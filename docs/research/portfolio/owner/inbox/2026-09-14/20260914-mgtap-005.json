@@ -1,0 +1,87 @@
+{
+  "id": "20260914-mgtap-005",
+  "created": "2026-09-14T17:25:59-07:00",
+  "direction": "metric_ground_transport_allocation",
+  "tier": "portfolio",
+  "kind": "portfolio",
+  "title": "MGTAP：较长训练完成后的维护与投资建议",
+  "context": "已完成固定率复现和较长训练，完整Convergence审阅接受结果且选择不立即延伸当前探索。建议Portfolio可逆PARK；最强备选是仅测512终点的新配对。当前仍ACTIVE/MEDIUM并占席，未本地执行PARK。",
+  "options": [
+    {
+      "key": "park",
+      "label": "可逆PARK",
+      "consequence": "仅在完整Portfolio裁决应用后暂停方向投资并释放席位；保存代码和全部证据"
+    },
+    {
+      "key": "continue",
+      "label": "继续最小512配对",
+      "consequence": "创建新明确B对象，2拟合/278528ticks/2048Adam，不自动重试或选择更好结果"
+    },
+    {
+      "key": "idle",
+      "label": "保持ACTIVE-idle",
+      "consequence": "保留当前席位但不创建拟合或外部producer，记录实际重新考察条件"
+    }
+  ],
+  "recommended": "park",
+  "auto_applied": "park",
+  "dm_reason": "固定复现和新曝光量问题已真实执行，继续不变配方的边际开发价值目前弱于保存资产并暂停投资；备选仍有价值。",
+  "evidence": [
+    "docs/research/candidates/metric_ground_transport_allocation/MGTAP_POST_LATE512_PORTFOLIO_PROPOSAL_20260914.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-14.md#L106",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "MGTAP应可逆PARK、继续一个最小512训练配对，还是保持ACTIVE-idle？",
+    "changes_if_approved": [
+      {
+        "target": "MGTAP Portfolio lifecycle / occupied slot",
+        "from": "ACTIVE/MEDIUM，占用1席，当前数值探索已结束",
+        "to": "建议PARK并在正式裁决应用后释放1席；现在仅提交建议，尚未处置"
+      }
+    ],
+    "if_refused": "保留当前CONTINUE/席位与全部证据，按完整Portfolio裁决或所有者覆盖处理；不把反对建议变成新的实验授权。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260914_late512_results_review/archive/RESPONSE.md",
+        "quote": "The completed longer-training comparison did not produce a useful realized relative advantage at its prescribed final endpoint",
+        "why": "固定率复现8253不利后，新的较长训练机会8254也未增加本路径相对收益；保全资产不需要马上再取样。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260914_late512_results_review/archive/RESPONSE.md",
+        "quote": "The strongest alternative is one fresh matched pair at the same fixed rate and512 training endpoint, preferably with final512-only evaluation when recurrence of that endpoint is the question.",
+        "why": "仅一个512配对，另一个真实实例可能改变投入，且已测命令360秒；8252、8214等正结果仍保留。"
+      }
+    ],
+    "uncertainty": [
+      "只有B层次的自适应探索证据，不是稳定劣势、等价或普遍COND失败。",
+      "native tuned headroom及完整支持/长期费用未知，不作为停研门槛。",
+      "PARK是可逆价值判断；可因开发承诺或既有维护问题估值变化重新考察，不要求先有新正结果。"
+    ],
+    "cost": {
+      "compute": "本咨询0拟合；最强备选2 fits/278528 ticks/2048 Adam，6–10分钟未来估计未测；过去三程序1196.88秒非全成本",
+      "owner_time": "可异步覆盖，不等待回复",
+      "reversibility": "reversible",
+      "waits_on_this": "Portfolio完整答复决定MGTAP处置；不等待所有者"
+    },
+    "verdict_text": "Recommendation to Portfolio: reversible PARK of MGTAP, retaining optional COND code, DENSE default and every signed result. This is a proposed direction-level allocation judgment, not an applied disposition or evidence of general COND failure.",
+    "source": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_POST_LATE512_PORTFOLIO_PROPOSAL_20260914.md"
+  },
+  "starred": true,
+  "approval_correction": "本项原为未应用的DM建议；现由完整Portfolio裁决正式选择PARK。另一个512-only配对仍科学合理，当前不投；不称稳定劣势、等价或机制失败。",
+  "execution_history": [
+    {
+      "at": "2026-09-15T01:02:40+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260914_mgtap_post_late512_direction/archive/RESPONSE.md@c7f572df84640540a9da0229bcac405b380217fb",
+      "record": "docs/research/portfolio/decisions/2026-09-14-mgtap-post-late512-park.md",
+      "state": "applied",
+      "summary": "已逐字读取175行完整Portfolio裁决并完成conformance intake，应用MGTAP可逆PARK/MEDIUM；保留DENSE默认、COND和全部正负结果，零新拟合，完成安全席位交接。Root主分支整合是发布而非第二次批准。",
+      "correction": "本项原为未应用的DM建议；现由完整Portfolio裁决正式选择PARK。另一个512-only配对仍科学合理，当前不投；不称稳定劣势、等价或机制失败。"
+    }
+  ]
+}

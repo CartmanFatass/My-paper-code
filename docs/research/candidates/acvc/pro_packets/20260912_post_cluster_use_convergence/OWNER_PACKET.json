@@ -1,0 +1,53 @@
+{
+  "question": "原 Convergence 已决定保留已观察到的聚集场景参考，当前不建议再购买原样重复；记录这一方向决定，不把它当成暂停或资金裁决。",
+  "changes_if_approved": [
+    {
+      "target": "docs/research/candidates/acvc/DIRECTION.md",
+      "from": "上一轮 intake 倾向另投一次独立重复",
+      "to": "保留已观察到的先按 C 训练、再按 F 部署参考；当前不建议额外经验投入，明确新策略实际用途的重访条件。"
+    },
+    {
+      "target": "docs/research/candidates/acvc/pro_packets/20260912_post_cluster_use_convergence/INTAKE.md",
+      "from": "完整原节点回答待验收",
+      "to": "完整回答已验收并应用方向用途结论；ACVC 仍 ACTIVE/MEDIUM、recasts 2，无新对象、实验拨款或槽位释放。"
+    }
+  ],
+  "if_refused": "保留全部结果和原回答，按 owner 的实际新指令调整后续；不自动重跑 K、借旧余额或停止方向。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/acvc/pro_packets/20260912_post_cluster_use_convergence/archive/RESPONSE.md",
+      "quote": "Final decision: retain the qualified observed cluster reference and recommend no additional empirical allocation now, with the concrete fresh-policy-use revisit above.",
+      "why": "原节点已比较重复的决策价值与直接保留有限用途，选择后者；这是一次具体购买的判断。"
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_CLUSTER_DEPLOYMENT_B01_INTAKE_20260912.md",
+      "quote": "Fixed F gives +0.12407302446321236J over C and +0.07674096500501802J over own-dwell on the single freshly C-trained cluster endpoint.",
+      "why": "已有真实训练与两个必要比较器，足以保留这个已观察实例上的用途。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/acvc/pro_packets/20260912_post_cluster_use_convergence/archive/RESPONSE.md",
+      "quote": "One fresh unchanged cluster B is the strongest rejected alternative.",
+      "why": "新训练实例确实可能暴露反例；目前接受这一未决风险，并未声称重复没有价值。"
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_CLUSTER_DEPLOYMENT_B01_INTAKE_20260912.md",
+      "quote": "The strongest contradiction/limit is useful simple dwell, eight adverse F−dwell worlds, and only one independent training instance.",
+      "why": "不能将均值推广为新训练策略稳定受益，也不能把全部收益归因于反向移动。"
+    }
+  ],
+  "uncertainty": [
+    "未来新训练策略上的收益是否重现未知；64 个评价世界不是64 次独立训练。",
+    "若出现同一分布上为新训练策略默认采用 F 的具体用途，可再提出一次独立 C 训练与三面板 B 的单独投入。",
+    "ACVC 生命周期与后续资金仍由 Portfolio 决定，当前方向回答不释放槽位。"
+  ],
+  "cost": {
+    "compute": "当前科研执行0，咨询与文档成本未知。拒绝的重复原本为1 fit、180224 team ticks、1024 Adam；未来完整耗时与拨款均未确定，旧 K 余额不续期。",
+    "owner_time": "异步查看即可，方向结论已按现有委托应用。",
+    "reversibility": "reversible",
+    "waits_on_this": "nothing；不等待 owner 回复，不自动启动实验。"
+  },
+  "verdict_text": "Final decision: retain the qualified observed cluster reference and recommend no additional empirical allocation now, with the concrete fresh-policy-use revisit above.",
+  "source": "docs/research/candidates/acvc/pro_packets/20260912_post_cluster_use_convergence/archive/RESPONSE.md"
+}

@@ -1,0 +1,273 @@
+{
+  "references": [
+    {
+      "path": "docs/research/candidates/acvc/ACVC_POST_PAIRED_DIRECTION_REPORT_20260914.md",
+      "commit_sha": "07b848fadd57ed50af3632dbd60655f45ea666ab",
+      "bytes": 15386,
+      "sha256": "5508aed4ce0e11be21677464f9cfff29ee21f58e22ed47dc7f9aa448bd7dd443",
+      "published_reachable_from": [
+        "origin/codex/acvc"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/acvc/DIRECTION.md",
+      "commit_sha": "07b848fadd57ed50af3632dbd60655f45ea666ab",
+      "bytes": 61114,
+      "sha256": "9a0998732bfc24cd4237de2049a37d967c42021cc369fbe4ff3f54291a6da08c",
+      "published_reachable_from": [
+        "origin/codex/acvc"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/acvc/PARK.md",
+      "commit_sha": "07b848fadd57ed50af3632dbd60655f45ea666ab",
+      "bytes": 6182,
+      "sha256": "ebcbe5982f99c5bc7d3305ce78e980f32183d8afa8a930dca528f00ffdd483c0",
+      "published_reachable_from": [
+        "origin/codex/acvc"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_CLUSTER_PAIRED_EXPOSURE_B01_INTAKE_20260914.md",
+      "commit_sha": "07b848fadd57ed50af3632dbd60655f45ea666ab",
+      "bytes": 21743,
+      "sha256": "b0473c625b00c58ab6038fa05fbfef38a0f286a8a4df0aea0cb5d08acaebe075",
+      "published_reachable_from": [
+        "origin/codex/acvc"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_CLUSTER_PAIRED_EXPOSURE_B01_RESULT_EVIDENCE_20260914.md",
+      "commit_sha": "07b848fadd57ed50af3632dbd60655f45ea666ab",
+      "bytes": 9127,
+      "sha256": "5e70b3d9d7c066e2f3881551c130a0d5cdd66560a5ae0404376f781963b2841b",
+      "published_reachable_from": [
+        "origin/codex/acvc"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/acvc/pro_packets/20260914_cluster_paired_exposure_b01_scientific_review/archive/RESPONSE.md",
+      "commit_sha": "68fed46f448312827f38b4b4f9bade36e2aedc35",
+      "bytes": 14654,
+      "sha256": "98a9fb29fd1c9c610b9ccc2b767fd694ed0e9b3170ad5c5a6e94f3789404d18f",
+      "published_reachable_from": [
+        "origin/codex/acvc"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_CLUSTER_LONGER_C_B01_INTAKE_20260914.md",
+      "commit_sha": "07b848fadd57ed50af3632dbd60655f45ea666ab",
+      "bytes": 17865,
+      "sha256": "a19bdac2a22b74100d685cfdec3cb4c939b03d6aa4878fc8464b6c57a645aa0e",
+      "published_reachable_from": [
+        "origin/codex/acvc"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_CLUSTER_LONGER_C_B01_RESULT_EVIDENCE_20260914.md",
+      "commit_sha": "07b848fadd57ed50af3632dbd60655f45ea666ab",
+      "bytes": 6398,
+      "sha256": "422e07520e2cfd9d3c6c39dc41f9009dbe6ac1975e9a9f41a2079566b213880c",
+      "published_reachable_from": [
+        "origin/codex/acvc"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/acvc/pro_packets/20260914_cluster_longer_c_b01_scientific_review/archive/RESPONSE.md",
+      "commit_sha": "fcd806cb2b1f99158540d8f7d1123a9df249b214",
+      "bytes": 13756,
+      "sha256": "3bf2b5bf96bfb07f1fc9ccbfb80c432be73910883d612cddd2ffb29d8d21794a",
+      "published_reachable_from": [
+        "origin/codex/acvc"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_CLUSTER_DEPLOYMENT_B03_INTAKE_20260914.md",
+      "commit_sha": "07b848fadd57ed50af3632dbd60655f45ea666ab",
+      "bytes": 15425,
+      "sha256": "f71097c07dc943d5cfba3ce023da05c7b69258e4001f1394dbec6d63f6e93e23",
+      "published_reachable_from": [
+        "origin/codex/acvc"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_CLUSTER_DEPLOYMENT_B03_RESULT_EVIDENCE_20260914.md",
+      "commit_sha": "07b848fadd57ed50af3632dbd60655f45ea666ab",
+      "bytes": 6198,
+      "sha256": "ca9f61047b23c2133620b8fac2a3d0e488d4995ef32114c6cdf708df8ab7b4a4",
+      "published_reachable_from": [
+        "origin/codex/acvc"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_CLUSTER_DEPLOYMENT_B02_RESULT_EVIDENCE_20260913.md",
+      "commit_sha": "07b848fadd57ed50af3632dbd60655f45ea666ab",
+      "bytes": 5022,
+      "sha256": "bf867eb0cd83cb75b762ecbd480bb26159a6f1832b5c7b0e59fe873a5c32122f",
+      "published_reachable_from": [
+        "origin/codex/acvc"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_CLUSTER_DEPLOYMENT_B01_RESULT_EVIDENCE_20260912.md",
+      "commit_sha": "07b848fadd57ed50af3632dbd60655f45ea666ab",
+      "bytes": 10102,
+      "sha256": "bb902dae582095f9f6a728600af348417340cfe10176e5682e7e6b96028a365b",
+      "published_reachable_from": [
+        "origin/codex/acvc"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_FRESH_DENSE_PACKAGE_C01_INTAKE_20260911.md",
+      "commit_sha": "07b848fadd57ed50af3632dbd60655f45ea666ab",
+      "bytes": 30523,
+      "sha256": "74a63c8dc7ab4f31e01d5c77ffd1849bca692d8ed5e5351d7cb2f6af5d7239c9",
+      "published_reachable_from": [
+        "origin/codex/acvc"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_FIXED_F_TRAINING_USE_B02_INTAKE_20260912.md",
+      "commit_sha": "07b848fadd57ed50af3632dbd60655f45ea666ab",
+      "bytes": 7466,
+      "sha256": "b30de31d2d5083bb4c573eb6a7b237a5a55b57cff274b5ca6d71de2f09fe9735",
+      "published_reachable_from": [
+        "origin/codex/acvc"
+      ]
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260914_rcle_park_vacancy_selection/archive/RESPONSE.md",
+      "commit_sha": "1fabe79ebbf826138801b7e096278c2edda5d58a",
+      "bytes": 21323,
+      "sha256": "3b81868e9065d370f0d2a5430dd81da960d8a4cd3d4be799dff7c98cbd54ceb7",
+      "published_reachable_from": [
+        "origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260914_rcle_park_vacancy_selection/INTAKE.md",
+      "commit_sha": "1fabe79ebbf826138801b7e096278c2edda5d58a",
+      "bytes": 16351,
+      "sha256": "f59ab0645cb2d55ef270bde1416e5c10e83e6965f3877e9c675666665cca7e99",
+      "published_reachable_from": [
+        "origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/portfolio/PORTFOLIO.md",
+      "commit_sha": "1fabe79ebbf826138801b7e096278c2edda5d58a",
+      "bytes": 8356,
+      "sha256": "9fd2b3d297fe80977b03027c0e7c8816e7135dae0a25f0d35aaaf351e3655184",
+      "published_reachable_from": [
+        "origin/main"
+      ]
+    },
+    {
+      "path": ".codex/hmasd-dm-sessions.toml",
+      "commit_sha": "1fabe79ebbf826138801b7e096278c2edda5d58a",
+      "bytes": 41659,
+      "sha256": "ef185a91d2b57a11ae1831e4f86c11eccd9087f8d4e8e4f3f7901f9683d539c3",
+      "published_reachable_from": [
+        "origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260914_lr_selection_portfolio_direction/INTAKE.md",
+      "commit_sha": "1fabe79ebbf826138801b7e096278c2edda5d58a",
+      "bytes": 10084,
+      "sha256": "e2de22221bbe8a56c03ceb939801e8821c473997bad76e3a7aaf4ea1da762c75",
+      "published_reachable_from": [
+        "origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/pro_packets/20260914_post_b03_portfolio_direction/INTAKE.md",
+      "commit_sha": "1fabe79ebbf826138801b7e096278c2edda5d58a",
+      "bytes": 27054,
+      "sha256": "297a7b7d0af79bdb5c8eede4055e2f47f7b9ace72d9f574c419a8b48e31333c4",
+      "published_reachable_from": [
+        "origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/entity_history_augmentation_b01_781601/EXECUTION.md",
+      "commit_sha": "1fabe79ebbf826138801b7e096278c2edda5d58a",
+      "bytes": 3727,
+      "sha256": "23c4fddb7c14c1fb0b696153fde926e0acff8daa419d7c2cbcdab838631c8e5a",
+      "published_reachable_from": [
+        "origin/main"
+      ]
+    },
+    {
+      "path": "AGENTS.md",
+      "commit_sha": "1fabe79ebbf826138801b7e096278c2edda5d58a",
+      "bytes": 44883,
+      "sha256": "85c87049d109792ef253fa16866646e3a3632cf6cc0c02a93765da12e6e2ef11",
+      "published_reachable_from": [
+        "origin/main"
+      ]
+    },
+    {
+      "path": "docs/project/PORTFOLIO_DECISION_PROTOCOL.md",
+      "commit_sha": "1fabe79ebbf826138801b7e096278c2edda5d58a",
+      "bytes": 4876,
+      "sha256": "86a55c5386d4691203185d7f8b0d667d6626d94abc9665a8727c7f5aed346368",
+      "published_reachable_from": [
+        "origin/main"
+      ]
+    },
+    {
+      "path": "docs/project/PEER_DM_COORDINATION.md",
+      "commit_sha": "1fabe79ebbf826138801b7e096278c2edda5d58a",
+      "bytes": 7399,
+      "sha256": "60fbfcc8216278fe9177f7f8b830de75da06218ad18e742c1a2b69aea4ca0d53",
+      "published_reachable_from": [
+        "origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "commit_sha": "1fabe79ebbf826138801b7e096278c2edda5d58a",
+      "bytes": 50385,
+      "sha256": "6a1f411f130b8a0575de45256a39ac3e52cc14d4eebfee284e2c29608fb80534",
+      "published_reachable_from": [
+        "origin/main"
+      ]
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "commit_sha": "1fabe79ebbf826138801b7e096278c2edda5d58a",
+      "bytes": 7819,
+      "sha256": "c1f7d6c68fcec55de48ea555346d5d65af8d311e28502be43a2b05436a174247",
+      "published_reachable_from": [
+        "origin/main"
+      ]
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+      "commit_sha": "1fabe79ebbf826138801b7e096278c2edda5d58a",
+      "bytes": 4252,
+      "sha256": "99b7e727a890d4e93a64b5c0f44fe588e383b5de56f2da663fb3f864c6d8293c",
+      "published_reachable_from": [
+        "origin/main"
+      ]
+    },
+    {
+      "path": "docs/project/MARL_RUNTIME_ENGINEERING_SPEC.md",
+      "commit_sha": "1fabe79ebbf826138801b7e096278c2edda5d58a",
+      "bytes": 26556,
+      "sha256": "029cf0840f1a9a8be0882834a1bcf59ce3b33984a6f03cccbd56469548118fca",
+      "published_reachable_from": [
+        "origin/main"
+      ]
+    }
+  ],
+  "prepublication_repair": "Initial source check found original reopening delivery commit 7a490382cb469f2a62e276a756a2be32b460cc69 was not an ancestor of the two observed current refs. No packet files or Send existed. Bound its byte-identical preserved main copy at 1fabe79ebbf826138801b7e096278c2edda5d58a and retained original delivery provenance.",
+  "checks": "Every exact Git object read and reachable from an observed published origin ref; no provider access claimed.",
+  "dm_task_read": {
+    "complete": true,
+    "bytes": 33570,
+    "sha256": "1f38a2ca733b30ea659c8a326217b489ba6958f09738809abdd015cff12a0637",
+    "scope": "Full rendered TASK read; 29 exact sources, current Portfolio contract, peer snapshot reconciliation, alternatives/cost, no new empirical selection, correct scoped response and full fallback."
+  }
+}

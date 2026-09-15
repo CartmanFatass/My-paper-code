@@ -1,0 +1,84 @@
+{
+  "id": "20260913-acvc-003",
+  "created": "2026-09-13T16:18:03-07:00",
+  "direction": "acvc",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "ACVC B02：一个独立cluster C-fit与三部署面板",
+  "context": "一次新普通B；master21493/eval31493；有限600/600/1200秒；已选定卡，尚未执行。独立训练可改变有限开发建议，不冒充客户、K重跑或稳定优势。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "launch as carded"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "do not launch"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "revise before launch"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "",
+  "evidence": [
+    "docs/research/candidates/acvc/ACVC_CLUSTER_DEPLOYMENT_B02_SCIENCE_CARD_20260913.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-13.md#L13",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "新普通B02是否忠实执行一次独立cluster C-fit与C/F/own-dwell比较，并保留其有限结论？",
+    "changes_if_approved": [
+      {
+        "target": "ACVC_CLUSTER_DEPLOYMENT_B02",
+        "from": "无新训练实例",
+        "to": "DM已选定有限新B卡，完成一次独立fit和三个终评面板"
+      }
+    ],
+    "if_refused": "按实际owner修改在下一安全边界处理；保留已发生结果，拒绝不隐含重跑。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/acvc/ACVC_CLUSTER_DEPLOYMENT_B02_SCIENCE_CARD_20260913.md",
+        "quote": "K's F−C +0.124073 J and F−dwell +0.076741 J are credible follow-up signals",
+        "why": "相对原C和有用dwell的真实学习增量支持一个经济的独立训练观察。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/acvc/ACVC_CLUSTER_DEPLOYMENT_B02_SCIENCE_CARD_20260913.md",
+        "quote": "1/64 and 8/64 adverse worlds, useful dwell and one learning unit leave fresh-training variation unresolved.",
+        "why": "结果并非处处更优，新的训练实例可能不保留增量；不承诺阳性。"
+      }
+    ],
+    "uncertainty": [
+      "64个world不是64个训练实例；每fit单独保留结果。",
+      "支持工作完整成本未知，600/600/1200是有限上限而非已证可完成报价。"
+    ],
+    "cost": {
+      "compute": "一次C-fit；512训练episode/1024updates；3x64终评；180224team ticks；native600s/support600s/complete1200s。",
+      "owner_time": "无需批准；owner预测未取得。",
+      "reversibility": "costly",
+      "waits_on_this": "没有owner批准等待；独立检查/新鲜准入属于DM正常执行。"
+    },
+    "verdict_text": "选(a)：一个新的独立 C fit，加原有 C/F/own-dwell 三面板；在已开放机制内按普通对象授权执行，旧K预算和no-retry保持原范围。",
+    "source": "docs/research/candidates/acvc/ACVC_CLUSTER_DEPLOYMENT_B02_SCIENCE_CARD_20260913.md"
+  },
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-13T23:49:23+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "docs/research/candidates/acvc/ACVC_CLUSTER_DEPLOYMENT_B02_SCIENCE_CARD_20260913.md",
+      "record": "docs/research/candidates/acvc/ACVC_CLUSTER_DEPLOYMENT_B02_INTAKE_20260913.md",
+      "state": "applied",
+      "summary": "DM ordinary B02 completed: one original fit, both frozen contrasts UP, all rows/counts checked; pre-execution fault preserved, independent scientific synthesis review follows; no Portfolio approval."
+    }
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "archive": "temp/directions/acvc/retained/cluster_longer_c_b01_20260914/native_output.tar.gz",
+  "bytes": 561848,
+  "sha256": "1e2d9e304a8c36908ed25710c7c367ac51ba1addfc8cb873e0ca249342f9f7dd",
+  "members": {
+    "cluster_longer_c_b01_20260914/stdout.log": {
+      "bytes": 3650,
+      "sha256": "3b8ff20854b043ac451c1715d4a2ce210719f8a4c3c6c1908424a6fb94683bde"
+    },
+    "cluster_longer_c_b01_20260914/summary.json": {
+      "bytes": 17366,
+      "sha256": "98ff6e3007317e9cb6269bf4ce87b1fb165736d96629a3f5964c9ee60ab84bce"
+    },
+    "cluster_longer_c_b01_20260914/native_time.txt": {
+      "bytes": 53,
+      "sha256": "c4310d6bc54a2455655c6b0d4ce9f5f17af13f06a9449b2727f707f47f797860"
+    },
+    "cluster_longer_c_b01_20260914/episodes.jsonl": {
+      "bytes": 772541,
+      "sha256": "f32c3ee7f71b31a3c60a1a6cbb19a4a92e71e25769de9e2b50d57559dce947b9"
+    },
+    "cluster_longer_c_b01_20260914/final_DENSE.pt": {
+      "bytes": 282893,
+      "sha256": "a58961caca5de291f63f0d85c178c9f0ba289f608e966edeed40ebf149a744e3"
+    },
+    "cluster_longer_c_b01_20260914/admission.json": {
+      "bytes": 504,
+      "sha256": "1053606041bb269a787407b03f973b7446af8be7784c26224e69c4095c26e08c"
+    },
+    "cluster_longer_c_b01_20260914/updates.jsonl": {
+      "bytes": 475426,
+      "sha256": "1304ba6d4292db7cec4704f3e23aafecbd3ca10b307f05438d4d999554b5e42e"
+    },
+    "cluster_longer_c_b01_20260914/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "acvc-longer-c-b01-914a3d0e7/runner.sh": {
+      "bytes": 1292,
+      "sha256": "88ad232cf05cba22b514a5d800edd4c636e3e10aae77ba8e6d652422893ea5fa"
+    },
+    "acvc-longer-c-b01-914a3d0e7/exit_code": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "acvc-longer-c-b01-914a3d0e7/status": {
+      "bytes": 9,
+      "sha256": "161069badc0cc23058b13d7c068e45205f4333aa15fd78db9d68f5c9f1ae8983"
+    },
+    "acvc-longer-c-b01-914a3d0e7/start_time": {
+      "bytes": 11,
+      "sha256": "28e8502d618d9463b23f763dbc68b388d2d28408d0df59fd3d7e0788225f2d05"
+    },
+    "acvc-longer-c-b01-914a3d0e7/pid": {
+      "bytes": 8,
+      "sha256": "15579dac2019a30d79ae91b4c2197c90625e8abbed08e9178342b18dc74723e8"
+    },
+    "acvc-longer-c-b01-914a3d0e7/task.log": {
+      "bytes": 692,
+      "sha256": "0b009019bc084f3c6a699c85474705de3adcf9b6413d32c961dde919e8d02d31"
+    }
+  }
+}

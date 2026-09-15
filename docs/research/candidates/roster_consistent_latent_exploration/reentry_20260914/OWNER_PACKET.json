@@ -1,0 +1,49 @@
+{
+  "question": "是否保留 DM 已作出的重入决定，执行一个独立 final1024 B11 比较？",
+  "changes_if_approved": [
+    {
+      "target": "roster_consistent_latent_exploration/DIRECTION.md",
+      "from": "PARK；未选择后继问题",
+      "to": "ACTIVE / B11；一个新 seed31、固定1024更新和四角色比较，同任务完成工程、执行与 intake"
+    }
+  ],
+  "if_refused": "在下一干净边界执行 owner 指令并协调在途工作，保留既成执行和全部证据；可恢复可逆 PARK。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260913_b10_scientific_review/archive/RESPONSE.md",
+      "quote": "这些足以使fresh1024重复成为科学上认真、可辩护的B，而不是必须先得到新用户需求、阳性pilot或完整病因才能提出的要求。",
+      "why": "独立评审明确指出新训练实例有辨别力；DM 自行决定其当前价值，没有把 review 当成重开命令。"
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B10_GREEDY_ANCHORED_1024_INTAKE_20260913.md",
+      "quote": "One fresh1024 replication is scientifically defensible and could change the learned-versus-greedy development preference.",
+      "why": "B10 有真实自身学习且仅一个 final1024 实例，原 PARK 也接受可能错过更好实例的机会成本。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B10_GREEDY_ANCHORED_1024_INTAKE_20260913.md",
+      "quote": "Recovery is mixed. Final tau worsens in3/8 cells versus initialization and5/8 versus greedy.",
+      "why": "全部八格 U 和 full-Y 均值也仍偏向 greedy；新实例可能只重复当前缺口，不能靠 U 汇总掩盖恢复损害。"
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/PARK.md",
+      "quote": "DM 没有测得训练总体劣势，也没有估计下一次成功概率或信息价值。",
+      "why": "继续 PARK 是接近的备选，重入是定性投入判断，没有已测信息价值或收益概率。"
+    }
+  ],
+  "uncertainty": [
+    "训练变异和未来完整增量成本未知；B09/final256 不是第二个 final1024 重复。",
+    "新训练加新评价场景的差异包含评价变动，不能声称纯训练方差分解。",
+    "服务与恢复之间没有预先合理化的标量交换率；所有不利结果必须保留。",
+    "两个 exact-recipe HOLD、旧失败及 UNKNOWN 成本继续保留；不自动续购种子。"
+  ],
+  "cost": {
+    "compute": "冻结时实际新 fits/episodes/optimizer/Pro Send 为0。已选一个 B11：67,584 episodes、4,325,376 ticks。B10 native161.35秒与旧支持检查点只是历史记录，600秒不是停止线。B11预计native约3-5分钟、support约10-20调用分钟，允许偏差；完整费用及早期文档支持/agent lifetime UNKNOWN。",
+    "owner_time": "异步 P2 close-call，可阅读后介入；不等待答复。",
+    "reversibility": "reversible",
+    "waits_on_this": "nothing；DM 已作决定，同一任务继续工程、执行与 intake，无需再次授权。"
+  },
+  "verdict_text": "决定：重入 final1024 训练实例敏感性问题，选择一个新独立 B11 比较，并在同一任务中完成工程、执行与结果 intake。",
+  "source": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_REENTRY_INTAKE_20260914.md"
+}

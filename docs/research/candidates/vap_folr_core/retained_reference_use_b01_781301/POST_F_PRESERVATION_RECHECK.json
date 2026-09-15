@@ -1,0 +1,126 @@
+{
+  "checked_at": "2026-09-13T16:05:31.8116285-07:00",
+  "author_sha": "a726ffbfe4efb532a0ea84ea602071e5f5c09009",
+  "main_sha": "f6763abc42a859cb9e89ad20194456210412fbbe",
+  "archives": [
+    {
+      "path": "docs/research/candidates/vap_folr_core/retained_reference_use_b01_781301/GENERIC_RAW.tar.gz",
+      "author_blob": "555fa6bcc1eafecd08c8dd3add35cd4d19d237ad",
+      "main_present": false,
+      "main_blob": null,
+      "match": false
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/retained_reference_use_b01_781301/BANK_RAW.tar.gz",
+      "author_blob": "8113837fc5bcc9ba2f350dd0c83fbc38b3dac17f",
+      "main_present": true,
+      "main_blob": "8113837fc5bcc9ba2f350dd0c83fbc38b3dac17f",
+      "match": true
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/retained_reference_use_b01_781301/SUPPORT_SUPERVISORS_RAW.tar.gz",
+      "author_blob": "7a1c2bcb3f2dec1ca83cd09799be40ee9819867a",
+      "main_present": true,
+      "main_blob": "7a1c2bcb3f2dec1ca83cd09799be40ee9819867a",
+      "match": true
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/entity_history_b01_781201/BANK_RAW.tar.gz",
+      "author_blob": "9e15750cd3cb9ec8c7d785c0cf4e65c54059dd95",
+      "main_present": true,
+      "main_blob": "9e15750cd3cb9ec8c7d785c0cf4e65c54059dd95",
+      "match": true
+    }
+  ],
+  "accepted_source_sha": "5dce539ed54afd4334d09db9dcd94df38c52c2fc",
+  "generic_acceptance_sha": "e617175ecc764cf137f8d8a91d7cba4056a57a40",
+  "mechanically_integrable_paths": [
+    {
+      "change": "A",
+      "path": "docs/research/candidates/vap_folr_core/retained_reference_use_b01_781301/BANK.sh"
+    },
+    {
+      "change": "A",
+      "path": "docs/research/candidates/vap_folr_core/retained_reference_use_b01_781301/BANK_ADMISSION.json"
+    },
+    {
+      "change": "A",
+      "path": "docs/research/candidates/vap_folr_core/retained_reference_use_b01_781301/BANK_LAUNCH.json"
+    },
+    {
+      "change": "A",
+      "path": "docs/research/candidates/vap_folr_core/retained_reference_use_b01_781301/BANK_LAUNCH_PLAN.json"
+    },
+    {
+      "change": "A",
+      "path": "docs/research/candidates/vap_folr_core/retained_reference_use_b01_781301/CHECK_RESULTS.json"
+    },
+    {
+      "change": "A",
+      "path": "docs/research/candidates/vap_folr_core/retained_reference_use_b01_781301/EXPOSURE.json"
+    },
+    {
+      "change": "A",
+      "path": "docs/research/candidates/vap_folr_core/retained_reference_use_b01_781301/GENERIC.sh"
+    },
+    {
+      "change": "A",
+      "path": "docs/research/candidates/vap_folr_core/retained_reference_use_b01_781301/GENERIC_ACCEPTANCE_FACTS.json"
+    },
+    {
+      "change": "A",
+      "path": "docs/research/candidates/vap_folr_core/retained_reference_use_b01_781301/GENERIC_COLLECTION.json"
+    },
+    {
+      "change": "A",
+      "path": "docs/research/candidates/vap_folr_core/retained_reference_use_b01_781301/GENERIC_INVOCATION_TIME.json"
+    },
+    {
+      "change": "A",
+      "path": "docs/research/candidates/vap_folr_core/retained_reference_use_b01_781301/GENERIC_RAW.tar.gz"
+    },
+    {
+      "change": "A",
+      "path": "docs/research/candidates/vap_folr_core/retained_reference_use_b01_781301/GENERIC_SUPERVISOR.txt"
+    },
+    {
+      "change": "A",
+      "path": "docs/research/candidates/vap_folr_core/retained_reference_use_b01_781301/GENERIC_summary.json"
+    },
+    {
+      "change": "A",
+      "path": "docs/research/candidates/vap_folr_core/retained_reference_use_b01_781301/INDEPENDENT_REVIEW.md"
+    },
+    {
+      "change": "A",
+      "path": "docs/research/candidates/vap_folr_core/retained_reference_use_b01_781301/OWNER_PACKET.json"
+    },
+    {
+      "change": "A",
+      "path": "docs/research/candidates/vap_folr_core/retained_reference_use_b01_781301/SOURCE_SCOPE.json"
+    },
+    {
+      "change": "A",
+      "path": "docs/research/portfolio/pro_packets/20260913_folr_retained_reference_investment/archive/RESPONSE.md"
+    },
+    {
+      "change": "A",
+      "path": "experiments/candidates/vap_folr_core/entity_history_b01/retained_use.py"
+    },
+    {
+      "change": "M",
+      "path": "scripts/run_folr_entity_history_b01.py"
+    },
+    {
+      "change": "A",
+      "path": "tests/experiments/candidates/vap_folr_core/entity_history_b01/test_retained_use.py"
+    }
+  ],
+  "integration_authorization": "DM explicitly accepts these historical paths at author_sha for Clerk integration, preserving unrelated main work and returning any semantic conflict. Prior SOURCE_SCOPE/INDEPENDENT_REVIEW/TECHNICAL_ACCEPTANCE are the acceptance basis; this is not a new source change.",
+  "cleanup": {
+    "removal_executed_this_turn": false,
+    "remote_scene_rechecked_this_turn": false,
+    "independent_of_portfolio_planning": true,
+    "next_action_owner": "Clerk: integrate/confirm retained accepted paths; DM: original exact cleanup after preservation handoff, within original technical scope"
+  }
+}

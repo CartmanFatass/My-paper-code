@@ -1,0 +1,38 @@
+{
+  "question": "是否保留已选 B12：在 B11 失败和一次诊断未复现后，做一个新 seed32/final1024 比较并捕获故障栈？",
+  "changes_if_approved": [
+    {
+      "target": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B12_FINAL1024_SCIENCE_CARD_20260914.md",
+      "from": "B11无有效终点，原问题仍开放；D1仅为未复现诊断",
+      "to": "明确新对象 B12、一个seed32完整比较，保留B11失败和全部成本"
+    }
+  ],
+  "if_refused": "下一干净边界应用owner指令，协调真实在途效果并保留证据；不改写B11。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B12_FINAL1024_SCIENCE_CARD_20260914.md",
+      "quote": "A can answer the still-open development question and retain a fault location if execution fails.",
+      "why": "直接有限B比继续无明确原因的合成训练更有机会买到缺失比较；若再崩溃则保留实际栈。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B11_PARTIAL_FAILURE_INTAKE_20260914.md",
+      "quote": "The missing discriminating fact is the fatal call stack.",
+      "why": "B11实际崩溃原因仍未知；D1通过不能证明故障已修复或原对象有效。"
+    }
+  ],
+  "uncertainty": [
+    "B12可能再次失败；没有成功概率估计，也不自动加种子。",
+    "B10/B12若完整，也是在三次尝试中两个完整实例，不能把B11缺失终点当作无偏训练总体样本。",
+    "历史greedy优势、恢复损害、两类HOLD和UNKNOWN成本保留。"
+  ],
+  "cost": {
+    "compute": "一个B12：67584episodes、4325376ticks、1024Adam；B11至少704512ticks/native40.83s和D1 786432ticks/39.69s均保留。B12native约3-5分钟加debugger，support约10-20调用分钟仅为可偏差估计；未知完整尾项不为零。",
+    "owner_time": "异步可介入，不等待批准",
+    "reversibility": "reversible",
+    "waits_on_this": "nothing；DM已选有限对象，继续工程/执行/intake"
+  },
+  "verdict_text": "Owner-delegated decision (2026-09-03/13): A.",
+  "source": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B12_FINAL1024_SCIENCE_CARD_20260914.md"
+}

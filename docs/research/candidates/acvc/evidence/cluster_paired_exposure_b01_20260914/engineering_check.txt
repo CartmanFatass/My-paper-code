@@ -1,0 +1,102 @@
+ACVC_CLUSTER_PAIRED_EXPOSURE_B01 implementation check
+event: ACVC_CLUSTER_PAIRED_EXPOSURE_B01_IMPL_20260914_01
+bookkeeping correction: ACVC_CLUSTER_PAIRED_EXPOSURE_B01_IMPL_20260914_01_BOOKKEEPING_01
+implementation/cleanup owner: /root/acvc_paired_exposure_b01_implementation
+checkout: C:/Projects/HMASD-worktrees/codex-acvc
+branch: codex/acvc
+parent starting HEAD: 744686c8ef8f32c4884c128c924a673a3c27afae
+
+Scope
+scope: fixed checkpoint orchestration, sole original-output refusal, and bounded engineering watchdog per card section 4
+No other ENGINEERING_SCOPE_SPEC section 4 facility was added.
+New runtime source: 542 lines (runner 362; protocol 160; launch 19; package init 1), below 2000.
+Package metadata: one scoped .gitattributes line keeps launch.sh at committed LF.
+Entry runner: 362 lines, below 600.
+
+Test invocations (historical facts; no bookkeeping rerun)
+All five used PYTHONDONTWRITEBYTECODE=1 and this exact command shape:
+  C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe -m pytest -q -p no:cacheprovider --basetemp <PATH> tests/experiments/candidates/acvc/cluster_paired_exposure_b01
+
+1. Original invocation
+   PATH: C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/test/paired_exposure_b01_impl_20260914
+   Exact command: C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe -m pytest -q -p no:cacheprovider --basetemp C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/test/paired_exposure_b01_impl_20260914 tests/experiments/candidates/acvc/cluster_paired_exposure_b01
+   Reason: first focused implementation check.
+   Outcome: ERROR during test collection; exit code 1. Importing the new runner imported the reused fitter after Torch interop threads had already been set, producing RuntimeError: cannot set number of interop threads after parallel work has started or set_num_interop_threads called.
+   Pytest-reported elapsed: 1.79s. Command-tool observed wall: 2.7174099s.
+
+2. Rerun r2
+   PATH: C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/test/paired_exposure_b01_impl_20260914_r2
+   Exact command: C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe -m pytest -q -p no:cacheprovider --basetemp C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/test/paired_exposure_b01_impl_20260914_r2 tests/experiments/candidates/acvc/cluster_paired_exposure_b01
+   Reason: verify the concrete import-order repair that removed duplicate Torch setup and reused the fitter's fixed CPU FP32/thread1 configuration.
+   Outcome: PASS, 8 tests; exit code 0. Pytest-reported elapsed: 1.88s. Command-tool observed wall: 2.8403028s.
+
+3. Rerun r3
+   PATH: C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/test/paired_exposure_b01_impl_20260914_r3
+   Exact command: C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe -m pytest -q -p no:cacheprovider --basetemp C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/test/paired_exposure_b01_impl_20260914_r3 tests/experiments/candidates/acvc/cluster_paired_exposure_b01
+   Reason: verify the added exact 2048-record rollout/epoch/episode ordering assertion.
+   Outcome: PASS, 8 tests; exit code 0. Pytest-reported elapsed: 1.84s. Command-tool observed wall: 2.817511s.
+
+4. Rerun r4
+   PATH: C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/test/paired_exposure_b01_impl_20260914_r4
+   Exact command: C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe -m pytest -q -p no:cacheprovider --basetemp C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/test/paired_exposure_b01_impl_20260914_r4 tests/experiments/candidates/acvc/cluster_paired_exposure_b01
+   Reason: verify the added expired-invocation test for truthful incomplete publication and nonzero exit without constructing a learner.
+   Outcome: PASS, 9 tests; exit code 0. Pytest-reported elapsed: 1.87s. Command-tool observed wall: 2.8604605s.
+
+5. Rerun r5 (final behavior-bearing check)
+   PATH: C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/test/paired_exposure_b01_impl_20260914_r5
+   Exact command: C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe -m pytest -q -p no:cacheprovider --basetemp C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/test/paired_exposure_b01_impl_20260914_r5 tests/experiments/candidates/acvc/cluster_paired_exposure_b01
+   Reason: verify added snapshot identity records for exact completed rollout index, optimizer steps and update-record counts at episodes512 and1024.
+   Outcome: PASS, 9 tests; exit code 0. Pytest-reported elapsed: 1.83s. Command-tool observed wall: 2.7486934s.
+
+Final covered behavior
+Update/snapshot order and immutable midpoint; training-before-evaluation; six private
+loads/environments and common stream inputs; fixed stage order/identity; missing, wrong-stage,
+wrong-reset and duplicate dependency handling; direct NumPy float64 paired difference-of-
+differences with nonzero endpoint spread and zero change spread; inclusive .01J thresholds;
+exact rows/ticks/rollouts/updates/snapshots/loads/constructors; cost law, complete exit, and
+timed-out incomplete publication/nonzero exit.
+
+Other checks
+1. Python compile check for runner, protocol, and both test modules: PASS before the behavior suite; no later syntax-only rerun was needed because every later edited Python surface was imported by the passing focused suite.
+2. bash -n experiments/candidates/acvc/cluster_paired_exposure_b01/launch.sh: PASS.
+3. Fixed master/evaluation namespace and six-stage order import assertion: PASS.
+4. Whitespace checks on all owned generated files: PASS.
+
+Retained invocation paths and exact current state
+The five invocation paths are listed below. The first path is absent; collection failed before
+pytest retained that basetemp. The four later scratch directories are present.
+- ABSENT: C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/test/paired_exposure_b01_impl_20260914
+- PRESENT: C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/test/paired_exposure_b01_impl_20260914_r2
+- PRESENT: C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/test/paired_exposure_b01_impl_20260914_r3
+- PRESENT: C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/test/paired_exposure_b01_impl_20260914_r4
+- PRESENT: C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/test/paired_exposure_b01_impl_20260914_r5
+
+Exact retained generated bytecode files
+- C:/Projects/HMASD-worktrees/codex-acvc/experiments/candidates/acvc/cluster_paired_exposure_b01/__pycache__/protocol.cpython-310.pyc
+- C:/Projects/HMASD-worktrees/codex-acvc/scripts/__pycache__/run_acvc_cluster_paired_exposure_b01.cpython-310.pyc
+- C:/Projects/HMASD-worktrees/codex-acvc/tests/experiments/candidates/acvc/cluster_paired_exposure_b01/__pycache__/test_protocol.cpython-310.pyc
+- C:/Projects/HMASD-worktrees/codex-acvc/tests/experiments/candidates/acvc/cluster_paired_exposure_b01/__pycache__/test_runner.cpython-310.pyc
+
+Cleanup policy rejection and owner
+The attempted bounded cleanup command resolved the exact original basetemp under
+C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/test, then requested Remove-Item only
+for that directory and exact generated pyc files under owned modules. Automatic review rejected
+the command before execution with the exact stated reason: "blocked by policy". No alternate
+language, shell or deletion workaround was attempted. The cleanup owner remains
+/root/acvc_paired_exposure_b01_implementation. Cleanup event: automatic policy permits removal of
+the four PRESENT scratch directories and four exact pyc files named above. This is not assigned
+to the DM and is not a scientific or acceptance gate.
+
+Wrong-directory relocation cleanup
+The original file was removed after its content was preserved at this canonical path. Read-only
+inspection then confirmed both wrong directories were empty:
+- C:/Projects/HMASD-worktrees/codex-acvc/evidence/cluster_paired_exposure_b01_20260914
+- C:/Projects/HMASD-worktrees/codex-acvc/evidence
+A bounded PowerShell command validated those exact absolute paths and emptiness, then requested
+non-recursive Remove-Item for only those two directories. Automatic review rejected the command
+before execution with the exact stated reason: "blocked by policy". Both empty wrong directories
+therefore remain. No alternate language, shell or deletion workaround was attempted. Their cleanup
+owner/event is also /root/acvc_paired_exposure_b01_implementation when automatic policy permits.
+
+No scientific learner fit, native environment probe, admission, result-bearing invocation,
+behavior change, commit or push occurred during this bookkeeping correction.

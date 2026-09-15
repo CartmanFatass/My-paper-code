@@ -1,0 +1,220 @@
+=== Task 'rcle-b12-s32-15eaa7ea6' started at 2026-09-14T13:01:17+08:00 ===
+{
+  "assessed_at": "2026-09-14T05:01:17.349130Z",
+  "available_physical_bytes": 14768648192,
+  "captured_at": "2026-09-14T05:01:17.348852Z",
+  "cgroup_headroom_bytes": null,
+  "cgroup_memory_current_bytes": null,
+  "cgroup_memory_max_bytes": null,
+  "effective_available_bytes": 14768648192,
+  "effective_floor_pass": true,
+  "failure_reasons": [],
+  "measurement_source": "/proc/meminfo",
+  "minimum_available_bytes": 4294967296,
+  "passed": true,
+  "physical_floor_pass": true,
+  "schema_version": 1
+}
+
+This GDB supports auto-downloading debuginfo from the following URLs:
+  <https://debuginfod.ubuntu.com>
+Enable debuginfod for this session? (y or [n]) [answered N; input not from terminal]
+Debuginfod has been disabled.
+To make this setting permanent, add 'set debuginfod enabled off' to .gdbinit.
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib/x86_64-linux-gnu/libthread_db.so.1".
+[Detaching after vfork from child process 3661140]
+[Detaching after vfork from child process 3661141]
+[New Thread 0x7fff1fbff6c0 (LWP 3661146)]
+[New Thread 0x7fff1efff6c0 (LWP 3661147)]
+[Thread 0x7fff1efff6c0 (LWP 3661147) exited]
+[New Thread 0x7fff1efff6c0 (LWP 3661148)]
+update 32/1024
+update 64/1024
+update 96/1024
+update 128/1024
+update 160/1024
+update 192/1024
+update 224/1024
+update 256/1024
+update 288/1024
+update 320/1024
+update 352/1024
+update 384/1024
+update 416/1024
+update 448/1024
+update 480/1024
+update 512/1024
+update 544/1024
+update 576/1024
+update 608/1024
+update 640/1024
+update 672/1024
+update 704/1024
+update 736/1024
+update 768/1024
+update 800/1024
+update 832/1024
+update 864/1024
+update 896/1024
+update 928/1024
+update 960/1024
+update 992/1024
+update 1024/1024
+COMPLETE
+[Thread 0x7fff1efff6c0 (LWP 3661148) exited]
+[Thread 0x7ffff7eb5740 (LWP 3661099) exited]
+[Thread 0x7fff1fbff6c0 (LWP 3661146) exited]
+[New process 3661099]
+[Inferior 1 (process 3661099) exited normally]
+warning: Could not load shared library symbols for linux-vdso.so.1.
+Do you need "set solib-search-path" or "set sysroot"?
+From                To                  Syms Read   Shared Object Library
+0x00007ffff7fc6000  0x00007ffff7ff0195  Yes (*)     /lib64/ld-linux-x86-64.so.2
+0x00007ffff7fb3040  0x00007ffff7fb3105  Yes (*)     /lib/x86_64-linux-gnu/libpthread.so.0
+0x00007ffff7fae040  0x00007ffff7fae105  Yes (*)     /lib/x86_64-linux-gnu/libdl.so.2
+0x00007ffff7fa9040  0x00007ffff7fa9105  Yes (*)     /lib/x86_64-linux-gnu/libutil.so.1
+0x00007ffff7ecf420  0x00007ffff7f4d3a6  Yes (*)     /lib/x86_64-linux-gnu/libm.so.6
+0x00007ffff7ebb080  0x00007ffff7ebb2b1  Yes (*)     /lib/x86_64-linux-gnu/librt.so.1
+0x00007ffff7c28800  0x00007ffff7db0039  Yes (*)     /lib/x86_64-linux-gnu/libc.so.6
+0x00007ffff7e4f040  0x00007ffff7e4f0f9  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/torch/lib/libtorch_global_deps.so
+0x00007ffff720f370  0x00007ffff727abba  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/torch/lib/../../nvidia/cuda_runtime/lib/libcudart.so.11.0
+0x00007ffff6e092a0  0x00007ffff6e2d3a2  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/torch/lib/libgomp-25c89faf.so.1
+0x00007ffff35dbb60  0x00007ffff5920794  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/nvidia/cuda_nvrtc/lib/libnvrtc.so.11.2
+0x00007ffff7fb8050  0x00007ffff7fb8115  Yes         /home/wu/.venvs/hmasd/lib/python3.10/site-packages/torch/_C.cpython-310-x86_64-linux-gnu.so
+0x00007ffff218f480  0x00007ffff2d3a420  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/torch/lib/libtorch_python.so
+0x00007ffff7e229b0  0x00007ffff7e3db8d  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/torch/lib/libtorch.so
+0x00007ffff74ae3f0  0x00007ffff74b075e  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/torch/lib/libshm.so
+0x00007fffdea9d900  0x00007fffee7d71f0  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/torch/lib/libtorch_cpu.so
+0x00007fff9a95a8f0  0x00007fff9d5d24a2  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/torch/lib/libtorch_cuda.so
+0x00007ffff71602a0  0x00007ffff71b8e61  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/torch/lib/libc10_cuda.so
+0x00007ffff6d07280  0x00007ffff6dacb39  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/torch/lib/libc10.so
+0x00007fff998041e0  0x00007fff9981206c  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/torch/lib/../../nvidia/cudnn/lib/libcudnn.so.9
+0x00007fff977aea80  0x00007fff9826836a  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/torch/lib/libcusparseLt-f8b4a9fb.so.0
+0x00007fff970a55c0  0x00007fff971e4ce2  Yes (*)     /lib/x86_64-linux-gnu/libstdc++.so.6
+0x00007ffff7126780  0x00007ffff7149745  Yes (*)     /lib/x86_64-linux-gnu/libgcc_s.so.1
+0x00007fff966af1e0  0x00007fff96ab7404  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/torch/lib/../../nvidia/cuda_cupti/lib/libcupti.so.11.8
+0x00007fff858774c0  0x00007fff8620094a  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/torch/lib/../../nvidia/cusparse/lib/libcusparse.so.11
+0x00007fff749b2d60  0x00007fff74e3247a  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/torch/lib/../../nvidia/cufft/lib/libcufft.so.10
+0x00007fff6de0c620  0x00007fff6df157ba  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/torch/lib/../../nvidia/curand/lib/libcurand.so.10
+0x00007fff68020a00  0x00007fff6889b53a  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/torch/lib/../../nvidia/cublas/lib/libcublas.so.11
+0x00007fff43f7d7f0  0x00007fff494cdeea  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/torch/lib/../../nvidia/cublas/lib/libcublasLt.so.11
+0x00007fff38a2ad90  0x00007fff38b18a92  Yes         /home/wu/.venvs/hmasd/lib/python3.10/site-packages/torch/lib/../../nvidia/nccl/lib/libnccl.so.2
+0x00007fff3860db10  0x00007fff386247d2  Yes (*)     /usr/lib/wsl/lib/libcuda.so.1
+0x00007fff37e2da70  0x00007fff38308663  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/numpy/core/_multiarray_umath.cpython-310-x86_64-linux-gnu.so
+0x00007fff35d18000  0x00007fff37998c5c  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/numpy/core/../../numpy.libs/libopenblas64_p-r0-0cf96a72.3.23.dev.so
+0x00007fff3561b870  0x00007fff35846837  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/numpy/core/../../numpy.libs/libgfortran-040039e1.so.5.0.0
+0x00007fff352023e0  0x00007fff35225d2b  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/numpy/core/../../numpy.libs/libquadmath-96973f99.so.0.0.0
+0x00007ffff77e6260  0x00007ffff77f7c60  Yes (*)     /lib/x86_64-linux-gnu/libz.so.1
+0x00007ffff77c4e70  0x00007ffff77da299  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/numpy/core/_multiarray_tests.cpython-310-x86_64-linux-gnu.so
+0x00007ffff7046c20  0x00007ffff7065da2  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/numpy/linalg/_umath_linalg.cpython-310-x86_64-linux-gnu.so
+0x00007ffff6cc7170  0x00007ffff6cd9adf  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/numpy/fft/_pocketfft_internal.cpython-310-x86_64-linux-gnu.so
+0x00007fff99a528f0  0x00007fff99aaafd4  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/numpy/random/mtrand.cpython-310-x86_64-linux-gnu.so
+0x00007ffff6c958f0  0x00007ffff6cb72cf  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/numpy/random/bit_generator.cpython-310-x86_64-linux-gnu.so
+0x00007ffff1f35830  0x00007ffff1f662ab  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/numpy/random/_common.cpython-310-x86_64-linux-gnu.so
+0x00007ffff1ee0840  0x00007ffff1f24fdf  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/numpy/random/_bounded_integers.cpython-310-x86_64-linux-gnu.so
+0x00007ffff6c115e0  0x00007ffff6c216d2  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/numpy/random/_mt19937.cpython-310-x86_64-linux-gnu.so
+0x00007ffff333a610  0x00007ffff334802c  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/numpy/random/_philox.cpython-310-x86_64-linux-gnu.so
+0x00007fffddbe7600  0x00007fffddbf85eb  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/numpy/random/_pcg64.cpython-310-x86_64-linux-gnu.so
+0x00007ffff1ece590  0x00007ffff1ed61ba  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/numpy/random/_sfc64.cpython-310-x86_64-linux-gnu.so
+0x00007fff96f27c90  0x00007fff96fa6f67  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/numpy/random/_generator.cpython-310-x86_64-linux-gnu.so
+0x00007ffff1fec7c0  0x00007ffff1ff9a34  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/scipy/_lib/_ccallback_c.cpython-310-x86_64-linux-gnu.so
+0x00007fff32c03450  0x00007fff32fb90ca  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/scipy/sparse/_sparsetools.cpython-310-x86_64-linux-gnu.so
+0x00007fff99747a20  0x00007fff997ea68c  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/scipy/sparse/_csparsetools.cpython-310-x86_64-linux-gnu.so
+0x00007fff330ceb10  0x00007fff3310fa52  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/scipy/linalg/_fblas.cpython-310-x86_64-linux-gnu.so
+0x00007fff316b2c00  0x00007fff327bb80d  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/scipy/linalg/../../scipy.libs/libscipy_openblas-68440149.so
+0x00007fff3101b870  0x00007fff31246837  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/scipy/linalg/../../scipy.libs/libgfortran-040039e1-0352e75f.so.5.0.0
+0x00007fff30c023e0  0x00007fff30c25d2b  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/scipy/linalg/../../scipy.libs/libquadmath-96973f99-934c22de.so.0.0.0
+0x00007fff2e843b60  0x00007fff2e909f02  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/scipy/linalg/_flapack.cpython-310-x86_64-linux-gnu.so
+0x00007fff6dc789d0  0x00007fff6dceb9d8  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/scipy/linalg/_cythonized_array_utils.cpython-310-x86_64-linux-gnu.so
+0x00007fff38873300  0x00007fff3888b85a  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/scipy/linalg/cython_lapack.cpython-310-x86_64-linux-gnu.so
+0x00007ffff1faa990  0x00007ffff1fdac8b  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/scipy/linalg/_solve_toeplitz.cpython-310-x86_64-linux-gnu.so
+0x00007fffddbac900  0x00007fffddbd7117  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/scipy/linalg/_decomp_lu_cython.cpython-310-x86_64-linux-gnu.so
+0x00007fff972c6950  0x00007fff972f309c  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/scipy/linalg/_matfuncs_sqrtm_triu.cpython-310-x86_64-linux-gnu.so
+0x00007fff67fbd860  0x00007fff67fd68c5  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/scipy/linalg/_matfuncs_expm.cpython-310-x86_64-linux-gnu.so
+0x00007ffff1f8b510  0x00007ffff1f9e319  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/scipy/linalg/_linalg_pythran.cpython-310-x86_64-linux-gnu.so
+0x00007fff37caf770  0x00007fff37cecc3f  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/scipy/linalg/_decomp_update.cpython-310-x86_64-linux-gnu.so
+0x00007fff35abc280  0x00007fff35ae6f3a  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/scipy/linalg/cython_blas.cpython-310-x86_64-linux-gnu.so
+0x00007fff35479ad0  0x00007fff354cb975  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/scipy/sparse/linalg/_dsolve/_superlu.cpython-310-x86_64-linux-gnu.so
+0x00007fff3156bb60  0x00007fff315bbc02  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/scipy/sparse/linalg/_eigen/arpack/_arpack.cpython-310-x86_64-linux-gnu.so
+0x00007fff3305bba0  0x00007fff3306f9c2  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/scipy/sparse/linalg/_propack/_spropack.cpython-310-x86_64-linux-gnu.so
+0x00007fff32ababa0  0x00007fff32ace472  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/scipy/sparse/linalg/_propack/_dpropack.cpython-310-x86_64-linux-gnu.so
+0x00007fff314dfc00  0x00007fff314f9eb2  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/scipy/sparse/linalg/_propack/_cpropack.cpython-310-x86_64-linux-gnu.so
+0x00007fff30f7fc00  0x00007fff30f977e2  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/scipy/sparse/linalg/_propack/_zpropack.cpython-310-x86_64-linux-gnu.so
+0x00007fff30ede980  0x00007fff30f400ac  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/scipy/sparse/csgraph/_shortest_path.cpython-310-x86_64-linux-gnu.so
+0x00007fff99a1f6a0  0x00007fff99a3fc3f  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/scipy/sparse/csgraph/_tools.cpython-310-x86_64-linux-gnu.so
+0x00007fff30e46980  0x00007fff30ec31d2  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/scipy/sparse/csgraph/_traversal.cpython-310-x86_64-linux-gnu.so
+0x00007fff9728a8e0  0x00007fff972b3d7c  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/scipy/sparse/csgraph/_min_spanning_tree.cpython-310-x86_64-linux-gnu.so
+0x00007fff2ebb6910  0x00007fff2ebee91c  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/scipy/sparse/csgraph/_flow.cpython-310-x86_64-linux-gnu.so
+0x00007fff2eb668e0  0x00007fff2eb9e6e4  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/scipy/sparse/csgraph/_matching.cpython-310-x86_64-linux-gnu.so
+0x00007fff2eb1c950  0x00007fff2eb52864  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/scipy/sparse/csgraph/_reordering.cpython-310-x86_64-linux-gnu.so
+0x00007fff2ea47d80  0x00007fff2eaf0fda  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/scipy/spatial/_ckdtree.cpython-310-x86_64-linux-gnu.so
+0x00007fff2e5f9ca0  0x00007fff2e6c162d  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/scipy/spatial/_qhull.cpython-310-x86_64-linux-gnu.so
+0x00007ffff1f79700  0x00007ffff1f82745  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/scipy/_lib/messagestream.cpython-310-x86_64-linux-gnu.so
+0x00007fff2e5c18e0  0x00007fff2e5e5c21  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/scipy/spatial/_voronoi.cpython-310-x86_64-linux-gnu.so
+0x00007fffddb8e1c0  0x00007fffddba1632  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/scipy/spatial/_distance_wrap.cpython-310-x86_64-linux-gnu.so
+0x00007fff2e589900  0x00007fff2e5afaca  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/scipy/spatial/_hausdorff.cpython-310-x86_64-linux-gnu.so
+0x00007fff2e41bec0  0x00007fff2e51f1b2  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/scipy/special/_ufuncs.cpython-310-x86_64-linux-gnu.so
+0x00007ffff7e16050  0x00007ffff7e1612e  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/scipy/special/libsf_error_state.so
+0x00007fff2e290b00  0x00007fff2e3deaf2  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/scipy/special/_ufuncs_cxx.cpython-310-x86_64-linux-gnu.so
+0x00007fff2e143640  0x00007fff2e2453c2  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/scipy/special/_special_ufuncs.cpython-310-x86_64-linux-gnu.so
+0x00007fff2e0ab440  0x00007fff2e130172  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/scipy/special/_gufuncs.cpython-310-x86_64-linux-gnu.so
+0x00007fff2e06c930  0x00007fff2e09e3d2  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/scipy/special/_specfun.cpython-310-x86_64-linux-gnu.so
+0x00007fff856f55a0  0x00007fff856fbafe  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/scipy/special/_comb.cpython-310-x86_64-linux-gnu.so
+0x00007fff746e46b0  0x00007fff746f7bda  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/scipy/special/_ellip_harm_2.cpython-310-x86_64-linux-gnu.so
+0x00007fff2dfeec30  0x00007fff2e0533fa  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/scipy/spatial/_distance_pybind.cpython-310-x86_64-linux-gnu.so
+0x00007fff2de03b60  0x00007fff2deadfdf  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/scipy/spatial/transform/_rotation.cpython-310-x86_64-linux-gnu.so
+0x00007fff856e04e0  0x00007fff856ec859  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/scipy/optimize/_group_columns.cpython-310-x86_64-linux-gnu.so
+0x00007fff2ddaaad0  0x00007fff2dde85a8  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/scipy/optimize/_trlib/_trlib.cpython-310-x86_64-linux-gnu.so
+0x00007fff2dc6e7d0  0x00007fff2dc7c085  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/scipy/optimize/_lbfgsb.cpython-310-x86_64-linux-gnu.so
+0x00007fff38834680  0x00007fff3884caa6  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/scipy/optimize/_moduleTNC.cpython-310-x86_64-linux-gnu.so
+0x00007fff439eb4d0  0x00007fff439f8122  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/scipy/optimize/_cobyla.cpython-310-x86_64-linux-gnu.so
+0x00007fff6dc603d0  0x00007fff6dc6c542  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/scipy/optimize/_slsqp.cpython-310-x86_64-linux-gnu.so
+0x00007fff384ea2a0  0x00007fff384fb3cc  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/scipy/optimize/_minpack.cpython-310-x86_64-linux-gnu.so
+0x00007fff2dc1f8e0  0x00007fff2dc41f0c  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/scipy/optimize/_lsq/givens_elimination.cpython-310-x86_64-linux-gnu.so
+0x00007ffff77b8130  0x00007ffff77b9574  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/scipy/optimize/_zeros.cpython-310-x86_64-linux-gnu.so
+0x00007fff37c936a0  0x00007fff37ca4204  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/scipy/optimize/_cython_nnls.cpython-310-x86_64-linux-gnu.so
+0x00007fff2d613580  0x00007fff2d9fe21d  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/scipy/optimize/_highspy/_core.cpython-310-x86_64-linux-gnu.so
+0x00007fff2dbd2da0  0x00007fff2dc06d6d  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/scipy/optimize/_highspy/_highs_options.cpython-310-x86_64-linux-gnu.so
+0x00007fff2dadd9e0  0x00007fff2dbb9608  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/scipy/linalg/_decomp_interpolative.cpython-310-x86_64-linux-gnu.so
+0x00007fff35a996f0  0x00007fff35aab1ea  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/scipy/_lib/_uarray/_uarray.cpython-310-x86_64-linux-gnu.so
+0x00007fff2d408cb0  0x00007fff2d4e092c  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/scipy/fft/_pocketfft/pypocketfft.cpython-310-x86_64-linux-gnu.so
+0x00007fff2d3b6950  0x00007fff2d3f09b4  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/scipy/optimize/_bglu_dense.cpython-310-x86_64-linux-gnu.so
+0x00007ffff6c8a1a0  0x00007ffff6c8bc95  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/scipy/optimize/_lsap.cpython-310-x86_64-linux-gnu.so
+0x00007fff33014b30  0x00007fff3302cb5a  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/scipy/optimize/_pava_pybind.cpython-310-x86_64-linux-gnu.so
+0x00007ffff6c041f0  0x00007ffff6c09f82  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/scipy/optimize/_direct.cpython-310-x86_64-linux-gnu.so
+0x00007fff2d3748f0  0x00007fff2d3853a5  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/scipy/integrate/_odepack.cpython-310-x86_64-linux-gnu.so
+0x00007fff2dabf310  0x00007fff2dad2bb2  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/scipy/integrate/_quadpack.cpython-310-x86_64-linux-gnu.so
+0x00007fff2d305b80  0x00007fff2d323b22  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/scipy/integrate/_vode.cpython-310-x86_64-linux-gnu.so
+0x00007fff2d2cb4f0  0x00007fff2d2d8b72  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/scipy/integrate/_dop.cpython-310-x86_64-linux-gnu.so
+0x00007fff2d285b80  0x00007fff2d299052  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/scipy/integrate/_lsoda.cpython-310-x86_64-linux-gnu.so
+0x00007fff384d2220  0x00007fff384e12a4  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/scipy/interpolate/_fitpack.cpython-310-x86_64-linux-gnu.so
+0x00007fff2d014510  0x00007fff2d049e42  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/scipy/interpolate/_dfitpack.cpython-310-x86_64-linux-gnu.so
+0x00007fff354404b0  0x00007fff3544bbba  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/scipy/interpolate/_dierckx.cpython-310-x86_64-linux-gnu.so
+0x00007fff2cfaba00  0x00007fff2d000aef  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/scipy/interpolate/_ppoly.cpython-310-x86_64-linux-gnu.so
+0x00007fff2cf45ad0  0x00007fff2cf9491b  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/scipy/interpolate/_interpnd.cpython-310-x86_64-linux-gnu.so
+0x00007fff2cf0c5b0  0x00007fff2cf36349  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/scipy/interpolate/_rbfinterp_pythran.cpython-310-x86_64-linux-gnu.so
+0x00007fff2cecb990  0x00007fff2cefbb86  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/scipy/interpolate/_rgi_cython.cpython-310-x86_64-linux-gnu.so
+0x00007fff2ce7abe0  0x00007fff2ceaf1aa  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/scipy/interpolate/_bspl.cpython-310-x86_64-linux-gnu.so
+0x00007fff2cdccaf0  0x00007fff2ce5fa27  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/scipy/stats/_stats.cpython-310-x86_64-linux-gnu.so
+0x00007fff2ca0eee0  0x00007fff2ccd2d72  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/scipy/special/cython_special.cpython-310-x86_64-linux-gnu.so
+0x00007fff2cd70990  0x00007fff2cdb761f  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/scipy/stats/_sobol.cpython-310-x86_64-linux-gnu.so
+0x00007fff2cd33a00  0x00007fff2cd5dbb4  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/scipy/stats/_qmc_cy.cpython-310-x86_64-linux-gnu.so
+0x00007fff2c7c39e0  0x00007fff2c7ecc6a  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/scipy/stats/_biasedurn.cpython-310-x86_64-linux-gnu.so
+0x00007fff2c79c5a0  0x00007fff2c7b5459  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/scipy/stats/_stats_pythran.cpython-310-x86_64-linux-gnu.so
+0x00007fff67f91620  0x00007fff67f972b5  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/scipy/stats/_levy_stable/levyst.cpython-310-x86_64-linux-gnu.so
+0x00007fff2c65f9a0  0x00007fff2c68bd59  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/scipy/stats/_ansari_swilk_statistics.cpython-310-x86_64-linux-gnu.so
+0x00007fff2c551430  0x00007fff2c5596d2  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/scipy/stats/_mvn.cpython-310-x86_64-linux-gnu.so
+0x00007fff2c419920  0x00007fff2c440189  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/scipy/stats/_rcont/rcont.cpython-310-x86_64-linux-gnu.so
+0x00007fff2c3f3360  0x00007fff2c40d2d9  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/scipy/ndimage/_nd_image.cpython-310-x86_64-linux-gnu.so
+0x00007ffff1f701c0  0x00007ffff1f72442  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/scipy/ndimage/_rank_filter_1d.cpython-310-x86_64-linux-gnu.so
+0x00007fff2c3979c0  0x00007fff2c3e2a82  Yes (*)     /home/wu/.venvs/hmasd/lib/python3.10/site-packages/scipy/ndimage/_ni_label.cpython-310-x86_64-linux-gnu.so
+0x00007fff32a87440  0x00007fff32a92f75  Yes (*)     /home/wu/hmasd-worktrees/rcle-b12-15eaa7ea6/temp/directions/roster_consistent_latent_exploration/exp/b12_seed32/native_build/cbc8870010a78859ef1f2053a377339d88678d6e0f38872b3d5a264a57e69fd5/tbcfv_backend.so
+0x00007fff26233480  0x00007fff2a9a8b94  Yes         /home/wu/.venvs/hmasd/lib/python3.10/site-packages/triton/_C/libtriton.so
+0x00007fff21875fa0  0x00007fff218f0e81  Yes (*)     /usr/lib/wsl/lib/libdxcore.so
+0x00007fff1fd52d40  0x00007fff20cec1ea  Yes (*)     /usr/lib/wsl/drivers/nvam.inf_amd64_6c98bb76a18a5f20/libcuda.so.1.1
+0x00007fff1f000960  0x00007fff1f00c542  Yes (*)     /usr/lib/wsl/drivers/nvam.inf_amd64_6c98bb76a18a5f20/libnvdxgdmal.so.1
+                                        No          linux-vdso.so.1
+(*): Shared library is missing debugging information.
+No current process: you must name one.
+=== Task 'rcle-b12-s32-15eaa7ea6' exited with code 0 at 2026-09-14T13:04:30+08:00 (Duration: 193s) ===

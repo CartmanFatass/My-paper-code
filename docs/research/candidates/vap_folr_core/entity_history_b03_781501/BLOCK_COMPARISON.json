@@ -1,0 +1,26 @@
+{
+  "blocks": [
+    {
+      "block": "B02",
+      "object": "FOLR_ENTITY_HISTORY_B02_781401",
+      "generic_mean": -0.6529687500000004,
+      "bank_mean": -5.483828125,
+      "bank_minus_generic": -4.830859374999999,
+      "rule": "GENERIC_ABOVE_MEI",
+      "training_runs_per_arm": 1,
+      "evaluation_episodes_per_policy": 128
+    },
+    {
+      "block": "B03",
+      "object": "FOLR_ENTITY_HISTORY_B03_781501",
+      "generic_mean": 4.9259375,
+      "bank_mean": -1.7107812500000006,
+      "bank_minus_generic": -6.63671875,
+      "rule": "GENERIC_ABOVE_MEI",
+      "training_runs_per_arm": 1,
+      "evaluation_episodes_per_policy": 128
+    }
+  ],
+  "pooling": "No episode pooling or summary meta-estimate; two distinct whole-learning-and-evaluation realizations.",
+  "population_rank_uncertainty": null
+}

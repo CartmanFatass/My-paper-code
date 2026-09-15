@@ -1,0 +1,156 @@
+{
+  "caller_role": "em",
+  "workflow_node": "em_convergence",
+  "request_id": "2026-09-14-folr-augmentation-b01-result-closeout-review-01",
+  "source_thread_id": "01a09e16-f7b1-7e60-83a0-ba2a7cd969bc",
+  "parent_thread_id": "01a09e16-f7b1-7e60-83a0-ba2a7cd969bc",
+  "operator_thread_id": "01a09ea0-4a86-75b0-826d-6f864efa7480",
+  "direction_id": "vap_folr_core",
+  "repository": "CartmanFatass/My-paper-code",
+  "repository_url": "https://github.com/CartmanFatass/My-paper-code",
+  "commit_or_ref": "15f47648566c923c28389778b67313c6292e4a9a",
+  "execution_mode": "REUSE_SINGLETON",
+  "delivery_mode": "github_delivery",
+  "conversation_id": "6aa18137-9d88-83e8-a01f-46630813faf8",
+  "scientific_question": "You are FOLR's independent Convergence scientific Reviewer. Review the completed augmentation B01 A-minus-G result, the DM's interpretation and its concrete handoff claim limits. This is necessary closeout of the task already in hand. The owner has explicitly instructed all directions to finish current work and experiments, write handoffs and pause. Do not select, design, fund or launch a successor object, issue a direction PARK/CLOSE/CONTINUE decision, or turn this into an open-ended next-object consultation. Current scientific CONTINUE/MEDIUM and slot occupancy remain; operational owner pause follows current closeout. Read the separately pinned owner-pause instruction. DM must read your full answer, respond to material findings and correct or bound any dependent claim.\n\nThe original object FOLR_ENTITY_HISTORY_AUGMENTATION_B01_781601 is now complete. Both fresh Generic G and augmented A finished the fixed5000 training episodes/100000 native ticks/4969 RMSprop updates, one final checkpoint, then128 greedy non-learning episodes/2560ticks. Total2fresh fits/205120ticks/9938updates/256final episodes. Train seed781601/eval1781601 were prospectively unscreened. G ran first; the original A ran after technical G collection regardless of G score. Both original invocations finished exit0 at the unchanged source d9977dc18baf33b78dc626764c252391f1ddaa9d. No scientific retry, third arm, tuning, best-checkpoint selection, shortened pilot or changed endpoint.\n\nG mean-0.966484375, sampleSD7.311570982, conditional episodeSE0.646257678,75/128negative, range[-16.56,20.08]. A mean4.329921875, SD8.237034431, conditionalSE0.728057863,42/128negative, range[-15.20,23.64]. d_A-G=+5.29640625, AUGMENTED_ABOVE_MEI under the frozen strict d>1 rule; inclusive[-1,1] is WITHIN_MEI and strict d<-1 is GENERIC_ABOVE_MEI. The observed margin exceeds the positive MEI boundary by4.29640625. MEI is not significance, equivalence or competence. The DM's prospective low-confidence GENERIC_ABOVE_MEI prediction missed; owner prediction was not taken. All signed evidence remains.\n\nThere is one fresh fitted policy per arm. Compatible Generic modules and post-constructor external Torch RNG are aligned, but equal seed labels do not establish paired episode worlds or independent arm draws.128evaluation episodes per policy do not estimate training-population uncertainty. The existing publisher's training_pairs=1 field names the selected comparison block, not a statistical pairing certificate; paired_difference_se is null. The descriptive run tool used one endpoint row per fitted program and no --paired flag, with per-arm n=1 and sampleSDnull. Assess actual units rather than interpreting tool labels as proof. The old5000 training returns are preserved as changing-policy context, never substituted for the fixed final panel.\n\nPrograms retain the same truthful public lifecycle/slot table, legal observer-local physical/action observations, visible/seen/age and event cues on the H20 easy native Traffic Junction host, five slots/actions, vision1, CPU FP32, Torch1/1, existing double-Q complete-episode replay and training-only FlexQMixer. G keeps its existing current visible-attention+metadata/own-trip GRU64/original Q head. A retains that Generic recurrent route and adds an independent observer-subject GRU16 history stream, current physical bypass, its own attention/readout64 and a single Linear128-to5 head after concatenation. Entity histories reset at observer or subject lifetime boundaries, update when visible, carry when unseen and continuing, and are zero when inactive; unseen current physical/action values are sanitized before learned encoders. Generic resets only on its own lifetime. Each learner/target/replay/optimizer is fresh, and online/target histories are separately reconstructed on replay. Technical implementation had independent Sol/high full-path review with no material finding and11 focused synthetic tests; no selected-seed scientific smoke was used.\n\nA has192741 actor parameters versus103173 for G. A's unused original Generic head consumes its initialization draws before all added modules initialize in CPU fork_rng; compatible Generic modules and external constructor RNG match G. Initial Q, full architecture, temporal capacity, gradients, optimization and learned Generic states do not match. The DM claims a positive complete-program increment in this one realization. It does not attribute it uniquely to persistent memory, diagnose why old BANK lost, demonstrate A-Z, population superiority, convergence, absolute competence, tuned headroom, transfer/speed, C-BENCH or UAV performance. Extra parameters/current-feature processing/fusion/optimization and favorable realization remain serious alternatives. A's42negative episodes and broad conditional spread remain visible.\n\nThe current report updates the additive-design uncertainty, without rewriting history. Old replacement BANK B02 d=-4.830859375 and B03 d=-6.63671875 remain separately adverse; they are not negative replications of this A. E lacks an intact fresh-pair contrast; F uses an outcome-informed retained historical BANK and is not another BANK fit. Historical B03 Generic4.9259375 cannot substitute for the contemporaneous comparator, serve as a tuned upper or support a cross-block ranking. Full prior B03 review and final Portfolio clarification are pinned: the latter explicitly chose A-G and withdrew A-Z for this round; no new causal-persistence claim follows. The earlier owner-challenged stopping inference is not reinstated just because this object finished, and the present owner pause is not scientific PARK.\n\nCollection checked fixed clean source, original G summary SHA256, object/arm/seed/exposure bindings, complete finite arrays, source-grounded checkpoint state/buffer counts, finite FP32 actor/mixer/target/optimizer state, exact checkpoint path, final publication and original primary. A's original G input digest is152b1b807f148a9d7004f8b0208d30ce2fa1c147734c11d4d7cb01f84216336c. A summary isac8a8e647eb18f6028af2743ae7fa0a9634ac24b388124f80bbf89f23298ff0e. The selected publisher was recomputed from both original summaries, then independently checked with NumPy.15A and14G raw archive members (some shared control sources overlap) were transferred and hash-verified. They preserve summaries, all returns, final weights, admission, native timings, launch commands and supervisor logs. You need not download/execute raw archives or checkpoints; use the compact collection manifests/result/cost and listed source.\n\nG complete native wall1178.68s/CPU1177.50s; A2796.80s/CPU2795.46s. Sum3975.48native seconds/3972.96CPU. Study elapsed at supervisor second-resolution17377s includes13401s inter-arm gap; precise terminal-G-to-A-preparation interval13401.737549s is distinct. A parent callback failed before execution with unsupported reasoning effort=none, delaying control consequence; it did not fail or repeat native G. Monitor and return-route repairs are preserved. Native actor state includes buffers: G103173parameters+26buffer elements; A192741+27. The original G technical checker erroneously equated total state size with parameter count; source-grounded correction passed, without changing or repeating science. Assess whether these operational facts threaten the primary or only their stated reporting/cost scope.\n\nKnown earlier E/F/B02/B03 native12538.44s plus this object is16513.92s, not full direction lifetime. Full support/provider/engineering costs stay UNKNOWN; nested measured readback windows are not blindly summed. Ordinary G3600s/A5400s/native9000s plans were not exceeded, but complete1800s support-reference compliance is unknown. Native planning estimates are not owner caps or scientific endpoints. The observed A/G wall ratio2.3728 is a sequential invocation fact, not a controlled efficiency study. No extra paid/cross-direction capacity was used; original one-FOLR-at-a-time/fresh physical and effective>=4GiB admission were met.\n\nThe deferred-research paragraph in the DM intake preserves only what a future owner resume would need to reconsider: whether the positive intact program recurs under another complete realization, versus the distinct conditional A-Z persistence question. It selects no next seed/card/experiment/consultation and claims no automatic entitlement to further compute. Do not expand that paragraph into a new research plan. Your task is to review the actual result's scientific integrity, interpretation, historical distinctions, costs and recovery knowledge now. Apply the pinned empirical specification and focused foundations to the consequential inference; do not add exact-upper, mechanism census, significance or fixed-seed prerequisites for this B fact. Report any actual decision-critical source gap and its affected claim honestly; local publication does not prove your access.\n\nReturn concrete consequential findings first. Distinguish any result-invalidating binding/measurement flaw; narrower overclaim/uncertainty/cost reporting issue; scientifically defensible interpretation; and remaining handoff caveats. Explain why any challenged inference follows or fails. If no material defect is found say so with the bounded claim you accept, without relabeling this as a lifecycle decision. The full answer and material DM response are necessary current-task closeout. No additional independent model request or empirical work is authorized by your review.",
+  "deliverable": "Full independent scientific review of completed augmentation B01 measurement/interpretation/cost/handoff. Distinguish concrete defects and dependent claims from bounded accepted facts; identify actual accessed sources and remaining limitations. No successor design, lifecycle decision or empirical authorization.",
+  "claim_ceiling": "B/EXPLORE: one intact whole-program fitted-policy A-G comparison. No training-population ranking, causal persistence/A-Z, convergence/competence/tuned headroom, transfer/speed, C/UAV or scientific PARK from operational pause.",
+  "reference_files": [
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_ENTITY_HISTORY_AUGMENTATION_B01_SCIENCE_CARD_20260914.md",
+      "purpose": "Read complete fixed question, program/inputs/RNG, exposure, MEI/prediction and original resource meanings.",
+      "provenance": "Frozen science and accepted engineering; no changed endpoint.",
+      "commit_sha": "8d219f4bcc29259e626c16dea23182660ae350d9"
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_ENTITY_HISTORY_AUGMENTATION_B01_RESULT_EVIDENCE_20260914.md",
+      "purpose": "Read complete actual result, rule, integrity/provenance, units and deviations.",
+      "provenance": "Current original-DM evidence and interpretation; not an independent review.",
+      "commit_sha": "15f47648566c923c28389778b67313c6292e4a9a"
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_ENTITY_HISTORY_AUGMENTATION_B01_INTAKE_20260914.md",
+      "purpose": "Read complete DM interpretation and owner-pause closeout; future work is deferred, not selected.",
+      "provenance": "Current original-DM evidence and interpretation; not an independent review.",
+      "commit_sha": "15f47648566c923c28389778b67313c6292e4a9a"
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/DIRECTION.md",
+      "purpose": "Read Scientific question and Current position only; historical sections remain separate and are not current control routes.",
+      "provenance": "Current original-DM evidence and interpretation; not an independent review.",
+      "commit_sha": "15f47648566c923c28389778b67313c6292e4a9a"
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/entity_history_augmentation_b01_781601/RESULT_SUMMARY.json",
+      "purpose": "Read complete compact result, original primary, all per-arm counts, conditional uncertainty and prediction.",
+      "provenance": "Fixed current-object evidence; no code/archive/checkpoint execution is requested.",
+      "commit_sha": "15f47648566c923c28389778b67313c6292e4a9a"
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/entity_history_augmentation_b01_781601/COST_SUMMARY.json",
+      "purpose": "Read complete native/study/support scopes, timestamp precision and unknown costs.",
+      "provenance": "Fixed current-object evidence; no code/archive/checkpoint execution is requested.",
+      "commit_sha": "15f47648566c923c28389778b67313c6292e4a9a"
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/entity_history_augmentation_b01_781601/GENERIC_COLLECTION.json",
+      "purpose": "Read complete G identity, integrity/buffer checks, native timings and raw member manifest.",
+      "provenance": "Fixed current-object evidence; no code/archive/checkpoint execution is requested.",
+      "commit_sha": "15f47648566c923c28389778b67313c6292e4a9a"
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/entity_history_augmentation_b01_781601/AUGMENTED_COLLECTION.json",
+      "purpose": "Read complete A identity, original G digest, publisher recomputation, finite checkpoint and member manifest.",
+      "provenance": "Fixed current-object evidence; no code/archive/checkpoint execution is requested.",
+      "commit_sha": "15f47648566c923c28389778b67313c6292e4a9a"
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/entity_history_augmentation_b01_781601/INDEPENDENT_REVIEW.md",
+      "purpose": "Read full independent engineering review of implemented recurrent/learner/collector/checkpoint/RNG and exact native commands.",
+      "provenance": "Fixed current-object evidence; no code/archive/checkpoint execution is requested.",
+      "commit_sha": "15f47648566c923c28389778b67313c6292e4a9a"
+    },
+    {
+      "path": "experiments/candidates/vap_folr_core/entity_history_augmentation_b01/model.py",
+      "purpose": "Read complete actual A architecture, lawful memory boundaries, current bypass and constructor alignment.",
+      "provenance": "Accepted implementation at exact execution source.",
+      "commit_sha": "d9977dc18baf33b78dc626764c252391f1ddaa9d"
+    },
+    {
+      "path": "experiments/candidates/vap_folr_core/entity_history_augmentation_b01/publication.py",
+      "purpose": "Read complete actual binding/MEI publisher and interpretation of training_pairs=1.",
+      "provenance": "Accepted implementation at exact execution source.",
+      "commit_sha": "d9977dc18baf33b78dc626764c252391f1ddaa9d"
+    },
+    {
+      "path": "scripts/run_folr_entity_history_augmentation_b01.py",
+      "purpose": "Read complete actual fit/final-panel/publication path, fixed seeds/exposure and G input handling.",
+      "provenance": "Exact executed source; outer native timings cover more than runner sample.",
+      "commit_sha": "d9977dc18baf33b78dc626764c252391f1ddaa9d"
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_ENTITY_HISTORY_B03_RESULT_EVIDENCE_20260914.md",
+      "purpose": "Read bounded historical replacement-program result and preserve its separate B02/E/F context.",
+      "provenance": "Prior program; not current A evidence.",
+      "commit_sha": "15f47648566c923c28389778b67313c6292e4a9a"
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/pro_packets/20260914_entity_history_b03_result_plan_review/archive/RESPONSE.md",
+      "purpose": "Read complete prior independent result/design review and its substantive confound concerns.",
+      "provenance": "Historical independent review, not a verdict on this new result.",
+      "commit_sha": "18e03e45d69def09d29c0f2c299bb855891b0f27"
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/pro_packets/20260914_post_b03_portfolio_direction/archive/clarification_01/RESPONSE.md",
+      "purpose": "Read complete unique applied A-G clarification and its explicit causal-attribution limits.",
+      "provenance": "Applied Portfolio selection; A-Z withdrawn only for this round.",
+      "commit_sha": "8d219f4bcc29259e626c16dea23182660ae350d9"
+    },
+    {
+      "path": "docs/research/portfolio/decisions/2026-09-14-owner-pause-after-inflight.md",
+      "purpose": "Read complete latest owner instruction: current task/review closeout continues; no successor or lifecycle/vacancy change follows.",
+      "provenance": "Current owner authority.",
+      "commit_sha": "51c597fdec5ba22826f748e3389cf462575d57e5"
+    },
+    {
+      "path": "docs/project/PORTFOLIO_DECISION_PROTOCOL.md",
+      "purpose": "Read authority scope only: DM owns result intake, Direction Pro reviews, Portfolio final direction interpretation; current owner pause controls future work.",
+      "provenance": "Current authority; not per-experiment permission.",
+      "commit_sha": "51c597fdec5ba22826f748e3389cf462575d57e5"
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "purpose": "Apply sections11.4 and11.7-11.10 for actual B integrity, MEI, proportionality, evidence units, failures and claim ceilings.",
+      "provenance": "Current empirical requirements; frozen card unchanged.",
+      "commit_sha": "51c597fdec5ba22826f748e3389cf462575d57e5"
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "purpose": "Read sections2,4,6: legal history, method/learning distinctions and empirical units.",
+      "provenance": "Explanatory knowledge; no independent authority.",
+      "commit_sha": "51c597fdec5ba22826f748e3389cf462575d57e5"
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+      "purpose": "Read complete concise topic, no recursive linked literature: fit versus episode, method versus component, costs/selection.",
+      "provenance": "Explanatory methodology.",
+      "commit_sha": "51c597fdec5ba22826f748e3389cf462575d57e5"
+    },
+    {
+      "path": "docs/project/MARL_RUNTIME_ENGINEERING_SPEC.md",
+      "purpose": "Read section1 for complete logical invocation, native/study/support cost and planning references versus actual limits.",
+      "provenance": "Current cost meaning; not a new investigation or launch gate.",
+      "commit_sha": "51c597fdec5ba22826f748e3389cf462575d57e5"
+    }
+  ],
+  "constraints": [
+    "Current owner pause is binding. Complete only this in-hand result-review closeout; future research remains deferred.",
+    "Do not run code, inspect binary checkpoints or produce a fabricated independent/Portfolio verdict. Read the listed fixed evidence, use the scoped response delivery, and keep full findings."
+  ],
+  "github_delivery": {
+    "branch": "codex/vap-folr",
+    "base_sha": "15f47648566c923c28389778b67313c6292e4a9a",
+    "response_path": "docs/research/candidates/vap_folr_core/pro_packets/20260914_augmentation_b01_result_closeout_review/archive/RESPONSE.md",
+    "issue_url": "https://github.com/CartmanFatass/My-paper-code/issues/15"
+  }
+}

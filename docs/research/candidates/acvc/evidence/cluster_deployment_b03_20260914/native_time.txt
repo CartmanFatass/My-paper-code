@@ -1,0 +1,3 @@
+native_wall_s=163.36
+peak_rss_kib=548876
+exit_code=0

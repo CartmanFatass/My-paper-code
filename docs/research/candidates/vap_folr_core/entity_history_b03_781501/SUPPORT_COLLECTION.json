@@ -1,0 +1,155 @@
+{
+  "at_utc": "2026-09-14T10:08:32.202292+00:00",
+  "source_sha": "b257dcb1d7578a057afa9b4bdd7c7ff74ad8e24f",
+  "wt": "/home/wu/hmasd-worktrees/folr-entity-history-b03-781501-b257dcb1d",
+  "tracked_clean": true,
+  "terminal_statuses": {
+    "folr-b03-781501-generic": {
+      "task": "folr-b03-781501-generic",
+      "status": "finished",
+      "exit_code": 0,
+      "pid": 3666806,
+      "uptime_seconds": 6252,
+      "tmux_active": false
+    },
+    "folr-b03-781501-bank": {
+      "task": "folr-b03-781501-bank",
+      "status": "finished",
+      "exit_code": 0,
+      "pid": 3669107,
+      "uptime_seconds": 3602,
+      "tmux_active": false
+    }
+  },
+  "live_processes": [],
+  "untracked_inventory": [
+    "experiments/candidates/vap_folr_core/entity_history_b01/__pycache__/__init__.cpython-310.pyc",
+    "experiments/candidates/vap_folr_core/entity_history_b01/__pycache__/environment.cpython-310.pyc",
+    "experiments/candidates/vap_folr_core/entity_history_b01/__pycache__/learner.cpython-310.pyc",
+    "experiments/candidates/vap_folr_core/entity_history_b01/__pycache__/model.cpython-310.pyc",
+    "experiments/candidates/vap_folr_core/entity_history_b01/__pycache__/publication.cpython-310.pyc",
+    "experiments/candidates/vap_folr_core/entity_history_b03/__pycache__/__init__.cpython-310.pyc",
+    "experiments/candidates/vap_folr_core/entity_history_b03/__pycache__/binding.cpython-310.pyc",
+    "experiments/candidates/vap_folr_core/public_lifecycle_b01/__pycache__/attention.cpython-310.pyc",
+    "experiments/candidates/vap_folr_core/public_lifecycle_b01/__pycache__/collection.cpython-310.pyc",
+    "experiments/candidates/vap_folr_core/public_lifecycle_b01/__pycache__/environment.cpython-310.pyc",
+    "experiments/candidates/vap_folr_core/public_lifecycle_b01/__pycache__/flex_qmix.cpython-310.pyc",
+    "experiments/candidates/vap_folr_core/public_lifecycle_b01/__pycache__/learner.cpython-310.pyc",
+    "experiments/candidates/vap_folr_core/public_lifecycle_b01/__pycache__/model.cpython-310.pyc",
+    "experiments/candidates/vap_folr_core/public_lifecycle_b01/__pycache__/native_env.cpython-310.pyc",
+    "scripts/__pycache__/hmasd_platform.cpython-310.pyc",
+    "temp/directions/vap_folr_core/exp/entity_history_b03_781501/BANK/ADMISSION.json",
+    "temp/directions/vap_folr_core/exp/entity_history_b03_781501/BANK/INVOCATION_TIME.json",
+    "temp/directions/vap_folr_core/exp/entity_history_b03_781501/BANK/final.pt",
+    "temp/directions/vap_folr_core/exp/entity_history_b03_781501/BANK/summary.json",
+    "temp/directions/vap_folr_core/exp/entity_history_b03_781501/BANK_CONTROL_LAUNCH.json",
+    "temp/directions/vap_folr_core/exp/entity_history_b03_781501/BANK_LAUNCH.sh",
+    "temp/directions/vap_folr_core/exp/entity_history_b03_781501/BANK_RAW.tar.gz",
+    "temp/directions/vap_folr_core/exp/entity_history_b03_781501/GENERIC/ADMISSION.json",
+    "temp/directions/vap_folr_core/exp/entity_history_b03_781501/GENERIC/INVOCATION_TIME.json",
+    "temp/directions/vap_folr_core/exp/entity_history_b03_781501/GENERIC/final.pt",
+    "temp/directions/vap_folr_core/exp/entity_history_b03_781501/GENERIC/summary.json",
+    "temp/directions/vap_folr_core/exp/entity_history_b03_781501/GENERIC_CONTROL_LAUNCH.json",
+    "temp/directions/vap_folr_core/exp/entity_history_b03_781501/GENERIC_LAUNCH.sh",
+    "temp/directions/vap_folr_core/exp/entity_history_b03_781501/GENERIC_RAW.tar.gz"
+  ],
+  "already_preserved_scientific_paths": [
+    "temp/directions/vap_folr_core/exp/entity_history_b03_781501/BANK/ADMISSION.json",
+    "temp/directions/vap_folr_core/exp/entity_history_b03_781501/BANK/INVOCATION_TIME.json",
+    "temp/directions/vap_folr_core/exp/entity_history_b03_781501/BANK/final.pt",
+    "temp/directions/vap_folr_core/exp/entity_history_b03_781501/BANK/summary.json",
+    "temp/directions/vap_folr_core/exp/entity_history_b03_781501/BANK_RAW.tar.gz",
+    "temp/directions/vap_folr_core/exp/entity_history_b03_781501/GENERIC/ADMISSION.json",
+    "temp/directions/vap_folr_core/exp/entity_history_b03_781501/GENERIC/INVOCATION_TIME.json",
+    "temp/directions/vap_folr_core/exp/entity_history_b03_781501/GENERIC/final.pt",
+    "temp/directions/vap_folr_core/exp/entity_history_b03_781501/GENERIC/summary.json",
+    "temp/directions/vap_folr_core/exp/entity_history_b03_781501/GENERIC_RAW.tar.gz"
+  ],
+  "support_files": {
+    "experiments/candidates/vap_folr_core/entity_history_b01/__pycache__/__init__.cpython-310.pyc": {
+      "bytes": 305,
+      "sha256": "67892d8b98ec8bb8347839338ec9cf852113f651cc5e07ed6e1a5a792f15c846"
+    },
+    "experiments/candidates/vap_folr_core/entity_history_b01/__pycache__/environment.cpython-310.pyc": {
+      "bytes": 1825,
+      "sha256": "c0f46d67f64d323bdbb32071469b92abadc885fdc25c95978721a21846153f3d"
+    },
+    "experiments/candidates/vap_folr_core/entity_history_b01/__pycache__/learner.cpython-310.pyc": {
+      "bytes": 1150,
+      "sha256": "87bfbc79c038f9afa78dd3a054511842e4ee0364c500e8014f327d5b87e46dbb"
+    },
+    "experiments/candidates/vap_folr_core/entity_history_b01/__pycache__/model.cpython-310.pyc": {
+      "bytes": 4012,
+      "sha256": "67aa43282c1532096d373e657fc139ff734d2e455210e35a2744b7deb58f4657"
+    },
+    "experiments/candidates/vap_folr_core/entity_history_b01/__pycache__/publication.cpython-310.pyc": {
+      "bytes": 2078,
+      "sha256": "b1c03b09f9b0ada0c2148a5ef653e69e5389ae395af369913aeb3e33c458263c"
+    },
+    "experiments/candidates/vap_folr_core/entity_history_b03/__pycache__/__init__.cpython-310.pyc": {
+      "bytes": 277,
+      "sha256": "c41e1f8e0a1a266b571a7ed246a3efabd744624eaa107103cd0df4b49c9fa107"
+    },
+    "experiments/candidates/vap_folr_core/entity_history_b03/__pycache__/binding.cpython-310.pyc": {
+      "bytes": 1371,
+      "sha256": "44352f0a80f2ee71afda5f43d8cd8c63441da679b023221e53c8d638cc5e4eb0"
+    },
+    "experiments/candidates/vap_folr_core/public_lifecycle_b01/__pycache__/attention.cpython-310.pyc": {
+      "bytes": 2020,
+      "sha256": "0316709c4e48553b153e42c62574cf9c7ac41c85e3e766dc02cb51a79af2a2af"
+    },
+    "experiments/candidates/vap_folr_core/public_lifecycle_b01/__pycache__/collection.cpython-310.pyc": {
+      "bytes": 4723,
+      "sha256": "fea64464936ca3545db8b879803b9bd3be4b1979ff28fb71d90e7b7296f98641"
+    },
+    "experiments/candidates/vap_folr_core/public_lifecycle_b01/__pycache__/environment.cpython-310.pyc": {
+      "bytes": 2644,
+      "sha256": "55d8c0393a42702755246fb2367d2cd054ecf9e954d694a49ca6cef6812a6584"
+    },
+    "experiments/candidates/vap_folr_core/public_lifecycle_b01/__pycache__/flex_qmix.cpython-310.pyc": {
+      "bytes": 2519,
+      "sha256": "c98eb4ca6f238e37594611796175adf53add58407122a81ac900b57f6405ddfb"
+    },
+    "experiments/candidates/vap_folr_core/public_lifecycle_b01/__pycache__/learner.cpython-310.pyc": {
+      "bytes": 2836,
+      "sha256": "273edd53b991a3d95b7b3a5a47e3b1627a2554f39f3acb61cba52c38b4931fb7"
+    },
+    "experiments/candidates/vap_folr_core/public_lifecycle_b01/__pycache__/model.cpython-310.pyc": {
+      "bytes": 2866,
+      "sha256": "09efd2e8d54bcaa812eca8039e447a98bff45bf4561ae555f150a108b687b739"
+    },
+    "experiments/candidates/vap_folr_core/public_lifecycle_b01/__pycache__/native_env.cpython-310.pyc": {
+      "bytes": 10844,
+      "sha256": "e4f4eedf6a3bc54269085f1a3558b5fd95a4f7fc3609a014114917bdfc4a7bef"
+    },
+    "scripts/__pycache__/hmasd_platform.cpython-310.pyc": {
+      "bytes": 2840,
+      "sha256": "b35c2be88787904c27b821e81e0430759d635c6fe2246dbce3308477a54b6545"
+    },
+    "temp/directions/vap_folr_core/exp/entity_history_b03_781501/BANK_CONTROL_LAUNCH.json": {
+      "bytes": 1578,
+      "sha256": "7659e4afa9b9e4f5757cd30af9ca59af54386c906a2d164e97b5281581343d88"
+    },
+    "temp/directions/vap_folr_core/exp/entity_history_b03_781501/BANK_LAUNCH.sh": {
+      "bytes": 721,
+      "sha256": "de2ef45b69834e62c1c3da9c1d41bd79f4dab28699312a21919efd867695e5b3"
+    },
+    "temp/directions/vap_folr_core/exp/entity_history_b03_781501/GENERIC_CONTROL_LAUNCH.json": {
+      "bytes": 1457,
+      "sha256": "05f954f1a75b6d5b016b54879819e744cc2e0bc5c85c2a99a50dc734c6a788cc"
+    },
+    "temp/directions/vap_folr_core/exp/entity_history_b03_781501/GENERIC_LAUNCH.sh": {
+      "bytes": 675,
+      "sha256": "c28edbb07847aeba73188252443a7c3d985355c4bd7629150dd3e4f098939357"
+    }
+  },
+  "archive": {
+    "remote_path": "/home/wu/hmasd-worktrees/folr-entity-history-b03-781501-b257dcb1d/temp/directions/vap_folr_core/exp/entity_history_b03_781501/SUPPORT_RAW.tar.gz",
+    "bytes": 20706,
+    "sha256": "922c2207cb0f5e319d31e56d4b204c62eeca844ad4583136d74afeb52111025c"
+  },
+  "local_archive": "C:\\Projects\\HMASD-worktrees\\codex-vap-folr\\docs\\research\\candidates\\vap_folr_core\\entity_history_b03_781501\\SUPPORT_RAW.tar.gz",
+  "all_members_verified": true,
+  "support_collection_wall_seconds": 1.562999999965541,
+  "new_scientific_invocations": 0
+}

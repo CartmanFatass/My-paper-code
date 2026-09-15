@@ -1,0 +1,82 @@
+{
+  "id": "20260914-acvc-014",
+  "created": "2026-09-14T20:25:36-07:00",
+  "direction": "acvc",
+  "tier": "portfolio",
+  "kind": "portfolio",
+  "title": "双率结果后：保留资产PARK、再一个参考B，或基线设计",
+  "context": "双率B均完成；低率C更低、两率F增量均UP。完整科学审查支持3e-4与optionalF，略偏向追加一个参考B；DM建议当前先保留资产/PARK。新双轴校准支持单独准备baseline/独立训练/K归因，不改变现有结果。此项只提交Portfolio，尚未应用。",
+  "options": [
+    {
+      "key": "consolidate_park",
+      "label": "保留资产，可逆PARK",
+      "consequence": "只有完整Portfolio选择后才PARK/MEDIUM、0新数值并释放ACVC席位；全部证据和optionalF保留。"
+    },
+    {
+      "key": "one_reference_b",
+      "label": "新增一个参考配方B",
+      "consequence": "ACTIVE/MEDIUM保留；若选择则恰好一个fresh3e-4/4096拟合、三final64评价，不重做两率比较，不追加retry。"
+    },
+    {
+      "key": "baseline_design_only",
+      "label": "ACTIVE做零暴露基线设计",
+      "consequence": "只准备同宿主匹配和具体未来卡/工作量或最小不兼容修正；0fit/0native/model/optimizer，无数值baseline/K/N授权。"
+    }
+  ],
+  "recommended": "consolidate_park",
+  "auto_applied": null,
+  "dm_reason": "当前实测资产值得保留；追加参考实例有真实价值，但新的基线比较/归因准备与持续端点重复形成机会成本，交Portfolio完整选择。",
+  "evidence": [
+    "docs/research/candidates/acvc/ACVC_POST_FIXED_RATE_INVESTMENT_REPORT_20260914.md",
+    "docs/research/candidates/acvc/pro_packets/20260914_cluster_fixed_lr_pair_b01_scientific_review/archive/RESPONSE.md",
+    "docs/research/candidates/acvc/pro_packets/20260914_cluster_fixed_lr_pair_b01_scientific_review/INTAKE.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-14.md#L131",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "双率B及完整科学审查已完成：ACVC是否保留资产后可逆PARK、购买一个新的参考配方B，或保留ACTIVE先做同宿主基线设计？这是向Portfolio提交的建议，当前不应用PARK。",
+    "changes_if_approved": [
+      {
+        "target": "ACVC 投资/生命周期",
+        "from": "CONTINUE/MEDIUM/recasts2；原两次运行和review完成；无新数值分配",
+        "to": "推荐可逆PARK/MEDIUM、零新数值；保留F/3e-4/全部证据。只有完整Portfolio决定才能应用并释放席位。"
+      }
+    ],
+    "if_refused": "保留审查者支持的单参考B及零暴露baseline设计备选，按完整Portfolio的合规选择执行；不回退已完成结果，不自动训练。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/acvc/ACVC_POST_FIXED_RATE_INVESTMENT_REPORT_20260914.md",
+        "quote": "The last purchase answered a concrete recipe choice and sharpened an existing asset's limits. Preserving the asset needs no further numerical purchase.",
+        "why": "两率比较已给出本地配方选择；继续观察同一配方可能仍不能解决新的基线和归因设计问题。这是边际投入判断，非负结果推出机制无效。"
+      },
+      {
+        "path": "docs/research/candidates/acvc/ACVC_CLUSTER_FIXED_LR_PAIR_B01_RESULT_EVIDENCE_20260914.md",
+        "quote": "Reference C attains.329215978929418 J and F still adds.03770462016249634 J over C and.03251075015598452 J over own-dwell.",
+        "why": "正资产被保留；PARK建议不抹掉当前或六训练单元C01的正证据。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/acvc/pro_packets/20260914_cluster_fixed_lr_pair_b01_scientific_review/archive/RESPONSE.md",
+        "quote": "For the next investment, I narrowly favor proposing one fresh unchanged-reference B over consolidation without further measurement: smaller reference-package gains and substantial adverse tails make usefulness on another learned proposer decision-relevant.",
+        "why": "独立审查略偏向追加一个真实B；新负/混合/正结果都能改变继续扩大F使用的信心。这项反对意见未被局部覆盖。"
+      }
+    ],
+    "uncertainty": [
+      "当前4096每率一个fit，不是训练总体或稳定排序；64评价世界不能代替独立训练。",
+      "同宿主tuned headroom缺失是准备问题，不是停止或B启动门槛；F/dwell是包效果，不识别K轴时长或batch原因。",
+      "完整support/provider/维护/终身成本未知；推荐与追加B是定性close-call。"
+    ],
+    "cost": {
+      "compute": "当前pair2原始、0retry、2381.37s native总和、2379.43s CPU。备选B1fit/4096train/192eval/1097728ticks/8192Adam，1192.29s仅实测参考；A/C零新拟合但人力不免费。",
+      "owner_time": "无需回复或逐项批准；通过既有owner-console异步覆盖。",
+      "reversibility": "reversible",
+      "waits_on_this": "无owner回复等待；下一投资/生命周期只待完整Portfolio决定。"
+    },
+    "verdict_text": "The DM recommends consolidation/PARK now, preserves the review's narrow preference for a fresh reference B, and offers the preparation-only option as a distinct middle course under the owner's accepted calibration.",
+    "source": "docs/research/candidates/acvc/ACVC_POST_FIXED_RATE_INVESTMENT_REPORT_20260914.md"
+  },
+  "starred": true
+}

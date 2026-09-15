@@ -1,0 +1,66 @@
+# ACPS post-B02 finite-use judgment intake
+
+**Apply the complete Convergence answer: no candidate; reversibly park advancement of only the exact tested ACPS package for its present fixed-budget final native-service use. Retain fully informed SHARED.** No actual RECAST or whole-direction Portfolio disposition is selected. ACPS remains ACTIVE/HIGH/recasts0; zero empirical or conditional allocation remains. This completes the one Q purchase through answer, conformance/intake and publication. The next unfunded need belongs to Portfolio, not a second scientific use question drawn from Q.
+
+## Complete source and Transport acceptance
+
+Read all 115 lines / 27,467 bytes of [RESPONSE.md](pro_packets/20260912_post_b02_use/archive/RESPONSE.md) at delivery commit `f842439457bfaad8f9c57f1e3974d0f4bf22e9fd`, Git blob `3d19942f71c2578a3362b013770e626a15048a10`, SHA-256 `b51e6815c3423ab36a19636e3fb03a9dff07c13b0035134c8c4bebe6294e7f7f`. The raw full local archive equals the immutable Git blob. The commit adds only the scoped response. This is distinct from the 376-byte strict short chat receipt, SHA-256 `2871ec8f8ed882698057f8787250fbd6ec9ad89f5f43b356a5954a5c09b7620e`.
+
+The fixed [TASK](https://github.com/CartmanFatass/My-paper-code/blob/c32e6e241b9fa6942482f554524659d943fa8163/docs/research/candidates/actuator_conditioned_partial_sharing/pro_packets/20260912_post_b02_use/delivery/TASK.md) and [Issue 19 delivery comment](https://github.com/CartmanFatass/My-paper-code/issues/19#issuecomment-5652988155) match this complete response. Its final `[b01]` reference contains a transcribed SHA typo. The same delivery comment expressly corrects it to the B01 intake actually read, at `f45a4dd675b73ce2013fe7f2844ed033c38f398d`. The fixed TASK lists that correct source, and the scientific values match the accepted intake. Preserve the response and correction separately; this resolved citation defect changes no conclusion and needs no new Send.
+
+The original request `2026-09-13-acps-post-b02-use-01` never reached Send. Owner-authorized recovery handoff `c36369d105169e608a7dee4a4c42f5c45710f370` changed only routing, preserving the original TASK, all frozen inputs, canonical GPT-6 Astra / Pro and the identical 1,942-byte prompt (SHA-256 `bee9b6e037f7b68e37143d152dd004cfefd10a9904d5c13bb648750ee9a2ab84`). [Recovery record](pro_packets/20260912_post_b02_use/RECOVERY_RECORD_20260913.json) and [publication/technical acceptance](pro_packets/20260912_post_b02_use/PUBLICATION.md) preserve the helper checks and independent review.
+
+| Identity | Preserved original generation | Accepted recovery generation |
+| --- | --- | --- |
+| Request/idempotency | `2026-09-13-acps-post-b02-use-01` | `2026-09-13-acps-post-b02-use-rebind-01` |
+| Operation | `b7f00c5e-8e41-4ad1-805d-65cebf1ec763` | `c827876f-c617-4299-9cee-1ee205673cd5` |
+| Effect | Explicit false Send; null provider pairing/observed conversation/archive | One Send, paired user and assistant, exact archive |
+| Agentify key | `em:actuator_conditioned_partial_sharing:convergence` | `hmasd-gen:7e64af7eba4439ec6a7221062db586ecd104dc58caaf80a481d114f8e5c728d8` |
+| Conversation | No concrete conversation | `6aa68713-08c0-83e8-819c-1bf4e8ee5cea` |
+| Tab | `4cd5b361-b097-48cc-95cc-a10dfcdf5ddf`, preserved | `830aafcd-bd3d-4b44-b95e-1be42c73e063`, closed after archive |
+
+New provider user is `44057cb0-b3ec-4ec6-8f3a-ec982819b2a9`, assistant `1b71accf-2e04-478e-bad1-85f13249dee0`. New operation starts with `productModel=Latest`, `reasoningEffort=Pro`; the Transport verified its current model meaning before Send, while canonical handoff/binding stays GPT-6 Astra / Pro. Its actual arguments are preserved. Old literal arguments and receipts remain untouched. Canonical registry is ARCHIVED with one Send and the original recovery audit in history; native receipt is SENT via direct native final. Portfolio's separate binding remains archived. These facts establish technical delivery, not scientific validity by themselves.
+
+The full archive and OP_ARGS/GITHUB_COMMENT/PROMPT receipts are retained in the new attempt directory named in [response facts](pro_packets/20260912_post_b02_use/RESPONSE_FACTS_20260913.json). Reading the frozen strict short-receipt path requires Windows extended-path syntax because its normalized path has 260 characters; the exact bytes/hash were verified without renaming it. Transport removed only its temporary `test.tmp`; all receipt files remain. The separate helper-test scratch removal was rejected `blocked by policy` and stays explicitly retained. No empirical archive/source is removed.
+
+## What was checked and the rule applied
+
+Compared the complete answer with the fixed TASK and original Q investment, the B02 card, accepted B01/B02 intakes/E0/counts, current DIRECTION, owner instructions, evidence-spec §§3–5.2,7–8.2,11.4,11.7–11.10 and engineering §§4–5,7.1,7.3. Reused the relevant scientific-reading and attributed library reading already recorded in BRIEF; no new search, source-code/model invocation or raw-result reanalysis was needed.
+
+Direction rule applied verbatim: **"A complete archived Pro response that decides the posed question at its declared evidence class and within current owner instructions and applicable specifications is final for its node."** The answer supplies the explicitly permitted reasoned no-candidate and smallest supported family/use boundary. It does not reject B evidence for failing a stronger claim class, demand a positive pilot/exact optimum/causal census, or impose an extra launch gate. Its lack of a persuasive changed operating/resource decision is a qualitative purpose-selection reason, not a general requirement to know all future costs or design details. No concrete scientific/specification conflict remains.
+
+Empirical rule retained verbatim: **Strict mean>.01 is a local above-MEI package signal; inclusive[−.01,+.01] retains sign without equivalence; strict mean<−.01 is adverse. A damaged dependent primary has no comparative polarity.**
+
+| Accepted pair | ACPS minus SHARED J | Frozen reading | Conditional worlds | Whole-native wall |
+| --- | --- | --- | --- | --- |
+| B01, master 9101 | -0.03680814181453545 | ADVERSE | 7 positive / 25 adverse | 361.04 s |
+| B02, master 9102 | -0.005186427396033822 | INSIDE_MEI, negative | 12 positive / 20 adverse | 348.12 s |
+
+Each is one paired learning instance with two fresh fits, not 32 training replications. Both have 512 training plus 32 sole-final H256 episodes per arm, 2,048 pair Adam calls and 278,528 pair team ticks. Counts and endpoint values are transcribed from accepted records; they are not newly pooled or recalculated. B02 is a fresh pair, not longer training of B01. Its smaller negative value is neither recovery nor equivalence. No new scientific observation is claimed by this consultation.
+
+## Meaning, contrary evidence and claim ceiling
+
+The binding path remains public speed capability assigned to each physical UAV → capability-scaled motion/joint geometry → equal legal 118 inputs and private recurrent history → stochastic primitive command → native team-return learning. The actual command, likelihood proposal and physical displacement stay distinct. Both intact DENSE/GRU64 policies can condition on capability and identity; the centralized 136-input critic is training-only. The added 1,340 ACPS residual parameters test a capacity/representation/optimization package, not an information advantage or causal component in isolation.
+
+Strongest support for the selected present-use park is the lack of an above-MEI aggregate ACPS benefit in either recorded learning pair against the competent informed SHARED null, including B01 beyond the adverse margin. Strongest contradiction to a broad negative is the real physical/learning pathway, favorable conditional worlds and unresolved finite optimization/training-instance variation. Those possibilities support keeping the wider scientific question recoverable; they do not identify an operational regime or current purpose to select.
+
+The closest unselected purpose is reaching a meaningful native-service target with less learning expenditure. The answer explains why that could change a resource recommendation but declines to invent a service target/deadline or retime historical endpoints after seeing them. It reports neither evidence for nor impossibility of such a benefit. Assumption from scientific reading: equal information and nonlinear recurrence make SHARED a competent null while finite learnability remains empirical. Limit: representability and parameter movement neither prove sufficient learning nor estimate the probability of a different-use benefit. ADMN remains attributed DM reading about a different package/settings, not direct Pro paper access or ACPS-host efficacy.
+
+Claim ceiling: reversible development/use advice for this exact package on five UAVs, fifty uniform users, H256, public episode-fixed speed permutations and the recorded finite learner/exposure. No stable superiority/harm, equivalence, causal specialization, capacity isolation, exhaustive exclusion, optimum/headroom, novelty, transfer or formal-UAV claim follows. Own .01 J margin stays with the historical native-service question; matching tuned same-information headroom remains absent, not zero. No actual RECAST is selected; recasts remain 0.
+
+No further evidence is required to complete this no-candidate. A concrete changed operating/training-resource requirement or trustworthy relevant evidence would justify revisiting the judgment; favorable evidence is not a prerequisite. A later learned comparison needs its own independent learning unit and meaningful observable, but none is selected or funded here.
+
+## Costs, prediction and owner flags
+
+Q's full preparation, Transport/provider work, response, conformance/intake, publication/integration and documentary closeout cost remains explicitly accepted UNKNOWN. The verified-zero-effect rebind recovers that same purchase. Its supporting control repair was a separately owner-authorized engineering action; the 31 provider-free tests and independent review are recorded as control-plane work, not new Q empirical evidence. No models, learning RNG, raw numerical analysis, profile, native evaluation or training were invoked. No scientific §4 machinery is added and no measured §5 breach is established; unknown coverage is not compliance certification.
+
+Historical native walls do not forecast another object or become budget balances. Peak resources and complete support/provider costs remain unmeasured. Nothing invalidates the independently trustworthy B primaries. Both prediction misses remain: B01 favored INSIDE_MEI but observed ADVERSE; B02 favored ADVERSE but observed INSIDE_MEI/negative. No distinct Q outcome prediction was frozen; owner prediction was not taken. Owner review query returned `[]`. Flags: direction-level family/use decision, recoverable finite-learning uncertainty and citation correction preserved; no material critic dissent or second recast.
+
+## Decisions this intake produces
+
+1. **Direction, PRO_FINAL / OWNER_DELEGATED:** options continue, park the exact tested use, close the wider family, or recast. Pro recommends/selects the reversible exact package/use park and reasoned no-candidate. Apply it; retain informed SHARED. Wider closure exceeds the evidence and no different family/use was actually selected.
+2. **Object/technical:** options intake the complete bound answer with the same-turn citation correction, or invent a missing-decision/re-Send need. Recommend/select complete intake. `Owner-delegated decision (unattended, 2026-09-03 instruction): accept the task-bound complete response and preserve the corrected citation mapping separately.` Old never-Send facts, new one-Send archive, scope and unknown costs stay explicit.
+3. **Portfolio dependency, no local disposition:** Q is complete, but the containing ACTIVE direction has not stopped and its slot is not released. No second use question, implementation or empirical successor is bought. The DM now returns the actual no-candidate/current-use park and absence of selected funded successor to `portfolio:cross_direction` for a focused investment/lifecycle decision. This is the required proper-node continuation, not another scientific purpose charged to Q. Only a complete conforming Portfolio disposition or owner instruction can PARK/CLOSE the whole direction.
+4. **Integration:** Root records Q complete and the exact-use decision, retains ACTIVE/HIGH/recasts0 and all other directions/grants, replaces the obsolete shared-runtime blocker in current tracking, and integrates this intake plus the linked recovery evidence. Formal vacancy/replacement remains Root's route only if Portfolio later disposes the whole direction.
+
+[Chinese owner brief](../../portfolio/owner/briefs/actuator_conditioned_partial_sharing/2026-09-13_ACPS_POST_B02_USE.md). Applied direction item [20260913-actuator-001](../../portfolio/owner/inbox/2026-09-13/20260913-actuator-001.json) and original Portfolio item `20260912-root-022` are traced to the complete source and actual application. The audit ledger records both the direction decision and technical acceptance. Publishing them does not wait for an owner reply.

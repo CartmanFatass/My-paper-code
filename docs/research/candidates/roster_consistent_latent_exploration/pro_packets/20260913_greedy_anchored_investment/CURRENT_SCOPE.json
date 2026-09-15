@@ -1,0 +1,52 @@
+{
+  "request_id": "2026-09-13-rcle-greedy-anchored-investment-01",
+  "prepared_at": "2026-09-13T20:20:39.226440+00:00",
+  "assignment": "Root native ACTIVE-idle follow-up: autonomously author finite B/investment specification, publish/bind and send proper node; no empirical launch until decision.",
+  "author": "/root/dm_rcle_resume",
+  "native_transport": "/root/dm_rcle_resume/tr_l_h_rcle",
+  "checkout": "C:/Projects/HMASD-worktrees/dm-rcle-a02-20260906",
+  "branch": "codex/rcle",
+  "starting_head": "2c74f29032f2af05a41316659a9dc0ff7fa2da5c",
+  "starting_changes": [],
+  "current_main_sha": "d50a063db77d5d8d84e0055fbdec8ea236742266",
+  "affected_direction_refresh": {
+    "portfolio_row_at": "d50a063db77d5d8d84e0055fbdec8ea236742266",
+    "current_direction_and_latest_intake_at": "2c74f29032f2af05a41316659a9dc0ff7fa2da5c",
+    "own_handoff": "complete accepted candidate retention, exact same DM, clean checkout; no active experimental/Transport handle before this fresh assignment",
+    "lifecycle": "ACTIVE",
+    "priority": "MEDIUM",
+    "both_recipe_HOLDs": "unchanged",
+    "family": "open",
+    "candidate": "only retained epsilon .1 exact-greedy log-prior plus existing phase scorer",
+    "headroom": "no tuned same-information upper/baseline record"
+  },
+  "node": "portfolio:cross_direction",
+  "decision_scope": "One RCLE finite B investment only; no lifecycle, priority, capacity, fusion, registration, other-direction budget or recast change.",
+  "shared_binding_observation": {
+    "request_id": "2026-09-13-folr-retained-reference-investment-01",
+    "conversation_id": "6a9c109e-b264-83e8-a78b-f9ea1b767b7b",
+    "registry_state": "ARCHIVED",
+    "native_receipt": "SENT",
+    "tab": "CLOSED",
+    "native_author_confirmation": "FOLR DM confirms complete archival/intake and no pending Portfolio writer; runtime F continues independently.",
+    "no_claim_or_send_yet": true,
+    "preflight_reconcile_again": true
+  },
+  "source_method_boundary": "Fetched current published main Git objects; read current control/method passages at d50a063db77d5d8d84e0055fbdec8ea236742266. New method references pin that full SHA separately while direction evidence retains its original immutable SHAs. Direction authoring branch/check-out and no-fit boundary are unchanged.",
+  "owner_reviews_unapplied": [],
+  "scientific_reading": {
+    "reused": "Foundations sections3-4,6; MARL information/joint-control and empirical independent-unit/package passages at prior verified blobs; current investment specs7-8,11.7-11.10 applied.",
+    "concrete_assumption": "Public q changes the action/learning package, not available information; new own initialization distinguishes imported competence from learning, fixed greedy and nearest preserve competent service nulls.",
+    "limit": "One fit can change this bounded development recommendation but cannot estimate training-history uncertainty or isolate anchor causality."
+  },
+  "literature_reuse": {
+    "source": "../20260913_greedy_anchored_continuation/LITERATURE_SCOPE.json",
+    "commit": "2cfd9e300477774043144f6a1da3533f0ca38380",
+    "scope": "Reuse verified real-corpus index coverage and two official abstract-only residual-learning passages; no new retrieval, no novelty/full-paper/reproduction/RCLE-efficacy claim."
+  },
+  "proposal": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B09_GREEDY_ANCHORED_PROPOSAL_20260913.md",
+  "recommendation": "A one fit within proposed180/600/780s limits; not applied",
+  "actual_new_scientific_exposure": "zero",
+  "claim_ceiling": "Outcome-informed Portfolio investment judgment and prospective n1 B package-service reading; no new efficacy or broad disposition.",
+  "root_scope_clarification": "Keep this to the single bounded finite-investment decision. Publish/send once when complete, no duplicate or follow-up ACK request. If Portfolio buys, the experiment is DM object-tier and proceeds after admission without another Portfolio approval."
+}

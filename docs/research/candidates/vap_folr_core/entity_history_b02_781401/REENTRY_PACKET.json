@@ -1,0 +1,11 @@
+{
+  "question": "是否以一个新的 fresh-BANK/fresh-Generic 完整学习比较重入 FOLR，而非再次维持原 PARK？",
+  "changes_if_approved": [{"target": "vap_folr_core/DIRECTION.md", "from": "PARKED/MEDIUM", "to": "ACTIVE/MEDIUM；DM已选择一个B02学习块"}],
+  "if_refused": "在下个安全边界应用所有者指令；保留已发生的调用与结果，不改写E/F或丢弃数据。",
+  "evidence_for": [{"path": "docs/research/candidates/vap_folr_core/pro_packets/20260913_post_f_scientific_review/archive/RESPONSE.md", "quote": "The proposed fresh BANK16/Generic64 comparison is scientifically coherent and would add information F deliberately did not acquire.", "why": "F固定BANK，没有取得新BANK学习实例；E又缺失Generic终点。最小完整学习比较仍能改变开发选择。"}],
+  "evidence_against": [{"path": "docs/research/candidates/vap_folr_core/PARK.md", "quote": "d_use = BANK - Generic = -5.932421875 < -1", "why": "现存BANK固定用途明显不利，Generic是同信息的认真比较器，新训练有真实成本。"}],
+  "uncertainty": ["改变的是DM对首个完整学习比较的价值判断，没有新数据或新成功概率。", "一块结果不能估计训练总体不确定性，不能证明记忆机制因果或通用优势。", "H20和共同生命周期信息仅为可能解释，完整成本仍未知。"],
+  "cost": {"compute": "B02为2次新训练、每臂5000训练/128最终评价；205120团队tick、9938更新。每臂3600秒、native7200秒、support1800秒、合计9000秒是DM可前瞻调整的运作计划，不是测得费用或owner硬限。", "owner_time": "异步可阅，不等待答复", "reversibility": "reversible", "waits_on_this": "nothing"},
+  "verdict_text": "DM selects bounded re-entry, ACTIVE/MEDIUM, and the one fresh-learning B02 comparison.",
+  "source": "docs/research/candidates/vap_folr_core/FOLR_REENTRY_INTAKE_20260914.md"
+}

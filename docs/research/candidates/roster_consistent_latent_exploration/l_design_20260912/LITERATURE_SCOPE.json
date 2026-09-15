@@ -1,0 +1,56 @@
+{
+  "question": "How must a common joint choice and its legal execution information be distinguished from independently mixing action components?",
+  "My_lib_scope": "Read README.md, collections/README.md and the visible collections registry. Initial synthetic-core is excluded. No verified real allow-list established in this limited read; no synthetic source or new index/search service was used.",
+  "Inst_sci_catalog": "C:/Projects/Inst-sci/papers/MyLib/llm-index/catalog.v2.jsonl",
+  "catalog_sha256": "2e682c6d1131d503ad48920794dd8005ccf8f535dc9ff75679b0c8502533efc0",
+  "bounded_catalog_query": "multi.agent transformer|autoregressive|counterfactual multi.agent (case-insensitive)",
+  "recall_ids": [
+    "MARL-0037",
+    "MARL-0069",
+    "MARL-0575",
+    "MARL-0653",
+    "MARL-0660"
+  ],
+  "recall_limit": "Metadata recall from this snapshot; no exhaustive or novelty statement. Only MARL-0069 received substantive primary reading for this candidate.",
+  "primary": {
+    "id": "MARL-0069",
+    "title": "Cooperative Policy Agreement: Learning Diverse Policy for Offline MARL",
+    "authors": "Yihe Zhou et al.",
+    "venue_year": "AAAI 2025",
+    "doi": "10.1609/aaai.v39i21.34465",
+    "official_url": "https://ojs.aaai.org/index.php/AAAI/article/view/34465",
+    "json_path": "C:/Projects/Inst-sci/papers/MyLib/json/MARL-0069.json",
+    "json_sha256": "3d42b853e262eef0fa22254b63e51504c9b4829f00e84553951668b713b82f90",
+    "metadata_record": "C:/Projects/Inst-sci/papers/MyLib/metadata/v2/papers.v2.jsonl#MARL-0069",
+    "metadata_quality": "official_title_matched;official_enriched;gradeA;warnings[]",
+    "pdf_sha256_from_metadata": "aa3d53ef0caef9e6042dfd08cb0fd528ab619a5e1c9cd77fb3c39c27fcd24478",
+    "actual_primary_passages": [
+      {
+        "page": 1,
+        "element": 87,
+        "short_quote": "individual actions from different optimal joint actions are combined into suboptimal joint actions"
+      },
+      {
+        "page": 2,
+        "elements": [
+          95,
+          96
+        ],
+        "short_quote": "access the actions previously taken by other agents during offline training"
+      },
+      {
+        "page": 3,
+        "element": 152,
+        "use": "Sequential action conditioning explanation; no equations or performance result imported."
+      }
+    ],
+    "bounded_reading": "The paper treats offline policy mixture and distinguishes compatible joint choices from independent mixtures; CPA trains autoregressively and then applies policy agreement. These are source conditions, not a diagnosis of RCLE or a method/efficacy claim here.",
+    "design_inference": "Draw a single common phase for the team, score that draw and explicitly declare its public dispatch facility. Do not independently resample phase per entity, hide prior-action communication or claim no-communication CTDE. The proposed online public-state N-phase restriction is different from CPA."
+  },
+  "foundations": [
+    "FOUNDATIONS sections3-4,6 reused",
+    "02_MARL information/coordination read",
+    "04_EMPIRICAL conditional uncertainty/whole-package limits reused"
+  ],
+  "no_additional_activity": "No model, RNG, empirical analysis, download, new library index, test, experiment or Pro."
+}

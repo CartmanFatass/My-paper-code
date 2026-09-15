@@ -1,0 +1,39 @@
+{
+  "question": "是否保留已执行的取舍：结束当前低学习率512轮探索，暂不自动追加一个配对？",
+  "changes_if_approved": [
+    {
+      "target": "MGTAP fixed1e-4/512 exposure exploration",
+      "from": "完整结果待审阅",
+      "to": "完整审阅接受结果，当前探索不立即延伸；整方向状态不变"
+    }
+  ],
+  "if_refused": "保留原始结果与完整审阅，按所有者具体新指示处理未执行工作；任何新拟合仍须有自己的明确对象和资源准入。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260914_late512_results_review/archive/RESPONSE.md",
+      "quote": "End the present fixed1e-4/512 exposure exploration, retain the optional COND implementation and its evidence, and select no immediate numerical extension.",
+      "why": "这条路径两臂都学习了，COND没有获得有用相对优势；保存代码不要求马上继续取样。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260914_late512_results_review/archive/RESPONSE.md",
+      "quote": "The strongest alternative is one fresh matched pair at the same fixed rate and512 training endpoint, preferably with final512-only evaluation when recurrence of that endpoint is the question.",
+      "why": "一个新训练配对确实可能改变开发投入，且原始完整命令只用了360秒；这不是已证明未来无用。"
+    }
+  ],
+  "uncertainty": [
+    "仅一条512训练路径，不能说等价、稳定劣势或更长训练一般不利。",
+    "以前8252及8214正结果都保留；下一配对合法但当前没有被选中。",
+    "本项不是整方向PARK或释放席位；更大的维护和投资问题由Portfolio决定。"
+  ],
+  "cost": {
+    "compute": "本决定零新拟合；既有2拟合/360.00秒，支持及长期成本未知；合理备选为2拟合/278528 ticks/2048 Adam",
+    "owner_time": "可异步覆盖，无需答复",
+    "reversibility": "reversible",
+    "waits_on_this": "nothing"
+  },
+  "verdict_text": "End the present fixed1e-4/512 exposure exploration, retain the optional COND implementation and its evidence, and select no immediate numerical extension.",
+  "source": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260914_late512_results_review/archive/RESPONSE.md"
+}
+

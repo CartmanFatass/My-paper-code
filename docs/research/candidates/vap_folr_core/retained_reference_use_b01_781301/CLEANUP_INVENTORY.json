@@ -1,0 +1,124 @@
+{
+  "collected_at": "2026-09-13T20:53:16.834538+00:00",
+  "support_supervisors_archive_sha256": "4cb440c1b9b0612d98690263573193e55b22e84d3c1a5de2726be0e3e4b0be28",
+  "archive_bytes": 3432,
+  "file_count": 20,
+  "files": [
+    {
+      "path": "folr-ref-use-generic-781301-5dce539ed54a/runner.sh",
+      "bytes": 1376,
+      "sha256": "1c738f4f4f01576ce575ae283882df42b9b638096cdf164658f09ccca7b8e7d9"
+    },
+    {
+      "path": "folr-ref-use-generic-781301-5dce539ed54a/exit_code",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "path": "folr-ref-use-generic-781301-5dce539ed54a/status",
+      "bytes": 9,
+      "sha256": "161069badc0cc23058b13d7c068e45205f4333aa15fd78db9d68f5c9f1ae8983"
+    },
+    {
+      "path": "folr-ref-use-generic-781301-5dce539ed54a/start_time",
+      "bytes": 11,
+      "sha256": "ab1d2d5d5a3570958def5c1162f5927d2c19c92c78d99534ffac7712b840fa46"
+    },
+    {
+      "path": "folr-ref-use-generic-781301-5dce539ed54a/pid",
+      "bytes": 8,
+      "sha256": "8f8c157ff5c085245a981e22438776ae67f0f68708d03913ea434cc97919ecba"
+    },
+    {
+      "path": "folr-ref-use-generic-781301-5dce539ed54a/task.log",
+      "bytes": 2696,
+      "sha256": "92383cacf460b1739ee7280f61145bd262092535a0421a97cbe367c6d4d64bbc"
+    },
+    {
+      "path": "folr-ref-use-bank-781301-5dce539ed54a/runner.sh",
+      "bytes": 1540,
+      "sha256": "dab9486984724b38283f5175110e2da85cb2a147302080011b4fe7d8676c4c5e"
+    },
+    {
+      "path": "folr-ref-use-bank-781301-5dce539ed54a/exit_code",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "path": "folr-ref-use-bank-781301-5dce539ed54a/status",
+      "bytes": 9,
+      "sha256": "161069badc0cc23058b13d7c068e45205f4333aa15fd78db9d68f5c9f1ae8983"
+    },
+    {
+      "path": "folr-ref-use-bank-781301-5dce539ed54a/start_time",
+      "bytes": 11,
+      "sha256": "0f4df8d7a0aec0b23da066607c7d3a9a070c0b079b6ca23037f53238bbe3fe78"
+    },
+    {
+      "path": "folr-ref-use-bank-781301-5dce539ed54a/pid",
+      "bytes": 8,
+      "sha256": "5fb1a067a71a237cdc768c9676ea9395c6ad94016b36a9b8742c801bc72f09ae"
+    },
+    {
+      "path": "folr-ref-use-bank-781301-5dce539ed54a/task.log",
+      "bytes": 934,
+      "sha256": "f6074da5c713114a073a816a2be054526fc0799fd792d2240901a88211288a68"
+    },
+    {
+      "path": "support/check_5dce539ed54a/TEST_TIME.json",
+      "bytes": 100,
+      "sha256": "cdfbbc4a35cbc9f05dd69e38658fd88a93536714d13ec0fa2caa6f469734bf6a"
+    },
+    {
+      "path": "support/check_5dce539ed54a/TEST.log",
+      "bytes": 98,
+      "sha256": "f62c784a4ad189e78dba04de0b7c8e2dfb60ed101e5d5dec5811ac95000ad903"
+    },
+    {
+      "path": "support/check_0bd5c477b11d_r2/TEST_TIME.json",
+      "bytes": 100,
+      "sha256": "5e2a12f1ff7535aa7164e1b6b557131933b8d0f01dc5f3134cd99aecdcb19f83"
+    },
+    {
+      "path": "support/check_0bd5c477b11d_r2/TEST.log",
+      "bytes": 98,
+      "sha256": "a19de940ee1161f7b864e19072a57cfe4e83c15e9f50ca486c06e286dff9165b"
+    },
+    {
+      "path": "support/check_0bd5c477b11d/TEST_TIME.json",
+      "bytes": 100,
+      "sha256": "bb91fed287f978f3cb8d8d6d25345d22d131f170c42b10e70619b7ad5c0647c8"
+    },
+    {
+      "path": "support/check_0bd5c477b11d/TEST.log",
+      "bytes": 2034,
+      "sha256": "b80c3a829a45509708b324647a679395fc9a66691bf43238fcd1e5d783a4487d"
+    },
+    {
+      "path": "prepared/GENERIC.sh",
+      "bytes": 755,
+      "sha256": "3154898585c4e2e1cd462bd1a446bb0381d5ffb21960687770a115f677b65590"
+    },
+    {
+      "path": "prepared/BANK.sh",
+      "bytes": 803,
+      "sha256": "d6122f0d9b9f907f57f89714e6f5731ac796324ec7f37cfed14f4e635c9f3b47"
+    }
+  ],
+  "collection_control_wall_seconds": 1.6089999999967404,
+  "removal_executed": false,
+  "inventory_only": true,
+  "terminal_tasks": [
+    "folr-ref-use-generic-781301-5dce539ed54a",
+    "folr-ref-use-bank-781301-5dce539ed54a"
+  ],
+  "candidates": [
+    "/home/wu/hmasd-worktrees/folr-ref-use-5dce539ed54a",
+    "/home/wu/projects/HMASD/temp/directions/vap_folr_core/exp/retained_reference_use_b01_781301",
+    "/home/wu/hmasd-inputs/vap_folr_core/retained_reference_use_b01_781301",
+    "/home/wu/.agent-tasks/folr-ref-use-generic-781301-5dce539ed54a",
+    "/home/wu/.agent-tasks/folr-ref-use-bank-781301-5dce539ed54a"
+  ],
+  "preservation": "Generic raw archive includes unique final.pt; BANK raw includes its new panel; old BANK input retained in frozen E archive; both supervisor roots and exact prepared commands/support retained here; all source at published5dce",
+  "boundary": "Root integration/retention confirmation and assigned exact cleanup are still pending; shared authoring checkout and other directions remain untouched."
+}

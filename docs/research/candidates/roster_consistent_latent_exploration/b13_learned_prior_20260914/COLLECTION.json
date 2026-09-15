@@ -1,0 +1,11 @@
+{
+  "remote_archive": "/home/wu/hmasd-inputs/rcle-b13-cf4d9bd93-evidence.tgz",
+  "local_archive": "C:\\Projects\\HMASD-worktrees\\dm-rcle-a02-20260906\\temp\\directions\\roster_consistent_latent_exploration\\exp\\b13-collected-cf4d9bd93\\rcle-b13-cf4d9bd93-evidence.tgz",
+  "archive_bytes": 320580,
+  "archive_sha256": "efea49fc263d0f5eae74b806e280bcb5d07cfb0b3f2f6692e5ab1a2b2ea2a020",
+  "verified_files": 19,
+  "all_local_member_hashes_match_remote": true,
+  "collection_enclosing_wall_s": 1.3119999999762513,
+  "source_sha": "cf4d9bd93ff9eb255800223d95de170b68315ba6",
+  "scope": "Terminal immutable evidence collection only; no model/rollout/update. Remote and local originals preserved."
+}

@@ -1,0 +1,82 @@
+{
+  "id": "20260913-acvc-004",
+  "created": "2026-09-13T18:56:50-07:00",
+  "direction": "acvc",
+  "tier": "direction",
+  "kind": "close-call",
+  "title": "ACVC 完整复核后可逆 PARK：保留有限证据，不立即追加相同训练",
+  "context": "两项固定收益均为 UP，完整科学复核未发现结果失效问题。DM 接受比较器与停止理由的措辞修正，承认第三次独立训练仍有价值；选择接受未决训练差异并可逆 PARK。只剩同一响应的记录性归档收尾，不等待批准。",
+  "options": [
+    {
+      "key": "park",
+      "label": "可逆 PARK，保留证据和资产",
+      "consequence": "当前已执行；停止新增科学调用，保留模型、负结果和重开条件。"
+    },
+    {
+      "key": "replicate",
+      "label": "另选一次有限独立重复",
+      "consequence": "在前瞻有限卡片与实际槽位协调下研究训练间变化，不改写旧对象。"
+    },
+    {
+      "key": "close",
+      "label": "永久 CLOSE",
+      "consequence": "永久结束方向；DM 不推荐，未决研究问题仍存在。"
+    }
+  ],
+  "recommended": "park",
+  "auto_applied": "park",
+  "dm_reason": "当前保留用途限于已观察终点；接受训练间不确定性，停与再做一次直接重复是接近取舍而非普遍停止规则。",
+  "evidence": [
+    "docs/research/candidates/acvc/PARK.md",
+    "docs/research/candidates/acvc/ACVC_CLUSTER_DEPLOYMENT_B02_INTAKE_20260913.md",
+    "docs/research/candidates/acvc/pro_packets/20260913_cluster_b02_scientific_review/archive/RESPONSE.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-13.md#L20",
+  "brief": "docs/research/portfolio/owner/briefs/acvc/2026-09-13_ACVC_CLUSTER_DEPLOYMENT_B02.md",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "ACVC 已完成独立复核并可逆 PARK；是否要异步覆盖这一决定？",
+    "changes_if_approved": [
+      {
+        "target": "ACVC DIRECTION.md / PARK.md",
+        "from": "ACTIVE，B02 等待完整科学复核",
+        "to": "DM 已回应两项措辞意见；可逆 PARK，保留有限用途证据和资产，不立即进行第三次同样训练"
+      }
+    ],
+    "if_refused": "按用户具体覆盖指令在安全边界重开或修订；不重写已完成结果，不把旧卡当成自动重跑授权。归档后的实际槽位与 Clerk 协调。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/acvc/pro_packets/20260913_cluster_b02_scientific_review/archive/RESPONSE.md",
+        "quote": "B02 supports its two separate UP readings, and K/B02 support descriptive recurrence on two observed cluster-trained endpoints. I find no result-invalidating defect in the supplied record.",
+        "why": "可以保留有限用途证据；完整复核不是缺失或科学审批。"
+      },
+      {
+        "path": "docs/research/candidates/acvc/PARK.md",
+        "quote": "DM 决定：ACVC 可逆 PARK，保留已复核的有限用途证据，不立即开展第三次相同的聚集场景训练。",
+        "why": "DM 选择接受未决训练间差异，不升级为未来策略默认优势；停止新增投入而不永久否定方向。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/acvc/pro_packets/20260913_cluster_b02_scientific_review/archive/RESPONSE.md",
+        "quote": "The strongest alternative is genuinely useful: another independent proposer could lose to C or fail to improve on dwell, changing which package merits further development. Another positive would add limited recurrence.",
+        "why": "另一独立训练仍有科学价值；两次观察没有解决训练总体变化，也不证明研究价值耗尽。"
+      }
+    ],
+    "uncertainty": [
+      "聚集场景只有两个独立训练终点；64个评估世界不能替代训练重复，仍有不利世界。",
+      "固定回退与停留的触发、轨迹和记忆不同，完整包收益不是回退或历史的独立因果结论。",
+      "可在明确的重复性、用途或完整性问题上重开；不需要先有外部客户或机制证明。"
+    ],
+    "cost": {
+      "compute": "不再新增训练；B02 唯一科学调用164.53秒，完整累计支持与服务成本未完全汇总；仅同一响应归档对账和发布收尾。",
+      "owner_time": "无需逐项批准，可异步覆盖。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing；Clerk 的实际归档等待记录性收尾，不等待用户批复。"
+    },
+    "verdict_text": "DM 决定：ACVC 可逆 PARK，保留已复核的有限用途证据，不立即开展第三次相同的聚集场景训练。",
+    "source": "docs/research/candidates/acvc/PARK.md"
+  },
+  "starred": true
+}

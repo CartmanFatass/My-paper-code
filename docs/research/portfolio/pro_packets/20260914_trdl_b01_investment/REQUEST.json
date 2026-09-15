@@ -1,0 +1,118 @@
+{
+  "caller_role": "portfolio",
+  "workflow_node": "portfolio_decision",
+  "execution_mode": "REUSE_DM_TRANSPORT",
+  "request_id": "2026-09-14-trdl-b01-investment-01",
+  "source_thread_id": "/root/dm_trdl_vacancy_20260914",
+  "parent_thread_id": "/root/dm_trdl_vacancy_20260914",
+  "operator_thread_id": "/root/dm_trdl_vacancy_20260914/tr_lh_trdl_b01",
+  "direction_ids": [
+    "tail_return_distributional_learning"
+  ],
+  "repository": "CartmanFatass/My-paper-code",
+  "repository_url": "https://github.com/CartmanFatass/My-paper-code",
+  "commit_or_ref": "80511fa6cddd907177b011af767bce5039e316ad",
+  "scientific_question": "After the completed zero-exposure TRDL-A01 assessment, should Portfolio purchase this one now-concrete TRDL-B01 comparison and its minimum implementation/verification, or decline that purchase? The new fact is a verified native host/actor path plus exact distinct baseline updates under the same lower-tail objective: SCALAR fits W=(G-eta)*1[G<=eta]/.25, Q32 fits full episode G and transforms its detached quantile predictions into a baseline for that same W. Both use the same legal DENSE/GRU64 actor and frozen per-agent PPO score surrogate. The existing learner's return-to-go, advantage standardization and entropy term are incompatible and need the small direction-local replacement described in the card. The A assessment found a coherent path, not an accepted implementation, efficacy or affordability. The original vacancy selection is settled and must not be repeated. Recommend purchasing this single pair as the smallest real learner observation capable of changing the development choice; the strongest alternative is scalar retention without paying for Q32, because an adequately fitted scalar already estimates the needed conditional score. Quantile loss/representation and joint-optimization differences may hurt. Choose using this finite decision value, known work and honest uncertainty; identify any precise correction that actually changes the recommendation instead of asking for a prerequisite pilot, exact bound or generic further research.",
+  "deliverable": "Return one complete investment decision: grant or decline the one specified pair and minimum implementation/support work; decisive reasons versus scalar retention; exact permitted fits, training/optimizer/final-evaluation exposure and selected allowance; distinguish genuine hard limits from adjustable runtime plans; claim ceiling, preserved counterargument, uncertainty and revisit condition. If a concrete scientific or engineering mismatch warrants a narrower correction, specify that correction and its actual consequence, without silently rewriting registered scientific laws or current specifications. Keep TRDL ACTIVE/MEDIUM/recasts0 and its occupied slot unless a separate, explicitly in-scope authority is invoked; this request asks for no lifecycle, priority, capacity or other-direction change. The historical 900s/complete arm, 1800 native +1200 support =3000 invoked-second offer is still unallocated and unmeasured; explicitly say whether and on what terms the concrete proposed pair is now selected, rather than treating old text as an active grant. Do not implement, run or change code/control state. State exactly which listed sources/passages were read and material gaps. Deliver only the scoped response and link comment, with the full downloadable Markdown fallback if needed.",
+  "claim_ceiling": "Current evidence A/RECON: coherent source/design path only, zero numerical exposure. Proposed B/EXPLORE: one fresh paired training instance, two fitted methods and each method's own worst64-of256 final J; a local development signal only. No stable superiority, scalar-class inadequacy, mechanism causality, exact/unbiased CVaR optimization, tuned headroom, novelty, expected-return superiority, transfer or safety conclusion. No training-population uncertainty can be estimated from the one pair; preserve all outcomes and ordinary-mean harms.",
+  "reference_files": [
+    {
+      "path": "docs/research/candidates/tail_return_distributional_learning/TRDL_A01_INTAKE_20260914.md",
+      "purpose": "Read the complete A01 disposition, new source facts, strongest null, zero actual exposure, recommendation and unresolved new-investment question.",
+      "provenance": "DM self-reviewed static preparation; no empirical effect or implementation acceptance."
+    },
+    {
+      "path": "docs/research/candidates/tail_return_distributional_learning/TRDL_B01_SCIENCE_CARD_20260914.md",
+      "purpose": "Read the complete prospective candidate: same tail objective, factual baseline targets, actor update, host/information, exposure/RNG, own-tail endpoint, MEI, cost law and minimum L0 implementation.",
+      "provenance": "Unfunded candidate, with explicit choices made after static reading; no model or native call exists."
+    },
+    {
+      "path": "docs/research/candidates/tail_return_distributional_learning/TRDL_A01_RESULT_EVIDENCE_20260914.md",
+      "purpose": "Read source-path evidence, why the old mean-return update is incompatible, precise knowledge access and limits, and checks.",
+      "provenance": "E0 static source/retrieval evidence; primary papers were accessed by the DM, not asserted accessed by Pro."
+    },
+    {
+      "path": "docs/research/candidates/tail_return_distributional_learning/TRDL_A01_COUNTS_20260914.json",
+      "purpose": "Read machine-generated actual zero-exposure and separate prospective work/model/memory arithmetic.",
+      "provenance": "Standard-library arithmetic without learner import; component bytes are not peak memory, and nominal LR schedule is not observed displacement."
+    },
+    {
+      "path": "docs/research/candidates/tail_return_distributional_learning/DIRECTION.md",
+      "purpose": "Read accepted registration, strongest null and current A01 scientific position.",
+      "provenance": "TRDL mechanism record; operational status comes from the current Portfolio snapshot."
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260912_new_direction_discovery/archive/RESPONSE.md",
+      "purpose": "Read section5 only for the original registered TRDL scientific laws and explicitly declined 3000-second offer.",
+      "provenance": "Historical complete Portfolio registration, not an active grant."
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260914_mgtap_vacancy_replacement/archive/RESPONSE.md",
+      "purpose": "Read sections3-5 for the completed initial assignment and explicit numerical-investment boundary; do not reconsider the vacancy.",
+      "provenance": "Complete Portfolio decision selecting zero-exposure preparation only."
+    },
+    {
+      "path": "docs/research/portfolio/PORTFOLIO.md",
+      "purpose": "Read current three-occupied/no-vacancy snapshot and the TRDL assessment/new-question producer; preserve other directions and their priorities.",
+      "provenance": "Current Root integrated snapshot; no cross-direction performance ranking requested.",
+      "commit_sha": "d725c677f33412bd4b73b908b22069317582ab04"
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "purpose": "Apply sections4/5.1-5.2/7/8.1/11.4/11.7-11.10: integrity, minimum useful class, direction limits, Portfolio principles, fair B burden, MEI/headroom, complexity and knowledge limits.",
+      "provenance": "Applicable scientific specification; current claims do not require an exact maximum, stable superiority, positive pilot or measured full cost."
+    },
+    {
+      "path": "AGENTS.md",
+      "purpose": "Apply sections2/4.7-4.8/5-7 for the decision boundary, current owner resume, DM ownership, Portfolio investment finality, published source and remote admission.",
+      "provenance": "Current instructions at the source commit include OWNER_RESUMED; historical pause handoff is not a current stop."
+    },
+    {
+      "path": "docs/project/ENGINEERING_SCOPE_SPEC.md",
+      "purpose": "Apply sections3-5 and7.1/7.3 for minimum research code, forbidden optional machinery, budget proportions and independent high-risk review.",
+      "provenance": "No code implemented yet; an investment decision does not accept code or grant unrequested services."
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "purpose": "Read sections2-4 and6 for legal critic/actor information, finite-learning versus representation, and independent training/evaluation units.",
+      "provenance": "Explanatory concepts; no independent authority or new scientific prerequisite."
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+      "purpose": "Read randomization/units and complete-method comparison sections for one paired fit and conditional order-statistic tails.",
+      "provenance": "Explanatory limits; no universal seed quota or uncertainty-test gate."
+    },
+    {
+      "path": "experiments/candidates/ucope/uav_motion_prefix_b01/environment.py",
+      "purpose": "Inspect make_real, actor_features, critic_features and team_reward only for the native host/reward and current dimensions.",
+      "provenance": "Existing reusable code read statically by DM; no import or execution in this request."
+    },
+    {
+      "path": "experiments/candidates/ucope/uav_motion_prefix_b01/learner.py",
+      "purpose": "Inspect clipped_policy_loss, recurrent_outputs, optimizer_for and update for the exact reusable versus incompatible update distinction.",
+      "provenance": "Existing mean-return learner is not TRDL; future local tail learner is in the card outline."
+    }
+  ],
+  "constraints": [
+    "Apply only the named specification sections and current owner resume; explanatory papers/knowledge do not create authority. A complete conforming Portfolio decision is final for this new investment question; implementation acceptance, source publication, focused review and actual-node admission remain with DM without Root ACK.",
+    "Consultation and A01 actual exposure: fits=0, model constructions=0, native calls=0, eval calls=0, optimizer updates=0, pilots=0, historical numerical reruns=0. UNALLOCATED B: one paired training instance, two fits, 34902 trainable actor parameters/arm; scalar critic 34305, quantile critic 38304; 128 joint Adam calls/arm at lr=.0003, no frozen parameter groups; actual displacement unmeasured. A01 actual exposure remains zero.",
+    "Proposed complete pair: 2*(512+256)*256=393216 scored team ticks; 2*(512/16)*4=256 joint Adam calls; one final checkpoint/arm, 512 final evaluation episodes total. Q32 has 32 scalar pinball terms per factual context/target, 16777216 across training epochs, not 32 trajectories or a 32x32 bootstrap target grid. No nested policy/controller/search branch or cost pilot. Future constructor resets and publication are in the cost law.",
+    "Per-arm cost law is in B01 and includes non-reset initialization, 769 resets, training collection, frozen baselines, four-epoch fitting, all final evaluation and publication. Unit rates and actual peak RSS are UNKNOWN; batch component bytes are not memory admission. Total wall, critical path, support and provider/agent cost are different. The old offer is not a timing measurement or active cap; current runtime-estimate calibration still applies.",
+    "The lower-tail objective, actor information and primary contrast must remain matched. G is native team reward_sum/H, not adapter scalar or return-to-go. The primary is each arm own64-lowest-of256 then Q32 minus SCALAR, never worst64 paired differences. Preserve final stochastic evaluation, private action randomness, common reset worlds, no adaptation, and complete ordinary means/returns.",
+    "TRDL local MEI.01J is retained with native service/quality scale reasoning; matching tuned lower-tail headroom absent, not zero. No cross-direction raw reward comparison or investment ranking. Three occupied slots remain ACVC/FOLR/TRDL; no replacement or shared runtime disruption requested. Root confirmed no other live Portfolio writer for this request.",
+    "Future work, only if selected, is direction-owned small research code and proportionate high-risk review on codex/trdl, remote-first CPU FP32 single-thread execution with fresh memory admission. No frozen parameter groups, generic pool, framework migration, schema guard, new telemetry or extra numerical validation allocation is implicit. No automatic retry, extra seed, longer endpoint, risk grid, C promotion or successor follows.",
+    "Write only docs/research/portfolio/pro_packets/20260914_trdl_b01_investment/archive/RESPONSE.md on current descendant codex/trdl and the delivery-link comment to Issue21. Preserve fixed evidence SHAs and unrelated branch advances; fresh readback or complete Markdown fallback is required."
+  ],
+  "response_schema": [
+    "Investment choice and exact finite implementation/numerical allowance or precise declined/corrected consequence.",
+    "Decisive reasons, strongest scalar alternative, claim ceiling, unknown work and revisit condition.",
+    "Actual source access and concrete limitations; scoped response/comment delivery."
+  ],
+  "delivery_mode": "github_delivery",
+  "github_delivery": {
+    "branch": "codex/trdl",
+    "base_sha": "80511fa6cddd907177b011af767bce5039e316ad",
+    "response_path": "docs/research/portfolio/pro_packets/20260914_trdl_b01_investment/archive/RESPONSE.md",
+    "issue_url": "https://github.com/CartmanFatass/My-paper-code/issues/21"
+  }
+}

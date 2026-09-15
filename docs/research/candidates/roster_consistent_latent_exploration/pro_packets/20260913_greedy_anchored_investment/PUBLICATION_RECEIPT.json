@@ -1,0 +1,30 @@
+{
+  "request_id": "2026-09-13-rcle-greedy-anchored-investment-01",
+  "task_commit": "0cf002c3913f7536a6db8064e234958e973fbc09",
+  "task_bytes": 28209,
+  "task_sha256": "9673acd05e0efab91b53d26edadc16f515d16f0f881c102136cda2952c8f86d2",
+  "task_url": "https://github.com/CartmanFatass/My-paper-code/blob/0cf002c3913f7536a6db8064e234958e973fbc09/docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260913_greedy_anchored_investment/delivery/TASK.md",
+  "source_sha": "306cabf5923b44bbfa486fae7313b5fea8666613",
+  "prepared_at": "2026-09-13T20:32:50.168553+00:00",
+  "handoff_state": "READY_TO_DISPATCH",
+  "binding": "portfolio:cross_direction",
+  "conversation_id": "6a9c109e-b264-83e8-a78b-f9ea1b767b7b",
+  "native_parent": "/root/dm_rcle_resume",
+  "native_transport": "/root/dm_rcle_resume/tr_l_h_rcle",
+  "github_delivery": {
+    "branch": "codex/rcle",
+    "base_sha": "306cabf5923b44bbfa486fae7313b5fea8666613",
+    "response_path": "docs/research/portfolio/pro_packets/20260913_rcle_greedy_anchored_investment/archive/RESPONSE.md",
+    "issue_url": "https://github.com/CartmanFatass/My-paper-code/issues/8"
+  },
+  "owner_item": "docs/research/portfolio/owner/inbox/2026-09-13/20260913-rcle-003.json",
+  "owner_item_id": "20260913-rcle-003",
+  "portfolio_recommendation": "A, unapplied",
+  "current_grant": "NONE",
+  "send_evidence": "NONE at this publication boundary",
+  "references_verified": 22,
+  "current_main_method_sha": "d50a063db77d5d8d84e0055fbdec8ea236742266",
+  "scientific_exposure": "zero",
+  "checks": "TASK contains exact question/deliverable/constraints and22 source mappings; actual published Git task bytes bound; Issue8 OPEN; direct native route fixed.",
+  "root_followup": "If buy, ordinary DM execution after card/technical acceptance/admission proceeds without another Portfolio or Root ACK."
+}

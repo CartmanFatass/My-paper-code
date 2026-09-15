@@ -1,0 +1,21 @@
+{
+  "command": [
+    "/home/wu/.venvs/hmasd/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "/home/wu/hmasd-worktrees/rcle-b09-38a29c7e3/temp/directions/roster_consistent_latent_exploration/test/b09_contract_02",
+    "tests/experiments/candidates/roster_consistent_latent_exploration/joint_quota_phase/test_contract.py",
+    "-k",
+    "native_current or four_role or fresh_identity"
+  ],
+  "exit_code": 0,
+  "test_wall_s": 4.343634270015173,
+  "stdout": ".....                                                                    [100%]\n5 passed, 3 deselected in 3.89s\n",
+  "stderr": "",
+  "scratch_absent": true,
+  "source_sha": "38a29c7e3ee55cfb6fa732bdb02a271e835b45b5"
+}

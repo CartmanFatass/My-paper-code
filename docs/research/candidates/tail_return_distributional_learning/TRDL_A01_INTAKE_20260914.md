@@ -1,0 +1,43 @@
+# TRDL-A01 intake — coherent prospective pair, numerical investment still ungranted
+
+**Technical acceptance: the assigned zero-exposure static preparation is complete. Scientific intake: A/RECON path evidence only.** The [B01 card](TRDL_B01_SCIENCE_CARD_20260914.md) is a concrete two-learner proposal, not an accepted implementation or measured result. Recommend consideration of that one finite pair; do not activate the historical offer locally.
+
+## What was checked
+
+Read the [E0 result](TRDL_A01_RESULT_EVIDENCE_20260914.md) against the [A01 card](TRDL_A01_SCIENCE_CARD_20260914.md), the complete 2026-09-14 vacancy response §3 and original registration response §5. Applied the card rule verbatim:
+
+> If the registered host and actor path exist and both distinct baseline updates can be specified under one common tail objective, return a concrete prospective B card and minimal implementation/work outline. Otherwise return the exact incompatibility and smallest correction. In either branch, report zero new experimental exposure and no efficacy or measured-feasibility claim.
+
+The first branch is met by the inspected native host, DENSE actor and replay path, plus explicit SCALAR-to-W and Q32-to-G updates under one frozen-score PPO rule. Actual counts/receipts: zero fits/model constructions/native/evaluation calls/updates/pilots/historical reruns; initial clean branch and source `05a8dc01560e99b867a36b0414058a251b24453c`; static arithmetic output in [COUNTS](TRDL_A01_COUNTS_20260914.json). No launch/admission/Monitor receipt exists. The absence is appropriate to A01's prohibition, not an execution defect.
+
+The check is DM self-review of static definitions and their reachable source dependencies. No independent runtime review is claimed. Later scientific code changes require the independent high-risk Reviewer and focused verification named in B01, within any selected support allocation. No test, training or evaluation was run to make this outline look executable.
+
+## Observation that bounds the result
+
+The registered contrast is implementable in outline, but the current shared `update()` has incompatible return-to-go, advantage-standardization and entropy semantics. The minimum repair is local tail-target/baseline/collector/readout work, not changing the host or comparing against a mean-trained scalar. Full J is reward_sum/H; native critic state already contains time, so the needed new context is one accumulated-reward coordinate. These findings remove concrete specification gaps. They establish neither lower-tail improvement nor runtime affordability.
+
+The strongest support is a complete lawful path from native service events through identical actor information to two trained score baselines and the registered own-arm tail endpoint. The strongest contrary case is that a scalar conditional W predictor already estimates exactly what this actor needs; quantile fitting may add error and joint-optimization cost. Small empirical tail batches and one paired fit further limit the prospective claim. Matching tuned headroom and all timing/peak-memory coefficients remain absent, not zero.
+
+Source reading was useful rather than ceremonial: Foundations/empirical notes set the one-fit and information boundaries; local RiskQ motivates distributions without donating its factorization claims; the primary CVaR/quantile papers fix score/loss semantics without proving PPO convergence. E0 records exact access, versions and limitations.
+
+## Predictions and owner instructions
+
+The A prediction was that host/actor reuse exists while the mean-return update needs replacement: **supported by static source inspection**. It was not a prediction that Q32 wins. Owner prediction: **not taken (unattended)**. Before further work, B's weak directional prediction is positive Delta_tail with low confidence; an inside-MEI or scalar-favoring observation remains plausible and must be preserved.
+
+The canonical owner-console `item.py reviews --json` returned `[]` at the preparation clean boundary. Root reconciled the apparent pause conflict by confirming current owner resume and publishing `05a8dc015`; that repair was fast-forwarded without overwriting direction work. Historical pause records do not govern current continuation. The older unallocated 3,000-second numerical/implementation offer is still not a grant.
+
+## Decisions this intake produces
+
+1. **Object tier — preparation disposition.** Options: (a) accept the static assessment and retain the concrete registered B01 proposal; (b) return an objective/host incompatibility; (c) substitute a mean-trained scalar or exact diagnostic. Recommend and select **(a)**: the baseline updates are distinct but target the same score; the source mismatch has a small local correction. (b) is not supported, and (c) changes the question or adds unnecessary work. `Owner-delegated decision (unattended, 2026-09-03 instruction): (a)`. This accepts preparation only; it creates no fit, implementation or timing allowance.
+2. **Object tier — prospective detail.** Retain original alpha=.25, own worst64-of256 primary, .01J local scale, 512 training episodes, batch16/four epochs, common DENSE actor and one pair. Specify generalized-inverse eta=G_(4), current context137 and factual pinball Q32 loss, rather than leaving library defaults/normalization to choose scientific meaning. `Owner-delegated decision (unattended, 2026-09-03 instruction): retain the registered design with the explicit prospective details in B01`. No outcome-informed change or recast occurred.
+3. **Portfolio tier — unresolved new investment.** Options for a new proper-node decision: buy this one specified pair plus its minimum implementation/verification; decline that purchase while retaining the prepared design and existing direction authority; or select one precise narrower correction if the node finds the contrast/cost disproportionate. DM recommendation is the one pair, because it can change the actual choice between two same-objective learners and needs no prerequisite assay, exact optimum or new host. Strongest alternative is scalar retention without purchasing Q32. **No local Portfolio choice is executed.** The new facts are the verified source path, exact same-objective updates and complete dominant work; this is not a repeat of the already settled vacancy choice. Any submission must preserve unknown rates and the unallocated status of the old offer.
+
+Audit is recorded in canonical `docs/research/portfolio/audit/2026-09-14.md`; the new-card owner item describes a **prepared unfunded candidate**, not “launch as carded.” The [Chinese owner brief](../../portfolio/owner/briefs/tail_return_distributional_learning/2026-09-14_TRDL_A01.md) preserves the six required fields.
+
+## Handoff and next discriminator
+
+Owned source/workspace remains `C:/Projects/HMASD-worktrees/codex-trdl`, `codex/trdl`. No scientific process, accepted external request or cleanup scratch was created by A01. Preserve this reusable authoring checkout. Root integrates the named direction commit and shared owner/audit files; no shared source writer dependency remains.
+
+TRDL remains ACTIVE/MEDIUM/recasts0 in its occupied slot. There is no lifecycle action here. After publishing this assessment, the DM may author the concrete new-investment question through its own Transport under the current parent assignment and Portfolio route. A pending decision would hold only the ungranted implementation/numerical work, not reinterpret it as PARK. The next empirical discriminator, **if separately selected**, is the one B01 final-policy pair and own-arm lower-tail difference, with all ordinary-mean harms disclosed. No automatic successor, pilot or extra training seed follows from this intake.
+
+Publication/continuation fact: A01 was committed and pushed as `80511fa6cddd907177b011af767bce5039e316ad`; Root integrated the materials. The unique new-investment request `2026-09-14-trdl-b01-investment-01` has fixed [TASK](../../portfolio/pro_packets/20260914_trdl_b01_investment/TASK.md) commit `5511bca9f65608dc6bf4f455c9b81726f70058e0` and published HANDOFF commit `c3b41be6466e4c7d5bc8a602de027ea77cfe9195`. It was assigned once by native `followup_task` to the DM-owned `/root/dm_trdl_vacancy_20260914/tr_lh_trdl_b01`. Root confirmed shared-node availability. This is dispatch, not provider acceptance or a formed decision. Full archive/intake remains with this DM; no scientific implementation or invocation has started. The renderer needed the existing local Python3.11 because the compute interpreter lacks `tomllib`; no environment upgrade or request change occurred.

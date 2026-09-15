@@ -1,0 +1,37 @@
+{
+  "question": "记录已获 F 拨款的同一用途卡：一次新 Generic 完整训练、旧 BANK 新评估，采用未筛选的新绑定。",
+  "changes_if_approved": [
+    {
+      "target": "FOLR retained-reference use B01",
+      "from": "拨款已生效，尚未绑定执行卡",
+      "to": "Generic781301、评估1781301/2781301；5000训练与各128评估，待代码检查/独立审阅/准入后执行"
+    }
+  ],
+  "if_refused": "按异步覆盖处理剩余工作，保留已执行事实；不会改写旧 E 或自动选择其他对象。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_RETAINED_REFERENCE_USE_B01_SCIENCE_CARD_20260913.md",
+      "quote": "Portfolio funds **F once** at response `9e37525139abc18ab6b9dcd393a21e5a24f12e26`.",
+      "why": "只落实已最终选定的一次用途，不另选科学或续拨。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/vap_folr_core/pro_packets/20260913_retained_reference_investment/INTAKE.md",
+      "quote": "Strongest contradiction: BANK has no comparative advantage yet, short H20/public cues may suffice, and N3 B04 demonstrated Generic competence on a different host.",
+      "why": "有限投入仍可能没有可用比较或优势。"
+    }
+  ],
+  "uncertainty": [
+    "一个新 Generic 实现不能估计训练总体不确定性，旧 BANK 已受结果知情选择。",
+    "未来完整时价、内存和支持仍未知；五项硬上限不保证完成。"
+  ],
+  "cost": {
+    "compute": "Generic2700s，BANK300s，原生3000s，支持1200s，完整4200s；无自动续拨。",
+    "owner_time": "无需等待回复，可异步覆盖。",
+    "reversibility": "costly",
+    "waits_on_this": "无 owner 等待；源代码接受与实际准入仍待完成。"
+  },
+  "verdict_text": "Owner-delegated decision (unattended, 2026-09-03 instruction): bind this fresh unscreened realization and exact card, recommended over changing the accepted science or waiting for ACK.",
+  "source": "docs/research/candidates/vap_folr_core/FOLR_RETAINED_REFERENCE_USE_B01_SCIENCE_CARD_20260913.md"
+}

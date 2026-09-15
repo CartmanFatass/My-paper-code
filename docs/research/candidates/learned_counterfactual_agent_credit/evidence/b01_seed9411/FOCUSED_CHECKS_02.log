@@ -1,0 +1,41 @@
+F                                                                        [100%]
+================================== FAILURES ===================================
+___________ test_complete_engineering_chain_counts_and_publication ____________
+
+    def resources():
+        try:
+>           import resource
+E           ModuleNotFoundError: No module named 'resource'
+
+experiments\candidates\learned_counterfactual_agent_credit\lcac_b01\study.py:43: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+tmp_path = WindowsPath('C:/Users/fires/.codex/worktrees/891a/HMASD/temp/directions/learned_counterfactual_agent_credit/test/b01-check-20260914-02/test_complete_engineering_chai0')
+
+    def test_complete_engineering_chain_counts_and_publication(tmp_path):
+        path = tmp_path / "pair"
+>       result = study.run_pair(path, seed=29, env_factory=ToyAdapter, horizon=4,
+                                train_episodes=2, eval_episodes=2, chunk=2, native=False)
+
+tests\experiments\candidates\learned_counterfactual_agent_credit\lcac_b01\test_learning_contract.py:235: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+experiments\candidates\learned_counterfactual_agent_credit\lcac_b01\study.py:124: in run_pair
+    summary.update(resources())
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def resources():
+        try:
+            import resource
+            own = resource.getrusage(resource.RUSAGE_SELF)
+            children = resource.getrusage(resource.RUSAGE_CHILDREN)
+            return {"peak_rss_bytes": own.ru_maxrss * 1024,
+                    "aggregate_cpu_seconds": own.ru_utime + own.ru_stime + children.ru_utime + children.ru_stime}
+        except ImportError:
+>           import psutil
+E           ModuleNotFoundError: No module named 'psutil'
+
+experiments\candidates\learned_counterfactual_agent_credit\lcac_b01\study.py:49: ModuleNotFoundError
+=========================== short test summary info ===========================
+FAILED tests/experiments/candidates/learned_counterfactual_agent_credit/lcac_b01/test_learning_contract.py::test_complete_engineering_chain_counts_and_publication
+1 failed in 3.56s

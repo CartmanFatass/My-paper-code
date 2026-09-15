@@ -1,0 +1,153 @@
+{
+  "checked_at_utc": "2026-09-13 01:56:45 UTC",
+  "input_sha": "932cb96c667caed3b0dc5857085ae4fc9fa02754",
+  "observed_published_refs": {
+    "refs/heads/codex/rcle": "932cb96c667caed3b0dc5857085ae4fc9fa02754",
+    "refs/heads/main": "0fda32925379cb80bc1ef59b8917c9920b1b5d3c",
+    "refs/heads/codex/portfolio": "97041c2c11988bc1b1c947c05d212277d09f090f"
+  },
+  "references": [
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260912_joint_quota_phase_family/SCIENCE_BRIEF.md",
+      "commit_sha": "932cb96c667caed3b0dc5857085ae4fc9fa02754",
+      "git_blob": "f3c3493388446ba03a60219965f4eea2d95daca2",
+      "bytes": 14011,
+      "published_through": "refs/heads/codex/rcle"
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260912_joint_quota_phase_family/EXPOSURE_AND_COST.json",
+      "commit_sha": "932cb96c667caed3b0dc5857085ae4fc9fa02754",
+      "git_blob": "0c32b3b0e49eb45de52f98144d0490ee01612b12",
+      "bytes": 3556,
+      "published_through": "refs/heads/codex/rcle"
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_JOINT_QUOTA_PHASE_B_PROPOSAL_20260912.md",
+      "commit_sha": "c6fd4d8f0fd9dc72aa1b743b7f0b835ab36ad01e",
+      "git_blob": "272e3427cf398fbaa66d475afd1e342c88fbf34e",
+      "bytes": 22762,
+      "published_through": "refs/heads/main"
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_L_DESIGN_INTAKE_20260912.md",
+      "commit_sha": "c6fd4d8f0fd9dc72aa1b743b7f0b835ab36ad01e",
+      "git_blob": "026788e538656cbbe8a480f91d8a7bf53b7758bd",
+      "bytes": 11291,
+      "published_through": "refs/heads/main"
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/l_design_20260912/WORK_AND_SCOPE.json",
+      "commit_sha": "c6fd4d8f0fd9dc72aa1b743b7f0b835ab36ad01e",
+      "git_blob": "5ec13d3e3e48d0e7b0f36644d60b7c9d67f4b5d4",
+      "bytes": 3569,
+      "published_through": "refs/heads/main"
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/l_design_20260912/LITERATURE_SCOPE.json",
+      "commit_sha": "c6fd4d8f0fd9dc72aa1b743b7f0b835ab36ad01e",
+      "git_blob": "948c6d2436c6f297e58592a1a0f4e7b19ec0cb02",
+      "bytes": 3216,
+      "published_through": "refs/heads/main"
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/DIRECTION.md",
+      "commit_sha": "c6fd4d8f0fd9dc72aa1b743b7f0b835ab36ad01e",
+      "git_blob": "8dec777570771f96dc323be35384ad899ca9d28d",
+      "bytes": 55391,
+      "published_through": "refs/heads/main"
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_POST_B07_CONVERGENCE_INTAKE_20260912.md",
+      "commit_sha": "5e969c23bf870dd5fb0c7fba9c676cf8e881020b",
+      "git_blob": "030a0899221f65413e897d4b19dd954c4d154893",
+      "bytes": 15897,
+      "published_through": "refs/heads/codex/rcle"
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_SERVICE_COMPARISON_DESIGN_INTAKE_20260910.md",
+      "commit_sha": "7c2873dd31529ee24b3a2ca9615ae1fa08c3f51b",
+      "git_blob": "72cdda81bbbbd25c8161add6af56d4eb7e3245e2",
+      "bytes": 24333,
+      "published_through": "refs/heads/main"
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_TARGET_BOUND_COMMITMENT_FRAGMENTATION_VALUE_SCIENCE_CARD.md",
+      "commit_sha": "c6fd4d8f0fd9dc72aa1b743b7f0b835ab36ad01e",
+      "git_blob": "c058069f51a0050b63f9f80b9353583dbf226857",
+      "bytes": 42923,
+      "published_through": "refs/heads/main"
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260912_post_kelu_continuation/archive/RESPONSE.md",
+      "commit_sha": "e9f097ed85d554352df95fc97ec4c3f303ac8f5e",
+      "git_blob": "d1a76b8d5d156db209f1073ef858e2a9c9daf968",
+      "bytes": 65519,
+      "published_through": "refs/heads/codex/portfolio"
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260912_post_kelu_continuation/EXECUTION_MAPPING.md",
+      "commit_sha": "814139558ccb28502b2e23da6800897b4d7af4b3",
+      "git_blob": "cd6c5f5811772fe3d2b0a0c27e4dc45881d52fac",
+      "bytes": 17514,
+      "published_through": "refs/heads/main"
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260912_post_kelu_continuation/INTAKE.md",
+      "commit_sha": "814139558ccb28502b2e23da6800897b4d7af4b3",
+      "git_blob": "be606481e38707bc4e45d30409061d09ead84f76",
+      "bytes": 15162,
+      "published_through": "refs/heads/main"
+    },
+    {
+      "path": "AGENTS.md",
+      "commit_sha": "814139558ccb28502b2e23da6800897b4d7af4b3",
+      "git_blob": "02803820d622497fbb681efe0b94f2a6a0d21c7b",
+      "bytes": 45889,
+      "published_through": "refs/heads/main"
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "commit_sha": "814139558ccb28502b2e23da6800897b4d7af4b3",
+      "git_blob": "c520f24f1440ca0638943d7a5126cfd5bc34440c",
+      "bytes": 45053,
+      "published_through": "refs/heads/main"
+    },
+    {
+      "path": "docs/project/ENGINEERING_SCOPE_SPEC.md",
+      "commit_sha": "814139558ccb28502b2e23da6800897b4d7af4b3",
+      "git_blob": "72f81d5650d9c1ddde12df3a6ed37add99f436be",
+      "bytes": 20899,
+      "published_through": "refs/heads/main"
+    },
+    {
+      "path": "docs/project/MARL_RUNTIME_ENGINEERING_SPEC.md",
+      "commit_sha": "814139558ccb28502b2e23da6800897b4d7af4b3",
+      "git_blob": "a4dbb54d2e2128e2d8b907cf200e701d7729172a",
+      "bytes": 23929,
+      "published_through": "refs/heads/main"
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "commit_sha": "814139558ccb28502b2e23da6800897b4d7af4b3",
+      "git_blob": "05b3dc8d8628e2510431250c119b533f2ac3c29a",
+      "bytes": 7819,
+      "published_through": "refs/heads/main"
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/02_MARL.md",
+      "commit_sha": "814139558ccb28502b2e23da6800897b4d7af4b3",
+      "git_blob": "1b3ceff0c80a63f8b12f6b8686265a92fbcc9fb4",
+      "bytes": 4038,
+      "published_through": "refs/heads/main"
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+      "commit_sha": "814139558ccb28502b2e23da6800897b4d7af4b3",
+      "git_blob": "9bae14c6deb8e3d1bee6bb567828e4667a426174",
+      "bytes": 4252,
+      "published_through": "refs/heads/main"
+    }
+  ],
+  "scope": "Each exact path is a Git blob and each input commit is an ancestor of the named observed published ref. Local publication proof is not proof of Pro connector access.",
+  "publication_reconciliation": "Original response and post-B07 intake are retained through their actual Portfolio/RCLE branches; main cherry-picks do not move the original scientific SHAs."
+}

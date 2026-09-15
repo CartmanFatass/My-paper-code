@@ -1,0 +1,10 @@
+{
+  "all_fixed_sources_exist": true,
+  "all_reachable_from_observed_published_refs": true,
+  "reference_count": 22,
+  "observed_remote_refs": [
+    "e4a67d816da001b1b2988f1554f50b785fcba72f\trefs/heads/codex/mgtap",
+    "64ccb0be13be4dcef5cc530b5f88e8100c19d2d5\trefs/heads/main"
+  ],
+  "checked_at": "2026-09-14T20:14:52.4281076+00:00"
+}

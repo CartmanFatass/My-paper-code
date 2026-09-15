@@ -1,0 +1,77 @@
+{
+  "id": "20260914-acvc-004",
+  "created": "2026-09-14T07:51:21-07:00",
+  "direction": "acvc",
+  "tier": "object",
+  "kind": "close-call",
+  "title": "配对暴露B与先报告：接近的研究取舍",
+  "context": "DM选配对B，但一个嵌套程序不能充分刻画未来策略变异，成本收益没有明确量化差距；先报告是接近备选。",
+  "options": [
+    {
+      "key": "a",
+      "label": "现在形成方向报告",
+      "consequence": "整理强项反例成本并提交Portfolio方向判断"
+    },
+    {
+      "key": "b",
+      "label": "执行一次新配对暴露B",
+      "consequence": "实际测量同一学习程序中固定F增量的变化，仍只有一个学习单位"
+    },
+    {
+      "key": "c",
+      "label": "冻结新的固定配方C-BENCH",
+      "consequence": "回答跨新程序的固定配方期望增量，需独立前瞻设计与有限预算"
+    }
+  ],
+  "recommended": "b",
+  "auto_applied": "b",
+  "dm_reason": "具体的程序内问题足以支持一次有界测量；报告仍是认真且接近的备选，无正净信息价值的证明。",
+  "evidence": [
+    "docs/research/candidates/acvc/ACVC_CLUSTER_PAIRED_EXPOSURE_B01_SCIENCE_CARD_20260914.md",
+    "docs/research/candidates/acvc/ACVC_CLUSTER_LONGER_C_B01_INTAKE_20260914.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-14.md#L65",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "下一步是否采用一个新学习程序内的512/1024轮配对比较，而不是现在只形成方向报告？",
+    "changes_if_approved": [
+      {
+        "target": "ACVC paired-exposure B01",
+        "from": "长训练B01已完成并经完整科学评审，原先暂倾向报告",
+        "to": "新C程序固定保存512与1024轮快照，全部训练后做六个私有终局面板"
+      }
+    ],
+    "if_refused": "在下一干净边界应用实际选择，可转为方向报告或明确修订；保留已经发生的成本、快照和证据，不自动重跑、删证据或释放席位。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/acvc/ACVC_CLUSTER_PAIRED_EXPOSURE_B01_SCIENCE_CARD_20260914.md",
+        "quote": "Current unpaired outcomes cannot answer that question.",
+        "why": "同一程序内固定配对可以直接检查更多学习后F相对有用dwell的增量是否保留；端点有用性与增量变化将分别报告。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/acvc/pro_packets/20260914_cluster_longer_c_b01_scientific_review/archive/RESPONSE.md",
+        "quote": "My preference for the paired observation is close and unquantified, not proof of positive expected net value.",
+        "why": "一个嵌套配对仍不能充分描述未来策略变异，工程和支持成本未知；先报告并保留参考也是合理而接近的选择。"
+      }
+    ],
+    "uncertainty": [
+      "更多训练不保证更强C，数据暴露与优化器暴露仍共同变化。",
+      "两快照不是两独立学习实例；64个世界的变化SE必须保留配对相关性。",
+      "固定配方C-BENCH更直接回答总体均值问题，也不以本B通过为前提。",
+      "推荐与报告备选没有明确的量化净信息价值差距，按close-call公开。"
+    ],
+    "cost": {
+      "compute": "一次新1024训练、2048更新、384终评、360448团队步，两快照六加载；native500秒/支持2100秒为可修订计划，完整历史支持成本仍未知。",
+      "owner_time": "无需等待，所有者可异步选择。",
+      "reversibility": "costly",
+      "waits_on_this": "nothing"
+    },
+    "verdict_text": "Owner-delegated decision (unattended, 2026-09-03 instruction): (b).",
+    "source": "docs/research/candidates/acvc/ACVC_CLUSTER_PAIRED_EXPOSURE_B01_SCIENCE_CARD_20260914.md"
+  },
+  "starred": true
+}

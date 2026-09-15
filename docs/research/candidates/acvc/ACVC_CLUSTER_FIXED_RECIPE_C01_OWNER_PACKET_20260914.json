@@ -1,0 +1,38 @@
+{
+  "question": "是否保留已冻结的 ACVC 六程序固定1024 C-BENCH 卡及前瞻抽样/联合推断？",
+  "changes_if_approved": [
+    {
+      "target": "ACVC 下一科学对象",
+      "from": "Portfolio 已选择六程序目标，具体卡片尚未冻结",
+      "to": "冻结一次六程序、每个1024训练/192评价的卡；首批12个随机值已保留，双主量使用假设限定的 df5 同时 t 区间"
+    }
+  ],
+  "if_refused": "在下一干净边界遵守实际 owner 覆盖，保留已抽样值和已执行影响；不悄悄重抽、换seed、改冻结终点或自动追加fit。",
+  "evidence_for": [
+    {
+      "path": "docs/research/portfolio/pro_packets/20260914_acvc_post_paired_direction/archive/RESPONSE.md",
+      "quote": "六个程序是本次选择的有限投入，不是充分性、正态性或成功概率定理。",
+      "why": "完整 Portfolio 已选这一有限目标；新卡将完整学习—评价程序作为单位，并前瞻规定抽样与两项联合比较。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/acvc/ACVC_CLUSTER_FIXED_RECIPE_C01_SCIENCE_CARD_20260914.md",
+      "quote": "Actual neural-training coverage/calibration is not established.",
+      "why": "六单位仍可能不精确或不符合工作模型；即使均值过关也不证明尾部可接受，零方差不生成零宽度确定性。"
+    }
+  ],
+  "uncertainty": [
+    "两个比较共享 F，必须使用声明的同时区间，不能乘独立概率。",
+    "坏结果完整保留；缺失无六单位总体区间，无自动第七次拟合。",
+    "首批抽样是有放回 iid，不能按seed去重；单位索引/过程/目录独立。"
+  ],
+  "cost": {
+    "compute": "六个原始调用，共7296episode/12288更新/1867776ticks；native参考1777.8秒，native3000/支持4800为可前瞻修订的 DM 计划，完整历史成本未知。",
+    "owner_time": "无需等待；可异步介入。",
+    "reversibility": "costly",
+    "waits_on_this": "nothing"
+  },
+  "verdict_text": "Owner-delegated decision (unattended, 2026-09-03 instruction): freeze this six-programme design and its first outcome-blind draw, then implement and execute within the applied Portfolio scope.",
+  "source": "docs/research/candidates/acvc/ACVC_CLUSTER_FIXED_RECIPE_C01_SCIENCE_CARD_20260914.md"
+}

@@ -1,0 +1,72 @@
+{
+  "batch_id": "FOLR_ENTITY_HISTORY_AUGMENTATION_B01_781601",
+  "assignment_id": "FOLR_AUGMENTATION_B01_GENERIC_MONITOR_20260914_R1",
+  "monitor_identity": "native:/root/folr_augmentation_b01_monitor",
+  "handle": "folr-augmentation-b01-781601-generic",
+  "supervisor_pid": "3674297",
+  "node": "hmasd-wsl-node",
+  "supervisor": "/usr/local/bin/agent-task",
+  "accepted_at": "2026-09-14T15:36:55.744043+00:00",
+  "last_observed_at": "2026-09-14T15:56:32.611Z",
+  "next_due_check": "2026-09-14T16:01:32.611Z",
+  "readopted_at": "2026-09-14T15:42:46.321Z",
+  "readoption_event_id": "FOLR_ENTITY_HISTORY_AUGMENTATION_B01_781601:MONITOR_READOPTED:folr-augmentation-b01-781601-generic:20260914T154246Z",
+  "active_handle": {
+    "assignment_id": "FOLR_AUGMENTATION_B01_AUGMENTED_MONITOR_20260914_R1",
+    "handle": "folr-augmentation-b01-781601-augmented",
+    "supervisor_pid": "3679958",
+    "accepted_at": "2026-09-14T19:39:55.755736+00:00",
+    "last_observed_at": "2026-09-14T20:25:49.008Z",
+    "next_due_check": "2026-09-14T20:30:49.008Z",
+    "observation_deadline": "2026-09-14T21:39:55.755736Z",
+    "status": "finished",
+    "exit_code": 0,
+    "terminal_observed_at": "2026-09-14T20:26:49.622Z",
+    "terminal_at_source": "2026-09-15T04:26:32+08:00",
+    "terminal_raw_record": {"arm":"AUGMENTED_PERSISTENT","status":"complete","panel":{"mean":4.329921874999999,"sample_sd":8.237034430808267,"conditional_episode_se":0.7280578628614498,"minimum":-15.200000000000003,"maximum":23.639999999999997,"n":128}},
+    "source_sha": "d9977dc18baf33b78dc626764c252391f1ddaa9d",
+    "cwd": "/home/wu/hmasd-worktrees/folr-entity-history-augmentation-b01-781601-d9977dc18",
+    "output_path": "/home/wu/hmasd-worktrees/folr-entity-history-augmentation-b01-781601-d9977dc18/temp/directions/vap_folr_core/exp/entity_history_augmentation_b01_781601/augmented_persistent",
+    "evidence_paths": [
+      "/home/wu/.agent-tasks/folr-augmentation-b01-781601-augmented/status",
+      "/home/wu/.agent-tasks/folr-augmentation-b01-781601-augmented/pid",
+      "/home/wu/.agent-tasks/folr-augmentation-b01-781601-augmented/exit_code",
+      "/home/wu/.agent-tasks/folr-augmentation-b01-781601-augmented/start_time",
+      "/home/wu/.agent-tasks/folr-augmentation-b01-781601-augmented/task.log"
+    ]
+  },
+  "observation_deadline": "2026-09-14T17:36:55.744043Z",
+  "status": "finished",
+  "tmux_active": true,
+  "exit_code": 0,
+  "terminal_observed_at": "2026-09-14T15:57:33.617Z",
+  "terminal_at_source": "2026-09-14T23:56:34+08:00",
+  "terminal_at_source_original_transcription": "2026-09-14T15:56:34+08:00 (preserved prior transcription; raw supervisor log is authoritative)",
+  "source_sha": "d9977dc18baf33b78dc626764c252391f1ddaa9d",
+  "cwd": "/home/wu/hmasd-worktrees/folr-entity-history-augmentation-b01-781601-d9977dc18",
+  "output_path": "/home/wu/hmasd-worktrees/folr-entity-history-augmentation-b01-781601-d9977dc18/temp/directions/vap_folr_core/exp/entity_history_augmentation_b01_781601/generic_retain",
+  "evidence_paths": [
+    "/home/wu/.agent-tasks/folr-augmentation-b01-781601-generic/status",
+    "/home/wu/.agent-tasks/folr-augmentation-b01-781601-generic/pid",
+    "/home/wu/.agent-tasks/folr-augmentation-b01-781601-generic/exit_code",
+    "/home/wu/.agent-tasks/folr-augmentation-b01-781601-generic/start_time",
+    "/home/wu/.agent-tasks/folr-augmentation-b01-781601-generic/task.log"
+  ],
+  "delivery": {
+    "adoption_event_id": "FOLR_ENTITY_HISTORY_AUGMENTATION_B01_781601:MONITOR_ADOPTED:folr-augmentation-b01-781601-generic:20260914T153700Z",
+    "adoption_delivered": true,
+    "correction_event_id": "FOLR_ENTITY_HISTORY_AUGMENTATION_B01_781601:MONITOR_ADOPTED_CORRECTION:folr-augmentation-b01-781601-generic:20260914T153925Z",
+    "correction_delivered": true,
+    "terminal_event_id": "FOLR_ENTITY_HISTORY_AUGMENTATION_B01_781601:MONITOR_TERMINAL:folr-augmentation-b01-781601-generic:20260914T155733Z",
+    "terminal_delivered": true,
+    "active_adoption_event_id": "FOLR_ENTITY_HISTORY_AUGMENTATION_B01_781601:MONITOR_ADOPTED:folr-augmentation-b01-781601-augmented:20260914T194029Z",
+    "active_adoption_delivered": true,
+    "active_terminal_event_id": "FOLR_ENTITY_HISTORY_AUGMENTATION_B01_781601:MONITOR_TERMINAL:folr-augmentation-b01-781601-augmented:20260914T202649Z",
+    "active_terminal_delivered": true
+  },
+  "completed_handle_history": {
+    "handle": "folr-augmentation-b01-781601-generic",
+    "status": "finished",
+    "terminal_event_id": "FOLR_ENTITY_HISTORY_AUGMENTATION_B01_781601:MONITOR_TERMINAL:folr-augmentation-b01-781601-generic:20260914T155733Z"
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "handle": "lcac-b01-s9411-133218a8-20260914",
+  "launch_sha": "133218a8e08c29e833b4d549ffd48f00b204bf2e",
+  "files": [
+    {
+      "name": "summary.json",
+      "source": "/home/wu/hmasd-worktrees/lcac-b01-26e23ff3/experiments/results/lcac_b01_9411_20260914/summary.json",
+      "sha256": "be417110293b5a54594e260dc49a5cf72b1c751b3bfe7a18cf0407e709dc1e6a",
+      "bytes": 4265
+    },
+    {
+      "name": "episodes.jsonl",
+      "source": "/home/wu/hmasd-worktrees/lcac-b01-26e23ff3/experiments/results/lcac_b01_9411_20260914/episodes.jsonl",
+      "sha256": "c4609949bf5af646a53b4c16f46db738df51fd6ee8d8d2dc394a96ee7a2ae90e",
+      "bytes": 107305
+    },
+    {
+      "name": "rollouts.jsonl",
+      "source": "/home/wu/hmasd-worktrees/lcac-b01-26e23ff3/experiments/results/lcac_b01_9411_20260914/rollouts.jsonl",
+      "sha256": "6d52f4a0d2063a6fc993ee70a6f96256bffc17e671f324596e15b928d5b50021",
+      "bytes": 352591
+    },
+    {
+      "name": "final_V.pt",
+      "source": "/home/wu/hmasd-worktrees/lcac-b01-26e23ff3/experiments/results/lcac_b01_9411_20260914/final_V.pt",
+      "sha256": "9f0e3e6f8b50bca297e209dd0e18c18d4151e274c03498eb4f0170481a971922",
+      "bytes": 283248
+    },
+    {
+      "name": "final_Q.pt",
+      "source": "/home/wu/hmasd-worktrees/lcac-b01-26e23ff3/experiments/results/lcac_b01_9411_20260914/final_Q.pt",
+      "sha256": "c054b26aafe2a3e76be8959c5f191c1d28250aa06f84c2d9e4cfba46fa38fafa",
+      "bytes": 301168
+    },
+    {
+      "name": "admission.json",
+      "source": "/home/wu/hmasd-worktrees/lcac-b01-26e23ff3/experiments/results/lcac_b01_9411_20260914_receipts/admission.json",
+      "sha256": "ac1f32c5d68992a285b110da03436cdee6d3ad182127f85fe430889b74511d25",
+      "bytes": 504
+    },
+    {
+      "name": "runner_time.json",
+      "source": "/home/wu/hmasd-worktrees/lcac-b01-26e23ff3/experiments/results/lcac_b01_9411_20260914_receipts/runner_time.json",
+      "sha256": "de7a2b45e1f16d9e5006ca3d038a09e613b6eae2b57ac0b1ea17183ea05106a0",
+      "bytes": 62
+    },
+    {
+      "name": "supervisor.log",
+      "source": "/home/wu/.agent-tasks/lcac-b01-s9411-133218a8-20260914/task.log",
+      "sha256": "821cd9f6b904d6dc3830efd92bbc9f2f7b433a397db878d3f7b18c3ce17d708f",
+      "bytes": 823
+    }
+  ],
+  "transfer_and_hash_wall_seconds": 4.688000000023749,
+  "remote_sha256_stdout": "be417110293b5a54594e260dc49a5cf72b1c751b3bfe7a18cf0407e709dc1e6a  /home/wu/hmasd-worktrees/lcac-b01-26e23ff3/experiments/results/lcac_b01_9411_20260914/summary.json\nc4609949bf5af646a53b4c16f46db738df51fd6ee8d8d2dc394a96ee7a2ae90e  /home/wu/hmasd-worktrees/lcac-b01-26e23ff3/experiments/results/lcac_b01_9411_20260914/episodes.jsonl\n6d52f4a0d2063a6fc993ee70a6f96256bffc17e671f324596e15b928d5b50021  /home/wu/hmasd-worktrees/lcac-b01-26e23ff3/experiments/results/lcac_b01_9411_20260914/rollouts.jsonl\n9f0e3e6f8b50bca297e209dd0e18c18d4151e274c03498eb4f0170481a971922  /home/wu/hmasd-worktrees/lcac-b01-26e23ff3/experiments/results/lcac_b01_9411_20260914/final_V.pt\nc054b26aafe2a3e76be8959c5f191c1d28250aa06f84c2d9e4cfba46fa38fafa  /home/wu/hmasd-worktrees/lcac-b01-26e23ff3/experiments/results/lcac_b01_9411_20260914/final_Q.pt\nac1f32c5d68992a285b110da03436cdee6d3ad182127f85fe430889b74511d25  /home/wu/hmasd-worktrees/lcac-b01-26e23ff3/experiments/results/lcac_b01_9411_20260914_receipts/admission.json\nde7a2b45e1f16d9e5006ca3d038a09e613b6eae2b57ac0b1ea17183ea05106a0  /home/wu/hmasd-worktrees/lcac-b01-26e23ff3/experiments/results/lcac_b01_9411_20260914_receipts/runner_time.json\n821cd9f6b904d6dc3830efd92bbc9f2f7b433a397db878d3f7b18c3ce17d708f  /home/wu/.agent-tasks/lcac-b01-s9411-133218a8-20260914/task.log\n"
+}

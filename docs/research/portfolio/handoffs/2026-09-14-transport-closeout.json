@@ -1,0 +1,53 @@
+{
+  "recorded_at": "2026-09-14T21:11:55.202578+00:00",
+  "executor_thread_id": "01a09ea0-4a86-75b0-826d-6f864efa7480",
+  "handoff_source_path": "C:/Projects/HMASD/temp/sessions/hmasd-chatgpt-pro-transport/HANDOFF.md",
+  "handoff_source_bytes": 1540,
+  "handoff_source_sha256": "c7ac2f43f926fee0fbdda44ab6c73f1c3957756978665eaa9d3e140e26b9e843",
+  "handoff_original_utf8_text": "# HMASD ChatGPT Pro Transport Handoff\n\nUpdated: 2026-09-14T20:56:19.8725794Z\n\nPause state: the pre-pause MGTAP and FOLR current-object closeouts have now completed. No new request, successor research, vacancy request, provider Send, Stop, Regenerate, or archive action is pending here.\n\nDurable queue: `pending-requests.json` is authoritative. Every listed request is terminal (`COMPLETED_PROVIDER_DELIVERY_VERIFIED` or the historical FOLR `COMPLETED_ARCHIVE_ONLY_RESPONSE`). The latest ACVC Portfolio request `2026-09-14-acvc-post-fixed-c01-direction-decision-01` was accepted once, completed, archived, and returned to its author; its verified delivery is commit `fa1e385efc89135288b6afb102ec9353c9acf1c3` with Issue #14 comment `5670244411`. The pre-pause MGTAP request `2026-09-14-mgtap-fixed-lr-results-review-01` was reconciled, accepted once, completed, archived, and returned to its author; its verified delivery is commit `494dbefe004bfa4b52017dc2ba903f4eff30204c` with Issue #18 comment `5670514258`. The pre-pause FOLR request `2026-09-14-folr-augmentation-b01-result-closeout-review-01` was reconciled, accepted once, completed, archived, and returned to its author; its verified delivery is commit `4da68fe7a9577a0bc32a00d6fc7c7e7412e50568` with Issue #15 comment `5670667652`.\n\nRemaining obligations: none for this executor. Preserve all queue records, accepted bindings, sibling unsent drafts, and archive-only incident history. Do not start new work during the owner pause. Any later request must be a new explicit handoff.\n",
+  "queue_source_path": "C:/Projects/HMASD/temp/sessions/hmasd-chatgpt-pro-transport/pending-requests.json",
+  "queue_source_sha256": "a7e5039f8f1bb2b36d720bcf40a3a3c2844e7a29951bbea4213e4624aadc9324",
+  "queue_updated_at": "2026-09-14T20:56:19.8725794Z",
+  "request_count": 10,
+  "nonterminal_count": 0,
+  "current_closeout_requests": [
+    {
+      "request_id": "2026-09-14-folr-augmentation-b01-result-closeout-review-01",
+      "state": "COMPLETED_PROVIDER_DELIVERY_VERIFIED",
+      "author_return_route": "01a09e16-f7b1-7e60-83a0-ba2a7cd969bc",
+      "accepted_user_node_id": "7ee820c2-d2d1-495c-af8e-eeb77dab4c19",
+      "assistant_node_id": "037b1952-9215-430b-9e96-041c85bd640d",
+      "send_count": 1,
+      "manual_send_count": 0,
+      "delivery_commit": "4da68fe7a9577a0bc32a00d6fc7c7e7412e50568",
+      "delivery_comment_id": 5670667652,
+      "completed_at": "2026-09-14T20:56:19.8725794Z"
+    },
+    {
+      "request_id": "2026-09-14-mgtap-fixed-lr-results-review-01",
+      "state": "COMPLETED_PROVIDER_DELIVERY_VERIFIED",
+      "author_return_route": "01a09cd8-676e-7513-806d-a86b7e104518",
+      "accepted_user_node_id": "8d56e527-169b-4ddf-9aec-ea7bd872cd01",
+      "assistant_node_id": "16a020df-2a3d-4156-bcce-5e67c8922a0e",
+      "send_count": 1,
+      "manual_send_count": 0,
+      "delivery_commit": "494dbefe004bfa4b52017dc2ba903f4eff30204c",
+      "delivery_comment_id": 5670514258,
+      "completed_at": "2026-09-14T20:43:13.9462897Z"
+    },
+    {
+      "request_id": "2026-09-14-acvc-post-fixed-c01-direction-decision-01",
+      "state": "COMPLETED_PROVIDER_DELIVERY_VERIFIED",
+      "author_return_route": "01a09dfa-0655-7831-aa3a-9fff2ddd2508",
+      "accepted_user_node_id": "caca35ed-9351-48c7-b8f1-d06f0cb0b955",
+      "assistant_node_id": "8949daab-a321-4517-84e3-7dc7d2b100cc",
+      "send_count": 1,
+      "manual_send_count": 0,
+      "delivery_commit": "fa1e385efc89135288b6afb102ec9353c9acf1c3",
+      "delivery_comment_id": 5670244411,
+      "completed_at": "2026-09-14T20:21:49.5559532Z"
+    }
+  ],
+  "executor_remaining_obligations": 0,
+  "claim_boundary": "Executor completion is separate from each DM scientific intake; all three DM final handoffs are separately verified in the companion record."
+}

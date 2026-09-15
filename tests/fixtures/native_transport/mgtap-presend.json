@@ -1,0 +1,37 @@
+{
+  "operationId": "19ca18f5-1683-418c-b204-e03873309af7",
+  "requestId": "2026-09-12-mgtap-unequal-exposure-investment-01",
+  "stableKey": "portfolio:cross_direction",
+  "provider": "chatgpt",
+  "productModel": "Latest",
+  "reasoningEffort": "Pro",
+  "conversationUrl": "https://chatgpt.com/c/6a9c109e-b264-83e8-a78b-f9ea1b767b7b",
+  "conversationId": "6a9c109e-b264-83e8-a78b-f9ea1b767b7b",
+  "idempotencyKey": "2026-09-12-mgtap-unequal-exposure-investment-01",
+  "promptPath": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\portfolio\\2026-09-12-mgtap-unequal-exposure-investment-01\\packet\\2026-09-12-mgtap-unequal-exposure-investment-01--portfolio__00_PROMPT.md",
+  "promptSha256": "f6e468abc5df9ef6751c70b11891e8ab2813a722fcb8430c65cb5236ebf9aef0",
+  "responsePath": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\portfolio\\2026-09-12-mgtap-unequal-exposure-investment-01\\2026-09-12-mgtap-unequal-exposure-investment-01--portfolio--attempt-01__02_RESPONSE.md",
+  "existingTabId": "a41f8908-2c61-44d8-b5c0-a33ad1aa4bf7",
+  "timeoutMs": 60000,
+  "verifyExisting": null,
+  "toolReceipt": {
+    "content": [
+      {
+        "type": "text",
+        "text": "tab_key_mismatch"
+      }
+    ],
+    "isError": true
+  },
+  "operationState": {
+    "sendAttempted": false,
+    "sendAttemptedAt": null,
+    "providerUserMessageId": null,
+    "providerAssistantMessageId": null,
+    "archive": null,
+    "error": {
+      "code": "TAB_KEY_MISMATCH"
+    }
+  },
+  "replayNote": "Replay the same pre-Send failure only with these immutable arguments; do not create a new operation or Send until parent release."
+}

@@ -1,0 +1,54 @@
+{
+  "prior_snapshot_commit": "5f4abd6f0774c9b9e6ffe9b1c8bc721861b4265a",
+  "meaning": "Exact archive correction differences; prior DM-read snapshot remains in Git. No new provider Send or answer.",
+  "files": [
+    {
+      "file": "RESPONSE.md",
+      "old_bytes": 20896,
+      "new_bytes": 20895,
+      "old_sha256": "2e3eb34bf9af4b050b4856b9d7993136d911d08f4bb8c6735b21792394373370",
+      "new_sha256": "7c7476fca152aec673c7ff0974ae182c0ef30c091e230a4ba7039ac71f06a416",
+      "changes": [
+        {
+          "kind": "delete",
+          "old_chars": [
+            1201,
+            1202
+          ],
+          "new_chars": [
+            1201,
+            1201
+          ],
+          "old": "-",
+          "new": "",
+          "context_old": ") |\n| ---- | ---------------: | -------------------: | -------------------: |\n| B10  |  +0.061531575521 |      ",
+          "context_new": ") |\n| ---- | ---------------: | -------------------: | ------------------: |\n| B10  |  +0.061531575521 |      "
+        }
+      ]
+    },
+    {
+      "file": "PROMPT_BODY.md",
+      "old_bytes": 20122,
+      "new_bytes": 20120,
+      "old_sha256": "32510d355e53051453416dcd7447adc2de3409fb04fbf8dcf85201beac27b95b",
+      "new_sha256": "bae1fb96f26b704f43d0ecd34aab0c8578feeb6eb15476e05e7027e116a687f9",
+      "changes": [
+        {
+          "kind": "delete",
+          "old_chars": [
+            20113,
+            20115
+          ],
+          "new_chars": [
+            20113,
+            20113
+          ],
+          "old": "\n\n",
+          "new": "",
+          "context_old": " direction decision without another Root ratification.\n\n\n",
+          "context_new": " direction decision without another Root ratification.\n"
+        }
+      ]
+    }
+  ]
+}

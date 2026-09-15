@@ -120,9 +120,10 @@ their Codex-era text); their content is unchanged.
   the same scoped GitHub delivery, packet renderer, registry and conversation bindings the Codex
   Transport uses; procedure in `.claude/skills/hmasd-pro-transport/SKILL.md`. It is enabled for
   unattended scientific dispatch only after one recorded non-scientific smoke has passed. Until
-  then, and whenever transport is unavailable, direction- and Portfolio-tier questions are put to
-  the owner through the owner surfaces; in the owner's absence the direction parks (§3) and
-  object-tier decisions follow §4.
+  then, and whenever transport is unavailable, record the actual missing scientific review fact
+  and resolve only the dependent scope. DM retains lifecycle ownership; transport failure never
+  automatically parks a direction. Portfolio is reporting, with consultation/global changes only
+  on explicit owner request under current AGENTS.md.
 
 ### Grok Build route (formerly AGENTS.md Appendix C)
 

@@ -1,0 +1,33 @@
+{
+  "collected_at": "2026-09-13T20:44:52.856450+00:00",
+  "source_sha": "5dce539ed54afd4334d09db9dcd94df38c52c2fc",
+  "remote": "/home/wu/projects/HMASD/temp/directions/vap_folr_core/exp/retained_reference_use_b01_781301/GENERIC",
+  "task": "folr-ref-use-generic-781301-5dce539ed54a",
+  "archive_sha256": "300d1b7b2d5886f83d813ae6f83ea9e4148f08f57792bee5c0ca4ff02ea5953e",
+  "archive_bytes": 4285500,
+  "members": [
+    {
+      "path": "summary.json",
+      "bytes": 109489,
+      "sha256": "e9929a131c57a6bbb4e5bbc11cdd4296d1563bd9506ec29bd1e01e0a2dd51174"
+    },
+    {
+      "path": "final.pt",
+      "bytes": 4694195,
+      "sha256": "649804697fe74a7432fcbae4e9ec33e0ff3d9332b3ca894f1932e024f511edd9"
+    },
+    {
+      "path": "ADMISSION.json",
+      "bytes": 504,
+      "sha256": "dac9dc0e3e3d541fbeccc4d1bee85306f76e2b9973afe38f2baa3db109297506"
+    },
+    {
+      "path": "INVOCATION_TIME.json",
+      "bytes": 108,
+      "sha256": "9300a29a343dd2c2bc8fd097b813f59c08a915326ed56193fefe7a0ac25d2955"
+    }
+  ],
+  "collection_control_wall_seconds": 3.202999999979511,
+  "model_loads": 0,
+  "scientific_invocations": 0
+}

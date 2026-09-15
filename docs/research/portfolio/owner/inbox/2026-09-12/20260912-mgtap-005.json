@@ -1,0 +1,84 @@
+{
+  "id": "20260912-mgtap-005",
+  "created": "2026-09-12T21:55:08-07:00",
+  "direction": "metric_ground_transport_allocation",
+  "tier": "direction",
+  "kind": "decision",
+  "title": "MGTAP：原节点选中一次COND512/DENSE768用途B",
+  "context": "完整原Convergence回复71baa4a81已核对合规：选择唯一新比较，保持DENSE默认及ACTIVE/MEDIUM。当前只完成科学选择和文档intake，实验资金与数值上限均未分配。",
+  "options": [
+    {
+      "key": "a",
+      "label": "采纳原节点科学选择",
+      "consequence": "记录一次准确B及完整新投资需求；无任何实验拨款。"
+    },
+    {
+      "key": "b",
+      "label": "拒绝此候选",
+      "consequence": "仅拒绝这一用途候选，保留原回复与既有科学；无自动PARK或替代。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "完整回复在授权的两项选择中作出明确判断，未扩大证据类别、预算或生命周期。",
+  "evidence": [
+    "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260912_cond512_dense768_use/INTAKE.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-12.md#L147",
+  "brief": "docs/research/portfolio/owner/briefs/metric_ground_transport_allocation/2026-09-12_COND512_DENSE768_USE.md",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "记录原Convergence已形成的最终选择：一次新的mean-COND512/完整DENSE768用途B，而非拒绝这一科学候选。",
+    "changes_if_approved": [
+      {
+        "target": "MGTAP当前方向科学选择",
+        "from": "该用途候选尚待原节点判断",
+        "to": "原节点已选中一次明确B；DENSE默认和ACTIVE/MEDIUM保留，实验额度仍为空"
+      }
+    ],
+    "if_refused": "异步owner明确覆盖则按其指示处理后续；保留完整原回复与历史事实，不自动重跑、另问或PARK。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260912_cond512_dense768_use/archive/RESPONSE.md",
+        "quote": "Select exactly one fresh **mean-COND512 versus intact-DENSE768 B/EXPLORE use comparison**.",
+        "why": "完整原节点回答选择了已授权的唯一候选，未增加别的查询或实验。"
+      },
+      {
+        "path": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260912_cond512_dense768_use/archive/RESPONSE.md",
+        "quote": "The existing evidence contains no DENSE768 fit and cannot answer that choice.",
+        "why": "新观察针对具体训练程序用途，现有512/512数据不能给出其结果。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260912_cond512_dense768_use/archive/RESPONSE.md",
+        "quote": "Declining is a serious alternative. It avoids two new fits and their complete support chain.",
+        "why": "三次mean-COND只有一次超过MEI，另有负向；全成本未知，一对新训练也仅给本地观察。"
+      }
+    ],
+    "uncertainty": [
+      "更多DENSE训练不保证更好，不能识别训练因果作用或稳定优势。",
+      "全部数值额度尚未分配；当前只完成文档intake和新投资需求。"
+    ],
+    "cost": {
+      "compute": "本次0模型/实验/测量/重分析/测试；既有文档全成本UNKNOWN已获接受。拟议B为344064团队步、2560Adam，native/support/完整成本UNKNOWN且未拨款。",
+      "owner_time": "无需逐项确认；异步介入保留。",
+      "reversibility": "reversible",
+      "waits_on_this": "none；实际B只依赖新的Portfolio资金决定。"
+    },
+    "verdict_text": "This is the final scientific selection of this one candidate, not an empirical allocation.",
+    "source": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260912_cond512_dense768_use/archive/RESPONSE.md"
+  },
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-13T04:55:29+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260912_cond512_dense768_use/archive/RESPONSE.md",
+      "record": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260912_cond512_dense768_use/INTAKE.md",
+      "state": "applied",
+      "summary": "完整读取71baa4a81全部202行，34652字节与Root main相同；18固定引用、delivery comment和科学/规格范围一致。已记录唯一COND512/DENSE768科学选择，DENSE默认不变；资金和全部数值上限仍未分配。"
+    }
+  ]
+}

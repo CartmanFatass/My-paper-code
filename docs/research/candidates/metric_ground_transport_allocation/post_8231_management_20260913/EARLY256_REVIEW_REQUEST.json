@@ -1,0 +1,97 @@
+{
+  "caller_role": "em",
+  "workflow_node": "em_convergence",
+  "request_id": "2026-09-13-mgtap-early256-scientific-review-01",
+  "source_thread_id": "/root",
+  "parent_thread_id": "/root",
+  "operator_thread_id": "/root/mgtap_transport",
+  "execution_mode": "REUSE_DM_TRANSPORT",
+  "direction_id": "metric_ground_transport_allocation",
+  "repository": "CartmanFatass/My-paper-code",
+  "repository_url": "https://github.com/CartmanFatass/My-paper-code",
+  "commit_or_ref": "0d161633e3bb6884b56ef57a0200060b659c56a8",
+  "conversation_id": "6a9b6b01-a918-83e8-8b06-ca9dd8184dab",
+  "scientific_question": "Independently review the DM-selected early-exposure B design and the scientific interpretation/next-plan logic it permits. The actual DM decision is CONTINUE with one fresh unscreened mean-COND256 versus intact-DENSE256 native matched training unit (master8241), not another unchanged512/512 proposal and not the old unequal512/768 grant. The scientific uncertainty is whether this existing representation deserves further early native-learning development at256 episodes per arm, rather than retaining generic DENSE and ending an unproductive line. One realized B is the smallest sufficient class for an exploratory development point, not stable superiority. Strongest alternative: generic DENSE plus finite training/co-adaptation/trajectory variation can account for mixed earlier results, and another local point might only sustain weak-result chasing. A same-information same-exposure direct B discriminates the realized complete-procedure performance at a previously unobserved common early exposure; it cannot identify a learning curve, architecture mechanism, extra-training causality or an across-seed ordering. Please challenge whether this observation genuinely bears on the stated development action, identify any concrete design/comparator/RNG/unit/MEI/claim defect and the smallest proportionate correction or claim limit, and review the positive/inside/adverse/incomplete successor recommendations. Also assess whether the outcome-informed three-pair descriptive A is being used honestly without replacing any historical primary. Do not decide funding, lifecycle or scheduling; DM owns the final direction choice and must respond to material scientific findings.",
+  "deliverable": "One complete independent scientific review, conclusion first. Distinguish actual material defects from limitations or preferences. Explain evidence and reasoning for each finding; specify the minimal correction/claim limit and whether it affects the planned observation or only a later conclusion. State what the fixed one-pair design can and cannot establish and assess the DM's result-contingent next-plan reasoning. If no material scientific defect is found, say so with residual limitations. Do not output a grant/permission/lifecycle verdict, require a hypothetical customer, or add expensive diagnostics without a task-specific scientific necessity and cost comparison.",
+  "claim_ceiling": "B/EXPLORE: one realized private matched training pair on the declared five-UAV/fifty-user H256 host at256 training episodes per arm, conditioned-on-fit final32-world uncertainty. No stable ordering, curve/sample-efficiency claim, causal geometry/attention/credit/extra-training effect, cross-host transfer, novelty or formal UAV validation. Descriptive A is outcome-informed and adds zero independent fits.",
+  "reference_files": [
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_EARLY_EXPOSURE_B01_SCIENCE_CARD_20260913.md",
+      "purpose": "Read complete current B card: question, counterfactual/comparator, private RNG/fits, prospective256/256 exposure, primary/MEI/action branches and finite costs. Review material scientific defects and claim limits.",
+      "provenance": "DM-owned new prospective ordinary B within accepted mean-COND; zero new scientific invocation at publication."
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_POST_8231_MANAGEMENT_20260913.md",
+      "purpose": "Read A/RECON result and management comparison/contrary evidence/cost scope. Review the adequacy of the new early-learning question and result-contingent continuation logic, not lifecycle approval.",
+      "provenance": "Current DM decision and outcome-informed descriptive reanalysis; retains original results separately and no Portfolio Send."
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/post_8231_management_20260913/RUN_SUMMARY.json",
+      "purpose": "Complete tool-produced descriptive training-unit summary; assess whether its use remains within outcome-informed descriptive limits.",
+      "provenance": "One static invocation over six already accepted endpoints, no new independent fit or prospective pooled primary."
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/post_8231_management_20260913/WORK_PROJECTION.json",
+      "purpose": "Read exact computed per-arm/pair dominant work and separately labeled illustrative future envelope, actual exposure line and finite caps.",
+      "provenance": "Static integer count calculation from inspected source/card constants; not measured runtime or funded future sequence."
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260913_post_8231_continuation/archive/RESPONSE.md",
+      "commit_sha": "3abb76592596f7f8c30b4c41fce58632f007452d",
+      "purpose": "Read complete prior R review, especially opening and lines81-85,97. Distinguish declined unchanged512/512 proposal from a universal customer/positive-first/512 requirement.",
+      "provenance": "Immutable complete previous Convergence answer; strict old operation uncertain effect is preserved with no resend. Existing formed scientific content, not current lifecycle authority."
+    },
+    {
+      "path": "experiments/candidates/metric_ground_transport_allocation/mgtap_early_exposure_b01/study.py",
+      "purpose": "Inspect the changed native256/256 exposure, treatment/comparator data binding, fixed final32 panel and what reported quantities mean; engineering reviewer already covered code safety.",
+      "provenance": "New208-line attempt using accepted native learner/representations/reducer; no shared scientific dependency changes."
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "commit_sha": "4dfdb5f8f8b377eea29006d0715a737429c719bc",
+      "purpose": "Apply sections11.4,11.7-11.10 to B/EXPLORE evidence/claim/cost calibration; no universal Pro launch prerequisite or extra experiment quota.",
+      "provenance": "Current applicable empirical specification, independently pinned method source."
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "commit_sha": "4dfdb5f8f8b377eea29006d0715a737429c719bc",
+      "purpose": "Read sections2-4 and6 only for local information/history, expressivity vs finite learning, empirical comparison and genuine uncertainty units.",
+      "provenance": "Explanatory scientific foundation, not new mandatory validation or an authority beyond named specification."
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+      "commit_sha": "4dfdb5f8f8b377eea29006d0715a737429c719bc",
+      "purpose": "Read empirical unit/comparator/exposure/claim calibration relevant to one trained-pair native B and outcome-informed earlier endpoints.",
+      "provenance": "Task-relevant method explanation, no new policy requirement."
+    },
+    {
+      "path": "AGENTS.md",
+      "commit_sha": "4dfdb5f8f8b377eea29006d0715a737429c719bc",
+      "purpose": "Apply section2 Decision ownership only: DM direction/lifecycle ownership, meaningful independent scientific review and owner-only cross-direction adjustment.",
+      "provenance": "Latest published direct owner authority; supersedes older approval/finality language without rewriting historical evidence."
+    }
+  ],
+  "discussion_urls": [],
+  "constraints": [
+    "Latest owner authority: Convergence is an independent scientific Reviewer, not optional generic advice and not an investment/lifecycle/scheduling approver. DM reads the full review, responds to material findings, fixes actual scientific defects or bounds claims, and owns the decision. Portfolio is report-only absent explicit owner commission.",
+    "No new experimental output is supplied. Current new exposure: one completed static A/RECON calculation0.1189499s over six prior endpoints; zero new training fits, checkpoints loaded, trajectories or evaluation episodes; this new B is not launched at input publication. Do not infer results from a branch advance or read unlisted later output.",
+    "Machine-generated work projection: per arm train65536+final8192=73728 team ticks,128 rollouts,512 Adam calls,1679360 actor row uses. Sole pair2 fits/1 matched training unit:147456 ticks,256 rollouts,1024 Adam,3358720 actor row uses. No nested search or cost pilot. Illustrative two512-pair envelope is not selected or funded.",
+    "New DM limits450s per complete arm,900s summed native,2700s invoked support,3600s complete; no old-grant reuse. Historical non-identical pair walls361.85/377.11/432.30s are scale anchors, not per-unit forecasts. Full future support, peak memory and lifetime total cost remain UNKNOWN, never zero. No resource purchase/reallocation is in scope.",
+    "Keep all historical signs, original primaries, frozen8231 no-retry allocation, and old uncertain operation unchanged. Eligibility is not broad efficacy and old allocation exhaustion is not direction-wide zero authority. Any reviewer challenge to prior assumptions remains explicit; do not silently reinterpret historical constraints.",
+    "Only the named specification sections apply; explanatory method sources create no extra experiment or gating requirement. No exhaustive cause/search-before-learning prerequisite. Request a costly new diagnostic only if concretely necessary and compare it with the direct bounded B.",
+    "Do not execute code or scientific invocations. Write only the named response and one delivery-link comment on the existing direction Issue; preserve current descendant branch changes and fixed input SHA."
+  ],
+  "response_schema": [
+    "Scientific review conclusion and material findings",
+    "Design, comparison and evidence-unit assessment",
+    "Claim limits and result-contingent successor-plan review",
+    "Minimal necessary corrections, residual uncertainty and actual scope/cost"
+  ],
+  "delivery_mode": "github_delivery",
+  "github_delivery": {
+    "branch": "codex/mgtap",
+    "base_sha": "0d161633e3bb6884b56ef57a0200060b659c56a8",
+    "response_path": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260913_early256_scientific_review/archive/RESPONSE.md",
+    "issue_url": "https://github.com/CartmanFatass/My-paper-code/issues/18"
+  }
+}

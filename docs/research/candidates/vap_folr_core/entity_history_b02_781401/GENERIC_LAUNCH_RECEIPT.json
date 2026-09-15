@@ -1,0 +1,9 @@
+{
+  "supervisor_handle": "folr-b02-generic-781401-82b12d7e0",
+  "source_sha": "82b12d7e0f205ea228ca69e28e581ca6ee5f2ca6",
+  "acceptance_commit": "5094e1a00297395358bdc310e4014e545fcea2a4",
+  "ssh_returncode": 0,
+  "stdout": "2026-09-14T04:43:26Z\nTask 'folr-b02-generic-781401-82b12d7e0' started in tmux session 'agent_folr-b02-generic-781401-82b12d7e0'. Output: /home/wu/.agent-tasks/folr-b02-generic-781401-82b12d7e0/task.log\n{\"task\": \"folr-b02-generic-781401-82b12d7e0\", \"status\": \"running\", \"exit_code\": null, \"pid\": 3658558, \"uptime_seconds\": 0, \"tmux_active\": true}\n",
+  "stderr": "",
+  "local_observed_wall_seconds": 0.6570000000065193
+}

@@ -1,0 +1,9 @@
+# B12 technical acceptance — 2026-09-14
+
+DM accepts source15eaa7ea655a0f42a0ec3986927487892bdce212 and the exact SUPERVISOR_COMMAND.txt (SHA256de1c4a35893f581e4e27e70e8c22b5b247dc169ca098284ba243e1bd21bbcf89). Independent Sol/high Reviewer `/root/rv_rcle_b12` eventE01 found no material source/command finding. New B12 domain/seed32/fixed1024/four512panels preserve every B08–B11 entry and the unchanged FP64 learning/native law. The command preserves four outer argv values with one complete scientific-command argument; admission&&gdb/Pythonfaulthandler, thread1, fullSHA, output/control and1800s operationalwatchdog agree. No old600/300 scientific-validity gate applies.
+
+The exact-source focused remote synthetic suite passed5/7deselected in2.58s; no scientific root/rollout was used and creator removed scratch. Control exists and scientific out does not. PLAN records newbatch monitor `/root/monitor_rcle_b12`; its earlier null value was preparatory, not a completed adoption. Actual supervisor acceptance/adoption, full output validity or a fatal stack remain execution facts.
+
+Record deviation: prior15eaa7ea6 and earlier DM commit messages used Owner-Approval-Scope:none instead of the required literal scope:none footer. Historical commits are retained; subsequent commits use the required footer. No code/source/scientific repair follows from that metadata deviation.
+
+Read-only analysis L0: ANALYZE_RECORDED.py adapts the existing B10 retained-byte analyzer to B12 paths/seed32/fullSHA/object. It checks the complete curves, optimizer/model/FP64 state, panel identities/counts/finite values and independent paired arithmetic over stored bytes. It constructs no model or rollout. The old B10 <=300s assertion is deliberately not inherited: time is reported, while actual complete endpoints and identity determine validity. No new test/screening exposure or runtime proof follows. DM owns this analyzer and its one execution after full terminal collection.

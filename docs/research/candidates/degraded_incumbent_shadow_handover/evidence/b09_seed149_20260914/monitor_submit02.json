@@ -1,0 +1,22 @@
+{
+  "batch": "dish-b09-s149-20260914",
+  "handle": "dish-b09-s149-3a749256-20260914-submit02",
+  "assignment": "dish-b09-s149-20260914",
+  "source_sha": "3a749256d2aaf16345308827518283c8d2b91ad7",
+  "node": "hmasd-wsl-node",
+  "cwd": "/home/wu/hmasd-worktrees/dish-b09-3a749256",
+  "supervisor": "/usr/local/bin/agent-task",
+  "status": "finished",
+  "active_set": [],
+  "observations": [
+    {"observed_at":"2026-09-14T02:14:35Z","direct_status":{"status":"running","exit_code":null,"pid":3434447,"uptime_seconds":22,"tmux_active":true},"enclosing_ssh_wall_seconds":0.9},
+    {"observed_at":"2026-09-14T02:15:58Z","direct_status":{"status":"running","exit_code":null,"pid":3434447,"uptime_seconds":82,"tmux_active":true},"enclosing_ssh_wall_seconds":60.7},
+    {"observed_at":"2026-09-14T02:16:52Z","direct_status":{"status":"running","exit_code":null,"pid":3434447,"uptime_seconds":136,"tmux_active":true},"enclosing_ssh_wall_seconds":60.6},
+    {"observed_at":"2026-09-14T02:17:42Z","direct_status":{"status":"running","exit_code":null,"pid":3434447,"uptime_seconds":186,"tmux_active":true},"enclosing_ssh_wall_seconds":60.7},
+    {"observed_at":"2026-09-14T02:21:12Z","direct_status":{"status":"finished","exit_code":0,"pid":3434447,"uptime_seconds":454,"tmux_active":false},"bounded_log":"supervisor exited code 0 at 2026-09-14T10:21:10+08:00; runner status COMPLETE","enclosing_ssh_wall_seconds":1.0}
+  ],
+  "last_observation":"2026-09-14T02:21:12Z",
+  "next_due":null,
+  "observation_command_wall_seconds_total":243.6,
+  "delivery":{"adopted":"sent","terminal":"sent"}
+}

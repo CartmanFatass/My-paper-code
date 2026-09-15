@@ -1,0 +1,48 @@
+{
+  "recorded_by_dm_utc": "2026-09-14T20:51:46.084809+00:00",
+  "source": "Actual current Transport durable queue; independently compared HANDOFF prompt digest.",
+  "queue_record": {
+    "request_id": "2026-09-14-folr-augmentation-b01-result-closeout-review-01",
+    "input_reference": {
+      "handoff_path": "C:/Projects/HMASD-worktrees/codex-vap-folr/docs/research/candidates/vap_folr_core/pro_packets/20260914_augmentation_b01_result_closeout_review/HANDOFF.json",
+      "handoff_commit_or_ref": "48c8658dfb887ee5a566bfde6a9961a18d7ba610",
+      "scientific_input_commit": "15f47648566c923c28389778b67313c6292e4a9a",
+      "task_commit": "53f9f10aa8612da7375ef7c8e2492670fb53801f",
+      "task_path": "docs/research/candidates/vap_folr_core/pro_packets/20260914_augmentation_b01_result_closeout_review/TASK.md",
+      "task_url": "https://github.com/CartmanFatass/My-paper-code/blob/53f9f10aa8612da7375ef7c8e2492670fb53801f/docs/research/candidates/vap_folr_core/pro_packets/20260914_augmentation_b01_result_closeout_review/TASK.md",
+      "dispatch_prompt_sha256": "3896abfb211903f3caf49c03b18e9af04b84b628877a36e4848e76b163d02222",
+      "dispatch_prompt_chars": 1937,
+      "dispatch_prompt_utf8_bytes": 1937,
+      "dispatch_prompt_terminal_lf": false
+    },
+    "author_return_route": "01a09e16-f7b1-7e60-83a0-ba2a7cd969bc",
+    "binding": "em:vap_folr_core:convergence",
+    "provider_url": "https://chatgpt.com/c/6aa18137-9d88-83e8-a01f-46630813faf8",
+    "provider_model": "GPT-6 Astra",
+    "provider_mode": "Pro",
+    "archive_destination": "C:/Projects/HMASD-worktrees/codex-vap-folr/docs/research/candidates/vap_folr_core/pro_packets/20260914_augmentation_b01_result_closeout_review/archive",
+    "executor_adoption_observed_at": "2026-09-14T20:46:00.3985413Z",
+    "existing_accepted_effects_reconciled": true,
+    "existing_accepted_effects_summary": "Three prior user requests are present; none contains this fixed TASK URL or request identity. No acceptance of this request observed.",
+    "state": "WAITING_GENERATION",
+    "accepted_user_node_id": "7ee820c2-d2d1-495c-af8e-eeb77dab4c19",
+    "assistant_node_id": null,
+    "send_count": 1,
+    "manual_send_count": 0,
+    "composer_verified_exact": true,
+    "composer_verified_chars": 1937,
+    "send_observed_at": "2026-09-14T20:46:33.9318003Z",
+    "accepted_user_raw_innerText_chars": 1948,
+    "accepted_user_prompt_chars_without_ui_suffix": 1937,
+    "accepted_user_prompt_exact_match_without_ui_suffix": true,
+    "accepted_user_ui_suffix": "\\n\\nShow more",
+    "next_action": "Observe the accepted request to terminal completion; do not send, edit, stop, or regenerate."
+  },
+  "dm_verification": {
+    "prompt_digest_matches": true,
+    "same_request_handoff": true,
+    "one_send_reported": true,
+    "full_response_pending": true,
+    "raw_input_capture_requested_from_actual_provider": true
+  }
+}

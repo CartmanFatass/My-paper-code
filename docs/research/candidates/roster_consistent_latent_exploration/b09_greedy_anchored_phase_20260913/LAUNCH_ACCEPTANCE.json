@@ -1,0 +1,21 @@
+{
+  "source_sha": "38a29c7e3ee55cfb6fa732bdb02a271e835b45b5",
+  "command_publication_commit": "39e2c6b2c5a9599c2d9746fb90ad1deafcd41e74",
+  "command_git_bytes": 797,
+  "command_git_sha256": "04e9b5c68abaf7b2af11d9d105a930045cfc7bc5321db17bef5ad90104c8b8be",
+  "handle": "rcle-b09-s29-38a29c7e3",
+  "node": "wsl_4070",
+  "remote_checkout": "/home/wu/hmasd-worktrees/rcle-b09-38a29c7e3",
+  "acceptance_exit_code": 0,
+  "acceptance_stdout": "Task 'rcle-b09-s29-38a29c7e3' started in tmux session 'agent_rcle-b09-s29-38a29c7e3'. Output: /home/wu/.agent-tasks/rcle-b09-s29-38a29c7e3/task.log\n",
+  "acceptance_stderr": "",
+  "launch_support_wall_s": 0.8600000000442378,
+  "scientific_result": "COMPLETE/exit0;256 updates and four panels verified from raw bytes",
+  "monitor": "/root/dm_rcle_resume/mon_l_l_rcle",
+  "monitor_adoption": "MONITOR_ADOPTED; first alive128/256 and admission passed",
+  "terminal_event": "rcle-b09-s29-38a29c7e3-terminal-20260913T212242Z",
+  "terminal_utc": "2026-09-13T21:22:42Z",
+  "whole_native_wall_s": 47.13,
+  "peak_rss_kib": 617396,
+  "source_metadata_deviation": "none; raw summary/checkpoint carry exact full source SHA"
+}

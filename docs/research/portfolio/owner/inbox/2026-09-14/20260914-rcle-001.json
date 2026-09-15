@@ -1,0 +1,81 @@
+{
+  "id": "20260914-rcle-001",
+  "created": "2026-09-14T00:19:34-07:00",
+  "direction": "roster_consistent_latent_exploration",
+  "tier": "direction",
+  "kind": "portfolio",
+  "title": "RCLE E01之后：向Portfolio建议学习先验强度",
+  "context": "完整审查已回应；新建议待Portfolio方向决定，零新拟合，保留席位。",
+  "options": [
+    {
+      "key": "a",
+      "label": "CONTINUE：可学习先验强度的有限B",
+      "consequence": "根据Portfolio决定由DM固定新对象并实际实现、验证、执行和intake；不保证阳性。"
+    },
+    {
+      "key": "b",
+      "label": "PARK：保留证据和重新研究条件",
+      "consequence": "仅在Portfolio合规决定后完成知识保全和席位交接；不以support或文档结束为理由。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "E01只改变执行法则，未改变先验在训练中的固定强度；具体学习问题仍可能改变开发选择。",
+  "evidence": [
+    "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260914_e01_portfolio_direction/REPORT.md",
+    "docs/research/candidates/roster_consistent_latent_exploration/RCLE_FIXED_MODAL_REUSE_E01_INTAKE_20260914.md"
+  ],
+  "ledger_row": "2026-09-14T07:12:31+00:00|roster_consistent_latent_exploration",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "RCLE 应继续一个可学习先验强度的有限 B，还是暂缓；这是提交 Portfolio 的建议，供 owner 异步介入，不等待新的 owner 批准。",
+    "changes_if_approved": [
+      {
+        "target": "RCLE direction",
+        "from": "E01完成，方向待Portfolio决定，仍占用1席",
+        "to": "按Portfolio的合规决定执行；DM推荐新的可学习先验强度B"
+      }
+    ],
+    "if_refused": "认真处理Portfolio的PARK理由或具体修改，保留完整证据与三席记录；不擅自释放槽位。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260914_e01_portfolio_direction/REPORT.md",
+        "quote": "改变训练中的可学习自由度，能直接回答固定 mode 测量没有回答的问题：一个真实学得的新 package\n能否提供超越有能力规则的有限服务增量，并呈现怎样的恢复后果。",
+        "why": "具体学习法则问题仍未解决，保持起点能力，可用一个有限对象判别。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260914_e01_portfolio_direction/REPORT.md",
+        "quote": "最强 PARK 理由也真实存在：当前 sampled 与 mode 均未给出替换 greedy 的服务理由，新标量\n可能只重现规则，完整工程/解释和跨方向机会成本未知。",
+        "why": "继续的边际价值并不确定，不能保证收益或把小改动当成免费。"
+      }
+    ],
+    "uncertainty": [
+      "eta可能只加强greedy；未测训练/面板总体不确定性。",
+      "B11缺失与SIG11原因未知；新拟合及完整成本尚未实测。",
+      "FOLR同会话先行，须待其完整答复及释放绑定后提交本轮。"
+    ],
+    "cost": {
+      "compute": "建议1fit/1024更新/68096episodes/4358144ticks；零新原生曝光。历史已知链441.41s不是完整费用，support尾项UNKNOWN，600s不是停止门。",
+      "owner_time": "无需同步回复；Portfolio读取完整报告后作方向决定。",
+      "reversibility": "reversible",
+      "waits_on_this": false
+    },
+    "verdict_text": "DM 建议 **CONTINUE：用一个有限的新 B 检验可学习先验强度**，提交 Portfolio 作最终方向判断。",
+    "source": "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260914_e01_portfolio_direction/REPORT.md"
+  },
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-14T08:54:48+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260914_e01_portfolio_direction/archive/RESPONSE.md",
+      "record": "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260914_e01_portfolio_direction/INTAKE.md",
+      "state": "applied",
+      "summary": "已全文读取并应用Portfolio的CONTINUE裁决；选择原B13有限真实学习比较，保留本席位及历史反证；实际启动、准入与结果另记。"
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "question": "按 Portfolio 完整裁决，将 RCLE 释放的唯一空缺用于复开原 ACVC DM，并实际开展一次新 C 训练及 C/F/own-dwell 比较；此条记录已委托决定，供异步干预，不等待批准。",
+  "changes_if_approved": [
+    {
+      "target": "共享登记表 · 本次 RCLE 单一空缺",
+      "from": "2占用、0预留、1真实空缺；ACVC归档PARK",
+      "to": "先2占用、1个ACVC预留；原DM实际接续后转换为3占用、0预留，不增加第四席"
+    }
+  ],
+  "if_refused": "按真实 owner 覆盖在干净边界调整未执行的后继工作，保全已执行事实与全部旧结果；不自动改选DISH或重复创建任务。",
+  "evidence_for": [
+    {
+      "path": "docs/research/portfolio/pro_packets/20260914_rcle_park_vacancy_selection/archive/RESPONSE.md",
+      "quote": "**选择 ACVC（`acvc`），作出方向级重开并 CONTINUE 的决定。复用已登记的原 DM `01a09dfa-0655-7831-aa3a-9fff2ddd2508`，配置为 Astra/max，保留历史 MEDIUM、recasts2 及已停止家族的边界。**",
+      "why": "完整裁决给出明确研究目标与新投入理由，而不是再做一次仅重入审核。"
+    },
+    {
+      "path": "docs/research/candidates/acvc/PARK.md",
+      "quote": "- 聚集场景 K/B02 的两个独立终点分别出现固定回退优于原动作及各自停留的均值收益。B02 两项增量为0.1046/0.0607 J，但有4/64、11/64个世界更差；简单停留自身也提高0.0439 J。[K结果](ACVC_CLUSTER_DEPLOYMENT_B01_RESULT_EVIDENCE_20260912.md)、[B02结果](ACVC_CLUSTER_DEPLOYMENT_B02_RESULT_EVIDENCE_20260913.md)。",
+      "why": "原PARK记录保留直接比较收益和不利结果；支持研究新学得proposer上的用途，但不是稳定性证明。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/portfolio/pro_packets/20260914_rcle_park_vacancy_selection/archive/RESPONSE.md",
+      "quote": "这是本次最强的反对意见：两个端点已经可以诚实保存；第三个正结果仍不能认证稳定性，第三个负结果也不撤销前两个端点。继续维护、运行和解释这条路径会发生完整研究成本，而不只是一次原生计时。**不立即填位、让 ACVC 继续 PARK，仍是可以认真选择的方案。**",
+      "why": "继续PARK仍是认真可选项；第三次正结果不能认证稳定性，完整研究成本并非仅165秒。"
+    }
+  ],
+  "uncertainty": [
+    "这次没有新增ACVC实验事实；改变的是接近、未量化的投入判断。",
+    "失败学习门控、train-through-F、uncertain/delayed家族和独立C01资格不复活或合并。",
+    "新训练及评价随机实现均变化时不隔离纯训练方差；双比较共享F。"
+  ],
+  "cost": {
+    "compute": "单拟合512训练episode、1024更新、192最终评价、180224teamticks；历史165.33/164.53s仅参考，完整support/provider/累计成本UNKNOWN。",
+    "owner_time": "无需等待用户回复；只在异步实际覆盖到达时应用。",
+    "reversibility": "reversible",
+    "waits_on_this": "没有等待用户批准的工作；RCLE负责一次实际预留和原DM接续，普通后续研究由ACVC DM执行。"
+  },
+  "verdict_text": "**选择 ACVC（`acvc`），作出方向级重开并 CONTINUE 的决定。复用已登记的原 DM `01a09dfa-0655-7831-aa3a-9fff2ddd2508`，配置为 Astra/max，保留历史 MEDIUM、recasts2 及已停止家族的边界。**",
+  "source": "docs/research/portfolio/pro_packets/20260914_rcle_park_vacancy_selection/archive/RESPONSE.md"
+}

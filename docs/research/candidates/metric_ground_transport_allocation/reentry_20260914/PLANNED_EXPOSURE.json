@@ -1,0 +1,64 @@
+{
+  "object": "MGTAP-LR-SELECTION-B01",
+  "status": "PLANNED_NOT_EXECUTED",
+  "learning_rates": {
+    "base": 0.0003,
+    "slow": 0.0001,
+    "fast": 0.001
+  },
+  "selection_master": 8251,
+  "holdout_master": 8252,
+  "per_fit": {
+    "train_episodes": 256,
+    "evaluation_episodes": 32,
+    "train_team_ticks": 65536,
+    "evaluation_team_ticks": 8192,
+    "rollouts": 128,
+    "adam_calls": 512,
+    "total_team_ticks": 73728,
+    "actor_row_uses_collection_evaluation_replay": 1679360
+  },
+  "stages": {
+    "selection": {
+      "fits": 6,
+      "train_episodes": 1536,
+      "evaluation_episodes": 192,
+      "train_team_ticks": 393216,
+      "evaluation_team_ticks": 49152,
+      "rollouts": 768,
+      "adam_calls": 3072,
+      "total_team_ticks": 442368,
+      "actor_row_uses_collection_evaluation_replay": 10076160
+    },
+    "holdout": {
+      "fits": 2,
+      "train_episodes": 512,
+      "evaluation_episodes": 64,
+      "train_team_ticks": 131072,
+      "evaluation_team_ticks": 16384,
+      "rollouts": 256,
+      "adam_calls": 1024,
+      "total_team_ticks": 147456,
+      "actor_row_uses_collection_evaluation_replay": 3358720
+    }
+  },
+  "total": {
+    "fits": 8,
+    "train_episodes": 2048,
+    "evaluation_episodes": 256,
+    "train_team_ticks": 524288,
+    "evaluation_team_ticks": 65536,
+    "rollouts": 1024,
+    "adam_calls": 4096,
+    "total_team_ticks": 589824,
+    "actor_row_uses_collection_evaluation_replay": 13434880
+  },
+  "independence": {
+    "selection_training_masters": 1,
+    "holdout_training_pairs": 1,
+    "whole_selection_procedure_replications": 1,
+    "notes": "six candidate fits are not six independent selected-program replications"
+  },
+  "nested_work": "three learning-rate candidates per arm; no trajectory, policy or checkpoint search",
+  "actual_new_native_exposure_at_protocol_preparation": 0
+}

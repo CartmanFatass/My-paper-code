@@ -1,0 +1,27 @@
+{
+  "status": "READY_UNSENT_BEFORE_SUBMISSION",
+  "authority": "PRO_FINAL Portfolio F; DM complete Generic acceptance; no further approval",
+  "source_sha": "5dce539ed54afd4334d09db9dcd94df38c52c2fc",
+  "task": "folr-ref-use-bank-781301-5dce539ed54a",
+  "node": "hmasd-wsl-node",
+  "cwd": "/home/wu/hmasd-worktrees/folr-ref-use-5dce539ed54a",
+  "output": "/home/wu/projects/HMASD/temp/directions/vap_folr_core/exp/retained_reference_use_b01_781301/BANK",
+  "command": "/home/wu/projects/HMASD/temp/directions/vap_folr_core/exp/retained_reference_use_b01_781301/prepared/BANK.sh",
+  "command_sha256": "d6122f0d9b9f907f57f89714e6f5731ac796324ec7f37cfed14f4e635c9f3b47",
+  "arguments": [
+    "5dce539ed54afd4334d09db9dcd94df38c52c2fc",
+    "/home/wu/hmasd-worktrees/folr-ref-use-5dce539ed54a",
+    "/home/wu/projects/HMASD/temp/directions/vap_folr_core/exp/retained_reference_use_b01_781301/BANK",
+    "/home/wu/projects/HMASD/temp/directions/vap_folr_core/exp/retained_reference_use_b01_781301/GENERIC/summary.json",
+    "/home/wu/hmasd-inputs/vap_folr_core/retained_reference_use_b01_781301/BANK_final.pt"
+  ],
+  "generic_summary_sha256": "e9929a131c57a6bbb4e5bbc11cdd4296d1563bd9506ec29bd1e01e0a2dd51174",
+  "retained_checkpoint_sha256": "2385b6ea0f03b36fd4e0f05006acbe64922a8dd9c2c8fa7d0cd396d5ed090989",
+  "bank_new_training_instances": 0,
+  "bank_new_optimizer_steps": 0,
+  "bank_evaluation_seed": 2781301,
+  "bank_evaluation_episodes": 128,
+  "bank_evaluation_ticks": 2560,
+  "complete_invocation_cap_seconds": 300,
+  "monitor": "/root/dm_folr_resume/monitor_folr"
+}

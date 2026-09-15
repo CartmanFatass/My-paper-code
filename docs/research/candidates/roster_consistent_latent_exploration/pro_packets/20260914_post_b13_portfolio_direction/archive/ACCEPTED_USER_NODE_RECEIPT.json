@@ -1,0 +1,23 @@
+{
+  "provider_conversation": "https://chatgpt.com/c/6aa7836e-e4a0-83e8-985d-c633d94935b1",
+  "provider_user_message_id": "bf84ddba-6465-44c7-8ce4-237e60d26c8c",
+  "capture_mode": "read-only same-node DOM capture after terminal response",
+  "capture_time": null,
+  "capture_time_note": "The read-only CUA capture did not expose a wall-clock timestamp; no timestamp is invented. The 2026-09-14T11:10:18.787Z timestamp supplied by the parent refers to the earlier response capture, not this node recapture.",
+  "selector": "[data-message-id=bf84ddba-6465-44c7-8ce4-237e60d26c8c] [data-testid=collapsible-user-message-content]",
+  "body_chars": 23294,
+  "body_utf8_bytes": 23294,
+  "body_sha256": "44dd2c9414a2f94287ded8aa47ad47a700436bbb6877daecf8f658690c1c1b44",
+  "body_ends_with_lf": false,
+  "body_lf_count": 172,
+  "outer_user_node_inner_text_chars_with_ui_control": 23305,
+  "outer_user_node_text_content_chars": 23267,
+  "ui_control": "Show more",
+  "prior_observation_before_ui_control_chars": 23294,
+  "prior_observation_with_ui_control_chars": 23305,
+  "prior_raw_inner_text_sha256": "5d67ac93cf0f1248106f3bd30a2a329366358139718206398f700e36a8910938",
+  "archive_file": "ACCEPTED_USER_NODE.txt",
+  "archive_file_bytes": 23295,
+  "archive_file_sha256": "854f6d4c844d437d21b4b9b1ea0d8e13952bb0267c01f46bfcbf166fa21719f2",
+  "archive_file_note": "The captured body bytes are preserved exactly; apply_patch adds one terminal LF to the text-file container. body_sha256 is the authoritative captured-node digest."
+}

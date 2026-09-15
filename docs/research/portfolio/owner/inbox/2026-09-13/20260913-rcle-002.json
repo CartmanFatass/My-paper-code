@@ -1,0 +1,81 @@
+{
+  "id": "20260913-rcle-002",
+  "created": "2026-09-13T12:16:21-07:00",
+  "direction": "roster_consistent_latent_exploration",
+  "tier": "direction",
+  "kind": "close-call",
+  "title": "仅保留 greedy 锚定候选：接近不继续的取舍",
+  "context": "B08 确有学习但服务落后规则。完整 Convergence 已选择 A，仅保留给定的新概率法则作为后续有限对象与投资说明候选；不解除旧 HOLD 或启动 fit。",
+  "options": [
+    {
+      "key": "a",
+      "label": "仅保留给定候选，后续另作有限对象与投资说明",
+      "consequence": "仅应用候选保留；两个 HOLD 与 ACTIVE/MEDIUM 不变，不分配 fit、seed、card、cap。"
+    },
+    {
+      "key": "b",
+      "label": "当前不推荐新经验候选，保持家族开放和 ACTIVE",
+      "consequence": "不保留新经验候选；既有证据、两个 HOLD、开放家族和方向占位不变。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "完整答复符合固定问题和规范；真实学习支持有限问题，但强 greedy 与未知增量能力使之成为 close-call。",
+  "evidence": [
+    "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260913_greedy_anchored_continuation/INTAKE.md",
+    "docs\\research\\candidates\\roster_consistent_latent_exploration\\pro_packets\\20260913_greedy_anchored_continuation\\archive\\RESPONSE.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-13.md#L13",
+  "brief": "docs/research/portfolio/owner/briefs/roster_consistent_latent_exploration/2026-09-13_RCLE_GREEDY_ANCHORED_CANDIDATE.md",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否保留唯一的 greedy 锚定学习修正问题供后续有限 B 对象与投资说明？Pro 已选 A，但标为 close-call，本项供异步干预。",
+    "changes_if_approved": [
+      {
+        "target": "roster_consistent_latent_exploration/DIRECTION.md 当前科学位置、INTAKE 与 continuation",
+        "from": "已准备且未应用的 A/B 候选建议",
+        "to": "仅保留给定候选；两个原配方 HOLD、家族开放和 ACTIVE/MEDIUM 保留；无 fit、card 或新限额"
+      }
+    ],
+    "if_refused": "依所有者新指令改为当前不推荐新经验候选，保留既有证据、两个 HOLD 和 ACTIVE 方向；不自动替换算法、启动训练或再发咨询。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260913_greedy_anchored_continuation/archive/RESPONSE.md",
+        "quote": "当前候选已经有固定的公共计算、唯一的相位偏好形式和两个不可事后择弱的参照，因而可把“是否产生额外服务”与“只继承了规则”分开读。",
+        "why": "B08 确有初始化学习，给定的改变使未来比较能考察学习是否增加已有强规则没有提供的服务；本次只保留问题。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260913_greedy_anchored_continuation/archive/RESPONSE.md",
+        "quote": "B08 的正初始化学习使这个问题具有有限的经验动机；其巨大的 greedy/nearest 差距则是最强反对证据，绝不是已经识别出“随机初始化导致失败”或“加先验就会修好”。",
+        "why": "greedy 已很强，锚定可能只导入规则能力，探索偏离反而损害轨迹；旧先验方案未成功，新候选没有实测能力。"
+      }
+    ],
+    "uncertainty": [
+      "这是接近 B（当前不推荐新经验候选）的、结果知情的候选价值判断，不是效力结论。",
+      "新初始化的原生服务、训练增量和完整成本均未知；不能从单步 .9 偏好推断完整回报或安全保障。",
+      "后续对象与投资仍须明确；本项不选择 fit、seed、card、cap，也不视为原 HOLD 的新用途或新证据。"
+    ],
+    "cost": {
+      "compute": "本轮仅一次获准 Send；无新 fit、模型、RNG、轨迹、评估、分析或测试。未来拟议规模 18,432 episodes，真实 native/support/完整成本 UNKNOWN；新 grant NONE/cap UNASSIGNED。旧 B08 native45.39秒、support420.3480783秒不重复计费或转移旧限额。",
+      "owner_time": "可异步查看，无需即时回复。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing；仅候选保留已应用，训练未获分配，方向持续占位。"
+    },
+    "verdict_text": "选择 A：在仍开放的 joint-quota-phase 家族内，仅保留这一个明确提出的 greedy-anchored learned-correction 问题，作为以后另行进行有限 B 对象与投资说明的候选。",
+    "source": "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260913_greedy_anchored_continuation/archive/RESPONSE.md"
+  },
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-13T19:16:40+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs\\research\\candidates\\roster_consistent_latent_exploration\\pro_packets\\20260913_greedy_anchored_continuation\\archive\\RESPONSE.md",
+      "record": "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260913_greedy_anchored_continuation/INTAKE.md",
+      "state": "applied",
+      "summary": "已应用 A，仅保留唯一候选供后续有限对象与投资说明；close-call 已记录，两个 HOLD、ACTIVE/MEDIUM 和 no-fit/无 cap 边界不变。"
+    }
+  ]
+}

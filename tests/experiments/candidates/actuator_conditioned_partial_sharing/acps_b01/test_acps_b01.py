@@ -101,12 +101,12 @@ def test_source_collector_keeps_proposal_and_unscaled_history():
     assert rows[0]["steps"] == 2 and not limits
 
 
-def summaries(delta):
-    return [dict(arm=arm, seed=MASTER, complete=True,
+def summaries(delta, master=MASTER):
+    return [dict(arm=arm, seed=master, complete=True,
                  counts=dict(train_episodes=512, train_team_steps=131072, eval_episodes=32,
                              eval_team_steps=8192, optimizer_steps=1024, rollouts=256),
-                 rows=[dict(phase="eval", episode=e, steps=256, pair_master=MASTER, arm=arm,
-                            reset_seed=100000 * MASTER + 2000 + e, J=delta if arm == "ACPS" else 0.)
+                 rows=[dict(phase="eval", episode=e, steps=256, pair_master=master, arm=arm,
+                            reset_seed=100000 * master + 2000 + e, J=delta if arm == "ACPS" else 0.)
                        for e in range(32)]) for arm in ("SHARED", "ACPS")]
 
 
@@ -125,3 +125,23 @@ def test_primary_rule_and_serialized_consumer(delta, reading, tmp_path):
     broken = copy.deepcopy(summaries(delta))
     broken[0]["counts"]["optimizer_steps"] = 0
     assert primary(broken)["reading"] == "INCOMPLETE"
+
+
+@pytest.mark.parametrize("master", [9101, 9102])
+@pytest.mark.parametrize("delta,reading", [(.02, "ABOVE_MEI"), (.01, "INSIDE_MEI"),
+                                           (-.01, "INSIDE_MEI"), (-.02, "ADVERSE")])
+def test_primary_explicit_master_rejects_foreign_or_mixed_binding(master, delta, reading):
+    bound = json.loads(json.dumps(summaries(delta, master)))
+    result = primary(bound, master=master)
+    assert result["complete"] and result["reading"] == reading
+    assert result["mean"] == delta and len(result["differences"]) == 32
+    assert primary(bound)["complete"] is (master == MASTER)
+    foreign = 9102 if master == 9101 else 9101
+    assert not primary(bound, master=foreign)["complete"]
+    for field in ("pair_master", "reset_seed"):
+        broken = copy.deepcopy(bound)
+        broken[1]["rows"][17][field] += 1
+        assert not primary(broken, master=master)["complete"]
+    broken = copy.deepcopy(bound)
+    broken[0]["seed"] = foreign
+    assert not primary(broken, master=master)["complete"]

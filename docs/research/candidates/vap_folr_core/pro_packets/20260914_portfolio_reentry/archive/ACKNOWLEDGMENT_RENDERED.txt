@@ -1,0 +1,5 @@
+收讫，作为本轮完整选择交换的 FOLR DM 直接回应。单块 fresh BANK16／fresh Generic64 B02 是你独立作出的重入决定；改变的是投入价值判断，没有新增数据，也不改写旧 PARK 理由、F 的 GENERIC_ONLY_BANK_WORSE、E 缺失 primary 或其他历史限制。
+
+按本次反馈，当前为代码已提交、独立审查未发现实质问题、远端检查待完成，尚无科学调用接受。时间安排是 DM 运作计划，不是 owner 硬限或费用预测；完整历史及 provider 费用仍为 UNKNOWN，无第二块或额外付费资源。
+
+下一科研边界是该块的实际结果或具体失败及 DM intake。不重复未变化的 PARK／重选评估，不增加 Portfolio 或 Clerk 批准步骤；后续科学回应仍由 DM 直接完成。

@@ -1,0 +1,100 @@
+{
+  "caller_role": "em",
+  "workflow_node": "em_convergence",
+  "execution_mode": "REUSE_SINGLETON",
+  "request_id": "2026-09-14-mgtap-lr-selection-design-review-01",
+  "source_thread_id": "01a09cd8-676e-7513-806d-a86b7e104518",
+  "parent_thread_id": "01a09cd8-676e-7513-806d-a86b7e104518",
+  "operator_thread_id": "01a09ea0-4a86-75b0-826d-6f864efa7480",
+  "direction_id": "metric_ground_transport_allocation",
+  "conversation_id": "6a9b6b01-a918-83e8-8b06-ca9dd8184dab",
+  "repository": "CartmanFatass/My-paper-code",
+  "repository_url": "https://github.com/CartmanFatass/My-paper-code",
+  "commit_or_ref": "3594eafe28ed91b2558fcc064e46ea714edd2e1c",
+  "scientific_question": "Independently review the prospective MGTAP-LR-SELECTION-B01 scientific design and the DM's changed development question after reversible PARK. DM has chosen CONTINUE: can mean-COND remain a useful actively developed optional branch after the SAME finite LR selection opportunity as intact-DENSE, read only on a fresh fitted holdout pair? This is B/EXPLORE, comparing two whole selection-and-learning procedures, not pure geometry, causal tuning benefit, optimal baselines, stable ordering or population confirmation. The earlier valid early256 pairs remain +0.015128847632690413 and -0.05684388886006531 J; mixed equal512 and adverse distinct TOP/unequal objects remain separate. Prior full independent review correctly rejected inability to prove mechanism/population ordering as a reason to forbid another B. The new finite LR object is selected because prior toy results made scalar-setting sensitivity a concrete development alternative, not because toy tuning explains native losses or because tuning is mandatory. Challenge whether that inference supports the added decision value over an unchanged two-fit recurrence or maintained PARK; the strongest alternative remains PARK given weak/mixed native evidence and the cost of eight fits. The proposed observation discriminates by directly testing whether each arm's separately selected configuration produces a useful fresh local COND-minus-DENSE holdout contrast, conditional on this finite programme; it does not establish how much tuning helped. Both arms fit base3e-4, slow1e-4 and fast1e-3 at selection master8251, each256 train +32 validation H256, with corresponding-arm initialization matched across candidates and NEW candidate/arm-owned optimizer/RNG instances. Each arm independently maximizes OWN mean validation J, ties base/slow/fast, never maximizes the arm difference. Complete scores and selection JSON/hash are saved before ANY holdout fit construction. A fresh pair at8252 trains selected per-arm rates from new initialization for256 episodes, with sole32 final worlds. No selection weights transfer. Review information/comparator fairness, candidate/state/RNG independence versus intentional pairing, finite-selection and holdout contamination risks, the primary and conditional uncertainty, missing-candidate handling, and proposed positive/inside/adverse consequences. Primary is ordered mean32(J_COND-J_DENSE), MEI0.01 inclusive interior; all outcomes retained, no automatic seed/grid expansion. Six correlated candidate fits and32 holdout worlds are NOT independent programme replications. There is one selection master and one final fitted pair. Be specific about material flaws, minimal corrections or claim limits. No full native runner/result exists at this input revision: the published protocol and13 synthetic tests cover only the selection contract. Runner implementation proceeds independently and will receive changed-path technical review. This review does not grant lifecycle, funding or launch permission; DM will respond to substantive findings and owns acceptance and next choices.",
+  "deliverable": "Conclusion-first independent scientific review of the prospective selected-program comparison and its development rationale. Distinguish direct prior observations, DM judgment, material design/integrity defects, and optional alternatives. Explicitly assess whether the fresh selected-arm contrast is useful for the stated optional-branch decision despite selection/training-population uncertainty, and whether eight fits are proportionate relative to two or maintained PARK. Challenge substantive assumptions without converting missing mechanism proof, a positive-first requirement or a fixed seed quota into a B gate. For each material finding give specific evidence, impact and smallest correction or narrower claim. Identify exact pinned sections accessed and any decision-relevant access gap; do not replace a missing source with assumed contents. No experiment execution or lifecycle changes.",
+  "claim_ceiling": "Prospective B/EXPLORE only. No new empirical result yet. One finite selection master with six intentionally correlated candidate fits; one independently trained final matched pair with32 paired evaluation worlds. Conditional paired-world SE is not training/selection-population uncertainty. No causal tuning gain without an untuned holdout comparator, which is not selected; no optimal LR claim, headroom certificate, mechanism proof, stable algorithm ordering, sample efficiency/learning-curve conclusion or generic COND failure. DENSE remains generic development default; a useful positive only favors continued optional-branch work. Prior signed objects remain valid and separate, not pooled.",
+  "reference_files": [
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_LR_SELECTION_B01_SCIENCE_CARD_20260914.md",
+      "purpose": "Read the complete prospective card, especially §§1–5: changed question, protected native semantics, selection/holdout independence, work/cost and interpretation.",
+      "provenance": "DM-selected new B protocol, zero native exposure.4GiB admission correction is prospective; ordinary watchdog plans are not owner caps. This is the actual design to challenge."
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/reentry_20260914/DM_REENTRY_INTAKE.md",
+      "purpose": "Read the DM's full response to Portfolio, CONTINUE rationale and strongest continued-PARK alternative; final role section distinguishes current peer coordination from historical Clerk routes.",
+      "provenance": "DM-authored scientific/development judgment, not positive evidence or instruction to agree. Full lifecycle authority does not cancel independent review."
+    },
+    {
+      "path": "experiments/candidates/metric_ground_transport_allocation/mgtap_lr_selection_b01/protocol.py",
+      "purpose": "Inspect only the implemented stage/address rules, per-arm own-score selection/ties, full panels, holdout primary and computed exposure; do not execute.",
+      "provenance": "Stdlib-only prospective measurement code. It does not instantiate learners or prove native end-to-end integrity."
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/reentry_20260914/PLANNED_EXPOSURE.json",
+      "purpose": "Read generated8-fit counts and stage multipliers; these are known loop counts, not measured native costs.",
+      "provenance": "Machine-generated from protocol constants; PLANNED_NOT_EXECUTED."
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/PARK.md",
+      "purpose": "Read historical PARK reasons, lessons, contrary evidence and reopening conditions, preserving current CONTINUE notice.",
+      "provenance": "Retained historical scientific judgment; not a present permission gate or direction-wide failure proof."
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260913_early256_results_review/archive/RESPONSE.md",
+      "purpose": "Read the prior complete actual-results independent review, especially why a further B need not prove mechanism/stable ordering and how development stopping is judged.",
+      "provenance": "Full archived independent review of completed8241/8242 evidence; does not cover this new prospective object.",
+      "commit_sha": "47699fcad5714bbe8cfca43abef78c89a3887b62"
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260913_early256_results_review/INTAKE.md",
+      "purpose": "Read the DM's response to prior material findings; assess substantive reasoning rather than accepting a close-call label.",
+      "provenance": "Preserved completed-review intake. No old tool or support difficulty supplies scientific polarity."
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_B03_MAIN_INTAKE_20260904.md",
+      "purpose": "Read only scalar-LR comparison facts and their limits:24 toy fits, both chosen at grid edge3, same-panel residual+.0006554780 versusMEI.01; assess relevance and nontransfer to native.",
+      "provenance": "Toy same-panel selection result, not held-out optimum or native causal explanation. Historical approval/hold wording is superseded; no toy/native pooling."
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "purpose": "Apply §§11.4 and11.7–11.10 only: B integrity and burden, MEI, proportionate exploration, selection/inference and knowledge use.",
+      "provenance": "Separately pinned applicable method requirements; no rewriting frozen historical endpoints.",
+      "commit_sha": "1c6ba284ecd03c20fc6b7e6fa1a3d27efd630abf"
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "purpose": "Read §§2–4 and6 for policy history/legal information, CTDE/nonstationarity, selection and independent training/evaluation units.",
+      "provenance": "Explanatory knowledge only; no new authority or unlisted dependencies.",
+      "commit_sha": "1c6ba284ecd03c20fc6b7e6fa1a3d27efd630abf"
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+      "purpose": "Read independent training units, selection/holdout, paired comparisons and finite-evaluation uncertainty passages.",
+      "provenance": "Explanatory empirical assumptions/limits; no recursive citation tree.",
+      "commit_sha": "1c6ba284ecd03c20fc6b7e6fa1a3d27efd630abf"
+    }
+  ],
+  "constraints": [
+    "Frozen implementation contract: five UAV/fifty uniform users; free-space/no shadowing,H256; original sum-five-rewards/256 J; legal raw108; privateGRU64; training-only critic; primitive sampled velocity; mean visible-partner query+masked-partner sum COND versus intact DENSE full raw/nonlinear paths. Recurrent PPO agent_compound,chunk32,two episodes/rollout,four full epochs,entropy.01,global actor+critic clip.5,CPUFP32/thread1. Adam betas.9/.999,eps1e-8,weight_decay0,amsgrad/foreach/fusedFalse,only LR varies.",
+    "RNG master s uses base100000*s: train resetbase+1000+e,persistent velocitybase+21,durationbase+4000+e; eval resetbase+2000+e,velocitybase+3000+e,durationbase+5000+e. Identical address labels mean paired experiment inputs, not shared mutable generator objects or equal learned trajectories.8251 and8252 distinguish selection and holdout; no checkpoint transfer or holdout-selected rates.",
+    "Machine-computed total8fits:2048trainingepisodes+256evalepisodes=589824teamticks;4096Adamcalls,1024rollouts,13434880actorrowuses.6selectionfits442368ticks/3072Adam;2holdoutfits147456ticks/1024Adam. Eachfit65536train+8192evalticks/512Adam. Only nested LR candidate dimension3; no trajectory/solver/checkpoint search. An unchanged recurrence would be2fits, so selected design costs4times as many fits.",
+    "Native plan15–30min remains UNMEASURED. Prior early256 pair walls188.19s and190.58s (sum378.77s) are sizing anchors only. Existing node serialCPU/thread1 and fresh physical/effective4GiB admission; ordinary1800s/fit,14400s/study watchdogs are DM-adjustable technical plans, not fixed science endpoints or owner-only caps. Support/provider/lifetime/aggregateCPU UNKNOWN, not zero. No paid capacity or peer resource reassignment.",
+    "Only complete trustworthy candidate panels permit this complete selected-procedure primary; failed/missing required candidate means INCOMPLETE with partials retained, not an adverse scientific result, replacement candidate/seed or automatic retry. Technical recovery is separate from scientific continuation/stopping.",
+    "Scientific question review only; Pro writes solely the scoped complete response and delivery comment. Do not modify source, card, lifecycle, main, other branches/paths or execute experiments. Same-request downloadable complete RESPONSE.md fallback remains available if actual connector readback cannot confirm scoped delivery; no new Send or fabricated delivery."
+  ],
+  "response_schema": [
+    "Conclusion and material findings.",
+    "Selection/comparison/holdout integrity and inference assessment.",
+    "Development value versus strongest alternative, with explicit reasoning.",
+    "Minimal corrections/claim limits and exact source access/gaps."
+  ],
+  "delivery_mode": "github_delivery",
+  "github_delivery": {
+    "branch": "codex/mgtap",
+    "base_sha": "3594eafe28ed91b2558fcc064e46ea714edd2e1c",
+    "response_path": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260914_lr_selection_design_review/archive/RESPONSE.md",
+    "issue_url": "https://github.com/CartmanFatass/My-paper-code/issues/18"
+  }
+}
+

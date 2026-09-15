@@ -1,0 +1,1 @@
+| 23:18:13 UTC | acvc | object | selection | selected1024/4096 B / another1024 / changed-question return | selected1024/4096 B, master27457/eval37457 | no (declared compute) | OWNER_DELEGATED; existing PRO_FINAL | docs/research/candidates/acvc/ACVC_CLUSTER_EXTENDED_EXPOSURE_B01_SCIENCE_CARD_20260914.md | none | |

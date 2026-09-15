@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "request_id": "2026-09-14-rcle-b12-scientific-review-01",
+  "direction_id": "roster_consistent_latent_exploration",
+  "conversation_binding_key": "em:roster_consistent_latent_exploration:convergence",
+  "conversation_id": "6aa55611-bf80-83e8-b018-70e30a95b28a",
+  "provider_url": "https://chatgpt.com/c/6aa55611-bf80-83e8-b018-70e30a95b28a",
+  "handoff": {
+    "commit": "d91427da54cb8999df5b2cdbe6cf449e2add87d0",
+    "path": "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260914_b12_scientific_review/delivery/HANDOFF.json"
+  },
+  "task": {
+    "sha": "0d8a29cb832da3e998c97133ee0dd325801ad08b",
+    "path": "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260914_b12_scientific_review/delivery/TASK.md"
+  },
+  "prompt_sha256": "10ace10a71119151ffe06137d2c1a13836f5f63bc3a0ad0d5bdeb2932f229400",
+  "provider_requirement": {
+    "model": "GPT-6 Astra",
+    "mode": "Pro",
+    "visible_label": "6 Pro",
+    "selector": "Latest"
+  },
+  "operation": {
+    "operationId": "c13a3806-4a9c-456c-93ab-2ebab3b0fa47",
+    "idempotencyKey": "2026-09-14-rcle-b12-scientific-review-01",
+    "fingerprint": "3430dd1506c779cd6189b0f04e40110367aff6c8e9029d39c79c57410af38781",
+    "sendAttempted": true,
+    "sendAttemptedAt": 1789363475112,
+    "providerUserMessageId": "673c3463-5bc2-43a6-9134-d3f1a2f33d01",
+    "providerAssistantMessageId": "964824e8-e843-4d75-aaeb-606be79541f7",
+    "observedConversationId": "6aa55611-bf80-83e8-b018-70e30a95b28a",
+    "observedConversationUrl": "https://chatgpt.com/c/6aa55611-bf80-83e8-b018-70e30a95b28a",
+    "archiveVerifiedAt": 1789364262156,
+    "sendCount": 1,
+    "duplicateSend": false
+  },
+  "provider_chat_receipt": {
+    "path": "archive/CHAT_RECEIPT.md",
+    "sha256": "40512c09c7698ecad8a30b2957b666c028a6e91902ed4f26a1ab95bd7caa3c69",
+    "size_bytes": 163,
+    "projection": "exact"
+  },
+  "github_delivery": {
+    "branch": "codex/rcle",
+    "commit": "ad6e30953c5fd1f78e3f5da6cdee103769a6bfde",
+    "parent_commit": "8b0928d5cca3ff40bee06281549c53f2bf358674",
+    "response_path": "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260914_b12_scientific_review/archive/RESPONSE.md",
+    "response_url": "https://github.com/CartmanFatass/My-paper-code/blob/ad6e30953c5fd1f78e3f5da6cdee103769a6bfde/docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260914_b12_scientific_review/archive/RESPONSE.md",
+    "local_full_response": "archive/GITHUB_BLOB_ad6e3095.md",
+    "local_full_response_sha256": "4f8e4cb130727897298f1acca05429a19e8e6b4266ffcef3be111c7ebad42b0a",
+    "local_full_response_bytes": 43622,
+    "github_blob_sha": "5e08153b74b642d0fa6603a84ff87cdb8eb96b89",
+    "acquisition_sidecar": "archive/GITHUB_RESPONSE_ad6e3095.md",
+    "acquisition_sidecar_sha256": "31db988830e4fac04284a73c6a0fbc2b468083097e43355203cd135f8f359ca9",
+    "acquisition_sidecar_bytes": 43623,
+    "acquisition_sidecar_has_one_appended_terminal_lf": true,
+    "issue": "https://github.com/CartmanFatass/My-paper-code/issues/8",
+    "issue_comment": "https://github.com/CartmanFatass/My-paper-code/issues/8#issuecomment-5659514239",
+    "issue_comment_id": 5659514239,
+    "issue_open_verified": true,
+    "github_response_verified": true
+  },
+  "checks": {
+    "handoff_preflight": true,
+    "exact_prompt_and_task_sha": true,
+    "conversation_identity": true,
+    "single_send_accepted": true,
+    "natural_completion_observed": true,
+    "full_response_fetched_at_immutable_commit": true,
+    "exact_git_blob_preserved": true,
+    "acquisition_sidecar_byte_identity": false,
+    "short_receipt_preserved": true,
+    "prior_b10_preserved": true,
+    "science_or_code_written": false
+  },
+  "actual_assigning_parent_app_thread": "01a09e10-9d9f-7f82-87c0-d58cbe0c7618",
+  "native_execution_parent": "/root",
+  "native_operator": "/root/tr_rcle_b12",
+  "next_owner_action": "DM reads the complete review and performs scientific conformance intake; no further Send."
+}

@@ -1,0 +1,53 @@
+{
+  "low_C-reference_C": {
+    "probabilities": {
+      "UP": 0.45,
+      "WITHIN": 0.35,
+      "DOWN": 0.2
+    },
+    "observed": "DOWN",
+    "brier": 0.9650000000000001
+  },
+  "low:F-C": {
+    "probabilities": {
+      "UP": 0.7,
+      "WITHIN": 0.2,
+      "DOWN": 0.1
+    },
+    "observed": "UP",
+    "brier": 0.14000000000000004
+  },
+  "low:F-dwell": {
+    "probabilities": {
+      "UP": 0.6,
+      "WITHIN": 0.25,
+      "DOWN": 0.15
+    },
+    "observed": "UP",
+    "brier": 0.24500000000000002
+  },
+  "reference:F-C": {
+    "probabilities": {
+      "UP": 0.8,
+      "WITHIN": 0.15,
+      "DOWN": 0.05
+    },
+    "observed": "UP",
+    "brier": 0.06499999999999997
+  },
+  "reference:F-dwell": {
+    "probabilities": {
+      "UP": 0.7,
+      "WITHIN": 0.2,
+      "DOWN": 0.1
+    },
+    "observed": "UP",
+    "brier": 0.14000000000000004
+  },
+  "technical_completeness": {
+    "probability": 0.95,
+    "observed": true,
+    "binary_brier": 0.0025000000000000044
+  },
+  "owner_prediction": "not taken (unattended); canonical reviews [] at intake"
+}

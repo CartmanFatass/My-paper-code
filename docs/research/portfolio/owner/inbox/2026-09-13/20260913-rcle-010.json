@@ -1,0 +1,75 @@
+{
+  "id": "20260913-rcle-010",
+  "created": "2026-09-13T22:57:34-07:00",
+  "direction": "roster_consistent_latent_exploration",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "RCLE：准备固定权重众数推理比较 E01",
+  "context": "两次完整1024结果均有学习但采样服务弱于greedy。准备两份既有模型的1024次条件评价，0新增训练，保留原始失败与恢复后果；ordinary B非零更新条款由Root按已写明的具体范围处理。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "记录并准备完整E01对象；原生调用仅在具体规范适用明确后启动。"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "保留B12和review，DM重新选择有价值问题或PARK。"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "修改具体对象或条款适用后再形成新执行输入。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "众数执行能直接检验已学参数是否值得保留；不追加无目的重复训练或为维持ACTIVE而运行。",
+  "evidence": [
+    "docs/research/candidates/roster_consistent_latent_exploration/RCLE_FIXED_MODAL_REUSE_E01_SCIENCE_CARD_20260914.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-13.md#L28",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "选择准备两份已训练模型的固定众数推理比较，保留明确的零新增训练范围及待处理规范条款。",
+    "changes_if_approved": [
+      {
+        "target": "RCLE E01 card / DIRECTION",
+        "from": "B12独立review已完成",
+        "to": "准备两份固定checkpoint的条件众数比较；尚未开始原生调用"
+      }
+    ],
+    "if_refused": "保留B12及完整review；DM重新选择PARK或有明确理由的不同问题，不自动重训。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B12_FINAL1024_INTAKE_20260914.md",
+        "quote": "No new native invocation has started.",
+        "why": "已学参数在新执行法则下是否有用，会直接影响保留该控制器还是使用固定greedy。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260914_b12_scientific_review/archive/RESPONSE.md",
+        "quote": "PARK 是有力的竞争意见：当前 sampled 方法已经两次完成并落后于同支持的强规则，modal 也可能只恢复 greedy 行为而没有新用途价值。",
+        "why": "不能因为便宜或要保持ACTIVE而不断改变执行方式追求阳性。"
+      }
+    ],
+    "uncertainty": [
+      "B11故障未定位，成功运行不等于修复。",
+      "原评价面板已被看过，两个checkpoint是完成者；不作独立确认或总体推广。",
+      "ordinary B非零更新条款需Root按具体共享规范范围处理；不借A标签或无用更新绕过。"
+    ],
+    "cost": {
+      "compute": "拟定1024新评价episode/65536tick、0新fit/0更新；原生15–45s与support10–20min仅参考，费用未知项保留。",
+      "owner_time": "无需在owner条目中逐步批准；Root处理的是已经具象化的共享规范条款适用。",
+      "reversibility": "reversible",
+      "waits_on_this": "E01原生调用仅依赖具体规范适用处理；准备和review不等待owner条目回复。"
+    },
+    "verdict_text": "Owner-delegated decision (2026-09-03/13): prepare E01. No new native invocation has started.",
+    "source": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B12_FINAL1024_INTAKE_20260914.md"
+  },
+  "starred": false
+}

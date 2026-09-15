@@ -1,0 +1,78 @@
+{
+  "native_arm_time": {
+    "GENERIC_RETAIN": {
+      "wall_seconds": 1252.33,
+      "user_seconds": 1134.62,
+      "system_seconds": 117.4,
+      "peak_rss_kib": 757916,
+      "exit_code": 0
+    },
+    "BANK": {
+      "wall_seconds": 1789.13,
+      "user_seconds": 1383.02,
+      "system_seconds": 406.53,
+      "peak_rss_kib": 745284,
+      "exit_code": 0
+    }
+  },
+  "summed_native_wall_seconds": 3041.46,
+  "aggregate_native_user_seconds": 2517.64,
+  "aggregate_native_system_seconds": 523.93,
+  "study_elapsed_start_to_last_terminal_seconds": 3375,
+  "study_elapsed_resolution": "Integer supervisor timestamps 2026-09-14T04:43:26Z to05:39:41Z; includes333s arm gap and rounding. Not summed invocation or CPU work.",
+  "selected_measured_support_windows_seconds": {
+    "focused_remote_tests": 1.73,
+    "source_setup_terminal_TLS_failure": 4.922000000020489,
+    "source_setup_successful_recovery": 4.719000000040978,
+    "generic_collection": 3.7179999999934807,
+    "bank_collection": 1.9219999999622814,
+    "first_generic_checkpoint_check_failed_tool": 2.1529695,
+    "generic_checkpoint_diagnostic": 1.6400000000139698,
+    "bank_checkpoint_integrity": 1.5619999999762513,
+    "analysis_batch": 2.7189999999827705,
+    "supervisor_preservation": 0.6099999999860302,
+    "published_preservation_and_remote_cleanup": 3.3273560000234284
+  },
+  "selected_measured_support_lower_bound_seconds": 29.02232549999968,
+  "support_limitations": "Selected non-overlapping command windows only, mixing native test time and local control/collection waits. Excludes initial CRLF failure, earlier 90/60/55 s local SSH timeout windows and unmeasured remote lazy-fetch wait, other Git/reading/authoring/review/monitor/receipt/intake/unmeasured preservation/cleanup work. Not complete support cost, CPU work or proof of full planning compliance.",
+  "provider_work": "Portfolio factual acknowledgment worked 51 s; original selection/synchronization were existing answers. One post-B02 independent scientific review Send completed and its full 20351-byte response was read and preserved. Provider work duration/usage/billing and complete model-task cost remain UNKNOWN.",
+  "valid_complete_learning_comparisons": 1,
+  "native_seconds_per_valid_learning_comparison": 3041.46,
+  "fresh_fits": 2,
+  "native_ticks": 205120,
+  "optimizer_steps": 9938,
+  "final_episodes": 256,
+  "plans": {
+    "per_arm_seconds": 3600,
+    "summed_native_seconds": 7200,
+    "invoked_support_seconds": 1800,
+    "complete_invoked_seconds": 9000
+  },
+  "historical_accounts": {
+    "E_native_seconds": 3557.28,
+    "E_later_support_lower_bound_seconds": 213.7327064,
+    "F_native_seconds": 2159.85,
+    "F_later_support_lower_bound_seconds": 148.5160421,
+    "complete_direction_cost": "UNKNOWN; no historical account reset or pooling"
+  },
+  "remaining_closeout_plan": {
+    "selected_provider_requests": 1,
+    "selected_new_empirical_invocations": 0,
+    "work": "One independent Convergence result review, full exact-byte archive and DM response, then one final lifecycle/owner/audit/brief/PARK knowledge publication if selected. No automatic review repeat or scientific successor.",
+    "additional_active_support_planning_seconds": 1800,
+    "provider_observation_planning_seconds": 5400,
+    "authority": "Prospective finite DM administrative closeout under AGENTS section 2; these are planning allowances, not owner caps or expiry of an accepted request. If observation is unresolved, reconcile the same request and record actual deviation before selecting needed recovery.",
+    "accountability": "Old card plans and unknown full cumulative/support/provider cost remain. No original total-plan compliance claim, accounting reset, extra training or changed endpoint."
+  },
+  "review_and_closeout": {
+    "status": "complete",
+    "scientific_review_sends": 1,
+    "response_commit": "b4a67c7bf7b0eec726f107bf7acdf148f7e60109",
+    "review_intake_new_empirical_invocations": 0,
+    "remote_cleanup_complete": true,
+    "exact_agentify_tab_cleanup_complete": true,
+    "lifecycle": "PARK/MEDIUM",
+    "owner_flag": "close-call",
+    "complete_cost": "UNKNOWN; published lower bound is not a full total and does not include all later closeout work."
+  }
+}

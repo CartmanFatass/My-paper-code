@@ -1,0 +1,252 @@
+{
+  "request_id": "2026-09-11-rcle-channel-normalization-convergence-01",
+  "input_sha": "aab72bbfb2fd729bcf53c4227320284da3a48fbe",
+  "observed_remote_refs": {
+    "refs/heads/codex/portfolio": "11c008e3f4d24ebc4c540d490460dcd5b766f5f9",
+    "refs/heads/codex/rcle": "aab72bbfb2fd729bcf53c4227320284da3a48fbe",
+    "refs/heads/main": "76440e33a98666b027532328493a12a6e8a5e20c"
+  },
+  "verified_reference_manifest": [
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260911_channel_normalization_convergence/DESIGN_BRIEF.md",
+      "commit_sha": "aab72bbfb2fd729bcf53c4227320284da3a48fbe",
+      "blob": "5912c327124507a51066ef11edb5e344ea04afbf",
+      "bytes": 16498,
+      "sha256": "d02a96af2c51a6ad2001c960da2c83efbac7efe2fac6e3f57de3272faf010437",
+      "reachable_from_observed_remote_refs": [
+        "refs/heads/codex/rcle"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260911_channel_normalization_convergence/EXPOSURE_AND_COST.json",
+      "commit_sha": "aab72bbfb2fd729bcf53c4227320284da3a48fbe",
+      "blob": "954dee5ab01cf51fa7670b20d5345b92c87abccd",
+      "bytes": 4618,
+      "sha256": "507daab27601378993d22e86da2f4d2efa680364b376b0a8c5b661f76b40a9fa",
+      "reachable_from_observed_remote_refs": [
+        "refs/heads/codex/rcle"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260911_channel_normalization_convergence/LITERATURE_SCOPE.json",
+      "commit_sha": "aab72bbfb2fd729bcf53c4227320284da3a48fbe",
+      "blob": "5fef56f16fca47f8e789af33f7ca2d5977562f85",
+      "bytes": 2501,
+      "sha256": "f7c29f2fac4f8a07b5c543daafa9be1bde5ae58eb51600b1520b2de9f789d187",
+      "reachable_from_observed_remote_refs": [
+        "refs/heads/codex/rcle"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260911_channel_normalization_convergence/ISSUE_SNAPSHOT.json",
+      "commit_sha": "aab72bbfb2fd729bcf53c4227320284da3a48fbe",
+      "blob": "1e91476f5ee8b0d21d123b88dc732198a94ed0c6",
+      "bytes": 10764,
+      "sha256": "194930c1172e4e2632203a91e2195207cb79fafd05ecf3d9923ce863df327492",
+      "reachable_from_observed_remote_refs": [
+        "refs/heads/codex/rcle"
+      ]
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260911_post_program_vacancies/archive/RESPONSE.md",
+      "commit_sha": "50703c1bd1a4411c31a0b211d3ec8aff88fa0d0f",
+      "blob": "ebcfea177338a682a21f2b22daaba7175b8ca4f0",
+      "bytes": 66565,
+      "sha256": "1dc62ab2a10aef042c4a3ca3ba53b26daecbea0529e653359167cc03ecb76752",
+      "reachable_from_observed_remote_refs": [
+        "refs/heads/codex/portfolio"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B06_NEAREST99_PRIOR1000_SCIENCE_CARD_20260911.md",
+      "commit_sha": "7c2873dd31529ee24b3a2ca9615ae1fa08c3f51b",
+      "blob": "7eaa76ec4ad02301fe675f7264f51d933a542ad6",
+      "bytes": 11854,
+      "sha256": "c16bd7a1cea6c4a1490fa8f2776653de19f6490c5424849a8be1ffb1a22771cb",
+      "reachable_from_observed_remote_refs": [
+        "refs/heads/codex/rcle",
+        "refs/heads/main"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B06_NEAREST99_PRIOR1000_RESULT_EVIDENCE_20260911.md",
+      "commit_sha": "7c2873dd31529ee24b3a2ca9615ae1fa08c3f51b",
+      "blob": "b53bf670c64e0a2a454acf6372d54a92cac0e5dd",
+      "bytes": 15200,
+      "sha256": "07d83ffecb262f81297dcd229fa6267822cb1e4d5d0df12542203146a16d882b",
+      "reachable_from_observed_remote_refs": [
+        "refs/heads/codex/rcle",
+        "refs/heads/main"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B06_NEAREST99_PRIOR1000_RESULT_INTAKE_20260911.md",
+      "commit_sha": "7c2873dd31529ee24b3a2ca9615ae1fa08c3f51b",
+      "blob": "97f1a6145c53f6c1276e7f4d02756de81587afa4",
+      "bytes": 11756,
+      "sha256": "a4734a2a474bce975ecd4b4d28a0442ca3f8d1d8f43ec98ff14c50b14b86ad09",
+      "reachable_from_observed_remote_refs": [
+        "refs/heads/codex/rcle",
+        "refs/heads/main"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/DIRECTION.md",
+      "commit_sha": "7c2873dd31529ee24b3a2ca9615ae1fa08c3f51b",
+      "blob": "f58161a07320600a3412173f0d8d6d13a377db0e",
+      "bytes": 52543,
+      "sha256": "895476dcacf024a251f4902cec7f8168b9b68e04f659a66c14193fabf5b40744",
+      "reachable_from_observed_remote_refs": [
+        "refs/heads/codex/rcle",
+        "refs/heads/main"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_TBCFV_A02_RESULT_INTAKE_20260906.md",
+      "commit_sha": "7c2873dd31529ee24b3a2ca9615ae1fa08c3f51b",
+      "blob": "4e69ee1bbcf975f7ac1c2c7bf86978b7b2b5ccea",
+      "bytes": 21494,
+      "sha256": "9befb297b901b1617c7849ee81330e5f5bb4419c029fa003f8e9206ccfd4ff12",
+      "reachable_from_observed_remote_refs": [
+        "refs/heads/codex/rcle",
+        "refs/heads/main"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_SERVICE_COMPARISON_DESIGN_INTAKE_20260910.md",
+      "commit_sha": "7c2873dd31529ee24b3a2ca9615ae1fa08c3f51b",
+      "blob": "72cdda81bbbbd25c8161add6af56d4eb7e3245e2",
+      "bytes": 24333,
+      "sha256": "14f350f4e46b55354e46443e7c0e232f302a222a3412ba54fb5051f1510a2f17",
+      "reachable_from_observed_remote_refs": [
+        "refs/heads/codex/rcle",
+        "refs/heads/main"
+      ]
+    },
+    {
+      "path": "experiments/candidates/roster_consistent_latent_exploration_tbcfv_b03/study.py",
+      "commit_sha": "7c2873dd31529ee24b3a2ca9615ae1fa08c3f51b",
+      "blob": "8f4c8c01318497327cb34ea32c31e4f0e796d7a5",
+      "bytes": 10277,
+      "sha256": "2d5c279d7b769e29b3d3ff5e1f4aadf671da0aea712154414c3bda4d1f5193be",
+      "reachable_from_observed_remote_refs": [
+        "refs/heads/codex/rcle",
+        "refs/heads/main"
+      ]
+    },
+    {
+      "path": "experiments/candidates/roster_consistent_latent_exploration_tbcfv_b02/study.py",
+      "commit_sha": "7c2873dd31529ee24b3a2ca9615ae1fa08c3f51b",
+      "blob": "3473cade01e24090f9802cd40f7c4f6b74efa861",
+      "bytes": 25139,
+      "sha256": "abd1f972479c0b4f86cdde9a3e9be67d943a2ecfeaeffd4f9020675068a39451",
+      "reachable_from_observed_remote_refs": [
+        "refs/heads/codex/rcle",
+        "refs/heads/main"
+      ]
+    },
+    {
+      "path": "experiments/candidates/roster_consistent_latent_exploration_tbcfv/models.py",
+      "commit_sha": "7c2873dd31529ee24b3a2ca9615ae1fa08c3f51b",
+      "blob": "fdcf5eccb53d115c10787e42950afdd6f1707690",
+      "bytes": 22089,
+      "sha256": "7f05cbcbc4f7b09ba4f22c46df7beabfc81658443d300aa3438b03e76abbc5f9",
+      "reachable_from_observed_remote_refs": [
+        "refs/heads/codex/rcle",
+        "refs/heads/main"
+      ]
+    },
+    {
+      "path": "experiments/candidates/roster_consistent_latent_exploration/b04_nearest_prior/study.py",
+      "commit_sha": "7c2873dd31529ee24b3a2ca9615ae1fa08c3f51b",
+      "blob": "b0ee9dd4c3278c4443177489250e82743752ceb2",
+      "bytes": 9264,
+      "sha256": "177db66c7fff7720756e439ec821bd4764d2df7dadadf2463a5bffb5c19502af",
+      "reachable_from_observed_remote_refs": [
+        "refs/heads/codex/rcle",
+        "refs/heads/main"
+      ]
+    },
+    {
+      "path": "experiments/candidates/roster_consistent_latent_exploration/b06_nearest99_prior1000/study.py",
+      "commit_sha": "7c2873dd31529ee24b3a2ca9615ae1fa08c3f51b",
+      "blob": "03159ca9381e6e87bfb7310ffec3de9b07bf7752",
+      "bytes": 749,
+      "sha256": "ab3beed9c2a1b72a121a36eae9dd535d4f4cf156ff7ff3f8cddcb64da858e78b",
+      "reachable_from_observed_remote_refs": [
+        "refs/heads/codex/rcle",
+        "refs/heads/main"
+      ]
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "commit_sha": "84ae51da0c6903197c9d92df23786caf3ed283ae",
+      "blob": "c520f24f1440ca0638943d7a5126cfd5bc34440c",
+      "bytes": 45053,
+      "sha256": "44418af31752086f6752f8f3d6874b260134e4c91b6c82ed8dbc61e4ef0b87e1",
+      "reachable_from_observed_remote_refs": [
+        "refs/heads/codex/rcle",
+        "refs/heads/main"
+      ]
+    },
+    {
+      "path": "docs/project/ENGINEERING_SCOPE_SPEC.md",
+      "commit_sha": "84ae51da0c6903197c9d92df23786caf3ed283ae",
+      "blob": "72f81d5650d9c1ddde12df3a6ed37add99f436be",
+      "bytes": 20899,
+      "sha256": "a52a26e3b9ba876cb954ef4e671b5826ff9e1bab573320ca6da1033e12e64996",
+      "reachable_from_observed_remote_refs": [
+        "refs/heads/codex/rcle",
+        "refs/heads/main"
+      ]
+    },
+    {
+      "path": "AGENTS.md",
+      "commit_sha": "84ae51da0c6903197c9d92df23786caf3ed283ae",
+      "blob": "42e79d0752c754a54b4c69c99eadc9b85e8bd219",
+      "bytes": 43568,
+      "sha256": "76e0df93004d715e82f20c2bc084e689509506dda597220b98930e9a5e53940a",
+      "reachable_from_observed_remote_refs": [
+        "refs/heads/codex/rcle",
+        "refs/heads/main"
+      ]
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "commit_sha": "84ae51da0c6903197c9d92df23786caf3ed283ae",
+      "blob": "05b3dc8d8628e2510431250c119b533f2ac3c29a",
+      "bytes": 7819,
+      "sha256": "c1f7d6c68fcec55de48ea555346d5d65af8d311e28502be43a2b05436a174247",
+      "reachable_from_observed_remote_refs": [
+        "refs/heads/codex/rcle",
+        "refs/heads/main"
+      ]
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+      "commit_sha": "84ae51da0c6903197c9d92df23786caf3ed283ae",
+      "blob": "9bae14c6deb8e3d1bee6bb567828e4667a426174",
+      "bytes": 4252,
+      "sha256": "99b7e727a890d4e93a64b5c0f44fe588e383b5de56f2da663fb3f864c6d8293c",
+      "reachable_from_observed_remote_refs": [
+        "refs/heads/codex/rcle",
+        "refs/heads/main"
+      ]
+    }
+  ],
+  "references_verified": 21,
+  "publication_proves": "All exact Git objects exist and their commits are reachable from observed published refs; this is not a claim of Pro connector access.",
+  "prebind_route": {
+    "source_thread_id": "01a08ed9-d674-7780-80f7-28d9b0284520",
+    "parent_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+    "operator_thread_id": "01a087a3-4f12-7021-9a4d-6da9da2bafcc",
+    "conversation_binding_key": "em:roster_consistent_latent_exploration:convergence",
+    "conversation_reuse_required": true,
+    "reset_invalid_provider_context": false,
+    "dispatch_state": "TASK_NOT_PUBLISHED",
+    "dispatch_required": false
+  },
+  "scientific_and_implementation_exposure": 0,
+  "DM_transport_dispatches": 0,
+  "task_sha": "not published yet"
+}

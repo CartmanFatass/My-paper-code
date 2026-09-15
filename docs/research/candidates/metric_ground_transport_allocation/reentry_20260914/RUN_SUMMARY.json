@@ -1,0 +1,1098 @@
+{
+  "mode": "UAV_B_EXPLORE",
+  "object": "MGTAP-LR-SELECTION-B01",
+  "card": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_LR_SELECTION_B01_SCIENCE_CARD_20260914.md",
+  "scientific_invocation": true,
+  "launch_sha": "2d351d48604396ce478aa900584bd24b3255def5",
+  "selection_master": 8251,
+  "holdout_master": 8252,
+  "configuration": {
+    "candidate_order": [
+      "base",
+      "slow",
+      "fast"
+    ],
+    "arm_order": [
+      "COND",
+      "DENSE"
+    ],
+    "learning_rates": {
+      "base": 0.0003,
+      "slow": 0.0001,
+      "fast": 0.001
+    },
+    "horizon": 256,
+    "train_episodes_per_fit": 256,
+    "eval_episodes_per_fit": 32,
+    "chunk": 32,
+    "episodes_per_rollout": 2,
+    "epochs": 4,
+    "ratio_grouping": "agent_compound",
+    "entropy_coef": 0.01,
+    "gradient_clip": 0.5,
+    "device": "cpu",
+    "dtype": "float32",
+    "threads": 1,
+    "fit_watchdog_seconds": 1800.0,
+    "study_watchdog_seconds": 14400.0
+  },
+  "planned_exposure": {
+    "object": "MGTAP-LR-SELECTION-B01",
+    "status": "PLANNED_NOT_EXECUTED",
+    "learning_rates": {
+      "base": 0.0003,
+      "slow": 0.0001,
+      "fast": 0.001
+    },
+    "selection_master": 8251,
+    "holdout_master": 8252,
+    "per_fit": {
+      "train_episodes": 256,
+      "evaluation_episodes": 32,
+      "train_team_ticks": 65536,
+      "evaluation_team_ticks": 8192,
+      "rollouts": 128,
+      "adam_calls": 512,
+      "total_team_ticks": 73728,
+      "actor_row_uses_collection_evaluation_replay": 1679360
+    },
+    "stages": {
+      "selection": {
+        "fits": 6,
+        "train_episodes": 1536,
+        "evaluation_episodes": 192,
+        "train_team_ticks": 393216,
+        "evaluation_team_ticks": 49152,
+        "rollouts": 768,
+        "adam_calls": 3072,
+        "total_team_ticks": 442368,
+        "actor_row_uses_collection_evaluation_replay": 10076160
+      },
+      "holdout": {
+        "fits": 2,
+        "train_episodes": 512,
+        "evaluation_episodes": 64,
+        "train_team_ticks": 131072,
+        "evaluation_team_ticks": 16384,
+        "rollouts": 256,
+        "adam_calls": 1024,
+        "total_team_ticks": 147456,
+        "actor_row_uses_collection_evaluation_replay": 3358720
+      }
+    },
+    "total": {
+      "fits": 8,
+      "train_episodes": 2048,
+      "evaluation_episodes": 256,
+      "train_team_ticks": 524288,
+      "evaluation_team_ticks": 65536,
+      "rollouts": 1024,
+      "adam_calls": 4096,
+      "total_team_ticks": 589824,
+      "actor_row_uses_collection_evaluation_replay": 13434880
+    },
+    "independence": {
+      "selection_training_masters": 1,
+      "holdout_training_pairs": 1,
+      "whole_selection_procedure_replications": 1,
+      "notes": "six candidate fits are not six independent selected-program replications"
+    },
+    "nested_work": "three learning-rate candidates per arm; no trajectory, policy or checkpoint search",
+    "actual_new_native_exposure_at_protocol_preparation": 0
+  },
+  "fits": [
+    {
+      "stage": "selection",
+      "pair_master": 8251,
+      "arm": "COND",
+      "lr_key": "base",
+      "learning_rate": 0.0003,
+      "fit_complete": true,
+      "panel_complete": true,
+      "counts": {
+        "train_team_steps": 65536,
+        "eval_team_steps": 8192,
+        "team_steps": 73728,
+        "optimizer_steps": 512,
+        "train_episodes": 256,
+        "eval_episodes": 32,
+        "velocity_decisions": 368640,
+        "duration_decisions": 0,
+        "d4": 0,
+        "recurrent_observations": 368640,
+        "explicit_resets": 288,
+        "constructor_resets": 1,
+        "constructors": 1,
+        "step_calls": 73728,
+        "scientific_uav_calls": 73728,
+        "diagnostic_frames": 0,
+        "completed_episode_steps": 73728,
+        "rollouts": 128
+      },
+      "training_counts": {
+        "train_team_steps": 65536,
+        "eval_team_steps": 0,
+        "team_steps": 65536,
+        "optimizer_steps": 512,
+        "train_episodes": 256,
+        "eval_episodes": 0,
+        "velocity_decisions": 327680,
+        "duration_decisions": 0,
+        "d4": 0,
+        "recurrent_observations": 327680,
+        "explicit_resets": 256,
+        "constructor_resets": 1,
+        "constructors": 1,
+        "step_calls": 65536,
+        "scientific_uav_calls": 65536,
+        "diagnostic_frames": 0,
+        "completed_episode_steps": 65536,
+        "rollouts": 128
+      },
+      "exposure": {
+        "common_actor": {
+          "parameters": 34902,
+          "initial_norm": 12.90963077545166,
+          "final_norm": 13.188653945922852,
+          "displacement": 2.7974507808685303,
+          "relative_displacement": 0.2166948714124197
+        },
+        "critic": {
+          "parameters": 34177,
+          "initial_norm": 9.274332046508789,
+          "final_norm": 10.339719772338867,
+          "displacement": 4.309174060821533,
+          "relative_displacement": 0.4646344382766849
+        },
+        "total": {
+          "parameters": 69079,
+          "initial_norm": 15.89565658569336,
+          "final_norm": 16.758586883544922,
+          "displacement": 5.137579917907715,
+          "relative_displacement": 0.3232065243867555
+        },
+        "encoder": {
+          "parameters": 9744,
+          "initial_norm": 5.965577125549316,
+          "final_norm": 6.118785381317139,
+          "displacement": 1.3361430168151855,
+          "relative_displacement": 0.2239754827898446
+        },
+        "recurrent": {
+          "parameters": 24960,
+          "initial_norm": 11.40200138092041,
+          "final_norm": 11.640902519226074,
+          "displacement": 2.4479446411132812,
+          "relative_displacement": 0.21469429439022394
+        },
+        "branch_inner": {
+          "parameters": 144,
+          "initial_norm": 3.805877447128296,
+          "final_norm": 3.842683792114258,
+          "displacement": 0.20614705979824066,
+          "relative_displacement": 0.054165448746578436
+        },
+        "branch_projection": {
+          "parameters": 2624,
+          "initial_norm": 0.0,
+          "final_norm": 0.7934962511062622,
+          "displacement": 0.7934962511062622,
+          "relative_displacement": null
+        }
+      },
+      "checkpoint": "selection_base_COND.pt",
+      "fit_body_wall": 88.67440278292634,
+      "limits": []
+    },
+    {
+      "stage": "selection",
+      "pair_master": 8251,
+      "arm": "DENSE",
+      "lr_key": "base",
+      "learning_rate": 0.0003,
+      "fit_complete": true,
+      "panel_complete": true,
+      "counts": {
+        "train_team_steps": 65536,
+        "eval_team_steps": 8192,
+        "team_steps": 73728,
+        "optimizer_steps": 512,
+        "train_episodes": 256,
+        "eval_episodes": 32,
+        "velocity_decisions": 368640,
+        "duration_decisions": 0,
+        "d4": 0,
+        "recurrent_observations": 368640,
+        "explicit_resets": 288,
+        "constructor_resets": 1,
+        "constructors": 1,
+        "step_calls": 73728,
+        "scientific_uav_calls": 73728,
+        "diagnostic_frames": 0,
+        "completed_episode_steps": 73728,
+        "rollouts": 128
+      },
+      "training_counts": {
+        "train_team_steps": 65536,
+        "eval_team_steps": 0,
+        "team_steps": 65536,
+        "optimizer_steps": 512,
+        "train_episodes": 256,
+        "eval_episodes": 0,
+        "velocity_decisions": 327680,
+        "duration_decisions": 0,
+        "d4": 0,
+        "recurrent_observations": 327680,
+        "explicit_resets": 256,
+        "constructor_resets": 1,
+        "constructors": 1,
+        "step_calls": 65536,
+        "scientific_uav_calls": 65536,
+        "diagnostic_frames": 0,
+        "completed_episode_steps": 65536,
+        "rollouts": 128
+      },
+      "exposure": {
+        "common_actor": {
+          "parameters": 34902,
+          "initial_norm": 12.556600570678711,
+          "final_norm": 12.996295928955078,
+          "displacement": 3.4998550415039062,
+          "relative_displacement": 0.27872631782811047
+        },
+        "critic": {
+          "parameters": 34177,
+          "initial_norm": 9.274332046508789,
+          "final_norm": 9.919785499572754,
+          "displacement": 3.3931305408477783,
+          "relative_displacement": 0.36586252506720585
+        },
+        "total": {
+          "parameters": 69079,
+          "initial_norm": 15.610302925109863,
+          "final_norm": 16.349485397338867,
+          "displacement": 4.874660491943359,
+          "relative_displacement": 0.3122719985210498
+        },
+        "encoder": {
+          "parameters": 9744,
+          "initial_norm": 5.15730094909668,
+          "final_norm": 5.363202095031738,
+          "displacement": 1.5072435140609741,
+          "relative_displacement": 0.29225432623331415
+        },
+        "recurrent": {
+          "parameters": 24960,
+          "initial_norm": 11.40200138092041,
+          "final_norm": 11.793510437011719,
+          "displacement": 3.14361572265625,
+          "relative_displacement": 0.2757073620352614
+        },
+        "branch_inner": {
+          "parameters": 1744,
+          "initial_norm": 2.3440020084381104,
+          "final_norm": 2.4589293003082275,
+          "displacement": 0.6803438067436218,
+          "relative_displacement": 0.2902488156128621
+        },
+        "branch_projection": {
+          "parameters": 1024,
+          "initial_norm": 0.0,
+          "final_norm": 0.5579582452774048,
+          "displacement": 0.5579582452774048,
+          "relative_displacement": null
+        }
+      },
+      "checkpoint": "selection_base_DENSE.pt",
+      "fit_body_wall": 68.88418858207297,
+      "limits": []
+    },
+    {
+      "stage": "selection",
+      "pair_master": 8251,
+      "arm": "COND",
+      "lr_key": "slow",
+      "learning_rate": 0.0001,
+      "fit_complete": true,
+      "panel_complete": true,
+      "counts": {
+        "train_team_steps": 65536,
+        "eval_team_steps": 8192,
+        "team_steps": 73728,
+        "optimizer_steps": 512,
+        "train_episodes": 256,
+        "eval_episodes": 32,
+        "velocity_decisions": 368640,
+        "duration_decisions": 0,
+        "d4": 0,
+        "recurrent_observations": 368640,
+        "explicit_resets": 288,
+        "constructor_resets": 1,
+        "constructors": 1,
+        "step_calls": 73728,
+        "scientific_uav_calls": 73728,
+        "diagnostic_frames": 0,
+        "completed_episode_steps": 73728,
+        "rollouts": 128
+      },
+      "training_counts": {
+        "train_team_steps": 65536,
+        "eval_team_steps": 0,
+        "team_steps": 65536,
+        "optimizer_steps": 512,
+        "train_episodes": 256,
+        "eval_episodes": 0,
+        "velocity_decisions": 327680,
+        "duration_decisions": 0,
+        "d4": 0,
+        "recurrent_observations": 327680,
+        "explicit_resets": 256,
+        "constructor_resets": 1,
+        "constructors": 1,
+        "step_calls": 65536,
+        "scientific_uav_calls": 65536,
+        "diagnostic_frames": 0,
+        "completed_episode_steps": 65536,
+        "rollouts": 128
+      },
+      "exposure": {
+        "common_actor": {
+          "parameters": 34902,
+          "initial_norm": 12.90963077545166,
+          "final_norm": 12.934786796569824,
+          "displacement": 0.7425332069396973,
+          "relative_displacement": 0.0575177725726754
+        },
+        "critic": {
+          "parameters": 34177,
+          "initial_norm": 9.274332046508789,
+          "final_norm": 10.133546829223633,
+          "displacement": 3.819390058517456,
+          "relative_displacement": 0.41182373451409987
+        },
+        "total": {
+          "parameters": 69079,
+          "initial_norm": 15.89565658569336,
+          "final_norm": 16.431598663330078,
+          "displacement": 3.8908987045288086,
+          "relative_displacement": 0.24477747638499608
+        },
+        "encoder": {
+          "parameters": 9744,
+          "initial_norm": 5.965577125549316,
+          "final_norm": 5.98156213760376,
+          "displacement": 0.30848488211631775,
+          "relative_displacement": 0.05171081952743347
+        },
+        "recurrent": {
+          "parameters": 24960,
+          "initial_norm": 11.40200138092041,
+          "final_norm": 11.422638893127441,
+          "displacement": 0.6715769171714783,
+          "relative_displacement": 0.05889991543898649
+        },
+        "branch_inner": {
+          "parameters": 144,
+          "initial_norm": 3.805877447128296,
+          "final_norm": 3.8215346336364746,
+          "displacement": 0.04690907523036003,
+          "relative_displacement": 0.012325429781177713
+        },
+        "branch_projection": {
+          "parameters": 2624,
+          "initial_norm": 0.0,
+          "final_norm": 0.19913449883460999,
+          "displacement": 0.19913449883460999,
+          "relative_displacement": null
+        }
+      },
+      "checkpoint": "selection_slow_COND.pt",
+      "fit_body_wall": 88.21140400797594,
+      "limits": []
+    },
+    {
+      "stage": "selection",
+      "pair_master": 8251,
+      "arm": "DENSE",
+      "lr_key": "slow",
+      "learning_rate": 0.0001,
+      "fit_complete": true,
+      "panel_complete": true,
+      "counts": {
+        "train_team_steps": 65536,
+        "eval_team_steps": 8192,
+        "team_steps": 73728,
+        "optimizer_steps": 512,
+        "train_episodes": 256,
+        "eval_episodes": 32,
+        "velocity_decisions": 368640,
+        "duration_decisions": 0,
+        "d4": 0,
+        "recurrent_observations": 368640,
+        "explicit_resets": 288,
+        "constructor_resets": 1,
+        "constructors": 1,
+        "step_calls": 73728,
+        "scientific_uav_calls": 73728,
+        "diagnostic_frames": 0,
+        "completed_episode_steps": 73728,
+        "rollouts": 128
+      },
+      "training_counts": {
+        "train_team_steps": 65536,
+        "eval_team_steps": 0,
+        "team_steps": 65536,
+        "optimizer_steps": 512,
+        "train_episodes": 256,
+        "eval_episodes": 0,
+        "velocity_decisions": 327680,
+        "duration_decisions": 0,
+        "d4": 0,
+        "recurrent_observations": 327680,
+        "explicit_resets": 256,
+        "constructor_resets": 1,
+        "constructors": 1,
+        "step_calls": 65536,
+        "scientific_uav_calls": 65536,
+        "diagnostic_frames": 0,
+        "completed_episode_steps": 65536,
+        "rollouts": 128
+      },
+      "exposure": {
+        "common_actor": {
+          "parameters": 34902,
+          "initial_norm": 12.556600570678711,
+          "final_norm": 12.577733993530273,
+          "displacement": 0.7220680713653564,
+          "relative_displacement": 0.05750506017141466
+        },
+        "critic": {
+          "parameters": 34177,
+          "initial_norm": 9.274332046508789,
+          "final_norm": 10.13564395904541,
+          "displacement": 3.827883243560791,
+          "relative_displacement": 0.4127395077472279
+        },
+        "total": {
+          "parameters": 69079,
+          "initial_norm": 15.610302925109863,
+          "final_norm": 16.153350830078125,
+          "displacement": 3.8953909873962402,
+          "relative_displacement": 0.24953974346840394
+        },
+        "encoder": {
+          "parameters": 9744,
+          "initial_norm": 5.15730094909668,
+          "final_norm": 5.1683244705200195,
+          "displacement": 0.31196507811546326,
+          "relative_displacement": 0.06048998908431834
+        },
+        "recurrent": {
+          "parameters": 24960,
+          "initial_norm": 11.40200138092041,
+          "final_norm": 11.420654296875,
+          "displacement": 0.6474283933639526,
+          "relative_displacement": 0.05678199569834056
+        },
+        "branch_inner": {
+          "parameters": 1744,
+          "initial_norm": 2.3440020084381104,
+          "final_norm": 2.352778196334839,
+          "displacement": 0.13759516179561615,
+          "relative_displacement": 0.05870095729450414
+        },
+        "branch_projection": {
+          "parameters": 1024,
+          "initial_norm": 0.0,
+          "final_norm": 0.16363583505153656,
+          "displacement": 0.16363583505153656,
+          "relative_displacement": null
+        }
+      },
+      "checkpoint": "selection_slow_DENSE.pt",
+      "fit_body_wall": 70.64322138694115,
+      "limits": []
+    },
+    {
+      "stage": "selection",
+      "pair_master": 8251,
+      "arm": "COND",
+      "lr_key": "fast",
+      "learning_rate": 0.001,
+      "fit_complete": true,
+      "panel_complete": true,
+      "counts": {
+        "train_team_steps": 65536,
+        "eval_team_steps": 8192,
+        "team_steps": 73728,
+        "optimizer_steps": 512,
+        "train_episodes": 256,
+        "eval_episodes": 32,
+        "velocity_decisions": 368640,
+        "duration_decisions": 0,
+        "d4": 0,
+        "recurrent_observations": 368640,
+        "explicit_resets": 288,
+        "constructor_resets": 1,
+        "constructors": 1,
+        "step_calls": 73728,
+        "scientific_uav_calls": 73728,
+        "diagnostic_frames": 0,
+        "completed_episode_steps": 73728,
+        "rollouts": 128
+      },
+      "training_counts": {
+        "train_team_steps": 65536,
+        "eval_team_steps": 0,
+        "team_steps": 65536,
+        "optimizer_steps": 512,
+        "train_episodes": 256,
+        "eval_episodes": 0,
+        "velocity_decisions": 327680,
+        "duration_decisions": 0,
+        "d4": 0,
+        "recurrent_observations": 327680,
+        "explicit_resets": 256,
+        "constructor_resets": 1,
+        "constructors": 1,
+        "step_calls": 65536,
+        "scientific_uav_calls": 65536,
+        "diagnostic_frames": 0,
+        "completed_episode_steps": 65536,
+        "rollouts": 128
+      },
+      "exposure": {
+        "common_actor": {
+          "parameters": 34902,
+          "initial_norm": 12.90963077545166,
+          "final_norm": 14.306211471557617,
+          "displacement": 6.121029376983643,
+          "relative_displacement": 0.4741444184927912
+        },
+        "critic": {
+          "parameters": 34177,
+          "initial_norm": 9.274332046508789,
+          "final_norm": 12.139641761779785,
+          "displacement": 7.516598224639893,
+          "relative_displacement": 0.8104732704139718
+        },
+        "total": {
+          "parameters": 69079,
+          "initial_norm": 15.89565658569336,
+          "final_norm": 18.762685775756836,
+          "displacement": 9.69361686706543,
+          "relative_displacement": 0.6098280253355127
+        },
+        "encoder": {
+          "parameters": 9744,
+          "initial_norm": 5.965577125549316,
+          "final_norm": 6.861052513122559,
+          "displacement": 3.277024745941162,
+          "relative_displacement": 0.5493223332753175
+        },
+        "recurrent": {
+          "parameters": 24960,
+          "initial_norm": 11.40200138092041,
+          "final_norm": 12.508306503295898,
+          "displacement": 5.148061275482178,
+          "relative_displacement": 0.4515050563049622
+        },
+        "branch_inner": {
+          "parameters": 144,
+          "initial_norm": 3.805877447128296,
+          "final_norm": 3.9874987602233887,
+          "displacement": 0.5023414492607117,
+          "relative_displacement": 0.13199096824297868
+        },
+        "branch_projection": {
+          "parameters": 2624,
+          "initial_norm": 0.0,
+          "final_norm": 2.1946587562561035,
+          "displacement": 2.1946587562561035,
+          "relative_displacement": null
+        }
+      },
+      "checkpoint": "selection_fast_COND.pt",
+      "fit_body_wall": 89.74967852199916,
+      "limits": []
+    },
+    {
+      "stage": "selection",
+      "pair_master": 8251,
+      "arm": "DENSE",
+      "lr_key": "fast",
+      "learning_rate": 0.001,
+      "fit_complete": true,
+      "panel_complete": true,
+      "counts": {
+        "train_team_steps": 65536,
+        "eval_team_steps": 8192,
+        "team_steps": 73728,
+        "optimizer_steps": 512,
+        "train_episodes": 256,
+        "eval_episodes": 32,
+        "velocity_decisions": 368640,
+        "duration_decisions": 0,
+        "d4": 0,
+        "recurrent_observations": 368640,
+        "explicit_resets": 288,
+        "constructor_resets": 1,
+        "constructors": 1,
+        "step_calls": 73728,
+        "scientific_uav_calls": 73728,
+        "diagnostic_frames": 0,
+        "completed_episode_steps": 73728,
+        "rollouts": 128
+      },
+      "training_counts": {
+        "train_team_steps": 65536,
+        "eval_team_steps": 0,
+        "team_steps": 65536,
+        "optimizer_steps": 512,
+        "train_episodes": 256,
+        "eval_episodes": 0,
+        "velocity_decisions": 327680,
+        "duration_decisions": 0,
+        "d4": 0,
+        "recurrent_observations": 327680,
+        "explicit_resets": 256,
+        "constructor_resets": 1,
+        "constructors": 1,
+        "step_calls": 65536,
+        "scientific_uav_calls": 65536,
+        "diagnostic_frames": 0,
+        "completed_episode_steps": 65536,
+        "rollouts": 128
+      },
+      "exposure": {
+        "common_actor": {
+          "parameters": 34902,
+          "initial_norm": 12.556600570678711,
+          "final_norm": 13.410161018371582,
+          "displacement": 4.752458572387695,
+          "relative_displacement": 0.3784828979496985
+        },
+        "critic": {
+          "parameters": 34177,
+          "initial_norm": 9.274332046508789,
+          "final_norm": 13.638411521911621,
+          "displacement": 9.603837966918945,
+          "relative_displacement": 1.0355288034498569
+        },
+        "total": {
+          "parameters": 69079,
+          "initial_norm": 15.610302925109863,
+          "final_norm": 19.126903533935547,
+          "displacement": 10.715388298034668,
+          "relative_displacement": 0.6864305163993842
+        },
+        "encoder": {
+          "parameters": 9744,
+          "initial_norm": 5.15730094909668,
+          "final_norm": 5.669749736785889,
+          "displacement": 2.4248111248016357,
+          "relative_displacement": 0.4701705695933607
+        },
+        "recurrent": {
+          "parameters": 24960,
+          "initial_norm": 11.40200138092041,
+          "final_norm": 12.113152503967285,
+          "displacement": 4.078810214996338,
+          "relative_displacement": 0.35772756718143145
+        },
+        "branch_inner": {
+          "parameters": 1744,
+          "initial_norm": 2.3440020084381104,
+          "final_norm": 2.556838035583496,
+          "displacement": 1.0969380140304565,
+          "relative_displacement": 0.46797656746075755
+        },
+        "branch_projection": {
+          "parameters": 1024,
+          "initial_norm": 0.0,
+          "final_norm": 0.5699472427368164,
+          "displacement": 0.5699472427368164,
+          "relative_displacement": null
+        }
+      },
+      "checkpoint": "selection_fast_DENSE.pt",
+      "fit_body_wall": 72.63680273899809,
+      "limits": []
+    },
+    {
+      "stage": "holdout",
+      "pair_master": 8252,
+      "arm": "COND",
+      "lr_key": "slow",
+      "learning_rate": 0.0001,
+      "fit_complete": true,
+      "panel_complete": true,
+      "counts": {
+        "train_team_steps": 65536,
+        "eval_team_steps": 8192,
+        "team_steps": 73728,
+        "optimizer_steps": 512,
+        "train_episodes": 256,
+        "eval_episodes": 32,
+        "velocity_decisions": 368640,
+        "duration_decisions": 0,
+        "d4": 0,
+        "recurrent_observations": 368640,
+        "explicit_resets": 288,
+        "constructor_resets": 1,
+        "constructors": 1,
+        "step_calls": 73728,
+        "scientific_uav_calls": 73728,
+        "diagnostic_frames": 0,
+        "completed_episode_steps": 73728,
+        "rollouts": 128
+      },
+      "training_counts": {
+        "train_team_steps": 65536,
+        "eval_team_steps": 0,
+        "team_steps": 65536,
+        "optimizer_steps": 512,
+        "train_episodes": 256,
+        "eval_episodes": 0,
+        "velocity_decisions": 327680,
+        "duration_decisions": 0,
+        "d4": 0,
+        "recurrent_observations": 327680,
+        "explicit_resets": 256,
+        "constructor_resets": 1,
+        "constructors": 1,
+        "step_calls": 65536,
+        "scientific_uav_calls": 65536,
+        "diagnostic_frames": 0,
+        "completed_episode_steps": 65536,
+        "rollouts": 128
+      },
+      "exposure": {
+        "common_actor": {
+          "parameters": 34902,
+          "initial_norm": 12.97102165222168,
+          "final_norm": 13.000864028930664,
+          "displacement": 0.8837795853614807,
+          "relative_displacement": 0.06813492483917322
+        },
+        "critic": {
+          "parameters": 34177,
+          "initial_norm": 9.340302467346191,
+          "final_norm": 10.082268714904785,
+          "displacement": 3.569956064224243,
+          "relative_displacement": 0.3822098991659499
+        },
+        "total": {
+          "parameters": 69079,
+          "initial_norm": 15.984010696411133,
+          "final_norm": 16.452186584472656,
+          "displacement": 3.6777234077453613,
+          "relative_displacement": 0.2300876468113779
+        },
+        "encoder": {
+          "parameters": 9744,
+          "initial_norm": 6.12648344039917,
+          "final_norm": 6.1595916748046875,
+          "displacement": 0.468523234128952,
+          "relative_displacement": 0.07647506741621896
+        },
+        "recurrent": {
+          "parameters": 24960,
+          "initial_norm": 11.385621070861816,
+          "final_norm": 11.401898384094238,
+          "displacement": 0.7469109296798706,
+          "relative_displacement": 0.06560124608321158
+        },
+        "branch_inner": {
+          "parameters": 144,
+          "initial_norm": 4.048696517944336,
+          "final_norm": 4.074042320251465,
+          "displacement": 0.07378512620925903,
+          "relative_displacement": 0.018224415162316016
+        },
+        "branch_projection": {
+          "parameters": 2624,
+          "initial_norm": 0.0,
+          "final_norm": 0.31911954283714294,
+          "displacement": 0.31911954283714294,
+          "relative_displacement": null
+        }
+      },
+      "checkpoint": "holdout_slow_COND.pt",
+      "fit_body_wall": 88.65940996201243,
+      "limits": []
+    },
+    {
+      "stage": "holdout",
+      "pair_master": 8252,
+      "arm": "DENSE",
+      "lr_key": "slow",
+      "learning_rate": 0.0001,
+      "fit_complete": true,
+      "panel_complete": true,
+      "counts": {
+        "train_team_steps": 65536,
+        "eval_team_steps": 8192,
+        "team_steps": 73728,
+        "optimizer_steps": 512,
+        "train_episodes": 256,
+        "eval_episodes": 32,
+        "velocity_decisions": 368640,
+        "duration_decisions": 0,
+        "d4": 0,
+        "recurrent_observations": 368640,
+        "explicit_resets": 288,
+        "constructor_resets": 1,
+        "constructors": 1,
+        "step_calls": 73728,
+        "scientific_uav_calls": 73728,
+        "diagnostic_frames": 0,
+        "completed_episode_steps": 73728,
+        "rollouts": 128
+      },
+      "training_counts": {
+        "train_team_steps": 65536,
+        "eval_team_steps": 0,
+        "team_steps": 65536,
+        "optimizer_steps": 512,
+        "train_episodes": 256,
+        "eval_episodes": 0,
+        "velocity_decisions": 327680,
+        "duration_decisions": 0,
+        "d4": 0,
+        "recurrent_observations": 327680,
+        "explicit_resets": 256,
+        "constructor_resets": 1,
+        "constructors": 1,
+        "step_calls": 65536,
+        "scientific_uav_calls": 65536,
+        "diagnostic_frames": 0,
+        "completed_episode_steps": 65536,
+        "rollouts": 128
+      },
+      "exposure": {
+        "common_actor": {
+          "parameters": 34902,
+          "initial_norm": 12.537267684936523,
+          "final_norm": 12.56186580657959,
+          "displacement": 0.8900829553604126,
+          "relative_displacement": 0.07099497097200634
+        },
+        "critic": {
+          "parameters": 34177,
+          "initial_norm": 9.340302467346191,
+          "final_norm": 10.010502815246582,
+          "displacement": 3.386165142059326,
+          "relative_displacement": 0.3625327074682043
+        },
+        "total": {
+          "parameters": 69079,
+          "initial_norm": 15.634072303771973,
+          "final_norm": 16.06270980834961,
+          "displacement": 3.501194715499878,
+          "relative_displacement": 0.2239464323479516
+        },
+        "encoder": {
+          "parameters": 9744,
+          "initial_norm": 5.144847393035889,
+          "final_norm": 5.163337230682373,
+          "displacement": 0.43682095408439636,
+          "relative_displacement": 0.0849045502643278
+        },
+        "recurrent": {
+          "parameters": 24960,
+          "initial_norm": 11.385621070861816,
+          "final_norm": 11.40471076965332,
+          "displacement": 0.7722914218902588,
+          "relative_displacement": 0.06783041672330428
+        },
+        "branch_inner": {
+          "parameters": 1744,
+          "initial_norm": 2.308159351348877,
+          "final_norm": 2.3163137435913086,
+          "displacement": 0.18547801673412323,
+          "relative_displacement": 0.0803575440428974
+        },
+        "branch_projection": {
+          "parameters": 1024,
+          "initial_norm": 0.0,
+          "final_norm": 0.16676445305347443,
+          "displacement": 0.16676445305347443,
+          "relative_displacement": null
+        }
+      },
+      "checkpoint": "holdout_slow_DENSE.pt",
+      "fit_body_wall": 70.92851899995003,
+      "limits": []
+    }
+  ],
+  "completed_fit_count": 8,
+  "current_on_failure": {
+    "stage": "holdout",
+    "lr_key": "slow",
+    "arm": "DENSE"
+  },
+  "raw_episode_file": "episodes.jsonl",
+  "raw_episode_rows": 2304,
+  "raw_rollout_file": "rollouts.jsonl",
+  "raw_rollout_rows": 1024,
+  "selection_file": "selection.json",
+  "selection_sha256": "e34d586de070e90896d95674613ebfd4954a5ba705ddcfcbcc9029d8c5735e48",
+  "selection": {
+    "object": "MGTAP-LR-SELECTION-B01",
+    "selection_master": 8251,
+    "selected_lr_key": {
+      "COND": "slow",
+      "DENSE": "slow"
+    },
+    "selected_learning_rate": {
+      "COND": 0.0001,
+      "DENSE": 0.0001
+    },
+    "validation_mean_J": {
+      "COND": {
+        "base": 0.14112299987893276,
+        "slow": 0.16492958901611127,
+        "fast": 0.13031716182818406
+      },
+      "DENSE": {
+        "base": 0.026265496601253702,
+        "slow": 0.1687065165636938,
+        "fast": 0.14945226312362142
+      }
+    },
+    "exact_tie_order": [
+      "base",
+      "slow",
+      "fast"
+    ],
+    "holdout_used_for_selection": false
+  },
+  "primary": {
+    "object": "MGTAP-LR-SELECTION-B01",
+    "holdout_master": 8252,
+    "selected_lr_key": {
+      "COND": "slow",
+      "DENSE": "slow"
+    },
+    "J_by_arm": {
+      "COND": [
+        0.10636483458007706,
+        0.1482498735744453,
+        0.1242935114417363,
+        0.0720282737850122,
+        0.13205798698859528,
+        0.17760357879566227,
+        0.06162887752924171,
+        0.22617956898437738,
+        0.2031703028363901,
+        0.09986863054060523,
+        0.14749309211499542,
+        0.1595750971591023,
+        0.10380021474716797,
+        0.17093084284894303,
+        0.1463454742292019,
+        0.11358459664122364,
+        0.19903446735080063,
+        0.13807220915472315,
+        0.13440304264078093,
+        0.20610112289932303,
+        0.14590220276596155,
+        0.10584950411436872,
+        0.20693789479411037,
+        0.18139030195525369,
+        0.1849122027131151,
+        0.18270369127688732,
+        0.1890376851837381,
+        0.18000833003567798,
+        0.10070542921300037,
+        0.09130782620413402,
+        0.19928000982849894,
+        0.1711471356823184
+      ],
+      "DENSE": [
+        0.10065195192849773,
+        0.10792935747244328,
+        0.07999126133809634,
+        0.06216608175038347,
+        0.13227164798632285,
+        0.15837189872069568,
+        0.04365261223701049,
+        0.1885422648964719,
+        0.1887643375316553,
+        0.0829993693023306,
+        0.08897739015331205,
+        0.18767632931867367,
+        0.0729830224373925,
+        0.15902754799655927,
+        0.08794299589691362,
+        0.11167134523257916,
+        0.15789717529184458,
+        0.13620859232855312,
+        0.09686822406240413,
+        0.1864130490413885,
+        0.07716529572170594,
+        0.06837404650613682,
+        0.1452565993424562,
+        0.13059560958620847,
+        0.13340493299158898,
+        0.17240929083608864,
+        0.1725299448689634,
+        0.17556081317220298,
+        0.12057878351771194,
+        0.08459194814614368,
+        0.16892845968337247,
+        0.17100890649436506
+      ]
+    },
+    "mean_J_by_arm": {
+      "COND": 0.15031149414404593,
+      "DENSE": 0.12660659643095226
+    },
+    "ordered_COND_minus_DENSE": [
+      0.005712882651579335,
+      0.04032051610200202,
+      0.04430225010363996,
+      0.00986219203462873,
+      -0.00021366099772757163,
+      0.01923168007496659,
+      0.017976265292231224,
+      0.03763730408790547,
+      0.014405965304734786,
+      0.016869261238274633,
+      0.058515701961683375,
+      -0.02810123215957136,
+      0.030817192309775462,
+      0.011903294852383756,
+      0.05840247833228829,
+      0.001913251408644484,
+      0.041137292058956054,
+      0.0018636168261700337,
+      0.0375348185783768,
+      0.01968807385793453,
+      0.06873690704425561,
+      0.0374754576082319,
+      0.06168129545165418,
+      0.05079469236904521,
+      0.05150726972152611,
+      0.010294400440798684,
+      0.0165077403147747,
+      0.004447516863474998,
+      -0.01987335430471157,
+      0.006715878057990343,
+      0.03035155014512647,
+      0.00013822918795333705
+    ],
+    "delta_J": 0.023704897713093642,
+    "conditional_panel_se": 0.004197354694630503,
+    "reading": "COND_ABOVE_MEI",
+    "independent_final_training_pairs": 1,
+    "independent_selection_replications": 1,
+    "claim_limit": "one fresh pair conditional on one finite-grid selection; no population ordering"
+  },
+  "cost_law": "per fit: init + 65536 training team ticks + 512 Adam calls + 8192 evaluation team ticks + checkpoint; eight fits serial",
+  "study_body_wall_before_summary": 638.4077481810236,
+  "timing_scope": "study_body_wall_before_summary excludes module imports, CLI parsing, Torch thread setup, final summary write, stdout, and process exit; fit_body_wall excludes its model-pair factory but includes environment construction, learning, evaluation, and checkpoint publication; complete command wall is measured by the GNU-time/supervisor launch envelope",
+  "limits": [],
+  "status": "COMPLETE"
+}

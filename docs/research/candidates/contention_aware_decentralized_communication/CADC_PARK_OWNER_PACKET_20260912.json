@@ -1,0 +1,46 @@
+{
+  "question": "记录已形成并由Root集成的Portfolio决定：CADC可逆停放，保留HIGH、recasts0、训练过的RR与全部B01证据。无需逐项确认，可异步覆盖。",
+  "changes_if_approved": [
+    {
+      "target": "CADC DIRECTION.md 当前生命周期",
+      "from": "ACTIVE/HIGH/recasts0",
+      "to": "PARKED/HIGH/recasts0，可逆；无新增科研投入"
+    }
+  ],
+  "if_refused": "在下一干净边界按实际异步覆盖更新所指状态；保全已接受证据，不从覆盖推断额外实验、设计、清理或Pro授权。",
+  "evidence_for": [
+    {
+      "path": "docs/research/portfolio/pro_packets/20260912_post_kelu_continuation/archive/RESPONSE.md",
+      "quote": "**Only CADC's lifecycle changes: ACTIVE to PARKED, retaining HIGH priority and recasts 0 as recorded attributes.**",
+      "why": "Portfolio明确决定生命周期，原作者已做完整conformance intake，Root在main814139558集成并派发本地应用。"
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260912_post_kelu_continuation/INTAKE.md",
+      "quote": "Current trained RR is stronger and original DM supplies no next action-changing use.",
+      "why": "本次投资依据是当前下一行动的价值；保留RR与完整结果，不由分配结束自行推断停向。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/portfolio/pro_packets/20260912_post_kelu_continuation/INTAKE.md",
+      "quote": "One pair cannot establish unlearnability; finite learning may be insufficient.",
+      "why": "可逆停放没有关闭所有学习通信方案，也没有完成失败原因的因果诊断。"
+    }
+  ],
+  "uncertainty": [
+    "具体新用途、可信新证据或实质成本／就绪事实可触发新的适当节点决定；不要求正向pilot或完整因果重建。",
+    "方向状态和owner记录的完整documentary成本为UNKNOWN；不生成科研额度。",
+    "原有本地synthetic scratch策略拒绝保持创建者责任，本次不重复清理。"
+  ],
+  "cost": {
+    "compute": "零新科研调用；状态应用与保全文档完整成本UNKNOWN。旧B01额度没有余额。",
+    "owner_time": "无需回复即可应用已形成决定；可异步覆盖。",
+    "reversibility": "reversible",
+    "waits_on_this": "nothing"
+  },
+  "verdict_text": "**Only CADC's lifecycle changes: ACTIVE to PARKED, retaining HIGH priority and recasts 0 as recorded attributes.**",
+  "source": "docs/research/portfolio/pro_packets/20260912_post_kelu_continuation/archive/RESPONSE.md",
+  "authority": "PRO_FINAL / OWNER_DELEGATED; ROOT_INTEGRATED main814139558",
+  "portfolio_owner_item": "docs/research/portfolio/owner/inbox/2026-09-12/20260912-root-021.json",
+  "application_record": "docs/research/candidates/contention_aware_decentralized_communication/DIRECTION.md"
+}

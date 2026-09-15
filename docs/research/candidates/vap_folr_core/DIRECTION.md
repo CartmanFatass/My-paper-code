@@ -6,8 +6,10 @@ This source belongs to route **N3 — 状态保留、重建与迁移**, in the *
 of **灵活 agent 数量**. Sources in the same route share one agenda with named subdirections;
 this does not establish scientific equivalence or pool result polarity.
 See [owner-adopted map and resume](../../portfolio/decisions/2026-09-04-adopt-nine-routes-and-resume.md).
-Current lifecycle and sequencing are held only in `docs/research/portfolio/PORTFOLIO.md`;
-older lifecycle/execution statements below are historical. Existing cards, technical quarantines,
+Current reports and direction decisions are recorded in this direction's intake and
+summarized below under OWNER_DIRECT 2026-09-14 Portfolio final interpretation.
+`docs/research/portfolio/PORTFOLIO.md` is a report that may lag actual producers.
+Older lifecycle/execution statements below are historical. Existing cards, technical quarantines,
 second-recast counts and stopped object-family boundaries remain unchanged.
 
 This authority preserves the direction's source-grounded scientific question, evidence references, and provenance.
@@ -15,7 +17,8 @@ This authority preserves the direction's source-grounded scientific question, ev
 ## Authority
 
 - Stable direction ID: `vap_folr_core`
-- Current lifecycle, priority, and owner are held only by `docs/research/portfolio/PORTFOLIO.md`; this file records only the direction's scientific authority and provenance.
+- OWNER_DIRECT 2026-09-14: DM owns innovation, ordinary experiments/engineering and reports; Portfolio is the final direction-level interpreter under current AGENTS §§2/4.8. The owner-challenged disposition is reconciled by Portfolio CONTINUE, using the same third slot.
+- Convergence independently reviews design/evidence/interpretation and successor plans. DM reads the full review and responds to material findings. Portfolio makes the conforming final direction decision; DM executes it without Root ratification.
 
 ## Scientific question
 
@@ -27,12 +30,188 @@ below does not rewrite the older typed-state or scalar-gate objects.
 
 ## Current position
 
-The latest accepted scope is the 2026-09-12 OPEN of one observer-owned entity-
-history-before-aggregation B family against equally informed generic RETAIN on
-an explicitly lifecycle-identity-visible native Traffic Junction variant. This
-selects a concrete new question, not a direction RECAST or empirical result.
-The next need is a finite implementation-and-one-pair investment through the
-proper route; current scope does not itself fund implementation or an experiment.
+**Owner-resumed 2026-09-14:** the explicit instruction to restore subagent DM
+control and continue supersedes the operational pause below. The complete new
+fresh A−Z B gives A−1.476796875/Z1.59265625, d−3.069453125,
+CURRENT_ONLY_ABOVE_MEI. Both have one5000/4969/128 fit, identical augmented modules
+and Generic64 retained; Z clears only the learned entity state every primitive
+observation. This supports prioritizing current-only entity processing for bounded
+development in this design, not closing persistent history or establishing a stable
+ranking. Z remains recurrent through Generic memory and retains seen/age metadata.
+
+The old A−G +5.29640625 remains the strongest positive complete-program observation,
+with unknown repeatability and no isolated persistence attribution. Old replacement
+BANK negatives remain separate. A favorable complete Z realization and easier
+optimization/current-processing/fusion are surviving alternatives. The next useful
+discriminator is a prospective fresh Z−G block against adaptive Generic64: current
+evidence does not show whether Z earns any increment over that null. No historical
+G substitution, exact diagnostic, family closure, C promotion or Portfolio change
+follows from the present result. Same-host tuned headroom remains unmeasured.
+[Card](FOLR_ENTITY_PERSISTENCE_B01_SCIENCE_CARD_20260914.md),
+[E0 result](FOLR_ENTITY_PERSISTENCE_B01_RESULT_EVIDENCE_20260914.md) and
+[intake/next question](FOLR_ENTITY_PERSISTENCE_B01_INTAKE_20260914.md) fix the
+bounded interpretation and preserve the missed low-confidence prediction.
+The [complete independent result/plan review and DM response](pro_packets/20260914_persistence_b01_result_plan_review/INTAKE.md)
+find no result-invalidating defect and support preparing fresh Z−G. Selection of Z
+is outcome-informed; repeating the earlier direct A−G positive remains the strongest
+rival. Equal registered parameters do not equal trained temporal capacity, and Z is
+not established smaller or faster. The comparison remains a whole learning/execution
+law. This completed review neither grants a new fit nor changes the direction's
+lifecycle, priority or family status.
+The subsequent object-tier selection is the [fresh Z−G B card](FOLR_ENTITY_CURRENT_INCREMENT_B01_SCIENCE_CARD_20260914.md),
+with two new original fits and a whole-program increment as its claim ceiling.
+Under the [owner's accepted two-axis calibration](../../portfolio/decisions/2026-09-14-two-axis-research-calibration.md),
+this adaptive A−G / A−Z / Z−G sequence is not independent replication of a fixed
+contrast or a stable method ranking. Each original object's reading stays frozen;
+training replication and a matched target-host baseline remain separate gaps.
+The [current intake's applicability record](entity_current_increment_b01_781801/GENERIC_INTAKE.md#owner-calibration-received-while-the-original-z-was-running)
+keeps jointly trained roster change distinct from transfer and ad hoc teamwork.
+
+**Historical operational instruction — 2026-09-14 13:23 PDT (superseded by explicit resume):** finish the accepted
+augmentation B01 A−G run and required result/review/archival closeout, then write
+the [owner-pause handoff](HANDOFF_20260914_OWNER_PAUSE.md) and await explicit
+resume. The original pair, independent review and material response are complete.
+Owner pause follows the final committed handoff; no successor object or
+direction/vacancy work follows. This operational pause does not change the scientific lifecycle below.
+
+**Current lifecycle: ACTIVE / MEDIUM — Portfolio CONTINUE applied on 2026-09-14.**
+The [complete Portfolio decision and DM intake](pro_packets/20260914_portfolio_direction_reconciliation/INTAKE.md)
+withdraw the disputed stopping rationale and select the prepared B03 bounded
+comparison under the latest owner authority. B02 remains a valid
+adverse observation: Generic -0.65296875, BANK -5.483828125, d=-4.830859375,
+GENERIC_ABOVE_MEI, one fitted instance per arm. E's missing contrast and F's
+outcome-informed negative fixed-reference use stay separate. There is no population,
+component-causal, competence, convergence, speed or general BANK-negative claim.
+
+The surviving uncertainty is whether the current package's substantial disadvantage
+recurs under a new complete learning-and-evaluation realization. This does not
+isolate pure training variance, because both declared random seeds change. The [B03 card](FOLR_ENTITY_HISTORY_B03_SCIENCE_CARD_20260914.md)
+selects new seed781501/eval1781501 with the same legal information, H20 and
+5000-train/4969-update/128-final exposure per arm. A reversal/near tie or further
+adverse observation would change development advice about this exact memory package.
+The observed B02 cost of3041.46 native seconds and existing accepted path make this
+question proportionate; one negative sign or completed ticket did not justify PARK.
+This is no fixed seed quota, favorable-output search or automatic future repetition.
+
+BANK's observer-subject histories could alter native decisions after visibility and
+membership changes; short H20 trips, reobserved cues and adaptive Generic recurrence
+remain its strongest opposition. The comparison preserves that legal generic null.
+It tests the intact package, not necessity or a particular component's causal effect.
+The full [B02 independent review](pro_packets/20260914_entity_history_b02_review/INTAKE.md)
+challenged the stopping inference; the correction now answers it through selected work.
+
+B03 at source b257dcb1d7578a057afa9b4bdd7c7ff74ad8e24f is now complete and
+technically accepted for both arms. [B03 result](FOLR_ENTITY_HISTORY_B03_RESULT_EVIDENCE_20260914.md):
+Generic4.9259375, BANK-1.71078125, d=-6.63671875, GENERIC_ABOVE_MEI. Both arms
+completed5000/4969/128; summed native wall3779.85s. B02 and B03 are two separate
+whole-learning-and-evaluation realizations, with no pooled population ranking.
+All original outputs/checkpoints/logs and operational failures are preserved.
+At B03 intake no additional fit had been selected. That [DM intake](FOLR_ENTITY_HISTORY_B03_INTAKE_20260914.md)
+proposed preserving generic recurrence in both arms while testing persistent versus
+current-only entity state. The subsequent complete Portfolio clarification changes
+the selected next comparison to A−G, as recorded below.
+The [complete independent result/plan review and DM response](pro_packets/20260914_entity_history_b03_result_plan_review/INTAKE.md)
+are now read and preserved. The review finds no result-invalidating B03 defect and
+favors developing the additive-persistence question over a third unchanged block.
+DM accepts its prospective findings: unseen current-only entity state must be zero;
+both learners retain their own generic recurrent route and two-stream replay; equal
+parameter counts do not match temporal capacity or prove a gain over unaugmented Generic.
+The [full post-B03 Portfolio intake](pro_packets/20260914_post_b03_portfolio_direction/INTAKE.md)
+preserves both contradictory comparator decisions and the complete116-line
+clarification resolving them. The applied unique objective is **persistent
+augmented program versus fresh unaugmented Generic64 (A−G)**; the A−Z internal
+persistence comparison is withdrawn for this round. This prioritizes the complete
+program's development increment while forgoing component attribution. CONTINUE/
+MEDIUM, the existing family/slot and all historical negative evidence remain.
+Original malformed inputs, the full composer/accepted-user captures and all full
+responses are preserved and checked. No FOLR provider or archive recovery remains.
+The common persistent Generic64 plus entity-history actor is technically accepted
+at source `550846a863ad7276edf8cab1a556e7d76353df08`, after five focused tests and
+independent Sol/high recurrent/RNG review. Both native engineering children are
+complete. The new [augmentation B01 card](FOLR_ENTITY_HISTORY_AUGMENTATION_B01_SCIENCE_CARD_20260914.md)
+selects train781601/eval1781601, two fresh5000/4969/128 fits and strict MEI1.
+Complete learner/driver/checkpoint/primary integration is published at
+`cf1efd77ce5c38a33a1d1d283922bc3f13208c7b`, with11 focused synthetic tests passed.
+The exact native time/admission scripts are at`e218a89096b14331b783e7544503210e74be0f89`.
+Independent Sol/high full-path review is complete with no material finding; DM
+[accepts exact source d9977dc18](entity_history_augmentation_b01_781601/TECHNICAL_ACCEPTANCE.md),
+including the explicit output-directory precreation condition. [G actually started](entity_history_augmentation_b01_781601/EXECUTION.md)
+at2026-09-14T15:36:55.744043Z after fresh memory admission, handle
+`folr-augmentation-b01-781601-generic`,PID3674297. Native
+`/root/folr_augmentation_b01_monitor` adopted it and owns bounded observation;
+its initial timestamp inconsistency and factual correction are both preserved.
+G has now completed and been collected:mean-0.966484375,5000/4969/128,
+1178.68s native wall,exit0. Original raw evidence is preserved. The original A
+was accepted19:39:55.755736Z,handle`folr-augmentation-b01-781601-augmented`,
+PID3679958,after fresh admission; the same batch Monitor adopted at19:40:29.085Z.
+A is now complete exit0 at20:26:32Z and fully collected:mean4.329921875;
+**A−G=+5.29640625, AUGMENTED_ABOVE_MEI**, under the frozen rule. The low-confidence
+Generic-win prediction missed. Both5000/4969/128 endpoints and all raw evidence
+are intact; native3975.48s/CPU3972.96s. [Full result and interpretation](FOLR_ENTITY_HISTORY_AUGMENTATION_B01_INTAKE_20260914.md)
+support this one complete-program increment, without persistence attribution or
+training-population ranking. Old replacement losses remain separate. The
+13401.737549s inter-arm control interval stays outside native work. The full112-line independent current-result review at4da68fe7a9577a0bc32a00d6fc7c7e7412e50568
+finds no invalidating defect and accepts this bounded program-level observation.
+DM read the complete answer and corrected the MEI contrast subject and nonpaired
+negative-count wording; numerical evidence and inference limits remain. All
+accepted provider input/response/comment artifacts are verified, and remote
+execution was reclaimed20:44:04.991160Z after complete published preservation.
+Current-object science/review closeout is complete. [Final operational handoff](HANDOFF_20260914_OWNER_PAUSE.md)
+records the explicit owner pause; no successor, new direction or vacancy follows.
+FOLR continues to occupy one existing slot, with the
+same DM and checkout. Portfolio declines the earlier DISH alternative for this slot.
+Full support/provider cost remains UNKNOWN and all old evidence/costs remain recorded. [PARK.md](PARK.md) preserves
+the previous decisions as history, not current lifecycle or dispatch instructions.
+
+**Previous lifecycle judgment (2026-09-13), superseded prospectively above:**
+Owner lifted the later operational pause on 2026-09-13. DM reconsidered the
+runtime-policy change and retains this scientific PARK, independently of any
+wall-time estimate, investigation reference or missing permission. The
+[resume readback](pro_packets/20260913_post_f_scientific_review/INTAKE.md#owner-resume-and-runtime-policy-readback--2026-09-13)
+records the synchronized controls, comparison limits and preservation closeout.
+The fixed reference-use question is resolved. A fresh same-host learning block
+would supply the first complete fresh/fresh comparison here, not just another
+panel of the old BANK. DM currently judges that unresolved comparison insufficiently
+valuable relative to its necessary work and unknown complete cost. No architecture
+change or earlier favorable result is required for reconsideration. This is a
+qualitative research-value judgment, not an empirical futility result or a
+consequence of expired permission. No new experiment is selected; the occupied
+execution slot is released without selecting a replacement or new resources.
+DM may revisit a specific useful information/lifetime, learning-performance or cost
+proposal within the owner's actual resource/cross-direction constraints. Portfolio
+consultation is not a re-entry prerequisite. Scientific evidence and narrower holds
+below retain their original meanings. Assigned remote reclamation is complete;
+the [cleanup receipt](retained_reference_use_b01_781301/CLEANUP_RECEIPT_20260913.json)
+retains preservation hashes, terminal checks and all five verified removals.
+See the [DM lifecycle decision](FOLR_RETAINED_REFERENCE_USE_B01_INTAKE_20260913.md#dm-lifecycle-decision--2026-09-13-full-direction-delegation).
+The complete post-F independent scientific review found no result-invalidating
+defect; DM accepts its R1/R2 reporting corrections and R3 judgment clarification
+in the [scientific-review response](pro_packets/20260913_post_f_scientific_review/INTAKE.md).
+At that PARK closeout no live scientific or Transport producer remained. Clerk completed the four old
+main-preservation gaps and f80 cleanup publication; DM verified the exact accepted
+blobs. Current decision/report integration is separate from scientific execution.
+
+The observer-owned entity-history-before-aggregation B family remains OPEN on
+the lifecycle-identity-visible native Traffic Junction variant. Its allocated
+E batch produced one complete BANK policy (5000 train/4969 updates/128 final),
+with native mean return -4.32609375. The equally informed Generic arm timed out
+before final evaluation, so BANK-minus-Generic and its MEI rule are unavailable.
+This is an accepted own-arm observation, not evidence of a bank advantage.
+
+The separately selected and funded retained-reference use comparison is now
+complete: one fresh equally informed Generic64 has mean1.055 and the fixed
+historical BANK's new panel has mean-4.877421875, giving d_use=-5.932421875. The
+strict<-1 rule selects Generic-only for this named optional development-reference
+use. One newly trained Generic policy has a higher sampled mean than this fixed
+BANK reference; no absolute task-competence or information-sufficiency threshold
+has been established. This outcome-informed retained/new comparison is not a fresh matched
+training pair or BANK-learning replication; it does not repair E's unavailable
+primary or close the still-open family. The named finite F allocation supplies
+no retry or automatic successor. B04 remains contrary context on its own host.
+See [E0 result](FOLR_ENTITY_HISTORY_B01_RESULT_EVIDENCE_20260912.md) and
+[final intake](FOLR_ENTITY_HISTORY_B01_INTAKE_20260912.md), and the
+[post-B01 use decision intake](pro_packets/20260912_entity_history_post_b01_discriminator/INTAKE.md),
+and [completed reference-use intake](FOLR_RETAINED_REFERENCE_USE_B01_INTAKE_20260913.md).
 
 The accepted post-B03 H still holds the exact tested LEARNED_EVENT/5000-training/
 128-final package, retaining event-aware RETAIN and no currently recommended
@@ -923,9 +1102,10 @@ support considering bounded independent follow-up; inside/adverse evidence
 would favor the generic package at that observation's scope. No branch funds
 an automatic successor or stops FOLR. Complete implementation, per-arm wall,
 support, memory and agent/provider costs are unknown; no old cap transfers.
-The present OPEN authorizes no implementation, scientific identity, test or
-experiment. Root receives the decision-ready finite investment need through
-the existing Portfolio route, without another Convergence consultation.
+At that historical decision the OPEN did not itself allocate implementation or
+an experiment; its named investment request subsequently produced E. That old
+route is not current authority: DM now owns useful bounded research and lifecycle
+decisions with independent scientific review, and Clerk reports them.
 
 References:
 
@@ -933,3 +1113,84 @@ References:
 - `pro_packets/20260912_entity_history_continuity/INTAKE.md`
 - `FOLR_ENTITY_HISTORY_CONTINUITY_QUESTION_20260912.md`
 - `pro_packets/20260912_entity_history_continuity/FACTS.json`
+
+## Accepted post-B01 retained-reference use selection — 2026-09-12
+
+**Conclusion and bounded claim.** Convergence selects one future B use comparison
+within the still-open entity-history family: the accepted final BANK weights
+against one genuinely new Generic GRU64 RETAIN fit, followed by fresh 128-episode
+panels for each. The decision is whether this particular BANK belongs in an
+optional executable reference set for development on the same public-information
+host. It is outcome-informed and conditional on one completed historical BANK;
+it neither repairs E's unavailable primary nor adds BANK training replication.
+This is no new family OPEN, direction RECAST or Portfolio disposition.
+
+**Mechanism and legal alternative.** The five-slot H20 native host, full common
+public lifecycle table, observer-local physical information and lifetime-owned
+GRU16 bank remain. Each evaluation episode resets recurrent records. Generic
+retains its adaptive own-trip GRU64 and identical public information, with the
+accepted full 5,000-episode learning exposure. New Generic parameters, optimizer,
+replay and RNG are fresh; the failed E prefix supplies no checkpoint or endpoint.
+
+**Strongest support and contradiction.** One executable BANK exists, so one new
+competent Generic fit could change the stated reference-use choice without another
+BANK training history. BANK has still shown no comparative value. The short
+horizon/common cues and B04's competent Generic on its different host preserve
+Generic sufficiency as the strongest alternative. The negative BANK raw return
+is not a contrast. Matching tuned headroom is absent; all old scalar signs, H,
+pauses and recast history remain under their own scope.
+
+**Next discriminator.** Fresh BANK-reference mean minus fresh Generic mean,
+with the proposed absolute MEI 1: strict >+1 supports optional BANK inclusion;
+inclusive [−1,+1] preserves sign and favors Generic-only use; strict <−1 favors
+Generic-only use. No equivalence, stable superiority, component-memory cause,
+original-CAMA, speed, transfer or C/UAV claim follows. Generic technical completion
+precedes the new BANK panel, whose acquisition is independent of Generic's score.
+A missing endpoint leaves the dependent contrast unavailable with no automatic
+replacement. The direction decision did not supply investment; Portfolio has
+now funded this same finite use once, with no change to its scientific ceiling
+([investment intake](pro_packets/20260913_retained_reference_investment/INTAKE.md)).
+
+References:
+
+- `pro_packets/20260912_entity_history_post_b01_discriminator/archive/RESPONSE.md`, delivery `d6a29b287612f21fd5ddbb0cc19fbae4e8c1fb12`, integrated identical bytes `7ab178ad8fbf94ffa4c5da5b4812d632db2fdb9b`
+- `pro_packets/20260912_entity_history_post_b01_discriminator/INTAKE.md`
+- `pro_packets/20260912_entity_history_post_b01_discriminator/INVESTMENT_READINESS.md`
+
+## Accepted retained-reference use result — 2026-09-13
+
+**Conclusion and bounded claim.** The exact fixed BANK is not retained as an
+optional executable development reference on the current public-information
+Traffic Junction host. One new full Generic64 fit and its128 new final episodes
+give mean1.055; the historical BANK16's128 new episodes give-4.877421875. Their
+nonpaired d_use=-5.932421875 selects the prespecified strict<-1
+GENERIC_ONLY_BANK_WORSE branch. This resolves the purchased use observation,
+without replacing the missing original E contrast.
+
+**Strongest support and contradiction.** Both native endpoints are complete,
+equally informed and technically accepted at the fixed source and exposure.
+One new Generic policy has a higher sampled mean than the fixed BANK on this
+exact host; this is not certified absolute competence. Against a broad negative, BANK is one outcome-informed historical policy
+and Generic one new fit; their capacities/histories are not matched. Episode
+SEs0.533175147760 and0.289917604837 remain conditional; no training-population or
+component-memory inference follows. Generic's62 negative-return episodes and
+range[-13.46,22.16] coexist with its higher mean; BANK has125 negative episodes
+and range[-19.80,1.46]. No adverse outcome is dropped.
+
+**Surviving alternative and next discriminator.** The observed comparison supports
+Generic-only selection for the named reference use, not general sufficiency.
+A fresh/fresh learning comparison on this unchanged host remains informative;
+other information/lifetime contexts are also unruled out, not prerequisites.
+No next empirical object is selected here. Repeating the same
+retained-reference question would reuse the completed Generic-only decision.
+Reconsider when a concrete new fact or proposal changes the action choice;
+no automatic fit, panel, consultation, family closure or whole-direction stop
+follows from this completed allocation. Matching tuned headroom remains absent;
+earlier scalar H, signs, smaller holds and recast history remain unchanged.
+
+References:
+
+- `FOLR_RETAINED_REFERENCE_USE_B01_SCIENCE_CARD_20260913.md`
+- `FOLR_RETAINED_REFERENCE_USE_B01_RESULT_EVIDENCE_20260913.md`
+- `FOLR_RETAINED_REFERENCE_USE_B01_INTAKE_20260913.md`
+- `retained_reference_use_b01_781301/RESULT_SUMMARY.json`

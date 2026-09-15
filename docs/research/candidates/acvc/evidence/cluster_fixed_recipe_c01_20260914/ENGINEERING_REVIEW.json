@@ -1,0 +1,98 @@
+{
+  "object": "ACVC_CLUSTER_FIXED_RECIPE_C01",
+  "dm_parent_thread_id": "01a09dfa-0655-7831-aa3a-9fff2ddd2508",
+  "reviewer_native": "/root/acvc_fixed_recipe_c01_review",
+  "reviewer_app_thread_id": "01a0a103-33aa-7291-9abc-1b9e905fb54e",
+  "role_model_effort": "hmasd-reviewer / Sol / high",
+  "event": "ACVC_CLUSTER_FIXED_RECIPE_C01_REVIEW_20260914_01",
+  "state": "all_material_findings_resolved_dm_exact_byte_acceptance",
+  "reviewed_base": "e20c5737da08b2311ad42c0e5d06117f3035432b",
+  "frozen_card_commit": "cc7913a2920a49e15b918def066935e0e95cb334",
+  "current_doc_only_head": "08378aee99020373716ed7926090b34a744b95a4",
+  "findings": [
+    {
+      "severity": "HIGH",
+      "summary": "The 1800 s complete-invocation boundary is not enforced through final publication/readback, and a just-over-boundary unit can remain marked complete.",
+      "evidence": "The inherited fitter cancels SIGALRM before its summary publication. New protocol.py lines60-62 call shared.publish without an armed inner timer, then lines81-85 sample elapsed before final JSON serialization/write/readback at86-89. An elapsed value below1800 followed by boundary-crossing serialization/write/readback retains complete status and read_unit accepts it. A blocked publication can continue to the1860s outer timeout.",
+      "impact": "A unit outside the frozen technical-completeness boundary can enter the six-unit inference.",
+      "required_correction": "Enforce the remaining inner deadline across all publication layers, check elapsed decisively after final readback, and validate timeout/completeness evidence in the reducer; add a focused clock/write-boundary counterexample.",
+      "dm_response": "Accepted. Correct before source acceptance or scientific execution, within the already declared complete-invocation-timeout scope. No frozen exposure or inference rule is relaxed.",
+      "resolution": "Resolved by final exact-byte independent review and DM acceptance before execution."
+    },
+    {
+      "severity": "MEDIUM",
+      "summary": "Every launch omits the card-required native CPU measurement.",
+      "evidence": "launch.sh line21 records only native_wall_s=%e, peak_rss_kib=%M and exit_code=%x. Neither summary nor reducer records user/system CPU.",
+      "impact": "The required per-unit and six-unit native CPU cost would be unavailable after execution.",
+      "required_correction": "Add GNU-time user and system CPU fields %U and %S around the full native command, retain both and their explicit sum in intake.",
+      "dm_response": "Accepted. Record the promised native CPU measurement before any original unit starts; this does not change scientific work or add a profiler.",
+      "resolution": "Resolved by final exact-byte independent review and DM acceptance before execution."
+    }
+  ],
+  "other_reviewed_behavior": "No other material finding in indexed pairs/routing, unchanged fresh C-only1024/512rollout/2048update/full192panel execution, private m/q RNG/state consumers, complete ordered records/configuration/checkpoint presence, exact six indexed units, df5/sqrt6 t(.9875), strict.01 conjunction, ZERO_VARIANCE_UNRESOLVED, or survivor/master-dedup exclusion. No uncarded scope4 machinery;493 non-test source lines and68-line runner.",
+  "checks": "Staged inventory/base/current revision and full reachable source/consumer/RNG/runtime/statistical inspection; git diff --cached --check passed. Existing13-pass pytest and bash syntax evidence was not repeated. No new scratch, source edit, model/environment/learner or scientific invocation.",
+  "reviewed_staged_blobs": {
+    "engineering_check.txt": "43384f7b98c68e501c399b9a9794d2a2134e6240",
+    ".gitattributes": "b9399209bd528d592b25f1d315578527f7528d5d",
+    "__init__.py": "f479af979fc02dcc7f48401b1d6106c055225ee7",
+    "launch.sh": "d96eeb999259debe292f4dad9273909fda1dae80",
+    "protocol.py": "1ade3979a8f4fc035dce4dcbb5111d26026db8c3",
+    "runner.py": "f9018a6d54357cbbdd7dbaf61c40d0574a733207",
+    "test_protocol.py": "fb8519e708152de3e22a834fc82af7e8b735d8fe"
+  },
+  "frozen_card_blob": "e755d3dd496debcd0a7272a1cee5de33b7274448",
+  "reachable_shared_blobs": {
+    "fitter": "55db07fc5d3e864351e4d803823f70b36cc3d583",
+    "clustered_protocol": "fb6c8935813c59694c86bb02854a5368bc3f2594",
+    "model": "4f3e39743b608cd16e6c5098724bd609ed5add66",
+    "evaluation_collector": "cffcd7ebb68c07af9d8a0b61671a1d9f0208e086",
+    "environment": "4b59281bfb76245dd3283fe860327e35463c2b26",
+    "training_learner": "30c07ff798f198227b98add3a3a452249db22f13",
+    "policy": "ed228c88530feda63bf96c1a1597486cc52f0842",
+    "geometry": "bc00b7e708ce7f52525540e7537adb888c1057a5"
+  },
+  "corrective_assignment": "ACVC_CLUSTER_FIXED_RECIPE_C01_IMPL_20260914_01_CORRECTION_02",
+  "corrective_owner": "/root/acvc_fixed_recipe_c01_implementation",
+  "next_owner_action": "DM commits/pushes exact accepted source, records its actual SHA/commands, remotely prepares and launches six original units with fresh adjacent admission and direct batch monitor.",
+  "limits": "Engineering evidence only; no real native execution, filesystem timing, scientific validity, launch authority or DM source acceptance is established. Prior creator-owned policy-rejected cleanup remains untouched.",
+  "correction_reviews": [
+    {
+      "event": "ACVC_CLUSTER_FIXED_RECIPE_C01_REVIEW_20260914_01_CORRECTION_01",
+      "reviewed_head": "e4411f493e0fef1457a716d032493f29ab44e9cf",
+      "protocol_blob": "2ce75a238b07c4d07750d871dbd692dcfdfa3b12",
+      "launch_blob": "22c547797a187a6f4e70bab69a3eb1a542e29580",
+      "tests_blob": "0052b61b7c015079afefb18a90140b1f80fd0d92",
+      "engineering_evidence_blob": "3511aa5395008f82a8630cad064f1b031bc887d2",
+      "initial_correction_report": "CPU and false acceptance resolved. MEDIUM residual: inherited fitter cancels SIGALRM before its own summary construction/write/readback, while new publisher rearms only after fitter return. An inherited blocked write can continue to1860s. Post-exit wall<1800 excludes it but is not operational enforcement; it also includes interpreter teardown after the frozen publication endpoint. Suggested scoped shared-source option or explicit prospective watchdog boundary revision.",
+      "parent_steer_addendum": "Reviewer independently assessed the DM candidate: time ... timeout TERM/+10sKILL1860s timeout TERM/+10sKILL1800s Python. Starting the inner GNU timer before interpreter entry covers imports, learner/evaluation, inherited and fixed publication/readback and completion, independently of SIGALRM cancellation. Outer1860 remains fallback. Treating1800 as complete Python invocation including immediate exit is consistent with named complete-invocation scope and declared publication/readback/exit cost chain; no healthy-run RNG/order/exposure/evaluation/inference changes. Exact nested implementation, bash-n and focused assertion remain to be inspected.",
+      "dm_response": "Accept residual and concrete minimal repair. Explicitly clarify the prospective complete-Python-invocation watchdog in card9 before any run. Keep shared learner read-only; assign same Implementer correction02 and same Reviewer final byte review. No scientific endpoint, estimator, allocation or history changes.",
+      "retention_limit": "Timeout can interrupt non-atomic summary writing, leaving it partial. Raw episodes/updates/checkpoint/logs/native resource evidence remain, and reducer quarantines incomplete records. No other material retention defect found.",
+      "checks": "Full staged/shared correction inspection and git diff --cached --check passed; working digests match. Recorded13-pass/1.16s evidence inspected without rerun. An attempted staged-hash reconstruction through an invocation-owned temporary file was rejected before effect; direct read-only Get-FileHash safely confirmed working digests. No file edit, scratch, model or scientific run."
+    },
+    {
+      "event": "ACVC_CLUSTER_FIXED_RECIPE_C01_REVIEW_20260914_01_CORRECTION_02",
+      "outcome": "No material finding remains; original timeout and CPU findings resolved.",
+      "reviewed_head": "e4411f493e0fef1457a716d032493f29ab44e9cf",
+      "launch_blob": "f856e05440cb83e950b50baa14cf71c2fca88277",
+      "protocol_blob": "2ce75a238b07c4d07750d871dbd692dcfdfa3b12",
+      "tests_blob": "2ae17dfa7934b209f2961c90ded0218d919ff715",
+      "engineering_evidence_blob": "0f6cbfa005fc313c5cad66f09666ecc09dbf4fdc",
+      "assessment": "Exact time -> outer1860 TERM/+10sKILL -> inner1800 TERM/+10sKILL -> Python enforces full invocation independent of inherited SIGALRM cancellation. Card9 explicitly clarifies the prospective ordinary watchdog; frozen science unchanged. CPU fields retained. Timeout may leave partial summary, raw records preserved and incomplete inference excluded.",
+      "checks": "Exact seven staged surfaces and working SHA256 verified; staged diff check passed; recorded focused assertion1pass.21s and bash-n inspected without repeating. No edits/scratch/model/native/science by Reviewer.",
+      "limits": "Actual native/runtime/resource facts remain to be measured and accepted by DM."
+    }
+  ],
+  "final_source_sha256": {
+    "scripts/run_acvc_cluster_fixed_recipe_c01.py": "a056e7da5a8340daea49d4bac3de576749403138b5d2970836b05a64c35ca628",
+    "experiments/candidates/acvc/cluster_fixed_recipe_c01/protocol.py": "ac73f0536510391cbe3d27a2dda5f74c71c50f52e2a8850c63edb87719a9f638",
+    "experiments/candidates/acvc/cluster_fixed_recipe_c01/launch.sh": "8f5469a5e854f7184e1be91c8c13485b1c11e127af043e437d3b9f09a85058c0",
+    "tests/experiments/candidates/acvc/cluster_fixed_recipe_c01/test_protocol.py": "ea9964d212c90c0381c8f6a837298cbd87ad6f4ed2ef1c77ee43893bd40badc8"
+  },
+  "dm_acceptance": {
+    "at": "2026-09-14T18:06:35.530165+00:00",
+    "decision": "Accept exact reviewed staged source for the six original frozen invocations.",
+    "basis": "Actual artifact/shared-path inspection, final independent high-risk review with all material findings resolved, original and corrective focused checks (8.513s aggregate pytest command wall), exact working/staged byte agreement. No repeat of passed tests.",
+    "scope": "fixed unit/complete-primary validation, original-output refusal and complete-invocation timeout per science card section6; prospective watchdog clarification in9",
+    "retained_limit": "Creator-owned five test scratch directories and three initial pyc files remain after policy-rejected cleanup. No native result or resource value preclaimed."
+  }
+}

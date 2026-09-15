@@ -1,0 +1,212 @@
+{
+  "accepted": true,
+  "evidence_class": "B/EXPLORE",
+  "independent_training_units": 1,
+  "verification": "All1216 episode rows/2048 ordered updates, identity, reset, counts, configuration, finite values and all primary reductions; stdlib mean/SD match original float64 at absolute1e-14. No new scientific exposure.",
+  "expected_counts": {
+    "environment_constructors": 4,
+    "explicit_resets": 1216,
+    "train_episodes": 1024,
+    "eval_episodes": 192,
+    "rollouts": 512,
+    "optimizer_steps": 2048,
+    "backward_calls": 2048,
+    "update_records": 2048,
+    "train_team_steps": 262144,
+    "eval_team_steps": 49152,
+    "team_steps": 311296,
+    "fresh_dense_initializations": 1,
+    "post_fit_loads": 3,
+    "final_checkpoints": 1,
+    "new_fits": 1,
+    "gate_constructions": 0,
+    "duration_heads": 0,
+    "selector_updates": 0,
+    "evaluation_updates": 0
+  },
+  "arm_means": {
+    "C": {
+      "complete": true,
+      "available_episodes": 64,
+      "mean_S": 44.65817928546113,
+      "mean_J": 0.17444601283383254
+    },
+    "F": {
+      "complete": true,
+      "available_episodes": 64,
+      "mean_S": 77.74962576885484,
+      "mean_J": 0.3037094756595892
+    },
+    "dwell": {
+      "complete": true,
+      "available_episodes": 64,
+      "mean_S": 61.47882139080062,
+      "mean_J": 0.24015164605781492
+    }
+  },
+  "contrasts": {
+    "F-C": {
+      "mean_J": 0.12926346282575668,
+      "sample_SD_J": 0.07462570002022607,
+      "conditional_SE_J": 0.00932821250252826,
+      "minimum_J": -0.05320107074318092,
+      "maximum_J": 0.3004851932484936,
+      "adverse": 1,
+      "favorable": 63,
+      "zero": 0,
+      "reading": "UP"
+    },
+    "F-dwell": {
+      "mean_J": 0.0635578296017743,
+      "sample_SD_J": 0.08962578187822466,
+      "conditional_SE_J": 0.011203222734778083,
+      "minimum_J": -0.1859325035842555,
+      "maximum_J": 0.3403342958437049,
+      "adverse": 15,
+      "favorable": 49,
+      "zero": 0,
+      "reading": "UP"
+    },
+    "dwell-C": {
+      "mean_J": 0.06570563322398239,
+      "sample_SD_J": 0.08379871246989312,
+      "conditional_SE_J": 0.01047483905873664,
+      "minimum_J": -0.2814743147840588,
+      "maximum_J": 0.2927441895369617,
+      "adverse": 10,
+      "favorable": 54,
+      "zero": 0,
+      "reading": "UP"
+    }
+  },
+  "exposure": {
+    "common_actor": {
+      "parameters": 34902,
+      "initial_norm": 12.596080780029297,
+      "final_norm": 13.011567115783691,
+      "displacement": 3.1679012775421143,
+      "relative_displacement": 0.2514989648656806
+    },
+    "critic": {
+      "parameters": 34177,
+      "initial_norm": 9.287044525146484,
+      "final_norm": 13.871137619018555,
+      "displacement": 9.878192901611328,
+      "relative_displacement": 1.0636530141384732
+    },
+    "total": {
+      "parameters": 69079,
+      "initial_norm": 15.649613380432129,
+      "final_norm": 19.018657684326172,
+      "displacement": 10.373730659484863,
+      "relative_displacement": 0.6628745648410231
+    },
+    "encoder": {
+      "parameters": 9744,
+      "initial_norm": 5.198408126831055,
+      "final_norm": 5.546746730804443,
+      "displacement": 1.8291577100753784,
+      "relative_displacement": 0.35186881550027116
+    },
+    "recurrent": {
+      "parameters": 24960,
+      "initial_norm": 11.42384147644043,
+      "final_norm": 11.718205451965332,
+      "displacement": 2.5753350257873535,
+      "relative_displacement": 0.22543511577066982
+    },
+    "branch_inner": {
+      "parameters": 1744,
+      "initial_norm": 2.3352298736572266,
+      "final_norm": 2.4917829036712646,
+      "displacement": 0.8548062443733215,
+      "relative_displacement": 0.36604800838481694
+    },
+    "branch_projection": {
+      "parameters": 1024,
+      "initial_norm": 0.0,
+      "final_norm": 0.5922542214393616,
+      "displacement": 0.5922542214393616,
+      "relative_displacement": null
+    }
+  },
+  "intervention_by_rule": {
+    "C": {
+      "opportunities": 0,
+      "retrace": 0,
+      "dwell": 0,
+      "apply": 0,
+      "distinguishable": 0
+    },
+    "F": {
+      "opportunities": 6595,
+      "retrace": 6595,
+      "dwell": 0,
+      "apply": 0,
+      "distinguishable": 6595
+    },
+    "dwell": {
+      "opportunities": 4825,
+      "retrace": 0,
+      "dwell": 4825,
+      "apply": 0,
+      "distinguishable": 4825
+    }
+  },
+  "native_wall_s": 296.3,
+  "peak_rss_kib": 548524,
+  "forecasts": {
+    "F-C": {
+      "UP": 0.65,
+      "WITHIN": 0.2,
+      "DOWN": 0.15
+    },
+    "F-dwell": {
+      "UP": 0.55,
+      "WITHIN": 0.25,
+      "DOWN": 0.2
+    }
+  },
+  "scores": {
+    "F-C": {
+      "observed": "UP",
+      "brier": 0.18499999999999997
+    },
+    "F-dwell": {
+      "observed": "UP",
+      "brier": 0.30499999999999994
+    }
+  },
+  "completion_brier": 0.0025000000000000044,
+  "owner_prediction": "not taken (unattended)",
+  "hashes": {
+    "admission.json": {
+      "bytes": 504,
+      "sha256": "1053606041bb269a787407b03f973b7446af8be7784c26224e69c4095c26e08c"
+    },
+    "episodes.jsonl": {
+      "bytes": 772541,
+      "sha256": "f32c3ee7f71b31a3c60a1a6cbb19a4a92e71e25769de9e2b50d57559dce947b9"
+    },
+    "native_time.txt": {
+      "bytes": 53,
+      "sha256": "c4310d6bc54a2455655c6b0d4ce9f5f17af13f06a9449b2727f707f47f797860"
+    },
+    "stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stdout.log": {
+      "bytes": 3650,
+      "sha256": "3b8ff20854b043ac451c1715d4a2ce210719f8a4c3c6c1908424a6fb94683bde"
+    },
+    "summary.json": {
+      "bytes": 17366,
+      "sha256": "98ff6e3007317e9cb6269bf4ce87b1fb165736d96629a3f5964c9ee60ab84bce"
+    },
+    "updates.jsonl": {
+      "bytes": 475426,
+      "sha256": "1304ba6d4292db7cec4704f3e23aafecbd3ca10b307f05438d4d999554b5e42e"
+    }
+  }
+}

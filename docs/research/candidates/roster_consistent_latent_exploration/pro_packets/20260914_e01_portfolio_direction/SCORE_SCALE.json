@@ -1,0 +1,67 @@
+{
+  "class": "A_RECON_RECORDED_WEIGHT_MEASUREMENT",
+  "source_sha": "5c3ab7b074f185902078452811774e6a8d727a9d",
+  "input_tar_sha256": "f42d79970b1a8df0e72f73ee7892cab88aeebb51a0a0a9b0d6712c1712804825",
+  "new_fits": 0,
+  "new_episodes": 0,
+  "new_ticks": 0,
+  "new_optimizer_calls": 0,
+  "rows": [
+    {
+      "base": "b10",
+      "checkpoint_sha256": "c0e0a5385d190460c289c5ab1e43b1ef13628e4b5ec5df23188dbe3aae9793cf",
+      "score_shape": [
+        1,
+        32
+      ],
+      "score_dtype": "torch.float64",
+      "score_l1": 3.9271967120129885,
+      "score_l1_decimal": "3.92719671201298825558012595138279721140861511230468750000",
+      "twice_l1_ideal_arithmetic": "7.85439342402597651116025190276559442281723022460937500000",
+      "score_bias": [
+        2.057848662759442e-11
+      ],
+      "prior_comparison": {
+        "8": {
+          "prior_log_odds": "4.2904594411483911290921088574385425709047528448715976645956988571617899759205973",
+          "prior_minus_ideal_head_envelope": "-3.5639339828775853820681430453270518519124773797377773354043011428382100240794027",
+          "envelope_below_prior_scale": false
+        },
+        "12": {
+          "prior_log_odds": "4.6913478822291437003773164522092016510603488835032311530748735546809032841951630",
+          "prior_minus_ideal_head_envelope": "-3.1630455417968328107829354505563927717568813411061438469251264453190967158048370",
+          "envelope_below_prior_scale": false
+        }
+      }
+    },
+    {
+      "base": "b12",
+      "checkpoint_sha256": "0bece0f2db200e4589c84e7624f21f77a6aee31a51f55d81df90280622b4d3eb",
+      "score_shape": [
+        1,
+        32
+      ],
+      "score_dtype": "torch.float64",
+      "score_l1": 3.8828695115939706,
+      "score_l1_decimal": "3.88286951159397074329060473019126220606267452239990234375",
+      "twice_l1_ideal_arithmetic": "7.76573902318794148658120946038252441212534904479980468750",
+      "score_bias": [
+        6.442066147579507e-11
+      ],
+      "prior_comparison": {
+        "8": {
+          "prior_log_odds": "4.2904594411483911290921088574385425709047528448715976645956988571617899759205973",
+          "prior_minus_ideal_head_envelope": "-3.4752795820395503574891006029439818412205961999282070229043011428382100240794027",
+          "envelope_below_prior_scale": false
+        },
+        "12": {
+          "prior_log_odds": "4.6913478822291437003773164522092016510603488835032311530748735546809032841951630",
+          "prior_minus_ideal_head_envelope": "-3.0743911409587977862038930081733227610650001612965735344251264453190967158048370",
+          "envelope_below_prior_scale": false
+        }
+      }
+    }
+  ],
+  "body_wall_seconds": 1.5592438000021502,
+  "limit": "Recorded head weight scale and ideal-arithmetic range expression only; no action/trajectory sampling, effect attribution, native equivalence certificate or proof of prior causation."
+}

@@ -15,7 +15,7 @@ Difference of own-arm64-lowest-of256 final J means, not tail of paired differenc
 
 Unfunded proposed pair:512train+256sole-final/arm,H256,393216ticks,256jointAdam.32quantile outputs/factual target; no counterfactual trajectories/search.
 
-Registration only. Proposed900s/arm,1800native,1200support,3000complete offer is UNALLOCATED; zero implementation/numerical/consultation grant.
+Portfolio vacancy selection on 2026-09-14 reopens the direction as **ACTIVE/MEDIUM, recasts0** for one Astra/max DM and one zero-new-exposure A/RECON first-object preparation. The DM must return a source-grounded prospective B card and minimal implementation/work outline, or one precise incompatibility and smallest correction. No fit, native environment/evaluation call, optimizer update, cost pilot or historical numerical rerun is granted. Proposed900s/arm,1800native,1200support,3000complete offer remains UNALLOCATED.
 
 The complete exact first-object scientific design and all retained laws are in source response §5; this summary does not authorize a change. Above-MEI/inside-inclusive-band/opposite-sign readings preserve sign and all outcomes without equivalence or stable-population claims. The actual training unit and endpoint uncertainty remain distinct. Matching tuned same-information host headroom is absent, not zero and not an exclusion gate. Proposed counts and unknown rates/memory are not measured feasibility.
 
@@ -25,6 +25,16 @@ Support is the concrete event/information/action-or-credit/real-learning/native-
 
 New means materially different question/comparator/estimand/first object from existing and legacy directions, not a universal literature novelty claim. Limited primary extracts and foundational reasoning in the Portfolio packet supplied inspiration; no new result polarity is borrowed from an old method.
 
+### Accepted A01 source assessment — 2026-09-14
+
+[A01 intake](TRDL_A01_INTAKE_20260914.md) accepts zero-exposure static preparation: the homogeneous native host and DENSE/GRU64 actor are reusable; no TRDL learner exists. The source mean-return update cannot serve as the registered tail learner. [Prospective B01](TRDL_B01_SCIENCE_CARD_20260914.md) defines scalar fitting of W versus32-quantile fitting of full J, identical frozen-score actor updates and each arm's own worst64-of256 endpoint. No scientific source was edited and no model/environment/optimizer invoked.
+
+The strongest null survives: an adequately fitted scalar conditional W baseline may suffice, while quantile estimation adds finite fitting and optimization error. A01 establishes a coherent path, not efficacy, headroom, measured affordability or a new empirical result. Its source finding that time is already in critic136 leaves only accumulated reward/H to add. The next discriminator is the one prepared learning pair if numerical/implementation investment is separately selected; the old3000-second offer remains unallocated. This is object-tier preparation acceptance, not a recast or lifecycle disposition.
+
 ## Responsibility and finite boundary
 
-Registration-only ownership remains with the current Portfolio author through Root until an actual funded direction assignment. No placeholder branch, worktree, runtime root or implementation task is created. A useful concrete use/cost question can prompt proper Portfolio re-entry; no positive pilot, exact proof, full reconstruction or automatic release of the unallocated offer is required or authorized. PARKED is this explicit reversible investment judgment, not scientific falsification.
+Root creates one reusable direction worktree and one Astra/max DM for the accepted preparation. The DM owns the bounded assessment and subsequent current-authority decisions; no positive pilot, exact proof, full reconstruction or automatic release of the unallocated offer is required or authorized. Preparation completion alone does not release the occupied direction.
+
+### Accepted first-pair investment — 2026-09-14
+
+[Complete Portfolio investment intake](../../portfolio/pro_packets/20260914_trdl_b01_investment/INTAKE.md) applies the new purchase of exactly one SCALAR/Q32 pair plus minimum implementation/support. The historical offer remains historical; the response now supplies prospective authority. The next discriminator is the registered finite same-tail-objective learning comparison. No scientific outcome or source acceptance exists yet. Scalar conditional-score sufficiency remains the strongest null; loss-scale/joint-clipping consequences limit any outcome to the whole package. Independent replication, tuned generic-host baseline competence and component attribution remain separate future questions under current §11.11, without additional granted exposure.

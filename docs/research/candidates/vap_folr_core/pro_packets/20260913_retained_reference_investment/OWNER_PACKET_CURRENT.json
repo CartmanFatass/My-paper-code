@@ -1,0 +1,37 @@
+{
+  "question": "Portfolio 已选择 F：按固定上限资助一次旧 BANK 参照用途比较；此处记录已生效决定，供异步覆盖。",
+  "changes_if_approved": [
+    {
+      "target": "FOLR retained-reference use investment",
+      "from": "仅建议，零当前拨款",
+      "to": "一次新 Generic 完整训练与旧 BANK 新面板；2700/300/3000/1200/4200 秒；已接受拨款，尚未运行"
+    }
+  ],
+  "if_refused": "异步覆盖只作用于该用途剩余工作；保留已发生事实，不推断重跑或整方向 PARK。",
+  "evidence_for": [
+    {
+      "path": "docs/research/portfolio/pro_packets/20260913_folr_retained_reference_investment/archive/RESPONSE.md",
+      "quote": "**F — fund exactly the already selected retained-reference use unit: one fresh, unscreened Generic GRU64 RETAIN fit through its full endpoint, followed by a new panel of the fixed historical BANK GRU16 after Generic technical acceptance. Adopt the proposed hard limits unchanged: Generic 2700 s, retained BANK 300 s, native sum 3000 s, support 1200 s and complete invoked work 4200 s.** The purchase can change whether this particular BANK remains an optional executable development reference on the exact public-information host, without buying another BANK training history. It does not repair the old E contrast or repeat the completed Convergence selection. FOLR remains **ACTIVE/MEDIUM**, and its entity-history family remains **OPEN**. [TASK, Research question and Requested decision][task]; [accepted selection §§2–3][selection]; [investment readiness, Decision ready][readiness].",
+      "why": "完整同节点回复选择 F，保持有限用途与五项上限。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/portfolio/pro_packets/20260913_folr_retained_reference_investment/archive/RESPONSE.md",
+      "quote": "**D, declining further spending on this particular reference-inclusion unit, is the strongest alternative.** BANK has demonstrated no comparative advantage, the short horizon and common public cues may make Generic sufficient, and the complete cost and probability of an informative outcome remain unknown. I nevertheless select one finite purchase because the missing competent alternative's endpoint can change a named development-use choice. This is a qualitative close call, not a measured information-per-second ranking, a prediction of BANK benefit, or an entitlement created by sunk cost or missing data. [Accepted selection §2][selection]; [readiness, Decision ready][readiness].",
+      "why": "D 仍是实质替代项；BANK 尚无比较收益，短时域与公共线索可能已足够。"
+    }
+  ],
+  "uncertainty": [
+    "新 Generic 可能失败或是特殊训练实现，不能推断训练总体。",
+    "完整时价、支持、内存与 provider/agent 费用未知；接受一次有限风险，不预先补实验。"
+  ],
+  "cost": {
+    "compute": "一次新训练、4969更新、105120新 team ticks；完整调用4200秒硬上限，无转拨或续拨。",
+    "owner_time": "无需逐项同意；可异步覆盖。",
+    "reversibility": "costly",
+    "waits_on_this": "无 owner 等待；未来代码接受与实际资源准入仍需完成。"
+  },
+  "verdict_text": "**F — fund exactly the already selected retained-reference use unit: one fresh, unscreened Generic GRU64 RETAIN fit through its full endpoint, followed by a new panel of the fixed historical BANK GRU16 after Generic technical acceptance. Adopt the proposed hard limits unchanged: Generic 2700 s, retained BANK 300 s, native sum 3000 s, support 1200 s and complete invoked work 4200 s.** The purchase can change whether this particular BANK remains an optional executable development reference on the exact public-information host, without buying another BANK training history. It does not repair the old E contrast or repeat the completed Convergence selection. FOLR remains **ACTIVE/MEDIUM**, and its entity-history family remains **OPEN**. [TASK, Research question and Requested decision][task]; [accepted selection §§2–3][selection]; [investment readiness, Decision ready][readiness].",
+  "source": "docs/research/portfolio/pro_packets/20260913_folr_retained_reference_investment/archive/RESPONSE.md"
+}

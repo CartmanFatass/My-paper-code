@@ -1,0 +1,24 @@
+{
+  "enclosing_local_wall_seconds": 7.601119700004347,
+  "ssh_exit_code": 0,
+  "ssh_stderr": "",
+  "remote": {
+    "command": [
+      "/home/wu/.venvs/hmasd/bin/python",
+      "-m",
+      "pytest",
+      "-q",
+      "-p",
+      "no:cacheprovider",
+      "--basetemp",
+      "/home/wu/hmasd-worktrees/dish-b09-3a749256/temp/directions/degraded_incumbent_shadow_handover/test/b09-focused-20260914-01",
+      "tests/experiments/candidates/degraded_incumbent_shadow_handover/receipt_bypass_b09/test_bypass.py"
+    ],
+    "exit_code": 0,
+    "stdout": "..........                                                               [100%]\n=============================== warnings summary ===============================\n../../.venvs/hmasd/lib/python3.10/site-packages/_pytest/config/__init__.py:1249\n  /home/wu/.venvs/hmasd/lib/python3.10/site-packages/_pytest/config/__init__.py:1249: PytestConfigWarning: Unknown config option: cache_dir\n  \n    self._warn_or_fail_if_strict(f\"Unknown config option: {key}\\n\")\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n10 passed, 1 warning in 5.70s\n",
+    "stderr": "",
+    "test_wall_seconds": 6.864432657021098,
+    "source_sha": "3a749256d2aaf16345308827518283c8d2b91ad7",
+    "scratch_removed": true
+  }
+}

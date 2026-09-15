@@ -1,0 +1,37 @@
+{
+  "question": "是否按已选 B10 卡，做一次新 seed 的 1024 更新比较？此项提供异步干预入口，不是等待对象或生命周期批准。",
+  "changes_if_approved": [
+    {
+      "target": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B10_GREEDY_ANCHORED_1024_SCIENCE_CARD_20260913.md",
+      "from": "B09 已有正学习，但最终服务输给固定贪心；未分配 B10",
+      "to": "本 DM 选择并实施一条新 seed 30、最终 1024 更新和四面板的普通 B 对象"
+    }
+  ],
+  "if_refused": "停止或按明确指令修订尚未发生的工作，保留已发生证据和成本；不自动重跑、不转移其他方向资源。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B10_GREEDY_ANCHORED_1024_SCIENCE_CARD_20260913.md",
+      "quote": "Select final1024: B09 already measured positive initialization learning but a greedy deficit at256; this tests a different, feasible finite-exposure endpoint.",
+      "why": "继续学习后能否成为有用服务选项仍是实质未知；本对象可改变方向内继续投入判断。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/DIRECTION.md",
+      "quote": "one-fit result favors fixed greedy for the observed U use; recovery worsens in3/8\ncells versus initialization and5/8 versus greedy despite all8 gains over nearest.",
+      "why": "已有可用规则仍更优，继续训练可能没有增益，也可能有恢复代价。"
+    }
+  ],
+  "uncertainty": [
+    "只有一条新训练历史；不能据此估计稳定训练群体优越性，也不能把不同 seed 的 B09/B10 当作训练时长因果对照。",
+    "约 172.81 秒只是按历史每回合平均成本估算；实际完整尾部与 provider 成本仍未知。"
+  ],
+  "cost": {
+    "compute": "一次已开始的结果调用上限；完整 native 300 秒、额外 invoked support 600 秒、complete 900 秒，同时约束。67584 回合、4325376 ticks；无重试或自动增量。",
+    "owner_time": "无需逐步批准；可异步干预。",
+    "reversibility": "costly",
+    "waits_on_this": "nothing; DM implements and executes within this finite card."
+  },
+  "verdict_text": "Owner-delegated decision (unattended, 2026-09-03 standing instruction): select this single new B.",
+  "source": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B10_GREEDY_ANCHORED_1024_SCIENCE_CARD_20260913.md"
+}

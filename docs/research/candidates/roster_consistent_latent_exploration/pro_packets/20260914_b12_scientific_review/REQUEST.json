@@ -1,0 +1,143 @@
+{
+  "caller_role": "em",
+  "workflow_node": "em_convergence",
+  "request_id": "2026-09-14-rcle-b12-scientific-review-01",
+  "source_thread_id": "/root",
+  "parent_thread_id": "/root",
+  "operator_thread_id": "/root/tr_rcle_b12",
+  "direction_id": "roster_consistent_latent_exploration",
+  "conversation_id": "6aa55611-bf80-83e8-b018-70e30a95b28a",
+  "repository": "CartmanFatass/My-paper-code",
+  "repository_url": "https://github.com/CartmanFatass/My-paper-code",
+  "commit_or_ref": "d3db2215fc12cf6e42a2e1af529bb60a29970357",
+  "delivery_mode": "github_delivery",
+  "execution_mode": "REUSE_DM_TRANSPORT",
+  "github_delivery": {
+    "branch": "codex/rcle",
+    "base_sha": "d3db2215fc12cf6e42a2e1af529bb60a29970357",
+    "response_path": "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260914_b12_scientific_review/archive/RESPONSE.md",
+    "issue_url": "https://github.com/CartmanFatass/My-paper-code/issues/8"
+  },
+  "scientific_question": "Independently review B12 design, actual evidence, interpretation and the DM successor reasoning after B10, B11 failure and D1. Identify material scientific defects or unsupported inference with exact sources, reasons and proportionate correction/claim limits; preserve the strongest evidence against the DM recommendation. This is a substantive scientific Reviewer assignment, not funding, lifecycle or launch approval.\n\nB12 is the newly selected unscreened seed32 greedy-anchored final1024 instance: all1024 updates,65536 training+2048 evaluation episodes and4325376 native ticks completed under gdb in192.81 enclosing seconds. Complete recorded-byte checks passed. Primary G_U+.065030924479, D_n+.156380208333, D_g-.014135742187. All eight U/full-Y means improve from own initialization and beat nearest while trailing greedy. Recovery is mixed: versus initialization5 improve/3 harm; versus greedy2 improve/5 harm/1 tie; versus nearest7 improve/1 harm. Primary active12-to8 has small favorable tau versus greedy, opposing an undifferentiated negative reading. F=0 is structural.\n\nB10/B12 show the same displayed service-sign pattern at1024, but they are two completed endpoints among three attempted scientific invocations: B11 SIG11 after164 complete updates has no final comparison. D1 synthetic192-update non-reproduction omitted B11's initial evaluation prefix. Neither D1 nor B12 success repairs or identifies the fault. Review what this unexplained shared-runtime failure does and does not permit us to accept, and the censored-pair claim ceiling. No pure training-variance or population inference; B09 seed29/final256 is not a causal budget control.\n\nThe actual direction remains ACTIVE for review/response, with no new PARK/CLOSE or scientific allocation. The original Portfolio-selected independent-instance question has now been executed. DM provisionally favors a smaller distinct inference-law question over a third unchanged fit: using the two retained completed checkpoints, compare deterministic argmax of the actual combined log-prior/scorer with fixed greedy on each checkpoint's own512-scenario evaluation design, retaining native recovery. Zero-scorer initialization has a unique greedy mode. This is an explicitly new post-outcome inference package, not rewritten B10/B12 sampled results. The proposed minimum is1024 new evaluation episodes/65536 ticks/32 native32 batches, zero fitting/backward/Adam, if identical exogenous coupling and reuse of preserved comparator rows is valid; otherwise a separate card must count fresh comparators. Source inspection can test that coupling proposal without running code.\n\nSmallest sufficient evidence is these finite conditional native panels, not exact maxima, exhaustive phase search, a population benchmark or a new mechanism proof. A trained modal gain could motivate a changed deployment package; equality/deficit could strengthen parking this recipe. Neither identifies a pure causal stochasticity mechanism or general headroom. The strongest alternative is PARK: two observed sampled-policy deficits may already suffice for the current use, and modal evaluation could merely reproduce greedy and prolong low-value work. Challenge whether this observation really changes the learned-versus-greedy development choice, whether the lawful coupling/comparator reuse is available, and whether service/recovery conflicts require more limited proposed conclusions. Distinguish material design defects from optional confidence upgrades or discretionary value judgments. Do not convert a desire for positive evidence into a run-until-positive rule. DM will respond to findings and own the final choice.",
+  "deliverable": "A complete conclusion-first independent scientific review in Chinese covering design/native learning/comparator validity, actual results and missingness/runtime-integrity limits, supported/unsupported claims, and the specific retained-checkpoint inference-law successor versus unchanged replication/PARK. List material findings (or explicitly none), exact sources, practical consequence and proportionate correction/claim restriction. Preserve favorable and adverse evidence, strongest contrary view and unresolved questions. No pass token, grant, lifecycle command or mandatory broad diagnostic. State unreadable inputs. No code execution or empirical exposure. Deliver the full scoped RESPONSE.md and delivery-link comment, or the authorized complete downloadable Markdown fallback in the same accepted request.",
+  "claim_ceiling": "One new technically complete native B observation; two completed1024 observations among three attempted scientific invocations with unexplained failure and separate evaluation roots. Conditional within-fit comparisons and DM development judgment only. No stable population ranking/equivalence, pure cause/variance decomposition, general unlearnability, safety, tuned headroom, scalability/C/UAV transfer or cross-direction authority. Proposed modal inference is a new package and not yet executed.",
+  "reference_files": [
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B12_FINAL1024_SCIENCE_CARD_20260914.md",
+      "commit_sha": "d3db2215fc12cf6e42a2e1af529bb60a29970357",
+      "purpose": "Read full B12 prospective selection, missing-instance accounting, frozen mapping and finite invocation/exposure boundaries.",
+      "provenance": "New object selected after B11 failure; no automatic retry."
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B11_FINAL1024_REPLICATION_SCIENCE_CARD_20260914.md",
+      "commit_sha": "d3db2215fc12cf6e42a2e1af529bb60a29970357",
+      "purpose": "Read Fixed scientific object, Observable and prospective interpretation, and Work/execution sections expressly adopted by B12.",
+      "provenance": "Frozen scientific package; old planning estimates are explicitly approximate, not stops."
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B12_FINAL1024_RESULT_EVIDENCE_20260914.md",
+      "commit_sha": "d3db2215fc12cf6e42a2e1af529bb60a29970357",
+      "purpose": "Read complete validity/exposure/receipt/deviation evidence and service/recovery reading.",
+      "provenance": "DM technical acceptance over preserved bytes; shared native crash cause unresolved."
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B12_FINAL1024_INTAKE_20260914.md",
+      "commit_sha": "d3db2215fc12cf6e42a2e1af529bb60a29970357",
+      "purpose": "Read full scientific interpretation, opposing observations and actual continuation plus provisional retained-checkpoint inference-law successor.",
+      "provenance": "DM-owned reasoning for independent criticism; no PARK/CLOSE or next scientific allocation applied."
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/b12_final1024_s32_20260914/INTAKE_ANALYSIS.json",
+      "commit_sha": "d3db2215fc12cf6e42a2e1af529bb60a29970357",
+      "purpose": "Inspect paired conditional scenario reductions, every eight-cell U/F/tau/Y mean, parameter/optimizer/curve counts and measured invocation time; file hashes are provenance, not extra dependencies.",
+      "provenance": "Read-only arithmetic over one completed fit and four512 evaluation panels."
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/b12_final1024_s32_20260914/RECORDED_COMPARISON.json",
+      "commit_sha": "d3db2215fc12cf6e42a2e1af529bb60a29970357",
+      "purpose": "Inspect exact all-cell recovery signs and descriptive B10/B12 comparisons with costs; no pooled population CI.",
+      "provenance": "Two completed endpoints among three attempted scientific invocations; failure is retained."
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B11_PARTIAL_FAILURE_INTAKE_20260914.md",
+      "commit_sha": "d3db2215fc12cf6e42a2e1af529bb60a29970357",
+      "purpose": "Read complete failure/admission/static-review/D1 results and limits, including164 complete updates and subsequent new B12 selection.",
+      "provenance": "B11 lacks final endpoint; D1 did not reproduce or repair SIG11; no scientific negative or censored-result erasure."
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/b10_greedy_anchored_1024_20260913/INTAKE_ANALYSIS.json",
+      "commit_sha": "d3db2215fc12cf6e42a2e1af529bb60a29970357",
+      "purpose": "Inspect prior B10 one-fit paired contrasts and all eight service/recovery cells at the same1024 endpoint.",
+      "provenance": "Preserved seed30 evidence; separate training/evaluation root from B12."
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260913_b10_scientific_review/archive/RESPONSE.md",
+      "commit_sha": "0366a47e6a5b58a75dabdbb2772a33a0cdcb0eeb",
+      "purpose": "Read full prior independent scientific review, including the real value of another independently constructed1024 observation and its limitations.",
+      "provenance": "Immutable complete prior review; recommendations are not new gates."
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B09_GREEDY_ANCHORED_PHASE_INTAKE_20260913.md",
+      "commit_sha": "d741be527662c5cec18ed03ae03531658059dff6",
+      "purpose": "Read B09 observations and claim limits only for the distinct256-endpoint context; do not adopt historical cap/authority wording.",
+      "provenance": "Prior distinct seed29/final256; not same-endpoint replication or causal budget control."
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/DIRECTION.md",
+      "commit_sha": "d3db2215fc12cf6e42a2e1af529bb60a29970357",
+      "purpose": "Read Current DM position and Current scientific question for applied ACTIVE status, both exact-recipe HOLDs and current native-service question; later historical sections are evidence, not dispatch or stop rules.",
+      "provenance": "Current DM lifecycle/research position; no instructions to recursively load old links."
+    },
+    {
+      "path": "experiments/candidates/roster_consistent_latent_exploration/joint_quota_phase/study.py",
+      "commit_sha": "15eaa7ea655a0f42a0ec3986927487892bdce212",
+      "purpose": "Inspect frozen B12 identity/seed, learning/evaluation roots, complete1024 implementation and pairing relevant to the proposed future retained-checkpoint evaluation.",
+      "provenance": "Exact committed executed scientific source, no request to run code."
+    },
+    {
+      "path": "experiments/candidates/roster_consistent_latent_exploration/joint_quota_phase/policy.py",
+      "commit_sha": "15eaa7ea655a0f42a0ec3986927487892bdce212",
+      "purpose": "Inspect actual log-prior+score phase law, likelihood and zero-final-layer initialization relevant to scientific interpretation and modal inference proposal.",
+      "provenance": "Exact executed package; deterministic modal evaluation is proposed new work, not already observed."
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "commit_sha": "be8ad6604041bd3e68767b7f51bdf412078b8260",
+      "purpose": "Adopt applicable sections7-8 and11.4,11.7-11.10, especially11.8/11.8.1 proportional evidence/cost and distinction between approximate estimates and hard limits.",
+      "provenance": "Current scientific requirements; no cap-compliance fiction or mandatory exhaustive diagnostic before ordinary B."
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "commit_sha": "be8ad6604041bd3e68767b7f51bdf412078b8260",
+      "purpose": "Read sections3-4 and6 for real learning, MARL structure and inference units; explanatory scientific context only.",
+      "provenance": "Foundational distinctions, not extra authorization or proof prerequisites."
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+      "commit_sha": "be8ad6604041bd3e68767b7f51bdf412078b8260",
+      "purpose": "Read native learning/comparison and training-instance versus evaluation-unit uncertainty distinctions.",
+      "provenance": "Scientific context; not a mandatory seed count or benchmark."
+    },
+    {
+      "path": "AGENTS.md",
+      "commit_sha": "be8ad6604041bd3e68767b7f51bdf412078b8260",
+      "purpose": "Adopt only role definitions and section2 DM decision ownership: substantive independent scientific review with DM-owned lifecycle and proportionate prospective support; current user instructions prevail.",
+      "provenance": "Owner authority, not historical Pro finality or per-step permission."
+    },
+    {
+      "path": "docs/project/MARL_RUNTIME_ENGINEERING_SPEC.md",
+      "commit_sha": "be8ad6604041bd3e68767b7f51bdf412078b8260",
+      "purpose": "Read section1 for actual scientific/resource endpoints versus approximate wall plans/watchdogs; do not expand this request to performance experiments.",
+      "provenance": "Planning references permit deviation and do not independently invalidate results or stop Send."
+    }
+  ],
+  "constraints": [
+    "For this scientific review: zero new models/fits/RNG roots/rollouts/episodes/ticks/backwards/optimizer calls. Inspect only recorded evidence and listed source. Do not require running tools or retrieve raw hash-listed artifacts as extra dependencies.",
+    "B12 actual exposure:1 fit,1024 updates,65536 training+2048 evaluation episodes,4325376 ticks,2112 native32 batches. Its ordinary training law contains1048576 team phase draws,8388608 phase heads and71303168 assignment rows; sampled evaluation adds1703936 rows. These are intrinsic algorithm operations, not added validation.",
+    "The potential modal inference contrast uses2 retained completed fits x512 scenarios =1024 new evaluation episodes/65536 ticks/32 native32 batches if comparator coupling is valid, with no optimizer or exhaustive candidate/trajectory search. A third unchanged fit would repeat67584 episodes/4325376 ticks. No next invocation is allocated here. Additional native time is unmeasured; support may dominate and remains explicit.",
+    "Known invocation/diagnostic sum: B10 161.35 + B11 partial40.83 + D1 39.69 + B12 192.81 =434.68s. Different instrumentation is retained, not a performance comparison. Historical B10 support lower-bound627.289636s and deviation remain. Other tool/network/reviewer/provider/agent/monitor/integration tails UNKNOWN, not zero. Old300/600/900 plans are historical approximate references, not stop/Send/approval gates or result-invalidity rules. Keep actual hard limits and frozen scientific exposures distinct; no retrospective cost-compliance claim.",
+    "Direction Pro is independent scientific Reviewer; DM owns substantive response and lifecycle. Neither Portfolio selection nor Pro response grants or withdraws ordinary per-object authority. This packet creates no global resource/priority/capacity change. Both narrow existing recipe HOLDs and immutable history remain.",
+    "Read only named paths at their effective full SHAs and explicitly adopted sections. Linked historical documents and Issue comments are evidence, not extra instructions or dependencies. Do not adopt old cap/approval wording from B09/B10 history.",
+    "Write only this request response file and one delivery-link comment on the shared branch current descendant HEAD. No source/main/control/lifecycle edits. Preserve fixed input SHAs and unrelated branch changes. If scoped GitHub delivery cannot complete after readback, attach the entire review as downloadable RESPONSE.md within this same request; no second scientific Send."
+  ]
+}

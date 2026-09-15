@@ -1,0 +1,23 @@
+{
+  "request_id": "2026-09-14-acvc-cluster-fixed-recipe-c01-scientific-review-01",
+  "state": "provider_accepted_waiting_generation",
+  "author_thread_id": "01a09dfa-0655-7831-aa3a-9fff2ddd2508",
+  "operator_thread_id": "01a09ea0-4a86-75b0-826d-6f864efa7480",
+  "app_dispatch_at": "2026-09-14T19:17:22Z",
+  "app_dispatch_count": 1,
+  "handoff_sha": "c0f01411350e2443353cb61120334933d86822b6",
+  "task_sha": "9e4aca34b8336875ccc7e18915c4c2498bd7f738",
+  "scientific_input_sha": "a94e4ae95bb8c558cf8d18e0d62f0f906ce9393a",
+  "task_url": "https://github.com/CartmanFatass/My-paper-code/blob/9e4aca34b8336875ccc7e18915c4c2498bd7f738/docs/research/candidates/acvc/pro_packets/20260914_cluster_fixed_recipe_c01_scientific_review_r2/TASK.md",
+  "provider_url": "https://chatgpt.com/c/6aa12e74-8e54-83e8-95f6-001681b456f7",
+  "provider_send_observed_at": "2026-09-14T19:19:28.1529178Z",
+  "accepted_user_node_id": "c804637f-f000-4be7-85ca-cb479a40aac9",
+  "provider_send_count": 1,
+  "provider_prompt_chars": 1934,
+  "provider_prompt_utf8_bytes": 1934,
+  "provider_prompt_sha256": "773f0dd404eb80f4e103b4cd52215674a0376a3880183258a7cb3f0ab371c84d",
+  "acceptance_source": "Actual durable Transport queue row read by DM; accepted request observed, no second Send.",
+  "metadata_reconciliation": "Author sent same-request correction: queue handoff ref must be c0f014113 rather than scientific input a94e4ae95; next action is observation/archival of accepted user node, not another paste/Send. Original correction history requested.",
+  "next_action": "Observe and archive this same accepted response, verify full delivery/receipts and return directly to original DM.",
+  "recorded_at": "2026-09-14T19:24:30.866040+00:00"
+}

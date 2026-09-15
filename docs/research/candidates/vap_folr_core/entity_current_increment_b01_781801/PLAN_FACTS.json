@@ -1,0 +1,44 @@
+{
+  "object": "FOLR_ENTITY_CURRENT_INCREMENT_B01_781801",
+  "created_utc": "2026-09-15T02:08:31.559442+00:00",
+  "training_seed": 781801,
+  "evaluation_seed": 1781801,
+  "actual_new_native_exposure": 0,
+  "selected_original_invocations": 2,
+  "per_arm": {
+    "training_episodes": 5000,
+    "training_ticks": 100000,
+    "optimizer_steps": 4969,
+    "evaluation_episodes": 128,
+    "evaluation_ticks": 2560,
+    "generic_replay_positions": 33391680,
+    "generic_acting_positions": 538440
+  },
+  "z_extra": {
+    "entity_replay_positions": 166958400,
+    "entity_acting_positions": 2692200
+  },
+  "totals": {
+    "training_episodes": 10000,
+    "training_ticks": 200000,
+    "optimizer_steps": 9938,
+    "evaluation_episodes": 256,
+    "evaluation_ticks": 5120,
+    "native_ticks": 205120
+  },
+  "native_seconds_references": {
+    "old_G": 1178.68,
+    "preceding_Z": 2930.62,
+    "heterogeneous_sum": 4109.3,
+    "preceding_A_Z": 5759.94,
+    "known_prior_subtotal": 22273.86
+  },
+  "ordinary_plan_seconds": {
+    "G": 1800,
+    "Z": 5400,
+    "native_sum": 7200,
+    "active_support": 1800
+  },
+  "unknown": "full support/provider/engineering/lifetime costs and future native realized costs",
+  "cost_limit": "Heterogeneous references are not forecasts, upper bounds, speed results or transferred funding. Dense attention/backward/mixer work is not priced by position counts."
+}

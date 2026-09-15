@@ -1,0 +1,55 @@
+{
+  "object": "FOLR_ENTITY_HISTORY_B03_781501",
+  "per_arm_native_invocation": {
+    "GENERIC": {
+      "wall_seconds": 2005.71,
+      "user_seconds": 1859.24,
+      "system_seconds": 143.95,
+      "peak_rss_kib": 767384,
+      "exit_code": 0
+    },
+    "BANK": {
+      "wall_seconds": 1774.14,
+      "user_seconds": 1347.24,
+      "system_seconds": 425.63,
+      "peak_rss_kib": 751632,
+      "exit_code": 0
+    }
+  },
+  "sum_native_wall_seconds": 3779.8500000000004,
+  "aggregate_native_cpu_seconds": 3776.06,
+  "study_elapsed_supervisor_seconds": 4424.0,
+  "interarm_gap_supervisor_seconds": 644.0,
+  "supervisor_timing_precision": "integer seconds; native GNU time decimals remain primary invocation measures",
+  "supervisor_start_utc": {
+    "GENERIC": "2026-09-14T08:24:20+00:00",
+    "BANK": "2026-09-14T09:08:30+00:00"
+  },
+  "supervisor_end_utc": {
+    "GENERIC": "2026-09-14T08:57:46+00:00",
+    "BANK": "2026-09-14T09:38:04+00:00"
+  },
+  "recorded_collection_windows_seconds": {
+    "GENERIC": 3.8429999999934807,
+    "BANK": 3.4839999999967404
+  },
+  "analysis_batch_wall_seconds": 1.6410000000032596,
+  "current_collection_and_analysis_lower_bound_seconds": 8.96799999999348,
+  "other_support_cost": "Known preparation/test/launch/observation windows remain in prior receipts; no complete aggregation; UNKNOWN total",
+  "provider_cost": "UNKNOWN",
+  "prior_native_seconds": {
+    "E": 3557.28,
+    "F": 2159.85,
+    "B02": 3041.46
+  },
+  "E_F_B02_B03_known_native_seconds": 12538.44,
+  "full_direction_native_and_support_cost": "UNKNOWN; earlier families and incomplete support accounting not reset",
+  "planning_comparison": "Actual native3779.85 below DM7200 native plan; plans are not scientific or owner caps. Full9000 combined-plan compliance cannot be claimed because total support is UNKNOWN.",
+  "new_scientific_invocations_in_collection_analysis": 0,
+  "post_initial_intake_support_windows_seconds": {
+    "support_archive_collection": 1.562999999965541,
+    "published_preservation_and_remote_cleanup": 2.6560000000172295
+  },
+  "collection_analysis_and_cleanup_lower_bound_seconds": 13.186999999976251,
+  "later_cost_scope": "Adds only measured later disjoint windows; fixed review input6642b5e63 correctly reported the earlier8.968s lower bound. Total support/provider/lifetime remains UNKNOWN."
+}

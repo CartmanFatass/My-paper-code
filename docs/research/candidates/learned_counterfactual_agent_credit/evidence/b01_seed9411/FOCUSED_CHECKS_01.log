@@ -1,0 +1,19 @@
+........E                                                                [100%]
+=================================== ERRORS ====================================
+__ ERROR at setup of test_complete_engineering_chain_counts_and_publication ___
+
+self = WindowsPath('C:/Users/fires/.codex/worktrees/891a/HMASD/temp/directions/learned_counterfactual_agent_credit/test/b01-check-20260914-01')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           self._accessor.mkdir(self, mode)
+E           FileNotFoundError: [WinError 3] The system cannot find the path specified: 'C:\\Users\\fires\\.codex\\worktrees\\891a\\HMASD\\temp\\directions\\learned_counterfactual_agent_credit\\test\\b01-check-20260914-01'
+
+..\..\..\..\.conda\envs\hmasd-amd-cpu\lib\pathlib.py:1175: FileNotFoundError
+=========================== short test summary info ===========================
+ERROR tests/experiments/candidates/learned_counterfactual_agent_credit/lcac_b01/test_learning_contract.py::test_complete_engineering_chain_counts_and_publication
+8 passed, 1 error in 3.73s

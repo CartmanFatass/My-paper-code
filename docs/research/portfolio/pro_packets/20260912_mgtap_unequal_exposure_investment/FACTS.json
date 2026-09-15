@@ -1,0 +1,558 @@
+{
+  "recorded_utc": "2026-09-13T05:10:45.166635+00:00",
+  "request_id": "2026-09-12-mgtap-unequal-exposure-investment-01",
+  "state": "AUTHOR_PROPOSAL_NO_PORTFOLIO_DISPOSITION",
+  "author": "/root/dm_a_mx_portfolio_resume",
+  "author_uuid": "01a095c2-e06a-7a92-984f-2dca23d77d57",
+  "parent_root": "01a095b7-850f-7401-ad4e-5e4320d285f1",
+  "observed_main": "34382425abd4bdda9bcb71847c0f016d9af9483a",
+  "scientific_intake_main": "fff53e245d07eaa5d5d921c0eca658848a71a79b",
+  "required_input_merges": [
+    "0dfab307555dc891bc112b226492afa821eb6a92",
+    "e35d26d147e82d21188745b7963f7508cece9c1c"
+  ],
+  "direction_ids": [
+    "metric_ground_transport_allocation"
+  ],
+  "selected_source": {
+    "INVESTMENT_NEED.md": {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260912_cond512_dense768_use/INVESTMENT_NEED.md",
+      "source_sha": "e4aa3566ff1f5b3163a168225dc0d6172e2a093e",
+      "git_bytes": 9795,
+      "sha256": "eb18321a99f79ecd71c3415dc47e6140315c60ee9cd787913d8ddea9b35531e3"
+    },
+    "OWNER_INVESTMENT_PACKET.json": {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260912_cond512_dense768_use/OWNER_INVESTMENT_PACKET.json",
+      "source_sha": "e4aa3566ff1f5b3163a168225dc0d6172e2a093e",
+      "git_bytes": 3489,
+      "sha256": "25a1a36fd885a2f66820b90180f4db86352f7b8a0dff323f0581904b08d1612d"
+    },
+    "INTAKE.md": {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260912_cond512_dense768_use/INTAKE.md",
+      "source_sha": "e4aa3566ff1f5b3163a168225dc0d6172e2a093e",
+      "git_bytes": 11061,
+      "sha256": "8d760a9fe8f32e3ebd0f28a93bd88f011971f30665bae05bd02c9bbd58708a68"
+    },
+    "INTAKE_FACTS.json": {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260912_cond512_dense768_use/INTAKE_FACTS.json",
+      "source_sha": "e4aa3566ff1f5b3163a168225dc0d6172e2a093e",
+      "git_bytes": 7483,
+      "sha256": "9916144ef38c8ab3978a18c009fae4d6c781d0be339453243802c80cb0e46b4d"
+    },
+    "archive/RESPONSE.md": {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260912_cond512_dense768_use/archive/RESPONSE.md",
+      "source_sha": "e4aa3566ff1f5b3163a168225dc0d6172e2a093e",
+      "git_bytes": 34652,
+      "sha256": "18c850a28efe3098e356972a15655bea3eaa2ed5f05f1c6d767d8763d2fd8475"
+    }
+  },
+  "recommendation": "B: purchase the exact selected single pair only with Portfolio-assigned whole-chain limits; no cap offered locally",
+  "alternative": "N: no additional empirical purchase; retain scientific selection, DENSE default and ACTIVE/MEDIUM, no new consultation",
+  "new_allowances": {
+    "whole_COND_arm_seconds": "UNASSIGNED",
+    "whole_DENSE_arm_seconds": "UNASSIGNED",
+    "native_sum_seconds": "UNASSIGNED",
+    "additional_support_seconds": "UNASSIGNED",
+    "complete_invoked_seconds": "UNASSIGNED"
+  },
+  "new_costs": {
+    "initialization": "UNKNOWN",
+    "collection_rate": "UNKNOWN",
+    "recurrent_PPO_rate": "UNKNOWN",
+    "final_evaluation_rate": "UNKNOWN",
+    "publication_exit": "UNKNOWN",
+    "DENSE768_wall": "UNKNOWN",
+    "CPU_work": "UNKNOWN",
+    "peak_memory": "UNKNOWN",
+    "full_support": "UNKNOWN",
+    "full_empirical_cost": "UNKNOWN",
+    "author_provider_agent_cost": "UNKNOWN"
+  },
+  "historical_timing_anchor_only": {
+    "8214_native_s": 361.85,
+    "8214_COND_s": 198.38539502117783,
+    "8214_DENSE_s": 163.4646049788222,
+    "TOP8221_native_s": 377.11,
+    "TOP8221_TOP_s": 207.89017485710792,
+    "TOP8221_DENSE_s": 169.2198251428921,
+    "no_scaled_forecast_or_balance": true
+  },
+  "future_selected_static_work": {
+    "COND512": {
+      "fresh_fits": 1,
+      "train_episodes": 512,
+      "train_team_ticks": 131072,
+      "two_episode_rollouts": 256,
+      "Adam_calls": 1024,
+      "final_episodes": 32,
+      "final_team_ticks": 8192,
+      "all_episodes": 544,
+      "all_team_ticks": 139264,
+      "actor_row_uses": 3317760
+    },
+    "DENSE768": {
+      "fresh_fits": 1,
+      "train_episodes": 768,
+      "train_team_ticks": 196608,
+      "two_episode_rollouts": 384,
+      "Adam_calls": 1536,
+      "final_episodes": 32,
+      "final_team_ticks": 8192,
+      "all_episodes": 800,
+      "all_team_ticks": 204800,
+      "actor_row_uses": 4956160
+    },
+    "total": {
+      "fresh_fits": 2,
+      "train_episodes": 1280,
+      "train_team_ticks": 327680,
+      "two_episode_rollouts": 640,
+      "Adam_calls": 2560,
+      "final_episodes": 64,
+      "final_team_ticks": 16384,
+      "all_episodes": 1344,
+      "all_team_ticks": 344064,
+      "actor_row_uses": 8273920
+    }
+  },
+  "independent_unit": "one unscreened matched learning pair; master UNASSIGNED; final32 worlds condition on two fresh fitted models",
+  "own_MEI_J": 0.01,
+  "headroom": "matching tuned same-information native headroom absent, not zero and not a gate",
+  "default_comparator": "intact DENSE in all outcome branches",
+  "registry": [
+    {
+      "direction": "active_post_churn_population_flow_identification",
+      "lifecycle": "PARKED",
+      "priority": "LOW"
+    },
+    {
+      "direction": "actuator_conditioned_partial_sharing",
+      "lifecycle": "ACTIVE",
+      "priority": "HIGH"
+    },
+    {
+      "direction": "acvc",
+      "lifecycle": "ACTIVE",
+      "priority": "MEDIUM"
+    },
+    {
+      "direction": "capability_bound_semantic_currentness",
+      "lifecycle": "ACTIVE",
+      "priority": "HIGH"
+    },
+    {
+      "direction": "contention_aware_decentralized_communication",
+      "lifecycle": "PARKED",
+      "priority": "HIGH"
+    },
+    {
+      "direction": "commitment_residual_triggered_options",
+      "lifecycle": "ACTIVE",
+      "priority": "MEDIUM"
+    },
+    {
+      "direction": "cross_play_compatible_population_learning",
+      "lifecycle": "PARKED",
+      "priority": "MEDIUM"
+    },
+    {
+      "direction": "degraded_incumbent_shadow_handover",
+      "lifecycle": "ACTIVE",
+      "priority": "MEDIUM"
+    },
+    {
+      "direction": "ec4g_r1",
+      "lifecycle": "PARKED",
+      "priority": "LOW"
+    },
+    {
+      "direction": "eociv_lite",
+      "lifecycle": "PARKED",
+      "priority": "MEDIUM"
+    },
+    {
+      "direction": "expressibility_gated_renewal_credit_relay",
+      "lifecycle": "PARKED",
+      "priority": "MEDIUM"
+    },
+    {
+      "direction": "finite_resource_relational_inductive_efficiency",
+      "lifecycle": "ACTIVE",
+      "priority": "HIGH"
+    },
+    {
+      "direction": "flexible_skill_duration",
+      "lifecycle": "ACTIVE",
+      "priority": "HIGH"
+    },
+    {
+      "direction": "learned_counterfactual_agent_credit",
+      "lifecycle": "PARKED",
+      "priority": "MEDIUM"
+    },
+    {
+      "direction": "metric_ground_transport_allocation",
+      "lifecycle": "ACTIVE",
+      "priority": "MEDIUM"
+    },
+    {
+      "direction": "orbit_shadow_read",
+      "lifecycle": "PARKED",
+      "priority": "LOW"
+    },
+    {
+      "direction": "recct_lite",
+      "lifecycle": "PARKED",
+      "priority": "MEDIUM"
+    },
+    {
+      "direction": "roster_consistent_latent_exploration",
+      "lifecycle": "ACTIVE",
+      "priority": "MEDIUM"
+    },
+    {
+      "direction": "scope_1s",
+      "lifecycle": "PARKED",
+      "priority": "LOW"
+    },
+    {
+      "direction": "semigroup_consistent_duration_model_policy",
+      "lifecycle": "ACTIVE",
+      "priority": "HIGH"
+    },
+    {
+      "direction": "tail_return_distributional_learning",
+      "lifecycle": "PARKED",
+      "priority": "MEDIUM"
+    },
+    {
+      "direction": "ucope",
+      "lifecycle": "ACTIVE",
+      "priority": "HIGH"
+    },
+    {
+      "direction": "vap_folr_core",
+      "lifecycle": "ACTIVE",
+      "priority": "MEDIUM"
+    },
+    {
+      "direction": "variable_n_fleet_churn",
+      "lifecycle": "ACTIVE",
+      "priority": "HIGH"
+    },
+    {
+      "direction": "vsp_02",
+      "lifecycle": "ACTIVE",
+      "priority": "LOW"
+    },
+    {
+      "direction": "vsp_03",
+      "lifecycle": "ACTIVE",
+      "priority": "LOW"
+    },
+    {
+      "direction": "vsp_c1",
+      "lifecycle": "ACTIVE",
+      "priority": "MEDIUM"
+    }
+  ],
+  "registry_counts": {
+    "registered": 27,
+    "ACTIVE": 16,
+    "PARKED": 11
+  },
+  "headroom_by_direction": {
+    "active_post_churn_population_flow_identification": "no matching current-host tuned same-information headroom record in verified current inventory",
+    "actuator_conditioned_partial_sharing": "no matching current-host tuned same-information headroom record in verified current inventory",
+    "acvc": "no matching current-host tuned same-information headroom record in verified current inventory",
+    "capability_bound_semantic_currentness": "no matching current-host tuned same-information headroom record in verified current inventory",
+    "contention_aware_decentralized_communication": "no matching current-host tuned same-information headroom record in verified current inventory",
+    "commitment_residual_triggered_options": "no matching current-host tuned same-information headroom record in verified current inventory",
+    "cross_play_compatible_population_learning": "no matching current-host tuned same-information headroom record in verified current inventory",
+    "degraded_incumbent_shadow_handover": "no matching current-host tuned same-information headroom record in verified current inventory",
+    "ec4g_r1": "no matching current-host tuned same-information headroom record in verified current inventory",
+    "eociv_lite": "no matching current-host tuned same-information headroom record in verified current inventory",
+    "expressibility_gated_renewal_credit_relay": "no matching current-host tuned same-information headroom record in verified current inventory",
+    "finite_resource_relational_inductive_efficiency": "no matching current-host tuned same-information headroom record in verified current inventory",
+    "flexible_skill_duration": "no matching current-host tuned same-information headroom record in verified current inventory",
+    "learned_counterfactual_agent_credit": "no matching current-host tuned same-information headroom record in verified current inventory",
+    "metric_ground_transport_allocation": "no matching current-host tuned same-information headroom record in verified current inventory",
+    "orbit_shadow_read": "no matching current-host tuned same-information headroom record in verified current inventory",
+    "recct_lite": "no matching current-host tuned same-information headroom record in verified current inventory",
+    "roster_consistent_latent_exploration": "no matching current-host tuned same-information headroom record in verified current inventory",
+    "scope_1s": "no matching current-host tuned same-information headroom record in verified current inventory",
+    "semigroup_consistent_duration_model_policy": "no matching current-host tuned same-information headroom record in verified current inventory",
+    "tail_return_distributional_learning": "no matching current-host tuned same-information headroom record in verified current inventory",
+    "ucope": "no matching current-host tuned same-information headroom record in verified current inventory",
+    "vap_folr_core": "no matching current-host tuned same-information headroom record in verified current inventory",
+    "variable_n_fleet_churn": "no matching current-host tuned same-information headroom record in verified current inventory",
+    "vsp_02": "no matching current-host tuned same-information headroom record in verified current inventory",
+    "vsp_03": "no matching current-host tuned same-information headroom record in verified current inventory",
+    "vsp_c1": "no matching current-host tuned same-information headroom record in verified current inventory"
+  },
+  "second_recast_lowest_ACTIVE_contention": [
+    "acvc",
+    "variable_n_fleet_churn",
+    "semigroup_consistent_duration_model_policy"
+  ],
+  "current_direction_surface_refresh": [
+    {
+      "path": "docs/research/candidates/active_post_churn_population_flow_identification/DIRECTION.md",
+      "current_sha": "34382425abd4bdda9bcb71847c0f016d9af9483a",
+      "git_sha256": "5b5e8f27b6e5379ea7bfc5dca6fabeef68039b52f197ee7606a1dd8f32bf9cb7",
+      "unchanged_from_prior_refresh": true,
+      "changed_sections_read": false
+    },
+    {
+      "path": "docs/research/candidates/actuator_conditioned_partial_sharing/DIRECTION.md",
+      "current_sha": "34382425abd4bdda9bcb71847c0f016d9af9483a",
+      "git_sha256": "73600b6143f6486602bed2c98218c707ffbeebd3ef21ec7ac93f6b2b00233f5e",
+      "unchanged_from_prior_refresh": true,
+      "changed_sections_read": false
+    },
+    {
+      "path": "docs/research/candidates/acvc/DIRECTION.md",
+      "current_sha": "34382425abd4bdda9bcb71847c0f016d9af9483a",
+      "git_sha256": "e51540e5c6de2e5bd5b9e06cbfd769c9ef9a0abff4c1e940d8ab53322f54290a",
+      "unchanged_from_prior_refresh": true,
+      "changed_sections_read": false
+    },
+    {
+      "path": "docs/research/candidates/capability_bound_semantic_currentness/DIRECTION.md",
+      "current_sha": "34382425abd4bdda9bcb71847c0f016d9af9483a",
+      "git_sha256": "84bc01ca5be90ba6fd906c5e705192596b3a35b71a9b086d9f3fb292448310aa",
+      "unchanged_from_prior_refresh": true,
+      "changed_sections_read": false
+    },
+    {
+      "path": "docs/research/candidates/contention_aware_decentralized_communication/DIRECTION.md",
+      "current_sha": "34382425abd4bdda9bcb71847c0f016d9af9483a",
+      "git_sha256": "0750d72b9710516394a01e425022c0e65f55ce5f848363aff3a5079f19bfa745",
+      "unchanged_from_prior_refresh": true,
+      "changed_sections_read": false
+    },
+    {
+      "path": "docs/research/candidates/commitment_residual_triggered_options/DIRECTION.md",
+      "current_sha": "34382425abd4bdda9bcb71847c0f016d9af9483a",
+      "git_sha256": "3522f67f1ed92078b6ba4954cc94ae1985d52a1a3b43fd5e59b36069f71d8ad2",
+      "unchanged_from_prior_refresh": true,
+      "changed_sections_read": false
+    },
+    {
+      "path": "docs/research/candidates/cross_play_compatible_population_learning/DIRECTION.md",
+      "current_sha": "34382425abd4bdda9bcb71847c0f016d9af9483a",
+      "git_sha256": "30f965c85fc56a4664394143879e09ee7c0a11ccd1cffe681fd1e058f38d3df4",
+      "unchanged_from_prior_refresh": true,
+      "changed_sections_read": false
+    },
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DIRECTION.md",
+      "current_sha": "34382425abd4bdda9bcb71847c0f016d9af9483a",
+      "git_sha256": "08e5a85acb2fb73205022211c4ee35baa6107502b60da72c989b389d35019090",
+      "unchanged_from_prior_refresh": true,
+      "changed_sections_read": false
+    },
+    {
+      "path": "docs/research/candidates/ec4g_r1/DIRECTION.md",
+      "current_sha": "34382425abd4bdda9bcb71847c0f016d9af9483a",
+      "git_sha256": "633e18efadad7140c058983f826d98c53dd8eb0bf91f0597fe3024445856d619",
+      "unchanged_from_prior_refresh": true,
+      "changed_sections_read": false
+    },
+    {
+      "path": "docs/research/candidates/eociv_lite/DIRECTION.md",
+      "current_sha": "34382425abd4bdda9bcb71847c0f016d9af9483a",
+      "git_sha256": "df513faabf2c823875fb85d78b10155b281538c155998cb2c78f419254acde08",
+      "unchanged_from_prior_refresh": true,
+      "changed_sections_read": false
+    },
+    {
+      "path": "docs/research/candidates/expressibility_gated_renewal_credit_relay/DIRECTION.md",
+      "current_sha": "34382425abd4bdda9bcb71847c0f016d9af9483a",
+      "git_sha256": "b996bdd4ad375da3a959c4538482ca491fb125ba7175bddba5b933535d36b0d8",
+      "unchanged_from_prior_refresh": true,
+      "changed_sections_read": false
+    },
+    {
+      "path": "docs/research/candidates/finite_resource_relational_inductive_efficiency/DIRECTION.md",
+      "current_sha": "34382425abd4bdda9bcb71847c0f016d9af9483a",
+      "git_sha256": "c056718e634bfea0825fb55b54b974e6e4fb78145feff28751483a21656cdba9",
+      "unchanged_from_prior_refresh": true,
+      "changed_sections_read": false
+    },
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/DIRECTION.md",
+      "current_sha": "34382425abd4bdda9bcb71847c0f016d9af9483a",
+      "git_sha256": "a3f0a4a8bd8ce2fb7d1f82fced0cc0b3b3b7085a92797566ce7253b9f70481e4",
+      "unchanged_from_prior_refresh": true,
+      "changed_sections_read": false
+    },
+    {
+      "path": "docs/research/candidates/learned_counterfactual_agent_credit/DIRECTION.md",
+      "current_sha": "34382425abd4bdda9bcb71847c0f016d9af9483a",
+      "git_sha256": "e8d087432ac5852687fc12a04b8a2483610fdbd609208d9f308bbb6d34540fde",
+      "unchanged_from_prior_refresh": true,
+      "changed_sections_read": false
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/DIRECTION.md",
+      "current_sha": "34382425abd4bdda9bcb71847c0f016d9af9483a",
+      "git_sha256": "fa146d39d3a221c0ac7fce973bfc3b2106f5dde6fa3298ad1658783a8cc88f15",
+      "unchanged_from_prior_refresh": false,
+      "changed_sections_read": true
+    },
+    {
+      "path": "docs/research/candidates/orbit_shadow_read/DIRECTION.md",
+      "current_sha": "34382425abd4bdda9bcb71847c0f016d9af9483a",
+      "git_sha256": "034149e80a08ae9179ba073e349b3948bf7c896d1a2d1356bf4d8740a803c466",
+      "unchanged_from_prior_refresh": true,
+      "changed_sections_read": false
+    },
+    {
+      "path": "docs/research/candidates/recct_lite/DIRECTION.md",
+      "current_sha": "34382425abd4bdda9bcb71847c0f016d9af9483a",
+      "git_sha256": "009493cd0884717fd041cd132e4d2db5bbe7c291230b299a1fb5a6aa905d85bd",
+      "unchanged_from_prior_refresh": true,
+      "changed_sections_read": false
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/DIRECTION.md",
+      "current_sha": "34382425abd4bdda9bcb71847c0f016d9af9483a",
+      "git_sha256": "22c4de77cad6518694ec2f907ed3d0690e295a727e88365429b8391de82e3f9f",
+      "unchanged_from_prior_refresh": true,
+      "changed_sections_read": false
+    },
+    {
+      "path": "docs/research/candidates/scope_1s/DIRECTION.md",
+      "current_sha": "34382425abd4bdda9bcb71847c0f016d9af9483a",
+      "git_sha256": "47cf30ed20470118d37041f5ff5ac6e5debb3803ce532933891cd83faaa934e0",
+      "unchanged_from_prior_refresh": true,
+      "changed_sections_read": false
+    },
+    {
+      "path": "docs/research/candidates/semigroup_consistent_duration_model_policy/DIRECTION.md",
+      "current_sha": "34382425abd4bdda9bcb71847c0f016d9af9483a",
+      "git_sha256": "eaf079ddba94cd33bb7b2d385c5fa7caf4339deb2477e4eec1b3a73e6df91e16",
+      "unchanged_from_prior_refresh": true,
+      "changed_sections_read": false
+    },
+    {
+      "path": "docs/research/candidates/tail_return_distributional_learning/DIRECTION.md",
+      "current_sha": "34382425abd4bdda9bcb71847c0f016d9af9483a",
+      "git_sha256": "902b7c699b715eb60436035e453237e0275a67b1960c8f14a66197c229b84431",
+      "unchanged_from_prior_refresh": true,
+      "changed_sections_read": false
+    },
+    {
+      "path": "docs/research/candidates/ucope/DIRECTION.md",
+      "current_sha": "34382425abd4bdda9bcb71847c0f016d9af9483a",
+      "git_sha256": "2be254a9501ae8de51df3b3c4a2d361a3e9c58424008e7a70f7a9c55c90566d2",
+      "unchanged_from_prior_refresh": true,
+      "changed_sections_read": false
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/DIRECTION.md",
+      "current_sha": "34382425abd4bdda9bcb71847c0f016d9af9483a",
+      "git_sha256": "717d10f2fa4c05f26d95c7df540dc70c7136e25c2cd36f206dcc00cc32d0c030",
+      "unchanged_from_prior_refresh": true,
+      "changed_sections_read": false
+    },
+    {
+      "path": "docs/research/candidates/variable_n_fleet_churn/DIRECTION.md",
+      "current_sha": "34382425abd4bdda9bcb71847c0f016d9af9483a",
+      "git_sha256": "9639d9f76a06300f1bc1ab3b867420e8827c15edd933c4b04832955ca96ba8fa",
+      "unchanged_from_prior_refresh": true,
+      "changed_sections_read": false
+    },
+    {
+      "path": "docs/research/candidates/vsp_02/DIRECTION.md",
+      "current_sha": "34382425abd4bdda9bcb71847c0f016d9af9483a",
+      "git_sha256": "9f12835000b6e29662bc23265eebd49b4a9f4a237e8d36e90b76d3b6c0c323e5",
+      "unchanged_from_prior_refresh": true,
+      "changed_sections_read": false
+    },
+    {
+      "path": "docs/research/candidates/vsp_03/DIRECTION.md",
+      "current_sha": "34382425abd4bdda9bcb71847c0f016d9af9483a",
+      "git_sha256": "666f324eb0b109a06c3f73135da68bb6333a8f045014ca645b112d5f697d75ae",
+      "unchanged_from_prior_refresh": true,
+      "changed_sections_read": false
+    },
+    {
+      "path": "docs/research/candidates/vsp_c1/DIRECTION.md",
+      "current_sha": "34382425abd4bdda9bcb71847c0f016d9af9483a",
+      "git_sha256": "063d9291faba212941c75a7ab0e14f69c741bcfbc0c4cdca95573d8b9a88020b",
+      "unchanged_from_prior_refresh": true,
+      "changed_sections_read": false
+    }
+  ],
+  "current_cross_direction_context": {
+    "acvc": {
+      "path": "docs/research/candidates/acvc/pro_packets/20260912_post_cluster_use_convergence/HANDOFF.json",
+      "source_sha": "34382425abd4bdda9bcb71847c0f016d9af9483a",
+      "sha256": "107653cfca28a131013c60e1e6a43f47eeaedc6b75996c8402578256e47eaf55",
+      "request_id": "2026-09-12-acvc-post-cluster-use-convergence-01",
+      "published_handoff_state": "READY_TO_DISPATCH",
+      "provider_acceptance": "UNKNOWN from ready handoff alone; no new receipt observed by this author",
+      "scope_change": false
+    },
+    "roster_consistent_latent_exploration": {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260912_joint_quota_phase_family/delivery/HANDOFF.json",
+      "source_sha": "34382425abd4bdda9bcb71847c0f016d9af9483a",
+      "sha256": "c61577ee006ac9774eecb56740586b20f1c1a7f9b22438ba349444febc79fa3f",
+      "request_id": "2026-09-12-rcle-joint-quota-phase-family-01",
+      "published_handoff_state": "READY_TO_DISPATCH",
+      "provider_acceptance": "UNKNOWN from ready handoff alone; no new receipt observed by this author",
+      "scope_change": false
+    },
+    "vap_folr_core": {
+      "path": "docs/research/candidates/vap_folr_core/pro_packets/20260912_entity_history_post_b01_discriminator/delivery_ready/HANDOFF.json",
+      "source_sha": "34382425abd4bdda9bcb71847c0f016d9af9483a",
+      "sha256": "c741c9d176a811bc36074657f88ba9f4311a496188df82466a58b05c73d1051e",
+      "request_id": "folr-entity-history-post-b01-discriminator-20260912",
+      "published_handoff_state": "READY_TO_DISPATCH",
+      "provider_acceptance": "UNKNOWN from ready handoff alone; no new receipt observed by this author",
+      "scope_change": false
+    },
+    "metric_ground_transport_allocation": {
+      "original_convergence": "COMPLETE conforming PRO_FINAL; accepted mainfff53e245",
+      "current_need": "Only selected fresh COND512/DENSE768 empirical purchase; all new caps UNASSIGNED",
+      "original_DM": "/root/dm_mgtap_m_pair",
+      "branch": "codex/mgtap",
+      "worktree": "C:/Projects/HMASD-worktrees/dm-n5-continue-20260904",
+      "implementation_or_experiment_accepted": false
+    },
+    "actuator_conditioned_partial_sharing": {
+      "B02": "complete intake and four-target cleanup accepted; ACTIVE/HIGH/recasts0",
+      "separate_request": "2026-09-12-acps-post-b02-investment-01",
+      "fixed_task": "c5d433fb3482a2bd466a84695d8ad5c7d581bc37",
+      "handoff": "b157ae9fa112a3a9c0008d6ef703b1b787bfc5e5",
+      "new_response_observed": "f63980ab1acdcf9fad0ec8b1ac9770c864a6b988",
+      "response_scope": "only its archive/RESPONSE.md; preserved in current branch",
+      "current_boundary": "full immutable response available; Root receipt/original-author intake separate and pending in this snapshot; no decision inferred from title",
+      "scope_change": false
+    }
+  },
+  "live_count": "No exact count inferred from registry, completed returns, ready requests or this one author; Root reconciles actual DM/experiment/provider acceptance",
+  "formal_UAV": "No new entry or C promotion; prior UCOPE explicit entry evidence retained and not generalized from UAV host use",
+  "owner_reviews_unapplied": [],
+  "exposure": {
+    "new_result_bearing_invocations": 0,
+    "new_models_or_RNG_draws": 0,
+    "new_training_episodes": 0,
+    "new_Adam_calls": 0,
+    "new_evaluation_episodes": 0,
+    "raw_result_reanalysis": 0,
+    "test_or_profiling_invocations": 0,
+    "author_Pro_Send": 0,
+    "static_configuration_arithmetic": "Python integer expressions only; source-selected future counts, not a forecast or scientific observation",
+    "documentary_complete_cost": "UNKNOWN; all current author preparation, publication, Transport/provider and original-author intake accounted honestly, separate from future empirical purchase"
+  },
+  "audit_record": "docs/research/portfolio/audit/2026-09-12.md#L162",
+  "owner_proposal": {
+    "id": "20260912-root-023",
+    "path": "docs/research/portfolio/owner/inbox/2026-09-12/20260912-root-023.json",
+    "auto_applied": null,
+    "audit_record": "docs/research/portfolio/audit/2026-09-12.md#L162"
+  }
+}

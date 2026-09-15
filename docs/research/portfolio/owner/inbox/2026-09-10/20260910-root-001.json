@@ -67,6 +67,30 @@
       "record": "docs/research/portfolio/decisions/2026-09-10-control-plane-consolidation.md",
       "state": "applied",
       "summary": "已实施控制面文件与owner-console变更并完成针对性验收；模型配置重启后生效，未增加科研调用。"
+    },
+    {
+      "at": "2026-09-13T20:51:42+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "docs/research/portfolio/decisions/2026-09-13-dm-autonomy-consolidation.md",
+      "record": "docs/research/portfolio/decisions/2026-09-13-dm-autonomy-consolidation.md",
+      "state": "applied",
+      "summary": "所有者指定ACVC收敛四份提案并更新控制面：DM在既有card/Pro/grant内连续执行到intake，proper-node新科学与投资边界保留，一次变化回报及无生产者ACTIVE-idle；27项生命周期/priority不变。FOLR已按原授权Generic技术接受后直接完成BANK运行，当前combined intake；RCLE原投资请求已分派但接受待事实，无新拨款。独立review及针对性文档检查通过，本治理任务零科研调用或Send。"
+    },
+    {
+      "at": "2026-09-13T22:20:24+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "docs/research/portfolio/decisions/2026-09-13-direction-management-workflow.md",
+      "record": "docs/research/portfolio/decisions/2026-09-13-direction-management-workflow.md",
+      "state": "applied",
+      "summary": "Event-driven Root and independent DM control contract applied; research paused; all four tasks Astra/max, migration acceptance pending."
+    },
+    {
+      "at": "2026-09-13T22:38:47+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "docs/research/portfolio/decisions/2026-09-13-direction-management-workflow.md",
+      "record": "docs/research/portfolio/decisions/2026-09-13-direction-management-workflow.md",
+      "state": "applied",
+      "summary": "Four independent Astra/max DMs accepted; event-driven Root and independent overall Portfolio planning route applied. All science and heartbeat paused; no new Pro planning request."
     }
   ]
 }

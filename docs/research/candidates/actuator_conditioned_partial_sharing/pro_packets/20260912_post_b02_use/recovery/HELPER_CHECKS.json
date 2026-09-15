@@ -1,0 +1,27 @@
+{
+  "check_kind": "provider-free Transport control-plane regression",
+  "command": "python -m pytest -q -p no:cacheprovider --basetemp temp/tests/acps-unbound-rebind-20260913-a tests/skills/test_unaccepted_first_binding_rebind.py tests/skills/hmasd_pro_conversation_binding_test.py tests/skills/test_transport_round_reset.py",
+  "result": "31 passed in 0.80s",
+  "scope": "new unbound never-Send recovery plus existing concrete replacement and ordinary round reset",
+  "earlier_attempts": [
+    {
+      "outcome": "execution rejected before start",
+      "cause": "compound test-and-cleanup command blocked by policy"
+    },
+    {
+      "outcome": "31 setup errors, no assertions ran",
+      "cause": "pytest basetemp parent did not exist; created its parent before the successful retry"
+    }
+  ],
+  "cleanup": {
+    "path": "C:/Projects/HMASD-worktrees/codex-acps/temp/tests/acps-unbound-rebind-20260913-a",
+    "resolved_target_verified": true,
+    "command": "Remove-Item -LiteralPath C:/Projects/HMASD-worktrees/codex-acps/temp/tests/acps-unbound-rebind-20260913-a -Recurse -Force",
+    "result": "Rejected before execution: blocked by policy",
+    "state": "RETAINED_POLICY_RESTRICTED",
+    "alternate_shell_bypass": false
+  },
+  "scientific_invocations": 0,
+  "external_sends": 0,
+  "review": "independent /root/dm_acps_resume/review_unbound_rebind is checking the changed path; outcome recorded separately in PUBLICATION.md"
+}

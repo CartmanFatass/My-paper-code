@@ -1,0 +1,32 @@
+{
+  "status": "COMPLETE_RECLAIMED_EVIDENCE_RETAINED",
+  "verified_at_utc": "2026-09-13T07:30:54.734095+00:00",
+  "before": [
+    {
+      "path": "/home/wu/hmasd-worktrees/rcle-b08-012a8bce2",
+      "files": 2404
+    },
+    {
+      "path": "/home/wu/.agent-tasks/rcle-b08-s28-012a8bce2",
+      "files": 6
+    }
+  ],
+  "targets": [
+    {
+      "path": "/home/wu/hmasd-worktrees/rcle-b08-012a8bce2",
+      "disk_absent": true,
+      "registration_absent": true
+    },
+    {
+      "path": "/home/wu/.agent-tasks/rcle-b08-s28-012a8bce2",
+      "disk_absent": true,
+      "registration_absent": true
+    },
+    {
+      "path": "/home/wu/hmasd-worktrees/rcle-b08-check-8761274f9",
+      "disk_absent": true,
+      "registration_absent": true
+    }
+  ],
+  "scope": "exact two terminal copies after main941a04808 integration and Root scoped-cleanup continuation; local source/raw evidence retained; unrelated roots untouched"
+}

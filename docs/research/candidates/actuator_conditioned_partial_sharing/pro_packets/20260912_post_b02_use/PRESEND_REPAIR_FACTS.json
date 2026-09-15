@@ -1,0 +1,39 @@
+{
+  "recorded_at_utc": "2026-09-13T09:48:15.936539+00:00",
+  "request_id": "2026-09-13-acps-post-b02-use-01",
+  "operation_id": "b7f00c5e-8e41-4ad1-805d-65cebf1ec763",
+  "stable_key": "em:actuator_conditioned_partial_sharing:convergence",
+  "tab_id": "4cd5b361-b097-48cc-95cc-a10dfcdf5ddf",
+  "immutable_product_model": "GPT-6 Astra",
+  "verified_UI_model_alias": "Latest",
+  "reasoning_effort": "Pro",
+  "prompt_sha256": "bee9b6e037f7b68e37143d152dd004cfefd10a9904d5c13bb648750ee9a2ab84",
+  "sendAttempted": false,
+  "provider_ids": null,
+  "archive": null,
+  "blocker": "literal selected model-menu row comparison rejects immutable GPT-6 Astra against verified Latest; changed Latest operation arg rejected as review_idempotency_conflict",
+  "repair_owner": "/root/dm_mgtap_resume, explicitly assigned by Root",
+  "scope": "preserve original operation/request/prompt/hash/tab; no replacement; no Q Send before repaired non-sending preflight",
+  "receipt_sources": [
+    {
+      "path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\actuator_conditioned_partial_sharing\\2026-09-13-acps-post-b02-use-01--actuator_conditioned_partial_sharing--attempt-01\\2026-09-13-acps-post-b02-use-01--operation-receipt.json",
+      "bytes": 2044,
+      "sha256": "80cf346125b24c4109f5b6381a3aa6b0132204568a70915c39e805a522735605"
+    },
+    {
+      "path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\actuator_conditioned_partial_sharing\\2026-09-13-acps-post-b02-use-01--actuator_conditioned_partial_sharing--attempt-01\\2026-09-13-acps-post-b02-use-01--transport-facts.json",
+      "bytes": 1689,
+      "sha256": "f198b932d37720bdc04c3a8904b0895d6ae7305078afc77a3a3a1f503925d2d0"
+    },
+    {
+      "path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\actuator_conditioned_partial_sharing\\2026-09-13-acps-post-b02-use-01--actuator_conditioned_partial_sharing--attempt-01\\2026-09-13-acps-post-b02-use-01--error-02.json",
+      "bytes": 616,
+      "sha256": "28a404981b6659d0a0eb9b309ffc4c427691ea3f0bb12953f8035660735b234e"
+    },
+    {
+      "path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\actuator_conditioned_partial_sharing\\2026-09-13-acps-post-b02-use-01--actuator_conditioned_partial_sharing--attempt-01\\2026-09-13-acps-post-b02-use-01--error-03.json",
+      "bytes": 460,
+      "sha256": "c6940ba053f54e1b21fdfffd22a28b978fe79e5b6b85d6693c0f47874849ff54"
+    }
+  ]
+}

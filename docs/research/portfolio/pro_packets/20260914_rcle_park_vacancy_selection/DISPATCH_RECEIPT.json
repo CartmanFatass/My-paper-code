@@ -1,0 +1,58 @@
+{
+  "request_id": "2026-09-14-rcle-park-vacancy-selection-01",
+  "recorded_at_utc": "2026-09-14T11:53:04.978673+00:00",
+  "event": "App dispatch accepted by tool; provider acceptance unverified",
+  "author_thread_id": "01a09e10-9d9f-7f82-87c0-d58cbe0c7618",
+  "operator_thread_id": "01a09ea0-4a86-75b0-826d-6f864efa7480",
+  "handoff_sha": "1fb1e98cf337f4ea9e275ab4150eaa48536c5c8e",
+  "main_binding_sha": "c34d39edab06acbd2724852eec7d9a401573b6d6",
+  "prompt_sha": "51d753570d946ac3259bff2ffa9a12dc1b80c9d1",
+  "prompt_bytes": 23840,
+  "prompt_characters": 23815,
+  "prompt_sha256": "30d4979c76946448b88af9c04044d8fee8b20e57c5720e4e8e7e9ad1bdae035b",
+  "actual_provider_send": "Matching request is observed persisted in the bound conversation; exact Send time not asserted; no author-side resend.",
+  "actual_provider_user_id": "712fe70b-7b64-4cd9-8589-dc05506fd639",
+  "actual_provider_answer": "docs/research/portfolio/pro_packets/20260914_rcle_park_vacancy_selection/archive/RESPONSE.md",
+  "scientific_invocations": 0,
+  "replacement_selected": false,
+  "reservations_created": 0,
+  "next_owner": "RCLE applies one reservation and original ACVC DM actual continuation; no provider observation/acquisition remains.",
+  "current_peer_delta": "Maine359ce5b5 verified FOLR review acceptance and retained same CONTINUE/no successor. The prompt honestly labels its earlier fixed808 snapshot; no new peer result or lifecycle conclusion occurred.",
+  "observation_update": {
+    "recorded_at_utc": "2026-09-14T12:24:44.122003+00:00",
+    "source": "Original Transport request-scoped function_call_output records in its own rollout; read-only author reconciliation, not a second browser observer.",
+    "source_rollout": "C:/Users/fires/.codex/sessions/2026/09/13/rollout-2026-09-13T23-35-00-01a09ea0-4a86-75b0-826d-6f864efa7480.jsonl",
+    "observations": [
+      {
+        "line": 6530,
+        "call_id": "call_H5yFJRyapamD7wkrP7pGHdyk",
+        "captured_at": "2026-09-14T12:10:21.779Z",
+        "scope": "User role, full ID, observed outer-node length23825 and matching request-title prefix."
+      },
+      {
+        "line": 6585,
+        "call_id": "call_xeUwkxEWHunvFrFuugBCyCMJ",
+        "captured_at": "2026-09-14T12:14:10.844Z",
+        "scope": "Same user ID/role/length and matching final report tail after read-only reconciliation."
+      }
+    ],
+    "full_actual_user_body_archive_pending": true,
+    "full_actual_user_body_equality_not_claimed": true,
+    "composer_file_check": {
+      "path": "archive/COMPOSER_LOGICAL_CAPTURE.txt",
+      "bytes": 23740,
+      "sha256": "a73f66e12e4430a0c1f372224f03d8e4ff281b67e512d9ce34a247016436c30d",
+      "full_nonwhitespace_content_equal_to_bound_prompt": true,
+      "exact_bytes_equal": false,
+      "full_report_tail_present": true,
+      "scope": "Captured file compared with exact bound Git blob, not independent browser readback."
+    },
+    "provider_state": "Transport revision202 reports same persisted request still processing in read-only second tab; no complete decision yet. Earlier UI stop-control disappearance did not establish terminal completion.",
+    "observer": "Registered independent Transport01a09ea0-4a86-75b0-826d-6f864efa7480 remains active and explicitly owns same-request full archival/direct return."
+  },
+  "terminal_archive_commit": "7a490382cb469f2a62e276a756a2be32b460cc69",
+  "terminal_archive_sha256": "3b81868e9065d370f0d2a5430dd81da960d8a4cd3d4be799dff7c98cbd54ceb7",
+  "actual_assistant_id": "936a224b-a316-40d6-a326-c0803ffdfb8c",
+  "full_actual_user_body_archive": "docs/research/portfolio/pro_packets/20260914_rcle_park_vacancy_selection/archive/ACCEPTED_USER_DOM_BODY.txt",
+  "archive_complete": true
+}

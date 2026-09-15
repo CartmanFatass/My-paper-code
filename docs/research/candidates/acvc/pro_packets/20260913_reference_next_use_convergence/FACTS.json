@@ -1,0 +1,73 @@
+{
+  "request_id": "2026-09-13-acvc-reference-next-use-convergence-01",
+  "generated_utc": "2026-09-13T18:52:13.048331+00:00",
+  "current_method_commit": "a5f146f5a086f50da8c53386f9ee821ef82401c5",
+  "current_exposure": {
+    "new_fits": 0,
+    "model_initializations": 0,
+    "scientific_rng_instances": 0,
+    "training_steps": 0,
+    "optimizer_steps": 0,
+    "evaluation_episodes": 0,
+    "native_steps": 0,
+    "runtime_tests": 0,
+    "profiling_or_diagnostic_invocations": 0,
+    "parameter_displacement": null
+  },
+  "exposure_line": "new_fits=0; model_initializations=0; scientific_rng_instances=0; training_steps=0; optimizer_steps=0; evaluation_episodes=0; native_steps=0; runtime_tests=0; profiling_or_diagnostic_invocations=0; parameter_displacement=N/A",
+  "authorized_pro_consultations": 1,
+  "provider_and_complete_documentary_cost": "UNKNOWN",
+  "new_receiving_use": null,
+  "new_receiving_default_decision": null,
+  "new_empirical_result": null,
+  "existing_decision": "retain qualified observed train-C -> deploy-F cluster reference; recommend no additional empirical allocation now",
+  "existing_decision_commit": "d9a1426af03c42bdcbb8e4f84413f94493a58ebf",
+  "existing_response_sha256": "4deb7f4c27dafdcd6634b898722aa3e2e667e4334335fad72bfa368095f78816",
+  "copied_accepted_counts": {
+    "train_episodes": 512,
+    "optimizer_steps": 1024,
+    "final_checkpoints": 1,
+    "post_fit_loads": 3,
+    "eval_episodes": 192,
+    "team_steps": 180224
+  },
+  "copied_accepted_primaries": {
+    "F-C": {
+      "mean_J": 0.12407302446321236,
+      "conditional_SE_J": 0.008490426540329714,
+      "adverse": 1,
+      "minimum_J": -0.024574273874233443,
+      "reading": "UP"
+    },
+    "F-dwell": {
+      "mean_J": 0.07674096500501802,
+      "conditional_SE_J": 0.010170152134996446,
+      "adverse": 8,
+      "minimum_J": -0.12128082288171904,
+      "reading": "UP"
+    }
+  },
+  "alternative_intrinsic_work": {
+    "independent_training_units": 1,
+    "train_team_ticks": 131072,
+    "evaluation_team_ticks": 49152,
+    "total_team_ticks": 180224,
+    "adam_calls": 1024,
+    "final_checkpoints": 1,
+    "status": "unselected, unallocated alternative only"
+  },
+  "alternative_native_and_support_cost": "UNKNOWN, no caps allocated",
+  "claim_ceiling": "bounded observed endpoint reference; no training-population stability, component causality, transfer, tuned headroom or new default claim",
+  "lifecycle": "ACTIVE",
+  "priority": "MEDIUM",
+  "recasts": 2,
+  "empirical_invocations_authorized": 0,
+  "owner_prediction": "not taken; no new empirical prediction",
+  "scientific_reading": {
+    "foundations": "section 6",
+    "empirical_topic": "first three sections",
+    "assumption": "one complete fit is the independent learning unit; paired worlds describe conditional deployment spread; package contrasts do not isolate causal components",
+    "limit": "fresh-policy variation, pure retrace, tuned headroom and transfer remain unestablished"
+  },
+  "check_method": "Python copied accepted intake facts and checked configuration arithmetic; no model/RNG creation or outcome recomputation"
+}

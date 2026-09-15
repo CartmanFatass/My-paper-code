@@ -1,0 +1,11 @@
+{
+  "finished_utc": "2026-09-15T00:11:40.029780+00:00",
+  "worktree_absent": true,
+  "worktree_registration_absent": true,
+  "supervisor_absent": true,
+  "remote_staging_archive_absent": true,
+  "source": "66ea85e0154e838ccb570eab81e2fecea8ff5973",
+  "command": "git -C /home/wu/projects/HMASD worktree remove --force /home/wu/hmasd-worktrees/acvc-extended-b01-66ea85e01; remove verified finished exact supervisor and already-preserved staging tar",
+  "shared_authoring_and_denied_local_paths": "untouched",
+  "root_integration_retention_receipt": "Root native message: a740d9914 complete intake/evidence and1809f5076 originals integrated; continue exact reclamation without ACK"
+}

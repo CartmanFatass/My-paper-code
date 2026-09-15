@@ -1,0 +1,80 @@
+{
+  "id": "20260912-folr-004",
+  "created": "2026-09-12T23:11:17-07:00",
+  "direction": "vap_folr_core",
+  "tier": "direction",
+  "kind": "decision",
+  "title": "FOLR 接受旧 BANK 对新 Generic 的有限用途选择",
+  "context": "已完整读取原方向响应并通过当前规范核对：仅选择旧 BANK 对一个全新 Generic 的用途比较；没有新拨款、实验、重试或方向处置。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "接受原节点用途选择",
+      "consequence": "把选定问题写入方向记录并准备独立拨款材料；当前不运行。"
+    },
+    {
+      "key": "conflict",
+      "label": "返回具体规范冲突",
+      "consequence": "保留完整响应并向原节点提出确切冲突，不代判。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "完整响应符合所问的有限 B 用途范围；没有具体规范冲突。",
+  "evidence": [
+    "docs/research/candidates/vap_folr_core/pro_packets/20260912_entity_history_post_b01_discriminator/INTAKE.md",
+    "docs/research/candidates/vap_folr_core/pro_packets/20260912_entity_history_post_b01_discriminator/archive/RESPONSE.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-12.md#L158",
+  "brief": "docs/research/portfolio/owner/briefs/vap_folr_core/2026-09-12_FOLR_ENTITY_HISTORY_POST_B01_USE_DECISION.md",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "接受原方向节点的单次用途选择：旧 BANK 是否值得成为同一主机的可选开发参照？",
+    "changes_if_approved": [
+      {
+        "target": "DIRECTION.md 当前科学位置",
+        "from": "下一判别尚未选择，E 差值不可用",
+        "to": "选择旧 BANK 与一个新 Generic 的条件用途比较；拨款仍待 Portfolio"
+      }
+    ],
+    "if_refused": "保留完整 Pro 与 E/H 证据；实际异步冲突返回同一节点，不编造替代裁决，也不重试旧 Generic。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/vap_folr_core/pro_packets/20260912_entity_history_post_b01_discriminator/archive/RESPONSE.md",
+        "quote": "Select one future, separately funded comparison of the accepted, frozen BANK policy against one newly trained, equally informed Generic RETAIN policy.",
+        "why": "一个新 Generic 终点能改变具体参照用途，避免另购 BANK 训练。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/vap_folr_core/pro_packets/20260912_entity_history_post_b01_discriminator/archive/RESPONSE.md",
+        "quote": "BANK has not demonstrated comparative value, the twenty-tick host may offer little useful additional history, and current local features plus adaptive Generic recurrence may already suffice.",
+        "why": "没有比较收益，节省开销是实质替代项；B04 的 Generic 能力仍是不同主机上的反证。"
+      }
+    ],
+    "uncertainty": [
+      "仅一个已知结果的旧 BANK 加一个新 Generic；没有 BANK 训练复现或总体不确定性。",
+      "公共信息接口是理想化任务假设；匹配的调优 headroom 缺失。"
+    ],
+    "cost": {
+      "compute": "本次新增科学调用为零；未来完整原生、支持及模型费用未知，现有 E 预算不续期。",
+      "owner_time": "无需等待回复。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing"
+    },
+    "verdict_text": "Final decision: select the one conditional retained-BANK-reference versus fresh-Generic use comparison described above for possible separate investment.",
+    "source": "docs/research/candidates/vap_folr_core/pro_packets/20260912_entity_history_post_b01_discriminator/archive/RESPONSE.md"
+  },
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-13T06:11:59+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/vap_folr_core/pro_packets/20260912_entity_history_post_b01_discriminator/archive/RESPONSE.md",
+      "record": "docs/research/candidates/vap_folr_core/pro_packets/20260912_entity_history_post_b01_discriminator/INTAKE.md",
+      "state": "applied",
+      "summary": "已通过完整响应核对并接受用途选择；只更新科学记录，没有拨款或实验。"
+    }
+  ]
+}

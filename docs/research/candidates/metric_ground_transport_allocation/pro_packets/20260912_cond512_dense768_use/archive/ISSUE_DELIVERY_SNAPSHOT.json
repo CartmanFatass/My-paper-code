@@ -1,0 +1,43 @@
+{
+  "observed_utc": "2026-09-13T04:49:45.453768+00:00",
+  "matching_delivery_comment": "https://github.com/CartmanFatass/My-paper-code/issues/18#issuecomment-5650131023",
+  "issue": {
+    "body": "MGTAP 当前唯一用途问题：选择一次新的 mean-COND512 / 完整 DENSE768 B，或拒绝该具体延续方案。\n\nPortfolio 已购买一次原 Convergence 判断及完整 intake；没有代码、模型、测量、训练或评价额度，完整文档与调用成本明确接受 UNKNOWN。若选中 B，原 DM 只返回完整的新实验投资需求。MGTAP 保持 ACTIVE/MEDIUM，DENSE 保持默认。\n\n已接受的 mean-COND 三次 J 差为 +0.005761321371348559、−0.02246957345594415、+0.02447811898058116；TOP8221 为 −0.0684509798102144（4 正 / 28 负）。保留每次独立训练配对、全部负例及条件评价不确定性；不作新的合并结果或稳定优势判断。TOP 已完成并清理，不再是待判断候选。\n\n唯一新候选保持原 mean-COND 和完整 DENSE，只让后者获得 768 而非 512 回合普通训练。拟议一对新训练、各 32 个最终评价世界；原生团队回报 J 和 0.01 J 效应尺度不变。更多训练不保证 DENSE 提升，这是有意不同数据量和成本的用途比较，不是等预算、等时间或查询因果比较。\n\n不得第四次不变 COND 配对、TOP 重跑、额外 arm/panel、训练长度或架构搜索、七 UAV 替代、新分析或成本探测。拒绝这一候选不会自动 PARK 方向；本次不另选替代家族。\n\n固定输入：\n\n- [最新 Portfolio 授权与精确映射](https://github.com/CartmanFatass/My-paper-code/blob/814139558ccb28502b2e23da6800897b4d7af4b3/docs/research/portfolio/pro_packets/20260912_post_kelu_continuation/EXECUTION_MAPPING.md)\n- [原 DM 用途与成本依据](https://github.com/CartmanFatass/My-paper-code/blob/e854bd6f11b3ca0b95783fbd6fc49c75b6095ed3/docs/research/candidates/metric_ground_transport_allocation/MGTAP_POST_TOP_NEXT_USE_READINESS_20260912.md)\n- [完整 TOP 负向 intake](https://github.com/CartmanFatass/My-paper-code/blob/bf175fafbe916b174e553801a01c6378597f094c/docs/research/candidates/metric_ground_transport_allocation/MGTAP_TOP_QUERY_B01_INTAKE_20260912.md)\n\n本轮仅允许在共享 codex/mgtap 的 docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260912_cond512_dense768_use/archive/RESPONSE.md 交付完整答案及一个交付链接评论。固定 TASK 由原 DM 发布并绑定后交 Root → 当前 Transport。既有评论及旧 TASK/RESPONSE 保留各自历史含义，不是本轮输入或追加授权。\n",
+    "comments": [
+      {
+        "id": "IC_kwDOO8trO88AAAABUK4sqA",
+        "author": {
+          "login": "CartmanFatass"
+        },
+        "authorAssociation": "OWNER",
+        "body": "MGTAP post-8214 TOP-query (20260912_post8214_top_query): the complete [RESPONSE.md at immutable delivery commit 10ad0d09fda138f49b117cbcf7231c09bfdd50a4](https://github.com/CartmanFatass/My-paper-code/blob/10ad0d09fda138f49b117cbcf7231c09bfdd50a4/docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260912_post8214_top_query/archive/RESPONSE.md) is delivered.\n\nThe final direction-level scientific choice selects one new TOP/intact-DENSE B/EXPLORE training-pair object. Only the query changes to the delivered highest-local-SINR visible partner; full raw information, all-partner context, private recurrence and native primitive reward/action/PPO remain intact. One fresh master remains unassigned. The 450-second-per-complete-arm, 900-second-native and 1,200-second-complete-invoked envelope is a fresh recommendation for the proper investment route, not a grant or launch authorization. No fourth unchanged COND pair, generic DENSE-default change, stable/causal claim or Portfolio disposition is made. All three prior signed COND observations remain separate.\n\nFixed task revision: 7edd25cdcc81a604ae25a3309fd2371664e971e5. All seventeen manifest paths were accessed at their individually specified versions. The response was read back in full at the delivery commit. Comparison with the pre-write HEAD confirms one commit adding only the specified 253-line response on codex/mgtap, preserving the required base ancestry and prior deliveries. No scientific source, model, test, experiment or scientific-state change was executed by this consultation.",
+        "createdAt": "2026-09-12T20:40:47Z",
+        "includesCreatedEdit": false,
+        "isMinimized": false,
+        "minimizedReason": "",
+        "reactionGroups": [],
+        "url": "https://github.com/CartmanFatass/My-paper-code/issues/18#issuecomment-5648559272",
+        "viewerDidAuthor": true
+      },
+      {
+        "id": "IC_kwDOO8trO88AAAABUMYoTw",
+        "author": {
+          "login": "CartmanFatass"
+        },
+        "authorAssociation": "OWNER",
+        "body": "MGTAP COND512/intact-DENSE768 use decision (20260912_cond512_dense768_use): the complete [RESPONSE.md at immutable delivery commit 71baa4a814fb8cb5d0cd2944deb0548b8fc644b2](https://github.com/CartmanFatass/My-paper-code/blob/71baa4a814fb8cb5d0cd2944deb0548b8fc644b2/docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260912_cond512_dense768_use/archive/RESPONSE.md) is delivered.\n\nThe final scientific choice selects exactly one fresh mean-COND512 versus intact-DENSE768 B/EXPLORE use comparison. It preserves the original mean-query encoder, including cV = sum(masked partner embeddings)/10, all raw local information, private recurrence, native primitive reward/action and PPO. The changed quantity is DENSE's training exposure, not its architecture or information. The response explicitly rejects guaranteed longer-training benefit, equal-time/equal-budget, sample-efficiency-curve and causal interpretations. All three mean-COND results and the adverse TOP result remain separate; DENSE remains default and MGTAP ACTIVE/MEDIUM.\n\nThis is a scientific selection only. The existing purchase covers one judgment and full original-DM intake, not a conditional B. The complete new empirical need is 344064 native team ticks, 2560 Adam calls and 8273920 actor-row uses, plus the necessary implementation/check/review/source/command/Git/staging/admission/Monitor/collection/intake/integration/retention/cleanup chain counted once. New rates, complete costs and numerical allowances remain unassigned/UNKNOWN for the separate Portfolio investment decision. No old M/T balance, master, implementation or empirical launch is authorized.\n\nFixed task revision: e10ae82fb9f9fe914d9a18633b3436c5d1b2e8b0. All eighteen manifest paths were accessed at their specified versions. The 202-line response was read back in full at the delivery commit. Comparison with the pre-write HEAD confirms one commit adding only the specified response on codex/mgtap, preserving the required base ancestry and prior deliveries. A transient content-read disconnection was resolved by fresh reads without retrying the file write. No scientific code, model, test, numerical reanalysis or experiment was executed.",
+        "createdAt": "2026-09-13T02:08:12Z",
+        "includesCreatedEdit": false,
+        "isMinimized": false,
+        "minimizedReason": "",
+        "reactionGroups": [],
+        "url": "https://github.com/CartmanFatass/My-paper-code/issues/18#issuecomment-5650131023",
+        "viewerDidAuthor": true
+      }
+    ],
+    "number": 18,
+    "state": "OPEN",
+    "title": "MGTAP：COND512 与完整 DENSE768 的用途选择或拒绝",
+    "url": "https://github.com/CartmanFatass/My-paper-code/issues/18"
+  }
+}

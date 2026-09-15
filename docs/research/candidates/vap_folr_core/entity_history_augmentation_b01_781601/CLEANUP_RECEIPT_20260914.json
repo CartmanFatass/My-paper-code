@@ -1,0 +1,23 @@
+{
+  "published_sha": "2ca2dd387fa9dd04a93f1d4e54b2350229b14c29",
+  "observed_remote_ref": "2ca2dd387fa9dd04a93f1d4e54b2350229b14c29",
+  "published_archives": [
+    {
+      "name": "GENERIC_RAW.tar.gz",
+      "sha256": "8bfe7c3d711d85ae51e70a932503538415afc059e2bffd7a4d6ff5d39f5d2efc"
+    },
+    {
+      "name": "AUGMENTED_RAW.tar.gz",
+      "sha256": "0190acfca2c38ac45963abbc425b0de4620bbe707880994733b65ac6880a06bd"
+    },
+    {
+      "name": "SUPPORT_RAW.tar.gz",
+      "sha256": "1dba47b361b13b22825b3f056fa26e6f9e5dede10c38c6b2607a275d8ed0894a"
+    }
+  ],
+  "returncode": 0,
+  "stdout": "{\"completed_at_utc\": \"2026-09-14T20:44:04.991160+00:00\", \"exact_targets\": [\"/home/wu/hmasd-worktrees/folr-entity-history-augmentation-b01-781601-d9977dc18\", \"/home/wu/.agent-tasks/folr-augmentation-b01-781601-generic\", \"/home/wu/.agent-tasks/folr-augmentation-b01-781601-augmented\"], \"source_sha\": \"d9977dc18baf33b78dc626764c252391f1ddaa9d\", \"terminal_statuses\": [{\"task\": \"folr-augmentation-b01-781601-generic\", \"status\": \"finished\", \"exit_code\": 0, \"pid\": 3674297, \"uptime_seconds\": 18429, \"tmux_active\": false}, {\"task\": \"folr-augmentation-b01-781601-augmented\", \"status\": \"finished\", \"exit_code\": 0, \"pid\": 3679958, \"uptime_seconds\": 3849, \"tmux_active\": false}], \"tracked_source_clean\": true, \"live_processes\": [], \"all_untracked_and_supervisor_files_verified\": 46, \"git_remove\": {\"returncode\": 0, \"stdout\": \"\", \"stderr\": \"\"}, \"all_removed_and_unregistered\": true, \"remote_cleanup_wall_seconds\": 0.09897033195011318, \"new_scientific_invocations\": 0}\n",
+  "stderr": "",
+  "local_complete_ssh_window_seconds": 0.7349999999860302,
+  "scope": "Only the original terminal B01 detached remote worktree and its two supervisor directories after full published preservation. Local authoring checkout, shared Git/interpreter and all peers retained."
+}

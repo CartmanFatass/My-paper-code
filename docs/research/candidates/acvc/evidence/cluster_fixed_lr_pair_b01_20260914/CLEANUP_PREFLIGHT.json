@@ -1,0 +1,58 @@
+{
+  "checked_at": "2026-09-15T02:52:21.246045+00:00",
+  "source": "2bbaa99ad9cc717d89e47a1f24d9acd76dce4f97",
+  "scoped_source_diff_clean": true,
+  "untracked": [
+    "temp/directions/acvc/exp/cluster_fixed_lr_pair_b01_27931_low/DENSE_episode_4096.pt",
+    "temp/directions/acvc/exp/cluster_fixed_lr_pair_b01_27931_low/admission.json",
+    "temp/directions/acvc/exp/cluster_fixed_lr_pair_b01_27931_low/episodes.jsonl",
+    "temp/directions/acvc/exp/cluster_fixed_lr_pair_b01_27931_low/native_time.txt",
+    "temp/directions/acvc/exp/cluster_fixed_lr_pair_b01_27931_low/stderr.log",
+    "temp/directions/acvc/exp/cluster_fixed_lr_pair_b01_27931_low/stdout.log",
+    "temp/directions/acvc/exp/cluster_fixed_lr_pair_b01_27931_low/summary.json",
+    "temp/directions/acvc/exp/cluster_fixed_lr_pair_b01_27931_low/updates.jsonl",
+    "temp/directions/acvc/exp/cluster_fixed_lr_pair_b01_27931_reference/DENSE_episode_4096.pt",
+    "temp/directions/acvc/exp/cluster_fixed_lr_pair_b01_27931_reference/admission.json",
+    "temp/directions/acvc/exp/cluster_fixed_lr_pair_b01_27931_reference/episodes.jsonl",
+    "temp/directions/acvc/exp/cluster_fixed_lr_pair_b01_27931_reference/native_time.txt",
+    "temp/directions/acvc/exp/cluster_fixed_lr_pair_b01_27931_reference/stderr.log",
+    "temp/directions/acvc/exp/cluster_fixed_lr_pair_b01_27931_reference/stdout.log",
+    "temp/directions/acvc/exp/cluster_fixed_lr_pair_b01_27931_reference/summary.json",
+    "temp/directions/acvc/exp/cluster_fixed_lr_pair_b01_27931_reference/updates.jsonl"
+  ],
+  "unexpected_untracked": [],
+  "remote_files_matched": 28,
+  "remote_archive_matched": true,
+  "terminal_status": {
+    "low": {
+      "task": "acvc-rate-low-b01-27931-2bbaa99ad",
+      "status": "finished",
+      "exit_code": 0,
+      "pid": 3701076,
+      "uptime_seconds": 2879,
+      "tmux_active": false
+    },
+    "reference": {
+      "task": "acvc-rate-ref-b01-27931-2bbaa99ad",
+      "status": "finished",
+      "exit_code": 0,
+      "pid": 3701127,
+      "uptime_seconds": 2879,
+      "tmux_active": false
+    }
+  },
+  "processes_using_checkout_cwd": [],
+  "paths": {
+    "worktree": "/home/wu/hmasd-worktrees/acvc-rate-pair-b01-2bbaa99ad",
+    "supervisor": [
+      "/home/wu/.agent-tasks/acvc-rate-low-b01-27931-2bbaa99ad",
+      "/home/wu/.agent-tasks/acvc-rate-ref-b01-27931-2bbaa99ad"
+    ],
+    "staging": "/home/wu/hmasd-inputs/acvc-rate-pair-b01-2bbaa99ad"
+  },
+  "ready_for_exact_reclamation": true,
+  "local_original_files_reverified": 28,
+  "local_archive_reverified": true,
+  "local_verification_provenance": "preceding parent collection-closeout call verified all preserved local bytes; first remote assertion was corrected to allow the expected 16 preserved native output files",
+  "root_retention_confirmation": "Root native message: original retention confirmed; main c854cf90f / tracking b5b03db3c"
+}

@@ -1,0 +1,17 @@
+{
+  "object_id": "RCLE_FIXED_MODAL_REUSE_E01",
+  "authority": "OWNER_DIRECT 2026-09-14",
+  "received_from_thread": "01a095b7-850f-7401-ad4e-5e4320d285f1",
+  "root_commit": "c833f026e02a36ce940cfb17382fb761a65336c3",
+  "direction_cherry_pick": "ec81437deafb9d352dffe9a469f09ce046965dbf",
+  "applied_utc": "2026-09-14T06:13:38.287239+00:00",
+  "specification": "MARL_EMPIRICAL_EVIDENCE_SPEC.md section 11.4.2",
+  "proposal_commit": "a8e55d8435d7132681fa5b6f856675e2eb56bc57",
+  "new_fits": 0,
+  "new_evaluation_episodes": 1024,
+  "native_ticks": 65536,
+  "native_batch32_calls": 32,
+  "started_invocations": 0,
+  "automatic_retry": false,
+  "remaining_before_launch": "Independent engineering acceptance, published exact source, fresh actual-node admission; no further authorization dependency"
+}

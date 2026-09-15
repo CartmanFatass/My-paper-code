@@ -1,0 +1,64 @@
+{
+  "request_id": "2026-09-13-folr-retained-reference-investment-01",
+  "binding_key": "portfolio:cross_direction",
+  "handoff_sha256": "d098f6c69b6b4b35af68ed58a21046e4b9e5fdbb",
+  "handoff_path": "docs/research/candidates/vap_folr_core/pro_packets/20260913_retained_reference_investment/delivery/HANDOFF.json",
+  "parent": "/root/dm_folr_resume",
+  "operator": "/root/dm_folr_resume/transport_lh_folr",
+  "conversation_id": "6a9c109e-b264-83e8-a78b-f9ea1b767b7b",
+  "conversation_url": "https://chatgpt.com/c/6a9c109e-b264-83e8-a78b-f9ea1b767b7b",
+  "tab_id": "62155d8b-9302-4ad0-bcc5-d7dcb17def3a",
+  "operation_id": "0134d548-7182-4825-ab5c-3a2080c8bef4",
+  "idempotency_key": "2026-09-13-folr-retained-reference-investment-01",
+  "request_fingerprint": "c7814cbc554e9c32204144d2b96fbb6d761de98441ae299d21317ed4b564f901",
+  "provider": "chatgpt",
+  "product_model": "Latest",
+  "visible_model": "6 Pro",
+  "reasoning_effort": "Pro",
+  "prompt_sha256": "b116d74ef973aa853e3e116d224d5c5e5a607ca11a2cfbffaba47006aaaec1ba",
+  "prompt_bytes": 1936,
+  "send_count": 1,
+  "send_attempted_epoch_ms": 1789326490517,
+  "provider_user_message_id": "c4679f53-15da-4f76-a670-8c30fe6a8b0b",
+  "provider_assistant_message_id": "809fd465-9d4e-4f59-9af7-f9c6051dfd25",
+  "effect": {
+    "send_observed": true,
+    "user_node_exact": true,
+    "assistant_node_exact": true,
+    "url_exact": true,
+    "first_pre_send_failure": "chatgpt_target_menu_open_unconfirmed",
+    "same_operation_recovery": "review_idempotency_conflict verified; reused immutable Latest/Pro operation with verifyExisting=true",
+    "observation": [
+      "wait_response timeout",
+      "expected_model_switch_unconfirmed",
+      "completed by strict verifyExisting reconciliation"
+    ],
+    "uncertain_effect_send": false
+  },
+  "short_receipt": {
+    "path": "RESPONSE.md",
+    "bytes": 96,
+    "sha256": "e82ee10325f90aa2ddf0adde143c5bcf80e8e050150285f22c9dcecb23f0ed19",
+    "local_path": "C:/Projects/HMASD/temp/sessions/hmasd-chatgpt-pro-transport/archive/portfolio/2026-09-13-folr-retained-reference-investment-01/RESPONSE.md"
+  },
+  "github_delivery": {
+    "repository": "CartmanFatass/My-paper-code",
+    "branch": "codex/vap-folr",
+    "commit": "9e37525139abc18ab6b9dcd393a21e5a24f12e26",
+    "parent_commit": "d098f6c69b6b4b35af68ed58a21046e4b9e5fdbb",
+    "response_path": "docs/research/portfolio/pro_packets/20260913_folr_retained_reference_investment/archive/RESPONSE.md",
+    "response_url": "https://github.com/CartmanFatass/My-paper-code/blob/9e37525139abc18ab6b9dcd393a21e5a24f12e26/docs/research/portfolio/pro_packets/20260913_folr_retained_reference_investment/archive/RESPONSE.md",
+    "issue_number": 15,
+    "delivery_comment_id": 5655512143,
+    "delivery_comment_url": "https://github.com/CartmanFatass/My-paper-code/issues/15#issuecomment-5655512143",
+    "response_bytes": 29328,
+    "response_sha256": "6d2168eadd82e0581cbf65a45a49d4e65c5eb3d71815bb8ef1cbe9d7a3de4276",
+    "connector_sha": "039b390a3e0c97e1a5718f05db5478ef2d3441a6"
+  },
+  "immutable_full_archive": {
+    "path": "C:/Projects/HMASD/temp/sessions/hmasd-chatgpt-pro-transport/archive/portfolio/2026-09-13-folr-retained-reference-investment-01/2026-09-13-folr-retained-reference-investment-01--portfolio__05_FULL_RESPONSE.md",
+    "bytes": 29328,
+    "sha256": "6d2168eadd82e0581cbf65a45a49d4e65c5eb3d71815bb8ef1cbe9d7a3de4276"
+  },
+  "native_transport_capability": "collaboration.send_message unavailable; direct native final parent return is the delivery method"
+}

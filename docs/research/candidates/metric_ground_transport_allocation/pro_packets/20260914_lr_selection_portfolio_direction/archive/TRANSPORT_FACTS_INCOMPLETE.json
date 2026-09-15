@@ -1,0 +1,8 @@
+{
+  "preserved_from": "TRANSPORT_FACTS.json before full-content recovery",
+  "request_id": "2026-09-14-mgtap-lr-selection-direction-decision-01",
+  "provider_assistant_message_id": "3ea6a40e-4c0f-4933-bf46-b8583cb24fda",
+  "response_utf8_bytes": 18522,
+  "response_sha256": "df3e7910a281e4bbc0fa928d59d780c6bdce13974f68165bbbba659381238272",
+  "note": "Pre-correction receipt; canonical facts are in TRANSPORT_FACTS.json."
+}

@@ -1,0 +1,87 @@
+{
+  "id": "20260914-tailretu-001",
+  "created": "2026-09-14T19:34:59-07:00",
+  "direction": "tail_return_distributional_learning",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "TRDL零暴露准备完成：保留未拨款首对照卡",
+  "context": "同一尾部目标下比较32分位完整回报baseline与标量尾部分数baseline；绑定多智能体信用分配。本次只有静态源码事实和设计计数，未实现、拟合或评估。",
+  "options": [
+    {
+      "key": "prepare",
+      "label": "保留未拨款候选卡",
+      "consequence": "接受已完成准备，保留具体卡；不授予实现或实验预算"
+    },
+    {
+      "key": "revise",
+      "label": "修改候选卡",
+      "consequence": "按明确缺陷修改准备材料，不自动实验"
+    },
+    {
+      "key": "discard",
+      "label": "不保留本B提案",
+      "consequence": "保留A01事实但不保留本B提案；方向生命周期不变"
+    }
+  ],
+  "recommended": "prepare",
+  "auto_applied": "prepare",
+  "dm_reason": "同目标更新与真实源码路径已明确，最强标量null和未知成本均保留。",
+  "evidence": [
+    "docs/research/candidates/tail_return_distributional_learning/TRDL_B01_SCIENCE_CARD_20260914.md",
+    "docs/research/candidates/tail_return_distributional_learning/TRDL_A01_INTAKE_20260914.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-14.md#L122",
+  "brief": "docs/research/portfolio/owner/briefs/tail_return_distributional_learning/2026-09-14_TRDL_A01.md",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否保留TRDL已完成的零暴露准备及具体、尚未拨款的B01候选卡？",
+    "changes_if_approved": [
+      {
+        "target": "docs/research/candidates/tail_return_distributional_learning/TRDL_B01_SCIENCE_CARD_20260914.md",
+        "from": "已注册的简要未拨款设计",
+        "to": "明确同尾部目标、宿主、更新、计数和最小实现路径的候选卡；仍未拨款"
+      }
+    ],
+    "if_refused": "保留A01源码事实，按明确意见修改或不保留本B提案；不自动改变方向生命周期。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/tail_return_distributional_learning/TRDL_A01_INTAKE_20260914.md",
+        "quote": "Technical acceptance: the assigned zero-exposure static preparation is complete.",
+        "why": "宿主、策略、同目标两种baseline和有限工作量已明确。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/tail_return_distributional_learning/TRDL_B01_SCIENCE_CARD_20260914.md",
+        "quote": "The strongest null survives: a scalar conditional estimate of the exact score the actor needs is sufficient and easier to fit.",
+        "why": "没有性能或成本结果，不能凭表示更丰富断言收益。"
+      }
+    ],
+    "uncertainty": [
+      "运行速率、峰值内存、分位拟合收益和matching headroom均未知。",
+      "16条轨迹的经验阈值和单fit每臂限制推断。"
+    ],
+    "cost": {
+      "compute": "本次0 fit/0 native call/0 optimizer update；旧3000秒offer未拨款。",
+      "owner_time": "可异步阅读，无逐步批准需求。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing; this item does not grant empirical investment"
+    },
+    "verdict_text": "接受A01静态准备并保留具体B01候选卡；不将准备接受视作实验或实现拨款。",
+    "source": "docs/research/candidates/tail_return_distributional_learning/TRDL_A01_INTAKE_20260914.md"
+  },
+  "starred": true,
+  "approval_correction": "Evidence quotation correction only: B01原文为 Strongest null: a scalar conditional estimate of the exact score the actor needs is sufficient and easier to fit. 原packet额外的 The strongest null survives 前缀应视为作者转述，不是逐字引文；不改变推荐或已执行范围。",
+  "execution_history": [
+    {
+      "at": "2026-09-15T02:43:50+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260914_mgtap_vacancy_replacement/archive/RESPONSE.md",
+      "record": "docs/research/candidates/tail_return_distributional_learning/TRDL_A01_INTAKE_20260914.md",
+      "state": "applied",
+      "summary": "A01零暴露准备已完成并保留未拨款候选卡；没有实现或实验授权。",
+      "correction": "Evidence quotation correction only: B01原文为 Strongest null: a scalar conditional estimate of the exact score the actor needs is sufficient and easier to fit. 原packet额外的 The strongest null survives 前缀应视为作者转述，不是逐字引文；不改变推荐或已执行范围。"
+    }
+  ]
+}

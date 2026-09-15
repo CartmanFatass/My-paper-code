@@ -1,0 +1,37 @@
+{
+  "verified_by_dm_utc": "2026-09-14T20:58:12.315063+00:00",
+  "response_commit": "4da68fe7a9577a0bc32a00d6fc7c7e7412e50568",
+  "response_path": "docs/research/candidates/vap_folr_core/pro_packets/20260914_augmentation_b01_result_closeout_review/archive/RESPONSE.md",
+  "response_bytes": 26392,
+  "response_characters": 26319,
+  "response_lines": 112,
+  "response_sha256": "b3b1666d901cd9612113306de1fc516731dca1823f1a2120d8a57f3160ebf907",
+  "local_bytes_equal_committed_blob": true,
+  "response_commit_changed_paths": [
+    "docs/research/candidates/vap_folr_core/pro_packets/20260914_augmentation_b01_result_closeout_review/archive/RESPONSE.md"
+  ],
+  "fixed_reference_mappings_verified": 21,
+  "full_response_read": true,
+  "reviewer_reported_access": "All21listed sources at fixed commits; no decision-critical access gap. Inherited code/binary raw archives/later cleanup outside direct manifest; facts attributed to engineering/collection.",
+  "dm_access_limit": "Manifest correspondence and Git source verified locally; reviewer access account is independently authored, not substituted by local retrieval.",
+  "finding_summary": "No result-invalidating binding/measurement/implementation defect. Two minor wording precisions: MEI contrast subject; negative count difference not paired improvement.",
+  "science_scope": "Current-object review and substantive response only; owner pause not a lifecycle verdict.",
+  "transport_full_receipt_state": "Complete direct terminal callback received; original accepted user body, full response and actual Issue15 comment verified.",
+  "provider_terminal": {
+    "accepted_user_id": "7ee820c2-d2d1-495c-af8e-eeb77dab4c19",
+    "assistant_id": "037b1952-9215-430b-9e96-041c85bd640d",
+    "send_count": 1,
+    "manual_send_count": 0,
+    "input_capture_file_sha256": "9584bb4435d108df3deaf7c4271bb718e5488d10b560fa2d71b0ef30d7558088",
+    "accepted_raw_innerText_characters": 1948,
+    "authored_prompt_characters": 1937,
+    "accepted_body_matches_after_only_UI_suffix_removal": true,
+    "composer_capture_provenance": "Exactness check reported by Transport; no separate past raw composer string is fabricated. Complete actual accepted-node text is preserved.",
+    "receipt_archive_bytes": 426,
+    "receipt_archive_sha256": "47d5f5034c9ef9b33b0449900c30113730c06542df82211e249db9662089dfea",
+    "receipt_normalization": "Transport reports429-byte CRLF clipboard; archived426-byte LF receipt verified. Full response original Git blob is separate.",
+    "issue_comment_id": 5670667652,
+    "issue_comment_snapshot": "archive/ISSUE_COMMENT.json",
+    "remaining_transport_obligations": 0
+  }
+}

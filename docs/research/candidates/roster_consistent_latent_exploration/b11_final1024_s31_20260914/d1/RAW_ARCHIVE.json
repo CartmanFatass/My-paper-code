@@ -1,0 +1,8 @@
+{
+  "path": "temp/directions/roster_consistent_latent_exploration/exp/b11-d1-collected-c7eb5986f/rcle-b11-d1-c7eb5986f-evidence.tgz",
+  "bytes": 53487,
+  "sha256": "636f21758ba6e8ac0847220886f52c2fd771943836ff46e323bb4df225d035f5",
+  "remote_path": "/home/wu/hmasd-inputs/rcle-b11-d1-c7eb5986f-evidence.tgz",
+  "remote_local_hash_match": true,
+  "contains": "complete synthetic output/native source/build, control and supervisor records; no new diagnostic execution"
+}

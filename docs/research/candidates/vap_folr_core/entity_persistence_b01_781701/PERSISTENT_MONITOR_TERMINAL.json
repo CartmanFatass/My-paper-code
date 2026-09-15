@@ -1,0 +1,13 @@
+{
+  "handle": "folr-persistence-b01-781701-persistent",
+  "source_sha": "42e337f36bd36c5dd24a7862eb71144f44fdef57",
+  "pid": 3698859,
+  "runner_pid": 3698863,
+  "accepted_at": "2026-09-15T00:17:51Z",
+  "last_status": "finished",
+  "exit_code": 0,
+  "terminal_observed_at": "2026-09-15T01:06:53.5531751Z",
+  "observation_method": "bounded PowerShell SSH loop; exact agent-task status query every 180 seconds; exited on non-null exit_code; terminal timestamp confirmed by direct UTC status query",
+  "session_id": 46377,
+  "delivery_state": "native_final_to_parent"
+}

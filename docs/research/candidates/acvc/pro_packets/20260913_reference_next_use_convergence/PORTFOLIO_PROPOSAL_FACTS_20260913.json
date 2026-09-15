@@ -1,0 +1,99 @@
+{
+  "proposal_id": "acvc-post-k-direction-management-v1",
+  "prepared_at": "2026-09-13",
+  "author_task": "01a09cd3-ae36-7071-874f-4d021bdeb225",
+  "clerk_task": "01a09cfe-1614-7da1-8445-323658edcc70",
+  "authority": "OWNER_DIRECT 2026-09-13 ordinary direction research correction; standing object delegation for B02, DM_RECOMMENDATION only for overall plan",
+  "source_control_commit": "2cd18ede9",
+  "source_direction_commit": "23b5efe52477f2acda971c38ea018469db0e9d22",
+  "existing_state": {
+    "lifecycle": "ACTIVE",
+    "priority": "MEDIUM",
+    "recasts": 2,
+    "occupied_direction_slots": 1,
+    "remaining_selected_result_invocations": 1,
+    "pending_scientific_producers": 0,
+    "old_direction_request": "ARCHIVED; one Send",
+    "remaining_old_k_invocations": 0,
+    "current_work": "ACVC_CLUSTER_DEPLOYMENT_B02 selected; preparation underway; no launch yet"
+  },
+  "recommendation": "C: continue finite same-law development, with ordinary B02 independently selected by DM; Portfolio handles overall priorities, capacity/lifecycle and material program/resource changes",
+  "alternatives": [
+    "P: reversible whole-direction PARK if the global planner prefers conserving/reallocating the slot",
+    "D: explicit zero-new-compute deferral, one reserved non-advancing slot and one DM review within seven days"
+  ],
+  "portfolio_selection": null,
+  "scientific_exposure": {
+    "fits": 0,
+    "model_rng_instances": 0,
+    "train_team_ticks": 0,
+    "eval_team_ticks": 0,
+    "optimizer_steps": 0,
+    "scientific_tests": 0
+  },
+  "exposure_line": "fits=0; model_rng_instances=0; train_team_ticks=0; eval_team_ticks=0; optimizer_steps=0; scientific_tests=0; parameter_displacement=N/A",
+  "counts_computation": "Python standard-library integer arithmetic from existing K configuration: per fit 512*256 training ticks + 3*64*256 evaluation ticks, 256*4 optimizer calls; program maximum two fits. No simulation, model, RNG or result reduction.",
+  "prospective_program": {
+    "status": "First one-fit ordinary B selected by DM, finite card caps 600 native/600 support/1200 complete. A second original unit is a possible within-scope future choice, not launched or automatically selected. No per-object Portfolio grant requested.",
+    "minimum_unit": {
+      "training_fits": 1,
+      "training_episodes": 512,
+      "optimizer_steps": 1024,
+      "training_team_ticks": 131072,
+      "evaluation_episodes": 192,
+      "evaluation_team_ticks": 49152,
+      "total_team_ticks": 180224,
+      "checkpoints": 1
+    },
+    "maximum": {
+      "training_fits": 2,
+      "training_episodes": 1024,
+      "optimizer_steps": 2048,
+      "training_team_ticks": 262144,
+      "evaluation_episodes": 384,
+      "evaluation_team_ticks": 98304,
+      "total_team_ticks": 360448,
+      "checkpoints": 2
+    },
+    "proposed_new_caps_seconds": {
+      "whole_native_per_fit": 600,
+      "total_native": 1200,
+      "additional_invoked_support": 1200,
+      "complete_future_invoked": 2400,
+      "kind": "DM planning declarations under ordinary object delegation, not a request to renew K"
+    },
+    "forecast_seconds": {
+      "per_fit": null,
+      "total_native": null,
+      "complete_support": null,
+      "provider_and_agent": null
+    },
+    "invocation_policy": "Maximum two fresh original fit-plus-panel invocations; no replacement/retry or transfer of unused caps. DM may stop early with reason and all outcomes retained.",
+    "resource_route": "remote-first hmasd-wsl-node; CPU FP32, threads=1, no GPU; prospective portable law retained; each launch exact committed source and fresh destination memory admission >=4 GiB"
+  },
+  "inherited_evidence": {
+    "cluster_fit_count": 1,
+    "cluster_f_minus_c_J": 0.12407302446321236,
+    "cluster_f_minus_dwell_J": 0.07674096500501802,
+    "adverse_f_minus_c_worlds": 1,
+    "adverse_f_minus_dwell_worlds": 8,
+    "worlds_per_panel": 64,
+    "primary_margin_J": 0.01,
+    "headroom": "tuned same-information cluster headroom absent, not zero or a launch gate",
+    "historical_k_native_command_seconds": 165.33,
+    "historical_k_supervisor_charge_seconds": 166,
+    "historical_k_known_support_seconds": 75.29171340009022,
+    "historical_k_peak_rss_gib": 0.5314903259277344,
+    "historical_cost_coverage": "incomplete; historical observations are not new quotes or unused balances"
+  },
+  "science_sources": {
+    "k_allocation": "0aeab180b603930b0b882a2f1ed3cabb736709fa",
+    "cluster_result_and_card": "f569a80bc28bb9c679884da36824613652b414f0",
+    "cluster_execution": "d8bb4b2b049f87989cb138181b598e9ada496a22",
+    "post_cluster_response": "d9a1426af03c42bdcbb8e4f84413f94493a58ebf",
+    "next_use_response": "98208469a9fd922c3390c63e7eaf53680fc2122b"
+  },
+  "owner_reviews": "Primary-control item.py reviews --json returned [] on 2026-09-13; no owner reply or Portfolio selection invented",
+  "technical_closeout": "Historical K four remote targets removed; one exact local preparation directory retained after pre-execution refusal. Separate bounded technical responsibility, no planning gate or scientific producer. The old refusal is not inferred to prohibit new research.",
+  "authority_correction": "No unused K invocation was initially generalized into no direction research authority. Corrected before submission: old K and no-successor clauses do not bar a new ordinary B in the accepted cluster-deployment mechanism."
+}

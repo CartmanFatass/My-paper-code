@@ -1,0 +1,23 @@
+{
+  "utc": "2026-09-13T19:26:06.200282+00:00",
+  "command": [
+    "python",
+    "-X",
+    "utf8",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "C:\\Projects\\HMASD\\temp\\tests\\acvc-task-sha-pairing-20260913-1922",
+    "tests/skills/test_native_transport_workflow.py"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 6.51600000000326,
+  "stdout": ".......................................................................  [100%]\n71 passed in 5.62s\n",
+  "stderr": "",
+  "empirical_invocations": 0,
+  "network_or_provider_calls": 0,
+  "scratch_removed": true
+}

@@ -1,0 +1,20 @@
+{
+  "source_sha": "5dce539ed54afd4334d09db9dcd94df38c52c2fc",
+  "prepared_command": "/home/wu/projects/HMASD/temp/directions/vap_folr_core/exp/retained_reference_use_b01_781301/prepared/GENERIC.sh",
+  "command_sha256": "3154898585c4e2e1cd462bd1a446bb0381d5ffb21960687770a115f677b65590",
+  "supervisor_task": "folr-ref-use-generic-781301-5dce539ed54a",
+  "status": {
+    "task": "folr-ref-use-generic-781301-5dce539ed54a",
+    "status": "running",
+    "exit_code": null,
+    "pid": 3424844,
+    "uptime_seconds": 0,
+    "tmux_active": true
+  },
+  "out": "/home/wu/projects/HMASD/temp/directions/vap_folr_core/exp/retained_reference_use_b01_781301/GENERIC",
+  "cwd": "/home/wu/hmasd-worktrees/folr-ref-use-5dce539ed54a",
+  "preparation_failure": "Remote sparse Git show could not fetch its missing command blob after134489ms Github443 connection failure; returned128 before supervisor run/model/RNG/admission. PID-safe termination attempt found the exited Git process and performed no kill.",
+  "repair": "Verified local committed command bytes transferred with scp and remote sha256 readback; one supervisor run only.",
+  "launch_stdout": "Task 'folr-ref-use-generic-781301-5dce539ed54a' started in tmux session 'agent_folr-ref-use-generic-781301-5dce539ed54a'. Output: /home/wu/.agent-tasks/folr-ref-use-generic-781301-5dce539ed54a/task.log\n",
+  "launch_transport_exit": 0
+}

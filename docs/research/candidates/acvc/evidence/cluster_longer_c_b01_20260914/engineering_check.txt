@@ -1,0 +1,6 @@
+Report-only engineering batch 2026-09-14.
+C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe -m pytest -q -p no:cacheprovider --import-mode=importlib --basetemp temp/directions/acvc/test/longer_c_b01_20260914_1400/pytest tests/experiments/candidates/acvc/cluster_deployment_b01 tests/experiments/candidates/acvc/cluster_deployment_b02 tests/experiments/candidates/acvc/cluster_deployment_b03 tests/experiments/candidates/acvc/cluster_longer_c_b01
+PYTHONDONTWRITEBYTECODE=1; exit_code=0; command wall=4.7421983s.
+New cost-report tests stop before model construction; no scientific invocation.
+..........................                                               [100%]
+26 passed in 3.47s

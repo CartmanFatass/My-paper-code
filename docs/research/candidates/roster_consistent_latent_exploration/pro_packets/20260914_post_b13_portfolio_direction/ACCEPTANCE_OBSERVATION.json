@@ -1,0 +1,22 @@
+{
+  "event": "RCLE_POST_B13_PORTFOLIO_ACCEPTANCE_REPORTED_20260914",
+  "request_id": "2026-09-14-rcle-post-b13-direction-decision-01",
+  "recorded_at": "2026-09-14T10:57:48.298729+00:00",
+  "evidence_kind": "Actual registered-Transport task commentary returned by wait_threads, not a direct DM browser/server audit",
+  "transport_thread_id": "01a09ea0-4a86-75b0-826d-6f864efa7480",
+  "transport_turn_id": "01a09f8b-b33c-76d0-8bbd-8fb9d697e65a",
+  "composer_observation_revision": 128,
+  "acceptance_observation_revision": 131,
+  "provider_url": "https://chatgpt.com/c/6aa7836e-e4a0-83e8-985d-c633d94935b1",
+  "reported_provider_user_message_id": "bf84ddba-6465-44c7-8ce4-237e60d26c8c",
+  "reported_state": "Accepted as one new Portfolio turn; Pro thinking",
+  "reported_send_count": 1,
+  "intended_prompt_bytes": 23431,
+  "intended_prompt_sha256": "e91f1beb4fe40f38eabe67488d9a98163e195437be6f9eb6d9937f030a41a59f",
+  "reported_composer_comparison": "All23431 expected characters appear in order, with217 formatting-inserted blank lines and2 trailing newlines added by rich editor; declared rendering-only differences by Transport",
+  "complete_post_acceptance_node_comparison": "Not received yet; author requested this precise same-node readback/capture once while Transport continues observing. Not inferred from pre-Send/local hash.",
+  "full_response_received": false,
+  "next_owner_action": "Transport records full accepted node comparison, then observes/archives complete response directly to RCLE DM; DM full scientific intake/application follows",
+  "new_scientific_exposure": 0,
+  "disposition_or_slot_change": false
+}

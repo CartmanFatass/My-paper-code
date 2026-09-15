@@ -234,16 +234,32 @@ or a portfolio value judgment that no narrower or recast object merits investmen
 
 ## 8. Responsibility split
 
-### 8.1 Portfolio Pro and its designated DM author
+### 8.1 DM research ownership, independent review and Portfolio final interpretation
 
-OWNER_DIRECT 2026-09-10: Portfolio is the persistent `portfolio:cross_direction` Pro node.
-Root designates a relevant recently active DM to prepare its materials and check the full response
-for scientific/specification conformance. Root owns routing and operational application, not
-scientific selection. A complete conforming Pro decision is final under AGENTS §4.8 without
-per-item owner ratification; asynchronous owner overrides remain. Existing direction Pro nodes
-and DM object-tier decisions retain their scopes. A local conformance check is not another verdict.
+OWNER_DIRECT 2026-09-14: DM owns innovation, hypotheses, ordinary bounded experiments,
+implementation/repair, evidence interpretation and reports within current direction scope.
+Portfolio is the global scientific synthesizer and final direction-level interpreter for
+CONTINUE, RECAST, PARK, CLOSE and reopening under current owner constraints and this evidence
+standard. At substantive lifecycle/family/recast questions or contested direction interpretation,
+DM submits complete evidence and alternatives under `AGENTS.md` §§2 and 4.8 and the
+current `hmasd-portfolio-task` procedure.
+DM cannot unilaterally PARK/CLOSE the direction or release its slot. Ordinary in-scope experiments
+do not require per-experiment Portfolio approval.
 
-Portfolio MUST:
+Direction Pro Convergence independently reviews design, evidence, interpretation, conclusions
+and next plans. DM reads the full review, responds to material findings, corrects defects and
+bounds claims; review findings are inputs to Portfolio, not a final lifecycle verdict. DM applies
+a complete conforming Portfolio decision without Root ratification. Concrete conflicts return
+to the same Portfolio conversation while independent authorized work continues. Pending decision
+or transport recovery is not scientific PARK.
+
+Clerk is retired. Equal peer DMs coordinate and record actual handoffs and vacancies under
+PEER_DM_COORDINATION.md; Root owns user interaction and shared-control engineering. Portfolio
+receives the protocol's fixed repository context and identifies actual source access; a local
+citation does not establish web access. Existing accepted requests and historical decisions
+retain their provenance. Scientific evidence requirements below remain unchanged.
+
+DM scientific decisions, independent reviews and Portfolio decisions/reports MUST:
 
 1. identify the decision question and assign the lowest sufficient evidence class before investing;
 2. compare directions at their honest claim ceilings rather than reward those with the most formal
@@ -259,7 +275,7 @@ Portfolio MUST:
    material lifecycle packet and decision record.
 
 When an external scientific consultation applies a stronger class than the stated claim requires,
-Portfolio must treat the mismatch as an unresolved methodology issue and seek a class-corrected
+The DM and scientific reviewer must treat the mismatch as an unresolved methodology issue and seek a class-corrected
 answer. It must not convert the mismatched standard into a scientific negative.
 
 **Portfolio principles and experience.** Keep classification, management grouping, investment
@@ -278,11 +294,12 @@ decision relevance, known complete cost, uncertainty, substitutability and rever
 unknown costs and the observation that would change the recommendation. Do not turn a benchmark
 sample or local failure into a universal investment threshold.
 
-Experience informs the choice; it does not silently override a specification. Pro states its
-chosen option, decisive reasons, uncertainty, revisit condition and bounded consequences. A needed
-rule change names the exact rule, necessity and scope under the proper-node authority. Owner
-changes to the question return to that node; preserve its previous answer instead of inventing
-a revised local decision. No new required response schema or scientific exposure follows.
+Experience informs the choice; it does not silently override a specification. The DM states its
+chosen option, decisive reasons, uncertainty, revisit condition and bounded consequences, including
+responses to material independent-review findings. A needed rule change names its exact necessity
+and accountable owner; a review recommendation alone does not amend the specification. Preserve
+original answers/evidence when making prospective decisions. No new response schema or scientific
+exposure follows from reporting.
 
 ### 8.2 Direction Manager (including engineering delivery)
 
@@ -300,7 +317,8 @@ EM MUST:
 6. preserve every valid result at its original meaning while permitting explicitly new follow-up
    objects;
 7. implement and technically accept the performance/instrumentation path required by the selected
-   class, optionally using a bounded Implementer, not unrelated proof machinery; and
+   class, with DM implementing and reviewing directly during the temporary code-subagent suspension,
+   not unrelated proof machinery; and
 8. recommend lifecycle consequences at the smallest supported unit and state what evidence would
    justify promotion, parking, recasting, or closure.
 
@@ -415,6 +433,47 @@ The real native environment, retained learned recurrent stochastic policy and ev
 
 Report F-C and F-dwell separately for each base, retain dwell-C and all outcomes, and use conditional paired-episode uncertainty. The ceiling is a preliminary native execution-package signal or counterexample conditional on these two selected retained bases and the declared fresh panels, not new learning, training-population superiority, isolated mechanism/history necessity, optimality, tuned headroom or transfer. The named scope retains the proposed 180-second whole-logical-invocation cap, including the proposed 30-second focused-check/readback allowance; this paragraph allocates no execution. It authorizes no additional fit, panel, search, retry or successor and does not reopen the stopped T/G selector. Ordinary B requirements and all other objects remain unchanged; no new class or general Pro-consultation gate is created.
 
+#### 11.4.2 Named exception — RCLE_FIXED_MODAL_REUSE_E01
+
+OWNER_DIRECT 2026-09-14: the owner approved the bounded proposal at direction commit
+`a8e55d8435d7132681fa5b6f856675e2eb56bc57`,
+`docs/research/candidates/roster_consistent_latent_exploration/fixed_modal_reuse_e01_20260914/SPECIFICATION_SCOPE_PROPOSAL.md`,
+after the applicability finding in independent review `ad6e30953c5fd1f78e3f5da6cdee103769a6bfde`.
+This records actual owner approval, not authority inferred from that review.
+
+For RCLE_FIXED_MODAL_REUSE_E01 only, B/EXPLORE may compare the deterministic modes of
+the two frozen B10/seed30 and B12/seed32 final1024 greedy-anchored trained policies against
+their respective preserved fixed-greedy panels without new fitting or training. This is
+an object-limited substitution for real-learner/trainer, nonzero-update and learner-
+movement requirements in §§5.2/11.4 and the corresponding wording of §11.8.6. It applies
+only to the unchanged native 120-sector/six-beacon/H64 host, two 512-episode modal panels,
+original base-specific exogenous addresses and legal combined-logit action law in the
+RCLE_FIXED_MODAL_REUSE_E01_SCIENCE_CARD_20260914.md card at the cited proposal commit.
+The four frozen inputs are identified by that card's INPUT_MANIFEST.json.
+
+The real native environment, retained learned policy and evaluator must execute. The
+machine-produced exposure record must distinguish two retained completed fits from zero
+new fits/training episodes/backward/optimizer calls, report zero parameter displacement
+during evaluation, and report actual new native transitions and evaluation counts. The
+nominal card bound is 1024 new episodes/65536 ticks/32 native32 batches in one started
+serial invocation with no automatic retry. Historical learning is provenance, not new
+exposure. Reusing greedy rows is conditional on unchanged comparator/world/reward semantics;
+an invalidated reuse requires prospective card/count revision, not invented pairing.
+
+All common integrity, fresh actual-node admission, own-trajectory events, information/RNG/
+checkpoint/FP64 semantics, complete favorable/adverse service and recovery, preserved B11
+failure and costs, proportionate technical review and dependency-based failure interpretation
+remain. The claim ceiling is a preliminary post-outcome execution-package observation
+conditional on these two selected completed checkpoints and already observed panels, not
+new learning, trained-population superiority, pure stochasticity mechanism, equivalence,
+general headroom, safety or transfer. Current approximate wall plans retain their ordinary
+adjustable scope; they do not become resource grants or time-based scientific gates.
+
+This wording itself allocates no extra fit/panel/search/retry/successor, changes neither old
+result nor either existing recipe HOLD, creates no new evidence class or general exception,
+and adds no routine Pro/Root approval requirement. DM retains the finite scientific selection,
+technical acceptance, execution and lifecycle responsibility.
+
 ### 11.5 Direction separation for the untying programme
 
 Untying the skill duration k and untying the agent count N are **two separate directions**, not one
@@ -480,6 +539,15 @@ that do not serve the current claim; it does not rewrite historical results, com
 the named VNFC E01 appendix.
 
 #### 11.8.1 Claim determines burden
+
+OWNER_DIRECT 2026-09-13: reasonable runtime estimates and engineering investigation thresholds
+are planning inputs, not scientific failure rules, launch/Pro-Send gates or approval triggers.
+DM owns prospective adjustment of ordinary wall-time plans and operational watchdogs under actual
+resource constraints. Distinguish them from explicit owner/platform hard limits and scientific
+exposure/comparison endpoints (steps, updates, samples or an explicitly wall-budgeted comparison).
+Preserve started frozen endpoints and historical outcomes; elapsed-time deviation alone does not
+invalidate evidence. Apply MARL_RUNTIME_ENGINEERING_SPEC section 1 for source, scope and response;
+do not make a new profiling exercise or Root/Portfolio request mandatory merely to revise an estimate.
 
 B exploration asks whether a bounded next investment is worthwhile; a conclusion-bearing comparison
 asks what performance judgment the declared population supports. Ordinary A/B/C-BENCH work does not
@@ -592,12 +660,14 @@ runs nothing; unknown cost is not zero and does not demand a separate calibratio
 On cost refusal, reconsider the chosen question and necessary evidence as well as execution.
 Moving a prohibited B prerequisite into a preceding A does not make it permissible.
 
-Pro decisions are final within current owner instructions and applicable specifications. In the
-existing intake, the designated DM cites any concrete conflict and returns it to the same node for correction
-before executing the affected requirement, while independent conforming work continues. Preserve
-the exact response and do not invent a substitute decision. Explicit specification exceptions name
-the rule, scientific necessity and scope and follow existing appropriate-node authority. No silent
-exception follows from response completeness, and no extra reviewer/approval/launch gate is added.
+Direction Pro provides independent scientific review. The DM preserves the complete response,
+answers material findings and owns corrections, claim limits, ordinary research execution and
+reports. Under §8.1 and `AGENTS.md` §§2 and 4.8, Portfolio supplies final direction-level
+interpretation and decisions within current owner/spec constraints; DM applies a complete conforming
+decision without Root ratification. Concrete unresolved scientific issues can receive focused review
+follow-up; direction review is not a lifecycle veto or per-experiment approval. Specification
+requirements cannot be silently waived by reviewer, DM or Portfolio; identify any needed change,
+necessity and applicable authority. Independent authorized work continues without a blanket gate.
 
 This owner-directed clarification changes future authoring and current decision intake; it does
 not rewrite accepted request bodies, historical results or completed experiment assignments.
@@ -648,3 +718,30 @@ result, proof, full mechanism explanation or Pro round becomes a new A/B conditi
 Mechanical work does not preload this material; scientific reading does not invoke
 grilling or require owner confirmation. Missing decision-critical sources follow the
 existing node's gap procedure; an explanatory-source gap alone is no launch refusal.
+
+### 11.11 Owner calibration after external methodology review (2026-09-14)
+
+The owner accepted the [corrected two-axis assessment and preparation order](../portfolio/decisions/2026-09-14-two-axis-research-calibration.md),
+implemented in the [revised programme](../portfolio/TWO_AXIS_RESEARCH_PROGRAMME_20260914.md).
+Prioritise preparation of the target-host baseline comparison, independent training replication
+and mechanism-discriminating ablations. This sets preparation priorities, not a universal launch
+gate, a global batch boundary or a change to current lifecycle, accepted budgets or frozen results.
+
+Keep effect importance, outcome variability and estimator uncertainty separate. A card's justified
+MEI describes the effect worth caring about; seed variation informs precision and study design.
+There is no universal rule that an effect must exceed two seed SDs, or that a point estimate inside
+one SD establishes a null/equivalence result. An equivalence claim needs uncertainty sufficiently
+narrow relative to a prospectively defined equivalence region. Otherwise report the actual limits
+and unresolved alternatives. Existing §11.8 proportionality and exploratory flexibility remain.
+
+Resampling and uncertainty must respect independent training instances, nested evaluations and
+actual declared pairing. Report the estimand, selection exposure and interval assumptions; IQM or
+bootstrap is a tool, not additional independent evidence or automatic adequacy at five/ten seeds.
+Whole-package gains remain package gains unless an appropriate control identifies a component.
+A resource/investment PARK does not establish a scientific population null.
+
+Controlled environments remain useful for mechanism questions, with external benchmarks supporting
+broader comparisons. Match information, task and training rights before adopting a published
+baseline. In particular, jointly trained roster change, train-N/test-N transfer and open ad hoc
+teamwork are distinct questions. Benchmark-gap observations guide design; neither a prior positive
+gap nor beating a privileged oracle is a universal prerequisite for exploration.

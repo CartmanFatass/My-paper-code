@@ -1,0 +1,29 @@
+# MGTAP late512 direct engineering and execution
+
+2026-09-14: selected card MGTAP_LATE_EXPOSURE_B01_SCIENCE_CARD_20260914.md owns L0, protected semantics, primary, cost and execution allowance. Initial branch was clean atfa7edbb339c6b9d9d33b22c93dd2ae68a58d1240. Current main inputs70d9505a4 were merged at5824bf36a and pushed: canonical controls from main, complete unique MGTAP early-exposure history and8 unique historical audit rows retained. No other author's working edits were present or overwritten. Root owns main integration; this DM owns the existing direction checkout.
+
+The new standalone runner reuses accepted native environment/collector/update, optimizer, model-pair factory and exposure routines. Its sole change in scientific work is512 training with fixed256/512 evaluations and private evaluation environment/RNGs. The optimizer and training generator persist across evaluation; recurrent state remains episode-local. No legacy module was edited. Source/synthetic verification and independent review follow below; no result-bearing process has started at creation.
+
+Native command: COMMAND.sh. Planned handle/cwd mgtap-late-exposure-b01-8254-20260914 on hmasd-wsl-node, under /home/wu/hmasd-worktrees/. Preserve outputs/checkpoints locally and in the direction evidence before reclaiming the exact detached execution checkout. Shared authoring checkout and previous evidence remain live/retained. No prior cleanup is repeated.
+
+## Checks and DM technical acceptance
+
+DM synthetic suite:12 passed in4.69s (DM_CHECK.txt), including actual tiny Adam persistence and checkpoint step512/1024, uninterrupted training RNG, same evaluation draws, distinct environments, final-only polarity, incomplete/misbound panels, partial final counts and no next arm, complete1152-row publication. No real native environment or RL fit was invoked. The first combined check-and-recursive-cleanup PowerShell command was rejected before process creation: `blocked by policy`. Its non-destructive pytest-only counterpart was permitted. Exact DM scratch temp/directions/metric_ground_transport_allocation/test/late512_dm_20260914 remains; no alternative deletion mechanism or repeat cleanup request was attempted. This is a retained local scratch obligation, not a scientific failure.
+
+Independent Astra/high native Reviewer returned no material finding and a4.75s synthetic counterexample pass; its own temporary artifacts were removed. Full direct return in INDEPENDENT_REVIEW.md. It covered persistent state/RNG, actual model forward behavior, complete final primary and checkpoint/publication path. Source hashes identify its read scope, not a new launch gate. No finding was overruled. Total reported focused test wall9.44s, below5min; new source230 lines with159-line runner, below2000/600. Required file I/O is simple publication; no additional §4 machinery or budget breach.
+
+DM accepts this engineering implementation within the card's exact limits. Technical review is separate from scientific validity and actual resource admission. Next actions are publication, exact remote materialization, command syntax check and the sole admitted launch; no extra native smoke or fit is allocated.
+
+## Completed preservation and cleanup
+
+All14 remote originals and local Monitor bytes are retained in the15-member archive. The3334990-byte archive was explicitly published at26d0ac5d7c2af3ec09eef243197651eafcef41c1 after detecting its broad ignore rule; reading the actual Git blob reproduced SHA256 a4aa0713a72396e12c593ae92996850d7e4bcda5a600f2ab9c611bc48f33e935. All scientific source and evidence are recoverable from published commits. No native execution was repeated.
+
+Before cleanup, the exact detached checkout had no tracked or ordinary untracked modifications; its only ignored files were the eight preserved native originals. Ordinary `git worktree remove /home/wu/hmasd-worktrees/mgtap-late-exposure-b01-8254-20260914` returned0. At2026-09-14T23:44:05.5411939Z, the path was absent from disk and from the remote repository's worktree registration. The supervisor directory, local originals and active/shared authoring checkout remain retained. Local test scratch remains under the previously recorded rejection; this successful remote checkout cleanup does not authorize a workaround for that separate rejected deletion.
+
+## Exact launch and Monitor transfer
+
+Source90f835e10357fbbf465cc5d500a93f1e2d4ab226 was pushed before remote materialization. The exact detached checkout was absent before creation; Git reported that source, clean status, and bash -n accepted the committed COMMAND.sh. Known zsh prompt-component warnings did not change the successful fetch/materialization exit. Supervisor exact handle was not_found before the single run command.
+
+Agent-task accepted mgtap-late-exposure-b01-8254-20260914; first direct status was running/PID3694820/tmux_active=true/exit=null/uptime11s. Admission at2026-09-14T23:24:56.522070Z passed physical AND effective15587618816 bytes against4294967296 required, using /proc/meminfo; cgroup fields were unavailable/null. This admission was immediately adjacent to the actual invocation in COMMAND.sh.
+
+DM-owned Luna/low native child /root/dm_mgtap_resume_20260914/monitor_ll_mgtap_late512 directly delivered MONITOR_ADOPTED by native final, observing running at23:26:44Z and again uptime152s. Its attempted app-route delivery failed because the canonical parent was not an app UUID. DM received the native final, confirmed adoption and resumed this same Monitor with the canonical collaboration.send_message route; no new observer/handle, launch or retry. MONITOR.json preserves actual observation/delivery. DM ended routine process polling; terminal collection and scientific intake remain DM-owned. New-card owner item20260914-mgtap-003 is asynchronous. Root reported main integration2951c0d44, with sibling audit rows preserved and no repeated tests; that integration was not a launch gate.

@@ -1,0 +1,91 @@
+{
+  "handle": "dish-b09-s149-3a749256-20260914-submit02",
+  "purpose": "reconcile monitor receipt accounting from retained tool outputs",
+  "source_record_preserved": "monitor_submit02.json",
+  "timing_method": "functions.exec reported enclosing tool/wait wall only; no shell time command was used, so sleep and SSH portions of combined calls cannot be separated",
+  "observations": [
+    {
+      "status_read_at": "2026-09-14T02:14:35Z (monitor timestamp)",
+      "command": "ssh hmasd-wsl-node \"/usr/local/bin/agent-task status dish-b09-s149-3a749256-20260914-submit02\"",
+      "direct_status": "running, pid 3434447, uptime_seconds 22, tmux_active true",
+      "ssh_command_wall_seconds": 0.9,
+      "sleep_seconds": 0,
+      "delivery_timestamp": "unknown"
+    },
+    {
+      "status_read_at": "unknown; after bounded 45-second sleep",
+      "command": "Start-Sleep -Seconds 45; ssh hmasd-wsl-node \"/usr/local/bin/agent-task status dish-b09-s149-3a749256-20260914-submit02\"",
+      "direct_status": "running, pid 3434447, uptime_seconds 82, tmux_active true",
+      "ssh_command_wall_seconds": "unknown (sleep and SSH not separately measured)",
+      "sleep_seconds": 45,
+      "enclosing_wait_wall_seconds": 46.7,
+      "delivery_timestamp": "unknown"
+    },
+    {
+      "status_read_at": "unknown; after bounded 45-second sleep",
+      "command": "Start-Sleep -Seconds 45; ssh hmasd-wsl-node \"/usr/local/bin/agent-task status dish-b09-s149-3a749256-20260914-submit02\"",
+      "direct_status": "running, pid 3434447, uptime_seconds 136, tmux_active true",
+      "ssh_command_wall_seconds": "unknown",
+      "sleep_seconds": 45,
+      "enclosing_wait_wall_seconds": 46.6,
+      "delivery_timestamp": "unknown"
+    },
+    {
+      "status_read_at": "unknown; after bounded 45-second sleep",
+      "command": "Start-Sleep -Seconds 45; ssh hmasd-wsl-node \"/usr/local/bin/agent-task status dish-b09-s149-3a749256-20260914-submit02\"",
+      "direct_status": "running, pid 3434447, uptime_seconds 186, tmux_active true",
+      "ssh_command_wall_seconds": "unknown",
+      "sleep_seconds": 45,
+      "enclosing_wait_wall_seconds": 46.7,
+      "delivery_timestamp": "unknown"
+    },
+    {
+      "status_read_at": "unknown; after bounded 45-second sleep",
+      "command": "Start-Sleep -Seconds 45; ssh hmasd-wsl-node \"/usr/local/bin/agent-task status dish-b09-s149-3a749256-20260914-submit02\"",
+      "direct_status": "running, pid 3434447, uptime_seconds 252, tmux_active true",
+      "ssh_command_wall_seconds": "unknown",
+      "sleep_seconds": 45,
+      "enclosing_wait_wall_seconds": 46.7,
+      "delivery_timestamp": "unknown"
+    },
+    {
+      "status_read_at": "unknown; after bounded 45-second sleep",
+      "command": "Start-Sleep -Seconds 45; ssh hmasd-wsl-node \"/usr/local/bin/agent-task status dish-b09-s149-3a749256-20260914-submit02\"",
+      "direct_status": "running, pid 3434447, uptime_seconds 305, tmux_active true",
+      "ssh_command_wall_seconds": "unknown",
+      "sleep_seconds": 45,
+      "enclosing_wait_wall_seconds": 46.5,
+      "delivery_timestamp": "unknown"
+    },
+    {
+      "status_read_at": "unknown; after bounded 45-second sleep",
+      "command": "Start-Sleep -Seconds 45; ssh hmasd-wsl-node \"/usr/local/bin/agent-task status dish-b09-s149-3a749256-20260914-submit02\"",
+      "direct_status": "running, pid 3434447, uptime_seconds 356, tmux_active true",
+      "ssh_command_wall_seconds": "unknown",
+      "sleep_seconds": 45,
+      "enclosing_wait_wall_seconds": 46.8,
+      "delivery_timestamp": "unknown"
+    },
+    {
+      "status_read_at": "2026-09-14T02:21:12Z (monitor timestamp; status output reported uptime 454)",
+      "command": "Start-Sleep -Seconds 45; ssh hmasd-wsl-node \"/usr/local/bin/agent-task status dish-b09-s149-3a749256-20260914-submit02\"",
+      "direct_status": "finished, exit_code 0, pid 3434447, tmux_active false, uptime_seconds 454",
+      "ssh_command_wall_seconds": "unknown",
+      "sleep_seconds": 45,
+      "enclosing_wait_wall_seconds": 46.8,
+      "delivery_timestamp": "unknown"
+    }
+  ],
+  "terminal_log_command": "ssh hmasd-wsl-node \"tail -n 80 /home/wu/.agent-tasks/dish-b09-s149-3a749256-20260914-submit02/task.log\"",
+  "terminal_log_command_wall_seconds": 1.0,
+  "terminal_log_fact": "supervisor exited code 0 at 2026-09-14T10:21:10+08:00; runner status COMPLETE",
+  "delivery": {"adoption": "already sent", "terminal": "already sent", "delivery_timestamps": "unknown"},
+  "accounting": {
+    "known_direct_ssh_wall_seconds": 1.9,
+    "known_sleep_seconds": 315,
+    "combined_call_ssh_wall_seconds": "unknown",
+    "uptime_is_execution_or_supervisor_observation_field": true,
+    "uptime_not_added_to_observation_cost": true,
+    "previous_243_6_seconds_total": "not recoverable as pure SSH command wall from retained evidence; preserved in source record"
+  }
+}

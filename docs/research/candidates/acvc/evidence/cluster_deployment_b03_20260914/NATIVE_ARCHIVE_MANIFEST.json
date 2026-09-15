@@ -1,0 +1,63 @@
+{
+  "archive": "temp\\directions\\acvc\\retained\\cluster_deployment_b03_20260914\\native_output.tar.gz",
+  "bytes": 420924,
+  "sha256": "c0bd6559406ce247c4db53727718373272e0f1175db0b7aea5fd141e446894b4",
+  "members": {
+    "cluster_deployment_b03_20260914/stdout.log": {
+      "bytes": 1947,
+      "sha256": "7ad6fa4402f7a08f81693bef9769de24c5c3b97a3e468d11aaa4f33f117b0fd2"
+    },
+    "cluster_deployment_b03_20260914/summary.json": {
+      "bytes": 17385,
+      "sha256": "7ac32ae4140c23ef774baeb9ad54220536098de5db185ad6f24cf857c4f4f6ba"
+    },
+    "cluster_deployment_b03_20260914/native_time.txt": {
+      "bytes": 53,
+      "sha256": "6003f61971d36c6d56988a53fceaebad606954d5cd5d7a6e125d9ff90b3ef5fa"
+    },
+    "cluster_deployment_b03_20260914/episodes.jsonl": {
+      "bytes": 412529,
+      "sha256": "aae8b14d0584422a68d42b7e8679432aa9b2d0410c7c5dbfbefbb83a07ea61a0"
+    },
+    "cluster_deployment_b03_20260914/final_DENSE.pt": {
+      "bytes": 282957,
+      "sha256": "b5502c21400e469a9ab667abd0821da317d5a13851231a90a858f57a836d2517"
+    },
+    "cluster_deployment_b03_20260914/admission.json": {
+      "bytes": 504,
+      "sha256": "b303b0a4ca42cf86258a9ecc3a086276ad82b11293aa7c22c50d45dc4e5f5b9e"
+    },
+    "cluster_deployment_b03_20260914/updates.jsonl": {
+      "bytes": 237476,
+      "sha256": "6bf7db7ec166397e73f98b483330d722447af46ef59dada9f7fadf5c950d6e4c"
+    },
+    "cluster_deployment_b03_20260914/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "acvc-cluster-b03-091c6725b/runner.sh": {
+      "bytes": 1285,
+      "sha256": "d0b7f41e463c665b718f137544bffe7e480022c6e59fb6412c46d81b4d88848a"
+    },
+    "acvc-cluster-b03-091c6725b/exit_code": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "acvc-cluster-b03-091c6725b/status": {
+      "bytes": 9,
+      "sha256": "161069badc0cc23058b13d7c068e45205f4333aa15fd78db9d68f5c9f1ae8983"
+    },
+    "acvc-cluster-b03-091c6725b/start_time": {
+      "bytes": 11,
+      "sha256": "437f234a420447dbc02be1a133b324fcce4669b1ddad3d18067c1d3855525f56"
+    },
+    "acvc-cluster-b03-091c6725b/pid": {
+      "bytes": 8,
+      "sha256": "21069c339cf7ce4aeedfd73e88e9110f4e4a87096e563805f2199e19ce8a3ac9"
+    },
+    "acvc-cluster-b03-091c6725b/task.log": {
+      "bytes": 690,
+      "sha256": "d0679622fb8abaf593c83d002fd97c57d9578b80fe41023c2e4b4581518397b7"
+    }
+  }
+}

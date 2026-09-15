@@ -1,0 +1,108 @@
+{
+  "statuses": [
+    {
+      "task": "folr-augmentation-b01-781601-generic",
+      "status": "finished",
+      "exit_code": 0,
+      "pid": 3674297,
+      "uptime_seconds": 18245,
+      "tmux_active": false
+    },
+    {
+      "task": "folr-augmentation-b01-781601-augmented",
+      "status": "finished",
+      "exit_code": 0,
+      "pid": 3679958,
+      "uptime_seconds": 3665,
+      "tmux_active": false
+    }
+  ],
+  "run_root_files": [
+    {
+      "relative": "AUGMENTED_COLLECTION.json",
+      "bytes": 8497,
+      "sha256": "5f258459b9649852e7226144ffe0ffe8f9a5fea06f14ad5526432b8565f91da0"
+    },
+    {
+      "relative": "AUGMENTED_CONTROL_LAUNCH.json",
+      "bytes": 2501,
+      "sha256": "180e5ea96413bcc113a6bee05fb08b92b43ec1d70610e38673c1fe5494be647d"
+    },
+    {
+      "relative": "AUGMENTED_LAUNCH.sh",
+      "bytes": 744,
+      "sha256": "67558e16221e37077a94ac4737bd2d2ef997d9db51f97a8be3846298133a64db"
+    },
+    {
+      "relative": "AUGMENTED_RAW.tar.gz",
+      "bytes": 5282464,
+      "sha256": "0190acfca2c38ac45963abbc425b0de4620bbe707880994733b65ac6880a06bd"
+    },
+    {
+      "relative": "GENERIC_COLLECTION.json",
+      "bytes": 7055,
+      "sha256": "4c7df8f5d1d7a8f3738f293d7447497831e7acb25b397a8de5880495ce96f491"
+    },
+    {
+      "relative": "GENERIC_CONTROL_LAUNCH.json",
+      "bytes": 2157,
+      "sha256": "4576fa239bb247f4da45fa6add56fcf991042c0571d9fde2defa1ce1c5a20143"
+    },
+    {
+      "relative": "GENERIC_LAUNCH.sh",
+      "bytes": 664,
+      "sha256": "1301c9ef2068ace19d852db8b9fbd796cafa1ba7fa3755198022389bc6bae8f1"
+    },
+    {
+      "relative": "GENERIC_RAW.tar.gz",
+      "bytes": 4298469,
+      "sha256": "8bfe7c3d711d85ae51e70a932503538415afc059e2bffd7a4d6ff5d39f5d2efc"
+    },
+    {
+      "relative": "LAUNCH_PREPARATION.json",
+      "bytes": 1580,
+      "sha256": "bb189ff43a4bedc0cdeb26a1b77dc4efa408bac99fc68b40a020903a200a6b10"
+    },
+    {
+      "relative": "augmented_persistent/ADMISSION.json",
+      "bytes": 504,
+      "sha256": "1d5aea57296f3b98dffa13f393f1bdca63a8116f5c5657a6d5066a1f5aab8136"
+    },
+    {
+      "relative": "augmented_persistent/INVOCATION_TIME.json",
+      "bytes": 108,
+      "sha256": "aa411fac5955d8104b1ecb711e1c9fe8666b85a99fa1e41804187c9edd374d0a"
+    },
+    {
+      "relative": "augmented_persistent/final.pt",
+      "bytes": 5782043,
+      "sha256": "0b97414c52114cf7ec59fb931934d835a5e23c3df8fe2aa471813a15f3529af2"
+    },
+    {
+      "relative": "augmented_persistent/summary.json",
+      "bytes": 110627,
+      "sha256": "ac8a8e647eb18f6028af2743ae7fa0a9634ac24b388124f80bbf89f23298ff0e"
+    },
+    {
+      "relative": "generic_retain/ADMISSION.json",
+      "bytes": 504,
+      "sha256": "7b8eb94c22be96b1e8976aa872a052aaae85e5b8e821bec3fe37bbae6b756fa4"
+    },
+    {
+      "relative": "generic_retain/INVOCATION_TIME.json",
+      "bytes": 107,
+      "sha256": "5636ef2b9f00c653cd5aa8d5db5878de8ba1932c9f47e2eb45367479633208d1"
+    },
+    {
+      "relative": "generic_retain/final.pt",
+      "bytes": 4694195,
+      "sha256": "c0ea4e6a45007022b3e26c3ae688ab4f19a8413628072fe0e98cdc7573b4c5bb"
+    },
+    {
+      "relative": "generic_retain/summary.json",
+      "bytes": 106427,
+      "sha256": "152b1b807f148a9d7004f8b0208d30ce2fa1c147734c11d4d7cb01f84216336c"
+    }
+  ],
+  "other_nontracked_nonbytecode_files": []
+}

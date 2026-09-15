@@ -1,0 +1,104 @@
+{
+  "event": "RCLE_ACVC_SINGLE_RESERVATION_20260914",
+  "recorded_at_utc": "2026-09-14T12:43:12.603123+00:00",
+  "main_base": "94ad5914bd00eaf426e84263224ee5b61a7ab620",
+  "response_commit": "7a490382cb469f2a62e276a756a2be32b460cc69",
+  "response_sha256": "3b81868e9065d370f0d2a5430dd81da960d8a4cd3d4be799dff7c98cbd54ceb7",
+  "full_read_and_conformance": true,
+  "request_id": "2026-09-14-rcle-park-vacancy-selection-01",
+  "owner_thread_id": "01a09e10-9d9f-7f82-87c0-d58cbe0c7618",
+  "selected_direction": "acvc",
+  "selected_dm_thread_id": "01a09dfa-0655-7831-aa3a-9fff2ddd2508",
+  "prior": {
+    "occupied": 2,
+    "reserved": 0,
+    "vacancy": 1
+  },
+  "actual": {
+    "occupied": 3,
+    "reserved": 0,
+    "unreserved_vacancy": 0,
+    "dm_unarchived": true,
+    "handoff_delivered": true,
+    "dm_accepted": true,
+    "object_started": true,
+    "object_start_phase": "card_and_implementation_created; no accepted source/native launch at report",
+    "conversation_released": true,
+    "release_notice_delivered": true
+  },
+  "owner_item": "docs/research/portfolio/owner/inbox/2026-09-14/20260914-root-001.json",
+  "audit_line": 58,
+  "next_action": "Original ACVC independently continues accepted B03; FOLR owns its prepared Portfolio question using delivered actual release/global facts. RCLE task archive next; physical checkout cleanup exception remains documented.",
+  "peer_science_preserved": true,
+  "handoff": {
+    "recorded_at_utc": "2026-09-14T12:53:14.413339+00:00",
+    "main_base": "fc76fa3211c74b7056c6af6451bde93a375980a9",
+    "thread_id": "01a09dfa-0655-7831-aa3a-9fff2ddd2508",
+    "model": "gpt-6-astra",
+    "thinking": "max",
+    "unarchive_result": {
+      "archived": false
+    },
+    "send_result": {
+      "threadId": "01a09dfa-0655-7831-aa3a-9fff2ddd2508"
+    },
+    "prompt_path": "docs/research/portfolio/pro_packets/20260914_rcle_park_vacancy_selection/ACVC_DM_HANDOFF.md",
+    "app_snapshot": "active; latest turn01a09ff8-bdd4-7c81-87bd-05ec0d1a5e0d inProgress; no object result asserted"
+  },
+  "acceptance": {
+    "event": "ACVC_REOPEN_ACTUAL_RESEARCH_STARTED_20260914",
+    "received_from_thread_id": "01a09dfa-0655-7831-aa3a-9fff2ddd2508",
+    "recorded_at_utc": "2026-09-14T13:08:29.446186+00:00",
+    "delivery": "Direct App message; complete original body in ACVC_ACCEPTANCE.md",
+    "full_decision_and_intake_read": true,
+    "material_conformance_conflict": false,
+    "ongoing_research_owner": "01a09dfa-0655-7831-aa3a-9fff2ddd2508",
+    "object": "ACVC_CLUSTER_DEPLOYMENT_B03",
+    "training_master": 21937,
+    "eval_namespace": 31937,
+    "authoring_checkout": "C:\\Projects\\HMASD-worktrees\\codex-acvc",
+    "authoring_branch": "codex/acvc",
+    "head_at_observation": "9a7aaddfc9ffe53f827d1589742626edd8658c7d",
+    "work_state_at_report": "B03 card and implementation actually created as uncommitted work; no accepted source/native launch claimed",
+    "observed_draft_card_sha256": "401a6f750d851264be838f5dce160f5cbf16dc2e15d986b5c0900f994a7c23ba",
+    "observed_paths": [
+      "docs/research/candidates/acvc/ACVC_CLUSTER_DEPLOYMENT_B03_SCIENCE_CARD_20260914.md",
+      "experiments/candidates/acvc/cluster_deployment_b03/protocol.py",
+      "scripts/run_acvc_cluster_deployment_b03.py",
+      "experiments/candidates/acvc/cluster_deployment_b03/launch.sh",
+      "tests/experiments/candidates/acvc/cluster_deployment_b03/test_protocol.py"
+    ],
+    "path_reconciliation": "DM's original reported scripts/launch_acvc_cluster_deployment_b03.sh was subsequently relocated to experiments/candidates/acvc/cluster_deployment_b03/launch.sh in active work; original message preserved. Receipt verifies current location, not frozen source acceptance.",
+    "observation_scope": "Actual handoff/card/file facts; no duplicate engineering or scientific acceptance"
+  },
+  "capacity_application": {
+    "event": "RCLE_ACVC_SINGLE_VACANCY_APPLIED_PORTFOLIO_RELEASED_20260914",
+    "recorded_at_utc": "2026-09-14T13:08:29.446186+00:00",
+    "main_base": "5476b6f4610b5ebb90fe47ce2492cb16528c171b",
+    "previous": {
+      "occupied": 2,
+      "reserved": 1
+    },
+    "current": {
+      "occupied": 3,
+      "reserved": 0
+    },
+    "same_reservation": true,
+    "new_task_created": false,
+    "peer_science_preserved": true,
+    "owner_review_files_at_boundary": []
+  },
+  "portfolio_release": {
+    "recorded_at_utc": "2026-09-14T13:08:29.446186+00:00",
+    "conversation_id": "6aa7836e-e4a0-83e8-985d-c633d94935b1",
+    "prior_author": "01a09e10-9d9f-7f82-87c0-d58cbe0c7618",
+    "active_author_after_release": "",
+    "queued_next_author": "01a09e16-f7b1-7e60-83a0-ba2a7cd969bc",
+    "queued_request": "2026-09-14-folr-post-b03-direction-decision-01",
+    "notice_state": "delivered_directly_to_folr; actual_capacity_also_delivered_to_acvc",
+    "does_not_wait_for_acvc_experiment": true
+  },
+  "application_audit_line": 59,
+  "peer_delivery_path": "docs/research/portfolio/pro_packets/20260914_rcle_park_vacancy_selection/PEER_RELEASE.json",
+  "coupling_complete": true
+}

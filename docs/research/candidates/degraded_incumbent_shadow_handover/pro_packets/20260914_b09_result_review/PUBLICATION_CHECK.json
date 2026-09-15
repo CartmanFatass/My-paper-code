@@ -1,0 +1,109 @@
+{
+  "observed_delivery_head": "c493e95cb14d7c34c7877aca7119bde5f546a26f",
+  "issue_url": "https://github.com/CartmanFatass/My-paper-code/issues/4",
+  "references": [
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_RECEIPT_BYPASS_B09_RESULT_INTAKE_20260914.md",
+      "commit_sha": "c493e95cb14d7c34c7877aca7119bde5f546a26f",
+      "published_refs": [
+        "refs/remotes/origin/codex/pro-dish-post-b06-20260907"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_RECEIPT_BYPASS_B09_RESULT_EVIDENCE_20260914.md",
+      "commit_sha": "c493e95cb14d7c34c7877aca7119bde5f546a26f",
+      "published_refs": [
+        "refs/remotes/origin/codex/pro-dish-post-b06-20260907"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/evidence/b09_seed149_20260914/COMPARISON.json",
+      "commit_sha": "c493e95cb14d7c34c7877aca7119bde5f546a26f",
+      "published_refs": [
+        "refs/remotes/origin/codex/pro-dish-post-b06-20260907"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/evidence/b09_seed149_20260914/COST.json",
+      "commit_sha": "c493e95cb14d7c34c7877aca7119bde5f546a26f",
+      "published_refs": [
+        "refs/remotes/origin/codex/pro-dish-post-b06-20260907"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_RECEIPT_BYPASS_B09_SCIENCE_CARD_20260914.md",
+      "commit_sha": "c493e95cb14d7c34c7877aca7119bde5f546a26f",
+      "published_refs": [
+        "refs/remotes/origin/codex/pro-dish-post-b06-20260907"
+      ]
+    },
+    {
+      "path": "experiments/candidates/degraded_incumbent_shadow_handover_rbhr_r06/production_training_engine.py",
+      "commit_sha": "3a749256d2aaf16345308827518283c8d2b91ad7",
+      "published_refs": [
+        "refs/remotes/origin/codex/pro-dish-post-b06-20260907"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_LIFECYCLE_REASSESSMENT_20260914.md",
+      "commit_sha": "c493e95cb14d7c34c7877aca7119bde5f546a26f",
+      "published_refs": [
+        "refs/remotes/origin/codex/pro-dish-post-b06-20260907"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260914_lifecycle_review/archive/RESPONSE.md",
+      "commit_sha": "eaed5cb6cc52422ec9535e559755dd89dd8ea992",
+      "published_refs": [
+        "refs/remotes/origin/codex/pro-dish-post-b06-20260907"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_POST_B08_CONVERGENCE_INTAKE_20260910.md",
+      "commit_sha": "3151cb405e6d36a42c5102056f2eedb18daf7103",
+      "published_refs": [
+        "refs/remotes/origin/codex/pro-dish-post-b06-20260907"
+      ]
+    },
+    {
+      "path": "AGENTS.md",
+      "commit_sha": "dca374c9ef54ae5368a31b2cf9f7119c84b7f0e6",
+      "published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/codex/lcac",
+        "refs/remotes/origin/codex/ucope",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "commit_sha": "dca374c9ef54ae5368a31b2cf9f7119c84b7f0e6",
+      "published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/codex/lcac",
+        "refs/remotes/origin/codex/ucope",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "commit_sha": "dca374c9ef54ae5368a31b2cf9f7119c84b7f0e6",
+      "published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/codex/lcac",
+        "refs/remotes/origin/codex/ucope",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+      "commit_sha": "dca374c9ef54ae5368a31b2cf9f7119c84b7f0e6",
+      "published_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/codex/lcac",
+        "refs/remotes/origin/codex/ucope",
+        "refs/remotes/origin/main"
+      ]
+    }
+  ]
+}

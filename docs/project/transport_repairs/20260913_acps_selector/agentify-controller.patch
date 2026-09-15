@@ -1,0 +1,103 @@
+--- a/chatgpt-controller.mjs
++++ b/chatgpt-controller.mjs
+@@ -80,6 +80,33 @@
+   const actualLabel = normalize(actual);
+   const expectedLabel = normalize(expected);
+   return !!actualLabel && actualLabel === expectedLabel;
++}
++
++export function classifyChatgptStrictProductSelection({
++  requestedProductModel, closedModelLabel = null, menuCount, records = []
++}) {
++  const normalize = (value) => String(value || '').normalize('NFKC').replace(/\s+/g, ' ').trim();
++  const requested = normalize(requestedProductModel);
++  const closedLabel = normalize(closedModelLabel);
++  const rows = records.map((row) => ({ label: normalize(row.label), selected: row.selected === true }));
++  // "Latest" alone is not a product identity. The current Astra UI calls the same
++  // product "6 Pro" on the exact composer trigger; never rewrite frozen arguments.
++  const latestAlias = requested === 'GPT-6 Astra' && /^6 ?Pro$/i.test(closedLabel) &&
++    !rows.some((row) => row.label === requested);
++  const expectedLabel = latestAlias ? 'Latest' : requested;
++  const matches = rows.filter((row) => row.label === expectedLabel);
++  const selected = matches.filter((row) => row.selected);
++  const selectedProductCount = rows.filter((row) => row.selected).length;
++  return {
++    matched: menuCount === 1 && matches.length === 1 && selected.length === 1 && selectedProductCount === 1,
++    requestedProductModel: requested,
++    matchedLabel: selected.length === 1 ? selected[0].label : null,
++    closedModelLabel: closedLabel || null,
++    selectionMapping: latestAlias ? 'latest_with_composer_6_pro' : 'exact_product_label',
++    selectionView: 'chatgpt_target_menu_product_list',
++    role: 'menuitemradio', menuCount, scopedMatchCount: matches.length,
++    selectedMatchCount: selected.length, selectedProductCount
++  };
+ }
+ 
+ 
+@@ -2937,6 +2964,7 @@
+         alreadyOpen: false,
+         triggerCount: 1,
+         menuCount: 0,
++        closedModelLabel: normalize(triggers[0].getAttribute('aria-label') || triggers[0].textContent),
+         rect: { x: rect.x, y: rect.y, w: rect.width, h: rect.height }
+       };
+     })()`);
+@@ -3000,12 +3028,13 @@
+     return result;
+   }
+ 
+-  async #readChatgptProductModelState(productModel) {
++  async #readChatgptProductModelState(productModel, closedModelLabel = null) {
+     const requested = String(productModel || '').trim();
+     if (!requested) throw new Error('missing_product_model');
+     return await this.#eval(`(() => {
+       const agentifyChatgptProductModelStateMarker = true;
+       const requested = ${JSON.stringify(requested)};
++      const classify = ${classifyChatgptStrictProductSelection.toString()};
+       const normalize = (value) => String(value || '').normalize('NFKC').replace(/\\s+/g, ' ').trim();
+       const menus = Array.from(document.querySelectorAll('[role="menu"][data-state="open"]'))
+         .filter((menu) => menu.querySelector('[data-testid="composer-intelligence-picker-content"]'));
+@@ -3014,25 +3043,16 @@
+       )).map((node) => ({
+         label: normalize(node.getAttribute('aria-label') || node.textContent),
+         selected: node.getAttribute('aria-checked') === 'true' || node.getAttribute('data-state') === 'checked'
+-      }))).filter((record) => record.label === requested);
+-      const selected = records.filter((record) => record.selected);
+-      return {
+-        matched: menus.length === 1 && records.length === 1 && selected.length === 1,
+-        requestedProductModel: requested,
+-        matchedLabel: selected.length === 1 ? selected[0].label : null,
+-        selectionView: 'chatgpt_target_menu_product_list',
+-        role: 'menuitemradio',
+-        menuCount: menus.length,
+-        scopedMatchCount: records.length,
+-        selectedMatchCount: selected.length
+-      };
++      })));
++      return classify({ requestedProductModel: requested,
++        closedModelLabel: ${JSON.stringify(closedModelLabel)}, menuCount: menus.length, records });
+     })()`);
+   }
+ 
+-  async #verifyChatgptProductModelInOpenMenu(productModel) {
++  async #verifyChatgptProductModelInOpenMenu(productModel, closedModelLabel = null) {
+     const requested = String(productModel || '').trim();
+     if (!requested) throw new Error('missing_product_model');
+-    const state = await this.#readChatgptProductModelState(requested);
++    const state = await this.#readChatgptProductModelState(requested, closedModelLabel);
+     if (!state?.matched) {
+       const error = new Error('chatgpt_product_model_unavailable_or_unselected');
+       error.data = {
+@@ -3166,8 +3186,10 @@
+     let reasoningEffortEvidence;
+     let failure = null;
+     try {
+-      await this.#openChatgptTargetMenu();
+-      productModelEvidence = await this.#verifyChatgptProductModelInOpenMenu(requestedProductModel);
++      const targetMenu = await this.#openChatgptTargetMenu();
++      productModelEvidence = await this.#verifyChatgptProductModelInOpenMenu(
++        requestedProductModel, targetMenu.closedModelLabel
++      );
+       reasoningEffortEvidence = await this.#verifyChatgptReasoningEffortInOpenMenu(
+         requestedReasoningEffort,
+         deadline

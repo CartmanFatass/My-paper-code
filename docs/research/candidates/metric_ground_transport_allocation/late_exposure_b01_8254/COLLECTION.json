@@ -1,0 +1,111 @@
+{
+  "object": "MGTAP-LATE-EXPOSURE-B01",
+  "source_sha": "90f835e10357fbbf465cc5d500a93f1e2d4ab226",
+  "node": "hmasd-wsl-node",
+  "handle": "mgtap-late-exposure-b01-8254-20260914",
+  "pid": 3694820,
+  "supervisor_start_utc": "2026-09-14T23:24:56+00:00",
+  "collected_at": "2026-09-14T23:33:31.699619+00:00",
+  "verified_at": "2026-09-14T23:35:13.310629+00:00",
+  "exit_code": 0,
+  "status": "finished",
+  "remote_originals": [
+    {
+      "kind": "native",
+      "relative_path": "COND_256.pt",
+      "bytes": 849817,
+      "sha256": "0669f3bf2a94835b45dd20b6ff72c9dfb7a7973e605551dca7d927db92425162"
+    },
+    {
+      "kind": "native",
+      "relative_path": "COND_512.pt",
+      "bytes": 849817,
+      "sha256": "5a5e6421e1325882b523bf29968b69152762e1cff21601c6487f77526e2db7e5"
+    },
+    {
+      "kind": "native",
+      "relative_path": "DENSE_256.pt",
+      "bytes": 850087,
+      "sha256": "87a73b251a12285a3af993b23697285a249cb64cf20e70fa4fa7f69d4e4a293f"
+    },
+    {
+      "kind": "native",
+      "relative_path": "DENSE_512.pt",
+      "bytes": 850087,
+      "sha256": "0f0316835c86d7552272a3e72b6bda2b60c284a2496fe3d27112d9818fc330ad"
+    },
+    {
+      "kind": "native",
+      "relative_path": "admission.json",
+      "bytes": 504,
+      "sha256": "f33d4982a2d01f1ddc0a68c097b44d4b155f3a167fb9db79b8cff6a205e7c161"
+    },
+    {
+      "kind": "native",
+      "relative_path": "episodes.jsonl",
+      "bytes": 883137,
+      "sha256": "6bde3bc8b9615605b966fd569cd39cd6fc1a3bd2bf1bc07b80e2b6ec6fe44269"
+    },
+    {
+      "kind": "native",
+      "relative_path": "rollouts.jsonl",
+      "bytes": 469341,
+      "sha256": "309533b5dd51cc1c0c7f95fcbebda8889fe98c28c7ed7ab837338766934bf648"
+    },
+    {
+      "kind": "native",
+      "relative_path": "summary.json",
+      "bytes": 29471,
+      "sha256": "375ccefddc5b1febd7b6bfe2c772f8fbd61e736f92406631b3072e177e4654fe"
+    },
+    {
+      "kind": "supervisor",
+      "relative_path": "exit_code",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "kind": "supervisor",
+      "relative_path": "pid",
+      "bytes": 8,
+      "sha256": "5aafe4cf53e90d2cd881c08e50ff9a432f8ea89b739b8a10fd58c81140db6aa0"
+    },
+    {
+      "kind": "supervisor",
+      "relative_path": "runner.sh",
+      "bytes": 1202,
+      "sha256": "be2d10f558f4b33666632c5d0f128c9fc24633f27c2a8a8714e2e61fe899fadf"
+    },
+    {
+      "kind": "supervisor",
+      "relative_path": "start_time",
+      "bytes": 11,
+      "sha256": "ce732e1cbd5098d862b16cc1ee1c4bb1e6dd72ed5d99a3f0376d2292fdfc2e99"
+    },
+    {
+      "kind": "supervisor",
+      "relative_path": "status",
+      "bytes": 9,
+      "sha256": "161069badc0cc23058b13d7c068e45205f4333aa15fd78db9d68f5c9f1ae8983"
+    },
+    {
+      "kind": "supervisor",
+      "relative_path": "task.log",
+      "bytes": 30299,
+      "sha256": "334691f7f47cac3255ab00342c1036c53a1e877ec1cdbe92321b326103011d81"
+    }
+  ],
+  "originals_match_remote": true,
+  "archive": "NATIVE_EVIDENCE.zip",
+  "archive_bytes": 3334990,
+  "archive_sha256": "a4aa0713a72396e12c593ae92996850d7e4bcda5a600f2ab9c611bc48f33e935",
+  "archive_members": 15,
+  "all_members_read_back": true,
+  "raw_local_root": "temp\\directions\\metric_ground_transport_allocation\\exp\\late_exposure_b01_8254_20260914",
+  "remote_checkout": "/home/wu/hmasd-worktrees/mgtap-late-exposure-b01-8254-20260914",
+  "remote_cleanup": "complete: ordinary git worktree remove returned0; disk and registration absent at2026-09-14T23:44:05.5411939Z; supervisor and local originals retained",
+  "archive_publication_sha": "26d0ac5d7c2af3ec09eef243197651eafcef41c1",
+  "published_git_blob_matches_archive": true,
+  "local_test_scratch": "retained after blocked-by-policy combined deletion command; no workaround",
+  "monitor_limit": "MONITOR.json final overwrote initial adoption and uses program-finish log time for terminal adoption. Original adoption23:26:44Z and repeated nonterminal returns remain in native history/ENGINEERING.md. Program finished23:30:56Z; terminal supervisor observation uptime452s. No falsely precise terminal observation UTC is inferred."
+}

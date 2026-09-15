@@ -1,0 +1,45 @@
+{"task": "folr-ref-use-generic-781301-5dce539ed54a", "status": "finished", "exit_code": 0, "pid": 3424844, "uptime_seconds": 2253, "tmux_active": false}
+=== Task 'folr-ref-use-generic-781301-5dce539ed54a' started at 2026-09-14T04:07:19+08:00 ===
+{
+  "assessed_at": "2026-09-13T20:07:19.051135Z",
+  "available_physical_bytes": 15630262272,
+  "captured_at": "2026-09-13T20:07:19.050823Z",
+  "cgroup_headroom_bytes": null,
+  "cgroup_memory_current_bytes": null,
+  "cgroup_memory_max_bytes": null,
+  "effective_available_bytes": 15630262272,
+  "effective_floor_pass": true,
+  "failure_reasons": [],
+  "measurement_source": "/proc/meminfo",
+  "minimum_available_bytes": 4294967296,
+  "passed": true,
+  "physical_floor_pass": true,
+  "schema_version": 1
+}
+{"episode": 200, "updates": 169, "wall_seconds": 43.01807288196869}
+{"episode": 400, "updates": 369, "wall_seconds": 91.13938988395967}
+{"episode": 600, "updates": 569, "wall_seconds": 139.21544755494688}
+{"episode": 800, "updates": 769, "wall_seconds": 192.93622947693802}
+{"episode": 1000, "updates": 969, "wall_seconds": 255.92963754292578}
+{"episode": 1200, "updates": 1169, "wall_seconds": 325.23956362798344}
+{"episode": 1400, "updates": 1369, "wall_seconds": 401.8430980569683}
+{"episode": 1600, "updates": 1569, "wall_seconds": 486.76385773997754}
+{"episode": 1800, "updates": 1769, "wall_seconds": 578.7773340449203}
+{"episode": 2000, "updates": 1969, "wall_seconds": 675.5591998309828}
+{"episode": 2200, "updates": 2169, "wall_seconds": 775.481783291907}
+{"episode": 2400, "updates": 2369, "wall_seconds": 873.8681092299521}
+{"episode": 2600, "updates": 2569, "wall_seconds": 973.1264916269574}
+{"episode": 2800, "updates": 2769, "wall_seconds": 1070.6731815158855}
+{"episode": 3000, "updates": 2969, "wall_seconds": 1168.409532280988}
+{"episode": 3200, "updates": 3169, "wall_seconds": 1266.9869485409}
+{"episode": 3400, "updates": 3369, "wall_seconds": 1363.7917163938982}
+{"episode": 3600, "updates": 3569, "wall_seconds": 1462.2010729078902}
+{"episode": 3800, "updates": 3769, "wall_seconds": 1561.0851378359366}
+{"episode": 4000, "updates": 3969, "wall_seconds": 1660.9014783439925}
+{"episode": 4200, "updates": 4169, "wall_seconds": 1759.8702394909924}
+{"episode": 4400, "updates": 4369, "wall_seconds": 1858.8377226839075}
+{"episode": 4600, "updates": 4569, "wall_seconds": 1956.906230413937}
+{"episode": 4800, "updates": 4769, "wall_seconds": 2055.2837545919465}
+{"episode": 5000, "updates": 4969, "wall_seconds": 2153.7979079149663}
+{"arm": "GENERIC_RETAIN", "status": "complete", "panel": {"mean": 1.0549999999999995, "sample_sd": 6.032188200660601, "conditional_episode_se": 0.5331751477600736, "minimum": -13.459999999999997, "maximum": 22.16, "n": 128}}
+=== Task 'folr-ref-use-generic-781301-5dce539ed54a' exited with code 0 at 2026-09-14T04:43:15+08:00 (Duration: 2156s) ===

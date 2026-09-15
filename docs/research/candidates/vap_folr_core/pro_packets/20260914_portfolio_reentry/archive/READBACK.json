@@ -1,0 +1,54 @@
+{
+  "conversation_id": "6aa77158-7194-83e8-8f8a-caf16ae6b84b",
+  "url": "https://chatgpt.com/c/6aa77158-7194-83e8-8f8a-caf16ae6b84b",
+  "capture": "Complete rendered DOM innerText through supported CUA browser API; exact text recovered from this task tool output, without retyping or summarization. Formatting is not original provider Markdown.",
+  "clipboard_readback": "Empty despite Response copied UI; native content export unsupported.",
+  "clerk_reported_markdown_response_characters": 8370,
+  "prompt_characters": 629,
+  "rendered_response_characters": 8239,
+  "files": {
+    "PROMPT.txt": {
+      "bytes": 629,
+      "sha256": "5223af8219ecc1db4b0f12f4709581ac2c9302fffae3afd437bce5f759855b54"
+    },
+    "RESPONSE_RENDERED.txt": {
+      "bytes": 8257,
+      "sha256": "c57767be6fd541324e7ba6a29f97c8b359e5019ef1e965525505dbb0a25f2de2"
+    },
+    "SYNC_PROMPT_RENDERED.txt": {
+      "bytes": 1324,
+      "sha256": "f9feb63787f625ba0e6e75c6088d873921bff53826307c082e05439b25a2102b"
+    },
+    "DM_PROMPT.txt": {
+      "bytes": 2048,
+      "sha256": "6f451e60bf9b585c592a9a470af03080edf39ebb51dae9a90886ffe39c5b3c43"
+    },
+    "DM_PROMPT_RENDERED.txt": {
+      "bytes": 1783,
+      "sha256": "806e80dced69e6968839f1fa61c6659184d28ef850dacf333733d23b4c1b1fca"
+    },
+    "ACKNOWLEDGMENT_RENDERED.txt": {
+      "bytes": 797,
+      "sha256": "af97f7a65b0d1dffe60d2dc41810eb74bd792092be521064d974ea6a08aaee4c"
+    }
+  },
+  "sync_response": {
+    "file": "SYNC_RESPONSE_RENDERED.txt",
+    "bytes": 2801,
+    "sha256": "21be297b16e0e168dd66551526f14e8b3d8b1356eb6676b2cec16a2614bf58e7",
+    "method": "Complete rendered DOM innerText captured in CUA output; extracted unchanged from own tool receipt."
+  },
+  "dm_direct_send": {
+    "count": 1,
+    "state": "complete; full acknowledgment read and archived; Stop answering absent",
+    "conversation_id": "6aa77158-7194-83e8-8f8a-caf16ae6b84b",
+    "prompt": "DM_PROMPT.txt",
+    "fixed_links_verified_after_send": true,
+    "request": "Factual decision return; no new scientific assessment requested",
+    "acknowledgment": "ACKNOWLEDGMENT_RENDERED.txt",
+    "provider_worked_seconds": 51
+  },
+  "new_dm_provider_sends": 1,
+  "new_provider_sends_for_original_readback": 0,
+  "dm_prompt_rendering": "ChatGPT rendered fixed GitHub links as filename chips; exact target URLs were verified in the accepted UI. DM_PROMPT.txt preserves exact submitted UTF8 source; DM_PROMPT_RENDERED.txt preserves full visible text."
+}

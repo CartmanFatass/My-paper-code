@@ -1,0 +1,71 @@
+{
+  "request_id": "2026-09-14-folr-entity-history-b02-result-review-01",
+  "full_response": {
+    "commit": "b4a67c7bf7b0eec726f107bf7acdf148f7e60109",
+    "path": "docs/research/candidates/vap_folr_core/pro_packets/20260914_entity_history_b02_review/archive/RESPONSE.md",
+    "bytes": 20351,
+    "sha256": "f98b5af4b38c20777a6da5b142feec5d4c8e273a91051744c150f8a59f45ea34",
+    "git_blob": "7b942d2406ac2c91dfed3e3e44bd3bc58c3ee54c",
+    "transport_copy_matches": true,
+    "full_93_line_answer_read_by_dm": true
+  },
+  "scope_check": {
+    "previous_head": "a89a2c65b03b6709836912211b55a3fb74a5ab12",
+    "delivery_changed_only_scoped_response": true,
+    "author_checkout_fast_forwarded": true,
+    "provider_send_count": 1
+  },
+  "readback_note": "Initial Python console print failed under cp1252 after all Git/hash checks and the fast-forward succeeded. DM then read the complete response via PowerShell Get-Content. No evidence bytes or scientific exposure changed.",
+  "preserved_transport_artifacts": {
+    "PROMPT_BODY.md": {
+      "bytes": 1923,
+      "sha256": "182e153b9fa5948a41b82347ef80decc90cca8c846f32f9de051efaefca706e7",
+      "source": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vap_folr_core\\20260914_entity_history_b02_review\\PROMPT_BODY.md"
+    },
+    "CHAT_RECEIPT.md": {
+      "bytes": 108,
+      "sha256": "f1fe49f4b1441cc9fdabd1b91fd0eb17b96a575f42391b3a2e6df1da59df9a82",
+      "source": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vap_folr_core\\20260914_entity_history_b02_review\\CHAT_RECEIPT.md"
+    },
+    "TRANSPORT_FACTS.json": {
+      "bytes": 2271,
+      "sha256": "f6a7d42a9e4648e728a00885b4ea06094fefb52f3c9d3e42136db7bddf9b5287",
+      "source": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vap_folr_core\\20260914_entity_history_b02_review\\TRANSPORT_FACTS.json"
+    },
+    "PREFLIGHT.json": {
+      "bytes": 4843,
+      "sha256": "efb549fb241ae38f0cb47f35e96c8e8201fe4f9ee9e70828e60c90657916cba3",
+      "source": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vap_folr_core\\20260914_entity_history_b02_review\\PREFLIGHT.json"
+    },
+    "ISSUE_COMMENT.json": {
+      "bytes": 4733,
+      "sha256": "81b4e28e43031200e16ab2c1249bff22d8b9020b12e14d0238e52d26a1d0b406",
+      "source": "https://github.com/CartmanFatass/My-paper-code/issues/15#issuecomment-5659790705"
+    }
+  },
+  "scientific_readback": {
+    "reviewer_reports_all_12_fixed_references_read": true,
+    "decision_critical_source_gap": null,
+    "material_design_primary_rule_defect": false,
+    "dm_accepts_findings_1_2_3": true,
+    "empirical_repair_selected": false,
+    "new_consultation_selected": false
+  },
+  "cleanup": {
+    "accepted": "archive/TAB_CLEANUP.json",
+    "outcome": "Exact non-protected Agentify tab closed and absent on follow-up Agentify inventory; conversation binding/history retained. No additional Send.",
+    "initial_inference": "Initial zero-tab CUA inventory did not cover the Agentify target. DM returned the insufficient conclusion; same child reconciled Agentify directly, found and closed the actual tab.",
+    "preserved_receipts": {
+      "TAB_CLEANUP_INITIAL.json": {
+        "source": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vap_folr_core\\20260914_entity_history_b02_review\\CLEANUP_RECEIPT.json",
+        "bytes": 843,
+        "sha256": "43f229ddf1f70f6661cce715c7ec53b6f61dc33b0ced4240cef6ed18823dc41b"
+      },
+      "TAB_CLEANUP.json": {
+        "source": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vap_folr_core\\20260914_entity_history_b02_review\\AGENTIFY_CLEANUP_RECEIPT.json",
+        "bytes": 1658,
+        "sha256": "b2ef40f4330944bcd6befd973c7f68855cf502e7e47f1e4c1652650bf8a18c5e"
+      }
+    }
+  }
+}

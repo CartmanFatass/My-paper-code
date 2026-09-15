@@ -1,0 +1,45 @@
+{
+  "event": "FOLR_CURRENT_INCREMENT_B01_GENERIC_LAUNCH",
+  "source_sha": "8ad304d61af6885c0ca5ba236bbf6c2c160e61f4",
+  "cwd": "/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801",
+  "out": "/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801/temp/directions/vap_folr_core/exp/entity_current_increment_b01_781801/generic",
+  "argv": [
+    "/usr/local/bin/agent-task",
+    "run",
+    "folr-current-increment-b01-781801-generic",
+    "bash",
+    "/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801/temp/directions/vap_folr_core/exp/entity_current_increment_b01_781801/GENERIC.sh",
+    "8ad304d61af6885c0ca5ba236bbf6c2c160e61f4",
+    "/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801",
+    "/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801/temp/directions/vap_folr_core/exp/entity_current_increment_b01_781801/generic"
+  ],
+  "submitted_utc": "2026-09-15T02:18:02.420082+00:00",
+  "returned_utc": "2026-09-15T02:18:02.432323+00:00",
+  "supervisor_returncode": 0,
+  "stdout": "Task 'folr-current-increment-b01-781801-generic' started in tmux session 'agent_folr-current-increment-b01-781801-generic'. Output: /home/wu/.agent-tasks/folr-current-increment-b01-781801-generic/task.log\n",
+  "stderr": "",
+  "status": {
+    "task": "folr-current-increment-b01-781801-generic",
+    "status": "running",
+    "exit_code": null,
+    "pid": 3702285,
+    "uptime_seconds": 0,
+    "tmux_active": true
+  },
+  "admission": {
+    "assessed_at": "2026-09-15T02:18:02.459293Z",
+    "available_physical_bytes": 14991753216,
+    "captured_at": "2026-09-15T02:18:02.459021Z",
+    "cgroup_headroom_bytes": null,
+    "cgroup_memory_current_bytes": null,
+    "cgroup_memory_max_bytes": null,
+    "effective_available_bytes": 14991753216,
+    "effective_floor_pass": true,
+    "failure_reasons": [],
+    "measurement_source": "/proc/meminfo",
+    "minimum_available_bytes": 4294967296,
+    "passed": true,
+    "physical_floor_pass": true,
+    "schema_version": 1
+  }
+}

@@ -87,12 +87,12 @@ returns the diff.
 
 | Quantity | Limit | On breach |
 | --- | --- | --- |
-| New lines in a research attempt (code, excluding tests and the card) | 2,000 | the DM splits the object or the implementer returns the excess as a named list |
+| New lines in a research attempt (code, excluding tests and the card) | 2,000 | the DM splits the object or the DM records the excess as a named list |
 | Runner script | 600 lines | same |
 | Orchestration share of a research diff (lines that do not compute, sample, learn, or evaluate) | 30% review signal | the reviewer identifies unnecessary machinery and concrete impact; ratio alone does not return the diff |
 | Launch conditions | the four of evidence spec §11.4 | any other gate is deleted, not recorded |
 | Test wall time per research directory | 5 minutes total excluding the smoke of the runner | delete unrequired duplication only; required scientific coverage remains, and insufficient budget returns a concrete gap; another bounded engineering task is separately selected, never automatic |
-| Time to first run of a new object, from card to launch | one session | if exceeded, the implementer reports which of §4 it was building |
+| Time to first run of a new object, from card to launch | one session | if exceeded, the DM records which of §4 it was building |
 
 ### Owner-ratified small reuse / net-deletion exception (2026-09-05)
 
@@ -157,15 +157,15 @@ never grows a service layer: no daemons, no dashboards, no control plane in Pyth
 
 Apply `MARL_RUNTIME_ENGINEERING_SPEC.md` and the actual object appendix before interpreting §4/§5.
 DM records full work/cost, shapes, topology/state ownership, protected semantics, measurement
-scope, validation and stop. A delegated Implementer follows that contract and returns any needed
-scientific-meaning change to DM. Independent review checks full
+scope, validation and stop. DM implements and reviews against that contract, resolving any needed
+scientific-meaning change under the existing decision ladder. Independent review checks full
 dependencies, internal threads, scientific outputs and publication as well as complete cost scope.
 No new profiling task or launch condition follows merely from this reference.
 
 - **Direction Manager**: the card names every §4 item the object needs, with the quantity that
   needs it; an object that needs none says so in one line. The DM returns a result whose
   implementation exceeded a §5 budget with the breach recorded.
-- **DM and Implementer**: before writing, list the §4 items the change would add and
+- **DM implementation**: before writing, list the §4 items the change would add and
   the card line for each; if there is none, do not add it. The smallest runnable path is the
   correct one. A guard is a bug until a card asks for it.
 - **Reviewer and critic**: the first check on any research diff is §4 and §5, before correctness.
@@ -197,14 +197,23 @@ into a global convention or write extra details merely to claim a higher level.
 
 ### 7.2 Direct work, delegation and acceptance
 
-DM implements directly by default and owns technical acceptance as well as separate scientific
-intake. Delegate one complete bounded implementation only when it saves material work, isolates
-substantial context or enables useful independent parallelism. Small edits and commands stay local.
-The Implementer owns its named edit/check scope; DM owns Git, review disposition and result-bearing
-execution. Reuse the same executor for corrections. Do not delegate and duplicate its work.
-Root retains main integration and accepts shared control-plane engineering without a direction DM.
+OWNER_DIRECT 2026-09-14: DM owns science, design choices, repair and technical acceptance. It may
+implement directly or assign a complete bounded batch to an optional native Sol/medium Implementer.
+Delegate when isolating substantial code context or independent work helps; do not split every
+function into a handoff. Use §7.1's five L0 facts: deliverable, owned paths/checkout, protected
+semantics, acceptance evidence, and bounds/return conditions. DM resolves scientific ambiguity;
+Implementer chooses routine in-scope methods and completes checks/repairs without per-step ACK.
 
-Scout, Implementer, Reviewer, Verifier, Operator and Critic return to their actual assigning DM
+One editing owner per overlapping path; reuse the direction authoring checkout and preserve other
+writers' changes. Implementer returns the exact diff, check evidence, failures and residual risks;
+DM owns Git/technical acceptance and experiment decisions. Implementer does not launch scientific
+runs or create children. Reviewer is a separate DM child with independent context; do not pass it
+the implementation discussion as a substitute for the contract and source. Same-batch corrections
+reuse children; unrelated batches use new minimal-context children. No CM layer or Root permission.
+Root may use the same method for its shared control-plane assignments. Existing accepted work
+keeps its original route. Required high-risk review remains under §7.3.
+
+Implementer, Scout, Reviewer, Verifier, Operator and scientific Critic return to their actual assigning DM
 (or Root for its own bounded work); they do not create another ordinary child chain. A missing
 specialist fact returns with the completed work and exact question so that the parent can resolve
 it or assign an independent sibling. Existing legacy tasks finish their accepted scope on their
@@ -219,7 +228,8 @@ Keep technical validity, scientific interpretation and dispatch/observation stat
 
 An independent Reviewer is required for a high-risk diff affecting shared core, scientific meaning,
 numerics, RNG, replay/recurrent state, checkpoint compatibility, bit identity or external effects.
-Codex uses Astra/high, read-only. Ordinary mechanical edits use owner self-checks. Risk determines
+Codex defaults to Sol/high, read-only. DM may choose Astra for a concrete difficult semantic,
+numerical or concurrency question; this is neither a Root approval nor a mandatory second review. Ordinary mechanical edits use owner self-checks. Risk determines
 review needs, not whether implementation was delegated. Reviewer evidence is not permission or
 a scientific disposition; DM (or Root for control-plane work) resolves findings and accepts.
 

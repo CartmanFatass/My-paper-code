@@ -1,0 +1,114 @@
+{
+  "schema_version": 1,
+  "event": "acvc-portfolio-existing-exchange-archived-20260914-01",
+  "status": "COMPLETE_EXISTING_TEXT_ARCHIVE",
+  "scope": {
+    "authority": "Root explicitly and temporarily unarchived this task for one existing-evidence preservation task",
+    "root_task": "01a095b7-850f-7401-ad4e-5e4320d285f1",
+    "executing_task": "01a09dfa-0655-7831-aa3a-9fff2ddd2508",
+    "clerk_task": "01a09d6c-e4e0-7613-ba99-7b0a1b6c540e",
+    "direction": "acvc",
+    "scientific_lifecycle": "PARK unchanged",
+    "occupies_scientific_slot": false,
+    "new_scientific_decisions": 0,
+    "experiments": 0,
+    "new_provider_requests": 0,
+    "send_actions": 0
+  },
+  "source": {
+    "conversation_id": "6aa76925-4558-83e8-86e2-40c5e0a2c320",
+    "url": "https://chatgpt.com/c/6aa76925-4558-83e8-86e2-40c5e0a2c320",
+    "observed_title": "Select Replacement Direction",
+    "browser": "Codex In-app Browser",
+    "browser_id": "1",
+    "temporary_tab_id": "1",
+    "visible_tab": false,
+    "user_message_id": "5bac5003-dd94-4474-ac52-658a7d723cc5",
+    "user_turn_id": "5bac5003-dd94-4474-ac52-658a7d723cc5",
+    "assistant_message_id": "6eb3a67b-8280-40e8-9237-1c71647d0dd0",
+    "assistant_turn_id": "8debf4a5-7121-4163-9cdd-eb138104bfe3",
+    "observed_assistant_model_slug": "gpt-6-pro",
+    "identity_source": "Read-only DOM attributes on conversation-turn-1 and the visible assistant heading ancestors; URL/title from supported tab methods"
+  },
+  "extraction": {
+    "tool": "mcp__cua_repl.js",
+    "method": "Supported Copy response and Copy message UI controls, fresh copied-state AX observations, then Tab.clipboard.readText()",
+    "source_format": "actual full browser clipboard strings (answer Markdown)",
+    "full_text_source": "provider conversation, not the local summary",
+    "serialization": "Lossless JSON transfer: consecutive runs of two or more ASCII spaces encoded as integer lengths, all other copied characters retained; exactly decoded before UTF-8 writing",
+    "text_transformation": "none; no trimming, Markdown reformatting, newline substitution, citation editing or paraphrase",
+    "file_writer": "Documented general node_repl with node:fs/promises, Buffer UTF-8, exclusive-create writes",
+    "copied_string_fidelity": "FNV-1a over UTF-16 code units and exact lengths matched between browser capture and decoded file input; FNV is a transfer check, not a cryptographic or completeness proof",
+    "completeness_basis": "Full existing prompt and answer present in the page through the answer final Status paragraph and response controls; actual complete clipboard strings saved. Prior character counts are corroboration only.",
+    "non_source_attempts": [
+      {
+        "operation": "Copy message; clipboard.readText twice; clipboard.read",
+        "observed_ui": "Message copied",
+        "result": "empty string twice; empty item list",
+        "accepted_as_source": false
+      },
+      {
+        "operation": "Tab.content.export()",
+        "api_error": "Codex in-app browser does not support command \"tab_content_export\".",
+        "accepted_as_source": false
+      },
+      {
+        "operation": "Read-only DOM inspection",
+        "result": "assistant rendered text length 7985; role/message/turn attributes observed",
+        "accepted_as_archival_body": false
+      }
+    ],
+    "successful_copy_order": [
+      "Copy response -> Response copied -> clipboard.readText(): 9756 characters",
+      "Copy message -> Message copied -> clipboard.readText(): 573 characters"
+    ],
+    "encoding": "UTF-8 without BOM",
+    "browser_hidden_state_or_backend_fetch": false
+  },
+  "prior_auxiliary_counts": {
+    "prompt": 573,
+    "response": 9756,
+    "source": "main docs/research/portfolio/decisions/2026-09-14-vacancy-exchange-recovery.md at ba739a679b1d434277a54ef031373822b3c40b73"
+  },
+  "files": {
+    "PROMPT.md": {
+      "characters_utf16": 573,
+      "bytes": 573,
+      "sha256": "96bba3d0f1c681bce1e9244a8ef0bdccc2124607d92928e935836630865d45cd",
+      "fnv1a_utf16": "44b0ccf8",
+      "lf_count": 0,
+      "cr_count": 0,
+      "trailing_newline": false,
+      "utf8_bom": false,
+      "git_blob": "464cf2c0c6fb0bda6ac3338e1e620d8fd2359a01"
+    },
+    "RESPONSE.md": {
+      "characters_utf16": 9756,
+      "bytes": 9796,
+      "sha256": "0f75e8e8fe776e7dc703d9dd81f123269a553a53b05a46ff9430a2826705ffb5",
+      "fnv1a_utf16": "61ba2cb3",
+      "lf_count": 73,
+      "cr_count": 0,
+      "trailing_newline": true,
+      "utf8_bom": false,
+      "git_blob": "e83dd7ed31e9503962c547aa28871c4f07a4e782"
+    }
+  },
+  "archive_written_at_utc": "2026-09-14T04:31:07.121Z",
+  "metadata_created_at_utc": "2026-09-14T04:33:18.754Z",
+  "validation": {
+    "file_readback": "byte-equal to exact decoded browser capture",
+    "prompt_has_no_trailing_newline": true,
+    "response_has_73_lf_and_trailing_newline": true,
+    "archive_body_headers_added": false,
+    "prior_scientific_records_rewritten": false,
+    "git_staged_body_equals_disk": true,
+    "git_staged_body_sha256_equals_recorded": true
+  },
+  "closeout": {
+    "next_owner": "Clerk",
+    "next_action": "Integrate accepted files, update main recovery index, rearchive this task after publication turn ends",
+    "root_ack_required": false,
+    "temporary_browser_tab": "Closed by this task after exact local/staged archive verification; supported listTabs returned [] for its in-app browser"
+  }
+}

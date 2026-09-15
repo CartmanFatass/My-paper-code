@@ -1,0 +1,7 @@
+{
+  "archive": "rcle-b12-15eaa7ea6-evidence.tgz",
+  "bytes": 301860,
+  "sha256": "92c1e4a3f60cbd7a6541af4be73122d7add8e3559609f76ac481f453b16e4dfa",
+  "remote_and_local_sha_match": true,
+  "extraction": "regular files/directories only; all resolved paths within own evidence root"
+}

@@ -1,0 +1,13 @@
+{
+  "raw_archive_path": "temp\\directions\\roster_consistent_latent_exploration\\exp\\b09-collected-38a29\\b09-evidence.tgz",
+  "raw_bytes": 204105,
+  "raw_sha256": "6cec5dda3404b33ef88b406f1ac47d63c6cfedfa309fd4bf417fd2b224d5a674",
+  "archive_members": 25,
+  "source_bundle_path": "temp\\directions\\roster_consistent_latent_exploration\\exp\\b09-collected-38a29\\b09-source.bundle",
+  "source_bundle_bytes": 24567,
+  "source_bundle_sha256": "d497b6c0085e5116918df933f0c36863a32e77fd0b1476b6e4f749c24599d01e",
+  "bundle_verified": true,
+  "bundle_prerequisite": "88e39c358",
+  "summary_status": "COMPLETE",
+  "source_sha": "38a29c7e3ee55cfb6fa732bdb02a271e835b45b5"
+}

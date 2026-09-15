@@ -1,0 +1,39 @@
+{
+  "object": "FOLR_RETAINED_REFERENCE_USE_B01_781301",
+  "evidence_class": "B/EXPLORE",
+  "training_seeds": {
+    "new_generic": 781301,
+    "historical_bank": 781201
+  },
+  "evaluation_seeds": {
+    "new_generic": 1781301,
+    "new_fixed_bank": 2781301
+  },
+  "fresh_generic_fits": 1,
+  "retained_bank_fits": 1,
+  "new_bank_fits": 0,
+  "new_training_episodes": 5000,
+  "new_training_ticks": 100000,
+  "new_optimizer_steps": 4969,
+  "new_evaluation_episodes": 256,
+  "new_evaluation_ticks": 5120,
+  "new_total_native_ticks": 105120,
+  "generic_replay_gru_positions": 33391680,
+  "generic_acting_positions": 538440,
+  "bank_acting_cell_positions_upper": 67200,
+  "caps_seconds": {
+    "generic_complete_invocation": 2700,
+    "fixed_bank_complete_invocation": 300,
+    "native_sum": 3000,
+    "hard_support": 1200,
+    "complete_invoked": 4200
+  },
+  "historical_archive": "docs/research/candidates/vap_folr_core/entity_history_b01_781201/BANK_RAW.tar.gz",
+  "historical_archive_sha256": "f4d2726f98ae2b05157fd3b06b5cfc2f9c3c8c4fa0cc891bb41874f0c2b1595b",
+  "new_scientific_result_exposure_at_card": 0,
+  "known_runtime_rates": "UNKNOWN; historical prefix scalings only, no forecast",
+  "complete_provider_agent_cost": "UNKNOWN; not zero or outside-cap allowance",
+  "historical_checkpoint_bytes": 4532819,
+  "historical_checkpoint_sha256": "2385b6ea0f03b36fd4e0f05006acbe64922a8dd9c2c8fa7d0cd396d5ed090989",
+  "frozen_input_identity_check": "sha256 over archived BANK_RAW and final.pt member bytes only; no torch load or raw-result reanalysis"
+}

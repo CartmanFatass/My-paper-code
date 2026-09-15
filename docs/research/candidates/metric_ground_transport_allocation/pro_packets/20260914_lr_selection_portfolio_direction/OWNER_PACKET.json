@@ -1,0 +1,38 @@
+{
+  "question": "已按完整 Portfolio 裁决继续 MGTAP 的固定选中配置研究；此项供异步介入，不是等待批准的启动申请。",
+  "changes_if_approved": [
+    {
+      "target": "MGTAP DIRECTION.md / common registry",
+      "from": "pending_portfolio_decision",
+      "to": "CONTINUE，保留原槽位；下一目标为固定1e-4新配对，未启动"
+    }
+  ],
+  "if_refused": "保留全部已发生结果和归档；在干净边界执行具体 owner 覆盖，不推定重跑或删除证据。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260914_lr_selection_portfolio_direction/archive/RESPONSE.md",
+      "quote": "**决定：MGTAP CONTINUE，继续现有可选 COND 开发范围，保持既有优先级；下一项具体目标是将双方学习率固定为本轮各自选中的 \\(10^{-4}\\)，进行一对全新训练比较。DENSE 仍是通用开发默认。不 RECAST、不 PARK/CLOSE，不自动重做八拟合选择程序，也不向更低学习率扩展网格。**",
+      "why": "完整回答权衡固定配置的可改变开发判断与两拟合有限工作；不是单次正结果自动追加。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260914_lr_selection_portfolio_direction/INTAKE.md",
+      "quote": "Slow validation favored DENSE0.1687065165636938 over COND0.16492958901611127. It is contrary evidence, not a second favorable repetition.",
+      "why": "历史混合、一次自适应选择和未知维护成本仍支持停止反方案。"
+    }
+  ],
+  "uncertainty": [
+    "新配对不是原先冻结的第二个确证样本，也不重复完整选择程序。",
+    "仅标题被实际发送；完整答复自行定位了固定包，原错误回执与完整原文都保留。",
+    "新 seed、科学卡、两拟合命令和准入尚未完成；不把裁决记录当作运行。"
+  ],
+  "cost": {
+    "compute": "后继拟议2fits/147456ticks/1024Adam；3–6分钟是UNMEASURED规划；既有native658.02s，完整维护与提供方成本UNKNOWN。",
+    "owner_time": "无需等待 owner/Root 回复；可异步覆盖。",
+    "reversibility": "reversible",
+    "waits_on_this": "nothing; ordinary DM work is not waiting for approval"
+  },
+  "verdict_text": "**决定：MGTAP CONTINUE，继续现有可选 COND 开发范围，保持既有优先级；下一项具体目标是将双方学习率固定为本轮各自选中的 \\(10^{-4}\\)，进行一对全新训练比较。DENSE 仍是通用开发默认。不 RECAST、不 PARK/CLOSE，不自动重做八拟合选择程序，也不向更低学习率扩展网格。**",
+  "source": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260914_lr_selection_portfolio_direction/archive/RESPONSE.md"
+}

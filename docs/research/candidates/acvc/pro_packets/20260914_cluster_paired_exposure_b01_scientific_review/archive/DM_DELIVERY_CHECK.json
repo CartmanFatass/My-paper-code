@@ -1,0 +1,26 @@
+{
+  "request_id": "2026-09-14-acvc-cluster-paired-exposure-b01-scientific-review-01",
+  "delivery_commit": "68fed46f448312827f38b4b4f9bade36e2aedc35",
+  "response_bytes": 14654,
+  "response_lines": 73,
+  "response_sha256": "98a9fb29fd1c9c610b9ccc2b767fd694ed0e9b3170ad5c5a6e94f3789404d18f",
+  "full_read": true,
+  "full_read_method": "Exact committed Git blob decoded UTF8 and printed in a complete untruncated3682-token result; initial console cp1252 print failed, then corrected UTF8 output read all73lines.",
+  "changed_scope": [
+    "docs/research/candidates/acvc/pro_packets/20260914_cluster_paired_exposure_b01_scientific_review/archive/RESPONSE.md"
+  ],
+  "delivery_comment_id": 5666688209,
+  "delivery_comment_url": "https://github.com/CartmanFatass/My-paper-code/issues/14#issuecomment-5666688209",
+  "comment_created_at": "2026-09-14T15:47:53Z",
+  "accepted_user_node_id": "f25bcae8-4dc3-47ca-a5e6-ba636027e79b",
+  "terminal_assistant_node_id": "a394e176-e2a8-42c1-8e6a-c5bcf733ba77",
+  "send_count": 1,
+  "receipt_normalized_bytes": 399,
+  "receipt_normalized_sha256": "ac542a1b468913bc7db615f22ac3a344c44bf21c75267eb91a394c6062999809",
+  "reported_clipboard_bytes": 402,
+  "reported_clipboard_sha256": "d9f2ed828150e37956166ff289357642ad1fac97aa47c0032b9ff5a04a7e1e77",
+  "reconstructed_CRLF_sha256": "d9f2ed828150e37956166ff289357642ad1fac97aa47c0032b9ff5a04a7e1e77",
+  "queue_digest_error": "Resolved: actual hashlib64-hex assignment and equality check; failed63-character correction retained in producer history.",
+  "clipboard_recovery": "RECEIPT_CLIPBOARD_RECONSTRUCTED.md restores CRLF from normalized receipt;402bytes and SHA match the independently reported original clipboard bytes exactly. Reconstructed, not a new direct clipboard read.",
+  "accepted_prompt_readback": "Producer direct same-node .markdown innerText equality true at1934chars; read-only temporary tab closed. Initial TextEncoder diagnostic failed without UI mutation, then actual text comparison succeeded."
+}

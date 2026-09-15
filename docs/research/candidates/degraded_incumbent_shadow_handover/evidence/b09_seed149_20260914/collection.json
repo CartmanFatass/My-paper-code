@@ -1,0 +1,16 @@
+{
+  "remote_archive": "/home/wu/hmasd-worktrees/dish-b09-3a749256/temp/directions/degraded_incumbent_shadow_handover/receipts/b09_seed149_20260914_run01/complete_evidence.tar.gz",
+  "bytes": 4298237,
+  "sha256": "f6f2392d09e9048228e2e406dd81f5cf590cb6ba9342a1f3c9aea548c0dd9ac1",
+  "source_sha": "3a749256d2aaf16345308827518283c8d2b91ad7",
+  "status": "COMPLETE",
+  "runner_wall": "runner_wall_seconds=395.21\n",
+  "failed_preflight_wall": "Command exited with non-zero status 2\npreflight_wall_seconds=0.03\n",
+  "archive_ssh_wall_seconds": 0.8363762000226416,
+  "scp_wall_seconds": 1.156954899954144,
+  "collected_at_utc": "2026-09-14T02:24:13.598730+00:00",
+  "local_archive": "C:\\Projects\\HMASD-worktrees\\dm-dish-b06-scientific-intake-20260907\\temp\\directions\\degraded_incumbent_shadow_handover\\exp\\b09_s149_3a749256_collected\\complete_evidence.tar.gz",
+  "primary_archive": "C:\\Projects\\HMASD\\temp\\directions\\degraded_incumbent_shadow_handover\\exp\\b09_s149_3a749256_collected\\complete_evidence.tar.gz",
+  "local_and_primary_sha_verified": true,
+  "complete_collection_enclosing_wall_seconds": 2.0807948000147007
+}

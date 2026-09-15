@@ -1,0 +1,52 @@
+{
+  "object": "ACVC_CLUSTER_FIXED_LR_PAIR_B01",
+  "class_": "B/EXPLORE",
+  "master": 27931,
+  "evaluation_namespace": 37931,
+  "recipes": {
+    "low": 0.0001,
+    "reference": 0.0003
+  },
+  "per_recipe": {
+    "fits": 1,
+    "training_episodes": 4096,
+    "evaluation_episodes": 192,
+    "training_team_ticks": 1048576,
+    "evaluation_team_ticks": 49152,
+    "rollouts": 2048,
+    "optimizer_steps": 8192,
+    "fixed_snapshots": 1,
+    "checkpoint_loads": 3,
+    "environment_constructors": 4,
+    "scored_episode_rows": 4288,
+    "team_ticks": 1097728,
+    "replayed_actor_agent_steps": 20971520,
+    "critic_update_rows": 4194304
+  },
+  "pair_total": {
+    "fits": 2,
+    "training_episodes": 8192,
+    "evaluation_episodes": 384,
+    "training_team_ticks": 2097152,
+    "evaluation_team_ticks": 98304,
+    "rollouts": 4096,
+    "optimizer_steps": 16384,
+    "fixed_snapshots": 2,
+    "checkpoint_loads": 6,
+    "environment_constructors": 8,
+    "scored_episode_rows": 8576,
+    "team_ticks": 2195456,
+    "replayed_actor_agent_steps": 41943040,
+    "critic_update_rows": 8388608
+  },
+  "prospective_historical_native_reference_s_per_recipe": 1230.58,
+  "prospective_historical_native_reference_s_pair": 2461.16,
+  "reference_limit": "Previous complete extended programme included midpoint evaluation; this is a coarse reference, not a measured cost law or bound.",
+  "max_numpy_reset_address": 3793102063,
+  "seed_selection": "prospective unscreened integer labels; matching addresses create one paired design, not iid training replicates",
+  "new_exposure_so_far": {
+    "fits": 0,
+    "team_ticks": 0,
+    "optimizer_steps": 0
+  }
+}

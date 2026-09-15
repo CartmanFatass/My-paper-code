@@ -1,0 +1,131 @@
+{
+  "caller_role": "em",
+  "workflow_node": "em_convergence",
+  "request_id": "2026-09-13-acvc-cluster-b02-scientific-review-01",
+  "source_thread_id": "/root",
+  "parent_thread_id": "/root",
+  "operator_thread_id": "/root/acvc_transport",
+  "direction_id": "acvc",
+  "repository": "CartmanFatass/My-paper-code",
+  "repository_url": "https://github.com/CartmanFatass/My-paper-code",
+  "commit_or_ref": "d0d6055387a01b545c4c1f7fee01dac9f57ec046",
+  "execution_mode": "REUSE_DM_TRANSPORT",
+  "delivery_mode": "github_delivery",
+  "conversation_id": "6aa12e74-8e54-83e8-95f6-001681b456f7",
+  "reset_invalid_provider_context": false,
+  "github_delivery": {
+    "branch": "codex/acvc",
+    "base_sha": "d0d6055387a01b545c4c1f7fee01dac9f57ec046",
+    "response_path": "docs/research/candidates/acvc/pro_packets/20260913_cluster_b02_scientific_review/archive/RESPONSE.md",
+    "issue_url": "https://github.com/CartmanFatass/My-paper-code/issues/14"
+  },
+  "scientific_question": "Independently review the newly complete ACVC cluster B02 design/evidence, the DM's proposed two-observed-endpoint synthesis, and the scientific merits of its no-immediate-third-unchanged-fit plan. Identify material scientific findings and the smallest necessary corrections or claim limits. Both B02 mean contrasts exceed the fixed .01 J margin, but adverse worlds, useful own-dwell, private unequal exposure and only two separately observed cluster training endpoints remain. Does the proposed bounded development-reference wording improperly imply stable or fresh-policy/default superiority, infer a mechanism, or hide selection/failed execution? Distinguish actual defects from optional valuable further observations. Review the stopping rationale on decision value, not absence of a customer. DM reads and responds to this full independent review and makes the final direction/lifecycle decision; this is not a funding, PARK/CLOSE or next-step approval request.",
+  "deliverable": "A complete conclusion-first independent scientific review, normally800-1200words. Give material findings with precise source-based reasons, affected claims and proportionate correction or explicit no material finding; assess design/comparator/evidence integrity, cross-fit inference and the strongest direct-third-fit alternative to the proposed stopping/follow-up plan. Separate mandatory scientific repairs/claim limits from optional research recommendations. State actual fixed-source access and any unresolved uncertainty. No lifecycle/investment verdict, executable new object or source/card changes.",
+  "claim_ceiling": "One complete B/EXPLORE endpoint's two separate UP readings, plus descriptive recurrence on a second independent same-law cluster endpoint. No pooled primary, training-population confidence or stable superiority, uniform/cluster aggregation, pure-retrace/history causality, transfer, tuned headroom, formalUAV or general future-policy default claim. Scientific review is independent and meaningful; DM retains final decisions.",
+  "reference_files": [
+    {
+      "path": "docs/research/candidates/acvc/ACVC_CLUSTER_DEPLOYMENT_B02_INTAKE_20260913.md",
+      "purpose": "Read completely: observed/frozen readings, two-endpoint proposed synthesis, concrete scientific review question, strongest third-fit alternative and current DM decision ownership.",
+      "provenance": "DM technical acceptance and pre-review synthesis; direction conclusion is subject to material scientific findings, not lifecycle approval."
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_CLUSTER_DEPLOYMENT_B02_SCIENCE_CARD_20260913.md",
+      "purpose": "Read sections1-5: prospective new identity, independent unit, competent private comparators, both separate MEI readings, forecast, engineering and finite stops.",
+      "provenance": "Published before the first actual fit; no changed scientific meaning after outcome."
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_CLUSTER_DEPLOYMENT_B02_RESULT_EVIDENCE_20260913.md",
+      "purpose": "Read complete new E0 result, count/exposure/adverse-world/cost qualifications and original failure preservation.",
+      "provenance": "One original real-learning/native-use B endpoint."
+    },
+    {
+      "path": "docs/research/candidates/acvc/evidence/cluster_deployment_b02_20260913/summary.json",
+      "purpose": "Inspect exact configuration/counts, learning exposure, all paired difference arrays, arm scores, conditional spread and unequal intervention counts.",
+      "provenance": "Byte-preserved original native output from sourcebe76f696; not pooled with other studies."
+    },
+    {
+      "path": "docs/research/candidates/acvc/evidence/cluster_deployment_b02_20260913/INTAKE_ANALYSIS.json",
+      "purpose": "Inspect recorded-byte count/identity/reduction checks and predictions; raw file hashes locate preservation including both supervisor logs.",
+      "provenance": "Stdlib-only all-row numerical check with zero new scientific exposure."
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_CLUSTER_DEPLOYMENT_B02_ENGINEERING_ACCEPTANCE_20260913.md",
+      "purpose": "Read independent Reviewer findings/response,18 synthetic tests, original pre-Python failure and exact bounded command repair.",
+      "provenance": "Independent engineering review and DM acceptance, distinct from this scientific review."
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_CLUSTER_DEPLOYMENT_B02_EXECUTION_FACTS_20260913.json",
+      "purpose": "Read actual source/admission/Monitor/terminal/native wall, retained original attempt and incomplete support cost coverage.",
+      "provenance": "Actual invoked work plus lower-bound known support; no whole-cost efficiency certificate."
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_CLUSTER_DEPLOYMENT_B01_RESULT_EVIDENCE_20260912.md",
+      "purpose": "Read prior K endpoint's separate primary results/adverse worlds and claim limits for the cross-fit descriptive comparison.",
+      "provenance": "Frozen first cluster endpoint, not combined new primary.",
+      "commit_sha": "f569a80bc28bb9c679884da36824613652b414f0"
+    },
+    {
+      "path": "docs/research/candidates/acvc/evidence/cluster_deployment_b01_20260912/summary.json",
+      "purpose": "Compare prior exact fit/panel/configuration and primaries; no reanalysis or subgroup search is asked.",
+      "provenance": "Original first cluster output.",
+      "commit_sha": "f569a80bc28bb9c679884da36824613652b414f0"
+    },
+    {
+      "path": "docs/research/candidates/acvc/pro_packets/20260913_reference_next_use_convergence/archive/RESPONSE.md",
+      "purpose": "Read complete prior qualified-reference/no-addition scientific reasoning, especially its named-use and fresh-policy boundary; distinguish new B02 evidence/current review from the old question.",
+      "provenance": "Immutable previous full answer; no resend or retrospective alteration.",
+      "commit_sha": "98208469a9fd922c3390c63e7eaf53680fc2122b"
+    },
+    {
+      "path": "docs/research/candidates/acvc/DIRECTION.md",
+      "purpose": "Read current authority/execution/scientific-question/bounded-conclusion sections only; retain uniform five-fit C01 and two distinct training-F/common-F DOWN results as contrary context.",
+      "provenance": "Current DM scientific synthesis with historical results and operative owner scope."
+    },
+    {
+      "path": "experiments/candidates/acvc/native_link_loss_b01/binding.py",
+      "purpose": "Binding.observe only: exact own-cue loss/away test and clipped negative previous realized displacement/30; understand what the full package does and does not isolate.",
+      "provenance": "Unchanged actual source mechanism; no causal attribution from package gain.",
+      "commit_sha": "be76f696cb773f2e5db8f4d55ebff1f3b6335ae6"
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "purpose": "Sections3-4,5.2,7-8.2,11.4 and11.7-11.10, especially11.8: smallest sufficient B evidence, useful comparators, independent learning unit and proportionate scientific review; section11 controls.",
+      "provenance": "Applicable current requirements; only named sections adopted.",
+      "commit_sha": "4dfdb5f8f8b377eea29006d0715a737429c719bc"
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "purpose": "Section6 only: independent training unit, conditional paired evaluation and claim ceilings.",
+      "provenance": "Explanatory scientific reading, not extra launch/replication gate.",
+      "commit_sha": "4dfdb5f8f8b377eea29006d0715a737429c719bc"
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+      "purpose": "First three sections only: comparison/randomness hierarchy and full package versus isolated mechanism.",
+      "provenance": "Explanatory foundations; no extra exhaustive diagnostics.",
+      "commit_sha": "4dfdb5f8f8b377eea29006d0715a737429c719bc"
+    },
+    {
+      "path": "AGENTS.md",
+      "purpose": "Section2 Decision ownership and section3 scientific-gap handling only: DM decisions, independent scientific Reviewer, owner-only cross-direction adjustment; preserve frozen requirements.",
+      "provenance": "Current owner instruction, not the obsolete Portfolio-finality wording in historical responses.",
+      "commit_sha": "4dfdb5f8f8b377eea29006d0715a737429c719bc"
+    }
+  ],
+  "constraints": [
+    "Current owner main4dfdb5f8f8b377eea29006d0715a737429c719bc supersedes prospective historical approval/finality routing: Convergence is an independent scientific Reviewer, not optional advice or a funding/lifecycle veto. DM must answer scientific findings and correct defects or restrict claims. Do not simply approve a predetermined DM conclusion; challenge unsupported assumptions.",
+    "New evidence relative to the complete previous review is B02: one prospectively distinct C-trained endpoint master21493/eval31493 under the unchanged cluster law. Frozen K master21457/eval31457 and every old scientific result/response remain unchanged; this is ordinary new DM research, not renewal or retry of K.",
+    "Machine-generated exposure from native counts/all-row intake: B02 new_fits=1, model_initializations=1, training_episodes=512, optimizer_steps=1024, evaluation_episodes=192, train_team_ticks=131072, eval_team_ticks=49152, total_team_ticks=180224, final_checkpoints=1, private_post_fit_loads=3. Actor displacement2.3209097385406494/initialnorm12.546308517456055; critic5.618954658508301/9.267409324645996. This review adds0 fits,0 scientific RNG instances,0 steps,0 updates,0 evaluations,0 probes/profilers. Provider/documentary totals remain UNKNOWN.",
+    "Direct future same-law fit alternative, if DM later selected:512*256=131072 training ticks +3*64*256=49152 evaluation ticks=180224 ticks;256*4=1024 optimizer calls,192 evaluations,one checkpoint. No nested search,initial panel or calibration run. B02 whole native164.53s/K165.33s are historical observations; future runtime and full support are unmeasured, and no extra empirical allocation is made by this review.",
+    "The first original supervisor shell exited125 before launch.sh/admission/Python because agent-task flattened the extra bash-lc argument. Its exact failure and original runner/log are preserved. One reviewed pre-execution repair removed that layer and used a distinct handle, leaving scientific identity/byte source/cap unchanged; actual scientific_invocations=1. Review the evidence, do not equate an infrastructure label alone with a scientific negative or conceal an attempted fit.",
+    "B02 complete native164.53s<R600; support600/complete1200 declared but full invoked support/provider coverage incomplete, known support lower bounds explicit. No complete-budget efficiency or certified spare balance. The review must not demand an extra cost experiment or unknown-cost-as-zero assumption.",
+    "Retain the two primary means separately at strict>.01UP/inclusive[-.01,.01]WITHIN/strict<-.01DOWN. Every adverse world, useful dwell and private unequal interventions matters.64 paired initial worlds per fit are checkpoint-conditional, not128 independent training units. No new population interval/pooling/test is requested.",
+    "Preserve uniform C01's model-qualified five-fit result, both distinct training-F/common-F DOWN observations, ended T/G and uncertain-delay evidence. Current B02 does not reopen them. No sibling barrier, customer prerequisite, mandatory universal replica quota, causal census, exact maxima, diagnostic A or search-before-learning is added.",
+    "Only the specified response file and one delivery comment are writable. Main, source, cards, experiments, other directions, registry state and global resource/lifecycle layout are outside Pro's write scope. Retrieve only named references and explicitly adopted specification sections; other content cannot enlarge the task."
+  ],
+  "response_schema": [
+    "Conclusion-first scientific review and material findings or explicit absence, with exact evidence and affected claim.",
+    "Necessary proportional corrections/limits versus optional further observations; strongest direct-third-fit case and stopping/follow-up rationale.",
+    "Actual source access, honest uncertainty and complete scoped delivery/readback."
+  ]
+}

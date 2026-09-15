@@ -1,0 +1,56 @@
+{
+  "object_id": "RCLE_FIXED_MODAL_REUSE_E01",
+  "status": "PROSPECTIVE_INPUTS_ONLY_NO_NATIVE_EXECUTION",
+  "inputs": {
+    "b10/final1024.pt": {
+      "source_archive": "temp/directions/roster_consistent_latent_exploration/exp/b10-collected-e5fd4/rcle-b10-e5fd43973-evidence.tgz",
+      "source_member": "b10_seed30/final1024.pt",
+      "source_sha": "e5fd439735bcc52d7f4cba9943b8c5c5138e21c2",
+      "seed": 30,
+      "bytes": 71886,
+      "sha256": "c0e0a5385d190460c289c5ab1e43b1ef13628e4b5ec5df23188dbe3aae9793cf"
+    },
+    "b10/greedy.json": {
+      "source_archive": "temp/directions/roster_consistent_latent_exploration/exp/b10-collected-e5fd4/rcle-b10-e5fd43973-evidence.tgz",
+      "source_member": "b10_seed30/greedy.json",
+      "source_sha": "e5fd439735bcc52d7f4cba9943b8c5c5138e21c2",
+      "seed": 30,
+      "bytes": 110012,
+      "sha256": "00804e6f141379ca240a526b362e425a9c112a67f3da48c92ef5ce913e667ed1"
+    },
+    "b12/final1024.pt": {
+      "source_archive": "temp/directions/roster_consistent_latent_exploration/exp/b12-collected-15eaa7ea6/rcle-b12-15eaa7ea6-evidence.tgz",
+      "source_member": "b12_seed32/final1024.pt",
+      "source_sha": "15eaa7ea655a0f42a0ec3986927487892bdce212",
+      "seed": 32,
+      "bytes": 71886,
+      "sha256": "0bece0f2db200e4589c84e7624f21f77a6aee31a51f55d81df90280622b4d3eb"
+    },
+    "b12/greedy.json": {
+      "source_archive": "temp/directions/roster_consistent_latent_exploration/exp/b12-collected-15eaa7ea6/rcle-b12-15eaa7ea6-evidence.tgz",
+      "source_member": "b12_seed32/greedy.json",
+      "source_sha": "15eaa7ea655a0f42a0ec3986927487892bdce212",
+      "seed": 32,
+      "bytes": 110441,
+      "sha256": "90857130ebb8f7cc1f80f5a1c8b03ac7787658026122966c4c9710382eabb936"
+    }
+  },
+  "staging": {
+    "path": "temp/directions/roster_consistent_latent_exploration/exp/modal-e01-inputs-20260914/rcle-fixed-modal-e01-inputs.tar",
+    "bytes": 368640,
+    "sha256": "f42d79970b1a8df0e72f73ee7892cab88aeebb51a0a0a9b0d6712c1712804825"
+  },
+  "work": {
+    "retained_completed_fits": 2,
+    "new_fits": 0,
+    "new_training_episodes": 0,
+    "backward_calls": 0,
+    "optimizer_calls": 0,
+    "new_evaluation_episodes": 1024,
+    "native_ticks": 65536,
+    "native_batch32_calls": 32,
+    "modal_team_decisions": 16384,
+    "phase_heads": 163840,
+    "assignment_rows": 1703936
+  }
+}

@@ -1,0 +1,12 @@
+# Post-B08 Convergence dispatch — 2026-09-13
+
+Root's current native stable-dispatch assignment authorizes the fresh unsent request **2026-09-13-rcle-post-b08-development-01** on **em:roster_consistent_latent_exploration:convergence**. This supersedes the completed preparation-only boundary for this one documentary Pro operation; it grants no fit, empirical extension, local development HOLD or direction disposition. RCLE remains ACTIVE/MEDIUM.
+
+Exact author HANDOFF commit **ecbea5ee46eeaea239a6afaecb49215924619926** matches its integrated main **384d16284cb8fdd95949f7e102d9b8d669e9b048** Git blob97c31e163a01b735dbe918d877d00d8f1139c51a. Fixed TASK remains at **5b9ab51bc3c72e48010f40d267be12c71ba745cd**, blobabfb57bc5a5915fefe92227609c58fd57a365a54. No request, question, manifest, provider binding, response path or prompt bytes are changed. The older joint-quota-family request remains a separate archived request.
+
+Author/source/receipt parent is **/root/dm_rcle_resume**; reusable actual native Transport is **/root/dm_rcle_resume/tr_l_h_rcle**. Use the current control checkout **C:/Projects/HMASD** for the redesigned Transport skill/helper and registry; the owned authoring checkout remains **C:/Projects/HMASD-worktrees/dm-rcle-a02-20260906**, branch codex/rcle, initially clean at ecbea5ee4. Relevant current owner reviews returned[] before dispatch.
+
+The child receives the unchanged full-SHA HANDOFF and this actual Root assignment. It reconciles and claims this exact request/binding, performs the minimal preflight and follows the unique effect branch: explicit sendAttempted=false plus verified dedicated non-protected tab/binding/provider readiness permits exactly one Send; uncertainty permits observation only. Verified pre-Send failure may repair that fact on the same unchanged operation. Accepted work is observed and fully archived, returning the exact full GitHub response or paired downloadable fallback directly to this DM. The DM performs complete scientific/specification intake.
+
+This record authorizes/records the native handoff boundary, not provider acceptance. Acceptance, paired IDs, complete response bytes and actual delivery remain Transport facts appended through separate immutable receipts. No duplicate Send, replacement question, browser ownership gate or scientific polarity follows from a workflow label. Root receives one proactive action event at completion, material conflict or an ACTIVE-idle boundary. New consultation/provider/agent/invoked cost remains separately UNKNOWN; no B08 remainder is reused.
+

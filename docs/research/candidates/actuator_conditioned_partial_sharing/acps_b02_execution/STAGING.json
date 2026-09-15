@@ -1,0 +1,35 @@
+{
+  "source_sha": "dd91ea3d81970485a8d562db47e30c70ed063524",
+  "node": "hmasd-wsl-node",
+  "worktree": "/home/wu/hmasd-worktrees/acps-b02-9102-20260912",
+  "source_status": "clean",
+  "initial_supervisor_states": [
+    {
+      "task": "acps-b02-shared-9102-20260912",
+      "status": "not_found"
+    },
+    {
+      "task": "acps-b02-acps-9102-20260912",
+      "status": "not_found"
+    }
+  ],
+  "wrapper_readback": [
+    {
+      "path": "/home/wu/hmasd-inputs/acps-b02-9102-20260912/run_shared.sh",
+      "bytes": 524,
+      "sha256": "7caf516fd2134f3b9af42035bc1821b386fd67a9d871d58831785386d6427f8f",
+      "bash_n_exit": 0
+    },
+    {
+      "path": "/home/wu/hmasd-inputs/acps-b02-9102-20260912/run_acps.sh",
+      "bytes": 518,
+      "sha256": "d9afb1b24ed9188eb51d4d96ed90c9842bed3642ba6840f8e508a4efb4e022c1",
+      "bash_n_exit": 0
+    }
+  ],
+  "finished_utc": "2026-09-13T01:51:50.553071+00:00",
+  "remote_staging_wall_seconds": 4.458425628021359,
+  "scientific_invocations": 0,
+  "new_models": 0,
+  "enclosing_ssh_wall_seconds": 5.396218899986707
+}

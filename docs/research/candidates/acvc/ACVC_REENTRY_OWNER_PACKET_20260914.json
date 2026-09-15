@@ -1,0 +1,39 @@
+{
+  "question": "ACVC 被选为 DISH 空槽替代后，本次重开评估是否继续保留可逆 PARK？",
+  "changes_if_approved": [
+    {
+      "target": "acvc lifecycle / replacement-DM intake",
+      "from": "Portfolio 已选方向，新 DM 需作重开决定",
+      "to": "新 DM 已完成实质评估，保留 PARK；无新实验，交 Clerk 释放科学槽位"
+    }
+  ],
+  "if_refused": "在下一安全边界执行实际 owner 指令；原数据与失败保留，重新选择有限研究对象，不追溯重写旧结果。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/acvc/ACVC_REENTRY_INTAKE_20260914.md",
+      "quote": "At the intended output scope, the new DM favors retaining the existing qualified reference and acknowledging its remaining uncertainty over buying one more recurrence observation now.",
+      "why": "当前交付只限定为已观察终点的开发参考；已有完整复核，不把空槽选择自动转成研究追加。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/acvc/pro_packets/20260913_cluster_b02_scientific_review/archive/RESPONSE.md",
+      "quote": "The strongest alternative is genuinely useful: another independent proposer could lose to C or fail to improve on dwell, changing which package merits further development. Another positive would add limited recurrence.",
+      "why": "独立重复确有价值且原生计算不昂贵；本次停止属于接近的投入取舍，不是证明后续无用。"
+    }
+  ],
+  "uncertainty": [
+    "两次聚集训练均值增益不能代表稳定的训练总体优势；评价世界不能代替独立训练。",
+    "B02 仍有 4/64 与 11/64 个不利世界，停留本身也有收益。",
+    "学习门控和训练使用固定回退的失败保留；机制归因、迁移、调优余量和正式 UAV 结论未建立。",
+    "再次选择有限重复仍合法，不要求新用户、缺陷或新机制。"
+  ],
+  "cost": {
+    "compute": "本次新增 fit / model load / update / evaluation / Send 均为零；文档、工具和任务成本非零且未完整汇总。未选的单次重复需 180224 team ticks、1024 updates、192 final episodes；历史 native 墙时约 165 秒并非完整未来报价。",
+    "owner_time": "无需批准；可异步改变下一次实际选择。",
+    "reversibility": "reversible",
+    "waits_on_this": "无研究等待；Clerk 在本轮发布结束后整合、归档并处理真实空槽。"
+  },
+  "verdict_text": "保留可逆 PARK。再次独立训练有真实研究价值，但本次接受训练间不确定性，仅保留已复核的有限开发参考；不自动开 B03 或追加预算。",
+  "source": "docs/research/candidates/acvc/ACVC_REENTRY_INTAKE_20260914.md"
+}

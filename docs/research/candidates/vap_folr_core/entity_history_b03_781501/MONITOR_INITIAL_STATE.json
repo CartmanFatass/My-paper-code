@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "batch_id": "FOLR_ENTITY_HISTORY_B03_781501",
+  "direction": "vap_folr_core",
+  "status": "adopted_running",
+  "parent_thread_id": "01a09e16-f7b1-7e60-83a0-ba2a7cd969bc",
+  "parent_host": "local",
+  "handles": [
+    {
+      "handle": "folr-b03-781501-generic",
+      "kind": "GENERIC",
+      "node": "hmasd-wsl-node",
+      "supervisor": "/usr/local/bin/agent-task",
+      "tmux": "agent_folr-b03-781501-generic",
+      "pid": 3666806,
+      "launch_sha": "b257dcb1d7578a057afa9b4bdd7c7ff74ad8e24f",
+      "status": "running",
+      "exit_code": null,
+      "last_observation": "2026-09-14T08:26:30Z queried running; pid 3666806; tmux_active true",
+      "delivery": "adopted_delivered"
+    }
+  ],
+  "pending_delivery": [],
+  "observation_interval_seconds": 120,
+  "provenance": [
+    "Adoption delivered once; monitoring resumed after premature final while handle remained running."
+  ]
+}

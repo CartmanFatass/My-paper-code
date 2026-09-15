@@ -1,0 +1,44 @@
+{
+  "monitor_identity": "monitor_folr",
+  "parent_dm": "/root/dm_folr_resume",
+  "active_set": [],
+  "terminal_events": [
+    {
+      "handle": "folr-ref-use-generic-781301-5dce539ed54a",
+      "source_sha": "5dce539ed54afd4334d09db9dcd94df38c52c2fc",
+      "node": "hmasd-wsl-node",
+      "pid": 3424844,
+      "cwd": "/home/wu/hmasd-worktrees/folr-ref-use-5dce539ed54a",
+      "output": "/home/wu/projects/HMASD/temp/directions/vap_folr_core/exp/retained_reference_use_b01_781301/GENERIC",
+      "last_observed": "2026-09-13T20:42:55Z",
+      "status": "finished",
+      "exit_code": 0,
+      "uptime_seconds": 2161,
+      "tmux_active": false,
+      "event_id": "MONITOR_TERMINAL-folr-ref-use-generic-781301-5dce539ed54a-20260913T204255Z",
+      "delivery": "delivered_direct_parent",
+      "adoption_delivery": "delivered_direct_parent",
+      "supervisor_log": "/home/wu/.agent-tasks/folr-ref-use-generic-781301-5dce539ed54a/task.log",
+      "bounded_evidence": "arm GENERIC_RETAIN complete; exit code 0; duration 2156s; n=128; supervisor log exit 2026-09-13T20:43:15Z; stored observation clock is not terminal time"
+    },
+    {
+      "handle": "folr-ref-use-bank-781301-5dce539ed54a",
+      "source_sha": "5dce539ed54afd4334d09db9dcd94df38c52c2fc",
+      "node": "hmasd-wsl-node",
+      "pid": 3427261,
+      "cwd": "/home/wu/hmasd-worktrees/folr-ref-use-5dce539ed54a",
+      "output": "/home/wu/projects/HMASD/temp/directions/vap_folr_core/exp/retained_reference_use_b01_781301/BANK",
+      "last_observed": "2026-09-13T20:48:49Z",
+      "status": "finished",
+      "exit_code": 0,
+      "uptime_seconds": 18,
+      "tmux_active": false,
+      "event_id": "MONITOR_TERMINAL-folr-ref-use-bank-781301-5dce539ed54a-20260913T204849Z",
+      "delivery": "delivered_direct_parent",
+      "adoption_delivery": "delivered_direct_parent",
+      "supervisor_log": "/home/wu/.agent-tasks/folr-ref-use-bank-781301-5dce539ed54a/task.log",
+      "bounded_evidence": "arm BANK complete; exit code 0; duration 3s; n=128"
+    }
+  ],
+  "pending_notices": []
+}

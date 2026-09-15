@@ -1,0 +1,73 @@
+{
+  "schema": "hmasd_conversation_unrecoverable_recovery_audit_v1",
+  "status": "VERIFIED_NONACCEPTANCE / CONVERSATION_UNRECOVERABLE",
+  "request_id": "2026-09-13-acps-post-b02-use-01",
+  "stableKey": "em:actuator_conditioned_partial_sharing:convergence",
+  "old_operation_id": "b7f00c5e-8e41-4ad1-805d-65cebf1ec763",
+  "old_operation": {
+    "schemaVersion": 4,
+    "operationId": "b7f00c5e-8e41-4ad1-805d-65cebf1ec763",
+    "idempotencyKey": "2026-09-13-acps-post-b02-use-01",
+    "requestFingerprint": "8aa79746979a145aeabe9293b593ede88e4b7daafb200f73719de465d1e44fe5",
+    "stableKey": "em:actuator_conditioned_partial_sharing:convergence",
+    "provider": "chatgpt",
+    "productModel": "GPT-6 Astra",
+    "reasoningEffort": "Pro",
+    "conversationUrl": "https://chatgpt.com/",
+    "conversationId": "__new__",
+    "promptSha256": "bee9b6e037f7b68e37143d152dd004cfefd10a9904d5c13bb648750ee9a2ab84",
+    "responsePath": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\actuator_conditioned_partial_sharing\\2026-09-13-acps-post-b02-use-01--actuator_conditioned_partial_sharing--attempt-01\\2026-09-13-acps-post-b02-use-01--actuator_conditioned_partial_sharing--attempt-01__02_RESPONSE.md",
+    "sendAttempted": false,
+    "sendAttemptedAt": null,
+    "providerUserMessageId": null,
+    "providerAssistantMessageId": null,
+    "observedConversationUrl": null,
+    "observedConversationId": null,
+    "archive": null,
+    "error": {
+      "code": "CHATGPT_PRODUCT_MODEL_UNAVAILABLE_OR_UNSELECTED"
+    },
+    "createdAt": 1789291242246,
+    "updatedAt": 1789291506899
+  },
+  "old_handoff": {
+    "commit": "aaf0b977de1f547794ac0a540480be9778f1524e",
+    "path": "docs/research/candidates/actuator_conditioned_partial_sharing/pro_packets/20260912_post_b02_use/delivery/HANDOFF.json",
+    "prompt_sha256": "bee9b6e037f7b68e37143d152dd004cfefd10a9904d5c13bb648750ee9a2ab84",
+    "task_commit": "c32e6e241b9fa6942482f554524659d943fa8163"
+  },
+  "old_tab": {
+    "tab_id": "4cd5b361-b097-48cc-95cc-a10dfcdf5ddf",
+    "protected": false,
+    "url": "https://chatgpt.com/",
+    "stable_key": "em:actuator_conditioned_partial_sharing:convergence",
+    "preserved": true
+  },
+  "verified_nonacceptance": {
+    "sendAttempted": false,
+    "sendAttemptedAt": null,
+    "providerUserMessageId": null,
+    "providerAssistantMessageId": null,
+    "observedConversationUrl": null,
+    "observedConversationId": null,
+    "archive": null
+  },
+  "unrecoverable_basis": {
+    "old_operation_is_first_binding_root": "conversationUrl=https://chatgpt.com/; conversationId=__new__; no concrete provider conversation identity was ever observed",
+    "same_request_model_failure": "CHATGPT_PRODUCT_MODEL_UNAVAILABLE_OR_UNSELECTED for immutable productModel GPT-6 Astra",
+    "alias_change_rejected": "review_idempotency_conflict when Latest was tried; immutable operation arguments remain unchanged",
+    "supported_runtime_load": "No supported binder can recover a concrete conversation from this unbound root operation without a new Send; old operation remains preserved for Root repair.",
+    "binder_reset_probe": "prepare_context_reset is only admitted for an existing archived registry binding with a concrete UUID and explicit reset evidence; this unbound first-binding Q has no such binding.",
+    "bind_semantics": "bind requires a concrete /c/<uuid> and observed_after_successful_send; it cannot infer or attach a conversation before a new successful Send."
+  },
+  "durable_prior_receipts": [
+    "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\actuator_conditioned_partial_sharing\\2026-09-13-acps-post-b02-use-01--actuator_conditioned_partial_sharing--attempt-01\\2026-09-13-acps-post-b02-use-01--operation-receipt.json",
+    "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\actuator_conditioned_partial_sharing\\2026-09-13-acps-post-b02-use-01--actuator_conditioned_partial_sharing--attempt-01\\2026-09-13-acps-post-b02-use-01--error-01.json",
+    "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\actuator_conditioned_partial_sharing\\2026-09-13-acps-post-b02-use-01--actuator_conditioned_partial_sharing--attempt-01\\2026-09-13-acps-post-b02-use-01--error-02.json",
+    "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\actuator_conditioned_partial_sharing\\2026-09-13-acps-post-b02-use-01--actuator_conditioned_partial_sharing--attempt-01\\2026-09-13-acps-post-b02-use-01--error-03.json",
+    "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\actuator_conditioned_partial_sharing\\2026-09-13-acps-post-b02-use-01--actuator_conditioned_partial_sharing--attempt-01\\2026-09-13-acps-post-b02-use-01--transport-facts.json"
+  ],
+  "new_recovery_handoff_pending": true,
+  "old_operation_mutated": false,
+  "recorded_at": "2026-09-13T11:02:44.763006+00:00"
+}

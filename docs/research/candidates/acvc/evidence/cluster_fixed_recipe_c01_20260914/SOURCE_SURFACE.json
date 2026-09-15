@@ -1,0 +1,71 @@
+{
+  "object": "ACVC_CLUSTER_FIXED_RECIPE_C01",
+  "basis": "Exact canonical staged Git bytes; these are the expected bytes in the eventual detached source worktree. Final source commit will be recorded in EXECUTION_FACTS.json. The complete detached checkout is fixed at that SHA; listed directly relevant surfaces supplement that full-commit binding.",
+  "files": {
+    "scripts/run_acvc_cluster_fixed_recipe_c01.py": {
+      "bytes": 2250,
+      "sha256": "a056e7da5a8340daea49d4bac3de576749403138b5d2970836b05a64c35ca628",
+      "git_blob": "f9018a6d54357cbbdd7dbaf61c40d0574a733207"
+    },
+    "experiments/candidates/acvc/cluster_fixed_recipe_c01/protocol.py": {
+      "bytes": 19338,
+      "sha256": "ac73f0536510391cbe3d27a2dda5f74c71c50f52e2a8850c63edb87719a9f638",
+      "git_blob": "2ce75a238b07c4d07750d871dbd692dcfdfa3b12"
+    },
+    "experiments/candidates/acvc/cluster_fixed_recipe_c01/launch.sh": {
+      "bytes": 1200,
+      "sha256": "8f5469a5e854f7184e1be91c8c13485b1c11e127af043e437d3b9f09a85058c0",
+      "git_blob": "f856e05440cb83e950b50baa14cf71c2fca88277"
+    },
+    "scripts/run_acvc_fresh_dense_reuse_b01.py": {
+      "bytes": 21876,
+      "sha256": "451029fbc0bdfca9e583f82809bfe74cd1f97830c7d12a35cc9fcf610cfb1504",
+      "git_blob": "55db07fc5d3e864351e4d803823f70b36cc3d583"
+    },
+    "experiments/candidates/acvc/cluster_deployment_b01/protocol.py": {
+      "bytes": 4961,
+      "sha256": "af0edb9ab3d5b548833ed5896c14a135cac2b0c1f9eb079ed5b7bc91b5252ed2",
+      "git_blob": "fb6c8935813c59694c86bb02854a5368bc3f2594"
+    },
+    "experiments/candidates/acvc/native_link_loss_b01/model.py": {
+      "bytes": 4310,
+      "sha256": "f571b8a98cd4d02bdb77280bb23f819f9f0d1ceceb58a00d73433c29a016e092",
+      "git_blob": "4f3e39743b608cd16e6c5098724bd609ed5add66"
+    },
+    "experiments/candidates/acvc/native_link_loss_b01/learner.py": {
+      "bytes": 6014,
+      "sha256": "f65cf8997de577c23a1c389a71b3d4549f0422a05f74dade505fee3d3c0cb416",
+      "git_blob": "cffcd7ebb68c07af9d8a0b61671a1d9f0208e086"
+    },
+    "experiments/candidates/ucope/uav_motion_prefix_b01/environment.py": {
+      "bytes": 4819,
+      "sha256": "fb25e48857cc8531ac9b80f13243ccd6ca88fa5bf2b194a43dffed21c80690e6",
+      "git_blob": "4b59281bfb76245dd3283fe860327e35463c2b26"
+    },
+    "experiments/candidates/ucope/uav_motion_prefix_b01/learner.py": {
+      "bytes": 14150,
+      "sha256": "466ec7b0efabdf474f838b662e781a2b7a3b5e1c1a41096b6ccf0f00eb0471f1",
+      "git_blob": "30c07ff798f198227b98add3a3a452249db22f13"
+    },
+    "experiments/candidates/ucope/uav_motion_prefix_b01/policy.py": {
+      "bytes": 6887,
+      "sha256": "e324640251d0d025549705ff7541b765e7b96733f422c48ee9c2f5bd07709614",
+      "git_blob": "ed228c88530feda63bf96c1a1597486cc52f0842"
+    },
+    "experiments/candidates/metric_ground_transport_allocation/mgtap_native_ground_geometry_b01/geometry.py": {
+      "bytes": 8386,
+      "sha256": "8c6108eda8c053d81cd686929cbca3765bec76d26e57fe66b6e386013a838fca",
+      "git_blob": "bc00b7e708ce7f52525540e7537adb888c1057a5"
+    },
+    "envs/pettingzoo/uav_env.py": {
+      "bytes": 67979,
+      "sha256": "f50d74cdba92d5ef976c8ba53d2697fc72742683fcb746b404b8c8807f463803",
+      "git_blob": "21b0474e8d7ba6cdc46ed344fa65bf98ef66a907"
+    },
+    "scripts/hmasd_resource_preflight.py": {
+      "bytes": 21314,
+      "sha256": "cb0525e9247f1c7262c198bf051e542282f5928982137b3023d36d5d69eda4dc",
+      "git_blob": "4127cd22d2e0c4cc1ad6df85aafeb7131c3d07b2"
+    }
+  }
+}

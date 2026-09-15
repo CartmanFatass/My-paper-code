@@ -1,0 +1,58 @@
+{
+  "object": "ACPS-B02",
+  "master": 9102,
+  "source_sha": "dd91ea3d81970485a8d562db47e30c70ed063524",
+  "node": "hmasd-wsl-node",
+  "remote_repository": "/home/wu/projects/HMASD",
+  "network_shell": "zsh -lic",
+  "worktree": "/home/wu/hmasd-worktrees/acps-b02-9102-20260912",
+  "staging": "/home/wu/hmasd-inputs/acps-b02-9102-20260912",
+  "whole_arm_cap_seconds": 450,
+  "native_sum_cap_seconds": 900,
+  "support_cap_seconds": 600,
+  "complete_cap_seconds": 1500,
+  "arms": [
+    {
+      "arm": "SHARED",
+      "handle": "acps-b02-shared-9102-20260912",
+      "output": "/home/wu/hmasd-worktrees/acps-b02-9102-20260912/temp/directions/actuator_conditioned_partial_sharing/exp/acps_b02_9102/SHARED",
+      "supervisor_root": "/home/wu/.agent-tasks/acps-b02-shared-9102-20260912",
+      "argv": [
+        "/usr/local/bin/agent-task",
+        "run",
+        "acps-b02-shared-9102-20260912",
+        "/usr/bin/time",
+        "-q",
+        "-f",
+        "%e",
+        "-o",
+        "/home/wu/hmasd-worktrees/acps-b02-9102-20260912/temp/directions/actuator_conditioned_partial_sharing/exp/acps_b02_9102/SHARED/process_wall_seconds.txt",
+        "bash",
+        "/home/wu/hmasd-inputs/acps-b02-9102-20260912/run_shared.sh"
+      ],
+      "scientific_invocations": 1,
+      "selected_regardless_of_first_score": true
+    },
+    {
+      "arm": "ACPS",
+      "handle": "acps-b02-acps-9102-20260912",
+      "output": "/home/wu/hmasd-worktrees/acps-b02-9102-20260912/temp/directions/actuator_conditioned_partial_sharing/exp/acps_b02_9102/ACPS",
+      "supervisor_root": "/home/wu/.agent-tasks/acps-b02-acps-9102-20260912",
+      "argv": [
+        "/usr/local/bin/agent-task",
+        "run",
+        "acps-b02-acps-9102-20260912",
+        "/usr/bin/time",
+        "-q",
+        "-f",
+        "%e",
+        "-o",
+        "/home/wu/hmasd-worktrees/acps-b02-9102-20260912/temp/directions/actuator_conditioned_partial_sharing/exp/acps_b02_9102/ACPS/process_wall_seconds.txt",
+        "bash",
+        "/home/wu/hmasd-inputs/acps-b02-9102-20260912/run_acps.sh"
+      ],
+      "scientific_invocations": 1,
+      "selected_regardless_of_first_score": true
+    }
+  ]
+}

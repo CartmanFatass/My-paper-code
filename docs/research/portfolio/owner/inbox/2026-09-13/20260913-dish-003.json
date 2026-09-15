@@ -1,0 +1,81 @@
+{
+  "id": "20260913-dish-003",
+  "created": "2026-09-13T20:05:46-07:00",
+  "direction": "degraded_incumbent_shadow_handover",
+  "tier": "direction",
+  "kind": "decision",
+  "title": "DISH完成B09与独立审查后可逆PARK",
+  "context": "B09差值−35.25越过预定负向尺度，保留REPLACE并结束本次绕过扩展。DM接受独立审查的理由修正：重复可能改变默认值；当前依据服务与耗能证据不追加，普通来源问题仍开放。",
+  "options": [
+    {
+      "key": "a",
+      "label": "方向PARK",
+      "consequence": "保留证据与默认值，Clerk安全归档并按既有委托处理空缺。"
+    },
+    {
+      "key": "b",
+      "label": "新的独立训练对",
+      "consequence": "另定有限新卡以检验可能改变默认值的学习不确定性，当前未选择。"
+    },
+    {
+      "key": "c",
+      "label": "明确普通来源比较",
+      "consequence": "先明确会改变开发选择的干预与比较器，再由DM决定有限研究；当前未选择。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "直接比较显示实际尺度的服务损失且各条件耗能均增；重复仍合法，但其当前边际决策价值不足。",
+  "evidence": [
+    "docs\\research\\candidates\\degraded_incumbent_shadow_handover\\DISH_POST_B09_CONVERGENCE_INTAKE_20260914.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-14.md#L10",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否保留DM已按委托执行的可逆方向PARK：保留REPLACE，当前不追加接收筛选或重复，也未选择普通来源比较？",
+    "changes_if_approved": [
+      {
+        "target": "DISH方向状态",
+        "from": "B09结果审查中",
+        "to": "PARK；Clerk在安全收尾后归档并按既有委托处理名额。"
+      }
+    ],
+    "if_refused": "在下一安全边界应用所有者覆盖，先明确新的有限问题和名额；保留所有已执行效果，不自动重跑。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_RECEIPT_BYPASS_B09_RESULT_INTAKE_20260914.md",
+        "quote": "Accept the finite negative B result, retain REPLACE and end this BYPASS extension.",
+        "why": "此前最具体的保留或绕过问题已实际比较，负向均值越过预先确定的尺度；保守默认选择不需要总体优劣声明。"
+      },
+      {
+        "path": "docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260914_b09_result_review/archive/RESPONSE.md",
+        "quote": "The proposed reversible whole-direction PARK is now scientifically defensible as a current development-value judgment, not an empirical direction-wide negative.",
+        "why": "独立审查支持有范围的当前价值判断；负责人接受其关于重复仍可逆转默认选择的修正。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_RECEIPT_BYPASS_B09_RESULT_EVIDENCE_20260914.md",
+        "quote": "The four differences are+6,−30,−46,−71.",
+        "why": "仍有正向条件，而且最终无效提交减少18次；只有一对学习，重复可减少不确定性。"
+      }
+    ],
+    "uncertainty": [
+      "单对学习不能证明总体劣势、等价或每条消息必要。",
+      "普通合法交接均为零，交接后的来源价值仍未知。",
+      "更多同目标独立训练对是合法备选，不要求新机制、先有正结果或新用户。",
+      "完整机器工作、H、CPU、暂存峰值和模型服务成本仍有未知项。"
+    ],
+    "cost": {
+      "compute": "已完成一对，共131072训练转换、1024优化器调用和8个最终回合；完整运行395.21秒，后续科学计算为零。完整成本仍未知。 两轮科学审查均完整归档；远程执行树已核对后清理，后续实验数为零。",
+      "owner_time": "可异步查看，无须回复后才处理已获授权的收尾。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing; decision auto-applied, no live scientific producer; Clerk owns integration and safe archival"
+    },
+    "verdict_text": "DM selects reversible whole-direction PARK, retaining REPLACE and all unresolved receipt/source questions.",
+    "source": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_POST_B09_CONVERGENCE_INTAKE_20260914.md"
+  },
+  "starred": true
+}

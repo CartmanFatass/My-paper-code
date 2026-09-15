@@ -1,0 +1,26 @@
+{
+  "published_sha": "0427cbcc914e4e8182821320c106f132eb0e0cf9",
+  "observed_remote_ref": "0427cbcc914e4e8182821320c106f132eb0e0cf9",
+  "published_archives": [
+    {
+      "path": "docs/research/candidates/vap_folr_core/entity_history_b03_781501/GENERIC_RAW.tar.gz",
+      "bytes": 4299210,
+      "sha256": "5ca1b84e5f262eea476b1219b7284840b029cdee97947af73a73666b525bfb04"
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/entity_history_b03_781501/BANK_RAW.tar.gz",
+      "bytes": 4155609,
+      "sha256": "cbfb535cda8dca062e37737e336fd84f8a7b5c0f15d0cc935ebcbb7650a0ca10"
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/entity_history_b03_781501/SUPPORT_RAW.tar.gz",
+      "bytes": 20706,
+      "sha256": "922c2207cb0f5e319d31e56d4b204c62eeca844ad4583136d74afeb52111025c"
+    }
+  ],
+  "returncode": 0,
+  "stdout": "{\"completed_at_utc\": \"2026-09-14T10:12:04.969606+00:00\", \"exact_targets\": [\"/home/wu/hmasd-worktrees/folr-entity-history-b03-781501-b257dcb1d\", \"/home/wu/.agent-tasks/folr-b03-781501-generic\", \"/home/wu/.agent-tasks/folr-b03-781501-bank\"], \"source_sha\": \"b257dcb1d7578a057afa9b4bdd7c7ff74ad8e24f\", \"terminal_statuses\": {\"folr-b03-781501-generic\": {\"task\": \"folr-b03-781501-generic\", \"status\": \"finished\", \"exit_code\": 0, \"pid\": 3666806, \"uptime_seconds\": 6464, \"tmux_active\": false}, \"folr-b03-781501-bank\": {\"task\": \"folr-b03-781501-bank\", \"status\": \"finished\", \"exit_code\": 0, \"pid\": 3669107, \"uptime_seconds\": 3814, \"tmux_active\": false}}, \"tracked_source_clean\": true, \"live_processes\": [], \"all_untracked_paths_preserved\": [\"experiments/candidates/vap_folr_core/entity_history_b01/__pycache__/__init__.cpython-310.pyc\", \"experiments/candidates/vap_folr_core/entity_history_b01/__pycache__/environment.cpython-310.pyc\", \"experiments/candidates/vap_folr_core/entity_history_b01/__pycache__/learner.cpython-310.pyc\", \"experiments/candidates/vap_folr_core/entity_history_b01/__pycache__/model.cpython-310.pyc\", \"experiments/candidates/vap_folr_core/entity_history_b01/__pycache__/publication.cpython-310.pyc\", \"experiments/candidates/vap_folr_core/entity_history_b03/__pycache__/__init__.cpython-310.pyc\", \"experiments/candidates/vap_folr_core/entity_history_b03/__pycache__/binding.cpython-310.pyc\", \"experiments/candidates/vap_folr_core/public_lifecycle_b01/__pycache__/attention.cpython-310.pyc\", \"experiments/candidates/vap_folr_core/public_lifecycle_b01/__pycache__/collection.cpython-310.pyc\", \"experiments/candidates/vap_folr_core/public_lifecycle_b01/__pycache__/environment.cpython-310.pyc\", \"experiments/candidates/vap_folr_core/public_lifecycle_b01/__pycache__/flex_qmix.cpython-310.pyc\", \"experiments/candidates/vap_folr_core/public_lifecycle_b01/__pycache__/learner.cpython-310.pyc\", \"experiments/candidates/vap_folr_core/public_lifecycle_b01/__pycache__/model.cpython-310.pyc\", \"experiments/candidates/vap_folr_core/public_lifecycle_b01/__pycache__/native_env.cpython-310.pyc\", \"scripts/__pycache__/hmasd_platform.cpython-310.pyc\", \"temp/directions/vap_folr_core/exp/entity_history_b03_781501/BANK/ADMISSION.json\", \"temp/directions/vap_folr_core/exp/entity_history_b03_781501/BANK/INVOCATION_TIME.json\", \"temp/directions/vap_folr_core/exp/entity_history_b03_781501/BANK/final.pt\", \"temp/directions/vap_folr_core/exp/entity_history_b03_781501/BANK/summary.json\", \"temp/directions/vap_folr_core/exp/entity_history_b03_781501/BANK_CONTROL_LAUNCH.json\", \"temp/directions/vap_folr_core/exp/entity_history_b03_781501/BANK_LAUNCH.sh\", \"temp/directions/vap_folr_core/exp/entity_history_b03_781501/BANK_RAW.tar.gz\", \"temp/directions/vap_folr_core/exp/entity_history_b03_781501/GENERIC/ADMISSION.json\", \"temp/directions/vap_folr_core/exp/entity_history_b03_781501/GENERIC/INVOCATION_TIME.json\", \"temp/directions/vap_folr_core/exp/entity_history_b03_781501/GENERIC/final.pt\", \"temp/directions/vap_folr_core/exp/entity_history_b03_781501/GENERIC/summary.json\", \"temp/directions/vap_folr_core/exp/entity_history_b03_781501/GENERIC_CONTROL_LAUNCH.json\", \"temp/directions/vap_folr_core/exp/entity_history_b03_781501/GENERIC_LAUNCH.sh\", \"temp/directions/vap_folr_core/exp/entity_history_b03_781501/GENERIC_RAW.tar.gz\", \"temp/directions/vap_folr_core/exp/entity_history_b03_781501/SUPPORT_RAW.tar.gz\"], \"verified_file_count\": 42, \"removals\": [\"/home/wu/hmasd-worktrees/folr-entity-history-b03-781501-b257dcb1d\", \"/home/wu/.agent-tasks/folr-b03-781501-generic\", \"/home/wu/.agent-tasks/folr-b03-781501-bank\"], \"git_remove\": {\"returncode\": 0, \"stdout\": \"\", \"stderr\": \"\"}, \"all_removed_and_unregistered\": true, \"remote_cleanup_wall_seconds\": 0.15365821891464293, \"new_scientific_invocations\": 0}\n",
+  "stderr": "",
+  "local_and_ssh_window_seconds": 2.6560000000172295,
+  "scope": "Only named terminal B03 execution checkout and its two supervisor directories, after full published byte preservation. Local authoring checkout, other directions and shared Git/venv remain."
+}

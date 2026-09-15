@@ -1,0 +1,19 @@
+{
+  "source_sha": "012a8bce2c90cbe54459437dba01d3f171c9e063",
+  "command_publication_commit": "a690406c11d40a7dda66071cbb3badc9c7eb0dc6",
+  "remote_checkout": "/home/wu/hmasd-worktrees/rcle-b08-012a8bce2",
+  "supervisor_handle": "rcle-b08-s28-012a8bce2",
+  "acceptance_stdout": "Task 'rcle-b08-s28-012a8bce2' started in tmux session 'agent_rcle-b08-s28-012a8bce2'. Output: /home/wu/.agent-tasks/rcle-b08-s28-012a8bce2/task.log\n",
+  "monitor": "/root/dm_rcle_resume/mon_l_l_rcle",
+  "adoption": "MONITOR_ADOPTED directly; first observation alive at224/256 then256/256",
+  "scientific_result": "COMPLETE/exit0; all256 updates and four panels accepted",
+  "terminal_time_utc": "2026-09-13T06:43:15Z",
+  "whole_native_wall_s": 45.39,
+  "study_body_wall_s": 42.261950423941016,
+  "peak_rss_kib": 613072,
+  "monitor_active_set": "empty",
+  "monitor_terminal_event": "rcle-b08-s28-012a8bce2-terminal-20260913T064315Z",
+  "monitor_support_read_wall_s_approximate": 3.7,
+  "monitor_support_charged_bound_s": 4,
+  "command_metadata_deviation": "terminal CR appended after exact published payload; affected launch_sha metadata only; canonical source reconciled and raw values retained"
+}

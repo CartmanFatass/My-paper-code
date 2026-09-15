@@ -1,0 +1,27 @@
+{
+  "request_id": "2026-09-12-mgtap-cond512-dense768-use-01",
+  "authority": "814139558ccb28502b2e23da6800897b4d7af4b3",
+  "current_scope": "Exactly one original Convergence use/design question, full answer and DM intake; no empirical grant",
+  "new_scientific_invocations": 0,
+  "new_model_constructions": 0,
+  "new_rng_streams": 0,
+  "new_environment_instances": 0,
+  "new_training_episodes": 0,
+  "new_evaluation_episodes": 0,
+  "new_optimizer_calls": 0,
+  "new_checkpoint_loads": 0,
+  "new_numerical_reanalysis": 0,
+  "new_tests_fixtures_or_cost_probes": 0,
+  "authored_pro_questions": 1,
+  "author_pro_sends": 0,
+  "provider_acceptance": "not dispatched by author; current request pending Root/Transport",
+  "documentary_complete_invoked_provider_agent_cost": "UNKNOWN, expressly accepted; preparation/Git/Issue/Transport/archive/intake/Root integration once, separate from idle calendar time",
+  "empirical_allocation": null,
+  "fresh_empirical_identity": null,
+  "prospective_configuration_source": {
+    "commit": "e854bd6f11b3ca0b95783fbd6fc49c75b6095ed3",
+    "path": "docs/research/candidates/metric_ground_transport_allocation/next_use_20260912/EXPOSURE_AND_COST.json"
+  },
+  "prospective_work_is_not_execution_or_allocation": true,
+  "recorded_utc": "2026-09-13T01:48:47.886401+00:00"
+}

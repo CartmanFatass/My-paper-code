@@ -1,0 +1,27 @@
+{
+  "launch_sha": "2d351d48604396ce478aa900584bd24b3255def5",
+  "node": "wsl_4070",
+  "handle": "mgtap-lr-selection-8251-8252-20260914",
+  "sha256": {
+    "admission.json": "4f6c88a2175d027a4a432bab25279ed26b1701113f6bdd9ddc08718670d7b715",
+    "episodes.jsonl": "c99ec3431e593aa16120f1912b8027ca4ef0ca2a567210be8e9fa00eaaa10033",
+    "rollouts.jsonl": "0ed6c037c2267c714e81f17d20a1eb0ed1303564847314a12276411d09fb1cef",
+    "selection.json": "e34d586de070e90896d95674613ebfd4954a5ba705ddcfcbcc9029d8c5735e48",
+    "selection.sha256": "9d8c1241a464ba1ca1831c85cc47a69e2b5d0101627b8d15811e5c09782c63aa",
+    "summary.json": "0ed3cd6ecf70ea69832aa45998355c0d7764474359f55492257dcfc42ae3b8fb",
+    "selection_base_COND.pt": "21eb2121dd67b755fccd6b6d66bb2d5889267cce6cc6a598ee03905710ed6a44",
+    "selection_base_DENSE.pt": "68334ed02f0aab2b0aaa2e91cf6899002e885f6c1232fbca933fd41ec3debd2a",
+    "selection_slow_COND.pt": "7d7f3477ee50c117e16f273c55b1d2c68cf66e1032fa4ae185a6d8b82c2d4d64",
+    "selection_slow_DENSE.pt": "e9e53162e1a0493a0ca3a930a860d603f634944bc8bf0ea7a185adc67d5150c3",
+    "selection_fast_COND.pt": "20ebc7c4ea85c9a6c6cfb9b1ff3435a4c74be1b1c599b2ac41e2491088dace07",
+    "selection_fast_DENSE.pt": "3296d5f97240e5c84b9d7d89305ab429ab4b44b0f895b6855e63ec9bbab908c0",
+    "holdout_slow_COND.pt": "aec6b441c1809847d9439fd5e0f3847c1c12c60e3ac8bbf7d883bcb955c75a0a",
+    "holdout_slow_DENSE.pt": "d2a9e1f1f39bb4567642a5bc4793d40efecdb7b18f2adb0fb1eeecd75056145a",
+    "supervisor/exit_code": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "supervisor/pid": "0f4f38cd38931f7a1703ab1973b81ef948ac5f2dedb1ab3566896b3a901f3fa2",
+    "supervisor/runner.sh": "fa00524c2ec6dd30c4ee8c398bc5630b53b20f9f18e631a412311a52c246640f",
+    "supervisor/start_time": "a2d829e37df5cf3edeef0eca709f0cea314175a28b8f3538278b0e9f4fea6648",
+    "supervisor/status": "161069badc0cc23058b13d7c068e45205f4333aa15fd78db9d68f5c9f1ae8983",
+    "supervisor/task.log": "69a1279059bb40f00ac3cec6fff98c852554bb1c423ce001626c8c524e1719e6"
+  }
+}

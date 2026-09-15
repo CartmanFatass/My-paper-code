@@ -1,0 +1,17 @@
+{
+  "handle": "lcac-b01-s9411-133218a8-20260914",
+  "launch_sha": "133218a8e08c29e833b4d549ffd48f00b204bf2e",
+  "launched_utc": "2026-09-14T03:07:11.965398+00:00",
+  "launch_command": "test ! -e /home/wu/.agent-tasks/lcac-b01-s9411-133218a8-20260914 && /usr/local/bin/agent-task run lcac-b01-s9411-133218a8-20260914 'cd /home/wu/hmasd-worktrees/lcac-b01-26e23ff3 && export PATH=/home/wu/.local/bin:/usr/lib/wsl/lib:$PATH PYTHONDONTWRITEBYTECODE=1 OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 MAX_JOBS=1 && test \"$(git rev-parse HEAD)\" = 133218a8e08c29e833b4d549ffd48f00b204bf2e && test ! -e /home/wu/hmasd-worktrees/lcac-b01-26e23ff3/experiments/results/lcac_b01_9411_20260914 && mkdir -p /home/wu/hmasd-worktrees/lcac-b01-26e23ff3/experiments/results/lcac_b01_9411_20260914_receipts && /home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out /home/wu/hmasd-worktrees/lcac-b01-26e23ff3/experiments/results/lcac_b01_9411_20260914_receipts/admission.json && /usr/bin/time -f '\"'\"'{\"wall_seconds\":%e,\"peak_rss_kib\":%M,\"exit_status\":%x}'\"'\"' -o /home/wu/hmasd-worktrees/lcac-b01-26e23ff3/experiments/results/lcac_b01_9411_20260914_receipts/runner_time.json /home/wu/.venvs/hmasd/bin/python scripts/run_lcac_b01.py --seed 9411 --output /home/wu/hmasd-worktrees/lcac-b01-26e23ff3/experiments/results/lcac_b01_9411_20260914'",
+  "dispatch": {
+    "exit_code": 0,
+    "stdout": "Task 'lcac-b01-s9411-133218a8-20260914' started in tmux session 'agent_lcac-b01-s9411-133218a8-20260914'. Output: /home/wu/.agent-tasks/lcac-b01-s9411-133218a8-20260914/task.log\n",
+    "stderr": ""
+  },
+  "dispatch_wall_seconds": 0.48499999998603016,
+  "initial_status": {
+    "exit_code": 0,
+    "stdout": "{\"task\": \"lcac-b01-s9411-133218a8-20260914\", \"status\": \"running\", \"exit_code\": null, \"pid\": 3653575, \"uptime_seconds\": 1, \"tmux_active\": true}\n",
+    "stderr": ""
+  }
+}

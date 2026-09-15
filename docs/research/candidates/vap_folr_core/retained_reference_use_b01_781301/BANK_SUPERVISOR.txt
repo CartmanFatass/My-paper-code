@@ -1,0 +1,20 @@
+{"task": "folr-ref-use-bank-781301-5dce539ed54a", "status": "finished", "exit_code": 0, "pid": 3427261, "uptime_seconds": 112, "tmux_active": false}
+=== Task 'folr-ref-use-bank-781301-5dce539ed54a' started at 2026-09-14T04:48:30+08:00 ===
+{
+  "assessed_at": "2026-09-13T20:48:30.617607Z",
+  "available_physical_bytes": 15627558912,
+  "captured_at": "2026-09-13T20:48:30.617330Z",
+  "cgroup_headroom_bytes": null,
+  "cgroup_memory_current_bytes": null,
+  "cgroup_memory_max_bytes": null,
+  "effective_available_bytes": 15627558912,
+  "effective_floor_pass": true,
+  "failure_reasons": [],
+  "measurement_source": "/proc/meminfo",
+  "minimum_available_bytes": 4294967296,
+  "passed": true,
+  "physical_floor_pass": true,
+  "schema_version": 1
+}
+{"arm": "BANK", "status": "complete", "panel": {"mean": -4.877421875, "sample_sd": 3.2800432698542474, "conditional_episode_se": 0.28991760483740436, "minimum": -19.800000000000008, "maximum": 1.4599999999999997, "n": 128}}
+=== Task 'folr-ref-use-bank-781301-5dce539ed54a' exited with code 0 at 2026-09-14T04:48:33+08:00 (Duration: 3s) ===

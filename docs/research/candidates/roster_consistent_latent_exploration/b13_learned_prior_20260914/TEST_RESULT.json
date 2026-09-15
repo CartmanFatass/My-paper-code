@@ -1,0 +1,24 @@
+{
+  "command": [
+    "C:\\Users\\fires\\.conda\\envs\\hmasd-amd-cpu\\python.exe",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "C:\\Projects\\HMASD-worktrees\\dm-rcle-a02-20260906\\temp\\directions\\roster_consistent_latent_exploration\\test\\b13-policy-20260914-01",
+    "tests/experiments/candidates/roster_consistent_latent_exploration/joint_quota_phase/test_learned_prior.py",
+    "tests/experiments/candidates/roster_consistent_latent_exploration/joint_quota_phase/test_contract.py::test_public_quota_mapping_greedy_tie_and_uniform_likelihood",
+    "tests/experiments/candidates/roster_consistent_latent_exploration/joint_quota_phase/test_contract.py::test_adam_is_one_full_return_score_step_then_baseline_and_rejects_before_mutation",
+    "tests/experiments/candidates/roster_consistent_latent_exploration/joint_quota_phase/test_contract.py::test_b09_exact_snapshot_anchor_reuses_integer_distances_and_combined_score",
+    "tests/experiments/candidates/roster_consistent_latent_exploration/joint_quota_phase/test_contract.py::test_b10_b12_and_legacy_entries_bind_only_their_fixed_identity_and_endpoint",
+    "tests/experiments/candidates/roster_consistent_latent_exploration/joint_quota_phase/test_contract.py::test_b10_b12_synthetic_driver_reaches1024_and_publishes_the_actual_final_role",
+    "tests/experiments/candidates/roster_consistent_latent_exploration/fixed_modal_reuse_e01/test_study.py"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 12.584358399966732,
+  "scratch": "C:\\Projects\\HMASD-worktrees\\dm-rcle-a02-20260906\\temp\\directions\\roster_consistent_latent_exploration\\test\\b13-policy-20260914-01",
+  "scratch_removed": true,
+  "scope": "synthetic changed-law and legacy/E01 regression checks; no scientific key or native environment invocation"
+}

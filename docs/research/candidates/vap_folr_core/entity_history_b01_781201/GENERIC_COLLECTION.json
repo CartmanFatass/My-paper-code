@@ -1,0 +1,86 @@
+{
+  "collected_at": "2026-09-13T00:14:16.427213+00:00",
+  "handle": "folr-entity-history-b01-781201-generic",
+  "source_sha": "922a461fde867a8efe23a1563a969e6d2d08e258",
+  "status": "COMPLETE_TECHNICAL_COLLECTION_OF_INCOMPLETE_ARM",
+  "terminal_exit": 124,
+  "archives": [
+    {
+      "name": "GENERIC_RAW.tar.gz",
+      "bytes": 15881,
+      "sha256": "71b536f7e3f6ffec70882243d5e707ed132af3cf4d9ef2eced7089a395147812",
+      "members": [
+        {
+          "name": "summary.json",
+          "bytes": 89537,
+          "sha256": "4075f0a95b925ab0d155b43b864bcbe21ab8c570cb7681649d4b220c841f39db"
+        },
+        {
+          "name": "ADMISSION.json",
+          "bytes": 504,
+          "sha256": "5fed8fe60ecc5111783be68a8114b90d620fa92607cf49a7103a8c1a898edf7e"
+        },
+        {
+          "name": "INVOCATION_TIME.json",
+          "bytes": 110,
+          "sha256": "cca54fc42382eb8275382b6bb95ea82e466a3818c3e4adfadc860377b2bc2795"
+        }
+      ]
+    },
+    {
+      "name": "GENERIC_SUPERVISOR.tar.gz",
+      "bytes": 1979,
+      "sha256": "d53c280160c3a0fc4f72d19fd339f1ae0b783bde089185be4cf014d6cbca42f2",
+      "members": [
+        {
+          "name": "runner.sh",
+          "bytes": 1445,
+          "sha256": "7e136221406f302b069d5cd1fcdceef497b93816ef8d9a240e218d1f4aef2ff6"
+        },
+        {
+          "name": "task.log",
+          "bytes": 3469,
+          "sha256": "c9a1904762623c507d26afd4daa39e0bdd06d7f353e243c635dddd3faf05f095"
+        },
+        {
+          "name": "status",
+          "bytes": 7,
+          "sha256": "6da5b18878e110928643ebcc38dbb7552cf3a296eea56493e23edc2b93eecff8"
+        },
+        {
+          "name": "pid",
+          "bytes": 8,
+          "sha256": "365ad8c0538e97f755ef2f807cf81541120b194b0e70e5115ef7dbb7bdecb45a"
+        },
+        {
+          "name": "exit_code",
+          "bytes": 4,
+          "sha256": "ca2ebdf97d7469496b1f4b78958f9dc8447efdcb623953fee7b6996b762f6fff"
+        },
+        {
+          "name": "start_time",
+          "bytes": 11,
+          "sha256": "9c4399e90a0abdbca89987fca4dcc7bca7e48f3a4e711306a330701a90b56950"
+        }
+      ]
+    }
+  ],
+  "invocation_time": {
+    "wall_seconds": 1795.06,
+    "user_seconds": 1677.43,
+    "system_seconds": 117.28,
+    "peak_rss_kib": 761828,
+    "exit_code": 124
+  },
+  "observed_counts": {
+    "training_episodes": 4253,
+    "training_ticks": 85060,
+    "optimizer_steps": 4221,
+    "evaluation_episodes": 0,
+    "evaluation_ticks": 0
+  },
+  "final_checkpoint_present": false,
+  "primary_available": false,
+  "technical_reading": "TERM during loss.backward after4253 completed episodes,4221 completed optimizer steps; interrupted update prefix unmeasured. No final panel or trained checkpoint retained; no Generic retry.",
+  "support_command_wall_seconds": 0.022610291023738682
+}

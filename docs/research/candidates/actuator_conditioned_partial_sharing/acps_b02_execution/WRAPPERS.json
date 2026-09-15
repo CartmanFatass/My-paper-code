@@ -1,0 +1,14 @@
+[
+  {
+    "arm": "SHARED",
+    "path": "docs/research/candidates/actuator_conditioned_partial_sharing/acps_b02_execution/run_shared.sh",
+    "bytes": 524,
+    "sha256": "7caf516fd2134f3b9af42035bc1821b386fd67a9d871d58831785386d6427f8f"
+  },
+  {
+    "arm": "ACPS",
+    "path": "docs/research/candidates/actuator_conditioned_partial_sharing/acps_b02_execution/run_acps.sh",
+    "bytes": 518,
+    "sha256": "d9afb1b24ed9188eb51d4d96ed90c9842bed3642ba6840f8e508a4efb4e022c1"
+  }
+]

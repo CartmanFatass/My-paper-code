@@ -1,0 +1,16 @@
+{
+  "complete": true,
+  "read_mode": "torch.load weights_only=True; CPU; no model initialization/training/native calls",
+  "metadata_and_finite_tensors": true,
+  "parameter_counts": {
+    "V": {
+      "actor": 35159,
+      "critic": 34177
+    },
+    "Q": {
+      "actor": 35159,
+      "critic": 38657
+    }
+  },
+  "read_check_seconds": 0.01600000000325963
+}

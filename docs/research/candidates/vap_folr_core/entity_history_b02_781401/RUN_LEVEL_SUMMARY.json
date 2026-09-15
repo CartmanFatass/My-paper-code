@@ -1,0 +1,31 @@
+{
+  "unit": "caller-declared independent training run",
+  "inference": "descriptive only; no confidence interval or success classification",
+  "groups": [
+    {
+      "task": "FOLR_ENTITY_HISTORY_B02_H20",
+      "arm": "BANK",
+      "n": 1,
+      "mean": -5.483828125,
+      "sample_sd": null,
+      "min": -5.483828125,
+      "max": -5.483828125,
+      "runs": {
+        "781401": -5.483828125
+      }
+    },
+    {
+      "task": "FOLR_ENTITY_HISTORY_B02_H20",
+      "arm": "GENERIC_RETAIN",
+      "n": 1,
+      "mean": -0.6529687500000004,
+      "sample_sd": null,
+      "min": -0.6529687500000004,
+      "max": -0.6529687500000004,
+      "runs": {
+        "781401": -0.6529687500000004
+      }
+    }
+  ],
+  "paired_differences": []
+}

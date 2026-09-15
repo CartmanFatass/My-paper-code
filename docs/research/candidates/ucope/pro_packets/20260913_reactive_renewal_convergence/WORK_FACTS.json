@@ -1,0 +1,32 @@
+{
+  "status": "PROPOSED_NOT_LAUNCHED",
+  "training_episodes_per_fit": 2048,
+  "primitive_ticks_per_episode": 256,
+  "episodes_per_rollout": 2,
+  "epochs_per_rollout": 4,
+  "fresh_fits": 3,
+  "evaluation_worlds_per_panel": 64,
+  "evaluation_panels": 4,
+  "training_steps_per_fit": 524288,
+  "rollouts_per_fit": 1024,
+  "adam_calls_per_fit": 4096,
+  "total_training_native_steps": 1572864,
+  "total_adam_calls": 12288,
+  "evaluation_episodes": 256,
+  "evaluation_native_steps": 65536,
+  "total_native_team_steps": 1638400,
+  "nested_search_calls": 0,
+  "two_fit_R_G_H_narrower_alternative": {
+    "native_team_steps": 1097728,
+    "adam_calls": 8192
+  },
+  "new_empirical_invocations": 0,
+  "new_model_or_environment_instances": 0,
+  "historical_wall_seconds": {
+    "T_F_G_8703": 2108.73,
+    "L_F_8801_native": 1384.14,
+    "L_F_8801_total_charge": 1638.5729552
+  },
+  "prospective_complete_wall_seconds": null,
+  "note": "Arithmetic only; historical times are attributed to accepted intakes and are not new cost measurements or grants."
+}

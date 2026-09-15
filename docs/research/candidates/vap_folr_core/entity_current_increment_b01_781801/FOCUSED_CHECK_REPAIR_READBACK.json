@@ -1,0 +1,129 @@
+{
+  "repair_log": ".....                                                                    [100%]\n5 passed, 14 deselected in 2.22s\n",
+  "scratch_root": "/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801/temp/directions/vap_folr_core/test/current-increment-b01-20260914-dm-repair",
+  "root_resolved": "/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801/temp/directions/vap_folr_core/test/current-increment-b01-20260914-dm-repair",
+  "root_is_symlink": false,
+  "entries": [
+    {
+      "path": "test_synthetic_update_keeps_tacurrent",
+      "is_symlink": true,
+      "resolved": "/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801/temp/directions/vap_folr_core/test/current-increment-b01-20260914-dm-repair/test_synthetic_update_keeps_ta1",
+      "within": true
+    },
+    {
+      "path": "test_runner_follows_selected_a2",
+      "is_symlink": false,
+      "resolved": "/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801/temp/directions/vap_folr_core/test/current-increment-b01-20260914-dm-repair/test_runner_follows_selected_a2",
+      "within": true
+    },
+    {
+      "path": "test_runner_follows_selected_a0",
+      "is_symlink": false,
+      "resolved": "/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801/temp/directions/vap_folr_core/test/current-increment-b01-20260914-dm-repair/test_runner_follows_selected_a0",
+      "within": true
+    },
+    {
+      "path": "test_runner_follows_selected_acurrent",
+      "is_symlink": true,
+      "resolved": "/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801/temp/directions/vap_folr_core/test/current-increment-b01-20260914-dm-repair/test_runner_follows_selected_a2",
+      "within": true
+    },
+    {
+      "path": "test_synthetic_update_keeps_ta1",
+      "is_symlink": false,
+      "resolved": "/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801/temp/directions/vap_folr_core/test/current-increment-b01-20260914-dm-repair/test_synthetic_update_keeps_ta1",
+      "within": true
+    },
+    {
+      "path": "test_runner_follows_selected_a1",
+      "is_symlink": false,
+      "resolved": "/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801/temp/directions/vap_folr_core/test/current-increment-b01-20260914-dm-repair/test_runner_follows_selected_a1",
+      "within": true
+    },
+    {
+      "path": "test_synthetic_update_keeps_ta0",
+      "is_symlink": false,
+      "resolved": "/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801/temp/directions/vap_folr_core/test/current-increment-b01-20260914-dm-repair/test_synthetic_update_keeps_ta0",
+      "within": true
+    },
+    {
+      "path": "test_runner_follows_selected_a2/generic.json",
+      "is_symlink": false,
+      "resolved": "/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801/temp/directions/vap_folr_core/test/current-increment-b01-20260914-dm-repair/test_runner_follows_selected_a2/generic.json",
+      "within": true
+    },
+    {
+      "path": "test_runner_follows_selected_a2/output",
+      "is_symlink": false,
+      "resolved": "/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801/temp/directions/vap_folr_core/test/current-increment-b01-20260914-dm-repair/test_runner_follows_selected_a2/output",
+      "within": true
+    },
+    {
+      "path": "test_runner_follows_selected_a2/output/summary.json",
+      "is_symlink": false,
+      "resolved": "/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801/temp/directions/vap_folr_core/test/current-increment-b01-20260914-dm-repair/test_runner_follows_selected_a2/output/summary.json",
+      "within": true
+    },
+    {
+      "path": "test_runner_follows_selected_a2/output/final.pt",
+      "is_symlink": false,
+      "resolved": "/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801/temp/directions/vap_folr_core/test/current-increment-b01-20260914-dm-repair/test_runner_follows_selected_a2/output/final.pt",
+      "within": true
+    },
+    {
+      "path": "test_runner_follows_selected_a0/output",
+      "is_symlink": false,
+      "resolved": "/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801/temp/directions/vap_folr_core/test/current-increment-b01-20260914-dm-repair/test_runner_follows_selected_a0/output",
+      "within": true
+    },
+    {
+      "path": "test_runner_follows_selected_a0/output/summary.json",
+      "is_symlink": false,
+      "resolved": "/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801/temp/directions/vap_folr_core/test/current-increment-b01-20260914-dm-repair/test_runner_follows_selected_a0/output/summary.json",
+      "within": true
+    },
+    {
+      "path": "test_runner_follows_selected_a0/output/final.pt",
+      "is_symlink": false,
+      "resolved": "/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801/temp/directions/vap_folr_core/test/current-increment-b01-20260914-dm-repair/test_runner_follows_selected_a0/output/final.pt",
+      "within": true
+    },
+    {
+      "path": "test_synthetic_update_keeps_ta1/final.pt",
+      "is_symlink": false,
+      "resolved": "/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801/temp/directions/vap_folr_core/test/current-increment-b01-20260914-dm-repair/test_synthetic_update_keeps_ta1/final.pt",
+      "within": true
+    },
+    {
+      "path": "test_runner_follows_selected_a1/generic.json",
+      "is_symlink": false,
+      "resolved": "/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801/temp/directions/vap_folr_core/test/current-increment-b01-20260914-dm-repair/test_runner_follows_selected_a1/generic.json",
+      "within": true
+    },
+    {
+      "path": "test_runner_follows_selected_a1/output",
+      "is_symlink": false,
+      "resolved": "/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801/temp/directions/vap_folr_core/test/current-increment-b01-20260914-dm-repair/test_runner_follows_selected_a1/output",
+      "within": true
+    },
+    {
+      "path": "test_runner_follows_selected_a1/output/summary.json",
+      "is_symlink": false,
+      "resolved": "/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801/temp/directions/vap_folr_core/test/current-increment-b01-20260914-dm-repair/test_runner_follows_selected_a1/output/summary.json",
+      "within": true
+    },
+    {
+      "path": "test_runner_follows_selected_a1/output/final.pt",
+      "is_symlink": false,
+      "resolved": "/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801/temp/directions/vap_folr_core/test/current-increment-b01-20260914-dm-repair/test_runner_follows_selected_a1/output/final.pt",
+      "within": true
+    },
+    {
+      "path": "test_synthetic_update_keeps_ta0/final.pt",
+      "is_symlink": false,
+      "resolved": "/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801/temp/directions/vap_folr_core/test/current-increment-b01-20260914-dm-repair/test_synthetic_update_keeps_ta0/final.pt",
+      "within": true
+    }
+  ],
+  "receipt_exists": false
+}

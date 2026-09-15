@@ -1,0 +1,242 @@
+{
+  "recorded_utc": "2026-09-13T05:16:51.080640+00:00",
+  "request_id": "2026-09-12-mgtap-unequal-exposure-investment-01",
+  "fixed_task_sha": "a52d4dcb43625dc5ef1f009c9f578a20089c5d14",
+  "fixed_task_path": "docs/research/portfolio/pro_packets/20260912_mgtap_unequal_exposure_investment/delivery/TASK.md",
+  "task_git_bytes": 27694,
+  "task_sha256": "003a6858e00f898949394f6a7316389e44eac7edd89597a68226511b56bfdfbe",
+  "prompt_bytes": 1925,
+  "prompt_sha256": "f6e468abc5df9ef6751c70b11891e8ab2813a722fcb8430c65cb5236ebf9aef0",
+  "reference_count": 21,
+  "reference_byte_verification": [
+    {
+      "path": "docs/research/portfolio/pro_packets/20260912_mgtap_unequal_exposure_investment/SCIENCE_BRIEF.md",
+      "commit_sha": "e0196a1e1c9aa53c2dc3e978ab199c4adfe84eac",
+      "git_bytes": 14154,
+      "sha256": "4ab446b60fa0add47257fa3518c0849e39b48365194ef815681a719ed78c593b",
+      "observed_remote_containing_refs": [
+        "origin/codex/portfolio"
+      ]
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260912_mgtap_unequal_exposure_investment/FACTS.json",
+      "commit_sha": "e0196a1e1c9aa53c2dc3e978ab199c4adfe84eac",
+      "git_bytes": 25001,
+      "sha256": "2ee19cb738f31d15cddec38500786e17d8515790898cd4944656c5925bd76add",
+      "observed_remote_containing_refs": [
+        "origin/codex/portfolio"
+      ]
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260912_mgtap_unequal_exposure_investment/PREPARATION_INTAKE.md",
+      "commit_sha": "e0196a1e1c9aa53c2dc3e978ab199c4adfe84eac",
+      "git_bytes": 4344,
+      "sha256": "469b87d14bf7d44864c7152ed03260221724e7adcef36e8fce43373aa736ede5",
+      "observed_remote_containing_refs": [
+        "origin/codex/portfolio"
+      ]
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260912_mgtap_unequal_exposure_investment/OWNER_PACKET.json",
+      "commit_sha": "e0196a1e1c9aa53c2dc3e978ab199c4adfe84eac",
+      "git_bytes": 3678,
+      "sha256": "bfac56ab3b8607e7cbc6924f203cb8e76b2a6319877446c9f2cab63b42c88dc3",
+      "observed_remote_containing_refs": [
+        "origin/codex/portfolio"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260912_cond512_dense768_use/INVESTMENT_NEED.md",
+      "commit_sha": "e4aa3566ff1f5b3163a168225dc0d6172e2a093e",
+      "git_bytes": 9795,
+      "sha256": "eb18321a99f79ecd71c3415dc47e6140315c60ee9cd787913d8ddea9b35531e3",
+      "observed_remote_containing_refs": [
+        "origin/codex/mgtap"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260912_cond512_dense768_use/OWNER_INVESTMENT_PACKET.json",
+      "commit_sha": "e4aa3566ff1f5b3163a168225dc0d6172e2a093e",
+      "git_bytes": 3489,
+      "sha256": "25a1a36fd885a2f66820b90180f4db86352f7b8a0dff323f0581904b08d1612d",
+      "observed_remote_containing_refs": [
+        "origin/codex/mgtap"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260912_cond512_dense768_use/INTAKE.md",
+      "commit_sha": "e4aa3566ff1f5b3163a168225dc0d6172e2a093e",
+      "git_bytes": 11061,
+      "sha256": "8d760a9fe8f32e3ebd0f28a93bd88f011971f30665bae05bd02c9bbd58708a68",
+      "observed_remote_containing_refs": [
+        "origin/codex/mgtap"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260912_cond512_dense768_use/archive/RESPONSE.md",
+      "commit_sha": "e4aa3566ff1f5b3163a168225dc0d6172e2a093e",
+      "git_bytes": 34652,
+      "sha256": "18c850a28efe3098e356972a15655bea3eaa2ed5f05f1c6d767d8763d2fd8475",
+      "observed_remote_containing_refs": [
+        "origin/codex/mgtap"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/DIRECTION.md",
+      "commit_sha": "e4aa3566ff1f5b3163a168225dc0d6172e2a093e",
+      "git_bytes": 57511,
+      "sha256": "fa146d39d3a221c0ac7fce973bfc3b2106f5dde6fa3298ad1658783a8cc88f15",
+      "observed_remote_containing_refs": [
+        "origin/codex/mgtap"
+      ]
+    },
+    {
+      "path": "AGENTS.md",
+      "commit_sha": "34382425abd4bdda9bcb71847c0f016d9af9483a",
+      "git_bytes": 46790,
+      "sha256": "e1be4a8a42238af2b050217758ffd253c0a352406d5ca89302f1caa0b865ab34",
+      "observed_remote_containing_refs": [
+        "origin/HEAD -> origin/main",
+        "origin/codex/portfolio",
+        "origin/main"
+      ]
+    },
+    {
+      "path": "docs/project/ROOT_OPERATIONS.md",
+      "commit_sha": "34382425abd4bdda9bcb71847c0f016d9af9483a",
+      "git_bytes": 14160,
+      "sha256": "3c3a509434b4b4b2253710478f78246f2c3109af9655f6d85c8e809da976d5a0",
+      "observed_remote_containing_refs": [
+        "origin/HEAD -> origin/main",
+        "origin/codex/portfolio",
+        "origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "commit_sha": "34382425abd4bdda9bcb71847c0f016d9af9483a",
+      "git_bytes": 45107,
+      "sha256": "fcebbdf7e487ee521d67ef6bb77bcaef6916aab524504379073525696bc4c7d1",
+      "observed_remote_containing_refs": [
+        "origin/HEAD -> origin/main",
+        "origin/codex/portfolio",
+        "origin/main"
+      ]
+    },
+    {
+      "path": "docs/project/ENGINEERING_SCOPE_SPEC.md",
+      "commit_sha": "34382425abd4bdda9bcb71847c0f016d9af9483a",
+      "git_bytes": 20851,
+      "sha256": "e5f1a651830ca447acd4302fe8b678fb7a425d15a364b189041ccf23c708baaa",
+      "observed_remote_containing_refs": [
+        "origin/HEAD -> origin/main",
+        "origin/codex/portfolio",
+        "origin/main"
+      ]
+    },
+    {
+      "path": "docs/project/MARL_RUNTIME_ENGINEERING_SPEC.md",
+      "commit_sha": "34382425abd4bdda9bcb71847c0f016d9af9483a",
+      "git_bytes": 24094,
+      "sha256": "d40a7f14f3d67919bd6693d53e4e25b3a5b3fe5877c22d556a27b7f45d3cb043",
+      "observed_remote_containing_refs": [
+        "origin/HEAD -> origin/main",
+        "origin/codex/portfolio",
+        "origin/main"
+      ]
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "commit_sha": "34382425abd4bdda9bcb71847c0f016d9af9483a",
+      "git_bytes": 7819,
+      "sha256": "c1f7d6c68fcec55de48ea555346d5d65af8d311e28502be43a2b05436a174247",
+      "observed_remote_containing_refs": [
+        "origin/HEAD -> origin/main",
+        "origin/codex/portfolio",
+        "origin/main"
+      ]
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/02_MARL.md",
+      "commit_sha": "34382425abd4bdda9bcb71847c0f016d9af9483a",
+      "git_bytes": 4038,
+      "sha256": "4dae3729dc54db39599a689712fa1f6ccdb80d5fd2f08e96757bcf8686e6e0b9",
+      "observed_remote_containing_refs": [
+        "origin/HEAD -> origin/main",
+        "origin/codex/portfolio",
+        "origin/main"
+      ]
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+      "commit_sha": "34382425abd4bdda9bcb71847c0f016d9af9483a",
+      "git_bytes": 4252,
+      "sha256": "99b7e727a890d4e93a64b5c0f44fe588e383b5de56f2da663fb3f864c6d8293c",
+      "observed_remote_containing_refs": [
+        "origin/HEAD -> origin/main",
+        "origin/codex/portfolio",
+        "origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/portfolio/PORTFOLIO.md",
+      "commit_sha": "34382425abd4bdda9bcb71847c0f016d9af9483a",
+      "git_bytes": 11525,
+      "sha256": "28ebdb84b1ce5e2c59ac9bc5ae5db80c8b6215ad25ae889936bd39f8a0639c51",
+      "observed_remote_containing_refs": [
+        "origin/HEAD -> origin/main",
+        "origin/codex/portfolio",
+        "origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/portfolio/EXPERIMENT_TRACKING.md",
+      "commit_sha": "34382425abd4bdda9bcb71847c0f016d9af9483a",
+      "git_bytes": 3306,
+      "sha256": "900aaae15fea56f717e4ad6373efb185e894ca501ef2d12bedd53a6524a384ea",
+      "observed_remote_containing_refs": [
+        "origin/HEAD -> origin/main",
+        "origin/codex/portfolio",
+        "origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/portfolio/decisions/2026-09-12-post-kelu-marginal-investment.md",
+      "commit_sha": "34382425abd4bdda9bcb71847c0f016d9af9483a",
+      "git_bytes": 5148,
+      "sha256": "eb9bf4a35936956654a7670f7f91ab2a8f635322b63e387d846663096b403372",
+      "observed_remote_containing_refs": [
+        "origin/HEAD -> origin/main",
+        "origin/codex/portfolio",
+        "origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/portfolio/ORACLE_RECOMMENDATIONS_20260911.md",
+      "commit_sha": "e0196a1e1c9aa53c2dc3e978ab199c4adfe84eac",
+      "git_bytes": 17312,
+      "sha256": "147b28e4d856dbbc3156d0ce876ac42b11e65f3b34e3a42d8716f0766136814d",
+      "observed_remote_containing_refs": [
+        "origin/codex/portfolio"
+      ]
+    }
+  ],
+  "input_sha": "e0196a1e1c9aa53c2dc3e978ab199c4adfe84eac",
+  "operator": "01a095ca-7b4a-7940-8acf-fca1b52c784d",
+  "source": "01a095c2-e06a-7a92-984f-2dca23d77d57",
+  "parent": "01a095b7-850f-7401-ad4e-5e4320d285f1",
+  "binding": "portfolio:cross_direction",
+  "conversation": "6a9c109e-b264-83e8-a78b-f9ea1b767b7b",
+  "relay": "01a095ca-8676-74e1-b78c-ea459d41e905",
+  "issue_readback": "Issue17 exists and open; gh api fresh read during this publication",
+  "ready_handoff": "Bound after TASK push, dispatch_required true; no author Send or experiment",
+  "owner_proposal": "20260912-root-023 with no auto_applied; audit#L162",
+  "branch_worktree": "codex/portfolio at C:/Projects/HMASD-worktrees/codex-portfolio",
+  "new_scope_only": [
+    "metric_ground_transport_allocation"
+  ],
+  "preserved_other_request": "ACPS c5d433fb3482a2bd466a84695d8ad5c7d581bc37 TASK and f63980ab1acdcf9fad0ec8b1ac9770c864a6b988 response bytes verified unchanged",
+  "root_dispatch_bytes": 188,
+  "root_dispatch_sha256": "5e7c95709f003fcdeb199f7701de1b3cef91623173b4639fdb35c2c3587945e1",
+  "prompt_field": "transport_request.prompt (provider payload); dispatch_prompt is the separate Root-to-Transport instruction"
+}

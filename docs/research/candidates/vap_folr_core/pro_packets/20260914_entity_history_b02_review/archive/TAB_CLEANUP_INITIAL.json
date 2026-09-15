@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "event_id": "folr-b02-transport-cleanup-20260914-01",
+  "request_id": "2026-09-14-folr-entity-history-b02-result-review-01",
+  "native_task_id": "01a09e7a-4f2f-77e3-8098-4e160c5ebc79",
+  "parent_thread_id": "01a09e16-f7b1-7e60-83a0-ba2a7cd969bc",
+  "conversation_binding_key": "em:vap_folr_core:convergence",
+  "conversation_id": "6aa18137-9d88-83e8-a01f-46630813faf8",
+  "owned_tab_id": "da345b8d-c537-4d0a-b025-f7fe14b60513",
+  "observed_at": "2026-09-14T06:22:52Z",
+  "observation": {
+    "browser_count": 0,
+    "tab_count": 0,
+    "owned_tab_present": false
+  },
+  "outcome": "ALREADY_CLOSED",
+  "action": "none",
+  "scope": "Only the exact owned non-protected tab was reconciled; no query, Send, navigation, or conversation change was performed.",
+  "immutable_artifacts_preserved": true
+}

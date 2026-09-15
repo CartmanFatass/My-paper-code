@@ -1,0 +1,6 @@
+{
+  "exit_code": 0,
+  "elapsed_seconds": 0.39100000000325963,
+  "stdout": "{\n  \"observed_utc\": \"2026-09-14T08:25:03.605627+00:00\",\n  \"path\": \"/home/wu/hmasd-worktrees/folr-entity-history-b03-781501-b257dcb1d/temp/directions/vap_folr_core/exp/entity_history_b03_781501/GENERIC/ADMISSION.json\",\n  \"exists\": true,\n  \"contents\": {\n    \"assessed_at\": \"2026-09-14T08:24:20.801708Z\",\n    \"available_physical_bytes\": 15631683584,\n    \"captured_at\": \"2026-09-14T08:24:20.801307Z\",\n    \"cgroup_headroom_bytes\": null,\n    \"cgroup_memory_current_bytes\": null,\n    \"cgroup_memory_max_bytes\": null,\n    \"effective_available_bytes\": 15631683584,\n    \"effective_floor_pass\": true,\n    \"failure_reasons\": [],\n    \"measurement_source\": \"/proc/meminfo\",\n    \"minimum_available_bytes\": 4294967296,\n    \"passed\": true,\n    \"physical_floor_pass\": true,\n    \"schema_version\": 1\n  }\n}\n",
+  "stderr": ""
+}

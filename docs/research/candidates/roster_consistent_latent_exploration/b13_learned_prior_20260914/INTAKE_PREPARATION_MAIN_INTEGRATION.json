@@ -1,0 +1,25 @@
+{
+  "event": "RCLE_PORTFOLIO_ACCEPTED_AND_B13_INTAKE_PREPARATION_ACCEPTED_20260914",
+  "time_utc": "2026-09-14T08:37:45.634669+00:00",
+  "main_start_sha": "c07444a26531edb55f18fc9c706d25d77cbe1eb0",
+  "source_commits": [
+    "2d5432792e521edbb15ebdc9d43a49feb2cb0a9a",
+    "adaeeda2b019232b594149deca9807bdc489c58e"
+  ],
+  "integrated_paths": [
+    ".codex/hmasd-dm-sessions.toml",
+    "docs/research/candidates/roster_consistent_latent_exploration/b13_learned_prior_20260914/ANALYZE_RECORDED.py",
+    "docs/research/candidates/roster_consistent_latent_exploration/b13_learned_prior_20260914/ENGINEERING.md",
+    "docs/research/candidates/roster_consistent_latent_exploration/b13_learned_prior_20260914/INTAKE_CODE_REVIEW.md",
+    "docs/research/candidates/roster_consistent_latent_exploration/b13_learned_prior_20260914/LAUNCH_PREPARATION.json",
+    "docs/research/candidates/roster_consistent_latent_exploration/b13_learned_prior_20260914/PREDICTIONS.md",
+    "docs/research/candidates/roster_consistent_latent_exploration/b13_learned_prior_20260914/REMOTE_PREPARATION.json",
+    "docs/research/candidates/roster_consistent_latent_exploration/b13_learned_prior_20260914/SUPERVISOR_COMMAND.txt",
+    "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260914_e01_portfolio_direction/PEER_DELTA_AFTER_SEND.md",
+    "docs/research/portfolio/PORTFOLIO.md",
+    "docs/research/portfolio/audit/2026-09-14.md"
+  ],
+  "scope": "Accepted conditional intake/command/source preparation, new direct peer context and actual Transport producer status. No empirical run or Portfolio verdict claimed; accepted prompt unchanged.",
+  "producer_fact_source": "Transport compact wait revision83; no full response or provider IDs supplied yet",
+  "other_directions_preserved": true
+}

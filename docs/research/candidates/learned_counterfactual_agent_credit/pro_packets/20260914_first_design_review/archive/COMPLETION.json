@@ -1,0 +1,27 @@
+{
+  "request_id": "lcac-first-design-review-20260914-01",
+  "recorded_utc": "2026-09-14T02:30:49.882592+00:00",
+  "status": "COMPLETE",
+  "operation_id": "e1355881-4a7f-4a79-8fee-86fbd01f88dd",
+  "source_parent": "/root",
+  "operator": "/root/lcac_first_design_transport",
+  "codex_dm_task": "01a09da1-6639-7fd0-bedd-9e006db051a9",
+  "send_click_count": 1,
+  "registry_state": "ARCHIVED",
+  "native_final_received": true,
+  "dedicated_tab": "be9b8ab1-6780-45b7-831c-0a9f7cb646cc",
+  "tab_lifecycle": "CLOSED",
+  "delivery_commit": "b98a5f084107143fc8650b34a3ff8b06312002fe",
+  "response_bytes": 11986,
+  "response_lines_read_by_dm": 51,
+  "response_sha256": "04a0eb8bd8cb3874a904921913e343ed40ee96fb3a2e2e5a43e0e501e3eebbf9",
+  "dm_decision": "CONTINUE; select new256/32 scalar-Q versus V B01 for implementation, no experiment launched",
+  "current_batch_scientific_exposure": {
+    "models": 0,
+    "native_transitions": 0,
+    "optimizer_calls": 0,
+    "evaluation_episodes": 0
+  },
+  "cost": "support/provider/lifetime UNKNOWN; no additional paid capacity",
+  "archive_representation_correction": "Original Transport JSON sidecars contain unescaped Windows paths. Exact originals preserved as *.json.raw.txt; corresponding JSON files encode those same path strings correctly. Full response/short receipt and accepted TASK/REQUEST/HANDOFF are unchanged."
+}

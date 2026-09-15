@@ -1,0 +1,29 @@
+{
+  "status": "CONDITIONAL_PREPARATION_ONLY; no remote materialization, admission, accepted process or scientific exposure",
+  "prepared_at_utc": "2026-09-14T08:28:53.266978+00:00",
+  "proposed_launch_sha": "cf4d9bd93ff9eb255800223d95de170b68315ba6",
+  "accepted_code_sha": "91811c61cff2617f0b691c793dd40a7df76c5bdb",
+  "handle": "rcle-b13-s33-cf4d9bd93",
+  "execution_node": "wsl_4070",
+  "ssh_target": "hmasd-wsl-node",
+  "worktree": "/home/wu/hmasd-worktrees/rcle-b13-cf4d9bd93",
+  "output": "/home/wu/hmasd-worktrees/rcle-b13-cf4d9bd93/temp/directions/roster_consistent_latent_exploration/exp/b13_seed33",
+  "control": "/home/wu/hmasd-worktrees/rcle-b13-cf4d9bd93/temp/directions/roster_consistent_latent_exploration/exp/b13_control",
+  "supervisor": "/usr/local/bin/agent-task",
+  "outer_argv_count": 4,
+  "command_sha256": "eb7f5b4c764dc1112a7befc49afa884eca103f33fa8e15826a9b53037bd70000",
+  "static_check": "shlex split/join preserves exactly four outer arguments and complete inner admission && gdb chain; no execution",
+  "selection_dependency": "Read and apply actual Portfolio direction answer; if it selects unchanged B13, this already-published source is eligible after fresh source/admission checks. Any relevant amendment is bound before a run.",
+  "finite_scientific_exposure": {
+    "started_invocations": 1,
+    "seed": 33,
+    "training_episodes": 65536,
+    "evaluation_episodes": 2560,
+    "native_ticks": 4358144,
+    "native32_batches": 2128,
+    "adam_steps": 1024
+  },
+  "operational_watchdog_seconds": 1800,
+  "watchdog_scope": "Approximate DM operational plan, prospectively revisable; not600s support cap or scientific endpoint.",
+  "collection": "After terminal, archive complete b13_seed33, b13_control and same supervisor facts; hash archive/members, run accepted retained-byte analyzer with this full launch SHA; preserve partials/failure/UNKNOWN costs."
+}

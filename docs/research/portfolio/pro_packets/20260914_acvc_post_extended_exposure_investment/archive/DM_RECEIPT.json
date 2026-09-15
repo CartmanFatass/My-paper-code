@@ -1,0 +1,19 @@
+{
+  "request_id": "2026-09-14-acvc-post-extended-exposure-investment-01",
+  "delivery_commit": "fb321b5e8b888b88e0715765d0082efb4e96bbfc",
+  "blob": "170edad2046802b4d8e8d21136bacc6b753debc3",
+  "sha256": "662dc0eea1ca9fe00ddd09476a61eb45bcdebd2a487bbe39901cb623677433cf",
+  "bytes": 14786,
+  "lines": 81,
+  "complete_DM_read": true,
+  "archive_equals_git_blob": true,
+  "comment_id": 5673270939,
+  "operation_id": "4d2ccd35-6f8b-4aa1-b4da-bdf3ba5e3508",
+  "user_message_id": "1f2ac113-b152-4349-ad92-adcd7ff77d83",
+  "assistant_message_id": "911429ec-4c80-4892-84b2-b5879b7f8418",
+  "send_count": 1,
+  "registry": "ARCHIVED/RECEIPT; binding/mirror agree, native_final SENT",
+  "initial_pre_send_failure": "VERIFIED_NONACCEPTANCE chatgpt_target_menu_open_unconfirmed, same request/prompt/binding/idempotency repaired before unique Send",
+  "decision": "CONTINUE/MEDIUM/recasts2, exactly one new final-only1e-4/3e-4 B, two fresh4096 C-only fits, six private64-world final panels",
+  "new_scientific_work_performed_at_intake": 0
+}

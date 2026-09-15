@@ -1,0 +1,12 @@
+{
+  "source_sha": "c7eb5986f38d42f24fb0d9749c705c975aa40b0d",
+  "cwd": "/home/wu/hmasd-worktrees/rcle-b11-d1-c7eb5986f",
+  "out": "/home/wu/hmasd-worktrees/rcle-b11-d1-c7eb5986f/temp/directions/roster_consistent_latent_exploration/exp/d1",
+  "control": "/home/wu/hmasd-worktrees/rcle-b11-d1-c7eb5986f/temp/directions/roster_consistent_latent_exploration/exp/d1_control",
+  "handle": "rcle-b11-d1-c7eb5986f",
+  "node": "wsl_4070",
+  "status": "READY_NOT_LAUNCHED",
+  "science": "synthetic runtime diagnostic only;192updates;0scientificendpoints",
+  "monitor": "/root/monitor_rcle_b11",
+  "independent_review": "E05 no material finding; diagnostic only, no reproduction implies no validity/safety claim"
+}

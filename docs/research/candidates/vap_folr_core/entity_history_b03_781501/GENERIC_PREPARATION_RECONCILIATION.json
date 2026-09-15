@@ -1,0 +1,6 @@
+{
+  "exit_code": 0,
+  "elapsed_seconds": 0.375,
+  "stdout": "{\n  \"observed_utc\": \"2026-09-14T08:20:34.599620+00:00\",\n  \"out_exists\": true,\n  \"files\": [],\n  \"matching_processes\": [\n    {\n      \"pid\": \"3666477\",\n      \"cmdline\": \"git -C /home/wu/hmasd-worktrees/folr-entity-history-b03-781501-b257dcb1d show b257dcb1d7578a057afa9b4bdd7c7ff74ad8e24f:docs/research/candidates/vap_folr_core/entity_history_b03_781501/GENERIC.sh \",\n      \"stat\": \"3666477 (git) S 3666452 3666451 3666451 0 -1 4194304 216 0 38 0 0 0 0 0 20 0 1 0 82434946 11882496 1320 18446744073709551615 99877433016320 99877436175617 140730472921712 0 0 0 0 0 0 1 0 0 17 9 0 0 0 0 0 99877436871728 99877436957408 99877671464960 140730472926541 140730472926736 140730472926736 140730472927211 0\\n\",\n      \"cwd\": \"/home/wu/hmasd-worktrees/folr-entity-history-b03-781501-b257dcb1d\"\n    }\n  ],\n  \"supervisor_status\": {\n    \"returncode\": 0,\n    \"stdout\": \"{\\\"task\\\": \\\"folr-b03-781501-generic\\\", \\\"status\\\": \\\"not_found\\\"}\\n\",\n    \"stderr\": \"\"\n  }\n}\n",
+  "stderr": ""
+}

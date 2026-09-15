@@ -1,0 +1,2 @@
+# Preserve exact Transport receipt bytes, including native CRLF captures.
+*.json -text -whitespace

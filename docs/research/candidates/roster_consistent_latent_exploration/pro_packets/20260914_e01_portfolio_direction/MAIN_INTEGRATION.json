@@ -1,0 +1,26 @@
+{
+  "event": "RCLE_E01_FULL_REVIEW_PORTFOLIO_REPORT_20260914",
+  "source_commits": [
+    "93bb8ffcd4de430a722bbb6b84e9733f40d26782",
+    "6f13c2b2fa713414e777190b7bcfbec11243b61a",
+    "08c012cb080204419b7ec63e844d87d09fd920f2"
+  ],
+  "main_start_sha": "e49af7704c95c6efee4917818c9d73a46ac6cd62",
+  "integrated_paths": [
+    "docs/research/candidates/roster_consistent_latent_exploration/DIRECTION.md",
+    "docs/research/candidates/roster_consistent_latent_exploration/RCLE_FIXED_MODAL_REUSE_E01_INTAKE_20260914.md",
+    "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260914_e01_portfolio_direction/OWNER_PACKET.json",
+    "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260914_e01_portfolio_direction/PROPOSED_COUNTS.json",
+    "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260914_e01_portfolio_direction/REFERENCE_PUBLICATION.json",
+    "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260914_e01_portfolio_direction/REPORT.md",
+    "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260914_e01_portfolio_direction/SOURCE_MANIFEST.json",
+    "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260914_fixed_modal_e01_review/archive/RESPONSE.md",
+    "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260914_fixed_modal_e01_review/archive/TRANSPORT_FACTS.json",
+    "docs/research/portfolio/audit/2026-09-14.md",
+    "docs/research/portfolio/owner/inbox/2026-09-14/20260914-rcle-001.json"
+  ],
+  "audit_merge": "Only the source RCLE recommendation row appended; other main rows preserved.",
+  "registry_scope": "RCLE row and actual transaction fields only; FOLR active Portfolio claim unchanged.",
+  "owner_console_note": "Canonical tool path initially wrote its own untracked main owner item before this mutex; exact output was preserved in author branch and integrated here. Future direction item creation uses the direction-local tool path.",
+  "time_utc": "2026-09-14T07:22:14.774963+00:00"
+}

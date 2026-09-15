@@ -1,0 +1,122 @@
+{
+  "caller_role": "em",
+  "workflow_node": "em_convergence",
+  "request_id": "2026-09-11-acvc-post-three-fresh-convergence-01",
+  "source_thread_id": "01a08eda-0ae0-7123-aafc-619ab2addd1a",
+  "parent_thread_id": "01a07249-b095-7821-8ce2-e9c32ba85267",
+  "direction_id": "acvc",
+  "repository": "CartmanFatass/My-paper-code",
+  "repository_url": "https://github.com/CartmanFatass/My-paper-code",
+  "commit_or_ref": "3c7f0976e1116b43e3e42a06ca03c25a8045225c",
+  "execution_mode": "REUSE_SINGLETON",
+  "delivery_mode": "github_delivery",
+  "reset_invalid_provider_context": false,
+  "github_delivery": {
+    "branch": "codex/acvc",
+    "base_sha": "3c7f0976e1116b43e3e42a06ca03c25a8045225c",
+    "response_path": "docs/research/candidates/acvc/pro_packets/20260911_post_three_fresh_convergence/archive/RESPONSE.md",
+    "issue_url": "https://github.com/CartmanFatass/My-paper-code/issues/14"
+  },
+  "scientific_question": "Select the next useful ACVC claim and its smallest sufficient evidence after three favorable fresh-fit observations: one specifically bounded B, preparation toward a provisional single-task C-BENCH claim, or a narrow hold. Read SCIENCE_BRIEF and FACTS first. I recommend the claim-design route, not local C promotion: another positive B would add recurrence evidence but would not itself define a conclusion-bearing population or uncertainty. Give the strongest legitimate case for one more B and for holding; the direction node decides, and it may reject this recommendation.\n\nFor fresh DENSE masters8921/8931/8961, F-C is +0.1229328560/+0.0915279844/+0.1414322041 J and F-dwell is +0.0877164686/+0.0638998669/+0.0944113176. Dwell-C is also positive, +0.0352163875/+0.0276281175/+0.0470208865. Preserve the two separate primary comparisons and the0.01 J=2.56 S scale. The three independent completed training histories have64 paired initial worlds per rule, conditional evaluation SEs and no training-population interval. F-dwell has5/11/5 adverse worlds, including -0.0793154814 on8961. Retained selected8201/8202 E01 panels contain zero new fitting and remain separate development evidence. Preparation failures add no fit. All outcomes of the outcome-informed recipe remain visible; none becomes frozen confirmation retroactively.\n\nKeep the fixed five-UAV/fifty-user native host and exact DENSE512x256/1024-Adam fitting law. Fit C's sampled-proposal actor once; evaluate the final checkpoint regardless of attractiveness. C sends its sampled proposal. On its own accepted private-history cue, F reverses its own previous actual displacement. Dwell sends zero on its own predicate and otherwise its own proposal; it borrows neither F's event times nor dose. Arms own their proposal streams, recurrence, actual-command feedback, observations, cue histories and joint trajectories. The legitimate estimand compares whole fixed execution packages, not isolated retrace, history necessity, matched-cue or equal-dose effects. Trace local partial observation/other-agent motion to the action and native team reward; no global critic information enters actor decisions.\n\nThe proposed provisional claim is that the fixed F package improves expected endpoint native J by more than0.01 against each named comparator under independently generated fresh training histories plus the declared native world/proposal law. Decide whether that bounded population is useful and defensible. SCIENCE_BRIEF offers five new fits x64 paired worlds/rule as a concrete design to assess, not a required count, power finding or authorized run. If choosing this route, select a finite useful design or narrower population; specify the two estimands, actual independent unit and weights, development/final selection boundary, uncertainty and its assumptions, primary/conjunction reading, failure/completeness/stop rules, and permissible wording. Three to five seeds or all-positive means do not guarantee sufficiency; episode-only resampling cannot estimate training uncertainty. The competent comparison is to the named attained C and beneficial own-predicate dwell, not a tuned best-general-MARL baseline.\n\nIf choosing another B, identify the concrete next decision changed by one more unscreened fit's separate UP/WITHIN/DOWN or split contrasts, with finite work and no run-until-positive ladder. If choosing a hold, name its narrow boundary and concrete revisit while retaining the favorable package evidence and unresolved training variation. No exact upper, all-support census, mechanism diagnosis, positive pilot, oracle retuning, held-out transfer task, best-of-many search or seed quota is a universal prerequisite. Tuned same-information native headroom is absent, not zero or a reason to stop by rule. Apply empirical-spec11.8-11.10 to the question itself; requirements follow the particular claim.\n\nMachine-generated current exposure: scientific_invocations=0; model_constructions=0; model_loads=0; scientific_rng_masters=0; native_ticks=0; training_episodes=0; optimizer_updates=0; evaluation_episodes=0; diagnostic_trajectories=0; search_candidates=0. One future unchanged unit would be512x256 training plus3x64x256 evaluation=180224 ticks,704 episodes,1024 Adam calls, nine top-level model constructions, three post-fit loads,2621440 recurrent replay actor rows and up to6553600 coordinate-pair checks. Five would be901120 ticks,3520 episodes,5120 Adam calls,45 constructions,15 loads and up to32768000 pair checks. These are intrinsic full-law counts, not added validation; no nested search exists. Historical whole commands168.37/166.05/175.58 seconds and conservative native charges172/169/178 are scale anchors only. Full future costs are unknown. Include source preparation, changed-risk checks, publication, observation, collection and integration/cleanup without inventing a cost experiment or transferring old caps. Unmeasured historical support overhead stays unknown without negating independently trustworthy native returns.\n\nThis is exactly one original-Convergence question and complete intake, with zero implementation and numerical allowance under the pinned Portfolio decision. It funds no fourth fit, changed rule, diagnostic, C freeze, Innovator dispatch, new consultation ladder or formal UAV entry. A selected future design still needs its actual later direction/Innovator and investment authority; this task ends at your one decision/full intake or exact gap. Preserve ACTIVE/MEDIUM, recasts2/lowest contention, ended T/G and old-host findings. Root owns subsequent execution/Portfolio routing. This request changes no completed reading rule, specification, lifecycle, priority, registration or frozen invocation budget.",
+  "deliverable": "Write a conclusion-first original-Convergence decision selecting one bounded next B, one narrowly specified C-BENCH claim-design route, or a narrow hold. Assess the strongest alternatives and retained contrary evidence. State the selected claim/population, smallest useful future evidence and independent-unit uncertainty/selection boundaries, intrinsic work factors and unknown costs, allowed wording and revisit/stop. No current implementation, numerical allowance, C freeze, extra consultation or Portfolio disposition follows. Return clear scientific prose with actual fixed sources; do not use a prescribed response schema.",
+  "claim_ceiling": "Direction-local decision from three complete fresh-fit B observations and separately retained selected-base evidence. At most a bounded next-question/claim design or narrow hold. No current stable population superiority, pure-retrace/history necessity, dose matching, best-possible baseline, headroom, transfer/safety/real-UAV, C freeze, lifecycle/priority or Portfolio investment claim.",
+  "reference_files": [
+    {
+      "path": "docs/research/candidates/acvc/pro_packets/20260911_post_three_fresh_convergence/SCIENCE_BRIEF.md",
+      "purpose": "Read first: full three-way choice, proposed population/design, contrary evidence, actual MARL path, work and zero-exposure boundary.",
+      "provenance": "Current original-DM preparation; recommendation only, no C card or run allocation"
+    },
+    {
+      "path": "docs/research/candidates/acvc/pro_packets/20260911_post_three_fresh_convergence/FACTS.json",
+      "purpose": "Read with brief: extracted per-fit primary/secondary results, adverse worlds, retained-vs-fresh distinction, exact known count arithmetic and missing costs.",
+      "provenance": "Read-only extraction of accepted committed records at3643a734223efd05bff39d8e1bfd7216745066c1; no new empirical or training-population inference"
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260911_post_program_vacancies/archive/RESPONSE.md",
+      "purpose": "Sections1,6,9 only: one original ACVC question/full intake, zero implementation/numerical allowance, next claim/evidence choice and accounting.",
+      "provenance": "Original immutable Portfolio response; main copy41c46303f66005f74a18dccf45974d99771b155b; Root assignment reports designated-DM conformance PASS",
+      "commit_sha": "50703c1bd1a4411c31a0b211d3ec8aff88fa0d0f"
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_FRESH_DENSE_REUSE_B01_SCIENCE_CARD_20260910.md",
+      "purpose": "Sections2-5 for fixed host, legal information, DENSE fitting, RNG/proposal/own-history rule and separate primary; section16 only for completed8961 binding. Other allocations are historical.",
+      "provenance": "Accepted fresh-fit law; no completed rule is rewritten"
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_FRESH_DENSE_REUSE_B01_8961_INTAKE_20260911.md",
+      "purpose": "Sections1-5: third fresh result, actual primary meaning, adverse worlds, scientific vs engineering acceptance and ended allocation. Section6 only if cost/cleanup matters.",
+      "provenance": "Accepted complete8961 intake; support final publication tail stated separately in brief/facts"
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_FRESH_DENSE_REUSE_B01_8931_INTAKE_20260910.md",
+      "purpose": "Its rule/result, independent-unit, adverse-world and cost sections as needed for the second fresh fit.",
+      "provenance": "Accepted complete second fresh realization; neither pooled confirmation nor a cap for future work"
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_FRESH_DENSE_REUSE_B01_INTAKE_20260910.md",
+      "purpose": "Its rule/result, independent-unit, adverse-world and cost sections as needed for the first fresh fit.",
+      "provenance": "Accepted first fresh realization; not evidence of a stable training population"
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_FIXED_RETRACE_REUSE_E01_INTAKE_20260909.md",
+      "purpose": "Sections5-9 only as needed: selected retained8201/8202 results, zero new fitting, contrary worlds, conditional interpretation and historical cost.",
+      "provenance": "Historical named E01 exception; selected panels do not augment the fresh-fit unit count"
+    },
+    {
+      "path": "experiments/candidates/acvc/native_link_loss_b01/binding.py",
+      "purpose": "Read only if needed to resolve exact anchor/cue and realized-displacement reversal semantics; do not execute.",
+      "provenance": "Accepted source; own-history fixed F predicate, not a matched-clock comparator"
+    },
+    {
+      "path": "experiments/candidates/acvc/native_link_loss_b01/model.py",
+      "purpose": "Read only if needed: C bypass and fixed/dwell commands with private recurrence/proposals; old T/G classes are historical, not reopened.",
+      "provenance": "Accepted common native evaluation source; no construction or numerical check authorized"
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "purpose": "Sections4,5.2-5.3,6.1-6.3,8.1,11.4,11.7-11.10: claim classes, final selection, independent units, proper scope, proportionality. Section11 controls.",
+      "provenance": "Current controlling empirical specification at this fixed input"
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "purpose": "Section6 only: empirical claim, uncertainty unit and selection; do not recursively read all linked sources.",
+      "provenance": "Explanatory scientific reading, not new authority or native evidence"
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+      "purpose": "Training vs episode units, complete-package vs mechanism comparisons, development selection and uncertainty; use only relevant passages.",
+      "provenance": "Explanatory source reused by DM; no universal count or launch gate"
+    },
+    {
+      "path": "docs/project/ENGINEERING_SCOPE_SPEC.md",
+      "purpose": "Sections4-5,7 only if needed: no requested apparatus, full work and proportionate future check/review scope.",
+      "provenance": "Current engineering rules, no code/verification invocation allocated by this task"
+    },
+    {
+      "path": "AGENTS.md",
+      "purpose": "Sections2-4,5-6: direction/Portfolio boundary, no local substitute, independent rolling work, exact scope and shared-branch delivery.",
+      "provenance": "Current authority at fixed input; applicable sections adopted by TASK"
+    },
+    {
+      "path": "docs/project/GITHUB_RESEARCH_COLLABORATION.md",
+      "purpose": "Only scoped response/Issue delivery and partial-success/readback rules; scientific text and input bindings stay unchanged.",
+      "provenance": "Current authorized delivery method"
+    },
+    {
+      "path": "docs/research/candidates/acvc/pro_packets/20260911_post_three_fresh_convergence/ISSUE_INPUT_SNAPSHOT.json",
+      "purpose": "Pinned readback of current Issue14 question and preserved earlier accepted history; discussion is context only.",
+      "provenance": "Actual GitHub body readback; mutable Issue cannot enlarge this task"
+    }
+  ],
+  "discussion_urls": [
+    "https://github.com/CartmanFatass/My-paper-code/issues/14"
+  ],
+  "constraints": [
+    "Use the original em:acvc:convergence binding resolved by Transport; no context reset, replacement conversation or rewrite of an accepted historical request. Root alone dispatches and receives the Transport return, then forwards the full immutable response to the actual DM.",
+    "Scientific authority is this one direction claim/evidence choice within Portfolio50703c1 §§1,6,9. Zero implementation and numerical allowance; do not create a card, fit, probe, stronger-control prerequisite, C freeze, Innovator dispatch or successor ladder. Any future investment remains separately decided.",
+    "Keep actual C/F/dwell semantics, native5-UAV/50-user DENSE512x256/1024Adam law, separate F-C/F-dwell primaries and0.01J, beneficial dwell and all adverse worlds. Retained selected bases, three fresh training units and technical failures are different evidence.",
+    "The five-fit C design is a concrete proposal to assess, not an adopted size or certainty guarantee. Choose a class-correct, finite next question without a positive-first, exactness, full-causal, tuning/search or fixed-seed hurdle. Concrete instruction/spec conflicts return to the proper node; do not silently grant exceptions.",
+    "Write only the named new archive/RESPONSE.md on current descendant codex/acvc HEAD and one delivery-link comment on existing Issue14. Read current target, preserve other paths and accepted content, no force-push, source/card/main/PR/state edits. Evidence SHAs remain fixed as the delivery branch advances.",
+    "End at one full response/conformance intake or exact blocker. ACTIVE/MEDIUM, recasts2/lowest contention, ended T/G and existing historical boundaries persist; no new Portfolio or formal UAV-validation action."
+  ]
+}

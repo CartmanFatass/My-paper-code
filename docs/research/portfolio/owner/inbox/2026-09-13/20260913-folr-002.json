@@ -1,0 +1,87 @@
+{
+  "id": "20260913-folr-002",
+  "created": "2026-09-13T16:15:08-07:00",
+  "direction": "vap_folr_core",
+  "tier": "portfolio",
+  "kind": "portfolio",
+  "title": "FOLR 固定用途完成后的总体容量与生命周期建议",
+  "context": "DM 推荐可逆 PARK，保留 Generic-only 与所有科学证据；同时给出一至两个 fresh-learning 训练区组的可行普通研究方案，以及有责任人和期限的明确暂缓。普通 A/B 已有 DM standing delegation，本提案不是逐实验许可申请。Portfolio 尚未决定，任何生命周期选项均未应用。",
+  "options": [
+    {
+      "key": "P",
+      "label": "可逆 PARK/MEDIUM",
+      "consequence": "仅在完整 Portfolio 计划选择后释放 FOLR 槽位；保留证据和再进入条件。"
+    },
+    {
+      "key": "C",
+      "label": "继续有界 fresh-learning 研究",
+      "consequence": "保持 ACTIVE/MEDIUM；普通对象由 DM 自主选择，规划最多两个区组、四 fits，完整工作风险上限 13800 秒。"
+    },
+    {
+      "key": "D",
+      "label": "明确短期暂缓",
+      "consequence": "保持占位但非推进；Clerk 在下次材料性总体复审或决定后七日内触发复审，以先到者为准。"
+    }
+  ],
+  "recommended": "P",
+  "auto_applied": null,
+  "dm_reason": "固定用途已解决；新训练变异比较可行，但在短 H20、公共线索和已有 Generic 优势下，当前边际投入价值弱于释放容量的建议。",
+  "evidence": [
+    "docs/research/candidates/vap_folr_core/FOLR_RETAINED_REFERENCE_USE_B01_INTAKE_20260913.md",
+    "docs/research/candidates/vap_folr_core/retained_reference_use_b01_781301/POST_F_PROGRAM_PROJECTION.json"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-13.md#L34",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": {
+    "question": "FOLR 已完成固定参照用途后，在总体计划中应可逆 PARK、继续有界 fresh-learning 研究，还是明确暂缓？DM 推荐 P，尚未形成或应用 Portfolio 决定。",
+    "changes_if_approved": [
+      {
+        "target": "PORTFOLIO.md · vap_folr_core（若最终选择 P）",
+        "from": "ACTIVE/MEDIUM，占用一个执行槽位",
+        "to": "可逆 PARKED/MEDIUM，明确释放槽位；保留家族问题、证据与原对象边界"
+      }
+    ],
+    "if_refused": "Portfolio 可保留 C 连续研究方案或 D 明确暂缓，也可提出其他总体计划。普通新 A/B 的 DM 自主选择不以逐项 Portfolio 购买为条件；本轮不从 F 结束推断全方向禁令。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/vap_folr_core/FOLR_RETAINED_REFERENCE_USE_B01_INTAKE_20260913.md",
+        "quote": "Accept the complete use comparison and apply GENERIC_ONLY_BANK_WORSE.",
+        "why": "固定用途已由完整原规则解决；继续占位应有新的方向投入理由。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/vap_folr_core/FOLR_RETAINED_REFERENCE_USE_B01_INTAKE_20260913.md",
+        "quote": "Strongest limit to a broad negative is the conditional, outcome-informed BANK selection and one new Generic realization.",
+        "why": "训练变异尚未解决；fresh BANK/Generic 的新学习比较是实质替代方案，不能把当前结果扩大为整个算法负面。"
+      }
+    ],
+    "uncertainty": [
+      "短 H20 与公共生命周期线索可能使 Generic 足够，但不是已证明的记忆因果解释。",
+      "匹配的 tuned headroom 缺失，不是零，也不是 PARK 的必要理由。",
+      "全 provider/agent 成本及新工作阶段速率未知；不能据此宣称信息/秒跨方向排名。",
+      "P 的复审由 Portfolio/owner 对具体信息/生命周期、学习性能或成本方案触发，Clerk 负责路由。"
+    ],
+    "cost": {
+      "compute": "P/D：0 新科研调用。C 规划上限：2 新训练区组、4 fits、410240 team ticks；Generic 每次2700秒、BANK每次3000秒、native合计11400秒、support2400秒、complete invoked13800秒。这是规划风险报价，不是第一普通B审批门槛或旧F续拨。",
+      "owner_time": "异步审阅；不等所有者逐项确认。",
+      "reversibility": "reversible",
+      "waits_on_this": "全方向占位/生命周期规划未决；没有已接受科研 producer。技术保全/整合独立进行。"
+    },
+    "verdict_text": "DM recommends P: reversibly PARK the whole FOLR direction at MEDIUM priority, preserve its evidence and open scientific questions, and release its occupied execution slot only through the explicit Portfolio plan.",
+    "source": "docs/research/candidates/vap_folr_core/FOLR_RETAINED_REFERENCE_USE_B01_INTAKE_20260913.md"
+  },
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-13T23:35:08+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "docs/research/candidates/vap_folr_core/FOLR_RETAINED_REFERENCE_USE_B01_INTAKE_20260913.md#dm-lifecycle-decision--2026-09-13-full-direction-delegation",
+      "record": "docs/research/candidates/vap_folr_core/FOLR_RETAINED_REFERENCE_USE_B01_INTAKE_20260913.md#dm-lifecycle-decision--2026-09-13-full-direction-delegation",
+      "state": "applied",
+      "summary": "Owner 最新权限更正已应用：Portfolio proposal 002 仅作为历史报告输入，不再等待或自动请求生命周期批准；DM 自行选择 P 的实际决定见 20260913-folr-003。该 trace 不声称 owner 或 Pro 选择了 P。Convergence 保留独立科学 Reviewer 职责。"
+    }
+  ]
+}

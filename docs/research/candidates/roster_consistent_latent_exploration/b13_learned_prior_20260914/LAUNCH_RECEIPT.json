@@ -1,0 +1,16 @@
+{
+  "exit_code": 0,
+  "stdout": "Task 'rcle-b13-s33-cf4d9bd93' started in tmux session 'agent_rcle-b13-s33-cf4d9bd93'. Output: /home/wu/.agent-tasks/rcle-b13-s33-cf4d9bd93/task.log\n",
+  "stderr": "",
+  "enclosing_wall_s": 0.35899999999674037,
+  "time_utc": "2026-09-14T09:01:24.653422+00:00",
+  "handle": "rcle-b13-s33-cf4d9bd93",
+  "launch_sha": "cf4d9bd93ff9eb255800223d95de170b68315ba6",
+  "worktree": "/home/wu/hmasd-worktrees/rcle-b13-cf4d9bd93",
+  "output": "/home/wu/hmasd-worktrees/rcle-b13-cf4d9bd93/temp/directions/roster_consistent_latent_exploration/exp/b13_seed33",
+  "control": "/home/wu/hmasd-worktrees/rcle-b13-cf4d9bd93/temp/directions/roster_consistent_latent_exploration/exp/b13_control",
+  "portfolio_application_sha": "5f4abd6f0774c9b9e6ffe9b1c8bc721861b4265a",
+  "dispatch_attempts": 1,
+  "scope": "One selected B13 invocation; adjacent admission and full native learning/evaluation/check/publication inside this detached command.",
+  "acceptance_observed": true
+}

@@ -1,0 +1,35 @@
+{
+  "question": "执行已激活的唯一共同相位B08，固定seed28与256次更新，保留四角色和两种主比较。",
+  "changes_if_approved": [
+    {
+      "target": "RCLE B08",
+      "from": "家族与条件额度已激活",
+      "to": "明确本次卡片、数据耦合和工程L0，进入实现与独立检查"
+    }
+  ],
+  "if_refused": "下一干净边界应用主人覆盖，保留已经执行的记录，不追加fit或停整个方向。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B08_JOINT_QUOTA_PHASE_SCIENCE_CARD_20260912.md",
+      "quote": "One model and one Adam(lr3e-4,betas.9/.999,eps1e-8,weight_decay0), no clipping/entropy/teacher/critic.",
+      "why": "真实学习且四角色比较能区分初始结构、学习增量和就近差距。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B08_JOINT_QUOTA_PHASE_SCIENCE_CARD_20260912.md",
+      "quote": "Strongest support is previous actual native learning; strongest contrary evidence is nearest deficits and service/F dissociation.",
+      "why": "结构配额匹配和参数少都不能保证新方法服务或成本。"
+    }
+  ],
+  "uncertainty": [
+    "单fit条件观察；完整新速度、graph内存和实际support覆盖尚未知。"
+  ],
+  "cost": {
+    "compute": "一次native900秒、额外invoked支持900秒、完整1800秒；无自动重试。",
+    "owner_time": "无需批准",
+    "reversibility": "costly",
+    "waits_on_this": "nothing"
+  },
+  "source": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B08_JOINT_QUOTA_PHASE_SCIENCE_CARD_20260912.md"
+}

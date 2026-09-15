@@ -1,0 +1,22 @@
+{
+  "request_id": "2026-09-14-rcle-post-b13-direction-decision-01",
+  "recorded_at": "2026-09-14T11:18:15.482891+00:00",
+  "original_capture_call_id": "call_sTsaiFA1jW41UPCbqDGzAMRh",
+  "original_capture_timestamp": "2026-09-14T11:10:18.787Z",
+  "original_capture_rollout_line": 5418,
+  "original_capture_source": "C:\\Users\\fires\\.codex\\sessions\\2026\\09\\13\\rollout-2026-09-13T23-35-00-01a09ea0-4a86-75b0-826d-6f864efa7480.jsonl",
+  "original_capture_origin": "Transport copied actual provider response with Copy response and browser clipboard; subsequent nodeRepl.write(ans) printed entire captured string",
+  "local_archive_exactly_matches_original_captured_string": true,
+  "normalization_or_response_repair_performed": "none; original full captured UTF8 bytes equal received RESPONSE.md",
+  "response_bytes": 20289,
+  "response_characters": 9583,
+  "response_lines": 151,
+  "response_sha256": "7ea74e98cdff648cf11cbf84ee907056241ee6b6befddf9f349031f251c63780",
+  "provider_capture_digest_call_id": "call_NQX6rJzUuhrjYiuFhWaDO48G",
+  "transport_direct_message_digest": "7ea74e98cdff86cf11cbf84ee907056241ee6b6befddf9f349031f251c63780",
+  "direct_message_digest_characters": 63,
+  "direct_message_digest_error": "App return contains a malformed63-character digest; actual provider capture, local file and both local receipts agree on the full64-character digest. Preserve this reporting error; no provider resend or scientific change.",
+  "full_original_response_read_to_eof": true,
+  "provider_user_message_id": "bf84ddba-6465-44c7-8ce4-237e60d26c8c",
+  "provider_assistant_message_id": "c137f147-a2e8-4d07-baba-0f166ba1b87b"
+}

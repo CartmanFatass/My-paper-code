@@ -1,0 +1,12 @@
+{
+  "purpose": "One bounded read-only preflight for the original five-path F cleanup; no deletion or scientific execution.",
+  "checked_before": "2026-09-13T23:22:53Z",
+  "node": "hmasd-wsl-node",
+  "command_exit_code": 0,
+  "local_command_wall_seconds": 0.7560686,
+  "cost_limit": "Local control-command wall only, not full native/provider cost; original F support accounting remains.",
+  "output": "/home/wu/hmasd-worktrees/folr-ref-use-5dce539ed54a\n48564\t/home/wu/hmasd-worktrees/folr-ref-use-5dce539ed54a\n/home/wu/projects/HMASD/temp/directions/vap_folr_core/exp/retained_reference_use_b01_781301\n4784\t/home/wu/projects/HMASD/temp/directions/vap_folr_core/exp/retained_reference_use_b01_781301\n/home/wu/hmasd-inputs/vap_folr_core/retained_reference_use_b01_781301\n4432\t/home/wu/hmasd-inputs/vap_folr_core/retained_reference_use_b01_781301\n/home/wu/.agent-tasks/folr-ref-use-generic-781301-5dce539ed54a\n28\t/home/wu/.agent-tasks/folr-ref-use-generic-781301-5dce539ed54a\n/home/wu/.agent-tasks/folr-ref-use-bank-781301-5dce539ed54a\n28\t/home/wu/.agent-tasks/folr-ref-use-bank-781301-5dce539ed54a\nHANDLE folr-ref-use-generic-781301-5dce539ed54a\nstatus=finished\n\nexit_code=0\n\npid=3424844\n\nHANDLE folr-ref-use-bank-781301-5dce539ed54a\nstatus=finished\n\nexit_code=0\n\npid=3427261\n\nworktree /home/wu/hmasd-worktrees/folr-ref-use-5dce539ed54a\nHEAD 5dce539ed54afd4334d09db9dcd94df38c52c2fc\ndetached\n\n",
+  "removal_executed": false,
+  "scientific_invocations": 0,
+  "dependency": "Accepted Generic raw and listed historical paths need Clerk integration/retention handoff; report/lifecycle independent."
+}

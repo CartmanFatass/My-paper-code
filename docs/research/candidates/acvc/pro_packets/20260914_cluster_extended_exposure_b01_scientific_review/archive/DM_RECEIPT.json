@@ -1,0 +1,15 @@
+{
+  "review_commit": "f82bf29f24dce34bff5bcd092c83a41db18bd0ad",
+  "response_path": "docs/research/candidates/acvc/pro_packets/20260914_cluster_extended_exposure_b01_scientific_review/archive/RESPONSE.md",
+  "bytes": 13084,
+  "sha256": "eac777250e5021e9aa5346f1748f84de3e2faf711ce1cb9b35d04d20d3671bea",
+  "lines": 63,
+  "complete_DM_read": true,
+  "issue_comment_id": 5672720675,
+  "one_send_operation_id": "1011b8cb-c0ee-485c-965f-b733fecb8bb6",
+  "user_message_id": "c239975d-29a0-483e-805f-10fd223560fe",
+  "assistant_provider_id": null,
+  "assistant_id_limit": "Not exposed by actual provider result; exact task/GitHub delivery/comment verified by Transport, full bytes independently matched by DM.",
+  "transport_receipt": "Native final received directly from /root/dm_acvc_resume_20260914/tr_lh_acvc",
+  "initial_failure": "VERIFIED_NONACCEPTANCE chatgpt_target_menu_open_unconfirmed; same request/prompt/binding/idempotency repaired before one Send."
+}

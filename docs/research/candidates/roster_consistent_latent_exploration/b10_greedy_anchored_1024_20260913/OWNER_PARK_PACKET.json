@@ -1,0 +1,37 @@
+{
+  "question": "本 DM 已选择可逆暂停当前 RCLE 推进；是否有异步覆盖或具体科学反证？这不是申请生命周期批准。",
+  "changes_if_approved": [
+    {
+      "target": "docs/research/candidates/roster_consistent_latent_exploration/DIRECTION.md",
+      "from": "ACTIVE，B10 正在推进",
+      "to": "PARKED，由 DM 根据 B10 完整服务结果与当前后续价值判断作出；科学审查/保全清理仍在closeout"
+    }
+  ],
+  "if_refused": "根据具体覆盖/科学反证调整未执行计划并明确重新进入研究的实际对象；不复活 B10 调用或改写旧结果。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B10_GREEDY_ANCHORED_1024_INTAKE_20260913.md",
+      "quote": "B09 and B10 provide real learning but no observed U value over the already available legal greedy comparator; B10 still loses in every service cell, and unresolved recovery harms persist.",
+      "why": "当前可用贪心已更好；再加同类种子尚缺能改变实际服务选择的明确价值。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B10_GREEDY_ANCHORED_1024_INTAKE_20260913.md",
+      "quote": "G_U=+.061531575521",
+      "why": "学习真实发生；一条新训练历史不能排除有用改进或稳定表现的不确定性，故不用永久关闭结论。"
+    }
+  ],
+  "uncertainty": [
+    "科学 Convergence 独立审查尚未完成；具体缺陷须修正或限制claim，而非用自主权忽略。",
+    "不同 seed/端点不能隔离训练量效果；贪心只是已取得成绩的规则，不是headroom证书。"
+  ],
+  "cost": {
+    "compute": "停止新的结果调用；B10 已用 native161.35秒、support仍在600秒原上限内记账，未知尾部不计零。未选的新增1024复制需67584回合，不能视为已授权。",
+    "owner_time": "无需批准；可异步纠正。",
+    "reversibility": "reversible",
+    "waits_on_this": "nothing; scientific review and technical closeout continue without a lifecycle approval gate."
+  },
+  "verdict_text": "Owner-delegated decision (unattended, standing instruction and owner2026-09-13 full-lifecycle delegation): select A.",
+  "source": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B10_GREEDY_ANCHORED_1024_INTAKE_20260913.md"
+}

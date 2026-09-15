@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 4,
+  "operationId": "c55f5a91-2bfb-4dff-b755-d14d0d3fe105",
+  "idempotencyKey": "2026-09-13-mgtap-post-8231-continuation-01",
+  "requestFingerprint": "ab86c21e02e2727a947629857f3e32a69c0a888bedca7fda64eb9a78b047c365",
+  "stableKey": "em:metric_ground_transport_allocation:convergence",
+  "provider": "chatgpt",
+  "productModel": "Latest",
+  "reasoningEffort": "Pro",
+  "conversationUrl": "https://chatgpt.com/c/6a9b6b01-a918-83e8-8b06-ca9dd8184dab",
+  "conversationId": "6a9b6b01-a918-83e8-8b06-ca9dd8184dab",
+  "promptSha256": "293ade999ac8f413b5fd8340fcc7ff204116ca077f03c040ee48b328b62522ce",
+  "responsePath": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\metric_ground_transport_allocation\\2026-09-13-mgtap-post-8231-continuation-01\\2026-09-13-mgtap-post-8231-continuation-01--metric_ground_transport_allocation--attempt-01__02_RESPONSE.md",
+  "sendAttempted": true,
+  "sendAttemptedAt": 1789325430145,
+  "providerUserMessageId": null,
+  "providerAssistantMessageId": null,
+  "observedConversationUrl": null,
+  "observedConversationId": null,
+  "archive": null,
+  "error": {
+    "code": "USER_MESSAGE_CONTENT_MISMATCH"
+  },
+  "createdAt": 1789325331978,
+  "updatedAt": 1789325430622
+}

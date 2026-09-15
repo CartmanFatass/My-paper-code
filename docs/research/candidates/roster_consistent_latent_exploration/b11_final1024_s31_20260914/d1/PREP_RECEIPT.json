@@ -1,0 +1,5 @@
+{
+  "exit": 1,
+  "stdout": "",
+  "stderr": "Preparing worktree (detached HEAD c7eb5986f)\nerror: -c died of signal 15\nfatal: could not fetch 18753c35e4df33c81aae8610b3b7445da104bfd0 from promisor remote\nTraceback (most recent call last):\n  File \"<stdin>\", line 10, in <module>\n  File \"/home/wu/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/subprocess.py\", line 526, in run\n    raise CalledProcessError(retcode, process.args,\nsubprocess.CalledProcessError: Command '['git', '-C', '/home/wu/hmasd-worktrees/rcle-b11-d1-c7eb5986f', 'checkout', '--detach', 'c7eb5986f38d42f24fb0d9749c705c975aa40b0d']' returned non-zero exit status 128.\nerror: git-remote-https died of signal 15\n"
+}

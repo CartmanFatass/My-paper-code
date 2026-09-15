@@ -1,0 +1,38 @@
+{
+  "event": "FOLR_CONTEXT_REFRESH_AFTER_RCLE_ACVC_APPLICATION_20260914",
+  "recorded_at_utc": "2026-09-14T13:16:34.822672+00:00",
+  "request_id": "2026-09-14-folr-post-b03-direction-decision-01",
+  "source_thread_id": "01a09e16-f7b1-7e60-83a0-ba2a7cd969bc",
+  "parent_thread_id": "01a09e16-f7b1-7e60-83a0-ba2a7cd969bc",
+  "release_received_from": "01a09e10-9d9f-7f82-87c0-d58cbe0c7618",
+  "release_event": "RCLE_ACVC_VACANCY_APPLIED_PORTFOLIO_RELEASED_20260914",
+  "actual_release_commit": "6c6b2432402bf9d9c77b53d683b35ebbb4c325ee",
+  "folr_author_claim_commit": "4afaa06f705ec7bdb42e94a908e95eb89d819deb",
+  "conversation_id": "6aa7836e-e4a0-83e8-985d-c633d94935b1",
+  "capacity": {
+    "occupied": [
+      "acvc",
+      "metric_ground_transport_allocation",
+      "vap_folr_core"
+    ],
+    "reserved": 0,
+    "vacancies": 0
+  },
+  "new_selection": {
+    "direction": "acvc",
+    "decision": "REOPEN / CONTINUE",
+    "original_dm": "01a09dfa-0655-7831-aa3a-9fff2ddd2508",
+    "actual_work": "New B03 card and implementation exist; uncommitted at acceptance handoff, no accepted launch SHA or native result claimed",
+    "work": "one new C fit/512train/1024updates/three64-world final C,F,own-dwell panels/180224ticks",
+    "master": 21937,
+    "eval_namespace": 31937,
+    "response_commit": "7a490382cb469f2a62e276a756a2be32b460cc69",
+    "response_bytes": 21323,
+    "response_sha256": "3b81868e9065d370f0d2a5430dd81da960d8a4cd3d4be799dff7c98cbd54ceb7"
+  },
+  "author_read_scope": "Complete185-line selection response, complete RCLE intake and ACVC original acceptance; actual capacity/application fields checked. No new ACVC scientific computation or engineering acceptance by FOLR.",
+  "recommendation_change": "FOLR retains conditional additive-persistence recommendation with PARK closest; actual ACVC continuation adds concrete opportunity context but no new FOLR evidence or changed scientific claim.",
+  "new_folr_fit": false,
+  "portfolio_send": false,
+  "owner_review_pending": false
+}

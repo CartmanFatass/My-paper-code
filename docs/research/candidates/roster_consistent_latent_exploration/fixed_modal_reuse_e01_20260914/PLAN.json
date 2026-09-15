@@ -1,0 +1,22 @@
+{
+  "object_id": "RCLE_FIXED_MODAL_REUSE_E01",
+  "source_sha": "5c3ab7b074f185902078452811774e6a8d727a9d",
+  "reviewed_code_sha": "72b6184e8070668aba98ff71f97d1fdc3fa30225",
+  "cwd": "/home/wu/hmasd-worktrees/rcle-modal-e01-5c3ab7b07",
+  "output": "/home/wu/hmasd-worktrees/rcle-modal-e01-5c3ab7b07/temp/directions/roster_consistent_latent_exploration/exp/modal_e01",
+  "control": "/home/wu/hmasd-worktrees/rcle-modal-e01-5c3ab7b07/temp/directions/roster_consistent_latent_exploration/exp/modal_e01_control",
+  "inputs": "/home/wu/hmasd-inputs/rcle-fixed-modal-e01-20260914/inputs",
+  "handle": "rcle-modal-e01-5c3ab7b07",
+  "node": "wsl_4070",
+  "status": "COMPLETE_RECORDED_BYTES_ACCEPTED",
+  "watchdog_s": 600,
+  "watchdog_scope": "whole operational admission/build/evaluation/check/publication process, not a support cap or scientific endpoint",
+  "scientific_endpoint": "two frozen-base modal panels; 512 each; 1024 evaluation episodes; 65536 native ticks; 32 native32 batches; zero new fits/updates",
+  "monitor": "/root/monitor_rcle_modal_e01",
+  "automatic_retry": false,
+  "supervisor_command_sha256": "25aec072c978f894a899b07c7c14c7d54f73a6ea38b5305a42967281425c1ec8",
+  "accepted_utc": "2026-09-14T06:18:26.223591+00:00",
+  "terminal_observed_utc": "2026-09-14T06:18:33Z",
+  "exit_code": 0,
+  "whole_native_wall_s": 6.73
+}

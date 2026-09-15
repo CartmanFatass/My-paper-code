@@ -17,27 +17,26 @@ card/intake。`seed-ledger` 停止批量补建旧条目。既有 owner 指令仍
 按原 P1/P2 分类处理，不为绕过限制而升级普通条目。
 决定：[2026-09-05-owner-review-p2-cutoff.md](../decisions/2026-09-05-owner-review-p2-cutoff.md)。
 
-## ★ 重要改动与 6 Pro 执行委托（当前边界）
+## ★ 重要改动与当前权责
 
-完整裁决的执行委托及此前批准归因纠正见 [本次明确指令](../decisions/2026-09-05-pro6-delegation-and-starred-trace.md)。
-方向/Portfolio 层级及重大异议、close-call、second-recast 新项自动星标；重要治理改动用既有 P1 项。
-「★ 重要改动」显示全部历史星标项，包含已答项。星标不代表 owner 逐项批准。
+DM 负责创新、实验、工程修复、证据解释和报告，在当前方向范围内自主推进普通研究。
+方向 Pro Convergence 负责独立 review；DM 回应意见。Portfolio 按
+`docs/project/PORTFOLIO_DECISION_PROTOCOL.md` 总览全局，最终解释并决定方向级
+CONTINUE/RECAST/PARK/CLOSE/重开。完整合规决定由 DM 执行，不等待 Root 或用户逐项批准；
+普通实验不逐项提交 Portfolio。DM 的建议或待回复状态不能写为已 PARK、已关闭或已释放席位。
 
-执行时通过 CLI 追加记录，保留原回复与 status，不伪写 owner ratify：
+Clerk 已退役。平行 DM 按 `PEER_DM_COORDINATION.md` 直接协调并记录交接，实际空槽按当前
+三个占用加预留席位的目标处理，已有请求和预留不得重复创建。Web Portfolio 必须收到固定版本的
+完整相关上下文并说明实际访问情况。历史 PRO_FINAL 与批改项保留出处；星标便于用户异步介入。
 
+对已执行的 Portfolio 决定，记录真实来源和应用状态，例如：
+
+```powershell
+python tools/owner_console/item.py trace <id> --authority "PRO_FINAL / OWNER_DELEGATED" --source <portfolio-response.md> --record <dm-intake.md> --state applied --summary "实际变化与影响" --auto-applied <option-key>
 ```
-python tools/owner_console/item.py trace <id> --authority "PRO_FINAL / OWNER_DELEGATED" --source <archived-response.md> --record <application-intake.md> --state applied --summary "实际变化与影响" --auto-applied <option-key>
-```
 
-`--state planned|applied|blocked`；仅已执行可填 `--auto-applied`。`--authority OWNER_DIRECT` 仅用于有明确 owner 指令的事项。application record 列出变化前后、修改文件和提交定位；`execution_history` 逐条追加时间、来源、状态与记录链接。`--correction` 用于保留原回复并明确纠正其授权归因，不冒充新回复。新 owner 回复仍按原流程生效。此记录不新增运行关卡。
-
-## 2026-09-10 Portfolio 裁决与异步覆盖
-
-按 AGENTS §4.8，新 Portfolio Pro 裁决由指定 DM 完整读取并检查适用规范，Root 执行符合范围的裁决，不等逐项 ratify。
-新默认选项为 keep/refuse/amend；keep 或 agree 只表示已阅，不增加运行授权。
-refuse/amend 在下一个干净边界覆盖后续执行，保留已执行效果和历史，不隐含重跑或回滚。
-旧 ratify 条目与回复保留原语义；自定义选项保留其实际含义。执行状态仍用 trace 的 planned/applied/blocked，
-auto_applied 只填实际已执行选项。保留的 packet 字段 changes_if_approved 描述变更内容，不构成新批准关卡。
+共享治理改动记录真实 OWNER_DIRECT 来源。planned/applied/blocked 描述实际应用状态；不能把待建议项
+写成已经执行。用户的新明确指令仍在对应干净边界生效，不追溯改写已有结果或自动创建重跑。
 
 ## 所有者每天怎么用（约 15 分钟）
 
@@ -73,7 +72,7 @@ command. The DM definition and the Portfolio skill reference that skill.
 | a science card is frozen | `new-card` |
 | a critic's material dissent is overruled | `critic-dissent` |
 | a recommendation and its runner-up were not clearly separated | `close-call` |
-| Convergence returns a second `RECAST` | `second-recast` |
+| DM records a second `RECAST` | `second-recast` |
 | Portfolio records a proposal or a DM returns a direction recommendation | `portfolio` |
 
 ```

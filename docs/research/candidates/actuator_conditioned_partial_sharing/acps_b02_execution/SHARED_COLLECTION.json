@@ -1,0 +1,141 @@
+{
+  "object": "ACPS-B02",
+  "arm": "SHARED",
+  "master": 9102,
+  "checks": {
+    "complete": true,
+    "identity": true,
+    "counts": true,
+    "rows_match": true,
+    "train_order": true,
+    "final_order": true,
+    "finite_complete_rows": true,
+    "world_rng_binding": true,
+    "checkpoint": true,
+    "whole_arm_cap": true,
+    "rollouts": true
+  },
+  "counts": {
+    "train_team_steps": 131072,
+    "eval_team_steps": 8192,
+    "team_steps": 139264,
+    "optimizer_steps": 1024,
+    "train_episodes": 512,
+    "eval_episodes": 32,
+    "velocity_decisions": 696320,
+    "duration_decisions": 0,
+    "d4": 0,
+    "recurrent_observations": 696320,
+    "explicit_resets": 544,
+    "constructor_resets": 1,
+    "constructors": 1,
+    "step_calls": 139264,
+    "scientific_uav_calls": 139264,
+    "diagnostic_frames": 0,
+    "completed_episode_steps": 139264,
+    "rollouts": 256
+  },
+  "whole_native_wall_seconds": 164.64,
+  "partial_internal_wall_seconds": 164.17615267750807,
+  "J_mean": 0.05844655498057657,
+  "J_final": [
+    0.02013471601895793,
+    0.046798175407427096,
+    0.07075280194964886,
+    0.034265166287137654,
+    0.07410573246119133,
+    0.023989174403391017,
+    0.011904870020363193,
+    0.05499884679885962,
+    0.051530287533389056,
+    0.07758264983621824,
+    0.10576206193022482,
+    0.0815138546745591,
+    0.04015747607736998,
+    0.06137547888661888,
+    0.05681759459539052,
+    0.11568320193379007,
+    0.08902179859679908,
+    0.04400336636201186,
+    0.0719175045565002,
+    0.0511310828379251,
+    0.04875944263979212,
+    0.05598421793481671,
+    0.06469894448196671,
+    0.06115089369448044,
+    0.04769588095130096,
+    0.05739103464609208,
+    0.07734423558705453,
+    0.06884950194430992,
+    0.08233674082214879,
+    0.010573408113197343,
+    0.062102907121417625,
+    0.04995671027409942
+  ],
+  "exposure": {
+    "common_actor": {
+      "parameters": 35702,
+      "initial_norm": 12.56568717956543,
+      "final_norm": 13.104759216308594,
+      "displacement": 3.582760810852051,
+      "relative_displacement": 0.28512255316035623
+    },
+    "critic": {
+      "parameters": 34177,
+      "initial_norm": 9.256773948669434,
+      "final_norm": 10.933304786682129,
+      "displacement": 5.5279717445373535,
+      "relative_displacement": 0.5971812399428791
+    },
+    "total": {
+      "parameters": 69879,
+      "initial_norm": 15.607184410095215,
+      "final_norm": 17.06669044494629,
+      "displacement": 6.587461948394775,
+      "relative_displacement": 0.4220788180175406
+    }
+  },
+  "checkpoint_readback": {
+    "actual_source_master_arm_finite_verified": true,
+    "no_model_construction": true,
+    "note": "Passed in the preceding collection check; not redundantly repeated."
+  },
+  "collection_checker_correction": "Initial local check compared the epochs record list to scalar4. The published source returns four epoch records; corrected only that schema check, all other checks had passed. No experiment or source retry.",
+  "files": [
+    {
+      "path": "admission.json",
+      "bytes": 504,
+      "sha256": "516d0a39b9bf578bafad11ba0b9c6eeb372e9c2d636bd2e10bfca20ada5cfad4"
+    },
+    {
+      "path": "episodes.jsonl",
+      "bytes": 407213,
+      "sha256": "c306bb5dcdc57c421d938ff6bd3e8c35b217cce241f9fa99f90384009be4411f"
+    },
+    {
+      "path": "final.pt",
+      "bytes": 285053,
+      "sha256": "8f3cd86c59acdcabf69096eba0c3d651f7733688a5eba98691bba8bc2a0c86d8"
+    },
+    {
+      "path": "process_wall_seconds.txt",
+      "bytes": 7,
+      "sha256": "53ce8543247a0619a9077f6c7a2544ad598c8dcc30ef46d920941aec207742da"
+    },
+    {
+      "path": "rollouts.jsonl",
+      "bytes": 187858,
+      "sha256": "28392b3b3f66ac8542f55d781c20a6532b0bf3a5e097df0db09467f463aa5ab8"
+    },
+    {
+      "path": "summary.json",
+      "bytes": 559192,
+      "sha256": "1e26d3ee9e9cd4c63bfc24738dcf7acfaae6a168f80a14752dd336761a12180d"
+    },
+    {
+      "path": "supervisor.log",
+      "bytes": 1454,
+      "sha256": "9c7e9a369088099be5a3d5f8a0753ff34d0e8eefaf86c58cd63cbeef87ecab83"
+    }
+  ]
+}

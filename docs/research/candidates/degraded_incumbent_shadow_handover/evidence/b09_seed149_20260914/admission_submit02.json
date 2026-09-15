@@ -1,0 +1,27 @@
+{
+  "observed_at_utc": "2026-09-14T02:15:13.067646+00:00",
+  "ssh_exit_code": 0,
+  "readback_wall_seconds": 0.42182080005295575,
+  "facts": {
+    "memory": {
+      "assessed_at": "2026-09-14T02:14:34.954166Z",
+      "available_physical_bytes": 15634288640,
+      "captured_at": "2026-09-14T02:14:34.953896Z",
+      "cgroup_headroom_bytes": null,
+      "cgroup_memory_current_bytes": null,
+      "cgroup_memory_max_bytes": null,
+      "effective_available_bytes": 15634288640,
+      "effective_floor_pass": true,
+      "failure_reasons": [],
+      "measurement_source": "/proc/meminfo",
+      "minimum_available_bytes": 4294967296,
+      "passed": true,
+      "physical_floor_pass": true,
+      "schema_version": 1
+    },
+    "preflight_wall": "preflight_wall_seconds=0.04\n",
+    "supervisor_wrapper": "#!/usr/bin/env bash\necho $$ > \"/home/wu/.agent-tasks/dish-b09-s149-3a749256-20260914-submit02/pid\"\nSTART_TS=$(date +%s)\necho \"=== Task 'dish-b09-s149-3a749256-20260914-submit02' started at $(date -Iseconds) ===\" >> \"/home/wu/.agent-tasks/dish-b09-s149-3a749256-20260914-submit02/task.log\"\n\n# Execute command capturing output\nset +e\neval 'cd /home/wu/hmasd-worktrees/dish-b09-3a749256 && export PYTHONPATH=\"$PWD\" PYTHONDONTWRITEBYTECODE=1 OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 MAX_JOBS=1 && mkdir -p temp/directions/degraded_incumbent_shadow_handover/receipts/b09_seed149_20260914_run01 && /usr/bin/time -f '\\''preflight_wall_seconds=%e'\\'' -o temp/directions/degraded_incumbent_shadow_handover/receipts/b09_seed149_20260914_run01/preflight_wall.txt /home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out temp/directions/degraded_incumbent_shadow_handover/receipts/b09_seed149_20260914_run01/memory.json && /usr/bin/time -f '\\''runner_wall_seconds=%e'\\'' -o temp/directions/degraded_incumbent_shadow_handover/receipts/b09_seed149_20260914_run01/runner_wall.txt /home/wu/.venvs/hmasd/bin/python scripts/run_dish_receipt_bypass_b09.py --seed 149 --output temp/directions/degraded_incumbent_shadow_handover/exp/receipt_bypass_b09_seed149_20260914_run01 --launch-sha 3a749256d2aaf16345308827518283c8d2b91ad7 --prior-shared-seconds 180' >> \"/home/wu/.agent-tasks/dish-b09-s149-3a749256-20260914-submit02/task.log\" 2>&1\nEXIT_CODE=$?\nset -e\n\nEND_TS=$(date +%s)\necho $EXIT_CODE > \"/home/wu/.agent-tasks/dish-b09-s149-3a749256-20260914-submit02/exit_code\"\nif [ $EXIT_CODE -eq 0 ]; then\n    echo \"finished\" > \"/home/wu/.agent-tasks/dish-b09-s149-3a749256-20260914-submit02/status\"\nelse\n    echo \"failed\" > \"/home/wu/.agent-tasks/dish-b09-s149-3a749256-20260914-submit02/status\"\nfi\necho \"=== Task 'dish-b09-s149-3a749256-20260914-submit02' exited with code $EXIT_CODE at $(date -Iseconds) (Duration: $((END_TS - START_TS))s) ===\" >> \"/home/wu/.agent-tasks/dish-b09-s149-3a749256-20260914-submit02/task.log\"\n\n# Keep session alive briefly for inspection, then exit\nsleep 1\n",
+    "scientific_output_exists": true
+  },
+  "stderr": ""
+}

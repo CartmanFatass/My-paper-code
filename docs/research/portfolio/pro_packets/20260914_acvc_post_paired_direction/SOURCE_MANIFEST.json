@@ -1,0 +1,211 @@
+{
+  "repository": "CartmanFatass/My-paper-code",
+  "scientific_input_sha": "07b848fadd57ed50af3632dbd60655f45ea666ab",
+  "control_snapshot_sha": "1fabe79ebbf826138801b7e096278c2edda5d58a",
+  "publication_checks_are_not_provider_access": true,
+  "sources": [
+    {
+      "path": "docs/research/candidates/acvc/ACVC_POST_PAIRED_DIRECTION_REPORT_20260914.md",
+      "purpose": "Read the complete current DM report: prior objective, all new evidence, full-review response, finite six-programme candidate, smaller B and close PARK alternative, actual cost and unknowns.",
+      "provenance": "Fixed ACVC source/evidence; read only the named scientific scope.",
+      "commit_sha": "07b848fadd57ed50af3632dbd60655f45ea666ab",
+      "url": "https://github.com/CartmanFatass/My-paper-code/blob/07b848fadd57ed50af3632dbd60655f45ea666ab/docs/research/candidates/acvc/ACVC_POST_PAIRED_DIRECTION_REPORT_20260914.md"
+    },
+    {
+      "path": "docs/research/candidates/acvc/DIRECTION.md",
+      "purpose": "Read current synthesis and retained evidence/claim ceilings; distinguish historical family dispositions from current reopened fixed-F scope.",
+      "provenance": "Fixed ACVC source/evidence; read only the named scientific scope.",
+      "commit_sha": "07b848fadd57ed50af3632dbd60655f45ea666ab",
+      "url": "https://github.com/CartmanFatass/My-paper-code/blob/07b848fadd57ed50af3632dbd60655f45ea666ab/docs/research/candidates/acvc/DIRECTION.md"
+    },
+    {
+      "path": "docs/research/candidates/acvc/PARK.md",
+      "purpose": "Read the complete prior PARK rationale and retained contrary evidence as historical knowledge only; obsolete Clerk/routes are not current authority.",
+      "provenance": "Fixed ACVC source/evidence; read only the named scientific scope.",
+      "commit_sha": "07b848fadd57ed50af3632dbd60655f45ea666ab",
+      "url": "https://github.com/CartmanFatass/My-paper-code/blob/07b848fadd57ed50af3632dbd60655f45ea666ab/docs/research/candidates/acvc/PARK.md"
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_CLUSTER_PAIRED_EXPOSURE_B01_INTAKE_20260914.md",
+      "purpose": "Read the complete latest intake, including every material independent-review finding and actual DM response, selected report action and preserved support-plan deviations.",
+      "provenance": "Fixed ACVC source/evidence; read only the named scientific scope.",
+      "commit_sha": "07b848fadd57ed50af3632dbd60655f45ea666ab",
+      "url": "https://github.com/CartmanFatass/My-paper-code/blob/07b848fadd57ed50af3632dbd60655f45ea666ab/docs/research/candidates/acvc/ACVC_CLUSTER_PAIRED_EXPOSURE_B01_INTAKE_20260914.md"
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_CLUSTER_PAIRED_EXPOSURE_B01_RESULT_EVIDENCE_20260914.md",
+      "purpose": "Read complete E0: separate .01 J endpoints, direct paired changes, absolute arms, all adverse tails, covariance, one-programme/two-snapshot limits and native cost.",
+      "provenance": "Fixed ACVC source/evidence; read only the named scientific scope.",
+      "commit_sha": "07b848fadd57ed50af3632dbd60655f45ea666ab",
+      "url": "https://github.com/CartmanFatass/My-paper-code/blob/07b848fadd57ed50af3632dbd60655f45ea666ab/docs/research/candidates/acvc/ACVC_CLUSTER_PAIRED_EXPOSURE_B01_RESULT_EVIDENCE_20260914.md"
+    },
+    {
+      "path": "docs/research/candidates/acvc/pro_packets/20260914_cluster_paired_exposure_b01_scientific_review/archive/RESPONSE.md",
+      "purpose": "Read the complete latest independent scientific challenge, including the report-rationale clarification, serious fixed-recipe alternative and qualitative/unquantified investment preference.",
+      "provenance": "Independent Direction Pro full response; advisory science, not Portfolio disposition.",
+      "commit_sha": "68fed46f448312827f38b4b4f9bade36e2aedc35",
+      "url": "https://github.com/CartmanFatass/My-paper-code/blob/68fed46f448312827f38b4b4f9bade36e2aedc35/docs/research/candidates/acvc/pro_packets/20260914_cluster_paired_exposure_b01_scientific_review/archive/RESPONSE.md"
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_CLUSTER_LONGER_C_B01_INTAKE_20260914.md",
+      "purpose": "Read actual longer-C interpretation and complete material-review responses that motivated the paired programme.",
+      "provenance": "Fixed ACVC source/evidence; read only the named scientific scope.",
+      "commit_sha": "07b848fadd57ed50af3632dbd60655f45ea666ab",
+      "url": "https://github.com/CartmanFatass/My-paper-code/blob/07b848fadd57ed50af3632dbd60655f45ea666ab/docs/research/candidates/acvc/ACVC_CLUSTER_LONGER_C_B01_INTAKE_20260914.md"
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_CLUSTER_LONGER_C_B01_RESULT_EVIDENCE_20260914.md",
+      "purpose": "Read complete independent 1024 endpoint evidence, tails, workload and the measured 296.30 s final-only native reference.",
+      "provenance": "Fixed ACVC source/evidence; read only the named scientific scope.",
+      "commit_sha": "07b848fadd57ed50af3632dbd60655f45ea666ab",
+      "url": "https://github.com/CartmanFatass/My-paper-code/blob/07b848fadd57ed50af3632dbd60655f45ea666ab/docs/research/candidates/acvc/ACVC_CLUSTER_LONGER_C_B01_RESULT_EVIDENCE_20260914.md"
+    },
+    {
+      "path": "docs/research/candidates/acvc/pro_packets/20260914_cluster_longer_c_b01_scientific_review/archive/RESPONSE.md",
+      "purpose": "Read complete earlier independent challenge; its within-programme question was actually executed, not left as a plan.",
+      "provenance": "Independent Direction Pro response at its actual delivery commit.",
+      "commit_sha": "fcd806cb2b1f99158540d8f7d1123a9df249b214",
+      "url": "https://github.com/CartmanFatass/My-paper-code/blob/fcd806cb2b1f99158540d8f7d1123a9df249b214/docs/research/candidates/acvc/pro_packets/20260914_cluster_longer_c_b01_scientific_review/archive/RESPONSE.md"
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_CLUSTER_DEPLOYMENT_B03_INTAKE_20260914.md",
+      "purpose": "Read B03 actual reopening execution, review response and retained limitations.",
+      "provenance": "Fixed ACVC source/evidence; read only the named scientific scope.",
+      "commit_sha": "07b848fadd57ed50af3632dbd60655f45ea666ab",
+      "url": "https://github.com/CartmanFatass/My-paper-code/blob/07b848fadd57ed50af3632dbd60655f45ea666ab/docs/research/candidates/acvc/ACVC_CLUSTER_DEPLOYMENT_B03_INTAKE_20260914.md"
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_CLUSTER_DEPLOYMENT_B03_RESULT_EVIDENCE_20260914.md",
+      "purpose": "Read complete B03 endpoint/tail/cost evidence; keep this programme separate from other fits.",
+      "provenance": "Fixed ACVC source/evidence; read only the named scientific scope.",
+      "commit_sha": "07b848fadd57ed50af3632dbd60655f45ea666ab",
+      "url": "https://github.com/CartmanFatass/My-paper-code/blob/07b848fadd57ed50af3632dbd60655f45ea666ab/docs/research/candidates/acvc/ACVC_CLUSTER_DEPLOYMENT_B03_RESULT_EVIDENCE_20260914.md"
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_CLUSTER_DEPLOYMENT_B02_RESULT_EVIDENCE_20260913.md",
+      "purpose": "Read complete B02 fixed-F/dwell evidence and adverse worlds; descriptive historical programme only.",
+      "provenance": "Fixed ACVC source/evidence; read only the named scientific scope.",
+      "commit_sha": "07b848fadd57ed50af3632dbd60655f45ea666ab",
+      "url": "https://github.com/CartmanFatass/My-paper-code/blob/07b848fadd57ed50af3632dbd60655f45ea666ab/docs/research/candidates/acvc/ACVC_CLUSTER_DEPLOYMENT_B02_RESULT_EVIDENCE_20260913.md"
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_CLUSTER_DEPLOYMENT_B01_RESULT_EVIDENCE_20260912.md",
+      "purpose": "Read complete original K/B01 fixed-F/dwell evidence and claim ceilings.",
+      "provenance": "Fixed ACVC source/evidence; read only the named scientific scope.",
+      "commit_sha": "07b848fadd57ed50af3632dbd60655f45ea666ab",
+      "url": "https://github.com/CartmanFatass/My-paper-code/blob/07b848fadd57ed50af3632dbd60655f45ea666ab/docs/research/candidates/acvc/ACVC_CLUSTER_DEPLOYMENT_B01_RESULT_EVIDENCE_20260912.md"
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_FRESH_DENSE_PACKAGE_C01_INTAKE_20260911.md",
+      "purpose": "Read the consumed uniform-law C01 qualification, normal working-model assumptions and explicit missing neural-training calibration; do not pool into clustered evidence.",
+      "provenance": "Fixed ACVC source/evidence; read only the named scientific scope.",
+      "commit_sha": "07b848fadd57ed50af3632dbd60655f45ea666ab",
+      "url": "https://github.com/CartmanFatass/My-paper-code/blob/07b848fadd57ed50af3632dbd60655f45ea666ab/docs/research/candidates/acvc/ACVC_FRESH_DENSE_PACKAGE_C01_INTAKE_20260911.md"
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_FIXED_F_TRAINING_USE_B02_INTAKE_20260912.md",
+      "purpose": "Read both train-through-F negative observations and their scope; learned/uncertain/delayed contrary paths remain in DIRECTION/PARK.",
+      "provenance": "Fixed ACVC source/evidence; read only the named scientific scope.",
+      "commit_sha": "07b848fadd57ed50af3632dbd60655f45ea666ab",
+      "url": "https://github.com/CartmanFatass/My-paper-code/blob/07b848fadd57ed50af3632dbd60655f45ea666ab/docs/research/candidates/acvc/ACVC_FIXED_F_TRAINING_USE_B02_INTAKE_20260912.md"
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260914_rcle_park_vacancy_selection/archive/RESPONSE.md",
+      "purpose": "Read the complete prior 21323-byte reopening rationale for buying future-proposer fixed-F information; address it substantively.",
+      "provenance": "Previous complete Portfolio selection originally delivered at 7a490382cb469f2a62e276a756a2be32b460cc69; this published main copy is byte-identical. The RCLE vacancy was already filled by the original ACVC DM.",
+      "commit_sha": "1fabe79ebbf826138801b7e096278c2edda5d58a",
+      "url": "https://github.com/CartmanFatass/My-paper-code/blob/1fabe79ebbf826138801b7e096278c2edda5d58a/docs/research/portfolio/pro_packets/20260914_rcle_park_vacancy_selection/archive/RESPONSE.md"
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260914_rcle_park_vacancy_selection/INTAKE.md",
+      "purpose": "Read author response/application of the reopening decision and scope of the already-completed single vacancy transaction.",
+      "provenance": "Published prior Portfolio application; historical transaction, not a new dispatch route.",
+      "commit_sha": "1fabe79ebbf826138801b7e096278c2edda5d58a",
+      "url": "https://github.com/CartmanFatass/My-paper-code/blob/1fabe79ebbf826138801b7e096278c2edda5d58a/docs/research/portfolio/pro_packets/20260914_rcle_park_vacancy_selection/INTAKE.md"
+    },
+    {
+      "path": "docs/research/portfolio/PORTFOLIO.md",
+      "purpose": "Read the global direction/cost summary; reconcile older embedded summaries with the explicit current-state fields in the fixed registry and corrections in this TASK.",
+      "provenance": "Published global report at the named snapshot, not a separate source of authorization.",
+      "commit_sha": "1fabe79ebbf826138801b7e096278c2edda5d58a",
+      "url": "https://github.com/CartmanFatass/My-paper-code/blob/1fabe79ebbf826138801b7e096278c2edda5d58a/docs/research/portfolio/PORTFOLIO.md"
+    },
+    {
+      "path": ".codex/hmasd-dm-sessions.toml",
+      "purpose": "Read current top-level controls, ACVC/MGTAP/FOLR direction entries and Portfolio claim. Three occupied, zero reserved/vacancies. Current FOLR augmentation G is actually running; older B03/native-preparation fields are historical.",
+      "provenance": "Canonical shared registry at fixed input commit; operational snapshot only, no assumed live filesystem access.",
+      "commit_sha": "1fabe79ebbf826138801b7e096278c2edda5d58a",
+      "url": "https://github.com/CartmanFatass/My-paper-code/blob/1fabe79ebbf826138801b7e096278c2edda5d58a/.codex/hmasd-dm-sessions.toml"
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260914_lr_selection_portfolio_direction/INTAKE.md",
+      "purpose": "Read current peer conclusion, complete Portfolio response/application, next fixed-selected-rate objective, mixed historical evidence, native work and unknown costs.",
+      "provenance": "MGTAP owning DM report; no ACVC reassignment of peer work or priorities.",
+      "commit_sha": "1fabe79ebbf826138801b7e096278c2edda5d58a",
+      "url": "https://github.com/CartmanFatass/My-paper-code/blob/1fabe79ebbf826138801b7e096278c2edda5d58a/docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260914_lr_selection_portfolio_direction/INTAKE.md"
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/pro_packets/20260914_post_b03_portfolio_direction/INTAKE.md",
+      "purpose": "Read current peer clarified CONTINUE/MEDIUM and unique A-G objective; A-Z withdrawn. Preserve B02/B03 negative BANK evidence and capacity-confound limits.",
+      "provenance": "FOLR owning DM interpretation/application; existing commitment remains.",
+      "commit_sha": "1fabe79ebbf826138801b7e096278c2edda5d58a",
+      "url": "https://github.com/CartmanFatass/My-paper-code/blob/1fabe79ebbf826138801b7e096278c2edda5d58a/docs/research/candidates/vap_folr_core/pro_packets/20260914_post_b03_portfolio_direction/INTAKE.md"
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/entity_history_augmentation_b01_781601/EXECUTION.md",
+      "purpose": "Read current accepted G execution/independent engineering acceptance and selected unlaunched A, including fresh admission and actual monitoring; no new pair endpoint at the bound registry snapshot.",
+      "provenance": "Actual FOLR execution evidence supersedes stale no-new-native prose in earlier report snapshots.",
+      "commit_sha": "1fabe79ebbf826138801b7e096278c2edda5d58a",
+      "url": "https://github.com/CartmanFatass/My-paper-code/blob/1fabe79ebbf826138801b7e096278c2edda5d58a/docs/research/candidates/vap_folr_core/entity_history_augmentation_b01_781601/EXECUTION.md"
+    },
+    {
+      "path": "AGENTS.md",
+      "purpose": "Applicable current OWNER_DIRECT authority, sections1-6: DM ordinary scope, Portfolio direction finality, actual resources, three-slot ceiling and no fourth-slot expansion. Historical conflicting procedures do not override current owner instructions.",
+      "provenance": "Current owner/repository authority, not scientific evidence.",
+      "commit_sha": "1fabe79ebbf826138801b7e096278c2edda5d58a",
+      "url": "https://github.com/CartmanFatass/My-paper-code/blob/1fabe79ebbf826138801b7e096278c2edda5d58a/AGENTS.md"
+    },
+    {
+      "path": "docs/project/PORTFOLIO_DECISION_PROTOCOL.md",
+      "purpose": "Read the complete current direction-finality and mandatory web-context contract; apply its scoped CONTINUE/RECAST/PARK/CLOSE authority.",
+      "provenance": "Current owner-authorized Portfolio decision protocol.",
+      "commit_sha": "1fabe79ebbf826138801b7e096278c2edda5d58a",
+      "url": "https://github.com/CartmanFatass/My-paper-code/blob/1fabe79ebbf826138801b7e096278c2edda5d58a/docs/project/PORTFOLIO_DECISION_PROTOCOL.md"
+    },
+    {
+      "path": "docs/project/PEER_DM_COORDINATION.md",
+      "purpose": "Read shared-record, short main transaction, dialogue ownership and genuine-vacancy principles as relevant; this request creates no vacancy or replacement transaction.",
+      "provenance": "Current peer mechanics; no extra approval system.",
+      "commit_sha": "1fabe79ebbf826138801b7e096278c2edda5d58a",
+      "url": "https://github.com/CartmanFatass/My-paper-code/blob/1fabe79ebbf826138801b7e096278c2edda5d58a/docs/project/PEER_DM_COORDINATION.md"
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "purpose": "Applicable sections7-8,11.4,11.7-11.10, especially11.8: genuine B usefulness, independent units, calibration/qualification, proportionate dominant work, scientific choice and limits. Section11 controls B and C-BENCH.",
+      "provenance": "Current empirical specification; only these named sections are adopted for this direction decision.",
+      "commit_sha": "1fabe79ebbf826138801b7e096278c2edda5d58a",
+      "url": "https://github.com/CartmanFatass/My-paper-code/blob/1fabe79ebbf826138801b7e096278c2edda5d58a/docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md"
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "purpose": "Section6 only: randomization hierarchy, independent programmes, conditional paired worlds, selection and claim scope.",
+      "provenance": "Focused scientific foundations; explanatory context, not added approval requirements.",
+      "commit_sha": "1fabe79ebbf826138801b7e096278c2edda5d58a",
+      "url": "https://github.com/CartmanFatass/My-paper-code/blob/1fabe79ebbf826138801b7e096278c2edda5d58a/docs/rl-marl-foundations-20260907/FOUNDATIONS.md"
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+      "purpose": "First three sections: comparison/randomness hierarchy, whole-package versus isolated-mechanism meaning and evaluation limits.",
+      "provenance": "Focused empirical-method knowledge, not a new benchmark or mandatory experiment.",
+      "commit_sha": "1fabe79ebbf826138801b7e096278c2edda5d58a",
+      "url": "https://github.com/CartmanFatass/My-paper-code/blob/1fabe79ebbf826138801b7e096278c2edda5d58a/docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md"
+    },
+    {
+      "path": "docs/project/MARL_RUNTIME_ENGINEERING_SPEC.md",
+      "purpose": "Section1 only for actual owner/platform limits versus revisable DM wall/support planning and honest cost reporting; no new execution requested here.",
+      "provenance": "Current runtime resource distinction relevant to the investment alternatives.",
+      "commit_sha": "1fabe79ebbf826138801b7e096278c2edda5d58a",
+      "url": "https://github.com/CartmanFatass/My-paper-code/blob/1fabe79ebbf826138801b7e096278c2edda5d58a/docs/project/MARL_RUNTIME_ENGINEERING_SPEC.md"
+    }
+  ]
+}

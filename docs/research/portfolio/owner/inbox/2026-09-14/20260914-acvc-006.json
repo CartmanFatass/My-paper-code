@@ -1,0 +1,87 @@
+{
+  "id": "20260914-acvc-006",
+  "created": "2026-09-14T09:33:52-07:00",
+  "direction": "acvc",
+  "tier": "direction",
+  "kind": "close-call",
+  "title": "ACVC 方向建议：有限继续与保留参考后 PARK 接近",
+  "context": "完整配对 B01 和全部独立评审回应已完成。当前形成方向建议，Portfolio 处置尚待完整答复；推荐与 PARK 是接近的定性取舍。",
+  "options": [
+    {
+      "key": "a",
+      "label": "建议固定配方的未来 proposer 比较",
+      "consequence": "提交六程序成本候选及总体问题，最终对象仍由完整 Portfolio 方向决定后的 DM 卡片绑定。"
+    },
+    {
+      "key": "b",
+      "label": "建议 PARK 并保留 F 参考",
+      "consequence": "向 Portfolio 提议接受剩余不确定性并停止当前开发；尚未执行 PARK。"
+    },
+    {
+      "key": "c",
+      "label": "建议较小的一或二程序 B",
+      "consequence": "用较低成本购买可能改变发展判断的局部证据，不声明总体资格。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "未来固定配方 proposer 的期望增量直接影响 F 维护判断；新的有限比较可以改变该判断，PARK 也合理。",
+  "evidence": [
+    "docs/research/candidates/acvc/ACVC_POST_PAIRED_DIRECTION_REPORT_20260914.md",
+    "docs/research/candidates/acvc/ACVC_CLUSTER_PAIRED_EXPOSURE_B01_INTAKE_20260914.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-14.md#L72",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否保留并提交ACVC方向提案：优先CONTINUE一次固定1024配方的未来proposer比较，认真比较保留F参考后的PARK？",
+    "changes_if_approved": [
+      {
+        "target": "ACVC方向发展建议",
+        "from": "配对B01及完整科学审阅已完成；当前CONTINUE/MEDIUM/recasts2，尚无后继实验",
+        "to": "形成并提交Portfolio方向报告，推荐一个有明确总体问题与有限成本的新比较；实际方向处置和新卡仍待完整Portfolio决定"
+      }
+    ],
+    "if_refused": "在下一干净边界按实际owner意见修订或撤回未发送提案；已接受请求先核对状态，保留全部结果和已发文本，不重发、改写历史或自动释放席位。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/acvc/ACVC_CLUSTER_PAIRED_EXPOSURE_B01_RESULT_EVIDENCE_20260914.md",
+        "quote": "F−dwell declines from+0.1191862743 to+0.0687279633J while the later endpoint remains useful by the frozen mean criterion.",
+        "why": "C在共同世界上提高，后期F仍超出有用dwell，未来新proposer的期望增量仍是直接影响是否维护F的具体问题。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/acvc/pro_packets/20260914_cluster_paired_exposure_b01_scientific_review/archive/RESPONSE.md",
+        "quote": "My report preference is discretionary and unquantified.",
+        "why": "保留既有有限参考后PARK也合理；新比较不能凭6个程序就保证校准，严重负向尾部和完整支持成本未知必须保留。"
+      }
+    ],
+    "uncertainty": [
+      "推荐CONTINUE与PARK是接近的定性投入取舍，没有量化净价值排名。",
+      "单次新B也可能改变发展判断，不能因为不能独自解决总体问题就排除。",
+      "六程序只是成本化候选，尚未冻结新卡/seed/统计模型；置信假设不足或结果不确定时必须限缩结论。",
+      "当前三个占用席位不变，不在此轮选择替代方向或调整其他方向优先级。"
+    ],
+    "cost": {
+      "compute": "候选六程序1867776ticks/12288updates/1152终评，旧单程序296.30s给出1777.8s合计参考；native3000s/支持4800s只是候选规划。当前实际仅提交一份方向报告并关闭同次回复，支持1800s可修订计划；完整累计成本仍未知。",
+      "owner_time": "无需等待，所有者可异步介入。",
+      "reversibility": "costly",
+      "waits_on_this": "nothing"
+    },
+    "verdict_text": "Owner-delegated decision (unattended, 2026-09-03 instruction): submit the report with CONTINUE recommendation; no Portfolio disposition or new experiment applied.",
+    "source": "docs/research/candidates/acvc/ACVC_POST_PAIRED_DIRECTION_REPORT_20260914.md"
+  },
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-14T16:44:53+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "AGENTS.md",
+      "record": "docs/research/portfolio/pro_packets/20260914_acvc_post_paired_direction/INTAKE.md",
+      "state": "applied",
+      "summary": "依据既有 OWNER_DIRECT 的持续 DM 委托，实际已形成并提交该方向建议；仅是作者动作，完整 Portfolio 处置、新对象与 native 均未应用。"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "sha": "26e23ff3a5d12818bd062d32ed6cc661e5ac0b68",
+  "cwd": "/home/wu/hmasd-worktrees/lcac-b01-26e23ff3",
+  "exit_code": 0,
+  "enclosing_seconds": 3.2660000000032596,
+  "stdout": ".........                                                                [100%]\n9 passed in 1.46s\n",
+  "stderr": "",
+  "scratch": "/home/wu/hmasd-worktrees/lcac-b01-26e23ff3/temp/tests/lcac-b01-remote-check01",
+  "cleanup": "exact remote invocation directory removed after verified absolute-path match; local restricted scratch untouched",
+  "native_exposure": 0
+}

@@ -1,0 +1,22 @@
+{
+  "event_id": "FOLR_ENTITY_HISTORY_AUGMENTATION_B01_781601:MONITOR_ADOPTED:folr-augmentation-b01-781601-augmented:20260914T194029Z",
+  "monitor_native": "/root/folr_augmentation_b01_monitor",
+  "monitor_app_source": "01a0a090-cd02-7fe1-a5e8-1d3258c7fc44",
+  "parent_thread_id": "01a09e16-f7b1-7e60-83a0-ba2a7cd969bc",
+  "accepted_at": "2026-09-14T19:39:55.755736Z",
+  "observed_at": "2026-09-14T19:40:29.085Z",
+  "observation_provenance": "UTC/status/log in one remote command",
+  "source_sha": "d9977dc18baf33b78dc626764c252391f1ddaa9d",
+  "handle": "folr-augmentation-b01-781601-augmented",
+  "pid": 3679958,
+  "status": "running",
+  "exit_code": null,
+  "available_physical_and_effective_bytes": 15625777152,
+  "next_due_check": "2026-09-14T19:45:29.085Z",
+  "observation_deadline": "2026-09-14T21:39:55.755736Z",
+  "parent_route_assignment": {
+    "model": "gpt-6-astra",
+    "thinking": "max"
+  },
+  "dm_acceptance": "Actual same-batch A adoption accepted; stop routine DM polling. G is complete and outside the active set."
+}

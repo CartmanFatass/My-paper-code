@@ -1,0 +1,93 @@
+{
+  "request_id": "2026-09-13-folr-retained-reference-investment-01",
+  "intaken_at": "2026-09-13T19:39:53.960897+00:00",
+  "intake_author": "/root/dm_folr_resume",
+  "task_sha": "13e461c48c735665fd770619a7dd3154b51650c1",
+  "handoff_commit": "d098f6c69b6b4b35af68ed58a21046e4b9e5fdbb",
+  "handoff_sha256": "3e77de398c99e1bfa9bceaf0c6ba2f64eee59f9924731685b3307e012c5376ac",
+  "response_commit": "9e37525139abc18ab6b9dcd393a21e5a24f12e26",
+  "response_path": "docs/research/portfolio/pro_packets/20260913_folr_retained_reference_investment/archive/RESPONSE.md",
+  "response_bytes": 29328,
+  "response_lines": 148,
+  "response_sha256": "6d2168eadd82e0581cbf65a45a49d4e65c5eb3d71815bb8ef1cbe9d7a3de4276",
+  "full_runtime_archive_equals_git_blob": true,
+  "delivery_scope_one_response_file_only": true,
+  "issue_comment_id": 5655512143,
+  "fresh_comment_read_matches_archived_pairing": true,
+  "transport_operation_id": "0134d548-7182-4825-ab5c-3a2080c8bef4",
+  "provider_user_id": "c4679f53-15da-4f76-a670-8c30fe6a8b0b",
+  "provider_assistant_id": "809fd465-9d4e-4f59-9af7-f9c6051dfd25",
+  "send_count": 1,
+  "transport_state": "ARCHIVED",
+  "selected_option": "F",
+  "authority": "PRO_FINAL / OWNER_DELEGATED",
+  "conformance": "ACCEPTED; no science/specification conflict",
+  "caps_seconds": {
+    "generic_complete_invocation": 2700,
+    "fixed_bank_complete_invocation": 300,
+    "native_sum": 3000,
+    "hard_support": 1200,
+    "complete_invoked": 4200
+  },
+  "planned_work": {
+    "source": "accepted E card Exposure, RNG and native endpoint; archived response section 6",
+    "scope": "counts only; no model/environment/RNG constructed",
+    "fresh_generic_fits": 1,
+    "retained_historical_bank_fits": 1,
+    "new_bank_fits": 0,
+    "new_generic_training_episodes": 5000,
+    "new_generic_training_ticks": 100000,
+    "new_generic_optimizer_steps": 4969,
+    "new_generic_final_episodes": 128,
+    "new_bank_final_episodes": 128,
+    "new_generic_total_ticks": 102560,
+    "new_bank_total_ticks": 2560,
+    "new_total_native_ticks": 105120,
+    "new_generic_replay_gru_positions": 33391680,
+    "new_generic_acting_positions": 538440,
+    "new_bank_acting_cell_positions_upper": 67200,
+    "additional_replay_positions_for_unselected_fresh_bank_fit_upper": 166958400
+  },
+  "new_empirical_exposure": {
+    "models": 0,
+    "checkpoint_loads": 0,
+    "scientific_rng_masters": 0,
+    "training_episodes": 0,
+    "native_ticks": 0,
+    "optimizer_steps": 0,
+    "evaluation_episodes": 0,
+    "profiling": 0,
+    "numerical_tests": 0
+  },
+  "lifecycle": "ACTIVE",
+  "priority": "MEDIUM",
+  "entity_history_family": "OPEN",
+  "matching_tuned_headroom": "absent, not zero",
+  "owner_reviews": [],
+  "prediction": "not taken (unattended); F recommendation was not an empirical outcome forecast",
+  "current_method_sha_read": "68bc2a9a6299af5ab14125e518f5261bcbfbabc6",
+  "relevant_current_spec_diff_from_task_methods": "none",
+  "receipt_artifacts": {
+    "TRANSPORT_FACTS.json": {
+      "source": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\portfolio\\2026-09-13-folr-retained-reference-investment-01\\2026-09-13-folr-retained-reference-investment-01--portfolio__03_TRANSPORT_FACTS.json",
+      "bytes": 3523,
+      "sha256": "2e2ec2a95a1776d4822ff21cd83e78a60eeeba679c023aa1f7aa286ef4112f03"
+    },
+    "GITHUB_PAIRING.json": {
+      "source": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\portfolio\\2026-09-13-folr-retained-reference-investment-01\\2026-09-13-folr-retained-reference-investment-01--portfolio__06_GITHUB_PAIRING.json",
+      "bytes": 2328,
+      "sha256": "9ab5a75f4579c03618a5687cc6f4609d5fcf29197de7c13afcce652e2ff1d035"
+    },
+    "HANDOFF_PREFLIGHT.json": {
+      "source": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\portfolio\\2026-09-13-folr-retained-reference-investment-01\\2026-09-13-folr-retained-reference-investment-01--portfolio__HANDOFF_PREFLIGHT.json",
+      "bytes": 4771,
+      "sha256": "2f2357c70d79f2af8db7b65f2e0be3021ce439636212b8a9a1da5dfd3753c8d1"
+    },
+    "CHAT_RECEIPT.md": {
+      "bytes": 96,
+      "sha256": "e82ee10325f90aa2ddf0adde143c5bcf80e8e050150285f22c9dcecb23f0ed19",
+      "scope": "96-byte short receipt only; full decision is RESPONSE.md"
+    }
+  },
+  "receipt_metadata_limit": "Preserved TRANSPORT_FACTS field handoff_sha256 contains the 40-character Git commit despite its label. HANDOFF_PREFLIGHT correctly separates frozen_handoff.sha and sha256; both are reported correctly here. No binding ambiguity or scientific effect."
+}

@@ -1,0 +1,24 @@
+{
+  "requested_at": "2026-09-14T04:55:14.370352+00:00",
+  "handle": "lcac-b03-s9413-81fec5e1-20260914",
+  "launch_sha": "81fec5e1b3a2cee810029f0cd30713a0ea64fce3",
+  "node": "wsl_4070",
+  "cwd": "/home/wu/hmasd-worktrees/lcac-b01-26e23ff3",
+  "output": "/home/wu/hmasd-worktrees/lcac-b01-26e23ff3/experiments/results/lcac_b03_9413_20260914",
+  "receipts": "/home/wu/hmasd-worktrees/lcac-b01-26e23ff3/experiments/results/lcac_b03_9413_20260914_receipts",
+  "monitor": "/root/lcac_b03_monitor",
+  "phase": "accepted",
+  "ssh_returncode": 0,
+  "launch_stdout": "Task 'lcac-b03-s9413-81fec5e1-20260914' started in tmux session 'agent_lcac-b03-s9413-81fec5e1-20260914'. Output: /home/wu/.agent-tasks/lcac-b03-s9413-81fec5e1-20260914/task.log\n",
+  "launch_stderr": "",
+  "launch_ssh_wall_seconds": 0.41960480000125244,
+  "status": {
+    "task": "lcac-b03-s9413-81fec5e1-20260914",
+    "status": "running",
+    "exit_code": null,
+    "pid": 3660054,
+    "uptime_seconds": 0,
+    "tmux_active": true
+  },
+  "accepted_at": "2026-09-14T04:55:15.171400+00:00"
+}

@@ -1,0 +1,45 @@
+# ACVC_CLUSTER_DEPLOYMENT_B02 — independent same-law development observation
+Claim: one fresh C-trained cluster endpoint tests whether the complete fixed F deployment package retains a useful increment over its C proposer and useful own-predicate dwell.
+Binding MARL structure: other-agent-induced partial observability; each UAV's private association history changes its correction, recurrent feedback and team-service consequences.
+
+## 1. Object choice and authority
+
+**B/EXPLORE, one new original invocation; OWNER_DELEGATED ordinary object choice.** Under owner correction main `2cd18ede9`, AGENTS §2 “Ordinary direction research belongs to DM”, the DM selects ordinary A/B objects in an admitted open mechanism and declares finite budgets/stops. This is not a Portfolio grant request or spending K's unused seconds. K completed successfully; its original fit, cap, no-retry and reference conclusions remain fixed. This object has a prospectively distinct unscreened identity and asks about an independent endpoint in the accepted cluster-deployment mechanism. No family opening/recast, post-C01 direction selection, training-F retry or C promotion is made.
+
+Options: (a) one fresh C fit and its three competent deployment controls; (b) retain checkpoint-only evidence without another measurement; (c) add two or more fits now. Recommend/select (a): K's F−C +0.124073 J and F−dwell +0.076741 J are credible follow-up signals; 1/64 and 8/64 adverse worlds, useful dwell and one learning unit leave fresh-training variation unresolved. A fresh instance can change finite development advice; more K evaluation cannot answer that question. (b) conserves support but leaves this useful uncertainty; (c) is unnecessary before this single new instance. **Owner-delegated decision (unattended, 2026-09-03 instruction): (a)** under current ordinary-research authority. No existing external customer or receiving policy is asserted or required.
+
+Both complete Convergence answers remain accepted for their named reference/use questions. Their no-addition clauses are not whole-direction prohibitions. No old request is reopened/resent. Overall planning proceeds independently through Clerk, without a gate for this object.
+
+## 2. Comparison and prospective identity
+
+One C-trained DENSE proposer: existing clustered generator in training/evaluation; five UAVs/fifty users; H256; private GRU64; native legal observation/reward/action; PPO and ordered Adam exposure unchanged. Training is C only. C, F and own-dwell each load the sole final checkpoint privately, with their own trajectory, anchors, predicate, previous actual command and hidden-state resets. F uses `clip(-(position-previous_position)/30,-1,1)` at its existing predicate; dwell zeroes its own eligible commands. No borrowed F masks, dose matching, extra arm/panel or intermediate checkpoint selection.
+
+Master **21493**, evaluation namespace **31493**, chosen before output. The accepted stream-construction law is unchanged, with new non-overlapping identities. Training:512 episodes,256 two-episode rollouts,1024 optimizer calls. Evaluation:64 paired initial-world episodes per final arm,H256. Identity `ACVC_CLUSTER_DEPLOYMENT_B02`; one checkpoint,three private loads,192 evaluations,180224 team ticks (131072 train+49152 evaluation). Zero initial evaluation; preserve every outcome and partial row.
+
+## 3. Primary, interpretation and predictions
+
+Two separate primary means: F−C and F−own-dwell in J=S/256 over their64 signed world differences. Preserve absolute arm S/J, every difference, sample SD(ddof1), conditional SE, signed adverse/favorable/zero counts and extremes; dwell−C is descriptive. Retain NumPy float64 final reductions. **Strictly >+.01 J UP; inclusive [−.01,+.01] WITHIN with sign and without equivalence; strictly <−.01 J DOWN.** MEI .01 J follows the unchanged native host/reward scale, not a power threshold.
+
+Both UP support use on this new endpoint; F−C UP without F−dwell UP supports only C-relative gain. Loss to C favors C here; no material increment over useful dwell weighs against adding F in this development setting. Preserve mixed/inside-margin results. Compare B01/B02 per fit; no uniform C01 pooling, stable superiority, pure-retrace attribution, transfer, general future-policy default, tuned headroom or formal UAV claim. A damaged contrast is unavailable; retain independent trustworthy facts without replacing the fit.
+
+DM forecasts conditional on completeness: F−C UP/WITHIN/DOWN .60/.25/.15; F−dwell .50/.30/.20; P(complete inside native cap)=.90. Subjective, not calibrated: K/uniform package evidence supports benefit; useful dwell, adverse worlds, fresh training and unknown support tails limit confidence. Owner prediction **not taken (unattended)**; main owner reviews returned `[]`. Score observed outcomes at intake and preserve any actual later owner reply.
+
+Scientific reading used FOUNDATIONS §6 and empirical-topic comparison/randomness/component-attribution under evidence-spec §§11.8–11.10. One fit-plus-panels is the learning unit;64 worlds describe conditional deployment spread. A fresh fit supports finite advice, not stable training-population benefit. Tuned same-information cluster headroom is absent, not zero or a gate. No new literature claim.
+
+## 4. L0 engineering and acceptance
+
+DM owns `C:/Projects/HMASD-worktrees/codex-acvc`, branch `codex/acvc`, new `experiments/candidates/acvc/cluster_deployment_b02/`, `scripts/run_acvc_cluster_deployment_b02.py`, mirrored tests and direction evidence. A small shared change parameterizes B01 publication's expected master/evaluation namespace with identical B01 defaults. The learner, environment, numerical operations, comparator and old inputs stay unchanged. B02 passes its own identity to both producer and final publication.
+
+Focused synthetic checks must accept B02 identities, reject wrong/B01 reset identities, preserve B01 defaults and exercise runner-to-primary publication. Independently review changed identity/RNG/publication mapping under Engineering Scope§7.3; DM resolves findings/accepts. Reuse unchanged semantic tests without a scientific smoke. No model/RNG or scientific output in engineering checks. Engineering Scope§4: the launch wrapper's single output-existence refusal preserves this original invocation's output against accidental reuse; it adds no retry or scientific eligibility rule. No orchestration service, registry or extra telemetry is added.
+
+Direction Pro Convergence remains the independent scientific Reviewer of design, evidence, conclusions and follow-up. The unchanged same-law C/F/own-dwell comparison and claim ceilings reuse the prior complete reviews; this new independent endpoint and its resulting development advice will receive proportionate Convergence review at intake. DM reads the full review, answers material findings and repairs defects or limits dependent claims before accepting them. This is scientific review, not optional approval advice or an investment/lifecycle veto; it creates no universal A/B pre-launch gate.
+
+Technical acceptance requires published source/command, adjacent admission, one fit/1024 updates, original checkpoint/three panels and intact publication. Then apply scientific reading. This card permits no scientific retry/replacement; failures retain original logs, partials and costs. Later useful ordinary objects require their own reason and finite scope, not an automatic successor quota or lifecycle inference.
+
+## 5. Finite cost, execution route and stop
+
+Declare **one result-bearing invocation,600s whole native,600s additional invoked support,1200s complete future invoked work**. These are this DM-selected object's limits under ordinary delegation, not renewed K funds. Known K native165.33s/supervisor166s and support75.29171340009022s are historical observations; complete support/provider/agent cost is unknown and does not certify this cap. Count each new invoked phase once and retain unmeasured tails. Historical cumulative direction cost is incomplete, not zero; no undeclared cumulative cap is inferred. An actual applicable cumulative/resource limit remains binding.
+
+Remote-first `hmasd-wsl-node`, exact published SHA, prospective CPU FP32/threads1 portability preserved. No GPU/library/RNG-law change. Fresh destination-adjacent admission requires physical/effective available memory >=4GiB and is joined directly to the run. Historical RSS0.53149GiB does not admit it. Inner execution580s; outer timeout595s with bounded grace within600s. Detached `agent-task`; accepted handle goes to this DM's native Luna/low Monitor, with actual adoption before DM stops polling.
+
+Short preparation/checks are bounded; substantive portable checks run remotely after commit. If necessary engineering cannot fit remaining support, report the concrete limitation without trimming exposure. Stop on cap/failure and preserve facts. DM intakes the result and chooses the next useful ordinary action; no all-direction barrier or wait for Portfolio planning.

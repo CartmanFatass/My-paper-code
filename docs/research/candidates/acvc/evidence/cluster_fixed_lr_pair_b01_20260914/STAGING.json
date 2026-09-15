@@ -1,0 +1,14 @@
+{
+  "initial_source_staging": {
+    "returncode": 0,
+    "stdout": "{\"source\": \"9b44896d967b424010b4b60888a0f7e2e0dfd5db\", \"actual_head\": \"9b44896d967b424010b4b60888a0f7e2e0dfd5db\", \"worktree\": \"/home/wu/hmasd-worktrees/acvc-rate-pair-b01-9b44896d9\", \"staged_source_scopes\": [\"hmasd\", \"ha_ctse_process\", \"envs\", \"environments\", \"experiments\", \"scripts\", \"tools\", \"tests\", \"manifold_hmasd\"], \"source_diff_exit\": 0, \"bash_syntax_exit\": 0, \"scientific_invocations\": 0}\n",
+    "stderr": "(eval):1: can't change option: zle\n(anon):setopt:7: can't change option: monitor\n\n[\u001b[31mERROR\u001b[39m]: gitstatus failed to initialize.\n\n\n  Add the following parameter to ~/.zshrc for extra diagnostics on error:\n\n    GITSTATUS_LOG_LEVEL=DEBUG\n\n  Restart Zsh to retry gitstatus initialization:\n\n    \u001b[32mexec zsh\u001b[39m\nPreparing worktree (detached HEAD 9b44896d9)\nAuto packing the repository in background for optimum performance.\nSee \"git help gc\" for manual housekeeping.\nAuto packing the repository in background for optimum performance.\nSee \"git help gc\" for manual housekeeping.\n",
+    "operation": "exact source staging, no scientific launch"
+  },
+  "accepted_source_staging": {
+    "returncode": 0,
+    "stdout": "{\"source\": \"2bbaa99ad9cc717d89e47a1f24d9acd76dce4f97\", \"actual_head\": \"2bbaa99ad9cc717d89e47a1f24d9acd76dce4f97\", \"worktree\": \"/home/wu/hmasd-worktrees/acvc-rate-pair-b01-2bbaa99ad\", \"source_diff_exit\": 0, \"bash_syntax_exit\": 0, \"scientific_invocations\": 0, \"retired_staging_path\": \"/home/wu/hmasd-worktrees/acvc-rate-pair-b01-9b44896d9\", \"retired_disk_absent\": true, \"retired_registration_absent\": true}\n",
+    "stderr": "(eval):1: can't change option: zle\n(anon):setopt:7: can't change option: monitor\n\n[\u001b[31mERROR\u001b[39m]: gitstatus failed to initialize.\n\n\n  Add the following parameter to ~/.zshrc for extra diagnostics on error:\n\n    GITSTATUS_LOG_LEVEL=DEBUG\n\n  Restart Zsh to retry gitstatus initialization:\n\n    \u001b[32mexec zsh\u001b[39m\nFrom https://github.com/CartmanFatass/My-paper-code\n * branch                2bbaa99ad9cc717d89e47a1f24d9acd76dce4f97 -> FETCH_HEAD\nPreparing worktree (detached HEAD 2bbaa99ad)\n",
+    "operation": "published corrected source staging; retire unlaunched source-only initial checkout"
+  }
+}

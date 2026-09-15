@@ -1,0 +1,175 @@
+{
+  "prepared_at": "2026-09-13T18:52:10.902109+00:00",
+  "request_id": "2026-09-13-folr-retained-reference-investment-01",
+  "author_native": "/root/dm_folr_resume",
+  "transport_native": "/root/dm_folr_resume/transport_lh_folr",
+  "science_input_sha": "c17f7ff5f6b1ad862a7f3da6e21c3274998af563",
+  "method_input_sha": "6459a2ff51cb45274d7f0cf7c1b4de9e0ffb0622",
+  "authority_scope": "One bounded Portfolio F/D investment question and its full intake. No current empirical allocation, scientific seed, model load or Generic retry. Existing Convergence use decision remains final and is not resent.",
+  "direction": "vap_folr_core",
+  "lifecycle": "ACTIVE",
+  "priority": "MEDIUM",
+  "matching_tuned_headroom": "absent, not zero",
+  "selected_use": "One fresh full Generic GRU64 RETAIN fit versus the fixed historical BANK GRU16 on new 128-episode panels, to decide optional executable-reference inclusion on this exact host.",
+  "historical_accepted_E": {
+    "status": "BANK_OWN_ARM_ACCEPTED_PAIR_PRIMARY_UNAVAILABLE",
+    "generic": {
+      "status": "incomplete",
+      "exit_code": 124,
+      "counts": {
+        "training_episodes": 4253,
+        "training_ticks": 85060,
+        "optimizer_steps": 4221,
+        "evaluation_episodes": 0,
+        "evaluation_ticks": 0
+      },
+      "native_panel": null,
+      "source_sha": "922a461fde867a8efe23a1563a969e6d2d08e258",
+      "wall_seconds": 1795.06
+    },
+    "bank": {
+      "status": "complete",
+      "exit_code": 0,
+      "counts": {
+        "training_episodes": 5000,
+        "training_ticks": 100000,
+        "optimizer_steps": 4969,
+        "evaluation_episodes": 128,
+        "evaluation_ticks": 2560
+      },
+      "native_panel": {
+        "mean": -4.32609375,
+        "sample_sd": 2.8547342180505457,
+        "conditional_episode_se": 0.2523252405086021,
+        "minimum": -12.529999999999998,
+        "maximum": 1.5100000000000007,
+        "n": 128
+      },
+      "source_sha": "5b3ae6b9847beba5fe72b0960ec7b66cb7d1c4b4",
+      "wall_seconds": 1762.22
+    },
+    "actual_completed_counts": {
+      "training_episodes": 9253,
+      "training_ticks": 185060,
+      "optimizer_steps": 9190,
+      "evaluation_episodes": 128,
+      "evaluation_ticks": 2560
+    },
+    "pair_primary": null,
+    "pair_rule": null,
+    "independent_training_instances_with_final_endpoint": 1,
+    "mei_for_missing_contrast": 1.0,
+    "claim": "One fitted BANK policy only; no comparative sign, causal memory benefit, stable superiority, matched capacity or new headroom."
+  },
+  "new_author_exposure": {
+    "scientific_invocations": 0,
+    "models": 0,
+    "checkpoint_loads": 0,
+    "environments": 0,
+    "scientific_rng_masters": 0,
+    "training_episodes": 0,
+    "native_ticks": 0,
+    "optimizer_steps": 0,
+    "evaluation_episodes": 0,
+    "diagnostic_trajectories": 0,
+    "policy_search_candidates": 0,
+    "profiling": 0,
+    "source_implementation_edits": 0,
+    "source_or_numerical_tests": 0,
+    "new_raw_result_analysis": 0,
+    "provider_sends": 0,
+    "transport_dispatches": 0
+  },
+  "prospective_configuration_arithmetic": {
+    "source": "accepted E card Exposure, RNG and native endpoint; archived response section 6",
+    "scope": "counts only; no model/environment/RNG constructed",
+    "fresh_generic_fits": 1,
+    "retained_historical_bank_fits": 1,
+    "new_bank_fits": 0,
+    "new_generic_training_episodes": 5000,
+    "new_generic_training_ticks": 100000,
+    "new_generic_optimizer_steps": 4969,
+    "new_generic_final_episodes": 128,
+    "new_bank_final_episodes": 128,
+    "new_generic_total_ticks": 102560,
+    "new_bank_total_ticks": 2560,
+    "new_total_native_ticks": 105120,
+    "new_generic_replay_gru_positions": 33391680,
+    "new_generic_acting_positions": 538440,
+    "new_bank_acting_cell_positions_upper": 67200,
+    "additional_replay_positions_for_unselected_fresh_bank_fit_upper": 166958400
+  },
+  "historical_prefix_sizing_only": {
+    "generic_incomplete_wall_seconds": 1795.06,
+    "observed_training_episodes": 4253,
+    "observed_optimizer_steps": 4221,
+    "stationary_episode_scaled_seconds": 2110.345638372913,
+    "stationary_update_scaled_seconds": 2113.161132433073,
+    "limit": "not a measured completion time or lower bound; missing checkpoint/evaluation/publication stages and all stage rates unknown"
+  },
+  "option_F_proposed_caps_seconds": {
+    "generic_complete_invocation": 2700,
+    "fixed_bank_complete_invocation": 300,
+    "native_sum": 3000,
+    "hard_support": 1200,
+    "complete_invoked": 4200
+  },
+  "future_costs": {
+    "generic_full_wall": "UNKNOWN",
+    "fixed_bank_full_wall": "UNKNOWN",
+    "per_arm_memory": "UNKNOWN",
+    "full_support": "UNKNOWN",
+    "provider_agent_complete": "UNKNOWN"
+  },
+  "historical_cost_limit": "E native wall 3557.28 seconds, support lower bound 213.7327064, combined lower bound 3771.0127064; later publication 9.1041944 is a separate window. Full support/complete coverage remains unknown and old caps do not transfer.",
+  "same_host_semantics": "easy five-slot H20 Traffic Junction; vision 1; five actions; native reward/transition/RNG; CPU FP32 Torch intra/inter-op 1/1; full identical public lifecycle table and own local physical visibility.",
+  "primary": "d_use = new fixed-BANK mean minus new Generic mean; nonpaired new panels; no historical pooling.",
+  "proposed_reading": "strict >+1 optional BANK reference; inclusive [-1,+1] favor Generic-only while retaining sign/conditional uncertainty, no equivalence; strict <-1 favor Generic-only; missing endpoint no contrast.",
+  "unit_and_selection_limit": "Outcome-informed, completion-conditioned historical BANK, one new unscreened Generic training realization. No BANK training replication, paired training/episode inference or training-population uncertainty.",
+  "dependency": "New full Generic fit/panel first; only after technical acceptance evaluate retained BANK irrespective of Generic score. Generic failure ends this unit before BANK panel; BANK evaluation failure retains trustworthy Generic facts without substitute or new BANK fit.",
+  "non_goals": [
+    "E contrast repair",
+    "Generic retry/resume",
+    "new BANK training",
+    "architecture/width/seed/checkpoint search",
+    "C/transfer/UAV",
+    "mechanism cause or stable superiority",
+    "same-endpoint speed/headroom claim",
+    "whole-direction lifecycle change",
+    "automatic successor or budget renewal"
+  ],
+  "source_pointers": [
+    {
+      "path": "docs/research/candidates/vap_folr_core/pro_packets/20260912_entity_history_post_b01_discriminator/archive/RESPONSE.md",
+      "commit_sha": "d6a29b287612f21fd5ddbb0cc19fbae4e8c1fb12",
+      "use": "complete selected question; no empirical allocation"
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_ENTITY_HISTORY_B01_SCIENCE_CARD_20260912.md",
+      "commit_sha": "5b3ae6b9847beba5fe72b0960ec7b66cb7d1c4b4",
+      "use": "frozen host, information, E primary and source cost law; old budget ended"
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_ENTITY_HISTORY_B01_INTAKE_20260912.md",
+      "commit_sha": "be6505326d2536603205c3d835ab02af79ce0668",
+      "use": "accepted E own-policy and failure-dependent comparison ceiling"
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_ENTITY_HISTORY_B01_RESULT_EVIDENCE_20260912.md",
+      "commit_sha": "be6505326d2536603205c3d835ab02af79ce0668",
+      "use": "counts, recorded costs, checkpoint identity and preservation"
+    }
+  ],
+  "owner_reviews": [],
+  "machine_generated_exposure_line": "NEW AUTHOR EXPOSURE: scientific_invocations=0, models=0, checkpoint_loads=0, environments=0, scientific_rng_masters=0, training_episodes=0, native_ticks=0, optimizer_steps=0, evaluation_episodes=0, diagnostic_trajectories=0, policy_search_candidates=0, profiling=0, source_implementation_edits=0, source_or_numerical_tests=0, new_raw_result_analysis=0, provider_sends=0, transport_dispatches=0.",
+  "retained_bank_identity": {
+    "archive_path": "docs/research/candidates/vap_folr_core/entity_history_b01_781201/BANK_RAW.tar.gz",
+    "member": "final.pt",
+    "archive_sha256": "f4d2726f98ae2b05157fd3b06b5cfc2f9c3c8c4fa0cc891bb41874f0c2b1595b",
+    "source_sha": "5b3ae6b9847beba5fe72b0960ec7b66cb7d1c4b4",
+    "training_seed": 781201,
+    "historical_evaluation_seed": 1781201,
+    "new_generic_training_seed": "UNBOUND",
+    "new_evaluation_seeds": "UNBOUND; separate new streams, no old-panel pooling"
+  }
+}

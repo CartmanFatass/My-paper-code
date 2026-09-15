@@ -1,0 +1,13 @@
+{
+  "future_fixed_lr_pair_fits": 2,
+  "training_episodes": 8192,
+  "evaluation_episodes": 384,
+  "team_ticks": 2195456,
+  "optimizer_steps": 16384,
+  "replayed_actor_agent_steps": 41943040,
+  "critic_update_rows": 8388608,
+  "final_snapshots": 2,
+  "private_loads": 6,
+  "coarse_two_complete_programmes_native_reference_seconds": 2461.16,
+  "native_reference_qualification": "Two observed complete programmes would include extra midpoint evaluation; this doubled reference is not a timing law or a guaranteed upper bound. New final-only pair native/support costs remain prospective."
+}

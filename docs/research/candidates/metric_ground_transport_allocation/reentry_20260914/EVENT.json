@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "event_id": "MGTAP_REENTRY_LR_SELECTION_CONTINUE_20260914",
+  "source_request": "lcac-park-vacancy-20260914-01",
+  "recorded_at_utc": "2026-09-14T06:30:15Z",
+  "direction_id": "metric_ground_transport_allocation",
+  "dm_task_id": "01a09cd8-676e-7513-806d-a86b7e104518",
+  "host_id": "local",
+  "authoring_checkout": "C:/Projects/HMASD-worktrees/dm-n5-continue-20260904",
+  "authoring_branch": "codex/mgtap",
+  "actual_decision": "CONTINUE",
+  "direction_work_state": "implementation_in_progress",
+  "reason": "A finite symmetric LR-selection programme followed by a fresh pair can affect the optional COND implementation decision; this is not another unchanged recurrence or reversal of old evidence.",
+  "first_concrete_action": {
+    "status": "COMPLETED",
+    "description": "Implemented and tested selection/holdout protocol and computed its work.",
+    "protocol": "experiments/candidates/metric_ground_transport_allocation/mgtap_lr_selection_b01/protocol.py",
+    "test_count": 13,
+    "test_exit_code": 0,
+    "evidence": "docs/research/candidates/metric_ground_transport_allocation/reentry_20260914/ENGINEERING.md"
+  },
+  "selected_object": "MGTAP-LR-SELECTION-B01",
+  "slot_application": {
+    "use_existing_reservation": true,
+    "vacancy_source": "LCAC_B03_PARK",
+    "requested_occupies_slot": true,
+    "occupancy_delta_for_mgtap": 1,
+    "reservation_delta_for_same_request": -1,
+    "planning_snapshot": {
+      "occupied_before": 2,
+      "reserved_before": 1,
+      "occupied_after_if_other_directions_unchanged": 3,
+      "reserved_after": 0
+    },
+    "application_rule": "Convert only the existing MGTAP reservation; recount live totals and never override another direction's newer lifecycle.",
+    "registry_writer_task_id": "01a09d6c-e4e0-7613-ba99-7b0a1b6c540e",
+    "registry_write_performed_by_dm": false
+  },
+  "unaffected_directions": [
+    "RCLE",
+    "FOLR"
+  ],
+  "full_portfolio_body_received": true,
+  "full_body_archive": "docs/research/candidates/metric_ground_transport_allocation/reentry_20260914/PORTFOLIO_USER_COPY.md",
+  "evidence": [
+    "docs/research/candidates/metric_ground_transport_allocation/reentry_20260914/DM_REENTRY_INTAKE.md",
+    "docs/research/candidates/metric_ground_transport_allocation/MGTAP_LR_SELECTION_B01_SCIENCE_CARD_20260914.md",
+    "docs/research/candidates/metric_ground_transport_allocation/reentry_20260914/ENGINEERING.md",
+    "docs/research/candidates/metric_ground_transport_allocation/reentry_20260914/PLANNED_EXPOSURE.json"
+  ],
+  "original_park_preserved": true,
+  "new_native_fits_executed": 0,
+  "new_native_evaluations_executed": 0,
+  "active_experiment_handles": [],
+  "native_child_producers": [],
+  "new_portfolio_request": false,
+  "next_action": "DM completes the selected native runner, changed-behavior tests/proportionate independent review and actual-node admission, then executes and intakes the new object without another lifecycle dispatch."
+}

@@ -1,0 +1,46 @@
+{
+  "assignment": "ACVC_CLUSTER_FIXED_LR_PAIR_B01",
+  "state": "remote_reclaimed_local_originals_retained",
+  "authoring_checkout": "C:/Projects/HMASD-worktrees/codex-acvc",
+  "retain_authoring": true,
+  "source": "2bbaa99ad9cc717d89e47a1f24d9acd76dce4f97",
+  "remote_checkout": "/home/wu/hmasd-worktrees/acvc-rate-pair-b01-2bbaa99ad",
+  "active_handles": [],
+  "remote_outputs": {
+    "low": "/home/wu/hmasd-worktrees/acvc-rate-pair-b01-2bbaa99ad/temp/directions/acvc/exp/cluster_fixed_lr_pair_b01_27931_low",
+    "reference": "/home/wu/hmasd-worktrees/acvc-rate-pair-b01-2bbaa99ad/temp/directions/acvc/exp/cluster_fixed_lr_pair_b01_27931_reference"
+  },
+  "remote_supervisor": {
+    "low": "/home/wu/.agent-tasks/acvc-rate-low-b01-27931-2bbaa99ad",
+    "reference": "/home/wu/.agent-tasks/acvc-rate-ref-b01-27931-2bbaa99ad"
+  },
+  "required_preservation": [
+    "published exact source and card",
+    "each original episodes.jsonl and updates.jsonl",
+    "each final DENSE_episode_4096.pt",
+    "each summary/admission/native_time/stdout/stderr",
+    "both original supervisor task logs and terminal facts",
+    "recorded-data reducer outputs and prediction scoring",
+    "any partials or deviations"
+  ],
+  "reclamation_rule": "After original terminal facts, verified local original archive/checkpoints and Root retention integration: remove only exact inactive outputs/checkout registration and owned supervisor paths. Never remove an active/shared checkout.",
+  "prior_source_only_staging_retired": {
+    "path": "/home/wu/hmasd-worktrees/acvc-rate-pair-b01-9b44896d9",
+    "disk_absent": true,
+    "registration_absent": true,
+    "evidence": "STAGING.json"
+  },
+  "retained_local_scratch": [
+    "temp/directions/acvc/test/extended_b01_20260914_01",
+    "temp/directions/acvc/test/fixed_lr_pair_b01_20260914_01",
+    "temp/directions/acvc/test/fixed_lr_pair_b01_ingestion_20260914_01"
+  ],
+  "local_cleanup_limit": "Native recursive Remove-Item was rejected before execution: blocked by policy. No shell/tool deletion workaround.",
+  "unique_raw_preservation": "all28 original files verified; local archive 2840872 bytes sha256c10b687a1652566f39b341cb3e278c872da3d5719eafd2e197fae3928f1fcbee; see PRESERVATION.json",
+  "terminal_handles": [
+    "acvc-rate-low-b01-27931-2bbaa99ad",
+    "acvc-rate-ref-b01-27931-2bbaa99ad"
+  ],
+  "cleanup_receipt": "CLEANUP.json",
+  "root_retention": "Confirmed natively; source/results retained on main c854cf90f"
+}

@@ -1,0 +1,20 @@
+{
+  "object": "ACVC_CLUSTER_DEPLOYMENT_B02",
+  "authority": "OWNER_DELEGATED DM retention/cleanup, exact inventory accepted and published7ab9e9ddf706c28a98d0b12721be9f4073a0df1c",
+  "node": "hmasd-wsl-node",
+  "four_remote_targets_removed": true,
+  "worktree_registration_absent": true,
+  "source_worktree_sha_verified": "be76f696cb773f2e5db8f4d55ebff1f3b6335ae6",
+  "tracked_source_clean": true,
+  "both_supervisors_terminal": true,
+  "tmux_inactive": true,
+  "retained_local_archive_verified_after_cleanup": true,
+  "archive_sha256": "be32ec3b31643d310fbdba780feb7d64f964cbe4df1fdc8b10a58b521b0849c0",
+  "native_files_published_at": "d0d6055387a01b545c4c1f7fee01dac9f57ec046",
+  "cleanup_outer_wall_s": 0.5459374,
+  "post_cleanup_archive_check_wall_s": 0.2179906,
+  "retained_local_preparation": "B02 small preparation retains source bundle, collected copies and one-off analysis/publication-check scripts; deliberate retention, no pending deletion assignment.",
+  "historical_K_local_scratch": "untouched; earlier refused exact target remains, not a scientific blocker",
+  "recovery": "Source bytes from Git; raw/checkpoint and both supervisor files from retained archive;19 raw text files also published.",
+  "completed": true
+}

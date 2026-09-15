@@ -1,0 +1,11 @@
+{
+  "requested_at_utc": "2026-09-14T09:08:31.028222+00:00",
+  "publication_sha": "faef7f8b0bf996ffaf0818d201608d0fe4962ed3",
+  "node": "hmasd-wsl-node",
+  "source_sha": "b257dcb1d7578a057afa9b4bdd7c7ff74ad8e24f",
+  "scope": "One first BANK invocation under frozen B03, no retry.",
+  "returncode": 0,
+  "stdout": "{\"event\": \"FOLR_B03_BANK_FIRST_LAUNCH_20260914\", \"publication_sha\": \"faef7f8b0bf996ffaf0818d201608d0fe4962ed3\", \"source_sha\": \"b257dcb1d7578a057afa9b4bdd7c7ff74ad8e24f\", \"planned_argv\": [\"/usr/local/bin/agent-task\", \"run\", \"folr-b03-781501-bank\", \"bash\", \"/home/wu/hmasd-worktrees/folr-entity-history-b03-781501-b257dcb1d/temp/directions/vap_folr_core/exp/entity_history_b03_781501/BANK_LAUNCH.sh\", \"b257dcb1d7578a057afa9b4bdd7c7ff74ad8e24f\", \"/home/wu/hmasd-worktrees/folr-entity-history-b03-781501-b257dcb1d\", \"/home/wu/hmasd-worktrees/folr-entity-history-b03-781501-b257dcb1d/temp/directions/vap_folr_core/exp/entity_history_b03_781501/BANK\", \"/home/wu/hmasd-worktrees/folr-entity-history-b03-781501-b257dcb1d/temp/directions/vap_folr_core/exp/entity_history_b03_781501/GENERIC/summary.json\"], \"before_status\": {\"task\": \"folr-b03-781501-bank\", \"status\": \"not_found\"}, \"generic_summary_sha256\": \"d1b46eac0487632de92ba33e22d029a64882e66633b7418f2d50b2c01fe4e2ec\", \"prepared_at_utc\": \"2026-09-14T09:08:30.679991+00:00\", \"acceptance\": \"accepted\", \"supervisor_returncode\": 0, \"supervisor_stdout\": \"Task 'folr-b03-781501-bank' started in tmux session 'agent_folr-b03-781501-bank'. Output: /home/wu/.agent-tasks/folr-b03-781501-bank/task.log\\n\", \"supervisor_stderr\": \"\", \"returned_at_utc\": \"2026-09-14T09:08:30.703494+00:00\", \"status_after\": {\"task\": \"folr-b03-781501-bank\", \"status\": \"running\", \"exit_code\": null, \"pid\": 3669107, \"uptime_seconds\": 0, \"tmux_active\": true}}\n",
+  "stderr": "",
+  "ssh_elapsed_seconds": 0.5619999999762513
+}

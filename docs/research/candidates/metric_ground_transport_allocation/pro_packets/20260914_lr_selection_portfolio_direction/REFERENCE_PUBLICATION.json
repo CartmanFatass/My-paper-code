@@ -1,0 +1,19 @@
+{
+  "checked_at_utc": "2026-09-14T09:48:05.0521382Z",
+  "request_id": "2026-09-14-mgtap-lr-selection-direction-decision-01",
+  "source_count": 27,
+  "exact_objects_exist": true,
+  "reachable_from_observed_published_refs": true,
+  "observed_remote_refs": [
+    "fcdc592236660389ca6c651a23973d32cc534ed5\trefs/heads/codex/mgtap",
+    "d45d4bc6ea2012b93d1d044402268520be5eea9a\trefs/heads/codex/rcle",
+    "ed98c18dd793aac5a810ff812fe755cd09544711\trefs/heads/codex/vap-folr",
+    "a65a0013fec15eb1cc979566ea3b193abc623741\trefs/heads/main"
+  ],
+  "prompt_manifest_mappings_match": true,
+  "prompt_bytes": 20627,
+  "prompt_sha256": "1b1b0a3ddd28cab5b058d1fcb1799379f534c83a01c42d802cd8b33f2a9fa196",
+  "provider_access": "NOT_YET_OBSERVED; publication is not provider retrieval",
+  "send_state": "UNSENT",
+  "publication_note": "Peer originals are reached through their actual published direction refs, not necessarily cherry-picked main. Newly observed remote Git objects were fetched before ancestry checks."
+}

@@ -1,0 +1,28 @@
+{
+  "completed_at": "2026-09-14T05:22:12.993353+00:00",
+  "owner": "RCLE DM",
+  "scope": "Only the three completed B11/D1/B12 detached execution checkouts; authoring checkout, published commits, supervisor records and raw evidence retained.",
+  "archive": {
+    "local_path": "temp/directions/roster_consistent_latent_exploration/exp/reentry-remote-closeout-20260914/rcle-reentry-20260914-remote-closeout.tgz",
+    "remote_path": "/home/wu/hmasd-inputs/rcle-reentry-20260914-remote-closeout.tgz",
+    "bytes": 557612,
+    "sha256": "7ac0c65c69f433a3f5baa27ea1332a1f91266fed4fd0eea24b8b4287a8554569",
+    "remote_local_hash_match": true,
+    "all_temp_files_individually_hash_compared_before_removal": true
+  },
+  "checks": {
+    "resolved_paths_within_exact_remote_worktree_root": true,
+    "exact_source_heads_match_published_commits": true,
+    "tracked_and_untracked_status_clean": true,
+    "no_live_process_cwd_in_targets": true,
+    "all_bound_supervisors_terminal": true,
+    "no_review_dependency_on_remote_checkouts": true,
+    "no_local_scientific_archive_deleted": true
+  },
+  "worktrees": [
+    {"path": "/home/wu/hmasd-worktrees/rcle-b11-e863914e2", "source_sha": "e863914e2c2c071b8dbdd8787f159233245000d5", "removed": true, "unregistered": true},
+    {"path": "/home/wu/hmasd-worktrees/rcle-b11-d1-c7eb5986f", "source_sha": "c7eb5986f38d42f24fb0d9749c705c975aa40b0d", "removed": true, "unregistered": true},
+    {"path": "/home/wu/hmasd-worktrees/rcle-b12-15eaa7ea6", "source_sha": "15eaa7ea655a0f42a0ec3986927487892bdce212", "removed": true, "unregistered": true}
+  ],
+  "continuation": "RCLE ACTIVE; dispatched scientific review belongs to native /root/tr_rcle_b12. Future retained-checkpoint input, if selected, uses archived bytes with a declared digest, not an old live execution checkout."
+}

@@ -1,0 +1,87 @@
+{
+  "id": "20260913-mgtap-003",
+  "created": "2026-09-13T16:20:56-07:00",
+  "direction": "metric_ground_transport_allocation",
+  "tier": "portfolio",
+  "kind": "portfolio",
+  "title": "MGTAP继续早期学习探索与总体容量选择",
+  "context": "DM已自主完成A并选择一个256/256普通B。这里只请求总体规划的真实priority/capacity/lifecycle选择，不请求每对象实验许可；推荐继续，完整全局计划未形成。",
+  "options": [
+    {
+      "key": "C",
+      "label": "继续ACTIVE/MEDIUM",
+      "consequence": "保持方向占位，当前普通B自主执行，按真实全局计划排序"
+    },
+    {
+      "key": "D",
+      "label": "明确延期与容量处理",
+      "consequence": "Pro明确safe boundary、容量处理、复审事件与责任人，记为non-advancing"
+    },
+    {
+      "key": "P",
+      "label": "可逆whole-direction PARK",
+      "consequence": "在明确安全边界正式PARK并释放容量，保全科学与全部证据"
+    }
+  ],
+  "recommended": "C",
+  "auto_applied": "C",
+  "dm_reason": "已有机制内的256/256暴露提供尚未观察的低成本发展判断；它不是旧R被拒的unchanged512/512提案。",
+  "evidence": [
+    "docs/research/candidates/metric_ground_transport_allocation/MGTAP_POST_8231_MANAGEMENT_20260913.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-13.md#L32",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": {
+    "question": "MGTAP 已自主选择一个 256/256 普通 B；总体规划应如何安排该方向的优先级、容量与生命周期？",
+    "changes_if_approved": [
+      {
+        "target": "总体 Portfolio 计划的 MGTAP 容量/优先级与接续映射",
+        "from": "ACTIVE/MEDIUM；本轮总体规划尚未形成",
+        "to": "推荐继续当前方向与早期学习探索；明确与其他方向的排序及下一管理复审事件"
+      }
+    ],
+    "if_refused": "执行 Portfolio 明确选择的 deferral 或 PARK 及安全边界；保留所有有效证据与 mean-COND eligibility，不推断全族失败。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_EARLY_EXPOSURE_B01_SCIENCE_CARD_20260913.md",
+        "quote": "Its question is whether early native development should retain the conditional branch for further bounded learning work.",
+        "why": "256/256 是既有机制内尚未观察的共同训练暴露，已有实现可小幅复用；DM 以有限普通对象推进，无需逐对象购买许可。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_UNEQUAL_EXPOSURE_B01_INTAKE_20260913.md",
+        "quote": "This allocation has no further scientific invocation or automatic successor.",
+        "why": "8231 的 unequal-exposure 结果 adverse，旧 grant 完成；不能把旧余额当新投资，也不能因改暴露自动期待改善。"
+      }
+    ],
+    "uncertainty": [
+      "三个已有等暴露训练实例的描述均差 +0.002590 J、SD 0.023634 J 只描述已观察实例，不是稳定效应。",
+      "256/256 结果、完整新支撑成本与原生 tuned headroom 均未知；positive-first 和新客户不是启动要求。",
+      "Portfolio 可基于其他方向实际机会拒绝继续占用容量；该比较不是每普通实验审批。"
+    ],
+    "cost": {
+      "compute": "当前 A 计算 0.1189499 秒；B 未启动。新 B 2 fits，native cap 900 s，support 2700 s，complete 3600 s；未来单位成本与方向全生命周期成本 UNKNOWN。",
+      "owner_time": "无需逐项批准；通过既有 owner surface 异步覆盖。",
+      "reversibility": "reversible",
+      "waits_on_this": "只有总体容量/生命周期选择等待完整 Portfolio 计划；当前 ordinary B 工程执行不等待。"
+    },
+    "verdict_text": "Recommend continued ACTIVE/MEDIUM direction work through the newly selected ordinary early-exposure B, while Portfolio compares its priority/capacity with the whole program. No per-object Portfolio grant is requested.",
+    "source": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_POST_8231_MANAGEMENT_20260913.md"
+  },
+  "starred": true,
+  "approval_correction": "The original item was an unsent automatic Portfolio proposal. Preserve that historical snapshot; the current DM-owned selection and report supersede its approval framing. This traces owner delegation, not an invented owner selection or Pro verdict.",
+  "execution_history": [
+    {
+      "at": "2026-09-13T23:38:12+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_POST_8231_MANAGEMENT_20260913.md",
+      "record": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_POST_8231_MANAGEMENT_20260913.md",
+      "state": "applied",
+      "summary": "Latest direct owner instruction delegates full direction lifecycle to DM and retains Convergence scientific review. DM selected C: continued ACTIVE/MEDIUM with one ordinary early256 pair; no Portfolio consultation or other-direction adjustment.",
+      "correction": "The original item was an unsent automatic Portfolio proposal. Preserve that historical snapshot; the current DM-owned selection and report supersede its approval framing. This traces owner delegation, not an invented owner selection or Pro verdict."
+    }
+  ]
+}

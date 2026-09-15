@@ -1,0 +1,42 @@
+{
+  "utc": "2026-09-14T06:55:53.575050+00:00",
+  "owner_thread_id": "01a09e10-9d9f-7f82-87c0-d58cbe0c7618",
+  "event": "RCLE_E01_ACCEPTED_INTEGRATION_20260914",
+  "main_before": "5eb30e6cb941f4dbad49b1eda3e98eb417db7051",
+  "already_present": [
+    "72b6184e8",
+    "ec81437de (original owner c833f026e)",
+    "5c3ab7b07",
+    "d3144acba",
+    "b9cf89406"
+  ],
+  "integrated": [
+    {
+      "source": "98f08c069547573d1cbc5ec8d46b2552d3c9a092",
+      "main": "905a603d753b2e76bb6573007a5c89e7d5b54f8a"
+    },
+    {
+      "source": "0dae67149795a8a1e926e7dda773adbc73084a28",
+      "main": "38cc99cd80f748b926a6e5a17cfd2211210382ca"
+    },
+    {
+      "source": "d4e4d218557fb8823a22a41d9bdc4f6eecba0dc0",
+      "main": "fd0abc45746e816ebcfd6755c3a0df1394893ef8"
+    },
+    {
+      "source": "f44e013c51475b37c1863fba6fbf865c278a7cbd",
+      "main": "5cf4718f6effbe41ca1e0355cf4c8438d2762b17"
+    },
+    {
+      "source": "8fa480249b7d759f814c0e6d98c60724f7ec3683",
+      "main": "b35b6eca7d77ce695886a3ba4c5ea2f834c29aa3"
+    },
+    {
+      "source": "d5b9dda43edb9dc15dd9d2eece99352fb2558b63",
+      "main": "f5dd9ed0c3eb1d7daf330214a1912694a84169fd"
+    }
+  ],
+  "registry_scope": "own RCLE row plus actual main_writer transaction fields; other directions preserved",
+  "mutex": "Local\\HMASD_Main_Transaction",
+  "scientific_allocation_change": false
+}

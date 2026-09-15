@@ -1,0 +1,121 @@
+{
+  "id": "20260912-root-019",
+  "created": "2026-09-12T16:37:38-07:00",
+  "direction": "portfolio",
+  "tier": "portfolio",
+  "kind": "decision",
+  "title": "四方向下一投入：ACPS复验、CADC生命周期、MGTAP用途与FSD保留",
+  "context": "K/E/L/U已完成验收并独立推进。四原DM已刷新最新证据：ACPS单对ADVERSE而建议有界复验；CADC无具体新用途且不建议原样重复；MGTAP建议一次COND512/DENSE768用途判断；FSD建议本轮保留LONG。以下只是提交Portfolio的建议，没有本地拨款或PARK。",
+  "options": [
+    {
+      "key": "a",
+      "label": "采纳分项建议",
+      "consequence": "由Portfolio分别决定ACPS全新cap、CADC显式可逆PARK、MGTAP一次用途咨询、FSD本轮不新增LONG；当前尚未应用。"
+    },
+    {
+      "key": "b",
+      "label": "本轮均不追加",
+      "consequence": "不给四项新投入，现有生命周期保持，K/E/L/U继续；不把拒绝新款解释为停向。"
+    },
+    {
+      "key": "c",
+      "label": "修改具体分项",
+      "consequence": "Portfolio可选择列明的有限设计/不追加等替代，给出精确成本、当前生命周期及下一动作。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": null,
+  "dm_reason": "每方向从最新独立单位与当前用途决定边际价值，保留强反证、未知完整成本和五槽独立滚动。",
+  "evidence": [
+    "docs/research/portfolio/pro_packets/20260912_post_kelu_continuation/SCIENCE_BRIEF.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-12.md#L121",
+  "brief": "",
+  "ledger_kind": "technical",
+  "status": "open",
+  "packet": {
+    "question": "下一干净 Portfolio 轮如何分别处理 ACPS、CADC、MGTAP 与 FSD 的当前投入、排序和明确生命周期？",
+    "changes_if_approved": [
+      {
+        "target": "ACPS 当前投入",
+        "from": "B01 完整 ADVERSE，无新拨款",
+        "to": "如 Pro 选定则一组新 fresh pair，明确新 whole-native/support/complete 上限"
+      },
+      {
+        "target": "CADC 当前生命周期/投入",
+        "from": "ACTIVE/HIGH，无具体下一 B",
+        "to": "建议 Pro 明确可逆 PARK；一次有限设计或 ACTIVE 不追加是真实替代"
+      },
+      {
+        "target": "MGTAP 下一用途",
+        "from": "T 完成且 DENSE 默认，A/U/P 未获选择",
+        "to": "建议一次原 Convergence 用途/设计及 intake，完整费用 UNKNOWN，零实验"
+      },
+      {
+        "target": "FSD LONG 投入",
+        "from": "新候选未获拨款，U 已购买",
+        "to": "建议本轮不追加 LONG，依据 U 的具体用途再判断；不改变 U 或方向 ACTIVE"
+      }
+    ],
+    "if_refused": "Portfolio 可分别选择不追加或其他列明选项；K/E/L/U 已授权工作继续。无默认停向、旧余额、额外实验或作者替代决定。",
+    "evidence_for": [
+      {
+        "path": "docs/research/portfolio/pro_packets/20260912_post_kelu_continuation/SCIENCE_BRIEF.md",
+        "quote": "The author modestly favors one replication because this new physically heterogeneous host has only one learning instance and no invalidating measurement defect.",
+        "why": "ACPS 的实际收益不确定性可能改变是否继续使用该包，但不保证第二对会改变行动。"
+      },
+      {
+        "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_POST_TOP_NEXT_USE_READINESS_20260912.md",
+        "quote": "Recommend A: one bounded original-node use/design decision and complete intake; zero numerical exposure.",
+        "why": "可直接选择一个普通学习投入的真实替代用途，未购买其 B。"
+      },
+      {
+        "path": "docs/research/portfolio/pro_packets/20260912_post_kelu_continuation/SCIENCE_BRIEF.md",
+        "quote": "Original DM explicitly recommends no unchanged fresh same-comparison pair now.",
+        "why": "CADC 当前没有使原样复测改变已训练 RR 行动的具体用途；生命周期仍仅由 Portfolio 选择。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/actuator_conditioned_partial_sharing/ACPS_B01_INTAKE_20260912.md",
+        "quote": "ADVERSE",
+        "why": "ACPS 首对 −.0368081418 J，25/32 不利；再买一对可能仍不改变 SHARED 的当前用途。"
+      },
+      {
+        "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_POST_TOP_NEXT_USE_READINESS_20260912.md",
+        "quote": "The strongest alternative is no addition this round.",
+        "why": "三次 mean-COND 混合且 TOP 强负向，咨询也可能没有足够边际价值。"
+      },
+      {
+        "path": "docs/research/portfolio/pro_packets/20260912_post_kelu_continuation/SCIENCE_BRIEF.md",
+        "quote": "Finite training may still be insufficient for a useful different coordination policy; one pair does not disprove communication learning.",
+        "why": "CADC PARK 是可逆相对投入判断，不能写成整个方向不可学习。"
+      }
+    ],
+    "uncertainty": [
+      "ACPS 与 CADC 的全部未来成本和新上限未知，历史 native 耗时只作规模参照。",
+      "MGTAP 一次咨询完整 documentary/provider/agent 成本 UNKNOWN，不认为它免费或廉价。",
+      "FSD LONG 的额外普通训练对照确实不同于第六个 unchanged pair，但原 DM 最新建议先明确它改变哪项已购买 U 的用途判断。",
+      "Registry 仍 27=17 ACTIVE+10 PARKED；若 Pro 明确 PARK 才改变对应行，准备快照不是永久运行数。"
+    ],
+    "cost": {
+      "compute": "作者新科学 exposure=0；ACPS 未来候选 278528 ticks/2048 Adam，暂无 cap；MGTAP 当前申请 0 native 的一次咨询；FSD 未选 offer 1800/arm、3600 native、300 support、3900 complete；CADC 设计替代成本 UNKNOWN。",
+      "owner_time": "无需逐项批准；可异步覆盖。",
+      "reversibility": "costly",
+      "waits_on_this": "仅这些尚未分配的选择；K/E/L/U 不等本轮。"
+    },
+    "verdict_text": "建议 ACPS 购买一组新的独立配对并由 Portfolio 新定完整上限；CADC 不原样复测，建议 Portfolio 明确可逆停放；MGTAP 仅购买一次原节点用途/设计判断；FSD 本轮保留 LONG 候选，已购买 U 独立推进。每项均有真实反选项，当前无投资或生命周期选择被本作者执行。",
+    "source": "docs/research/portfolio/pro_packets/20260912_post_kelu_continuation/SCIENCE_BRIEF.md"
+  },
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-12T23:58:26+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "docs/research/portfolio/pro_packets/20260912_post_kelu_continuation/PREPARATION_INTAKE.md",
+      "record": "docs/research/portfolio/pro_packets/20260912_post_kelu_continuation/PREPARATION_INTAKE.md",
+      "state": "planned",
+      "summary": "依据Root在既有owner委托下的明确未发送范围替换：旧四项从未派Transport/被provider接受，追加RCLE后仅五项新版可派发。旧项保留未应用提案历史，无旧四项投资或PARK被作者执行。新五项P2承载当前选择。"
+    }
+  ]
+}

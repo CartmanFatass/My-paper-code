@@ -1,0 +1,7 @@
+# FOLR B03 transport receipt
+
+- Request `2026-09-14-folr-entity-history-b03-result-plan-review-01` was recovered in the existing conversation exactly once; no second Send, edit, regenerate, or stop action occurred.
+- Accepted provider user node: `82d7b17b-3f22-45a6-8d3b-1ed647164bfc`. Its logical body, including the URL-pill `data-id`, is 1,935 UTF-8 bytes and matches the fixed prompt SHA-256 `85858f370d899d28fc2ebcd8c0d396a67839d33e9f6dde3c7cddede8ef7adeaf`. Visible innerText was 1,755 characters because the URL pill is non-editable; the full logical body was checked.
+- Terminal assistant node: `a8b6c56a-5ccb-4f67-b9f3-b0b5a42a2d20`. Full response is [RESPONSE.md](RESPONSE.md), captured from the verified GitHub file: 23,129 characters / 23,157 UTF-8 bytes, SHA-256 `76c9aa4bd443086e55a968e0a74b5325f3147dff5e2997e3964db71299f51170`, no original terminal LF. The local archive container adds one terminal LF and records that distinction.
+- Fresh GitHub verification: branch `codex/vap-folr` delivery commit `18e03e45d69def09d29c0f2c299bb855891b0f27`; target file is present and hash-matched. Issue #15 delivery comment `5663487902` is present at [the issue permalink](https://github.com/CartmanFatass/My-paper-code/issues/15#issuecomment-5663487902) and links the same response commit.
+- Scientific result: B03 again favors Generic under the frozen rule. The review favors a precise persistent-versus-current-only additive-history question over an unchanged third block, while preserving claim limits and leaving execution/lifecycle to the DM.

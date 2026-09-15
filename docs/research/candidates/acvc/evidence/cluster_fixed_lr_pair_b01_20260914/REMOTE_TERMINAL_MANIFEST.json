@@ -1,0 +1,214 @@
+{
+  "low": {
+    "handle": "acvc-rate-low-b01-27931-2bbaa99ad",
+    "status_returncode": 0,
+    "status_stdout": "{\"task\": \"acvc-rate-low-b01-27931-2bbaa99ad\", \"status\": \"finished\", \"exit_code\": 0, \"pid\": 3701076, \"uptime_seconds\": 1348, \"tmux_active\": false}\n",
+    "status_stderr": "",
+    "files": [
+      {
+        "root": "native",
+        "path": "/home/wu/hmasd-worktrees/acvc-rate-pair-b01-2bbaa99ad/temp/directions/acvc/exp/cluster_fixed_lr_pair_b01_27931_low/DENSE_episode_4096.pt",
+        "relative": "DENSE_episode_4096.pt",
+        "bytes": 283253,
+        "sha256": "7a9fe3078d20e0835a30063fcc9bd2d8e129469bd4033d9750dafba2d4ed5fdc"
+      },
+      {
+        "root": "native",
+        "path": "/home/wu/hmasd-worktrees/acvc-rate-pair-b01-2bbaa99ad/temp/directions/acvc/exp/cluster_fixed_lr_pair_b01_27931_low/admission.json",
+        "relative": "admission.json",
+        "bytes": 504,
+        "sha256": "2c72dd7c2fea091550cc589a3a076172154ee19252661f98f0a59b55331cbce4"
+      },
+      {
+        "root": "native",
+        "path": "/home/wu/hmasd-worktrees/acvc-rate-pair-b01-2bbaa99ad/temp/directions/acvc/exp/cluster_fixed_lr_pair_b01_27931_low/episodes.jsonl",
+        "relative": "episodes.jsonl",
+        "bytes": 3122983,
+        "sha256": "50dbd5a10cd6118190d28f14b120c2c1a531487c85f474deeeb1c73bb8a8f8fd"
+      },
+      {
+        "root": "native",
+        "path": "/home/wu/hmasd-worktrees/acvc-rate-pair-b01-2bbaa99ad/temp/directions/acvc/exp/cluster_fixed_lr_pair_b01_27931_low/native_time.txt",
+        "relative": "native_time.txt",
+        "bytes": 83,
+        "sha256": "28e4367845144e45fe7bcaac2d5efc9bd748b1ffb619f9e8a6337b2c862b2434"
+      },
+      {
+        "root": "native",
+        "path": "/home/wu/hmasd-worktrees/acvc-rate-pair-b01-2bbaa99ad/temp/directions/acvc/exp/cluster_fixed_lr_pair_b01_27931_low/stderr.log",
+        "relative": "stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "root": "native",
+        "path": "/home/wu/hmasd-worktrees/acvc-rate-pair-b01-2bbaa99ad/temp/directions/acvc/exp/cluster_fixed_lr_pair_b01_27931_low/stdout.log",
+        "relative": "stdout.log",
+        "bytes": 14084,
+        "sha256": "131c6177591cd3a39e14f8c1ad3d8ca36f16e0f300e5acf42d473869fca27790"
+      },
+      {
+        "root": "native",
+        "path": "/home/wu/hmasd-worktrees/acvc-rate-pair-b01-2bbaa99ad/temp/directions/acvc/exp/cluster_fixed_lr_pair_b01_27931_low/summary.json",
+        "relative": "summary.json",
+        "bytes": 28734,
+        "sha256": "822b27a3405bbd8def4af5d4bcd93beb1e1d099c911292c95f2ff7fc82845770"
+      },
+      {
+        "root": "native",
+        "path": "/home/wu/hmasd-worktrees/acvc-rate-pair-b01-2bbaa99ad/temp/directions/acvc/exp/cluster_fixed_lr_pair_b01_27931_low/updates.jsonl",
+        "relative": "updates.jsonl",
+        "bytes": 2264490,
+        "sha256": "618637427379fa9ece7559cce324c180cb724f0851a2776434661e60a474bea3"
+      },
+      {
+        "root": "supervisor",
+        "path": "/home/wu/.agent-tasks/acvc-rate-low-b01-27931-2bbaa99ad/exit_code",
+        "relative": "exit_code",
+        "bytes": 2,
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      },
+      {
+        "root": "supervisor",
+        "path": "/home/wu/.agent-tasks/acvc-rate-low-b01-27931-2bbaa99ad/pid",
+        "relative": "pid",
+        "bytes": 8,
+        "sha256": "1d9f893d75d53c4c5b8a9f1b4bd6e571249ef9ce4ed208aacd8ddea35f0764e7"
+      },
+      {
+        "root": "supervisor",
+        "path": "/home/wu/.agent-tasks/acvc-rate-low-b01-27931-2bbaa99ad/runner.sh",
+        "relative": "runner.sh",
+        "bytes": 1363,
+        "sha256": "56b5ff762f2cccd239a6ec46f305c1c5083b126836026bd69524062100ddc5eb"
+      },
+      {
+        "root": "supervisor",
+        "path": "/home/wu/.agent-tasks/acvc-rate-low-b01-27931-2bbaa99ad/start_time",
+        "relative": "start_time",
+        "bytes": 11,
+        "sha256": "2ddc1675dc85d51360700b3124dd5aa5842f8c8638896c476b61379338fbe8a6"
+      },
+      {
+        "root": "supervisor",
+        "path": "/home/wu/.agent-tasks/acvc-rate-low-b01-27931-2bbaa99ad/status",
+        "relative": "status",
+        "bytes": 9,
+        "sha256": "161069badc0cc23058b13d7c068e45205f4333aa15fd78db9d68f5c9f1ae8983"
+      },
+      {
+        "root": "supervisor",
+        "path": "/home/wu/.agent-tasks/acvc-rate-low-b01-27931-2bbaa99ad/task.log",
+        "relative": "task.log",
+        "bytes": 705,
+        "sha256": "0aa181b7f05c02790702dd397fd78ab0cb2a4043afa5d93ddbb5722c4f9f1efe"
+      }
+    ]
+  },
+  "reference": {
+    "handle": "acvc-rate-ref-b01-27931-2bbaa99ad",
+    "status_returncode": 0,
+    "status_stdout": "{\"task\": \"acvc-rate-ref-b01-27931-2bbaa99ad\", \"status\": \"finished\", \"exit_code\": 0, \"pid\": 3701127, \"uptime_seconds\": 1348, \"tmux_active\": false}\n",
+    "status_stderr": "",
+    "files": [
+      {
+        "root": "native",
+        "path": "/home/wu/hmasd-worktrees/acvc-rate-pair-b01-2bbaa99ad/temp/directions/acvc/exp/cluster_fixed_lr_pair_b01_27931_reference/DENSE_episode_4096.pt",
+        "relative": "DENSE_episode_4096.pt",
+        "bytes": 283253,
+        "sha256": "c371cf0341f2fe4370d1c0173aabe56effa85b80c8b6c63541b8f09bda460e59"
+      },
+      {
+        "root": "native",
+        "path": "/home/wu/hmasd-worktrees/acvc-rate-pair-b01-2bbaa99ad/temp/directions/acvc/exp/cluster_fixed_lr_pair_b01_27931_reference/admission.json",
+        "relative": "admission.json",
+        "bytes": 504,
+        "sha256": "7561c6eda72ac8288ecc5d4bdbf5375cdb82a28b75500acdf7a06f1a38beca56"
+      },
+      {
+        "root": "native",
+        "path": "/home/wu/hmasd-worktrees/acvc-rate-pair-b01-2bbaa99ad/temp/directions/acvc/exp/cluster_fixed_lr_pair_b01_27931_reference/episodes.jsonl",
+        "relative": "episodes.jsonl",
+        "bytes": 3148584,
+        "sha256": "01e09f3dbb206e417f7b72da50a10306c46535990bd7c2af4f23c3a4345256c2"
+      },
+      {
+        "root": "native",
+        "path": "/home/wu/hmasd-worktrees/acvc-rate-pair-b01-2bbaa99ad/temp/directions/acvc/exp/cluster_fixed_lr_pair_b01_27931_reference/native_time.txt",
+        "relative": "native_time.txt",
+        "bytes": 83,
+        "sha256": "2d81ef456b1eb7a7bc64f445fb6f9052ad5b901ca7e147e32744df0fdfc2458f"
+      },
+      {
+        "root": "native",
+        "path": "/home/wu/hmasd-worktrees/acvc-rate-pair-b01-2bbaa99ad/temp/directions/acvc/exp/cluster_fixed_lr_pair_b01_27931_reference/stderr.log",
+        "relative": "stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "root": "native",
+        "path": "/home/wu/hmasd-worktrees/acvc-rate-pair-b01-2bbaa99ad/temp/directions/acvc/exp/cluster_fixed_lr_pair_b01_27931_reference/stdout.log",
+        "relative": "stdout.log",
+        "bytes": 14095,
+        "sha256": "7444d9f5a820effa146fedc07c7c8991da33acfbbe9254995fd7afde4622c78e"
+      },
+      {
+        "root": "native",
+        "path": "/home/wu/hmasd-worktrees/acvc-rate-pair-b01-2bbaa99ad/temp/directions/acvc/exp/cluster_fixed_lr_pair_b01_27931_reference/summary.json",
+        "relative": "summary.json",
+        "bytes": 28810,
+        "sha256": "47767de03b8b3ed6cad6c1f2d1bf9370a8dc75e96d79e02a64178f0340a9703f"
+      },
+      {
+        "root": "native",
+        "path": "/home/wu/hmasd-worktrees/acvc-rate-pair-b01-2bbaa99ad/temp/directions/acvc/exp/cluster_fixed_lr_pair_b01_27931_reference/updates.jsonl",
+        "relative": "updates.jsonl",
+        "bytes": 2311117,
+        "sha256": "f5d93f7287c4dcda1e17395c8398e4deb0819cf1583f1dcdf02e27add8462ed4"
+      },
+      {
+        "root": "supervisor",
+        "path": "/home/wu/.agent-tasks/acvc-rate-ref-b01-27931-2bbaa99ad/exit_code",
+        "relative": "exit_code",
+        "bytes": 2,
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      },
+      {
+        "root": "supervisor",
+        "path": "/home/wu/.agent-tasks/acvc-rate-ref-b01-27931-2bbaa99ad/pid",
+        "relative": "pid",
+        "bytes": 8,
+        "sha256": "5d7ff3197629841a70cd8639184e75ffa20e2128d8b4ee0a44102a35c353a71a"
+      },
+      {
+        "root": "supervisor",
+        "path": "/home/wu/.agent-tasks/acvc-rate-ref-b01-27931-2bbaa99ad/runner.sh",
+        "relative": "runner.sh",
+        "bytes": 1375,
+        "sha256": "362a2108d2c169aac36603f771b6344094d6f2f4bfbc18e3eae66827f7360fd0"
+      },
+      {
+        "root": "supervisor",
+        "path": "/home/wu/.agent-tasks/acvc-rate-ref-b01-27931-2bbaa99ad/start_time",
+        "relative": "start_time",
+        "bytes": 11,
+        "sha256": "2ddc1675dc85d51360700b3124dd5aa5842f8c8638896c476b61379338fbe8a6"
+      },
+      {
+        "root": "supervisor",
+        "path": "/home/wu/.agent-tasks/acvc-rate-ref-b01-27931-2bbaa99ad/status",
+        "relative": "status",
+        "bytes": 9,
+        "sha256": "161069badc0cc23058b13d7c068e45205f4333aa15fd78db9d68f5c9f1ae8983"
+      },
+      {
+        "root": "supervisor",
+        "path": "/home/wu/.agent-tasks/acvc-rate-ref-b01-27931-2bbaa99ad/task.log",
+        "relative": "task.log",
+        "bytes": 705,
+        "sha256": "158bb603c74b75a1d24381793452c93615b8f8159043d9029fa15df06adc088c"
+      }
+    ]
+  }
+}

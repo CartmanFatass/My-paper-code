@@ -1,0 +1,82 @@
+{
+  "id": "20260914-acvc-009",
+  "created": "2026-09-14T12:53:47-07:00",
+  "direction": "acvc",
+  "tier": "direction",
+  "kind": "portfolio",
+  "title": "C01完整审查后：保留有限参考的PARK提案与更长训练B比较",
+  "context": "六个原始程序的两项预设比较通过，独立审查无实质缺陷。DM近似并列地推荐保留有限参考并PARK，强替代为一次1024/4096配对B。当前只形成和提交方向建议，实际仍CONTINUE并占用1席。",
+  "options": [
+    {
+      "key": "keep",
+      "label": "保留当前方向提案",
+      "consequence": "保留PARK推荐并向Portfolio比较强替代；不预先执行PARK。"
+    },
+    {
+      "key": "refuse",
+      "label": "撤回这项提案",
+      "consequence": "按所有者指示恢复方向报告选择；完整结果和当前席位保留。"
+    },
+    {
+      "key": "amend",
+      "label": "修改推荐或替代项",
+      "consequence": "按明确修订形成方向提案，保留已完成科学与实际执行事实。"
+    }
+  ],
+  "recommended": "keep",
+  "auto_applied": "keep",
+  "dm_reason": "固定配方期望问题已回答，新增更长暴露是新的发展投入；正结果和有限B仍构成强反方，因此是close-call。",
+  "evidence": [
+    "docs/research/candidates/acvc/ACVC_POST_C01_DIRECTION_REPORT_20260914.md",
+    "docs/research/candidates/acvc/pro_packets/20260914_cluster_fixed_recipe_c01_scientific_review_r2/INTAKE.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-14.md#L85",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否保留这份近似并列的PARK方向建议，并由Portfolio比较更长训练B后作出实际裁决？",
+    "changes_if_approved": [
+      {
+        "target": "ACVC方向报告和Portfolio提案",
+        "from": "C01完整独立审查已接收并逐项回应",
+        "to": "提交保留有限研究参考的PARK建议，继续方案为一次1024/4096配对B；裁决前仍CONTINUE并占用1席"
+      }
+    ],
+    "if_refused": "保留完整C01与历史结果，按所有者明确修订调整方向提案；不会将尚未裁决的PARK写成已执行。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/acvc/ACVC_POST_C01_DIRECTION_REPORT_20260914.md",
+        "quote": "The new result answers the specific fixed1024 programme-and-finite-panel expectation question that Portfolio deliberately selected after the earlier paired attenuation.",
+        "why": "原选择的问题已在声明范围内回答，下一次更长训练属于新的发展投入。"
+      },
+      {
+        "path": "docs/research/candidates/acvc/pro_packets/20260914_cluster_fixed_recipe_c01_scientific_review_r2/archive/RESPONSE.md",
+        "quote": "No empirical repair is identified.",
+        "why": "独立审查没有指出必须通过新增科学调用修复的问题；审查建议整理报告。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/acvc/ACVC_POST_C01_DIRECTION_REPORT_20260914.md",
+        "quote": "The case against PARK is substantial: F's added value exceeds a useful control in six fresh programmes, and the next B is finite with a plausible native bill.",
+        "why": "正结果强且追加B可能揭示更长训练下的交叉或扩展用途，因此PARK是close-call。"
+      }
+    ],
+    "uncertainty": [
+      "真实神经训练统计覆盖尚未校准；不利世界和组件因果限制仍在。",
+      "更长暴露不保证更强C，一次B也可能改变研究使用判断。",
+      "完整支持、provider、agent与维护成本未知，未声称投入收益最优。",
+      "Portfolio尚未裁决；无真实空槽，无新增实验或替换。"
+    ],
+    "cost": {
+      "compute": "当前报告零新增科学调用；C01原生1733.09秒，已知clustered子集2847.53秒；强替代B为4096训练/384评估/8192更新/1146880ticks，粗略原生参考1185.2秒，支持成本未知。",
+      "owner_time": "约2分钟查看建议和强替代；循环不等待。",
+      "reversibility": "reversible",
+      "waits_on_this": "无人等待所有者确认；方向处置依完整Portfolio裁决。"
+    },
+    "verdict_text": "DM recommends PARK ACVC as a bounded optional fixed-F research reference, MEDIUM/recasts2 unchanged. This is a close call against one new1024/4096 paired-exposure B; no PARK is yet applied.",
+    "source": "docs/research/candidates/acvc/ACVC_POST_C01_DIRECTION_REPORT_20260914.md"
+  },
+  "starred": true
+}

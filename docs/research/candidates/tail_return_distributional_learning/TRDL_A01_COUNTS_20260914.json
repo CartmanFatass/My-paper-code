@@ -1,0 +1,73 @@
+{
+  "record": "TRDL-A01 static configuration arithmetic; no learner import or execution",
+  "source_sha": "05a8dc01560e99b867a36b0414058a251b24453c",
+  "actual_A_exposure": {
+    "fits": 0,
+    "model_constructions": 0,
+    "native_calls": 0,
+    "eval_calls": 0,
+    "optimizer_updates": 0,
+    "cost_pilots": 0,
+    "historical_numeric_reruns": 0
+  },
+  "design": {
+    "arms": 2,
+    "paired_training_instances": 1,
+    "agents": 5,
+    "horizon": 256,
+    "training_episodes_per_arm": 512,
+    "final_episodes_per_arm": 256,
+    "batch_episodes": 16,
+    "batches_per_arm": 32,
+    "epochs": 4,
+    "joint_Adam_per_arm": 128,
+    "chunk": 32,
+    "quantiles": 32,
+    "critic_features": 137
+  },
+  "work": {
+    "train_ticks_pair": 262144,
+    "final_ticks_pair": 131072,
+    "total_ticks_pair": 393216,
+    "total_scored_episodes": 1536,
+    "explicit_resets_per_arm": 768,
+    "constructor_resets_per_arm": 1,
+    "joint_Adam_pair": 256,
+    "actor_forward_agent_ticks_pair": 1966080,
+    "actor_backward_agent_rows_pair": 5242880,
+    "critic_training_context_rows_per_arm": 524288,
+    "scalar_loss_entries": 524288,
+    "quantile_loss_entries": 16777216,
+    "quantile_frozen_baseline_entries": 4194304
+  },
+  "architecture": {
+    "actor_parameters": 34902,
+    "scalar_critic_parameters": 34305,
+    "quantile_critic_parameters": 38304,
+    "extra_quantile_parameters": 3999
+  },
+  "resources": {
+    "rollout_obs_bytes": 8847360,
+    "rollout_hidden_bytes": 5242880,
+    "rollout_critic_context_bytes": 2244608,
+    "quantile_output_bytes_per_epoch": 524288,
+    "recurrent_sequences_per_epoch": 640,
+    "nominal_Adam_lr_times_steps": 0.0384,
+    "measured_peak_RSS": null,
+    "unit_times": null
+  },
+  "MEI": {
+    "J": 0.01,
+    "reward_sum_over_H256": 2.56,
+    "connection_term_only_average_connections": 0.7142857142857143
+  },
+  "formulas": {
+    "scored_team_ticks": "2*(512+256)*256",
+    "Adam_calls": "2*(512/16)*4",
+    "actor_parameters": "108*64+64+2*(3*64*64+3*64)+64*3+3+3+108*16+16+16*64",
+    "critic_trunk": "137*128+128+128*128+128",
+    "quantile_loss_terms": "512*256*4*32",
+    "nominal_schedule_scale": "128*.0003; not a parameter displacement bound or observation"
+  },
+  "prospective_exposure_line": "UNALLOCATED B: one paired training instance, two fits, 34902 trainable actor parameters/arm; scalar critic 34305, quantile critic 38304; 128 joint Adam calls/arm at lr=.0003, no frozen parameter groups; actual displacement unmeasured. A01 actual exposure remains zero."
+}

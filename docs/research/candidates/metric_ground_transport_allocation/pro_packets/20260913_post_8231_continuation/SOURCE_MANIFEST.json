@@ -1,0 +1,133 @@
+{
+  "request_id": "2026-09-13-mgtap-post-8231-continuation-01",
+  "verified_at": "2026-09-13T11:07:24.222369+00:00",
+  "publication_proves_local_access_not_Pro_access": true,
+  "references": [
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260913_post_8231_continuation/OPTIONS.md",
+      "commit_sha": "cd3f2a7f9f9a3920f18e9e154711f799cf22fdf6",
+      "bytes": 9814,
+      "sha256": "06c150a382600e943f30963bb15730e599de2de51c39cfe49d82f8df729b2710",
+      "reachable_from": [
+        "origin/codex/mgtap"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260913_post_8231_continuation/EXPOSURE.json",
+      "commit_sha": "cd3f2a7f9f9a3920f18e9e154711f799cf22fdf6",
+      "bytes": 2523,
+      "sha256": "2bbdfaf1bb7cc482fb7c661dde81278f7f577f3fab318afb2a03648365dd7cfb",
+      "reachable_from": [
+        "origin/codex/mgtap"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260913_post_8231_continuation/ISSUE_SNAPSHOT.json",
+      "commit_sha": "cd3f2a7f9f9a3920f18e9e154711f799cf22fdf6",
+      "bytes": 6916,
+      "sha256": "011d35ae053aae58ad1654de6c33138cb1a9623613349e38b77209886cbeffbe",
+      "reachable_from": [
+        "origin/codex/mgtap"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_UNEQUAL_EXPOSURE_B01_SCIENCE_CARD_20260913.md",
+      "commit_sha": "3910da4687b9732c5520d2528b4a23e5cf4e0e79",
+      "bytes": 8508,
+      "sha256": "21669b6ec989836347018490f9948fe10345cb254517fbc598a3df74a8a2f47d",
+      "reachable_from": [
+        "origin/codex/mgtap"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_UNEQUAL_EXPOSURE_B01_INTAKE_20260913.md",
+      "commit_sha": "3910da4687b9732c5520d2528b4a23e5cf4e0e79",
+      "bytes": 7210,
+      "sha256": "dc0f09eb959cb46d986fa69ae75c5cb930a9b05c88eb4eec6807388f9324df26",
+      "reachable_from": [
+        "origin/codex/mgtap"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_UNEQUAL_EXPOSURE_B01_RESULT_20260913.md",
+      "commit_sha": "3910da4687b9732c5520d2528b4a23e5cf4e0e79",
+      "bytes": 4430,
+      "sha256": "0eb764672936f381eee440061820fb7fa5e41e577f6214cd36b005e84ef9cf93",
+      "reachable_from": [
+        "origin/codex/mgtap"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/DIRECTION.md",
+      "commit_sha": "3910da4687b9732c5520d2528b4a23e5cf4e0e79",
+      "bytes": 57653,
+      "sha256": "4779f1710d26c5fe1df9217b42062b7f2fad0552334efbf41f717880a5d6c338",
+      "reachable_from": [
+        "origin/codex/mgtap"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/unequal_exposure_b01_8231_20260913/CLEANUP_INVENTORY.json",
+      "commit_sha": "3910da4687b9732c5520d2528b4a23e5cf4e0e79",
+      "bytes": 2091,
+      "sha256": "2df4be1a3905da083df36aeca5b9bd23c73c18bc4602749ab2f1a6cab784b8d5",
+      "reachable_from": [
+        "origin/codex/mgtap"
+      ]
+    },
+    {
+      "path": "docs/research/portfolio/PORTFOLIO.md",
+      "commit_sha": "7c40c090dbd17803182420fbb16e9e572b1f86ca",
+      "bytes": 12589,
+      "sha256": "537963af5dd6ae24cfb422b907bd62ad3a453633f7cb4fdfef5aa645fc5a86da",
+      "reachable_from": [
+        "origin/main"
+      ]
+    },
+    {
+      "path": "AGENTS.md",
+      "commit_sha": "7c40c090dbd17803182420fbb16e9e572b1f86ca",
+      "bytes": 47670,
+      "sha256": "ed26db27ac2546d790211c2098d15544c60c77d7e49de50eedbb5037ce85bba5",
+      "reachable_from": [
+        "origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "commit_sha": "7c40c090dbd17803182420fbb16e9e572b1f86ca",
+      "bytes": 45107,
+      "sha256": "fcebbdf7e487ee521d67ef6bb77bcaef6916aab524504379073525696bc4c7d1",
+      "reachable_from": [
+        "origin/main"
+      ]
+    },
+    {
+      "path": "docs/project/ENGINEERING_SCOPE_SPEC.md",
+      "commit_sha": "7c40c090dbd17803182420fbb16e9e572b1f86ca",
+      "bytes": 20851,
+      "sha256": "e5f1a651830ca447acd4302fe8b678fb7a425d15a364b189041ccf23c708baaa",
+      "reachable_from": [
+        "origin/main"
+      ]
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "commit_sha": "cd3f2a7f9f9a3920f18e9e154711f799cf22fdf6",
+      "bytes": 7819,
+      "sha256": "c1f7d6c68fcec55de48ea555346d5d65af8d311e28502be43a2b05436a174247",
+      "reachable_from": [
+        "origin/codex/mgtap"
+      ]
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+      "commit_sha": "cd3f2a7f9f9a3920f18e9e154711f799cf22fdf6",
+      "bytes": 4252,
+      "sha256": "99b7e727a890d4e93a64b5c0f44fe588e383b5de56f2da663fb3f864c6d8293c",
+      "reachable_from": [
+        "origin/codex/mgtap"
+      ]
+    }
+  ]
+}

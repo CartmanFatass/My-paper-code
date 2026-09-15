@@ -1,0 +1,75 @@
+{
+  "id": "20260913-dish-001",
+  "created": "2026-09-13T18:56:43-07:00",
+  "direction": "degraded_incumbent_shadow_handover",
+  "tier": "direction",
+  "kind": "decision",
+  "title": "DISH接受独立审查，选择一次接收更新绕过比较",
+  "context": "初始PARK建议未实施。独立审查指出保留还是绕过接收更新已是具体控制器决策，DM接受该意见并选择新B09；不修改B08、旧家族PARK或历史预算。",
+  "options": [
+    {
+      "key": "a",
+      "label": "继续一次B09",
+      "consequence": "比较BYPASS与新训练REPLACE，有限新计划；旧停止不变。"
+    },
+    {
+      "key": "b",
+      "label": "方向PARK",
+      "consequence": "保留具体但未购买的BYPASS备选，停止当前方向工作。"
+    },
+    {
+      "key": "c",
+      "label": "复查固定半保留",
+      "consequence": "需要另行说明重访旧家族的边际价值，当前未选择。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "二元操作存在性比另一个中间系数具有更清楚的增量决策价值。",
+  "evidence": [
+    "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_LIFECYCLE_REASSESSMENT_20260914.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-14.md#L6",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否保留DM已按委托选择的B09：一次BYPASS对新训练REPLACE比较？当前不请求逐项批准。",
+    "changes_if_approved": [
+      {
+        "target": "DISH方向与B09科学卡",
+        "from": "建议方向PARK，未实施",
+        "to": "接受独立科学审查的关键反对意见，继续一次新B09；B08及其固定半保留家族PARK不变"
+      }
+    ],
+    "if_refused": "在下一安全边界应用所有者覆盖；保留已发生的效果及证据，不自动重跑或撤销。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260914_lifecycle_review/archive/RESPONSE.md",
+        "quote": "The reassessment itself identifies the choice: **should this received-packet bridge remain in the finite-budget controller?**",
+        "why": "二元的保留或绕过问题会改变具体控制器默认值，B08两种使用消息的规则没有测量此对比。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/degraded_incumbent_shadow_handover/pro_packets/20260914_lifecycle_review/archive/RESPONSE.md",
+        "quote": "The strongest case against my recommendation is that full REPLACE/GRU already learns useful retention and may need the packet; bypass can discard useful forecasts or reinforce stale history.",
+        "why": "可能丢弃有用信息，单对学习仍不能提供总体结论。"
+      }
+    ],
+    "uncertainty": [
+      "BYPASS效果尚未测量；DM弱预测差值为负，是否越过−24未知。",
+      "所有B08普通CAS为零，源状态价值仍未估计。",
+      "完整成本未知，历史计时不是新报价。"
+    ],
+    "cost": {
+      "compute": "新B09仅一对，合计131072训练转换、1024优化器调用和8个最终回合；新计划2700秒机器工作，含每臂900和共享900。",
+      "owner_time": "可异步查看，无须回复才开始。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing; independent engineering review and actual-node admission remain the scientific execution dependencies"
+    },
+    "verdict_text": "DM response: accept this finding and change the recommendation.",
+    "source": "docs/research/candidates/degraded_incumbent_shadow_handover/DISH_LIFECYCLE_REASSESSMENT_20260914.md"
+  },
+  "starred": true
+}

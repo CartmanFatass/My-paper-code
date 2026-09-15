@@ -1,0 +1,25 @@
+{
+  "request_id": "2026-09-14-folr-augmentation-b01-result-closeout-review-01",
+  "handoff_commit": "48c8658dfb887ee5a566bfde6a9961a18d7ba610",
+  "task_commit": "53f9f10aa8612da7375ef7c8e2492670fb53801f",
+  "source_result_commit": "15f47648566c923c28389778b67313c6292e4a9a",
+  "operator_thread_id": "01a09ea0-4a86-75b0-826d-6f864efa7480",
+  "parent_thread_id": "01a09e16-f7b1-7e60-83a0-ba2a7cd969bc",
+  "app_dispatch_count": 1,
+  "app_dispatch_result": "Tool returned success for the registered independent Transport task.",
+  "recorded_utc": "2026-09-14T20:42:21.964346+00:00",
+  "provider_acceptance": "Not yet observed by DM; Transport reconciles exact request before Send.",
+  "owner_scope": "Current-result review closeout under OWNER_PAUSE_AFTER_INFLIGHT_20260914; no successor consultation.",
+  "parent_callback_requirement": "model gpt-6-astra, thinking max",
+  "same_assignment_recovery": {
+    "reason": "Transport ended latest MGTAP turn idle without adding the delivered FOLR assignment to its durable queue.",
+    "observed_thread_turn": "01a0a19a-a6d8-7493-b14a-a2ba3013ab91",
+    "observed_status": "idle",
+    "matching_queue_entry_present": false,
+    "followup_control_messages": 1,
+    "followup_tool_result": "success",
+    "actual_provider_acceptance": "UNVERIFIED; actual conversation reconciliation required, no blind repeat Send",
+    "source_handoff_unchanged": true,
+    "recorded_utc": "2026-09-14T20:46:54.907697+00:00"
+  }
+}

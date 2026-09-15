@@ -1,0 +1,13 @@
+{
+  "handle": "folr-current-increment-b01-781801-generic",
+  "source_sha": "8ad304d61af6885c0ca5ba236bbf6c2c160e61f4",
+  "pid": 3702285,
+  "accepted_at": "2026-09-15T02:18:02.432323Z",
+  "runner_pid": 3702285,
+  "status": "finished",
+  "exit_code": 0,
+  "terminal_observed_at": "2026-09-15T02:55:12.2894023Z",
+  "observation_method": "bounded PowerShell SSH loop; exact agent-task status query every 180 seconds; exited on non-null exit_code; terminal timestamp confirmed by direct UTC status query",
+  "session_id": 61629,
+  "delivery_state": "native_final_to_parent"
+}

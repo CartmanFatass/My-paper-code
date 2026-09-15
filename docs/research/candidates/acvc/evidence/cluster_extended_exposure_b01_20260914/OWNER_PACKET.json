@@ -1,0 +1,37 @@
+{
+  "question": "在已恢复的 ACVC 链中执行 Portfolio 已选的一次 1024/4096 配对 B，是否需要所有者异步修改？",
+  "changes_if_approved": [
+    {
+      "target": "docs\\research\\candidates\\acvc\\ACVC_CLUSTER_EXTENDED_EXPOSURE_B01_SCIENCE_CARD_20260914.md",
+      "from": "后继仅在暂停交接中选定，尚未定义",
+      "to": "固定一个全新 C-only4096 程序、1024/4096 快照和六个私有评价面板"
+    }
+  ],
+  "if_refused": "在下个安全边界遵从异步修改；保留旧 C01 结论及已执行事实，不自行替换方向。",
+  "evidence_for": [
+    {
+      "path": "docs/research/portfolio/pro_packets/20260914_acvc_post_fixed_c01_direction_r2/archive/RESPONSE.md",
+      "quote": "ACVC CONTINUE，保持 MEDIUM、recasts2 和现有席位；下一目标选择一个全新的4096回合 C-only 学习程序",
+      "why": "完整最终选择直接授权这项有限研究；更长训练用途尚未回答。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/acvc/ACVC_CLUSTER_PAIRED_EXPOSURE_B01_RESULT_EVIDENCE_20260914.md",
+      "quote": "DECREASE",
+      "why": "较短配对曾见增量衰减；四倍训练不保证更强参照，单程序无总体结论。"
+    }
+  ],
+  "uncertainty": [
+    "晚期 C 可能未改善，所有观察仍须保留。",
+    "无法估计跨训练总体的不确定性或安全性。"
+  ],
+  "cost": {
+    "compute": "4096训练+384评价回合、8192更新；native参考1185.2秒，DM计划1400秒；完整支持及provider/agent费用未知。",
+    "owner_time": "无需等待回复；只在要改变已选有限工作时干预。",
+    "reversibility": "costly",
+    "waits_on_this": "nothing"
+  },
+  "verdict_text": "Owner-delegated decision (unattended, 2026-09-03 instruction): execute the selected B with the prospective bindings below.",
+  "source": "docs\\research\\candidates\\acvc\\ACVC_CLUSTER_EXTENDED_EXPOSURE_B01_SCIENCE_CARD_20260914.md"
+}

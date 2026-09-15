@@ -1,0 +1,80 @@
+{
+  "id": "20260913-acvc-001",
+  "created": "2026-09-13T12:38:03-07:00",
+  "direction": "acvc",
+  "tier": "direction",
+  "kind": "decision",
+  "title": "ACVC 无新接收用途：保留 reference，不追加",
+  "context": "原 Convergence 完整答复已验收。当前没有新的接收用途或经验结果；本次只完成 intake 与使用边界保全。现有两项 cluster primary 仍 UP，八个不利 dwell 对比世界与单一训练端点限制推广。ACVC 仍 ACTIVE/MEDIUM，recasts 2；不改变资金或生命周期。",
+  "options": [
+    {
+      "key": "a",
+      "label": "保留合格 reference，不追加",
+      "consequence": "应用完整方向决定；本轮不新增文档研究、接收对象搜索或实验，保留真实新策略用途触发。"
+    },
+    {
+      "key": "b",
+      "label": "提供真实用途后重审",
+      "consequence": "以明确接收对象和默认决策为新事实走适当节点；不自动重跑旧 K、购买实验或停向。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "完整 Pro 决定保持原科学边界；没有新用途事实支持另立工作。",
+  "evidence": [
+    "docs/research/candidates/acvc/pro_packets/20260913_reference_next_use_convergence/INTAKE.md",
+    "docs/research/candidates/acvc/pro_packets/20260913_reference_next_use_convergence/archive/RESPONSE.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-13.md#L7",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "ACVC 原方向节点确认暂无真实接收用途：是否保留现有合格 reference，不追加文档研究或实验？",
+    "changes_if_approved": [
+      {
+        "target": "ACVC DIRECTION / next-use intake / Root 当前记录",
+        "from": "一次已发送的原节点问题，完整答复待 intake",
+        "to": "完整决定已按范围验收；不追加，保留实际新策略用途触发；方向仍 ACTIVE/MEDIUM、recasts 2"
+      }
+    ],
+    "if_refused": "记录具体异议或真实接收用途，按原节点解决有关科学问题；不改写已有结果、不自动实验或停向。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/acvc/pro_packets/20260913_reference_next_use_convergence/archive/RESPONSE.md",
+        "quote": "Beyond completing this intake and preserving that boundary, no additional documentary study or reuse artifact remains to be commissioned.",
+        "why": "本次没有新增结果或接收默认决策；完成当前 intake 与保全边界就是所选有界动作。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/acvc/pro_packets/20260913_reference_next_use_convergence/archive/RESPONSE.md",
+        "quote": "One independently trained unchanged cluster C-fit remains the strongest rejected alternative.",
+        "why": "新独立策略可能改变未来实际使用判断；现有单一训练端点不支持普遍默认采用。"
+      }
+    ],
+    "uncertainty": [
+      "八个 F−dwell 不利世界与仅一个 cluster 训练端点仍限制使用范围。",
+      "真实同法用途准备把 F 作为新训练策略默认时，再按实际决策价值审议；当前没有此输入。"
+    ],
+    "cost": {
+      "compute": "新增科学计算为零；离线 Transport 校验测试单独记录，旧 K 上限不续期，provider/完整文档成本未知。",
+      "owner_time": "异步查看，无需本轮回复。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing"
+    },
+    "verdict_text": "Final decision: unchanged reference retention and no addition.",
+    "source": "docs/research/candidates/acvc/pro_packets/20260913_reference_next_use_convergence/archive/RESPONSE.md"
+  },
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-13T19:39:55+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/acvc/pro_packets/20260913_reference_next_use_convergence/archive/RESPONSE.md",
+      "record": "docs/research/candidates/acvc/pro_packets/20260913_reference_next_use_convergence/INTAKE.md",
+      "state": "applied",
+      "summary": "完整原节点答复已核对固定 TASK 与17条输入；保留现有 reference/no-addition，未新增文档研究或实验；ACTIVE/MEDIUM/recasts2不变。Transport 配对与同归档回执修复分别验收，不修改既有响应或科学含义。"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "batch": "LCAC_B02_9412_20260914",
+  "dm": "/root",
+  "active_set": [],
+  "pending_notices": [],
+  "terminal_events": [
+    {
+      "event_id": "LCAC_B02_9412_20260914-terminal-20260914T041432Z",
+      "handle": "lcac-b02-s9412-25ea4d61-20260914",
+      "status": "finished",
+      "exit_code": 0,
+      "pid": 3655108,
+      "tmux_active": false,
+      "output": "/home/wu/hmasd-worktrees/lcac-b01-26e23ff3/experiments/results/lcac_b02_9412_20260914",
+      "receipts": "/home/wu/hmasd-worktrees/lcac-b01-26e23ff3/experiments/results/lcac_b02_9412_20260914_receipts",
+      "runner_time": {"wall_seconds": 443.91, "peak_rss_kib": 570212, "exit_status": 0},
+      "admission_passed": true,
+      "delivery_state": "terminal_notice_sent"
+    }
+  ]
+}

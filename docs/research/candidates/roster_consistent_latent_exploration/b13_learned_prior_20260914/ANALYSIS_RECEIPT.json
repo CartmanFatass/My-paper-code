@@ -1,0 +1,9 @@
+{
+  "started_at_utc": "2026-09-14T09:12:44.1403634Z",
+  "ended_at_utc": "2026-09-14T09:12:47.7951340Z",
+  "elapsed_s": 3.6449386,
+  "exit_code": 0,
+  "source": "2d5432792e521edbb15ebdc9d43a49feb2cb0a9a",
+  "launch_sha": "cf4d9bd93ff9eb255800223d95de170b68315ba6",
+  "scope": "retained-byte intake only; no model, rollout, RNG or update; enclosing local support wall"
+}

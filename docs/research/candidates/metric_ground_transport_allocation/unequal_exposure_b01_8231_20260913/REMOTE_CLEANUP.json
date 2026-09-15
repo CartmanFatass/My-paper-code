@@ -1,0 +1,14 @@
+{
+  "observed_at": "2026-09-13T09:57:34.354059+00:00",
+  "removed": [
+    "/home/wu/hmasd-worktrees/mgtap-unequal-8231-ecf40e0ad",
+    "/home/wu/.agent-tasks/mgtap-unequal-8231-ecf40e0ad",
+    "/home/wu/hmasd-inputs/mgtap-unequal-8231-readiness"
+  ],
+  "all_disk_absent": true,
+  "execution_worktree_registration_absent": true,
+  "source_sha": "ecf40e0ade4576fd75ffb0eab09425cb5c4ce059",
+  "shared_remote_checkout_preserved": true,
+  "root_retention_integration": "48e6f98a8",
+  "archive_sha256": "2e9be88fd64c7825c5bfda5388be75f03444e68dc3add41b36ba9ce19c6253a1"
+}

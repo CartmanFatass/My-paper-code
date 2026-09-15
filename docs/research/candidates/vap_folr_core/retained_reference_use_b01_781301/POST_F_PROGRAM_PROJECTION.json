@@ -1,0 +1,66 @@
+{
+  "projection_kind": "proposed_program_only_not_grant",
+  "seed_blocks_max": 2,
+  "result_bearing_invocations_max": 4,
+  "per_arm": {
+    "training_episodes": 5000,
+    "training_ticks": 100000,
+    "optimizer_updates": 4969,
+    "evaluation_episodes": 128,
+    "evaluation_ticks": 2560,
+    "total_native_ticks": 102560
+  },
+  "max_program": {
+    "training_episodes": 20000,
+    "training_ticks": 400000,
+    "optimizer_updates": 19876,
+    "evaluation_episodes": 512,
+    "evaluation_ticks": 10240,
+    "total_native_ticks": 410240
+  },
+  "generic_replay_gru_positions_per_fit": 33391680,
+  "bank_replay_gru_positions_per_fit_upper": 166958400,
+  "generic_acting_positions_per_fit": 538440,
+  "bank_acting_positions_per_fit_upper": 2692200,
+  "proposed_hard_seconds": {
+    "generic_per_invocation": 2700,
+    "bank_per_invocation": 3000,
+    "native_sum": 11400,
+    "invoked_support": 2400,
+    "complete_invoked": 13800
+  },
+  "new_empirical_exposure_during_proposal": 0,
+  "minimum_one_block": {
+    "fresh_fits": 2,
+    "training_episodes": 10000,
+    "training_ticks": 200000,
+    "optimizer_updates": 9938,
+    "final_episodes": 256,
+    "evaluation_ticks": 5120,
+    "native_ticks": 205120,
+    "native_risk_cap_seconds": 5700,
+    "support_risk_cap_seconds": 1200,
+    "complete_invoked_risk_cap_seconds": 6900
+  },
+  "authority_note": "Planning estimate only. Ordinary DM A/B selection is not contingent on a Portfolio purchase. Old F no-successor/caps constrain F, not all direction objects. No new run selected here; recommendation P rests on marginal research value.",
+  "source_card": {
+    "path": "docs/research/candidates/vap_folr_core/FOLR_ENTITY_HISTORY_B01_SCIENCE_CARD_20260912.md",
+    "commit": "5b3ae6b9847beba5fe72b0960ec7b66cb7d1c4b4",
+    "section": "Exposure, RNG and native endpoint; L0 cost law"
+  },
+  "computation": "Python stdlib configuration arithmetic only: updates=5000-32+1; per-arm ticks=(5000+128)*20; program maximum=two blocks*two arms.",
+  "new_author_exposure": {
+    "scientific_invocations": 0,
+    "models": 0,
+    "checkpoint_loads": 0,
+    "environments": 0,
+    "scientific_rng_masters": 0,
+    "training_episodes": 0,
+    "native_ticks": 0,
+    "optimizer_steps": 0,
+    "evaluation_episodes": 0,
+    "source_implementation_edits": 0,
+    "scientific_tests": 0,
+    "provider_sends": 0
+  }
+}

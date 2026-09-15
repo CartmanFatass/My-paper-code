@@ -1,0 +1,18 @@
+=== Task 'acvc-fixed-recipe-c01-u01-6e8d1b894' started at 2026-09-15T02:10:19+08:00 ===
+{
+  "assessed_at": "2026-09-14T18:10:19.815663Z",
+  "available_physical_bytes": 15625986048,
+  "captured_at": "2026-09-14T18:10:19.815327Z",
+  "cgroup_headroom_bytes": null,
+  "cgroup_memory_current_bytes": null,
+  "cgroup_memory_max_bytes": null,
+  "effective_available_bytes": 15625986048,
+  "effective_floor_pass": true,
+  "failure_reasons": [],
+  "measurement_source": "/proc/meminfo",
+  "minimum_available_bytes": 4294967296,
+  "passed": true,
+  "physical_floor_pass": true,
+  "schema_version": 1
+}
+=== Task 'acvc-fixed-recipe-c01-u01-6e8d1b894' exited with code 0 at 2026-09-15T02:15:12+08:00 (Duration: 293s) ===

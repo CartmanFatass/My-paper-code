@@ -1,0 +1,12 @@
+{
+  "request_id": "2026-09-13-folr-retained-reference-investment-01",
+  "reference_count": 15,
+  "all_exact_paths_exist_and_published": true,
+  "task_matches_scientific_question_and_manifest": true,
+  "native_direct_parent_child_binding": true,
+  "portfolio_only_response_write_scope": "docs/research/portfolio/pro_packets/20260913_folr_retained_reference_investment/archive/RESPONSE.md",
+  "old_convergence_files_unchanged": true,
+  "new_empirical_exposure": 0,
+  "self_review": "Corrected prepublication wording to distinguish collection episodes plus learner updates rather than implying their product; no numeric or scientific change.",
+  "task_sha256_before_commit": "18bc36f9bf9716524f8a46cd25f638a9ed8f1027921ac7934b774be979a30fe1"
+}

@@ -1,0 +1,567 @@
+{
+  "object_id": "RCLE-TBCFV-B08-JOINT-QUOTA-PHASE",
+  "source_sha_canonical": "012a8bce2c90cbe54459437dba01d3f171c9e063",
+  "source_metadata_literal": "012a8bce2c90cbe54459437dba01d3f171c9e063\r",
+  "source_metadata_deviation": "one terminal CR from PowerShell-to-bash payload; canonical remote HEAD independently verified; metadata only, raw output retained",
+  "independent_fits": 1,
+  "training_episodes": 16384,
+  "updates": 256,
+  "evaluation": {
+    "initialization": {
+      "rows": 512,
+      "cells": 8,
+      "agent_ticks": 327680,
+      "agent_claims": 81920
+    },
+    "final256": {
+      "rows": 512,
+      "cells": 8,
+      "agent_ticks": 327680,
+      "agent_claims": 81920
+    },
+    "greedy": {
+      "rows": 512,
+      "cells": 8,
+      "agent_ticks": 327680,
+      "agent_claims": 81920
+    },
+    "nearest": {
+      "rows": 512,
+      "cells": 8,
+      "agent_ticks": 327680,
+      "agent_claims": 81920
+    }
+  },
+  "native_ticks": 1179648,
+  "training_agent_ticks": 8388608,
+  "training_agent_claims": 2097152,
+  "checkpoint": {
+    "parameters": 2561,
+    "dtype": "float64",
+    "initial_norm": 5.912500941900966,
+    "displacement": 4.368355707910601,
+    "changed_parameters": 2561,
+    "optimizer_steps": [
+      256.0,
+      256.0,
+      256.0,
+      256.0,
+      256.0,
+      256.0,
+      256.0,
+      256.0
+    ],
+    "baseline_shape": [
+      8
+    ]
+  },
+  "observed_curve": {
+    "first32_mean_training_Y": 0.31510823567708335,
+    "last32_mean_training_Y": 0.36156565348307296,
+    "nonzero_parameter_updates": 256,
+    "minimum_gradient_norm": 0.001347028003841466,
+    "maximum_gradient_norm": 0.14502892753616073
+  },
+  "primary_means": {
+    "initialization": {
+      "U": 0.6858561197916666,
+      "F": 0.0,
+      "tau": 38.453125,
+      "Y": 0.31630452473958337,
+      "unmet_ticks": 27.434244791666668,
+      "tau40": 58.5
+    },
+    "final256": {
+      "U": 0.6377034505208333,
+      "F": 0.0,
+      "tau": 37.359375,
+      "Y": 0.36435953776041663,
+      "unmet_ticks": 25.508138020833336,
+      "tau40": 54.5
+    },
+    "greedy": {
+      "U": 0.10466308593750001,
+      "F": 0.0,
+      "tau": 22.1015625,
+      "Y": 0.8838602701822916,
+      "unmet_ticks": 4.1865234375,
+      "tau40": 31.5
+    },
+    "nearest": {
+      "U": 0.26756184895833335,
+      "F": 0.2664713541666667,
+      "tau": 39.375,
+      "Y": 0.7272338867187501,
+      "unmet_ticks": 10.702473958333334,
+      "tau40": 62.5
+    }
+  },
+  "comparison": {
+    "D_g": {
+      "mean": -0.5330403645833333,
+      "conditional_se": 0.006233857853628364,
+      "conditional_normal95": [
+        -0.5452587259764449,
+        -0.5208220031902216
+      ],
+      "paths": {
+        "8_to_12.ACTIVE_CONTINUATION": {
+          "mean": -0.5977213541666666,
+          "conditional_se": 0.008484862460002558,
+          "positive": 0,
+          "adverse": 64,
+          "ties": 0
+        },
+        "12_to_8.ACTIVE_CONTINUATION": {
+          "mean": -0.468359375,
+          "conditional_se": 0.009135154294910157,
+          "positive": 0,
+          "adverse": 64,
+          "ties": 0
+        }
+      }
+    },
+    "D_n": {
+      "mean": -0.3701416015625,
+      "conditional_se": 0.00940293188336182,
+      "conditional_normal95": [
+        -0.38857134805388915,
+        -0.3517118550711108
+      ],
+      "paths": {
+        "8_to_12.ACTIVE_CONTINUATION": {
+          "mean": -0.39433593749999996,
+          "conditional_se": 0.012484960911248594,
+          "positive": 0,
+          "adverse": 64,
+          "ties": 0
+        },
+        "12_to_8.ACTIVE_CONTINUATION": {
+          "mean": -0.345947265625,
+          "conditional_se": 0.014063650417198363,
+          "positive": 0,
+          "adverse": 64,
+          "ties": 0
+        }
+      }
+    },
+    "G_U": {
+      "mean": 0.04815266927083335,
+      "conditional_se": 0.005192497338408733,
+      "conditional_normal95": [
+        0.037975374487552234,
+        0.05832996405411447
+      ],
+      "paths": {
+        "8_to_12.ACTIVE_CONTINUATION": {
+          "mean": 0.05729166666666669,
+          "conditional_se": 0.006629126073623884,
+          "positive": 56,
+          "adverse": 8,
+          "ties": 0
+        },
+        "12_to_8.ACTIVE_CONTINUATION": {
+          "mean": 0.039013671875,
+          "conditional_se": 0.007993922812832703,
+          "positive": 44,
+          "adverse": 18,
+          "ties": 2
+        }
+      }
+    }
+  },
+  "reading_flags": [
+    "no_endpoint_advantage"
+  ],
+  "native_receipt": {
+    "whole_native_wall_s": 45.39,
+    "peak_rss_kib": 613072.0,
+    "exit_code": 0.0
+  },
+  "all_eight_cell_means": {
+    "initialization": {
+      "8_to_8.ACTIVE_CONTINUATION": {
+        "episodes": 64,
+        "U": 0.6899902343750001,
+        "F": 0.0,
+        "tau": 39.4375,
+        "Y": 0.308685302734375,
+        "unmet_ticks": 27.599609375,
+        "tau40": 63
+      },
+      "8_to_8.NEW_EPOCH": {
+        "episodes": 64,
+        "U": 0.6953125,
+        "F": 0.0,
+        "tau": 39.40625,
+        "Y": 0.302398681640625,
+        "unmet_ticks": 27.8125,
+        "tau40": 63
+      },
+      "12_to_12.ACTIVE_CONTINUATION": {
+        "episodes": 64,
+        "U": 0.6684895833333334,
+        "F": 0.0,
+        "tau": 35.625,
+        "Y": 0.326171875,
+        "unmet_ticks": 26.739583333333332,
+        "tau40": 52
+      },
+      "12_to_12.NEW_EPOCH": {
+        "episodes": 64,
+        "U": 0.6824544270833334,
+        "F": 0.0,
+        "tau": 35.5625,
+        "Y": 0.31640625,
+        "unmet_ticks": 27.298177083333336,
+        "tau40": 51
+      },
+      "8_to_12.ACTIVE_CONTINUATION": {
+        "episodes": 64,
+        "U": 0.6816731770833333,
+        "F": 0.0,
+        "tau": 37.984375,
+        "Y": 0.3202921549479167,
+        "unmet_ticks": 27.266927083333336,
+        "tau40": 55
+      },
+      "8_to_12.NEW_EPOCH": {
+        "episodes": 64,
+        "U": 0.6888997395833334,
+        "F": 0.0,
+        "tau": 37.8125,
+        "Y": 0.3182474772135417,
+        "unmet_ticks": 27.555989583333336,
+        "tau40": 58
+      },
+      "12_to_8.ACTIVE_CONTINUATION": {
+        "episodes": 64,
+        "U": 0.6900390625,
+        "F": 0.0,
+        "tau": 38.921875,
+        "Y": 0.31231689453125,
+        "unmet_ticks": 27.6015625,
+        "tau40": 62
+      },
+      "12_to_8.NEW_EPOCH": {
+        "episodes": 64,
+        "U": 0.7048828125000001,
+        "F": 0.0,
+        "tau": 39.609375,
+        "Y": 0.30116780598958337,
+        "unmet_ticks": 28.1953125,
+        "tau40": 62
+      }
+    },
+    "final256": {
+      "8_to_8.ACTIVE_CONTINUATION": {
+        "episodes": 64,
+        "U": 0.6490234375,
+        "F": 0.0,
+        "tau": 39.390625,
+        "Y": 0.354766845703125,
+        "unmet_ticks": 25.9609375,
+        "tau40": 61
+      },
+      "8_to_8.NEW_EPOCH": {
+        "episodes": 64,
+        "U": 0.63076171875,
+        "F": 0.0,
+        "tau": 36.953125,
+        "Y": 0.36505126953125,
+        "unmet_ticks": 25.23046875,
+        "tau40": 56
+      },
+      "12_to_12.ACTIVE_CONTINUATION": {
+        "episodes": 64,
+        "U": 0.5994791666666667,
+        "F": 0.0,
+        "tau": 30.40625,
+        "Y": 0.38671874999999994,
+        "unmet_ticks": 23.979166666666664,
+        "tau40": 36
+      },
+      "12_to_12.NEW_EPOCH": {
+        "episodes": 64,
+        "U": 0.6197916666666667,
+        "F": 0.0,
+        "tau": 31.796875,
+        "Y": 0.3751424153645833,
+        "unmet_ticks": 24.791666666666668,
+        "tau40": 42
+      },
+      "8_to_12.ACTIVE_CONTINUATION": {
+        "episodes": 64,
+        "U": 0.6243815104166666,
+        "F": 0.0,
+        "tau": 35.984375,
+        "Y": 0.3718159993489583,
+        "unmet_ticks": 24.975260416666668,
+        "tau40": 48
+      },
+      "8_to_12.NEW_EPOCH": {
+        "episodes": 64,
+        "U": 0.6192708333333333,
+        "F": 0.0,
+        "tau": 37.171875,
+        "Y": 0.37787882486979163,
+        "unmet_ticks": 24.77083333333333,
+        "tau40": 54
+      },
+      "12_to_8.ACTIVE_CONTINUATION": {
+        "episodes": 64,
+        "U": 0.6510253906250001,
+        "F": 0.0,
+        "tau": 38.734375,
+        "Y": 0.356903076171875,
+        "unmet_ticks": 26.041015625,
+        "tau40": 61
+      },
+      "12_to_8.NEW_EPOCH": {
+        "episodes": 64,
+        "U": 0.65380859375,
+        "F": 0.0,
+        "tau": 38.609375,
+        "Y": 0.35384114583333337,
+        "unmet_ticks": 26.15234375,
+        "tau40": 61
+      }
+    },
+    "greedy": {
+      "8_to_8.ACTIVE_CONTINUATION": {
+        "episodes": 64,
+        "U": 0.171875,
+        "F": 0.0,
+        "tau": 40.0,
+        "Y": 0.809478759765625,
+        "unmet_ticks": 6.875,
+        "tau40": 64
+      },
+      "8_to_8.NEW_EPOCH": {
+        "episodes": 64,
+        "U": 0.183984375,
+        "F": 0.0,
+        "tau": 24.5625,
+        "Y": 0.802978515625,
+        "unmet_ticks": 7.359375,
+        "tau40": 38
+      },
+      "12_to_12.ACTIVE_CONTINUATION": {
+        "episodes": 64,
+        "U": 0.0,
+        "F": 0.0,
+        "tau": 0.0,
+        "Y": 0.9732462565104166,
+        "unmet_ticks": 0.0,
+        "tau40": 0
+      },
+      "12_to_12.NEW_EPOCH": {
+        "episodes": 64,
+        "U": 0.02890625,
+        "F": 0.0,
+        "tau": 1.15625,
+        "Y": 0.9554443359375,
+        "unmet_ticks": 1.15625,
+        "tau40": 0
+      },
+      "8_to_12.ACTIVE_CONTINUATION": {
+        "episodes": 64,
+        "U": 0.02666015625,
+        "F": 0.0,
+        "tau": 4.828125,
+        "Y": 0.906646728515625,
+        "unmet_ticks": 1.06640625,
+        "tau40": 0
+      },
+      "8_to_12.NEW_EPOCH": {
+        "episodes": 64,
+        "U": 0.038183593749999994,
+        "F": 0.0,
+        "tau": 4.015625,
+        "Y": 0.8997802734375,
+        "unmet_ticks": 1.52734375,
+        "tau40": 0
+      },
+      "12_to_8.ACTIVE_CONTINUATION": {
+        "episodes": 64,
+        "U": 0.182666015625,
+        "F": 0.0,
+        "tau": 39.375,
+        "Y": 0.8610738118489583,
+        "unmet_ticks": 7.306640625,
+        "tau40": 63
+      },
+      "12_to_8.NEW_EPOCH": {
+        "episodes": 64,
+        "U": 0.187744140625,
+        "F": 0.0,
+        "tau": 15.546875,
+        "Y": 0.8569234212239583,
+        "unmet_ticks": 7.509765625,
+        "tau40": 22
+      }
+    },
+    "nearest": {
+      "8_to_8.ACTIVE_CONTINUATION": {
+        "episodes": 64,
+        "U": 0.323828125,
+        "F": 0.323828125,
+        "tau": 39.625,
+        "Y": 0.67108154296875,
+        "unmet_ticks": 12.953125,
+        "tau40": 62
+      },
+      "8_to_8.NEW_EPOCH": {
+        "episodes": 64,
+        "U": 0.331884765625,
+        "F": 0.31953125,
+        "tau": 38.65625,
+        "Y": 0.667449951171875,
+        "unmet_ticks": 13.275390625,
+        "tau40": 60
+      },
+      "12_to_12.ACTIVE_CONTINUATION": {
+        "episodes": 64,
+        "U": 0.2369791666666667,
+        "F": 0.23697916666666669,
+        "tau": 40.0,
+        "Y": 0.7579142252604167,
+        "unmet_ticks": 9.479166666666668,
+        "tau40": 64
+      },
+      "12_to_12.NEW_EPOCH": {
+        "episodes": 64,
+        "U": 0.26168619791666675,
+        "F": 0.23958333333333337,
+        "tau": 40.0,
+        "Y": 0.7411295572916667,
+        "unmet_ticks": 10.467447916666668,
+        "tau40": 64
+      },
+      "8_to_12.ACTIVE_CONTINUATION": {
+        "episodes": 64,
+        "U": 0.23004557291666672,
+        "F": 0.22786458333333337,
+        "tau": 39.375,
+        "Y": 0.7370198567708335,
+        "unmet_ticks": 9.201822916666668,
+        "tau40": 63
+      },
+      "8_to_12.NEW_EPOCH": {
+        "episodes": 64,
+        "U": 0.2534830729166667,
+        "F": 0.23828125,
+        "tau": 40.0,
+        "Y": 0.7303670247395835,
+        "unmet_ticks": 10.139322916666668,
+        "tau40": 64
+      },
+      "12_to_8.ACTIVE_CONTINUATION": {
+        "episodes": 64,
+        "U": 0.305078125,
+        "F": 0.305078125,
+        "tau": 39.375,
+        "Y": 0.7174479166666667,
+        "unmet_ticks": 12.203125,
+        "tau40": 62
+      },
+      "12_to_8.NEW_EPOCH": {
+        "episodes": 64,
+        "U": 0.337060546875,
+        "F": 0.31914062499999996,
+        "tau": 39.125,
+        "Y": 0.6945699055989585,
+        "unmet_ticks": 13.482421875,
+        "tau40": 61
+      }
+    }
+  },
+  "files": [
+    {
+      "path": "b08-check-012a-01/CHECK_RECEIPT.json",
+      "bytes": 177,
+      "sha256": "ffb54df706d64a1d5501c6693c5180b50de17acc9231885cde1e35f7d23527c4"
+    },
+    {
+      "path": "b08-check-012a-01/pytest.log",
+      "bytes": 98,
+      "sha256": "92abc570a64cf5b4a3b3bfe72c47828ee416279edd7d21b74c75bb7ab5095f0b"
+    },
+    {
+      "path": "b08-evidence.tar.gz",
+      "bytes": 203231,
+      "sha256": "321ad277ac6dc5c4c5b611a2e7dcc028eb1aba528b925337fc46dc9e9c6c2ad0"
+    },
+    {
+      "path": "b08_control/admission.json",
+      "bytes": 504,
+      "sha256": "2d07ceb784835c92024b96c2da0a52ee08d615a8fee6911f97f992eaafc08398"
+    },
+    {
+      "path": "b08_control/native.time",
+      "bytes": 58,
+      "sha256": "56e6a00645f8208dcfe017580d7fa9d64a1ac7f1cf896f3ad238843d6bdaa4cf"
+    },
+    {
+      "path": "b08_control/supervisor_status.json",
+      "bytes": 134,
+      "sha256": "4df6b6cb2d25b61ffaebdce1433b9cbc1f28bb95e3e421f5b55295edb4e92a14"
+    },
+    {
+      "path": "b08_control/task.log",
+      "bytes": 807,
+      "sha256": "a5ef84d0005c12b993617e36ad49429db1bcb2ddc43ed04f8af36939ce8245b8"
+    },
+    {
+      "path": "b08_seed28/curves.jsonl",
+      "bytes": 274708,
+      "sha256": "e8ea68a00996c1d19259acba134804562fdcdc6ae6b2f54a7862a3f1d10fdec8"
+    },
+    {
+      "path": "b08_seed28/final256.json",
+      "bytes": 113175,
+      "sha256": "4f077f9aa646d12a0a064b4a13f38e08860bd8f6165b36908e1532c3f2c2dca5"
+    },
+    {
+      "path": "b08_seed28/final256.pt",
+      "bytes": 71783,
+      "sha256": "48439cc36a764f2745c968201d46d0322f34bdcce3159ef9aac35cf9df5d4e88"
+    },
+    {
+      "path": "b08_seed28/greedy.json",
+      "bytes": 110146,
+      "sha256": "00ca7592b88393ed5879e1a758c6ba59c7c09928bc82c99703a32f2aaf55a577"
+    },
+    {
+      "path": "b08_seed28/initialization.json",
+      "bytes": 113748,
+      "sha256": "4099ac019d3e1b92ab591add32998e7248a26eee9682cc7441f9950cd1716795"
+    },
+    {
+      "path": "b08_seed28/initialization.pt",
+      "bytes": 24111,
+      "sha256": "0ab729bf5f199885c7ffbc5879450f6fae63cf368e58b097905684fbd3807eb7"
+    },
+    {
+      "path": "b08_seed28/native_build/9941df731135f97ccb8e4ca7b24d29e784dab313f58a723d3b5a3414e8a4b0c0/tbcfv_backend.so",
+      "bytes": 85416,
+      "sha256": "5b918da7e23d7b65251fb20efcb6678e4a17e62538f6ebdedbda1d9e96221983"
+    },
+    {
+      "path": "b08_seed28/native_build/9941df731135f97ccb8e4ca7b24d29e784dab313f58a723d3b5a3414e8a4b0c0/tbcfv_backend.source.cpp",
+      "bytes": 50757,
+      "sha256": "18d45b95a29c1ca8d17b4d192a9328ddc9c56a821a2690f118de44dbf0054819"
+    },
+    {
+      "path": "b08_seed28/nearest.json",
+      "bytes": 115379,
+      "sha256": "8b26ba5a594c07e860cbaf8552950bce3594daa84d2326273f17a60152d77230"
+    },
+    {
+      "path": "b08_seed28/summary.json",
+      "bytes": 22747,
+      "sha256": "905cd95baab2d18dd4a341be658e0653067d37191425b4a5a13340de32ec7476"
+    }
+  ],
+  "scope": "read-only checks and arithmetic over retained bytes; zero new fitting, rollout, screening or seed independence"
+}

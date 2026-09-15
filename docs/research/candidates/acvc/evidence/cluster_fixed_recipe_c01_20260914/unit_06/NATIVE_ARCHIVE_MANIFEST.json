@@ -1,0 +1,84 @@
+{
+  "archive": "/home/wu/hmasd-inputs/acvc-fixed-recipe-c01-u06-6e8d1b894-native.tar.gz",
+  "bytes": 559917,
+  "sha256": "c6a6c935535fab477dfc1017a755361550a5a92aa5e85c2c18993fadbd2f10db",
+  "supervisor_status": "finished",
+  "supervisor_exit_code": 0,
+  "files": {
+    "native/admission.json": {
+      "bytes": 504,
+      "sha256": "819a510d212f1a55a9afb48ce817f4d66e0812f7a798e3faec495f4ab4d2f4bc",
+      "published_path": "docs/research/candidates/acvc/evidence/cluster_fixed_recipe_c01_20260914/unit_06/admission.json"
+    },
+    "native/episodes.jsonl": {
+      "bytes": 772761,
+      "sha256": "274ef5977412aa89c8cd38b0b72a5392861833c04e3ee117b88a0980ca447709",
+      "published_path": "docs/research/candidates/acvc/evidence/cluster_fixed_recipe_c01_20260914/unit_06/episodes.jsonl"
+    },
+    "native/final_DENSE.pt": {
+      "bytes": 282957,
+      "sha256": "97fb4b72b1325ed8f8a2a88db291692605529cb75ac5582657b27aa2cb379035",
+      "retention": "Original local archive and collected native data; no intake model load."
+    },
+    "native/native_time.txt": {
+      "bytes": 89,
+      "sha256": "14a09857ca94a94bf2f09e8d2deb2bd2161aa5210dccaf8053b1af140d96f71a",
+      "published_path": "docs/research/candidates/acvc/evidence/cluster_fixed_recipe_c01_20260914/unit_06/native_time.txt"
+    },
+    "native/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "published_path": "docs/research/candidates/acvc/evidence/cluster_fixed_recipe_c01_20260914/unit_06/stderr.log"
+    },
+    "native/stdout.log": {
+      "bytes": 3650,
+      "sha256": "9c3eda5608eaaa61897153b7bbb396f45c4e55f5371b138543aca065fed507bb",
+      "published_path": "docs/research/candidates/acvc/evidence/cluster_fixed_recipe_c01_20260914/unit_06/stdout.log"
+    },
+    "native/summary.json": {
+      "bytes": 18248,
+      "sha256": "5646bba9e57480198cc86984111a38981dafa8a1d1a0e9368ff471ae46a3af9c",
+      "published_path": "docs/research/candidates/acvc/evidence/cluster_fixed_recipe_c01_20260914/unit_06/summary.json"
+    },
+    "native/updates.jsonl": {
+      "bytes": 475443,
+      "sha256": "54e36ec69a8baebd9de781764b4747347ef26e0f256f93fb7849fe628f461d58",
+      "published_path": "docs/research/candidates/acvc/evidence/cluster_fixed_recipe_c01_20260914/unit_06/updates.jsonl"
+    },
+    "supervisor/exit_code": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "published_path": "docs/research/candidates/acvc/evidence/cluster_fixed_recipe_c01_20260914/unit_06/supervisor_exit_code"
+    },
+    "supervisor/pid": {
+      "bytes": 8,
+      "sha256": "0ee75d06fdcfc4100ac03bf2dbb5cb69a15f1e9c597fa8603ac19e26be9610b1",
+      "published_path": "docs/research/candidates/acvc/evidence/cluster_fixed_recipe_c01_20260914/unit_06/supervisor_pid"
+    },
+    "supervisor/runner.sh": {
+      "bytes": 1266,
+      "sha256": "a0cedb49c37eb2d91fafd5c5bee33ad3d7c6b5f9a8b84de0d8efe49e4e0390ef",
+      "published_path": "docs/research/candidates/acvc/evidence/cluster_fixed_recipe_c01_20260914/unit_06/supervisor_runner.sh"
+    },
+    "supervisor/start_time": {
+      "bytes": 11,
+      "sha256": "0d05f81da9c9684b476e71f22d4540f5b95d1b2c5766f05f48217132dc1ee892",
+      "published_path": "docs/research/candidates/acvc/evidence/cluster_fixed_recipe_c01_20260914/unit_06/supervisor_start_time"
+    },
+    "supervisor/status": {
+      "bytes": 9,
+      "sha256": "161069badc0cc23058b13d7c068e45205f4333aa15fd78db9d68f5c9f1ae8983",
+      "published_path": "docs/research/candidates/acvc/evidence/cluster_fixed_recipe_c01_20260914/unit_06/supervisor_status"
+    },
+    "supervisor/task.log": {
+      "bytes": 708,
+      "sha256": "1e1943e5d574da0981949b461fcfb35484ec0a8a4d5c16158856154699d14926",
+      "published_path": "docs/research/candidates/acvc/evidence/cluster_fixed_recipe_c01_20260914/unit_06/supervisor_task.log"
+    }
+  },
+  "local_archive": "temp/directions/acvc/retained/cluster_fixed_recipe_c01_20260914/unit_06_native.tar.gz",
+  "local_collected": "temp/directions/acvc/retained/cluster_fixed_recipe_c01_20260914/units/unit_06",
+  "collected_at": "2026-09-14T19:02:04.587084+00:00",
+  "preserved_file_count": 14,
+  "scientific_invocations_added_by_collection": 0
+}

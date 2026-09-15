@@ -1,0 +1,32 @@
+{
+  "low": {
+    "recipe": "low",
+    "handle": "acvc-rate-low-b01-27931-2bbaa99ad",
+    "source": "2bbaa99ad9cc717d89e47a1f24d9acd76dce4f97",
+    "cwd": "/home/wu/hmasd-worktrees/acvc-rate-pair-b01-2bbaa99ad",
+    "output": "/home/wu/hmasd-worktrees/acvc-rate-pair-b01-2bbaa99ad/temp/directions/acvc/exp/cluster_fixed_lr_pair_b01_27931_low",
+    "node": "hmasd-wsl-node",
+    "command_commit": "f3cba57c88bcde9c8bd8a37ed4b8410f4f875bcd",
+    "submitted_at_utc": "2026-09-15T02:04:22.314809+00:00",
+    "receipt_at_utc": "2026-09-15T02:04:22.939896+00:00",
+    "returncode": 0,
+    "stdout": "Task 'acvc-rate-low-b01-27931-2bbaa99ad' started in tmux session 'agent_acvc-rate-low-b01-27931-2bbaa99ad'. Output: /home/wu/.agent-tasks/acvc-rate-low-b01-27931-2bbaa99ad/task.log\n",
+    "stderr": "",
+    "accepted": true
+  },
+  "reference": {
+    "recipe": "reference",
+    "handle": "acvc-rate-ref-b01-27931-2bbaa99ad",
+    "source": "2bbaa99ad9cc717d89e47a1f24d9acd76dce4f97",
+    "cwd": "/home/wu/hmasd-worktrees/acvc-rate-pair-b01-2bbaa99ad",
+    "output": "/home/wu/hmasd-worktrees/acvc-rate-pair-b01-2bbaa99ad/temp/directions/acvc/exp/cluster_fixed_lr_pair_b01_27931_reference",
+    "node": "hmasd-wsl-node",
+    "command_commit": "f3cba57c88bcde9c8bd8a37ed4b8410f4f875bcd",
+    "submitted_at_utc": "2026-09-15T02:04:22.940901+00:00",
+    "receipt_at_utc": "2026-09-15T02:04:23.320675+00:00",
+    "returncode": 0,
+    "stdout": "Task 'acvc-rate-ref-b01-27931-2bbaa99ad' started in tmux session 'agent_acvc-rate-ref-b01-27931-2bbaa99ad'. Output: /home/wu/.agent-tasks/acvc-rate-ref-b01-27931-2bbaa99ad/task.log\n",
+    "stderr": "",
+    "accepted": true
+  }
+}

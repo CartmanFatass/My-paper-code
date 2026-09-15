@@ -1,0 +1,114 @@
+{
+  "checked_utc": "2026-09-13T01:56:31.371855+00:00",
+  "input_sha": "0791b04744549d6f16d65d07a287156f9a4b1f1a",
+  "task_commit": "4ebcd0f610ea9e15e8f48c30ec3f1f147d272913",
+  "task_url": "https://github.com/CartmanFatass/My-paper-code/blob/4ebcd0f610ea9e15e8f48c30ec3f1f147d272913/docs/research/candidates/acvc/pro_packets/20260912_post_cluster_use_convergence/TASK.md",
+  "task_bytes": 23919,
+  "task_sha256": "dec4ec4a6f606832e879064bfc6340b361abe365afd1af956f0215f02c3dd659",
+  "task_blob_matches_working_bytes": true,
+  "reference_count": 15,
+  "reference_checks": "All15 exact path/full-SHA objects exist; rendered Markdown path/SHA/purpose/provenance manifest matches REQUEST exactly. The initial checker incorrectly expected a JSON fence; corrected to the actual renderer format without changing TASK or inputs.",
+  "effective_references": [
+    {
+      "path": "docs/research/candidates/acvc/ACVC_POST_CLUSTER_USE_DIRECTION_QUESTION_20260912.md",
+      "commit_sha": "0791b04744549d6f16d65d07a287156f9a4b1f1a"
+    },
+    {
+      "path": "docs/research/candidates/acvc/pro_packets/20260912_post_cluster_use_convergence/FACTS.json",
+      "commit_sha": "0791b04744549d6f16d65d07a287156f9a4b1f1a"
+    },
+    {
+      "path": "docs/research/candidates/acvc/DIRECTION.md",
+      "commit_sha": "f569a80bc28bb9c679884da36824613652b414f0"
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_CLUSTER_DEPLOYMENT_B01_INTAKE_20260912.md",
+      "commit_sha": "f569a80bc28bb9c679884da36824613652b414f0"
+    },
+    {
+      "path": "docs/research/candidates/acvc/evidence/cluster_deployment_b01_20260912/summary.json",
+      "commit_sha": "f569a80bc28bb9c679884da36824613652b414f0"
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_CLUSTER_DEPLOYMENT_B01_EXECUTION_FACTS_20260912.json",
+      "commit_sha": "d8bb4b2b049f87989cb138181b598e9ada496a22"
+    },
+    {
+      "path": "experiments/candidates/acvc/cluster_deployment_b01/protocol.py",
+      "commit_sha": "e06b3d63f7e9f77c13fd327dba0270d80e74d819"
+    },
+    {
+      "path": "scripts/run_acvc_cluster_deployment_b01.py",
+      "commit_sha": "e06b3d63f7e9f77c13fd327dba0270d80e74d819"
+    },
+    {
+      "path": "experiments/candidates/acvc/native_link_loss_b01/binding.py",
+      "commit_sha": "e06b3d63f7e9f77c13fd327dba0270d80e74d819"
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "commit_sha": "814139558ccb28502b2e23da6800897b4d7af4b3"
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "commit_sha": "814139558ccb28502b2e23da6800897b4d7af4b3"
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+      "commit_sha": "814139558ccb28502b2e23da6800897b4d7af4b3"
+    },
+    {
+      "path": "AGENTS.md",
+      "commit_sha": "814139558ccb28502b2e23da6800897b4d7af4b3"
+    },
+    {
+      "path": "docs/project/ENGINEERING_SCOPE_SPEC.md",
+      "commit_sha": "814139558ccb28502b2e23da6800897b4d7af4b3"
+    },
+    {
+      "path": "docs/research/candidates/acvc/pro_packets/20260912_post_cluster_use_convergence/ISSUE_INPUT_SNAPSHOT.json",
+      "commit_sha": "0791b04744549d6f16d65d07a287156f9a4b1f1a"
+    }
+  ],
+  "observed_published_source_refs": {
+    "0791b04744549d6f16d65d07a287156f9a4b1f1a": [
+      "refs/remotes/origin/codex/acvc"
+    ],
+    "f569a80bc28bb9c679884da36824613652b414f0": [
+      "refs/remotes/origin/codex/acvc"
+    ],
+    "d8bb4b2b049f87989cb138181b598e9ada496a22": [
+      "refs/remotes/origin/codex/acvc"
+    ],
+    "e06b3d63f7e9f77c13fd327dba0270d80e74d819": [
+      "refs/remotes/origin/codex/acvc"
+    ],
+    "814139558ccb28502b2e23da6800897b4d7af4b3": [
+      "refs/remotes/origin/HEAD",
+      "refs/remotes/origin/codex/acps",
+      "refs/remotes/origin/codex/mgtap",
+      "refs/remotes/origin/main"
+    ]
+  },
+  "observed_delivery_head": "4ebcd0f610ea9e15e8f48c30ec3f1f147d272913",
+  "response_present_before_dispatch": false,
+  "issue": {
+    "url": "https://github.com/CartmanFatass/My-paper-code/issues/14",
+    "state": "OPEN",
+    "comments_preserved": 8,
+    "body_readback": "matches one preserved-history prefix edit modulo CR normalization"
+  },
+  "live_primary": "C:/Projects/HMASD",
+  "author_checkout": "C:\\Projects\\HMASD-worktrees\\codex-acvc",
+  "branch": "codex/acvc",
+  "source_thread_id": "01a095be-63c8-7c23-8384-edaf74dcb154",
+  "parent_thread_id": "01a095b7-850f-7401-ad4e-5e4320d285f1",
+  "operator_thread_id": "01a095ca-7b4a-7940-8acf-fca1b52c784d",
+  "binding": "em:acvc:convergence",
+  "conversation_id": "6aa12e74-8e54-83e8-95f6-001681b456f7",
+  "native_source": "/root/dm_a_mx_acvc_resume",
+  "return_owner": "original DM full scientific/spec intake; Root dispatches and receives Transport receipt",
+  "state": "READY_FOR_ROOT_HANDOFF; no Transport dispatch or provider Send by this DM",
+  "exposure": "Zero source changes/model/RNG/fit/train/eval/native steps/runtime tests/diagnostics; metadata and arithmetic only",
+  "documentary_cost": "UNKNOWN; current authoring is a new documentary assignment and does not renew or re-bill K empirical caps"
+}

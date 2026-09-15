@@ -1,0 +1,85 @@
+{
+  "id": "20260914-folr-002",
+  "created": "2026-09-14T01:08:41-07:00",
+  "direction": "vap_folr_core",
+  "tier": "direction",
+  "kind": "decision",
+  "title": "FOLR 纠正 PARK 判断，按 Portfolio 决定继续 B03",
+  "context": "完整 Portfolio 答复已决定 CONTINUE / MEDIUM，以 B03 两次新拟合回答完整学习程序的实现敏感性；保留 B02 负面证据，原第三槽位预留转占位。代码、独立评审和九项远端测试已接受，科学曝光仍为零。",
+  "options": [
+    {
+      "key": "continue",
+      "label": "继续 B03 有限比较",
+      "consequence": "原 DM 执行已准备的两次完整学习程序，并解释全部结果。"
+    },
+    {
+      "key": "park",
+      "label": "停止当前方向投入",
+      "consequence": "保留知识和结果，按新的明确决定处理后续与槽位。"
+    },
+    {
+      "key": "revise",
+      "label": "改变下一个研究问题",
+      "consequence": "说明更值得研究的有限目标并修改尚未执行的后续，不改写既有证据。"
+    }
+  ],
+  "recommended": "continue",
+  "auto_applied": "continue",
+  "dm_reason": "Portfolio 实质回应了第二个学习观察的决策价值与替代项；DM 接受并执行该符合当前规范的方向决定。",
+  "evidence": [
+    "docs/research/candidates/vap_folr_core/pro_packets/20260914_portfolio_direction_reconciliation/INTAKE.md",
+    "docs/research/candidates/vap_folr_core/pro_packets/20260914_portfolio_direction_reconciliation/archive/RESPONSE.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-14.md#L24",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "FOLR 是否继续，以已准备的 B03 完整学习比较作为下一目标？",
+    "changes_if_approved": [
+      {
+        "target": "FOLR 当前方向及第三槽位",
+        "from": "等待 Portfolio 决定，第三槽位预留",
+        "to": "Portfolio 已决定 CONTINUE / MEDIUM；同一 DM 执行 B03，预留转占位"
+      }
+    ],
+    "if_refused": "按所有者的新明确指令调整尚未执行的后续工作；保存已经发生的结果、成本和请求。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/vap_folr_core/pro_packets/20260914_portfolio_direction_reconciliation/archive/RESPONSE.md",
+        "quote": "决定：FOLR 继续推进（CONTINUE，保持 MEDIUM），在现有实体历史研究族内，以已准备的 B03 同预算新训练块作为下一项具体研究目标。",
+        "why": "第二个完整学习观察可以改变当前 BANK 程序的开发取舍，比较器和有限工作已具体化。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/vap_folr_core/FOLR_ENTITY_HISTORY_B02_RESULT_EVIDENCE_20260914.md",
+        "quote": "GENERIC_ABOVE_MEI",
+        "why": "B02 中 BANK 落后 4.830859375；短行程、公共提示和通用循环是保留的强反方。"
+      }
+    ],
+    "uncertainty": [
+      "一个新块仍不能估计稳定总体排名或单独识别训练方差。",
+      "B03 实际总成本及方向完整成本尚未知。"
+    ],
+    "cost": {
+      "compute": "两次新拟合，共 205120 原生步、9938 次更新和 256 个最终评估 episode；B02 实测 native 3041.46 秒仅作尺度。",
+      "owner_time": "可选异步介入。",
+      "reversibility": "reversible",
+      "waits_on_this": "无需等待所有者回复；实验按既有条件执行。"
+    },
+    "verdict_text": "决定：FOLR 继续推进（CONTINUE，保持 MEDIUM），在现有实体历史研究族内，以已准备的 B03 同预算新训练块作为下一项具体研究目标。不 RECAST，不 PARK/CLOSE，不应用此前 DISH 替代建议。",
+    "source": "docs/research/candidates/vap_folr_core/pro_packets/20260914_portfolio_direction_reconciliation/archive/RESPONSE.md"
+  },
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-14T08:09:04+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/vap_folr_core/pro_packets/20260914_portfolio_direction_reconciliation/archive/RESPONSE.md",
+      "record": "docs/research/candidates/vap_folr_core/pro_packets/20260914_portfolio_direction_reconciliation/INTAKE.md",
+      "state": "applied",
+      "summary": "按 2026-09-14 当前 Portfolio 协议应用 CONTINUE / MEDIUM；同一第三槽位归 FOLR，执行 B03；科学曝光仍为零。"
+    }
+  ]
+}

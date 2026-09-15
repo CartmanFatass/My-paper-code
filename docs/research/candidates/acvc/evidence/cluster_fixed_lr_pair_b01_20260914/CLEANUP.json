@@ -1,0 +1,32 @@
+{
+  "assignment": "ACVC_CLUSTER_FIXED_LR_PAIR_B01",
+  "started_at": "2026-09-15T02:52:59.738442+00:00",
+  "verified_at": "2026-09-15T02:52:59.786188+00:00",
+  "command": [
+    "git",
+    "-C",
+    "/home/wu/projects/HMASD",
+    "worktree",
+    "remove",
+    "--force",
+    "/home/wu/hmasd-worktrees/acvc-rate-pair-b01-2bbaa99ad"
+  ],
+  "worktree_remove": {
+    "returncode": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  "disk_absence": {
+    "/home/wu/hmasd-worktrees/acvc-rate-pair-b01-2bbaa99ad": true,
+    "/home/wu/.agent-tasks/acvc-rate-low-b01-27931-2bbaa99ad": true,
+    "/home/wu/.agent-tasks/acvc-rate-ref-b01-27931-2bbaa99ad": true,
+    "/home/wu/hmasd-inputs/acvc-rate-pair-b01-2bbaa99ad": true
+  },
+  "worktree_registration_absent": true,
+  "other_worktree_registrations_unchanged": true,
+  "shared_repo_preserved": true,
+  "remaining_registered_worktree_count": 166,
+  "preflight": "CLEANUP_PREFLIGHT.json",
+  "local_original_archive_retained": true,
+  "local_scratch": "Retained because native Windows Remove-Item was rejected before execution; no alternative deletion attempted."
+}

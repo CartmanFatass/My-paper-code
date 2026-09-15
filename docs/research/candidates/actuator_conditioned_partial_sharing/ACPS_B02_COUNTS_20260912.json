@@ -1,0 +1,31 @@
+{
+  "object": "ACPS-B02",
+  "master": 9102,
+  "arms": 2,
+  "train_episodes_per_arm": 512,
+  "final_episodes_per_arm": 32,
+  "horizon": 256,
+  "agents": 5,
+  "rollouts_per_arm": 256,
+  "epochs_per_rollout": 4,
+  "team_ticks_per_arm": 139264,
+  "team_ticks_pair": 278528,
+  "adam_per_arm": 1024,
+  "adam_pair": 2048,
+  "actor_collection_eval_uses_pair": 1392640,
+  "actor_replay_uses_pair": 5242880,
+  "actor_total_uses_pair": 6635520,
+  "exposure_line": {
+    "nominal_lr_step_sum_per_arm": 0.3072,
+    "shared_parameters": 69879,
+    "acps_parameters": 71219,
+    "initial_norm_and_actual_displacement": "emitted per arm without an extra model construction"
+  },
+  "hard_caps_seconds": {
+    "whole_native_arm": 450,
+    "native_sum": 900,
+    "additional_support": 600,
+    "complete": 1500
+  },
+  "new_unit_rates_and_complete_cost": "UNKNOWN; historical B01 native361.04s is no forecast or balance"
+}

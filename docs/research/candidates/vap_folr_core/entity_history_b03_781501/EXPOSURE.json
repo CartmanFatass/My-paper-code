@@ -1,0 +1,16 @@
+{
+  "object": "FOLR_ENTITY_HISTORY_B03_781501",
+  "training_seed": 781501,
+  "evaluation_seed": 1781501,
+  "arms": 2,
+  "training_episodes_per_arm": 5000,
+  "evaluation_episodes_per_arm": 128,
+  "updates_per_arm": 4969,
+  "native_ticks_per_arm": 102560,
+  "native_ticks_total": 205120,
+  "optimizer_steps_total": 9938,
+  "generic_replay_positions": 33391680,
+  "bank_replay_positions_upper": 166958400,
+  "native_work_reference_seconds": 3041.46,
+  "reference_is_forecast": false
+}

@@ -1,0 +1,10 @@
+{
+  "remote_path": "/home/wu/hmasd-worktrees/acvc-extended-b01-66ea85e01/docs/research/candidates/acvc/evidence/cluster_fixed_recipe_c01_20260914/unit_05/episodes.jsonl",
+  "retained_copy": "C:\\Projects\\HMASD-worktrees\\codex-acvc\\temp\\directions\\acvc\\retained\\cluster_extended_exposure_b01_20260914\\staging_partial_episode_copy.jsonl",
+  "copy_bytes": 0,
+  "copy_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "published_original_bytes": 772657,
+  "published_original_sha256": "cea38c59ea4e11bcfa63fea9f9dab4e3dfadee57758efb9c22d0ba84c8b1d4ea",
+  "is_strict_prefix_of_original": true,
+  "interpretation": "Partial file from the interrupted initial full-tree source restore; not a native runtime input, new empirical result or alteration of the published C01 original. Exact partial bytes retained before cleanup."
+}

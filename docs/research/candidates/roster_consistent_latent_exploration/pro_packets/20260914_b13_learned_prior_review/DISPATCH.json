@@ -1,0 +1,19 @@
+{
+  "request_id": "2026-09-14-rcle-b13-learned-prior-results-review-01",
+  "recorded_at": "2026-09-14T09:32:30.765761+00:00",
+  "author_parent": "01a09e10-9d9f-7f82-87c0-d58cbe0c7618",
+  "transport_thread": "01a09ea0-4a86-75b0-826d-6f864efa7480",
+  "handoff_sha": "8951dddfeb2aefe484c2ed064147f9dcd1612be6",
+  "task_sha": "e62ad353fc853293e24ae345e3416d96b0a42cbf",
+  "science_sha": "c58ec2fb49795035ff99f5ba9c60c44083f8d13b",
+  "conversation_id": "6aa55611-bf80-83e8-b018-70e30a95b28a",
+  "app_dispatch": "accepted by send_message_to_thread; single dispatch",
+  "provider_acceptance": "not yet received at this record",
+  "first_snapshot": {
+    "revision": 115,
+    "cursor": "3252695d-108b-47ee-9c4d-3cab9dff4348:115",
+    "state": "Transport active and reconciling exact new handoff"
+  },
+  "next_owner": "registered Transport observes/archives same request; RCLE DM reads full answer and responds",
+  "scope": "independent actual-result review only; B13 already terminal; no new native fit or lifecycle application"
+}

@@ -1,0 +1,88 @@
+{
+  "id": "20260914-tailretu-002",
+  "created": "2026-09-14T19:42:32-07:00",
+  "direction": "tail_return_distributional_learning",
+  "tier": "portfolio",
+  "kind": "portfolio",
+  "title": "TRDL：首个同尾部目标学习pair的具体投资提案",
+  "context": "零暴露准备已明确原生宿主、同目标SCALAR/Q32更新、393216 team ticks和256次Adam。向Portfolio请求这一pair及最小实现验证；旧3000秒仍未拨款。",
+  "options": [
+    {
+      "key": "buy",
+      "label": "购买这一具体pair",
+      "consequence": "只有Portfolio形成完整合规拨款后，DM按所选边界实现验证和执行"
+    },
+    {
+      "key": "decline",
+      "label": "不购买本pair",
+      "consequence": "保留A01事实及方向状态，不执行本pair"
+    },
+    {
+      "key": "correct",
+      "label": "选择一项精确修正",
+      "consequence": "节点明确必要修正和投入边界，不默认扩展实验"
+    }
+  ],
+  "recommended": "buy",
+  "auto_applied": "buy",
+  "dm_reason": "两臂确实追求同一尾部目标且最小源码路径明确，真实pair可决定是否保留Q32；标量充分性和未知成本仍是反面理由。",
+  "evidence": [
+    "docs/research/portfolio/pro_packets/20260914_trdl_b01_investment/TASK.md",
+    "docs/research/candidates/tail_return_distributional_learning/TRDL_A01_INTAKE_20260914.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-14.md#L125",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "在零暴露准备明确源码路径与同目标更新后，是否投入TRDL这一组具体Q32/标量学习比较及最小实现验证？",
+    "changes_if_approved": [
+      {
+        "target": "TRDL_B01_SCIENCE_CARD_20260914.md",
+        "from": "prospective / unfunded，旧3000秒offer未拨款",
+        "to": "仅在完整合规Portfolio决定明确选择后，按其实际调用和投入边界实施这一pair"
+      }
+    ],
+    "if_refused": "保留A01源码事实和具体B卡，不启动该数值购买；TRDL仍ACTIVE/MEDIUM/recasts0，本问题不处置生命周期。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/tail_return_distributional_learning/TRDL_A01_INTAKE_20260914.md",
+        "quote": "The strongest support is a complete lawful path from native service events through identical actor information to two trained score baselines and the registered own-arm tail endpoint.",
+        "why": "新事实是已明确最小实现与比较含义，不再只有注册摘要；一对真实学习结果可改变开发选择。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/tail_return_distributional_learning/TRDL_B01_SCIENCE_CARD_20260914.md",
+        "quote": "Strongest null: a scalar conditional estimate of the exact score the actor needs is sufficient and easier to fit.",
+        "why": "分位表示不是必要性证明，32个输出可能只增加拟合误差、优化耦合和成本。"
+      }
+    ],
+    "uncertainty": [
+      "完整速率、峰值内存、support/provider成本和同信息tuned headroom未知。",
+      "每批16条轨迹估计经验阈值；一fit每臂只能给出局部开发信号。",
+      "实际Portfolio选择尚未形成，原有3000秒offer仍不能直接使用。"
+    ],
+    "cost": {
+      "compute": "当前0fit/0native/0optimizer。未来提案393216 scored team ticks、256 joint Adam；旧900秒每臂、1800 native+1200 support只是未拨款方案，节点需明确实际投入及硬限制/时间计划区别。",
+      "owner_time": "异步了解即可；不存在逐步批准等待。",
+      "reversibility": "costly",
+      "waits_on_this": "Portfolio完整决定约束尚未拨款的实现/实验；owner item本身不形成等待。"
+    },
+    "verdict_text": "DM推荐购买这一个具体同尾部目标学习pair及最小实现验证；最强替代是保留标量而不购买Q32。请求已发送到正确Portfolio节点，DM没有执行本地投资决定。",
+    "source": "docs/research/portfolio/pro_packets/20260914_trdl_b01_investment/TASK.md"
+  },
+  "starred": true,
+  "approval_correction": "原packet所述Portfolio尚未形成仅描述发问时状态；现由d23d8805b响应及完整intake替代。当前校准§11.11保留baseline、独立replication和归因区别，不改已发绑定或增加调用。",
+  "execution_history": [
+    {
+      "at": "2026-09-15T03:10:00+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260914_trdl_b01_investment/archive/RESPONSE.md",
+      "record": "docs/research/portfolio/pro_packets/20260914_trdl_b01_investment/INTAKE.md",
+      "state": "applied",
+      "summary": "已读取并核对d23d8805b完整24923字节答复，Portfolio正式选择两个原始训练臂及最小实现验证。每臂512train+256evalH256、128Adam；时间为可修订估计，调用和科学曝光固定。当前0科学fit/native/update；先直接实现和独立审查，之后逐臂实际节点admission。ACTIVE/MEDIUM/recasts0不变，无自动重试或后继。",
+      "correction": "原packet所述Portfolio尚未形成仅描述发问时状态；现由d23d8805b响应及完整intake替代。当前校准§11.11保留baseline、独立replication和归因区别，不改已发绑定或增加调用。"
+    }
+  ]
+}

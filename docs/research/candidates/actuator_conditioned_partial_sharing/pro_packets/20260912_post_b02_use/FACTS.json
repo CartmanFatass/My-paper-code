@@ -1,0 +1,98 @@
+{
+  "prepared_at_utc": "2026-09-13T06:14:31.022538+00:00",
+  "assignment": "One funded ACPS post-B02 Convergence purpose judgment Q; preparation only pending Root workflow repair",
+  "owner": "/root/dm_acps_resume",
+  "checkout": "C:/Projects/HMASD-worktrees/codex-acps",
+  "branch": "codex/acps",
+  "current_source_sha": "83c48b7079850260edc1f981718ffa624cd4b6df",
+  "portfolio_decision": {
+    "request_id": "2026-09-12-acps-post-b02-investment-01",
+    "original_response_sha": "f63980ab1acdcf9fad0ec8b1ac9770c864a6b988",
+    "integrated_response_sha": "a9f84237da382047b15908ec2ac77ad9d3c26930",
+    "response_bytes": 35568,
+    "response_sha256": "0e654363ff33c2dc8316f7cf4682bf5b30ee98662216ce63fb6e4c2d576443da",
+    "choice": "Q once",
+    "full_documentary_cost": "UNKNOWN explicitly accepted",
+    "empirical_or_conditional_allocation": 0,
+    "conformance": "Q applies; isolated capacity sentence returned, current four-target rule retained"
+  },
+  "machine_generated_exposure_line": {
+    "new_scientific_invocations": 0,
+    "new_models_or_loads": 0,
+    "new_scientific_rng_streams": 0,
+    "new_training_episodes": 0,
+    "new_evaluation_episodes": 0,
+    "new_optimizer_steps": 0,
+    "raw_outcome_numerical_analysis": 0,
+    "tests_or_profiling": 0,
+    "provider_sends_for_Q": 0,
+    "parameter_displacement_budget": "not applicable: no learner in documentary Q",
+    "operations": "document/index/source reads, Python configuration and immutable byte checks, owner trace and ordinary Git publication only"
+  },
+  "historical_workload_context_only": {
+    "pair_team_ticks": 278528,
+    "pair_adam_calls": 2048,
+    "source": "ACPS_B02_COUNTS_20260912.json",
+    "future_same_or_different_object_funding": 0,
+    "future_object_fields": "UNSELECTED; no imported caps or wall forecast"
+  },
+  "library_coverage": {
+    "question": "Does parameter-sharing literature supply a consequential different purpose beyond extra capability branches?",
+    "My_lib": "README and tracked registry inspected; surfaced P-SYN-001/P-SYN-002 excluded; no verified real collection located in this bounded read",
+    "Inst_sci_index": "C:\\Projects\\Inst-sci\\papers\\MyLib\\llm-index\\catalog.v2.jsonl",
+    "index_sha256": "2e682c6d1131d503ad48920794dd8005ccf8f535dc9ff75679b0c8502533efc0",
+    "query": "title/keywords parameter sharing, heterogeneous, capability/capabilities, policy sharing",
+    "candidate_ids": [
+      "MARL-0078",
+      "MARL-0184",
+      "MARL-0438",
+      "MARL-0464",
+      "MARL-0500",
+      "MARL-0514",
+      "MARL-0578"
+    ],
+    "source_checked": "MARL-0514, ADMN, DOI10.24963/ijcai.2024/34",
+    "source_json_path": "C:\\Projects\\Inst-sci\\papers\\MyLib\\json\\MARL-0514.json",
+    "source_json_sha256": "8e7b1e195a771c418abf8cd589155b632345c087066a363b7168f502bc09edfe",
+    "pdf_sha256_from_metadata": "7d995bf85585934780c2072174a97cb9a6575ff625d6f28e700c0e528e3ce4bc",
+    "source_pages": [
+      2,
+      3,
+      4
+    ],
+    "source_elements": [
+      325,
+      346,
+      410,
+      412,
+      454
+    ],
+    "official_identity_page_read": "https://www.ijcai.org/proceedings/2024/34",
+    "limit": "No imported mechanism, new efficacy claim, baseline incapacity, causal diagnosis or novelty verdict; bounded attributed use in BRIEF"
+  },
+  "transport_preparation": {
+    "native_child": "/root/dm_acps_resume/transport_lh_acps",
+    "convergence_binding": "em:actuator_conditioned_partial_sharing:convergence",
+    "convergence_registry_exists": false,
+    "child_observation": "only protected default Chrome CDP tab, strict eligible, no active query, promptVisible=false/blank active URL; strict Pro preflight timed out",
+    "sends": 0,
+    "tab_creations": 0,
+    "registry_mutations": 0,
+    "dedicated_ACPS_tab_ready": false,
+    "Root_instruction": "Preserve no-Send facts; no retry or new request before MGTAP completes end-to-end workflow repair; continue independent science",
+    "Q_task_or_handoff_rendered": false,
+    "Q_issue_created": false
+  },
+  "portfolio_binding_snapshot": {
+    "conversation_binding_key": "portfolio:cross_direction",
+    "conversation_id": "6a9c109e-b264-83e8-a78b-f9ea1b767b7b",
+    "request_id": "2026-09-12-mgtap-unequal-exposure-investment-01",
+    "state": "DIRECTION_VERIFIED",
+    "source_thread_id": "01a095c2-e06a-7a92-984f-2dca23d77d57",
+    "operator_thread_id": "01a095ca-7b4a-7940-8acf-fca1b52c784d",
+    "updated_at": "2026-09-13T06:13:28Z"
+  },
+  "binding_snapshot_limit": "Mutable registry only, not provider acceptance. MGTAP native DM owns shared binding; ACPS correction remains unsent and observation-only there.",
+  "owner_reviews": [],
+  "scope_additions": "none; no research implementation or runtime invocation"
+}

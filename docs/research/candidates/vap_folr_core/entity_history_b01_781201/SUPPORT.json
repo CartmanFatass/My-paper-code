@@ -1,0 +1,182 @@
+{
+  "recorded_at": "2026-09-13T01:18:55.192170+00:00",
+  "hard_support_cap_seconds": 1200,
+  "native_caps_seconds": {
+    "generic": 1800,
+    "bank": 3000,
+    "sum": 4800
+  },
+  "complete_invoked_cap_seconds": 6000,
+  "rows": [
+    {
+      "component": "accepted-input merge attempt and reconciliation",
+      "seconds": 7.062500399999999
+    },
+    {
+      "component": "card/exposure and owner item commands",
+      "seconds": 4.4742683
+    },
+    {
+      "component": "source/card/check and correction commits/pushes",
+      "seconds": 8.9314809
+    },
+    {
+      "component": "remote supervisor help/read",
+      "seconds": 1.2401768
+    },
+    {
+      "component": "exact-source remote stages",
+      "seconds": 11.3366371
+    },
+    {
+      "component": "focused invocation SSH/control including inner check",
+      "seconds": 3.9081011
+    },
+    {
+      "component": "unexecuted-case correction SSH/control including inner check",
+      "seconds": 3.3439921
+    },
+    {
+      "component": "check receipt collection",
+      "seconds": 0.9944623
+    },
+    {
+      "component": "independent review read commands",
+      "seconds": 2.509
+    },
+    {
+      "component": "technical acceptance commit/push",
+      "seconds": 4.7090475
+    },
+    {
+      "component": "failed command transport: observed ongoing git retrieval age",
+      "seconds_lower_bound": 97,
+      "complete_seconds": "UNKNOWN; lower bound observed before scoped termination, no scientific handle/output existed"
+    },
+    {
+      "component": "same-effect reconciliation and scoped retrieval termination",
+      "seconds": 1.5618927
+    },
+    {
+      "component": "PowerShell exact command staging/scp/local scratch cleanup",
+      "seconds": 1.0002502
+    },
+    {
+      "component": "single accepted Generic supervisor launch command",
+      "seconds": 0.8455976
+    },
+    {
+      "component": "Generic launch/admission receipt collection",
+      "seconds": 1.034821
+    },
+    {
+      "component": "Generic launch boundary commit/push",
+      "seconds": 4.4021762
+    },
+    {
+      "component": "terminal source/decision reads and local archive/member verification",
+      "seconds": 2.4614678
+    },
+    {
+      "component": "independent incomplete-Generic dependency review read",
+      "seconds": 0.432
+    },
+    {
+      "component": "Generic terminal collection SSH and SCP, including inner archival",
+      "seconds": 2.1708673999999997
+    },
+    {
+      "component": "terminal intake/correction record writes",
+      "seconds": 0.3391869
+    },
+    {
+      "component": "partial-result source/evidence commit and immediate push",
+      "seconds": 4.8575519
+    },
+    {
+      "component": "exact BANK source fetch/detached checkout update",
+      "seconds": 4.7482958
+    },
+    {
+      "component": "owner review/read checks",
+      "seconds": 0.5684283
+    },
+    {
+      "component": "independent actual-diff review read",
+      "seconds": 0.285
+    },
+    {
+      "component": "new publication regression outer SSH including inner check",
+      "seconds": 2.2170882
+    },
+    {
+      "component": "publication check artifact transfer",
+      "seconds": 1.6259476
+    },
+    {
+      "component": "exact BANK command staging/transfer and explicit cleanup",
+      "seconds": 0.9023749
+    },
+    {
+      "component": "BANK technical acceptance/command publication commit and push",
+      "seconds": 4.375556
+    },
+    {
+      "component": "single accepted BANK supervisor launch command",
+      "seconds": 0.6923703
+    },
+    {
+      "component": "BANK launch/admission receipt collection",
+      "seconds": 0.9628208
+    },
+    {
+      "component": "BANK receipts commit/push with interrupted text update; encoding inspection",
+      "seconds": 4.8256646
+    },
+    {
+      "component": "BANK execution record commit/push",
+      "seconds": 4.6707784
+    },
+    {
+      "component": "terminal/current-card/reading-mode/owner review and source reads",
+      "seconds": 2.5652156999999995
+    },
+    {
+      "component": "initial checkpoint collection count assertion and targeted state read",
+      "seconds": 3.1238441000000003
+    },
+    {
+      "component": "corrected final collection and archival outer SSH",
+      "seconds": 1.8466178
+    },
+    {
+      "component": "BANK archives/receipt transfer and local verification/run-level analysis",
+      "seconds": 3.5309175
+    },
+    {
+      "component": "post-snapshot final analysis/authoring/result publication (from accepted handoff)",
+      "seconds": 8.6000145
+    },
+    {
+      "component": "cleanup assignment/current control and preservation inventory reads",
+      "seconds": 1.2117138
+    },
+    {
+      "component": "Root-accepted preservation verification and scoped cleanup outer command",
+      "seconds": 1.8584793
+    },
+    {
+      "component": "independent post-cleanup disk and parsed worktree-record verification",
+      "seconds": 0.5061006
+    }
+  ],
+  "known_support_seconds": 116.7327064,
+  "accounting": "Outer command elapsed covers inner pytest/admission once; do not add 3.346657243/2.834894535 again. New regression outer2.2170882 includes inner1.684901184 once. Rejected combined command created no process; approval-service overhead unknown. Final collection outer1.8466178 includes inner0.929379525 once; failed count assertion and targeted read are retained support. Cleanup outer1.8584793 includes local manifest construction, inner outer-support1.671 and remote0.140009809 once; post-cleanup exact-record verification separate0.5061006.",
+  "uncovered": "Other unitemized source/control reads, approval/service overhead, Root integration, Monitor/provider/agent costs and final cleanup publication are not fully measured; no zero or complete-total assertion.",
+  "scientific_invocations_so_far": 2,
+  "native_spend_so_far": "Generic1795.06s exit124 + BANK1762.22s exit0 =3557.28s enclosed native wall. Both arms terminal; two scientific invocations, no retry.",
+  "rates": "BANK completed5000/128 in1762.22s; Generic incomplete4253/zero-final in1795.06s. Observed runs only, not a same-endpoint runtime comparison or projected future guarantee.",
+  "remaining_scope": "No owned remote runtime/supervisor roots remain. Cleanup publication and Root final integration only; shared authoring retained, no successor/retry/extra arm/search.",
+  "additional_observed_support_lower_bound_seconds": 97,
+  "resource_status": "Native timing and peak RSS measured; resources_unmeasured for unitemized support and complete total. No observed cap breach; full hard-support/complete conformance unverified."
+}

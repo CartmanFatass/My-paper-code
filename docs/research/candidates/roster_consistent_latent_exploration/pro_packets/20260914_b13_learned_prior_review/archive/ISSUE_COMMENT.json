@@ -1,0 +1,7 @@
+{
+  "body": "RCLE B13 learned-prior scientific review（20260914_b13_learned_prior_review）完整独立科学审查已交付至指定分支 `codex/rcle`，并按不可变交付提交全文读回（291行，含全部参考链接）。\n\n[完整 RESPONSE.md（不可变交付版本）](https://github.com/CartmanFatass/My-paper-code/blob/d45d4bc6ea2012b93d1d044402268520be5eea9a/docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260914_b13_learned_prior_review/archive/RESPONSE.md)\n\n[交付提交 d45d4bc6ea2012b93d1d044402268520be5eea9a](https://github.com/CartmanFatass/My-paper-code/commit/d45d4bc6ea2012b93d1d044402268520be5eea9a)\n\n固定任务：e62ad353fc853293e24ae345e3416d96b0a42cbf 中本轮 delivery/TASK.md。科学输入保持清单规定的各自固定版本。交付提交相对实际父提交 0c502d78363e1ba0067b1d5983f4154aaaab0459 的比较确认仅新增授权 RESPONSE.md，未更改其他路径。\n\n全文审查实际归一化 eta 梯度与 Adam 参与、五面板及原生配对、真实参数学习、sampled/modal 分开的比较、全部恢复向量、条件不确定性和前向开发理由。未发现已证实使当前主比较失效的实质科学缺陷；保留正自身学习、nearest 收益、sampled greedy U/full-Y 缺口、modal 有限结局相等，以及恢复均值和失败数的不同方向。eta 的变化不是组件因果收益；B11 缺失和未定位 SIG11 未被后续成功修复。前次标量反方案已获真实检验，不能继续称为未试；一条同法则独立训练/评价实例是明确的可选反方案，不是本次有效性条件或新增分配。\n\n本交付仅为实质独立科学审查。DM负责完整回应与普通研究执行，当前 Portfolio 协议保留最终方向解释；本文件不下达 CONTINUE/PARK/CLOSE、释放槽位或授权新调用。未执行科学源码、模型/RNG、训练、评价、数值重分析、测试或 profiling。完整来源访问、未验证依赖和已知/UNKNOWN成本边界均保留在全文。",
+  "created_at": "2026-09-14T09:47:47Z",
+  "html_url": "https://github.com/CartmanFatass/My-paper-code/issues/8#issuecomment-5662100435",
+  "id": 5662100435,
+  "updated_at": "2026-09-14T09:47:47Z"
+}

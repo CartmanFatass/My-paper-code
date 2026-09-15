@@ -1,0 +1,71 @@
+{
+  "status": {
+    "task": "folr-b02-generic-781401-82b12d7e0",
+    "status": "finished",
+    "exit_code": 0,
+    "pid": 3658558,
+    "uptime_seconds": 1412,
+    "tmux_active": false
+  },
+  "host": "LAPTOP-U9TDKC8A",
+  "source_sha": "82b12d7e0f205ea228ca69e28e581ca6ee5f2ca6",
+  "files": {
+    "ADMISSION.json": {
+      "bytes": 504,
+      "sha256": "e828f87c46b98fa73a4fbc97b16549472bd06b2424fed861ac2ac20fb3f9fda7"
+    },
+    "INVOCATION_TIME.json": {
+      "bytes": 108,
+      "sha256": "85939e951676b060845e3ab96424e5aee547a329760d97d35c378cfc94c8bbba"
+    },
+    "final.pt": {
+      "bytes": 4694195,
+      "sha256": "b6d19b2d2542d275e21ea0589f1be0f353e5aad7cf8bae061e668afa510690d5"
+    },
+    "summary.json": {
+      "bytes": 107104,
+      "sha256": "6562bc757c195f00c7b41b8b4b920af48528db3f4f7058ec1a2a210c0c248f2d"
+    }
+  },
+  "archive": {
+    "file": "GENERIC_RAW.tar.gz",
+    "bytes": 4303594,
+    "sha256": "ea439406507c40dca5dc56df48ea9d4838dca5703a24dacd0f9a86b2e0059940"
+  },
+  "native_timing": {
+    "wall_seconds": 1252.33,
+    "user_seconds": 1134.62,
+    "system_seconds": 117.4,
+    "peak_rss_kib": 757916,
+    "exit_code": 0
+  },
+  "admission": {
+    "assessed_at": "2026-09-14T04:43:26.843573Z",
+    "available_physical_bytes": 15630786560,
+    "captured_at": "2026-09-14T04:43:26.843319Z",
+    "cgroup_headroom_bytes": null,
+    "cgroup_memory_current_bytes": null,
+    "cgroup_memory_max_bytes": null,
+    "effective_available_bytes": 15630786560,
+    "effective_floor_pass": true,
+    "failure_reasons": [],
+    "measurement_source": "/proc/meminfo",
+    "minimum_available_bytes": 4294967296,
+    "passed": true,
+    "physical_floor_pass": true,
+    "schema_version": 1
+  },
+  "computed_panel": {
+    "mean": -0.6529687500000004,
+    "sample_sd": 6.279320811782391,
+    "conditional_episode_se": 0.5550187909071431,
+    "minimum": -19.549999999999997,
+    "maximum": 18.71,
+    "n": 128,
+    "negative_episodes": 73
+  },
+  "technical_counts_valid": true,
+  "collection_wall_seconds": 3.7179999999934807,
+  "checkpoint_loads": 0,
+  "scientific_new_invocations": 0
+}

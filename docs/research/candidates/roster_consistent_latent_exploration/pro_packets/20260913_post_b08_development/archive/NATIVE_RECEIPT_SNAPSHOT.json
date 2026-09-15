@@ -1,0 +1,71 @@
+{
+  "request_id": "2026-09-13-rcle-post-b08-development-01",
+  "conversation_binding_key": "em:roster_consistent_latent_exploration:convergence",
+  "conversation_id": "6aa55611-bf80-83e8-b018-70e30a95b28a",
+  "state": "ARCHIVED",
+  "native_state": "RECEIPT",
+  "send_click_count": 1,
+  "timestamps": {
+    "send_attempted_at": "2026-09-13T07:57:23Z",
+    "completed_at": "2026-09-13T08:14:20Z",
+    "captured_at": "2026-09-13T08:14:20Z",
+    "archived_at": "2026-09-13T08:18:01Z"
+  },
+  "frozen_handoff": {
+    "sha": "ecbea5ee46eeaea239a6afaecb49215924619926",
+    "path": "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260913_post_b08_development/delivery/HANDOFF.json",
+    "sha256": "9c243c53cb7afef0199d2ac7274f312e5613d0ecc7c9db141014d7860ddaf58a"
+  },
+  "frozen_routing": {
+    "source_thread_id": "/root/dm_rcle_resume",
+    "parent_thread_id": "/root/dm_rcle_resume",
+    "operator_thread_id": "/root/dm_rcle_resume/tr_l_h_rcle"
+  },
+  "actual_native_parent": "/root/dm_rcle_resume",
+  "actual_native_operator": "/root/dm_rcle_resume/tr_l_h_rcle",
+  "native_receipt": {
+    "message_key": "2026-09-13-rcle-post-b08-development-01|COMPLETE|e38ea92d217912f04b0009a6b3125472da1d22d82f7f9c3c07c7073c215b28fd|/root/dm_rcle_resume",
+    "destination": "/root/dm_rcle_resume",
+    "status": "SENT",
+    "boundary": "COMPLETE",
+    "archive": {
+      "path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\roster_consistent_latent_exploration\\20260913-rcle-post-b08-development-01\\GITHUB_RESPONSE.md",
+      "sha256": "e38ea92d217912f04b0009a6b3125472da1d22d82f7f9c3c07c7073c215b28fd",
+      "size_bytes": 34826
+    },
+    "message": "Assignment: Execute exact request 2026-09-13-rcle-post-b08-development-01 once under the committed HANDOFF.. Status: Complete full response archived; native parent receipt delivered.. Request: 2026-09-13-rcle-post-b08-development-01; binding: em:roster_consistent_latent_exploration:convergence. Evidence: C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\roster_consistent_latent_exploration\\20260913-rcle-post-b08-development-01\\GITHUB_RESPONSE.md sha256=e38ea92d217912f04b0009a6b3125472da1d22d82f7f9c3c07c7073c215b28fd bytes=34826; paired user=b1318ed5-2d05-4938-9b6b-7f7bb8d52c20 assistant=c60778dd-b088-4e79-98d1-70ee096a2b13; GitHub commit=e4fd016e1612d0d4ad6a18a9a2eb4ac2f06478a0; Issue #8 matching comment absent in readback.. Next: DM reads the complete response and performs conformance intake.",
+    "transport": "collaboration.send_message"
+  },
+  "return_receipt": {
+    "required": true,
+    "source_thread_id": "/root/dm_rcle_resume",
+    "parent_thread_id": "/root/dm_rcle_resume",
+    "destination_thread_id": "/root/dm_rcle_resume",
+    "status": "SENT",
+    "attempt_count": 1,
+    "message_key": "2026-09-13-rcle-post-b08-development-01|roster_consistent_latent_exploration|6aa55611-bf80-83e8-b018-70e30a95b28a|e38ea92d217912f04b0009a6b3125472da1d22d82f7f9c3c07c7073c215b28fd",
+    "retry_allowed": false,
+    "routing_mode": "PARENT_SESSION",
+    "blocked_at": "2026-09-13T08:18:01Z",
+    "delivery_mode": "bounded_single_attempt",
+    "return_control_after_attempt": true,
+    "archive_paths": {
+      "prompt_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\roster_consistent_latent_exploration\\20260913-rcle-post-b08-development-01\\PROMPT_BODY.md",
+      "response_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\roster_consistent_latent_exploration\\20260913-rcle-post-b08-development-01\\GITHUB_RESPONSE.md",
+      "short_receipt_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\roster_consistent_latent_exploration\\20260913-rcle-post-b08-development-01\\RESPONSE.md",
+      "short_receipt_sha256": "643733c0c3f9d084788cdb7eb9bbc002eb85feb45ca9755f185cbc6588253423",
+      "transport_fact_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\roster_consistent_latent_exploration\\20260913-rcle-post-b08-development-01\\TRANSPORT_FACTS.json",
+      "github_response_file": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\roster_consistent_latent_exploration\\20260913-rcle-post-b08-development-01\\GITHUB_RESPONSE.md",
+      "github_response_sha256": "e38ea92d217912f04b0009a6b3125472da1d22d82f7f9c3c07c7073c215b28fd",
+      "github_commit": "e4fd016e1612d0d4ad6a18a9a2eb4ac2f06478a0",
+      "response_sha256": "e38ea92d217912f04b0009a6b3125472da1d22d82f7f9c3c07c7073c215b28fd"
+    },
+    "response_sha256": "e38ea92d217912f04b0009a6b3125472da1d22d82f7f9c3c07c7073c215b28fd",
+    "staged_at": "2026-09-13T08:19:15Z",
+    "fallback_enabled": false,
+    "delivery_status": "accepted",
+    "sent_at": "2026-09-13T08:22:01Z",
+    "canonical_destination_thread_id": "01a095b7-850f-7401-ad4e-5e4320d285f1",
+    "native_tool_thread_id": "01a095b7-850f-7401-ad4e-5e4320d285f1"
+  }
+}

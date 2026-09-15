@@ -1,0 +1,40 @@
+{
+  "adoption": {
+    "source": "Exact MONITOR_ADOPTED receipt forwarded by Root during intake, originally received before terminal",
+    "goal": "Observe accepted handle acvc-cluster-b01-e06b3d63f through terminal completion; deliver terminal notification to Root and finish only after accepted delivery.",
+    "goal_state": "actual matching unfinished goal",
+    "handle": "acvc-cluster-b01-e06b3d63f",
+    "status": "running",
+    "exit_code": null,
+    "pid": 3408418,
+    "tmux_active": true,
+    "uptime_seconds": 36,
+    "node": "hmasd-wsl-node",
+    "source_sha": "e06b3d63f7e9f77c13fd327dba0270d80e74d819",
+    "runtime_cwd": "/home/wu/hmasd-worktrees/acvc-cluster-b01-e06b3d63f",
+    "output_root": "/home/wu/hmasd-worktrees/acvc-cluster-b01-e06b3d63f/temp/directions/acvc/exp/cluster_deployment_b01_20260912"
+  },
+  "terminal": {
+    "event_id": "acvc-cluster-b01-e06b3d63f-exit0",
+    "status": "finished",
+    "exit_code": 0,
+    "duration_s": 166,
+    "pid": 3408418,
+    "tmux_active": false,
+    "exited_at": "2026-09-13T07:36:24+08:00",
+    "completed_arms": [
+      "C",
+      "F",
+      "dwell"
+    ],
+    "monitor_goal_complete": true,
+    "active_set": [],
+    "terminal_source": "Root forwarded accepted Monitor terminal and goal-complete receipts; original full supervisor bytes independently collected",
+    "original_supervisor_files": {
+      "exit_code": "0",
+      "pid": "3408418",
+      "start_time": "1789256018",
+      "status": "finished"
+    }
+  }
+}

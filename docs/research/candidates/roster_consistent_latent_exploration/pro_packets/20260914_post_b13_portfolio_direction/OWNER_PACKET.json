@@ -1,0 +1,44 @@
+{
+  "question": "B13完整结果与全文独立审阅后，RCLE应可逆PARK，还是继续一个同法则新独立完整实例？这是待Portfolio裁决的DM方向建议，不要求owner同步批准。",
+  "changes_if_approved": [
+    {
+      "target": "RCLE direction and occupied slot",
+      "from": "已应用CONTINUE；B13与完整审阅已完成，仍占用1席",
+      "to": "仅在Portfolio完整合规裁决后应用其选择；DM当前推荐可逆PARK，尚未应用"
+    }
+  ],
+  "if_refused": "按Portfolio的CONTINUE或更有理由的具体合规目标完成实际工程/实验/intake；不因审阅建议、旧support或本轮结束自行PARK。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260914_post_b13_portfolio_direction/REPORT.md",
+      "quote": "这次需要解释的是新增科学事实后的边际研究价值。",
+      "why": "最清楚的先前未测学习自由度已实际优化，仍无本实例sampled或modal greedy增量；这改变了继续该配方的开发理由。"
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260914_b13_learned_prior_review/archive/RESPONSE.md",
+      "quote": "先前提出的可学习先验强度已经得到真实检验，但这次没有取得其所寻求的 greedy 增量服务。",
+      "why": "完整独立审阅认可实际检验，并反对把参数变化重命名为效力成功；未将结果否定为无效。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260914_post_b13_portfolio_direction/REPORT.md",
+      "quote": "旧固定先验 B10/B12 不能代替新法则的重复。",
+      "why": "新法则只有一个fit，一个未筛选新训练/评价实例可能改变是否保留该学习程序的选择。"
+    }
+  ],
+  "uncertainty": [
+    "一个新实例仍可能得到增量或不同服务/恢复取舍；不能宣称总体无效。",
+    "B11端点缺失、SIG11原因未知；其他成功未证明修复。",
+    "新实验和支持/提供方/寿命完整成本UNKNOWN；不会把UNKNOWN或600s参考当停止理由。",
+    "MGTAP拥有前序共享Portfolio请求；RCLE在实际释放后才发送新报告，期间席位保留。"
+  ],
+  "cost": {
+    "compute": "反方案1fit/65536train+2560eval/4358144ticks/1024Adam；尚未选择。B13实测163.92s；六条具名native链和605.33s不是support总价。",
+    "owner_time": "无需同步回复；供异步介入，完整方向判断由Portfolio承担。",
+    "reversibility": "reversible",
+    "waits_on_this": "方向去留待Portfolio完整裁决，不等owner批改或Root ACK。"
+  },
+  "verdict_text": "DM 建议 **可逆 PARK 当前 RCLE 开发投入**，最强反方案是 **CONTINUE：一个新的、同法则的完整独立训练及评价实例**。",
+  "source": "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260914_post_b13_portfolio_direction/REPORT.md"
+}

@@ -1,0 +1,80 @@
+{
+  "id": "20260913-mgtap-008",
+  "created": "2026-09-13T23:32:16-07:00",
+  "direction": "metric_ground_transport_allocation",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "MGTAP-LR-SELECTION-B01：对称选择与新配对",
+  "context": "双方各用一个选择 master 进行三点 LR 选择，再以另一 master 各训练一次并进行32世界最终比较；one final trained pair，不证明机制或总体排序。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "保留当前协议",
+      "consequence": "继续新 runner 的实现与验收，当前不冒称已启动实验。"
+    },
+    {
+      "key": "reject",
+      "label": "拒绝该新对象",
+      "consequence": "不执行新对象，保留已发生的协议工作与历史证据。"
+    },
+    {
+      "key": "revise",
+      "label": "前瞻修订协议",
+      "consequence": "在原生执行前有记录地修订，不静默改变已开始的对象。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "两臂同等选择机会并与最终拟合分开，直接服务有限实现选择。",
+  "evidence": [
+    "docs/research/candidates/metric_ground_transport_allocation/MGTAP_LR_SELECTION_B01_SCIENCE_CARD_20260914.md"
+  ],
+  "ledger_row": "docs/research/candidates/metric_ground_transport_allocation/reentry_20260914/AUDIT.md#L5",
+  "brief": "",
+  "ledger_kind": "",
+  "status": "open",
+  "packet": {
+    "changes_if_approved": [
+      {
+        "target": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_LR_SELECTION_B01_SCIENCE_CARD_20260914.md",
+        "from": "无本对象",
+        "to": "对双方三点 LR 等量选择，冻结后以新拟合配对检验；原生 runner/运行尚未完成"
+      }
+    ],
+    "if_refused": "保留旧 PARK、全部模型与正负证据，停止该新对象未执行部分；不自动启动其他候补或新方向。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/metric_ground_transport_allocation/reentry_20260914/DM_REENTRY_INTAKE.md",
+        "quote": "这不是再取一次固定学习率 early256 符号。",
+        "why": "首个具体比较改变了开发选择所依赖的信息，双方等量选择且最终用新配对。"
+      },
+      {
+        "path": "docs/research/candidates/metric_ground_transport_allocation/reentry_20260914/PORTFOLIO_USER_COPY.md",
+        "quote": "这是一个能够由该 DM 实际改变的内部开发选择，不需要虚构用户、部署任务或跨方向需求。",
+        "why": "接受方向内实现去留目标，不虚构客户或把空槽当科学证据。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/metric_ground_transport_allocation/PARK.md",
+        "quote": "继续做一对独立训练确实可能增加关于重复性的知识，但当前预计开发价值有限。",
+        "why": "旧停止理由仍成立；新程序需8次拟合，选择不稳定且收益未成立。"
+      }
+    ],
+    "uncertainty": [
+      "一个选择 master 和一个最终配对不能支持总体稳定排序。",
+      "有限三点选择不能证明最优或识别调参的独立因果收益。",
+      "支持、provider、方向累计成本及 aggregate CPU 为 UNKNOWN。"
+    ],
+    "cost": {
+      "compute": "当前仅13项合成测试与工作量计算，零新原生曝光；计划8拟合、589824 team ticks、4096 Adam calls。",
+      "owner_time": "异步介入；不要求答复",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing"
+    },
+    "verdict_text": "首个研究对象为 MGTAP-LR-SELECTION-B01；仅协议实现和测试已完成，不宣称原生 runner 已验收或实验已运行。",
+    "source": "docs/research/candidates/metric_ground_transport_allocation/reentry_20260914/DM_REENTRY_INTAKE.md",
+    "question": "是否保留已前瞻选定的 MGTAP-LR-SELECTION-B01 科学协议？"
+  },
+  "starred": false
+}

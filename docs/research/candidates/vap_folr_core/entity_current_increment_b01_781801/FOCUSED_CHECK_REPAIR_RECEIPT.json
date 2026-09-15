@@ -1,0 +1,25 @@
+{
+  "observed_utc": "2026-09-15T02:15:59.835329+00:00",
+  "source_sha": "8ad304d61af6885c0ca5ba236bbf6c2c160e61f4",
+  "checked_outcome": "5 passed, 14 deselected in 2.22s",
+  "log_sha256": "4f2554ea47c65d2d7568a9d3b921461e1857985f556e269af5eb2dddcd242507",
+  "log_bytes": 113,
+  "pytest_exit_fact": "Original controller entered its p.returncode==0 branch; its subsequent cleanup assertion failed before receipt publication",
+  "process_wall_seconds": null,
+  "process_wall_limit": "Not durably captured before cleanup assertion; pytest reports2.22s",
+  "repair_history": "Created missing parent and reran only five setup-error cases. Passing pytest created two within-scratch current symlinks; initial overstrict no-symlink cleanup assertion failed. Readback verified every link resolves within exact scratch. Linux shutil.rmtree removes links without traversal. No test rerun or source change followed.",
+  "scratch": "/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801/temp/directions/vap_folr_core/test/current-increment-b01-20260914-dm-repair",
+  "symlinks_verified_inside": [
+    {
+      "path": "test_synthetic_update_keeps_tacurrent",
+      "resolved": "/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801/temp/directions/vap_folr_core/test/current-increment-b01-20260914-dm-repair/test_synthetic_update_keeps_ta1"
+    },
+    {
+      "path": "test_runner_follows_selected_acurrent",
+      "resolved": "/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801/temp/directions/vap_folr_core/test/current-increment-b01-20260914-dm-repair/test_runner_follows_selected_a2"
+    }
+  ],
+  "scratch_disk_absent": true,
+  "first_scratch_disk_absent": true,
+  "native_scientific_invocations": 0
+}

@@ -1,0 +1,84 @@
+{
+  "archive_path": "C:\\Projects\\HMASD-worktrees\\codex-acvc\\temp\\directions\\acvc\\retained\\cluster_extended_exposure_b01_20260914\\original_native.tar.gz",
+  "archive_bytes": 1687859,
+  "archive_sha256": "9768d6fbf472311c4dde15443f583f4fcc977d85781d1ea4c1a57de4344970d5",
+  "files": [
+    {
+      "path": "native/admission.json",
+      "bytes": 504,
+      "sha256": "09ac334d2f5248a79d2bbb96312302f6c728c337f31fa4d1a07cba4f89219e88"
+    },
+    {
+      "path": "native/DENSE_episode_1024.pt",
+      "bytes": 283189,
+      "sha256": "aa44c0e588a02c39c1212e0b134501ac78d2860180ef82abb77c4e817430f55c"
+    },
+    {
+      "path": "native/DENSE_episode_4096.pt",
+      "bytes": 283189,
+      "sha256": "88247c08688794a045621e4f83d43a761d79eaae41f197ecbb6235bcd4252e02"
+    },
+    {
+      "path": "native/episodes.jsonl",
+      "bytes": 3000614,
+      "sha256": "5e197916b1b4ff791ea0d99063108c71fb6489759d07d4ae603fe31e991880ba"
+    },
+    {
+      "path": "native/native_time.txt",
+      "bytes": 54,
+      "sha256": "b29b7b0a53e6a962273ac5150b34cf53aca73f054afb40ca61eb175eb3f8af1c"
+    },
+    {
+      "path": "native/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "native/stdout.log",
+      "bytes": 14449,
+      "sha256": "35da2fd73fc2ba1bbaab05133353d8f40e95e202ceef2ea7045de3362a32b48f"
+    },
+    {
+      "path": "native/summary.json",
+      "bytes": 79355,
+      "sha256": "35467cf1be3f8c77e1d713e13a91eb32acfa19a1751a8dcb8c68fe8150589876"
+    },
+    {
+      "path": "native/updates.jsonl",
+      "bytes": 1918675,
+      "sha256": "6a119c23037b1158706046ee8fe4f45b99e59cadaecd1390908733d958fccaae"
+    },
+    {
+      "path": "supervisor/exit_code",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "path": "supervisor/pid",
+      "bytes": 8,
+      "sha256": "f1209e6fe264a30f9a7d694ebbf9ee41dce40fbb7655b5d60353f88af5c985a2"
+    },
+    {
+      "path": "supervisor/runner.sh",
+      "bytes": 1361,
+      "sha256": "f641416103159026626e8a5b3514374b5b8112372b70af88504f583221ac813b"
+    },
+    {
+      "path": "supervisor/start_time",
+      "bytes": 11,
+      "sha256": "5e84d5f7ff124bb85a7ccaae9a0a7e0b67faf72d9d35a291a8aedd9231822b7d"
+    },
+    {
+      "path": "supervisor/status",
+      "bytes": 9,
+      "sha256": "161069badc0cc23058b13d7c068e45205f4333aa15fd78db9d68f5c9f1ae8983"
+    },
+    {
+      "path": "supervisor/task.log",
+      "bytes": 705,
+      "sha256": "9fef52d00598f695e82f89d8d10331da018bbec6940206c2c78be130bb6681d6"
+    }
+  ],
+  "checkpoints_preserved": 2,
+  "models_loaded_during_intake": false
+}

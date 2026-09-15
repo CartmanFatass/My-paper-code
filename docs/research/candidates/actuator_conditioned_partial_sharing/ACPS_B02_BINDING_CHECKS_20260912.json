@@ -1,0 +1,16 @@
+{
+  "check": "B02 CLI refuses B01 master before run_arm/output construction",
+  "exit_code": 2,
+  "stderr": "usage: run_acps_b02.py [-h] (--arm {SHARED,ACPS} | --reduce REDUCE REDUCE)\n                       [--seed {9102}] --output OUTPUT\nrun_acps_b02.py: error: argument --seed: invalid choice: 9101 (choose from 9102)\n",
+  "wall_seconds": 2.0533737000077963,
+  "output_path_absent": true,
+  "new_model_or_native_invocation": false,
+  "pytest": {
+    "selected": "test_primary_explicit_master_rejects_foreign_or_mixed_binding",
+    "passed": 8,
+    "pytest_seconds": 3.76,
+    "enclosing_shell_seconds": 5.234099,
+    "new_scratch_created": false,
+    "basetemp": "temp/directions/actuator_conditioned_partial_sharing/test/acps-b02-binding-20260912"
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "question": "当前实体处理分支 Z 对同信息普通循环基线 G 是否有有限训练后的增量，值得继续开发？",
+  "changes_if_approved": [
+    {
+      "target": "docs/research/candidates/vap_folr_core/FOLR_ENTITY_CURRENT_INCREMENT_B01_SCIENCE_CARD_20260914.md",
+      "from": "旧 A−Z 两次实验与全文审查已完成，Z 尚无对 G 的直接比较",
+      "to": "选择新的 Z−G B：每臂一次全新训练，5000 次训练回合、4969 次更新、128 次最终评估；两次原始调用，无自动重试"
+    }
+  ],
+  "if_refused": "保留全部 A−Z、旧 A−G 和 BANK 证据，重新选择下一有限问题；不据此关闭方向或改写历史。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_ENTITY_CURRENT_INCREMENT_B01_SCIENCE_CARD_20260914.md",
+      "quote": "It makes Z a candidate to develop but does not establish Z's increment over G.",
+      "why": "新比较直接填补候选相对普通循环基线是否有增量的缺口。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_ENTITY_CURRENT_INCREMENT_B01_SCIENCE_CARD_20260914.md",
+      "quote": "The strongest rival is (b): A has a direct positive A−G instance (+5.29640625),\nwhich remains unreplicated. An internal Z win could reflect luck.",
+      "why": "选择 Z 受已见结果影响；不能将两次不同实验的差值拼成稳定排名。"
+    }
+  ],
+  "uncertainty": [
+    "每臂仍只有一次训练实例，不能估计训练总体优势。",
+    "同主机尚无调优后的同信息 headroom 记录；本对象不宣称基线已达到能力上限。"
+  ],
+  "cost": {
+    "compute": "两次原始拟合，共 205120 原生 ticks；异次历史耗时相加 4109.30 秒仅为参考，普通原生计划 7200 秒，支持成本未知。",
+    "owner_time": "无需逐步批准；可异步改写对象选择。",
+    "reversibility": "costly",
+    "waits_on_this": "nothing"
+  },
+  "verdict_text": "Owner-delegated decision (unattended, 2026-09-03 instruction): (a).",
+  "source": "docs/research/candidates/vap_folr_core/FOLR_ENTITY_CURRENT_INCREMENT_B01_SCIENCE_CARD_20260914.md"
+}

@@ -1,0 +1,51 @@
+{
+  "arm": "BANK",
+  "updates": 4969,
+  "weights_only": true,
+  "map_location": "cpu",
+  "checkpoint_loads": 1,
+  "actor_constructions": 0,
+  "rng_resets": 0,
+  "new_training_or_evaluation": 0,
+  "tensor_checks": {
+    "actor": {
+      "tensor_count": 17,
+      "state_dict_elements": 89599,
+      "all_finite": true,
+      "floating_dtypes": [
+        "torch.float32"
+      ]
+    },
+    "mixer": {
+      "tensor_count": 32,
+      "state_dict_elements": 284292,
+      "all_finite": true,
+      "floating_dtypes": [
+        "torch.float32"
+      ]
+    },
+    "target_actor": {
+      "tensor_count": 17,
+      "state_dict_elements": 89599,
+      "all_finite": true,
+      "floating_dtypes": [
+        "torch.float32"
+      ]
+    },
+    "target_mixer": {
+      "tensor_count": 32,
+      "state_dict_elements": 284292,
+      "all_finite": true,
+      "floating_dtypes": [
+        "torch.float32"
+      ]
+    }
+  },
+  "known_registered_buffers": {
+    "labels": 25,
+    "attn.scale_factor": 1
+  },
+  "parameter_elements_excluding_buffers": 89573,
+  "technical_integrity_passed": true,
+  "support_wall_seconds": 1.5619999999762513
+}

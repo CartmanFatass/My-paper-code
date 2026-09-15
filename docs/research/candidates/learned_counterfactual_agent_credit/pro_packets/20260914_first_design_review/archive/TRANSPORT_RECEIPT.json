@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 4,
+  "request_id": "lcac-first-design-review-20260914-01",
+  "operationId": "e1355881-4a7f-4a79-8fee-86fbd01f88dd",
+  "idempotencyKey": "lcac-first-design-review-20260914-01",
+  "stableKey": "em:learned_counterfactual_agent_credit:convergence",
+  "productModel": "GPT-6 Astra",
+  "reasoningEffort": "Pro",
+  "tabId": "be9b8ab1-6780-45b7-831c-0a9f7cb646cc",
+  "providerUserMessageId": "26d894ad-4e15-445c-a1c9-f4fa2e2609bd",
+  "providerAssistantMessageId": "b3a39eb5-451a-4278-b882-1c4269cb02b5",
+  "observedConversationId": "6aa757c7-cd08-83e8-9859-b78e2dfaeb90",
+  "observedConversationUrl": "https://chatgpt.com/c/6aa757c7-cd08-83e8-9859-b78e2dfaeb90",
+  "sendAttempted": true,
+  "send_click_count": 1,
+  "chat_receipt_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\learned_counterfactual_agent_credit\\lcac-first-design-review-20260914-01\\RESPONSE.md",
+  "chat_receipt_sha256": "e8b93ebd5baff5846b9294461e0158256de3a61fc7d547c56e1c81edec9d9a3e",
+  "chat_receipt_bytes": 83,
+  "full_response_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\learned_counterfactual_agent_credit\\lcac-first-design-review-20260914-01\\GITHUB_RESPONSE.md",
+  "full_response_sha256": "04a0eb8bd8cb3874a904921913e343ed40ee96fb3a2e2e5a43e0e501e3eebbf9",
+  "full_response_bytes": 11986,
+  "archive_source": "verified_github_pairing"
+}

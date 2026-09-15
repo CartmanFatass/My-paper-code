@@ -1,0 +1,13 @@
+# FOLR: finite next discriminator after entity-history B01
+
+FOLR remains **ACTIVE / MEDIUM** and the entity-history-before-aggregation family remains OPEN. The accepted E batch and its exact remote cleanup are complete.
+
+Observer-owned GRU16 BANK completed 5000 training episodes, 4969 optimizer updates and 128 final native episodes, with mean return **-4.32609375**. This is one trained-policy observation. Equally informed GRU64 Generic RETAIN reached its arm cap after 4253 training episodes and 4221 complete updates, with no final evaluation or checkpoint. **There is no BANK-minus-Generic primary or pair MEI reading.** The raw BANK return and Generic timeout do not establish comparative scientific polarity.
+
+Read the [accepted E intake](https://github.com/CartmanFatass/My-paper-code/blob/be6505326d2536603205c3d835ab02af79ce0668/docs/research/candidates/vap_folr_core/FOLR_ENTITY_HISTORY_B01_INTAKE_20260912.md) and [bounded result evidence](https://github.com/CartmanFatass/My-paper-code/blob/be6505326d2536603205c3d835ab02af79ce0668/docs/research/candidates/vap_folr_core/FOLR_ENTITY_HISTORY_B01_RESULT_EVIDENCE_20260912.md). All source, endpoint, partial, checkpoint and cleanup evidence is preserved.
+
+The [current fixed direction-node task](https://github.com/CartmanFatass/My-paper-code/blob/1ec79eb3d57fb76981158e623c2b9ee34a4cd0f9/docs/research/candidates/vap_folr_core/pro_packets/20260912_entity_history_post_b01_discriminator/delivery_ready/TASK.md) asks the original Convergence node to select exactly one scientifically useful finite same-public-information discriminator/use, or decline further allocation to the smallest named scientific unit. Its observation must change a concrete native action/use/development or investment decision. The DM has selected no successor, automatic Generic retry or whole-direction PARK. Any later empirical investment is a distinct proper-node need.
+
+This request authorizes consultation and intake only: no implementation, training, retained-policy evaluation, profiling pilot, numerical test or new empirical budget. The ended E caps do not renew themselves. Complete consultation and future resource costs remain UNKNOWN; preserved observed counts and timings are decision inputs, not a fresh cap certification.
+
+The old tested **LEARNED_EVENT / 5000 / 128 H** remains package-scoped. Preserve all B01-B03 outcomes, B04 generic competence on its own host/information setting, the entity-history opening and the accepted E asymmetry. No result here changes Portfolio lifecycle or priority. Earlier responses and delivery comments retain their historical meaning; this body records the current question and accepted evidence.

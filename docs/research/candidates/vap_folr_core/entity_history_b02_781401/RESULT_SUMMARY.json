@@ -1,0 +1,33 @@
+{
+  "object": "FOLR_ENTITY_HISTORY_B02_781401",
+  "panels": {
+    "GENERIC_RETAIN": {
+      "mean": -0.6529687500000004,
+      "sample_sd": 6.279320811782391,
+      "conditional_episode_se": 0.5550187909071431,
+      "minimum": -19.549999999999997,
+      "maximum": 18.71,
+      "n": 128,
+      "negative_episodes": 73
+    },
+    "BANK": {
+      "mean": -5.483828125,
+      "sample_sd": 4.5698291842667365,
+      "conditional_episode_se": 0.40391965063239976,
+      "minimum": -19.95,
+      "maximum": 3.8999999999999995,
+      "n": 128,
+      "negative_episodes": 121
+    }
+  },
+  "bank_minus_generic": -4.830859374999999,
+  "mei": 1,
+  "rule": "GENERIC_ABOVE_MEI",
+  "fresh_fit_realizations": 2,
+  "training_blocks": 1,
+  "per_arm_training_runs": 1,
+  "training_population_uncertainty": null,
+  "paired_episode_se": null,
+  "uncertainty": "128 episodes per fitted policy; no exogenous pairing or across-training uncertainty estimate.",
+  "claim": "Exploratory whole-learning-package comparison on this exact equally informed H20 host."
+}

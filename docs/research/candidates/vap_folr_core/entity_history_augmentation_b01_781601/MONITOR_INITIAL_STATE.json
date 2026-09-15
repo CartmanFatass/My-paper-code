@@ -1,0 +1,34 @@
+{
+  "batch_id": "FOLR_ENTITY_HISTORY_AUGMENTATION_B01_781601",
+  "assignment_id": "FOLR_AUGMENTATION_B01_GENERIC_MONITOR_20260914_R1",
+  "monitor_identity": "native:/root/folr_augmentation_b01_monitor",
+  "handle": "folr-augmentation-b01-781601-generic",
+  "supervisor_pid": "3674297",
+  "node": "hmasd-wsl-node",
+  "supervisor": "/usr/local/bin/agent-task",
+  "accepted_at": "2026-09-14T15:36:55.744043+00:00",
+  "last_observed_at": "2026-09-14T15:39:25.653Z",
+  "next_due_check": "2026-09-14T15:44:25.653Z",
+  "observation_deadline": "2026-09-14T17:36:55.744043Z",
+  "status": "running",
+  "tmux_active": true,
+  "exit_code": null,
+  "source_sha": "d9977dc18baf33b78dc626764c252391f1ddaa9d",
+  "cwd": "/home/wu/hmasd-worktrees/folr-entity-history-augmentation-b01-781601-d9977dc18",
+  "output_path": "/home/wu/hmasd-worktrees/folr-entity-history-augmentation-b01-781601-d9977dc18/temp/directions/vap_folr_core/exp/entity_history_augmentation_b01_781601/generic_retain",
+  "evidence_paths": [
+    "/home/wu/.agent-tasks/folr-augmentation-b01-781601-generic/status",
+    "/home/wu/.agent-tasks/folr-augmentation-b01-781601-generic/pid",
+    "/home/wu/.agent-tasks/folr-augmentation-b01-781601-generic/exit_code",
+    "/home/wu/.agent-tasks/folr-augmentation-b01-781601-generic/start_time",
+    "/home/wu/.agent-tasks/folr-augmentation-b01-781601-generic/task.log"
+  ],
+  "delivery": {
+    "adoption_event_id": "FOLR_ENTITY_HISTORY_AUGMENTATION_B01_781601:MONITOR_ADOPTED:folr-augmentation-b01-781601-generic:20260914T153700Z",
+    "adoption_delivered": true,
+    "correction_event_id": "FOLR_ENTITY_HISTORY_AUGMENTATION_B01_781601:MONITOR_ADOPTED_CORRECTION:folr-augmentation-b01-781601-generic:20260914T153925Z",
+    "correction_delivered": true,
+    "terminal_event_id": null,
+    "terminal_delivered": false
+  }
+}

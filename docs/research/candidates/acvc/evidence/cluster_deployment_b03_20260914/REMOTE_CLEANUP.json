@@ -1,0 +1,12 @@
+{
+  "removed": [
+    "/home/wu/hmasd-worktrees/acvc-cluster-b03-091c6725b",
+    "/home/wu/.agent-tasks/acvc-cluster-b03-091c6725b",
+    "/home/wu/hmasd-inputs/acvc-cluster-b03-091c6725b-native.tar.gz"
+  ],
+  "absent_on_disk": true,
+  "worktree_absent_from_git": true,
+  "preservation": "verified local420924-byte native archive and published raw evidence; scientific source091c6725b remains published",
+  "cleanup_owner": "ACVC DM",
+  "no_live_native_handles": true
+}

@@ -1,0 +1,70 @@
+{
+  "id": "20260914-rcle-002",
+  "created": "2026-09-14T00:47:46-07:00",
+  "direction": "roster_consistent_latent_exploration",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "B13：等待方向判断期间的可逆实现准备",
+  "context": "代码和24项合成检查已完成；独立审查进行中；原生调用0，未自行CONTINUE或PARK。",
+  "options": [
+    {
+      "key": "prep",
+      "label": "准备并独立审查具体B13实现",
+      "consequence": "产生可执行代码及合成证据，保留工程成本；实际实验仍按Portfolio方向决定应用。"
+    },
+    {
+      "key": "defer",
+      "label": "暂缓实现准备",
+      "consequence": "保留报告，待方向决定后再做代码；不影响当前席位。"
+    }
+  ],
+  "recommended": "prep",
+  "auto_applied": "prep",
+  "dm_reason": "利用等待时间完成必要且有限的可逆准备，让方向决定能直接接到实际工作。",
+  "evidence": [
+    "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B13_LEARNED_PRIOR_SCIENCE_CARD_20260914.md",
+    "docs/research/candidates/roster_consistent_latent_exploration/b13_learned_prior_20260914/ENGINEERING.md"
+  ],
+  "ledger_row": "",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "在Portfolio方向决定等待期间，是否把可学习先验强度建议准备成可审查实现？本项只应用可逆准备，零新原生调用。",
+    "changes_if_approved": [
+      {
+        "target": "RCLE B13 engineering preparation",
+        "from": "完整科学建议；无具体新实现",
+        "to": "代码、24项合成检查和独立审查；仍待Portfolio方向决定，未执行科研调用"
+      }
+    ],
+    "if_refused": "保留已完成可逆准备，按owner/Portfolio要求调整；不以此自行PARK或释放席位。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B13_LEARNED_PRIOR_SCIENCE_CARD_20260914.md",
+        "quote": "Status: engineering preparation selected while the RCLE direction decision is pending\nPortfolio; **no B13 native invocation selected or launched**.",
+        "why": "等待期间完成具体而有限的实现准备，可直接接续最终方向决定。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B13_LEARNED_PRIOR_SCIENCE_CARD_20260914.md",
+        "quote": "eta might strengthen greedy, worsen the start or leave another tie; none is excluded.",
+        "why": "新法则价值未证实；若Portfolio选择暂缓，工程成本仍要保留。"
+      }
+    ],
+    "uncertainty": [
+      "独立Sol/high审查正在进行，技术接受尚未完成。",
+      "B13没有任何native结果；先验瓶颈也未被诊断。"
+    ],
+    "cost": {
+      "compute": "24项合成/旧路径测试11.24s，manager12.584s内含；scratch已清。原生调用0。若后续选择B13则按卡执行1fit/68096episodes/4358144ticks，未知成本保留。",
+      "owner_time": "无须同步回复；Portfolio方向决定仍为实际依赖。",
+      "reversibility": "reversible",
+      "waits_on_this": false
+    },
+    "verdict_text": "Status: engineering preparation selected while the RCLE direction decision is pending\nPortfolio; **no B13 native invocation selected or launched**.",
+    "source": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B13_LEARNED_PRIOR_SCIENCE_CARD_20260914.md"
+  },
+  "starred": false
+}

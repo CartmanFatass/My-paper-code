@@ -1,0 +1,33 @@
+{
+  "scope": "Read-only archived-source identity check prompted by unexplained B11 fault; no code execution or runtime-safety proof.",
+  "source_sha": "15eaa7ea655a0f42a0ec3986927487892bdce212",
+  "source_path": "experiments/candidates/roster_consistent_latent_exploration_tbcfv/native/tbcfv_backend.cpp",
+  "source_sha256": "18d45b95a29c1ca8d17b4d192a9328ddc9c56a821a2690f118de44dbf0054819",
+  "archived_native_sources": {
+    "B10": {
+      "archive": "temp/directions/roster_consistent_latent_exploration/exp/b10-collected-e5fd4/rcle-b10-e5fd43973-evidence.tgz",
+      "native_source_path": "b10_seed30/native_build/7e0588e42f0627778238e44ad033d53120305c4ad5e45a7c3c5c0faf06172ffd/tbcfv_backend.source.cpp",
+      "bytes": 50757,
+      "sha256": "18d45b95a29c1ca8d17b4d192a9328ddc9c56a821a2690f118de44dbf0054819"
+    },
+    "B11": {
+      "archive": "temp/directions/roster_consistent_latent_exploration/exp/b11-collected-e863914e2/rcle-b11-e863914e2-partial-evidence.tgz",
+      "native_source_path": "b11_seed31/native_build/ba240b165d090a4bb33a29e4ca811effd991e71ed9f414873ac826f071b0779a/tbcfv_backend.source.cpp",
+      "bytes": 50757,
+      "sha256": "18d45b95a29c1ca8d17b4d192a9328ddc9c56a821a2690f118de44dbf0054819"
+    },
+    "D1": {
+      "archive": "temp/directions/roster_consistent_latent_exploration/exp/b11-d1-collected-c7eb5986f/rcle-b11-d1-c7eb5986f-evidence.tgz",
+      "native_source_path": "d1/native_build/140dd299eb81e43ac030ccf9a388c80a7373918026be51cc3b85f687261febaa/tbcfv_backend.source.cpp",
+      "bytes": 50757,
+      "sha256": "18d45b95a29c1ca8d17b4d192a9328ddc9c56a821a2690f118de44dbf0054819"
+    },
+    "B12": {
+      "archive": "temp/directions/roster_consistent_latent_exploration/exp/b12-collected-15eaa7ea6/rcle-b12-15eaa7ea6-evidence.tgz",
+      "native_source_path": "b12_seed32/native_build/cbc8870010a78859ef1f2053a377339d88678d6e0f38872b3d5a264a57e69fd5/tbcfv_backend.source.cpp",
+      "bytes": 50757,
+      "sha256": "18d45b95a29c1ca8d17b4d192a9328ddc9c56a821a2690f118de44dbf0054819"
+    }
+  },
+  "note": "Build cache directory digests include runtime ABI/build-root/toolchain; different directory keys do not imply different C++ source."
+}

@@ -1,0 +1,137 @@
+ACVC_CLUSTER_FIXED_RECIPE_C01 implementation engineering check
+event: ACVC_CLUSTER_FIXED_RECIPE_C01_IMPL_20260914_01
+implementer: /root/acvc_fixed_recipe_c01_implementation
+checkout: C:/Projects/HMASD-worktrees/codex-acvc
+starting committed HEAD: cc7913a2920a49e15b918def066935e0e95cb334
+result-bearing invocation: none
+
+Scope
+scope: fixed unit/complete-primary validation, original-output refusal and complete-invocation timeout per science card section 6
+No scheduler, retry/resume/lease, provenance framework, process pool, profiler, service, compatibility shim, or extra telemetry was added.
+
+Scientific-reading application
+One independent unit remains one complete fresh fit plus its finite 64-world three-arm panel. Evaluation worlds reduce conditional uncertainty for that fitted policy but are not promoted to independent training units. The reducer therefore computes uncertainty only across the six equally weighted indexed fit-panel means. Its two marginal t intervals have the card's simultaneous interpretation only under the prespecified iid-normal working model; actual neural-training calibration remains unestablished. Unit index remains identity even if numeric m/q pairs repeat.
+
+Implemented checks
+- exact unit index to frozen (m,q) routing; output suffix bound to unit index
+- full1024 ordered training/reset rows, 512 rollouts and 2048 ordered update records
+- ordered C/F/dwell final panels with 192 unique finite rows and J=S/256
+- frozen clustered CPU-FP32/Torch1 configuration and complete counts/checkpoint
+- exact launch SHA on every unit and all six original indexed identities
+- all raw summary/training/update/evaluation records and all issues retained in reduction
+- per-unit paired vectors, absolute arm means, adverse/favourable/zero identities and extrema
+- scipy.stats.t.ppf(.9875,5), sqrt(6), strict .01 conjunction, exact boundary readings
+- ZERO_VARIANCE_UNRESOLVED and INCOMPLETE without a survivor/replacement interval
+- 1800s complete-invocation inner reading and 1860s TERM/+10s outer timeout
+- adjacent 4 GiB admit-memory invocation and prior scientific-output refusal
+
+Commands and results
+1. Static compile (before focused pytest):
+   C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe -m py_compile scripts/run_acvc_cluster_fixed_recipe_c01.py experiments/candidates/acvc/cluster_fixed_recipe_c01/protocol.py tests/experiments/candidates/acvc/cluster_fixed_recipe_c01/test_protocol.py
+   exit 0; no output. The surrounding three-command tool batch (status/diff, line counts, compile) took 1.0s.
+   This command omitted PYTHONDONTWRITEBYTECODE and created the three exact .pyc paths listed under Cleanup. No scientific/model/environment path ran.
+
+2. First focused batch, after initial implementation:
+   PYTHONDONTWRITEBYTECODE=1 C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe -m pytest -q -p no:cacheprovider --basetemp C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/test/acvc_c01_impl_20260914_01 tests/experiments/candidates/acvc/cluster_fixed_recipe_c01
+   12 passed in 1.06s; measured command wall 1.598s; tool wall 1.781s; exit 0.
+
+3. Cleanup attempts:
+   The first verified-path PowerShell Remove-Item command for the three exact generated .pyc files was rejected before execution by automatic policy: "rejected: blocked by policy".
+   A read-only check then confirmed the invocation_01 scratch and all three exact .pyc paths existed and resolved under this checkout.
+   One explicit PowerShell Remove-Item command naming invocation_01 recursively plus the same three literal .pyc paths was also rejected before execution by automatic policy: "rejected: blocked by policy".
+   Per tests/AGENTS and the assignment, no other shell/language or parent-cleanup bypass was attempted.
+
+4. Second focused batch, after adding runner prior-output refusal and fixed-publication elapsed-time handling:
+   PYTHONDONTWRITEBYTECODE=1 C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe -m pytest -q -p no:cacheprovider --basetemp C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/test/acvc_c01_impl_20260914_02 tests/experiments/candidates/acvc/cluster_fixed_recipe_c01
+   1 failed, 11 passed in 0.96s; measured command wall 1.479s; tool wall 1.636s; exit 1.
+   Failure: test_all_indexed_runner_bindings_and_final_publication synthetic fake summary omitted configuration.remaining_process_timeout_s, causing KeyError in the new timeout reading. The production helper always writes that field. Test fixture repaired to represent the inherited runner output; no scientific contract or production behavior changed.
+
+5. Third focused batch after the fixture repair:
+   PYTHONDONTWRITEBYTECODE=1 C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe -m pytest -q -p no:cacheprovider --basetemp C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/test/acvc_c01_impl_20260914_03 tests/experiments/candidates/acvc/cluster_fixed_recipe_c01
+   12 passed in 1.03s; measured command wall 1.524s; tool wall 1.679s; exit 0.
+
+6. Fourth focused batch after adding the direct elapsed-inner-timeout negative check:
+   PYTHONDONTWRITEBYTECODE=1 C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe -m pytest -q -p no:cacheprovider --basetemp C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/test/acvc_c01_impl_20260914_04 tests/experiments/candidates/acvc/cluster_fixed_recipe_c01
+   13 passed in 1.01s; measured command wall 1.519s; tool wall 1.675s; exit 0.
+   Total measured focused pytest command wall: 6.120s, below the 300s research-directory limit.
+
+7. Final static checks:
+   bash -n experiments/candidates/acvc/cluster_fixed_recipe_c01/launch.sh
+   exit 0; no output; wall 8.504s.
+   A read-only PowerShell line/trailing-whitespace inventory found: runner68 lines, protocol398, launch25, package init1, gitattributes1, tests332, evidence73 before this appended block; zero trailing-whitespace lines in every owned file.
+   Non-test research source is 493 lines total and the runner is 68 lines, within the 2000/600 limits.
+   git status listed only the seven assigned new source/test/evidence paths. HEAD was e20c5737da08b2311ad42c0e5d06117f3035432b after the DM concurrently committed direction intake/ownership docs; cc7913a2920a49e15b918def066935e0e95cb334..HEAD changed only docs/research/candidates/acvc/ACVC_CLUSTER_FIXED_RECIPE_C01_INTAKE_20260914.md and docs/research/candidates/acvc/DIRECTION.md. No owned/shared code overlap occurred.
+   The supplied launch SHA remains opaque accepted-source metadata: reducer comparison is recorded-unit SHA versus the explicit reducer argument only. No authoring-HEAD, ancestry, or currentness refusal exists.
+
+Cleanup status
+Automatic policy rejected the authorized exact cleanup, so these creator-owned paths remain and were not bypass-cleaned:
+- C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/test/acvc_c01_impl_20260914_01
+- C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/test/acvc_c01_impl_20260914_02
+- C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/test/acvc_c01_impl_20260914_03
+- C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/test/acvc_c01_impl_20260914_04
+- C:/Projects/HMASD-worktrees/codex-acvc/scripts/__pycache__/run_acvc_cluster_fixed_recipe_c01.cpython-310.pyc
+- C:/Projects/HMASD-worktrees/codex-acvc/experiments/candidates/acvc/cluster_fixed_recipe_c01/__pycache__/protocol.cpython-310.pyc
+- C:/Projects/HMASD-worktrees/codex-acvc/tests/experiments/candidates/acvc/cluster_fixed_recipe_c01/__pycache__/test_protocol.cpython-310.pyc
+These are ignored scratch/bytecode artifacts, not scientific evidence or source. Cleanup remains the only material operational issue.
+
+Limits and residual risk
+- Tests are synthetic/stub-only. They do not execute Torch, the native environment, learner, or any result-bearing pilot.
+- Existing shared learner, collector, clustered environment constructor, checkpoint loader and final-panel helper were unchanged and reused.
+- Runtime resource values remain unmeasured until DM-authorized execution; planning/reference values are not presented as achieved timings.
+- Independent high-risk review and DM technical acceptance remain required under ENGINEERING_SCOPE_SPEC section 7.3.
+
+Correction event ACVC_CLUSTER_FIXED_RECIPE_C01_IMPL_20260914_01_CORRECTION_01
+Accepted reviewer findings repaired:
+1. The fixed-recipe publisher now re-arms SIGALRM for the remaining portion of the same 1800s process-relative limit after the inherited fitter returns. It keeps the alarm armed through shared clustered publication, fixed metadata publication and final readback. Manual elapsed checks surround both fixed-summary write/readback passes. A crossing marks the summary incomplete when diagnostic publication remains possible; interruption still yields a nonzero process exit.
+2. The reducer now requires the timeout evidence in summary plus the outer native_time.txt written after process exit. A unit is accepted only with exit_code=0 and finite nonnegative native wall/user CPU/system CPU, positive peak RSS, and native_wall_s<1800. Because /usr/bin/time starts before the Python process and writes after it exits, this externally closes the small gap after the in-process final readback check. It does not compare Git HEAD, ancestry or currentness.
+3. The unchanged 1860s TERM/+10s KILL outer safeguard now records native_wall_s=%e, user_cpu_s=%U, system_cpu_s=%S, peak_rss_kib=%M and exit_code=%x around the same full native command.
+
+Corrective focused command:
+PYTHONDONTWRITEBYTECODE=1 C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe -m pytest -q -p no:cacheprovider --basetemp C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/test/acvc_c01_impl_20260914_05 tests/experiments/candidates/acvc/cluster_fixed_recipe_c01
+Result: 13 passed in 1.16s; measured command wall 1.696s; tool wall 1.861s; exit 0. No corrective-test failure occurred. Cumulative measured focused pytest command wall is 7.816s, below300s.
+Coverage added/changed: synthetic clock advances from100.1s to exactly1800.0s across the final evidence write/readback and requires INCOMPLETE; byte reader accepts all five GNU-time fields and rejects native_wall_s=1800.0 even with exit_code0; launch-format assertion requires %U/%S without changing the command boundary.
+
+Corrective static checks:
+- bash -n experiments/candidates/acvc/cluster_fixed_recipe_c01/launch.sh: exit0, no output, wall9.134s.
+- PowerShell line/trailing-whitespace/digest inventory: zero trailing whitespace in all seven owned paths. Corrected non-test research source595 lines total; runner68 lines.
+- git diff --check: exit0. Git emitted only expected Windows working-copy LF/CRLF notices for Python files; launch.sh remains LF-pinned by the owned .gitattributes.
+- At final check HEAD was e4411f493e0fef1457a716d032493f29ab44e9cf. Concurrent 08378aee..HEAD changes were only ACVC intake, DIRECTION and ENGINEERING_REVIEW.json; no owned source/test overlap.
+
+Corrected artifact SHA-256 digests:
+- scripts/run_acvc_cluster_fixed_recipe_c01.py a056e7da5a8340daea49d4bac3de576749403138b5d2970836b05a64c35ca628
+- experiments/candidates/acvc/cluster_fixed_recipe_c01/__init__.py 090fe42ab149d04b54e20dc1451526c1471a71458775d20ccaf2375027f6161a
+- experiments/candidates/acvc/cluster_fixed_recipe_c01/protocol.py ac73f0536510391cbe3d27a2dda5f74c71c50f52e2a8850c63edb87719a9f638
+- experiments/candidates/acvc/cluster_fixed_recipe_c01/launch.sh 8acd1c7571a3dbc49bfaec907207c01d4438168362823f8766a96c89021a3b3d
+- experiments/candidates/acvc/cluster_fixed_recipe_c01/.gitattributes e2552037f08fc90c3c9826dc130543522b79fb6469578d0af0c7e99f6597e828
+- tests/experiments/candidates/acvc/cluster_fixed_recipe_c01/test_protocol.py 6a972f638ccedfa733a0c8bef36a83de64dbf232b796cf446a39d7696473069b
+
+Corrective cleanup status:
+C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/test/acvc_c01_impl_20260914_05 exists and is ignored. The prior exact cleanup attempt was already rejected by automatic policy. Per the correction assignment, no cleanup retry or alternate shell/language/parent bypass was attempted. PYTHONDONTWRITEBYTECODE=1 prevented new bytecode in this correction. The previously recorded four scratch roots and three .pyc files also remain unchanged.
+
+Correction residuals:
+- No model, environment, learner, native scientific invocation or real output was run.
+- Actual per-unit resource values remain unavailable until authorized execution; the reducer now retains and validates them when present.
+- Same independent Reviewer must inspect these corrections; DM retains technical acceptance, Git and launch.
+
+Correction event ACVC_CLUSTER_FIXED_RECIPE_C01_IMPL_20260914_01_CORRECTION_02
+Final watchdog repair:
+- launch.sh now executes `/usr/bin/time ... timeout --signal=TERM --kill-after=10s 1860s timeout --signal=TERM --kill-after=10s 1800s <Python runner ...>`.
+- The inner GNU timeout starts before Python interpreter entry and directly encloses imports, learning, evaluation, both publications/readbacks and immediate process exit. The 1860s outer fallback, CPU/wall/RSS format, admission, output refusal and all scientific arguments are unchanged.
+- This uses the card's already-declared complete-invocation timeout and adds no timer framework, retry, scheduler or changed exposure.
+
+Focused changed assertion only:
+PYTHONDONTWRITEBYTECODE=1 C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe -m pytest -q -p no:cacheprovider --basetemp C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/test/acvc_c01_impl_20260914_06 tests/experiments/candidates/acvc/cluster_fixed_recipe_c01/test_protocol.py::test_launch_has_adjacent_admission_refusal_and_both_timeouts
+Result: 1 passed in0.21s; measured command wall0.697s; tool wall0.860s; exit0. The assertion requires exactly two timeout commands and exact ordering outer1860 -> inner1800 -> Python. No previously passed unrelated test was repeated. Cumulative measured focused pytest wall is8.513s, below300s.
+
+Final static check:
+bash -n experiments/candidates/acvc/cluster_fixed_recipe_c01/launch.sh
+Result: exit0, no output, wall8.771s. Trailing-whitespace inventory remained zero. git diff --check exited0 with only the expected Windows Python LF/CRLF notice. HEAD remained e4411f493e0fef1457a716d032493f29ab44e9cf; no concurrent overlap appeared.
+
+Correction02 artifact SHA-256:
+- experiments/candidates/acvc/cluster_fixed_recipe_c01/launch.sh 8f5469a5e854f7184e1be91c8c13485b1c11e127af043e437d3b9f09a85058c0
+- tests/experiments/candidates/acvc/cluster_fixed_recipe_c01/test_protocol.py ea9964d212c90c0381c8f6a837298cbd87ad6f4ed2ef1c77ee43893bd40badc8
+
+Cleanup:
+The invocation_06 basetemp was not materialized by this test (it uses no temporary-path fixture); a read-only check found the exact path absent. No cleanup command was needed or attempted. The earlier policy-rejected cleanup and retained paths remain unchanged and were not retried or bypassed.
+
+No scientific/model/native invocation, stage, commit or push occurred. Same Reviewer inspects these final bytes; DM retains acceptance and launch.

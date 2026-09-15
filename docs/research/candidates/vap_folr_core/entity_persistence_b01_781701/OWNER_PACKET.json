@@ -1,0 +1,37 @@
+{
+  "question": "是否执行新的 A−Z 两臂学习比较，决定持久实体状态是否值得保留？",
+  "changes_if_approved": [
+    {
+      "target": "FOLR 当前对象",
+      "from": "A−G 完成后的未决持久性问题",
+      "to": "两个新训练实例：持久 A 与当前实体 Z，保留两者 Generic 记忆"
+    }
+  ],
+  "if_refused": "停止尚未开始的本对象；已完成 A−G、旧 BANK 结果和 CONTINUE/MEDIUM 均保留，按具体反馈调整。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_ENTITY_PERSISTENCE_B01_SCIENCE_CARD_20260914.md",
+      "quote": "A−Z directly informs the current implementation choice for roughly two augmented fits, using an already accepted learner.",
+      "why": "把持久状态与额外当前处理分开，直接改变开发选择。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_ENTITY_HISTORY_AUGMENTATION_B01_INTAKE_20260914.md",
+      "quote": "The strongest alternative is a favorable whole-learning-and-evaluation realization for A relative to G, together with changes in capacity/current processing/fusion and optimization.",
+      "why": "单次 A−G 正结果不保证持久记忆有效；A−Z 也不是整体增益复现。"
+    }
+  ],
+  "uncertainty": [
+    "一臂一次训练不能估计训练总体不确定性；不声称机制的普遍因果作用。",
+    "Z 运行耗时未测；完整支持和历史总成本未知。"
+  ],
+  "cost": {
+    "compute": "2 fits × (5000 train + 128 eval) × H20 = 205120 native ticks；9938 optimizer steps；旧 A wall 提供约5593.6s参考，计划每臂5400s。",
+    "owner_time": "异步查看，无需回复后再执行。",
+    "reversibility": "costly",
+    "waits_on_this": "nothing"
+  },
+  "verdict_text": "Owner-delegated decision (unattended, 2026-09-03 instruction): (a).",
+  "source": "docs/research/candidates/vap_folr_core/FOLR_ENTITY_PERSISTENCE_B01_SCIENCE_CARD_20260914.md"
+}

@@ -1,0 +1,38 @@
+{
+  "question": "是否保留已应用的 Portfolio 决定：ACVC 继续一次前瞻六程序固定1024配方研究？",
+  "changes_if_approved": [
+    {
+      "target": "ACVC 当前方向目标",
+      "from": "完整配对研究和科学回应已完成，方向报告待 Portfolio 裁决",
+      "to": "CONTINUE / MEDIUM / recasts2，选择一次六程序固定1024期望增量研究；新卡、抽样和统计规则由 DM 前瞻冻结"
+    }
+  ],
+  "if_refused": "在下一干净边界应用实际 owner 的明确覆盖，保留全部已执行影响、接受请求和历史证据；不自动重跑或释放席位。",
+  "evidence_for": [
+    {
+      "path": "docs/research/portfolio/pro_packets/20260914_acvc_post_paired_direction/archive/RESPONSE.md",
+      "quote": "最强支持是后期 F 仍超过有用的 dwell，而最强反证是其损害尾部。",
+      "why": "在本次更强的已测 C/dwell 终点，F 增量衰减但未消失；固定配方的新程序可以改变未来维护判断。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/portfolio/pro_packets/20260914_acvc_post_paired_direction/archive/RESPONSE.md",
+      "quote": "完整支持和维护成本未知；六次拟合仍可能只得到假设限定或不确定的结论。",
+      "why": "PARK 和更小 B 都可信；六不是统计校准证明，均值支持也不能保证默认部署或尾部可接受。"
+    }
+  ],
+  "uncertainty": [
+    "推荐是有理由但未量化净价值的投资选择；六个独立完整程序仍可能不够精确。",
+    "全部旧 B 和均匀 C01 保持原有边界，不合并为新研究样本。",
+    "缺失、坏结果和双主量联合规则须在输出前绑定，无自动第七次拟合。"
+  ],
+  "cost": {
+    "compute": "六程序6144训练/1152评价/12288更新/1867776ticks，旧 native 合计参考1777.8秒；3000native/4800支持是候选 DM 计划，完整累计成本未知。",
+    "owner_time": "异步介入，不等待再次批准。",
+    "reversibility": "costly",
+    "waits_on_this": "nothing"
+  },
+  "verdict_text": "**ACVC CONTINUE，保持 MEDIUM、recasts2 和现有席位。下一目标选择一项六个全新训练—评价程序的固定1024配方研究，前瞻按单任务、假设限定的 C-BENCH 问题设计；不 PARK、不 RECAST、不 CLOSE。** 理由是：配对暴露研究已经显示 F 的增量随本程序继续学习而缩小，却没有消失；对已经变得更有用的 own-dwell，后期 F 仍有实际均值增量。现在值得购买的不是又一个暴露切点，而是同一配方在新学得 proposer 上的期望增量及其不确定性。六个程序是本次选择的有限投入，不是充分性、正态性或成功概率定理。当前已完成结果仍各属其原来的 B 范围；本答复不把尚未冻结、执行的新研究写成已取得的 C 结论。[当前报告][report]；[配对结果及限制][paired-e0]。",
+  "source": "docs/research/portfolio/pro_packets/20260914_acvc_post_paired_direction/archive/RESPONSE.md"
+}

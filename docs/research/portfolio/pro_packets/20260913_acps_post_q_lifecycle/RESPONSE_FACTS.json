@@ -1,0 +1,157 @@
+{
+  "schema": "hmasd_acps_portfolio_lifecycle_intake_facts_v1",
+  "recorded_at": "2026-09-13T12:34:24.635279+00:00",
+  "request_id": "2026-09-13-acps-post-q-lifecycle-01",
+  "author": "/root/dm_acps_resume",
+  "native_transport": "/root/dm_acps_resume/transport_lh_acps",
+  "complete_response": {
+    "commit": "266861b02cbd4839be60abddc2ba013139cec06f",
+    "path": "docs/research/portfolio/pro_packets/20260913_acps_post_q_lifecycle/archive/RESPONSE.md",
+    "blob_sha": "1c059a2cc18f88fdea28ea690e922a0f37663e56",
+    "sha256": "30b2093b5aec6e7ad76cc69075f7f68c5a57b65873359bd2a6fabecbec5af2dd",
+    "bytes": 23632,
+    "lines": 97,
+    "raw_full_archive_equals_git_blob": true,
+    "read_completely": true
+  },
+  "fixed_handoff": {
+    "commit": "0bc6b6f154a8f430b6da32c4eef4397e87e2f35f",
+    "path": "docs/research/portfolio/pro_packets/20260913_acps_post_q_lifecycle/delivery/HANDOFF.json",
+    "task_url": "https://github.com/CartmanFatass/My-paper-code/blob/19e2306cca64479113cfe01041244f8fd0b21dc1/docs/research/portfolio/pro_packets/20260913_acps_post_q_lifecycle/delivery/TASK.md"
+  },
+  "immutable_raw_sources": {
+    "OP_ARGS.json": {
+      "path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\portfolio\\2026-09-13-acps-post-q-lifecycle-01\\OP_ARGS.json",
+      "sha256": "18c04acf7ef7126ba5b33e7edd428d10b29b1d27b6cac512591c4083fa280c8f",
+      "bytes": 7559
+    },
+    "MODEL_PREFLIGHT.json": {
+      "path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\portfolio\\2026-09-13-acps-post-q-lifecycle-01\\MODEL_PREFLIGHT.json",
+      "sha256": "ae22f8a1609209c541cbf35d64eb14a2a3bda71a08c1061e2573de7fbc82b335",
+      "bytes": 2130
+    },
+    "GITHUB_COMMENT.json": {
+      "path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\portfolio\\2026-09-13-acps-post-q-lifecycle-01\\GITHUB_COMMENT.json",
+      "sha256": "143f4e22f8cebaa89ded4c776e0d3771c671ebc2bbddbc403abff0f264af9126",
+      "bytes": 5552
+    },
+    "PROMPT.txt": {
+      "path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\portfolio\\2026-09-13-acps-post-q-lifecycle-01\\PROMPT.txt",
+      "sha256": "6b94d741d44c22e675b656deebd250f0e46070f8e82cb1f5165fb9cec2c91ce3",
+      "bytes": 1913
+    },
+    "FULL_RESPONSE.md": {
+      "path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\portfolio\\2026-09-13-acps-post-q-lifecycle-01\\FULL_RESPONSE.md",
+      "sha256": "30b2093b5aec6e7ad76cc69075f7f68c5a57b65873359bd2a6fabecbec5af2dd",
+      "bytes": 23632
+    },
+    "RESPONSE.md": {
+      "path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\portfolio\\2026-09-13-acps-post-q-lifecycle-01\\RESPONSE.md",
+      "sha256": "69d46b2bfd873e525db7b24e08b2c75a40ef55ad65b1a3698408b1330d4b1a48",
+      "bytes": 96
+    }
+  },
+  "repository_operation_receipt": {
+    "path": "docs/research/portfolio/pro_packets/20260913_acps_post_q_lifecycle/archive/OPERATION_RECEIPT.json",
+    "projection": "same JSON data serialized as UTF-8 LF; raw source bytes remain untouched",
+    "sha256": "cda1dac849ad0581d58d5edb40742797b4fef39e32d15182583cbdb16381a27c",
+    "bytes": 7424
+  },
+  "github_pairing": {
+    "comment_id": 5653215122,
+    "comment_url": "https://github.com/CartmanFatass/My-paper-code/issues/17#issuecomment-5653215122",
+    "response_url": "https://github.com/CartmanFatass/My-paper-code/blob/266861b02cbd4839be60abddc2ba013139cec06f/docs/research/portfolio/pro_packets/20260913_acps_post_q_lifecycle/archive/RESPONSE.md",
+    "fixed_task_and_response_links_verified": true
+  },
+  "provider": {
+    "operation_id": "e811b82d-07d8-4225-8598-519599eac057",
+    "stable_key": "portfolio:cross_direction",
+    "conversation_id": "6a9c109e-b264-83e8-a78b-f9ea1b767b7b",
+    "canonical_requirement": "GPT-6 Astra / Pro",
+    "product_selector": "Latest",
+    "reasoning_effort": "Pro",
+    "prompt_sha256": "6b94d741d44c22e675b656deebd250f0e46070f8e82cb1f5165fb9cec2c91ce3",
+    "request_fingerprint": "3a3a4f1d04911d03368e812c1d230107c6f2db50035a5675a313ce6145c5e553",
+    "effect": {
+      "send_click_count": 1,
+      "sendAttempted": true,
+      "provider_user_message_id": "af0a3335-e23f-46fb-a22b-e33d2d5f754d",
+      "provider_assistant_message_id": "54a4a078-a820-4149-ac78-6f0ecafb40ed"
+    },
+    "pre_send_repairs": [
+      "tab_url_mismatch",
+      "chatgpt_target_menu_open_unconfirmed"
+    ],
+    "pre_send_verification_source": "docs/research/portfolio/pro_packets/20260913_acps_post_q_lifecycle/archive/OPERATION_RECEIPT.json#pre_send_model_verification"
+  },
+  "registry_snapshot": {
+    "path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\registry.json",
+    "sha256_at_read": "1f20be7b6aabe7726511ace1060f9220a7c0bac2d6d6df3fb7785a5256c04af1",
+    "request_id": "2026-09-13-acps-post-q-lifecycle-01",
+    "state": "ARCHIVED",
+    "native_state": "RECEIPT",
+    "prior_history_count": 43,
+    "prior_history_canonical_json_sha256": "c815838bbf587c497f93910fd9450bbaa416b0f197256a5e7906effa8812dbfb",
+    "native_receipt_status": "SENT",
+    "native_receipt_destination": "/root/dm_acps_resume",
+    "native_receipt_boundary": "COMPLETE",
+    "tab_id": "3564c968-6991-4492-b812-63e4f7f0dc8f",
+    "tab_lifecycle": "CLOSED",
+    "tab_lease": {
+      "handle": "3564c968-6991-4492-b812-63e4f7f0dc8f",
+      "lifecycle": "CLOSED",
+      "origin": "agent",
+      "reusable": true,
+      "last_observed_at": null,
+      "lease_expires_at": null,
+      "closed_at": "2026-09-13T12:22:19.180725+00:00"
+    },
+    "optional_top_level_send_click_count_present": false,
+    "optional_top_level_send_click_count": null,
+    "shared_binding_released": true,
+    "note": "Timestamped documentary projection; later legitimate requests may update the shared registry."
+  },
+  "decision": {
+    "tier": "Portfolio",
+    "authority": "PRO_FINAL / OWNER_DELEGATED",
+    "conformance_conflict": null,
+    "option": "P",
+    "lifecycle": "PARKED",
+    "reversible": true,
+    "priority": "HIGH",
+    "recasts": 0,
+    "default": "informed SHARED",
+    "new_scientific_work_allocated": false,
+    "new_conditional_reserve": false,
+    "remaining_unit": "necessary documentary intake/application/preservation closeout",
+    "complete_remaining_unit_cost": "UNKNOWN explicitly accepted",
+    "old_q_account": "separate and complete; no reuse or double billing",
+    "other_direction_changes": false,
+    "replacement_selected": false,
+    "root_action": "Publish formal disposition, then reconcile actual occupied/reserved chains and overlap against target four; replacement only for an actual remaining vacancy."
+  },
+  "science": {
+    "new_empirical_results": 0,
+    "new_fits": 0,
+    "new_evaluation_episodes": 0,
+    "new_raw_result_analysis": false,
+    "underlying_class_ceiling": "two separately recorded B/EXPLORE comparative learning instances",
+    "q_result": "no candidate; exact tested-use park only, completed before this whole-direction disposition",
+    "reentry": "Concrete changed operating/training-resource requirement or trustworthy relevant evidence/cost fact that makes informed-SHARED versus specialized learning actionable; favorable evidence is not required."
+  },
+  "retention": {
+    "previous_q_generations_preserved": true,
+    "previous_responses_rewritten": false,
+    "new_tab_closed": true,
+    "old_never_sent_q_tab_preserved": true,
+    "no_new_cleanup_project": true,
+    "helper_test_scratch": "C:/Projects/HMASD-worktrees/codex-acps/temp/tests/acps-unbound-rebind-20260913-a",
+    "helper_scratch_disposition": "Preserved after exact literal PowerShell Remove-Item was blocked by policy; no bypass. See original Q recovery/HELPER_CHECKS.json."
+  },
+  "owner": {
+    "item_id": "20260913-actuator-002",
+    "auto_applied": "p",
+    "unapplied_reviews_at_intake": []
+  },
+  "intake_path": "docs/research/candidates/actuator_conditioned_partial_sharing/ACPS_POST_Q_PORTFOLIO_INTAKE_20260913.md"
+}

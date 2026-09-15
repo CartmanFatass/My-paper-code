@@ -102,7 +102,7 @@ at the next clean boundary; preserve executed effects and do not infer a rerun o
 Custom option keys retain their actual recorded meanings. Preserve historical items and replies.
 Use `trace` for planned/applied/blocked state; `auto_applied` records only an executed option.
 The retained packet field `changes_if_approved` describes the disposition's changes, not a new
-ratification gate. Read/archive Pro and record the designated DM's conformance check before application.
+ratification gate. Read/archive Pro and record the author parent's conformance check (DM, or Root for vacancy replacement) before application.
 
 ## What not to do
 

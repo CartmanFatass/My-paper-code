@@ -1,0 +1,47 @@
+{
+  "handle": "mgtap-unequal-8231-ecf40e0ad",
+  "source_sha": "ecf40e0ade4576fd75ffb0eab09425cb5c4ce059",
+  "terminal_at": "2026-09-13T09:41:01Z",
+  "event_id": "mgtap-unequal-8231-ecf40e0ad:complete:20260913T094101Z",
+  "supervisor_status": "finished",
+  "exit_code": 0,
+  "pid": 3422734,
+  "tmux_active": false,
+  "native_wall_seconds": 432.3,
+  "supervisor_rounded_seconds": 433,
+  "monitor": "/root/dm_mgtap_resume/mon_ll_mgtap",
+  "return_parent": "/root/dm_mgtap_resume",
+  "delivery_transport": "native_final",
+  "delivery_state": "received_by_parent",
+  "active_handles": [],
+  "pending_observation": false,
+  "historical_monitor_record": {
+    "schema_version": 1,
+    "direction": "metric_ground_transport_allocation",
+    "assignment": "MGTAP_UNEQUAL_EXPOSURE_B01",
+    "monitor_identity": "native-monitor:/root/dm_mgtap_resume/mon_ll_mgtap",
+    "handles": [
+      {
+        "handle": "mgtap-unequal-8231-ecf40e0ad",
+        "node": "hmasd-wsl-node",
+        "host_identity": "LAPTOP-U9TDKC8A",
+        "supervisor": "/usr/local/bin/agent-task",
+        "source_sha": "ecf40e0ade4576fd75ffb0eab09425cb5c4ce059",
+        "remote_cwd": "/home/wu/hmasd-worktrees/mgtap-unequal-8231-ecf40e0ad",
+        "output_path": "C:/Projects/HMASD-worktrees/dm-n5-continue-20260904/temp/directions/metric_ground_transport_allocation/exp/unequal_exposure_b01_8231_20260913",
+        "log_path": "/home/wu/.agent-tasks/mgtap-unequal-8231-ecf40e0ad/task.log",
+        "adopted_at": "2026-09-13T09:34:31.3959224Z",
+        "last_observed_at": "2026-09-13T09:41:01Z",
+        "status": "complete",
+        "pid": 3422734,
+        "evidence": "ps: bash runner.sh; launch log: started 2026-09-13T17:33:48+08:00; admission passed at 2026-09-13T09:33:49.015934Z; physical/effective available 15624224768 bytes",
+        "delivery": "terminal_pending_direct_parent",
+        "terminal_at": "2026-09-13T09:41:01Z",
+        "terminal_event_id": "mgtap-unequal-8231-ecf40e0ad:complete:20260913T094101Z",
+        "terminal_evidence": "supervisor/log: status COMPLETE; exited code 0 at 2026-09-13T17:41:01+08:00, duration 433s; primary reading COND_ADVERSE; errors COND=[] DENSE=[]"
+      }
+    ],
+    "pending_notices": []
+  },
+  "note": "Historical pending delivery label retained; direct terminal final was actually received. DM collection independently confirmed terminal and native bytes. No new invocation."
+}

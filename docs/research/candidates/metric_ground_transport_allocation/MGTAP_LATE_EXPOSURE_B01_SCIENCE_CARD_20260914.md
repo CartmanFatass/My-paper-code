@@ -1,0 +1,56 @@
+Claim under study: mean-COND at fixed1e-4 may provide useful native return against intact DENSE after512 training episodes, with a256 observation locating changes within the same learning path.
+Binding structure: systems / information flow; legal local entity information must support decentralized decisions under multi-UAV partial observability.
+
+# MGTAP-LATE-EXPOSURE-B01
+
+Execution update: the sole8254 invocation is complete; unchanged final512 rule reads INSIDE_MEI. [Result](MGTAP_LATE_EXPOSURE_B01_RESULT_20260914.md) and [intake](MGTAP_LATE_EXPOSURE_B01_INTAKE_20260914.md) retain the original prospective definition and prediction below.
+
+Selected B/EXPLORE under the owner's explicit2026-09-14 resume and standing object-tier delegation. This is a new finite object inside the accepted optional COND scope; DENSE remains default, scientific CONTINUE/priority/occupied slot and historical C/coordinate-family conclusions remain. It is not a retry of8253 or a replication of the selector.
+
+## Question, decision value and limits
+
+At the selected lower LR1e-4, does a complete512-episode configuration give a useful local COND-minus-DENSE return? Observe256 and512 on the same fitted path and same32 exogenous evaluation addresses; final512 alone is primary. The within-path difference asks whether the later half changes the observed relative return. It does not isolate a causal dose effect, optimization cause, representation mechanism or pure training variation.
+
+8252's+0.0237048977 and8253's-0.0259249275 at256 remain valid separate observations. Earlier3e-4/256 and3e-4/512 results remain mixed. Choosing a longer endpoint after these outcomes is explicit adaptive exploration, not confirmation. No seed/world/checkpoint is screened. The new unscreened master8254 is the next integer after8253.
+
+Options: (a) this fixed512 pair with an intermediate256 observation; (b) another unchanged256 pair; (c) retain optional code with no numerical object and seek a direction interpretation; (d) another8-fit selector or lower-rate search. DM selects(a): the rate was selected at256, so its behavior later in learning is unobserved; one continued pair provides a different actionable configuration and a within-path trajectory comparison. A useful final signal would justify considering the512 recipe for another bounded study; a small/adverse final result provides no local reason to develop that recipe now. This does not assume slower learning must improve, nor make a mechanism explanation a B gate.
+
+The strongest alternative(b) is cheaper and directly adds another fixed256 training instance; the full8253 review regards it as legitimate and potentially useful while preferring stopping unchanged sampling. This is a close development choice. I favor a new finite exposure condition over further refining only the same256 maintenance decision, without erasing the review's stopping case or implying that more data have zero value. No lifecycle decision is taken locally.
+
+MEI: absolute0.01 J, the existing local development scale for this unchanged reward. It is not a significance threshold or equivalence margin. Primary strict delta>+0.01: COND_ABOVE_MEI; strict delta<-0.01: COND_ADVERSE; inclusive band: INSIDE_MEI. Every final row stays. Above-MEI suggests a useful local512 configuration; inside-band is inconclusive at this scale; adverse weighs against that configuration. Intermediate results are descriptive and never replace final512. Incomplete required observations have no full-object polarity and no automatic replacement; independently trustworthy narrower facts remain reportable.
+
+Independent unit: one newly trained matched pair. Two checkpoints and32 worlds are not additional learning replicates. Report conditional paired-world SE separately; training-population uncertainty remains unestimated. No stable ordering, sample efficiency, tuned optimum/headroom, transfer, UAV safety, isolated pooling or LR/dose mechanism is claimed. Native tuned headroom versus a stated upper remains unavailable. The host baseline set does not supply an exactly matched fixed1e-4/512 comparator; both actual arms are trained here.
+
+## Protected path and exact comparison
+
+Reuse the five-UAV/50-uniform-user free-space/no-shadowing H256 host, original sum-five-reward/256 J, raw108 legal actor information, private GRU64, training-only critic, sampled primitive velocity, COND mean-visible-partner conditioning/masked-partner context, and intact DENSE raw/nonlinear paths. Recurrent PPO agent_compound, chunk32, two complete episodes per rollout, four full-rollout epochs, entropy0.01, joint actor/critic clip0.5; Adam betas(.9,.999), eps1e-8, weight_decay0, amsgrad/foreach/fused=False; LR1e-4 for both. CPU FP32/thread1.
+
+Construct one fresh pair at8254; train COND then DENSE. Each arm owns actor, critic, one persistent optimizer, separate training/evaluation environments and private RNGs. No old checkpoint/state is loaded. Training runs512 complete episodes without restart or optimizer reset at256. After completed updates at256 and512, evaluate32 episodes and preserve that checkpoint. No selection, conditional stop, parameter update or training-RNG draw occurs during evaluation. Each episode starts its own zero recurrent state; evaluation uses the learner's accepted no-grad collector.
+
+For base=100000*8254, training e uses reset base+1000+e, persistent velocity stream base+21 and duration base+4000+e. Both evaluation endpoints use reset base+2000+e, fresh private velocity base+3000+e and duration base+5000+e. These deliberately shared numeric addresses compare the two policies/arms on matching exogenous conditions and action-noise streams, not shared mutable generators or identical endogenous trajectories. Training and evaluation never share mutable environment/RNG state. All historical master blocks are separate.
+
+Trace: evolving native user/UAV positions -> current UAV's legal visible entities -> unchanged local raw and COND/DENSE computation -> private recurrent primitive action -> real recurrent PPO exposure -> native team J. No new entity, communication, membership, reward or termination law is introduced.
+
+## Exposure, cost and execution bound
+
+Executable protocol arithmetic (no simulation): per arm512 train+64 evaluation episodes,131072+16384=147456 team ticks,256 rollouts,1024 Adam calls,3358720 actor collection/evaluation/replay row uses. Total2fits/1024train+128eval/294912ticks/512rollouts/2048Adam/6717440actor row uses. No candidate, controller, trajectory or checkpoint search. The added256 evaluation is32 episodes per arm (16384 total ticks); the primary512 comparison otherwise requires278528 ticks. This observation is part of the selected learning-curve question, not extra validation.
+
+One started serial invocation, no automatic retry, additional fit, rate search, endpoint extension or successor. All outcomes and partial exposure remain. Real parameter displacement is emitted at both endpoints. Prior full two-fit256 command178.86s is evidence; roughly6–10min for this doubled training/evaluation work is an unmeasured plan, not a cap or guarantee. Per-arm cost law: init +131072 collection ticks +1024 recurrent PPO/Adam +2*8192 evaluation ticks +two checkpoint/publication writes. Prior fit bodies COND99.22s/DENSE78.28s are narrower scopes, not whole per-arm costs; unknown costs remain unknown. Inherited1800s/fit and14400s whole-invocation watchdogs are ordinary operational plans, not new owner grants or scientific endpoints. Full support/provider/engineering/lifetime/aggregate CPU cost remains UNKNOWN.
+
+Remote-first on configured hmasd-wsl-node, existing CPU interpreter and exact published detached SHA. Host-portable same source/CPU dtype/RNG semantics, no cross-platform bit-equality claim. Fresh actual-node physical AND effective4GiB admission adjacent to the sole command; a remote failure does not authorize a duplicate. Record full command wall/RSS/exit. No paid capacity or peer-resource reassignment.
+
+## Prediction, sources and scientific-reading application
+
+DM leading prediction: final512 INSIDE_MEI and no clearly useful growth of the COND advantage; positive/adverse remain plausible. This is not calibrated. Owner prediction: not taken (unattended). All signs receive the same ceiling.
+
+Foundations§§2–4,6 and topic04_EMPIRICAL were read: architecture can represent a computation without learning it in finite exposure; an intermediate checkpoint is one state of one training process. This changes the design to final512-only selection and paired within-path reporting, rather than treating checkpoints/worlds as replications or comparing fresh512 with historical256 as an identified dose effect.
+
+Question-driven library check: the real Inst-sci catalog contains190 records; the bounded PPO/policy-optimization/sample-efficiency/training-stability query found35 metadata candidates, not35 supporting papers. Reused conditional-pooling source return§7 and re-read MARL-0078 JSON pp1–2 elements32,42,45–46 (Utke et al., AAAI2025, Investigating Relational State Abstraction in Collaborative MARL). Its spatial relational critic supports a plausible structured-information comparison but supplies neither an actor-side UAV result nor a512 endpoint justification. My-lib README/collections identify synthetic default fixtures; no verified real-collection result from that interface is claimed. The actual512 choice is DM's finite-development inference, not a literature conclusion. No new architecture/algorithm/comparator was imported.
+
+Owner-delegated decision (unattended,2026-09-03 instruction): (a). Current explicit owner resume is supplied by Root's native assignment; canonical owner reviews returned[] at preparation. Latest complete8253 review and its DM response remain binding evidence, including their strongest unchanged-pair and stopping arguments.
+
+## Direct engineering L0
+
+Goal: one small two-fit512 runner, two preserved observations/checkpoints per arm, primary512, raw rows/partial exposure and closed summary. Owned checkout C:/Projects/HMASD-worktrees/dm-n5-continue-20260904, branch codex/mgtap; source experiments/candidates/metric_ground_transport_allocation/mgtap_late_exposure_b01/, mirrored tests, this card and late_exposure_b01_8254/ evidence. Existing learner/factory/optimizer/geometry functions are reused unchanged; no shared-core edit. Entry: python -m experiments.candidates.metric_ground_transport_allocation.mgtap_late_exposure_b01.study.
+
+Preserve the comparison/RNG/state semantics above. Focused synthetic checks must detect optimizer restart or training-RNG consumption at256, wrong endpoint selection, mixed/incomplete evaluation rows, lost partial counts and publication failure. Independent Astra/high Reviewer covers changed recurrent/RNG/evaluation/checkpoint path; DM resolves findings. No native smoke or causal audit is added. Limits:2000 new source lines,600 runner lines,5min focused tests. Engineering-scope§4 additions: none; use existing checkpoints, file I/O and supervisor, without retry/resume orchestration, registries, schema framework, telemetry or hash launch fences. Exact source, command, admission, accepted handle/monitor, technical acceptance and cleanup are recorded in late_exposure_b01_8254/ENGINEERING.md.

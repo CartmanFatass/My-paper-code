@@ -27,6 +27,14 @@ whose corrections are incorporated. No experiment was run and no scientific obje
 
 ### reviews/
 
+- `FOUNDATIONS_AND_METHODOLOGY_CRITICAL_REVIEW_20260914.md` — critical review, at the owner's
+  request, of the starting papers (HMASD, OPT), the untie-k / untie-N premise, the B-ladder
+  methodology and the direction-selection loop. Main findings: the hierarchy premise was never
+  tested against flat MAPPO on the dense-reward UAV host; one-seed pairs are read against a
+  0.01 J minimum effect while the measured across-seed SD is about 0.08 J; positive results sit
+  on undertrained learners; 41 bespoke hosts; about twenty new objects per day. Recommends a
+  headroom experiment, one frozen benchmark per axis, five-seed inference, two directions, owner
+  deciding. Includes self-criticism of §11 and other Claude-authored documents.
 - `FIRST_WAVE_INDEPENDENT_REVIEW_20260901.md` — independent review of the five `ACTIVE/HIGH`
   first-wave directions (FRRIE, VNFC, CBSC, SCDMP, UCOPE) against the packet in
   `docs/research/review_packets/2026-09-01-first-wave-latest-model/`. Dispositions: SCDMP, CBSC,
@@ -88,6 +96,13 @@ whose corrections are incorporated. No experiment was run and no scientific obje
 
 ### plans/
 
+- `TWO_AXIS_RESEARCH_PROGRAMME_20260914.md` — alignment draft answering the owner's request for
+  concrete next steps after the 2026-09-14 critical review: field standards (Gorsane 2022,
+  Agarwal 2021, EPyMARL, Henderson 2018); a ten-section skeleton to replace the evidence spec;
+  consolidation of the 27 directions into two axes (FSD and VNFC cores, FOLR/RCLE/FRRIE/vsp_03
+  folded as arms, 22 archived); a library audit with reading lists per axis; open-source
+  substrates (EPyMARL, GPL open-team LBF, MacDec-POMDP tasks); the L0–L5 ladder with pass
+  rules; an eight-week plan; seven [DECIDE] items.
 - `CLAUDE_SUBAGENT_WORKFLOW_20260905.md` — build record of the Claude Code research workflow: the
   Fable session as research hub (Root plus DM, two directions at a time), eleven subagents under
   `.claude/agents/` ported from the Codex roles with Opus for code and judgment and Sonnet for

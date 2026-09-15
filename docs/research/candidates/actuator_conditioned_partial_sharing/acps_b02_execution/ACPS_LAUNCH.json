@@ -1,0 +1,43 @@
+{
+  "arm": "ACPS",
+  "object": "ACPS-B02",
+  "master": 9102,
+  "source_sha": "dd91ea3d81970485a8d562db47e30c70ed063524",
+  "node": "hmasd-wsl-node",
+  "worktree": "/home/wu/hmasd-worktrees/acps-b02-9102-20260912",
+  "output": "/home/wu/hmasd-worktrees/acps-b02-9102-20260912/temp/directions/actuator_conditioned_partial_sharing/exp/acps_b02_9102/ACPS",
+  "handle": "acps-b02-acps-9102-20260912",
+  "supervisor_root": "/home/wu/.agent-tasks/acps-b02-acps-9102-20260912",
+  "argv": [
+    "/usr/local/bin/agent-task",
+    "run",
+    "acps-b02-acps-9102-20260912",
+    "/usr/bin/time",
+    "-q",
+    "-f",
+    "%e",
+    "-o",
+    "/home/wu/hmasd-worktrees/acps-b02-9102-20260912/temp/directions/actuator_conditioned_partial_sharing/exp/acps_b02_9102/ACPS/process_wall_seconds.txt",
+    "bash",
+    "/home/wu/hmasd-inputs/acps-b02-9102-20260912/run_acps.sh"
+  ],
+  "initial_state": {
+    "task": "acps-b02-acps-9102-20260912",
+    "status": "not_found"
+  },
+  "submitted_utc": "2026-09-13T01:59:53.033450+00:00",
+  "ssh_wall_seconds": 0.32773670001188293,
+  "transport_exit_code": 0,
+  "stdout": "Task 'acps-b02-acps-9102-20260912' started in tmux session 'agent_acps-b02-acps-9102-20260912'. Output: /home/wu/.agent-tasks/acps-b02-acps-9102-20260912/task.log\n",
+  "stderr": "",
+  "monitor_dispatch": "accepted by live configured Monitor app task",
+  "actual_monitor_adoption": "Root confirmed actual goal retention through terminal delivery: running on hmasd-wsl-node, pid3417871, source dd91ea3d81970485a8d562db47e30c70ed063524, exact ACPS output root; no routine DM polling",
+  "initial_status": {
+    "task": "acps-b02-acps-9102-20260912",
+    "status": "running",
+    "exit_code": null,
+    "pid": 3417871,
+    "uptime_seconds": 27,
+    "tmux_active": true
+  }
+}

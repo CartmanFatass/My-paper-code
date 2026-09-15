@@ -21,8 +21,10 @@ results or measured HMASD speedups. Archived draft and historical measurements r
 ## General requirements
 
 OWNER_DIRECT 2026-09-10 prospective responsibility mapping: in the general requirements below,
-CM engineering duties belong to the DM; semantic/routine implementer names denote the optional
-unified Implementer. AGENTS and ENGINEERING_SCOPE_SPEC §7 control current role and acceptance
+CM engineering duties belong to the DM. OWNER_DIRECT 2026-09-14 permits an optional direct
+Sol/medium Implementer for complete bounded implementation batches; DM retains scientific choices
+and technical acceptance. Independent Sol/high Reviewer coverage remains required for high-risk
+changes; DM may choose Astra for a concrete difficult review. AGENTS and ENGINEERING_SCOPE_SPEC §7 control current role and acceptance
 methods. This mapping changes no scientific requirement, frozen object appendix (including
 VNFC E01), numerical boundary, execution budget or historical assignment.
 
@@ -30,13 +32,23 @@ VNFC E01), numerical boundary, execution budget or historical assignment.
 
 本规范要求以适当的算法实现、数据布局和执行方式完成已经选定的科学观察。工程优化不得通过删除比较器、世界、种子、候选、独立检查、完整终局或必需输出，把不同科学对象冒充为更快的原对象。
 
-**调查阈值按单臂、单训练种子的完整逻辑调用计算：toy主机超过2700秒，UAV主机超过43,200秒。** 无训练种子的A类对象，以该卡规定的一次完整对象调用为单位。初始化、rollout、学习、replay、全部必需评估与检查、终局处理及最终发布属于同一工作链，分脚本、分阶段或分slice不重置阈值。
+**OWNER_DIRECT 2026-09-13：调查启动参考按单臂、单训练种子的完整逻辑调用计算：toy env超过5400秒（90分钟），UAV超过64,800秒（18小时）。** 无训练种子的A类对象，以该卡规定的一次完整对象调用为单位。初始化、rollout、学习、replay、全部必需评估与检查、终局处理及最终发布属于同一工作链，分脚本、分阶段或分slice不重置阈值。
 
 若一个调用包含不可分离的多臂共同计算，按整个调用调查，同时如实披露可归属的各臂工作；不得通过事后均分一个不可分离耗时规避调查。主机类别在既有任务说明中声明，不由文件名、目录名或重命名决定；混合路径分别说明组成及整次成本，不自动采用较宽松阈值。
 
-预计或实测越过上述阈值时，CM必须在既有任务和最近可行的干净边界完成具体工程查证：完整工作量、主要源码路径、批处理与依赖关系、编译／设备／并行边界、已有计时及缺口。先读源码和现有证据；需要新测量时，选择有明确预算与停止条件的有界工程任务。
+预计或实测越过上述阈值时，DM在既有任务和最近可行的干净边界作与问题相称的工程判断：完整工作量、主要源码路径、已有计时及缺口。已有证据足以解释合理耗时时，记录理由即可继续，不要求先完成独立调查。需要新测量时，由DM选择有明确目的和停止条件的工程任务；不因此向Root或Portfolio请批。
 
-**阈值不是新的wall cap、计算额度、科学结果规则或第五个启动条件。** 仍执行原对象更严格的cap和停止规则。仅越过调查阈值不自动终止一个原本合规的活动调用；已有投影超过原卡硬cap的调用也不能因此被允许。历史有效结果不追溯失效。
+这属于DM日常工作，Clerk在既有记录中保存结论和实际动作；不因启动调查或超过参考值通知Root。普通600多秒耗时不构成本规范的调查触发或停止理由，也不得默认将600秒写成通用watchdog。明确的故障、无进展或资源风险可以在参考值以下就地处理；需要Root的仍仅限具体共同规则变更或真实用户决策。
+
+**阈值不是新的wall cap、计算额度、科学结果规则或第五个启动条件。** 仅越过调查阈值不自动终止活动调用。真实用户/平台硬限和已冻结科学终点仍按原范围执行；普通DM耗时计划依下文前瞻调整，不能仅凭“原卡更严格”拒绝修订。历史有效结果不追溯失效。
+
+OWNER_DIRECT 2026-09-13：解释上一段的“硬cap”必须依据来源与用途，不能仅因数值写入卡片或标为cap就视为用户硬限。合理耗时估计、历史实测、规划参考和上述调查阈值不自动禁止启动、停止运行、禁止发送评审或要求上报。8秒参考与300秒实际耗时也必须先核对工作范围、环境和计时口径，不能单用倍数宣布阻塞。
+
+DM自定的普通wall时间计划和工程watchdog由DM负责设定及前瞻调整，说明工作量、合理完成窗口、真实资源约束和累计成本即可，无须另立审批或校准实验。执行中的参考估计被超过时，依据进度、资源健康和剩余工作判断；无进展、失控增长或资源风险才需要相应修复/停止动作。实际watchdog已经终止的运行如实记为终止，是否选择后续运行由DM另作科学判断，不能伪装为原运行继续。
+
+进程尚未终止时，只要不改变冻结的训练量/比较终点且不突破真实用户/平台限制，DM可在运行中前瞻调整普通工程wall/watchdog，并记录调整时点与原因。禁止延长冻结实验指科学exposure或比较终点，不指这种工程调整；不得以是否已经启动为由强迫停做或请批。
+
+真正的限制包括用户明确指定的硬资源上限、平台配额/物理准入，以及定义比较含义的训练步数、更新次数、评估样本或明确按wall预算比较的终点。这些不能因“合理耗时”而静默放宽。已启动的冻结科学终点和已完成记录保持原义；未启动的普通DM计划可前瞻修订并保留版本。耗时超出估计本身不证明科学无效。支持、排队和代理等待不得冒充训练量，也不得因未测而记零。当前owner暂停仍优先；本条不恢复实验。
 
 ### 2．完整调用、完整study和计算工作分别核算
 
@@ -50,7 +62,7 @@ VNFC E01), numerical boundary, execution budget or historical assignment.
 * 各逻辑调用wall之和；
 * 能够完整核算时，各调用aggregate CPU之和。
 
-并发调用wall之和可以大于study elapsed；两者不是同一指标。多个小调用组成的大study不因单项都低于阈值而免于总成本披露，但**45分钟／12小时不同时充当study总上限**。
+并发调用wall之和可以大于study elapsed；两者不是同一指标。多个小调用组成的大study不因单项都低于阈值而免于总成本披露，但**90分钟／18小时不同时充当study总上限**。
 
 争用、配额节流、IPC等待和设备排队属于实际wall。已知争用条件要记录；未测争用损失不得凭推断扣除，也不得用空闲节点或线性并行的假设改写实测值。异步设备计时在所声称的完成边界同步，不能把dispatch时间当执行完成时间。JaxMARL的编译外计时与Mava的首次调用包含编译，正说明二者不应不加区分地比较。
 
@@ -109,7 +121,7 @@ $$
 
 ### 8．既有角色和执行边界
 
-CM在原任务中记录完整工作／成本律、实际热点、参考模式、shape／拓扑、保护语义、资源范围、验证和停止条件；semantic implementer实现这个最小完整路径；routine implementer不自行选择或修改batch、native backend、并行、reduction、资源核算及数值语义；既有独立reviewer检查整个变更、消费者、完整科学量与成本覆盖。
+DM在同一任务中记录完整工作／成本律、实际热点、参考模式、shape／拓扑、保护语义、资源范围、验证和停止条件，实现最小完整路径，并自检整个变更、消费者、完整科学量与成本覆盖；高风险变更仍交独立Reviewer审查，由DM修复并验收。batch、native backend、并行、reduction、资源核算及数值语义仍遵守原任务约束；不派发CM或Implementer。
 
 没有具体超预算或待判性能问题的对象，不增加固定profiling任务。需要新测量时，既有链条明确选定一次有界任务；不新增角色或审批层。实际缺口返回原责任节点，不能用更小科学问题替换工程问题。
 

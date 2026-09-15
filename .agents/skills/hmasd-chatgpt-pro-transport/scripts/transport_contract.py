@@ -402,18 +402,18 @@ def reconcile_send_effect(
 
 
 def validate_source_thread_id(value: object) -> str:
-    """Validate the task UUID that authored the handoff."""
+    """Validate the native path or task UUID that authored the handoff."""
 
-    if not isinstance(value, str) or not re.fullmatch(THREAD_ID_RE, value):
-        raise ValueError("source_thread_id must be the canonical creator Codex task UUID")
+    if not isinstance(value, str) or not (re.fullmatch(THREAD_ID_RE, value) or re.fullmatch(r"/root(?:/[a-z0-9_]+)*", value)):
+        raise ValueError("source_thread_id must be the canonical creator Codex task UUID or native path")
     return value
 
 
 def validate_parent_thread_id(value: object) -> str:
-    """Validate the parent task UUID used as the sole return destination."""
+    """Validate the native path or task UUID used as the sole return destination."""
 
-    if not isinstance(value, str) or not re.fullmatch(THREAD_ID_RE, value):
-        raise ValueError("parent_thread_id must be the canonical parent Codex task UUID")
+    if not isinstance(value, str) or not (re.fullmatch(THREAD_ID_RE, value) or re.fullmatch(r"/root(?:/[a-z0-9_]+)*", value)):
+        raise ValueError("parent_thread_id must be the canonical parent Codex task UUID or native path")
     return value
 
 

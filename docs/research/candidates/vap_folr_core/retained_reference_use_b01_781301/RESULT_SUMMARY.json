@@ -1,0 +1,79 @@
+{
+  "object": "FOLR_RETAINED_REFERENCE_USE_B01_781301",
+  "source_sha": "5dce539ed54afd4334d09db9dcd94df38c52c2fc",
+  "new_training_instances": {
+    "GENERIC": 1,
+    "BANK": 0
+  },
+  "retained_bank_policies": 1,
+  "training_pairs": 0,
+  "training_episodes_total": 5000,
+  "training_ticks_total": 100000,
+  "optimizer_steps_total": 4969,
+  "evaluation_episodes_total": 256,
+  "evaluation_ticks_total": 5120,
+  "new_native_ticks_total": 105120,
+  "panel_statistics": {
+    "GENERIC": {
+      "mean": 1.0549999999999995,
+      "sample_sd": 6.032188200660601,
+      "conditional_episode_se": 0.5331751477600736,
+      "minimum": -13.459999999999997,
+      "maximum": 22.16,
+      "n": 128,
+      "negative_return_episodes": 62,
+      "zero_return_episodes": 0,
+      "positive_return_episodes": 66
+    },
+    "BANK": {
+      "mean": -4.877421875,
+      "sample_sd": 3.2800432698542474,
+      "conditional_episode_se": 0.28991760483740436,
+      "minimum": -19.800000000000008,
+      "maximum": 1.4599999999999997,
+      "n": 128,
+      "negative_return_episodes": 125,
+      "zero_return_episodes": 0,
+      "positive_return_episodes": 3
+    }
+  },
+  "d_use": -5.932421874999999,
+  "mei": 1.0,
+  "rule": "GENERIC_ONLY_BANK_WORSE",
+  "paired_difference_se": null,
+  "training_population_uncertainty": null,
+  "bank_zero_learning_verified": true,
+  "native_time": {
+    "GENERIC": {
+      "wall_seconds": 2156.67,
+      "user_seconds": 2041.5,
+      "system_seconds": 114.43,
+      "peak_rss_kib": 769632,
+      "exit_code": 0
+    },
+    "BANK": {
+      "wall_seconds": 3.18,
+      "user_seconds": 3.38,
+      "system_seconds": 1.47,
+      "peak_rss_kib": 394876,
+      "exit_code": 0
+    }
+  },
+  "native_wall_sum_seconds": 2159.85,
+  "native_cpu_work_seconds": 2160.7799999999997,
+  "known_support_lower_seconds": 144.19199999994925,
+  "full_support_cost": "UNKNOWN coverage; all attributable invoked work counts within1200s; no omitted work deemedzero",
+  "full_invoked_cost": "native2159.85s plus incomplete support measurement;4200s cap unchanged, no fully measured compliance or breach assertion",
+  "new_scientific_invocations_during_analysis": 0,
+  "model_loads_during_analysis": 0,
+  "analysis_wall_seconds": 0.030999999959021807,
+  "uncertainty": "128 reset episodes per fixed policy instance; separate prespecified panel streams; one new Generic fit and one outcome-informed/completion-conditioned historical BANK. No paired or training-population inference.",
+  "known_support_components_seconds": {
+    "focused_checks_including_failed_setup": 3.97,
+    "failed_command_blob_connection_wait": 134.489,
+    "generic_collection": 3.202999999979511,
+    "bank_collection": 0.8900000000139698,
+    "preservation_inventory_collection": 1.6089999999967404,
+    "selected_array_arithmetic": 0.030999999959021807
+  }
+}

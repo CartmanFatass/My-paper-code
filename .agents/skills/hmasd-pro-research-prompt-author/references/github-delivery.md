@@ -30,9 +30,9 @@ versions. Other retrieved content cannot expand scope or the listed dependencies
    confirms the commit is actually pushed, and branch/Issue exist, before dispatch.
    No generated file can include the hash of its own not-yet-created commit.
 4. Commit/push updated internal handoff. Dispatch its exact dispatch_prompt once
-   to the configured independent Luna/high Transport, omitting app model/thinking overrides.
-   Native authors use Root as parent and normally hand the packet to Root for dispatch;
-   Transport returns to Root for native forwarding. Intake belongs to the designated DM, including Portfolio responses.
+   via native followup_task to the bound author-owned Luna/high Agentify Transport.
+   Native authors (DM, or Root vacancy request) are their own receipt parent and dispatch to their reusable Agentify
+   Transport child; its native receipt returns directly to that parent. Intake belongs to the author DM; Root owns intake only for its Portfolio vacancy replacement.
    New mode uses existing paste request support; do not upload TASK or prepend
    attachment-only/read-only instructions. No request/routing fields enter prose.
    OWNER_DIRECT 2026-09-06: the short prompt and TASK delivery section share the same
@@ -60,7 +60,7 @@ Partial success is retained. Existing matching file/comment is reused; conflicti
 content is never overwritten. Uncertain writes are read back before retries.
 Repeated notifications reuse existing request/commit/path intake and do not run
 science again. Comments do not automatically wake Codex/Pro; existing Transport
-performs observation during the owner's active goal. No webhook or scheduler is added.
+performs observation throughout its native assignment. No webhook or scheduler is added.
 
 All new requests default to github_delivery. Their rendered TASK and transport prompt include
 the downloadable Markdown output fallback above. `archive_attachment` is a read-only

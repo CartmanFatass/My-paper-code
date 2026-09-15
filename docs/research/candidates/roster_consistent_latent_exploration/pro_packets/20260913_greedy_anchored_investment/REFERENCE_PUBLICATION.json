@@ -1,0 +1,240 @@
+{
+  "request_id": "2026-09-13-rcle-greedy-anchored-investment-01",
+  "observed_remote_heads": [
+    "306cabf5923b44bbfa486fae7313b5fea8666613\trefs/heads/codex/rcle",
+    "7357fdb884e07a939c0b7d92534139b1f0a1bc83\trefs/heads/main"
+  ],
+  "references": [
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260913_greedy_anchored_investment/INVESTMENT_QUESTION.md",
+      "commit_sha": "306cabf5923b44bbfa486fae7313b5fea8666613",
+      "bytes": 8470,
+      "sha256": "ebc769dc969a3c199f21875a039d49df20834ea1c56d70a412c815348102b4b2",
+      "git_blob": "3b67f3c6a0e1e00e54017d539cdb007773e8e21a",
+      "published_remote_refs": [
+        "refs/remotes/origin/codex/rcle"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B09_GREEDY_ANCHORED_PROPOSAL_20260913.md",
+      "commit_sha": "306cabf5923b44bbfa486fae7313b5fea8666613",
+      "bytes": 15979,
+      "sha256": "8a3de4f8a31d518c323863f4fa545e203cfb573abc5d2ecfa80ecf7845742ad7",
+      "git_blob": "743a883b5275250b1dad02f387996755f68c0198",
+      "published_remote_refs": [
+        "refs/remotes/origin/codex/rcle"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260913_greedy_anchored_investment/EXPOSURE_AND_COST.json",
+      "commit_sha": "306cabf5923b44bbfa486fae7313b5fea8666613",
+      "bytes": 5707,
+      "sha256": "4e886e1993d667b17c322cffe605b19611d4648528990d341a3533677c7cafba",
+      "git_blob": "fb149464f26661176c313ac11884b40de651e3bb",
+      "published_remote_refs": [
+        "refs/remotes/origin/codex/rcle"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260913_greedy_anchored_investment/CURRENT_SCOPE.json",
+      "commit_sha": "306cabf5923b44bbfa486fae7313b5fea8666613",
+      "bytes": 3974,
+      "sha256": "3beadc6051ddb12eea4bb709f98ff97770f2619396d37d8c7d473a2ed30e4eae",
+      "git_blob": "fac4b1d706c5842b92e15572b665eff5bf83b435",
+      "published_remote_refs": [
+        "refs/remotes/origin/codex/rcle"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260913_greedy_anchored_continuation/archive/RESPONSE.md",
+      "commit_sha": "5b04f22e844b74df5c12a0dfd334b3ff08f32634",
+      "bytes": 37104,
+      "sha256": "5e26b956e5f4c27cfa0b98677bb4d7ef80948e825b57ee71d11ab8a37958ef0a",
+      "git_blob": "82d854c37ddeea0aa47dd541185a24a199c4c4c4",
+      "published_remote_refs": [
+        "refs/remotes/origin/codex/rcle"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260913_greedy_anchored_continuation/INTAKE.md",
+      "commit_sha": "2c74f29032f2af05a41316659a9dc0ff7fa2da5c",
+      "bytes": 15765,
+      "sha256": "b5896d8e76283fa6ce949cbf7e0d40a0b9e4c45b3630d327af755a1dbd39ff29",
+      "git_blob": "95c704a3dc3aec2403a102988516777241bdec7d",
+      "published_remote_refs": [
+        "refs/remotes/origin/codex/rcle"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/DIRECTION.md",
+      "commit_sha": "2c74f29032f2af05a41316659a9dc0ff7fa2da5c",
+      "bytes": 60449,
+      "sha256": "f034902f551495b05c3fd7730c2fe8b1580e3cf210e3d3290bedd0cf44cf0ed5",
+      "git_blob": "7004e2395513d39d1f1125575ab8058c42ce36d2",
+      "published_remote_refs": [
+        "refs/remotes/origin/codex/rcle"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260913_greedy_anchored_continuation/LITERATURE_SCOPE.json",
+      "commit_sha": "2cfd9e300477774043144f6a1da3533f0ca38380",
+      "bytes": 3562,
+      "sha256": "ad13fcd0ce32461c4359c39cf5af005fcb6fd217ece716b06f4b538d995f00d5",
+      "git_blob": "8afd4f96275916634cd8b3e6fc739c3b725711e5",
+      "published_remote_refs": [
+        "refs/remotes/origin/codex/rcle"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260913_post_b08_development/archive/RESPONSE.md",
+      "commit_sha": "e4fd016e1612d0d4ad6a18a9a2eb4ac2f06478a0",
+      "bytes": 34826,
+      "sha256": "e38ea92d217912f04b0009a6b3125472da1d22d82f7f9c3c07c7073c215b28fd",
+      "git_blob": "11c70fc90a464f6f7f74ba625131b4f98d4afd95",
+      "published_remote_refs": [
+        "refs/remotes/origin/codex/rcle"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260913_post_b08_development/B08_CLOSEOUT_COST_APPENDIX.json",
+      "commit_sha": "39f671d5b5a78dcc48a88a7187aec05481855ab4",
+      "bytes": 8769,
+      "sha256": "ea9183e5459b41e58952eee1668a5f33f598df43159cbfe1ab0f40996fd073bd",
+      "git_blob": "f24bb6b931bf4d8ccdc83b442120b951001e743a",
+      "published_remote_refs": [
+        "refs/remotes/origin/codex/rcle"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B08_JOINT_QUOTA_PHASE_SCIENCE_CARD_20260912.md",
+      "commit_sha": "8761274f9c0d152437a4c5e11b2b9a847d2d76d1",
+      "bytes": 12648,
+      "sha256": "56dcb8933cf651a31647c1a0ba76ce5a959a1d4f437f960fb51528d016df5a87",
+      "git_blob": "f51732a71098cc906a9d2b83b902dbfa8b588144",
+      "published_remote_refs": [
+        "refs/remotes/origin/codex/rcle"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B08_JOINT_QUOTA_PHASE_RESULT_EVIDENCE_20260912.md",
+      "commit_sha": "6fd46ddb35c549a6099499b4542f8ae674d684ca",
+      "bytes": 12530,
+      "sha256": "fe3ee57855e4ec1fc180d9c08d19d8475fe6590cfe60c94e83c514f23d733512",
+      "git_blob": "010dd63d659d85f670f00968590b292d781a8a54",
+      "published_remote_refs": [
+        "refs/remotes/origin/codex/rcle"
+      ]
+    },
+    {
+      "path": "experiments/candidates/roster_consistent_latent_exploration/joint_quota_phase/policy.py",
+      "commit_sha": "012a8bce2c90cbe54459437dba01d3f171c9e063",
+      "bytes": 5580,
+      "sha256": "904775573c1075f518794f649ad46f4a11fb14c46d74448d6263b1bad215e4ab",
+      "git_blob": "5d1cd7912c1cc1ed1ba5b1096f52459cd5554b5f",
+      "published_remote_refs": [
+        "refs/remotes/origin/codex/rcle"
+      ]
+    },
+    {
+      "path": "docs/research/portfolio/PORTFOLIO.md",
+      "commit_sha": "d50a063db77d5d8d84e0055fbdec8ea236742266",
+      "bytes": 12577,
+      "sha256": "b2f7978717b63084637c9d3155f739be742a7135130f4277c3a5a413a4e1f38d",
+      "git_blob": "e9cab366ba591e28d949d7107423d679469892ff",
+      "published_remote_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "AGENTS.md",
+      "commit_sha": "d50a063db77d5d8d84e0055fbdec8ea236742266",
+      "bytes": 49049,
+      "sha256": "3d40d893c3171cf1c20cd95bf35758de29819e820a95870ce322f63c290f6daa",
+      "git_blob": "c8ad295e852869c100827889f326d0891f307101",
+      "published_remote_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "commit_sha": "d50a063db77d5d8d84e0055fbdec8ea236742266",
+      "bytes": 45107,
+      "sha256": "fcebbdf7e487ee521d67ef6bb77bcaef6916aab524504379073525696bc4c7d1",
+      "git_blob": "ce4d235d055fa4b32fae957d0b198836515d2aac",
+      "published_remote_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/project/MARL_RUNTIME_ENGINEERING_SPEC.md",
+      "commit_sha": "d50a063db77d5d8d84e0055fbdec8ea236742266",
+      "bytes": 24094,
+      "sha256": "d40a7f14f3d67919bd6693d53e4e25b3a5b3fe5877c22d556a27b7f45d3cb043",
+      "git_blob": "12b43aa1c5aadce85871092b5c947bba1baf1cb1",
+      "published_remote_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/project/ENGINEERING_SCOPE_SPEC.md",
+      "commit_sha": "d50a063db77d5d8d84e0055fbdec8ea236742266",
+      "bytes": 20851,
+      "sha256": "e5f1a651830ca447acd4302fe8b678fb7a425d15a364b189041ccf23c708baaa",
+      "git_blob": "d0a1c317c223c64d2dfee8b8bb83ca0c0f01f9d9",
+      "published_remote_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": ".codex/hmasd-compute.toml",
+      "commit_sha": "d50a063db77d5d8d84e0055fbdec8ea236742266",
+      "bytes": 1670,
+      "sha256": "f2b6953ea409ab53532549d4e84bc2b74affa3f1ec3c70890ec3208c762deb3e",
+      "git_blob": "aab99b54af6a50e2f1af1e22f774f82960a99863",
+      "published_remote_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "commit_sha": "d50a063db77d5d8d84e0055fbdec8ea236742266",
+      "bytes": 7819,
+      "sha256": "c1f7d6c68fcec55de48ea555346d5d65af8d311e28502be43a2b05436a174247",
+      "git_blob": "05b3dc8d8628e2510431250c119b533f2ac3c29a",
+      "published_remote_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/02_MARL.md",
+      "commit_sha": "d50a063db77d5d8d84e0055fbdec8ea236742266",
+      "bytes": 4038,
+      "sha256": "4dae3729dc54db39599a689712fa1f6ccdb80d5fd2f08e96757bcf8686e6e0b9",
+      "git_blob": "1b3ceff0c80a63f8b12f6b8686265a92fbcc9fb4",
+      "published_remote_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+      "commit_sha": "d50a063db77d5d8d84e0055fbdec8ea236742266",
+      "bytes": 4252,
+      "sha256": "99b7e727a890d4e93a64b5c0f44fe588e383b5de56f2da663fb3f864c6d8293c",
+      "git_blob": "9bae14c6deb8e3d1bee6bb567828e4667a426174",
+      "published_remote_refs": [
+        "refs/remotes/origin/HEAD",
+        "refs/remotes/origin/main"
+      ]
+    }
+  ],
+  "count": 22,
+  "claim": "Exact Git bytes exist and referenced commits are reachable from observed published remote tracking refs; Pro access remains to be reported separately."
+}

@@ -1,0 +1,7 @@
+# D1 diagnostic acceptance
+
+Independent E05 (Sol/high) found no material defect in the67-line script, distinct synthetic domain,192x64 bounds, unchanged complete training gradient, FP64/thread1 and nonempirical output. DM accepts it. AST parse and diff check passed; no diagnostic/empirical root was executed during review. Exact COMMAND.txt parses into four supervisor argv values with one whole command. Its timer/300s watchdog encloses actual-node admission joined by && to gdb batch/Python faulthandler. Out does not preexist; the control parent exists. No source edits since c7eb5986f38d42f24fb0d9749c705c975aa40b0d.
+
+Initial checkout's automatic missing-blob fetch used a plain SSH environment and stalled. Only its own verified worktree fetch processes were terminated, then checkout completed through configured zsh -lic network environment. PREP_RECEIPT.json preserves the failed preparation. The repaired checkout reports exact c7eb5986f38d42f24fb0d9749c705c975aa40b0d, control_exists true, out_exists false; no scientific or diagnostic invocation started. Existing B11 outputs/worktree were untouched.
+
+Launch exactly once using the recorded command; supervisor success is not diagnostic completion. Collect fatal stack or the fixed no-reproduction receipt, record actual work/cost and stop. No scientific B11 rerun, automatic diagnostic repeat, capacity change or speculative production patch follows.

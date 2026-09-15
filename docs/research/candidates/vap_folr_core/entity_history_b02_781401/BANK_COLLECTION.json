@@ -1,0 +1,96 @@
+{
+  "status": {
+    "task": "folr-b02-bank-781401-82b12d7e0",
+    "status": "finished",
+    "exit_code": 0,
+    "pid": 3662375,
+    "uptime_seconds": 2022,
+    "tmux_active": false
+  },
+  "host": "LAPTOP-U9TDKC8A",
+  "source_sha": "82b12d7e0f205ea228ca69e28e581ca6ee5f2ca6",
+  "files": {
+    "ADMISSION.json": {
+      "bytes": 504,
+      "sha256": "1befbff91e064ff7abf016c1b9ff0a450292ac38329cc006cd7889a6f662ec87"
+    },
+    "INVOCATION_TIME.json": {
+      "bytes": 108,
+      "sha256": "ea0f61a2b041b07a2c2b668095e732799234d97e7e30b45a18a83b0d81e54af3"
+    },
+    "final.pt": {
+      "bytes": 4532819,
+      "sha256": "c8eec7260c5c73407baa3ce568bb73ea0089da389cfaf5d9405688d1edb00daf"
+    },
+    "summary.json": {
+      "bytes": 103890,
+      "sha256": "c9b14b678ad6d6598855ab58b2df55e25bad44f9c04109298ef1d8a083399c0a"
+    }
+  },
+  "archive": {
+    "file": "BANK_RAW.tar.gz",
+    "bytes": 4151097,
+    "sha256": "a9bc226cb5edb4e1b5b32461686ba7ee2c43cc70950591d77ec02b0e3fe690cf"
+  },
+  "native_timing": {
+    "wall_seconds": 1789.13,
+    "user_seconds": 1383.02,
+    "system_seconds": 406.53,
+    "peak_rss_kib": 745284,
+    "exit_code": 0
+  },
+  "admission": {
+    "assessed_at": "2026-09-14T05:09:52.361618Z",
+    "available_physical_bytes": 15628066816,
+    "captured_at": "2026-09-14T05:09:52.361221Z",
+    "cgroup_headroom_bytes": null,
+    "cgroup_memory_current_bytes": null,
+    "cgroup_memory_max_bytes": null,
+    "effective_available_bytes": 15628066816,
+    "effective_floor_pass": true,
+    "failure_reasons": [],
+    "measurement_source": "/proc/meminfo",
+    "minimum_available_bytes": 4294967296,
+    "passed": true,
+    "physical_floor_pass": true,
+    "schema_version": 1
+  },
+  "computed_panel": {
+    "mean": -5.483828125,
+    "sample_sd": 4.5698291842667365,
+    "conditional_episode_se": 0.40391965063239976,
+    "minimum": -19.95,
+    "maximum": 3.8999999999999995,
+    "n": 128,
+    "negative_episodes": 121
+  },
+  "native_pair_primary": {
+    "generic": {
+      "mean": -0.6529687500000004,
+      "sample_sd": 6.279320811782391,
+      "conditional_episode_se": 0.5550187909071431,
+      "minimum": -19.549999999999997,
+      "maximum": 18.71,
+      "n": 128
+    },
+    "bank": {
+      "mean": -5.483828125,
+      "sample_sd": 4.5698291842667365,
+      "conditional_episode_se": 0.40391965063239976,
+      "minimum": -19.95,
+      "maximum": 3.8999999999999995,
+      "n": 128
+    },
+    "bank_minus_generic": -4.830859374999999,
+    "rule": "GENERIC_ABOVE_MEI",
+    "mei": 1.0,
+    "training_pairs": 1,
+    "paired_difference_se": null,
+    "uncertainty": "Per-arm episode dispersion conditional on each fitted policy; shared seed labels do not establish exogenous episode coupling or training-population uncertainty.",
+    "claim": "Exploratory whole-package native comparison on the selected public-information host."
+  },
+  "technical_counts_valid": true,
+  "collection_wall_seconds": 1.9219999999622814,
+  "checkpoint_loads": 0,
+  "scientific_new_invocations": 0
+}

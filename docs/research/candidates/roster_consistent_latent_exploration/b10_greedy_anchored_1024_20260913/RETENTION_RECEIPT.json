@@ -1,0 +1,34 @@
+{
+  "state": "LOCAL_RAW_AND_PUBLISHED_SOURCE_PRESERVED",
+  "raw_archive": {
+    "path": "temp/directions/roster_consistent_latent_exploration/exp/b10-collected-e5fd4/rcle-b10-e5fd43973-evidence.tgz",
+    "bytes": 297865,
+    "sha256": "b87737bf2bb42f3f2c7df497bdb04030602c51be2ad7c7aa891d74b3c4a14133"
+  },
+  "source_bundle": {
+    "path": "temp/directions/roster_consistent_latent_exploration/exp/b10-collected-e5fd4/rcle-b10-e5fd43973-source.bundle",
+    "bytes": 24822,
+    "sha256": "a461bd83347908a1e85a70b4374d9897fb82677f35db9230ea86aa8a5c7f9582",
+    "verified": true,
+    "tip": "bf98ebba6c088d282df10ff88844e3b7d97c1630",
+    "requires": "d741be527662c5cec18ed03ae03531658059dff6",
+    "contains_launch_sha": "e5fd439735bcc52d7f4cba9943b8c5c5138e21c2"
+  },
+  "collection_recovery": {
+    "failed_remote_bundle_by_literal_SHA": "refused empty bundle; no source or raw loss",
+    "first_analysis": "no local data yet after collection command failure; no numerical reanalysis happened",
+    "remote_HEAD_bundle": "partial clone demanded unpublished-in-checkout blobs through networkless fetch; exact owned job terminated at observed53s and source preserved from already complete local Git objects",
+    "same_raw_archive_reused": true
+  },
+  "cleanup_pending": [
+    "/home/wu/hmasd-worktrees/rcle-b10-e5fd43973",
+    "/home/wu/.agent-tasks/rcle-b10-s30-e5fd43973",
+    "/home/wu/hmasd-inputs/rcle-b10-e5fd43973-evidence.tgz",
+    "/home/wu/hmasd-inputs/rcle-b10-e5fd43973-source.bundle or failed temporary file, if present"
+  ],
+  "do_not_remove": [
+    "authoring checkout",
+    "local raw/source evidence",
+    "shared/sibling roots"
+  ]
+}

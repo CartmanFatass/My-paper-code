@@ -1,0 +1,111 @@
+Selected replacement: FOLR — vap_folr_core
+
+Assign the ACVC-released slot to FOLR for bounded direction-management re-entry. The intended working set is LCAC + RCLE + FOLR = 3/3 after Clerk verifies the replacement task’s creation and intake. The fresh registry read still shows LCAC and RCLE occupying two slots, ACVC archived, and one replacement reservation; FOLR is currently archived and non-occupying. This selection does not itself constitute a third running DM.
+
+Why FOLR for this vacancy
+
+FOLR has a concrete, unresolved learning comparison that could change a development choice: whether a newly trained BANK package merits further development against a newly trained, equally informed Generic package on the existing H20 host. Its first complete fresh/fresh comparison is still missing. In object E, BANK completed its endpoint but Generic timed out; object F instead compared a fresh Generic fit with a fixed, outcome-informed historical BANK. F therefore neither completes E nor supplies a fresh BANK-learning replication. This question is expressly retained in FOLR’s PARK conditions.
+
+The adverse evidence remains substantial: F’s BANK-minus-Generic difference was −5.932421875, yielding GENERIC_ONLY_BANK_WORSE for that exact fixed-reference use. The result does not establish Generic sufficiency, population superiority, or that entity history is unnecessary. The prior DM explicitly considered fresh/fresh learning valuable but judged its marginal value modest relative to the work required. My selection is a bounded reconsideration of that qualitative allocation judgment, not a finding that it was scientifically wrong or that BANK should win.
+
+For this vacancy, I prefer that first complete learning comparison over immediately purchasing another unchanged observation from the recently parked MGTAP, DISH, or UCOPE programmes. Their repeatability and development questions remain legitimate; none is closed, demoted globally, or required to produce a novel mechanism or favorable pilot before reconsideration. Their separate negative/mixed evidence remains unchanged.
+
+Evidence and resources that remain binding
+
+ACVC stays reversibly parked. Its B02 mean gains of 0.1046 J over original actions and 0.0607 J over individual stay coexist with 4/64 and 11/64 adverse worlds, respectively; individual stay itself improved 0.0439 J. Preserve the learned-gating failure, both DOWN training-use comparisons, and the separation between the uniform-scene C01 evidence and clustered-scene evidence. These are complete-package comparisons, not isolated fallback/history effects; evaluation worlds are not independent training fits. No additional ACVC fit is selected here. Its unique retained model/raw archive must survive any worktree reclamation.
+
+FOLR is not being selected as a cheap or already-funded experiment. Recorded F native wall time was 2,159.85 seconds, with a later support lower bound of 148.5160421 seconds and incomplete coverage. E’s 3,557.28 seconds belongs to a separate historical account. Complete direction, support, and provider costs remain unknown. The old 6,900-second fresh-block envelope and 120-second cleanup allowance were planning inputs—not unavoidable bills, new grants, or owner-only permission gates. ACVC’s recorded 164.53-second scientific invocation likewise does not establish its complete historical cost or a transferable remaining budget. A vacant management slot is not proof of available compute or memory.
+
+Astra/max DM creation handoff
+
+The retained FOLR branch is codex/vap-folr, freshly resolved to c2a22c5b46352a4f8d608d81addfaa960219b575. The registry identifies its retained authoring checkout as C:/Projects/HMASD-worktrees/codex-vap-folr; its physical availability and ownership must be checked before reuse.
+
+TO: Current Clerk
+TASK: FOLR — ACVC-vacancy bounded re-entry
+DIRECTION: vap_folr_core
+MODEL: gpt-6-astra
+REASONING_EFFORT: max
+MODE: independent_task
+CREATE_COUNT: exactly one, after checking for an existing matching task
+VACANCY_SOURCE: acvc-park-20260914
+TARGET_SLOTS: 3
+PRESERVE_ACTIVE_DIRECTIONS: learned_counterfactual_agent_credit,
+                            roster_consistent_latent_exploration
+AUTHORING_BRANCH: codex/vap-folr
+PREFERRED_AUTHORING_CHECKOUT:
+  C:/Projects/HMASD-worktrees/codex-vap-folr
+VERIFIED_BRANCH_REFERENCE:
+  c2a22c5b46352a4f8d608d81addfaa960219b575
+
+Assignment
+Take ownership of FOLR's direction-management reconsideration for this one
+vacancy. This is not a second RCLE task, a fourth-slot request, or an automatic
+experiment, seed allocation, budget renewal, provider Send, or scientific approval.
+
+First intake
+Read the current repository role instructions and live DM registry.
+Under docs/research/candidates/vap_folr_core/, read:
+  PARK.md
+  DIRECTION.md
+  FOLR_ENTITY_HISTORY_B01_INTAKE_20260912.md
+  FOLR_RETAINED_REFERENCE_USE_B01_INTAKE_20260913.md
+  FOLR_RETAINED_REFERENCE_USE_B01_RESULT_EVIDENCE_20260913.md
+  pro_packets/20260913_post_f_scientific_review/archive/RESPONSE.md
+  pro_packets/20260913_post_f_scientific_review/INTAKE.md
+  retained_reference_use_b01_781301/CLEANUP_RECEIPT_20260913.json
+
+Read this Portfolio selection in full, including the ACVC preservation and
+resource boundaries. Historical ACTIVE, record-only, pending-cleanup and
+authorization language must retain its original temporal scope.
+
+Concrete question
+Would the first complete prospective fresh-BANK versus fresh-Generic learning
+comparison on the existing equally informed H20 host provide enough
+decision-changing information to justify further BANK development rather than
+retaining Generic-only?
+
+Explicitly weigh that comparison against retaining PARK with no new experiment.
+Address the previous DM's modest-value judgment and adverse BANK evidence.
+Do not manufacture a requirement for architectural novelty, a favorable pilot,
+an external customer, exact headroom, or complete mechanism identification.
+
+First substantive return
+Publish a bounded re-entry intake stating:
+  - the development decision that could change;
+  - what E, F and older evidence establish and leave unresolved;
+  - the chosen next action and reasons, including contrary evidence;
+  - actual resource facts, cost unknowns and required execution admission;
+  - retained assets, producer state and the next responsible actor.
+
+The DM owns the prospective scientific-object and lifecycle decision under
+existing delegation. Portfolio selection neither chooses the experiment nor
+requires a favorable re-entry decision. Do not add a Root/Portfolio approval
+round merely to make the delegated DM decision.
+
+Scientific and operational boundaries
+Keep F's GENERIC_ONLY_BANK_WORSE result and E's missing contrast unchanged.
+A successor is a new prospective object, not E repair, F replication by
+relabeling, or continuation of a stopped invocation. Preserve all older holds,
+adverse outcomes, capacity/training-history differences and claim limits.
+Conditional evaluation episodes must not become independent training fits.
+
+Do not replay completed reviews or restore retired native loops. Any later
+execution requires its own prospective definition and fresh admission against
+actual shared/physical resources. Historical timing plans are neither automatic
+funding nor universal stop thresholds.
+
+Keep ACVC PARK, B02 evidence, original review and unique retained archive intact.
+Leave every other PARK record and the stopped fourth-slot request unchanged.
+
+Creation and occupancy reconciliation
+Resolve the current registry and check for an existing matching FOLR task before
+creation or any retry. Reuse a confirmed matching delivery rather than duplicate it.
+Record the actual returned task identity and first substantive intake.
+Until creation is confirmed, retain two occupied slots plus one reservation;
+after confirmation, record LCAC + RCLE + FOLR as three occupied slots and clear
+this reservation. Do not infer creation from this handoff.
+
+If the new DM chooses PARK, preserve its new substantive assessment, complete
+safe closeout, and release the slot through the existing vacancy process.
+
+Disposition: FOLR selected for this one vacancy. No global priority changes, scientific acceptance, new experiment, or resource grant accompany the selection.

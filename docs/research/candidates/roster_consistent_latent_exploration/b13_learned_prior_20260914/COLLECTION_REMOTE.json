@@ -1,0 +1,92 @@
+{
+  "time_utc": "2026-09-14T09:07:13.285024+00:00",
+  "status": {
+    "task": "rcle-b13-s33-cf4d9bd93",
+    "status": "finished",
+    "exit_code": 0,
+    "pid": 3668475,
+    "uptime_seconds": 349,
+    "tmux_active": false
+  },
+  "archive": "/home/wu/hmasd-inputs/rcle-b13-cf4d9bd93-evidence.tgz",
+  "archive_bytes": 320580,
+  "archive_sha256": "efea49fc263d0f5eae74b806e280bcb5d07cfb0b3f2f6692e5ab1a2b2ea2a020",
+  "files": {
+    "b13_seed33/summary.json": {
+      "bytes": 29793,
+      "sha256": "b8b50f5790d2f13432f91766eb3146c1fca9a44134a17e688f8f9f2cd12b2d8b"
+    },
+    "b13_seed33/modal.json": {
+      "bytes": 110155,
+      "sha256": "ddb16de763daaaced1f56c1e4e0d77aa39f8066a1194a0faffb02988b4069bba"
+    },
+    "b13_seed33/final1024.json": {
+      "bytes": 110090,
+      "sha256": "c1e96a2e43204cc01f2bb4def62eef87eb2feb82f1d8b93899d9341fbeb4c683"
+    },
+    "b13_seed33/curves.jsonl": {
+      "bytes": 1178598,
+      "sha256": "a864e2476e37f4aecd7cd6deb7eaf828e621ae9354031b6d158a76f4b31ae5fa"
+    },
+    "b13_seed33/final1024.pt": {
+      "bytes": 72970,
+      "sha256": "c5317fd0615c0712ae38d93d57bfca2190a3d442ff6b9ad37a0b092832cf719b"
+    },
+    "b13_seed33/nearest.json": {
+      "bytes": 115345,
+      "sha256": "8f10245a7a614ef12074115405b68bf1871156b57511c178f1c04c18eeb45909"
+    },
+    "b13_seed33/initialization.pt": {
+      "bytes": 24370,
+      "sha256": "f19f1ea1dcc3dde69e4103d3abfb036193f8b669edc6bd3bc0913e5ddc6c8b97"
+    },
+    "b13_seed33/initialization.json": {
+      "bytes": 110075,
+      "sha256": "e5477741cc2b058a3d8f60b5c86746e91659b45ede04c75e974ce579f1179b59"
+    },
+    "b13_seed33/greedy.json": {
+      "bytes": 110155,
+      "sha256": "ddb16de763daaaced1f56c1e4e0d77aa39f8066a1194a0faffb02988b4069bba"
+    },
+    "b13_seed33/native_build/8400160e6ca2c23b0932f6a073ce126099000cf0de7562c1eb8a13d1458496ce/tbcfv_backend.so": {
+      "bytes": 85416,
+      "sha256": "5b918da7e23d7b65251fb20efcb6678e4a17e62538f6ebdedbda1d9e96221983"
+    },
+    "b13_seed33/native_build/8400160e6ca2c23b0932f6a073ce126099000cf0de7562c1eb8a13d1458496ce/tbcfv_backend.source.cpp": {
+      "bytes": 50757,
+      "sha256": "18d45b95a29c1ca8d17b4d192a9328ddc9c56a821a2690f118de44dbf0054819"
+    },
+    "b13_control/native.time": {
+      "bytes": 60,
+      "sha256": "f5016e0c772ef2727bb74356559696e13fcf2add48960f6347a83b2b868cf21a"
+    },
+    "b13_control/admission.json": {
+      "bytes": 504,
+      "sha256": "52da71e53201f1f98d7af9a9ac0da1f1fbbe7b939965e959efedbfc78b4b137c"
+    },
+    "b13_control/supervisor/runner.sh": {
+      "bytes": 2009,
+      "sha256": "0fe7da29e8acdbede6217dd17312cad1e5d14aab7010dedf32379fea32282477"
+    },
+    "b13_control/supervisor/exit_code": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "b13_control/supervisor/status": {
+      "bytes": 9,
+      "sha256": "161069badc0cc23058b13d7c068e45205f4333aa15fd78db9d68f5c9f1ae8983"
+    },
+    "b13_control/supervisor/start_time": {
+      "bytes": 11,
+      "sha256": "ed3f0f989f2b8642109a45ffce5bb557598a790299924f2f650e3b0d565118f7"
+    },
+    "b13_control/supervisor/pid": {
+      "bytes": 8,
+      "sha256": "519bde4e85b05fe0b802c3d9f3db7447a64169967feffaea75becbd09e03a2bd"
+    },
+    "b13_control/supervisor/task.log": {
+      "bytes": 24399,
+      "sha256": "bede7e3cbc62c139a8ce6afefe10d10f2e734f52638515459d2e0b70cc73bddd"
+    }
+  }
+}

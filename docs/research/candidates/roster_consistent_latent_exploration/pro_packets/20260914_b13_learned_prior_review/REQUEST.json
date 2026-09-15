@@ -1,0 +1,164 @@
+{
+  "caller_role": "em",
+  "workflow_node": "em_convergence",
+  "request_id": "2026-09-14-rcle-b13-learned-prior-results-review-01",
+  "source_thread_id": "01a09e10-9d9f-7f82-87c0-d58cbe0c7618",
+  "parent_thread_id": "01a09e10-9d9f-7f82-87c0-d58cbe0c7618",
+  "operator_thread_id": "01a09ea0-4a86-75b0-826d-6f864efa7480",
+  "direction_id": "roster_consistent_latent_exploration",
+  "conversation_id": "6aa55611-bf80-83e8-b018-70e30a95b28a",
+  "repository": "CartmanFatass/My-paper-code",
+  "repository_url": "https://github.com/CartmanFatass/My-paper-code",
+  "commit_or_ref": "c58ec2fb49795035ff99f5ba9c60c44083f8d13b",
+  "delivery_mode": "github_delivery",
+  "execution_mode": "REUSE_SINGLETON",
+  "github_delivery": {
+    "branch": "codex/rcle",
+    "base_sha": "c58ec2fb49795035ff99f5ba9c60c44083f8d13b",
+    "response_path": "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260914_b13_learned_prior_review/archive/RESPONSE.md",
+    "issue_url": "https://github.com/CartmanFatass/My-paper-code/issues/8"
+  },
+  "scientific_question": "Independently review the newly completed RCLE B13 learned-prior-strength result, its integrity, scientific reading and concrete next development reasoning. You are the direction scientific Reviewer. Portfolio remains the global final direction-level interpreter; DM owns innovation, ordinary bounded experiments, technical acceptance and reports. This is a new actual-result review after the prior E01 counterproposal and full Portfolio CONTINUE, not an approval to launch, an automatic repeat consultation or a lifecycle vote. Identify material findings with exact evidence, consequences and proportionate corrections or claim limits. Read complete mandatory B13 result/intake and the actual Portfolio decision, the adopted contract and relevant source/method passages. A link/title is not proof of access; report actual material accessed and unavailable critical inputs, and request exact missing content rather than inventing it. Treat binary raw archive access as optional unless a concrete unresolved fact requires it; do not imply it was inspected when it was not.\n\nThe fixed new law is softmax(exp(eta)*log(q)+z_theta), exact q=.9*greedy+.1/N, eta0=0 and unchanged zero final score so initial law is q. One real shared FP64 scalar participates in the same full-native-Y score gradient and Adam with the unchanged scorer; no new reward/teacher/clamp/schedule is introduced. B13 uses unscreened seed33, new object/domain, 1,024 updates of64 complete64tick episodes and five512 held-out panels: sampled initialization/final, greedy/nearest, and final combined-law mode. CPU FP64/thread1, own native trajectories, exact committed source, fresh4GiB admission and detached monitoring were retained. Actual counts are65,536 training+2,560 evaluation=68,096 episodes,4,358,144 ticks,2,128 native32 batches,1,024 backward/Adam. All19 source evidence files matched their remote hashes; all checkpoints/curves/panels/identities passed the independently reviewed retained-byte analyzer. Whole native163.92s, nested study156.055563641s, peak1,234,556KiB, exit0. No retry or further scientific exposure; normal completion does not prove B11 SIG11 repaired.\n\nReal eta moved0→0.1922643915495339, prior strength1→1.2119909147637744, displacement7.862306218627657, nine Adam states at1,024 and all1,024 parameter steps nonzero. The runner reports actual evaluation displacement0; the saved final checkpoint precedes evaluation, so it is not independent before/after-checkpoint evidence. The scalar entered learning, but movement itself is no causal explanation or evidence the old prior was a bottleneck. The earlier retained-head range measurement did not establish insufficient range.\n\nSampled primary G_U=+0.07243652343750001 (conditional SE.007893353037147301), D_n=+.15496419270833334 (SE.00909816586827858), D_g=-.019783528645833333 (SE.0036370629650214893). In all8 cell means the sampled package improves U and full-Y over its own initial law and nearest and trails greedy. B10/B12 historical own gains and greedy deficits are preserved, but their train/evaluation roots differ from B13: no eta effect or B13-versus-B12 gain can be identified from that comparison. Conditional intervals concern scenario coordinates of this one fit, not training variance, population superiority or an all-positive requirement. B11 remains164 complete updates with missing final endpoint after unexplained SIG11; its observed160-update progress was only a dated partial observation.\n\nAll512 new modal/greedy rows exactly tie on U/F/tau/40U/directY and all8 failure counts tie. These held-out B13 roots were fixed prospectively, whereas E01 reused previously seen panels; neither proves action/policy/population equivalence or greedy optimality. No action traces exist. Modal D_g=0 and D_n=+.1747477213541667 are separate execution-package observations, not modal-minus-sampled-initialization pure learning. Zero empirical SE is not zero population uncertainty.\n\nKeep the recovery vector: sampled mean tau is better/worse/tied in2/6/0 cells against greedy, while failure-count signs are3/1/4. On primary12→8 ACTIVE_CONTINUATION sampled tau38.9375/fail61 compares with greedy/modal38.75/fail62 of64, so mean recovery and failure count point differently. On8→8 ACTIVE_CONTINUATION sampled38.5/60 compares with modal40/64; on8→8 NEW_EPOCH20.875/31 compares with modal21.640625/33. Mode loses those sampled recovery benefits while service improves. Full-Y is the directly measured complete return, not synthesized from post-event means; no invented service/recovery exchange rate. The .025 local interest scale is not an equivalence margin or validity/lifecycle stop.\n\nThe smallest sufficient evidence class is this finite B/EXPLORE learned-package comparison, not a general causality or deployment proof. DM's actual selection is this one full independent result review and response. No further fit, promotion, PARK/CLOSE or slot release is selected. Critique the strongest continuation and strongest contrary case in the complete intake. Actual learning/local recovery benefits and one-fit uncertainty leave useful family questions possible; the tested extra scalar did not attain a new measured modal increment and sampled service still trails greedy. A completed object, missing successor selection or support estimate is not a scientific reason to close. Conversely, sunk engineering and generic availability of another seed/hyperparameter are not automatic research value.\n\nIf you identify a concrete smallest useful next question, state what competing reading it discriminates and its realistic work factors/claim ceiling. One ordinary fresh B13-style fit would again mean1,024×64 training plus five512 panels/4,358,144 ticks; it tests another complete training+evaluation programme, not an isolated eta cause. A matched fixed-eta comparator could address attribution only with explicit prospective coupling and a new scientific rationale, and is not mandatory merely because causality is currently unclaimed. A changed within-family learning package needs a concrete scientific reason rather than proof of an entirely new mechanism or promised positivity. No diagnostic grid, full-support search, extra confidence seed or mandatory cause proof follows by default. If no next option is compelling, give the scientific reason as advice for the DM's eventual full Portfolio report, not a unilateral direction command.\n\nThe full Portfolio CONTINUE was read/applied before actual launch. Preserve both narrow historical HOLDs and failed/cumulative costs. Native3–8min, support10–20min,1,800s operational watchdog and historical support600s are plans/references with error allowed; they are not launch/Send/escalation/PARK rules. Real owner/platform/resource limits and frozen scientific endpoints remain. Support/provider/lifetime tails are UNKNOWN;605.33s is only the explicitly enumerated sum of B10+B11partial+D1synthetic+B12+E01+B13 native chains, not support/study elapsed/CPU or a budget. Judge proportionate evidence and scientific opportunity under empirical11.8. Do not execute source or add new observations. Return the complete scientific review, with material findings distinguished from optional developments, and address the prior proposed scalar in light of actual evidence.",
+  "deliverable": "Complete conclusion-first independent scientific review in Chinese: actual B13 integrity and learning/greedy/recovery vector, claim ceiling and missingness, response to the prior scalar proposal, material findings with exact source/consequence/correction, and strongest concrete forward alternative or scientific reason it lacks value. Distinguish technical invalidity from optional confidence and direction advice. No source execution, new experiment or lifecycle command. Deliver only the named full RESPONSE.md and its Issue8 delivery comment; when actual GitHub write capability is unavailable, finish this same review with the complete downloadable RESPONSE.md as rendered below.",
+  "claim_ceiling": "One new finite B/EXPLORE learned-package comparison with conditional held-out scenario arithmetic. No training-population superiority, eta causality, policy/action/trajectory equivalence, greedy optimality/headroom, unlearnability, sample efficiency, safety, transfer or C claim. Portfolio owns final direction interpretation; DM responds and executes ordinary work.",
+  "reference_files": [
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B13_LEARNED_PRIOR_SCIENCE_CARD_20260914.md",
+      "commit_sha": "cf4d9bd93ff9eb255800223d95de170b68315ba6",
+      "purpose": "Read full prospective scientific object, initial law, fixed work/coupling/panels and allowed interpretation.",
+      "provenance": "Frozen selected launch card; zero-at-application wording is dated preparation, actual execution is in result evidence."
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B12_FINAL1024_SCIENCE_CARD_20260914.md",
+      "commit_sha": "cf4d9bd93ff9eb255800223d95de170b68315ba6",
+      "purpose": "Read Exact scientific mapping and its named B11 adoption, plus finite execution/accounting limits.",
+      "provenance": "Explicit inherited B13 scientific contract; older DM-final wording is superseded by current Portfolio protocol."
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B11_FINAL1024_REPLICATION_SCIENCE_CARD_20260914.md",
+      "commit_sha": "cf4d9bd93ff9eb255800223d95de170b68315ba6",
+      "purpose": "Read Fixed scientific object, Observable and prospective interpretation, and work-count paragraph: exact native legal information, returns, coupling and baseline definitions inherited by B13.",
+      "provenance": "Inherited frozen method definitions; no B11 retry or budget inheritance."
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B13_LEARNED_PRIOR_RESULT_EVIDENCE_20260914.md",
+      "commit_sha": "c58ec2fb49795035ff99f5ba9c60c44083f8d13b",
+      "purpose": "Read the complete actual result, primary and all40 cell/package rows, recovery/failure distinctions, counts, integrity and costs.",
+      "provenance": "New completed result, not a receipt or a training-population conclusion."
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B13_LEARNED_PRIOR_INTAKE_20260914.md",
+      "commit_sha": "c58ec2fb49795035ff99f5ba9c60c44083f8d13b",
+      "purpose": "Read full DM interpretation, prediction check, strongest contrary evidence and next-development alternatives.",
+      "provenance": "Actual technical intake and finite result-review selection; no lifecycle disposition or additional run."
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/b13_learned_prior_20260914/summary.json",
+      "commit_sha": "c58ec2fb49795035ff99f5ba9c60c44083f8d13b",
+      "purpose": "Inspect runner publication, all primary per-scenario differences, endpoint means, counts and measured scalar.",
+      "provenance": "Accepted local technical or predictive evidence with its stated limits; not a new independent scientific result."
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/b13_learned_prior_20260914/INTAKE_ANALYSIS.json",
+      "commit_sha": "c58ec2fb49795035ff99f5ba9c60c44083f8d13b",
+      "purpose": "Inspect retained-byte crosschecks, scalar/Adam inventory, conditional arithmetic and exact file hashes.",
+      "provenance": "Accepted local technical or predictive evidence with its stated limits; not a new independent scientific result."
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/b13_learned_prior_20260914/VECTOR_DETAILS.json",
+      "commit_sha": "c58ec2fb49795035ff99f5ba9c60c44083f8d13b",
+      "purpose": "Inspect all512 row-equality counts and separate descriptive cell signs for U/Y/tau/failure counts.",
+      "provenance": "Accepted local technical or predictive evidence with its stated limits; not a new independent scientific result."
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/b13_learned_prior_20260914/PREDICTIONS.md",
+      "commit_sha": "c58ec2fb49795035ff99f5ba9c60c44083f8d13b",
+      "purpose": "Read the prospective qualitative predictions without relabeling them calibrated or screening criteria.",
+      "provenance": "Accepted local technical or predictive evidence with its stated limits; not a new independent scientific result."
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/b13_learned_prior_20260914/ENGINEERING.md",
+      "commit_sha": "c58ec2fb49795035ff99f5ba9c60c44083f8d13b",
+      "purpose": "Read bounded code/command/analyzer implementation, independent review and DM technical acceptance.",
+      "provenance": "Accepted local technical or predictive evidence with its stated limits; not a new independent scientific result."
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/b13_learned_prior_20260914/CODE_REVIEW.md",
+      "commit_sha": "c58ec2fb49795035ff99f5ba9c60c44083f8d13b",
+      "purpose": "Read full independent engineering coverage of scalar gradient/Adam/state and actual sampled/modal law.",
+      "provenance": "Accepted local technical or predictive evidence with its stated limits; not a new independent scientific result."
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/b13_learned_prior_20260914/INTAKE_CODE_REVIEW.md",
+      "commit_sha": "c58ec2fb49795035ff99f5ba9c60c44083f8d13b",
+      "purpose": "Read full independent coverage of analyzer counts, conditional contrasts and exact supervisor command.",
+      "provenance": "Accepted local technical or predictive evidence with its stated limits; not a new independent scientific result."
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/b13_learned_prior_20260914/NATIVE_EVIDENCE.tgz",
+      "commit_sha": "c58ec2fb49795035ff99f5ba9c60c44083f8d13b",
+      "purpose": "Optional original19-file archive for a concrete raw-byte question; do not execute the scientific workload. The complete measured vector and explicit checks are in the mandatory result/analysis.",
+      "provenance": "Original remote archive320580bytes, SHA256 efea49fc263d0f5eae74b806e280bcb5d07cfb0b3f2f6692e5ab1a2b2ea2a020; binary evidence, not silently assumed accessed."
+    },
+    {
+      "path": "experiments/candidates/roster_consistent_latent_exploration/joint_quota_phase/policy.py",
+      "commit_sha": "cf4d9bd93ff9eb255800223d95de170b68315ba6",
+      "purpose": "Inspect learned exp(eta)*log(q)+z normalized action, eta0, sampling and combined modal action.",
+      "provenance": "Exact executed source; read only, no model or new scientific execution."
+    },
+    {
+      "path": "experiments/candidates/roster_consistent_latent_exploration/joint_quota_phase/study.py",
+      "commit_sha": "cf4d9bd93ff9eb255800223d95de170b68315ba6",
+      "purpose": "Inspect exact B13 identity/domains, full-Y learning/Adam, own trajectories,5panel publication and evaluation-displacement measurement.",
+      "provenance": "Exact executed source; read only, no model or new scientific execution."
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B12_FINAL1024_INTAKE_20260914.md",
+      "commit_sha": "c58ec2fb49795035ff99f5ba9c60c44083f8d13b",
+      "purpose": "Read B10/B12 sampled benefit/greedy deficits, B11 missingness and the prior full review DM response.",
+      "provenance": "Historical context on different train/evaluation roots, not a matched eta control."
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260914_fixed_modal_e01_review/archive/RESPONSE.md",
+      "commit_sha": "c58ec2fb49795035ff99f5ba9c60c44083f8d13b",
+      "purpose": "Read the prior reviewer conclusion and learned-prior-strength counterproposal, including all qualifications; inspect any other passage needed for this new result.",
+      "provenance": "Full independent prior review preserved; its older DM-final lifecycle wording is superseded by current owner protocol."
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260914_e01_portfolio_direction/archive/RESPONSE.md",
+      "commit_sha": "c58ec2fb49795035ff99f5ba9c60c44083f8d13b",
+      "purpose": "Read the complete actual CONTINUE, B13 scientific rationale, strongest PARK alternative, claim/cost conditions and no-automatic-result-disposition rule.",
+      "provenance": "Exact20895byte final Portfolio answer, not a Transport summary."
+    },
+    {
+      "path": "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260914_e01_portfolio_direction/INTAKE.md",
+      "commit_sha": "c58ec2fb49795035ff99f5ba9c60c44083f8d13b",
+      "purpose": "Read DM full response/conformance, exact format-only archive correction and actual application before native launch.",
+      "provenance": "Actual alignment and execution provenance, not another approval request."
+    },
+    {
+      "path": "docs/project/PORTFOLIO_DECISION_PROTOCOL.md",
+      "commit_sha": "bc4dec35273005676a9939a856b09ed0fcc9fb54",
+      "purpose": "Apply direction Reviewer versus Portfolio final interpretation boundary; ordinary DM experiments are not individually approved.",
+      "provenance": "Current owner protocol, separately pinned from frozen science."
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "commit_sha": "bc4dec35273005676a9939a856b09ed0fcc9fb54",
+      "purpose": "Apply relevant B clauses in11.4, evidence/proportionality11.7-11.10, and interpretation principles7-8. No new exception is requested; B13 contains genuine training.",
+      "provenance": "Current evidence authority; interest scales, diagnostic feasibility and real-versus-planned resource limits retain scope."
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "commit_sha": "bc4dec35273005676a9939a856b09ed0fcc9fb54",
+      "purpose": "Read3-4 and6: real learning, multi-agent coupling, optimization and correct inferential units.",
+      "provenance": "Explanatory scientific foundations, not new proof or confidence requirements."
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+      "commit_sha": "bc4dec35273005676a9939a856b09ed0fcc9fb54",
+      "purpose": "Read the focused empirical interpretation/replication/claim passages needed for a single fitted policy and adaptive method development.",
+      "provenance": "Explanatory knowledge; identify any source actually used without imposing its optional techniques as requirements."
+    }
+  ]
+}

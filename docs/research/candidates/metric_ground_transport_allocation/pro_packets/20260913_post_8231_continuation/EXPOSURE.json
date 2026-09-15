@@ -1,0 +1,62 @@
+{
+  "request_id": "2026-09-13-mgtap-post-8231-continuation-01",
+  "recorded_utc": "2026-09-13T11:04:53.037875+00:00",
+  "current_scope": "One bounded direction question preparation and exact non-Sending Transport handoff; no empirical authorization",
+  "new_scientific_invocations": 0,
+  "new_model_constructions": 0,
+  "new_rng_streams": 0,
+  "new_environment_instances": 0,
+  "new_training_episodes": 0,
+  "new_evaluation_episodes": 0,
+  "new_optimizer_calls": 0,
+  "new_checkpoint_loads": 0,
+  "new_numerical_result_reanalysis": 0,
+  "new_cost_probes": 0,
+  "author_pro_sends": 0,
+  "authored_questions": 1,
+  "empirical_allocation": null,
+  "fresh_master": null,
+  "native_exposure_line": "Current request: zero new learners/transitions/updates/evaluations/checkpoint loads. Historical 8231 had two fresh fits and 1024/1536 nonzero Adam calls; see accepted intake. Future B arithmetic is not an invocation or allocation.",
+  "documentary_complete_invoked_cost": "UNKNOWN; preparation/checking/Git/Issue/Transport/archive/intake/integration once; do not infer old support/complete cap compliance",
+  "historical_8231": {
+    "intake_source_sha": "3910da4687b9732c5520d2528b4a23e5cf4e0e79",
+    "native_seconds": 432.3,
+    "native_caps": "passed 600/900/1500 seconds",
+    "support_900_and_complete_2400_compliance": "UNKNOWN",
+    "old_allowance_reusable": false
+  },
+  "option_R": {
+    "new_algorithm_work": 0
+  },
+  "option_B": {
+    "scope": "proposal only, not selected or funded",
+    "configuration_source": "experiments/candidates/metric_ground_transport_allocation/mgtap_conditional_pooling_b01/study.py",
+    "configuration_sha": "3910da4687b9732c5520d2528b4a23e5cf4e0e79",
+    "independent_learning_units": 1,
+    "fresh_fits": 2,
+    "actors": 5,
+    "horizon": 256,
+    "ppo_epochs_per_rollout": 4,
+    "episodes_per_rollout": 2,
+    "per_arm": {
+      "training_episodes": 512,
+      "final_episodes": 32,
+      "native_team_ticks": 139264,
+      "rollouts": 256,
+      "adam_calls": 1024,
+      "actor_row_uses": 3317760
+    },
+    "pair": {
+      "training_episodes": 1024,
+      "final_episodes": 64,
+      "native_team_ticks": 278528,
+      "rollouts": 512,
+      "adam_calls": 2048,
+      "actor_row_uses": 6635520
+    },
+    "nested_search_dimensions": 0,
+    "future_rates_native_support_complete_cost": "UNKNOWN",
+    "future_numerical_caps": null,
+    "calculation": "per_arm: native=(train+final)*H; rollouts=train/2; Adam=rollouts*4; actor_rows=5*H*(train+final+4*train); pair=2*per_arm"
+  }
+}

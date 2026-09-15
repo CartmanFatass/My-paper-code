@@ -1,0 +1,23 @@
+{
+  "source_sha": "e863914e2c2c071b8dbdd8787f159233245000d5",
+  "command": [
+    "/home/wu/.venvs/hmasd/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "/home/wu/hmasd-worktrees/rcle-b11-e863914e2/temp/directions/roster_consistent_latent_exploration/test/b11-e863914e2-02",
+    "tests/experiments/candidates/roster_consistent_latent_exploration/joint_quota_phase/test_contract.py",
+    "-k",
+    "b10_b11 or four_role_paired_publication"
+  ],
+  "exit_code": 0,
+  "wall_s": 2.3612887860508636,
+  "stdout": "....                                                                     [100%]\n4 passed, 7 deselected in 1.97s\n",
+  "stderr": "",
+  "scientific_exposure": "none; synthetic identity and publication fixtures",
+  "scratch_removed": true,
+  "enclosing_ssh_wall_s": 3.047000000020489
+}

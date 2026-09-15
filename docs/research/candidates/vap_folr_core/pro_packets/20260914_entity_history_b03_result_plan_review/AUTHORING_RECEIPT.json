@@ -1,0 +1,38 @@
+{
+  "event_id": "FOLR_B03_REVIEW_RENDERER_REGISTRATION_DEFECT_20260914",
+  "recorded_at_utc": "2026-09-14T10:02:44.885081+00:00",
+  "attempt": 1,
+  "command_context": "Current C:/Projects/HMASD render_packet.py with --project-root C:/Projects/HMASD and authoring packet output directory",
+  "method_sha": "22dbc8dad2fa3b4971817debff532179e24ef19a",
+  "scientific_input_sha": "6642b5e63d7e9d8dd95f52511c53e7b15f92eb86",
+  "renderer_result": {
+    "valid": false,
+    "error": {
+      "kind": "malformed_input",
+      "message": "direction not registered in PORTFOLIO.md: vap_folr_core",
+      "field": "direction_id"
+    }
+  },
+  "actual_registration": "Live shared registry names this existing DM active/occupied; DIRECTION.md exists. Derived PORTFOLIO report uses a Markdown link first cell, while renderer expects a bare direction ID.",
+  "task_created": false,
+  "handoff_created": false,
+  "provider_send_count": 0,
+  "scientific_effect": "None; actual B03 endpoints remain complete; no PARK or authority gap.",
+  "root_action": "Shared renderer correction requested directly from Root01a095b7-850f-7401-ad4e-5e4320d285f1; DM continues collection/integration/cleanup.",
+  "next_action": "Once current renderer is corrected, render this unsent same request, inspect full TASK, publish/bind and dispatch once.",
+  "recovery": {
+    "root_fix_sha": "a1c6a0e7f7366df6c42880df8813784dfd3d4e55",
+    "root_report": "Canonical shared registry map replaces derived-report table syntax when registry exists; DIRECTION.md remains required; three focused regression cases passed.",
+    "rendered_at_utc": "2026-09-14T10:04:52.167361+00:00",
+    "render_result": {
+      "files": [
+        "TASK.md",
+        "HANDOFF.json"
+      ],
+      "dispatch_required": false,
+      "dispatch_state": "TASK_NOT_PUBLISHED"
+    },
+    "scientific_request_changed": false,
+    "provider_send_count": 0
+  }
+}

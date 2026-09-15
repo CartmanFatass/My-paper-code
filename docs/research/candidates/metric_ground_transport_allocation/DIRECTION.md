@@ -1,16 +1,250 @@
 # Direction metric_ground_transport_allocation: metric ground transport allocation
 
+## Current disposition — Portfolio PARKED/MEDIUM, 2026-09-14
+
+The complete175-line Portfolio responsec7f572df84640540a9da0229bcac405b380217fb selects reversible whole-direction PARK/MEDIUM and zero new numerical work. [Full DM conformance/application](../../portfolio/pro_packets/20260914_mgtap_post_late512_direction/INTAKE.md) preserves optional mean-COND, DENSE default, every signed result and historical C/family conclusions. This is a present marginal-investment judgment after the adverse fixed256 recurrence and the separately exercised late512 opportunity, not stable inferiority, equivalence, a causal mechanism conclusion or a seed quota. The prior useful8252 and8214 observations remain the strongest contrary support. [PARK knowledge](PARK.md) and [closeout handoff](MGTAP_RESUME_CLOSEOUT_HANDOFF_20260914.md) preserve recovery and limits.
+
+A fresh independent fixed1e-4/512 final-only pair remains a legitimate next discriminator if owner/Portfolio valuation of optional512 development changes; it is declined now, not permanently disqualified. Reopening needs no favorable pilot, new architecture, exact headroom or mechanism certificate. No new producer is commissioned to manufacture a revisit trigger.
+
+## Result behind this disposition — fixed-rate later exposure inside MEI, 2026-09-14
+
+The owner explicitly resumed the direction through the restored native DM. At that resume boundary the accepted position was optional mean-COND within CONTINUE, with DENSE default: fixed1e-4/256 has one useful positive8252 and one similarly sized adverse8253, not a stable ordering. All prior evidence and the complete review below remain; the later Portfolio disposition above changes future investment.
+
+The selected [late-exposure B01](MGTAP_LATE_EXPOSURE_B01_SCIENCE_CARD_20260914.md) completed: fresh8254 final512 COND−DENSE=-0.005375013231600323 J, conditional world SE0.004649366246290445, INSIDE_MEI. The256 difference was+0.008370279359008794; both arms improved on the same training path, but DENSE improved more. This supplies no useful late relative advantage on that path, not equivalence, a dose mechanism or stable ordering. [Full intake](MGTAP_LATE_EXPOSURE_B01_INTAKE_20260914.md) preserves every sign, real learning and the strongest prior support8252 versus contradiction8253. The complete199-line reviewde3b1fbcc found no primary-changing defect and chose no immediate extension of this exposure exploration; [full DM response](pro_packets/20260914_late512_results_review/INTAKE.md) applies that bounded choice. A fresh independent final512-only pair remains a legitimate discriminator if its investment value is selected later; neither mechanism attribution nor tuned headroom is a gate. That review itself applied no whole-direction PARK/CLOSE, default promotion, C reopening or capacity disposition; scientific CONTINUE was retained until the separate Portfolio synthesis recorded above.
+
+## Historical owner-pause boundary after complete current-object closeout, 2026-09-14
+
+The selected fixed1e-4 fresh8253 recurrence is now complete: COND−DENSE
+-0.025924927546066238 J, conditional world SE0.002797864052725455,
+2positive/30negative worlds, **COND_ADVERSE**. Both real fits completed with
+finite movement and the frozen147456ticks/1024Adam; full-command wall178.86s.
+[Complete8253 intake](MGTAP_FIXED_LR_B01_INTAKE_20260914.md) preserves the favorable
+8252 and all earlier contrary history. This one fixed-configuration realization
+did not reproduce8252's favorable contrast; it does not establish stable inferiority
+or retrospectively confirm a two-seed study. DENSE stays default. The complete
+181-line independent review494dbefe004bfa4b52017dc2ba903f4eff30204c found no
+primary-changing defect. Its [full DM intake](pro_packets/20260914_fixed_lr_results_review/INTAKE.md)
+applies local-non-recurrence and no-mechanism-admission-gate qualifications, retaining
+the strongest cheap fixed-pair alternative and value-based stopping preference for
+future deliberation. No recommendation is converted into scientific PARK.
+Native execution/observation, full review/archive and both remote cleanup obligations
+are complete. Under OWNER_PAUSE_AFTER_INFLIGHT_20260914, MGTAP is now operationally
+owner-paused with no live native/provider obligation. Scientific Portfolio CONTINUE,
+default and occupied slot remain unchanged. No successor, new consultation or task
+archival follows. [Final handoff](MGTAP_OWNER_PAUSE_HANDOFF_20260914.md) names source,
+evidence, limitations and first recovery action after explicit owner resume.
+
+The preceding Portfolio application and its preparation boundary follow as history:
+
+MGTAP-LR-SELECTION-B01 completed at source2d351d48604396ce478aa900584bd24b3255def5.
+Both arms independently selected1e-4; the fresh8252 final pair yielded
+COND−DENSE+0.023704897713093642 J, conditional paired-world SE0.004197354694630503,
+so the frozen MEI0.01 rule reads COND_ABOVE_MEI. All8 fits and their original artifacts
+passed collection/recomputation; full-command wall658.02s. This remains one selected
+programme and one final training pair, not stable superiority or causal tuning gain.
+
+The [complete new intake](MGTAP_LR_SELECTION_B01_INTAKE_20260914.md) retains all signed
+prior evidence, inference/cost limits and the strongest PARK alternative. DM accepts the
+bounded observation and has read the complete actual-results scientific review at
+68144bc0123397fbdc5184fcc4e86055c05c20d8; its [DM intake](pro_packets/20260914_lr_selection_results_review/INTAKE.md)
+records no result-changing finding and the substantive recurrence-versus-PARK comparison.
+The complete18,522-byte [Portfolio answer](pro_packets/20260914_lr_selection_portfolio_direction/archive/RESPONSE.md)
+is now archived and read. DM applies CONTINUE under PRO_FINAL / OWNER_DELEGATED;
+the [full intake](pro_packets/20260914_lr_selection_portfolio_direction/INTAKE.md)
+responds to its reasoning, preserves the actual title-only input-delivery defect
+and records the next objective: one fresh fixed-selected-LR1e-4 pair at256/32/H256.
+This is not another eight-fit selector or lower-grid expansion. The selected
+[MGTAP-FIXED-LR-B01 card](MGTAP_FIXED_LR_B01_SCIENCE_CARD_20260914.md) now fixes
+unscreened master8253 and a fresh two-fit entry, with no checkpoint transfer.
+Its [engineering record](fixed_lr_b01_8253/ENGINEERING.md) records implementation,
+focused checks and independent review; no native successor has launched at this
+preparation boundary. MGTAP retains its existing occupied slot and
+DENSE remains the generic default; adaptive selection history and contrary validation
+are explicit, without a stable-ranking or tuning-causality claim.
+
+Clerk retirement/handoff is complete. At the earlier MGTAP Portfolio release boundary
+the then-current three original peers were occupied; MGTAP released the conversation
+and directly notified RCLE. That is a historical handoff, not current dialogue ownership.
+RCLE subsequently parked and its completed vacancy transaction admitted ACVC; current
+capacity/routes/other directions' actual work live in the shared registry. No legacy
+MGTAP-owned vacancy transaction or FOLR replacement is reopened by this new object.
+
+## Historical reentry decision — CONTINUE, 2026-09-14
+
+DM explicitly accepts the existing single LCAC-vacancy reservation and resumes
+direction-local implementation as **CONTINUE**. The first selected object is
+[MGTAP-LR-SELECTION-B01](MGTAP_LR_SELECTION_B01_SCIENCE_CARD_20260914.md): equal
+three-candidate LR selection for both legal-information arms, followed by one
+fresh selected-program holdout pair. The executable selection/holdout contract
+and workload calculation have been implemented and tested; no native study has
+launched. This is actual implementation work, not a request for another dispatch.
+
+[DM reentry intake](reentry_20260914/DM_REENTRY_INTAKE.md) answers both full
+user-delivered Portfolio texts and preserves the strongest continued-PARK case.
+[The integration event](reentry_20260914/EVENT.json) asked the then-live Clerk to convert
+the same reservation into occupancy, changing only MGTAP (+1 occupied/-1 reserved).
+The initial2→3 totals were a planning snapshot, not an instruction to overwrite
+other directions' newer lifecycle decisions. The later live registry shows MGTAP
+occupied and FOLR PARK; [the update](reentry_20260914/CAPACITY_AND_TRANSPORT_UPDATE.md)
+preserves that distinction. No fourth direction is created.
+No new Portfolio request, old experiment restart or parallel DM is selected.
+
+The current peer-DM role supersedes that historical Clerk route; accepted integration
+belongs to this DM under the shared main transaction protocol. The complete native
+runner is now assigned to a bounded Sol/medium Implementer, while DM owns independent
+scientific review and the explicitly assigned legacy handoff. The separate FOLR
+owner-reconciliation reservation is not a MGTAP scientific dependency.
+
+DENSE remains the generic default; no new empirical advantage is claimed.
+The native runner, proportionate independent review, actual admission, launch
+and intake are this DM's next direction-local work, not scientific approval waits.
+
+## Historical DM decision — reversible PARK, 2026-09-13
+
+DM has completed the actual-result independent scientific review and selects
+**PARK** under current full-lifecycle delegation. No numerical successor or
+third unchanged early256 pair is selected. Both8241+0.015128847632690413 J and
+8242−0.05684388886006531 J remain valid local B/EXPLORE observations. This is a
+development-value judgment, not stable inferiority, a fixed-two-seed rule,
+an owner pause or a Pro/Root/Clerk approval decision.
+
+The full122-line review47699fcad found no material defect requiring result
+reclassification, recomputation or another experiment. DM accepts its material
+clarification: another pair is declined for insufficient current marginal
+development value, not because it cannot establish mechanism or population
+ordering. A meaningful future recurrence-sensitive decision can make the same
+unchanged comparison worth reopening; no new architecture or customer is required.
+
+[Full review and DM response](pro_packets/20260913_early256_results_review/INTAKE.md)
+and [Chinese PARK knowledge handoff](PARK.md) preserve evidence, contrary findings,
+assets, limitations, costs and reopening conditions. Runs and native Transport
+are complete; there is no pending producer. Archive/source recovery is preserved,
+remote duplicates removed and policy-rejected local duplicates retained. DM sends
+the committed handoff to the live Clerk before ending. Clerk archival is a
+subsequent mechanical action, not claimed as already complete here.
+
+Sections below preserve historical stages and decisions; neither their old
+CONTINUE/ACTIVE wording nor this historical PARK supersedes the current reentry.
+
 ## Research organization — 2026-09-04
 
 This source belongs to route **N5 — 配置结构与 FREE**, in the **资源配置与几何** family
 of **灵活 agent 数量**. Sources in the same route share one agenda with named subdirections;
 this does not establish scientific equivalence or pool result polarity.
 See [owner-adopted map and resume](../../portfolio/decisions/2026-09-04-adopt-nine-routes-and-resume.md).
-Current lifecycle and sequencing are held only in `docs/research/portfolio/PORTFOLIO.md`;
-older lifecycle/execution statements below are historical. Existing cards, technical quarantines,
-second-recast counts and stopped object-family boundaries remain unchanged.
+Current direction lifecycle/research decisions belong to this DM and are recorded
+here and in the current card/intake. Portfolio reports them, not approves them.
+Cross-direction layout/resource adjustments require an explicit owner instruction.
+Historical evidence remains unchanged; previous authority wording below is not
+a current dispatch route or Portfolio approval requirement.
 
 This authority preserves the direction's source-grounded scientific question, evidence references, and provenance.
+
+## DM CONTINUE and early-exposure B — 2026-09-13
+
+Under current AGENTS section2 at main4dfdb5f8f, this DM selects **CONTINUE
+ACTIVE/MEDIUM** through one ordinary mean-COND256/DENSE256 B/EXPLORE, master8241.
+It tests new common early-learning exposure within the eligible mechanism.
+DENSE stays generic default. No sibling allocation, resource commitment,
+old-grant reuse or automatic successor is selected.
+
+The strongest alternative is reversible PARK: historical equal-exposure instances
+have mixed signs, TOP and unequal-exposure8231 are adverse, and another local
+point may not justify weak-result chasing. The concrete256/256 question uses
+modest native work and informs this DM's next useful object or lifecycle decision;
+no external customer is claimed. Completed outcome-informed A/RECON describes
+the three existing pair means: +0.0025899556319951833 J, sample
+SD0.02363397187880618 J. It adds no independent fit, replaces no primary and
+does not establish a population/stable effect.
+
+Convergence remains independent scientific Reviewer of design, evidence,
+conclusions and successor plans. DM reads the full review, responds to findings,
+corrects concrete defects or limits claims, then makes the direction decision.
+This is neither optional generic advice nor funding/lifecycle approval. New
+requests use the main renderer/Transport marker dm_owned_scientific_review;
+accepted/uncertain requests keep exact bytes/routes. No automatic Portfolio
+question is sent; the unsent proposal is now report input. Clerk records the
+actual decision without an ACK gate.
+
+The [management intake](MGTAP_POST_8231_MANAGEMENT_20260913.md) records options,
+contrary evidence and costs. The [card](MGTAP_EARLY_EXPOSURE_B01_SCIENCE_CARD_20260913.md)
+fixes two256-episode fits,32 final worlds per arm, MEI0.01 J and new caps450s/arm,
+900s native,2700s support,3600s complete. The sole pair is now complete and
+technically accepted: COND meanJ0.05611652551644544, DENSE0.040987677883755035,
+Delta+0.015128847632690413 J (COND_ABOVE_MEI), conditional SE0.004195093455269184.
+Complete native188.19s passes the450/450/900s limits; support/complete compliance
+is UNKNOWN with unmeasured tails. This is one realized early-exposure pair,
+not stable superiority or a curve. [E0](MGTAP_EARLY_EXPOSURE_B01_RESULT_20260913.md)
+and [intake](MGTAP_EARLY_EXPOSURE_B01_INTAKE_20260913.md) preserve all outcomes,
+Monitor's corrected premature observation, archive and complete independent
+design/next-plan review (no material design defect; full DM response recorded).
+DM's candidate next action is one further independent
+256/256 instance, not yet a selected card/seed or automatic successor.
+
+All dated sections below retain historical results and then-current dispositions,
+not current approval requirements. Frozen objects/results remain unchanged;
+any later family/lifecycle revision is a prospective DM decision.
+
+## Historical unchanged proposal declined; mean-COND eligibility retained — 2026-09-13
+
+Post-8231 Convergence selects reversible preparation option R: retain mean-COND's
+scientific eligibility and DENSE default, but do not prepare another unchanged
+equal-exposure empirical proposal now. This does not park, close or recast the family
+or direction, and creates no successor, master, numerical allowance or experiment.
+
+The accepted reason is the current proposal's underdefined additional development
+consequence, not proof that replication has no information value. Another independent
+pair could inform recurrence despite all three result signs already having occurred.
+Mean8214 +.02447811898058116 J remains the strongest support; equal-exposure8213
+−.02246957345594415 and the separate unequal-exposure8231 adverse use result remain
+contrary evidence. No pooled result, causal account or stable ordering follows.
+
+The next discriminator is a concrete same-host development decision limited to512
+episodes per fit where fresh useful COND evidence would enable a specified non-default
+development commitment. This is an illustrative revisit fact, not an observed workload,
+mandatory qualification or funded activity. Native headroom and complete future costs
+remain unknown; neither becomes a prerequisite. Legal DENSE processing, finite learning,
+partner co-adaptation and trajectory-dependent usefulness remain live alternatives.
+
+[Complete Pro response](pro_packets/20260913_post_8231_continuation/archive/RESPONSE.md),
+[full DM intake and limits](pro_packets/20260913_post_8231_continuation/INTAKE.md).
+
+## Unequal-exposure COND512/DENSE768 adverse use result — 2026-09-13
+
+The selected and funded sole master8231 pair is complete and valid: COND512 mean
+native J0.16574499572521276 versus intact-DENSE768 J0.19507936796417658;
+**COND−DENSE −0.02933437223896382 J**, conditional SE0.009856726660478026,
+7 positive/25 adverse final worlds. The card's below−.01 branch is adverse for
+this exact procedure choice. Both real fits and all32 endpoints completed;
+DENSE remains default and MGTAP remains ACTIVE/MEDIUM.
+
+This question compares two expressly unequal-exposure learning procedures.
+The result supplies no beyond-MEI support for optional COND development in this
+realized pair. It does not identify the effect of extra DENSE training, a query
+mechanism, optimal training length, equal-time performance or stable superiority/
+inferiority. The32 worlds condition on one trained pair, not32 independent fits.
+
+Prior equal-exposure mean-COND8214+.02447811898058116J remains the strongest
+conditional-pooling support;8213−.02246957345594415 contradicts consistent benefit,
+and8212+.005761321371348559 was inside MEI. The new8231 result is the direct
+adverse evidence for the unequal-exposure use procedure. TOP8221−.0684509798102144
+is a separate query package. These observations are not pooled or relabelled.
+Finite training variation, partner co-adaptation, trajectory-dependent usefulness
+and competent generic learning remain alternatives. Tuned same-information
+native headroom remains absent; no new mechanism explanation is asserted.
+
+The exact pair completed344064 native ticks/2560Adam in432.30s; its native
+600/900/1500s caps pass. Support900/complete2400s compliance remains UNKNOWN with
+unmeasured tails included in scope. This allocation ends without an extra fit,
+master, panel or automatic successor. The next scientific discriminator requires
+a newly selected bounded direction question; this intake creates no new run or
+Portfolio lifecycle choice. Preserve the ACTIVE slot while the evidence is
+integrated and duplicate retention/cleanup closes.
+
+[Card](MGTAP_UNEQUAL_EXPOSURE_B01_SCIENCE_CARD_20260913.md),
+[complete E0](MGTAP_UNEQUAL_EXPOSURE_B01_RESULT_20260913.md),
+[DM intake](MGTAP_UNEQUAL_EXPOSURE_B01_INTAKE_20260913.md),
+[funding and conforming amendment](pro_packets/20260912_cond512_dense768_use/PORTFOLIO_INTAKE_20260913.md).
 
 ## TOP single-partner query fresh8221 adverse result — 2026-09-12
 

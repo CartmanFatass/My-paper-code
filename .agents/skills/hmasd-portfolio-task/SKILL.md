@@ -1,20 +1,25 @@
 ---
 name: hmasd-portfolio-task
-description: Use when the DM designated by Root prepares Portfolio Pro decision materials, checks the complete Portfolio response, or maps its conforming decision to execution.
+description: Use when DM prepares or intakes direction-related Portfolio decisions, or Root requests and intakes a new direction to fill a formally vacated slot in the three-direction working set.
 ---
 
 # HMASD Portfolio materials and Pro intake
 
-Portfolio is the existing `portfolio:cross_direction` Pro node. Root is the execution coordinator;
-it chooses a relevant recently active DM as author and response checker. The DM supplies science
-and recommendations but does not replace Pro's final decision. ROOT_OPERATIONS.md maintains this
+Portfolio is the existing `portfolio:cross_direction` Pro node. DM authors and intakes ordinary
+direction-related questions. Root authors and intakes only vacancy replacement after a formal
+direction pause/closure leaves fewer than three occupied slots. Pro selects the new direction and
+bounded investment; Root creates its DM from the complete conforming decision. ROOT_OPERATIONS.md maintains this
 responsibility split. Existing Direction Pro nodes remain separate.
 
 ## Ground the question
 
 Start with the assigned question and current affected Portfolio rows/intakes. Read only relevant
 sections of `docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md`: §8.1 maintains Portfolio principles,
-§7 lifecycle meanings and §§11.7–11.10 investment/evidence calibration. AGENTS §§2,4.7–4.8 maintain
+§7 lifecycle meanings and §§11.7–11.11 investment/evidence calibration. For a new design or
+investment question, §11.11 and `docs/research/portfolio/TWO_AXIS_RESEARCH_PROGRAMME_20260914.md`
+prioritise matched competent baselines, independent training replication and identifying
+ablations. They do not reopen a frozen object, grant a launch/budget, impose a universal
+pilot/power/sample-size/estimator gate or retroactively rescore existing evidence. AGENTS §§2,4.7–4.8 maintain
 final authority, specification changes and asynchronous owner overrides. Use scientific-tools for
 scientific reading or analysis, not for mechanical routing.
 
@@ -31,7 +36,12 @@ reading list. Ask Pro to state its choice, decisive reasons, uncertainty, revisi
 bounded consequences. Historical experience informs judgment but cannot silently amend a spec.
 If a rule change is necessary, name the rule, necessity and scope for the proper node.
 
-A relevant DM authors one cross-direction packet; other DMs may supply their direction facts.
+A relevant DM authors a scientific cross-direction packet; other DMs may supply direction facts.
+For vacancy replacement, Root instead assembles the final DM disposition/evidence, remaining
+occupied/reserved slots, current priorities and resource constraints, and asks Pro to select the
+next new direction and bounded initial assignment. Cite DM scientific facts without inventing
+local scientific recommendations. Reuse a pending replacement request; no request per timeout,
+object completion or temporary blocker. Existing overlap above three drains without forced stops.
 Root can request missing facts but does not rewrite scientific content. If the author becomes
 unavailable, Root explicitly transfers the remaining scope and evidence to another relevant DM.
 
@@ -44,11 +54,14 @@ sections and only needed experience/card/evidence references at their exact publ
 Include the machine-generated exposure line (zero new exposure when appropriate) and any required
 per-arm projection; no consultation-only exposure experiment is needed.
 
-Reuse `portfolio:cross_direction` and the existing Transport endpoint. The new request's source is
-the actual DM author, parent is the existing Root task, operator is Transport. Root dispatches the
-committed exact handoff, Transport returns its factual receipt only to Root, and Root forwards the
-complete response to the designated DM using `followup_task`. Preserve in-flight identities and
-accepted bytes; an author transfer or missing receipt does not authorize another Send.
+Reuse `portfolio:cross_direction`. Source and parent are the actual author (DM, or Root for
+vacancy replacement); operator is that author's reusable native Luna/high Agentify Transport
+child. The author dispatches the exact committed handoff, waits natively, receives the full
+archive and performs conformance intake. Root integrates a DM's resulting operational mapping;
+for its own replacement request it records and applies the complete Pro decision directly.
+Serialize the shared portfolio:cross_direction binding; do not overlap another accepted request.
+An existing accepted packet retains its original binding through observation-only recovery.
+
 
 ## Read the complete response and return an application mapping
 
@@ -65,7 +78,7 @@ do not create a replacement Portfolio question solely to escape an operational b
 
 For a complete conforming decision, record the actual choice, reasons, limits, opposing evidence
 and affected direction/actions in the existing Portfolio decision record. Return that record and
-an execution mapping to Root. Pro is final under AGENTS §4.8; Root applies and integrates without
+an execution mapping to Root, or apply it directly when Root owns the vacancy question. Pro is final under AGENTS §4.8; Root applies and integrates without
 waiting for per-item owner ratify. Root does not rewrite scientific conclusions during integration.
 A specification change follows AGENTS §4.7 and does not itself accept code or launch an experiment.
 

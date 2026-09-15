@@ -1,0 +1,111 @@
+{
+  "id": "20260914-rcle-003",
+  "created": "2026-09-14T03:10:26-07:00",
+  "direction": "roster_consistent_latent_exploration",
+  "tier": "direction",
+  "kind": "decision",
+  "title": "RCLE B13后方向建议：可逆PARK与新独立实例的取舍",
+  "context": "B13实际完成且全文独立审查未发现失效缺陷。先验强度真实学习，但sampled仍落后greedy、modal新面板全部已测结局相同，恢复取舍保留。DM倾向可逆PARK，强反方案是一个同法则新独立完整实例；提交Portfolio决定，未应用PARK或释放席位。",
+  "options": [
+    {
+      "key": "a",
+      "label": "可逆PARK（待Portfolio裁决）",
+      "consequence": "若Portfolio选择，保全知识及当前证据后暂缓开发并处理真实空缺；当前尚未执行。"
+    },
+    {
+      "key": "b",
+      "label": "CONTINUE一个新独立实例（待裁决）",
+      "consequence": "若Portfolio选择，DM完成一个有限新对象的实际设计、工程、执行及intake，不再索要启动批准。"
+    }
+  ],
+  "recommended": "a",
+  "auto_applied": "a",
+  "dm_reason": "此前最明确的未测学习自由度已获真实检验仍无本次greedy增量，削弱续做同配方的边际理由；单实例不确定性使一次新实例成为接近的反方案。",
+  "evidence": [
+    "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260914_post_b13_portfolio_direction/REPORT.md",
+    "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260914_b13_learned_prior_review/archive/RESPONSE.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-14.md#L27",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "B13完整结果与全文独立审阅后，RCLE应可逆PARK，还是继续一个同法则新独立完整实例？这是待Portfolio裁决的DM方向建议，不要求owner同步批准。",
+    "changes_if_approved": [
+      {
+        "target": "RCLE direction and occupied slot",
+        "from": "已应用CONTINUE；B13与完整审阅已完成，仍占用1席",
+        "to": "仅在Portfolio完整合规裁决后应用其选择；DM当前推荐可逆PARK，尚未应用"
+      }
+    ],
+    "if_refused": "按Portfolio的CONTINUE或更有理由的具体合规目标完成实际工程/实验/intake；不因审阅建议、旧support或本轮结束自行PARK。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260914_post_b13_portfolio_direction/REPORT.md",
+        "quote": "这次需要解释的是新增科学事实后的边际研究价值。",
+        "why": "最清楚的先前未测学习自由度已实际优化，仍无本实例sampled或modal greedy增量；这改变了继续该配方的开发理由。"
+      },
+      {
+        "path": "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260914_b13_learned_prior_review/archive/RESPONSE.md",
+        "quote": "先前提出的可学习先验强度已经得到真实检验，但这次没有取得其所寻求的 greedy 增量服务。",
+        "why": "完整独立审阅认可实际检验，并反对把参数变化重命名为效力成功；未将结果否定为无效。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260914_post_b13_portfolio_direction/REPORT.md",
+        "quote": "旧固定先验 B10/B12 不能代替新法则的重复。",
+        "why": "新法则只有一个fit，一个未筛选新训练/评价实例可能改变是否保留该学习程序的选择。"
+      }
+    ],
+    "uncertainty": [
+      "一个新实例仍可能得到增量或不同服务/恢复取舍；不能宣称总体无效。",
+      "B11端点缺失、SIG11原因未知；其他成功未证明修复。",
+      "新实验和支持/提供方/寿命完整成本UNKNOWN；不会把UNKNOWN或600s参考当停止理由。",
+      "MGTAP拥有前序共享Portfolio请求；RCLE在实际释放后才发送新报告，期间席位保留。"
+    ],
+    "cost": {
+      "compute": "反方案1fit/65536train+2560eval/4358144ticks/1024Adam；尚未选择。B13实测163.92s；六条具名native链和605.33s不是support总价。",
+      "owner_time": "无需同步回复；供异步介入，完整方向判断由Portfolio承担。",
+      "reversibility": "reversible",
+      "waits_on_this": "方向去留待Portfolio完整裁决，不等owner批改或Root ACK。"
+    },
+    "verdict_text": "DM 建议 **可逆 PARK 当前 RCLE 开发投入**，最强反方案是 **CONTINUE：一个新的、同法则的完整独立训练及评价实例**。",
+    "source": "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260914_post_b13_portfolio_direction/REPORT.md"
+  },
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-14T10:12:38+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "C:/Projects/HMASD/docs/project/PORTFOLIO_DECISION_PROTOCOL.md",
+      "record": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_B13_LEARNED_PRIOR_INTAKE_20260914.md",
+      "state": "planned",
+      "summary": "OWNER_DIRECT只指当前Portfolio报告/方向裁决流程授权，不冒称owner选择PARK。B13全文独立审阅已读并回应；可逆PARK只是DM建议，保留新独立实例反方案，待前序MGTAP会话释放后提交。无PARK/CLOSE应用、槽位释放或新fit。"
+    },
+    {
+      "at": "2026-09-14T10:21:53+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "docs/project/PORTFOLIO_DECISION_PROTOCOL.md",
+      "record": "docs/research/portfolio/audit/2026-09-14.md#L54",
+      "state": "planned",
+      "summary": "Main integration from 998c4dbde11727b2ed26ced1bebaddc60b164c43; original source ledger locator retained, appended main ledger row is 54. Recommendation only; current Portfolio CONTINUE and occupied slot preserved; no PARK/CLOSE/new fit applied."
+    },
+    {
+      "at": "2026-09-14T11:27:28+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260914_post_b13_portfolio_direction/archive/RESPONSE.md",
+      "record": "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260914_post_b13_portfolio_direction/INTAKE.md",
+      "state": "applied",
+      "summary": "完整151行Portfolio答复与原始捕获一致；DM全文回应并应用可逆PARK，保留同法则新实例作为接近的反方案。不CLOSE/RECAST/新增fit；本次知识保全后按真实主分支事务释放一席并由RCLE负责空缺接续。前次CONTINUE与B13实测仍有效，600s仅为参考。"
+    },
+    {
+      "at": "2026-09-14T11:32:27+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/roster_consistent_latent_exploration/pro_packets/20260914_post_b13_portfolio_direction/archive/RESPONSE.md",
+      "record": "docs/research/portfolio/audit/2026-09-14.md#L56",
+      "state": "applied",
+      "summary": "Full Portfolio PARK/intake and raw evidence integrated. This actual main transaction releases only RCLE:2occupied/0reserved/1vacant; originalRCLE owns one pending vacancy request, no replacement chosen. Source decision/owner history preserved."
+    }
+  ]
+}

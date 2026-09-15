@@ -1,0 +1,57 @@
+{
+  "current_task": "Root-owned new read-only next-use readiness, separate from closed T",
+  "current_scientific_invocations": 0,
+  "current_model_constructions": 0,
+  "new_pro_requests": 0,
+  "new_data_analysis": 0,
+  "recommended_future_purchase": "One bounded original-node use/design question and its intake only; no training or evaluation",
+  "future_question_native_cost_seconds": 0,
+  "future_question_complete_invoked_cost": "UNKNOWN; new authoring/Transport/archive/intake/Root integration charged once",
+  "not_selected_numerical_example": {
+    "purpose": "Intentional COND512 versus intact DENSE768 use-of-training comparison, not equal-budget comparison, no unchanged repeat",
+    "arms": {
+      "COND512": {
+        "train_episodes": 512,
+        "final_episodes": 32,
+        "train_team_ticks": 131072,
+        "final_team_ticks": 8192,
+        "rollouts": 256,
+        "adam_calls": 1024,
+        "actor_row_uses": 3317760,
+        "train_reset_offsets": [
+          1000,
+          1511
+        ],
+        "final_reset_offsets": [
+          2000,
+          2031
+        ]
+      },
+      "DENSE768": {
+        "train_episodes": 768,
+        "final_episodes": 32,
+        "train_team_ticks": 196608,
+        "final_team_ticks": 8192,
+        "rollouts": 384,
+        "adam_calls": 1536,
+        "actor_row_uses": 4956160,
+        "train_reset_offsets": [
+          1000,
+          1767
+        ],
+        "final_reset_offsets": [
+          2000,
+          2031
+        ]
+      }
+    },
+    "pair": {
+      "episodes": 1344,
+      "team_ticks": 344064,
+      "adam_calls": 2560,
+      "actor_row_uses": 8273920
+    },
+    "numerical_native_support_complete_costs": "UNKNOWN; no models, pilot, per-step rate or numerical budget inferred",
+    "fresh_master": "unassigned"
+  }
+}

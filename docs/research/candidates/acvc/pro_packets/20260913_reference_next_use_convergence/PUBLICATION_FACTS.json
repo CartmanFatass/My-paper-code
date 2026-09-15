@@ -1,0 +1,98 @@
+{
+  "checked_utc": "2026-09-13T18:55:35.168834+00:00",
+  "input_sha": "3d0921ee071a2e21ea32250d9dac7b971547b17e",
+  "reference_count": 17,
+  "source_mappings": [
+    {
+      "path": "docs/research/candidates/acvc/pro_packets/20260913_reference_next_use_convergence/QUESTION.md",
+      "commit_sha": "3d0921ee071a2e21ea32250d9dac7b971547b17e",
+      "published_ref_witness": "refs/remotes/origin/codex/acvc"
+    },
+    {
+      "path": "docs/research/candidates/acvc/pro_packets/20260913_reference_next_use_convergence/FACTS.json",
+      "commit_sha": "3d0921ee071a2e21ea32250d9dac7b971547b17e",
+      "published_ref_witness": "refs/remotes/origin/codex/acvc"
+    },
+    {
+      "path": "docs/research/candidates/acvc/pro_packets/20260912_post_cluster_use_convergence/archive/RESPONSE.md",
+      "commit_sha": "d9a1426af03c42bdcbb8e4f84413f94493a58ebf",
+      "published_ref_witness": "refs/remotes/origin/codex/acvc"
+    },
+    {
+      "path": "docs/research/candidates/acvc/pro_packets/20260912_post_cluster_use_convergence/INTAKE.md",
+      "commit_sha": "fd15777ad6002a205795c572ca5e6319dab1a392",
+      "published_ref_witness": "refs/remotes/origin/codex/acvc"
+    },
+    {
+      "path": "docs/research/candidates/acvc/DIRECTION.md",
+      "commit_sha": "fd15777ad6002a205795c572ca5e6319dab1a392",
+      "published_ref_witness": "refs/remotes/origin/codex/acvc"
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_CLUSTER_DEPLOYMENT_B01_SCIENCE_CARD_20260912.md",
+      "commit_sha": "f569a80bc28bb9c679884da36824613652b414f0",
+      "published_ref_witness": "refs/remotes/origin/codex/acvc"
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_CLUSTER_DEPLOYMENT_B01_RESULT_EVIDENCE_20260912.md",
+      "commit_sha": "f569a80bc28bb9c679884da36824613652b414f0",
+      "published_ref_witness": "refs/remotes/origin/codex/acvc"
+    },
+    {
+      "path": "docs/research/candidates/acvc/evidence/cluster_deployment_b01_20260912/summary.json",
+      "commit_sha": "f569a80bc28bb9c679884da36824613652b414f0",
+      "published_ref_witness": "refs/remotes/origin/codex/acvc"
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_CLUSTER_DEPLOYMENT_B01_EXECUTION_FACTS_20260912.json",
+      "commit_sha": "d8bb4b2b049f87989cb138181b598e9ada496a22",
+      "published_ref_witness": "refs/remotes/origin/codex/acvc"
+    },
+    {
+      "path": "experiments/candidates/acvc/native_link_loss_b01/binding.py",
+      "commit_sha": "e06b3d63f7e9f77c13fd327dba0270d80e74d819",
+      "published_ref_witness": "refs/remotes/origin/codex/acvc"
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "commit_sha": "a5f146f5a086f50da8c53386f9ee821ef82401c5",
+      "published_ref_witness": "refs/remotes/origin/HEAD"
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "commit_sha": "a5f146f5a086f50da8c53386f9ee821ef82401c5",
+      "published_ref_witness": "refs/remotes/origin/HEAD"
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+      "commit_sha": "a5f146f5a086f50da8c53386f9ee821ef82401c5",
+      "published_ref_witness": "refs/remotes/origin/HEAD"
+    },
+    {
+      "path": "AGENTS.md",
+      "commit_sha": "a5f146f5a086f50da8c53386f9ee821ef82401c5",
+      "published_ref_witness": "refs/remotes/origin/HEAD"
+    },
+    {
+      "path": "docs/project/ENGINEERING_SCOPE_SPEC.md",
+      "commit_sha": "a5f146f5a086f50da8c53386f9ee821ef82401c5",
+      "published_ref_witness": "refs/remotes/origin/HEAD"
+    },
+    {
+      "path": "docs/research/portfolio/PORTFOLIO.md",
+      "commit_sha": "a5f146f5a086f50da8c53386f9ee821ef82401c5",
+      "published_ref_witness": "refs/remotes/origin/HEAD"
+    },
+    {
+      "path": "docs/research/candidates/acvc/pro_packets/20260913_reference_next_use_convergence/ISSUE_INPUT_SNAPSHOT.json",
+      "commit_sha": "3d0921ee071a2e21ea32250d9dac7b971547b17e",
+      "published_ref_witness": "refs/remotes/origin/codex/acvc"
+    }
+  ],
+  "scientific_code_changes": 0,
+  "empirical_invocations": 0,
+  "issue_input_preserves_prior_comments": 9,
+  "native_binding_reconciled": "all nine previous ACVC requests ARCHIVED, latest archive d9a1426af03c42bdcbb8e4f84413f94493a58ebf; no live exact request or claim",
+  "provider_access": "not asserted; Transport performs one exact preflight",
+  "independent_review": "not required for document-only publication; DM self-check"
+}

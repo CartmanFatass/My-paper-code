@@ -1,0 +1,11 @@
+{
+  "question": "在当前 CONTINUE 下，执行一次新 1,024 轮 C 训练，检验该终点的固定 F 增量价值；所有者可异步介入。",
+  "changes_if_approved": [{"target": "ACVC longer-C B01", "from": "已完成三个 512 轮 cluster 实例和 B03 完整独立评审", "to": "一个新 1,024 轮 C 拟合及私有 C/F/own-dwell 终点评价"}],
+  "if_refused": "在下一干净边界应用实际指令，保留已经发生的工作与证据；不自动重跑、改写旧结果或释放席位。",
+  "evidence_for": [{"path": "docs/research/candidates/acvc/ACVC_CLUSTER_LONGER_C_B01_SCIENCE_CARD_20260914.md", "quote": "Greater training exposure tests a relevant regime without presuming a stronger policy.", "why": "三个旧实例支持已观察终点的固定 F 增量；在仍开发中的 C 训练配置下，更多训练暴露后的价值是有用的新问题。"}],
+  "evidence_against": [{"path": "docs/research/candidates/acvc/ACVC_CLUSTER_DEPLOYMENT_B03_INTAKE_20260914.md", "quote": "Larger differences do not show F improved, proposer competence increased, or a causal stabilization mechanism.", "why": "B03 较大差值伴随较弱 C/dwell；增加训练不保证更强比较器，单个新实例仍不能支持总体稳定性。"}],
+  "uncertainty": ["新训练与评价根同时变化，不能把历史差值归因于训练时长。", "新对象不作为第四个不变 512 轮实例，不借用 C01 未校准的神经训练覆盖率。", "固定配置 C-BENCH 与保留参考并报告仍是认真备选；完整累计支持成本未知。"],
+  "cost": {"compute": "一次 1024 训练 episode、2048 更新、192 终局、311296 团队步；native450秒、支持1800秒为可修订计划。", "owner_time": "无需等待回复，可异步审阅。", "reversibility": "costly", "waits_on_this": "nothing"},
+  "verdict_text": "Owner-delegated decision (unattended, 2026-09-03 instruction): (a).",
+  "source": "docs/research/candidates/acvc/ACVC_CLUSTER_LONGER_C_B01_SCIENCE_CARD_20260914.md"
+}

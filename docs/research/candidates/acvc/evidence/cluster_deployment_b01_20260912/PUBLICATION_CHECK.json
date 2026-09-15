@@ -1,0 +1,32 @@
+{
+  "commit": "f569a80bc28bb9c679884da36824613652b414f0",
+  "checked_utc": "2026-09-12T23:51:49.283807+00:00",
+  "checks": {
+    "summary.json": {
+      "bytes": 17386,
+      "sha256": "2c2401736d8efc023fdf16ed0e87b05b16668eb003b2ef079c0d9d03d4b662b7"
+    },
+    "episodes.jsonl": {
+      "bytes": 412261,
+      "sha256": "fa929f6d9e3d15c7a5f1198fea46d265f03675758d3247cfbbd1cf82c7a225b4"
+    },
+    "updates.jsonl": {
+      "bytes": 237193,
+      "sha256": "e8494c4f8ff9994e07932edb5a6f05c88577bc7b1cd1779cf7ff3f85c94a5693"
+    },
+    "SUPERVISOR_TASK_LOG.txt": {
+      "bytes": 2632,
+      "sha256": "8254f0b430efe53a576f5c83a28e87ad05f9800d86c5aac935655f1250ecd17d"
+    },
+    "SUPERVISOR_RUNNER.sh": {
+      "bytes": 1517,
+      "sha256": "ca22e72b662bc82a82051e80d32f3b4561962600b487c560fa6b8034a8bdd91b"
+    },
+    "WHOLE_COMMAND_TIME.txt": {
+      "bytes": 60,
+      "sha256": "8d93536ca20c8633a20bd8fd1b1b85c3946dbbf0e3ebfb6436f9a5e88fce155b"
+    }
+  },
+  "all_match_collected_native_bytes": true,
+  "known_check_wall_s": 0.30603169999085367
+}

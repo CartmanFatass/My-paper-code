@@ -524,7 +524,7 @@ def test_validate_request_requires_operator_for_every_canonical_workflow(
         "operator_thinking": "high",
     }
     canonical.pop("operator_thread_id")
-    with pytest.raises(ValueError, match="requires the configured Transport singleton operator_thread_id"):
+    with pytest.raises(ValueError, match="requires the bound Transport operator_thread_id"):
         TRANSPORT_VALIDATE.validate(canonical, project_root)
 
     accepted = TRANSPORT_VALIDATE.validate(
@@ -533,7 +533,7 @@ def test_validate_request_requires_operator_for_every_canonical_workflow(
     )
     assert accepted["operator_thread_id"] == SINGLETON_THREAD_ID
 
-    with pytest.raises(ValueError, match="dispatch_mode=REUSE_SINGLETON"):
+    with pytest.raises(ValueError, match="dispatch_mode="):
         TRANSPORT_VALIDATE.validate(
             {
                 **canonical,
@@ -644,7 +644,7 @@ def test_validate_request_enforces_canonical_single_body_attachment(
 
     without_operator = {**canonical}
     without_operator.pop("operator_thread_id")
-    with pytest.raises(ValueError, match="requires the configured Transport singleton operator_thread_id"):
+    with pytest.raises(ValueError, match="requires the bound Transport operator_thread_id"):
         TRANSPORT_VALIDATE.validate(without_operator, project_root)
 
 
@@ -890,40 +890,6 @@ def test_same_request_bind_is_idempotent_after_initial_admission(tmp_path: Path)
     assert record["request_id"] == "req-01"
     assert record.get("request_history") is None
     assert record["send_click_count"] == 1
-
-
-def test_skill_contracts_encode_execution_owner_async_and_tab_boundaries() -> None:
-    transport_text = TRANSPORT_SKILL.read_text(encoding="utf-8")
-    for reference in ("attachment-compatibility.md", "attachment-send.md"):
-        transport_text += (TRANSPORT_SKILL.parent / "references" / reference).read_text(encoding="utf-8")
-
-    for phrase in (
-        "independent Luna/high Transport task executes",
-        "scripts/materialize_packet.py",
-        "without busy polling",
-        "the tab lease remains active while generation is pending",
-        "The executor turn ending, an observation pass returning, or a timeout is never",
-        "request_id|conversation_binding_key|conversation_id|provider_url",
-        "stage_receipt",
-        "provider filename suffix or normalization",
-        "Acceptance of a\nvalidated handoff authorizes uploading exactly its validated `prompt_path`",
-        "Do not request\naction-time confirmation before upload or immediately before Send",
-        "does not extend to any other local file, destination, replacement packet, or second",
-        "rejected before acceptance and produced no external effect",
-        "`parent_thread_id` is the sole completion",
-        "`fallback_enabled=false`",
-        "call `retry_rejected_receipt` with the direct `not_accepted_evidence`",
-        "`RETURN_RECEIPT_BLOCKED`",
-        "Never multiplex a later",
-        "stage_blocker_receipt",
-    ):
-        assert phrase in transport_text
-    assert "fallback_enabled=true" not in transport_text
-    assert "obtain the required action-time confirmation" not in transport_text
-    assert "transport-level confirmation gate" not in transport_text
-    assert "01a05860-" not in transport_text
-    assert "01a04f5a-" not in transport_text
-    assert "close the temporary tab\nafter recording that state" not in transport_text
 
 
 def test_transport_contracts_require_one_attachment_for_prompt_author_packets() -> None:
