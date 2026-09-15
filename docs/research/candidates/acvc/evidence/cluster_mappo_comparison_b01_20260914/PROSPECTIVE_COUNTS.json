@@ -1,0 +1,41 @@
+{
+  "object": "ACVC_CLUSTER_MAPPO_COMPARISON_B01",
+  "master": 28331,
+  "evaluation_namespace": 38331,
+  "class": "B/EXPLORE",
+  "training_blocks": 1,
+  "fresh_fit_grant": 2,
+  "training_episodes_per_fit": 4096,
+  "episodes_per_rollout": 2,
+  "rollouts_per_fit": 2048,
+  "ppo_minibatches_per_fit": 8192,
+  "native_training_team_ticks_per_fit": 1048576,
+  "final_panels": {
+    "C": 64,
+    "F": 64,
+    "dwell": 64,
+    "M": 64
+  },
+  "native_total_training_team_ticks": 2097152,
+  "native_total_eval_team_ticks": 65536,
+  "native_total_team_ticks": 2162688,
+  "C_joint_adam": 8192,
+  "M_actor_adam": 8192,
+  "M_critic_adam": 8192,
+  "total_optimizer_step_calls": 24576,
+  "actor_replay_agent_rows_per_fit": 20971520,
+  "C_critic_rows": 4194304,
+  "M_critic_rows": 20971520,
+  "M_chunks_per_minibatch": 80,
+  "snapshots": 2,
+  "panel_loads": 4,
+  "retry_replacement_tuning_pilot_extra_eval": 0,
+  "ordinary_native_plans_seconds": {
+    "C": 1400,
+    "M": 2400,
+    "total": 3800,
+    "hard_caps": false
+  },
+  "future_M_native_wall_RSS_support_provider_maintenance_cost": "UNKNOWN",
+  "actual_scientific_invocations_at_card_freeze": 0
+}
