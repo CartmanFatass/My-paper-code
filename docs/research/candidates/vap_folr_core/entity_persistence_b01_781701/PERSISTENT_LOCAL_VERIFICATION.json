@@ -1,0 +1,15 @@
+{
+  "verified_utc": "2026-09-15T01:08:10.460020+00:00",
+  "archive_sha256": "c5eb3b5a863f9695c8e882ea11d921ca789e27dfb2c740a83c9fda75b4cab2ad",
+  "archive_members": 10,
+  "all_members_verified": true,
+  "summary_sha256": "a491708b5a78c6032da7ad183205d0e959b6271eb02bf74a9d77da3caee379ec",
+  "technical_accepted": true,
+  "errors": [],
+  "terminal_log_tail": [
+    "{\"episode\": 4800, \"updates\": 4769, \"wall_seconds\": 2695.440925198025}",
+    "{\"episode\": 5000, \"updates\": 4969, \"wall_seconds\": 2824.7662943690084}",
+    "{\"arm\": \"AUGMENTED_PERSISTENT\", \"status\": \"complete\", \"panel\": {\"mean\": -1.4767968750000005, \"sample_sd\": 4.7745108886808385, \"conditional_episode_se\": 0.42201112827940374, \"minimum\": -17.540000000000003, \"maximum\": 11.989999999999997, \"n\": 128, \"negative_count\": 84}}",
+    "=== Task 'folr-persistence-b01-781701-persistent' exited with code 0 at 2026-09-15T09:05:00+08:00 (Duration: 2829s) ==="
+  ]
+}
