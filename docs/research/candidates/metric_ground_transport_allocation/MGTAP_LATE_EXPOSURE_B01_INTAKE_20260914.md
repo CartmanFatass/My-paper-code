@@ -1,5 +1,7 @@
 # MGTAP late512 intake — final contrast inside MEI
 
+Subsequent review completion: the full199-line response atde3b1fbccbb294c205dd4953daa72a823fa0fcda accepts the result and selects no immediate extension of this exposure exploration. [Complete DM response](pro_packets/20260914_late512_results_review/INTAKE.md) preserves the legitimate fresh final512-only alternative and prepares the distinct Portfolio maintenance/investment question. The original intake and its then-selected review below remain the historical sequence; no native result or rule changed.
+
 ## Accepted result and its boundary
 
 The complete8254 learning path gives final512 COND−DENSE **-0.005375013231600323 J**, conditional world SE0.004649366246290445, **INSIDE_MEI**. This is a valid B observation, not equivalence, stable DENSE superiority or a scientific direction failure. The256 gap was+0.008370279359008794; both arms' mean return increased later, but DENSE increased more and the gap changed-0.013745292590609116. This path supplies no observed useful late COND advantage. It does not show that longer training generally harms COND, nor identify why the two policies changed.
