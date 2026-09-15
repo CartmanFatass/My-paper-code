@@ -25,6 +25,11 @@ use `.agents/skills/hmasd-scientific-tools/SKILL.md` scientific-reading mode aft
 card and relevant spec sections. Preserve the frozen semantics; ordinary fixes and
 accepted execution/collection do not trigger conceptual reading.
 
+For new design or interpretation, apply evidence-spec §11.11 to independent training
+units, comparator rights, uncertainty and package-versus-component claims. Use the
+adopted programme linked there; do not turn external review recommendations into
+new seed-count, estimator or launch requirements or retroactively rescore frozen evidence.
+
 Tool adoption (OWNER_DIRECT 2026-09-05): when the task involves retrieval, arithmetic,
 analysis, profiling or a baseline/adapter, read .agents/skills/hmasd-scientific-tools/SKILL.md
 and only the relevant reference. Check tool-produced counts, changed behavior and measured evidence; distinguish interface tests from scientific validity and do not invent extra test gates.

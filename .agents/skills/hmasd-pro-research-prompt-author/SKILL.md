@@ -78,7 +78,7 @@ applicable Portfolio principles/specifications and relevant empirical/engineerin
 including contrary evidence and revisit conditions. The designated DM checks publication and route facts and dispatches to its own Transport.
 Root retains coordination and integration without rewriting scientific material.
 The DM checks the complete Pro response and returns its operational mapping or a precise conflict.
-For a formally vacated slot below the four-direction target, Root authors the replacement request,
+For a formally vacated slot below the three-direction target, Root authors the replacement request,
 uses its own Transport and checks the complete response itself before creating the Pro-selected
 DM. This route requires no intermediate author DM; Pro retains scientific selection authority.
 Under AGENTS §4.8 a conforming Portfolio decision needs no per-item owner ratify; no native author
@@ -88,13 +88,21 @@ acquires final Portfolio authority. Direction Pro nodes and accepted historical 
 
 For new scientific requests, use scientific-tools scientific-reading mode locally.
 For Portfolio, include the relevant principles in empirical-spec §§7–8 and calibration in
-§§11.7–11.10, plus the specific experience/intake sources that affect the choice.
+§§11.7–11.11, plus the specific experience/intake sources that affect the choice.
 List the applicable empirical specification, relevant FOUNDATIONS passages and only
 needed topics/primary sources in reference_files; purpose names exact sections and
 use, provenance states the source's scope. Pro reads those passages directly; no
 local skill or unlisted linked dependency is needed. TASK adopts only the named
 applicable specification requirements; knowledge remains explanatory evidence.
 SESSION_CHOICES is listed only when its choices are current task inputs.
+
+For new questions affected by the owner-approved baseline, replication or K/N-axis
+priorities, pin the relevant sections of
+`docs/research/portfolio/TWO_AXIS_RESEARCH_PROGRAMME_20260914.md` alongside §11.11.
+The external draft/addendum may be cited as review evidence; its unadopted approval,
+estimator and sample-size rules are not TASK requirements. Keep scientific input
+bindings fixed; a method-source update does not regenerate or resend an accepted or
+uncertain request, change its budget or retroactively rescore its evidence.
 
 Each reference may supply an optional full commit_sha; omission inherits the full
 commit_or_ref scientific input SHA. Empty, short or moving versions are invalid in

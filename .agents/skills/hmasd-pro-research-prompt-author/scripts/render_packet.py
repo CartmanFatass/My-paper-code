@@ -760,7 +760,7 @@ in ordinary language that no decision could be reached; do not manufacture one.
 ## Direct scientific reading
 
 This TASK adopts the applicable requirements of MARL_EMPIRICAL_EVIDENCE_SPEC.md
-at its explicitly listed version and sections, including sections 11.8–11.10 when
+at its explicitly listed version and sections, including sections 11.8–11.11 when
 listed. Read the listed foundational passages and relevant topics directly to assess
 concepts, assumptions and inferential limits. No local skill invocation or unlisted
 dependency is required. Knowledge material has no independent decision authority.

@@ -38,6 +38,13 @@ stronger claim would need. Do not demand project-wide exact replay, extreme tole
 exhaustive cause-first diagnosis, full historical replay or a line-ratio pass unless the current
 claim or a concrete correctness risk requires it.
 
+For new design or interpretation, apply §11.11 and its adopted programme: distinguish
+practical effect importance, training-instance variation and estimator uncertainty;
+check independent units, baseline rights and whether controls identify the claimed component.
+Keep jointly trained roster change, train-N/test-N transfer and ad hoc teamwork distinct.
+State historical evidence limits without changing its frozen result rule; the calibration
+adds no universal seed count, estimator choice, positive-result prerequisite or launch gate.
+
 If a premise remains ambiguous after checking one exact cited artifact, state a conditional
 objection and the needed discriminator rather than scanning without bound.
 

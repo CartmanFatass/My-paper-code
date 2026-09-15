@@ -2,8 +2,12 @@
 
 Use after the current assignment/card and applicable evidence-spec sections. The
 knowledge route serves the concrete judgment; it is not a serial reading prerequisite.
-The controlling proportionality and knowledge-use clauses are
-`docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md` §§11.8–11.10.
+The controlling proportionality, knowledge-use and current calibration clauses are
+`docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md` §§11.8–11.11. For new design or
+interpretation affected by the baseline, replication or K/N-axis priorities, use the
+relevant section of `docs/research/portfolio/TWO_AXIS_RESEARCH_PROGRAMME_20260914.md`.
+That programme records the adopted scope; the external draft/addendum is review evidence,
+not authority for its unadopted approval, estimator or sample-size rules.
 
 Paths below are relative to the repository root. Read only relevant passages in
 `docs/rl-marl-foundations-20260907/FOUNDATIONS.md`, then the topic needed now:
@@ -20,6 +24,8 @@ how it supports or changes the judgment, and its limit. Reuse relevant current r
 a new concept, changed source version, conflict or observed misunderstanding warrants
 supplementing them. Existing sessions receive the published version and this pointer
 in their next natural scientific handoff; editing disk does not reload their context.
+Use the application/receipt procedure in `docs/project/ROOT_OPERATIONS.md`, recording
+the actual effect in the existing card/intake without reopening frozen work.
 
 For a decision-relevant unresolved source claim, consult the package's
 `sources/READING_MAP.md` or [local-literature.md](local-literature.md), search the index,

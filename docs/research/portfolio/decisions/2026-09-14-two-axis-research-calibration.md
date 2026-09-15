@@ -92,3 +92,39 @@ external addendum and returned one application receipt each:
 
 All three rejected the addendum's unadopted universal approval, power/sample-size and estimator
 rules. This synchronization creates no experiment, lifecycle change, slot change or extra budget.
+
+## Completion of role and specification entrypoints
+
+The owner's follow-up instruction was **“请完成角色配置和规范更新”**. This extends the
+documentary application above to the maintained role/skill entrypoints and actual live-DM
+application; the preceding table records the three DM receipts.
+
+L0 for this completion batch: Root owns the scientific-reading reference, Pro-author skill
+and the scientific-section pointer emitted by its `scripts/render_packet.py`,
+Codex/Claude Reviewer and Critic configurations, AGENTS scientific-source pointer and
+ROOT_OPERATIONS propagation procedure in C:/Projects/HMASD, plus this acceptance record and
+the existing owner-item trace. Complete the §11.11 routing and distinguish published files
+from applied live context. Preserve current role/model boundaries, frozen inputs/results,
+unattended authority, decision nodes, lifecycle and invocation/cap limits; no research code,
+new scientific exposure or accepted Pro-request rewrite is included. Acceptance uses focused
+TOML/frontmatter/link checks, skill validation, focused existing packet-rendering checks,
+scoped diff review and independent review under
+ENGINEERING_SCOPE_SPEC §7.3. Stop after accepted publication and Root receipt, or a concrete
+scope conflict. No experiment or broad test suite is needed.
+
+Completion acceptance: independent Astra/high Reviewer `rev_ah_calibration_roles` inspected
+the nine instruction/record paths and returned **no material findings**. Its subsequent focused
+review of the renderer's one-line §11.11 pointer also returned **no material findings**; the
+template still adopts only explicitly listed versions/sections. Root accepts both scoped changes.
+Python 3.11 parsed all three affected/current Codex science roles and both Claude frontmatters,
+verified unchanged model/tool/access boundaries, and resolved 19 local document/skill links.
+Both affected skills passed `quick_validate.py`; the scoped `git diff --check` passed.
+The existing source-mapping and exact-task-binding tests passed in both output modes and all
+binding cases: **6 passed in 0.69 s**. The old §11.10 fixture remains unchanged, checking that
+updated template prose does not silently move a frozen method/source binding.
+
+The initial combined test/recursive-cleanup command was rejected by automatic approval review
+before execution (`blocked by policy`, no more specific reason supplied). The same focused tests
+then ran successfully without deletion. Their invocation directory
+`temp/tests/two-axis-roles-01a0a2f0-20260914-check1` is retained; no alternate deletion route was
+attempted. This is a local cleanup limitation, not a scientific or role-application blocker.

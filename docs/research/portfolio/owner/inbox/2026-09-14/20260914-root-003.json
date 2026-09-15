@@ -96,6 +96,14 @@
       "record": "docs/research/portfolio/decisions/2026-09-14-two-axis-research-calibration.md",
       "state": "applied",
       "summary": "已应用修订方案、§11.11方法澄清和研究地图入口；独立审阅P2已修正并复核，无新实验拨款、方向归档或DM派发。"
+    },
+    {
+      "at": "2026-09-15T03:23:24+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "docs/research/portfolio/decisions/2026-09-14-two-axis-research-calibration.md",
+      "record": "docs/research/portfolio/decisions/2026-09-14-two-axis-research-calibration.md",
+      "state": "applied",
+      "summary": "已完成角色/规范入口校准：DM、科学工具和Portfolio首批09df541b0；ACVC/FOLR/TRDL实际应用回执e6de16be1；补齐Root、Reviewer/Critic、科学阅读和新Pro请求模板的§11.11入口。独立审查无material findings，配置/链接/skill验证通过，固定来源和请求绑定6项测试通过。既有科学预算和冻结请求不因本次校准改动。"
     }
   ]
 }

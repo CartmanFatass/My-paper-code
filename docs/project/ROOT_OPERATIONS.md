@@ -116,6 +116,23 @@ Role configurations keep role/model boundaries and link to these sources instead
 whole procedure. Change a rule at its maintained source and update affected entrypoints together.
 Historical decisions, snapshots and benchmark materials remain evidence, not competing procedures.
 
+### Applying changed scientific instructions
+
+Publish an authorized scientific rule change with its affected role/skill entrypoints.
+At the next relevant clean handoff, Root sends the published revision, exact changed sections
+and their application boundary to each affected original DM through the current native route
+in SIBLING_COMMUNICATION.md. Editing files alone does not update an existing DM's context.
+The DM reads the change, records its actual application or concrete no-change/conflict reason
+in the existing card/intake, and returns one actionable native receipt. Root records received
+and pending application states in the existing decision/tracking record; a sent message alone
+is not an applied update. Frozen work continues under its existing binding and authority.
+
+New Pro questions pin the applicable published sections through the prompt-author skill;
+accepted or uncertain requests retain their exact bytes and reconciliation route. Instruction
+propagation does not add an experiment ACK gate, require restarting live work or authorize a
+new invocation. Resolve an actual scientific conflict through its existing decision node while
+independent conforming work continues.
+
 ## Complete deliverables and owners
 
 | Owner | Deliverable |

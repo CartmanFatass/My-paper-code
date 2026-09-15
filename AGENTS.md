@@ -72,7 +72,11 @@ their already accepted assignments and return paths through closeout; no new CM 
 Scientific meaning lives in `docs/research/candidates/<direction>/DIRECTION.md` and its cited
 evidence. The evidence standard is `docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md`; its
 §11 controls every B and C-BENCH object and prevails over any direction document that asks for
-more. `docs/project/ALGORITHM_PRINCIPLES.md` is historical background, not a required reading.
+more. New design and interpretation use §11.11 and its linked owner-approved two-axis
+programme within the recorded application scope. Publish scientific-rule changes with the
+affected role/skill entrypoints and apply them to live DMs under
+`docs/project/ROOT_OPERATIONS.md` (Applying changed scientific instructions).
+`docs/project/ALGORITHM_PRINCIPLES.md` is historical background, not a required reading.
 
 ## Workflow calibration (OWNER_DIRECT, 2026-09-06)
 
