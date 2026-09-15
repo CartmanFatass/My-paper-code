@@ -1,0 +1,86 @@
+{
+  "id": "20260914-tailretu-004",
+  "created": "2026-09-14T21:38:58-07:00",
+  "direction": "tail_return_distributional_learning",
+  "tier": "portfolio",
+  "kind": "portfolio",
+  "title": "TRDL B02独立重复：推荐购买两原始，尚未拨款",
+  "context": "B01已完成并通过完整科学审阅。建议购买一对相同配方的新训练；它回答已观察的尾部增益能否再现，但强标量基线、阈值适配解释和纯归因仍未解决。备选是零暴露的强标量/阈值方案准备，或不追加此配方数值投入。仅提出投资建议，没有执行buy。",
+  "options": [
+    {
+      "key": "buy",
+      "label": "购买一对独立重复",
+      "consequence": "Portfolio若选中，给出恰好2原始及最小配套的明确新授权；不含重试或额外种子。"
+    },
+    {
+      "key": "baseline_prep",
+      "label": "先做有限标量方案准备",
+      "consequence": "只完成一个零模型/native/fit/更新的同宿主标量能力或阈值条件化方案，不产生实测headroom。"
+    },
+    {
+      "key": "no_numeric",
+      "label": "不追加此配方数值投入",
+      "consequence": "保留B01与复查条件，无自动续投、科学负面或整方向关闭。"
+    }
+  ],
+  "recommended": "buy",
+  "auto_applied": null,
+  "dm_reason": "一个新训练对最直接改变当前配方保留判断；已测395.64秒native只是成本参考，需与未建立标量能力的反例一起由Portfolio衡量。",
+  "evidence": [
+    "docs/research/portfolio/pro_packets/20260914_trdl_b02_investment/PREPARATION.md",
+    "docs/research/candidates/tail_return_distributional_learning/TRDL_B02_SCIENCE_CARD_20260914.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-14.md#L148",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "Portfolio是否购买TRDL一对独立重复，还是先准备强标量/阈值比较或不追加数值投入？本项是推荐，尚未拨款。",
+    "changes_if_approved": [
+      {
+        "target": "TRDL B02 investment",
+        "from": "只有零暴露准备，无新增模型/fit/代码适配额度",
+        "to": "若Portfolio选择R，新增恰好2个original arms与卡内最小配套；每臂512训练/256最终评估/128次Adam，master9602，不含重试"
+      }
+    ],
+    "if_refused": "若选A，完成一个零暴露的同宿主标量能力/阈值条件化方案；若选N，保留本次观察与明确复查条件。都不自动关闭整个方向，也不把旧3000秒offer变成预算。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/tail_return_distributional_learning/pro_packets/20260914_b01_result_review_v2/archive/RESPONSE.md",
+        "quote": "**Continue the current recipe at the bounded B/EXPLORE preparation level: accept B01's Q32_ABOVE_MEI observation and prepare one independent, unchanged-recipe SCALAR/Q32 pair.**",
+        "why": "完整科研审阅确认真实尾部增益，并选择独立重复准备。新的训练实现能改变是否保留此配方的开发判断。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/tail_return_distributional_learning/pro_packets/20260914_b01_result_review_v2/archive/RESPONSE.md",
+        "quote": "A second unchanged pair can test whether the observed package preference survives another training realization; it cannot exclude systematic weakness of this scalar recipe.",
+        "why": "调优匹配标量基线仍缺失；阈值处理、损失和有限拟合可解释结果，重复不提供纯表示归因。"
+      }
+    ],
+    "uncertainty": [
+      "仅完成一个训练对；第二对仍不能证明稳定优势。",
+      "当前源码的训练和出版均限9601，9602需要获拨款后的最小适配。",
+      "旧pair原生合计395.64秒已测，未来、支持、提供方和维护成本不完整。"
+    ],
+    "cost": {
+      "compute": "拟议2 originals=393216 ticks/256 Adam；300秒每臂、1200秒支持、1800秒合计仅为普通可调整计划。此准备与咨询实际新增科学暴露为0。",
+      "owner_time": "无需逐步回复或追认；你可异步覆盖Portfolio决定。",
+      "reversibility": "costly",
+      "waits_on_this": "owner item本身nothing；新增数值必须等实际Portfolio/owner分配，目前另有ACVC共享writer串行。"
+    },
+    "verdict_text": "Recommend R: purchase exactly one independent unchanged-recipe SCALAR/Q32 pair at master9602 plus the minimum support described by the card.",
+    "source": "docs/research/portfolio/pro_packets/20260914_trdl_b02_investment/PREPARATION.md"
+  },
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-15T04:40:07+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "docs/research/portfolio/decisions/2026-09-13-dm-autonomy-consolidation.md",
+      "record": "docs/research/portfolio/pro_packets/20260914_trdl_b02_investment/PREPARATION.md",
+      "state": "planned",
+      "summary": "依据DM持续作者化具体投资问题权限，仅准备B02推荐R与A/N备选；未执行buy、未绑定/Send。当前由ACVC占用shared Portfolio writer，待其完整application释放后同request一次发送。"
+    }
+  ]
+}
