@@ -92,3 +92,26 @@ directory repair under standing engineering authority. The exact A1 output is
 created and empty; the corrected start2 supervisor remains unaccepted at this
 repair-acceptance boundary. There are still three unstarted scientific fits,
 with the original four-fit budget and zero scientific retries unchanged.
+
+## Original A1 learner accepted after preparation repair
+
+Manual start2 is accepted2026-09-15T05:38:43.407977Z, exact handle
+folr-augmentation-repeat-b01-781901-persistent-start2, supervisor PID3712032.
+The source remains797596454 and the wrapper digest/complete scientific argv
+match the original A1. Only the supervisor name and creation of its empty output
+directory differ. Adjacent admission at05:38:43.437325Z passes physical/effective
+14674436096 bytes against4294967296. Initial status running/exit null/tmux true;
+the complete receipt is BLOCK1_PERSISTENT_START2_LAUNCH_RECEIPT.json. The exact
+corrected argv was published in c8409bffd PRELEARNER_REPAIR_PLAN before launch;
+repair acceptance is2af3414e4. The original failed handle remains intact.
+
+The same native terminal-only Monitor is assigned only this accepted start2,
+with new local state path ending block1/persistent/MONITOR_STATE_START2.json;
+the earlier failed-handle state is retained. Dispatch alone is not a claimed
+intermediate adoption. DM stops routine status polling after handover.
+
+Actual supervisor acceptances so far:3 (G1, failed prelearner A1, A1-start2).
+Actual original learner invocations admitted:2 of4 (G1 complete, A1 running).
+Manual startup repair count1; scientific retry0. G2/A2 remain unstarted original
+calls and continue regardless of block1 outcome, each with explicit output
+directory preparation and its fresh adjacent admission. No study polarity exists.

@@ -85,8 +85,11 @@ accepted; the only failure was a repaired test fixture, with scientific source
 unchanged. G1 is complete with mean1.4009375 and full5000/4969/128 counts;
 this single arm supplies no contrast or study polarity. The first A1 supervisor
 failed before its child command because its output directory was not prepared;
-the intact failure is being classified and ordinary startup preparation repaired.
-A1/G2/A2 remain the fixed learner endpoints without results. The [execution
+a bounded marker check confirmed zero learner exposure, and the intact failure
+is retained. Manual directory preparation repaired that defect. The original
+A1 learner is now running under preserved-record handle suffix-start2, accepted
+at05:38:43Z with fresh admission and unchanged797596454/source/parameters.
+G2/A2 remain selected and unstarted; no extra fit or scientific retry. The [execution
 record](entity_augmentation_repeat_b01_781901_782001/EXECUTION.md) fixes the source,
 commands and actual state. No new family/lifecycle or Portfolio disposition.
 Under the [owner's accepted two-axis calibration](../../portfolio/decisions/2026-09-14-two-axis-research-calibration.md),
