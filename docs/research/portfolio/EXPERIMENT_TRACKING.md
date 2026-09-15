@@ -1,7 +1,7 @@
 # HMASD current execution tracking
 
 OWNER_RESUMED by the explicit 2026-09-14 instruction to restore the subagent DM control plane,
-read the handoffs and continue. Root currently coordinates three native Astra/max DM chains; each
+read the handoffs and continue. Root currently coordinates four native Astra/max DM chains; each
 DM owns its direction lifecycle and Direction Pro remains the independent scientific Reviewer.
 The owner-pause handoffs remain the recovery baseline, while the rows below record new work.
 
@@ -14,10 +14,10 @@ The owner-pause handoffs remain the recovery baseline, while the rows below reco
 | FOLR | ACTIVE/MEDIUM；fresh Z−G B 的 G 已完成并保全：5000/4969/128、exit0、mean4.307734375、native2112.27s；1800s仅ordinary plan，超出312.27s不是hard cap/科研违约；G证据已集成 main754b208fb | 卡内Z handle `folr-current-increment-b01-781801-current-only`、PID3703852 已在同source与fresh≥4GiB admission下接受；terminal-only Monitor仅观察Z。两原始均已接受、retry0；Z终态后完成Z−G intake/review |
 | TRDL | ACTIVE/MEDIUM/recasts0；Portfolio已批准有限B01：SCALAR/Q32各一个原始fit，每臂512 train+256 eval、H256、128 Adam；完整响应和intake已集成main a916263c4/51ab09bd6 | DM直接实施、验证并取得独立代码review；尚无科学native fit/update。无retry、额外native smoke或自动后继 |
 | CADC | Portfolio explicitly applies reversible PARKED/HIGH, retaining RR and B01 evidence | Direction-local documentary application only; no advancing research chain |
-| FSD | U complete; limited optional I1280 and D0 default retained, no LONG/repeat U funded | No advancing research chain |
+| FSD | OWNER_DIRECT恢复为第四条ACTIVE/HIGH链；U complete、limited optional I1280与D0 default保留，旧no-current-addition未改写为整方向PARK | 原FSD worktree/branch已由新Astra/max DM接管；先刷新事实并读取owner重启建议，准备中断×batch归因、同宿主基线和独立训练精度。当前0新fit、0冻结实验卡、0新增cap |
 
 
-ACVC、FOLR 与 TRDL 的 native DM 是各自方向 owner；当前3占用、0预留、0空缺。MGTAP 已完成
+ACVC、FOLR、TRDL 与 FSD 的 native DM 是各自方向 owner；当前4占用、0预留、0空缺。第四槽为所有者直接恢复的显式例外，不挤占前三条链。MGTAP 已完成
 记录交接并结束本链。报告实际运行与占用分开；对象或准备完成不释放 slot，正式 Portfolio/owner
 lifecycle 处置才释放。Root 继续处理 native 事件并集成 accepted commits。
 
