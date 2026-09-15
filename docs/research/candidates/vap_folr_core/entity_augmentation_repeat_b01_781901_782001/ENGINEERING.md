@@ -54,3 +54,27 @@ are0 native acquisition/0 real optimizer updates and not a scientific retry.
 The independent Astra/high source review reports no material finding; its full
 return and scope limits are in INDEPENDENT_REVIEW.md. New source publication
 and the two focused fixture cases remain before technical acceptance.
+
+## Technical acceptance
+
+The two affected fixture cases pass at7975964542b83560cbc0e79f74a9212f8e3737af:
+2 passed in0.75s, full process0.992051s. Combined focused pytest time2.92s and
+full-process time3.692396s remain below300s. There are27 distinct completed
+passing cases after the repair; other passing cases were not repeated.
+Both exact test scratch directories are absent. The10183-byte original failed
+scratch archive was transferred and matches SHA256
+b4460c8e20ade774bb2acdc238a4ce8aaf379f9c629c38ffd0c443f8b9f8ed54.
+Original failure and repair logs/receipts are retained, not rewritten.
+
+Actual Git comparison confirms no scientific code/card/wrapper change from the
+independently reviewed78437b89f to797596454; only the test fixture and evidence
+changed. All four staged wrappers match the new source's Git bytes and bash-n
+passed. DM accepts source797596454 for the four selected original invocations:
+persistent A selection, own-block binding, fixed two-block reading and complete
+learning/publication path meet the card. No material review finding remains.
+Science acquisition0 and real optimizer updates0 at this acceptance; synthetic
+fake-loop counts are not scientific training. New non-test source340 lines,
+runner210, tests193 after repair. No section4 facility or budget breach.
+
+COMMANDS.json and EXECUTION.md fix the four detached commands. Destination-
+adjacent resource admission still belongs to each actual original call.
