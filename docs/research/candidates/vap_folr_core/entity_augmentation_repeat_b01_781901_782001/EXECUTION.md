@@ -154,3 +154,28 @@ Supervisor acceptances4 including the one zero-learner failure; original learner
 invocations3/4: G1/A1 complete, G2 running, A2 unstarted. Scientific retry0.
 DM waits for G2 terminal after publishing this boundary and then completes fixed
 A2 at fresh admission, irrespective of first-block polarity. No successor work.
+
+## G2 collection; fourth and final original A2 accepted
+
+G2 is terminal exit0, Monitor-confirmed07:39:19.7270166Z, collected07:41:30.265621Z
+at exact full5000/4969/128. Its finite CPU FP32 checkpoint and ten raw archive
+members are verified. Mean0.208046875, wall2150.29s/CPU2150.95s; the separate
+BLOCK2_GENERIC_INTAKE retains this endpoint without d2 or a study pattern.
+The current owner reviews command returned[]; owner completion-then-pause applies.
+
+A2 is accepted2026-09-15T07:42:07.103592Z, handle
+folr-augmentation-repeat-b01-782001-persistent, supervisor PID3722930. It uses
+the unchanged original COMMANDS[3] from b27d35cf6, source797596454, exact wrapper
+and own-G2 summary digest7020b568344d3bcfc1a629414fe38cd58ef92c7811243499bc627165d9a69d66.
+Its empty output directory was prepared before time. Fresh adjacent admission
+07:42:07.128613Z passes physical/effective15615676416 bytes against4294967296.
+BLOCK2_PERSISTENT_LAUNCH_RECEIPT preserves initial running/exit null/tmux true.
+The same terminal-only native Monitor is assigned just A2, local state path
+block2/persistent/MONITOR_STATE.json, without a fabricated intermediate adoption.
+
+All four original learner calls are now admitted: G1/A1/G2 complete, A2 running.
+Five supervisors were accepted including the preserved zero-learner A1 failure;
+manual startup repair1/scientific retry0. On A2 terminal, collect all four and
+invoke the published study_result plus independent ordered-vector readback.
+No additional empirical invocation follows; finish required object-only review,
+retention/necessary cleanup and the concrete operational pause handoff.
