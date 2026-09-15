@@ -7,9 +7,11 @@ accepted submission (the first call returned `chatgpt_target_menu_open_unconfirm
 click; the identical `verifyExisting` call clicked once). Response delivered at
 `codex/acvc 319efe78472a3624e657dcb0a82513dbe13a2737` ("docs(acvc): deliver M-deployment transfer
 B02 result review", 23:10:47Z): [`archive/RESPONSE.md`](archive/RESPONSE.md) (blob `2c0f0972d`,
-11,214 bytes, sha256 `20394bc3f7314171d5d0a7a986d36e0b26d19de380fcd7ac11d0fd72f59edef3`). Read
-from the immutable commit; the transport archive, delivery comment, registry walk to `ARCHIVED`
-and tab close are recorded in the transport facts file under
+11,156 bytes, sha256 `62655809175498aa507d63de0eaaa36dd66326346b5da07b2ebc7f08bca8ba51` as
+verified by the transport at the commit; the hub's first figure of 11,214 bytes was the CRLF
+working copy). Issue 14 delivery comment `5689372160` (23:13:02Z). Read from the immutable
+commit; the transport archive (`GITHUB_RESPONSE.md`, same sha256), registry walk to `ARCHIVED` and
+tab close are recorded in the transport facts file under
 `temp/sessions/hmasd-chatgpt-pro-transport/archive/acvc/2026-09-15-acvc-m-deployment-transfer-b02-result-review-01/`.
 
 ## Question posed
