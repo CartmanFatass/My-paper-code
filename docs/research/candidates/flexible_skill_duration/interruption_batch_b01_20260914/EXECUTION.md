@@ -94,6 +94,38 @@ MONITOR_ADOPTED, then stops routine process polling. Each terminal event trigger
 collection/intake and the next selected original directly. Test failure,
 provider state or a completed original never supplies a direction disposition.
 
+### Accepted launch revision
+
+Exact executable source/command commit is
+**`168e612956d098c017fe67377eadeb68589bf81d`**. The same independent reviewer
+checked its15-line FIT.sh and command table as this batch's completion: no material
+external-effects finding; it confirmed argument quoting, adjacent admission,
+fixed original table, thread environment, full GNU-time scope, exit propagation
+and absence of timeout/retry. Python source remains the accepted0c837c6dd bytes.
+
+The remote checkout reports exactly168e61295. Source readback matched all ten
+requested tracked inputs: new/shared/E0 runners, agent, buffer sampler, config,
+native environment/adapter, admission helper and FIT.sh. FIT.sh contains zero
+CR bytes and `bash -n` exited0 without executing its payload. The selected seed
+identities had no matching prior FSD supervisor handles; earlier source/card
+searches found only this prospective allocation. No launch SHA or source guard
+was added to the runner.
+
+At **2026-09-15T04:49:49Z**, supervisor accepted original
+`fsd-ib-b01-772003-D1280`, tmux `agent_fsd-ib-b01-772003-D1280`, with the exact
+published script, D1280 and772003. Adjacent admission assessed
+`2026-09-15T04:49:49.797301Z`: physical/effective available15157596160 bytes,
+required4294967296, both floors passed. Actual admission copy is in the local
+owned exp `receipts/772003_D1280_ADMISSION.json`; canonical copy remains in
+that remote original output. This is one accepted original, zero completed
+results, seven not yet submitted. Training completion and polarity are not
+inferred from launch/admission.
+
+DM assigned only this accepted handle to reusable native Monitor
+`/root/dm_fsd_restart_20260914/monitor_fsd_factorial_20260914`. Its direct
+MONITOR_ADOPTED is pending at this record revision. Later terminal facts trigger
+collection and original2 (I1280, same block), without a Root ACK or new grant.
+
 ## Collection and preservation inventory
 
 Collect every original summary, training rows, logs, adjacent admission,
