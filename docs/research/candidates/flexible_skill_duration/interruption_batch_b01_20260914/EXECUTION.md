@@ -230,6 +230,53 @@ unsupported time fields are removed/marked unverified, and supervisor/GNU-time
 retain actual run boundaries. No training or source change follows from this
 observation-metadata correction.
 
+### First complete four-arm block
+
+I128/772003 returned terminal exit0, PID3711508, no tmux and observed elapsed1210s.
+Its complete endpoint passes the same fixed training/final/configuration checks,
+with all update losses finite. Joint rows4912/4960/5407/5337/5751 lead to
+585/585/645/630/675 coordinator steps,3120 total, as the cost law predicts.
+Whole-command wall1204.05s, user4751.92s/system26.42s, peak RSS1700200KiB, exit0.
+Summary SHA256
+`fe825002fe6d06bd85e063a8d6059e4e395aea92c91c6dca5c54640a602bca7c`;
+archive SHA256
+`740fc3617be9f7ae37bb2c91a5db256ff18a97b02da514700627a497e747e1f1`.
+The collection receipt and `receipts/first_block.json` retain all inputs/readouts.
+
+The four newly trained endpoints of block772003, evaluated at782003, are:
+
+| D128 J | D1280 J | I128 J | I1280 J |
+| ---: | ---: | ---: | ---: |
+| .3748949428966962 | .40328138236214595 | .3781082793746645 | .3768410822229793 |
+
+| Contrast | One-block value J |
+| --- | ---: |
+| SI1280 (primary component) | −.026440300139166675 |
+| SI128 | +.003213336477968327 |
+| MI | −.01161348183059917 |
+| MB | +.01355962115688223 |
+| INT | −.029653636617135 |
+| PKG | +.001946139326283053 |
+
+The committed reducer accepted all common non-factor comparator settings. These
+are one training block's descriptive controlled differences. They do not estimate
+training variation or establish stable component effects; no episode count replaces
+the missing second training block. The first-block package difference is small,
+and the high-batch renewal switch is adverse in this block. Historical package
+gains remain separate evidence. The complete two-block primary is still pending,
+and no default, direction disposition or remaining original changes follows.
+
+All four originals total160000 training steps/64000 final evaluation steps,
+3230.42s whole-command wall and12776.88s CPU, with no retry/model smoke/interim
+evaluation. Original5 `fsd-ib-b01-772103-D1280` has been accepted from the same
+168e61295 source to start the second selected independent block. Adjacent admission
+assessed `2026-09-15T05:54:22.851086Z`:15101345792 effective/physical bytes, passed.
+The same native Monitor received the new accepted handle and is running, but its
+initial adoption record has not yet arrived at this revision. DM has returned that
+missing receipt to the same child for factual correction, without a new launch or
+claiming adoption from assignment alone. Its terminal event will trigger original6
+directly. Current allocation: five accepted, four complete, one live, three unsubmitted.
+
 ## Collection and preservation inventory
 
 Collect every original summary, training rows, logs, adjacent admission,
