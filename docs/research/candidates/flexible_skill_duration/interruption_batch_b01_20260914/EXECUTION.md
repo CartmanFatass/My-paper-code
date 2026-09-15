@@ -342,6 +342,32 @@ separate single-handle adoption file will avoid further aggregate overwrites.
 Current allocation: seven accepted, six complete endpoints, one live, one
 unsubmitted. Original8 is the last preselected fit before the owner pause closeout.
 
+### Last original accepted
+
+D128/772103 returned terminal exit0, PID3719200, no tmux, observed elapsed542s.
+The same complete source/configuration/exposure/actual learner checks pass with
+finite losses; J0.31107654932920453, five800-row rollouts/525 coordinator steps.
+Whole-command wall515.18s, user2010.15s/system15.27s, peak RSS1638784KiB, exit0.
+Summary SHA256
+`f9b0d27319ade749b7053a058021af7d26d678a2b5a81757b13f398b641931b0`;
+archive SHA256
+`e54bd1c477cd7a0935f0a2ac9c154370bbcab786bc24d19fa72002e5dd19f62e`.
+
+DM preserved the exact old duplicate-key Monitor state, then rebuilt the aggregate
+from seven collected/received terminal facts at this empty-set boundary. The
+Monitor no longer edits the aggregate. It records original8 adoption in one simple
+separate file, `receipts/772103_I128_MONITOR_ADOPTION.json`; DM received its actual
+running/PID3719886/tmux active/null exit facts and updated the unique-key aggregate.
+The active set has exactly this last handle. No earlier guessed time is adopted.
+
+Original8 `fsd-ib-b01-772103-I128` is accepted at168e61295. Its adjacent admission
+at `2026-09-15T06:39:52.771516Z` passed with14978490368 bytes. All eight selected
+originals are now accepted, seven endpoints complete and one live; none is queued
+and no further original/retry/successor is authorized. The seven complete raw
+archives,120448 bytes, have also been copied with matching SHA256 to this record's
+`artifacts/` for immutable preservation. Final result/review/intake and owner pause
+handoff follow the last original's terminal collection.
+
 ## Collection and preservation inventory
 
 Collect every original summary, training rows, logs, adjacent admission,
