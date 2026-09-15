@@ -38,5 +38,45 @@
     "observed_head": "a69d73a905ad94b78087661e767536c66b3f19dc",
     "path_exists": true,
     "published_ancestor": true
+  },
+  {
+    "commit": "6bdea263a119c4360c967515f73f001db0e47c42",
+    "path": "docs/research/portfolio/pro_packets/20260914_fsd_interruption_batch_investment/INTAKE.md",
+    "observed_remote_branch": "codex/fsd",
+    "observed_head": "0c837c6dd52a51fbd4de2e15aefe18964d1fcde0",
+    "path_exists": true,
+    "published_ancestor": true,
+    "observed_at_utc": "2026-09-15T04:44:47.439524+00:00",
+    "note": "Read-only publication check; not Pro access or new peer authority."
+  },
+  {
+    "commit": "5f19f33e10ba95e8ddf8b11b8812abb8ae664222",
+    "path": "docs/research/candidates/vap_folr_core/DIRECTION.md",
+    "observed_remote_branch": "codex/vap-folr",
+    "observed_head": "5f19f33e10ba95e8ddf8b11b8812abb8ae664222",
+    "path_exists": true,
+    "published_ancestor": true,
+    "observed_at_utc": "2026-09-15T04:44:47.439524+00:00",
+    "note": "Read-only publication check; not Pro access or new peer authority."
+  },
+  {
+    "commit": "96f834ea4164d26a11b11d0a3382ab055acf591c",
+    "path": "docs/research/candidates/tail_return_distributional_learning/pro_packets/20260914_b01_result_review_v2/INTAKE.md",
+    "observed_remote_branch": "codex/trdl",
+    "observed_head": "5bbd499c410ef9f92635c6c7a64a640c53731e34",
+    "path_exists": true,
+    "published_ancestor": true,
+    "observed_at_utc": "2026-09-15T04:44:47.439524+00:00",
+    "note": "Read-only publication check; not Pro access or new peer authority."
+  },
+  {
+    "commit": "7710de2603038c373afb252a50eda06989048aa8",
+    "path": "docs/research/portfolio/PORTFOLIO.md",
+    "observed_remote_branch": "main",
+    "observed_head": "7710de2603038c373afb252a50eda06989048aa8",
+    "path_exists": true,
+    "published_ancestor": true,
+    "observed_at_utc": "2026-09-15T04:44:47.439524+00:00",
+    "note": "Read-only publication check; not Pro access or new peer authority."
   }
 ]
