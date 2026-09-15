@@ -1,5 +1,6 @@
 """Controlled-array and synthetic verification only: no native host or master9601 fit."""
 import copy
+import itertools
 import json
 
 import numpy as np
@@ -170,3 +171,37 @@ def test_agent_reducer_and_own_tail_publication(tmp_path):
         study.publish_pair(*paths, output, "fixture")
     with pytest.raises(ValueError, match="256 finite"):
         learner.endpoint([0.] * 255 + [float("nan")])
+
+
+@pytest.mark.parametrize("interrupted_phase", ("updates", "final_evaluation"))
+def test_partial_phase_cost_and_endpoint_survive_interruption(tmp_path, monkeypatch, interrupted_phase):
+    # Control-flow fixture: seed10 models, zero optimizer/native calls, artificial clock.
+    monkeypatch.setattr(study, "models", lambda _master, arm: learner.models(10, arm))
+    monkeypatch.setattr(study, "TRAIN_EPISODES", 16)
+    monkeypatch.setattr(study, "make_real", lambda _seed: RewardProbe())
+    monkeypatch.setattr(study, "frozen_batch", lambda _critic, _episodes: {})
+    clock = itertools.count()
+    monkeypatch.setattr(study.time, "monotonic", lambda: float(next(clock)))
+    def fake_update(_actor, _critic, _optimizer, _batch, _check, counts, emit):
+        if interrupted_phase == "updates":
+            raise TimeoutError("controlled update interruption")
+    def fake_collect(_env, _actor, _reset, _rng, phase, episode, _check, counts, emit):
+        if phase == "eval" and episode == 1:
+            raise TimeoutError("controlled evaluation interruption")
+        row = dict(phase=phase, episode=episode, J=.2)
+        counts[f"{phase}_episodes"] += 1
+        emit(row)
+        return {}, row
+    monkeypatch.setattr(study, "update", fake_update)
+    monkeypatch.setattr(study, "collect_episode", fake_collect)
+    out = tmp_path / interrupted_phase
+    result = study.run_arm("SCALAR", 9601, out, "synthetic-control-flow", 1e9, 0.)
+    saved = json.loads((out / "summary.json").read_text())
+    assert result["status"] == saved["status"] == "incomplete"
+    assert saved["timings_seconds"][interrupted_phase] > 0
+    assert saved["counts"]["optimizer_steps"] == saved["counts"]["step_calls"] == 0
+    assert "endpoint" not in saved and "checkpoint_sha256" not in saved
+    if interrupted_phase == "final_evaluation":
+        assert saved["complete_final_returns"] == [.2]
+        checkpoint = torch.load(out / "checkpoint.pt", weights_only=True)
+        assert checkpoint["arm"] == "SCALAR" and checkpoint["optimizer_steps"] == 0

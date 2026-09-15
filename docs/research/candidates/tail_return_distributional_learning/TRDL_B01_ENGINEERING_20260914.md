@@ -20,3 +20,7 @@ Reuse A01's scientific reading and adapter reference: native information/reward 
 - Test scratch`b01-contract-02` is retained because the deletion-containing command was policy-rejected; do not claim cleanup. The rejected first command/first actual setup created no`b01-contract-01` directory. Source/test caches and this exact scratch are included in eventual creator cleanup inventory; no shared root is a removal target.
 
 Independent high-risk Reviewer and DM acceptance are pending. No unit rate, complete original runtime or native peak RSS is measured. A source review/check does not select a scientific outcome, add invocations or remove the next actual-node memory admission.
+
+## Independent findings and correction
+
+The [independent review record](TRDL_B01_INDEPENDENT_REVIEW_20260914.md) preserves the two P2 closeout/scope findings and DM repairs. Partial phase wall is now captured in `finally`; the unrequested checkpoint digest is removed. No learner formula, RNG, native information or scientific endpoint changed. Two selected interruption/publication checks passed in4.5866875s, making cumulative directory test wall11.8756571s. Support adds two seed10 model/optimizer constructions and control-flow fixtures with zero native/optimizer calls; cumulative synthetic backward calls remain8. All8 intended contract cases have passed across the focused invocations, with the original setup failure retained. Same-Reviewer correction check and DM source acceptance remain pending.
