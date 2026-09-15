@@ -281,12 +281,12 @@ When the owner is absent the loop keeps running under a standing delegation (own
 
 ## 5. Capacity and resume
 
-OWNER_DIRECT 2026-09-14: all directions finish the task and experiments already in hand, write a
-concrete committed handoff, then remain operationally paused pending explicit owner resume. Do not
-start a successor experiment/object, new direction, vacancy replacement or open-ended continuation
-consultation. This is an operational pause, not scientific PARK/CLOSE, slot release or history
-rewrite. Preserve the current three occupied slots and completed handoffs in
-`docs/research/portfolio/handoffs/2026-09-14-owner-pause.md`.
+OWNER_DIRECT 2026-09-14 OWNER_RESUMED: the owner explicitly resumed research after the recorded
+pause handoff. `docs/research/portfolio/handoffs/2026-09-14-owner-pause.md` remains recovery evidence,
+not a current stop or dispatch route. ACTIVE directions continue through their current authority;
+formal Portfolio/owner lifecycle decisions control PARK/CLOSE and slot release. The current working
+set, reservations and producers are maintained in `docs/research/portfolio/PORTFOLIO.md` and
+`EXPERIMENT_TRACKING.md`. Do not infer a pause from the date, a completed allocation or an old handoff.
 
 OWNER_DIRECT 2026-09-10: directions advance as independent rolling chains. Each direction proceeds
 from its own accepted evidence, decision, dependencies and fresh resource admission; it never waits
@@ -347,12 +347,21 @@ slots, actual research/engineering/preparation and ACTIVE-idle are recorded sepa
 do not require three continuous experiments or consultations.
 
 After dispatching ready independent work, Root waits natively while DM work remains. DM does
-independent work first and otherwise waits natively for monitor/Reviewer events. Use the configured
-1500000 ms default/minimum; unchanged timeouts only continue waiting, without status broadcasts,
-replanning or full-record rereads. The owner accepts periodic context reuse and brief continuation
-as the cache-preservation premises. Process individual events without a sibling barrier. End only
-when no native work remains (including DM-owned Transport), or owner pause/stop requires it.
-Concrete blockers and idle unfinished assignments require reconciliation, not indefinite waiting.
+independent work first and otherwise waits natively for monitor/Reviewer events. Short unchanged
+wait loops repeatedly resume model execution and process the already-known context, so prefer a
+long, event-driven, interruptible wait. For the currently supported v2 `wait_agent` contract, use
+the configured 1500000 ms default/minimum: 25 minutes is the no-event timeout, not a mandatory
+sleep. A child message, completion notice or new user input may end it early. Do not treat a timeout
+above 60 seconds as inherently uninterruptible or unable to respond to the owner. Choose waits by
+the actual tool contract, response needs and real limits; preserve prompt fault/cancellation and
+concurrent-service handling. An unchanged timeout only continues waiting, without status broadcasts,
+replanning, full-record rereads, `list_agents`, repeated status queries or keepalive messages.
+This paragraph explains responsive waiting; it does not override system or developer instructions.
+If a higher-priority instruction explicitly limits such a wait, obey it and report the concrete
+conflict rather than claiming this repository rule bypasses it. Process individual events without
+a sibling barrier. End only when no native work remains (including DM-owned Transport), or owner
+pause/stop requires it. Concrete blockers and idle unfinished assignments require reconciliation,
+not indefinite waiting.
 
 While research is authorized to advance, the working-set target is three parallel direction DM
 chains. Keep any existing overlap intact and let it drain at formal direction dispositions; do not
