@@ -1,0 +1,74 @@
+{
+  "id": "20260914-acvc-015",
+  "created": "2026-09-14T20:56:01-07:00",
+  "direction": "acvc",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "零暴露：cluster基线匹配与未来比较准备",
+  "context": "完整Portfolio选定一次A/RECON。只读flat MAPPO与fixed-k HMASD及当前cluster接口，给一个可比方案或精确不兼容/最小修正。0新模型、native、fit、update或code execution。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "执行有限静态准备",
+      "consequence": "按已接受Portfolio scope完成文档；不授权新数值实验。"
+    },
+    {
+      "key": "reject",
+      "label": "提出具体范围冲突",
+      "consequence": "保留原证据并记录冲突，不改历史或自行PARK。"
+    },
+    {
+      "key": "revise",
+      "label": "修改准备描述",
+      "consequence": "在零暴露及两个baseline路径范围内校正卡片，不新建执行预算。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "卡片忠实落地已接受的有限Portfolio决定。",
+  "evidence": [
+    "docs\\research\\candidates\\acvc\\ACVC_CLUSTER_BASELINE_MATCH_A01_SCIENCE_CARD_20260914.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-14.md#L139",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "按Portfolio已选C，执行一次零暴露cluster baseline匹配/未来卡准备；不是批准新训练。",
+    "changes_if_approved": [
+      {
+        "target": "ACVC当前A01准备",
+        "from": "已收到有限baseline设计分配",
+        "to": "静态核对两条baseline路径，给一个可比问题/最小适配方案或精确不兼容；全程0新model/native/fit/update/eval/code execution。"
+      }
+    ],
+    "if_refused": "保留已分配决定、历史数据与对具体card的异步修改，任何科学意义冲突返回正确节点；不自动执行新baseline。",
+    "evidence_for": [
+      {
+        "path": "docs/research/portfolio/pro_packets/20260914_acvc_post_fixed_rate_investment/archive/RESPONSE.md",
+        "quote": "The existing ACVC DM shall return one source-grounded matching assessment and prospective comparison card/work proposal, or one precise incompatibility with its smallest correction.",
+        "why": "完整Portfolio明确选择有限准备，当前任务无需逐步批准。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/acvc/ACVC_CLUSTER_BASELINE_MATCH_A01_SCIENCE_CARD_20260914.md",
+        "quote": "An algorithm switch or static config is not proof of matched or accepted runnable code.",
+        "why": "可能需要信息、动作或训练路径适配；静态观察没有性能/headroom结论。"
+      }
+    ],
+    "uncertainty": [
+      "两条路径是否在当前cluster合法信息下可比尚待读实际source。",
+      "未来B的配置、独立单位、预算和MEI需由此次有限准备提出，均未获数值授权。"
+    ],
+    "cost": {
+      "compute": "0model/load/native/fit/optimizer/eval/research-code execution；仅源码文本、文档与静态算式。",
+      "owner_time": "无需等待回复",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing"
+    },
+    "verdict_text": "Owner-delegated decision (unattended,2026-09-03 instruction): execute this Portfolio-selected documentary preparation; no second vote or Root ACK is required.",
+    "source": "docs/research/candidates/acvc/ACVC_CLUSTER_BASELINE_MATCH_A01_SCIENCE_CARD_20260914.md"
+  },
+  "starred": false
+}
