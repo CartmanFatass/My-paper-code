@@ -96,6 +96,13 @@ whose corrections are incorporated. No experiment was run and no scientific obje
 
 ### plans/
 
+- `TWO_AXIS_RESEARCH_PROGRAMME_20260914.md` — alignment draft answering the owner's request for
+  concrete next steps after the 2026-09-14 critical review: field standards (Gorsane 2022,
+  Agarwal 2021, EPyMARL, Henderson 2018); a ten-section skeleton to replace the evidence spec;
+  consolidation of the 27 directions into two axes (FSD and VNFC cores, FOLR/RCLE/FRRIE/vsp_03
+  folded as arms, 22 archived); a library audit with reading lists per axis; open-source
+  substrates (EPyMARL, GPL open-team LBF, MacDec-POMDP tasks); the L0–L5 ladder with pass
+  rules; an eight-week plan; seven [DECIDE] items.
 - `CLAUDE_SUBAGENT_WORKFLOW_20260905.md` — build record of the Claude Code research workflow: the
   Fable session as research hub (Root plus DM, two directions at a time), eleven subagents under
   `.claude/agents/` ported from the Codex roles with Opus for code and judgment and Sonnet for
