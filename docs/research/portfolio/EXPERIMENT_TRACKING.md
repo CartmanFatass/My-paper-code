@@ -14,7 +14,7 @@ the unified handoff and the named direction handoff; do not infer a vacancy or s
 | FOLR | ACTIVE/MEDIUM；两块fresh A−G为−5.830625/−.109921875，MIXED_BLOCK_PATTERN | Operationally paused；0 producer；handoff `HANDOFF_20260915_AUGMENTATION_REPEAT_OWNER_PAUSE.md` |
 | TRDL | ACTIVE/MEDIUM/recasts0；B02 Q−S lower-tail−.00241972 J INSIDE_MEI，B01正结果另存 | Operationally paused；0 producer；handoff `TRDL_OWNER_PAUSE_HANDOFF_20260914.md` |
 | CADC | Portfolio explicitly applies reversible PARKED/HIGH, retaining RR and B01 evidence | Direction-local documentary application only; no advancing research chain |
-| FSD | ACTIVE/HIGH；Claude hub 驱动。Portfolio S 分配（baseline × interruption B01，12 fits，`dc4dbdfcd`）已全部完成并 intake（2026-09-15 17:40Z）：SI1280_15 +.0098 J（small_signed，df=3 区间跨零）；GAP_D_15 −.045、GAP_I_15 −.035（未调参包差距，区间跨零）；六块 rollout-5 合并 +.043 [−.023, +.109]；合计原生墙钟 45,401 s | 0 producer；全部 12 个 handle exit 0 并已收集至 `baseline_interruption_b01_20260915/fits/`；远端 worktree 待清理（无 checkpoint）；方向层问题（A 收束 / B 调参同信息扁平基线，推荐 / C 加块）已拟于 intake，未发送；记录 `EXECUTION.md`、`HANDOFF_2026-09-15_baseline_interruption.md` |
+| FSD | ACTIVE/HIGH；Claude hub 驱动。Portfolio S 分配（baseline × interruption B01，12 fits，`dc4dbdfcd`）已全部完成并 intake（2026-09-15 17:40Z）：SI1280_15 +.0098 J（small_signed，df=3 区间跨零）；GAP_D_15 −.045、GAP_I_15 −.035（未调参包差距，区间跨零）；六块 rollout-5 合并 +.043 [−.023, +.109]；合计原生墙钟 45,401 s | 0 producer；全部 12 个 handle exit 0 并已收集至 `baseline_interruption_b01_20260915/fits/`；远端 worktree 与任务记录已清理（`CLEANUP.json`，无 checkpoint）；方向层问题（A 收束 / B 调参同信息扁平基线，推荐 / C 加块）已拟于 intake，未发送；记录 `EXECUTION.md`、`HANDOFF_2026-09-15_baseline_interruption.md` |
 
 
 ACVC、FOLR、TRDL 与 FSD 的 native DM 是各自方向 owner；当前4占用、0预留、0空缺。第四槽为所有者直接恢复的显式例外，不挤占前三条链。MGTAP 已完成

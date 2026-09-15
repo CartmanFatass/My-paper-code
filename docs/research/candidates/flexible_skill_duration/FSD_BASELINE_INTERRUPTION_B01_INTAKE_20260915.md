@@ -84,8 +84,7 @@ reviews checked at this boundary, none unapplied.
    receipt, endpoint and digest is present; the launch-quoting defect produced no duplicate
    or missing original. Owner-delegated decision (unattended, 2026-09-03 instruction): accept;
    preserve every original (committed under `fits/`; the runner writes no checkpoint, so the
-   committed set is complete apart from the Git-ignored `task.log`, also committed here as
-   plain text where present).
+   committed set is complete; the Git-ignored supervisor logs are preserved as `task_records/*.txt`).
 2. **Scientific conclusion** — options: (a) report the card-fixed readings as above (small
    signed primary, both gaps adverse-pointing with intervals including zero, rollout-5
    accumulation descriptive); (b) read the rollout-5/10 means as the "real" renewal effect and
@@ -116,8 +115,9 @@ Ledger row in `docs/research/portfolio/audit/2026-09-15.md`; owner item `2026091
 
 The twelve originals are committed under
 [baseline_interruption_b01_20260915/fits/](baseline_interruption_b01_20260915/fits/) with the
-queue records, the reduce output as `RESULT_SUMMARY.json` and the execution record. The remote
-worktree `/home/wu/hmasd-worktrees/fsd-baseline-b01-dc4dbdfcd` holds only what is committed
-here and is reclaimed at the next clean boundary (recorded in `CLEANUP.json` when done). No
+queue records, the reduce output as `RESULT_SUMMARY.json` and the execution record. The twelve supervisor
+logs and runner scripts are preserved as tracked text under `task_records/`; the remote
+worktree `/home/wu/hmasd-worktrees/fsd-baseline-b01-dc4dbdfcd` and task records were
+reclaimed after blob-level verification (`CLEANUP.json`). No
 experiment, Pro response or transport effect is pending for FSD. Revisit condition: the
 Convergence answer to the question in decision 3 once sent, or an owner instruction.

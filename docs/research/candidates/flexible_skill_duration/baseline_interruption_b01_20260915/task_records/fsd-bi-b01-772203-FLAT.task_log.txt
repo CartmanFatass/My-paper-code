@@ -1,0 +1,19 @@
+=== Task 'fsd-bi-b01-772203-FLAT' started at 2026-09-15T21:02:49+08:00 ===
+{
+  "assessed_at": "2026-09-15T13:02:49.116004Z",
+  "available_physical_bytes": 6287306752,
+  "captured_at": "2026-09-15T13:02:49.115313Z",
+  "cgroup_headroom_bytes": null,
+  "cgroup_memory_current_bytes": null,
+  "cgroup_memory_max_bytes": null,
+  "effective_available_bytes": 6287306752,
+  "effective_floor_pass": true,
+  "failure_reasons": [],
+  "measurement_source": "/proc/meminfo",
+  "minimum_available_bytes": 4294967296,
+  "passed": true,
+  "physical_floor_pass": true,
+  "schema_version": 1
+}
+{"arm": "FLAT", "seed": 772203, "status": "complete", "failure": null}
+=== Task 'fsd-bi-b01-772203-FLAT' exited with code 0 at 2026-09-15T21:36:31+08:00 (Duration: 2022s) ===

@@ -185,10 +185,12 @@ FLAT queues: not launched (dependent work, see the pre-launch record).
   every `block_<seed>_queue.jsonl` records exit 0 for its elements. Collected by
   `hmasd-experiment-tracker` into `fits/<seed>_<arm>/` (same file set as the first fits;
   `learner_logs/` and `evaluation_logs/` empty on the node; the runner writes no checkpoint).
-- Summary sha256 of the committed `summary.json` files (first 8 / last 6 hex):
-  772203: FLAT `e9379731…01edf0`, D1280 `de46bedc…dece6d`, I1280 `76d8328c…e6dd66`
-  772303: FLAT `e5c80b76…0cee35`, D1280 `ab67ceb4…2371bb`, I1280 `e544f7cf…2e1e5c`
-  772403: FLAT `6745c5bb…4b4256`, D1280 `c15e873f…811ea2`, I1280 `f8a5be98…308152`
+- Summary sha256 of the committed `summary.json` blobs, equal to the node originals (first 8 /
+  last 6 hex; Windows working copies of the three earliest D1280 folders differ only by CRLF
+  checkout normalization):
+  772203: FLAT `e9379731…01edf0`, D1280 `20cba726…c5c19f`, I1280 `76d8328c…e6dd66`
+  772303: FLAT `e5c80b76…0cee35`, D1280 `a32d5465…8c1969`, I1280 `e544f7cf…2e1e5c`
+  772403: FLAT `6745c5bb…4b4256`, D1280 `2615b720…53e47f`, I1280 `f8a5be98…308152`
   772503: FLAT `9b508235…af7ef2`, D1280 `dd799d35…56de9c`, I1280 `72eba4a6…0ff3c3`
 - Whole-command walls and peak RSS (GNU time):
 
@@ -209,3 +211,13 @@ FLAT queues: not launched (dependent work, see the pre-launch record).
   [E0](../FSD_BASELINE_INTERRUPTION_B01_RESULT_EVIDENCE_20260915.md) and
   [intake](../FSD_BASELINE_INTERRUPTION_B01_INTAKE_20260915.md) written. The S allocation ends
   here; nothing further is launched under it.
+
+### 2026-09-15 18:05Z — remote reclaim
+
+All 88 committed fit files verified byte-identical (blob sha256) to the node originals and
+the twelve supervisor `task.log`/`runner.sh` preserved as tracked text under
+[task_records/](task_records/) (digests equal to the node copies); the runner writes no
+checkpoint. The detached worktree `/home/wu/hmasd-worktrees/fsd-baseline-b01-dc4dbdfcd`
+(clean at `dc4dbdfcd`) and the twelve `~/.agent-tasks/fsd-bi-b01-*` records were then
+removed; worktree registrations 166 → 165 ([CLEANUP.json](CLEANUP.json)). Nothing of this
+object remains on the node.

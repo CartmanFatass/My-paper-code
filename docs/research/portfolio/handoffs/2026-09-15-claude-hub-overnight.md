@@ -18,8 +18,8 @@ under `docs/Claude_docs/changes/`). Nothing here changes lifecycle, priority or 
   mirrored on `codex/fsd`.
 - No producer. Direction-tier question prepared in the intake (A conclude / B tuned
   same-information flat baseline, recommended / C more blocks) for
-  `em:flexible_skill_duration:convergence`; not sent (check-in scope). Remote worktree
-  reclaim pending (no checkpoints; committed set complete).
+  `em:flexible_skill_duration:convergence`; not sent (check-in scope). Remote worktree and
+  task records reclaimed after verified preservation (`CLEANUP.json`, `task_records/`).
 - Direction handoff: `docs/research/candidates/flexible_skill_duration/HANDOFF_2026-09-15_baseline_interruption.md`.
 
 ## ACVC — family concluded, ACTIVE-idle
@@ -46,7 +46,7 @@ under `docs/Claude_docs/changes/`). Nothing here changes lifecycle, priority or 
 ## Next session
 
 No live handles. FSD: unless the owner redirects, author and send the direction-tier packet
-from intake decision 3, then reclaim the remote worktree with a `CLEANUP.json`. ACVC:
+from intake decision 3. ACVC:
 ACTIVE-idle, nothing to do. No launches are authorized under either allocation.
 
 ## Integration state

@@ -1,0 +1,19 @@
+=== Task 'fsd-bi-b01-772303-I1280' started at 2026-09-15T20:38:42+08:00 ===
+{
+  "assessed_at": "2026-09-15T12:38:42.676073Z",
+  "available_physical_bytes": 14957654016,
+  "captured_at": "2026-09-15T12:38:42.675777Z",
+  "cgroup_headroom_bytes": null,
+  "cgroup_memory_current_bytes": null,
+  "cgroup_memory_max_bytes": null,
+  "effective_available_bytes": 14957654016,
+  "effective_floor_pass": true,
+  "failure_reasons": [],
+  "measurement_source": "/proc/meminfo",
+  "minimum_available_bytes": 4294967296,
+  "passed": true,
+  "physical_floor_pass": true,
+  "schema_version": 1
+}
+{"arm": "I1280", "seed": 772303, "status": "complete", "failure": null}
+=== Task 'fsd-bi-b01-772303-I1280' exited with code 0 at 2026-09-15T22:27:52+08:00 (Duration: 6550s) ===

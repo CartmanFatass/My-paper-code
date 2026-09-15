@@ -31,10 +31,10 @@ predictions correct; owner slot not taken. Summed native wall 45,401.07 s.
 
 ## Producers
 
-None. All twelve `agent-task` handles (`fsd-bi-b01-<seed>[-<arm>]`) are finished with exit
-0 and collected. The remote worktree `/home/wu/hmasd-worktrees/fsd-baseline-b01-dc4dbdfcd`
-holds only what is committed (the runner writes no checkpoint) and is reclaimed at the next
-clean boundary with a `CLEANUP.json` in the evidence folder, as ACVC block 2 did.
+None. All twelve `agent-task` handles (`fsd-bi-b01-<seed>[-<arm>]`) finished with exit 0 and
+were collected; the remote worktree and task records were reclaimed after verified
+preservation (`baseline_interruption_b01_20260915/CLEANUP.json`; supervisor logs and runner
+scripts under `task_records/`). Nothing of this object remains on the node.
 
 ## Open direction-tier question (prepared, not sent)
 
@@ -58,5 +58,5 @@ Earlier today: `dc4dbdfcd`, `ead3ab1bf`, `5b698cad6`, `7a34308e3`, `550ef2f0a`, 
 Nothing to launch. If the owner has not redirected, author the direction-tier packet from
 intake decision 3 (REQUEST.json under `pro_packets/20260915_post_baseline_interruption_convergence/`,
 references at a main commit including the evidence spec), render, publish, bind and send
-through `hmasd-pro-transport` on key `em:flexible_skill_duration:convergence`; then reclaim
-the remote worktree and record `CLEANUP.json`. Otherwise remain ACTIVE-idle.
+through `hmasd-pro-transport` on key `em:flexible_skill_duration:convergence`. Otherwise
+remain ACTIVE-idle.

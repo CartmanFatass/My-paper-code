@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+echo $$ > "/home/wu/.agent-tasks/fsd-bi-b01-772403-FLAT/pid"
+START_TS=$(date +%s)
+echo "=== Task 'fsd-bi-b01-772403-FLAT' started at $(date -Iseconds) ===" >> "/home/wu/.agent-tasks/fsd-bi-b01-772403-FLAT/task.log"
+
+# Execute command capturing output
+set +e
+eval '/bin/bash /home/wu/hmasd-worktrees/fsd-baseline-b01-dc4dbdfcd/docs/research/candidates/flexible_skill_duration/baseline_interruption_b01_20260915/commands/BLOCK.sh /home/wu/hmasd-worktrees/fsd-baseline-b01-dc4dbdfcd 772403 FLAT' >> "/home/wu/.agent-tasks/fsd-bi-b01-772403-FLAT/task.log" 2>&1
+EXIT_CODE=$?
+set -e
+
+END_TS=$(date +%s)
+echo $EXIT_CODE > "/home/wu/.agent-tasks/fsd-bi-b01-772403-FLAT/exit_code"
+if [ $EXIT_CODE -eq 0 ]; then
+    echo "finished" > "/home/wu/.agent-tasks/fsd-bi-b01-772403-FLAT/status"
+else
+    echo "failed" > "/home/wu/.agent-tasks/fsd-bi-b01-772403-FLAT/status"
+fi
+echo "=== Task 'fsd-bi-b01-772403-FLAT' exited with code $EXIT_CODE at $(date -Iseconds) (Duration: $((END_TS - START_TS))s) ===" >> "/home/wu/.agent-tasks/fsd-bi-b01-772403-FLAT/task.log"
+
+# Keep session alive briefly for inspection, then exit
+sleep 1
