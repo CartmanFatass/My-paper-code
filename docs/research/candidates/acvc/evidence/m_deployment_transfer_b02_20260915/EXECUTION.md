@@ -64,4 +64,6 @@ ssh -o BatchMode=yes -o ConnectTimeout=10 hmasd-wsl-node /usr/local/bin/agent-ta
 
 | Handle | Launch (UTC) | Remote pid | Admission | State |
 | --- | --- | ---: | --- | --- |
-| __LAUNCH_ROW__ |
+| acvc-transfer-m-b02-28631-c006c0b24 | 2026-09-15T22:34:13Z | 3754217 | passed, 15,613,599,744 B physical and effective available (floor 4 GiB), assessed 22:34:25Z | running at uptime 15 s (tmux active); stderr.log 0 bytes; stdout advancing (rollout 48 after 23.06 s process wall); expected end about 22:54Z |
+
+Operator: `hmasd-experiment-operator`, one command, pre-launch duplicate check `not_found`, worktree clean at the launch sha, output parent created and output absent, no retry. Node otherwise idle (two stale supervisor records from 2026-09-07/08 with inactive tmux and zero load are not live processes). Observation: hub-owned bounded status polls; collection after the terminal state.

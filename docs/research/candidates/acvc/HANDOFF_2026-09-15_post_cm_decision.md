@@ -1,8 +1,7 @@
 # ACVC handoff — after the em:acvc:convergence decision (2026-09-15, Claude hub)
 
-**State: ACTIVE / MEDIUM / recasts 2, lowest sequencing; B01 complete and reviewed
-(`PRO_FINAL`, B02 selected), one-fit B02 investment request pending with Portfolio, no live
-producer, no launch authorised.** Driven by
+**State: ACTIVE / MEDIUM / recasts 2, lowest sequencing; B02 granted (G2) and launched: one live
+producer, handle `acvc-transfer-m-b02-28631-c006c0b24`; nothing else authorised.** Driven by
 the Claude Code research hub (owner 2026-09-15 resume; two directions, ACVC and
 FSD). Authoring checkout `C:/Projects/HMASD-worktrees/codex-acvc`, branch
 `codex/acvc` (1,140 commits behind `main`; a merge of `main` conflicts in Codex
@@ -78,6 +77,35 @@ and `em:acvc:convergence` selected it with corrections (**B**, `PRO_FINAL`,
 card §5 and §7 acceptance groups) is engineering work that proceeds meanwhile with independent
 Opus review.
 
+## B02 granted, L0 accepted, fit launched (2026-09-15 22:35Z)
+
+- Portfolio answered at `codex/acvc 47021a400` (22:20Z; one Send 22:13Z, COMPLETE, ARCHIVED,
+  tab closed; Issue 14 comment `5688893524`): **G2**, `PRO_FINAL / OWNER_DELEGATED`
+  ([decision](../../portfolio/decisions/2026-09-15-acvc-m-deployment-transfer-b02-grant.md),
+  [intake](../../portfolio/pro_packets/20260915_acvc_m_deployment_transfer_b02_investment/INTAKE.md),
+  ledger row 34, owner item `20260915-acvc-007`).
+- L0 at `codex/acvc 6a3967065` (thin B02 entry, launch script, five binding tests); `hmasd-reviewer`
+  accept, no material finding; 16 tests green on the node at the launch sha
+  `c006c0b2453a44902ebfda827099823a28e136f1` (ledger row 35). On-policy re-staged at
+  `/home/wu/hmasd-inputs/acvc-transfer-b02-28631/on-policy` (DEPENDENCY.json); remote worktree
+  `/home/wu/hmasd-worktrees/acvc-transfer-b02-c006c0b24` (fetched by full sha).
+- **Live handle `acvc-transfer-m-b02-28631-c006c0b24`**: launched 2026-09-15T22:34:13Z through hmasd-experiment-operator, remote pid 3754217, admission passed at 22:34:25Z (15,613,599,744 B physical and effective available, floor 4 GiB), running at uptime 15 s with tmux active, stderr.log 0 bytes, stdout advancing (rollout 48 after 23.06 s process wall), expected end about 22:54Z
+  Record: `evidence/m_deployment_transfer_b02_20260915/EXECUTION.md`. Plan about 1,200 s, not a cap.
+  Output root `<W>/temp/directions/acvc/exp/m_deployment_transfer_b02_28631`.
+
+## First resume step (current)
+
+Observe the handle (`agent-task status acvc-transfer-m-b02-28631-c006c0b24`; never run/stop/attach).
+When finished: collect `native/` (summary.json, episodes.jsonl, updates.jsonl, admission.json,
+native_time.txt, task.log as .txt) with digests as for B01, run `--mode reduce` through
+`scripts/run_acvc_m_deployment_transfer_b02.py`, write WORLD_DIFFERENCES.json (never .csv), the
+E0 with the card-fixed reading (T_F,2 primary; read alone first, then the two instances side by
+side with their own uncertainties; no pooled verdict), intake, Chinese brief, PREDICTIONS.json
+(card §3 forecasts), preservation archive under
+`temp/directions/acvc/retained/m_deployment_transfer_b02_20260915/`, then reclaim the remote
+worktree, staging and task record (CLEANUP.json). The object ends after this one original; a
+further object is a direction-tier question for `em:acvc:convergence`. FSD-side work is unaffected.
+
 ## Result review intaken and B02 investment question sent (2026-09-15 22:10Z)
 
 - `em:acvc:convergence` answered the result review at `codex/acvc 1fb3d9e14` (21:57Z; one
@@ -102,7 +130,7 @@ Opus review.
   wrapped evaluator and reducer at `a741758a1`) with one focused binding test and independent
   review of the changed behaviour.
 
-## First resume step (current)
+## First resume step as written at 22:10Z (superseded 22:35Z by the section above)
 
 Wait for the archived Portfolio answer to the B02 investment request (GitHub readback of the
 response path above at a fresh `codex/acvc` head; then transport phase 2: COMPLETE receipt,

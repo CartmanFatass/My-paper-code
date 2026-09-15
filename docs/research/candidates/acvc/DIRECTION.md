@@ -1,5 +1,26 @@
 # Direction acvc: ACVC
 
+## B02 granted and launched — 2026-09-15 22:35Z (Portfolio G2, PRO_FINAL / OWNER_DELEGATED)
+
+`portfolio:cross_direction` granted exactly one further independently initialised M fit at 22:20Z
+([decision](../../portfolio/decisions/2026-09-15-acvc-m-deployment-transfer-b02-grant.md),
+[intake](../../portfolio/pro_packets/20260915_acvc_m_deployment_transfer_b02_investment/INTAKE.md),
+ledger row 34, owner item `20260915-acvc-007`): 1,097,728 ticks, one snapshot loaded three times,
+T_F,2 primary, per-instance display beside B01 with no pooled verdict, zero retries or extra
+panels, the next ready numerical job after technical acceptance; the delegation reading stands
+(this fit by G2; ordinary in-scope work under real DM delegation needs no per-fit approval). The
+L0 is a thin entry `scripts/run_acvc_m_deployment_transfer_b02.py` that rebinds MASTER 28631 /
+namespace 38631 on the unchanged B01 transfer runner before any recipe import, with its launch
+script and five focused binding tests (`codex/acvc 6a3967065`); independent Opus review accepted
+it with no material finding, and both focused suites passed on the node at the launch sha
+(16 tests, on-policy no-op identity included; ledger row 35). Launched through the operator on
+the WSL node: launched 2026-09-15T22:34:13Z through hmasd-experiment-operator, remote pid 3754217, admission passed at 22:34:25Z (15,613,599,744 B physical and effective available, floor 4 GiB), running at uptime 15 s with tmux active, stderr.log 0 bytes, stdout advancing (rollout 48 after 23.06 s process wall), expected end about 22:54Z
+([EXECUTION.md](evidence/m_deployment_transfer_b02_20260915/EXECUTION.md), plan about 1,200 s,
+not a cap). No reading before the fit completes and `--mode reduce` runs; the object ends after
+this one original regardless of sign.
+
+
+
 ## Result review intaken: one further independent M fit selected (B02) — 2026-09-15 22:05Z (em:acvc:convergence B, PRO_FINAL; one-fit investment question to Portfolio)
 
 `em:acvc:convergence` reviewed the completed transfer result and selected **B**: exactly one
