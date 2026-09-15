@@ -30,6 +30,13 @@ below does not rewrite the older typed-state or scalar-gate objects.
 
 ## Current position
 
+**Owner pause after the current fixed object, acknowledged2026-09-15T06:05Z:**
+finish all four already selected original A-G learner calls, Monitor/collection,
+this object's intake/review, preservation and necessary cleanup, then publish a
+concrete pause handoff. Do not interrupt A1 or omit fixed G2/A2, and do not open
+a successor object, Portfolio/direction question or new Transport. This is an
+operational stopping boundary; CONTINUE/MEDIUM, family OPEN and evidence stay.
+
 **Owner-resumed 2026-09-14:** the explicit instruction to restore subagent DM
 control and continue supersedes the operational pause below. The latest complete
 fresh Z−G B gives Z−0.136015625/G4.307734375, d−4.44375, GENERIC_ABOVE_MEI.

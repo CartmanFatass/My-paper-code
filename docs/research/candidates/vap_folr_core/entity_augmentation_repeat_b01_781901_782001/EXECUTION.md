@@ -115,3 +115,18 @@ Actual original learner invocations admitted:2 of4 (G1 complete, A1 running).
 Manual startup repair count1; scientific retry0. G2/A2 remain unstarted original
 calls and continue regardless of block1 outcome, each with explicit output
 directory preparation and its fresh adjacent admission. No study polarity exists.
+
+## Owner completion-then-pause instruction
+
+At the06:05Z acknowledgment boundary, Root relayed OWNER_PAUSE_REQUEST: complete
+the currently fixed two-block A-G four-original chain, Monitor, collection,
+intake/review, preservation and necessary cleanup, then stop at a safe boundary.
+Do not interrupt A1 or omit the remaining G2/A2 from this same frozen study.
+Do not start a successor outside this object, Portfolio/direction request or new
+Transport. DM applies this immediately to continuation scope. Any required
+review of this object's completed evidence is limited to that evidence and its
+interpretation, without a next-object or direction/Portfolio selection question.
+The existing reusable reviewer/Transport remains available for authorized
+closeout; no new Transport is created. A committed actual pause handoff follows
+terminal closeout. The instruction changes neither this card's frozen reading,
+four learner calls, scientific retry0, source nor scientific disposition.
