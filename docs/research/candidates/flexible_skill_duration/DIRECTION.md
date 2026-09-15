@@ -44,8 +44,9 @@ Untying the duration `k` is this direction. Untying the agent count `N` is a sep
   same-information baseline competence comparison and a narrower batch-dependence
   question. [The baseline work plan](FSD_RESTART_PREPARATION_INTAKE_20260914.md#baseline-information-audit-and-bounded-work-plan)
   exposes the private-flat versus centrally conditioned skill information mismatch;
-  no baseline or successor fit is allocated. Owner requested an execution pause
-  after this chain's preservation/closeout, not a scientific PARK. Existing optional
+  no baseline or successor fit is allocated. The owner execution pause is now
+  applied after preservation/closeout; [pause handoff](FSD_OWNER_PAUSE_HANDOFF_20260915.md).
+  No scientific PARK is selected. Existing optional
   package-use evidence and the fixed-K2 branch boundary retain their scope.
 - Current claim ceiling is B — EXPLORE. Original Convergence U now selects the
   complete I1280 recipe as a **limited optional learning scheme under the same

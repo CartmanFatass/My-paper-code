@@ -150,6 +150,8 @@ Eight unchanged raw archives preserve88 files/138032 compressed bytes. Their
 archive and per-file digests, supervisor facts, admissions and resources are in
 PROVENANCE.json. Source remains published in Git. The [intake](FSD_INTERRUPTION_BATCH_B01_INTAKE_20260915.md)
 records independent result-review acceptance and owner pause application. Remote
-cleanup occurs only after Root confirms this preservation/integration; receipts
-are linked there. Completion is not scientific PARK: owner requested a safe
-execution pause after this finite chain.
+cleanup completed after Root retained the full result at main dc0e47465;
+all9 owned targets and the source worktree registration are verified absent,
+with166 other worktrees unchanged. Retention/absence receipts are linked in the
+intake. Completion is not scientific PARK: the owner-requested safe execution
+pause is applied after this finite chain and its preservation/cleanup.

@@ -96,10 +96,13 @@ new scientific calls. DM accepts the report and its limits: no independent live
 thread census, source-transfer audit or trajectory/gradient replay is claimed.
 
 The final raw archives/PROVENANCE and terminal state are in
-`interruption_batch_b01_20260914/`; the remote owned worktree and8 terminal
-supervisor roots remain pending verified retention and assigned cleanup. No other
-active/shared checkout is in the inventory. Root's forthcoming retention confirmation
-and the actual cleanup receipt will be appended before the final pause handoff.
+`interruption_batch_b01_20260914/`. Root integrated and pushed their complete
+preservation as main **dc0e474654482e8db205fd1e6b67dd4a2b6a5398** and accepted
+the exact9-target reclamation. DM independently reread all8 archives from that
+immutable main commit, unpacked their88 member digests, checked the retained
+summary and exact malformed-metadata gzip, and confirmed the published source
+commit exists. [RETENTION_CHECK.json](interruption_batch_b01_20260914/RETENTION_CHECK.json)
+records this actual main preservation rather than a branch-only promise.
 
 [CLEANUP_INVENTORY.json](interruption_batch_b01_20260914/CLEANUP_INVENTORY.json)
 has exactly nine targets: this isolated remote source/output worktree and its
@@ -109,6 +112,16 @@ with no tracked/untracked source changes. All8 statuses are finished/exit0,
 their PIDs and tmux sessions are absent. The worktree is registered and contains
 45723277 file bytes;166 other worktrees are outside the removal scope. These
 are pre-cleanup facts, not claims of completed deletion.
+
+Cleanup completed **2026-09-15T07:16:48.678359Z** after a fresh88-file hash match,
+source/terminal/PID/tmux/path check. The one exact owned worktree was removed
+through Git worktree removal; the8 exact terminal supervisor roots were removed.
+[CLEANUP_RECEIPT.json](interruption_batch_b01_20260914/CLEANUP_RECEIPT.json)
+verifies all9 disk absences, source worktree registration absence, all8 PID/tmux
+absences and an unchanged set of166 other worktrees. The remote shared repository,
+Windows authoring checkout and published source/results remain intact. No cleanup
+or external producer remains pending. The owner pause is applied at this completed
+safe boundary; see [pause handoff](FSD_OWNER_PAUSE_HANDOFF_20260915.md).
 
 Chinese owner brief:
 [2026-09-15_FSD_INTERRUPTION_BATCH_B01](../../portfolio/owner/briefs/flexible_skill_duration/2026-09-15_FSD_INTERRUPTION_BATCH_B01.md).
