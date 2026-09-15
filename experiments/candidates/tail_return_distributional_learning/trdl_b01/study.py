@@ -16,6 +16,7 @@ from .learner import (ARMS, BATCH, CHUNK, EPOCHS, EVAL_EPISODES, HORIZON,
 COST_LAW = ("non-reset initialization + 769 resets + 512*256 training ticks + "
             "32 frozen-baseline batches + 128 updates(16,256,5,32,K) + "
             "256*256 final-evaluation ticks + publication and exit")
+MASTERS = (9601, 9602)
 
 
 def new_counts():
@@ -53,8 +54,8 @@ def peak_rss_bytes():
 
 def run_arm(arm, master, out, launch_sha, max_seconds, process_start):
     """Fixed scientific endpoint; no retry/resume/checkpoint-selection path."""
-    if arm not in ARMS or master != 9601:
-        raise ValueError("B01 binds SCALAR/Q32 and unscreened master9601")
+    if arm not in ARMS or master not in MASTERS:
+        raise ValueError("TRDL binds SCALAR/Q32 and registered master9601/9602")
     out = Path(out)
     out.mkdir(parents=True, exist_ok=False)
     counts = new_counts()
@@ -64,7 +65,8 @@ def run_arm(arm, master, out, launch_sha, max_seconds, process_start):
                    counts=counts, timings_seconds=timings, device="cpu", dtype="float32",
                    torch_threads=torch.get_num_threads(), cost_law=COST_LAW,
                    cost_unit_rates="UNKNOWN before the original invocation",
-                   initial_ordinary_runtime_plan_seconds=900, watchdog_seconds=max_seconds,
+                   initial_ordinary_runtime_plan_seconds=(900 if master == 9601 else 300),
+                   watchdog_seconds=max_seconds,
                    scientific_class="B/EXPLORE", independent_training_instances=1,
                    training_episodes=TRAIN_EPISODES, horizon=HORIZON,
                    batch_episodes=BATCH, epochs=EPOCHS, chunk=CHUNK,
@@ -159,17 +161,19 @@ def run_arm(arm, master, out, launch_sha, max_seconds, process_start):
     return summary
 
 
-def publish_pair(scalar_path, quantile_path, output, launch_sha):
+def publish_pair(scalar_path, quantile_path, output, launch_sha, master=9601):
+    if master not in MASTERS:
+        raise ValueError("unregistered pair master")
     summaries = [json.loads(Path(path).read_text(encoding="utf-8"))
                  for path in (scalar_path, quantile_path)]
     for arm, summary in zip(ARMS, summaries):
         counts = summary["counts"]
-        if (summary["arm"] != arm or summary["seed"] != 9601 or summary["status"] != "complete"
+        if (summary["arm"] != arm or summary["seed"] != master or summary["status"] != "complete"
                 or counts["train_episodes"] != TRAIN_EPISODES
                 or counts["eval_episodes"] != EVAL_EPISODES or counts["optimizer_steps"] != 128):
-            raise ValueError("missing complete original B01 arm; preserve independent facts")
+            raise ValueError("missing complete original arm at requested master; preserve independent facts")
     result = contrast(*(summary["endpoint"]["returns"] for summary in summaries))
-    result.update(launch_sha=launch_sha, source_summaries=[str(scalar_path), str(quantile_path)],
+    result.update(seed=master, launch_sha=launch_sha, source_summaries=[str(scalar_path), str(quantile_path)],
                   counts={summary["arm"]: summary["counts"] for summary in summaries},
                   summed_arm_wall_seconds=sum(s["wall_seconds_through_closeout"] for s in summaries),
                   claim_ceiling="one paired learning instance, whole-package B/EXPLORE")

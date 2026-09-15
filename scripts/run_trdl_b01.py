@@ -33,13 +33,14 @@ def main():
     arm.add_argument("--launch-sha", required=True)
     arm.add_argument("--max-seconds", type=float, default=900)
     pair = sub.add_parser("pair")
+    pair.add_argument("--seed", type=int, default=9601)
     pair.add_argument("--scalar", type=Path, required=True)
     pair.add_argument("--quantile", type=Path, required=True)
     pair.add_argument("--out", type=Path, required=True)
     pair.add_argument("--launch-sha", required=True)
     args = parser.parse_args()
     if args.mode == "pair":
-        result = publish_pair(args.scalar, args.quantile, args.out, args.launch_sha)
+        result = publish_pair(args.scalar, args.quantile, args.out, args.launch_sha, master=args.seed)
         print(result["branch"], result["delta_tail"])
         return 0
     result = run_arm(args.arm, args.seed, args.out, args.launch_sha,
