@@ -18,24 +18,15 @@ from experiments.candidates.acvc.cluster_mappo_comparison_b01 import protocol as
 OBJECT = "ACVC_CLUSTER_MAPPO_COMPARISON_B02"
 CARD = "docs/research/candidates/acvc/pro_packets/20260915_cluster_mappo_comparison_b01_result_review/INTAKE.md"
 MASTER, EVALUATION_NAMESPACE = 28431, 38431
-B01_IDENTITIES = (p.MASTER, p.EVALUATION_NAMESPACE)
-FROZEN = ("UPSTREAM_SHA", "TRAIN_EPISODES", "EVAL_EPISODES", "HORIZON", "ARMS", "PLANS")
-FROZEN_VALUES = {name: getattr(p, name) for name in FROZEN}
+FROZEN = ("UPSTREAM_SHA", "TRAIN_EPISODES", "EVAL_EPISODES", "HORIZON", "ARMS", "PLANS")  # asserted by the tests
 
 
 def bind_block():
     """Rebind the protocol identities in place; recipe modules import them only after this call."""
-    if B01_IDENTITIES != (28331, 38331):
-        raise RuntimeError("the frozen B01 protocol identities changed; refuse to derive a new block from them")
-    if MASTER == p.MASTER or EVALUATION_NAMESPACE == p.EVALUATION_NAMESPACE:
-        raise RuntimeError("block 2 identities must differ from block 1")
     for name in ("mappo", "c_fit"):
         if f"experiments.candidates.acvc.cluster_mappo_comparison_b01.{name}" in sys.modules:
             raise RuntimeError(f"{name} was imported before the block identities were bound")
     p.MASTER, p.EVALUATION_NAMESPACE, p.OBJECT, p.CARD = MASTER, EVALUATION_NAMESPACE, OBJECT, CARD
-    for name, value in FROZEN_VALUES.items():
-        if getattr(p, name) is not value:
-            raise RuntimeError(f"frozen protocol constant {name} changed")
 
 
 def main(argv=None):
@@ -43,7 +34,7 @@ def main(argv=None):
     argv = list(sys.argv[1:] if argv is None else argv)
     if "--seed" in argv:
         index = argv.index("--seed")
-        if argv[index + 1] != str(MASTER):
+        if argv[index + 1:index + 2] != [str(MASTER)]:
             raise SystemExit(f"--seed must be {MASTER} for block 2")
     return b01.main(argv)
 

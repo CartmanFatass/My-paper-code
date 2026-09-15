@@ -33,9 +33,12 @@ def test_bind_block_rebinds_identities_and_keeps_the_recipe(fresh_modules):
         assert getattr(p, name) is value
     assert frozen["TRAIN_EPISODES"] == 4096 and frozen["EVAL_EPISODES"] == 64 and frozen["HORIZON"] == 256
     assert frozen["UPSTREAM_SHA"] == "de66d7a4b23fac2513f56f96f73b3f5cb96695ac"
-    # Derived seeds of the new block never collide with block 1's.
-    old = {100000 * 28331 + k for k in range(0, 6000)} | {100000 * 38331 + k for k in range(0, 6000)}
-    new = {100000 * 28431 + k for k in range(0, 6000)} | {100000 * 38431 + k for k in range(0, 6000)}
+    # Derived seeds of the new block never collide with block 1's: the largest offset in the recipe's
+    # seed graph is base + 40463 (native_link_loss_b01/model.py eval gate generators), far below the
+    # 100000 * 100 gap between the two masters and the two namespaces.
+    span = range(0, 50000)
+    old = {100000 * 28331 + k for k in span} | {100000 * 38331 + k for k in span}
+    new = {100000 * 28431 + k for k in span} | {100000 * 38431 + k for k in span}
     assert not (old & new)
     # The B01 runner's parser now accepts only the block-2 seed.
     parser_choices = None
@@ -66,3 +69,5 @@ def test_wrong_seed_is_refused(fresh_modules):
     b02 = importlib.import_module("run_acvc_cluster_mappo_comparison_b02")
     with pytest.raises(SystemExit):
         b02.main(["--seed", "28331", "--output", "x", "--arm", "C", "--launch-sha", "abc"])
+    with pytest.raises(SystemExit):
+        b02.main(["--output", "x", "--arm", "C", "--launch-sha", "abc", "--seed"])
