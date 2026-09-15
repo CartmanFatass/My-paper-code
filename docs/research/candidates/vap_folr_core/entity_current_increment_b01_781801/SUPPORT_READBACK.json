@@ -1,0 +1,14 @@
+{
+  "verified_utc": "2026-09-15T04:00:49.371305+00:00",
+  "source_sha": "8ad304d61af6885c0ca5ba236bbf6c2c160e61f4",
+  "archive": {
+    "remote_path": "/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801/temp/directions/vap_folr_core/exp/entity_current_increment_b01_781801/SUPPORT_RAW.tar.gz",
+    "bytes": 19195846,
+    "sha256": "e39832b6c183e2edb8b3cf8683c4e4eb4b2d985c769b3d502898d7187dd6feb7",
+    "member_count": 53
+  },
+  "all_members_match_inventory": true,
+  "members": 53,
+  "scientific_exposure": 0,
+  "removal_performed": false
+}

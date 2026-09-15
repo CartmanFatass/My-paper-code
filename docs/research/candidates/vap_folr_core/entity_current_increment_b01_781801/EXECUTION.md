@@ -92,3 +92,19 @@ one-fit-per-arm ceiling, missed prediction, original/adaptive evidence boundarie
 and the owner's prospective calibration. No scientific retry or successor fit
 has occurred. Full independent result/plan review and support retention/cleanup
 are the remaining closeout work.
+
+## Complete-result review dispatched and support preserved
+
+The new result/one-versus-two A-G block review is published at TASK
+859b18b05bca3985ce7a34662e500a85a563e7aa and HANDOFF
+ca6889fb49978657c16957ca85b7a57d723daae5, in
+pro_packets/20260914_current_increment_b01_result_plan_review. It was dispatched
+directly to the reusable native Transport; provider acceptance and full response
+are not inferred from dispatch. The scope is result/object-plan review, with no
+family/lifecycle or Portfolio decision. Scientific input2d83f5b8f includes the
+endpoint CSV that the repository-wide ignore pattern initially omitted.
+
+All53 remote support members and4 local runtime members are now archived and
+read back byte-for-byte. CLEANUP_INVENTORY.md and SUPPORT_READBACK.json record
+the exact retention/removal boundary. No cleanup, successor fit or retry has yet
+occurred at this preservation step.
