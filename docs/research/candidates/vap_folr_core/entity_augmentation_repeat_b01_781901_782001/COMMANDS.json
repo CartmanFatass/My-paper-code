@@ -1,0 +1,77 @@
+{
+  "source_sha": "7975964542b83560cbc0e79f74a9212f8e3737af",
+  "worktree": "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001",
+  "order": "G1,A1,G2,A2 regardless of earlier score/completeness; fresh admission per call",
+  "commands": [
+    {
+      "block": 1,
+      "arm": "generic",
+      "source_sha": "7975964542b83560cbc0e79f74a9212f8e3737af",
+      "handle": "folr-augmentation-repeat-b01-781901-generic",
+      "out": "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/block1/generic",
+      "argv": [
+        "/usr/local/bin/agent-task",
+        "run",
+        "folr-augmentation-repeat-b01-781901-generic",
+        "bash",
+        "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/BLOCK1_GENERIC.sh",
+        "7975964542b83560cbc0e79f74a9212f8e3737af",
+        "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001",
+        "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/block1/generic"
+      ]
+    },
+    {
+      "block": 1,
+      "arm": "persistent",
+      "source_sha": "7975964542b83560cbc0e79f74a9212f8e3737af",
+      "handle": "folr-augmentation-repeat-b01-781901-persistent",
+      "out": "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/block1/persistent",
+      "argv": [
+        "/usr/local/bin/agent-task",
+        "run",
+        "folr-augmentation-repeat-b01-781901-persistent",
+        "bash",
+        "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/BLOCK1_PERSISTENT.sh",
+        "7975964542b83560cbc0e79f74a9212f8e3737af",
+        "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001",
+        "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/block1/persistent",
+        "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/block1/generic/summary.json"
+      ]
+    },
+    {
+      "block": 2,
+      "arm": "generic",
+      "source_sha": "7975964542b83560cbc0e79f74a9212f8e3737af",
+      "handle": "folr-augmentation-repeat-b01-782001-generic",
+      "out": "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/block2/generic",
+      "argv": [
+        "/usr/local/bin/agent-task",
+        "run",
+        "folr-augmentation-repeat-b01-782001-generic",
+        "bash",
+        "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/BLOCK2_GENERIC.sh",
+        "7975964542b83560cbc0e79f74a9212f8e3737af",
+        "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001",
+        "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/block2/generic"
+      ]
+    },
+    {
+      "block": 2,
+      "arm": "persistent",
+      "source_sha": "7975964542b83560cbc0e79f74a9212f8e3737af",
+      "handle": "folr-augmentation-repeat-b01-782001-persistent",
+      "out": "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/block2/persistent",
+      "argv": [
+        "/usr/local/bin/agent-task",
+        "run",
+        "folr-augmentation-repeat-b01-782001-persistent",
+        "bash",
+        "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/BLOCK2_PERSISTENT.sh",
+        "7975964542b83560cbc0e79f74a9212f8e3737af",
+        "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001",
+        "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/block2/persistent",
+        "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/block2/generic/summary.json"
+      ]
+    }
+  ]
+}

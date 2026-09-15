@@ -1,0 +1,27 @@
+{
+  "started_utc": "2026-09-15T04:37:54.429635+00:00",
+  "source_sha": "7975964542b83560cbc0e79f74a9212f8e3737af",
+  "review_source_sha": "78437b89f901f0a3ef1828f768039ea41e7d29a3",
+  "scientific_code_card_wrappers_unchanged": true,
+  "argv": [
+    "/home/wu/.venvs/hmasd/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "--basetemp",
+    "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/test/augmentation-repeat-b01-fixture-fix-20260914-dm",
+    "tests/experiments/candidates/vap_folr_core/entity_augmentation_repeat_b01/test_integration.py::test_unusable_own_block_g_keeps_a_endpoint_without_polarity[changes1]",
+    "tests/experiments/candidates/vap_folr_core/entity_augmentation_repeat_b01/test_integration.py::test_unusable_own_block_g_keeps_a_endpoint_without_polarity[changes10]"
+  ],
+  "returncode": 0,
+  "wall_seconds": 0.9920506130438298,
+  "scratch": "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/test/augmentation-repeat-b01-fixture-fix-20260914-dm",
+  "scratch_disk_absent": true,
+  "native_exposure": 0,
+  "real_optimizer_updates": 0,
+  "earlier_failure_scratch_archive": {
+    "remote_path": "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/FAILED_CHECK_SCRATCH.tar.gz",
+    "bytes": 10183,
+    "sha256": "b4460c8e20ade774bb2acdc238a4ce8aaf379f9c629c38ffd0c443f8b9f8ed54"
+  }
+}
