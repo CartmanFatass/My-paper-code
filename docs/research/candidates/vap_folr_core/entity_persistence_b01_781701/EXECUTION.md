@@ -50,11 +50,34 @@ physical/effective available15285231616bytes, passed4GiB. The native Monitor
 It prematurely returned a final while the handle was active; DM immediately
 resumed the same monitor's complete observation assignment, with no launch or
 scientific retry. Its compact state remains in the named direction temp path.
-DM ceases routine process polling after direct adoption; terminal collection follows
-that monitor's native event.
+The initial adoption did not provide continuous observation: this Monitor and its
+first replacement repeatedly finalized while the handle remained running. Their
+running receipts are historical observations, not evidence of an active observer.
+The capability fallback and limited cleanup are recorded in MONITOR_RECOVERY.md.
 
 The earlier preparation's stopped git-show parent returned SIGTERM; its orphaned
 HTTPS helper subsequently exited with `SSL connection timeout`. A later attempt
 to stop those same two helper PIDs found them already absent. No scientific process
 was stopped and no ambiguous launch existed; repaired preparation was completed
 through the configured network shell before this accepted invocation.
+
+## Z collection and original A invocation
+
+Z exited0 at2026-09-15T00:15:40Z in the original supervisor log; full external
+invocation wall2930.62s/aggregate CPU2931.17s/peak RSS857528KiB. DM collected the
+terminal at00:16:26Z, verified the exact source and full5000/4969/128 output and
+checkpoint, and verified all10 archived members after local transfer. See
+CURRENT_ONLY_COLLECTION.json, CURRENT_ONLY_LOCAL_VERIFICATION.json and
+CURRENT_ONLY_PANEL_READBACK.json. The raw archive preserves every arm output and
+supervisor file; CURRENT_ONLY_INTAKE.md separates this arm's facts from the pair.
+
+A was accepted at2026-09-15T00:17:51.655882Z under the already published exact
+command, supervisor PID3698859/runner PID3698863. Its memory preflight captured
+00:17:51.673682Z, physical/effective15630495744bytes, passed4GiB. Source remains
+42e337f36bd36c5dd24a7862eb71144f44fdef57 with a clean tracked checkout. Its Z input
+is the unchanged summary SHA256
+cfbeb5e9e7c8fd750a73c706a22e5719afce57d0f8a2b481e2f6fb2fe39ad61b.
+PERSISTENT_LAUNCH_RECEIPT.json and PERSISTENT_ACCEPTANCE.json record the actual
+acceptance and admission. One original invocation per arm, zero retries; no score
+screening or exposure change. The same honest terminal-only Monitor was resumed
+for A; MONITOR_RECOVERY.md records the actual direct-return method and limitations.
