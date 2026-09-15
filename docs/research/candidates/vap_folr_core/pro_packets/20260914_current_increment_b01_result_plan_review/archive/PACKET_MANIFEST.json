@@ -1,0 +1,36 @@
+{
+  "schema_version": 4,
+  "packet_id": "2026-09-14-folr-current-increment-b01-result-plan-review-01--vap_folr_core",
+  "attempt": 1,
+  "canonical_form": "logical_packet_manifest",
+  "request_id": "2026-09-14-folr-current-increment-b01-result-plan-review-01",
+  "direction_id": "vap_folr_core",
+  "direction_ids": [
+    "vap_folr_core"
+  ],
+  "workflow_node": "em_convergence",
+  "conversation_binding_key": "em:vap_folr_core:convergence",
+  "decision_authority": "pro_final",
+  "source_mode": "paste",
+  "body": {
+    "role": "prompt",
+    "source_path": "<paste>",
+    "canonical_filename": "2026-09-14-folr-current-increment-b01-result-plan-review-01--vap_folr_core__00_PROMPT.md",
+    "bytes": 1938,
+    "sha256": "f0e8b85714ab377d46bb896c9b7d68fd6ca2c739a0d1ae717ff806134869aafa",
+    "materialized_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\packet\\20260914-folr-current-increment-b01-result-plan-review\\2026-09-14-folr-current-increment-b01-result-plan-review-01--vap_folr_core__00_PROMPT.md"
+  },
+  "references": [],
+  "reference_order_is_authoritative": true,
+  "provider_filename_policy": "record_observed_name_only",
+  "companion_prompt_is_transport_ui_only": true,
+  "manifest_path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\packet\\20260914-folr-current-increment-b01-result-plan-review\\2026-09-14-folr-current-increment-b01-result-plan-review-01--vap_folr_core__PACKET_MANIFEST.json",
+  "materialized_artifacts": {
+    "body": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\packet\\20260914-folr-current-increment-b01-result-plan-review\\2026-09-14-folr-current-increment-b01-result-plan-review-01--vap_folr_core__00_PROMPT.md",
+    "references": []
+  },
+  "materialized_hashes": {
+    "body": "f0e8b85714ab377d46bb896c9b7d68fd6ca2c739a0d1ae717ff806134869aafa",
+    "references": []
+  }
+}

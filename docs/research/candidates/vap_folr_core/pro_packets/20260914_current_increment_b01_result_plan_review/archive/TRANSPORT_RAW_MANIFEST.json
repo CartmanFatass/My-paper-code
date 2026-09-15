@@ -1,0 +1,56 @@
+{
+  "archived_utc": "2026-09-15T04:19:17.974544+00:00",
+  "canonical_root": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vap_folr_core\\20260914_current_increment_b01_result_plan_review",
+  "files": [
+    {
+      "name": "AGENTIFY_CLEANUP_RECEIPT.json",
+      "bytes": 295,
+      "sha256": "2fed605fe02233ee960d7a650b57925f06363367636d77810a683450cd7aac2e"
+    },
+    {
+      "name": "GITHUB_RESPONSE.md",
+      "bytes": 33166,
+      "sha256": "e519b6bca81440b73a754eac9d96b30069d9028bf57d78fa60ce863b0de6702d"
+    },
+    {
+      "name": "PACKET_MANIFEST.json",
+      "bytes": 1882,
+      "sha256": "632b0c5e4ad27cb508685f4535815624a38efce989d0a8a2ee80af0195e892e9"
+    },
+    {
+      "name": "PRE_SEND_NONACCEPTANCE.json",
+      "bytes": 2438,
+      "sha256": "969e64f1b7adfc773c3139b4e56f60386f12702279b23f361256ce28aa9e50a3"
+    },
+    {
+      "name": "PRE_SEND_NONACCEPTANCE.md",
+      "bytes": 1311,
+      "sha256": "a4d0b2924b74b13898083b9ea860c974d6bc054d1f5f2f591f3319291576058c"
+    },
+    {
+      "name": "PREFLIGHT.json",
+      "bytes": 5067,
+      "sha256": "db82e1cb0a53ac55b4bdb52a5b399800668e6c58e015db025ea54dad1b4ecc05"
+    },
+    {
+      "name": "PROMPT_BODY.md",
+      "bytes": 1938,
+      "sha256": "f0e8b85714ab377d46bb896c9b7d68fd6ca2c739a0d1ae717ff806134869aafa"
+    },
+    {
+      "name": "RESPONSE.md",
+      "bytes": 130,
+      "sha256": "efb96cc72dee52c5b14359f93536f0a5efcce996b08e7081dd2e691ba2b34e0f"
+    },
+    {
+      "name": "TRANSPORT_FACTS.json",
+      "bytes": 6206,
+      "sha256": "8f71aa2a59fdafb16e456d7d6cdb208f8e3c204c8f21ba42845bf8397a41c4a0"
+    }
+  ],
+  "archive_bytes": 17257,
+  "archive_sha256": "c4d1ca4b1a67b24d1016f10e5373270424bdfc60f4b6c5b03bc59fa244243ea9",
+  "all_members_verified": true,
+  "full_response": "RESPONSE.md at immutable a006871c828a211c7873b06a156cad6ca1d42227",
+  "canonical_short_receipt": "canonical RESPONSE.md is130 bytes and is preserved here only as CHAT_RECEIPT.md; it does not occupy the full response path"
+}
