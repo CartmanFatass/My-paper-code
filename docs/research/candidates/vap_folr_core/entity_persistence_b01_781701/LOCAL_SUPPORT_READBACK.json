@@ -1,0 +1,98 @@
+{
+  "verified_utc": "2026-09-15T01:26:13.556806+00:00",
+  "remote_support_archive_sha256": "fc451b8d74ba129bff43d0bb5cd96824a8d0290ccef2edbb95345965d9af9200",
+  "remote_support_members_verified": 23,
+  "local_archive": {
+    "path": "C:\\Projects\\HMASD-worktrees\\codex-vap-folr\\docs\\research\\candidates\\vap_folr_core\\entity_persistence_b01_781701\\LOCAL_SUPPORT_RAW.tar.gz",
+    "bytes": 10215537,
+    "sha256": "afd2e666084222be49aed5b27711f89e0df9eb3e4f325f1dfa7c6c4e5e538e74"
+  },
+  "local_roots": [
+    "C:\\Projects\\HMASD-worktrees\\codex-vap-folr\\temp\\directions\\vap_folr_core\\exp\\entity_persistence_b01_781701",
+    "C:\\Projects\\HMASD-worktrees\\codex-vap-folr\\temp\\directions\\vap_folr_core\\test\\persistence-b01-20260914-dm",
+    "C:\\Projects\\HMASD-worktrees\\codex-vap-folr\\temp\\directions\\vap_folr_core\\test\\persistence-b01-count-fix-20260914-dm"
+  ],
+  "local_manifest": [
+    {
+      "source": "C:\\Projects\\HMASD-worktrees\\codex-vap-folr\\temp\\directions\\vap_folr_core\\exp\\entity_persistence_b01_781701\\collect_terminal.py",
+      "archive_name": "temp/directions/vap_folr_core/exp/entity_persistence_b01_781701/collect_terminal.py",
+      "bytes": 5726,
+      "sha256": "889f981f233cc553ac2e5f716e926d708764c95cf18c2eb0d09c3d9233c5eb19"
+    },
+    {
+      "source": "C:\\Projects\\HMASD-worktrees\\codex-vap-folr\\temp\\directions\\vap_folr_core\\exp\\entity_persistence_b01_781701\\MONITOR_STATE.json",
+      "archive_name": "temp/directions/vap_folr_core/exp/entity_persistence_b01_781701/MONITOR_STATE.json",
+      "bytes": 764,
+      "sha256": "98d50d217a2a0932c95e76890ae75f7dd079f97830e885e81f19813fce789d48"
+    },
+    {
+      "source": "C:\\Projects\\HMASD-worktrees\\codex-vap-folr\\temp\\directions\\vap_folr_core\\exp\\entity_persistence_b01_781701\\read_pair.py",
+      "archive_name": "temp/directions/vap_folr_core/exp/entity_persistence_b01_781701/read_pair.py",
+      "bytes": 3764,
+      "sha256": "6145e3c475b4fe96edff535d355c78ea4d54814f2a2e0acd6a2fdd32631d58dd"
+    },
+    {
+      "source": "C:\\Projects\\HMASD-worktrees\\codex-vap-folr\\temp\\directions\\vap_folr_core\\exp\\entity_persistence_b01_781701\\RECOVERY_MONITOR_STATE.json",
+      "archive_name": "temp/directions/vap_folr_core/exp/entity_persistence_b01_781701/RECOVERY_MONITOR_STATE.json",
+      "bytes": 540,
+      "sha256": "2de6c37280f18c99b881c2885ea1f49ba765f07b0b461c3ec7455d9c49d67ae6"
+    },
+    {
+      "source": "C:\\Projects\\HMASD-worktrees\\codex-vap-folr\\temp\\directions\\vap_folr_core\\exp\\entity_persistence_b01_781701\\TERMINAL_MONITOR_STATE.json",
+      "archive_name": "temp/directions/vap_folr_core/exp/entity_persistence_b01_781701/TERMINAL_MONITOR_STATE.json",
+      "bytes": 566,
+      "sha256": "13f303ed21129425200929d0f4a0112755871552f347ccd5d84e8b1232dc244f"
+    },
+    {
+      "source": "C:\\Projects\\HMASD-worktrees\\codex-vap-folr\\temp\\directions\\vap_folr_core\\test\\persistence-b01-20260914-dm\\test_augmented_real_update_tar0\\final.pt",
+      "archive_name": "temp/directions/vap_folr_core/test/persistence-b01-20260914-dm/test_augmented_real_update_tar0/final.pt",
+      "bytes": 5782043,
+      "sha256": "59ef702ff192ff800bcc5c75eb723742921c0fff313d0934ed36817949e845ba"
+    },
+    {
+      "source": "C:\\Projects\\HMASD-worktrees\\codex-vap-folr\\temp\\directions\\vap_folr_core\\test\\persistence-b01-20260914-dm\\test_augmented_real_update_tar1\\final.pt",
+      "archive_name": "temp/directions/vap_folr_core/test/persistence-b01-20260914-dm/test_augmented_real_update_tar1/final.pt",
+      "bytes": 5782043,
+      "sha256": "1165d77f05f2643fefe6e310ca3a19d7827bd21a82d2e671e89d12183d6e14a8"
+    },
+    {
+      "source": "C:\\Projects\\HMASD-worktrees\\codex-vap-folr\\temp\\directions\\vap_folr_core\\test\\persistence-b01-20260914-dm\\test_runner_executes_complete_0\\augmented\\final.pt",
+      "archive_name": "temp/directions/vap_folr_core/test/persistence-b01-20260914-dm/test_runner_executes_complete_0/augmented/final.pt",
+      "bytes": 1313,
+      "sha256": "bdd956e9cb0c2d745147ea1fde9fc6fa11da8963a9f72a4f8aba43eb56a275f4"
+    },
+    {
+      "source": "C:\\Projects\\HMASD-worktrees\\codex-vap-folr\\temp\\directions\\vap_folr_core\\test\\persistence-b01-20260914-dm\\test_runner_executes_complete_0\\augmented\\summary.json",
+      "archive_name": "temp/directions/vap_folr_core/test/persistence-b01-20260914-dm/test_runner_executes_complete_0/augmented/summary.json",
+      "bytes": 53468,
+      "sha256": "7c0b60e23d2aa7d9cb18d5c99a9623e065f120eb1027a8caabe26c92d3b477e2"
+    },
+    {
+      "source": "C:\\Projects\\HMASD-worktrees\\codex-vap-folr\\temp\\directions\\vap_folr_core\\test\\persistence-b01-20260914-dm\\test_runner_executes_complete_0\\foreign_generic.json",
+      "archive_name": "temp/directions/vap_folr_core/test/persistence-b01-20260914-dm/test_runner_executes_complete_0/foreign_generic.json",
+      "bytes": 971,
+      "sha256": "61232681a7f1dd00320891811596d401ccab1eae9b93f665e2bde80f051504c5"
+    },
+    {
+      "source": "C:\\Projects\\HMASD-worktrees\\codex-vap-folr\\temp\\directions\\vap_folr_core\\test\\persistence-b01-count-fix-20260914-dm\\test_runner_executes_complete_0\\augmented\\final.pt",
+      "archive_name": "temp/directions/vap_folr_core/test/persistence-b01-count-fix-20260914-dm/test_runner_executes_complete_0/augmented/final.pt",
+      "bytes": 1313,
+      "sha256": "bdd956e9cb0c2d745147ea1fde9fc6fa11da8963a9f72a4f8aba43eb56a275f4"
+    },
+    {
+      "source": "C:\\Projects\\HMASD-worktrees\\codex-vap-folr\\temp\\directions\\vap_folr_core\\test\\persistence-b01-count-fix-20260914-dm\\test_runner_executes_complete_0\\augmented\\summary.json",
+      "archive_name": "temp/directions/vap_folr_core/test/persistence-b01-count-fix-20260914-dm/test_runner_executes_complete_0/augmented/summary.json",
+      "bytes": 53512,
+      "sha256": "709ae6bda01d3b2446db9a87934b5c6b8e23a5354a913e0161730f7aa8256d65"
+    },
+    {
+      "source": "C:\\Projects\\HMASD-worktrees\\codex-vap-folr\\temp\\directions\\vap_folr_core\\test\\persistence-b01-count-fix-20260914-dm\\test_runner_executes_complete_0\\foreign_generic.json",
+      "archive_name": "temp/directions/vap_folr_core/test/persistence-b01-count-fix-20260914-dm/test_runner_executes_complete_0/foreign_generic.json",
+      "bytes": 971,
+      "sha256": "61232681a7f1dd00320891811596d401ccab1eae9b93f665e2bde80f051504c5"
+    }
+  ],
+  "links": [],
+  "all_local_members_verified": true,
+  "local_roots_resolved_under_owned_direction_temp": true
+}
