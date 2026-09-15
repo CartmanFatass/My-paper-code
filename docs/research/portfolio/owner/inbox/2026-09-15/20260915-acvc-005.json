@@ -1,0 +1,81 @@
+{
+  "id": "20260915-acvc-005",
+  "created": "2026-09-15T13:58:51-07:00",
+  "direction": "acvc",
+  "tier": "portfolio",
+  "kind": "portfolio",
+  "title": "ACVC M-部署迁移对象的 Portfolio 投资（G：一次 M 拟合及三面板）",
+  "context": "方向节点 20:28Z 选 B（带修正）后，一次拟合的投入保留给 Portfolio；hub 发送投资请求，Portfolio 于 2026-09-15 20:51Z 选 G。",
+  "options": [
+    {
+      "key": "G",
+      "label": "资助恰好一次 M 拟合（28531/38531）及 M / F(M) / own-dwell(M) 三面板与有界支持",
+      "consequence": "约 2,600 s 原生墙钟（计划非上限）；主量 T_F@.01 J；零重试、零第二实例"
+    },
+    {
+      "key": "N",
+      "label": "不投入，保留 C 侧两块主张",
+      "consequence": "ACVC ACTIVE-idle，最低排序优先级"
+    }
+  ],
+  "recommended": "G",
+  "auto_applied": "G",
+  "dm_reason": "同一拟合的三面板能把固定变换在 M 上的增益、伤害与零命令替代分开；成本一次拟合，无累积。",
+  "evidence": [
+    "docs/research/portfolio/pro_packets/20260915_acvc_m_deployment_transfer_investment/archive/RESPONSE.md",
+    "docs/research/portfolio/decisions/2026-09-15-acvc-m-deployment-transfer-grant.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-15.md#L30",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否为 ACVC 资助恰好一次新的 M 拟合（冻结的块 2 配方，MASTER 28531 / 评估命名空间 38531）及其三个私有终评面板 M / F(M) / own-dwell(M)，连同有界的实现、验证、执行、intake 与保存支持（G），还是不投入（N）？",
+    "changes_if_approved": [
+      {
+        "target": "ACVC 实验分配",
+        "from": "方向节点 20:28Z 选 B 后，对象已入选但一次拟合的投入明确保留给 Portfolio；0 producer",
+        "to": "一次原始 M 拟合：4,096 个 H256 训练回合（1,048,576 团队 tick）、2,048 次 rollout、8,192 个 PPO minibatch；一个终快照加载三次；三个 64 世界终评面板（192 回合、49,152 tick）；零重试、零第二实例、零额外面板"
+      },
+      {
+        "target": "读数",
+        "from": "无（新的结果知情 B/EXPLORE 问题）",
+        "to": "主量 T_F = mean64[J(F(M)) − J(M)]，±.01 J 带（TRANSFERS / WITHIN_MEI / ADVERSE，无效操作数则 INCOMPLETE 不插补）；T_D 与配对 U = F(M) − own-dwell(M) 为辅助；不与早期块累积"
+      }
+    ],
+    "if_refused": "选 N 则保留 C 侧两块主张，不为 M 上的可移植性问题购买证据；ACVC 保持 ACTIVE/MEDIUM/recasts2、最低排序优先级，进入 ACTIVE-idle。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/acvc/ACVC_CLUSTER_MAPPO_COMPARISON_B02_RESULT_EVIDENCE_20260915.md",
+        "quote": "F−C +.0474962535776785 and F−own-dwell +.031713764045473436 UP (positive in both blocks); F−M −.03919008143501977 J, M_ABOVE_MEI, opposite to block 1's +.02343964960218458.",
+        "why": "内部增量在两块复现，但竞争性对比反转：这促使在 M 上测试固定变换 F，同一拟合的三面板能区分增益、伤害与零命令替代。"
+      },
+      {
+        "path": "docs/research/candidates/acvc/pro_packets/20260915_m_deployment_transfer_convergence/archive/RESPONSE.md",
+        "quote": "Select B: the derived M-deployment transfer card with corrections; one fit requires a bounded Portfolio investment question before launch.",
+        "why": "方向节点已选定对象，只缺 Portfolio 的投入授权。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/portfolio/pro_packets/20260915_acvc_one_block_replication_investment/archive/RESPONSE.md",
+        "quote": "Zero automatic replacements, retries, third fits or extensions.",
+        "why": "上一笔资助已结束；新拟合不属于任何现有分配，且单实例结果只能给出条件世界的 SD/SE，不是训练总体精度。"
+      }
+    ],
+    "verdict_text": "Portfolio 于 2026-09-15 20:51Z 选 G：恰好一次 M 拟合及三面板，含有界支持；ACVC 保持 ACTIVE/MEDIUM/recasts2 最低排序；两块主张不变；独立 Opus 评审并解决重大发现后作为下一个就绪数值任务启动；约 2,600 s 为可调计划非上限；所有者 12:57 PDT 指令不构成新的数值额度。",
+    "uncertainty": [
+      "单实例结果只给条件世界 SD/SE，不是训练总体精度；T_F 小或不利只限制这次拟合策略的可移植性观察，不推翻 C 侧证据。",
+      "面板/Binding 额外开销未测（<1 GiB 合理但未验证）；独立 Opus 评审的重大发现须先解决再启动。",
+      "零实现机会（无替换）只描述该面板，不能建立有益回溯。"
+    ],
+    "cost": {
+      "compute": "约 2,600 s 原生墙钟（一次拟合含三面板，单线程 CPU FP32；块 2 M 拟合 2,427.41 s、峰值 RSS 585,504 KiB 为基准），作为可调整的普通计划而非上限",
+      "owner_time": "阅读 Pro 决定与结果 intake，约 10 分钟",
+      "reversibility": "reversible",
+      "waits_on_this": "ACVC 下一步实验；Pro 决定到达后 hub 直接执行，不等待所有者"
+    },
+    "source": "docs/research/portfolio/pro_packets/20260915_acvc_m_deployment_transfer_investment/archive/RESPONSE.md"
+  },
+  "starred": true
+}
