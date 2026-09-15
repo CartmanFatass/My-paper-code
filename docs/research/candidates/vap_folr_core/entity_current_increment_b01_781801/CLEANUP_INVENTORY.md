@@ -31,3 +31,27 @@ exact published inventory for integration/retention and perform only the assigne
 bounded reclamation. Verify disk and Git-worktree-registration absence separately.
 An actual denied operation is recorded and retained, without an alternate deletion
 method. This inventory creates no blanket cleanup authority or scientific retry.
+
+## Complete support preservation, 2026-09-15T04:00:49Z
+
+SUPPORT_INVENTORY.json inventories all41 untracked/ignored files in the exact
+remote worktree and12 files in the two terminal supervisor directories:53 files,
+20367571 original bytes. The source HEAD is the accepted8ad304d61 and tracked
+status is clean. Both supervisors are finished/exit0 with no active tmux session.
+SUPPORT_RAW.tar.gz preserves all53 members, including the already preserved raw
+results, final checkpoints, initial failed-check logs and original cleanup-assert
+receipt. The transferred19195846-byte archive has SHA256
+e39832b6c183e2edb8b3cf8683c4e4eb4b2d985c769b3d502898d7187dd6feb7;
+SUPPORT_READBACK.json verifies every member against its pre-archive digest.
+The generated archive itself is also inside the exact remote output root and is
+therefore included in that later removal; its local committed copy is retained.
+
+LOCAL_SUPPORT_RAW.tar.gz preserves all4 current-object local runtime files:
+collect_terminal.py, read_pair.py and the two native Monitor state files.
+LOCAL_SUPPORT_READBACK.json lists exact paths/digests and verifies all4 members.
+No old A-Z scratch or other direction/runtime root is in this inventory.
+
+The clean-boundary owner review query returned no unapplied instructions. These
+archives are ready for Root integration/retention before the already assigned
+bounded reclamation. Removal has not yet occurred. Retain the authoring checkout,
+shared remote source checkout, live direction branch and current Transport archive.

@@ -1,0 +1,345 @@
+{
+  "checked_utc": "2026-09-15T03:59:59.994177+00:00",
+  "source_sha": "8ad304d61af6885c0ca5ba236bbf6c2c160e61f4",
+  "worktree": "/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801",
+  "tracked_status": "",
+  "terminal_statuses": [
+    {
+      "task": "folr-current-increment-b01-781801-generic",
+      "status": "finished",
+      "exit_code": 0,
+      "pid": 3702285,
+      "uptime_seconds": 6117,
+      "tmux_active": false
+    },
+    {
+      "task": "folr-current-increment-b01-781801-current-only",
+      "status": "finished",
+      "exit_code": 0,
+      "pid": 3703852,
+      "uptime_seconds": 3601,
+      "tmux_active": false
+    }
+  ],
+  "files": [
+    {
+      "source": "/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801/experiments/candidates/vap_folr_core/entity_current_increment_b01/__pycache__/__init__.cpython-310.pyc",
+      "archive_name": "worktree/experiments/candidates/vap_folr_core/entity_current_increment_b01/__pycache__/__init__.cpython-310.pyc",
+      "bytes": 315,
+      "sha256": "ef449ef9ff2869e49bb29d1ea43abcc17a2546d3110dfbfd6f3384ee4824b10e"
+    },
+    {
+      "source": "/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801/experiments/candidates/vap_folr_core/entity_current_increment_b01/__pycache__/learner.cpython-310.pyc",
+      "archive_name": "worktree/experiments/candidates/vap_folr_core/entity_current_increment_b01/__pycache__/learner.cpython-310.pyc",
+      "bytes": 1354,
+      "sha256": "9c37ffba266d58ccdb2d9b97a862362713263e1f8229219e930f3be1dbf39b54"
+    },
+    {
+      "source": "/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801/experiments/candidates/vap_folr_core/entity_current_increment_b01/__pycache__/publication.cpython-310.pyc",
+      "archive_name": "worktree/experiments/candidates/vap_folr_core/entity_current_increment_b01/__pycache__/publication.cpython-310.pyc",
+      "bytes": 2499,
+      "sha256": "258a51d36b5f1e3d5edb8ec93193d741d3e92e7e5b0d567d7b5da3868735e66b"
+    },
+    {
+      "source": "/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801/experiments/candidates/vap_folr_core/entity_history_augmentation_b01/__pycache__/__init__.cpython-310.pyc",
+      "archive_name": "worktree/experiments/candidates/vap_folr_core/entity_history_augmentation_b01/__pycache__/__init__.cpython-310.pyc",
+      "bytes": 392,
+      "sha256": "d9f2cd0629e7cc29931ef7df033f65b8d4a0c61780a21666dd800b96837f967e"
+    },
+    {
+      "source": "/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801/experiments/candidates/vap_folr_core/entity_history_augmentation_b01/__pycache__/model.cpython-310.pyc",
+      "archive_name": "worktree/experiments/candidates/vap_folr_core/entity_history_augmentation_b01/__pycache__/model.cpython-310.pyc",
+      "bytes": 3765,
+      "sha256": "c00e233f049cf53b4bab84c48c38558beaf423ee4d85d132c3a45ce517d9ab6e"
+    },
+    {
+      "source": "/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801/experiments/candidates/vap_folr_core/entity_history_b01/__pycache__/__init__.cpython-310.pyc",
+      "archive_name": "worktree/experiments/candidates/vap_folr_core/entity_history_b01/__pycache__/__init__.cpython-310.pyc",
+      "bytes": 305,
+      "sha256": "9307942f92992d5f2192b3bc35469e7c4c394f5dee11276dd43eb3e73ba80cf8"
+    },
+    {
+      "source": "/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801/experiments/candidates/vap_folr_core/entity_history_b01/__pycache__/environment.cpython-310.pyc",
+      "archive_name": "worktree/experiments/candidates/vap_folr_core/entity_history_b01/__pycache__/environment.cpython-310.pyc",
+      "bytes": 1825,
+      "sha256": "927b3763d616364b60c2c12aa27c5dc395333fb11866d7bf52e3052bc690110a"
+    },
+    {
+      "source": "/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801/experiments/candidates/vap_folr_core/entity_history_b01/__pycache__/model.cpython-310.pyc",
+      "archive_name": "worktree/experiments/candidates/vap_folr_core/entity_history_b01/__pycache__/model.cpython-310.pyc",
+      "bytes": 4012,
+      "sha256": "b7383c63738554da5eaf4ac52d8a124cfa4bb9ce7e095a04cbadecd7e92388c9"
+    },
+    {
+      "source": "/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801/experiments/candidates/vap_folr_core/entity_history_b01/__pycache__/publication.cpython-310.pyc",
+      "archive_name": "worktree/experiments/candidates/vap_folr_core/entity_history_b01/__pycache__/publication.cpython-310.pyc",
+      "bytes": 2078,
+      "sha256": "5afab9a847b3e127a771ffb6fc7c5eb2040f11b9165251b438c118c6db3085d5"
+    },
+    {
+      "source": "/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801/experiments/candidates/vap_folr_core/entity_persistence_b01/__pycache__/__init__.cpython-310.pyc",
+      "archive_name": "worktree/experiments/candidates/vap_folr_core/entity_persistence_b01/__pycache__/__init__.cpython-310.pyc",
+      "bytes": 311,
+      "sha256": "99254a0b2b57b2d4f21db8886c8e8f6da68fecdf1f8214f5746d6622a84eea5a"
+    },
+    {
+      "source": "/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801/experiments/candidates/vap_folr_core/entity_persistence_b01/__pycache__/publication.cpython-310.pyc",
+      "archive_name": "worktree/experiments/candidates/vap_folr_core/entity_persistence_b01/__pycache__/publication.cpython-310.pyc",
+      "bytes": 2831,
+      "sha256": "120cc495b29a2da668ecdb72516d78eafdbe99e38f950841cf77123a7c2d1578"
+    },
+    {
+      "source": "/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801/experiments/candidates/vap_folr_core/public_lifecycle_b01/__pycache__/attention.cpython-310.pyc",
+      "archive_name": "worktree/experiments/candidates/vap_folr_core/public_lifecycle_b01/__pycache__/attention.cpython-310.pyc",
+      "bytes": 2020,
+      "sha256": "dbcf22e552cce29ab166c10a50618d4dfea5c4da2b1b638039735da0cc827e1d"
+    },
+    {
+      "source": "/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801/experiments/candidates/vap_folr_core/public_lifecycle_b01/__pycache__/collection.cpython-310.pyc",
+      "archive_name": "worktree/experiments/candidates/vap_folr_core/public_lifecycle_b01/__pycache__/collection.cpython-310.pyc",
+      "bytes": 4723,
+      "sha256": "5eb720df657ba5f96d0d5efcf31470ffc972bea9b35fb40966ac7e4598d2ff0f"
+    },
+    {
+      "source": "/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801/experiments/candidates/vap_folr_core/public_lifecycle_b01/__pycache__/environment.cpython-310.pyc",
+      "archive_name": "worktree/experiments/candidates/vap_folr_core/public_lifecycle_b01/__pycache__/environment.cpython-310.pyc",
+      "bytes": 2644,
+      "sha256": "f97959207496419fdb2118bf11d352db788453a2c116c3330f88387a1fedd607"
+    },
+    {
+      "source": "/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801/experiments/candidates/vap_folr_core/public_lifecycle_b01/__pycache__/flex_qmix.cpython-310.pyc",
+      "archive_name": "worktree/experiments/candidates/vap_folr_core/public_lifecycle_b01/__pycache__/flex_qmix.cpython-310.pyc",
+      "bytes": 2519,
+      "sha256": "d6ae4472a8b41ae1f76c3ffdf1012526b9296e915fa3342f819b77f673019528"
+    },
+    {
+      "source": "/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801/experiments/candidates/vap_folr_core/public_lifecycle_b01/__pycache__/learner.cpython-310.pyc",
+      "archive_name": "worktree/experiments/candidates/vap_folr_core/public_lifecycle_b01/__pycache__/learner.cpython-310.pyc",
+      "bytes": 2836,
+      "sha256": "f4d24c551c7c265e79c80ec405aabca3760917bea3cb384425466d9f05f86bf1"
+    },
+    {
+      "source": "/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801/experiments/candidates/vap_folr_core/public_lifecycle_b01/__pycache__/model.cpython-310.pyc",
+      "archive_name": "worktree/experiments/candidates/vap_folr_core/public_lifecycle_b01/__pycache__/model.cpython-310.pyc",
+      "bytes": 2866,
+      "sha256": "2f9d3de4b8822683432659758ef1a9e3b4b6839aa7ad6a64b74fb2dc15d8e4e4"
+    },
+    {
+      "source": "/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801/experiments/candidates/vap_folr_core/public_lifecycle_b01/__pycache__/native_env.cpython-310.pyc",
+      "archive_name": "worktree/experiments/candidates/vap_folr_core/public_lifecycle_b01/__pycache__/native_env.cpython-310.pyc",
+      "bytes": 10844,
+      "sha256": "b48204ffa655f5debab7b08614ae65dff997c94b00ea765b8217f192b3fa5aea"
+    },
+    {
+      "source": "/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801/scripts/__pycache__/hmasd_platform.cpython-310.pyc",
+      "archive_name": "worktree/scripts/__pycache__/hmasd_platform.cpython-310.pyc",
+      "bytes": 2840,
+      "sha256": "4d7f3264acb172ab7f8fa2788c2a754f46a2bdb33acc9c016d1b119f3af27633"
+    },
+    {
+      "source": "/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801/temp/directions/vap_folr_core/exp/entity_current_increment_b01_781801/CURRENT_ONLY.sh",
+      "archive_name": "worktree/temp/directions/vap_folr_core/exp/entity_current_increment_b01_781801/CURRENT_ONLY.sh",
+      "bytes": 756,
+      "sha256": "8d7b499900bfa3bf7835f8f04e6663302e331ec5b4907ce7cde565dc3902a89c"
+    },
+    {
+      "source": "/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801/temp/directions/vap_folr_core/exp/entity_current_increment_b01_781801/CURRENT_ONLY_COLLECTION.json",
+      "archive_name": "worktree/temp/directions/vap_folr_core/exp/entity_current_increment_b01_781801/CURRENT_ONLY_COLLECTION.json",
+      "bytes": 7381,
+      "sha256": "8b25902befbfda33fa34fb5f39c3b2191a25a6167a54c64344d49e5ee1d3fae8"
+    },
+    {
+      "source": "/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801/temp/directions/vap_folr_core/exp/entity_current_increment_b01_781801/CURRENT_ONLY_LAUNCH_RECEIPT.json",
+      "archive_name": "worktree/temp/directions/vap_folr_core/exp/entity_current_increment_b01_781801/CURRENT_ONLY_LAUNCH_RECEIPT.json",
+      "bytes": 2323,
+      "sha256": "57cb4bd20ef34cdd2f1a91607b1877d8c0330206e66f3366a924e210178b82fe"
+    },
+    {
+      "source": "/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801/temp/directions/vap_folr_core/exp/entity_current_increment_b01_781801/CURRENT_ONLY_RAW.tar.gz",
+      "archive_name": "worktree/temp/directions/vap_folr_core/exp/entity_current_increment_b01_781801/CURRENT_ONLY_RAW.tar.gz",
+      "bytes": 5290873,
+      "sha256": "7772f813c0677c49addfb51d8a72ec9596fbcd3dc4e16bd6f1cc8cab7394cb33"
+    },
+    {
+      "source": "/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801/temp/directions/vap_folr_core/exp/entity_current_increment_b01_781801/FOCUSED_CHECK.txt",
+      "archive_name": "worktree/temp/directions/vap_folr_core/exp/entity_current_increment_b01_781801/FOCUSED_CHECK.txt",
+      "bytes": 5393,
+      "sha256": "957e1b006d8ada70e0057b76fb3b03b3ade24abaeceed270e47b8633f8cacc93"
+    },
+    {
+      "source": "/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801/temp/directions/vap_folr_core/exp/entity_current_increment_b01_781801/FOCUSED_CHECK_RECEIPT.json",
+      "archive_name": "worktree/temp/directions/vap_folr_core/exp/entity_current_increment_b01_781801/FOCUSED_CHECK_RECEIPT.json",
+      "bytes": 938,
+      "sha256": "61cb59f65a349f86d3615532005974a84e7b87a7d5fcc5338a66043cc1390f66"
+    },
+    {
+      "source": "/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801/temp/directions/vap_folr_core/exp/entity_current_increment_b01_781801/FOCUSED_CHECK_REPAIR.txt",
+      "archive_name": "worktree/temp/directions/vap_folr_core/exp/entity_current_increment_b01_781801/FOCUSED_CHECK_REPAIR.txt",
+      "bytes": 113,
+      "sha256": "4f2554ea47c65d2d7568a9d3b921461e1857985f556e269af5eb2dddcd242507"
+    },
+    {
+      "source": "/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801/temp/directions/vap_folr_core/exp/entity_current_increment_b01_781801/FOCUSED_CHECK_REPAIR_RECEIPT.json",
+      "archive_name": "worktree/temp/directions/vap_folr_core/exp/entity_current_increment_b01_781801/FOCUSED_CHECK_REPAIR_RECEIPT.json",
+      "bytes": 1731,
+      "sha256": "2800c48dcad4b703c34ce356c4fc4b691f7845a90e89b617ecc21b7393cde5bb"
+    },
+    {
+      "source": "/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801/temp/directions/vap_folr_core/exp/entity_current_increment_b01_781801/GENERIC.sh",
+      "archive_name": "worktree/temp/directions/vap_folr_core/exp/entity_current_increment_b01_781801/GENERIC.sh",
+      "bytes": 666,
+      "sha256": "aa93119365c201ba08b016a454e9979c7cdae3e1b1eae54ff11d7e656b3d17a9"
+    },
+    {
+      "source": "/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801/temp/directions/vap_folr_core/exp/entity_current_increment_b01_781801/GENERIC_COLLECTION.json",
+      "archive_name": "worktree/temp/directions/vap_folr_core/exp/entity_current_increment_b01_781801/GENERIC_COLLECTION.json",
+      "bytes": 6237,
+      "sha256": "01e4f966be1db0768d4ec35d9f9f453e0699c9271f44bff9302f28d99f9b28e6"
+    },
+    {
+      "source": "/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801/temp/directions/vap_folr_core/exp/entity_current_increment_b01_781801/GENERIC_LAUNCH_RECEIPT.json",
+      "archive_name": "worktree/temp/directions/vap_folr_core/exp/entity_current_increment_b01_781801/GENERIC_LAUNCH_RECEIPT.json",
+      "bytes": 2020,
+      "sha256": "d1e452bcbe27ffda9e7c6f761dd1264b08679eb63d8f35749a3e4cb9e62f718c"
+    },
+    {
+      "source": "/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801/temp/directions/vap_folr_core/exp/entity_current_increment_b01_781801/GENERIC_RAW.tar.gz",
+      "archive_name": "worktree/temp/directions/vap_folr_core/exp/entity_current_increment_b01_781801/GENERIC_RAW.tar.gz",
+      "bytes": 4288032,
+      "sha256": "9e7ae325d7432caa9d301b8abaa0360ecbfbd7e4e9d9ec545640e5f380141cc1"
+    },
+    {
+      "source": "/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801/temp/directions/vap_folr_core/exp/entity_current_increment_b01_781801/PREPARATION.json",
+      "archive_name": "worktree/temp/directions/vap_folr_core/exp/entity_current_increment_b01_781801/PREPARATION.json",
+      "bytes": 1443,
+      "sha256": "e019f5566217ebe09f20115aca420403ad49d3e1fdb10c0f92eec598f9d62fa2"
+    },
+    {
+      "source": "/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801/temp/directions/vap_folr_core/exp/entity_current_increment_b01_781801/collect_terminal.py",
+      "archive_name": "worktree/temp/directions/vap_folr_core/exp/entity_current_increment_b01_781801/collect_terminal.py",
+      "bytes": 6010,
+      "sha256": "92f6404777f43c57070f61685219e0bf108833e8e2fbd7a7230e0f9aebf914fc"
+    },
+    {
+      "source": "/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801/temp/directions/vap_folr_core/exp/entity_current_increment_b01_781801/current_only/ADMISSION.json",
+      "archive_name": "worktree/temp/directions/vap_folr_core/exp/entity_current_increment_b01_781801/current_only/ADMISSION.json",
+      "bytes": 504,
+      "sha256": "40e863fa9971499c8a53e8cee135105a8f98bf7389c3449cb5fc0f5e7e4adcb5"
+    },
+    {
+      "source": "/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801/temp/directions/vap_folr_core/exp/entity_current_increment_b01_781801/current_only/INVOCATION_TIME.json",
+      "archive_name": "worktree/temp/directions/vap_folr_core/exp/entity_current_increment_b01_781801/current_only/INVOCATION_TIME.json",
+      "bytes": 108,
+      "sha256": "e675ce7f0f54b6c23c075d6b3d148865a8f96a65603b35d3bd6050052cc835d3"
+    },
+    {
+      "source": "/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801/temp/directions/vap_folr_core/exp/entity_current_increment_b01_781801/current_only/final.pt",
+      "archive_name": "worktree/temp/directions/vap_folr_core/exp/entity_current_increment_b01_781801/current_only/final.pt",
+      "bytes": 5782043,
+      "sha256": "99b94e3bf9d5cec1db3c096a8dcf079b7a20dd7d03c26e82bc5806b1a94967a7"
+    },
+    {
+      "source": "/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801/temp/directions/vap_folr_core/exp/entity_current_increment_b01_781801/current_only/summary.json",
+      "archive_name": "worktree/temp/directions/vap_folr_core/exp/entity_current_increment_b01_781801/current_only/summary.json",
+      "bytes": 108034,
+      "sha256": "5ae6d9cdb813e78c3e73773d1199b85c8e447993207271e21b911bdb438e24e1"
+    },
+    {
+      "source": "/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801/temp/directions/vap_folr_core/exp/entity_current_increment_b01_781801/generic/ADMISSION.json",
+      "archive_name": "worktree/temp/directions/vap_folr_core/exp/entity_current_increment_b01_781801/generic/ADMISSION.json",
+      "bytes": 504,
+      "sha256": "a8d3f42d5a9ddcfe1d0dde6698e343b407a3d03822f6759a2604e6e638f7b3c1"
+    },
+    {
+      "source": "/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801/temp/directions/vap_folr_core/exp/entity_current_increment_b01_781801/generic/INVOCATION_TIME.json",
+      "archive_name": "worktree/temp/directions/vap_folr_core/exp/entity_current_increment_b01_781801/generic/INVOCATION_TIME.json",
+      "bytes": 108,
+      "sha256": "ff2bd4cfa2dbd233851aa803af5c58076fe50c90ffcf58aa1ad6e131757f8956"
+    },
+    {
+      "source": "/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801/temp/directions/vap_folr_core/exp/entity_current_increment_b01_781801/generic/final.pt",
+      "archive_name": "worktree/temp/directions/vap_folr_core/exp/entity_current_increment_b01_781801/generic/final.pt",
+      "bytes": 4694195,
+      "sha256": "d32cd0a4ed27e108d51b7c934d924cd30e3a022ec0876d61f7507a9b66ffc290"
+    },
+    {
+      "source": "/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801/temp/directions/vap_folr_core/exp/entity_current_increment_b01_781801/generic/summary.json",
+      "archive_name": "worktree/temp/directions/vap_folr_core/exp/entity_current_increment_b01_781801/generic/summary.json",
+      "bytes": 108478,
+      "sha256": "49b98f1ce155c4c90798692c3a8de844293e5133b669ed4d926b0f3fd2a99e93"
+    },
+    {
+      "source": "/home/wu/.agent-tasks/folr-current-increment-b01-781801-generic/exit_code",
+      "archive_name": "supervisor/folr-current-increment-b01-781801-generic/exit_code",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "source": "/home/wu/.agent-tasks/folr-current-increment-b01-781801-generic/pid",
+      "archive_name": "supervisor/folr-current-increment-b01-781801-generic/pid",
+      "bytes": 8,
+      "sha256": "e2c2f4f951bfd8f28f42c92aabeb6510f9d292ce350524d4ace1a7da1cdbf9b4"
+    },
+    {
+      "source": "/home/wu/.agent-tasks/folr-current-increment-b01-781801-generic/runner.sh",
+      "archive_name": "supervisor/folr-current-increment-b01-781801-generic/runner.sh",
+      "bytes": 1479,
+      "sha256": "7573ee95f8d373fed662a095ad9d16cb277236d041b8f125319a0e035b5af49b"
+    },
+    {
+      "source": "/home/wu/.agent-tasks/folr-current-increment-b01-781801-generic/start_time",
+      "archive_name": "supervisor/folr-current-increment-b01-781801-generic/start_time",
+      "bytes": 11,
+      "sha256": "07b6dec6cec79414df01bee31a969bdf445d1a486199f4f9d5206bfd451bd3c3"
+    },
+    {
+      "source": "/home/wu/.agent-tasks/folr-current-increment-b01-781801-generic/status",
+      "archive_name": "supervisor/folr-current-increment-b01-781801-generic/status",
+      "bytes": 9,
+      "sha256": "161069badc0cc23058b13d7c068e45205f4333aa15fd78db9d68f5c9f1ae8983"
+    },
+    {
+      "source": "/home/wu/.agent-tasks/folr-current-increment-b01-781801-generic/task.log",
+      "archive_name": "supervisor/folr-current-increment-b01-781801-generic/task.log",
+      "bytes": 2719,
+      "sha256": "c97f7c0df3e1623752887c7d4281db6e543d0fc18639b03ac1ef34b9b50f9b85"
+    },
+    {
+      "source": "/home/wu/.agent-tasks/folr-current-increment-b01-781801-current-only/exit_code",
+      "archive_name": "supervisor/folr-current-increment-b01-781801-current-only/exit_code",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "source": "/home/wu/.agent-tasks/folr-current-increment-b01-781801-current-only/pid",
+      "archive_name": "supervisor/folr-current-increment-b01-781801-current-only/pid",
+      "bytes": 8,
+      "sha256": "b3c8d7aa55e81cfb580c3fe34975aab3407d01abc1cacc7740d207d026b6d1bd"
+    },
+    {
+      "source": "/home/wu/.agent-tasks/folr-current-increment-b01-781801-current-only/runner.sh",
+      "archive_name": "supervisor/folr-current-increment-b01-781801-current-only/runner.sh",
+      "bytes": 1691,
+      "sha256": "6496c08489eed654a8ab056f0568c58871c18c7b58bca5611b013e8388cacbca"
+    },
+    {
+      "source": "/home/wu/.agent-tasks/folr-current-increment-b01-781801-current-only/start_time",
+      "archive_name": "supervisor/folr-current-increment-b01-781801-current-only/start_time",
+      "bytes": 11,
+      "sha256": "c6734ede286baf373cef0fd934ffc7989332cd350dcfc209e24390332284ebd8"
+    },
+    {
+      "source": "/home/wu/.agent-tasks/folr-current-increment-b01-781801-current-only/status",
+      "archive_name": "supervisor/folr-current-increment-b01-781801-current-only/status",
+      "bytes": 9,
+      "sha256": "161069badc0cc23058b13d7c068e45205f4333aa15fd78db9d68f5c9f1ae8983"
+    },
+    {
+      "source": "/home/wu/.agent-tasks/folr-current-increment-b01-781801-current-only/task.log",
+      "archive_name": "supervisor/folr-current-increment-b01-781801-current-only/task.log",
+      "bytes": 2753,
+      "sha256": "6c60881937eceb7db884d05637d8e0f1cfef55cd87fc9fc4a4b5b8bf017a2f91"
+    }
+  ],
+  "total_bytes": 20367571
+}

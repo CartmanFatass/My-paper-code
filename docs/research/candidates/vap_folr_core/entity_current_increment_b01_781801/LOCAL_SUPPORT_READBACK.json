@@ -1,0 +1,34 @@
+{
+  "verified_utc": "2026-09-15T04:00:49.394417+00:00",
+  "root": "C:\\Projects\\HMASD-worktrees\\codex-vap-folr\\temp\\directions\\vap_folr_core\\exp\\entity_current_increment_b01_781801",
+  "files": [
+    {
+      "source": "C:\\Projects\\HMASD-worktrees\\codex-vap-folr\\temp\\directions\\vap_folr_core\\exp\\entity_current_increment_b01_781801\\collect_terminal.py",
+      "archive_name": "collect_terminal.py",
+      "bytes": 6010,
+      "sha256": "92f6404777f43c57070f61685219e0bf108833e8e2fbd7a7230e0f9aebf914fc"
+    },
+    {
+      "source": "C:\\Projects\\HMASD-worktrees\\codex-vap-folr\\temp\\directions\\vap_folr_core\\exp\\entity_current_increment_b01_781801\\current_only\\MONITOR_STATE.json",
+      "archive_name": "current_only/MONITOR_STATE.json",
+      "bytes": 562,
+      "sha256": "32ec36a062e0aabc2fd735c4ea30625e7e1b19084d2007287db245d972fa57b8"
+    },
+    {
+      "source": "C:\\Projects\\HMASD-worktrees\\codex-vap-folr\\temp\\directions\\vap_folr_core\\exp\\entity_current_increment_b01_781801\\generic\\MONITOR_STATE.json",
+      "archive_name": "generic/MONITOR_STATE.json",
+      "bytes": 571,
+      "sha256": "0958727ed3a59ff3e949309ada9ffc07d9e36ea25a0edf0cfc93fe5f4db1523e"
+    },
+    {
+      "source": "C:\\Projects\\HMASD-worktrees\\codex-vap-folr\\temp\\directions\\vap_folr_core\\exp\\entity_current_increment_b01_781801\\read_pair.py",
+      "archive_name": "read_pair.py",
+      "bytes": 3711,
+      "sha256": "42c6e6bb12591cf36227e19cee80b13fb8c74e225783616adc01129e52a3ce7e"
+    }
+  ],
+  "archive_bytes": 4281,
+  "archive_sha256": "25db62863f6773a4499511c4cdd5e7d43c271a358ad6c39c8ac71f1592f3cb0f",
+  "all_members_match": true,
+  "removal_performed": false
+}
