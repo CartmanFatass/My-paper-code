@@ -1,0 +1,95 @@
+{
+  "id": "20260915-fsd-001",
+  "created": "2026-09-15T03:53:09-07:00",
+  "direction": "flexible_skill_duration",
+  "tier": "portfolio",
+  "kind": "portfolio",
+  "title": "FSD 基线×中断合并研究投资请求（推荐 F：18 次拟合）",
+  "context": "已完成 2×2 因子实验后，FSD 仍无同宿主扁平基线，且两块无法分辨 +.03 J 均值。hub 作为 DM 准备了合并研究卡片并发送 Portfolio 投资请求。",
+  "options": [
+    {
+      "key": "F",
+      "label": "三臂×六块 18 次拟合，15 rollout，5/10/15 面板",
+      "consequence": "约 36,000–44,000 s 原生墙钟；首个 headroom 记录与 df=5 区间"
+    },
+    {
+      "key": "S",
+      "label": "三臂×四块 12 次拟合",
+      "consequence": "约 24,000–30,000 s；df=3 区间更弱"
+    },
+    {
+      "key": "P",
+      "label": "F 加直接 fixed-k10 HMASD 第四臂 24 次拟合",
+      "consequence": "成本再加三分之一，方法级 headroom"
+    },
+    {
+      "key": "N",
+      "label": "不投入",
+      "consequence": "卡片在档，FSD ACTIVE-idle"
+    }
+  ],
+  "recommended": "F",
+  "auto_applied": null,
+  "dm_reason": "六块是能对 .05 J 效应给出可用区间的最小块数，且补上缺失的同宿主基线。",
+  "evidence": [
+    "docs/research/candidates/flexible_skill_duration/FSD_BASELINE_INTERRUPTION_B01_PROSPECTIVE_CARD_20260915.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-15.md#L14",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否为 FSD 资助“基线 × 中断”合并研究（推荐 F：FLAT/D1280/I1280 三臂 × 6 个独立训练块 = 18 次拟合，15 rollout 终点，5/10/15 三次面板），还是较小的 S、加第四臂的 P，或不投入 N？",
+    "changes_if_approved": [
+      {
+        "target": "FSD 实验分配",
+        "from": "已完成的 2×2 因子实验后无后继分配、无同宿主基线",
+        "to": "18 次拟合（F）：新增 FLAT 私有 actor 扁平约简基线臂，训练预算 ×3，6 个训练块"
+      },
+      {
+        "target": "实现",
+        "from": "无",
+        "to": "新 runner scripts/run_fsd_baseline_interruption_b01.py 与聚焦测试；hmasd/** 只读；Opus 审阅后才可启动"
+      }
+    ],
+    "if_refused": "选 N 时不做新实验，卡片保留在档；FSD 仍为 ACTIVE/HIGH、authentic D0 默认，进入 ACTIVE-idle。选 S/P 时按对应臂数/块数执行。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/flexible_skill_duration/FSD_INTERRUPTION_BATCH_B01_RESULT_EVIDENCE_20260915.md",
+        "quote": "SI1280 −.02644030 / +.08464985 J，均值 +.02910478，训练 SD .07855260，df=1 区间 [−.6767, +.7349]。",
+        "why": "两个块无法把 +.03 J 的均值与块间变异分开；需要更多独立块。"
+      },
+      {
+        "path": "docs/research/candidates/flexible_skill_duration/FSD_RESTART_PREPARATION_INTAKE_20260914.md",
+        "quote": "There is no tuned same-information headroom or accepted flat-MAPPO Scenario1 performance comparison.",
+        "why": "方向至今没有任何同宿主扁平基线，无法判断 D2-D0/I1280 相对扁平方法的位置。"
+      },
+      {
+        "path": "docs/Claude_docs/reviews/FOUR_DIRECTION_PROGRESS_REVIEW_20260915.md",
+        "quote": "Pooled seven package observations: mean about +.06 J, 95% interval touching zero.",
+        "why": "信号存在但精度不足；6 块是能对 .05 J 效应给出可用区间的最小块数。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/flexible_skill_duration/FSD_BASELINE_INTERRUPTION_B01_PROSPECTIVE_CARD_20260915.md",
+        "quote": "F ≈ 36,000–44,000 s native wall sum（若节点串行约 10–12 小时）。",
+        "why": "成本是此前 F 的 5–6 倍；FLAT 不是信息匹配的比较器，也不是上游 R-MAPPO。"
+      }
+    ],
+    "uncertainty": [
+      "FLAT 臂的实际墙钟未测量",
+      "块间 SD 可能大于 .08 J，6 块仍可能得到跨零区间",
+      "中央输入扁平变体被推迟为后续消融"
+    ],
+    "cost": {
+      "compute": "F 约 36,000–44,000 s 原生墙钟总和（WSL 4070 节点，CPU FP32 四线程）；S 约 24,000–30,000 s",
+      "owner_time": "阅读 Pro 决定与结果摘要，约 10 分钟",
+      "reversibility": "reversible",
+      "waits_on_this": "FSD 下一步实验；Pro 决定到达后 hub 直接执行，不等待所有者"
+    },
+    "verdict_text": "DM 推荐 F：三臂 × 六块、15 rollout 终点、5/10/15 面板；主要量 SI1280_15，MEI .05 J；H_15 = J(D1280) − J(FLAT) 作为 headroom 记录。已发送至 portfolio:cross_direction。",
+    "source": "docs/research/portfolio/pro_packets/20260915_fsd_baseline_interruption_investment/REQUEST.json"
+  },
+  "starred": true
+}

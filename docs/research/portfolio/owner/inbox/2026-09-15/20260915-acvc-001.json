@@ -1,0 +1,80 @@
+{
+  "id": "20260915-acvc-001",
+  "created": "2026-09-15T03:53:09-07:00",
+  "direction": "acvc",
+  "tier": "direction",
+  "kind": "decision",
+  "title": "ACVC C/M 之后的下一对象（推荐 B：3× 预算 F/M 探针）",
+  "context": "C/M 单块 F−M +.0234 J 高于 MEI 但只有一个块；FSD 的块间 SD ≈ .08 J 提示再加一块无法分辨。hub 作为 DM 将 A/B/C 三选项发送至 em:acvc:convergence。",
+  "options": [
+    {
+      "key": "A",
+      "label": "追加独立复制块",
+      "consequence": "每块约 3,200 s；若块 SD 大则区间仍宽"
+    },
+    {
+      "key": "B",
+      "label": "3× 预算 F/M 单块探针，1×/2×/3× 面板",
+      "consequence": "约 10,000 s；判断效应是否随训练增长"
+    },
+    {
+      "key": "C",
+      "label": "不再实验，有界结论收口",
+      "consequence": "零成本；C/M 问题悬而未决"
+    }
+  ],
+  "recommended": "B",
+  "auto_applied": null,
+  "dm_reason": "在为复制花钱前，用最便宜的观察判断效应尺度是否值得追。",
+  "evidence": [
+    "docs/research/candidates/acvc/ACVC_POST_MAPPO_RESUME_INTAKE_20260915.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-15.md#L15",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "ACVC 的 C/M 单块比较（F−M +.0234 J，高于 .01 J MEI；C−M −.0113 J）之后，C/M 对象族的下一步是什么：(A) 追加独立复制块，(B) 3 倍训练预算的 F/M 单块探针（1×/2×/3× 面板），还是 (C) 不再实验、以有界结论收口？",
+    "changes_if_approved": [
+      {
+        "target": "ACVC 下一对象",
+        "from": "所有者暂停后无后继对象",
+        "to": "由 em:acvc:convergence 决定；DM 推荐 (B)：F 与 M 各一次 3× 预算拟合，同一 64 世界面板在 1×/2×/3× 评估"
+      }
+    ],
+    "if_refused": "若 Pro 选 (C)，C/M 族以单块 F_ABOVE_MEI 有界结论收口，ACVC 保持 ACTIVE-idle、最低排序优先级；若选 (A)，按其固定的块数与合并规则执行。不做本地方向级选择。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/acvc/ACVC_CLUSTER_MAPPO_COMPARISON_B01_INTAKE_20260914.md",
+        "quote": "F−M +.02343964960218458 J = F_ABOVE_MEI；22/64 adverse worlds，worst −.2115 J；一个训练块。",
+        "why": "效应小且只有一个块；下一不确定性正是块间变异。"
+      },
+      {
+        "path": "docs/research/candidates/flexible_skill_duration/FSD_INTERRUPTION_BATCH_B01_RESULT_EVIDENCE_20260915.md",
+        "quote": "SI1280 训练 SD .07855260，SI128 .09294704（两块）。",
+        "why": "同仓库首个块间变异测量：若 ACVC 的块 SD 同量级，再加一块无法分辨 +.023 J。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/acvc/ACVC_OWNER_PAUSE_AFTER_MAPPO_HANDOFF_20260914.md",
+        "quote": "One independent unchanged paired block and baseline-competence/calibration design address different uncertainties; neither is selected/funded here.",
+        "why": "审阅者此前倾向再加一次参考拟合；FSD 的变异数字来自不同宿主，仅为量级提示。"
+      }
+    ],
+    "uncertainty": [
+      "ACVC 集群宿主的块间 SD 未测",
+      "(B) 为结果知情的新对象，只能给出符号与尺度观察",
+      "方向已用尽两次 recast，排序优先级最低"
+    ],
+    "cost": {
+      "compute": "(B) 约 10,000 s 原生（F ≈ 5,000 s，M ≈ 4,500 s，各加两次中间面板）；(A) 每块约 3,200 s",
+      "owner_time": "阅读 Pro 决定，约 5 分钟",
+      "reversibility": "reversible",
+      "waits_on_this": "ACVC 的下一实验；Pro 决定到达后 hub 直接执行"
+    },
+    "verdict_text": "DM 推荐 (B)：在为复制花钱之前，用最便宜的一次观察判断 F−M 是否随训练增长；(A) 在当前证据下不推荐；(C) 为备选。已发送至 em:acvc:convergence。",
+    "source": "docs/research/candidates/acvc/ACVC_POST_MAPPO_RESUME_INTAKE_20260915.md"
+  },
+  "starred": true
+}
