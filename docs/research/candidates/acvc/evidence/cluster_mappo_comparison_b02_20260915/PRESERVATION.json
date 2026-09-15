@@ -1,0 +1,119 @@
+{
+  "created_utc": "2026-09-15T16:51:49+00:00",
+  "reason": "final.pt and task.log are excluded from Git by .gitignore (*.pt, *.log); the complete nine-file originals are retained in local archives as for block 1",
+  "retained_root": "C:\\Projects\\HMASD-worktrees\\codex-acvc\\temp\\directions\\acvc\\retained\\cluster_mappo_comparison_b02_20260915",
+  "archives": {
+    "C": {
+      "path": "C:\\Projects\\HMASD-worktrees\\codex-acvc\\temp\\directions\\acvc\\retained\\cluster_mappo_comparison_b02_20260915\\C_original.tar.gz",
+      "bytes": 1407710,
+      "sha256": "fa965a905fb0757d087eb9a5a098ac501413da95cae3e2120b524d558ce1bc53",
+      "files": {
+        "admission.json": {
+          "bytes": 502,
+          "sha256": "9a1fa7b6fa0d234a134b1a8dfa481f4ebcf60c8466ccdfd9168c8c876848ba38"
+        },
+        "episodes.jsonl": {
+          "bytes": 2964818,
+          "sha256": "59dce2fb001ede8b9ae0b48cd58287b3c19cdfaf1bad7808e96ca8f6ed9e9be2"
+        },
+        "final.pt": {
+          "bytes": 281853,
+          "sha256": "30a70296b0f72eca79206952a689853909efa1aeae6f31e635bd4fd29bbf9ed2"
+        },
+        "native_time.txt": {
+          "bytes": 83,
+          "sha256": "5c5f0210478d25455b0881c4b93690d8f138e6020ba61522f7e81cc706089874"
+        },
+        "stderr.log": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stdout.log": {
+          "bytes": 17887,
+          "sha256": "c101323eda585adb2aabfdb34eb4f248f2d06b19875ad1f83f1bbd5f760d4adf"
+        },
+        "summary.json": {
+          "bytes": 10892,
+          "sha256": "4d7a2bd12f0939a3d440b52e205e6a290c2e0aeab6b29f05137538c0994a51a9"
+        },
+        "task.log": {
+          "bytes": 699,
+          "sha256": "233085cd64e03ed2bbd22733cfb71f02116a710f33023fda44496be51e0d9885"
+        },
+        "updates.jsonl": {
+          "bytes": 2016244,
+          "sha256": "36ddac681a0d32215cafc46604893d9d20a256084a22f48e0b140d291cab104f"
+        }
+      },
+      "tracked_in_git": [
+        "admission.json",
+        "episodes.jsonl",
+        "native_time.txt",
+        "summary.json",
+        "updates.jsonl"
+      ],
+      "retained_only": [
+        "final.pt",
+        "stderr.log",
+        "stdout.log",
+        "task.log"
+      ]
+    },
+    "M": {
+      "path": "C:\\Projects\\HMASD-worktrees\\codex-acvc\\temp\\directions\\acvc\\retained\\cluster_mappo_comparison_b02_20260915\\M_original.tar.gz",
+      "bytes": 555455,
+      "sha256": "7e61dc5cb8ac780b84d0dab65fca56c8cc2dcb9cd03743f07937ec6ff2792a60",
+      "files": {
+        "admission.json": {
+          "bytes": 504,
+          "sha256": "64f805cbd64b62491e2bf9bb80b86622214b13641a564245d4477da0f7141700"
+        },
+        "episodes.jsonl": {
+          "bytes": 939285,
+          "sha256": "55a1e8ad9b716ff9f3982850cc98a75aca369fef9e9ba1781fad058f39bb0ffe"
+        },
+        "final.pt": {
+          "bytes": 313423,
+          "sha256": "9132486d0eab436a16333bcc521bf94c02705dc438cd9c0616f55a211f4f1538"
+        },
+        "native_time.txt": {
+          "bytes": 83,
+          "sha256": "c401834bf7d687a39f1bd923143a9f2af599126feb62c8b43a648c61dfffa480"
+        },
+        "stderr.log": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stdout.log": {
+          "bytes": 17674,
+          "sha256": "20a43d5c440f0e795b792c3b443541a6df25036dcf61198b2c9242f83bcd3ce7"
+        },
+        "summary.json": {
+          "bytes": 6503,
+          "sha256": "44c628f24a7e61b2775df8189ff6fba50ff0e4d2a427eaf9d0a05263190c4edf"
+        },
+        "task.log": {
+          "bytes": 701,
+          "sha256": "d32374ee6ab18bb617cac5bbff5146dc5637b184b20ffa82b7f1cc025817a08c"
+        },
+        "updates.jsonl": {
+          "bytes": 688723,
+          "sha256": "8d73fd0013c2805d7116ac17b4025475ff1442ab9b552c7beac1c56faa608cca"
+        }
+      },
+      "tracked_in_git": [
+        "admission.json",
+        "episodes.jsonl",
+        "native_time.txt",
+        "summary.json",
+        "updates.jsonl"
+      ],
+      "retained_only": [
+        "final.pt",
+        "stderr.log",
+        "stdout.log",
+        "task.log"
+      ]
+    }
+  }
+}

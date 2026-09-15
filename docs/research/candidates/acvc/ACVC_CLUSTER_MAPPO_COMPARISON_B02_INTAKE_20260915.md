@@ -75,9 +75,11 @@ intake. [Chinese owner brief](../../portfolio/owner/briefs/acvc/2026-09-15_clust
 
 ## Preservation, boundary and revisit
 
-Both originals (nine files each, `final.pt` included) are committed under
-`evidence/cluster_mappo_comparison_b02_20260915/native/` with digests; the reduce output,
-world differences and accumulation are committed beside them. Remote worktree
+Both originals (nine files each) are preserved: the non-checkpoint, non-log files are
+committed under `evidence/cluster_mappo_comparison_b02_20260915/native/`, and the complete
+sets including `final.pt` and `task.log` (Git-ignored) are retained in local archives listed in
+`PRESERVATION.json`; the reduce output, world differences and accumulation are committed
+beside them. Remote worktree
 `/home/wu/hmasd-worktrees/acvc-b02-2dc9631c8` and staging `/home/wu/hmasd-inputs/acvc-mappo-b02-28431`
 are reclaimed after the push (CLEANUP.json). No experiment, Pro response or transport effect
 is pending for ACVC after the direction-tier question above is sent. Revisit condition: the
