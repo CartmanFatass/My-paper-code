@@ -79,8 +79,10 @@ conversation for a bound key.
    never calls them itself; the Sonnet `hmasd-pro-transport` agent does, in two short phases:
    - **Phase 1 (dispatch the agent):** preconditions (registry, fresh `gh api` readback of the
      output branch head, response path and Issue comments, TASK commit on the remote,
-     `agentify_status`, one agent tab at the exact conversation URL or `https://chatgpt.com/`
-     for a first binding, `agentify_ensure_ready`, `agentify_review_preflight` with `Pro` and
+     `agentify_status`, **one** agent tab keyed by the binding key at the exact conversation
+     URL or `https://chatgpt.com/` for a first binding (owner 2026-09-15: never a second
+     preflight tab under a private key; `agentify_review_query` reuses the key's tab),
+     `agentify_ensure_ready`, `agentify_review_preflight` with `Pro` and
      `GPT-6 Astra` then `Latest`), the exact prompt bytes to `__00_PROMPT.md` with sha256, then
      one `agentify_review_query` with `timeoutMs` about 60000 and **return as soon as the
      receipt shows `sendAttempted=true`** with the observed conversation id and operation id.
@@ -103,7 +105,9 @@ conversation for a bound key.
      `bind_conversation.py` under `PYTHONUTF8=1` with the creator ids from the handoff and the
      session's UUID5 as `--operator-thread-id`, the transport facts JSON, and the tab close
      (mandatory; owner 2026-09-06: open agent tabs accumulate and consume memory; the hub
-     checks `tab_lifecycle: CLOSED` in the facts and closes a leftover tab itself if needed).
+     checks `tab_lifecycle: CLOSED` and the single `request_tab_id` in the facts, then
+     `agentify_tabs` once itself: only the protected `default` tab may remain, and it closes a
+     leftover agent tab with `agentify_tab_close` if the transport's close failed).
    The hub-direct variant (hub calls Agentify itself) remains in Git history as a fallback when
    no Sonnet agent can be spawned; it is not the standard route.
    **The chat receipt is not the delivery.** In both scientific runs so far (DISH recovery,

@@ -53,14 +53,28 @@ Read from the handoff: `request_id`, `direction_id`, `workflow_node`,
 4. Agentify Desktop is running: `agentify_status` succeeds. If it fails, report that the GUI
    (`npm run start` in `C:/Projects/agentify-desktop`) must be started by the owner; do not start
    it yourself and do not fall back to another browser tool.
-5. Tab discipline (owner 2026-09-06): `agentify_review_query` creates and keys its own tab by
-   the `stableKey`; do not pre-create a tab for the send and never pass `existingTabId` (it
-   causes `tab_key_mismatch`). The only tab you may create yourself is one agent tab for the
-   preflight when no tab shows the bound conversation, navigated once to the exact
-   `https://chatgpt.com/c/<id>` (or `https://chatgpt.com/` for a first binding), then
-   `agentify_ensure_ready`; record its id, because you must close it in phase 2 together with
-   every tab the tool created under the request's `stableKey`. If login or a challenge is
-   pending, `agentify_show` it and stop; the owner completes it.
+5. Tab discipline (owner 2026-09-06; corrected 2026-09-15 after the owner watched the
+   transport open a second tab while the first was fine and leave it open): **one request, one
+   tab, keyed by the binding key.** Agentify's `ensureTab` reuses the tab registered under a
+   key when its URL matches, and `adoptTab` throws `tab_key_mismatch` only when the tab was
+   created under a *different* key, so the earlier two-tab habit (a preflight tab under a
+   private key plus the tool's own tab under `stableKey`) was self-inflicted. Procedure:
+   - `agentify_tabs` first. If a tab already carries `key == <binding key>` at the exact
+     conversation URL, reuse it. Otherwise open exactly one tab with
+     `agentify_navigate key=<binding key> url=https://chatgpt.com/c/<id>` (provider root
+     `https://chatgpt.com/` for a first binding); the call creates the tab under that key when
+     it is missing. Never use the owner's protected `default` tab and never create a tab under
+     any other key (no `pro-preflight-*` keys).
+   - `agentify_ensure_ready key=<binding key>`; if login or a challenge is pending,
+     `agentify_show` it and stop; the owner completes it.
+   - Preflight on that same tab id (item 6), then `agentify_review_query` with
+     `stableKey=<binding key>` and **no** `existingTabId`: the tool resolves the same tab by its
+     key. If it returns `key_url_mismatch` (the registered URL drifted from the conversation
+     URL), close that tab, let one identical call create the tool's own tab under the key, and
+     report both ids; never open a third tab.
+   - Every later call for this request (`verifyExisting=true` retry, phase-2 observation) uses
+     the same key and therefore the same tab. Record the single tab id in the facts as
+     `tab_ids.request_tab_id`; a second id appears only under the `key_url_mismatch` branch.
 6. Model preflight on that tab: `agentify_review_preflight` with `reasoningEffort` `Pro` and
    `productModel` `GPT-6 Astra` first; if it returns
    `chatgpt_product_model_unavailable_or_unselected`, repeat once with `Latest`. In the smoke of
@@ -136,12 +150,11 @@ permission to create a replacement key or conversation.
    the prompt and then as the repository sidecar `<packet>/archive/CHAT_FALLBACK_RESPONSE.md`.
    Never create or overwrite the scoped GitHub `archive/RESPONSE.md`, never synthesise a response
    from the chat text, and never Send again; report which route delivered the bytes.
-5. Close every tab this request created, only after the archive and readback are verified: the
-   preflight tab you created (if any) and each tab `agentify_review_query` created under the
-   request's `stableKey` (list them with `agentify_tabs`; a stale one that lost its CDP session
-   is closed the same way). Confirm with `agentify_tabs` that only the owner's protected
-   `default` tab remains and report `tab_lifecycle: CLOSED` with every id. Never close a user
-   tab. The hub verifies this line and closes leftovers itself if a close fails.
+5. Close the request's tab (`agentify_tab_close tabId=<request_tab_id>`, plus the second id if
+   the `key_url_mismatch` branch ran) as soon as the archive and readback are verified; a stale
+   tab that lost its CDP session is closed the same way. Confirm with `agentify_tabs` that only
+   the owner's protected `default` tab remains and report `tab_lifecycle: CLOSED` with the id(s).
+   Never close a user tab. The hub verifies this line and closes leftovers itself if a close fails.
 6. Complete the Registry lifecycle below for this exact delivered request.
    `bind_conversation.py` alone leaves `DIRECTION_VERIFIED`; archive it after verified readback
    and tab closure before another request uses the key. Report a reconciliation refusal to the
@@ -217,3 +230,15 @@ return directly), `materialize_packet.py` (github delivery has no attachments).
   left open accumulate and eat memory). After the archive and readback are verified, call
   `agentify_tab_close` on the tab you created and report `tab_lifecycle: CLOSED`; if the close
   fails, report the tab id so the hub can close it. Never close a tab you did not create.
+
+## Rule learned on 2026-09-15 (owner observation, FSD/ACVC rounds)
+
+- The transport opened a preflight tab under a private key, then `agentify_review_query`
+  opened a second tab under the binding key, and the first stayed open through the whole
+  round; with two requests in one session four agent tabs existed. The Agentify mapping is:
+  `agentify_navigate`/`agentify_ensure_ready` with `key=<binding key>` create-or-reuse the
+  key's tab; `agentify_review_preflight` inspects a tab id and never creates one;
+  `agentify_review_query` calls `ensureTab(stableKey, exactUrl)` and so reuses the key's tab
+  when its URL is the conversation URL; `existingTabId` only re-keys a tab and fails with
+  `tab_key_mismatch` when that tab was created under another key. Hence one tab per request,
+  keyed by the binding key, closed in phase 2 (precondition 5 and phase-2 step 5 above).
