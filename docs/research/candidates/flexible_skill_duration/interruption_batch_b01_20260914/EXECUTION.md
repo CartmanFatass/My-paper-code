@@ -122,9 +122,14 @@ results, seven not yet submitted. Training completion and polarity are not
 inferred from launch/admission.
 
 DM assigned only this accepted handle to reusable native Monitor
-`/root/dm_fsd_restart_20260914/monitor_fsd_factorial_20260914`. Its direct
-MONITOR_ADOPTED is pending at this record revision. Later terminal facts trigger
-collection and original2 (I1280, same block), without a Root ACK or new grant.
+`/root/dm_fsd_restart_20260914/monitor_fsd_factorial_20260914`. Direct native-final
+MONITOR_ADOPTED reports running, PID3708689, tmux active, exit null and uptime44s.
+DM accepts this actual native receipt. The child had incorrectly tried an app-thread
+delivery for its parent's canonical subagent address; that is unnecessary. DM
+resumed the same child immediately to continue its existing active handle, using
+native messages or a terminal native final, with no app-thread relay/lookup or
+replacement monitor. DM has stopped routine process polling. Later terminal facts
+trigger collection and original2 (I1280, same block), without Root ACK or a new grant.
 
 ## Collection and preservation inventory
 
