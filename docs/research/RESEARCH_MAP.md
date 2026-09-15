@@ -8,6 +8,14 @@ Current lifecycle, priority, capacity, and direction owner exist only in
 [`portfolio/PORTFOLIO.md`](portfolio/PORTFOLIO.md). The 14 structurally closed or absorbed labels
 and their complete evidence live under [`legacy/directions/`](legacy/directions/README.md).
 
+## Owner-adopted research calibration — 2026-09-14
+
+The [revised two-axis programme](portfolio/TWO_AXIS_RESEARCH_PROGRAMME_20260914.md) prioritises
+target-host baselines, independent training replication and mechanism attribution. It distinguishes
+the N-axis problem settings and corrects the external draft's statistical/evidence claims.
+The [owner decision](portfolio/decisions/2026-09-14-two-axis-research-calibration.md) adopts that
+preparation order; it does not rename/archive source IDs, change occupied slots or grant experiments.
+
 ## Newly registered independent programmes — 2026-09-12
 
 The [conforming Portfolio decision](portfolio/decisions/2026-09-12-new-direction-discovery.md) registers the following distinct questions. ACPS/CADC have one bounded B grant each; the other three have zero implementation/empirical grant. Code locations below are designated ownership surfaces, not existing implementations. Lifecycle/priority and actual tasks remain in Portfolio; these are not additional route fusions or formal-UAV entries.

@@ -1,0 +1,101 @@
+{
+  "id": "20260914-root-003",
+  "created": "2026-09-14T19:54:34-07:00",
+  "direction": "portfolio",
+  "tier": "portfolio",
+  "kind": "decision",
+  "title": "双轴研究校准：优先补基线、独立复现和机制归因",
+  "context": "所有者在核查后的修订建议下回复“同意”。本项记录已应用的文档和准备顺序，不请求再次批准；具体新实验、方向归档和额度另依实际决定。",
+  "options": [
+    {
+      "key": "apply",
+      "label": "应用核查后的研究校准",
+      "consequence": "发布修订方案和方法澄清，后续准备围绕三个证据缺口。"
+    },
+    {
+      "key": "wholesale",
+      "label": "原样采用外部方案",
+      "consequence": "会引入未获本次同意的统一2SD、批量归档和权限变更。"
+    },
+    {
+      "key": "unchanged",
+      "label": "保留原先准备方式",
+      "consequence": "关键基线、独立复现和归因缺口仍需其他安排解决。"
+    }
+  ],
+  "recommended": "apply",
+  "auto_applied": "apply",
+  "dm_reason": "所有者已同意核查后的建议；实际应用限定于文档和准备顺序。",
+  "evidence": [
+    "docs/research/portfolio/decisions/2026-09-14-two-axis-research-calibration.md",
+    "docs/research/portfolio/TWO_AXIS_RESEARCH_PROGRAMME_20260914.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-14.md#L126",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "记录所有者已同意的研究校准及本轮文档应用范围；本项不请求再次批准。",
+    "changes_if_approved": [
+      {
+        "target": "docs/research/portfolio/TWO_AXIS_RESEARCH_PROGRAMME_20260914.md",
+        "from": "外部建议尚未经过事实与推断校正",
+        "to": "形成基线、独立复现、机制归因优先的双轴准备方案"
+      },
+      {
+        "target": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md §11.11",
+        "from": "既有少样本与主张比例原则",
+        "to": "补充 MEI/SD/区间、配方归因和 N 轴问题边界的澄清"
+      }
+    ],
+    "if_refused": "将后来明确的 owner override 应用于后续准备；保留历史结果和真实应用记录。",
+    "evidence_for": [
+      {
+        "path": "docs/research/portfolio/decisions/2026-09-14-two-axis-research-calibration.md",
+        "quote": "The owner replied, verbatim: **“同意”**.",
+        "why": "直接授权来自当前会话，范围由上一条修订建议限定。"
+      },
+      {
+        "path": "docs/research/baselines/scenario_1/BASELINE_SET_RESULT_20260904.md",
+        "quote": "There is no located flat MAPPO result on `envs.pettingzoo.scenario1.UAVBaseStationEnv`.",
+        "why": "目标宿主的关键基线缺口支持优先准备比较。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/acvc/ACVC_CLUSTER_FIXED_RECIPE_C01_RESULT_EVIDENCE_20260914.md",
+        "quote": "All six preselected originals are technically complete.",
+        "why": "已有重复正证据，不能将所有历史结果概括为无效。"
+      },
+      {
+        "path": "docs/research/candidates/flexible_skill_duration/pro_packets/20260912_post_five_pair_use_convergence/INTAKE.md",
+        "quote": "I gap.25/batch1280 versus authentic infinite-gap/batch128 D0",
+        "why": "FSD 完整配方改变多个因素，不能直接归因于中断。"
+      }
+    ],
+    "uncertainty": [
+      "具体基线卡的独立训练数、训练步数、调参和运行成本尚待作者确定。",
+      "N 轴学习权限及基准适配尚待具体比较。",
+      "方向逐项融合/归档、实验额度和运行调度未由本次简短同意逐项决定。"
+    ],
+    "cost": {
+      "compute": "0 新训练/评估/拟合/GPU 执行；仅文档、读取和历史差值的描述性核对。",
+      "owner_time": "无需再次批准本次已同意的校准。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing"
+    },
+    "verdict_text": "The owner replied, verbatim: **“同意”**.",
+    "source": "docs/research/portfolio/decisions/2026-09-14-two-axis-research-calibration.md"
+  },
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-15T02:55:27+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "docs/research/portfolio/decisions/2026-09-14-two-axis-research-calibration.md",
+      "record": "docs/research/portfolio/decisions/2026-09-14-two-axis-research-calibration.md",
+      "state": "applied",
+      "summary": "已应用修订方案、§11.11方法澄清和研究地图入口；独立审阅P2已修正并复核，无新实验拨款、方向归档或DM派发。"
+    }
+  ]
+}

@@ -718,3 +718,30 @@ result, proof, full mechanism explanation or Pro round becomes a new A/B conditi
 Mechanical work does not preload this material; scientific reading does not invoke
 grilling or require owner confirmation. Missing decision-critical sources follow the
 existing node's gap procedure; an explanatory-source gap alone is no launch refusal.
+
+### 11.11 Owner calibration after external methodology review (2026-09-14)
+
+The owner accepted the [corrected two-axis assessment and preparation order](../portfolio/decisions/2026-09-14-two-axis-research-calibration.md),
+implemented in the [revised programme](../portfolio/TWO_AXIS_RESEARCH_PROGRAMME_20260914.md).
+Prioritise preparation of the target-host baseline comparison, independent training replication
+and mechanism-discriminating ablations. This sets preparation priorities, not a universal launch
+gate, a global batch boundary or a change to current lifecycle, accepted budgets or frozen results.
+
+Keep effect importance, outcome variability and estimator uncertainty separate. A card's justified
+MEI describes the effect worth caring about; seed variation informs precision and study design.
+There is no universal rule that an effect must exceed two seed SDs, or that a point estimate inside
+one SD establishes a null/equivalence result. An equivalence claim needs uncertainty sufficiently
+narrow relative to a prospectively defined equivalence region. Otherwise report the actual limits
+and unresolved alternatives. Existing §11.8 proportionality and exploratory flexibility remain.
+
+Resampling and uncertainty must respect independent training instances, nested evaluations and
+actual declared pairing. Report the estimand, selection exposure and interval assumptions; IQM or
+bootstrap is a tool, not additional independent evidence or automatic adequacy at five/ten seeds.
+Whole-package gains remain package gains unless an appropriate control identifies a component.
+A resource/investment PARK does not establish a scientific population null.
+
+Controlled environments remain useful for mechanism questions, with external benchmarks supporting
+broader comparisons. Match information, task and training rights before adopting a published
+baseline. In particular, jointly trained roster change, train-N/test-N transfer and open ad hoc
+teamwork are distinct questions. Benchmark-gap observations guide design; neither a prior positive
+gap nor beating a privileged oracle is a universal prerequisite for exploration.
