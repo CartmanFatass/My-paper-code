@@ -1,0 +1,24 @@
+total 2004
+drwxrwxr-x 2 wu wu   4096 Sep 16 06:50 .
+drwxrwxr-x 3 wu wu   4096 Sep 16 06:34 ..
+-rw------- 1 wu wu    504 Sep 16 06:34 admission.json
+-rw-rw-r-- 1 wu wu 983133 Sep 16 06:50 episodes.jsonl
+-rw-rw-r-- 1 wu wu 313423 Sep 16 06:50 final.pt
+-rw-rw-r-- 1 wu wu     81 Sep 16 06:50 native_time.txt
+-rw-rw-r-- 1 wu wu      0 Sep 16 06:34 stderr.log
+-rw-rw-r-- 1 wu wu  17911 Sep 16 06:50 stdout.log
+-rw-rw-r-- 1 wu wu  11336 Sep 16 06:50 summary.json
+-rw-rw-r-- 1 wu wu 688618 Sep 16 06:50 updates.jsonl
+d7865a92ef8aa2801c41f9515e8f03fdf13df40508a2d043c023e79d6266d937  summary.json
+adc93a7b05b9a9f86eedafce538f41363a8e1ece6413a3cc45124064abb2b6ed  episodes.jsonl
+49a22b7a14bb042866c46725a1dcbb980d14602d9492e7cfcd6bc897da89819a  updates.jsonl
+edd71847d4beb703582e786fcd731a24b0cc2330c8ec5b2ee72366fc9cc0335d  admission.json
+85fc3652e8500341768c3f0a715d45d76fc686a829e02c9a2b0ff6ac10e0f4d3  native_time.txt
+5f10ea34adec273596d54f51224d92231b4e4f1cdeab8575b3b5e3298640665a  stdout.log
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  stderr.log
+cf32fb9450ef951e33049280fc12d8a4420df101c2c24c8f3e3e0bff06145ec2  final.pt
+native_wall_s=989.80
+peak_rss_kib=588916
+user_s=987.74
+system_s=1.13
+exit_code=0
