@@ -34,5 +34,12 @@
       "bytes": 4853,
       "sha256": "532a688e716dabf77f82b15f68b255ba3473d9b46d834b16d7f4cea3bffa0679"
     }
-  ]
+  ],
+  "byte_exact_archive": {
+    "path": "RAW_INITIAL_CONFLICT.tar.gz",
+    "bytes": 4048,
+    "sha256": "5b8d7b1dca730b6abfc7765ebe875f8f75ca33b8939a4a15b250916ac0d4ce00",
+    "members_verified_against_original_hashes": true
+  },
+  "text_copy_note": "Repository Markdown/JSON copies may undergo Git CRLF normalization. The binary tar.gz preserves all six original transport byte strings, checked above; original local Transport files are retained."
 }
