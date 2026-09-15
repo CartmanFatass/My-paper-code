@@ -1,0 +1,139 @@
+{
+  "readback_utc": "2026-09-15T08:34:47.216610+00:00",
+  "source_sha": "7975964542b83560cbc0e79f74a9212f8e3737af",
+  "primary_recomputed": {
+    "object": "FOLR_ENTITY_AUGMENTATION_REPEAT_B01_781901_782001",
+    "blocks": [
+      {
+        "block": 1,
+        "training_seed": 781901,
+        "evaluation_seed": 1781901,
+        "launch_sha": "7975964542b83560cbc0e79f74a9212f8e3737af",
+        "generic": {
+          "mean": 1.4009375,
+          "sample_sd": 6.656210342383062,
+          "conditional_episode_se": 0.5883314337628868,
+          "minimum": -13.309999999999999,
+          "maximum": 19.04,
+          "n": 128,
+          "negative_count": 56
+        },
+        "persistent": {
+          "mean": -4.4296875,
+          "sample_sd": 4.597889953833068,
+          "conditional_episode_se": 0.406399895688108,
+          "minimum": -20.209999999999997,
+          "maximum": 7.699999999999999,
+          "n": 128,
+          "negative_count": 114
+        },
+        "persistent_minus_generic": -5.8306249999999995,
+        "rule": "G_ABOVE_MEI",
+        "mei": 1.0,
+        "training_instances_per_arm": 1,
+        "population_interval": null,
+        "uncertainty": "Conditional policy panels; no episode-paired worlds or population precision."
+      },
+      {
+        "block": 2,
+        "training_seed": 782001,
+        "evaluation_seed": 1782001,
+        "launch_sha": "7975964542b83560cbc0e79f74a9212f8e3737af",
+        "generic": {
+          "mean": 0.20804687499999938,
+          "sample_sd": 5.44509821586926,
+          "conditional_episode_se": 0.4812832340834906,
+          "minimum": -19.259999999999998,
+          "maximum": 18.58,
+          "n": 128,
+          "negative_count": 71
+        },
+        "persistent": {
+          "mean": 0.09812499999999962,
+          "sample_sd": 5.655571255007971,
+          "conditional_episode_se": 0.49988659823748116,
+          "minimum": -14.97,
+          "maximum": 14.520000000000001,
+          "n": 128,
+          "negative_count": 68
+        },
+        "persistent_minus_generic": -0.10992187499999977,
+        "rule": "WITHIN_MEI",
+        "mei": 1.0,
+        "training_instances_per_arm": 1,
+        "population_interval": null,
+        "uncertainty": "Conditional policy panels; no episode-paired worlds or population precision."
+      }
+    ],
+    "ordered_differences": [
+      -5.8306249999999995,
+      -0.10992187499999977
+    ],
+    "descriptive_mean_difference": -2.9702734374999995,
+    "rule": "MIXED_BLOCK_PATTERN",
+    "mei_per_block": 1.0,
+    "training_instances_per_arm": 2,
+    "independent_contrast_blocks": 2,
+    "population_interval": null,
+    "claim": "Two fresh whole-program A-G realizations; no stable rank or isolated persistence effect.",
+    "uncertainty": "Block independence is a working design assumption; within-block common labels do not prove paired evaluation worlds. The mean is descriptive, not the reading rule."
+  },
+  "independent_ordered_rule": "MIXED_BLOCK_PATTERN",
+  "recomputed_panels": {
+    "BLOCK1_GENERIC": {
+      "mean": 1.4009375,
+      "sample_sd": 6.656210342383062,
+      "conditional_episode_se": 0.5883314337628868,
+      "minimum": -13.309999999999999,
+      "maximum": 19.04,
+      "n": 128,
+      "negative_count": 56
+    },
+    "BLOCK1_PERSISTENT": {
+      "mean": -4.4296875,
+      "sample_sd": 4.597889953833068,
+      "conditional_episode_se": 0.406399895688108,
+      "minimum": -20.209999999999997,
+      "maximum": 7.699999999999999,
+      "n": 128,
+      "negative_count": 114
+    },
+    "BLOCK2_GENERIC": {
+      "mean": 0.20804687499999938,
+      "sample_sd": 5.44509821586926,
+      "conditional_episode_se": 0.4812832340834906,
+      "minimum": -19.259999999999998,
+      "maximum": 18.58,
+      "n": 128,
+      "negative_count": 71
+    },
+    "BLOCK2_PERSISTENT": {
+      "mean": 0.09812499999999962,
+      "sample_sd": 5.655571255007971,
+      "conditional_episode_se": 0.49988659823748116,
+      "minimum": -14.97,
+      "maximum": 14.520000000000001,
+      "n": 128,
+      "negative_count": 68
+    }
+  },
+  "complete_counts": {
+    "training_episodes": 20000,
+    "training_ticks": 400000,
+    "optimizer_steps": 19876,
+    "evaluation_episodes": 512,
+    "evaluation_ticks": 10240
+  },
+  "new_training_instances": 4,
+  "fresh_contrast_blocks": 2,
+  "exposure_line": "4 fresh fits; 400000 train ticks; 19876 RMSprop steps; 4 final checkpoints; 512 final greedy episodes/10240 eval ticks; 0 screening/retry/checkpoint selection",
+  "cost": {
+    "invocations_with_external_timing": 4,
+    "native_wall_measured_sum_seconds": 11218.369999999999,
+    "aggregate_cpu_measured_sum_seconds": 11216.4,
+    "peak_rss_kib_measured_max": 863732,
+    "support_provider_lifetime_total": "UNKNOWN"
+  },
+  "training_population_uncertainty": "not estimated; two complete block realizations, evaluation variation included",
+  "within_block_common_labels": "intentional construction alignment, not evidence of paired worlds or independent arm draws"
+}
