@@ -27,6 +27,14 @@ whose corrections are incorporated. No experiment was run and no scientific obje
 
 ### reviews/
 
+- `FOUNDATIONS_AND_METHODOLOGY_CRITICAL_REVIEW_20260914.md` — critical review, at the owner's
+  request, of the starting papers (HMASD, OPT), the untie-k / untie-N premise, the B-ladder
+  methodology and the direction-selection loop. Main findings: the hierarchy premise was never
+  tested against flat MAPPO on the dense-reward UAV host; one-seed pairs are read against a
+  0.01 J minimum effect while the measured across-seed SD is about 0.08 J; positive results sit
+  on undertrained learners; 41 bespoke hosts; about twenty new objects per day. Recommends a
+  headroom experiment, one frozen benchmark per axis, five-seed inference, two directions, owner
+  deciding. Includes self-criticism of §11 and other Claude-authored documents.
 - `FIRST_WAVE_INDEPENDENT_REVIEW_20260901.md` — independent review of the five `ACTIVE/HIGH`
   first-wave directions (FRRIE, VNFC, CBSC, SCDMP, UCOPE) against the packet in
   `docs/research/review_packets/2026-09-01-first-wave-latest-model/`. Dispositions: SCDMP, CBSC,
