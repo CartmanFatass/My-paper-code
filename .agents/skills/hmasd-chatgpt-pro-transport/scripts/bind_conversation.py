@@ -118,6 +118,7 @@ def _record_defaults(record: dict, args: argparse.Namespace) -> dict:
     record.setdefault("conversation_binding_key", binding_key)
     record.setdefault("workflow_node", workflow_node)
     record.setdefault("direction_ids", direction_ids)
+    record.setdefault("direction_id", getattr(args, "direction_id", None))
     record.setdefault("decision_authority", decision_authority)
     record.setdefault("packet_id", logical_packet_id)
     record.setdefault(

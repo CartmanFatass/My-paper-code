@@ -122,6 +122,17 @@ traceable through Git history (commit by pathspec with the runtime trailers) and
 05:38 PDT). Unchanged: no `git add -A`/stash/reset/history rewrites, no evidence deletion, and
 scientific-meaning changes still follow the decision ladder in `AGENTS.md` section 2.
 
+**Owner instruction 2026-09-15 12:57 PDT (scope of the Claude hub):** the deny rules in
+`.claude/settings.json` are removed. The hub is authorized to **advance two research directions
+in parallel**; its role is equivalent to the Codex-side DM, with the additional authority to
+allocate and coordinate work across both directions. "Advance" includes derivation, innovation
+and experimental validation; final scientific measurement and convergence decisions can be left
+to GPT Pro. Conversation binding is a traceability mechanism for record-keeping, not an absolute
+requirement: a strict one-to-one binding is unnecessary as long as the work remains traceable
+(request, prompt bytes, conversation id, response commit and archive recorded). The two-direction
+cap, the `AGENTS.md` decision ladder for direction- and Portfolio-tier decisions, evidence-spec
+§11 and the Git rules above are unchanged.
+
 ### Claude Code session rules (formerly AGENTS.md Appendix B)
 
 - `CLAUDE.md` at the repository root carries the environment, commands, architecture, and
