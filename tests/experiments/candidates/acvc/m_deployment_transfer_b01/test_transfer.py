@@ -274,3 +274,18 @@ def test_reduce_keeps_unaffected_contrasts_when_one_panel_is_incomplete(fresh_mo
     assert out["contrasts"]["T_D"]["reading"] == "INCOMPLETE" and out["contrasts"]["U"]["reading"] == "INCOMPLETE"
     wrong = runner.reduce_transfer(make_summary({"M": base, "F(M)": base, "dwell(M)": base}, master=28431))
     assert not wrong["eligible_fit"] and all(v["reading"] == "INCOMPLETE" for v in wrong["contrasts"].values())
+
+
+def test_reduce_cli_binds_the_identities_before_reading_a_real_summary(fresh_modules, tmp_path):
+    """Reviewer finding 2026-09-15: the CLI must bind 28531/38531 before fit_eligible, or every contrast is INCOMPLETE."""
+    import json
+    runner = importlib.import_module("run_acvc_m_deployment_transfer_b01")
+    base = np.linspace(.2, .5, 64)
+    summary = make_summary({"M": base, "F(M)": base + .05, "dwell(M)": base + .01})
+    (tmp_path / "summary.json").write_text(json.dumps(summary), encoding="utf-8")
+    assert runner.main(["--mode", "reduce", "--m-summary", str(tmp_path / "summary.json"),
+                        "--output", str(tmp_path / "out")]) == 0
+    out = json.loads((tmp_path / "out" / "summary.json").read_text(encoding="utf-8"))
+    assert out["eligible_fit"] and out["complete"]
+    assert out["contrasts"]["T_F"]["reading"] == "TRANSFERS" and out["contrasts"]["T_F"]["mean_J"] == pytest.approx(.05)
+    assert out["contrasts"]["U"]["mean_J"] == pytest.approx(.04)
