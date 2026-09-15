@@ -1,0 +1,75 @@
+{
+  "id": "20260914-folr-008",
+  "created": "2026-09-14T21:29:16-07:00",
+  "direction": "vap_folr_core",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "FOLR：固定两块新的 A−G 训练复查",
+  "context": "在同一公开生命周期宿主上，用两块新训练比较持续实体增强 A 与完整 Generic G；固定四次原始调用，保留两个逐块差值。旧正结果引导了选题，两块仍不证明稳定排名。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "按卡内四次原始调用完成两块复查，不依第一块结果决定是否纳入第二块。"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "按具体所有者指示停止尚未执行的卡内部分，保留已执行事实和旧证据。"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "只调整尚未执行且明确授权的卡片内容，不回溯改写已冻结结果。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "第二块可能挑战第一块任一符号并改变开发建议强弱；一块仍为少一半计算的合理备选。",
+  "evidence": [
+    "docs/research/candidates/vap_folr_core/FOLR_ENTITY_AUGMENTATION_REPEAT_B01_SCIENCE_CARD_20260914.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-14.md#L42",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "在固定的两块新 A−G 研究中，复查旧正结果是否重现、反转或分歧。",
+    "changes_if_approved": [
+      {
+        "target": "FOLR_ENTITY_AUGMENTATION_REPEAT_B01_SCIENCE_CARD_20260914.md",
+        "from": "两块对一块的准备比较",
+        "to": "事先固定 G1、A1、G2、A2 四次原始调用及两个逐块差值，不混入旧结果"
+      }
+    ],
+    "if_refused": "按下一干净边界收到的具体所有者指示调整尚未执行部分；保留所有已执行事实，不替换既有结果。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/vap_folr_core/FOLR_ENTITY_AUGMENTATION_REPEAT_B01_SCIENCE_CARD_20260914.md",
+        "quote": "a second fresh block can challenge either sign of the first within one fixed study",
+        "why": "第二块可以改变对第一块结果的开发解释，且其是否纳入不由第一块符号决定。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/vap_folr_core/pro_packets/20260914_current_increment_b01_result_plan_review/archive/RESPONSE.md",
+        "quote": "The strongest case for one block is substantial.",
+        "why": "一块已经能复查旧正比较，并少一半计算；两块仍不支持稳定排名。"
+      }
+    ],
+    "uncertainty": [
+      "选择回到旧正 A−G 是结果知情的。",
+      "第二块边际信息价值未量化；两块选择仍为近似取舍。",
+      "同宿主调优同信息基线能力和 headroom 尚未建立。"
+    ],
+    "cost": {
+      "compute": "四次各5000训练回合/4969更新/128评估；合计410240原生步。异质历史时间参考9883.18秒，普通计划13200秒；实际及完整支持成本未知。",
+      "owner_time": "无需逐项回复，沿用既有对象层委托。",
+      "reversibility": "costly",
+      "waits_on_this": "nothing"
+    },
+    "verdict_text": "Owner-delegated decision (unattended, 2026-09-03 instruction): select two blocks.",
+    "source": "docs/research/candidates/vap_folr_core/FOLR_ENTITY_AUGMENTATION_REPEAT_B01_SCIENCE_CARD_20260914.md"
+  },
+  "starred": false
+}
