@@ -76,5 +76,15 @@
     "verdict_text": "DM 推荐 (B)：在为复制花钱之前，用最便宜的一次观察判断 F−M 是否随训练增长；(A) 在当前证据下不推荐；(C) 为备选。已发送至 em:acvc:convergence。",
     "source": "docs/research/candidates/acvc/ACVC_POST_MAPPO_RESUME_INTAKE_20260915.md"
   },
-  "starred": true
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-15T11:27:01+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/acvc/pro_packets/20260915_cluster_mappo_comparison_b01_result_review/archive/RESPONSE.md",
+      "record": "docs/research/candidates/acvc/pro_packets/20260915_cluster_mappo_comparison_b01_result_review/INTAKE.md",
+      "state": "planned",
+      "summary": "方向节点选 A（k=1）：再做一个未改动的 C/M 配对块，D2 主要量、.01 J MEI、前瞻两块累积；DM 推荐的 B 被否决。两次新拟合的投入待 Portfolio 批准，零暴露。"
+    }
+  ]
 }
