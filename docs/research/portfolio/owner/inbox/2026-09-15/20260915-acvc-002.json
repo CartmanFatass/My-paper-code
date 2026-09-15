@@ -1,0 +1,81 @@
+{
+  "id": "20260915-acvc-002",
+  "created": "2026-09-15T06:25:51-07:00",
+  "direction": "acvc",
+  "tier": "portfolio",
+  "kind": "portfolio",
+  "title": "ACVC 一个复现块的 Portfolio 投资（G：两次拟合）",
+  "context": "方向节点选 A（k=1）后，两次新拟合的投入保留给 Portfolio；hub 发送投资请求，Portfolio 于 2026-09-15 13:19Z 选 G。",
+  "options": [
+    {
+      "key": "G",
+      "label": "再购买一个不变的 C/M 配对块（两次原始拟合）及有界支持",
+      "consequence": "约 3,400 s 原生墙钟；两块等块累积（df=1）"
+    },
+    {
+      "key": "N",
+      "label": "不投入，保留块 1 事实",
+      "consequence": "ACVC ACTIVE-idle，最低排序优先级"
+    }
+  ],
+  "recommended": "G",
+  "auto_applied": "G",
+  "dm_reason": "单块 F−M +.0234 J 高于 MEI 但 22/64 世界不利；再来一块能判断复现或反转，成本小。",
+  "evidence": [
+    "docs/research/portfolio/pro_packets/20260915_acvc_one_block_replication_investment/archive/RESPONSE.md",
+    "docs/research/portfolio/decisions/2026-09-15-acvc-one-block-replication-grant.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-15.md#L22",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否为 ACVC 资助一个新的、不变的 C/M 配对训练块（两次原始拟合，master 28431 / 评估命名空间 38431，计划 C 1,800 s、M 1,600 s）以及有界的准备、验证、执行、intake 与保存支持（G），还是不投入（N）？",
+    "changes_if_approved": [
+      {
+        "target": "ACVC 实验分配",
+        "from": "方向节点决定 A（k=1）后，两次新拟合的投入被明确保留，0 producer",
+        "to": "两次原始拟合：C 与 M 各 4,096 个 H256 训练回合、2,048 次双回合 rollout、8,192 个 PPO minibatch；四个 64 世界终评面板（C、F、own-dwell、M）；零重试、零替换、零第三次拟合"
+      },
+      {
+        "target": "读数与累积",
+        "from": "单块 D1 = +.0234 J（F−M），22/64 不利世界",
+        "to": "先单独读 D2 = mean64(J_F − J_M)（±.01 J MEI 带），再分别报告 D1、D2，然后固定的等块累积（pooled_mean、block_SD=|D2−D1|/√2、df=1 区间），标注为工作模型描述；块 1 不重评"
+      }
+    ],
+    "if_refused": "选 N 则保留块 1 事实，不再对未调参比较器购买证据；ACVC 保持 ACTIVE/MEDIUM/recasts2、最低排序优先级，进入 ACTIVE-idle。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/acvc/ACVC_CLUSTER_MAPPO_COMPARISON_B01_RESULT_EVIDENCE_20260914.md",
+        "quote": "F−M +.02343964960218458 J; C−M −.011309900227360047; 22/64 primary worlds adverse; worst −.21151331203707885.",
+        "why": "单块高于 MEI 但世界间不利比例高、条件 SE 不度量训练块不确定性；再来一块能判断复现、反转或缩小。"
+      },
+      {
+        "path": "docs/research/candidates/acvc/pro_packets/20260915_cluster_mappo_comparison_b01_result_review/archive/RESPONSE.md",
+        "quote": "Select A with k = 1: one further unchanged C/M paired block; the allocation itself is withheld for Portfolio.",
+        "why": "方向节点已选定对象，只缺 Portfolio 的投入授权。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/acvc/ACVC_CLUSTER_MAPPO_COMPARISON_B01_INTAKE_20260914.md",
+        "quote": "There is no tuned same-information headroom; M is an untuned comparator.",
+        "why": "第二个有利结果仍可能只是未调参基线的弱点或配方敏感性，不能建立稳定优势。"
+      }
+    ],
+    "uncertainty": [
+      "两块无法验证 df=1 区间的覆盖率，尤其在结果知情的继续之后",
+      "与 FSD 四个并发拟合共用节点，实际墙钟与支持成本未知",
+      "M 拟合前需重新准备 on-policy 依赖（de66d7a4b）"
+    ],
+    "cost": {
+      "compute": "约 3,400 s 原生墙钟总和（C 1,800 s、M 1,600 s，单线程 CPU FP32，历史峰值 RSS 约 0.56 GiB/拟合），作为可调整的普通计划而非上限",
+      "owner_time": "阅读 Pro 决定与两块累积摘要，约 10 分钟",
+      "reversibility": "reversible",
+      "waits_on_this": "ACVC 下一步实验；Pro 决定到达后 hub 直接执行，不等待所有者"
+    },
+    "verdict_text": "Portfolio 选 G：恰好再购买一个不变的 C/M 配对块（两次原始拟合）及有界支持；FSD 就绪工作优先，ACVC 作为低优先级回填，先 C 后 M；ACTIVE/MEDIUM/recasts2 与最低排序优先级不变。hub 已按 dc… 2dc9631c8 启动源执行。",
+    "source": "docs/research/portfolio/pro_packets/20260915_acvc_one_block_replication_investment/archive/RESPONSE.md"
+  },
+  "starred": true
+}

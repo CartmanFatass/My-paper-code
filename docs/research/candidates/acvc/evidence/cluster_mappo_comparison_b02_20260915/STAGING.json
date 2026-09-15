@@ -1,0 +1,26 @@
+{
+  "object": "ACVC_CLUSTER_MAPPO_COMPARISON_B02",
+  "grant": "docs/research/portfolio/decisions/2026-09-15-acvc-one-block-replication-grant.md",
+  "launch_sha": "2dc9631c8644464b8c4189a53344b2956c3eb3b4",
+  "launch_branch": "codex/acvc",
+  "reviewed_wrapper_sha": "3ae041d9e",
+  "source_identity_check": "git diff 3ae041d9e 2dc9631c8 -- scripts/run_acvc_cluster_mappo_comparison_b02.py scripts/run_acvc_cluster_mappo_comparison_b01.py experiments/candidates/acvc/cluster_mappo_comparison_b01/ hmasd/ is empty; remote working file hash-object 18f13880a49682f76880331a368e68db8e66754f equals the committed blob at both shas (local sha256 differs only by CRLF checkout)",
+  "remote_worktree": "/home/wu/hmasd-worktrees/acvc-b02-2dc9631c8",
+  "worktree_receipts": [
+    {
+      "operation": "git fetch origin codex/acvc && git worktree add --detach",
+      "returncode": 1,
+      "effect": "fetch refused: cannot lock ref refs/remotes/origin/codex/acvc because the stale tracking ref refs/remotes/origin/codex/acvc/next-object-20260904 exists on the node; no worktree created, nothing modified"
+    },
+    {
+      "operation": "git fetch origin 2dc9631c8644464b8c4189a53344b2956c3eb3b4 && git worktree add --detach /home/wu/hmasd-worktrees/acvc-b02-2dc9631c8 2dc9631c8644464b8c4189a53344b2956c3eb3b4",
+      "returncode": 0,
+      "head": "2dc9631c8644464b8c4189a53344b2956c3eb3b4",
+      "status_clean": true,
+      "sparse_checkout_omits_docs": true
+    }
+  ],
+  "native_invocations_during_staging": 0,
+  "model_constructions_during_staging": 0,
+  "staged_at_utc": "2026-09-15T13:27Z"
+}
