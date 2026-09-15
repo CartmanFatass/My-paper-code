@@ -1,0 +1,42 @@
+[
+  {
+    "commit": "f8943e044caff1c9e1e371e4217891267fee49a2",
+    "path": "docs/research/candidates/acvc/DIRECTION.md",
+    "observed_remote_branch": "codex/acvc",
+    "observed_head": "f8943e044caff1c9e1e371e4217891267fee49a2",
+    "path_exists": true,
+    "published_ancestor": true
+  },
+  {
+    "commit": "2d83f5b8fe0d6eba9c5e749569d44fcf000d03f1",
+    "path": "docs/research/candidates/vap_folr_core/FOLR_ENTITY_CURRENT_INCREMENT_B01_INTAKE_20260914.md",
+    "observed_remote_branch": "codex/vap-folr",
+    "observed_head": "ef3605be4f67935062d72d459173552f8872b68b",
+    "path_exists": true,
+    "published_ancestor": true
+  },
+  {
+    "commit": "9e8ea42b0efe6e86bb5cc9fec9feca90c5bd1d38",
+    "path": "docs/research/candidates/tail_return_distributional_learning/TRDL_B01_INTAKE_20260914.md",
+    "observed_remote_branch": "codex/trdl",
+    "observed_head": "c463c2c79b0c0cbf19d43fc7435aefe7bbe3db04",
+    "path_exists": true,
+    "published_ancestor": true
+  },
+  {
+    "commit": "cbdac09d54291b3a7d01db1a56c897174a6b32af",
+    "path": "docs/research/candidates/flexible_skill_duration/FSD_INTERRUPTION_BATCH_B01_PROSPECTIVE_CARD_20260914.md",
+    "observed_remote_branch": "codex/fsd",
+    "observed_head": "ca27db8d529ffb54eab5f26f014c204bbaeafcf2",
+    "path_exists": true,
+    "published_ancestor": true
+  },
+  {
+    "commit": "df2bf1ed35484d0be236b8b84f22aaddba7dacdf",
+    "path": "docs/research/portfolio/PORTFOLIO.md",
+    "observed_remote_branch": "main",
+    "observed_head": "a69d73a905ad94b78087661e767536c66b3f19dc",
+    "path_exists": true,
+    "published_ancestor": true
+  }
+]
