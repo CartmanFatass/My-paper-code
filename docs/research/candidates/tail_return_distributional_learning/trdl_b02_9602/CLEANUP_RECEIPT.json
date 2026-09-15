@@ -1,0 +1,49 @@
+{
+  "assignment": "TRDL-B02",
+  "owner": "/root/dm_trdl_vacancy_20260914",
+  "node": "hmasd-wsl-node",
+  "verified_at": "2026-09-15T06:15:15.988548Z",
+  "source_sha": "deddd8d9e0b41cff165d32f3f7729c23df236a69",
+  "source_object_retained": true,
+  "root_retention": {
+    "result_main": "8bde125a0",
+    "execution_main": "3c598fd54",
+    "pause_boundary_main": "862b51256",
+    "owner_audit_main": "42e29108a"
+  },
+  "preconditions": [
+    "exact realpath and non-symlink of each named directory",
+    "accepted tracked-clean source SHA",
+    "each supervisor finished/exit0 and tmux inactive"
+  ],
+  "removed": [
+    {
+      "path": "/home/wu/hmasd-worktrees/trdl-b02-9602",
+      "disk_absent": true,
+      "allocated_kib_before": 50692
+    },
+    {
+      "path": "/home/wu/.agent-tasks/trdl-b02-9602-scalar",
+      "disk_absent": true,
+      "allocated_kib_before": 48
+    },
+    {
+      "path": "/home/wu/.agent-tasks/trdl-b02-9602-q32",
+      "disk_absent": true,
+      "allocated_kib_before": 48
+    }
+  ],
+  "worktree_registration_absent": true,
+  "commands": [
+    "git -C /home/wu/projects/HMASD worktree remove --force /home/wu/hmasd-worktrees/trdl-b02-9602",
+    "native Bash rm -r -- the two exact listed terminal supervisor paths"
+  ],
+  "retained": [
+    "author checkout and published source/results",
+    "complete Pro archives and existing Transport",
+    "local and remote source bundles",
+    "local collected raw evidence and policy-blocked test/cache scratch"
+  ],
+  "scientific_exposure_added": 0,
+  "free_space_gain_measured": false
+}
