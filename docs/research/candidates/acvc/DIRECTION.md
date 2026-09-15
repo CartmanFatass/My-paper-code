@@ -1,5 +1,30 @@
 # Direction acvc: ACVC
 
+## Result review intaken: one further independent M fit selected (B02) — 2026-09-15 22:05Z (em:acvc:convergence B, PRO_FINAL; one-fit investment question to Portfolio)
+
+`em:acvc:convergence` reviewed the completed transfer result and selected **B**: exactly one
+further independently initialised M fit, **ACVC_M_DEPLOYMENT_TRANSFER_B02** (MASTER 28631 /
+namespace 38631), with the unchanged three private final panels M / F(M) / own-dwell(M), sole
+primary T_F,2 = mean64[J(F(M_2)) − J(M_2)] at the same unrounded ±.01 J branches, T_D,2 and
+paired U_2 supporting, read on its own first and then displayed beside B01 per instance with
+**no pooled verdict**, no accumulation with the C/M blocks, ending after the one original
+regardless of sign
+([response](pro_packets/20260915_m_deployment_transfer_result_review/archive/RESPONSE.md),
+[intake](pro_packets/20260915_m_deployment_transfer_result_review/INTAKE.md),
+[card](ACVC_M_DEPLOYMENT_TRANSFER_B02_PROSPECTIVE_CARD_20260915.md)). B01's TRANSFERS reading
+is retained with three corrections applied to its E0 and to the section below: U contrasts
+two complete deployment packages, not a retrace-specific remainder; the .044 J block
+dispersion of F(C)−M is not the variability of T_F, whose between-fit variation is unmeasured;
+the M score ordering .3338 < .3786 < .3942 is descriptive, not typicality. Ordinary plan about
+1,200 s native wall (basis: B01's 985 s on an otherwise idle node), not a cap. The one-fit
+grant is exhausted; the node routes B02 through a bounded Portfolio investment question before
+launch (spec §8.1: not every future fit needs separate approval, but no applicable allocation
+is shown). A (keep concluded), C (matched F(C)/F(M) pair, 2,129,920 ticks) and D (train M
+through the law) were weighed and not selected. ACVC stays ACTIVE/MEDIUM/recasts2, lowest
+sequencing, no producer; no launch until a conforming grant and technical acceptance.
+
+
+
 ## M-deployment transfer result: TRANSFERS on one instance — 2026-09-15 21:45Z (grant consumed; next object with em:acvc:convergence)
 
 The one granted fit (MASTER 28531 / namespace 38531, handle `acvc-transfer-m-b01-28531-a741758a`,
@@ -8,13 +33,13 @@ native wall 985 s) is complete and accepted
 [intake](ACVC_M_DEPLOYMENT_TRANSFER_B01_INTAKE_20260915.md), ledger row 32). Unrounded
 T_F = F(M) − M = **+.018338 J**, 53/64 worlds favorable, conditional SE .0055: the card's
 **TRANSFERS** branch. Supporting T_D = own-dwell(M) − M = +.00907 J and paired
-U = F(M) − own-dwell(M) = +.00927 J, both WITHIN_MEI (50/64 and 48/64 favorable): about half of
-the F increment on M is shared with holding still at a flagged opportunity, and the retrace-specific
-remainder is not resolved beyond the MEI in one instance. Counters 6,752 retraces / 5,110 holds on
+U = F(M) − own-dwell(M) = +.00927 J, both WITHIN_MEI (50/64 and 48/64 favorable): T_D is numerically about half of T_F (three means, not a mediation); U contrasts two complete
+deployment packages and leaves an MEI-sized F-over-dwell preference unestablished (wording
+corrected 2026-09-15, see the section above). Counters 6,752 retraces / 5,110 holds on
 their opportunities, all distinguishable. Absolute panels M .3786 / F(M) .3969 / own-dwell(M) .3877 J.
 DM Briers T_F .54 (modal category occurred), T_D .635. One instance with conditional-world
-precision only; the between-instance variability that blocks 1–2 showed for F−M (block SD .044 J)
-applies and is unmeasured here. No stable superiority, discardable C, F(C) versus F(M), tuned
+precision only; between-fit variation of T_F is unmeasured (the .044 J block dispersion of F(C)−M is a
+different contrast and does not transfer; corrected 2026-09-15). No stable superiority, discardable C, F(C) versus F(M), tuned
 headroom, equivalence, mechanism, default change or C promotion. The two-block C/M claim is unchanged.
 The grant ends here (zero retries or extra panels). The next object is a direction-tier question for
 `em:acvc:convergence` (A keep concluded / B one further independent M instance, DM's recommendation /
