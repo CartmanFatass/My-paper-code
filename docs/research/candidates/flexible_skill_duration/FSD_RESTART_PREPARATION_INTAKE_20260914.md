@@ -30,8 +30,12 @@ PARK; no such whole-direction disposition is inferred.
 The 2026-09-12 no-addition decision bought no LONG, repeated U, sixth unchanged
 pair or new numerical work. The new owner instruction restores preparation and
 authoring of a substantive finite next question. It is not a fit/cap allocation.
-The separate restart recommendation and owner decision are being published by
-their assigned author; this DM will read them on receipt and does not edit them.
+The separate restart recommendation and owner decision were published at main
+`55de762c0386232ea24c0416b4b8320fbf4bec39`, then merged into this branch. This DM
+read [recommendations §§1–9](FSD_RESTART_RECOMMENDATIONS_20260914.md) in full and
+the [owner decision](../../portfolio/decisions/2026-09-14-owner-fsd-restart.md),
+including their scope and reviewed acceptance. These two owner documents and
+owner item 20260914-fsd-001 are left to their assigned author.
 
 ## Applied scientific calibration
 
@@ -97,10 +101,41 @@ encoder or GAE machinery, a claim of novelty or a predicted FSD gain.
 1. Object technical: apply the direct owner restart and current scientific reading
    instructions; preserve existing scientific evidence and unchanged fixed grants.
    Selected application is recorded above. Owner reviews at this boundary: `[]`.
-2. Next preparation: finish the source-grounded bounded attribution/baseline choices
-   after reading the assigned restart recommendations, then directly publish and
-   send the substantive proper-node question if new investment is required.
-   There is no prior funding for that new factorial or baseline experiment.
+2. New object preparation: adopt the four-cell renewal × batch design as the
+   preferred finite B investment, two independent training blocks/eight fits.
+   Select the high-batch renewal simple effect as primary because it directly
+   tests the surviving explanation for the optional recipe; retain both simple
+   effects, correctly scaled MI/MB, interaction and original package contrast as
+   prospective auxiliaries. These choices and the source-derived counts/cost
+   law are in [the prospective card](FSD_INTERRUPTION_BATCH_B01_PROSPECTIVE_CARD_20260914.md).
+   The smaller option is two high-batch pairs/four fits with the same primary,
+   explicitly unable to support a batch explanation by itself. Declining this
+   allocation leaves the already authorized baseline design preparation, not
+   a direction PARK. No grant is selected locally.
+3. Apply the recommendations with explicit DM choices: keep the original host,
+   CPU FP32/four threads, D2-D0 and early fixed endpoint; choose n=2 as a limited
+   exploratory replication rather than a claim of adequate precision; choose a
+   task-justified .01 J primary MEI and a declared model-conditional interval,
+   with no uniform SD/estimator/pilot gate. Historical package variation cannot
+   supply the new contrast's unknown variance. Baseline competence is an
+   independent preparation deliverable; no baseline fit or tuning is inferred.
+
+**Owner-delegated decision (unattended, 2026-09-03 instruction): prepare and
+recommend the full finite factorial investment F, retain smaller option S and
+decline option N, and directly publish the unresolved Portfolio investment
+question after actual shared-writer release.** These are object-tier proposal
+choices, not a Portfolio investment verdict. Root identified the real writer
+as ACVC request `2026-09-14-acvc-post-fixed-rate-investment-01`; binding/dispatch
+waits for its complete application and explicit release, without a Root approval
+gate. No accepted request is regenerated or sent over.
+
+The prospective counts/exposure were generated from AST-literal runner constants
+without target imports and retained in
+[PROSPECTIVE_COUNTS.json](pro_packets/20260914_interruption_batch_investment/PROSPECTIVE_COUNTS.json).
+New Portfolio proposal [owner item 20260914-fsd-002](../../portfolio/owner/inbox/2026-09-14/20260914-fsd-002.json)
+was created with `item.py`, with recommended F and no auto-applied grant. The
+existing restart item 001 is unchanged. The corresponding audit row records the
+DM proposal separately from the awaited Pro investment decision.
 
 Current activity is document/source preparation. New models, RNG/learner creation,
 environment steps, optimizer calls, evaluations, profiling, tests, scientific
