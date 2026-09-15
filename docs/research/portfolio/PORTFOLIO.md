@@ -6,10 +6,10 @@
 
 | 方向 | 当前科学位置 | 当前 producer / 下一事件 |
 | --- | --- | --- |
-| acvc | [ACTIVE/MEDIUM/recasts2](../candidates/acvc/DIRECTION.md)。fixed-rate B 已完成：primary lowC−refC −.1285335613 J（DOWN），两率F对照均UP；限于一个匹配训练block。 | 完整科学/计划 review 已固定并dispatch，尚未声称provider接受；范围是科学review/建议，不产生lifecycle finality。DM同时执行exact remote reclamation，随后完整intake；无第三fit/retry。 |
-| vap_folr_core | [ACTIVE/MEDIUM](../candidates/vap_folr_core/DIRECTION.md)。fresh Z−G B 的G已完成：mean4.307734375、native2112.27s；普通1800s计划超出不是hard cap或科研违约。 | 卡内Z已在同source与fresh admission下接受，terminal-only Monitor仅观察Z；两原始均已接受、retry0。Z终态后由同一DM完成Z−G intake/review，不拼接旧比较。 |
-| tail_return_distributional_learning | [ACTIVE/MEDIUM/recasts0](../candidates/tail_return_distributional_learning/DIRECTION.md)。零暴露A01和具体 prospective B01 card 已完成；scalar与Q32被明确为学习同一lower-tail目标W的两种方法。 | 唯一 Portfolio B01投资请求已固定并dispatch，尚未声称provider接受；只决定一pair及最小实现验证，不问vacancy/priority/lifecycle。393216 ticks/256 Adam仍是方案计数，旧3000秒offer未拨款。 |
-| flexible_skill_duration | [ACTIVE/HIGH](../candidates/flexible_skill_duration/DIRECTION.md)。limited optional I1280与D0 default保留；2026-09-05 PARK只约束固定K2 corridor分支，旧no-current-addition不是整个方向的PARK。 | OWNER_DIRECT已恢复原方向DM；正在刷新事实并读取重启建议，准备中断×batch归因、同宿主基线与独立训练精度。当前是设计准备，尚无新fit、冻结卡或新增cap。 |
+| acvc | [ACTIVE/MEDIUM/recasts2](../candidates/acvc/DIRECTION.md)。fixed-rate B与review已完成；后续零暴露评估确认原HMASD的集中式global-state技能选择不能直接充当private-actor ACVC的同信息基线。 | DM正准备flat recurrent MAPPO-style对比的有限Portfolio投资包；当前0新fit/代码执行。shared writer由FSD占用，ACVC尚未绑定或发送。 |
+| vap_folr_core | [ACTIVE/MEDIUM](../candidates/vap_folr_core/DIRECTION.md)。fresh Z−G完整：Z −.136015625、G 4.307734375、差−4.44375，支持本次Generic对照；两臂各一个fit，旧A−G正结果仍为强反例。 | 完整Convergence review已intake，支持准备两块fresh A−G并保留一块低成本备选；DM直接记卡、实现、审查与准入，尚无新调用。远端对象已回收。 |
+| tail_return_distributional_learning | [ACTIVE/MEDIUM/recasts0](../candidates/tail_return_distributional_learning/DIRECTION.md)。B01两原始完成：Q32−SCALAR lower-tail差+.0345634681 J；每臂一个训练实例，支持完整配方B，不支持稳定优势或组件归因。 | 完整Convergence response已归档，DM正在intake并准备master9602 unchanged-recipe pair的有限投资材料；0追加grant/launch。shared writer由FSD占用，TRDL尚未绑定或发送。 |
+| flexible_skill_duration | [ACTIVE/HIGH](../candidates/flexible_skill_duration/DIRECTION.md)。OWNER_DIRECT恢复后已实际读取重启建议；完整2×2归因为首选准备，两臂I1280/D0-1280为有限备选，旧证据与D0 default保持。 | 唯一Portfolio请求 `2026-09-14-fsd-interruption-batch-investment-01` 已原生dispatch并占用shared writer；等待provider/full response，当前0训练/handle。 |
 
 ## 当前协作边界
 
