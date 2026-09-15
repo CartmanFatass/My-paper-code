@@ -1,0 +1,107 @@
+{
+  "caller_role": "em",
+  "workflow_node": "em_convergence",
+  "request_id": "2026-09-15-acvc-post-block2-convergence-01",
+  "source_thread_id": "9e0bd69f-aa60-5d32-aaf5-354fa4ffde46",
+  "parent_thread_id": "9e0bd69f-aa60-5d32-aaf5-354fa4ffde46",
+  "operator_thread_id": "fabd6914-bf7f-5050-a5da-b91154eb46e2",
+  "direction_id": "acvc",
+  "repository": "CartmanFatass/My-paper-code",
+  "repository_url": "https://github.com/CartmanFatass/My-paper-code",
+  "execution_mode": "CALLER_DIRECT",
+  "owner_execution_instruction": "Owner 2026-09-15: the Claude Code research hub (Root and DM at once, CLAUDE.md) runs the research loop for two directions from the recorded handoffs; Pro transport in Claude Code uses Agentify Desktop through the Sonnet hmasd-pro-transport agent (owner 2026-09-05 22:57 PDT). The hub authors this request and the transport agent executes it through the Agentify strict review transport; no Codex singleton dispatch and no self-receipt.",
+  "delivery_mode": "github_delivery",
+  "conversation_id": "6aa12e74-8e54-83e8-95f6-001681b456f7",
+  "reset_invalid_provider_context": false,
+  "commit_or_ref": "c698fbd14682a11616cd5f9debcda4190bd16c63",
+  "github_delivery": {
+    "branch": "codex/acvc",
+    "base_sha": "c698fbd14682a11616cd5f9debcda4190bd16c63",
+    "response_path": "docs/research/candidates/acvc/pro_packets/20260915_post_block2_convergence/archive/RESPONSE.md",
+    "issue_url": "https://github.com/CartmanFatass/My-paper-code/issues/14"
+  },
+  "scientific_question": "Your 2026-09-15 decision selected A with k = 1: one further unchanged C/M paired block, D2 = mean64(J_F − J_M) read alone first at the ±.01 J MEI, then the fixed equal-block accumulation with block 1. Portfolio granted the two fits and they are complete and accepted at source 2dc9631c8. The new facts: block 2 (master 28431) reads F−M −.0391900814 J = M_ABOVE_MEI, reversing block 1's +.0234396496 J; C−M −.0866863350 (DOWN); F−C +.0474962536 and F−own-dwell +.0317137640 (UP); absolute C/F/own-dwell/M .3075322691/.3550285227/.3233147586/.3942186041 J; 49/64 adverse matched worlds (worst −.1962865 J), conditional world SE .0102182 J. The fixed accumulation gives pooled F−M −.0078752159 J, block SD .0442859 J, block SE .0313149 J, df = 1 interval [−.4057619, +.3900115]; F−C pooled +.0411229 J [−.0398569, +.1221027]; F−own-dwell pooled +.0219676 J [−.1018676, +.1458027]. The between-block dispersion of F−M is four times the within-block conditional SE, so training-instance variability dominates the F versus M comparison and two blocks cannot estimate it. What recurs is the within-package ordering F > C and F > own-dwell with small block dispersion. Native cost of block 2 was C 2495.72 s and M 2427.41 s under heavy node contention.\n\nWhat is the direction decision for the C/M family now? The DM's options: (A) close the family at its bounded two-block claim: the F transformation recurrently improves its own C source and own-dwell control, while F versus the untuned private-information MAPPO recipe is unresolved and sign-unstable across training instances; record no competitive-advantage claim; ACVC ACTIVE-idle until a Portfolio question. (B) one bounded baseline-calibration object before any further package block: a prospective small recipe sweep of M alone on the same host (for example three learning-rate settings, one block each, sole-final 64-world panels), read as the M reference level and its recipe sensitivity, so that any later F versus M block compares against a certified-competent reference rather than one untuned instance; ordinary plan about 3 × 1,600 s native. (C) a third unchanged paired block under the same accumulation rule (df = 2), about 3,400–4,900 s native. The DM recommends (A) or (B) and does not recommend (C): two blocks already show a between-instance dispersion (.044 J) that a third block cannot resolve at ±.01 J, and every block spends 3,200 s or more of shared node time. Please also say whether the recurrent F > C / F > own-dwell ordering may be recorded as the family's retained claim, what its honest label is (internal usefulness of the deployment transformation, not a competitive result), and whether any alternative object the DM did not list has higher decision value at comparable cost.",
+  "deliverable": "Give one conclusion-first Direction decision at the smallest warranted scope and explain its strongest support, contradiction, alternatives and uncertainty. If you select (B) or another experiment, name the object with its class, arms, comparator, primary endpoint, reading rule with its declared MEI and reason, exposure in the runner's units (fits, training environment steps, evaluation panels, optimizer stages) and the ordinary cost plan with its measured basis; state what each outcome would change and what it cannot establish. If you select (C), fix the accumulation rule and say what precision it buys under the stated dispersion. If you select (A), say exactly what claim the family closes on, its label, and what fact would reopen it. Use present timings only at their measured scope. Your selection is not an accepted source change, a launch, or a Portfolio action.",
+  "claim_ceiling": "Current evidence is two complete paired B blocks with opposite primary signs: block 1 F_ABOVE_MEI (+.0234 J), block 2 M_ABOVE_MEI (−.0392 J); pooled F−M −.0079 J with a df = 1 working-model interval spanning ±.4 J; F > C and F > own-dwell in both blocks. It is not stable superiority of either package, tuned same-information headroom, equivalence, a pure K/N/retrace/memory mechanism, or a cross-host result. This round selects at most one bounded next object for the C/M family, a replication rule, or closure of the family at its bounded claim; no C freeze, no specification change, no Portfolio lifecycle, capacity, priority, fusion or registration change, no rescoring of either block.",
+  "constraints": [
+    "Evidence-spec sections 11.8–11.11 govern: one or two independent training seeds are the default follow-up for a real bounded improvement, no seed must be positive, no universal seed count, estimator, bootstrap, significance or pilot gate; the card's own MEI informs comparison without rewriting its result branches; package versus component claims stay distinct; the equal-block accumulation is a working-model description whose coverage two blocks cannot validate, especially after outcome-informed continuation.",
+    "Both blocks' rules, panels, contrasts and limits are preserved verbatim; no historical pooling beyond the fixed rule, no rescoring, no repair rerun of the unwired auxiliary counters (selected_final_checkpoints, M velocity_decisions, recurrent_observations remain unmeasured, not zero behaviour). An outcome-informed next object is permitted only under its honest label as a new object.",
+    "Consultation exposure: zero fits, models, checkpoint loads, environment steps, optimizer steps, tests or profiling; only static reading of the named fixed sources. Historical execution records cited: four originals over two blocks, 4,325,376 native team ticks, 49,152 optimizer steps; block-2 native walls C 2495.72 s and M 2427.41 s, peak RSS 562,308 and 585,504 KiB.",
+    "Any selected experiment keeps the frozen host, legal information rights, native reward and termination, CPU FP32 single-thread numerics, remote-first WSL execution with exact committed source, per-invocation fresh memory admission of at least 4 GiB, detached supervision and separate evaluator RNG; a baseline-calibration sweep changes the M recipe prospectively under its own card and never rescored the completed blocks; new investment beyond the standing delegation is a Portfolio question after your selection.",
+    "ACVC's lifecycle (ACTIVE/MEDIUM/recasts2, lowest sequencing priority, occupied slot) is not decided here. Answer in natural language with the numbers you rely on; cite the fixed sources by their linked paths."
+  ],
+  "response_schema": [
+    "Conclusion and actual fixed-source access/limits.",
+    "Selected object or closure with class, arms, comparator, primary endpoint, reading rule and MEI reason, exposure and ordinary cost plan; or the exact closing claim, its label and the reopening fact.",
+    "Strongest support, strongest contradiction, alternatives weighed (A/B/C and any unlisted), and the training-instance dispersion stated as alternatives.",
+    "What each outcome would change for the direction and what it cannot establish; no lifecycle disposition."
+  ],
+  "reference_files": [
+    {
+      "path": "docs/research/candidates/acvc/ACVC_CLUSTER_MAPPO_COMPARISON_B02_INTAKE_20260915.md",
+      "purpose": "Read completely: the block-2 checks, the rule applied, the two-block accumulation, the bounded reading, the three options with the DM recommendation and the boundaries.",
+      "provenance": "Current DM intake authored by the Claude Code research hub; a proposal, not a decision.",
+      "commit_sha": "c698fbd14682a11616cd5f9debcda4190bd16c63"
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_CLUSTER_MAPPO_COMPARISON_B02_RESULT_EVIDENCE_20260915.md",
+      "purpose": "Read the block-2 result: every panel and contrast, the accumulation table, exposure, cost and measurement limits.",
+      "provenance": "E0 result evidence for block 2, collected and reduced by the hub through the frozen wrapper.",
+      "commit_sha": "c698fbd14682a11616cd5f9debcda4190bd16c63"
+    },
+    {
+      "path": "docs/research/candidates/acvc/evidence/cluster_mappo_comparison_b02_20260915/COMPARISON.json",
+      "purpose": "Read the machine readout of block 2: all 64 scores per panel, means, contrasts, adverse counts.",
+      "provenance": "Output of scripts/run_acvc_cluster_mappo_comparison_b02.py --mode reduce over the two collected summaries.",
+      "commit_sha": "c698fbd14682a11616cd5f9debcda4190bd16c63"
+    },
+    {
+      "path": "docs/research/candidates/acvc/evidence/cluster_mappo_comparison_b02_20260915/TWO_BLOCK_ACCUMULATION.json",
+      "purpose": "Read the fixed equal-block accumulation of both blocks for every contrast.",
+      "provenance": "Computed by the hub from the two COMPARISON.json files under the rule your decision and the Portfolio grant fixed.",
+      "commit_sha": "c698fbd14682a11616cd5f9debcda4190bd16c63"
+    },
+    {
+      "path": "docs/research/candidates/acvc/pro_packets/20260915_cluster_mappo_comparison_b01_result_review/archive/RESPONSE.md",
+      "purpose": "Read your own prior decision (A, k = 1) and its reading and accumulation rules; this round follows it.",
+      "provenance": "Archived complete em:acvc:convergence response, PRO_FINAL.",
+      "commit_sha": "c698fbd14682a11616cd5f9debcda4190bd16c63"
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260915_acvc_one_block_replication_investment/archive/RESPONSE.md",
+      "purpose": "Read the Portfolio grant (G) and its fixed reading, accumulation and end-of-grant boundary.",
+      "provenance": "Archived complete portfolio:cross_direction response, PRO_FINAL / OWNER_DELEGATED.",
+      "commit_sha": "c698fbd14682a11616cd5f9debcda4190bd16c63"
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_CLUSTER_MAPPO_COMPARISON_B01_RESULT_EVIDENCE_20260914.md",
+      "purpose": "Read block 1's result, panels and contrasts for the comparison with block 2.",
+      "provenance": "E0 result evidence for block 1 (Codex DM, 2026-09-14).",
+      "commit_sha": "c698fbd14682a11616cd5f9debcda4190bd16c63"
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_CLUSTER_MAPPO_COMPARISON_B01_SCIENCE_CARD_20260914.md",
+      "purpose": "Read the frozen claim, host, information rights, C and M recipes, reading rule and MEI reason that both blocks share.",
+      "provenance": "Frozen block-1 card, unchanged for block 2.",
+      "commit_sha": "c698fbd14682a11616cd5f9debcda4190bd16c63"
+    },
+    {
+      "path": "docs/research/candidates/acvc/DIRECTION.md",
+      "purpose": "Read the current position (top two sections), the two consumed recasts and the prior family history.",
+      "provenance": "Direction authority, updated by the hub after block 2.",
+      "commit_sha": "c698fbd14682a11616cd5f9debcda4190bd16c63"
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "purpose": "Apply sections 4, 7, 8.1, 11.4 and 11.7–11.11.",
+      "provenance": "Current evidence specification.",
+      "commit_sha": "c698fbd14682a11616cd5f9debcda4190bd16c63"
+    },
+    {
+      "path": "docs/research/portfolio/TWO_AXIS_RESEARCH_PROGRAMME_20260914.md",
+      "purpose": "Read sections 2–5 on baseline calibration, replication and identifying claims.",
+      "provenance": "Owner-approved two-axis programme; a main-branch file, referenced at the main commit where it exists (the direction branch does not carry it).",
+      "commit_sha": "969fac75a04379c4ea0741b9ced0234aa8079323"
+    }
+  ]
+}
