@@ -1,0 +1,85 @@
+{
+  "id": "20260914-fsd-002",
+  "created": "2026-09-14T20:49:19-07:00",
+  "direction": "flexible_skill_duration",
+  "tier": "portfolio",
+  "kind": "decision",
+  "title": "FSD 中断×batch 有限归因投资提案",
+  "context": "所有者已恢复FSD。新问题是同batch下中断是否仍有收益、batch与中断是否交互；不重复已完成U用途判断。首选完整四臂两block，备选高batch两臂两block；当前0新实验，只等共享Portfolio writer释放后直接请求有限新额度。",
+  "options": [
+    {
+      "key": "F",
+      "label": "完整四臂×两block",
+      "consequence": "投入8次原始fit及必要实现/检查/收集，估计主要高batch中断效应与预定factorial辅助量"
+    },
+    {
+      "key": "S",
+      "label": "高batch两臂×两block",
+      "consequence": "投入4次原始fit及必要实现/检查/收集，只回答同batch中断simple effect，不能归因batch"
+    },
+    {
+      "key": "N",
+      "label": "本次不投入实验",
+      "consequence": "保持ACTIVE及D0 default，继续已授权基线设计准备，无新fit或自动PARK"
+    }
+  ],
+  "recommended": "F",
+  "auto_applied": null,
+  "dm_reason": "完整四臂用新同期控制区分原package中的renewal与batch；两个block仅用于早期探索精度，保留全部反证与成本未知。",
+  "evidence": [
+    "docs/research/candidates/flexible_skill_duration/FSD_INTERRUPTION_BATCH_B01_PROSPECTIVE_CARD_20260914.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-14.md#L132",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否投入两个独立 block 的完整中断×batch 四臂探索，或缩为同 batch 两臂比较？FSD 恢复已由所有者决定，本项只请求新实验额度。",
+    "changes_if_approved": [
+      {
+        "target": "FSD_INTERRUPTION_BATCH_B01_PROSPECTIVE_CARD_20260914.md",
+        "from": "无新科研调用额度",
+        "to": "首选 F：四臂×两 block，8 次原始 fit；或 S：高 batch 两臂×两 block，4 次原始 fit；包含对应必要实现、检查、收集与 intake"
+      }
+    ],
+    "if_refused": "保留 ACTIVE/HIGH、I1280 有限可选与 D0 default；DM 继续已授权的同宿主基线设计准备，不启动新 fit、不自动 PARK。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/flexible_skill_duration/FSD_RESTART_RECOMMENDATIONS_20260914.md",
+        "quote": "首先准备完整的 2×2 设计",
+        "why": "新的中断/批量归因直接回答旧用途判断尚未解决的问题。"
+      },
+      {
+        "path": "docs/research/candidates/flexible_skill_duration/FSD_UAV_RENEWAL_BATCH_B02_771303_INTAKE_20260912.md",
+        "quote": "The comparison includes renewal and changed advantage/optimizer grouping",
+        "why": "既有配方结果不能把中断与 batch 分开，补控制有明确的信息价值。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/flexible_skill_duration/pro_packets/20260912_post_five_pair_use_convergence/INTAKE.md",
+        "quote": "the unchanged negative pair",
+        "why": "保留负向训练实例、不利世界与更高成本，不能承诺稳定优势。"
+      },
+      {
+        "path": "docs/research/candidates/flexible_skill_duration/FSD_INTERRUPTION_BATCH_B01_PROSPECTIVE_CARD_20260914.md",
+        "quote": "Two blocks provide early replication and an initial description of training variation",
+        "why": "只有两个 block，精度可能很差；完整四臂成本高于只问高 batch simple effect。"
+      }
+    ],
+    "uncertainty": [
+      "新 D0-1280 运行成本未知，旧 package 差值的 SD 不是新 simple effect/交互方差。",
+      "主量为 I1280−D0-1280；其余 contrast 预先作为辅助，不能事后挑胜者。",
+      "同 batch 两臂近零不能单独证明 batch 收益；整体方法的价值还受同宿主强基线缺口限制。"
+    ],
+    "cost": {
+      "compute": "F：320000训练+128000评价team steps、8 fits；S：160000训练+64000评价team steps、4 fits。普通原生wall计划分别10800/5400秒，非科学硬上限；D0-1280与支持总成本未知。零额外调参/评价panel/自动重试。",
+      "owner_time": "异步知悉；无需逐步授权",
+      "reversibility": "costly",
+      "waits_on_this": "尚未获得额度的新实验；设计准备继续"
+    },
+    "verdict_text": "DM recommends two independent four-arm blocks (eight fresh fits). A two-block, two-arm high-batch comparison is the smaller investment alternative.",
+    "source": "docs/research/candidates/flexible_skill_duration/FSD_INTERRUPTION_BATCH_B01_PROSPECTIVE_CARD_20260914.md"
+  },
+  "starred": true
+}

@@ -1,0 +1,62 @@
+{
+  "kind": "prospective_design_arithmetic_not_execution",
+  "source_path": "scripts/run_fsd_uav_individual_renewal_b01.py",
+  "source_sha": "367d30575b2cec848430ec22cc94257a186dbad2",
+  "per_arm": {
+    "training_team_steps": 40000,
+    "evaluation_team_steps": 16000,
+    "training_episodes": 80,
+    "evaluation_episodes": 32,
+    "update_stages": 5,
+    "model_constructions": 2,
+    "batched_control_calls": 3000
+  },
+  "proposals": {
+    "F": {
+      "blocks": 2,
+      "arms": 4,
+      "fits": 8,
+      "training_team_steps": 320000,
+      "evaluation_team_steps": 128000,
+      "training_episodes": 640,
+      "evaluation_episodes": 256,
+      "update_stages": 40,
+      "model_constructions": 16,
+      "batched_control_calls": 24000,
+      "agent_step_observations": 2688000
+    },
+    "S": {
+      "blocks": 2,
+      "arms": 2,
+      "fits": 4,
+      "training_team_steps": 160000,
+      "evaluation_team_steps": 64000,
+      "training_episodes": 320,
+      "evaluation_episodes": 128,
+      "update_stages": 20,
+      "model_constructions": 8,
+      "batched_control_calls": 12000,
+      "agent_step_observations": 1344000
+    }
+  },
+  "coordinator_law": "15 * sum_rollouts ceil(valid_joint_rows / batch_size); 800 rows/rollout for D0 clock, at most 8000 for I",
+  "per_fit_scheduled_calls": {
+    "D128": 525,
+    "D1280": 75,
+    "I128_upper": 4725,
+    "I1280_upper": 525
+  },
+  "exposure_line": {
+    "new_scientific_invocations": 0,
+    "training_starts": 0,
+    "model_constructions": 0,
+    "checkpoint_loads": 0,
+    "environment_steps": 0,
+    "optimizer_calls": 0,
+    "evaluations": 0,
+    "tests_or_profiling": 0,
+    "pro_sends": 0,
+    "parameter_displacement": "not applicable; no learner",
+    "arithmetic": "AST constants and ordinary arithmetic only; no target imports or historical result recomputation"
+  }
+}
