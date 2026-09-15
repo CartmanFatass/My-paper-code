@@ -11,4 +11,8 @@ Two P2 findings at the initial source were returned:
 
 The original444 non-test source lines/51-line runner were within budgets. In-process batching preserves sequence ownership; no worker pool was introduced. Actual destination threads, memory, original runtime and endpoint publication remained unmeasured. Summary wall explicitly excludes its final JSON write/process exit; complete supervisor wall will be recorded separately.
 
+## Same-Reviewer correction return
+
+The same Reviewer inspected`0874ccfb6102859e5cd7ecfbc4b7d578eab06d91` and directly returned: “Both P2 findings are resolved” and “No remaining material issue found in this correction and dependent closeout.” It checked all six timing scopes, exception propagation, removed digest and intact checkpoint. No execution or edits were performed. DM accepts this corrected source; destination admission, real execution and scientific intake are still distinct future facts.
+
 DM repair verification selected only the two new control-flow cases,`test_partial_phase_cost_and_endpoint_survive_interruption[updates/final_evaluation]`. Both passed (pytest3.39s, invocation wall4.5866875s). Artificial-clock, seed10-model fixtures execute zero native and zero optimizer calls, preserving partial costs/returns and ordinary checkpoint serialization. Cumulative research-directory test wall is11.8756571s of300s. Their scratch remains under`temp/directions/tail_return_distributional_learning/test/b01-closeout-03` because the previously recorded recursive-cleanup operation was policy-rejected; no bypass is attempted. The same Reviewer will check this exact repair; DM acceptance is pending that correction return.
