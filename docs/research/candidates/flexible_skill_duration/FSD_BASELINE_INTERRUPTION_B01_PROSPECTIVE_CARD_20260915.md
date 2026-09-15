@@ -148,7 +148,7 @@ SI1280_15 mean in [−.05, +.05] (P .60), above +.05 (P .30), below (P .10).
 | evaluation episodes | 96 | 1,728 | 1,152 |
 | update stages | 15 | 270 | 180 |
 | model constructions | 2 | 36 | 24 |
-| batched control calls | 7,500 | 135,000 | 90,000 |
+| batched control calls (training + panels) | 9,000 | 162,000 | 108,000 |
 | agent-step observations | 1,008,000 | 18,144,000 | 12,096,000 |
 
 Coordinator law unchanged, `15 × Σ_r ceil(M_r / batch)`: D1280 schedules 15
