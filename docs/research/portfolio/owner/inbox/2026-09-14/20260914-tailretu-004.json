@@ -24,7 +24,7 @@
     }
   ],
   "recommended": "buy",
-  "auto_applied": null,
+  "auto_applied": "buy",
   "dm_reason": "一个新训练对最直接改变当前配方保留判断；已测395.64秒native只是成本参考，需与未建立标量能力的反例一起由Portfolio衡量。",
   "evidence": [
     "docs/research/portfolio/pro_packets/20260914_trdl_b02_investment/PREPARATION.md",
@@ -89,6 +89,14 @@
       "record": "docs/research/portfolio/pro_packets/20260914_trdl_b02_investment/DISPATCH.md",
       "state": "planned",
       "summary": "ACVC完整application正式释放后，TRDL唯一B02 TASK8079cd8ae/HANDOFF433276b38已发布绑定并原生分配同Transport。provider接受与完整决策尚未确认，buy未应用；0模型/代码适配/fit/native/optimizer。"
+    },
+    {
+      "at": "2026-09-15T05:45:59+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260914_trdl_b02_investment/archive/RESPONSE.md",
+      "record": "docs/research/portfolio/pro_packets/20260914_trdl_b02_investment/INTAKE.md",
+      "state": "applied",
+      "summary": "完整78行/18187字节afcf3ed27经逐文conformance选择R，新拨款恰好2original master9602和最小配套；0retry/额外panel。1800秒为可调整普通计划。grant已应用，当前0代码适配/模型/fit/handle；共享writer在完整application后释放。"
     }
   ]
 }
