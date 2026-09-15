@@ -2,11 +2,11 @@
 
 > OWNER_RESUMED 2026-09-14：所有者已明确恢复科研。2026-09-14 owner-pause handoff 仅作为恢复基线，不再表示当前运行状态。
 
-当前工作集为 **2 个占用方向、0 个预留、1 个正式空缺**。ACVC 与 FOLR 由原生 Astra/max DM 管理完整生命周期；MGTAP 已由完整 Portfolio 决定可逆 PARK 并释放一席。实时执行细节见[实验跟踪](EXPERIMENT_TRACKING.md)。
+当前工作集为 **2 个占用方向、1 个预留、0 个未处理空缺**。ACVC 与 FOLR 由原生 Astra/max DM 管理完整生命周期；MGTAP 释放的席位已由 Root 唯一 replacement 请求预留。实时执行细节见[实验跟踪](EXPERIMENT_TRACKING.md)。
 
 | 方向 | 当前科学位置 | 当前 producer / 下一事件 |
 | --- | --- | --- |
-| acvc | [ACTIVE/MEDIUM/recasts2](../candidates/acvc/DIRECTION.md)。extended-exposure B01 与完整独立 review 均已 intake；具体投资报告建议一次固定1e-4/3e-4 final4096双fresh配方B，同时保留零学习consolidation强反案；未本地 grant/launch/lifecycle。 | 唯一 Portfolio 请求 `2026-09-14-acvc-post-extended-exposure-investment-01` 已固定并 dispatch，尚未声称 provider 接受。ACVC 持有共享 writer 至完整响应、conformance/application intake 后一次释放；Root vacancy replacement 排在其后。 |
+| acvc | [ACTIVE/MEDIUM/recasts2](../candidates/acvc/DIRECTION.md)。Portfolio 已选择唯一 final-only 1e-4/3e-4 配对 B：两次 fresh4096 C-only fit、6 个 final 私有面板，合计2195456 ticks /16384 Adam；无新 recast、PARK、default、retry 或自动追加。 | DM 直接完成新卡、窄实现、独立 review、准入、两 originals、intake 和 cleanup，不等待 Root ACK。共享 Portfolio writer 已释放给 Root replacement。 |
 | vap_folr_core | [ACTIVE/MEDIUM](../candidates/vap_folr_core/DIRECTION.md)。entity-persistence B01 的 A−Z 已完成：A −1.476796875、Z 1.59265625、差值 −3.069453125，CURRENT_ONLY_ABOVE_MEI；两臂完整、exit0、零retry。 | 结果/plan review 已固定并 dispatch，尚未声称 provider 接受；范围仅为完整结果和 fresh Z−G 计划，不是方向 lifecycle 问题。当前无科学进程或后续 invocation，DM 同时完成支持保全与远端回收。 |
 
 ## 当前协作边界
@@ -14,7 +14,7 @@
 - DM 自主完成方向科学、实现、检查、审查、Transport、Monitor、结果 intake 和已授权延续；Root 不对这些步骤逐项审批。
 - Direction Convergence 处理方向内科学收敛；`portfolio:cross_direction` 处理投资、优先级、生命周期、容量、融合/分离和注册。只有完整 Portfolio 决定或所有者直接指令才能 PARK/CLOSE 整个方向。
 - Root 处理 DM 原生事件、共享依赖、主分支集成和当前记录。Root 使用事件驱动的 `wait_agent`，不以短轮询或 ACK 作为推进门槛。
-- MGTAP 的正式 PARK 已产生一个真实空缺。ACVC 当前按既定队列占用共享 Portfolio writer；Root 的 vacancy replacement 请求排在其完整归档/intake 之后，避免并发绑定同一节点。
+- MGTAP 的正式 PARK 产生的空缺已由 Root 请求 `2026-09-14-mgtap-park-vacancy-replacement-01` 预留。固定 TASK/HANDOFF 已发布并交给 Root Luna/high Transport；Portfolio 将选择恰好一个方向和首个有界 Astra/max DM 任务。
 
 ## 已 PARK / 未占用方向
 
