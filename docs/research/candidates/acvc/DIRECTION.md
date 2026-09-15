@@ -20,7 +20,7 @@ or C promotion. The two-block C/M claim is unchanged. G2 ends here (zero retries
 the remote worktree, staging and task record are reclaimed (CLEANUP.json). Next: a direction-tier
 result review for `em:acvc:convergence` (A record both instances and conclude the transfer family,
 stating whether any defensible next object remains, DM recommendation / B third instance / C
-matched F(C) vs F(M) / D another object); the request `2026-09-15-acvc-m-deployment-transfer-b02-result-review-01` is authored in `pro_packets/20260915_m_deployment_transfer_b02_result_review/` and its send through the transport follows this commit. ACVC stays ACTIVE/MEDIUM/recasts2, lowest
+matched F(C) vs F(M) / D another object); the request `2026-09-15-acvc-m-deployment-transfer-b02-result-review-01` (TASK `82565b7de`, HANDOFF `e6a206eff`) was sent once at 23:03:30Z (first call chatgpt_target_menu_open_unconfirmed before any click; the identical verifyExisting call clicked once; user message 4db1d0b7-7ff6-4201-9d7c-8bb9a2b0c4e2, tab 6bb435c4-3650-4ad4-ad8d-b4d8100ef3fc open for phase 2, prompt sha256 a3a571524789b2fdb3efd14467be29467016d3f867d95f71fe07aea6d73cd08f); the archived answer is awaited. ACVC stays ACTIVE/MEDIUM/recasts2, lowest
 sequencing, no producer.
 
 

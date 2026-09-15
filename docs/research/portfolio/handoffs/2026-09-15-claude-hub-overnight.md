@@ -75,7 +75,7 @@ under `docs/Claude_docs/changes/`). Nothing here changes lifecycle, priority or 
   intake `..._INTAKE_20260915.md`, ledger row 36, Chinese brief filed. G2 consumed; DM Briers .665 / .465.
 - Next object is a direction-tier result review to `em:acvc:convergence` (DM recommends A: record
   both instances, conclude the transfer family, state whether any defensible next object remains);
-  the request `2026-09-15-acvc-m-deployment-transfer-b02-result-review-01` is authored in `pro_packets/20260915_m_deployment_transfer_b02_result_review/` and its send through the transport follows this commit.
+  the request `2026-09-15-acvc-m-deployment-transfer-b02-result-review-01` (TASK `82565b7de`, HANDOFF `e6a206eff`) was sent once at 23:03:30Z (first call chatgpt_target_menu_open_unconfirmed before any click; the identical verifyExisting call clicked once; user message 4db1d0b7-7ff6-4201-9d7c-8bb9a2b0c4e2, tab 6bb435c4-3650-4ad4-ad8d-b4d8100ef3fc open for phase 2, prompt sha256 a3a571524789b2fdb3efd14467be29467016d3f867d95f71fe07aea6d73cd08f); the archived answer is awaited.
 - Direction handoff: `docs/research/candidates/acvc/HANDOFF_2026-09-15_post_cm_decision.md`.
 
 ## Transport and registry
