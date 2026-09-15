@@ -33,3 +33,20 @@ and both handles not_found at 02:11:36Z. FOCUSED_CHECK receipts distinguish actu
 synthetic checks and their setup repair from native scientific exposure. Acceptance
 and terminal receipts will be appended as actual events occur; a planned argv or
 preparation receipt is not evidence that a process was accepted.
+
+## First original invocation accepted
+
+G was accepted at 2026-09-15T02:18:02.432323Z under the exact published argv,
+supervisor PID3702285, handle folr-current-increment-b01-781801-generic, running
+with exit_code null. Its adjacent admission at 02:18:02.459021Z passed with
+14991753216 physical/effective available bytes against the 4294967296-byte floor.
+GENERIC_LAUNCH_RECEIPT.json preserves native acceptance and admission, not a
+scientific endpoint. One original invocation is now accepted; Z remains selected
+but unstarted, with zero retries and no altered endpoint.
+
+The DM resumed its reusable native Luna/low child
+/root/dm_folr_resume_20260914/monitor_l_low_folr_terminal for only this accepted
+handle. Its actual current capability/adoption/terminal return will be recorded
+directly; dispatch alone is not MONITOR_ADOPTED. If send_message is unavailable,
+the existing explicit terminal-only native-final fallback applies, without a
+fabricated intermediate delivery or a claim of continuous historical coverage.
