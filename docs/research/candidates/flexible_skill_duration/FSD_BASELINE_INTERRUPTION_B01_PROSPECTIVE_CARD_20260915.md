@@ -290,3 +290,14 @@ request `2026-09-15-fsd-baseline-interruption-investment-01`, delivery commit
   its two focused test files, committed on `codex/fsd` at `db0b11bd8`; 15
   synthetic and 2 real tiny-host tests green; Opus independent review requested
   before launch. `hmasd/**` and the existing runners untouched.
+
+## 9. Result (2026-09-15, appended after completion; the card above is unchanged)
+
+All twelve originals complete at `dc4dbdfcd`. Primary SI1280_15 +.00983744 J,
+`small_signed`, interval [−.11564245, +.13531733] including zero; GAP_D_15 −.04526346,
+GAP_I_15 −.03542601 (intervals include zero); rollout-5 six-block accumulation +.04287702
+[−.02320115, +.10895519]. Predictions in §4: both modal branches (GAP_D and SI1280_15
+inside ±.05) correct; owner slot not taken. Records:
+[E0](FSD_BASELINE_INTERRUPTION_B01_RESULT_EVIDENCE_20260915.md),
+[intake](FSD_BASELINE_INTERRUPTION_B01_INTAKE_20260915.md),
+[execution](baseline_interruption_b01_20260915/EXECUTION.md).

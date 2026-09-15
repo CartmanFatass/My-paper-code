@@ -176,3 +176,36 @@ FLAT queues: not launched (dependent work, see the pre-launch record).
 
   Every recorded `runner.sh` ends `BLOCK.sh <W> <seed> <arm>` (single token). Expected
   ends: FLAT about 16:40Z, D1280 about 16:50Z, I1280 about 17:50Z (critical path).
+
+### 2026-09-15 17:26Z — all twelve elements complete; collected, reduced, intaken
+
+- The five 16:01Z elements finished with exit 0: FLAT 772403/772503/772303 at about 16:44Z,
+  D1280 772503 at 16:59Z (wall 3,428.12 s, RSS 2,846,552 KiB), I1280 772503 at 17:25:36Z
+  (wall 5,045.10 s, RSS 3,877,192 KiB, pid 3735922). Each `summary.json` `status: complete`;
+  every `block_<seed>_queue.jsonl` records exit 0 for its elements. Collected by
+  `hmasd-experiment-tracker` into `fits/<seed>_<arm>/` (same file set as the first fits;
+  `learner_logs/` and `evaluation_logs/` empty on the node; the runner writes no checkpoint).
+- Summary sha256 of the committed `summary.json` files (first 8 / last 6 hex):
+  772203: FLAT `e9379731…01edf0`, D1280 `de46bedc…dece6d`, I1280 `76d8328c…e6dd66`
+  772303: FLAT `e5c80b76…0cee35`, D1280 `ab67ceb4…2371bb`, I1280 `e544f7cf…2e1e5c`
+  772403: FLAT `6745c5bb…4b4256`, D1280 `c15e873f…811ea2`, I1280 `f8a5be98…308152`
+  772503: FLAT `9b508235…af7ef2`, D1280 `dd799d35…56de9c`, I1280 `72eba4a6…0ff3c3`
+- Whole-command walls and peak RSS (GNU time):
+
+  | Fit | Wall s | RSS KiB | Fit | Wall s | RSS KiB | Fit | Wall s | RSS KiB |
+  | --- | ---: | ---: | --- | ---: | ---: | --- | ---: | ---: |
+  | 772203_FLAT | 2022.50 | 1,251,540 | 772203_D1280 | 2642.05 | 2,826,100 | 772203_I1280 | 6369.48 | 3,825,768 |
+  | 772303_FLAT | 2589.24 | 1,234,008 | 772303_D1280 | 2637.78 | 2,881,412 | 772303_I1280 | 6550.17 | 3,817,448 |
+  | 772403_FLAT | 2551.63 | 1,234,756 | 772403_D1280 | 2617.32 | 2,867,548 | 772403_I1280 | 6353.28 | 3,837,196 |
+  | 772503_FLAT | 2594.40 | 1,249,204 | 772503_D1280 | 3428.12 | 2,846,552 | 772503_I1280 | 5045.10 | 3,877,192 |
+
+  Sum 45,401.07 s (FLAT 9,757.77; D1280 11,325.27; I1280 24,318.03) against the serial plan of
+  24,000–30,000 s; three to four fits ran concurrently with the ACVC block-2 fits.
+- Reduce (control checkout, main `aff026fea`, `hmasd-amd-cpu` interpreter) with the completed
+  factorial's `RESULT_SUMMARY.json`: `status: complete`; primary SI1280_15 +.00983744 J,
+  `small_signed`, `interval_includes_zero`, interval [−.11564245, +.13531733]; GAP_D_15
+  −.04526346, GAP_I_15 −.03542601; six-block rollout-5 accumulation +.04287702
+  [−.02320115, +.10895519]. Output committed as [RESULT_SUMMARY.json](RESULT_SUMMARY.json);
+  [E0](../FSD_BASELINE_INTERRUPTION_B01_RESULT_EVIDENCE_20260915.md) and
+  [intake](../FSD_BASELINE_INTERRUPTION_B01_INTAKE_20260915.md) written. The S allocation ends
+  here; nothing further is launched under it.

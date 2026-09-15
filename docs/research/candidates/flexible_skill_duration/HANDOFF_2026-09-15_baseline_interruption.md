@@ -1,84 +1,62 @@
-# FSD handoff — baseline × interruption B01 in flight (2026-09-15, Claude hub)
+# FSD handoff — baseline × interruption B01 complete (2026-09-15, Claude hub)
 
-**State: ACTIVE / HIGH. Portfolio decision S applied and the FLAT k = 10 correction
-confirmed (`PRO_FINAL / OWNER_DELEGATED`, 12:55Z); 7 of 12 fits complete and collected
-(D1280 × 3, I1280 × 3, FLAT 772203), the last 5 running since 16:01Z.** Driven by the
-Claude Code research hub (owner resume 2026-09-15; two directions, FSD and ACVC).
-Authoring checkout `C:/Projects/HMASD-worktrees/codex-fsd`, branch `codex/fsd`; the hub
-cherry-picks accepted commits into `main`.
+**State: ACTIVE / HIGH, allocation complete, ACTIVE-idle pending one direction-tier
+question.** All twelve S-allocation fits are complete, collected, reduced and intaken
+([E0](FSD_BASELINE_INTERRUPTION_B01_RESULT_EVIDENCE_20260915.md),
+[intake](FSD_BASELINE_INTERRUPTION_B01_INTAKE_20260915.md),
+[brief](../../portfolio/owner/briefs/flexible_skill_duration/2026-09-15_FSD_BASELINE_INTERRUPTION_B01.md)).
+Driven by the Claude Code research hub (owner resume 2026-09-15; two directions, FSD and
+ACVC). Authoring checkout `C:/Projects/HMASD-worktrees/codex-fsd`, branch `codex/fsd`; the
+hub commits on `main` and mirrors the direction-owned paths onto `codex/fsd`.
+
+## Result in one paragraph
+
+Primary SI1280_15 = I1280 − D1280 mean +.00983744 J (`small_signed`; blocks +.098 / +.045 /
+−.083 / −.020), df = 3 interval [−.11564245, +.13531733] including zero and not inside ±.05.
+The rollout-5/10 renewal advantage (about +.05 J) is not maintained at rollout 15 on the mean.
+Untuned package gaps at rollout 15: GAP_D −.04526346 J [−.13491570, +.04438879], GAP_I
+−.03542601 J [−.18359432, +.11274230]; arm means FLAT .4510, D1280 .4058, I1280 .4156. Six-
+block rollout-5 accumulation +.04287702 J [−.02320115, +.10895519]. Both hub modal
+predictions correct; owner slot not taken. Summed native wall 45,401.07 s.
 
 ## Object and authority
 
-- Card: [FSD_BASELINE_INTERRUPTION_B01_PROSPECTIVE_CARD_20260915.md](FSD_BASELINE_INTERRUPTION_B01_PROSPECTIVE_CARD_20260915.md)
-  §8 (applied S decision, FLAT `k = 10` deviation). Arms FLAT / D1280 / I1280 ×
-  blocks 772203, 772303, 772403, 772503; 15 rollouts, panels 5/10/15; primary
-  SI1280 at rollout 15, MEI .05 J; GAP_D, GAP_I; rollout-5 accumulation 4 + 2.
-- Portfolio packet and intake: `docs/research/portfolio/pro_packets/20260915_fsd_baseline_interruption_investment/`
-  (response `5c6053f4a`, INTAKE.md with the correction map, review and launch addendum).
-- Runner `scripts/run_fsd_baseline_interruption_b01.py`, tests under
-  `tests/experiments/candidates/flexible_skill_duration/baseline_interruption_b01/`
-  (16 synthetic + 2 real tiny-host, green at `dc4dbdfcd`). Independent Opus
-  review: ACCEPT_WITH_CORRECTIONS, corrections applied at `dc4dbdfcd`.
-- Execution record: [baseline_interruption_b01_20260915/EXECUTION.md](baseline_interruption_b01_20260915/EXECUTION.md).
+- Card §8 (applied S decision, FLAT `k = 10`, GAP labels, split reading, rollout-5
+  accumulation) and §9 (result pointer). Portfolio packet and intake:
+  `docs/research/portfolio/pro_packets/20260915_fsd_baseline_interruption_investment/`;
+  correction decision `docs/research/portfolio/decisions/2026-09-15-fsd-flat-k-correction.md`.
+- Runner `scripts/run_fsd_baseline_interruption_b01.py` at `dc4dbdfcd`; execution record
+  [baseline_interruption_b01_20260915/EXECUTION.md](baseline_interruption_b01_20260915/EXECUTION.md);
+  twelve fit folders and `RESULT_SUMMARY.json` committed beside it.
 
-## Live producers (launch sha `dc4dbdfcd`)
+## Producers
 
-Worktree `/home/wu/hmasd-worktrees/fsd-baseline-b01-dc4dbdfcd`, output root
-`<W>/temp/directions/flexible_skill_duration/exp/baseline_interruption_b01_20260915/`.
-One queue element per handle (`BLOCK.sh <W> <seed> <arm>`, single-token arm; the
-12:36Z quoting defect is recorded in `EXECUTION.md`).
+None. All twelve `agent-task` handles (`fsd-bi-b01-<seed>[-<arm>]`) are finished with exit
+0 and collected. The remote worktree `/home/wu/hmasd-worktrees/fsd-baseline-b01-dc4dbdfcd`
+holds only what is committed (the runner writes no checkpoint) and is reclaimed at the next
+clean boundary with a `CLEANUP.json` in the evidence folder, as ACVC block 2 did.
 
-| Handle | Arm | Launched (UTC) | State at writing |
-| --- | --- | --- | --- |
-| fsd-bi-b01-772203 / 772303 / 772403 | D1280 | 11:52Z | complete, collected (`fits/`), walls 2,617–2,642 s |
-| fsd-bi-b01-7722/3/403-I1280 | I1280 | 12:38Z | complete, collected, walls 6,353–6,550 s, peak RSS 3.8 GiB |
-| fsd-bi-b01-772203-FLAT | FLAT | 13:02:49Z | complete, collected, wall 2,023 s, peak RSS 1.25 GiB |
-| fsd-bi-b01-772403-FLAT | FLAT | 16:01:14Z | running (pid 3735333), expected end about 16:40Z |
-| fsd-bi-b01-772503-FLAT | FLAT | 16:01:15Z | running (pid 3735439), about 16:40Z |
-| fsd-bi-b01-772503-I1280 | I1280 | 16:01:31Z | running (pid 3735922), about 17:50Z (critical path) |
-| fsd-bi-b01-772303-FLAT | FLAT | 16:01:40Z | running (pid 3736070), about 16:40Z |
-| fsd-bi-b01-772503-D1280 | D1280 | 16:02:04Z | running (pid 3736794), about 16:50Z |
+## Open direction-tier question (prepared, not sent)
 
-The last five run together (projected peak RSS about 10.9 GiB with the ACVC M fit; the node
-has 15.8 GiB); the node idled 14:15Z–16:01Z while the hub's session was rate-limited. Status: `agent-task status <handle>` on the node; a per-fit `summary.json`
-is complete only with `status: complete` plus exit 0 in `block_<seed>_queue.jsonl`
-(the early `summary.json` is the runner's setup publication). Ordinary plans 1,800 s
-(D1280, observed about 2,640 s with three concurrent), 4,000 s (I1280), 1,200–1,600 s
-(FLAT, unmeasured).
+For `em:flexible_skill_duration:convergence` (intake decision 3): (A) conclude the
+renewal-versus-flat family at this bounded claim, authentic D0 default, five-rollout optional
+I1280 scope unchanged, ACTIVE-idle; (B) a tuned same-information flat baseline as the next
+object (first §11.7 headroom record) before any further renewal work; (C) another tranche of
+unchanged blocks (Portfolio investment). DM recommendation B over A; C not recommended. The
+09:00 PDT check-in scoped the session to collection, intake and report, so the packet is not
+yet authored; the owner may redirect before it goes out.
 
-## FLAT correction (closed)
+## Commits (main; direction-owned paths mirrored on codex/fsd)
 
-The k = 10 deviation was returned to `portfolio:cross_direction` and confirmed as
-option 1 ([decision](../../portfolio/decisions/2026-09-15-fsd-flat-k-correction.md),
-[intake](../../portfolio/pro_packets/20260915_fsd_flat_k_correction/INTAKE.md)). GAP_D
-and GAP_I are untuned package gaps, never headroom. The registry key was archived by the
-transport after the round; the Claude-side bind script still lacks the singular
-`direction_id` write (fix pending in `docs/Claude_docs/changes/2026-09-15-control-plane-changes.md`),
-but the portfolio record now carries the field, so later rounds on that key archive
-normally.
-
-## Reduce
-
-After the available summaries: `reduce --summaries <summary.json…>
---historical-factorial-summary docs/research/candidates/flexible_skill_duration/interruption_batch_b01_20260914/RESULT_SUMMARY.json
---output-root <reduce root>`. With FLAT missing, SI1280 and the rollout-5
-accumulation are computable; GAP_D/GAP_I report `incomplete`. Do not intake GAP
-readings from a partial factorial; with all twelve summaries the intake reports SI1280
-(importance and uncertainty separately) and both GAPs.
-
-## Commits on codex/fsd (all integrated into main at writing)
-
-`dc4dbdfcd` (review corrections, launch sha), `ead3ab1bf` (intake addendum),
-`5b698cad6` (launch record), `7a34308e3` (handoff), `550ef2f0a` (correction request
-bound), `2ea0ed993` (D1280 evidence, I1280 relaunch), `8d76569178` (Pro's correction
-response), then the correction intake/decision/launch-record commit (see `git log`).
+`aff026fea` (twelfth fit), then the closure commit carrying E0, intake, RESULT_SUMMARY.json,
+EXECUTION.md, DIRECTION.md, card §9 and this handoff (see `git log --oneline -3 -- docs/research/candidates/flexible_skill_duration`).
+Earlier today: `dc4dbdfcd`, `ead3ab1bf`, `5b698cad6`, `7a34308e3`, `550ef2f0a`, `2ea0ed993`,
+`8d7656917`, the correction intake/decision commit, `f3d920eba`.
 
 ## First resume step
 
-Monitor the five running handles (`agent-task status`); collect each finished element into
-`fits/<seed>_<arm>/` (same file set as the existing folders, plus the refreshed
-`block_772503_queue.jsonl`). When all twelve summaries exist run `reduce` with the historical
-factorial summary and write the intake (SI1280 primary with importance and uncertainty read
-separately, GAP_D/GAP_I as untuned package gaps, rollout-5 accumulation 4 + 2), the Chinese
-brief, the ledger row, then integrate to `main`. No further launches are authorized under
-the S allocation after these five.
+Nothing to launch. If the owner has not redirected, author the direction-tier packet from
+intake decision 3 (REQUEST.json under `pro_packets/20260915_post_baseline_interruption_convergence/`,
+references at a main commit including the evidence spec), render, publish, bind and send
+through `hmasd-pro-transport` on key `em:flexible_skill_duration:convergence`; then reclaim
+the remote worktree and record `CLEANUP.json`. Otherwise remain ACTIVE-idle.
