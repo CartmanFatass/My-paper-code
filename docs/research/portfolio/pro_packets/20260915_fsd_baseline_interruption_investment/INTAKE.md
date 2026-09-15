@@ -65,3 +65,27 @@ singular `direction_id`, a pre-existing Codex-side schema mismatch), so the
 key `portfolio:cross_direction` rests at `DIRECTION_VERIFIED` for this request
 with the response fully archived; reported to the owner, not repaired by the
 hub.
+
+## Independent review, deviation return and launch (2026-09-15, appended)
+
+- Independent Opus review of the runner at `db0b11bd8`: **ACCEPT_WITH_CORRECTIONS**.
+  The reviewer's real-host probe found the D1280 training trajectory bit-identical
+  with and without the three evaluation panels and FLAT learning only actor/critic.
+  Corrections applied at `dc4dbdfcd` (M1a–c: the true reason for FLAT `k = 10`, the
+  deviation recorded on the card §8 and here; M2: `launch_sha` in the comparability
+  view; a mixed-source block now fails the contrast). 16 synthetic + 2 real
+  tiny-host tests green.
+- **Correction note owed to `portfolio:cross_direction`** (AGENTS §2, concrete
+  conflict with the decision's "switch-selected long k"): `config.k` is also the
+  truncated-BPTT chunk length of the recurrent actor and critic, so the switch's
+  `k = rollout_length + 1` would train FLAT through 500-step chunks against the D
+  arms' 10-step chunks and confound the architecture contrast with the
+  gradient-truncation law. The runner sets `k = 10` (same optimizer law in every
+  arm; the single constant skill makes the ten-step re-assignment degenerate).
+  The note cannot be sent yet: the key rests at `DIRECTION_VERIFIED` (archive
+  defect above). Until it is returned and answered, the FLAT arm is dependent
+  work under AGENTS §3; the D1280/I1280 arms are independent authorized work.
+- Launch: eight D1280/I1280 fits (blocks 772203, 772303, 772403, 772503) at
+  `dc4dbdfcd` on `hmasd-wsl-node`, three block queues concurrent then the fourth;
+  handles and receipts in the evidence folder's `EXECUTION.md`. FLAT queues
+  (four fits) follow at the same source bytes after the node's answer.
