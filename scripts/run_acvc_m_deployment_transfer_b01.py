@@ -15,8 +15,6 @@ import math
 import sys
 from pathlib import Path
 
-import numpy as np
-
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import run_acvc_cluster_mappo_comparison_b01 as b01
@@ -54,7 +52,9 @@ def execute_m_with_panels(output, summary, emit, emit_update, progress):
     summary["deployment_laws"] = dict(
         F="native_link_loss_b01.binding.Binding opportunities -> retrace command; else the M proposal",
         dwell="the same opportunities -> zero command; else the M proposal",
-        feedback="the actually sent command; remaining hold 0; fresh Binding per episode; one actor draw per tick")
+        feedback="the actually sent command; remaining hold 0; fresh Binding per episode; one actor draw per tick",
+        counters="opportunities == retrace (F) or dwell (dwell); apply is 0 by construction because the mask is the "
+                 "choice (no learned gate), as on the C side; distinguishable counts replaced commands that differ")
     args, _ = m.configuration()
     counts = summary["counts"]
     checkpoint = m.torch.load(Path(output) / summary["checkpoint"], map_location="cpu", weights_only=True)
@@ -113,6 +113,7 @@ def main(argv=None):
     parser.add_argument("--on-policy-root", type=Path)
     parser.add_argument("--m-summary", type=Path)
     args = parser.parse_args(argv)
+    bind_object()  # before either mode: reduce compares the summary against the bound identities
     if args.mode == "reduce":
         summary = json.loads(args.m_summary.read_text(encoding="utf-8")) if args.m_summary else None
         args.output.mkdir(parents=True, exist_ok=True)
@@ -121,7 +122,6 @@ def main(argv=None):
         return 0
     if not args.launch_sha or not args.on_policy_root:
         parser.error("run needs --launch-sha and --on-policy-root")
-    bind_object()
     return b01.run(args.output, "M", args.launch_sha, args.on_policy_root)
 
 

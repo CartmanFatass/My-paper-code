@@ -7,6 +7,7 @@ cd -- "$root"
 launch_sha=${1:?launch SHA required}
 output=${2:?original absolute output required}
 upstream=${3:?isolated on-policy source path required}
+[ "$#" -eq 3 ] || { echo "usage: launch.sh <launch_sha> <output> <on_policy_root>" >&2; exit 2; }
 HMASD_PYTHON=${HMASD_PYTHON:-python3}
 export PYTHONDONTWRITEBYTECODE=1
 mkdir -- "$output"
