@@ -1,0 +1,86 @@
+{
+  "id": "20260915-acvc-007",
+  "created": "2026-09-15T15:23:42-07:00",
+  "direction": "acvc",
+  "tier": "portfolio",
+  "kind": "portfolio",
+  "title": "ACVC B02 一次 M 拟合的 Portfolio 投资（G2：再资助恰好一次独立 M 拟合及三面板）",
+  "context": "方向节点 21:57Z 选 B02 后，hub 发送一次拟合投资请求；portfolio:cross_direction 于 2026-09-15 22:19Z 选 G2（PRO_FINAL / OWNER_DELEGATED）：一次 M 拟合（28631/38631）、三面板、逐实例并列不汇总；技术接受后作为下一个就绪数值作业；约 1,200 s 为计划非上限；零重试。",
+  "options": [
+    {
+      "key": "G2",
+      "label": "资助恰好再一次独立 M 拟合（28631/38631）及 M / F(M) / own-dwell(M) 三面板与有界支持",
+      "consequence": "约 1,200 s 原生墙钟（计划非上限）；主量 T_F,2@.01 J；零重试、零第二实例；一次即止"
+    },
+    {
+      "key": "N",
+      "label": "不投入，B02 留在记录中未获资助",
+      "consequence": "ACVC ACTIVE-idle，最低排序优先级"
+    }
+  ],
+  "recommended": "G2",
+  "auto_applied": "G2",
+  "dm_reason": "B01 给出真实的 M 侧整包观察；一次不变的重复能揭示复现或分歧并改变下一步投资，成本一次拟合。",
+  "evidence": [
+    "docs/research/portfolio/pro_packets/20260915_acvc_m_deployment_transfer_b02_investment/archive/RESPONSE.md",
+    "docs/research/portfolio/decisions/2026-09-15-acvc-m-deployment-transfer-b02-grant.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-15.md#L34",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否为 ACVC 资助恰好再一次独立初始化的 M 拟合（ACVC_M_DEPLOYMENT_TRANSFER_B02，MASTER 28631 / 命名空间 38631）及其三个私有终评面板 M / F(M) / own-dwell(M)，连同最小的绑定改动验证、执行、intake 与保存支持（G2），还是不投入（N）？",
+    "changes_if_approved": [
+      {
+        "target": "ACVC 实验分配",
+        "from": "B01 拨款已耗尽；方向节点已选 B02 但无可用拨款；0 producer",
+        "to": "一次新的 M 拟合：4,096 个 H256 训练回合（1,048,576 团队 tick）、2,048 次 rollout、8,192 个 PPO minibatch、16,384 次优化器调用；一个终快照加载三次；三个 64 世界面板（192 回合、49,152 tick）；共 1,097,728 tick；零重试、零第二实例、零额外面板；无论正负一次即止"
+      },
+      {
+        "target": "读数与后续比较",
+        "from": "无",
+        "to": "唯一主量 T_F,2 = mean64[J(F(M_2)) − J(M_2)]，±.01 J 分支不变；T_D,2 与配对 U_2 为辅助；先独立读 B02，再与 B01 逐实例并列显示各自不确定性；不做汇总裁决、不算训练总体均值、不与 C/M 块累积；Portfolio 之后比较决策相关性、复现/分歧、各宿主的 MEI、成本与未解替代"
+      },
+      {
+        "target": "调度与授权解读",
+        "from": "节点空闲；每次拟合是否都需 Portfolio 批准未定",
+        "to": "ACVC 为技术接受后的下一个就绪数值作业，不等 FSD；约 1,200 s 为可调计划非上限；本次拟合由 G2 供给，既有拨款与常设授权之外的工作仍是 Portfolio 问题，常设授权内的常规工作不需逐拟合批准"
+      }
+    ],
+    "if_refused": "选 N 则 B02 留在记录中未获资助，ACVC 保持 ACTIVE/MEDIUM/recasts2、最低排序优先级，进入 ACTIVE-idle；B01 的 TRANSFERS 读数与两块 C/M 主张不变。所有者可在账本 owner 列或评审中改选。",
+    "evidence_for": [
+      {
+        "path": "docs/research/portfolio/pro_packets/20260915_acvc_m_deployment_transfer_b02_investment/archive/RESPONSE.md",
+        "quote": "Select G2: grant exactly one further independently initialized M fit with its unchanged three final panels, plus minimum binding-change verification, execution, intake and preservation support.",
+        "why": "Portfolio 的完整决定：B01 给出了真实的 M 侧整包观察，一次不变的重复可揭示复现或分歧，改变 F / dwell / 都不维护的选择。"
+      },
+      {
+        "path": "docs/research/candidates/acvc/ACVC_M_DEPLOYMENT_TRANSFER_B01_RESULT_EVIDENCE_20260915.md",
+        "quote": "T_F = +.018338005502877976 J TRANSFERS (53/64 favorable, conditional SE .0055).",
+        "why": "已完成一次拟合上的 MEI 量级增益是购买第二个实例的依据。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/portfolio/pro_packets/20260915_acvc_m_deployment_transfer_b02_investment/archive/RESPONSE.md",
+        "quote": "N is the strongest expenditure-saving alternative. T_D = +.009069800680064894 and U = +.00926820482281308 J are both WITHIN_MEI; another fit may leave F's preference over simpler dwell unresolved. T_F has eleven adverse worlds, worst −.1614043800748056 J.",
+        "why": "第二次拟合可能仍不能分辨 F 与 dwell；两个实例也不能分解训练变异与面板变异。"
+      }
+    ],
+    "uncertainty": [
+      "两个实例只显示复现或分歧，不给训练总体均值；不承诺区间或样本量",
+      "约 1,200 s 为按 B01 空闲节点实测 985 s 的计划；竞争会改变实际墙钟",
+      "支持/维护的完整成本未知"
+    ],
+    "cost": {
+      "compute": "拟议 1 次 M 拟合，1,097,728 团队 tick，约 1,200 s 原生墙钟（B01 实测 985.12 s，峰值 RSS 585,028 KiB）；本决定本身零新拟合",
+      "owner_time": "阅读拨款记录与 B02 卡片，约 5 分钟",
+      "reversibility": "reversible",
+      "waits_on_this": "启动等待 L0 独立评审与技术接受；不等所有者"
+    },
+    "verdict_text": "Portfolio 选 G2（PRO_FINAL / OWNER_DELEGATED）：恰好再资助一次独立 M 拟合（B02，28631/38631）及三面板；T_F,2 主量，逐实例并列不汇总；技术接受后作为下一个就绪数值作业启动；约 1,200 s 为计划非上限；零重试、零第二实例；授权解读维持：本次由 G2 供给，常设授权内的常规工作不需逐拟合批准。",
+    "source": "docs/research/portfolio/pro_packets/20260915_acvc_m_deployment_transfer_b02_investment/archive/RESPONSE.md"
+  },
+  "starred": true
+}
