@@ -1,0 +1,79 @@
+.EE.............EEE                                                      [100%]
+==================================== ERRORS ====================================
+_ ERROR at setup of test_synthetic_update_keeps_targets_separate_and_publishes_checkpoint[GENERIC_RETAIN-fc3] _
+
+self = PosixPath('/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801/temp/directions/vap_folr_core/test/current-increment-b01-20260914-dm')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           self._accessor.mkdir(self, mode)
+E           FileNotFoundError: [Errno 2] No such file or directory: '/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801/temp/directions/vap_folr_core/test/current-increment-b01-20260914-dm'
+
+../../.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/pathlib.py:1175: FileNotFoundError
+_ ERROR at setup of test_synthetic_update_keeps_targets_separate_and_publishes_checkpoint[AUGMENTED_CURRENT_ONLY-head] _
+
+self = PosixPath('/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801/temp/directions/vap_folr_core/test/current-increment-b01-20260914-dm')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           self._accessor.mkdir(self, mode)
+E           FileNotFoundError: [Errno 2] No such file or directory: '/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801/temp/directions/vap_folr_core/test/current-increment-b01-20260914-dm'
+
+../../.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/pathlib.py:1175: FileNotFoundError
+_ ERROR at setup of test_runner_follows_selected_arm_then_publishes_only_bound_primary[GENERIC_RETAIN-False] _
+
+self = PosixPath('/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801/temp/directions/vap_folr_core/test/current-increment-b01-20260914-dm')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           self._accessor.mkdir(self, mode)
+E           FileNotFoundError: [Errno 2] No such file or directory: '/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801/temp/directions/vap_folr_core/test/current-increment-b01-20260914-dm'
+
+../../.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/pathlib.py:1175: FileNotFoundError
+_ ERROR at setup of test_runner_follows_selected_arm_then_publishes_only_bound_primary[AUGMENTED_CURRENT_ONLY-False] _
+
+self = PosixPath('/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801/temp/directions/vap_folr_core/test/current-increment-b01-20260914-dm')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           self._accessor.mkdir(self, mode)
+E           FileNotFoundError: [Errno 2] No such file or directory: '/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801/temp/directions/vap_folr_core/test/current-increment-b01-20260914-dm'
+
+../../.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/pathlib.py:1175: FileNotFoundError
+_ ERROR at setup of test_runner_follows_selected_arm_then_publishes_only_bound_primary[AUGMENTED_CURRENT_ONLY-True] _
+
+self = PosixPath('/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801/temp/directions/vap_folr_core/test/current-increment-b01-20260914-dm')
+mode = 448, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           self._accessor.mkdir(self, mode)
+E           FileNotFoundError: [Errno 2] No such file or directory: '/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801/temp/directions/vap_folr_core/test/current-increment-b01-20260914-dm'
+
+../../.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/pathlib.py:1175: FileNotFoundError
+=========================== short test summary info ============================
+ERROR tests/experiments/candidates/vap_folr_core/entity_current_increment_b01/test_integration.py::test_synthetic_update_keeps_targets_separate_and_publishes_checkpoint[GENERIC_RETAIN-fc3]
+ERROR tests/experiments/candidates/vap_folr_core/entity_current_increment_b01/test_integration.py::test_synthetic_update_keeps_targets_separate_and_publishes_checkpoint[AUGMENTED_CURRENT_ONLY-head]
+ERROR tests/experiments/candidates/vap_folr_core/entity_current_increment_b01/test_integration.py::test_runner_follows_selected_arm_then_publishes_only_bound_primary[GENERIC_RETAIN-False]
+ERROR tests/experiments/candidates/vap_folr_core/entity_current_increment_b01/test_integration.py::test_runner_follows_selected_arm_then_publishes_only_bound_primary[AUGMENTED_CURRENT_ONLY-False]
+ERROR tests/experiments/candidates/vap_folr_core/entity_current_increment_b01/test_integration.py::test_runner_follows_selected_arm_then_publishes_only_bound_primary[AUGMENTED_CURRENT_ONLY-True]
+14 passed, 5 errors in 1.60s

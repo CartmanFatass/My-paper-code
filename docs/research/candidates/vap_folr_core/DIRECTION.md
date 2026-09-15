@@ -58,6 +58,8 @@ rival. Equal registered parameters do not equal trained temporal capacity, and Z
 not established smaller or faster. The comparison remains a whole learning/execution
 law. This completed review neither grants a new fit nor changes the direction's
 lifecycle, priority or family status.
+The subsequent object-tier selection is the [fresh Z−G B card](FOLR_ENTITY_CURRENT_INCREMENT_B01_SCIENCE_CARD_20260914.md),
+with two new original fits and a whole-program increment as its claim ceiling.
 
 **Historical operational instruction — 2026-09-14 13:23 PDT (superseded by explicit resume):** finish the accepted
 augmentation B01 A−G run and required result/review/archival closeout, then write
