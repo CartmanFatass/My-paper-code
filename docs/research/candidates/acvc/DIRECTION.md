@@ -1,5 +1,26 @@
 # Direction acvc: ACVC
 
+## Portfolio funds one bounded matched-package comparison (G3); the direction node fixes the card next — 2026-09-15 23:40Z (portfolio:cross_direction P1, PRO_FINAL / OWNER_DELEGATED)
+
+`portfolio:cross_direction` answered the direction-level investment/lifecycle question with **P1 under an
+inclusive exposure ceiling** ([response](../../portfolio/pro_packets/20260915_acvc_direction_investment_lifecycle/archive/RESPONSE.md),
+[intake](../../portfolio/pro_packets/20260915_acvc_direction_investment_lifecycle/INTAKE.md),
+[decision G3](../../portfolio/decisions/2026-09-15-acvc-direction-investment-lifecycle.md), ledger row 38,
+owner item `20260915-acvc-009`): ACVC stays ACTIVE/MEDIUM/recasts2 at the lowest sequencing priority with its
+slot; preparation and conditional execution of **one bounded matched-package comparison** is funded, at most
+one fresh C fit and one fresh M fit of the unchanged recipes (4,096 H256 episodes each; 2,129,920 ticks with
+two final 64-world panels; inclusive ceiling 2,195,456 scored ticks, at most six 64-world panels; unused
+allowance expires; zero retries, third fits, extra panels or extensions). The decisive reason is the distinct
+missing comparison: F(C)−M changed sign across the two blocks while F(C) beat its own C and own-dwell in
+both, and neither those contrasts nor F(M)−M decides the matched F(C)-versus-F(M) development choice. PARK
+was the strongest alternative and a close call. **The scientific object is not yet fixed**: the direction
+node (`em:acvc:convergence`) selects and fixes the card within the envelope (estimand, comparator, labels,
+pairing, panels, reading rule; recipes, Binding's numerical law, private-information host, native
+reward/termination and the .01 J MEI unchanged) before any L0, review or launch; the matched-package card question to `em:acvc:convergence` is being authored. Working-set
+advice recorded for the owner: two occupied directions are not two advancing directions (FSD ACTIVE-idle).
+
+
+
 ## M-deployment transfer family concluded at two instances; investment/lifecycle question with Portfolio — 2026-09-15 23:25Z (em:acvc:convergence A, PRO_FINAL)
 
 `em:acvc:convergence` reviewed B02 and selected **A**: the unchanged M-deployment-transfer family is

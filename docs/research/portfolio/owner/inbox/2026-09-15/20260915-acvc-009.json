@@ -1,0 +1,91 @@
+{
+  "id": "20260915-acvc-009",
+  "created": "2026-09-15T16:38:38-07:00",
+  "direction": "acvc",
+  "tier": "portfolio",
+  "kind": "portfolio",
+  "title": "Portfolio 选 P1（G3）：ACVC 保持 ACTIVE 并资助一次有界的匹配 F(C) 对 F(M) 整包比较（至多一次 C 拟合与一次 M 拟合）；卡片由方向节点固定",
+  "context": "portfolio:cross_direction 2026-09-15 23:31Z 回答 ACVC 方向层投资/生命周期问题：选 P1 带包容上限（PRO_FINAL / OWNER_DELEGATED）。ACVC 保持 ACTIVE/MEDIUM/recasts2、最低排序优先级与槽位；资助至多两次新拟合（一次 C、一次 M，各 4,096 个 H256 回合），含两个终评面板 2,129,920 tick，上限 2,195,456 计分 tick（至多 6 个 64 世界面板），未用额度过期，零重试/第三次拟合/额外面板/扩展。对象由 em:acvc:convergence 选定固定后才 L0、评审、技术接受与 operator 启动。P2 PARK 为最强替代、接近的选择。工作集建议：两方向占用不等于两方向推进（FSD ACTIVE-idle），Root 应把休眠的第二分配交所有者单独决定。",
+  "options": [
+    {
+      "key": "P1",
+      "label": "资助匹配的 F(C) 对 F(M) 配对，至多两次新拟合（DM 建议）",
+      "consequence": "G3：至多一次 C 拟合与一次 M 拟合，上限 2,195,456 计分 tick；卡片由方向节点固定；C 先 M 后为下一个就绪数值作业"
+    },
+    {
+      "key": "P2",
+      "label": "PARK ACVC，保全资产并释放槽位",
+      "consequence": "零新拟合；槽位释放，空缺替代由 Root 提问；两块 C/M 主张与迁移读数不变"
+    },
+    {
+      "key": "P3",
+      "label": "保持 ACTIVE-idle 并记录复访条件",
+      "consequence": "零新拟合；槽位占用但无工作；需命名的观察或依赖"
+    }
+  ],
+  "recommended": "P1",
+  "auto_applied": "P1",
+  "dm_reason": "F(C)−M 在两块间变号而 F(C) 在两块都优于自身 C 与 own-dwell；两次迁移实例都不能决定匹配的 F(C) 对 F(M) 开发选择；Portfolio 判断该缺失比较比第三个不变实例或无限期空闲更有价值。",
+  "evidence": [
+    "docs/research/portfolio/pro_packets/20260915_acvc_direction_investment_lifecycle/INTAKE.md",
+    "docs/research/portfolio/decisions/2026-09-15-acvc-direction-investment-lifecycle.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-15.md#L38",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "方向节点结束 M-部署迁移族并携带 C 之后，ACVC 的方向层投资与生命周期：(P1) 资助匹配的 F(C) 对 F(M) 配对，至多两次新拟合（一次 C、一次 M）及其终评面板（DM 建议，接近的选择）；(P2) PARK，保全资产并释放槽位；(P3) 保持 ACTIVE-idle 并记录复访条件？",
+    "changes_if_approved": [
+      {
+        "target": "ACVC 生命周期与投资",
+        "from": "迁移族已结束，无数值对象，G2 用尽，0 producer；是否继续投入待定",
+        "to": "保持 ACTIVE/MEDIUM/recasts2、最低排序优先级、占用槽位；资助一次有界的匹配整包比较（G3）：至多两次新拟合，每个不变配方各一次，各 4,096 个 H256 训练回合（合计 2,097,152 训练 tick、24,576 次优化器调用）；含拟议两个终评面板 2,129,920 tick；含 6 个 64 世界面板的包容上限 2,195,456 计分 tick；未用额度过期；零重试、零第三次拟合、零额外面板"
+      },
+      {
+        "target": "应用顺序",
+        "from": "无",
+        "to": "先由 em:acvc:convergence 在该包络内选定并固定科学对象与卡片（估计量、比较器、标签、配对、面板、读数规则；配方、Binding 数值法则、私有信息宿主、原生奖励/终止与 .01 J MEI 不变）；随后 L0、聚焦测试、独立评审、技术接受、operator 启动；符合的卡片不需第二次 Portfolio 许可或 Root 批准；若节点不选出符合对象，额度不用并把原因交回 Portfolio，不自动 PARK"
+      },
+      {
+        "target": "工作集读法",
+        "from": "两方向占用即视为两方向推进",
+        "to": "保留 ACVC 与 FSD 符合两方向容量，但 FSD ACTIVE-idle、ACVC 为资助准备而非已启动 producer；Portfolio 建议 Root 把休眠的第二分配交所有者单独决定工作集；不重开 FSD、不释放其槽位、不选替代、不动 FOLR/TRDL"
+      }
+    ],
+    "if_refused": "所有者可在账本 owner 列或评审中改选：选 P2 则保全资产、记录处置并释放槽位（空缺替代由 Root 提问，本会话不作）；选 P3 则记录缺失事实与复访条件后等待。任何选择都不改变 B01/B02 逐实例读数与两块 C/M 主张。",
+    "evidence_for": [
+      {
+        "path": "docs/research/portfolio/pro_packets/20260915_acvc_direction_investment_lifecycle/archive/RESPONSE.md",
+        "quote": "Select P1 with an inclusive exposure ceiling: retain ACVC ACTIVE/MEDIUM/recasts2 and fund preparation and conditional execution of one bounded matched-package comparison, at most one fresh C fit and one fresh M fit.",
+        "why": "F(C)−M 在两块间变号（+.0234 到 −.0392 J）而 F(C) 在两块都优于自身 C 与 own-dwell；这些对比与 F(M)−M 都不能决定匹配的 F(C) 对 F(M) 开发选择，历史绝对分不能替代。"
+      },
+      {
+        "path": "docs/research/candidates/acvc/pro_packets/20260915_m_deployment_transfer_b02_result_review/archive/RESPONSE.md",
+        "quote": "C ... remains scientifically defensible: it addresses which complete proposer-package to develop, which neither transfer instance answers.",
+        "why": "方向节点已把 C 作为最强的独立替代携带给 Portfolio。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/portfolio/pro_packets/20260915_acvc_direction_investment_lifecycle/archive/RESPONSE.md",
+        "quote": "P2 is the strongest alternative and a close call. Another C fit and another comparison may leave the practical case for maintaining F unresolved.",
+        "why": "包排序本身不建立 F 相对 dwell 的增量偏好；B02 仍有 22 个不利世界（最差 −.1375 J），B01 最差 −.1614 J。"
+      }
+    ],
+    "uncertainty": [
+      "定性的边际价值判断，不主张配对优于整合",
+      "对象仍由方向节点选定；若不选出符合对象，额度不用",
+      "计划时长 C 2,600 s / M 1,200 s 是初始判断非上限；暂存、评审与维护成本未知"
+    ],
+    "cost": {
+      "compute": "至多两次拟合，上限 2,195,456 计分 tick（含至多 6 个面板）；计划约 3,800 s 原生墙钟；本决定本身零新拟合",
+      "owner_time": "阅读决定记录与之后的卡片，约 5 分钟",
+      "reversibility": "reversible",
+      "waits_on_this": "方向节点定卡片、L0、评审、技术接受后才可启动；不等所有者"
+    },
+    "verdict_text": "Portfolio 选 P1（PRO_FINAL / OWNER_DELEGATED）：ACVC 保持 ACTIVE/MEDIUM/recasts2 与槽位；资助一次有界的匹配 F(C) 对 F(M) 整包比较（G3，至多一次 C 拟合与一次 M 拟合，包容上限 2,195,456 计分 tick，至多 6 个面板）；对象由 em:acvc:convergence 选定固定后才 L0/评审/启动；零重试与扩展；工作集建议：Root 把休眠的第二分配交所有者单独决定；hub 已记录并将卡片问题送方向节点。",
+    "source": "docs/research/portfolio/pro_packets/20260915_acvc_direction_investment_lifecycle/archive/RESPONSE.md"
+  },
+  "starred": true
+}

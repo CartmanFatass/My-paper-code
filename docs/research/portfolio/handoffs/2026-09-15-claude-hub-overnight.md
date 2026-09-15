@@ -1,4 +1,4 @@
-# Root handoff — Claude hub overnight run (2026-09-15, refreshed 16:35 PDT)
+# Root handoff — Claude hub overnight run (2026-09-15, refreshed 16:45 PDT)
 
 Owner instruction 04:27 PDT: rest until 09:00 PDT; the hub runs the FSD fits overnight and
 reports at the 09:00 cron check-in. Two directions driven: FSD and ACVC. Owner 05:45 PDT:
@@ -24,7 +24,7 @@ under `docs/Claude_docs/changes/`). Nothing here changes lifecycle, priority or 
   Remote worktree and task records reclaimed (`CLEANUP.json`, `task_records/`).
 - Direction handoff: `docs/research/candidates/flexible_skill_duration/HANDOFF_2026-09-15_baseline_interruption.md`.
 
-## ACVC — transfer family concluded at two instances (A); investment/lifecycle question with Portfolio
+## ACVC — transfer family concluded (A); Portfolio funded one matched-package comparison (G3); card with the direction node next
 
 - Block 2 complete and intaken (D2 = F−M −.03919 J, M_ABOVE_MEI; F−C and F−own-dwell UP in
   both blocks; pooled F−M −.0079 J, df = 1 interval [−.406, +.390]). `em:acvc:convergence`
@@ -82,7 +82,21 @@ under `docs/Claude_docs/changes/`). Nothing here changes lifecycle, priority or 
   observations, no further numerical object, wording corrections applied, ACVC not shown exhausted, C
   (matched F(C) vs F(M) pair, about 2,129,920 ticks) carried to Portfolio; ledger row 37, owner item
   `20260915-acvc-008`.
-- Portfolio question on ACVC's direction-level investment and lifecycle: request `2026-09-15-acvc-direction-investment-lifecycle-01` authored in `docs/research/portfolio/pro_packets/20260915_acvc_direction_investment_lifecycle/` (P1 fund the matched F(C) vs F(M) pair as at most two fits, DM recommendation, close call with P2 PARK / P3 ACTIVE-idle); sent once at 23:22:55Z (TASK `f707fe2f3`, HANDOFF `3a8154036`; first call chatgpt_target_menu_open_unconfirmed before any click, the identical verifyExisting call clicked once; user message d4555e9e-2913-44a7-810d-2dd6cd0f6d32, tab 3eb267d8-c83a-4352-9fc4-bcc7d1165738 open for phase 2, prompt sha256 65f8236eec3c8dc7cf13f2ae094e71991bcd2161873d9344842594760cce8376); the archived answer is awaited.
+- Portfolio question on ACVC's direction-level investment and lifecycle: request `2026-09-15-acvc-direction-investment-lifecycle-01` authored in `docs/research/portfolio/pro_packets/20260915_acvc_direction_investment_lifecycle/` (P1 fund the matched F(C) vs F(M) pair as at most two fits, DM recommendation, close call with P2 PARK / P3 ACTIVE-idle); sent once at 23:22:55Z (TASK `f707fe2f3`, HANDOFF `3a8154036`; first call chatgpt_target_menu_open_unconfirmed before any click, the identical verifyExisting call clicked once; user message d4555e9e-2913-44a7-810d-2dd6cd0f6d32, tab 3eb267d8-c83a-4352-9fc4-bcc7d1165738 open for phase 2, prompt sha256 65f8236eec3c8dc7cf13f2ae094e71991bcd2161873d9344842594760cce8376); the archived answer is awaited (superseded below).
+- `portfolio:cross_direction` answered at 23:31Z (**P1 with an inclusive exposure ceiling**, `PRO_FINAL /
+  OWNER_DELEGATED`; response `d97ab77a6`, one Send, COMPLETE, ARCHIVED, tab closed): ACVC stays
+  ACTIVE/MEDIUM/recasts2 with its slot; G3 funds at most one fresh C fit and one fresh M fit of the
+  unchanged recipes for a matched F(C)-versus-F(M) package comparison (2,129,920 ticks with two final
+  panels; ceiling 2,195,456 scored ticks, at most six 64-world panels; zero retries or extensions); the
+  direction node fixes the card first; decision
+  `decisions/2026-09-15-acvc-direction-investment-lifecycle.md`, ledger row 38, owner item
+  `20260915-acvc-009`.
+- **Working-set advice from Portfolio for the owner**: keeping ACVC and FSD respects the two-direction
+  capacity but two occupied directions are not two advancing directions (FSD ACTIVE-idle; ACVC funded
+  preparation, no producer yet). Portfolio recommends that Root bring the dormant second assignment to the
+  owner for a separate working-set decision if two advancing chains are desired. This session takes no FSD
+  action and authors no replacement; the owner decides.
+- Card question to `em:acvc:convergence`: the matched-package card question to `em:acvc:convergence` is being authored.
 - Direction handoff: `docs/research/candidates/acvc/HANDOFF_2026-09-15_post_cm_decision.md`.
 
 ## Transport and registry
@@ -98,13 +112,11 @@ under `docs/Claude_docs/changes/`). Nothing here changes lifecycle, priority or 
 
 ## Next session
 
-No live handles. FSD: ACTIVE-idle, nothing to do. ACVC: the Portfolio question on its direction-level
-investment and lifecycle (packet
-`docs/research/portfolio/pro_packets/20260915_acvc_direction_investment_lifecycle/`) is the pending
-step: wait for the archived answer (GitHub readback, transport phase 2), intake it as `PRO_FINAL /
-OWNER_DELEGATED` with a decision record and a P1 `portfolio` item, then apply it (C funded: direction
-node fixes the card before any L0/launch; PARK: preserve, record, release the slot; idle: wait). No
-launch is authorized.
+No live handles. FSD: ACTIVE-idle, nothing to do (see the working-set advice above for the owner). ACVC:
+G3 is granted but the object is not fixed; the pending step is the matched-package card question to
+`em:acvc:convergence` (see the direction handoff's first resume step), then L0, independent review,
+technical acceptance and operator launch, C first then M. No launch is authorized before the node's
+decision.
 
 ## Integration state
 

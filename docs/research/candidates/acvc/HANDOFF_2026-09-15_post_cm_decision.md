@@ -1,8 +1,9 @@
 # ACVC handoff — after the em:acvc:convergence decision (2026-09-15, Claude hub)
 
-**State: ACTIVE / MEDIUM / recasts 2, lowest sequencing; the M-deployment transfer family is concluded
-at two instances (`PRO_FINAL`, A), no open object, no producer; the direction-level investment/lifecycle
-question is with `portfolio:cross_direction` (carrying C); nothing else authorised.** Driven by
+**State: ACTIVE / MEDIUM / recasts 2, lowest sequencing; the transfer family is concluded (A); Portfolio
+funded one bounded matched-package comparison (G3, at most one C fit and one M fit, ceiling 2,195,456
+scored ticks); the object is not yet fixed, the card question is for `em:acvc:convergence`; no producer;
+no launch authorised.** Driven by
 the Claude Code research hub (owner 2026-09-15 resume; two directions, ACVC and
 FSD). Authoring checkout `C:/Projects/HMASD-worktrees/codex-acvc`, branch
 `codex/acvc` (1,140 commits behind `main`; a merge of `main` conflicts in Codex
@@ -90,7 +91,34 @@ Opus review.
   ledger row 37; owner item `20260915-acvc-008`.
 - Portfolio question on ACVC's direction-level investment and lifecycle: request `2026-09-15-acvc-direction-investment-lifecycle-01` authored in `docs/research/portfolio/pro_packets/20260915_acvc_direction_investment_lifecycle/` (P1 fund the matched F(C) vs F(M) pair as at most two fits, DM recommendation, close call with P2 PARK / P3 ACTIVE-idle); sent once at 23:22:55Z (TASK `f707fe2f3`, HANDOFF `3a8154036`; first call chatgpt_target_menu_open_unconfirmed before any click, the identical verifyExisting call clicked once; user message d4555e9e-2913-44a7-810d-2dd6cd0f6d32, tab 3eb267d8-c83a-4352-9fc4-bcc7d1165738 open for phase 2, prompt sha256 65f8236eec3c8dc7cf13f2ae094e71991bcd2161873d9344842594760cce8376); the archived answer is awaited.
 
+## Portfolio funded the matched-package comparison, G3 (2026-09-15 23:40Z)
+
+- `portfolio:cross_direction` answered at `codex/acvc d97ab77a6` (23:31Z; one Send 23:22Z, COMPLETE,
+  ARCHIVED, tab closed): **P1 with an inclusive exposure ceiling**, `PRO_FINAL / OWNER_DELEGATED`.
+  ACVC stays ACTIVE/MEDIUM/recasts2 with its slot; at most one fresh C fit and one fresh M fit of the
+  unchanged recipes (2,129,920 ticks with two final panels; ceiling 2,195,456 scored ticks, at most six
+  64-world panels; unused allowance expires; zero retries/third fits/extra panels/extensions); planning
+  C 2,600 s / M 1,200 s, not caps; C then M as the next ready numerical work. The direction node fixes the
+  card first. Decision record
+  `docs/research/portfolio/decisions/2026-09-15-acvc-direction-investment-lifecycle.md`; intake
+  `docs/research/portfolio/pro_packets/20260915_acvc_direction_investment_lifecycle/INTAKE.md`; ledger row
+  38; owner item `20260915-acvc-009`. Working-set advice (Root brings the dormant second assignment to the
+  owner if two advancing chains are desired) is recorded in the root handoff; FSD untouched.
+- Card question to `em:acvc:convergence`: the matched-package card question to `em:acvc:convergence` is being authored.
+
 ## First resume step (current)
+
+If the matched-package card question has not been sent: finish the prospective card
+`ACVC_MATCHED_PACKAGE_COMPARISON_C01_PROSPECTIVE_CARD_20260915.md` within the G3 envelope, render and bind
+the packet under `pro_packets/20260915_matched_package_card_convergence/`, send once through
+`hmasd-pro-transport` (`em:acvc:convergence`, direction-tier). If sent: wait for the archived answer
+(GitHub readback at a fresh `codex/acvc` head, transport phase 2), intake it as `PRO_FINAL`, apply the
+node's fixes to the card, then L0 (reuse the block-2 C and M runners and the transfer evaluator; change only
+object, identities and panel bindings), focused tests, independent `hmasd-reviewer` review, technical
+acceptance, fresh admission and launch through `hmasd-experiment-operator` only, C first then M. Nothing is
+launched before the node's decision. FSD-side work is unaffected.
+
+## First resume step as written at 23:25Z (superseded 23:40Z by the section above)
 
 Wait for the archived Portfolio answer (packet
 `docs/research/portfolio/pro_packets/20260915_acvc_direction_investment_lifecycle/`; GitHub readback of
