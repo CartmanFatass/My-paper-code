@@ -4,7 +4,8 @@
     "experiments/candidates/acvc/cluster_mappo_comparison_b01/mappo.py": 203,
     "experiments/candidates/acvc/cluster_mappo_comparison_b01/protocol.py": 87,
     "experiments/candidates/acvc/cluster_mappo_comparison_b01/__init__.py": 1,
-    "scripts/run_acvc_cluster_mappo_comparison_b01.py": 187
+    "scripts/run_acvc_cluster_mappo_comparison_b01.py": 187,
+    "experiments/candidates/acvc/cluster_mappo_comparison_b01/launch.sh": 16
   },
   "test_file": "tests/experiments/candidates/acvc/cluster_mappo_comparison_b01/test_contract.py",
   "initial_test_result": {
@@ -26,5 +27,6 @@
     "M_critic": 4,
     "C_joint": 4
   },
-  "scope_cap_seconds": 300
+  "scope_cap_seconds": 300,
+  "new_source_lines_total": 585
 }
