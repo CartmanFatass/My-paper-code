@@ -1,0 +1,26 @@
+{
+  "schema_version": 4,
+  "packet_id": "2026-09-14-acvc-post-extended-exposure-investment-01--portfolio",
+  "attempt": 1,
+  "canonical_form": "logical_packet_manifest",
+  "request_id": "2026-09-14-acvc-post-extended-exposure-investment-01",
+  "direction_id": "portfolio",
+  "direction_ids": [
+    "acvc"
+  ],
+  "workflow_node": "portfolio_decision",
+  "conversation_binding_key": "portfolio:cross_direction",
+  "decision_authority": "pro_final",
+  "source_mode": "paste",
+  "body": {
+    "role": "prompt",
+    "source_path": "<paste>",
+    "canonical_filename": "2026-09-14-acvc-post-extended-exposure-investment-01--portfolio__00_PROMPT.md",
+    "bytes": 1921,
+    "sha256": "6f8adf65310213dfd4857b8a92e39f8bcfda6f48224c598a5ca33d715de82760"
+  },
+  "references": [],
+  "reference_order_is_authoritative": true,
+  "provider_filename_policy": "record_observed_name_only",
+  "companion_prompt_is_transport_ui_only": true
+}
