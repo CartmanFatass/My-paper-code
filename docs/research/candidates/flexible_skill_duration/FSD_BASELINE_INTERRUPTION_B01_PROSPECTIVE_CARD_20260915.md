@@ -34,7 +34,7 @@ observed so far, or fund a smaller version, or decline and leave FSD ACTIVE-idle
 
 | Arm | What it is | Coordinator | Individual gap | Joint-row batch |
 | --- | --- | --- | --- | --- |
-| **FLAT** | private-actor flat reduction of the same HMASD stack: single constant skill (`n_Z = n_z = 1`, `k` longer than the rollout), coordinator and both discriminators never updated, discriminator rewards off, only the `SkillDiscoverer` actor + critic receive PPO updates | none | n/a | n/a |
+| **FLAT** | private-actor flat reduction of the same HMASD stack: single constant skill (`n_Z = n_z = 1`, `k = 10` as in the D arms, see §8), coordinator and both discriminators **never updated** (the coordinator is still forward-called every ten steps to assign the single skill), discriminator rewards off, only the `SkillDiscoverer` actor + critic receive PPO updates | never updated | n/a | n/a |
 | **D1280** | D2-D0 as in the completed factorial | on | +∞ | 1280 |
 | **I1280** | interruption recipe as in the completed factorial | on | .25 | 1280 |
 
@@ -246,14 +246,23 @@ request `2026-09-15-fsd-baseline-interruption-investment-01`, delivery commit
   `apply_algorithm_config(config, "mappo")` switch, not from a D2 configuration.
   It keeps constant single skills, zero coordinator/discriminator updates and a
   learning private recurrent actor with a central-state critic.
-  *Runtime deviation recorded by the DM:* the switch's `k = rollout_length + 1`
-  is not runnable on this stack because the discoverer's recurrent training
-  chunk length is `config.k` (`hmasd/agent.py:6125`) and a chunk longer than the
-  rollout cannot be split; the runner sets `k = 10`, identical to the D arms, so
-  the recurrent chunking and the ten-step skill period are the same in every
-  arm and the only differences are the single constant skill and the absent
-  coordinator/discriminator learning. The tiny real-host check exercises this
-  path (`test_real_tiny.py`).
+  *DM deviation from the decision's "switch-selected long k", returned to the
+  node:* the switch's `k = rollout_length + 1` does run (the discoverer sampler
+  falls back to one full-rollout chunk, `hmasd/utils.py` `get_discoverer_sampler`;
+  the reviewer ran it on the tiny real host), but `config.k` is also the
+  truncated-BPTT chunk length of the recurrent actor and critic
+  (`hmasd/agent.py:6125`), so the long k would train FLAT through 500-step
+  chunks against the D arms' 10-step chunks, confounding the architecture
+  contrast with the gradient-truncation law and adding a 500-step BPTT
+  memory/wall risk. The runner therefore sets `k = 10`, identical to the D arms:
+  the optimizer law is the same in every arm and the only differences are the
+  single constant skill and the absent coordinator/discriminator learning. The
+  switch's high-level buffer fields stay as computed at its own k; they are inert
+  and listed as planned differences. Independent Opus review (2026-09-15)
+  judged k = 10 the better control and required this reason to be recorded and
+  returned to `portfolio:cross_direction` as a correction note; the FLAT arm is
+  dependent work under AGENTS §3 and waits for that return, while D1280/I1280
+  launch as independent authorized work.
 - **Labels:** `H_r`/`HI_r` are renamed `GAP_D`/`GAP_I`, *untuned
   cross-information package gaps* D1280 − FLAT and I1280 − FLAT; they are not
   §11.7 headroom and supply no tuned same-information reference.

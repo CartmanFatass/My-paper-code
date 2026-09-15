@@ -221,7 +221,8 @@ def test_reduce_primary_readings_gaps_and_accumulation(monkeypatch, tmp_path, fa
     assert block["contrasts"]["SI1280"]["by_rollout"]["15"]["value"] == pytest.approx(si[0])
 
 
-@pytest.mark.parametrize("damage", ["flat_coordinator_trained", "unplanned_config", "missing_panel", "wrong_rollouts"])
+@pytest.mark.parametrize("damage", ["flat_coordinator_trained", "unplanned_config", "missing_panel", "wrong_rollouts",
+                                    "mixed_launch_sha"])
 def test_damaged_fit_limits_only_dependent_contrasts(monkeypatch, tmp_path, fake_only, damage):
     summaries = supplied_summaries(monkeypatch, tmp_path, designed_scores([.06] * 4, [.02] * 4))
     victim = next(s for s in summaries if s["factorial_arm"] == "FLAT" and s["block_seed"] == SEED)
@@ -231,11 +232,18 @@ def test_damaged_fit_limits_only_dependent_contrasts(monkeypatch, tmp_path, fake
         victim["learner_config"]["gamma"] = .5
     elif damage == "missing_panel":
         victim["panels"].pop(1)
+    elif damage == "mixed_launch_sha":
+        victim["launch_sha"] = "other-source"
     else:
         victim["rollouts"] = 10
     result = baseline.assemble_blocks(summaries)
     block = result["blocks"][0]
-    assert result["status"] == "incomplete" and "FLAT" in block["missing_or_invalid_arms"] or damage == "unplanned_config"
+    assert result["status"] == "incomplete"
+    if damage in ("unplanned_config", "mixed_launch_sha"):
+        assert not block["missing_or_invalid_arms"]
+        assert block["contrasts"]["GAP_D"]["failure"] == "unplanned comparator difference"
+    else:
+        assert "FLAT" in block["missing_or_invalid_arms"]
     assert block["contrasts"]["SI1280"]["status"] == "complete"
     assert block["contrasts"]["GAP_D"]["status"] == block["contrasts"]["GAP_I"]["status"] == "incomplete"
     assert result["primary"]["available_training_blocks"] == 4
@@ -252,7 +260,9 @@ def test_reduce_reads_historical_factorial_summary(monkeypatch, tmp_path, fake_o
         paths.append(str(path))
     old = tmp_path / "old.json"
     old.write_text(json.dumps({"object_id": "FSD_INTERRUPTION_BATCH_B01", "blocks": [
-        {"contrasts": {"SI1280": {"value": -.02644030}}}, {"contrasts": {"SI1280": {"value": .08464985}}}]}))
+        {"contrasts": {"SI1280": {"status": "complete", "value": -.02644030}}},
+        {"contrasts": {"SI1280": {"status": "complete", "value": .08464985}}},
+        {"contrasts": {"SI1280": {"status": "incomplete", "missing_operands": ["I1280"]}}}]}))
     out = tmp_path / "reduce"
     assert baseline.main(["reduce", "--summaries", *paths, "--historical-factorial-summary", str(old),
                           "--output-root", str(out)]) == 0
