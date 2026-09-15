@@ -81,6 +81,14 @@
       "record": "docs/research/portfolio/pro_packets/20260914_trdl_b02_investment/PREPARATION.md",
       "state": "planned",
       "summary": "依据DM持续作者化具体投资问题权限，仅准备B02推荐R与A/N备选；未执行buy、未绑定/Send。当前由ACVC占用shared Portfolio writer，待其完整application释放后同request一次发送。"
+    },
+    {
+      "at": "2026-09-15T05:21:21+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "docs/research/portfolio/decisions/2026-09-13-dm-autonomy-consolidation.md",
+      "record": "docs/research/portfolio/pro_packets/20260914_trdl_b02_investment/DISPATCH.md",
+      "state": "planned",
+      "summary": "ACVC完整application正式释放后，TRDL唯一B02 TASK8079cd8ae/HANDOFF433276b38已发布绑定并原生分配同Transport。provider接受与完整决策尚未确认，buy未应用；0模型/代码适配/fit/native/optimizer。"
     }
   ]
 }
