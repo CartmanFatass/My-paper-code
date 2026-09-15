@@ -111,6 +111,14 @@
       "state": "applied",
       "summary": "Portfolio 确认修正选项 1：FLAT 保持 k = 10（与 D 臂相同的截断 BPTT 块长），先前“不可运行”的解释撤回；GAP_D/GAP_I 只是未调参的跨信息包差，不是 §11.7 headroom；D1280/I1280 与 SI1280 主量不受影响；四个 FLAT 拟合按 dc4dbdfcd 逐块启动。",
       "correction": "FLAT k=10 的真实原因是匹配梯度截断律；开关 k=rollout+1 是可运行的"
+    },
+    {
+      "at": "2026-09-15T17:42:20+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260915_fsd_baseline_interruption_investment/archive/RESPONSE.md",
+      "record": "docs/research/candidates/flexible_skill_duration/FSD_BASELINE_INTERRUPTION_B01_INTAKE_20260915.md",
+      "state": "applied",
+      "summary": "S 分配（12 次拟合）已全部完成并 intake：SI1280_15 +.0098 J small_signed、区间跨零；GAP_D −.045 / GAP_I −.035（未调参包差距）；六块 rollout-5 合并 +.043；不再拟合；方向层问题已备待送"
     }
   ]
 }

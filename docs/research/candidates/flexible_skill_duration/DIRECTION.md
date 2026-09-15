@@ -26,6 +26,31 @@ Untying the duration `k` is this direction. Untying the agent count `N` is a sep
 
 ## Position
 
+- **Latest discriminator — completed B/EXPLORE, 2026-09-15 (baseline × interruption,
+  Claude hub as DM):** the [funded S object](FSD_BASELINE_INTERRUPTION_B01_PROSPECTIVE_CARD_20260915.md)
+  (FLAT / D1280 / I1280 × four fresh blocks, fifteen rollouts, panels 5/10/15) completed all
+  twelve originals at `dc4dbdfcd`. Primary SI1280_15 = I1280 − D1280 is +.09835977 /
+  +.04471497 / −.08340338 / −.02032159 J by block, mean **+.00983744 J**, `small_signed` at the
+  .05 J MEI, df = 3 working-model interval [−.11564245, +.13531733] including zero and not
+  inside the MEI band. The renewal advantage seen at rollouts 5 and 10 (four-block means
+  +.050 / +.052 J) is not maintained at rollout 15 on the mean; per-block curves differ in
+  direction. The untuned package gaps at rollout 15 are GAP_D = D1280 − FLAT **−.04526346 J**
+  [−.13491570, +.04438879] and GAP_I = I1280 − FLAT **−.03542601 J** [−.18359432,
+  +.11274230] (four-block arm means FLAT .4510, D1280 .4058, I1280 .4156): the direction's
+  first same-host flat comparison, a package gap and not §11.7 headroom, in which the untuned
+  private-actor flat reduction is not below the skill package at equal exposure. Six-block
+  rollout-5 accumulation (four new + two historical, outcome-informed descriptive)
+  +.04287702 J [−.02320115, +.10895519]. Panel-to-panel movement inside one fit reaches
+  .1–.2 J, so block dispersion is not attributable to training seeds alone. Both hub modal
+  predictions (SI1280_15 and GAP_D inside ±.05) were correct; owner slot not taken. See
+  [complete E0](FSD_BASELINE_INTERRUPTION_B01_RESULT_EVIDENCE_20260915.md) and
+  [accepted intake](FSD_BASELINE_INTERRUPTION_B01_INTAKE_20260915.md). Authentic D0 remains
+  default; the five-rollout optional I1280 scope is unchanged; no equivalence, default change,
+  component attribution or C promotion. The S allocation ends here (no automatic extension).
+  The next choice is direction-tier for `em:flexible_skill_duration:convergence`: conclude at
+  this claim (A), a tuned same-information flat baseline as the next object (B, DM
+  recommendation), or another tranche of blocks (C, Portfolio); prepared in the intake, not
+  yet sent.
 - **Latest discriminator — completed B/EXPLORE, 2026-09-15:** the
   [funded interruption-by-batch card](FSD_INTERRUPTION_BATCH_B01_PROSPECTIVE_CARD_20260914.md)
   completed all eight originals in two fresh four-arm blocks. I1280 minus
