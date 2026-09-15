@@ -1,6 +1,6 @@
 ---
 name: hmasd-pro-transport
-description: How the Claude Code research hub sends a direction- or portfolio-tier question to the ChatGPT Pro decision nodes through Agentify Desktop and scoped GitHub delivery, reusing the Codex packet renderer, registry and conversation bindings. Load when authoring a Pro request, running the first transport smoke, or taking in a Pro response.
+description: How the Claude Code research hub, as the author DM, sends a direction- or portfolio-tier question to the ChatGPT Pro decision nodes through Agentify Desktop and scoped GitHub delivery, reusing the Codex packet renderer, registry, provider policy and conversation bindings; smoke passed 2026-09-05, scientific dispatch enabled. Load when authoring a Pro request or taking in a Pro response.
 ---
 
 # HMASD Pro transport (Claude Code)
@@ -17,7 +17,16 @@ conversation for a bound key.
 ## Hub procedure for a scientific request
 
 1. **Decide that the question is direction- or portfolio-tier** (`AGENTS.md` section 2). Object-tier
-   decisions are the hub's own and never go to Pro.
+   decisions are the hub's own and never go to Pro. Direction-tier questions (family open/close,
+   park, recast, next object after a consumed C, independent result review) bind to
+   `em:<direction>:convergence` or `:innovator`; Portfolio-tier questions (new investment or a
+   grant beyond the standing delegation, priority, capacity, lifecycle, fusion/separation,
+   registration) bind to `portfolio:cross_direction` and follow
+   `.agents/skills/hmasd-portfolio-task/SKILL.md` for the packet content (evidence spec section 8.1,
+   section 7, sections 11.7 to 11.11, the two-axis programme). The hub is the author DM in both
+   cases (`docs/project/GITHUB_RESEARCH_COLLABORATION.md`); a Claude session never authors a
+   vacancy replacement. The question states the actual choice it would change and the new fact or
+   concrete proposal relative to the last complete decision (`AGENTS.md` section 5, 2026-09-13).
 2. **Write the substantive inputs** yourself: `scientific_question`, `deliverable`, `claim_ceiling`,
    the `reference_files` list with purpose and provenance (include the current evidence spec and
    applicable authorities), `constraints`, optional `discussion_urls`, an `EVIDENCE_AND_OPTIONS.md`
@@ -117,16 +126,23 @@ conversation for a bound key.
    heartbeat automations (replaced by the GitHub head watch), parent-thread receipts
    (`stage_receipt`; the hub reads the agent's return), `materialize_packet.py` (no attachments).
 7. **Intake**: read the full response from the archive's `GITHUB_RESPONSE.md` (verified against the
-   immutable commit), not the short chat receipt. Check the formed decision against current owner
-   instructions and specifications; a complete answer does not authorize a silent exception. Write
-   the intake, apply the decision, label it `PRO_FINAL`, and record the archive paths.
+   immutable commit) or, when the connector could not write, from the verified chat-fallback bytes
+   `archive/CHAT_FALLBACK_RESPONSE.md`; never from the short chat receipt. Check the formed decision
+   against current owner instructions and specifications (`AGENTS.md` section 2): a complete answer
+   that decides the posed question at its declared evidence class is final for its node; a concrete
+   conflict is cited, the response preserved, and the conflict returned to the same node, never
+   replaced locally. Write the intake, apply the conforming decision, label it `PRO_FINAL`
+   (Portfolio: `PRO_FINAL / OWNER_DELEGATED`, recorded under `docs/research/portfolio/decisions/`
+   with a P1 `portfolio` owner item), and record the archive paths. Under the blocker rule
+   (`AGENTS.md` section 3) a transport status alone never establishes whether a decision was
+   formed: reconcile the bound request and full response first.
 
 ## The first run is a smoke, not a request
 
 **Status: the smoke passed on 2026-09-05** (record
 `docs/Claude_docs/experiments/TRANSPORT_SMOKE_AGENTIFY_20260905.md`; matched labels `Latest` /
-`Pro`; one Send; `COMPLETE`). Scientific dispatch through `hmasd-pro-transport` is enabled on the
-transport side; the research-side pause on Pro requests is a separate gate. Re-run a smoke only
+`Pro`; one Send; `COMPLETE`). Scientific dispatch through `hmasd-pro-transport` is enabled; an
+owner pause on research is a separate instruction, read from the current handoff. Re-run a smoke only
 after an Agentify code change, a ChatGPT UI change, or a provider-selection change in
 `.codex/hmasd-transport.toml`. The procedure that was followed:
 

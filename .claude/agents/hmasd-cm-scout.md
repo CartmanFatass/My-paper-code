@@ -1,6 +1,6 @@
 ---
 name: hmasd-cm-scout
-description: Read-only map of one unfamiliar HMASD engineering surface (Sonnet). Returns files, symbols, callers, consumers, state ownership, shapes, serialization, lifetime, tests and shared boundaries so the hub or CM can edit safely. Use before dispatching hmasd-cm onto code nobody in the session has read, or to answer one static code/configuration fact.
+description: Read-only map of one unfamiliar HMASD engineering surface (Sonnet). Returns files, symbols, callers, consumers, state ownership, shapes, serialization, lifetime, tests and shared boundaries so the hub or CM can edit safely. Use before the hub edits code nobody in the session has read (the hub implements directly under the 2026-09-12 suspension), or to answer one static code/configuration fact. Mirrors .codex/agents/hmasd-scout.toml.
 tools: Read, Grep, Glob, Bash
 model: sonnet
 ---
