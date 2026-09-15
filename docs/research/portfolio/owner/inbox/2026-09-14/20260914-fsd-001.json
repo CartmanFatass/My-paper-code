@@ -1,0 +1,87 @@
+{
+  "id": "20260914-fsd-001",
+  "created": "2026-09-14T20:39:50-07:00",
+  "direction": "flexible_skill_duration",
+  "tier": "portfolio",
+  "kind": "decision",
+  "title": "FSD 所有者直接恢复：加入工作集并继续归因研究准备",
+  "context": "所有者明确要求 FSD 加入并由 Root 重启，DM 阅读详细建议。Root 已复用原 worktree 并恢复同角色 DM，9545486bf 已记录四个占用方向；此项不请求再次批准或声称新实验已启动。",
+  "options": [
+    {
+      "key": "restore",
+      "label": "执行所有者的 FSD 恢复决定",
+      "consequence": "恢复方向连续所有权、加入工作集、读取建议并准备具体新问题；原三链继续。"
+    },
+    {
+      "key": "retain",
+      "label": "维持此前未加入工作集的状态",
+      "consequence": "与本次恢复指令相反；只有新的所有者覆盖才执行此选项，历史科学证据保留。"
+    }
+  ],
+  "recommended": "restore",
+  "auto_applied": "restore",
+  "dm_reason": "执行最新 OWNER_DIRECT；恢复与具体新实验选择、额度分别记录。",
+  "evidence": [
+    "docs/research/portfolio/decisions/2026-09-14-owner-fsd-restart.md",
+    "docs/research/candidates/flexible_skill_duration/FSD_RESTART_RECOMMENDATIONS_20260914.md",
+    "docs/research/portfolio/root-log/2026-09-14.md"
+  ],
+  "ledger_row": "docs/research/portfolio/root-log/2026-09-14.md#L5",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "记录所有者已明确选定的 FSD 恢复与加入决定；无需再次审批。",
+    "changes_if_approved": [
+      {
+        "target": "PORTFOLIO / EXPERIMENT_TRACKING / FSD DM",
+        "from": "FSD ACTIVE/HIGH，最近无追加投入且未占用当前工作集",
+        "to": "FSD 恢复为第四条方向链，DM 读取继续建议并准备实质新问题；原三条链继续"
+      }
+    ],
+    "if_refused": "只有新的所有者明确覆盖才调整恢复决定；保留已完成事实、原五对结果和其他方向连续性。",
+    "evidence_for": [
+      {
+        "path": "docs/research/portfolio/decisions/2026-09-14-owner-fsd-restart.md",
+        "quote": "我认为FSD应该加入 这个方向之前似乎因为工作流迁移不稳定的缘故自行parked 请将详细的建议写在docs中 并让root重启此方向 让DM阅读继续的建议",
+        "why": "最新直接恢复指令，覆盖本次默认不加第四方向的限制。"
+      },
+      {
+        "path": "docs/research/candidates/flexible_skill_duration/pro_packets/20260912_post_five_pair_use_convergence/INTAKE.md",
+        "quote": "the complete I1280 recipe is a limited optional learning scheme under the same tested host, recipe and five-rollout learning conditions; authentic D0 remains default/reference.",
+        "why": "已有限定正证据和具体的中断/批量归因问题；U 本身已完成。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/flexible_skill_duration/FSD_POST_U_PORTFOLIO_APPLICATION_20260912.md",
+        "quote": "Applied: no current addition; retain limited optional I1280, authentic D0 default and ACTIVE/HIGH.",
+        "why": "旧有限拨款与 LONG offer 没有自动变成新 fits 或 cap，五对反证/额外成本仍须保留。"
+      }
+    ],
+    "uncertainty": [
+      "尚无证据确认整个 FSD 因迁移被正式 PARK；原生旧 DM 不可用是 Root 本次观察到的恢复事实。",
+      "具体四臂或两臂方案、n、同宿主基线及新投入尚待 DM 完成设计/适用决策。",
+      "建议的发布及 DM 实际阅读应用仍在本任务内跟进，不能由恢复消息推定训练已启动。"
+    ],
+    "cost": {
+      "compute": "本次文档/恢复新增科研训练评价为零；新实验数字是候选计数，未拨款。文档和代理成本未计量。",
+      "owner_time": "不请求再次批准。",
+      "reversibility": "reversible",
+      "waits_on_this": "恢复已执行；建议发布和 DM 阅读应用由当前任务与研究 Root 接续。"
+    },
+    "verdict_text": "我认为FSD应该加入 这个方向之前似乎因为工作流迁移不稳定的缘故自行parked 请将详细的建议写在docs中 并让root重启此方向 让DM阅读继续的建议",
+    "source": "docs/research/portfolio/decisions/2026-09-14-owner-fsd-restart.md"
+  },
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-15T03:39:50+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "docs/research/portfolio/decisions/2026-09-14-owner-fsd-restart.md",
+      "record": "docs/research/portfolio/decisions/2026-09-14-owner-fsd-restart.md",
+      "state": "applied",
+      "summary": "研究 Root 已在9545486bf恢复第四条 FSD 链；旧DM不可用，复用原worktree/branch，接续DM为/root/dm_fsd_restart_20260914。建议正在独立审查/发布，DM正式阅读应用回执另补；0新fit/冻结卡/cap。"
+    }
+  ]
+}
