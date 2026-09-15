@@ -300,4 +300,6 @@ GAP_I_15 −.03542601 (intervals include zero); rollout-5 six-block accumulation
 inside ±.05) correct; owner slot not taken. Records:
 [E0](FSD_BASELINE_INTERRUPTION_B01_RESULT_EVIDENCE_20260915.md),
 [intake](FSD_BASELINE_INTERRUPTION_B01_INTAKE_20260915.md),
-[execution](baseline_interruption_b01_20260915/EXECUTION.md).
+[execution](baseline_interruption_b01_20260915/EXECUTION.md). Direction decision
+(`em:flexible_skill_duration:convergence`, 20:27Z): **A, `CLOSE_OBJECT`**, no new object
+([intake](pro_packets/20260915_post_baseline_interruption_convergence/INTAKE.md)).

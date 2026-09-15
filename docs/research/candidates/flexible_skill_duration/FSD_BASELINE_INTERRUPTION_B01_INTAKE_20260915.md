@@ -32,27 +32,37 @@ is §11.7 headroom. Rollout-5 accumulation: new four blocks +.04976314 J [−.05
 
 ## Scientific reading and limits
 
-Inference. (1) **The renewal simple effect does not persist to fifteen rollouts on the
-mean.** At rollouts 5 and 10 the four-block SI1280 means are +.050 and +.052 J; at rollout 15
+Inference (narrowed by `em:flexible_skill_duration:convergence`, 20:27Z; see the
+[decision intake](pro_packets/20260915_post_baseline_interruption_convergence/INTAKE.md)).
+(1) **The renewal simple effect observed at rollouts 5 and 10 is not maintained at fifteen
+rollouts on the mean** (a description of the observed means, not a decay law; no cross-panel
+interval was computed). At rollouts 5 and 10 the four-block SI1280 means are +.050 and +.052 J; at rollout 15
 the mean is +.010 J with two blocks positive and two negative. The per-block curves differ in
 direction (772203 rises .055 → .076 → .098; 772303 falls .141 → .105 → .045; 772403 and 772503
 change sign between panels), so the endpoint contrast at any single rollout is a snapshot of
 a non-converged trajectory. The accepted "limited optional I1280 scheme under five-rollout
 conditions" keeps its scope: the six-block rollout-5 accumulation (+.043 J, interval touching
 zero from below) is consistent with that bounded description and adds no stable superiority.
-(2) **The untuned private-actor flat reduction is not below the skill package at equal
-exposure on this host.** Four-block arm means at rollout 15: FLAT .4510, D1280 .4058,
+(2) **On the observed point estimates, the untuned private-actor flat reduction is not below
+the skill package at equal exposure on this host** (intervals include zero: no non-inferiority,
+equivalence or stable FLAT advantage is shown, and the private FLAT score gives no monotone
+guarantee for an untested central-input flat). Four-block arm means at rollout 15: FLAT .4510, D1280 .4058,
 I1280 .4156 J; GAP_D_15 is near zero in two blocks (+.004, +.000) and about −.08 to −.11 J in
 the other two. This is the direction's first same-host flat comparison. It is a package gap,
 not headroom: FLAT is untuned and carries different information (private recurrent actor,
 central-state critic, no coordinator). The card's "negative gap with an interval excluding 0"
 branch is not reached; the point estimate is nevertheless adverse for the claim that the D2-D0
 package adds over a flat reduction at this budget, and every package claim the direction has
-made at this budget is bounded by it. (3) **Within-trajectory movement dominates.** Panel-to-
-panel swings inside one fit reach .1–.2 J (FLAT 772503 .312 → .530 between rollouts 10 and 15;
-D1280 772503 .439 → .507 → .452), far above the conditional panel SE (.008–.021 J). Block SDs of
-.056–.161 J across contrasts are therefore not attributable to training-seed variation alone;
-they include where each trajectory happened to be at the panel.
+made at this budget is bounded by it. (3) **Large within-trajectory movement is observed, not decomposed.** Panel-to-panel
+swings inside one fit reach .1–.2 J (FLAT 772503 .312 → .530 between rollouts 10 and 15;
+D1280 772503 .439 → .507 → .452), far above the conditional panel SE (.008–.021 J); these are
+readings of different policies of one training process at different update positions and
+show that the checkpoints share no stable ordering. The hub's original inference that block
+dispersion is "not attributable to training seeds alone" is withdrawn: where each training
+instance stands at the common endpoint is part of complete training-instance variation, the
+block SD cannot be split into a seed part and a trajectory-phase part from single-panel SEs,
+and more independent blocks can still improve the precision of the fixed fifteen-rollout
+contrast (correction by the node).
 
 Boundaries: direct observation (counts, values, readings) versus inference (the three points
 above); scientific result (small signed primary, adverse-pointing gaps, unresolved
@@ -100,10 +110,12 @@ reviews checked at this boundary, none unapplied.
    flat baseline as the next object (the direction's first §11.7 headroom record, since the
    untuned FLAT already matches the package), before any further renewal work; (C) another
    tranche of blocks of the unchanged object (a Portfolio investment question under the
-   card's no-automatic-extension rule). DM recommendation: (B) over (A); (C) is not
-   recommended because four blocks already show that the endpoint contrast is dominated by
-   within-trajectory movement that more blocks of the same 15-rollout design do not remove.
-   This is a direction-tier question and is not decided locally.
+   card's no-automatic-extension rule). DM recommendation was (B) over (A). **Answered
+   20:27Z: A, `PRO_FINAL`, label `CLOSE_OBJECT`** ([intake](pro_packets/20260915_post_baseline_interruption_convergence/INTAKE.md)):
+   the stage closes at the bounded claim; B rejected (a one-fit-per-setting FLAT sweep cannot
+   deliver §11.7 headroom and is not the next step); C and D legitimate but not bought now;
+   the DM's "more blocks would not help" reason was not accepted. FSD ACTIVE-idle for this
+   question with the node's reopening facts in the handoff.
 4. **Direction/Portfolio** — no local disposition; no capacity writer held; no peer change;
    FSD stays ACTIVE/HIGH in its slot.
 
