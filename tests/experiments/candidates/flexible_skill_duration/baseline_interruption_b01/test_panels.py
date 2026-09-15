@@ -281,6 +281,10 @@ def test_collector_copy_matches_frozen_collector(monkeypatch, tmp_path, fake_onl
     frozen, copy_ = outputs
     assert frozen[0] == copy_[0] and frozen[1] == copy_[1] and frozen[3] == copy_[3] and frozen[4] == copy_[4]
     assert frozen[0][0]["segments"]["agent"]["count"] > 0  # the D arms keep their renewal metrics
+    assert len(frozen[2]) == len(copy_[2]) == 5 * r.HORIZON
+    for a, b in zip(frozen[2], copy_[2]):
+        for key in ("states", "next_states", "observations", "next_observations", "actions", "rewards", "dones"):
+            np.testing.assert_array_equal(a[key], b[key])
 
 
 def test_flat_rows_carry_no_renewal_metrics(monkeypatch, tmp_path, fake_only):
@@ -306,7 +310,3 @@ def test_flat_rows_carry_no_renewal_metrics(monkeypatch, tmp_path, fake_only):
     assert all(row["d2_metrics"] is None and row["segments"] is None for row in summary["training_rows"])
     assert all(panel["d2_metrics"] is None for panel in summary["panels"])
     assert list(baseline.arm_panels(summary)) == [5, 10, 15]
-    assert len(frozen[2]) == len(copy_[2]) == 5 * r.HORIZON
-    for a, b in zip(frozen[2], copy_[2]):
-        for key in ("states", "next_states", "observations", "next_observations", "actions", "rewards", "dones"):
-            np.testing.assert_array_equal(a[key], b[key])
