@@ -1,0 +1,71 @@
+{
+  "computed_at": "2026-09-15T03:23:28.080961+00:00",
+  "consultation_exposure": {
+    "fits": 0,
+    "native_episodes": 0,
+    "team_ticks": 0,
+    "optimizer_updates": 0
+  },
+  "consolidate_park": {
+    "new_fits": 0,
+    "new_native_calls": 0,
+    "new_optimizer_updates": 0,
+    "support_cost": "UNKNOWN; nonzero archival/maintenance labor is not presumed free"
+  },
+  "one_reference_b": {
+    "fits": 1,
+    "learning_rate": 0.0003,
+    "training_episodes": 4096,
+    "evaluation_panels": 3,
+    "evaluation_episodes_per_panel": 64,
+    "evaluation_episodes": 192,
+    "training_team_ticks": 1048576,
+    "evaluation_team_ticks": 49152,
+    "total_team_ticks": 1097728,
+    "two_episode_rollouts": 2048,
+    "adam_backward_calls": 8192,
+    "replayed_actor_agent_steps": 20971520,
+    "replayed_critic_rows": 4194304,
+    "final_snapshots": 1,
+    "private_loads": 3,
+    "lr_times_steps": 2.4576,
+    "learning_rate_scale_is_displacement_bound": false,
+    "native_reference_seconds": 1192.29,
+    "native_reference_is_guarantee": false,
+    "support_and_provider_cost": "UNKNOWN",
+    "native_wall_plan_seconds": 1400,
+    "support_plan_seconds": 3600,
+    "combined_plan_seconds": 5000,
+    "planning_not_hard_cap": true,
+    "extra_scientific_retries": 0,
+    "extra_native_smokes_or_pilots": 0
+  },
+  "baseline_design_only": {
+    "new_fits": 0,
+    "native_episodes": 0,
+    "model_constructions": 0,
+    "optimizer_updates": 0,
+    "research_code_edits": 0,
+    "deliverables": "one source-grounded matching assessment and prospective baseline card/work proposal, or a precise incompatibility with smallest correction",
+    "support_cost": "UNKNOWN; finite static design is not presumed cheap"
+  },
+  "current_pair_actual": {
+    "originals": 2,
+    "failed_numerical_attempts": 0,
+    "total_team_ticks": 2195456,
+    "adam_updates": 16384,
+    "native_wall_sum_seconds": 2381.37,
+    "aggregate_cpu_seconds": 2379.43,
+    "enclosing_whole_seconds": 1193,
+    "full_support_provider_lifetime_cost": "UNKNOWN"
+  },
+  "recent_two_objects_native_subset": {
+    "objects": [
+      "ACVC_CLUSTER_EXTENDED_EXPOSURE_B01",
+      "ACVC_CLUSTER_FIXED_LR_PAIR_B01"
+    ],
+    "original_fits": 3,
+    "native_wall_sum_seconds": 3611.95,
+    "not_lifetime_cost": true
+  }
+}
