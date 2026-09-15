@@ -133,3 +133,23 @@ FLAT queues: not launched (dependent work, see the pre-launch record).
   queue markers, task log; `learner_logs/`/`evaluation_logs/` were empty on the node)
   under [fits/](fits/): summary sha256 772203 `20cba726…c19f`, 772303 `a32d5465…1969`,
   772403 `2615b720…e47f`.
+
+### 2026-09-15 13:02Z — FLAT arm released and launched (Portfolio correction confirmed)
+
+- `portfolio:cross_direction` confirmed option 1 (FLAT at `k = 10`) at 12:55Z
+  ([decision](../../../portfolio/decisions/2026-09-15-fsd-flat-k-correction.md),
+  `PRO_FINAL / OWNER_DELEGATED`); the FLAT arm is independent work from that time.
+  Same worktree and launch sha `dc4dbdfcd`; one queue element per block
+  (`BLOCK.sh <W> <seed> FLAT`, single token), admission inside the supervised command.
+- Concurrency: measured D1280 peak RSS is about 2.8 GiB per fit, so a fourth concurrent
+  fit is admitted beside the three I1280 elements (available 6,027 MiB before launch,
+  admission 5.86 GiB); the remaining elements follow as running fits end, at most four
+  concurrent. This is a technical choice, not a scientific parameter.
+- FLAT launch record:
+
+  | Handle | Launch (UTC) | Remote pid | Admission |
+  | --- | --- | ---: | --- |
+  | fsd-bi-b01-772203-FLAT | 2026-09-15T13:02:49Z | 3731471 | passed, 6,287,306,752 B available |
+
+  Pending elements in launch order: 772503-D1280, 772303-FLAT, 772403-FLAT, 772503-I1280,
+  772503-FLAT (each `fsd-bi-b01-<seed>-<arm>`).

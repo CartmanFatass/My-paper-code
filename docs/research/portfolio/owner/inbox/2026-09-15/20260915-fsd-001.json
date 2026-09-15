@@ -92,7 +92,7 @@
     "source": "docs/research/portfolio/pro_packets/20260915_fsd_baseline_interruption_investment/REQUEST.json"
   },
   "starred": true,
-  "approval_correction": "FLAT k=rollout+1 在本栈不可运行（递归 chunk 长度=k），runner 取 k=10 与 D 臂一致，记录于卡片 §8",
+  "approval_correction": "FLAT k=10 的真实原因是匹配梯度截断律；开关 k=rollout+1 是可运行的",
   "execution_history": [
     {
       "at": "2026-09-15T11:25:28+00:00",
@@ -102,6 +102,15 @@
       "state": "applied",
       "summary": "Portfolio 选 S（12 次拟合，四块，15 rollout，三面板）并作出修正：FLAT 走 off 路线+mappo 开关、GAP 标签、重要性/不确定性分开读、4+2 累积；已在 codex/fsd db0b11bd8 实现，Opus 审阅中，未启动。",
       "correction": "FLAT k=rollout+1 在本栈不可运行（递归 chunk 长度=k），runner 取 k=10 与 D 臂一致，记录于卡片 §8"
+    },
+    {
+      "at": "2026-09-15T13:04:37+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260915_fsd_flat_k_correction/archive/RESPONSE.md",
+      "record": "docs/research/portfolio/pro_packets/20260915_fsd_flat_k_correction/INTAKE.md",
+      "state": "applied",
+      "summary": "Portfolio 确认修正选项 1：FLAT 保持 k = 10（与 D 臂相同的截断 BPTT 块长），先前“不可运行”的解释撤回；GAP_D/GAP_I 只是未调参的跨信息包差，不是 §11.7 headroom；D1280/I1280 与 SI1280 主量不受影响；四个 FLAT 拟合按 dc4dbdfcd 逐块启动。",
+      "correction": "FLAT k=10 的真实原因是匹配梯度截断律；开关 k=rollout+1 是可运行的"
     }
   ]
 }
