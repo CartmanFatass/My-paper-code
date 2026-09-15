@@ -1,4 +1,4 @@
-# Root handoff — Claude hub overnight run (2026-09-15, refreshed 15:15 PDT)
+# Root handoff — Claude hub overnight run (2026-09-15, refreshed 15:40 PDT)
 
 Owner instruction 04:27 PDT: rest until 09:00 PDT; the hub runs the FSD fits overnight and
 reports at the 09:00 cron check-in. Two directions driven: FSD and ACVC. Owner 05:45 PDT:
@@ -24,7 +24,7 @@ under `docs/Claude_docs/changes/`). Nothing here changes lifecycle, priority or 
   Remote worktree and task records reclaimed (`CLEANUP.json`, `task_records/`).
 - Direction handoff: `docs/research/candidates/flexible_skill_duration/HANDOFF_2026-09-15_baseline_interruption.md`.
 
-## ACVC — transfer result reviewed (B02 selected); one-fit B02 investment question with Portfolio
+## ACVC — B02 granted (G2) and launched; one live producer
 
 - Block 2 complete and intaken (D2 = F−M −.03919 J, M_ABOVE_MEI; F−C and F−own-dwell UP in
   both blocks; pooled F−M −.0079 J, df = 1 interval [−.406, +.390]). `em:acvc:convergence`
@@ -60,6 +60,13 @@ under `docs/Claude_docs/changes/`). Nothing here changes lifecycle, priority or 
   `docs/research/portfolio/pro_packets/20260915_acvc_m_deployment_transfer_b02_investment/`,
   TASK `92c5957c7`, HANDOFF `4ebfad9df`, references at `74d49807b` / main `3580587ac`).
   Transport: one Send at 22:13:13Z (first call errored review_user_message_not_observed_after_click with persisted sendAttempted=true; the identical verifyExisting observation confirmed the single send, user message 721f8b05-4e0f-4a28-a556-d778056ebfc6, operation 5b50fcbb-a76b-4427-b9b4-02bb6fd65252), matched labels Latest / Pro, tab fee2561b-aa1e-43aa-905d-44dc1a80dd76 open for phase 2, prompt sha256 9ca41561260fdaa363fe5018dad2fe6fd13a7ced3fc4527d980c23fe5b1d9728; the registry binding's history lists the one-block replication round as its last request (the transfer-investment round has an archive folder but no history row), state ARCHIVED before this send.
+- Portfolio granted G2 at 22:20Z (`PRO_FINAL / OWNER_DELEGATED`; decision
+  `decisions/2026-09-15-acvc-m-deployment-transfer-b02-grant.md`, ledger row 34, owner item
+  `20260915-acvc-007`; one Send, COMPLETE, ARCHIVED, tab closed). L0 `codex/acvc 6a3967065`
+  reviewed by Opus (accept, no material finding), 16 tests green on the node at launch sha
+  `c006c0b24` (ledger row 35).
+- **Live handle `acvc-transfer-m-b02-28631-c006c0b24`**: launched 2026-09-15T22:34:13Z through hmasd-experiment-operator, remote pid 3754217, admission passed at 22:34:25Z (15,613,599,744 B physical and effective available, floor 4 GiB), running at uptime 15 s with tmux active, stderr.log 0 bytes, stdout advancing (rollout 48 after 23.06 s process wall), expected end about 22:54Z Plan about 1,200 s, not a cap.
+  Record `docs/research/candidates/acvc/evidence/m_deployment_transfer_b02_20260915/EXECUTION.md`.
 - Direction handoff: `docs/research/candidates/acvc/HANDOFF_2026-09-15_post_cm_decision.md`.
 
 ## Transport and registry
@@ -75,14 +82,10 @@ under `docs/Claude_docs/changes/`). Nothing here changes lifecycle, priority or 
 
 ## Next session
 
-No live handles. FSD: ACTIVE-idle, nothing to do. ACVC: the one-fit B02 investment request to
-`portfolio:cross_direction` (packet
-`docs/research/portfolio/pro_packets/20260915_acvc_m_deployment_transfer_b02_investment/`) is
-the pending step: GitHub readback of its response path, transport phase 2 (archive, registry
-ARCHIVED, tab close), intake as `PRO_FINAL / OWNER_DELEGATED` with a decision record and a P1
-`portfolio` item. If G2: B02 binding change and focused test, independent review, technical
-acceptance, fresh admission, launch only through `hmasd-experiment-operator` (plan about
-1,200 s). No launch is authorized before that.
+One live handle: ACVC `acvc-transfer-m-b02-28631-c006c0b24` on the WSL node (expected end about
+20 minutes after launch). FSD: ACTIVE-idle, nothing to do. ACVC next: observe, collect, reduce,
+E0/intake/brief with the per-instance display beside B01, preserve, reclaim (first resume step in
+the direction handoff). The object ends after this one original; no further launch is authorized.
 
 ## Integration state
 
