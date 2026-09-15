@@ -1,0 +1,48 @@
+**Select G: grant exactly one fresh M fit and its three final panels, with the necessary bounded implementation, verification, execution, intake and preservation support.** This purchases the already selected local deployment-transfer question, not another C/M replication or a renewed series. ACVC remains ACTIVE/MEDIUM/recasts2, lowest sequencing priority; the concluded two-block claim is unchanged. [Transfer decision][S1]; [applied intake][S2].
+
+## Why this purchase
+
+The strongest support is the retained internal increment: F−C was +.03474955/+ .04749625 J and F−own-dwell +.01222138/+.03171376 across the two blocks. The strongest counterweight is competitive failure to recur: F(C)−M changed from +.02343965 to −.03919008 J; block 2 has 49/64 adverse worlds, worst −.19628655 J. Its pooled mean −.00787522 and broad df1 interval do not establish equivalence or stable M superiority. These observations motivate testing F on M; they do not predict portability. [B02 evidence, contrasts/accumulation][S6].
+
+**N is the strongest expenditure-saving alternative.** It preserves the useful C-side asset without another one-instance result or new evaluator maintenance. I prefer G because the same fitted M supplies all three panels, directly distinguishing added value from harm and a simpler zero-command alternative. M may already respond adequately or respond poorly to substituted commands. The documented narrow integration makes this a reasonable qualitative investment, not proven positive information value. Idle capacity alone would not justify it. No second instance, crossed comparison or tuning is purchased. [Prior decision, unlisted candidate/cost table][S4]; [card §§1–5][S3].
+
+## Exact exposure and reading
+
+Retain **MASTER 28531 / evaluation namespace 38531**, the frozen block-2 M recipe and pinned upstream dependency, private108 actor/training-only critic136, five-UAV/fifty-user cluster host, true H256 termination and native J=S/256. Preserve the bounded-action adapter, GAE, ValueNorm and separate Adam optimizers. No historical checkpoint, C fit or training through F/dwell is included. [Card §§2–5,7][S3].
+
+The one original trains **4,096 episodes / 1,048,576 team ticks**, 2,048 rollouts and 8,192 PPO minibatches, with 8,192 actor plus 8,192 critic optimizer calls. One final snapshot supplies three loads and exactly one M, one F(M) and one own-dwell(M) panel: 192 evaluation episodes / 49,152 ticks, **1,097,728 total ticks**. The training-instance count is one; loading constructions must be reported separately. There is no nested search. [Card §4][S3]; [decision, Work][S1].
+
+Preserve the unrounded primary **T_F=mean64[J(F(M))−J(M)]**: above +.01 J is TRANSFERS; inclusive ±.01 is WITHIN_MEI; below −.01 is ADVERSE; a missing/invalid operand makes its contrast INCOMPLETE, without imputation. Report T_D and paired U=F(M)−own-dwell(M), all absolute scores, world differences, signs and extrema. U's uncertainty comes from its paired vector, not added SEs. Conditional world SD/SE is not training-population precision. **No accumulation with earlier blocks.** [Card §§3,7][S3].
+
+Positive T_F with weak or negative U does not prefer F over dwell. Small/adverse results limit this fitted-policy portability observation, not the preserved C-side evidence. No realized opportunities would describe a panel without substitutions, not establish beneficial retracing. No result discards C, compares F(C) with F(M), supplies tuned headroom, identifies a pure retrace/memory/K/N mechanism, establishes equivalence or stable superiority, changes defaults or promotes C. [Transfer decision, interpretations][S1]; [DIRECTION, top sections][S7].
+
+## Implementation and execution
+
+The hub implements the card's runner **≤300 lines**, narrowly wrapped evaluator (60–100 lines is an estimate), and focused tests. Protected M training, Binding numerical conventions, upstream source and shared code remain unchanged. Preserve the four accepted check groups: training/final identity and early label binding; synthetic no-op identity plus actual substitution semantics; private-state/RNG isolation; complete primary publication and counter meaning. These are required checks, not completed acceptance. Independent Opus review and resolution of material findings precede launch. [Card §§5,7][S3]; [intake, acceptance][S2].
+
+Each wrapped episode owns a fresh Binding and private history. Feed back the submitted command while Binding observes physical displacement; retain one actor call/draw per tick and hold zero. No panel borrows another's event mask or mutable state. Produce the unmodified M panel once through the unchanged evaluator. No native pilot or duplicate panel is authorized. [S1]; [S3].
+
+At the pinned snapshot, FSD's twelve-fit stage is complete and both directions have no live producer. **Schedule ACVC as the next ready numerical job after technical acceptance**, without waiting for a new FSD result or approval. Recheck actual node resources; reported idleness is not admission. Use remote-first WSL, exact committed detached source, CPU FP32/single-thread numerics, fresh ≥4GiB physical/effective memory admission joined by `&&`, experiment-operator launch, detached supervision and truthful observation/terminal receipts. Existing priorities still govern any later contention. [Root handoff][S12]; [snapshot rows][S11]; [card §5][S3].
+
+**About 2,600 seconds is an adjustable ordinary native-wall plan, not a cap.** Its basis is M's measured 2,427.41-second wall, 2,394.46-second CPU and 585,504-KiB peak with one panel. Added-panel/Binding overhead and complete support costs remain unknown; under 1GiB is plausible, not verified. Neither the old 8,114.79-second two-block sum nor FSD's 45,401.07 seconds is available credit. Record complete costs without inventing a speedup, support ceiling or profiling prerequisite. [B02 costs][S6]; [S12]; [specification §11.8.1][S9].
+
+Collect and reduce through the object's runner; complete scientific intake/review responses and preservation. End after the one original and required panels, regardless of outcome, or at a concrete dependent integrity/resource limitation. **Zero automatic replacements, retries, second fits, extensions or extra panels.** Reconcile uncertain acceptance before further action; retain independently valid facts. [S1–S3]; [specification §11.8.7][S9].
+
+## Future delegation and access limits
+
+The supplied 12:57 PDT instruction includes experimental validation within advancement; it does **not establish a blanket new numerical allowance or renew the ended grant**. The recorded handoff explicitly retains this investment question. Future fits genuinely outside existing allocation **and standing delegation** remain Portfolio investment questions; ordinary experiments already within DM delegation do not require per-experiment approval. Being outside one completed grant alone does not erase broader existing authority. This decision supplies this fit only, adds no approval layer or Root ratification, and changes no peer lifecycle. [Ended grant, stopping][S5]; [handoffs][S8][S12]; [specification §8.1][S9]; [programme §5][S10].
+
+All twelve manifest paths were accessed at their linked revisions, completely or in the requested sections. No decision-critical gap remains. The full owner instruction in unlisted CLAUDE.md, implementation, raw archives and live resource state were not independently audited; owner wording is supplied by the task and recorded handoff. No code, tests, models, profiling or experiments were executed here. FSD stays ACTIVE-idle; FOLR/TRDL handoffs and prior evidence remain untouched.
+
+[S1]: https://github.com/CartmanFatass/My-paper-code/blob/224e4e53569671b76dbca2e63f6513deb31834ec/docs/research/candidates/acvc/pro_packets/20260915_m_deployment_transfer_convergence/archive/RESPONSE.md
+[S2]: https://github.com/CartmanFatass/My-paper-code/blob/224e4e53569671b76dbca2e63f6513deb31834ec/docs/research/candidates/acvc/pro_packets/20260915_m_deployment_transfer_convergence/INTAKE.md
+[S3]: https://github.com/CartmanFatass/My-paper-code/blob/224e4e53569671b76dbca2e63f6513deb31834ec/docs/research/candidates/acvc/ACVC_M_DEPLOYMENT_TRANSFER_B01_PROSPECTIVE_CARD_20260915.md
+[S4]: https://github.com/CartmanFatass/My-paper-code/blob/224e4e53569671b76dbca2e63f6513deb31834ec/docs/research/candidates/acvc/pro_packets/20260915_post_block2_convergence/archive/RESPONSE.md
+[S5]: https://github.com/CartmanFatass/My-paper-code/blob/224e4e53569671b76dbca2e63f6513deb31834ec/docs/research/portfolio/pro_packets/20260915_acvc_one_block_replication_investment/archive/RESPONSE.md
+[S6]: https://github.com/CartmanFatass/My-paper-code/blob/224e4e53569671b76dbca2e63f6513deb31834ec/docs/research/candidates/acvc/ACVC_CLUSTER_MAPPO_COMPARISON_B02_RESULT_EVIDENCE_20260915.md
+[S7]: https://github.com/CartmanFatass/My-paper-code/blob/224e4e53569671b76dbca2e63f6513deb31834ec/docs/research/candidates/acvc/DIRECTION.md
+[S8]: https://github.com/CartmanFatass/My-paper-code/blob/224e4e53569671b76dbca2e63f6513deb31834ec/docs/research/candidates/acvc/HANDOFF_2026-09-15_post_cm_decision.md
+[S9]: https://github.com/CartmanFatass/My-paper-code/blob/224e4e53569671b76dbca2e63f6513deb31834ec/docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md
+[S10]: https://github.com/CartmanFatass/My-paper-code/blob/969fac75a04379c4ea0741b9ced0234aa8079323/docs/research/portfolio/TWO_AXIS_RESEARCH_PROGRAMME_20260914.md
+[S11]: https://github.com/CartmanFatass/My-paper-code/blob/880c5ba4618b761dde535f76406e8ed05b63c18b/docs/research/portfolio/PORTFOLIO.md
+[S12]: https://github.com/CartmanFatass/My-paper-code/blob/880c5ba4618b761dde535f76406e8ed05b63c18b/docs/research/portfolio/handoffs/2026-09-15-claude-hub-overnight.md
