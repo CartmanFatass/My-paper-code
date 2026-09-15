@@ -1,0 +1,712 @@
+{
+  "source": "168e612956d098c017fe67377eadeb68589bf81d",
+  "source_tracked_or_untracked_changes": "",
+  "remote_worktree": "/home/wu/hmasd-worktrees/fsd-interruption-batch-b01-20260914",
+  "resolved_worktree": "/home/wu/hmasd-worktrees/fsd-interruption-batch-b01-20260914",
+  "worktree_registered": true,
+  "other_worktree_paths": [
+    "/home/wu/projects/HMASD",
+    "/home/wu/hmasd-worktrees/acvc-actual-upper-3918fc97",
+    "/home/wu/hmasd-worktrees/acvc-actual-upper-c4c46e50",
+    "/home/wu/hmasd-worktrees/acvc-fresh-dense-c01-3fd9062d5",
+    "/home/wu/hmasd-worktrees/acvc-r02-3831a66d",
+    "/home/wu/hmasd-worktrees/acvc-upper-prefix-cost-782f6965",
+    "/home/wu/hmasd-worktrees/acvc-upper-prefix-cost-b18a098d",
+    "/home/wu/hmasd-worktrees/cbsc-approved-repair-8003b96bd-20260905",
+    "/home/wu/hmasd-worktrees/cbsc-b1-r06-2aaf43a8a8-01",
+    "/home/wu/hmasd-worktrees/cbsc-b1-r06-a138b01534-01",
+    "/home/wu/hmasd-worktrees/cbsc-b1-r07-b230e476ec-01",
+    "/home/wu/hmasd-worktrees/cbsc-b1-venv-5a1b1b7fe-01",
+    "/home/wu/hmasd-worktrees/cbsc-b1-venv-7508b8b72-01",
+    "/home/wu/hmasd-worktrees/cbsc-defect8-4f8fe0f6e",
+    "/home/wu/hmasd-worktrees/cbsc-direct-return-b02-2c9254f70-20260905",
+    "/home/wu/hmasd-worktrees/cbsc-direct-return-b03-65bf24865-20260905",
+    "/home/wu/hmasd-worktrees/cbsc-local-acquisition-p16-20260907",
+    "/home/wu/hmasd-worktrees/cbsc-opportunity-credit-b04-20260906",
+    "/home/wu/hmasd-worktrees/cbsc-opportunity-credit-b05-20260907",
+    "/home/wu/hmasd-worktrees/cbsc-p47-minimal-prefix-20260908",
+    "/home/wu/hmasd-worktrees/cbsc-p47-train51-20260908",
+    "/home/wu/hmasd-worktrees/cbsc-post-a03-acquisition-proposal-20260907",
+    "/home/wu/hmasd-worktrees/cbsc-r07-formal-profile-ce94f5afd-01",
+    "/home/wu/hmasd-worktrees/cbsc-r07-formal-profile-f15b77ecc-01",
+    "/home/wu/hmasd-worktrees/cbsc-r07-resource-profile-261ca37e28-01",
+    "/home/wu/hmasd-worktrees/cbsc-system-runtime-a01-20260907",
+    "/home/wu/hmasd-worktrees/cbsc-system-runtime-a02-20260907",
+    "/home/wu/hmasd-worktrees/cbsc-system-runtime-a03-20260907",
+    "/home/wu/hmasd-worktrees/cbsc-test-only-initial-prefix-20260908",
+    "/home/wu/hmasd-worktrees/cbsc-test-only-native-replay-20260908",
+    "/home/wu/hmasd-worktrees/cbsc-zero-cpu-55e405a2",
+    "/home/wu/hmasd-worktrees/cm-n3-folr-b04-20260904-a1",
+    "/home/wu/hmasd-worktrees/cm-ucope-native-return-b01-20260907",
+    "/home/wu/hmasd-worktrees/crto-b02-2b667289",
+    "/home/wu/hmasd-worktrees/crto-b03-fd76e7d7",
+    "/home/wu/hmasd-worktrees/crto-b04-c53f3bb1",
+    "/home/wu/hmasd-worktrees/crto-b05-s1-c53f3bb1",
+    "/home/wu/hmasd-worktrees/crto-b05-s2-c53f3bb1",
+    "/home/wu/hmasd-worktrees/crto-b06-s1-7cad2758",
+    "/home/wu/hmasd-worktrees/crto-b06-s2-7cad2758",
+    "/home/wu/hmasd-worktrees/crto-b07-s1-5a4b5c20",
+    "/home/wu/hmasd-worktrees/crto-b07-s2-5a4b5c20",
+    "/home/wu/hmasd-worktrees/crto-raw-phase-a01-c8247c2d",
+    "/home/wu/hmasd-worktrees/crto-raw-phase-probe-c8247c2d-02",
+    "/home/wu/hmasd-worktrees/crto-resume-a01-8d1c5978-r02",
+    "/home/wu/hmasd-worktrees/dish-b01-c03-b0c63b69",
+    "/home/wu/hmasd-worktrees/dish-b01-c04-e0541d0c",
+    "/home/wu/hmasd-worktrees/dish-b01-c04-e15c1794",
+    "/home/wu/hmasd-worktrees/dish-b04-ef23d92",
+    "/home/wu/hmasd-worktrees/dish-b05-seed101-20260906",
+    "/home/wu/hmasd-worktrees/dish-b06-seed113-20260907-run01",
+    "/home/wu/hmasd-worktrees/dish-b07-seed127-20260908-run01",
+    "/home/wu/hmasd-worktrees/dish-certificate-a04-d543146c",
+    "/home/wu/hmasd-worktrees/dish-endpoint-a03-818b2566",
+    "/home/wu/hmasd-worktrees/dish-ground-a02-dd0e01bb",
+    "/home/wu/hmasd-worktrees/dish-prefix-a01-bfe4952b",
+    "/home/wu/hmasd-worktrees/dish-witness-3c0ed5c",
+    "/home/wu/hmasd-worktrees/dish_a01_ffa23bf8d",
+    "/home/wu/hmasd-worktrees/dish_a02_3f4d447f6",
+    "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001",
+    "/home/wu/hmasd-worktrees/frrie-a01-check-b41a6ba7",
+    "/home/wu/hmasd-worktrees/frrie-a03-50283c9cf",
+    "/home/wu/hmasd-worktrees/frrie-a04-d6844bb25f6f",
+    "/home/wu/hmasd-worktrees/frrie-a05-first-exception-p27-43eec21e",
+    "/home/wu/hmasd-worktrees/frrie-a05-inert-p27-66106b3f2",
+    "/home/wu/hmasd-worktrees/frrie-a06-fatal-callpath-p31-43eec21e",
+    "/home/wu/hmasd-worktrees/frrie-a07-scheduled-stack-p35-43eec21e",
+    "/home/wu/hmasd-worktrees/frrie-contact-r02-36b538ba",
+    "/home/wu/hmasd-worktrees/frrie-contact-r02-diag-36b538ba",
+    "/home/wu/hmasd-worktrees/frrie-contact-r02-r04-732cc2b2",
+    "/home/wu/hmasd-worktrees/frrie-contact-r02-r05-5e6d47f0",
+    "/home/wu/hmasd-worktrees/frrie-contact-r06-72b1bd00",
+    "/home/wu/hmasd-worktrees/frrie-contact-r07-10ae9781",
+    "/home/wu/hmasd-worktrees/frrie-contact-r08-58710424",
+    "/home/wu/hmasd-worktrees/frrie-contact-r09-43eec21e",
+    "/home/wu/hmasd-worktrees/frrie-contact-repair-check-732cc2b2",
+    "/home/wu/hmasd-worktrees/frrie-native-repair-801511a18",
+    "/home/wu/hmasd-worktrees/frrie-p47-input-factory-20260908",
+    "/home/wu/hmasd-worktrees/frrie-p47-native-boundary-20260908",
+    "/home/wu/hmasd-worktrees/frrie-p59-input-factory-20260908",
+    "/home/wu/hmasd-worktrees/frrie-r04-a01-b41a6ba7",
+    "/home/wu/hmasd-worktrees/frrie-r06-check-72b1bd00",
+    "/home/wu/hmasd-worktrees/frrie-r06-check-eb5a4547",
+    "/home/wu/hmasd-worktrees/frrie-r06-import-f0bfe7a5",
+    "/home/wu/hmasd-worktrees/frrie-r07-check-10ae9781",
+    "/home/wu/hmasd-worktrees/frrie-r08-check-58710424",
+    "/home/wu/hmasd-worktrees/frrie-r09-check-43eec21e",
+    "/home/wu/hmasd-worktrees/frrie-r09-segfault-a01-43eec21e-20260905",
+    "/home/wu/hmasd-worktrees/frrie-r09-segfault-a02-43eec21e-20260906",
+    "/home/wu/hmasd-worktrees/frrie-r09-system312-offline-p21-43eec21e",
+    "/home/wu/hmasd-worktrees/fsd-e4-census-bc3eaeecf",
+    "/home/wu/hmasd-worktrees/fsd-native-renewal-a01-p21-01770d8dd",
+    "/home/wu/hmasd-worktrees/fsd-native-renewal-b01-p38-b3f86bb28",
+    "/home/wu/hmasd-worktrees/fsd-native-renewal-b02-p43-d961c5826",
+    "/home/wu/hmasd-worktrees/fsd-native-renewal-b03-p47-f09aa00ba",
+    "/home/wu/hmasd-worktrees/fsd-uav-b02-p72-08199a932",
+    "/home/wu/hmasd-worktrees/fsd_e3_large_d0_seed1_20260904_01",
+    "/home/wu/hmasd-worktrees/fsd_e3_large_d0_seed2_20260905_01",
+    "/home/wu/hmasd-worktrees/fsd_e3_large_d0_seed3_20260905_01",
+    "/home/wu/hmasd-worktrees/fsd_e3_large_d2_seed1_20260905_01",
+    "/home/wu/hmasd-worktrees/fsd_e3_large_d2_seed2_20260905_01",
+    "/home/wu/hmasd-worktrees/fsd_e3_large_d2_seed3_20260905_01",
+    "/home/wu/hmasd-worktrees/fsd_e3_medium_d0_seed1_20260904_01",
+    "/home/wu/hmasd-worktrees/fsd_e3_medium_d0_seed1_20260904_02",
+    "/home/wu/hmasd-worktrees/fsd_e3_medium_d0_seed2_20260904_01",
+    "/home/wu/hmasd-worktrees/fsd_e3_medium_d0_seed3_20260904_01",
+    "/home/wu/hmasd-worktrees/fsd_e3_medium_d2_seed1_20260904_01",
+    "/home/wu/hmasd-worktrees/fsd_e3_medium_d2_seed2_20260904_01",
+    "/home/wu/hmasd-worktrees/fsd_e3_medium_d2_seed3_20260904_01",
+    "/home/wu/hmasd-worktrees/lcac-b01-26e23ff3",
+    "/home/wu/hmasd-worktrees/mgtap_b01_4f65eefb1b15e44b42d694376630fba0c230cc6c",
+    "/home/wu/hmasd-worktrees/mgtap_b02_20260904",
+    "/home/wu/hmasd-worktrees/mgtap_b03_20260904",
+    "/home/wu/hmasd-worktrees/n3-a05-approved-20260905",
+    "/home/wu/hmasd-worktrees/n3-b02-20260905",
+    "/home/wu/hmasd-worktrees/n3-b03-20260906",
+    "/home/wu/hmasd-worktrees/native-call-dispatch-20260908",
+    "/home/wu/hmasd-worktrees/rcle-a02-abcc376",
+    "/home/wu/hmasd-worktrees/rcle-b01-4d40621",
+    "/home/wu/hmasd-worktrees/rcle-b02-8ad01cb",
+    "/home/wu/hmasd-worktrees/route_smoke_20260904_01",
+    "/home/wu/hmasd-worktrees/ucope-reactive-renewal-b01-8901-831b83c15",
+    "/home/wu/hmasd-worktrees/ucope-shared-return-b02-seed6401-20260907",
+    "/home/wu/hmasd-worktrees/ucope-shared-return-b03-20260907",
+    "/home/wu/hmasd-worktrees/ucope-shared-return-b04-20260907",
+    "/home/wu/hmasd-worktrees/ucope-uav-motion-prefix-b01-p21-20260907",
+    "/home/wu/hmasd-worktrees/ucope-uav-motion-prefix-b01-p24-20260907",
+    "/home/wu/hmasd-worktrees/ucope-uav-motion-prefix-b02-p47-20260908",
+    "/home/wu/hmasd-worktrees/ucope-uav-motion-prefix-b03-p57-check-20260908",
+    "/home/wu/hmasd-worktrees/ucope-uav-motion-prefix-b04-p61-check-20260908",
+    "/home/wu/hmasd-worktrees/ucope-uav-renewal-b01-p69-check-20260908",
+    "/home/wu/hmasd-worktrees/ucope-uav-renewal-b03-7501-p72-20260908",
+    "/home/wu/hmasd-worktrees/ucope-uav-renewal-b03-p72-check-20260908",
+    "/home/wu/hmasd-worktrees/ucope_root_target_fit_r01_997f49c3_01",
+    "/home/wu/hmasd-worktrees/ucope_root_target_fit_r01_997f49c3_02",
+    "/home/wu/hmasd-worktrees/vnfc-causal-r03-9c41484a",
+    "/home/wu/hmasd-worktrees/vnfc-e01-60d21ad7d",
+    "/home/wu/hmasd-worktrees/vnfc-mb1024-r02-ce80bc14-20260904-01",
+    "/home/wu/hmasd-worktrees/vnfc_b01_check_33e08f440",
+    "/home/wu/hmasd-worktrees/vnfc_b01_check_33e08f440_02",
+    "/home/wu/hmasd-worktrees/vnfc_b01_depmode_6fc574561",
+    "/home/wu/hmasd-worktrees/vnfc_b01_formal_33e08f440_01",
+    "/home/wu/hmasd-worktrees/vnfc_b01_formal_33e08f440_02",
+    "/home/wu/hmasd-worktrees/vnfc_b01_seed02_33e08f440_01",
+    "/home/wu/hmasd-worktrees/vsp02-tpc-b01-p15-s1103-a1",
+    "/home/wu/hmasd-worktrees/vsp02-tpc-b01-p17-s1117-a1",
+    "/home/wu/hmasd-worktrees/vsp03-b01-seed1-r01",
+    "/home/wu/hmasd-worktrees/vsp03-b01-seeds23-r01",
+    "/home/wu/hmasd-worktrees/vsp03-b02-p09-00ebefa5823dbb41e64aed11b90ba26a8ff97020",
+    "/home/wu/hmasd-worktrees/vsp03-b03-p54-4eb8a36b9184633f5e28eff999a99f2dbc948040",
+    "/home/wu/hmasd-worktrees/vsp03-b04-p64-b5d605bf4f39b5ab18f01c98e04dc07e53764354",
+    "/home/wu/hmasd-worktrees/vsp03-b04-p67-828da00343e5036a4de93ccf1ec636e3b8c777b7",
+    "/home/wu/hmasd-worktrees/vspc1-b01-e2f00991f",
+    "/home/wu/hmasd-worktrees/vspc1-b01-e7e574b44",
+    "/home/wu/hmasd-worktrees/vspc1-native-hold-value-b01-8101-65c89368ab0f",
+    "/home/wu/hmasd-worktrees/vspc1-native-hold-value-b02-8102-0ec208899f5e",
+    "/home/wu/hmasd-worktrees/vspc1-native-hold-value-b03-8201-7a8ed3aa5d25",
+    "/home/wu/hmasd-worktrees/vspc1-native-hold-value-b04-8202-a33a3820fe9d",
+    "/home/wu/hmasd-worktrees/vspc1-native-hold-value-b04-p67-8202",
+    "/home/wu/hmasd-worktrees/vspc1-native-hold-value-b05-8301-bda90e1db76a",
+    "/home/wu/hmasd-worktrees/vspc1-native-hold-value-b08-8401-e9a05af5d51d",
+    "/home/wu/hmasd-worktrees/vspc1-native-hold-value-b09-8402-4c9dc8b3de9b",
+    "/home/wu/hmasd-worktrees/vspc1-reactive-queues-b01-476748835",
+    "/home/wu/hmasd-worktrees/vspc1-service-allocation-b01-completion402-20260907",
+    "/home/wu/hmasd-worktrees/vspc1-service-allocation-b01-seed402-20260907",
+    "/home/wu/hmasd-worktrees/vspc1_b02_90c730a098d1"
+  ],
+  "worktree_disk_file_bytes": 45723277,
+  "worktree_file_count": 2766,
+  "raw_files": [
+    {
+      "member": "772003_D128/admission.json",
+      "bytes": 504,
+      "sha256": "d979f968dbc05c25dd6ce6568182d495e75775bbba6efb7f6e6757bb58049bc8"
+    },
+    {
+      "member": "772003_D128/manifest.json",
+      "bytes": 1806,
+      "sha256": "5892a9aac13e9ece9524f3c6de42f7517b6df3634af3b8456ad3632f4cd5d59d"
+    },
+    {
+      "member": "772003_D128/summary.json",
+      "bytes": 49761,
+      "sha256": "9b80baad884454e0423f4f70237a4030982de413dcf8b7ef9e24620c48986447"
+    },
+    {
+      "member": "772003_D128/training.jsonl",
+      "bytes": 22331,
+      "sha256": "6b2150884e20719a113c617055a19f60f0af4111403bce107ca79e15653a8a99"
+    },
+    {
+      "member": "772003_D128/whole_command_resources.json",
+      "bytes": 107,
+      "sha256": "f6076d62913edb3ad8c35c1218cc5958438df3d824dca0b579752543fbf95053"
+    },
+    {
+      "member": "fsd-ib-b01-772003-D128/exit_code",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "member": "fsd-ib-b01-772003-D128/pid",
+      "bytes": 8,
+      "sha256": "b39e920e29eda4db759d5860e14bec54d2ae23b469bc044a4b8fb8cd05cfd31e"
+    },
+    {
+      "member": "fsd-ib-b01-772003-D128/runner.sh",
+      "bytes": 1085,
+      "sha256": "6de0ba6946780c7e858f32666849c693981ff65f1f4f2efdb941b5080635ce58"
+    },
+    {
+      "member": "fsd-ib-b01-772003-D128/start_time",
+      "bytes": 11,
+      "sha256": "076cb5288436eb32d9e1ac01b8fb6df058718d1ff0963278e09f594f2f137e84"
+    },
+    {
+      "member": "fsd-ib-b01-772003-D128/status",
+      "bytes": 9,
+      "sha256": "161069badc0cc23058b13d7c068e45205f4333aa15fd78db9d68f5c9f1ae8983"
+    },
+    {
+      "member": "fsd-ib-b01-772003-D128/task.log",
+      "bytes": 753,
+      "sha256": "796d61f3bc0edee6c9bc9d07d74302b27f65d92ad6996a1a44437bec4c14e77a"
+    },
+    {
+      "member": "772003_D1280/admission.json",
+      "bytes": 504,
+      "sha256": "999deaab6af448a09592c98e0e7a66f17bb3c7c40dfc176f560f7a87effa54b1"
+    },
+    {
+      "member": "772003_D1280/manifest.json",
+      "bytes": 1808,
+      "sha256": "c1157c51e1ea5694106b0b5ca8921c83bf2373e963e2440b81edede2eb03900a"
+    },
+    {
+      "member": "772003_D1280/summary.json",
+      "bytes": 49739,
+      "sha256": "2c65edcc87a40b5e317e59eda3c0ea62e57ec60253a00bd2940e958955b381cb"
+    },
+    {
+      "member": "772003_D1280/training.jsonl",
+      "bytes": 22296,
+      "sha256": "3620e06ff958f7440f35639978ffd5c9d3c6ce92d672355e49775691f54df16f"
+    },
+    {
+      "member": "772003_D1280/whole_command_resources.json",
+      "bytes": 107,
+      "sha256": "3370739681428fa237ded10db17b104e5711cb2f26642be18d90127813b2f4a6"
+    },
+    {
+      "member": "fsd-ib-b01-772003-D1280/exit_code",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "member": "fsd-ib-b01-772003-D1280/pid",
+      "bytes": 8,
+      "sha256": "6ec2702b57d5bbf365aa1c38cc94951c6c1147c391ca1f5fe5cef0c0d0f157ed"
+    },
+    {
+      "member": "fsd-ib-b01-772003-D1280/runner.sh",
+      "bytes": 1095,
+      "sha256": "cd5e13b351adb048ff7b20e3700cecc117b9978959d3289717fb7723bef6f70f"
+    },
+    {
+      "member": "fsd-ib-b01-772003-D1280/start_time",
+      "bytes": 11,
+      "sha256": "9737b31ab916ffaae8647741773457acd84193cb522d6808d055b630cf001a19"
+    },
+    {
+      "member": "fsd-ib-b01-772003-D1280/status",
+      "bytes": 9,
+      "sha256": "161069badc0cc23058b13d7c068e45205f4333aa15fd78db9d68f5c9f1ae8983"
+    },
+    {
+      "member": "fsd-ib-b01-772003-D1280/task.log",
+      "bytes": 756,
+      "sha256": "ebd72630c4649ba06fa4a17773b6d4c5c19f5c2022e77524a087349dca05ab71"
+    },
+    {
+      "member": "772003_I128/admission.json",
+      "bytes": 504,
+      "sha256": "ff4b416705443ff517cd91e01db432fa4e58553111564268f5baf03dd145a14e"
+    },
+    {
+      "member": "772003_I128/manifest.json",
+      "bytes": 1806,
+      "sha256": "bb63f34b24c6ee489c9d5bc9c4888f7a986b1b5b81c7ccc4b39d6d9f6a66ef2e"
+    },
+    {
+      "member": "772003_I128/summary.json",
+      "bytes": 49933,
+      "sha256": "fe825002fe6d06bd85e063a8d6059e4e395aea92c91c6dca5c54640a602bca7c"
+    },
+    {
+      "member": "772003_I128/training.jsonl",
+      "bytes": 22505,
+      "sha256": "856509617d9bf85c5736a256a12842667222723bf05b3b57919f0a43b2163a3e"
+    },
+    {
+      "member": "772003_I128/whole_command_resources.json",
+      "bytes": 108,
+      "sha256": "9858104748ca670ae5baad9dfdcae083b921fcfb61dc78feb62106f5b0fe2914"
+    },
+    {
+      "member": "fsd-ib-b01-772003-I128/exit_code",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "member": "fsd-ib-b01-772003-I128/pid",
+      "bytes": 8,
+      "sha256": "667073996329d1cb261e12609b365f568cd29d33a6cbdd427e6a0d2061ff9b8a"
+    },
+    {
+      "member": "fsd-ib-b01-772003-I128/runner.sh",
+      "bytes": 1085,
+      "sha256": "1dbfe2bf3c44d1d68a13cadaeb0c056698e98cc16d78f9c42c86091513ce643b"
+    },
+    {
+      "member": "fsd-ib-b01-772003-I128/start_time",
+      "bytes": 11,
+      "sha256": "9821e4362a1e7814de0a0bb727d3a358ee7b6f6bb3149e0a58bff7241445e781"
+    },
+    {
+      "member": "fsd-ib-b01-772003-I128/status",
+      "bytes": 9,
+      "sha256": "161069badc0cc23058b13d7c068e45205f4333aa15fd78db9d68f5c9f1ae8983"
+    },
+    {
+      "member": "fsd-ib-b01-772003-I128/task.log",
+      "bytes": 754,
+      "sha256": "c49cd06308caf9d47489e0c4ea8a23ff6c4c4f8ac4deabffc5206b084e634564"
+    },
+    {
+      "member": "772003_I1280/admission.json",
+      "bytes": 504,
+      "sha256": "0895835846d23fef26523ce6eb85ff8ef036dc30764b6e8da399219383b99072"
+    },
+    {
+      "member": "772003_I1280/manifest.json",
+      "bytes": 1808,
+      "sha256": "ea8804f0fd05383ee289b27ba7624e3cc8d4a12e32b810df2bd6b6709a012ea2"
+    },
+    {
+      "member": "772003_I1280/summary.json",
+      "bytes": 49848,
+      "sha256": "67c35998fa25cb0e43eec4a9f47eabadde97bd304e76d044b9cbffbba6198017"
+    },
+    {
+      "member": "772003_I1280/training.jsonl",
+      "bytes": 22451,
+      "sha256": "fe438aa6a3c78805e8b4a7921d60f1f80e4a42079214f40337022722e55044ba"
+    },
+    {
+      "member": "772003_I1280/whole_command_resources.json",
+      "bytes": 108,
+      "sha256": "08c30261ea11305dc6203e7c3cf54e7070e2c1b08f1e2acc281bea394391e864"
+    },
+    {
+      "member": "fsd-ib-b01-772003-I1280/exit_code",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "member": "fsd-ib-b01-772003-I1280/pid",
+      "bytes": 8,
+      "sha256": "f0cd72e09ee95c0897eac776bbf71fbed18a18a1817bbe5363c2dd76cf047671"
+    },
+    {
+      "member": "fsd-ib-b01-772003-I1280/runner.sh",
+      "bytes": 1095,
+      "sha256": "d98555a30e5d35dd8dcfe91e80bcee469c6272b2531d15f8d007256fa530c28e"
+    },
+    {
+      "member": "fsd-ib-b01-772003-I1280/start_time",
+      "bytes": 11,
+      "sha256": "855573085f5ff7b2ca0a22d2a7cade938c8b1eb33b63857690a7084437ed719c"
+    },
+    {
+      "member": "fsd-ib-b01-772003-I1280/status",
+      "bytes": 9,
+      "sha256": "161069badc0cc23058b13d7c068e45205f4333aa15fd78db9d68f5c9f1ae8983"
+    },
+    {
+      "member": "fsd-ib-b01-772003-I1280/task.log",
+      "bytes": 757,
+      "sha256": "ae9b20a8fc824fb0dd79e966fd60643606bd2de611215f9ac353aa8935975066"
+    },
+    {
+      "member": "772103_D128/admission.json",
+      "bytes": 504,
+      "sha256": "29cc96e46fc7dcded55320f5bda4a2288f1a8f5f70d5cff4f64ba2dec8b3fce7"
+    },
+    {
+      "member": "772103_D128/manifest.json",
+      "bytes": 1806,
+      "sha256": "9b23fe8300c58d32615b26b0362cafeffeddf7f7893d478422e6bb502ea34cc9"
+    },
+    {
+      "member": "772103_D128/summary.json",
+      "bytes": 49723,
+      "sha256": "f9b0d27319ade749b7053a058021af7d26d678a2b5a81757b13f398b641931b0"
+    },
+    {
+      "member": "772103_D128/training.jsonl",
+      "bytes": 22325,
+      "sha256": "593c11a11dfc9fc58a4d04706136fd9d3bd253978d91095028e648b48da07504"
+    },
+    {
+      "member": "772103_D128/whole_command_resources.json",
+      "bytes": 107,
+      "sha256": "b1989ad001eb05915ec9be5b9152d248db37f46adce656415109df8b0ebf1145"
+    },
+    {
+      "member": "fsd-ib-b01-772103-D128/exit_code",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "member": "fsd-ib-b01-772103-D128/pid",
+      "bytes": 8,
+      "sha256": "ae03ae43436ba4855a3bb8e6a854f1202926bc9b5d39c9d5c5f70a23ee618cf9"
+    },
+    {
+      "member": "fsd-ib-b01-772103-D128/runner.sh",
+      "bytes": 1085,
+      "sha256": "5c84c37664a8aea4dc76de994f3de7e1448dc642063ac9fbc25640f811b0f800"
+    },
+    {
+      "member": "fsd-ib-b01-772103-D128/start_time",
+      "bytes": 11,
+      "sha256": "879c054c33a49be4a4116c269d24f3339ca377ee701d9004381644999381a07d"
+    },
+    {
+      "member": "fsd-ib-b01-772103-D128/status",
+      "bytes": 9,
+      "sha256": "161069badc0cc23058b13d7c068e45205f4333aa15fd78db9d68f5c9f1ae8983"
+    },
+    {
+      "member": "fsd-ib-b01-772103-D128/task.log",
+      "bytes": 753,
+      "sha256": "cccb8b707d45ae142ab8d1abebd20d766cfd4311648db38a449ca08b3c4bdd2b"
+    },
+    {
+      "member": "772103_D1280/admission.json",
+      "bytes": 504,
+      "sha256": "3c264c011ed93c1130580ae82a1b684860fadc50ee076c847ff4ca1188dd9d35"
+    },
+    {
+      "member": "772103_D1280/manifest.json",
+      "bytes": 1808,
+      "sha256": "4aa9189d19591673bf1b87c1cb9907d5c1128fb6369ce1c40764fcfb01d686e4"
+    },
+    {
+      "member": "772103_D1280/summary.json",
+      "bytes": 49720,
+      "sha256": "a8e5e572cf1bf570db365462a47457c3b79293fd1878a1da56dcdea374fec008"
+    },
+    {
+      "member": "772103_D1280/training.jsonl",
+      "bytes": 22317,
+      "sha256": "a989027bba747311d986b7ee90a440b82fdfd8a932ae2a5f3332e2e216e81e3b"
+    },
+    {
+      "member": "772103_D1280/whole_command_resources.json",
+      "bytes": 107,
+      "sha256": "5bc9cf11b0d63fb7880e02cc2b3190c31579553cb9db7de3c4a28f11e4642838"
+    },
+    {
+      "member": "fsd-ib-b01-772103-D1280/exit_code",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "member": "fsd-ib-b01-772103-D1280/pid",
+      "bytes": 8,
+      "sha256": "531fa10dafb9d68ca56187fb83b6c611d52ba4be5b7cd9e4b35834282d951566"
+    },
+    {
+      "member": "fsd-ib-b01-772103-D1280/runner.sh",
+      "bytes": 1095,
+      "sha256": "b06042ddaccb968b877f6d0b3a8fe26bedecce1520b800a1267cb8ae06bb7e15"
+    },
+    {
+      "member": "fsd-ib-b01-772103-D1280/start_time",
+      "bytes": 11,
+      "sha256": "03a9e7dd8a845d21aa877eae834eaac45f8b538312ab10a0c0fb9d124dc3ee11"
+    },
+    {
+      "member": "fsd-ib-b01-772103-D1280/status",
+      "bytes": 9,
+      "sha256": "161069badc0cc23058b13d7c068e45205f4333aa15fd78db9d68f5c9f1ae8983"
+    },
+    {
+      "member": "fsd-ib-b01-772103-D1280/task.log",
+      "bytes": 756,
+      "sha256": "49b9ac25ead12ab6542bdf7f11db8561b42e60de4abb134935a65531e2877a17"
+    },
+    {
+      "member": "772103_I128/admission.json",
+      "bytes": 504,
+      "sha256": "16cf262170782aebc3402ff6baef82daad0e84a14268e9edcb1487f6a41956f6"
+    },
+    {
+      "member": "772103_I128/manifest.json",
+      "bytes": 1806,
+      "sha256": "6e895abacf62aae43834baf56228c3bfa63d00c6a3237722243bd8884e713825"
+    },
+    {
+      "member": "772103_I128/summary.json",
+      "bytes": 49796,
+      "sha256": "ca8dbc66e1de3f8d037eadc4e21986bdb7f1d1316d5c4b47c9180a5e725dd82b"
+    },
+    {
+      "member": "772103_I128/training.jsonl",
+      "bytes": 22432,
+      "sha256": "139fd0869eaa46b17b762b6bc023d9c3ef565b09cd209db9d325d45228dcba8d"
+    },
+    {
+      "member": "772103_I128/whole_command_resources.json",
+      "bytes": 108,
+      "sha256": "b515c05059d1d008fbe06e457fd0715f589487850664cf0428c31fe68687e107"
+    },
+    {
+      "member": "fsd-ib-b01-772103-I128/exit_code",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "member": "fsd-ib-b01-772103-I128/pid",
+      "bytes": 8,
+      "sha256": "f94232130acd4edf0edb16dbd2d3df2c00c5d93bfb300e31db309eebc2005df5"
+    },
+    {
+      "member": "fsd-ib-b01-772103-I128/runner.sh",
+      "bytes": 1085,
+      "sha256": "71e7f8bb7f8b9da81378fb3863eb74b0887e067786ca20286df9993f57162f56"
+    },
+    {
+      "member": "fsd-ib-b01-772103-I128/start_time",
+      "bytes": 11,
+      "sha256": "c36e71b1a8eaff14350d7753b4d672542901449aee6d6ab2a2999eceee4f4955"
+    },
+    {
+      "member": "fsd-ib-b01-772103-I128/status",
+      "bytes": 9,
+      "sha256": "161069badc0cc23058b13d7c068e45205f4333aa15fd78db9d68f5c9f1ae8983"
+    },
+    {
+      "member": "fsd-ib-b01-772103-I128/task.log",
+      "bytes": 754,
+      "sha256": "f5118905c2c50f518628e6d56a5c6653a06fd63a3211235f6b73d4c93330d623"
+    },
+    {
+      "member": "772103_I1280/admission.json",
+      "bytes": 504,
+      "sha256": "d11176cbacf8ceef6c30fc8ba47da25586d8892be884c51a5aa913c3302531f8"
+    },
+    {
+      "member": "772103_I1280/manifest.json",
+      "bytes": 1808,
+      "sha256": "89ce01ab08e4a3e776dd229234ae06413071cc3209f6358fc07ccddb2310281e"
+    },
+    {
+      "member": "772103_I1280/summary.json",
+      "bytes": 49839,
+      "sha256": "2d8cff9b8afd236a3fdf33b0b512706b0227feb5cb9bd667b8763e2fbcf9d567"
+    },
+    {
+      "member": "772103_I1280/training.jsonl",
+      "bytes": 22459,
+      "sha256": "0211f6e90fb6c82ae0b277dc78170fd2a49e63349472553060c467abad697202"
+    },
+    {
+      "member": "772103_I1280/whole_command_resources.json",
+      "bytes": 108,
+      "sha256": "2d5fb499d4f1cae15f2895b135631c7a450b5007629d1ee91522d9c91b2e0b5b"
+    },
+    {
+      "member": "fsd-ib-b01-772103-I1280/exit_code",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "member": "fsd-ib-b01-772103-I1280/pid",
+      "bytes": 8,
+      "sha256": "40f2dbf5aaccbb97f2a4b7827e758ca43764c9de08196360d5f87aba535ca0fd"
+    },
+    {
+      "member": "fsd-ib-b01-772103-I1280/runner.sh",
+      "bytes": 1095,
+      "sha256": "a25d066509bcbe5433901f0f33f564bd3f38168fad68ead27f2b9298712bf74a"
+    },
+    {
+      "member": "fsd-ib-b01-772103-I1280/start_time",
+      "bytes": 11,
+      "sha256": "2640d8423aeab54f42dc32b6df5fe0dd7aeb9c0ba08d809bcbcb8921ed1c4cef"
+    },
+    {
+      "member": "fsd-ib-b01-772103-I1280/status",
+      "bytes": 9,
+      "sha256": "161069badc0cc23058b13d7c068e45205f4333aa15fd78db9d68f5c9f1ae8983"
+    },
+    {
+      "member": "fsd-ib-b01-772103-I1280/task.log",
+      "bytes": 757,
+      "sha256": "53f82981480fb039e21f48125a2e72e5920ecce8f192889d2ac995453c6dc0a2"
+    }
+  ],
+  "terminal_supervisor_roots": [
+    {
+      "path": "/home/wu/.agent-tasks/fsd-ib-b01-772003-D128",
+      "resolved": "/home/wu/.agent-tasks/fsd-ib-b01-772003-D128",
+      "handle": "fsd-ib-b01-772003-D128",
+      "pid": 3710339,
+      "pid_exists": false,
+      "tmux_active": false,
+      "status": "finished",
+      "exit_code": 0
+    },
+    {
+      "path": "/home/wu/.agent-tasks/fsd-ib-b01-772003-D1280",
+      "resolved": "/home/wu/.agent-tasks/fsd-ib-b01-772003-D1280",
+      "handle": "fsd-ib-b01-772003-D1280",
+      "pid": 3708689,
+      "pid_exists": false,
+      "tmux_active": false,
+      "status": "finished",
+      "exit_code": 0
+    },
+    {
+      "path": "/home/wu/.agent-tasks/fsd-ib-b01-772003-I128",
+      "resolved": "/home/wu/.agent-tasks/fsd-ib-b01-772003-I128",
+      "handle": "fsd-ib-b01-772003-I128",
+      "pid": 3711508,
+      "pid_exists": false,
+      "tmux_active": false,
+      "status": "finished",
+      "exit_code": 0
+    },
+    {
+      "path": "/home/wu/.agent-tasks/fsd-ib-b01-772003-I1280",
+      "resolved": "/home/wu/.agent-tasks/fsd-ib-b01-772003-I1280",
+      "handle": "fsd-ib-b01-772003-I1280",
+      "pid": 3709290,
+      "pid_exists": false,
+      "tmux_active": false,
+      "status": "finished",
+      "exit_code": 0
+    },
+    {
+      "path": "/home/wu/.agent-tasks/fsd-ib-b01-772103-D128",
+      "resolved": "/home/wu/.agent-tasks/fsd-ib-b01-772103-D128",
+      "handle": "fsd-ib-b01-772103-D128",
+      "pid": 3719200,
+      "pid_exists": false,
+      "tmux_active": false,
+      "status": "finished",
+      "exit_code": 0
+    },
+    {
+      "path": "/home/wu/.agent-tasks/fsd-ib-b01-772103-D1280",
+      "resolved": "/home/wu/.agent-tasks/fsd-ib-b01-772103-D1280",
+      "handle": "fsd-ib-b01-772103-D1280",
+      "pid": 3713801,
+      "pid_exists": false,
+      "tmux_active": false,
+      "status": "finished",
+      "exit_code": 0
+    },
+    {
+      "path": "/home/wu/.agent-tasks/fsd-ib-b01-772103-I128",
+      "resolved": "/home/wu/.agent-tasks/fsd-ib-b01-772103-I128",
+      "handle": "fsd-ib-b01-772103-I128",
+      "pid": 3719886,
+      "pid_exists": false,
+      "tmux_active": false,
+      "status": "finished",
+      "exit_code": 0
+    },
+    {
+      "path": "/home/wu/.agent-tasks/fsd-ib-b01-772103-I1280",
+      "resolved": "/home/wu/.agent-tasks/fsd-ib-b01-772103-I1280",
+      "handle": "fsd-ib-b01-772103-I1280",
+      "pid": 3715954,
+      "pid_exists": false,
+      "tmux_active": false,
+      "status": "finished",
+      "exit_code": 0
+    }
+  ],
+  "cleanup_targets": [
+    "/home/wu/hmasd-worktrees/fsd-interruption-batch-b01-20260914",
+    "/home/wu/.agent-tasks/fsd-ib-b01-772003-D128",
+    "/home/wu/.agent-tasks/fsd-ib-b01-772003-D1280",
+    "/home/wu/.agent-tasks/fsd-ib-b01-772003-I128",
+    "/home/wu/.agent-tasks/fsd-ib-b01-772003-I1280",
+    "/home/wu/.agent-tasks/fsd-ib-b01-772103-D128",
+    "/home/wu/.agent-tasks/fsd-ib-b01-772103-D1280",
+    "/home/wu/.agent-tasks/fsd-ib-b01-772103-I128",
+    "/home/wu/.agent-tasks/fsd-ib-b01-772103-I1280"
+  ]
+}

@@ -1,0 +1,114 @@
+{
+  "unit": "caller-declared independent training run",
+  "inference": "descriptive only; no confidence interval or success classification",
+  "groups": [
+    {
+      "task": "FSD_INTERRUPTION_BATCH_B01",
+      "arm": "D128",
+      "n": 2,
+      "mean": 0.3429857461129504,
+      "sample_sd": 0.04512641885600532,
+      "min": 0.31107654932920453,
+      "max": 0.3748949428966962,
+      "runs": {
+        "772003": 0.3748949428966962,
+        "772103": 0.31107654932920453
+      }
+    },
+    {
+      "task": "FSD_INTERRUPTION_BATCH_B01",
+      "arm": "D1280",
+      "n": 2,
+      "mean": 0.3601005336355064,
+      "sample_sd": 0.0610669419039946,
+      "min": 0.3169196849088669,
+      "max": 0.40328138236214595,
+      "runs": {
+        "772003": 0.40328138236214595,
+        "772103": 0.3169196849088669
+      }
+    },
+    {
+      "task": "FSD_INTERRUPTION_BATCH_B01",
+      "arm": "I128",
+      "n": 2,
+      "mean": 0.4119225627477164,
+      "sample_sd": 0.04782061814809692,
+      "min": 0.37810827937466457,
+      "max": 0.4457368461207682,
+      "runs": {
+        "772003": 0.37810827937466457,
+        "772103": 0.4457368461207682
+      }
+    },
+    {
+      "task": "FSD_INTERRUPTION_BATCH_B01",
+      "arm": "I1280",
+      "n": 2,
+      "mean": 0.38920530900303274,
+      "sample_sd": 0.017485657200608243,
+      "min": 0.3768410822229793,
+      "max": 0.40156953578308624,
+      "runs": {
+        "772003": 0.3768410822229793,
+        "772103": 0.40156953578308624
+      }
+    }
+  ],
+  "paired_differences": [
+    {
+      "task": "FSD_INTERRUPTION_BATCH_B01",
+      "arm": "D128",
+      "baseline": "D1280",
+      "summary": {
+        "n": 2,
+        "mean": -0.017114787522556046,
+        "sample_sd": 0.01594052304798928,
+        "min": -0.02838643946544972,
+        "max": -0.005843135579662373
+      },
+      "differences": {
+        "772003": -0.02838643946544972,
+        "772103": -0.005843135579662373
+      },
+      "unmatched_arm_seeds": [],
+      "unmatched_baseline_seeds": []
+    },
+    {
+      "task": "FSD_INTERRUPTION_BATCH_B01",
+      "arm": "I128",
+      "baseline": "D1280",
+      "summary": {
+        "n": 2,
+        "mean": 0.051822029112209955,
+        "sample_sd": 0.10888756005209152,
+        "min": -0.025173102987481377,
+        "max": 0.1288171612119013
+      },
+      "differences": {
+        "772003": -0.025173102987481377,
+        "772103": 0.1288171612119013
+      },
+      "unmatched_arm_seeds": [],
+      "unmatched_baseline_seeds": []
+    },
+    {
+      "task": "FSD_INTERRUPTION_BATCH_B01",
+      "arm": "I1280",
+      "baseline": "D1280",
+      "summary": {
+        "n": 2,
+        "mean": 0.029104775367526342,
+        "sample_sd": 0.07855259910460284,
+        "min": -0.02644030013916665,
+        "max": 0.08464985087421933
+      },
+      "differences": {
+        "772003": -0.02644030013916665,
+        "772103": 0.08464985087421933
+      },
+      "unmatched_arm_seeds": [],
+      "unmatched_baseline_seeds": []
+    }
+  ]
+}

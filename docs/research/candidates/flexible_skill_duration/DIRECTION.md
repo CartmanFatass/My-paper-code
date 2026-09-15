@@ -26,19 +26,27 @@ Untying the duration `k` is this direction. Untying the agent count `N` is a sep
 
 ## Position
 
-- **Current discriminator — OWNER_DIRECT / PRO_FINAL 2026-09-14:** restore this original direction
-  to the working set and prepare the interruption-by-batch question under evidence
-  spec §11.11 and the owner-approved two-axis programme. The current DM has resumed
-  in `codex/fsd` and read/applied the [published restart recommendations](FSD_RESTART_RECOMMENDATIONS_20260914.md);
-  [reading/application receipt](FSD_RESTART_PREPARATION_INTAKE_20260914.md).
-  The [prospective finite B](FSD_INTERRUPTION_BATCH_B01_PROSPECTIVE_CARD_20260914.md)
-  is now funded as two new four-arm blocks; the primary is I1280 minus fresh
-  D0-1280, with both simple effects, batch marginal effect and interaction retained.
-  [Complete Portfolio investment and conformance intake](../../portfolio/pro_packets/20260914_fsd_interruption_batch_investment/INTAKE.md)
-  authorizes eight original fits and necessary implementation/intake, with zero
-  automatic retries. This is a changed attribution question, not a sixth unchanged
-  pair or the old LONG offer. Existing package-use evidence and
-  the fixed-K2 branch boundary below retain their scope.
+- **Latest discriminator — completed B/EXPLORE, 2026-09-15:** the
+  [funded interruption-by-batch card](FSD_INTERRUPTION_BATCH_B01_PROSPECTIVE_CARD_20260914.md)
+  completed all eight originals in two fresh four-arm blocks. I1280 minus
+  D1280 is −.02644030/+.08464985J by block, mean+.02910478 above the .01 MEI,
+  training SE.05554508 and working-model95% interval[−.67666233,+.73487188].
+  This is a bounded local mean signal with mixed signs and weak training precision.
+  The batch marginal mean is−.00280123 with opposite block signs; both observed
+  interactions are negative, mean−.03983204, but their interval includes zero.
+  The controls provide a limited batch-dependence clue, not stable renewal/batch
+  benefit, equivalence or pure-duration attribution. Strongest new support is the
+  second block's gains at both batches; strongest contradiction is the first
+  high-batch loss and wide training uncertainty. See
+  [complete E0](FSD_INTERRUPTION_BATCH_B01_RESULT_EVIDENCE_20260915.md) and
+  [accepted intake](FSD_INTERRUPTION_BATCH_B01_INTAKE_20260915.md).
+  The next useful decision must distinguish more training precision from a
+  same-information baseline competence comparison and a narrower batch-dependence
+  question. [The baseline work plan](FSD_RESTART_PREPARATION_INTAKE_20260914.md#baseline-information-audit-and-bounded-work-plan)
+  exposes the private-flat versus centrally conditioned skill information mismatch;
+  no baseline or successor fit is allocated. Owner requested an execution pause
+  after this chain's preservation/closeout, not a scientific PARK. Existing optional
+  package-use evidence and the fixed-K2 branch boundary retain their scope.
 - Current claim ceiling is B — EXPLORE. Original Convergence U now selects the
   complete I1280 recipe as a **limited optional learning scheme under the same
   tested host, recipe and five-rollout conditions; authentic D0 remains default**.

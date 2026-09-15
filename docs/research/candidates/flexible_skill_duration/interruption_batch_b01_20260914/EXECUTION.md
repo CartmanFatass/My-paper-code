@@ -368,6 +368,34 @@ archives,120448 bytes, have also been copied with matching SHA256 to this record
 `artifacts/` for immutable preservation. Final result/review/intake and owner pause
 handoff follow the last original's terminal collection.
 
+### Complete chain and final acceptance
+
+Original8 returned native terminal exit0, PID3719886, no tmux, observed elapsed1201s,
+and the Monitor explicitly returned an empty active set. Its complete endpoint is
+valid: I128/772103 J0.44573684612076825, five completed updates and the fixed
+40000/16000 train/final steps. Joint rows5734/5143/5521/5239/5635 give
+675/615/660/615/675 coordinator steps,3240 total. Complete wall1159.59s,
+user4572.40s/system30.22s, peak RSS1644080KiB, exit0. Summary SHA256
+`ca8dbc66e1de3f8d037eadc4e21986bdb7f1d1316d5c4b47c9180a5e725dd82b`;
+archive SHA256
+`dd2ba767cee57a303662012fc6879f3a1e574a346f9d7db22df7bb78b0226983`.
+
+All8 originals are collected/accepted,0 live or queued,0 retries. The exact remote
+reducer completed the two-block readout. DM and the same independent Astra/high
+reviewer completed endpoint/count/configuration/numerical checks; the independent
+report has no material findings. DM accepts it with its stated limits. Full
+counts, all factorial contrasts, primary rule/uncertainty, costs and interpretation
+are in [E0](../FSD_INTERRUPTION_BATCH_B01_RESULT_EVIDENCE_20260915.md) and
+[intake](../FSD_INTERRUPTION_BATCH_B01_INTAKE_20260915.md). The raw archives retain
+88 files, with full local/remote digest agreement. The repaired terminal aggregate
+is unique-key JSON with8 terminal handles, empty active set and no pending notices;
+the original malformed metadata is preserved in a binary gzip artifact.
+
+Owner pause closeout is now at preservation/integration and assigned reclamation.
+No experiment, Transport delivery, Pro request or scientific successor remains
+pending. The concrete9-target cleanup inventory excludes166 other worktrees,
+all shared/authoring checkouts and all other directions.
+
 ## Collection and preservation inventory
 
 Collect every original summary, training rows, logs, adjacent admission,
