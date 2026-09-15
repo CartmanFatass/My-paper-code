@@ -1,0 +1,18 @@
+=== Task 'acvc-rate-low-b01-27931-2bbaa99ad' started at 2026-09-15T10:04:22+08:00 ===
+{
+  "assessed_at": "2026-09-15T02:04:22.464554Z",
+  "available_physical_bytes": 15629537280,
+  "captured_at": "2026-09-15T02:04:22.464287Z",
+  "cgroup_headroom_bytes": null,
+  "cgroup_memory_current_bytes": null,
+  "cgroup_memory_max_bytes": null,
+  "effective_available_bytes": 15629537280,
+  "effective_floor_pass": true,
+  "failure_reasons": [],
+  "measurement_source": "/proc/meminfo",
+  "minimum_available_bytes": 4294967296,
+  "passed": true,
+  "physical_floor_pass": true,
+  "schema_version": 1
+}
+=== Task 'acvc-rate-low-b01-27931-2bbaa99ad' exited with code 0 at 2026-09-15T10:24:11+08:00 (Duration: 1189s) ===

@@ -1,6 +1,14 @@
 # Direction acvc: ACVC
 
-## Current scientific disposition and extended-exposure evidence — 2026-09-14
+## Current fixed-rate-pair evidence — 2026-09-14
+
+ACVC remains **CONTINUE / MEDIUM / recasts2**, lowest contention sequence, optional F and the same occupied direction slot. The selected final-only [fixed-rate B pair](ACVC_CLUSTER_FIXED_LR_PAIR_B01_SCIENCE_CARD_20260914.md) is now complete: one fresh4096 fit each at1e-4 and3e-4, one matched programme block. Low C−reference C is **−.1285335612775105 J (DOWN)**; retain the existing3e-4 development reference on this bounded evidence. Both recipes' F−C/F−dwell are UP: low+.11665445482669831/+.0666529051261728 J; reference+.03770462016249634/+.03251075015598452 J. [Complete E0](ACVC_CLUSTER_FIXED_LR_PAIR_B01_RESULT_EVIDENCE_20260914.md); [scientific intake](ACVC_CLUSTER_FIXED_LR_PAIR_B01_INTAKE_20260914.md).
+
+The strongest new support is a useful fixed-F increment on reference C attaining.329215978929418 J in this pair, with reference F.3669205990919143 J and dwell.33440984893592984 J. The tested lower-rate improvement forecast is contradicted. The main counterweight to broad/default F use remains16/64 adverse worlds against each reference control, alongside one trained policy per recipe. Private histories and intervention doses differ; no stable recipe ranking, tuned headroom, rate/data cause or safety claim follows. Older programme differences are not a new matched exposure contrast.
+
+The next discriminator is complete independent scientific review of this result and consolidation recommendation; another unchanged final4096 reference programme is a legitimate but unallocated alternative, not an automatic requirement. The current two-original numerical allocation is complete, with no retry or third fit. Scientific review/retention/assigned cleanup continue, and Portfolio retains investment/lifecycle authority. Headroom remains absent; old C consumption, adverse gate/train-through results and stopped families remain unchanged.
+
+## Prior extended-exposure evidence and rate-pair allocation — 2026-09-14
 
 ACVC remains **CONTINUE / MEDIUM / recasts2**, with an occupied direction slot under the complete [post-C01 Portfolio decision](../../portfolio/pro_packets/20260914_acvc_post_fixed_c01_direction_r2/archive/RESPONSE.md) and [full DM response](../../portfolio/pro_packets/20260914_acvc_post_fixed_c01_direction_r2/INTAKE.md). The owner explicitly resumed the paused native DM chain on2026-09-14. The previously selected single fresh1024/4096 B is now complete; the historical [pause handoff](ACVC_OWNER_PAUSE_HANDOFF_20260914.md) remains provenance, not current execution authority.
 
