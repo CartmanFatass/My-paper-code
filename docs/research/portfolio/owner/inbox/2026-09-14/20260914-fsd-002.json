@@ -24,7 +24,7 @@
     }
   ],
   "recommended": "F",
-  "auto_applied": null,
+  "auto_applied": "F",
   "dm_reason": "完整四臂用新同期控制区分原package中的renewal与batch；两个block仅用于早期探索精度，保留全部反证与成本未知。",
   "evidence": [
     "docs/research/candidates/flexible_skill_duration/FSD_INTERRUPTION_BATCH_B01_PROSPECTIVE_CARD_20260914.md"
@@ -81,5 +81,15 @@
     "verdict_text": "DM recommends two independent four-arm blocks (eight fresh fits). A two-block, two-arm high-batch comparison is the smaller investment alternative.",
     "source": "docs/research/candidates/flexible_skill_duration/FSD_INTERRUPTION_BATCH_B01_PROSPECTIVE_CARD_20260914.md"
   },
-  "starred": true
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-15T04:28:55+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260914_fsd_interruption_batch_investment/archive/RESPONSE.md@ca27db8d529ffb54eab5f26f014c204bbaeafcf2",
+      "record": "docs/research/portfolio/pro_packets/20260914_fsd_interruption_batch_investment/INTAKE.md",
+      "state": "applied",
+      "summary": "完整答复已核对并应用F：四臂两block、8次原始fit及必要支持；0训练已启动，直接进入实现。普通900/1800秒计划可调整，非硬上限；ACTIVE/HIGH及D0默认保持。共享writer释放，无需Root再批准。"
+    }
+  ]
 }

@@ -26,16 +26,18 @@ Untying the duration `k` is this direction. Untying the agent count `N` is a sep
 
 ## Position
 
-- **Current preparation — OWNER_DIRECT 2026-09-14:** restore this original direction
+- **Current discriminator — OWNER_DIRECT / PRO_FINAL 2026-09-14:** restore this original direction
   to the working set and prepare the interruption-by-batch question under evidence
   spec §11.11 and the owner-approved two-axis programme. The current DM has resumed
   in `codex/fsd` and read/applied the [published restart recommendations](FSD_RESTART_RECOMMENDATIONS_20260914.md);
   [reading/application receipt](FSD_RESTART_PREPARATION_INTAKE_20260914.md).
   The [prospective finite B](FSD_INTERRUPTION_BATCH_B01_PROSPECTIVE_CARD_20260914.md)
-  recommends two new four-arm blocks, with a smaller same-batch-pair alternative;
-  the primary is I1280 minus fresh D0-1280. This is an unfunded proposal.
-  This restores direction preparation without allocating a sixth unchanged pair,
-  the old LONG offer or a new training budget. Existing package-use evidence and
+  is now funded as two new four-arm blocks; the primary is I1280 minus fresh
+  D0-1280, with both simple effects, batch marginal effect and interaction retained.
+  [Complete Portfolio investment and conformance intake](../../portfolio/pro_packets/20260914_fsd_interruption_batch_investment/INTAKE.md)
+  authorizes eight original fits and necessary implementation/intake, with zero
+  automatic retries. This is a changed attribution question, not a sixth unchanged
+  pair or the old LONG offer. Existing package-use evidence and
   the fixed-K2 branch boundary below retain their scope.
 - Current claim ceiling is B — EXPLORE. Original Convergence U now selects the
   complete I1280 recipe as a **limited optional learning scheme under the same

@@ -34,3 +34,15 @@ and immutable archive; its next factual receipt updates this state. A native
 dispatch is not a Pro decision or experiment grant. New training/models/evaluation
 and scientific handles remain zero. The DM waits natively for its own Transport
 and continues independent authorized preparation where useful.
+
+## Complete receipt and release
+
+Transport returned a direct native final: ARCHIVED/RECEIPT, full Git response
+`ca27db8d529ffb54eab5f26f014c204bbaeafcf2`, Issue22 comment5674635863,
+user `401448de-a990-489e-b60d-c6d5c150ebc7` paired with assistant
+`14e9ad2a-1a42-4154-a38f-69fd8cce903c`. The pre-Send menu failure was
+verified ineffective and repaired on the same immutable operation; one effective
+Send was accepted. No recovery remains. Full bytes/hashes and the DM's complete
+read/conformance/application are in [INTAKE.md](INTAKE.md). F is allocated;
+zero fits have launched at application. The shared writer is released after
+that intake, with a direct native event to Root and queued ACVC.
