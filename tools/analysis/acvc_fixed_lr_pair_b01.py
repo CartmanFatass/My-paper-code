@@ -11,8 +11,30 @@ sys.path.insert(0, str(ROOT))
 from experiments.candidates.acvc.cluster_fixed_lr_pair_b01 import protocol as p
 
 
-def jsonl(path):
-    return [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines() if line.strip()] if path.exists() else []
+def jsonl(path, errors):
+    try:
+        lines = path.read_text(encoding="utf-8").splitlines()
+    except OSError as error:
+        errors.append(f"{path.name}: {type(error).__name__}: {error}")
+        return []
+    rows = []
+    for number, line in enumerate(lines, 1):
+        if not line.strip():
+            continue
+        try:
+            rows.append(json.loads(line))
+        except json.JSONDecodeError as error:
+            # A killed original may leave an unfinished final write. Keep other full records.
+            errors.append(f"{path.name} line {number}: {type(error).__name__}: {error}")
+    return rows
+
+
+def read_summary(path, errors):
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as error:
+        errors.append(f"{path.name}: {type(error).__name__}: {error}")
+        return {}
 
 
 def analyze(paths):
@@ -24,8 +46,9 @@ def analyze(paths):
                            fixed_snapshots=1, post_fit_loads=3, environment_constructors=4,
                            new_fits=1, final_checkpoints=1)
     for recipe, path in paths.items():
-        rows, updates = jsonl(path / "episodes.jsonl"), jsonl(path / "updates.jsonl")
-        summary = json.loads((path / "summary.json").read_text(encoding="utf-8"))
+        errors = []
+        rows, updates = jsonl(path / "episodes.jsonl", errors), jsonl(path / "updates.jsonl", errors)
+        summary = read_summary(path / "summary.json", errors)
         recipe_rows[recipe] = rows
         train = [row for row in rows if row.get("phase") == "train"]
         native = {}
@@ -33,9 +56,13 @@ def analyze(paths):
             for line in (path / "native_time.txt").read_text().splitlines():
                 if "=" in line:
                     key, value = line.split("=", 1)
-                    native[key] = float(value)
+                    try:
+                        native[key] = float(value)
+                    except ValueError:
+                        native[key] = None
         primary = p.final_panel(rows, recipe)
         checks = dict(
+            original_files_complete=not errors,
             identity=summary.get("object") == p.OBJECT and summary.get("recipe") == recipe
                      and summary.get("master") == p.MASTER and summary.get("learning_rate") == p.RECIPES[recipe],
             original_complete=summary.get("status") == "complete" and summary.get("fit_complete") is True,
@@ -57,11 +84,12 @@ def analyze(paths):
             counts=all(summary.get("counts",{}).get(key) == value for key,value in expected_counts.items()),
             panels=primary["complete"], primary_publication=summary.get("primary") == primary,
             group_rate=summary.get("optimizer_group_learning_rates") == [p.RECIPES[recipe]],
-            native_exit=native.get("exit_code") == 0,
+            native_exit_not_adverse=native.get("exit_code") in (0, None),
         )
         training = np.asarray([row["J"] for row in train], dtype=np.float64)
         originals[recipe] = dict(path=str(path), launch_sha=summary.get("launch_sha"), checks=checks,
-                                checked=all(checks.values()), counts=summary.get("counts"), native=native,
+                                checked=all(checks.values()), ingestion_errors=errors,
+                                counts=summary.get("counts"), native=native,
                                 training_blocks_256=[dict(first_episode=start, n=len(training[start:start+256]),
                                                         mean_J=float(training[start:start+256].mean()))
                                                      for start in range(0,len(training),256)],
@@ -78,12 +106,14 @@ def analyze(paths):
         outcome = contrast["reading"]
         predictions[name] = dict(probabilities=dict(zip(["UP","WITHIN","DOWN"],probs)), observed=outcome,
                                  brier=sum((prob-float(label==outcome))**2 for label,prob in zip(["UP","WITHIN","DOWN"],probs)) if outcome != "INCOMPLETE" else None)
-    native_complete = all(all(key in value["native"] for key in ("native_wall_s","user_s","system_s")) for value in originals.values())
+    native_complete = all(all(value["native"].get(key) is not None for key in ("native_wall_s","user_s","system_s")) for value in originals.values())
     return dict(object=p.OBJECT, master=p.MASTER, evaluation_namespace=p.EVALUATION_NAMESPACE,
                 analysis="Recorded original bytes only; no model loading, new environment calls or learning.",
-                checks_passed=checks_passed, originals=originals, pair=pair, predictions=predictions,
+                checks_passed=checks_passed, object_status="complete" if checks_passed and pair["complete"] else "incomplete",
+                original_completion_limit="Whole object requires both complete fit records and all panels. Panel completeness alone is narrower evidence. Missing resource telemetry is reported, not a scientific invalidity rule; supervisor receipts are checked separately at intake.",
+                originals=originals, pair=pair, predictions=predictions,
                 owner_prediction="not taken (unattended); replace only from an actual owner reply",
-                costs=dict(native_wall_sum_s=sum(value["native"].get("native_wall_s",0) for value in originals.values()) if native_complete else None,
+                costs=dict(resources="measured" if native_complete else "resources_unmeasured", native_wall_sum_s=sum(value["native"].get("native_wall_s",0) for value in originals.values()) if native_complete else None,
                            aggregate_cpu_s=sum(value["native"]["user_s"]+value["native"]["system_s"] for value in originals.values()) if native_complete else None,
                            overlapping_elapsed_s="requires supervisor acceptance/terminal timestamps; not the sum of native walls",
                            full_support_provider_maintenance_lifetime="UNKNOWN"))
