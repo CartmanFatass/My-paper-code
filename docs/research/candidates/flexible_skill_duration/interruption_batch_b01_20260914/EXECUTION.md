@@ -208,6 +208,28 @@ running/PID3710339/tmux active/null exit adoption and continues the exact handle
 Current allocation: three accepted originals, two complete endpoints, one live,
 five unsubmitted. DM continues the already selected order directly.
 
+### Original3 collection and original4
+
+D128/772003 returned terminal exit0, PID3710339, no tmux and observed elapsed520s.
+The collected endpoint passes the same40000/16000-step, five-update/32-final-world,
+exact-source/configuration checks. Its mean is0.3748949428966962J; all recorded
+losses are finite. Five800-row coordinator rollouts require105 steps each,525 total;
+actor/critic optimizer calls remain11250 each. Whole-command wall463.64s,
+user1815.28s/system12.67s, peak RSS1634088KiB, exit0. Summary SHA256
+`9b80baad884454e0423f4f70237a4030982de413dcf8b7ef9e24620c48986447`,
+archive SHA256
+`bc8bb4a6dfd85b100c77e8b7b058fc0c4832c06ac33be108c6007721c2b58df2`;
+receipt `772003_D128_COLLECTION.json` records the unchanged source read.
+
+Original4 `fsd-ib-b01-772003-I128` is accepted at168e61295. Adjacent admission
+`2026-09-15T05:33:12.995077Z` passed with15626915840 effective/physical bytes.
+The same Monitor adopted running/PID3711508/tmux active/null exit. Four originals
+are accepted, three endpoints complete, one live, four unsubmitted. Monitor's
+manually rounded observation times are not accepted timing evidence; optional
+unsupported time fields are removed/marked unverified, and supervisor/GNU-time
+retain actual run boundaries. No training or source change follows from this
+observation-metadata correction.
+
 ## Collection and preservation inventory
 
 Collect every original summary, training rows, logs, adjacent admission,
