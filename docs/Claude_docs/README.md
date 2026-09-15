@@ -27,6 +27,13 @@ whose corrections are incorporated. No experiment was run and no scientific obje
 
 ### reviews/
 
+- `FOUR_DIRECTION_PROGRESS_REVIEW_20260915.md` — progress check on the four live directions
+  (FSD, ACVC, FOLR, TRDL) in the seven hours between the 2026-09-14 calibration and the owner's
+  completed pause: what the owner adopted from the two-axis plan and what ran; per-direction
+  results (FSD 2×2: batch is not the explanation, interruption signal alive but unresolved at
+  n = 2; ACVC: learned proposer at MAPPO level, heuristic package +0.023 J in one block; FOLR:
+  two fresh blocks both negative; TRDL: B01 positive did not recur in B02); pooled FSD package
+  effect and power table; process changes; six owner decisions for the resume.
 - `FOUNDATIONS_AND_METHODOLOGY_CRITICAL_REVIEW_20260914.md` — critical review, at the owner's
   request, of the starting papers (HMASD, OPT), the untie-k / untie-N premise, the B-ladder
   methodology and the direction-selection loop. Main findings: the hierarchy premise was never
