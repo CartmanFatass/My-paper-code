@@ -24,7 +24,7 @@
     }
   ],
   "recommended": "pair",
-  "auto_applied": null,
+  "auto_applied": "pair",
   "dm_reason": "固定两配方的结果能改变proposer配方与F保留选择；这比相同曝光的重复更直接，但低率可能不改善C，独立审查偏好整理的反案完整保留。",
   "evidence": [
     "docs/research/candidates/acvc/ACVC_POST_EXTENDED_EXPOSURE_INVESTMENT_REPORT_20260914.md"
@@ -76,5 +76,15 @@
     "verdict_text": "Recommendation to Portfolio: CONTINUE for one fixed lower-learning-rate versus current-rate final4096 B, consisting of two fresh C-only fits and six private final C/F/own-dwell panels.",
     "source": "docs/research/candidates/acvc/ACVC_POST_EXTENDED_EXPOSURE_INVESTMENT_REPORT_20260914.md"
   },
-  "starred": true
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-15T01:43:01+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260914_acvc_post_extended_exposure_investment/archive/RESPONSE.md",
+      "record": "docs/research/portfolio/decisions/2026-09-14-acvc-final-rate-pair-investment.md",
+      "state": "applied",
+      "summary": "已核对完整 Portfolio 回答 fb321b5e8：选择唯一固定 1e-4/3e-4 配对 B，各一次全新 4096 训练及最终三个评价面板。保留 CONTINUE/MEDIUM、recasts2、最低争用顺序和现有席位。这里只落地投资选择，两个新训练尚未启动；无额外重试或自动追加。"
+    }
+  ]
 }
