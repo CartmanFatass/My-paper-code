@@ -1,0 +1,38 @@
+{
+  "question": "Portfolio 已选择唯一固定学习率配对 B；此卡固定未筛选身份和完整比较，所有者可异步维持或修订。",
+  "changes_if_approved": [
+    {
+      "target": "ACVC 当前有限 B 的执行绑定",
+      "from": "已获两个 fresh4096 的投资额度，尚未运行",
+      "to": "master27931/eval37931；1e-4 与 3e-4 各一次原始训练，最终各评价 C/F/自身停留，保留全部结果"
+    }
+  ],
+  "if_refused": "在下一干净边界应用实际 owner 指令；已发生效果保全，不自行更换种子或补跑。",
+  "evidence_for": [
+    {
+      "path": "docs/research/portfolio/pro_packets/20260914_acvc_post_extended_exposure_investment/archive/RESPONSE.md",
+      "quote": "The selection covers **two original fresh fits only**, one per rate, with equal4096 training episodes.",
+      "why": "完整 Portfolio 已授权恰好此有限两配方问题；卡片只是确定对象输入与读数。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/acvc/ACVC_CLUSTER_EXTENDED_EXPOSURE_B01_SCIENCE_CARD_20260914.md",
+      "quote": "Two snapshots are correlated and not two fits; shared F makes contrasts dependent.",
+      "why": "现有较晚 F 有用，但 C 改善有限；降学习率未必改善 C，两个新训练也不能证明稳定排名。"
+    }
+  ],
+  "uncertainty": [
+    "一个匹配训练配对，不是两次同配方独立复制；共同随机地址不等于共同内生轨迹。",
+    "无同 host 的 tuned headroom；没有强 C、正结果或额外诊断启动门槛。",
+    "只有 final 评价；不再作训练曝光趋势结论。"
+  ],
+  "cost": {
+    "compute": "2 fits；8192训练+384评价集；2195456 team ticks、16384 Adam。粗 native 合计参考2461.16秒，非新实测或上限。各自新鲜4GiB准入，可重叠运行但报告各原始成本和CPU总和。",
+    "owner_time": "不等待回复或逐步批准。",
+    "reversibility": "costly",
+    "waits_on_this": "nothing；按已授权有限对象继续"
+  },
+  "verdict_text": "Owner-delegated decision (unattended, 2026-09-03 instruction): (a).",
+  "source": "docs/research/candidates/acvc/ACVC_CLUSTER_FIXED_LR_PAIR_B01_SCIENCE_CARD_20260914.md"
+}
