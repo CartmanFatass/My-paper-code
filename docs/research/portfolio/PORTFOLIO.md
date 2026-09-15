@@ -6,7 +6,7 @@
 
 | 方向 | 当前科学位置 | 当前 producer / 下一事件 |
 | --- | --- | --- |
-| acvc | [ACTIVE/MEDIUM/recasts2](../candidates/acvc/DIRECTION.md)。extended-exposure B01 与完整独立 review 均已 intake；review 未发现实质经验/推断缺陷，也未授予新 fit 或 lifecycle。原始证据、Transport 事实、远端回收和保全 inventory 已发布。 | DM 已刷新 MGTAP/FOLR 当前事实并正完成具体投资报告；MGTAP 仍是共享 Portfolio writer，因此 ACVC 暂不 Send。真实节点释放后由 ACVC 直接绑定最新 Portfolio 快照接续，无 Root 科学 ACK。 |
+| acvc | [ACTIVE/MEDIUM/recasts2](../candidates/acvc/DIRECTION.md)。extended-exposure B01 与完整独立 review 均已 intake；具体投资报告建议一次固定1e-4/3e-4 final4096双fresh配方B，同时保留零学习consolidation强反案；未本地 grant/launch/lifecycle。 | 唯一 Portfolio 请求 `2026-09-14-acvc-post-extended-exposure-investment-01` 已固定并 dispatch，尚未声称 provider 接受。ACVC 持有共享 writer 至完整响应、conformance/application intake 后一次释放；Root vacancy replacement 排在其后。 |
 | vap_folr_core | [ACTIVE/MEDIUM](../candidates/vap_folr_core/DIRECTION.md)。entity-persistence B01 的 Z/current-only 已完成：mean 1.59265625、57/128 负值；原始/checkpoint 和真实 Monitor 恢复记录已保全。 | 原定 A/persistent 臂已在同一 source、fresh admission 和第二个既定 invocation 中运行；terminal-only child 在终态以 native final 直接返回，未伪称即时 adoption。DM 随后完成 A−Z intake、独立科学审查和回收；零 retry、原两 invocation 预算不变。 |
 
 ## 当前协作边界
