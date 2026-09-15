@@ -1,0 +1,72 @@
+{
+  "readback_utc": "2026-09-15T06:57:19.823341+00:00",
+  "source_sha": "7975964542b83560cbc0e79f74a9212f8e3737af",
+  "block1_primary_recomputed": {
+    "block": 1,
+    "training_seed": 781901,
+    "evaluation_seed": 1781901,
+    "launch_sha": "7975964542b83560cbc0e79f74a9212f8e3737af",
+    "generic": {
+      "mean": 1.4009375,
+      "sample_sd": 6.656210342383062,
+      "conditional_episode_se": 0.5883314337628868,
+      "minimum": -13.309999999999999,
+      "maximum": 19.04,
+      "n": 128,
+      "negative_count": 56
+    },
+    "persistent": {
+      "mean": -4.4296875,
+      "sample_sd": 4.597889953833068,
+      "conditional_episode_se": 0.406399895688108,
+      "minimum": -20.209999999999997,
+      "maximum": 7.699999999999999,
+      "n": 128,
+      "negative_count": 114
+    },
+    "persistent_minus_generic": -5.8306249999999995,
+    "rule": "G_ABOVE_MEI",
+    "mei": 1.0,
+    "training_instances_per_arm": 1,
+    "population_interval": null,
+    "uncertainty": "Conditional policy panels; no episode-paired worlds or population precision."
+  },
+  "independent_panels": {
+    "GENERIC": {
+      "mean": 1.4009375,
+      "sample_sd": 6.656210342383062,
+      "conditional_episode_se": 0.5883314337628868,
+      "minimum": -13.309999999999999,
+      "maximum": 19.04,
+      "n": 128,
+      "negative_count": 56
+    },
+    "PERSISTENT": {
+      "mean": -4.4296875,
+      "sample_sd": 4.597889953833068,
+      "conditional_episode_se": 0.406399895688108,
+      "minimum": -20.209999999999997,
+      "maximum": 7.699999999999999,
+      "n": 128,
+      "negative_count": 114
+    }
+  },
+  "independent_difference": -5.8306249999999995,
+  "complete_counts": {
+    "training_episodes": 10000,
+    "training_ticks": 200000,
+    "optimizer_steps": 9938,
+    "evaluation_episodes": 256,
+    "evaluation_ticks": 5120
+  },
+  "cost": {
+    "wall_sum_seconds": 6058.969999999999,
+    "cpu_sum_seconds": 6057.620000000001,
+    "a1_wall_above_ordinary_plan_seconds": 207.78999999999996,
+    "a1_wall_above_ordinary_plan_percent": 5.771944444444443,
+    "hard_cap_breach": false,
+    "full_lifetime_cost": "UNKNOWN"
+  },
+  "study_primary": "UNAVAILABLE until block2 endpoints; no prediction score or overall polarity",
+  "original_prelearner_failure": "preserved and verified no learner exposure; manual startup repair1, scientific retry0"
+}

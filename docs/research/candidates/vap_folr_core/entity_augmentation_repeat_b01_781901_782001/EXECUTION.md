@@ -130,3 +130,27 @@ The existing reusable reviewer/Transport remains available for authorized
 closeout; no new Transport is created. A committed actual pause handoff follows
 terminal closeout. The instruction changes neither this card's frozen reading,
 four learner calls, scientific retry0, source nor scientific disposition.
+
+## Block1 complete; original G2 accepted
+
+A1-start2 is terminal exit0, Monitor-confirmed06:50:30.9480767Z and collected
+06:56:33.674913Z with full5000/4969/128, finite CPU FP32 checkpoint and10 raw
+members verified locally. The own-G digest matches G1. BLOCK1_READBACK and
+BLOCK1_INTAKE accept d1=-5.830625, G_ABOVE_MEI, without a study-wide label.
+A wall3807.79s is207.79s above its non-cap ordinary plan; preserve actual cost.
+The original prelearner failure and the corrected complete endpoint remain
+distinct records. Owner reviews returned[]; completion-then-pause scope applies.
+
+G2 is accepted2026-09-15T06:57:53.507224Z, supervisor PID3721180, handle
+folr-augmentation-repeat-b01-782001-generic. Source797596454 and the published
+COMMANDS[2] argv are exact. Its output directory was prepared before time.
+Adjacent admission06:57:53.534947Z passes physical/effective14543785984 bytes
+against4294967296. BLOCK2_GENERIC_LAUNCH_RECEIPT preserves full native acceptance,
+running/exit null/tmux true. The same Monitor is assigned only G2 with local
+state path block2/generic/MONITOR_STATE.json and terminal-only native-final
+capability; dispatch is not an invented intermediate adoption.
+
+Supervisor acceptances4 including the one zero-learner failure; original learner
+invocations3/4: G1/A1 complete, G2 running, A2 unstarted. Scientific retry0.
+DM waits for G2 terminal after publishing this boundary and then completes fixed
+A2 at fresh admission, irrespective of first-block polarity. No successor work.
