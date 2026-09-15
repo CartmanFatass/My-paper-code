@@ -7,7 +7,7 @@
 | 方向 | 当前科学位置 | 当前 producer / 下一事件 |
 | --- | --- | --- |
 | acvc | [ACTIVE/MEDIUM/recasts2](../candidates/acvc/DIRECTION.md)。final-only 1e-4/3e-4 配对 B 的卡、实现、13项检查和独立review修复已接受；两个 originals 均在 exact source 与 fresh admission 下各接受一次。 | 两 handles 已交原 Monitor，真实 adoption 尚未返回，DM 不杜撰 PID 并保留pending交接责任；随后完成收集、intake和cleanup。无新recast/PARK/default/retry或自动追加。 |
-| vap_folr_core | [ACTIVE/MEDIUM](../candidates/vap_folr_core/DIRECTION.md)。A−Z 完整结果与独立 review 已 intake；review 接受 d−3.069453125 / CURRENT_ONLY_ABOVE_MEI 的单fit/臂结论，CONTINUE/MEDIUM、family OPEN 不变。 | DM 正把 fresh Z−G 具体化为有界对象；当前无运行进程只是时间点事实。若符合当前 OPEN family 的 object-tier standing delegation，可直接记卡、实现/review、准入和执行，无 Root ACK。 |
+| vap_folr_core | [ACTIVE/MEDIUM](../candidates/vap_folr_core/DIRECTION.md)。fresh Z−G B 已按 object-tier standing delegation 选定；卡、实现、独立review、检查和exact命令已接受，两原始各5000/4969/128。 | G handle 在 source8ad304d61 与 fresh admission 下运行；terminal-only Monitor 已接任务但未伪称adoption。G终态后由同一DM收集并fresh admission启动卡内Z；retry0，不把A−Z与旧A−G拼成排名。 |
 | tail_return_distributional_learning | [ACTIVE/MEDIUM/recasts0](../candidates/tail_return_distributional_learning/DIRECTION.md)。Portfolio 选择其填补 MGTAP 席位；目标是 distributional 与同一 lower-tail objective scalar learner 的有限比较。 | 新 Astra/max DM `/root/dm_trdl_vacancy_20260914` 已在 `codex/trdl` 工作区接管一个零新实验暴露 A/RECON 准备：产出具体 prospective B card/最小实现与工作量 outline，或精确 incompatibility。旧3000秒offer仍未拨款。 |
 
 ## 当前协作边界
