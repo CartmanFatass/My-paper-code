@@ -1,0 +1,21 @@
+{
+  "verified_utc": "2026-09-15T02:58:30.236929+00:00",
+  "archive_sha256": "9e7ae325d7432caa9d301b8abaa0360ecbfbd7e4e9d9ec545640e5f380141cc1",
+  "archive_members": 10,
+  "all_members_verified": true,
+  "summary_sha256": "49b98f1ce155c4c90798692c3a8de844293e5133b669ed4d926b0f3fd2a99e93",
+  "native_panel_recomputed": {
+    "mean": 4.307734374999999,
+    "sample_sd": 9.166581225405613,
+    "conditional_episode_se": 0.8102189680977001,
+    "minimum": -21.56,
+    "maximum": 29.029999999999998,
+    "n": 128,
+    "negative_count": 40
+  },
+  "supervisor_terminal_log_tail": ": 4800, \"updates\": 4769, \"wall_seconds\": 1976.6811346260365}\n{\"episode\": 5000, \"updates\": 4969, \"wall_seconds\": 2072.755989395082}\n{\"arm\": \"GENERIC_RETAIN\", \"status\": \"complete\", \"panel\": {\"mean\": 4.307734374999999, \"sample_sd\": 9.166581225405613, \"conditional_episode_se\": 0.8102189680977001, \"minimum\": -21.56, \"maximum\": 29.029999999999998, \"n\": 128, \"negative_count\": 40}}\n=== Task 'folr-current-increment-b01-781801-generic' exited with code 0 at 2026-09-15T10:53:14+08:00 (Duration: 2112s) ===\n",
+  "technical_accepted": true,
+  "errors": [],
+  "monitor_state_file_status": "requested documented object-root path was absent; same child reconciling actual path; terminal separately verified",
+  "later_monitor_reconciliation": "Same child corrected to local generic/MONITOR_STATE.json; DM directly read and byte-preserved it. See GENERIC_MONITOR_TERMINAL.json."
+}

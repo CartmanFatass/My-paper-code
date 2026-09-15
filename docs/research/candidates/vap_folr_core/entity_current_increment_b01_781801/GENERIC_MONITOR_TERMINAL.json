@@ -1,0 +1,14 @@
+{
+  "native_child": "/root/dm_folr_resume_20260914/monitor_l_low_folr_terminal",
+  "actual_method": "terminal-only actionable native final; collaboration.send_message unavailable",
+  "native_terminal_confirmation_utc": "2026-09-15T02:55:12.2894023Z",
+  "handle": "folr-current-increment-b01-781801-generic",
+  "status": "finished",
+  "exit_code": 0,
+  "pid": 3702285,
+  "active_set": [],
+  "actual_state_path": "C:\\Projects\\HMASD-worktrees\\codex-vap-folr\\temp\\directions\\vap_folr_core\\exp\\entity_current_increment_b01_781801\\generic\\MONITOR_STATE.json",
+  "state_sha256": "0958727ed3a59ff3e949309ada9ffc07d9e36ea25a0edf0cfc93fe5f4db1523e",
+  "path_reconciliation": "Original reply implied object output root, but state was local beneath generic/. Remote object-root scp returned ENOENT. Same child corrected the claim and actual local file was directly read and byte-preserved. No intermediate MONITOR_ADOPTED was delivered.",
+  "state_limit": "Archived runner_pid copies supervisor PID; no independent learner PID measurement is established."
+}
