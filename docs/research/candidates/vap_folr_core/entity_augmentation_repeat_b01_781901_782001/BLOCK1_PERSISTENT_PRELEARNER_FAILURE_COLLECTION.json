@@ -1,0 +1,81 @@
+{
+  "collected_utc": "2026-09-15T05:33:04.982970+00:00",
+  "block": 1,
+  "mode": "persistent",
+  "handle": "folr-augmentation-repeat-b01-781901-persistent",
+  "source_sha": "7975964542b83560cbc0e79f74a9212f8e3737af",
+  "status": {
+    "task": "folr-augmentation-repeat-b01-781901-persistent",
+    "status": "failed",
+    "exit_code": 125,
+    "pid": 3711036,
+    "uptime_seconds": 138,
+    "tmux_active": false
+  },
+  "cwd": "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001",
+  "out": "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/block1/persistent",
+  "errors": [
+    "summary read: FileNotFoundError(2, 'No such file or directory')",
+    "checkpoint read: FileNotFoundError(2, 'No such file or directory')",
+    "supervisor exit nonzero"
+  ],
+  "actual_head": "7975964542b83560cbc0e79f74a9212f8e3737af",
+  "tracked_status": "",
+  "generic_input_sha256": "11cfab196f0a770a1601f68fa898372a5c12ef9475a269c3c9ef6bf621ea2841",
+  "invocation_time": null,
+  "resources_unmeasured": [
+    "invocation_time: FileNotFoundError(2, 'No such file or directory')",
+    "admission: FileNotFoundError(2, 'No such file or directory')"
+  ],
+  "admission": null,
+  "manifest": [
+    {
+      "path": "/home/wu/.agent-tasks/folr-augmentation-repeat-b01-781901-persistent/exit_code",
+      "archive_name": "supervisor/exit_code",
+      "bytes": 4,
+      "sha256": "a5e45837a2959db847f7e67a915d0ecaddd47f943af2af5fa6453be497faabca"
+    },
+    {
+      "path": "/home/wu/.agent-tasks/folr-augmentation-repeat-b01-781901-persistent/pid",
+      "archive_name": "supervisor/pid",
+      "bytes": 8,
+      "sha256": "3cb8d70ba23f14df0b18088dd4a1a5ac80bab3745e9f0f086381e48a94753524"
+    },
+    {
+      "path": "/home/wu/.agent-tasks/folr-augmentation-repeat-b01-781901-persistent/runner.sh",
+      "archive_name": "supervisor/runner.sh",
+      "bytes": 1771,
+      "sha256": "67443c29c107de1fe2262ef5af327108668673b23df2fa49a56ddde22a207627"
+    },
+    {
+      "path": "/home/wu/.agent-tasks/folr-augmentation-repeat-b01-781901-persistent/start_time",
+      "archive_name": "supervisor/start_time",
+      "bytes": 11,
+      "sha256": "56bc7afb38cc18370d61e55ac6c4f22f4612b224e1242e941f7e7772b4ea1281"
+    },
+    {
+      "path": "/home/wu/.agent-tasks/folr-augmentation-repeat-b01-781901-persistent/status",
+      "archive_name": "supervisor/status",
+      "bytes": 7,
+      "sha256": "6da5b18878e110928643ebcc38dbb7552cf3a296eea56493e23edc2b93eecff8"
+    },
+    {
+      "path": "/home/wu/.agent-tasks/folr-augmentation-repeat-b01-781901-persistent/task.log",
+      "archive_name": "supervisor/task.log",
+      "bytes": 461,
+      "sha256": "0690421ecb16dc74e643a5e37cc4e1a7baf133115e2330402582d1e4c27385ec"
+    }
+  ],
+  "archive": {
+    "path": "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/BLOCK1_PERSISTENT_RAW.tar.gz",
+    "bytes": 1033,
+    "sha256": "db4543673767b4629487f959ea88b6d579f9eb980130cf26887c599fd77f4ea4"
+  },
+  "archive_members_verified": true,
+  "output_directory_existed_at_failure_collection": false,
+  "preserved_failure_archive": {
+    "path": "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/BLOCK1_PERSISTENT_PRELEARNER_FAILURE_RAW.tar.gz",
+    "bytes": 1033,
+    "sha256": "db4543673767b4629487f959ea88b6d579f9eb980130cf26887c599fd77f4ea4"
+  }
+}

@@ -82,9 +82,11 @@ evaluation1781901/1782001,5000/4969/128 each. Its ordered two-block differences
 and descriptive-only mean preserve all outcomes without pooling discovery data.
 Source797596454 has independent binding/publication review and27 focused cases
 accepted; the only failure was a repaired test fixture, with scientific source
-unchanged. G1 is accepted at2026-09-15T04:40:52Z after fresh admission, with the
-reused terminal-only Monitor assigned. A1/G2/A2 are the remaining fixed original
-calls, not yet accepted; no study outcome is inferred from launch. The [execution
+unchanged. G1 is complete with mean1.4009375 and full5000/4969/128 counts;
+this single arm supplies no contrast or study polarity. The first A1 supervisor
+failed before its child command because its output directory was not prepared;
+the intact failure is being classified and ordinary startup preparation repaired.
+A1/G2/A2 remain the fixed learner endpoints without results. The [execution
 record](entity_augmentation_repeat_b01_781901_782001/EXECUTION.md) fixes the source,
 commands and actual state. No new family/lifecycle or Portfolio disposition.
 Under the [owner's accepted two-axis calibration](../../portfolio/decisions/2026-09-14-two-axis-research-calibration.md),

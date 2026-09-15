@@ -1,0 +1,54 @@
+{
+  "prepared_utc": "2026-09-15T05:33:58.208920+00:00",
+  "kind": "manual repair of prelearner output-directory preparation",
+  "scientific_source_sha": "7975964542b83560cbc0e79f74a9212f8e3737af",
+  "preserved_original_handle": "folr-augmentation-repeat-b01-781901-persistent",
+  "preserved_failure": "BLOCK1_PERSISTENT_PRELEARNER_FAILURE_COLLECTION.json",
+  "prepared_out": "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/block1/persistent",
+  "prepare_before_launch": "Create the exact absent/empty output directory before /usr/bin/time opens its output file; same preparation for selected G2/A2. Never overwrite endpoint files.",
+  "corrected_supervisor_command": {
+    "block": 1,
+    "arm": "persistent",
+    "source_sha": "7975964542b83560cbc0e79f74a9212f8e3737af",
+    "handle": "folr-augmentation-repeat-b01-781901-persistent-start2",
+    "out": "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/block1/persistent",
+    "argv": [
+      "/usr/local/bin/agent-task",
+      "run",
+      "folr-augmentation-repeat-b01-781901-persistent-start2",
+      "bash",
+      "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/BLOCK1_PERSISTENT.sh",
+      "7975964542b83560cbc0e79f74a9212f8e3737af",
+      "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001",
+      "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/block1/persistent",
+      "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/block1/generic/summary.json"
+    ]
+  },
+  "zero_exposure_claim": "Wrapper/time failure and missing output imply no child invocation; confirm with two nonlearning marker checks before continuation. Not yet classified solely from error text.",
+  "new_fit_or_scientific_retry": 0,
+  "remaining_real_learner_calls": "A1,G2,A2 under the existing four-fit card",
+  "check_bound": "Two GNU time/touch marker checks, one missing output directory then one prepared directory; no Python learner, environment, reward or optimizer; <=10s; exact owned scratch; preserve receipt then creator cleanup.",
+  "check_scratch": "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/test/repetition-output-preparation-20260914-dm",
+  "check_commands": [
+    [
+      "/usr/bin/time",
+      "-q",
+      "-f",
+      "{\"wall_seconds\":%e,\"exit_code\":%x}",
+      "-o",
+      "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/test/repetition-output-preparation-20260914-dm/unprepared/TIME.json",
+      "/usr/bin/touch",
+      "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/test/repetition-output-preparation-20260914-dm/MARKER_unprepared"
+    ],
+    [
+      "/usr/bin/time",
+      "-q",
+      "-f",
+      "{\"wall_seconds\":%e,\"exit_code\":%x}",
+      "-o",
+      "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/test/repetition-output-preparation-20260914-dm/prepared/TIME.json",
+      "/usr/bin/touch",
+      "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/test/repetition-output-preparation-20260914-dm/MARKER_prepared"
+    ]
+  ]
+}
