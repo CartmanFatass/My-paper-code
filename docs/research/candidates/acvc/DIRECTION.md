@@ -17,7 +17,7 @@ opportunity-level ablations. **ACVC is not shown scientifically exhausted**: a f
 F(M) pair (C; two fits and two final 64-world panels, about 2,129,920 ticks and 24,576 optimizer
 calls, more with contextual panels) remains a defensible, different question about which complete
 proposer-package to develop, and the node returns the direction-level investment/lifecycle question
-to `portfolio:cross_direction` carrying C as the strongest distinct alternative; request `2026-09-15-acvc-direction-investment-lifecycle-01` authored in `docs/research/portfolio/pro_packets/20260915_acvc_direction_investment_lifecycle/` (P1 fund the matched F(C) vs F(M) pair as at most two fits, DM recommendation, close call with P2 PARK / P3 ACTIVE-idle); its send follows this commit. Until
+to `portfolio:cross_direction` carrying C as the strongest distinct alternative; request `2026-09-15-acvc-direction-investment-lifecycle-01` authored in `docs/research/portfolio/pro_packets/20260915_acvc_direction_investment_lifecycle/` (P1 fund the matched F(C) vs F(M) pair as at most two fits, DM recommendation, close call with P2 PARK / P3 ACTIVE-idle); sent once at 23:22:55Z (TASK `f707fe2f3`, HANDOFF `3a8154036`; first call chatgpt_target_menu_open_unconfirmed before any click, the identical verifyExisting call clicked once; user message d4555e9e-2913-44a7-810d-2dd6cd0f6d32, tab 3eb267d8-c83a-4352-9fc4-bcc7d1165738 open for phase 2, prompt sha256 65f8236eec3c8dc7cf13f2ae094e71991bcd2161873d9344842594760cce8376); the archived answer is awaited. Until
 Portfolio answers: ACTIVE/MEDIUM/recasts2, lowest sequencing, no open object, no producer; the
 two-block C/M claim, B01 and the historical results are unchanged.
 

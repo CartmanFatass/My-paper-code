@@ -88,7 +88,7 @@ Opus review.
   distinct alternative. Intake
   [pro_packets/20260915_m_deployment_transfer_b02_result_review/INTAKE.md](pro_packets/20260915_m_deployment_transfer_b02_result_review/INTAKE.md);
   ledger row 37; owner item `20260915-acvc-008`.
-- Portfolio question on ACVC's direction-level investment and lifecycle: request `2026-09-15-acvc-direction-investment-lifecycle-01` authored in `docs/research/portfolio/pro_packets/20260915_acvc_direction_investment_lifecycle/` (P1 fund the matched F(C) vs F(M) pair as at most two fits, DM recommendation, close call with P2 PARK / P3 ACTIVE-idle); its send follows this commit.
+- Portfolio question on ACVC's direction-level investment and lifecycle: request `2026-09-15-acvc-direction-investment-lifecycle-01` authored in `docs/research/portfolio/pro_packets/20260915_acvc_direction_investment_lifecycle/` (P1 fund the matched F(C) vs F(M) pair as at most two fits, DM recommendation, close call with P2 PARK / P3 ACTIVE-idle); sent once at 23:22:55Z (TASK `f707fe2f3`, HANDOFF `3a8154036`; first call chatgpt_target_menu_open_unconfirmed before any click, the identical verifyExisting call clicked once; user message d4555e9e-2913-44a7-810d-2dd6cd0f6d32, tab 3eb267d8-c83a-4352-9fc4-bcc7d1165738 open for phase 2, prompt sha256 65f8236eec3c8dc7cf13f2ae094e71991bcd2161873d9344842594760cce8376); the archived answer is awaited.
 
 ## First resume step (current)
 
