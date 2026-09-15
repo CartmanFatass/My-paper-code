@@ -1,0 +1,12 @@
+{
+  "handle": "folr-augmentation-repeat-b01-781901-generic",
+  "source_sha": "7975964542b83560cbc0e79f74a9212f8e3737af",
+  "supervisor_pid": 3707528,
+  "accepted_at": "2026-09-15T04:40:52.089036Z",
+  "status": "finished",
+  "exit_code": 0,
+  "terminal_observed_at": "2026-09-15T05:26:59.6896005Z",
+  "observation_method": "bounded PowerShell SSH status observation; 60-second cadence; terminal confirmed by direct UTC status query",
+  "session_id": 99756,
+  "delivery_state": "native_final_to_parent"
+}

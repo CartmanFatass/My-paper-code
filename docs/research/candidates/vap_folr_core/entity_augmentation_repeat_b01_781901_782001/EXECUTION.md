@@ -58,3 +58,27 @@ Dispatch is not proof of an intermediate direct adoption. Its declared actual
 capability/native-final method and terminal evidence will be recorded on return.
 A1/G2/A2 remain the selected, not-yet-accepted original calls; zero retry or
 post-result extension is introduced. DM now waits on G1 after independent work.
+
+## G1 collection and A1 preparation failure
+
+G1 is terminal exit0 and fully collected at05:29:22Z. Its separate arm intake
+accepts5000/4969/128 with mean1.4009375, wall2251.18s, CPU2250.28s and ten
+verified raw members; no contrast is available. The Monitor's native-final
+terminal receipt and actual capability are preserved. Owner reviews returned[].
+
+The original A1 supervisor accepted05:30:46.666204Z, PID3711036, but returned
+exit125 before ADMISSION/summary/checkpoint. /usr/bin/time could not create
+its output because block1/persistent did not exist; this DM launch preparation
+omitted the directory creation performed for G1. The Monitor confirmed terminal
+at05:31:23.2774201Z, tmux false, and returned native final. The entire six-member
+supervisor archive is retained as BLOCK1_PERSISTENT_PRELEARNER_FAILURE_RAW.tar.gz,
+with its separate collection and state receipts. No failed supervisor is erased.
+
+PRELEARNER_REPAIR_PLAN.json fixes the small nonlearning marker check and exact
+manual repair: prepare the same output directory, retain source797596454 and all
+published scientific arguments, and name a second technical supervisor start2
+so the failed original remains. G2/A2 likewise receive ordinary directory
+preparation before their original commands. A reader failure alone is provisional;
+the recorded marker check will confirm whether the child can have executed.
+This does not authorize a fifth learner, scientific retry, score selection or
+changed endpoint. The original COMMANDS bytes remain historical and unchanged.
