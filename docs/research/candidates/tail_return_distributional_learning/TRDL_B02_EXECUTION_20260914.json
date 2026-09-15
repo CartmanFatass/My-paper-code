@@ -46,7 +46,7 @@
     "optimizer_calls": 128
   },
   "source_acceptance": "DM accepts reviewed deddd8d9e after six pure changed-contract checks and independent Reviewer no-material-issue finding. No native smoke selected.",
-  "current_state": "Both granted originals complete/exit0, fully collected and technically/scientifically accepted as INSIDE_MEI; Monitor active_set empty. Owner-directed preservation/assigned cleanup and pause handoff remain. No new review request or successor.",
+  "current_state": "OWNER_DIRECT operationally paused after two complete original fits, Monitor terminal collection, independent source review, DM technical/scientific intake, main preservation and assigned exact remote cleanup. No live experiment/provider/child assignment; no successor/new Pro request.",
   "monitor": "/root/dm_trdl_vacancy_20260914/monitor_trdl_b01",
   "pair_publication_command": "cd /home/wu/hmasd-worktrees/trdl-b02-9602 && /home/wu/.venvs/hmasd/bin/python scripts/run_trdl_b01.py pair --seed 9602 --scalar /home/wu/hmasd-worktrees/trdl-b02-9602/temp/directions/tail_return_distributional_learning/exp/b02_9602/SCALAR/summary.json --quantile /home/wu/hmasd-worktrees/trdl-b02-9602/temp/directions/tail_return_distributional_learning/exp/b02_9602/Q32/summary.json --out /home/wu/hmasd-worktrees/trdl-b02-9602/temp/directions/tail_return_distributional_learning/exp/b02_9602/PAIR_SUMMARY.json --launch-sha deddd8d9e0b41cff165d32f3f7729c23df236a69",
   "source_transport": {
@@ -110,5 +110,8 @@
   },
   "result_intake": "docs/research/candidates/tail_return_distributional_learning/TRDL_B02_INTAKE_20260914.md",
   "result_branch": "INSIDE_MEI",
-  "next_action": "Preserve integrated unique evidence, perform assigned exact remote cleanup, publish owner-pause handoff; no next science/request"
+  "next_action": "None while owner-paused; explicit owner resume required. Unstarted B02 full Pro result review remains distinctly recorded, with no pending provider.",
+  "cleanup_receipt": "docs/research/candidates/tail_return_distributional_learning/trdl_b02_9602/CLEANUP_RECEIPT.json",
+  "cleanup_verified_at": "2026-09-15T06:15:15.988548Z",
+  "pause_handoff": "docs/research/candidates/tail_return_distributional_learning/TRDL_OWNER_PAUSE_HANDOFF_20260914.md"
 }
