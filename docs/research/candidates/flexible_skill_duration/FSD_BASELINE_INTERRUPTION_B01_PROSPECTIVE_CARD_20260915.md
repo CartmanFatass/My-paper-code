@@ -231,3 +231,50 @@ with architecture, and costs a separate object.
 Under all options: authentic D0 remains default, limited optional I1280 keeps
 its accepted scope, no lifecycle, priority or peer change, no C promotion, no
 recast, no specification exception. Completion ends only this allocation.
+
+## 8. Portfolio decision applied (2026-09-15, `PRO_FINAL / OWNER_DELEGATED`)
+
+`portfolio:cross_direction` selected **S with corrections**
+([RESPONSE.md](../../portfolio/pro_packets/20260915_fsd_baseline_interruption_investment/archive/RESPONSE.md),
+request `2026-09-15-fsd-baseline-interruption-investment-01`, delivery commit
+`5c6053f4a`). The frozen object is therefore:
+
+- **Four** fresh training blocks, bases 772203/772303/772403/772503 and
+  782203/782303/782403/782503; twelve original fits; blocks 772603/772703 are
+  unpurchased. Fifteen rollouts and all three panels are retained.
+- **FLAT is built from the ordinary `off` configuration** and then the
+  `apply_algorithm_config(config, "mappo")` switch, not from a D2 configuration.
+  It keeps constant single skills, zero coordinator/discriminator updates and a
+  learning private recurrent actor with a central-state critic.
+  *Runtime deviation recorded by the DM:* the switch's `k = rollout_length + 1`
+  is not runnable on this stack because the discoverer's recurrent training
+  chunk length is `config.k` (`hmasd/agent.py:6125`) and a chunk longer than the
+  rollout cannot be split; the runner sets `k = 10`, identical to the D arms, so
+  the recurrent chunking and the ten-step skill period are the same in every
+  arm and the only differences are the single constant skill and the absent
+  coordinator/discriminator learning. The tiny real-host check exercises this
+  path (`test_real_tiny.py`).
+- **Labels:** `H_r`/`HI_r` are renamed `GAP_D`/`GAP_I`, *untuned
+  cross-information package gaps* D1280 − FLAT and I1280 − FLAT; they are not
+  §11.7 headroom and supply no tuned same-information reference.
+- **MEI .05 J** stays as a cost-sensitive development target; the claim that an
+  effect must exceed arm variability to matter is withdrawn. Reading is split:
+  importance (mean above +.05 locally substantial positive; below −.05 adverse;
+  inclusive ±.05 small signed) and uncertainty (df = 3 working-model interval
+  reported alongside; zero exclusion strengthens but is not required; an
+  interval inside ±.05 is a model-conditional small-magnitude reading, never
+  equivalence).
+- **Rollout-5 accumulation:** four new plus two historical blocks (six, df = 5),
+  new and historical groups reported separately first; the combined summary is
+  explicitly outcome-informed descriptive accumulation, permitted because the
+  five-rollout prefix, evaluation and seed semantics are inherited unchanged
+  (collector equivalence test; entropy annealing is off in this recipe so the
+  inherited `total_timesteps` is inert).
+- **Exposure (S):** 1,440,000 training + 576,000 evaluation team steps, 2,880 +
+  1,152 episodes, 180 update stages, 24 model constructions, 108,000 batched
+  control calls, 12,096,000 agent-step observations. Ordinary plan 24,000–30,000 s
+  summed native wall; not a cap.
+- Implementation: `scripts/run_fsd_baseline_interruption_b01.py` (488 lines) and
+  its two focused test files, committed on `codex/fsd` at `db0b11bd8`; 15
+  synthetic and 2 real tiny-host tests green; Opus independent review requested
+  before launch. `hmasd/**` and the existing runners untouched.
