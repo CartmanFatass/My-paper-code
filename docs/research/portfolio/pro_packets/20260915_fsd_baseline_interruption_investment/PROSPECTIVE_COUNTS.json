@@ -1,0 +1,85 @@
+{
+  "card": "docs/research/candidates/flexible_skill_duration/FSD_BASELINE_INTERRUPTION_B01_PROSPECTIVE_CARD_20260915.md",
+  "source_constants": {
+    "file": "scripts/run_fsd_uav_individual_renewal_b01.py",
+    "TRAIN_LANES": 16,
+    "EVAL_LANES": 32,
+    "HORIZON": 500,
+    "ROLLOUTS_existing": 5,
+    "N_UAVS": 6
+  },
+  "proposed": {
+    "ROLLOUTS": 15,
+    "panels_per_fit": 3,
+    "panel_rollouts": [
+      5,
+      10,
+      15
+    ]
+  },
+  "options": {
+    "F": {
+      "fits": 18,
+      "arms": 3,
+      "training_blocks": 6,
+      "training_team_steps": 2160000,
+      "training_episodes": 4320,
+      "evaluation_team_steps": 864000,
+      "evaluation_episodes": 1728,
+      "update_stages": 270,
+      "model_constructions": 36,
+      "batched_control_calls": 162000,
+      "agent_step_observations": 18144000
+    },
+    "S": {
+      "fits": 12,
+      "arms": 3,
+      "training_blocks": 4,
+      "training_team_steps": 1440000,
+      "training_episodes": 2880,
+      "evaluation_team_steps": 576000,
+      "evaluation_episodes": 1152,
+      "update_stages": 180,
+      "model_constructions": 24,
+      "batched_control_calls": 108000,
+      "agent_step_observations": 12096000
+    },
+    "P": {
+      "fits": 24,
+      "arms": 4,
+      "training_blocks": 6,
+      "training_team_steps": 2880000,
+      "training_episodes": 5760,
+      "evaluation_team_steps": 1152000,
+      "evaluation_episodes": 2304,
+      "update_stages": 360,
+      "model_constructions": 48,
+      "batched_control_calls": 216000,
+      "agent_step_observations": 24192000
+    },
+    "N": {
+      "fits": 0,
+      "arms": 0,
+      "training_blocks": 0,
+      "training_team_steps": 0,
+      "training_episodes": 0,
+      "evaluation_team_steps": 0,
+      "evaluation_episodes": 0,
+      "update_stages": 0,
+      "model_constructions": 0,
+      "batched_control_calls": 0,
+      "agent_step_observations": 0
+    }
+  },
+  "coordinator_call_law": "15 * sum_r ceil(valid_joint_rows_r / batch); D1280 800 rows/rollout -> 15 calls/rollout -> 225 per fit; I1280 <= 8000 rows -> <= 105/rollout -> <= 1575 per fit; FLAT 0",
+  "current_consultation_exposure": {
+    "fits": 0,
+    "models": 0,
+    "checkpoint_loads": 0,
+    "environment_steps": 0,
+    "optimizer_steps": 0,
+    "evaluations": 0,
+    "tests_or_profiling": 0
+  },
+  "method": "regex/AST-literal reading of module constants; no target import, no historical outcome reanalysis"
+}
