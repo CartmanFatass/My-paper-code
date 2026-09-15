@@ -1,5 +1,5 @@
 """One original arm, complete final panel, and the card's pair publication."""
-import hashlib
+from contextlib import contextmanager
 import json
 import time
 import traceback
@@ -28,6 +28,15 @@ def new_counts():
 
 def write_json(path, payload):
     Path(path).write_text(json.dumps(payload, indent=2, allow_nan=False) + "\n", encoding="utf-8")
+
+
+@contextmanager
+def phase_time(timings, name):
+    started = time.monotonic()
+    try:
+        yield
+    finally:
+        timings[name] += time.monotonic() - started
 
 
 def peak_rss_bytes():
@@ -75,57 +84,50 @@ def run_arm(arm, master, out, launch_sha, max_seconds, process_start):
                           cost_law=COST_LAW, unit_rates="UNKNOWN")), flush=True)
     try:
         check()
-        started = time.monotonic()
-        actor, critic = models(master, arm)
-        initial = snapshot(actor, critic)
-        optimizer = optimizer_for(actor, critic)
-        counts["constructor_calls"] += 1
-        env = make_real(100000 * master + 1000)
-        counts["constructor_resets"] += 1
-        timings["initialization"] += time.monotonic() - started
+        with phase_time(timings, "initialization"):
+            actor, critic = models(master, arm)
+            initial = snapshot(actor, critic)
+            optimizer = optimizer_for(actor, critic)
+            counts["constructor_calls"] += 1
+            env = make_real(100000 * master + 1000)
+            counts["constructor_resets"] += 1
         velocity_rng = action_generator(master, arm)
         with (out / "episodes.jsonl").open("w", encoding="utf-8") as episodes_file, (
                 out / "updates.jsonl").open("w", encoding="utf-8") as updates_file:
             for batch_number in range(TRAIN_EPISODES // BATCH):
                 rollouts = []
-                started = time.monotonic()
-                for offset in range(BATCH):
-                    episode = batch_number * BATCH + offset
-                    rollout, _ = collect_episode(
-                        env, actor, 100000 * master + 1000 + episode, velocity_rng,
-                        "train", episode, check, counts, lambda row: emit(episodes_file, row))
-                    rollouts.append(rollout)
-                timings["training_collection"] += time.monotonic() - started
+                with phase_time(timings, "training_collection"):
+                    for offset in range(BATCH):
+                        episode = batch_number * BATCH + offset
+                        rollout, _ = collect_episode(
+                            env, actor, 100000 * master + 1000 + episode, velocity_rng,
+                            "train", episode, check, counts, lambda row: emit(episodes_file, row))
+                        rollouts.append(rollout)
                 check()
-                started = time.monotonic()
-                batch = frozen_batch(critic, rollouts)
-                timings["frozen_baselines"] += time.monotonic() - started
-                started = time.monotonic()
-                update(actor, critic, optimizer, batch, check, counts,
-                       lambda row: emit(updates_file, dict(batch=batch_number, **row)))
-                timings["updates"] += time.monotonic() - started
+                with phase_time(timings, "frozen_baselines"):
+                    batch = frozen_batch(critic, rollouts)
+                with phase_time(timings, "updates"):
+                    update(actor, critic, optimizer, batch, check, counts,
+                           lambda row: emit(updates_file, dict(batch=batch_number, **row)))
                 print(json.dumps(dict(event="batch_complete", arm=arm, batch=batch_number,
                                       counts=counts, elapsed=time.monotonic() - process_start)), flush=True)
             check()
-            started = time.monotonic()
-            actor.eval()
-            critic.eval()
-            torch.save(dict(arm=arm, seed=master, launch_sha=launch_sha,
-                            actor=actor.state_dict(), critic=critic.state_dict(),
-                            optimizer_steps=counts["optimizer_steps"]), out / "checkpoint.pt")
-            summary["checkpoint_sha256"] = hashlib.sha256((out / "checkpoint.pt").read_bytes()).hexdigest()
-            timings["checkpoint_publication"] += time.monotonic() - started
-            started = time.monotonic()
-            for episode in range(EVAL_EPISODES):
-                _, row = collect_episode(
-                    env, actor, 100000 * master + 2000 + episode,
-                    action_generator(master, arm, episode), "eval", episode,
-                    check, counts, lambda result: emit(episodes_file, result))
-                evaluation_returns.append(row["J"])
-                if (episode + 1) % 16 == 0:
-                    print(json.dumps(dict(event="eval_progress", arm=arm, episodes=episode + 1,
-                                          elapsed=time.monotonic() - process_start)), flush=True)
-            timings["final_evaluation"] += time.monotonic() - started
+            with phase_time(timings, "checkpoint_publication"):
+                actor.eval()
+                critic.eval()
+                torch.save(dict(arm=arm, seed=master, launch_sha=launch_sha,
+                                actor=actor.state_dict(), critic=critic.state_dict(),
+                                optimizer_steps=counts["optimizer_steps"]), out / "checkpoint.pt")
+            with phase_time(timings, "final_evaluation"):
+                for episode in range(EVAL_EPISODES):
+                    _, row = collect_episode(
+                        env, actor, 100000 * master + 2000 + episode,
+                        action_generator(master, arm, episode), "eval", episode,
+                        check, counts, lambda result: emit(episodes_file, result))
+                    evaluation_returns.append(row["J"])
+                    if (episode + 1) % 16 == 0:
+                        print(json.dumps(dict(event="eval_progress", arm=arm, episodes=episode + 1,
+                                              elapsed=time.monotonic() - process_start)), flush=True)
         summary["endpoint"] = endpoint(evaluation_returns)
         summary["status"] = "complete"
     except Exception as error:
