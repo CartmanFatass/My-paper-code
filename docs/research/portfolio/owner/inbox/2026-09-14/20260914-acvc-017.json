@@ -1,0 +1,74 @@
+{
+  "id": "20260914-acvc-017",
+  "created": "2026-09-14T22:27:00-07:00",
+  "direction": "acvc",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "ACVC：一块同信息MAPPO比较已获拨款并固定",
+  "context": "固定B：每臂4096训练，最终C/F/dwell/M各64，共两个原始fit。局部actor信息相同，whole-method比较，以F-M为唯一primary；不预设baseline已调优或训练总体优越。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "launch as carded",
+      "consequence": "应用现有Portfolio拨款，最小适配和独立审查后直接执行两原始。"
+    },
+    {
+      "key": "reject",
+      "label": "do not launch",
+      "consequence": "在干净边界应用owner覆盖，保留已有事实；无自动替代或重试。"
+    },
+    {
+      "key": "revise",
+      "label": "revise before launch",
+      "consequence": "仅按实际owner改动处理依赖，不悄悄扩大已固定科学预算。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "完整Portfolio已选择M；当前卡只固定新标签、上游默认和必要适配量，保留更便宜参考复核及未知成本。",
+  "evidence": [
+    "docs/research/candidates/acvc/ACVC_CLUSTER_MAPPO_COMPARISON_B01_SCIENCE_CARD_20260914.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-14.md#L154",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "已获Portfolio新拨款的一块ACVC与MAPPO同信息比较，按固定两个原始拟合直接实施。",
+    "changes_if_approved": [
+      {
+        "target": "ACVC当前有限B",
+        "from": "Portfolio已拨款，尚无新模型或调用",
+        "to": "冻结28331/38331，一个C/M训练block、两个4096原始fit，最终C/F/dwell/M各64；最小适配审查后直接执行。"
+      }
+    ],
+    "if_refused": "在下一个干净边界应用实际owner覆盖，保留已执行事实；不假定新的替代或重试拨款。",
+    "evidence_for": [
+      {
+        "path": "docs/research/portfolio/pro_packets/20260914_acvc_post_baseline_match_investment/archive/RESPONSE.md",
+        "quote": "Select M: purchase one fresh private-information ACVC C/M training block—exactly two original fits, four final C/F/own-dwell/M panels—and the minimum baseline adapter and support.",
+        "why": "完整conforming Portfolio明确购买此有限比较；新基线信息差异已解决。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/acvc/ACVC_CLUSTER_MAPPO_COMPARISON_B01_SCIENCE_CARD_20260914.md",
+        "quote": "One unchanged reference fit remains the strongest cheaper alternative",
+        "why": "新增baseline适配和原始运行成本未知，一个训练block不能建立总体排名或调优能力。"
+      }
+    ],
+    "uncertainty": [
+      "主比较F−M不由有利的辅助比较替代；所有负向world保留。",
+      "当前原型未技术接受，recurrent/likelihood/ValueNorm需要独立高风险审查。"
+    ],
+    "cost": {
+      "compute": "2original fit，2162688teamticks/24576Adam；C1400s/M2400s只是可调整普通计划，不是硬cap。MAPPO实际wall/RSS、support/provider全成本未知。",
+      "owner_time": "无需逐步批准，保留异步覆盖",
+      "reversibility": "costly",
+      "waits_on_this": "nothing; accepted allocation proceeds through DM implementation and exact technical acceptance"
+    },
+    "verdict_text": "Owner-delegated decision (unattended,2026-09-03 instruction): freeze this M card and directly implement the already selected Portfolio allocation.",
+    "source": "docs/research/candidates/acvc/ACVC_CLUSTER_MAPPO_COMPARISON_B01_SCIENCE_CARD_20260914.md"
+  },
+  "starred": false
+}
