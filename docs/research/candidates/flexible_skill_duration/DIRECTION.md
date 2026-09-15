@@ -37,20 +37,27 @@ Untying the duration `k` is this direction. Untying the agent count `N` is a sep
   direction. The untuned package gaps at rollout 15 are GAP_D = D1280 − FLAT **−.04526346 J**
   [−.13491570, +.04438879] and GAP_I = I1280 − FLAT **−.03542601 J** [−.18359432,
   +.11274230] (four-block arm means FLAT .4510, D1280 .4058, I1280 .4156): the direction's
-  first same-host flat comparison, a package gap and not §11.7 headroom, in which the untuned
-  private-actor flat reduction is not below the skill package at equal exposure. Six-block
+  first same-host flat comparison, a package gap and not §11.7 headroom, in which on the
+  observed point estimates the untuned private-actor flat reduction is not below the skill
+  package at equal exposure (intervals include zero; no non-inferiority or equivalence). Six-block
   rollout-5 accumulation (four new + two historical, outcome-informed descriptive)
   +.04287702 J [−.02320115, +.10895519]. Panel-to-panel movement inside one fit reaches
-  .1–.2 J, so block dispersion is not attributable to training seeds alone. Both hub modal
+  .1–.2 J (checkpoints share no stable ordering; not a variance decomposition). Both hub modal
   predictions (SI1280_15 and GAP_D inside ±.05) were correct; owner slot not taken. See
   [complete E0](FSD_BASELINE_INTERRUPTION_B01_RESULT_EVIDENCE_20260915.md) and
   [accepted intake](FSD_BASELINE_INTERRUPTION_B01_INTAKE_20260915.md). Authentic D0 remains
   default; the five-rollout optional I1280 scope is unchanged; no equivalence, default change,
   component attribution or C promotion. The S allocation ends here (no automatic extension).
-  The next choice is direction-tier for `em:flexible_skill_duration:convergence`: conclude at
-  this claim (A), a tuned same-information flat baseline as the next object (B, DM
-  recommendation), or another tranche of blocks (C, Portfolio); prepared in the intake, not
-  yet sent.
+  **Direction decision (`em:flexible_skill_duration:convergence`, 20:27Z, A, `PRO_FINAL`,
+  label `CLOSE_OBJECT`, [intake](pro_packets/20260915_post_baseline_interruption_convergence/INTAKE.md)):**
+  this exploration stage (declared recipes, host, fifteen-rollout budget) is closed at the
+  bounded claim quoted in that intake; no new object; a FLAT recipe sweep (B) cannot deliver
+  headroom and is not the next step; more blocks (C) and thirty rollouts (D) are legitimate
+  but not bought now. Not a family closure, PARK or slot decision (Portfolio's). Reopening
+  facts: a real use needing a choice among the recipes at a stated thirty-rollout budget; a
+  same-information comparison with a defined legal execution interface, method and cost; or
+  new evidence or a dependency fact that materially changes the reading. FSD is ACTIVE-idle
+  for this question.
 - **Latest discriminator — completed B/EXPLORE, 2026-09-15:** the
   [funded interruption-by-batch card](FSD_INTERRUPTION_BATCH_B01_PROSPECTIVE_CARD_20260914.md)
   completed all eight originals in two fresh four-arm blocks. I1280 minus

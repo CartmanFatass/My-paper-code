@@ -1,5 +1,22 @@
 # Direction acvc: ACVC
 
+## M-deployment transfer object selected — 2026-09-15 20:28Z (em:acvc:convergence B, PRO_FINAL; Portfolio investment pending)
+
+Under the owner's 12:57 PDT scope instruction the hub derived the node's unlisted candidate
+into a card, [ACVC_M_DEPLOYMENT_TRANSFER_B01](ACVC_M_DEPLOYMENT_TRANSFER_B01_PROSPECTIVE_CARD_20260915.md):
+one fresh M fit (MASTER 28531 / namespace 38531) with three private final panels M, F(M),
+own-dwell(M), primary T_F = mean64[J(F(M)) − J(M)] at the .01 J MEI (TRANSFERS / WITHIN_MEI
+/ ADVERSE), supporting T_D and the paired U = F(M) − own-dwell(M). `em:acvc:convergence`
+selected it with corrections (private per-panel history, U as supporting, evaluation
+accounting, a bounded synthetic no-op identity check, structure class *systems / information
+flow*; [intake](pro_packets/20260915_m_deployment_transfer_convergence/INTAKE.md)). It is a
+new outcome-informed B/EXPLORE question about portability of the fixed deployment
+transformation to the conventional proposer; the concluded two-block claim below is
+unchanged. Launch waits for a bounded Portfolio investment decision (one fit, about 2,600 s
+native plan); the L0 (runner, wrapped evaluator, focused tests) is engineering work that
+proceeds meanwhile with independent review. Hub predictions on record: T_F .40/.30/.30, T_D
+.30/.35/.35; owner not taken.
+
 ## C/M comparison family concluded at its two-block claim — 2026-09-15 (em:acvc:convergence, PRO_FINAL)
 
 The granted second block (master 28431, source `2dc9631c8`) is complete and accepted

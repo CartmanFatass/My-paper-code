@@ -65,9 +65,22 @@ recurred; competitive advantage unresolved). Reporting corrections applied to th
 intake. Remote worktree and staging reclaimed (CLEANUP.json); checkpoints retained locally
 (PRESERVATION.json). The evidence-spec copy on `codex/acvc` was synced to main.
 
-## State: ACTIVE-idle
+## M-deployment transfer object selected (2026-09-15 20:28Z)
 
-No pending producer, request, transport effect or authorized work. Reopening condition (Pro):
+Under the owner's 12:57 PDT scope instruction the hub derived the unlisted candidate into
+[ACVC_M_DEPLOYMENT_TRANSFER_B01](ACVC_M_DEPLOYMENT_TRANSFER_B01_PROSPECTIVE_CARD_20260915.md)
+and `em:acvc:convergence` selected it with corrections (**B**, `PRO_FINAL`,
+[intake](pro_packets/20260915_m_deployment_transfer_convergence/INTAKE.md), response commit
+`71a1ca5b7`): one fresh M fit, panels M / F(M) / own-dwell(M), T_F at .01 J, labels
+28531/38531. **Launch waits for a bounded Portfolio investment decision** (one fit, about
+2,600 s native plan); the L0 (runner ≤ 300 lines, wrapped evaluator, focused tests under the
+card §5 and §7 acceptance groups) is engineering work that proceeds meanwhile with independent
+Opus review.
+
+## State: ACTIVE, transfer object selected, no producer
+
+Pending: the Portfolio investment question (to author and send on `portfolio:cross_direction`)
+and the L0 implementation. No live handle, no unresolved transport effect. Reopening condition (Pro):
 new compatible evidence or a concrete changed use that makes the comparative choice
 consequential, for example a decision to develop the fixed transformation on an M-trained
 proposer (Pro's best unlisted candidate: one fresh M fit with M / F(M) / own-dwell(M) panels).
@@ -76,6 +89,12 @@ disposition changes them.
 
 ## First resume step
 
-Read this handoff, `DIRECTION.md` (top section) and the Convergence intake. If the owner or
-new evidence supplies a reopening fact, author the corresponding direction question or card;
-otherwise remain ACTIVE-idle. Nothing to launch.
+Read this handoff, `DIRECTION.md` (top section), the corrected card (§7) and the transfer
+intake. (1) If the Portfolio investment question has not been sent, author it
+(`docs/research/portfolio/pro_packets/20260915_acvc_m_deployment_transfer_investment/`, one
+fit, references at a main commit) and send it through `hmasd-pro-transport`. (2) Implement
+the L0 on `codex/acvc` (`scripts/run_acvc_m_deployment_transfer_b01.py`,
+`experiments/candidates/acvc/m_deployment_transfer_b01/wrapped_eval.py`, focused tests), get
+independent Opus review, record the per-fit cost projection. (3) Launch only after a
+conforming Portfolio decision and technical acceptance, via `hmasd-experiment-operator` on
+the WSL node with fresh admission. Nothing to launch before that.

@@ -1,0 +1,86 @@
+{
+  "id": "20260915-acvc-004",
+  "created": "2026-09-15T13:37:42-07:00",
+  "direction": "acvc",
+  "tier": "direction",
+  "kind": "decision",
+  "title": "ACVC M-部署迁移对象带修正入选（方向节点选 B；启动待 Portfolio 投资）",
+  "context": "hub 按所有者 12:57 PDT 授权把节点的未列候选推导成卡片；em:acvc:convergence 20:28Z 选 B：一次新 M 拟合、三面板、T_F@.01 J，四项修正；两块收束主张不变；一次拟合需先经 Portfolio 有界投资问题。",
+  "options": [
+    {
+      "key": "A",
+      "label": "按卡片原样选为下一对象",
+      "consequence": "1 次 M 拟合约 2,600 s；卡片原文的掩码/计数/恒等检查措辞有误"
+    },
+    {
+      "key": "B",
+      "label": "带修正选入；启动前经 Portfolio 一次拟合投资问题",
+      "consequence": "1 次 M 拟合约 2,600 s；L0 实现先行；启动等待 Portfolio 决定"
+    },
+    {
+      "key": "C",
+      "label": "保持族已收束，不做新工作",
+      "consequence": "零新学习；可移植性问题不回答"
+    }
+  ],
+  "recommended": "B",
+  "auto_applied": "B",
+  "dm_reason": "",
+  "evidence": [
+    "docs/research/candidates/acvc/pro_packets/20260915_m_deployment_transfer_convergence/INTAKE.md",
+    "docs/research/candidates/acvc/ACVC_M_DEPLOYMENT_TRANSFER_B01_PROSPECTIVE_CARD_20260915.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-15.md#L29",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "hub 将方向节点提到的“未列候选”推导成卡片（一次新的 M 拟合，面板 M / F(M) / own-dwell(M)，主量 T_F = F(M)−M @ .01 J）后，方向节点应：A 按卡片原样选为下一对象；B 带修正选入；C 保持族已收束？",
+    "changes_if_approved": [
+      {
+        "target": "ACVC 下一对象",
+        "from": "C/M 比较族于 17:08Z 收束，ACTIVE-idle，无对象",
+        "to": "M-部署迁移对象 ACVC_M_DEPLOYMENT_TRANSFER_B01 带修正入选（PRO_FINAL）：1 次新 M 拟合（MASTER 28531 / 命名空间 38531），三面板，T_F@.01 J 主量，U=F(M)−own-dwell(M) 配对支持量；启动前需 Portfolio 一次拟合投资决定；L0 实现作为工程工作先行"
+      },
+      {
+        "target": "卡片修正",
+        "from": "“同一掩码”、两个附加面板各 32,768 tick、用真实 64 分数做恒等检查",
+        "to": "各面板按自身历史评估同一谓词（每回合新建 Binding）；两个附加面板合计 32,768 tick、M 面板只跑一次；用一个有界合成夹具做无替换恒等检查；结构类别 systems / information flow；预测理由修正、概率不变"
+      }
+    ],
+    "if_refused": "所有者可直接指示不投资（族保持收束）、或跳过 Portfolio 直接批准这一次拟合（约 2,600 s 原生墙钟）；否则 hub 按节点要求先向 portfolio:cross_direction 提出有界投资问题，并先行实现 L0。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/acvc/pro_packets/20260915_m_deployment_transfer_convergence/archive/RESPONSE.md",
+        "quote": "Select B: recommend the one-fresh-M deployment-transfer object with the bounded corrections below, retaining one fit, three final panels, the proposed labels and the original primary/.01 J rule.",
+        "why": "方向节点的完整归档决定。"
+      },
+      {
+        "path": "docs/research/candidates/acvc/ACVC_CLUSTER_MAPPO_COMPARISON_B02_RESULT_EVIDENCE_20260915.md",
+        "quote": "F−C +.0474962535776785 UP; F−own-dwell +.031713764045473436 UP.",
+        "why": "两块均见 F 对其 C 源的内部增量；可移植性是旧比较无法回答的具体问题。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/acvc/pro_packets/20260915_m_deployment_transfer_convergence/archive/RESPONSE.md",
+        "quote": "C—retain the concluded family without new work—is the strongest alternative. It costs no new learning and avoids investing in another one-instance result that may not change maintenance.",
+        "why": "一次拟合的单实例结果可能不改变任何维护决定；节点称其偏好为定性投资偏好。"
+      }
+    ],
+    "uncertainty": [
+      "M 是不同的已学策略，C 侧增量不预测 F(M) 的符号",
+      "一次拟合只有条件面板精度，无训练总体精度",
+      "两个附加面板与 Binding 开销未测；2,600 s 为可调计划"
+    ],
+    "cost": {
+      "compute": "拟议 1 次 M 拟合约 2,600 s 原生墙钟（块 2 M 实测 2,427.41 s）；本决定本身零新拟合",
+      "owner_time": "阅读卡片修正与投资边界，约 5 分钟",
+      "reversibility": "reversible",
+      "waits_on_this": "启动等待 Portfolio 投资决定；L0 实现不等待"
+    },
+    "verdict_text": "方向节点选 B（PRO_FINAL）：M-部署迁移对象带四项修正入选，两块收束主张不变；一次拟合属常规 B 工作但记录中无剩余数值拨款，启动前需向 portfolio:cross_direction 提出有界投资问题；hub 已修正卡片并更新 DIRECTION.md。",
+    "source": "docs/research/candidates/acvc/pro_packets/20260915_m_deployment_transfer_convergence/archive/RESPONSE.md"
+  },
+  "starred": true
+}

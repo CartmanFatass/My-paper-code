@@ -6,10 +6,10 @@
 
 | 方向 | 当前科学位置 | 当前 producer / 下一事件 |
 | --- | --- | --- |
-| acvc | [ACTIVE/MEDIUM/recasts2](../candidates/acvc/DIRECTION.md)。private C/M 单block完成，F−M +.02343965 J；限于一个训练block、22/64 adverse worlds，缺tuned headroom。em:acvc:convergence PRO_FINAL：再做一个不变的 C/M block（A，k=1）。 | **Claude hub 驱动**；0 producer；b02 wrapper 已备（`7bd04236d`）；Portfolio 13:19Z 授予一个 block（G，`decisions/2026-09-15-acvc-one-block-replication-grant.md`）；块 2 F−M −.0392（与块 1 反向）；em:acvc:convergence 17:08Z 选 A：C/M 比较族在两块有界主张处收束（内部有用性复现、竞争优势未解决），不选新对象；ACVC ACTIVE-idle；交接 `HANDOFF_2026-09-15_post_cm_decision.md` |
+| acvc | [ACTIVE/MEDIUM/recasts2](../candidates/acvc/DIRECTION.md)。C/M 比较族在两块有界主张处收束（17:08Z，A）；em:acvc:convergence 20:28Z 选 B：M-部署迁移对象（1 次 M 拟合，M / F(M) / own-dwell(M)，T_F@.01 J）带修正入选，属新的结果知情 B/EXPLORE 问题。 | **Claude hub 驱动**；0 producer；启动前需 Portfolio 一次拟合投资决定；L0 实现先行；交接 `HANDOFF_2026-09-15_post_cm_decision.md` |
 | vap_folr_core | [ACTIVE/MEDIUM](../candidates/vap_folr_core/DIRECTION.md)。两块fresh A−G为 −5.830625/−.109921875，均未重现旧A正优势；保持MIXED_BLOCK_PATTERN。 | **Operationally paused**；0 learner/Monitor/Transport。恢复从 `HANDOFF_20260915_AUGMENTATION_REPEAT_OWNER_PAUSE.md` 继续，next discriminator刻意未选。 |
 | tail_return_distributional_learning | [ACTIVE/MEDIUM/recasts0](../candidates/tail_return_distributional_learning/DIRECTION.md)。B02独立pair lower-tail Q−S −.00241972 J（INSIDE_MEI）；B01正结果独立保留。 | **Operationally paused**；0 fit/provider/child。恢复从 `TRDL_OWNER_PAUSE_HANDOFF_20260914.md` 继续；B02结果Pro review未启动。 |
-| flexible_skill_duration | [ACTIVE/HIGH](../candidates/flexible_skill_duration/DIRECTION.md)。baseline × interruption B01（S，12/12 originals）完成：SI1280_15 +.0098 J small_signed、区间跨零；D1280−FLAT −.045、I1280−FLAT −.035（未调参包差距，区间跨零）；rollout-5 六块合并 +.043 [−.023, +.109]。 | **Claude hub 驱动**：S 分配结束，0 producer；方向层问题（A 收束 / B 调参同信息扁平基线为下一对象，推荐 / C 加块）已备于 intake，待送 em:flexible_skill_duration:convergence；交接 `HANDOFF_2026-09-15_baseline_interruption.md` |
+| flexible_skill_duration | [ACTIVE/HIGH](../candidates/flexible_skill_duration/DIRECTION.md)。baseline × interruption B01（S，12/12）完成：SI1280_15 +.0098 J small_signed、区间跨零；D1280−FLAT −.045、I1280−FLAT −.035（未调参包差距，区间跨零）；em:flexible_skill_duration:convergence 20:27Z 选 A（CLOSE_OBJECT）：阶段结题、不选新对象。 | **Claude hub 驱动**：0 producer，ACTIVE-idle；重开条件见 `HANDOFF_2026-09-15_baseline_interruption.md` |
 
 ## 当前协作边界
 

@@ -1,0 +1,91 @@
+{
+  "id": "20260915-fsd-002",
+  "created": "2026-09-15T13:37:41-07:00",
+  "direction": "flexible_skill_duration",
+  "tier": "direction",
+  "kind": "decision",
+  "title": "FSD baseline × interruption 探索阶段结题（方向节点选 A，CLOSE_OBJECT）",
+  "context": "十二次拟合完成并 intake 后，hub 向 em:flexible_skill_duration:convergence 提出 A/B/C/D；节点 20:27Z 选 A：在有界主张处结题、不选新对象，B 不能给出 headroom，C/D 不买；三处收窄修正已应用。",
+  "options": [
+    {
+      "key": "A",
+      "label": "在有界主张处结题，不选新对象，ACTIVE-idle",
+      "consequence": "零新拟合；D0 默认与五轮可选 I1280 范围不变；重开条件记录在交接"
+    },
+    {
+      "key": "B",
+      "label": "FLAT 三设置调参扫描作为 headroom 记录（DM 原推荐）",
+      "consequence": "约 3×2,000–2,600 s；选出的有限终点不能给出 §11.7 headroom"
+    },
+    {
+      "key": "C",
+      "label": "再加相同十五轮块（Portfolio 投资）",
+      "consequence": "每块约 11,000 s 原生墙钟；提高固定终点精度，但当前无决策依赖"
+    },
+    {
+      "key": "D",
+      "label": "三十轮对象（约 2 倍单拟合）",
+      "consequence": "不同预算的 B；不保证轨迹变平或稳定排序"
+    }
+  ],
+  "recommended": "A",
+  "auto_applied": "A",
+  "dm_reason": "",
+  "evidence": [
+    "docs/research/candidates/flexible_skill_duration/pro_packets/20260915_post_baseline_interruption_convergence/INTAKE.md",
+    "docs/research/candidates/flexible_skill_duration/FSD_BASELINE_INTERRUPTION_B01_INTAKE_20260915.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-15.md#L28",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "S 对象（三臂 × 四块、十五轮）完成后，方向节点应如何处置：A 在有界主张处结束本阶段、不选新对象；B 先做 FLAT 调参扫描作为 headroom 记录；C 再加相同块；D 三十轮对象？",
+    "changes_if_approved": [
+      {
+        "target": "FSD baseline × interruption 探索阶段",
+        "from": "十二次拟合完成：SI1280_15 +.0098 J small_signed、df=3 区间跨零；D1280−FLAT −.045、I1280−FLAT −.035，区间跨零",
+        "to": "CLOSE_OBJECT：在有界主张处结题，全部原始观察保留；不自动接续加块、FLAT 扫描或更长训练；authentic D0 仍默认，五轮可选 I1280（U）范围不变；FSD 对本问题 ACTIVE-idle"
+      },
+      {
+        "target": "hub intake 措辞修正",
+        "from": "“续约优势到十五轮未保持”“FLAT 不低于技能包”“轨迹内运动主导、块间离散不能归于 seed”",
+        "to": "第一条限于已观察均值、非衰减规律；第二条限于点估计，区间含零、无非劣/等效；第三条撤回方差分解，更多独立块仍可提高固定终点精度"
+      }
+    ],
+    "if_refused": "所有者可直接指示 B（三设置 FLAT 扫描，各 1 次拟合，约 3×2,000–2,600 s）、C（每加一块三臂约 11,000 s）或 D（三十轮块约 2 倍单拟合）；否则本阶段保持结题，重开条件：出现需在三十轮预算下选择配方的真实用途、有明确合法执行接口与成本的同信息比较需求、或实质改变解读的新证据/依赖事实。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/flexible_skill_duration/FSD_BASELINE_INTERRUPTION_B01_RESULT_EVIDENCE_20260915.md",
+        "quote": "SI1280_15 mean +.00983744 J, interval [−.11564245, +.13531733]; GAP_D_15 −.04526346; GAP_I_15 −.03542601.",
+        "why": "十二次拟合给出首个同宿主扁平对比与十五轮读数，但没有把这一续约配置作为发展重点的强正向收益。"
+      },
+      {
+        "path": "docs/research/candidates/flexible_skill_duration/pro_packets/20260915_post_baseline_interruption_convergence/archive/RESPONSE.md",
+        "quote": "选择 A：以有界、仍不确定的 B/EXPLORE 结论结束本轮 baseline × interruption 探索及其原样延长，不选择新的实验对象。",
+        "why": "方向节点的完整归档决定。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/flexible_skill_duration/pro_packets/20260915_post_baseline_interruption_convergence/archive/RESPONSE.md",
+        "quote": "支持继续研究的最强当前证据是 772203 的十五轮 SI1280 +.09835977 J、同块 I1280−FLAT +.10259562，以及六块 rollout-5 描述性累计仍正向指向。",
+        "why": "潜在收益未被普遍反证消灭；结题是接受剩余不确定性的研究取舍。"
+      }
+    ],
+    "uncertainty": [
+      "四块无法分辨 .03–.05 J 的效应；工作模型覆盖率未验证",
+      "未调参、跨信息的 FLAT 不是同信息 headroom；central-input flat 未测",
+      "更多独立块或更长训练的价值取决于届时要做的选择"
+    ],
+    "cost": {
+      "compute": "本决定不新增拟合；已完成 S 合计 45,401.07 s 原生墙钟",
+      "owner_time": "阅读结题主张与重开条件，约 5 分钟",
+      "reversibility": "reversible",
+      "waits_on_this": "无；FSD 进入 ACTIVE-idle，直到出现重开事实或所有者指示"
+    },
+    "verdict_text": "方向节点选 A（CLOSE_OBJECT）：baseline × interruption 探索阶段在有界主张处结题，不选新对象；B 不能给出 headroom，C/D 合法但本轮不买；D0 默认与五轮可选 I1280 范围不变；hub 已按节点修正 intake 与 DIRECTION.md 措辞。",
+    "source": "docs/research/candidates/flexible_skill_duration/pro_packets/20260915_post_baseline_interruption_convergence/archive/RESPONSE.md"
+  },
+  "starred": true
+}
