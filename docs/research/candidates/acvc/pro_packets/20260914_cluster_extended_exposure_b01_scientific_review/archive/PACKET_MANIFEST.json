@@ -1,0 +1,26 @@
+{
+  "schema_version": 4,
+  "packet_id": "2026-09-14-acvc-cluster-extended-exposure-b01-scientific-review--acvc",
+  "attempt": 1,
+  "canonical_form": "logical_packet_manifest",
+  "request_id": "2026-09-14-acvc-cluster-extended-exposure-b01-scientific-review-01",
+  "direction_id": "acvc",
+  "direction_ids": [
+    "acvc"
+  ],
+  "workflow_node": "em_convergence",
+  "conversation_binding_key": "em:acvc:convergence",
+  "decision_authority": "pro_final",
+  "source_mode": "paste",
+  "body": {
+    "role": "prompt",
+    "source_path": "<paste>",
+    "canonical_filename": "2026-09-14-acvc-cluster-extended-exposure-b01-scientific-review--acvc__00_PROMPT.md",
+    "bytes": 1936,
+    "sha256": "5b258f89502313793e1dbc430cfad0e1225e93f4d6c784ee48e2e60c403a9707"
+  },
+  "references": [],
+  "reference_order_is_authoritative": true,
+  "provider_filename_policy": "record_observed_name_only",
+  "companion_prompt_is_transport_ui_only": true
+}

@@ -1,0 +1,37 @@
+{
+  "observed_utc": "2026-09-15T00:11:02.985620+00:00",
+  "worktree": "/home/wu/hmasd-worktrees/acvc-extended-b01-66ea85e01",
+  "source": "66ea85e0154e838ccb570eab81e2fecea8ff5973",
+  "output": "/home/wu/hmasd-worktrees/acvc-extended-b01-66ea85e01/temp/directions/acvc/exp/cluster_extended_exposure_b01_27457",
+  "supervisor": "/home/wu/.agent-tasks/acvc-extended-b01-27457-66ea85e01",
+  "staging_archive": "/home/wu/hmasd-inputs/acvc-extended-b01-27457-66ea85e01.tar.gz",
+  "archive_sha256": "9768d6fbf472311c4dde15443f583f4fcc977d85781d1ea4c1a57de4344970d5",
+  "archive_bytes": 1687859,
+  "original_files_verified": 15,
+  "native_directory_bytes": 5582125,
+  "supervisor_pid": 3696275,
+  "pid_absent": true,
+  "matching_live_processes": [],
+  "supervisor_status": "finished",
+  "exit_code": 0,
+  "nondelete_tracked_changes": [],
+  "index_omitted_HEAD_files_byte_verified": 2112,
+  "matched_path_list_sha256": "fa7c71076e81cb18e0786628ed22357b283fd2146c01d7178e401277df8487d2",
+  "separately_preserved_interrupted_restore_files": [
+    "docs/research/candidates/acvc/evidence/cluster_fixed_recipe_c01_20260914/unit_05/episodes.jsonl"
+  ],
+  "unique_unpreserved_files": [],
+  "runtime_output_files": [
+    "temp/directions/acvc/exp/cluster_extended_exposure_b01_27457/DENSE_episode_1024.pt",
+    "temp/directions/acvc/exp/cluster_extended_exposure_b01_27457/DENSE_episode_4096.pt",
+    "temp/directions/acvc/exp/cluster_extended_exposure_b01_27457/admission.json",
+    "temp/directions/acvc/exp/cluster_extended_exposure_b01_27457/episodes.jsonl",
+    "temp/directions/acvc/exp/cluster_extended_exposure_b01_27457/native_time.txt",
+    "temp/directions/acvc/exp/cluster_extended_exposure_b01_27457/stderr.log",
+    "temp/directions/acvc/exp/cluster_extended_exposure_b01_27457/stdout.log",
+    "temp/directions/acvc/exp/cluster_extended_exposure_b01_27457/summary.json",
+    "temp/directions/acvc/exp/cluster_extended_exposure_b01_27457/updates.jsonl"
+  ],
+  "registered_before": true,
+  "cleanup_allowed_after_preservation": true
+}
