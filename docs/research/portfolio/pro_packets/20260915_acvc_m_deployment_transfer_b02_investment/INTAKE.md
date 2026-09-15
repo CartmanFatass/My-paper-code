@@ -9,8 +9,9 @@ the Claude hub as ACVC's DM under the owner's 12:57 PDT scope instruction. Sent 
 `codex/acvc 47021a400875341eda48bbf6e5e439e13ee6bad2` ("docs(acvc): deliver M deployment transfer
 B02 investment decision", 22:19:58Z): [`archive/RESPONSE.md`](archive/RESPONSE.md) (10,379 bytes,
 sha256 `71123df4e18bb5b1aca3f7f9e4a67e7140a0d2f4c99adb2ea70db09ee6ae4c8d`). Read from the
-immutable commit; the transport's archive, delivery-comment record, registry walk to `ARCHIVED`
-and tab close are recorded in the transport facts file under
+immutable commit; Issue 14 delivery comment `5688893524` (22:22:21Z). The transport archive
+(`GITHUB_RESPONSE.md`, same sha256), registry walk to `ARCHIVED` and tab close are recorded in
+the transport facts file under
 `temp/sessions/hmasd-chatgpt-pro-transport/archive/portfolio/2026-09-15-acvc-m-deployment-transfer-b02-investment-01/`.
 
 ## Question posed
