@@ -1,0 +1,61 @@
+{
+  "readback_utc": "2026-09-15T01:08:10.641835+00:00",
+  "source_sha": "42e337f36bd36c5dd24a7862eb71144f44fdef57",
+  "primary_recomputed": {
+    "current_only": {
+      "mean": 1.5926562499999999,
+      "sample_sd": 7.152017554054516,
+      "conditional_episode_se": 0.6321550139546467,
+      "minimum": -15.1,
+      "maximum": 21.28,
+      "n": 128,
+      "negative_count": 57
+    },
+    "persistent": {
+      "mean": -1.4767968750000005,
+      "sample_sd": 4.7745108886808385,
+      "conditional_episode_se": 0.42201112827940374,
+      "minimum": -17.540000000000003,
+      "maximum": 11.989999999999997,
+      "n": 128,
+      "negative_count": 84
+    },
+    "persistent_minus_current_only": -3.0694531250000003,
+    "rule": "CURRENT_ONLY_ABOVE_MEI",
+    "mei": 1.0,
+    "training_instances_per_arm": 1,
+    "paired_difference_se": null,
+    "uncertainty": "Episode dispersion is conditional on each fitted policy; common seed labels do not establish paired worlds or training-population uncertainty.",
+    "claim": "Exploratory persistence design comparison within the augmented program."
+  },
+  "recomputed_persistent_panel": {
+    "mean": -1.4767968750000005,
+    "sample_sd": 4.7745108886808385,
+    "conditional_episode_se": 0.42201112827940374,
+    "minimum": -17.540000000000003,
+    "maximum": 11.989999999999997,
+    "n": 128,
+    "negative_count": 84
+  },
+  "complete_counts": {
+    "training_episodes": 10000,
+    "training_ticks": 200000,
+    "optimizer_steps": 9938,
+    "evaluation_episodes": 256,
+    "evaluation_ticks": 5120
+  },
+  "new_training_instances": 2,
+  "per_arm_actor_change_l2": {
+    "Z": 45.8567639737606,
+    "A": 44.38688878123391
+  },
+  "exposure_line": "2 fresh fits; 200000 native training ticks; 9938 RMSprop steps; 2 final checkpoints; 256 final greedy episodes/5120 evaluation ticks; no screening/retry/checkpoint selection",
+  "cost": {
+    "native_wall_sum_seconds": 5759.9400000000005,
+    "aggregate_cpu_sum_seconds": 5759.38,
+    "peak_rss_kib_max": 865784,
+    "support_provider_lifetime_total": "UNKNOWN"
+  },
+  "training_population_uncertainty": "not estimated",
+  "paired_world_or_arm_independence": "not established by common seed labels"
+}

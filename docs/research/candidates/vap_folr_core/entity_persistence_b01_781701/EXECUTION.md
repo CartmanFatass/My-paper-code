@@ -81,3 +81,15 @@ PERSISTENT_LAUNCH_RECEIPT.json and PERSISTENT_ACCEPTANCE.json record the actual
 acceptance and admission. One original invocation per arm, zero retries; no score
 screening or exposure change. The same honest terminal-only Monitor was resumed
 for A; MONITOR_RECOVERY.md records the actual direct-return method and limitations.
+
+## Complete pair collected
+
+Original A exited0 at2026-09-15T01:05:00Z in the supervisor log. The reused Monitor
+returned a command-generated01:06:53.5531751Z finished/exit0 receipt and an empty
+active set. DM collected at01:07:23.914596Z, verified the same source and all
+complete counts/checkpoint/primary bindings, and verified all10 A archive members
+locally. A wall2829.32s; both-arm native wall5759.94s. PAIR_READBACK.json matches
+the published primary: A−Z−3.069453125/CURRENT_ONLY_ABOVE_MEI. The E0 evidence and
+scientific intake record the claim limits separately from technical acceptance.
+No scientific invocation or observer remains live; independent current-result/
+next-plan review and assigned preservation/cleanup are the remaining work.

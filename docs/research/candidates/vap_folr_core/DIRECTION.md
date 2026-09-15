@@ -31,16 +31,26 @@ below does not rewrite the older typed-state or scalar-gate objects.
 ## Current position
 
 **Owner-resumed 2026-09-14:** the explicit instruction to restore subagent DM
-control and continue supersedes the operational pause below. The completed
-A−G +5.29640625 remains one intact-program observation with unknown repeatability
-and unobserved persistence contribution. The next object selects a fresh A−Z
-learning comparison inside the existing family: both retain Generic64 and the
-same entity/current-processing/fusion modules; only Z discards entity hidden state
-each primitive observation. This informs whether to retain persistent entity
-state or simplify that design, without claiming A−G replication, general memory
-cause or stable superiority. Generic recurrence/current cues remain the strongest
-alternative. [Prospective B card](FOLR_ENTITY_PERSISTENCE_B01_SCIENCE_CARD_20260914.md)
-fixes the actual exposure, comparator, reading and bounded recommendation.
+control and continue supersedes the operational pause below. The complete new
+fresh A−Z B gives A−1.476796875/Z1.59265625, d−3.069453125,
+CURRENT_ONLY_ABOVE_MEI. Both have one5000/4969/128 fit, identical augmented modules
+and Generic64 retained; Z clears only the learned entity state every primitive
+observation. This supports prioritizing current-only entity processing for bounded
+development in this design, not closing persistent history or establishing a stable
+ranking. Z remains recurrent through Generic memory and retains seen/age metadata.
+
+The old A−G +5.29640625 remains the strongest positive complete-program observation,
+with unknown repeatability and no isolated persistence attribution. Old replacement
+BANK negatives remain separate. A favorable complete Z realization and easier
+optimization/current-processing/fusion are surviving alternatives. The next useful
+discriminator is a prospective fresh Z−G block against adaptive Generic64: current
+evidence does not show whether Z earns any increment over that null. No historical
+G substitution, exact diagnostic, family closure, C promotion or Portfolio change
+follows from the present result. Same-host tuned headroom remains unmeasured.
+[Card](FOLR_ENTITY_PERSISTENCE_B01_SCIENCE_CARD_20260914.md),
+[E0 result](FOLR_ENTITY_PERSISTENCE_B01_RESULT_EVIDENCE_20260914.md) and
+[intake/next question](FOLR_ENTITY_PERSISTENCE_B01_INTAKE_20260914.md) fix the
+bounded interpretation and preserve the missed low-confidence prediction.
 
 **Historical operational instruction — 2026-09-14 13:23 PDT (superseded by explicit resume):** finish the accepted
 augmentation B01 A−G run and required result/review/archival closeout, then write

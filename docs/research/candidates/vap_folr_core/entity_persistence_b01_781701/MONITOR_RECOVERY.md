@@ -48,3 +48,11 @@ After Z collection the same child was resumed for the original A handle,
 folr-persistence-b01-781701-persistent, PID3698859. Its accepted source is unchanged;
 its new adjacent memory admission passed at00:17:51Z. A uses the same terminal-only
 direct-parent final path, with no assertion of intermediate native adoption.
+
+A terminal-only observation completed. The child returned native final with exact
+finished/exit0/PID3698859 and command-generated UTC01:06:53.5531751Z after the
+180-second loop. DM collection independently confirms finished/exit0 and the raw
+exit log01:05:00Z. PERSISTENT_MONITOR_TERMINAL.json preserves the actual state;
+its active set is empty. This time the returned observation time is consistent
+with the original supervisor terminal. The fallback's terminal return worked;
+earlier failures/timestamps remain preserved and are not retrospectively corrected.
