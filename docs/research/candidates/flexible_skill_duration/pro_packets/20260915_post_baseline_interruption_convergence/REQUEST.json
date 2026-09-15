@@ -1,0 +1,113 @@
+{
+  "caller_role": "em",
+  "workflow_node": "em_convergence",
+  "request_id": "2026-09-15-fsd-post-baseline-interruption-convergence-01",
+  "source_thread_id": "9e0bd69f-aa60-5d32-aaf5-354fa4ffde46",
+  "parent_thread_id": "9e0bd69f-aa60-5d32-aaf5-354fa4ffde46",
+  "operator_thread_id": "fabd6914-bf7f-5050-a5da-b91154eb46e2",
+  "direction_id": "flexible_skill_duration",
+  "repository": "CartmanFatass/My-paper-code",
+  "repository_url": "https://github.com/CartmanFatass/My-paper-code",
+  "execution_mode": "CALLER_DIRECT",
+  "owner_execution_instruction": "Owner 2026-09-15 12:57 PDT: the Claude Code research hub advances two research directions in parallel as the DM-equivalent with cross-direction allocation authority; advancing includes derivation, innovation and experimental validation, while final scientific measurement and convergence decisions can be left to GPT Pro. Pro transport in Claude Code uses Agentify Desktop through the Sonnet hmasd-pro-transport agent (owner 2026-09-05 22:57 PDT). The hub authors this request and the transport agent executes it through the Agentify strict review transport; no Codex singleton dispatch and no self-receipt.",
+  "delivery_mode": "github_delivery",
+  "conversation_id": "6a9c2865-14a8-83e8-b556-e7f5836d9236",
+  "reset_invalid_provider_context": false,
+  "commit_or_ref": "a8b0e332ea68554de7a1b07bf037d8469c228884",
+  "github_delivery": {
+    "branch": "codex/fsd",
+    "base_sha": "a8b0e332ea68554de7a1b07bf037d8469c228884",
+    "response_path": "docs/research/candidates/flexible_skill_duration/pro_packets/20260915_post_baseline_interruption_convergence/archive/RESPONSE.md",
+    "issue_url": "https://github.com/CartmanFatass/My-paper-code/issues/10"
+  },
+  "scientific_question": "Portfolio funded S on 2026-09-15 (three arms FLAT / D1280 / I1280 × four fresh training blocks, fifteen rollouts, 32-world panels after rollouts 5, 10 and 15; FLAT is the private-actor flat reduction of the same HMASD stack at k = 10 with coordinator and discriminators never updated, confirmed by portfolio:cross_direction at 12:55Z). All twelve originals are complete and accepted at source dc4dbdfcd. The new facts. Primary SI1280_15 = J15(I1280) − J15(D1280) by block +.0983597735 / +.0447149700 / −.0834033800 / −.0203215900 J, mean +.0098374427 J, sample SD .0788586533, SE .0394293267, df = 3 working-model interval [−.1156424464, +.1353173319]: importance small_signed at the .05 J MEI, interval includes zero and is not inside ±.05. The four-block SI1280 means at rollouts 5 and 10 are +.0497631425 and +.0518287708 J, so the renewal advantage seen at five rollouts is not maintained at fifteen on the mean; per-block curves differ in direction (772203 rises .055 → .076 → .098; 772303 falls .141 → .105 → .045; 772403 and 772503 change sign between panels). Untuned cross-information package gaps at rollout 15: GAP_D = D1280 − FLAT by block +.0042358500 / −.1079292400 / +.0004323500 / −.0777927700, mean −.0452634555 J [−.1349157030, +.0443887921]; GAP_I = I1280 − FLAT mean −.0354260128 J [−.1835943228, +.1127422972]; four-block arm means at rollout 15 FLAT .4510, D1280 .4058, I1280 .4156 J. The untuned private-actor flat reduction is therefore not below the skill package at equal exposure on this host; the card's 'negative gap with interval excluding zero' branch is not reached. Rollout-5 accumulation as declared: four new blocks +.0497631425 J [−.0553179867, +.1548442717]; the completed factorial's two blocks +.0291047754 J; six blocks +.0428770201 J, SD .0629649931, SE .0257053508, df = 5 interval [−.0232011546, +.1089551949] (outcome-informed descriptive). Panel-to-panel movement inside one fit reaches .1–.2 J (FLAT 772503 .312 → .530 between rollouts 10 and 15; D1280 772503 .439 → .507 → .452) against conditional panel SEs of .008–.021 J, so block dispersion (.056–.161 J across contrasts) is not attributable to training seeds alone. Both hub modal predictions (SI1280_15 and GAP_D inside ±.05) were correct. Summed native wall 45,401.07 s for twelve fits (FLAT 9,757.77; D1280 11,325.27; I1280 24,318.03) under three-to-four-fit contention; peak RSS 1.2 / 2.8 / 3.8 GiB by arm.\n\nWhat is the direction decision now? The S allocation ends with the intake and the card forbids automatic extension. The DM's options: (A) conclude the renewal-versus-flat family at this bounded claim: the high-batch renewal simple effect is small signed at fifteen rollouts with unresolved uncertainty, the untuned flat reduction matches or exceeds the D2-D0 package at equal exposure, authentic D0 stays default and the five-rollout limited optional I1280 scope (your 2026-09-12 U decision) is unchanged; FSD ACTIVE-idle with a stated reopening fact. (B) select a tuned same-information flat reference as the next object, the direction's first §11.7 headroom record: a bounded prospective recipe sweep of FLAT alone on the same host (for example three learning-rate settings or three entropy settings, one fit each, fifteen rollouts, sole-final 32-world panels), read as the FLAT reference level and its recipe sensitivity before any further package or renewal work; the DM notes your ACVC objection that a small one-fit-per-setting sweep yields selected finite endpoints and cannot certify a reference, and asks whether that objection applies equally here or whether the fact that untuned FLAT already matches the package changes the value of tuning it. (C) another tranche of unchanged blocks (a Portfolio investment question under the card's rule; the DM does not recommend it because four blocks already show endpoint contrasts dominated by within-trajectory movement that more blocks of the same fifteen-rollout design do not remove). (D) an unlisted training-length object: the same three arms on fewer fresh blocks trained to thirty rollouts with panels every five, asking whether any arm ordering stabilises once trajectories stop moving by .1–.2 J between panels (about 2 × the per-fit wall). The DM recommends (B) over (A) and asks for your selection, the exact retained claim and its label under either, and whether an object the DM did not list has higher decision value at comparable cost.",
+  "deliverable": "Give one conclusion-first Direction decision at the smallest warranted scope and explain its strongest support, contradiction, alternatives and uncertainty. If you select (B), (D) or another experiment, name the object with its class, arms, comparator, primary endpoint, reading rule with its declared MEI and reason, exposure in the runner's units (fits, training environment steps, evaluation panels, optimizer stages) and the ordinary cost plan with its measured basis; state what each outcome would change and what it cannot establish, and whether it needs a Portfolio investment question or fits the standing object-tier delegation. If you select (A), say exactly what claim the family closes on, its label, and what fact would reopen it. Say whether the two-block completed factorial's SI1280 reading and the five-pair U decision keep their scope unchanged. Use present timings only at their measured scope. Your selection is not an accepted source change, a launch, or a Portfolio action.",
+  "claim_ceiling": "Current evidence is one complete twelve-fit B/EXPLORE object over four independent training blocks plus the earlier two-block factorial and five accepted pairs: a small signed renewal primary at fifteen rollouts with a df = 3 interval including zero, negative-pointing untuned package gaps with intervals including zero, and a six-block rollout-5 descriptive accumulation touching zero. It is not equivalence, not §11.7 headroom (FLAT is untuned and cross-information), not stable superiority or inferiority of any arm, not component attribution, not a cross-host result. This round selects at most one bounded next object, an accumulation or training-length rule, or closure of the family at its bounded claim; no C freeze, no specification change, no Portfolio lifecycle, capacity, priority, fusion or registration change, no rescoring of any completed block.",
+  "constraints": [
+    "Evidence-spec sections 11.8–11.11 govern: one or two independent training seeds are the default follow-up for a real bounded improvement, no seed must be positive, no universal seed count, estimator, bootstrap, significance or pilot gate; the card's own MEI informs comparison without rewriting its result branches; importance and uncertainty are read separately (Portfolio 2026-09-15); GAP_D and GAP_I are untuned cross-information package gaps and never §11.7 headroom; the rollout-5 accumulation is outcome-informed descriptive and never prospective confirmation.",
+    "All twelve fits' rules, panels, contrasts and limits are preserved verbatim; no selection among the three panels, no pooling beyond the declared rollout-5 accumulation, no rescoring of the completed factorial or the five U pairs. An outcome-informed next object is permitted only under its honest label as a new object.",
+    "Consultation exposure: zero fits, models, checkpoint loads, environment steps, optimizer steps, tests or profiling; only static reading of the named fixed sources. Historical execution records cited: twelve originals, 1,440,000 training and 576,000 evaluation team steps, 180 update stages, 24 model constructions; summed native wall 45,401.07 s; peak RSS about 1.2 / 2.8 / 3.8 GiB by arm.",
+    "Any selected experiment keeps the frozen host (Scenario 1, six UAVs, fifty users, J = 6U/500), native reward and termination, CPU FP32 four-thread numerics, remote-first WSL execution with exact committed source, per-invocation fresh memory admission of at least 4 GiB, detached supervision and separate evaluator RNG; a FLAT recipe sweep changes the FLAT recipe prospectively under its own card and never rescored the completed object; new investment beyond the standing delegation is a Portfolio question after your selection.",
+    "FSD's lifecycle (ACTIVE/HIGH, occupied slot) is not decided here. Answer in natural language with the numbers you rely on; cite the fixed sources by their linked paths."
+  ],
+  "response_schema": [
+    "Conclusion and actual fixed-source access/limits.",
+    "Selected object or closure with class, arms, comparator, primary endpoint, reading rule and MEI reason, exposure and ordinary cost plan, and whether it needs Portfolio investment; or the exact closing claim, its label and the reopening fact.",
+    "Strongest support, strongest contradiction, alternatives weighed (A/B/C/D and any unlisted), and the within-trajectory versus between-block dispersion stated as alternatives.",
+    "What each outcome would change for the direction and what it cannot establish; scope of the completed factorial reading and the U decision; no lifecycle disposition."
+  ],
+  "reference_files": [
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/FSD_BASELINE_INTERRUPTION_B01_INTAKE_20260915.md",
+      "purpose": "Read completely: the checks, the rule applied, the three inference points, the four boundaries, the scored predictions and the options with the DM recommendation.",
+      "provenance": "Current DM intake authored by the Claude Code research hub; a proposal, not a decision.",
+      "commit_sha": "a8b0e332ea68554de7a1b07bf037d8469c228884"
+    },
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/FSD_BASELINE_INTERRUPTION_B01_RESULT_EVIDENCE_20260915.md",
+      "purpose": "Read the full result: every endpoint by arm, block and panel rollout; every contrast per rollout; the rollout-5 accumulation; counts, receipts, resources and deviations.",
+      "provenance": "E0 result evidence, collected and reduced by the hub through the frozen runner.",
+      "commit_sha": "a8b0e332ea68554de7a1b07bf037d8469c228884"
+    },
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/baseline_interruption_b01_20260915/RESULT_SUMMARY.json",
+      "purpose": "Read the machine readout: per-block panel scores, contrasts with conditional SEs, aggregate statistics, primary readings and the accumulation sub-summaries.",
+      "provenance": "Verbatim output of scripts/run_fsd_baseline_interruption_b01.py reduce over the twelve committed summaries.",
+      "commit_sha": "a8b0e332ea68554de7a1b07bf037d8469c228884"
+    },
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/FSD_BASELINE_INTERRUPTION_B01_PROSPECTIVE_CARD_20260915.md",
+      "purpose": "Read sections 2–4 (arms, primary, MEI and reading rule, predictions), 7 (why F over S), 8 (the applied S decision with the FLAT k = 10 deviation, GAP labels, split reading, accumulation) and 9 (result pointer).",
+      "provenance": "Frozen card with the Portfolio decision applied; unchanged science.",
+      "commit_sha": "a8b0e332ea68554de7a1b07bf037d8469c228884"
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260915_fsd_baseline_interruption_investment/archive/RESPONSE.md",
+      "purpose": "Read the Portfolio decision S with its corrections (FLAT construction, GAP labels, MEI reading split, accumulation rule, no automatic extension).",
+      "provenance": "Archived complete portfolio:cross_direction response, PRO_FINAL / OWNER_DELEGATED.",
+      "commit_sha": "a8b0e332ea68554de7a1b07bf037d8469c228884"
+    },
+    {
+      "path": "docs/research/portfolio/decisions/2026-09-15-fsd-flat-k-correction.md",
+      "purpose": "Read the confirmed FLAT k = 10 correction (option 1) and its reason.",
+      "provenance": "Portfolio decision record, PRO_FINAL / OWNER_DELEGATED, 12:55Z.",
+      "commit_sha": "a8b0e332ea68554de7a1b07bf037d8469c228884"
+    },
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/pro_packets/20260912_post_five_pair_use_convergence/archive/RESPONSE.md",
+      "purpose": "Read your own U decision: limited optional I1280 membership under five-rollout conditions, authentic D0 default; this round asks whether its scope is unchanged.",
+      "provenance": "Archived complete em:flexible_skill_duration:convergence response, PRO_FINAL.",
+      "commit_sha": "a8b0e332ea68554de7a1b07bf037d8469c228884"
+    },
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/FSD_INTERRUPTION_BATCH_B01_RESULT_EVIDENCE_20260915.md",
+      "purpose": "Read the completed two-block factorial whose SI1280 values enter the rollout-5 accumulation.",
+      "provenance": "E0 result evidence of the completed factorial (accepted 2026-09-15).",
+      "commit_sha": "a8b0e332ea68554de7a1b07bf037d8469c228884"
+    },
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/FSD_RESTART_PREPARATION_INTAKE_20260914.md",
+      "purpose": "Read the baseline information audit and bounded work plan (the private-flat versus centrally conditioned skill information mismatch) that option B addresses.",
+      "provenance": "DM restart preparation intake, 2026-09-14.",
+      "commit_sha": "a8b0e332ea68554de7a1b07bf037d8469c228884"
+    },
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/DIRECTION.md",
+      "purpose": "Read the current position (top bullets of Position) and the direction's scientific question.",
+      "provenance": "Direction authority, updated by the hub after the S object.",
+      "commit_sha": "a8b0e332ea68554de7a1b07bf037d8469c228884"
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "purpose": "Apply sections 4, 7, 8.1, 11.4 and 11.7–11.11 (this branch copy equals main's).",
+      "provenance": "Current evidence specification.",
+      "commit_sha": "a8b0e332ea68554de7a1b07bf037d8469c228884"
+    },
+    {
+      "path": "docs/research/portfolio/TWO_AXIS_RESEARCH_PROGRAMME_20260914.md",
+      "purpose": "Read sections 2–5 on baseline calibration, replication and identifying claims.",
+      "provenance": "Owner-approved two-axis programme, present on this branch.",
+      "commit_sha": "a8b0e332ea68554de7a1b07bf037d8469c228884"
+    }
+  ]
+}
