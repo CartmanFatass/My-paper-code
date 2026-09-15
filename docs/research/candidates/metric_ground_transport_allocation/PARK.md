@@ -1,6 +1,20 @@
 # MGTAP 科学 PARK 知识交接
 
-## 2026-09-14 当前状态补记：已选择 CONTINUE
+## 2026-09-14 当前决定：Portfolio 可逆 PARK / MEDIUM
+
+已完整读取并应用175行 Portfolio 裁决c7f572df84640540a9da0229bcac405b380217fb：[完整原文](../../portfolio/pro_packets/20260914_mgtap_post_late512_direction/archive/RESPONSE.md)及[逐项回应](../../portfolio/pro_packets/20260914_mgtap_post_late512_direction/INTAKE.md)。停止当前方向投资，保留MEDIUM、可选mean-COND和DENSE默认；无新拟合、重试、RECAST、CLOSE或替代方向。Root接收安全交接后记录本方向席位释放，并重数实际并行状态。
+
+公平选率后的8252正结果+.0237048977仍有效；被明确选择的固定率复现8253为−.0259249275。恢复后另做的8254较长训练，512主终点−.0053750132、INSIDE_MEI，256描述性差+.0083702794；两臂都提高但DENSE更多。一个训练配对、两个依赖checkpoint和32重复评价地址不能证明等价、稳定劣势或训练量因果效果。完整记录见[late512结果](MGTAP_LATE_EXPOSURE_B01_RESULT_20260914.md)与[intake](MGTAP_LATE_EXPOSURE_B01_INTAKE_20260914.md)。
+
+停止是当前边际开发价值判断：明确的复现与较长训练机会都已执行，保存代码和全部正负知识不要求继续购买同一维护问题的观察。另一个新512配对仍可能改变投入，Portfolio接受错过有用实现的可能性；这不是小结果否决、种子配额、机制或headroom门槛。
+
+最小未选备选是仅测512终点的新独立配对：2拟合、278528 ticks、2048 Adam；无需再次购买256观察。若所有者/Portfolio对现有维护问题估值变化、可信新证据、比较器/主量纠正或实际成本变化改变开发选择，可重新考虑相同方案；无需先有正结果、新客户或新架构。没有为制造重开理由新增实验或持续监控。
+
+源码90f835e10357fbbf465cc5d500a93f1e2d4ab226、四个原始checkpoint与15成员[归档](late_exposure_b01_8254/NATIVE_EVIDENCE.zip)、两份新完整Pro答复均保全。完整原生命令360.00秒/548.4336MiB；最近三个不同程序合计1196.88秒，非方向全成本。原生调优headroom缺失，完整支持/长期/provider/aggregateCPU费用UNKNOWN。远端exact checkout已核验disk/registration均不存在；本地测试scratch按实际策略拒绝保留，无绕行。具体路径、限制与零producer事实见[本次最终handoff](MGTAP_RESUME_CLOSEOUT_HANDOFF_20260914.md)。
+
+以下为历史重入和旧PARK知识，保留原义；其中旧DM-final/Clerk及派发路径不是当前权责或执行入口。
+
+## 历史2026-09-14重入补记：当时选择 CONTINUE
 
 DM 已实质回应两份完整 Portfolio 答复，选择恢复本方向工作，首对象为双方等量
 学习率选择后新配对检验的 MGTAP-LR-SELECTION-B01。该程序现已完整完成：双方选中1e-4，
