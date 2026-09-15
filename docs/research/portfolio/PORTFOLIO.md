@@ -6,7 +6,7 @@
 
 | 方向 | 当前科学位置 | 当前 producer / 下一事件 |
 | --- | --- | --- |
-| acvc | [ACTIVE/MEDIUM/recasts2](../candidates/acvc/DIRECTION.md)。Portfolio 已选择唯一 final-only 1e-4/3e-4 配对 B：两次 fresh4096 C-only fit、6 个 final 私有面板，合计2195456 ticks /16384 Adam；无新 recast、PARK、default、retry 或自动追加。 | DM 直接完成新卡、窄实现、独立 review、准入、两 originals、intake 和 cleanup，不等待 Root ACK。共享 Portfolio writer 已释放给 Root replacement。 |
+| acvc | [ACTIVE/MEDIUM/recasts2](../candidates/acvc/DIRECTION.md)。final-only 1e-4/3e-4 配对 B 的卡、实现、13项检查和独立review修复已接受；两个 originals 均在 exact source 与 fresh admission 下各接受一次。 | 两 handles 已交原 Monitor，真实 adoption 尚未返回，DM 不杜撰 PID 并保留pending交接责任；随后完成收集、intake和cleanup。无新recast/PARK/default/retry或自动追加。 |
 | vap_folr_core | [ACTIVE/MEDIUM](../candidates/vap_folr_core/DIRECTION.md)。A−Z 完整结果与独立 review 已 intake；review 接受 d−3.069453125 / CURRENT_ONLY_ABOVE_MEI 的单fit/臂结论，CONTINUE/MEDIUM、family OPEN 不变。 | DM 正把 fresh Z−G 具体化为有界对象；当前无运行进程只是时间点事实。若符合当前 OPEN family 的 object-tier standing delegation，可直接记卡、实现/review、准入和执行，无 Root ACK。 |
 
 ## 当前协作边界
