@@ -46,7 +46,7 @@
     "optimizer_calls": 128
   },
   "source_acceptance": "DM accepts reviewed deddd8d9e after six pure changed-contract checks and independent Reviewer no-material-issue finding. No native smoke selected.",
-  "current_state": "Exactly two original handles accepted/running and Monitor adoption received; awaiting terminal collection. No retries/extra native calls.",
+  "current_state": "Both granted originals complete/exit0, fully collected and technically/scientifically accepted as INSIDE_MEI; Monitor active_set empty. Owner-directed preservation/assigned cleanup and pause handoff remain. No new review request or successor.",
   "monitor": "/root/dm_trdl_vacancy_20260914/monitor_trdl_b01",
   "pair_publication_command": "cd /home/wu/hmasd-worktrees/trdl-b02-9602 && /home/wu/.venvs/hmasd/bin/python scripts/run_trdl_b01.py pair --seed 9602 --scalar /home/wu/hmasd-worktrees/trdl-b02-9602/temp/directions/tail_return_distributional_learning/exp/b02_9602/SCALAR/summary.json --quantile /home/wu/hmasd-worktrees/trdl-b02-9602/temp/directions/tail_return_distributional_learning/exp/b02_9602/Q32/summary.json --out /home/wu/hmasd-worktrees/trdl-b02-9602/temp/directions/tail_return_distributional_learning/exp/b02_9602/PAIR_SUMMARY.json --launch-sha deddd8d9e0b41cff165d32f3f7729c23df236a69",
   "source_transport": {
@@ -67,5 +67,48 @@
     "admissions": "both passed at 2026-09-15T06:01:40Z per direct Monitor observation; bytes collected at terminal"
   },
   "owner_closeout_instruction": "OWNER_PAUSE_REQUEST relayed by Root during accepted B02 execution: complete current two originals, Monitor, collection, technical/scientific intake, necessary review, preservation and exact assigned cleanup; then write pause handoff and stop. Do not interrupt fits or start successor pair/object/Portfolio/Direction request or new Transport.",
-  "scientific_review_request_state": "No B02 result-review request bound/sent when owner pause arrived; no new Direction request is started under the explicit latest instruction. Existing independent source review complete; terminal intake remains with DM."
+  "scientific_review_request_state": "No B02 result-review request bound/sent when owner pause arrived; no new Direction request is started under the explicit latest instruction. Existing independent source review complete; terminal intake remains with DM.",
+  "terminal_observed_at": "2026-09-15T06:06:22Z",
+  "terminal_events": [
+    "TRDL-B02-SCALAR-TERMINAL-20260915T060622Z",
+    "TRDL-B02-Q32-TERMINAL-20260915T060622Z"
+  ],
+  "terminal_collection": "2026-09-15T06:07:27Z: both supervisors finished/exit0/tmux inactive; exact remote source matches; pure9602 publisher completed",
+  "admissions": {
+    "SCALAR": {
+      "assessed_at": "2026-09-15T06:01:40.180634Z",
+      "available_physical_bytes": 12297232384,
+      "captured_at": "2026-09-15T06:01:40.180291Z",
+      "cgroup_headroom_bytes": null,
+      "cgroup_memory_current_bytes": null,
+      "cgroup_memory_max_bytes": null,
+      "effective_available_bytes": 12297232384,
+      "effective_floor_pass": true,
+      "failure_reasons": [],
+      "measurement_source": "/proc/meminfo",
+      "minimum_available_bytes": 4294967296,
+      "passed": true,
+      "physical_floor_pass": true,
+      "schema_version": 1
+    },
+    "Q32": {
+      "assessed_at": "2026-09-15T06:01:40.206695Z",
+      "available_physical_bytes": 12302336000,
+      "captured_at": "2026-09-15T06:01:40.206244Z",
+      "cgroup_headroom_bytes": null,
+      "cgroup_memory_current_bytes": null,
+      "cgroup_memory_max_bytes": null,
+      "effective_available_bytes": 12302336000,
+      "effective_floor_pass": true,
+      "failure_reasons": [],
+      "measurement_source": "/proc/meminfo",
+      "minimum_available_bytes": 4294967296,
+      "passed": true,
+      "physical_floor_pass": true,
+      "schema_version": 1
+    }
+  },
+  "result_intake": "docs/research/candidates/tail_return_distributional_learning/TRDL_B02_INTAKE_20260914.md",
+  "result_branch": "INSIDE_MEI",
+  "next_action": "Preserve integrated unique evidence, perform assigned exact remote cleanup, publish owner-pause handoff; no next science/request"
 }
