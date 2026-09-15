@@ -7,7 +7,7 @@
 | 方向 | 当前科学位置 | 当前 producer / 下一事件 |
 | --- | --- | --- |
 | acvc | [ACTIVE/MEDIUM/recasts2](../candidates/acvc/DIRECTION.md)。fixed-rate B 已完成：primary lowC−refC −.1285335613 J（DOWN），两率F对照均UP；限于一个匹配训练block。 | 完整科学/计划 review 已固定并dispatch，尚未声称provider接受；范围是科学review/建议，不产生lifecycle finality。DM同时执行exact remote reclamation，随后完整intake；无第三fit/retry。 |
-| vap_folr_core | [ACTIVE/MEDIUM](../candidates/vap_folr_core/DIRECTION.md)。fresh Z−G B 已按 object-tier standing delegation 选定；卡、实现、独立review、检查和exact命令已接受，两原始各5000/4969/128。 | G handle 在 source8ad304d61 与 fresh admission 下运行；terminal-only Monitor 已接任务但未伪称adoption。G终态后由同一DM收集并fresh admission启动卡内Z；retry0，不把A−Z与旧A−G拼成排名。 |
+| vap_folr_core | [ACTIVE/MEDIUM](../candidates/vap_folr_core/DIRECTION.md)。fresh Z−G B 的G已完成：mean4.307734375、native2112.27s；普通1800s计划超出不是hard cap或科研违约。 | 卡内Z已在同source与fresh admission下接受，terminal-only Monitor仅观察Z；两原始均已接受、retry0。Z终态后由同一DM完成Z−G intake/review，不拼接旧比较。 |
 | tail_return_distributional_learning | [ACTIVE/MEDIUM/recasts0](../candidates/tail_return_distributional_learning/DIRECTION.md)。零暴露A01和具体 prospective B01 card 已完成；scalar与Q32被明确为学习同一lower-tail目标W的两种方法。 | 唯一 Portfolio B01投资请求已固定并dispatch，尚未声称provider接受；只决定一pair及最小实现验证，不问vacancy/priority/lifecycle。393216 ticks/256 Adam仍是方案计数，旧3000秒offer未拨款。 |
 
 ## 当前协作边界
