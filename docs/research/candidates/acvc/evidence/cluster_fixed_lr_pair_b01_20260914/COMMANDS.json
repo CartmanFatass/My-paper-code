@@ -1,0 +1,56 @@
+{
+  "low": {
+    "handle": "acvc-rate-low-b01-27931-2bbaa99ad",
+    "node": "hmasd-wsl-node",
+    "cwd": "/home/wu/hmasd-worktrees/acvc-rate-pair-b01-2bbaa99ad",
+    "output": "/home/wu/hmasd-worktrees/acvc-rate-pair-b01-2bbaa99ad/temp/directions/acvc/exp/cluster_fixed_lr_pair_b01_27931_low",
+    "source": "2bbaa99ad9cc717d89e47a1f24d9acd76dce4f97",
+    "argv": [
+      "ssh",
+      "-o",
+      "BatchMode=yes",
+      "-o",
+      "ConnectTimeout=10",
+      "hmasd-wsl-node",
+      "/usr/local/bin/agent-task",
+      "run",
+      "acvc-rate-low-b01-27931-2bbaa99ad",
+      "env",
+      "HMASD_PYTHON=/home/wu/.venvs/hmasd/bin/python",
+      "PYTHONDONTWRITEBYTECODE=1",
+      "bash",
+      "/home/wu/hmasd-worktrees/acvc-rate-pair-b01-2bbaa99ad/experiments/candidates/acvc/cluster_fixed_lr_pair_b01/launch.sh",
+      "2bbaa99ad9cc717d89e47a1f24d9acd76dce4f97",
+      "/home/wu/hmasd-worktrees/acvc-rate-pair-b01-2bbaa99ad/temp/directions/acvc/exp/cluster_fixed_lr_pair_b01_27931_low",
+      "low"
+    ],
+    "state": "prospective_not_accepted"
+  },
+  "reference": {
+    "handle": "acvc-rate-ref-b01-27931-2bbaa99ad",
+    "node": "hmasd-wsl-node",
+    "cwd": "/home/wu/hmasd-worktrees/acvc-rate-pair-b01-2bbaa99ad",
+    "output": "/home/wu/hmasd-worktrees/acvc-rate-pair-b01-2bbaa99ad/temp/directions/acvc/exp/cluster_fixed_lr_pair_b01_27931_reference",
+    "source": "2bbaa99ad9cc717d89e47a1f24d9acd76dce4f97",
+    "argv": [
+      "ssh",
+      "-o",
+      "BatchMode=yes",
+      "-o",
+      "ConnectTimeout=10",
+      "hmasd-wsl-node",
+      "/usr/local/bin/agent-task",
+      "run",
+      "acvc-rate-ref-b01-27931-2bbaa99ad",
+      "env",
+      "HMASD_PYTHON=/home/wu/.venvs/hmasd/bin/python",
+      "PYTHONDONTWRITEBYTECODE=1",
+      "bash",
+      "/home/wu/hmasd-worktrees/acvc-rate-pair-b01-2bbaa99ad/experiments/candidates/acvc/cluster_fixed_lr_pair_b01/launch.sh",
+      "2bbaa99ad9cc717d89e47a1f24d9acd76dce4f97",
+      "/home/wu/hmasd-worktrees/acvc-rate-pair-b01-2bbaa99ad/temp/directions/acvc/exp/cluster_fixed_lr_pair_b01_27931_reference",
+      "reference"
+    ],
+    "state": "prospective_not_accepted"
+  }
+}
