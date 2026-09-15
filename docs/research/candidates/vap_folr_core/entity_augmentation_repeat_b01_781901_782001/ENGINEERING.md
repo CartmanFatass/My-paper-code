@@ -78,3 +78,25 @@ runner210, tests193 after repair. No section4 facility or budget breach.
 
 COMMANDS.json and EXECUTION.md fix the four detached commands. Destination-
 adjacent resource admission still belongs to each actual original call.
+
+## Prepared terminal collection and study readback
+
+COLLECTION_TOOLS.tar.gz preserves the two short runtime helpers before endpoint
+collection. Its two member hashes and successful archive readback/AST parse are
+in COLLECTION_TOOLS.json. The 88-line collector adapts the prior terminal
+collector to the exact block, arm, source, seeds and parameter/state quantities;
+it archives selected output and supervisor files even when readable endpoints
+fail conformance. Resource-only missing measurements remain separately marked.
+It queries the named supervisor only at actual terminal collection and cannot
+launch, retry, restart or alter learner output. The 63-line study helper requires
+all four conforming endpoints, verifies own-block Generic input digests, invokes
+the published study_result and separately recomputes the two means/differences
+and frozen pattern. Four rows represent four fits; evaluation episodes are never
+fed to a training-run summarizer. It checks that its two publication modules
+match the selected source bytes and records full lifetime cost as unknown.
+
+These are collection/support bytes, not a new learner source. The live and later
+original invocations remain bound to797596454. This preparation produced zero
+new native acquisition and zero real optimizer updates. Actual endpoint readback
+occurs only after terminal returns. Including both helpers, new non-test source
+is491 lines, below the selected600-line bound; no scope facility or new experiment.
