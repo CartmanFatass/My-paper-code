@@ -1,0 +1,117 @@
+{
+  "assignment": "TRDL-B02",
+  "dm": "/root/dm_trdl_vacancy_20260914",
+  "author_worktree": "C:/Projects/HMASD-worktrees/codex-trdl",
+  "branch": "codex/trdl",
+  "source_sha": "deddd8d9e0b41cff165d32f3f7729c23df236a69",
+  "grant_response": "afcf3ed2712b0dec90524707fcd09ee38be9fce4",
+  "execution_node": "hmasd-wsl-node",
+  "remote_cwd": "/home/wu/hmasd-worktrees/trdl-b02-9602",
+  "supervisor": "/usr/local/bin/agent-task",
+  "python": "/home/wu/.venvs/hmasd/bin/python",
+  "output_root": "/home/wu/hmasd-worktrees/trdl-b02-9602/temp/directions/tail_return_distributional_learning/exp/b02_9602",
+  "arms": [
+    {
+      "arm": "SCALAR",
+      "handle": "trdl-b02-9602-scalar",
+      "command": "cd /home/wu/hmasd-worktrees/trdl-b02-9602 && /home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out /home/wu/hmasd-worktrees/trdl-b02-9602/temp/directions/tail_return_distributional_learning/exp/b02_9602/SCALAR_ADMISSION.json && /usr/bin/time -q -f '{\"wall_seconds\":%e,\"user_seconds\":%U,\"system_seconds\":%S,\"peak_rss_kib\":%M,\"exit_code\":%x}' -o /home/wu/hmasd-worktrees/trdl-b02-9602/temp/directions/tail_return_distributional_learning/exp/b02_9602/SCALAR_INVOCATION_TIME.json /home/wu/.venvs/hmasd/bin/python -u scripts/run_trdl_b01.py arm --arm SCALAR --seed 9602 --out /home/wu/hmasd-worktrees/trdl-b02-9602/temp/directions/tail_return_distributional_learning/exp/b02_9602/SCALAR --launch-sha deddd8d9e0b41cff165d32f3f7729c23df236a69 --max-seconds 900",
+      "output": "/home/wu/hmasd-worktrees/trdl-b02-9602/temp/directions/tail_return_distributional_learning/exp/b02_9602/SCALAR",
+      "acceptance": "native supervisor accepted 2026-09-15T06:01:40Z, running/exit null/tmux active",
+      "pid": 3715230
+    },
+    {
+      "arm": "Q32",
+      "handle": "trdl-b02-9602-q32",
+      "command": "cd /home/wu/hmasd-worktrees/trdl-b02-9602 && /home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out /home/wu/hmasd-worktrees/trdl-b02-9602/temp/directions/tail_return_distributional_learning/exp/b02_9602/Q32_ADMISSION.json && /usr/bin/time -q -f '{\"wall_seconds\":%e,\"user_seconds\":%U,\"system_seconds\":%S,\"peak_rss_kib\":%M,\"exit_code\":%x}' -o /home/wu/hmasd-worktrees/trdl-b02-9602/temp/directions/tail_return_distributional_learning/exp/b02_9602/Q32_INVOCATION_TIME.json /home/wu/.venvs/hmasd/bin/python -u scripts/run_trdl_b01.py arm --arm Q32 --seed 9602 --out /home/wu/hmasd-worktrees/trdl-b02-9602/temp/directions/tail_return_distributional_learning/exp/b02_9602/Q32 --launch-sha deddd8d9e0b41cff165d32f3f7729c23df236a69 --max-seconds 900",
+      "output": "/home/wu/hmasd-worktrees/trdl-b02-9602/temp/directions/tail_return_distributional_learning/exp/b02_9602/Q32",
+      "acceptance": "native supervisor accepted 2026-09-15T06:01:40Z, running/exit null/tmux active",
+      "pid": 3715251
+    }
+  ],
+  "authorized_originals": 2,
+  "actual_launches": 2,
+  "retries_allowed": 0,
+  "ordering": "Two separately admitted original arms; may overlap if both actual memory admissions permit. No first-score-dependent choice.",
+  "watchdog_note": "Prospective900s whole original; ordinary300s plan is informed by B01 approximately198s whole invocations. Allow load variation but bound a hung original. Fixed endpoints and two originals remain; no retry after interruption.",
+  "initial_ordinary_plans_seconds": {
+    "per_arm": 300,
+    "native_sum": 600,
+    "support": 1200,
+    "combined": 1800
+  },
+  "scientific_exposure_per_arm": {
+    "train_episodes": 512,
+    "eval_episodes": 256,
+    "horizon": 256,
+    "optimizer_calls": 128
+  },
+  "source_acceptance": "DM accepts reviewed deddd8d9e after six pure changed-contract checks and independent Reviewer no-material-issue finding. No native smoke selected.",
+  "current_state": "OWNER_DIRECT operationally paused after two complete original fits, Monitor terminal collection, independent source review, DM technical/scientific intake, main preservation and assigned exact remote cleanup. No live experiment/provider/child assignment; no successor/new Pro request.",
+  "monitor": "/root/dm_trdl_vacancy_20260914/monitor_trdl_b01",
+  "pair_publication_command": "cd /home/wu/hmasd-worktrees/trdl-b02-9602 && /home/wu/.venvs/hmasd/bin/python scripts/run_trdl_b01.py pair --seed 9602 --scalar /home/wu/hmasd-worktrees/trdl-b02-9602/temp/directions/tail_return_distributional_learning/exp/b02_9602/SCALAR/summary.json --quantile /home/wu/hmasd-worktrees/trdl-b02-9602/temp/directions/tail_return_distributional_learning/exp/b02_9602/Q32/summary.json --out /home/wu/hmasd-worktrees/trdl-b02-9602/temp/directions/tail_return_distributional_learning/exp/b02_9602/PAIR_SUMMARY.json --launch-sha deddd8d9e0b41cff165d32f3f7729c23df236a69",
+  "source_transport": {
+    "method": "published incremental Git bundle after prior HTTP route stalled; no new HTTP attempt",
+    "local": "temp/directions/tail_return_distributional_learning/support/trdl-b02-deddd8.bundle",
+    "remote": "/home/wu/hmasd-inputs/trdl-b02-deddd8.bundle",
+    "published_tip": "f461a1bf35ed8a922473f43cb37258cbf03e847a",
+    "prerequisite": "0874ccfb6102859e5cd7ecfbc4b7d578eab06d91",
+    "bytes": 783126,
+    "sha256": "a5e59c47db50c0f7dadd2628027f081223ad63acf841f5d5a8b410062ddb8689",
+    "remote_source_verified": "deddd8d9e0b41cff165d32f3f7729c23df236a69",
+    "remote_setup_time": "2026-09-15T06:01:12Z"
+  },
+  "monitor_adoption": {
+    "observed_at": "2026-09-15T06:02:07Z",
+    "receipt": "native_final MONITOR_ADOPTED both handles",
+    "delivery": "direct native_final; leaf send_message unavailable; same child resumed terminal-only",
+    "admissions": "both passed at 2026-09-15T06:01:40Z per direct Monitor observation; bytes collected at terminal"
+  },
+  "owner_closeout_instruction": "OWNER_PAUSE_REQUEST relayed by Root during accepted B02 execution: complete current two originals, Monitor, collection, technical/scientific intake, necessary review, preservation and exact assigned cleanup; then write pause handoff and stop. Do not interrupt fits or start successor pair/object/Portfolio/Direction request or new Transport.",
+  "scientific_review_request_state": "No B02 result-review request bound/sent when owner pause arrived; no new Direction request is started under the explicit latest instruction. Existing independent source review complete; terminal intake remains with DM.",
+  "terminal_observed_at": "2026-09-15T06:06:22Z",
+  "terminal_events": [
+    "TRDL-B02-SCALAR-TERMINAL-20260915T060622Z",
+    "TRDL-B02-Q32-TERMINAL-20260915T060622Z"
+  ],
+  "terminal_collection": "2026-09-15T06:07:27Z: both supervisors finished/exit0/tmux inactive; exact remote source matches; pure9602 publisher completed",
+  "admissions": {
+    "SCALAR": {
+      "assessed_at": "2026-09-15T06:01:40.180634Z",
+      "available_physical_bytes": 12297232384,
+      "captured_at": "2026-09-15T06:01:40.180291Z",
+      "cgroup_headroom_bytes": null,
+      "cgroup_memory_current_bytes": null,
+      "cgroup_memory_max_bytes": null,
+      "effective_available_bytes": 12297232384,
+      "effective_floor_pass": true,
+      "failure_reasons": [],
+      "measurement_source": "/proc/meminfo",
+      "minimum_available_bytes": 4294967296,
+      "passed": true,
+      "physical_floor_pass": true,
+      "schema_version": 1
+    },
+    "Q32": {
+      "assessed_at": "2026-09-15T06:01:40.206695Z",
+      "available_physical_bytes": 12302336000,
+      "captured_at": "2026-09-15T06:01:40.206244Z",
+      "cgroup_headroom_bytes": null,
+      "cgroup_memory_current_bytes": null,
+      "cgroup_memory_max_bytes": null,
+      "effective_available_bytes": 12302336000,
+      "effective_floor_pass": true,
+      "failure_reasons": [],
+      "measurement_source": "/proc/meminfo",
+      "minimum_available_bytes": 4294967296,
+      "passed": true,
+      "physical_floor_pass": true,
+      "schema_version": 1
+    }
+  },
+  "result_intake": "docs/research/candidates/tail_return_distributional_learning/TRDL_B02_INTAKE_20260914.md",
+  "result_branch": "INSIDE_MEI",
+  "next_action": "None while owner-paused; explicit owner resume required. Unstarted B02 full Pro result review remains distinctly recorded, with no pending provider.",
+  "cleanup_receipt": "docs/research/candidates/tail_return_distributional_learning/trdl_b02_9602/CLEANUP_RECEIPT.json",
+  "cleanup_verified_at": "2026-09-15T06:15:15.988548Z",
+  "pause_handoff": "docs/research/candidates/tail_return_distributional_learning/TRDL_OWNER_PAUSE_HANDOFF_20260914.md"
+}

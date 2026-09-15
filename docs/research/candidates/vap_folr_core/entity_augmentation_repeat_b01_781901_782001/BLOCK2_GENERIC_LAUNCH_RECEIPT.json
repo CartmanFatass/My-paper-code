@@ -1,0 +1,54 @@
+{
+  "accepted_at": "2026-09-15T06:57:53.507224+00:00",
+  "command_publication_sha": "b27d35cf633c07189780c71bbb9e5a8ee52f9643",
+  "commands_sha256": "717668997af372b45569ed5614c428dfb8d81f7cdf6a4e08da462d4940fc39d0",
+  "source_sha": "7975964542b83560cbc0e79f74a9212f8e3737af",
+  "command": {
+    "block": 2,
+    "arm": "generic",
+    "source_sha": "7975964542b83560cbc0e79f74a9212f8e3737af",
+    "handle": "folr-augmentation-repeat-b01-782001-generic",
+    "out": "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/block2/generic",
+    "argv": [
+      "/usr/local/bin/agent-task",
+      "run",
+      "folr-augmentation-repeat-b01-782001-generic",
+      "bash",
+      "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/BLOCK2_GENERIC.sh",
+      "7975964542b83560cbc0e79f74a9212f8e3737af",
+      "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001",
+      "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/block2/generic"
+    ]
+  },
+  "output_directory_prepared_before_time": true,
+  "wrapper_sha256": "23ffcf21d7f60c6efa50d5010833d5778d10fdb74d07ffb1ef3b8d9412ab0981",
+  "supervisor_acceptance_stdout": "Task 'folr-augmentation-repeat-b01-782001-generic' started in tmux session 'agent_folr-augmentation-repeat-b01-782001-generic'. Output: /home/wu/.agent-tasks/folr-augmentation-repeat-b01-782001-generic/task.log\n",
+  "supervisor_acceptance_stderr": "",
+  "status_at_acceptance": {
+    "task": "folr-augmentation-repeat-b01-782001-generic",
+    "status": "running",
+    "exit_code": null,
+    "pid": 3721180,
+    "uptime_seconds": 0,
+    "tmux_active": true
+  },
+  "adjacent_admission": {
+    "assessed_at": "2026-09-15T06:57:53.534947Z",
+    "available_physical_bytes": 14543785984,
+    "captured_at": "2026-09-15T06:57:53.534638Z",
+    "cgroup_headroom_bytes": null,
+    "cgroup_memory_current_bytes": null,
+    "cgroup_memory_max_bytes": null,
+    "effective_available_bytes": 14543785984,
+    "effective_floor_pass": true,
+    "failure_reasons": [],
+    "measurement_source": "/proc/meminfo",
+    "minimum_available_bytes": 4294967296,
+    "passed": true,
+    "physical_floor_pass": true,
+    "schema_version": 1
+  },
+  "new_scientific_learner_ordinal": 3,
+  "scientific_retry": 0,
+  "selection": "original block2 preserved regardless of block1 result; owner completion-then-pause includes this fixed call"
+}

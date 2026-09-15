@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "request_id": "2026-09-14-folr-current-increment-b01-result-plan-review-01",
+  "binding": "em:vap_folr_core:convergence",
+  "first_strict_attempt": {
+    "tool_outcome": "chatgpt_target_menu_open_unconfirmed",
+    "strict_call_attempted": true,
+    "provider_send_attempted": "not_persisted",
+    "operation_id": null,
+    "idempotency_key": "2026-09-14-folr-current-increment-b01-result-plan-review-01",
+    "provider_user_message_id": null,
+    "provider_assistant_message_id": null,
+    "accepted_effect": "not_observed",
+    "post_failure_registry_observation": {
+      "state": "DIRECTION_VERIFIED",
+      "native_state": "READY_UNSENT",
+      "operation": null,
+      "send_evidence": null,
+      "send_click_count": null
+    },
+    "interpretation": "The failure returned before an Agentify operation or Send evidence was persisted; no provider acceptance was observed. The recorded status is not a reconstructed provider-side false value."
+  },
+  "same_request_repair": {
+    "action": "Read-only status reconciliation, then rerun the unchanged strict request once",
+    "tab_id": "4a0d1d68-fcb6-4a76-9e63-29192a7fa9eb",
+    "conversation_url": "https://chatgpt.com/c/6aa18137-9d88-83e8-a01f-46630813faf8",
+    "status_facts": {
+      "blocked": false,
+      "prompt_visible": true,
+      "send_visible": true,
+      "active_query": null,
+      "protected_tab": false,
+      "strict_transport_eligible": true
+    },
+    "immutable_inputs_preserved": true,
+    "provider_send_retries": 1
+  },
+  "successful_same_request_operation": {
+    "operation_id": "6aa65ecf-2271-468e-aeff-9ebb755a35d6",
+    "idempotency_key": "2026-09-14-folr-current-increment-b01-result-plan-review-01",
+    "request_fingerprint": "262d592dbfd9b1ee15176278e4ac4f8c769a041d939e417c9b182ac929a5aa1d",
+    "send_attempted": true,
+    "provider_user_message_id": "6e0b45e0-b208-4711-a4c2-e5e5f9bdd93d",
+    "provider_assistant_message_id": "6106e80a-ebe1-41a6-a3ab-4192e84a019e",
+    "prompt_sha256": "f0e8b85714ab377d46bb896c9b7d68fd6ca2c739a0d1ae717ff806134869aafa",
+    "conversation_id": "6aa18137-9d88-83e8-a01f-46630813faf8",
+    "response_sha256": "e519b6bca81440b73a754eac9d96b30069d9028bf57d78fa60ce863b0de6702d",
+    "response_bytes": 33166
+  },
+  "delivery_capability": {
+    "collaboration_send_message_available": false,
+    "delivery_method": "direct_native_final",
+    "parent": "/root/dm_folr_resume_20260914"
+  }
+}

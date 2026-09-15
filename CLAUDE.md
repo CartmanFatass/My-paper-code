@@ -33,7 +33,15 @@ C:/Users/fires/.conda/envs/hmasd-science-tools/python.exe  # isolated analysis e
 The second environment is declared in `configs/scientific-capabilities-v1.toml`
 (`python scripts/hmasd_science_capabilities.py list|show|doctor`). Never install into either
 environment to satisfy an analysis need; report the capability as unavailable and let the owner
-decide. Neither environment has CUDA.
+decide. Neither local environment has CUDA.
+
+Result-bearing and compute-intensive execution is **remote-first** (owner, 2026-09-04;
+`AGENTS.md` §5). The execution node is declared in `.codex/hmasd-compute.toml` (`wsl_4070`,
+SSH alias `hmasd-wsl-node`, repo `/home/wu/projects/HMASD`, worktrees under
+`/home/wu/hmasd-worktrees`, interpreter `/home/wu/.venvs/hmasd/bin/python`, supervisor
+`/usr/local/bin/agent-task`; network-touching commands run inside `zsh -lic`). Its sparse
+checkout omits `docs/`; add a committed evidence path to the sparse surface before a run reads
+it. The control plane (editing, review, Git, transport) stays on this Windows checkout.
 
 ## Commands
 
@@ -54,7 +62,17 @@ python -m ha_ctse_process.smoke
 
 # mandatory resource admission, immediately before every result-bearing run, resume or queue element
 python scripts/hmasd_resource_preflight.py admit-memory --out <receipt.json>
+
+# remote route: admission and runner are one supervised command on the executing node (AGENTS.md §7)
+ssh hmasd-wsl-node "zsh -lic 'cd /home/wu/hmasd-worktrees/<wt> && git fetch && git worktree add ... <launch-sha>'"
+ssh hmasd-wsl-node "bash -lc '/usr/local/bin/agent-task run <handle> -- /home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out <receipt> && /home/wu/.venvs/hmasd/bin/python scripts/run_<prefix>_<object>.py ...'"
+ssh hmasd-wsl-node "/usr/local/bin/agent-task status <handle>"   # observation; never run/stop/attach
 ```
+
+Only `hmasd-experiment-operator` issues launch commands; the hub never launches in its own
+process. Test scratch: every pytest invocation supplies `-p no:cacheprovider --basetemp
+temp/directions/<direction-id>/test/<run-tag>` (or `temp/tests/<run-tag>` outside a direction)
+and the creator removes that directory when done (`tests/AGENTS.md`, OWNER_DIRECT 2026-09-08).
 
 There is no lint, format or type-check tooling, no dashboard for research code, and no C++ build
 step (native extensions compile through PyTorch's JIT loader on first use). Do not add any of
@@ -88,56 +106,84 @@ any change needs the owner's explicit approval, named per file. Claude's own rul
 this file and under `.claude/`. Downstream mechanical state (the shared transport registry and
 archive under `temp/sessions/hmasd-chatgpt-pro-transport/`, `scripts/hmasd_*.py`) may be shared
 by both loops, and is likewise modified only with the owner's approval. The sections below were
-moved here from `AGENTS.md` Appendices B and C on 2026-09-06 (the appendices were restored to
-their Codex-era text); their content is unchanged.
+moved here from `AGENTS.md` Appendices B and C on 2026-09-06 and **resynchronised with the
+Codex control plane on 2026-09-15** (owner instruction of that date): the dated `OWNER_DIRECT`
+blocks in `AGENTS.md` (2026-09-10 DM absorbs CM; 2026-09-12 CM/Implementer suspension and
+rolling chains; 2026-09-13 DM autonomy; 2026-09-14 two-axis calibration, evidence spec §11.11)
+bind Claude sessions exactly as they bind Codex. Where a Claude file below is silent, the Codex
+role file or skill it was ported from applies.
 
 ### Claude Code session rules (formerly AGENTS.md Appendix B)
 
 - `CLAUDE.md` at the repository root carries the environment, commands, architecture, and
-  repo-specific working rules; it is tracked.
+  repo-specific working rules; it is tracked. `.claude/settings.json` denies edits to the Codex
+  control plane.
 - Deliverables of a Claude session (reviews, plans, experiment designs and results outside the
   research authority tree) live under `docs/Claude_docs/<category>/`, indexed by its README.
+  Research authority records (cards, intakes, `DIRECTION.md`, decisions, handoffs, ledger,
+  owner items, briefs) live in their `docs/research/` locations exactly as for Codex.
 - The Fable session is the **research hub**: Root and Direction Manager at once for the directions
   it drives (owner, 2026-09-05). Its procedure is `.claude/skills/hmasd-research-hub/SKILL.md`. It
-  keeps every scientific judgment (cards, objectives, intake, decisions, owner items, briefs,
-  `DIRECTION.md`, Portfolio, integration) and delegates everything else to the subagents defined in
-  `.claude/agents/`, ported from `.codex/agents/*.toml`: Opus for code and independent judgment
-  (`hmasd-cm`, `hmasd-reviewer`, `hmasd-research-critic`), Sonnet for scouting and mechanical work
-  (`hmasd-cm-scout`, `hmasd-routine-implementer`, `hmasd-verifier`, `hmasd-experiment-operator`,
-  `hmasd-experiment-tracker`, `hmasd-clerk`, `hmasd-research-scout`, `hmasd-pro-transport`).
-  Subagents cannot spawn subagents, so the hub dispatches every specialist itself; there is no
-  sibling messaging, so the tracker is a bounded observer the hub invokes, not a standing agent.
+  keeps every scientific judgment (cards, L0 specifications, intake, decisions, owner items,
+  briefs, `DIRECTION.md`, Portfolio rows, integration) and, under the 2026-09-12 suspension of
+  CM and Implementer assignments, **implements code directly** with the L0 five facts of
+  `docs/project/ENGINEERING_SCOPE_SPEC.md` §7.1 and independent `hmasd-reviewer` review for
+  high-risk diffs (§7.3). It delegates bounded methods to the subagents in `.claude/agents/`,
+  ported from `.codex/agents/*.toml`: Opus for independent judgment (`hmasd-reviewer`,
+  `hmasd-research-critic`), Sonnet for scouting, launch, observation and mechanical work
+  (`hmasd-cm-scout`, `hmasd-verifier`, `hmasd-experiment-operator`, `hmasd-experiment-tracker`,
+  `hmasd-clerk`, `hmasd-research-scout`, `hmasd-pro-transport`). `hmasd-cm` and
+  `hmasd-routine-implementer` are retained for recovery of accepted work and receive no new
+  assignment until the owner lifts the suspension. Subagents cannot spawn subagents, so the hub
+  dispatches every specialist itself; there is no sibling messaging, so the tracker is the
+  bounded Claude counterpart of the DM-owned native Monitor in
+  `docs/project/EXPERIMENT_MONITOR.md`, invoked by the hub per window, and the hub retains
+  collection, technical acceptance and intake.
 - Capacity in a Claude session is **two concurrently advancing directions** (owner, 2026-09-03,
-  reaffirmed 2026-09-05; the Claude quota is separate from Codex's). The five-chain working set in
-  §2 and §5 is the Codex loop's target and does not apply here. Lifecycle and priority are
-  unchanged by which loop drives a direction.
-- Implementer subagents reuse the direction's designated checkout under `AGENTS.md` §6;
-  create a direction branch only when actual work needs it, without automatic per-agent isolation.
-  The hub integrates accepted commits into `main` and retires finished temporary branches.
-  Commits end with the `Co-Authored-By` and
-  `Claude-Session` trailers the runtime supplies.
+  reaffirmed 2026-09-05 and 2026-09-15; the Claude five-hour usage window is the reason). The
+  three-chain working set in `AGENTS.md` §5 is the Codex loop's target and does not apply here.
+  Lifecycle, priority, occupied slots and budgets are unchanged by which loop drives a
+  direction; a Claude session drives existing occupied slots and never authors a vacancy
+  replacement.
+- The hub and every editing agent reuse the direction's designated checkout and branch under
+  `AGENTS.md` §6 (one authoring worktree per direction, created on demand); no automatic
+  per-agent isolation. The hub integrates accepted commits into `main` by cherry-pick, pushes
+  immediately after every commit, and retires finished temporary branches. Commits end with the
+  `Co-Authored-By` and `Claude-Session` trailers the runtime supplies plus the `scope:` line.
 - Pro transport in Claude Code goes through Agentify Desktop (`C:/Projects/agentify-desktop`) and
-  the same scoped GitHub delivery, packet renderer, registry and conversation bindings the Codex
-  Transport uses; procedure in `.claude/skills/hmasd-pro-transport/SKILL.md`. It is enabled for
-  unattended scientific dispatch only after one recorded non-scientific smoke has passed. Until
-  then, and whenever transport is unavailable, record the actual missing scientific review fact
-  and resolve only the dependent scope. DM retains lifecycle ownership; transport failure never
-  automatically parks a direction. Portfolio is reporting, with consultation/global changes only
-  on explicit owner request under current AGENTS.md.
+  the same scoped GitHub delivery (`docs/project/GITHUB_RESEARCH_COLLABORATION.md`), packet
+  renderer, registry, provider policy (`.codex/hmasd-transport.toml`) and conversation bindings
+  the Codex Transport uses; procedure in `.claude/skills/hmasd-pro-transport/SKILL.md`. The
+  non-scientific smoke passed on 2026-09-05, so scientific dispatch through
+  `hmasd-pro-transport` is enabled. The hub is the author DM: it dispatches direction-tier
+  questions to `em:<direction>:convergence` / `:innovator` and Portfolio-tier questions to
+  `portfolio:cross_direction`, and takes complete archived responses in as `PRO_FINAL` (or
+  `PRO_FINAL / OWNER_DELEGATED` for Portfolio under `AGENTS.md` §4.8) after checking them
+  against current owner instructions and specifications. Transport readiness follows the
+  actual ChatGPT login state and one-Send reconciliation (OWNER_DIRECT 2026-09-11), never which
+  session opened a browser surface. Whenever transport is unavailable, record the actual
+  missing scientific review fact and pause only the dependent scope; transport failure never
+  parks a direction.
+- Handoffs: per direction `docs/research/candidates/<direction>/HANDOFF_<date>_<slug>.md`; root
+  `docs/research/portfolio/handoffs/<date>-<slug>.md`. Write both before a session's usage
+  window closes.
 
 ### Grok Build route (formerly AGENTS.md Appendix C)
 
-- Grok Build (xAI CLI, `grok-4.6` at effort `high`) is a third agent runtime under section 1
-  (owner decisions 2026-09-05 22:40 and 22:57 PDT). It receives working methods only: one
-  direction's CM implementation when two directions advance in a Claude session, read-only code
-  maps, second independent reviews, and (owner 2026-09-06, `grok-4.5`) every mechanical
-  control-plane task whose content the hub has fixed in advance (ledger rows, owner items through
-  `item.py`, evidence copies, packet auxiliary files, splices of hub-written text, render/bind). It never launches result-bearing runs, never operates Pro
-  transport, and never makes a scientific judgment.
-- Invocation is headless and fenced (`.claude/skills/hmasd-grok-cm/SKILL.md`): its own git
-  worktree, an explicit tool allowlist, no subagents, no web, deny rules on every shared or
-  governance path, no git commands. Its output is a diff for the hub to review, test and commit
-  by pathspec with an `Implemented-By: grok-build` trailer; a diff touching a protected surface
-  also goes to `hmasd-reviewer`. Accepted Grok work is recorded as a `technical` ledger row.
+- Grok Build (xAI CLI) is a third agent runtime under section 1 (owner decisions 2026-09-05
+  22:40 and 22:57 PDT). It receives working methods only. Its **CM mode** (`grok-4.6` high, one
+  direction's code implementation) is an "equivalent code-implementation role" and is
+  **suspended with CM/Implementer under OWNER_DIRECT 2026-09-12**; no new Grok CM assignment
+  starts until the owner lifts that suspension. Its **clerk mode** (`grok-4.5` medium, owner
+  2026-09-06) continues: every mechanical control-plane task whose content the hub has fixed in
+  advance (ledger rows, owner items through `item.py`, evidence copies, packet auxiliary files,
+  splices of hub-written text, render/bind, named checks, cherry-pick sequences). Grok never
+  launches result-bearing runs, never operates Pro transport, and never makes a scientific
+  judgment.
+- Invocation is headless and fenced (`.claude/skills/hmasd-grok-cm/SKILL.md`): the direction's
+  existing worktree, an explicit tool allowlist, no subagents, no web, deny rules on every shared
+  or governance path, no git commands. Its output is a diff for the hub to review and commit by
+  pathspec with an `Implemented-By: grok-build` trailer. Accepted Grok work is recorded as a
+  `technical` ledger row.
 - Grok reads `AGENTS.md`, `CLAUDE.md`, `.claude/agents/` and `.claude/skills/` itself; those
   files bind it as they bind every runtime. No Grok-specific authority, label or gate exists.

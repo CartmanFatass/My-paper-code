@@ -75,3 +75,54 @@ The same native terminal-only Monitor is resumed for Z only. Its specified local
 state path is C:/Projects/HMASD-worktrees/codex-vap-folr/temp/directions/vap_folr_core/exp/entity_current_increment_b01_781801/current_only/MONITOR_STATE.json.
 It reports only the supervisor PID unless it independently measures a learner PID.
 The actual pending producer is Z plus this observation assignment; G is complete.
+
+## Complete pair collected
+
+Z exited0 at 2026-09-15T03:34:38Z in the original supervisor log. The reused
+terminal-only Monitor confirmed finished/exit0 at03:37:01.2560763Z and returned
+empty active_set with the correct actual local state path. DM collected at03:37:54Z,
+verified all selected source/arm/seeds/counts/checkpoint and the original G digest,
+then verified all10 transferred Z archive members. Both original handles and the
+Monitor are terminal; no science process or observation remains pending.
+
+Z native wall2080.16s / CPU2079.15s; the two-arm sums are4192.43s /4191.98s.
+PAIR_READBACK recomputes Z−G−4.44375 / GENERIC_ABOVE_MEI from both complete arrays
+and matches the selected publisher. The E0 result and complete intake preserve the
+one-fit-per-arm ceiling, missed prediction, original/adaptive evidence boundaries
+and the owner's prospective calibration. No scientific retry or successor fit
+has occurred. Full independent result/plan review and support retention/cleanup
+are the remaining closeout work.
+
+## Complete-result review dispatched and support preserved
+
+The new result/one-versus-two A-G block review is published at TASK
+859b18b05bca3985ce7a34662e500a85a563e7aa and HANDOFF
+ca6889fb49978657c16957ca85b7a57d723daae5, in
+pro_packets/20260914_current_increment_b01_result_plan_review. It was dispatched
+directly to the reusable native Transport; provider acceptance and full response
+are not inferred from dispatch. The scope is result/object-plan review, with no
+family/lifecycle or Portfolio decision. Scientific input2d83f5b8f includes the
+endpoint CSV that the repository-wide ignore pattern initially omitted.
+
+All53 remote support members and4 local runtime members are now archived and
+read back byte-for-byte. CLEANUP_INVENTORY.md and SUPPORT_READBACK.json record
+the exact retention/removal boundary. No cleanup, successor fit or retry has yet
+occurred at this preservation step.
+
+Root retained the support on main17b81fcf2. The assigned remote reclamation
+completed at2026-09-15T04:03:57Z with disk and registration absence in
+REMOTE_CLEANUP_RECEIPT.json. Current-object local PowerShell deletion was rejected
+before execution by automatic approval review (`blocked by policy`); all4 files
+remain byte-preserved without deletion retry or an alternate method, as recorded
+in LOCAL_CLEANUP_BLOCKER.json. The exact review remains the pending outside
+producer; scientific exposure and both frozen outcomes are unchanged.
+
+The complete result/plan review is now delivered at
+a006871c828a211c7873b06a156cad6ca1d42227, with one scoped response commit,
+155lines/33166 exact UTF-8 bytes and matched Issue15 comment5674616338. The
+DM's full conformance intake is in the bound packet's INTAKE.md. All9 canonical
+Transport files, including the strict pre-Send repair supplement, are archived;
+the dedicated tab is closed and actual native_final return is recorded.
+The completed Z-G lifecycle has no remaining external producer or scientific
+invocation. Its local4-file policy retention is explicit. Further A-G card work
+is a new bounded object choice by the same DM, not an extension of this budget.

@@ -1,0 +1,31 @@
+{
+  "prepared_utc": "2026-09-15T04:35:03.620755+00:00",
+  "source_sha": "78437b89f901f0a3ef1828f768039ea41e7d29a3",
+  "worktree": "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001",
+  "out": "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001",
+  "python": "/home/wu/.venvs/hmasd/bin/python",
+  "python_version": "3.10.21 (main, Sep  1 2026, 14:16:49) [Clang 22.1.3 ]",
+  "wrappers": [
+    {
+      "name": "BLOCK1_GENERIC.sh",
+      "bytes": 656,
+      "sha256": "1364b503fc8db27753f19f34eacacc41c3fad142ee4b00de70f4a5677ea89d75"
+    },
+    {
+      "name": "BLOCK1_PERSISTENT.sh",
+      "bytes": 731,
+      "sha256": "d16f3f70071dfb3e43cdc1013af963cabace210f5590317ca2d44a37d10d3156"
+    },
+    {
+      "name": "BLOCK2_GENERIC.sh",
+      "bytes": 656,
+      "sha256": "23ffcf21d7f60c6efa50d5010833d5778d10fdb74d07ffb1ef3b8d9412ab0981"
+    },
+    {
+      "name": "BLOCK2_PERSISTENT.sh",
+      "bytes": 731,
+      "sha256": "9794688e66cdf721deb5ee3bac1b11cb416e776a4afe90f634c26b491aa6d30c"
+    }
+  ],
+  "tracked_status": ""
+}

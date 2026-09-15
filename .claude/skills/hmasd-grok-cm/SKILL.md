@@ -5,6 +5,13 @@ description: How the Claude Code research hub routes one direction's CM implemen
 
 # Grok Build as CM implementer (Claude Code hub)
 
+**CM mode is suspended (OWNER_DIRECT 2026-09-12, `AGENTS.md` section 1):** new CM and
+Implementer assignments, including equivalent code-implementation roles under generic names,
+are temporarily suspended on every runtime; the hub implements directly. Do not start a new
+Grok CM task until the owner lifts that suspension. **Clerk mode** (below, `grok-4.5` medium)
+is a mechanical control-plane method, not a code-implementation role, and remains in use. The
+CM-mode procedure is retained for the day the suspension is lifted.
+
 Owner decisions 2026-09-05 (22:40 and 22:57 PDT): with two directions advancing in a Claude
 session, one direction's code tasks go to Grok Build to save Claude quota, model `grok-4.6` at
 effort `high`, and this route is part of the stable workflow. Grok is a third agent runtime under

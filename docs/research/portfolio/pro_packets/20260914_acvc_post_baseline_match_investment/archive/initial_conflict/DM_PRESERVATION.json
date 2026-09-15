@@ -1,0 +1,45 @@
+{
+  "captured_at_utc": "2026-09-15T05:01:30.381783+00:00",
+  "request_id": "2026-09-14-acvc-post-baseline-match-investment-01",
+  "source_directory": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\portfolio\\2026-09-14-acvc-post-baseline-match-investment-01",
+  "interpretation": "The operation records accepted user bc922ee8-24cd-4382-a8de-3bf719b4d231 but assistant ID is unknown. Old FSD short receipt is unpaired evidence, not an ACVC scientific response. Same-request observation/reconciliation resumed; no second Send.",
+  "files": [
+    {
+      "name": "PROMPT_BODY.md",
+      "bytes": 1918,
+      "sha256": "1d990a9cba5d4736c16fe0bb063e1b5d8e5af75030c6199f8facd2f389a34497"
+    },
+    {
+      "name": "PACKET_MANIFEST.json",
+      "bytes": 939,
+      "sha256": "1c04a2bc6caece0d505f96c2790fb3d81e3df52dd5b8e2f2ddea2453b05146f0"
+    },
+    {
+      "name": "CHAT_RECEIPT.md",
+      "bytes": 96,
+      "sha256": "74a9df3c22b28e44e69a04b24758ac2ea4581248905a775b3cddef463e9ce71c"
+    },
+    {
+      "name": "CONFLICT.md",
+      "bytes": 1359,
+      "sha256": "88456264ed1b4f4cdeb50185c79a04e995e37be7db09010b3b8449410ec1080d"
+    },
+    {
+      "name": "TRANSPORT_FACTS.json",
+      "bytes": 5217,
+      "sha256": "e37c45698f250a530b05822f9dd3ae2d8b0cc4f321e2b48440c45b2c756de9c6"
+    },
+    {
+      "name": "transport_preflight.json",
+      "bytes": 4853,
+      "sha256": "532a688e716dabf77f82b15f68b255ba3473d9b46d834b16d7f4cea3bffa0679"
+    }
+  ],
+  "byte_exact_archive": {
+    "path": "RAW_INITIAL_CONFLICT.tar.gz",
+    "bytes": 4048,
+    "sha256": "5b8d7b1dca730b6abfc7765ebe875f8f75ca33b8939a4a15b250916ac0d4ce00",
+    "members_verified_against_original_hashes": true
+  },
+  "text_copy_note": "Repository Markdown/JSON copies may undergo Git CRLF normalization. The binary tar.gz preserves all six original transport byte strings, checked above; original local Transport files are retained."
+}

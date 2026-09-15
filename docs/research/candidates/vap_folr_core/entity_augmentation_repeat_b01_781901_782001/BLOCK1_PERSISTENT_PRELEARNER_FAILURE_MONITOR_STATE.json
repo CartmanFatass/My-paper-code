@@ -1,0 +1,11 @@
+{
+  "handle": "folr-augmentation-repeat-b01-781901-persistent",
+  "source_sha": "7975964542b83560cbc0e79f74a9212f8e3737af",
+  "supervisor_pid": 3711036,
+  "accepted_at": "2026-09-15T05:30:46.666204Z",
+  "status": "failed",
+  "exit_code": 125,
+  "terminal_observed_at": "2026-09-15T05:31:23.2774201Z",
+  "observation_method": "direct UTC agent-task status query; handle was already terminal at first check",
+  "delivery_state": "terminal_only_native_final_fallback"
+}

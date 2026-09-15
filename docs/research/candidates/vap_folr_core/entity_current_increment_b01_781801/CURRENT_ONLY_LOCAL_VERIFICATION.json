@@ -1,0 +1,10 @@
+{
+  "verified_utc": "2026-09-15T03:39:37.818575+00:00",
+  "archive_sha256": "7772f813c0677c49addfb51d8a72ec9596fbcd3dc4e16bd6f1cc8cab7394cb33",
+  "archive_members": 10,
+  "all_members_verified": true,
+  "summary_sha256": "5ae6d9cdb813e78c3e73773d1199b85c8e447993207271e21b911bdb438e24e1",
+  "supervisor_terminal_log_tail": "l_seconds\": 1956.2399710880127}\n{\"episode\": 5000, \"updates\": 4969, \"wall_seconds\": 2040.7995217540301}\n{\"arm\": \"AUGMENTED_CURRENT_ONLY\", \"status\": \"complete\", \"panel\": {\"mean\": -0.1360156250000004, \"sample_sd\": 7.467901953715321, \"conditional_episode_se\": 0.6600755140885463, \"minimum\": -23.779999999999998, \"maximum\": 15.200000000000001, \"n\": 128, \"negative_count\": 69}}\n=== Task 'folr-current-increment-b01-781801-current-only' exited with code 0 at 2026-09-15T11:34:38+08:00 (Duration: 2080s) ===\n",
+  "technical_accepted": true,
+  "errors": []
+}

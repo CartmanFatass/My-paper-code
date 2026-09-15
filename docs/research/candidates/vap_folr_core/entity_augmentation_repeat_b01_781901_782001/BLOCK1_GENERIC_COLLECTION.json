@@ -1,0 +1,173 @@
+{
+  "collected_utc": "2026-09-15T05:29:22.786258+00:00",
+  "block": 1,
+  "mode": "generic",
+  "handle": "folr-augmentation-repeat-b01-781901-generic",
+  "source_sha": "7975964542b83560cbc0e79f74a9212f8e3737af",
+  "status": {
+    "task": "folr-augmentation-repeat-b01-781901-generic",
+    "status": "finished",
+    "exit_code": 0,
+    "pid": 3707528,
+    "uptime_seconds": 2910,
+    "tmux_active": false
+  },
+  "cwd": "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001",
+  "out": "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/block1/generic",
+  "errors": [],
+  "actual_head": "7975964542b83560cbc0e79f74a9212f8e3737af",
+  "tracked_status": "",
+  "summary_sha256": "11cfab196f0a770a1601f68fa898372a5c12ef9475a269c3c9ef6bf621ea2841",
+  "summary_bytes": 109419,
+  "binding": {
+    "object": "FOLR_ENTITY_AUGMENTATION_REPEAT_B01_781901_782001",
+    "block": 1,
+    "arm": "GENERIC_RETAIN",
+    "status": "complete",
+    "training_seed": 781901,
+    "evaluation_seed": 1781901,
+    "launch_sha": "7975964542b83560cbc0e79f74a9212f8e3737af",
+    "training_episodes": 5000,
+    "training_ticks": 100000,
+    "optimizer_steps": 4969,
+    "evaluation_episodes": 128,
+    "evaluation_ticks": 2560,
+    "actor_parameters": 103173,
+    "torch_threads": [
+      1,
+      1
+    ],
+    "actor_change_l2": 33.62452910541652,
+    "torch_version": "2.7.0+cu118",
+    "numpy_version": "1.26.3"
+  },
+  "array_counts": {
+    "training_returns": 5000,
+    "evaluation_returns": 128
+  },
+  "native_panel": {
+    "mean": 1.4009375,
+    "sample_sd": 6.656210342383062,
+    "conditional_episode_se": 0.5883314337628868,
+    "minimum": -13.309999999999999,
+    "maximum": 19.04,
+    "n": 128,
+    "negative_count": 56
+  },
+  "pair_primary": null,
+  "checkpoint": {
+    "bytes": 4694195,
+    "sha256": "fa4659bb055f380ce28f3e42642f3a11ff4d99a4bb62a3b8d371633cbc7cbf5b",
+    "arm": "GENERIC_RETAIN",
+    "updates": 4969,
+    "keys": [
+      "actor",
+      "mixer",
+      "target_actor",
+      "target_mixer",
+      "optimiser",
+      "updates",
+      "arm"
+    ],
+    "tensor_count": 176,
+    "all_finite": true,
+    "all_cpu": true,
+    "floating_dtypes": [
+      "torch.float32"
+    ],
+    "actor_state_elements": 103199,
+    "target_actor_state_elements": 103199,
+    "optimizer_slots": 41
+  },
+  "invocation_time": {
+    "wall_seconds": 2251.18,
+    "user_seconds": 2128.01,
+    "system_seconds": 122.27,
+    "peak_rss_kib": 768528,
+    "exit_code": 0
+  },
+  "admission": {
+    "assessed_at": "2026-09-15T04:40:52.106767Z",
+    "available_physical_bytes": 15606669312,
+    "captured_at": "2026-09-15T04:40:52.106506Z",
+    "cgroup_headroom_bytes": null,
+    "cgroup_memory_current_bytes": null,
+    "cgroup_memory_max_bytes": null,
+    "effective_available_bytes": 15606669312,
+    "effective_floor_pass": true,
+    "failure_reasons": [],
+    "measurement_source": "/proc/meminfo",
+    "minimum_available_bytes": 4294967296,
+    "passed": true,
+    "physical_floor_pass": true,
+    "schema_version": 1
+  },
+  "manifest": [
+    {
+      "path": "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/block1/generic/ADMISSION.json",
+      "archive_name": "run/ADMISSION.json",
+      "bytes": 504,
+      "sha256": "457b832a5e8b8e9ff85539b71520c1eb10cb05750c00ed862835b597f468d884"
+    },
+    {
+      "path": "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/block1/generic/INVOCATION_TIME.json",
+      "archive_name": "run/INVOCATION_TIME.json",
+      "bytes": 108,
+      "sha256": "d7b8cd29654ab79b501f2ef38b0d7e10600ecd5e8e82f4fc01a52bb3dfa20ded"
+    },
+    {
+      "path": "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/block1/generic/final.pt",
+      "archive_name": "run/final.pt",
+      "bytes": 4694195,
+      "sha256": "fa4659bb055f380ce28f3e42642f3a11ff4d99a4bb62a3b8d371633cbc7cbf5b"
+    },
+    {
+      "path": "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/block1/generic/summary.json",
+      "archive_name": "run/summary.json",
+      "bytes": 109419,
+      "sha256": "11cfab196f0a770a1601f68fa898372a5c12ef9475a269c3c9ef6bf621ea2841"
+    },
+    {
+      "path": "/home/wu/.agent-tasks/folr-augmentation-repeat-b01-781901-generic/exit_code",
+      "archive_name": "supervisor/exit_code",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "path": "/home/wu/.agent-tasks/folr-augmentation-repeat-b01-781901-generic/pid",
+      "archive_name": "supervisor/pid",
+      "bytes": 8,
+      "sha256": "36edb46c9f0afc199f23a19a0c0c3b6fa72716dfaced765ca7224946f69149a2"
+    },
+    {
+      "path": "/home/wu/.agent-tasks/folr-augmentation-repeat-b01-781901-generic/runner.sh",
+      "archive_name": "supervisor/runner.sh",
+      "bytes": 1556,
+      "sha256": "b0ff52b51c30d8fad69b3d4fc0d5fdb4a047b4b67dbddd7ff16bb816e3dcaee8"
+    },
+    {
+      "path": "/home/wu/.agent-tasks/folr-augmentation-repeat-b01-781901-generic/start_time",
+      "archive_name": "supervisor/start_time",
+      "bytes": 11,
+      "sha256": "61dc0f41f579ccbe7cff25e218c81bb9d817a0b6adad4bdb74af69e4554e724a"
+    },
+    {
+      "path": "/home/wu/.agent-tasks/folr-augmentation-repeat-b01-781901-generic/status",
+      "archive_name": "supervisor/status",
+      "bytes": 9,
+      "sha256": "161069badc0cc23058b13d7c068e45205f4333aa15fd78db9d68f5c9f1ae8983"
+    },
+    {
+      "path": "/home/wu/.agent-tasks/folr-augmentation-repeat-b01-781901-generic/task.log",
+      "archive_name": "supervisor/task.log",
+      "bytes": 2716,
+      "sha256": "d2238ce5a8c15b60c790a4f644827762d316f3f7b89ae050f7ecce6025cb656f"
+    }
+  ],
+  "archive": {
+    "path": "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/BLOCK1_GENERIC_RAW.tar.gz",
+    "bytes": 4303182,
+    "sha256": "f2ad3e7a04c4b490ed458faccd5c1cee2e9f8c20490da6c2a7fa854616c318bc"
+  },
+  "archive_members_verified": true
+}

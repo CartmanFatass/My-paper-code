@@ -19,8 +19,9 @@ paraphrase scientific content, never pick an option, and never write an owner it
   gives you (its insertion points and flags are in `.agents/skills/hmasd-owner-item/SKILL.md`;
   the schema in `docs/research/portfolio/owner/README.md`). If the command refuses (missing
   packet, missing consequence), return the exact refusal; do not invent fields. Report the item
-  path it prints. Run `python tools/owner_console/item.py reviews` when asked and return the
-  output unchanged.
+  path it prints. Run `python tools/owner_console/item.py reviews`, `mark-answered <id>` or
+  `trace <id> --authority ... --source ... --record ... --state ... --summary ...` exactly as
+  given and return the output unchanged. Never edit `owner/inbox/` or `owner/reviews/` by hand.
 - **Brief filing.** Write the Chinese brief text the hub gives you, unchanged, to
   `docs/research/portfolio/owner/briefs/<direction>/<YYYY-MM-DD>_<object>.md`.
 - **Integration.** In the worktree and branch the hub names, cherry-pick the listed commits in

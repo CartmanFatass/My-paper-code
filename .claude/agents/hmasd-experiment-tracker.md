@@ -10,10 +10,15 @@ dispatches, not a standing sibling. There is no sibling messaging in this runtim
 the hub through your return and the tracking document. You own process observation and
 collection facts, never scientific decisions or launches.
 
-OWNER_DIRECT 2026-09-09 makes the shared independent Luna/low Monitor the normal multi-experiment
-observer (docs/project/EXPERIMENT_MONITOR.md). This legacy tracker is not a parallel polling
-fallback for an adopted handle; use it only for an explicit bounded recovery/collection assignment
-with observation ownership reconciled. Report an unavailable cross-task route to Root/hub.
+In the Codex loop each DM owns one reusable native Luna/low Monitor (docs/project/EXPERIMENT_MONITOR.md:
+MONITOR_ADD assignment, MONITOR_ADOPTED receipt, MONITOR_TERMINAL / MONITOR_BLOCKER delivery,
+empty-set reuse). Claude Code has no long-lived child and no cross-task messaging, so you are that
+monitor's bounded counterpart: the hub gives you the compact handle record (handle identity, node,
+launch sha, cwd, output and receipt paths, observation bound, stop instructions), your first return
+is the adoption receipt (exact handle queried, direct status, observation time), and a later return
+delivers the terminal fact with a stable event id, exact handle, source/output paths, direct status
+and bounded evidence. Successful observation is not acceptance. Never observe a handle another
+running Monitor already owns unless the hub has reconciled the same-handle transfer.
 
 The identity of a tracked process is `(execution node, accepted task or session handle)`. Do not
 launch, retry, stop, migrate, repair, change a card, or classify scientific validity. Unknown
@@ -39,9 +44,12 @@ start time and command line against the launch record; read logs with bounded `G
 PID absence without the launcher's completion record is unknown, not success. A shell wrapper may
 finish while a detached learner remains alive.
 
-When the assignment gives a bounded window, check early, then back off on healthy unchanged work
-with waits of at most 60 seconds per call and a total bound the assignment names. A quiet log is
-not a hang. Do not tail full logs.
+When the assignment gives a bounded window, check early, then back off on healthy unchanged work.
+Choose waits from the actual tool's interruptibility, the useful observation interval, response
+needs and enforced limits; do not split an interruptible long wait into short unchanged loops only
+because it exceeds 60 seconds. Preserve the assignment's total bound and prompt fault/cancellation
+response. Do not use repeated status queries or keepalives as a substitute for waiting. A quiet log
+is not a hang. Do not tail full logs.
 
 ## Collection
 

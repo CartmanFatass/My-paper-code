@@ -1,0 +1,23 @@
+{
+  "request_id": "2026-09-14-acvc-post-baseline-match-investment-01",
+  "recorded_at_utc": "2026-09-15T04:48:41.267373+00:00",
+  "event": "native_followup_dispatched",
+  "native_method": "collaboration.followup_task",
+  "source_and_parent": "/root/dm_acvc_resume_20260914",
+  "operator": "/root/dm_acvc_resume_20260914/tr_lh_acvc",
+  "handoff_commit": "9484e3214c420a283eca9c5db1b318f04808c3ed",
+  "handoff_path": "docs/research/portfolio/pro_packets/20260914_acvc_post_baseline_match_investment/HANDOFF.json",
+  "task_commit": "c0dc9a942a2c0ee4249e247851f31f860bc5b34e",
+  "scientific_input": "01aaf23b54e3fedbc3ee6ec81a1be6ae2288440a",
+  "native_tool_return": "completed without reported error",
+  "provider_acceptance": "not yet observed by author; not inferred from native dispatch",
+  "provider_operation_id": null,
+  "provider_node_ids": null,
+  "send_authorization": "one original fixed prompt; uncertain acceptance requires same-request reconciliation",
+  "shared_binding": "portfolio:cross_direction",
+  "previous_writer": "FSD complete ARCHIVED/RECEIPT/application plus explicit release; Root corroborated",
+  "current_writer": "ACVC through full-response conformance/application",
+  "next_writer": "TRDL after explicit ACVC complete-application release",
+  "new_scientific_invocations": 0,
+  "new_investment_or_lifecycle_decision": "none yet; await full conforming Portfolio response"
+}

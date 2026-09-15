@@ -1,0 +1,225 @@
+{
+  "source_sha": "0874ccfb6102859e5cd7ecfbc4b7d578eab06d91",
+  "arms": {
+    "SCALAR": {
+      "counts": {
+        "constructor_calls": 1,
+        "constructor_resets": 1,
+        "reset_calls": 768,
+        "explicit_resets": 768,
+        "step_calls": 196608,
+        "team_steps": 196608,
+        "train_team_steps": 131072,
+        "eval_team_steps": 65536,
+        "train_episodes": 512,
+        "eval_episodes": 256,
+        "completed_episode_steps": 196608,
+        "velocity_decisions": 983040,
+        "recurrent_observations": 983040,
+        "optimizer_attempts": 128,
+        "optimizer_steps": 128
+      },
+      "endpoint": {
+        "mean": 0.14086419139155873,
+        "lower_tail": 0.08521000753530991,
+        "tail_threshold": 0.1106247841291423
+      },
+      "checkpoint": {
+        "actor": {
+          "parameters": 34902,
+          "dtype": "float32",
+          "all_finite": true,
+          "final_norm": 12.645697593688965
+        },
+        "critic": {
+          "parameters": 34305,
+          "dtype": "float32",
+          "all_finite": true,
+          "final_norm": 9.299993515014648
+        }
+      },
+      "learner_exposure": {
+        "common_actor": {
+          "parameters": 34902,
+          "initial_norm": 12.57728385925293,
+          "final_norm": 12.645697593688965,
+          "displacement": 1.229894995689392,
+          "relative_displacement": 0.09778701104726026
+        },
+        "critic": {
+          "parameters": 34305,
+          "initial_norm": 9.317988395690918,
+          "final_norm": 9.299993515014648,
+          "displacement": 0.5683510899543762,
+          "relative_displacement": 0.06099504161404063
+        },
+        "total": {
+          "parameters": 69207,
+          "initial_norm": 15.652885437011719,
+          "final_norm": 15.697243690490723,
+          "displacement": 1.3548665046691895,
+          "relative_displacement": 0.08655698082766773
+        }
+      },
+      "invocation_time": {
+        "wall_seconds": 197.99,
+        "user_seconds": 196.71,
+        "system_seconds": 0.83,
+        "peak_rss_kib": 655784,
+        "exit_code": 0
+      },
+      "phase_wall": {
+        "initialization": 0.7555165729718283,
+        "training_collection": 123.49519179330673,
+        "frozen_baselines": 0.1884656430920586,
+        "updates": 9.628233249182813,
+        "final_evaluation": 58.8489129160298,
+        "checkpoint_publication": 0.001964973984286189
+      },
+      "gradient_norms": {
+        "actor_grad_norm": {
+          "min": 0.0033464981243014336,
+          "max": 0.015771254897117615
+        },
+        "critic_grad_norm": {
+          "min": 0.006564833223819733,
+          "max": 0.21630634367465973
+        },
+        "grad_norm": {
+          "min": 0.0074906125664711,
+          "max": 0.21656954288482666
+        }
+      },
+      "strictly_negative_score_counts": [
+        3
+      ],
+      "first_last_critic_loss": [
+        0.010260475799441338,
+        0.0027138288132846355
+      ],
+      "first_last16_train_mean": [
+        0.1416434027657193,
+        0.14321651717650652
+      ]
+    },
+    "Q32": {
+      "counts": {
+        "constructor_calls": 1,
+        "constructor_resets": 1,
+        "reset_calls": 768,
+        "explicit_resets": 768,
+        "step_calls": 196608,
+        "team_steps": 196608,
+        "train_team_steps": 131072,
+        "eval_team_steps": 65536,
+        "train_episodes": 512,
+        "eval_episodes": 256,
+        "completed_episode_steps": 196608,
+        "velocity_decisions": 983040,
+        "recurrent_observations": 983040,
+        "optimizer_attempts": 128,
+        "optimizer_steps": 128
+      },
+      "endpoint": {
+        "mean": 0.19251225542684883,
+        "lower_tail": 0.11977347559882232,
+        "tail_threshold": 0.15216589320388105
+      },
+      "checkpoint": {
+        "actor": {
+          "parameters": 34902,
+          "dtype": "float32",
+          "all_finite": true,
+          "final_norm": 12.664042472839355
+        },
+        "critic": {
+          "parameters": 38304,
+          "dtype": "float32",
+          "all_finite": true,
+          "final_norm": 9.693547248840332
+        }
+      },
+      "learner_exposure": {
+        "common_actor": {
+          "parameters": 34902,
+          "initial_norm": 12.57728385925293,
+          "final_norm": 12.664042472839355,
+          "displacement": 1.3208191394805908,
+          "relative_displacement": 0.1050162462946066
+        },
+        "critic": {
+          "parameters": 38304,
+          "initial_norm": 9.870976448059082,
+          "final_norm": 9.693547248840332,
+          "displacement": 1.1893601417541504,
+          "relative_displacement": 0.12049062704307154
+        },
+        "total": {
+          "parameters": 73206,
+          "initial_norm": 15.98824691772461,
+          "final_norm": 15.948122024536133,
+          "displacement": 1.77739679813385,
+          "relative_displacement": 0.11116896100493122
+        }
+      },
+      "invocation_time": {
+        "wall_seconds": 197.65,
+        "user_seconds": 196.42,
+        "system_seconds": 0.82,
+        "peak_rss_kib": 655900,
+        "exit_code": 0
+      },
+      "phase_wall": {
+        "initialization": 0.8036212789593264,
+        "training_collection": 123.91270945011638,
+        "frozen_baselines": 0.212580201565288,
+        "updates": 9.694596285698935,
+        "final_evaluation": 57.94614104903303,
+        "checkpoint_publication": 0.0031571839936077595
+      },
+      "gradient_norms": {
+        "actor_grad_norm": {
+          "min": 0.004311278462409973,
+          "max": 0.039385270327329636
+        },
+        "critic_grad_norm": {
+          "min": 0.021832186728715897,
+          "max": 0.1331356167793274
+        },
+        "grad_norm": {
+          "min": 0.022540543228387833,
+          "max": 0.1387568861246109
+        }
+      },
+      "strictly_negative_score_counts": [
+        3
+      ],
+      "first_last_critic_loss": [
+        0.06281433999538422,
+        0.016601594164967537
+      ],
+      "first_last16_train_mean": [
+        0.1470009689775188,
+        0.19598839717754712
+      ]
+    }
+  },
+  "checks": [
+    "raw rows/reset identity/reward_sum/H",
+    "512train+256eval and128sequentialAdam perarm",
+    "ownbatchFP32eta4 andnegativecounts/four frozenepoch records",
+    "checkpoint finiteFP32 source/arm/master/updatecounts/parametercounts/finalnorm",
+    "rawown64of256 tails match runner endpoint",
+    "native process exit0 and complete timing"
+  ],
+  "primary_delta": 0.034563468063512404,
+  "mean_delta": 0.0516480640352901,
+  "paired_eval_Q32_lower_count": 55,
+  "summed_native_wall": 395.64,
+  "archive": {
+    "path": "docs\\research\\candidates\\tail_return_distributional_learning\\trdl_b01_9601\\RAW_RESULTS.zip",
+    "bytes": 647102,
+    "members": 24,
+    "sha256": "e10085a57a9f950a9ec5fed0852b8e7b64041b777a8f4c472735778812ebc8b2"
+  }
+}

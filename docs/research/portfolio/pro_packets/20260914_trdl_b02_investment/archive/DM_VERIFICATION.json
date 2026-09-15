@@ -1,0 +1,18 @@
+{
+  "request_id": "2026-09-14-trdl-b02-investment-01",
+  "response_commit": "afcf3ed2712b0dec90524707fcd09ee38be9fce4",
+  "response_parent": "486b6249937bae35ec0acba1d54595051a723f42",
+  "changed_paths": [
+    "docs/research/portfolio/pro_packets/20260914_trdl_b02_investment/archive/RESPONSE.md"
+  ],
+  "bytes": 18187,
+  "line_count": 78,
+  "sha256": "b9d099df4e2eab2c5e5944372459870aab37ca695719a2417e393451e0e7d627",
+  "git_blob": "5170e5df08f39155b66b32cc2c4554bde336a74d",
+  "transport_full_copy_equal": true,
+  "all_15_response_citation_mappings_match_fixed_manifest": true,
+  "transport_binding_pairing_matches": true,
+  "accepted_send_count": 1,
+  "short_receipt_bytes": 96,
+  "native_scientific_calls_added_by_verification": 0
+}

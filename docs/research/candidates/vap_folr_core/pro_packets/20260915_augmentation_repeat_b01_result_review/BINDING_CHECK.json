@@ -1,0 +1,7 @@
+{
+  "first_binding_attempt": "failed locally before binding/dispatch: task author checkout is not a subpath of main project root",
+  "repair": "use authoring checkout as bind-time project-root for its relative Git path; render used current control configuration; TASK bytes unchanged",
+  "bound_task_sha": "f281434c2ad093b86f95507ed42a376714568668",
+  "dispatch_state": "READY_TO_DISPATCH",
+  "provider_action_during_binding": false
+}

@@ -1,0 +1,40 @@
+{
+  "verified_utc": "2026-09-15T04:18:41.859169+00:00",
+  "request_id": "2026-09-14-folr-current-increment-b01-result-plan-review-01",
+  "response_commit": "a006871c828a211c7873b06a156cad6ca1d42227",
+  "actual_parent": "2f5457cd77697d6edd87ef74d8482a31e3739b99",
+  "only_changed_path": "docs/research/candidates/vap_folr_core/pro_packets/20260914_current_increment_b01_result_plan_review/archive/RESPONSE.md",
+  "response_bytes": 33166,
+  "response_lines": 155,
+  "response_sha256": "e519b6bca81440b73a754eac9d96b30069d9028bf57d78fa60ce863b0de6702d",
+  "response_blob": "dbca664f377d64ff5a61cd1b7271502b5ccbe7c6",
+  "canonical_and_git_bytes_match": true,
+  "all_response_reference_mappings_match_fixed_task": true,
+  "source_mapping_count": 32,
+  "issue_comment_id": 5674616338,
+  "issue_comment_exact_body_match": true,
+  "prompt_bytes": 1938,
+  "prompt_sha256": "f0e8b85714ab377d46bb896c9b7d68fd6ca2c739a0d1ae717ff806134869aafa",
+  "handoff_sha256": "f5a807e33545fb6cc87d2e3db8d14ee0572ad2e7c7c74f9b95a824a8dab66329",
+  "operation_id": "6aa65ecf-2271-468e-aeff-9ebb755a35d6",
+  "provider_user_id": "6e0b45e0-b208-4711-a4c2-e5e5f9bdd93d",
+  "provider_assistant_id": "6106e80a-ebe1-41a6-a3ab-4192e84a019e",
+  "short_receipt_bytes": 130,
+  "native_receipt_method_observed": "native_final",
+  "leaf_send_message_capability": "reported unavailable by Transport",
+  "provider_source_access": "Pro reports all31 listed paths accessed at their effective commits and scopes, no decision-critical gap; DM verified mappings, not provider reading events",
+  "unexecuted_by_pro": "No raw archive/checkpoint loads, code/tests, raw-result recomputation, profiling, unlisted dependency or local-library retrieval",
+  "display_repairs": "Git checkout CRLF-only conversion restored to exact immutable LF bytes. Python3.11 console could not print one Unicode segment in default locale; native UTF8 Get-Content read the complete missing segment, without any evidence-byte repair.",
+  "first_strict_attempt": "Bounded Transport supplement preserved exact reported tool output: first strict target-menu-open-unconfirmed; subsequent registry status request absent with no send evidence/provider IDs; same unchanged idempotency/input later accepted. No unobserved provider-side sendAttempted boolean is reconstructed. Full supplement and direct native-final capability are archived.",
+  "transport_supplement_bytes_sha256": {
+    "PRE_SEND_NONACCEPTANCE.json": [
+      "969e64f1b7adfc773c3139b4e56f60386f12702279b23f361256ce28aa9e50a3",
+      2438
+    ],
+    "PRE_SEND_NONACCEPTANCE.md": [
+      "a4d0b2924b74b13898083b9ea860c974d6bc054d1f5f2f591f3319291576058c",
+      1311
+    ]
+  },
+  "transport_archive_all_members_verified": 9
+}

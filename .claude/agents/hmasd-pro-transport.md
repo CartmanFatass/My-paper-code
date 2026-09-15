@@ -42,8 +42,14 @@ Read from the handoff: `request_id`, `direction_id`, `workflow_node`,
    `git branch -r --contains <sha>` in `C:/Projects/HMASD` is non-empty.
 3. Registry `temp/sessions/hmasd-chatgpt-pro-transport/registry.json` (shared with Codex):
    the binding key's record, if present, has `active_request_id` null and a `conversation_id`
-   equal to `requested_conversation_id`. A different conversation, an active request, or an id in
-   `quarantined_conversations` stops you. Never invent or borrow a conversation for a key.
+   equal to `requested_conversation_id`. A different conversation, an active request, an id in
+   `quarantined_conversations`, or an id listed in the exclusion record named by
+   `.codex/hmasd-transport.toml` `[conversation_policy].retired_ids_record` stops you (its
+   inventory is not exhaustive: never navigate to, prebind or Send into a retired or excluded
+   conversation). Never invent or borrow a conversation for a key. Send readiness is decided by
+   the actual ChatGPT login state of the target session, the exact conversation/request binding,
+   the provider state and one-Send reconciliation, never by which session or task opened a
+   browser surface (OWNER_DIRECT 2026-09-11).
 4. Agentify Desktop is running: `agentify_status` succeeds. If it fails, report that the GUI
    (`npm run start` in `C:/Projects/agentify-desktop`) must be started by the owner; do not start
    it yourself and do not fall back to another browser tool.
@@ -122,6 +128,14 @@ permission to create a replacement key or conversation.
    to `GITHUB_RESPONSE.md` in the same archive directory with their sha256, and save the Issue
    comment as `DELIVERY_COMMENT.json`. If the links are missing or the file is absent, read the
    branch and Issue directly, report exactly what exists, and do not send anything.
+   **Chat Markdown fallback** (`docs/project/GITHUB_RESEARCH_COLLABORATION.md` step 5): when the
+   readback after the wait still shows base sha, the response path absent and no delivery comment,
+   and the assistant turn carries a downloadable `RESPONSE.md` attachment, download that exact
+   attachment, verify it is paired with this accepted request and the complete assistant response,
+   record byte count and sha256, and preserve it first as `<archive_id>__02_RESPONSE.md` beside
+   the prompt and then as the repository sidecar `<packet>/archive/CHAT_FALLBACK_RESPONSE.md`.
+   Never create or overwrite the scoped GitHub `archive/RESPONSE.md`, never synthesise a response
+   from the chat text, and never Send again; report which route delivered the bytes.
 5. Close every tab this request created, only after the archive and readback are verified: the
    preflight tab you created (if any) and each tab `agentify_review_query` created under the
    request's `stableKey` (list them with `agentify_tabs`; a stale one that lost its CDP session

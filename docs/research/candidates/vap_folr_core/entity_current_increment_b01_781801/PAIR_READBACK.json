@@ -1,0 +1,72 @@
+{
+  "readback_utc": "2026-09-15T03:39:37.959600+00:00",
+  "source_sha": "8ad304d61af6885c0ca5ba236bbf6c2c160e61f4",
+  "primary_recomputed": {
+    "generic": {
+      "mean": 4.307734374999999,
+      "sample_sd": 9.166581225405613,
+      "conditional_episode_se": 0.8102189680977001,
+      "minimum": -21.56,
+      "maximum": 29.029999999999998,
+      "n": 128,
+      "negative_count": 40
+    },
+    "current_only": {
+      "mean": -0.1360156250000004,
+      "sample_sd": 7.467901953715321,
+      "conditional_episode_se": 0.6600755140885463,
+      "minimum": -23.779999999999998,
+      "maximum": 15.200000000000001,
+      "n": 128,
+      "negative_count": 69
+    },
+    "current_only_minus_generic": -4.44375,
+    "rule": "GENERIC_ABOVE_MEI",
+    "mei": 1.0,
+    "training_instances_per_arm": 1,
+    "paired_difference_se": null,
+    "uncertainty": "Episode dispersion is conditional on each fitted policy; common seed labels do not establish paired worlds or training-population uncertainty.",
+    "claim": "Exploratory whole-program current-only augmentation increment over Generic."
+  },
+  "recomputed_panels": {
+    "GENERIC": {
+      "mean": 4.307734374999999,
+      "sample_sd": 9.166581225405613,
+      "conditional_episode_se": 0.8102189680977001,
+      "minimum": -21.56,
+      "maximum": 29.029999999999998,
+      "n": 128,
+      "negative_count": 40
+    },
+    "CURRENT_ONLY": {
+      "mean": -0.1360156250000004,
+      "sample_sd": 7.467901953715321,
+      "conditional_episode_se": 0.6600755140885463,
+      "minimum": -23.779999999999998,
+      "maximum": 15.200000000000001,
+      "n": 128,
+      "negative_count": 69
+    }
+  },
+  "complete_counts": {
+    "training_episodes": 10000,
+    "training_ticks": 200000,
+    "optimizer_steps": 9938,
+    "evaluation_episodes": 256,
+    "evaluation_ticks": 5120
+  },
+  "new_training_instances": 2,
+  "per_arm_actor_change_l2": {
+    "G": 34.046542076775566,
+    "Z": 39.67975006716655
+  },
+  "exposure_line": "2 fresh fits; 200000 native training ticks; 9938 RMSprop steps; 2 final checkpoints; 256 final greedy episodes/5120 evaluation ticks; no screening/retry/checkpoint selection",
+  "cost": {
+    "native_wall_sum_seconds": 4192.43,
+    "aggregate_cpu_sum_seconds": 4191.98,
+    "peak_rss_kib_max": 858384,
+    "support_provider_lifetime_total": "UNKNOWN"
+  },
+  "training_population_uncertainty": "not estimated",
+  "paired_world_or_arm_independence": "not established by common seed labels"
+}

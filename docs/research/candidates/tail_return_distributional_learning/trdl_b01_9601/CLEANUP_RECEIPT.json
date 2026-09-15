@@ -1,0 +1,29 @@
+{
+  "assignment": "TRDL-B01 remote terminal reclamation",
+  "authority": "Root native confirmation of main retention of 9e8ea42b0 result, 9bd778498 execution and 24-file archive; explicit exact remote worktree and terminal-supervisor cleanup assignment",
+  "execution_node": "hmasd-wsl-node",
+  "verified_at_utc": "2026-09-15T04:05:39.289474+00:00",
+  "preflight_source_sha": "0874ccfb6102859e5cd7ecfbc4b7d578eab06d91",
+  "preflight_tracked_status": "",
+  "preflight_registered": true,
+  "preflight_supervisors": [
+    {"task": "trdl-b01-9601-scalar", "status": "finished", "exit_code": 0, "pid": 3705286, "tmux_active": false},
+    {"task": "trdl-b01-9601-q32", "status": "finished", "exit_code": 0, "pid": 3705373, "tmux_active": false}
+  ],
+  "disk_absence": {
+    "/home/wu/hmasd-worktrees/trdl-b01-9601": true,
+    "/home/wu/.agent-tasks/trdl-b01-9601-scalar": true,
+    "/home/wu/.agent-tasks/trdl-b01-9601-q32": true
+  },
+  "worktree_registered": false,
+  "source_object_retained": true,
+  "scientific_invocations_added": 0,
+  "retained": [
+    "active local author worktree C:/Projects/HMASD-worktrees/codex-trdl",
+    "published source and full scientific/raw evidence",
+    "Transport archive and pending review delivery",
+    "local policy-blocked scratch and creator caches",
+    "local and remote trdl-b01-e3ff.bundle",
+    "local collected scratch"
+  ]
+}

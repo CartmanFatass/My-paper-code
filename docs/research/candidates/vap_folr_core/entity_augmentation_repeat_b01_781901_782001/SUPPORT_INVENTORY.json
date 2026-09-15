@@ -1,0 +1,508 @@
+{
+  "preserved_utc": "2026-09-15T08:49:12.630830+00:00",
+  "source_sha": "7975964542b83560cbc0e79f74a9212f8e3737af",
+  "worktree": "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001",
+  "tracked_status": "",
+  "untracked_nonignored": "",
+  "worktree_registered": true,
+  "statuses": [
+    {
+      "task": "folr-augmentation-repeat-b01-781901-generic",
+      "status": "finished",
+      "exit_code": 0,
+      "pid": 3707528,
+      "uptime_seconds": 14899,
+      "tmux_active": false
+    },
+    {
+      "task": "folr-augmentation-repeat-b01-781901-persistent",
+      "status": "failed",
+      "exit_code": 125,
+      "pid": 3711036,
+      "uptime_seconds": 11905,
+      "tmux_active": false
+    },
+    {
+      "task": "folr-augmentation-repeat-b01-781901-persistent-start2",
+      "status": "finished",
+      "exit_code": 0,
+      "pid": 3712032,
+      "uptime_seconds": 11428,
+      "tmux_active": false
+    },
+    {
+      "task": "folr-augmentation-repeat-b01-782001-generic",
+      "status": "finished",
+      "exit_code": 0,
+      "pid": 3721180,
+      "uptime_seconds": 6678,
+      "tmux_active": false
+    },
+    {
+      "task": "folr-augmentation-repeat-b01-782001-persistent",
+      "status": "finished",
+      "exit_code": 0,
+      "pid": 3722930,
+      "uptime_seconds": 4024,
+      "tmux_active": false
+    }
+  ],
+  "manifest": [
+    {
+      "path": "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/BLOCK1_GENERIC.sh",
+      "archive_name": "worktree/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/BLOCK1_GENERIC.sh",
+      "bytes": 656,
+      "sha256": "1364b503fc8db27753f19f34eacacc41c3fad142ee4b00de70f4a5677ea89d75"
+    },
+    {
+      "path": "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/BLOCK1_GENERIC_COLLECTION.json",
+      "archive_name": "worktree/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/BLOCK1_GENERIC_COLLECTION.json",
+      "bytes": 6443,
+      "sha256": "83489d414dc6e4c8c5c063b6f045ef85f7a62c1e39be1529571709036460f5a5"
+    },
+    {
+      "path": "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/BLOCK1_GENERIC_LAUNCH_RECEIPT.json",
+      "archive_name": "worktree/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/BLOCK1_GENERIC_LAUNCH_RECEIPT.json",
+      "bytes": 2330,
+      "sha256": "812919aec0af5357be93ac05f1708983c6fa3fa2efaf10666f19a1a5c997d3c8"
+    },
+    {
+      "path": "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/BLOCK1_GENERIC_RAW.tar.gz",
+      "archive_name": "worktree/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/BLOCK1_GENERIC_RAW.tar.gz",
+      "bytes": 4303182,
+      "sha256": "f2ad3e7a04c4b490ed458faccd5c1cee2e9f8c20490da6c2a7fa854616c318bc"
+    },
+    {
+      "path": "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/BLOCK1_PERSISTENT.sh",
+      "archive_name": "worktree/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/BLOCK1_PERSISTENT.sh",
+      "bytes": 731,
+      "sha256": "d16f3f70071dfb3e43cdc1013af963cabace210f5590317ca2d44a37d10d3156"
+    },
+    {
+      "path": "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/BLOCK1_PERSISTENT_COLLECTION.json",
+      "archive_name": "worktree/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/BLOCK1_PERSISTENT_COLLECTION.json",
+      "bytes": 7571,
+      "sha256": "2e05547f80bf732991a3925634e36cfa00b1fe79c1c10dfd04f0aaa761ad1050"
+    },
+    {
+      "path": "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/BLOCK1_PERSISTENT_PRELEARNER_FAILURE_COLLECTION.json",
+      "archive_name": "worktree/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/BLOCK1_PERSISTENT_PRELEARNER_FAILURE_COLLECTION.json",
+      "bytes": 3595,
+      "sha256": "879b7182decb44b2d2c06a08ae218fe7eba8a447789a031a47c234c646387421"
+    },
+    {
+      "path": "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/BLOCK1_PERSISTENT_PRELEARNER_FAILURE_RAW.tar.gz",
+      "archive_name": "worktree/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/BLOCK1_PERSISTENT_PRELEARNER_FAILURE_RAW.tar.gz",
+      "bytes": 1033,
+      "sha256": "db4543673767b4629487f959ea88b6d579f9eb980130cf26887c599fd77f4ea4"
+    },
+    {
+      "path": "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/BLOCK1_PERSISTENT_RAW.tar.gz",
+      "archive_name": "worktree/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/BLOCK1_PERSISTENT_RAW.tar.gz",
+      "bytes": 5302355,
+      "sha256": "af5480240f0807184fc91d4b9b7180faed985bf292680ed7796e57461ba9df14"
+    },
+    {
+      "path": "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/BLOCK1_PERSISTENT_START2_LAUNCH_RECEIPT.json",
+      "archive_name": "worktree/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/BLOCK1_PERSISTENT_START2_LAUNCH_RECEIPT.json",
+      "bytes": 2857,
+      "sha256": "b27157d8739020615f5fc889a078766b2b0b2d6e37178ee45a878c7847e12c09"
+    },
+    {
+      "path": "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/BLOCK2_GENERIC.sh",
+      "archive_name": "worktree/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/BLOCK2_GENERIC.sh",
+      "bytes": 656,
+      "sha256": "23ffcf21d7f60c6efa50d5010833d5778d10fdb74d07ffb1ef3b8d9412ab0981"
+    },
+    {
+      "path": "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/BLOCK2_GENERIC_COLLECTION.json",
+      "archive_name": "worktree/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/BLOCK2_GENERIC_COLLECTION.json",
+      "bytes": 6452,
+      "sha256": "d66c07aeb694c6b3597f0a393be59ced8205bf83fffb17a02962beeddc305cc3"
+    },
+    {
+      "path": "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/BLOCK2_GENERIC_LAUNCH_RECEIPT.json",
+      "archive_name": "worktree/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/BLOCK2_GENERIC_LAUNCH_RECEIPT.json",
+      "bytes": 2652,
+      "sha256": "dfebd8a14753ed6745d0525e3d056f3aac185a2ac7566e082605e7edc2686ab0"
+    },
+    {
+      "path": "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/BLOCK2_GENERIC_RAW.tar.gz",
+      "archive_name": "worktree/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/BLOCK2_GENERIC_RAW.tar.gz",
+      "bytes": 4295775,
+      "sha256": "c4011b0f17218ae0bbc78b8d7faa2a5f117277635ab4bf3511ee24be43e2742d"
+    },
+    {
+      "path": "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/BLOCK2_PERSISTENT.sh",
+      "archive_name": "worktree/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/BLOCK2_PERSISTENT.sh",
+      "bytes": 731,
+      "sha256": "9794688e66cdf721deb5ee3bac1b11cb416e776a4afe90f634c26b491aa6d30c"
+    },
+    {
+      "path": "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/BLOCK2_PERSISTENT_COLLECTION.json",
+      "archive_name": "worktree/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/BLOCK2_PERSISTENT_COLLECTION.json",
+      "bytes": 7520,
+      "sha256": "7f27b5ab8fbfc58debe4b1ffb32a6419b14fd91c37485db27958b4088cfa54d2"
+    },
+    {
+      "path": "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/BLOCK2_PERSISTENT_LAUNCH_RECEIPT.json",
+      "archive_name": "worktree/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/BLOCK2_PERSISTENT_LAUNCH_RECEIPT.json",
+      "bytes": 2956,
+      "sha256": "d920172e9b1ee38e7a71cc4878a33d15c3925874f006c78d2b46eced6b592dfa"
+    },
+    {
+      "path": "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/BLOCK2_PERSISTENT_RAW.tar.gz",
+      "archive_name": "worktree/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/BLOCK2_PERSISTENT_RAW.tar.gz",
+      "bytes": 5289635,
+      "sha256": "d23ac0af49d751e4dc6dbc23cee32448b5570dda5b67f6a0b6e7f25a413006ad"
+    },
+    {
+      "path": "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/COLLECTION_PREPARATION.json",
+      "archive_name": "worktree/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/COLLECTION_PREPARATION.json",
+      "bytes": 577,
+      "sha256": "42b6e3ec9db57d79ef5a3fee777a2d3354f0f4073daf2f1ebd715055834bf3db"
+    },
+    {
+      "path": "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/FAILED_CHECK_SCRATCH.tar.gz",
+      "archive_name": "worktree/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/FAILED_CHECK_SCRATCH.tar.gz",
+      "bytes": 10183,
+      "sha256": "b4460c8e20ade774bb2acdc238a4ce8aaf379f9c629c38ffd0c443f8b9f8ed54"
+    },
+    {
+      "path": "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/FOCUSED_CHECK.txt",
+      "archive_name": "worktree/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/FOCUSED_CHECK.txt",
+      "bytes": 1296,
+      "sha256": "bf4be74efb81285dd9d264077e293440313c148ebdbbafe1f4dce07fff4cb37c"
+    },
+    {
+      "path": "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/FOCUSED_CHECK_RECEIPT.json",
+      "archive_name": "worktree/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/FOCUSED_CHECK_RECEIPT.json",
+      "bytes": 1019,
+      "sha256": "9f4156e98f52f41632554ac82b8f05a3385be141de57585bff52d7238a2d7713"
+    },
+    {
+      "path": "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/FOCUSED_CHECK_REPAIR.txt",
+      "archive_name": "worktree/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/FOCUSED_CHECK_REPAIR.txt",
+      "bytes": 98,
+      "sha256": "2279ec65d7821a5fdf0d326061fe8c4bae70ad1962651b6925df69fa8b30a84e"
+    },
+    {
+      "path": "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/FOCUSED_CHECK_REPAIR_RECEIPT.json",
+      "archive_name": "worktree/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/FOCUSED_CHECK_REPAIR_RECEIPT.json",
+      "bytes": 1518,
+      "sha256": "ad294636a8043213b26a4dded8332a78a5dd0e051f29cd94423116a139b27041"
+    },
+    {
+      "path": "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/OUTPUT_PREPARATION_CHECK.json",
+      "archive_name": "worktree/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/OUTPUT_PREPARATION_CHECK.json",
+      "bytes": 3327,
+      "sha256": "0ee7149d259f078c672422462daeb33bd1b32c7c662ac02de600d1cc56c4b4ce"
+    },
+    {
+      "path": "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/OUTPUT_PREPARATION_CHECK_RAW.tar.gz",
+      "archive_name": "worktree/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/OUTPUT_PREPARATION_CHECK_RAW.tar.gz",
+      "bytes": 980,
+      "sha256": "64639efb5ff904804517b5dafa18a0960824cfa4d6871a9134e1f03b66e13b23"
+    },
+    {
+      "path": "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/PREPARATION.json",
+      "archive_name": "worktree/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/PREPARATION.json",
+      "bytes": 1154,
+      "sha256": "e98ac25bf9c00a304f483c136adb7cd2b1fc955dc77e0023679cc082465f20a3"
+    },
+    {
+      "path": "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/block1/generic/ADMISSION.json",
+      "archive_name": "worktree/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/block1/generic/ADMISSION.json",
+      "bytes": 504,
+      "sha256": "457b832a5e8b8e9ff85539b71520c1eb10cb05750c00ed862835b597f468d884"
+    },
+    {
+      "path": "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/block1/generic/INVOCATION_TIME.json",
+      "archive_name": "worktree/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/block1/generic/INVOCATION_TIME.json",
+      "bytes": 108,
+      "sha256": "d7b8cd29654ab79b501f2ef38b0d7e10600ecd5e8e82f4fc01a52bb3dfa20ded"
+    },
+    {
+      "path": "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/block1/generic/final.pt",
+      "archive_name": "worktree/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/block1/generic/final.pt",
+      "bytes": 4694195,
+      "sha256": "fa4659bb055f380ce28f3e42642f3a11ff4d99a4bb62a3b8d371633cbc7cbf5b"
+    },
+    {
+      "path": "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/block1/generic/summary.json",
+      "archive_name": "worktree/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/block1/generic/summary.json",
+      "bytes": 109419,
+      "sha256": "11cfab196f0a770a1601f68fa898372a5c12ef9475a269c3c9ef6bf621ea2841"
+    },
+    {
+      "path": "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/block1/persistent/ADMISSION.json",
+      "archive_name": "worktree/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/block1/persistent/ADMISSION.json",
+      "bytes": 504,
+      "sha256": "66fdccc1f7150a5cc8a2d859193eab24dd1a0efebf412f2c195bea8d9d0222b4"
+    },
+    {
+      "path": "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/block1/persistent/INVOCATION_TIME.json",
+      "archive_name": "worktree/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/block1/persistent/INVOCATION_TIME.json",
+      "bytes": 108,
+      "sha256": "f9d3459f803a01684906981680785ac924dc2473129fa45f75ac73328f967e26"
+    },
+    {
+      "path": "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/block1/persistent/final.pt",
+      "archive_name": "worktree/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/block1/persistent/final.pt",
+      "bytes": 5782043,
+      "sha256": "a6a92472121bca4a38c09703b2ed8497647f5ddb227377d8f88f5daea36df7e8"
+    },
+    {
+      "path": "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/block1/persistent/summary.json",
+      "archive_name": "worktree/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/block1/persistent/summary.json",
+      "bytes": 105527,
+      "sha256": "fbe1d65f45b139ae121682e4acb560799e90bc841b051ff611d7292aff3e010e"
+    },
+    {
+      "path": "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/block2/generic/ADMISSION.json",
+      "archive_name": "worktree/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/block2/generic/ADMISSION.json",
+      "bytes": 504,
+      "sha256": "70ef959fab68e35d15fdd0b21e9833860870ef0c7b3193077897785ee1f00385"
+    },
+    {
+      "path": "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/block2/generic/INVOCATION_TIME.json",
+      "archive_name": "worktree/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/block2/generic/INVOCATION_TIME.json",
+      "bytes": 108,
+      "sha256": "9d32b460e80cadd880919dcb34de5050a2e444fa6369af15bf4cbdb1f7b266e8"
+    },
+    {
+      "path": "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/block2/generic/final.pt",
+      "archive_name": "worktree/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/block2/generic/final.pt",
+      "bytes": 4694195,
+      "sha256": "d126718fd5fb870b30c2b0e1180ad62da070996c3c805f0b4a800e26187cefd0"
+    },
+    {
+      "path": "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/block2/generic/summary.json",
+      "archive_name": "worktree/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/block2/generic/summary.json",
+      "bytes": 109737,
+      "sha256": "7020b568344d3bcfc1a629414fe38cd58ef92c7811243499bc627165d9a69d66"
+    },
+    {
+      "path": "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/block2/persistent/ADMISSION.json",
+      "archive_name": "worktree/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/block2/persistent/ADMISSION.json",
+      "bytes": 504,
+      "sha256": "72312d45dec4aa5c55bf7354baaeebb49c892d7f8e1053c6ec2eda4431d6fa14"
+    },
+    {
+      "path": "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/block2/persistent/INVOCATION_TIME.json",
+      "archive_name": "worktree/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/block2/persistent/INVOCATION_TIME.json",
+      "bytes": 108,
+      "sha256": "7c6cae686a1e6a0b4cf168983b48e57267bd50ed8befef654fe68c4e55d0eebb"
+    },
+    {
+      "path": "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/block2/persistent/final.pt",
+      "archive_name": "worktree/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/block2/persistent/final.pt",
+      "bytes": 5782043,
+      "sha256": "7e8fc8d458a5129a15bc6b57182e35285078cf75360e110bf10040f412c85055"
+    },
+    {
+      "path": "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/block2/persistent/summary.json",
+      "archive_name": "worktree/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/block2/persistent/summary.json",
+      "bytes": 111079,
+      "sha256": "a5a975eee15c004dc4e3337180bbb15bb59fc91f50b0c9f144bbb7a4cb9d3f23"
+    },
+    {
+      "path": "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/collect_terminal.py",
+      "archive_name": "worktree/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/collect_terminal.py",
+      "bytes": 6568,
+      "sha256": "361cb910a52ed1c42a4bfb56451a95c165b7acfbf848aec0b0911bc44a0dac33"
+    },
+    {
+      "path": "/home/wu/.agent-tasks/folr-augmentation-repeat-b01-781901-generic/exit_code",
+      "archive_name": "supervisors/folr-augmentation-repeat-b01-781901-generic/exit_code",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "path": "/home/wu/.agent-tasks/folr-augmentation-repeat-b01-781901-generic/pid",
+      "archive_name": "supervisors/folr-augmentation-repeat-b01-781901-generic/pid",
+      "bytes": 8,
+      "sha256": "36edb46c9f0afc199f23a19a0c0c3b6fa72716dfaced765ca7224946f69149a2"
+    },
+    {
+      "path": "/home/wu/.agent-tasks/folr-augmentation-repeat-b01-781901-generic/runner.sh",
+      "archive_name": "supervisors/folr-augmentation-repeat-b01-781901-generic/runner.sh",
+      "bytes": 1556,
+      "sha256": "b0ff52b51c30d8fad69b3d4fc0d5fdb4a047b4b67dbddd7ff16bb816e3dcaee8"
+    },
+    {
+      "path": "/home/wu/.agent-tasks/folr-augmentation-repeat-b01-781901-generic/start_time",
+      "archive_name": "supervisors/folr-augmentation-repeat-b01-781901-generic/start_time",
+      "bytes": 11,
+      "sha256": "61dc0f41f579ccbe7cff25e218c81bb9d817a0b6adad4bdb74af69e4554e724a"
+    },
+    {
+      "path": "/home/wu/.agent-tasks/folr-augmentation-repeat-b01-781901-generic/status",
+      "archive_name": "supervisors/folr-augmentation-repeat-b01-781901-generic/status",
+      "bytes": 9,
+      "sha256": "161069badc0cc23058b13d7c068e45205f4333aa15fd78db9d68f5c9f1ae8983"
+    },
+    {
+      "path": "/home/wu/.agent-tasks/folr-augmentation-repeat-b01-781901-generic/task.log",
+      "archive_name": "supervisors/folr-augmentation-repeat-b01-781901-generic/task.log",
+      "bytes": 2716,
+      "sha256": "d2238ce5a8c15b60c790a4f644827762d316f3f7b89ae050f7ecce6025cb656f"
+    },
+    {
+      "path": "/home/wu/.agent-tasks/folr-augmentation-repeat-b01-781901-persistent/exit_code",
+      "archive_name": "supervisors/folr-augmentation-repeat-b01-781901-persistent/exit_code",
+      "bytes": 4,
+      "sha256": "a5e45837a2959db847f7e67a915d0ecaddd47f943af2af5fa6453be497faabca"
+    },
+    {
+      "path": "/home/wu/.agent-tasks/folr-augmentation-repeat-b01-781901-persistent/pid",
+      "archive_name": "supervisors/folr-augmentation-repeat-b01-781901-persistent/pid",
+      "bytes": 8,
+      "sha256": "3cb8d70ba23f14df0b18088dd4a1a5ac80bab3745e9f0f086381e48a94753524"
+    },
+    {
+      "path": "/home/wu/.agent-tasks/folr-augmentation-repeat-b01-781901-persistent/runner.sh",
+      "archive_name": "supervisors/folr-augmentation-repeat-b01-781901-persistent/runner.sh",
+      "bytes": 1771,
+      "sha256": "67443c29c107de1fe2262ef5af327108668673b23df2fa49a56ddde22a207627"
+    },
+    {
+      "path": "/home/wu/.agent-tasks/folr-augmentation-repeat-b01-781901-persistent/start_time",
+      "archive_name": "supervisors/folr-augmentation-repeat-b01-781901-persistent/start_time",
+      "bytes": 11,
+      "sha256": "56bc7afb38cc18370d61e55ac6c4f22f4612b224e1242e941f7e7772b4ea1281"
+    },
+    {
+      "path": "/home/wu/.agent-tasks/folr-augmentation-repeat-b01-781901-persistent/status",
+      "archive_name": "supervisors/folr-augmentation-repeat-b01-781901-persistent/status",
+      "bytes": 7,
+      "sha256": "6da5b18878e110928643ebcc38dbb7552cf3a296eea56493e23edc2b93eecff8"
+    },
+    {
+      "path": "/home/wu/.agent-tasks/folr-augmentation-repeat-b01-781901-persistent/task.log",
+      "archive_name": "supervisors/folr-augmentation-repeat-b01-781901-persistent/task.log",
+      "bytes": 461,
+      "sha256": "0690421ecb16dc74e643a5e37cc4e1a7baf133115e2330402582d1e4c27385ec"
+    },
+    {
+      "path": "/home/wu/.agent-tasks/folr-augmentation-repeat-b01-781901-persistent-start2/exit_code",
+      "archive_name": "supervisors/folr-augmentation-repeat-b01-781901-persistent-start2/exit_code",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "path": "/home/wu/.agent-tasks/folr-augmentation-repeat-b01-781901-persistent-start2/pid",
+      "archive_name": "supervisors/folr-augmentation-repeat-b01-781901-persistent-start2/pid",
+      "bytes": 8,
+      "sha256": "a0890e8e1e0daf0f69d537e2c9f4fc6346754a5d4fe2c95f9a9e15a5d82763ba"
+    },
+    {
+      "path": "/home/wu/.agent-tasks/folr-augmentation-repeat-b01-781901-persistent-start2/runner.sh",
+      "archive_name": "supervisors/folr-augmentation-repeat-b01-781901-persistent-start2/runner.sh",
+      "bytes": 1834,
+      "sha256": "a30826481064567809cfe55357702e5fae1af1fdaeb030b7c803c9ce863586bc"
+    },
+    {
+      "path": "/home/wu/.agent-tasks/folr-augmentation-repeat-b01-781901-persistent-start2/start_time",
+      "archive_name": "supervisors/folr-augmentation-repeat-b01-781901-persistent-start2/start_time",
+      "bytes": 11,
+      "sha256": "d9f9d8bd648bba4c8df781c9158663f02a3dd32a71e6f60efddbd0c1331844f9"
+    },
+    {
+      "path": "/home/wu/.agent-tasks/folr-augmentation-repeat-b01-781901-persistent-start2/status",
+      "archive_name": "supervisors/folr-augmentation-repeat-b01-781901-persistent-start2/status",
+      "bytes": 9,
+      "sha256": "161069badc0cc23058b13d7c068e45205f4333aa15fd78db9d68f5c9f1ae8983"
+    },
+    {
+      "path": "/home/wu/.agent-tasks/folr-augmentation-repeat-b01-781901-persistent-start2/task.log",
+      "archive_name": "supervisors/folr-augmentation-repeat-b01-781901-persistent-start2/task.log",
+      "bytes": 2753,
+      "sha256": "6477d672147cd1365d28787264967803204a35bbec2f862c65a6c42719b07f63"
+    },
+    {
+      "path": "/home/wu/.agent-tasks/folr-augmentation-repeat-b01-782001-generic/exit_code",
+      "archive_name": "supervisors/folr-augmentation-repeat-b01-782001-generic/exit_code",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "path": "/home/wu/.agent-tasks/folr-augmentation-repeat-b01-782001-generic/pid",
+      "archive_name": "supervisors/folr-augmentation-repeat-b01-782001-generic/pid",
+      "bytes": 8,
+      "sha256": "74a02c2ea6ce29c9d33bd20152c1146a048a7f5577fa6758585df44bd5d33f68"
+    },
+    {
+      "path": "/home/wu/.agent-tasks/folr-augmentation-repeat-b01-782001-generic/runner.sh",
+      "archive_name": "supervisors/folr-augmentation-repeat-b01-782001-generic/runner.sh",
+      "bytes": 1556,
+      "sha256": "89d9af5b0d4853307576d01cdede5d980950e015b5d83b58ec81e7bf11abda9f"
+    },
+    {
+      "path": "/home/wu/.agent-tasks/folr-augmentation-repeat-b01-782001-generic/start_time",
+      "archive_name": "supervisors/folr-augmentation-repeat-b01-782001-generic/start_time",
+      "bytes": 11,
+      "sha256": "d00e1682f80e23930052423c97e0597e95b5442aa7e1b0fc0ce240c6675626ba"
+    },
+    {
+      "path": "/home/wu/.agent-tasks/folr-augmentation-repeat-b01-782001-generic/status",
+      "archive_name": "supervisors/folr-augmentation-repeat-b01-782001-generic/status",
+      "bytes": 9,
+      "sha256": "161069badc0cc23058b13d7c068e45205f4333aa15fd78db9d68f5c9f1ae8983"
+    },
+    {
+      "path": "/home/wu/.agent-tasks/folr-augmentation-repeat-b01-782001-generic/task.log",
+      "archive_name": "supervisors/folr-augmentation-repeat-b01-782001-generic/task.log",
+      "bytes": 2727,
+      "sha256": "d4451e2ce2fab69a480c89241a9a013db47e20cabf58b28d023aa5ae625aff9e"
+    },
+    {
+      "path": "/home/wu/.agent-tasks/folr-augmentation-repeat-b01-782001-persistent/exit_code",
+      "archive_name": "supervisors/folr-augmentation-repeat-b01-782001-persistent/exit_code",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "path": "/home/wu/.agent-tasks/folr-augmentation-repeat-b01-782001-persistent/pid",
+      "archive_name": "supervisors/folr-augmentation-repeat-b01-782001-persistent/pid",
+      "bytes": 8,
+      "sha256": "8b0cc8dcb2355c4a166d0bb2cef29593ab9b4da906d3d4ae3509ffe67511eca2"
+    },
+    {
+      "path": "/home/wu/.agent-tasks/folr-augmentation-repeat-b01-782001-persistent/runner.sh",
+      "archive_name": "supervisors/folr-augmentation-repeat-b01-782001-persistent/runner.sh",
+      "bytes": 1771,
+      "sha256": "55e91d5efa7efeeb011d74f0895d77f0572614ecfbe4c63386f17b4f7269a2b1"
+    },
+    {
+      "path": "/home/wu/.agent-tasks/folr-augmentation-repeat-b01-782001-persistent/start_time",
+      "archive_name": "supervisors/folr-augmentation-repeat-b01-782001-persistent/start_time",
+      "bytes": 11,
+      "sha256": "9a1cd15f5a7768cb0eb3f9485df521a7a3931026f5d2d4d05bc006587bcae996"
+    },
+    {
+      "path": "/home/wu/.agent-tasks/folr-augmentation-repeat-b01-782001-persistent/status",
+      "archive_name": "supervisors/folr-augmentation-repeat-b01-782001-persistent/status",
+      "bytes": 9,
+      "sha256": "161069badc0cc23058b13d7c068e45205f4333aa15fd78db9d68f5c9f1ae8983"
+    },
+    {
+      "path": "/home/wu/.agent-tasks/folr-augmentation-repeat-b01-782001-persistent/task.log",
+      "archive_name": "supervisors/folr-augmentation-repeat-b01-782001-persistent/task.log",
+      "bytes": 2738,
+      "sha256": "3bbacabf19a016bf8611fe07e68a2eeef700f9cfbfbf98eb0ae14e37dde2e4ff"
+    }
+  ],
+  "original_bytes": 40674569,
+  "archive": {
+    "path": "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/SUPPORT_RAW.tar.gz",
+    "bytes": 38419425,
+    "sha256": "e982297bc0d60f0797a5788020dc9b27d89f1a5018961862002dab659558f974"
+  },
+  "archive_members_verified": 74,
+  "preservation_wall_seconds": 1.3624067830387503,
+  "excluded_reconstructible": "Published tracked source at797596454; Python/pytest caches outside direction temp; no untracked nonignored source exists.",
+  "cleanup_state": "not removed; retain until Root preservation integration/retention",
+  "ignored_outside_owned_temp_noncache": [],
+  "ignored_cache_files_excluded": 22
+}

@@ -1,0 +1,16 @@
+{
+  "arm": "C",
+  "accepted_native_fit": true,
+  "train_rows": 4096,
+  "eval_rows": 192,
+  "update_records": 8192,
+  "optimizer_steps": 8192,
+  "complete_reset_episode_step_sequence": true,
+  "epoch_rollout_sequence_exact": true,
+  "all_bound_panels_complete": true,
+  "raw_summary_matches": true,
+  "primary_independently_recomputed": true,
+  "legacy_counter_limit": "selected_final_checkpoints is an unwired inherited placeholder in both summaries; the actual final_checkpoints and post_fit_loads are populated. C recurrent_observations/velocity_decisions count training only, not its deployment panels.",
+  "new_native_calls_in_analysis": 0,
+  "all_loss_gradient_fields_finite": true
+}

@@ -1,0 +1,37 @@
+{
+  "recorded_utc": "2026-09-15T08:38:32.718179+00:00",
+  "learner_source": "7975964542b83560cbc0e79f74a9212f8e3737af",
+  "study_helper_sha256": "ec06be37c13cae8ff64e349fd307134cee988f9f5da30e1ffc7757b971e04e63",
+  "study_helper_publication": "c8409bffd84fa4af49fae7a6221ed8847f23c123/COLLECTION_TOOLS.tar.gz; reader unchanged from ebeb74ea8",
+  "run_summary_tool": "C:\\Projects\\HMASD\\.agents\\skills\\hmasd-scientific-tools\\scripts\\summarize_runs.py",
+  "run_summary_tool_sha256": "e918965e5b63d0c9d5b99f555dcd86143d838f952037611a616b24f506cd08d9",
+  "tool_control_head": "7ebabed2e2e3bd0b57106d6a42f9ace6dc2dc560",
+  "run_summary_arguments": [
+    "RUN_SCORES.csv",
+    "--out",
+    "RUN_SUMMARY.json"
+  ],
+  "paired_flag": false,
+  "independent_unit": "two prospectively fixed complete A/G blocks, four separate fits; per-arm descriptive groups contain two fits; 128 eval episodes nested in each fit",
+  "primary": "published study_result ordered(d1,d2), independently recomputed from per-fit episode means; mean difference descriptive only",
+  "csv_publication": "LF normalized after computation; scores/rows unchanged",
+  "new_empirical_acquisition": 0,
+  "full_result_archives_verified": 40,
+  "files": [
+    {
+      "path": "docs\\research\\candidates\\vap_folr_core\\entity_augmentation_repeat_b01_781901_782001\\STUDY_READBACK.json",
+      "bytes": 5114,
+      "sha256": "c4e635471d366fa06f370b9ed44ed40aa646ac46f6dddcb01b114a0279031be4"
+    },
+    {
+      "path": "docs\\research\\candidates\\vap_folr_core\\entity_augmentation_repeat_b01_781901_782001\\RUN_SCORES.csv",
+      "bytes": 381,
+      "sha256": "8afd4825947de500932a92c800f57c56e3023b3d581df15b6eafbe618c698847"
+    },
+    {
+      "path": "docs\\research\\candidates\\vap_folr_core\\entity_augmentation_repeat_b01_781901_782001\\RUN_SUMMARY.json",
+      "bytes": 916,
+      "sha256": "fd537b01b84989440bb4dfd82df95d2d8d611bf7aa329f1249eece852d6a7e0a"
+    }
+  ]
+}

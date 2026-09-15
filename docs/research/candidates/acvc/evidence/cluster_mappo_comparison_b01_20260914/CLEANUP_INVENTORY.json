@@ -1,0 +1,42 @@
+{
+  "object": "ACVC_CLUSTER_MAPPO_COMPARISON_B01",
+  "state": "completed; owner operational pause applied",
+  "authoring_checkout": "C:/Projects/HMASD-worktrees/codex-acvc",
+  "remote_source_checkout": "/home/wu/hmasd-worktrees/acvc-mappo-b01-e4d3f324e",
+  "remote_dependency_root": "/home/wu/hmasd-inputs/acvc-mappo-b01-28331",
+  "local_dependency_archive": "temp/directions/acvc/staging/cluster_mappo_comparison_b01_20260914/on-policy-de66d7a4b23fac2513f56f96f73b3f5cb96695ac.tar",
+  "expected_original_artifacts_per_arm": [
+    "admission.json",
+    "stdout.log",
+    "stderr.log",
+    "native_time.txt",
+    "episodes.jsonl",
+    "updates.jsonl",
+    "final.pt",
+    "summary.json"
+  ],
+  "preserve": [
+    "exact published source/dependency inputs",
+    "both original complete or partial outputs",
+    "both supervisor status/log records",
+    "two unique final snapshots if present",
+    "computed comparison and scientific intake"
+  ],
+  "cleanup_boundary": "Only after terminal originals and verified original-byte local retention; exact source worktree plus dependency and inactive named supervisor paths. Preserve shared repo/other worktrees/authoring checkout. Root receives retention and absence facts.",
+  "local_test_scratch_retained_after_policy_rejection": [
+    "temp/directions/acvc/test/cluster_mappo_b01_20260914_01",
+    "temp/directions/acvc/test/cluster_mappo_b01_cfixture_20260914_01"
+  ],
+  "handles": [
+    "acvc-mappo-c-b01-28331-e4d3f324",
+    "acvc-mappo-m-b01-28331-e4d3f324"
+  ],
+  "outputs": [
+    "/home/wu/hmasd-worktrees/acvc-mappo-b01-e4d3f324e/temp/directions/acvc/exp/cluster_mappo_comparison_b01_28331_C",
+    "/home/wu/hmasd-worktrees/acvc-mappo-b01-e4d3f324e/temp/directions/acvc/exp/cluster_mappo_comparison_b01_28331_M"
+  ],
+  "remote_cleanup_complete": true,
+  "cleanup_receipt": "CLEANUP.json",
+  "retained_originals": "local verified C_original.tar.gz and M_original.tar.gz plus extracted28 files; unique checkpoints retained",
+  "remaining_cleanup": "Only explicit policy-denied local test scratch; no remote runtime cleanup or scientific producer remains"
+}

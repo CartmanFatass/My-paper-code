@@ -1,0 +1,102 @@
+{
+  "id": "20260914-tailretu-003",
+  "created": "2026-09-14T21:31:04-07:00",
+  "direction": "tail_return_distributional_learning",
+  "tier": "object",
+  "kind": "new-card",
+  "title": "TRDL B02：仅准备一对独立重复，新增投资另问Portfolio",
+  "context": "同目标尾部学习的B01实测正差已通过完整科学审阅。B02保持原配方，只准备master9602独立训练对；不实例化种子或模型，不适配代码，不获得新调用。重复回答配方结果能否再现，不能证明强标量基线优势或纯表示归因。",
+  "options": [
+    {
+      "key": "accept",
+      "label": "保留独立重复准备",
+      "consequence": "继续已选零暴露B02准备并作者化新投资问题；数值仍待Portfolio决定。"
+    },
+    {
+      "key": "reject",
+      "label": "拒绝此准备",
+      "consequence": "保留B01证据，应用异步停止此准备指令；不自动PARK方向。"
+    },
+    {
+      "key": "revise",
+      "label": "改写下一问题",
+      "consequence": "据明确改写调整未来问题；B01配方和历史结果不变。"
+    }
+  ],
+  "recommended": "accept",
+  "auto_applied": "accept",
+  "dm_reason": "完整审阅选择一次独立重复作为当前配方保留决策最直接可回答的下一不确定性，同时保留阈值适配与弱标量替代解释。",
+  "evidence": [
+    "docs/research/candidates/tail_return_distributional_learning/TRDL_B02_SCIENCE_CARD_20260914.md",
+    "docs/research/candidates/tail_return_distributional_learning/pro_packets/20260914_b01_result_review_v2/INTAKE.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-14.md#L147",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "是否保留已按完整科研审阅执行的B02独立重复方案准备？本项不拨款，也不启动实验。",
+    "changes_if_approved": [
+      {
+        "target": "TRDL B02 prospective card",
+        "from": "B01单个训练对与待审阅的重复建议",
+        "to": "仅准备一对master9602、相同配方的独立重复；另行提出具体Portfolio投资问题"
+      }
+    ],
+    "if_refused": "在下一边界应用你的改写或拒绝；保留B01完整结果，现无B02实验可停止，方向不因本项自动PARK。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/tail_return_distributional_learning/pro_packets/20260914_b01_result_review_v2/archive/RESPONSE.md",
+        "quote": "**Continue the current recipe at the bounded B/EXPLORE preparation level: accept B01's Q32_ABOVE_MEI observation and prepare one independent, unchanged-recipe SCALAR/Q32 pair.**",
+        "why": "完整审阅选择独立训练重复作为当前配方保留决策最直接的下一证据；原生尾部差超过本地MEI。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/tail_return_distributional_learning/pro_packets/20260914_b01_result_review_v2/archive/RESPONSE.md",
+        "quote": "A second unchanged pair can test whether the observed package preference survives another training realization; it cannot exclude systematic weakness of this scalar recipe.",
+        "why": "尚无匹配调优标量基线；阈值适配、有限拟合和不同训练轨迹仍可能解释差异，重复不是纯分布表示归因。"
+      }
+    ],
+    "uncertainty": [
+      "只有一个已完成的训练对，未证明稳定优势。",
+      "SCALAR不显式输入eta，而Q32在输出变换中用当前eta；强标量/阈值归因是独立后续问题。",
+      "现有源码的训练和出版两处绑定9601；9602需要未来获拨款后的最小适配。"
+    ],
+    "cost": {
+      "compute": "本次0模型/fit/native/optimizer；拟议2originals为393216 ticks/256 Adam。旧对native合计395.64秒，未来完整成本UNKNOWN。",
+      "owner_time": "异步查看即可；不等待逐项批准。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing；后续数值只等待新Portfolio/owner投资及实际共享writer串行。"
+    },
+    "verdict_text": "**Continue the current recipe at the bounded B/EXPLORE preparation level: accept B01's Q32_ABOVE_MEI observation and prepare one independent, unchanged-recipe SCALAR/Q32 pair.**",
+    "source": "docs/research/candidates/tail_return_distributional_learning/pro_packets/20260914_b01_result_review_v2/archive/RESPONSE.md"
+  },
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-15T04:40:07+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/tail_return_distributional_learning/pro_packets/20260914_b01_result_review_v2/archive/RESPONSE.md",
+      "record": "docs/research/candidates/tail_return_distributional_learning/TRDL_B02_SCIENCE_CARD_20260914.md",
+      "state": "applied",
+      "summary": "已发布96f834ea4：B02仅准备一对独立相同配方训练。0新模型/RNG实例/native/fit/代码适配；标量能力与阈值归因另列，没有科学grant或lifecycle变化。"
+    },
+    {
+      "at": "2026-09-15T05:45:59+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260914_trdl_b02_investment/archive/RESPONSE.md",
+      "record": "docs/research/candidates/tail_return_distributional_learning/TRDL_B02_SCIENCE_CARD_20260914.md",
+      "state": "applied",
+      "summary": "B02原科学卡/laws/MEI/自身64of256终点保持；afcf新拨款两原始并授权最小训练/出版seed绑定修改和独立审查。准备记录已更新ALLOCATED，尚无新source接受或native调用。"
+    },
+    {
+      "at": "2026-09-15T06:12:18+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260914_trdl_b02_investment/archive/RESPONSE.md",
+      "record": "docs/research/candidates/tail_return_distributional_learning/TRDL_B02_INTAKE_20260914.md",
+      "state": "applied",
+      "summary": "B02 exact master9602 pair completed without retry; INSIDE_MEI tail -0.0024197225790644483, mean -0.0006779595179982473. Frozen card reading accepted; no stronger ranking claim. Owner-directed closeout/pause, no successor or new Pro request."
+    }
+  ]
+}

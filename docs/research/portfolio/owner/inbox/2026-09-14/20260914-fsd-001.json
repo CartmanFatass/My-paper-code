@@ -82,6 +82,14 @@
       "record": "docs/research/portfolio/decisions/2026-09-14-owner-fsd-restart.md",
       "state": "applied",
       "summary": "研究 Root 已在9545486bf恢复第四条 FSD 链；旧DM不可用，复用原worktree/branch，接续DM为/root/dm_fsd_restart_20260914。建议正在独立审查/发布，DM正式阅读应用回执另补；0新fit/冻结卡/cap。"
+    },
+    {
+      "at": "2026-09-15T03:55:54+00:00",
+      "authority": "OWNER_DIRECT",
+      "source": "docs/research/portfolio/decisions/2026-09-14-owner-fsd-restart.md",
+      "record": "docs/research/portfolio/decisions/2026-09-14-owner-fsd-restart.md",
+      "state": "applied",
+      "summary": "详细建议已在55de762c0发布。FSD DM已阅读全文并应用：原commit 9e42d5a20，Root集成main 9baa14189；2dbb4531f补同宿主baseline来源映射。DM形成两独立blocks/八fits的四臂首选与四fits的两臂备选，后续投资由item002记录，尚未拨款或运行。DM接续有限投资请求和baseline设计；本项的文档发布、实际恢复、阅读应用均完成，原packet中的待应用状态由本trace更新。0新model/训练/eval/科研handle/Pro Send。"
     }
   ]
 }

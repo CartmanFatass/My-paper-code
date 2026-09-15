@@ -1,0 +1,72 @@
+{
+  "checked_utc": "2026-09-15T05:36:59.402404+00:00",
+  "plan_commit": "c8409bffd84fa4af49fae7a6221ed8847f23c123",
+  "plan_sha256": "086bad4f9ca196d8a3b026dbffcb68279f9c0cd9462f1d4455bece28cb7b3199",
+  "checks": [
+    {
+      "argv": [
+        "/usr/bin/time",
+        "-q",
+        "-f",
+        "{\"wall_seconds\":%e,\"exit_code\":%x}",
+        "-o",
+        "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/test/repetition-output-preparation-20260914-dm/unprepared/TIME.json",
+        "/usr/bin/touch",
+        "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/test/repetition-output-preparation-20260914-dm/MARKER_unprepared"
+      ],
+      "exit_code": 125,
+      "stdout": "",
+      "stderr": "/usr/bin/time: /home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/test/repetition-output-preparation-20260914-dm/unprepared/TIME.json: No such file or directory\n",
+      "child_marker_exists": false
+    },
+    {
+      "argv": [
+        "/usr/bin/time",
+        "-q",
+        "-f",
+        "{\"wall_seconds\":%e,\"exit_code\":%x}",
+        "-o",
+        "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/test/repetition-output-preparation-20260914-dm/prepared/TIME.json",
+        "/usr/bin/touch",
+        "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/test/repetition-output-preparation-20260914-dm/MARKER_prepared"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "",
+      "child_marker_exists": true
+    }
+  ],
+  "wall_seconds": 0.0027349229203537107,
+  "child_not_executed_on_output_open_failure": true,
+  "directory_preparation_allows_child": true,
+  "new_learner_invocations": 0,
+  "native_env_ticks": 0,
+  "optimizer_steps": 0,
+  "a1_classification": "preserved supervisor failure before the time child; no admit-memory or learner call; manually resume the original unstarted A1 with unchanged source/arguments and preserved old handle",
+  "archive": {
+    "path": "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/OUTPUT_PREPARATION_CHECK_RAW.tar.gz",
+    "bytes": 980,
+    "sha256": "64639efb5ff904804517b5dafa18a0960824cfa4d6871a9134e1f03b66e13b23",
+    "manifest": [
+      {
+        "name": "CHECK.json",
+        "bytes": 2148,
+        "sha256": "7805352144a134068fafbe53001449b3c554462e08e05ad289e7e3a9e089aee1"
+      },
+      {
+        "name": "MARKER_prepared",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "prepared/TIME.json",
+        "bytes": 36,
+        "sha256": "d8806058c108792926881fe646b81030f1101d19415ed42d304da7b87553686d"
+      }
+    ]
+  },
+  "test_scratch_absent": true,
+  "prepared_output": "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/block1/persistent",
+  "prepared_output_empty": true,
+  "collection_script_sha256": "361cb910a52ed1c42a4bfb56451a95c165b7acfbf848aec0b0911bc44a0dac33"
+}

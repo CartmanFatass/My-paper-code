@@ -1,0 +1,39 @@
+{
+  "accepted_at": "2026-09-15T05:30:46.666204+00:00",
+  "command_publication_sha": "b27d35cf633c07189780c71bbb9e5a8ee52f9643",
+  "commands_sha256": "717668997af372b45569ed5614c428dfb8d81f7cdf6a4e08da462d4940fc39d0",
+  "source_sha": "7975964542b83560cbc0e79f74a9212f8e3737af",
+  "command": {
+    "block": 1,
+    "arm": "persistent",
+    "source_sha": "7975964542b83560cbc0e79f74a9212f8e3737af",
+    "handle": "folr-augmentation-repeat-b01-781901-persistent",
+    "out": "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/block1/persistent",
+    "argv": [
+      "/usr/local/bin/agent-task",
+      "run",
+      "folr-augmentation-repeat-b01-781901-persistent",
+      "bash",
+      "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/BLOCK1_PERSISTENT.sh",
+      "7975964542b83560cbc0e79f74a9212f8e3737af",
+      "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001",
+      "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/block1/persistent",
+      "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/block1/generic/summary.json"
+    ]
+  },
+  "wrapper_sha256": "d16f3f70071dfb3e43cdc1013af963cabace210f5590317ca2d44a37d10d3156",
+  "tracked_status": "",
+  "supervisor_acceptance_stdout": "Task 'folr-augmentation-repeat-b01-781901-persistent' started in tmux session 'agent_folr-augmentation-repeat-b01-781901-persistent'. Output: /home/wu/.agent-tasks/folr-augmentation-repeat-b01-781901-persistent/task.log\n",
+  "supervisor_acceptance_stderr": "",
+  "status_at_acceptance": {
+    "task": "folr-augmentation-repeat-b01-781901-persistent",
+    "status": "failed",
+    "exit_code": 125,
+    "pid": 3711036,
+    "uptime_seconds": 0,
+    "tmux_active": true
+  },
+  "adjacent_admission": null,
+  "generic_input_sha256": "11cfab196f0a770a1601f68fa898372a5c12ef9475a269c3c9ef6bf621ea2841",
+  "scientific_retry": 0
+}

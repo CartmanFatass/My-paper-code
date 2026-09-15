@@ -1,0 +1,33 @@
+{
+  "unit": "caller-declared independent training run",
+  "inference": "descriptive only; no confidence interval or success classification",
+  "groups": [
+    {
+      "task": "FOLR_ENTITY_AUGMENTATION_REPEAT_B01_781901_782001",
+      "arm": "AUGMENTED_PERSISTENT",
+      "n": 2,
+      "mean": -2.16578125,
+      "sample_sd": 3.2016469226912143,
+      "min": -4.4296875,
+      "max": 0.09812499999999962,
+      "runs": {
+        "781901": -4.4296875,
+        "782001": 0.09812499999999962
+      }
+    },
+    {
+      "task": "FOLR_ENTITY_AUGMENTATION_REPEAT_B01_781901_782001",
+      "arm": "GENERIC_RETAIN",
+      "n": 2,
+      "mean": 0.8044921874999996,
+      "sample_sd": 0.8435010501513593,
+      "min": 0.20804687499999938,
+      "max": 1.4009375,
+      "runs": {
+        "781901": 1.4009375,
+        "782001": 0.20804687499999938
+      }
+    }
+  ],
+  "paired_differences": []
+}

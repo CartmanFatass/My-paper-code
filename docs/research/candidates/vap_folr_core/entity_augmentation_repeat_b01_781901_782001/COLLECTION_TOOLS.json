@@ -1,0 +1,29 @@
+{
+  "prepared_utc": "2026-09-15T05:33:58.223681+00:00",
+  "learner_source": "7975964542b83560cbc0e79f74a9212f8e3737af",
+  "members": [
+    {
+      "path": "temp\\directions\\vap_folr_core\\exp\\entity_augmentation_repeat_b01_781901_782001\\collect_terminal.py",
+      "archive_name": "collect_terminal.py",
+      "bytes": 6568,
+      "sha256": "361cb910a52ed1c42a4bfb56451a95c165b7acfbf848aec0b0911bc44a0dac33",
+      "lines": 90
+    },
+    {
+      "path": "temp\\directions\\vap_folr_core\\exp\\entity_augmentation_repeat_b01_781901_782001\\read_study.py",
+      "archive_name": "read_study.py",
+      "bytes": 4852,
+      "sha256": "ec06be37c13cae8ff64e349fd307134cee988f9f5da30e1ffc7757b971e04e63",
+      "lines": 63
+    }
+  ],
+  "archive_bytes": 4488,
+  "archive_sha256": "ae9feca452dcb045f26980f64ef7615fa2b9fb03d03a64aa28163f0e75540b98",
+  "readback_verified": true,
+  "local_ast_parse": "PASS",
+  "new_native_acquisition": 0,
+  "real_optimizer_updates": 0,
+  "new_non_test_lines_including_collection": 493,
+  "previous_collection_tool_publication": "ebeb74ea854daf17df80321327c4b5972576c9cc",
+  "change": "Only A1 future collection handle points to preserved-failure technical start2; all four scientific endpoint/source/seeds/reading remain unchanged."
+}

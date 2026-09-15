@@ -1,0 +1,54 @@
+{
+  "accepted_at": "2026-09-15T05:38:43.407977+00:00",
+  "repair_plan_publication_sha": "c8409bffd84fa4af49fae7a6221ed8847f23c123",
+  "repair_plan_sha256": "086bad4f9ca196d8a3b026dbffcb68279f9c0cd9462f1d4455bece28cb7b3199",
+  "source_sha": "7975964542b83560cbc0e79f74a9212f8e3737af",
+  "command": {
+    "block": 1,
+    "arm": "persistent",
+    "source_sha": "7975964542b83560cbc0e79f74a9212f8e3737af",
+    "handle": "folr-augmentation-repeat-b01-781901-persistent-start2",
+    "out": "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/block1/persistent",
+    "argv": [
+      "/usr/local/bin/agent-task",
+      "run",
+      "folr-augmentation-repeat-b01-781901-persistent-start2",
+      "bash",
+      "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/BLOCK1_PERSISTENT.sh",
+      "7975964542b83560cbc0e79f74a9212f8e3737af",
+      "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001",
+      "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/block1/persistent",
+      "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/block1/generic/summary.json"
+    ]
+  },
+  "wrapper_sha256": "d16f3f70071dfb3e43cdc1013af963cabace210f5590317ca2d44a37d10d3156",
+  "supervisor_acceptance_stdout": "Task 'folr-augmentation-repeat-b01-781901-persistent-start2' started in tmux session 'agent_folr-augmentation-repeat-b01-781901-persistent-start2'. Output: /home/wu/.agent-tasks/folr-augmentation-repeat-b01-781901-persistent-start2/task.log\n",
+  "supervisor_acceptance_stderr": "",
+  "status_at_acceptance": {
+    "task": "folr-augmentation-repeat-b01-781901-persistent-start2",
+    "status": "running",
+    "exit_code": null,
+    "pid": 3712032,
+    "uptime_seconds": 0,
+    "tmux_active": true
+  },
+  "adjacent_admission": {
+    "assessed_at": "2026-09-15T05:38:43.437325Z",
+    "available_physical_bytes": 14674436096,
+    "captured_at": "2026-09-15T05:38:43.437031Z",
+    "cgroup_headroom_bytes": null,
+    "cgroup_memory_current_bytes": null,
+    "cgroup_memory_max_bytes": null,
+    "effective_available_bytes": 14674436096,
+    "effective_floor_pass": true,
+    "failure_reasons": [],
+    "measurement_source": "/proc/meminfo",
+    "minimum_available_bytes": 4294967296,
+    "passed": true,
+    "physical_floor_pass": true,
+    "schema_version": 1
+  },
+  "prior_supervisor_failure": "folr-augmentation-repeat-b01-781901-persistent; prelearner exit125 preserved",
+  "new_scientific_learner_ordinal": 2,
+  "scientific_retry": 0
+}

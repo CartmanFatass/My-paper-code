@@ -1,0 +1,198 @@
+{
+  "collected_utc": "2026-09-15T03:37:54.971306+00:00",
+  "mode": "current_only",
+  "handle": "folr-current-increment-b01-781801-current-only",
+  "source_sha": "8ad304d61af6885c0ca5ba236bbf6c2c160e61f4",
+  "status": {
+    "task": "folr-current-increment-b01-781801-current-only",
+    "status": "finished",
+    "exit_code": 0,
+    "pid": 3703852,
+    "uptime_seconds": 2276,
+    "tmux_active": false
+  },
+  "cwd": "/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801",
+  "out": "/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801/temp/directions/vap_folr_core/exp/entity_current_increment_b01_781801/current_only",
+  "errors": [],
+  "actual_head": "8ad304d61af6885c0ca5ba236bbf6c2c160e61f4",
+  "tracked_status": "",
+  "summary_sha256": "5ae6d9cdb813e78c3e73773d1199b85c8e447993207271e21b911bdb438e24e1",
+  "summary_bytes": 108034,
+  "binding": {
+    "object": "FOLR_ENTITY_CURRENT_INCREMENT_B01_781801",
+    "arm": "AUGMENTED_CURRENT_ONLY",
+    "status": "complete",
+    "training_seed": 781801,
+    "evaluation_seed": 1781801,
+    "launch_sha": "8ad304d61af6885c0ca5ba236bbf6c2c160e61f4",
+    "training_episodes": 5000,
+    "training_ticks": 100000,
+    "optimizer_steps": 4969,
+    "evaluation_episodes": 128,
+    "evaluation_ticks": 2560,
+    "actor_parameters": 192741,
+    "actor_change_l2": 39.67975006716655,
+    "torch_version": "2.7.0+cu118",
+    "numpy_version": "1.26.3",
+    "torch_threads": [
+      1,
+      1
+    ]
+  },
+  "array_counts": {
+    "training_returns": 5000,
+    "evaluation_returns": 128
+  },
+  "native_panel": {
+    "mean": -0.1360156250000004,
+    "sample_sd": 7.467901953715321,
+    "conditional_episode_se": 0.6600755140885463,
+    "minimum": -23.779999999999998,
+    "maximum": 15.200000000000001,
+    "n": 128,
+    "negative_count": 69
+  },
+  "pair_primary": {
+    "generic": {
+      "mean": 4.307734374999999,
+      "sample_sd": 9.166581225405613,
+      "conditional_episode_se": 0.8102189680977001,
+      "minimum": -21.56,
+      "maximum": 29.029999999999998,
+      "n": 128,
+      "negative_count": 40
+    },
+    "current_only": {
+      "mean": -0.1360156250000004,
+      "sample_sd": 7.467901953715321,
+      "conditional_episode_se": 0.6600755140885463,
+      "minimum": -23.779999999999998,
+      "maximum": 15.200000000000001,
+      "n": 128,
+      "negative_count": 69
+    },
+    "current_only_minus_generic": -4.44375,
+    "rule": "GENERIC_ABOVE_MEI",
+    "mei": 1.0,
+    "training_instances_per_arm": 1,
+    "paired_difference_se": null,
+    "uncertainty": "Episode dispersion is conditional on each fitted policy; common seed labels do not establish paired worlds or training-population uncertainty.",
+    "claim": "Exploratory whole-program current-only augmentation increment over Generic."
+  },
+  "generic_input_sha256": "49b98f1ce155c4c90798692c3a8de844293e5133b669ed4d926b0f3fd2a99e93",
+  "checkpoint": {
+    "bytes": 5782043,
+    "sha256": "99b94e3bf9d5cec1db3c096a8dcf079b7a20dd7d03c26e82bc5806b1a94967a7",
+    "arm": "AUGMENTED_CURRENT_ONLY",
+    "updates": 4969,
+    "keys": [
+      "actor",
+      "mixer",
+      "target_actor",
+      "target_mixer",
+      "optimiser",
+      "updates",
+      "arm"
+    ],
+    "tensor_count": 230,
+    "all_finite": true,
+    "all_cpu": true,
+    "floating_dtypes": [
+      "torch.float32"
+    ],
+    "actor_state_elements": 192768,
+    "target_actor_state_elements": 192768,
+    "optimizer_slots": 54
+  },
+  "invocation_time": {
+    "wall_seconds": 2080.16,
+    "user_seconds": 1906.4,
+    "system_seconds": 172.75,
+    "peak_rss_kib": 858384,
+    "exit_code": 0
+  },
+  "admission": {
+    "assessed_at": "2026-09-15T02:59:58.263258Z",
+    "available_physical_bytes": 15626321920,
+    "captured_at": "2026-09-15T02:59:58.262941Z",
+    "cgroup_headroom_bytes": null,
+    "cgroup_memory_current_bytes": null,
+    "cgroup_memory_max_bytes": null,
+    "effective_available_bytes": 15626321920,
+    "effective_floor_pass": true,
+    "failure_reasons": [],
+    "measurement_source": "/proc/meminfo",
+    "minimum_available_bytes": 4294967296,
+    "passed": true,
+    "physical_floor_pass": true,
+    "schema_version": 1
+  },
+  "manifest": [
+    {
+      "path": "/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801/temp/directions/vap_folr_core/exp/entity_current_increment_b01_781801/current_only/ADMISSION.json",
+      "archive_name": "run/ADMISSION.json",
+      "bytes": 504,
+      "sha256": "40e863fa9971499c8a53e8cee135105a8f98bf7389c3449cb5fc0f5e7e4adcb5"
+    },
+    {
+      "path": "/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801/temp/directions/vap_folr_core/exp/entity_current_increment_b01_781801/current_only/INVOCATION_TIME.json",
+      "archive_name": "run/INVOCATION_TIME.json",
+      "bytes": 108,
+      "sha256": "e675ce7f0f54b6c23c075d6b3d148865a8f96a65603b35d3bd6050052cc835d3"
+    },
+    {
+      "path": "/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801/temp/directions/vap_folr_core/exp/entity_current_increment_b01_781801/current_only/final.pt",
+      "archive_name": "run/final.pt",
+      "bytes": 5782043,
+      "sha256": "99b94e3bf9d5cec1db3c096a8dcf079b7a20dd7d03c26e82bc5806b1a94967a7"
+    },
+    {
+      "path": "/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801/temp/directions/vap_folr_core/exp/entity_current_increment_b01_781801/current_only/summary.json",
+      "archive_name": "run/summary.json",
+      "bytes": 108034,
+      "sha256": "5ae6d9cdb813e78c3e73773d1199b85c8e447993207271e21b911bdb438e24e1"
+    },
+    {
+      "path": "/home/wu/.agent-tasks/folr-current-increment-b01-781801-current-only/exit_code",
+      "archive_name": "supervisor/exit_code",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "path": "/home/wu/.agent-tasks/folr-current-increment-b01-781801-current-only/pid",
+      "archive_name": "supervisor/pid",
+      "bytes": 8,
+      "sha256": "b3c8d7aa55e81cfb580c3fe34975aab3407d01abc1cacc7740d207d026b6d1bd"
+    },
+    {
+      "path": "/home/wu/.agent-tasks/folr-current-increment-b01-781801-current-only/runner.sh",
+      "archive_name": "supervisor/runner.sh",
+      "bytes": 1691,
+      "sha256": "6496c08489eed654a8ab056f0568c58871c18c7b58bca5611b013e8388cacbca"
+    },
+    {
+      "path": "/home/wu/.agent-tasks/folr-current-increment-b01-781801-current-only/start_time",
+      "archive_name": "supervisor/start_time",
+      "bytes": 11,
+      "sha256": "c6734ede286baf373cef0fd934ffc7989332cd350dcfc209e24390332284ebd8"
+    },
+    {
+      "path": "/home/wu/.agent-tasks/folr-current-increment-b01-781801-current-only/status",
+      "archive_name": "supervisor/status",
+      "bytes": 9,
+      "sha256": "161069badc0cc23058b13d7c068e45205f4333aa15fd78db9d68f5c9f1ae8983"
+    },
+    {
+      "path": "/home/wu/.agent-tasks/folr-current-increment-b01-781801-current-only/task.log",
+      "archive_name": "supervisor/task.log",
+      "bytes": 2753,
+      "sha256": "6c60881937eceb7db884d05637d8e0f1cfef55cd87fc9fc4a4b5b8bf017a2f91"
+    }
+  ],
+  "archive": {
+    "path": "/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801/temp/directions/vap_folr_core/exp/entity_current_increment_b01_781801/CURRENT_ONLY_RAW.tar.gz",
+    "bytes": 5290873,
+    "sha256": "7772f813c0677c49addfb51d8a72ec9596fbcd3dc4e16bd6f1cc8cab7394cb33"
+  },
+  "archive_members_verified": true
+}

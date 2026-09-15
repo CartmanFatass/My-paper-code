@@ -1,0 +1,207 @@
+{
+  "caller_role": "em",
+  "workflow_node": "em_convergence",
+  "source_thread_id": "/root/dm_folr_resume_20260914",
+  "parent_thread_id": "/root/dm_folr_resume_20260914",
+  "operator_thread_id": "/root/dm_folr_resume_20260914/transport_l_high_folr",
+  "direction_id": "vap_folr_core",
+  "repository": "CartmanFatass/My-paper-code",
+  "repository_url": "https://github.com/CartmanFatass/My-paper-code",
+  "execution_mode": "REUSE_DM_TRANSPORT",
+  "delivery_mode": "github_delivery",
+  "conversation_id": "6aa18137-9d88-83e8-a01f-46630813faf8",
+  "request_id": "2026-09-15-folr-augmentation-repeat-b01-result-review-01",
+  "commit_or_ref": "f10f8b330468f5e0a3328680aa3909227d404dc4",
+  "scientific_question": "Independently review ONLY the COMPLETE prospectively fixed two-block FOLR A-minus-G B result and its scientific interpretation. This is this object's required result closeout on the existing review node, not a direction-tier or Portfolio decision request. The owner now explicitly requires completion of the current fixed four-original chain, Monitor, collection, intake/review, preservation and necessary cleanup, then an operational pause. Do not choose or propose a successor experiment, new grant, extra invocation, direction/family/lifecycle/priority/capacity change, C freeze or Portfolio action. No new Transport child is created. The concrete action your review can change is correction/narrowing of this object's validity record or claims before its pause handoff. All experimental work is already finished.\n\nThe complete prior Z-G review supported, narrowly, two new A-G blocks over one cheaper adequate block. The DM then prospectively fixed all four G1,A1,G2,A2 learners before any new result, preserving both blocks regardless of sign or completeness. Current source7975964542b83560cbc0e79f74a9212f8e3737af used unchanged original GENERIC_RETAIN and AUGMENTED_PERSISTENT programmes from entity_history_augmentation_b01.Learner. Block1 train781901/eval1781901; block2 train782001/eval1782001. Each process created its own learner, targets, optimizer and replay, with no shared learned artifacts; Python/global NumPy/Torch reset before construction and final evaluation. Compatible Generic/mixer initialization and nominal streams align inside a block, not full unequal networks, subsequent trajectories or paired evaluation worlds. Both labels vary across blocks, so observed variation mixes learning and evaluation realizations. The complete contrast block is the working independent unit, n2 blocks/two fitted programmes per arm; 128 evaluations remain nested in each policy.\n\nActual means: block1 G1.4009375/A-4.4296875, d1=-5.830625; block2 G0.208046875/A0.098125, d2=-0.109921875. The frozen primary is the ordered vector(d1,d2), with absolute MEI1 per block. Both d>1 gives BOTH_A_ABOVE_MEI; both d<-1 gives BOTH_G_ABOVE_MEI; both inclusive[-1,1] gives BOTH_WITHIN_MEI preserving signs; every other complete pattern gives MIXED_BLOCK_PATTERN. Therefore MIXED_BLOCK_PATTERN: both signs negative, but G_ABOVE_MEI versus WITHIN_MEI categories differ. The arithmetic mean-2.9702734375 is descriptive, not a substitute verdict. The DM's low-confidence MIXED prediction matches this category only; owner prediction not taken. No claim of opposite signs or general calibration is made.\n\nMachine-generated actual exposure:4 fresh fits;400000 native training ticks;19876 RMSprop steps;4 final checkpoints;512 final greedy episodes/10240 evaluation ticks;410240 total native ticks;0 screening/scientific retry/checkpoint selection. Each endpoint has5000 train episodes/100000 ticks/4969 updates and128 evaluations/2560 ticks. All40 raw result/supervisor members were hash-verified remotely and after transfer; all endpoints/arrays/checkpoints conform, finite CPU FP32 with nonzero actor changes. Both A publications read the exact own-block G summary only after their learning/evaluation. Complete study_result was run over all four endpoints and independently read back. RUN_SCORES contains exactly four fit rows; the descriptive summary uses no paired flag, episode rows or interval. Inspect the primary, counts and receipts; do not execute learners or require a new checkpoint/native census.\n\nThere is one real engineering deviation: the first A1 supervisor was accepted then GNU time failed125 opening its timing output because DM had omitted creation of the output directory. The child contains admit-memory and the Python learner. The original directory/admission/summary/checkpoint were absent, the full six-member failed-supervisor archive is retained, and a committed-plan nonlearning marker check reproduced125 with no child marker and succeeded after directory preparation (0.002735s). The DM classified zero learner/tick/update exposure, manually prepared the exact same empty output directory, retained the failed supervisor, and used suffix-start2 for the original unstarted A1. Source/programme/seeds/budget/endpoints are unchanged; later G2/A2 also prepared their output directory. Thus five supervisor acceptances correspond to four real original learners, one manual startup repair and zero scientific retry. Review whether this distinction is supported by the actual receipts rather than silently treating an error as negative or hiding an empirical retry. Independent source review and27 distinct passing focused synthetic cases precede acquisition; original fixture failure/repair records remain preserved.\n\nPer-arm wall/CPU seconds: G1 2251.18/2250.28, A1 3807.79/3807.34, G2 2150.29/2150.95, A2 3009.11/3007.83. Totals11218.37 wall/11216.40 CPU, peak max863732KiB. A1 exceeds its ordinary3600s plan by207.79s; the card explicitly made G3000/A3600 and summed13200 references non-cap/non-kill planning values. No hard budget breach is claimed; full support/provider/engineering/lifetime total remains UNKNOWN. Resource admissions were fresh adjacent4GiB checks. Do not reinterpret timing as a controlled efficiency comparison, funding, paid capacity or a new trial. This review itself has zero new empirical exposure and proposes no future algorithm work.\n\nThe bounded DM reading is that neither fresh block repeats an A-above-MEI increment; block1 is adverse to this whole programme and block2 near zero at the declared scale. This weakens reliance on the old selected A-G+5.29640625 discovery without proving stable G superiority, equivalence, a population effect or isolated persistence harm. A adds entity-history recurrence and processing/attention/fusion/capacity to the unchanged Generic64 programme; native short-H20 information, finite optimization and policy-induced data remain alternatives. The old direct positive is retained as the strongest favorable contradiction; preceding adaptive A-Z=-3.069453125 and Z-G=-4.44375, plus distinct replacement BANK negatives, are separate evidence. Do not pool the selected historical positive with these two blocks or add unlike A-Z/Z-G endpoints into an A-G ranking. Same-host tuned same-information headroom remains absent. This jointly trained within-episode roster-change host is not train-N/test-N-prime transfer or ad hoc unfamiliar-teammate competence.\n\nRead the listed fixed scientific and method passages, including evidence-spec11.11 and the adopted corrected two-axis programme. They distinguish MEI, training-instance variation and estimator uncertainty and preserve flexible B burden. Unadopted sample-count/estimator/power/approval requirements are not retrospective validity gates. Preserve the card and current owner pause; no result here closes an OPEN family or changes CONTINUE/MEDIUM. Source access gaps must be stated honestly; source/collection receipts do not assert raw checkpoint access. Return consequential findings first, the exact supported bounded reading, any necessary report correction and residual uncertainty. A complete answer should resolve this result-review question at B class without asking for or designing additional empirical work. If no material invalidating defect is found, say so with the limits; if one is found, identify its direct evidence and affected quantity. Do not turn a lack of C evidence into a B negative or an unposed direction disposition.",
+  "deliverable": "Complete independent scientific review of this completed two-block A-G B: validity/identity, frozen pattern, independent units, startup failure classification, measured-cost reporting, historical selection and claim ceiling. Consequential report corrections only; no successor, direction/Portfolio action or empirical execution.",
+  "claim_ceiling": "B/EXPLORE: two prospectively included new whole-program A-G contrast realizations; mixed threshold categories with both differences negative. No stable rank, population interval/equivalence, isolated persistence effect, competence/headroom, efficiency, transfer/scaling, C or UAV conclusion.",
+  "reference_files": [
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_ENTITY_AUGMENTATION_REPEAT_B01_SCIENCE_CARD_20260914.md",
+      "purpose": "Read the full prospective B question, exact four original calls, ordered rule, MEI, missingness, costs and non-goals.",
+      "provenance": "Fixed before any of the four endpoints.",
+      "commit_sha": "7975964542b83560cbc0e79f74a9212f8e3737af"
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_ENTITY_AUGMENTATION_REPEAT_B01_RESULT_EVIDENCE_20260915.md",
+      "purpose": "Read the entire E0, exact rule/counts/costs and all retained deviations.",
+      "provenance": "DM complete-result evidence/interpretation, not additional empirical data."
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_ENTITY_AUGMENTATION_REPEAT_B01_INTAKE_20260915.md",
+      "purpose": "Read the complete DM interpretation, prediction and object-only closeout/owner pause scope.",
+      "provenance": "DM complete-result evidence/interpretation, not additional empirical data."
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/DIRECTION.md",
+      "purpose": "Read Scientific question and Current position only; preserve stronger/contrary observations and actual operational pause.",
+      "provenance": "DM complete-result evidence/interpretation, not additional empirical data."
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/entity_augmentation_repeat_b01_781901_782001/STUDY_READBACK.json",
+      "purpose": "Read complete ordered primary, per-fit panels, all counts and measured native costs.",
+      "provenance": "Published selected-object evidence; no new fit or raw-checkpoint access implied."
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/entity_augmentation_repeat_b01_781901_782001/RUN_SCORES.csv",
+      "purpose": "Read all four fit-level endpoint rows.",
+      "provenance": "Published selected-object evidence; no new fit or raw-checkpoint access implied."
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/entity_augmentation_repeat_b01_781901_782001/RUN_SUMMARY.json",
+      "purpose": "Read n2 per-arm descriptive summaries, without paired flag or interval.",
+      "provenance": "Published selected-object evidence; no new fit or raw-checkpoint access implied."
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/entity_augmentation_repeat_b01_781901_782001/ANALYSIS_METHOD.json",
+      "purpose": "Read exact analysis route/tool/input hashes and independent-unit declaration.",
+      "provenance": "Published selected-object evidence; no new fit or raw-checkpoint access implied."
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/entity_augmentation_repeat_b01_781901_782001/ENGINEERING.md",
+      "purpose": "Read direct implementation/independent review/focused checks, collection support and repaired output-preparation defect.",
+      "provenance": "Published selected-object evidence; no new fit or raw-checkpoint access implied."
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/entity_augmentation_repeat_b01_781901_782001/INDEPENDENT_REVIEW.md",
+      "purpose": "Read full source review and its coverage/limits.",
+      "provenance": "Published selected-object evidence; no new fit or raw-checkpoint access implied."
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/entity_augmentation_repeat_b01_781901_782001/COMMANDS.json",
+      "purpose": "Read original fixed G1/A1/G2/A2 source/handle/programme argv.",
+      "provenance": "Published selected-object evidence; no new fit or raw-checkpoint access implied."
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/entity_augmentation_repeat_b01_781901_782001/EXECUTION.md",
+      "purpose": "Read complete original/failure/repair/terminal sequence and owner completion-then-pause instruction.",
+      "provenance": "Published selected-object evidence; no new fit or raw-checkpoint access implied."
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/entity_augmentation_repeat_b01_781901_782001/BLOCK1_PERSISTENT_PRELEARNER_FAILURE_COLLECTION.json",
+      "purpose": "Read original failed supervisor, absent output/admission/learner and separate preservation manifest.",
+      "provenance": "Published selected-object evidence; no new fit or raw-checkpoint access implied."
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/entity_augmentation_repeat_b01_781901_782001/OUTPUT_PREPARATION_CHECK.json",
+      "purpose": "Read exact published-plan marker checks and actual zero-child/fix observations.",
+      "provenance": "Published selected-object evidence; no new fit or raw-checkpoint access implied."
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/entity_augmentation_repeat_b01_781901_782001/BLOCK1_GENERIC_COLLECTION.json",
+      "purpose": "Read the entire binding/count/array/checkpoint/admission/cost/terminal and archive-verification receipt for this exact endpoint.",
+      "provenance": "Direct DM collection; original raw files are retained but no extra execution is requested."
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/entity_augmentation_repeat_b01_781901_782001/BLOCK1_PERSISTENT_COLLECTION.json",
+      "purpose": "Read the entire binding/count/array/checkpoint/admission/cost/terminal and archive-verification receipt for this exact endpoint.",
+      "provenance": "Direct DM collection; original raw files are retained but no extra execution is requested."
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/entity_augmentation_repeat_b01_781901_782001/BLOCK2_GENERIC_COLLECTION.json",
+      "purpose": "Read the entire binding/count/array/checkpoint/admission/cost/terminal and archive-verification receipt for this exact endpoint.",
+      "provenance": "Direct DM collection; original raw files are retained but no extra execution is requested."
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/entity_augmentation_repeat_b01_781901_782001/BLOCK2_PERSISTENT_COLLECTION.json",
+      "purpose": "Read the entire binding/count/array/checkpoint/admission/cost/terminal and archive-verification receipt for this exact endpoint.",
+      "provenance": "Direct DM collection; original raw files are retained but no extra execution is requested."
+    },
+    {
+      "path": "experiments/candidates/vap_folr_core/entity_augmentation_repeat_b01/publication.py",
+      "purpose": "Read complete block and study publication/validation/MEI rules.",
+      "provenance": "Exact execution source; unlisted inherited mechanics have their existing review/collection scope.",
+      "commit_sha": "7975964542b83560cbc0e79f74a9212f8e3737af"
+    },
+    {
+      "path": "scripts/run_folr_entity_augmentation_repeat_b01.py",
+      "purpose": "Read exact independent process learning/checkpoint/evaluation and own-G input ordering.",
+      "provenance": "Exact execution source; unlisted inherited mechanics have their existing review/collection scope.",
+      "commit_sha": "7975964542b83560cbc0e79f74a9212f8e3737af"
+    },
+    {
+      "path": "experiments/candidates/vap_folr_core/entity_history_augmentation_b01/learner.py",
+      "purpose": "Read original A/G selection, inherited learner and fresh ownership.",
+      "provenance": "Exact execution source; unlisted inherited mechanics have their existing review/collection scope.",
+      "commit_sha": "7975964542b83560cbc0e79f74a9212f8e3737af"
+    },
+    {
+      "path": "experiments/candidates/vap_folr_core/entity_history_augmentation_b01/model.py",
+      "purpose": "Read persistent entity state, Generic stream, legal inputs, lifetime handling and capacity/fusion.",
+      "provenance": "Exact execution source; unlisted inherited mechanics have their existing review/collection scope.",
+      "commit_sha": "7975964542b83560cbc0e79f74a9212f8e3737af"
+    },
+    {
+      "path": "experiments/candidates/vap_folr_core/entity_history_b01/model.py",
+      "purpose": "Read unchanged GENERIC_RETAIN/head, legal local/public inputs and recurrent ownership.",
+      "provenance": "Exact execution source; unlisted inherited mechanics have their existing review/collection scope.",
+      "commit_sha": "7975964542b83560cbc0e79f74a9212f8e3737af"
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_ENTITY_HISTORY_AUGMENTATION_B01_RESULT_EVIDENCE_20260914.md",
+      "purpose": "Read historical direct A-G positive and its one-fit-per-arm limits.",
+      "provenance": "Discovery evidence retained separately, not pooled.",
+      "commit_sha": "935694878cd7066d157bdb9f8637abc654badd4b"
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_ENTITY_PERSISTENCE_B01_RESULT_EVIDENCE_20260914.md",
+      "purpose": "Read separate A-Z result and original scope.",
+      "provenance": "Adaptive historical contrast, not a current A-G replication.",
+      "commit_sha": "028e36b952e79d6719387661bc032b5aabc723df"
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_ENTITY_CURRENT_INCREMENT_B01_RESULT_EVIDENCE_20260914.md",
+      "purpose": "Read separate Z-G result and original scope.",
+      "provenance": "Adaptive historical contrast, never algebraically added to A-Z.",
+      "commit_sha": "2d83f5b8fe0d6eba9c5e749569d44fcf000d03f1"
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/pro_packets/20260914_current_increment_b01_result_plan_review/INTAKE.md",
+      "purpose": "Read complete previous review intake and the substantive reason for two rather than one prospective block.",
+      "provenance": "The prior complete review selected no empirical endpoint or new grant; all current four were subsequently fixed.",
+      "commit_sha": "ef3605be4f67935062d72d459173552f8872b68b"
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "purpose": "Apply sections2-5.2 and11.7-11.11 to this completed B, independent units/selection and proportionate claims; section11 controls.",
+      "provenance": "Published current methods/authority; knowledge does not enlarge experimental burden or owner scope.",
+      "commit_sha": "7ebabed2e2e3bd0b57106d6a42f9ace6dc2dc560"
+    },
+    {
+      "path": "docs/research/portfolio/TWO_AXIS_RESEARCH_PROGRAMME_20260914.md",
+      "purpose": "Read applicable sections1,3-6: MEI versus variance/uncertainty, baseline rights and distinct roster settings; no universal retrospective gate.",
+      "provenance": "Published current methods/authority; knowledge does not enlarge experimental burden or owner scope.",
+      "commit_sha": "7ebabed2e2e3bd0b57106d6a42f9ace6dc2dc560"
+    },
+    {
+      "path": "docs/project/ENGINEERING_SCOPE_SPEC.md",
+      "purpose": "Apply sections4-5/7 only to actual scope, numerical/measurement and technical acceptance facts.",
+      "provenance": "Published current methods/authority; knowledge does not enlarge experimental burden or owner scope.",
+      "commit_sha": "7ebabed2e2e3bd0b57106d6a42f9ace6dc2dc560"
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "purpose": "Read sections2-4/6 for legal history, finite learning, comparator and independent units.",
+      "provenance": "Published current methods/authority; knowledge does not enlarge experimental burden or owner scope.",
+      "commit_sha": "7ebabed2e2e3bd0b57106d6a42f9ace6dc2dc560"
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+      "purpose": "Read independent-unit, conditional evaluation and adaptive-selection passages.",
+      "provenance": "Published current methods/authority; knowledge does not enlarge experimental burden or owner scope.",
+      "commit_sha": "7ebabed2e2e3bd0b57106d6a42f9ace6dc2dc560"
+    },
+    {
+      "path": "AGENTS.md",
+      "purpose": "Apply sections2/4/5 authority, subject to the newer exact completion-then-pause instruction in this TASK; no direction/Portfolio selection posed.",
+      "provenance": "Published current methods/authority; knowledge does not enlarge experimental burden or owner scope.",
+      "commit_sha": "7ebabed2e2e3bd0b57106d6a42f9ace6dc2dc560"
+    }
+  ],
+  "github_delivery": {
+    "branch": "codex/vap-folr",
+    "base_sha": "f10f8b330468f5e0a3328680aa3909227d404dc4",
+    "response_path": "docs/research/candidates/vap_folr_core/pro_packets/20260915_augmentation_repeat_b01_result_review/archive/RESPONSE.md",
+    "issue_url": "https://github.com/CartmanFatass/My-paper-code/issues/15"
+  }
+}

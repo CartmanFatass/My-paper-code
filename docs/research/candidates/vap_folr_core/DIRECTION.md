@@ -30,36 +30,106 @@ below does not rewrite the older typed-state or scalar-gate objects.
 
 ## Current position
 
+**Owner pause after the current fixed object, acknowledged2026-09-15T06:05Z:**
+finish all four already selected original A-G learner calls, Monitor/collection,
+this object's intake/review, preservation and necessary cleanup, then publish a
+concrete pause handoff. Do not interrupt A1 or omit fixed G2/A2, and do not open
+a successor object, Portfolio/direction question or new Transport. This is an
+operational stopping boundary; CONTINUE/MEDIUM, family OPEN and evidence stay.
+
+**Latest complete B: prospective two-block A-G repetition.** The ordered fresh
+differences are(-5.830625,-0.109921875), MIXED_BLOCK_PATTERN: both negative,
+one G_ABOVE_MEI and one WITHIN_MEI. Its descriptive mean-2.9702734375 does not
+replace that frozen pattern. Both blocks were selected before any result;
+neither repeats an A-above-MEI gain. This weakens reliance on the old selected
+positive without establishing stable Generic superiority, equivalence or an
+isolated persistence effect. The strongest direct contradiction is new block1;
+the old+5.29640625 remains the positive discovery support, with the intervening
+A-Z/Z-G/BANK observations kept separate. Same-host tuned headroom is still absent.
+All four original learners completed5000/4969/128 each at source797596454;
+Monitor active set and empirical pending count are0. A preserved zero-learner
+startup failure/manual repair adds no scientific retry. [E0 evidence](FOLR_ENTITY_AUGMENTATION_REPEAT_B01_RESULT_EVIDENCE_20260915.md)
+and [full intake](FOLR_ENTITY_AUGMENTATION_REPEAT_B01_INTAKE_20260915.md) record
+the matched low-confidence category prediction, limits and measured costs.
+The [complete independent result review and DM response](pro_packets/20260915_augmentation_repeat_b01_result_review/INTAKE.md)
+find no invalidating defect and preserve the result with retry/cost qualifications.
+Review, support preservation and assigned cleanup are complete, including honest
+retention of policy-rejected local scratch. The
+[owner-pause handoff](HANDOFF_20260915_AUGMENTATION_REPEAT_OWNER_PAUSE.md) records
+no active experiment, Monitor, provider or Transport work. This direction is now
+operationally owner-paused; no successor discriminator is selected.
+
 **Owner-resumed 2026-09-14:** the explicit instruction to restore subagent DM
-control and continue supersedes the operational pause below. The complete new
-fresh A−Z B gives A−1.476796875/Z1.59265625, d−3.069453125,
-CURRENT_ONLY_ABOVE_MEI. Both have one5000/4969/128 fit, identical augmented modules
-and Generic64 retained; Z clears only the learned entity state every primitive
-observation. This supports prioritizing current-only entity processing for bounded
-development in this design, not closing persistent history or establishing a stable
-ranking. Z remains recurrent through Generic memory and retains seen/age metadata.
+control and continue supersedes the older operational pause below. The preceding complete
+fresh Z−G B gives Z−0.136015625/G4.307734375, d−4.44375, GENERIC_ABOVE_MEI.
+Each has one5000/4969/128 fit. This weighs against the current-only augmented
+package in that realization, without closing augmentation/history or establishing
+a stable ranking. Z retains Generic64 memory and seen/age metadata; its extra
+current cell, attention/fusion and capacity form a whole-program comparison.
+
+The preceding A−Z B gave A−1.476796875/Z1.59265625, d−3.069453125,
+CURRENT_ONLY_ABOVE_MEI, with identical augmented modules and Generic memory
+retained. That internal result motivated Z−G; it did not establish Z's increment
+over Generic or an isolated persistence effect. Its original reading remains.
 
 The old A−G +5.29640625 remains the strongest positive complete-program observation,
 with unknown repeatability and no isolated persistence attribution. Old replacement
 BANK negatives remain separate. A favorable complete Z realization and easier
-optimization/current-processing/fusion are surviving alternatives. The next useful
-discriminator is a prospective fresh Z−G block against adaptive Generic64: current
-evidence does not show whether Z earns any increment over that null. No historical
-G substitution, exact diagnostic, family closure, C promotion or Portfolio change
-follows from the present result. Same-host tuned headroom remains unmeasured.
+optimization/current-processing/fusion are surviving alternatives. The next
+discriminator was the now-complete prospective repetition of A−G, the surviving
+direct positive contrast. The complete independent Z-G result/plan review narrowly
+supports two prospective new A-G blocks; DM accepts the second block's ability
+to challenge either first-result sign within one fixed study as its marginal
+decision value. One remains a substantially cheaper close runner-up, and no
+new allocation or invocation is frozen by the review itself. No historical
+endpoint substitution, exact diagnostic, family closure, C promotion or Portfolio
+change follows. Same-host tuned headroom remains unmeasured.
+The [Z−G card](FOLR_ENTITY_CURRENT_INCREMENT_B01_SCIENCE_CARD_20260914.md),
+[E0 result](FOLR_ENTITY_CURRENT_INCREMENT_B01_RESULT_EVIDENCE_20260914.md) and
+[complete intake/next question](FOLR_ENTITY_CURRENT_INCREMENT_B01_INTAKE_20260914.md)
+record the current bounded conclusion and missed low-confidence prediction.
 [Card](FOLR_ENTITY_PERSISTENCE_B01_SCIENCE_CARD_20260914.md),
 [E0 result](FOLR_ENTITY_PERSISTENCE_B01_RESULT_EVIDENCE_20260914.md) and
 [intake/next question](FOLR_ENTITY_PERSISTENCE_B01_INTAKE_20260914.md) fix the
 bounded interpretation and preserve the missed low-confidence prediction.
-The [complete independent result/plan review and DM response](pro_packets/20260914_persistence_b01_result_plan_review/INTAKE.md)
-find no result-invalidating defect and support preparing fresh Z−G. Selection of Z
+The preceding [complete independent A−Z result/plan review and DM response](pro_packets/20260914_persistence_b01_result_plan_review/INTAKE.md)
+found no result-invalidating defect and supported the now-completed Z−G. Selection of Z
 is outcome-informed; repeating the earlier direct A−G positive remains the strongest
 rival. Equal registered parameters do not equal trained temporal capacity, and Z is
 not established smaller or faster. The comparison remains a whole learning/execution
 law. This completed review neither grants a new fit nor changes the direction's
 lifecycle, priority or family status.
-The subsequent object-tier selection is the [fresh Z−G B card](FOLR_ENTITY_CURRENT_INCREMENT_B01_SCIENCE_CARD_20260914.md),
-with two new original fits and a whole-program increment as its claim ceiling.
+Both original fits of that Z−G card are complete, with whole-program increment as
+its claim ceiling. The [complete independent Z-G review and substantive DM response](pro_packets/20260914_current_increment_b01_result_plan_review/INTAKE.md)
+find no result-invalidating defect and preserve GENERIC_ABOVE_MEI. Returning to
+the old A-G positive remains outcome-informed; both new block-specific outcomes
+will remain visible and any mean will be descriptive. Current Z-G remote resources
+are reclaimed after full preservation;4 local archived support files remain after
+an actual policy rejection. The [prospective two-block A-G card](FOLR_ENTITY_AUGMENTATION_REPEAT_B01_SCIENCE_CARD_20260914.md)
+now fixes four original G1/A1/G2/A2 calls at training781901/782001 and final
+evaluation1781901/1782001,5000/4969/128 each. Its ordered two-block differences
+and descriptive-only mean preserve all outcomes without pooling discovery data.
+Source797596454 has independent binding/publication review and27 focused cases
+accepted; the focused suite's sole failure was a repaired test fixture, with
+scientific source unchanged. At the earlier block1 intake, A-4.4296875/G1.4009375,
+d1-5.830625 was G_ABOVE_MEI, each5000/4969/128. That direct block challenged
+reliance on the old isolated positive; at that boundary the full two-block
+pattern was not yet available. The complete current pattern is reported above.
+The first A1 supervisor
+failed before its child command because its output directory was not prepared;
+the failure/error, wrapper ordering and bounded marker check support zero
+learner exposure, and the intact failure is retained. Manual directory preparation
+repaired that defect. The original
+A1 learner completed under preserved-record handle suffix-start2, with unchanged
+797596454/source/parameters. Its wall3807.79s exceeds the ordinary3600s plan,
+which was not a cap. G2 is complete at full exposure with mean0.208046875;
+A2, the fourth and final original learner, also completes with mean0.098125.
+Its d2=-0.109921875 is WITHIN_MEI, yielding the complete pattern recorded above.
+No native call or Monitor remains active. No
+extra fit or scientific retry. The [block1 intake](entity_augmentation_repeat_b01_781901_782001/BLOCK1_INTAKE.md)
+preserves the adverse block and limits. The [execution
+record](entity_augmentation_repeat_b01_781901_782001/EXECUTION.md) fixes the source,
+commands and actual state. No new family/lifecycle or Portfolio disposition.
 Under the [owner's accepted two-axis calibration](../../portfolio/decisions/2026-09-14-two-axis-research-calibration.md),
 this adaptive A−G / A−Z / Z−G sequence is not independent replication of a fixed
 contrast or a stable method ranking. Each original object's reading stays frozen;

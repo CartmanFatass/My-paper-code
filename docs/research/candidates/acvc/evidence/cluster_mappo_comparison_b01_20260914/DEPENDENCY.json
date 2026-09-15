@@ -1,0 +1,61 @@
+{
+  "source_repository": "https://github.com/marlbenchmark/on-policy.git",
+  "source_sha": "de66d7a4b23fac2513f56f96f73b3f5cb96695ac",
+  "source_pack_method": "git archive of published committed upstream tree; excludes reference-overlay untracked files",
+  "archive_sha256": "0f151fea5346db5a6b77eaafaa77144416955d962ab501a26f6cd3bd372cf19c",
+  "archive_bytes": 1157120,
+  "local_archive": "C:\\Projects\\HMASD-worktrees\\codex-acvc\\temp\\directions\\acvc\\staging\\cluster_mappo_comparison_b01_20260914\\on-policy-de66d7a4b23fac2513f56f96f73b3f5cb96695ac.tar",
+  "remote_staging": "/home/wu/hmasd-inputs/acvc-mappo-b01-28331",
+  "remote_source": "/home/wu/hmasd-inputs/acvc-mappo-b01-28331/on-policy",
+  "no_interpreter_change": true,
+  "remote_staging_receipts": [
+    {
+      "operation": "initial shell-input staging",
+      "returncode": 1,
+      "effect": "Windows text-mode subprocess input translated LF to CRLF; bash set -e rejected a carriage return; first mkdir created only the intended parent name suffixed by carriage return; child mkdir failed. No archive copied or native invocation."
+    },
+    {
+      "argv": [
+        "ssh",
+        "-o",
+        "BatchMode=yes",
+        "-o",
+        "ConnectTimeout=10",
+        "hmasd-wsl-node",
+        "bash",
+        "-s"
+      ],
+      "returncode": 0,
+      "stdout": "{\"expected_exists\": false, \"carriage_return_path_exists\": true, \"expected_after\": true, \"accidental_after\": false, \"dependency_empty\": true}\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "scp",
+        "-q",
+        "C:\\Projects\\HMASD-worktrees\\codex-acvc\\temp\\directions\\acvc\\staging\\cluster_mappo_comparison_b01_20260914\\on-policy-de66d7a4b23fac2513f56f96f73b3f5cb96695ac.tar",
+        "hmasd-wsl-node:/home/wu/hmasd-inputs/acvc-mappo-b01-28331/on-policy-source.tar"
+      ],
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "ssh",
+        "-o",
+        "BatchMode=yes",
+        "-o",
+        "ConnectTimeout=10",
+        "hmasd-wsl-node",
+        "bash",
+        "-s"
+      ],
+      "returncode": 0,
+      "stdout": "{\"archive_sha256\": \"0f151fea5346db5a6b77eaafaa77144416955d962ab501a26f6cd3bd372cf19c\", \"archive_bytes\": 1157120, \"python\": \"3.10.21 (main, Sep  1 2026, 14:16:49) [Clang 22.1.3 ]\", \"numpy\": \"1.26.3\", \"torch\": \"2.7.0+cu118\", \"gymnasium\": \"1.0.0\", \"native_invocations\": 0}\n",
+      "stderr": ""
+    }
+  ],
+  "remote_archive_matches": true,
+  "native_invocations_during_staging": 0
+}

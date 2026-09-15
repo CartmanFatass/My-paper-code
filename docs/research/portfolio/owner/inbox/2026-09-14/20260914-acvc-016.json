@@ -1,0 +1,92 @@
+{
+  "id": "20260914-acvc-016",
+  "created": "2026-09-14T21:16:05-07:00",
+  "direction": "acvc",
+  "tier": "portfolio",
+  "kind": "portfolio",
+  "title": "ACVC：匹配评估后的一组局部信息基线比较提案",
+  "context": "A已完成，直接HMASD周期性读取全局/联合观测，不能直接当作当前ACVC的同信息比较器。建议向Portfolio购买一个改名且保持局部执行权限的ACVC与flat MAPPO配对，保留参考B和收整选项；当前无新实现或训练授权。",
+  "options": [
+    {
+      "key": "matched_pair",
+      "label": "修正为局部信息ACVC与MAPPO新配对",
+      "consequence": "如Portfolio选定才执行最小适配与两个原始fit；2162688ticks/24576Adam，仅一个训练block。"
+    },
+    {
+      "key": "reference_b",
+      "label": "一个原配方参考B复现",
+      "consequence": "如Portfolio选定才训练一个原参考fit，增加训练单位但不回答baseline差距。"
+    },
+    {
+      "key": "consolidate",
+      "label": "收整资产并决定生命周期",
+      "consequence": "保留历史与optionalF，是否PARK由Portfolio决定；提案本身不释放席位。"
+    }
+  ],
+  "recommended": "matched_pair",
+  "auto_applied": "matched_pair",
+  "dm_reason": "信息权限差异已得到源码与原论文印证；保持当前用途的最小有效baseline问题比扩大central执行更直接，但新增工程和运行成本未知。",
+  "evidence": [
+    "docs/research/candidates/acvc/ACVC_CLUSTER_BASELINE_MATCH_A01_INTAKE_20260914.md",
+    "docs/research/candidates/acvc/ACVC_CLUSTER_MAPPO_COMPARISON_B01_PROSPECTIVE_20260914.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-14.md#L143",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "源码确认直接HMASD有周期性集中执行权限后，是否投资一组保持ACVC局部信息的ACVC与flat MAPPO新训练比较，或改选原参考模型复现/收整？",
+    "changes_if_approved": [
+      {
+        "target": "ACVC下一数值分配",
+        "from": "有限静态A已完成；无新fit授权",
+        "to": "提议1个新训练block、2个原始fit和4个最终面板，连同最小baseline适配与检查；当前仅提案。"
+      }
+    ],
+    "if_refused": "保留全部F正负证据及现有状态，由Portfolio选择原参考B或收整；不自动启动其它对象。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/acvc/ACVC_CLUSTER_BASELINE_MATCH_A01_RESULT_EVIDENCE_20260914.md",
+        "quote": "The as-shipped direct fixed-k HMASD path is not a same-execution-information comparator for the retained ACVC cluster asset.",
+        "why": "直接读取全局状态及所有观测，不能把纯适配视为相同信息的层次比较。"
+      },
+      {
+        "path": "docs/research/candidates/acvc/ACVC_CLUSTER_MAPPO_COMPARISON_B01_PROSPECTIVE_20260914.md",
+        "quote": "The smallest proposal retaining ACVC's present intended use is a different, explicitly named comparison.",
+        "why": "保持当前资产和宿主，用明确flat MAPPO recipe补充目标baseline比较。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/acvc/ACVC_CLUSTER_MAPPO_COMPARISON_B01_PROSPECTIVE_20260914.md",
+        "quote": "Unknown cost weighs against this option compared with one unchanged reference fit.",
+        "why": "新增适配/验证成本未知；1配对也不能估计训练总体，基线尚未证实调优能力。"
+      }
+    ],
+    "uncertainty": [
+      "改变的是原HMASD-versus-MAPPO对比，不能由DM当成已接受预算内替换。",
+      "当前参考F对C与dwell各有16/64负向world；baseline准备不抹去该限制。"
+    ],
+    "cost": {
+      "compute": "提案2fit/2162688native ticks/24576 optimizer.step；当前0模型、native、fit、update、eval和科研代码执行。MAPPO原始native、支持和provider成本未知。",
+      "owner_time": "无需逐步批准；Portfolio完整决定后执行，保留异步override",
+      "reversibility": "costly",
+      "waits_on_this": "只有新数值投资及相关实现；当前A已完成"
+    },
+    "verdict_text": "Recommend purchasing this one corrected paired B only as a new Portfolio decision.",
+    "source": "docs/research/candidates/acvc/ACVC_CLUSTER_BASELINE_MATCH_A01_INTAKE_20260914.md"
+  },
+  "starred": true,
+  "approval_correction": "原packet记录的是未拨款提案；本trace记录新增完整Pro投资决定的实际应用，不伪造owner回复或已完成训练。",
+  "execution_history": [
+    {
+      "at": "2026-09-15T05:15:36+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260914_acvc_post_baseline_match_investment/archive/RESPONSE.md@ade27ced0e8a0ab63b89b9396bd0a7668f1d9f2b",
+      "record": "docs/research/portfolio/pro_packets/20260914_acvc_post_baseline_match_investment/INTAKE.md",
+      "state": "applied",
+      "summary": "完整95行Portfolio答复已核对并应用M：一块C/M、两个原始4096拟合、四个最终64面板及最小适配/审查。当前科学调用0，CONTINUE/MEDIUM/recasts2与占位不变；直接实施，不等Root或owner批准。旧FSD短回执已同请求恢复，无第二次Send；完整intake后释放writer给TRDL。",
+      "correction": "原packet记录的是未拨款提案；本trace记录新增完整Pro投资决定的实际应用，不伪造owner回复或已完成训练。"
+    }
+  ]
+}

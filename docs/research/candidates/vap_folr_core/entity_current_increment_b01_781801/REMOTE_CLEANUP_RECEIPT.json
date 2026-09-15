@@ -1,0 +1,41 @@
+{
+  "completed_utc": "2026-09-15T04:03:57.158862+00:00",
+  "source_sha": "8ad304d61af6885c0ca5ba236bbf6c2c160e61f4",
+  "worktree": "/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801",
+  "terminal_statuses": [
+    {
+      "task": "folr-current-increment-b01-781801-generic",
+      "status": "finished",
+      "exit_code": 0,
+      "pid": 3702285,
+      "uptime_seconds": 6355,
+      "tmux_active": false
+    },
+    {
+      "task": "folr-current-increment-b01-781801-current-only",
+      "status": "finished",
+      "exit_code": 0,
+      "pid": 3703852,
+      "uptime_seconds": 3839,
+      "tmux_active": false
+    }
+  ],
+  "root_retention": "17b81fcf2 / native authorization",
+  "support_archive_sha256": "e39832b6c183e2edb8b3cf8683c4e4eb4b2d985c769b3d502898d7187dd6feb7",
+  "all53_original_files_unchanged_before_removal": true,
+  "new_untracked_files_other_than_preserved_archive": [],
+  "worktree_remove_returncode": 0,
+  "absence": {
+    "worktree_disk_absent": true,
+    "worktree_registration_absent": true,
+    "supervisor_disk_absent": {
+      "/home/wu/.agent-tasks/folr-current-increment-b01-781801-generic": true,
+      "/home/wu/.agent-tasks/folr-current-increment-b01-781801-current-only": true
+    }
+  },
+  "scientific_processes_stopped": 0,
+  "scientific_retries": 0,
+  "shared_repository_present": true,
+  "local_authoring_checkout_preserved": "C:/Projects/HMASD-worktrees/codex-vap-folr",
+  "active_review_branch_preserved": "codex/vap-folr"
+}
