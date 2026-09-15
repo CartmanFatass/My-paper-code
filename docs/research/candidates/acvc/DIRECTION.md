@@ -1,6 +1,20 @@
 # Direction acvc: ACVC
 
-## M-deployment transfer object selected — 2026-09-15 20:28Z (em:acvc:convergence B, PRO_FINAL; Portfolio investment pending)
+## M-deployment transfer object granted and launched — 2026-09-15 21:09Z (Portfolio G, PRO_FINAL / OWNER_DELEGATED)
+
+`portfolio:cross_direction` granted exactly one fresh M fit with its three panels at 20:51Z
+([decision](../../portfolio/decisions/2026-09-15-acvc-m-deployment-transfer-grant.md),
+[intake](../../portfolio/pro_packets/20260915_acvc_m_deployment_transfer_investment/INTAKE.md)):
+1,097,728 ticks, one snapshot loaded three times, T_F primary, no accumulation, zero retries or
+extra panels; ACTIVE/MEDIUM/recasts2 and the lowest sequencing priority unchanged. The L0
+(`scripts/run_acvc_m_deployment_transfer_b01.py`, `m_deployment_transfer_b01/wrapped_eval.py`,
+eleven focused tests) passed independent Opus review after one material fix (reduce mode
+bound the identities too late) at `codex/acvc a741758a1`. Launched through the operator at
+21:09:14Z on the WSL node (handle `acvc-transfer-m-b01-28531-a741758a`, admission 14.55 GiB,
+[EXECUTION.md](evidence/m_deployment_transfer_b01_20260915/EXECUTION.md)); projected wall
+about 2,500 s. No reading before the fit completes and `--mode reduce` runs.
+
+## M-deployment transfer object selected — 2026-09-15 20:28Z (em:acvc:convergence B, PRO_FINAL)
 
 Under the owner's 12:57 PDT scope instruction the hub derived the node's unlisted candidate
 into a card, [ACVC_M_DEPLOYMENT_TRANSFER_B01](ACVC_M_DEPLOYMENT_TRANSFER_B01_PROSPECTIVE_CARD_20260915.md):

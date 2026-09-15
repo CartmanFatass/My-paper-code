@@ -1,0 +1,33 @@
+{
+  "source_repository": "https://github.com/marlbenchmark/on-policy.git",
+  "source_sha": "de66d7a4b23fac2513f56f96f73b3f5cb96695ac",
+  "reused_from": "docs/research/candidates/acvc/evidence/cluster_mappo_comparison_b02_20260915/DEPENDENCY.json",
+  "archive_sha256": "0f151fea5346db5a6b77eaafaa77144416955d962ab501a26f6cd3bd372cf19c",
+  "archive_bytes": 1157120,
+  "local_archive": "C:\\Projects\\HMASD-worktrees\\codex-acvc\\temp\\directions\\acvc\\staging\\cluster_mappo_comparison_b01_20260914\\on-policy-de66d7a4b23fac2513f56f96f73b3f5cb96695ac.tar",
+  "remote_staging": "/home/wu/hmasd-inputs/acvc-transfer-b01-28531",
+  "remote_source": "/home/wu/hmasd-inputs/acvc-transfer-b01-28531/on-policy",
+  "no_interpreter_change": true,
+  "remote_staging_receipts": [
+    {
+      "operation": "mkdir -p remote staging directory (was absent; block-2 staging /home/wu/hmasd-inputs/acvc-mappo-b02-28431 was reclaimed on 2026-09-15 16:53Z per CLEANUP.json)",
+      "returncode": 0,
+      "entries_before": 0
+    },
+    {
+      "operation": "scp -q <local_archive> hmasd-wsl-node:/home/wu/hmasd-inputs/acvc-transfer-b01-28531/on-policy-source.tar",
+      "returncode": 0
+    },
+    {
+      "operation": "sha256sum + stat + tar -xf on-policy-source.tar -C on-policy",
+      "returncode": 0,
+      "archive_sha256": "0f151fea5346db5a6b77eaafaa77144416955d962ab501a26f6cd3bd372cf19c",
+      "archive_bytes": 1157120,
+      "extracted_files": 163,
+      "adapter_import_path_present": "/home/wu/hmasd-inputs/acvc-transfer-b01-28531/on-policy/onpolicy/__init__.py"
+    }
+  ],
+  "remote_archive_matches": true,
+  "native_invocations_during_staging": 0,
+  "staged_at_utc": "2026-09-15T20:56:32Z"
+}

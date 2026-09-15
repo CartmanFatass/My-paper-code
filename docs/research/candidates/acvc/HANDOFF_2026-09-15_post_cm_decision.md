@@ -77,7 +77,40 @@ and `em:acvc:convergence` selected it with corrections (**B**, `PRO_FINAL`,
 card §5 and §7 acceptance groups) is engineering work that proceeds meanwhile with independent
 Opus review.
 
-## State: ACTIVE, transfer object selected, no producer
+## Portfolio grant G, L0 reviewed, fit launched (2026-09-15 21:09Z)
+
+- `portfolio:cross_direction` granted the one fit at 20:51Z (`PRO_FINAL / OWNER_DELEGATED`,
+  [decision](../../portfolio/decisions/2026-09-15-acvc-m-deployment-transfer-grant.md),
+  [intake](../../portfolio/pro_packets/20260915_acvc_m_deployment_transfer_investment/INTAKE.md),
+  ledger row 30, owner item `20260915-acvc-005`). Transport: one Send, receipt COMPLETE,
+  registry ARCHIVED, tab closed (facts under
+  `temp/sessions/hmasd-chatgpt-pro-transport/archive/portfolio/2026-09-15-acvc-m-deployment-transfer-investment-01/`).
+- L0 committed at `codex/acvc fb7f859d9` (main `95c2290a0`); independent `hmasd-reviewer`
+  accepted after fixes; corrections at `a741758a1` (main `deb0eb357`), eleven tests green;
+  ledger row 31 (technical acceptance).
+- On-policy re-staged at `/home/wu/hmasd-inputs/acvc-transfer-b01-28531/on-policy`
+  (`evidence/m_deployment_transfer_b01_20260915/DEPENDENCY.json`); remote worktree
+  `/home/wu/hmasd-worktrees/acvc-transfer-b01-a741758a1` (fetched by sha: the node's stale
+  remote-tracking ref `origin/codex/acvc/next-object-20260904` blocks fetching the branch ref).
+- **Live handle `acvc-transfer-m-b01-28531-a741758a`** (pid 3745266, launched 21:09:14Z,
+  admission passed at 15,621,808,128 B, expected end about 21:52Z), output root
+  `<worktree>/temp/directions/acvc/exp/m_deployment_transfer_b01_28531`;
+  [EXECUTION.md](evidence/m_deployment_transfer_b01_20260915/EXECUTION.md) has the cost
+  projection and command form.
+
+## First resume step (current)
+
+Check `agent-task status acvc-transfer-m-b01-28531-a741758a`. When finished with exit 0:
+collect `summary.json`, `episodes.jsonl`, `updates.jsonl`, `admission.json`, `native_time.txt`,
+`stdout.log`, `stderr.log`, `final.pt` (retain locally, preserve digests) into
+`evidence/m_deployment_transfer_b01_20260915/native/`, run
+`scripts/run_acvc_m_deployment_transfer_b01.py --mode reduce --m-summary <summary.json> --output <dir>`,
+write the E0 with T_F / T_D / U and the counters, score the hub predictions (T_F .40/.30/.30,
+T_D .30/.35/.35), intake, Chinese brief, ledger row, then reclaim the remote worktree and
+staging with a CLEANUP.json and send the result review to `em:acvc:convergence`. A non-zero
+exit or an incomplete panel is quarantined and reported; no retry is authorized.
+
+## State at the previous boundary (20:28Z): ACTIVE, transfer object selected, no producer
 
 Pending: the Portfolio investment question (to author and send on `portfolio:cross_direction`)
 and the L0 implementation. No live handle, no unresolved transport effect. Reopening condition (Pro):
