@@ -3,7 +3,7 @@ Binding MARL structure: (c) multi-agent credit assignment.
 
 # TRDL-B02 — one independent unchanged-recipe pair
 
-**ALLOCATED / PRO_FINAL / OWNER_DELEGATED, B/EXPLORE; implementation and native execution not yet accepted.** The [B01 scientific review/intake](pro_packets/20260914_b01_result_review_v2/INTAKE.md) selected preparation; the new [complete Portfolio response/intake](../../portfolio/pro_packets/20260914_trdl_b02_investment/INTAKE.md), response`afcf3ed2712b0dec90524707fcd09ee38be9fce4`, now buys exactly two original invocations and the minimum source/check/review/execution/intake/retention support below. B01's completed allocation, old offers and unused time are not funding sources. At this application, actor/critic code has not been adapted and master9602 has not been instantiated. All scientific laws below are unchanged from the published prospective card.
+**ALLOCATED / PRO_FINAL / OWNER_DELEGATED, B/EXPLORE; source accepted, native execution pending.** The [B01 scientific review/intake](pro_packets/20260914_b01_result_review_v2/INTAKE.md) selected preparation; the new [complete Portfolio response/intake](../../portfolio/pro_packets/20260914_trdl_b02_investment/INTAKE.md), response`afcf3ed2712b0dec90524707fcd09ee38be9fce4`, now buys exactly two original invocations and the minimum source/check/review/execution/intake/retention support below. B01's completed allocation, old offers and unused time are not funding sources. At this application, actor/critic code has not been adapted and master9602 has not been instantiated. All scientific laws below are unchanged from the published prospective card.
 
 ## Question, independent unit and interpretation
 
@@ -65,3 +65,7 @@ Remote-first destination is the enabled`hmasd-wsl-node` CPU FP32 path, existing 
 - **Optional engineering§4 features:** **none needed**. Ordinary exact source, required scalar/quantile checkpoints, native rows and complete cost/learner receipts suffice; no checkpoint digest/readback, replay framework or additional audit machinery is requested.
 
 Prediction: another above-MEI Q32 pair is plausible, with low confidence; an inside-band or reversed outcome remains credible because comparator competence and training variation are unmeasured. Owner prediction is not taken (unattended). All future outcomes, costs and failures will be retained. Preparation so far has zero scientific exposure and no active experiment handle.
+
+## Executable binding before exposure
+
+DM accepted source`deddd8d9e0b41cff165d32f3f7729c23df236a69` after six passing pure tests and the same independent Reviewer found no material issue. [Review/acceptance](TRDL_B02_INDEPENDENT_REVIEW_20260914.md) and [exact execution commands](TRDL_B02_EXECUTION_20260914.json) supersede the pre-adaptation binding descriptions above. Both commands select9602 and a prospective900s whole-arm watchdog; ordinary300s/arm plans and all fixed scientific laws/counts remain. No original is yet accepted at this binding publication.

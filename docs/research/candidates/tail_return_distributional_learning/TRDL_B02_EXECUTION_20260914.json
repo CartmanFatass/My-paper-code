@@ -1,0 +1,50 @@
+{
+  "assignment": "TRDL-B02",
+  "dm": "/root/dm_trdl_vacancy_20260914",
+  "author_worktree": "C:/Projects/HMASD-worktrees/codex-trdl",
+  "branch": "codex/trdl",
+  "source_sha": "deddd8d9e0b41cff165d32f3f7729c23df236a69",
+  "grant_response": "afcf3ed2712b0dec90524707fcd09ee38be9fce4",
+  "execution_node": "hmasd-wsl-node",
+  "remote_cwd": "/home/wu/hmasd-worktrees/trdl-b02-9602",
+  "supervisor": "/usr/local/bin/agent-task",
+  "python": "/home/wu/.venvs/hmasd/bin/python",
+  "output_root": "/home/wu/hmasd-worktrees/trdl-b02-9602/temp/directions/tail_return_distributional_learning/exp/b02_9602",
+  "arms": [
+    {
+      "arm": "SCALAR",
+      "handle": "trdl-b02-9602-scalar",
+      "command": "cd /home/wu/hmasd-worktrees/trdl-b02-9602 && /home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out /home/wu/hmasd-worktrees/trdl-b02-9602/temp/directions/tail_return_distributional_learning/exp/b02_9602/SCALAR_ADMISSION.json && /usr/bin/time -q -f '{\"wall_seconds\":%e,\"user_seconds\":%U,\"system_seconds\":%S,\"peak_rss_kib\":%M,\"exit_code\":%x}' -o /home/wu/hmasd-worktrees/trdl-b02-9602/temp/directions/tail_return_distributional_learning/exp/b02_9602/SCALAR_INVOCATION_TIME.json /home/wu/.venvs/hmasd/bin/python -u scripts/run_trdl_b01.py arm --arm SCALAR --seed 9602 --out /home/wu/hmasd-worktrees/trdl-b02-9602/temp/directions/tail_return_distributional_learning/exp/b02_9602/SCALAR --launch-sha deddd8d9e0b41cff165d32f3f7729c23df236a69 --max-seconds 900",
+      "output": "/home/wu/hmasd-worktrees/trdl-b02-9602/temp/directions/tail_return_distributional_learning/exp/b02_9602/SCALAR",
+      "acceptance": "not yet accepted"
+    },
+    {
+      "arm": "Q32",
+      "handle": "trdl-b02-9602-q32",
+      "command": "cd /home/wu/hmasd-worktrees/trdl-b02-9602 && /home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out /home/wu/hmasd-worktrees/trdl-b02-9602/temp/directions/tail_return_distributional_learning/exp/b02_9602/Q32_ADMISSION.json && /usr/bin/time -q -f '{\"wall_seconds\":%e,\"user_seconds\":%U,\"system_seconds\":%S,\"peak_rss_kib\":%M,\"exit_code\":%x}' -o /home/wu/hmasd-worktrees/trdl-b02-9602/temp/directions/tail_return_distributional_learning/exp/b02_9602/Q32_INVOCATION_TIME.json /home/wu/.venvs/hmasd/bin/python -u scripts/run_trdl_b01.py arm --arm Q32 --seed 9602 --out /home/wu/hmasd-worktrees/trdl-b02-9602/temp/directions/tail_return_distributional_learning/exp/b02_9602/Q32 --launch-sha deddd8d9e0b41cff165d32f3f7729c23df236a69 --max-seconds 900",
+      "output": "/home/wu/hmasd-worktrees/trdl-b02-9602/temp/directions/tail_return_distributional_learning/exp/b02_9602/Q32",
+      "acceptance": "not yet accepted"
+    }
+  ],
+  "authorized_originals": 2,
+  "actual_launches": 0,
+  "retries_allowed": 0,
+  "ordering": "Two separately admitted original arms; may overlap if both actual memory admissions permit. No first-score-dependent choice.",
+  "watchdog_note": "Prospective900s whole original; ordinary300s plan is informed by B01 approximately198s whole invocations. Allow load variation but bound a hung original. Fixed endpoints and two originals remain; no retry after interruption.",
+  "initial_ordinary_plans_seconds": {
+    "per_arm": 300,
+    "native_sum": 600,
+    "support": 1200,
+    "combined": 1800
+  },
+  "scientific_exposure_per_arm": {
+    "train_episodes": 512,
+    "eval_episodes": 256,
+    "horizon": 256,
+    "optimizer_calls": 128
+  },
+  "source_acceptance": "DM accepts reviewed deddd8d9e after six pure changed-contract checks and independent Reviewer no-material-issue finding. No native smoke selected.",
+  "current_state": "Exact source/commands published prospectively; no accepted original yet. Fresh destination-adjacent admission in each exact command is required.",
+  "monitor": "/root/dm_trdl_vacancy_20260914/monitor_trdl_b01",
+  "pair_publication_command": "cd /home/wu/hmasd-worktrees/trdl-b02-9602 && /home/wu/.venvs/hmasd/bin/python scripts/run_trdl_b01.py pair --seed 9602 --scalar /home/wu/hmasd-worktrees/trdl-b02-9602/temp/directions/tail_return_distributional_learning/exp/b02_9602/SCALAR/summary.json --quantile /home/wu/hmasd-worktrees/trdl-b02-9602/temp/directions/tail_return_distributional_learning/exp/b02_9602/Q32/summary.json --out /home/wu/hmasd-worktrees/trdl-b02-9602/temp/directions/tail_return_distributional_learning/exp/b02_9602/PAIR_SUMMARY.json --launch-sha deddd8d9e0b41cff165d32f3f7729c23df236a69"
+}
