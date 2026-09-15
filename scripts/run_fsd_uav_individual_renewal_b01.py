@@ -62,7 +62,7 @@ def measured(value, label):
 
 
 def check_deadline(summary, stage):
-    if time.perf_counter() - PROCESS_START >= summary["cap_seconds"]:
+    if summary["cap_seconds"] is not None and time.perf_counter() - PROCESS_START >= summary["cap_seconds"]:
         raise TimeoutError(f"complete-command cap at {stage}")
 
 
@@ -84,7 +84,7 @@ def publish(out, summary, stage):
     check_deadline(summary, stage + ":published")
 
 
-def make_config(arm, envs, seed, *, renewal_batch=False):
+def make_config(arm, envs, seed, *, renewal_batch=False, coordinator_batch_size=None):
     # E0 provides the ordinary config. Apply I's cost before either model exists.
     config = e0._make_config("D0", seed, len(envs), HORIZON, HORIZON, N_UAVS,
                              N_USERS, ROLLOUTS, envs[0].state_dim, envs[0].obs_dim)
@@ -92,6 +92,8 @@ def make_config(arm, envs, seed, *, renewal_batch=False):
     config.n_Z = config.n_z = 6
     if renewal_batch:
         config.coordinator_batch_size = 1280 if arm == "I" else 128
+    if coordinator_batch_size is not None:
+        config.coordinator_batch_size = coordinator_batch_size
     return config
 
 
@@ -136,7 +138,8 @@ def base_summary(arm, *, training_seed=TRAIN_SEED, evaluation_seed=EVAL_SEED, ob
                  "channel_model": "free_space"},
         "device": "cpu", "torch_threads": 4, "learner_precision": "float32",
         "reward_return_precision": "float64", "native_score_factor": N_UAVS / HORIZON,
-        "cap_seconds": caps[arm], "summed_pair_cap_seconds": sum(caps.values()),
+        "cap_seconds": caps[arm] if caps is not None else None,
+        "summed_pair_cap_seconds": sum(caps.values()) if caps is not None else None,
         "status": "incomplete", "failure": None, "learner_config": None,
         "evaluation_config": None, "training_rows": [], "evaluation": None,
         "initial_parameter_norms": {}, "optimizer_calls": dict.fromkeys(NETWORKS, 0),
@@ -146,12 +149,13 @@ def base_summary(arm, *, training_seed=TRAIN_SEED, evaluation_seed=EVAL_SEED, ob
                                  "evaluation_episodes", "evaluation_agent_step_batches"), 0)}
 
 
-def build_learner(summary, out, *, training_seed=TRAIN_SEED, renewal_batch=False):
+def build_learner(summary, out, *, training_seed=TRAIN_SEED, renewal_batch=False, coordinator_batch_size=None):
     check_deadline(summary, "learner setup")
     torch.set_num_threads(4)
     seed_rng(training_seed)
     envs = e0._make_envs(TRAIN_LANES, training_seed, N_UAVS, N_USERS, HORIZON)
-    config = make_config(summary["arm"], envs, training_seed, renewal_batch=renewal_batch)
+    config = make_config(summary["arm"], envs, training_seed, renewal_batch=renewal_batch,
+                         coordinator_batch_size=coordinator_batch_size)
     summary["learner_config"] = config_snapshot(config)
     agent = HMASDAgent(config, log_dir=str(out / "learner_logs"), device=torch.device("cpu"))
     summary["counts"]["model_constructions"] += 1
@@ -246,19 +250,22 @@ def collect_training(envs, agent, theta0, counters, summary, out):
 class Evaluator(e0.Evaluator):
     """Reuse E0's active-module/normalizer synchronization, with our arm builder."""
 
-    def __init__(self, arm, out, *, evaluation_seed=EVAL_SEED, renewal_batch=False):
+    def __init__(self, arm, out, *, evaluation_seed=EVAL_SEED, renewal_batch=False, coordinator_batch_size=None):
         self.lanes = EVAL_LANES
         self.envs = e0._make_envs(EVAL_LANES, evaluation_seed, N_UAVS, N_USERS, HORIZON)
-        self.config = make_config(arm, self.envs, evaluation_seed, renewal_batch=renewal_batch)
+        self.config = make_config(arm, self.envs, evaluation_seed, renewal_batch=renewal_batch,
+                                  coordinator_batch_size=coordinator_batch_size)
         self.agent = HMASDAgent(self.config, log_dir=str(out / "evaluation_logs"), device=torch.device("cpu"))
         self.agent.train(False)
 
 
-def final_evaluation(learner, summary, out, *, evaluation_seed=EVAL_SEED, renewal_batch=False):
+def final_evaluation(learner, summary, out, *, evaluation_seed=EVAL_SEED, renewal_batch=False,
+                     coordinator_batch_size=None):
     with e0._preserve_rng():
         check_deadline(summary, "evaluator construction")
         seed_rng(evaluation_seed)
-        evaluator = Evaluator(summary["arm"], out, evaluation_seed=evaluation_seed, renewal_batch=renewal_batch)
+        evaluator = Evaluator(summary["arm"], out, evaluation_seed=evaluation_seed,
+                              renewal_batch=renewal_batch, coordinator_batch_size=coordinator_batch_size)
         summary["counts"]["model_constructions"] += 1
         summary["evaluation_config"] = config_snapshot(evaluator.config)
         evaluator.agent.clear_buffers()

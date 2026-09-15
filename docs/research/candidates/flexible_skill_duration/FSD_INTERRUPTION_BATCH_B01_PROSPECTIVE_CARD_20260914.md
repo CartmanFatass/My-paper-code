@@ -232,3 +232,33 @@ Current source/document reads and prospective configuration arithmetic create no
 empirical result. No numerical reanalysis of historical primaries was performed.
 Next: implement the minimal selected bindings/reducer, complete focused acceptance
 and independent high-risk review, then execute the selected originals directly.
+
+## 8. Execution implementation and acceptance record
+
+The selected L0 in §6 is implemented in `scripts/run_fsd_interruption_batch_b01.py`
+plus the existing shared collector. Its `fit --arm D128|D1280|I128|I1280 --seed
+772003|772103` binds one original; evaluation seed is respectively782003/782103.
+`factorial_arm` records the full arm while shared `arm` retains I/D0 renewal-path
+identity. The explicit batch keyword reaches both learner and separately built
+evaluator. The shared legacy defaults/caps remain unchanged; this new object passes
+`caps=None` and records ordinary wall plans separately. It calls the existing
+training, terminal storage, update and final-evaluation code without replacing it.
+
+The same entry's `reduce` reads original summaries, preserves every block/arm and
+forms only contrasts with intact operands and matching non-factor settings.
+SD/SE/interval are over the two block contrasts, not endpoint episodes. With one
+operand-complete block it publishes its bounded mean but no training interval;
+missing low-batch arms do not erase an intact high-batch primary. No provenance
+guard, framework, core code change or additional empirical invocation is added.
+
+Focused acceptance uses synthetic-only config/RNG/collector/evaluator seams and
+complete/missing-operand publication in
+`tests/experiments/candidates/flexible_skill_duration/interruption_batch_b01/test_factorial.py`,
+plus directly relevant existing default/final/deadline checks. Tests replace real
+model and host constructors. The actual batch consumer remains
+`hmasd/agent.py`'s D2 coordinator update and `hmasd/utils.py`'s valid-row sampler;
+the published previous synthetic1281-row sampler traversal is reused as unchanged
+coverage. No real model-bearing smoke is selected. Independent high-risk review
+will inspect the reachable scientific/configuration/RNG/reducer change before launch.
+Engineering Scope §4: none. Actual check/review results and exact execution bindings
+are appended here when completed, rather than inferred from implementation.
