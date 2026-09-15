@@ -1,0 +1,65 @@
+{
+  "preserved_utc": "2026-09-15T08:50:20.415978+00:00",
+  "exact_root": "C:\\Projects\\HMASD-worktrees\\codex-vap-folr\\temp\\directions\\vap_folr_core\\exp\\entity_augmentation_repeat_b01_781901_782001",
+  "file_count": 9,
+  "manifest": [
+    {
+      "path": "C:\\Projects\\HMASD-worktrees\\codex-vap-folr\\temp\\directions\\vap_folr_core\\exp\\entity_augmentation_repeat_b01_781901_782001\\block1\\generic\\MONITOR_STATE.json",
+      "archive_name": "block1/generic/MONITOR_STATE.json",
+      "bytes": 503,
+      "sha256": "c25213342d5723a8b7f3fe0eb3ca1395ef46462a2b4cf236cfbf0b61d3a596b8"
+    },
+    {
+      "path": "C:\\Projects\\HMASD-worktrees\\codex-vap-folr\\temp\\directions\\vap_folr_core\\exp\\entity_augmentation_repeat_b01_781901_782001\\block1\\persistent\\MONITOR_STATE.json",
+      "archive_name": "block1/persistent/MONITOR_STATE.json",
+      "bytes": 467,
+      "sha256": "2414a0d9d79ca2d33e1c2fd1f9634aed067c4e78a144f6ee3d3c7c5250002c3f"
+    },
+    {
+      "path": "C:\\Projects\\HMASD-worktrees\\codex-vap-folr\\temp\\directions\\vap_folr_core\\exp\\entity_augmentation_repeat_b01_781901_782001\\block1\\persistent\\MONITOR_STATE_START2.json",
+      "archive_name": "block1/persistent/MONITOR_STATE_START2.json",
+      "bytes": 513,
+      "sha256": "a8a1781c92fbbeffbf28980e1633b9691483776b1daafd5889ce34bf07851863"
+    },
+    {
+      "path": "C:\\Projects\\HMASD-worktrees\\codex-vap-folr\\temp\\directions\\vap_folr_core\\exp\\entity_augmentation_repeat_b01_781901_782001\\block2\\generic\\MONITOR_STATE.json",
+      "archive_name": "block2/generic/MONITOR_STATE.json",
+      "bytes": 503,
+      "sha256": "62832d1d661010cf2cdef52942bee7d0d18ded11720f462412695618e45971d3"
+    },
+    {
+      "path": "C:\\Projects\\HMASD-worktrees\\codex-vap-folr\\temp\\directions\\vap_folr_core\\exp\\entity_augmentation_repeat_b01_781901_782001\\block2\\persistent\\MONITOR_STATE.json",
+      "archive_name": "block2/persistent/MONITOR_STATE.json",
+      "bytes": 551,
+      "sha256": "44227db59fae04330e66d2caae021f770b3848ece339b7d290f01f51d962c096"
+    },
+    {
+      "path": "C:\\Projects\\HMASD-worktrees\\codex-vap-folr\\temp\\directions\\vap_folr_core\\exp\\entity_augmentation_repeat_b01_781901_782001\\collect_terminal.py",
+      "archive_name": "collect_terminal.py",
+      "bytes": 6568,
+      "sha256": "361cb910a52ed1c42a4bfb56451a95c165b7acfbf848aec0b0911bc44a0dac33"
+    },
+    {
+      "path": "C:\\Projects\\HMASD-worktrees\\codex-vap-folr\\temp\\directions\\vap_folr_core\\exp\\entity_augmentation_repeat_b01_781901_782001\\COLLECTION_PREPARATION.json",
+      "archive_name": "COLLECTION_PREPARATION.json",
+      "bytes": 558,
+      "sha256": "866e8c1f99c29edb573e785c9080beecc795ace864930d034d8966f9746cac65"
+    },
+    {
+      "path": "C:\\Projects\\HMASD-worktrees\\codex-vap-folr\\temp\\directions\\vap_folr_core\\exp\\entity_augmentation_repeat_b01_781901_782001\\COLLECTION_PREPARATION.stderr.log",
+      "archive_name": "COLLECTION_PREPARATION.stderr.log",
+      "bytes": 327,
+      "sha256": "3dde5833307d3ab4c0cf818c8d5e5862efba303ec8e34d35c286fd1da79d9241"
+    },
+    {
+      "path": "C:\\Projects\\HMASD-worktrees\\codex-vap-folr\\temp\\directions\\vap_folr_core\\exp\\entity_augmentation_repeat_b01_781901_782001\\read_study.py",
+      "archive_name": "read_study.py",
+      "bytes": 4852,
+      "sha256": "ec06be37c13cae8ff64e349fd307134cee988f9f5da30e1ffc7757b971e04e63"
+    }
+  ],
+  "archive_bytes": 5832,
+  "archive_sha256": "3296e0190c909804b580e3c0126d97e0f6666ecee1b91703b731a318c358177a",
+  "all_members_readback_verified": true,
+  "cleanup_state": "not attempted; preserve prior policy-rejected roots; only this exact current root is assigned after Root retention"
+}
