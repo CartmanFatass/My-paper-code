@@ -262,3 +262,10 @@ coverage. No real model-bearing smoke is selected. Independent high-risk review
 will inspect the reachable scientific/configuration/RNG/reducer change before launch.
 Engineering Scope §4: none. Actual check/review results and exact execution bindings
 are appended here when completed, rather than inferred from implementation.
+
+Source `0c837c6dd` is technically accepted:26 distinct synthetic cases passed
+on the configured WSL node after correcting a missing pytest scratch parent;
+independent Astra/high review returned no material findings. No real model or
+scientific invocation occurred in checks. Full evidence, actual preparation
+failures/corrections, exact original command table and collection ownership are in
+[the execution record](interruption_batch_b01_20260914/EXECUTION.md).
