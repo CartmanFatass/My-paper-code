@@ -1,0 +1,54 @@
+# MGTAP Portfolio: complete post-late512 decision and application
+
+## Decision applied and exact evidence
+
+Apply **PARKED/MEDIUM**, retain optional mean-COND and intact DENSE default, and select zero new numerical work. This is the complete Portfolio decision on current MGTAP investment under AGENTS§4.8 and evidence§§7,8.1; it is not a local DM lifecycle inference, a scientific CLOSE, a recast, or a reclassification of8254. The decision is reversible and leaves the declined final512-only pair scientifically legitimate.
+
+Request2026-09-14-mgtap-post-late512-portfolio-direction-01; fixedTASK70f23ef3f47b71cf146dc844c0c08c4724654c0a andHANDOFF62e0e27a31922502ecedd3973738a2a48e246905. [The complete175-line response](archive/RESPONSE.md) is atc7f572df84640540a9da0229bcac405b380217fb,36697bytes, SHA256681b5062fa2cc91fa31687a48dd01fa2fda437a5796a1bfc34f4f6f78e79f530. I read all175lines directly from that immutable Git object, including every alternative, source-access limit and reference. Bytes equal the native Transport FULL_RESPONSE.md. The commit adds only the authorized response over the fixed HANDOFF head; Issue18 comment5672975966 was directly read back and names the correct response and TASK.
+
+The exact disposition is: “Reversibly PARK MGTAP, retain its MEDIUM priority, preserve the optional mean-COND implementation and every signed result, and keep intact DENSE as the generic default. Do not select the offered fresh fixed1e-4/512 final-only pair or retain an uncommitted ACTIVE-idle slot.”
+
+Current [PARK knowledge](../../../candidates/metric_ground_transport_allocation/PARK.md), [DIRECTION](../../../candidates/metric_ground_transport_allocation/DIRECTION.md), [formal application record](../../decisions/2026-09-14-mgtap-post-late512-park.md) and [bounded handoff](../../../candidates/metric_ground_transport_allocation/MGTAP_RESUME_CLOSEOUT_HANDOFF_20260914.md) implement and preserve this decision. The owner P2 item20260914-mgtap-005 is traced to this response and actual application; no owner reply or Root ratification is a gate. Root owns main publication and the current global capacity recount.
+
+## Conformance and bounded scientific reading
+
+The answer addresses the actual maintenance/investment question and independently synthesizes the prior complete Portfolio CONTINUE, newly completed8253 recurrence, different8254 late exposure, complete Convergence review and full DM response. It does not merely copy the review into a direction verdict. The previous CONTINUE remains correct historical authority for its prescribed finite work; this prospective allocation changes after the new observations.
+
+I checked the answer against the original card rule: “Primary strict delta>+0.01: COND_ABOVE_MEI; strict delta<-0.01: COND_ADVERSE; inclusive band: INSIDE_MEI. Every final row stays.” The original final8254 difference−0.005375013231600323J remains INSIDE_MEI; the secondary−0.013745292590609116 gap change does not use that branch rule. Counts remain1152episode rows/512rollouts/2fits/294912ticks/2048Adam, with four actual checkpoints and no partial fits. Consultation and selected successor exposure are both0fits/0ticks/0Adam.
+
+Pro reports complete access to all17 listed paths and TASK at their exact revisions; DIRECTION and foundations/specification accesses use their named relevant ranges. It read complete native summary arrays and reported audit findings, not raw JSONL/checkpoint binaries, unlisted runner/analysis implementations, deeper code or independent engineer transcripts. It performed no model/environment construction, experiment, numerical reanalysis or profiling. Those original DM/Reviewer checks remain attributed evidence, not a second empirical result.
+
+The answer conforms to controlling§§11.4,11.7–11.10: one B result is admitted at its real ceiling; no mechanism, headroom, favorable pilot, stable-order proof, seed quota, extra diagnostic or cost census is imposed. It fairly compares the final512-only alternative at278528ticks rather than forcing another intermediate measurement. Unknown full costs are retained, not used as a fabricated breach or automatic stopping reason. No claim of stable COND inferiority, equivalence, tuning causality, sample efficiency, transfer/safety or C promotion appears.
+
+The§7 lifecycle interpretation is explicit: the offered pair is specified and plausibly feasible; Portfolio declines current investment justification, not its technical eligibility. Together with§8.1's investment/value authority, reversible PARK preserves the plausible question without declaring CLOSED. This is the answer's discretionary marginal-value judgment; no specification amendment, general numerical threshold or silent exception is applied. Retaining MEDIUM, changing only MGTAP's lifecycle/slot, and leaving replacement to Root match the bound scope.
+
+## Substantive response to every material decision point
+
+1. **New evidence changes the development premise, not history.** Accepted. Fair selection8251 and useful8252+.023704897713093642J supported the prescribed fixed recurrence.8253−.025924927546066238J did not reproduce that favorable realization. The separately justified512 path then produced inside-MEI−.005375013231600323J. This weakens present favorable carry-forward without retroactively making the old CONTINUE or the new B scientifically improper.
+
+2. **The stronger continuation argument survives.** Accepted. Only one independently trained fixed1e-4/512 pair exists. A fresh final-only pair could change development valuation and costs2fits/278528ticks/2048Adam, with comparable actual native work360s. Prior8252 and8214 positives remain genuine support. The decision accepts a chance of foregoing a useful realization, rather than proving a negative value of information, infeasibility or universal dominance by other directions.
+
+3. **PARK has an affirmative allocation rationale.** Accepted. The two actual opportunities were exercised; neither provided further support for current optional-recipe development at this boundary. Recoverable code/evidence preservation retains the scientific option without buying another refinement. I accept Portfolio's judgment that present development value is insufficient, while acknowledging that a different owner/Portfolio valuation on the same evidence could support CONTINUE. No outside customer or identified defect is required.
+
+4. **ACTIVE-idle is permitted but declined.** Accepted. MGTAP properly retained its slot before formal disposition; lack of a live experiment, ended allocation or review wait never released it. After this decision, preserving the same optional assets under PARK better describes selected non-investment than an uncommitted occupied slot. No imaginary external dependency or repeated unchanged consultation is created.
+
+5. **Result and cost limits remain exact.** Accepted. Both means rose on one persistent learning path; DENSE rose more. Checkpoints and reused32-world addresses are dependent; conditional SEs omit training/selection uncertainty. The native360.00s measurement contains fit/study body timers. The recent3-programme sum1196.88s/12fits/1032192ticks/7168Adam is not a direction bill or three matched replicas. Full support/provider/maintenance/lifetime/aggregateCPU costs and native tuned headroom remain UNKNOWN/absent, without a new prerequisite.
+
+6. **Operational provenance does not supply scientific polarity.** Accepted. Full original rows/checkpoints and published archive remain. The Monitor timestamp limitation, earlier title-only Portfolio delivery defect and rejected local scratch deletion retain their exact scopes. Current complete response/source/receipt equality resolves this request; no resend, new monitor, repair project, evidence deletion or repeat cleanup is needed.
+
+7. **Revisit is concrete and does not demand success first.** Accepted. A revised value placed on optional512 maintenance could justify the same fresh final-only pair; trustworthy relevant native evidence, a comparator/primary correction or a real cost/resource change could also alter that choice. State which future development commitment it changes. Idle capacity, a larger watchdog or a desired favorable majority is insufficient alone. No new experiment/consultation is allocated to manufacture a reopen trigger.
+
+## Decisions this intake produces
+
+- **Portfolio disposition:** options were PARK, one fresh final512 pair and ACTIVE-idle. Select and apply the complete response's PARKED/MEDIUM, decline new numerical work. Provenance PRO_FINAL / OWNER_DELEGATED under AGENTS4.8. Preserve every historical outcome, C consumption, coordinate-family conclusion, default and recast history.
+- **Capacity mapping:** release only MGTAP's occupied slot through this safe completed handoff. Relative to the fixed3-slot baseline this is−1 occupied and no reservation; Root must recount independent current events rather than overwrite peers. No replacement direction is selected here.
+- **Retention/cleanup:** preserve existing authoring checkout/branch, native evidence/source and full responses. Exact8254 remote checkout is already absent from disk/registration; do not repeat cleanup. Keep supervisor/local originals and the policy-rejected test scratch as documented retained exceptions. No active experiment, Monitor or unfinished Transport remains.
+- **Owner instruction check:** canonical reviews returned[] immediately before application. No new owner prediction exists; the valid-result brief retains not taken and the one uncalibrated DM prediction outcome. Update existingP2 with actual application, not a fabricated owner reply.
+- **Shared-node release:** after this full conforming intake, release portfolio:cross_direction writer ownership to Root-coordinated subsequent work; the waiting ACVC author receives the actual disposition/source. A subsequent replacement request remains Root's responsibility and must serialize with actual writers.
+
+## Transport and final application facts
+
+Operationc3d8b181-e57b-46cb-9a02-3fd8c0c7c181; sameconversation6a9c109e-b264-83e8-a78b-f9ea1b767b7b; one accepted userc8ad74ea-6909-4a33-bde1-edb9d312c835 / assistant9ba99bc5-0476-4e27-aa98-2dc352ca00b3. Native child /root/dm_mgtap_resume_20260914/transport_lh_mgtap_review returned ARCHIVED/RECEIPT directly by native final because its runtime lacked collaboration.send_message. Authoritative binding and portfolio mirror agree on effect/receipt; the dedicated tab is closed. No other request or accepted historical binding was superseded.
+
+DM-side science/retention/application and handoff are complete in this record's publication. Main integration and actual capacity display are Root-owned next actions, not pending scientific acceptance or another Portfolio decision. No continuing MGTAP producer or successor invocation remains.
+

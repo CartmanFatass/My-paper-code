@@ -24,7 +24,7 @@
     }
   ],
   "recommended": "park",
-  "auto_applied": null,
+  "auto_applied": "park",
   "dm_reason": "固定复现和新曝光量问题已真实执行，继续不变配方的边际开发价值目前弱于保存资产并暂停投资；备选仍有价值。",
   "evidence": [
     "docs/research/candidates/metric_ground_transport_allocation/MGTAP_POST_LATE512_PORTFOLIO_PROPOSAL_20260914.md"
@@ -71,5 +71,17 @@
     "verdict_text": "Recommendation to Portfolio: reversible PARK of MGTAP, retaining optional COND code, DENSE default and every signed result. This is a proposed direction-level allocation judgment, not an applied disposition or evidence of general COND failure.",
     "source": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_POST_LATE512_PORTFOLIO_PROPOSAL_20260914.md"
   },
-  "starred": true
+  "starred": true,
+  "approval_correction": "本项原为未应用的DM建议；现由完整Portfolio裁决正式选择PARK。另一个512-only配对仍科学合理，当前不投；不称稳定劣势、等价或机制失败。",
+  "execution_history": [
+    {
+      "at": "2026-09-15T01:02:40+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260914_mgtap_post_late512_direction/archive/RESPONSE.md@c7f572df84640540a9da0229bcac405b380217fb",
+      "record": "docs/research/portfolio/decisions/2026-09-14-mgtap-post-late512-park.md",
+      "state": "applied",
+      "summary": "已逐字读取175行完整Portfolio裁决并完成conformance intake，应用MGTAP可逆PARK/MEDIUM；保留DENSE默认、COND和全部正负结果，零新拟合，完成安全席位交接。Root主分支整合是发布而非第二次批准。",
+      "correction": "本项原为未应用的DM建议；现由完整Portfolio裁决正式选择PARK。另一个512-only配对仍科学合理，当前不投；不称稳定劣势、等价或机制失败。"
+    }
+  ]
 }

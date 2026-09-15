@@ -1,5 +1,7 @@
 # MGTAP late512 intake — final contrast inside MEI
 
+Final direction application: the complete175-line Portfolio answerc7f572df84640540a9da0229bcac405b380217fb selects reversible PARK/MEDIUM with zero new numerical work. [Complete Portfolio intake](../../portfolio/pro_packets/20260914_mgtap_post_late512_direction/INTAKE.md) preserves this valid result, all contrary evidence and the legitimate fresh512-only alternative. This later investment disposition does not reclassify8254 or rewrite the original steps below.
+
 Subsequent review completion: the full199-line response atde3b1fbccbb294c205dd4953daa72a823fa0fcda accepts the result and selects no immediate extension of this exposure exploration. [Complete DM response](pro_packets/20260914_late512_results_review/INTAKE.md) preserves the legitimate fresh final512-only alternative and prepares the distinct Portfolio maintenance/investment question. The original intake and its then-selected review below remain the historical sequence; no native result or rule changed.
 
 ## Accepted result and its boundary
