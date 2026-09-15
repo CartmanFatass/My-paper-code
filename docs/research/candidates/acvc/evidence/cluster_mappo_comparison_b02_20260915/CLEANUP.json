@@ -1,0 +1,38 @@
+{
+  "completed_at": "2026-09-15T16:53:54.239734+00:00",
+  "source_sha": "2dc9631c8644464b8c4189a53344b2956c3eb3b4",
+  "authorization": "Portfolio grant G (assigned cleanup within the grant); preservation verified at main 1a40561c7 / codex/acvc c698fbd14 plus retained archives (PRESERVATION.json)",
+  "terminal_statuses": {
+    "acvc-mappo-c-b02-28431-2dc9631c": {
+      "task": "acvc-mappo-c-b02-28431-2dc9631c",
+      "status": "finished",
+      "exit_code": 0,
+      "pid": 3732902,
+      "uptime_seconds": 12431,
+      "tmux_active": false
+    },
+    "acvc-mappo-m-b02-28431-2dc9631c": {
+      "task": "acvc-mappo-m-b02-28431-2dc9631c",
+      "status": "finished",
+      "exit_code": 0,
+      "pid": 3736172,
+      "uptime_seconds": 3131,
+      "tmux_active": false
+    }
+  },
+  "exact_removed_paths": [
+    "/home/wu/hmasd-worktrees/acvc-b02-2dc9631c8",
+    "/home/wu/hmasd-inputs/acvc-mappo-b02-28431",
+    "/home/wu/.agent-tasks/acvc-mappo-c-b02-28431-2dc9631c",
+    "/home/wu/.agent-tasks/acvc-mappo-m-b02-28431-2dc9631c"
+  ],
+  "disk_absent": {
+    "worktree": true,
+    "staging": true
+  },
+  "worktree_registration_absent": true,
+  "registered_before_count": 167,
+  "registered_after_count": 166,
+  "remove_stdout": "rc=0\nwt_absent\nst_absent\n0\n166\n",
+  "remove_stderr": ""
+}
