@@ -36,3 +36,21 @@ checks and independent Astra/high review of the changed scientific binding and
 publication path remain pending. Their evidence and DM acceptance will be added
 before any result-bearing invocation. Each check uses its own explicit remote
 scratch directory, preserving diagnostic evidence and then creator cleanup.
+
+## First committed-source check and fixture repair
+
+At source78437b89f, the remote suite returned26 passed/1 failed in2.17s
+(full process2.700345s). Failure changes10 passed arm both positionally and as
+a keyword to the test endpoint factory, raising TypeError before the production
+comparison was called. The fixture is repaired by constructing the base endpoint
+then updating its requested mutations. No runner, publisher, programme, wrapper,
+card or scientific result changed. Recheck the repaired arm mutation and the
+block mutation whose construction detail also changed; other inputs retain the
+same dictionaries and their passing results are reused.
+
+The complete failure output/receipt is preserved. Failed synthetic scratch was
+archived remotely before creator cleanup; the exact scratch is absent. These
+are0 native acquisition/0 real optimizer updates and not a scientific retry.
+The independent Astra/high source review reports no material finding; its full
+return and scope limits are in INDEPENDENT_REVIEW.md. New source publication
+and the two focused fixture cases remain before technical acceptance.

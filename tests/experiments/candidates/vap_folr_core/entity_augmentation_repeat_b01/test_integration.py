@@ -82,7 +82,9 @@ def test_ordered_primary_preserves_boundaries_and_disagreement(d1, d2, rule):
     {"arm": "AUGMENTED_CURRENT_ONLY"},
 ])
 def test_unusable_own_block_g_keeps_a_endpoint_without_polarity(changes):
-    g = None if changes is None else endpoint("GENERIC_RETAIN", **changes)
+    g = None if changes is None else endpoint("GENERIC_RETAIN")
+    if g is not None:
+        g.update(changes)
     a = endpoint("AUGMENTED_PERSISTENT", value=2.0)
     attach_primary(a, g)
     assert a["status"] == "complete" and a["evaluation_returns"] == [2.0] * 128

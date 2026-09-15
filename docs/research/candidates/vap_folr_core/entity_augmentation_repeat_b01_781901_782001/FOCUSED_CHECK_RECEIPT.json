@@ -1,0 +1,21 @@
+{
+  "started_utc": "2026-09-15T04:35:03.709120+00:00",
+  "source_sha": "78437b89f901f0a3ef1828f768039ea41e7d29a3",
+  "argv": [
+    "/home/wu/.venvs/hmasd/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "--basetemp",
+    "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/test/augmentation-repeat-b01-20260914-dm",
+    "tests/experiments/candidates/vap_folr_core/entity_augmentation_repeat_b01"
+  ],
+  "returncode": 1,
+  "wall_seconds": 2.7003453980432823,
+  "scratch": "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/test/augmentation-repeat-b01-20260914-dm",
+  "scratch_disk_absent": true,
+  "native_exposure": 0,
+  "real_optimizer_updates": 0,
+  "kind": "focused synthetic code check, not scientific fit",
+  "preserved_log": "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/FOCUSED_CHECK.txt"
+}

@@ -1,0 +1,21 @@
+...................F.......                                              [100%]
+=================================== FAILURES ===================================
+____ test_unusable_own_block_g_keeps_a_endpoint_without_polarity[changes10] ____
+
+changes = {'arm': 'AUGMENTED_CURRENT_ONLY'}
+
+    @pytest.mark.parametrize("changes", [
+        None, {"block": 2}, {"status": "incomplete"}, {"object": "old-object"},
+        {"training_seed": 781801}, {"evaluation_seed": 1781801},
+        {"launch_sha": "foreign"}, {"optimizer_steps": 4968},
+        {"evaluation_returns": [0.0] * 127}, {"evaluation_returns": [float("nan")] * 128},
+        {"arm": "AUGMENTED_CURRENT_ONLY"},
+    ])
+    def test_unusable_own_block_g_keeps_a_endpoint_without_polarity(changes):
+>       g = None if changes is None else endpoint("GENERIC_RETAIN", **changes)
+E       TypeError: endpoint() got multiple values for argument 'arm'
+
+tests/experiments/candidates/vap_folr_core/entity_augmentation_repeat_b01/test_integration.py:85: TypeError
+=========================== short test summary info ============================
+FAILED tests/experiments/candidates/vap_folr_core/entity_augmentation_repeat_b01/test_integration.py::test_unusable_own_block_g_keeps_a_endpoint_without_polarity[changes10]
+1 failed, 26 passed in 2.17s
