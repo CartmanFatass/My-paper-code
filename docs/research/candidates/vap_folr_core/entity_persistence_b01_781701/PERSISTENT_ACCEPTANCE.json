@@ -1,0 +1,35 @@
+{
+  "observed_utc": "2026-09-14T17:18:15.882389-07:00",
+  "handle": "folr-persistence-b01-781701-persistent",
+  "source_sha": "42e337f36bd36c5dd24a7862eb71144f44fdef57",
+  "status": {
+    "task": "folr-persistence-b01-781701-persistent",
+    "status": "running",
+    "exit_code": null,
+    "pid": 3698859,
+    "uptime_seconds": 24,
+    "tmux_active": true
+  },
+  "admission": {
+    "assessed_at": "2026-09-15T00:17:51.673952Z",
+    "available_physical_bytes": 15630495744,
+    "captured_at": "2026-09-15T00:17:51.673682Z",
+    "cgroup_headroom_bytes": null,
+    "cgroup_memory_current_bytes": null,
+    "cgroup_memory_max_bytes": null,
+    "effective_available_bytes": 15630495744,
+    "effective_floor_pass": true,
+    "failure_reasons": [],
+    "measurement_source": "/proc/meminfo",
+    "minimum_available_bytes": 4294967296,
+    "passed": true,
+    "physical_floor_pass": true,
+    "schema_version": 1
+  },
+  "processes": [
+    "3698858       1      24 tmux new-session -d -s agent_folr-persistence-b01-781701-persistent bash '/home/wu/.agent-tasks/folr-persistence-b01-781701-persistent/runner.sh'",
+    "3698859 3698858      24 bash /home/wu/.agent-tasks/folr-persistence-b01-781701-persistent/runner.sh",
+    "3698862 3698859      24 /usr/bin/time -q -f {\"wall_seconds\":%e,\"user_seconds\":%U,\"system_seconds\":%S,\"peak_rss_kib\":%M,\"exit_code\":%x} -o /home/wu/hmasd-worktrees/folr-entity-persistence-b01-781701-bd841a180/temp/directions/vap_folr_core/exp/entity_persistence_b01_781701/persistent/INVOCATION_TIME.json bash -c set -euo pipefail     cd \"$1\"     /home/wu/.venvs/hmasd/bin/python scripts/hmasd_resource_preflight.py admit-memory --out \"$3/ADMISSION.json\" &&     exec /home/wu/.venvs/hmasd/bin/python -u scripts/run_folr_entity_persistence_b01.py \\       --arm AUGMENTED_PERSISTENT --seed 781701 --evaluation-seed 1781701 \\       --launch-sha \"$2\" --out \"$3\" --current-only-summary \"$4\"    -- /home/wu/hmasd-worktrees/folr-entity-persistence-b01-781701-bd841a180 42e337f36bd36c5dd24a7862eb71144f44fdef57 /home/wu/hmasd-worktrees/folr-entity-persistence-b01-781701-bd841a180/temp/directions/vap_folr_core/exp/entity_persistence_b01_781701/persistent /home/wu/hmasd-worktrees/folr-entity-persistence-b01-781701-bd841a180/temp/directions/vap_folr_core/exp/entity_persistence_b01_781701/current_only/summary.json",
+    "3698863 3698862      24 /home/wu/.venvs/hmasd/bin/python -u scripts/run_folr_entity_persistence_b01.py --arm AUGMENTED_PERSISTENT --seed 781701 --evaluation-seed 1781701 --launch-sha 42e337f36bd36c5dd24a7862eb71144f44fdef57 --out /home/wu/hmasd-worktrees/folr-entity-persistence-b01-781701-bd841a180/temp/directions/vap_folr_core/exp/entity_persistence_b01_781701/persistent --current-only-summary /home/wu/hmasd-worktrees/folr-entity-persistence-b01-781701-bd841a180/temp/directions/vap_folr_core/exp/entity_persistence_b01_781701/current_only/summary.json"
+  ]
+}

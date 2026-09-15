@@ -1,0 +1,19 @@
+{
+  "recomputed_from_complete_eval_array": {
+    "mean": 1.5926562499999999,
+    "sample_sd": 7.152017554054516,
+    "conditional_episode_se": 0.6321550139546467,
+    "minimum": -15.1,
+    "maximum": 21.28,
+    "n": 128,
+    "negative_count": 57
+  },
+  "panel_and_mean_match": true,
+  "training_instances": 1,
+  "terminal_log_tail": [
+    "{\"episode\": 4800, \"updates\": 4769, \"wall_seconds\": 2797.397978250985}",
+    "{\"episode\": 5000, \"updates\": 4969, \"wall_seconds\": 2927.0531853020657}",
+    "{\"arm\": \"AUGMENTED_CURRENT_ONLY\", \"status\": \"complete\", \"panel\": {\"mean\": 1.5926562499999999, \"sample_sd\": 7.152017554054516, \"conditional_episode_se\": 0.6321550139546467, \"minimum\": -15.1, \"maximum\": 21.28, \"n\": 128, \"negative_count\": 57}}",
+    "=== Task 'folr-persistence-b01-781701-current-only' exited with code 0 at 2026-09-15T08:15:40+08:00 (Duration: 2931s) ==="
+  ]
+}
