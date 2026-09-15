@@ -129,3 +129,20 @@ resume. Current pending work is only this result review and support/cleanup.
 Pending at initial intake publication. Full response intake, concrete corrections
 or residual findings, retained evidence and actual cleanup/pause handoff will be
 linked here without rewriting the frozen result or inventing a future decision.
+
+## Preservation and actual reclamation
+
+Complete terminal support was preserved in commit
+3aeef63cab56808dbb980a1b8e736dff4310a746 and retained by Root on main
+8fa0e344bab3bf6a7142d5a3c56152ac925f57d5: remote74 files and local9 files,
+full archives, exact inventories and member readback. Root then authorized the
+[CLEANUP_INVENTORY](entity_augmentation_repeat_b01_781901_782001/CLEANUP_INVENTORY.md)
+exact scope. The remote receipt verifies the unique worktree absent on disk and
+from Git registration plus all five terminal supervisors absent; shared source
+is retained. The local operation was rejected before process creation by policy;
+its checks/deletion did not execute. A separate read-only comparison verifies
+all9 local files still match their preserved bytes. LOCAL_CLEANUP_BLOCKER.json
+records retention without a second attempt or alternate removal. Prior rejected
+roots and all Pro archives remain. Cleanup changes no polarity, exposure or
+scientific budget. Required independent review is the remaining external producer;
+no successor is selected or permitted by this owner-pause closeout.

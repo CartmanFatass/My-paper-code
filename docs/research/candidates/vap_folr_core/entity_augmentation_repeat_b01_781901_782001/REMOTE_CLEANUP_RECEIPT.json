@@ -1,0 +1,67 @@
+{
+  "reclaimed_utc": "2026-09-15T08:54:53.881688+00:00",
+  "retention_main_commit": "8fa0e344bab3bf6a7142d5a3c56152ac925f57d5",
+  "source_sha": "7975964542b83560cbc0e79f74a9212f8e3737af",
+  "manifest_members_unchanged_before_removal": 74,
+  "support_archive_sha256": "e982297bc0d60f0797a5788020dc9b27d89f1a5018961862002dab659558f974",
+  "pre_removal_statuses": [
+    {
+      "task": "folr-augmentation-repeat-b01-781901-generic",
+      "status": "finished",
+      "exit_code": 0,
+      "pid": 3707528,
+      "uptime_seconds": 15241,
+      "tmux_active": false
+    },
+    {
+      "task": "folr-augmentation-repeat-b01-781901-persistent",
+      "status": "failed",
+      "exit_code": 125,
+      "pid": 3711036,
+      "uptime_seconds": 12247,
+      "tmux_active": false
+    },
+    {
+      "task": "folr-augmentation-repeat-b01-781901-persistent-start2",
+      "status": "finished",
+      "exit_code": 0,
+      "pid": 3712032,
+      "uptime_seconds": 11770,
+      "tmux_active": false
+    },
+    {
+      "task": "folr-augmentation-repeat-b01-782001-generic",
+      "status": "finished",
+      "exit_code": 0,
+      "pid": 3721180,
+      "uptime_seconds": 7020,
+      "tmux_active": false
+    },
+    {
+      "task": "folr-augmentation-repeat-b01-782001-persistent",
+      "status": "finished",
+      "exit_code": 0,
+      "pid": 3722930,
+      "uptime_seconds": 4366,
+      "tmux_active": false
+    }
+  ],
+  "worktree": "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001",
+  "worktree_disk_absent": true,
+  "worktree_registration_absent": true,
+  "supervisor_disk_absence": {
+    "/home/wu/.agent-tasks/folr-augmentation-repeat-b01-781901-generic": true,
+    "/home/wu/.agent-tasks/folr-augmentation-repeat-b01-781901-persistent": true,
+    "/home/wu/.agent-tasks/folr-augmentation-repeat-b01-781901-persistent-start2": true,
+    "/home/wu/.agent-tasks/folr-augmentation-repeat-b01-782001-generic": true,
+    "/home/wu/.agent-tasks/folr-augmentation-repeat-b01-782001-persistent": true
+  },
+  "git_remove_stdout": "",
+  "git_remove_stderr": "",
+  "shared_source_retained": true,
+  "stops": 0,
+  "scientific_retries": 0,
+  "manual_startup_repairs": 1,
+  "local_cleanup": "separate native PowerShell operation",
+  "author_branch_and_pro_archives": "outside this exact remote reclamation; retained"
+}
