@@ -98,8 +98,10 @@ a bounded marker check confirmed zero learner exposure, and the intact failure
 is retained. Manual directory preparation repaired that defect. The original
 A1 learner completed under preserved-record handle suffix-start2, with unchanged
 797596454/source/parameters. Its wall3807.79s exceeds the ordinary3600s plan,
-which was not a cap. G2 is accepted at06:57:53Z after fresh admission and assigned
-to the same native Monitor; A2 remains the selected fourth unstarted fit. No
+which was not a cap. G2 is complete at full exposure with mean0.208046875;
+A2, the fourth and final original learner, is accepted07:42:07Z after fresh
+admission and assigned to the same native Monitor. No d2 or full-study pattern
+is available yet. No
 extra fit or scientific retry. The [block1 intake](entity_augmentation_repeat_b01_781901_782001/BLOCK1_INTAKE.md)
 preserves the adverse block and limits. The [execution
 record](entity_augmentation_repeat_b01_781901_782001/EXECUTION.md) fixes the source,
