@@ -1,8 +1,8 @@
 # ACVC handoff — after the em:acvc:convergence decision (2026-09-15, Claude hub)
 
-**State: ACTIVE / MEDIUM / recasts 2, lowest sequencing; B02 complete and intaken (WITHIN_MEI on
-the second instance), G2 consumed, no producer; result review with `em:acvc:convergence`; nothing
-else authorised.** Driven by
+**State: ACTIVE / MEDIUM / recasts 2, lowest sequencing; the M-deployment transfer family is concluded
+at two instances (`PRO_FINAL`, A), no open object, no producer; the direction-level investment/lifecycle
+question is with `portfolio:cross_direction` (carrying C); nothing else authorised.** Driven by
 the Claude Code research hub (owner 2026-09-15 resume; two directions, ACVC and
 FSD). Authoring checkout `C:/Projects/HMASD-worktrees/codex-acvc`, branch
 `codex/acvc` (1,140 commits behind `main`; a merge of `main` conflicts in Codex
@@ -78,6 +78,31 @@ and `em:acvc:convergence` selected it with corrections (**B**, `PRO_FINAL`,
 card §5 and §7 acceptance groups) is engineering work that proceeds meanwhile with independent
 Opus review.
 
+## B02 result reviewed: family concluded, Portfolio question sent (2026-09-15 23:25Z)
+
+- `em:acvc:convergence` answered at `codex/acvc 319efe784` (23:10Z; one Send 23:03Z, COMPLETE,
+  ARCHIVED, tab closed): **A**, `PRO_FINAL`: family concluded at B01 TRANSFERS and B02 WITHIN_MEI as
+  separate observations, no further numerical object; wording corrections applied (small positive
+  F-over-dwell difference inside the band, not a match; M's zero counter is bypassed instrumentation);
+  ACVC not shown exhausted; C (matched F(C) vs F(M) pair) carried to Portfolio as the strongest
+  distinct alternative. Intake
+  [pro_packets/20260915_m_deployment_transfer_b02_result_review/INTAKE.md](pro_packets/20260915_m_deployment_transfer_b02_result_review/INTAKE.md);
+  ledger row 37; owner item `20260915-acvc-008`.
+- Portfolio question on ACVC's direction-level investment and lifecycle: request `2026-09-15-acvc-direction-investment-lifecycle-01` authored in `docs/research/portfolio/pro_packets/20260915_acvc_direction_investment_lifecycle/` (P1 fund the matched F(C) vs F(M) pair as at most two fits, DM recommendation, close call with P2 PARK / P3 ACTIVE-idle); its send follows this commit.
+
+## First resume step (current)
+
+Wait for the archived Portfolio answer (packet
+`docs/research/portfolio/pro_packets/20260915_acvc_direction_investment_lifecycle/`; GitHub readback of
+its response path at a fresh `codex/acvc` head, then transport phase 2 with
+`bind_conversation.py --direction-id portfolio --direction-ids-json '["acvc"]'`). Intake it as
+`PRO_FINAL / OWNER_DELEGATED` with a decision record under `docs/research/portfolio/decisions/` and a P1
+`portfolio` item. If C is funded: the direction node selects and fixes the card first
+(`em:acvc:convergence`), then L0, independent review, technical acceptance, fresh admission and launch
+through `hmasd-experiment-operator` only. If PARK: preserve assets, record the disposition, release the
+slot (vacancy replacement is Root's, never this session's). If ACTIVE-idle: record the missing fact and
+revisit condition once and wait. No launch is authorised. FSD-side work is unaffected.
+
 ## B02 complete and intaken: WITHIN_MEI on the second instance (2026-09-15 23:05Z)
 
 - Handle `acvc-transfer-m-b02-28631-c006c0b24` finished exit 0/0 at about 22:51Z (native wall
@@ -98,7 +123,7 @@ Opus review.
   recommends A: record both instances, conclude the transfer family, and state whether any
   defensible next object remains in ACVC); the request `2026-09-15-acvc-m-deployment-transfer-b02-result-review-01` (TASK `82565b7de`, HANDOFF `e6a206eff`) was sent once at 23:03:30Z (first call chatgpt_target_menu_open_unconfirmed before any click; the identical verifyExisting call clicked once; user message 4db1d0b7-7ff6-4201-9d7c-8bb9a2b0c4e2, tab 6bb435c4-3650-4ad4-ad8d-b4d8100ef3fc open for phase 2, prompt sha256 a3a571524789b2fdb3efd14467be29467016d3f867d95f71fe07aea6d73cd08f); the archived answer is awaited.
 
-## First resume step (current)
+## First resume step as written at 23:05Z (superseded 23:25Z by the section above)
 
 If the B02 result-review request to `em:acvc:convergence` has been sent (packet
 `pro_packets/20260915_m_deployment_transfer_b02_result_review/` and the transport registry), wait

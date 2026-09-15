@@ -1,5 +1,28 @@
 # Direction acvc: ACVC
 
+## M-deployment transfer family concluded at two instances; investment/lifecycle question with Portfolio — 2026-09-15 23:25Z (em:acvc:convergence A, PRO_FINAL)
+
+`em:acvc:convergence` reviewed B02 and selected **A**: the unchanged M-deployment-transfer family is
+concluded now, retaining B01's TRANSFERS (+.018338 J, 53/11/0) and B02's WITHIN_MEI (+.002859 J,
+41/22/1) as separate B/EXPLORE observations; no further numerical object is selected
+([response](pro_packets/20260915_m_deployment_transfer_b02_result_review/archive/RESPONSE.md),
+[intake](pro_packets/20260915_m_deployment_transfer_b02_result_review/INTAKE.md), ledger row 37,
+owner item `20260915-acvc-008`). The recurrence test weakened reliance on the first useful-size
+increment, and neither instance establishes an MEI-sized preference of F over own-dwell (B02's paired
+difference is a small positive +.000181873 J inside the band, not a match); this supports stopping
+unchanged spending, not non-transfer or exhaustion. The WITHIN_MEI reading, the per-instance display,
+both tails and the no-op world 46 are confirmed; wording corrections applied to the B02 E0 and intake.
+Weighed and not selected: a third instance (lower value than consolidation now), training M through F,
+opportunity-level ablations. **ACVC is not shown scientifically exhausted**: a fresh matched F(C) versus
+F(M) pair (C; two fits and two final 64-world panels, about 2,129,920 ticks and 24,576 optimizer
+calls, more with contextual panels) remains a defensible, different question about which complete
+proposer-package to develop, and the node returns the direction-level investment/lifecycle question
+to `portfolio:cross_direction` carrying C as the strongest distinct alternative; request `2026-09-15-acvc-direction-investment-lifecycle-01` authored in `docs/research/portfolio/pro_packets/20260915_acvc_direction_investment_lifecycle/` (P1 fund the matched F(C) vs F(M) pair as at most two fits, DM recommendation, close call with P2 PARK / P3 ACTIVE-idle); its send follows this commit. Until
+Portfolio answers: ACTIVE/MEDIUM/recasts2, lowest sequencing, no open object, no producer; the
+two-block C/M claim, B01 and the historical results are unchanged.
+
+
+
 ## B02 result: WITHIN_MEI on the second instance; the two instances disagree — 2026-09-15 23:05Z (G2 consumed; result review with em:acvc:convergence)
 
 The one granted second fit (MASTER 28631 / namespace 38631, handle
@@ -8,8 +31,8 @@ accepted ([E0](ACVC_M_DEPLOYMENT_TRANSFER_B02_RESULT_EVIDENCE_20260915.md),
 [intake](ACVC_M_DEPLOYMENT_TRANSFER_B02_INTAKE_20260915.md), ledger row 36). Unrounded
 T_F,2 = F(M_2) − M_2 = **+.002859 J**, 41/22/1 worlds favorable/adverse/zero, conditional SE .0033:
 the card's **WITHIN_MEI** branch. Supporting T_D,2 = +.002678 J and paired U_2 = +.000182 J, both
-WITHIN_MEI (35/64 and 42/64 favorable): on this instance the F and dwell packages are
-indistinguishable at the point scale. Absolute panels M_2 .4292 / F(M_2) .4321 / own-dwell(M_2)
+WITHIN_MEI (35/64 and 42/64 favorable): a small positive paired F-over-dwell mean difference inside
+the band, not equivalence or indistinguishability (wording corrected 2026-09-15, see the section above). Absolute panels M_2 .4292 / F(M_2) .4321 / own-dwell(M_2)
 .4319 J; counters 6,510 retraces / 5,037 dwells, all distinguishable; world 46 (no opportunity)
 identical across panels. Displayed per instance beside B01 (T_F +.018338 J TRANSFERS, 53/11/0): the
 MEI-sized increment did not recur; the design claims recurrence or discrepancy and discrepancy was

@@ -1,4 +1,4 @@
-# Root handoff — Claude hub overnight run (2026-09-15, refreshed 16:15 PDT)
+# Root handoff — Claude hub overnight run (2026-09-15, refreshed 16:35 PDT)
 
 Owner instruction 04:27 PDT: rest until 09:00 PDT; the hub runs the FSD fits overnight and
 reports at the 09:00 cron check-in. Two directions driven: FSD and ACVC. Owner 05:45 PDT:
@@ -24,7 +24,7 @@ under `docs/Claude_docs/changes/`). Nothing here changes lifecycle, priority or 
   Remote worktree and task records reclaimed (`CLEANUP.json`, `task_records/`).
 - Direction handoff: `docs/research/candidates/flexible_skill_duration/HANDOFF_2026-09-15_baseline_interruption.md`.
 
-## ACVC — B02 complete: WITHIN_MEI on the second instance, the two instances disagree; result review next
+## ACVC — transfer family concluded at two instances (A); investment/lifecycle question with Portfolio
 
 - Block 2 complete and intaken (D2 = F−M −.03919 J, M_ABOVE_MEI; F−C and F−own-dwell UP in
   both blocks; pooled F−M −.0079 J, df = 1 interval [−.406, +.390]). `em:acvc:convergence`
@@ -76,6 +76,13 @@ under `docs/Claude_docs/changes/`). Nothing here changes lifecycle, priority or 
 - Next object is a direction-tier result review to `em:acvc:convergence` (DM recommends A: record
   both instances, conclude the transfer family, state whether any defensible next object remains);
   the request `2026-09-15-acvc-m-deployment-transfer-b02-result-review-01` (TASK `82565b7de`, HANDOFF `e6a206eff`) was sent once at 23:03:30Z (first call chatgpt_target_menu_open_unconfirmed before any click; the identical verifyExisting call clicked once; user message 4db1d0b7-7ff6-4201-9d7c-8bb9a2b0c4e2, tab 6bb435c4-3650-4ad4-ad8d-b4d8100ef3fc open for phase 2, prompt sha256 a3a571524789b2fdb3efd14467be29467016d3f867d95f71fe07aea6d73cd08f); the archived answer is awaited.
+- `em:acvc:convergence` reviewed B02 at 23:10Z (**A**, `PRO_FINAL`; packet
+  `pro_packets/20260915_m_deployment_transfer_b02_result_review/`, response `319efe784`, one Send,
+  COMPLETE, ARCHIVED, tab closed): family concluded at B01 TRANSFERS / B02 WITHIN_MEI as separate
+  observations, no further numerical object, wording corrections applied, ACVC not shown exhausted, C
+  (matched F(C) vs F(M) pair, about 2,129,920 ticks) carried to Portfolio; ledger row 37, owner item
+  `20260915-acvc-008`.
+- Portfolio question on ACVC's direction-level investment and lifecycle: request `2026-09-15-acvc-direction-investment-lifecycle-01` authored in `docs/research/portfolio/pro_packets/20260915_acvc_direction_investment_lifecycle/` (P1 fund the matched F(C) vs F(M) pair as at most two fits, DM recommendation, close call with P2 PARK / P3 ACTIVE-idle); its send follows this commit.
 - Direction handoff: `docs/research/candidates/acvc/HANDOFF_2026-09-15_post_cm_decision.md`.
 
 ## Transport and registry
@@ -91,11 +98,13 @@ under `docs/Claude_docs/changes/`). Nothing here changes lifecycle, priority or 
 
 ## Next session
 
-No live handles. FSD: ACTIVE-idle, nothing to do. ACVC: the B02 result review to
-`em:acvc:convergence` (packet `pro_packets/20260915_m_deployment_transfer_b02_result_review/`) is the
-pending step: wait for the archived answer (GitHub readback, transport phase 2) and intake it as
-`PRO_FINAL`; a new fit would need a Portfolio investment question first; if the node finds no
-defensible next object, the lifecycle question goes to Portfolio. No launch is authorized.
+No live handles. FSD: ACTIVE-idle, nothing to do. ACVC: the Portfolio question on its direction-level
+investment and lifecycle (packet
+`docs/research/portfolio/pro_packets/20260915_acvc_direction_investment_lifecycle/`) is the pending
+step: wait for the archived answer (GitHub readback, transport phase 2), intake it as `PRO_FINAL /
+OWNER_DELEGATED` with a decision record and a P1 `portfolio` item, then apply it (C funded: direction
+node fixes the card before any L0/launch; PARK: preserve, record, release the slot; idle: wait). No
+launch is authorized.
 
 ## Integration state
 
