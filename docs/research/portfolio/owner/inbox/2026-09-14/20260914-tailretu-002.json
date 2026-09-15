@@ -83,6 +83,14 @@
       "state": "applied",
       "summary": "已读取并核对d23d8805b完整24923字节答复，Portfolio正式选择两个原始训练臂及最小实现验证。每臂512train+256evalH256、128Adam；时间为可修订估计，调用和科学曝光固定。当前0科学fit/native/update；先直接实现和独立审查，之后逐臂实际节点admission。ACTIVE/MEDIUM/recasts0不变，无自动重试或后继。",
       "correction": "原packet所述Portfolio尚未形成仅描述发问时状态；现由d23d8805b响应及完整intake替代。当前校准§11.11保留baseline、独立replication和归因区别，不改已发绑定或增加调用。"
+    },
+    {
+      "at": "2026-09-15T03:49:11+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260914_trdl_b01_investment/archive/RESPONSE.md",
+      "record": "docs/research/candidates/tail_return_distributional_learning/TRDL_B01_INTAKE_20260914.md",
+      "state": "applied",
+      "summary": "两原始臂已完整执行并接收：Q32各臂own64of256均值差+0.03456347 J，普通均值差+0.05164806；每臂512train+256evalH256、128Adam，总wall395.64秒。仅一训练实例/臂的完整配方结果，非稳定优势或归因。源码0874、结果9e8ea42b0及24文件原始archive保全；正在完成已拨款的科学review，无新增调用或PARK。"
     }
   ]
 }
