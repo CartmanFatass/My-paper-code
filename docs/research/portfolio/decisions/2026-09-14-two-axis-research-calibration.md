@@ -76,3 +76,19 @@ owner-item and audit links were also checked after creation.
 
 The actual application is traced in [owner item 20260914-root-003](../owner/inbox/2026-09-14/20260914-root-003.json)
 and [the audit row](../audit/2026-09-14.md#L126). No console reply was manufactured.
+
+## Runtime role synchronization
+
+Root published the maintained DM/scientific/Portfolio entrypoint update in `09df541b0`; a second
+independent Astra/high Reviewer found no material issue in the authority, inference, arithmetic or
+frozen-work boundaries. The live DMs then read §11.11, this decision, the revised programme and the
+external addendum and returned one application receipt each:
+
+| Direction | Application state | Evidence |
+| --- | --- | --- |
+| ACVC | Applied prospectively in the completed fixed-rate review intake. The current result, request and budget were unchanged; future work separates same-host baseline competence, independent fitted units and K attribution. | main `0238a4478`, response `52d963fc6` |
+| FOLR | Applied to the live Z−G interpretation boundary. The frozen run was unchanged; the adaptive A−G/A−Z/Z−G sequence is explicitly not independent replication or a stable three-arm ranking. | main `fbd8986c1` |
+| TRDL | Applied in B01 investment intake/card. The accepted two-fit grant remains a scalar-versus-Q32 package comparison, not baseline sufficiency, replication or K attribution. | main `51ab09bd6`, response `a916263c4` |
+
+All three rejected the addendum's unadopted universal approval, power/sample-size and estimator
+rules. This synchronization creates no experiment, lifecycle change, slot change or extra budget.
