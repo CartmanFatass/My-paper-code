@@ -70,5 +70,15 @@
     "verdict_text": "Owner-delegated decision (unattended,2026-09-03 instruction): freeze this M card and directly implement the already selected Portfolio allocation.",
     "source": "docs/research/candidates/acvc/ACVC_CLUSTER_MAPPO_COMPARISON_B01_SCIENCE_CARD_20260914.md"
   },
-  "starred": false
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-15T06:36:21+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/candidates/acvc/ACVC_CLUSTER_MAPPO_COMPARISON_B01_SCIENCE_CARD_20260914.md@2f90398a865a0eaebc78f2af603cb4d4a54487de",
+      "record": "docs/research/candidates/acvc/ACVC_CLUSTER_MAPPO_COMPARISON_B01_INTAKE_20260914.md",
+      "state": "applied",
+      "summary": "Two granted C/M originals complete; F-M +0.0234396496 above card MEI, one-block limits and adverse worlds retained; subsequent direct owner instruction requires exact closeout then operational pause, no new request."
+    }
+  ]
 }
