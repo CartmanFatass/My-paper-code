@@ -1,0 +1,16 @@
+{
+  "response_commit": "ade27ced0e8a0ab63b89b9396bd0a7668f1d9f2b",
+  "selected": "M",
+  "authority": "PRO_FINAL / OWNER_DELEGATED",
+  "audit": "docs/research/portfolio/audit/2026-09-14.md#L153",
+  "owner_item": "20260914-acvc-016",
+  "original_fit_grant": 2,
+  "actual_new_scientific_invocations_at_intake": 0,
+  "scope": "one private C/M block and minimum support",
+  "lifecycle": "CONTINUE",
+  "priority": "MEDIUM",
+  "recasts": 2,
+  "occupied_slot_retained": true,
+  "shared_writer_release": "full conformance/application complete; native event after publication",
+  "next_writer": "TRDL"
+}

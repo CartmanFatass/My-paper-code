@@ -1,0 +1,122 @@
+{
+  "schema_version": 4,
+  "request_id": "2026-09-14-acvc-post-baseline-match-investment-01",
+  "packet_id": "2026-09-14-acvc-post-baseline-match-investment-01--portfolio",
+  "conversation_binding_key": "portfolio:cross_direction",
+  "conversation_id": "6a9c109e-b264-83e8-a78b-f9ea1b767b7b",
+  "operator": "/root/dm_acvc_resume_20260914/tr_lh_acvc",
+  "parent": "/root/dm_acvc_resume_20260914",
+  "frozen_handoff": {
+    "sha": "9484e3214c420a283eca9c5db1b318f04808c3ed",
+    "path": "docs/research/portfolio/pro_packets/20260914_acvc_post_baseline_match_investment/HANDOFF.json",
+    "sha256": "074feb52b77f0a068ec33d2b91a81a970e6d479de99220f3a50a6f2e124f31b7"
+  },
+  "github_delivery": {
+    "branch": "codex/acvc",
+    "base_sha": "01aaf23b54e3fedbc3ee6ec81a1be6ae2288440a",
+    "response_path": "docs/research/portfolio/pro_packets/20260914_acvc_post_baseline_match_investment/archive/RESPONSE.md",
+    "issue_url": "https://github.com/CartmanFatass/My-paper-code/issues/14"
+  },
+  "preflight": {
+    "valid": true,
+    "prompt_sha256": "1d990a9cba5d4736c16fe0bb063e1b5d8e5af75030c6199f8facd2f389a34497",
+    "prompt_bytes": 1918
+  },
+  "operation": {
+    "operationId": "d84d3e5d-477c-4892-8f89-2b6d303221e3",
+    "idempotencyKey": "2026-09-14-acvc-post-baseline-match-investment-01",
+    "requestFingerprint": "024a9a2b7cbc2181cca7fd47d6820d234f50dfad26723bb9f27efeaeee9045b9",
+    "provider": "chatgpt",
+    "productModel": "Latest",
+    "reasoningEffort": "Pro",
+    "sendAttempted": true,
+    "sendAttemptedAt": 1789447749571,
+    "providerUserMessageId": "bc922ee8-24cd-4382-a8de-3bf719b4d231",
+    "providerAssistantMessageId": null,
+    "observedConversationUrl": "https://chatgpt.com/c/6a9c109e-b264-83e8-a78b-f9ea1b767b7b",
+    "observedConversationId": "6a9c109e-b264-83e8-a78b-f9ea1b767b7b",
+    "promptSha256": "1d990a9cba5d4736c16fe0bb063e1b5d8e5af75030c6199f8facd2f389a34497",
+    "responsePath": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\portfolio\\2026-09-14-acvc-post-baseline-match-investment-01\\RESPONSE.md",
+    "archive": null
+  },
+  "send_reconciliation_history": [
+    {
+      "outcome": "VERIFIED_NONACCEPTANCE",
+      "reason": "chatgpt_target_menu_open_unconfirmed before Send",
+      "sendAttempted": false,
+      "repaired_by": "agentify_review_preflight exact Latest/Pro mapping",
+      "preserved_operation_id": "d84d3e5d-477c-4892-8f89-2b6d303221e3"
+    },
+    {
+      "outcome": "ACCEPTED",
+      "reason": "strict operation returned sendAttempted=true with provider user message; no paired assistant/archive for this request",
+      "sendAttempted": true,
+      "providerUserMessageId": "bc922ee8-24cd-4382-a8de-3bf719b4d231",
+      "preserved_operation_id": "d84d3e5d-477c-4892-8f89-2b6d303221e3"
+    }
+  ],
+  "observed_provider_receipt": {
+    "text": "File: RESPONSE.md\n\nCommit: ca27db8d529ffb54eab5f26f014c204bbaeafcf2\n\nComment: Issue #22 delivery",
+    "commit": "ca27db8d529ffb54eab5f26f014c204bbaeafcf2",
+    "response_path": "docs/research/portfolio/pro_packets/20260914_fsd_interruption_batch_investment/archive/RESPONSE.md",
+    "issue": 22,
+    "comment_id": 5674635863
+  },
+  "github_verification": {
+    "branch": "codex/acvc",
+    "branch_head": "362677853d87d5f6a8793e928c81e758bdaeef4c",
+    "fixed_response_path": "docs/research/portfolio/pro_packets/20260914_acvc_post_baseline_match_investment/archive/RESPONSE.md",
+    "fixed_issue": 14,
+    "fixed_task_url": "https://github.com/CartmanFatass/My-paper-code/blob/c0dc9a942a2c0ee4249e247851f31f860bc5b34e/docs/research/portfolio/pro_packets/20260914_acvc_post_baseline_match_investment/TASK.md",
+    "fixed_response_present": false,
+    "matching_comment_present": false,
+    "observed_wrong_scope": true
+  },
+  "archive_conflict": true,
+  "full_response_available": false,
+  "synthesized_response": false,
+  "artifacts": {
+    "PROMPT_BODY.md": {
+      "path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\portfolio\\2026-09-14-acvc-post-baseline-match-investment-01\\PROMPT_BODY.md",
+      "sha256": "1d990a9cba5d4736c16fe0bb063e1b5d8e5af75030c6199f8facd2f389a34497",
+      "size_bytes": 1918
+    },
+    "PACKET_MANIFEST.json": {
+      "path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\portfolio\\2026-09-14-acvc-post-baseline-match-investment-01\\PACKET_MANIFEST.json",
+      "sha256": "1c04a2bc6caece0d505f96c2790fb3d81e3df52dd5b8e2f2ddea2453b05146f0",
+      "size_bytes": 939
+    },
+    "CHAT_RECEIPT.md": {
+      "path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\portfolio\\2026-09-14-acvc-post-baseline-match-investment-01\\CHAT_RECEIPT.md",
+      "sha256": "74a9df3c22b28e44e69a04b24758ac2ea4581248905a775b3cddef463e9ce71c",
+      "size_bytes": 96
+    },
+    "CONFLICT.md": {
+      "path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\portfolio\\2026-09-14-acvc-post-baseline-match-investment-01\\CONFLICT.md",
+      "sha256": "88456264ed1b4f4cdeb50185c79a04e995e37be7db09010b3b8449410ec1080d",
+      "size_bytes": 1359
+    }
+  },
+  "recovery": {
+    "tab_id": "53209b59-a912-45b8-beae-001519fb01e8",
+    "url": "https://chatgpt.com/c/6a9c109e-b264-83e8-a78b-f9ea1b767b7b",
+    "user_message_id": "bc922ee8-24cd-4382-a8de-3bf719b4d231",
+    "user_fixed_task_observed": "https://github.com/CartmanFatass/My-paper-code/blob/c0dc9a942a2c0ee4249e247851f31f860bc5b34e/docs/research/portfolio/pro_packets/20260914_acvc_post_baseline_match_investment/TASK.md",
+    "assistant_message_id": "44790384-e518-4b2c-b44a-5335362e758f",
+    "completion_short_receipt": "File: RESPONSE.md\n\nCommit: ade27ced0e8a0ab63b89b9396bd0a7668f1d9f2b\n\nComment: Issue #14 delivery",
+    "delivery_commit": "ade27ced0e8a0ab63b89b9396bd0a7668f1d9f2b",
+    "delivery_response_path": "docs/research/portfolio/pro_packets/20260914_acvc_post_baseline_match_investment/archive/RESPONSE.md",
+    "issue_comment_id": 5675036399,
+    "full_response_sha256": "450a71d8f5f6f916f0ebabc9a640185af4f92d824e1830d4eb8f31d509369ff7",
+    "full_response_size_bytes": 17805,
+    "git_blob_sha": "1f9eb7daa10a6b145e64250afb8d5968a6ee2bb9",
+    "resolved_prior_conflict": true
+  },
+  "final_state": {
+    "state": "ARCHIVED",
+    "native_state": "RECEIPT",
+    "receipt_status": "SENT",
+    "native_delivery": "native_final",
+    "tab_lifecycle": "CLOSED"
+  }
+}
