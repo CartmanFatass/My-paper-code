@@ -1,0 +1,39 @@
+{
+  "returncode": 0,
+  "stdout": "{\"C\": {\"assessed_at\": \"2026-09-15T05:57:40.726418Z\", \"available_physical_bytes\": 13068771328, \"captured_at\": \"2026-09-15T05:57:40.725734Z\", \"cgroup_headroom_bytes\": null, \"cgroup_memory_current_bytes\": null, \"cgroup_memory_max_bytes\": null, \"effective_available_bytes\": 13068771328, \"effective_floor_pass\": true, \"failure_reasons\": [], \"measurement_source\": \"/proc/meminfo\", \"minimum_available_bytes\": 4294967296, \"passed\": true, \"physical_floor_pass\": true, \"schema_version\": 1}, \"M\": {\"assessed_at\": \"2026-09-15T05:57:41.075209Z\", \"available_physical_bytes\": 12828741632, \"captured_at\": \"2026-09-15T05:57:41.074914Z\", \"cgroup_headroom_bytes\": null, \"cgroup_memory_current_bytes\": null, \"cgroup_memory_max_bytes\": null, \"effective_available_bytes\": 12828741632, \"effective_floor_pass\": true, \"failure_reasons\": [], \"measurement_source\": \"/proc/meminfo\", \"minimum_available_bytes\": 4294967296, \"passed\": true, \"physical_floor_pass\": true, \"schema_version\": 1}}\n",
+  "stderr": "",
+  "original_admissions": {
+    "C": {
+      "assessed_at": "2026-09-15T05:57:40.726418Z",
+      "available_physical_bytes": 13068771328,
+      "captured_at": "2026-09-15T05:57:40.725734Z",
+      "cgroup_headroom_bytes": null,
+      "cgroup_memory_current_bytes": null,
+      "cgroup_memory_max_bytes": null,
+      "effective_available_bytes": 13068771328,
+      "effective_floor_pass": true,
+      "failure_reasons": [],
+      "measurement_source": "/proc/meminfo",
+      "minimum_available_bytes": 4294967296,
+      "passed": true,
+      "physical_floor_pass": true,
+      "schema_version": 1
+    },
+    "M": {
+      "assessed_at": "2026-09-15T05:57:41.075209Z",
+      "available_physical_bytes": 12828741632,
+      "captured_at": "2026-09-15T05:57:41.074914Z",
+      "cgroup_headroom_bytes": null,
+      "cgroup_memory_current_bytes": null,
+      "cgroup_memory_max_bytes": null,
+      "effective_available_bytes": 12828741632,
+      "effective_floor_pass": true,
+      "failure_reasons": [],
+      "measurement_source": "/proc/meminfo",
+      "minimum_available_bytes": 4294967296,
+      "passed": true,
+      "physical_floor_pass": true,
+      "schema_version": 1
+    }
+  }
+}

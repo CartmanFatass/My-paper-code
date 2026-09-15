@@ -1,0 +1,16 @@
+{
+  "initial": {
+    "operation": "Exact published source and pinned dependency availability; no scientific launch",
+    "source_sha": "e4d3f324ef2b233d0e97b347a5b94c9061ac6f52",
+    "returncode": 128,
+    "stdout": "",
+    "stderr": "Terminated\n(eval):1: can't change option: zle\n(anon):setopt:7: can't change option: monitor\n\n[\u001b[31mERROR\u001b[39m]: gitstatus failed to initialize.\n\n\n  Add the following parameter to ~/.zshrc for extra diagnostics on error:\n\n    GITSTATUS_LOG_LEVEL=DEBUG\n\n  Restart Zsh to retry gitstatus initialization:\n\n    \u001b[32mexec zsh\u001b[39m\nFrom https://github.com/CartmanFatass/My-paper-code\n * branch                e4d3f324ef2b233d0e97b347a5b94c9061ac6f52 -> FETCH_HEAD\nPreparing worktree (detached HEAD e4d3f324e)\nfatal: unable to access 'https://github.com/CartmanFatass/My-paper-code.git/': Recv failure: Connection reset by peer\nfatal: could not fetch c253b48251265a22586b49dac24228a77e266a08 from promisor remote\n"
+  },
+  "repair": "Stopped only owned lazy-fetch preparation PIDs3713643/3713644/3713645/3713646 after exact command/tree verification. Explicit fetch succeeded, then plain-shell restore failed on a promisor blob. Reused same unlaunched detached checkout; execute all Git restore in configured zsh network environment.",
+  "accepted_staging": {
+    "returncode": 0,
+    "stdout": "{\"head\": \"e4d3f324ef2b233d0e97b347a5b94c9061ac6f52\", \"source_diff_exit\": 0, \"bash_syntax_exit\": 0, \"new_adapter_imported\": true, \"upstream_import_path\": \"/home/wu/hmasd-inputs/acvc-mappo-b01-28331/on-policy/onpolicy/__init__.py\", \"native_invocations\": 0, \"model_constructions\": 0, \"intraop\": 1, \"interop\": 1}\n",
+    "stderr": "(eval):1: can't change option: zle\n(anon):setopt:7: can't change option: monitor\n\n[\u001b[31mERROR\u001b[39m]: gitstatus failed to initialize.\n\n\n  Add the following parameter to ~/.zshrc for extra diagnostics on error:\n\n    GITSTATUS_LOG_LEVEL=DEBUG\n\n  Restart Zsh to retry gitstatus initialization:\n\n    \u001b[32mexec zsh\u001b[39m\n"
+  },
+  "native_invocations": 0
+}
