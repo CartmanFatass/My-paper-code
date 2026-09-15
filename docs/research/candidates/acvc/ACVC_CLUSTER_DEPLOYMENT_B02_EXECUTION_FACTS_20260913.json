@@ -171,19 +171,7 @@
     "complete_cap_s": 1200,
     "complete_support_certified": false,
     "known_exact_seconds": 44.858115000000005,
-    "observed_invoked_wall_lower_bound_s": 267.858115,
-    "post_intake_addendum": {
-      "original_plan_preserved": true,
-      "prospective_administrative_allowance_s": 2400,
-      "allowance_boundary_utc": "2026-09-14T00:16:00Z",
-      "allowance_scope": "One same-request connection repair, repaired strict invocation on verified nonacceptance, observation/archive and DM findings response; earlier stop at concrete unresolved shared-runtime dependency.",
-      "recorded_operation_elapsed_s": 60.433,
-      "reviewer_synthetic_test_wall_s": 0.0889,
-      "administrative_record_publication_wall_s": 4.6815595,
-      "post_rejection_read_only_check_wall_s": 0.5410879,
-      "cumulative_observed_support_lower_bound_s": 333.6026624,
-      "coverage": "Lower bound only; prior unknowns, readiness, intervening diagnosis/authoring/publication and rejected-call handling remain unaggregated/UNKNOWN. No original-plan compliance, study-elapsed or CPU-work claim. Concrete dependency stop reached before any runtime restart or Send."
-    }
+    "observed_invoked_wall_lower_bound_s": 267.858115
   },
   "science_review": {
     "role": "Convergence independent scientific Reviewer",
@@ -193,40 +181,11 @@
     "handoff_sha": "24d45f49d0d633d19a1bfa1de172839253a151bb",
     "native_transport": "/root/acvc_transport",
     "decision_authority": "dm_owned_scientific_review",
-    "operation_id": "38dbacca-f772-43f5-ad16-31dd94ff302d",
-    "send_attempted": false,
-    "provider_pairing": null,
-    "operation_error": "TIMEOUT_WAITING_FOR_PROMPT",
-    "active_native_producer": true,
-    "repair_status": "Exact process recovery command rejected before execution by tool policy; not retried. Read-only check verified both processes and immutable operation/binding bytes unchanged.",
-    "dependency": "Shared restart completed by Root under explicit owner authority; same native Transport now owns dedicated-tab recovery and unchanged strict operation.",
-    "status": "Original review recovery dispatched to original request-batch Transport after fresh persisted sendAttempted=false check. No provider acceptance yet asserted; full scientific review not archived. No new request or scientific invocation."
+    "status": "Native Transport dispatched; observed shared request READY_UNSENT/DIRECTION_VERIFIED, provider acceptance not yet asserted."
   },
-  "execution_control": {
-    "state": "OWNER_RESUMED_REVIEW_RECOVERY_ACTIVE",
-    "paused_utc": "2026-09-14T00:30:49Z",
-    "resumption_observed_utc": "2026-09-14T00:43:00Z",
-    "in_flight_handles": [],
-    "provider_request_in_flight": false,
-    "active_observer": null,
-    "retained_native_transport": "/root/acvc_transport",
-    "scientific_lifecycle": "ACTIVE unchanged; this execution pause is not PARK/CLOSE",
-    "shared_runtime": {
-      "restart_actor": "Root under separate explicit owner restart instruction",
-      "agentify_pid": 14460,
-      "api_port": 49382,
-      "server_id": "1f76bf62-102c-4552-ad6a-0e33419f94bb",
-      "started_at": "2026-09-14T00:48:37.850Z",
-      "chrome_pid": 18144,
-      "cdp_port": 9222,
-      "profile_preserved": true,
-      "dm_repeated_rejected_process_action": false
-    },
-    "resume_condition": "Runtime prerequisite resolved by owner-authorized Root action. Original request-batch Transport is active on same unchanged operation; full scientific review and DM findings response follow. No duplicate Send or new scientific question."
-  },
-  "status": "OWNER_RESUMED; B02 remains accepted/retained. Shared runtime recovered by Root under explicit owner authority; original native Transport now performs same-request review recovery. Fresh persistent operation check was unsent, no provider generation yet asserted. Full scientific review, findings response and lifecycle judgment remain unfinished. ACTIVE lifecycle unchanged; no third fit selected.",
+  "status": "One valid complete B/EXPLORE accepted with both primaries UP; original files/checkpoint preserved and scoped remote cleanup complete. Actual native Convergence review producer remains; DM findings response and lifecycle decision pending, no further empirical object selected.",
   "stop": "No scientific retry/replacement, extra panel, checkpoint selection or automatic successor.",
-  "updated_utc": "2026-09-14 00:50:24 UTC",
+  "updated_utc": "2026-09-13 23:58:27 UTC",
   "monitor": {
     "native": "/root/acvc_monitor",
     "adopted": true,
