@@ -102,7 +102,7 @@ accepted effects and does not change scientific meaning.
 | Complete owner assignments and integration | This document |
 | Code-task L0–L3 detail, delegation and high-risk review | ENGINEERING_SCOPE_SPEC.md §7 |
 | Ready-work ordering and waits | hmasd-loop-dispatch Skill |
-| Portfolio principles and decision evidence | MARL_EMPIRICAL_EVIDENCE_SPEC.md §§11.3,11.7–11.10 |
+| Portfolio principles and decision evidence | MARL_EMPIRICAL_EVIDENCE_SPEC.md §§11.3,11.7–11.11 and TWO_AXIS_RESEARCH_PROGRAMME_20260914.md |
 | Portfolio material preparation, Pro intake and application handoff | hmasd-portfolio-task Skill |
 | Native/app addressing and return routes | SIBLING_COMMUNICATION.md |
 | Experiment observation, adoption and terminal handover | EXPERIMENT_MONITOR.md |

@@ -54,6 +54,15 @@ sections, with section 11 controlling; do not preload the whole specification or
 citation tree. Expand only for a concrete unresolved scientific or engineering question. Check
 actual checkout/Git state and preserve unrelated work. Follow AGENTS focused-reading guidance.
 
+For new design or interpretation, apply evidence-spec §11.11 and
+`docs/research/portfolio/TWO_AXIS_RESEARCH_PROGRAMME_20260914.md`: distinguish MEI, training-run
+variation and estimator uncertainty; match baseline information/task/training rights; count only
+independent training instances; and require an identifying control before attributing a package
+gain to one component. This calibration does not reopen frozen objects, change accepted budgets,
+retroactively rescore results, or create a universal pilot, power, sample-size, estimator or launch
+gate. New baseline, K-axis and N-axis material remains design/decision input until the proper
+existing authority allocates a concrete object.
+
 For mechanism design/recast, comparator selection, unexpected-result interpretation or related
 work, use the question-driven local-library route in
 `.agents/skills/hmasd-scientific-tools/references/local-literature.md`. Use verified real-corpus
@@ -125,8 +134,10 @@ launch acceptance, Monitor handover, terminal collection and technical acceptanc
 Operator executes a complete named batch; you retain acceptance. Create/reuse your own native
 Luna/low monitor under EXPERIMENT_MONITOR.md and supply its canonical address to Operator.
 Assign only accepted handles, confirm MONITOR_ADOPTED directly, then stop routine process polling.
-Do independent work first, otherwise use native wait_agent with the configured 1500000 ms default.
-On unchanged timeout only continue waiting; do not reread cards, replan or broadcast status.
+Do independent work first, otherwise use native v2 wait_agent with the configured 1500000 ms
+interruptible no-event timeout; child messages, completion notices or new user input may return it
+early. On unchanged timeout only continue waiting; do not reread cards, replan, call list_agents,
+repeat status queries, send keepalives or broadcast unchanged progress.
 Receive terminal facts directly, collect and interpret, repair and continue within authorization.
 Reuse the same monitor across handles and resume it with followup_task after an empty-set final.
 

@@ -15,7 +15,11 @@ responsibility split. Existing Direction Pro nodes remain separate.
 
 Start with the assigned question and current affected Portfolio rows/intakes. Read only relevant
 sections of `docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md`: §8.1 maintains Portfolio principles,
-§7 lifecycle meanings and §§11.7–11.10 investment/evidence calibration. AGENTS §§2,4.7–4.8 maintain
+§7 lifecycle meanings and §§11.7–11.11 investment/evidence calibration. For a new design or
+investment question, §11.11 and `docs/research/portfolio/TWO_AXIS_RESEARCH_PROGRAMME_20260914.md`
+prioritise matched competent baselines, independent training replication and identifying
+ablations. They do not reopen a frozen object, grant a launch/budget, impose a universal
+pilot/power/sample-size/estimator gate or retroactively rescore existing evidence. AGENTS §§2,4.7–4.8 maintain
 final authority, specification changes and asynchronous owner overrides. Use scientific-tools for
 scientific reading or analysis, not for mechanical routing.
 

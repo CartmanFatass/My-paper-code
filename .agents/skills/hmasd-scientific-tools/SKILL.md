@@ -9,6 +9,14 @@ Owner approved adoption batches 1 and 2 on 2026-09-05. Use tools to retrieve,
 calculate and measure facts instead of repeatedly deriving them in prose. Select
 only the mode needed now; this is not a launch checklist or new review layer.
 
+For new scientific design and interpretation, apply evidence-spec §11.11 and the
+[owner-approved two-axis programme](../../../docs/research/portfolio/TWO_AXIS_RESEARCH_PROGRAMME_20260914.md).
+Keep MEI, training-instance variation and estimator uncertainty distinct; preserve the
+declared independent unit and pairing. Baselines must match the claimed information, task and
+training rights, and package effects remain package effects without an identifying control.
+These priorities do not reopen frozen objects, add experimental budget, retroactively rescore
+accepted evidence or create a universal power, sample-size, interval-estimator or launch gate.
+
 - **Scientific reading:** for DM/Claude hub mechanism/card/comparator/estimand choices,
   intake or scientific Pro questions, Portfolio material preparation and Pro-response conformance by its author (DM, or Root for vacancy replacement), and a
   critic's reviewed claim, use [scientific-reading.md](references/scientific-reading.md).
