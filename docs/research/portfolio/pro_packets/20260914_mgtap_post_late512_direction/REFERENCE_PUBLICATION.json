@@ -1,0 +1,151 @@
+{
+  "request_id": "2026-09-14-mgtap-post-late512-portfolio-direction-01",
+  "observed_utc": "2026-09-15T00:28:46.519527+00:00",
+  "published_refs": {
+    "refs/heads/codex/mgtap": "9b0912391ba02fa25c81dfb06d9f25fd9a0d1cac",
+    "refs/heads/main": "f743af2813c0d372c8ae5f83fe6f0a09ace78690"
+  },
+  "reference_files": [
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_POST_LATE512_PORTFOLIO_PROPOSAL_20260914.md",
+      "commit_sha": "9b0912391ba02fa25c81dfb06d9f25fd9a0d1cac",
+      "bytes": 12064,
+      "published_ancestor_of": [
+        "refs/heads/codex/mgtap"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_LATE_EXPOSURE_B01_INTAKE_20260914.md",
+      "commit_sha": "b4ced6c26e46ab240ae2dc84bca0bc0a72c595c8",
+      "bytes": 7620,
+      "published_ancestor_of": [
+        "refs/heads/codex/mgtap"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_LATE_EXPOSURE_B01_RESULT_20260914.md",
+      "commit_sha": "b4ced6c26e46ab240ae2dc84bca0bc0a72c595c8",
+      "bytes": 5070,
+      "published_ancestor_of": [
+        "refs/heads/codex/mgtap"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/late_exposure_b01_8254/RUN_SUMMARY.json",
+      "commit_sha": "b4ced6c26e46ab240ae2dc84bca0bc0a72c595c8",
+      "bytes": 29471,
+      "published_ancestor_of": [
+        "refs/heads/codex/mgtap"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/late_exposure_b01_8254/ANALYSIS.json",
+      "commit_sha": "b4ced6c26e46ab240ae2dc84bca0bc0a72c595c8",
+      "bytes": 13197,
+      "published_ancestor_of": [
+        "refs/heads/codex/mgtap"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260914_late512_results_review/archive/RESPONSE.md",
+      "commit_sha": "de3b1fbccbb294c205dd4953daa72a823fa0fcda",
+      "bytes": 38923,
+      "published_ancestor_of": [
+        "refs/heads/codex/mgtap"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260914_late512_results_review/INTAKE.md",
+      "commit_sha": "b4ced6c26e46ab240ae2dc84bca0bc0a72c595c8",
+      "bytes": 9513,
+      "published_ancestor_of": [
+        "refs/heads/codex/mgtap"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/DIRECTION.md",
+      "commit_sha": "b4ced6c26e46ab240ae2dc84bca0bc0a72c595c8",
+      "bytes": 76376,
+      "published_ancestor_of": [
+        "refs/heads/codex/mgtap"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260914_lr_selection_portfolio_direction/archive/RESPONSE.md",
+      "commit_sha": "d03ee1f04f7c0ea9dc2e7ae5ae817b75511a5f80",
+      "bytes": 18522,
+      "published_ancestor_of": [
+        "refs/heads/codex/mgtap"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260914_lr_selection_portfolio_direction/INTAKE.md",
+      "commit_sha": "b4ced6c26e46ab240ae2dc84bca0bc0a72c595c8",
+      "bytes": 10084,
+      "published_ancestor_of": [
+        "refs/heads/codex/mgtap"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_LATE_EXPOSURE_B01_SCIENCE_CARD_20260914.md",
+      "commit_sha": "90f835e10357fbbf465cc5d500a93f1e2d4ab226",
+      "bytes": 11016,
+      "published_ancestor_of": [
+        "refs/heads/codex/mgtap"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/late_exposure_b01_8254/COLLECTION.json",
+      "commit_sha": "b4ced6c26e46ab240ae2dc84bca0bc0a72c595c8",
+      "bytes": 4148,
+      "published_ancestor_of": [
+        "refs/heads/codex/mgtap"
+      ]
+    },
+    {
+      "path": "docs/research/portfolio/PORTFOLIO.md",
+      "commit_sha": "f08755d199fe38ae6d3fc1d02452f011e7012684",
+      "bytes": 4113,
+      "published_ancestor_of": [
+        "refs/heads/main"
+      ]
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "commit_sha": "f08755d199fe38ae6d3fc1d02452f011e7012684",
+      "bytes": 50411,
+      "published_ancestor_of": [
+        "refs/heads/main"
+      ]
+    },
+    {
+      "path": "AGENTS.md",
+      "commit_sha": "f08755d199fe38ae6d3fc1d02452f011e7012684",
+      "bytes": 51417,
+      "published_ancestor_of": [
+        "refs/heads/main"
+      ]
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "commit_sha": "f08755d199fe38ae6d3fc1d02452f011e7012684",
+      "bytes": 7819,
+      "published_ancestor_of": [
+        "refs/heads/main"
+      ]
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+      "commit_sha": "f08755d199fe38ae6d3fc1d02452f011e7012684",
+      "bytes": 4252,
+      "published_ancestor_of": [
+        "refs/heads/main"
+      ]
+    }
+  ],
+  "control_root": "C:/Projects/HMASD",
+  "limit": "Publication proof, not actual Pro access; science and global sources retain separate fixed versions.",
+  "task_manifest_matches_request": true,
+  "native_routing_checked": true,
+  "preparation_repairs": "Current main Portfolio display initially lacked literal first-column registration IDs; renderer rejected before output/Send. Root restored IDs at2e7325667; same request rendered successfully against current main. Prior ARCHIVED shared-node mirror reconciled by Transport under registry_lock with authoritative binding, no Send or changed historical evidence."
+}
