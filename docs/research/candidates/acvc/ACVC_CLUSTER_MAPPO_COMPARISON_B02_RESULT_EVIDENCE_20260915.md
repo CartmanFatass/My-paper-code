@@ -112,12 +112,14 @@ Remote reclamation of the worktree and staging follows the commit (CLEANUP.json)
 
 ## Bounded reading and prediction
 
-Strongest support for the block-1 package advantage is gone: block 2 puts M above F by
-.039 J with 49/64 adverse worlds, and C alone trails M by .087 J. Strongest surviving support
-for the optional package: F exceeds its own C source and its own-dwell control in both blocks
-(pooled +.041 and +.022 J) with small block dispersion. The two blocks together say the F
-transformation adds to its C source while the C/M recipe difference dominates and varies in
-sign between training instances. This is evidence for the attained finite-learning packages,
+Reliance on the block-1 package advantage is weakened, not erased: the first positive
+observation remains, and block 2 puts M above F by .039 J with 49/64 adverse worlds while C
+alone trails M by .087 J. Strongest surviving support for the optional package: F exceeds its
+own C source and its own-dwell control in both blocks (pooled +.041 and +.022 J) with small
+block dispersion. Via F−M = (F−C) + (C−M): C−M is negative in both blocks and it is F−M that
+reverses sign, because the positive internal correction does not overcome C's larger deficit
+to M in block 2 (correction recorded by `em:acvc:convergence`, 17:08Z; the earlier wording
+"the C/M recipe difference varies in sign" was wrong). This is evidence for the attained finite-learning packages,
 not stable superiority of either, tuned same-information headroom, equivalence, or K/N/
 component attribution. Matching tuned headroom remains absent.
 

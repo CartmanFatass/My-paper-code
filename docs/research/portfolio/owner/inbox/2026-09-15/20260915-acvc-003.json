@@ -1,0 +1,86 @@
+{
+  "id": "20260915-acvc-003",
+  "created": "2026-09-15T10:11:48-07:00",
+  "direction": "acvc",
+  "tier": "direction",
+  "kind": "decision",
+  "title": "ACVC C/M 比较族在两块有界证据处收束（方向节点选 A）",
+  "context": "块 2 复现反转了主读数（F−M −0.0392 J），hub 将方向层问题送 em:acvc:convergence；节点于 2026-09-15 17:08Z 选 A。",
+  "options": [
+    {
+      "key": "A",
+      "label": "在两块有界主张处收束，不选新对象，ACTIVE-idle",
+      "consequence": "零新拟合；保留内部有用性主张；重开条件明确"
+    },
+    {
+      "key": "B",
+      "label": "先做 M 基线校准扫描（3 次拟合）",
+      "consequence": "约 3×1,600 s；无法给出经认证的参考"
+    },
+    {
+      "key": "C",
+      "label": "第三个相同块（2 次拟合）",
+      "consequence": "约 3,400–4,900 s；最小三块 SE ≈ .018 J"
+    }
+  ],
+  "recommended": "A",
+  "auto_applied": "A",
+  "dm_reason": "两块已给出对第一块优势的真实反例；内部改进可复现；再做相同块或 M 扫描的边际价值低于收束。",
+  "evidence": [
+    "docs/research/candidates/acvc/pro_packets/20260915_post_block2_convergence/archive/RESPONSE.md",
+    "docs/research/candidates/acvc/ACVC_CLUSTER_MAPPO_COMPARISON_B02_INTAKE_20260915.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-15.md#L26",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "第二块 C/M 复现反转了主读数之后，方向节点应如何处置该比较族：A 在两块有界证据处收束、不再选新数值对象；B 先做 M 基线校准扫描；C 第三个相同块；或未列出的对象？",
+    "changes_if_approved": [
+      {
+        "target": "ACVC C/M 比较族",
+        "from": "两块完成，F−M 符号相反（+0.0234 / −0.0392），F−C、F−自停留两块均为正",
+        "to": "在两块有界主张处收束：保留“部署变换对其自身 C 源与自停留的内部有用性两块复现”（B/EXPLORE），竞争优势记为未解决且符号不稳；不选新对象；ACVC ACTIVE-idle"
+      },
+      {
+        "target": "报告措辞修正",
+        "from": "E0 写“C/M 配方差异符号变化”、“训练实例变异主导”",
+        "to": "C−M 两块均为负，反转的是 F−M；.044 J 的块间离散无法分解为训练与面板成分，训练变异是可信解释而非已测定的主导；块 1 的正观测仍在，只是对其复现的依赖减弱"
+      }
+    ],
+    "if_refused": "所有者可直接指示 B（M 学习率扫描，3 次拟合）、C（第三块，2 次拟合）或未列出的 M 部署测试（1 次 M 拟合 + M/F(M)/自停留(M) 面板）；否则本族保持收束，重开条件为出现使比较选择再次具有行动后果的新证据或具体新用途。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/acvc/ACVC_CLUSTER_MAPPO_COMPARISON_B02_RESULT_EVIDENCE_20260915.md",
+        "quote": "D2 = −.03919008143501977 J, M_ABOVE_MEI; F−C +.0475, F−own-dwell +.0317 UP.",
+        "why": "购买的复现给出了对第一块 F 优于 M 的真实反例；内部有用性两块复现。"
+      },
+      {
+        "path": "docs/research/candidates/acvc/pro_packets/20260915_post_block2_convergence/archive/RESPONSE.md",
+        "quote": "Select A: conclude the unchanged 4,096-episode C/M comparison family at its bounded two-block evidence, with no further numerical object selected now.",
+        "why": "方向节点的完整归档决定。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/acvc/pro_packets/20260915_post_block2_convergence/archive/RESPONSE.md",
+        "quote": "one positive and one negative block cannot tell how common useful F−M gains are, and another independently generated block could change practical advice.",
+        "why": "收束不等于科学穷尽；残余不确定性被明确接受。"
+      }
+    ],
+    "uncertainty": [
+      "两块无法分离训练变异与有限面板误差",
+      "未列出的候选（M 部署测试）可能比再做相同块更有价值，但尚未选定",
+      "codex/acvc 分支上的证据规范副本落后于 main（缺 §11.11），已同步；Pro 说明该错配不影响结论"
+    ],
+    "cost": {
+      "compute": "本决定不新增任何拟合；已完成两块共 8,114.79 s 原生墙钟",
+      "owner_time": "阅读收束主张与重开条件，约 5 分钟",
+      "reversibility": "reversible",
+      "waits_on_this": "无；ACVC 进入 ACTIVE-idle，直到出现新事实或所有者指示"
+    },
+    "verdict_text": "方向节点选 A：C/M 比较族在两块有界证据处收束，保留“内部部署变换有用性两块复现”的探索性主张，竞争优势未解决；不选新对象，ACVC 保持 ACTIVE/MEDIUM/recasts2 与占用槽位；hub 已按此更新 DIRECTION.md 并修正 E0 措辞。",
+    "source": "docs/research/candidates/acvc/pro_packets/20260915_post_block2_convergence/archive/RESPONSE.md"
+  },
+  "starred": true
+}

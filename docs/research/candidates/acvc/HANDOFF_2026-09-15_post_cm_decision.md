@@ -54,18 +54,28 @@ commits are cherry-picked into `main` by the hub).
   and note that `CARD` points at the intake document.
 - `DIRECTION.md` addendum for the selected object at the next clean boundary.
 
-## Block 2 complete (2026-09-15 16:55Z)
+## Block 2 complete and family concluded (2026-09-15 17:10Z)
 
-Both granted fits finished exit 0, were collected, reduced through the b02 wrapper and
-intaken: D2 = F−M −.03919 J (M_ABOVE_MEI), reversing block 1; F−C and F−own-dwell UP in
-both blocks; two-block pooled F−M −.0079 J with a df = 1 interval [−.406, +.390]
-([E0](ACVC_CLUSTER_MAPPO_COMPARISON_B02_RESULT_EVIDENCE_20260915.md),
-[intake](ACVC_CLUSTER_MAPPO_COMPARISON_B02_INTAKE_20260915.md)). The grant is consumed.
+Both granted fits finished, were collected, reduced and intaken (D2 = F−M −.03919 J,
+M_ABOVE_MEI; F−C and F−own-dwell UP in both blocks; pooled F−M −.0079 J, df = 1 interval
+[−.406, +.390]). `em:acvc:convergence` answered the post-block-2 question at 17:08Z with **A**
+(`PRO_FINAL`, [intake](pro_packets/20260915_post_block2_convergence/INTAKE.md)): the C/M
+family is concluded at its bounded two-block claim (internal deployment-package usefulness
+recurred; competitive advantage unresolved). Reporting corrections applied to the E0 and
+intake. Remote worktree and staging reclaimed (CLEANUP.json); checkpoints retained locally
+(PRESERVATION.json). The evidence-spec copy on `codex/acvc` was synced to main.
+
+## State: ACTIVE-idle
+
+No pending producer, request, transport effect or authorized work. Reopening condition (Pro):
+new compatible evidence or a concrete changed use that makes the comparative choice
+consequential, for example a decision to develop the fixed transformation on an M-trained
+proposer (Pro's best unlisted candidate: one fresh M fit with M / F(M) / own-dwell(M) panels).
+Lifecycle ACTIVE/MEDIUM/recasts2 and the occupied slot are unchanged; only a Portfolio or owner
+disposition changes them.
 
 ## First resume step
 
-Send the direction-tier question to `em:acvc:convergence` (packet under
-`docs/research/candidates/acvc/pro_packets/20260915_post_block2_convergence/`): close the C/M
-family with the internal-usefulness reading (A), a bounded baseline-calibration design (B), or
-a third unchanged block (C); DM recommends B or A. Then verify the remote cleanup
-(CLEANUP.json) and hold ACVC ACTIVE-idle until the answer. No fit is authorized.
+Read this handoff, `DIRECTION.md` (top section) and the Convergence intake. If the owner or
+new evidence supplies a reopening fact, author the corresponding direction question or card;
+otherwise remain ACTIVE-idle. Nothing to launch.

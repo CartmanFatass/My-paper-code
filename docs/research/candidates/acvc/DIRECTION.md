@@ -1,26 +1,36 @@
 # Direction acvc: ACVC
 
-## Block-2 replication complete — 2026-09-15 (Claude hub as DM)
+## C/M comparison family concluded at its two-block claim — 2026-09-15 (em:acvc:convergence, PRO_FINAL)
 
 The granted second block (master 28431, source `2dc9631c8`) is complete and accepted
 ([E0](ACVC_CLUSTER_MAPPO_COMPARISON_B02_RESULT_EVIDENCE_20260915.md),
 [intake](ACVC_CLUSTER_MAPPO_COMPARISON_B02_INTAKE_20260915.md)). Primary D2 = F−M
-**−.03919008143501977 J**, M_ABOVE_MEI at the fixed .01 rule, reversing block 1's
-+.02343964960218458 J. C−M −.08668633501269826 DOWN; F−C +.0474962535776785 and
-F−own-dwell +.031713764045473436 UP. Absolute C/F/own-dwell/M .3075/.3550/.3233/.3942 J.
-Fixed equal-block accumulation: pooled F−M −.007875 J with a df = 1 working-model interval
-[−.406, +.390]; F−C pooled +.041 J [−.040, +.122]; F−own-dwell +.022 J [−.102, +.146].
+**−.03919008143501977 J**, M_ABOVE_MEI at the fixed .01 rule, opposite to block 1's
++.02343964960218458 J. C−M −.08668633501269826 DOWN (negative in both blocks); F−C
++.0474962535776785 and F−own-dwell +.031713764045473436 UP (positive in both blocks).
+Absolute C/F/own-dwell/M .3075/.3550/.3233/.3942 J. Fixed equal-block accumulation: pooled
+F−M −.007875 J with a df = 1 working-model interval [−.406, +.390]; F−C +.041 J
+[−.040, +.122]; F−own-dwell +.022 J [−.102, +.146].
 
-Current position: the block-1 package advantage over the untuned private-information MAPPO
-recipe did not recur; what recurs is the within-package ordering F > C and F > own-dwell.
-Between-block dispersion of F−M (.044 J) is four times the within-block conditional SE, so
-training-instance variability dominates the comparison and two blocks cannot estimate it. No
-stable superiority, equivalence, tuned headroom or attribution follows in either direction;
-M remains an untuned comparator. The grant is consumed with zero replacements; the next
-choice is direction-tier (close the family with the internal-usefulness reading, or a bounded
-baseline-calibration design; a third unchanged block is not recommended) and goes to
-`em:acvc:convergence`. Lifecycle ACTIVE/MEDIUM/recasts2 and the lowest sequencing priority
-are unchanged.
+**Direction decision (`em:acvc:convergence`, 17:08Z, option A,
+[intake](pro_packets/20260915_post_block2_convergence/INTAKE.md)):** the unchanged
+4,096-episode C/M comparison family is concluded at its bounded two-block evidence; no further
+numerical object is selected. Retained claim, labelled *B/EXPLORE, two-block recurrence of
+positive mean internal deployment-package increments*: on these two fresh blocks F−C and
+F−own-dwell each exceeded .01 J in both blocks, while F−M had opposite above-margin
+directions, leaving comparative advantage over the private-information MAPPO recipe
+unresolved and sign-unstable. Both original primary readings stand with their counterexamples
+(F−M minima −.2115 / −.1963 J). The block dispersion (.044 J) is a fragile two-sample
+quantity that cannot be split into training and finite-panel components; training variation
+is a credible explanation, not a measured dominance. Not selected: an M recipe sweep (cannot
+certify a reference), a third block (smallest possible three-block SE ≈ .018 J, low marginal
+value after the reversal). Best unlisted candidate for a future question: one fresh M fit with
+M / F(M) / own-dwell(M) panels (transfer of the transformation to the conventional proposer).
+Reopening condition: new compatible evidence or a concrete changed use that makes the
+comparative choice consequential; no precursor, threshold or seed quota. Lifecycle
+**ACTIVE/MEDIUM/recasts2**, lowest sequencing priority and the occupied slot are unchanged;
+the direction is ACTIVE-idle with no pending producer. Older consumed C objects keep their own
+qualified claims.
 
 ## Selected next object and grant — 2026-09-15 (Claude hub as DM)
 

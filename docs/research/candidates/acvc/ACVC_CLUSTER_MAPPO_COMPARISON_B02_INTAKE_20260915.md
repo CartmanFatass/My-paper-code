@@ -29,10 +29,12 @@ across both blocks is the within-package ordering F > C and F > own-dwell; what 
 is F versus the untuned recurrent M recipe. This is the response's "strong F−C alongside weak
 F−M" branch: internal usefulness of the deployment transformation without a competitive
 advantage over the private-information MAPPO baseline. The between-block dispersion of F−M
-(block SD .044 J) is four times the within-block conditional SE (.010 J), so the 64 nested
-worlds never measured the relevant uncertainty; block-to-block training variability dominates.
-Two blocks cannot estimate that variability with any reliability (df = 1), and the continuation
-was outcome-informed, so the interval is a working-model description only.
+(block SD .044 J) is far larger than the within-block conditional SE (.010 J), so the 64 nested
+worlds never measured the relevant uncertainty. That dispersion is the sample dispersion of two
+complete fit-plus-panel contrasts and cannot be separated into training and finite-panel
+components: training variation is a credible explanation, not a measured dominance, and two
+blocks give a very fragile dispersion estimate (correction by `em:acvc:convergence`, 17:08Z).
+The continuation was outcome-informed, so the interval is a working-model description only.
 
 Boundaries: direct observation versus inference as above; scientific result (M_ABOVE_MEI on
 this block, package ordering) versus engineering conformance (accepted, no defect); direction-
@@ -64,8 +66,9 @@ plans were not caps; no stop or retry.
    (tuned M reference before any further package block); (C) a third unchanged block. DM
    recommendation: (B) or (A); (C) is not recommended because two blocks already show the
    between-instance variability that a third cannot resolve at df = 2. This is a direction-tier
-   question and is sent to `em:acvc:convergence` as the next DM action; nothing is decided
-   locally. ACVC stays ACTIVE/MEDIUM/recasts2 in its slot.
+   question and was sent to `em:acvc:convergence`; **answered 17:08Z: A, `PRO_FINAL`**
+   ([intake](pro_packets/20260915_post_block2_convergence/INTAKE.md)). ACVC stays
+   ACTIVE/MEDIUM/recasts2 in its slot, ACTIVE-idle.
 4. **Direction/Portfolio** — no local disposition; no capacity writer held; no peer change.
 
 Predictions: DM block-2 forecast not recorded prospectively (process gap, no post hoc entry);
