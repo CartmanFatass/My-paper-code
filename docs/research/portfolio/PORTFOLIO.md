@@ -6,7 +6,7 @@
 
 | 方向 | 当前科学位置 | 当前 producer / 下一事件 |
 | --- | --- | --- |
-| acvc | [ACTIVE/MEDIUM/recasts2](../candidates/acvc/DIRECTION.md)。extended-exposure B01 已完成并 intake：4096 F−C +0.1168642320 J、F−dwell +0.0923540717 J、G_dwell +0.0295386263 J，四端点 UP；保留 one-programme、非 tuned、训练波动与全部不利世界限制。 | 独立 Convergence 审查请求 `2026-09-14-acvc-cluster-extended-exposure-b01-scientific-review-01` 已固定并 dispatch，尚未把 dispatch 误记为 provider 接受。DM 的 Transport 负责 reconciliation 和完整响应归档；远端精确回收已完成，清理证据待与 intake 一并提交。 |
+| acvc | [ACTIVE/MEDIUM/recasts2](../candidates/acvc/DIRECTION.md)。extended-exposure B01 与完整独立 review 均已 intake；review 未发现实质经验/推断缺陷，也未授予新 fit 或 lifecycle。原始证据、Transport 事实、远端回收和保全 inventory 已发布。 | DM 已刷新 MGTAP/FOLR 当前事实并正完成具体投资报告；MGTAP 仍是共享 Portfolio writer，因此 ACVC 暂不 Send。真实节点释放后由 ACVC 直接绑定最新 Portfolio 快照接续，无 Root 科学 ACK。 |
 | metric_ground_transport_allocation | [ACTIVE/MEDIUM，DENSE default 保留](../candidates/metric_ground_transport_allocation/DIRECTION.md)。fresh8254 late-exposure B01 与完整 Convergence review 均已 intake；当前 fixed1e-4/512 exploration 已结束且无补跑，整方向未被处置。 | 唯一 Portfolio 请求 `2026-09-14-mgtap-post-late512-portfolio-direction-01` 已固定并 dispatch，尚待 Transport 确认 provider 接受和完整归档。该请求当前占用共享 writer；ACVC 已收到事实并作为下一 writer。当前无实验、无 PARK/CLOSE 或席位变化。 |
 | vap_folr_core | [ACTIVE/MEDIUM](../candidates/vap_folr_core/DIRECTION.md)。entity-persistence B01 的 Z/current-only 已完成：mean 1.59265625、57/128 负值；原始/checkpoint 和真实 Monitor 恢复记录已保全。 | 原定 A/persistent 臂已在同一 source、fresh admission 和第二个既定 invocation 中运行；terminal-only child 在终态以 native final 直接返回，未伪称即时 adoption。DM 随后完成 A−Z intake、独立科学审查和回收；零 retry、原两 invocation 预算不变。 |
 
