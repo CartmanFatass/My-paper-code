@@ -1,0 +1,7 @@
+{
+  "source_path": "temp\\directions\\vap_folr_core\\exp\\entity_current_increment_b01_781801\\collect_terminal.py",
+  "source_sha256": "92f6404777f43c57070f61685219e0bf108833e8e2fbd7a7230e0f9aebf914fc",
+  "archive_sha256": "355cff88281378e7e1e98d8180a28a0278f810f2663d776e33a7ce5295d98159",
+  "source_lines": 75,
+  "purpose": "Reuse prior bounded terminal collection with new G/Z identities; verify original checkpoint dtype/device without map_location. No result-bearing invocation or model execution."
+}
