@@ -34,8 +34,11 @@ distinguishable. No accumulation with B01 or blocks 1–2.
 ## Scientific reading and limits
 
 Inference: on this second fresh instance the fixed retrace package does not add a useful-size
-increment to the conventional proposer; the point estimate is positive and small, the dwell
-package matches it, and the F-over-dwell paired difference is essentially zero. Displayed beside
+increment to the conventional proposer; the point estimate is positive and small, the dwell package's
+increment is of the same size, and the F-over-dwell paired mean difference is a small positive
++.000181873 J inside the band (wording corrected 2026-09-15 per `em:acvc:convergence`,
+[review intake](pro_packets/20260915_m_deployment_transfer_b02_result_review/INTAKE.md); U is a complete deployment-regime contrast on different private histories, not
+an isolation of retrace direction or equivalence). Displayed beside
 B01 (T_F +.018338 J TRANSFERS, 53/11/0), the two instances disagree on whether the package
 adds an MEI-sized increment; the design claims recurrence or discrepancy, and discrepancy is
 what was observed. Both readings stand as recorded; no pooled verdict, majority rule or

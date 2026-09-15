@@ -82,8 +82,10 @@ majority-read or accumulated with the C/M blocks.
 | B02 (28631/38631) | .4292 | .4321 | .4319 | +.002859 (.0033; 22/41/1) | WITHIN_MEI | +.002678 (.0034) | +.000182 (.0037) |
 
 The MEI-sized package increment observed on B01 did not recur on B02: the B02 primary is
-positive but about a third of the MEI, the dwell package matches the F package to four decimal
-places (U_2 ≈ 0), and both wrapped panels sit within the band of the unwrapped M_2. The
+positive but about a third of the MEI, the paired F-over-dwell mean difference is small and positive
+(+.000181873 J, inside the MEI band; the means round to .4321 and .4319, not the same value), and
+both wrapped panels sit within the band of the unwrapped M_2 (wording corrected 2026-09-15 per
+`em:acvc:convergence`, [review intake](pro_packets/20260915_m_deployment_transfer_b02_result_review/INTAKE.md)). The
 difference between the two instances' T_F (about .0155 J) exceeds either conditional SE, which
 is a descriptive statement about two attained policies, not an estimate of between-fit
 variation (two fits cannot decompose training from panel variation). The absolute M_2 score
@@ -148,8 +150,8 @@ package adds +.003 J with 41 of 64 matched worlds favorable, 22 adverse and one 
 inside the ±.01 J band: the card's WITHIN_MEI branch, "useful-size recurrence is not observed at
 this point scale; preserve the sign and uncertainty; reconsider further unchanged spending". The
 simpler zero-command package adds +.003 J on the same instance and the paired F-over-dwell
-difference is +.0002 J (42/64 favorable), so on this instance the two complete deployment
-packages are indistinguishable at the point scale; that is not equivalence, and U_2 remains a
+difference is a small positive +.000181873 J (42/64 favorable) inside the band; that is not
+equivalence or indistinguishability, and U_2 remains a
 contrast between complete execution packages with different realised schedules (6,510 versus
 5,037 substitutions). Displayed beside B01's TRANSFERS, the two M-transfer instances disagree on
 whether the fixed package adds an MEI-sized increment to M; the design claims recurrence or

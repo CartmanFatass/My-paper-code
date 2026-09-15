@@ -8,8 +8,8 @@ accepted ([E0](ACVC_M_DEPLOYMENT_TRANSFER_B02_RESULT_EVIDENCE_20260915.md),
 [intake](ACVC_M_DEPLOYMENT_TRANSFER_B02_INTAKE_20260915.md), ledger row 36). Unrounded
 T_F,2 = F(M_2) − M_2 = **+.002859 J**, 41/22/1 worlds favorable/adverse/zero, conditional SE .0033:
 the card's **WITHIN_MEI** branch. Supporting T_D,2 = +.002678 J and paired U_2 = +.000182 J, both
-WITHIN_MEI (35/64 and 42/64 favorable): on this instance the F and dwell packages are
-indistinguishable at the point scale. Absolute panels M_2 .4292 / F(M_2) .4321 / own-dwell(M_2)
+WITHIN_MEI (35/64 and 42/64 favorable): a small positive paired F-over-dwell mean difference inside
+the band, not equivalence or indistinguishability (wording corrected 2026-09-15, see the section above). Absolute panels M_2 .4292 / F(M_2) .4321 / own-dwell(M_2)
 .4319 J; counters 6,510 retraces / 5,037 dwells, all distinguishable; world 46 (no opportunity)
 identical across panels. Displayed per instance beside B01 (T_F +.018338 J TRANSFERS, 53/11/0): the
 MEI-sized increment did not recur; the design claims recurrence or discrepancy and discrepancy was
