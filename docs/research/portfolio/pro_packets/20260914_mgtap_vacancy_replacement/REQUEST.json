@@ -1,0 +1,110 @@
+{
+  "caller_role": "portfolio",
+  "workflow_node": "portfolio_decision",
+  "execution_mode": "REUSE_DM_TRANSPORT",
+  "request_id": "2026-09-14-mgtap-park-vacancy-replacement-01",
+  "source_thread_id": "/root",
+  "parent_thread_id": "/root",
+  "operator_thread_id": "/root/transport_l_high_root_vacancy_20260914",
+  "direction_ids": [
+    "acvc",
+    "vap_folr_core",
+    "metric_ground_transport_allocation",
+    "roster_consistent_latent_exploration",
+    "degraded_incumbent_shadow_handover",
+    "ucope",
+    "learned_counterfactual_agent_credit"
+  ],
+  "conversation_id": "6a9c109e-b264-83e8-a78b-f9ea1b767b7b",
+  "repository": "CartmanFatass/My-paper-code",
+  "repository_url": "https://github.com/CartmanFatass/My-paper-code",
+  "commit_or_ref": "2420bd8bfd0369ed815a2c32fa13ab6c8198cd86",
+  "scientific_question": "MGTAP has now received and applied a complete conforming Portfolio decision of reversible PARKED/MEDIUM, formally releasing one slot. The target working set is three direction DM chains; ACVC and vap_folr_core remain occupied and continue independently, leaving exactly one vacancy. Select exactly one nonoccupied research direction to fill that vacancy and specify its smallest useful bounded initial DM assignment. Use the current preserved scientific assets, contrary evidence, lifecycle records, priorities, headroom facts or honest absence, and actual known/unknown work. Do not select ACVC or FOLR again. Do not immediately reverse MGTAP's just-applied PARK without a concrete changed fact that was unavailable to its decision. Consider currently parked or otherwise available registered directions, including RCLE, DISH, UCOPE and LCAC, and any better supported nonoccupied direction in the current research map/Oracle evidence. Scientific value and the ability of one bounded object to discriminate a real question matter more than manufacturing constant experiment activity. Do not demand positive prior results, a mechanism proof, exact optimum, exhaustive reconstruction, a fixed seed quota, a deployment customer or complete cost knowledge. This is vacancy replacement only: do not change ACVC/FOLR science, global specifications, or the lifecycle of unselected directions.",
+  "deliverable": "Return one complete Portfolio vacancy decision: selected direction id; decisive reasons versus the strongest alternatives; current evidence and limitations; priority/lifecycle on entry; one concrete bounded initial DM assignment with question, comparator or decision object, evidence class, primary outcome, claim ceiling, minimum effect of interest treatment, permitted invocations and dominant work/cost factors; explicit exclusions; revisit condition; and a ready Astra/max DM handoff naming current direction records and the existing direction branch/worktree if one exists. If no candidate can support a useful bounded first assignment, explain the concrete missing fact for each strongest candidate and select the smallest bounded preparation that would resolve the vacancy rather than leaving an indefinite empty slot. Do not run experiments, edit scientific/control state, or create the DM yourself. Report exact source access and material gaps, and write only this request's scoped response/comment delivery.",
+  "claim_ceiling": "Portfolio selects one management direction and initial bounded investment; it does not establish algorithm superiority, mechanism causality, tuned headroom, transfer, safety, stable ranking, publication significance or a C-level claim. Historical results retain their original units, hosts, estimands and training-replication limits. A new DM must write a prospective card before any result-bearing run and obey current evidence, exact-source, resource-admission and remote-first rules. Consultation itself adds zero fits, training ticks, optimizer updates or evaluations.",
+  "reference_files": [
+    {
+      "path": "docs/research/portfolio/PORTFOLIO.md",
+      "commit_sha": "1ac55907c2f47337b7864d573f32389b82eb8dbd",
+      "purpose": "Read the current two-occupied/one-vacancy snapshot, current producers, machine-readable direction ids, shared-writer order and parked registry.",
+      "provenance": "Root current control snapshot after applying MGTAP PARK; later ACVC application does not fill the vacancy."
+    },
+    {
+      "path": "docs/research/portfolio/decisions/2026-09-14-mgtap-post-late512-park.md",
+      "commit_sha": "faae71602233c42a9ff2d13bf2709fe9d7b1a5d5",
+      "purpose": "Read the complete applied MGTAP-only PARK decision, preserved assets, released-slot consequence and separate replacement boundary.",
+      "provenance": "PRO_FINAL / OWNER_DELEGATED Portfolio lifecycle decision; no replacement was selected in that packet."
+    },
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_RESUME_CLOSEOUT_HANDOFF_20260914.md",
+      "commit_sha": "faae71602233c42a9ff2d13bf2709fe9d7b1a5d5",
+      "purpose": "Read final MGTAP evidence, costs, retained optional assets, cleanup and concrete revisit conditions.",
+      "provenance": "Final direction handoff; MGTAP has no live producer and its slot is released."
+    },
+    {
+      "path": "docs/research/portfolio/decisions/2026-09-14-acvc-final-rate-pair-investment.md",
+      "commit_sha": "2420bd8bfd0369ed815a2c32fa13ab6c8198cd86",
+      "purpose": "Read ACVC's current bounded allocation and explicit statement that it retains its existing occupied slot independently of replacement.",
+      "provenance": "Complete applied Portfolio decision; ACVC is not a vacancy candidate."
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_ENTITY_PERSISTENCE_B01_INTAKE_20260914.md",
+      "commit_sha": "f8f439c320aa9cc527e86f0de41daa041c4e326a",
+      "purpose": "Read FOLR's current A-Z result, limits, retained contradictory history and next result-plan review.",
+      "provenance": "Current occupied-direction intake; FOLR is not a vacancy candidate."
+    },
+    {
+      "path": "docs/research/portfolio/ORACLE_RECOMMENDATIONS_20260911.md",
+      "commit_sha": "2420bd8bfd0369ed815a2c32fa13ab6c8198cd86",
+      "purpose": "Use the current Oracle scientific inventory of active and parked directions, their distinct questions, strongest nulls, prior effects, costs and limitations; refresh lifecycle from newer decision records.",
+      "provenance": "Scientific portfolio report and candidate map, not authority; its older operational snapshots are superseded by current Portfolio and handoffs."
+    },
+    {
+      "path": "docs/research/RESEARCH_MAP.md",
+      "commit_sha": "2420bd8bfd0369ed815a2c32fa13ab6c8198cd86",
+      "purpose": "Find the registered candidate records and current knowledge entry points for alternatives not expanded in the short Portfolio table.",
+      "provenance": "Repository research index; cited direction evidence keeps its own original scope."
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "commit_sha": "2420bd8bfd0369ed815a2c32fa13ab6c8198cd86",
+      "purpose": "Apply sections 7, 8.1 and 11.7-11.10 for lifecycle, Portfolio judgment, headroom/MEI, bounded empirical burden, units, complexity and honest cost treatment.",
+      "provenance": "Current scientific evidence specification; no positive-first, exhaustive reconstruction, fixed seed quota or complete-cost prerequisite."
+    },
+    {
+      "path": "AGENTS.md",
+      "commit_sha": "2420bd8bfd0369ed815a2c32fa13ab6c8198cd86",
+      "purpose": "Apply sections 2, 4.7-4.8 and 5 for Portfolio finality, three-slot replacement, DM autonomy, rolling execution and Root integration.",
+      "provenance": "Current owner authority and control boundary."
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "commit_sha": "2420bd8bfd0369ed815a2c32fa13ab6c8198cd86",
+      "purpose": "Use sections 3-6 for legal information, independent fitting/evaluation, bounded comparison and inference limits when assessing a first object.",
+      "provenance": "Explanatory scientific knowledge, not a new approval requirement."
+    }
+  ],
+  "constraints": [
+    "Current capacity is exactly2 occupied (ACVC and vap_folr_core),0 reserved and1 formal vacancy from MGTAP PARK. This request reserves that one vacancy; it must select one replacement and must not create a fourth slot.",
+    "Consultation exposure is0fits/0training ticks/0optimizer updates/0evaluations. Future work is only a proposed bounded initial assignment; Pro must state dominant arms/seeds/steps/evaluation and nested work, with unknown support/provider/maintenance costs kept UNKNOWN. No cost pilot is required.",
+    "Do not compare raw reward magnitudes across different hosts/estimands as a ranking score. Use scientific question quality, discriminating evidence, retained counterevidence, priority/recast state, resource feasibility and smallest useful investment.",
+    "Unselected directions keep their current lifecycle and assets. Selection does not rewrite negative results, retroactively pool adaptive objects, grant retries to old cards, fuse directions, promote to C, or alter ACVC/FOLR allocations.",
+    "The selected direction gets one Astra/max DM in its existing direction worktree/branch when available. That DM owns science, implementation, self-checks, required independent review, remote-first admission/launch, Monitor, collection, intake and continuation under current authority; no Implementer or Clerk is created.",
+    "A formal initial assignment must be small enough to be decision-bearing without stepwise enumeration or complete reconstruction. Toy engineering investigation threshold2700s and UAV43200s are diagnostic reference thresholds, not automatic launch/PARK/escalation gates; ordinary scientific invocation caps come from the selected prospective card and current specs.",
+    "The complete conforming response is final for this vacancy under AGENTS4.8. Root checks conformance, records the decision, creates the selected DM and integrates without per-item owner ratification. Preserve asynchronous owner overrides and report concrete conflicts rather than silently changing rules.",
+    "Only write this request's response on codex/portfolio and the shared Portfolio Issue18 delivery comment. Perform actual-state readback and provide the complete Markdown fallback when connector delivery cannot be confirmed."
+  ],
+  "response_schema": [
+    "Selected replacement direction, lifecycle/priority and decisive comparison against strongest alternatives.",
+    "Bounded initial Astra/max DM assignment with evidence class, comparator/decision object, primary, MEI treatment, permitted invocations and work factors.",
+    "Claim ceiling, exclusions, retained contrary evidence, uncertainties and revisit condition.",
+    "Exact source access/gaps and operational DM creation handoff."
+  ],
+  "delivery_mode": "github_delivery",
+  "github_delivery": {
+    "branch": "codex/portfolio",
+    "base_sha": "fa1922c37641c9e5ce8ae7cb2239e835a30a3f4f",
+    "response_path": "docs/research/portfolio/pro_packets/20260914_mgtap_vacancy_replacement/archive/RESPONSE.md",
+    "issue_url": "https://github.com/CartmanFatass/My-paper-code/issues/18"
+  }
+}
