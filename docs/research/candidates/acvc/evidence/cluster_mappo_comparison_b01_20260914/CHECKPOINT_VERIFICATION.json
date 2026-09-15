@@ -1,0 +1,33 @@
+{
+  "C": {
+    "metadata": {
+      "object": "ACVC_CLUSTER_MAPPO_COMPARISON_B01",
+      "master": 28331,
+      "checkpoint_episode": 4096,
+      "optimizer_steps": 8192
+    },
+    "actor_finite_float32": true,
+    "critic_finite_float32": true
+  },
+  "M": {
+    "metadata": {
+      "object": "ACVC_CLUSTER_MAPPO_COMPARISON_B01",
+      "master": 28331,
+      "checkpoint_episode": 4096,
+      "actor_optimizer_steps": 8192,
+      "critic_optimizer_steps": 8192
+    },
+    "actor_finite_float32": true,
+    "critic_finite_float32": true,
+    "ValueNorm": {
+      "running_mean": [
+        1.540545105934143
+      ],
+      "running_mean_sq": [
+        38.10104751586914
+      ],
+      "debiasing_term": 0.07864450663328171
+    }
+  },
+  "new_models_native_calls_optimizer_steps": 0
+}
