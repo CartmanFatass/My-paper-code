@@ -50,10 +50,15 @@ def make_config(arm, envs, seed):
                                         shared.N_USERS, shared.ROLLOUTS, envs[0].state_dim, envs[0].obs_dim)
         config.n_Z = config.n_z = 6  # the switch below fixes both to 1; start from the ordinary value
         config = apply_algorithm_config(config, "mappo")
-        # The switch's k = rollout_length + 1 is not runnable here: the discoverer's recurrent training chunk
-        # length is config.k (hmasd/agent.py), and a chunk longer than the rollout cannot be split. Keep the
-        # D arms' k = 10 so the recurrent chunking is identical across arms; with one constant skill the
-        # periodic re-assignment changes nothing but the chunk boundaries the D arms also have.
+        # DM deviation from the Portfolio decision's "switch-selected long k" (recorded on the card, returned
+        # to the node): the switch's k = rollout_length + 1 does run (the sampler falls back to one
+        # full-rollout chunk, hmasd/utils.py get_discoverer_sampler), but config.k is also the truncated-BPTT
+        # chunk length of the recurrent actor and critic (hmasd/agent.py update_discoverer_from_rollout), so
+        # the long k would train FLAT through 500-step chunks against the D arms' 10-step chunks and confound
+        # the architecture contrast with the gradient-truncation law. k = 10 keeps the optimizer law identical;
+        # with one constant skill the ten-step re-assignment is degenerate (the coordinator is still
+        # forward-called, never updated). The switch computed the high-level buffer fields at its own k;
+        # they are inert (nothing is collected into that buffer) and listed as planned differences.
         config.k = FLAT_K
         return config
     return shared.make_config(renewal, envs, seed, coordinator_batch_size=batch)
@@ -374,7 +379,8 @@ def block_statistics(values, planned):
 
 def comparable_view(summary):
     common = {k: summary[k] for k in ("host", "device", "torch_threads", "learner_precision",
-                                      "reward_return_precision", "native_score_factor", "rollouts", "panel_rollouts")}
+                                      "reward_return_precision", "native_score_factor", "rollouts", "panel_rollouts",
+                                      "launch_sha")}
     for phase in ("learner_config", "evaluation_config"):
         common[phase] = {k: v for k, v in summary[phase].items() if k not in PLANNED_CONFIG_DIFFERENCES}
     return common
@@ -473,7 +479,8 @@ def main(argv=None):
         old = json.loads(args.historical_factorial_summary.read_text(encoding="utf-8"))
         if old.get("object_id") != "FSD_INTERRUPTION_BATCH_B01":
             raise ValueError("historical summary is not the completed factorial")
-        historical = [block["contrasts"]["SI1280"]["value"] for block in old["blocks"]]
+        historical = [block["contrasts"]["SI1280"]["value"] for block in old["blocks"]
+                      if block["contrasts"]["SI1280"].get("status") == "complete"]
     result = assemble_blocks([json.loads(p.read_text(encoding="utf-8")) for p in args.summaries], historical)
     result["input_summaries"] = [str(p) for p in args.summaries]
     result["historical_factorial_summary"] = (str(args.historical_factorial_summary)

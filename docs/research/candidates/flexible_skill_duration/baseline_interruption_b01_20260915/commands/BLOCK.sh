@@ -1,15 +1,16 @@
 #!/bin/bash
 # One training block of FSD_BASELINE_INTERRUPTION_B01: the three arms in order, each its own queue
 # element with an adjacent memory admission joined by &&. A failed arm records its exit and the
-# queue continues; nothing is retried. Usage: BLOCK.sh WORKTREE SEED
+# queue continues; nothing is retried. Usage: BLOCK.sh WORKTREE SEED [ARMS]  (ARMS default "D1280 I1280 FLAT")
 set -u
 worktree="$1"
 seed="$2"
+arms="${3:-D1280 I1280 FLAT}"
 cd "$worktree" || exit 1
 export OMP_NUM_THREADS=4 MKL_NUM_THREADS=4 OPENBLAS_NUM_THREADS=4 NUMEXPR_NUM_THREADS=4
 export PYTHONUNBUFFERED=1 PYTHONDONTWRITEBYTECODE=1
 status=0
-for arm in D1280 I1280 FLAT; do
+for arm in $arms; do
   out="temp/directions/flexible_skill_duration/exp/baseline_interruption_b01_20260915/${seed}_${arm}"
   mkdir -p "$out"
   date -u +%FT%TZ > "$out/queue_element_start.txt"

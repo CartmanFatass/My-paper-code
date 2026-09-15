@@ -57,3 +57,20 @@ python scripts/run_fsd_baseline_interruption_b01.py reduce --summaries <12 summa
 ## Launch record
 
 (appended at launch)
+
+### 2026-09-15 pre-launch record
+
+- Independent Opus review of `db0b11bd8`: **ACCEPT_WITH_CORRECTIONS** (M1a/b/c on
+  the FLAT `k` justification and its deviation from the decision, M2 launch-sha
+  comparability); all four applied in the commit that carries this record; the
+  reviewer's own real-host probe found the D1280 training trajectory bit-identical
+  with and without the three panels, and FLAT learning only actor/critic.
+- **Arm split at launch:** D1280 and I1280 launch now as independent authorized
+  work (`BLOCK.sh <checkout> SEED "D1280 I1280"`); the FLAT arm is dependent work
+  under AGENTS §3 until the `k = 10` deviation note has been returned to
+  `portfolio:cross_direction` (the shared Portfolio binding is presently stuck at
+  `DIRECTION_VERIFIED` by a Codex-side archive-script defect; owner action
+  requested). FLAT queues run later at the same source bytes with
+  `BLOCK.sh <checkout> SEED FLAT`; block pairing is by fixed base seeds, so the
+  order of arms within a block does not change the object.
+- Concurrency: three block queues at once, the fourth when the first finishes.
