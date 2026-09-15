@@ -1,6 +1,6 @@
 {
   "assignment": "ACVC_CLUSTER_FIXED_LR_PAIR_B01",
-  "state": "originals_terminal_preserved_pending_retention_integration",
+  "state": "remote_reclaimed_local_originals_retained",
   "authoring_checkout": "C:/Projects/HMASD-worktrees/codex-acvc",
   "retain_authoring": true,
   "source": "2bbaa99ad9cc717d89e47a1f24d9acd76dce4f97",
@@ -40,5 +40,7 @@
   "terminal_handles": [
     "acvc-rate-low-b01-27931-2bbaa99ad",
     "acvc-rate-ref-b01-27931-2bbaa99ad"
-  ]
+  ],
+  "cleanup_receipt": "CLEANUP.json",
+  "root_retention": "Confirmed natively; source/results retained on main c854cf90f"
 }
