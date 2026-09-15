@@ -30,6 +30,15 @@ blocks 1 or 2.
 
 ## Scientific reading and limits
 
+> **Correction 2026-09-15 (`em:acvc:convergence` result review, `PRO_FINAL`,
+> [intake](pro_packets/20260915_m_deployment_transfer_result_review/INTAKE.md)).** The paragraphs below overstate in three places and the E0 and
+> `DIRECTION.md` carry the corrected wording: U contrasts two complete deployment packages
+> (unequal realised schedules, diverging downstream states), not a retrace-specific
+> remainder, and does not identify "what transfers most clearly"; T_D about half of T_F
+> describes three means, not a mediation; the .044 J block dispersion of F(C)−M is not the
+> variability of T_F, whose between-fit variation is unmeasured rather than inherited. The
+> recorded primary, counts and decisions are unchanged.
+
 Inference: on this one fresh instance of the conventional private recurrent proposer, the
 fixed retrace law adds an MEI-sized increment, and roughly half of that increment is shared
 with the simpler zero-command law on the same predicate; the retrace-specific remainder over

@@ -1,0 +1,96 @@
+{
+  "id": "20260915-acvc-006",
+  "created": "2026-09-15T15:09:35-07:00",
+  "direction": "acvc",
+  "tier": "direction",
+  "kind": "decision",
+  "title": "ACVC 方向节点复审 B01 结果后选 B：再做一次独立 M 拟合（B02，28631/38631）；一次拟合投资待 Portfolio",
+  "context": "em:acvc:convergence 2026-09-15 21:57Z 复审 B01（T_F +.018 J TRANSFERS，单实例）后选 B（PRO_FINAL）：ACVC_M_DEPLOYMENT_TRANSFER_B02，三面板不变，逐实例并列、不汇总；修正 B01 记录三处叙述；一次拟合先经 Portfolio 有界投资问题；无启动。",
+  "options": [
+    {
+      "key": "A",
+      "label": "保持族已收束，只记录迁移观察",
+      "consequence": "零新学习；ACVC ACTIVE-idle"
+    },
+    {
+      "key": "B",
+      "label": "再做恰好一次独立 M 拟合（B02），三面板与读数规则不变，逐实例并列",
+      "consequence": "1 次 M 拟合约 1,200 s；启动等 Portfolio 一次拟合拨款；无论正负一次即止"
+    },
+    {
+      "key": "C",
+      "label": "匹配的 F(C) 对 F(M) 配对",
+      "consequence": "两次拟合 2,129,920 tick，主量不同，回答替换而非复现"
+    },
+    {
+      "key": "D",
+      "label": "让 M 穿过固定法则训练",
+      "consequence": "需自己的训练规范与工程风险；未选"
+    }
+  ],
+  "recommended": "B",
+  "auto_applied": "B",
+  "dm_reason": "第一个 M 侧整包增益有部署用途解释，便宜的 dwell 对照留在同一面板；复现或反转会改变下一步投资。",
+  "evidence": [
+    "docs/research/candidates/acvc/pro_packets/20260915_m_deployment_transfer_result_review/INTAKE.md",
+    "docs/research/candidates/acvc/ACVC_M_DEPLOYMENT_TRANSFER_B02_PROSPECTIVE_CARD_20260915.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-15.md#L33",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "方向节点复审 B01 结果（T_F = +.018 J，TRANSFERS，单实例）后，下一对象是：(A) 保持族已收束、只记录迁移观察；(B) 再做恰好一次独立初始化的 M 拟合，三面板不变（DM 建议）；(C) 匹配的 F(C) 对 F(M) 配对；(D) 让 M 穿过固定法则训练？",
+    "changes_if_approved": [
+      {
+        "target": "ACVC 下一对象",
+        "from": "B01 拨款已耗尽；无生产者；方向问题待节点回答",
+        "to": "ACVC_M_DEPLOYMENT_TRANSFER_B02：一次新的独立初始化 M 拟合（MASTER 28631 / 命名空间 38631），三个私有终评面板 M / F(M) / own-dwell(M) 不变；唯一主量 T_F,2 = mean64[J(F(M_2)) − J(M_2)]，±.01 J 分支不变；T_D,2 与配对 U_2 为辅助；先独立读取，再与 B01 逐实例并列显示，不做汇总裁决、不累积；无论正负一次即止"
+      },
+      {
+        "target": "B01 记录的叙述性措辞",
+        "from": "U 被读为“回溯特有的剩余”；C 侧块间离散 .044 J 被推断适用于 T_F；M 得分居中被称为“普通实例、非离群”",
+        "to": "U 是两个完整部署包的对比（干预时间表不等、下游状态分歧），不识别“哪部分迁移”；T_F 的拟合间变异未测量，不从 F(C)−M 的离散继承；.3338 < .3786 < .3942 仅为描述性排序。主量、计数与已有决定不变"
+      },
+      {
+        "target": "启动条件",
+        "from": "无",
+        "to": "一次拟合的拨款先经 portfolio:cross_direction 有界投资问题；§8.1 下并非每次拟合都需单独批准，但本处无可用拨款；计划约 1,200 s 原生墙钟（B01 空闲节点实测 985 s），非上限"
+      }
+    ],
+    "if_refused": "选 A 则记录迁移观察后族保持收束，ACVC ACTIVE-idle；选 C 需两次拟合（2,129,920 tick）且主量不同，回答的是替换而非复现；选 D 需自己的穿越 F 训练规范。所有者可在账本 owner 列或评审中改选。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/acvc/pro_packets/20260915_m_deployment_transfer_result_review/archive/RESPONSE.md",
+        "quote": "Select B: recommend exactly one further independent M training instance with the unchanged three private final panels. Retain the completed TRANSFERS reading, but correct the claims of a retrace-specific remainder, inherited variability and a demonstrated ordinary instance.",
+        "why": "节点的完整决定：复现问题值得一次不变的重复；F 相对 dwell 的优势小且不确定，复现或反转会改变下一步投资。"
+      },
+      {
+        "path": "docs/research/candidates/acvc/ACVC_M_DEPLOYMENT_TRANSFER_B01_RESULT_EVIDENCE_20260915.md",
+        "quote": "T_F = +.018338005502877976 J TRANSFERS (53/64 favorable, conditional SE .0055); T_D +.00907 WITHIN_MEI; U +.00927 WITHIN_MEI.",
+        "why": "已完成的一次拟合上固定变换给出 MEI 量级的整包增益；世界级极值 −.161 / +.170 J 提示需要第二个实例。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/acvc/pro_packets/20260915_m_deployment_transfer_result_review/archive/RESPONSE.md",
+        "quote": "A is the strongest expenditure-saving alternative. It retains a valid local gain without more learning ... a second fit could leave the small F-over-dwell margin unresolved and yield little practical reason to maintain an extra package.",
+        "why": "第二次拟合可能仍不能分辨 F 与 dwell；两次拟合也不能分解训练变异与面板变异。"
+      }
+    ],
+    "uncertainty": [
+      "两个实例只能显示复现或分歧，不给出训练总体均值；不承诺区间、bootstrap 或样本量",
+      "拟合间变异与有限面板变异不能由两次观察分解",
+      "1,200 s 为按空闲节点实测的计划，节点竞争会改变实际墙钟"
+    ],
+    "cost": {
+      "compute": "拟议 1 次 M 拟合，1,097,728 团队 tick，约 1,200 s 原生墙钟（B01 实测 985.12 s）；本决定本身零新拟合",
+      "owner_time": "阅读 B02 卡片与 B01 记录修正，约 5 分钟",
+      "reversibility": "reversible",
+      "waits_on_this": "启动等待 Portfolio 一次拟合投资决定；L0 绑定改动与聚焦测试不等待"
+    },
+    "verdict_text": "方向节点选 B（PRO_FINAL）：再做恰好一次独立 M 拟合作为 ACVC_M_DEPLOYMENT_TRANSFER_B02，三面板与读数规则不变，逐实例并列、不汇总；B01 的 TRANSFERS 保留并修正三处叙述；一次拟合先向 portfolio:cross_direction 提出有界投资问题；hub 已写 B02 卡片、修正 E0/DIRECTION 并发送投资请求。",
+    "source": "docs/research/candidates/acvc/pro_packets/20260915_m_deployment_transfer_result_review/archive/RESPONSE.md"
+  },
+  "starred": true
+}

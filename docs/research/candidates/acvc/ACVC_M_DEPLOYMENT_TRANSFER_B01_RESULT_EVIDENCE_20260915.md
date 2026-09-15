@@ -84,8 +84,9 @@ finite `S`/`J`, `terminated` true and `truncated` false; all 2,048 update rows a
 Training moved: mean training J .162 over the first 256 episodes to .378 over the last 256;
 value loss .618 → .029; policy entropy 4.26 → 6.38; parameter displacements finite (actor
 8.825, critic 8.352, action head finite). The absolute M panel (.3786 J) sits between block 1's
-M (.3338) and block 2's M (.3942), so this is an ordinary instance of the recipe, not an
-outlier. Panel reset seeds are identical across the three panels (`100000·38531 + 2000 + e`)
+M (.3338) and block 2's M (.3942); the ordering is descriptive context only and does not
+certify a typical draw, exclude an outlier or establish competence (corrected 2026-09-15 per
+`em:acvc:convergence`, [review intake](pro_packets/20260915_m_deployment_transfer_result_review/INTAKE.md)). Panel reset seeds are identical across the three panels (`100000·38531 + 2000 + e`)
 and the per-episode actor generators equal-seeded; coupling is conditional, not guaranteed.
 The inherited unwired auxiliary counters stay unmeasured (§11.8.7) and the primary does not
 depend on them. No retry, tuning, midpoint, pilot or extra panel occurred.
@@ -131,15 +132,19 @@ Remote reclamation of the worktree and staging follows the push (CLEANUP.json).
 In this one instance the fixed retrace law adds an MEI-sized increment to the conventional
 private recurrent proposer: +.018 J with 53 of 64 matched worlds favorable, on a proposer that
 never trained through the law. The simpler zero-command law on the same predicate adds +.009 J
-(within the band), and the paired retrace-over-dwell difference U is +.009 J (within the band,
-48/64 favorable): roughly half of the F increment on M is shared with holding still on a
-flagged opportunity, and the retrace-specific remainder is not resolved beyond the MEI in one
-instance. This is the card's TRANSFERS branch: it motivates the development question "M plus
+(within the band), and the paired retrace-over-dwell difference U is +.009 J (within the band, 48/64 favorable). T_D numerically about half of T_F describes three
+panel means, not a mediation decomposition. U contrasts two complete deployment packages
+(unequal realised intervention schedules, 6,752 versus 5,110 substitutions, with diverging
+downstream states), not an isolated retrace-direction component: an MEI-sized incremental
+preference of F over dwell is not established, and the packages are not shown equivalent
+(corrected 2026-09-15 per `em:acvc:convergence`, [review intake](pro_packets/20260915_m_deployment_transfer_result_review/INTAKE.md)). This is the card's TRANSFERS branch: it motivates the development question "M plus
 the fixed transformation" and makes a later matched F(C) versus F(M) comparison worth asking.
 It is evidence for one attained finite-learning instance on this host with conditional-world
-precision only. Blocks 1 and 2 showed that F−M reverses sign between training instances
-(block SD .044 J against a within-block SE of .010 J); the same between-instance variability
-applies to T_F and is unmeasured here. No stable superiority, no evidence that C can be
+precision only. Between-fit variation of the expected deployment contrast conditional on the fitted M
+policy is unmeasured here: one fitted policy cannot identify it, and the .0055 J SE
+describes finite-panel variation at this attained policy only. The .044 J dispersion of the
+two F(C)−M block contrasts is a different contrast on different fitted proposers and is not
+the variability of T_F (corrected 2026-09-15 per `em:acvc:convergence`, [review intake](pro_packets/20260915_m_deployment_transfer_result_review/INTAKE.md)). No stable superiority, no evidence that C can be
 discarded, no F(C) versus F(M) comparison, no tuned headroom, no equivalence, no mechanism, no
 default change and no C promotion follow. The two-block C/M claim and its label are unchanged.
 
