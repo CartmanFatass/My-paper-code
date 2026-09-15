@@ -178,5 +178,6 @@
   "all_original_files_verified": true,
   "new_native_episodes": 0,
   "new_optimizer_steps": 0,
-  "cleanup": "pending Root retention integration; remote originals retained"
+  "cleanup": "Exact remote checkout/outputs, both inactive supervisor roots and owned archive staging removed after Root retention confirmation; disk and registration absence verified2026-09-15T02:52:59.786188+00:00; local original archive/checkpoints retained. See CLEANUP.json.",
+  "cleanup_receipt": "CLEANUP.json"
 }
