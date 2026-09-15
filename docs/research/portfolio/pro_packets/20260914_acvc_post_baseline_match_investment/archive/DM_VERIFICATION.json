@@ -1,0 +1,92 @@
+{
+  "request_id": "2026-09-14-acvc-post-baseline-match-investment-01",
+  "verified_at_utc": "2026-09-15T05:12:06.224290+00:00",
+  "response_commit": "ade27ced0e8a0ab63b89b9396bd0a7668f1d9f2b",
+  "response_actual_parent": "56f81cf51d38f20f4641a3f948168212a69f6e86",
+  "changed_paths": [
+    "docs/research/portfolio/pro_packets/20260914_acvc_post_baseline_match_investment/archive/RESPONSE.md"
+  ],
+  "response_bytes": 17805,
+  "response_lines": 95,
+  "response_sha256": "450a71d8f5f6f916f0ebabc9a640185af4f92d824e1830d4eb8f31d509369ff7",
+  "response_git_blob": "1f9eb7daa10a6b145e64250afb8d5968a6ee2bb9",
+  "response_exactly_matches_transport_GITHUB_RESPONSE": true,
+  "all_29_effective_response_citations_match_fixed_request": true,
+  "source_coverage_claim": "Pro reports all29 paths at complete/focused declared scope; author verified cited mapping, not unseen provider read events.",
+  "issue_comment": {
+    "id": 5675036399,
+    "url": "https://github.com/CartmanFatass/My-paper-code/issues/14#issuecomment-5675036399",
+    "created_at": "2026-09-15T05:04:57Z",
+    "actual_body_matches_transport_after_line_ending_normalization": true,
+    "body_utf8_sha256": "8e00653429255cd0b0a12594a93095b3aa1a32df59507bdb0a4f7d5adc1c908d"
+  },
+  "transport_recovery": {
+    "accepted_operation": "d84d3e5d-477c-4892-8f89-2b6d303221e3",
+    "user_id": "bc922ee8-24cd-4382-a8de-3bf719b4d231",
+    "paired_assistant_id": "44790384-e518-4b2c-b44a-5335362e758f",
+    "fixed_task_observed": "https://github.com/CartmanFatass/My-paper-code/blob/c0dc9a942a2c0ee4249e247851f31f860bc5b34e/docs/research/portfolio/pro_packets/20260914_acvc_post_baseline_match_investment/TASK.md",
+    "one_accepted_send": true,
+    "no_second_send_on_recovery": true,
+    "old_FSD_short_receipt": "unpaired old observation, preserved; not an ACVC decision",
+    "final_state": {
+      "state": "ARCHIVED",
+      "native_state": "RECEIPT",
+      "receipt_status": "SENT",
+      "native_delivery": "native_final",
+      "tab_lifecycle": "CLOSED"
+    }
+  },
+  "raw_transport_archive": {
+    "path": "TRANSPORT_RAW.tar.gz",
+    "bytes": 12017,
+    "sha256": "f7b7976276bc3da5f7b3827ee243fb230a92c91fe8f15e8e92946f6817dd59dc",
+    "files": [
+      {
+        "name": "CHAT_RECEIPT.md",
+        "bytes": 96,
+        "sha256": "74a9df3c22b28e44e69a04b24758ac2ea4581248905a775b3cddef463e9ce71c"
+      },
+      {
+        "name": "CONFLICT.md",
+        "bytes": 1359,
+        "sha256": "88456264ed1b4f4cdeb50185c79a04e995e37be7db09010b3b8449410ec1080d"
+      },
+      {
+        "name": "DELIVERY_COMMENT.md",
+        "bytes": 1911,
+        "sha256": "8e00653429255cd0b0a12594a93095b3aa1a32df59507bdb0a4f7d5adc1c908d"
+      },
+      {
+        "name": "GITHUB_RESPONSE.md",
+        "bytes": 17805,
+        "sha256": "450a71d8f5f6f916f0ebabc9a640185af4f92d824e1830d4eb8f31d509369ff7"
+      },
+      {
+        "name": "PACKET_MANIFEST.json",
+        "bytes": 939,
+        "sha256": "1c04a2bc6caece0d505f96c2790fb3d81e3df52dd5b8e2f2ddea2453b05146f0"
+      },
+      {
+        "name": "PROMPT_BODY.md",
+        "bytes": 1918,
+        "sha256": "1d990a9cba5d4736c16fe0bb063e1b5d8e5af75030c6199f8facd2f389a34497"
+      },
+      {
+        "name": "RESPONSE.md",
+        "bytes": 96,
+        "sha256": "17444a8ce712f6d8e2bc87e6128685c170571b6b89071312759c01017f5ab08d"
+      },
+      {
+        "name": "TRANSPORT_FACTS.json",
+        "bytes": 6522,
+        "sha256": "80625ecc895ee37dbd7dcbca8aa0f2d1ae24a056637e88172db64204f070d7e4"
+      },
+      {
+        "name": "transport_preflight.json",
+        "bytes": 4853,
+        "sha256": "532a688e716dabf77f82b15f68b255ba3473d9b46d834b16d7f4cea3bffa0679"
+      }
+    ]
+  },
+  "note": "Historical top-level conflict fields and the96-byte old RESPONSE.md remain preserved; recovery/final_state and17805-byte GITHUB_RESPONSE.md identify the resolved complete answer. No short receipt was substituted for the Git scientific response."
+}
