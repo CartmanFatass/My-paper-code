@@ -70,5 +70,15 @@
     "verdict_text": "Owner-delegated decision (unattended,2026-09-03 instruction): execute this Portfolio-selected documentary preparation; no second vote or Root ACK is required.",
     "source": "docs/research/candidates/acvc/ACVC_CLUSTER_BASELINE_MATCH_A01_SCIENCE_CARD_20260914.md"
   },
-  "starred": false
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-15T04:15:47+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260914_acvc_post_fixed_rate_investment/archive/RESPONSE.md",
+      "record": "docs/research/candidates/acvc/ACVC_CLUSTER_BASELINE_MATCH_A01_INTAKE_20260914.md",
+      "state": "applied",
+      "summary": "有限静态A已完成：直接HMASD执行信息与当前ACVC不匹配；只形成修正比较建议，所有新数值/模型/科研代码执行计数0。"
+    }
+  ]
 }
