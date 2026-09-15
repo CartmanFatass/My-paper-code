@@ -26,7 +26,7 @@ commits are cherry-picked into `main` by the hub).
 
 ## Commits on codex/acvc not on main at writing
 
-`7bd04236d` (block-2 wrapper + tests). Earlier session commits `897880496`,
+`7bd04236d` (block-2 wrapper + tests) and `3ae041d9e` (review corrections), both on `main`. Earlier session commits `897880496`,
 `c3ce56bf2`, `f4c2475da`, `a4cb8e8b0` (Pro), `c14180e9c` are on `main`.
 
 ## Pending and blocked
@@ -44,7 +44,13 @@ commits are cherry-picked into `main` by the hub).
   sha256 `0f151fea…`) must be re-created before an M fit; the previous copy was
   reclaimed (DEPENDENCY.json / STAGING.json in the B01 evidence folder record
   the exact procedure).
-- Opus review of the wrapper before launch (RNG identity binding).
+- ~~Opus review of the wrapper before launch~~ done 2026-09-15 (ACCEPT_WITH_CORRECTIONS,
+  applied at `3ae041d9e`: guards removed, trailing `--seed` guarded, collision span 50,000,
+  `launch_b02.sh` added; the reviewer verified every seed consumer reads the rebound
+  identities and that the 64 evaluation worlds are shared by C and M and disjoint from
+  block 1). Remaining pre-launch items from the review: run `--mode reduce` through the
+  b02 wrapper, compute the two-block pooled summary at intake by hand with provenance,
+  and note that `CARD` points at the intake document.
 - `DIRECTION.md` addendum for the selected object at the next clean boundary.
 
 ## First resume step
