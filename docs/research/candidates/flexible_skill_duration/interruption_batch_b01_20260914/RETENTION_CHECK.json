@@ -1,0 +1,52 @@
+{
+  "retained_main_commit": "dc0e474654482e8db205fd1e6b67dd4a2b6a5398",
+  "source_commit": "168e612956d098c017fe67377eadeb68589bf81d",
+  "source_commit_exists": true,
+  "archives_verified": [
+    {
+      "archive": "772003_D128.tar.gz",
+      "sha256": "bc8bb4a6dfd85b100c77e8b7b058fc0c4832c06ac33be108c6007721c2b58df2",
+      "bytes": 16867
+    },
+    {
+      "archive": "772003_D1280.tar.gz",
+      "sha256": "614168dbcf15ef0776355b21dd00487700bc9b62d04822a26114979599b68020",
+      "bytes": 16954
+    },
+    {
+      "archive": "772003_I128.tar.gz",
+      "sha256": "740fc3617be9f7ae37bb2c91a5db256ff18a97b02da514700627a497e747e1f1",
+      "bytes": 17718
+    },
+    {
+      "archive": "772003_I1280.tar.gz",
+      "sha256": "2559a0de98450c41abc52c656ce5e4e6f8ec0dcdf53d62fc8d47b4b8bb5e5602",
+      "bytes": 17586
+    },
+    {
+      "archive": "772103_D128.tar.gz",
+      "sha256": "e54bd1c477cd7a0935f0a2ac9c154370bbcab786bc24d19fa72002e5dd19f62e",
+      "bytes": 16861
+    },
+    {
+      "archive": "772103_D1280.tar.gz",
+      "sha256": "8db008ecfd31220d2a0aeb4b13a5e4c5cc917ca4e2fd0683cba704f473357ae5",
+      "bytes": 16892
+    },
+    {
+      "archive": "772103_I128.tar.gz",
+      "sha256": "dd2ba767cee57a303662012fc6879f3a1e574a346f9d7db22df7bb78b0226983",
+      "bytes": 17584
+    },
+    {
+      "archive": "772103_I1280.tar.gz",
+      "sha256": "99417affbb004d2b594a5461c134aec376512bfbfd1cad08fd007bf25d34b1c7",
+      "bytes": 17570
+    }
+  ],
+  "raw_file_count": 88,
+  "all_archive_and_raw_digests_match": true,
+  "monitor_raw_gzip_roundtrip_verified": true,
+  "full_result_summary_retained": true,
+  "root_reclamation_instruction": "native message: main dc0e47465 integrated/pushed; recycle exact inventory9 targets; preserve author checkout and other166 worktrees"
+}

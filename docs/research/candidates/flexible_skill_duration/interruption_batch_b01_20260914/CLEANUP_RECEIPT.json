@@ -1,0 +1,78 @@
+{
+  "completed_at_utc": "2026-09-15T07:16:48.678359+00:00",
+  "retained_main_commit": "dc0e474654482e8db205fd1e6b67dd4a2b6a5398",
+  "source_commit": "168e612956d098c017fe67377eadeb68589bf81d",
+  "fresh_pre_removal_raw_file_hashes_verified": 88,
+  "actions": [
+    "git worktree remove --force exact owned detached worktree",
+    "shutil.rmtree each of8 exact terminal supervisor roots"
+  ],
+  "targets": [
+    {
+      "path": "/home/wu/hmasd-worktrees/fsd-interruption-batch-b01-20260914",
+      "disk_absent": true,
+      "worktree_registration_absent": true
+    },
+    {
+      "path": "/home/wu/.agent-tasks/fsd-ib-b01-772003-D128",
+      "disk_absent": true,
+      "pid": 3710339,
+      "pid_absent": true,
+      "tmux_absent": true
+    },
+    {
+      "path": "/home/wu/.agent-tasks/fsd-ib-b01-772003-D1280",
+      "disk_absent": true,
+      "pid": 3708689,
+      "pid_absent": true,
+      "tmux_absent": true
+    },
+    {
+      "path": "/home/wu/.agent-tasks/fsd-ib-b01-772003-I128",
+      "disk_absent": true,
+      "pid": 3711508,
+      "pid_absent": true,
+      "tmux_absent": true
+    },
+    {
+      "path": "/home/wu/.agent-tasks/fsd-ib-b01-772003-I1280",
+      "disk_absent": true,
+      "pid": 3709290,
+      "pid_absent": true,
+      "tmux_absent": true
+    },
+    {
+      "path": "/home/wu/.agent-tasks/fsd-ib-b01-772103-D128",
+      "disk_absent": true,
+      "pid": 3719200,
+      "pid_absent": true,
+      "tmux_absent": true
+    },
+    {
+      "path": "/home/wu/.agent-tasks/fsd-ib-b01-772103-D1280",
+      "disk_absent": true,
+      "pid": 3713801,
+      "pid_absent": true,
+      "tmux_absent": true
+    },
+    {
+      "path": "/home/wu/.agent-tasks/fsd-ib-b01-772103-I128",
+      "disk_absent": true,
+      "pid": 3719886,
+      "pid_absent": true,
+      "tmux_absent": true
+    },
+    {
+      "path": "/home/wu/.agent-tasks/fsd-ib-b01-772103-I1280",
+      "disk_absent": true,
+      "pid": 3715954,
+      "pid_absent": true,
+      "tmux_absent": true
+    }
+  ],
+  "all9_targets_absent": true,
+  "other_worktree_count_before": 166,
+  "other_worktree_count_after": 166,
+  "other_worktree_set_unchanged": true,
+  "shared_repo_retained": true
+}

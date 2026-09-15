@@ -396,6 +396,19 @@ No experiment, Transport delivery, Pro request or scientific successor remains
 pending. The concrete9-target cleanup inventory excludes166 other worktrees,
 all shared/authoring checkouts and all other directions.
 
+### Retained and reclaimed; owner pause applied
+
+Root retained the full8-archive/88-file result and scientific intake at main
+dc0e474654482e8db205fd1e6b67dd4a2b6a5398. DM checked every retained archive/member
+against its manifest and fresh remote bytes; source168e61295 remains published.
+At2026-09-15T07:16:48.678359Z, the exact owned remote worktree and8 terminal
+supervisor roots were removed. All9 disk absences, registration absence and
+PID/tmux absences are verified;166 other worktrees and both shared/authoring
+checkouts remain intact. See RETENTION_CHECK.json and CLEANUP_RECEIPT.json.
+There is0 live/queued experiment,0 pending Monitor/Transport/review/recovery and
+0 remaining cleanup. The final [owner pause handoff](../FSD_OWNER_PAUSE_HANDOFF_20260915.md)
+holds this completed boundary; no successor fit/object or Pro request was launched.
+
 ## Collection and preservation inventory
 
 Collect every original summary, training rows, logs, adjacent admission,
