@@ -29,7 +29,7 @@
     }
   ],
   "recommended": "F",
-  "auto_applied": null,
+  "auto_applied": "S",
   "dm_reason": "六块是能对 .05 J 效应给出可用区间的最小块数，且补上缺失的同宿主基线。",
   "evidence": [
     "docs/research/candidates/flexible_skill_duration/FSD_BASELINE_INTERRUPTION_B01_PROSPECTIVE_CARD_20260915.md"
@@ -91,5 +91,17 @@
     "verdict_text": "DM 推荐 F：三臂 × 六块、15 rollout 终点、5/10/15 面板；主要量 SI1280_15，MEI .05 J；H_15 = J(D1280) − J(FLAT) 作为 headroom 记录。已发送至 portfolio:cross_direction。",
     "source": "docs/research/portfolio/pro_packets/20260915_fsd_baseline_interruption_investment/REQUEST.json"
   },
-  "starred": true
+  "starred": true,
+  "approval_correction": "FLAT k=rollout+1 在本栈不可运行（递归 chunk 长度=k），runner 取 k=10 与 D 臂一致，记录于卡片 §8",
+  "execution_history": [
+    {
+      "at": "2026-09-15T11:25:28+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260915_fsd_baseline_interruption_investment/archive/RESPONSE.md",
+      "record": "docs/research/portfolio/pro_packets/20260915_fsd_baseline_interruption_investment/INTAKE.md",
+      "state": "applied",
+      "summary": "Portfolio 选 S（12 次拟合，四块，15 rollout，三面板）并作出修正：FLAT 走 off 路线+mappo 开关、GAP 标签、重要性/不确定性分开读、4+2 累积；已在 codex/fsd db0b11bd8 实现，Opus 审阅中，未启动。",
+      "correction": "FLAT k=rollout+1 在本栈不可运行（递归 chunk 长度=k），runner 取 k=10 与 D 臂一致，记录于卡片 §8"
+    }
+  ]
 }
