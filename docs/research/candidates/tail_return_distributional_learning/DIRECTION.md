@@ -25,6 +25,12 @@ Support is the concrete event/information/action-or-credit/real-learning/native-
 
 New means materially different question/comparator/estimand/first object from existing and legacy directions, not a universal literature novelty claim. Limited primary extracts and foundational reasoning in the Portfolio packet supplied inspiration; no new result polarity is borrowed from an old method.
 
+### Accepted A01 source assessment — 2026-09-14
+
+[A01 intake](TRDL_A01_INTAKE_20260914.md) accepts zero-exposure static preparation: the homogeneous native host and DENSE/GRU64 actor are reusable; no TRDL learner exists. The source mean-return update cannot serve as the registered tail learner. [Prospective B01](TRDL_B01_SCIENCE_CARD_20260914.md) defines scalar fitting of W versus32-quantile fitting of full J, identical frozen-score actor updates and each arm's own worst64-of256 endpoint. No scientific source was edited and no model/environment/optimizer invoked.
+
+The strongest null survives: an adequately fitted scalar conditional W baseline may suffice, while quantile estimation adds finite fitting and optimization error. A01 establishes a coherent path, not efficacy, headroom, measured affordability or a new empirical result. Its source finding that time is already in critic136 leaves only accumulated reward/H to add. The next discriminator is the one prepared learning pair if numerical/implementation investment is separately selected; the old3000-second offer remains unallocated. This is object-tier preparation acceptance, not a recast or lifecycle disposition.
+
 ## Responsibility and finite boundary
 
 Root creates one reusable direction worktree and one Astra/max DM for the accepted preparation. The DM owns the bounded assessment and subsequent current-authority decisions; no positive pilot, exact proof, full reconstruction or automatic release of the unallocated offer is required or authorized. Preparation completion alone does not release the occupied direction.
