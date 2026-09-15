@@ -1,0 +1,148 @@
+{
+  "caller_role": "em",
+  "workflow_node": "em_convergence",
+  "request_id": "2026-09-14-folr-persistence-b01-result-plan-review-01",
+  "source_thread_id": "/root/dm_folr_resume_20260914",
+  "parent_thread_id": "/root/dm_folr_resume_20260914",
+  "operator_thread_id": "/root/dm_folr_resume_20260914/transport_l_high_folr",
+  "direction_id": "vap_folr_core",
+  "repository": "CartmanFatass/My-paper-code",
+  "repository_url": "https://github.com/CartmanFatass/My-paper-code",
+  "commit_or_ref": "028e36b952e79d6719387661bc032b5aabc723df",
+  "execution_mode": "REUSE_DM_TRANSPORT",
+  "delivery_mode": "github_delivery",
+  "conversation_id": "6aa18137-9d88-83e8-a01f-46630813faf8",
+  "scientific_question": "Independently review the COMPLETE FOLR entity-persistence B01 result, its bounded interpretation, and the DM's concrete proposal to prepare a fresh Z-minus-Generic B next. The owner explicitly resumed the subagent DMs after the completed operational-pause handoffs and instructed them to continue. This is a new result/plan review, not a reopening/resend of the completed A-G closeout. The relevant new fact is a prospective fresh A-Z contrast; do not mechanically repeat the old A-G question or extrapolate either single positive or negative observation. The decision this review informs is whether the next bounded comparison should test the simplified Z program's increment over adaptive Generic, versus repeating A-Z or A-G first. No Portfolio priority/lifecycle/capacity question or new-family opening/closure is posed here. CONTINUE/MEDIUM and the accepted family remain; current ordinary object-tier preparation is delegated to DM. Please review and challenge the actual choice and requirements, rather than treating this as a request for an automatic grant or a sign-triggered disposition.\n\nThe original two invocations at 42e337f36bd36c5dd24a7862eb71144f44fdef57 both completed: train781701/eval1781701, one unscreened fit per arm,5000 training episodes/100000 native ticks/4969 RMSprop steps, one final checkpoint then128 greedy non-learning episodes/2560ticks each. Machine-generated exposure:2 fresh fits;200000 native training ticks;9938 RMSprop steps;2 final checkpoints;256 final greedy episodes/5120 evaluation ticks; no screening/retry/checkpoint selection. Z ran first and the selected A ran regardless of Z score. Both original terminal exits are0; exact source, original Z input, full arrays, checkpoint state, adjacent4GiB admission and20 archived members were checked and retained. No scientific retry or post-result source repair. Full native wall5759.94s; aggregate CPU5759.38s; support/provider/lifetime total UNKNOWN. Observer capability/timestamp failures are preserved separately, with actual supervisor terminal/collection evidence and a successful terminal-only native return; assess only their concrete claim dependency.\n\nZ mean1.59265625 (SD7.1520175541, conditional episodeSE0.632155014,57/128 negative), A mean-1.476796875 (SD4.7745108887,SE0.4220111283,84/128 negative). A-Z=-3.069453125 => CURRENT_ONLY_ABOVE_MEI under strict d<-1;[-1,1] is WITHIN_MEI and d>1 PERSISTENT_ABOVE_MEI. DM predicted WITHIN_MEI with low confidence and missed; owner prediction was not taken. One fitted policy per arm is the learning unit.128 episodes are conditional on each fitted policy; matching labels align initialization but do not prove paired worlds, independent arm draws, training-population uncertainty or stable superiority. The negative-count difference is not paired episode improvement.\n\nBoth complete actors have192741 parameters and the same modules/initial weights/external constructor RNG. A retains observer-owned entity GRU16 state across continuing visible/unseen membership; Z feeds zero old entity state into every primitive call and leaves unseen state zero. Both KEEP their adaptive Generic64 recurrence, own-lifetime resets, seen/age metadata, truthful public slot/lifecycle announcements and legal locally masked physical/action observations. Z is not memoryless. Same parameter count does not equal temporal/optimization capacity: its entity recurrent weight receives zero prior-hidden inputs. Own observer/subject lifetime resets, unseen physical masks and separate online/target recurrent reconstruction were independently reviewed before launch. The H20 easy Traffic Junction/five-slot/CPU-FP32 host, native reward/actions and learner remain fixed. Generic recurrence and current cues are strong alternatives to useful entity persistence. Review the actual listed changed source and complete technical review; no raw checkpoint execution or expanded inherited-code census is requested. State honestly which inputs you accessed and which technical facts rely on preserved DM/reviewer receipts.\n\nThe DM accepts an adverse persistent-versus-current-only INSTANCE, favoring Z as a candidate for bounded development without closing A/history or claiming a uniquely identified mechanism. The old A-G+5.29640625 remains one positive whole-program instance and is not overwritten; old replacement BANK B02-4.830859375/B03-6.63671875 remain separate adverse package observations. E lacked its intact new contrast and F used outcome-informed historical BANK; neither is an extra replication. New A's negative mean cannot serve as another A-G replication when contemporary G is absent. Do not combine historical G with current Z or pool these different contrasts as one effect. Unknown convergence, competent/tuned same-information baseline headroom, computational efficiency, transfer, scaling and C/UAV performance remain outside the claim.\n\nThe proposed next question is: after fresh finite learning, does current-only augmented Z earn any increment over the existing same-information adaptive Generic64 G? Prepare one new unscreened block, fresh Z and G,5000/4969/128 each, two fits/205120total ticks; future card fixes new labels before acquisition. This would be a whole-program increment (192741 versus103173 actor parameters), not capacity-isolated memory attribution. No successor invocation has been accepted. The DM prefers this to another A-Z because an internal preference does not establish Z's value over Generic at all; another A-G does not test Z. A fixed-checkpoint lesion does not compare learning adaptation. Strong alternatives are favorable complete learning/evaluation realization and easier optimization/current processing. Challenge whether this finite proposal is the right next decision and whether a materially better bounded alternative is supported, while respecting its B claim ceiling. Do not impose exact maxima, exhaustive causal/support diagnostics, search-before-learning, tuned-headroom acquisition or stronger-class confirmation as prerequisites merely because those would answer different questions.\n\nKnown next-work factors are two complete5000-episode fits;2*4969*32*21*5*2 Generic replay positions, with Z additionally4969*32*21*25*2 entity replay positions and existing attention/fusion;256 final greedy episodes. No nested candidates/trajectories/solver search, performance sweep or added native validation. Current Z2930.62s plus old G1178.68s yields a4109.30s approximate two-fit reference, not a guaranteed cost or cost experiment; current A-Z measured5759.94s. Baseline tuning would itself be a B, not free preparation, and a missing matching headroom record is not a B launch gate. Future scope/budget still requires its own concise card, exact accepted implementation and fresh admission. No paid capacity or Portfolio change is included here.\n\nReturn consequential findings first: any actual binding/measurement flaw and affected claim; narrower inference/selection/optimization/cost wording issues; the defensible bounded result; and your reasoned assessment of the concrete next comparison with known work. Distinguish review recommendations from unposed direction/Portfolio dispositions. DM will read your full response, respond to material findings and resolve any concrete owner/spec conflict through this same node before executing an affected requirement. Scientific knowledge explains alternatives; only the listed applicable specification passages bind this task.",
+  "deliverable": "Complete independent scientific review of the actual A-Z B evidence/interpretation and the finite prospective Z-G comparison's decision value. Name consequential defects and their dependent claims, preserve contradictory evidence, assess the strongest legal available null and dominant work, and report actual source access. A concrete plan critique is requested; no Portfolio disposition, new paid grant, C freeze or empirical execution.",
+  "claim_ceiling": "B/EXPLORE: one complete learning/evaluation instance per program in an A-Z conditional design comparison. No stable training-population superiority, memoryless-policy comparison, unique causal memory mechanism, convergence/competence/tuned headroom, efficiency, transfer/scaling or C/UAV claim. Future Z-G would be a new bounded whole-program comparison.",
+  "reference_files": [
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_ENTITY_PERSISTENCE_B01_SCIENCE_CARD_20260914.md",
+      "purpose": "Read the complete selected B question, legal programs, exposure, MEI/prediction and L0/cost limits.",
+      "provenance": "Prospectively committed card before either original invocation.",
+      "commit_sha": "bd841a18078bab9894153801714bbca0cf77472e"
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_ENTITY_PERSISTENCE_B01_RESULT_EVIDENCE_20260914.md",
+      "purpose": "Read the complete E0 result, fixed rule, counts, terminal and archive facts, deviations and claim ceiling.",
+      "provenance": "Current DM technical collection and scientific evidence; not independent empirical replication."
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_ENTITY_PERSISTENCE_B01_INTAKE_20260914.md",
+      "purpose": "Read the entire interpretation, missed prediction, decisions and concrete Z-G proposal with alternatives and costs.",
+      "provenance": "DM scientific judgment to challenge; future preparation only, no successor invocation."
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/DIRECTION.md",
+      "purpose": "Read Scientific question and Current position only; older authority/lifecycle/source paragraphs are historical and do not expand this request.",
+      "provenance": "Direction synthesis; current routes are the separately pinned applicable AGENTS sections."
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/entity_persistence_b01_781701/PAIR_READBACK.json",
+      "purpose": "Read complete machine-generated exposure, numerical primary and cost totals.",
+      "provenance": "DM readback over the two complete selected original summary byte strings."
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/entity_persistence_b01_781701/RUN_SUMMARY.json",
+      "purpose": "Read all run-level units, per-arm n=1, null SD and absent paired inference.",
+      "provenance": "Scientific-tools descriptive summary; equal seed labels are not pairing proof."
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/entity_persistence_b01_781701/CURRENT_ONLY_COLLECTION.json",
+      "purpose": "Read all source/seed/count/checkpoint/admission/terminal/digest facts.",
+      "provenance": "Actual remote collection and manifests; raw archives are preserved but executing/downloading them is not requested."
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/entity_persistence_b01_781701/PERSISTENT_COLLECTION.json",
+      "purpose": "Read all source/seed/count/checkpoint/admission/terminal/digest and original Z input facts.",
+      "provenance": "Actual remote collection and manifests; retain direct-observation versus DM verification boundaries."
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/entity_persistence_b01_781701/INDEPENDENT_REVIEW.md",
+      "purpose": "Read the complete independent recurrent/learning/publication review and correction closeout.",
+      "provenance": "Native Astra/high technical review; not scientific polarity or empirical replication."
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/entity_persistence_b01_781701/ENGINEERING.md",
+      "purpose": "Read direct implementation scope, focused checks, prelaunch repair and retained test scratch limitation.",
+      "provenance": "DM engineering record; automatic deletion rejection does not invalidate science."
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/entity_persistence_b01_781701/MONITOR_RECOVERY.md",
+      "purpose": "Read the actual observation failures and later terminal-only native return, including rejected timestamps.",
+      "provenance": "Technical observation evidence only; not a retry, continuous-adoption claim or result polarity."
+    },
+    {
+      "path": "experiments/candidates/vap_folr_core/entity_history_augmentation_b01/model.py",
+      "purpose": "Read the actual A/Z entity-state reset/carry, Generic route, lifetime and legal-information masks.",
+      "provenance": "Exact execution source; required source for the conditional design interpretation.",
+      "commit_sha": "42e337f36bd36c5dd24a7862eb71144f44fdef57"
+    },
+    {
+      "path": "experiments/candidates/vap_folr_core/entity_persistence_b01/publication.py",
+      "purpose": "Read the complete selected endpoint bindings, fixed primary and missing-comparator behavior.",
+      "provenance": "Exact execution source, independent review accepted before either fit.",
+      "commit_sha": "42e337f36bd36c5dd24a7862eb71144f44fdef57"
+    },
+    {
+      "path": "scripts/run_folr_entity_persistence_b01.py",
+      "purpose": "Read the full selected acquisition/optimizer/checkpoint/final publication path and RNG handling.",
+      "provenance": "Exact execution source; unchanged lower-level learner/environment semantics are the card and reviewed inheritance.",
+      "commit_sha": "42e337f36bd36c5dd24a7862eb71144f44fdef57"
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_ENTITY_HISTORY_AUGMENTATION_B01_INTAKE_20260914.md",
+      "purpose": "Read the complete historical A-G interpretation and substantive independent-review response; pause clauses are superseded by explicit owner resume.",
+      "provenance": "Final historical A-G closeout retained at its complete handoff snapshot.",
+      "commit_sha": "935694878cd7066d157bdb9f8637abc654badd4b"
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_ENTITY_HISTORY_B02_RESULT_EVIDENCE_20260914.md",
+      "purpose": "Read original B02 rule and adverse replacement-BANK result, not a negative replication of augmentation.",
+      "provenance": "Historical evidence preserved separately at the complete pre-resume snapshot.",
+      "commit_sha": "935694878cd7066d157bdb9f8637abc654badd4b"
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_ENTITY_HISTORY_B03_RESULT_EVIDENCE_20260914.md",
+      "purpose": "Read original B03 rule and adverse replacement-BANK result, preserving its limits.",
+      "provenance": "Historical evidence preserved separately at the complete pre-resume snapshot.",
+      "commit_sha": "935694878cd7066d157bdb9f8637abc654badd4b"
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "purpose": "Apply §§2–5.2 and11.8–11.10 to this B result and proposed B question; §11 controls. Read §11.7 MEI/headroom descriptors.",
+      "provenance": "Current published applicable evidence specification; no stronger class, exactness or universal baseline-tuning gate.",
+      "commit_sha": "70d9505a4965387e76f455dbf58c0bd32250f134"
+    },
+    {
+      "path": "docs/project/ENGINEERING_SCOPE_SPEC.md",
+      "purpose": "Apply §§4–5 and7 only to concrete implementation/measurement threats and proportional review.",
+      "provenance": "Current published engineering specification; scope-none object and independent high-risk review.",
+      "commit_sha": "70d9505a4965387e76f455dbf58c0bd32250f134"
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "purpose": "Read §§2–4 and6 for legal information, finite-learning alternatives, attribution and empirical units.",
+      "provenance": "Explanatory scientific foundations, not authority to add experiment prerequisites.",
+      "commit_sha": "70d9505a4965387e76f455dbf58c0bd32250f134"
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+      "purpose": "Read relevant run-unit, selection and conditional evaluation reasoning.",
+      "provenance": "Explanatory knowledge; the card fixes the actual B endpoint and inference.",
+      "commit_sha": "70d9505a4965387e76f455dbf58c0bd32250f134"
+    },
+    {
+      "path": "AGENTS.md",
+      "purpose": "Apply §§2,4 and4.8 to the posed review and ordinary object-tier preparation; no unposed Portfolio disposition. Owner explicitly resumed DMs after the historical operational pause.",
+      "provenance": "Current published authority passages; latest explicit owner resume is recorded in the prospective card and this request.",
+      "commit_sha": "70d9505a4965387e76f455dbf58c0bd32250f134"
+    }
+  ],
+  "github_delivery": {
+    "branch": "codex/vap-folr",
+    "base_sha": "028e36b952e79d6719387661bc032b5aabc723df",
+    "response_path": "docs/research/candidates/vap_folr_core/pro_packets/20260914_persistence_b01_result_plan_review/archive/RESPONSE.md",
+    "issue_url": "https://github.com/CartmanFatass/My-paper-code/issues/15"
+  }
+}

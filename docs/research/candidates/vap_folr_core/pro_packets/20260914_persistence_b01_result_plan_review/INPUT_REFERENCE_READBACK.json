@@ -1,0 +1,220 @@
+{
+  "checked_utc": "2026-09-15T01:19:25.317871+00:00",
+  "observed_published_refs": {
+    "refs/heads/codex/vap-folr": "028e36b952e79d6719387661bc032b5aabc723df",
+    "refs/heads/main": "361e1372527dcbdd3706c09ad72c955cde78f5c2"
+  },
+  "references": [
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_ENTITY_PERSISTENCE_B01_SCIENCE_CARD_20260914.md",
+      "commit_sha": "bd841a18078bab9894153801714bbca0cf77472e",
+      "bytes": 12630,
+      "sha256": "ac7413e2ef14b6568e9b7f2b59156e4ee67b6b065b6044af03f50615eb8ad59e",
+      "reachable_from_observed_published_refs": [
+        "refs/heads/codex/vap-folr"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_ENTITY_PERSISTENCE_B01_RESULT_EVIDENCE_20260914.md",
+      "commit_sha": "028e36b952e79d6719387661bc032b5aabc723df",
+      "bytes": 6602,
+      "sha256": "1a4e5af94a893fe7c683f4648fb0c1c732c1c8346f313e2788f7f870c0df01b0",
+      "reachable_from_observed_published_refs": [
+        "refs/heads/codex/vap-folr"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_ENTITY_PERSISTENCE_B01_INTAKE_20260914.md",
+      "commit_sha": "028e36b952e79d6719387661bc032b5aabc723df",
+      "bytes": 7666,
+      "sha256": "dbc942b92e6ee8429cbe42d67d064a54f08c608869caafdc2ba190f40f3ec097",
+      "reachable_from_observed_published_refs": [
+        "refs/heads/codex/vap-folr"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/DIRECTION.md",
+      "commit_sha": "028e36b952e79d6719387661bc032b5aabc723df",
+      "bytes": 77836,
+      "sha256": "8d1c5f76b6afd87cd3325b086176017401955bdb4bcc2963c65559b965388777",
+      "reachable_from_observed_published_refs": [
+        "refs/heads/codex/vap-folr"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/entity_persistence_b01_781701/PAIR_READBACK.json",
+      "commit_sha": "028e36b952e79d6719387661bc032b5aabc723df",
+      "bytes": 2191,
+      "sha256": "c42c6ed9e44ce409b15753380fe60d30cc6636604de92def2bf594c57e04e29e",
+      "reachable_from_observed_published_refs": [
+        "refs/heads/codex/vap-folr"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/entity_persistence_b01_781701/RUN_SUMMARY.json",
+      "commit_sha": "028e36b952e79d6719387661bc032b5aabc723df",
+      "bytes": 782,
+      "sha256": "77a3b7fa4055708aed4f48175fa2b38c1d74b71e8121c54cb6ced5bbf5ccb307",
+      "reachable_from_observed_published_refs": [
+        "refs/heads/codex/vap-folr"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/entity_persistence_b01_781701/CURRENT_ONLY_COLLECTION.json",
+      "commit_sha": "028e36b952e79d6719387661bc032b5aabc723df",
+      "bytes": 5492,
+      "sha256": "f6340384f5f94db0241a52012de05d571f9dbf90110a15c5956d3ab2281d4415",
+      "reachable_from_observed_published_refs": [
+        "refs/heads/codex/vap-folr"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/entity_persistence_b01_781701/PERSISTENT_COLLECTION.json",
+      "commit_sha": "028e36b952e79d6719387661bc032b5aabc723df",
+      "bytes": 6402,
+      "sha256": "a31fd25987d8873702cbe4c8a06d3154aceb8b1a9ad19b35c03efbc63eeb351b",
+      "reachable_from_observed_published_refs": [
+        "refs/heads/codex/vap-folr"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/entity_persistence_b01_781701/INDEPENDENT_REVIEW.md",
+      "commit_sha": "028e36b952e79d6719387661bc032b5aabc723df",
+      "bytes": 4090,
+      "sha256": "12af2251bd473263d76e075ddc0a05b40711306d82bde89b70611d9346512902",
+      "reachable_from_observed_published_refs": [
+        "refs/heads/codex/vap-folr"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/entity_persistence_b01_781701/ENGINEERING.md",
+      "commit_sha": "028e36b952e79d6719387661bc032b5aabc723df",
+      "bytes": 2735,
+      "sha256": "38a82eb944bdab6741e0e40401dbab5a432caf4ad880534fa49684d0b5f4b083",
+      "reachable_from_observed_published_refs": [
+        "refs/heads/codex/vap-folr"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/entity_persistence_b01_781701/MONITOR_RECOVERY.md",
+      "commit_sha": "028e36b952e79d6719387661bc032b5aabc723df",
+      "bytes": 3894,
+      "sha256": "c93059e95d2ac557b761009ee6f6b6e6d5e2d50862625041ce433eefbabc1618",
+      "reachable_from_observed_published_refs": [
+        "refs/heads/codex/vap-folr"
+      ]
+    },
+    {
+      "path": "experiments/candidates/vap_folr_core/entity_history_augmentation_b01/model.py",
+      "commit_sha": "42e337f36bd36c5dd24a7862eb71144f44fdef57",
+      "bytes": 5637,
+      "sha256": "99312849a725623e4364bcbe6f2c0a491ee6ab24b94b2ede9b601f93bd2370bb",
+      "reachable_from_observed_published_refs": [
+        "refs/heads/codex/vap-folr"
+      ]
+    },
+    {
+      "path": "experiments/candidates/vap_folr_core/entity_persistence_b01/publication.py",
+      "commit_sha": "42e337f36bd36c5dd24a7862eb71144f44fdef57",
+      "bytes": 2632,
+      "sha256": "a5bacbc7b43497fdb404256c475caa4f3a7a16d3a94ba4e7804ffa2791373ac8",
+      "reachable_from_observed_published_refs": [
+        "refs/heads/codex/vap-folr"
+      ]
+    },
+    {
+      "path": "scripts/run_folr_entity_persistence_b01.py",
+      "commit_sha": "42e337f36bd36c5dd24a7862eb71144f44fdef57",
+      "bytes": 8063,
+      "sha256": "ca400266a3c3016dd26a5ec1e21f218d532a9f99b7dc8fa67111e6a1596b7810",
+      "reachable_from_observed_published_refs": [
+        "refs/heads/codex/vap-folr"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_ENTITY_HISTORY_AUGMENTATION_B01_INTAKE_20260914.md",
+      "commit_sha": "935694878cd7066d157bdb9f8637abc654badd4b",
+      "bytes": 10344,
+      "sha256": "e54b055cb0abf636029556343f4bd506ca0324371b7951e30dd98469b77a3b59",
+      "reachable_from_observed_published_refs": [
+        "refs/heads/codex/vap-folr"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_ENTITY_HISTORY_B02_RESULT_EVIDENCE_20260914.md",
+      "commit_sha": "935694878cd7066d157bdb9f8637abc654badd4b",
+      "bytes": 9178,
+      "sha256": "206afb1cdefe010f758ce7e951e59e4140fe7f127133bef995e37070141756c1",
+      "reachable_from_observed_published_refs": [
+        "refs/heads/codex/vap-folr"
+      ]
+    },
+    {
+      "path": "docs/research/candidates/vap_folr_core/FOLR_ENTITY_HISTORY_B03_RESULT_EVIDENCE_20260914.md",
+      "commit_sha": "935694878cd7066d157bdb9f8637abc654badd4b",
+      "bytes": 7669,
+      "sha256": "f9f5ccb7367ede561e492865579768d7fdc022af1ab7ab6aacd48e5e08f27b18",
+      "reachable_from_observed_published_refs": [
+        "refs/heads/codex/vap-folr"
+      ]
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "commit_sha": "70d9505a4965387e76f455dbf58c0bd32250f134",
+      "bytes": 50411,
+      "sha256": "4d0de0052abce741d9be90c2ead6e14097c3ab254a8086f8947f8cde6f992089",
+      "reachable_from_observed_published_refs": [
+        "refs/heads/main"
+      ]
+    },
+    {
+      "path": "docs/project/ENGINEERING_SCOPE_SPEC.md",
+      "commit_sha": "70d9505a4965387e76f455dbf58c0bd32250f134",
+      "bytes": 21838,
+      "sha256": "ee7d7f5b183c95cdc024823c582ffd008f4bb6df00869b5e8ed22d6079d34673",
+      "reachable_from_observed_published_refs": [
+        "refs/heads/main"
+      ]
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "commit_sha": "70d9505a4965387e76f455dbf58c0bd32250f134",
+      "bytes": 7819,
+      "sha256": "c1f7d6c68fcec55de48ea555346d5d65af8d311e28502be43a2b05436a174247",
+      "reachable_from_observed_published_refs": [
+        "refs/heads/main"
+      ]
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+      "commit_sha": "70d9505a4965387e76f455dbf58c0bd32250f134",
+      "bytes": 4252,
+      "sha256": "99b7e727a890d4e93a64b5c0f44fe588e383b5de56f2da663fb3f864c6d8293c",
+      "reachable_from_observed_published_refs": [
+        "refs/heads/main"
+      ]
+    },
+    {
+      "path": "AGENTS.md",
+      "commit_sha": "70d9505a4965387e76f455dbf58c0bd32250f134",
+      "bytes": 51417,
+      "sha256": "b241936683ee676756d371b832f349d2a89b7736ee8e359327db7cfff5ce6395",
+      "reachable_from_observed_published_refs": [
+        "refs/heads/main"
+      ]
+    }
+  ],
+  "published_source_verification_only_not_Pro_access": true,
+  "next_proposal_arithmetic": {
+    "new_fits": 2,
+    "train_episodes_total": 10000,
+    "train_ticks_total": 200000,
+    "optimizer_steps_total": 9938,
+    "evaluation_episodes_total": 256,
+    "evaluation_ticks_total": 5120,
+    "generic_replay_positions_total": 66783360,
+    "Z_entity_replay_positions": 166958400,
+    "native_reference_seconds": 4109.3,
+    "extra_current_native_exposure": 0
+  }
+}
