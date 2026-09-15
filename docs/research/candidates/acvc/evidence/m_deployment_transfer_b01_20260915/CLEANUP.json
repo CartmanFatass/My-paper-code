@@ -1,0 +1,46 @@
+{
+  "completed_at": "2026-09-15T21:40:44+00:00",
+  "source_sha": "a741758a11e6c9d9888cbc852095544f3df4e04f",
+  "authorization": "Portfolio grant G (assigned cleanup within the grant); preservation verified at main e52fd45dd / codex/acvc 3e5be1f62 plus the retained archive (PRESERVATION.json, member digests equal to the remote sha256sum listing)",
+  "terminal_status_before": {
+    "task": "acvc-transfer-m-b01-28531-a741758a",
+    "status": "finished",
+    "exit_code": 0,
+    "pid": 3745266,
+    "uptime_seconds": 1863,
+    "tmux_active": false
+  },
+  "exact_removed_paths": [
+    "/home/wu/hmasd-worktrees/acvc-transfer-b01-a741758a1",
+    "/home/wu/hmasd-inputs/acvc-transfer-b01-28531",
+    "/home/wu/.agent-tasks/acvc-transfer-m-b01-28531-a741758a"
+  ],
+  "disk_absent": {
+    "worktree": true,
+    "staging": true,
+    "task_record": true
+  },
+  "worktree_registration_absent": true,
+  "registered_before_count": 166,
+  "registered_after_count": 165,
+  "return_codes": {
+    "worktree_remove": 0,
+    "prune": 0,
+    "staging_rm": 0,
+    "task_rm": 0
+  },
+  "status_after": "{\"task\": \"acvc-transfer-m-b01-28531-a741758a\", \"status\": \"not_found\"}",
+  "raw_output": [
+    "status_before={\"task\": \"acvc-transfer-m-b01-28531-a741758a\", \"status\": \"finished\", \"exit_code\": 0, \"pid\": 3745266, \"uptime_seconds\": 1863, \"tmux_active\": false}",
+    "registered_before=166",
+    "wt_exists_before=yes st_exists_before=yes task_exists_before=yes",
+    "worktree_remove_rc=0",
+    "prune_rc=0",
+    "staging_rm_rc=0",
+    "task_rm_rc=0",
+    "wt_absent=yes st_absent=yes task_absent=yes",
+    "registration_absent=yes",
+    "registered_after=165",
+    "status_after={\"task\": \"acvc-transfer-m-b01-28531-a741758a\", \"status\": \"not_found\"}"
+  ]
+}
