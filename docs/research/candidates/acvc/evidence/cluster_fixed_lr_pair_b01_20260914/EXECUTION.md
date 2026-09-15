@@ -25,3 +25,11 @@ After each accepted original, DM hands its exact handle to reusable native monit
 Canonical owner item `docs/research/portfolio/owner/inbox/2026-09-14/20260914-acvc-013.json`; main audit2026-09-14 line117. Root owns main publication. No control-plane dirty path was changed. Local test cleanup was rejected before execution, so its exact scratch remains preserved in ENGINEERING.md; no alternative deletion was attempted.
 
 Actual source staging completed at the full commit above; scoped source diff and destination bash syntax passed. The initial source-only9b44896d9 checkout contained no result output or unique untracked file and was safely retired after preserving its published source; disk and worktree registration absence were verified. Both staging receipts are retained in STAGING.json.
+
+## Actual original launch acceptance
+
+Both exact commands were submitted once from published command commitf3cba57c88bcde9c8bd8a37ed4b8410f4f875bcd and returned accepted tmux starts. Local receipt times: low2026-09-15T02:04:22.939896Z and reference02:04:23.320675Z. The source and scientific paths are fixed at2bbaa99ad9cc717d89e47a1f24d9acd76dce4f97. [ACCEPTANCE.json](ACCEPTANCE.json) preserves both native command receipts; no uncertain launch remains.
+
+Read the actual destination admission files: low physical/effective15,629,537,280 bytes, reference15,556,071,424 bytes; both passed the required4,294,967,296-byte floor. Destination captured times are02:04:22.464287Z and02:04:22.850880Z. Local receipt and remote clock times are separate observations, not evidence of cross-host clock synchronization. Cgroup current/max/headroom are null as in the original helper receipt; each effective field equals its measured available physical field. [ADMISSION.json](ADMISSION.json) preserves these adjacent checks. This is not an admission for a future invocation.
+
+Both accepted handles were handed to `/root/dm_acvc_resume_20260914/mon_ll_acvc`; direct MONITOR_ADOPTED is still a separate pending event at this append. The DM prepared exact cleanup inventory while the originals execute. No third original, numerical probe or retry was launched.
