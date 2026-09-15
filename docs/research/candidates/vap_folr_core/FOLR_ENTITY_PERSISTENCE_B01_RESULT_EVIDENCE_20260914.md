@@ -26,7 +26,7 @@ It is not a significance, equivalence, competence or stable-ranking decision.
 | Training episodes / native ticks | 5000 / 100000 | 5000 / 100000 |
 | RMSprop updates | 4969 | 4969 |
 | Final evaluation episodes / ticks | 128 / 2560 | 128 / 2560 |
-| Actor parameters | 192741 | 192741 |
+| Registered actor parameters | 192741 | 192741 |
 | Actor parameter movement L2 | 45.8567639738 | 44.3868887812 |
 | Full invocation wall, seconds | 2930.62 | 2829.32 |
 | Aggregate user+system CPU, seconds | 2931.17 | 2828.21 |
@@ -102,7 +102,7 @@ checkout stays active. No historical result/quarantine is lifted.
 
 The contrast concerns persistent entity-state input inside the same augmented
 network. Z retains adaptive Generic recurrence, seen/age bookkeeping and common
-public lifecycle cues; it is not a memoryless policy. Equal parameter counts do
+public lifecycle cues; it is not a memoryless policy. Equal registered parameter counts do
 not equalize temporal capacity or optimization: Z's entity recurrent weight sees
 zero prior hidden inputs. Native history usefulness, stability, convergence,
 competence, tuned headroom and transfer remain unestablished. This adverse A−Z

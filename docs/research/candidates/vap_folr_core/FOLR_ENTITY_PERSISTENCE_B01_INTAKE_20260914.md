@@ -57,8 +57,9 @@ CURRENT_ONLY_ABOVE_MEI branch. Owner prediction: not taken. At the complete-resu
 boundary item.py reviews --json in canonical C:/Projects/HMASD returned[]; no
 unapplied owner instruction or ledger override was found. Historical pauses,
 quarantines, recasts and contrary evidence keep their original meaning. The
-operational resume remains in force. No material dissent has yet been received for
-this result; the independent scientific review remains due, not implicitly passed.
+operational resume remains in force. The later complete independent review is now
+accepted with the reporting and prospective-design refinements recorded below;
+none of its substantive findings was overruled.
 
 ## Decisions this intake produces
 
@@ -101,8 +102,8 @@ The same host lacks a tuned same-information headroom record; no baseline-compet
 claim is implied and that absence is not a B launch condition.
 
 Known cost reference: current Z2930.62s plus previous G1178.68s =4109.30s for two
-fits. This is an approximate reference from different original runs, not a guaranteed
-cost or a new cost experiment. Dominant work is two complete5000-episode fits,
+fits. This is a heterogeneous cross-run reference, not a forecast, upper bound,
+affordability grant or observed saving. Dominant work is two complete5000-episode fits,
 2*4969*32*21*5*2 Generic replay positions; Z adds4969*32*21*25*2 entity replay
 positions plus existing attention/fusion;256 final greedy episodes. No nested
 candidates, policy search, oracle or added native validation. Compare the measured
@@ -114,17 +115,38 @@ decision value under empirical-spec §11.8, not to demand exhaustive causal diag
 Chinese brief:
 [persistence result](../../portfolio/owner/briefs/vap_folr_core/2026-09-14_FOLR_ENTITY_PERSISTENCE_B01.md).
 
-## Post-input execution closeout and review binding
+## Post-input execution closeout and completed review
 
 The complete-result/finite-plan request is
 2026-09-14-folr-persistence-b01-result-plan-review-01, input028e36b952e79d6719387661bc032b5aabc723df,
 fixed TASKcf87e93333af7870aa5b2d5cbd7afb4d181ba3f0, HANDOFF
 32b9fc6a79cad14f4b4ea19d580c513b2e85b0ad. It was dispatched to the DM's native
-Luna/high Transport on the existing em:vap_folr_core:convergence binding. The
-pending producer is that exact Transport assignment; this line does not claim
-provider acceptance or scientific review completion. The authored scope is result/
-plan review, with no inferred lifecycle disposition; AUTHOR_SCOPE.md records the
-unpublished generic-boilerplate correction before the fixed TASK was bound.
+Luna/high Transport on the existing em:vap_folr_core:convergence binding. The entire
+123-line response at 5f49770d9d87aa952a1894b522056ce158000545 is verified, read and
+accepted in the [full review intake](pro_packets/20260914_persistence_b01_result_plan_review/INTAKE.md).
+The authored scope is result/plan review, with no inferred lifecycle disposition;
+AUTHOR_SCOPE.md records the unpublished generic-boilerplate correction before the
+fixed TASK was bound. No Transport response or scientific review remains pending.
+
+The review finds no result-invalidating defect and supports preparing fresh Z−G.
+Its three consequential refinements are applied: equal registered parameters do
+not mean equal trained temporal capacity; choosing Z is outcome-informed, with a
+fresh A−G repetition the strongest rival; and the 4109.30s cross-run cost reference
+confers neither speed nor funding. Z−G answers the missing incremental-value
+question, not a three-program ranking or an isolated value-of-memory claim.
+Prospective Z keeps its modules and Generic recurrence; G retains its original
+adaptive head, without dummy capacity or imposed amnesia. Compatible submodule and
+external-RNG alignment must be stated without claiming identical unequal networks.
+The complete learning/execution law, including optimization and policy-induced
+data, is the treatment. New checks target actual new routing/sign/identity risks;
+unchanged evidence is reused. No new native validation or empirical repair follows.
+
+At this clean boundary the canonical owner review query again returned an empty
+list. Options are accept/apply the full review, return a concrete conflict, or
+invalidate and repair. The executed recommendation is accept/apply: Owner-delegated
+decision (unattended, 2026-09-03 instruction). There is no concrete method/scope
+conflict to return. The original two-fit object is complete; the review recommends
+preparation and grants no new invocation. CONTINUE/MEDIUM and family OPEN remain.
 
 After the fixed input, all unique support files were published at3ce45737f and
 Root confirmed main retention atf1899b900. The exact remote worktree and both

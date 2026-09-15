@@ -17,7 +17,7 @@ This authority preserves the direction's source-grounded scientific question, ev
 ## Authority
 
 - Stable direction ID: `vap_folr_core`
-- OWNER_DIRECT 2026-09-14: DM owns innovation, ordinary experiments/engineering and reports; Portfolio is the final direction-level interpreter under PORTFOLIO_DECISION_PROTOCOL. The owner-challenged disposition is reconciled by Portfolio CONTINUE, using the same third slot.
+- OWNER_DIRECT 2026-09-14: DM owns innovation, ordinary experiments/engineering and reports; Portfolio is the final direction-level interpreter under current AGENTS §§2/4.8. The owner-challenged disposition is reconciled by Portfolio CONTINUE, using the same third slot.
 - Convergence independently reviews design/evidence/interpretation and successor plans. DM reads the full review and responds to material findings. Portfolio makes the conforming final direction decision; DM executes it without Root ratification.
 
 ## Scientific question
@@ -51,6 +51,13 @@ follows from the present result. Same-host tuned headroom remains unmeasured.
 [E0 result](FOLR_ENTITY_PERSISTENCE_B01_RESULT_EVIDENCE_20260914.md) and
 [intake/next question](FOLR_ENTITY_PERSISTENCE_B01_INTAKE_20260914.md) fix the
 bounded interpretation and preserve the missed low-confidence prediction.
+The [complete independent result/plan review and DM response](pro_packets/20260914_persistence_b01_result_plan_review/INTAKE.md)
+find no result-invalidating defect and support preparing fresh Z−G. Selection of Z
+is outcome-informed; repeating the earlier direct A−G positive remains the strongest
+rival. Equal registered parameters do not equal trained temporal capacity, and Z is
+not established smaller or faster. The comparison remains a whole learning/execution
+law. This completed review neither grants a new fit nor changes the direction's
+lifecycle, priority or family status.
 
 **Historical operational instruction — 2026-09-14 13:23 PDT (superseded by explicit resume):** finish the accepted
 augmentation B01 A−G run and required result/review/archival closeout, then write
