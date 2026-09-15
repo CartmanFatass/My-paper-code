@@ -65,7 +65,7 @@
       "path": "docs/research/portfolio/PORTFOLIO.md",
       "purpose": "Current occupied-direction/lifecycle context and applicable coordination boundary; this question changes only TRDL investment.",
       "provenance": "Fixed publication snapshot of4occupied/0reserved/0vacant. Producer text is not an execution grant; fresh TRDL science is supplied separately.",
-      "commit_sha": "70dd1b4c51fe177e719c6388f9412d41ca507d4d"
+      "commit_sha": "50d6f6a2b311de904a171cc26a6eafc58953c130"
     },
     {
       "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
@@ -83,12 +83,18 @@
       "path": "AGENTS.md",
       "purpose": "Sections2,4.8 and5: proper Portfolio finality, existing owner resume, fresh investment and completed allocation versus lifecycle.",
       "provenance": "Standing owner delegation; no Root scientific ACK or per-step owner ratification.",
-      "commit_sha": "70dd1b4c51fe177e719c6388f9412d41ca507d4d"
+      "commit_sha": "50d6f6a2b311de904a171cc26a6eafc58953c130"
     },
     {
       "path": "docs/project/ENGINEERING_SCOPE_SPEC.md",
       "purpose": "Sections4-5 and7.1/7.3: none optional features, existing code/runner/test budgets, minimal L0 seed/publication adaptation and independent risk review.",
       "provenance": "Proposed support only; technical acceptance and actual launch follow any explicit selected grant."
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260914_acvc_post_baseline_match_investment/INTAKE.md",
+      "commit_sha": "b9772e41b4cbe732b6a81421472355ac8d5ec076",
+      "purpose": "First paragraph, conformance items8/11 and Decisions table only: current peer investment/occupied-state and shared-node full-application release context. Do not reopen ACVC science or funding.",
+      "provenance": "Direct published author intake plus native release to TRDL; supersedes older producer text in the Portfolio snapshot."
     }
   ],
   "constraints": [
@@ -100,7 +106,8 @@
     "Whole original wall197.99/197.65s,sum395.64s; approximately212s overlapping span; peakRSS655784/655900KiB. Pair internal timer387.11272063304204s is retained separately from external whole cost. Future/full support/provider/staging/maintenance costs UNKNOWN. Prospective ordinary plans300sperarm/600native+1200support=1800combined are adjustable operational estimates, not hard scientific failure limits. No old3000offer or unusedB01time is carried into a grant.",
     "If R selected, minimal prospective source adaptation must cover both existingstudy.run_arm andpublish_pair9601guards; no9602source/modelcurrentlyexists. Reuse accepted source path, focused pure/synthetic changed-contract checks and sameindependentReviewer; no scientific extra native smoke. Existingengineeringbudgets2000researchlines/600runner/300stestwall; optionalengineeringsection4featuresnone. Publish exact futureSHA/command thenfresh4GiBactual-node admission, exact2originals/Monitor/collection/intake/fullresponse/preservation/assignedcleanup. No generalizedframework/sharedcode/librariesmigration.",
     "Option A is preparation, not a mandatory B prerequisite: produce one finite same-host same-tail scalar-competence/eta-conditioning candidate card with exact source compatibility, comparator/claim distinction, fair training/optimizer/tuning/selection exposure and smallest useful future proposal; zero models/native/fits/updates/reanalysis/codeadaptation. Option N is no new numeric investment in this recipe, not a local Portfolio lifecycle mutation. Neither creates an automatic follow-up consultation without a concrete new fact/proposal.",
-    "Apply current empirical§11.11 andprogramme baseline/replication/attribution distinctions. No universal pilot/power/fiveseed/2SD/exactdiagnosis/headroom success, populationinterval or extraRootpermission gate. Scientific review selected useful recurrence preparation; Portfolio still decides whether its finite decision value justifies actual investment. No recast/C/lifecycle/priority/capacity/other-direction disposition requested."
+    "Apply current empirical§11.11 andprogramme baseline/replication/attribution distinctions. No universal pilot/power/fiveseed/2SD/exactdiagnosis/headroom success, populationinterval or extraRootpermission gate. Scientific review selected useful recurrence preparation; Portfolio still decides whether its finite decision value justifies actual investment. No recast/C/lifecycle/priority/capacity/other-direction disposition requested.",
+    "Fresh peer/coordination context before this single dispatch: ACVC complete application b9772e41b selects M,2originals4096train andC/F/dwell/M64final panels, currently0newcode/fit/handle at its intake; its shared writer is formally released toTRDL with no pending recovery. ACVC intake records FSD8original allocation; neither grant is reconsidered here. Four occupied directions persist. Fixed Portfolio producer cells are older publication snapshots; use the named fresh TRDL/ACVC intakes for current scientific/allocation facts, and let Root coordinate actual runtime under unchanged priorities. No TRDL grant exists yet."
   ],
   "response_schema": [
     "Complete investment choice and decisive reason versus strongest scalar/baseline-first countercase.",
