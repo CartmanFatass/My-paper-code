@@ -179,3 +179,26 @@ manual startup repair1/scientific retry0. On A2 terminal, collect all four and
 invoke the published study_result plus independent ordered-vector readback.
 No additional empirical invocation follows; finish required object-only review,
 retention/necessary cleanup and the concrete operational pause handoff.
+
+## All four learner endpoints complete and primary published
+
+A2 is terminal exit0, Monitor-confirmed08:33:11.0417155Z and collected
+08:34:13.264112Z. Its5000/4969/128 endpoint, finite CPU FP32 checkpoint and ten
+raw members are verified locally; own-G2 input digest matches. The Monitor
+returned native final with empty active set. Four actual learners are complete,
+five accepted supervisors are terminal including the preserved prelearner failure.
+No empirical process or Monitor is pending; scientific retry0/manual repair1.
+
+The committed read_study helper invokes study_result over all four endpoints and
+separately recomputes panels, ordered differences and the frozen rule. Result:
+d1=-5.830625/G_ABOVE_MEI,d2=-0.109921875/WITHIN_MEI, MIXED_BLOCK_PATTERN with
+both signs negative. Mean-2.9702734375 is descriptive. Four-row RUN_SCORES and
+scientific-tools RUN_SUMMARY contain two per-arm fits without episode pooling,
+paired flag or interval. STUDY_READBACK/ANALYSIS_METHOD retain the exact tool
+inputs/hashes and complete exposure400000train/19876updates/10240eval ticks.
+Measured learner wall11218.37s/CPU11216.40s; full lifetime cost unknown.
+
+Complete E0/DM intake and the Chinese owner brief are published in the direction.
+Next work is confined to this object's independent result review, support
+retention, assigned cleanup and a recoverable owner pause handoff. No successor
+fit, Portfolio/direction selection question or new Transport is prepared.
