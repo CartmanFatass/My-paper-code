@@ -1,0 +1,104 @@
+{
+  "completed_at": "2026-09-15T17:47:50.934317+00:00",
+  "source_sha": "dc4dbdfcdb20ca29a47c1187e9ebf6787483d21b",
+  "authorization": "Portfolio S allocation (assigned cleanup within the allocation, DM autonomy 2026-09-13); preservation verified at main b2ed675b3 / codex/fsd 454b3045f: all 88 committed fit files byte-identical (git blob sha256) to the node originals; twelve task.log and runner.sh preserved as tracked text under task_records/ with digests equal to the node copies; the runner writes no checkpoint",
+  "terminal_statuses": {
+    "fsd-bi-b01-772203": {
+      "status": "finished",
+      "exit_code": 0,
+      "pid": 3727295,
+      "tmux_active": false
+    },
+    "fsd-bi-b01-772203-FLAT": {
+      "status": "finished",
+      "exit_code": 0,
+      "pid": 3731471,
+      "tmux_active": false
+    },
+    "fsd-bi-b01-772203-I1280": {
+      "status": "finished",
+      "exit_code": 0,
+      "pid": 3729226,
+      "tmux_active": false
+    },
+    "fsd-bi-b01-772303": {
+      "status": "finished",
+      "exit_code": 0,
+      "pid": 3727157,
+      "tmux_active": false
+    },
+    "fsd-bi-b01-772303-FLAT": {
+      "status": "finished",
+      "exit_code": 0,
+      "pid": 3736070,
+      "tmux_active": false
+    },
+    "fsd-bi-b01-772303-I1280": {
+      "status": "finished",
+      "exit_code": 0,
+      "pid": 3729455,
+      "tmux_active": false
+    },
+    "fsd-bi-b01-772403": {
+      "status": "finished",
+      "exit_code": 0,
+      "pid": 3727655,
+      "tmux_active": false
+    },
+    "fsd-bi-b01-772403-FLAT": {
+      "status": "finished",
+      "exit_code": 0,
+      "pid": 3735333,
+      "tmux_active": false
+    },
+    "fsd-bi-b01-772403-I1280": {
+      "status": "finished",
+      "exit_code": 0,
+      "pid": 3729527,
+      "tmux_active": false
+    },
+    "fsd-bi-b01-772503-D1280": {
+      "status": "finished",
+      "exit_code": 0,
+      "pid": 3736794,
+      "tmux_active": false
+    },
+    "fsd-bi-b01-772503-FLAT": {
+      "status": "finished",
+      "exit_code": 0,
+      "pid": 3735439,
+      "tmux_active": false
+    },
+    "fsd-bi-b01-772503-I1280": {
+      "status": "finished",
+      "exit_code": 0,
+      "pid": 3735922,
+      "tmux_active": false
+    }
+  },
+  "exact_removed_paths": [
+    "/home/wu/hmasd-worktrees/fsd-baseline-b01-dc4dbdfcd",
+    "/home/wu/.agent-tasks/fsd-bi-b01-772203",
+    "/home/wu/.agent-tasks/fsd-bi-b01-772203-FLAT",
+    "/home/wu/.agent-tasks/fsd-bi-b01-772203-I1280",
+    "/home/wu/.agent-tasks/fsd-bi-b01-772303",
+    "/home/wu/.agent-tasks/fsd-bi-b01-772303-FLAT",
+    "/home/wu/.agent-tasks/fsd-bi-b01-772303-I1280",
+    "/home/wu/.agent-tasks/fsd-bi-b01-772403",
+    "/home/wu/.agent-tasks/fsd-bi-b01-772403-FLAT",
+    "/home/wu/.agent-tasks/fsd-bi-b01-772403-I1280",
+    "/home/wu/.agent-tasks/fsd-bi-b01-772503-D1280",
+    "/home/wu/.agent-tasks/fsd-bi-b01-772503-FLAT",
+    "/home/wu/.agent-tasks/fsd-bi-b01-772503-I1280"
+  ],
+  "disk_absent": {
+    "worktree": true,
+    "task_records": true
+  },
+  "worktree_registration_absent": true,
+  "registered_before_count": 166,
+  "registered_after_count": 165,
+  "remove_stdout": "rc=0\nwt_absent\n0\n0\nbefore=166\nafter=165\n",
+  "remove_stderr": "",
+  "note": "Working-copy digests of the three earliest D1280 folders differ from the originals only by CRLF checkout normalization on Windows; the committed blobs are the originals."
+}
