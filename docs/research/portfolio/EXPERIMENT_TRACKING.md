@@ -14,7 +14,7 @@ the unified handoff and the named direction handoff; do not infer a vacancy or s
 | FOLR | ACTIVE/MEDIUM；两块fresh A−G为−5.830625/−.109921875，MIXED_BLOCK_PATTERN | Operationally paused；0 producer；handoff `HANDOFF_20260915_AUGMENTATION_REPEAT_OWNER_PAUSE.md` |
 | TRDL | ACTIVE/MEDIUM/recasts0；B02 Q−S lower-tail−.00241972 J INSIDE_MEI，B01正结果另存 | Operationally paused；0 producer；handoff `TRDL_OWNER_PAUSE_HANDOFF_20260914.md` |
 | CADC | Portfolio explicitly applies reversible PARKED/HIGH, retaining RR and B01 evidence | Direction-local documentary application only; no advancing research chain |
-| FSD | ACTIVE/HIGH；Claude hub 驱动。Portfolio S 决策（baseline × interruption B01，12 fits）已应用；D1280/I1280 八个 fit 于 2026-09-15T11:52Z 在 hmasd-wsl-node 以 `dc4dbdfcd` 启动，队列 `fsd-bi-b01-772203/772303/772403`（各 D1280→I1280）运行中，`772503` 在首个队列结束后启动；FLAT 四个 fit 为 AGENTS §3 dependent work，待 k=10 偏差说明回到 portfolio:cross_direction | 队列终态 → reduce（需 12 summary；FLAT 缺失时仅 GAP 不可算，SI1280 可算）；记录 `baseline_interruption_b01_20260915/EXECUTION.md` |
+| FSD | ACTIVE/HIGH；Claude hub 驱动。Portfolio S 决策（baseline × interruption B01，12 fits）已应用；D1280/I1280 八个 fit 于 2026-09-15T11:52Z 在 hmasd-wsl-node 以 `dc4dbdfcd` 启动；队列 `fsd-bi-b01-772203/772303/772403` 的 D1280 元素已完成（约12:36Z，walls 2642/2638/2617s，RSS约2.8GB）；因嵌套 shell 引号拆分了双臂列表，I1280 已改以单臂队列元素重新启动（handles `fsd-bi-b01-772203-I1280`/`fsd-bi-b01-772303-I1280`/`fsd-bi-b01-772403-I1280`）；`772503` 在首个队列结束后启动；FLAT 四个 fit 为 AGENTS §3 dependent work，待 k=10 偏差说明回到 portfolio:cross_direction | 队列终态 → reduce（需 12 summary；FLAT 缺失时仅 GAP 不可算，SI1280 可算）；记录 `baseline_interruption_b01_20260915/EXECUTION.md` |
 
 
 ACVC、FOLR、TRDL 与 FSD 的 native DM 是各自方向 owner；当前4占用、0预留、0空缺。第四槽为所有者直接恢复的显式例外，不挤占前三条链。MGTAP 已完成
