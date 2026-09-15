@@ -1,7 +1,7 @@
 {
   "object": "TRDL-B02",
   "class": "B/EXPLORE",
-  "status": "PROSPECTIVE_PREPARATION_ONLY_NO_NEW_GRANT",
+  "status": "ALLOCATED_AT_INTAKE_NO_CODE_ADAPTATION_OR_LAUNCH_YET",
   "proposed_master": 9602,
   "base": 960200000,
   "actual_new_scientific_exposure": {
@@ -94,5 +94,7 @@
   },
   "cost_status": "Ordinary plans, not hard time caps; future actual and full support/provider/maintenance cost unknown. B01 whole times are references, not an assurance. Fixed two-original and scientific exposure limits remain distinct.",
   "arithmetic_method": "Python 3.11 standard-library integer/decimal-literal arithmetic only; no research import, model/RNG construction, env, fitting, evaluation or numerical-result reanalysis.",
-  "exposure_line": "PROPOSED ONLY: 2 originals (SCALAR/Q32), each 512 train + 256 sole-final H256 episodes, 128 joint Adam calls at lr .0003, actor 34902 and critic 34305/38304 trainable parameters; pair 393216 scored team ticks / 256 updates; 0 retries/extra native smoke/eval. Actual new scientific exposure = 0."
+  "exposure_line": "PROPOSED ONLY: 2 originals (SCALAR/Q32), each 512 train + 256 sole-final H256 episodes, 128 joint Adam calls at lr .0003, actor 34902 and critic 34305/38304 trainable parameters; pair 393216 scored team ticks / 256 updates; 0 retries/extra native smoke/eval. Actual new scientific exposure = 0.",
+  "allocation_response_sha": "afcf3ed2712b0dec90524707fcd09ee38be9fce4",
+  "allocation_note": "The already computed scientific quantities are unchanged. Exact two originals and minimum support are newly funded; actual new exposure remains zero at this intake. Ordinary time estimates are adjustable, not hard ceilings."
 }
