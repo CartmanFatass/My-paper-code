@@ -60,6 +60,12 @@ law. This completed review neither grants a new fit nor changes the direction's
 lifecycle, priority or family status.
 The subsequent object-tier selection is the [fresh Z−G B card](FOLR_ENTITY_CURRENT_INCREMENT_B01_SCIENCE_CARD_20260914.md),
 with two new original fits and a whole-program increment as its claim ceiling.
+Under the [owner's accepted two-axis calibration](../../portfolio/decisions/2026-09-14-two-axis-research-calibration.md),
+this adaptive A−G / A−Z / Z−G sequence is not independent replication of a fixed
+contrast or a stable method ranking. Each original object's reading stays frozen;
+training replication and a matched target-host baseline remain separate gaps.
+The [current intake's applicability record](entity_current_increment_b01_781801/GENERIC_INTAKE.md#owner-calibration-received-while-the-original-z-was-running)
+keeps jointly trained roster change distinct from transfer and ad hoc teamwork.
 
 **Historical operational instruction — 2026-09-14 13:23 PDT (superseded by explicit resume):** finish the accepted
 augmentation B01 A−G run and required result/review/archival closeout, then write

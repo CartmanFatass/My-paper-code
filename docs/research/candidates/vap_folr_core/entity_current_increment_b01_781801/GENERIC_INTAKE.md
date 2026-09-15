@@ -65,3 +65,47 @@ fresh Z−G result. Source/raw/support preservation and eventual cleanup are tra
 in CLEANUP_INVENTORY.md; the active Z checkout is retained.
 
 Chinese brief: [Generic arm](../../../portfolio/owner/briefs/vap_folr_core/2026-09-14_FOLR_ENTITY_CURRENT_INCREMENT_B01_G.md).
+
+## Owner calibration received while the original Z was running
+
+The DM read current canonical evidence-spec §11.11, the revised
+[two-axis programme](../../../portfolio/TWO_AXIS_RESEARCH_PROGRAMME_20260914.md),
+its [2026-09-14 owner decision](../../../portfolio/decisions/2026-09-14-two-axis-research-calibration.md)
+(published calibration d862c9c690ca8d41c3999bc04858895bc280384f), and the complete
+evening Addendum in docs/Claude_docs/plans/TWO_AXIS_RESEARCH_PROGRAMME_20260914.md.
+This records application of the owner's corrected programme, not wholesale
+adoption of the external recommendations. Root explicitly preserved this card,
+both accepted original invocations and budget; future K/N objects remain separate.
+
+No card, code, accepted command, MEI, endpoint, branch rule, prediction or result
+was changed. The current card already separates effect importance from variation
+and uncertainty, uses each independently fitted program as the sampling unit, and
+limits conditional episode summaries accordingly. In the final intake, a point
+inside ±1 remains this B card's WITHIN_MEI reading, not proof of equivalence/null.
+No seed SD success rule, t-interval/IQM switch by an arbitrary sample count, power
+quota or bootstrap over episodes will be retrofitted to create training evidence.
+
+The A−G → A−Z → Z−G development sequence is adaptive and outcome-informed. It is
+not independent replication of a prospectively fixed contrast, a transitive
+three-program ranking, or pooled evidence of a stable component benefit. Package
+effects remain package effects; the existing paired labels and 128 evaluations
+do not add independent training units. Historical positives, negatives and all
+selection exposure keep their original scope. Same-host tuned headroom is still
+absent; current G's score is not a competence certificate.
+
+For a separately designed N-axis question, this FOLR host is closest to jointly
+trained within-episode membership change. All active slots use the trained shared
+program and public lifecycle table. It does not test train-N/test-N′ transfer or
+cooperation with unfamiliar fixed-policy teammates. GPL or another published
+baseline would require explicit task/information/action/training-rights matching.
+Future preparation gives priority to target-host baseline capability, independent
+training replication and a comparison that distinguishes the mechanism, with
+explicit exposure/cost/uncertainty. This neither inserts a global baseline-result
+barrier into Z nor grants a new experiment, K/N family, fusion or Portfolio action.
+
+The external Addendum's retained rung-approval/delegation restrictions, universal
+inference recipes and mandatory necessity-test wording are not imported as new
+authority: the accepted owner decision explicitly retains standing delegation /
+Pro rights and §11.8 proportionality. No scientific invocation or review Send was
+added for this documentary application. The existing owner-review query and FOLR
+audit owner columns were also empty at the post-G boundary.
