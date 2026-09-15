@@ -100,5 +100,6 @@ Git-registration absence verified. Local creator scratch remains only because
 automatic approval review rejected the separate native PowerShell cleanup before
 execution; read-only checks confirm all13 preserved files remain. See
 CLEANUP_INVENTORY.md and the exact REMOTE_CLEANUP_RECEIPT/LOCAL_CLEANUP_BLOCKER.
-Independent result/plan review is the actual pending producer; no native experiment
-or remote observation remains live.
+The later complete result/plan review at 5f49770d9 was verified and accepted at
+5484608e5. No native experiment, remote observation or review producer remains for
+this completed A−Z assignment; the separately selected Z−G card is a new object.

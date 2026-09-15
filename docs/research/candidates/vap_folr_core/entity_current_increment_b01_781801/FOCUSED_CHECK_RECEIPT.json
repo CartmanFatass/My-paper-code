@@ -1,0 +1,23 @@
+{
+  "observed_utc": "2026-09-15T02:12:34.986893+00:00",
+  "source_sha": "8ad304d61af6885c0ca5ba236bbf6c2c160e61f4",
+  "argv": [
+    "/home/wu/.venvs/hmasd/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801/temp/directions/vap_folr_core/test/current-increment-b01-20260914-dm",
+    "tests/experiments/candidates/vap_folr_core/entity_current_increment_b01"
+  ],
+  "returncode": 1,
+  "process_wall_seconds": 2.1948660109192133,
+  "log_sha256": "957e1b006d8ada70e0057b76fb3b03b3ade24abaeceed270e47b8633f8cacc93",
+  "log_bytes": 5393,
+  "native_scientific_invocations": 0,
+  "selected_seed_native_exposure": 0,
+  "scratch": "/home/wu/hmasd-worktrees/folr-entity-current-increment-b01-781801/temp/directions/vap_folr_core/test/current-increment-b01-20260914-dm",
+  "scratch_cleanup": "retained for failed-check inspection"
+}
