@@ -1,0 +1,106 @@
+{
+  "arm": "C",
+  "handle": "acvc-mappo-c-b02-28431-2dc9631c",
+  "status": {
+    "task": "acvc-mappo-c-b02-28431-2dc9631c",
+    "status": "finished",
+    "exit_code": 0,
+    "pid": 3732902,
+    "uptime_seconds": 9303,
+    "tmux_active": false
+  },
+  "collection_time": "2026-09-15T16:03:00Z",
+  "source_sha": "2dc9631c8644464b8c4189a53344b2956c3eb3b4",
+  "files": [
+    {
+      "relative_path": "C/admission.json",
+      "remote_path": "/home/wu/hmasd-worktrees/acvc-b02-2dc9631c8/temp/directions/acvc/exp/cluster_mappo_comparison_b02_28431_C/admission.json",
+      "bytes": 502,
+      "sha256": "9a1fa7b6fa0d234a134b1a8dfa481f4ebcf60c8466ccdfd9168c8c876848ba38"
+    },
+    {
+      "relative_path": "C/episodes.jsonl",
+      "remote_path": "/home/wu/hmasd-worktrees/acvc-b02-2dc9631c8/temp/directions/acvc/exp/cluster_mappo_comparison_b02_28431_C/episodes.jsonl",
+      "bytes": 2964818,
+      "sha256": "59dce2fb001ede8b9ae0b48cd58287b3c19cdfaf1bad7808e96ca8f6ed9e9be2"
+    },
+    {
+      "relative_path": "C/final.pt",
+      "remote_path": "/home/wu/hmasd-worktrees/acvc-b02-2dc9631c8/temp/directions/acvc/exp/cluster_mappo_comparison_b02_28431_C/final.pt",
+      "bytes": 281853,
+      "sha256": "30a70296b0f72eca79206952a689853909efa1aeae6f31e635bd4fd29bbf9ed2",
+      "note": "copied (281853 bytes < 50 MiB threshold)"
+    },
+    {
+      "relative_path": "C/native_time.txt",
+      "remote_path": "/home/wu/hmasd-worktrees/acvc-b02-2dc9631c8/temp/directions/acvc/exp/cluster_mappo_comparison_b02_28431_C/native_time.txt",
+      "bytes": 83,
+      "sha256": "5c5f0210478d25455b0881c4b93690d8f138e6020ba61522f7e81cc706089874"
+    },
+    {
+      "relative_path": "C/stderr.log",
+      "remote_path": "/home/wu/hmasd-worktrees/acvc-b02-2dc9631c8/temp/directions/acvc/exp/cluster_mappo_comparison_b02_28431_C/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "relative_path": "C/stdout.log",
+      "remote_path": "/home/wu/hmasd-worktrees/acvc-b02-2dc9631c8/temp/directions/acvc/exp/cluster_mappo_comparison_b02_28431_C/stdout.log",
+      "bytes": 17887,
+      "sha256": "c101323eda585adb2aabfdb34eb4f248f2d06b19875ad1f83f1bbd5f760d4adf"
+    },
+    {
+      "relative_path": "C/summary.json",
+      "remote_path": "/home/wu/hmasd-worktrees/acvc-b02-2dc9631c8/temp/directions/acvc/exp/cluster_mappo_comparison_b02_28431_C/summary.json",
+      "bytes": 10892,
+      "sha256": "4d7a2bd12f0939a3d440b52e205e6a290c2e0aeab6b29f05137538c0994a51a9"
+    },
+    {
+      "relative_path": "C/updates.jsonl",
+      "remote_path": "/home/wu/hmasd-worktrees/acvc-b02-2dc9631c8/temp/directions/acvc/exp/cluster_mappo_comparison_b02_28431_C/updates.jsonl",
+      "bytes": 2016244,
+      "sha256": "36ddac681a0d32215cafc46604893d9d20a256084a22f48e0b140d291cab104f"
+    },
+    {
+      "relative_path": "C/task.log",
+      "remote_path": "/home/wu/.agent-tasks/acvc-mappo-c-b02-28431-2dc9631c/task.log",
+      "bytes": 699,
+      "sha256": "233085cd64e03ed2bbd22733cfb71f02116a710f33023fda44496be51e0d9885"
+    }
+  ],
+  "native_time": "native_wall_s=2495.72\npeak_rss_kib=562308\nuser_s=2492.42\nsystem_s=1.81\nexit_code=0\n",
+  "native_time_fields": {
+    "native_wall_s": 2495.72,
+    "peak_rss_kib": 562308,
+    "user_s": 2492.42,
+    "system_s": 1.81,
+    "exit_code": 0
+  },
+  "summary_json_top_level_keys": [
+    "object",
+    "card",
+    "arm",
+    "master",
+    "evaluation_namespace",
+    "launch_sha",
+    "status",
+    "fit_started",
+    "fit_complete",
+    "counts",
+    "limits",
+    "configuration",
+    "ordinary_plan_seconds",
+    "plan_is_cap",
+    "cost_law",
+    "exposure",
+    "checkpoint",
+    "panels",
+    "training_rows",
+    "evaluation_rows",
+    "interventions",
+    "process_wall_s_to_summary",
+    "timing_boundary"
+  ],
+  "summary_json_parses": true,
+  "notes": "Collected by hmasd-experiment-tracker per hub assignment 2026-09-15. Layout mirrors docs/research/candidates/acvc/evidence/cluster_mappo_comparison_b01_20260914/C_COLLECTION.json (files field names, native_time field). Not present here (unlike block 1's C_COLLECTION.json): archive_path/archive_bytes/archive_sha256 (no local tar.gz archive step was performed in this collection), summary field (full summary.json is copied verbatim to native/C/summary.json instead of being duplicated inline), preservation field (no local preservation archive step was performed). This is a collection-only pass: no interpretation, reduction, or scientific acceptance is recorded here."
+}

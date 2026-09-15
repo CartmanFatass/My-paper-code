@@ -36,9 +36,12 @@ commits are cherry-picked into `main` by the hub).
   `docs/research/portfolio/decisions/2026-09-15-acvc-one-block-replication-grant.md`,
   packet intake in `docs/research/portfolio/pro_packets/20260915_acvc_one_block_replication_investment/INTAKE.md`).
   Launch source `codex/acvc 2dc9631c8`, remote worktree `/home/wu/hmasd-worktrees/acvc-b02-2dc9631c8`.
-  C fit `acvc-mappo-c-b02-28431-2dc9631c` running since 13:26:42Z (pid 3732902); M fit
-  `acvc-mappo-m-b02-28431-2dc9631c` launches after C ends (one original at a time, FSD ready
-  work first). Record: `evidence/cluster_mappo_comparison_b02_20260915/EXECUTION.md`.
+  C fit `acvc-mappo-c-b02-28431-2dc9631c` finished exit 0 (13:26:42Z to about 14:08Z, native
+  wall 2,495.72 s, peak RSS 562,308 KiB) and is collected under
+  `evidence/cluster_mappo_comparison_b02_20260915/native/C/` (`C_COLLECTION.json`); M fit
+  `acvc-mappo-m-b02-28431-2dc9631c` running since 16:01:41Z (pid 3736172), expected end
+  about 16:45Z. No scientific reading before M completes and the wrapper reduce runs.
+  Record: `evidence/cluster_mappo_comparison_b02_20260915/EXECUTION.md`.
 - ~~Remote staging of the pinned on-policy source~~ re-created 2026-09-15 13:26Z at
   `/home/wu/hmasd-inputs/acvc-mappo-b02-28431/on-policy` (digest verified,
   `evidence/cluster_mappo_comparison_b02_20260915/DEPENDENCY.json`).
@@ -53,11 +56,11 @@ commits are cherry-picked into `main` by the hub).
 
 ## First resume step
 
-Check `agent-task status acvc-mappo-c-b02-28431-2dc9631c`. When C is finished with exit 0:
-collect its output root (admission, native_time, stdout/stderr, episodes/updates jsonl,
-result files, checkpoint digest) into `evidence/cluster_mappo_comparison_b02_20260915/`,
-then launch M through `hmasd-experiment-operator` with the same command form and handle
-`acvc-mappo-m-b02-28431-2dc9631c` (memory ≥ 4 GiB beside the FSD fits). When both are
-finished: `--mode reduce` through the b02 wrapper, intake (D2 alone first, supporting
+Check `agent-task status acvc-mappo-m-b02-28431-2dc9631c`. When finished with exit 0:
+collect its output root into `evidence/cluster_mappo_comparison_b02_20260915/native/M/` with
+an `M_COLLECTION.json` mirroring the C one; run `--mode reduce` through the b02 wrapper over
+both originals; write the block-2 result evidence and intake (D2 alone first, supporting
 contrasts, D1/D2 individually, equal-block accumulation with provenance, Chinese brief),
-preservation, then assigned cleanup of the remote worktree and staging.
+ledger row and P1 trace; preserve; then assigned cleanup of the remote worktree
+`/home/wu/hmasd-worktrees/acvc-b02-2dc9631c8` and staging `/home/wu/hmasd-inputs/acvc-mappo-b02-28431`
+with a CLEANUP.json as in block 1. The grant ends there; no successor is authorized.

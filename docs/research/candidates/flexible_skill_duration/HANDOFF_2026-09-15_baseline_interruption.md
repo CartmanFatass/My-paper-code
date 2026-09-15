@@ -1,8 +1,8 @@
 # FSD handoff — baseline × interruption B01 in flight (2026-09-15, Claude hub)
 
 **State: ACTIVE / HIGH. Portfolio decision S applied and the FLAT k = 10 correction
-confirmed (`PRO_FINAL / OWNER_DELEGATED`, 12:55Z); 3 of 12 fits complete (D1280 ×
-772203/772303/772403), 4 running (I1280 × 3, FLAT 772203), 5 pending.** Driven by the
+confirmed (`PRO_FINAL / OWNER_DELEGATED`, 12:55Z); 7 of 12 fits complete and collected
+(D1280 × 3, I1280 × 3, FLAT 772203), the last 5 running since 16:01Z.** Driven by the
 Claude Code research hub (owner resume 2026-09-15; two directions, FSD and ACVC).
 Authoring checkout `C:/Projects/HMASD-worktrees/codex-fsd`, branch `codex/fsd`; the hub
 cherry-picks accepted commits into `main`.
@@ -30,15 +30,17 @@ One queue element per handle (`BLOCK.sh <W> <seed> <arm>`, single-token arm; the
 
 | Handle | Arm | Launched (UTC) | State at writing |
 | --- | --- | --- | --- |
-| fsd-bi-b01-772203 / 772303 / 772403 | D1280 | 11:52Z | complete, collected under `fits/` |
-| fsd-bi-b01-772203-I1280 | I1280 | 12:38:30Z | running |
-| fsd-bi-b01-772303-I1280 | I1280 | 12:38:42Z | running |
-| fsd-bi-b01-772403-I1280 | I1280 | 12:38:46Z | running |
-| fsd-bi-b01-772203-FLAT | FLAT | 13:02:49Z | running |
-| 772503-D1280, 772303-FLAT, 772403-FLAT, 772503-I1280, 772503-FLAT | | as slots free | pending, in that order |
+| fsd-bi-b01-772203 / 772303 / 772403 | D1280 | 11:52Z | complete, collected (`fits/`), walls 2,617–2,642 s |
+| fsd-bi-b01-7722/3/403-I1280 | I1280 | 12:38Z | complete, collected, walls 6,353–6,550 s, peak RSS 3.8 GiB |
+| fsd-bi-b01-772203-FLAT | FLAT | 13:02:49Z | complete, collected, wall 2,023 s, peak RSS 1.25 GiB |
+| fsd-bi-b01-772403-FLAT | FLAT | 16:01:14Z | running (pid 3735333), expected end about 16:40Z |
+| fsd-bi-b01-772503-FLAT | FLAT | 16:01:15Z | running (pid 3735439), about 16:40Z |
+| fsd-bi-b01-772503-I1280 | I1280 | 16:01:31Z | running (pid 3735922), about 17:50Z (critical path) |
+| fsd-bi-b01-772303-FLAT | FLAT | 16:01:40Z | running (pid 3736070), about 16:40Z |
+| fsd-bi-b01-772503-D1280 | D1280 | 16:02:04Z | running (pid 3736794), about 16:50Z |
 
-At most four concurrent fits (measured peak RSS about 2.8 GiB per fit; the node has
-15.8 GiB). Status: `agent-task status <handle>` on the node; a per-fit `summary.json`
+The last five run together (projected peak RSS about 10.9 GiB with the ACVC M fit; the node
+has 15.8 GiB); the node idled 14:15Z–16:01Z while the hub's session was rate-limited. Status: `agent-task status <handle>` on the node; a per-fit `summary.json`
 is complete only with `status: complete` plus exit 0 in `block_<seed>_queue.jsonl`
 (the early `summary.json` is the runner's setup publication). Ordinary plans 1,800 s
 (D1280, observed about 2,640 s with three concurrent), 4,000 s (I1280), 1,200–1,600 s
@@ -73,9 +75,10 @@ response), then the correction intake/decision/launch-record commit (see `git lo
 
 ## First resume step
 
-Run the status check (Monitor or `hmasd-experiment-tracker`); collect every finished
-fit's `summary.json`, `whole_command_resources.json`, `admission.json`, queue markers and
-task log into `fits/<seed>_<arm>/`; launch the next pending element through
-`hmasd-experiment-operator` whenever fewer than four fits run (order above); when all
-twelve summaries exist run `reduce` and write the intake (SI1280 primary, GAP_D/GAP_I,
-rollout-5 accumulation) with the Chinese brief.
+Monitor the five running handles (`agent-task status`); collect each finished element into
+`fits/<seed>_<arm>/` (same file set as the existing folders, plus the refreshed
+`block_772503_queue.jsonl`). When all twelve summaries exist run `reduce` with the historical
+factorial summary and write the intake (SI1280 primary with importance and uncertainty read
+separately, GAP_D/GAP_I as untuned package gaps, rollout-5 accumulation 4 + 2), the Chinese
+brief, the ledger row, then integrate to `main`. No further launches are authorized under
+the S allocation after these five.

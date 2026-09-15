@@ -31,8 +31,8 @@ ssh -o BatchMode=yes -o ConnectTimeout=10 hmasd-wsl-node /usr/local/bin/agent-ta
 
 | Arm | Handle | Launch (UTC) | Remote pid | Admission | State |
 | --- | --- | --- | ---: | --- | --- |
-| C | acvc-mappo-c-b02-28431-2dc9631c | 2026-09-15T13:26:42Z | 3732902 | passed, 5,225,508,864 B available | running; 128/2,048 rollouts at 152 s process wall (beside four FSD fits) |
-| M | acvc-mappo-m-b02-28431-2dc9631c | after C ends | | | pending (one original at a time, Pro sequencing) |
+| C | acvc-mappo-c-b02-28431-2dc9631c | 2026-09-15T13:26:42Z | 3732902 | passed, 5,225,508,864 B available | finished exit 0; native wall 2,495.72 s, peak RSS 562,308 KiB (beside four FSD fits); collected to [native/C/](native/C/), [C_COLLECTION.json](C_COLLECTION.json) |
+| M | acvc-mappo-m-b02-28431-2dc9631c | 2026-09-15T16:01:41Z | 3736172 | passed, 13,061,177,344 B available | running beside five FSD elements (single thread); expected end about 16:45Z |
 
 Sequencing per the grant: ready FSD work has first access; this fit is single-thread backfill
 (block-1 peak RSS 561,040 / 589,924 KiB) and did not displace any FSD element (available
