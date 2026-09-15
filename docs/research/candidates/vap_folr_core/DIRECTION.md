@@ -48,8 +48,11 @@ with unknown repeatability and no isolated persistence attribution. Old replacem
 BANK negatives remain separate. A favorable complete Z realization and easier
 optimization/current-processing/fusion are surviving alternatives. The next
 prepared discriminator is a prospective repetition of A−G, the surviving direct
-positive contrast. Two new blocks versus one is a cost close-call for full review,
-with no new allocation or invocation frozen by that preparation. No historical
+positive contrast. The complete independent Z-G result/plan review narrowly
+supports two prospective new A-G blocks; DM accepts the second block's ability
+to challenge either first-result sign within one fixed study as its marginal
+decision value. One remains a substantially cheaper close runner-up, and no
+new allocation or invocation is frozen by the review itself. No historical
 endpoint substitution, exact diagnostic, family closure, C promotion or Portfolio
 change follows. Same-host tuned headroom remains unmeasured.
 The [Z−G card](FOLR_ENTITY_CURRENT_INCREMENT_B01_SCIENCE_CARD_20260914.md),
@@ -68,7 +71,13 @@ not established smaller or faster. The comparison remains a whole learning/execu
 law. This completed review neither grants a new fit nor changes the direction's
 lifecycle, priority or family status.
 Both original fits of that Z−G card are complete, with whole-program increment as
-its claim ceiling; its complete independent scientific review remains due.
+its claim ceiling. The [complete independent Z-G review and substantive DM response](pro_packets/20260914_current_increment_b01_result_plan_review/INTAKE.md)
+find no result-invalidating defect and preserve GENERIC_ABOVE_MEI. Returning to
+the old A-G positive remains outcome-informed; both new block-specific outcomes
+will remain visible and any mean will be descriptive. Current Z-G remote resources
+are reclaimed after full preservation;4 local archived support files remain after
+an actual policy rejection. The next DM work is the prospective A-G card and
+direct implementation, with no pending Monitor or Pro producer at this boundary.
 Under the [owner's accepted two-axis calibration](../../portfolio/decisions/2026-09-14-two-axis-research-calibration.md),
 this adaptive A−G / A−Z / Z−G sequence is not independent replication of a fixed
 contrast or a stable method ranking. Each original object's reading stays frozen;
