@@ -74,3 +74,28 @@ python scripts/run_fsd_baseline_interruption_b01.py reduce --summaries <12 summa
   `BLOCK.sh <checkout> SEED FLAT`; block pairing is by fixed base seeds, so the
   order of arms within a block does not change the object.
 - Concurrency: three block queues at once, the fourth when the first finishes.
+
+### Launch record — D1280/I1280 arms (2026-09-15, launch sha `dc4dbdfcd`)
+
+Source `scripts/run_fsd_baseline_interruption_b01.py` at `dc4dbdfcd`
+(`dc4dbdfcdb20ca29a47c1187e9ebf6787483d21b`; review corrections applied, science
+of the fit unchanged from `db0b11bd8` except the recorded FLAT comment). Node
+`hmasd-wsl-node` (`wsl_4070`), detached worktree
+`/home/wu/hmasd-worktrees/fsd-baseline-b01-dc4dbdfcd` (clean, exact sha verified
+by each operator). Each queue launched by one `hmasd-experiment-operator` with
+`BLOCK.sh <W> SEED "D1280 I1280"`; the D1280 `admit-memory` receipt of each
+queue passed on the node (available ≥ 10.9 GiB at the first launch, ≈ 8 GiB with
+three fits running). Output root
+`<W>/temp/directions/flexible_skill_duration/exp/baseline_interruption_b01_20260915/`.
+
+| Handle | Arms | Launch (UTC) | Remote pid | Remote log |
+| --- | --- | --- | ---: | --- |
+| fsd-bi-b01-772303 | D1280, I1280 | 2026-09-15T11:52:19Z | 3727157 | `~/.agent-tasks/fsd-bi-b01-772303/task.log` |
+| fsd-bi-b01-772203 | D1280, I1280 | 2026-09-15T11:52:26Z | 3727295 | `~/.agent-tasks/fsd-bi-b01-772203/task.log` |
+| fsd-bi-b01-772403 | D1280, I1280 | 2026-09-15T11:52:52Z | 3727655 | `~/.agent-tasks/fsd-bi-b01-772403/task.log` |
+| fsd-bi-b01-772503 | D1280, I1280 | (launched when the first queue above ends) | | |
+
+The `summary.json` present in a fit directory before its `whole_command_resources.json`
+is non-empty is the runner's `setup` publication, not a result; a fit is complete only
+when its summary carries `status: complete` and the queue jsonl records exit 0.
+FLAT queues: not launched (dependent work, see the pre-launch record).
