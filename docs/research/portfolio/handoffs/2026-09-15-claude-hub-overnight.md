@@ -1,4 +1,4 @@
-# Root handoff — Claude hub overnight run (2026-09-15, refreshed 15:40 PDT)
+# Root handoff — Claude hub overnight run (2026-09-15, refreshed 16:15 PDT)
 
 Owner instruction 04:27 PDT: rest until 09:00 PDT; the hub runs the FSD fits overnight and
 reports at the 09:00 cron check-in. Two directions driven: FSD and ACVC. Owner 05:45 PDT:
@@ -24,7 +24,7 @@ under `docs/Claude_docs/changes/`). Nothing here changes lifecycle, priority or 
   Remote worktree and task records reclaimed (`CLEANUP.json`, `task_records/`).
 - Direction handoff: `docs/research/candidates/flexible_skill_duration/HANDOFF_2026-09-15_baseline_interruption.md`.
 
-## ACVC — B02 granted (G2) and launched; one live producer
+## ACVC — B02 complete: WITHIN_MEI on the second instance, the two instances disagree; result review next
 
 - Block 2 complete and intaken (D2 = F−M −.03919 J, M_ABOVE_MEI; F−C and F−own-dwell UP in
   both blocks; pooled F−M −.0079 J, df = 1 interval [−.406, +.390]). `em:acvc:convergence`
@@ -67,6 +67,15 @@ under `docs/Claude_docs/changes/`). Nothing here changes lifecycle, priority or 
   `c006c0b24` (ledger row 35).
 - **Live handle `acvc-transfer-m-b02-28631-c006c0b24`**: launched 2026-09-15T22:34:13Z through hmasd-experiment-operator, remote pid 3754217, admission passed at 22:34:25Z (15,613,599,744 B physical and effective available, floor 4 GiB), running at uptime 15 s with tmux active, stderr.log 0 bytes, stdout advancing (rollout 48 after 23.06 s process wall), expected end about 22:54Z Plan about 1,200 s, not a cap.
   Record `docs/research/candidates/acvc/evidence/m_deployment_transfer_b02_20260915/EXECUTION.md`.
+- Handle `acvc-transfer-m-b02-28631-c006c0b24` finished exit 0/0 in 989.80 s native wall; every
+  count as granted; collected, reduced, preserved, remote reclaimed (CLEANUP.json). **T_F,2 +.002859 J
+  WITHIN_MEI** (41/22/1), T_D,2 +.002678 and U_2 +.000182 WITHIN_MEI; beside B01's TRANSFERS the
+  two instances disagree (no pooled verdict). E0
+  `docs/research/candidates/acvc/ACVC_M_DEPLOYMENT_TRANSFER_B02_RESULT_EVIDENCE_20260915.md`,
+  intake `..._INTAKE_20260915.md`, ledger row 36, Chinese brief filed. G2 consumed; DM Briers .665 / .465.
+- Next object is a direction-tier result review to `em:acvc:convergence` (DM recommends A: record
+  both instances, conclude the transfer family, state whether any defensible next object remains);
+  the request `2026-09-15-acvc-m-deployment-transfer-b02-result-review-01` is authored in `pro_packets/20260915_m_deployment_transfer_b02_result_review/` and its send through the transport follows this commit.
 - Direction handoff: `docs/research/candidates/acvc/HANDOFF_2026-09-15_post_cm_decision.md`.
 
 ## Transport and registry
@@ -82,10 +91,11 @@ under `docs/Claude_docs/changes/`). Nothing here changes lifecycle, priority or 
 
 ## Next session
 
-One live handle: ACVC `acvc-transfer-m-b02-28631-c006c0b24` on the WSL node (expected end about
-20 minutes after launch). FSD: ACTIVE-idle, nothing to do. ACVC next: observe, collect, reduce,
-E0/intake/brief with the per-instance display beside B01, preserve, reclaim (first resume step in
-the direction handoff). The object ends after this one original; no further launch is authorized.
+No live handles. FSD: ACTIVE-idle, nothing to do. ACVC: the B02 result review to
+`em:acvc:convergence` (packet `pro_packets/20260915_m_deployment_transfer_b02_result_review/`) is the
+pending step: wait for the archived answer (GitHub readback, transport phase 2) and intake it as
+`PRO_FINAL`; a new fit would need a Portfolio investment question first; if the node finds no
+defensible next object, the lifecycle question goes to Portfolio. No launch is authorized.
 
 ## Integration state
 

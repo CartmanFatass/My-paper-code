@@ -1,7 +1,8 @@
 # ACVC handoff — after the em:acvc:convergence decision (2026-09-15, Claude hub)
 
-**State: ACTIVE / MEDIUM / recasts 2, lowest sequencing; B02 granted (G2) and launched: one live
-producer, handle `acvc-transfer-m-b02-28631-c006c0b24`; nothing else authorised.** Driven by
+**State: ACTIVE / MEDIUM / recasts 2, lowest sequencing; B02 complete and intaken (WITHIN_MEI on
+the second instance), G2 consumed, no producer; result review with `em:acvc:convergence`; nothing
+else authorised.** Driven by
 the Claude Code research hub (owner 2026-09-15 resume; two directions, ACVC and
 FSD). Authoring checkout `C:/Projects/HMASD-worktrees/codex-acvc`, branch
 `codex/acvc` (1,140 commits behind `main`; a merge of `main` conflicts in Codex
@@ -77,6 +78,36 @@ and `em:acvc:convergence` selected it with corrections (**B**, `PRO_FINAL`,
 card §5 and §7 acceptance groups) is engineering work that proceeds meanwhile with independent
 Opus review.
 
+## B02 complete and intaken: WITHIN_MEI on the second instance (2026-09-15 23:05Z)
+
+- Handle `acvc-transfer-m-b02-28631-c006c0b24` finished exit 0/0 at about 22:51Z (native wall
+  989.80 s, peak RSS 588,916 KiB, alone on the node; 0.82 of the 1,200 s plan). Every count as
+  granted; digests byte-identical; collection, reduce, world differences, prediction scores and
+  preservation under `evidence/m_deployment_transfer_b02_20260915/` (retained archive with
+  `final.pt` and logs at
+  `C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/retained/m_deployment_transfer_b02_20260915/M_original.tar.gz`).
+- Reading: T_F,2 +.002859 J **WITHIN_MEI** (41/22/1), T_D,2 +.002678 and U_2 +.000182 WITHIN_MEI;
+  beside B01's TRANSFERS the two instances disagree (discrepancy observed, no pooled verdict);
+  [E0](ACVC_M_DEPLOYMENT_TRANSFER_B02_RESULT_EVIDENCE_20260915.md),
+  [intake](ACVC_M_DEPLOYMENT_TRANSFER_B02_INTAKE_20260915.md), ledger row 36,
+  [brief](../../portfolio/owner/briefs/acvc/2026-09-15_ACVC_M_DEPLOYMENT_TRANSFER_B02.md).
+- G2 is consumed. Remote worktree `/home/wu/hmasd-worktrees/acvc-transfer-b02-c006c0b24`, staging
+  `/home/wu/hmasd-inputs/acvc-transfer-b02-28631` and the task record reclaimed after the push
+  (CLEANUP.json in the evidence folder).
+- Next: the direction-tier result review to `em:acvc:convergence` (options A/B/C/D in the intake, DM
+  recommends A: record both instances, conclude the transfer family, and state whether any
+  defensible next object remains in ACVC); the request `2026-09-15-acvc-m-deployment-transfer-b02-result-review-01` is authored in `pro_packets/20260915_m_deployment_transfer_b02_result_review/` and its send through the transport follows this commit.
+
+## First resume step (current)
+
+If the B02 result-review request to `em:acvc:convergence` has been sent (packet
+`pro_packets/20260915_m_deployment_transfer_b02_result_review/` and the transport registry), wait
+for the archived response (GitHub readback of its response path at a fresh `codex/acvc` head, then
+transport phase 2) and intake it as `PRO_FINAL`. If the node concludes the family with no next
+object, ACVC is ACTIVE-idle and any lifecycle question is Portfolio's (author it only if the node
+says the direction has no defensible object). If the node selects a new fit, a Portfolio investment
+question precedes any launch. No launch is authorised. FSD-side work is unaffected.
+
 ## B02 granted, L0 accepted, fit launched (2026-09-15 22:35Z)
 
 - Portfolio answered at `codex/acvc 47021a400` (22:20Z; one Send 22:13Z, COMPLETE, ARCHIVED,
@@ -93,7 +124,7 @@ Opus review.
   Record: `evidence/m_deployment_transfer_b02_20260915/EXECUTION.md`. Plan about 1,200 s, not a cap.
   Output root `<W>/temp/directions/acvc/exp/m_deployment_transfer_b02_28631`.
 
-## First resume step (current)
+## First resume step as written at 22:35Z (superseded 23:05Z by the section above)
 
 Observe the handle (`agent-task status acvc-transfer-m-b02-28631-c006c0b24`; never run/stop/attach).
 When finished: collect `native/` (summary.json, episodes.jsonl, updates.jsonl, admission.json,
