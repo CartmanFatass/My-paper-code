@@ -34,3 +34,7 @@ The strongest null survives: an adequately fitted scalar conditional W baseline 
 ## Responsibility and finite boundary
 
 Root creates one reusable direction worktree and one Astra/max DM for the accepted preparation. The DM owns the bounded assessment and subsequent current-authority decisions; no positive pilot, exact proof, full reconstruction or automatic release of the unallocated offer is required or authorized. Preparation completion alone does not release the occupied direction.
+
+### Accepted first-pair investment — 2026-09-14
+
+[Complete Portfolio investment intake](../../portfolio/pro_packets/20260914_trdl_b01_investment/INTAKE.md) applies the new purchase of exactly one SCALAR/Q32 pair plus minimum implementation/support. The historical offer remains historical; the response now supplies prospective authority. The next discriminator is the registered finite same-tail-objective learning comparison. No scientific outcome or source acceptance exists yet. Scalar conditional-score sufficiency remains the strongest null; loss-scale/joint-clipping consequences limit any outcome to the whole package. Independent replication, tuned generic-host baseline competence and component attribution remain separate future questions under current §11.11, without additional granted exposure.
