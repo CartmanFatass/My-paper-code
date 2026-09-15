@@ -67,3 +67,13 @@ ssh -o BatchMode=yes -o ConnectTimeout=10 hmasd-wsl-node /usr/local/bin/agent-ta
 | acvc-transfer-m-b01-28531-a741758a | 2026-09-15T21:09:14Z | 3745266 | passed, 15,621,808,128 B physical and effective available (floor 4 GiB) | running at 21:09:38Z (uptime 24 s, tmux active); stderr.log 0 bytes; updates at rollout 64 after 31.6 s process wall; expected end about 21:52Z |
 
 Operator: `hmasd-experiment-operator`, one command, pre-launch duplicate check `not_found`, no retry. Node idle otherwise (load 0.00 before launch). Observation: hub-owned bounded status polls; collection after the terminal state.
+
+## Terminal record
+
+| Handle | Terminal (UTC) | Supervisor status | Native wall s | CPU s | Peak RSS KiB | Exit |
+| --- | --- | --- | ---: | ---: | ---: | --- |
+| acvc-transfer-m-b01-28531-a741758a | between 21:22:44Z (running, uptime 810 s) and 21:27:45Z (finished, uptime 1,111 s) | finished, tmux inactive | 985.12 | 982.04 + 1.47 | 585,028 | 0/0 |
+
+Process wall to the summary 984.64 s: training complete at 944.99 s (0.90 ms per training tick), three panels about 11.9 / 13.9 / 13.9 s. The node was otherwise idle; the projection above was scaled from the contended block-2 M wall (2,427 s beside five FSD fits), so the actual wall is 0.38 of the 2,600 s plan. Collected 21:29Z into `native/` and `task_records/` with digests byte-identical to the remote listing ([COLLECTION.json](COLLECTION.json)); reduce output in `reduce/summary.json`; E0 and intake at
+`../../ACVC_M_DEPLOYMENT_TRANSFER_B01_RESULT_EVIDENCE_20260915.md` and `..._INTAKE_20260915.md`; retained archive in
+[PRESERVATION.json](PRESERVATION.json); remote reclamation in CLEANUP.json after the push.

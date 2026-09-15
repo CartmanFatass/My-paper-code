@@ -77,6 +77,31 @@ and `em:acvc:convergence` selected it with corrections (**B**, `PRO_FINAL`,
 card §5 and §7 acceptance groups) is engineering work that proceeds meanwhile with independent
 Opus review.
 
+## Transfer fit complete and intaken: TRANSFERS on one instance (2026-09-15 21:45Z)
+
+- Handle `acvc-transfer-m-b01-28531-a741758a` finished exit 0/0 at about 21:26Z (native wall
+  985.12 s, peak RSS 585,028 KiB; the node was idle, the 2,500 s projection came from a contended
+  block-2 wall). Every count as granted; digests byte-identical; collection, reduce, world
+  differences, prediction scores and preservation under
+  `evidence/m_deployment_transfer_b01_20260915/` (retained archive with `final.pt` and logs at
+  `C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/retained/m_deployment_transfer_b01_20260915/M_original.tar.gz`).
+- Reading: T_F +.018338 J **TRANSFERS** (53/64), T_D +.00907 WITHIN_MEI, U +.00927 WITHIN_MEI;
+  [E0](ACVC_M_DEPLOYMENT_TRANSFER_B01_RESULT_EVIDENCE_20260915.md),
+  [intake](ACVC_M_DEPLOYMENT_TRANSFER_B01_INTAKE_20260915.md), ledger row 32,
+  [brief](../../portfolio/owner/briefs/acvc/2026-09-15_ACVC_M_DEPLOYMENT_TRANSFER_B01.md).
+- The grant is consumed. Next: the direction-tier result review to `em:acvc:convergence`
+  (options A/B/C/D in the intake, DM recommends B: one further independent M instance, which
+  would need a Portfolio investment question). Remote worktree and staging reclaimed after the
+  push (CLEANUP.json in the evidence folder).
+
+## First resume step (current)
+
+If the result-review request to `em:acvc:convergence` has been sent (see the packet folder
+`pro_packets/20260915_m_deployment_transfer_result_review/` and the transport registry), wait for
+the archived response and intake it (`PRO_FINAL`); a Portfolio investment question follows only if
+the node selects a new fit. If it has not been sent, author it from the intake's continuation
+section. No launch is authorized. FSD-side work is unaffected.
+
 ## Portfolio grant G, L0 reviewed, fit launched (2026-09-15 21:09Z)
 
 - `portfolio:cross_direction` granted the one fit at 20:51Z (`PRO_FINAL / OWNER_DELEGATED`,
@@ -98,7 +123,7 @@ Opus review.
   [EXECUTION.md](evidence/m_deployment_transfer_b01_20260915/EXECUTION.md) has the cost
   projection and command form.
 
-## First resume step (current)
+## First resume step as written at launch (superseded 21:45Z by the section above)
 
 Check `agent-task status acvc-transfer-m-b01-28531-a741758a`. When finished with exit 0:
 collect `summary.json`, `episodes.jsonl`, `updates.jsonl`, `admission.json`, `native_time.txt`,

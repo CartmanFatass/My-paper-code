@@ -1,4 +1,4 @@
-# Root handoff — Claude hub overnight run (2026-09-15, refreshed 14:15 PDT)
+# Root handoff — Claude hub overnight run (2026-09-15, refreshed 14:50 PDT)
 
 Owner instruction 04:27 PDT: rest until 09:00 PDT; the hub runs the FSD fits overnight and
 reports at the 09:00 cron check-in. Two directions driven: FSD and ACVC. Owner 05:45 PDT:
@@ -24,7 +24,7 @@ under `docs/Claude_docs/changes/`). Nothing here changes lifecycle, priority or 
   Remote worktree and task records reclaimed (`CLEANUP.json`, `task_records/`).
 - Direction handoff: `docs/research/candidates/flexible_skill_duration/HANDOFF_2026-09-15_baseline_interruption.md`.
 
-## ACVC — family concluded; M-deployment transfer object granted and running
+## ACVC — family concluded; M-deployment transfer result TRANSFERS on one instance, convergence review next
 
 - Block 2 complete and intaken (D2 = F−M −.03919 J, M_ABOVE_MEI; F−C and F−own-dwell UP in
   both blocks; pooled F−M −.0079 J, df = 1 interval [−.406, +.390]). `em:acvc:convergence`
@@ -42,11 +42,13 @@ under `docs/Claude_docs/changes/`). Nothing here changes lifecycle, priority or 
   owner item `20260915-acvc-005`). L0 at `codex/acvc fb7f859d9` reviewed by Opus (accept after
   fixes; one material: reduce mode bound identities too late), corrections `a741758a1`
   (main `deb0eb357`), eleven tests green, ledger row 31.
-- **Live handle `acvc-transfer-m-b01-28531-a741758a`** (pid 3745266, launched 21:09:14Z on the
-  WSL node, admission 14.55 GiB, projected wall about 2,500 s, expected end about 21:52Z);
-  worktree `/home/wu/hmasd-worktrees/acvc-transfer-b01-a741758a1`, on-policy at
-  `/home/wu/hmasd-inputs/acvc-transfer-b01-28531/on-policy`; execution record
-  `docs/research/candidates/acvc/evidence/m_deployment_transfer_b01_20260915/EXECUTION.md`.
+- Handle `acvc-transfer-m-b01-28531-a741758a` (launched 21:09:14Z) finished exit 0/0 in 985 s
+  native wall; every count as granted; collected, reduced, preserved. **T_F +.018338 J TRANSFERS**
+  (53/64), T_D +.00907 and U +.00927 WITHIN_MEI; DM Briers .54 / .635. E0
+  `docs/research/candidates/acvc/ACVC_M_DEPLOYMENT_TRANSFER_B01_RESULT_EVIDENCE_20260915.md`,
+  intake `..._INTAKE_20260915.md`, ledger row 32, Chinese brief filed. Grant consumed; the next
+  object is a direction-tier question to `em:acvc:convergence` (DM recommends one further
+  independent M instance). Remote worktree and staging reclaimed (CLEANUP.json).
 - Direction handoff: `docs/research/candidates/acvc/HANDOFF_2026-09-15_post_cm_decision.md`.
 
 ## Transport and registry
@@ -62,14 +64,13 @@ under `docs/Claude_docs/changes/`). Nothing here changes lifecycle, priority or 
 
 ## Next session
 
-One live handle (ACVC transfer fit, above). FSD: ACTIVE-idle, nothing to do. ACVC: when the
-handle finishes, follow the direction handoff's first resume step (collect, reduce through
-`--mode reduce`, E0, predictions, intake, brief, ledger, cleanup, result review to
-`em:acvc:convergence`). No further launch is authorized by the grant (zero retries, no second
-fit, no extra panel).
+No live handles. FSD: ACTIVE-idle, nothing to do. ACVC: the result review to
+`em:acvc:convergence` (packet `pro_packets/20260915_m_deployment_transfer_result_review/`) is the
+pending step: send it once if not yet sent, intake the archived answer as `PRO_FINAL`; a new fit
+would need a Portfolio investment question first. No launch is authorized.
 
 ## Integration state
 
 `main` carries every accepted `codex/fsd` and `codex/acvc` commit at writing; the two
 direction branches carry the direction-owned paths of each main commit. Ledger rows in
-`docs/research/portfolio/audit/2026-09-15.md` (lines 14–31).
+`docs/research/portfolio/audit/2026-09-15.md` (lines 14–32).

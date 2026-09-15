@@ -1,5 +1,25 @@
 # Direction acvc: ACVC
 
+## M-deployment transfer result: TRANSFERS on one instance — 2026-09-15 21:45Z (grant consumed; next object with em:acvc:convergence)
+
+The one granted fit (MASTER 28531 / namespace 38531, handle `acvc-transfer-m-b01-28531-a741758a`,
+native wall 985 s) is complete and accepted
+([E0](ACVC_M_DEPLOYMENT_TRANSFER_B01_RESULT_EVIDENCE_20260915.md),
+[intake](ACVC_M_DEPLOYMENT_TRANSFER_B01_INTAKE_20260915.md), ledger row 32). Unrounded
+T_F = F(M) − M = **+.018338 J**, 53/64 worlds favorable, conditional SE .0055: the card's
+**TRANSFERS** branch. Supporting T_D = own-dwell(M) − M = +.00907 J and paired
+U = F(M) − own-dwell(M) = +.00927 J, both WITHIN_MEI (50/64 and 48/64 favorable): about half of
+the F increment on M is shared with holding still at a flagged opportunity, and the retrace-specific
+remainder is not resolved beyond the MEI in one instance. Counters 6,752 retraces / 5,110 holds on
+their opportunities, all distinguishable. Absolute panels M .3786 / F(M) .3969 / own-dwell(M) .3877 J.
+DM Briers T_F .54 (modal category occurred), T_D .635. One instance with conditional-world
+precision only; the between-instance variability that blocks 1–2 showed for F−M (block SD .044 J)
+applies and is unmeasured here. No stable superiority, discardable C, F(C) versus F(M), tuned
+headroom, equivalence, mechanism, default change or C promotion. The two-block C/M claim is unchanged.
+The grant ends here (zero retries or extra panels). The next object is a direction-tier question for
+`em:acvc:convergence` (A keep concluded / B one further independent M instance, DM's recommendation /
+C matched F(C) vs F(M) / D train M through the law); ACVC stays ACTIVE/MEDIUM/recasts2, ACTIVE-idle, no producer.
+
 ## M-deployment transfer object granted and launched — 2026-09-15 21:09Z (Portfolio G, PRO_FINAL / OWNER_DELEGATED)
 
 `portfolio:cross_direction` granted exactly one fresh M fit with its three panels at 20:51Z
