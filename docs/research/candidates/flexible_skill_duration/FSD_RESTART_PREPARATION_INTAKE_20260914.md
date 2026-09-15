@@ -163,7 +163,11 @@ question after actual shared-writer release.** These are object-tier proposal
 choices, not a Portfolio investment verdict. Root identified the real writer
 as ACVC request `2026-09-14-acvc-post-fixed-rate-investment-01`; binding/dispatch
 waits for its complete application and explicit release, without a Root approval
-gate. No accepted request is regenerated or sent over.
+gate. That writer was subsequently released after complete ACVC archival/intake;
+the finite [FSD request is now dispatched](../../portfolio/pro_packets/20260914_fsd_interruption_batch_investment/DISPATCH.md)
+through this DM's native Transport. At dispatch, provider acceptance remains
+unobserved; no Pro decision or new experimental grant is inferred. No accepted
+request is regenerated or sent over.
 
 The prospective counts/exposure were generated from AST-literal runner constants
 without target imports and retained in
@@ -175,7 +179,9 @@ DM proposal separately from the awaited Pro investment decision.
 
 Current activity is document/source preparation. New models, RNG/learner creation,
 environment steps, optimizer calls, evaluations, profiling, tests, scientific
-invocations, native handles and Pro Sends are all zero. Engineering Scope §4: none
+invocations and native experiment handles are all zero. Pro Sends were zero in
+the published preparation; current transport state is in the dispatch record.
+Engineering Scope §4: none
 needed by this documentary assignment. Documentation effort is unmetered, not free.
 Root receives this reading/application event and maintains shared tracking; no Root
 ACK is needed for the next already authorized preparation step.
