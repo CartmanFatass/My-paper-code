@@ -1,0 +1,11 @@
+{
+  "source_repository": "https://github.com/marlbenchmark/on-policy.git",
+  "source_sha": "de66d7a4b23fac2513f56f96f73b3f5cb96695ac",
+  "source_pack_method": "git archive of published committed upstream tree; excludes reference-overlay untracked files",
+  "archive_sha256": "0f151fea5346db5a6b77eaafaa77144416955d962ab501a26f6cd3bd372cf19c",
+  "archive_bytes": 1157120,
+  "local_archive": "C:\\Projects\\HMASD-worktrees\\codex-acvc\\temp\\directions\\acvc\\staging\\cluster_mappo_comparison_b01_20260914\\on-policy-de66d7a4b23fac2513f56f96f73b3f5cb96695ac.tar",
+  "remote_staging": "/home/wu/hmasd-inputs/acvc-mappo-b01-28331",
+  "remote_source": "/home/wu/hmasd-inputs/acvc-mappo-b01-28331/on-policy",
+  "no_interpreter_change": true
+}
