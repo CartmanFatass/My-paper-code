@@ -1,0 +1,38 @@
+{
+  "question": "MGTAP应可逆PARK、继续一个最小512训练配对，还是保持ACTIVE-idle？",
+  "changes_if_approved": [
+    {
+      "target": "MGTAP Portfolio lifecycle / occupied slot",
+      "from": "ACTIVE/MEDIUM，占用1席，当前数值探索已结束",
+      "to": "建议PARK并在正式裁决应用后释放1席；现在仅提交建议，尚未处置"
+    }
+  ],
+  "if_refused": "保留当前CONTINUE/席位与全部证据，按完整Portfolio裁决或所有者覆盖处理；不把反对建议变成新的实验授权。",
+  "evidence_for": [
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260914_late512_results_review/archive/RESPONSE.md",
+      "quote": "The completed longer-training comparison did not produce a useful realized relative advantage at its prescribed final endpoint",
+      "why": "固定率复现8253不利后，新的较长训练机会8254也未增加本路径相对收益；保全资产不需要马上再取样。"
+    }
+  ],
+  "evidence_against": [
+    {
+      "path": "docs/research/candidates/metric_ground_transport_allocation/pro_packets/20260914_late512_results_review/archive/RESPONSE.md",
+      "quote": "The strongest alternative is one fresh matched pair at the same fixed rate and512 training endpoint, preferably with final512-only evaluation when recurrence of that endpoint is the question.",
+      "why": "仅一个512配对，另一个真实实例可能改变投入，且已测命令360秒；8252、8214等正结果仍保留。"
+    }
+  ],
+  "uncertainty": [
+    "只有B层次的自适应探索证据，不是稳定劣势、等价或普遍COND失败。",
+    "native tuned headroom及完整支持/长期费用未知，不作为停研门槛。",
+    "PARK是可逆价值判断；可因开发承诺或既有维护问题估值变化重新考察，不要求先有新正结果。"
+  ],
+  "cost": {
+    "compute": "本咨询0拟合；最强备选2 fits/278528 ticks/2048 Adam，6–10分钟未来估计未测；过去三程序1196.88秒非全成本",
+    "owner_time": "可异步覆盖，不等待回复",
+    "reversibility": "reversible",
+    "waits_on_this": "Portfolio完整答复决定MGTAP处置；不等待所有者"
+  },
+  "verdict_text": "Recommendation to Portfolio: reversible PARK of MGTAP, retaining optional COND code, DENSE default and every signed result. This is a proposed direction-level allocation judgment, not an applied disposition or evidence of general COND failure.",
+  "source": "docs/research/candidates/metric_ground_transport_allocation/MGTAP_POST_LATE512_PORTFOLIO_PROPOSAL_20260914.md"
+}
