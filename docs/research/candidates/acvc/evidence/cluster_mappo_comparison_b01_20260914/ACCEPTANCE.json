@@ -1,0 +1,22 @@
+[
+  {
+    "arm": "C",
+    "handle": "acvc-mappo-c-b01-28331-e4d3f324",
+    "source_sha": "e4d3f324ef2b233d0e97b347a5b94c9061ac6f52",
+    "output": "/home/wu/hmasd-worktrees/acvc-mappo-b01-e4d3f324e/temp/directions/acvc/exp/cluster_mappo_comparison_b01_28331_C",
+    "returncode": 0,
+    "stdout": "Task 'acvc-mappo-c-b01-28331-e4d3f324' started in tmux session 'agent_acvc-mappo-c-b01-28331-e4d3f324'. Output: /home/wu/.agent-tasks/acvc-mappo-c-b01-28331-e4d3f324/task.log\n",
+    "stderr": "",
+    "local_receipt_time": "2026-09-15T05:57:41.077059+00:00"
+  },
+  {
+    "arm": "M",
+    "handle": "acvc-mappo-m-b01-28331-e4d3f324",
+    "source_sha": "e4d3f324ef2b233d0e97b347a5b94c9061ac6f52",
+    "output": "/home/wu/hmasd-worktrees/acvc-mappo-b01-e4d3f324e/temp/directions/acvc/exp/cluster_mappo_comparison_b01_28331_M",
+    "returncode": 0,
+    "stdout": "Task 'acvc-mappo-m-b01-28331-e4d3f324' started in tmux session 'agent_acvc-mappo-m-b01-28331-e4d3f324'. Output: /home/wu/.agent-tasks/acvc-mappo-m-b01-28331-e4d3f324/task.log\n",
+    "stderr": "",
+    "local_receipt_time": "2026-09-15T05:57:41.463009+00:00"
+  }
+]
