@@ -100,3 +100,30 @@ original invocations remain bound to797596454. This preparation produced zero
 new native acquisition and zero real optimizer updates. Actual endpoint readback
 occurs only after terminal returns. Including both helpers, new non-test source
 is491 lines, below the selected600-line bound; no scope facility or new experiment.
+
+## A1 startup preparation repair and acceptance
+
+The first A1 supervisor exited125 because DM omitted creation of its output
+directory before /usr/bin/time opened INVOCATION_TIME.json. This is a real
+launch-preparation defect, outside the already passing learner/publication
+source checks. The six-member failed-supervisor archive and original launch
+receipt remain immutable evidence; missing output/admission/learner endpoints
+are recorded rather than treated as an adverse scientific result.
+
+The two committed-plan GNU time/marker checks took0.002735s: missing output
+directory reproduced125 with no child marker; creating it yielded0 and the
+marker. Thus the matching failed original never entered its bash child,
+admit-memory or Python learner. Scientific learner invocations/ticks/updates
+in that failure are0; one accepted supervisor failure is still reported. The
+three-member check archive was verified locally and its exact remote test
+scratch is absent. There is no new empirical fit or scientific retry here.
+
+DM accepts the bounded manual preparation repair: the exact same A1 output is
+now created and empty before time; all frozen source, seeds, programme, budget,
+device and endpoint arguments remain unchanged. A new technical supervisor
+suffix-start2 retains the failed original. PRELEARNER_REPAIR_PLAN.json fixes the
+corrected argv, published before execution. G2/A2 also receive directory creation
+before their original commands. No learner/wrapper/source change or additional
+scientific review is needed for this filesystem preparation correction. The
+collector's only revision points A1 terminal collection to the new handle; its
+old bytes remain at ebeb74ea8. New non-test module/helper lines total493.

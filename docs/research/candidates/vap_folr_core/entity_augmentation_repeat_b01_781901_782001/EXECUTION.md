@@ -82,3 +82,13 @@ preparation before their original commands. A reader failure alone is provisiona
 the recorded marker check will confirm whether the child can have executed.
 This does not authorize a fifth learner, scientific retry, score selection or
 changed endpoint. The original COMMANDS bytes remain historical and unchanged.
+
+The committed-plan marker check is complete at05:36:59Z: the missing-directory
+case returned125 without executing its child, the prepared case returned0 and
+created its child marker. OUTPUT_PREPARATION_CHECK.json preserves both exact
+commands, native returns and0.002735s elapsed. No learner/admission was invoked
+by the failed A1 supervisor or either marker check. DM accepts the manual
+directory repair under standing engineering authority. The exact A1 output is
+created and empty; the corrected start2 supervisor remains unaccepted at this
+repair-acceptance boundary. There are still three unstarted scientific fits,
+with the original four-fit budget and zero scientific retries unchanged.
