@@ -1,0 +1,29 @@
+{
+  "recorded_utc": "2026-09-15T09:02:01.436955+00:00",
+  "retention_main_commit": "8fa0e344bab3bf6a7142d5a3c56152ac925f57d5",
+  "exact_root": "C:\\Projects\\HMASD-worktrees\\codex-vap-folr\\temp\\directions\\vap_folr_core\\exp\\entity_augmentation_repeat_b01_781901_782001",
+  "attempt_count": 1,
+  "method": "native PowerShell, exact absolute target and containment/hash checks included in submitted operation",
+  "tool": "exec_command",
+  "outcome": "rejected before process creation",
+  "error_class": "CreateProcess",
+  "error_reason_verbatim": "blocked by policy",
+  "full_error": "not reproduced: prior tool result truncated the submitted command",
+  "submitted_prechecks_executed": false,
+  "deletion_executed": false,
+  "after_rejection_readback": {
+    "method": "separate read-only Python filesystem/hash/archive comparison",
+    "root_exists": true,
+    "actual_file_count": 9,
+    "all_manifest_bytes_and_hashes_match": true,
+    "all_archive_members_match_live_files": true,
+    "archive_bytes": 5832,
+    "archive_sha256": "3296e0190c909804b580e3c0126d97e0f6666ecee1b91703b731a318c358177a"
+  },
+  "disposition": "retain all nine current-object files; no alternate deletion method, repeat attempt or escalation",
+  "historical_rejected_roots": "retained, untouched",
+  "scientific_polarity_changed": false,
+  "scientific_retries": 0,
+  "stops": 0,
+  "manual_startup_repairs": 1
+}

@@ -59,7 +59,26 @@ method, repeated approval or a scientific polarity/budget change.
 
 ## Actual state
 
-Preservation complete; no removal attempted at this publication. Root retention/
-integration and the exact reclamation receipt will be recorded here. The owner
-requires this object's review/retention/necessary cleanup and a concrete pause
-handoff, not an experiment or direction successor.
+Root retained the complete remote74/local9 support at main
+8fa0e344bab3bf6a7142d5a3c56152ac925f57d5 and explicitly authorized this exact
+reclamation. REMOTE_CLEANUP_RECEIPT.json records removal at
+2026-09-15T08:54:53.881688Z: all74 support members unchanged beforehand,
+worktree disk absence and Git-registration absence, and all five terminal
+supervisor directories absent. Shared source remains. No process was killed,
+restarted or retried; stops0/scientific retries0/manual startup repairs1.
+REMOTE_CLEANUP.stderr.log preserves the noninteractive shell startup messages;
+the complete receipt reports successful removal and absence checks.
+
+The single native PowerShell operation for the exact current local root was
+rejected before process creation with CreateProcess / `blocked by policy`.
+Its submitted prechecks and deletion did not execute. A separate read-only
+filesystem/hash/archive comparison then confirmed the root still exists and
+all9 files match the retained manifest and archive byte for byte. The full
+submitted command was truncated in the tool error and is not reconstructed.
+LOCAL_CLEANUP_BLOCKER.json records this actual boundary. All9 files remain,
+with no alternate method, repeat deletion attempt or escalation. Previously
+rejected local roots, shared source, author checkout/branch and all Pro/Transport
+archives remain untouched. This technical blocker changes no result or budget.
+
+Only this object's independent result-review intake and concrete owner-pause
+handoff remain. No experiment or direction successor is authorized during pause.
