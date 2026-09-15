@@ -268,3 +268,56 @@ It did not start Axis N, because that needed the owner. It filled a free slot wi
 direction and ran four fits on it. Three of four directions' prior positives failed to recur under
 replication. FSD's signal is alive, unresolved, and still being tested at a budget and n that
 cannot resolve it. The next step is the owner's: decisions 1 to 4 above.
+
+---
+
+## Addendum 2026-09-15 (03:15 PDT): further methodology and direction suggestions
+
+Written in answer to the owner's follow-up question. These extend §5; nothing above is changed.
+
+### Methodology
+
+- **A/A calibration block on scenario 1.** Six D0 fits, identical recipe, different seeds, all
+  pairwise differences. Measures the seed SD directly, checks the false-positive rate of the
+  0.01 J rule, costs about one CPU-hour. Every UAV card then quotes that SD as a standing host
+  fact and derives its n from it.
+- **Pre-registered accumulation objects.** The rules forbid pooling across objects, so evidence
+  never adds up (the seven FSD package observations in §3.1 are poolable only as reviewer
+  arithmetic). Define an accumulation object: same host, recipe, arms and budget; a standing
+  table to which each new block is appended and the interval updated. Pooling is legitimate
+  when the entry rule was fixed in advance.
+- **Learning curves, not only a final panel.** Evaluate at fixed step checkpoints on the same
+  32 worlds. Gives an operational definition of competence (comparator curve has plateaued);
+  a card run before plateau is labelled early-regime.
+- **Factorial over sequential.** FOLR's A−G → A−Z → Z−G chased each last point; FSD's 2×2
+  settled the batch question in one object. When two explanations survive, run the cross.
+- **Audit selections only.** 92 of 161 rows on 09-14 were `technical`. Ledger and inbox carry
+  selection rows; the Chinese brief is the only ordinary-result surface.
+- **Owner-defaults file at resume.** Minimum effect per host, budget ceiling per object, device
+  policy, the two axes and their benchmarks, answered once so the loop can run a week without
+  waiting on the owner.
+- **One UAV host.** Three directions used three UAV variants (scenario 1, cluster, uniform).
+  Standardise on scenario 1 and port ACVC's reviewed MAPPO adapter (pinned `on-policy` at
+  `de66d7a`, bounded tanh-Gaussian head, 585 lines) to it as the shared baseline, in place of
+  the untested flat switch in `hmasd/baselines.py`.
+- **Name the target paper.** Three figures: interruption gain on scenario 1 against flat and
+  fixed-k baselines; gain versus hazard on the corridor; one external asynchronous benchmark.
+  Every object maps to a figure or is declined.
+
+### Active directions
+
+- **FSD.** Reanalyse the existing eight fits for whether per-world gain correlates with the
+  interruption count in that world (exploratory, free, first mechanism readout). Then the
+  hazard prediction on the corridor, which has exact oracle margins; re-read the early-September
+  corridor evidence first (not re-read in this session; the 09-05 park covered only the fixed-K2
+  branch). Learned termination with a deliberation cost is the natural second treatment.
+- **ACVC.** The remaining useful question is a curve: does F−C shrink as C trains past 4,096
+  episodes? If it reaches zero the heuristic is a good prior and the direction closes cleanly.
+  Otherwise historical.
+- **FOLR.** No further Traffic Junction runs; keep-versus-reset becomes the L3 ablation on the
+  Axis N benchmark once N-a/N-b is chosen.
+- **TRDL.** Park. A tail question needs a host with real outcome variance and a competent scalar
+  baseline; both are missing.
+- **VNFC.** Re-open as the Axis N core under N-a: UAV failure and replacement events on
+  scenario 1, L0 first with masked MAPPO on the shared adapter. Its earlier stops were
+  engineering, not science.
