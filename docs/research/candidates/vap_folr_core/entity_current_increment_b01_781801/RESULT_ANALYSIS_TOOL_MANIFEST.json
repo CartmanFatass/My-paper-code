@@ -1,0 +1,7 @@
+{
+  "source_path": "temp\\directions\\vap_folr_core\\exp\\entity_current_increment_b01_781801\\read_pair.py",
+  "source_sha256": "42c6e6bb12591cf36227e19cee80b13fb8c74e225783616adc01129e52a3ce7e",
+  "source_lines": 65,
+  "archive_sha256": "fc3193df378a122d1db8f368c45d2d1e4899367b1c3c0a3e4566e7b2831abda6",
+  "purpose": "Read both original selected summaries, recompute per-policy panels and frozen Z-G primary, emit one endpoint row per fit. No new native exposure."
+}

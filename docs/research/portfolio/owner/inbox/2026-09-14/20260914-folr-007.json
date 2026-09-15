@@ -1,0 +1,69 @@
+{
+  "id": "20260914-folr-007",
+  "created": "2026-09-14T20:46:59-07:00",
+  "direction": "vap_folr_core",
+  "tier": "object",
+  "kind": "close-call",
+  "title": "FOLR：准备两组还是一组 A−G 复查",
+  "context": "Z−G 新结果为−4.44375，仍只有各一次训练。旧 A−G 的+5.2964是剩余单次正比较。准备两组可以观察新研究内的不一致，一组则省一半拟计算；当前没有新实验冻结或启动。",
+  "options": [
+    {
+      "key": "two",
+      "label": "准备两组",
+      "consequence": "先形成并审查四次拟合的有限方案；实际卡片和暴露仍按既有委托另行确定。"
+    },
+    {
+      "key": "one",
+      "label": "准备一组",
+      "consequence": "先形成并审查两次拟合的有限方案，减少约一半计算。"
+    }
+  ],
+  "recommended": "two",
+  "auto_applied": "two",
+  "dm_reason": "优先为剩余正比较设计事先固定的训练重复；额外一组的价值仍需要独立审查。",
+  "evidence": [
+    "docs/research/candidates/vap_folr_core/FOLR_ENTITY_CURRENT_INCREMENT_B01_INTAKE_20260914.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-14.md#L39",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "复查仍仅一次为正的 A−G 时，先准备两组全新训练，还是用一组节省一半计算？",
+    "changes_if_approved": [
+      {
+        "target": "docs/research/candidates/vap_folr_core/FOLR_ENTITY_CURRENT_INCREMENT_B01_INTAKE_20260914.md",
+        "from": "当前 Z−G 已完成且不支持这次 Z；后续未冻结",
+        "to": "准备并审查两组 A−G 的有限方案；不会据此直接启动或把旧自适应序列当独立复现"
+      }
+    ],
+    "if_refused": "改为准备一组 A−G，或按明确新指令改问题；所有旧结果、当前完整 Z−G 和方向状态保持。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/vap_folr_core/FOLR_ENTITY_CURRENT_INCREMENT_B01_INTAKE_20260914.md",
+        "quote": "Two blocks allow observing repeatability/heterogeneity inside one prospectively\nfixed study.",
+        "why": "给剩余单次正比较增加事先固定的训练实例，同时保留不一致结果。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/vap_folr_core/FOLR_ENTITY_CURRENT_INCREMENT_B01_INTAKE_20260914.md",
+        "quote": "One block is the cheaper strongest alternative and would directly challenge the\nold positive.",
+        "why": "两组相对一组的额外决策价值不确定，成本约翻倍。"
+      }
+    ],
+    "uncertainty": [
+      "当前和旧对象均不能提供稳定方法排名。",
+      "两组也不自动保证精度或支持统计总体结论。"
+    ],
+    "cost": {
+      "compute": "两组拟为四次5000/4969/128，共410240 ticks；历史异次耗时参考9883.18秒，一组4941.59秒，均非预测或额度。",
+      "owner_time": "无需逐步批准；可异步选择较便宜方案。",
+      "reversibility": "reversible",
+      "waits_on_this": "nothing; preparation and review continue"
+    },
+    "verdict_text": "Owner-delegated decision (unattended, 2026-09-03 instruction): prepare two-block A−G. Only preparation/review is executed here, not a new frozen allocation or invocation.",
+    "source": "docs/research/candidates/vap_folr_core/FOLR_ENTITY_CURRENT_INCREMENT_B01_INTAKE_20260914.md"
+  },
+  "starred": true
+}

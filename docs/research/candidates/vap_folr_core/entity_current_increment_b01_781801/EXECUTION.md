@@ -75,3 +75,20 @@ The same native terminal-only Monitor is resumed for Z only. Its specified local
 state path is C:/Projects/HMASD-worktrees/codex-vap-folr/temp/directions/vap_folr_core/exp/entity_current_increment_b01_781801/current_only/MONITOR_STATE.json.
 It reports only the supervisor PID unless it independently measures a learner PID.
 The actual pending producer is Z plus this observation assignment; G is complete.
+
+## Complete pair collected
+
+Z exited0 at 2026-09-15T03:34:38Z in the original supervisor log. The reused
+terminal-only Monitor confirmed finished/exit0 at03:37:01.2560763Z and returned
+empty active_set with the correct actual local state path. DM collected at03:37:54Z,
+verified all selected source/arm/seeds/counts/checkpoint and the original G digest,
+then verified all10 transferred Z archive members. Both original handles and the
+Monitor are terminal; no science process or observation remains pending.
+
+Z native wall2080.16s / CPU2079.15s; the two-arm sums are4192.43s /4191.98s.
+PAIR_READBACK recomputes Z−G−4.44375 / GENERIC_ABOVE_MEI from both complete arrays
+and matches the selected publisher. The E0 result and complete intake preserve the
+one-fit-per-arm ceiling, missed prediction, original/adaptive evidence boundaries
+and the owner's prospective calibration. No scientific retry or successor fit
+has occurred. Full independent result/plan review and support retention/cleanup
+are the remaining closeout work.
