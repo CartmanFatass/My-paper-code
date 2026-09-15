@@ -1,15 +1,15 @@
 # 科研 Portfolio 报告
 
-> OWNER_RESUMED 2026-09-14：所有者已明确恢复科研。2026-09-14 owner-pause handoff 仅作为恢复基线，不再表示当前运行状态。
+> OWNER_OPERATIONAL_PAUSE 2026-09-15：所有者要求各 DM 完成已接受任务后安全暂停。四条链均已完成当前对象、保全证据并停止；生命周期和席位未改变。统一恢复入口见 [handoff](handoffs/2026-09-15-owner-operational-pause.md)。
 
 当前工作集为 **4 个占用方向、0 个预留、0 个空缺**。ACVC、FOLR 与 TRDL 延续各自链；所有者于 2026-09-14 直接恢复 FSD 为第四条并行链，不挤占前三个方向，也不等待 Portfolio 重复准入。四个方向均由原生 Astra/max DM 管理完整生命周期。实时执行细节见[实验跟踪](EXPERIMENT_TRACKING.md)。
 
 | 方向 | 当前科学位置 | 当前 producer / 下一事件 |
 | --- | --- | --- |
-| acvc | [ACTIVE/MEDIUM/recasts2](../candidates/acvc/DIRECTION.md)。fixed-rate B与review已完成；后续零暴露评估确认原HMASD的集中式global-state技能选择不能直接充当private-actor ACVC的同信息基线。 | DM正准备flat recurrent MAPPO-style对比的有限Portfolio投资包；当前0新fit/代码执行。shared writer由FSD占用，ACVC尚未绑定或发送。 |
-| vap_folr_core | [ACTIVE/MEDIUM](../candidates/vap_folr_core/DIRECTION.md)。fresh Z−G完整：Z −.136015625、G 4.307734375、差−4.44375，支持本次Generic对照；两臂各一个fit，旧A−G正结果仍为强反例。 | 完整Convergence review已intake，支持准备两块fresh A−G并保留一块低成本备选；DM直接记卡、实现、审查与准入，尚无新调用。远端对象已回收。 |
-| tail_return_distributional_learning | [ACTIVE/MEDIUM/recasts0](../candidates/tail_return_distributional_learning/DIRECTION.md)。B01两原始完成：Q32−SCALAR lower-tail差+.0345634681 J；每臂一个训练实例，支持完整配方B，不支持稳定优势或组件归因。 | 完整Convergence response已归档，DM正在intake并准备master9602 unchanged-recipe pair的有限投资材料；0追加grant/launch。shared writer由FSD占用，TRDL尚未绑定或发送。 |
-| flexible_skill_duration | [ACTIVE/HIGH](../candidates/flexible_skill_duration/DIRECTION.md)。OWNER_DIRECT恢复后已实际读取重启建议；完整2×2归因为首选准备，两臂I1280/D0-1280为有限备选，旧证据与D0 default保持。 | 唯一Portfolio请求 `2026-09-14-fsd-interruption-batch-investment-01` 已原生dispatch并占用shared writer；等待provider/full response，当前0训练/handle。 |
+| acvc | [ACTIVE/MEDIUM/recasts2](../candidates/acvc/DIRECTION.md)。private C/M 单block完成，F−M +.02343965 J；限于一个训练block、22/64 adverse worlds，缺tuned headroom。 | **Operationally paused**；0 handle/Monitor/Reviewer/Pro/Transport。恢复从 `ACVC_OWNER_PAUSE_AFTER_MAPPO_HANDOFF_20260914.md` 继续。 |
+| vap_folr_core | [ACTIVE/MEDIUM](../candidates/vap_folr_core/DIRECTION.md)。两块fresh A−G为 −5.830625/−.109921875，均未重现旧A正优势；保持MIXED_BLOCK_PATTERN。 | **Operationally paused**；0 learner/Monitor/Transport。恢复从 `HANDOFF_20260915_AUGMENTATION_REPEAT_OWNER_PAUSE.md` 继续，next discriminator刻意未选。 |
+| tail_return_distributional_learning | [ACTIVE/MEDIUM/recasts0](../candidates/tail_return_distributional_learning/DIRECTION.md)。B02独立pair lower-tail Q−S −.00241972 J（INSIDE_MEI）；B01正结果独立保留。 | **Operationally paused**；0 fit/provider/child。恢复从 `TRDL_OWNER_PAUSE_HANDOFF_20260914.md` 继续；B02结果Pro review未启动。 |
+| flexible_skill_duration | [ACTIVE/HIGH](../candidates/flexible_skill_duration/DIRECTION.md)。8/8 factorial originals完成；主均值+.02910478 J但两block符号混合、n=2区间很宽。 | **Operationally paused**；0实验/Monitor/Transport/recovery。恢复从 `FSD_OWNER_PAUSE_HANDOFF_20260915.md` 继续。 |
 
 ## 当前协作边界
 
