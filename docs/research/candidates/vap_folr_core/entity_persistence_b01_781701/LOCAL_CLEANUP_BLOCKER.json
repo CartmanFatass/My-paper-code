@@ -1,0 +1,27 @@
+{
+  "recorded_utc": "2026-09-15T01:31:57.021382+00:00",
+  "operation": "Standalone native PowerShell exact-path cleanup with prospective resolved-boundary/no-reparse/preserved-hash checks",
+  "tool": "exec_command",
+  "outcome": "REJECTED_BEFORE_EXECUTION",
+  "error": "CreateProcess Rejected; blocked by policy",
+  "command_checks_executed": false,
+  "removed_files": 0,
+  "retained_roots": [
+    {
+      "path": "C:\\Projects\\HMASD-worktrees\\codex-vap-folr\\temp\\directions\\vap_folr_core\\exp\\entity_persistence_b01_781701",
+      "exists": true
+    },
+    {
+      "path": "C:\\Projects\\HMASD-worktrees\\codex-vap-folr\\temp\\directions\\vap_folr_core\\test\\persistence-b01-20260914-dm",
+      "exists": true
+    },
+    {
+      "path": "C:\\Projects\\HMASD-worktrees\\codex-vap-folr\\temp\\directions\\vap_folr_core\\test\\persistence-b01-count-fix-20260914-dm",
+      "exists": true
+    }
+  ],
+  "read_only_followup_all_13_files_still_match_preserved_manifest": true,
+  "archive_sha256": "afd2e666084222be49aed5b27711f89e0df9eb3e4f325f1dfa7c6c4e5e538e74",
+  "further_attempts_or_alternate_deletion_api": false,
+  "scope_effect": "local creator scratch retained; remote cleanup complete; no effect on scientific polarity/exposure"
+}

@@ -37,3 +37,20 @@ Removal receipts must show both disk absence and remote Git worktree-registratio
 absence. Shared/active checkout, Pro delivery branch, canonical Transport session
 directory and other directions' processes/files are outside this inventory.
 No scientific invocation, retry, polarity or source meaning changes through cleanup.
+
+## Actual reclamation
+
+REMOTE_CLEANUP_RECEIPT.json confirms2026-09-15T01:30:17.237352Z disk absence for
+all three named remote targets and absence of the Git worktree registration.
+Before removal, the three remote archives matched the published Git blobs at
+3ce45737fc4d0ed79d6484d3b233609b87c20dea; exact manifests, terminal statuses,
+no supervisor PID and no process cwd in the checkout were checked. Root confirmed
+complete support retention at main f1899b900. No live process was stopped.
+
+The separate safer native PowerShell cleanup command was rejected at process
+creation by automatic approval review: `CreateProcess Rejected; blocked by policy`.
+Even its prospective checks/removals did not execute. A permitted read-only
+followup verified all three local roots still exist and all13 files still match
+the preserved manifest. LOCAL_CLEANUP_BLOCKER.json records this remaining exact
+limitation. No further deletion attempt, alternate API, cross-shell deletion or
+escalation follows. This does not reopen science or prevent complete-response intake.
