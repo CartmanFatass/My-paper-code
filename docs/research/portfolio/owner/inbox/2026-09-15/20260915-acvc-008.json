@@ -1,0 +1,96 @@
+{
+  "id": "20260915-acvc-008",
+  "created": "2026-09-15T16:16:06-07:00",
+  "direction": "acvc",
+  "tier": "direction",
+  "kind": "decision",
+  "title": "ACVC 方向节点复审 B02 后选 A：M-部署迁移族在两实例处结束，不选数值对象；投资/生命周期问题交 Portfolio（携带 C）",
+  "context": "em:acvc:convergence 2026-09-15 23:10Z 复审 B02（T_F,2 +.0029 J 带内，与 B01 迁移成立并列为分歧）后选 A（PRO_FINAL）：族结束，两实例各自保留；修正三处措辞；ACVC 未被证明穷尽，方向层投资/生命周期问题交 Portfolio，携带 C（匹配的 F(C) 对 F(M) 配对）为最强替代。",
+  "options": [
+    {
+      "key": "A",
+      "label": "记录两实例、结束迁移族，不选数值对象；投资/生命周期问题交 Portfolio 并携带 C",
+      "consequence": "零新拟合；ACVC 保持 ACTIVE/MEDIUM/recasts2；Portfolio 决定是否投资 C 或处置生命周期"
+    },
+    {
+      "key": "B",
+      "label": "第三个不变 M 实例",
+      "consequence": "1 次拟合约 1,000 s；需新 Portfolio 投资；节点判断价值低于整合"
+    },
+    {
+      "key": "C",
+      "label": "匹配的 F(C) 对 F(M) 配对",
+      "consequence": "两次拟合约 2,129,920 tick；回答替换而非复现；节点认为可辩护但未选"
+    },
+    {
+      "key": "D",
+      "label": "节点另提对象",
+      "consequence": "未提出；训练穿越 F 需自己的规范"
+    }
+  ],
+  "recommended": "A",
+  "auto_applied": "A",
+  "dm_reason": "复现测试削弱了对第一个有用量级增益的依赖，两实例都未建立 F 相对 dwell 的 MEI 量级偏好；停止不变支出，把方向层投资问题交 Portfolio。",
+  "evidence": [
+    "docs/research/candidates/acvc/pro_packets/20260915_m_deployment_transfer_b02_result_review/INTAKE.md",
+    "docs/research/candidates/acvc/ACVC_M_DEPLOYMENT_TRANSFER_B02_RESULT_EVIDENCE_20260915.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-15.md#L37",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "方向节点复审 B02 结果（T_F,2 = +.0029 J 带内，与 B01 迁移成立并列为分歧）后，下一对象是：(A) 记录两实例、结束 M-部署迁移族，并说明 ACVC 是否还有可辩护对象（DM 建议）；(B) 第三个不变实例；(C) 匹配的 F(C) 对 F(M) 配对；(D) 节点另提对象？",
+    "changes_if_approved": [
+      {
+        "target": "ACVC M-部署迁移族",
+        "from": "两实例已完成（B01 迁移成立、B02 带内），G2 用尽，下一对象待定",
+        "to": "族在两实例逐实例读数处结束：B01 TRANSFERS 与 B02 WITHIN_MEI 作为各自独立的 B/EXPLORE 观察保留；不再做不变的拟合；不宣称不可迁移，也不宣称科学上已穷尽"
+      },
+      {
+        "target": "B02 记录的措辞",
+        "from": "“dwell 包与 F 包四位小数一致 / 不可区分”",
+        "to": "“F 对 dwell 的配对均差为小的正值 +.000181873 J，在 MEI 带内”（均值四舍五入为 .4321 与 .4319，并非相同）；U 是不同私有历史上两个完整部署包的对比，不是回溯方向的隔离或等价；M 的零机会计数是绕过了 Binding 计数，不是无机会"
+      },
+      {
+        "target": "方向层后续",
+        "from": "无",
+        "to": "不选数值对象；ACVC 未被证明穷尽；把方向层投资/生命周期问题交给 Portfolio，并明确携带 C（新的匹配 C/M 配对，F(C) 对 F(M) 终评面板，约 2,129,920 tick、24,576 次优化器调用）作为最强的独立替代"
+      }
+    ],
+    "if_refused": "所有者可在账本 owner 列或评审中改选：选 B 则需新的 Portfolio 投资再做一次实例；选 C 则由方向节点定卡片、Portfolio 定投资后才可启动；选 D 由节点另提。任何选择都不改变 B01 读数与两块 C/M 主张。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/acvc/pro_packets/20260915_m_deployment_transfer_b02_result_review/archive/RESPONSE.md",
+        "quote": "Select A: conclude the unchanged M-deployment-transfer family now, retaining B01's TRANSFERS and B02's WITHIN_MEI as separate B/EXPLORE observations. Select no further numerical object.",
+        "why": "复现测试削弱了对第一个有用量级增益的依赖，且两个实例都未建立 F 相对 own-dwell 的 MEI 量级偏好；支持停止不变的支出。"
+      },
+      {
+        "path": "docs/research/candidates/acvc/ACVC_M_DEPLOYMENT_TRANSFER_B02_RESULT_EVIDENCE_20260915.md",
+        "quote": "T_F,2 = +.002859470696673056 J, WITHIN_MEI (41/22/1); T_D,2 +.00268 and U_2 +.00018 WITHIN_MEI.",
+        "why": "第二实例上增益未以有用量级复现。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/acvc/pro_packets/20260915_m_deployment_transfer_b02_result_review/archive/RESPONSE.md",
+        "quote": "The strongest counterargument is that B01 remains useful-size positive, B02 remains positive, and another independent fit could change development advice.",
+        "why": "两实例主量均为正；再一个实例可能改变开发建议，但节点判断其价值目前低于整合。"
+      }
+    ],
+    "uncertainty": [
+      "两实例不能分解训练变异与面板变异；.0155 J 的实例间差异只是描述",
+      "C 是否值得投入是 Portfolio 的投资判断；节点未选 C，因其花费另一次 C 拟合回答的是方法排序而非 F 相对 dwell 的偏好",
+      "M_2 更高的绝对分不说明更强提议器导致了衰减"
+    ],
+    "cost": {
+      "compute": "本决定零新拟合；若 Portfolio 之后投资 C：两次拟合约 2,129,920 tick（每次约 1,000–2,500 s 视竞争而定）",
+      "owner_time": "阅读复审 intake 与 Portfolio 问题，约 5 分钟",
+      "reversibility": "reversible",
+      "waits_on_this": "Portfolio 的方向层投资/生命周期决定；不等所有者"
+    },
+    "verdict_text": "方向节点选 A（PRO_FINAL）：M-部署迁移族在两实例逐实例读数处结束（B01 迁移成立、B02 带内），不再选数值对象；修正三处措辞；ACVC 未被证明穷尽，方向层投资/生命周期问题交 Portfolio，携带 C（匹配的 F(C) 对 F(M) 配对）为最强替代；hub 已应用修正并发送 Portfolio 问题。",
+    "source": "docs/research/candidates/acvc/pro_packets/20260915_m_deployment_transfer_b02_result_review/archive/RESPONSE.md"
+  },
+  "starred": true
+}
