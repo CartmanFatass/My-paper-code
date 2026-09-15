@@ -1,6 +1,6 @@
 {
   "object": "ACVC_CLUSTER_MAPPO_COMPARISON_B01",
-  "state": "prospective before originals",
+  "state": "completed; owner operational pause applied",
   "authoring_checkout": "C:/Projects/HMASD-worktrees/codex-acvc",
   "remote_source_checkout": "/home/wu/hmasd-worktrees/acvc-mappo-b01-e4d3f324e",
   "remote_dependency_root": "/home/wu/hmasd-inputs/acvc-mappo-b01-28331",
@@ -34,5 +34,9 @@
   "outputs": [
     "/home/wu/hmasd-worktrees/acvc-mappo-b01-e4d3f324e/temp/directions/acvc/exp/cluster_mappo_comparison_b01_28331_C",
     "/home/wu/hmasd-worktrees/acvc-mappo-b01-e4d3f324e/temp/directions/acvc/exp/cluster_mappo_comparison_b01_28331_M"
-  ]
+  ],
+  "remote_cleanup_complete": true,
+  "cleanup_receipt": "CLEANUP.json",
+  "retained_originals": "local verified C_original.tar.gz and M_original.tar.gz plus extracted28 files; unique checkpoints retained",
+  "remaining_cleanup": "Only explicit policy-denied local test scratch; no remote runtime cleanup or scientific producer remains"
 }
