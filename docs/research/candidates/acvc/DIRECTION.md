@@ -1,5 +1,27 @@
 # Direction acvc: ACVC
 
+## Block-2 replication complete — 2026-09-15 (Claude hub as DM)
+
+The granted second block (master 28431, source `2dc9631c8`) is complete and accepted
+([E0](ACVC_CLUSTER_MAPPO_COMPARISON_B02_RESULT_EVIDENCE_20260915.md),
+[intake](ACVC_CLUSTER_MAPPO_COMPARISON_B02_INTAKE_20260915.md)). Primary D2 = F−M
+**−.03919008143501977 J**, M_ABOVE_MEI at the fixed .01 rule, reversing block 1's
++.02343964960218458 J. C−M −.08668633501269826 DOWN; F−C +.0474962535776785 and
+F−own-dwell +.031713764045473436 UP. Absolute C/F/own-dwell/M .3075/.3550/.3233/.3942 J.
+Fixed equal-block accumulation: pooled F−M −.007875 J with a df = 1 working-model interval
+[−.406, +.390]; F−C pooled +.041 J [−.040, +.122]; F−own-dwell +.022 J [−.102, +.146].
+
+Current position: the block-1 package advantage over the untuned private-information MAPPO
+recipe did not recur; what recurs is the within-package ordering F > C and F > own-dwell.
+Between-block dispersion of F−M (.044 J) is four times the within-block conditional SE, so
+training-instance variability dominates the comparison and two blocks cannot estimate it. No
+stable superiority, equivalence, tuned headroom or attribution follows in either direction;
+M remains an untuned comparator. The grant is consumed with zero replacements; the next
+choice is direction-tier (close the family with the internal-usefulness reading, or a bounded
+baseline-calibration design; a third unchanged block is not recommended) and goes to
+`em:acvc:convergence`. Lifecycle ACTIVE/MEDIUM/recasts2 and the lowest sequencing priority
+are unchanged.
+
 ## Selected next object and grant — 2026-09-15 (Claude hub as DM)
 
 Owner resume 2026-09-14/15 ended the operational pause. The post-C/M direction question went to

@@ -1,0 +1,107 @@
+{
+  "arm": "M",
+  "handle": "acvc-mappo-m-b02-28431-2dc9631c",
+  "status": {
+    "task": "acvc-mappo-m-b02-28431-2dc9631c",
+    "status": "finished",
+    "exit_code": 0,
+    "pid": 3736172,
+    "uptime_seconds": 2532,
+    "tmux_active": false
+  },
+  "collection_time": "2026-09-15T16:44:00Z",
+  "source_sha": "2dc9631c8644464b8c4189a53344b2956c3eb3b4",
+  "files": [
+    {
+      "relative_path": "M/admission.json",
+      "remote_path": "/home/wu/hmasd-worktrees/acvc-b02-2dc9631c8/temp/directions/acvc/exp/cluster_mappo_comparison_b02_28431_M/admission.json",
+      "bytes": 504,
+      "sha256": "64f805cbd64b62491e2bf9bb80b86622214b13641a564245d4477da0f7141700"
+    },
+    {
+      "relative_path": "M/episodes.jsonl",
+      "remote_path": "/home/wu/hmasd-worktrees/acvc-b02-2dc9631c8/temp/directions/acvc/exp/cluster_mappo_comparison_b02_28431_M/episodes.jsonl",
+      "bytes": 939285,
+      "sha256": "55a1e8ad9b716ff9f3982850cc98a75aca369fef9e9ba1781fad058f39bb0ffe"
+    },
+    {
+      "relative_path": "M/final.pt",
+      "remote_path": "/home/wu/hmasd-worktrees/acvc-b02-2dc9631c8/temp/directions/acvc/exp/cluster_mappo_comparison_b02_28431_M/final.pt",
+      "bytes": 313423,
+      "sha256": "9132486d0eab436a16333bcc521bf94c02705dc438cd9c0616f55a211f4f1538",
+      "note": "copied (313423 bytes < 50 MiB threshold)"
+    },
+    {
+      "relative_path": "M/native_time.txt",
+      "remote_path": "/home/wu/hmasd-worktrees/acvc-b02-2dc9631c8/temp/directions/acvc/exp/cluster_mappo_comparison_b02_28431_M/native_time.txt",
+      "bytes": 83,
+      "sha256": "c401834bf7d687a39f1bd923143a9f2af599126feb62c8b43a648c61dfffa480"
+    },
+    {
+      "relative_path": "M/stderr.log",
+      "remote_path": "/home/wu/hmasd-worktrees/acvc-b02-2dc9631c8/temp/directions/acvc/exp/cluster_mappo_comparison_b02_28431_M/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "relative_path": "M/stdout.log",
+      "remote_path": "/home/wu/hmasd-worktrees/acvc-b02-2dc9631c8/temp/directions/acvc/exp/cluster_mappo_comparison_b02_28431_M/stdout.log",
+      "bytes": 17674,
+      "sha256": "20a43d5c440f0e795b792c3b443541a6df25036dcf61198b2c9242f83bcd3ce7"
+    },
+    {
+      "relative_path": "M/summary.json",
+      "remote_path": "/home/wu/hmasd-worktrees/acvc-b02-2dc9631c8/temp/directions/acvc/exp/cluster_mappo_comparison_b02_28431_M/summary.json",
+      "bytes": 6503,
+      "sha256": "44c628f24a7e61b2775df8189ff6fba50ff0e4d2a427eaf9d0a05263190c4edf"
+    },
+    {
+      "relative_path": "M/updates.jsonl",
+      "remote_path": "/home/wu/hmasd-worktrees/acvc-b02-2dc9631c8/temp/directions/acvc/exp/cluster_mappo_comparison_b02_28431_M/updates.jsonl",
+      "bytes": 688723,
+      "sha256": "8d73fd0013c2805d7116ac17b4025475ff1442ab9b552c7beac1c56faa608cca"
+    },
+    {
+      "relative_path": "M/task.log",
+      "remote_path": "/home/wu/.agent-tasks/acvc-mappo-m-b02-28431-2dc9631c/task.log",
+      "bytes": 701,
+      "sha256": "d32374ee6ab18bb617cac5bbff5146dc5637b184b20ffa82b7f1cc025817a08c"
+    }
+  ],
+  "native_time": "native_wall_s=2427.41\npeak_rss_kib=585504\nuser_s=2392.22\nsystem_s=2.24\nexit_code=0\n",
+  "native_time_fields": {
+    "native_wall_s": 2427.41,
+    "peak_rss_kib": 585504,
+    "user_s": 2392.22,
+    "system_s": 2.24,
+    "exit_code": 0
+  },
+  "summary_json_top_level_keys": [
+    "object",
+    "card",
+    "arm",
+    "master",
+    "evaluation_namespace",
+    "launch_sha",
+    "status",
+    "fit_started",
+    "fit_complete",
+    "counts",
+    "limits",
+    "configuration",
+    "ordinary_plan_seconds",
+    "plan_is_cap",
+    "cost_law",
+    "upstream_sha",
+    "exposure",
+    "checkpoint",
+    "panels",
+    "training_rows",
+    "evaluation_rows",
+    "interventions",
+    "process_wall_s_to_summary",
+    "timing_boundary"
+  ],
+  "summary_json_parses": true,
+  "notes": "Collected by hmasd-experiment-tracker per hub assignment 2026-09-15. Layout mirrors docs/research/candidates/acvc/evidence/cluster_mappo_comparison_b02_20260915/C_COLLECTION.json exactly (files field names, native_time field, no archive_path/archive_bytes/archive_sha256, no inline summary field, no preservation field, no supervisor_M subtree). Block-1 M_COLLECTION.json (docs/research/candidates/acvc/evidence/cluster_mappo_comparison_b01_20260914/M_COLLECTION.json) was read for M-specific fields; it carries an additional summary_json_top_level_keys entry, \"upstream_sha\", that C02's summary.json (and hence C_COLLECTION.json's key list) lacks -- M02's summary.json does carry \"upstream_sha\" (between \"cost_law\" and \"exposure\"), so it is included here verbatim from the actual key order; all other block-1 M-specific fields (archive_path/archive_bytes/archive_sha256, supervisor_M/* files, inline summary object, ssh_stderr, preservation) were not reproduced because block-2's C collection established the pattern to mirror does not use them. This is a collection-only pass: no interpretation, reduction, or scientific acceptance is recorded here."
+}

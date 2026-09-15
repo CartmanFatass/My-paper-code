@@ -77,5 +77,15 @@
     "verdict_text": "Portfolio 选 G：恰好再购买一个不变的 C/M 配对块（两次原始拟合）及有界支持；FSD 就绪工作优先，ACVC 作为低优先级回填，先 C 后 M；ACTIVE/MEDIUM/recasts2 与最低排序优先级不变。hub 已按 dc… 2dc9631c8 启动源执行。",
     "source": "docs/research/portfolio/pro_packets/20260915_acvc_one_block_replication_investment/archive/RESPONSE.md"
   },
-  "starred": true
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-15T16:49:54+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "docs/research/portfolio/pro_packets/20260915_acvc_one_block_replication_investment/archive/RESPONSE.md",
+      "record": "docs/research/candidates/acvc/ACVC_CLUSTER_MAPPO_COMPARISON_B02_INTAKE_20260915.md",
+      "state": "applied",
+      "summary": "资助的第二块已完成并 intake：F−M −0.0392 J（M 占优，与块 1 +0.0234 反向）；C−M −0.0867；F−C +0.0475、F−自停留 +0.0317 两块均为正；两块合并 F−M −0.008、df=1 区间 [−0.41, +0.39]。读数：整体优势未复现，F 相对 C 的内部改进可复现；拨款用尽，无后继拟合；下一步方向层问题送 em:acvc:convergence。"
+    }
+  ]
 }

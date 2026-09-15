@@ -1,0 +1,69 @@
+{
+  "rule": "pooled_mean=(D1+D2)/2; block_SD=|D2-D1|/sqrt(2); block_SE=block_SD/sqrt(2); interval=pooled_mean +/- 12.706*block_SE (df=1), iid-normal complete-block working-model description; block 1 not rescored",
+  "source_block1": "docs/research/candidates/acvc/evidence/cluster_mappo_comparison_b01_20260914/COMPARISON.json",
+  "source_block2": "docs/research/candidates/acvc/evidence/cluster_mappo_comparison_b02_20260915/COMPARISON.json",
+  "contrasts": {
+    "F-M": {
+      "D1": 0.02343964960218458,
+      "D2": -0.03919008143501977,
+      "pooled_mean": -0.007875215916417596,
+      "block_SD": 0.04428590752029677,
+      "block_SE": 0.031314865518602165,
+      "t_df1": 12.706,
+      "interval": [
+        -0.4057618971957767,
+        0.3900114653629415
+      ]
+    },
+    "C-M": {
+      "D1": -0.011309900227360047,
+      "D2": -0.08668633501269826,
+      "pooled_mean": -0.048998117620029154,
+      "block_SD": 0.05329918817837822,
+      "block_SE": 0.03768821739266911,
+      "t_df1": 12.706,
+      "interval": [
+        -0.5278646078112829,
+        0.4298683725712245
+      ]
+    },
+    "F-C": {
+      "D1": 0.03474954982954462,
+      "D2": 0.0474962535776785,
+      "pooled_mean": 0.04112290170361156,
+      "block_SD": 0.009013280658081447,
+      "block_SE": 0.006373351874066939,
+      "t_df1": 12.706,
+      "interval": [
+        -0.03985690720828296,
+        0.12210271061550608
+      ]
+    },
+    "F-dwell": {
+      "D1": 0.012221377181678915,
+      "D2": 0.031713764045473436,
+      "pooled_mean": 0.021967570613576175,
+      "block_SD": 0.013783198932900685,
+      "block_SE": 0.00974619343189726,
+      "t_df1": 12.706,
+      "interval": [
+        -0.1018675631321104,
+        0.14580270435926274
+      ]
+    }
+  },
+  "absolute_means_J": {
+    "block1": {
+      "C": 0.3224744244456476,
+      "F": 0.35722397427519226,
+      "dwell": 0.34500259709351333,
+      "M": 0.33378432467300767
+    },
+    "block2": {
+      "C": 0.30753226910460413,
+      "F": 0.3550285226822827,
+      "dwell": 0.3233147586368092,
+      "M": 0.3942186041173025
+    }
+  }
+}
