@@ -80,8 +80,13 @@ an actual policy rejection. The [prospective two-block A-G card](FOLR_ENTITY_AUG
 now fixes four original G1/A1/G2/A2 calls at training781901/782001 and final
 evaluation1781901/1782001,5000/4969/128 each. Its ordered two-block differences
 and descriptive-only mean preserve all outcomes without pooling discovery data.
-Direct implementation, focused checks and independent binding/publication review
-precede fresh admission; no invocation is accepted yet.
+Source797596454 has independent binding/publication review and27 focused cases
+accepted; the only failure was a repaired test fixture, with scientific source
+unchanged. G1 is accepted at2026-09-15T04:40:52Z after fresh admission, with the
+reused terminal-only Monitor assigned. A1/G2/A2 are the remaining fixed original
+calls, not yet accepted; no study outcome is inferred from launch. The [execution
+record](entity_augmentation_repeat_b01_781901_782001/EXECUTION.md) fixes the source,
+commands and actual state. No new family/lifecycle or Portfolio disposition.
 Under the [owner's accepted two-axis calibration](../../portfolio/decisions/2026-09-14-two-axis-research-calibration.md),
 this adaptive A−G / A−Z / Z−G sequence is not independent replication of a fixed
 contrast or a stable method ranking. Each original object's reading stays frozen;

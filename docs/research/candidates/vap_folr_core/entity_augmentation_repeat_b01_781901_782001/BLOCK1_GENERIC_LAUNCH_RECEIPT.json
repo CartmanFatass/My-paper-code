@@ -1,0 +1,49 @@
+{
+  "event": "FOLR_AUGMENTATION_REPEAT_B01_BLOCK1_GENERIC_LAUNCH",
+  "command_commit": "b27d35cf633c07189780c71bbb9e5a8ee52f9643",
+  "command_file_sha256": "717668997af372b45569ed5614c428dfb8d81f7cdf6a4e08da462d4940fc39d0",
+  "source_sha": "7975964542b83560cbc0e79f74a9212f8e3737af",
+  "block": 1,
+  "arm": "GENERIC_RETAIN",
+  "cwd": "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001",
+  "out": "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/block1/generic",
+  "argv": [
+    "/usr/local/bin/agent-task",
+    "run",
+    "folr-augmentation-repeat-b01-781901-generic",
+    "bash",
+    "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/BLOCK1_GENERIC.sh",
+    "7975964542b83560cbc0e79f74a9212f8e3737af",
+    "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001",
+    "/home/wu/hmasd-worktrees/folr-entity-augmentation-repeat-b01-781901-782001/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/block1/generic"
+  ],
+  "submitted_utc": "2026-09-15T04:40:52.063088+00:00",
+  "returned_utc": "2026-09-15T04:40:52.089036+00:00",
+  "supervisor_returncode": 0,
+  "stdout": "Task 'folr-augmentation-repeat-b01-781901-generic' started in tmux session 'agent_folr-augmentation-repeat-b01-781901-generic'. Output: /home/wu/.agent-tasks/folr-augmentation-repeat-b01-781901-generic/task.log\n",
+  "stderr": "",
+  "status": {
+    "task": "folr-augmentation-repeat-b01-781901-generic",
+    "status": "running",
+    "exit_code": null,
+    "pid": 3707528,
+    "uptime_seconds": 0,
+    "tmux_active": true
+  },
+  "admission": {
+    "assessed_at": "2026-09-15T04:40:52.106767Z",
+    "available_physical_bytes": 15606669312,
+    "captured_at": "2026-09-15T04:40:52.106506Z",
+    "cgroup_headroom_bytes": null,
+    "cgroup_memory_current_bytes": null,
+    "cgroup_memory_max_bytes": null,
+    "effective_available_bytes": 15606669312,
+    "effective_floor_pass": true,
+    "failure_reasons": [],
+    "measurement_source": "/proc/meminfo",
+    "minimum_available_bytes": 4294967296,
+    "passed": true,
+    "physical_floor_pass": true,
+    "schema_version": 1
+  }
+}
