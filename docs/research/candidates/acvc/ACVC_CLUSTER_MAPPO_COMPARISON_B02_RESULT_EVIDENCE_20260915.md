@@ -99,10 +99,15 @@ elements), not a recipe change. Ordinary plans C 1,800 s / M 1,600 s were not ca
 adjacent admissions passed 4 GiB (C 5,225,508,864 B; M 13,061,177,344 B available). Support,
 provider and lifetime costs remain UNKNOWN.
 
-Both original nine-file sets (including `final.pt`, 281,853 and 313,423 bytes) are committed
-under [evidence/…/native/](evidence/cluster_mappo_comparison_b02_20260915/native/) with
-per-file sha256 in `C_COLLECTION.json` / `M_COLLECTION.json`, byte-identical to the remote
-digests. Launch facts and the scheduling record: [EXECUTION.md](evidence/cluster_mappo_comparison_b02_20260915/EXECUTION.md).
+Both original nine-file sets were collected with per-file sha256 in `C_COLLECTION.json` /
+`M_COLLECTION.json`, byte-identical to the remote digests. The seven non-checkpoint,
+non-log files per arm are committed under
+[evidence/…/native/](evidence/cluster_mappo_comparison_b02_20260915/native/); `final.pt`
+(281,853 and 313,423 bytes) and `task.log` are excluded from Git by `.gitignore` and are
+retained with the full sets in local archives
+`C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/retained/cluster_mappo_comparison_b02_20260915/{C,M}_original.tar.gz`
+([PRESERVATION.json](evidence/cluster_mappo_comparison_b02_20260915/PRESERVATION.json) carries
+the archive digests), as for block 1. Launch facts and the scheduling record: [EXECUTION.md](evidence/cluster_mappo_comparison_b02_20260915/EXECUTION.md).
 Remote reclamation of the worktree and staging follows the commit (CLEANUP.json).
 
 ## Bounded reading and prediction
