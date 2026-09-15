@@ -1,0 +1,30 @@
+{
+  "new_source_lines": {
+    "experiments/candidates/acvc/cluster_mappo_comparison_b01/c_fit.py": 91,
+    "experiments/candidates/acvc/cluster_mappo_comparison_b01/mappo.py": 203,
+    "experiments/candidates/acvc/cluster_mappo_comparison_b01/protocol.py": 87,
+    "experiments/candidates/acvc/cluster_mappo_comparison_b01/__init__.py": 1,
+    "scripts/run_acvc_cluster_mappo_comparison_b01.py": 187
+  },
+  "test_file": "tests/experiments/candidates/acvc/cluster_mappo_comparison_b01/test_contract.py",
+  "initial_test_result": {
+    "passed": 16,
+    "failed": 1,
+    "pytest_wall_seconds": 4.73,
+    "command_wall_seconds": 6.1865471
+  },
+  "focused_repair_result": {
+    "passed": 1,
+    "failed": 0,
+    "pytest_wall_seconds": 3.91,
+    "command_wall_seconds": 5.5841484
+  },
+  "test_native_uav_calls": 0,
+  "known_synthetic_transition_calls": 376,
+  "known_synthetic_optimizer_steps": {
+    "M_actor": 4,
+    "M_critic": 4,
+    "C_joint": 4
+  },
+  "scope_cap_seconds": 300
+}
