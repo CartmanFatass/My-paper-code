@@ -89,14 +89,19 @@ evaluation1781901/1782001,5000/4969/128 each. Its ordered two-block differences
 and descriptive-only mean preserve all outcomes without pooling discovery data.
 Source797596454 has independent binding/publication review and27 focused cases
 accepted; the only failure was a repaired test fixture, with scientific source
-unchanged. G1 is complete with mean1.4009375 and full5000/4969/128 counts;
-this single arm supplies no contrast or study polarity. The first A1 supervisor
+unchanged. Block1 is complete: A-4.4296875/G1.4009375, d1-5.830625,
+G_ABOVE_MEI, each5000/4969/128. This new direct block challenges reliance on
+the old isolated positive, while the full two-block pattern remains unavailable.
+The first A1 supervisor
 failed before its child command because its output directory was not prepared;
 a bounded marker check confirmed zero learner exposure, and the intact failure
 is retained. Manual directory preparation repaired that defect. The original
-A1 learner is now running under preserved-record handle suffix-start2, accepted
-at05:38:43Z with fresh admission and unchanged797596454/source/parameters.
-G2/A2 remain selected and unstarted; no extra fit or scientific retry. The [execution
+A1 learner completed under preserved-record handle suffix-start2, with unchanged
+797596454/source/parameters. Its wall3807.79s exceeds the ordinary3600s plan,
+which was not a cap. G2 is accepted at06:57:53Z after fresh admission and assigned
+to the same native Monitor; A2 remains the selected fourth unstarted fit. No
+extra fit or scientific retry. The [block1 intake](entity_augmentation_repeat_b01_781901_782001/BLOCK1_INTAKE.md)
+preserves the adverse block and limits. The [execution
 record](entity_augmentation_repeat_b01_781901_782001/EXECUTION.md) fixes the source,
 commands and actual state. No new family/lifecycle or Portfolio disposition.
 Under the [owner's accepted two-axis calibration](../../portfolio/decisions/2026-09-14-two-axis-research-calibration.md),
