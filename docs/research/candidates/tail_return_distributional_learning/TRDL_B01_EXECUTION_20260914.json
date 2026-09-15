@@ -23,7 +23,7 @@
       "output": "/home/wu/hmasd-worktrees/trdl-b01-9601/temp/directions/tail_return_distributional_learning/exp/b01_9601/Q32"
     }
   ],
-  "actual_launches": 0,
+  "actual_launches": 2,
   "retries_allowed": 0,
   "ordering": "Two separately admitted original arms; may overlap if actual memory admission permits. No score-dependent arm selection.",
   "watchdog_note": "7200 seconds per whole original is a prospective operational watchdog, selected before exposure because900 seconds is an unmeasured plan for196608 native ticks plus replay/closeout per arm. It is not an additional scientific allowance. Fixed endpoints and two originals remain. Record actual wall including final exit; a terminating watchdog retains partial facts and authorizes no retry.",
@@ -39,5 +39,27 @@
     "horizon": 256,
     "optimizer_calls": 128
   },
-  "source_acceptance": "DM accepts reviewed0874 after both P2 repairs and focused tests; actual-node admission remains immediately adjacent in each command."
+  "source_acceptance": "DM accepts reviewed0874 after both P2 repairs and focused tests; actual-node admission remains immediately adjacent in each command.",
+  "current_state": "Both original arms admitted/accepted; native Monitor adopted; no terminal result yet.",
+  "admissions": {
+    "SCALAR": {
+      "assessed_at": "2026-09-15T03:34:21.089801Z",
+      "physical_bytes": 15116754944,
+      "effective_bytes": 15116754944,
+      "passed": true
+    },
+    "Q32": {
+      "assessed_at": "2026-09-15T03:34:35.523368Z",
+      "physical_bytes": 14643048448,
+      "effective_bytes": 14643048448,
+      "passed": true
+    }
+  },
+  "supervisor_pids": {
+    "SCALAR": 3705286,
+    "Q32": 3705373
+  },
+  "monitor": "/root/dm_trdl_vacancy_20260914/monitor_trdl_b01",
+  "monitor_delivery": "MONITOR_ADOPTED received via native_final; send_message unavailable in leaf runtime. Same child resumed for terminal-only native delivery.",
+  "monitor_last_direct_observation": "2026-09-15T03:36:15Z: both running, exit null, episode/update files advancing; node timestamp corrected after initial receipt's erroneous2026-09-14 date."
 }
