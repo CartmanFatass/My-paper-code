@@ -1,0 +1,66 @@
+{
+  "assignment": "ACVC_CLUSTER_MAPPO_COMPARISON_B01",
+  "parent_dm": "/root/dm_acvc_resume_20260914",
+  "node": "hmasd-wsl-node",
+  "source_sha": "e4d3f324ef2b233d0e97b347a5b94c9061ac6f52",
+  "observation_bound": {
+    "C_plan_seconds": 1400,
+    "M_plan_seconds": 2400,
+    "note": "ordinary plans; no stop authority"
+  },
+  "handles": [
+    {
+      "role": "C",
+      "handle": "acvc-mappo-c-b01-28331-e4d3f324",
+      "pid": 3714457,
+      "cwd": "/home/wu/hmasd-worktrees/acvc-mappo-b01-e4d3f324e",
+      "output": "/home/wu/hmasd-worktrees/acvc-mappo-b01-e4d3f324e/temp/directions/acvc/exp/cluster_mappo_comparison_b01_28331_C",
+      "status": "finished",
+      "exit_code": 0,
+      "uptime_seconds": 1807,
+      "tmux_active": false,
+      "observed_at": "post-terminal status query; exact wall time not recorded",
+      "terminal_at": "2026-09-15T14:25:31+08:00",
+      "duration_seconds": 1671,
+      "event_id": "acvc-mappo-c-b01-28331-e4d3f324-terminal-exit0-20260915T142531+08:00",
+      "terminal_delivery": {
+        "status": "delivered",
+        "provenance": "parent_received_native_final"
+      }
+    },
+    {
+      "role": "M",
+      "handle": "acvc-mappo-m-b01-28331-e4d3f324",
+      "pid": 3714507,
+      "cwd": "/home/wu/hmasd-worktrees/acvc-mappo-b01-e4d3f324e",
+      "output": "/home/wu/hmasd-worktrees/acvc-mappo-b01-e4d3f324e/temp/directions/acvc/exp/cluster_mappo_comparison_b01_28331_M",
+      "status": "finished",
+      "exit_code": 0,
+      "uptime_seconds": 1542,
+      "tmux_active": false,
+      "observed_at": "post-terminal status query; exact wall time not recorded",
+      "terminal_at": "2026-09-15T14:23:02+08:00",
+      "duration_seconds": 1521,
+      "event_id": "acvc-mappo-m-b01-28331-e4d3f324-terminal-exit0-20260915T142302+08:00",
+      "terminal_delivery": {
+        "status": "delivered",
+        "provenance": "parent_received_native_final"
+      }
+    }
+  ],
+  "adoption_delivery": {
+    "status": "unconfirmed",
+    "event": "MONITOR_ADOPTED",
+    "provenance": "direct_status_query; native receipt unavailable"
+  },
+  "active_set": [],
+  "correction": "Removed legacy rate-object inner/outer/watchdog fields; C/M plan values are ordinary plans without stop authority.",
+  "next_due_check": null,
+  "DM_receipt": {
+    "recorded_at": "2026-09-15T06:36:03.638869+00:00",
+    "both_terminal_native_finals_received": true,
+    "formal_separate_adoption_receipt": "unconfirmed",
+    "delivery_route": "actual native final; no send_message call claimed",
+    "active_set": []
+  }
+}

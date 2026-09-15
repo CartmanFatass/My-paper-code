@@ -1,5 +1,13 @@
 # Direction acvc: ACVC
 
+## Latest complete private-baseline comparison — 2026-09-14
+
+The selected [C/M B block](ACVC_CLUSTER_MAPPO_COMPARISON_B01_SCIENCE_CARD_20260914.md) is complete: F−M **+.02343964960218458J**, F_ABOVE_MEI at the fixed.01 point rule. C−M−.011309900227360047 DOWN; F−C+.03474954982954462 and F−own-dwell+.012221377181678915 UP. C/F/own-dwell/M attain.3224744244456476/.35722397427519226/.34500259709351333/.33378432467300767J. [Full E0](ACVC_CLUSTER_MAPPO_COMPARISON_B01_RESULT_EVIDENCE_20260914.md), [full intake](ACVC_CLUSTER_MAPPO_COMPARISON_B01_INTAKE_20260914.md).
+
+Strongest support: the complete optional F package is above the predeclared private recurrent M recipe on this block although C alone is below it. Strongest contrary evidence:22/64 F−M adverse worlds, conditional SE.010402836J, a small F−own-dwell margin and one trained instance per method. Recipe/normalization/target differences and training variability remain alternatives; this is no stable superiority, pure component/K/N effect, tuned-headroom or default/safety result. The matched tuned headroom record is still absent. Direct HMASD's earlier information-right mismatch is a separate unresolved hierarchy comparison.
+
+Both original4096 fits/four final64 panels are complete, no retry or new grant. Owner now instructs finish-current-and-pause: complete acceptance/preservation/exact cleanup, then operationally pause with **CONTINUE/MEDIUM/recasts2**, lowest contention and the occupied slot preserved. No successor or new Portfolio/Direction/Transport request is selected. The unresolved scientific discriminator is whether this finite package advantage persists across independently trained blocks or changes under stronger baseline calibration; deciding that work waits for explicit resume, not a current external producer. Prior results/consumed C states below retain their own claims.
+
 ## Current baseline assessment — precise information mismatch, 2026-09-14
 
 The Portfolio-selected finite **A/RECON** is complete with zero new model/native/fit/update/evaluation/research-code exposure. [Source E0](ACVC_CLUSTER_BASELINE_MATCH_A01_RESULT_EVIDENCE_20260914.md) and [full intake](ACVC_CLUSTER_BASELINE_MATCH_A01_INTAKE_20260914.md) show that direct fixed-k HMASD uses a periodically centralized execution coordinator, whereas the retained ACVC actor has private local information. A normal adapter cannot preserve both that method and the original same-information claim. This is an access-right mismatch, not an empirical negative or HMASD family closure. Direct HMASD and D2 fixed-clock remain distinct methods.

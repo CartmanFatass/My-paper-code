@@ -1,0 +1,5 @@
+{
+  "canonical_root": "C:/Projects/HMASD",
+  "reference": "docs/research/portfolio/audit/2026-09-14.md#L161",
+  "row": "| 2026-09-15T06:36:03.639870+00:00 | acvc | object | technical | accept complete C/M bounded result / quarantine actual defect / discard or rerun uncertain result | accept F-M+.02343964960218458 F_ABOVE_MEI with C-M DOWN and both F supports UP;2complete originals/0retry; missing auxiliary counters unmeasured; OWNER_DIRECT finish preservation/exact cleanup then operational pause,no successor/new Pro | no (completed declared compute) | Owner-delegated decision (unattended,2026-09-03 instruction): accept; OWNER_DIRECT pause closeout | docs/research/candidates/acvc/ACVC_CLUSTER_MAPPO_COMPARISON_B01_INTAKE_20260914.md; ACVC_CLUSTER_MAPPO_COMPARISON_B01_RESULT_EVIDENCE_20260914.md | none | |"
+}
