@@ -1,0 +1,1092 @@
+{
+  "object_id": "FSD_INTERRUPTION_BATCH_B01",
+  "scientific_source": "168e612956d098c017fe67377eadeb68589bf81d",
+  "grant_response": "ca27db8d529ffb54eab5f26f014c204bbaeafcf2",
+  "independent_training_blocks": 2,
+  "original_fits": 8,
+  "archive_manifest": [
+    {
+      "name": "772003_D128.tar.gz",
+      "bytes": 16867,
+      "sha256": "bc8bb4a6dfd85b100c77e8b7b058fc0c4832c06ac33be108c6007721c2b58df2"
+    },
+    {
+      "name": "772003_D1280.tar.gz",
+      "bytes": 16954,
+      "sha256": "614168dbcf15ef0776355b21dd00487700bc9b62d04822a26114979599b68020"
+    },
+    {
+      "name": "772003_I128.tar.gz",
+      "bytes": 17718,
+      "sha256": "740fc3617be9f7ae37bb2c91a5db256ff18a97b02da514700627a497e747e1f1"
+    },
+    {
+      "name": "772003_I1280.tar.gz",
+      "bytes": 17586,
+      "sha256": "2559a0de98450c41abc52c656ce5e4e6f8ec0dcdf53d62fc8d47b4b8bb5e5602"
+    },
+    {
+      "name": "772103_D128.tar.gz",
+      "bytes": 16861,
+      "sha256": "e54bd1c477cd7a0935f0a2ac9c154370bbcab786bc24d19fa72002e5dd19f62e"
+    },
+    {
+      "name": "772103_D1280.tar.gz",
+      "bytes": 16892,
+      "sha256": "8db008ecfd31220d2a0aeb4b13a5e4c5cc917ca4e2fd0683cba704f473357ae5"
+    },
+    {
+      "name": "772103_I128.tar.gz",
+      "bytes": 17584,
+      "sha256": "dd2ba767cee57a303662012fc6879f3a1e574a346f9d7db22df7bb78b0226983"
+    },
+    {
+      "name": "772103_I1280.tar.gz",
+      "bytes": 17570,
+      "sha256": "99417affbb004d2b594a5461c134aec376512bfbfd1cad08fd007bf25d34b1c7"
+    }
+  ],
+  "raw_file_manifest": [
+    {
+      "archive": "772003_D128.tar.gz",
+      "member": "772003_D128/summary.json",
+      "bytes": 49761,
+      "sha256": "9b80baad884454e0423f4f70237a4030982de413dcf8b7ef9e24620c48986447"
+    },
+    {
+      "archive": "772003_D128.tar.gz",
+      "member": "772003_D128/training.jsonl",
+      "bytes": 22331,
+      "sha256": "6b2150884e20719a113c617055a19f60f0af4111403bce107ca79e15653a8a99"
+    },
+    {
+      "archive": "772003_D128.tar.gz",
+      "member": "772003_D128/manifest.json",
+      "bytes": 1806,
+      "sha256": "5892a9aac13e9ece9524f3c6de42f7517b6df3634af3b8456ad3632f4cd5d59d"
+    },
+    {
+      "archive": "772003_D128.tar.gz",
+      "member": "772003_D128/whole_command_resources.json",
+      "bytes": 107,
+      "sha256": "f6076d62913edb3ad8c35c1218cc5958438df3d824dca0b579752543fbf95053"
+    },
+    {
+      "archive": "772003_D128.tar.gz",
+      "member": "772003_D128/admission.json",
+      "bytes": 504,
+      "sha256": "d979f968dbc05c25dd6ce6568182d495e75775bbba6efb7f6e6757bb58049bc8"
+    },
+    {
+      "archive": "772003_D128.tar.gz",
+      "member": "fsd-ib-b01-772003-D128/runner.sh",
+      "bytes": 1085,
+      "sha256": "6de0ba6946780c7e858f32666849c693981ff65f1f4f2efdb941b5080635ce58"
+    },
+    {
+      "archive": "772003_D128.tar.gz",
+      "member": "fsd-ib-b01-772003-D128/exit_code",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "archive": "772003_D128.tar.gz",
+      "member": "fsd-ib-b01-772003-D128/status",
+      "bytes": 9,
+      "sha256": "161069badc0cc23058b13d7c068e45205f4333aa15fd78db9d68f5c9f1ae8983"
+    },
+    {
+      "archive": "772003_D128.tar.gz",
+      "member": "fsd-ib-b01-772003-D128/start_time",
+      "bytes": 11,
+      "sha256": "076cb5288436eb32d9e1ac01b8fb6df058718d1ff0963278e09f594f2f137e84"
+    },
+    {
+      "archive": "772003_D128.tar.gz",
+      "member": "fsd-ib-b01-772003-D128/pid",
+      "bytes": 8,
+      "sha256": "b39e920e29eda4db759d5860e14bec54d2ae23b469bc044a4b8fb8cd05cfd31e"
+    },
+    {
+      "archive": "772003_D128.tar.gz",
+      "member": "fsd-ib-b01-772003-D128/task.log",
+      "bytes": 753,
+      "sha256": "796d61f3bc0edee6c9bc9d07d74302b27f65d92ad6996a1a44437bec4c14e77a"
+    },
+    {
+      "archive": "772003_D1280.tar.gz",
+      "member": "772003_D1280/summary.json",
+      "bytes": 49739,
+      "sha256": "2c65edcc87a40b5e317e59eda3c0ea62e57ec60253a00bd2940e958955b381cb"
+    },
+    {
+      "archive": "772003_D1280.tar.gz",
+      "member": "772003_D1280/training.jsonl",
+      "bytes": 22296,
+      "sha256": "3620e06ff958f7440f35639978ffd5c9d3c6ce92d672355e49775691f54df16f"
+    },
+    {
+      "archive": "772003_D1280.tar.gz",
+      "member": "772003_D1280/manifest.json",
+      "bytes": 1808,
+      "sha256": "c1157c51e1ea5694106b0b5ca8921c83bf2373e963e2440b81edede2eb03900a"
+    },
+    {
+      "archive": "772003_D1280.tar.gz",
+      "member": "772003_D1280/whole_command_resources.json",
+      "bytes": 107,
+      "sha256": "3370739681428fa237ded10db17b104e5711cb2f26642be18d90127813b2f4a6"
+    },
+    {
+      "archive": "772003_D1280.tar.gz",
+      "member": "772003_D1280/admission.json",
+      "bytes": 504,
+      "sha256": "999deaab6af448a09592c98e0e7a66f17bb3c7c40dfc176f560f7a87effa54b1"
+    },
+    {
+      "archive": "772003_D1280.tar.gz",
+      "member": "fsd-ib-b01-772003-D1280/runner.sh",
+      "bytes": 1095,
+      "sha256": "cd5e13b351adb048ff7b20e3700cecc117b9978959d3289717fb7723bef6f70f"
+    },
+    {
+      "archive": "772003_D1280.tar.gz",
+      "member": "fsd-ib-b01-772003-D1280/exit_code",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "archive": "772003_D1280.tar.gz",
+      "member": "fsd-ib-b01-772003-D1280/status",
+      "bytes": 9,
+      "sha256": "161069badc0cc23058b13d7c068e45205f4333aa15fd78db9d68f5c9f1ae8983"
+    },
+    {
+      "archive": "772003_D1280.tar.gz",
+      "member": "fsd-ib-b01-772003-D1280/start_time",
+      "bytes": 11,
+      "sha256": "9737b31ab916ffaae8647741773457acd84193cb522d6808d055b630cf001a19"
+    },
+    {
+      "archive": "772003_D1280.tar.gz",
+      "member": "fsd-ib-b01-772003-D1280/pid",
+      "bytes": 8,
+      "sha256": "6ec2702b57d5bbf365aa1c38cc94951c6c1147c391ca1f5fe5cef0c0d0f157ed"
+    },
+    {
+      "archive": "772003_D1280.tar.gz",
+      "member": "fsd-ib-b01-772003-D1280/task.log",
+      "bytes": 756,
+      "sha256": "ebd72630c4649ba06fa4a17773b6d4c5c19f5c2022e77524a087349dca05ab71"
+    },
+    {
+      "archive": "772003_I128.tar.gz",
+      "member": "772003_I128/summary.json",
+      "bytes": 49933,
+      "sha256": "fe825002fe6d06bd85e063a8d6059e4e395aea92c91c6dca5c54640a602bca7c"
+    },
+    {
+      "archive": "772003_I128.tar.gz",
+      "member": "772003_I128/training.jsonl",
+      "bytes": 22505,
+      "sha256": "856509617d9bf85c5736a256a12842667222723bf05b3b57919f0a43b2163a3e"
+    },
+    {
+      "archive": "772003_I128.tar.gz",
+      "member": "772003_I128/manifest.json",
+      "bytes": 1806,
+      "sha256": "bb63f34b24c6ee489c9d5bc9c4888f7a986b1b5b81c7ccc4b39d6d9f6a66ef2e"
+    },
+    {
+      "archive": "772003_I128.tar.gz",
+      "member": "772003_I128/whole_command_resources.json",
+      "bytes": 108,
+      "sha256": "9858104748ca670ae5baad9dfdcae083b921fcfb61dc78feb62106f5b0fe2914"
+    },
+    {
+      "archive": "772003_I128.tar.gz",
+      "member": "772003_I128/admission.json",
+      "bytes": 504,
+      "sha256": "ff4b416705443ff517cd91e01db432fa4e58553111564268f5baf03dd145a14e"
+    },
+    {
+      "archive": "772003_I128.tar.gz",
+      "member": "fsd-ib-b01-772003-I128/runner.sh",
+      "bytes": 1085,
+      "sha256": "1dbfe2bf3c44d1d68a13cadaeb0c056698e98cc16d78f9c42c86091513ce643b"
+    },
+    {
+      "archive": "772003_I128.tar.gz",
+      "member": "fsd-ib-b01-772003-I128/exit_code",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "archive": "772003_I128.tar.gz",
+      "member": "fsd-ib-b01-772003-I128/status",
+      "bytes": 9,
+      "sha256": "161069badc0cc23058b13d7c068e45205f4333aa15fd78db9d68f5c9f1ae8983"
+    },
+    {
+      "archive": "772003_I128.tar.gz",
+      "member": "fsd-ib-b01-772003-I128/start_time",
+      "bytes": 11,
+      "sha256": "9821e4362a1e7814de0a0bb727d3a358ee7b6f6bb3149e0a58bff7241445e781"
+    },
+    {
+      "archive": "772003_I128.tar.gz",
+      "member": "fsd-ib-b01-772003-I128/pid",
+      "bytes": 8,
+      "sha256": "667073996329d1cb261e12609b365f568cd29d33a6cbdd427e6a0d2061ff9b8a"
+    },
+    {
+      "archive": "772003_I128.tar.gz",
+      "member": "fsd-ib-b01-772003-I128/task.log",
+      "bytes": 754,
+      "sha256": "c49cd06308caf9d47489e0c4ea8a23ff6c4c4f8ac4deabffc5206b084e634564"
+    },
+    {
+      "archive": "772003_I1280.tar.gz",
+      "member": "772003_I1280/summary.json",
+      "bytes": 49848,
+      "sha256": "67c35998fa25cb0e43eec4a9f47eabadde97bd304e76d044b9cbffbba6198017"
+    },
+    {
+      "archive": "772003_I1280.tar.gz",
+      "member": "772003_I1280/training.jsonl",
+      "bytes": 22451,
+      "sha256": "fe438aa6a3c78805e8b4a7921d60f1f80e4a42079214f40337022722e55044ba"
+    },
+    {
+      "archive": "772003_I1280.tar.gz",
+      "member": "772003_I1280/manifest.json",
+      "bytes": 1808,
+      "sha256": "ea8804f0fd05383ee289b27ba7624e3cc8d4a12e32b810df2bd6b6709a012ea2"
+    },
+    {
+      "archive": "772003_I1280.tar.gz",
+      "member": "772003_I1280/whole_command_resources.json",
+      "bytes": 108,
+      "sha256": "08c30261ea11305dc6203e7c3cf54e7070e2c1b08f1e2acc281bea394391e864"
+    },
+    {
+      "archive": "772003_I1280.tar.gz",
+      "member": "772003_I1280/admission.json",
+      "bytes": 504,
+      "sha256": "0895835846d23fef26523ce6eb85ff8ef036dc30764b6e8da399219383b99072"
+    },
+    {
+      "archive": "772003_I1280.tar.gz",
+      "member": "fsd-ib-b01-772003-I1280/runner.sh",
+      "bytes": 1095,
+      "sha256": "d98555a30e5d35dd8dcfe91e80bcee469c6272b2531d15f8d007256fa530c28e"
+    },
+    {
+      "archive": "772003_I1280.tar.gz",
+      "member": "fsd-ib-b01-772003-I1280/exit_code",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "archive": "772003_I1280.tar.gz",
+      "member": "fsd-ib-b01-772003-I1280/status",
+      "bytes": 9,
+      "sha256": "161069badc0cc23058b13d7c068e45205f4333aa15fd78db9d68f5c9f1ae8983"
+    },
+    {
+      "archive": "772003_I1280.tar.gz",
+      "member": "fsd-ib-b01-772003-I1280/start_time",
+      "bytes": 11,
+      "sha256": "855573085f5ff7b2ca0a22d2a7cade938c8b1eb33b63857690a7084437ed719c"
+    },
+    {
+      "archive": "772003_I1280.tar.gz",
+      "member": "fsd-ib-b01-772003-I1280/pid",
+      "bytes": 8,
+      "sha256": "f0cd72e09ee95c0897eac776bbf71fbed18a18a1817bbe5363c2dd76cf047671"
+    },
+    {
+      "archive": "772003_I1280.tar.gz",
+      "member": "fsd-ib-b01-772003-I1280/task.log",
+      "bytes": 757,
+      "sha256": "ae9b20a8fc824fb0dd79e966fd60643606bd2de611215f9ac353aa8935975066"
+    },
+    {
+      "archive": "772103_D128.tar.gz",
+      "member": "772103_D128/summary.json",
+      "bytes": 49723,
+      "sha256": "f9b0d27319ade749b7053a058021af7d26d678a2b5a81757b13f398b641931b0"
+    },
+    {
+      "archive": "772103_D128.tar.gz",
+      "member": "772103_D128/training.jsonl",
+      "bytes": 22325,
+      "sha256": "593c11a11dfc9fc58a4d04706136fd9d3bd253978d91095028e648b48da07504"
+    },
+    {
+      "archive": "772103_D128.tar.gz",
+      "member": "772103_D128/manifest.json",
+      "bytes": 1806,
+      "sha256": "9b23fe8300c58d32615b26b0362cafeffeddf7f7893d478422e6bb502ea34cc9"
+    },
+    {
+      "archive": "772103_D128.tar.gz",
+      "member": "772103_D128/whole_command_resources.json",
+      "bytes": 107,
+      "sha256": "b1989ad001eb05915ec9be5b9152d248db37f46adce656415109df8b0ebf1145"
+    },
+    {
+      "archive": "772103_D128.tar.gz",
+      "member": "772103_D128/admission.json",
+      "bytes": 504,
+      "sha256": "29cc96e46fc7dcded55320f5bda4a2288f1a8f5f70d5cff4f64ba2dec8b3fce7"
+    },
+    {
+      "archive": "772103_D128.tar.gz",
+      "member": "fsd-ib-b01-772103-D128/runner.sh",
+      "bytes": 1085,
+      "sha256": "5c84c37664a8aea4dc76de994f3de7e1448dc642063ac9fbc25640f811b0f800"
+    },
+    {
+      "archive": "772103_D128.tar.gz",
+      "member": "fsd-ib-b01-772103-D128/exit_code",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "archive": "772103_D128.tar.gz",
+      "member": "fsd-ib-b01-772103-D128/status",
+      "bytes": 9,
+      "sha256": "161069badc0cc23058b13d7c068e45205f4333aa15fd78db9d68f5c9f1ae8983"
+    },
+    {
+      "archive": "772103_D128.tar.gz",
+      "member": "fsd-ib-b01-772103-D128/start_time",
+      "bytes": 11,
+      "sha256": "879c054c33a49be4a4116c269d24f3339ca377ee701d9004381644999381a07d"
+    },
+    {
+      "archive": "772103_D128.tar.gz",
+      "member": "fsd-ib-b01-772103-D128/pid",
+      "bytes": 8,
+      "sha256": "ae03ae43436ba4855a3bb8e6a854f1202926bc9b5d39c9d5c5f70a23ee618cf9"
+    },
+    {
+      "archive": "772103_D128.tar.gz",
+      "member": "fsd-ib-b01-772103-D128/task.log",
+      "bytes": 753,
+      "sha256": "cccb8b707d45ae142ab8d1abebd20d766cfd4311648db38a449ca08b3c4bdd2b"
+    },
+    {
+      "archive": "772103_D1280.tar.gz",
+      "member": "772103_D1280/summary.json",
+      "bytes": 49720,
+      "sha256": "a8e5e572cf1bf570db365462a47457c3b79293fd1878a1da56dcdea374fec008"
+    },
+    {
+      "archive": "772103_D1280.tar.gz",
+      "member": "772103_D1280/training.jsonl",
+      "bytes": 22317,
+      "sha256": "a989027bba747311d986b7ee90a440b82fdfd8a932ae2a5f3332e2e216e81e3b"
+    },
+    {
+      "archive": "772103_D1280.tar.gz",
+      "member": "772103_D1280/manifest.json",
+      "bytes": 1808,
+      "sha256": "4aa9189d19591673bf1b87c1cb9907d5c1128fb6369ce1c40764fcfb01d686e4"
+    },
+    {
+      "archive": "772103_D1280.tar.gz",
+      "member": "772103_D1280/whole_command_resources.json",
+      "bytes": 107,
+      "sha256": "5bc9cf11b0d63fb7880e02cc2b3190c31579553cb9db7de3c4a28f11e4642838"
+    },
+    {
+      "archive": "772103_D1280.tar.gz",
+      "member": "772103_D1280/admission.json",
+      "bytes": 504,
+      "sha256": "3c264c011ed93c1130580ae82a1b684860fadc50ee076c847ff4ca1188dd9d35"
+    },
+    {
+      "archive": "772103_D1280.tar.gz",
+      "member": "fsd-ib-b01-772103-D1280/runner.sh",
+      "bytes": 1095,
+      "sha256": "b06042ddaccb968b877f6d0b3a8fe26bedecce1520b800a1267cb8ae06bb7e15"
+    },
+    {
+      "archive": "772103_D1280.tar.gz",
+      "member": "fsd-ib-b01-772103-D1280/exit_code",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "archive": "772103_D1280.tar.gz",
+      "member": "fsd-ib-b01-772103-D1280/status",
+      "bytes": 9,
+      "sha256": "161069badc0cc23058b13d7c068e45205f4333aa15fd78db9d68f5c9f1ae8983"
+    },
+    {
+      "archive": "772103_D1280.tar.gz",
+      "member": "fsd-ib-b01-772103-D1280/start_time",
+      "bytes": 11,
+      "sha256": "03a9e7dd8a845d21aa877eae834eaac45f8b538312ab10a0c0fb9d124dc3ee11"
+    },
+    {
+      "archive": "772103_D1280.tar.gz",
+      "member": "fsd-ib-b01-772103-D1280/pid",
+      "bytes": 8,
+      "sha256": "531fa10dafb9d68ca56187fb83b6c611d52ba4be5b7cd9e4b35834282d951566"
+    },
+    {
+      "archive": "772103_D1280.tar.gz",
+      "member": "fsd-ib-b01-772103-D1280/task.log",
+      "bytes": 756,
+      "sha256": "49b9ac25ead12ab6542bdf7f11db8561b42e60de4abb134935a65531e2877a17"
+    },
+    {
+      "archive": "772103_I128.tar.gz",
+      "member": "772103_I128/summary.json",
+      "bytes": 49796,
+      "sha256": "ca8dbc66e1de3f8d037eadc4e21986bdb7f1d1316d5c4b47c9180a5e725dd82b"
+    },
+    {
+      "archive": "772103_I128.tar.gz",
+      "member": "772103_I128/training.jsonl",
+      "bytes": 22432,
+      "sha256": "139fd0869eaa46b17b762b6bc023d9c3ef565b09cd209db9d325d45228dcba8d"
+    },
+    {
+      "archive": "772103_I128.tar.gz",
+      "member": "772103_I128/manifest.json",
+      "bytes": 1806,
+      "sha256": "6e895abacf62aae43834baf56228c3bfa63d00c6a3237722243bd8884e713825"
+    },
+    {
+      "archive": "772103_I128.tar.gz",
+      "member": "772103_I128/whole_command_resources.json",
+      "bytes": 108,
+      "sha256": "b515c05059d1d008fbe06e457fd0715f589487850664cf0428c31fe68687e107"
+    },
+    {
+      "archive": "772103_I128.tar.gz",
+      "member": "772103_I128/admission.json",
+      "bytes": 504,
+      "sha256": "16cf262170782aebc3402ff6baef82daad0e84a14268e9edcb1487f6a41956f6"
+    },
+    {
+      "archive": "772103_I128.tar.gz",
+      "member": "fsd-ib-b01-772103-I128/runner.sh",
+      "bytes": 1085,
+      "sha256": "71e7f8bb7f8b9da81378fb3863eb74b0887e067786ca20286df9993f57162f56"
+    },
+    {
+      "archive": "772103_I128.tar.gz",
+      "member": "fsd-ib-b01-772103-I128/exit_code",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "archive": "772103_I128.tar.gz",
+      "member": "fsd-ib-b01-772103-I128/status",
+      "bytes": 9,
+      "sha256": "161069badc0cc23058b13d7c068e45205f4333aa15fd78db9d68f5c9f1ae8983"
+    },
+    {
+      "archive": "772103_I128.tar.gz",
+      "member": "fsd-ib-b01-772103-I128/start_time",
+      "bytes": 11,
+      "sha256": "c36e71b1a8eaff14350d7753b4d672542901449aee6d6ab2a2999eceee4f4955"
+    },
+    {
+      "archive": "772103_I128.tar.gz",
+      "member": "fsd-ib-b01-772103-I128/pid",
+      "bytes": 8,
+      "sha256": "f94232130acd4edf0edb16dbd2d3df2c00c5d93bfb300e31db309eebc2005df5"
+    },
+    {
+      "archive": "772103_I128.tar.gz",
+      "member": "fsd-ib-b01-772103-I128/task.log",
+      "bytes": 754,
+      "sha256": "f5118905c2c50f518628e6d56a5c6653a06fd63a3211235f6b73d4c93330d623"
+    },
+    {
+      "archive": "772103_I1280.tar.gz",
+      "member": "772103_I1280/summary.json",
+      "bytes": 49839,
+      "sha256": "2d8cff9b8afd236a3fdf33b0b512706b0227feb5cb9bd667b8763e2fbcf9d567"
+    },
+    {
+      "archive": "772103_I1280.tar.gz",
+      "member": "772103_I1280/training.jsonl",
+      "bytes": 22459,
+      "sha256": "0211f6e90fb6c82ae0b277dc78170fd2a49e63349472553060c467abad697202"
+    },
+    {
+      "archive": "772103_I1280.tar.gz",
+      "member": "772103_I1280/manifest.json",
+      "bytes": 1808,
+      "sha256": "89ce01ab08e4a3e776dd229234ae06413071cc3209f6358fc07ccddb2310281e"
+    },
+    {
+      "archive": "772103_I1280.tar.gz",
+      "member": "772103_I1280/whole_command_resources.json",
+      "bytes": 108,
+      "sha256": "2d5fb499d4f1cae15f2895b135631c7a450b5007629d1ee91522d9c91b2e0b5b"
+    },
+    {
+      "archive": "772103_I1280.tar.gz",
+      "member": "772103_I1280/admission.json",
+      "bytes": 504,
+      "sha256": "d11176cbacf8ceef6c30fc8ba47da25586d8892be884c51a5aa913c3302531f8"
+    },
+    {
+      "archive": "772103_I1280.tar.gz",
+      "member": "fsd-ib-b01-772103-I1280/runner.sh",
+      "bytes": 1095,
+      "sha256": "a25d066509bcbe5433901f0f33f564bd3f38168fad68ead27f2b9298712bf74a"
+    },
+    {
+      "archive": "772103_I1280.tar.gz",
+      "member": "fsd-ib-b01-772103-I1280/exit_code",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "archive": "772103_I1280.tar.gz",
+      "member": "fsd-ib-b01-772103-I1280/status",
+      "bytes": 9,
+      "sha256": "161069badc0cc23058b13d7c068e45205f4333aa15fd78db9d68f5c9f1ae8983"
+    },
+    {
+      "archive": "772103_I1280.tar.gz",
+      "member": "fsd-ib-b01-772103-I1280/start_time",
+      "bytes": 11,
+      "sha256": "2640d8423aeab54f42dc32b6df5fe0dd7aeb9c0ba08d809bcbcb8921ed1c4cef"
+    },
+    {
+      "archive": "772103_I1280.tar.gz",
+      "member": "fsd-ib-b01-772103-I1280/pid",
+      "bytes": 8,
+      "sha256": "40f2dbf5aaccbb97f2a4b7827e758ca43764c9de08196360d5f87aba535ca0fd"
+    },
+    {
+      "archive": "772103_I1280.tar.gz",
+      "member": "fsd-ib-b01-772103-I1280/task.log",
+      "bytes": 757,
+      "sha256": "53f82981480fb039e21f48125a2e72e5920ecce8f192889d2ac995453c6dc0a2"
+    }
+  ],
+  "counts": {
+    "model_constructions": 16,
+    "training_starts": 8,
+    "checkpoint_loads": 0,
+    "training_transitions": 320000,
+    "stored_training_transitions": 320000,
+    "training_episodes": 640,
+    "update_stages": 40,
+    "training_agent_step_batches": 20000,
+    "evaluation_steps": 128000,
+    "evaluation_episodes": 256,
+    "evaluation_agent_step_batches": 4000
+  },
+  "runtime": [
+    {
+      "seed": 772003,
+      "arm": "D128",
+      "handle": "fsd-ib-b01-772003-D128",
+      "source": "168e612956d098c017fe67377eadeb68589bf81d",
+      "status": "finished",
+      "exit_code": 0,
+      "pid": 3710339,
+      "start_unix": 1789449814,
+      "admission": {
+        "assessed_at": "2026-09-15T05:23:34.354677Z",
+        "available_physical_bytes": 15626428416,
+        "captured_at": "2026-09-15T05:23:34.354371Z",
+        "cgroup_headroom_bytes": null,
+        "cgroup_memory_current_bytes": null,
+        "cgroup_memory_max_bytes": null,
+        "effective_available_bytes": 15626428416,
+        "effective_floor_pass": true,
+        "failure_reasons": [],
+        "measurement_source": "/proc/meminfo",
+        "minimum_available_bytes": 4294967296,
+        "passed": true,
+        "physical_floor_pass": true,
+        "schema_version": 1
+      },
+      "wall_seconds_before_publication": 455.7179877059534,
+      "optimizer_calls": {
+        "coordinator": 525,
+        "discoverer_actor": 11250,
+        "discoverer_critic": 11250,
+        "team_discriminator": 75,
+        "individual_discriminator": 300
+      },
+      "coordinator_joint_rows": [
+        800,
+        800,
+        800,
+        800,
+        800
+      ],
+      "wall_seconds": 463.64,
+      "user_seconds": 1815.28,
+      "system_seconds": 12.67,
+      "peak_rss_kib": 1634088,
+      "cpu_seconds": 1827.95
+    },
+    {
+      "seed": 772003,
+      "arm": "D1280",
+      "handle": "fsd-ib-b01-772003-D1280",
+      "source": "168e612956d098c017fe67377eadeb68589bf81d",
+      "status": "finished",
+      "exit_code": 0,
+      "pid": 3708689,
+      "start_unix": 1789447789,
+      "admission": {
+        "assessed_at": "2026-09-15T04:49:49.797301Z",
+        "available_physical_bytes": 15157596160,
+        "captured_at": "2026-09-15T04:49:49.797026Z",
+        "cgroup_headroom_bytes": null,
+        "cgroup_memory_current_bytes": null,
+        "cgroup_memory_max_bytes": null,
+        "effective_available_bytes": 15157596160,
+        "effective_floor_pass": true,
+        "failure_reasons": [],
+        "measurement_source": "/proc/meminfo",
+        "minimum_available_bytes": 4294967296,
+        "passed": true,
+        "physical_floor_pass": true,
+        "schema_version": 1
+      },
+      "wall_seconds_before_publication": 475.362186311977,
+      "optimizer_calls": {
+        "coordinator": 75,
+        "discoverer_actor": 11250,
+        "discoverer_critic": 11250,
+        "team_discriminator": 75,
+        "individual_discriminator": 300
+      },
+      "coordinator_joint_rows": [
+        800,
+        800,
+        800,
+        800,
+        800
+      ],
+      "wall_seconds": 487.6,
+      "user_seconds": 1909.19,
+      "system_seconds": 11.3,
+      "peak_rss_kib": 2589996,
+      "cpu_seconds": 1920.49
+    },
+    {
+      "seed": 772003,
+      "arm": "I128",
+      "handle": "fsd-ib-b01-772003-I128",
+      "source": "168e612956d098c017fe67377eadeb68589bf81d",
+      "status": "finished",
+      "exit_code": 0,
+      "pid": 3711508,
+      "start_unix": 1789450392,
+      "admission": {
+        "assessed_at": "2026-09-15T05:33:12.995077Z",
+        "available_physical_bytes": 15626915840,
+        "captured_at": "2026-09-15T05:33:12.994744Z",
+        "cgroup_headroom_bytes": null,
+        "cgroup_memory_current_bytes": null,
+        "cgroup_memory_max_bytes": null,
+        "effective_available_bytes": 15626915840,
+        "effective_floor_pass": true,
+        "failure_reasons": [],
+        "measurement_source": "/proc/meminfo",
+        "minimum_available_bytes": 4294967296,
+        "passed": true,
+        "physical_floor_pass": true,
+        "schema_version": 1
+      },
+      "wall_seconds_before_publication": 1179.4037649009842,
+      "optimizer_calls": {
+        "coordinator": 3120,
+        "discoverer_actor": 11250,
+        "discoverer_critic": 11250,
+        "team_discriminator": 75,
+        "individual_discriminator": 300
+      },
+      "coordinator_joint_rows": [
+        4912,
+        4960,
+        5407,
+        5337,
+        5751
+      ],
+      "wall_seconds": 1204.05,
+      "user_seconds": 4751.92,
+      "system_seconds": 26.42,
+      "peak_rss_kib": 1700200,
+      "cpu_seconds": 4778.34
+    },
+    {
+      "seed": 772003,
+      "arm": "I1280",
+      "handle": "fsd-ib-b01-772003-I1280",
+      "source": "168e612956d098c017fe67377eadeb68589bf81d",
+      "status": "finished",
+      "exit_code": 0,
+      "pid": 3709290,
+      "start_unix": 1789448617,
+      "admission": {
+        "assessed_at": "2026-09-15T05:03:37.442640Z",
+        "available_physical_bytes": 15087321088,
+        "captured_at": "2026-09-15T05:03:37.442376Z",
+        "cgroup_headroom_bytes": null,
+        "cgroup_memory_current_bytes": null,
+        "cgroup_memory_max_bytes": null,
+        "effective_available_bytes": 15087321088,
+        "effective_floor_pass": true,
+        "failure_reasons": [],
+        "measurement_source": "/proc/meminfo",
+        "minimum_available_bytes": 4294967296,
+        "passed": true,
+        "physical_floor_pass": true,
+        "schema_version": 1
+      },
+      "wall_seconds_before_publication": 1052.5420930780238,
+      "optimizer_calls": {
+        "coordinator": 330,
+        "discoverer_actor": 11250,
+        "discoverer_critic": 11250,
+        "team_discriminator": 75,
+        "individual_discriminator": 300
+      },
+      "coordinator_joint_rows": [
+        4912,
+        4887,
+        4995,
+        5230,
+        5185
+      ],
+      "wall_seconds": 1075.13,
+      "user_seconds": 4200.18,
+      "system_seconds": 49.92,
+      "peak_rss_kib": 3534244,
+      "cpu_seconds": 4250.1
+    },
+    {
+      "seed": 772103,
+      "arm": "D128",
+      "handle": "fsd-ib-b01-772103-D128",
+      "source": "168e612956d098c017fe67377eadeb68589bf81d",
+      "status": "finished",
+      "exit_code": 0,
+      "pid": 3719200,
+      "start_unix": 1789453781,
+      "admission": {
+        "assessed_at": "2026-09-15T06:29:41.180525Z",
+        "available_physical_bytes": 15023423488,
+        "captured_at": "2026-09-15T06:29:41.180239Z",
+        "cgroup_headroom_bytes": null,
+        "cgroup_memory_current_bytes": null,
+        "cgroup_memory_max_bytes": null,
+        "effective_available_bytes": 15023423488,
+        "effective_floor_pass": true,
+        "failure_reasons": [],
+        "measurement_source": "/proc/meminfo",
+        "minimum_available_bytes": 4294967296,
+        "passed": true,
+        "physical_floor_pass": true,
+        "schema_version": 1
+      },
+      "wall_seconds_before_publication": 498.9359956700355,
+      "optimizer_calls": {
+        "coordinator": 525,
+        "discoverer_actor": 11250,
+        "discoverer_critic": 11250,
+        "team_discriminator": 75,
+        "individual_discriminator": 300
+      },
+      "coordinator_joint_rows": [
+        800,
+        800,
+        800,
+        800,
+        800
+      ],
+      "wall_seconds": 515.18,
+      "user_seconds": 2010.15,
+      "system_seconds": 15.27,
+      "peak_rss_kib": 1638784,
+      "cpu_seconds": 2025.42
+    },
+    {
+      "seed": 772103,
+      "arm": "D1280",
+      "handle": "fsd-ib-b01-772103-D1280",
+      "source": "168e612956d098c017fe67377eadeb68589bf81d",
+      "status": "finished",
+      "exit_code": 0,
+      "pid": 3713801,
+      "start_unix": 1789451662,
+      "admission": {
+        "assessed_at": "2026-09-15T05:54:22.851086Z",
+        "available_physical_bytes": 15101345792,
+        "captured_at": "2026-09-15T05:54:22.850783Z",
+        "cgroup_headroom_bytes": null,
+        "cgroup_memory_current_bytes": null,
+        "cgroup_memory_max_bytes": null,
+        "effective_available_bytes": 15101345792,
+        "effective_floor_pass": true,
+        "failure_reasons": [],
+        "measurement_source": "/proc/meminfo",
+        "minimum_available_bytes": 4294967296,
+        "passed": true,
+        "physical_floor_pass": true,
+        "schema_version": 1
+      },
+      "wall_seconds_before_publication": 579.8212648680201,
+      "optimizer_calls": {
+        "coordinator": 75,
+        "discoverer_actor": 11250,
+        "discoverer_critic": 11250,
+        "team_discriminator": 75,
+        "individual_discriminator": 300
+      },
+      "coordinator_joint_rows": [
+        800,
+        800,
+        800,
+        800,
+        800
+      ],
+      "wall_seconds": 594.97,
+      "user_seconds": 2314.98,
+      "system_seconds": 16.08,
+      "peak_rss_kib": 2540840,
+      "cpu_seconds": 2331.06
+    },
+    {
+      "seed": 772103,
+      "arm": "I128",
+      "handle": "fsd-ib-b01-772103-I128",
+      "source": "168e612956d098c017fe67377eadeb68589bf81d",
+      "status": "finished",
+      "exit_code": 0,
+      "pid": 3719886,
+      "start_unix": 1789454392,
+      "admission": {
+        "assessed_at": "2026-09-15T06:39:52.771516Z",
+        "available_physical_bytes": 14978490368,
+        "captured_at": "2026-09-15T06:39:52.771094Z",
+        "cgroup_headroom_bytes": null,
+        "cgroup_memory_current_bytes": null,
+        "cgroup_memory_max_bytes": null,
+        "effective_available_bytes": 14978490368,
+        "effective_floor_pass": true,
+        "failure_reasons": [],
+        "measurement_source": "/proc/meminfo",
+        "minimum_available_bytes": 4294967296,
+        "passed": true,
+        "physical_floor_pass": true,
+        "schema_version": 1
+      },
+      "wall_seconds_before_publication": 1123.6510543329641,
+      "optimizer_calls": {
+        "coordinator": 3240,
+        "discoverer_actor": 11250,
+        "discoverer_critic": 11250,
+        "team_discriminator": 75,
+        "individual_discriminator": 300
+      },
+      "coordinator_joint_rows": [
+        5734,
+        5143,
+        5521,
+        5239,
+        5635
+      ],
+      "wall_seconds": 1159.59,
+      "user_seconds": 4572.4,
+      "system_seconds": 30.22,
+      "peak_rss_kib": 1644080,
+      "cpu_seconds": 4602.62
+    },
+    {
+      "seed": 772103,
+      "arm": "I1280",
+      "handle": "fsd-ib-b01-772103-I1280",
+      "source": "168e612956d098c017fe67377eadeb68589bf81d",
+      "status": "finished",
+      "exit_code": 0,
+      "pid": 3715954,
+      "start_unix": 1789452359,
+      "admission": {
+        "assessed_at": "2026-09-15T06:06:00.037885Z",
+        "available_physical_bytes": 13602533376,
+        "captured_at": "2026-09-15T06:06:00.037286Z",
+        "cgroup_headroom_bytes": null,
+        "cgroup_memory_current_bytes": null,
+        "cgroup_memory_max_bytes": null,
+        "effective_available_bytes": 13602533376,
+        "effective_floor_pass": true,
+        "failure_reasons": [],
+        "measurement_source": "/proc/meminfo",
+        "minimum_available_bytes": 4294967296,
+        "passed": true,
+        "physical_floor_pass": true,
+        "schema_version": 1
+      },
+      "wall_seconds_before_publication": 1283.0844735819846,
+      "optimizer_calls": {
+        "coordinator": 360,
+        "discoverer_actor": 11250,
+        "discoverer_critic": 11250,
+        "team_discriminator": 75,
+        "individual_discriminator": 300
+      },
+      "coordinator_joint_rows": [
+        5734,
+        5234,
+        5161,
+        5036,
+        5226
+      ],
+      "wall_seconds": 1319.23,
+      "user_seconds": 5152.13,
+      "system_seconds": 74.71,
+      "peak_rss_kib": 3558196,
+      "cpu_seconds": 5226.84
+    }
+  ],
+  "components": [
+    {
+      "seed": 772003,
+      "arm": "D128",
+      "J": 0.3748949428966962,
+      "coverage_reward": 0.46446750000000075,
+      "quality_reward": 0.19165976617309366,
+      "energy_penalty": 0.007730236955231769,
+      "total_reward": 0.3748949428966963,
+      "max_component_reconstruction_error": 3.3306690738754696e-15,
+      "training_gap_causes": 0,
+      "final_gap_causes": 0
+    },
+    {
+      "seed": 772003,
+      "arm": "D1280",
+      "J": 0.40328138236214595,
+      "coverage_reward": 0.5058762500000002,
+      "quality_reward": 0.17657275964394414,
+      "energy_penalty": 0.003803820531037297,
+      "total_reward": 0.403281382362146,
+      "max_component_reconstruction_error": 3.9968028886505635e-15,
+      "training_gap_causes": 0,
+      "final_gap_causes": 0
+    },
+    {
+      "seed": 772003,
+      "arm": "I128",
+      "J": 0.37810827937466457,
+      "coverage_reward": 0.5057162500000002,
+      "quality_reward": 0.17217894321083518,
+      "energy_penalty": 0.027546778588586073,
+      "total_reward": 0.3781082793746645,
+      "max_component_reconstruction_error": 4.107825191113079e-15,
+      "training_gap_causes": 48121,
+      "final_gap_causes": 1
+    },
+    {
+      "seed": 772003,
+      "arm": "I1280",
+      "J": 0.3768410822229793,
+      "coverage_reward": 0.4849050000000003,
+      "quality_reward": 0.15325540536770454,
+      "energy_penalty": 0.008569039387332028,
+      "total_reward": 0.37684108222297935,
+      "max_component_reconstruction_error": 4.884981308350689e-15,
+      "training_gap_causes": 44613,
+      "final_gap_causes": 6
+    },
+    {
+      "seed": 772103,
+      "arm": "D128",
+      "J": 0.31107654932920453,
+      "coverage_reward": 0.5155000000000002,
+      "quality_reward": 0.12151557973967175,
+      "energy_penalty": 0.08622812459269759,
+      "total_reward": 0.31107654932920453,
+      "max_component_reconstruction_error": 4.107825191113079e-15,
+      "training_gap_causes": 0,
+      "final_gap_causes": 0
+    },
+    {
+      "seed": 772103,
+      "arm": "D1280",
+      "J": 0.3169196849088669,
+      "coverage_reward": 0.4816200000000005,
+      "quality_reward": 0.14918100501635,
+      "energy_penalty": 0.06496861659603807,
+      "total_reward": 0.3169196849088669,
+      "max_component_reconstruction_error": 4.773959005888173e-15,
+      "training_gap_causes": 0,
+      "final_gap_causes": 0
+    },
+    {
+      "seed": 772103,
+      "arm": "I128",
+      "J": 0.4457368461207682,
+      "coverage_reward": 0.5626787500000008,
+      "quality_reward": 0.18553650946117223,
+      "energy_penalty": 0.00379923171758351,
+      "total_reward": 0.4457368461207682,
+      "max_component_reconstruction_error": 5.2735593669694936e-15,
+      "training_gap_causes": 50701,
+      "final_gap_causes": 0
+    },
+    {
+      "seed": 772103,
+      "arm": "I1280",
+      "J": 0.40156953578308624,
+      "coverage_reward": 0.5252500000000001,
+      "quality_reward": 0.1620319913630091,
+      "energy_penalty": 0.014715061625816324,
+      "total_reward": 0.4015695357830864,
+      "max_component_reconstruction_error": 2.942091015256665e-15,
+      "training_gap_causes": 47034,
+      "final_gap_causes": 2
+    }
+  ],
+  "primary_conditional_episode_signs": [
+    {
+      "seed": 772003,
+      "mean": -0.026440300139166675,
+      "positive_episodes": 15,
+      "negative_episodes": 17,
+      "zero_episodes": 0
+    },
+    {
+      "seed": 772103,
+      "mean": 0.08464985087421936,
+      "positive_episodes": 28,
+      "negative_episodes": 4,
+      "zero_episodes": 0
+    }
+  ],
+  "total_wall_seconds": 6819.389999999999,
+  "total_cpu_seconds": 26962.82,
+  "approx_study_elapsed_seconds": 7762.589999914169,
+  "study_elapsed_basis": "supervisor first/last start at integer-second resolution plus last full-command wall; not a recorded terminal timestamp",
+  "resources_unmeasured": [
+    "preparation/source delivery/review/transport/collection/preservation support",
+    "supervisor/cleanup tails"
+  ],
+  "owner_reviews_at_intake": [],
+  "monitor_metadata_limit": "original handmade timestamps and duplicate-key aggregate not timing evidence; exact raw state preserved, DM repaired aggregate from actual terminal and supervisor facts",
+  "monitor_pre_repair": {
+    "path": "artifacts/MONITOR_STATE_PRE_REPAIR.json.gz",
+    "raw_sha256": "1a7d7127a92dbd91a70b2f4889ff41f71375efc9c183c3ef7830417444601afc",
+    "compressed_sha256": "2863fe5aec487d06060f0b33b381e0533f23b921e1e6bd1e83365f425de7555d",
+    "purpose": "exact historical malformed observation metadata; not scientific/timing evidence"
+  }
+}

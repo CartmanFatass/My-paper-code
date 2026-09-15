@@ -1,0 +1,99 @@
+{
+  "monitor": "/root/dm_fsd_restart_20260914/monitor_fsd_factorial_20260914",
+  "direction": "flexible_skill_duration",
+  "state_owner": "DM after observed duplicate-key defect",
+  "handles": [
+    {
+      "handle": "fsd-ib-b01-772003-D128",
+      "source_sha": "168e612956d098c017fe67377eadeb68589bf81d",
+      "status": "finished",
+      "exit_code": 0,
+      "pid": 3710339,
+      "tmux_active": false,
+      "basis": "received Monitor native terminal plus collected exact supervisor files",
+      "delivery": "terminal_received_by_dm",
+      "terminal_event_id": "monitor-terminal-fsd-ib-b01-772003-D128-exit0"
+    },
+    {
+      "handle": "fsd-ib-b01-772003-D1280",
+      "source_sha": "168e612956d098c017fe67377eadeb68589bf81d",
+      "status": "finished",
+      "exit_code": 0,
+      "pid": 3708689,
+      "tmux_active": false,
+      "basis": "received Monitor native terminal plus collected exact supervisor files",
+      "delivery": "terminal_received_by_dm",
+      "terminal_event_id": "monitor-terminal-fsd-ib-b01-772003-D1280-exit0"
+    },
+    {
+      "handle": "fsd-ib-b01-772003-I128",
+      "source_sha": "168e612956d098c017fe67377eadeb68589bf81d",
+      "status": "finished",
+      "exit_code": 0,
+      "pid": 3711508,
+      "tmux_active": false,
+      "basis": "received Monitor native terminal plus collected exact supervisor files",
+      "delivery": "terminal_received_by_dm",
+      "terminal_event_id": "monitor-terminal-fsd-ib-b01-772003-I128-exit0"
+    },
+    {
+      "handle": "fsd-ib-b01-772003-I1280",
+      "source_sha": "168e612956d098c017fe67377eadeb68589bf81d",
+      "status": "finished",
+      "exit_code": 0,
+      "pid": 3709290,
+      "tmux_active": false,
+      "basis": "received Monitor native terminal plus collected exact supervisor files",
+      "delivery": "terminal_received_by_dm",
+      "terminal_event_id": "monitor-terminal-fsd-ib-b01-772003-I1280-exit0"
+    },
+    {
+      "handle": "fsd-ib-b01-772103-D128",
+      "source_sha": "168e612956d098c017fe67377eadeb68589bf81d",
+      "status": "finished",
+      "exit_code": 0,
+      "pid": 3719200,
+      "tmux_active": false,
+      "basis": "received Monitor native terminal plus collected exact supervisor files",
+      "delivery": "terminal_received_by_dm",
+      "terminal_event_id": "monitor-terminal-fsd-ib-b01-772103-D128-exit0"
+    },
+    {
+      "handle": "fsd-ib-b01-772103-D1280",
+      "source_sha": "168e612956d098c017fe67377eadeb68589bf81d",
+      "status": "finished",
+      "exit_code": 0,
+      "pid": 3713801,
+      "tmux_active": false,
+      "basis": "received Monitor native terminal plus collected exact supervisor files",
+      "delivery": "terminal_received_by_dm",
+      "terminal_event_id": "monitor-terminal-fsd-ib-b01-772103-D1280-exit0"
+    },
+    {
+      "handle": "fsd-ib-b01-772103-I1280",
+      "source_sha": "168e612956d098c017fe67377eadeb68589bf81d",
+      "status": "finished",
+      "exit_code": 0,
+      "pid": 3715954,
+      "tmux_active": false,
+      "basis": "received Monitor native terminal plus collected exact supervisor files",
+      "delivery": "terminal_received_by_dm",
+      "terminal_event_id": "monitor-terminal-fsd-ib-b01-772103-I1280-exit0"
+    },
+    {
+      "handle": "fsd-ib-b01-772103-I128",
+      "source_sha": "168e612956d098c017fe67377eadeb68589bf81d",
+      "status": "finished",
+      "exit_code": 0,
+      "tmux_active": false,
+      "pid": 3719886,
+      "delivery": "terminal_received_by_dm",
+      "basis": "Monitor native terminal plus collected exact supervisor files",
+      "terminal_event_id": "monitor-terminal-fsd-ib-b01-772103-I128-exit0"
+    }
+  ],
+  "active_set": [],
+  "pending_notices": [],
+  "time_policy": "only real supervisor/admission/GNU-time are accepted; old handwritten timestamps not used",
+  "prior_raw_state": "MONITOR_STATE_LEGACY_DUPLICATE_KEYS.json"
+}
