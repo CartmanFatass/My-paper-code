@@ -1,0 +1,18 @@
+=== Task 'acvc-transfer-m-b02-28631-c006c0b24' started at 2026-09-16T06:34:25+08:00 ===
+{
+  "assessed_at": "2026-09-15T22:34:25.799336Z",
+  "available_physical_bytes": 15613599744,
+  "captured_at": "2026-09-15T22:34:25.799032Z",
+  "cgroup_headroom_bytes": null,
+  "cgroup_memory_current_bytes": null,
+  "cgroup_memory_max_bytes": null,
+  "effective_available_bytes": 15613599744,
+  "effective_floor_pass": true,
+  "failure_reasons": [],
+  "measurement_source": "/proc/meminfo",
+  "minimum_available_bytes": 4294967296,
+  "passed": true,
+  "physical_floor_pass": true,
+  "schema_version": 1
+}
+=== Task 'acvc-transfer-m-b02-28631-c006c0b24' exited with code 0 at 2026-09-16T06:50:55+08:00 (Duration: 990s) ===

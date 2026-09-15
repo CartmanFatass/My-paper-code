@@ -1,0 +1,105 @@
+{
+  "object": "ACVC_M_DEPLOYMENT_TRANSFER_B02",
+  "arm": "M (one fit, panels M / F(M) / dwell(M))",
+  "handle": "acvc-transfer-m-b02-28631-c006c0b24",
+  "status": {
+    "task": "acvc-transfer-m-b02-28631-c006c0b24",
+    "status": "finished",
+    "exit_code": 0,
+    "pid": 3754217,
+    "uptime_seconds": 1020,
+    "tmux_active": false
+  },
+  "collection_time": "2026-09-15T22:52:09+00:00",
+  "source_sha": "c006c0b2453a44902ebfda827099823a28e136f1",
+  "remote_worktree": "/home/wu/hmasd-worktrees/acvc-transfer-b02-c006c0b24",
+  "remote_output_root": "/home/wu/hmasd-worktrees/acvc-transfer-b02-c006c0b24/temp/directions/acvc/exp/m_deployment_transfer_b02_28631",
+  "native_time": {
+    "native_wall_s": "989.80",
+    "peak_rss_kib": "588916",
+    "user_s": "987.74",
+    "system_s": "1.13",
+    "exit_code": "0"
+  },
+  "files": [
+    {
+      "relative_path": "native/admission.json",
+      "remote_path": "/home/wu/hmasd-worktrees/acvc-transfer-b02-c006c0b24/temp/directions/acvc/exp/m_deployment_transfer_b02_28631/admission.json",
+      "bytes": 504,
+      "sha256": "edd71847d4beb703582e786fcd731a24b0cc2330c8ec5b2ee72366fc9cc0335d",
+      "remote_sha256_match": true
+    },
+    {
+      "relative_path": "native/episodes.jsonl",
+      "remote_path": "/home/wu/hmasd-worktrees/acvc-transfer-b02-c006c0b24/temp/directions/acvc/exp/m_deployment_transfer_b02_28631/episodes.jsonl",
+      "bytes": 983133,
+      "sha256": "adc93a7b05b9a9f86eedafce538f41363a8e1ece6413a3cc45124064abb2b6ed",
+      "remote_sha256_match": true
+    },
+    {
+      "relative_path": "native/updates.jsonl",
+      "remote_path": "/home/wu/hmasd-worktrees/acvc-transfer-b02-c006c0b24/temp/directions/acvc/exp/m_deployment_transfer_b02_28631/updates.jsonl",
+      "bytes": 688618,
+      "sha256": "49a22b7a14bb042866c46725a1dcbb980d14602d9492e7cfcd6bc897da89819a",
+      "remote_sha256_match": true
+    },
+    {
+      "relative_path": "native/summary.json",
+      "remote_path": "/home/wu/hmasd-worktrees/acvc-transfer-b02-c006c0b24/temp/directions/acvc/exp/m_deployment_transfer_b02_28631/summary.json",
+      "bytes": 11336,
+      "sha256": "d7865a92ef8aa2801c41f9515e8f03fdf13df40508a2d043c023e79d6266d937",
+      "remote_sha256_match": true
+    },
+    {
+      "relative_path": "native/native_time.txt",
+      "remote_path": "/home/wu/hmasd-worktrees/acvc-transfer-b02-c006c0b24/temp/directions/acvc/exp/m_deployment_transfer_b02_28631/native_time.txt",
+      "bytes": 81,
+      "sha256": "85fc3652e8500341768c3f0a715d45d76fc686a829e02c9a2b0ff6ac10e0f4d3",
+      "remote_sha256_match": true
+    },
+    {
+      "relative_path": "native/stdout.log",
+      "remote_path": "/home/wu/hmasd-worktrees/acvc-transfer-b02-c006c0b24/temp/directions/acvc/exp/m_deployment_transfer_b02_28631/stdout.log",
+      "bytes": 17911,
+      "sha256": "5f10ea34adec273596d54f51224d92231b4e4f1cdeab8575b3b5e3298640665a",
+      "remote_sha256_match": true
+    },
+    {
+      "relative_path": "native/stderr.log",
+      "remote_path": "/home/wu/hmasd-worktrees/acvc-transfer-b02-c006c0b24/temp/directions/acvc/exp/m_deployment_transfer_b02_28631/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "remote_sha256_match": true
+    },
+    {
+      "relative_path": "native/final.pt",
+      "remote_path": "/home/wu/hmasd-worktrees/acvc-transfer-b02-c006c0b24/temp/directions/acvc/exp/m_deployment_transfer_b02_28631/final.pt",
+      "bytes": 313423,
+      "sha256": "cf32fb9450ef951e33049280fc12d8a4420df101c2c24c8f3e3e0bff06145ec2",
+      "remote_sha256_match": true
+    },
+    {
+      "relative_path": "task_records/acvc-transfer-m-b02-28631-c006c0b24.task_log.txt",
+      "remote_path": "/home/wu/.agent-tasks/acvc-transfer-m-b02-28631-c006c0b24/task.log",
+      "bytes": 708,
+      "sha256": "d2e2946ea4e221c9863da57030ab774ee01662e443c98c641b08ba529e95679f",
+      "remote_sha256_match": null
+    }
+  ],
+  "tracked_in_git": [
+    "native/admission.json",
+    "native/episodes.jsonl",
+    "native/updates.jsonl",
+    "native/summary.json",
+    "native/native_time.txt",
+    "task_records/acvc-transfer-m-b02-28631-c006c0b24.task_log.txt",
+    "task_records/*.txt",
+    "task_records/*.json"
+  ],
+  "retained_only": [
+    "native/final.pt",
+    "native/stdout.log",
+    "native/stderr.log"
+  ],
+  "note": "sha256 of every native file equals the remote sha256sum in task_records/remote_listing.txt; final.pt, stdout.log and stderr.log are excluded from Git by .gitignore (*.pt, *.log) and retained in the archive named by PRESERVATION.json"
+}

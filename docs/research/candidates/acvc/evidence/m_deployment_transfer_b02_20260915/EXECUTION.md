@@ -67,3 +67,11 @@ ssh -o BatchMode=yes -o ConnectTimeout=10 hmasd-wsl-node /usr/local/bin/agent-ta
 | acvc-transfer-m-b02-28631-c006c0b24 | 2026-09-15T22:34:13Z | 3754217 | passed, 15,613,599,744 B physical and effective available (floor 4 GiB), assessed 22:34:25Z | running at uptime 15 s (tmux active); stderr.log 0 bytes; stdout advancing (rollout 48 after 23.06 s process wall); expected end about 22:54Z |
 
 Operator: `hmasd-experiment-operator`, one command, pre-launch duplicate check `not_found`, worktree clean at the launch sha, output parent created and output absent, no retry. Node otherwise idle (two stale supervisor records from 2026-09-07/08 with inactive tmux and zero load are not live processes). Observation: hub-owned bounded status polls; collection after the terminal state.
+
+## Terminal record
+
+| Handle | Terminal (UTC) | Supervisor status | Native wall s | CPU s | Peak RSS KiB | Exit |
+| --- | --- | --- | ---: | ---: | ---: | --- |
+| acvc-transfer-m-b02-28631-c006c0b24 | between 22:50:19Z (running, uptime 954 s, training complete at 949.14 s process wall) and 22:51:40Z (finished) | finished, tmux inactive | 989.80 | 987.74 + 1.13 | 588,916 | 0/0 |
+
+Process wall to the summary 989.47 s: training 949.14 s (0.905 ms per training tick), panels about 12.2 / 14.2 / 14.0 s. Actual wall 0.82 of the 1,200 s plan and 1.005 of B01's 985.12 s; the fit ran alone on the node. Collected 22:53Z with per-file digests equal to the remote listing (COLLECTION.json); reduce readout T_F,2 = +.002859470696673056 J WITHIN_MEI (reduce/summary.json). Preserved (PRESERVATION.json); remote reclamation after the push (CLEANUP.json).

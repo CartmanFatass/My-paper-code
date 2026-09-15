@@ -1,0 +1,26 @@
+{
+  "source": "card section 3 (hub, recorded before launch); owner slot not taken (unattended)",
+  "T_F": {
+    "forecast": {
+      "TRANSFERS": 0.45,
+      "WITHIN_MEI": 0.35,
+      "ADVERSE": 0.2
+    },
+    "realized": "WITHIN_MEI",
+    "value_J": 0.002859470696673056,
+    "multiclass_brier": 0.665,
+    "modal_forecast_occurred": false
+  },
+  "T_D": {
+    "forecast": {
+      "UP": 0.35,
+      "WITHIN_MEI": 0.45,
+      "DOWN": 0.2
+    },
+    "realized": "WITHIN_MEI",
+    "value_J": 0.0026775973111561728,
+    "multiclass_brier": 0.465,
+    "modal_forecast_occurred": true
+  },
+  "owner": "not taken (unattended)"
+}
