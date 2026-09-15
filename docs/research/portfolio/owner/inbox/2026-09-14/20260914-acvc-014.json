@@ -24,7 +24,7 @@
     }
   ],
   "recommended": "consolidate_park",
-  "auto_applied": null,
+  "auto_applied": "baseline_design_only",
   "dm_reason": "当前实测资产值得保留；追加参考实例有真实价值，但新的基线比较/归因准备与持续端点重复形成机会成本，交Portfolio完整选择。",
   "evidence": [
     "docs/research/candidates/acvc/ACVC_POST_FIXED_RATE_INVESTMENT_REPORT_20260914.md",
@@ -78,5 +78,15 @@
     "verdict_text": "The DM recommends consolidation/PARK now, preserves the review's narrow preference for a fresh reference B, and offers the preparation-only option as a distinct middle course under the owner's accepted calibration.",
     "source": "docs/research/candidates/acvc/ACVC_POST_FIXED_RATE_INVESTMENT_REPORT_20260914.md"
   },
-  "starred": true
+  "starred": true,
+  "execution_history": [
+    {
+      "at": "2026-09-15T03:52:30+00:00",
+      "authority": "PRO_FINAL / OWNER_DELEGATED",
+      "source": "a5473d18f7efd476037287483f592f8ddfbf086b:docs/research/portfolio/pro_packets/20260914_acvc_post_fixed_rate_investment/archive/RESPONSE.md",
+      "record": "docs/research/portfolio/pro_packets/20260914_acvc_post_fixed_rate_investment/INTAKE.md",
+      "state": "applied",
+      "summary": "完整Portfolio选C：保持CONTINUE/MEDIUM/recasts2与原席位，只做一次零暴露cluster baseline匹配/未来卡准备；不PARK、不追加reference B。DM已完整读取79行并接受，无spec冲突，直接实施准备。"
+    }
+  ]
 }
