@@ -1,0 +1,58 @@
+{
+  "object": "FOLR_ENTITY_AUGMENTATION_REPEAT_B01_781901_782001",
+  "selected_utc": "2026-09-15T04:28:04.530771+00:00",
+  "original_invocations": 4,
+  "blocks": [
+    {
+      "block": 1,
+      "training_seed": 781901,
+      "evaluation_seed": 1781901
+    },
+    {
+      "block": 2,
+      "training_seed": 782001,
+      "evaluation_seed": 1782001
+    }
+  ],
+  "new_native_exposure_at_selection": 0,
+  "per_arm": {
+    "training_episodes": 5000,
+    "training_ticks": 100000,
+    "optimizer_steps": 4969,
+    "evaluation_episodes": 128,
+    "evaluation_ticks": 2560,
+    "generic_replay_positions": 33391680,
+    "generic_acting_positions": 538440
+  },
+  "a_extra": {
+    "entity_replay_positions": 166958400,
+    "entity_acting_positions": 2692200
+  },
+  "totals": {
+    "training_episodes": 20000,
+    "training_ticks": 400000,
+    "optimizer_steps": 19876,
+    "evaluation_episodes": 512,
+    "evaluation_ticks": 10240,
+    "generic_replay_positions": 133566720,
+    "generic_acting_positions": 2153760,
+    "native_ticks": 410240
+  },
+  "total_a_extra": {
+    "entity_replay_positions": 333916800,
+    "entity_acting_positions": 5384400
+  },
+  "heterogeneous_reference_seconds": {
+    "prior_A": 2829.32,
+    "current_G": 2112.27,
+    "one_block": 4941.59,
+    "two_blocks": 9883.18
+  },
+  "ordinary_plans_seconds": {
+    "G_per_call": 3000,
+    "A_per_call": 3600,
+    "native_sum": 13200,
+    "active_support": 2400
+  },
+  "unknown": "actual future/native/support/provider/lifetime cost; references are not a forecast, cap, efficiency result or grant"
+}

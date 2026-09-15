@@ -76,8 +76,12 @@ find no result-invalidating defect and preserve GENERIC_ABOVE_MEI. Returning to
 the old A-G positive remains outcome-informed; both new block-specific outcomes
 will remain visible and any mean will be descriptive. Current Z-G remote resources
 are reclaimed after full preservation;4 local archived support files remain after
-an actual policy rejection. The next DM work is the prospective A-G card and
-direct implementation, with no pending Monitor or Pro producer at this boundary.
+an actual policy rejection. The [prospective two-block A-G card](FOLR_ENTITY_AUGMENTATION_REPEAT_B01_SCIENCE_CARD_20260914.md)
+now fixes four original G1/A1/G2/A2 calls at training781901/782001 and final
+evaluation1781901/1782001,5000/4969/128 each. Its ordered two-block differences
+and descriptive-only mean preserve all outcomes without pooling discovery data.
+Direct implementation, focused checks and independent binding/publication review
+precede fresh admission; no invocation is accepted yet.
 Under the [owner's accepted two-axis calibration](../../portfolio/decisions/2026-09-14-two-axis-research-calibration.md),
 this adaptive A−G / A−Z / Z−G sequence is not independent replication of a fixed
 contrast or a stable method ranking. Each original object's reading stays frozen;
