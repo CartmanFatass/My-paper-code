@@ -1,10 +1,10 @@
-# ACVC_CLUSTER_FIXED_LR_PAIR_B01 â€” E0 result evidence
+# ACVC_CLUSTER_FIXED_LR_PAIR_B01 — E0 result evidence
 
 ## Object, original bytes and rule
 
 Class **B/EXPLORE**; one prospectively matched programme identity master27931/eval37931, two fresh C-only recipes (low1e-4, reference3e-4), no iid-training-population claim. Source `2bbaa99ad9cc717d89e47a1f24d9acd76dce4f97`; exact commands `f3cba57c88bcde9c8bd8a37ed4b8410f4f875bcd`. [Card](ACVC_CLUSTER_FIXED_LR_PAIR_B01_SCIENCE_CARD_20260914.md), [machine facts](ACVC_CLUSTER_FIXED_LR_PAIR_B01_PROSPECTIVE_FACTS_20260914.json), [complete recorded-data analysis](evidence/cluster_fixed_lr_pair_b01_20260914/INTAKE_ANALYSIS.json).
 
-Rule applied verbatim: **strictly greater than +.01 J is UP; strictly less than âˆ’.01 J is DOWN; inclusive [âˆ’.01,+.01] is WITHIN; missing or invalid required measurements give INCOMPLETE for their dependent contrast.** Both original fits and all six final panels are complete. WITHIN is not equivalence; no confidence-interval or significance gate was applied. J=S/256 from complete native team reward.
+Rule applied verbatim: **strictly greater than +.01 J is UP; strictly less than −.01 J is DOWN; inclusive [−.01,+.01] is WITHIN; missing or invalid required measurements give INCOMPLETE for their dependent contrast.** Both original fits and all six final panels are complete. WITHIN is not equivalence; no confidence-interval or significance gate was applied. J=S/256 from complete native team reward.
 
 ## Full final panel
 
@@ -17,7 +17,7 @@ Rule applied verbatim: **strictly greater than +.01 J is UP; strictly less than 
 | reference | F | 0.36692059909191432 | 93.931673367530067 | 0.13826558259811514 | 0.53616052213567766 |
 | reference | dwell | 0.33440984893592984 | 85.60892132759804 | 0.07445259248848396 | 0.52136590425761131 |
 
-The designated low Câˆ’reference C contrast is **âˆ’.1285335612775105 J, DOWN**. Its conditional SE is .011137008194285232 J; 59/64 world differences are negative and5 positive, rangeâˆ’.3730060045102702 to+.04755205995114148. This is one matched recipe block, not a recipe-population interval.
+The designated low C−reference C contrast is **−.1285335612775105 J, DOWN**. Its conditional SE is .011137008194285232 J; 59/64 world differences are negative and5 positive, range−.3730060045102702 to+.04755205995114148. This is one matched recipe block, not a recipe-population interval.
 
 | Comparison | Mean difference J | Conditional SE J | Negative / positive / zero | Min J | Max J | Reading |
 |---|---:|---:|---|---:|---:|---|
@@ -31,7 +31,7 @@ The designated low Câˆ’reference C contrast is **âˆ’.1285335612775105 J,
 | reference: F-dwell | 0.032510750155984522 | 0.0082580429344839366 | 16/48/0 | -0.12733811826976932 | 0.24955961587095765 | UP |
 | reference: dwell-C | 0.0051938700065118143 | 0.0072409090670419781 | 32/32/0 | -0.12515055975512923 | 0.1533425043404813 | DESCRIPTIVE |
 
-All five prespecified point-rule readings are reported: low Câˆ’reference C DOWN; both recipes' Fâˆ’C and Fâˆ’dwell UP. Supporting comparisons are explicitly descriptive. Direct64-world difference vectors, their sample SD/sqrt64, all signs and episode IDs are in the analysis; no independent-SE addition, cross-panel pooling or favorable-endpoint selection was used. Each package has private state/history; common reset worlds do not make its trajectory or trigger dose identical.
+All five prespecified point-rule readings are reported: low C−reference C DOWN; both recipes' F−C and F−dwell UP. Supporting comparisons are explicitly descriptive. Direct64-world difference vectors, their sample SD/sqrt64, all signs and episode IDs are in the analysis; no independent-SE addition, cross-panel pooling or favorable-endpoint selection was used. Each package has private state/history; common reset worlds do not make its trajectory or trigger dose identical.
 
 ## Exposure and technical acceptance
 
@@ -39,9 +39,9 @@ Each original has4096 train +192 evaluation episodes (4288 scored rows), 2048 ro
 
 Both original summaries, all episode/update rows and actual source/configuration match the card. All parsed loss, reward and gradient fields are finite; row IDs, reset identities, recipe/rate tags, counts and direct primary publication agree. Runtime summaries record CPU/float32/intraop1/interop1, actor34902+critic34177=69079 parameters, expected final checkpoints, actual optimizer group rates1e-4 and3e-4 and empty limits. Both actor and critic move under real learning; low/reference actor displacements2.413120985031128/8.544625282287598 are descriptive, not mechanistic causality or a rate-displacement bound. No models were loaded or native trajectories rerun during collection/analysis.
 
-F retrace counts are7046(low)/7629(reference); own-dwell interventions5036/5009. They arise from separately evolved package histories and are not matched intervention doses. Reference dwellâˆ’C is+.005193870006511814 J descriptively, with32 adverse/32 favorable worlds; this does not prove equivalence.
+F retrace counts are7046(low)/7629(reference); own-dwell interventions5036/5009. They arise from separately evolved package histories and are not matched intervention doses. Reference dwell−C is+.005193870006511814 J descriptively, with32 adverse/32 favorable worlds; this does not prove equivalence.
 
-Prelaunch engineering:11 focused checks passed10.22s; independent Astra/high review found one offline partial-ingestion failure path. DM repaired it before either original,2 focused tests passed.29s, and the same Reviewer verified no residual material finding. The training/evaluation/launch bytes were unchanged by that repair. Details and the actual local-cleanup restriction are in [ENGINEERING](evidence/cluster_fixed_lr_pair_b01_20260914/ENGINEERING.md). No scientific-source deviation or Â§5 budget breach was found.
+Prelaunch engineering:11 focused checks passed10.22s; independent Astra/high review found one offline partial-ingestion failure path. DM repaired it before either original,2 focused tests passed.29s, and the same Reviewer verified no residual material finding. The training/evaluation/launch bytes were unchanged by that repair. Details and the actual local-cleanup restriction are in [ENGINEERING](evidence/cluster_fixed_lr_pair_b01_20260914/ENGINEERING.md). No scientific-source deviation or §5 budget breach was found.
 
 ## Original costs, receipts and preservation
 
@@ -62,6 +62,6 @@ All28 original files (26 text,2 checkpoints) match remote/local SHA256 and byte 
 
 At this fixed4096 exposure, the proposed low rate loses to reference on C and is lower on F and dwell descriptively. Retain3e-4 as the development reference; this is no stable ranking across programmes. Reference C attains.329215978929418 J and F still adds.03770462016249634 J over C and.03251075015598452 J over own-dwell. That directly supports optional-F usefulness on the higher attained reference endpoint in this pair; the usefulness is not restricted to its weaker low-rate C. It does not establish tuned headroom or compare old and new programmes as matched causal exposure changes. Reference F has16/64 adverse worlds against each control; their identities need not coincide.
 
-Low-C forecast missed: UP/WITHIN/DOWN=.45/.35/.20, observedDOWN, Brier.965. Four F forecasts had modalUP and all observedUP; Brier lowFâˆ’C .14, lowFâˆ’dwell .245, referenceFâˆ’C .065, referenceFâˆ’dwell .14. Whole-pair completeness forecast.95 realized complete (binary Brier.0025). Owner prediction not taken (unattended); current reviews were checked at intake. Claim ceiling remains one B pair, no training-population uncertainty, causal rate/data diagnosis, safety, default promotion or formal transfer.
+Low-C forecast missed: UP/WITHIN/DOWN=.45/.35/.20, observedDOWN, Brier.965. Four F forecasts had modalUP and all observedUP; Brier lowF−C .14, lowF−dwell .245, referenceF−C .065, referenceF−dwell .14. Whole-pair completeness forecast.95 realized complete (binary Brier.0025). Owner prediction not taken (unattended); current reviews were checked at intake. Claim ceiling remains one B pair, no training-population uncertainty, causal rate/data diagnosis, safety, default promotion or formal transfer.
 
 [Result figure](evidence/cluster_fixed_lr_pair_b01_20260914/RESULT_FIGURE.png) shows all six absolute panel means and all five prespecified contrasts; error bars are conditional SE, not training-population intervals.

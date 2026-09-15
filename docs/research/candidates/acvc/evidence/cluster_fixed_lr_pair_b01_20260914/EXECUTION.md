@@ -2,7 +2,7 @@
 
 Author/technical acceptance owner: `/root/dm_acvc_resume_20260914`, authoring at `C:/Projects/HMASD-worktrees/codex-acvc` / `codex/acvc`. [The card](../../ACVC_CLUSTER_FIXED_LR_PAIR_B01_SCIENCE_CARD_20260914.md) binds exactly two originals under the complete Portfolio allocation. Source **2bbaa99ad9cc717d89e47a1f24d9acd76dce4f97**, published before staging. The numerical source is fixed even when subsequent evidence-only commits update this document.
 
-Destination **hmasd-wsl-node**, detached checkout `/home/wu/hmasd-worktrees/acvc-rate-pair-b01-2bbaa99ad`; Python `/home/wu/.venvs/hmasd/bin/python`, CPU FP32 and one numerical thread per original. [COMMANDS.json](COMMANDS.json) contains the literal argv, identities, source and original output paths. The two commands are separate originals, each with fresh adjacent physical/effective â‰¥4 GiB admission inside the committed launch script; neither admission covers the other. No original has been accepted at this prospective publication.
+Destination **hmasd-wsl-node**, detached checkout `/home/wu/hmasd-worktrees/acvc-rate-pair-b01-2bbaa99ad`; Python `/home/wu/.venvs/hmasd/bin/python`, CPU FP32 and one numerical thread per original. [COMMANDS.json](COMMANDS.json) contains the literal argv, identities, source and original output paths. The two commands are separate originals, each with fresh adjacent physical/effective ≥4 GiB admission inside the committed launch script; neither admission covers the other. No original has been accepted at this prospective publication.
 
 ## low
 
