@@ -26,6 +26,13 @@ Untying the duration `k` is this direction. Untying the agent count `N` is a sep
 
 ## Position
 
+- **Current preparation — OWNER_DIRECT 2026-09-14:** restore this original direction
+  to the working set and prepare the interruption-by-batch question under evidence
+  spec §11.11 and the owner-approved two-axis programme. The current DM has resumed
+  in `codex/fsd`; [reading/application receipt](FSD_RESTART_PREPARATION_INTAKE_20260914.md).
+  This restores direction preparation without allocating a sixth unchanged pair,
+  the old LONG offer or a new training budget. Existing package-use evidence and
+  the fixed-K2 branch boundary below retain their scope.
 - Current claim ceiling is B — EXPLORE. Original Convergence U now selects the
   complete I1280 recipe as a **limited optional learning scheme under the same
   tested host, recipe and five-rollout conditions; authentic D0 remains default**.
@@ -36,7 +43,7 @@ Untying the duration `k` is this direction. Untying the agent count `N` is a sep
   The accepted use and its bounds are in [the complete U intake](pro_packets/20260912_post_five_pair_use_convergence/INTAKE.md).
   FSD remains ACTIVE under owner instruction; finite N/U completion creates no
   direction stop, sixth pair, default/C/UAV promotion or automatic consultation.
-  Latest Portfolio selects **no current addition** while preserving ACTIVE/HIGH:
+  The 2026-09-12 Portfolio selected **no current addition** while preserving ACTIVE/HIGH:
   no LONG or repeated U purchase, sixth pair, code, analysis or experiment.
   [Applied Portfolio boundary](FSD_POST_U_PORTFOLIO_APPLICATION_20260912.md).
 - C-BENCH requires the evidence and prior Innovator decision appropriate to its
