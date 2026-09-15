@@ -320,3 +320,128 @@ two axes get two new directories with one results table each.
   object-tier science decisions.
 - **[DECIDE 7]** Add the D1 reading list to the library and read Axis K items 1–3 and Axis N
   item 1 before week 3.
+
+---
+
+## Addendum 2026-09-14 (evening): corrections after the owner's review
+
+The owner read §§A–H against the record and the source papers and returned four corrections
+and a revised order of work. All four are accepted; this addendum records what was wrong, the
+recomputed numbers, and the corrected text. Where the addendum and the body disagree, the
+addendum governs.
+
+### Correction 1. The "2 × seed SD" rule was wrong and is withdrawn
+
+The body's B5 rule ("signal when the IQM difference exceeds 2 × seed SD; null when inside
+±1 SD") conflated three different quantities: the effect size that matters, the training-run
+variability, and the uncertainty of the estimate. Recomputed on FSD's five paired differences:
+
+| Quantity | Value |
+| --- | --- |
+| Mean paired gain | +0.0674 J |
+| SD of paired differences (ddof 1) | 0.0849 J |
+| Standard error of the mean | 0.0380 J |
+| 95% t-interval (4 df) | [−0.038, +0.173] J |
+| Positive pairs | 4 of 5 |
+
+Under the withdrawn rule the strongest FSD result would have been classified null, as the owner
+showed. Under an interval reading it is *suggestive and not yet resolved*: the interval includes
+zero and includes effects three times the mean. Neither "signal" nor "null" is warranted at
+n = 5 on this host.
+
+**Corrected rule (replaces B5).**
+1. The minimum effect of interest is fixed *before* the run from practical meaning on that
+   benchmark (for scenario 1, one candidate is 0.05 J, about five percentage points of coverage
+   at the 0.7 weight; the owner sets it), never from the noise.
+2. The decision reads a confidence interval on the training-level mean difference (paired
+   where common random numbers apply), using the field's estimators (IQM with stratified
+   bootstrap when n ≥ 10; t-interval when n < 10, stated as such).
+3. Verdicts: *supported* when the lower bound exceeds the minimum effect; *null* when the
+   interval lies inside ±minimum effect; *unresolved* otherwise. "Pause further investment" is
+   allowed on an unresolved result and is recorded as such; it is never written as "proven
+   ineffective".
+4. The seed count is chosen by a power calculation from a pilot variance on that benchmark.
+   With FSD's SD of 0.085 J, the paired sample needed at 80% power and α = 0.05 is
+   approximately: 6 for a 0.10 J effect, 12 for 0.07 J, 23 for 0.05 J, 63 for 0.03 J, 565 for
+   0.01 J. The existing 0.01 J convention is therefore undetectable on this host at any feasible
+   budget, which is the concrete reason to re-set the minimum effect rather than to keep
+   reading one-seed pairs against it. ACVC's between-unit SD on its host is 0.017 J, five times
+   smaller, so the required seed count is benchmark-specific and must be piloted per benchmark.
+
+### Correction 2. ACVC C01 is a replicated result; the body misdescribed it
+
+`ACVC_CLUSTER_FIXED_RECIPE_C01_RESULT_EVIDENCE_20260914.md` reports six independent training
+units under a frozen recipe: F−C mean +0.0964 J, between-unit SD 0.0167, 97.5% marginal
+interval [0.075, 0.118]; F−own-dwell +0.0641 J, interval [0.035, 0.093]. The body's statements
+that FSD was "the only replicated signal" and that ACVC's positive rested on one fit are
+withdrawn. The remaining caveat stands and is narrower than before: the absolute C means are
+0.06–0.17 J and no tuned generic baseline exists on the cluster host, so the result establishes
+a package effect at that training budget, not an effect against a competent learner. Under the
+corrected rule this is a *supported* result at its declared scope, and it is the best-replicated
+result in the repository. Its disposition in §C changes from "archive" to "historical evidence
+with one open question: does F−C survive a competent C?", to be answered by the headroom
+experiment (F1) on the same host rather than by a new ACVC object.
+
+### Correction 3. The FSD gain is not yet attributable to flexible duration
+
+The five pairs compare *interruption gap 0.25 with training batch 1280* against *no interruption
+with batch 128* (intake of 2026-09-12, §2). Batch size changes learning exposure and advantage
+grouping on its own. The Axis K rung L2 in §E is replaced by a 2 × 2 attribution experiment
+before any hazard sweep:
+
+| Arm | Interruption | Batch |
+| --- | --- | --- |
+| D0-128 (existing default) | off | 128 |
+| D0-1280 | off | 1280 |
+| I-128 | on (gap 0.25) | 128 |
+| I-1280 (existing treatment) | on (gap 0.25) | 1280 |
+
+Same host, recipe, five-rollout protocol and common evaluation worlds as the existing pairs;
+seed count from the power table above against the owner's minimum effect. The interruption main
+effect is (I-128 + I-1280) − (D0-128 + D0-1280); the batch main effect and the interaction are
+read the same way. Only if the interruption main effect is supported does the hazard sweep
+(λ ∈ {0, 0.005, 0.02} on the corridor, then moving users on scenario 1) follow.
+
+### Correction 4. GPL is a different problem from Axis N; the problem must be defined first
+
+GPL (Rahman et al. 2021) trains one learner to cooperate with fixed-policy teammates that were
+not trained with it and may enter or leave. Axis N, as the owner states it, is how a *jointly
+trained* team maintains coordination under membership change. The body's "GPL = Axis N
+benchmark" is withdrawn. Axis N is split into three formulations, each with its own benchmark
+and baseline; the owner chooses which to pursue first:
+
+| Formulation | Definition | Existing benchmark | Baseline | Note |
+| --- | --- | --- | --- | --- |
+| N-a within-episode change, joint training | agents leave and (re)join mid-episode; all policies trained together; survivors keep state | SMAC/SMACv2 already contain *leaving* (unit death with masking) and are the standard; *joining* has no standard benchmark and needs a declared modification of LBF/RWARE or this repository's `continuous_roster` host | MAPPO/QMIX with entity masking; REFIL for entity-wise factorisation | This is VNFC's and FOLR's question; the novel part is joining and continuity, since leaving is routine |
+| N-b train-N / test-N′ transfer | fixed roster per episode, count differs at test | SMACv2 compositions; REFIL's MPE tasks; LBF/RWARE with varied agent counts | REFIL, UPDeT, shared MAPPO with padding | FRRIE's question; well-defined and cheap |
+| N-c unfamiliar teammates | learner joins a team it did not train with | GPL's open LBF / Wolfpack | GPL | Out of scope unless the owner opens it; GPL's environments remain reusable for N-a with all agents learning, with the comparison conditions declared |
+
+The §E Axis N ladder applies to whichever formulation is chosen; L0 for N-a is "does a fixed-N
+learner with masking measurably degrade when joining events are added?", which must be shown
+before any coordinator change is tested.
+
+### Revised order of work (replaces §F weeks 3–8)
+
+1. **Baseline competence** on scenario 1: MAPPO and fixed-k HMASD, matched information,
+   environment steps and a declared tuning budget, multi-seed learning curves (unchanged from
+   §F weeks 1–2). Run the same on the ACVC cluster host so Correction 2's open question closes.
+2. **Attribution** for Axis K: the 2 × 2 above. Then hazard dependence.
+3. **Problem definition** for Axis N: the owner picks N-a or N-b; the L0 necessity test on the
+   chosen benchmark; then the coordinator-representation arm.
+4. **Consolidation by evidence relationship** (§C stands, with ACVC's row amended): ablations
+   fold into the axes, off-axis directions stay as historical evidence, controlled hosts serve
+   mechanism interpretation, external benchmarks carry performance claims.
+
+### Decision authority, narrowed
+
+The body's B10 and §G asked for owner approval of every run. The owner declined universal manual
+approval, and the corrected version is: the owner approves each pre-registration page at rung
+entry and each rung transition; within an approved rung the loop runs seeds, collects, fills the
+results table and drafts the reading autonomously; external models review at rung transitions.
+Unattended selection of *new objects* remains ended.
+
+### What this addendum leaves unchanged
+
+Sections A (field standards), B1–B4 and B6–B9, D1 (reading list, with the note that GPL is the
+N-c reference), D2 (substrates, with GPL's environments re-labelled as reusable rather than
+canonical for Axis N), D3 (the six-field question form), and the ladder structure in E.
