@@ -263,6 +263,9 @@ request `2026-09-15-fsd-baseline-interruption-investment-01`, delivery commit
   returned to `portfolio:cross_direction` as a correction note; the FLAT arm is
   dependent work under AGENTS §3 and waits for that return, while D1280/I1280
   launch as independent authorized work.
+  **Returned and confirmed** (`PRO_FINAL / OWNER_DELEGATED`, 2026-09-15 12:55Z,
+  [decision](../../portfolio/decisions/2026-09-15-fsd-flat-k-correction.md)): option 1,
+  FLAT stays at k = 10; the FLAT arm is independent work from that time.
 - **Labels:** `H_r`/`HI_r` are renamed `GAP_D`/`GAP_I`, *untuned
   cross-information package gaps* D1280 − FLAT and I1280 − FLAT; they are not
   §11.7 headroom and supply no tuned same-information reference.

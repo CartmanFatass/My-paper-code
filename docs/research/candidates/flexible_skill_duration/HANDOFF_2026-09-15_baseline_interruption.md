@@ -1,10 +1,11 @@
 # FSD handoff — baseline × interruption B01 in flight (2026-09-15, Claude hub)
 
-**State: ACTIVE / HIGH. Portfolio decision S applied (`PRO_FINAL / OWNER_DELEGATED`);
-eight of twelve fits running on `hmasd-wsl-node`; four FLAT fits held as dependent
-work.** Driven by the Claude Code research hub (owner resume 2026-09-15; two
-directions, FSD and ACVC). Authoring checkout `C:/Projects/HMASD-worktrees/codex-fsd`,
-branch `codex/fsd`; the hub cherry-picks accepted commits into `main`.
+**State: ACTIVE / HIGH. Portfolio decision S applied and the FLAT k = 10 correction
+confirmed (`PRO_FINAL / OWNER_DELEGATED`, 12:55Z); 3 of 12 fits complete (D1280 ×
+772203/772303/772403), 4 running (I1280 × 3, FLAT 772203), 5 pending.** Driven by the
+Claude Code research hub (owner resume 2026-09-15; two directions, FSD and ACVC).
+Authoring checkout `C:/Projects/HMASD-worktrees/codex-fsd`, branch `codex/fsd`; the hub
+cherry-picks accepted commits into `main`.
 
 ## Object and authority
 
@@ -24,30 +25,35 @@ branch `codex/fsd`; the hub cherry-picks accepted commits into `main`.
 
 Worktree `/home/wu/hmasd-worktrees/fsd-baseline-b01-dc4dbdfcd`, output root
 `<W>/temp/directions/flexible_skill_duration/exp/baseline_interruption_b01_20260915/`.
+One queue element per handle (`BLOCK.sh <W> <seed> <arm>`, single-token arm; the
+12:36Z quoting defect is recorded in `EXECUTION.md`).
 
-| Handle | Arms | Launched (UTC) | State at writing |
+| Handle | Arm | Launched (UTC) | State at writing |
 | --- | --- | --- | --- |
-| fsd-bi-b01-772303 | D1280 → I1280 | 11:52:19Z | running (D1280) |
-| fsd-bi-b01-772203 | D1280 → I1280 | 11:52:26Z | running (D1280) |
-| fsd-bi-b01-772403 | D1280 → I1280 | 11:52:52Z | running (D1280) |
-| fsd-bi-b01-772503 | D1280 → I1280 | when the first queue ends | not launched |
+| fsd-bi-b01-772203 / 772303 / 772403 | D1280 | 11:52Z | complete, collected under `fits/` |
+| fsd-bi-b01-772203-I1280 | I1280 | 12:38:30Z | running |
+| fsd-bi-b01-772303-I1280 | I1280 | 12:38:42Z | running |
+| fsd-bi-b01-772403-I1280 | I1280 | 12:38:46Z | running |
+| fsd-bi-b01-772203-FLAT | FLAT | 13:02:49Z | running |
+| 772503-D1280, 772303-FLAT, 772403-FLAT, 772503-I1280, 772503-FLAT | | as slots free | pending, in that order |
 
-Status: `agent-task status <handle>` on the node; a per-fit `summary.json` is
-complete only with `status: complete` plus exit 0 in `block_<seed>_queue.jsonl`
-(the early `summary.json` is the runner's setup publication). Ordinary plans
-1,800 s (D1280) and 4,000 s (I1280) per fit; three concurrent fits stretch them.
+At most four concurrent fits (measured peak RSS about 2.8 GiB per fit; the node has
+15.8 GiB). Status: `agent-task status <handle>` on the node; a per-fit `summary.json`
+is complete only with `status: complete` plus exit 0 in `block_<seed>_queue.jsonl`
+(the early `summary.json` is the runner's setup publication). Ordinary plans 1,800 s
+(D1280, observed about 2,640 s with three concurrent), 4,000 s (I1280), 1,200–1,600 s
+(FLAT, unmeasured).
 
-## Dependent work held (AGENTS §3)
+## FLAT correction (closed)
 
-The FLAT arm deviates from the decision's "switch-selected long k" (`k = 10`;
-true reason: `config.k` is also the truncated-BPTT chunk length, card §8). The
-correction note must be returned to `portfolio:cross_direction` before FLAT
-launches, and that key is stuck at `DIRECTION_VERIFIED` because the Codex-side
-`archive_delivered_claude_request.py` raises `KeyError: 'direction_id'` on
-records carrying only `direction_ids`. **Owner decision needed**: approve a
-manual registry reconciliation or a Codex-side script fix (or rule on the
-deviation directly as `OWNER_DIRECT`). After the answer: `BLOCK.sh <W> SEED FLAT`
-for the four seeds through `hmasd-experiment-operator`.
+The k = 10 deviation was returned to `portfolio:cross_direction` and confirmed as
+option 1 ([decision](../../portfolio/decisions/2026-09-15-fsd-flat-k-correction.md),
+[intake](../../portfolio/pro_packets/20260915_fsd_flat_k_correction/INTAKE.md)). GAP_D
+and GAP_I are untuned package gaps, never headroom. The registry key was archived by the
+transport after the round; the Claude-side bind script still lacks the singular
+`direction_id` write (fix pending in `docs/Claude_docs/changes/2026-09-15-control-plane-changes.md`),
+but the portfolio record now carries the field, so later rounds on that key archive
+normally.
 
 ## Reduce
 
@@ -55,18 +61,21 @@ After the available summaries: `reduce --summaries <summary.json…>
 --historical-factorial-summary docs/research/candidates/flexible_skill_duration/interruption_batch_b01_20260914/RESULT_SUMMARY.json
 --output-root <reduce root>`. With FLAT missing, SI1280 and the rollout-5
 accumulation are computable; GAP_D/GAP_I report `incomplete`. Do not intake GAP
-readings from a partial factorial.
+readings from a partial factorial; with all twelve summaries the intake reports SI1280
+(importance and uncertainty separately) and both GAPs.
 
 ## Commits on codex/fsd (all integrated into main at writing)
 
 `dc4dbdfcd` (review corrections, launch sha), `ead3ab1bf` (intake addendum),
-`5b698cad6` (launch record), this handoff.
+`5b698cad6` (launch record), `7a34308e3` (handoff), `550ef2f0a` (correction request
+bound), `2ea0ed993` (D1280 evidence, I1280 relaunch), `8d76569178` (Pro's correction
+response), then the correction intake/decision/launch-record commit (see `git log`).
 
 ## First resume step
 
-Run the status check; for each finished queue collect `summary.json`,
-`whole_command_resources.json`, `admission.json` and the queue jsonl into the
-evidence folder (`hmasd-experiment-tracker`); launch 772503 when the first
-queue ends (operator, arms `"D1280 I1280"`); when all eight D/I fits are
-complete run `reduce` and write the intake for SI1280 with GAP marked pending
-FLAT.
+Run the status check (Monitor or `hmasd-experiment-tracker`); collect every finished
+fit's `summary.json`, `whole_command_resources.json`, `admission.json`, queue markers and
+task log into `fits/<seed>_<arm>/`; launch the next pending element through
+`hmasd-experiment-operator` whenever fewer than four fits run (order above); when all
+twelve summaries exist run `reduce` and write the intake (SI1280 primary, GAP_D/GAP_I,
+rollout-5 accumulation) with the Chinese brief.

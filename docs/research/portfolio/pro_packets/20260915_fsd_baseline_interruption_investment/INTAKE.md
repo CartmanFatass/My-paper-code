@@ -89,3 +89,12 @@ hub.
   `dc4dbdfcd` on `hmasd-wsl-node`, three block queues concurrent then the fourth;
   handles and receipts in the evidence folder's `EXECUTION.md`. FLAT queues
   (four fits) follow at the same source bytes after the node's answer.
+
+## Correction confirmed (2026-09-15 12:55Z, appended)
+
+`portfolio:cross_direction` confirmed option 1: FLAT stays at `k = 10`
+([decision](../../decisions/2026-09-15-fsd-flat-k-correction.md),
+[intake](../20260915_fsd_flat_k_correction/INTAKE.md)). The "headroom record" phrase
+above reads "untuned package gap" (GAP_D/GAP_I, no MEI, not §11.7 headroom). The FLAT
+arm became independent work at 12:55Z; first FLAT fit launched 13:02:49Z at
+`dc4dbdfcd` (`EXECUTION.md`).
