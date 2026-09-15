@@ -1,0 +1,60 @@
+{
+  "preserved_utc": "2026-09-15T09:16:00.702962+00:00",
+  "canonical_archive_root": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vap_folr_core\\20260915_augmentation_repeat_b01_result_review",
+  "file_count": 8,
+  "members": [
+    {
+      "path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vap_folr_core\\20260915_augmentation_repeat_b01_result_review\\AGENTIFY_CLEANUP_RECEIPT.json",
+      "archive_name": "AGENTIFY_CLEANUP_RECEIPT.json",
+      "bytes": 399,
+      "sha256": "a5d9716f5223885311326e39c001f10553328ec388e559091d16950d80b65287"
+    },
+    {
+      "path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vap_folr_core\\20260915_augmentation_repeat_b01_result_review\\DELIVERY_COMMENT.json",
+      "archive_name": "DELIVERY_COMMENT.json",
+      "bytes": 1884,
+      "sha256": "13bbd81be74b9efdfbada5ba474be61a4a19f0356d9ac00c5a823a5e79e265a8"
+    },
+    {
+      "path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vap_folr_core\\20260915_augmentation_repeat_b01_result_review\\GITHUB_RESPONSE.md",
+      "archive_name": "GITHUB_RESPONSE.md",
+      "bytes": 35752,
+      "sha256": "3862c370bd914de2317822e6529c11b438eec18bda22e57334039b24a7834ee1"
+    },
+    {
+      "path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vap_folr_core\\20260915_augmentation_repeat_b01_result_review\\PACKET_MANIFEST.json",
+      "archive_name": "PACKET_MANIFEST.json",
+      "bytes": 1855,
+      "sha256": "1d356437b7e2c338a4e769c7523a7112fb560dc66a3a0061fee9b9e74767e8f3"
+    },
+    {
+      "path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vap_folr_core\\20260915_augmentation_repeat_b01_result_review\\PREFLIGHT.json",
+      "archive_name": "PREFLIGHT.json",
+      "bytes": 5037,
+      "sha256": "7b38e574d6ea8814a22a5016337dad8ddc369ba97c76e06f4a352b5ee52f14fd"
+    },
+    {
+      "path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vap_folr_core\\20260915_augmentation_repeat_b01_result_review\\PROMPT_BODY.md",
+      "archive_name": "PROMPT_BODY.md",
+      "bytes": 1935,
+      "sha256": "64cda1e97d0c67bf7b5ff637e81426fd2ede48e586683787e40d1ab368f54e36"
+    },
+    {
+      "path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vap_folr_core\\20260915_augmentation_repeat_b01_result_review\\RESPONSE.md",
+      "archive_name": "RESPONSE.md",
+      "bytes": 131,
+      "sha256": "bb586c55dd8ce0ebcadfa31b69f8ecc3ed57097d87d9c43d7c901aeab1ee9e3d"
+    },
+    {
+      "path": "C:\\Projects\\HMASD\\temp\\sessions\\hmasd-chatgpt-pro-transport\\archive\\vap_folr_core\\20260915_augmentation_repeat_b01_result_review\\TRANSPORT_FACTS.json",
+      "archive_name": "TRANSPORT_FACTS.json",
+      "bytes": 5439,
+      "sha256": "9065fb903870a94b0cbff0aed9511bdab6ec4da76e8dad056fd9b6c57d5f2faa"
+    }
+  ],
+  "archive_bytes": 17054,
+  "archive_sha256": "757b437d243ffe61986406b0fc2fbe6b1091d653f331772fb820b24871774682",
+  "all_members_readback_verified": true,
+  "canonical_root_retained": true,
+  "cleanup_record": "AGENTIFY_CLEANUP_RECEIPT.json is later than TRANSPORT_FACTS staged pending cleanup; exact owned tab closed"
+}

@@ -51,8 +51,13 @@ Monitor active set and empirical pending count are0. A preserved zero-learner
 startup failure/manual repair adds no scientific retry. [E0 evidence](FOLR_ENTITY_AUGMENTATION_REPEAT_B01_RESULT_EVIDENCE_20260915.md)
 and [full intake](FOLR_ENTITY_AUGMENTATION_REPEAT_B01_INTAKE_20260915.md) record
 the matched low-confidence category prediction, limits and measured costs.
-Only this object's independent result review, retention/necessary cleanup and
-owner pause handoff remain; no successor discriminator is selected.
+The [complete independent result review and DM response](pro_packets/20260915_augmentation_repeat_b01_result_review/INTAKE.md)
+find no invalidating defect and preserve the result with retry/cost qualifications.
+Review, support preservation and assigned cleanup are complete, including honest
+retention of policy-rejected local scratch. The
+[owner-pause handoff](HANDOFF_20260915_AUGMENTATION_REPEAT_OWNER_PAUSE.md) records
+no active experiment, Monitor, provider or Transport work. This direction is now
+operationally owner-paused; no successor discriminator is selected.
 
 **Owner-resumed 2026-09-14:** the explicit instruction to restore subagent DM
 control and continue supersedes the older operational pause below. The preceding complete
@@ -105,14 +110,16 @@ now fixes four original G1/A1/G2/A2 calls at training781901/782001 and final
 evaluation1781901/1782001,5000/4969/128 each. Its ordered two-block differences
 and descriptive-only mean preserve all outcomes without pooling discovery data.
 Source797596454 has independent binding/publication review and27 focused cases
-accepted; the only failure was a repaired test fixture, with scientific source
-unchanged. Block1 is complete: A-4.4296875/G1.4009375, d1-5.830625,
-G_ABOVE_MEI, each5000/4969/128. This new direct block challenges reliance on
-the old isolated positive, while the full two-block pattern remains unavailable.
+accepted; the focused suite's sole failure was a repaired test fixture, with
+scientific source unchanged. At the earlier block1 intake, A-4.4296875/G1.4009375,
+d1-5.830625 was G_ABOVE_MEI, each5000/4969/128. That direct block challenged
+reliance on the old isolated positive; at that boundary the full two-block
+pattern was not yet available. The complete current pattern is reported above.
 The first A1 supervisor
 failed before its child command because its output directory was not prepared;
-a bounded marker check confirmed zero learner exposure, and the intact failure
-is retained. Manual directory preparation repaired that defect. The original
+the failure/error, wrapper ordering and bounded marker check support zero
+learner exposure, and the intact failure is retained. Manual directory preparation
+repaired that defect. The original
 A1 learner completed under preserved-record handle suffix-start2, with unchanged
 797596454/source/parameters. Its wall3807.79s exceeds the ordinary3600s plan,
 which was not a cap. G2 is complete at full exposure with mean0.208046875;

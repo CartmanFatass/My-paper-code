@@ -32,13 +32,19 @@ is WITHIN_MEI with a negative sign. Mixed names different threshold categories,
 not opposite signs. Descriptive mean d=-2.9702734375 does not override the rule.
 
 The preserved first A1 supervisor failed before its child/admission/learner after
-DM omitted an output directory. A bounded recorded marker check confirms zero
-learner exposure. Manual startup repair1 preserved that six-member failure
+DM omitted an output directory. The failure/error and wrapper ordering, together
+with the bounded recorded marker check, support zero learner exposure; the check
+reproduces utility behavior rather than the original process. Manual startup
+repair1 preserved that six-member failure
 archive, source/parameters and all four original learning endpoints; scientific
 retry0. Five supervisors therefore correspond to four actual learners. This is
 a real engineering defect and repair, not a negative result or hidden retry.
-All actual learners finish exit0. Native measured wall11218.37s/CPU11216.40s;
-A1 exceeded its non-cap3600s plan by207.79s. Full support/provider/lifetime cost
+All actual learners finish exit0. Measured wall11218.37s/CPU11216.40s are sums
+over the four completed learner invocations. The failed startup runtime is
+unmeasured; neither its uptime nor the marker duration fills that gap. The raw
+exposure-line retry shorthand means zero scientific retries, alongside one
+manual pre-learner startup repair/five supervisor acceptances. A1 exceeded its
+non-cap3600s plan by207.79s. Full support/provider/lifetime cost
 remains unknown. No frozen hard-cap/scope breach is identified. Independent
 engineering source review and27 focused cases precede scientific acquisition;
 that technical acceptance is distinct from this scientific intake.
@@ -122,13 +128,23 @@ bounded result and finish its required review/preservation/cleanup. OWNER_DIRECT
 completion-then-pause controls the next action; CONTINUE/MEDIUM and family OPEN
 remain scientific context, not permission to launch a successor during pause.
 The next empirical discriminator is intentionally unselected pending an explicit
-resume. Current pending work is only this result review and support/cleanup.
+resume. The initial result review and support/cleanup are now complete; the
+actual final state is the owner-pause handoff linked below.
 
 ## Independent result review and closeout
 
-Pending at initial intake publication. Full response intake, concrete corrections
-or residual findings, retained evidence and actual cleanup/pause handoff will be
-linked here without rewriting the frozen result or inventing a future decision.
+Complete response b3f866e0d0f8c5f618dd6deab05d66e71ea83bbe,156 lines/35752 bytes,
+was read in full and verified against the immutable Git blob, original Transport
+bytes and actual Issue15 delivery comment. The
+[full review intake and DM response](pro_packets/20260915_augmentation_repeat_b01_result_review/INTAKE.md)
+find no invalidating defect or unresolved material finding. Required corrections
+qualify scientific retries versus startup repair, identify cost sums as the four
+completed learner invocations with failed-startup runtime unmeasured, and mark
+DIRECTION's block1 status explicitly historical. No scientific source/result,
+frozen rule, empirical count or lifecycle changes. All Transport support is
+preserved and its owned tab closed. The
+[completed owner-pause handoff](HANDOFF_20260915_AUGMENTATION_REPEAT_OWNER_PAUSE.md)
+records the actual terminal state and preserved cleanup blocker.
 
 ## Preservation and actual reclamation
 
@@ -144,5 +160,5 @@ its checks/deletion did not execute. A separate read-only comparison verifies
 all9 local files still match their preserved bytes. LOCAL_CLEANUP_BLOCKER.json
 records retention without a second attempt or alternate removal. Prior rejected
 roots and all Pro archives remain. Cleanup changes no polarity, exposure or
-scientific budget. Required independent review is the remaining external producer;
-no successor is selected or permitted by this owner-pause closeout.
+scientific budget. The required independent review is now complete and taken in;
+no pending external producer or successor remains at this owner-pause boundary.

@@ -37,6 +37,10 @@ There are four separate fitted programmes, two per arm, and two contrast blocks.
 All four outcomes are included in prospectively fixed G1,A1,G2,A2 order. There
 is no screened label, extra initial evaluation, selected checkpoint, historical
 endpoint substitution, fifth learner, scientific retry or post-result arm change.
+There were five supervisor acceptances and one manual pre-learner startup repair.
+The original STUDY_READBACK exposure shorthand `0 screening/retry/checkpoint
+selection` means zero scientific retries; it does not erase that startup repair.
+Its original bytes remain unchanged; current prose carries this qualification.
 
 A is the original AUGMENTED_PERSISTENT whole programme, with observer-subject
 entity GRU16 plus Generic64/history/fusion; G is original GENERIC_RETAIN64 with
@@ -82,7 +86,9 @@ capability, not a fabricated intermediate adoption. The Monitor active set is em
 
 Each invocation passed a new destination-adjacent4GiB admission. Exact measured
 physical/effective bytes are15606669312,14674436096,14543785984,15615676416.
-Native wall sums11218.37s and CPU11216.40s; peak max863732 KiB. A1 was207.79s
+Measured sums over the four completed learner invocations are wall11218.37s
+and CPU11216.40s; peak RSS max863732 KiB. The failed startup runtime is unmeasured,
+so these are not all five attempts' full costs or study elapsed. A1 was207.79s
 above its ordinary3600s plan; the other arms and summed wall remain below the
 ordinary references. Those plans were explicitly not caps or kill lines. This
 is no hard-cap breach, controlled efficiency estimate or full-cost measurement.
@@ -93,8 +99,11 @@ There were five supervisor acceptances, including the first A1 supervisor
 omitted output-directory preparation before GNU time opened its log. The full
 six-member failed-supervisor archive remains preserved. A two-command nonlearning
 marker check reproduced125 with no child execution and succeeded after directory
-creation (0.002735s). Thus no child/admission/learner/tick/update occurred in that
-failure. Manual preparation repair1 is reported; scientific retry0. The corrected
+creation (0.002735s). Together with the original failure/error and wrapper ordering,
+this supports zero child/admission/learner/tick/update exposure for that failure.
+The check reproduced utility behavior, not the original process, and its duration
+is not failed-startup or total-support runtime. Manual preparation repair1 is
+reported; scientific retry0. The corrected
 original A1 kept source/parameters/output and a new supervisor suffix preserved
 the failed original. G2/A2 directory preparation prevents the same defect.
 
@@ -133,3 +142,16 @@ This E0 preserves observed validity separately from the required object-only
 independent result review, support retention and cleanup, which are pending at
 initial publication. No further scientific invocation is selected or authorized;
 the owner requires a safe operational pause after this object's closeout.
+
+## Independent review and completed closeout
+
+The complete response at b3f866e0d0f8c5f618dd6deab05d66e71ea83bbe found no
+result-invalidating defect and preserves the exact ordered MIXED_BLOCK_PATTERN.
+DM read the complete response, accepted its bounded source/access limits and
+applied the retry/cost and historical-status clarifications above. See the
+[full review intake](pro_packets/20260915_augmentation_repeat_b01_result_review/INTAKE.md).
+Original source, card, machine outputs and primary values remain unchanged.
+Actual preservation, remote reclamation, local policy retention and completed
+Transport archival are recorded in the
+[owner-pause handoff](HANDOFF_20260915_AUGMENTATION_REPEAT_OWNER_PAUSE.md).
+No successor is selected; the direction is operationally paused by owner instruction.
