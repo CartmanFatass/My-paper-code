@@ -1,0 +1,120 @@
+{
+  "caller_role": "em",
+  "workflow_node": "em_convergence",
+  "execution_mode": "REUSE_DM_TRANSPORT",
+  "request_id": "2026-09-14-trdl-b01-result-review-01",
+  "source_thread_id": "/root/dm_trdl_vacancy_20260914",
+  "parent_thread_id": "/root/dm_trdl_vacancy_20260914",
+  "operator_thread_id": "/root/dm_trdl_vacancy_20260914/tr_lh_trdl_b01",
+  "direction_ids": [
+    "tail_return_distributional_learning"
+  ],
+  "repository": "CartmanFatass/My-paper-code",
+  "repository_url": "https://github.com/CartmanFatass/My-paper-code",
+  "commit_or_ref": "9e8ea42b0efe6e86bb5cc9fec9feca90c5bd1d38",
+  "scientific_question": "Provide the full scientific/specification review purchased with TRDL-B01. The native same-tail-objective pair is complete: Q32 minus SCALAR own64-lowest-of256 J=+0.034563468063512404 (MEI.01), ordinary mean+0.0516480640352901, one fitted instance per method. Does this support the bounded development reading, and which next discriminator is most useful: one independent same-recipe pair, retaining the simpler scalar/no further numerical development of this recipe, or a concrete baseline-competence/component-control preparation? DM recommends preparing one fresh matched pair (master9602, identical512train/256eval/H256/128Adam and scientific laws) to address unmeasured training realization; replication alone cannot isolate representation or establish tuned baseline competence. New facts are the complete result,395.64s summed native wall, nonzero learner movement, and every preclip norm below.5. There is no new invocation grant. Critique this concrete choice and strongest scalar countercase; do not turn this B signal into stable superiority or require a stronger unrequested class.",
+  "deliverable": "Return the complete B result-and-plan scientific review: whether the fixed rule and bounded reading fit the evidence; strongest surviving scalar/package/training-realization explanation; most useful next discriminator and why its known work is justified; and concrete scientific/spec conflicts. Distinguish direct observations from inference and baseline competence/independent replication/component attribution. Scope is scientific review and prospective preparation within the registered question, not new Portfolio investment, lifecycle, priority/capacity, C promotion or code/execution authority. Preserve B01 laws/all outcomes; no new fit or per-step Root/owner permission. If a stronger future claim needs another comparison, name that claim and consequence rather than invalidate this B for lacking it. State actual source access/gaps and deliver only the fixed response/comment.",
+  "claim_ceiling": "One paired training instance and whole-package B development observation. No training-population interval/stable ranking, pure representation/credit cause, scalar-class inadequacy, exact/unbiased CVaR, tuned headroom, expected-return-objective superiority, novelty, safety, transfer or K-axis attribution. Source/count validation is not independent empirical replication.",
+  "reference_files": [
+    {
+      "path": "docs/research/candidates/tail_return_distributional_learning/TRDL_B01_SCIENCE_CARD_20260914.md",
+      "purpose": "Complete fixed B design, original own-arm tail primary/MEI/RNG/learner laws; status annotations changed, scientific laws did not.",
+      "provenance": "Accepted card; one paired training instance."
+    },
+    {
+      "path": "docs/research/candidates/tail_return_distributional_learning/TRDL_B01_RESULT_EVIDENCE_20260914.md",
+      "purpose": "Complete E0: native observation, counts/movement/costs, receipts, strongest countercase and archive pointer.",
+      "provenance": "DM evidence; conformance is distinct from inference."
+    },
+    {
+      "path": "docs/research/candidates/tail_return_distributional_learning/TRDL_B01_INTAKE_20260914.md",
+      "purpose": "Complete intake, verbatim reading rule, prediction, owner flags and next-discriminator options.",
+      "provenance": "Outcome-informed preparation recommendation, not new investment."
+    },
+    {
+      "path": "docs/research/candidates/tail_return_distributional_learning/trdl_b01_9601/PAIR_SUMMARY.json",
+      "purpose": "Complete512 final returns, own-arm tails, means and registered branch.",
+      "provenance": "Post-collection reduction over two originals, not independent retraining or uncertainty interval."
+    },
+    {
+      "path": "docs/research/candidates/tail_return_distributional_learning/trdl_b01_9601/VALIDATION.json",
+      "purpose": "Counts/checkpoint/eta/gradient/cost verification and archive preservation facts.",
+      "provenance": "Recorded-array/checkpoint checks without construction/native calls; no mandatory binary audit."
+    },
+    {
+      "path": "docs/research/candidates/tail_return_distributional_learning/TRDL_B01_INDEPENDENT_REVIEW_20260914.md",
+      "purpose": "Full source review, two P2s and same-Reviewer repair return.",
+      "provenance": "Read-only review, not independent empirical evidence."
+    },
+    {
+      "path": "docs/research/candidates/tail_return_distributional_learning/DIRECTION.md",
+      "purpose": "Current accepted mechanism science and scalar-sufficiency alternative.",
+      "provenance": "Lifecycle remains ACTIVE/MEDIUM/recasts0 under prior Portfolio."
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260914_trdl_b01_investment/archive/RESPONSE.md",
+      "purpose": "Sections3-6: two-original allocation, full scientific response, adjustable plans and no automatic successor.",
+      "provenance": "Complete investmentd23; its numerical originals are complete. This review is allocated support."
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "purpose": "Apply sections4,7,11.4,11.7-11.11: bounded B, MEI/headroom, independent units, proportionality and current calibration.",
+      "provenance": "Current owner-approved spec; no universal baseline/pilot/seed/interval prerequisite.",
+      "commit_sha": "d862c9c690ca8d41c3999bc04858895bc280384f"
+    },
+    {
+      "path": "docs/research/portfolio/TWO_AXIS_RESEARCH_PROGRAMME_20260914.md",
+      "purpose": "Sections3-6: baseline competence, independent replication and component attribution distinctions and preparation priority.",
+      "provenance": "Owner-approved revision, not extra TRDL grant or wholesale external-draft authority.",
+      "commit_sha": "d862c9c690ca8d41c3999bc04858895bc280384f"
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/FOUNDATIONS.md",
+      "purpose": "Sections2-4 and6: actor/critic legality, finite trained package versus representation sufficiency and empirical inference.",
+      "provenance": "Explanatory knowledge, no separate gate."
+    },
+    {
+      "path": "docs/rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md",
+      "purpose": "Randomization/units and whole-method comparison passages.",
+      "provenance": "Conditional evaluation does not create independent training evidence."
+    },
+    {
+      "path": "experiments/candidates/tail_return_distributional_learning/trdl_b01/learner.py",
+      "purpose": "Frozen_batch/update/tail_score/pinball/models/action_generator and endpoint/contrast.",
+      "provenance": "Accepted0874 source unchanged here; inspect scientific target/RNG/primary, no execution."
+    },
+    {
+      "path": "experiments/candidates/tail_return_distributional_learning/trdl_b01/study.py",
+      "purpose": "Fixed loops, final checkpoint/evaluation, phase/full cost distinction and publish_pair.",
+      "provenance": "Accepted0874 source; no re-execution requested."
+    },
+    {
+      "path": "AGENTS.md",
+      "purpose": "Sections2/4.8/5 for decision tiers, owner resume, finite allocation versus lifecycle and new investment authority.",
+      "provenance": "This em review grants no Portfolio investment or slot release."
+    }
+  ],
+  "constraints": [
+    "Machine-checked actual exposure:2freshoriginalfits; each512train+256solefinalH256/128jointAdam atlr.0003; pair393216scoredticks/256updates. Actor34902trainable each; critic34305/38304. ActorL2 displacement1.229894995689392/1.3208191394805908, critic.5683510899543762/1.1893601417541504. No native validation/pilot/retry/extraeval. Consultation adds0fits/native/optimizer calls; A01 remains historically0.",
+    "Own tails.08521000753530991/.11977347559882232; means.14086419139155873/.19251225542684883.55/256 common-reset sampled rows are lower underQ32; all512returns preserved. Do not sort paired differences or use ordinary-mean SE as tail uncertainty.",
+    "Strongest null is adequate scalar conditional W sufficiency. Targets/losses/fitting/PPO and training/action realization remain alternatives. Observed maximum preclip norms.21656954288482666/.1387568861246109 below.5 exclude actual clipping-threshold activation here, without identifying a unique remaining cause or adequate critic.",
+    "Whole native wall197.99/197.65s, sum395.64s; approximately212s overlapping supervisor span; peakRSS655784/655900KiB. Full support/provider/maintenance costs incomplete.900/1800/1200/3000 initial plans were not hard caps;7200s prospective watchdogs never reached. Unknown future costs do not require another experiment.",
+    "Proposed preparation only: master9602 one independent pair, same512train/256eval/H256/128Adam each, own tails/MEI.01. Again393216ticks,256Adam,524288criticcontexts/arm and16777216Q32pinball terms; no nested search/counterfactual/32x32 target grid. Existing walls are planning references, not guaranteed future/full cost. No9602 model/seed/code adaptation/grant. Fresh numerical investment belongs to Portfolio/owner.",
+    "Apply current\u00a711.11 without changing completed B, justified localMEI.01 or ACTIVE/MEDIUM/recasts0. Baseline competence, replication and attribution are distinct. No universal pilot/power/5seed/2SD/exactdiagnosis prerequisite. Reuse A01 primary-paper reading as attributed evidence; no new novelty search.",
+    "Two independent-review P2 closeout/scope findings were repaired/resolved before launch.8focused contract cases,11.8756571s support test wall; these are notsciencefits. A demonstrated defect limits its dependent claim. No code/control operation or evidence deletion is requested.",
+    "Interpret generic node continue/park/close/recast wording within this explicit bound scope: scientific reading and current recipe/family continuation plus next-evidence preparation. Any whole-direction Portfolio lifecycle or new investment recommendation is unasked advice, not an applied disposition. No new authority is created by a template sentence."
+  ],
+  "response_schema": [
+    "Complete B result reading/conformance, decisive reason and strongest countercase.",
+    "Justified next-discriminator preparation, known work and limits, without implicit new investment/lifecycle.",
+    "Actual source access/gaps; scoped immutable response/comment."
+  ],
+  "delivery_mode": "github_delivery",
+  "github_delivery": {
+    "branch": "codex/trdl",
+    "base_sha": "9e8ea42b0efe6e86bb5cc9fec9feca90c5bd1d38",
+    "response_path": "docs/research/candidates/tail_return_distributional_learning/pro_packets/20260914_b01_result_review_v2/archive/RESPONSE.md",
+    "issue_url": "https://github.com/CartmanFatass/My-paper-code/issues/21"
+  },
+  "direction_id": "tail_return_distributional_learning"
+}
