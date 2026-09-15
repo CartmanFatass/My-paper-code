@@ -39,3 +39,22 @@ full scientific intake and complete result review follow the fixed study.
 Prepare cleanup inventory during collection, preserve unique source/evidence,
 and reclaim only the assigned terminal resources after Root retention. Current
 and historical policy-rejected local roots remain retained without another attempt.
+
+## First original G1 invocation accepted
+
+G1 was accepted2026-09-15T04:40:52.089036Z, handle
+folr-augmentation-repeat-b01-781901-generic, supervisor PID3707528. Source
+remains7975964542b83560cbc0e79f74a9212f8e3737af with clean tracked status.
+The exact command was read from published b27d35cf6 COMMANDS.json, whose bytes
+hash to717668997af372b45569ed5614c428dfb8d81f7cdf6a4e08da462d4940fc39d0.
+The staged wrapper matches the execution source. Destination-adjacent admission
+at04:40:52.106767Z passed with physical/effective15606669312 bytes against
+4294967296. BLOCK1_GENERIC_LAUNCH_RECEIPT.json preserves native acceptance,
+exact argv, initial running status and admission; no endpoint is inferred yet.
+
+The original terminal-only Monitor is resumed for G1 alone, with actual local
+state path C:/Projects/HMASD-worktrees/codex-vap-folr/temp/directions/vap_folr_core/exp/entity_augmentation_repeat_b01_781901_782001/block1/generic/MONITOR_STATE.json.
+Dispatch is not proof of an intermediate direct adoption. Its declared actual
+capability/native-final method and terminal evidence will be recorded on return.
+A1/G2/A2 remain the selected, not-yet-accepted original calls; zero retry or
+post-result extension is introduced. DM now waits on G1 after independent work.
