@@ -1,7 +1,9 @@
 # FSD restart — current preparation and reading application
 
-**Direction preparation resumed under OWNER_DIRECT 2026-09-14. No new training,
-evaluation, model construction or scientific handle has started.**
+**Direction resumed under OWNER_DIRECT 2026-09-14. The complete Portfolio
+decision now funds F (eight original fits plus necessary support), and DM
+implementation is next. No training, evaluation, model or scientific handle
+has started at application.** See the [complete investment intake](../../portfolio/pro_packets/20260914_fsd_interruption_batch_investment/INTAKE.md).
 
 ## Assignment and actual boundary
 
@@ -181,6 +183,9 @@ Current activity is document/source preparation. New models, RNG/learner creatio
 environment steps, optimizer calls, evaluations, profiling, tests, scientific
 invocations and native experiment handles are all zero. Pro Sends were zero in
 the published preparation; current transport state is in the dispatch record.
+The complete immutable response `ca27db8d5` subsequently selected F; its linked
+investment intake applies that grant and releases the shared writer. The earlier
+zero-grant statements above record the preparation boundary, not a current restriction.
 Engineering Scope §4: none
 needed by this documentary assignment. Documentation effort is unmetered, not free.
 Root receives this reading/application event and maintains shared tracking; no Root

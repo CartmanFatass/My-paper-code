@@ -1,13 +1,14 @@
 Claim under test: at the accepted early-training Scenario1 exposure, enabling individual policy-gap renewal can change native return beyond the effect of the coordinator's larger joint-row batch.
 Binding MARL structure: (b) temporal abstraction or termination; asynchronous skill boundaries change the joint rows and valid credit heads used to train the shared coordinator.
 
-# FSD interruption × batch B01 — finite investment proposal
+# FSD interruption × batch B01 — allocated finite experiment
 
-**B/EXPLORE proposal; no empirical invocation is allocated or launched.**
-DM recommends two independent four-arm blocks (eight fresh fits). A two-block,
-two-arm high-batch comparison is the smaller investment alternative. The
-[owner restart](../../portfolio/decisions/2026-09-14-owner-fsd-restart.md) restores
-preparation and the working direction; it does not fund either alternative.
+**B/EXPLORE: F is allocated by complete Portfolio decision; no fit has launched
+at application.** Two independent four-arm blocks (eight fresh original fits)
+and necessary implementation/acceptance/intake work are selected in the
+[applied investment](../../portfolio/decisions/2026-09-14-fsd-interruption-batch-investment.md).
+The fixed submitted version at `cbdac09d5` remains the prospective design evidence.
+The owner restart separately restored preparation and the working direction.
 
 ## 1. Decision and source of the new question
 
@@ -193,9 +194,9 @@ handling and no episode-as-training-replicate path. Required independent high-ri
 review covers changed scientific/configuration/RNG/primary semantics; DM accepts
 and repairs directly. No model-bearing smoke, extra performance panel, profiler,
 all-history replay or blanket suite is a preparation/launch prerequisite.
-Engineering Scope §4: none needed. No new implementation/test work is yet allocated
-by this prospective card; the finite investment request includes its necessary
-bounded implementation/check/review/collection and preservation work.
+Engineering Scope §4: none needed. The applied F investment includes the necessary
+bounded implementation/check/review/collection and preservation work. No additional
+model-bearing test or empirical invocation is implied.
 
 Same-host baseline preparation proceeds with this design. The existing baseline
 record is exposure/integrity-only and gives no tuned headroom. `hmasd/baselines.py`
@@ -217,16 +218,17 @@ lower cost, but no batch attribution, low-batch or interaction conclusion.
 N: decline this empirical allocation while the DM completes the separately bounded
 same-host baseline design preparation; no lifecycle/default change, no fresh fits.
 
-The only unresolved Portfolio choice is this finite new investment. Renewal/batch
+Portfolio has selected F for this finite new investment. Renewal/batch
 controls are object-tier choices inside the accepted native individual-renewal
 mechanism. I128 is a predeclared comparator in a new factorial question, not another
 unchanged early-pair extension under P74. No new family, recast or specification
-exception is proposed. The DM can submit this request directly once the actual
-shared Portfolio writer is free. Root integration/ACK is not an execution gate.
+exception is proposed. The DM executes the complete conforming F decision directly.
+Root integration/ACK is not an execution gate.
 
-At preparation: new fits/models/environment steps/optimizer calls/evaluations=0;
-tests/profiling=0; Pro Sends=0. Current source/document reads and prospective
-configuration arithmetic create no empirical result. No numerical reanalysis of
-the historical primaries was performed. Next: publish the finite request and dispatch
-after the actual shared writer releases, then intake its complete Portfolio decision
-and continue the authorized work directly.
+At the original preparation: new fits/models/environment steps/optimizer calls/
+evaluations=0; tests/profiling=0; Pro Sends=0. The subsequent single accepted request
+is completely archived and intaken; all empirical counts remain zero at application.
+Current source/document reads and prospective configuration arithmetic create no
+empirical result. No numerical reanalysis of historical primaries was performed.
+Next: implement the minimal selected bindings/reducer, complete focused acceptance
+and independent high-risk review, then execute the selected originals directly.
