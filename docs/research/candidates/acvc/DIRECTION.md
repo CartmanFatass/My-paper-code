@@ -1,5 +1,30 @@
 # Direction acvc: ACVC
 
+## B02 result: WITHIN_MEI on the second instance; the two instances disagree — 2026-09-15 23:05Z (G2 consumed; result review with em:acvc:convergence)
+
+The one granted second fit (MASTER 28631 / namespace 38631, handle
+`acvc-transfer-m-b02-28631-c006c0b24`, native wall 989.80 s alone on the node) is complete and
+accepted ([E0](ACVC_M_DEPLOYMENT_TRANSFER_B02_RESULT_EVIDENCE_20260915.md),
+[intake](ACVC_M_DEPLOYMENT_TRANSFER_B02_INTAKE_20260915.md), ledger row 36). Unrounded
+T_F,2 = F(M_2) − M_2 = **+.002859 J**, 41/22/1 worlds favorable/adverse/zero, conditional SE .0033:
+the card's **WITHIN_MEI** branch. Supporting T_D,2 = +.002678 J and paired U_2 = +.000182 J, both
+WITHIN_MEI (35/64 and 42/64 favorable): on this instance the F and dwell packages are
+indistinguishable at the point scale. Absolute panels M_2 .4292 / F(M_2) .4321 / own-dwell(M_2)
+.4319 J; counters 6,510 retraces / 5,037 dwells, all distinguishable; world 46 (no opportunity)
+identical across panels. Displayed per instance beside B01 (T_F +.018338 J TRANSFERS, 53/11/0): the
+MEI-sized increment did not recur; the design claims recurrence or discrepancy and discrepancy was
+observed; no pooled verdict, majority rule or population mean; B01's reading stands as recorded.
+DM Briers T_F,2 .665 (modal TRANSFERS did not occur), T_D,2 .465. No stable superiority, adverse
+instance, discardable C, F(C) versus F(M), tuned headroom, equivalence, mechanism, default change
+or C promotion. The two-block C/M claim is unchanged. G2 ends here (zero retries or extra fits);
+the remote worktree, staging and task record are reclaimed (CLEANUP.json). Next: a direction-tier
+result review for `em:acvc:convergence` (A record both instances and conclude the transfer family,
+stating whether any defensible next object remains, DM recommendation / B third instance / C
+matched F(C) vs F(M) / D another object); the request `2026-09-15-acvc-m-deployment-transfer-b02-result-review-01` is authored in `pro_packets/20260915_m_deployment_transfer_b02_result_review/` and its send through the transport follows this commit. ACVC stays ACTIVE/MEDIUM/recasts2, lowest
+sequencing, no producer.
+
+
+
 ## B02 granted and launched — 2026-09-15 22:35Z (Portfolio G2, PRO_FINAL / OWNER_DELEGATED)
 
 `portfolio:cross_direction` granted exactly one further independently initialised M fit at 22:20Z

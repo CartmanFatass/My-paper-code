@@ -1,0 +1,43 @@
+{
+  "completed_at": "2026-09-15T22:59:31+00:00",
+  "source_sha": "c006c0b2453a44902ebfda827099823a28e136f1",
+  "authorization": "Portfolio grant G2 (assigned cleanup within the grant); preservation verified at codex/acvc a3ae89b7b / main 6ff635920 plus the retained archive (PRESERVATION.json, member digests equal to the remote sha256sum listing)",
+  "terminal_status_before": {
+    "task": "acvc-transfer-m-b02-28631-c006c0b24",
+    "status": "finished",
+    "exit_code": 0,
+    "pid": 3754217,
+    "uptime_seconds": 1295,
+    "tmux_active": false
+  },
+  "exact_removed_paths": [
+    "/home/wu/hmasd-worktrees/acvc-transfer-b02-c006c0b24 (detached worktree at the launch sha, with its temp/directions/acvc/exp/m_deployment_transfer_b02_28631 output root)",
+    "/home/wu/hmasd-inputs/acvc-transfer-b02-28631 (on-policy staging: on-policy-source.tar and the extracted on-policy tree)",
+    "/home/wu/.agent-tasks/acvc-transfer-m-b02-28631-c006c0b24 (supervisor task record; task.log retained as task_records/acvc-transfer-m-b02-28631-c006c0b24.task_log.txt)"
+  ],
+  "receipts": {
+    "registered_before": "166",
+    "wt_exists_before": "yes",
+    "st_exists_before": "yes",
+    "task_exists_before": "yes",
+    "worktree_remove_rc": "0",
+    "prune_rc": "0",
+    "staging_rm_rc": "0",
+    "task_rm_rc": "0",
+    "wt_absent": "yes",
+    "st_absent": "yes",
+    "task_absent": "yes",
+    "registration_absent": "yes",
+    "registered_after": "165"
+  },
+  "status_after": {
+    "task": "acvc-transfer-m-b02-28631-c006c0b24",
+    "status": "not_found"
+  },
+  "not_removed": [
+    "/home/wu/projects/HMASD main checkout",
+    "other worktrees and staging directories",
+    "the two stale supervisor records vsp03-b02-p09-20260907 and vsp03-b03-p54-20260908 (not this object's)"
+  ],
+  "script": "C:/Users/fires/.claude/jobs/6210f003/tmp/cleanup_b02.sh (hub scratch; receipts above are its complete output)"
+}
