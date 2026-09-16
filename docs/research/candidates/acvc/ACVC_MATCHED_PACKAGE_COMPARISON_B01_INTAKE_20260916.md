@@ -69,3 +69,20 @@ no in-scope bounded object answers it better than consolidation); (B) a second m
 (recurrence of P; a new Portfolio investment); (C) an M-side development object without the
 wrapper (unwrapped M or dwell(M) as the package; new investment); (D) another object. No launch is
 authorised by this intake.
+
+### Result review outcome (2026-09-16 04:20Z, `em:acvc:convergence`, PRO_FINAL)
+
+Request `2026-09-16-acvc-matched-package-result-review-01` (TASK `7100c6099`, sent once 03:53:17Z, operation
+e317e2ed-484a-4ba0-8b54-29301bb3ffff); complete response at codex/acvc `f155792ae`
+([archive](pro_packets/20260916_matched_package_result_review/archive/RESPONSE.md), 12,452 B, sha256 f7d8622391d8591a18b724ddd7bdab859dc547225ae20b953ae50a1b5f29fb98;
+delivery comment 5691883160 by ChatGPT Codex Connector 04:07:13Z; all nineteen references accessed). **Selected A**:
+retain F_M_ABOVE_MEI, conclude the matched-package question at one block, no next numerical object; the lifecycle
+question returns to Portfolio carrying B (a second matched block: two fits, 2,195,456 ticks) as the defensible
+alternative. C (fresh M fit with unwrapped-M and own-dwell panels, 1,081,344 ticks) and D not selected absent a concrete
+reason. Conformance check: decides the posed question at its declared class, within the G3 grant (no new experiment),
+within the evidence spec (§11.8 proportional burden, no pooling) and current owner instructions (workflow lanes 21:03
+PDT: ACVC → CLOSE after this intake). No conflict; applied as `PRO_FINAL`. Corrections applied with dated markers in
+the E0 and DIRECTION (F(C) − M row removed from the display; two wording replacements; dwell(M) not wrapper-free).
+The DM's framing that consolidation answers the wrapper-maintenance question was corrected by the node and is
+withdrawn. Ledger row 42 (selection; real alternative B). Next: `ACVC_CLOSING_MEMO_20260916.md`, then one bundled
+Portfolio lifecycle question; no launch.

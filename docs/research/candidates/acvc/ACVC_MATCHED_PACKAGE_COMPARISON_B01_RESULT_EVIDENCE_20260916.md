@@ -78,7 +78,8 @@ Each wrapped panel counts its own history; the counts are not a matched interven
 | Transfer B01 | F(M) − M | +.018338 | TRANSFERS | 28531 / 38531 |
 | Transfer B02 | F(M) − M | +.002859 | WITHIN_MEI | 28631 / 38631 |
 | This block (support) | F(M) − M | +.004617 | WITHIN_MEI | 28731 / 38731 |
-| This block (support) | F(C) − M (not a declared support; derivable as C−M + F(C)−C) | −.010346 | (context only) | 28731 / 38731 |
+
+*Correction 2026-09-16 04:20Z (em:acvc:convergence result review, PRO_FINAL): a row "This block (support) | F(C) − M | −.010346 | (context only)" stood here; F(C) − M is excluded from this object by card §7.3 and the card review, so the row was undeclared post-result arithmetic. Removed from the fixed-result display; the original row is preserved in Git at `91f33688d`. P and the six declared supports are unchanged.*
 
 Distinct contrasts, identities, exposures and labels; nothing is appended to D1/D2 or T_F,1/T_F,2,
 no worlds are pooled across objects, no training-population mean, best instance, or new
@@ -135,12 +136,12 @@ remote reclamation: [CLEANUP.json](evidence/matched_package_comparison_b01_20260
 ## Bounded reading and predictions
 
 On this matched block the conventional-proposer package F(M) attains an MEI-sized advantage over
-the coordinator-side package F(C): P = −.0150 J with 40/64 worlds adverse to F(C) and conditional
+the C-trained private recurrent proposer package F(C): P = −.0150 J with 40/64 worlds adverse to F(C) and conditional
 SE .011 J. Under the fixed mapping this favours further development of F(M) relative to F(C) on
 this observed block. Arithmetic context, not attribution: C alone trails M by .056 J; the fixed
 transformation adds +.046 J to C (UP, 49/64) but only +.005 J to M (within the band, 38/64); the
 package gap is smaller than the proposer gap because F helps C much more than M. The M-side
-wrapper adds nothing MEI-sized on this block: F(M) − M and F(M) − own-dwell(M) are both inside the
+wrapper's observed increment is inside the point-importance band on this block (Correction 2026-09-16 04:20Z (em:acvc:convergence result review, PRO_FINAL): wording replaced; previously "adds nothing MEI-sized"): F(M) − M and F(M) − own-dwell(M) are both inside the
 band (dwell(M) is .0017 J above F(M)), so unwrapped M or dwell(M) is a reportable competing
 development option without substituting its contrast for P. These measurements do not identify a
 unique source of the advantage; within-band does not mean zero. Evidence for the attained
