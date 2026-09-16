@@ -133,6 +133,14 @@ requirement: a strict one-to-one binding is unnecessary as long as the work rema
 cap, the `AGENTS.md` decision ladder for direction- and Portfolio-tier decisions, evidence-spec
 §11 and the Git rules above are unchanged.
 
+**Owner instruction 2026-09-15 21:03 PDT (workflow lanes):** the uniform process is replaced by
+three lanes per direction, EXPLORE / CONFIRM / CLOSE, with process, records, statistical burden,
+review and a standing compute budget proportional to the lane (`AGENTS.md` "Workflow lanes";
+normative text `docs/research/portfolio/decisions/2026-09-15-workflow-lanes.md`). The hub runs
+the EXPLORE lane with the lighter records and no Pro round per pilot; CONFIRM objects get at most
+one Pro round at card freeze. ACVC enters CLOSE once its pending result review is intaken; FSD
+(`flexible_skill_duration`) is in CONFIRM with the headroom card as its first object.
+
 ### Claude Code session rules (formerly AGENTS.md Appendix B)
 
 - `CLAUDE.md` at the repository root carries the environment, commands, architecture, and
