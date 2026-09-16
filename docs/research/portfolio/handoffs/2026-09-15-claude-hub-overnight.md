@@ -1,4 +1,17 @@
-# Root handoff — Claude hub overnight run (2026-09-15, refreshed 2026-09-16 03:45Z)
+# Root handoff — Claude hub overnight run (2026-09-15, refreshed 2026-09-16 05:05Z)
+
+## Control changes 2026-09-15 21:03 / 21:37 PDT (read first)
+
+- Workflow lanes (`decisions/2026-09-15-workflow-lanes.md`) and Portfolio control
+  (`decisions/2026-09-15-portfolio-control-and-approved-set.md`): the loop advances only
+  `APPROVED_SET.md` (v1: flexible_skill_duration CONFIRM priority 1); concurrency is a ceiling; no refill;
+  Portfolio review only when the owner triggers it. Codex control plane synced (change record
+  `docs/Claude_docs/changes/2026-09-15-portfolio-control.md`; three files pending behind foreign edits).
+- ACVC: result review PRO_FINAL (A), lane CLOSE, closing memo queued; first dossier written
+  (`dossiers/2026-09-16_PORTFOLIO_DOSSIER.md`) for the owner's first review.
+- FSD: next hub action is the CONFIRM headroom card (flat comparator, HMASD fixed k, D0/I1280, five seeds,
+  three times the current budget, decision rule from measured across-seed SD), then one Pro round at card freeze.
+- Sections below this line predate the control changes; their "next" items for ACVC are superseded.
 
 Owner instruction 04:27 PDT: rest until 09:00 PDT; the hub runs the FSD fits overnight and
 reports at the 09:00 cron check-in. Two directions driven: FSD and ACVC. Owner 05:45 PDT:

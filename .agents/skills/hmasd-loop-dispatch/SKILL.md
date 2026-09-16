@@ -1,11 +1,11 @@
 ---
 name: hmasd-loop-dispatch
-description: Use when HMASD Root plans or advances the research working set, handles native direction returns, replaces an available direction slot, or is about to wait.
+description: Use when HMASD Root plans or advances the research working set, handles native direction returns, advances the approved set, or is about to wait.
 ---
 
 # HMASD research loop
 
-Root maintains three occupied direction DM chains and records their actual work separately.
+Root advances the approved set (`docs/research/portfolio/APPROVED_SET.md`) within the concurrency ceiling, with no slot target (OWNER_DIRECT 2026-09-15 21:37 PDT), and records actual work separately.
 DM owns science, code, Pro intake, Monitor adoption, collection and authorized continuation.
 Root integrates accepted work and resolves shared dependencies. ROOT_OPERATIONS.md owns routing;
 AGENTS §5 and the 2026-09-13 DM autonomy consolidation own the continuous-execution boundary.
@@ -20,7 +20,7 @@ no authorized next action or defensible unresolved question, preserve its one AC
 missing fact and revisit condition. It remains occupied and available in native event wait; a
 possible future fact is not a pending external dependency. An object,
 allocation, cleanup, Pro wait or child completion never releases a direction slot. Only an explicit
-Portfolio or owner lifecycle pause/closure releases it and can trigger vacancy replacement.
+Portfolio or owner lifecycle pause/closure releases it; nothing is refilled (2026-09-15).
 
 ## Stable next-action trigger
 
@@ -46,7 +46,7 @@ the first wait after useful work:
    An experiment/object/allocation ending, temporary blocker, Pro wait or idle child is not a
    direction vacancy. Resume the same DM's unfinished authorized work when necessary; a completed
    no-addition assessment with no changed input is not another unfinished assignment.
-   Existing overlap above three drains without interrupting live directions; no fourth admission.
+   Concurrency is a ceiling, not a quota; no refill (OWNER_DIRECT 2026-09-15 21:37 PDT).
 6. After useful independent work, wait natively for DM events or Root's own replacement Transport.
    Under the current v2 contract, use the configured 1500000 ms interruptible no-event timeout;
    messages, completion notices or new user input may return it early. An unchanged timeout briefly
@@ -72,16 +72,16 @@ new event; unchanged waits get none.
 | Accepted card/Pro/grant fixes object, inputs, comparator, permitted invocations and cap | DM completes the whole object and already authorized dependent steps directly, with fresh admission and existing checks. A prepared card, failed attempt or unused time supplies no new grant/retry. |
 | A concrete unresolved scientific/development choice exists | DM states the changed action and new fact or proposal relative to the complete prior decision in its existing card/intake, prepares/publishes/binds and sends to the proper node through its own Transport. No Root scope-making or approval is required. |
 | New direction-tier scientific meaning, or a frozen-meaning conflict | Use the original Convergence/Innovator or deciding authority under AGENTS §2; preserve frozen meaning while dependent work waits. |
-| New investment/grant or cap outside delegation, priority/capacity, lifecycle, fusion/separation, registration or vacancy choice | Portfolio decides. Direction-related authoring/intake stays with DM; Root authors vacancy replacement only after a formal slot release. Within-cap delegated object choices remain local. |
+| New investment/grant or cap outside delegation, priority/capacity, lifecycle, fusion/separation, registration or vacancy choice | Portfolio decides. Direction-related authoring/intake stays with DM; Vacancy replacement is retired; Portfolio review is owner-triggered (2026-09-15). Within-cap delegated object choices remain local. |
 | Verified complete bound Pro response, but short receipt or effect metadata unresolved | DM intakes the full response now and applies conforming work. Transport preserves/reconciles the same request; uncertain effects forbid another Send, not intake. |
 | Real pending request, accepted handle or supplied-input producer | Name the producer and awaited event; do independent work, then native wait for its direct return. |
 | No authorized work or defensible unresolved question; inputs/options/consequence unchanged | Reuse the completed decision and one recorded missing fact/revisit condition. Keep ACTIVE-idle with no pending external dependency. No new audit, request, assignment, or Root approval wait is created. |
 
 The concrete consequence can be a research/development choice; a deployment customer, positive
 B result or full diagnostic is not a universal prerequisite. New facts or a concrete new proposal
-let the original DM prepare the next bounded question directly. Three occupied slots do not imply
+let the original DM prepare the next bounded question directly. Three approved directions do not imply
 three advancing experiments/consultations. For example, two unchanged ACTIVE-idle directions and
-one Monitor-adopted run mean three occupied slots, one current experiment, and no two replacement
+one Monitor-adopted run mean three approved directions, one current experiment, and no two replacement
 or repeat-approval requests. Root coordinates actual shared writer/runtime conflicts and integrates
 the resulting decisions; it does not supply a local substitute scientific or budget verdict.
 

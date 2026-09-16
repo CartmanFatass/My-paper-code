@@ -77,7 +77,7 @@ defensible question exists, record the missing fact/revisit condition once and r
 explicitly distinguishing no pending external dependency from a real named request/handle waiting
 on its producer. The DM remains available for changed events; Root does not repeatedly resume it
 for the same empty state. Unchanged timeouts cause no new audit, assignment or Pro request. Three
-occupied directions need not be three advancing experiments; record preparation, engineering,
+approved directions need not be three advancing experiments; record preparation, engineering,
 actual result waits and idle state honestly, with no lifecycle change inferred from any of them.
 
 Transport/selector/workflow defects default to local repair by the author DM. The DM may edit its
@@ -137,7 +137,7 @@ independent conforming work continues.
 
 | Owner | Deliverable |
 | --- | --- |
-| Root | Brief changed-event log; necessary main integration and cross-direction dependencies; native waiting; Portfolio vacancy request/intake and new DM creation when formal direction pause/closure leaves fewer than three slots |
+| Root | Brief changed-event log; necessary main integration and cross-direction dependencies; native waiting; no vacancy request (retired, OWNER_DIRECT 2026-09-15 21:37 PDT); advances `docs/research/portfolio/APPROVED_SET.md` within the ceiling |
 | Direction DM | Card/predictions, object decisions, direct implementation, code self-review and repair, published inputs, bounded execution, monitor handover, collection, technical acceptance, scientific intake, cleanup and continuation |
 | Designated Portfolio DM | Decision materials grounded in Portfolio principles/specs/experience, complete Pro-response conformance and intake, execution mapping or exact conflict returned to Pro |
 | Implementer | Temporarily suspended for new work; preserve accepted closeout evidence and return routes |
@@ -160,6 +160,8 @@ constraints. Only the assigning owner resolves out-of-scope decisions; specialis
 gaps rather than inventing another authority layer.
 
 ## Portfolio material and response route
+
+(Superseded by OWNER_DIRECT 2026-09-15 21:37 PDT, `AGENTS.md` section 5 "Portfolio control": vacancy replacement and slot targets are retired; the loop advances `docs/research/portfolio/APPROVED_SET.md` within the ceiling; Portfolio review is owner-triggered. The passage below is kept as history.)
 
 The working-set target is three direction DM chains. Ordinary direction-related Portfolio replies
 remain with their author DM. A formal direction pause/closure that leaves fewer than three occupied

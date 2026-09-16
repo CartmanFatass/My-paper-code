@@ -1,6 +1,6 @@
 ---
 name: hmasd-pro-research-prompt-author
-description: "Use when DM authors an HMASD direction or Portfolio Pro research question, or Root authors a Portfolio vacancy replacement for fixed GitHub task delivery through a DM-owned native Agentify Transport subagent, with explicit author, parent and executor routing."
+description: "Use when DM authors an HMASD direction or Portfolio Pro research question, or an owner-triggered Portfolio review is authored for fixed GitHub task delivery through a DM-owned native Agentify Transport subagent, with explicit author, parent and executor routing."
 ---
 
 # HMASD Pro Research Prompt Author
@@ -78,6 +78,8 @@ applicable Portfolio principles/specifications and relevant empirical/engineerin
 including contrary evidence and revisit conditions. The designated DM checks publication and route facts and dispatches to its own Transport.
 Root retains coordination and integration without rewriting scientific material.
 The DM checks the complete Pro response and returns its operational mapping or a precise conflict.
+(Superseded by OWNER_DIRECT 2026-09-15 21:37 PDT, `AGENTS.md` section 5 "Portfolio control": vacancy replacement and slot targets are retired; the loop advances `docs/research/portfolio/APPROVED_SET.md` within the ceiling; Portfolio review is owner-triggered. The passage below is kept as history.)
+
 For a formally vacated slot below the three-direction target, Root authors the replacement request,
 uses its own Transport and checks the complete response itself before creating the Pro-selected
 DM. This route requires no intermediate author DM; Pro retains scientific selection authority.

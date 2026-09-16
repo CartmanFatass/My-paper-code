@@ -1,13 +1,13 @@
 ---
 name: hmasd-portfolio-task
-description: Use when DM prepares or intakes direction-related Portfolio decisions, or Root requests and intakes a new direction to fill a formally vacated slot in the three-direction working set.
+description: Use when DM prepares or intakes direction-related Portfolio decisions, or the owner triggers a Portfolio review of the approved set (docs/research/portfolio/APPROVED_SET.md); vacancy replacement is retired (OWNER_DIRECT 2026-09-15 21:37 PDT).
 ---
 
 # HMASD Portfolio materials and Pro intake
 
 Portfolio is the existing `portfolio:cross_direction` Pro node. DM authors and intakes ordinary
-direction-related questions. Root authors and intakes only vacancy replacement after a formal
-direction pause/closure leaves fewer than three occupied slots. Pro selects the new direction and
+direction-related questions. Root authors no vacancy replacement (retired, OWNER_DIRECT 2026-09-15 21:37 PDT; a
+closure leaves the approved set smaller and nothing is refilled). In an owner-triggered review Pro selects the new direction and
 bounded investment; Root creates its DM from the complete conforming decision. ROOT_OPERATIONS.md maintains this
 responsibility split. Existing Direction Pro nodes remain separate.
 
@@ -41,7 +41,7 @@ For vacancy replacement, Root instead assembles the final DM disposition/evidenc
 occupied/reserved slots, current priorities and resource constraints, and asks Pro to select the
 next new direction and bounded initial assignment. Cite DM scientific facts without inventing
 local scientific recommendations. Reuse a pending replacement request; no request per timeout,
-object completion or temporary blocker. Existing overlap above three drains without forced stops.
+object completion or temporary blocker. Concurrency is a ceiling, not a quota; nothing is refilled (2026-09-15).
 Root can request missing facts but does not rewrite scientific content. If the author becomes
 unavailable, Root explicitly transfers the remaining scope and evidence to another relevant DM.
 
