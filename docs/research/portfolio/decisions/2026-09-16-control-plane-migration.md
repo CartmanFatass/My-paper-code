@@ -152,8 +152,27 @@ Directory-specific core/test conventions remain where unique. No size becomes a 
 
 ## Integration and rollback (M6)
 
-Root publishes the reviewed migration branch, fast-forwards clean main and publishes only
-needed current controls into the clean paused FSD checkout, preserving scientific files.
+Root accepted the independently reviewed implementation and published commits
+`50ad5e9bc192dce4828af2a3565b031ebbee731d` and `38cc9264fae4e770f7a71ce0e3810baa0454c16e`
+on the migration branch and main. The second fixes a real post-checkout CRLF drift in
+four generated files; independent review verified only line endings differed, and all
+three publication regression tests passed. Main and FSD publication now check zero drift.
+Fresh post-publication Codex main and Claude FSD sessions performed only the recorded
+bounded native reads; their actions/results are appended to NATIVE.
+
+FSD adopted exact reviewed control paths in `ca57dfe7565ffd479c0d01e56ca96d30ba596ac1`.
+The FSD checkout lacked APPROVED_SET and the two 2026-09-15 owner decisions; follow-up
+`2f57045c95c7525e8c881a04955d035d1a726e0d` copied those three published main blobs exactly.
+This adds no member, allowance or lifecycle decision. Existing candidate scientific files
+remain unchanged against the original FSD head. Both FSD commits are pushed. The sync also
+includes baseline main's existing Claude settings and bind_conversation direction_id fix.
+Exact paths and original sources are in
+[PUBLICATION](../../../project/CONTROL_PLANE_MIGRATION_PUBLICATION_20260916.json).
+The copied owner plan retains its two original Markdown hard-break trailing spaces;
+they are intentionally excluded from whitespace cleanup to preserve its exact source bytes.
+
+Root fast-forwarded clean main and published only needed controls into paused FSD,
+preserving scientific files. Research remains paused and scratch cleanup remains blocked.
 Exact source/remote receipts and final migration state belong in the
 [handoff](../handoffs/2026-09-16-control-plane-migration.md). Other paused direction branches
 are not claimed refreshed. Known-good control baseline is main `e9399305d58bdd7e5f9518e12cf43e9abd199ee3`.
