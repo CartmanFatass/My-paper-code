@@ -1,8 +1,11 @@
 # ACVC handoff — after the em:acvc:convergence decision (2026-09-15, Claude hub)
 
-**State: ACTIVE / MEDIUM / recasts 2, lowest sequencing; the G3 block ACVC_MATCHED_PACKAGE_COMPARISON_B01 is
-complete and intaken (P = F(C) − F(M) = −.014963 J, F_M_ABOVE_MEI; ledger row 41), G3 consumed, no producer;
-the result-review request `2026-09-16-acvc-matched-package-result-review-01` was sent once to `em:acvc:convergence` (conversation 6aa12e74-8e54-83e8-95f6-001681b456f7, TASK 7100c6099, handoff bound at 1a8d19c12, operation e317e2ed-484a-4ba0-8b54-29301bb3ffff, sent 2026-09-16T03:53:17Z); awaiting the archived answer; nothing else authorised.** Driven by
+**State: lane CLOSE, left the approved set (owner control decision 2026-09-15 21:37 PDT,
+`docs/research/portfolio/APPROVED_SET.md`). The result review `2026-09-16-acvc-matched-package-result-review-01`
+was intaken as PRO_FINAL (A: matched-package question concluded at one block; lifecycle to Portfolio carrying B);
+two dated corrections applied; closing memo `ACVC_CLOSING_MEMO_20260916.md` queued for the owner-triggered review
+(dossier `docs/research/portfolio/dossiers/2026-09-16_PORTFOLIO_DOSSIER.md`). No producer, no launch, no Send.
+First resume step: nothing; wait for the review's disposition (PARK with assets retained recommended).** Driven by
 the Claude Code research hub (owner 2026-09-15 resume; two directions, ACVC and
 FSD). Authoring checkout `C:/Projects/HMASD-worktrees/codex-acvc`, branch
 `codex/acvc` (1,140 commits behind `main`; a merge of `main` conflicts in Codex
