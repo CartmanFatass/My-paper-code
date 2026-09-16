@@ -82,6 +82,8 @@ def generated(root=ROOT):
                 continue
             target = root/'.claude/skills'/source.relative_to(root/'.agents/skills')
             data = source.read_bytes()
+            if source.suffix in {'.md', '.py', '.yaml', '.yml', '.json', '.toml'}:
+                data = data.replace(b'\r\n', b'\n')
             if source.name == 'SKILL.md':
                 text = adapt_claude_method(data.decode('utf-8'), folder.name)
                 head, body = text.split('---', 2)[1:]

@@ -35,4 +35,15 @@ def test_generated_helpers_resolve_in_complete_skill_tree():
         assert canonical/relative in outputs
     # Shared publication preserves executable helper bytes, not a pointer shell.
     script = 'hmasd-pro-research-prompt-author/scripts/render_packet.py'
-    assert outputs[ROOT/'.claude/skills'/script] == (ROOT/'.agents/skills'/script).read_bytes()
+    assert outputs[ROOT/'.claude/skills'/script] == (ROOT/'.agents/skills'/script).read_bytes().replace(b'\r\n', b'\n')
+
+
+def test_publication_is_independent_of_checkout_line_endings(tmp_path):
+    for folder in ['.agents/skills', '.codex/agents', '.claude/agents']:
+        shutil.copytree(ROOT/folder, tmp_path/folder, ignore=shutil.ignore_patterns('__pycache__'))
+    publisher.publish(tmp_path)
+    # Simulate an older Windows checkout with CRLF canonical files.
+    for source in (tmp_path/'.agents/skills').rglob('*'):
+        if source.is_file() and source.suffix in {'.md', '.py', '.yaml', '.yml', '.json', '.toml'}:
+            source.write_bytes(source.read_bytes().replace(b'\r\n', b'\n').replace(b'\n', b'\r\n'))
+    assert publisher.publish(tmp_path, check=True) == []
