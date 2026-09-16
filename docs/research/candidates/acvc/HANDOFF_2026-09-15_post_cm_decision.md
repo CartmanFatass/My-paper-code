@@ -2,8 +2,7 @@
 
 **State: ACTIVE / MEDIUM / recasts 2, lowest sequencing; G3 object fixed by `em:acvc:convergence`
 (ACVC_MATCHED_PACKAGE_COMPARISON_B01, 28731/38731, one C fit and one M fit, six panels, primary
-P = F(C) − F(M) at ±.01 J); L0: written by the hub at zero exposure (thin entry `scripts/run_acvc_matched_package_comparison_b01.py` with `--arm C|M` and `--mode reduce`, launch scripts `experiments/candidates/acvc/matched_package_comparison_b01/launch_{c,m}.sh`, eight focused synthetic tests under `tests/experiments/candidates/acvc/matched_package_comparison_b01/`); independent `hmasd-reviewer` review of the changed behaviour precedes technical acceptance; no producer yet; launch only after independent review, technical
-acceptance and fresh admission, C then M.** Driven by
+P = F(C) − F(M) at ±.01 J); L0: written by the hub at zero exposure (thin entry `scripts/run_acvc_matched_package_comparison_b01.py` with `--arm C|M` and `--mode reduce`, launch scripts `experiments/candidates/acvc/matched_package_comparison_b01/launch_{c,m}.sh`, eight focused synthetic tests under `tests/experiments/candidates/acvc/matched_package_comparison_b01/`); independent `hmasd-reviewer` review of the changed behaviour precedes technical acceptance; review accepted, technical acceptance recorded (ledger row 40); both G3 originals launched through `hmasd-experiment-operator` at launch sha `841e5c35b` (worktree `/home/wu/hmasd-worktrees/acvc-matched-b01-841e5c35b`): C handle `acvc-matched-c-b01-28731-841e5c35b` (pid 3762157, 03:13:34Z, admission 15.6 GB) and M handle `acvc-matched-m-b01-28731-841e5c35b` (pid 3764685, 03:16:25Z, admission 15.3 GB), concurrent as the operational variant on the idle node; plans C 2,600 s / M 1,200 s not caps; expected ends about 03:35Z (M) and 03:45Z (C); 2 producers.** Driven by
 the Claude Code research hub (owner 2026-09-15 resume; two directions, ACVC and
 FSD). Authoring checkout `C:/Projects/HMASD-worktrees/codex-acvc`, branch
 `codex/acvc` (1,140 commits behind `main`; a merge of `main` conflicts in Codex
@@ -115,7 +114,26 @@ Opus review.
   `20260915-acvc-010`.
 - L0: written by the hub at zero exposure (thin entry `scripts/run_acvc_matched_package_comparison_b01.py` with `--arm C|M` and `--mode reduce`, launch scripts `experiments/candidates/acvc/matched_package_comparison_b01/launch_{c,m}.sh`, eight focused synthetic tests under `tests/experiments/candidates/acvc/matched_package_comparison_b01/`); independent `hmasd-reviewer` review of the changed behaviour precedes technical acceptance.
 
+## Review accepted, both originals launched (2026-09-16 03:17Z)
+
+- Independent `hmasd-reviewer` of `dadba46f9`: accept, no MATERIAL finding; three MINOR resolved at
+  `841e5c35b`; node suites 27 passed at the launch sha; ledger row 40 (technical acceptance).
+- both G3 originals launched through `hmasd-experiment-operator` at launch sha `841e5c35b` (worktree `/home/wu/hmasd-worktrees/acvc-matched-b01-841e5c35b`): C handle `acvc-matched-c-b01-28731-841e5c35b` (pid 3762157, 03:13:34Z, admission 15.6 GB) and M handle `acvc-matched-m-b01-28731-841e5c35b` (pid 3764685, 03:16:25Z, admission 15.3 GB), concurrent as the operational variant on the idle node; plans C 2,600 s / M 1,200 s not caps; expected ends about 03:35Z (M) and 03:45Z (C); 2 producers.
+- Evidence root `evidence/matched_package_comparison_b01_20260916/` (DEPENDENCY.json, EXECUTION.md with the
+  cost projection, launch rows and frozen commands).
+
 ## First resume step (current)
+
+Watch the two handles (`agent-task status <handle>`; strip spaces from the JSON) until both are `finished`;
+collect each original with the hub's collection script (`native/C`, `native/M`, per-file sha256 equal to the
+remote listing, task records), run `scripts/run_acvc_matched_package_comparison_b01.py --mode reduce --c-summary
+... --m-summary ... --output evidence/.../reduce`, write the E0 (`ACVC_MATCHED_PACKAGE_COMPARISON_B01_RESULT_EVIDENCE_20260916.md`:
+P at the frozen branches, six supports, all six absolute means, counts, extrema, identity residual, costs,
+predictions scored), intake, Chinese brief, PRESERVATION (retain `final.pt` archives locally), CLEANUP (remote
+worktree and staging), then the result review to `em:acvc:convergence`. Zero retries or extra panels;
+completion ends G3, not ACVC. FSD unaffected.
+
+## First resume step as written at 03:05Z (superseded 03:17Z by the section above)
 
 Resolve the independent `hmasd-reviewer` findings on the L0 (thin entry
 `scripts/run_acvc_matched_package_comparison_b01.py`, launch scripts under

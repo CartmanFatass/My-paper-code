@@ -76,9 +76,17 @@ ssh -o BatchMode=yes -o ConnectTimeout=10 hmasd-wsl-node /usr/local/bin/agent-ta
 
 ## Launch record
 
+Operator: `hmasd-experiment-operator`, one command per original, pre-launch duplicate check `not_found`,
+worktree clean at the launch sha, output parent present and output absent, no retry. Node idle before the C
+launch (load 0.12, 14.5 GiB available; the two stale supervisor records from 2026-09-07/08 are not live
+processes). The M original is launched after the C original as the operational concurrent variant the
+decision allows (idle node, separate fresh admission, no displaced accepted work); the order of launch is
+C then M. Observation: hub-owned bounded status polls; collection after the terminal states.
+
 | Handle | Launch (UTC) | Remote pid | Admission | State |
 | --- | --- | ---: | --- | --- |
-| (not launched) | | | | |
+| acvc-matched-c-b01-28731-841e5c35b | 2026-09-16T03:13:34Z | 3762157 | passed, 15,610,613,760 B physical and effective available (floor 4 GiB), assessed 03:13:35Z | running at uptime 56 s (tmux active); stderr.log 0 bytes; stdout advancing (rollout 96 after 48.98 s process wall, about 7.7 s per 16 rollouts); expected training end about 03:30Z plus three panels |
+| acvc-matched-m-b01-28731-841e5c35b | 2026-09-16T03:16:25Z | 3764685 | passed, 15,299,493,888 B physical and effective available (floor 4 GiB), assessed 03:16:26Z | running at uptime 26 s (tmux active); stderr.log 0 bytes; stdout advancing (rollout 48 after 24.0 s process wall); C still running as pid 3762157 at uptime 198 s; expected end about 03:34Z plus panels |
 
 ## Terminal record
 
