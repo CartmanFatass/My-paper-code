@@ -16,7 +16,7 @@ default_wait_timeout_ms = 1500000
 max_wait_timeout_ms = 3600000
 
 [agents]
-# The research working-set target is three direction DMs under AGENTS.md section 5.
+# Approved set only; concurrency is a ceiling, not a target.
 # This runtime fan-out also accommodates their monitors, transports and independent reviewers.
 max_concurrent_threads_per_session = 40
 interrupt_message = true

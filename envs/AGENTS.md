@@ -1,6 +1,6 @@
 # envs/ — shared environments and the native boundary
 
-Core tier (`docs/project/ENGINEERING_SCOPE_SPEC.md` §2, §6): behaviour-preserving changes only,
+Core tier (method: hmasd-research-engineering): behaviour-preserving changes only,
 each with the one focused test that would fail if the semantic changed. Environment
 implementations own transition dynamics and environment RNG.
 

@@ -1,31 +1,15 @@
 # docs/
 
-Which tree is an authority, and what each document family is. Nothing here is executable
-workflow state. Owner instructions and AGENTS define authority; specifications define requirements,
-skills describe procedures, and historical evidence does not create new authorization.
+Direction science lives under research/candidates/<direction>/DIRECTION.md. Per object
+retain pilot note/card, summary/result and intake; raw evidence and necessary execution
+facts remain. Older TASK/HANDOFF, cards, archives and fixed versions retain original
+meaning. Do not rewrite historical verdicts or replace raw outputs with summaries.
+Current methods live in .agents/skills; project/spec documents marked historical are
+binding evidence only for named frozen objects. APPROVED_SET is execution authority;
+Portfolio/dossier/handoff are current views, not a second grant.
 
-| Tree | Role |
-| --- | --- |
-| `docs/project/` | engineering authorities: `PROJECT_MAP.md` (one-page index of the nested `AGENTS.md` files), `ENGINEERING_SCOPE_SPEC.md` (what research code may and may not build), `PROBLEM_CACHE.md` (parked defects that block interpretation), `EFFICIENCY_PRACTICES.md`, `ENGINEERING_ADDITIONS.md` |
-| `docs/research/` | scientific authorities: `RESEARCH_MAP.md` (current directions, code and test paths, script prefixes), `portfolio/PORTFOLIO.md` (lifecycle, priority, capacity) with `portfolio/decisions/` and `portfolio/audit/`, `specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md` (§§7–8 Portfolio principles; §11 controls B and C-BENCH objects), `candidates/<direction-id>/` (per-direction science), `legacy/directions/` (closed or absorbed labels) |
-| `docs/external-review/` | archives of external model reviews (Pro rounds, Gemini, independent), read-only provenance |
-| `docs/Claude_docs/` | deliverables of Claude sessions (reviews, plans, experiment designs and results outside the authority tree), indexed by its README; evidence for the owner, never a science card or decision record |
-| `docs/archive/` | historical trees moved out of the way (`new/`, `new-libs/`, `report/`, `superpowers/`, `benchmarks/`, `operations/`, `agents/`, `logs/`); not maintained |
-| `docs/personal/` | the owner's notes; ignored by Git |
-
-## Document families in a direction directory
-
-`DIRECTION.md` is the one universal file (scientific position; `eol=lf` pinned). Per object:
-`*_SCIENCE_CARD_<date>.md` (frozen definition, predictions on record), `*_RESULT_EVIDENCE_<date>.md`
-or `*_RESULT_<date>.md` (the E0 format: rule applied verbatim, counts, receipts, deviations),
-`*_INTAKE_<date>.md` (reviewer or DM intake with the decisions it produced). Older families
-(`*_INNOVATOR_INTAKE`, `*_CONVERGENCE_DECISION_INTAKE`, `*_TECHNICAL_ACCEPTANCE`,
-`CODE_SCIENCE_INDEX.md`, `IMPLEMENTATION_THRESHOLD.md`, `*_PROSPECTIVE_CONTRACT`) remain as
-evidence; new objects use card → result → intake only.
-
-Result evidence files may be large JSON (`docs/` carries about 377 MiB of tracked `RESULT.json`;
-no size rule exists yet, flagged 2026-09-03). Prefer a `summary.json` of the numbers the rule reads
-over the raw dump.
-
-`.gitignore` no longer denies `*.md` globally; a new document under any `docs/` tree is tracked
-unless it sits in `docs/personal/`.
+external-review and archive trees preserve provenance; personal is owner notes (ignored).
+Claude deliverables outside direction authority use Claude_docs/<category> and its README.
+Direction DIRECTION and portfolio paths are LF-pinned by .gitattributes. Keep exact-source
+references. Current summaries should link directly to the card/intake, not require chains
+of old handoffs. Do not preload unrelated scientific material for formatting work.
