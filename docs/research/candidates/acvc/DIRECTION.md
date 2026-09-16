@@ -1,5 +1,23 @@
 # Direction acvc: ACVC
 
+## Matched-package comparison B01 complete: F(M) above F(C) by an MEI-sized margin on one block; G3 consumed — 2026-09-16 03:45Z (object-tier intake; result review with em:acvc:convergence)
+
+The G3 block ran as fixed (launch sha `841e5c35b`, both originals exit 0, 2,195,456 scored ticks exactly the
+ceiling; [E0](ACVC_MATCHED_PACKAGE_COMPARISON_B01_RESULT_EVIDENCE_20260916.md),
+[intake](ACVC_MATCHED_PACKAGE_COMPARISON_B01_INTAKE_20260916.md), ledger row 41). **P = F(C) − F(M) =
+−.014963 J, F_M_ABOVE_MEI** (24 / 40 / 0, conditional SE .011): on this matched block the conventional-proposer
+package attains an MEI-sized advantage over the coordinator-side package, which under the fixed mapping favours
+developing F(M) relative to F(C) on this block. Arithmetic context (not attribution): C − M −.056 J (DOWN),
+F(C) − C +.046 J (UP, 49/64), F(M) − M +.005 J (WITHIN_MEI), F(C) − own-dwell(C) +.024 J (UP), F(M) − own-dwell(M)
+−.002 J (WITHIN_MEI), own-dwell(C) − own-dwell(M) −.041 J (DOWN); absolute means C .3022, F(C) .3478, dwell(C)
+.3234, M .3581, F(M) .3627, dwell(M) .3644. The M-side wrapper adds nothing MEI-sized on this block, so
+unwrapped M or dwell(M) is a reportable competing development option without substituting for P. Displayed
+beside the concluded C/M blocks (F(C) − M +.023 / −.039 J) and transfer instances (F(M) − M +.018 / +.003 J;
+here +.005 J) without pooling. DM Brier P .185 (modal forecast occurred). Not stable superiority, a
+population mean, a discardable C or M, tuned headroom, equivalence, mechanism, C promotion or default change.
+G3 is consumed (zero retries, third fits or extra panels); the result-review request to `em:acvc:convergence` is being authored. ACTIVE/MEDIUM/recasts2, lowest sequencing,
+slot unchanged; no producer.
+
 ## Matched-package comparison B01 fixed by the direction node; L0 under G3 — 2026-09-16 03:05Z (em:acvc:convergence A with corrections, PRO_FINAL)
 
 `em:acvc:convergence` fixed the G3 object as the DM's card with corrections

@@ -1,4 +1,4 @@
-# Root handoff — Claude hub overnight run (2026-09-15, refreshed 2026-09-16 03:17Z)
+# Root handoff — Claude hub overnight run (2026-09-15, refreshed 2026-09-16 03:45Z)
 
 Owner instruction 04:27 PDT: rest until 09:00 PDT; the hub runs the FSD fits overnight and
 reports at the 09:00 cron check-in. Two directions driven: FSD and ACVC. Owner 05:45 PDT:
@@ -24,7 +24,7 @@ under `docs/Claude_docs/changes/`). Nothing here changes lifecycle, priority or 
   Remote worktree and task records reclaimed (`CLEANUP.json`, `task_records/`).
 - Direction handoff: `docs/research/candidates/flexible_skill_duration/HANDOFF_2026-09-15_baseline_interruption.md`.
 
-## ACVC — matched-package comparison B01 running: both G3 originals launched at 841e5c35b
+## ACVC — matched-package comparison B01 complete (F(M) above F(C) by .015 J on one block); G3 consumed; result review next
 
 - Block 2 complete and intaken (D2 = F−M −.03919 J, M_ABOVE_MEI; F−C and F−own-dwell UP in
   both blocks; pooled F−M −.0079 J, df = 1 interval [−.406, +.390]). `em:acvc:convergence`
@@ -104,6 +104,12 @@ under `docs/Claude_docs/changes/`). Nothing here changes lifecycle, priority or 
 - L0: written by the hub at zero exposure (thin entry `scripts/run_acvc_matched_package_comparison_b01.py` with `--arm C|M` and `--mode reduce`, launch scripts `experiments/candidates/acvc/matched_package_comparison_b01/launch_{c,m}.sh`, eight focused synthetic tests under `tests/experiments/candidates/acvc/matched_package_comparison_b01/`); independent `hmasd-reviewer` review of the changed behaviour precedes technical acceptance.
 - Review accepted (no MATERIAL; three MINOR resolved at `841e5c35b`), node suites 27 passed, technical
   acceptance ledger row 40; both G3 originals launched through `hmasd-experiment-operator` at launch sha `841e5c35b` (worktree `/home/wu/hmasd-worktrees/acvc-matched-b01-841e5c35b`): C handle `acvc-matched-c-b01-28731-841e5c35b` (pid 3762157, 03:13:34Z, admission 15.6 GB) and M handle `acvc-matched-m-b01-28731-841e5c35b` (pid 3764685, 03:16:25Z, admission 15.3 GB), concurrent as the operational variant on the idle node; plans C 2,600 s / M 1,200 s not caps; expected ends about 03:35Z (M) and 03:45Z (C); 2 producers.
+- Block complete and intaken at 03:45Z: P = F(C) − F(M) = −.014963 J **F_M_ABOVE_MEI** (40/64); C−M −.056 DOWN,
+  F(C)−C +.046 UP, F(M)−M +.005 WITHIN, F(C)−dwell(C) +.024 UP, F(M)−dwell(M) −.002 WITHIN, dwell(C)−dwell(M)
+  −.041 DOWN; native walls C 1,161.65 s / M 1,065.69 s; E0
+  `ACVC_MATCHED_PACKAGE_COMPARISON_B01_RESULT_EVIDENCE_20260916.md`, ledger row 41; both originals preserved,
+  remote reclaimed; G3 consumed; no producer.
+- Result review: the result-review request to `em:acvc:convergence` is being authored.
 - Direction handoff: `docs/research/candidates/acvc/HANDOFF_2026-09-15_post_cm_decision.md`.
 
 ## Transport and registry
@@ -120,10 +126,10 @@ under `docs/Claude_docs/changes/`). Nothing here changes lifecycle, priority or 
 ## Next session
 
 No live handles. FSD: ACTIVE-idle, nothing to do (see the working-set advice above for the owner). ACVC:
-two live handles on the node (C `acvc-matched-c-b01-28731-841e5c35b` pid 3762157, M
-`acvc-matched-m-b01-28731-841e5c35b` pid 3764685, worktree `/home/wu/hmasd-worktrees/acvc-matched-b01-841e5c35b`);
-watch to terminal, collect, reduce, E0, intake, brief, preserve, clean up, then the result review to
-`em:acvc:convergence` (see the direction handoff's first resume step). No retries or extra panels.
+no live handles; the G3 block is complete and intaken; the pending step is the result review to
+`em:acvc:convergence` (see the direction handoff's first resume step): wait for the archived answer (GitHub
+readback, transport phase 2) and intake it as `PRO_FINAL`; a new fit would need a Portfolio investment question
+first; a lifecycle recommendation goes to Portfolio. No launch is authorized.
 
 ## Integration state
 

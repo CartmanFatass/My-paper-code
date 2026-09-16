@@ -1,0 +1,18 @@
+=== Task 'acvc-matched-m-b01-28731-841e5c35b' started at 2026-09-16T11:16:26+08:00 ===
+{
+  "assessed_at": "2026-09-16T03:16:26.333926Z",
+  "available_physical_bytes": 15299493888,
+  "captured_at": "2026-09-16T03:16:26.333627Z",
+  "cgroup_headroom_bytes": null,
+  "cgroup_memory_current_bytes": null,
+  "cgroup_memory_max_bytes": null,
+  "effective_available_bytes": 15299493888,
+  "effective_floor_pass": true,
+  "failure_reasons": [],
+  "measurement_source": "/proc/meminfo",
+  "minimum_available_bytes": 4294967296,
+  "passed": true,
+  "physical_floor_pass": true,
+  "schema_version": 1
+}
+=== Task 'acvc-matched-m-b01-28731-841e5c35b' exited with code 0 at 2026-09-16T11:34:12+08:00 (Duration: 1066s) ===

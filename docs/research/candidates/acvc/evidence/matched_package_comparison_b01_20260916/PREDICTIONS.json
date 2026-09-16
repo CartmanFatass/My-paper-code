@@ -1,0 +1,50 @@
+{
+  "source": "card section 3 (hub, recorded 2026-09-15 before launch; rationale qualified by em:acvc:convergence 2026-09-16 02:48Z); owner slot not taken (unattended)",
+  "recorded_before_results": "2026-09-16T03:20Z (both originals running, no panel output read)",
+  "P": {
+    "forecast": {
+      "F_C_ABOVE_MEI": 0.2,
+      "WITHIN_MEI": 0.15,
+      "F_M_ABOVE_MEI": 0.65
+    },
+    "realized": "F_M_ABOVE_MEI",
+    "value_J": -0.014962985109475921,
+    "multiclass_brier": 0.185,
+    "modal_forecast_occurred": true
+  },
+  "supports": {
+    "C-M": {
+      "forecast": {
+        "UP": 0.15,
+        "WITHIN_MEI": 0.15,
+        "DOWN": 0.7
+      },
+      "realized": "DOWN",
+      "value_J": -0.05588148949283544,
+      "multiclass_brier": 0.135
+    },
+    "F(C)-C": {
+      "forecast": {
+        "UP": 0.8,
+        "WITHIN_MEI": 0.15,
+        "DOWN": 0.05
+      },
+      "realized": "UP",
+      "value_J": 0.045535299092300766,
+      "multiclass_brier": 0.065
+    },
+    "F(M)-M": {
+      "forecast": {
+        "UP": 0.4,
+        "WITHIN_MEI": 0.45,
+        "DOWN": 0.15
+      },
+      "realized": "WITHIN_MEI",
+      "value_J": 0.00461679470894125,
+      "multiclass_brier": 0.485
+    }
+  },
+  "completeness_forecast": 0.9,
+  "owner": "not taken (unattended)",
+  "scored_at": "2026-09-16T03:36:40+00:00"
+}

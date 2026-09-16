@@ -1,0 +1,27 @@
+{
+  "object": "ACVC_MATCHED_PACKAGE_COMPARISON_B01",
+  "preservation_verified_before_cleanup": true,
+  "preservation_record": "PRESERVATION.json (both nine-file sets archived locally with sha256; Git-tracked subset in COLLECTION.json)",
+  "remote_worktree": "/home/wu/hmasd-worktrees/acvc-matched-b01-841e5c35b",
+  "remote_staging": "/home/wu/hmasd-inputs/acvc-matched-b01-28731",
+  "facts": {
+    "worktree_exists_before": "yes",
+    "c_status": "{\"task\":\"acvc-matched-c-b01-28731-841e5c35b\",\"status\":\"finished\",\"exit_code\":0,\"pid\":3762157,\"uptime_seconds\":1548,\"tmux_active\":false}",
+    "m_status": "{\"task\":\"acvc-matched-m-b01-28731-841e5c35b\",\"status\":\"finished\",\"exit_code\":0,\"pid\":3764685,\"uptime_seconds\":1377,\"tmux_active\":false}",
+    "worktree_remove_rc": "0",
+    "worktree_prune_rc": "0",
+    "worktree_exists_after": "no",
+    "worktree_listed_after": "0",
+    "staging_exists_before": "yes",
+    "staging_rm_rc": "0",
+    "staging_exists_after": "no",
+    "task_records_retained": "yes",
+    "cleaned_at_utc": "2026-09-16T03:39:23Z"
+  },
+  "retained_on_node": [
+    "/home/wu/.agent-tasks/acvc-matched-c-b01-28731-841e5c35b/task.log",
+    "/home/wu/.agent-tasks/acvc-matched-m-b01-28731-841e5c35b/task.log"
+  ],
+  "native_invocations_during_cleanup": 0,
+  "script": "C:/Users/fires/.claude/jobs/6210f003/tmp/cleanup_mpc.sh (hub scratch; facts above are its complete output)"
+}
