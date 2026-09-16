@@ -1,9 +1,9 @@
 # ACVC handoff — after the em:acvc:convergence decision (2026-09-15, Claude hub)
 
-**State: ACTIVE / MEDIUM / recasts 2, lowest sequencing; the transfer family is concluded (A); Portfolio
-funded one bounded matched-package comparison (G3, at most one C fit and one M fit, ceiling 2,195,456
-scored ticks); the object is not yet fixed, the card question is for `em:acvc:convergence`; no producer;
-no launch authorised.** Driven by
+**State: ACTIVE / MEDIUM / recasts 2, lowest sequencing; G3 object fixed by `em:acvc:convergence`
+(ACVC_MATCHED_PACKAGE_COMPARISON_B01, 28731/38731, one C fit and one M fit, six panels, primary
+P = F(C) − F(M) at ±.01 J); L0: written by the hub at zero exposure (thin entry `scripts/run_acvc_matched_package_comparison_b01.py` with `--arm C|M` and `--mode reduce`, launch scripts `experiments/candidates/acvc/matched_package_comparison_b01/launch_{c,m}.sh`, eight focused synthetic tests under `tests/experiments/candidates/acvc/matched_package_comparison_b01/`); independent `hmasd-reviewer` review of the changed behaviour precedes technical acceptance; no producer yet; launch only after independent review, technical
+acceptance and fresh admission, C then M.** Driven by
 the Claude Code research hub (owner 2026-09-15 resume; two directions, ACVC and
 FSD). Authoring checkout `C:/Projects/HMASD-worktrees/codex-acvc`, branch
 `codex/acvc` (1,140 commits behind `main`; a merge of `main` conflicts in Codex
@@ -106,7 +106,28 @@ Opus review.
   owner if two advancing chains are desired) is recorded in the root handoff; FSD untouched.
 - Card question to `em:acvc:convergence`: request `2026-09-15-acvc-matched-package-card-convergence-01` (packet `pro_packets/20260915_matched_package_card_convergence/`, card `fb163af33`, TASK `1894f08dd`, HANDOFF `e7d78f72e`) was sent once at 2026-09-16T02:38:57Z (first call chatgpt_target_menu_open_unconfirmed before any click, the identical verifyExisting call clicked once; operation bde1c551-bea7-4f77-a598-fd9b9971b627, user message 3091bb8c-3696-4134-9bc0-ae47a27ea4c4, tab 3da0ecf1-69d1-4e8c-a819-b401abdfd17e open for phase 2, prompt sha256 39db08880254e9c13a74821d2885c07802d98021166e1b5d27f1806d72aabc13); the archived answer is awaited.
 
+## Card fixed by the direction node, L0 written (2026-09-16 03:05Z)
+
+- `em:acvc:convergence` answered at `codex/acvc b3278ff33` (02:48Z; one Send 02:38Z, COMPLETE, ARCHIVED,
+  tab closed; Issue 14 comment 5691316483): **A with corrections**, `PRO_FINAL`. Object fixed as in
+  `DIRECTION.md`'s top section; corrections applied to the card with dated markers; intake
+  `pro_packets/20260915_matched_package_card_convergence/INTAKE.md`; ledger row 39; owner item
+  `20260915-acvc-010`.
+- L0: written by the hub at zero exposure (thin entry `scripts/run_acvc_matched_package_comparison_b01.py` with `--arm C|M` and `--mode reduce`, launch scripts `experiments/candidates/acvc/matched_package_comparison_b01/launch_{c,m}.sh`, eight focused synthetic tests under `tests/experiments/candidates/acvc/matched_package_comparison_b01/`); independent `hmasd-reviewer` review of the changed behaviour precedes technical acceptance.
+
 ## First resume step (current)
+
+Resolve the independent `hmasd-reviewer` findings on the L0 (thin entry
+`scripts/run_acvc_matched_package_comparison_b01.py`, launch scripts under
+`experiments/candidates/acvc/matched_package_comparison_b01/`, tests under
+`tests/experiments/candidates/acvc/matched_package_comparison_b01/`), then technical acceptance: focused
+tests green on the WSL node in a fresh worktree at the launch sha (create `temp/` parents first), the
+on-policy root re-staged at `de66d7a4b` for the M arm, per-arm cost projection in the evidence
+`EXECUTION.md`, then launch the C original through `hmasd-experiment-operator` (launch_c.sh, fresh
+admission joined by &&), then the M original (launch_m.sh) as the node allows; collect, reduce with
+`--mode reduce`, E0, intake, brief, preservation, cleanup. Zero retries or extra panels. FSD unaffected.
+
+## First resume step as written at 23:40Z (superseded 03:05Z by the section above)
 
 If the matched-package card question has not been sent: finish the prospective card
 `ACVC_MATCHED_PACKAGE_COMPARISON_B01_PROSPECTIVE_CARD_20260915.md` within the G3 envelope, render and bind

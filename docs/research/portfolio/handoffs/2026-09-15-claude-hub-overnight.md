@@ -1,4 +1,4 @@
-# Root handoff — Claude hub overnight run (2026-09-15, refreshed 16:45 PDT)
+# Root handoff — Claude hub overnight run (2026-09-15, refreshed 2026-09-16 03:05Z)
 
 Owner instruction 04:27 PDT: rest until 09:00 PDT; the hub runs the FSD fits overnight and
 reports at the 09:00 cron check-in. Two directions driven: FSD and ACVC. Owner 05:45 PDT:
@@ -24,7 +24,7 @@ under `docs/Claude_docs/changes/`). Nothing here changes lifecycle, priority or 
   Remote worktree and task records reclaimed (`CLEANUP.json`, `task_records/`).
 - Direction handoff: `docs/research/candidates/flexible_skill_duration/HANDOFF_2026-09-15_baseline_interruption.md`.
 
-## ACVC — transfer family concluded (A); Portfolio funded one matched-package comparison (G3); card with the direction node next
+## ACVC — G3 object fixed by the direction node (matched-package comparison B01); L0 and review next
 
 - Block 2 complete and intaken (D2 = F−M −.03919 J, M_ABOVE_MEI; F−C and F−own-dwell UP in
   both blocks; pooled F−M −.0079 J, df = 1 interval [−.406, +.390]). `em:acvc:convergence`
@@ -97,6 +97,11 @@ under `docs/Claude_docs/changes/`). Nothing here changes lifecycle, priority or 
   owner for a separate working-set decision if two advancing chains are desired. This session takes no FSD
   action and authors no replacement; the owner decides.
 - Card question to `em:acvc:convergence`: request `2026-09-15-acvc-matched-package-card-convergence-01` (packet `pro_packets/20260915_matched_package_card_convergence/`, card `fb163af33`, TASK `1894f08dd`, HANDOFF `e7d78f72e`) was sent once at 2026-09-16T02:38:57Z (first call chatgpt_target_menu_open_unconfirmed before any click, the identical verifyExisting call clicked once; operation bde1c551-bea7-4f77-a598-fd9b9971b627, user message 3091bb8c-3696-4134-9bc0-ae47a27ea4c4, tab 3da0ecf1-69d1-4e8c-a819-b401abdfd17e open for phase 2, prompt sha256 39db08880254e9c13a74821d2885c07802d98021166e1b5d27f1806d72aabc13); the archived answer is awaited.
+- `em:acvc:convergence` fixed the object at 02:48Z (**A with corrections**, `PRO_FINAL`; response
+  `b3278ff33`, one Send, COMPLETE, ARCHIVED, tab closed): ACVC_MATCHED_PACKAGE_COMPARISON_B01, block
+  28731/38731, one C fit and one M fit, six panels, primary P = F(C) − F(M) at ±.01 J, exactly the G3
+  ceiling; ledger row 39; owner item `20260915-acvc-010`.
+- L0: written by the hub at zero exposure (thin entry `scripts/run_acvc_matched_package_comparison_b01.py` with `--arm C|M` and `--mode reduce`, launch scripts `experiments/candidates/acvc/matched_package_comparison_b01/launch_{c,m}.sh`, eight focused synthetic tests under `tests/experiments/candidates/acvc/matched_package_comparison_b01/`); independent `hmasd-reviewer` review of the changed behaviour precedes technical acceptance.
 - Direction handoff: `docs/research/candidates/acvc/HANDOFF_2026-09-15_post_cm_decision.md`.
 
 ## Transport and registry
@@ -113,10 +118,9 @@ under `docs/Claude_docs/changes/`). Nothing here changes lifecycle, priority or 
 ## Next session
 
 No live handles. FSD: ACTIVE-idle, nothing to do (see the working-set advice above for the owner). ACVC:
-G3 is granted but the object is not fixed; the pending step is the matched-package card question to
-`em:acvc:convergence` (see the direction handoff's first resume step), then L0, independent review,
-technical acceptance and operator launch, C first then M. No launch is authorized before the node's
-decision.
+the G3 object is fixed and the L0 is written; pending are the independent review, technical acceptance
+on the node and the operator launches, C first then M (see the direction handoff's first resume step).
+No launch before review and acceptance.
 
 ## Integration state
 

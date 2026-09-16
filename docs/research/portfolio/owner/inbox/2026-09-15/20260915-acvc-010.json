@@ -1,0 +1,86 @@
+{
+  "id": "20260915-acvc-010",
+  "created": "2026-09-15T19:59:07-07:00",
+  "direction": "acvc",
+  "tier": "direction",
+  "kind": "decision",
+  "title": "ACVC 方向节点固定 G3 对象：匹配整包比较 B01（一次 C 拟合与一次 M 拟合，六面板，主量 F(C) − F(M) @ .01 J）带修正",
+  "context": "em:acvc:convergence 2026-09-16 02:48Z 选 A 带修正（PRO_FINAL）：固定 ACVC_MATCHED_PACKAGE_COMPARISON_B01，MASTER 28731 / 命名空间 38731，一次新 C 拟合与一次新 M 拟合（配方不变），六个终评面板 C、F(C)、own-dwell(C)、M、F(M)、own-dwell(M) 在共同复位世界上；唯一主量 P = mean64[J(F(C)) − J(F(M))]，±.01 J 分支 F_C_ABOVE_MEI / WITHIN_MEI / F_M_ABOVE_MEI / INCOMPLETE；恰好六个辅助对比；不与 D1/D2 或 T_F 汇总；2,195,456 计分 tick 正好等于 G3 上限；C 先 M 后。修正：九次环境构造、提议器措辞、F(C)−M 不作辅助、分支叙述、预测理由、启动顺序、L0 验收项。hub 已应用修正并写 L0，待独立评审与技术接受后经 operator 启动。",
+  "options": [
+    {
+      "key": "A",
+      "label": "DM 卡片带修正（DM 建议）",
+      "consequence": "对象固定；L0、独立评审、技术接受、新鲜准入后经 operator 启动 C 与 M；2,195,456 tick"
+    },
+    {
+      "key": "B",
+      "label": "包络内另一对象",
+      "consequence": "未提出；节点权衡了 F(C)−M 与增量差主量、穿越 F 训练、机制搜索，均未选"
+    },
+    {
+      "key": "C",
+      "label": "不选符合对象",
+      "consequence": "额度不用并交回 Portfolio；未选"
+    }
+  ],
+  "recommended": "A",
+  "auto_applied": "A",
+  "dm_reason": "缺失的直接比较：F(C)−M 两块变号而 F(C) 两块都优于自身 C 与 own-dwell；两次迁移实例比较的是 F(M)−M；任一系列都未观察配对的 P。",
+  "evidence": [
+    "docs/research/candidates/acvc/pro_packets/20260915_matched_package_card_convergence/INTAKE.md",
+    "docs/research/candidates/acvc/ACVC_MATCHED_PACKAGE_COMPARISON_B01_PROSPECTIVE_CARD_20260915.md"
+  ],
+  "ledger_row": "docs/research/portfolio/audit/2026-09-15.md#L39",
+  "brief": "",
+  "ledger_kind": "selection",
+  "status": "open",
+  "packet": {
+    "question": "在 Portfolio G3 拨款之后，方向节点为匹配整包比较选定并固定科学对象：(A) DM 的预期卡片 ACVC_MATCHED_PACKAGE_COMPARISON_B01 带修正（六个开放点：估计量与标签、面板集 6/4/2、辅助对比、标签与配对、分支叙述与预测理由、启动顺序）；(B) 包络内另一对象；(C) 不选符合对象并说明交回 Portfolio 的理由？",
+    "changes_if_approved": [
+      {
+        "target": "ACVC 科学对象",
+        "from": "G3 已资助但对象未固定",
+        "to": "固定 B/EXPLORE 匹配整包块 MASTER 28731 / 命名空间 38731：一次新 C 拟合与一次新 M 拟合（配方不变），六个终评面板 C、F(C)、own-dwell(C)、M、F(M)、own-dwell(M) 在共同复位世界上；唯一主量 P = mean64[J(F(C)) − J(F(M))]，±.01 J 不取整分支 F_C_ABOVE_MEI / WITHIN_MEI / F_M_ABOVE_MEI / INCOMPLETE；恰好六个辅助对比；2,195,456 计分 tick，正好等于上限"
+      },
+      {
+        "target": "卡片修正",
+        "from": "DM 原稿",
+        "to": "环境构造九次而非十次；“ACVC 协调器”改为“C 训练的私有循环提议器”；六个辅助对比穷尽，F(C)−M 不再作为辅助（仅历史语境）；删除提议器因果与默认选择的暗示；预测理由限定（三个未匹配的 M 均值不是三次配对胜出）；启动顺序 C 先 M 后，并发仅为运行变体且不主张历史竞争数字；L0 需在两条进程路径上于配置、配方导入与种子解析之前绑定身份与计划，显式六键面板映射，为新主量重新标注，按依赖判定 INCOMPLETE"
+      },
+      {
+        "target": "后续",
+        "from": "无",
+        "to": "hub 直接实现 L0（薄入口 --arm C|M 与配对归约器、两个启动脚本、聚焦合成测试），独立评审，技术接受，成本投影，远端工作树与新鲜准入，仅经 hmasd-experiment-operator 启动，C 先 M 后；本决定不启动任何实验"
+      }
+    ],
+    "if_refused": "所有者可在账本 owner 列或评审中改选：改面板集或主量需回到方向节点重定；选 C 则额度不用并交回 Portfolio。任何选择都不改变两块 C/M 主张与两次迁移读数。",
+    "evidence_for": [
+      {
+        "path": "docs/research/candidates/acvc/pro_packets/20260915_matched_package_card_convergence/archive/RESPONSE.md",
+        "quote": "Select A with the corrections below: fix one B/EXPLORE matched-package block, MASTER 28731 / evaluation namespace 38731, with one fresh C fit, one fresh M fit and all six proposed sole-final panels. The sole primary is P = mean64[J(F(C)) − J(F(M))], read at the unchanged ±.01 J boundaries.",
+        "why": "直接回答 G3 购买的整包开发选择；语境面板保留已接受的评估路径并展示更简单的替代，不改变主量。"
+      }
+    ],
+    "evidence_against": [
+      {
+        "path": "docs/research/candidates/acvc/pro_packets/20260915_matched_package_card_convergence/archive/RESPONSE.md",
+        "quote": "The strongest counterweight is that ranking two wrapped packages may still leave little reason to maintain either wrapper.",
+        "why": "两次 M 侧 F 对 dwell 均差都在带内（+.0093、+.0002 J）；F(M) 对 M 有 11/64 与 22/64 不利世界。"
+      }
+    ],
+    "uncertainty": [
+      "单块只给两个已拟合策略的条件世界精度，不给训练总体均值",
+      "计划 C 2,600 s / M 1,200 s 为初始判断非上限；C 无独立运行时基线",
+      "DM 预测 .20/.15/.65 为主观前瞻判断"
+    ],
+    "cost": {
+      "compute": "两次拟合与六面板共 2,195,456 计分 tick（正好上限），计划约 3,800 s 原生墙钟；本决定本身零新拟合",
+      "owner_time": "阅读固定后的卡片与决定，约 5 分钟",
+      "reversibility": "reversible",
+      "waits_on_this": "启动等待 L0 独立评审与技术接受；不等所有者"
+    },
+    "verdict_text": "方向节点选 A 带修正（PRO_FINAL）：固定匹配整包块 28731/38731，一次 C 拟合与一次 M 拟合，六个面板，主量 P = mean64[J(F(C)) − J(F(M))] 在 ±.01 J，恰好六个辅助对比，2,195,456 tick 正好等于 G3 上限；修正九处构造计数、提议器措辞、辅助集合、分支叙述、预测理由、启动顺序与 L0 验收项；hub 已应用修正并实现 L0，待独立评审与技术接受后经 operator 启动，C 先 M 后。",
+    "source": "docs/research/candidates/acvc/pro_packets/20260915_matched_package_card_convergence/archive/RESPONSE.md"
+  },
+  "starred": true
+}
