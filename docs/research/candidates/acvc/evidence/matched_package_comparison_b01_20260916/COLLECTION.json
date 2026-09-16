@@ -1,0 +1,191 @@
+{
+  "object": "ACVC_MATCHED_PACKAGE_COMPARISON_B01",
+  "arms": {
+    "C": {
+      "handle": "acvc-matched-c-b01-28731-841e5c35b",
+      "status": {
+        "task": "acvc-matched-c-b01-28731-841e5c35b",
+        "status": "finished",
+        "exit_code": 0,
+        "pid": 3762157,
+        "uptime_seconds": 1315,
+        "tmux_active": false
+      },
+      "remote_output_root": "/home/wu/hmasd-worktrees/acvc-matched-b01-841e5c35b/temp/directions/acvc/exp/matched_package_comparison_b01_28731_C",
+      "native_time": {
+        "native_wall_s": "1161.65",
+        "peak_rss_kib": "552644",
+        "user_s": "1157.22",
+        "system_s": "2.21",
+        "exit_code": "0"
+      },
+      "files": [
+        {
+          "relative_path": "native/C/admission.json",
+          "remote_path": "/home/wu/hmasd-worktrees/acvc-matched-b01-841e5c35b/temp/directions/acvc/exp/matched_package_comparison_b01_28731_C/admission.json",
+          "bytes": 504,
+          "sha256": "0fa4b9db610410ae3396bd0e9c6c37248b7c8d2e49baa4799c7cee8c3e430125",
+          "remote_sha256_match": true
+        },
+        {
+          "relative_path": "native/C/episodes.jsonl",
+          "remote_path": "/home/wu/hmasd-worktrees/acvc-matched-b01-841e5c35b/temp/directions/acvc/exp/matched_package_comparison_b01_28731_C/episodes.jsonl",
+          "bytes": 2964345,
+          "sha256": "ce77f0ed94ec460314a26ae6fb0cbcc758907f6458cad6613b12dcd200e94dc4",
+          "remote_sha256_match": true
+        },
+        {
+          "relative_path": "native/C/updates.jsonl",
+          "remote_path": "/home/wu/hmasd-worktrees/acvc-matched-b01-841e5c35b/temp/directions/acvc/exp/matched_package_comparison_b01_28731_C/updates.jsonl",
+          "bytes": 2017068,
+          "sha256": "0cadb2e97e1e3c70aef4f44718217f8634b605672574c56d4f52ee286a31347e",
+          "remote_sha256_match": true
+        },
+        {
+          "relative_path": "native/C/summary.json",
+          "remote_path": "/home/wu/hmasd-worktrees/acvc-matched-b01-841e5c35b/temp/directions/acvc/exp/matched_package_comparison_b01_28731_C/summary.json",
+          "bytes": 10868,
+          "sha256": "ee7b501bda9213c4ff06f1fc8cc6559b8ae4ccddc62180cc3b5a8250f8064113",
+          "remote_sha256_match": true
+        },
+        {
+          "relative_path": "native/C/native_time.txt",
+          "remote_path": "/home/wu/hmasd-worktrees/acvc-matched-b01-841e5c35b/temp/directions/acvc/exp/matched_package_comparison_b01_28731_C/native_time.txt",
+          "bytes": 83,
+          "sha256": "dde464908795daade7c31023f576218223cf7b775df91bd67faea884bff1e86a",
+          "remote_sha256_match": true
+        },
+        {
+          "relative_path": "native/C/stdout.log",
+          "remote_path": "/home/wu/hmasd-worktrees/acvc-matched-b01-841e5c35b/temp/directions/acvc/exp/matched_package_comparison_b01_28731_C/stdout.log",
+          "bytes": 17865,
+          "sha256": "9d4b6736d27659dd3ec27af24c79bdfdde85da6eaba6ef9096662dff100de545",
+          "remote_sha256_match": true
+        },
+        {
+          "relative_path": "native/C/stderr.log",
+          "remote_path": "/home/wu/hmasd-worktrees/acvc-matched-b01-841e5c35b/temp/directions/acvc/exp/matched_package_comparison_b01_28731_C/stderr.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "remote_sha256_match": true
+        },
+        {
+          "relative_path": "native/C/final.pt",
+          "remote_path": "/home/wu/hmasd-worktrees/acvc-matched-b01-841e5c35b/temp/directions/acvc/exp/matched_package_comparison_b01_28731_C/final.pt",
+          "bytes": 281853,
+          "sha256": "da035214c10f897c5ed857b3e84023130ec6a517479091b3f07eb9131dda9f52",
+          "remote_sha256_match": true
+        },
+        {
+          "relative_path": "task_records/acvc-matched-c-b01-28731-841e5c35b.task_log.txt",
+          "remote_path": "/home/wu/.agent-tasks/acvc-matched-c-b01-28731-841e5c35b/task.log",
+          "bytes": 707,
+          "sha256": "27afe9fafc74442f5bde5dd9f552b96a12589bdc38f1a547323edeb0cef8e7d4",
+          "remote_sha256_match": null
+        }
+      ]
+    },
+    "M": {
+      "handle": "acvc-matched-m-b01-28731-841e5c35b",
+      "status": {
+        "task": "acvc-matched-m-b01-28731-841e5c35b",
+        "status": "finished",
+        "exit_code": 0,
+        "pid": 3764685,
+        "uptime_seconds": 1158,
+        "tmux_active": false
+      },
+      "remote_output_root": "/home/wu/hmasd-worktrees/acvc-matched-b01-841e5c35b/temp/directions/acvc/exp/matched_package_comparison_b01_28731_M",
+      "native_time": {
+        "native_wall_s": "1065.69",
+        "peak_rss_kib": "596148",
+        "user_s": "1064.17",
+        "system_s": "0.92",
+        "exit_code": "0"
+      },
+      "files": [
+        {
+          "relative_path": "native/M/admission.json",
+          "remote_path": "/home/wu/hmasd-worktrees/acvc-matched-b01-841e5c35b/temp/directions/acvc/exp/matched_package_comparison_b01_28731_M/admission.json",
+          "bytes": 504,
+          "sha256": "523865d3e7b7e1f069e75ccc9e009ce24014d79babcd875ed1a86a0450571e85",
+          "remote_sha256_match": true
+        },
+        {
+          "relative_path": "native/M/episodes.jsonl",
+          "remote_path": "/home/wu/hmasd-worktrees/acvc-matched-b01-841e5c35b/temp/directions/acvc/exp/matched_package_comparison_b01_28731_M/episodes.jsonl",
+          "bytes": 983000,
+          "sha256": "f7c369001e30107d9abcfc15829b30146336bd596296a1dd5c1073558a135a7e",
+          "remote_sha256_match": true
+        },
+        {
+          "relative_path": "native/M/updates.jsonl",
+          "remote_path": "/home/wu/hmasd-worktrees/acvc-matched-b01-841e5c35b/temp/directions/acvc/exp/matched_package_comparison_b01_28731_M/updates.jsonl",
+          "bytes": 687906,
+          "sha256": "bd7d131ef1e7becb241c7d9dc3972301f0e5db4134d1e204e232354849899281",
+          "remote_sha256_match": true
+        },
+        {
+          "relative_path": "native/M/summary.json",
+          "remote_path": "/home/wu/hmasd-worktrees/acvc-matched-b01-841e5c35b/temp/directions/acvc/exp/matched_package_comparison_b01_28731_M/summary.json",
+          "bytes": 11344,
+          "sha256": "b5208fe65a234cfdf52342456071f5c8a19ecab522b4001e62e07776b638502e",
+          "remote_sha256_match": true
+        },
+        {
+          "relative_path": "native/M/native_time.txt",
+          "remote_path": "/home/wu/hmasd-worktrees/acvc-matched-b01-841e5c35b/temp/directions/acvc/exp/matched_package_comparison_b01_28731_M/native_time.txt",
+          "bytes": 83,
+          "sha256": "a646f99589e6bbd45a767fafc996290bffa8167d079c78106d6664492cc2dd47",
+          "remote_sha256_match": true
+        },
+        {
+          "relative_path": "native/M/stdout.log",
+          "remote_path": "/home/wu/hmasd-worktrees/acvc-matched-b01-841e5c35b/temp/directions/acvc/exp/matched_package_comparison_b01_28731_M/stdout.log",
+          "bytes": 17923,
+          "sha256": "c6f903bc5653223388a2459d7b863a0e6af3313218f4314dbf6d55b2004b45f3",
+          "remote_sha256_match": true
+        },
+        {
+          "relative_path": "native/M/stderr.log",
+          "remote_path": "/home/wu/hmasd-worktrees/acvc-matched-b01-841e5c35b/temp/directions/acvc/exp/matched_package_comparison_b01_28731_M/stderr.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "remote_sha256_match": true
+        },
+        {
+          "relative_path": "native/M/final.pt",
+          "remote_path": "/home/wu/hmasd-worktrees/acvc-matched-b01-841e5c35b/temp/directions/acvc/exp/matched_package_comparison_b01_28731_M/final.pt",
+          "bytes": 313423,
+          "sha256": "189dcabc7dea3578f44ff40ac7ae0d6887ed9d929512eb3ba418a7d9801bb164",
+          "remote_sha256_match": true
+        },
+        {
+          "relative_path": "task_records/acvc-matched-m-b01-28731-841e5c35b.task_log.txt",
+          "remote_path": "/home/wu/.agent-tasks/acvc-matched-m-b01-28731-841e5c35b/task.log",
+          "bytes": 707,
+          "sha256": "406ce2a02f819b16889697fed335d5a746fd0201635474a0f3e4160ecc9a9086",
+          "remote_sha256_match": null
+        }
+      ]
+    }
+  },
+  "collection_time": "2026-09-16T03:36:40+00:00",
+  "source_sha": "841e5c35b1b9c0fe56f852f62f5235ae345b3227",
+  "remote_worktree": "/home/wu/hmasd-worktrees/acvc-matched-b01-841e5c35b",
+  "tracked_in_git": [
+    "native/*/admission.json",
+    "native/*/episodes.jsonl",
+    "native/*/updates.jsonl",
+    "native/*/summary.json",
+    "native/*/native_time.txt",
+    "task_records/*.txt",
+    "task_records/*.json"
+  ],
+  "retained_only": [
+    "native/*/final.pt",
+    "native/*/stdout.log",
+    "native/*/stderr.log"
+  ],
+  "note": "sha256 of every native file equals the remote sha256sum in task_records/remote_listing_<arm>.txt; final.pt, stdout.log and stderr.log are excluded from Git by .gitignore (*.pt, *.log) and retained in the archives named by PRESERVATION.json"
+}

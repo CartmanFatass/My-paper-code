@@ -92,4 +92,13 @@ C then M. Observation: hub-owned bounded status polls; collection after the term
 
 | Handle | Terminal (UTC) | Supervisor status | Native wall s | CPU s | Peak RSS KiB | Exit |
 | --- | --- | --- | ---: | ---: | ---: | --- |
-| (none) | | | | | | |
+| acvc-matched-c-b01-28731-841e5c35b | about 03:32:56Z (launch 03:13:34Z + 1,161.65 s; watch saw finished at 03:35:06Z) | finished, tmux inactive | 1,161.65 | 1,157.22 + 2.21 | 552,644 | 0/0 |
+| acvc-matched-m-b01-28731-841e5c35b | about 03:34:11Z (launch 03:16:25Z + 1,065.69 s; watch saw finished at 03:35:06Z) | finished, tmux inactive | 1,065.69 | 1,064.17 + 0.92 | 596,148 | 0/0 |
+
+Process walls to the summary 1,135.50 s (C: training 1,096.75 s, about 1.05 ms per training tick; panels 11.7 /
+13.5 / 13.5 s) and 1,042.07 s (M: training 1,004.03 s, about 0.96 ms per tick; panels 11.5 / 13.2 / 13.3 s).
+Actual walls 0.45 of the C plan and 0.89 of the M plan; the two single-thread originals overlapped on the
+otherwise idle node; no concurrent-pair speedup or slowdown is claimed. Collected 03:36Z with per-file digests
+equal to the remote listings (COLLECTION.json); paired reduce P = −.014962985109475921 J F_M_ABOVE_MEI
+(reduce/summary.json). Preserved (PRESERVATION.json), then the remote worktree and staging reclaimed
+(CLEANUP.json).

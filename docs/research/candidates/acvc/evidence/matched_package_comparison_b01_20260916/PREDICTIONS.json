@@ -7,16 +7,44 @@
       "WITHIN_MEI": 0.15,
       "F_M_ABOVE_MEI": 0.65
     },
-    "realized": null,
-    "value_J": null,
-    "multiclass_brier": null,
-    "modal_forecast_occurred": null
+    "realized": "F_M_ABOVE_MEI",
+    "value_J": -0.014962985109475921,
+    "multiclass_brier": 0.185,
+    "modal_forecast_occurred": true
   },
   "supports": {
-    "C-M": {"forecast": {"UP": 0.15, "WITHIN_MEI": 0.15, "DOWN": 0.7}, "realized": null, "value_J": null, "multiclass_brier": null},
-    "F(C)-C": {"forecast": {"UP": 0.8, "WITHIN_MEI": 0.15, "DOWN": 0.05}, "realized": null, "value_J": null, "multiclass_brier": null},
-    "F(M)-M": {"forecast": {"UP": 0.4, "WITHIN_MEI": 0.45, "DOWN": 0.15}, "realized": null, "value_J": null, "multiclass_brier": null}
+    "C-M": {
+      "forecast": {
+        "UP": 0.15,
+        "WITHIN_MEI": 0.15,
+        "DOWN": 0.7
+      },
+      "realized": "DOWN",
+      "value_J": -0.05588148949283544,
+      "multiclass_brier": 0.135
+    },
+    "F(C)-C": {
+      "forecast": {
+        "UP": 0.8,
+        "WITHIN_MEI": 0.15,
+        "DOWN": 0.05
+      },
+      "realized": "UP",
+      "value_J": 0.045535299092300766,
+      "multiclass_brier": 0.065
+    },
+    "F(M)-M": {
+      "forecast": {
+        "UP": 0.4,
+        "WITHIN_MEI": 0.45,
+        "DOWN": 0.15
+      },
+      "realized": "WITHIN_MEI",
+      "value_J": 0.00461679470894125,
+      "multiclass_brier": 0.485
+    }
   },
   "completeness_forecast": 0.9,
-  "owner": "not taken (unattended)"
+  "owner": "not taken (unattended)",
+  "scored_at": "2026-09-16T03:36:40+00:00"
 }

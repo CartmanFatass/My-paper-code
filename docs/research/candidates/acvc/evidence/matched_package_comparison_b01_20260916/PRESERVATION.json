@@ -1,0 +1,60 @@
+{
+  "object": "ACVC_MATCHED_PACKAGE_COMPARISON_B01",
+  "source_sha": "841e5c35b1b9c0fe56f852f62f5235ae345b3227",
+  "preserved_at": "2026-09-16T03:36:40+00:00",
+  "archives": {
+    "C": {
+      "path": "C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/retained/matched_package_comparison_b01_20260916/C_original.tar.gz",
+      "bytes": 1409098,
+      "sha256": "82bef4ed44d834611570d141d39d92c784e75d42eba284c2410ed97f019b3249",
+      "members": [
+        "C/admission.json",
+        "C/episodes.jsonl",
+        "C/updates.jsonl",
+        "C/summary.json",
+        "C/native_time.txt",
+        "C/stdout.log",
+        "C/stderr.log",
+        "C/final.pt"
+      ]
+    },
+    "M": {
+      "path": "C:/Projects/HMASD-worktrees/codex-acvc/temp/directions/acvc/retained/matched_package_comparison_b01_20260916/M_original.tar.gz",
+      "bytes": 560367,
+      "sha256": "a52dbe35f971e85fcff640eb77153e2dcccb2a81d566464762a93b2ee0e1259b",
+      "members": [
+        "M/admission.json",
+        "M/episodes.jsonl",
+        "M/updates.jsonl",
+        "M/summary.json",
+        "M/native_time.txt",
+        "M/stdout.log",
+        "M/stderr.log",
+        "M/final.pt"
+      ]
+    }
+  },
+  "member_digests": {
+    "C": {
+      "admission.json": "0fa4b9db610410ae3396bd0e9c6c37248b7c8d2e49baa4799c7cee8c3e430125",
+      "episodes.jsonl": "ce77f0ed94ec460314a26ae6fb0cbcc758907f6458cad6613b12dcd200e94dc4",
+      "updates.jsonl": "0cadb2e97e1e3c70aef4f44718217f8634b605672574c56d4f52ee286a31347e",
+      "summary.json": "ee7b501bda9213c4ff06f1fc8cc6559b8ae4ccddc62180cc3b5a8250f8064113",
+      "native_time.txt": "dde464908795daade7c31023f576218223cf7b775df91bd67faea884bff1e86a",
+      "stdout.log": "9d4b6736d27659dd3ec27af24c79bdfdde85da6eaba6ef9096662dff100de545",
+      "stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "final.pt": "da035214c10f897c5ed857b3e84023130ec6a517479091b3f07eb9131dda9f52"
+    },
+    "M": {
+      "admission.json": "523865d3e7b7e1f069e75ccc9e009ce24014d79babcd875ed1a86a0450571e85",
+      "episodes.jsonl": "f7c369001e30107d9abcfc15829b30146336bd596296a1dd5c1073558a135a7e",
+      "updates.jsonl": "bd7d131ef1e7becb241c7d9dc3972301f0e5db4134d1e204e232354849899281",
+      "summary.json": "b5208fe65a234cfdf52342456071f5c8a19ecab522b4001e62e07776b638502e",
+      "native_time.txt": "a646f99589e6bbd45a767fafc996290bffa8167d079c78106d6664492cc2dd47",
+      "stdout.log": "c6f903bc5653223388a2459d7b863a0e6af3313218f4314dbf6d55b2004b45f3",
+      "stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "final.pt": "189dcabc7dea3578f44ff40ac7ae0d6887ed9d929512eb3ba418a7d9801bb164"
+    }
+  },
+  "note": "complete native nine-file sets of both originals retained locally outside Git; the Git-tracked subset is listed in COLLECTION.json"
+}
