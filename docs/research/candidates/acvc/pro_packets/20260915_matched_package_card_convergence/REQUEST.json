@@ -1,0 +1,161 @@
+{
+  "caller_role": "em",
+  "workflow_node": "em_convergence",
+  "request_id": "2026-09-15-acvc-matched-package-card-convergence-01",
+  "source_thread_id": "9e0bd69f-aa60-5d32-aaf5-354fa4ffde46",
+  "parent_thread_id": "9e0bd69f-aa60-5d32-aaf5-354fa4ffde46",
+  "operator_thread_id": "9e0bd69f-aa60-5d32-aaf5-354fa4ffde46",
+  "direction_id": "acvc",
+  "repository": "CartmanFatass/My-paper-code",
+  "repository_url": "https://github.com/CartmanFatass/My-paper-code",
+  "execution_mode": "CALLER_DIRECT",
+  "owner_execution_instruction": "Owner 2026-09-15 12:57 PDT: the Claude Code research hub advances two research directions in parallel as the DM-equivalent with cross-direction allocation authority; advancing includes derivation, innovation and experimental validation, while final scientific measurement and convergence decisions can be left to GPT Pro. Pro transport in Claude Code uses Agentify Desktop through the Sonnet hmasd-pro-transport agent (owner 2026-09-05 22:57 PDT). The hub authors this request as ACVC's DM and the transport agent executes it through the Agentify strict review transport; no Codex singleton dispatch and no self-receipt.",
+  "delivery_mode": "github_delivery",
+  "conversation_id": "6aa12e74-8e54-83e8-95f6-001681b456f7",
+  "reset_invalid_provider_context": false,
+  "commit_or_ref": "fb163af330a885cc9ba7db6817d86aa77c53dc12",
+  "github_delivery": {
+    "branch": "codex/acvc",
+    "base_sha": "fb163af330a885cc9ba7db6817d86aa77c53dc12",
+    "response_path": "docs/research/candidates/acvc/pro_packets/20260915_matched_package_card_convergence/archive/RESPONSE.md",
+    "issue_url": "https://github.com/CartmanFatass/My-paper-code/issues/14"
+  },
+  "scientific_question": "Your 2026-09-15 result review of the second M-deployment transfer instance selected A (family concluded at B01 TRANSFERS +.018338 J and B02 WITHIN_MEI +.002859 J, per instance) and carried 'a fresh matched F(C) versus F(M) pair' to Portfolio as the strongest distinct alternative. The new fact: portfolio:cross_direction answered the direction-level investment/lifecycle question at 23:31Z with P1 under an inclusive exposure ceiling (G3, PRO_FINAL / OWNER_DELEGATED, linked): ACVC stays ACTIVE/MEDIUM/recasts2 with its slot; preparation and conditional execution of one bounded matched-package comparison is funded, at most one fresh C fit and one fresh M fit of the unchanged recipes (4,096 H256 episodes each), inclusive ceiling 2,195,456 scored team ticks with at most six 64-world final panels, unused allowance expiring, zero retries or extensions; and Portfolio expressly left the scientific object for you to select and fix (estimand, comparator specification, labels, pairing, panels, reading rule) with the recipes, Binding's numerical law, the private-information host, native reward/termination and the .01 J MEI unchanged. Under the owner's 12:57 PDT scope instruction the hub has derived the object into a prospective card (ACVC_MATCHED_PACKAGE_COMPARISON_B01, linked): one fresh prospectively paired block MASTER 28731 / namespace 38731 (disjoint from 28331/38331, 28431/38431, 28531/38531, 28631/38631, 8961/8962), one C fit and one M fit of the byte-identical recipes, six sole-final panels produced by the two accepted runners without evaluator changes (C, F(C), own-dwell(C) from the comparison runner; M, F(M), own-dwell(M) from the transfer runner) on the common reset addresses 100000*38731+2000+e, e=0..63, constructor offsets 62/63/64 and 65/66/67, the same Binding law applied to each proposer on its own history; sole primary P = mean64[J(F(C)) - J(F(M))] at the unrounded .01 J branches F_C_ABOVE_MEI / WITHIN_MEI / F_M_ABOVE_MEI / INCOMPLETE; six supporting matched contrasts (C-M, F(C)-C, F(M)-M, F(C)-own-dwell(C), F(M)-own-dwell(M), own-dwell(C)-own-dwell(M)) with the decomposition identity reported as arithmetic only; no pooling with D1/D2 or T_F,1/T_F,2; exposure exactly the ceiling (2,097,152 training + 98,304 evaluation ticks, 24,576 optimizer calls, two snapshots, six loads); plans C 2,600 s / M 1,200 s not caps; DM predictions P F_C_ABOVE .20 / WITHIN .15 / F_M_ABOVE .65; L0 as one thin entry with --arm C|M binding the identities before any recipe import plus a paired reducer over the two summaries. The question for this node: select and fix the scientific object for the G3 allocation. Specifically decide the six open points in card section 7: (1) the estimand and branch labels; (2) the panel set: all six panels from the unchanged runners at exactly the ceiling (DM recommendation), four panels (2,162,688 ticks, C-side evaluator change) or the two package panels alone (2,129,920 ticks, changes on both sides); (3) the supporting contrasts and their reading; (4) labels and pairing; (5) the development-advice mapping of the three branches and corrections to the DM's prediction reasoning; (6) launch order (concurrent originals allowed, sequential C-then-M as the loaded-node default). Alternatively (B) fix a different object inside the G3 envelope with its exact specification, or (C) select no conforming object and state the actual reason the hub must return to Portfolio.",
+  "deliverable": "Give one conclusion-first Direction decision: (A) the card as proposed, with every correction stated exactly; (B) a different object inside the G3 envelope, fully specified; or (C) no conforming object with the reason for Portfolio. For A or B, confirm or correct the class, block structure, arms and panels, matching, comparator, sole primary and its labels, reading rule with the MEI reason, supporting contrasts, the no-pooling rule and the display beside the concluded families, labels and RNG scheme, exposure table, ordinary cost plans, launch order, the focused acceptance items the L0 must show before launch, and what each outcome would change and cannot establish. Your selection is not an accepted source change, a launch, or a Portfolio action; the hub then implements the L0, obtains independent review, technical acceptance, fresh admission and operator launch under G3.",
+  "claim_ceiling": "One fresh prospectively paired training block with one attained C policy and one attained M policy deployed through the same fixed transformation on common final worlds: at most a bounded matched package comparison with conditional-world precision for two fitted policies, informing which complete package to develop next. Not stable superiority, not a training-population mean, not a discardable C or M, not tuned headroom, equivalence, a K/N/retrace/memory mechanism, C promotion, default change, transfer or recurrence claim; the concluded C/M two-block claim and both transfer instances keep their labels. This round fixes at most one object inside the G3 envelope.",
+  "constraints": [
+    "Direction-tier only: select and fix the object inside the Portfolio G3 envelope (at most one fresh C fit and one fresh M fit of the unchanged recipes, inclusive ceiling 2,195,456 scored team ticks, at most six 64-world final panels, zero retries or extensions). Investment, capacity, priority and lifecycle are decided and not reopened here; a non-conforming object returns to Portfolio through the hub. Consultation exposure of this request: zero fits, models, environment steps, optimizer steps, tests or profiling; only static reading.",
+    "Frozen and unchanged: the block-2 C and M recipe bytes (C: cluster_mappo_comparison_b01/c_fit.py; M: mappo.py with upstream de66d7a4b), the Binding law and its numerical convention, both accepted panel laws, native reward and termination, the private-information host, CPU FP32 single-thread numerics, the .01 J MEI with the unrounded reading rule, and the no-pooling display beside the concluded C/M blocks and transfer instances. The C/M family and the transfer family stay concluded; this object is not a third C/M block.",
+    "Evidence-spec sections 11.8-11.11 govern: one fresh block is the bounded follow-up, no seed must be positive, no universal seed count, estimator, bootstrap, significance or pilot gate; the card's own MEI informs comparison without rewriting result branches; package versus component claims stay distinct.",
+    "Execution facts you may rely on: remote-first WSL node, exact committed detached source, per-invocation fresh memory admission of at least 4 GiB joined by &&, hmasd-experiment-operator launch, detached supervision; measured walls C 1,670.62 s (beside one fit) and 2,495.72 s (beside four), M 985.12 / 989.80 s alone with three panels; the accepted runners already produce the six panels without code change.",
+    "Answer in natural language with the numbers you rely on; cite the fixed sources by their linked paths."
+  ],
+  "response_schema": [
+    "Conclusion (A card as proposed with exact corrections / B different object / C no conforming object) and actual fixed-source access/limits.",
+    "The fixed object: class, block, arms and panels, matching and RNG scheme, comparator, sole primary with labels and MEI reason, supporting contrasts, no-pooling rule, exposure and plans, launch order, required focused acceptance items.",
+    "Strongest support, strongest contradiction, alternatives weighed (the three panel sets, another primary, unlisted objects), corrections to the DM's predictions and reasoning.",
+    "What each outcome would change for development advice and what it cannot establish; what remains unchanged (concluded families, lifecycle, sequencing)."
+  ],
+  "reference_files": [
+    {
+      "path": "docs/research/candidates/acvc/ACVC_MATCHED_PACKAGE_COMPARISON_B01_PROSPECTIVE_CARD_20260915.md",
+      "purpose": "Read completely: the DM's proposed object, panels, matching, primary, reading rule, predictions, exposure, L0 and the six open points for this node.",
+      "provenance": "Prospective card by the Claude Code hub as DM under the owner's 12:57 PDT scope instruction; not yet fixed by any node.",
+      "commit_sha": "fb163af330a885cc9ba7db6817d86aa77c53dc12"
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260915_acvc_direction_investment_lifecycle/archive/RESPONSE.md",
+      "purpose": "Read completely: the Portfolio decision (P1 with ceiling, G3) that funds this object and delegates its selection to this node; the envelope and application order.",
+      "provenance": "Complete archived portfolio:cross_direction response, PRO_FINAL / OWNER_DELEGATED.",
+      "commit_sha": "fb163af330a885cc9ba7db6817d86aa77c53dc12"
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260915_acvc_direction_investment_lifecycle/INTAKE.md",
+      "purpose": "The DM intake of the Portfolio decision: question posed, conformance check, application.",
+      "provenance": "Hub intake as DM.",
+      "commit_sha": "fb163af330a885cc9ba7db6817d86aa77c53dc12"
+    },
+    {
+      "path": "docs/research/portfolio/decisions/2026-09-15-acvc-direction-investment-lifecycle.md",
+      "purpose": "The G3 decision record on main.",
+      "provenance": "Portfolio decision record, PRO_FINAL / OWNER_DELEGATED.",
+      "commit_sha": "c8228b2f1926da8b199726d694afedc5b2e01a1f"
+    },
+    {
+      "path": "docs/research/candidates/acvc/pro_packets/20260915_m_deployment_transfer_b02_result_review/archive/RESPONSE.md",
+      "purpose": "Your previous decision (A): the transfer family concluded, C carried as the strongest distinct alternative with its cost sketch.",
+      "provenance": "Complete archived em:acvc:convergence response, PRO_FINAL.",
+      "commit_sha": "fb163af330a885cc9ba7db6817d86aa77c53dc12"
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_CLUSTER_MAPPO_COMPARISON_B01_SCIENCE_CARD_20260914.md",
+      "purpose": "The frozen C/M block card: recipes, reset and RNG scheme, common panel resets, primary and MEI reason, exposure counts; the matched-block pattern this card reuses.",
+      "provenance": "Frozen B/EXPLORE science card (block 1).",
+      "commit_sha": "fb163af330a885cc9ba7db6817d86aa77c53dc12"
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_CLUSTER_MAPPO_COMPARISON_B02_RESULT_EVIDENCE_20260915.md",
+      "purpose": "Block-2 absolute scores and contrasts, two-block accumulation, native costs; context for predictions.",
+      "provenance": "Accepted E0 evidence.",
+      "commit_sha": "fb163af330a885cc9ba7db6817d86aa77c53dc12"
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_M_DEPLOYMENT_TRANSFER_B02_RESULT_EVIDENCE_20260915.md",
+      "purpose": "Second transfer instance: M_2, F(M_2), dwell(M_2) scores, T_F,2, counters, cost; the per-instance display beside B01.",
+      "provenance": "Accepted E0 evidence.",
+      "commit_sha": "fb163af330a885cc9ba7db6817d86aa77c53dc12"
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_M_DEPLOYMENT_TRANSFER_B01_RESULT_EVIDENCE_20260915.md",
+      "purpose": "First transfer instance: absolute scores, T_F, T_D, U, counters, cost.",
+      "provenance": "Accepted E0 evidence.",
+      "commit_sha": "fb163af330a885cc9ba7db6817d86aa77c53dc12"
+    },
+    {
+      "path": "scripts/run_acvc_cluster_mappo_comparison_b01.py",
+      "purpose": "The accepted comparison runner: C arm fit, snapshot and C/F/dwell panels; reduce mode; identities read from the protocol module.",
+      "provenance": "Accepted runner (launch source of blocks 1-2 through the b02 wrapper).",
+      "commit_sha": "fb163af330a885cc9ba7db6817d86aa77c53dc12"
+    },
+    {
+      "path": "scripts/run_acvc_cluster_mappo_comparison_b02.py",
+      "purpose": "The block-2 wrapper: rebinding MASTER/namespace in the protocol before any recipe import; the C-arm pattern the thin entry reuses.",
+      "provenance": "Accepted wrapper (block 2).",
+      "commit_sha": "fb163af330a885cc9ba7db6817d86aa77c53dc12"
+    },
+    {
+      "path": "scripts/run_acvc_m_deployment_transfer_b01.py",
+      "purpose": "The accepted transfer runner: M fit, snapshot, M/F(M)/dwell(M) panels with constructor offsets 65/66/67, reduce_transfer; the M-arm pattern the thin entry reuses.",
+      "provenance": "Accepted runner (launch source of B01; B02 through its thin entry).",
+      "commit_sha": "fb163af330a885cc9ba7db6817d86aa77c53dc12"
+    },
+    {
+      "path": "scripts/run_acvc_m_deployment_transfer_b02.py",
+      "purpose": "The B02 thin entry: module-global rebinding of the transfer runner before any recipe import, wrong-seed refusal.",
+      "provenance": "Accepted thin entry (B02).",
+      "commit_sha": "fb163af330a885cc9ba7db6817d86aa77c53dc12"
+    },
+    {
+      "path": "experiments/candidates/acvc/cluster_mappo_comparison_b01/protocol.py",
+      "purpose": "Protocol identities, ARMS/PLANS, panel, fit_eligible, contrast and reduce_pair helpers the paired reducer reuses.",
+      "provenance": "Accepted protocol module.",
+      "commit_sha": "fb163af330a885cc9ba7db6817d86aa77c53dc12"
+    },
+    {
+      "path": "experiments/candidates/acvc/cluster_mappo_comparison_b01/c_fit.py",
+      "purpose": "C arm execution and its three panels (constructor offsets 62/63/64) through the shared collect law.",
+      "provenance": "Accepted C learner reuse.",
+      "commit_sha": "fb163af330a885cc9ba7db6817d86aa77c53dc12"
+    },
+    {
+      "path": "experiments/candidates/acvc/m_deployment_transfer_b01/wrapped_eval.py",
+      "purpose": "The M-side wrapped evaluator: Binding per episode on the panel's own history, retrace or zero substitution.",
+      "provenance": "Accepted evaluator (B01/B02).",
+      "commit_sha": "fb163af330a885cc9ba7db6817d86aa77c53dc12"
+    },
+    {
+      "path": "experiments/candidates/acvc/native_link_loss_b01/binding.py",
+      "purpose": "The unchanged Binding law applied to both proposers.",
+      "provenance": "Accepted source.",
+      "commit_sha": "fb163af330a885cc9ba7db6817d86aa77c53dc12"
+    },
+    {
+      "path": "docs/research/candidates/acvc/DIRECTION.md",
+      "purpose": "Current direction state: G3, the concluded families, the corrections applied, lifecycle.",
+      "provenance": "Direction authority maintained by the hub as DM.",
+      "commit_sha": "fb163af330a885cc9ba7db6817d86aa77c53dc12"
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "purpose": "Sections 4, 7, 8.1, 11.4, 11.7-11.11.",
+      "provenance": "Controlling evidence specification.",
+      "commit_sha": "c8228b2f1926da8b199726d694afedc5b2e01a1f"
+    },
+    {
+      "path": "docs/research/portfolio/TWO_AXIS_RESEARCH_PROGRAMME_20260914.md",
+      "purpose": "The owner-approved two-axis programme.",
+      "provenance": "Portfolio programme.",
+      "commit_sha": "c8228b2f1926da8b199726d694afedc5b2e01a1f"
+    }
+  ]
+}
