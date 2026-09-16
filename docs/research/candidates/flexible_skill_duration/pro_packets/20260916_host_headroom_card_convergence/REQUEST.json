@@ -1,0 +1,125 @@
+{
+  "caller_role": "em",
+  "workflow_node": "em_convergence",
+  "request_id": "2026-09-16-fsd-host-headroom-card-convergence-01",
+  "source_thread_id": "9e0bd69f-aa60-5d32-aaf5-354fa4ffde46",
+  "parent_thread_id": "9e0bd69f-aa60-5d32-aaf5-354fa4ffde46",
+  "operator_thread_id": "fabd6914-bf7f-5050-a5da-b91154eb46e2",
+  "direction_id": "flexible_skill_duration",
+  "repository": "CartmanFatass/My-paper-code",
+  "repository_url": "https://github.com/CartmanFatass/My-paper-code",
+  "execution_mode": "CALLER_DIRECT",
+  "owner_execution_instruction": "Owner 2026-09-15 12:57 PDT: the Claude Code research hub advances two research directions in parallel as the DM-equivalent with cross-direction allocation authority; advancing includes derivation, innovation and experimental validation, while final scientific measurement and convergence decisions can be left to GPT Pro. Pro transport in Claude Code uses Agentify Desktop through the Sonnet hmasd-pro-transport agent (owner 2026-09-05 22:57 PDT). The hub authors this request and the transport agent executes it through the Agentify strict review transport; no Codex singleton dispatch and no self-receipt. Owner 2026-09-15 21:03 and 21:37 PDT: workflow lanes and Portfolio control; this is the one Pro round a CONFIRM object receives, at card freeze.",
+  "delivery_mode": "github_delivery",
+  "conversation_id": "6a9c2865-14a8-83e8-b556-e7f5836d9236",
+  "reset_invalid_provider_context": false,
+  "commit_or_ref": "b8c41ad27f85c9269a9e25adc4e9836af650061b",
+  "github_delivery": {
+    "branch": "codex/fsd",
+    "base_sha": "b8c41ad27f85c9269a9e25adc4e9836af650061b",
+    "response_path": "docs/research/candidates/flexible_skill_duration/pro_packets/20260916_host_headroom_card_convergence/archive/RESPONSE.md",
+    "issue_url": "https://github.com/CartmanFatass/My-paper-code/issues/10"
+  },
+  "scientific_question": "Freeze, correct or reject the FSD host headroom B01 card (linked). The owner changed the process on 2026-09-15: directions run in lanes, FSD is the approved set's only CONFIRM direction, a CONFIRM object gets exactly one Pro round (this one) at card freeze with a pre-registered reading rule, and the result is read by that rule without a further review unless the outcome falls outside it. The card proposes the direction's first section 11.7 headroom measurement on the frozen Scenario-1 host: stage 0 tunes the implemented private-actor flat reduction (FLAT, the same HMASD stack with a single constant skill, k = 10 chunking, coordinator and discriminators never updated) over three learning-rate multipliers with two seeds at 45 rollouts and selects by mean J45; stage 1 runs FLAT at the selected recipe, D1280 (authentic D0 default) and I1280 (interruption recipe) at their standing recipes, five fresh seeds each, 45 rollouts of 16 lanes x H500 (360,000 team steps, three times the longest FSD run), with the 32-world panel after every five rollouts as learning curves and rollout 45 as the endpoint. Primary H_45 = J45(D1280) - J45(FLAT_tuned) paired by seed; SI_45 = J45(I1280) - J45(D1280) and HI_45 beside it; s = pooled across-seed SD of J45 (df = 12). Declared MEI .08 J (the recorded block SD on this host). Pre-registered branches: HIERARCHY_ABOVE (mean > +2s and positive in at least 4 of 5 seeds: keep the host, next card is interruption at this budget), INDISTINGUISHABLE (inside +/-1s: the host does not reward skills at this budget; FSD moves to CLOSE with the hazard-host recommendation queued for the owner's review), FLAT_ABOVE (mean < -2s and negative in 4 of 5: CLOSE with an engineering finding bounding every FSD package claim), UNRESOLVED otherwise (no automatic tranche). Cost: 21 fits, native wall about 185,000 to 237,000 s, makespan about 15 to 20 h at four concurrent fits on the 20-core CPU node; the 5e6-step main-branch reference is unaffordable and the 0.67 J level is reported as context only. Questions you decide: (1) Is the private-actor flat reduction, tuned over learning rate, an acceptable section 11.7 baseline for this headroom record, given your 20:27Z reopening fact and the information-matching question the DM recorded as separate? If not, name the smallest comparator that is. (2) Are the seed count, budget, tuning grid, selection rule and the 2s / 1s rule with the 4-of-5 sign count the right pre-registration, or what should change? (3) Are the four branch consequences correctly stated for a CONFIRM object under the lanes (lifecycle itself is decided only at the owner's review)? (4) Anything that would make this result uninterpretable and must be fixed before freeze. Options: (A) freeze as written; (B) freeze with named corrections (state each exactly); (C) reject and name a different first CONFIRM object for FSD with its arms, comparator, primary, rule and cost; (D) advise that no confirmatory object is defensible on this host and say what the owner's review should hear.",
+  "deliverable": "Give one conclusion-first Direction decision: A, B with each correction stated exactly as card text, C with a complete object specification, or D with the reasoning the owner's review needs. Then the strongest support, the strongest contradiction, and what each pre-registered branch can and cannot establish. Under the lanes the card's result will be read by its own rule: say explicitly whether the rule as frozen is sufficient for that, or which outcome would still need a review.",
+  "claim_ceiling": "A frozen B card under section 11 for one direction; a headroom record under section 11.7 at 360,000 training steps on the frozen host with five independent training seeds per arm and a tuned flat baseline; no population claim beyond five seeds, no equivalence, no tuned headroom against the 5e6-step reference, no information-matched comparison, no lifecycle disposition (owner's review only), no C-BENCH promotion, no change to the authentic D0 default.",
+  "constraints": [
+    "Evidence-spec sections 11.8 to 11.11 govern; the workflow lanes decision (linked) adds for CONFIRM: at least two training seeds per arm or an MEI at least the recorded seed spread, and one Pro round per object at card freeze. The card's MEI and rule may be corrected here; after freeze they are read as written.",
+    "Any correction keeps the frozen host (Scenario 1, six UAVs, fifty users, J = 6U/500), native reward and termination, CPU FP32 four-thread numerics, remote-first WSL execution with exact committed source, per-invocation fresh memory admission of at least 4 GiB, detached supervision and separate evaluator RNG. The hierarchy arms keep their standing recipes; only the flat baseline is tuned, and only over the grid you accept.",
+    "Consultation exposure: zero fits, models, checkpoint loads, environment steps, optimizer steps, tests or profiling; only static reading of the named fixed sources. Historical execution records cited: baseline x interruption B01, twelve originals, 1,440,000 training and 576,000 evaluation team steps, summed native wall 45,401.07 s; peak RSS about 1.2 / 2.8 / 3.8 GiB by arm.",
+    "Budget: the object must fit the direction's standing CONFIRM budget (one object per seven days sized by its card) on the CPU node; if you enlarge it, state the new cost from the card's cost law. Lifecycle is not decided here; the card's CLOSE branches queue a memo for the owner's review.",
+    "Answer in natural language with the numbers you rely on; cite the fixed sources by their linked paths."
+  ],
+  "response_schema": [
+    "Conclusion (A/B/C/D) and actual fixed-source access/limits.",
+    "For B: each correction as exact replacement card text with its reason. For C: the complete object. For D: what the owner's review should hear.",
+    "Strongest support, strongest contradiction, alternatives weighed, and whether the frozen rule suffices to read every outcome without a review.",
+    "What the object can and cannot establish; no lifecycle disposition."
+  ],
+  "reference_files": [
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/FSD_HOST_HEADROOM_B01_PROSPECTIVE_CARD_20260916.md",
+      "purpose": "Read completely: the object to freeze (arms, stage-0 tuning and selection rule, stage-1 seeds, quantities, MEI and the pre-registered reading rule with its four branch consequences, cost projection, L0). Correct anything that is scientifically wrong or under-specified.",
+      "provenance": "Prospective card authored by the Claude hub as FSD DM under the workflow lanes; unfrozen.",
+      "commit_sha": "b8c41ad27f85c9269a9e25adc4e9836af650061b"
+    },
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/FSD_BASELINE_INTERRUPTION_B01_RESULT_EVIDENCE_20260915.md",
+      "purpose": "Read the completed twelve-fit result whose walls, RSS, block SD (.079 J) and FLAT/D1280/I1280 levels the card scales from.",
+      "provenance": "Accepted E0, 2026-09-15.",
+      "commit_sha": "b8c41ad27f85c9269a9e25adc4e9836af650061b"
+    },
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/FSD_BASELINE_INTERRUPTION_B01_INTAKE_20260915.md",
+      "purpose": "Read the three inference points and the reading that the untuned private FLAT is a package gap, not headroom.",
+      "provenance": "DM intake, 2026-09-15.",
+      "commit_sha": "b8c41ad27f85c9269a9e25adc4e9836af650061b"
+    },
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/baseline_interruption_b01_20260915/RESULT_SUMMARY.json",
+      "purpose": "Machine readout of the twelve fits: per-block panel scores at rollouts 5, 10, 15 by arm.",
+      "provenance": "Reducer output, 2026-09-15.",
+      "commit_sha": "b8c41ad27f85c9269a9e25adc4e9836af650061b"
+    },
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/FSD_BASELINE_INTERRUPTION_B01_PROSPECTIVE_CARD_20260915.md",
+      "purpose": "Sections 2 to 5: the arm definitions, panel law, independent units and cost law the new card reuses unchanged.",
+      "provenance": "Applied card of the completed object.",
+      "commit_sha": "b8c41ad27f85c9269a9e25adc4e9836af650061b"
+    },
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/pro_packets/20260915_post_baseline_interruption_convergence/archive/RESPONSE.md",
+      "purpose": "Your own decision A (CLOSE_OBJECT) at 20:27Z, the rejection of a FLAT recipe sweep as unable to deliver section 11.7 headroom, and the three reopening facts; the card claims to supply the second (a same-information comparison with a defined legal execution interface, method definition and ordinary cost) and states why the private-actor reduction is the intended comparator.",
+      "provenance": "Archived PRO_FINAL response, 2026-09-15.",
+      "commit_sha": "b8c41ad27f85c9269a9e25adc4e9836af650061b"
+    },
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/FSD_RESTART_PREPARATION_INTAKE_20260914.md",
+      "purpose": "The baseline information audit: the central-input flat option versus the private-actor reduction, and why the card records information matching as a separate question.",
+      "provenance": "DM preparation intake, 2026-09-14.",
+      "commit_sha": "b8c41ad27f85c9269a9e25adc4e9836af650061b"
+    },
+    {
+      "path": "docs/research/candidates/flexible_skill_duration/DIRECTION.md",
+      "purpose": "Current position (top of Position) and the scientific question.",
+      "provenance": "Direction authority.",
+      "commit_sha": "b8c41ad27f85c9269a9e25adc4e9836af650061b"
+    },
+    {
+      "path": "docs/research/portfolio/decisions/2026-09-15-workflow-lanes.md",
+      "purpose": "The CONFIRM lane rules this card follows: at least two seeds or an MEI at least the recorded seed spread, one Pro round at card freeze, result review only outside the pre-registered rule, standing budget of one object per seven days.",
+      "provenance": "Owner decision 2026-09-15 21:03 PDT.",
+      "commit_sha": "999e838cf764928b11d484f2232fde24a43f949f"
+    },
+    {
+      "path": "docs/research/portfolio/decisions/2026-09-15-portfolio-control-and-approved-set.md",
+      "purpose": "Portfolio control: FSD is the approved set's priority-one CONFIRM direction; lifecycle is decided only at an owner-triggered review, so the card's CLOSE branches queue a memo rather than deciding lifecycle.",
+      "provenance": "Owner decision 2026-09-15 21:37 PDT.",
+      "commit_sha": "999e838cf764928b11d484f2232fde24a43f949f"
+    },
+    {
+      "path": "docs/research/portfolio/APPROVED_SET.md",
+      "purpose": "The approved set v1 naming this card as FSD's first object.",
+      "provenance": "Authority file.",
+      "commit_sha": "999e838cf764928b11d484f2232fde24a43f949f"
+    },
+    {
+      "path": "docs/Claude_docs/reviews/FOUNDATIONS_AND_METHODOLOGY_CRITICAL_REVIEW_20260914.md",
+      "purpose": "Sections 3, 6 and 7: the 0.67 J reference, R1 (headroom before anything else, three decisive outcomes), R3 (inference from measured across-seed SD) and R5 (first FSD object).",
+      "provenance": "Claude hub review for the owner, 2026-09-14; advisory, not authority.",
+      "commit_sha": "999e838cf764928b11d484f2232fde24a43f949f"
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "purpose": "Apply sections 4, 7, 8.1, 11.4 and 11.7 to 11.11; section 11.7 defines headroom against a tuned same-information baseline.",
+      "provenance": "Evidence specification.",
+      "commit_sha": "999e838cf764928b11d484f2232fde24a43f949f"
+    },
+    {
+      "path": "docs/research/portfolio/TWO_AXIS_RESEARCH_PROGRAMME_20260914.md",
+      "purpose": "Sections 2 to 5 on baseline calibration and replication.",
+      "provenance": "Owner-approved programme.",
+      "commit_sha": "999e838cf764928b11d484f2232fde24a43f949f"
+    }
+  ]
+}

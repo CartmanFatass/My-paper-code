@@ -26,6 +26,15 @@ Untying the duration `k` is this direction. Untying the agent count `N` is a sep
 
 ## Position
 
+- **First CONFIRM object fixed — 2026-09-16 05:19Z (`em:flexible_skill_duration:convergence` C, PRO_FINAL):**
+  the DM's host headroom card was rejected and replaced by
+  [FSD_MATCHED_INFORMATION_BASELINE_B01](FSD_MATCHED_INFORMATION_BASELINE_B01_PROSPECTIVE_CARD_20260916.md): standing D1280 versus a central-input flat (legal central
+  snapshot at reset and k = 10 steps, ego one-hot) with a limited learning-rate selection, five fresh
+  confirmation blocks at 45 rollouts, primary mean G = J45(D1280) − J45(CF), MEI .05 J, labels
+  D_REFERENCE_ABOVE / SMALL_SIGNED / CF_REFERENCE_ABOVE with independent interval labels; 16 fits; no
+  I1280; `headroom_record: not established`. Read by its own rule at completion (workflow lanes);
+  lifecycle only at the owner's review. Approved set v1, priority 1, lane CONFIRM.
+
 - **Latest discriminator — completed B/EXPLORE, 2026-09-15 (baseline × interruption,
   Claude hub as DM):** the [funded S object](FSD_BASELINE_INTERRUPTION_B01_PROSPECTIVE_CARD_20260915.md)
   (FLAT / D1280 / I1280 × four fresh blocks, fifteen rollouts, panels 5/10/15) completed all

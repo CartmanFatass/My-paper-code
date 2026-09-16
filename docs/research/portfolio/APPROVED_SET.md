@@ -13,7 +13,7 @@ Hub: two directions. Node: fresh admission. Empty capacity stays empty.
 
 | Priority | Direction | Lane | Standing budget | First object | Reopening / exit conditions |
 | --- | --- | --- | --- | --- | --- |
-| 1 | flexible_skill_duration | CONFIRM | one confirmatory object per seven days, sized by its card | headroom card: tuned same-information baseline on the UAV host versus the direction's reference; at least two training seeds per arm or an MEI at least the recorded seed spread | exits to CLOSE if the headroom card and one follow-up show no effect above the noise floor; otherwise continues by review |
+| 1 | flexible_skill_duration | CONFIRM | one confirmatory object per seven days, sized by its card | `FSD_MATCHED_INFORMATION_BASELINE_B01` (fixed by the direction node 2026-09-16 05:19Z, option C, replacing the DM's headroom draft): standing D1280 versus a central-input flat with limited learning-rate selection, five fresh blocks at 45 rollouts, MEI .05 J, 16 fits; `headroom_record: not established` | every branch ends the object and keeps the result; CLOSE, a hazard host or further objects are recommendations for the owner's review, never automatic |
 
 ## Parked backups (pulled in only by review, in this order)
 
@@ -37,3 +37,4 @@ Hub: two directions. Node: fresh admission. Empty capacity stays empty.
 ## Version history
 
 - v1, 2026-09-15 21:37 PDT: initial set fixed by the owner with the control decision.
+- v1.1, 2026-09-16 05:30Z: FSD first-object wording replaced by the node-fixed object (direction-tier decision; no set change).
