@@ -1,16 +1,35 @@
 # Direction acvc: ACVC
 
+## Result review: A, matched-package question concluded at one block; lifecycle to Portfolio; lane CLOSE — 2026-09-16 04:20Z (em:acvc:convergence, PRO_FINAL)
+
+`em:acvc:convergence` (request `2026-09-16-acvc-matched-package-result-review-01`, response commit `f155792ae`, [archive](pro_packets/20260916_matched_package_result_review/archive/RESPONSE.md),
+12,452 B, sha256 f7d8622391d8591a18b724ddd7bdab859dc547225ae20b953ae50a1b5f29fb98, comment 5691883160) selected **A**: retain
+F_M_ABOVE_MEI and conclude the unchanged matched-package question at its one-block B/EXPLORE reading, no next numerical
+object selected; return the direction-level investment/lifecycle question to Portfolio carrying a second matched block (B)
+as the defensible alternative, not asserting exhaustion. The node's reading: the direct comparison favours F(M) over F(C)
+at the point-importance scale but does not establish a useful-size incremental case for F on M; P's SD across worlds is
+.088 J and its SE is conditional evaluation precision, not training-population uncertainty; one fitted policy per recipe
+is one block, not six replications. Corrections applied with dated markers: the undeclared F(C) − M context row removed
+from the E0 display; "coordinator-side" → "C-trained private recurrent proposer package"; "adds nothing MEI-sized" →
+"observed increment inside the point-importance band"; dwell(M) is not wrapper-free (Binding and private history remain).
+The node corrected the DM's framing that consolidation answers the wrapper-maintenance question: it preserves the
+uncertainty rather than measuring it. Historical readings unchanged (C/M +.023 / −.039; transfer +.018 / +.003; this
++.005 is a support, not a third transfer trial). G3 ends without automatic continuation; no new experiment is granted.
+Under the owner's workflow lanes (2026-09-15 21:03 PDT) ACVC enters **CLOSE**: closing memo, then one bundled Portfolio
+lifecycle question carrying B, the retained assets and the contrary evidence. ACTIVE/MEDIUM/recasts 2, lowest sequencing,
+slot unchanged; no producer.
+
 ## Matched-package comparison B01 complete: F(M) above F(C) by an MEI-sized margin on one block; G3 consumed — 2026-09-16 03:45Z (object-tier intake; result review with em:acvc:convergence)
 
 The G3 block ran as fixed (launch sha `841e5c35b`, both originals exit 0, 2,195,456 scored ticks exactly the
 ceiling; [E0](ACVC_MATCHED_PACKAGE_COMPARISON_B01_RESULT_EVIDENCE_20260916.md),
 [intake](ACVC_MATCHED_PACKAGE_COMPARISON_B01_INTAKE_20260916.md), ledger row 41). **P = F(C) − F(M) =
 −.014963 J, F_M_ABOVE_MEI** (24 / 40 / 0, conditional SE .011): on this matched block the conventional-proposer
-package attains an MEI-sized advantage over the coordinator-side package, which under the fixed mapping favours
+package attains an MEI-sized advantage over the C-trained private recurrent proposer package, which under the fixed mapping favours
 developing F(M) relative to F(C) on this block. Arithmetic context (not attribution): C − M −.056 J (DOWN),
 F(C) − C +.046 J (UP, 49/64), F(M) − M +.005 J (WITHIN_MEI), F(C) − own-dwell(C) +.024 J (UP), F(M) − own-dwell(M)
 −.002 J (WITHIN_MEI), own-dwell(C) − own-dwell(M) −.041 J (DOWN); absolute means C .3022, F(C) .3478, dwell(C)
-.3234, M .3581, F(M) .3627, dwell(M) .3644. The M-side wrapper adds nothing MEI-sized on this block, so
+.3234, M .3581, F(M) .3627, dwell(M) .3644. The M-side wrapper's observed increment is inside the point-importance band on this block (wording corrected 04:20Z per the result review), so
 unwrapped M or dwell(M) is a reportable competing development option without substituting for P. Displayed
 beside the concluded C/M blocks (F(C) − M +.023 / −.039 J) and transfer instances (F(M) − M +.018 / +.003 J;
 here +.005 J) without pooling. DM Brier P .185 (modal forecast occurred). Not stable superiority, a
