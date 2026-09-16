@@ -143,7 +143,12 @@ the rule; C-BENCH promotion; changes to the authentic D0 default.
 
 ## 9. Freeze record
 
-To be filled by the convergence round (packet
+**Rejected 2026-09-16 05:19Z by `em:flexible_skill_duration:convergence` (option C, PRO_FINAL; response `1462d3954`,
+sha256 0e9f6ca308ef8bd70d68836708a1db71faeae26a1f378f3eff60b1f42ac7fc66).** Superseded by
+[FSD_MATCHED_INFORMATION_BASELINE_B01_PROSPECTIVE_CARD_20260916.md](FSD_MATCHED_INFORMATION_BASELINE_B01_PROSPECTIVE_CARD_20260916.md): the private-actor FLAT is not a same-information baseline, the 2s / 1s rule and the
+.67 J reference are withdrawn, I1280 is dropped. This card is kept as the rejected draft; its predictions are not scored.
+
+Original text of this section: To be filled by the convergence round (packet
 `pro_packets/20260916_host_headroom_card_convergence/`): the node may correct arms, the
 tuning grid, the seed count, the rule constants or the branch consequences; corrections are
 applied with dated markers before freeze.
