@@ -16,7 +16,7 @@ both, and neither those contrasts nor F(M)−M decides the matched F(C)-versus-F
 was the strongest alternative and a close call. **The scientific object is not yet fixed**: the direction
 node (`em:acvc:convergence`) selects and fixes the card within the envelope (estimand, comparator, labels,
 pairing, panels, reading rule; recipes, Binding's numerical law, private-information host, native
-reward/termination and the .01 J MEI unchanged) before any L0, review or launch; the matched-package card question to `em:acvc:convergence` is being authored. Working-set
+reward/termination and the .01 J MEI unchanged) before any L0, review or launch; request `2026-09-15-acvc-matched-package-card-convergence-01` (packet `pro_packets/20260915_matched_package_card_convergence/`, card `fb163af33`, TASK `1894f08dd`, HANDOFF `e7d78f72e`) was sent once at 2026-09-16T02:38:57Z (first call chatgpt_target_menu_open_unconfirmed before any click, the identical verifyExisting call clicked once; operation bde1c551-bea7-4f77-a598-fd9b9971b627, user message 3091bb8c-3696-4134-9bc0-ae47a27ea4c4, tab 3da0ecf1-69d1-4e8c-a819-b401abdfd17e open for phase 2, prompt sha256 39db08880254e9c13a74821d2885c07802d98021166e1b5d27f1806d72aabc13); the archived answer is awaited. Working-set
 advice recorded for the owner: two occupied directions are not two advancing directions (FSD ACTIVE-idle).
 
 
