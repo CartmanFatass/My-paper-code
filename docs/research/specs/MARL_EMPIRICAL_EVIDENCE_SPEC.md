@@ -1,3 +1,7 @@
+> Historical binding / explanatory record after the 2026-09-16 control migration.
+> The preserved body below is not a daily instruction source. Current method: hmasd-scientific-tools.
+> Frozen objects retain their original source versions and exceptions.
+
 # MARL Empirical Evidence and Claim-Burden Specification
 
 ## 1. Purpose

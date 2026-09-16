@@ -1,3 +1,7 @@
+> Historical binding / explanatory record after the 2026-09-16 control migration.
+> The preserved body below is not a daily instruction source. Current method: hmasd-loop-dispatch.
+> Frozen objects retain their original source versions and exceptions.
+
 # Task collaboration
 
 Control runs on Windows C:/Projects/HMASD with PowerShell. Resolve native IDs from runtime

@@ -1,3 +1,7 @@
+> Historical binding / explanatory record after the 2026-09-16 control migration.
+> The preserved body below is not a daily instruction source. Current method: hmasd-research-engineering.
+> Frozen objects retain their original source versions and exceptions.
+
 # Engineering scope specification
 
 Status: confirmed by the owner 2026-09-03 (20:05 PDT; two tiers, the §4 list, the §5 budgets and

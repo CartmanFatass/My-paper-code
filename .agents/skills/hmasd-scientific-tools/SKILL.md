@@ -1,80 +1,148 @@
 ---
 name: hmasd-scientific-tools
-description: Use for HMASD scientific design, comparison, interpretation or review, literature retrieval, computed experiment counts, run-table analysis and plots, a concrete performance bottleneck, or choosing a MARL baseline/environment adapter. Supplies executable analysis and task-specific tool routing.
+description: Design, compare and interpret HMASD scientific objects; compute exposure or analyze existing results. Not mechanical Git, formatting or accepted artifact collection.
 ---
 
-# HMASD scientific tools
+# Research method
 
-Owner approved adoption batches 1 and 2 on 2026-09-05. Use tools to retrieve,
-calculate and measure facts instead of repeatedly deriving them in prose. Select
-only the mode needed now; this is not a launch checklist or new review layer.
+## Inputs and scope
 
-For new scientific design and interpretation, apply evidence-spec §11.11 and the
-[owner-approved two-axis programme](../../../docs/research/portfolio/TWO_AXIS_RESEARCH_PROGRAMME_20260914.md).
-Keep MEI, training-instance variation and estimator uncertainty distinct; preserve the
-declared independent unit and pairing. Baselines must match the claimed information, task and
-training rights, and package effects remain package effects without an identifying control.
-These priorities do not reopen frozen objects, add experimental budget, retroactively rescore
-accepted evidence or create a universal power, sample-size, interval-estimator or launch gate.
+Use the current assignment/card, accepted mechanism, actual allowance, evidence and
+question. Choose only the mode needed. Return the bounded claim, evidence, contrary
+facts, assumptions, actual exposure and next recommendation in the existing intake.
+Missing decision-critical inputs stop only the dependent claim; do not invent data,
+change frozen meaning or create a new experiment to fill a methodological checklist.
 
-- **Scientific reading:** for DM/Claude hub mechanism/card/comparator/estimand choices,
-  intake or scientific Pro questions, Portfolio material preparation and Pro-response conformance by its author (DM, or Root for vacancy replacement), and a
-  critic's reviewed claim, use [scientific-reading.md](references/scientific-reading.md).
-  During implementation and review, DM and independent Reviewer use this mode for affected reward, information,
-  termination, duration or inference semantics; do not create an Implementer task.
-  Start from the current assignment and relevant spec sections.
-  Formatting, Git, receipts and accepted technical collection do not trigger this mode.
-- **DM/Root literature:** for a concrete mechanism, comparator, unexpected-result or
-  related-work question, start with the two local libraries using
-  [local-literature.md](references/local-literature.md). Search indexes first and
-  verify decision-relevant claims in the source. Reuse relevant prior retrieval;
-  routine implementation does not require another literature pass. For a specific
-  coverage gap or current-information need, use official paper/code sources or the locally available
-  `C:/Projects/HMASD-scientific-skills/.agents/skills/paper-lookup/SKILL.md` and its
-  relevant database reference. Existing web/connector tools remain valid alternatives.
-  Retrieve public queries, retain exact relevant excerpts/links, and distinguish
-  metadata existence from support for a claim. Do not route to an additional LLM
-  research service merely because an upstream skill recommends it.
-- **DM counts:** compute expressions from actual configuration using Python/NumPy;
-  report units and dominant multipliers. An update round is not optimizer.step;
-  agent transitions are not independent episodes. Do not run a simulation just to
-  count a known loop. Unknown unit time remains unknown.
-- **Intake analysis:** use `scripts/summarize_runs.py` on selected endpoint scores
-  already aggregated once per independent training run, task and arm. It emits
-  descriptive summaries and an optional point plot. Add `--paired --baseline <arm>`
-  only when the study declares matched training runs, to emit paired differences.
-  Without `--paired`, equal seed labels do not trigger pairing.
-  Do not pass episode rows or repeated checkpoints as independent training seeds.
-  For curves or different estimands use a short task-specific Pandas/SciPy/Matplotlib
-  script instead. A tool's output does not choose the estimand or establish validity.
-- **Engineering performance:** use existing timings first; if a concrete decision remains,
-  scope a short torch.profiler window or torch.utils.benchmark call in the current
-  engineering assignment. Preserve declared scientific semantics; separate profiling
-  overhead/microbenchmarks from complete-run wall. No repeated mandatory profiling,
-  service, or whole-history replay. Native opaque functions may need native sampling
-  or phase timing; torch operator traces alone cannot explain their internals.
-- **Baseline, graph or environment work:** read [adapters.md](references/adapters.md)
-  only for that specific integration. Prefer existing fixed reference implementations
-  before rewriting PPO, collectors, buffers or graph algorithms.
+## Design and lanes
 
-Use the existing execution node and interpreter appropriate to the task; installing
-an analysis skill does not install its packages on another node. Optional dependencies
-go into the selected task's isolated environment, with compatible versions recorded;
-do not upgrade the live research interpreter. Frozen experiments keep their contracts.
-New tools do not authorize new arms, altered reward/information or changed dtypes.
+State the one-sentence claim, binding MARL structure (roster, duration, credit,
+nonstationarity/partial observation, or systems/information flow), question, non-goals,
+strongest simpler explanation and observation that distinguishes it. Trace environment
+event → entity ownership → available information → action/credit → learning → native
+consequence. For changing rosters distinguish entity/slot identity, join/leave/rejoin,
+survivor state, censoring, partner co-adaptation and primitive/opportunity time.
 
-Keep compact tool-produced tables/timings and relevant source snippets in the normal
-intake/engineering record. DM/Pro judge scientific implications within their respective decision scopes; Root checks its
-vacancy response against scope/specifications without locally selecting science; reviewers name
-concrete risks to actual measurements. Do not add generic power, normality, p-value,
-exactness or all-seeds-positive prerequisites. One seed remains a local observation.
+A/RECON reports engineering/access/measurement facts, never algorithm effects.
+B/EXPLORE uses real environment, policy, learner, trainer and evaluator, with nonzero
+transition/update/evaluation counts. It supports a preliminary setup-specific signal
+or counterexample. PILOT is an exploratory marker on B, not a separate evidence class.
+Historical labels and object-specific retained-policy exceptions stay bound to their
+original sources; do not generalize them. A and B have no consumption state.
+C-BENCH freezes a conclusion-bearing comparison on a declared population; C-TRANSFER
+adds held-out simulator variation relevant to the transfer claim; C-FORMAL carries only
+the exact proof/safety/invariant obligations the stated claim needs. Only a valid complete
+frozen C observation consumes that exact C rule; further work needs its own authorization.
+Before C final evaluation, separate development/tuning as the claim requires and freeze
+treatment, competent comparator, task population, training/evaluation budgets, primary
+estimand, checkpoints or selection rule, stopping rule, uncertainty method, decision rule
+and interpretation boundary. Transfer claims add held-out tasks/scenarios/populations
+and relevant dynamics/observation/communication disturbances with declared aggregation;
+simulator evidence never establishes physical deployment safety. No fixed seed quota
+or universal held-out transfer duty applies to B or ordinary C-BENCH.
 
-Example (from repository root, using the chosen analysis interpreter):
+EXPLORE: locally select pilots within the approved direction, accepted mechanism and
+actual fit allowance. Three to five candidates may be pruned by discrimination value
+and cost; count fits across arms, not pilot titles. Four fits can fund two two-arm
+single-seed pilots. No per-pilot Pro. A truly new family/mechanism may need one targeted
+batch direction question; no mandatory consultation per batch. Report signed effect,
+training n, learning/measurement counts, exposure, failures and next step; no formal MEI
+success verdict. Do not shorten learning into an uninformative experiment merely to
+save ceremony; no prerequisite learnability/oracle experiment is added.
 
-```text
-python .agents/skills/hmasd-scientific-tools/scripts/summarize_runs.py scores.csv --out temp/analysis/summary.json --plot temp/analysis/runs.png
-```
+CONFIRM is a process lane, not evidence promotion. B can remain developmental; a
+conclusion-bearing fixed-population comparison uses C-BENCH. One card-freeze Pro round
+covers positive/small/negative, wide intervals, boundaries, missing and invalid cases.
+DM intakes covered results directly. Only an uncovered change to comparison meaning,
+material dissent or explicit return requirement invokes exception review. A/B acquire
+no C consumption state from this lane. Honor every named object's stopping boundary.
+CLOSE has no new objects: closing memo is queued; lifecycle remains a separate decision.
 
-CSV columns: `task,seed,arm,score`. `score` is a finite, explicitly selected endpoint;
-`seed` identifies the independent training instance and its justified pairing, not an
-evaluation episode. Arm pairing is valid only when the study actually declares it.
+## Statistics and comparison
+
+Independent training instances are the learning-performance inference unit. Episodes
+and checkpoints are nested observations, not more training n. One training instance
+cannot estimate training-population uncertainty; bootstrap, more episodes and a larger
+MEI cannot fix that. Two seeds do not guarantee sufficiency. Choose repetition and
+precision for the claim; no uniform five/ten-seed gate for cheap exploration.
+MEI states a worthwhile difference with a task-specific reason, separately from training
+variation and estimator uncertainty. Single-instance confirmation is incomplete and
+reported conditionally. Keep individual runs/curves, estimand, interval model and
+small-sample limitations. A small point estimate is not equivalence, a wide interval
+is not zero effect, and five positive signs are not sufficient confirmation.
+
+Separate tuning/development and final evaluation as the claim requires. Report selection
+exposure. Pair only when shared exogenous design and real independent units justify it,
+not because seed numbers match. Never fill missing pairs with zero or assume missingness
+is random. Without a prospective addition rule do not add seeds/endpoints, switch
+checkpoints, drop bad blocks or run until significant. Outcome-informed redesign is
+labelled new exploration/reanalysis, never fresh prospective confirmation of the old rule.
+
+Describe actor AND critic rights, refresh cadence, bandwidth/representation, communication,
+action constraints, reward/termination/truncation, normalization, recurrent reset,
+training/update budgets, tuning rights and evaluation selection. Local-actor MAPPO,
+central-input flat CF, fixed-clock/interruption ablations and privileged uppers are
+different comparators. Same exogenous information is not matched representation,
+bandwidth, optimization difficulty or compute. Package gains need identifying controls
+before attribution to a component. Preserve native losses beside local/proxy gains.
+
+Reuse `docs/research/baselines/<host>/` and `experiments/baselines/<host>/` when compatible:
+configuration/version, information/task conditions, training/selection exposure, per-seed
+curves, results and applicability. State mismatches. A missing baseline library or tuned
+headroom is no universal pilot gate. Headroom is a stated upper reference minus a tuned
+same-information baseline, not any favorable score gap. K-axis controlled mechanism
+questions, jointly trained N-axis churn, train-N/test-N transfer and open ad hoc teamwork
+have distinct inference targets. Do not silently combine K and N into a new programme.
+
+## Burden, work and intake
+
+Prefer the smallest decision-relevant real learning comparison. Exact maxima, exhaustive
+support, full causal diagnosis or search-before-learning need a concrete purpose;
+bounded/beam search or moving a prerequisite into A does not supply one. Finite and
+zero-learner work can be expensive. Compute dominant factors from actual configurations:
+arms × independent fits × lanes × steps, evaluation panels/worlds, optimizer epochs and
+nested candidates/solver calls. Unknown time is not zero; no compulsory profiling fit.
+A plausible mechanism, differentiating prediction and containing null normally suffice;
+exact theorem claims require assumptions matching the implemented scheme.
+
+Within actual authorization, the scientific B launch burdens are common integrity,
+real learner/counts, fresh actual-node resource admission and a machine-produced exposure
+line showing learner movement relative to initialization (or equivalent). This does not
+waive required source acceptance/review, pause, frozen contracts or invocation limits.
+No universal exact replay, 1e-12 tolerance, all-positive-seed, causal census or power gate.
+
+Future cards state planned workload and allowance source: fits, training/evaluation
+team steps, optimizer/update and tuning exposure, per-fit wall, batch elapsed, RSS,
+threads and available CPU work. Distinguish plan/cap/measurement and sum_fit_wall,
+batch_elapsed and aggregate_cpu; parallel wall sums are not measured node occupancy.
+Keep seven-day standing limits (EXPLORE four fits; CONFIRM one card-sized object),
+no rollover or automatic next-window use. Window origin/deduction details undefined by
+the old source remain pending budget semantics; do not invent an anchor, reset a crossing
+object or erase failed work/retry usage. Resource dimensions without an assigned limit
+are UNKNOWN, not unlimited. Missing optional telemetry is resources_unmeasured and
+preserves trustworthy non-resource claims; missing primary instrumentation limits its claim.
+
+Keep three core records: pilot note/card, summary, intake; preserve raw outputs and
+necessary launch facts. Apply the frozen rule verbatim, retain all outcomes, distinguish
+engineering failure from scientific negative, and report trustworthy narrow facts even
+when the dependent full claim is invalid. Repair only dependencies the next claim uses;
+no blanket replay of unrelated historical failures. Technical completion is not acceptance.
+At a clean boundary refresh DIRECTION/handoffs/tracking once. Audit only selections with
+real alternatives; ordinary pilot facts need no owner item or automatic brief. Confirmation
+results and lifecycle/Portfolio information use the lightweight owner-item method. Record
+predictions before output; score an actual owner reply or mark not taken.
+Object completion is an intake, not authorization for another object or lifecycle action.
+
+## Tools, only as needed
+
+For an unresolved concept read relevant passages directly in
+`docs/rl-marl-foundations-20260907/FOUNDATIONS.md` or its topic-notes; record the concrete
+assumption/limit, not a citation ritual. For a literature gap read
+[local-literature.md](references/local-literature.md), search indexes then verify primary
+passages. No whole textbook or recursive citation preload. Explanatory gaps alone do not
+block B. For baseline/environment integration use [adapters.md](references/adapters.md).
+Use Python/NumPy for known counts rather than simulating. For endpoint CSV
+`task,seed,arm,score`, run `scripts/summarize_runs.py`; scores are once per training run.
+Use `--paired --baseline <arm>` only for justified declared pairing. Curves or other
+estimands need task-specific analysis, not episode rows disguised as training instances.
+Profiling is only a bounded named engineering question with recorded overhead. Optional
+packages belong in isolated environments, never a global/live interpreter upgrade.

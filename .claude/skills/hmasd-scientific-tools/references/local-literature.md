@@ -1,0 +1,59 @@
+# Local literature for DM decisions
+
+OWNER_DIRECT 2026-09-06: use the existing libraries when a concrete research question
+needs evidence. This is question-driven retrieval, not a new mandatory reading list.
+
+## When to retrieve
+
+Retrieve when designing or recasting a mechanism, selecting a comparator, examining
+an unexpected result, or assessing related-work overlap. State the question first.
+Reuse relevant evidence already checked in the current card/intake unless the question,
+source version or required coverage changed. Ordinary engineering implementation does not trigger
+a fresh search. Historical research and every cited paper are not startup reading.
+
+## Existing entry points
+
+Do not partition questions by library name. Both stores may contain methods, mechanisms
+and empirical evidence. Prefer a verified unified real-corpus entry point when available;
+until integration is verified, use the available source indexes below and state actual
+coverage. Files on disk are not proof of searchable coverage. My-lib's default tracked
+paper registry currently contains synthetic fixtures; exclude these from scientific
+retrieval and do not present them as real mechanism evidence. The owner's unified-library
+integration is assigned; this document does not claim it is already complete.
+
+- **My-lib — existing retrieval interface:** `C:/Projects/My-lib/README.md`
+  documents the existing local CLI and mechanism/evidence records. Use its existing
+  verified real-collection index and supported search interface. A CLI search uses the library's Innovation
+  Brief and explicit collection selection; derive these from the current question,
+  without asking the DM to rewrite the science card. Inspect relevant returned
+  source pointers, conditions and differences. No new index, service or acquisition
+  pipeline is needed for HMASD integration.
+- **Inst-sci — formal source corpus:** the formal library is
+  `C:/Projects/Inst-sci/papers/MyLib/`; start with `llm-index/catalog.v2.jsonl`.
+  Search title, algorithm, setting, benchmark or mechanism terms with bounded output.
+  Read a candidate's full metadata record in `metadata/v2/papers.v2.jsonl` when
+  needed, including quality warnings and field provenance. Read relevant pages or
+  elements from `json/<paper-id>.json` for substantive claims; use the corresponding
+  `pdf/<paper-id>.pdf` and assets when equations, tables, figures or extraction gaps
+  need verification. Use `metadata/integrity.json` for asset-availability questions;
+  do not rely on counts in old READMEs. Ignore `papers/temp` in ordinary retrieval.
+
+These are local control-plane paths, not paths relative to a DM worktree or remote
+execution node. If unavailable, report that concrete coverage/access gap and use an
+available source; do not silently treat the library as empty. This reading workflow
+does not require loading the Inst-sci download skill or performing downloads.
+
+## Evidence and handoff
+
+Indexes, title/abstract tags and mechanism matches identify candidates; they do not
+establish novelty, fair comparison or a scientific result. Confirm material claims
+in the source, retaining assumptions, setting, limits and page/section references.
+Distinguish the paper's finding from the DM's inference about HMASD. A local miss means
+no match in the searched snapshot, not absence of prior work. Extend to official
+external sources for a specific gap or freshness need, rather than forcing local coverage.
+
+Record the paper identity/version, source JSON/PDF path and page/section, bounded claim,
+and which current choice it informs in the existing card or intake. An implementation delegate receives only
+the relevant algorithm, equation or passage needed for its deliverable, with a precise
+pointer or excerpt if the source is inaccessible. Do not attach the whole paper set,
+repeat the research history, or create a separate literature report by default.

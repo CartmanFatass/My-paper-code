@@ -1,3 +1,7 @@
+> Historical binding / explanatory record after the 2026-09-16 control migration.
+> The preserved body below is not a daily instruction source. Current method: hmasd-research-engineering.
+> Frozen objects retain their original source versions and exceptions.
+
 # MARL runtime engineering specification
 
 Status: operative, 2026-09-05. Complete Portfolio Pro plan applied under AGENTS §4.7

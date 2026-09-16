@@ -1,3 +1,7 @@
+> Historical binding / explanatory record after the 2026-09-16 migration.
+> Current authoring and partial delivery method lives in hmasd-pro-research-prompt-author.
+> The preserved body is not a current dispatch route; frozen SHA versions remain intact.
+
 # GitHub research collaboration
 
 DM authors and intakes direction-related Pro questions, including ordinary Portfolio questions.

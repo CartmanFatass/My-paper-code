@@ -5,9 +5,7 @@ section 5. It decides nothing. Facts come from each direction's `DIRECTION.md`, 
 `PORTFOLIO.md`, `EXPERIMENT_TRACKING.md` and file counts (scout pass 2026-09-16 04:45Z); the
 "hub proposal" column is the DM-equivalent recommendation for the owner to accept, change or
 reject. Cost per valid result is approximated by objects run and Pro rounds spent, because
-compute per result was never recorded consistently. "Signal" means a positive result above the
-card's minimum effect that was not overturned by its own replication. Kill flags are inputs, not
-actions.
+compute per result was never recorded consistently. Evidence columns retain bounded observations, not a direction-wide signal verdict. Kill flags are recommendations, not actions. Historical counts below remain the 04:45Z inventory, not a fresh cost measurement.
 
 ## Questions for this review
 
@@ -16,11 +14,21 @@ actions.
 3. Whether the standing budgets of the lanes decision are the right size for the node (20 cores,
    about 15 GB, no GPU, four fits concurrently at 3 to 4 GB each).
 
-## Current approved set (v1)
+## Current source refresh (2026-09-16 migration)
+
+Source commit: e9399305d58bdd7e5f9518e12cf43e9abd199ee3 (main snapshot containing
+FSD intake/card and ACVC memo). Current object: FSD_MATCHED_INFORMATION_BASELINE_B01.
+Updated-at: 2026-09-16 control migration. Read the current approved set for authorization;
+this dossier makes no disposition. Actual node identity/resources are runtime_unverified;
+older 20-core/15-GB/no-GPU wording below is an earlier report, not a fresh probe. CF RSS
+and speed remain unmeasured. Seven-day origin/deduction and resource-dimensional limits
+are pending owner budget semantics; no automatic cross-week reset or grant.
+
+## Current approved set (v1.1)
 
 | Direction | Lane | Signal on record | Headroom record | Objects / Pro rounds | Hub proposal |
 | --- | --- | --- | --- | --- | --- |
-| flexible_skill_duration | CONFIRM, priority 1 | interruption vs no-interruption +.05 J at rollouts 5 and 10 over six blocks (accumulation interval touches zero); +.01 J at rollout 15 (four blocks, interval includes zero); the flat no-skill reduction scores .04 J above both at rollout 15 | none (FLAT is an untuned private-actor reduction, not a matched-information baseline) | 26 / 11 | keep; first CONFIRM object = headroom card (flat comparator, HMASD fixed k, D0 and I1280 at three times the current budget, five seeds per arm, decision rule from measured across-seed SD). Flag: the direction's whole record sits at 0.40 to 0.45 J against an achievable 0.67 J. |
+| flexible_skill_duration | CONFIRM, priority 1; execution paused, implementation pending | Historical interruption/package comparisons remain at their original endpoints and uncertainty; not a single signal flag | not established | 26 / 11 (historical inventory) | Current fixed object is D1280 versus central-input flat CF, k=10 central refresh, stage 0 six CF fits over learning-rate multipliers .5/1/2, then five fresh paired blocks (ten fits), 45 rollouts, J45, MEI .05 J and separate uncertainty labels. No .67 target, no interruption or hierarchy-necessity claim. Source: current matched-information card and its intake. |
 
 ## Queued from the closing lane
 
@@ -56,16 +64,19 @@ actions.
 Legacy (closed or absorbed, `docs/research/legacy/directions/`): fourteen further labels; not
 candidates.
 
-## Hub summary for the owner
+## Current interpretation and queued recommendations
 
-- Only FSD carries an effect that survived a second block, and even there the sign is unstable
-  across blocks and the flat reduction outscores the package at the longest budget run. The
-  headroom card is the one object that can settle whether the host rewards the hierarchy at all.
-- Twenty-six other directions have no surviving signal. Sixteen of them consumed between two and
-  twenty-six Pro rounds each. The hub proposes none of them for the approved set now; the
-  N-axis question (`variable_n_fleet_churn`) is the strongest reopening candidate once a host
-  with a real hazard exists (foundations review R2).
-- Lifecycle bookkeeping is inconsistent for about eighteen directions (their `DIRECTION.md`
-  defers to a `PORTFOLIO.md` table that no longer lists them). The approved set makes this moot
-  for execution; the owner may want a one-line "not approved" state recorded for each at this
-  review so the files stop contradicting each other.
+FSD's current object is a bounded complete-method comparison. It does not settle whether
+the host needs hierarchy and does not establish tuned headroom. The rejected headroom
+card, .67 reference and measured-SD rule remain historical evidence, not current inputs.
+
+ACVC has retained wrapper-local positive evidence, including its earlier clustered
+comparison, alongside adverse/mixed complete-package comparisons. These are different
+estimands; neither a single signal boolean nor a PARK recommendation erases them.
+PARK versus one additional matched block remains queued for owner-triggered review;
+no lifecycle decision, added direction or experiment is made by this refresh.
+
+Other candidate rows above preserve the original dossier's proposals/count inventory,
+not revalidated direction verdicts. Their heterogeneous lifecycle text is not execution
+authority. A review must refresh affected DIRECTION/intake sources before deciding.
+Compute per valid result remains unmeasured where source accounting is absent.

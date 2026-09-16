@@ -5,8 +5,7 @@ description: "Use when an author-owned native Transport executes or recovers an 
 
 # Native Agentify Pro Transport
 
-The author DM owns one reusable native Luna/high leaf Transport. Root uses this route for its
-own Portfolio vacancy request. Execute the assigned request; the author reads the full answer
+The author DM owns one reusable native Luna/high leaf Transport. Portfolio dispatch is owner-triggered only; no vacancy route exists. Execute the assigned request; the author reads the full answer
 and decides scientific/specification conformance. The current native assignment supplies the
 direct return parent. Preserve frozen HANDOFF IDs as provenance when recovering an older request.
 No singleton app task, relay, ACK loop, new scientific prompt or science selection belongs here.
@@ -23,25 +22,14 @@ replacement request or alter scientific meaning. Escalate to Root only when the 
 shared application runtime/load, a cross-direction resource or a scientific/Portfolio decision;
 Root then coordinates that dependency while the DM retains Transport acceptance.
 
-## Unrecoverable-conversation fallback
+## Inputs and scope
 
-If the original conversation cannot be recovered after the supported same-request repair path,
-the author DM may use a new conversation only when the old operation is positively verified as
-`sendAttempted=false` with no provider pairing or accepted effect. Record the old operation as
-`VERIFIED_NONACCEPTANCE / CONVERSATION_UNRECOVERABLE` and preserve its HANDOFF, prompt hash,
-idempotency key, tab facts and receipts. Then create a new handoff/conversation and idempotency
-key carrying the identical scientific prompt and frozen inputs, bind it as a new operation, and
-link both records. This is a recovery rebind, not a resend of an uncertain effect. Never use this
-fallback when `sendAttempted=true`, acceptance is unknown, or any provider pairing may exist; in
-those cases observe and reconcile the original operation only.
-
-For a failed initial homepage operation with no registry binding, use
-`bind_conversation.prepare_unaccepted_first_binding_rebind` with the validated replacement
-request and the fresh preserved operation audit. It reserves one deterministic generation,
-retains the prior audit in request history, and admits only explicit OWNER_DIRECT recovery with
-identical prompt/model/effort. It does not invent or quarantine a conversation UUID. Then use
-normal firstBinding and bind only the actual post-Send URL with the same reset evidence.
-An existing binding requires its own reconciliation or concrete-context replacement route.
+Use only an authorized exact committed handoff, current native parent/executor and existing
+operation state. No scientific design, status-only task or migration authorizes Send.
+Normal completion returns full archive/provenance and actual receipt state. For a concrete
+unrecoverable conversation after supported repair, read
+[unrecoverable-conversation.md](references/unrecoverable-conversation.md); uncertainty
+never permits that rebind. Missing inputs stop only the dependent effect.
 
 ## One preflight, one action, one return
 

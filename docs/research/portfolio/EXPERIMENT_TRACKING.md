@@ -1,3 +1,16 @@
+# 实验跟踪
+
+当前核对（2026-09-16，来源 `e9399305d58bdd7e5f9518e12cf43e9abd199ee3`）：研究仍暂停。
+唯一批准对象 FSD_MATCHED_INFORMATION_BASELINE_B01 已冻结、尚未实施 CF，迁移未启动任何 fit。
+ACVC 已有 closing memo，生命周期建议只排队。当前入口为 [PORTFOLIO.md](PORTFOLIO.md)、
+[批准表](APPROVED_SET.md)和[迁移 handoff](handoffs/2026-09-16-control-plane-migration.md)。
+记录未报告当前 producer；远端进程、浏览器和旧 agent 实时状态未全面核验，不推断它们已终止。
+
+## 历史执行明细（原文保留，非当前 dispatch 或容量规则）
+
+以下旧时刻状态、待归档表述、席位及路径仅保留原始执行证据；后续决定以上述当前来源为准。
+不得把历史 running、等待或空缺表述转成当前任务。
+
 # HMASD current execution tracking
 
 OWNER_OPERATIONAL_PAUSE 2026-09-15: all four native Astra/max DM chains completed their already

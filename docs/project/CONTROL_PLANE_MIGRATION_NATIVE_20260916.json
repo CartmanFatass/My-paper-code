@@ -1,0 +1,258 @@
+[
+  {
+    "runtime": "Codex 0.154.0",
+    "session": "01a0a9c3-5d84-7e80-bed9-3fbb0c7e0b11",
+    "role": "root",
+    "identity_basis": "rollout filename and parent spawn result; inherited session_meta is not child identity",
+    "source_log": "C:\\Users\\fires\\.codex\\sessions\\2026\\09\\16\\rollout-2026-09-16T03-29-08-01a0a9c3-5d84-7e80-bed9-3fbb0c7e0b11.jsonl",
+    "cwd": "C:\\Projects\\HMASD-worktrees\\control-plane-migration-20260916",
+    "tool_calls": [
+      {
+        "type": "function_call",
+        "name": "spawn_agent",
+        "arguments": "{\"task_name\":\"dm_behavior_test\",\"agent_type\":\"hmasd-direction-manager\",\"fork_turns\":\"all\",\"message\":\"gAAAAABqqm-CFJN6Vr0OKnSVJvPL-m4v62QiDLHXjjC8-NYryBGpXWXG4UGfYXdjKKbqyLicoCqxQmRhjISQaUA3vMy-HgDphe6tOyld-t8uNU5M4r6Ph-OuUVjwS28E3BBNRYcAQwcfa6ATHIw7c-iXsncImkiPBTtAf1HyGg3lKuiLqXMKCiCBO0FDSqJe1o-xyQfC5suHlhYRFnq3SKV8NeeuImY9eil46OgCGbBamLO8TS_5kiDWTAp0VL8FM1V-vgUB6cNq1nJ4gF_P7uWsINIm77aZJWQW94GSbhxV5zhWlFr21RZbiWJjxUqW51bje6aJf5cAdW1PUKHL55MEnMHEEQgy_wIna7_saux1mHFKe8K8_E68aPKkpIzyZSEJzBcnoGOGAmrzWtG6IrvC4S0qSfmnC1XEORWUmEsx5FIr69yJ_VALY1XYq2w2gt90UWHXPz-hlArZsCKdiHPpim4oDL4ZSdzfAVI-kiTAmZ9sKTWHgh6oN1LwCnZ0X7v1UTjvCJ8MCh-5RzUMEdR-pNgk1GsmVe_eaxDzusurJZS3EDLVRfmlCK7RNXOsVnzBMOBiOKEbc_Rqv74SlenNhslk4gcK4BIkkws2rFz791zVGALUymxv498CVOV1c5eksovl8dp2aYfKAiQZnjm4QS-TnJ2cjZEW800AhauMXJxuS-RnyGjIiXaSmZyMMGeRb4EutyzfBZ46WYhmi2W4BBtToLhYSMEKrkCHx05EPJX8KUtDkW-aB2kuxR78-ca2ROe24LfwWKPIBvwzkdFYXpyODCorR4jU08raGanUxvf2DZUQlUCogc5rvklXws-EJgsHwdApXFA7j0LU24Dr5Yz5j6PF_nlrliOX21PtB6_dFIi0D8V2XVhQQpBDSR7DQ5Rqfy_z6HXB7RYNTsLoZfUnCdHetEh2hOwxXEXNhLwA_EHVVNj01xF22fI2yIDgxqp1DidK\"}"
+      },
+      {
+        "type": "function_call",
+        "name": "spawn_agent",
+        "arguments": "{\"task_name\":\"operator_behavior_test\",\"agent_type\":\"hmasd-experiment-operator\",\"fork_turns\":\"all\",\"message\":\"gAAAAABqqm-JcFdUq6Lxhs8w6s7_2wNY4xeK2pYbBDEYx9BbjV2qblS43b1UOGJENSM3L_JIUUvcHfRAIrIR82jj1nMYQcjbBgoYysJ1Wsdgnx5Jjq1JqB4VsFUHl1xpXWY01URpfqRxY35j1hSZBI__47hBiXxkDDNDeXdEU3DYYnKnw3jpRCvLevrWg4Ci7mYokobLdcYEY40LtUf1ytRacY-9vso2pDqokjCR2Pc9iwrfmYKt3vJOTzenje0xLHu-JsvrW4KEARZbj-uc1ohYqLcVAPeKGeeLrBrZ4CJEreonC3d7TOQrWSy5zq3M8OVXOa5gfmDj5WKUJD4kZLlxnG-US_5Z8QZEs1xZFgQ86lGRcQ6fDJ3Lghg3Msroz4g-VhjsRcISvo7fyVMbBQL2a53euOwS1KN2H61xWab_FXAqSpgbG12x3DpBViIbdEK9YO5lAoPvPK8j0I2TkCFCiZNbaZkIcDo0k7ORJ_xeUFP8nvnN3YHyd-rfXc8gG5iCielL1ih0hJW_TPKwjVP-XgU9paRE-Fdx5kyscy6ZMshPs1-16dWlD2-YRLaZnz0GppfJnXvW84SX6QrPyo2iznpZNmkhiBb_4qbnB4O5nsbTjTJwYvijXD0euaRMaYyannN27GluBsWCMMxwIMSdfzXLHf2qWEyBpDz1Uqbo5pVl6_pCUNxjanvdCuFwA0Fb1IJOOdGLeQlwyIkuOlIffdBNeu9-FRDCPESpgcl5XeKs5Deo4OeU8qx4BrQMnWTWGeLk60bmWqWCaiSNjjnQjLA54Q5SqkC9zVJEtLgWhQn2iJ4EkO93JZRw14LT5V-v1dEwaJUJQjqSv-v3KBaZ2wWoLcTOaddPSVhc-YTnMXlOsS2QLV6udOhCGvOSFB8_-7d--tIg\"}"
+      },
+      {
+        "type": "function_call",
+        "name": "spawn_agent",
+        "arguments": "{\"task_name\":\"transport_behavior_test\",\"agent_type\":\"hmasd-transport\",\"fork_turns\":\"all\",\"message\":\"gAAAAABqqm-Qsf2bijauCrswg2S50Q9LU4u1TUMxA9Zbzh4QPyWq1y6uZrXCezBytqfg6kpvmbjjS04s0xDQ9fc7nhIhTaiYlaLmoTlTh3SF5YwanJKRzQyiQzQq_ZgGStf0M5LyasnYT9ft-MLQKR3V7PuhBXHWH5rJNUI2_om18PcYU7Fn7frGLtfHwr4gFTb_-sjvJT76Hj4ABicbdrq4QIhk1g2N1jx0E6DJ9vmAFTfpLAnJzsssjhNZ8mOown6-dm_ayF6GzFrgB1hU4YoHj6odvWqh5GebKeRKPqsqzZ1qhAeHLFHOunatB3oDCXxAlbYGhEnsw2lnLqUNjkZewG6qLeOnzyaypNhVIdaVZ9PGFkgx0XBg3Yd7cF2hnz-RHdUufl1lyrPbztSP0PCdu-AeOZJUJad-Kv4YxZzJo683D0jQPwRhQ6oww04st9zB4EpqbRWM9vOQ18pEH19V1mGljsKGIItPeXxKClexutGqmKuhKrOtcPF0PIn0f7ER6rO75GzDNfRY8nzsYYjfarxKGR8pwwlt70wQbIH-scECIEnP29XFEBeF5aQ_-rAxHDQbZv8w7yoEWaIkB1vm6lPCzPNTCgbZD8Wpl3PmtcjqxshN03IHYWuEzpwjizZ9TBhfcYnfJ0-ko84w5Nu0QqYbFj2tGNCsc2kc3rwOef-gKX6MsNthbvMJSbazr3DjdI5LNGKf2Yv44uofABz-yGVoScL730fS0EN8diQXUn8G3vXFV3uudUVdeC4fo9trBgKW6vMjKXLhFfvibJQlsL-sCeeM9JqxOm-8WcHqjmn1uof45V5g-aGBOG4tVWYYg2cxLQAv\"}"
+      },
+      {
+        "type": "function_call",
+        "name": "sleep",
+        "arguments": "{\"duration_ms\":45000}"
+      },
+      {
+        "type": "function_call",
+        "name": "sleep",
+        "arguments": "{\"duration_ms\":20000}"
+      },
+      {
+        "type": "function_call",
+        "name": "sleep",
+        "arguments": "{\"duration_ms\":10000}"
+      },
+      {
+        "type": "function_call",
+        "name": "sleep",
+        "arguments": "{\"duration_ms\":45000}"
+      }
+    ]
+  },
+  {
+    "runtime": "Codex 0.154.0",
+    "session": "01a0a9c3-9362-7411-9014-e3c26f005a2e",
+    "role": "hmasd-direction-manager",
+    "identity_basis": "rollout filename and parent spawn result; inherited session_meta is not child identity",
+    "source_log": "C:\\Users\\fires\\.codex\\sessions\\2026\\09\\16\\rollout-2026-09-16T03-29-21-01a0a9c3-9362-7411-9014-e3c26f005a2e.jsonl",
+    "cwd": "C:\\Projects\\HMASD-worktrees\\control-plane-migration-20260916",
+    "tool_calls": [
+      {
+        "type": "custom_tool_call",
+        "name": "exec",
+        "input": "const results = await Promise.allSettled([\n  tools.exec_command({cmd:\"Get-Content -LiteralPath 'AGENTS.md'\",\"workdir\":\"C:\\\\Projects\\\\HMASD-worktrees\\\\control-plane-migration-20260916\",\"max_output_tokens\":6000}),\n  tools.exec_command({cmd:\"Get-Content -LiteralPath '.agents/skills/hmasd-scientific-tools/SKILL.md'\",\"workdir\":\"C:\\\\Projects\\\\HMASD-worktrees\\\\control-plane-migration-20260916\",\"max_output_tokens\":12000})\n]);\nfor (let i=0;i<results.length;i++) text({path:i===0?\"AGENTS.md\":\".agents/skills/hmasd-scientific-tools/SKILL.md\",result:results[i]});\n"
+      },
+      {
+        "type": "custom_tool_call",
+        "name": "exec",
+        "input": "text(await tools.exec_command({cmd:\"rg --files docs/research | Select-String -Pattern 'FSD|fsd'\",\"workdir\":\"C:\\\\Projects\\\\HMASD-worktrees\\\\control-plane-migration-20260916\",\"max_output_tokens\":5000}));\n"
+      },
+      {
+        "type": "custom_tool_call",
+        "name": "exec",
+        "input": "text(await tools.exec_command({cmd:\"rg -n -i 'stage.?0|six|6 fits|missing|incomplete' 'docs/research/candidates/flexible_skill_duration/FSD_HOST_HEADROOM_B01_PROSPECTIVE_CARD_20260916.md' 'docs/research/candidates/flexible_skill_duration/FSD_MATCHED_INFORMATION_BASELINE_B01_PROSPECTIVE_CARD_20260916.md'\",\"workdir\":\"C:\\\\Projects\\\\HMASD-worktrees\\\\control-plane-migration-20260916\",\"max_output_tokens\":4000}));\n"
+      },
+      {
+        "type": "custom_tool_call",
+        "name": "exec",
+        "input": "text(await tools.exec_command({cmd:\"Get-Content -LiteralPath 'docs/research/candidates/flexible_skill_duration/FSD_MATCHED_INFORMATION_BASELINE_B01_PROSPECTIVE_CARD_20260916.md'\",\"workdir\":\"C:\\\\Projects\\\\HMASD-worktrees\\\\control-plane-migration-20260916\",\"max_output_tokens\":10000}));\n"
+      }
+    ]
+  },
+  {
+    "runtime": "Codex 0.154.0",
+    "session": "01a0a9c3-af41-7bb2-a978-eb7d484619fd",
+    "role": "hmasd-experiment-operator",
+    "identity_basis": "rollout filename and parent spawn result; inherited session_meta is not child identity",
+    "source_log": "C:\\Users\\fires\\.codex\\sessions\\2026\\09\\16\\rollout-2026-09-16T03-29-29-01a0a9c3-af41-7bb2-a978-eb7d484619fd.jsonl",
+    "cwd": "C:\\Projects\\HMASD-worktrees\\control-plane-migration-20260916",
+    "tool_calls": [
+      {
+        "type": "custom_tool_call",
+        "name": "exec",
+        "input": "const r = await tools.exec_command({cmd:\"Get-Content -Raw .agents/skills/hmasd-research-engineering/SKILL.md; rg -n -i \\\"experiment.operator|operator|observation lost|memory preflight|accepted\\\" .agents .codex docs 2>$null | Select-Object -First 120\",\"workdir\":\"C:\\\\Projects\\\\HMASD-worktrees\\\\control-plane-migration-20260916\",\"yield_time_ms\":10000,\"max_output_tokens\":12000}); text(r.output);\n"
+      },
+      {
+        "type": "custom_tool_call",
+        "name": "exec",
+        "input": "const r = await tools.exec_command({cmd:\"$paths=@('.codex/agents/hmasd-experiment-operator.toml','.codex/config.toml','.codex/hmasd-compute.toml','.agents/roles/EXPERIMENT_OPERATOR.md'); foreach($p in $paths){ if(Test-Path $p){ Write-Output \\\"=== $p\\\"; Get-Content -Raw $p }}\",\"workdir\":\"C:\\\\Projects\\\\HMASD-worktrees\\\\control-plane-migration-20260916\",\"yield_time_ms\":10000,\"max_output_tokens\":10000}); text(r.output);\n"
+      },
+      {
+        "type": "custom_tool_call",
+        "name": "exec",
+        "input": "const r = await tools.exec_command({cmd:\"Get-Content -Raw .agents/roles/EXPERIMENT_OPERATOR.md 2>$null; rg -n \\\"lost observation|uncertain acceptance|reconcile|simultaneous|serialize launch|no replacement\\\" .codex .agents docs/research | Select-Object -First 80\",\"workdir\":\"C:\\\\Projects\\\\HMASD-worktrees\\\\control-plane-migration-20260916\",\"yield_time_ms\":10000,\"max_output_tokens\":6000}); text(r.output);\n"
+      },
+      {
+        "type": "custom_tool_call",
+        "name": "exec",
+        "input": "const r = await tools.exec_command({cmd:\"$p='.agents/skills/hmasd-research-engineering/SKILL.md'; $i=Get-Content $p; $hits=Select-String -Path $p -Pattern 'Concurrent checks reserve|uncertain acceptance|DM owns technical'; $hits | ForEach-Object { \\\"$($_.Path):$($_.LineNumber):$($_.Line)\\\" }\",\"workdir\":\"C:\\\\Projects\\\\HMASD-worktrees\\\\control-plane-migration-20260916\",\"yield_time_ms\":10000,\"max_output_tokens\":2000}); text(r.output);\n"
+      }
+    ]
+  },
+  {
+    "runtime": "Codex 0.154.0",
+    "session": "01a0a9c3-c969-7681-8a13-c437ad5b43cb",
+    "role": "hmasd-transport",
+    "identity_basis": "rollout filename and parent spawn result; inherited session_meta is not child identity",
+    "source_log": "C:\\Users\\fires\\.codex\\sessions\\2026\\09\\16\\rollout-2026-09-16T03-29-35-01a0a9c3-c969-7681-8a13-c437ad5b43cb.jsonl",
+    "cwd": "C:\\Projects\\HMASD-worktrees\\control-plane-migration-20260916",
+    "tool_calls": [
+      {
+        "type": "custom_tool_call",
+        "name": "exec",
+        "input": "const r = await tools.exec_command({cmd: \"Get-Content -Raw .agents\\\\skills\\\\hmasd-chatgpt-pro-transport\\\\SKILL.md; Write-Output \\\"`n--- nearest AGENTS ---\\\"; Get-Content -Raw AGENTS.md; Write-Output \\\"`n--- transport references ---\\\"; rg -n --hidden -g '!*.pyc' -g '!node_modules' -g '!temp/**' \\\"sendAttempted|paired IDs|paired_ids|native role|transport\\\" .agents docs .codex 2>$null | Select-Object -First 200\", workdir: \"C:\\\\Projects\\\\HMASD-worktrees\\\\control-plane-migration-20260916\", max_output_tokens: 20000});\ntext(r.output);\n"
+      },
+      {
+        "type": "custom_tool_call",
+        "name": "exec",
+        "input": "const r = await tools.exec_command({cmd: \"Write-Output '--- configured transport role ---'; Get-Content -Raw .codex\\\\agents\\\\hmasd-transport.toml; Write-Output '--- transport config ---'; Get-Content -Raw .codex\\\\hmasd-transport.toml; Write-Output '--- relevant skill sections ---'; $s=Get-Content .agents\\\\skills\\\\hmasd-chatgpt-pro-transport\\\\SKILL.md; $s[0..170]; Write-Output '--- current branch/status ---'; git branch --show-current; git status --short --branch\", workdir: \"C:\\\\Projects\\\\HMASD-worktrees\\\\control-plane-migration-20260916\", max_output_tokens: 16000});\ntext(r.output);\n"
+      },
+      {
+        "type": "custom_tool_call",
+        "name": "exec",
+        "input": "const r = await tools.exec_command({cmd: \"$s=Get-Content .agents\\\\skills\\\\hmasd-chatgpt-pro-transport\\\\SKILL.md; Write-Output ('lines=' + $s.Count); Write-Output '--- 0-119 ---'; $s[0..119]; Write-Output '--- 120-239 ---'; $s[120..239]; Write-Output '--- 240-end ---'; $s[240..($s.Count-1)]\", workdir: \"C:\\\\Projects\\\\HMASD-worktrees\\\\control-plane-migration-20260916\", max_output_tokens: 24000});\ntext(r.output);\n"
+      },
+      {
+        "type": "custom_tool_call",
+        "name": "exec",
+        "input": "const r = await tools.exec_command({cmd: \"Write-Output '--- role/config line numbers ---'; rg -n \\\"^(name|description|model|model_reasoning_effort|approval_policy|sandbox_mode|schema_version|mode|status|backend|registry_path)|sendAttempted|UNCERTAIN_EFFECT|Non-sending reconciliation\\\" .codex\\\\agents\\\\hmasd-transport.toml .codex\\\\hmasd-transport.toml .agents\\\\skills\\\\hmasd-chatgpt-pro-transport\\\\SKILL.md; Write-Output '--- relevant repository files ---'; rg --files .agents\\\\skills\\\\hmasd-chatgpt-pro-transport .codex\\\\agents | Sort-Object\", workdir: \"C:\\\\Projects\\\\HMASD-worktrees\\\\control-plane-migration-20260916\", max_output_tokens: 8000});\ntext(r.output);\n"
+      }
+    ]
+  },
+  {
+    "runtime": "Codex 0.154.0",
+    "session": "01a0a9c0-ca6b-7562-a793-be0a3f12823b",
+    "probe": "codex-root",
+    "tool_calls": [
+      {
+        "command": "\"C:\\\\Users\\\\fires\\\\.cache\\\\codex-runtimes\\\\codex-primary-runtime\\\\dependencies\\\\native\\\\powershell\\\\pwsh.exe\" -Command \"Get-Location; Get-Content -LiteralPath 'AGENTS.md'; Get-Content -LiteralPath '.agents/skills/hmasd-loop-dispatch/SKILL.md'\"",
+        "exit_code": 0
+      }
+    ],
+    "source_log": "C:\\Projects\\HMASD-worktrees\\control-plane-migration-20260916\\temp\\migration-20260916\\codex-root.jsonl"
+  },
+  {
+    "runtime": "Codex 0.154.0",
+    "session": "01a0a9c7-632c-7d02-a639-0f1d7d45f058",
+    "probe": "codex-boundaries",
+    "tool_calls": [
+      {
+        "command": "\"C:\\\\Users\\\\fires\\\\.cache\\\\codex-runtimes\\\\codex-primary-runtime\\\\dependencies\\\\native\\\\powershell\\\\pwsh.exe\" -Command 'Get-Content -LiteralPath AGENTS.md; Get-Content -LiteralPath .agents/skills/hmasd-scientific-tools/SKILL.md; Get-Content -LiteralPath .agents/skills/hmasd-research-engineering/SKILL.md'",
+        "exit_code": 0
+      },
+      {
+        "command": "\"C:\\\\Users\\\\fires\\\\.cache\\\\codex-runtimes\\\\codex-primary-runtime\\\\dependencies\\\\native\\\\powershell\\\\pwsh.exe\" -Command \"rg -n \\\"refresh|刷新|foreign|same-file|headroom|D1280|\\\\.67\\\" .agents/skills/hmasd-loop-dispatch/SKILL.md .codex/agents docs/research -g '*migration*' -g '*MIGRATION*' -g '*FSD*' -g '*fsd*' -g '*.toml' -g 'SKILL.md'\"",
+        "exit_code": 0
+      },
+      {
+        "command": "\"C:\\\\Users\\\\fires\\\\.cache\\\\codex-runtimes\\\\codex-primary-runtime\\\\dependencies\\\\native\\\\powershell\\\\pwsh.exe\" -Command 'Get-Content -LiteralPath .agents/skills/hmasd-loop-dispatch/SKILL.md'",
+        "exit_code": 0
+      }
+    ],
+    "source_log": "C:\\Projects\\HMASD-worktrees\\control-plane-migration-20260916\\temp\\migration-20260916\\codex-boundaries.jsonl"
+  },
+  {
+    "runtime": "Claude 2.1.273",
+    "session": "b6ae9a34-6727-447b-bf05-ca33ef940b3a",
+    "probe": "claude-hub",
+    "source_log": "C:\\Projects\\HMASD-worktrees\\control-plane-migration-20260916\\temp\\migration-20260916\\claude-hub.jsonl",
+    "tool_calls": [
+      {
+        "name": "Skill",
+        "input": {
+          "skill": "hmasd-research-hub"
+        }
+      },
+      {
+        "name": "Read",
+        "input": {
+          "file_path": "C:\\Projects\\HMASD-worktrees\\control-plane-migration-20260916\\.claude\\skills\\hmasd-research-hub\\SKILL.md",
+          "limit": 20
+        }
+      },
+      {
+        "name": "Read",
+        "input": {
+          "file_path": "C:\\Projects\\HMASD-worktrees\\control-plane-migration-20260916\\docs\\research\\portfolio\\APPROVED_SET.md"
+        }
+      }
+    ],
+    "result": "Probe complete. Nothing was edited, launched or sent. Research stays paused.\n\n**Loaded paths (read-only)**\n\n- `CLAUDE.md` and `AGENTS.md` at the worktree root, via the startup import.\n- `.claude/skills/hmasd-research-hub/SKILL.md`, the generated copy from the Claude skill directory. Its header marks it as published by the control publisher from the shared source, so the binding text lives in `.agents/skills`.\n- `docs/research/portfolio/APPROVED_SET.md`, version 1.1, read because the skill names it as the sole execution authority.\n- `docs/CLAUDE.md` and `docs/AGENTS.md`, surfaced automatically when the approved set was read.\n\nBoth root files and the hub skill are modified in the working tree on the migration branch, so the loaded text is the uncommitted migration draft, not the main branch version.\n\n**Does empty capacity admit a parked backup?** No. The skill says empty capacity remains empty and forbids automatic backup, next object or weekly refill. The approved set repeats this under its ceiling line and lists the two parked backups as pulled in only by an owner-triggered review, in order. The ACVC slot that opened at CLOSE is explicitly recorded as not refilled.\n\n**Does object completion permit next-week budget?** No. The direction-ownership section states that object completion grants no next object, retry, new host or next-week budget. The root AGENTS text says the same and adds that completion creates an intake only. The standing FSD budget is one confirmatory object per seven days, sized by its card, but drawing on it again still requires an authorized object under the same approved set entry, not a completion event.\n\n**Current state from the approved set.** One direction is approved, flexible skill duration, in the CONFIRM lane with first object B01, the matched-information baseline fixed by the direction node. ACVC left the set on 2026-09-16 with its lifecycle recommendation queued for the next owner review. Nothing here resumes work while the pause holds."
+  },
+  {
+    "runtime": "Claude 2.1.273",
+    "session": "6ca4e042-c5c8-4d42-869f-643caff1636e",
+    "probe": "claude-reviewer",
+    "source_log": "C:\\Projects\\HMASD-worktrees\\control-plane-migration-20260916\\temp\\migration-20260916\\claude-reviewer.jsonl",
+    "tool_calls": [
+      {
+        "name": "Read",
+        "input": {
+          "file_path": "C:\\Projects\\HMASD-worktrees\\control-plane-migration-20260916\\.agents\\skills\\hmasd-research-engineering\\SKILL.md"
+        }
+      }
+    ],
+    "result": "Advice only. I edited nothing, ran no commands, used no network, launched no agents, did no training and sent nothing.\n\n**Role:** read-only independent Reviewer, run under the Claude adapter. I return only to the hub that assigned this. I'm not a scientific or permission authority, and the owner makes repairs and accepts.\n\n**What I actually read:**\n- `C:\\Projects\\HMASD-worktrees\\control-plane-migration-20260916\\.agents\\skills\\hmasd-research-engineering\\SKILL.md`, read directly.\n- `CLAUDE.md` and `AGENTS.md` at the worktree root. The session injected these; I didn't open them myself.\n- No other files: no `hmasd-scientific-tools`, directory AGENTS files, cards or experiment code.\n\n## Patch A: CF central snapshot refresh and recurrent replay in a thin runner\n\n**Review:** Independent read-only review is required. SKILL.md lines 41–45 require it for recurrent/replay state, numerics and RNG. Line 44 says \"A thin file that changes such semantics still needs review,\" so being a thin runner doesn't make it exempt.\n\n**What the owner should give the Reviewer:** the contract and invariants, the diff, and the acceptance evidence. These should stand on their own, not come from the implementation conversation. If the runner reaches into core paths (`hmasd`, `ha_ctse_process`, `envs`, `hmasd_*.py`), the review must also confirm those paths keep their routes, interfaces, numerical and RNG behaviour, and checkpoint compatibility (lines 20–23).\n\n**Checks (lines 49–56):**\n- **Full path:** follow the data from collector to storage, recurrent replay, loss/update, then evaluator/publication. Look at the actual callers, not just the runner.\n- **Snapshot refresh:**\n  - How often it refreshes, and exactly where in the update order.\n  - Snapshot identity: which parameters are frozen and when.\n  - Whether the centralized critic sees information the actor must not (actor/critic leakage).\n  - Whether the snapshot interacts with optimizer state.\n  - Whether the snapshot leaks between training and evaluation.\n- **Recurrent replay:**\n  - Hidden states are stored and reset at episode or skill boundaries.\n  - Masks line up with sequences, including sequence tails.\n  - Termination and truncation are handled separately, and bootstrap happens only on truncation.\n  - Normalizer state stays consistent between collection and replay.\n  - How losses are reduced over padded steps.\n- **RNG and results:** RNG addresses are unchanged unless explicitly authorized. Checkpoint and result identity are preserved, or the change is declared.\n- **Numerics:** inspect intermediates and gradients over the actual domain. Tolerances should depend on dtype and scale, not bit-for-bit equality.\n- **Independent checker:** a check must not reuse the candidate's own output as its proof.\n- **Owner self-check first:** run the changed behaviour and the main output once with proportionate existing or focused tests. Research tests stay within five minutes. No repeated smoke tests per launch.\n- **Scientific tools:** use `hmasd-scientific-tools` only if the refresh or replay change alters what an estimate or comparison means (for example, the critic's information set). Don't load it by default.\n- **Findings:** each must name direct evidence, a failure that can actually happen, and its impact. After repair, recheck only the gaps that changed or failed.\n\n## Patch B: documentation spelling only\n\n**Review:** self-check only, no independent Reviewer. Line 45 says \"Pure wording ... use self-check.\"\n\n**Checks:**\n- Confirm the diff touches only wording.\n- Confirm no frozen card, accepted TASK/HANDOFF bytes, historical label, path/identifier or LF-governed file is altered.\n- Confirm the commit carries runtime attribution and `scope: none`.\n- If the files are shared methods or roles, run the publisher afterwards (per CLAUDE.md).\n\nNo tests or science preload are needed. If the \"spelling\" fix actually changes a binding identifier, a config key or scientific wording, it isn't pure wording any more and should be reassessed.\n\n**Limits:** this applies the method to hypothetical patches. I didn't inspect any real CF or replay code, so I can't report findings on an actual implementation."
+  },
+  {
+    "runtime": "Claude 2.1.273",
+    "session": "7eea4b11-88b7-4fee-9cb8-c3b6f22701f8",
+    "probe": "claude-operator",
+    "source_log": "C:\\Projects\\HMASD-worktrees\\control-plane-migration-20260916\\temp\\migration-20260916\\claude-operator.jsonl",
+    "tool_calls": [
+      {
+        "name": "Grep",
+        "input": {
+          "pattern": "followup_task|bounded tracker|hub dispatches|DM owns technical acceptance",
+          "path": "C:\\Projects\\HMASD-worktrees\\control-plane-migration-20260916\\.agents\\skills",
+          "output_mode": "files_with_matches"
+        }
+      },
+      {
+        "name": "Glob",
+        "input": {
+          "pattern": ".claude/agents/*.md",
+          "path": "C:\\Projects\\HMASD-worktrees\\control-plane-migration-20260916"
+        }
+      },
+      {
+        "name": "Read",
+        "input": {
+          "file_path": "C:\\Projects\\HMASD-worktrees\\control-plane-migration-20260916\\.claude\\agents\\hmasd-experiment-operator.md"
+        }
+      },
+      {
+        "name": "Read",
+        "input": {
+          "file_path": "C:\\Projects\\HMASD-worktrees\\control-plane-migration-20260916\\.claude\\agents\\hmasd-experiment-tracker.md"
+        }
+      },
+      {
+        "name": "Grep",
+        "input": {
+          "pattern": "followup_task|bounded tracker|assigns the tracker|hub dispatches",
+          "path": "C:\\Projects\\HMASD-worktrees\\control-plane-migration-20260916\\.agents\\skills\\hmasd-loop-dispatch\\SKILL.md",
+          "output_mode": "content",
+          "-n": true,
+          "-C": 3
+        }
+      }
+    ],
+    "result": "**Answer (read-only, advisory only — nothing executed, edited, or invoked):**\n\nRole currently in effect: `hmasd-experiment-operator` (Sonnet), per `.claude/agents/hmasd-experiment-operator.md`, generated from `.agents/skills` shared source (`tools/publish_claude_control.py`).\n\n**1. Who receives the handle**\nThe **hub** (Root+DM combined coordination session). Per the operator role body: \"After actual acceptance return exact node/handle/source/cwd/output and observation bound to **hub**.\" I don't hold the handle onward or message a sibling with it — one return, to the hub, ends this batch.\n\n**2. Who assigns the tracker**\nThe **hub**, not me. Same line: \"The hub dispatches its bounded tracker; do not use sibling messaging, create a tracker, or keep polling after returning.\" My role is explicitly barred from creating `hmasd-experiment-tracker` or continuing to poll — collection/monitoring dispatch is the hub's decision after it receives my return.\n\n**3. Can I invoke `followup_task` here**\n**No.** `followup_task` (used for \"work to an existing non-root agent\") is defined in `hmasd-loop-dispatch/SKILL.md`, which is the generic/Codex-facing coordination source. My generated role body carries the explicit Claude adapter clause: *\"Claude adapter: return directly to the assigning hub using actual native returns; do not invent Codex collaboration tools. No child agents.\"* So even though the shared skill text mentions `followup_task`, the Claude-side operator is bound to return via an actual native return to the assigning hub session — not a Codex-style tool call — and is barred from spawning/dispatching any child agent.\n\nSummary: handle → hub; tracker dispatch → hub's decision, not mine; `followup_task` → not available/not applicable to this Claude role, native return to hub is the only channel."
+  }
+]

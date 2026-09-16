@@ -49,7 +49,7 @@ creating agent performs the same cleanup before declaring the task complete.
 
 ## What tests are for here
 
-Research tier (`docs/project/ENGINEERING_SCOPE_SPEC.md` §3–§5): a proportionate focused check
+Research tier (method: hmasd-research-engineering): a proportionate focused check
 of changed behavior and primary output, plus rule tests when the object has branch rules.
 Reuse existing checks for unchanged paths; a launch boundary alone does not require another
 smoke test. Total wall time per research directory stays under 5 minutes excluding runner smoke.

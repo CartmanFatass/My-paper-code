@@ -1,24 +1,27 @@
 # 科研 Portfolio 报告
 
-> OWNER_OPERATIONAL_PAUSE 2026-09-15：所有者要求各 DM 完成已接受任务后安全暂停。四条链均已完成当前对象、保全证据并停止；生命周期和席位未改变。统一恢复入口见 [handoff](handoffs/2026-09-15-owner-operational-pause.md)。
+当前摘要核对：2026-09-16；科学来源版本 `e9399305d58bdd7e5f9518e12cf43e9abd199ee3`。
+所有者 2026-09-15 22:23 PDT 的 research pause 持续有效；控制面迁移不是恢复授权。
+[APPROVED_SET.md](APPROVED_SET.md) 是唯一执行授权表，本页只作视图。
 
-**Portfolio 控制（OWNER_DIRECT 2026-09-15 21:37 PDT，[决定记录](decisions/2026-09-15-portfolio-control-and-approved-set.md)）**：Portfolio 评审仅由所有者触发；执行循环只推进 [APPROVED_SET.md](APPROVED_SET.md) 中的批准集（当前：flexible_skill_duration，CONFIRM，优先级 1）；并发是上限而非配额，不再有"三条链"目标、席位补位或空缺替换；acvc 已进入 CLOSE 离开批准集，结题备忘排队待下次评审；vap_folr_core、tail_return_distributional_learning 为停放备选。下表为各方向的科学位置快照，不再表示"占用席位"。实时执行细节见[实验跟踪](EXPERIMENT_TRACKING.md)。
-
-**流程车道（OWNER_DIRECT 2026-09-15 21:03 PDT，[决定记录](decisions/2026-09-15-workflow-lanes.md)）**：acvc → CLOSE（待送出的结果复审接受后生效；一份结题备忘 + 一次打包的 Portfolio 生命周期问题）；flexible_skill_duration → CONFIRM（首个对象已由方向节点于 2026-09-16 05:19Z 固定为 `FSD_MATCHED_INFORMATION_BASELINE_B01`：standing D1280 对中央输入 flat，五个新块、45 轮、MEI .05 J、16 fit；见 [APPROVED_SET.md](APPROVED_SET.md)；实现未开始）；vap_folr_core、tail_return_distributional_learning 由各自 DM 恢复时指定，默认 EXPLORE。EXPLORE 车道：PILOT 对象由 DM 对象层自选，单种子，无 Pro 轮次，三份记录；各 ACTIVE 方向有常设预算（EXPLORE 每 7 天 4 次单种子拟合；CONFIRM 每 7 天 1 个对象），取代逐对象 Portfolio 资助。
-
-| 方向 | 当前科学位置 | 当前 producer / 下一事件 |
+| 方向 | approval / lane | 科学对象与当前执行状态 |
 | --- | --- | --- |
-| acvc | [ACTIVE/MEDIUM/recasts2](../candidates/acvc/DIRECTION.md)。C/M 比较族在两块有界主张处收束（17:08Z，A）；em:acvc:convergence 20:28Z 选 B：M-部署迁移对象（1 次 M 拟合，M / F(M) / own-dwell(M)，T_F@.01 J）带修正入选，属新的结果知情 B/EXPLORE 问题。 | **Claude hub 驱动**；Portfolio G 的一次拟合已完成并接受（21:45Z）：T_F +.0183 J TRANSFERS（单实例），资助用尽，0 producer；em:acvc:convergence 21:57Z 选 B：再做一次独立 M 拟合（B02，28631/38631，三面板不变，逐实例并列）；Portfolio 22:20Z 选 G2 再资助一次拟合；B02 已完成并接受（23:05Z）：T_F,2 +.0029 J 带内，与 B01 的迁移成立并列为分歧，不汇总；G2 用尽，0 producer；em:acvc:convergence 23:10Z 选 A：迁移族在两实例处结束、不选数值对象、未穷尽；Portfolio 23:31Z 选 P1（G3）：保持 ACTIVE/MEDIUM/recasts2 与槽位，资助一次有界的匹配 F(C) 对 F(M) 整包比较（至多一次 C 拟合与一次 M 拟合，上限 2,195,456 计分 tick）；em:acvc:convergence 02:48Z 固定卡片（A 带修正）：ACVC_MATCHED_PACKAGE_COMPARISON_B01，主量 P = F(C) − F(M)，六面板，正好上限；块已完成并接受（03:45Z）：P = F(C) − F(M) = −.0150 J F_M_ABOVE_MEI（单块），F(M)−M +.005 带内；G3 用尽，0 producer；结果复审已单次送 em:acvc:convergence（2026-09-16T03:53:17Z），待归档答复；Portfolio 建议 Root 把休眠的第二分配（FSD）交所有者单独决定工作集；交接 `HANDOFF_2026-09-15_post_cm_decision.md` |
-| vap_folr_core | [ACTIVE/MEDIUM](../candidates/vap_folr_core/DIRECTION.md)。两块fresh A−G为 −5.830625/−.109921875，均未重现旧A正优势；保持MIXED_BLOCK_PATTERN。 | **Operationally paused**；0 learner/Monitor/Transport。恢复从 `HANDOFF_20260915_AUGMENTATION_REPEAT_OWNER_PAUSE.md` 继续，next discriminator刻意未选。 |
-| tail_return_distributional_learning | [ACTIVE/MEDIUM/recasts0](../candidates/tail_return_distributional_learning/DIRECTION.md)。B02独立pair lower-tail Q−S −.00241972 J（INSIDE_MEI）；B01正结果独立保留。 | **Operationally paused**；0 fit/provider/child。恢复从 `TRDL_OWNER_PAUSE_HANDOFF_20260914.md` 继续；B02结果Pro review未启动。 |
-| flexible_skill_duration | [ACTIVE/HIGH](../candidates/flexible_skill_duration/DIRECTION.md)。baseline × interruption B01（S，12/12）完成：SI1280_15 +.0098 J small_signed、区间跨零；D1280−FLAT −.045、I1280−FLAT −.035（未调参包差距，区间跨零）；em:flexible_skill_duration:convergence 20:27Z 选 A（CLOSE_OBJECT）：阶段结题、不选新对象。 | **Claude hub 驱动**：0 producer，ACTIVE-idle；重开条件见 `HANDOFF_2026-09-15_baseline_interruption.md` |
+| flexible_skill_duration | approved / CONFIRM | `FSD_MATCHED_INFORMATION_BASELINE_B01`；D1280 对 CF，16 fits，J45、MEI .05 J；冻结，CF 尚未实现，研究暂停。下一次正式恢复按[当前 handoff](../candidates/flexible_skill_duration/HANDOFF_2026-09-16_matched_information_baseline.md)先实施和独立审查。 |
+| acvc | 非批准集 / CLOSE | 已有[closing memo](../candidates/acvc/ACVC_CLOSING_MEMO_20260916.md)；wrapper 局部收益与整包比较分别保留。无新对象，生命周期建议排队待所有者触发 Portfolio；本次不作 PARK/CLOSED 裁决。 |
+| vap_folr_core | 停放备选 / 见批准表 | 保留两块 MIXED_BLOCK_PATTERN；不自动入集或恢复。 |
+| tail_return_distributional_learning | 停放备选 / 见批准表 | B01 正结果与 B02 INSIDE_MEI 并存；不自动入集或补发 review。 |
+
+当前记录未报告 FSD/ACVC 活跃 producer；迁移未做远端进程普查，不将旧记录当成实时零进程证明。
+具体历史实验与生命周期登记从各方向 card/intake/DIRECTION 读取；投资解释见
+[当前 dossier](dossiers/2026-09-16_PORTFOLIO_DOSSIER.md)。
 
 ## 当前协作边界
 
-- DM 自主完成方向科学、实现、检查、审查、Transport、Monitor、结果 intake 和已授权延续；Root 不对这些步骤逐项审批。
-- Direction Convergence 处理方向内科学收敛；`portfolio:cross_direction` 处理投资、优先级、生命周期、容量、融合/分离和注册。只有完整 Portfolio 决定或所有者直接指令才能 PARK/CLOSE 整个方向。
-- Root 处理 DM 原生事件、共享依赖、主分支集成和当前记录。Root 使用事件驱动的 `wait_agent`，不以短轮询或 ACK 作为推进门槛。
-- vacancy 请求 `2026-09-14-mgtap-park-vacancy-replacement-01` 已完整归档并应用：选择 TRDL，占用第三席；Root Transport 已结束。新的 vacancy 只有在未来正式 Portfolio/owner lifecycle 处置释放席位时才产生。
+- 先查 pause、批准表和具名对象权限。空闲容量保持空闲，不补位、不轮询发 Portfolio。
+- 原 DM 完成已授权步骤；对象结束仅产生 intake，不产生下个对象、下一周额度或方向生命周期裁决。
+- 科学、工程、执行和当前共享依赖分别由对应 task skill 与原生角色承接；Root 整合共享控制。
+- 未来方法已迁入 `.agents/skills/`；历史冻结对象仍按完整固定版本。预算窗口起算和扣账未定义处保留待决。
+- 迁移和恢复入口见[控制面 handoff](handoffs/2026-09-16-control-plane-migration.md)。
 
 ## 已 PARK / 未占用方向
 
@@ -29,5 +32,3 @@
 | degraded_incumbent_shadow_handover | [PARK](../candidates/degraded_incumbent_shadow_handover/PARK.md)；保留 B09、REPLACE/BYPASS 边界和历史证据。 |
 | ucope | [PARK](../candidates/ucope/PARK.md)；保留 reactive renewal 结果、反证和重新研究条件。 |
 | learned_counterfactual_agent_credit | [PARK](../candidates/learned_counterfactual_agent_credit/PARK.md)；保留 B03 负结果及基线/学习证据。 |
-
-历史 pause 文件、旧分配和结束的对象仍是证据，但不作为当前 dispatch 路由或生命周期状态。新的判断从各 DM 的最新 `DIRECTION.md`、intake、固定 Pro packet 和本报告读取。运行时长参考值不自动触发停止、上报、PARK 或额外授权。

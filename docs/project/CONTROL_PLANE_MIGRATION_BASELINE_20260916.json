@@ -1,0 +1,1109 @@
+{
+  "head": "e9399305d58bdd7e5f9518e12cf43e9abd199ee3",
+  "files": {
+    "AGENTS.md": {
+      "bytes": 55161,
+      "sha256": "cad0eea78ab736efd31499fcbf34db54bb871408fe2d32b38330383ae51d664c"
+    },
+    "CodexBechmark/AGENTS.md": {
+      "bytes": 767,
+      "sha256": "d4fa78385679cfa3f6f8e8692d84e909a9155d1e1867545befe4c528335d9228"
+    },
+    "CodexBechmark/cm_delegation_granularity/AGENTS.md": {
+      "bytes": 588,
+      "sha256": "e41ac4b9077b018a3236f84de63e01e5b9d58ee03d3bae9e3431a24044abef34"
+    },
+    "CodexBechmark/cm_delegation_granularity/workspace/AGENTS.md": {
+      "bytes": 2582,
+      "sha256": "064e8af601a0b066a4cb46f367d2a0cb04c3243af88e7ba1181f5452071d40ca"
+    },
+    "CodexBechmark/cm_direct_review/AGENTS.md": {
+      "bytes": 508,
+      "sha256": "402db1bf7ba09fd5fac6c295986884d239a33c64cde645f6003837f4e3a6f466"
+    },
+    "CodexBechmark/cm_direct_review/workspace/AGENTS.md": {
+      "bytes": 2548,
+      "sha256": "d8f82918cb0d9a61cbdb3226c0962b59db6afd6afb1ebad837df230f48488694"
+    },
+    "CodexBechmark/root_delegation/AGENTS.md": {
+      "bytes": 640,
+      "sha256": "733d1756e9e21249196441023b2cddf56c5146ce811ec32a9c404cdcd7e0b04f"
+    },
+    "CodexBechmark/root_delegation/workspace/AGENTS.md": {
+      "bytes": 2821,
+      "sha256": "5f217dbad63f88576e70881d96ff81649c5b9254a80e7883a6932b9e8a572c8e"
+    },
+    "CodexBechmark/_shared/cm_tasks/AGENTS.md": {
+      "bytes": 567,
+      "sha256": "160b5237250f37bd333489d8ae38bfd92ed1114f78df527a20a9a1112ba99b7e"
+    },
+    "docs/AGENTS.md": {
+      "bytes": 2684,
+      "sha256": "38a24e6596430b7940180914aaecd2cb4bf805cfe78258efcbc99de4d0e0fb53"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/BenchMARL/AGENTS.md": {
+      "bytes": 2688,
+      "sha256": "43a3a6909ba307bd2996ca838aa635111acef56da7be4a4e56e0bdcda2a543c4"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/BenchMARL/benchmarl/AGENTS.md": {
+      "bytes": 1187,
+      "sha256": "0ceb3ec1610fa2c233dcb032b82954f51e5483a1dfca21c3e1a5128ce674f2c6"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/BenchMARL/benchmarl/algorithms/AGENTS.md": {
+      "bytes": 1690,
+      "sha256": "80278809e92dafb28588540184d255b4104f60f3e6a33d3e4200cc91a19c8b2e"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/BenchMARL/benchmarl/benchmark/AGENTS.md": {
+      "bytes": 905,
+      "sha256": "57dea2af8bb019dd8783474008dd414f0a5235a380caa32359b7eb58ab82eaa4"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/BenchMARL/benchmarl/environments/AGENTS.md": {
+      "bytes": 1515,
+      "sha256": "0dd997c8b21f2a481743da342397782dbbaa5ce28c04f9da46587c8d390f8676"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/BenchMARL/benchmarl/experiment/AGENTS.md": {
+      "bytes": 2766,
+      "sha256": "74b76e5759455f45c49aaecc6926c9cb023428514384b14b3b491ea046991c71"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/BenchMARL/benchmarl/models/AGENTS.md": {
+      "bytes": 1423,
+      "sha256": "f9e570e85245ec0f5ffc1bacbea95b9987dc29d67624e6a0d09057e3c5807c1e"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/epymarl/AGENTS.md": {
+      "bytes": 1865,
+      "sha256": "fc15a6256677f113cead5b3fa0ca3f44f52dd31de3902b2b1574d71a7e889683"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/epymarl/src/components/AGENTS.md": {
+      "bytes": 479,
+      "sha256": "58a9c315a637233b3e8ecb85107a3ec85ed562f8ad38636bc397dac1800d17bc"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/epymarl/src/controllers/AGENTS.md": {
+      "bytes": 450,
+      "sha256": "b5f98928e1120d298cb8f076615f6af95d97594108321d6557bea3e584f7162e"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/epymarl/src/envs/AGENTS.md": {
+      "bytes": 511,
+      "sha256": "2008af5ae34048f0b4c7faea5fd2d39a339693d042d9520955cbd4e77dee7f15"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/epymarl/src/learners/AGENTS.md": {
+      "bytes": 470,
+      "sha256": "f26dc5fb91d7b3ef4bb782c730aad16f4c1245e8bda7c78c61486a768d9df1a3"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/epymarl/src/runners/AGENTS.md": {
+      "bytes": 516,
+      "sha256": "7045bda214b49c0ed8f2541030e0743a386550d1906fa4ece080ceb9ea8565d4"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/JaxMARL/AGENTS.md": {
+      "bytes": 2518,
+      "sha256": "2380298957b44ecb801243835950ffce50341f3876bb112fbd4aa0d929047f87"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/JaxMARL/baselines/AGENTS.md": {
+      "bytes": 1167,
+      "sha256": "0dac4480ffec47d4d2574735cac933d15834aa1bf8011b9d9f83ec71f00b0008"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/JaxMARL/baselines/IPPO/AGENTS.md": {
+      "bytes": 1025,
+      "sha256": "6144ca23ed19380689a081f403d22a10ef121fe85a48bcb12de2e21502455596"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/JaxMARL/baselines/MAPPO/AGENTS.md": {
+      "bytes": 948,
+      "sha256": "83d48f8e968a7ccfcacad86dbe3dc9b263812b51f8ec571ac36a8d22ce28faf1"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/JaxMARL/baselines/QLearning/AGENTS.md": {
+      "bytes": 1156,
+      "sha256": "8fc1e1bda9789dd313701f51ee830e513a960fa0475c6690177aad636ce53673"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/JaxMARL/baselines/QLearning/utils/AGENTS.md": {
+      "bytes": 503,
+      "sha256": "15a77eba4420bc926bccb808ec410635123579885947c09e5eddbb5d408a8967"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/JaxMARL/jaxmarl/AGENTS.md": {
+      "bytes": 1027,
+      "sha256": "c688fb101593fbf7e0d741081e355a2f0cdffebec2c900493f65a4f1f86319a9"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/JaxMARL/jaxmarl/environments/AGENTS.md": {
+      "bytes": 1167,
+      "sha256": "bad3a4bcb8630c405b8d264da05164aca7c04a7ff162e7c11656cae1d63b99cd"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/JaxMARL/jaxmarl/environments/hanabi/AGENTS.md": {
+      "bytes": 992,
+      "sha256": "8528bcfdb9deb262d51ad706843e664f941bbebc6dbc0c4c5ee7aaa183744be4"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/JaxMARL/jaxmarl/environments/mpe/AGENTS.md": {
+      "bytes": 1128,
+      "sha256": "d83475bdcbab47d982cb2ae880245e0c27b0b208d45f4970293e64663344c28d"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/JaxMARL/jaxmarl/environments/overcooked_v2/AGENTS.md": {
+      "bytes": 848,
+      "sha256": "ec0e82e2c7992576b14b4420688b9bb54471a50c7347c7593e7dc21287622f01"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/JaxMARL/jaxmarl/environments/smax/AGENTS.md": {
+      "bytes": 1197,
+      "sha256": "de3649d8f5c498ea5b8040216051f8b34a4cf00349fe91b8aee565633f36058a"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/JaxMARL/jaxmarl/environments/storm/AGENTS.md": {
+      "bytes": 833,
+      "sha256": "fa644f68693136d3c76a58b2fa466cfec218880f69fe1f7a9d77351360c4d23d"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/JaxMARL/jaxmarl/wrappers/AGENTS.md": {
+      "bytes": 1059,
+      "sha256": "53164235a8e93fe0b7db7b9238fc982eaf5bd74d5750a8e4cf5387b748269616"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/MARLlib/AGENTS.md": {
+      "bytes": 1194,
+      "sha256": "0bc4e841ddf8203e757e03a130e12ea09d0a68e885981855e918b2f7cc92b59b"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/MARLlib/examples/AGENTS.md": {
+      "bytes": 1164,
+      "sha256": "3b39ef13c5aaa9a33eb0725d4cf44087a198a5070adfcaca5fd061eb61e8a737"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/MARLlib/marllib/AGENTS.md": {
+      "bytes": 1164,
+      "sha256": "50585b4e7f379a18844ea79a6e04b1c1e9e8e18a05aefdd4468c32520c60e3e0"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/MARLlib/marllib/envs/AGENTS.md": {
+      "bytes": 1199,
+      "sha256": "c9cda3ae6da2b1ded335a5da1fd2faabbeeaeb5c4fbebc3f916a9210975ab711"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/MARLlib/marllib/envs/base_env/AGENTS.md": {
+      "bytes": 1167,
+      "sha256": "2984f37b38f593b8efc418ce017667a3fd42e79b7bb0f6bac68398cc7c9366a0"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/MARLlib/marllib/envs/base_env/config/AGENTS.md": {
+      "bytes": 1173,
+      "sha256": "198bad20e4221db8e71311994dd6296e926cf8ecf134fb10b86aff6f9ece3f0a"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/MARLlib/marllib/envs/global_reward_env/AGENTS.md": {
+      "bytes": 1179,
+      "sha256": "2299ac6f3e740eff7af9e75b9c239b72e38a60353bbe2d57d31aac54060f427b"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/MARLlib/marllib/marl/AGENTS.md": {
+      "bytes": 1169,
+      "sha256": "4ee3e0045df59f9bf2b46460bc3ed2bfbb8043c887a5543f4696c82e3098774d"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/MARLlib/marllib/marl/algos/AGENTS.md": {
+      "bytes": 1155,
+      "sha256": "03c89ff02066c0ed1b8e606e71a7269b2fe9afe3b9399d4dd8160c933f68d005"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/MARLlib/marllib/marl/algos/core/AGENTS.md": {
+      "bytes": 1116,
+      "sha256": "92cc71cc1569286472bba7a5220745470c915951e6dfd7f832a332a87eb34138"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/MARLlib/marllib/marl/algos/core/CC/AGENTS.md": {
+      "bytes": 1152,
+      "sha256": "c4e30c961eccee3411b96bed60ef794f719a0a128bd693e3986d9dbfff2fc7ff"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/MARLlib/marllib/marl/algos/core/IL/AGENTS.md": {
+      "bytes": 1114,
+      "sha256": "7da25865053e4ae9a41f35a62ad9fcac1330737e60cc2d5f9bea11a63655d5c6"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/MARLlib/marllib/marl/algos/core/VD/AGENTS.md": {
+      "bytes": 1146,
+      "sha256": "f6fccbed4762560698eaaa1549c2b35ed087e3884d1d2b2c5fec283c5e829f1b"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/MARLlib/marllib/marl/algos/hyperparams/AGENTS.md": {
+      "bytes": 1112,
+      "sha256": "b69bcd3865dd6a70d2c25b4471fe42a66b32bb8b2a8812f8d932331404ce8302"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/MARLlib/marllib/marl/algos/hyperparams/common/AGENTS.md": {
+      "bytes": 1157,
+      "sha256": "29dd650bf096295f62aea23955269b2abee2f81a770bb58eb3a0128c2f1f53f4"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/MARLlib/marllib/marl/algos/scripts/AGENTS.md": {
+      "bytes": 1154,
+      "sha256": "b8d2b29b5259c70004188d32dfa23864d437fb454b2bbd4c1366f124f6f84c5e"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/MARLlib/marllib/marl/algos/utils/AGENTS.md": {
+      "bytes": 1211,
+      "sha256": "ba83662867de2a86ea8bfd31c829d534aff736b78f15ea57870811ef3a6254f8"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/MARLlib/marllib/marl/models/AGENTS.md": {
+      "bytes": 1123,
+      "sha256": "779f891352ca2248edaf38cd8cca57c1696adee5769647fd600eb14f474688b4"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/MARLlib/marllib/marl/models/configs/AGENTS.md": {
+      "bytes": 1204,
+      "sha256": "225e7de51a05924b57272f0f5f17f5d5f6d59b3984986593fd7fccba5b03943a"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/MARLlib/marllib/marl/models/zoo/AGENTS.md": {
+      "bytes": 1113,
+      "sha256": "e89ab853c370fce8af9742dd2a8b3cecdda58026d07d54923185ae0f42322c57"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/MARLlib/marllib/marl/models/zoo/encoder/AGENTS.md": {
+      "bytes": 1207,
+      "sha256": "be09e8cf6781e599ad42640ed902ea192f729b8764313d57104ac61fe04c53bf"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/MARLlib/marllib/marl/models/zoo/mixer/AGENTS.md": {
+      "bytes": 1122,
+      "sha256": "db01995b2b7e1f9960a621b171c3ddee09ca62d2ce78134b373a97352d00c973"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/MARLlib/marllib/marl/models/zoo/mlp/AGENTS.md": {
+      "bytes": 1131,
+      "sha256": "e0fdbad4a1d6c4209953e015b338548e07184c7242c1a79a546538ee919360af"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/MARLlib/marllib/marl/models/zoo/rnn/AGENTS.md": {
+      "bytes": 1158,
+      "sha256": "c61e966c99c69b388b6713d565ad3f7803530b03938f33530916149667512ee5"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/MARLlib/marllib/marl/ray/AGENTS.md": {
+      "bytes": 1098,
+      "sha256": "19649a728e1cd7c50537899233b0e4969837446f1e2f33dc9c13e74e974773c3"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/MARLlib/marllib/patch/AGENTS.md": {
+      "bytes": 1121,
+      "sha256": "bd45b872cb02da335d07df49c7c9266d846748f71cabbaaa575b0c24612a76f0"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/MARLlib/marllib/patch/rllib/AGENTS.md": {
+      "bytes": 1133,
+      "sha256": "ed24d3e1cc8d678ea961154f471795a16fab764c5e146f18c77d76edd3d6d559"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/MARLlib/marllib/patch/rllib/execution/AGENTS.md": {
+      "bytes": 1156,
+      "sha256": "51ea9ae713d05607a1d00e7e83d297c507dca5caaed3a485e9fe4c2d5418b664"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/MARLlib/marllib/patch/rllib/models/AGENTS.md": {
+      "bytes": 1113,
+      "sha256": "1c7d0cae10c8b0d2f245c5c7c60cdcf20fbee0fcd3d1d306783e3c158c6fbf5d"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/MARLlib/marllib/patch/rllib/policy/AGENTS.md": {
+      "bytes": 1157,
+      "sha256": "376c2db3622dd73cc203cad494b4cae64cb9100dd42959cb209f293dfb28c070"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/MARLlib/marllib/patch/rllib/utils/AGENTS.md": {
+      "bytes": 1129,
+      "sha256": "73f34921603a30a191c058b465ffb39779a2e8562e8a32189500cb628e775dd3"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/MARLlib/tests/AGENTS.md": {
+      "bytes": 1195,
+      "sha256": "df05dc02fbfc6b5da7bfeba0022bec618045f75103b7b000cf25fc5ffa3831da"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/Mava/AGENTS.md": {
+      "bytes": 2267,
+      "sha256": "822417f253bd271e6245f1a0e539b70b6afbd5faaa25044b83f67862c03ce944"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/Mava/examples/AGENTS.md": {
+      "bytes": 290,
+      "sha256": "874e2b18a7337427e25f3d860bb861e34b46218276517414228482766ea1be0f"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/Mava/examples/advanced_usage/AGENTS.md": {
+      "bytes": 390,
+      "sha256": "3531de02798ad0cf14222bc0468ae564451cc70b36293119e451b620411d672d"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/Mava/mava/AGENTS.md": {
+      "bytes": 1235,
+      "sha256": "28696def8ab4ad1354d19b1b55fa8fd4413b536054884c624ee9b093428dc9d4"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/Mava/mava/configs/AGENTS.md": {
+      "bytes": 841,
+      "sha256": "55eb0d7a64a494ab804d35fa6c5fc45610049e4cbddbdc17a30547f3d9b3ee9d"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/Mava/mava/configs/arch/AGENTS.md": {
+      "bytes": 372,
+      "sha256": "3720802a92f871e21621cb535c1f8a9ea14723f873a47a56b55cdbb5bd8e859d"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/Mava/mava/configs/default/AGENTS.md": {
+      "bytes": 341,
+      "sha256": "c656f74838ec559cb06605ec63b6a1ce3cde98e480fd90bc329993c8b9b42f52"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/Mava/mava/configs/logger/AGENTS.md": {
+      "bytes": 410,
+      "sha256": "8878c789d75130c7c35253d75c16cec2b943ba5d92e7e702b35c7da1c48a2825"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/Mava/mava/configs/system/AGENTS.md": {
+      "bytes": 438,
+      "sha256": "52ae59140830b92e18039dd530510b2e892e80b9f5299f4aab85a7345a6e26e2"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/Mava/mava/networks/AGENTS.md": {
+      "bytes": 588,
+      "sha256": "c3e559d144829ec666d2f3292e62affdce850fe895edcaaffde2294beeea9ea6"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/Mava/mava/systems/AGENTS.md": {
+      "bytes": 1200,
+      "sha256": "ba583fc96d06753912b338d2b15a51c05bfbda6a5aceeb5636f24c91e4758744"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/Mava/mava/systems/ppo/AGENTS.md": {
+      "bytes": 947,
+      "sha256": "03e1c5f0e249e2cc6c19a5c61eb390d14fd45e77dba84fd17a0ca702f370e1d5"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/Mava/mava/systems/ppo/anakin/AGENTS.md": {
+      "bytes": 1051,
+      "sha256": "7c7c2cd5387a6f44ba30fbbd52a2fcc818ab96ec4a16159393ea7a4d30079fc4"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/Mava/mava/systems/ppo/sebulba/AGENTS.md": {
+      "bytes": 1004,
+      "sha256": "da580eca38a320a431c3cfc3988f8bbad084f3f26629d55de2fb8eb4cc1b2e73"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/Mava/mava/systems/q_learning/AGENTS.md": {
+      "bytes": 849,
+      "sha256": "a8b9d0f3239a7c89e4bf740bf5162112f1811ad2bfda23b5ec03263398a4ef4a"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/Mava/mava/systems/q_learning/anakin/AGENTS.md": {
+      "bytes": 807,
+      "sha256": "e957a75cf71c6cf8587ec628df8024352446b805a00eafd582a2859077f47e02"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/Mava/mava/systems/q_learning/sebulba/AGENTS.md": {
+      "bytes": 930,
+      "sha256": "891d9703bc676e2d0c0db2064594db62f737046b4f45add8bfafe617b3256526"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/Mava/mava/systems/sable/AGENTS.md": {
+      "bytes": 722,
+      "sha256": "069355f41be2747a5726966923675c0c895cd34fad73cc8801c0c476de302b55"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/Mava/mava/systems/sable/anakin/AGENTS.md": {
+      "bytes": 575,
+      "sha256": "9bd38758f91ac13c78d49de76cd03d7ee7f3f97b56b3cee5b92586a67c64d756"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/Mava/mava/systems/sable/sebulba/AGENTS.md": {
+      "bytes": 614,
+      "sha256": "cf61373547e2c56ccab22bd6c7fed3b1c2d677b3f6e77e26e181627c4559c2ec"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/Mava/mava/systems/sac/AGENTS.md": {
+      "bytes": 636,
+      "sha256": "c0600e154b41447b4d8a440b9cb0d052c9cf29a924252dadd914ec79312a1ef4"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/Mava/mava/systems/sac/anakin/AGENTS.md": {
+      "bytes": 845,
+      "sha256": "7d5627616511a8685e8810e3391e91e0b06b0d5ceec8751257e143bdf57b028a"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/Mava/mava/utils/AGENTS.md": {
+      "bytes": 913,
+      "sha256": "3a9c6f5d1184f49ce2bb42125d5873a07f5838f9bec64a45581a37a407eec4f1"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/Mava/mava/utils/sebulba/AGENTS.md": {
+      "bytes": 629,
+      "sha256": "16d7569c436e188f3e951c98f20cddeab4082839f462d2428ab6553ccfd44eab"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/Mava/mava/wrappers/AGENTS.md": {
+      "bytes": 873,
+      "sha256": "667348036e4a5368a946b0e2795b28d9c71da8c80d80d634030495fd89f20171"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/Mava/test/AGENTS.md": {
+      "bytes": 311,
+      "sha256": "cec3e530fd5bb7cff70e37fe7c7466be987b0dc62169fd54358394d1a0204371"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/on-policy/AGENTS.md": {
+      "bytes": 751,
+      "sha256": "e8aa22008ec9699ef5a1e6bf92298c58f15978a597ae0290cc4901863b6c1e0e"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/on-policy/onpolicy/AGENTS.md": {
+      "bytes": 397,
+      "sha256": "075452711276a46f1a76045066b0c959b62921d321fa555c78cbaf8d5983bacb"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/on-policy/onpolicy/algorithms/AGENTS.md": {
+      "bytes": 403,
+      "sha256": "69e53883b05f3009ca67f88b3bb6a1b31566934ce11d26e59cf5cedbe3e1d69b"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/on-policy/onpolicy/algorithms/r_mappo/AGENTS.md": {
+      "bytes": 440,
+      "sha256": "7267f1933d301034403b86dcc3bd07dcc033912c536797520e8600e4b37f28d5"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/on-policy/onpolicy/algorithms/r_mappo/algorithm/AGENTS.md": {
+      "bytes": 404,
+      "sha256": "87ada3055480d5dcb2ec46237eb4882a3bedfb15204396d6ae23d3eb26115e51"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/on-policy/onpolicy/algorithms/utils/AGENTS.md": {
+      "bytes": 391,
+      "sha256": "a419b8b46f1b7c576fa8e75de5ce9288c62025c4f12316847d0a3a17f4be7d3b"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/on-policy/onpolicy/envs/AGENTS.md": {
+      "bytes": 516,
+      "sha256": "8dfaf3be4c063d0571ba1b5ef730d42d4c4e11b7c0d51d48775745614736f522"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/on-policy/onpolicy/envs/football/AGENTS.md": {
+      "bytes": 363,
+      "sha256": "a437678b54188d1af8db52fb7c843e3b4ecf6a7e5b01691a71ae9f501afbd9bd"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/on-policy/onpolicy/envs/hanabi/AGENTS.md": {
+      "bytes": 384,
+      "sha256": "d1275fcc66e25aff98c672611d08531d5d62217c5b94109c0238b07df67a9e2e"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/on-policy/onpolicy/envs/mpe/AGENTS.md": {
+      "bytes": 414,
+      "sha256": "1f5bb17005fac47662b8f53320e30a76247b59b297efc92cdfee024dd331bb52"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/on-policy/onpolicy/envs/starcraft2/AGENTS.md": {
+      "bytes": 509,
+      "sha256": "e5ce85b9449c3d36a6762c533513a918b47a37b2da4ab7e181f7df2590fc0c0a"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/on-policy/onpolicy/envs/starcraft2/StarCraft2v2/AGENTS.md": {
+      "bytes": 413,
+      "sha256": "9135a40973d4512389220e233fb13cadf852c3e0c0b8dfbff2801dd8868fa38e"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/on-policy/onpolicy/runner/AGENTS.md": {
+      "bytes": 594,
+      "sha256": "ee3ca36e56314031089368cb935cb9f79b5e083940ca0a2b4350d0cc483ed30d"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/on-policy/onpolicy/runner/separated/AGENTS.md": {
+      "bytes": 416,
+      "sha256": "9168340eb36d6161636bd153af3b08805614c0c3ee3748820d66a596dd22e99c"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/on-policy/onpolicy/runner/shared/AGENTS.md": {
+      "bytes": 540,
+      "sha256": "1cd0cda096553cf44f1bee008e27739dd4f0ef4d5124d9c8dfaf852c502bcb33"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/on-policy/onpolicy/scripts/AGENTS.md": {
+      "bytes": 376,
+      "sha256": "c2f1451e14f3392ca1d170549cc3fe796479909c91f2893030925bac19103be7"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/on-policy/onpolicy/scripts/train/AGENTS.md": {
+      "bytes": 418,
+      "sha256": "15e73fc0a2a6551f592682dd065ecdaa880ffeafc0e6a50496a9b20f9b890516"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/on-policy/onpolicy/utils/AGENTS.md": {
+      "bytes": 452,
+      "sha256": "360d8ee14b99a1f24eb62de762d04f56581fa7b400cd4b7bdc077478fa2c9a6f"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/ref-lib/AGENTS.md": {
+      "bytes": 2740,
+      "sha256": "cde676432e8f6968e86f89fbabb51d7a730fb375d81cd1d739bc464148966079"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/BenchMARL/agents-overlays/AGENTS.md": {
+      "bytes": 2688,
+      "sha256": "43a3a6909ba307bd2996ca838aa635111acef56da7be4a4e56e0bdcda2a543c4"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/BenchMARL/agents-overlays/benchmarl/AGENTS.md": {
+      "bytes": 1187,
+      "sha256": "0ceb3ec1610fa2c233dcb032b82954f51e5483a1dfca21c3e1a5128ce674f2c6"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/BenchMARL/agents-overlays/benchmarl/algorithms/AGENTS.md": {
+      "bytes": 1690,
+      "sha256": "80278809e92dafb28588540184d255b4104f60f3e6a33d3e4200cc91a19c8b2e"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/BenchMARL/agents-overlays/benchmarl/benchmark/AGENTS.md": {
+      "bytes": 905,
+      "sha256": "57dea2af8bb019dd8783474008dd414f0a5235a380caa32359b7eb58ab82eaa4"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/BenchMARL/agents-overlays/benchmarl/environments/AGENTS.md": {
+      "bytes": 1515,
+      "sha256": "0dd997c8b21f2a481743da342397782dbbaa5ce28c04f9da46587c8d390f8676"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/BenchMARL/agents-overlays/benchmarl/experiment/AGENTS.md": {
+      "bytes": 2766,
+      "sha256": "74b76e5759455f45c49aaecc6926c9cb023428514384b14b3b491ea046991c71"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/BenchMARL/agents-overlays/benchmarl/models/AGENTS.md": {
+      "bytes": 1423,
+      "sha256": "f9e570e85245ec0f5ffc1bacbea95b9987dc29d67624e6a0d09057e3c5807c1e"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/epymarl/agents-overlays/AGENTS.md": {
+      "bytes": 1865,
+      "sha256": "fc15a6256677f113cead5b3fa0ca3f44f52dd31de3902b2b1574d71a7e889683"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/epymarl/agents-overlays/src/components/AGENTS.md": {
+      "bytes": 479,
+      "sha256": "58a9c315a637233b3e8ecb85107a3ec85ed562f8ad38636bc397dac1800d17bc"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/epymarl/agents-overlays/src/controllers/AGENTS.md": {
+      "bytes": 450,
+      "sha256": "b5f98928e1120d298cb8f076615f6af95d97594108321d6557bea3e584f7162e"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/epymarl/agents-overlays/src/envs/AGENTS.md": {
+      "bytes": 511,
+      "sha256": "2008af5ae34048f0b4c7faea5fd2d39a339693d042d9520955cbd4e77dee7f15"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/epymarl/agents-overlays/src/learners/AGENTS.md": {
+      "bytes": 470,
+      "sha256": "f26dc5fb91d7b3ef4bb782c730aad16f4c1245e8bda7c78c61486a768d9df1a3"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/epymarl/agents-overlays/src/runners/AGENTS.md": {
+      "bytes": 516,
+      "sha256": "7045bda214b49c0ed8f2541030e0743a386550d1906fa4ece080ceb9ea8565d4"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/JaxMARL/agents-overlays/AGENTS.md": {
+      "bytes": 2518,
+      "sha256": "2380298957b44ecb801243835950ffce50341f3876bb112fbd4aa0d929047f87"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/JaxMARL/agents-overlays/baselines/AGENTS.md": {
+      "bytes": 1167,
+      "sha256": "0dac4480ffec47d4d2574735cac933d15834aa1bf8011b9d9f83ec71f00b0008"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/JaxMARL/agents-overlays/baselines/IPPO/AGENTS.md": {
+      "bytes": 1025,
+      "sha256": "6144ca23ed19380689a081f403d22a10ef121fe85a48bcb12de2e21502455596"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/JaxMARL/agents-overlays/baselines/MAPPO/AGENTS.md": {
+      "bytes": 948,
+      "sha256": "83d48f8e968a7ccfcacad86dbe3dc9b263812b51f8ec571ac36a8d22ce28faf1"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/JaxMARL/agents-overlays/baselines/QLearning/AGENTS.md": {
+      "bytes": 1156,
+      "sha256": "8fc1e1bda9789dd313701f51ee830e513a960fa0475c6690177aad636ce53673"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/JaxMARL/agents-overlays/baselines/QLearning/utils/AGENTS.md": {
+      "bytes": 503,
+      "sha256": "15a77eba4420bc926bccb808ec410635123579885947c09e5eddbb5d408a8967"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/JaxMARL/agents-overlays/jaxmarl/AGENTS.md": {
+      "bytes": 1027,
+      "sha256": "c688fb101593fbf7e0d741081e355a2f0cdffebec2c900493f65a4f1f86319a9"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/JaxMARL/agents-overlays/jaxmarl/environments/AGENTS.md": {
+      "bytes": 1167,
+      "sha256": "bad3a4bcb8630c405b8d264da05164aca7c04a7ff162e7c11656cae1d63b99cd"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/JaxMARL/agents-overlays/jaxmarl/environments/hanabi/AGENTS.md": {
+      "bytes": 992,
+      "sha256": "8528bcfdb9deb262d51ad706843e664f941bbebc6dbc0c4c5ee7aaa183744be4"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/JaxMARL/agents-overlays/jaxmarl/environments/mpe/AGENTS.md": {
+      "bytes": 1128,
+      "sha256": "d83475bdcbab47d982cb2ae880245e0c27b0b208d45f4970293e64663344c28d"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/JaxMARL/agents-overlays/jaxmarl/environments/overcooked_v2/AGENTS.md": {
+      "bytes": 848,
+      "sha256": "ec0e82e2c7992576b14b4420688b9bb54471a50c7347c7593e7dc21287622f01"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/JaxMARL/agents-overlays/jaxmarl/environments/smax/AGENTS.md": {
+      "bytes": 1197,
+      "sha256": "de3649d8f5c498ea5b8040216051f8b34a4cf00349fe91b8aee565633f36058a"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/JaxMARL/agents-overlays/jaxmarl/environments/storm/AGENTS.md": {
+      "bytes": 833,
+      "sha256": "fa644f68693136d3c76a58b2fa466cfec218880f69fe1f7a9d77351360c4d23d"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/JaxMARL/agents-overlays/jaxmarl/wrappers/AGENTS.md": {
+      "bytes": 1059,
+      "sha256": "53164235a8e93fe0b7db7b9238fc982eaf5bd74d5750a8e4cf5387b748269616"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/MARLlib/agents-overlays/AGENTS.md": {
+      "bytes": 1194,
+      "sha256": "0bc4e841ddf8203e757e03a130e12ea09d0a68e885981855e918b2f7cc92b59b"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/MARLlib/agents-overlays/examples/AGENTS.md": {
+      "bytes": 1164,
+      "sha256": "3b39ef13c5aaa9a33eb0725d4cf44087a198a5070adfcaca5fd061eb61e8a737"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/MARLlib/agents-overlays/marllib/AGENTS.md": {
+      "bytes": 1164,
+      "sha256": "50585b4e7f379a18844ea79a6e04b1c1e9e8e18a05aefdd4468c32520c60e3e0"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/MARLlib/agents-overlays/marllib/envs/AGENTS.md": {
+      "bytes": 1199,
+      "sha256": "c9cda3ae6da2b1ded335a5da1fd2faabbeeaeb5c4fbebc3f916a9210975ab711"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/MARLlib/agents-overlays/marllib/envs/base_env/AGENTS.md": {
+      "bytes": 1167,
+      "sha256": "2984f37b38f593b8efc418ce017667a3fd42e79b7bb0f6bac68398cc7c9366a0"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/MARLlib/agents-overlays/marllib/envs/base_env/config/AGENTS.md": {
+      "bytes": 1173,
+      "sha256": "198bad20e4221db8e71311994dd6296e926cf8ecf134fb10b86aff6f9ece3f0a"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/MARLlib/agents-overlays/marllib/envs/global_reward_env/AGENTS.md": {
+      "bytes": 1179,
+      "sha256": "2299ac6f3e740eff7af9e75b9c239b72e38a60353bbe2d57d31aac54060f427b"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/MARLlib/agents-overlays/marllib/marl/AGENTS.md": {
+      "bytes": 1169,
+      "sha256": "4ee3e0045df59f9bf2b46460bc3ed2bfbb8043c887a5543f4696c82e3098774d"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/MARLlib/agents-overlays/marllib/marl/algos/AGENTS.md": {
+      "bytes": 1155,
+      "sha256": "03c89ff02066c0ed1b8e606e71a7269b2fe9afe3b9399d4dd8160c933f68d005"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/MARLlib/agents-overlays/marllib/marl/algos/core/AGENTS.md": {
+      "bytes": 1116,
+      "sha256": "92cc71cc1569286472bba7a5220745470c915951e6dfd7f832a332a87eb34138"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/MARLlib/agents-overlays/marllib/marl/algos/core/CC/AGENTS.md": {
+      "bytes": 1152,
+      "sha256": "c4e30c961eccee3411b96bed60ef794f719a0a128bd693e3986d9dbfff2fc7ff"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/MARLlib/agents-overlays/marllib/marl/algos/core/IL/AGENTS.md": {
+      "bytes": 1114,
+      "sha256": "7da25865053e4ae9a41f35a62ad9fcac1330737e60cc2d5f9bea11a63655d5c6"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/MARLlib/agents-overlays/marllib/marl/algos/core/VD/AGENTS.md": {
+      "bytes": 1146,
+      "sha256": "f6fccbed4762560698eaaa1549c2b35ed087e3884d1d2b2c5fec283c5e829f1b"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/MARLlib/agents-overlays/marllib/marl/algos/hyperparams/AGENTS.md": {
+      "bytes": 1112,
+      "sha256": "b69bcd3865dd6a70d2c25b4471fe42a66b32bb8b2a8812f8d932331404ce8302"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/MARLlib/agents-overlays/marllib/marl/algos/hyperparams/common/AGENTS.md": {
+      "bytes": 1157,
+      "sha256": "29dd650bf096295f62aea23955269b2abee2f81a770bb58eb3a0128c2f1f53f4"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/MARLlib/agents-overlays/marllib/marl/algos/scripts/AGENTS.md": {
+      "bytes": 1154,
+      "sha256": "b8d2b29b5259c70004188d32dfa23864d437fb454b2bbd4c1366f124f6f84c5e"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/MARLlib/agents-overlays/marllib/marl/algos/utils/AGENTS.md": {
+      "bytes": 1211,
+      "sha256": "ba83662867de2a86ea8bfd31c829d534aff736b78f15ea57870811ef3a6254f8"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/MARLlib/agents-overlays/marllib/marl/models/AGENTS.md": {
+      "bytes": 1123,
+      "sha256": "779f891352ca2248edaf38cd8cca57c1696adee5769647fd600eb14f474688b4"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/MARLlib/agents-overlays/marllib/marl/models/configs/AGENTS.md": {
+      "bytes": 1204,
+      "sha256": "225e7de51a05924b57272f0f5f17f5d5f6d59b3984986593fd7fccba5b03943a"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/MARLlib/agents-overlays/marllib/marl/models/zoo/AGENTS.md": {
+      "bytes": 1113,
+      "sha256": "e89ab853c370fce8af9742dd2a8b3cecdda58026d07d54923185ae0f42322c57"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/MARLlib/agents-overlays/marllib/marl/models/zoo/encoder/AGENTS.md": {
+      "bytes": 1207,
+      "sha256": "be09e8cf6781e599ad42640ed902ea192f729b8764313d57104ac61fe04c53bf"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/MARLlib/agents-overlays/marllib/marl/models/zoo/mixer/AGENTS.md": {
+      "bytes": 1122,
+      "sha256": "db01995b2b7e1f9960a621b171c3ddee09ca62d2ce78134b373a97352d00c973"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/MARLlib/agents-overlays/marllib/marl/models/zoo/mlp/AGENTS.md": {
+      "bytes": 1131,
+      "sha256": "e0fdbad4a1d6c4209953e015b338548e07184c7242c1a79a546538ee919360af"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/MARLlib/agents-overlays/marllib/marl/models/zoo/rnn/AGENTS.md": {
+      "bytes": 1158,
+      "sha256": "c61e966c99c69b388b6713d565ad3f7803530b03938f33530916149667512ee5"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/MARLlib/agents-overlays/marllib/marl/ray/AGENTS.md": {
+      "bytes": 1098,
+      "sha256": "19649a728e1cd7c50537899233b0e4969837446f1e2f33dc9c13e74e974773c3"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/MARLlib/agents-overlays/marllib/patch/AGENTS.md": {
+      "bytes": 1121,
+      "sha256": "bd45b872cb02da335d07df49c7c9266d846748f71cabbaaa575b0c24612a76f0"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/MARLlib/agents-overlays/marllib/patch/rllib/AGENTS.md": {
+      "bytes": 1133,
+      "sha256": "ed24d3e1cc8d678ea961154f471795a16fab764c5e146f18c77d76edd3d6d559"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/MARLlib/agents-overlays/marllib/patch/rllib/execution/AGENTS.md": {
+      "bytes": 1156,
+      "sha256": "51ea9ae713d05607a1d00e7e83d297c507dca5caaed3a485e9fe4c2d5418b664"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/MARLlib/agents-overlays/marllib/patch/rllib/models/AGENTS.md": {
+      "bytes": 1113,
+      "sha256": "1c7d0cae10c8b0d2f245c5c7c60cdcf20fbee0fcd3d1d306783e3c158c6fbf5d"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/MARLlib/agents-overlays/marllib/patch/rllib/policy/AGENTS.md": {
+      "bytes": 1157,
+      "sha256": "376c2db3622dd73cc203cad494b4cae64cb9100dd42959cb209f293dfb28c070"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/MARLlib/agents-overlays/marllib/patch/rllib/utils/AGENTS.md": {
+      "bytes": 1129,
+      "sha256": "73f34921603a30a191c058b465ffb39779a2e8562e8a32189500cb628e775dd3"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/MARLlib/agents-overlays/tests/AGENTS.md": {
+      "bytes": 1195,
+      "sha256": "df05dc02fbfc6b5da7bfeba0022bec618045f75103b7b000cf25fc5ffa3831da"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/Mava/agents-overlays/AGENTS.md": {
+      "bytes": 2267,
+      "sha256": "822417f253bd271e6245f1a0e539b70b6afbd5faaa25044b83f67862c03ce944"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/Mava/agents-overlays/examples/AGENTS.md": {
+      "bytes": 290,
+      "sha256": "874e2b18a7337427e25f3d860bb861e34b46218276517414228482766ea1be0f"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/Mava/agents-overlays/examples/advanced_usage/AGENTS.md": {
+      "bytes": 390,
+      "sha256": "3531de02798ad0cf14222bc0468ae564451cc70b36293119e451b620411d672d"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/Mava/agents-overlays/mava/AGENTS.md": {
+      "bytes": 1235,
+      "sha256": "28696def8ab4ad1354d19b1b55fa8fd4413b536054884c624ee9b093428dc9d4"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/Mava/agents-overlays/mava/configs/AGENTS.md": {
+      "bytes": 841,
+      "sha256": "55eb0d7a64a494ab804d35fa6c5fc45610049e4cbddbdc17a30547f3d9b3ee9d"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/Mava/agents-overlays/mava/configs/arch/AGENTS.md": {
+      "bytes": 372,
+      "sha256": "3720802a92f871e21621cb535c1f8a9ea14723f873a47a56b55cdbb5bd8e859d"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/Mava/agents-overlays/mava/configs/default/AGENTS.md": {
+      "bytes": 341,
+      "sha256": "c656f74838ec559cb06605ec63b6a1ce3cde98e480fd90bc329993c8b9b42f52"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/Mava/agents-overlays/mava/configs/logger/AGENTS.md": {
+      "bytes": 410,
+      "sha256": "8878c789d75130c7c35253d75c16cec2b943ba5d92e7e702b35c7da1c48a2825"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/Mava/agents-overlays/mava/configs/system/AGENTS.md": {
+      "bytes": 438,
+      "sha256": "52ae59140830b92e18039dd530510b2e892e80b9f5299f4aab85a7345a6e26e2"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/Mava/agents-overlays/mava/networks/AGENTS.md": {
+      "bytes": 588,
+      "sha256": "c3e559d144829ec666d2f3292e62affdce850fe895edcaaffde2294beeea9ea6"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/Mava/agents-overlays/mava/systems/AGENTS.md": {
+      "bytes": 1200,
+      "sha256": "ba583fc96d06753912b338d2b15a51c05bfbda6a5aceeb5636f24c91e4758744"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/Mava/agents-overlays/mava/systems/ppo/AGENTS.md": {
+      "bytes": 947,
+      "sha256": "03e1c5f0e249e2cc6c19a5c61eb390d14fd45e77dba84fd17a0ca702f370e1d5"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/Mava/agents-overlays/mava/systems/ppo/anakin/AGENTS.md": {
+      "bytes": 1051,
+      "sha256": "7c7c2cd5387a6f44ba30fbbd52a2fcc818ab96ec4a16159393ea7a4d30079fc4"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/Mava/agents-overlays/mava/systems/ppo/sebulba/AGENTS.md": {
+      "bytes": 1004,
+      "sha256": "da580eca38a320a431c3cfc3988f8bbad084f3f26629d55de2fb8eb4cc1b2e73"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/Mava/agents-overlays/mava/systems/q_learning/AGENTS.md": {
+      "bytes": 849,
+      "sha256": "a8b9d0f3239a7c89e4bf740bf5162112f1811ad2bfda23b5ec03263398a4ef4a"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/Mava/agents-overlays/mava/systems/q_learning/anakin/AGENTS.md": {
+      "bytes": 807,
+      "sha256": "e957a75cf71c6cf8587ec628df8024352446b805a00eafd582a2859077f47e02"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/Mava/agents-overlays/mava/systems/q_learning/sebulba/AGENTS.md": {
+      "bytes": 930,
+      "sha256": "891d9703bc676e2d0c0db2064594db62f737046b4f45add8bfafe617b3256526"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/Mava/agents-overlays/mava/systems/sable/AGENTS.md": {
+      "bytes": 722,
+      "sha256": "069355f41be2747a5726966923675c0c895cd34fad73cc8801c0c476de302b55"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/Mava/agents-overlays/mava/systems/sable/anakin/AGENTS.md": {
+      "bytes": 575,
+      "sha256": "9bd38758f91ac13c78d49de76cd03d7ee7f3f97b56b3cee5b92586a67c64d756"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/Mava/agents-overlays/mava/systems/sable/sebulba/AGENTS.md": {
+      "bytes": 614,
+      "sha256": "cf61373547e2c56ccab22bd6c7fed3b1c2d677b3f6e77e26e181627c4559c2ec"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/Mava/agents-overlays/mava/systems/sac/AGENTS.md": {
+      "bytes": 636,
+      "sha256": "c0600e154b41447b4d8a440b9cb0d052c9cf29a924252dadd914ec79312a1ef4"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/Mava/agents-overlays/mava/systems/sac/anakin/AGENTS.md": {
+      "bytes": 845,
+      "sha256": "7d5627616511a8685e8810e3391e91e0b06b0d5ceec8751257e143bdf57b028a"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/Mava/agents-overlays/mava/utils/AGENTS.md": {
+      "bytes": 913,
+      "sha256": "3a9c6f5d1184f49ce2bb42125d5873a07f5838f9bec64a45581a37a407eec4f1"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/Mava/agents-overlays/mava/utils/sebulba/AGENTS.md": {
+      "bytes": 629,
+      "sha256": "16d7569c436e188f3e951c98f20cddeab4082839f462d2428ab6553ccfd44eab"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/Mava/agents-overlays/mava/wrappers/AGENTS.md": {
+      "bytes": 873,
+      "sha256": "667348036e4a5368a946b0e2795b28d9c71da8c80d80d634030495fd89f20171"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/Mava/agents-overlays/test/AGENTS.md": {
+      "bytes": 311,
+      "sha256": "cec3e530fd5bb7cff70e37fe7c7466be987b0dc62169fd54358394d1a0204371"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/on-policy/agents-overlays/AGENTS.md": {
+      "bytes": 751,
+      "sha256": "e8aa22008ec9699ef5a1e6bf92298c58f15978a597ae0290cc4901863b6c1e0e"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/on-policy/agents-overlays/onpolicy/AGENTS.md": {
+      "bytes": 397,
+      "sha256": "075452711276a46f1a76045066b0c959b62921d321fa555c78cbaf8d5983bacb"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/on-policy/agents-overlays/onpolicy/algorithms/AGENTS.md": {
+      "bytes": 403,
+      "sha256": "69e53883b05f3009ca67f88b3bb6a1b31566934ce11d26e59cf5cedbe3e1d69b"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/on-policy/agents-overlays/onpolicy/algorithms/r_mappo/AGENTS.md": {
+      "bytes": 440,
+      "sha256": "7267f1933d301034403b86dcc3bd07dcc033912c536797520e8600e4b37f28d5"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/on-policy/agents-overlays/onpolicy/algorithms/r_mappo/algorithm/AGENTS.md": {
+      "bytes": 404,
+      "sha256": "87ada3055480d5dcb2ec46237eb4882a3bedfb15204396d6ae23d3eb26115e51"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/on-policy/agents-overlays/onpolicy/algorithms/utils/AGENTS.md": {
+      "bytes": 391,
+      "sha256": "a419b8b46f1b7c576fa8e75de5ce9288c62025c4f12316847d0a3a17f4be7d3b"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/on-policy/agents-overlays/onpolicy/envs/AGENTS.md": {
+      "bytes": 516,
+      "sha256": "8dfaf3be4c063d0571ba1b5ef730d42d4c4e11b7c0d51d48775745614736f522"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/on-policy/agents-overlays/onpolicy/envs/football/AGENTS.md": {
+      "bytes": 363,
+      "sha256": "a437678b54188d1af8db52fb7c843e3b4ecf6a7e5b01691a71ae9f501afbd9bd"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/on-policy/agents-overlays/onpolicy/envs/hanabi/AGENTS.md": {
+      "bytes": 384,
+      "sha256": "d1275fcc66e25aff98c672611d08531d5d62217c5b94109c0238b07df67a9e2e"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/on-policy/agents-overlays/onpolicy/envs/mpe/AGENTS.md": {
+      "bytes": 414,
+      "sha256": "1f5bb17005fac47662b8f53320e30a76247b59b297efc92cdfee024dd331bb52"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/on-policy/agents-overlays/onpolicy/envs/starcraft2/AGENTS.md": {
+      "bytes": 509,
+      "sha256": "e5ce85b9449c3d36a6762c533513a918b47a37b2da4ab7e181f7df2590fc0c0a"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/on-policy/agents-overlays/onpolicy/envs/starcraft2/StarCraft2v2/AGENTS.md": {
+      "bytes": 413,
+      "sha256": "9135a40973d4512389220e233fb13cadf852c3e0c0b8dfbff2801dd8868fa38e"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/on-policy/agents-overlays/onpolicy/runner/AGENTS.md": {
+      "bytes": 594,
+      "sha256": "ee3ca36e56314031089368cb935cb9f79b5e083940ca0a2b4350d0cc483ed30d"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/on-policy/agents-overlays/onpolicy/runner/separated/AGENTS.md": {
+      "bytes": 416,
+      "sha256": "9168340eb36d6161636bd153af3b08805614c0c3ee3748820d66a596dd22e99c"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/on-policy/agents-overlays/onpolicy/runner/shared/AGENTS.md": {
+      "bytes": 540,
+      "sha256": "1cd0cda096553cf44f1bee008e27739dd4f0ef4d5124d9c8dfaf852c502bcb33"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/on-policy/agents-overlays/onpolicy/scripts/AGENTS.md": {
+      "bytes": 376,
+      "sha256": "c2f1451e14f3392ca1d170549cc3fe796479909c91f2893030925bac19103be7"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/on-policy/agents-overlays/onpolicy/scripts/train/AGENTS.md": {
+      "bytes": 418,
+      "sha256": "15e73fc0a2a6551f592682dd065ecdaa880ffeafc0e6a50496a9b20f9b890516"
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/on-policy/agents-overlays/onpolicy/utils/AGENTS.md": {
+      "bytes": 452,
+      "sha256": "360d8ee14b99a1f24eb62de762d04f56581fa7b400cd4b7bdc077478fa2c9a6f"
+    },
+    "envs/AGENTS.md": {
+      "bytes": 2274,
+      "sha256": "ffd8258aaf651b2c1b4500c097471dc15574632b65c202f683f440b8b04bae89"
+    },
+    "experiments/AGENTS.md": {
+      "bytes": 7936,
+      "sha256": "6082a19cad1965a9899208709a59769020a46a327770b32a379dd4683ebfcb20"
+    },
+    "ha_ctse_process/AGENTS.md": {
+      "bytes": 2272,
+      "sha256": "9808a69c10ec36093215a73561018df1aaad4b5f04473523168d538aeb6ac040"
+    },
+    "scripts/AGENTS.md": {
+      "bytes": 2425,
+      "sha256": "99e18684e67e68c958e4c10cbb32f5b8ce1ec75f9fb0f3e3065d20f672b35ff8"
+    },
+    "tests/AGENTS.md": {
+      "bytes": 3675,
+      "sha256": "3a06c15a310b06e26340c19ffba724ab5e55d091ab78dc541d12a44bd3d8fec9"
+    },
+    "CLAUDE.md": {
+      "bytes": 16258,
+      "sha256": "dd066793fb5d41d088acf5f17e90d5840ce8e92567e0402aea012ef904529ba4"
+    },
+    ".codex/config.toml": {
+      "bytes": 2295,
+      "sha256": "e7f9560d2fa8efb0292abce79b15d83f54bf9bdb2f6983f04409d46b6781d6f2"
+    },
+    ".codex/hmasd-compute.toml": {
+      "bytes": 1670,
+      "sha256": "f2b6953ea409ab53532549d4e84bc2b74affa3f1ec3c70890ec3208c762deb3e"
+    },
+    ".codex/hmasd-transport.toml": {
+      "bytes": 688,
+      "sha256": "4a47bbb0c6e2780f13a159b6ed87390aa6c14b82c789a2f73e89123fbc277782"
+    },
+    ".codex/agents/hmasd-direction-manager.toml": {
+      "bytes": 22115,
+      "sha256": "fc75edb7ac02fc15caaf604c5cdcac5b03ea6f271c06814b9bfa4ff8068630ee"
+    },
+    ".codex/agents/hmasd-experiment-monitor.toml": {
+      "bytes": 1317,
+      "sha256": "6436d38f38eae2f0470dc921b544e85a2b1ce7ab39ad80b27e15bcea1ecb62ab"
+    },
+    ".codex/agents/hmasd-experiment-operator.toml": {
+      "bytes": 4744,
+      "sha256": "0441dc657b7e0467e8356f29bd9afa916274b8c1fc407918ebfcb270a5bca8c8"
+    },
+    ".codex/agents/hmasd-implementer.toml": {
+      "bytes": 6518,
+      "sha256": "4b8a6546c6fca5ccac62607c477c33614d0b3dc53fe1501e79deb711d8fc3b36"
+    },
+    ".codex/agents/hmasd-research-critic.toml": {
+      "bytes": 4811,
+      "sha256": "5435a75b27696bac30d647febb4cf198fb0b2bf52a20d8ba783810b45148b695"
+    },
+    ".codex/agents/hmasd-reviewer.toml": {
+      "bytes": 5225,
+      "sha256": "be073ff2e5480b831ed71867a7a5f0521e45e97e6364f23adb507b9cd487eb02"
+    },
+    ".codex/agents/hmasd-scout.toml": {
+      "bytes": 2807,
+      "sha256": "c320c5b574de0a69c4d6ecb60d328b8e29555788bb93e18d8d3b29bb34fa8f56"
+    },
+    ".codex/agents/hmasd-transport.toml": {
+      "bytes": 2839,
+      "sha256": "755c83051e5e8b5fa1c0054090dbf3f72f7e5466da35f712bfa5f112782f39f2"
+    },
+    ".codex/agents/hmasd-verifier.toml": {
+      "bytes": 3745,
+      "sha256": "f8e200f02bc90c035ca4f3beb6872b71b727dccb7e4951815e98e0f499736a14"
+    },
+    ".agents/skills/hmasd-chatgpt-pro-transport/SKILL.md": {
+      "bytes": 10926,
+      "sha256": "66049f3bfea747997ec104355e697fc09144f0e658b9e69549751ad48d29cf77"
+    },
+    ".agents/skills/hmasd-chatgpt-pro-transport/references/agentify.md": {
+      "bytes": 5943,
+      "sha256": "a2875921c39f49c967a38ff46f64664686a492b847b28620785212aa935b5fdc"
+    },
+    ".agents/skills/hmasd-chatgpt-pro-transport/references/attachment-compatibility.md": {
+      "bytes": 1232,
+      "sha256": "aea0b86600a3deab44bb4aad9051daa9e24db1664a4ad974a79c3f4737ac2485"
+    },
+    ".agents/skills/hmasd-chatgpt-pro-transport/references/attachment-send.md": {
+      "bytes": 1774,
+      "sha256": "e3a92b94cf01a8a5e91ff478ac4d575c2f59dfa2c90a4e14a887510882fe52bb"
+    },
+    ".agents/skills/hmasd-chatgpt-pro-transport/references/provider-context-replacement.md": {
+      "bytes": 2448,
+      "sha256": "fcd8c2b9e8a987412c0407023b7def4c5ba32f43a7129cbe09f059e8f6b7a73a"
+    },
+    ".agents/skills/hmasd-chatgpt-pro-transport/references/send-hit-point-recovery.md": {
+      "bytes": 3108,
+      "sha256": "34b42031bb600043c98d22be2b13c3a5827087d97414e1f87ea026b19bb2a4e1"
+    },
+    ".agents/skills/hmasd-chatgpt-pro-transport/references/state-schema.md": {
+      "bytes": 22658,
+      "sha256": "c48399722cd831c6d17379c7edc55d6585133b10cf26bf0bc3c46783c5769858"
+    },
+    ".agents/skills/hmasd-chatgpt-pro-transport/scripts/archive_delivered_claude_request.py": {
+      "bytes": 7889,
+      "sha256": "fe692b090685734e0fbd1bdb85b2d7312d5743f3d0bbdb3ebd74c4ecda55670a"
+    },
+    ".agents/skills/hmasd-chatgpt-pro-transport/scripts/bind_conversation.py": {
+      "bytes": 56110,
+      "sha256": "d52af8fa614a8da4f7765dd824d224b48f7586a17419a46779af99a91dcc9e96"
+    },
+    ".agents/skills/hmasd-chatgpt-pro-transport/scripts/materialize_packet.py": {
+      "bytes": 4617,
+      "sha256": "c5046ade4098f88f99fe7ad2e9bdc57fcf30c90a327b1e82cfdffaaec849a650"
+    },
+    ".agents/skills/hmasd-chatgpt-pro-transport/scripts/native_transport.py": {
+      "bytes": 26628,
+      "sha256": "bd5626a72645b1744683241033c0520d7de0f3e3c399a2fa2dcbc430e0943e63"
+    },
+    ".agents/skills/hmasd-chatgpt-pro-transport/scripts/transport_contract.py": {
+      "bytes": 43974,
+      "sha256": "7d689a3c27bb83904d2fe40926abce627e972af3c552c8b8c3c0c2e093e0eb3d"
+    },
+    ".agents/skills/hmasd-chatgpt-pro-transport/scripts/validate_request.py": {
+      "bytes": 17763,
+      "sha256": "7145288f897cd137902f244b4f5e7bc7971e22b56a09626f5f3f28e3b4293781"
+    },
+    ".agents/skills/hmasd-loop-dispatch/SKILL.md": {
+      "bytes": 9192,
+      "sha256": "3ba0b97476563e5ecd09ee401e24cbd196ee9bfe04b9e8a36dcadcfc6816506f"
+    },
+    ".agents/skills/hmasd-owner-item/SKILL.md": {
+      "bytes": 6973,
+      "sha256": "b071e8f0038cbd8509b1f86d546685c9b2f4c72b28a0c6ef5b8c47a92ee73cd0"
+    },
+    ".agents/skills/hmasd-portfolio-task/SKILL.md": {
+      "bytes": 7093,
+      "sha256": "c6566d5b5dc41190b057fa5a7f034835b3067646b82f263fc6b64326fa6b77c0"
+    },
+    ".agents/skills/hmasd-pro-research-prompt-author/SKILL.md": {
+      "bytes": 11470,
+      "sha256": "acb13a8098629fe88ccab2f85c029e688756432c46df23c16c7727f87d1ef460"
+    },
+    ".agents/skills/hmasd-pro-research-prompt-author/references/attachment-delivery.md": {
+      "bytes": 3672,
+      "sha256": "e757972584925e357910521591c51d70e7bb3a601da7c33d9b1d61bfcdbe1e21"
+    },
+    ".agents/skills/hmasd-pro-research-prompt-author/references/github-connector-contract.md": {
+      "bytes": 2407,
+      "sha256": "4dcaa572ade5d91bdb7f2e47fc316a12a0b36d651918c0aea6ce9bb9edb512e4"
+    },
+    ".agents/skills/hmasd-pro-research-prompt-author/references/github-delivery.md": {
+      "bytes": 5512,
+      "sha256": "bea4a50da13865fcddf87dc53fdcc94e32adb6fd102696fa61800d9e3d22e287"
+    },
+    ".agents/skills/hmasd-pro-research-prompt-author/scripts/render_packet.py": {
+      "bytes": 60648,
+      "sha256": "f760d9faaa193419f6ab5c465e53aab3f02590f4eba5c910d15934b560199e8d"
+    },
+    ".agents/skills/hmasd-scientific-tools/SKILL.md": {
+      "bytes": 5926,
+      "sha256": "b1bb4d2cd7ae99b1605d47f280e77c428e554af45e2fe0cf563947a02de938bc"
+    },
+    ".agents/skills/hmasd-scientific-tools/references/adapters.md": {
+      "bytes": 2758,
+      "sha256": "f978367f7806ea8b73ae14dc5ddcad576bafb20c6935164da4a0870a90021948"
+    },
+    ".agents/skills/hmasd-scientific-tools/references/local-literature.md": {
+      "bytes": 3906,
+      "sha256": "60c770a9caf4bea82f22874d30336637e259a5d94d5d42f228fb827057ad9f95"
+    },
+    ".agents/skills/hmasd-scientific-tools/references/scientific-reading.md": {
+      "bytes": 3237,
+      "sha256": "f257ac9e095d42e24ac15d64a62f8f110d66f43c370cbec99622780deae0e606"
+    },
+    ".agents/skills/hmasd-scientific-tools/scripts/summarize_runs.py": {
+      "bytes": 4261,
+      "sha256": "e918965e5b63d0c9d5b99f555dcd86143d838f952037611a616b24f506cd08d9"
+    },
+    ".claude/settings.json": {
+      "bytes": 47,
+      "sha256": "6f691a52631e7d97cfd311377f46c37bc2686f09287c5fedbe91dfff879656b7"
+    },
+    ".claude/agents/hmasd-clerk.md": {
+      "bytes": 3868,
+      "sha256": "52cf5ee92a06e374d2a15a0734cf56e3f5cd15e24c4914088916ac22d3368f6d"
+    },
+    ".claude/agents/hmasd-cm-scout.md": {
+      "bytes": 1638,
+      "sha256": "e1e145b453070b0ec34987db35feb6c0a4d126d1701b1a4e7ef264e872c71964"
+    },
+    ".claude/agents/hmasd-cm.md": {
+      "bytes": 7906,
+      "sha256": "f002db2b889ddbc008d3cd914e872ebab9e9af3a5a7cf825a9abfb25031714fe"
+    },
+    ".claude/agents/hmasd-experiment-operator.md": {
+      "bytes": 4402,
+      "sha256": "6079a32a6a9351817fef44ce7fa15954794f9a934c91465e7bb9f7a58d24d767"
+    },
+    ".claude/agents/hmasd-experiment-tracker.md": {
+      "bytes": 4861,
+      "sha256": "42e3392e49a05f34ec3019a9fcf62c7348a34ce623838b3e4ba74d29d6eaa381"
+    },
+    ".claude/agents/hmasd-pro-transport.md": {
+      "bytes": 19535,
+      "sha256": "c4c9d48b2d485fb3336089d4a75a8d9b1afb4a17ebebaaa3c2502cd455ed889f"
+    },
+    ".claude/agents/hmasd-research-critic.md": {
+      "bytes": 3922,
+      "sha256": "141302ae10b71a9d02d6eb38b4918bc6c091b99f0beb114b4ebb315b84a3603e"
+    },
+    ".claude/agents/hmasd-research-scout.md": {
+      "bytes": 2148,
+      "sha256": "0f0d26ee69659c6a5ee533553fd554dab95a56e6d73e14416d9b71e6dd676994"
+    },
+    ".claude/agents/hmasd-reviewer.md": {
+      "bytes": 3382,
+      "sha256": "5995b3945cca010e47fb5e12623123056d30d822ba3864bab3c08a2c4593b93e"
+    },
+    ".claude/agents/hmasd-routine-implementer.md": {
+      "bytes": 2810,
+      "sha256": "3f4f1f0238b898fa5cafbe1458877ca6fda374976d2722045ffd9227db5e366f"
+    },
+    ".claude/agents/hmasd-verifier.md": {
+      "bytes": 2347,
+      "sha256": "26cfb3310ca9b1f359f2e88e7653e095b81bd9ba1f8cc5441cec61ba306c6ce6"
+    },
+    ".claude/skills/hmasd-grok-cm/SKILL.md": {
+      "bytes": 7763,
+      "sha256": "1bae2f42e1b3eb9b8408f38d41f2fcc2d1674477b6341908ab81fab8813e7c2c"
+    },
+    ".claude/skills/hmasd-pro-transport/SKILL.md": {
+      "bytes": 14577,
+      "sha256": "02eb943c8e7a0a4eca38f14a92c29053f873e19a45a3d02055584853e9d2df97"
+    },
+    ".claude/skills/hmasd-research-hub/SKILL.md": {
+      "bytes": 19148,
+      "sha256": "05c7f098f22f7d9b1cca0b7b5c7a92890b8501107c4a1ae7249b6d103fbdb10b"
+    }
+  }
+}

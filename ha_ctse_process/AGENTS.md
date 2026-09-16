@@ -1,6 +1,6 @@
 # ha_ctse_process/ — the standalone process-core route
 
-Core tier (`docs/project/ENGINEERING_SCOPE_SPEC.md` §2, §6). Entered with
+Core tier (method: hmasd-research-engineering). Entered with
 `python -m ha_ctse_process.train` (and `.smoke`); owns its own configuration
 (`ha_ctse_process/config.py`, which inherits environment presets from `config_1.Config` but owns the
 algorithm settings). It must not import `hmasd.agent`, the HMASD discriminators, or the HMASD

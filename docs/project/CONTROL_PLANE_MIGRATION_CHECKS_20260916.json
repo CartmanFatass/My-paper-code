@@ -1,0 +1,1245 @@
+{
+  "baseline": "e9399305d58bdd7e5f9518e12cf43e9abd199ee3",
+  "sizes": {
+    "AGENTS.md": {
+      "before_bytes": 55161,
+      "after_bytes": 5485
+    },
+    "CodexBechmark/AGENTS.md": {
+      "before_bytes": 767,
+      "after_bytes": 767
+    },
+    "CodexBechmark/cm_delegation_granularity/AGENTS.md": {
+      "before_bytes": 588,
+      "after_bytes": 588
+    },
+    "CodexBechmark/cm_delegation_granularity/workspace/AGENTS.md": {
+      "before_bytes": 2582,
+      "after_bytes": 2582
+    },
+    "CodexBechmark/cm_direct_review/AGENTS.md": {
+      "before_bytes": 508,
+      "after_bytes": 508
+    },
+    "CodexBechmark/cm_direct_review/workspace/AGENTS.md": {
+      "before_bytes": 2548,
+      "after_bytes": 2548
+    },
+    "CodexBechmark/root_delegation/AGENTS.md": {
+      "before_bytes": 640,
+      "after_bytes": 640
+    },
+    "CodexBechmark/root_delegation/workspace/AGENTS.md": {
+      "before_bytes": 2821,
+      "after_bytes": 2821
+    },
+    "CodexBechmark/_shared/cm_tasks/AGENTS.md": {
+      "before_bytes": 567,
+      "after_bytes": 567
+    },
+    "docs/AGENTS.md": {
+      "before_bytes": 2684,
+      "after_bytes": 1033
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/BenchMARL/AGENTS.md": {
+      "before_bytes": 2688,
+      "after_bytes": 2688
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/BenchMARL/benchmarl/AGENTS.md": {
+      "before_bytes": 1187,
+      "after_bytes": 1187
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/BenchMARL/benchmarl/algorithms/AGENTS.md": {
+      "before_bytes": 1690,
+      "after_bytes": 1690
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/BenchMARL/benchmarl/benchmark/AGENTS.md": {
+      "before_bytes": 905,
+      "after_bytes": 905
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/BenchMARL/benchmarl/environments/AGENTS.md": {
+      "before_bytes": 1515,
+      "after_bytes": 1515
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/BenchMARL/benchmarl/experiment/AGENTS.md": {
+      "before_bytes": 2766,
+      "after_bytes": 2766
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/BenchMARL/benchmarl/models/AGENTS.md": {
+      "before_bytes": 1423,
+      "after_bytes": 1423
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/epymarl/AGENTS.md": {
+      "before_bytes": 1865,
+      "after_bytes": 1865
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/epymarl/src/components/AGENTS.md": {
+      "before_bytes": 479,
+      "after_bytes": 479
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/epymarl/src/controllers/AGENTS.md": {
+      "before_bytes": 450,
+      "after_bytes": 450
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/epymarl/src/envs/AGENTS.md": {
+      "before_bytes": 511,
+      "after_bytes": 511
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/epymarl/src/learners/AGENTS.md": {
+      "before_bytes": 470,
+      "after_bytes": 470
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/epymarl/src/runners/AGENTS.md": {
+      "before_bytes": 516,
+      "after_bytes": 516
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/JaxMARL/AGENTS.md": {
+      "before_bytes": 2518,
+      "after_bytes": 2518
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/JaxMARL/baselines/AGENTS.md": {
+      "before_bytes": 1167,
+      "after_bytes": 1167
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/JaxMARL/baselines/IPPO/AGENTS.md": {
+      "before_bytes": 1025,
+      "after_bytes": 1025
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/JaxMARL/baselines/MAPPO/AGENTS.md": {
+      "before_bytes": 948,
+      "after_bytes": 948
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/JaxMARL/baselines/QLearning/AGENTS.md": {
+      "before_bytes": 1156,
+      "after_bytes": 1156
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/JaxMARL/baselines/QLearning/utils/AGENTS.md": {
+      "before_bytes": 503,
+      "after_bytes": 503
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/JaxMARL/jaxmarl/AGENTS.md": {
+      "before_bytes": 1027,
+      "after_bytes": 1027
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/JaxMARL/jaxmarl/environments/AGENTS.md": {
+      "before_bytes": 1167,
+      "after_bytes": 1167
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/JaxMARL/jaxmarl/environments/hanabi/AGENTS.md": {
+      "before_bytes": 992,
+      "after_bytes": 992
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/JaxMARL/jaxmarl/environments/mpe/AGENTS.md": {
+      "before_bytes": 1128,
+      "after_bytes": 1128
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/JaxMARL/jaxmarl/environments/overcooked_v2/AGENTS.md": {
+      "before_bytes": 848,
+      "after_bytes": 848
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/JaxMARL/jaxmarl/environments/smax/AGENTS.md": {
+      "before_bytes": 1197,
+      "after_bytes": 1197
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/JaxMARL/jaxmarl/environments/storm/AGENTS.md": {
+      "before_bytes": 833,
+      "after_bytes": 833
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/JaxMARL/jaxmarl/wrappers/AGENTS.md": {
+      "before_bytes": 1059,
+      "after_bytes": 1059
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/MARLlib/AGENTS.md": {
+      "before_bytes": 1194,
+      "after_bytes": 1194
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/MARLlib/examples/AGENTS.md": {
+      "before_bytes": 1164,
+      "after_bytes": 1164
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/MARLlib/marllib/AGENTS.md": {
+      "before_bytes": 1164,
+      "after_bytes": 1164
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/MARLlib/marllib/envs/AGENTS.md": {
+      "before_bytes": 1199,
+      "after_bytes": 1199
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/MARLlib/marllib/envs/base_env/AGENTS.md": {
+      "before_bytes": 1167,
+      "after_bytes": 1167
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/MARLlib/marllib/envs/base_env/config/AGENTS.md": {
+      "before_bytes": 1173,
+      "after_bytes": 1173
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/MARLlib/marllib/envs/global_reward_env/AGENTS.md": {
+      "before_bytes": 1179,
+      "after_bytes": 1179
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/MARLlib/marllib/marl/AGENTS.md": {
+      "before_bytes": 1169,
+      "after_bytes": 1169
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/MARLlib/marllib/marl/algos/AGENTS.md": {
+      "before_bytes": 1155,
+      "after_bytes": 1155
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/MARLlib/marllib/marl/algos/core/AGENTS.md": {
+      "before_bytes": 1116,
+      "after_bytes": 1116
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/MARLlib/marllib/marl/algos/core/CC/AGENTS.md": {
+      "before_bytes": 1152,
+      "after_bytes": 1152
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/MARLlib/marllib/marl/algos/core/IL/AGENTS.md": {
+      "before_bytes": 1114,
+      "after_bytes": 1114
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/MARLlib/marllib/marl/algos/core/VD/AGENTS.md": {
+      "before_bytes": 1146,
+      "after_bytes": 1146
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/MARLlib/marllib/marl/algos/hyperparams/AGENTS.md": {
+      "before_bytes": 1112,
+      "after_bytes": 1112
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/MARLlib/marllib/marl/algos/hyperparams/common/AGENTS.md": {
+      "before_bytes": 1157,
+      "after_bytes": 1157
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/MARLlib/marllib/marl/algos/scripts/AGENTS.md": {
+      "before_bytes": 1154,
+      "after_bytes": 1154
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/MARLlib/marllib/marl/algos/utils/AGENTS.md": {
+      "before_bytes": 1211,
+      "after_bytes": 1211
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/MARLlib/marllib/marl/models/AGENTS.md": {
+      "before_bytes": 1123,
+      "after_bytes": 1123
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/MARLlib/marllib/marl/models/configs/AGENTS.md": {
+      "before_bytes": 1204,
+      "after_bytes": 1204
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/MARLlib/marllib/marl/models/zoo/AGENTS.md": {
+      "before_bytes": 1113,
+      "after_bytes": 1113
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/MARLlib/marllib/marl/models/zoo/encoder/AGENTS.md": {
+      "before_bytes": 1207,
+      "after_bytes": 1207
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/MARLlib/marllib/marl/models/zoo/mixer/AGENTS.md": {
+      "before_bytes": 1122,
+      "after_bytes": 1122
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/MARLlib/marllib/marl/models/zoo/mlp/AGENTS.md": {
+      "before_bytes": 1131,
+      "after_bytes": 1131
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/MARLlib/marllib/marl/models/zoo/rnn/AGENTS.md": {
+      "before_bytes": 1158,
+      "after_bytes": 1158
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/MARLlib/marllib/marl/ray/AGENTS.md": {
+      "before_bytes": 1098,
+      "after_bytes": 1098
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/MARLlib/marllib/patch/AGENTS.md": {
+      "before_bytes": 1121,
+      "after_bytes": 1121
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/MARLlib/marllib/patch/rllib/AGENTS.md": {
+      "before_bytes": 1133,
+      "after_bytes": 1133
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/MARLlib/marllib/patch/rllib/execution/AGENTS.md": {
+      "before_bytes": 1156,
+      "after_bytes": 1156
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/MARLlib/marllib/patch/rllib/models/AGENTS.md": {
+      "before_bytes": 1113,
+      "after_bytes": 1113
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/MARLlib/marllib/patch/rllib/policy/AGENTS.md": {
+      "before_bytes": 1157,
+      "after_bytes": 1157
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/MARLlib/marllib/patch/rllib/utils/AGENTS.md": {
+      "before_bytes": 1129,
+      "after_bytes": 1129
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/MARLlib/tests/AGENTS.md": {
+      "before_bytes": 1195,
+      "after_bytes": 1195
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/Mava/AGENTS.md": {
+      "before_bytes": 2267,
+      "after_bytes": 2267
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/Mava/examples/AGENTS.md": {
+      "before_bytes": 290,
+      "after_bytes": 290
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/Mava/examples/advanced_usage/AGENTS.md": {
+      "before_bytes": 390,
+      "after_bytes": 390
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/Mava/mava/AGENTS.md": {
+      "before_bytes": 1235,
+      "after_bytes": 1235
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/Mava/mava/configs/AGENTS.md": {
+      "before_bytes": 841,
+      "after_bytes": 841
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/Mava/mava/configs/arch/AGENTS.md": {
+      "before_bytes": 372,
+      "after_bytes": 372
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/Mava/mava/configs/default/AGENTS.md": {
+      "before_bytes": 341,
+      "after_bytes": 341
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/Mava/mava/configs/logger/AGENTS.md": {
+      "before_bytes": 410,
+      "after_bytes": 410
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/Mava/mava/configs/system/AGENTS.md": {
+      "before_bytes": 438,
+      "after_bytes": 438
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/Mava/mava/networks/AGENTS.md": {
+      "before_bytes": 588,
+      "after_bytes": 588
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/Mava/mava/systems/AGENTS.md": {
+      "before_bytes": 1200,
+      "after_bytes": 1200
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/Mava/mava/systems/ppo/AGENTS.md": {
+      "before_bytes": 947,
+      "after_bytes": 947
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/Mava/mava/systems/ppo/anakin/AGENTS.md": {
+      "before_bytes": 1051,
+      "after_bytes": 1051
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/Mava/mava/systems/ppo/sebulba/AGENTS.md": {
+      "before_bytes": 1004,
+      "after_bytes": 1004
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/Mava/mava/systems/q_learning/AGENTS.md": {
+      "before_bytes": 849,
+      "after_bytes": 849
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/Mava/mava/systems/q_learning/anakin/AGENTS.md": {
+      "before_bytes": 807,
+      "after_bytes": 807
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/Mava/mava/systems/q_learning/sebulba/AGENTS.md": {
+      "before_bytes": 930,
+      "after_bytes": 930
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/Mava/mava/systems/sable/AGENTS.md": {
+      "before_bytes": 722,
+      "after_bytes": 722
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/Mava/mava/systems/sable/anakin/AGENTS.md": {
+      "before_bytes": 575,
+      "after_bytes": 575
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/Mava/mava/systems/sable/sebulba/AGENTS.md": {
+      "before_bytes": 614,
+      "after_bytes": 614
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/Mava/mava/systems/sac/AGENTS.md": {
+      "before_bytes": 636,
+      "after_bytes": 636
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/Mava/mava/systems/sac/anakin/AGENTS.md": {
+      "before_bytes": 845,
+      "after_bytes": 845
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/Mava/mava/utils/AGENTS.md": {
+      "before_bytes": 913,
+      "after_bytes": 913
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/Mava/mava/utils/sebulba/AGENTS.md": {
+      "before_bytes": 629,
+      "after_bytes": 629
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/Mava/mava/wrappers/AGENTS.md": {
+      "before_bytes": 873,
+      "after_bytes": 873
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/Mava/test/AGENTS.md": {
+      "before_bytes": 311,
+      "after_bytes": 311
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/on-policy/AGENTS.md": {
+      "before_bytes": 751,
+      "after_bytes": 751
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/on-policy/onpolicy/AGENTS.md": {
+      "before_bytes": 397,
+      "after_bytes": 397
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/on-policy/onpolicy/algorithms/AGENTS.md": {
+      "before_bytes": 403,
+      "after_bytes": 403
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/on-policy/onpolicy/algorithms/r_mappo/AGENTS.md": {
+      "before_bytes": 440,
+      "after_bytes": 440
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/on-policy/onpolicy/algorithms/r_mappo/algorithm/AGENTS.md": {
+      "before_bytes": 404,
+      "after_bytes": 404
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/on-policy/onpolicy/algorithms/utils/AGENTS.md": {
+      "before_bytes": 391,
+      "after_bytes": 391
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/on-policy/onpolicy/envs/AGENTS.md": {
+      "before_bytes": 516,
+      "after_bytes": 516
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/on-policy/onpolicy/envs/football/AGENTS.md": {
+      "before_bytes": 363,
+      "after_bytes": 363
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/on-policy/onpolicy/envs/hanabi/AGENTS.md": {
+      "before_bytes": 384,
+      "after_bytes": 384
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/on-policy/onpolicy/envs/mpe/AGENTS.md": {
+      "before_bytes": 414,
+      "after_bytes": 414
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/on-policy/onpolicy/envs/starcraft2/AGENTS.md": {
+      "before_bytes": 509,
+      "after_bytes": 509
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/on-policy/onpolicy/envs/starcraft2/StarCraft2v2/AGENTS.md": {
+      "before_bytes": 413,
+      "after_bytes": 413
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/on-policy/onpolicy/runner/AGENTS.md": {
+      "before_bytes": 594,
+      "after_bytes": 594
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/on-policy/onpolicy/runner/separated/AGENTS.md": {
+      "before_bytes": 416,
+      "after_bytes": 416
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/on-policy/onpolicy/runner/shared/AGENTS.md": {
+      "before_bytes": 540,
+      "after_bytes": 540
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/on-policy/onpolicy/scripts/AGENTS.md": {
+      "before_bytes": 376,
+      "after_bytes": 376
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/on-policy/onpolicy/scripts/train/AGENTS.md": {
+      "before_bytes": 418,
+      "after_bytes": 418
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/on-policy/onpolicy/utils/AGENTS.md": {
+      "before_bytes": 452,
+      "after_bytes": 452
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/agents-overlays/ref-lib/AGENTS.md": {
+      "before_bytes": 2740,
+      "after_bytes": 2740
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/BenchMARL/agents-overlays/AGENTS.md": {
+      "before_bytes": 2688,
+      "after_bytes": 2688
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/BenchMARL/agents-overlays/benchmarl/AGENTS.md": {
+      "before_bytes": 1187,
+      "after_bytes": 1187
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/BenchMARL/agents-overlays/benchmarl/algorithms/AGENTS.md": {
+      "before_bytes": 1690,
+      "after_bytes": 1690
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/BenchMARL/agents-overlays/benchmarl/benchmark/AGENTS.md": {
+      "before_bytes": 905,
+      "after_bytes": 905
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/BenchMARL/agents-overlays/benchmarl/environments/AGENTS.md": {
+      "before_bytes": 1515,
+      "after_bytes": 1515
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/BenchMARL/agents-overlays/benchmarl/experiment/AGENTS.md": {
+      "before_bytes": 2766,
+      "after_bytes": 2766
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/BenchMARL/agents-overlays/benchmarl/models/AGENTS.md": {
+      "before_bytes": 1423,
+      "after_bytes": 1423
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/epymarl/agents-overlays/AGENTS.md": {
+      "before_bytes": 1865,
+      "after_bytes": 1865
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/epymarl/agents-overlays/src/components/AGENTS.md": {
+      "before_bytes": 479,
+      "after_bytes": 479
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/epymarl/agents-overlays/src/controllers/AGENTS.md": {
+      "before_bytes": 450,
+      "after_bytes": 450
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/epymarl/agents-overlays/src/envs/AGENTS.md": {
+      "before_bytes": 511,
+      "after_bytes": 511
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/epymarl/agents-overlays/src/learners/AGENTS.md": {
+      "before_bytes": 470,
+      "after_bytes": 470
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/epymarl/agents-overlays/src/runners/AGENTS.md": {
+      "before_bytes": 516,
+      "after_bytes": 516
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/JaxMARL/agents-overlays/AGENTS.md": {
+      "before_bytes": 2518,
+      "after_bytes": 2518
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/JaxMARL/agents-overlays/baselines/AGENTS.md": {
+      "before_bytes": 1167,
+      "after_bytes": 1167
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/JaxMARL/agents-overlays/baselines/IPPO/AGENTS.md": {
+      "before_bytes": 1025,
+      "after_bytes": 1025
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/JaxMARL/agents-overlays/baselines/MAPPO/AGENTS.md": {
+      "before_bytes": 948,
+      "after_bytes": 948
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/JaxMARL/agents-overlays/baselines/QLearning/AGENTS.md": {
+      "before_bytes": 1156,
+      "after_bytes": 1156
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/JaxMARL/agents-overlays/baselines/QLearning/utils/AGENTS.md": {
+      "before_bytes": 503,
+      "after_bytes": 503
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/JaxMARL/agents-overlays/jaxmarl/AGENTS.md": {
+      "before_bytes": 1027,
+      "after_bytes": 1027
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/JaxMARL/agents-overlays/jaxmarl/environments/AGENTS.md": {
+      "before_bytes": 1167,
+      "after_bytes": 1167
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/JaxMARL/agents-overlays/jaxmarl/environments/hanabi/AGENTS.md": {
+      "before_bytes": 992,
+      "after_bytes": 992
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/JaxMARL/agents-overlays/jaxmarl/environments/mpe/AGENTS.md": {
+      "before_bytes": 1128,
+      "after_bytes": 1128
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/JaxMARL/agents-overlays/jaxmarl/environments/overcooked_v2/AGENTS.md": {
+      "before_bytes": 848,
+      "after_bytes": 848
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/JaxMARL/agents-overlays/jaxmarl/environments/smax/AGENTS.md": {
+      "before_bytes": 1197,
+      "after_bytes": 1197
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/JaxMARL/agents-overlays/jaxmarl/environments/storm/AGENTS.md": {
+      "before_bytes": 833,
+      "after_bytes": 833
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/JaxMARL/agents-overlays/jaxmarl/wrappers/AGENTS.md": {
+      "before_bytes": 1059,
+      "after_bytes": 1059
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/MARLlib/agents-overlays/AGENTS.md": {
+      "before_bytes": 1194,
+      "after_bytes": 1194
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/MARLlib/agents-overlays/examples/AGENTS.md": {
+      "before_bytes": 1164,
+      "after_bytes": 1164
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/MARLlib/agents-overlays/marllib/AGENTS.md": {
+      "before_bytes": 1164,
+      "after_bytes": 1164
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/MARLlib/agents-overlays/marllib/envs/AGENTS.md": {
+      "before_bytes": 1199,
+      "after_bytes": 1199
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/MARLlib/agents-overlays/marllib/envs/base_env/AGENTS.md": {
+      "before_bytes": 1167,
+      "after_bytes": 1167
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/MARLlib/agents-overlays/marllib/envs/base_env/config/AGENTS.md": {
+      "before_bytes": 1173,
+      "after_bytes": 1173
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/MARLlib/agents-overlays/marllib/envs/global_reward_env/AGENTS.md": {
+      "before_bytes": 1179,
+      "after_bytes": 1179
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/MARLlib/agents-overlays/marllib/marl/AGENTS.md": {
+      "before_bytes": 1169,
+      "after_bytes": 1169
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/MARLlib/agents-overlays/marllib/marl/algos/AGENTS.md": {
+      "before_bytes": 1155,
+      "after_bytes": 1155
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/MARLlib/agents-overlays/marllib/marl/algos/core/AGENTS.md": {
+      "before_bytes": 1116,
+      "after_bytes": 1116
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/MARLlib/agents-overlays/marllib/marl/algos/core/CC/AGENTS.md": {
+      "before_bytes": 1152,
+      "after_bytes": 1152
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/MARLlib/agents-overlays/marllib/marl/algos/core/IL/AGENTS.md": {
+      "before_bytes": 1114,
+      "after_bytes": 1114
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/MARLlib/agents-overlays/marllib/marl/algos/core/VD/AGENTS.md": {
+      "before_bytes": 1146,
+      "after_bytes": 1146
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/MARLlib/agents-overlays/marllib/marl/algos/hyperparams/AGENTS.md": {
+      "before_bytes": 1112,
+      "after_bytes": 1112
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/MARLlib/agents-overlays/marllib/marl/algos/hyperparams/common/AGENTS.md": {
+      "before_bytes": 1157,
+      "after_bytes": 1157
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/MARLlib/agents-overlays/marllib/marl/algos/scripts/AGENTS.md": {
+      "before_bytes": 1154,
+      "after_bytes": 1154
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/MARLlib/agents-overlays/marllib/marl/algos/utils/AGENTS.md": {
+      "before_bytes": 1211,
+      "after_bytes": 1211
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/MARLlib/agents-overlays/marllib/marl/models/AGENTS.md": {
+      "before_bytes": 1123,
+      "after_bytes": 1123
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/MARLlib/agents-overlays/marllib/marl/models/configs/AGENTS.md": {
+      "before_bytes": 1204,
+      "after_bytes": 1204
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/MARLlib/agents-overlays/marllib/marl/models/zoo/AGENTS.md": {
+      "before_bytes": 1113,
+      "after_bytes": 1113
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/MARLlib/agents-overlays/marllib/marl/models/zoo/encoder/AGENTS.md": {
+      "before_bytes": 1207,
+      "after_bytes": 1207
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/MARLlib/agents-overlays/marllib/marl/models/zoo/mixer/AGENTS.md": {
+      "before_bytes": 1122,
+      "after_bytes": 1122
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/MARLlib/agents-overlays/marllib/marl/models/zoo/mlp/AGENTS.md": {
+      "before_bytes": 1131,
+      "after_bytes": 1131
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/MARLlib/agents-overlays/marllib/marl/models/zoo/rnn/AGENTS.md": {
+      "before_bytes": 1158,
+      "after_bytes": 1158
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/MARLlib/agents-overlays/marllib/marl/ray/AGENTS.md": {
+      "before_bytes": 1098,
+      "after_bytes": 1098
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/MARLlib/agents-overlays/marllib/patch/AGENTS.md": {
+      "before_bytes": 1121,
+      "after_bytes": 1121
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/MARLlib/agents-overlays/marllib/patch/rllib/AGENTS.md": {
+      "before_bytes": 1133,
+      "after_bytes": 1133
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/MARLlib/agents-overlays/marllib/patch/rllib/execution/AGENTS.md": {
+      "before_bytes": 1156,
+      "after_bytes": 1156
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/MARLlib/agents-overlays/marllib/patch/rllib/models/AGENTS.md": {
+      "before_bytes": 1113,
+      "after_bytes": 1113
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/MARLlib/agents-overlays/marllib/patch/rllib/policy/AGENTS.md": {
+      "before_bytes": 1157,
+      "after_bytes": 1157
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/MARLlib/agents-overlays/marllib/patch/rllib/utils/AGENTS.md": {
+      "before_bytes": 1129,
+      "after_bytes": 1129
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/MARLlib/agents-overlays/tests/AGENTS.md": {
+      "before_bytes": 1195,
+      "after_bytes": 1195
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/Mava/agents-overlays/AGENTS.md": {
+      "before_bytes": 2267,
+      "after_bytes": 2267
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/Mava/agents-overlays/examples/AGENTS.md": {
+      "before_bytes": 290,
+      "after_bytes": 290
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/Mava/agents-overlays/examples/advanced_usage/AGENTS.md": {
+      "before_bytes": 390,
+      "after_bytes": 390
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/Mava/agents-overlays/mava/AGENTS.md": {
+      "before_bytes": 1235,
+      "after_bytes": 1235
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/Mava/agents-overlays/mava/configs/AGENTS.md": {
+      "before_bytes": 841,
+      "after_bytes": 841
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/Mava/agents-overlays/mava/configs/arch/AGENTS.md": {
+      "before_bytes": 372,
+      "after_bytes": 372
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/Mava/agents-overlays/mava/configs/default/AGENTS.md": {
+      "before_bytes": 341,
+      "after_bytes": 341
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/Mava/agents-overlays/mava/configs/logger/AGENTS.md": {
+      "before_bytes": 410,
+      "after_bytes": 410
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/Mava/agents-overlays/mava/configs/system/AGENTS.md": {
+      "before_bytes": 438,
+      "after_bytes": 438
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/Mava/agents-overlays/mava/networks/AGENTS.md": {
+      "before_bytes": 588,
+      "after_bytes": 588
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/Mava/agents-overlays/mava/systems/AGENTS.md": {
+      "before_bytes": 1200,
+      "after_bytes": 1200
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/Mava/agents-overlays/mava/systems/ppo/AGENTS.md": {
+      "before_bytes": 947,
+      "after_bytes": 947
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/Mava/agents-overlays/mava/systems/ppo/anakin/AGENTS.md": {
+      "before_bytes": 1051,
+      "after_bytes": 1051
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/Mava/agents-overlays/mava/systems/ppo/sebulba/AGENTS.md": {
+      "before_bytes": 1004,
+      "after_bytes": 1004
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/Mava/agents-overlays/mava/systems/q_learning/AGENTS.md": {
+      "before_bytes": 849,
+      "after_bytes": 849
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/Mava/agents-overlays/mava/systems/q_learning/anakin/AGENTS.md": {
+      "before_bytes": 807,
+      "after_bytes": 807
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/Mava/agents-overlays/mava/systems/q_learning/sebulba/AGENTS.md": {
+      "before_bytes": 930,
+      "after_bytes": 930
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/Mava/agents-overlays/mava/systems/sable/AGENTS.md": {
+      "before_bytes": 722,
+      "after_bytes": 722
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/Mava/agents-overlays/mava/systems/sable/anakin/AGENTS.md": {
+      "before_bytes": 575,
+      "after_bytes": 575
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/Mava/agents-overlays/mava/systems/sable/sebulba/AGENTS.md": {
+      "before_bytes": 614,
+      "after_bytes": 614
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/Mava/agents-overlays/mava/systems/sac/AGENTS.md": {
+      "before_bytes": 636,
+      "after_bytes": 636
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/Mava/agents-overlays/mava/systems/sac/anakin/AGENTS.md": {
+      "before_bytes": 845,
+      "after_bytes": 845
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/Mava/agents-overlays/mava/utils/AGENTS.md": {
+      "before_bytes": 913,
+      "after_bytes": 913
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/Mava/agents-overlays/mava/utils/sebulba/AGENTS.md": {
+      "before_bytes": 629,
+      "after_bytes": 629
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/Mava/agents-overlays/mava/wrappers/AGENTS.md": {
+      "before_bytes": 873,
+      "after_bytes": 873
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/Mava/agents-overlays/test/AGENTS.md": {
+      "before_bytes": 311,
+      "after_bytes": 311
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/on-policy/agents-overlays/AGENTS.md": {
+      "before_bytes": 751,
+      "after_bytes": 751
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/on-policy/agents-overlays/onpolicy/AGENTS.md": {
+      "before_bytes": 397,
+      "after_bytes": 397
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/on-policy/agents-overlays/onpolicy/algorithms/AGENTS.md": {
+      "before_bytes": 403,
+      "after_bytes": 403
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/on-policy/agents-overlays/onpolicy/algorithms/r_mappo/AGENTS.md": {
+      "before_bytes": 440,
+      "after_bytes": 440
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/on-policy/agents-overlays/onpolicy/algorithms/r_mappo/algorithm/AGENTS.md": {
+      "before_bytes": 404,
+      "after_bytes": 404
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/on-policy/agents-overlays/onpolicy/algorithms/utils/AGENTS.md": {
+      "before_bytes": 391,
+      "after_bytes": 391
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/on-policy/agents-overlays/onpolicy/envs/AGENTS.md": {
+      "before_bytes": 516,
+      "after_bytes": 516
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/on-policy/agents-overlays/onpolicy/envs/football/AGENTS.md": {
+      "before_bytes": 363,
+      "after_bytes": 363
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/on-policy/agents-overlays/onpolicy/envs/hanabi/AGENTS.md": {
+      "before_bytes": 384,
+      "after_bytes": 384
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/on-policy/agents-overlays/onpolicy/envs/mpe/AGENTS.md": {
+      "before_bytes": 414,
+      "after_bytes": 414
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/on-policy/agents-overlays/onpolicy/envs/starcraft2/AGENTS.md": {
+      "before_bytes": 509,
+      "after_bytes": 509
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/on-policy/agents-overlays/onpolicy/envs/starcraft2/StarCraft2v2/AGENTS.md": {
+      "before_bytes": 413,
+      "after_bytes": 413
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/on-policy/agents-overlays/onpolicy/runner/AGENTS.md": {
+      "before_bytes": 594,
+      "after_bytes": 594
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/on-policy/agents-overlays/onpolicy/runner/separated/AGENTS.md": {
+      "before_bytes": 416,
+      "after_bytes": 416
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/on-policy/agents-overlays/onpolicy/runner/shared/AGENTS.md": {
+      "before_bytes": 540,
+      "after_bytes": 540
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/on-policy/agents-overlays/onpolicy/scripts/AGENTS.md": {
+      "before_bytes": 376,
+      "after_bytes": 376
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/on-policy/agents-overlays/onpolicy/scripts/train/AGENTS.md": {
+      "before_bytes": 418,
+      "after_bytes": 418
+    },
+    "docs/research/portfolio/pro_packets/20260905_marl_runtime_spec/worker-reports/on-policy/agents-overlays/onpolicy/utils/AGENTS.md": {
+      "before_bytes": 452,
+      "after_bytes": 452
+    },
+    "envs/AGENTS.md": {
+      "before_bytes": 2274,
+      "after_bytes": 2226
+    },
+    "experiments/AGENTS.md": {
+      "before_bytes": 7936,
+      "after_bytes": 859
+    },
+    "ha_ctse_process/AGENTS.md": {
+      "before_bytes": 2272,
+      "after_bytes": 2221
+    },
+    "scripts/AGENTS.md": {
+      "before_bytes": 2425,
+      "after_bytes": 763
+    },
+    "tests/AGENTS.md": {
+      "before_bytes": 3675,
+      "after_bytes": 3598
+    },
+    "CLAUDE.md": {
+      "before_bytes": 16258,
+      "after_bytes": 1753
+    },
+    ".codex/config.toml": {
+      "before_bytes": 2295,
+      "after_bytes": 2155
+    },
+    ".codex/hmasd-compute.toml": {
+      "before_bytes": 1670,
+      "after_bytes": 1670
+    },
+    ".codex/hmasd-transport.toml": {
+      "before_bytes": 688,
+      "after_bytes": 688
+    },
+    ".codex/agents/hmasd-direction-manager.toml": {
+      "before_bytes": 22115,
+      "after_bytes": 2935,
+      "before_body_bytes": 21821,
+      "after_body_bytes": 2641
+    },
+    ".codex/agents/hmasd-experiment-monitor.toml": {
+      "before_bytes": 1317,
+      "after_bytes": 2009,
+      "before_body_bytes": 1029,
+      "after_body_bytes": 1721
+    },
+    ".codex/agents/hmasd-experiment-operator.toml": {
+      "before_bytes": 4744,
+      "after_bytes": 2169,
+      "before_body_bytes": 4450,
+      "after_body_bytes": 1880
+    },
+    ".codex/agents/hmasd-implementer.toml": {
+      "before_bytes": 6518,
+      "after_bytes": 479,
+      "before_body_bytes": 6253,
+      "after_body_bytes": 214
+    },
+    ".codex/agents/hmasd-research-critic.toml": {
+      "before_bytes": 4811,
+      "after_bytes": 1218,
+      "before_body_bytes": 4584,
+      "after_body_bytes": 991
+    },
+    ".codex/agents/hmasd-reviewer.toml": {
+      "before_bytes": 5225,
+      "after_bytes": 1386,
+      "before_body_bytes": 4977,
+      "after_body_bytes": 1138
+    },
+    ".codex/agents/hmasd-scout.toml": {
+      "before_bytes": 2807,
+      "after_bytes": 869,
+      "before_body_bytes": 2574,
+      "after_body_bytes": 636
+    },
+    ".codex/agents/hmasd-transport.toml": {
+      "before_bytes": 2839,
+      "after_bytes": 2849,
+      "before_body_bytes": 2555,
+      "after_body_bytes": 2565
+    },
+    ".codex/agents/hmasd-verifier.toml": {
+      "before_bytes": 3745,
+      "after_bytes": 1035,
+      "before_body_bytes": 3515,
+      "after_body_bytes": 805
+    },
+    ".agents/skills/hmasd-chatgpt-pro-transport/SKILL.md": {
+      "before_bytes": 10926,
+      "after_bytes": 9951
+    },
+    ".agents/skills/hmasd-chatgpt-pro-transport/references/agentify.md": {
+      "before_bytes": 5943,
+      "after_bytes": 5943
+    },
+    ".agents/skills/hmasd-chatgpt-pro-transport/references/attachment-compatibility.md": {
+      "before_bytes": 1232,
+      "after_bytes": 1232
+    },
+    ".agents/skills/hmasd-chatgpt-pro-transport/references/attachment-send.md": {
+      "before_bytes": 1774,
+      "after_bytes": 1774
+    },
+    ".agents/skills/hmasd-chatgpt-pro-transport/references/provider-context-replacement.md": {
+      "before_bytes": 2448,
+      "after_bytes": 2448
+    },
+    ".agents/skills/hmasd-chatgpt-pro-transport/references/send-hit-point-recovery.md": {
+      "before_bytes": 3108,
+      "after_bytes": 3108
+    },
+    ".agents/skills/hmasd-chatgpt-pro-transport/references/state-schema.md": {
+      "before_bytes": 22658,
+      "after_bytes": 22630
+    },
+    ".agents/skills/hmasd-chatgpt-pro-transport/scripts/archive_delivered_claude_request.py": {
+      "before_bytes": 7889,
+      "after_bytes": 7889
+    },
+    ".agents/skills/hmasd-chatgpt-pro-transport/scripts/bind_conversation.py": {
+      "before_bytes": 56110,
+      "after_bytes": 56110
+    },
+    ".agents/skills/hmasd-chatgpt-pro-transport/scripts/materialize_packet.py": {
+      "before_bytes": 4617,
+      "after_bytes": 4617
+    },
+    ".agents/skills/hmasd-chatgpt-pro-transport/scripts/native_transport.py": {
+      "before_bytes": 26628,
+      "after_bytes": 26628
+    },
+    ".agents/skills/hmasd-chatgpt-pro-transport/scripts/transport_contract.py": {
+      "before_bytes": 43974,
+      "after_bytes": 43974
+    },
+    ".agents/skills/hmasd-chatgpt-pro-transport/scripts/validate_request.py": {
+      "before_bytes": 17763,
+      "after_bytes": 17763
+    },
+    ".agents/skills/hmasd-loop-dispatch/SKILL.md": {
+      "before_bytes": 9192,
+      "after_bytes": 5292
+    },
+    ".agents/skills/hmasd-owner-item/SKILL.md": {
+      "before_bytes": 6973,
+      "after_bytes": 5615
+    },
+    ".agents/skills/hmasd-portfolio-task/SKILL.md": {
+      "before_bytes": 7093,
+      "after_bytes": 4017
+    },
+    ".agents/skills/hmasd-pro-research-prompt-author/SKILL.md": {
+      "before_bytes": 11470,
+      "after_bytes": 5192
+    },
+    ".agents/skills/hmasd-pro-research-prompt-author/references/attachment-delivery.md": {
+      "before_bytes": 3672,
+      "after_bytes": 3698
+    },
+    ".agents/skills/hmasd-pro-research-prompt-author/references/github-connector-contract.md": {
+      "before_bytes": 2407,
+      "after_bytes": 2407
+    },
+    ".agents/skills/hmasd-pro-research-prompt-author/references/github-delivery.md": {
+      "before_bytes": 5512,
+      "after_bytes": 8420
+    },
+    ".agents/skills/hmasd-pro-research-prompt-author/scripts/render_packet.py": {
+      "before_bytes": 60648,
+      "after_bytes": 56800
+    },
+    ".agents/skills/hmasd-scientific-tools/SKILL.md": {
+      "before_bytes": 5926,
+      "after_bytes": 10462
+    },
+    ".agents/skills/hmasd-scientific-tools/references/adapters.md": {
+      "before_bytes": 2758,
+      "after_bytes": 2758
+    },
+    ".agents/skills/hmasd-scientific-tools/references/local-literature.md": {
+      "before_bytes": 3906,
+      "after_bytes": 3906
+    },
+    ".agents/skills/hmasd-scientific-tools/references/scientific-reading.md": {
+      "before_bytes": 3237,
+      "after_bytes": 627
+    },
+    ".agents/skills/hmasd-scientific-tools/scripts/summarize_runs.py": {
+      "before_bytes": 4261,
+      "after_bytes": 4261
+    },
+    ".claude/settings.json": {
+      "before_bytes": 47,
+      "after_bytes": 47
+    },
+    ".claude/agents/hmasd-clerk.md": {
+      "before_bytes": 3868,
+      "after_bytes": 850
+    },
+    ".claude/agents/hmasd-cm-scout.md": {
+      "before_bytes": 1638,
+      "after_bytes": 1391
+    },
+    ".claude/agents/hmasd-cm.md": {
+      "before_bytes": 7906,
+      "after_bytes": 890
+    },
+    ".claude/agents/hmasd-experiment-operator.md": {
+      "before_bytes": 4402,
+      "after_bytes": 2470
+    },
+    ".claude/agents/hmasd-experiment-tracker.md": {
+      "before_bytes": 4861,
+      "after_bytes": 2604
+    },
+    ".claude/agents/hmasd-pro-transport.md": {
+      "before_bytes": 19535,
+      "after_bytes": 3881
+    },
+    ".claude/agents/hmasd-research-critic.md": {
+      "before_bytes": 3922,
+      "after_bytes": 1655
+    },
+    ".claude/agents/hmasd-research-scout.md": {
+      "before_bytes": 2148,
+      "after_bytes": 1361
+    },
+    ".claude/agents/hmasd-reviewer.md": {
+      "before_bytes": 3382,
+      "after_bytes": 1832
+    },
+    ".claude/agents/hmasd-routine-implementer.md": {
+      "before_bytes": 2810,
+      "after_bytes": 784
+    },
+    ".claude/agents/hmasd-verifier.md": {
+      "before_bytes": 2347,
+      "after_bytes": 1442
+    },
+    ".claude/skills/hmasd-grok-cm/SKILL.md": {
+      "before_bytes": 7763,
+      "after_bytes": 1888
+    },
+    ".claude/skills/hmasd-pro-transport/SKILL.md": {
+      "before_bytes": 14577,
+      "after_bytes": 12397
+    },
+    ".claude/skills/hmasd-research-hub/SKILL.md": {
+      "before_bytes": 19148,
+      "after_bytes": 8448
+    }
+  },
+  "protected_blobs": {
+    "docs/research/portfolio/APPROVED_SET.md": "6bb54ee94b83a123294bdb8e8b09b51271e88736",
+    "docs/research/candidates/flexible_skill_duration/FSD_MATCHED_INFORMATION_BASELINE_B01_PROSPECTIVE_CARD_20260916.md": "9715c2f3b3d85c66069f9ce226eb787b9c770567",
+    "docs/research/candidates/flexible_skill_duration/HANDOFF_2026-09-16_matched_information_baseline.md": "73fa57a4133bf83d3093badc5ec2fb88f9dded73"
+  },
+  "frozen_source_snapshots": {
+    "AGENTS.md": {
+      "pre_migration_commit": "e9399305d58bdd7e5f9518e12cf43e9abd199ee3",
+      "blob": "602bc3dea53cc1c5e3427f077e62b92342f9ef73",
+      "fsd_handoff_commit": "b034cb0d9eb1ef2031d33dde1c60441242adc138",
+      "fsd_blob": "463678f62d399de82fddb46deb7a95e8246b3984"
+    },
+    "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md": {
+      "pre_migration_commit": "e9399305d58bdd7e5f9518e12cf43e9abd199ee3",
+      "blob": "cf0abe05a871accc7a0b10a075bec3c44607081c",
+      "fsd_handoff_commit": "b034cb0d9eb1ef2031d33dde1c60441242adc138",
+      "fsd_blob": "cf0abe05a871accc7a0b10a075bec3c44607081c"
+    },
+    "docs/project/ENGINEERING_SCOPE_SPEC.md": {
+      "pre_migration_commit": "e9399305d58bdd7e5f9518e12cf43e9abd199ee3",
+      "blob": "3d46a79b335ab55d0f4b53d2a2759ea87a941ef1",
+      "fsd_handoff_commit": "b034cb0d9eb1ef2031d33dde1c60441242adc138",
+      "fsd_blob": "3d46a79b335ab55d0f4b53d2a2759ea87a941ef1"
+    },
+    "docs/project/MARL_RUNTIME_ENGINEERING_SPEC.md": {
+      "pre_migration_commit": "e9399305d58bdd7e5f9518e12cf43e9abd199ee3",
+      "blob": "2f6d397be5ee5795b1a8fb4e224ffe6a3e57718d",
+      "fsd_handoff_commit": "b034cb0d9eb1ef2031d33dde1c60441242adc138",
+      "fsd_blob": "2f6d397be5ee5795b1a8fb4e224ffe6a3e57718d"
+    },
+    "docs/research/portfolio/decisions/2026-09-15-workflow-lanes.md": {
+      "pre_migration_commit": "e9399305d58bdd7e5f9518e12cf43e9abd199ee3",
+      "blob": "44fdfd9963359fbd104b1d29323d0e1d6d29ccdd",
+      "fsd_handoff_commit": "b034cb0d9eb1ef2031d33dde1c60441242adc138",
+      "fsd_blob": "ABSENT on direction branch; owner rule inherited from main, see migration record"
+    }
+  },
+  "static_runtime_settings_unchanged": true,
+  "token_counts": "UNKNOWN; bytes only",
+  "new_engineering_skill_bytes": 7902,
+  "accepted_request_binding": {
+    "path": "docs/research/candidates/flexible_skill_duration/pro_packets/20260916_host_headroom_card_convergence/REQUEST.json",
+    "blob": "f1b923bbbce6012a0770f916b76e2250debe930b",
+    "request_id": "2026-09-16-fsd-host-headroom-card-convergence-01",
+    "references": [
+      {
+        "path": "docs/research/candidates/flexible_skill_duration/FSD_HOST_HEADROOM_B01_PROSPECTIVE_CARD_20260916.md",
+        "commit": "b8c41ad27f85c9269a9e25adc4e9836af650061b",
+        "blob": "034948264e4baead72dbc17165ea19685d77c35a"
+      },
+      {
+        "path": "docs/research/candidates/flexible_skill_duration/FSD_BASELINE_INTERRUPTION_B01_RESULT_EVIDENCE_20260915.md",
+        "commit": "b8c41ad27f85c9269a9e25adc4e9836af650061b",
+        "blob": "f156a1485578586a72b8fb1074e2ed90a8ae1c3e"
+      },
+      {
+        "path": "docs/research/candidates/flexible_skill_duration/FSD_BASELINE_INTERRUPTION_B01_INTAKE_20260915.md",
+        "commit": "b8c41ad27f85c9269a9e25adc4e9836af650061b",
+        "blob": "4b84824e9c41a1408f9397722d19ea85b1e4be62"
+      },
+      {
+        "path": "docs/research/candidates/flexible_skill_duration/baseline_interruption_b01_20260915/RESULT_SUMMARY.json",
+        "commit": "b8c41ad27f85c9269a9e25adc4e9836af650061b",
+        "blob": "49bfb63e573f014f9223b2174426b9f4c31d824d"
+      },
+      {
+        "path": "docs/research/candidates/flexible_skill_duration/FSD_BASELINE_INTERRUPTION_B01_PROSPECTIVE_CARD_20260915.md",
+        "commit": "b8c41ad27f85c9269a9e25adc4e9836af650061b",
+        "blob": "53ccf4ef96fa112a20fc644dec2d6b63b7c056fc"
+      },
+      {
+        "path": "docs/research/candidates/flexible_skill_duration/pro_packets/20260915_post_baseline_interruption_convergence/archive/RESPONSE.md",
+        "commit": "b8c41ad27f85c9269a9e25adc4e9836af650061b",
+        "blob": "e667e02385706e6ca515c861d58ba16a404758ee"
+      },
+      {
+        "path": "docs/research/candidates/flexible_skill_duration/FSD_RESTART_PREPARATION_INTAKE_20260914.md",
+        "commit": "b8c41ad27f85c9269a9e25adc4e9836af650061b",
+        "blob": "dab4c2e393f6df59a225557dcbbbec6d40cbc6ae"
+      },
+      {
+        "path": "docs/research/candidates/flexible_skill_duration/DIRECTION.md",
+        "commit": "b8c41ad27f85c9269a9e25adc4e9836af650061b",
+        "blob": "fcbd60b061e19613d3bb042d36d14c9427df4be5"
+      },
+      {
+        "path": "docs/research/portfolio/decisions/2026-09-15-workflow-lanes.md",
+        "commit": "999e838cf764928b11d484f2232fde24a43f949f",
+        "blob": "44fdfd9963359fbd104b1d29323d0e1d6d29ccdd"
+      },
+      {
+        "path": "docs/research/portfolio/decisions/2026-09-15-portfolio-control-and-approved-set.md",
+        "commit": "999e838cf764928b11d484f2232fde24a43f949f",
+        "blob": "dd398fc92e267a0881f6c964d488f053bc11643a"
+      },
+      {
+        "path": "docs/research/portfolio/APPROVED_SET.md",
+        "commit": "999e838cf764928b11d484f2232fde24a43f949f",
+        "blob": "a3ccdd8759f0bcbd809f02bbbbf2bc37d0f157ae"
+      },
+      {
+        "path": "docs/Claude_docs/reviews/FOUNDATIONS_AND_METHODOLOGY_CRITICAL_REVIEW_20260914.md",
+        "commit": "999e838cf764928b11d484f2232fde24a43f949f",
+        "blob": "1356e200415f0adcf0bd3999e3ac557855cc12ab"
+      },
+      {
+        "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+        "commit": "999e838cf764928b11d484f2232fde24a43f949f",
+        "blob": "cf0abe05a871accc7a0b10a075bec3c44607081c"
+      },
+      {
+        "path": "docs/research/portfolio/TWO_AXIS_RESEARCH_PROGRAMME_20260914.md",
+        "commit": "999e838cf764928b11d484f2232fde24a43f949f",
+        "blob": "2904067f8b61241b166482a39cfa111ee3e74878"
+      }
+    ]
+  },
+  "skill_metadata_bytes": 1427
+}

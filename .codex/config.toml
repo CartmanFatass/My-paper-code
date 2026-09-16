@@ -16,7 +16,7 @@ default_wait_timeout_ms = 1500000
 max_wait_timeout_ms = 3600000
 
 [agents]
-# There is no working-set target (OWNER_DIRECT 2026-09-15 21:37 PDT): the loop advances docs/research/portfolio/APPROVED_SET.md within the concurrency ceiling, AGENTS.md section 5 "Portfolio control".
+# Approved set only; concurrency is a ceiling, not a target.
 # This runtime fan-out also accommodates their monitors, transports and independent reviewers.
 max_concurrent_threads_per_session = 40
 interrupt_message = true

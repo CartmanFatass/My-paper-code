@@ -1,3 +1,7 @@
+> Historical binding / explanatory record after the 2026-09-16 control migration.
+> The preserved body below is not a daily instruction source. Current method: native experiment-monitor role.
+> Frozen objects retain their original source versions and exceptions.
+
 # DM-owned experiment observation
 
 Each DM creates one reusable native Luna/low experiment-monitor child on its first accepted
