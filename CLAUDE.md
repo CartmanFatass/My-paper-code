@@ -141,6 +141,12 @@ the EXPLORE lane with the lighter records and no Pro round per pilot; CONFIRM ob
 one Pro round at card freeze. ACVC enters CLOSE once its pending result review is intaken; FSD
 (`flexible_skill_duration`) is in CONFIRM with the headroom card as its first object.
 
+**Owner instruction 2026-09-15 21:37 PDT (Portfolio control):** Portfolio review is owner-triggered
+only; the loop advances the approved set in `docs/research/portfolio/APPROVED_SET.md` in priority
+order; concurrency is a ceiling, not a quota; no vacancy replacement or refill; a CLOSE leaves the
+set and queues its memo for the next review (`AGENTS.md` section 5 "Portfolio control";
+`docs/research/portfolio/decisions/2026-09-15-portfolio-control-and-approved-set.md`).
+
 ### Claude Code session rules (formerly AGENTS.md Appendix B)
 
 - `CLAUDE.md` at the repository root carries the environment, commands, architecture, and
