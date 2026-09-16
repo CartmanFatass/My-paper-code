@@ -32,9 +32,8 @@ separate identity, permission, approval, or blocking system.
 **Root** is the primary execution coordinator. It owns working-set readiness, dependencies,
 sequencing and replacement within authorized priorities, delegation, main integration and current
 tracking. Its ordinary work is a brief changed-event log, necessary integration and native waiting.
-When a direction formally pauses/closes and fewer than three direction slots are occupied, Root
-authors and intakes a Portfolio replacement request through its own native Transport, then creates
-the DM selected by the complete conforming Pro decision. Root does not select the new science itself.
+Vacancy replacement is retired (OWNER_DIRECT 2026-09-15 21:37 PDT, section 5 "Portfolio control"):
+a pause or closure leaves the approved set smaller; Root never authors a replacement request.
 **Portfolio** is the persistent `portfolio:cross_direction` Pro decision node, not a native
 agent. Direction-related Portfolio materials and full-response intake belong to a relevant
 **Direction Manager (DM)**. Root handles only its vacancy-replacement question; ordinary
@@ -203,9 +202,9 @@ the owner may PARK it asynchronously. Sequencing never becomes a lifecycle dispo
 `ACTIVE` direction remains admitted to the research queue, while Root plans a target working
 set of three concurrently advancing top-level DM chains. A queued
 `ACTIVE` direction is not `PARKED`; entering or leaving the working set changes no lifecycle,
-priority, scientific meaning, or evidence polarity. After a formal direction pause/closure leaves fewer than three occupied slots, Root asks Portfolio
-for the next new direction and dispatches its DM from the complete conforming decision. Root drains temporary
-overlap without interrupting live work. Three is an execution-parallelism target, not a direction-count or fusion target. Directions
+priority, scientific meaning, or evidence polarity. There is no working-set target and no refill: the
+approved set in `docs/research/portfolio/APPROVED_SET.md` is what runs, and concurrency is a ceiling
+(OWNER_DIRECT 2026-09-15 21:37 PDT, section 5 "Portfolio control"). Directions
 share assets without fusing; fusion is proposed on demand only when their question, comparator,
 estimand, and next object are materially the same. Nothing in this paragraph waits for the owner,
 none of it is a §11.4 launch condition, and ladders already open continue.
@@ -303,6 +302,21 @@ When the owner is absent the loop keeps running under a standing delegation (own
    substitute. The current decision record supersedes older ratification requirements prospectively.
 
 ## 5. Capacity and resume
+
+**Portfolio control (OWNER_DIRECT 2026-09-15 21:37 PDT,
+`docs/research/portfolio/decisions/2026-09-15-portfolio-control-and-approved-set.md`).** Portfolio
+review is owner-triggered only; the loop never fires it on a slot count, an ended allocation, a
+CLOSE, an idle direction or a timer. The execution loop advances only the directions in
+`docs/research/portfolio/APPROVED_SET.md`, in priority order. Concurrency is a ceiling, not a
+quota: if the approved set exceeds the ceiling, lower-priority approved directions wait as parked
+backups; if it is smaller, capacity stays empty. A direction reaching lane CLOSE leaves the set and
+its slot is not refilled; its closing memo is queued for the next review. Retired: the vacancy-
+replacement request, the three-chain working-set target, reserved-slot bookkeeping and refill
+questions. Every "three chains", "fewer than three slots", "replacement" or "refill" passage below
+and in the loop-dispatch skill is superseded by this paragraph. Within an approved direction the
+lanes apply (workflow lanes, 21:03 PDT): EXPLORE proposes three to five pilots in one innovator
+packet and runs the survivors in parallel; CONFIRM runs one card with one Pro round; the hub stays
+on a direction until its batch completes or blocks.
 
 OWNER_DIRECT 2026-09-14 OWNER_RESUMED: the owner explicitly resumed research after the recorded
 pause handoff. `docs/research/portfolio/handoffs/2026-09-14-owner-pause.md` remains recovery evidence,

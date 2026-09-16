@@ -36,23 +36,22 @@ the first wait after useful work:
    fresh admission, launch/Monitor, collection, technical acceptance, scientific intake,
    preservation, assigned cleanup and its authorized dependent steps. Integration and Root ACK
    are not gates, and each step does not require another dispatch or Portfolio vote.
-4. A formal direction pause/closure releases its slot. When occupied slots fall below three,
-   Root uses hmasd-portfolio-task to author and dispatch a bounded replacement question to
-   portfolio:cross_direction through its own reusable native Luna/high Agentify Transport child.
-   Root reads the complete response, checks scope/specification conformance, records the Pro
-   decision and creates the selected new direction's DM with its bounded starting assignment.
-   Pro selects the direction and investment. Ordinary direction-related Portfolio questions and
-   responses remain with their author DMs. Preserve the shared node's single-writer binding.
-5. Record pending replacement request IDs and reserved slots in existing tracking. Repeated events
-   or timeouts reuse the same request; recount occupied/reserved slots before creating a DM.
+4. (OWNER_DIRECT 2026-09-15 21:37 PDT, `AGENTS.md` section 5 "Portfolio control".) A pause or
+   closure leaves the approved set (`docs/research/portfolio/APPROVED_SET.md`) smaller. Root never
+   authors a replacement or refill question and never counts slots; it advances the approved set in
+   priority order within the concurrency ceiling, pulling in the next parked backup only when the
+   approved set names one and capacity opens. Portfolio review is owner-triggered only.
+5. Queue closing memos and lifecycle recommendations in `APPROVED_SET.md` for the next
+   owner-triggered review; do not send them.
    An experiment/object/allocation ending, temporary blocker, Pro wait or idle child is not a
    direction vacancy. Resume the same DM's unfinished authorized work when necessary; a completed
    no-addition assessment with no changed input is not another unfinished assignment.
    Existing overlap above three drains without interrupting live directions; no fourth admission.
 6. After useful independent work, wait natively for DM events or Root's own replacement Transport.
-   Use the configured 1500000 ms default/minimum. An unchanged timeout briefly continues waiting
-   without a new dispatch pass, full-record reread, status polling or Portfolio request. The owner
-   accepts periodic context reuse and brief continuation as the cache-preservation premises.
+   Under the current v2 contract, use the configured 1500000 ms interruptible no-event timeout;
+   messages, completion notices or new user input may return it early. An unchanged timeout briefly
+   continues waiting without a new dispatch pass, full-record reread, `list_agents`, repeated status
+   query, keepalive, progress message or Portfolio request.
    Reconcile a child with unfinished authorized work once. A documented ACTIVE-idle boundary
    with no pending producer needs no repeated assessment or invented request. Owner pause/stop
    takes precedence; a bounded final does not dispose of the direction. Never impose a sibling

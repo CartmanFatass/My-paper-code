@@ -32,6 +32,9 @@ whose corrections are incorporated. No experiment was run and no scientific obje
   lifted restriction, and the pending `bind_conversation.py` root-cause fix.
 - `2026-09-15-workflow-lanes.md` — the owner-approved EXPLORE / CONFIRM / CLOSE lanes: which
   files changed and why (normative text in `docs/research/portfolio/decisions/2026-09-15-workflow-lanes.md`).
+- `2026-09-15-portfolio-control.md` — Portfolio review taken out of the loop; the approved set
+  (`docs/research/portfolio/APPROVED_SET.md`) as the only runnable set; concurrency a ceiling, not a
+  quota (normative text in `decisions/2026-09-15-portfolio-control-and-approved-set.md`).
 
 ### reviews/
 
