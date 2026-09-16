@@ -24,11 +24,10 @@ import math
 import sys
 from pathlib import Path
 
-import numpy as np
-
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-import run_acvc_cluster_mappo_comparison_b01 as b01
+import run_acvc_cluster_mappo_comparison_b01 as b01  # sets the single-thread environment caps before numpy/torch load
+import numpy as np  # noqa: E402  (after the caps, as in the accepted entries)
 import run_acvc_m_deployment_transfer_b01 as t
 from experiments.candidates.acvc.cluster_mappo_comparison_b01 import protocol as p
 
@@ -107,8 +106,10 @@ def reduce_matched(c_summary, m_summary):
         identity = dict(rowwise="p_e = [F(C)-C]_e + [C-M]_e - [F(M)-M]_e (arithmetic, not attribution)",
                         max_abs_residual_J=float(np.max(np.abs(residual))))
     interventions = {arm: (s or {}).get("interventions") for arm, s in summaries.items()}
+    inputs = {arm: dict(launch_sha=(s or {}).get("launch_sha"), object=(s or {}).get("object"),
+                        arm=(s or {}).get("arm")) for arm, s in summaries.items()}
     return dict(object=OBJECT, card=CARD, master=MASTER, evaluation_namespace=EVALUATION_NAMESPACE,
-                complete=primary["complete"], eligible_fits=eligible, panels=panels,
+                complete=primary["complete"], eligible_fits=eligible, inputs=inputs, panels=panels,
                 primary="P", primary_definition="mean64[J(F(C)) - J(F(M))] on the common final worlds",
                 P=primary, supports=supports, decomposition_identity=identity, MEI_J=MEI_J,
                 interventions=interventions, training_instances=2, plans_seconds=dict(PLANS), plan_is_cap=False,
@@ -135,14 +136,22 @@ def main(argv=None):
     parser.add_argument("--m-summary", type=Path)
     args = parser.parse_args(argv)
     if args.mode == "reduce":
+        if args.arm or args.launch_sha or args.on_policy_root:
+            parser.error("reduce takes only --c-summary, --m-summary and --output")
+        if not args.c_summary or not args.m_summary:
+            parser.error("reduce needs --c-summary and --m-summary")
         args.output.mkdir(parents=True, exist_ok=True)
         result = reduce_matched(_read(args.c_summary), _read(args.m_summary))
+        for arm, path in (("C", args.c_summary), ("M", args.m_summary)):
+            result["inputs"][arm]["summary_path"] = str(path)
         (args.output / "summary.json").write_text(json.dumps(result, indent=2, allow_nan=False) + "\n",
                                                   encoding="utf-8")
         return 0
     if args.arm is None or not args.launch_sha:
         parser.error("run needs --arm C|M and --launch-sha")
     if args.arm == "C":
+        if args.on_policy_root:
+            parser.error("the C arm has no on-policy dependency; do not pass --on-policy-root")
         bind_c()
         return b01.main(["--arm", "C", "--seed", str(MASTER), "--output", str(args.output),
                          "--launch-sha", args.launch_sha])

@@ -46,7 +46,8 @@ def make_summary(arm, scores, master=28731, namespace=38731, obj="ACVC_MATCHED_P
     else:
         counts.update(actor_optimizer_steps=8192, critic_optimizer_steps=8192)
     return dict(object=obj, arm=arm, master=master, evaluation_namespace=namespace, fit_complete=True,
-                counts=counts, panels=panels, interventions={k: {"opportunities": 1} for k in scores})
+                launch_sha=f"sha-{arm}", counts=counts, panels=panels,
+                interventions={k: {"opportunities": 1} for k in scores})
 
 
 def pair(base):
@@ -124,7 +125,10 @@ def test_wrong_seed_missing_inputs_and_early_import_are_refused(fresh_modules):
                  ["--arm", "M", "--seed", "28631", "--output", "x", "--launch-sha", "a", "--on-policy-root", "u"],
                  ["--arm", "M", "--seed", "28731", "--output", "x", "--launch-sha", "a"],  # no on-policy root
                  ["--seed", "28731", "--output", "x", "--launch-sha", "a"],  # no arm
-                 ["--arm", "C", "--seed", "28731", "--output", "x"]):  # no launch sha
+                 ["--arm", "C", "--seed", "28731", "--output", "x"],  # no launch sha
+                 ["--arm", "C", "--seed", "28731", "--output", "x", "--launch-sha", "a", "--on-policy-root", "u"],
+                 ["--mode", "reduce", "--output", "x", "--c-summary", "c"],  # no m summary
+                 ["--mode", "reduce", "--output", "x", "--c-summary", "c", "--m-summary", "m", "--arm", "C"]):
         with pytest.raises(SystemExit):
             e.main(argv)
     sys.modules["experiments.candidates.acvc.cluster_mappo_comparison_b01.c_fit"] = object()
@@ -212,6 +216,8 @@ def test_reduce_cli_writes_the_paired_summary(fresh_modules, tmp_path):
     assert (out["object"], out["master"], out["evaluation_namespace"]) == (e.OBJECT, 28731, 38731)
     assert out["card"] == e.CARD and out["P"]["reading"] == "F_C_ABOVE_MEI" and out["MEI_J"] == .01
     assert out["plans_seconds"] == {"C": 2600, "M": 1200} and out["plan_is_cap"] is False
+    assert out["inputs"]["C"]["launch_sha"] == "sha-C" and out["inputs"]["M"]["arm"] == "M"
+    assert out["inputs"]["C"]["summary_path"].endswith("c.json") and out["inputs"]["M"]["summary_path"].endswith("m.json")
 
 
 def test_launch_scripts_name_the_runner_arm_and_seed():
