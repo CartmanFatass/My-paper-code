@@ -1,4 +1,4 @@
-# ACVC matched-package comparison B01 — prospective card (for `em:acvc:convergence` to select and fix; Portfolio G3 envelope)
+# ACVC matched-package comparison B01 — card fixed by `em:acvc:convergence` (2026-09-16 02:48Z, A with corrections; Portfolio G3 envelope)
 
 Class **B/EXPLORE**, host the retained five-UAV cluster (`make_cluster`, H256, native J = S/256),
 prepared 2026-09-15 by the Claude Code research hub acting as ACVC's DM under the owner's
@@ -8,13 +8,17 @@ prepared 2026-09-15 by the Claude Code research hub acting as ACVC's DM under th
 `portfolio:cross_direction` funded it (P1 with an inclusive ceiling, **G3**,
 [decision](../../portfolio/decisions/2026-09-15-acvc-direction-investment-lifecycle.md)) and left
 the object for the direction node to select and fix. This card is the DM's derivation of that
-object inside the G3 envelope. It grants nothing and launches nothing; **the node fixes the
-estimand, comparator specification, labels, pairing, panels and reading rule** (§7) before any
-L0, review or launch.
+object inside the G3 envelope, **fixed by the node on 2026-09-16 02:48Z (A with corrections;
+[response](pro_packets/20260915_matched_package_card_convergence/archive/RESPONSE.md),
+[intake](pro_packets/20260915_matched_package_card_convergence/INTAKE.md), `PRO_FINAL`)**; the
+corrections are applied below with dated markers and §7 records their resolution. The card grants
+nothing and launches nothing: L0, independent review, technical acceptance, fresh admission and
+operator launch follow under G3.
 
 ## 1. Question and the choice it would change
 
-Two complete proposer-packages exist on this host: the retained ACVC coordinator C deployed
+Two complete proposer-packages exist on this host: the C-trained private recurrent proposer C
+(not the periodically centralised HMASD execution path; corrected 2026-09-16) deployed
 through the fixed link-loss transformation F, **F(C)**, and the declared flat recurrent
 MAPPO-style recipe M deployed through the same transformation, **F(M)**. The concluded C/M
 blocks compared F(C) with unwrapped M (D1 +.02344 J, D2 −.03919 J: sign-unstable) while F(C)
@@ -78,9 +82,12 @@ and dwell panels are produced by the accepted runners without any code change, c
 scored ticks inside the G3 ceiling, and supply the supporting decomposition on the same block
 (F(C)−F(M) = (F(C)−C) + (C−M) − (F(M)−M), an arithmetic identity on matched rows, not an
 attribution). Dropping them would require changing accepted evaluator code to save about 3 % of
-the exposure; the DM recommends keeping all six. They do not turn this object into a third C/M
-block: the C/M family is concluded, its primary F(C)−M is reported here only as a supporting
-contrast on a new block and is never accumulated with D1/D2.
+the design ticks (not a verified wall saving); the node fixed all six because the dwell
+comparisons address the strongest live simpler alternative and the unwrapped panels put P in
+context, not because spare budget must be consumed. They do not turn this object into a third
+C/M block: the C/M family is concluded; F(C)−M is **not** among the six supports and is not
+recomputed by reusing the old reducer (corrected 2026-09-16); its historical readings remain
+visible as historical context only.
 
 Exactly **two** original result-bearing invocations, one per arm. Retry, replacement, third fit,
 tuning, pilot, native smoke, midpoint, changed checkpoint, extra panel or continuation until a
@@ -101,15 +108,20 @@ comparator continuity; not justified by a seed SD, a sign count or the runtime).
 to the unrounded primary: `P > +.01` **F_C_ABOVE_MEI** (the coordinator-side package attains an
 MEI-sized advantage on this block; development advice favours F(C)); `−.01 ≤ P ≤ +.01`
 **WITHIN_MEI** (no MEI-sized preference between the packages at this point scale; a small signed
-observation, not equivalence; the cheaper or simpler package becomes the practical default
-consideration); `P < −.01` **F_M_ABOVE_MEI** (the conventional-proposer package attains the
+observation, not equivalence; corrected 2026-09-16: if P is within the band, no return-based MEI
+preference is observed; documented cost and simplicity may inform a provisional development
+choice, but neither equivalence nor a deployment default is established); `P < −.01` **F_M_ABOVE_MEI** (the conventional-proposer package attains the
 advantage; development advice favours F(M)); a missing or invalid operand **INCOMPLETE** (no
 dependent contrast, no imputation; independently trustworthy panel facts remain reportable at
-their own ceiling). Supporting contrasts are described at the same signed .01 scale; none is
-co-primary and a favourable support never replaces the primary. A F_C_ABOVE_MEI with F(C)−C
-inside the band, or a F_M_ABOVE_MEI with F(M)−M inside the band, says the winning package's
-advantage comes from its proposer rather than from the transformation on that block; the primary
-still decides the package question. No outcome establishes stable superiority, a
+their own ceiling). Supporting contrasts (exactly the six listed; positive favours the left operand; strict above
++.01 / inclusive ±.01 / strict below −.01 map to UP / WITHIN_MEI / DOWN with dependency-specific
+INCOMPLETE) are described at the same signed .01 scale; none is co-primary and a favourable
+support never replaces the primary. When the winning package's own-proposer increment is within
+the band (corrected 2026-09-16): its own-proposer increment is within the point-importance band;
+inspect both wrapper increments and C−M for the arithmetic context of the package difference;
+these measurements do not identify a unique source of the advantage (harm from F on the other
+proposer could also contribute; within-band does not mean zero; relative package preference does
+not establish that the preferred wrapper improves on its own unwrapped or dwell alternative). No outcome establishes stable superiority, a
 training-population mean, a discardable C or M, tuned headroom, equivalence, a K/N/retrace/memory
 mechanism, C promotion, default change or safety claim.
 
@@ -123,8 +135,12 @@ Predictions (hub, on record before launch; owner slot `not taken (unattended)`):
 F_C_ABOVE_MEI .20, WITHIN_MEI .15, F_M_ABOVE_MEI .65. Reason: F(C) attained .3572 and .3550 J on
 the two C/M blocks while the four fitted M instances attained .3338, .3942, .3786 and .4292 J
 unwrapped and F(M) added +.018 and +.003 J on the two wrapped instances; three of the four M
-instances already exceed F(C)'s observed level before wrapping, but one instance did not and the
-between-fit spread of M is the largest source of uncertainty. Supporting C−M: UP .15, WITHIN .15,
+instances already exceed F(C)'s observed level before wrapping, but one instance did not.
+Qualification (node, 2026-09-16): those are unmatched fitted-policy/panel observations, not
+three paired wins or a calibrated frequency for P; the record does not establish that M's
+between-fit spread is the largest uncertainty source (C-fit variation, finite-panel variation,
+differing action randomness and their covariance also matter); the forecasts are subjective
+prospective judgments. Supporting C−M: UP .15, WITHIN .15,
 DOWN .70; F(C)−C: UP .80, WITHIN .15, DOWN .05; F(M)−M: UP .40, WITHIN .45, DOWN .15.
 Completeness forecast .90.
 
@@ -139,15 +155,17 @@ Completeness forecast .90.
 | Sole-final panels / evaluation episodes / ticks | 6 / 384 / 98,304 |
 | Total scored team ticks | **2,195,456** (= the G3 inclusive ceiling) |
 | Final snapshots / loads | 2 / 6 |
-| Environment constructions | C arm 2 + 3, M arm 2 + 3 |
+| Environment constructions (unscored constructor resets) | **9**: C 1 training + 3 panel, M 2 training lanes + 3 panel (corrected 2026-09-16) |
 
 Dominant work is the two full training-and-update programmes (each actor replays 20,971,520
 agent rows). **Ordinary plans: C about 2,600 s, M about 1,200 s whole-native wall** on an
 otherwise idle node (Portfolio's initial judgments; C measured 1,670.62 s beside one fit and
-2,495.72 s beside four; M 985.12 / 989.80 s alone with three panels). Launching the two originals
-concurrently, as in blocks 1–2, is allowed and lengthens both walls (about 2.3 versus 0.9 ms per
-tick observed under contention); sequential C-then-M is the default if the node is otherwise
-loaded. Plans are judgments, not caps or gates; revise them prospectively from node conditions.
+2,495.72 s beside four; M 985.12 / 989.80 s alone with three panels). Ordinary order **C then M** (G3), retained on a loaded node; concurrent originals only as an
+operational variant when the actual node can accommodate both, each with fresh admission and no
+displaced accepted work, never depending on C's emerging score; no historical contention figure
+is claimed as a concurrent-pair speedup, slowdown or ordering advantage (corrected 2026-09-16). C's
+1,670.62 / 2,495.72 s were measured beside other work; no standalone C runtime is established.
+Plans are judgments, not caps or gates; revise them prospectively from node conditions.
 No profiling pilot. Consultation exposure of this card: zero.
 
 ## 5. Minimal L0 (hub implements directly; independent review of changed behaviour before launch)
@@ -158,18 +176,30 @@ No profiling pilot. Consultation exposure of this card: zero.
   snapshot, M / F(M) / dwell(M) panels), their evaluators and focused tests; the protocol's
   `contrast`, `panel` and `fit_eligible` helpers.
 - **Changed binding only**: one thin entry `scripts/run_acvc_matched_package_comparison_b01.py`
-  with `--arm C|M` that binds MASTER 28731 / namespace 38731 / object / card into the protocol
-  (C arm, as the block-2 wrapper did) or into the transfer runner's module globals (M arm, as the
-  B02 thin entry did) **before any recipe import**, refuses any other `--seed`, and delegates to
-  the unchanged code; plus `--mode reduce --c-summary --m-summary` computing the primary and the
-  six supporting contrasts from the two summaries' `panels[*].scores_J` with the existing
-  `contrast` helper, refusing mismatched identities and marking INCOMPLETE without imputation.
-  Two launch scripts naming the thin entry and `--seed 28731`.
-- **Focused checks**: identities reach initialisation, training resets, action streams, all six
-  panels and the reducer before use (the transfer B01 review's material finding); early recipe
-  import refused; reducer on synthetic summaries reproduces the primary and the identity
-  `P = (F(C)−C) + (C−M) − (F(M)−M)` on matched rows; INCOMPLETE on a missing panel; launch scripts
-  name the runner. Unchanged tests rerun only where the binding can affect them.
+  with `--arm C|M` that binds MASTER 28731 / namespace 38731 / object / card **and the ordinary
+  plans C 2,600 s / M 1,200 s as metadata** into the protocol (C arm, as the block-2 wrapper did;
+  C's recipe imports the constants by value, so binding precedes the import) or into the transfer
+  runner's module globals (M arm, as the B02 thin entry did; its own `bind_object` replaces the
+  protocol ARMS/PLANS and the M execution callback, so protocol identity alone is insufficient for
+  M and the M binder must never be applied on the C route) **before any recipe import and before
+  parsing the admitted seed**, refuses any other `--seed`, and delegates to the unchanged code in
+  separate C and M process invocations with separate outputs; plus `--mode reduce --c-summary
+  --m-summary` computing P and exactly the six supports from the two summaries with the explicit
+  six-key mapping (C→`C/C`, F(C)→`C/F`, own-dwell(C)→`C/dwell`, M→`M/M`, F(M)→`M/F(M)`,
+  own-dwell(M)→`M/dwell(M)`), the generic `contrast` arithmetic relabelled for the new primary
+  (F_C_ABOVE_MEI / F_M_ABOVE_MEI; the old `reduce_pair` and `contrast(primary=True)` are not the
+  new comparison), each operand validated for fit eligibility and a complete finite 64-score panel
+  under the bound identities, uncertainties from each paired vector, INCOMPLETE per dependency
+  without imputation (a missing dwell panel does not erase P; a missing F(C) or F(M) makes P
+  incomplete without erasing independent within-arm supports). Two launch scripts naming the thin
+  entry, the arm and `--seed 28731`. (Specified by the node 2026-09-16.)
+- **Focused checks**: identities and plans reach both fresh-process routes (configuration, recipe
+  imports, seed parsing, panel constructors and evaluator namespace) and the reducer before use;
+  early recipe import and wrong seed refused; the two summaries carry the common object and the
+  correct fitted-arm identities; synthetic fixtures exercise signed orientation, the exact ±.01
+  boundaries, the panel-key mapping, mismatched identities, nonfinite or missing operands and the
+  rowwise identity `p_e = [F(C)−C]_e + [C−M]_e − [F(M)−M]_e`; launch scripts name the runner and
+  arm. Unchanged tests rerun only where binding or dispatch can affect them; no native pilot.
 - **Protected**: C and M training bytes identical to blocks 1–2 and B01/B02; `Binding` unchanged;
   panel laws unchanged; direct matched reductions with strict/inclusive edges; real
   update/exposure accounting; two-snapshot / six-load verification.
@@ -190,19 +220,23 @@ ACTIVE/MEDIUM/recasts2 in its slot at the lowest sequencing priority; the two-bl
 both transfer instances, consumed C objects, failed alternatives and peer lifecycles are
 unchanged; no C promotion, recast, lifecycle, priority or family change.
 
-## 7. What the node is asked to fix (open points, DM recommendation first)
+## 7. Node resolution (`em:acvc:convergence`, 2026-09-16 02:48Z, A with corrections, `PRO_FINAL`)
 
-1. **Estimand and label**: P = mean64[J(F(C)) − J(F(M))] with the F_C_ABOVE_MEI / WITHIN_MEI /
-   F_M_ABOVE_MEI / INCOMPLETE branches at unrounded ±.01 J (recommended), or another primary.
-2. **Panel set**: all six panels from the unchanged runners (recommended; exactly the ceiling),
-   or only the two package panels plus the two unwrapped panels (2,162,688 ticks; requires an
-   evaluator change on the C side), or the two package panels alone (2,129,920 ticks; requires
-   changes on both sides).
-3. **Supporting contrasts and their reading**: the six listed in §3 at the same signed .01 scale,
-   with the decomposition identity reported as arithmetic only (recommended), or a smaller set.
-4. **Labels and pairing**: 28731/38731 with the reset, generator and offset scheme of §2
-   (recommended), or corrected labels.
-5. **Development-advice mapping of the three branches** (§3) and any correction to the DM's
-   prediction reasoning.
-6. **Launch order**: concurrent originals allowed with sequential C-then-M as the loaded-node
-   default (recommended), or strictly sequential.
+1. **Estimand and labels fixed as proposed**: P = mean64[J(F(C)) − J(F(M))] over all 64 declared
+   worlds, F_C_ABOVE_MEI / WITHIN_MEI / F_M_ABOVE_MEI / INCOMPLETE at the unrounded ±.01 J
+   boundaries; a fixed-final-endpoint comparison conditional on the two fitted policies.
+2. **Panel set fixed: all six** from the unchanged run paths (2,195,456 scored ticks, exactly the
+   ceiling), with the explicit source-key mapping of §5 and within-arm panel order C/F/dwell and
+   M/F(M)/dwell(M).
+3. **Supports fixed: exactly the six of §3**, UP / WITHIN_MEI / DOWN with dependency-specific
+   INCOMPLETE; the rowwise identity retained as arithmetic, not attribution; F(C)−M excluded.
+4. **Labels and pairing fixed** without screening: 28731/38731, the reset, generator and offset
+   scheme of §2; C retains `templates(MASTER)`, geometry +12, training-velocity +21 and its
+   per-episode generator at +4000+e with the existing namespace- and arm-indexed action law; C's
+   action streams are not forced to equal M's. Pairing is by prescribed reset address and episode
+   index, not by realised scores.
+5. **Branch narrative corrected** (§3 markers); DM probabilities preserved with their rationale
+   qualified.
+6. **Launch order: C then M** ordinarily; concurrency only as an operational variant (§4).
+7. Constructor count corrected to nine (§4); proposer wording corrected (§1); L0 acceptance items
+   specified (§5). No protected recipe, endpoint, Binding law or historical result changes.

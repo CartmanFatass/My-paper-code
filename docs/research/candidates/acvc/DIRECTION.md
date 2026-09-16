@@ -1,5 +1,24 @@
 # Direction acvc: ACVC
 
+## Matched-package comparison B01 fixed by the direction node; L0 under G3 — 2026-09-16 03:05Z (em:acvc:convergence A with corrections, PRO_FINAL)
+
+`em:acvc:convergence` fixed the G3 object as the DM's card with corrections
+([card](ACVC_MATCHED_PACKAGE_COMPARISON_B01_PROSPECTIVE_CARD_20260915.md),
+[response](pro_packets/20260915_matched_package_card_convergence/archive/RESPONSE.md),
+[intake](pro_packets/20260915_matched_package_card_convergence/INTAKE.md), ledger row 39, owner item
+`20260915-acvc-010`): **ACVC_MATCHED_PACKAGE_COMPARISON_B01**, B/EXPLORE, one fresh matched block MASTER
+28731 / namespace 38731, one C fit and one M fit of the unchanged recipes, six sole-final panels (C, F(C),
+own-dwell(C), M, F(M), own-dwell(M)) on the common final worlds; sole primary **P = mean64[J(F(C)) − J(F(M))]**
+at unrounded ±.01 J (F_C_ABOVE_MEI / WITHIN_MEI / F_M_ABOVE_MEI / INCOMPLETE); exactly six supports (C−M, F(C)−C,
+F(M)−M, F(C)−own-dwell(C), F(M)−own-dwell(M), own-dwell(C)−own-dwell(M)); no pooling with D1/D2 or T_F,1/T_F,2;
+2,195,456 scored ticks, exactly the G3 ceiling; plans C 2,600 s / M 1,200 s, not caps; C then M. Corrections
+applied with dated markers (nine constructors; C-trained private recurrent proposer; F(C)−M excluded from the
+supports; no proposer-causality or default-selection reading; prediction rationale qualified, DM .20/.15/.65
+preserved; concurrency only as an operational variant; L0 acceptance items). The question it answers is which
+complete package to develop next; it establishes no stable superiority or population claim. L0: written by the hub at zero exposure (thin entry `scripts/run_acvc_matched_package_comparison_b01.py` with `--arm C|M` and `--mode reduce`, launch scripts `experiments/candidates/acvc/matched_package_comparison_b01/launch_{c,m}.sh`, eight focused synthetic tests under `tests/experiments/candidates/acvc/matched_package_comparison_b01/`); independent `hmasd-reviewer` review of the changed behaviour precedes technical acceptance.
+No launch before independent review, technical acceptance and fresh admission through
+`hmasd-experiment-operator`. ACTIVE/MEDIUM/recasts2, lowest sequencing, slot unchanged.
+
 ## Portfolio funds one bounded matched-package comparison (G3); the direction node fixes the card next — 2026-09-15 23:40Z (portfolio:cross_direction P1, PRO_FINAL / OWNER_DELEGATED)
 
 `portfolio:cross_direction` answered the direction-level investment/lifecycle question with **P1 under an
