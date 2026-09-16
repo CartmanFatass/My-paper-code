@@ -103,6 +103,25 @@ conflict; continue independent authorized work. Ordinary code/check repairs cont
 or a concrete blocker. This creates no new result-bearing invocation, retry budget or relaxation
 of a frozen card. Required checks stay proportional; repeated checks need a new reason.
 
+## Workflow lanes (OWNER_DIRECT, 2026-09-15 21:03 PDT)
+
+Process is proportional to direction state, not uniform. Each direction is in one lane recorded
+in `PORTFOLIO.md`: **EXPLORE** (no effect on record; `PILOT` objects chosen by the DM at object
+tier, single seed allowed, no Pro round, three records: pilot note, `summary.json`, intake
+paragraph; results labelled `PILOT`, never an MEI verdict, never a B result), **CONFIRM** (an
+effect on record; full section 11 card with pre-registered decision rule, at least two training
+seeds per arm or an MEI at least the recorded host seed spread, independent review per
+ENGINEERING_SCOPE_SPEC section 7.3 only, at most one Pro round per object at card freeze with the
+result review only when the outcome falls outside the rule), **CLOSE** (one closing memo and one
+bundled Portfolio lifecycle round, no new objects). Direction- and Portfolio-tier questions are
+batched at boundaries. `DIRECTION.md`, handoffs, `PORTFOLIO.md` and tracking are refreshed once
+per clean boundary; ledger rows only for `selection` decisions with a real alternative; owner
+items only for lifecycle/Portfolio decisions and confirmatory results. Each ACTIVE direction has
+a standing budget (EXPLORE four single-seed fits per seven days; CONFIRM one object per seven
+days sized by its card) in place of per-object Portfolio grants. Lanes belong to the direction
+and bind both loops. Normative text and initial assignments:
+`docs/research/portfolio/decisions/2026-09-15-workflow-lanes.md`.
+
 ## Scientific tool use (OWNER_DIRECT, 2026-09-05)
 
 The owner approved adoption batches 1 and 2 from

@@ -30,6 +30,8 @@ whose corrections are incorporated. No experiment was run and no scientific obje
 
 - `2026-09-15-control-plane-changes.md` — transport tab discipline, registry reconciliation, the
   lifted restriction, and the pending `bind_conversation.py` root-cause fix.
+- `2026-09-15-workflow-lanes.md` — the owner-approved EXPLORE / CONFIRM / CLOSE lanes: which
+  files changed and why (normative text in `docs/research/portfolio/decisions/2026-09-15-workflow-lanes.md`).
 
 ### reviews/
 

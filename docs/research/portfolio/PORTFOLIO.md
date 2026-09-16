@@ -4,6 +4,8 @@
 
 当前工作集为 **4 个占用方向、0 个预留、0 个空缺**。ACVC、FOLR 与 TRDL 延续各自链；所有者于 2026-09-14 直接恢复 FSD 为第四条并行链，不挤占前三个方向，也不等待 Portfolio 重复准入。四个方向均由原生 Astra/max DM 管理完整生命周期。实时执行细节见[实验跟踪](EXPERIMENT_TRACKING.md)。
 
+**流程车道（OWNER_DIRECT 2026-09-15 21:03 PDT，[决定记录](decisions/2026-09-15-workflow-lanes.md)）**：acvc → CLOSE（待送出的结果复审接受后生效；一份结题备忘 + 一次打包的 Portfolio 生命周期问题）；flexible_skill_duration → CONFIRM（首个对象：UAV 主机上调优同信息基线的 headroom 卡，≥2 训练种子或 MEI ≥ 主机种子离散）；vap_folr_core、tail_return_distributional_learning 由各自 DM 恢复时指定，默认 EXPLORE。EXPLORE 车道：PILOT 对象由 DM 对象层自选，单种子，无 Pro 轮次，三份记录；各 ACTIVE 方向有常设预算（EXPLORE 每 7 天 4 次单种子拟合；CONFIRM 每 7 天 1 个对象），取代逐对象 Portfolio 资助。
+
 | 方向 | 当前科学位置 | 当前 producer / 下一事件 |
 | --- | --- | --- |
 | acvc | [ACTIVE/MEDIUM/recasts2](../candidates/acvc/DIRECTION.md)。C/M 比较族在两块有界主张处收束（17:08Z，A）；em:acvc:convergence 20:28Z 选 B：M-部署迁移对象（1 次 M 拟合，M / F(M) / own-dwell(M)，T_F@.01 J）带修正入选，属新的结果知情 B/EXPLORE 问题。 | **Claude hub 驱动**；Portfolio G 的一次拟合已完成并接受（21:45Z）：T_F +.0183 J TRANSFERS（单实例），资助用尽，0 producer；em:acvc:convergence 21:57Z 选 B：再做一次独立 M 拟合（B02，28631/38631，三面板不变，逐实例并列）；Portfolio 22:20Z 选 G2 再资助一次拟合；B02 已完成并接受（23:05Z）：T_F,2 +.0029 J 带内，与 B01 的迁移成立并列为分歧，不汇总；G2 用尽，0 producer；em:acvc:convergence 23:10Z 选 A：迁移族在两实例处结束、不选数值对象、未穷尽；Portfolio 23:31Z 选 P1（G3）：保持 ACTIVE/MEDIUM/recasts2 与槽位，资助一次有界的匹配 F(C) 对 F(M) 整包比较（至多一次 C 拟合与一次 M 拟合，上限 2,195,456 计分 tick）；em:acvc:convergence 02:48Z 固定卡片（A 带修正）：ACVC_MATCHED_PACKAGE_COMPARISON_B01，主量 P = F(C) − F(M)，六面板，正好上限；块已完成并接受（03:45Z）：P = F(C) − F(M) = −.0150 J F_M_ABOVE_MEI（单块），F(M)−M +.005 带内；G3 用尽，0 producer；结果复审已单次送 em:acvc:convergence（2026-09-16T03:53:17Z），待归档答复；Portfolio 建议 Root 把休眠的第二分配（FSD）交所有者单独决定工作集；交接 `HANDOFF_2026-09-15_post_cm_decision.md` |
