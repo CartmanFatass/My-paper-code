@@ -2,7 +2,7 @@
 
 **State: ACTIVE / MEDIUM / recasts 2, lowest sequencing; the G3 block ACVC_MATCHED_PACKAGE_COMPARISON_B01 is
 complete and intaken (P = F(C) − F(M) = −.014963 J, F_M_ABOVE_MEI; ledger row 41), G3 consumed, no producer;
-the result-review request to `em:acvc:convergence` is being authored; nothing else authorised.** Driven by
+the result-review request `2026-09-16-acvc-matched-package-result-review-01` was sent once to `em:acvc:convergence` (conversation 6aa12e74-8e54-83e8-95f6-001681b456f7, TASK 7100c6099, handoff bound at 1a8d19c12, operation e317e2ed-484a-4ba0-8b54-29301bb3ffff, sent 2026-09-16T03:53:17Z); awaiting the archived answer; nothing else authorised.** Driven by
 the Claude Code research hub (owner 2026-09-15 resume; two directions, ACVC and
 FSD). Authoring checkout `C:/Projects/HMASD-worktrees/codex-acvc`, branch
 `codex/acvc` (1,140 commits behind `main`; a merge of `main` conflicts in Codex
@@ -131,7 +131,7 @@ Opus review.
   `docs/research/portfolio/owner/briefs/acvc/2026-09-16_ACVC_MATCHED_PACKAGE_COMPARISON_B01.md`, ledger row 41.
 - P = −.014963 J F_M_ABOVE_MEI (40/64); supports C−M DOWN, F(C)−C UP, F(M)−M WITHIN, F(C)−dwell(C) UP,
   F(M)−dwell(M) WITHIN, dwell(C)−dwell(M) DOWN; Brier P .185.
-- Result review: the result-review request to `em:acvc:convergence` is being authored.
+- Result review: the result-review request `2026-09-16-acvc-matched-package-result-review-01` was sent once to `em:acvc:convergence` (conversation 6aa12e74-8e54-83e8-95f6-001681b456f7, TASK 7100c6099, handoff bound at 1a8d19c12, operation e317e2ed-484a-4ba0-8b54-29301bb3ffff, sent 2026-09-16T03:53:17Z); awaiting the archived answer.
 
 ## First resume step (current)
 

@@ -15,7 +15,7 @@ unwrapped M or dwell(M) is a reportable competing development option without sub
 beside the concluded C/M blocks (F(C) − M +.023 / −.039 J) and transfer instances (F(M) − M +.018 / +.003 J;
 here +.005 J) without pooling. DM Brier P .185 (modal forecast occurred). Not stable superiority, a
 population mean, a discardable C or M, tuned headroom, equivalence, mechanism, C promotion or default change.
-G3 is consumed (zero retries, third fits or extra panels); the result-review request to `em:acvc:convergence` is being authored. ACTIVE/MEDIUM/recasts2, lowest sequencing,
+G3 is consumed (zero retries, third fits or extra panels); the result-review request `2026-09-16-acvc-matched-package-result-review-01` was sent once to `em:acvc:convergence` (conversation 6aa12e74-8e54-83e8-95f6-001681b456f7, TASK 7100c6099, handoff bound at 1a8d19c12, operation e317e2ed-484a-4ba0-8b54-29301bb3ffff, sent 2026-09-16T03:53:17Z); awaiting the archived answer. ACTIVE/MEDIUM/recasts2, lowest sequencing,
 slot unchanged; no producer.
 
 ## Matched-package comparison B01 fixed by the direction node; L0 under G3 — 2026-09-16 03:05Z (em:acvc:convergence A with corrections, PRO_FINAL)
