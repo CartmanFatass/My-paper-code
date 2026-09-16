@@ -42,8 +42,10 @@ this route.
 At most **two directions** advance concurrently in a Claude session (owner, 2026-09-03,
 reaffirmed 2026-09-05 and 2026-09-15; the reason is the Claude five-hour usage window). The
 three-chain working set in `AGENTS.md` §5 is the Codex loop's target and does not apply here.
-Lifecycle, priority, slots and budgets are unchanged by which loop drives a direction: the hub
-drives two of the occupied slots, it does not release or fill any. Commit and push early; launch
+Two is a ceiling, not a quota (owner, 2026-09-15 21:37 PDT): the hub advances only the directions
+in `docs/research/portfolio/APPROVED_SET.md`, in priority order, and leaves capacity empty when the
+set is smaller; it never fills a slot, never sends a lifecycle or refill question, and stays on a
+direction until its batch completes or blocks. Commit and push early; launch
 every result-bearing run detached so a killed session loses no run; write the handoffs before
 the window closes.
 
@@ -138,6 +140,28 @@ tracker's return is the adoption receipt and, later, the terminal fact; the hub 
 collection, technical acceptance and scientific intake. Exit zero is not a result. The hub
 prepares the exact cleanup inventory at collection, confirms retention on `main`, then assigns
 the exact remote reclamation; test scratch is cleaned by its creator under `tests/AGENTS.md`.
+
+## Lanes (owner, 2026-09-15 21:03 PDT)
+
+Read the direction's lane from `docs/research/portfolio/APPROVED_SET.md` before choosing the
+process (`docs/research/portfolio/decisions/2026-09-15-workflow-lanes.md`):
+
+- **EXPLORE**: propose three to five `PILOT` objects in one packet to `em:<direction>:innovator`,
+  let Pro prune and rank once, run the survivors in parallel within admission, one review per
+  batch. One fit per arm, single seed allowed. Records per pilot: a pilot note, `summary.json`,
+  one intake paragraph. Report a signed effect with n and the label `PILOT`; never an MEI verdict.
+  Brief only if something moved. Up to four single-seed fits per seven days.
+- **CONFIRM**: full card under evidence spec section 11 with pre-registered branches and the
+  decision rule; at least two training seeds per arm or an MEI at least the host's recorded seed
+  spread; one Pro round at card freeze (`em:<direction>:convergence`), result review only when
+  the outcome is outside the rule or the hub dissents; independent review only for section 7.3
+  surfaces; brief and P1 item at intake. One object per seven days.
+- **CLOSE**: write `<DIRECTION>_CLOSING_MEMO_<date>.md` and queue it in `APPROVED_SET.md` for the
+  next owner-triggered review. No objects, no lifecycle Send.
+
+All lanes: refresh `DIRECTION.md`, handoffs, `PORTFOLIO.md` and tracking once per clean boundary;
+ledger rows only for `selection` decisions with a real alternative; the L0 five facts may be
+three lines for a pilot; launch still only through `hmasd-experiment-operator` with admission.
 
 ## Decision ladder
 
