@@ -1,8 +1,8 @@
 # ACVC handoff — after the em:acvc:convergence decision (2026-09-15, Claude hub)
 
-**State: ACTIVE / MEDIUM / recasts 2, lowest sequencing; G3 object fixed by `em:acvc:convergence`
-(ACVC_MATCHED_PACKAGE_COMPARISON_B01, 28731/38731, one C fit and one M fit, six panels, primary
-P = F(C) − F(M) at ±.01 J); L0: written by the hub at zero exposure (thin entry `scripts/run_acvc_matched_package_comparison_b01.py` with `--arm C|M` and `--mode reduce`, launch scripts `experiments/candidates/acvc/matched_package_comparison_b01/launch_{c,m}.sh`, eight focused synthetic tests under `tests/experiments/candidates/acvc/matched_package_comparison_b01/`); independent `hmasd-reviewer` review of the changed behaviour precedes technical acceptance; review accepted, technical acceptance recorded (ledger row 40); both G3 originals launched through `hmasd-experiment-operator` at launch sha `841e5c35b` (worktree `/home/wu/hmasd-worktrees/acvc-matched-b01-841e5c35b`): C handle `acvc-matched-c-b01-28731-841e5c35b` (pid 3762157, 03:13:34Z, admission 15.6 GB) and M handle `acvc-matched-m-b01-28731-841e5c35b` (pid 3764685, 03:16:25Z, admission 15.3 GB), concurrent as the operational variant on the idle node; plans C 2,600 s / M 1,200 s not caps; expected ends about 03:35Z (M) and 03:45Z (C); 2 producers.** Driven by
+**State: ACTIVE / MEDIUM / recasts 2, lowest sequencing; the G3 block ACVC_MATCHED_PACKAGE_COMPARISON_B01 is
+complete and intaken (P = F(C) − F(M) = −.014963 J, F_M_ABOVE_MEI; ledger row 41), G3 consumed, no producer;
+the result-review request to `em:acvc:convergence` is being authored; nothing else authorised.** Driven by
 the Claude Code research hub (owner 2026-09-15 resume; two directions, ACVC and
 FSD). Authoring checkout `C:/Projects/HMASD-worktrees/codex-acvc`, branch
 `codex/acvc` (1,140 commits behind `main`; a merge of `main` conflicts in Codex
@@ -122,7 +122,28 @@ Opus review.
 - Evidence root `evidence/matched_package_comparison_b01_20260916/` (DEPENDENCY.json, EXECUTION.md with the
   cost projection, launch rows and frozen commands).
 
+## Block complete and intaken: F(M) above F(C) on one block (2026-09-16 03:45Z)
+
+- Both originals finished exit 0 (C 1,161.65 s, M 1,065.69 s native wall; overlapped on the idle node);
+  collected with matching digests, reduced (`reduce/summary.json`), preserved locally (PRESERVATION.json), remote
+  worktree and staging reclaimed (CLEANUP.json). E0 `ACVC_MATCHED_PACKAGE_COMPARISON_B01_RESULT_EVIDENCE_20260916.md`,
+  intake `ACVC_MATCHED_PACKAGE_COMPARISON_B01_INTAKE_20260916.md`, brief
+  `docs/research/portfolio/owner/briefs/acvc/2026-09-16_ACVC_MATCHED_PACKAGE_COMPARISON_B01.md`, ledger row 41.
+- P = −.014963 J F_M_ABOVE_MEI (40/64); supports C−M DOWN, F(C)−C UP, F(M)−M WITHIN, F(C)−dwell(C) UP,
+  F(M)−dwell(M) WITHIN, dwell(C)−dwell(M) DOWN; Brier P .185.
+- Result review: the result-review request to `em:acvc:convergence` is being authored.
+
 ## First resume step (current)
+
+If the result-review request to `em:acvc:convergence` has not been sent: render, bind and send it once
+(packet `pro_packets/20260916_matched_package_result_review/`; options A record and conclude at one block with
+a statement on remaining defensible objects or the lifecycle question to Portfolio (DM recommendation), B a
+second matched block, C an M-side development object without the wrapper, D another object). If sent: wait for
+the archived answer (GitHub readback at a fresh `codex/acvc` head, transport phase 2), intake it as `PRO_FINAL`,
+apply it (a new fit needs a Portfolio investment question first; a lifecycle recommendation goes to Portfolio).
+No launch is authorised. FSD unaffected.
+
+## First resume step as written at 03:17Z (superseded 03:45Z by the section above)
 
 Watch the two handles (`agent-task status <handle>`; strip spaces from the JSON) until both are `finished`;
 collect each original with the hub's collection script (`native/C`, `native/M`, per-file sha256 equal to the
