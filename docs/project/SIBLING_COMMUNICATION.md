@@ -18,11 +18,14 @@ returns complete a bounded assignment. Do not send duplicate work through both t
 
 Root dispatches ready independent actions before waiting. While DM work is outstanding, Root
 uses native collaboration.wait_agent. DM does independent work first, then uses the same native
-long wait for its monitor or Reviewer. Use the configured 1500000 ms default/minimum wait;
-process an arriving event promptly. An unchanged timeout requires only a brief continuation of
-waiting: no rereading all cards, status census, repeated assignment or progress broadcast.
-The owner accepts periodic context reuse/cache refresh and brief continuation as design premises.
-No per-DM keepalive messages, ACK loops, timers or separate relay are needed.
+long wait for its monitor or Reviewer. Under the current v2 contract, the configured 1500000 ms
+default/minimum is an interruptible no-event timeout: child messages, completion notices and new
+user input can return control earlier. Select other waits by their actual tool contract, response
+needs and real limits; preserve fault, cancellation and concurrent-service response. Process an
+arriving event promptly. An unchanged timeout requires only a brief continuation of waiting: no
+rereading all cards, `list_agents`, repeated status queries, repeated assignment, keepalive or
+progress broadcast. Do not replace an interruptible long wait with short unchanged polling loops.
+Higher-priority system/developer limits still control and any concrete conflict is reported.
 
 An unchanged timeout stays quiet. When a bounded assignment reaches completion, hits a material
 blocker or scope conflict, or has no immediate authorized work while its direction remains ACTIVE,

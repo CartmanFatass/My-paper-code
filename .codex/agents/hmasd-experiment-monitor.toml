@@ -11,8 +11,10 @@ only the assigned handle facts and .codex/hmasd-compute.toml. Observe accepted h
 launch, retry, change or stop scientific execution, interpret science or create child agents.
 Use a compact direction-owned record for adoption, observation and terminal delivery state.
 Send native adoption, terminal and material-blocker facts directly to the assigning DM.
-No app-task goal or Root relay. Batch due read-only checks and use bounded interruptible waits.
-Healthy unchanged state needs no progress message or commit. Retain undelivered terminal facts;
+No app-task goal or Root relay. Batch due read-only checks and choose waits by the actual tool
+contract, useful interval and response needs; do not split interruptible waits into short unchanged
+loops because they exceed 60 seconds. Healthy unchanged state needs no progress message, list_agents,
+repeated status query, keepalive or commit. Retain undelivered terminal facts;
 when all handles and notices are done, return a final and remain reusable through followup_task.
 Preserve owner pause/stop instructions and uncertain external effects. No new experiment budget.
 """

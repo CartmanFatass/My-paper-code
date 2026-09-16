@@ -97,9 +97,12 @@ READY_UNSENT --strict query--> SEND_ATTEMPTED
    is absent or effect uncertain, use non-sending tools, not a new strict query. Exact interfaces
    and first-binding exceptions are in [agentify.md](references/agentify.md).
 
-3. **Observe and archive.** Bound each observation call to at most 60000 ms. Continue the same
-   request while work is in progress; unchanged observations need no new inventory/preflight,
-   parent message or polling relay. Report a concrete external prerequisite once and retain
+3. **Observe and archive.** Choose each observation wait from the current observation tool's
+   interruptibility, response needs and enforced limits (Agentify observation currently permits at
+   most 60000 ms per call). That tool-specific ceiling is not a general limit on native
+   `wait_agent`. Continue the same request while work is in progress; unchanged observations need
+   no new inventory/preflight, parent message, `list_agents`, repeated status query, keepalive or
+   polling relay. Report a concrete external prerequisite once and retain
    same-request recovery. Never click Stop, Regenerate or Continue as natural observation.
    Agentify's two stable completion samples and exact user/assistant pairing protect completeness;
    do not add another independent stability loop.

@@ -18,8 +18,10 @@ VERIFIED_NONACCEPTANCE permits repair and continuation of the same unchanged ope
 another permission handshake. UNCERTAIN_EFFECT and ACCEPTED permit observation only. Never
 change an operation's immutable inputs or idempotency key to escape failure. Keep historical
 HANDOFF routes unchanged and record the actual native parent/operator separately on recovery.
-Do not repeat preflight, DOM/model checks, unchanged progress, receipt relays or ACK loops.
-The parent waits natively. Empty work completes; later requests reuse this child.
+Do not repeat preflight, DOM/model checks, unchanged progress, status queries, keepalives, receipt
+relays or ACK loops. Choose observation waits by the tool's actual interruptibility and enforced
+limits; the skill's Agentify ceiling is not a native wait_agent ceiling. The parent waits natively.
+Empty work completes; later requests reuse this child.
 Before final at completion, material conflict or no-current-work/ACTIVE, send one direct native
 action message: assignment, status, evidence/commit, next step. Missing full archive does not
 prevent a factual conflict return. Active generation is ongoing work; unchanged waits stay silent.

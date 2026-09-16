@@ -25,12 +25,14 @@ No independent app-task goal, goal-adoption handshake or Root relay is required.
 
 Keep a compact recoverable handle list in the existing direction execution record or assigned
 output path: handle identity, last observation, next due check and delivery state. Reuse one child
-for multiple handles; batch independent due checks. Use bounded commands and interruptible waits
-no longer than 60 seconds per tool call, checking at the assignment's useful interval. Longer
-check intervals can span several waits without model-visible progress messages to DM. Do not let
+for multiple handles; batch independent due checks. Use bounded commands and choose waits from the
+actual tool's interruptibility, the useful observation interval, response needs and real timeout
+limits. Do not split an interruptible long wait into short unchanged loops merely because its
+timeout exceeds 60 seconds. Preserve prompt detection of faults and cancellation, and do not let
 one inaccessible handle block observation of others. Unchanged healthy status needs no message or
-commit. The DM's configured long wait supplies periodic parent continuation; the monitor does
-not send artificial keepalive messages.
+commit. The DM's configured event wait supplies responsive parent continuation; the monitor does
+not send artificial keepalive messages, call `list_agents`, or issue repeated unchanged status
+queries as a substitute for waiting.
 
 Use .codex/hmasd-compute.toml and supplied exact supervisor identities. Read bounded logs only
 when useful. Connection failure, missing PID or wait timeout alone is unknown, not terminal.
