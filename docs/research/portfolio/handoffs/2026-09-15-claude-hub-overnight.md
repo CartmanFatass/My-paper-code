@@ -1,4 +1,18 @@
-# Root handoff — Claude hub overnight run (2026-09-15, refreshed 2026-09-16 05:05Z)
+# Root handoff — Claude hub overnight run (2026-09-15, refreshed 2026-09-16 05:40Z, owner pause)
+
+## Pause point (owner 2026-09-15 22:23 PDT: "Prepare to pause")
+
+- No producer on the node, no open Pro request, no open agent tab. Nothing to collect.
+- FSD: first CONFIRM object fixed by the direction node (option C, PRO_FINAL):
+  `FSD_MATCHED_INFORMATION_BASELINE_B01`. Implementation of the central-input flat comparator has
+  **not started**; the direction handoff
+  `docs/research/candidates/flexible_skill_duration/HANDOFF_2026-09-16_matched_information_baseline.md`
+  carries the code map and the L0. Resume there.
+- ACVC: lane CLOSE, closing memo queued for the owner's review; nothing runs.
+- Owner's first Portfolio review is prepared: `docs/research/portfolio/dossiers/2026-09-16_PORTFOLIO_DOSSIER.md`
+  (ACVC lifecycle, additions, budgets). It is owner-triggered; the loop does not send it.
+- Three Codex-side files still carry old vacancy wording behind another session's uncommitted
+  edits (`docs/Claude_docs/changes/2026-09-15-portfolio-control.md`, pending row).
 
 ## Control changes 2026-09-15 21:03 / 21:37 PDT (read first)
 

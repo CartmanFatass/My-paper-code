@@ -4,7 +4,7 @@
 
 **Portfolio 控制（OWNER_DIRECT 2026-09-15 21:37 PDT，[决定记录](decisions/2026-09-15-portfolio-control-and-approved-set.md)）**：Portfolio 评审仅由所有者触发；执行循环只推进 [APPROVED_SET.md](APPROVED_SET.md) 中的批准集（当前：flexible_skill_duration，CONFIRM，优先级 1）；并发是上限而非配额，不再有"三条链"目标、席位补位或空缺替换；acvc 已进入 CLOSE 离开批准集，结题备忘排队待下次评审；vap_folr_core、tail_return_distributional_learning 为停放备选。下表为各方向的科学位置快照，不再表示"占用席位"。实时执行细节见[实验跟踪](EXPERIMENT_TRACKING.md)。
 
-**流程车道（OWNER_DIRECT 2026-09-15 21:03 PDT，[决定记录](decisions/2026-09-15-workflow-lanes.md)）**：acvc → CLOSE（待送出的结果复审接受后生效；一份结题备忘 + 一次打包的 Portfolio 生命周期问题）；flexible_skill_duration → CONFIRM（首个对象：UAV 主机上调优同信息基线的 headroom 卡，≥2 训练种子或 MEI ≥ 主机种子离散）；vap_folr_core、tail_return_distributional_learning 由各自 DM 恢复时指定，默认 EXPLORE。EXPLORE 车道：PILOT 对象由 DM 对象层自选，单种子，无 Pro 轮次，三份记录；各 ACTIVE 方向有常设预算（EXPLORE 每 7 天 4 次单种子拟合；CONFIRM 每 7 天 1 个对象），取代逐对象 Portfolio 资助。
+**流程车道（OWNER_DIRECT 2026-09-15 21:03 PDT，[决定记录](decisions/2026-09-15-workflow-lanes.md)）**：acvc → CLOSE（待送出的结果复审接受后生效；一份结题备忘 + 一次打包的 Portfolio 生命周期问题）；flexible_skill_duration → CONFIRM（首个对象已由方向节点于 2026-09-16 05:19Z 固定为 `FSD_MATCHED_INFORMATION_BASELINE_B01`：standing D1280 对中央输入 flat，五个新块、45 轮、MEI .05 J、16 fit；见 [APPROVED_SET.md](APPROVED_SET.md)；实现未开始）；vap_folr_core、tail_return_distributional_learning 由各自 DM 恢复时指定，默认 EXPLORE。EXPLORE 车道：PILOT 对象由 DM 对象层自选，单种子，无 Pro 轮次，三份记录；各 ACTIVE 方向有常设预算（EXPLORE 每 7 天 4 次单种子拟合；CONFIRM 每 7 天 1 个对象），取代逐对象 Portfolio 资助。
 
 | 方向 | 当前科学位置 | 当前 producer / 下一事件 |
 | --- | --- | --- |
