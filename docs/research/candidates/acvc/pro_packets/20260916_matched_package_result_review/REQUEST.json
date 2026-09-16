@@ -1,0 +1,155 @@
+{
+  "caller_role": "em",
+  "workflow_node": "em_convergence",
+  "request_id": "2026-09-16-acvc-matched-package-result-review-01",
+  "source_thread_id": "9e0bd69f-aa60-5d32-aaf5-354fa4ffde46",
+  "parent_thread_id": "9e0bd69f-aa60-5d32-aaf5-354fa4ffde46",
+  "operator_thread_id": "9e0bd69f-aa60-5d32-aaf5-354fa4ffde46",
+  "direction_id": "acvc",
+  "repository": "CartmanFatass/My-paper-code",
+  "repository_url": "https://github.com/CartmanFatass/My-paper-code",
+  "execution_mode": "CALLER_DIRECT",
+  "owner_execution_instruction": "Owner 2026-09-15 12:57 PDT: the Claude Code research hub advances two research directions in parallel as the DM-equivalent with cross-direction allocation authority; advancing includes derivation, innovation and experimental validation, while final scientific measurement and convergence decisions can be left to GPT Pro. Pro transport in Claude Code uses Agentify Desktop through the Sonnet hmasd-pro-transport agent (owner 2026-09-05 22:57 PDT). The hub authors this request as ACVC's DM and the transport agent executes it through the Agentify strict review transport; no Codex singleton dispatch and no self-receipt.",
+  "delivery_mode": "github_delivery",
+  "conversation_id": "6aa12e74-8e54-83e8-95f6-001681b456f7",
+  "reset_invalid_provider_context": false,
+  "commit_or_ref": "91f33688d61c26d764cfe7653de3572dbe8d542d",
+  "github_delivery": {
+    "branch": "codex/acvc",
+    "base_sha": "91f33688d61c26d764cfe7653de3572dbe8d542d",
+    "response_path": "docs/research/candidates/acvc/pro_packets/20260916_matched_package_result_review/archive/RESPONSE.md",
+    "issue_url": "https://github.com/CartmanFatass/My-paper-code/issues/14"
+  },
+  "scientific_question": "Your 2026-09-16 02:48Z decision fixed ACVC_MATCHED_PACKAGE_COMPARISON_B01 (A with corrections) under Portfolio grant G3: one fresh matched block MASTER 28731 / namespace 38731, one C fit and one M fit of the unchanged recipes, six sole-final panels on the common final worlds, sole primary P = mean64[J(F(C)) - J(F(M))] at the unrounded +-.01 J boundaries, exactly six supports, no pooling with the concluded families. The block is complete and accepted: launch source 841e5c35b (independent review accepted, 27 focused tests green on the node), handles acvc-matched-c-b01-28731-841e5c35b (native wall 1,161.65 s, peak RSS 552,644 KiB) and acvc-matched-m-b01-28731-841e5c35b (1,065.69 s, 596,148 KiB), both exit 0, every count as fixed (2,195,456 scored ticks, exactly the ceiling; 24,576 optimizer steps; two snapshots; six panels; nine constructors), digests byte-identical, both originals preserved and the remote reclaimed. Result: P = -.014962985109475921 J, F_M_ABOVE_MEI (24 worlds favour F(C), 40 favour F(M), 0 zero; conditional SE .010960; extrema -.214268 / +.207615). Absolute means C .302237, F(C) .347772, own-dwell(C) .323401, M .358119, F(M) .362735, own-dwell(M) .364401. Supports: C-M -.055881 DOWN (17/47), F(C)-C +.045535 UP (49/15), F(M)-M +.004617 WITHIN_MEI (38/26), F(C)-own-dwell(C) +.024371 UP (45/19), F(M)-own-dwell(M) -.001666 WITHIN_MEI (31/33), own-dwell(C)-own-dwell(M) -.041001 DOWN (21/43); rowwise identity residual 2.8e-17. Counters: F(C) 6,395 opportunities (7.81 % of agent-ticks), own-dwell(C) 4,629, F(M) 4,569 (5.58 %), own-dwell(M) 3,602, all substituted and distinguishable. DM Briers: P .185 (modal .65 forecast occurred), C-M .135, F(C)-C .065, F(M)-M .485. The DM's bounded reading (E0, intake): under the fixed mapping the block favours developing F(M) relative to F(C); the arithmetic context is a large C-M deficit partly offset by F's large gain on C and small gain on M; the M-side wrapper shows no MEI-sized increment on this block (F(M)-M and F(M)-own-dwell(M) inside the band, dwell(M) .0017 J above F(M)), so unwrapped M or dwell(M) is a reportable competing development option; F(M)-M here is a third per-instance M-side observation (+.005 J) displayed beside +.018 (B01) and +.003 J (B02) without pooling. G3 is consumed; no retry, third fit or extra panel exists. The question for this node: the independent review of the completed block at its declared class (confirm or correct the F_M_ABOVE_MEI reading, the support readings and the DM's bounded interpretation) and the next object. Options: (A) record the block, conclude the matched-package question at this one-block reading, and state whether a defensible next numerical object remains in ACVC or the direction-level lifecycle question returns to Portfolio (DM recommendation; with F(M)-M inside the band on two of three M-side instances and F(M) above F(C) here, the practical case for maintaining either wrapper is the open question, and consolidation now seems to the DM to answer it better than another in-scope block); (B) a second matched block for recurrence of P (a new Portfolio investment would be required); (C) an M-side development object without the wrapper, unwrapped M or dwell(M) as the package under a specification you fix (new investment required); (D) another object. Selecting B, C or D fixes the object only; the hub takes any new fit to Portfolio before launch.",
+  "deliverable": "Return one complete conclusion-first independent scientific review and direction decision, normally 700-1200 words: the reading of the block at its declared class (confirm or correct F_M_ABOVE_MEI, the six support readings and the display beside the concluded families), corrections to the DM's E0/intake wording if any, the selected next object (A / B / C / D) with decisive reasons, the strongest contrary evidence and unknowns, and, if A, an explicit statement on whether a defensible next object remains in ACVC or whether the lifecycle question goes to Portfolio. Do not grant investment, launch anything, change lifecycle, priority or capacity, or re-score the C/M blocks or the transfer instances. Read the named fixed sources, state real access limits, and cite the numbers you rely on.",
+  "claim_ceiling": "Independent review of one completed B/EXPLORE matched-package block (one attained C policy and one attained M policy deployed through the same fixed transformation on common final worlds; conditional-world precision only) and a direction-tier selection of the next object or a conclusion of the question. Not stable superiority, not a training-population mean, not a discardable C or M, not tuned headroom, equivalence, a K/N/retrace/memory mechanism claim, C promotion, default or safety change, transfer or recurrence; the concluded C/M two-block claim and both transfer readings keep their labels. No lifecycle change or investment grant.",
+  "constraints": [
+    "Direction-tier only: the reading of the completed block, the next object or the conclusion of the matched-package question, and an explicit statement on remaining defensible objects. Investment, capacity, priority, lifecycle, fusion and registration belong to portfolio:cross_direction and are not decided here; if you select a new fit, the hub takes it to Portfolio before any launch. Consultation exposure of this request: zero fits, models, environment steps, optimizer steps, tests or profiling; only static reading.",
+    "Frozen and unchanged: the C and M recipe bytes, the Binding law and its numerical convention, both panel laws, native reward and termination, CPU FP32 single-thread numerics, the .01 J MEI and the unrounded reading rule, the six-support set and the no-pooling display fixed by your previous decision. No reanalysis that pools worlds across objects, accumulates with the C/M blocks or the transfer instances, or selects a best instance.",
+    "Evidence-spec sections 11.8-11.11 govern: one block is the bounded follow-up; no seed must be positive; no universal seed count, estimator, bootstrap, significance or pilot gate; package versus component claims stay distinct.",
+    "Working set: the Claude Code hub drives FSD (ACTIVE-idle) and ACVC (owner capacity: two directions per Claude session); Portfolio has already advised that the dormant second assignment go to the owner for a separate working-set decision. ACVC's recasts-2 lowest sequencing priority and ACTIVE/MEDIUM lifecycle are unchanged by any answer; a lifecycle disposition, if you judge one due, is a recommendation for the hub to take to Portfolio, not a decision here.",
+    "Answer in natural language with the numbers you rely on; cite the fixed sources by their linked paths."
+  ],
+  "response_schema": [
+    "Conclusion (reading of the block confirmed or corrected; next object A / B / C / D) and actual fixed-source access/limits.",
+    "Independent review of the completed block: primary, six supports, counters, integrity, costs, the display beside the concluded families; corrections to the DM's E0/intake wording.",
+    "Selected next object with decisive reasons, the choice it changes, strongest contrary evidence, unknowns; if A, whether a defensible next object remains in ACVC or the lifecycle question goes to Portfolio.",
+    "Retained limits and what remains unchanged (the C/M claim, the transfer readings, lifecycle, sequencing)."
+  ],
+  "reference_files": [
+    {
+      "path": "docs/research/candidates/acvc/ACVC_MATCHED_PACKAGE_COMPARISON_B01_RESULT_EVIDENCE_20260916.md",
+      "purpose": "Read completely: the bound object, rule and reading; absolute scores, every contrast with SD/SE/counts/extrema; counters; the display beside the concluded families; exposure and integrity; costs; the bounded reading and scored predictions.",
+      "provenance": "Accepted E0 evidence by the Claude Code hub as DM.",
+      "commit_sha": "91f33688d61c26d764cfe7653de3572dbe8d542d"
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_MATCHED_PACKAGE_COMPARISON_B01_INTAKE_20260916.md",
+      "purpose": "The DM intake: what was checked, the four boundaries, the options A/B/C/D with the DM recommendation.",
+      "provenance": "Hub intake as DM.",
+      "commit_sha": "91f33688d61c26d764cfe7653de3572dbe8d542d"
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_MATCHED_PACKAGE_COMPARISON_B01_PROSPECTIVE_CARD_20260915.md",
+      "purpose": "The card as fixed by this node (corrections applied with dated markers; section 7 resolution).",
+      "provenance": "Card fixed by em:acvc:convergence, PRO_FINAL.",
+      "commit_sha": "91f33688d61c26d764cfe7653de3572dbe8d542d"
+    },
+    {
+      "path": "docs/research/candidates/acvc/evidence/matched_package_comparison_b01_20260916/reduce/summary.json",
+      "purpose": "The paired publication: P, six supports with paired vectors, panels with source keys, identity residual, input provenance.",
+      "provenance": "Output of the thin entry's --mode reduce over the two collected summaries.",
+      "commit_sha": "91f33688d61c26d764cfe7653de3572dbe8d542d"
+    },
+    {
+      "path": "docs/research/candidates/acvc/evidence/matched_package_comparison_b01_20260916/WORLD_DIFFERENCES.json",
+      "purpose": "Every absolute panel score and matched difference for the 64 worlds.",
+      "provenance": "Published from the reduce output.",
+      "commit_sha": "91f33688d61c26d764cfe7653de3572dbe8d542d"
+    },
+    {
+      "path": "docs/research/candidates/acvc/evidence/matched_package_comparison_b01_20260916/native/C/summary.json",
+      "purpose": "The C original's native summary: counts, panels, interventions, exposure, timing boundary.",
+      "provenance": "Collected native output (digest equal to the remote listing).",
+      "commit_sha": "91f33688d61c26d764cfe7653de3572dbe8d542d"
+    },
+    {
+      "path": "docs/research/candidates/acvc/evidence/matched_package_comparison_b01_20260916/native/M/summary.json",
+      "purpose": "The M original's native summary.",
+      "provenance": "Collected native output (digest equal to the remote listing).",
+      "commit_sha": "91f33688d61c26d764cfe7653de3572dbe8d542d"
+    },
+    {
+      "path": "docs/research/candidates/acvc/evidence/matched_package_comparison_b01_20260916/PREDICTIONS.json",
+      "purpose": "Prospective forecasts (committed before results) and their scoring.",
+      "provenance": "Hub record.",
+      "commit_sha": "91f33688d61c26d764cfe7653de3572dbe8d542d"
+    },
+    {
+      "path": "docs/research/candidates/acvc/evidence/matched_package_comparison_b01_20260916/EXECUTION.md",
+      "purpose": "Cost projection, review resolution, launch and terminal rows, frozen commands.",
+      "provenance": "Hub execution record.",
+      "commit_sha": "91f33688d61c26d764cfe7653de3572dbe8d542d"
+    },
+    {
+      "path": "docs/research/candidates/acvc/pro_packets/20260915_matched_package_card_convergence/archive/RESPONSE.md",
+      "purpose": "Your previous decision fixing this object, its reading rules and the development-advice mapping.",
+      "provenance": "Complete archived em:acvc:convergence response, PRO_FINAL.",
+      "commit_sha": "91f33688d61c26d764cfe7653de3572dbe8d542d"
+    },
+    {
+      "path": "docs/research/candidates/acvc/pro_packets/20260915_m_deployment_transfer_b02_result_review/archive/RESPONSE.md",
+      "purpose": "Your conclusion of the transfer family and the carried C alternative.",
+      "provenance": "Complete archived em:acvc:convergence response, PRO_FINAL.",
+      "commit_sha": "91f33688d61c26d764cfe7653de3572dbe8d542d"
+    },
+    {
+      "path": "docs/research/portfolio/pro_packets/20260915_acvc_direction_investment_lifecycle/archive/RESPONSE.md",
+      "purpose": "The Portfolio G3 decision: envelope, stopping rule, working-set advice.",
+      "provenance": "Complete archived portfolio:cross_direction response, PRO_FINAL / OWNER_DELEGATED.",
+      "commit_sha": "91f33688d61c26d764cfe7653de3572dbe8d542d"
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_M_DEPLOYMENT_TRANSFER_B02_RESULT_EVIDENCE_20260915.md",
+      "purpose": "Second transfer instance (F(M)-M +.002859 J) for the per-instance display.",
+      "provenance": "Accepted E0 evidence.",
+      "commit_sha": "91f33688d61c26d764cfe7653de3572dbe8d542d"
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_M_DEPLOYMENT_TRANSFER_B01_RESULT_EVIDENCE_20260915.md",
+      "purpose": "First transfer instance (F(M)-M +.018338 J).",
+      "provenance": "Accepted E0 evidence.",
+      "commit_sha": "91f33688d61c26d764cfe7653de3572dbe8d542d"
+    },
+    {
+      "path": "docs/research/candidates/acvc/ACVC_CLUSTER_MAPPO_COMPARISON_B02_RESULT_EVIDENCE_20260915.md",
+      "purpose": "Block-2 C/M scores and contrasts, two-block accumulation, costs.",
+      "provenance": "Accepted E0 evidence.",
+      "commit_sha": "91f33688d61c26d764cfe7653de3572dbe8d542d"
+    },
+    {
+      "path": "docs/research/candidates/acvc/DIRECTION.md",
+      "purpose": "Current direction state after this intake; the concluded families; lifecycle.",
+      "provenance": "Direction authority maintained by the hub as DM.",
+      "commit_sha": "91f33688d61c26d764cfe7653de3572dbe8d542d"
+    },
+    {
+      "path": "docs/research/portfolio/decisions/2026-09-15-acvc-direction-investment-lifecycle.md",
+      "purpose": "The G3 decision record on main.",
+      "provenance": "Portfolio decision record.",
+      "commit_sha": "79335b37f14240b4109dc6fb4857bbb2ee406da3"
+    },
+    {
+      "path": "docs/research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md",
+      "purpose": "Sections 4, 7, 8.1, 11.4, 11.7-11.11.",
+      "provenance": "Controlling evidence specification.",
+      "commit_sha": "79335b37f14240b4109dc6fb4857bbb2ee406da3"
+    },
+    {
+      "path": "docs/research/portfolio/TWO_AXIS_RESEARCH_PROGRAMME_20260914.md",
+      "purpose": "The owner-approved two-axis programme.",
+      "provenance": "Portfolio programme.",
+      "commit_sha": "79335b37f14240b4109dc6fb4857bbb2ee406da3"
+    }
+  ]
+}

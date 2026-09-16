@@ -109,7 +109,7 @@ under `docs/Claude_docs/changes/`). Nothing here changes lifecycle, priority or 
   −.041 DOWN; native walls C 1,161.65 s / M 1,065.69 s; E0
   `ACVC_MATCHED_PACKAGE_COMPARISON_B01_RESULT_EVIDENCE_20260916.md`, ledger row 41; both originals preserved,
   remote reclaimed; G3 consumed; no producer.
-- Result review: the result-review request to `em:acvc:convergence` is being authored.
+- Result review: the result-review request `2026-09-16-acvc-matched-package-result-review-01` was sent once to `em:acvc:convergence` (conversation 6aa12e74-8e54-83e8-95f6-001681b456f7, TASK 7100c6099, handoff bound at 1a8d19c12, operation e317e2ed-484a-4ba0-8b54-29301bb3ffff, sent 2026-09-16T03:53:17Z); awaiting the archived answer.
 - Direction handoff: `docs/research/candidates/acvc/HANDOFF_2026-09-15_post_cm_decision.md`.
 
 ## Transport and registry
