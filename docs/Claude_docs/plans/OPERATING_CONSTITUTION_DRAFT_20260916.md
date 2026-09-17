@@ -16,9 +16,14 @@ confirmation is a bounded final step, not the default mode.
 
 - **Owner** chooses directions, pauses/resumes research, and adopts/amends this page.
   Ordinary ideas, implementation, interpretation and within-budget runs do not await owner approval.
-- **Hub/DM** owns a direction end to end: idea, code, run, reading and records. Codex may use
-  a DM child with that same scope; do not duplicate ownership. One named lead/writer per
-  direction; at most two active directions across all runtimes, not two per runtime.
+- **DM** owns a direction end to end: idea, code, run, reading and records. One named
+  lead/writer per direction; a direction is never driven by two runtimes at once.
+- **Codex side (owner clarification 2026-09-16 17:50 PDT):** a Root session coordinates and
+  each DM child owns one direction. Soft ceiling: three concurrent DMs. When fewer than three
+  are active, Root may start a DM for a direction already chosen by an owner-triggered
+  Portfolio review (the reserve list in RESEARCH.md); there is no requirement to fill three.
+- **Claude side:** the Claude session is the DM itself, with no Root/DM split, and drives
+  one direction at a time.
 - **Transport / Monitor** absorb waits and return facts, without scientific authority.
   **Reviewer** independently checks changes to shared learners, runners, environments or evaluators.
 - **Retire Grok clerk and Sonnet clerk as standing roles.** Mechanical edits belong to the
@@ -55,7 +60,7 @@ launch failure consumes no fit; retain its error and wall time. Fix before retry
    and uncertainty method; append the result without rewriting the original plan.
 
 `docs/research/RESEARCH.md` is the only current index: direction, question, state
-(`exploring / confirming / archived`), lead, and one-line standing/next step with evidence links.
+(`exploring / confirming / reserve / archived`), lead runtime, and one-line standing/next step with evidence links.
 Record any owner pause there; a state label does not cancel a pause. It replaces PORTFOLIO,
 APPROVED_SET, tracking, dossiers and lifecycle-decision paperwork. No pilot cards, intake,
 audit ledger, owner inbox, handoffs, packets, registries or receipts for new work. Historical files stay unmaintained.
@@ -125,16 +130,19 @@ remove retired roles from active registration. Keep old documents historical, no
 active through AGENTS or skills. Populate RESEARCH.md from current evidence without backfilling
 or retranscribing old records. This is a small activation change, not a repository-wide rewrite.
 
-Exactly two directions remain active; all others become archived for investment purposes,
-not scientifically disproved. TRDL remains a recoverable reserve, not a third active slot.
+Two directions are active at adoption; all others become archived for investment purposes,
+not scientifically disproved. `tail_return_distributional_learning` (TRDL) is the one reserve
+direction: Codex Root may start a DM for it under the three-DM soft ceiling when a worthwhile
+discriminating idea exists, and is under no obligation to do so. The reserve list is
+amended only by an owner-triggered Portfolio review.
 
 | Direction | Initial standing after adoption |
 | --- | --- |
-| `flexible_skill_duration` | Priority 1, confirming: preserve [FSD matched-information B01](../../research/candidates/flexible_skill_duration/FSD_MATCHED_INFORMATION_BASELINE_B01_PROSPECTIVE_CARD_20260916.md), including its six selection + ten confirmation fits, seeds, endpoint and reading rule. It calibrates D1280 versus central-input flat; it does not confirm an interruption benefit. |
-| `vap_folr_core` | Priority 2, exploring: retain the N-axis membership-change/history question. [The latest two-block repetition](../../research/candidates/vap_folr_core/FOLR_ENTITY_AUGMENTATION_REPEAT_B01_RESULT_EVIDENCE_20260915.md) did not reproduce the old positive. Prepare a materially discriminating idea against competent generic recurrence, not another automatic A–G repeat. With no worthwhile idea, leave it idle. |
+| `flexible_skill_duration` | Priority 1, confirming, lead: Claude session (current lead) or a Codex DM, never both: preserve [FSD matched-information B01](../../research/candidates/flexible_skill_duration/FSD_MATCHED_INFORMATION_BASELINE_B01_PROSPECTIVE_CARD_20260916.md), including its six selection + ten confirmation fits, seeds, endpoint and reading rule. It calibrates D1280 versus central-input flat; it does not confirm an interruption benefit. |
+| `vap_folr_core` | Priority 2, exploring, lead: Codex DM: retain the N-axis membership-change/history question. [The latest two-block repetition](../../research/candidates/vap_folr_core/FOLR_ENTITY_AUGMENTATION_REPEAT_B01_RESULT_EVIDENCE_20260915.md) did not reproduce the old positive. Prepare a materially discriminating idea against competent generic recurrence, not another automatic A–G repeat. With no worthwhile idea, leave it idle. |
 
 **Adoption does not lift an owner pause.** After explicit resumption, the first execution
-batch is FSD B01, not simultaneous portfolio refilling. Its frozen card stands in for a new
+batch is FSD B01, not simultaneous filling of every DM slot. Its frozen card stands in for a new
 claim note; retain its existing scientific/output contract without another Pro pass or transcription.
 No worktree, branch or result deletion is part of adoption. Later cleanup requires fresh checks
 that unique commits and dirty evidence are preserved and no live work depends on the checkout;
