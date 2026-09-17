@@ -26,6 +26,15 @@ against a competent matched-information baseline; a positive effect is not owed.
 may support exploration, not an unmeasured UAV claim. Fast idea turnover is primary;
 confirmation is a bounded final step, not the default mode.
 
+Owner clarification: this is one person's rapid research project, not a collaborative
+organization or production service. The control plane exists to shorten the path from an idea
+to a readable observation. Roles and tools relieve work; they are not departments with routine
+handoff or approval obligations. Git commits, branches and recoverable known-good versions are
+the normal basis for core-code stability; use proportionate correctness checks for what changes.
+Do not build a parallel administrative system to provide guarantees Git already supplies.
+Keep bindings only where they preserve an experiment's meaning or reconcile an actual in-flight
+operation. A method, tool, conversation or historical workflow is not a permanent attachment.
+
 ## 2. Who does what
 
 - **Owner** chooses directions, pauses/resumes research, and adopts/amends this page.
