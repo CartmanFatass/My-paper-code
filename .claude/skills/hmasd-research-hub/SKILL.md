@@ -19,8 +19,8 @@ admission. Finishing an idea or batch grants no successor, retry, new host or ex
 
 Method: .agents/skills/hmasd-scientific-tools/SKILL.md for design, comparators, counts and
 reading; .agents/skills/hmasd-research-engineering/SKILL.md for code, review and launch. Read
-only the current NOTES.md, claim note and owned code; no spec or citation preload. Write the
-five L0 lines and hand each bounded code task to hmasd-implementer (Opus, high effort) to spare your context; review its diff, run or read its checks,
+only the current NOTES.md, claim note and owned code; no spec or citation preload. Write a
+concise L0 scope note and hand each bounded code task to hmasd-implementer (Opus, high effort) to spare your context; review its diff, run or read its checks,
 and accept it yourself. Independent Reviewer for core or semantic changes. Scout, Critic,
 Verifier and Operator are optional bounded leaves that return to you.
 

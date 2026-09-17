@@ -9,6 +9,8 @@ research pause of 2026-09-15 22:23 PDT.
 
 Amendments: 2026-09-16 18:32 PDT (owner): Implementer role added to section 2; carried-over
 engineering standards named in section 6.
+2026-09-16 (owner request): remove engineering size, time and formatting quotas; retain
+scientific allowances, runtime responsibilities and actual resource-safety checks.
 
 ## 1. What this project is
 
@@ -32,8 +34,8 @@ confirmation is a bounded final step, not the default mode.
   one direction at a time.
 - **Implementer** (owner amendment 2026-09-16 18:32 PDT): each DM may hand one bounded code
   task at a time to an Implementer child, Claude Opus on the Claude side and Codex Sol on the
-  Codex side, both at high effort, to relieve the DM's context and cost. The DM writes the five
-  L0 lines, the Implementer returns a diff and its checks, the DM reviews, accepts and owns the
+  Codex side, both at high effort, to relieve the DM's context and cost. The DM writes a concise
+  L0 scope note, the Implementer returns a diff and its checks, the DM reviews, accepts and owns the
   result. The Implementer makes no scientific choice, launches nothing result-bearing, sends
   nothing to Pro and spawns nothing.
 - **Transport / Monitor** absorb waits and return facts, without scientific authority.
@@ -98,10 +100,11 @@ Preserve interfaces; run a relevant smoke test and obtain independent review whe
 No compatibility promise or generic registry, lease, retry, resumability or telemetry infrastructure
 without a concrete experimental need. Small correctness tests/assertions remain allowed.
 Engineering standards carried over from the earlier specifications (owner 2026-09-16 18:32 PDT)
-are kept in `hmasd-research-engineering`: size budgets and orchestration share as review
-signals, the research test time budget, exact-sha staging of declared artifacts, the
-telemetry rule, quarantine of incomplete attempts and diagnosis by reproduction. They are
-review signals and record rules, never launch gates.
+are kept in `hmasd-research-engineering`: maintainable scope, proportionate correctness
+checks, exact-sha staging of declared artifacts, the telemetry rule, quarantine of incomplete
+attempts and diagnosis by reproduction. Engineering review uses actual complexity and risk,
+not line counts, orchestration percentages, elapsed-test ceilings or fixed note/test counts.
+This does not relax scientific allowances or genuine resource-safety and external-effect checks.
 
 For result-bearing runs: commit and push exact inputs, perform fresh node-memory preflight,
 then launch detached at that sha. Archiving stops maintenance; it does not destroy evidence.
@@ -111,9 +114,9 @@ Keep result-bearing code recoverable at its sha and preserve required outputs be
 
 Incidents normally produce a tool fix or an explicitly accepted risk, not another gate,
 role or process document. A necessary rule change requires owner amendment to this page.
-No new standing record types. Root AGENTS plus CLAUDE entry text together stay below 4 KB;
-task skills contain execution methods, not a shadow constitution. Agents may propose a change
-in one sentence; they do not initiate governance redesign. Owner-requested drafting, including
+No new standing record types. Keep root AGENTS and CLAUDE entry text concise and navigational;
+task skills contain execution methods, not a shadow constitution. Agents may briefly propose
+a change; they do not initiate governance redesign. Owner-requested drafting, including
 this revision, is allowed. Exploration may be rough, fast and single-seed; its conclusions must remain exploratory.
 
 ## 8. Scientific minimums — five, not a certification ladder
@@ -155,8 +158,8 @@ amended only by an owner-triggered Portfolio review.
 
 | Direction | Initial standing after adoption |
 | --- | --- |
-| `flexible_skill_duration` | Priority 1, confirming, lead: Claude session (current lead) or a Codex DM, never both: preserve [FSD matched-information B01](../../research/candidates/flexible_skill_duration/FSD_MATCHED_INFORMATION_BASELINE_B01_PROSPECTIVE_CARD_20260916.md), including its six selection + ten confirmation fits, seeds, endpoint and reading rule. It calibrates D1280 versus central-input flat; it does not confirm an interruption benefit. |
-| `vap_folr_core` | Priority 2, exploring, lead: Codex DM: retain the N-axis membership-change/history question. [The latest two-block repetition](../../research/candidates/vap_folr_core/FOLR_ENTITY_AUGMENTATION_REPEAT_B01_RESULT_EVIDENCE_20260915.md) did not reproduce the old positive. Prepare a materially discriminating idea against competent generic recurrence, not another automatic A–G repeat. With no worthwhile idea, leave it idle. |
+| `flexible_skill_duration` | Priority 1, confirming, lead: Claude session (current lead) or a Codex DM, never both: preserve [FSD matched-information B01](../research/candidates/flexible_skill_duration/FSD_MATCHED_INFORMATION_BASELINE_B01_PROSPECTIVE_CARD_20260916.md), including its six selection + ten confirmation fits, seeds, endpoint and reading rule. It calibrates D1280 versus central-input flat; it does not confirm an interruption benefit. |
+| `vap_folr_core` | Priority 2, exploring, lead: Codex DM: retain the N-axis membership-change/history question. [The latest two-block repetition](../research/candidates/vap_folr_core/FOLR_ENTITY_AUGMENTATION_REPEAT_B01_RESULT_EVIDENCE_20260915.md) did not reproduce the old positive. Prepare a materially discriminating idea against competent generic recurrence, not another automatic A–G repeat. With no worthwhile idea, leave it idle. |
 
 **Adoption does not lift an owner pause.** After explicit resumption, the first execution
 batch is FSD B01, not simultaneous filling of every DM slot. Its frozen card stands in for a new
