@@ -33,7 +33,9 @@ recorded. Run the relevant smoke test. Core acquires no research dependencies.
 **Experimental** code under `experiments/candidates/<direction>/` is disposable: no
 compatibility promise, no shared abstractions built for reuse. Provide explicit argparse runner entry
 points with seed, launch sha and a `summary.json` carrying the readings named in the notebook entry
-or claim note, including learner movement relative to initialisation. Small correctness tests
+or claim note, including learner movement relative to initialisation and actual transition,
+optimizer-update and evaluation counts when reporting learning or fixed-policy evaluation.
+Zero new updates in fixed-policy evaluation are explicit, not new training. Small correctness tests
 and assertions are welcome. Archiving stops maintenance; the sha that produced a recorded
 result stays recoverable, and its required outputs are preserved before scratch is deleted.
 
@@ -76,8 +78,17 @@ Self-check the changed behaviour and the primary output with proportionate focus
 Trace collector, storage, recurrent replay, loss and update, evaluator and publication. Look at
 actor and critic leakage, snapshot cadence, masks, resets, normaliser state, termination and
 truncation bootstrap, RNG addresses, optimizer exposure and train/eval isolation. For numerical
-changes inspect intermediates over the real domain with tolerances chosen from dtype and
-scale, not bit equality. A failed publication limits only the claim that depends on it.
+changes inspect intermediates and affected gradients over the real domain, choosing tolerances
+from dtype, scale, conditioning, accumulation and actual action/order/metric consequences.
+Distinguish deterministic numerical replay for a code path, statistical replication across
+independent training runs, and algorithm/semantic equivalence. A fixed input sha does not promise
+equal outputs; neither ordinary performance replication nor a device change implies universal
+bit equality or a project-wide tolerance. A failed publication limits only its dependent claim.
+
+An independent numerical checker cannot reuse the candidate answer as its proof. Keep outputs
+promised as diagnostics even when the main branch does not consume them. Future experiments
+may drop unnecessary diagnostics with an honest narrower claim; omitting required work is not
+an equivalent optimization of the original experiment.
 
 **Independent review** (`hmasd-reviewer`, read-only) is required for a change to core, to
 scientific meaning, numerics, RNG, replay or recurrent state, checkpoint or result identity, or
@@ -104,6 +115,26 @@ Runtime notes: ordinary in-process batching and a fixed synchronous native team 
 named function are fine; no dynamic executor service, no standing profiler, no automatic GPU,
 JIT, language or dependency migration. Report measured wall and peak RSS with their scope.
 Preserve live handles; a killed run stays killed.
+
+Batch only genuinely independent axes with explicit state ownership. Preserve causal,
+autoregressive and recurrent order unless an applicable equivalence argument supports the
+change. Check RNG consumption, masks/reset/bootstrap, sample/update frequency, replay ratio,
+policy freshness, reductions and tail handling; padding or dropping samples is not automatically
+equivalent. A fixed native team has bounded participants/lifetime, private mutable state and
+outputs, necessary synchronization, and logical-order merging of results/errors. Account for
+nested BLAS/OpenMP teams to avoid oversubscription; existing object-specific topology stands.
+
+Optimize the complete actual path: locate repeated construction, fine cross-language calls,
+Python loops, pack/copy and equivalent reuse at measured hotspots. Consider sampler, training,
+buffer and output placement with transfers and synchronization when choosing a device. A forward
+microbenchmark or increased samples/updates/model copies does not establish faster equal-work
+training. Use existing evidence where adequate; no compulsory device or worker-count sweep.
+
+Ordinary wall estimates and engineering watchdog plans can be adjusted prospectively, including
+during a live run, using progress, resource health and remaining work; note time and reason in
+the existing run entry. This never changes frozen training/evaluation exposure, a wall-based
+scientific endpoint, or genuine owner/platform hard limits. Exceeding an estimate alone does
+not invalidate a run. A terminated invocation remains terminated; adjustment does not grant a retry.
 
 ## Stops
 

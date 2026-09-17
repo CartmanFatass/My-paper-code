@@ -19,6 +19,8 @@ its confirmation batch. Pro reads only the repository at the sha you send.
    Conversation: <URL from the NOTES.md header, or "new">
    Question: <one sentence; what choice it changes>
    Standing: <two to five lines with sha-pinned links to the notebook entries, runs and claim note>
+   Method: <applicable scientific/engineering method sections or short inline constraints;
+     claim limits, relevant evidence, dominant proposed work and unknowns>
    Allowance: <fits available for what follows>
    Constraints: seeds and matched baseline per constitution section 8; no training, no edits
      outside the empty "### Answer" subsection; write only there on branch <branch>.
@@ -49,6 +51,16 @@ its confirmation batch. Pro reads only the repository at the sha you send.
    Use the current branch/file version; never overwrite concurrent changes with the pinned copy.
 6. **Respond in writing.** The next notebook entry records what you adopt, modify or reject and
    why. The DM chooses; Pro's answer is advice.
+
+## Method context
+
+Pro does not inherit local skills or role instructions. In the existing question, inline the
+brief methods that matter or explicitly ask it to read named sections of the scientific-tools
+and, when relevant, research-engineering skills at a full published sha. Keep current methods
+distinct from frozen experiment inputs; supply only relevant foundation/primary passages.
+Check referenced paths exist at the published revision. Include the strongest alternative and
+discriminator; fit counts alone need not describe a nested search or sweep's dominant cost.
+This is question context, not a packet, recursive reading assignment or additional Pro round.
 
 ## Never
 

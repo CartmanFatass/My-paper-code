@@ -4,6 +4,8 @@
 历史比较基点为 `b24c4c8be1387b3f0963c8ce9229581a82001acd`，原审计见
 [前后审计](../Claude_docs/reviews/CONTROL_PLANE_REWRITE_AUDIT_20260916.md)。
 源码、生成结果、运行中会话的有效设置必须区分；本图不声称验证过用户机上的会话。
+如何使用与修改这些文件，见 [CONTROL_PLANE_GUIDANCE.md](CONTROL_PLANE_GUIDANCE.md)。
+本图说明“在哪里、如何连接”；guidance 说明“为什么这样分工、改动会影响谁、如何避免丢失方法”。
 
 ## 权威、维护源与生成链
 

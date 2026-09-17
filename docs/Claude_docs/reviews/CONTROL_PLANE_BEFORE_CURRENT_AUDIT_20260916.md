@@ -4,6 +4,8 @@
 
 **审计重点更正：下列原报告主要检查手续与工具迁移，不能证明科学、工程方法完整迁移。请先读本文末尾的「科学 spec、工程 spec 与 skills 的内容保留复核」。该复核固定到 `7d30691bc87d7de441c0f27b666a237aef4c247a`，结论是：底线保留，但有实质方法内容未被当前 skills 完整承接。原报告保留为此前快照，不把其已修复的接口问题冒充当前问题。**
 
+后续 owner 已同意补回方法并要求说明手册；实施去向见末尾「Owner 同意后的迁移」。上述缺口表仍描述其固定审计快照。
+
 ## 固定版本与结论
 
 - 修改前：`70654c8d9cc7852f41fe74c7f920f04af2409764`，2026-09-16 03:56 PDT。
@@ -212,3 +214,33 @@ Claude 两份变化记录对“comparators/statistics/cost kept”的说法，�
 适合当前 research project 的处理是：**把有用判断方法补进现有四个 skills，继续使用 NOTES、runs、CLAIM，
 不恢复旧流程。** 本次只修改这份 owner 请求的对比报告，没有修改 Constitution/skills、增加研究任务、Send 或运行实验。
 核验为旧/新源码与记录逐节对照、当前角色和阅读入口交叉检索；没有用 publisher drift 或通过的测试替代内容审计。
+
+### Owner 同意后的迁移
+
+Owner 在听取逐项原因后同意实施，并要求 guidance，另询问与此前 Pro 修整原则的一致性。
+本次控制任务范围：修改四个共享方法及其生成副本，补充 MAP/根入口导航，编写
+[CONTROL_PLANE_GUIDANCE](../../project/CONTROL_PLANE_GUIDANCE.md)；不改 Constitution、冻结科学合约、
+fits/seed 额度、runtime 参数或外部工具，不恢复研究、不 Send。检查为内容对应、技能格式、
+现有生成/对齐测试、链接与独立方法审阅；不存在新的实现框架或科学运行预算。
+
+| 审计分组 | 已承接到现有位置 |
+| --- | --- |
+| S1/S2 与启发式研究取向 | scientific-tools Explore；engineering 的 summary 计数，固定策略零更新如实标明 |
+| S3 | scientific-tools Confirm：总体、评价预算、checkpoint/停止协议、development/final evaluation 分离 |
+| S4/S5/S6 | scientific-tools Statistics / Comparators / Cost：效应解释与条件性等效判断、headroom 定义、设计工作量 |
+| E1/E4 | engineering Runtime notes：batch/团队语义、完整路径性能判断、工程 wall 估计与科学终点区别 |
+| E2/E3 | engineering Checks：独立 checker、必需诊断、三种复现及数值/决策层检查 |
+| O1 | pro author Method context 与原 question 模板；Portfolio 显式复用方法上下文 |
+| O2 | Portfolio 原 review section 内的决策理由，不恢复 owner-item 或 packet |
+
+不是把十二组都判成 Claude 无意误删：已证明的是内容缺失或承接不足，删除意图的证据有强有弱。
+本次按 owner 当前同意保留的研究价值补回，继续保留有意的手续简化。
+现行治理与旧迁移原则的一致处、Pro 原稿及 owner 后续有意改变之处，见 guidance 首节；
+手册是解释和导航，方法仍只有共享 skills 一个手工维护来源。
+
+四个 skills 的现有格式验证通过；publisher 同步四份 Claude skills，`--check` 为 `drift: 0`；
+现有 publication/alignment/scientific-tools 检查 **21 passed**。这些检查不替代方法内容审阅，
+独立 Reviewer 对照旧方法、Pro 修订、现行 Constitution 与实际消费者，未发现实质问题或新增门槛；
+本次不宣称其他运行中会话已经重载。本次测试 scratch 为
+`temp/tests/method-guidance-20260916-7380106`；经路径限定的清理命令被自动审批以
+`blocked by policy` 拒绝，因此保留该目录，未换工具绕过。

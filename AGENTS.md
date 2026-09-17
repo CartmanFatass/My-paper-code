@@ -49,5 +49,6 @@ history rewrite without the owner's explicit request. Push every commit at once.
 with the runtime attribution and `scope: none` or `scope: <item> per <NOTES.md entry>`.
 Respect the LF paths in `.gitattributes`. Tests own their scratch under `temp/` and clean it.
 
-Control-plane navigation: `docs/project/CONTROL_PLANE_MAP.md` is a descriptive reference,
+Control-plane navigation: `docs/project/CONTROL_PLANE_MAP.md` maps sources and runtime routes;
+`docs/project/CONTROL_PLANE_GUIDANCE.md` explains operation and maintenance. Both are descriptive,
 not another authority or a mandatory preload.

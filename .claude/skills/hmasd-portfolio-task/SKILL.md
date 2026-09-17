@@ -23,10 +23,18 @@ as `NOTES.md` entries.
    Conversation: <Portfolio conversation URL, one long-lived conversation>
    Standing: <one line per active and reserve direction with sha-pinned links>
    Decisions asked: <activate, archive, reserve, priority order, per-idea allowance changes>
-   Options: <each with its consequence; the DM recommendations and reasons>
+   Options: <each with its consequence; recommendation, supporting/contrary evidence,
+     uncertainty, known complete cost, substitutability/reversibility, smallest useful next
+     investment and what would justify revisiting the choice; include only relevant dimensions>
    ### Answer
    ### Decision
    ```
+
+   Use these comparisons to judge the value of the next investment, not merely the best observed
+   score. Explain practical effect importance or headroom only where it bears on that choice;
+   an untuned reference gap or a proof unrelated to the claim is not an investment verdict.
+   Include the applicable method context as described in `hmasd-pro-research-prompt-author`,
+   within this same section; Pro does not inherit local skills. No separate packet or review trigger.
 
 3. **Publish through the shared integrator.** Root owns main/RESEARCH.md while it is
    coordinating Codex; otherwise the explicitly acting Claude integrator may publish from its

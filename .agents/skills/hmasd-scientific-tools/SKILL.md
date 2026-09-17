@@ -21,11 +21,25 @@ method; it adds no rule. Records are the notebook, the runs folder and the claim
 4. Kill, revise materially, or move on. A killed idea reopens only for a recorded new reason.
    Do not extend a batch after seeing its scores; do not rename a failed idea to reset its fits.
 
+For mechanism questions trace environment event -> entity ownership -> available information
+-> action/credit -> learning -> native consequence. For changing rosters distinguish entity
+from slot, join/leave/rejoin, survivor history, censoring and partner co-adaptation; distinguish
+primitive time from decision opportunities. Use the distinctions relevant to the proposed effect,
+not a form to fill for every run. A plausible heuristic or suboptimal scheme is a legitimate
+empirical candidate; exploration needs no general optimality, invariance or convergence proof.
+
+For learning observations check that the actual environment, policy, learner/trainer and
+evaluator ran: read transition, optimizer-update and evaluation counts and learner movement
+from the run summary. Claimed training needs actual updates; recurrent-state evolution alone
+is not parameter learning. Fixed-policy evaluation reports zero new updates and its conditional
+scope, never new learning. Use an informative horizon, without a prerequisite learnability run.
+
 ## Confirm a claim
 
 Write `CLAIM_<slug>.md` before the confirmation batch: hypothesis, candidate arm, the one
-primary matched-information baseline, seeds per arm (three to five, fresh and independent),
-training horizon, endpoint and evaluation protocol, selection and tuning exposure, decision rule,
+primary matched-information baseline, task population, seeds per arm (three to five, fresh and independent),
+training horizon, endpoint and evaluation budget/protocol, checkpoint selection and stopping rule,
+selection and tuning exposure with development separated from final evaluation, decision rule,
 uncertainty method, and what each outcome branch means. Run the batch once. Append the result
 read by that rule with per-seed values; never rewrite the plan. Inconclusive is a legitimate
 end; non-significance is not equivalence; a wide interval is not zero effect.
@@ -44,6 +58,10 @@ configuration, information conditions and exposure match; state mismatches. K-ax
 questions, jointly trained N-axis churn, train-N to test-N transfer and open ad hoc teamwork are
 distinct targets; do not merge K and N into one programme.
 
+When discussing headroom, name the upper reference and the tuned same-information generic
+baseline whose gap it measures; an arbitrary favorable score gap is not headroom. A privileged
+upper does not establish an achievable gain. Missing tuned headroom is no prerequisite to exploration.
+
 ## Statistics
 
 Independent training runs are the inference unit; episodes and checkpoints are nested
@@ -53,6 +71,12 @@ numbers match. Never fill a missing pair with zero or assume missingness is rand
 run and curve. Outcome-informed redesign is a new exploration, not a fresh confirmation of the
 old rule. Report signed effects, per-seed values, the estimand and the small-sample limits.
 
+Separate practical effect importance, training-outcome variation and estimator uncertainty.
+For confirmation explain what difference would matter for the task, without a mandatory MEI
+verdict for exploration. An equivalence claim needs a prospectively defined equivalence region
+and an uncertainty interval sufficiently narrow for that claim; a small point estimate or a
+one/two-seed-SD rule does not establish equivalence or importance. State the interval assumptions.
+
 ## Cost and exposure
 
 Count fits as arms times seeds per launched attempt at a declared horizon; different horizons
@@ -60,6 +84,13 @@ are different compute. Record actual wall time per fit and batch elapsed; unknow
 zero. Report selection and tuning exposure alongside any comparison. Prefer the smallest real
 learning comparison that decides the question; exhaustive diagnosis, exact maxima and
 search-before-learning need a concrete purpose.
+
+At design time count the dominant work from the configuration: arms, fits, steps, evaluation
+panels/checkpoints, optimizer epochs and nested candidate/trajectory/solver calls. Separate
+algorithm-intrinsic search from verification added to study it. Joint-action or trajectory
+branching, subsets and repeated replanning can dominate even a finite, bounded or zero-fit
+study; reconsider unnecessary dimensions before accelerating them. Use known counts and
+existing measurements; unknown cost stays unknown and creates no mandatory profiling run.
 
 Performance claims account for full work: import/build/init, rollout and learning, replay,
 evaluation, synchronization, publication and readback. Separate cold/warm runs, preparation,
