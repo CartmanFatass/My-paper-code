@@ -52,9 +52,10 @@ creating agent performs the same cleanup before declaring the task complete.
 Research tier (method: hmasd-research-engineering): a proportionate focused check
 of changed behavior and primary output, plus rule tests when the object has branch rules.
 Reuse existing checks for unchanged paths; a launch boundary alone does not require another
-smoke test. Total wall time per research directory stays under 5 minutes excluding runner smoke.
+smoke test. Let coverage and changed risk determine the checks; report actual cost and coverage
+gaps without a fixed test-duration or test-count ceiling.
 
-Core tier: the one focused test that would fail if the changed semantic (route, checkpoint
+Core tier: focused checks that would fail if the protected semantics (route, checkpoint
 format, RNG stream, numerical result) changed. Bitwise claims are pinned by an off-path identity
 test (the D2 `off` path is the example).
 

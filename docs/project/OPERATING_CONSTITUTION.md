@@ -9,6 +9,11 @@ research pause of 2026-09-15 22:23 PDT.
 
 Amendments: 2026-09-16 18:32 PDT (owner): Implementer role added to section 2; carried-over
 engineering standards named in section 6.
+2026-09-16 (owner request): remove engineering size, time and formatting quotas; retain
+scientific allowances, runtime responsibilities and actual resource-safety checks.
+2026-09-16 (owner request in the alignment follow-up): clarify existing leaf methods,
+shared writing and within-direction idea preparation. Source publication does not prove
+adoption by live sessions; research remains paused until explicitly resumed.
 
 ## 1. What this project is
 
@@ -32,14 +37,24 @@ confirmation is a bounded final step, not the default mode.
   one direction at a time.
 - **Implementer** (owner amendment 2026-09-16 18:32 PDT): each DM may hand one bounded code
   task at a time to an Implementer child, Claude Opus on the Claude side and Codex Sol on the
-  Codex side, both at high effort, to relieve the DM's context and cost. The DM writes the five
-  L0 lines, the Implementer returns a diff and its checks, the DM reviews, accepts and owns the
+  Codex side, both at high effort, to relieve the DM's context and cost. The DM writes a concise
+  L0 scope note, the Implementer returns a diff and its checks, the DM reviews, accepts and owns the
   result. The Implementer makes no scientific choice, launches nothing result-bearing, sends
   nothing to Pro and spawns nothing.
 - **Transport / Monitor** absorb waits and return facts, without scientific authority.
   **Reviewer** independently checks changes to shared learners, runners, environments or evaluators.
+- Existing **Operator, Scout, Verifier and ResearchCritic** names are bounded execution,
+  fact-finding or review methods under DM/Reviewer responsibility, not extra scientific
+  decision owners. Operator is Claude's result-launch delegate; these leaves spawn nothing.
 - **Retire Grok clerk and Sonnet clerk as standing roles.** Mechanical edits belong to the
   direction lead. No additional role, including a renamed equivalent, without owner amendment.
+
+Shared writing: a coordinating Codex Root integrates main and RESEARCH.md. A Claude session
+may take that function only when no Root is acting or on explicit handover, from its own
+checkout after checking current main and the actual writer; otherwise it publishes direction
+commits and returns facts. The direction lead owns NOTES.md, handing only the target answer
+subsection to Pro and reconciling uncertain writes before taking it back. Leaves return facts;
+an assignment does not implicitly grant shared-file or another checkout's index ownership.
 
 ## 3. Budget is counted in fits
 
@@ -53,6 +68,11 @@ horizons are not interchangeable compute. Record actual wall time rather than as
 | Confirm one claim | 3–5 fresh independent training seeds per arm, normally candidate + one primary baseline; one fixed batch | notebook + run artifacts + claim note |
 
 **No fixed weekly cap or weekly entitlement.** Work on one idea at a time per direction.
+A prospective new idea within an owner-chosen active direction may use this default allowance
+without another owner decision; completion alone never extends the same batch or replenishes
+its fits. Root may assign reasoning-only preparation to an existing chosen reserve, then
+activate it under the existing reserve authority if a worthwhile idea is recorded. This
+preparation adds no empirical grant and does not lift a pause.
 Additional attribution controls must be justified and costed in the same prospective note.
 Do not extend a batch after seeing its scores or rename the same failed idea to reset its allowance.
 Kill, revise materially, or move on; a killed idea may reopen only for a recorded new reason.
@@ -98,10 +118,11 @@ Preserve interfaces; run a relevant smoke test and obtain independent review whe
 No compatibility promise or generic registry, lease, retry, resumability or telemetry infrastructure
 without a concrete experimental need. Small correctness tests/assertions remain allowed.
 Engineering standards carried over from the earlier specifications (owner 2026-09-16 18:32 PDT)
-are kept in `hmasd-research-engineering`: reviewable diff size and orchestration share as
-review signals, fast research tests, exact-sha staging of declared artifacts, the telemetry
-rule, quarantine of incomplete attempts and diagnosis by reproduction. They are qualitative
-review signals and record rules, never numeric gates (owner 2026-09-16 18:43 PDT).
+are kept in `hmasd-research-engineering`: maintainable scope, proportionate correctness
+checks, exact-sha staging of declared artifacts, the telemetry rule, quarantine of incomplete
+attempts and diagnosis by reproduction. Engineering review uses actual complexity and risk,
+not line counts, orchestration percentages, elapsed-test ceilings or fixed note/test counts.
+This does not relax scientific allowances or genuine resource-safety and external-effect checks.
 
 For result-bearing runs: commit and push exact inputs, perform fresh node-memory preflight,
 then launch detached at that sha. Archiving stops maintenance; it does not destroy evidence.
@@ -111,9 +132,9 @@ Keep result-bearing code recoverable at its sha and preserve required outputs be
 
 Incidents normally produce a tool fix or an explicitly accepted risk, not another gate,
 role or process document. A necessary rule change requires owner amendment to this page.
-No new standing record types. Root AGENTS plus CLAUDE entry text together stay below 4 KB;
-task skills contain execution methods, not a shadow constitution. Agents may propose a change
-in one sentence; they do not initiate governance redesign. Owner-requested drafting, including
+No new standing record types. Keep root AGENTS and CLAUDE entry text concise and navigational;
+task skills contain execution methods, not a shadow constitution. Agents may briefly propose
+a change; they do not initiate governance redesign. Owner-requested drafting, including
 this revision, is allowed. Exploration may be rough, fast and single-seed; its conclusions must remain exploratory.
 
 ## 8. Scientific minimums — five, not a certification ladder
@@ -155,8 +176,8 @@ amended only by an owner-triggered Portfolio review.
 
 | Direction | Initial standing after adoption |
 | --- | --- |
-| `flexible_skill_duration` | Priority 1, confirming, lead: Claude session (current lead) or a Codex DM, never both: preserve [FSD matched-information B01](../../research/candidates/flexible_skill_duration/FSD_MATCHED_INFORMATION_BASELINE_B01_PROSPECTIVE_CARD_20260916.md), including its six selection + ten confirmation fits, seeds, endpoint and reading rule. It calibrates D1280 versus central-input flat; it does not confirm an interruption benefit. |
-| `vap_folr_core` | Priority 2, exploring, lead: Codex DM: retain the N-axis membership-change/history question. [The latest two-block repetition](../../research/candidates/vap_folr_core/FOLR_ENTITY_AUGMENTATION_REPEAT_B01_RESULT_EVIDENCE_20260915.md) did not reproduce the old positive. Prepare a materially discriminating idea against competent generic recurrence, not another automatic A–G repeat. With no worthwhile idea, leave it idle. |
+| `flexible_skill_duration` | Priority 1, confirming, lead: Claude session (current lead) or a Codex DM, never both: preserve [FSD matched-information B01](../research/candidates/flexible_skill_duration/FSD_MATCHED_INFORMATION_BASELINE_B01_PROSPECTIVE_CARD_20260916.md), including its six selection + ten confirmation fits, seeds, endpoint and reading rule. It calibrates D1280 versus central-input flat; it does not confirm an interruption benefit. |
+| `vap_folr_core` | Priority 2, exploring, lead: Codex DM: retain the N-axis membership-change/history question. [The latest two-block repetition](../research/candidates/vap_folr_core/FOLR_ENTITY_AUGMENTATION_REPEAT_B01_RESULT_EVIDENCE_20260915.md) did not reproduce the old positive. Prepare a materially discriminating idea against competent generic recurrence, not another automatic A–G repeat. With no worthwhile idea, leave it idle. |
 
 **Adoption does not lift an owner pause.** After explicit resumption, the first execution
 batch is FSD B01, not simultaneous filling of every DM slot. Its frozen card stands in for a new

@@ -20,7 +20,11 @@ its confirmation batch. Pro reads only the repository at the sha you send.
    Standing: <two to five lines with sha-pinned links to the notebook entries, runs and claim note>
    Allowance: <fits available for what follows>
    Constraints: seeds and matched baseline per constitution section 8; no training, no edits
-     outside this section; write the answer under "### Answer" on branch <branch>.
+     outside the empty "### Answer" subsection; write only there on branch <branch>.
+     Read the question at the pinned source, but fetch the latest target file before editing
+     and use its actual blob SHA. Preserve all other bytes; stop on overlapping edits.
+     On successful write, report the actual commit. On write failure return the complete
+     answer in chat, not just a SHA, status message or link.
    Return: <for a hypothesis batch: three to five ideas, each with prediction, strongest
      null, discriminating comparison and fit cost; for a critic pass: strongest objection,
      smallest discriminator, MATERIAL_DISSENT yes/no>
@@ -28,15 +32,20 @@ its confirmation batch. Pro reads only the repository at the sha you send.
    ```
 
 2. **Commit and push** that file by pathspec on the direction branch. Record the full sha.
-3. **Compose the message**, one line: repository, branch, the sha-pinned URL of `NOTES.md`,
-   the section heading, the instruction to write the answer under `### Answer` of that section
-   on that branch through the ChatGPT GitHub connector, and to reply in chat with the commit sha.
-4. **Hand off** the message and the conversation URL to Transport
+3. **Compose the message** with repository, branch, source_sha, target_path,
+   question_heading and answer_heading (`### Answer`), the source-pinned URL and the exact
+   answer-only write instruction. The source is immutable; the write target is the latest
+   version of this file on the named branch. Use a unique question heading, not a reused slot.
+4. **Hand off** those same fields, subject key (direction id), message and conversation URL to Transport
    (`hmasd-chatgpt-pro-transport`), or send it yourself when you are the Claude session and
    the Agentify tools are available.
-5. **On return**, pull the branch. The answer must be in the section at a new commit. If the
-   connector write failed, paste the exact returned text into the section yourself, commit, and
-   note "saved from chat". For a new conversation, put the URL in the `NOTES.md` header.
+5. **On return**, fetch and inspect before integrating. Apply the Transport complete-answer
+   checks to the specified target and immutable answer commit; a short receipt is not an
+   answer. While Pro owns the subsection, the DM and its leaves do not edit it. Reconcile an
+   uncertain write before taking back that subsection. Paste a complete recovered fallback
+   only after verifying no answer already landed and the question is unchanged; commit and
+   note "saved from chat". For a new conversation, put its actual URL in the notebook header.
+   Use the current branch/file version; never overwrite concurrent changes with the pinned copy.
 6. **Respond in writing.** The next notebook entry records what you adopt, modify or reject and
    why. The DM chooses; Pro's answer is advice.
 

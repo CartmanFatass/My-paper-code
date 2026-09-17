@@ -19,12 +19,14 @@ CLAUDE_ADAPTER = ('\nClaude adapter: return directly to the assigning session us
                   'do not invent Codex collaboration tools. No child agents.\n')
 TRANSPORT_ADAPTER = ('\n## Claude runtime\n\nThe Claude session is the DM. It may run these steps itself with the '
                      '`mcp__agentify-desktop__*` tools or dispatch `hmasd-pro-transport` (Sonnet) with the message, '
-                     'conversation URL, direction, branch and sha. Facts return to the session, which reads the answer.\n')
+                     'conversation URL, subject key, repository, branch, source_sha, target_path, question_heading and answer_heading. '
+                     'Facts return to the session, which reads the complete answer.\n')
 
 # Text in the shared DM role that names Codex-only routing, with its Claude counterpart.
 DM_CLAUDE_REPLACEMENTS = [
     ('Root integrates main and resolves shared dependencies; it does not ACK your steps.',
-     'You also integrate your own commits into main and push immediately.'),
+     'A coordinating Codex Root retains shared main/RESEARCH integration; publish your direction branch and return accepted commits. '
+     'Take shared integration only with no acting Root or explicit handover, from your own checkout after fetching main and checking the writer.'),
     ('then docs/research/RESEARCH.md (your direction must be\nactive and Codex-led)',
      'then docs/research/RESEARCH.md (your direction must be\nactive and led by the Claude session)'),
     ('an Implementer child\n(HMASDImplementer, Sol/high)', 'hmasd-implementer (Opus, high effort)'),
@@ -33,7 +35,8 @@ DM_CLAUDE_REPLACEMENTS = [
     ('you or Operator launch with preflight && runner under agent-task\non the declared node; hand the accepted handle to your monitor (HMASDExperimentMonitor) and\nrequire MONITOR_ADOPTED before ending polling.',
      'hmasd-experiment-operator launches with preflight && runner under\nagent-task on the declared node and returns the accepted handle; dispatch hmasd-experiment-tracker\nfor one bounded observation window at a time, its first return being adoption evidence.'),
     ('send Root one paragraph:\ndirection, state, evidence or commit, next step or dependency and its owner.',
-     'write one NOTES.md entry and update the\nRESEARCH.md standing line: state, evidence or commit, next step or dependency and its owner.'),
+     'write your NOTES.md entry and return the standing-line facts to the shared integrator '
+     '(update RESEARCH.md yourself only when acting as that integrator): state, evidence or commit, next step or dependency and its owner.'),
 ]
 
 
@@ -83,9 +86,9 @@ def generated(root=ROOT):
         outputs[target] = ('---'+header+'---\n\n'+BANNER+body+adapter).encode()
     dm = tomllib.loads((root/'.codex/agents/hmasd-direction-manager.toml').read_text(encoding='utf-8'))['developer_instructions']
     for old, new in DM_CLAUDE_REPLACEMENTS:
-        if old not in dm:
-            raise SystemExit(f'DM role text changed; update DM_CLAUDE_REPLACEMENTS for: {old[:60]!r}')
-        dm = dm.replace(old, new)
+        if dm.count(old) != 1:
+            raise SystemExit(f'DM role text changed or ambiguous; update DM_CLAUDE_REPLACEMENTS for: {old[:60]!r}')
+        dm = dm.replace(old, new, 1)
     outputs[root/'.claude/skills/hmasd-research-hub/SKILL.md'] = (f'''---
 name: hmasd-research-hub
 description: Drive one direction as the Claude DM under {CONSTITUTION}; not for status or mechanical edits.
@@ -101,15 +104,31 @@ description: Drive one direction as the Claude DM under {CONSTITUTION}; not for 
     return outputs
 
 
+def unexpected_outputs(root, expected):
+    """Report extra HMASD outputs; never delete a file or touch other publishers' trees."""
+    found = set()
+    for folder in (root/'.claude/skills').glob('hmasd-*'):
+        for path in folder.rglob('*'):
+            if (path.is_file() and '__pycache__' not in path.parts
+                    and path.suffix not in {'.pyc', '.pyo'}):
+                found.add(path)
+    found.update(p for p in (root/'.claude/agents').glob('hmasd-*.md') if p.is_file())
+    return sorted(found - set(expected))
+
+
 def publish(root=ROOT, check=False):
+    expected = generated(root)
     drift = []
-    for path, data in generated(root).items():
+    for path, data in expected.items():
         if not path.exists() or path.read_bytes() != data:
             drift.append(path.relative_to(root).as_posix())
             if not check:
                 path.parent.mkdir(parents=True, exist_ok=True)
                 path.write_bytes(data)
-    return drift
+    # Extra files used to disappear from --check's view. Report them in both modes,
+    # leaving archival/deletion and any active writer to the actual owner.
+    drift.extend(path.relative_to(root).as_posix() for path in unexpected_outputs(root, expected))
+    return sorted(set(drift))
 
 
 if __name__ == '__main__':
@@ -118,6 +137,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
     changes = publish(check=args.check)
     print(('drift: ' if args.check else 'published: ') + str(len(changes)))
-    if args.check and changes:
-        print('\n'.join(changes))
+    remaining = changes if args.check else publish(check=True)
+    if remaining:
+        print('\n'.join(remaining))
         raise SystemExit(1)
