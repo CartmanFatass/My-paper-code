@@ -28,14 +28,16 @@ def test_publication_preserves_native_metadata_and_detects_drift(tmp_path):
     assert publisher.publish(tmp_path, check=True) == []
 
 
-def test_generated_helpers_resolve_in_complete_skill_tree():
+def test_generated_tree_carries_references_helpers_and_hub_adaptation():
     outputs = publisher.generated()
     canonical = ROOT/'.claude/skills/hmasd-chatgpt-pro-transport'
-    for relative in ['scripts/native_transport.py','references/agentify.md','references/unrecoverable-conversation.md']:
+    for relative in ['references/agentify.md', 'references/send-hit-point-recovery.md']:
         assert canonical/relative in outputs
-    # Shared publication preserves executable helper bytes, not a pointer shell.
-    script = 'hmasd-pro-research-prompt-author/scripts/render_packet.py'
+    script = 'hmasd-scientific-tools/scripts/summarize_runs.py'
     assert outputs[ROOT/'.claude/skills'/script] == (ROOT/'.agents/skills'/script).read_bytes().replace(b'\r\n', b'\n')
+    hub = outputs[ROOT/'.claude/skills/hmasd-research-hub/SKILL.md'].decode()
+    assert 'HMASDTransport' not in hub and 'send Root one paragraph' not in hub
+    assert 'hmasd-experiment-tracker' in hub and publisher.CONSTITUTION in hub
 
 
 def test_publication_is_independent_of_checkout_line_endings(tmp_path):

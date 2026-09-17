@@ -1,79 +1,61 @@
 ---
 name: hmasd-loop-dispatch
-description: Coordinate approved HMASD research, handle changed direction returns and integrate accepted work. Not a trigger to resume research on status or workflow edits.
+description: Codex Root coordination of the active HMASD directions under docs/project/OPERATING_CONSTITUTION.md - start or resume DM children, integrate accepted commits, keep RESEARCH.md current, wait for producers. Not a trigger to resume research on a status question or workflow edit.
 ---
 
-# Root coordination
+# Root coordination (Codex)
+
+Authority: `docs/project/OPERATING_CONSTITUTION.md`. Current state: `docs/research/RESEARCH.md`.
+Root coordinates; it does not do a direction's science, implementation or reading.
 
 ## Inputs
 
-Current owner instruction/pause, `docs/research/portfolio/APPROVED_SET.md`, changed
-assignment/card/intake, actual native names and current checkout. Read only affected
-records. Root is the primary session, not an implicitly loaded subagent configuration.
-Machine/provider values come from `.codex/hmasd-*.toml`, never historical task literals.
+The current owner instruction (pause or resume), `RESEARCH.md`, the thing that changed (a DM
+message, a merged commit, an owner edit), actual native agent names from tool results, and the
+current checkout. Read only what changed. Machine and provider values come from
+`.codex/hmasd-compute.toml` and `.codex/hmasd-transport.toml`, never from old task text.
 
-## Changed-event procedure
+## Procedure at entry, on an actionable return, and before the first wait
 
-At coordination entry, an actionable return and before the first wait after useful work:
-1. Apply owner pause/stop. Migration/status/restart does not resume research.
-2. Read the approved set as execution authority, lane as process, evidence class as
-   claim ceiling, execution state as reality. Advance only approved, unpaused work with
-   an actual authorized object/step. No automatic backup, next object or weekly refill.
-3. Integrate named accepted evidence/commits and resolve real shared writers/runtime
-   dependencies. DM owns the complete authorized allocation: implementation, checks,
-   required independent review, publication, fresh admission, detached execution,
-   adoption, collection, acceptance, intake and assigned cleanup. No Root ACK at each step.
-4. A completed object yields intake. Resume the original idle DM once only for unfinished
-   authorized work; an already running DM continues. If no work remains, record missing
-   fact/revisit condition once. ACTIVE-idle with no producer is not a pending external task.
-5. Queue closing memos, budget shortages, lifecycle/addition recommendations for the next
-   owner-triggered Portfolio review. A duly entered CLOSE lane exits the executable set
-   and queues its memo, but is no fabricated PARK/CLOSED verdict. Ordinary completion or
-   an unfavorable sign does not enter CLOSE. No replacement request or slot target.
-6. After independent work, wait for named producers. Use available interruptible native
-   events within higher-priority runtime limits; configured v2 timeout is 1500000 ms.
-   If a higher-priority limit forbids that wait, report the concrete conflict and use a
-   permitted interruptible mechanism. Unchanged timeouts simply continue waiting, without
-   rereads, list_agents, redispatch, keepalives, repeated status or new audit/Send.
+1. **Owner pause first.** A status question, workflow edit, migration or restart never
+   resumes research. If paused, do nothing but answer the question asked.
+2. **Read RESEARCH.md.** Active directions in priority order with their lead runtime and
+   standing line; the reserve list. A direction whose lead runtime is the Claude session is
+   not started here.
+3. **DM children.** For each active Codex-led direction without a live DM, start or resume one
+   `HMASDDirectionManager` with minimal context: direction id, `NOTES.md` path, the standing
+   line, the fit allowance from constitution section 3, and the pause state. Soft ceiling:
+   three concurrent DMs. Start a reserve direction only when fewer than three are active and
+   its `NOTES.md` already records a worthwhile discriminating idea. Never start one to fill a
+   slot; empty capacity stays empty.
+4. **Integrate.** Bring accepted commits a DM names into `main` by explicit paths (cherry-pick
+   or fast-forward), check what is already integrated, push immediately. Resolve real
+   shared-writer or shared-runtime conflicts. Nothing else is Root's to accept; no per-step ACK.
+5. **Keep RESEARCH.md current.** When a DM reports a boundary (idea killed, batch done, claim
+   read, direction idle), update that direction's one standing line and push. No other record.
+6. **Queue, never send.** Archive or activate recommendations, budget concerns and closing
+   notes wait as `NOTES.md` entries for the owner-triggered Portfolio review
+   (`hmasd-portfolio-task`).
+7. **Wait.** After independent work, wait natively for the named producers with the configured
+   long timeout. An unchanged timeout continues waiting: no rereads, `list_agents`, redispatch,
+   status queries, keepalives or new messages.
 
-Root writes a brief changed-event log and refreshes shared tracking/handoff at clean
-boundaries, without repeating DM scientific intake or Monitor/Transport polling. Treat
-message/final copies at the same assignment/evidence revision as one event. No sibling
-barrier: process the direction that changed. Empty capacity remains empty.
+## Messages
 
-## Native assignments and handoffs
+`followup_task` resumes an existing DM; `send_message` carries information that needs no turn
+restart. A DM reports one paragraph at a boundary: direction, state, evidence or commit, next
+step or dependency and its owner. Specialists (Reviewer, Monitor, Transport, Operator, Scout,
+Critic, Verifier) return to the DM that assigned them, never through Root. A message and a
+final that describe the same boundary are one event.
 
-Use `followup_task` for work to an existing non-root agent, `send_message` for information
-that needs no turn restart. Resolve canonical names from actual tool results. Use minimal
-context for leaf specialists. No CM/Implementer or equivalent generic implementation role.
-Code work uses `hmasd-research-engineering` L0; Root owns shared-control acceptance.
+## Git and cleanup
 
-A DM sends one actionable native paragraph at bounded completion, material conflict or
-idle: assignment/state, evidence/commit, decision authority/limit, next action/dependency
-and owner (or none). Specialists return directly to that DM. Do not add an app relay or
-ACK. A final alone does not establish acceptance. Preserve original return routes during
-recovery; reconcile uncertain delivery before retrying and supplied experiment handles
-before observer transfer. DM receives monitor adoption/terminal facts and Pro archives.
-A written future step is not active work. Missing recipients require a bounded ownership
-transfer with existing evidence, not a duplicate scientific assignment.
+Root owns `main` and its index; each DM owns its direction branch and worktree. Preserve
+overlapping writers, commit by pathspec, push every commit. Remove an obsolete worktree only
+after its unique commits are on the remote, dirty evidence is preserved and no live process or
+delivery depends on it; verify absence on disk and in `git worktree list`.
 
-At a clean boundary apply relevant owner reviews and audit owner-column overrides using
-`hmasd-owner-item`. Keep actual applied/pending facts, no invented replies. Publish changed
-methods with their entrypoints and send the exact revision/application boundary to affected
-original DMs; record their actual adoption/conflict in existing intake. Disk edits alone do
-not update old sessions. New sessions/native refresh require observed loading evidence.
-Accepted or uncertain Pro inputs retain bytes and binding; a method update does not resend.
+## Return
 
-## Integration and limits
-
-Root owns main/index; direction DMs own their designated checkout. Preserve overlapping
-writers, integrate only accepted paths/commits, check already-integrated changes and push
-every commit immediately. Cleanup preserves unique commits, dirty evidence and delivery
-routes before removing obsolete worktrees; verify disk and registration absence. Shared
-active checkouts remain. Test creators clean their own scratch.
-
-Return current pause, changed facts, accepted revision, unresolved owner/dependency and
-one next authorized action. A real conflict pauses only dependent work. Lifecycle,
-investment and changes outside the approved allowance remain recommendations until the
-proper owner-triggered decision. A complete conforming response goes to its author intake
-even when short receipt bookkeeping is unresolved; uncertainty blocks Send, not reading.
+Pause state, what changed, commits integrated, `RESEARCH.md` lines updated, the live DM set,
+and the next action or none.

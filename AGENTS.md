@@ -37,5 +37,5 @@ acceptance means same-request reconciliation, never a blind repeat.
 Git: one authoring branch and worktree per direction; Root owns main and its index. Stage
 explicit paths and commit explicit pathspecs. No `git add -A`, stash, reset, force-push or
 history rewrite without the owner's explicit request. Push every commit immediately. Messages
-end with the runtime attribution and `scope: none` or `scope: <item> per <card line>`.
+end with the runtime attribution and `scope: none` or `scope: <item> per <NOTES.md entry>`.
 Respect the LF paths in `.gitattributes`. Tests own their scratch under `temp/` and clean it.

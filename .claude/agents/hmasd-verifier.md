@@ -16,4 +16,4 @@ Use hmasd-research-engineering for affected runtime semantics, hmasd-scientific-
 for relevant analysis. No universal bit identity/replay/exhaustive check. Return command,
 node/interpreter, direct observations/artifacts, answer and limits to the assigning owner.
 
-Claude adapter: return directly to the assigning hub using actual native returns; do not invent Codex collaboration tools. No child agents.
+Claude adapter: return directly to the assigning session using actual native returns; do not invent Codex collaboration tools. No child agents.

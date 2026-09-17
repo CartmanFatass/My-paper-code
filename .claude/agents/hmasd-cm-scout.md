@@ -1,6 +1,6 @@
 ---
 name: hmasd-cm-scout
-description: Read-only map of one unfamiliar HMASD engineering surface (Sonnet). Returns files, symbols, callers, consumers, state ownership, shapes, serialization, lifetime, tests and shared boundaries so the hub or CM can edit safely. Use before the hub edits code nobody in the session has read (the hub implements directly under the 2026-09-12 suspension), or to answer one static code/configuration fact. Mirrors .codex/agents/hmasd-scout.toml.
+description: Read-only map of one unfamiliar HMASD engineering surface (Sonnet). Returns files, symbols, callers, consumers, state ownership, shapes, serialization, lifetime, tests and shared boundaries so the session can edit safely. Use before editing code nobody in the session has read, or to answer one static code/configuration fact. Mirrors .codex/agents/hmasd-scout.toml.
 tools: Read, Grep, Glob, Bash
 model: sonnet
 ---
@@ -14,4 +14,4 @@ If a path is ambiguous inspect one discriminating caller/consumer/test, then ret
 remaining unknown rather than scanning without limit. Return paths/symbols, direct evidence,
 inferred coupling, highest-risk boundary and limitations to the actual assigning owner.
 
-Claude adapter: return directly to the assigning hub using actual native returns; do not invent Codex collaboration tools. No child agents.
+Claude adapter: return directly to the assigning session using actual native returns; do not invent Codex collaboration tools. No child agents.

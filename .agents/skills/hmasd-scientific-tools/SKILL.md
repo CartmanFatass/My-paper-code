@@ -1,148 +1,78 @@
 ---
 name: hmasd-scientific-tools
-description: Design, compare and interpret HMASD scientific objects; compute exposure or analyze existing results. Not mechanical Git, formatting or accepted artifact collection.
+description: Design, run and read HMASD experiments as a DM under docs/project/OPERATING_CONSTITUTION.md - explore an idea within its fit allowance, write a claim note, choose a matched-information comparator, read results by the prewritten rule, record in NOTES.md. Not for Git mechanics or formatting.
 ---
 
 # Research method
 
-## Inputs and scope
+Authority: `docs/project/OPERATING_CONSTITUTION.md` sections 3, 4, 5 and 8. This skill is the
+method; it adds no rule. Records are the notebook, the runs folder and the claim note.
 
-Use the current assignment/card, accepted mechanism, actual allowance, evidence and
-question. Choose only the mode needed. Return the bounded claim, evidence, contrary
-facts, assumptions, actual exposure and next recommendation in the existing intake.
-Missing decision-critical inputs stop only the dependent claim; do not invent data,
-change frozen meaning or create a new experiment to fill a methodological checklist.
+## Explore an idea
 
-## Design and lanes
+1. Write the `NOTES.md` entry before running: the idea in one sentence, the MARL structure it
+   touches (roster, duration, credit, partial observation, information flow), the strongest
+   simpler explanation, the observation that would distinguish them, the arms, the training
+   horizon, the total fits (up to six including tuning) and the expected sign.
+2. Run on any host that can show the effect; single seed is fine. Commit first, preflight,
+   launch detached at that sha (engineering skill). The runner writes `runs/<direction>/<tag>/`.
+3. Read curves and `summary.json` directly. Write the observation, keep or kill, and the next
+   step. Exploratory conclusions stay exploratory: no effect claim from one seed, no MEI verdict.
+4. Kill, revise materially, or move on. A killed idea reopens only for a recorded new reason.
+   Do not extend a batch after seeing its scores; do not rename a failed idea to reset its fits.
 
-State the one-sentence claim, binding MARL structure (roster, duration, credit,
-nonstationarity/partial observation, or systems/information flow), question, non-goals,
-strongest simpler explanation and observation that distinguishes it. Trace environment
-event → entity ownership → available information → action/credit → learning → native
-consequence. For changing rosters distinguish entity/slot identity, join/leave/rejoin,
-survivor state, censoring, partner co-adaptation and primitive/opportunity time.
+## Confirm a claim
 
-A/RECON reports engineering/access/measurement facts, never algorithm effects.
-B/EXPLORE uses real environment, policy, learner, trainer and evaluator, with nonzero
-transition/update/evaluation counts. It supports a preliminary setup-specific signal
-or counterexample. PILOT is an exploratory marker on B, not a separate evidence class.
-Historical labels and object-specific retained-policy exceptions stay bound to their
-original sources; do not generalize them. A and B have no consumption state.
-C-BENCH freezes a conclusion-bearing comparison on a declared population; C-TRANSFER
-adds held-out simulator variation relevant to the transfer claim; C-FORMAL carries only
-the exact proof/safety/invariant obligations the stated claim needs. Only a valid complete
-frozen C observation consumes that exact C rule; further work needs its own authorization.
-Before C final evaluation, separate development/tuning as the claim requires and freeze
-treatment, competent comparator, task population, training/evaluation budgets, primary
-estimand, checkpoints or selection rule, stopping rule, uncertainty method, decision rule
-and interpretation boundary. Transfer claims add held-out tasks/scenarios/populations
-and relevant dynamics/observation/communication disturbances with declared aggregation;
-simulator evidence never establishes physical deployment safety. No fixed seed quota
-or universal held-out transfer duty applies to B or ordinary C-BENCH.
+Write `CLAIM_<slug>.md` before the confirmation batch: hypothesis, candidate arm, the one
+primary matched-information baseline, seeds per arm (three to five, fresh and independent),
+training horizon, endpoint and evaluation protocol, selection and tuning exposure, decision rule,
+uncertainty method, and what each outcome branch means. Run the batch once. Append the result
+read by that rule with per-seed values; never rewrite the plan. Inconclusive is a legitimate
+end; non-significance is not equivalence; a wide interval is not zero effect.
 
-EXPLORE: locally select pilots within the approved direction, accepted mechanism and
-actual fit allowance. Three to five candidates may be pruned by discrimination value
-and cost; count fits across arms, not pilot titles. Four fits can fund two two-arm
-single-seed pilots. No per-pilot Pro. A truly new family/mechanism may need one targeted
-batch direction question; no mandatory consultation per batch. Report signed effect,
-training n, learning/measurement counts, exposure, failures and next step; no formal MEI
-success verdict. Do not shorten learning into an uninformative experiment merely to
-save ceremony; no prerequisite learnability/oracle experiment is added.
+## Comparators and MARL information
 
-CONFIRM is a process lane, not evidence promotion. B can remain developmental; a
-conclusion-bearing fixed-population comparison uses C-BENCH. One card-freeze Pro round
-covers positive/small/negative, wide intervals, boundaries, missing and invalid cases.
-DM intakes covered results directly. Only an uncovered change to comparison meaning,
-material dissent or explicit return requirement invokes exception review. A/B acquire
-no C consumption state from this lane. Honor every named object's stopping boundary.
-CLOSE has no new objects: closing memo is queued; lifecycle remains a separate decision.
+State for every arm: actor and critic information, refresh cadence, bandwidth and
+representation, communication, action constraints, reward, termination and truncation,
+normalisation, recurrent reset, training and update budgets, tuning rights and evaluation
+selection. Local-actor MAPPO, central-input flat, fixed-clock or interruption ablations and
+privileged uppers are different comparators; the same exogenous information is not the same
+representation, bandwidth, optimisation difficulty or compute. A package gain needs an
+identifying control before it is attributed to a component; keep native losses beside proxy
+gains. Reuse `docs/research/baselines/<host>/` and `experiments/baselines/<host>/` when the
+configuration, information conditions and exposure match; state mismatches. K-axis mechanism
+questions, jointly trained N-axis churn, train-N to test-N transfer and open ad hoc teamwork are
+distinct targets; do not merge K and N into one programme.
 
-## Statistics and comparison
+## Statistics
 
-Independent training instances are the learning-performance inference unit. Episodes
-and checkpoints are nested observations, not more training n. One training instance
-cannot estimate training-population uncertainty; bootstrap, more episodes and a larger
-MEI cannot fix that. Two seeds do not guarantee sufficiency. Choose repetition and
-precision for the claim; no uniform five/ten-seed gate for cheap exploration.
-MEI states a worthwhile difference with a task-specific reason, separately from training
-variation and estimator uncertainty. Single-instance confirmation is incomplete and
-reported conditionally. Keep individual runs/curves, estimand, interval model and
-small-sample limitations. A small point estimate is not equivalence, a wide interval
-is not zero effect, and five positive signs are not sufficient confirmation.
+Independent training runs are the inference unit; episodes and checkpoints are nested
+observations, not more n. Bootstrap, more episodes or a larger effect cannot fix n = 1. Pair
+only when a shared exogenous design and real independent units justify it, never because seed
+numbers match. Never fill a missing pair with zero or assume missingness is random. Keep every
+run and curve. Outcome-informed redesign is a new exploration, not a fresh confirmation of the
+old rule. Report signed effects, per-seed values, the estimand and the small-sample limits.
 
-Separate tuning/development and final evaluation as the claim requires. Report selection
-exposure. Pair only when shared exogenous design and real independent units justify it,
-not because seed numbers match. Never fill missing pairs with zero or assume missingness
-is random. Without a prospective addition rule do not add seeds/endpoints, switch
-checkpoints, drop bad blocks or run until significant. Outcome-informed redesign is
-labelled new exploration/reanalysis, never fresh prospective confirmation of the old rule.
+## Cost and exposure
 
-Describe actor AND critic rights, refresh cadence, bandwidth/representation, communication,
-action constraints, reward/termination/truncation, normalization, recurrent reset,
-training/update budgets, tuning rights and evaluation selection. Local-actor MAPPO,
-central-input flat CF, fixed-clock/interruption ablations and privileged uppers are
-different comparators. Same exogenous information is not matched representation,
-bandwidth, optimization difficulty or compute. Package gains need identifying controls
-before attribution to a component. Preserve native losses beside local/proxy gains.
+Count fits as arms times seeds per launched attempt at a declared horizon; different horizons
+are different compute. Record actual wall time per fit and batch elapsed; unknown time is not
+zero. Report selection and tuning exposure alongside any comparison. Prefer the smallest real
+learning comparison that decides the question; exhaustive diagnosis, exact maxima and
+search-before-learning need a concrete purpose.
 
-Reuse `docs/research/baselines/<host>/` and `experiments/baselines/<host>/` when compatible:
-configuration/version, information/task conditions, training/selection exposure, per-seed
-curves, results and applicability. State mismatches. A missing baseline library or tuned
-headroom is no universal pilot gate. Headroom is a stated upper reference minus a tuned
-same-information baseline, not any favorable score gap. K-axis controlled mechanism
-questions, jointly trained N-axis churn, train-N/test-N transfer and open ad hoc teamwork
-have distinct inference targets. Do not silently combine K and N into a new programme.
+## Pro
 
-## Burden, work and intake
-
-Prefer the smallest decision-relevant real learning comparison. Exact maxima, exhaustive
-support, full causal diagnosis or search-before-learning need a concrete purpose;
-bounded/beam search or moving a prerequisite into A does not supply one. Finite and
-zero-learner work can be expensive. Compute dominant factors from actual configurations:
-arms × independent fits × lanes × steps, evaluation panels/worlds, optimizer epochs and
-nested candidates/solver calls. Unknown time is not zero; no compulsory profiling fit.
-A plausible mechanism, differentiating prediction and containing null normally suffice;
-exact theorem claims require assumptions matching the implemented scheme.
-
-Within actual authorization, the scientific B launch burdens are common integrity,
-real learner/counts, fresh actual-node resource admission and a machine-produced exposure
-line showing learner movement relative to initialization (or equivalent). This does not
-waive required source acceptance/review, pause, frozen contracts or invocation limits.
-No universal exact replay, 1e-12 tolerance, all-positive-seed, causal census or power gate.
-
-Future cards state planned workload and allowance source: fits, training/evaluation
-team steps, optimizer/update and tuning exposure, per-fit wall, batch elapsed, RSS,
-threads and available CPU work. Distinguish plan/cap/measurement and sum_fit_wall,
-batch_elapsed and aggregate_cpu; parallel wall sums are not measured node occupancy.
-Keep seven-day standing limits (EXPLORE four fits; CONFIRM one card-sized object),
-no rollover or automatic next-window use. Window origin/deduction details undefined by
-the old source remain pending budget semantics; do not invent an anchor, reset a crossing
-object or erase failed work/retry usage. Resource dimensions without an assigned limit
-are UNKNOWN, not unlimited. Missing optional telemetry is resources_unmeasured and
-preserves trustworthy non-resource claims; missing primary instrumentation limits its claim.
-
-Keep three core records: pilot note/card, summary, intake; preserve raw outputs and
-necessary launch facts. Apply the frozen rule verbatim, retain all outcomes, distinguish
-engineering failure from scientific negative, and report trustworthy narrow facts even
-when the dependent full claim is invalid. Repair only dependencies the next claim uses;
-no blanket replay of unrelated historical failures. Technical completion is not acceptance.
-At a clean boundary refresh DIRECTION/handoffs/tracking once. Audit only selections with
-real alternatives; ordinary pilot facts need no owner item or automatic brief. Confirmation
-results and lifecycle/Portfolio information use the lightweight owner-item method. Record
-predictions before output; score an actual owner reply or mark not taken.
-Object completion is an intake, not authorization for another object or lifecycle action.
+Use `hmasd-pro-research-prompt-author` for a hypothesis batch before an exploration cycle or
+one critic pass on a claim note. Read the whole answer; record in `NOTES.md` what you adopt,
+modify or reject and why. Pro advises; the DM chooses.
 
 ## Tools, only as needed
 
-For an unresolved concept read relevant passages directly in
-`docs/rl-marl-foundations-20260907/FOUNDATIONS.md` or its topic-notes; record the concrete
-assumption/limit, not a citation ritual. For a literature gap read
-[local-literature.md](references/local-literature.md), search indexes then verify primary
-passages. No whole textbook or recursive citation preload. Explanatory gaps alone do not
-block B. For baseline/environment integration use [adapters.md](references/adapters.md).
-Use Python/NumPy for known counts rather than simulating. For endpoint CSV
-`task,seed,arm,score`, run `scripts/summarize_runs.py`; scores are once per training run.
-Use `--paired --baseline <arm>` only for justified declared pairing. Curves or other
-estimands need task-specific analysis, not episode rows disguised as training instances.
-Profiling is only a bounded named engineering question with recorded overhead. Optional
-packages belong in isolated environments, never a global/live interpreter upgrade.
+For an unresolved concept read the relevant section of
+`docs/rl-marl-foundations-20260907/FOUNDATIONS.md` ([scientific-reading.md](references/scientific-reading.md)).
+For a literature gap use [local-literature.md](references/local-literature.md) and verify primary
+passages. For baseline or environment integration use [adapters.md](references/adapters.md).
+For an endpoint CSV `task,seed,arm,score` run `scripts/summarize_runs.py` (one score per training
+run; `--paired --baseline <arm>` only for justified pairing). Use NumPy for known counts rather
+than simulation. Optional packages go in isolated environments, never the live interpreters.

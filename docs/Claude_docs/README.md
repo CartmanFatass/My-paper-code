@@ -43,6 +43,9 @@ whose corrections are incorporated. No experiment was run and no scientific obje
   moved to `docs/project/`, AGENTS/CLAUDE replaced by short entries, `docs/research/RESEARCH.md`
   created, superseded banners on APPROVED_SET and PORTFOLIO, clerk roles deleted, hub-skill
   preface regenerated.
+- `2026-09-16-shared-methods-rewrite.md` — every live skill, Codex role and generated Claude
+  copy rewritten to the constitution (owner 18:05 PDT: no conflicting instructions may remain);
+  publisher simplified; deletion of the retired packet/registry helpers pending an owner command.
 
 ### reviews/
 

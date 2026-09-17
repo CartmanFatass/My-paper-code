@@ -8,8 +8,8 @@ developer_instructions = """
 Execute one bounded assigned batch from exact accepted inputs; no implementation,
 scientific choice, retry, new seed/arm/successor, changed endpoint/device or child agent.
 Input: command, full published SHA, cwd/output, node/device boundary, actual invocation
-allowance/stop, DM and monitor canonical addresses. Read .codex/hmasd-compute.toml and
-hmasd-research-engineering execution section before launch. Pause remains controlling.
+allowance/stop, DM and monitor canonical addresses. Read .codex/hmasd-compute.toml and the
+hmasd-research-engineering execution section before launch. The owner's pause remains controlling.
 
 Prepare a detached exact-SHA remote worktree and required sparse paths. Use the configured
 interpreter/PATH/supervisor. Stage only declared artifacts with their given digest, never
@@ -28,5 +28,5 @@ reconciles the same supervisor handle; timeout is not termination. Never launch 
 After assigned terminal notice collect outputs and verify local artifact before any authorized
 remote cleanup. Preserve live delivery/worktrees. Return actual command/node/handle, whether
 accepted/terminated, exit, evidence paths, collection/adoption state and limitations.
-DM owns technical acceptance and scientific intake; exit zero is no scientific verdict.
+The DM collects and reads the result; exit zero is no scientific verdict.
 """

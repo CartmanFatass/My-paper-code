@@ -1,60 +1,41 @@
 ---
 name: hmasd-portfolio-task
-description: Prepare an owner-triggered HMASD Portfolio review or intake its bound response; queue unsent recommendations otherwise.
+description: Prepare an owner-triggered HMASD Portfolio review as a dated section in docs/research/RESEARCH.md, send it to the Portfolio Pro conversation, and apply the owner's decision to the direction table. Only when the owner asks; otherwise queue recommendations in NOTES.md.
 ---
 
-# Portfolio review
+# Portfolio review (owner-triggered)
 
-## Inputs and trigger
+Authority: `docs/project/OPERATING_CONSTITUTION.md` sections 2 and 4. The owner chooses which
+directions exist and triggers review. Nothing else triggers it: not object completion, idle
+capacity, a budget concern, a closing note or a timer. Without a trigger, recommendations wait
+as `NOTES.md` entries.
 
-Require an explicit owner-triggered review, its affected directions/question and current
-source evidence before dispatch. Object completion, CLOSE, idle capacity, budget shortage,
-recast or a timer never triggers review. Without that trigger prepare/queue recommendations
-only. Portfolio is the `portfolio:cross_direction` Pro node; a designated relevant DM owns
-scientific authoring and full-response intake. Root coordinates integration and shared
-writers; it authors no vacancy replacement. No new native Portfolio authority is created.
+## Steps
 
-## Dossier and publication
+1. **Gather.** The `RESEARCH.md` tables, each active and reserve direction's last notebook
+   entries and claim notes, and the queued recommendations. Verify a standing line against the
+   runs folder when it conflicts with the notebook.
+2. **Write the section.** Append to `RESEARCH.md`:
 
-1. Read affected current DIRECTION/latest intake/handoff and approved-set rows. Record
-   source commit, current object and updated-at for factual columns. Verify against
-   primary outputs when a current summary conflicts; preserve historical records.
-2. State approval, lane, evidence/claim ceiling and execution state separately. Compare
-   decision relevance, uncertainty, known complete cost, substitutability, reversibility,
-   headroom record or absence, MEI and strongest contrary evidence. Apply the research
-   method skill when making these scientific judgments, not for mechanical routing.
-3. List options, recommendation, consequence, smallest useful investment, missing facts
-   and revisit condition. No signal boolean may replace distinct wrapper/package results.
-   No untuned reference gap, cheap calculation or formal artifact establishes investment
-   value. Missing proof outside a claim is not grounds to PARK. Narrow negatives close
-   only the supported object; PARK for resources is no population null. Fusion needs
-   materially matching question/comparator/estimand/next object, not shared assets.
-4. Use `hmasd-pro-research-prompt-author` for authorized publication/dispatch with
-   workflow_node=portfolio_decision, caller_role=portfolio and all affected direction_ids.
-   Pin method sections and evidence, include machine-produced exposure (zero new when
-   appropriate), complete proposed work and honest unknown resource values. No exposure
-   experiment for a consultation. Serialize the shared node and preserve accepted requests.
+   ```
+   ## Portfolio review <YYYY-MM-DD>
+   Conversation: <Portfolio conversation URL, one long-lived conversation>
+   Standing: <one line per active and reserve direction with sha-pinned links>
+   Decisions asked: <activate, archive, reserve, priority order, per-idea allowance changes>
+   Options: <each with its consequence; the DM recommendations and reasons>
+   ### Answer
+   ### Decision
+   ```
 
-## Intake and application
+3. **Commit and push** `main` by pathspec, then send the one-line message through
+   `hmasd-chatgpt-pro-transport` (sha-pinned link, section heading, write under `### Answer`).
+4. **Read the whole answer.** Pro advises. The owner decides; if the owner says to apply Pro's
+   answer, apply it. Write the decision and its date under `### Decision`.
+5. **Apply.** Update the direction rows (state, priority, lead runtime, standing) and push.
+   Nothing else changes: no lifecycle labels, ledger, owner items or decision files.
 
-Read/preserve the entire immutable response, not its chat summary. Check bound scope,
-owner instructions, evidence class, frozen meaning and allowance. Preserve a concrete
-conflict and return it to the same node; continue independent conforming work. No local
-provisional direction/Portfolio disposition. Delivery errors alone do not prove no formed
-answer; reconcile exact full-response bytes. Uncertain Send never authorizes another Send.
+## Boundaries
 
-Record conforming decisions in the existing dated Portfolio decision path with actual
-choice, reasons, contrary evidence, limits and execution mapping. `PRO_FINAL /
-OWNER_DELEGATED` identifies authority; `ROOT_INTEGRATED` identifies publication, not a
-second verdict. Root integrates without per-item ratification. A scoped specification
-change must name rule, need and scope under existing authority and does not accept code
-or grant a run by itself. Historical unratified proposals do not become current decisions.
-Apply real asynchronous owner overrides; use `hmasd-owner-item` for the decision packet
-and actual planned/applied/blocked trace. Never invent an owner reply.
-
-Return decision/evidence revision, conformance or exact conflict, affected paths/actions,
-allowance, dependencies and application state. Only change approved-set membership and
-lifecycle within the actual decision. CLOSE lane exit queues a memo; it is not PARK.
-A second authorized recast is recorded and takes lowest ACTIVE sequencing priority,
-without silently parking it or granting new compute. Undefined window accounting and
-node-hour budgets remain questions for the owner's next review, not locally invented limits.
+A narrow negative closes only the idea it tested; archiving for investment reasons is not a
+scientific verdict. Fusion of two directions needs materially the same question, comparator,
+estimand and next step, not shared code. Allowances outside section 3 are the owner's to grant.
