@@ -71,7 +71,7 @@ flowchart TD
     C --> D[科学 skill：设计与解释]
     C --> E[工程 skill：实现、检查与必要 review]
     E --> F[提交输入、实际节点准入、detached launch]
-    F --> G[已有 handle 的 Monitor 或 Tracker]
+    F --> G[直接观察已有 handle，或按需委派]
     G --> H[runs 输出与终态事实]
     H --> I[DM 判读并更新 NOTES]
     I --> J[共享 integrator 更新 RESEARCH]
@@ -83,7 +83,16 @@ flowchart TD
 图表示职责与数据流，不要求每个 idea 顺序走遍每个节点。暂停时没有科研启动路径；
 确认才增加 CLAIM；Portfolio 仅在 owner 触发时使用 RESEARCH 内的 review section。
 科学设计和结果解释属于 DM；Implementer 返回实现与 checks；Reviewer 返回可达问题；
-Monitor/Transport 返回事实，不据此增加实验、裁决科学或扩展额度。
+Monitor/Transport 返回事实，不据此增加实验、裁决科学或扩展额度。实现、启动、观察和传输
+均可由有相应工具的 DM/session 直接完成；只有减轻上下文、独立工作或等待确有收益时才委派。
+
+新实验按任务选择本地或远端；配置的默认节点是便利值，不是 remote-first 硬绑定。
+Windows 使用 [本地执行说明](../../.agents/skills/hmasd-research-engineering/references/local-execution.md)中的
+一次性 PowerShell wrapper，远端使用 agent-task；两者均先准入再启动并保留可核对的进程事实。
+在途实验不能借换节点绕过原语义或制造重复进程。
+
+Git 的分支/worktree 服务于真实隔离需要，不再每方向强制建立。按完整工作边界提交和推送，
+在外部交付及结果运行前确保输入可取得；不要求 scope 尾注、每次 commit 立即 push 或月度治理指标。
 
 Codex Root 集成共享 main/RESEARCH，方向 lead 拥有自己的 NOTES；Claude 仅在无 acting Root
 或明确交接后承担共享集成。Pro 临时写指定 answer subsection，不能覆盖整个旧版本文件。
@@ -128,6 +137,8 @@ Codex Root 集成共享 main/RESEARCH，方向 lead 拥有自己的 NOTES；Clau
 也不把每个差异都认定为无意遗漏。
 
 沿实际链条核对：维护源 → 角色/skill 触发 → publisher 适配 → 生成副本 → 实际读者。
+共享角色正文采用 runtime-neutral 的责任描述；publisher 原样复制正文并追加 runtime 说明，
+无需为了修改普通句子或换行同步修改替换表。原生 frontmatter 和 Transport 别名仍由明确的生成逻辑处理。
 特别检查 Pro 是否收到方法、Implementer 是否收到所需契约、Reviewer 是否能独立看到依据。
 对于活跃会话，在安全边界通过既有返回路径说明实际采用的版本；不能凭文件生成成功宣称全体已重载。
 无需每个 fit 重读全套方法，也不建立 ACK registry。

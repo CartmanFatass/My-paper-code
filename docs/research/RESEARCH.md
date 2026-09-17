@@ -37,7 +37,9 @@ Each keeps its `DIRECTION.md` and evidence under `candidates/<direction>/`; code
 `semigroup_consistent_duration_model_policy`, `ucope`, `variable_n_fleet_churn`, `vsp_02`,
 `vsp_03`, `vsp_c1`.
 
-## Monthly overhead and output (constitution section 9)
+## Historical overhead reference
+
+Retained from adoption; current constitution section 9 does not require monthly updates or owner-hour accounting.
 
 | Month | Governance-only commits / unique result-bearing run summaries | Completed, read confirmation studies / owner-hour | Note |
 | --- | --- | --- | --- |

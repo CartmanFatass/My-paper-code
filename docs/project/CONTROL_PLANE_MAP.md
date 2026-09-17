@@ -20,7 +20,8 @@
 | 生成与适配 | `tools/publish_claude_control.py` | 共享 skills → `.claude/skills`；Codex role bodies ＋手工 Claude header → Claude agents；DM → research-hub，Transport →别名 skill |
 | 部署参数 | `.codex/hmasd-compute.toml`；`.codex/hmasd-transport.toml` | 节点、解释器、supervisor、provider 与 conversation 数据；不是运行许可 |
 
-Publisher 自身包含行为适配，必须和 source→output 一起审阅。`--check` 检查预期输出差异及额外
+Publisher 原样复制共享角色正文，只追加简短 runtime 说明，不再通过自然语言句子替换正文。
+`--check` 检查预期输出差异及额外
 HMASD 生成文件；不自动删除孤儿文件，不检查真实会话是否重载，不成为科研启动门禁。
 `.claude/skills/hmasd-pro-transport` 是同一 Transport 方法的生成别名，不是第二套协议。
 
@@ -34,11 +35,11 @@ HMASD 生成文件；不自动删除孤儿文件，不检查真实会话是否�
 | 工作 | Codex | Claude | 方法／记录归属 |
 | --- | --- | --- | --- |
 | 方向推进 | Root 协调 DM children，保留 owner 指定 soft ceiling | session 本身是单方向 DM | loop-dispatch／research-hub；direction lead 拥有 NOTES |
-| 实现 | Sol/high Implementer；DM 验收 | Opus/high 为请求设置；session 验收 | research-engineering；原生 Claude effort 未实测，不能从描述证明 |
+| 实现 | DM 直接实现，或按需 Sol/high Implementer | session 直接实现，或按需 Opus/high Implementer | research-engineering；原生 Claude effort 未实测，不能从描述证明 |
 | Review／事实 | Reviewer，既有 Scout／Verifier／ResearchCritic | 对应原生 leaves | engineering／scientific-tools；是受限方法，不是额外决策者 |
-| 启动 | DM 或 Operator | 只有 experiment-operator | engineering execution；精确来源、fresh preflight、accepted handle |
-| 观察 | 可复用 ExperimentMonitor，事实直接回 DM | session 派发 bounded tracker window，原生返回 | 不解释科学、不发起重试；状态由 DM 记入现有 run entry |
-| Pro | Transport child | session 自行 Agentify，或 Sonnet Transport | 同一 transport 方法；目标由 assignment 指定 |
+| 启动 | DM 直接启动或按需 Operator | session 直接启动或按需 Operator | engineering execution；精确来源、fresh preflight、accepted handle |
+| 观察 | DM 直接观察或按需 ExperimentMonitor | session 直接观察或按需 bounded tracker | 委派者返回事实；解释与记录仍由 DM 负责 |
+| Pro | 有工具时直接执行，或按需 Transport | session 自行 Agentify，或 Sonnet Transport | 同一 transport 方法；目标由问题作者指定 |
 | 共享 Git 写入 | 协调中的 Root 集成 main／RESEARCH | 向共享 integrator 返回已接受提交；无 Root 或明确交接后才自行集成 | 使用自己的 checkout，确认实际 writer，不跨 runtime 共用 index |
 
 DM 可在已选 active 方向内提出并前瞻记录新 idea，使用既定 per-idea fits；不是批次结束自动加额。
@@ -53,10 +54,13 @@ Monitor／Implementer 的任务分配不自动授予 NOTES／RESEARCH 写入权�
 旧 FSD B01 按 RESEARCH 的原卡／原输出约定恢复，不转抄、不重新设计、不重跑已有 accepted 工作。
 
 **执行路径：** owner pause／方向状态／idea allowance → DM 的明确代码任务 → 实现及必要 review →
-提交并发布精确输入 → compute config 中的执行节点 → `admit-memory && runner` 同一 supervised command →
-accepted handle → Monitor／tracker 的实际 adoption → terminal facts → DM 收集、核对并判读。
+提交并发布精确输入 → 按新实验需要选择配置中的本地/远端节点 → 同一 wrapper 内 preflight 成功后 runner →
+accepted handle → 直接观察或委派时确认 adoption → terminal facts → DM 收集、核对并判读。
 失联／timeout 不等于终止。local handle 要稳定进程身份与可访问 terminal witness；替换观察者先核对同一
 handle，再完成新观察者 adoption。节点安全底线、declared artifacts、scope 和冻结科学合约未取消。
+Windows 本地路径见 [local execution](../../.agents/skills/hmasd-research-engineering/references/local-execution.md)；
+远端使用配置的 agent-task。新实验选机与已有进程恢复是两件事。分支/worktree 按隔离需要选择，
+在完成工作、外部交付或运行前 push，不要求逐提交 scope 尾注或月度治理计数。
 
 **Transport 路径：** 方向问题写 NOTES，owner-triggered Portfolio 写 RESEARCH → 发布问题 → assignment
 携带 repository、branch、source_sha、target_path、question_heading、answer_heading、subject key、conversation →

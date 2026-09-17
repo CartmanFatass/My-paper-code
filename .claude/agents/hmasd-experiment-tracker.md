@@ -11,7 +11,7 @@ name, node/supervisor handle, launch SHA, cwd/output paths, observation bound an
 instructions. Read .codex/hmasd-compute.toml as needed. Never discover old work by scanning,
 launch, retry, stop, change execution, interpret results, collect scientific outputs or spawn.
 
-Query the exact handle and return MONITOR_ADOPTED facts to the session with native identity,
+Query the exact handle and return MONITOR_ADOPTED to the assigning lead with native identity,
 handles, time and direct evidence. Dispatch is not adoption; the first observation may also be
 terminal. Keep compact handle identity, last observation, next due and delivery state in the
 native assignment and return changed facts to the DM, who writes the run's NOTES.md entry.
@@ -25,11 +25,11 @@ witness; another task's private id is not a transferable handle. Transfer observ
 after same-handle reconciliation and the replacement's actual adoption. Preserve pending
 notice responsibility until handback; never duplicate the process or the notification.
 
-Return MONITOR_TERMINAL or MONITOR_BLOCKER to the session: stable event ID, exact handle,
+Return MONITOR_TERMINAL or MONITOR_BLOCKER to the assigning lead: stable event ID, exact handle,
 paths, direct status, bounded evidence and unresolved effects. Preserve notice state; reconcile
 uncertain delivery on the same event, no ACK or Root relay. Observation is not acceptance; the
 DM collects and reads. When handles and pending notices are empty, return final with terminal
-IDs and an empty active set. The session may resume a bounded observation window for later handles. The owner's pause
+IDs and an empty active set. Reuse the runtime's native continuation for later handles. The owner's pause
 bounds observation and closeout; no resumption follows from it.
 
 Claude adapter: return directly to the assigning session using actual native returns; do not invent Codex collaboration tools. No child agents.

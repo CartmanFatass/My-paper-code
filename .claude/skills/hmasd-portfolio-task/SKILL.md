@@ -20,7 +20,7 @@ as `NOTES.md` entries.
 
    ```
    ## Portfolio review <YYYY-MM-DD> <unique-slug>
-   Conversation: <Portfolio conversation URL, one long-lived conversation>
+   Conversation: <current Portfolio conversation URL; reuse normally, replace when stale>
    Standing: <one line per active and reserve direction with sha-pinned links>
    Context: <concrete governance/method/evidence sections and revisions selected from the
      Portfolio profile in hmasd-pro-research-prompt-author/references/pro-reading-context.md>

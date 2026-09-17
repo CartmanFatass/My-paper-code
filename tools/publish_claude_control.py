@@ -22,22 +22,7 @@ TRANSPORT_ADAPTER = ('\n## Claude runtime\n\nThe Claude session is the DM. It ma
                      'conversation URL, subject key, repository, branch, source_sha, target_path, question_heading and answer_heading. '
                      'Facts return to the session, which reads the complete answer.\n')
 
-# Text in the shared DM role that names Codex-only routing, with its Claude counterpart.
-DM_CLAUDE_REPLACEMENTS = [
-    ('Root integrates main and resolves shared dependencies; it does not ACK your steps.',
-     'A coordinating Codex Root retains shared main/RESEARCH integration; publish your direction branch and return accepted commits. '
-     'Take shared integration only with no acting Root or explicit handover, from your own checkout after fetching main and checking the writer.'),
-    ('then docs/research/RESEARCH.md (your direction must be\nactive and Codex-led)',
-     'then docs/research/RESEARCH.md (your direction must be\nactive and led by the Claude session)'),
-    ('an Implementer child\n(HMASDImplementer, Sol/high)', 'hmasd-implementer (Opus, high effort)'),
-    ('your\nTransport child (HMASDTransport) sends it.',
-     'you send\nit with the Agentify tools or dispatch hmasd-pro-transport.'),
-    ('you or Operator launch with preflight && runner under agent-task\non the declared node; hand the accepted handle to your monitor (HMASDExperimentMonitor) and\nrequire MONITOR_ADOPTED before ending polling.',
-     'hmasd-experiment-operator launches with preflight && runner under\nagent-task on the declared node and returns the accepted handle; dispatch hmasd-experiment-tracker\nfor one bounded observation window at a time, its first return being adoption evidence.'),
-    ('send Root one paragraph:\ndirection, state, evidence or commit, next step or dependency and its owner.',
-     'write your NOTES.md entry and return the standing-line facts to the shared integrator '
-     '(update RESEARCH.md yourself only when acting as that integrator): state, evidence or commit, next step or dependency and its owner.'),
-]
+# Shared role bodies use runtime-neutral responsibilities; native differences are appended.
 
 
 def adapt_skill(text, name):
@@ -65,37 +50,19 @@ def generated(root=ROOT):
         target = root/'.claude/agents'/f'{native}.md'
         header = target.read_text(encoding='utf-8').split('---', 2)[1]
         body = tomllib.loads((root/'.codex/agents'/f'{shared}.toml').read_text(encoding='utf-8'))['developer_instructions']
-        if native == 'hmasd-experiment-operator':
-            body = body.replace('DM and monitor canonical addresses', 'the assigning session return identity')
-            start = body.index('After acceptance send MONITOR_ADD')
-            end = body.index('A pre-process failure', start)
-            body = body[:start] + ("After actual acceptance return exact node/handle/source/cwd/output and observation bound to the "
-                                   "session. The session dispatches its bounded tracker; do not use sibling messaging, create a "
-                                   "tracker, or keep polling after returning. Preserve collection responsibility for a later "
-                                   "assigned terminal collection batch.\n\n") + body[end:]
-        elif native == 'hmasd-experiment-tracker':
-            body = body.replace('send MONITOR_ADOPTED directly to the DM', 'return MONITOR_ADOPTED facts to the session')
-            body = body.replace('Send MONITOR_TERMINAL or MONITOR_BLOCKER directly to the DM:', 'Return MONITOR_TERMINAL or MONITOR_BLOCKER to the session:')
-            body = body.replace('Reuse through followup_task for later handles.', 'The session may resume a bounded observation window for later handles.')
-        elif native == 'hmasd-pro-transport':
-            body = body.replace('return facts to the DM.', 'return facts to the session.')
-            body = body.replace('Later questions reuse this child.', 'Later questions may reuse this agent.')
         adapter = CLAUDE_ADAPTER
         if native == 'hmasd-experiment-tracker':
             adapter += 'Observe one bounded window; return adoption/terminal evidence and pending notice state. The session resumes a later window; no standing polling service.\n'
         outputs[target] = ('---'+header+'---\n\n'+BANNER+body+adapter).encode()
     dm = tomllib.loads((root/'.codex/agents/hmasd-direction-manager.toml').read_text(encoding='utf-8'))['developer_instructions']
-    for old, new in DM_CLAUDE_REPLACEMENTS:
-        if dm.count(old) != 1:
-            raise SystemExit(f'DM role text changed or ambiguous; update DM_CLAUDE_REPLACEMENTS for: {old[:60]!r}')
-        dm = dm.replace(old, new, 1)
     outputs[root/'.claude/skills/hmasd-research-hub/SKILL.md'] = (f'''---
 name: hmasd-research-hub
 description: Drive one direction as the Claude DM under {CONSTITUTION}; not for status or mechanical edits.
 ---
 
 ''' + BANNER + f'The Claude session is the DM for one direction at a time under `{CONSTITUTION}`; there is no Root/DM '
-    'split on this runtime. Only hmasd-experiment-operator launches result-bearing commands.\n\n## Direction ownership\n\n' + dm).encode()
+    'split on this runtime. The session may implement, launch and observe directly; hmasd-implementer, '
+    'hmasd-experiment-operator and hmasd-experiment-tracker are optional assistance.\n\n## Direction ownership\n\n' + dm).encode()
     transport = outputs[root/'.claude/skills/hmasd-chatgpt-pro-transport/SKILL.md'].decode()
     transport = transport.replace('name: hmasd-chatgpt-pro-transport', 'name: hmasd-pro-transport', 1)
     # Alias includes the full method; reference paths resolve to the generated canonical copy.

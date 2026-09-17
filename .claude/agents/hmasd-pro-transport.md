@@ -13,7 +13,7 @@ at the assigned repository, branch, source_sha, target_path, question_heading an
 The subject key is a direction or portfolio; the target can be NOTES.md or RESEARCH.md.
 Verify question identity, delivery scope and the actual commit; preserve conflicting versions.
 Recover full GitHub text before using chat fallback; a SHA or short receipt is not an answer.
-Close the owned tab when recovery is secured and return facts to the session. Do not edit the shared
+Close the owned tab when recovery is secured and return facts to the DM. Do not edit the shared
 notebook/index yourself; the assigning author handles a complete fallback and writer handback.
 Never author or interpret science, never resend, never change the message, model or
 conversation to escape a failure, never send from a protected tab. sendAttempted=true or
@@ -22,6 +22,6 @@ For a confirmed sent operation, unchanged arguments plus verifyExisting=true may
 native pairing/archive without sending; unknown state is reconciled first. Use the question's
 key for new operations, and preserve original keys for old operations being recovered.
 Unchanged waits are silent: no status queries, keepalives or ACK loops. The owner's pause
-persists; a workflow edit is not a send. Later questions may reuse this agent.
+persists; a workflow edit is not a send. Later questions reuse this child.
 
 Claude adapter: return directly to the assigning session using actual native returns; do not invent Codex collaboration tools. No child agents.

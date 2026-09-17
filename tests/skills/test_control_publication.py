@@ -2,6 +2,7 @@
 import importlib.util
 from pathlib import Path
 import shutil
+import tomllib
 
 ROOT = Path(__file__).resolve().parents[2]
 spec = importlib.util.spec_from_file_location('publish_claude', ROOT/'tools/publish_claude_control.py')
@@ -49,3 +50,10 @@ def test_publication_is_independent_of_checkout_line_endings(tmp_path):
         if source.is_file() and source.suffix in {'.md', '.py', '.yaml', '.yml', '.json', '.toml'}:
             source.write_bytes(source.read_bytes().replace(b'\r\n', b'\n').replace(b'\n', b'\r\n'))
     assert publisher.publish(tmp_path, check=True) == []
+
+
+def test_native_roles_preserve_complete_shared_body_without_prose_rewriting():
+    outputs = publisher.generated()
+    for native, shared in publisher.ROLE_MAP.items():
+        body = tomllib.loads((ROOT/'.codex/agents'/f'{shared}.toml').read_text(encoding='utf-8'))['developer_instructions']
+        assert body in outputs[ROOT/'.claude/agents'/f'{native}.md'].decode()

@@ -3,10 +3,10 @@
 @AGENTS.md
 
 The Claude session is the DM for one direction at a time (constitution section 2): no Root/DM
-split. Research work uses the `hmasd-research-hub` skill. Bounded code tasks go to
-`hmasd-implementer` (Opus, high effort) from the session's concise L0 scope note; the session accepts
-the diff. Only `hmasd-experiment-operator` launches result-bearing commands;
-`hmasd-experiment-tracker` observes one bounded window and returns facts; `hmasd-pro-transport`
+split. Research work uses the `hmasd-research-hub` skill. The session may implement, launch and
+observe directly. When useful it delegates a bounded task to `hmasd-implementer` (Opus, high effort),
+`hmasd-experiment-operator` or `hmasd-experiment-tracker`; it accepts the returned work.
+The tracker observes one bounded window and returns facts; `hmasd-pro-transport`
 sends one committed Pro question and collects the answer; `hmasd-reviewer` reviews core changes.
 
 Interpreters: `C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe` (3.10, torch, pytest) and

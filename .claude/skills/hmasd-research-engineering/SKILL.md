@@ -17,7 +17,7 @@ owned paths and entry points; semantics that must not change; checks; budget and
 interface, state-flow or skeleton detail only where there is real risk. Read the nearest
 directory `AGENTS.md`.
 
-Small edits the DM makes directly. A bounded task goes to the Implementer (Claude: Opus, high
+The DM may implement directly or delegate a bounded task to the Implementer (Claude: Opus, high
 effort; Codex: Sol, high effort) with the scope note, the checkout and branch, and the entry.
 The Implementer returns the diff or commit, the check output, deviations with reasons and open
 risks. It chooses no science, adds no seed, arm or endpoint, launches nothing result-bearing
@@ -46,8 +46,8 @@ result stays recoverable, and its required outputs are preserved before scratch 
 - **Implementation judgment**: choose facilities by the actual task, semantic risk, resource
   cost and maintenance burden. Existing libraries, parallel execution, validation, recovery,
   profiling and reuse are available techniques, not forbidden categories. Prefer the simplest
-  adequate path; explain material additional machinery in the existing scope note and use
-  `scope: <item> per <NOTES.md entry>` when applicable, otherwise `scope: none`. Routine choices
+  adequate path; explain material additional machinery in the existing scope note or commit.
+  No mandatory scope trailer or separate record is needed. Routine choices
   within the task do not need the L0 to enumerate every utility or another approval. This does
   not grant extra fits, alter frozen execution semantics or permit blind retries of external effects.
 - **Scope and structure**: judge complexity by the scientific task, interfaces and maintenance
@@ -72,9 +72,11 @@ result stays recoverable, and its required outputs are preserved before scratch 
   immediately; root cause from error text stays provisional until reproduced over recorded
   bytes. Repair or verify a defect when the next claim depends on it; an unrelated historical
   failure does not block a credible alternative path.
-- **Local fallback**: allowed only when host portability was established before any
-  question-relevant output, no remote process was accepted, and a fresh local admission
-  passes. Routing never changes dtype, device, RNG, comparator, horizon or claim meaning.
+- **Host choice and recovery**: choose a suitable local or remote node prospectively for a
+  new experiment; the configured default is a convenience, not a remote-first requirement.
+  For an existing attempt, reconcile its process before a replacement and preserve its frozen
+  dtype/device/RNG/comparator/horizon semantics. If a new host changes those semantics, label
+  the new attempt accordingly rather than treating it as continuation. Admit on the destination.
 
 ## Checks and review
 
@@ -108,13 +110,15 @@ The DM repairs and accepts; the reviewer decides neither science nor permission.
 1. Commit and push the exact inputs.
 2. On the executing node, `scripts/hmasd_resource_preflight.py admit-memory --out <receipt>`
    must pass its physical and effective available-memory safety check, immediately before
-   the runner, in the same supervised command (`preflight && runner` under `agent-task`).
+   the runner, in the same supervised command or wrapper. Remote uses `preflight && runner`
+   under the configured `agent-task`; local Windows uses the [local execution method](references/local-execution.md).
    Concurrent checks reserve nothing: serialise launch and acceptance, then remeasure.
-3. Launch detached in an exact-sha worktree with the configured interpreter. Record command,
+3. Launch detached from the committed sha with the configured interpreter. Use a worktree or
+   source snapshot when necessary to keep active inputs unchanged while authoring continues. Record command,
    node, handle, sha, cwd and output root in `NOTES.md`.
-4. Hand the accepted handle to the monitor (Codex) or a bounded tracker window (Claude).
-   Timeout or a lost connection is unknown, not terminal. Never launch a duplicate; reconcile
-   the same handle.
+4. Observe directly or delegate to a monitor/tracker when useful. On transfer, retain observation
+   responsibility until the recipient adopts the accepted handle. Timeout or a lost connection is
+   unknown, not terminal. Never launch a duplicate; reconcile the same handle.
 5. On terminal notice collect outputs into `runs/<direction>/<tag>/` and verify the local
    artifact before any remote cleanup. Exit zero is not a result; the DM reads it.
 

@@ -9,17 +9,21 @@ model: sonnet
 Execute one bounded assigned batch from exact accepted inputs; no implementation,
 scientific choice, retry, new seed/arm/successor, changed endpoint/device or child agent.
 Input: command, full published SHA, cwd/output, node/device boundary, actual invocation
-allowance/stop, the assigning session return identity. Read .codex/hmasd-compute.toml and the
+allowance/stop, assigning lead and any designated observer. Read .codex/hmasd-compute.toml and the
 hmasd-research-engineering execution section before launch. The owner's pause remains controlling.
 
-Prepare a detached exact-SHA remote worktree and required sparse paths. Use the configured
-interpreter/PATH/supervisor. Stage only declared artifacts with their given digest, never
-dirty source. Fresh destination admit-memory (physical/effective >=4 GiB) && exact runner
-must be inside the same agent-task command before scientific initialization. Multiple
-checks reserve no memory: serialize launch—acceptance and remeasure capacity. No guessed
-hardware or local fallback outside predeclared portability and verified remote nonexistence.
+Use an exact-source snapshot on the assigned node and its configured interpreter. Remote
+execution uses agent-task; local Windows execution uses the engineering method's detached
+PowerShell wrapper. Stage declared artifacts, never dirty source. Fresh destination admit-memory
+must succeed in the same supervised command/wrapper before the runner. Multiple checks reserve
+no memory: serialize launch—acceptance and remeasure capacity. Host choice for a new experiment
+is distinct from recovering an accepted run; reconcile an old process before any replacement.
 
-After actual acceptance return exact node/handle/source/cwd/output and observation bound to the session. The session dispatches its bounded tracker; do not use sibling messaging, create a tracker, or keep polling after returning. Preserve collection responsibility for a later assigned terminal collection batch.
+After acceptance return exact handle/node/source/cwd/output and observation bounds to the
+assigning lead. The lead may observe directly or delegate. When explicitly assigned a direct
+observer handover, use the available native return path and retain responsibility until actual
+adoption; otherwise the lead receives the handle and owns further observation. Missing an
+optional monitor address does not block return. Do not create a new child or duplicate polling.
 
 A pre-process failure returns direct error and stops. Uncertain acceptance/lost observation
 reconciles the same supervisor handle; timeout is not termination. Never launch a replacement.

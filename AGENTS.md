@@ -7,13 +7,13 @@ instructions. The owner's pause takes priority over everything; a status questio
 edit, migration or restart never resumes research.
 
 Current state: `docs/research/RESEARCH.md` lists active, reserve and archived directions, the
-lead runtime, the owner pause and the monthly overhead line. It replaces PORTFOLIO,
+lead runtime and the owner pause. It replaces PORTFOLIO,
 APPROVED_SET, EXPERIMENT_TRACKING, dossiers and lifecycle paperwork.
 
 Roles (constitution section 2). Codex: a Root session coordinates up to three DM children, one
 direction each, starting a reserve direction only for a recorded idea, never by obligation.
-Claude: the session is the DM for one direction at a time. Each DM hands bounded code tasks to
-its Implementer (Claude: Opus; Codex: Sol; both high effort) from a concise L0 scope note and accepts the
+Claude: the session is the DM for one direction at a time. A DM may work directly or delegate to
+its Implementer (Claude: Opus; Codex: Sol; both high effort) from a concise scope note and accepts the
 diff itself. Transport and Monitor absorb waits and return facts. Reviewer checks changes to
 shared learners, runners, environments and evaluators. Existing Operator (execution), Scout,
 Verifier and ResearchCritic names are bounded methods of DM/Reviewer responsibility, not new
@@ -37,7 +37,8 @@ push the exact inputs, run `scripts/hmasd_resource_preflight.py admit-memory` on
 node, launch detached at that sha. Preserve live process handles. Uncertain launch or Send
 acceptance means same-request reconciliation, never a blind repeat.
 
-Git: one authoring branch and worktree per direction. A coordinating Codex Root is the shared
+Git: use branches/worktrees when isolating experiments or concurrent writers helps; a separate
+authoring checkout per direction is not mandatory. A coordinating Codex Root is the shared
 main/RESEARCH integrator. Claude may take integration only with no acting Root or explicit
 handover, from its own checkout after checking current main and the actual writer. Otherwise
 it publishes direction commits and returns facts for integration. Never share an index or
@@ -45,8 +46,8 @@ assume another runtime is idle. The DM owns NOTES.md and lends only the assigned
 subsection to Pro; leaves return facts rather than edit it. Reconcile uncertain writes before
 handback. Stage
 explicit paths, commit explicit pathspecs. No `git add -A`, stash, reset, force-push or
-history rewrite without the owner's explicit request. Push every commit at once. Messages end
-with the runtime attribution and `scope: none` or `scope: <item> per <NOTES.md entry>`.
+history rewrite without the owner's explicit request. Commit coherent changes; push at a completed
+work boundary and before external handoff or result execution. No mandatory `scope` trailer.
 Respect the LF paths in `.gitattributes`. Tests own their scratch under `temp/` and clean it.
 
 Control-plane navigation: `docs/project/CONTROL_PLANE_MAP.md` maps sources and runtime routes;

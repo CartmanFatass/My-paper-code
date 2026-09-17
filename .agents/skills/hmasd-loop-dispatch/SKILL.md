@@ -34,8 +34,9 @@ current checkout. Start with what changed and follow relevant dependencies as ne
    grant. If a worthwhile discriminator is recorded, Root may activate that existing reserve
    and set its Codex lead under the Constitution's reserve authority before result execution.
    With no worthwhile idea, leave it idle. Never start work just to fill capacity.
-4. **Integrate.** Bring accepted commits a DM names into `main` by explicit paths (cherry-pick
-   or fast-forward), check what is already integrated, push immediately. Resolve real
+4. **Integrate.** Bring named accepted commits into `main` by cherry-pick or fast-forward;
+   stage explicit paths if an integration needs edits. Check what is already integrated and
+   publish the completed integration. Resolve real
    shared-writer or shared-runtime conflicts. Direction acceptance belongs to the DM; shared-control
    acceptance belongs to the acting integrator. Ordinary direction steps need no Root ACK.
 5. **Keep RESEARCH.md current.** When a DM reports a boundary (idea killed, batch done, claim
@@ -59,13 +60,15 @@ final that describe the same boundary are one event.
 
 ## Git and cleanup
 
-Root is the shared main/RESEARCH.md integrator while coordinating Codex; each DM owns its
-direction branch and worktree. A Claude session publishes direction commits and returns facts
+Root is the shared main/RESEARCH.md integrator while coordinating Codex. Use separate authoring
+branches/worktrees for real isolation or concurrent writers, not automatically per direction.
+A Claude session publishes direction commits and returns facts
 while Root holds shared integration. With no acting Root or an explicit handover, Claude may
 integrate accepted commits from its own checkout after fetching current main and coordinating
 the actual writer. Never assume a different runtime has no writer; uncertain ownership delays
 only the shared edit. Nobody mutates another checkout/index. Preserve
-overlapping writers, commit by pathspec, push every commit. Remove an obsolete worktree only
+overlapping writers, commit by pathspec, and push at completed work or external handoff/run boundaries.
+Remove an obsolete worktree only
 after its unique commits are on the remote, dirty evidence is preserved and no live process or
 delivery depends on it; verify absence on disk and in `git worktree list`.
 

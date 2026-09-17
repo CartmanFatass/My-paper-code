@@ -57,7 +57,8 @@ operation. A method, tool, conversation or historical workflow is not a permanen
   **Reviewer** independently checks changes to shared learners, runners, environments or evaluators.
 - Existing **Operator, Scout, Verifier and ResearchCritic** names are bounded execution,
   fact-finding or review methods under DM/Reviewer responsibility, not extra scientific
-  decision owners. Operator is Claude's result-launch delegate; these leaves spawn nothing.
+  decision owners. The DM/session may implement, launch, observe and use Transport directly;
+  delegate when useful for context, independent work or waits. These leaves spawn nothing.
 - **Retire Grok clerk and Sonnet clerk as standing roles.** Mechanical edits belong to the
   direction lead. No additional role, including a renamed equivalent, without owner amendment.
 
@@ -172,18 +173,18 @@ this revision, is allowed. Exploration may be rough, fast and single-seed; its c
 5. Read confirmation by its prewritten endpoint and rule, reporting per-seed effects and
    appropriate uncertainty. Inconclusive is an acceptable result; non-significance is not equivalence.
 
-## 9. Monthly overhead and output
+## 9. Overhead when it helps a decision
 
-Put one monthly line in RESEARCH.md, not a new report: **governance-only commits / unique
-result-bearing run summaries**, and **completed, read confirmation studies / owner-hour**.
-Record numerator/denominator counts; approximate owner time is enough, zero denominators are N/A.
-Positive, negative and inconclusive completed studies all count; aborted studies remain visible but separate.
+There is no mandatory monthly governance metric or owner-time accounting. Use existing run
+results and Git history if a concrete overhead question needs investigation. The earlier
+33 docs-touching-commits/run reference is historical, not a current target or reporting duty.
+Improve the research path by removing unnecessary steps, not by creating measurement machinery.
 
-The draft reports **33 docs-touching commits per run summary for 2026-09-02–09-16**; this
-revision has not re-audited that count. Keep that broader ratio alongside the new overhead
-ratio during transition; they are not interchangeable. The draft's "zero effects" is not a
-scientific conclusion or a verified baseline for completed studies. If overhead does not fall,
-remove process before adding measurement machinery; do not game the ratio by suppressing research notes.
+Git is the ordinary version and recovery mechanism. Separate authoring branches/worktrees are
+useful for isolation and simultaneous writers, not mandatory for every direction. Commit coherent
+changes and push at completed work boundaries, before external handoff and before result execution;
+there is no per-commit scope footer or additional bookkeeping requirement. Preserve other writers
+and the committed input identity of accepted runs.
 
 ## 10. Transition — switch the entrypoints, do not rewrite the archive
 
