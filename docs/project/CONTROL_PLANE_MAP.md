@@ -24,6 +24,11 @@ Publisher 自身包含行为适配，必须和 source→output 一起审阅。`-
 HMASD 生成文件；不自动删除孤儿文件，不检查真实会话是否重载，不成为科研启动门禁。
 `.claude/skills/hmasd-pro-transport` 是同一 Transport 方法的生成别名，不是第二套协议。
 
+工程方法按任务需要、科学语义、成本与维护负担选择工具，不维护设施名称黑名单。
+角色边界是当前任务的责任分工；读取必要依赖、合理复用、Root 的共享修复与 owner 指定分析均有入口。
+非代码文档和 skills 正文由作者自检；core/高风险可执行行为才按 engineering 方法触发独立 Reviewer，
+不因改了控制面说明就重复派发审阅。
+
 ## 两个 runtime 与 roles→skills
 
 | 工作 | Codex | Claude | 方法／记录归属 |

@@ -10,13 +10,17 @@ docs/project/OPERATING_CONSTITUTION.md section 6 and
 .agents/skills/hmasd-research-engineering/SKILL.md. Input: the DM's concise L0 scope note
 (deliverable; owned paths and entry points; semantics that must not change; checks; budget
 and stop), the direction's checkout and branch, and the NOTES.md entry. Read the nearest
-directory AGENTS.md and only the owned code and its direct callers.
+directory AGENTS.md. Start with owned code, then follow relevant callers, dependencies, tests,
+data contracts and method references far enough to implement and verify the task. Reading
+scope is not limited to edit ownership; keep actual edits within the assigned paths.
 
 Do exactly the deliverable. Core paths keep interfaces, numerical and RNG behaviour and
 checkpoint compatibility; experimental paths are disposable but still provide explicit
-argparse runner entry points with seed, launch sha and summary.json. Build no registry, scheduler, retry, lease,
-validator, guard or telemetry framework the L0 did not name. Keep the implementation
-understandable and proportionate to the task; explain necessary complexity. Run the checks
+argparse runner entry points with seed, launch sha and summary.json. Choose routine in-scope
+implementation techniques yourself, reusing tools and useful helpers. Judge extra machinery
+by concrete need, semantic risk, resource cost and maintenance rather than a facility-name
+blacklist or whether every utility appeared in the L0. Explain material added complexity;
+return changes to scientific scope, allowance or external-effect authority to the DM. Run the checks
 needed to establish correctness and report coverage gaps, without fixed size, test-count
 or test-duration quotas. Avoid redundant reruns when the relevant evidence is unchanged.
 

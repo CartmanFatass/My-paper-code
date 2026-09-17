@@ -14,6 +14,9 @@ scientific allowances, runtime responsibilities and actual resource-safety check
 2026-09-16 (owner request in the alignment follow-up): clarify existing leaf methods,
 shared writing and within-direction idea preparation. Source publication does not prove
 adoption by live sessions; research remains paused until explicitly resumed.
+2026-09-16 (owner follow-up): replace facility-name prohibitions with task-proportionate
+engineering judgment, permit useful reuse and dependency reading, and use author self-checks
+for non-code control documentation rather than automatic repeated Reviewer passes.
 
 ## 1. What this project is
 
@@ -48,6 +51,11 @@ confirmation is a bounded final step, not the default mode.
   decision owners. Operator is Claude's result-launch delegate; these leaves spawn nothing.
 - **Retire Grok clerk and Sonnet clerk as standing roles.** Mechanical edits belong to the
   direction lead. No additional role, including a renamed equivalent, without owner amendment.
+
+Role limits allocate responsibility for the assigned task; they are not project-wide bans on
+the underlying capability. Necessary reading may follow dependencies beyond owned edit paths.
+Shared-control repairs and owner-requested analysis remain work for the acting Root/session;
+direction ownership and scientific acceptance remain with the assigned DM.
 
 Shared writing: a coordinating Codex Root integrates main and RESEARCH.md. A Claude session
 may take that function only when no Root is acting or on explicit handover, from its own
@@ -115,14 +123,21 @@ conversation registry, finality label or mandatory result-review loop.
 **Core:** shared learners, runners, environments and evaluators, including `ha_ctse_process/`.
 Preserve interfaces; run a relevant smoke test and obtain independent review when changing them.
 **Experimental:** `experiments/candidates/<direction>/` is disposable software, not a framework.
-No compatibility promise or generic registry, lease, retry, resumability or telemetry infrastructure
-without a concrete experimental need. Small correctness tests/assertions remain allowed.
+Compatibility is not owed by default. Choose implementation facilities by concrete experimental
+need, scientific semantics, resource cost and maintenance burden, not a blacklist of names.
+Reuse existing tools and small shared helpers when they reduce duplication; build additional
+machinery only where its benefit warrants the complexity. Routine in-scope implementation
+choices need no separate approval. Small correctness tests/assertions remain allowed.
 Engineering standards carried over from the earlier specifications (owner 2026-09-16 18:32 PDT)
 are kept in `hmasd-research-engineering`: maintainable scope, proportionate correctness
 checks, exact-sha staging of declared artifacts, the telemetry rule, quarantine of incomplete
 attempts and diagnosis by reproduction. Engineering review uses actual complexity and risk,
 not line counts, orchestration percentages, elapsed-test ceilings or fixed note/test counts.
 This does not relax scientific allowances or genuine resource-safety and external-effect checks.
+Non-code documentation, skill prose and descriptive control-plane edits use the author's
+consistency and source checks; they do not automatically invoke a Reviewer. Independent review
+continues for core and high-risk executable behavior, including executable configuration or
+launch/transport code. Judge the actual behavior changed, not merely the file extension.
 
 For result-bearing runs: commit and push exact inputs, perform fresh node-memory preflight,
 then launch detached at that sha. Archiving stops maintenance; it does not destroy evidence.

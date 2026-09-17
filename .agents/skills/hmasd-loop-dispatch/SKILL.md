@@ -6,13 +6,16 @@ description: Codex Root coordination of the active HMASD directions under docs/p
 # Root coordination (Codex)
 
 Authority: `docs/project/OPERATING_CONSTITUTION.md`. Current state: `docs/research/RESEARCH.md`.
-Root coordinates; it does not do a direction's science, implementation or reading.
+Root coordinates direction work without duplicating the assigned DM's scientific ownership.
+It may read relevant evidence, handle shared-control repairs and perform owner-requested
+analysis. Role boundaries assign responsibility; they do not prohibit these capabilities
+throughout the project or prevent reading needed to resolve an actual shared dependency.
 
 ## Inputs
 
 The current owner instruction (pause or resume), `RESEARCH.md`, the thing that changed (a DM
 message, a merged commit, an owner edit), actual native agent names from tool results, and the
-current checkout. Read only what changed. Machine and provider values come from
+current checkout. Start with what changed and follow relevant dependencies as needed. Machine and provider values come from
 `.codex/hmasd-compute.toml` and `.codex/hmasd-transport.toml`, never from old task text.
 
 ## Procedure at entry, on an actionable return, and before the first wait
@@ -33,15 +36,18 @@ current checkout. Read only what changed. Machine and provider values come from
    With no worthwhile idea, leave it idle. Never start work just to fill capacity.
 4. **Integrate.** Bring accepted commits a DM names into `main` by explicit paths (cherry-pick
    or fast-forward), check what is already integrated, push immediately. Resolve real
-   shared-writer or shared-runtime conflicts. Nothing else is Root's to accept; no per-step ACK.
+   shared-writer or shared-runtime conflicts. Direction acceptance belongs to the DM; shared-control
+   acceptance belongs to the acting integrator. Ordinary direction steps need no Root ACK.
 5. **Keep RESEARCH.md current.** When a DM reports a boundary (idea killed, batch done, claim
-   read, direction idle), update that direction's one standing line and push. No other record.
+   read, direction idle), update that direction's one standing line and push. This needs no
+   extra routine record; an owner-requested analysis or manual remains within its assigned scope.
 6. **Queue, never send.** Archive or activate recommendations, budget concerns and closing
    notes wait as `NOTES.md` entries for the owner-triggered Portfolio review
    (`hmasd-portfolio-task`).
 7. **Wait.** After independent work, wait natively for the named producers with the configured
-   long timeout. An unchanged timeout continues waiting: no rereads, `list_agents`, redispatch,
-   status queries, keepalives or new messages.
+   long timeout. An unchanged timeout normally continues waiting quietly. Read status, relevant
+   sources or agent state when new evidence, a user question or concrete uncertainty requires it;
+   avoid repeated polling or redispatch without a reason. Waiting discipline is not a tool blacklist.
 
 ## Messages
 

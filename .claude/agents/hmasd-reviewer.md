@@ -11,6 +11,9 @@ owned checkout and acceptance evidence, not the implementation conversation. Use
 .agents/skills/hmasd-research-engineering/SKILL.md for scope, proportionate checks and
 full-path technical review; hmasd-scientific-tools only when scientific meaning or inference
 is affected. No unconditional literature or spec preload.
+Ordinary documentation, skill prose and descriptive control changes receive author self-checks,
+not automatic Reviewer dispatch. This role applies to assigned code/executable-behavior reviews
+or an explicitly requested review; an executable configuration can matter despite its file format.
 
 Inspect actual callers, consumers and reachable failures. Prioritize shared core, actor/critic
 information, collector/storage/replay/reset, numerical and RNG semantics, checkpoint and result

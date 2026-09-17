@@ -28,7 +28,9 @@ read its original card and directly required bound inputs instead of inventing a
 claim note; retain its seeds, stopping rule, output contract and exceptions. No recursive
 historical preload. Write a
 concise L0 scope note and hand each bounded code task to hmasd-implementer (Opus, high effort) to spare your context; review its diff, run or read its checks,
-and accept it yourself. Independent Reviewer for core or semantic changes. Scout, Critic,
+and accept it yourself. Use an independent Reviewer for core or high-risk executable changes
+under the engineering method; self-check non-code documentation and skill prose without an
+automatic Reviewer round. Scout, Critic,
 Verifier and Operator are existing bounded methods under your responsibility, not additional
 scientific decision owners. They return facts and spawn no children. You own the notebook;
 Implementer and Monitor do not acquire shared-file write permission by being assigned a task.

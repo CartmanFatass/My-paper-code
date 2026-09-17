@@ -31,7 +31,8 @@ numerical and RNG behaviour and checkpoint compatibility unless the change is th
 recorded. Run the relevant smoke test. Core acquires no research dependencies.
 
 **Experimental** code under `experiments/candidates/<direction>/` is disposable: no
-compatibility promise, no shared abstractions built for reuse. Provide explicit argparse runner entry
+default compatibility promise. Reuse small helpers or shared abstractions where actual consumers
+benefit; avoid designing a general framework for hypothetical future experiments. Provide explicit argparse runner entry
 points with seed, launch sha and a `summary.json` carrying the readings named in the notebook entry
 or claim note, including learner movement relative to initialisation and actual transition,
 optimizer-update and evaluation counts when reporting learning or fixed-policy evaluation.
@@ -41,11 +42,13 @@ result stays recoverable, and its required outputs are preserved before scratch 
 
 ## Carried-over engineering standards (review signals, not gates)
 
-- **Do not build** unrequested distributed or multiprocess workers, pools, schedulers, retries,
-  leases, heartbeats, recovery orchestration, hash or authority guards, incident trees, JSON
-  validators, registries, single-use abstractions, telemetry frameworks or compatibility
-  shims. A facility beyond wall time and peak RSS needs its need written in the notebook entry
-  and `scope: <item> per <NOTES.md entry>` in the commit; otherwise `scope: none`.
+- **Implementation judgment**: choose facilities by the actual task, semantic risk, resource
+  cost and maintenance burden. Existing libraries, parallel execution, validation, recovery,
+  profiling and reuse are available techniques, not forbidden categories. Prefer the simplest
+  adequate path; explain material additional machinery in the existing scope note and use
+  `scope: <item> per <NOTES.md entry>` when applicable, otherwise `scope: none`. Routine choices
+  within the task do not need the L0 to enumerate every utility or another approval. This does
+  not grant extra fits, alter frozen execution semantics or permit blind retries of external effects.
 - **Scope and structure**: judge complexity by the scientific task, interfaces and maintenance
   burden, not line counts or orchestration percentages. Explain necessary machinery and avoid
   splitting changes merely to conceal their logical scope.
@@ -90,9 +93,12 @@ promised as diagnostics even when the main branch does not consume them. Future 
 may drop unnecessary diagnostics with an honest narrower claim; omitting required work is not
 an equivalent optimization of the original experiment.
 
-**Independent review** (`hmasd-reviewer`, read-only) is required for a change to core, to
-scientific meaning, numerics, RNG, replay or recurrent state, checkpoint or result identity, or
-external effects, including launch and Pro tooling. Give the reviewer the contract, invariants,
+**Independent review** (`hmasd-reviewer`, read-only) is required for core or high-risk executable
+changes affecting scientific meaning, numerics, RNG, replay/recurrent state, checkpoint/result
+identity or external effects, including executable configuration and launch/Pro code. Non-code
+documentation, skill prose and descriptive control changes use author self-checks for source
+consistency, intent and affected consumers; no automatic or repeated Reviewer pass. File extension
+alone does not determine whether a change alters executable behavior. Give a required reviewer the contract, invariants,
 diff and evidence, not the conversation. A finding names the reachable failure and its impact.
 The DM repairs and accepts; the reviewer decides neither science nor permission.
 
@@ -112,8 +118,11 @@ The DM repairs and accepts; the reviewer decides neither science nor permission.
    artifact before any remote cleanup. Exit zero is not a result; the DM reads it.
 
 Runtime notes: ordinary in-process batching and a fixed synchronous native team inside one
-named function are fine; no dynamic executor service, no standing profiler, no automatic GPU,
-JIT, language or dependency migration. Report measured wall and peak RSS with their scope.
+named function are routine options. Select topology, profiling, device, JIT, language and
+dependencies for demonstrated task needs and actual costs under the existing scope. A larger
+execution design is not justified merely by its availability; a named technique is not itself
+a reason to refuse a useful implementation. Preserve frozen conditions and avoid unrelated
+environment changes. Report measured wall and peak RSS with their scope.
 Preserve live handles; a killed run stays killed.
 
 Batch only genuinely independent axes with explicit state ownership. Preserve causal,
