@@ -2,6 +2,8 @@
 
 一次性 owner-requested 审计，作者 Codex。不是新规则、批准记录或研究恢复指令。
 
+**审计重点更正：下列原报告主要检查手续与工具迁移，不能证明科学、工程方法完整迁移。请先读本文末尾的「科学 spec、工程 spec 与 skills 的内容保留复核」。该复核固定到 `7d30691bc87d7de441c0f27b666a237aef4c247a`，结论是：底线保留，但有实质方法内容未被当前 skills 完整承接。原报告保留为此前快照，不把其已修复的接口问题冒充当前问题。**
+
 ## 固定版本与结论
 
 - 修改前：`70654c8d9cc7852f41fe74c7f920f04af2409764`，2026-09-16 03:56 PDT。
@@ -101,3 +103,112 @@ Owner pause、独立高风险 review、真实节点物理及有效可用内存�
 不构成继续保留这些手续的理由。随后已采用问题级工具 key、恢复不发送的同操作查询、移除旧 helper／
 references／owner-item 与对应测试、对齐菜单提示并取消逐修改文书要求；真实 Agentify 模块的无外部发送
 测试通过。实施事实见[原迁移记录](../changes/2026-09-16-control-plane-alignment.md)的 owner clarification 段落。
+
+## 科学 spec、工程 spec 与 skills 的内容保留复核
+
+### 对比对象与判定口径
+
+本节回应 owner 的更正：检查工作流简化时有没有丢掉研究方法，而非再次审核手续。
+旧基线为 `70654c8d9cc7852f41fe74c7f920f04af2409764`，当前为
+`7d30691bc87d7de441c0f27b666a237aef4c247a`。旧 skill 引文均指该基线的同名文件，
+可用 `git show <基线>:<路径>` 复核；当前链接指本次快照的路径及节名。
+区间还包含 owner 修订、Pro 建议及 Codex 修复，不能把所有差异都归为 Claude 一人造成。
+
+逐节对照的来源：
+
+- 旧科学 skill 与 [MARL_EMPIRICAL_EVIDENCE_SPEC](../../research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md)，尤其 §§5、11.1–11.11。
+- 旧工程 skill 与 [ENGINEERING_SCOPE_SPEC](../../project/ENGINEERING_SCOPE_SPEC.md) §§2–7、[MARL_RUNTIME_ENGINEERING_SPEC](../../project/MARL_RUNTIME_ENGINEERING_SPEC.md) General requirements §§1–8、[ENGINEERING_ADDITIONS](../../project/ENGINEERING_ADDITIONS.md)。对象附款只检查保留方式，不推广成新工作要求。
+- 旧/current 科学、工程、Pro author、Portfolio、Root dispatch、Transport skills，已删除 owner-item 的内容；当前 Constitution、DM/Reviewer/Critic 角色和科学 references、分析脚本、foundation 阅读入口。
+- Claude 的 [shared-methods rewrite](../changes/2026-09-16-shared-methods-rewrite.md) 与 [carried-over standards](../changes/2026-09-16-implementer-and-carried-over-standards.md) 改动记录。
+
+**“未承接”指旧的可用方法不再出现在当前日常 skill/角色入口中；不是说历史文件被抹掉，也不是证明已经发生错误实验。**
+旧 spec 被明确标为历史资料，因此“旧 spec 仍在磁盘”不能作为完成迁移的证据。
+泛称“检查语义”“报告不确定性”只能算部分覆盖，不能替代原来具体的判断方法。
+当前 foundation 仍能补充部分概念；其按需阅读入口也不等于所有相关方法已在日常 skill 中承接。
+
+### 科学内容：六组实质差异
+
+| 编号与旧来源 | 当前实际承接 | 缺失的内容及影响 | 最小补法（建议，尚未应用） |
+| --- | --- | --- | --- |
+| S1：旧 scientific-tools「Design and lanes」的因果路径与动态成员分析 | **部分保留。** Explore 仍列 roster/duration/credit/information；comparators 仍区分 K、N、transfer、ad hoc；Critic 仍检查 causal path、co-adaptation、censoring | DM 的设计方法中不再明确追踪 environment event → entity ownership → information → action/credit → learning → native consequence；entity/slot、join/leave/rejoin、survivor state、primitive/opportunity time 的区分未承接。可能把槽位复用或存活者历史差异误认为 N-axis 机制效果；不能声称 co-adaptation/censoring 在全控制面消失 | 在 Explore 增加适用时的因果链与动态成员辨析提示，不要求每项实验填写新表 |
+| S2：旧 scientific-tools 实际学习链；科学 spec §§5.2、11.4、11.8.6 | **部分保留。** 工程 skill 要求 summary 中的 learner movement；当前有 horizon、fits、curves、summary 和技术失败区分 | 环境、policy、learner/trainer、evaluator 是否真的贯通，以及 transition/update/evaluation 的实际非零计数不再明确列出。参数变化不独自证明 evaluator/采样完整，也不能把 recurrent state 变化算作参数学习 | 需要学习主张时在现有 summary 核对这些读数；固定策略评价如实写零更新及条件性结论，不恢复 B 类认证或通用“先证明可学习”实验 |
+| S3：旧 scientific-tools 确认冻结与 selection；科学 spec §5.3 | **部分保留。** CLAIM 已有 arms、fresh seeds、horizon、endpoint/evaluation、selection/tuning、decision rule、uncertainty；禁止看分数扩批和改写原计划；foundation 解释 checkpoint 选择 | 任务总体、checkpoint 选择规则、停止规则，以及 development/tuning 与 final evaluation 的分离不再在当前确认方法中逐项明确。不能说预先约定完全丢失，但新作者可能遗漏选择协议。DM 对旧冻结卡的 stopping-rule 保护只覆盖旧对象 | 在原 CLAIM 方法的一句话中补明总体、选择/停止协议及调参与最终评价的分离，不新建卡或审批 |
+| S4：旧 scientific-tools「Statistics and comparison」；科学 spec §§11.7、11.11 | **部分保留。** 独立训练单位、配对依据、per-seed、estimand、小样本、不显著≠等效、宽区间≠零均在 | “值得关心的效应大小”、训练结果变异、估计量不确定性三者的区分未承接；事先定义等效区域及区间精度的正面判据缺失。取消 MEI verdict 是流程简化，但不应连确认阶段如何判断效果有无实际意义一起删掉。旧 spec 的“不用 1/2 SD 机械判有效或等效”也没有替代说明 | 按主张说明实际有意义的差异；仅在声称等效时给出事先定义区域及区间判断，不恢复所有探索都要 MEI 通过的门槛 |
+| S5：旧 scientific-tools 基线段；科学 spec §11.7 | **未明确承接。** 匹配信息与 baseline reuse 保留 | headroom 原来是“说明的 upper reference 减去调优后的同信息通用基线”，不是任意正 score gap；当前 skill 没有这个定义。它关系到 FSD 基线校准的解释，不能把 privileged upper 与弱基线之差直接当可实现改进空间 | 在 comparators 增加一句定义及适用限度；缺少 headroom 不阻止普通探索 |
+| S6：旧 scientific-tools「Burden, work and intake」；科学 spec §11.9 | **部分保留。** fits/horizon、完整性能成本、最小真实学习比较、search 需要目的均保留 | 设计前数 arms×fits×steps、evaluation panels、epochs、嵌套 candidate/trajectory/solver calls，区分算法固有搜索与研究附加验证的具体方法消失。小 fits 数无法揭示 a^N、b^H、全子集或每候选 replanning；“bounded/beam”也不自动代表便宜 | 在 Cost 加短工作量提示，用配置计数与已有测量选足够小的问题；无需成本 ledger、额外 profiling fit 或精确复杂度证明 |
+
+另有一项研究取向的压缩：科学 spec §§11.1–11.3 明确允许受理论启发的次优/启发式方案，
+其理论结论应匹配实际实现，普通经验比较不以普遍 invariance/safety/convergence 证明为前提。
+当前 Constitution 的快速探索、单种子探索，以及 science 的 theorem-assumption 限定保留了大方向，
+所以这不是全面丢失；但“启发式本身是合法研究对象，不需要先证明最优”不再明确。
+可与 S6 一起补一句正面方法说明，无需恢复 C-FORMAL 分类。
+
+### 工程内容：四组实质差异
+
+| 编号与旧来源 | 当前实际承接 | 缺失的内容及影响 | 最小补法（建议，尚未应用） |
+| --- | --- | --- | --- |
+| E1：旧 engineering「Runtime and bounded execution」；runtime spec §4 | **部分保留，关键细节缺失。** 当前允许进程内 batching、固定同步 native team，保留常规 RNG/mask/reset/replay 审查和内部线程成本披露 | 没有明确 batching 应保留 time/causal/autoregressive/recurrent 顺序，以及 sample/update frequency、replay ratio、policy freshness、reduction/tail；固定团队的私有可变状态/输出、参与者与生命周期边界、逻辑顺序合并错误也消失。可能“加速”时改变训练量、丢尾或引入共享状态竞争 | 在 Runtime notes 补适用的语义清单和固定团队实现边界；不增加 worker 框架、验证服务或审批 |
+| E2：旧 engineering「Scope and checks」；runtime spec §7；Engineering Additions「Wasted compute」 | **未明确承接。** independent Reviewer、required measurements 和不得删科学工作仍在 | “独立数值 checker 不得直接复用候选答案证明一致”和“虽不被主分支读取、但属于承诺诊断的输出不能直接删”已消失。独立 Reviewer 是人员/上下文隔离，不等于 checker 的算法独立性 | 补两句到 Checks。可以重新设计未来实验的无用诊断，但不能把省略原约定输出说成等价优化 |
+| E3：旧 engineering 数值段；scope spec §3.5；runtime spec §7；科学 spec §11.8.5 | **部分保留。** dtype/scale/intermediates、反对普遍 bit equality、独立种子统计方法均保留 | 三种复现（确定性数值回放、统计重复、算法/语义等价）的用途区分不再明确；gradients、conditioning、accumulation、动作/排序/指标后果的检查较旧版缩水。相近中间数值未必代表相同策略决策；输入 SHA 相同也不保证输出相同 | 在 Checks 用一小段区分主张所需复现，按实际数值与决策风险选择检查；不设统一 1e-12 或跨平台 bit equality |
+| E4：旧 engineering runtime 段；runtime spec §§1、3、5；Engineering Additions「Device selection」 | **部分保留。** 完整 wall/CPU/RSS/cold-warm 计量、no automatic GPU/JIT、killed stays killed 已在 | 性能方法被压缩为禁止列表与计量：真实热点、重复构造/细粒度跨语言调用/pack-copy、采样/训练/buffer/output 的设备与传输同步分析未承接。普通 wall/watchdog 估计可前瞻调整、但不能改变科学 endpoint/exposure 或硬资源限的区分也消失。可能误把规划估计当硬停机，或把微基准优势推广成训练优势 | 补“按完整实际路径找热点和选设备”及“工程估计与科学终点不同”两段；不恢复旧秒数阈值、不做强制设备扫描、不让被杀运行复活 |
+
+E1/E4 的计量内容不能误报为全丢：当前 scientific-tools「Cost and exposure」已经承接
+import/build/init、rollout/learning/replay、evaluation/synchronization/publication/readback、
+cold/warm、preparation/queue、sum fit walls/batch elapsed/node occupancy、children CPU 和 RSS scope。
+问题是**计量覆盖仍在，如何设计和验证优化的具体方法不完整**。
+
+Engineering Additions 中的历史倍速、单线程经验、特定 CUDA/width16 tolerance、
+torch.compile 1.00x 和 clone 成本仍是条件性历史测量，不应复制为全局规则。
+需要承接的是其适用范围与推理方法，不是把历史硬件经验设成当前约束。
+
+### 其他 skills：两处方法传播缺口
+
+**O1：Pro author 的方法传递断开。** 旧 skill「Method and evidence bindings」明确指出
+Pro 不继承本地 skills/role TOML，问题须内联适用约束，或指明固定 SHA 的科学/工程方法节；
+并交代 claim ceiling、strongest alternative、discriminator、dominant workload 与未知量。
+当前 [Pro author](../../../.agents/skills/hmasd-pro-research-prompt-author/SKILL.md) 的 Standing
+链接 notebook/runs/claim，Constraints 明确写出的科学内容只有 seeds 和 matched baseline；
+Return 仍有预测/null/discriminator/fit cost，但没有要求带入其他适用方法。
+**文件在仓库可读不等于 Pro 已收到阅读目标。** 这会让本地方法即使修好也不能可靠传给 adviser；
+不能因此断言所有历史 Pro 答案已经错误。最小补法是在现有问题段落加相关方法的短摘录或固定版本链接，
+只选与问题有关的节及必要原始证据，不恢复 TASK/HANDOFF、全历史预读或 PRO_FINAL。
+
+**O2：Portfolio/owner-item 的决策质量内容没有完整转移。** 旧 Portfolio 的比较维度包括
+decision relevance、uncertainty、完整成本、substitutability、reversibility、headroom、MEI、
+strongest contrary evidence；选项需说明 smallest useful investment、missing facts、revisit condition。
+旧 owner-item 还让 owner 看支持与反对证据、代价和可逆性。
+当前 [Portfolio](../../../.agents/skills/hmasd-portfolio-task/SKILL.md) 保留 options/consequences/reasons、
+owner 决定、narrow negative≠方向否定、资源退出≠科学否定、fusion 匹配问题/estimand。
+但“reasons”未明确承接上述比较维度。删掉 packet/owner-console 手续是有意简化，
+不能据此把反证与最小下一步投资也丢掉。最小补法是在原 review section 中用普通文字说明
+支持/反对证据、不确定性、完整代价、可替代性/可逆性及值得再次考虑的条件，仍只由 owner 触发。
+
+Root dispatch 主要变动是权限、预算与协调，不能把这些改变算成科研知识丢失。
+Transport 主要是交付方法，其先前修复也不等于完成上述科学内容迁移。
+owner-item 的删除不应反转；它有用的决策信息可留在现有 Portfolio/NOTES 内。
+
+### 确认保留的内容与应继续删除的手续
+
+| 类别 | 本次核对结论 |
+| --- | --- |
+| 科学推断底线 | 独立 training runs；episodes/checkpoints 不扩充 n；配对有设计依据；不填缺失为零；保留失败与反向结果；报告 per-seed/estimand/selection；不显著不等于等效；按预写规则判读——均有明确当前文字 |
+| 比较器 | actor/critic rights、信息 cadence/bandwidth/representation、communication/action/reward/termination/normalisation/reset、training/update/tuning/evaluation 权利以及 package/component 区分均保留 |
+| 工程纪律 | core/experimental 区分、L0、保持 interfaces/RNG/checkpoints、core 不依赖实验代码、比例检查、高风险独立 review、exact inputs、declared artifacts、fresh admission、quarantine、复现诊断、local fallback、optional telemetry 与 primary measurements 区别均保留或已补回 |
+| 文献与分析工具 | scientific-reading/local-literature 的 diff 仅是 card/intake → NOTES/claim 的记录路径用语；adapters.md 和 summarize_runs.py 在对比区间无变化。foundation/topic notes 入口保留。不能报告为知识库或统计脚本被删除 |
+| 历史对象 | Constitution §10 明确保留 FSD B01 的原 fits/seeds/endpoint/reading/output contract；归档对象的独立例外仍在历史源中，不该泛化成新工作门槛 |
+| 有意取消 | evidence-class/C-consumption 手续、旧 weekly windows、cards/intakes/ledgers/owner items、Pro 最终裁决与逐节点审批、固定行数/runner/test-time 配额、registry/packet/receipt 文书。均不建议恢复 |
+
+### 对此前结论的更正与修复边界
+
+Claude 两份变化记录对“comparators/statistics/cost kept”的说法，只在**保住部分主题与底线**的意义上成立。
+它们没有证明全部方法已迁移。此前 Codex 的对比也把生成一致、工具接口与部分底线保留当成主要结论，
+没有完成本节这种内容追踪，因此遗漏了 owner 真正关心的问题。
+
+本次定位到 **6 组科学、4 组工程、2 组其他 skill 的实质缺口或承接不足**，另列研究取向的轻度压缩。
+这些分组是审计组织方式，不是新的十二项合规关卡，也不表示十二项都完全消失。
+优先补 S1/S2/S4、E1/E2/E3 与 O1，可分别避免机制混淆、假学习证据、统计误读、
+优化改变算法、循环自证、错误复现要求及给 Pro 的方法遗漏；其余内容可在相同短段内一起承接。
+
+适合当前 research project 的处理是：**把有用判断方法补进现有四个 skills，继续使用 NOTES、runs、CLAIM，
+不恢复旧流程。** 本次只修改这份 owner 请求的对比报告，没有修改 Constitution/skills、增加研究任务、Send 或运行实验。
+核验为旧/新源码与记录逐节对照、当前角色和阅读入口交叉检索；没有用 publisher drift 或通过的测试替代内容审计。
