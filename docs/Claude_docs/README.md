@@ -35,6 +35,10 @@ whose corrections are incorporated. No experiment was run and no scientific obje
 - `2026-09-15-portfolio-control.md` — Portfolio review taken out of the loop; the approved set
   (`docs/research/portfolio/APPROVED_SET.md`) as the only runnable set; concurrency a ceiling, not a
   quota (normative text in `decisions/2026-09-15-portfolio-control-and-approved-set.md`).
+- `2026-09-16-role-remnant-cleanup.md` — deletion of the suspended CM/Implementer role files
+  (`.codex/agents/hmasd-implementer.toml`, `.claude/agents/hmasd-cm.md`,
+  `.claude/agents/hmasd-routine-implementer.md`) and an empty leftover skill directory;
+  publisher drift 0, publication tests 3 passed on the 3.11 environment.
 
 ### reviews/
 
@@ -114,6 +118,11 @@ whose corrections are incorporated. No experiment was run and no scientific obje
 
 ### plans/
 
+- `OPERATING_CONSTITUTION_DRAFT_20260916.md` — one-page operating constitution drafted at the
+  owner's request (17:13 PDT): roles kept (Root/DM, Transport, Monitor, Reviewer), budget in
+  fits, three records per direction, Pro as adviser through the GitHub connector, disposable
+  experimental code, rules about rules, scientific minimums, monthly overhead metric,
+  no-rewrite transition. `[ASK]` items await the owner's choice. Not in force until adopted.
 - `TWO_AXIS_RESEARCH_PROGRAMME_20260914.md` — alignment draft answering the owner's request for
   concrete next steps after the 2026-09-14 critical review: field standards (Gorsane 2022,
   Agarwal 2021, EPyMARL, Henderson 2018); a ten-section skeleton to replace the evidence spec;
