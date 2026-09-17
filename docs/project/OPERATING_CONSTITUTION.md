@@ -1,8 +1,11 @@
-# HMASD operating constitution — revised draft for owner adoption
+# HMASD operating constitution
 
-Pro revision, 2026-09-16, of the draft at `3196d2fc353dae5090c20517177aa15adaa52ec0`.
-Proposal only: neither adoption nor research resumption is implied by this edit.
-Once adopted, this is the sole operating-governance text; historical scientific records retain their meaning.
+Adopted by the owner 2026-09-16 17:53 PDT (instruction "adopt"), from the Claude draft at
+`3196d2fc3`, Pro's revision `cb65da12d` (PR #23) and the owner's runtime clarification
+`bb6b514b8`. This is the sole operating-governance text; where any other file, skill, role body
+or historical record conflicts with it, this page prevails. Historical scientific records keep
+their meaning as evidence. Only the owner amends this page. Adoption did not lift the owner's
+research pause of 2026-09-15 22:23 PDT.
 
 ## 1. What this project is
 

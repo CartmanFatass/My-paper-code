@@ -1,3 +1,5 @@
+> Superseded 2026-09-16 17:53 PDT: the current Portfolio view is `docs/research/RESEARCH.md` (constitution section 4). This file is historical and no longer maintained.
+
 # 科研 Portfolio 报告
 
 当前摘要核对：2026-09-16；科学来源版本 `e9399305d58bdd7e5f9518e12cf43e9abd199ee3`。

@@ -39,6 +39,10 @@ whose corrections are incorporated. No experiment was run and no scientific obje
   (`.codex/agents/hmasd-implementer.toml`, `.claude/agents/hmasd-cm.md`,
   `.claude/agents/hmasd-routine-implementer.md`) and an empty leftover skill directory;
   publisher drift 0, publication tests 3 passed on the 3.11 environment.
+- `2026-09-16-constitution-adoption.md` — the adoption activation: PR #23 merged, constitution
+  moved to `docs/project/`, AGENTS/CLAUDE replaced by short entries, `docs/research/RESEARCH.md`
+  created, superseded banners on APPROVED_SET and PORTFOLIO, clerk roles deleted, hub-skill
+  preface regenerated.
 
 ### reviews/
 
@@ -118,11 +122,9 @@ whose corrections are incorporated. No experiment was run and no scientific obje
 
 ### plans/
 
-- `OPERATING_CONSTITUTION_DRAFT_20260916.md` — one-page operating constitution drafted at the
-  owner's request (17:13 PDT): roles kept (Root/DM, Transport, Monitor, Reviewer), budget in
-  fits, three records per direction, Pro as adviser through the GitHub connector, disposable
-  experimental code, rules about rules, scientific minimums, monthly overhead metric,
-  no-rewrite transition. `[ASK]` items await the owner's choice. Not in force until adopted.
+- `OPERATING_CONSTITUTION_DRAFT_20260916.md` — moved on adoption (2026-09-16 17:53 PDT) to
+  `docs/project/OPERATING_CONSTITUTION.md`, the sole operating-governance text. History: Claude
+  draft `3196d2fc3`, Pro revision `cb65da12d` (PR #23), owner runtime clarification `bb6b514b8`.
 - `TWO_AXIS_RESEARCH_PROGRAMME_20260914.md` — alignment draft answering the owner's request for
   concrete next steps after the 2026-09-14 critical review: field standards (Gorsane 2022,
   Agarwal 2021, EPyMARL, Henderson 2018); a ten-section skeleton to replace the evidence spec;

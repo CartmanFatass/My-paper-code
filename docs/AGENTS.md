@@ -5,8 +5,8 @@ retain pilot note/card, summary/result and intake; raw evidence and necessary ex
 facts remain. Older TASK/HANDOFF, cards, archives and fixed versions retain original
 meaning. Do not rewrite historical verdicts or replace raw outputs with summaries.
 Current methods live in .agents/skills; project/spec documents marked historical are
-binding evidence only for named frozen objects. APPROVED_SET is execution authority;
-Portfolio/dossier/handoff are current views, not a second grant.
+binding evidence only for named frozen objects. research/RESEARCH.md is the only current index (constitution
+section 4); PORTFOLIO, APPROVED_SET, dossiers and handoffs are historical.
 
 external-review and archive trees preserve provenance; personal is owner notes (ignored).
 Claude deliverables outside direction authority use Claude_docs/<category> and its README.

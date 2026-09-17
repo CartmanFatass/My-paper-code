@@ -1,3 +1,5 @@
+> Superseded 2026-09-16 17:53 PDT: the current approved set is `docs/research/RESEARCH.md` (constitution section 4). This file is historical and no longer maintained.
+
 # Approved set (authority; version 1, 2026-09-15 21:37 PDT, OWNER_DIRECT)
 
 The execution loop advances only the directions listed under "Approved", in priority order, within

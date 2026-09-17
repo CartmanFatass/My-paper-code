@@ -114,10 +114,10 @@ def generated(root=ROOT):
     dm = dm[:start] + 'Operator returns the accepted handle to hub. Hub dispatches its bounded tracker with exact handle/node/source/output and observation limit. The tracker first return is adoption evidence; hub assigns subsequent bounded windows and terminal collection. No sibling messaging or simultaneous operator polling. ' + dm[end:]
     outputs[root/'.claude/skills/hmasd-research-hub/SKILL.md'] = ('''---
 name: hmasd-research-hub
-description: Coordinate and own approved research as Claude hub, at most two directions; not for status or mechanical edits.
+description: Drive one direction as the Claude DM under docs/project/OPERATING_CONSTITUTION.md; not for status or mechanical edits.
 ---
 
-'''+BANNER+'Claude hub combines Root and DM within the approved set, at most two directions. Only Operator launches. Use actual native task returns and bounded tracker windows; Codex tool names below describe counterpart routing, not available Claude APIs.\n\n'+loop+'\n## Direction ownership\n'+dm).encode()
+'''+BANNER+'The Claude session is the DM for one direction at a time; docs/project/OPERATING_CONSTITUTION.md prevails over any approved-set, lane, slot or ledger wording below. Only Operator launches. Use actual native task returns and bounded tracker windows; Codex tool names below describe counterpart routing, not available Claude APIs.\n\n'+loop+'\n## Direction ownership\n'+dm).encode()
     transport = outputs[root/'.claude/skills/hmasd-chatgpt-pro-transport/SKILL.md'].decode()
     transport = transport.replace('name: hmasd-chatgpt-pro-transport','name: hmasd-pro-transport',1)
     # Alias includes full method; helper/reference paths resolve to generated canonical copy.
