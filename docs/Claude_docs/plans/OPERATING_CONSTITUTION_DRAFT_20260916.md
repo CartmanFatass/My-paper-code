@@ -1,125 +1,141 @@
-# HMASD operating constitution — DRAFT for owner revision
+# HMASD operating constitution — revised draft for owner adoption
 
-Status: draft by the Claude hub, 2026-09-16, at the owner's request (17:13 PDT). Nothing here
-is in force until the owner adopts it. Items marked `[ASK]` need the owner's choice. Once
-adopted, this page is the one governance text; it replaces nothing by rewriting, it makes the
-old apparatus unused.
+Pro revision, 2026-09-16, of the draft at `3196d2fc353dae5090c20517177aa15adaa52ec0`.
+Proposal only: neither adoption nor research resumption is implied by this edit.
+Once adopted, this is the sole operating-governance text; historical scientific records retain their meaning.
 
 ## 1. What this project is
 
-A personal exploratory research project on untied K in HMASD: unfixed skill duration k
-(FSD) and unfixed agent count N, studied as two parallel questions. The deliverable is one
-paper-grade claim per question, on the UAV host, against a matched-information baseline.
-Fast iteration on ideas is the primary value; confirmation is a final, bounded step.
+A personal exploratory research project on unfixed skill duration k and unfixed agent count N,
+studied separately. Aim for one defensible paper-grade answer per question on the UAV host,
+against a competent matched-information baseline; a positive effect is not owed. Small hosts
+may support exploration, not an unmeasured UAV claim. Fast idea turnover is primary;
+confirmation is a bounded final step, not the default mode.
 
 ## 2. Who does what
 
-- **Owner**: chooses which directions exist, triggers Portfolio review, resumes or pauses
-  research, adopts or edits this page. Nothing waits for the owner unless it is one of these.
-- **Hub session** (Codex root or the Claude hub): one session owns a direction end to end,
-  from idea through code, run, reading and record. It is Root and DM at once. Two
-  directions at most per runtime.
-- **Codex DM children**: allowed, because Codex needs them for cost and parallelism. A DM
-  child owns one direction with the same end-to-end scope; it reports facts to the root.
-- **Transport** (Pro send/wait/collect) and **Monitor** (run wait/collect): exist only to
-  absorb long waits. They return facts and make no judgment.
-- **Reviewer**: only for a change to the core learner or a shared runner.
-- No other role. No new role, agent, or "equivalent under another name" without the owner
-  writing it into this page. `[ASK]` Keep Grok clerk mode and the Sonnet clerk for mechanical
-  edits, or retire both? (Under the three-record rule there is little mechanical work left.)
+- **Owner** chooses directions, pauses/resumes research, and adopts/amends this page.
+  Ordinary ideas, implementation, interpretation and within-budget runs do not await owner approval.
+- **Hub/DM** owns a direction end to end: idea, code, run, reading and records. Codex may use
+  a DM child with that same scope; do not duplicate ownership. One named lead/writer per
+  direction; at most two active directions across all runtimes, not two per runtime.
+- **Transport / Monitor** absorb waits and return facts, without scientific authority.
+  **Reviewer** independently checks changes to shared learners, runners, environments or evaluators.
+- **Retire Grok clerk and Sonnet clerk as standing roles.** Mechanical edits belong to the
+  direction lead. No additional role, including a renamed equivalent, without owner amendment.
 
 ## 3. Budget is counted in fits
 
-One fit is one training run of one seed on the declared node. The node does about 80 idle
-fits per day when serialised; contended fits take roughly 2.5 times longer.
+One fit is one started training attempt for one arm and seed at a declared training horizon
+on the declared node. State the horizon, arms and total fits before running; different
+horizons are not interchangeable compute. Record actual wall time rather than assume a universal fit rate.
 
-| Stage | Allowance | Records |
+| Stage | Default allowance | Records |
 | --- | --- | --- |
-| Explore an idea | 3 to 6 single-seed fits, any host | notebook entry + runs folder |
-| Confirm a claim | 3 to 5 seeds per arm, one baseline arm, once | notebook entry + runs folder + claim note |
+| Explore one idea | Up to 6 total fits, usually 3–6; include all arms and tuning; stop earlier when informative | notebook + run artifacts |
+| Confirm one claim | 3–5 fresh independent training seeds per arm, normally candidate + one primary baseline; one fixed batch | notebook + run artifacts + claim note |
 
-An idea that does not show anything after its exploration allowance is written down as
-killed and not rerun. A failed run is a bug to fix, not a spent or refunded allowance.
-`[ASK]` Standing weekly cap per direction, or none beyond the per-idea numbers?
+**No fixed weekly cap or weekly entitlement.** Work on one idea at a time per direction.
+Additional attribution controls must be justified and costed in the same prospective note.
+Do not extend a batch after seeing its scores or rename the same failed idea to reset its allowance.
+Kill, revise materially, or move on; a killed idea may reopen only for a recorded new reason.
+A failed training attempt consumes a fit but is not a scientific negative. A pre-training
+launch failure consumes no fit; retain its error and wall time. Fix before retrying; no hidden refunds.
 
-## 4. The three records per direction, and nothing else
+## 4. Three record types, and one repository table
 
-1. `docs/research/candidates/<direction>/NOTES.md`: append-only lab notebook. One dated
-   entry per idea or run batch: what was tried, sha, what was seen, keep/kill, next step.
-2. `runs/<direction>/<tag>/`: written by the runner, never by hand. `config.json`, launch
-   sha, `summary.json`, curves. Bad runs stay.
-3. `docs/research/candidates/<direction>/CLAIM_<slug>.md`: half a page, written before the
-   confirmation fits start: hypothesis, baseline, seeds, evaluation protocol, decision rule,
-   and after the fits the result read by that rule.
+1. `docs/research/candidates/<direction>/NOTES.md`: append-only dated entries with the question,
+   proposed comparison/budget, sha, observations, keep/kill and next step. Pro questions and
+   answers are sections here, not another packet or response-file system.
+2. `runs/<direction>/<tag>/`: runner-written config, launch sha, summary/status, curves and
+   underlying outputs needed to check the result. Keep failed and adverse runs. Preserve
+   recoverable artifact locations when outputs are stored outside Git.
+3. `docs/research/candidates/<direction>/CLAIM_<slug>.md`: short note written before confirmation:
+   hypothesis, comparison and selection exposure, seeds, endpoint/evaluation, decision rule
+   and uncertainty method; append the result without rewriting the original plan.
 
-One repository-level `docs/research/RESEARCH.md` holds a table of directions: name, question,
-state (exploring / confirming / archived), one line of current standing. That table replaces
-PORTFOLIO, APPROVED_SET, EXPERIMENT_TRACKING, dossiers and lifecycle decisions as the current
-view. Retired as of adoption: cards for pilots, intake documents, audit ledger, owner inbox
-items and briefs, per-session handoffs, packet/registry/binding files, decision records for
-object-tier choices. Historical files stay where they are, unmaintained.
+`docs/research/RESEARCH.md` is the only current index: direction, question, state
+(`exploring / confirming / archived`), lead, and one-line standing/next step with evidence links.
+Record any owner pause there; a state label does not cancel a pause. It replaces PORTFOLIO,
+APPROVED_SET, tracking, dossiers and lifecycle-decision paperwork. No pilot cards, intake,
+audit ledger, owner inbox, handoffs, packets, registries or receipts for new work. Historical files stay unmaintained.
 
-## 5. Pro
+## 5. Pro is an adviser
 
-Pro is used for two things: generating and converging a batch of hypotheses per direction
-before experiments start, and one critic pass on a claim note before its confirmation fits.
-It is not a decision node; its answers are advice the hub reads and the notebook records.
+Use Pro for a batch of hypotheses and one critic pass before confirmation, not approval
+at each step. The hub owns the choice and records its response to material criticism.
 
-Mechanics: the hub commits the question as one markdown file and pushes; the hub (or its
-Transport) opens the direction's Pro conversation in the browser, sends one line with the
-GitHub link, waits, and Pro writes its answer into the repository through the ChatGPT GitHub
-connector; the hub reads the committed file. No packet renderer, registry, conversation
-binding records, finality labels or receipts. If the connector fails, the page text is saved
-as the answer. `[ASK]` One Pro conversation per direction, reused indefinitely?
+**One current conversation per direction, reused by default, not indefinitely bound.** Replace
+it when context becomes stale, unwieldy or materially changes; GitHub, not chat memory, is the record.
+The hub commits a notebook question and sends its commit-pinned link, target branch and answer
+section. Pro reads the source and writes advice into that section through the GitHub connector.
+Coordinate the notebook writer; use the current file version when writing. If writing fails,
+the hub saves the answer text in the same section. No separate prompt/answer record type,
+conversation registry, finality label or mandatory result-review loop.
 
 ## 6. Code
 
-- **Core** (`ha_ctse_process/`, the shared learner, runners, envs): keep compatible, one
-  smoke test, Reviewer on change.
-- **Experimental** (`experiments/candidates/<direction>/`): disposable. No compatibility,
-  no schema validators, no provenance guards, no registries, no resumable execution, no
-  retry or lease machinery, no telemetry beyond wall time and peak RSS. Delete when the
-  direction is archived.
-- Every result-bearing run: commit first, memory preflight, launch detached on the declared
-  node at the committed sha. This is the entire launch procedure.
+**Core:** shared learners, runners, environments and evaluators, including `ha_ctse_process/`.
+Preserve interfaces; run a relevant smoke test and obtain independent review when changing them.
+**Experimental:** `experiments/candidates/<direction>/` is disposable software, not a framework.
+No compatibility promise or generic registry, lease, retry, resumability or telemetry infrastructure
+without a concrete experimental need. Small correctness tests/assertions remain allowed.
+
+For result-bearing runs: commit and push exact inputs, perform fresh node-memory preflight,
+then launch detached at that sha. Archiving stops maintenance; it does not destroy evidence.
+Keep result-bearing code recoverable at its sha and preserve required outputs before deleting scratch.
 
 ## 7. Rules about rules
 
-1. An incident becomes a tool fix or an accepted risk. It never becomes a new rule,
-   OWNER_DIRECT block, guard or label.
-2. No new process document without deleting one. No new record type at all.
-3. Always-loaded text (root AGENTS plus CLAUDE) stays under 4 KB. Anything longer moves
-   into a task skill or is cut.
-4. Only the owner edits this page. Agents may propose a change in one sentence in their
-   final report; they do not draft governance.
-5. Codex and Claude are asked for code, runs, readings and reviews. They are not asked to
-   design process, and a request phrased as "make the workflow more rigorous" is answered
-   with a proposal, not an implementation.
-6. Rigor scales with the claim. Exploration is allowed to be sloppy, fast and single-seed.
-   Confirmation is not, and is rare.
+Incidents normally produce a tool fix or an explicitly accepted risk, not another gate,
+role or process document. A necessary rule change requires owner amendment to this page.
+No new standing record types. Root AGENTS plus CLAUDE entry text together stay below 4 KB;
+task skills contain execution methods, not a shadow constitution. Agents may propose a change
+in one sentence; they do not initiate governance redesign. Owner-requested drafting, including
+this revision, is allowed. Exploration may be rough, fast and single-seed; its conclusions must remain exploratory.
 
-## 8. Scientific minimums (the only ones)
+## 8. Scientific minimums — five, not a certification ladder
 
-Seeds before belief (three or more independent training seeds behind any claim); one
-matched-information baseline per claim; sha, config and summary per run; keep the bad runs;
-read a confirmation by the rule written in its claim note. Nothing else is mandatory.
+1. Empirical learning claims need at least three independent training seeds per arm;
+   seed count alone does not establish adequate precision. Single-seed observations stay exploratory.
+2. Use a competent matched-information primary baseline; declare training/tuning exposure
+   and remaining confounds. Package comparisons do not establish component causality.
+3. Retain sha, config and summary/status for every run, with recoverable supporting outputs.
+4. Preserve all outcomes; distinguish technical failure, adverse evidence and uncertainty.
+5. Read confirmation by its prewritten endpoint and rule, reporting per-seed effects and
+   appropriate uncertainty. Inconclusive is an acceptable result; non-significance is not equivalence.
 
-## 9. How to measure whether this is working
+## 9. Monthly overhead and output
 
-Once a month: valid results (claim notes with a read result) per owner-hour, and commits
-touching `docs/` per run summary. The 2026-09-02 to 09-16 baseline is 33 documentation
-commits per run summary and zero effects on record. If the ratio is not falling, the
-process is still too heavy.
+Put one monthly line in RESEARCH.md, not a new report: **governance-only commits / unique
+result-bearing run summaries**, and **completed, read confirmation studies / owner-hour**.
+Record numerator/denominator counts; approximate owner time is enough, zero denominators are N/A.
+Positive, negative and inconclusive completed studies all count; aborted studies remain visible but separate.
 
-## 10. Transition (no rewrite)
+The draft reports **33 docs-touching commits per run summary for 2026-09-02–09-16**; this
+revision has not re-audited that count. Keep that broader ratio alongside the new overhead
+ratio during transition; they are not interchangeable. The draft's "zero effects" is not a
+scientific conclusion or a verified baseline for completed studies. If overhead does not fall,
+remove process before adding measurement machinery; do not game the ratio by suppressing research notes.
 
-1. Owner adopts this page; the old AGENTS, skills and role files stay as they are and go
-   unused except where this page names them.
-2. Research resumes with FSD B01 as the only active object, under the three records.
-3. Directions outside the two or three the owner names go to `archived` in RESEARCH.md;
-   their worktrees are removed after the branch is confirmed on the remote (audit of
-   2026-09-16: every direction branch is on a remote; dirty files exist only in
-   `codex-portfolio`, `dm-rcle-a02-20260906` and the ten `temp/cm-model-comparison`
-   checkouts; two `~/.codex/worktrees` detached checkouts hold one unpushed commit each).
-   `[ASK]` Which directions stay active?
-4. Old documents are deleted later, in one commit, once nothing current references them.
+## 10. Transition — switch the entrypoints, do not rewrite the archive
+
+On adoption, replace conflicting auto-loaded governance with short pointers to this page;
+remove retired roles from active registration. Keep old documents historical, not silently
+active through AGENTS or skills. Populate RESEARCH.md from current evidence without backfilling
+or retranscribing old records. This is a small activation change, not a repository-wide rewrite.
+
+Exactly two directions remain active; all others become archived for investment purposes,
+not scientifically disproved. TRDL remains a recoverable reserve, not a third active slot.
+
+| Direction | Initial standing after adoption |
+| --- | --- |
+| `flexible_skill_duration` | Priority 1, confirming: preserve [FSD matched-information B01](../../research/candidates/flexible_skill_duration/FSD_MATCHED_INFORMATION_BASELINE_B01_PROSPECTIVE_CARD_20260916.md), including its six selection + ten confirmation fits, seeds, endpoint and reading rule. It calibrates D1280 versus central-input flat; it does not confirm an interruption benefit. |
+| `vap_folr_core` | Priority 2, exploring: retain the N-axis membership-change/history question. [The latest two-block repetition](../../research/candidates/vap_folr_core/FOLR_ENTITY_AUGMENTATION_REPEAT_B01_RESULT_EVIDENCE_20260915.md) did not reproduce the old positive. Prepare a materially discriminating idea against competent generic recurrence, not another automatic A–G repeat. With no worthwhile idea, leave it idle. |
+
+**Adoption does not lift an owner pause.** After explicit resumption, the first execution
+batch is FSD B01, not simultaneous portfolio refilling. Its frozen card stands in for a new
+claim note; retain its existing scientific/output contract without another Pro pass or transcription.
+No worktree, branch or result deletion is part of adoption. Later cleanup requires fresh checks
+that unique commits and dirty evidence are preserved and no live work depends on the checkout;
+the old worktree audit is not present-tense deletion authority.
