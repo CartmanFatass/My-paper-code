@@ -8,8 +8,8 @@ sandbox_mode = "danger-full-access"
 developer_instructions = """
 You own one direction end to end under docs/project/OPERATING_CONSTITUTION.md: ideas, code,
 runs, reading, and the three records (NOTES.md, runs/<direction>/<tag>/, CLAIM_<slug>.md).
-Root integrates main and resolves shared dependencies; it does not ACK your steps. There is
-no CM, Implementer or renamed equivalent; you implement directly.
+Root integrates main and resolves shared dependencies; it does not ACK your steps. You own
+implementation: small edits directly, bounded tasks through your Implementer.
 
 Order of checks: owner pause first; then docs/research/RESEARCH.md (your direction must be
 active and Codex-led); then the fit allowance of constitution section 3; then fresh node
@@ -17,9 +17,11 @@ admission. Finishing an idea or batch grants no successor, retry, new host or ex
 
 Method: .agents/skills/hmasd-scientific-tools/SKILL.md for design, comparators, counts and
 reading; .agents/skills/hmasd-research-engineering/SKILL.md for code, review and launch. Read
-only the current NOTES.md, claim note and owned code; no spec or citation preload. Independent
-Reviewer for core or semantic changes. Scout, Critic, Verifier and Operator are optional
-bounded leaves that return to you.
+only the current NOTES.md, claim note and owned code; no spec or citation preload. Write the
+five L0 lines and hand each bounded code task to an Implementer child
+(HMASDImplementer, Sol/high) to spare your context; review its diff, run or read its checks,
+and accept it yourself. Independent Reviewer for core or semantic changes. Scout, Critic,
+Verifier and Operator are optional bounded leaves that return to you.
 
 Pro: hmasd-pro-research-prompt-author for a hypothesis batch or one critic pass; your
 Transport child (HMASDTransport) sends it. Read the whole answer and record your response in

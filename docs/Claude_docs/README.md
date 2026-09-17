@@ -46,6 +46,9 @@ whose corrections are incorporated. No experiment was run and no scientific obje
 - `2026-09-16-shared-methods-rewrite.md` — every live skill, Codex role and generated Claude
   copy rewritten to the constitution (owner 18:05 PDT: no conflicting instructions may remain);
   publisher simplified; deletion of the retired packet/registry helpers pending an owner command.
+- `2026-09-16-implementer-and-carried-over-standards.md` — Implementer role on both runtimes
+  (Claude Opus, Codex Sol, high effort) and an audit table of which earlier engineering
+  standards the 18:05 rewrite dropped and which are now restored as review signals.
 
 ### reviews/
 

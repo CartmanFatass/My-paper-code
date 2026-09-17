@@ -44,8 +44,8 @@ current checkout. Read only what changed. Machine and provider values come from
 
 `followup_task` resumes an existing DM; `send_message` carries information that needs no turn
 restart. A DM reports one paragraph at a boundary: direction, state, evidence or commit, next
-step or dependency and its owner. Specialists (Reviewer, Monitor, Transport, Operator, Scout,
-Critic, Verifier) return to the DM that assigned them, never through Root. A message and a
+step or dependency and its owner. Specialists (Implementer, Reviewer, Monitor, Transport, Operator,
+Scout, Critic, Verifier) return to the DM that assigned them, never through Root. A message and a
 final that describe the same boundary are one event.
 
 ## Git and cleanup

@@ -25,6 +25,10 @@ interrupt_message = true
 description = "Direction owner under the operating constitution: ideas, code, runs, reading, three records."
 config_file = "./agents/hmasd-direction-manager.toml"
 
+[agents.HMASDImplementer]
+description = "DM-owned Sol/high implementer for one bounded code task from an L0 note."
+config_file = "./agents/hmasd-implementer.toml"
+
 [agents.HMASDScout]
 description = "Optional engineering-surface mapping method."
 config_file = "./agents/hmasd-scout.toml"

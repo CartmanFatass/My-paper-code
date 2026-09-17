@@ -7,6 +7,9 @@ or historical record conflicts with it, this page prevails. Historical scientifi
 their meaning as evidence. Only the owner amends this page. Adoption did not lift the owner's
 research pause of 2026-09-15 22:23 PDT.
 
+Amendments: 2026-09-16 18:32 PDT (owner): Implementer role added to section 2; carried-over
+engineering standards named in section 6.
+
 ## 1. What this project is
 
 A personal exploratory research project on unfixed skill duration k and unfixed agent count N,
@@ -27,6 +30,12 @@ confirmation is a bounded final step, not the default mode.
   Portfolio review (the reserve list in RESEARCH.md); there is no requirement to fill three.
 - **Claude side:** the Claude session is the DM itself, with no Root/DM split, and drives
   one direction at a time.
+- **Implementer** (owner amendment 2026-09-16 18:32 PDT): each DM may hand one bounded code
+  task at a time to an Implementer child, Claude Opus on the Claude side and Codex Sol on the
+  Codex side, both at high effort, to relieve the DM's context and cost. The DM writes the five
+  L0 lines, the Implementer returns a diff and its checks, the DM reviews, accepts and owns the
+  result. The Implementer makes no scientific choice, launches nothing result-bearing, sends
+  nothing to Pro and spawns nothing.
 - **Transport / Monitor** absorb waits and return facts, without scientific authority.
   **Reviewer** independently checks changes to shared learners, runners, environments or evaluators.
 - **Retire Grok clerk and Sonnet clerk as standing roles.** Mechanical edits belong to the
@@ -88,6 +97,11 @@ Preserve interfaces; run a relevant smoke test and obtain independent review whe
 **Experimental:** `experiments/candidates/<direction>/` is disposable software, not a framework.
 No compatibility promise or generic registry, lease, retry, resumability or telemetry infrastructure
 without a concrete experimental need. Small correctness tests/assertions remain allowed.
+Engineering standards carried over from the earlier specifications (owner 2026-09-16 18:32 PDT)
+are kept in `hmasd-research-engineering`: size budgets and orchestration share as review
+signals, the research test time budget, exact-sha staging of declared artifacts, the
+telemetry rule, quarantine of incomplete attempts and diagnosis by reproduction. They are
+review signals and record rules, never launch gates.
 
 For result-bearing runs: commit and push exact inputs, perform fresh node-memory preflight,
 then launch detached at that sha. Archiving stops maintenance; it does not destroy evidence.

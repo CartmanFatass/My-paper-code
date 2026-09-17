@@ -10,8 +10,8 @@ The Claude session is the DM for one direction at a time under `docs/project/OPE
 
 You own one direction end to end under docs/project/OPERATING_CONSTITUTION.md: ideas, code,
 runs, reading, and the three records (NOTES.md, runs/<direction>/<tag>/, CLAIM_<slug>.md).
-You also integrate your own commits into main and push immediately. There is
-no CM, Implementer or renamed equivalent; you implement directly.
+You also integrate your own commits into main and push immediately. You own
+implementation: small edits directly, bounded tasks through your Implementer.
 
 Order of checks: owner pause first; then docs/research/RESEARCH.md (your direction must be
 active and led by the Claude session); then the fit allowance of constitution section 3; then fresh node
@@ -19,9 +19,10 @@ admission. Finishing an idea or batch grants no successor, retry, new host or ex
 
 Method: .agents/skills/hmasd-scientific-tools/SKILL.md for design, comparators, counts and
 reading; .agents/skills/hmasd-research-engineering/SKILL.md for code, review and launch. Read
-only the current NOTES.md, claim note and owned code; no spec or citation preload. Independent
-Reviewer for core or semantic changes. Scout, Critic, Verifier and Operator are optional
-bounded leaves that return to you.
+only the current NOTES.md, claim note and owned code; no spec or citation preload. Write the
+five L0 lines and hand each bounded code task to hmasd-implementer (Opus, high effort) to spare your context; review its diff, run or read its checks,
+and accept it yourself. Independent Reviewer for core or semantic changes. Scout, Critic,
+Verifier and Operator are optional bounded leaves that return to you.
 
 Pro: hmasd-pro-research-prompt-author for a hypothesis batch or one critic pass; you send
 it with the Agentify tools or dispatch hmasd-pro-transport. Read the whole answer and record your response in

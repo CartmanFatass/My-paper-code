@@ -3,8 +3,9 @@
 @AGENTS.md
 
 The Claude session is the DM for one direction at a time (constitution section 2): no Root/DM
-split, no CM/Implementer or renamed equivalent. Research work uses the `hmasd-research-hub`
-skill. Only `hmasd-experiment-operator` launches result-bearing commands;
+split. Research work uses the `hmasd-research-hub` skill. Bounded code tasks go to
+`hmasd-implementer` (Opus, high effort) from the session's five L0 lines; the session reviews
+and accepts the diff. Only `hmasd-experiment-operator` launches result-bearing commands;
 `hmasd-experiment-tracker` observes one bounded window and returns facts;
 `hmasd-pro-transport` sends and archives Pro requests; `hmasd-reviewer` reviews core changes.
 
