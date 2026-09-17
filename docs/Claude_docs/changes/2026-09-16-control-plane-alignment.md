@@ -65,3 +65,21 @@ dependency checks; no legacy helper, registry, worktree or evidence was deleted.
 The one-off applicator belongs to the delivery package, not the maintained repository. Do not
 install it as a launch helper. A failed prerequisite is a reported limit, never permission to
 reset user work, force-push, resend Pro or restart experiments.
+
+## Observed publication
+
+Alignment source `b2cebd3ea` was pushed to `codex/control-alignment-20260916`. Main integration
+`a6805d50d01187068211340d97d863224113b568` was pushed and verified with `git ls-remote origin
+refs/heads/main`. The five overlap conflicts were resolved to the newer reviewed package;
+`git write-tree` matched the alignment commit's tree exactly. Thus integration introduced no
+untested source differences. Main's publisher check again reported `drift: 0`; working tree
+was clean immediately after publication. PR #24 is included in this merge's ancestry.
+
+The exact original dirty edits remain recoverable in `52a48195e`, a parent of the integration.
+No reset, stash, history rewrite, force-push or scientific execution was used. The migration
+worktree and package remain available. Automatic approval review rejected the combined
+test-scratch cleanup/publication command with only `blocked by policy`; publication was then
+performed separately. The two ignored test directories under the isolated worktree's
+`temp/tests/control-alignment-root*-20260916` were retained, not bypass-deleted. Existing-session
+adoption, effective Claude settings, live Agentify/WSL handover and legacy helper retirement
+remain explicitly unverified; these were not inferred from passing source checks.
