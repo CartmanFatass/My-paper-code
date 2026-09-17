@@ -25,11 +25,20 @@ current checkout. Start with what changed and follow relevant dependencies as ne
    do not start research, Send, or result-bearing runs.
 2. **Read RESEARCH.md.** Active directions in priority order with their lead runtime and
    standing line; the reserve list. A direction whose lead runtime is the Claude session is
-   not started here.
-3. **DM children.** For each active Codex-led direction without a live DM, start or resume one
-   `HMASDDirectionManager` with minimal context: direction id, `NOTES.md` path, the standing
-   line, the fit allowance from constitution section 3, and the pause state. Soft ceiling:
-   three concurrent DMs. Under an explicit research resume, Root may assign a chosen reserve
+   not started here. Preserve the first-execution-batch order recorded there on a research resume;
+   resumption is not a request to launch every active direction at once.
+3. **DM children.** Match an authorized, actionable direction task to its existing DM before
+   creating a child. No visible live DM is not by itself a dispatch reason: check its last native
+   return and standing. An unchanged idle/no-idea return stays idle; a missing or uncertain
+   agent/experiment state is reconciled, not replaced. Resume for an unfinished authorized
+   deliverable, new evidence or a concrete idea that changes the recorded next step, or an owner
+   instruction that actually requests work. A status question or another direction's completion
+   does not reopen an idle direction. Ordinary within-budget next ideas remain the DM's choice;
+   this is not a new owner approval requirement.
+   Start or resume one `HMASDDirectionManager` with the direction id, `NOTES.md` path, standing,
+   specific next deliverable/re-entry reason, fit allowance and pause state. Reuse its native
+   continuation when available. Soft ceiling: three concurrent DMs, not a staffing target.
+   Under an explicit research resume, Root may assign a chosen reserve
    DM to prepare an idea with no empirical exposure. Preparation is not activation or a fit
    grant. If a worthwhile discriminator is recorded, Root may activate that existing reserve
    and set its Codex lead under the Constitution's reserve authority before result execution.
@@ -40,8 +49,11 @@ current checkout. Start with what changed and follow relevant dependencies as ne
    shared-writer or shared-runtime conflicts. Direction acceptance belongs to the DM; shared-control
    acceptance belongs to the acting integrator. Ordinary direction steps need no Root ACK.
 5. **Keep RESEARCH.md current.** When a DM reports a boundary (idea killed, batch done, claim
-   read, direction idle), update that direction's one standing line and push. This needs no
-   extra routine record; an owner-requested analysis or manual remains within its assigned scope.
+   read, direction idle), update that direction's standing line when its meaning or evidence
+   changes, then publish the completed update. Preserve "collected, not yet read" when that is
+   the actual boundary; a terminal handle, passing test or answer commit is not a scientific
+   conclusion. Repeated delivery of the same boundary needs no second edit or redispatch.
+   This needs no extra routine record; an owner-requested analysis or manual remains in scope.
 6. **Queue, never send.** Archive or activate recommendations, budget concerns and closing
    notes wait as `NOTES.md` entries for the owner-triggered Portfolio review
    (`hmasd-portfolio-task`).
@@ -53,8 +65,10 @@ current checkout. Start with what changed and follow relevant dependencies as ne
 ## Messages
 
 `followup_task` resumes an existing DM; `send_message` carries information that needs no turn
-restart. A DM reports one paragraph at a boundary: direction, state, evidence or commit, next
-step or dependency and its owner. Specialists (Implementer, Reviewer, Monitor, Transport, Operator,
+restart. A DM reports one paragraph at a boundary: direction, state, evidence or commit,
+what it does and does not establish (or what remains unread), next step or actual dependency
+and its owner. Root integrates this accepted reading rather than duplicating the DM's analysis.
+Specialists (Implementer, Reviewer, Monitor, Transport, Operator,
 Scout, Critic, Verifier) return to the DM that assigned them, never through Root. A message and a
 final that describe the same boundary are one event.
 
@@ -82,6 +96,19 @@ specific conflict in its existing status/NOTES entry. Do not assert loading from
 success. Preserve frozen inputs, accepted handles and uncertain Sends; no migration resend,
 restart, global ACK registry or per-run reloading ritual. An unresolved migration concern
 blocks only dependent new effects, not independent authorized work or evidence preservation.
+
+## Optional source inspection
+
+For a concrete registration/model/permission configuration question, run
+`python tools/inspect_codex_control.py` with a Python 3.11+ interpreter; `--json` prints the
+same report to stdout. It reads this checkout's Codex config and role files, lists source
+hashes and declarations, reports broken references, and exposes standalone files not referenced
+by the registration table without assuming they are inactive. It does not read user/managed
+configuration, resolve App/spawn choices, contact a runtime, or inspect live permissions.
+Unset values stay unknown; a read-only declaration is not proof of isolation. Zero exit means
+only that source inspection completed, not that the native schema or live adoption is valid.
+Use native observations for those questions. No configuration is changed, no report file or
+registry is required, and this command is not a prerequisite to dispatch or research execution.
 
 ## Return
 

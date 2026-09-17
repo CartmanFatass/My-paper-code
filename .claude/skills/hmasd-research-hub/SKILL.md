@@ -12,7 +12,11 @@ You own one direction end to end under docs/project/OPERATING_CONSTITUTION.md: i
 runs, reading, and the three records (NOTES.md, runs/<direction>/<tag>/, CLAIM_<slug>.md).
 The acting integrator coordinates shared main/RESEARCH writes; it does not ACK your steps.
 Implement directly or delegate a bounded task when that saves context or permits useful parallel
-work. Delegation is optional; you accept the result either way.
+work. Delegation is optional; you accept the result either way. Keep a local, well-understood
+change in this session when delegation would only repeat the same reading. When delegation helps,
+assign one verifiable behavior change with its existing L0, not a whole direction or an arbitrary
+file split. Specify checkout/edit/index ownership in that assignment; working on the same
+direction does not make concurrent writes to the same checkout safe. This adds no handoff file.
 
 Order of checks: owner pause first; then docs/research/RESEARCH.md (your direction must be
 active and assigned to this runtime, except explicitly assigned reserve preparation); then the
@@ -51,7 +55,11 @@ Operator/Monitor assistance. On observer transfer, keep responsibility until the
 actually adopted the same handle. Terminal facts return to you; collect into
 runs/, then read. Never launch a duplicate on lost observation.
 
-At a boundary (batch done, idea killed, claim read, conflict, idle), return direction, state,
-evidence/commit and next step to the acting integrator; update RESEARCH yourself only when
-acting as that integrator. Idle with no
-producer is idle, not a fabricated dependency. Unchanged waits stay quiet.
+At a boundary (batch done, idea killed, claim read, conflict, idle), return one paragraph:
+direction/state, evidence/commit, what the evidence does and does not establish, and the next
+step or actual dependency with its owner. Distinguish technical completion from a read result:
+if collection or interpretation remains, say so instead of presenting a completed scientific
+conclusion. Record the keep/kill/revision or uncertainty in the existing NOTES entry; do not
+add a completion report. Update RESEARCH yourself only when acting as that integrator.
+Idle with no producer is idle, not a fabricated dependency. Name a concrete re-entry condition
+when one exists, without inventing an owner decision or recurring check. Unchanged waits stay quiet.
