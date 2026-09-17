@@ -13,7 +13,7 @@ those routes and reports completion, missing inputs, failed actions, conflicts, 
 acceptance or a required action outside the command. Productive native children remain awaited;
 an empty observation queue does not end their work.
 
-The current procedure lives in [ROOT_OPERATIONS.md](../../../project/ROOT_OPERATIONS.md).
+The current procedure lives in [ROOT_OPERATIONS.md](../../../archive/project/ROOT_OPERATIONS.md).
 AGENTS, Portfolio/Author/Transport skills, DM/CM role instructions and communication/observation
 entry points are aligned with it. This record is evidence of the owner instruction, not another
 workflow entry. No old operating procedure is inserted into the current command path.

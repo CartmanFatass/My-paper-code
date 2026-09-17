@@ -1,12 +1,11 @@
 # HMASD Research Map
 
-This is the human navigation map for 27 registered directions: the 22 historical source IDs and five new independent programmes registered on 2026-09-12. It records
-a concise position and links to stable research and code directories. It is documentation, not an
-authorization, scheduling, lease, or workflow surface.
-
-Current lifecycle, priority, capacity, and direction owner exist only in
-[`portfolio/PORTFOLIO.md`](portfolio/PORTFOLIO.md). The 14 structurally closed or absorbed labels
-and their complete evidence live under [`legacy/directions/`](legacy/directions/README.md).
+Historical directory catalogue of 27 source directions registered before constitution adoption.
+It is useful for finding old code and evidence, not for selecting current work. Current
+active/reserve/archived standing, lead runtime and owner pause are in [RESEARCH.md](RESEARCH.md).
+The older Portfolio, priority, capacity and owner labels below describe their dated revisions.
+The 14 structurally closed or absorbed source labels remain under
+[legacy/directions/](legacy/directions/README.md); these are evidence locations, not current permissions.
 
 ## Owner-adopted research calibration — 2026-09-14
 

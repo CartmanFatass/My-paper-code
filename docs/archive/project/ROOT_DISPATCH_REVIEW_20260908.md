@@ -23,7 +23,7 @@ a snapshot that could become stale before delivery.
 Correction: [SIBLING_COMMUNICATION.md](SIBLING_COMMUNICATION.md#native-agent-messages)
 now selects by intent: every work handoff uses `followup_task` to the same recipient;
 `send_message` is only a notification requiring no new work. Root operations, experiment
-observation and the [dispatch skill](../../.agents/skills/hmasd-loop-dispatch/SKILL.md)
+observation and the [dispatch skill](../../../.agents/skills/hmasd-loop-dispatch/SKILL.md)
 use that same rule. A recorded next step does not count as dispatched or advancing work.
 At the next event boundary a turn or actual return establishes progress; no ACK barrier
 or repeated live assignment is added. The duplicate dispatch event table was removed.
@@ -32,7 +32,7 @@ or repeated live assignment is added. The duplicate dispatch event table was rem
 
 Before this correction, `EXPERIMENT_TRACKING.md` opened with the 2026-09-06 merged
 Root/Transport route, an active heartbeat and an old no-live-handles snapshot. Its later
-records reached P45, while the [Root daily log](../research/portfolio/root-log/2026-09-08.md)
+records reached P45, while the [Root daily log](../../research/portfolio/root-log/2026-09-08.md)
 contained P47 FSD, UCOPE 7001 and VSPC1 8101 accepted/terminal handles. Multiple sections
 claimed to be current. A resume from this file could recover obsolete work and routing.
 

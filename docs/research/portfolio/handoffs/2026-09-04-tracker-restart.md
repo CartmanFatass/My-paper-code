@@ -137,7 +137,7 @@ N3/N5 完整原始根分别收集在对应 CM 树的同名相对路径；N5 aggr
 旧临时实例使用 default，不能记为已加载该 custom role。
 
 原生 sibling 已被实际验证：FSD → CRTO → FSD 的 send/ACK，以及 CRTO → idle FSD → CRTO
-的 followup/ACK；Root 没有转发这两组消息。[说明文档](../../../project/SIBLING_COMMUNICATION.md)
+的 followup/ACK；Root 没有转发这两组消息。[说明文档](../../../archive/project/SIBLING_COMMUNICATION.md)
 保存 token、操作语义、官方文档范围和本轮工具限制。
 
 新的 Root/配置加载先检查是否发现该 role，再做一次 tracker 与 DM 的实际双向 ACK。

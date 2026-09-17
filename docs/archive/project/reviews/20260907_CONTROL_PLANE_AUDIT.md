@@ -57,8 +57,8 @@ Windows 默认编码使通用 skill 检查器最初无法读取中文，使用�
 
 ## 历史记录位置
 
-- [原通信与 tracker 记录](../../archive/control-plane/20260904_SIBLING_COMMUNICATION.md)
-- [原 GitHub 试点与迁移草案](../../archive/control-plane/20260905_GITHUB_PRO_COLLABORATION_WORKFLOW_DRAFT.md)
+- [原通信与 tracker 记录](../../control-plane/20260904_SIBLING_COMMUNICATION.md)
+- [原 GitHub 试点与迁移草案](../../control-plane/20260905_GITHUB_PRO_COLLABORATION_WORKFLOW_DRAFT.md)
 
 现行工作流不加载这两份归档。保留时间、旧标识、已接受请求和冻结科学例外作为证据，
 与要求代理再次执行旧流程不同。

@@ -13,12 +13,12 @@ For future ordinary work, evidence-spec §11.8 permits a properly selected new B
 revision of irrelevant diagnostic duties. This does not permit presenting changed semantics as
 an optimization of the unchanged original object. Current VNFC E01 remains unchanged.
 
-Source: [complete Pro decision](../research/portfolio/pro_packets/20260905_marl_runtime_spec/pro_review_01/archive/RESPONSE.md),
+Source: [complete Pro decision](../../research/portfolio/pro_packets/20260905_marl_runtime_spec/pro_review_01/archive/RESPONSE.md),
 response SHA-256 `da9e86d05bb34e070b936ca69aafdf4a1b912caf88bb4d1b150c3831e9a2125f`.
-Application: [decision record](../research/portfolio/decisions/2026-09-05-marl-runtime-engineering-spec.md).
-Reference evidence: [six-library synthesis](../research/portfolio/pro_packets/20260905_marl_runtime_spec/REFERENCE_EVIDENCE.md),
-[pinned source manifest](../research/portfolio/pro_packets/20260905_marl_runtime_spec/SOURCE_MANIFEST.json),
-and [navigation index](../research/portfolio/pro_packets/20260905_marl_runtime_spec/REF_LIB_INDEX.md).
+Application: [decision record](../../research/portfolio/decisions/2026-09-05-marl-runtime-engineering-spec.md).
+Reference evidence: [six-library synthesis](../../research/portfolio/pro_packets/20260905_marl_runtime_spec/REFERENCE_EVIDENCE.md),
+[pinned source manifest](../../research/portfolio/pro_packets/20260905_marl_runtime_spec/SOURCE_MANIFEST.json),
+and [navigation index](../../research/portfolio/pro_packets/20260905_marl_runtime_spec/REF_LIB_INDEX.md).
 These are static source studies with explicit unread dependency boundaries, not library benchmark
 results or measured HMASD speedups. Archived draft and historical measurements remain evidence.
 

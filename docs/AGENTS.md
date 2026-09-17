@@ -12,6 +12,8 @@ contract and interpretation. Historical DIRECTION, TASK/HANDOFF, cards, intakes 
 records remain evidence, not current permission or a new-work template. Do not rewrite their
 verdicts, relocate bound artifacts, or replace raw outputs with summaries.
 
+README.md maps current entrypoints, reference material and historical directories.
+Retired project specifications and migration/control plans live under archive/.
 Shared methods live in .agents/skills. external-review and archive preserve provenance;
 personal is owner notes (ignored). Non-direction Claude deliverables use Claude_docs/<category>.
 Keep exact-source links and the LF-pinned paths in .gitattributes. Link directly to the current

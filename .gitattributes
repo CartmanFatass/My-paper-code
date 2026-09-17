@@ -19,7 +19,7 @@
 /scripts/hmasd_*.py text eol=lf
 /scripts/schemas/hmasd_*.schema.json text eol=lf
 /tests/hmasd_*.py text eol=lf
-/docs/migration/*.md text eol=lf
+/docs/archive/migration/*.md text eol=lf
 
 # The VNFC native loader byte-addresses these two frozen scientific inputs.
 # Keep only that pre-build identity boundary portable under core.autocrlf.

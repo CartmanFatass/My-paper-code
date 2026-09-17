@@ -32,7 +32,7 @@ no endpoint to read. Evidence-spec §§4,5.2,11.8.6–7 preserve this launch-pat
 while prohibiting its conversion into a native negative or a zero return.
 There is no scientific reinterpretation of the frozen method or earlier results.
 
-The [Root operations rule](../../../project/ROOT_OPERATIONS.md#execute-the-supplied-launch-command)
+The [Root operations rule](../../../archive/project/ROOT_OPERATIONS.md#execute-the-supplied-launch-command)
 also states:
 
 > Supervisor acceptance, admission and scientific execution are separate facts. If a command

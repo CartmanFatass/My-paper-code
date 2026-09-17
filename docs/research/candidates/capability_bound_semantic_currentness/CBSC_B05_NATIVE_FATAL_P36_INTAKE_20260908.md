@@ -102,7 +102,7 @@ REQUEST_ONLY 12.375 and absent STRUCT are unchanged. No accepted mechanism-level
 science was added, so DIRECTION, recasts, C status, lifecycle, priority and UAV
 entry remain unchanged.
 
-This preparation needs **none** of [engineering-scope](../../../project/ENGINEERING_SCOPE_SPEC.md) section 4's added machinery.
+This preparation needs **none** of [engineering-scope](../../../archive/project/ENGINEERING_SCOPE_SPEC.md) section 4's added machinery.
 It added no source, wrapper, package, runtime instrumentation or test; no section
 5 budget breach occurred. The prospective native reporting remained unexecuted.
 This was pure capability collection/static preparation with the same CM, not a

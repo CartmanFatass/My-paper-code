@@ -19,33 +19,34 @@ One naming convention for new files: `test_<subject>.py`. Existing `*_test.py` f
 collects both (`pytest.ini`). Two flattened research test directories exist from before this rule
 (`capability_bound_semantic_currentness_omrc_b01`, `..._online`); they are not renamed.
 
-`conftest.py` exists only under `finite_resource_relational_inductive_efficiency/` (fixtures
-only). No lint, format, or type tooling is configured; do not add any.
+`tests/conftest.py` manages per-invocation scratch. Nested conftest files may provide
+local scientific fixtures. No lint, format, or type tooling is configured.
 
-## Commands
+## Commands and scratch
 
 ```powershell
-# one research directory
-C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe -m pytest -q --basetemp temp/directions/ucope/test/<run-tag> tests/experiments/candidates/ucope/
-# one file or one test
-C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe -m pytest -q --basetemp temp/tests/<run-tag> tests/hmasd_run_test.py::test_name
-# evidence-bearing run: isolate the temp dir under the direction's scratch root
-C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe -m pytest -q -p no:cacheprovider `
-  --basetemp C:/Projects/HMASD/temp/directions/<direction-id>/test/<run-tag> <paths>
+# Scientific test: default scratch is allocated automatically under temp/tests/.
+& 'C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe' -m pytest -q tests/hmasd_run_test.py
+# Control-plane tests use Python 3.11+.
+& 'C:/Users/fires/.conda/envs/hmasd-science-tools/python.exe' -m pytest -q tests/skills/
+# Optional direction-specific location: use a fresh, nonexistent invocation directory.
+& 'C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe' -m pytest -q --basetemp temp/directions/<direction>/test/<unique-tag> <paths>
 ```
 
-Every invocation supplies its own `--basetemp`: research tests use
-`temp/directions/<direction-id>/test/<run-tag>`, other tests use `temp/tests/<run-tag>`.
-All other generated test files also stay under that invocation's scratch directory.
-Choose a unique run tag when tests may overlap. Pytest's cache provider is disabled
-by default; test results belong in the existing acceptance record, not a retained cache.
+The session allocates a unique directory under this checkout's `temp/tests/` unless an
+explicit `--basetemp` is supplied. Explicit paths must be new directories inside `temp/`;
+existing directories and redirected roots are refused before pytest can erase them.
+Use `tmp_path` / `tmp_path_factory` for generated test files. The session removes only its
+own directory on normal teardown, including failed tests and collection errors. Copied
+Windows read-only attributes are cleared only in those test copies; source permissions
+are unchanged. Cleanup failures report the exact path and error rather than disappearing.
+Pytest's cache provider is disabled. Retain needed failure diagnostics outside scratch
+before teardown; do not treat temporary output as the only scientific evidence.
 
-The creating agent/process cleans its directory on completion, on success or failure,
-using `finally` or an equivalent teardown. Before cleanup, retain only the result or
-diagnostic evidence needed by the assignment. Confirm the resolved target is the exact
-invocation directory under this checkout's `temp/`, then remove it; never clean the
-shared `temp/` or another invocation's directory. After an interrupted process, its
-creating agent performs the same cleanup before declaring the task complete.
+A hard process kill or machine crash cannot run teardown. Leftovers from such interruptions
+need explicit inspection and cleanup; no later test session sweeps old or other sessions'
+directories. A tool-policy rejection is separate from filesystem permissions and must be
+reported, not bypassed through another tool or interpreter.
 
 ## What tests are for here
 

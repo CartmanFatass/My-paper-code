@@ -33,7 +33,7 @@ The card's dependency rule remains verbatim:
 
 Here no primary pair was generated at all. Under evidence-spec §11.8.7 this is a
 launch-path fact, not a native-return observation or a negative mechanism result.
-The applicable [ROOT_OPERATIONS supplied-command section](../../../project/ROOT_OPERATIONS.md#execute-the-supplied-launch-command)
+The applicable [ROOT_OPERATIONS supplied-command section](../../../archive/project/ROOT_OPERATIONS.md#execute-the-supplied-launch-command)
 states verbatim:
 
 > Supervisor acceptance, admission and scientific execution are separate facts. If a command

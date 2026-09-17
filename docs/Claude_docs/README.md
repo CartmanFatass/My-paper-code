@@ -1,5 +1,9 @@
 # Claude_docs
 
+Status: dated reviews and historical change records. Earlier workflow and reporting duties
+described below have been superseded; current navigation is [docs/README.md](../README.md)
+and current research state is [RESEARCH.md](../research/RESEARCH.md).
+
 Deliverables written by Claude Code (Fable 5.1) for the repository owner, kept outside the
 research authority tree on purpose: nothing here is a science card, contract, or decision record.
 Everything is evidence for the owner to evaluate. Dates in file names are the date the document

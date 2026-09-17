@@ -11,7 +11,7 @@ main 控制源码：`38cc9264fae4e770f7a71ce0e3810baa0454c16e`（主体
 与迁移分支。本页及发布证据是其后的文档回执，未再改控制逻辑。
 FSD：控制同步 `ca57dfe7565ffd479c0d01e56ca96d30ba596ac1`，补齐原有主分支批准表及
 两份 owner 决定 `2f57045c95c7525e8c881a04955d035d1a726e0d`；已核对 origin/codex/fsd。
-完整路径和来源见[发布回执](../../../project/CONTROL_PLANE_MIGRATION_PUBLICATION_20260916.json)。
+完整路径和来源见[发布回执](../../../archive/project/CONTROL_PLANE_MIGRATION_PUBLICATION_20260916.json)。
 
 下一明确动作：Root 仅在允许安全删除后清理本次 scratch/worktree；研究保持暂停，
 不因交接完成继续科研。未来科研恢复须由所有者明确触发，随后原 DM 从下述冻结入口继续。

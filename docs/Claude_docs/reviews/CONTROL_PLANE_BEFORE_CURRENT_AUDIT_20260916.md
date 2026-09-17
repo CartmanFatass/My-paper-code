@@ -119,7 +119,7 @@ references／owner-item 与对应测试、对齐菜单提示并取消逐修改�
 逐节对照的来源：
 
 - 旧科学 skill 与 [MARL_EMPIRICAL_EVIDENCE_SPEC](../../research/specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md)，尤其 §§5、11.1–11.11。
-- 旧工程 skill 与 [ENGINEERING_SCOPE_SPEC](../../project/ENGINEERING_SCOPE_SPEC.md) §§2–7、[MARL_RUNTIME_ENGINEERING_SPEC](../../project/MARL_RUNTIME_ENGINEERING_SPEC.md) General requirements §§1–8、[ENGINEERING_ADDITIONS](../../project/ENGINEERING_ADDITIONS.md)。对象附款只检查保留方式，不推广成新工作要求。
+- 旧工程 skill 与 [ENGINEERING_SCOPE_SPEC](../../archive/project/ENGINEERING_SCOPE_SPEC.md) §§2–7、[MARL_RUNTIME_ENGINEERING_SPEC](../../archive/project/MARL_RUNTIME_ENGINEERING_SPEC.md) General requirements §§1–8、[ENGINEERING_ADDITIONS](../../archive/project/ENGINEERING_ADDITIONS.md)。对象附款只检查保留方式，不推广成新工作要求。
 - 旧/current 科学、工程、Pro author、Portfolio、Root dispatch、Transport skills，已删除 owner-item 的内容；当前 Constitution、DM/Reviewer/Critic 角色和科学 references、分析脚本、foundation 阅读入口。
 - Claude 的 [shared-methods rewrite](../changes/2026-09-16-shared-methods-rewrite.md) 与 [carried-over standards](../changes/2026-09-16-implementer-and-carried-over-standards.md) 改动记录。
 

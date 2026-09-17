@@ -1,7 +1,7 @@
 # Control-plane migration — OWNER_DIRECT 2026-09-16
 
 Authority: the owner's instruction to execute the supplied
-[migration plan](../../../project/CONTROL_PLANE_MIGRATION_PLAN_20260916.md).
+[migration plan](../../../archive/project/CONTROL_PLANE_MIGRATION_PLAN_20260916.md).
 This is shared-control engineering, not a Portfolio decision or research resumption.
 Research remains paused under the owner's 2026-09-15 22:23 PDT instruction.
 
@@ -22,7 +22,7 @@ The previously foreign Transport/wait edits were already committed in main; no d
 foreign paths were swept into this assignment. Isolated implementation checkout:
 `C:/Projects/HMASD-worktrees/control-plane-migration-20260916`, branch
 `codex/control-plane-migration-20260916`. Baseline file sizes/hashes are in
-[BASELINE](../../../project/CONTROL_PLANE_MIGRATION_BASELINE_20260916.json).
+[BASELINE](../../../archive/project/CONTROL_PLANE_MIGRATION_BASELINE_20260916.json).
 
 ## Unique rule ownership (M1–M3)
 
@@ -79,7 +79,7 @@ ACVC's wrapper results and package comparisons are separately stated, with no ne
 
 No candidate scientific file, accepted TASK/HANDOFF/REQUEST, archive, seed, result or
 APPROVED_SET membership changed. The complete FSD card/handoff blobs and original method
-snapshots are recorded in [CHECKS](../../../project/CONTROL_PLANE_MIGRATION_CHECKS_20260916.json).
+snapshots are recorded in [CHECKS](../../../archive/project/CONTROL_PLANE_MIGRATION_CHECKS_20260916.json).
 That artifact also records every `REQUEST.reference_files` path at its actual explicit
 commit, including the workflow/portfolio rules bound at
 `999e838cf764928b11d484f2232fde24a43f949f`; request default source was
@@ -105,7 +105,7 @@ protected blobs pass; generated publication has zero drift.
 - Actual fresh Codex root and native DM/Operator/Transport sessions read the new skills
   and performed bounded hypothetical probes. Claude hub, Reviewer and Operator probes
   used actual native startup and Read/Skill traces. Filtered action/session evidence is
-  in [NATIVE](../../../project/CONTROL_PLANE_MIGRATION_NATIVE_20260916.json); original
+  in [NATIVE](../../../archive/project/CONTROL_PLANE_MIGRATION_NATIVE_20260916.json); original
   rollout paths are retained there. Child identity uses actual spawn IDs/log filenames,
   not the inherited parent session_meta present in forked logs.
 - Behavioral coverage: pause/empty capacity; authorized continuity; covered negative or
@@ -167,7 +167,7 @@ This adds no member, allowance or lifecycle decision. Existing candidate scienti
 remain unchanged against the original FSD head. Both FSD commits are pushed. The sync also
 includes baseline main's existing Claude settings and bind_conversation direction_id fix.
 Exact paths and original sources are in
-[PUBLICATION](../../../project/CONTROL_PLANE_MIGRATION_PUBLICATION_20260916.json).
+[PUBLICATION](../../../archive/project/CONTROL_PLANE_MIGRATION_PUBLICATION_20260916.json).
 The copied owner plan retains its two original Markdown hard-break trailing spaces;
 they are intentionally excluded from whitespace cleanup to preserve its exact source bytes.
 

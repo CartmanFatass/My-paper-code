@@ -85,7 +85,7 @@ Complete time/RSS is
 `/home/wu/hmasd-inputs/fsd-native-renewal-b02-p43-20260908/<arm>_process_time.txt`.
 Root records actual acceptance and observes that same identity with existing
 `agent-task status`/`logs`, following
-[EXPERIMENT_MONITOR](../../../project/EXPERIMENT_MONITOR.md). No adoption claim
+[EXPERIMENT_MONITOR](../../../archive/project/EXPERIMENT_MONITOR.md). No adoption claim
 or extra readiness ACK is made by this preparation.
 
 Failed G does not block independent C/H, and missing C does not erase H's own

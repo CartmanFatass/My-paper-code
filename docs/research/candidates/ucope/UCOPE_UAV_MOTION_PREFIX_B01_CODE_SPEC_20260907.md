@@ -4,7 +4,7 @@ This is the common implementation specification for [the B/EXPLORE card](UCOPE_U
 
 ## 1. Source, ownership and delivery boundary
 
-The pre-preparation source is full commit **521da9b267b623d7368ff1ed46807ff413dc095b** on `codex/ucope`. This documentation preparation changes no source bytes. Root captures the full descendant commit containing this card/spec/task for all five arms, at one identical starting snapshot. The designated authoring checkout remains `C:/Projects/HMASD-worktrees/dm-ucope-native-return-prep-20260906`; comparison participants use only their individually supplied detached copies, applying the same relative-path remapping. Root owns capture under [CM comparison](../../../project/CM_MODEL_COMPARISON_20260907.md); no ordinary solo CM has started.
+The pre-preparation source is full commit **521da9b267b623d7368ff1ed46807ff413dc095b** on `codex/ucope`. This documentation preparation changes no source bytes. Root captures the full descendant commit containing this card/spec/task for all five arms, at one identical starting snapshot. The designated authoring checkout remains `C:/Projects/HMASD-worktrees/dm-ucope-native-return-prep-20260906`; comparison participants use only their individually supplied detached copies, applying the same relative-path remapping. Root owns capture under [CM comparison](../../../archive/project/CM_MODEL_COMPARISON_20260907.md); no ordinary solo CM has started.
 
 Owned new paths and responsibilities:
 

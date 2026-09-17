@@ -24,7 +24,7 @@ No browser Send may overlap another executor; reconcile actual acceptance before
 The current Root task is the execution coordinator; DM owns direction
 science and the former CM engineering responsibilities. Portfolio is the persistent Pro node,
 not a native session. Authority, budgets and owner pause/stop instructions remain in AGENTS.md.
-The current autonomy clarification is [the 2026-09-13 DM consolidation](../research/portfolio/decisions/2026-09-13-dm-autonomy-consolidation.md).
+The current autonomy clarification is [the 2026-09-13 DM consolidation](../../research/portfolio/decisions/2026-09-13-dm-autonomy-consolidation.md).
 The 2026-09-10 control-plane consolidation remains the role-migration provenance.
 
 OWNER_DIRECT 2026-09-10: directions run as independent rolling chains. A direction advances from

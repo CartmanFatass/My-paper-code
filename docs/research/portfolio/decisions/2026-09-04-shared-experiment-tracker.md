@@ -56,7 +56,7 @@ Root verified two peer roundtrips between the existing FSD and CRTO custom DMs: 
 send_message with an actual returned ACK, then followup_task waking the idle FSD DM with an ACK
 received by CRTO. Root forwarded neither test message. The independently reported calls and the
 default tracker limitation are recorded in
-[SIBLING_COMMUNICATION.md](../../../project/SIBLING_COMMUNICATION.md), together with official
+[SIBLING_COMMUNICATION.md](../../../archive/project/SIBLING_COMMUNICATION.md), together with official
 configuration references and the exact native invocation boundaries. No research process changed
 because of these communication probes.
 

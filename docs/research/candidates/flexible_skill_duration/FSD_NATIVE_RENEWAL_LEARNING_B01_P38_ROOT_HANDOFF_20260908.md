@@ -102,7 +102,7 @@ For each literal handle `fsd_native_b01_p38_<arm>_b3f86bb28`:
 - External time/RSS/exit file:
   `/home/wu/hmasd-inputs/fsd-native-renewal-b01-p38-20260908/<arm>_process_time.txt`.
 - Root observes with `agent-task status <handle>` and `agent-task logs <handle> 40`
-  through SSH, under [EXPERIMENT_MONITOR](../../../project/EXPERIMENT_MONITOR.md).
+  through SSH, under [EXPERIMENT_MONITOR](../../../archive/project/EXPERIMENT_MONITOR.md).
   Root records actual acceptance/tracking; this preparation requests no ACK or
   duplicate readiness confirmation.
 

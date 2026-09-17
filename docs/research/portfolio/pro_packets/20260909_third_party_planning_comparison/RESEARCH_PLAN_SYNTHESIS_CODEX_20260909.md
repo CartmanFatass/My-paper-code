@@ -204,7 +204,7 @@ B02 的实测每臂约 753–768 秒，三臂训练加上述评价估计 **38–
 
 - Claude 文件在本轮未提交，读取内容 SHA256：`523640fb5787dce3e3c700c42e21ae86abd2baa94d9e3aa735458685c9a6e888`。其“无spec版/有spec版”原提示都在本目录；本报告不是提示词对照实验。
 - 基础知识：[FOUNDATIONS §§1–6](../../../../rl-marl-foundations-20260907/FOUNDATIONS.md)、[01_RL](../../../../rl-marl-foundations-20260907/topic-notes/01_RL.md)、[02_MARL](../../../../rl-marl-foundations-20260907/topic-notes/02_MARL.md)、[03_HIERARCHY_ASYNC](../../../../rl-marl-foundations-20260907/topic-notes/03_HIERARCHY_ASYNC.md)、[04_EMPIRICAL](../../../../rl-marl-foundations-20260907/topic-notes/04_EMPIRICAL.md)。
-- 规范：[MARL empirical evidence §§11.7–11.10](../../../specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md)、[工程范围](../../../../project/ENGINEERING_SCOPE_SPEC.md)、[运行时工程](../../../../project/MARL_RUNTIME_ENGINEERING_SPEC.md)。知识是解释依据，当前卡/spec 决定历史结果应如何读取。
+- 规范：[MARL empirical evidence §§11.7–11.10](../../../specs/MARL_EMPIRICAL_EVIDENCE_SPEC.md)、[工程范围](../../../../archive/project/ENGINEERING_SCOPE_SPEC.md)、[运行时工程](../../../../archive/project/MARL_RUNTIME_ENGINEERING_SPEC.md)。知识是解释依据，当前卡/spec 决定历史结果应如何读取。
 - UCOPE 当前选择的完整来源：[post-mean-velocity Pro](../../../candidates/ucope/pro_packets/20260909_post_mean_velocity_b01_convergence/archive/RESPONSE.md)；本报告其余九个方向 Pro 正文及专项复审均已在对应论断旁链接。
 - 直接代码核验聚焦 [FSD agent](../../../../../hmasd/agent.py) 的 `_batched_assign_skills_d2` 与 primitive action 调用，及 [FSD runner](../../../../../scripts/run_fsd_uav_individual_renewal_b01.py) 的 evaluator 同步。对照 FSD 冻结源 `08199a932671d9bacdbe4eb0bfebab38c37fca1f`，这两个文件与阅读时 main 的差异为空。UCOPE 联合裁剪判断按其 normalization 执行源中的 learner 路径核验，不声称运行复现。
 - 没有重新逐字节核查 Claude 声称读过的20项全部材料，也没有把它的阅读声明当作本人的覆盖证明。本报告以正文列出的 Pro、关键原始结果和直接争点代码为实际复核范围。

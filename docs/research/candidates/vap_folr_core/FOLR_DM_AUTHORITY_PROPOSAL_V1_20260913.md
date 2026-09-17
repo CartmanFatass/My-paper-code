@@ -90,7 +90,7 @@ Send/launch，继续同一请求或 handle 的事实核对。
 任何 cap/seed/比较器。当前科学 card、F 决定和运行中的 Generic 保持原绑定。
 下一步仍是接收 Monitor 终态、DM collection/技术接受及依赖满足后的 BANK128。
 
-依据：AGENTS §§2–6；[ROOT_OPERATIONS.md](../../../project/ROOT_OPERATIONS.md)
+依据：AGENTS §§2–6；[ROOT_OPERATIONS.md](../../../archive/project/ROOT_OPERATIONS.md)
 Current control、Complete deliverables、Execution inputs、Integration and cleanup；
-[ENGINEERING_SCOPE_SPEC.md](../../../project/ENGINEERING_SCOPE_SPEC.md) §7；
+[ENGINEERING_SCOPE_SPEC.md](../../../archive/project/ENGINEERING_SCOPE_SPEC.md) §7；
 [当前 science card](FOLR_RETAINED_REFERENCE_USE_B01_SCIENCE_CARD_20260913.md)。

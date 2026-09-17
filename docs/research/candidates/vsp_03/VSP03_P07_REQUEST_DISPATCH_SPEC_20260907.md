@@ -141,7 +141,7 @@ The current skill's operative text is: **“Never retry an uncertain or mismatch
 and **“A mismatch means re-inspect the same conversation and preserve the mismatched capture,
 never send a repair prompt.”** The latter is a recovery option for a separately authorized
 Root operation, not an instruction to perform one during P07. The
-[GitHub partial-success table](../../../project/GITHUB_RESEARCH_COLLABORATION.md#partial-success-and-uncertainty)
+[GitHub partial-success table](../../../archive/project/GITHUB_RESEARCH_COLLABORATION.md#partial-success-and-uncertainty)
 also requires exact-message reconciliation before continuation. A provider-context replacement
 is not authorized by this preparation or by the DISH text. No full-history replay or diagnosis
 of every past capture is imposed.

@@ -181,8 +181,8 @@ requires exact state reconciliation, never a blind second launch. Any repair aft
 requires a newly selected attempt; this handoff allocates no retry.
 
 Root records actual accepted handles and observation ownership in the existing tracking
-record per [EXPERIMENT_MONITOR](../../../project/EXPERIMENT_MONITOR.md) and
-[ROOT_OPERATIONS](../../../project/ROOT_OPERATIONS.md). It follows the same handle to terminal
+record per [EXPERIMENT_MONITOR](../../../archive/project/EXPERIMENT_MONITOR.md) and
+[ROOT_OPERATIONS](../../../archive/project/ROOT_OPERATIONS.md). It follows the same handle to terminal
 facts and sends the logs, admissions, process times and summaries to this CM through the
 existing native route (running: message; idle: follow-up). The DM resumes this same CM for
 collection/technical acceptance of the same panel without relaunch. CM then returns technical

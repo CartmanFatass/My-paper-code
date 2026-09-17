@@ -97,7 +97,7 @@ For each `fsd_native_b03_p47_<arm>_f09aa00ba`, supervisor evidence lives under
 `start_time`, `runner.sh`; tmux session `agent_<handle>`. Complete time/RSS files
 are `/home/wu/hmasd-inputs/fsd-native-renewal-b03-p47-20260908/<arm>_process_time.txt`.
 Root owns routine observation from its own accepted launch, records exact handle
-facts in existing tracking, and uses [EXPERIMENT_MONITOR](../../../project/EXPERIMENT_MONITOR.md).
+facts in existing tracking, and uses [EXPERIMENT_MONITOR](../../../archive/project/EXPERIMENT_MONITOR.md).
 The expected bound/reminder is the current arm's complete cap above; timeout/exit
 is a process fact and does not establish scientific validity.
 
