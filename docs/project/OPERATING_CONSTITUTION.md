@@ -98,10 +98,10 @@ Preserve interfaces; run a relevant smoke test and obtain independent review whe
 No compatibility promise or generic registry, lease, retry, resumability or telemetry infrastructure
 without a concrete experimental need. Small correctness tests/assertions remain allowed.
 Engineering standards carried over from the earlier specifications (owner 2026-09-16 18:32 PDT)
-are kept in `hmasd-research-engineering`: size budgets and orchestration share as review
-signals, the research test time budget, exact-sha staging of declared artifacts, the
-telemetry rule, quarantine of incomplete attempts and diagnosis by reproduction. They are
-review signals and record rules, never launch gates.
+are kept in `hmasd-research-engineering`: reviewable diff size and orchestration share as
+review signals, fast research tests, exact-sha staging of declared artifacts, the telemetry
+rule, quarantine of incomplete attempts and diagnosis by reproduction. They are qualitative
+review signals and record rules, never numeric gates (owner 2026-09-16 18:43 PDT).
 
 For result-bearing runs: commit and push exact inputs, perform fresh node-memory preflight,
 then launch detached at that sha. Archiving stops maintenance; it does not destroy evidence.

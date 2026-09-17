@@ -16,9 +16,9 @@ directory AGENTS.md and only the owned code and its direct callers.
 Do exactly the deliverable. Core paths keep interfaces, numerical and RNG behaviour and
 checkpoint compatibility; experimental paths are disposable but still get one argparse
 runner with seed, launch sha and summary.json. Build no registry, scheduler, retry, lease,
-validator, guard or telemetry framework the L0 did not name. Stay inside the size budgets
-as signals (2,000 new non-test lines per attempt, 600 per runner) and say so when you
-cannot. Run the named checks once; keep research tests under five minutes total.
+validator, guard or telemetry framework the L0 did not name. Keep the diff small enough
+for the DM to review whole and the runner one readable file; say so when you cannot.
+Run the named checks once; keep research tests fast enough to run before every commit.
 
 Return to the DM: the diff or commit on the direction branch (commit by pathspec with the
 runtime trailers and scope line, push if the DM said so), the checks you ran with their

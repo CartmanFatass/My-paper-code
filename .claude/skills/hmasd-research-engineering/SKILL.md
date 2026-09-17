@@ -45,10 +45,12 @@ result stays recoverable, and its required outputs are preserved before scratch 
   validators, registries, single-use abstractions, telemetry frameworks or compatibility
   shims. A facility beyond wall time and peak RSS needs its need written in the notebook entry
   and `scope: <item> per <NOTES.md entry>` in the commit; otherwise `scope: none`.
-- **Size**: 2,000 new non-test lines per attempt and 600 per runner. Orchestration above
-  30 percent of a diff is a review signal. Name any excess; never split commits to hide it.
-- **Tests**: research-directory tests total under five minutes excluding one runner smoke; no
-  repeated smoke per launch or slice. Return a concrete coverage gap rather than exceed it.
+- **Size**: an attempt's diff stays small enough for the DM to review whole, and a runner
+  stays one readable file. A diff that is mostly orchestration rather than the learner or
+  the measurement is a review signal. Name any excess; never split commits to hide it.
+- **Tests**: research-directory tests stay fast enough to run before every commit, with at
+  most one runner smoke; no repeated smoke per launch or slice. Return a concrete coverage
+  gap rather than a slow suite.
 - **Staging**: only committed source and declared artifacts at their recorded digest reach the
   node; never dirty source. Currentness is the byte content of the declared paths, not the
   commit id, so an unrelated commit does not refuse a run.
