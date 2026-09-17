@@ -46,6 +46,11 @@ skills 的描述用于发现，正文在任务使用时读取，references 只�
 Codex 子角色获得自身角色配置，不意味着 Root 主会话已经加载同一正文。
 Claude 导入 AGENTS，研究 session 使用生成的 research-hub；它不是又一名 Root。
 Pro 是外部会话，不继承本地 skills：问题作者在现有问题段内提供适用方法摘录或固定版本的具体节。
+具体选读见 [Pro reading context](../../.agents/skills/hmasd-pro-research-prompt-author/references/pro-reading-context.md)：
+Portfolio、假设批次、确认前 review、owner 明确要求的控制面 review 分别选择材料。
+作者把具体文件/节/版本和用途展开到原问题的 Context 中，并在实际发送消息中说明先读这些来源、
+现行治理替代冲突的旧聊天规则、冻结输入保持原义。Pro 在回答中引用实际采用的依据，说明关键未读材料；
+缺失材料只限制依赖它的结论，不产生新审批或自动补发。Transport 原样发送，作者负责判断来源是否适用。
 
 ## 一项研究如何经过控制面
 

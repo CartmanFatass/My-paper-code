@@ -22,6 +22,8 @@ as `NOTES.md` entries.
    ## Portfolio review <YYYY-MM-DD> <unique-slug>
    Conversation: <Portfolio conversation URL, one long-lived conversation>
    Standing: <one line per active and reserve direction with sha-pinned links>
+   Context: <concrete governance/method/evidence sections and revisions selected from the
+     Portfolio profile in hmasd-pro-research-prompt-author/references/pro-reading-context.md>
    Decisions asked: <activate, archive, reserve, priority order, per-idea allowance changes>
    Options: <each with its consequence; recommendation, supporting/contrary evidence,
      uncertainty, known complete cost, substitutability/reversibility, smallest useful next
@@ -35,6 +37,9 @@ as `NOTES.md` entries.
    an untuned reference gap or a proof unrelated to the claim is not an investment verdict.
    Include the applicable method context as described in `hmasd-pro-research-prompt-author`,
    within this same section; Pro does not inherit local skills. No separate packet or review trigger.
+   Use its [Portfolio reading profile](../hmasd-pro-research-prompt-author/references/pro-reading-context.md):
+   current Constitution, relevant scientific methods, affected directions' evidence and real options.
+   Historical specs are included only for named frozen obligations or explanatory comparisons.
 
 3. **Publish through the shared integrator.** Root owns main/RESEARCH.md while it is
    coordinating Codex; otherwise the explicitly acting Claude integrator may publish from its
@@ -44,11 +49,15 @@ as `NOTES.md` entries.
    Instruct Pro to read the pinned question, fetch the current target version and write only
    the empty answer subsection, preserving the question, tables and `### Decision`. Return
    the actual commit on success or the complete answer in chat on write failure.
+   Include the context reference's reading/source-precedence instruction in the actual send message,
+   including current-context replacement of stale chat rules and disclosure of critical unread sources.
    The shared integrator hands off only this subsection while Pro writes and does not edit
    it concurrently. A short receipt is not an answer. Use the same complete-answer, scope and
    uncertain-write reconciliation checks as a direction question; do not look in NOTES.md.
 4. **Read the whole answer.** Pro advises. The owner decides; if the owner says to apply Pro's
-   answer, apply it. Write the decision and its date under `### Decision`.
+   answer, apply it. Check consequential recommendations against the supplied methods and evidence;
+   state dependent source gaps without inventing a further review trigger. Write the decision and
+   its date under `### Decision`.
 5. **Apply.** Update the direction rows (state, priority, lead runtime, standing) and push.
    Nothing else changes: no lifecycle labels, ledger, owner items or decision files.
 

@@ -14,6 +14,10 @@ Direction questions target NOTES.md; owner-triggered Portfolio questions target 
 Do not infer the target from the role name. Read the pinned question and confirm that its
 answer subsection is empty and the heading uniquely identifies this question before sending.
 One send per question. Provider settings come from `.codex/hmasd-transport.toml`.
+The author's message includes the question's reading instructions and source precedence.
+Send them unchanged with the question URL; do not shorten to a link, choose scientific sources,
+or substitute conversation memory. Context selection and scientific source-use assessment belong
+to the author. A context correction never authorizes resending an accepted or uncertain question.
 
 ## Steps
 

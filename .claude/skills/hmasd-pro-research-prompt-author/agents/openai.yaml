@@ -1,4 +1,4 @@
 interface:
   display_name: "HMASD Pro Question"
   short_description: "Write a Pro question as a NOTES.md section"
-  default_prompt: "Use $hmasd-pro-research-prompt-author to write a hypothesis-batch or critic-pass question as a NOTES.md section, commit it and compose the one-line message for Transport."
+  default_prompt: "Use $hmasd-pro-research-prompt-author to write a hypothesis-batch or critic-pass question with pinned reading context in NOTES.md, commit it and compose the message and reading instructions for Transport."

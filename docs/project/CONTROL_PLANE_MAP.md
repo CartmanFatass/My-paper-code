@@ -59,6 +59,11 @@ handle，再完成新观察者 adoption。节点安全底线、declared artifact
 fallback → 原作者读取并记录采纳意见。目标不是固定 NOTES。核对 pinned question、实际 diff、完整 subsection 和
 目标 branch；SHA／短聊天 receipt 不算答案。未知发送状态只核对，不重复 Send。
 
+**Pro 的阅读上下文：** [共享选读说明](../../.agents/skills/hmasd-pro-research-prompt-author/references/pro-reading-context.md)
+由问题作者按用途展开到原问题 Context：current governance/methods、standing/evidence、独立版本的 frozen contract。
+实际发送消息包含阅读要求与来源优先关系；Transport 不自行选科学材料、不删掉这些说明。
+这份说明是现有 Pro author 的按需 reference，不是新 spec、packet 或常规 review 触发器。
+
 ## 历史、退役与尚未验证的边界
 
 PORTFOLIO、APPROVED_SET、dossiers、旧 cards／intakes／handoffs／ledger／packets 与旧治理规格是历史材料；
