@@ -43,10 +43,25 @@ are unchanged. Cleanup failures report the exact path and error rather than disa
 Pytest's cache provider is disabled. Retain needed failure diagnostics outside scratch
 before teardown; do not treat temporary output as the only scientific evidence.
 
-A hard process kill or machine crash cannot run teardown. Leftovers from such interruptions
-need explicit inspection and cleanup; no later test session sweeps old or other sessions'
-directories. A tool-policy rejection is separate from filesystem permissions and must be
-reported, not bypassed through another tool or interpreter.
+A hard process kill or machine crash cannot run teardown. At the end of test work, after
+all pytest processes have exited, use the fixed recovery command for any leftovers:
+
+```powershell
+# Preview completed-test scratch under temp/tests/.
+./scripts/cleanup_test_scratch.ps1
+# Reclaim it after checking the preview; no separate approval is needed for owned scratch.
+./scripts/cleanup_test_scratch.ps1 -Delete
+# Limit recovery to a specific invocation, including direction-specific test scratch.
+./scripts/cleanup_test_scratch.ps1 -RunDirectory temp/directions/<direction>/test/<tag> -Delete
+```
+
+Ordinary pytest teardown remains automatic; this command is the fallback for interrupted
+sessions and historical leftovers. It validates the selected invocation directories, refuses
+tracked content and links/junctions, checks for native pytest processes and reports failures.
+Do not run it concurrently with test startup. It does not sweep experiment outputs or the
+whole temp tree, kill processes, change ACLs or install a scheduled service. On non-Windows
+hosts, normal pytest teardown still works; this recovery script is for Windows.
+A tool-policy rejection must still be reported; a script is not a permission bypass.
 
 ## What tests are for here
 
