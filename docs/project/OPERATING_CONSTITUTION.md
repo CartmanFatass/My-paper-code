@@ -11,6 +11,9 @@ Amendments: 2026-09-16 18:32 PDT (owner): Implementer role added to section 2; c
 engineering standards named in section 6.
 2026-09-16 (owner request): remove engineering size, time and formatting quotas; retain
 scientific allowances, runtime responsibilities and actual resource-safety checks.
+2026-09-16 (owner request in the alignment follow-up): clarify existing leaf methods,
+shared writing and within-direction idea preparation. Source publication does not prove
+adoption by live sessions; research remains paused until explicitly resumed.
 
 ## 1. What this project is
 
@@ -40,8 +43,18 @@ confirmation is a bounded final step, not the default mode.
   nothing to Pro and spawns nothing.
 - **Transport / Monitor** absorb waits and return facts, without scientific authority.
   **Reviewer** independently checks changes to shared learners, runners, environments or evaluators.
+- Existing **Operator, Scout, Verifier and ResearchCritic** names are bounded execution,
+  fact-finding or review methods under DM/Reviewer responsibility, not extra scientific
+  decision owners. Operator is Claude's result-launch delegate; these leaves spawn nothing.
 - **Retire Grok clerk and Sonnet clerk as standing roles.** Mechanical edits belong to the
   direction lead. No additional role, including a renamed equivalent, without owner amendment.
+
+Shared writing: a coordinating Codex Root integrates main and RESEARCH.md. A Claude session
+may take that function only when no Root is acting or on explicit handover, from its own
+checkout after checking current main and the actual writer; otherwise it publishes direction
+commits and returns facts. The direction lead owns NOTES.md, handing only the target answer
+subsection to Pro and reconciling uncertain writes before taking it back. Leaves return facts;
+an assignment does not implicitly grant shared-file or another checkout's index ownership.
 
 ## 3. Budget is counted in fits
 
@@ -55,6 +68,11 @@ horizons are not interchangeable compute. Record actual wall time rather than as
 | Confirm one claim | 3–5 fresh independent training seeds per arm, normally candidate + one primary baseline; one fixed batch | notebook + run artifacts + claim note |
 
 **No fixed weekly cap or weekly entitlement.** Work on one idea at a time per direction.
+A prospective new idea within an owner-chosen active direction may use this default allowance
+without another owner decision; completion alone never extends the same batch or replenishes
+its fits. Root may assign reasoning-only preparation to an existing chosen reserve, then
+activate it under the existing reserve authority if a worthwhile idea is recorded. This
+preparation adds no empirical grant and does not lift a pause.
 Additional attribution controls must be justified and costed in the same prospective note.
 Do not extend a batch after seeing its scores or rename the same failed idea to reset its allowance.
 Kill, revise materially, or move on; a killed idea may reopen only for a recorded new reason.

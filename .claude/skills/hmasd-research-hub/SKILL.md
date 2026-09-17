@@ -10,19 +10,31 @@ The Claude session is the DM for one direction at a time under `docs/project/OPE
 
 You own one direction end to end under docs/project/OPERATING_CONSTITUTION.md: ideas, code,
 runs, reading, and the three records (NOTES.md, runs/<direction>/<tag>/, CLAIM_<slug>.md).
-You also integrate your own commits into main and push immediately. You own
+A coordinating Codex Root retains shared main/RESEARCH integration; publish your direction branch and return accepted commits. Take shared integration only with no acting Root or explicit handover, from your own checkout after fetching main and checking the writer. You own
 implementation: small edits directly, bounded tasks through your Implementer.
 
 Order of checks: owner pause first; then docs/research/RESEARCH.md (your direction must be
 active and led by the Claude session); then the fit allowance of constitution section 3; then fresh node
-admission. Finishing an idea or batch grants no successor, retry, new host or extra fits.
+admission. Ordinary new ideas in a chosen active direction may proceed within the default
+per-idea allowance after a prospective notebook entry; no per-idea owner approval is added.
+Completion never extends that same batch or grants extra fits, a duplicate retry, or a renamed
+failed idea. An explicitly assigned reserve preparation is reasoning only: record the idea,
+then let Root update the index under the existing reserve authority before any result run.
 
 Method: .agents/skills/hmasd-scientific-tools/SKILL.md for design, comparators, counts and
 reading; .agents/skills/hmasd-research-engineering/SKILL.md for code, review and launch. Read
-only the current NOTES.md, claim note and owned code; no spec or citation preload. Write a
+the current NOTES.md, claim note and owned code. For a frozen object linked by RESEARCH.md,
+read its original card and directly required bound inputs instead of inventing a replacement
+claim note; retain its seeds, stopping rule, output contract and exceptions. No recursive
+historical preload. Write a
 concise L0 scope note and hand each bounded code task to hmasd-implementer (Opus, high effort) to spare your context; review its diff, run or read its checks,
 and accept it yourself. Independent Reviewer for core or semantic changes. Scout, Critic,
-Verifier and Operator are optional bounded leaves that return to you.
+Verifier and Operator are existing bounded methods under your responsibility, not additional
+scientific decision owners. They return facts and spawn no children. You own the notebook;
+Implementer and Monitor do not acquire shared-file write permission by being assigned a task.
+For a changed control revision, reread affected methods at a safe boundary and report actual
+adoption or conflict through the existing return/NOTES entry. Disk publication is not proof of
+loaded instructions. Do not rebind, relaunch or resend accepted or uncertain work to migrate it.
 
 Pro: hmasd-pro-research-prompt-author for a hypothesis batch or one critic pass; you send
 it with the Agentify tools or dispatch hmasd-pro-transport. Read the whole answer and record your response in
@@ -33,6 +45,5 @@ agent-task on the declared node and returns the accepted handle; dispatch hmasd-
 for one bounded observation window at a time, its first return being adoption evidence. Terminal facts return to you; collect into
 runs/, then read. Never launch a duplicate on lost observation.
 
-At a boundary (batch done, idea killed, claim read, conflict, idle) write one NOTES.md entry and update the
-RESEARCH.md standing line: state, evidence or commit, next step or dependency and its owner. Idle with no
+At a boundary (batch done, idea killed, claim read, conflict, idle) write your NOTES.md entry and return the standing-line facts to the shared integrator (update RESEARCH.md yourself only when acting as that integrator): state, evidence or commit, next step or dependency and its owner. Idle with no
 producer is idle, not a fabricated dependency. Unchanged waits stay quiet.

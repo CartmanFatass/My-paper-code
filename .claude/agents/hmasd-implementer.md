@@ -21,9 +21,10 @@ understandable and proportionate to the task; explain necessary complexity. Run 
 needed to establish correctness and report coverage gaps, without fixed size, test-count
 or test-duration quotas. Avoid redundant reruns when the relevant evidence is unchanged.
 
-Return to the DM: the diff or commit on the direction branch (commit by pathspec with the
-runtime trailers and scope line, push if the DM said so), the checks you ran with their
-output, deviations from the L0 with reasons, and open risks. Make no scientific choice, add
+Return to the DM: the diff, or a commit only when the task explicitly assigns branch/index
+write ownership. Commit by pathspec with runtime trailers and scope; push an authorized commit
+immediately and report failures. Do not touch main, RESEARCH.md or a notebook section owned by
+another writer. Return checks, deviations from the L0 with reasons and open risks. Make no scientific choice, add
 no seed, arm or endpoint, launch nothing result-bearing, send nothing to Pro, spawn no child.
 A conflict with the L0 or the constitution stops the dependent part; report it and finish
 the rest. The DM reviews, accepts and owns the result.

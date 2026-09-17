@@ -19,7 +19,7 @@ as `NOTES.md` entries.
 2. **Write the section.** Append to `RESEARCH.md`:
 
    ```
-   ## Portfolio review <YYYY-MM-DD>
+   ## Portfolio review <YYYY-MM-DD> <unique-slug>
    Conversation: <Portfolio conversation URL, one long-lived conversation>
    Standing: <one line per active and reserve direction with sha-pinned links>
    Decisions asked: <activate, archive, reserve, priority order, per-idea allowance changes>
@@ -28,8 +28,17 @@ as `NOTES.md` entries.
    ### Decision
    ```
 
-3. **Commit and push** `main` by pathspec, then send the one-line message through
-   `hmasd-chatgpt-pro-transport` (sha-pinned link, section heading, write under `### Answer`).
+3. **Publish through the shared integrator.** Root owns main/RESEARCH.md while it is
+   coordinating Codex; otherwise the explicitly acting Claude integrator may publish from its
+   own checkout. Coordinate the shared writer, commit by pathspec and push. Supply Transport
+   repository, branch, source_sha, target_path=`docs/research/RESEARCH.md`, question_heading,
+   answer_heading=`### Answer`, subject key=`portfolio`, message and conversation URL.
+   Instruct Pro to read the pinned question, fetch the current target version and write only
+   the empty answer subsection, preserving the question, tables and `### Decision`. Return
+   the actual commit on success or the complete answer in chat on write failure.
+   The shared integrator hands off only this subsection while Pro writes and does not edit
+   it concurrently. A short receipt is not an answer. Use the same complete-answer, scope and
+   uncertain-write reconciliation checks as a direction question; do not look in NOTES.md.
 4. **Read the whole answer.** Pro advises. The owner decides; if the owner says to apply Pro's
    answer, apply it. Write the decision and its date under `### Decision`.
 5. **Apply.** Update the direction rows (state, priority, lead runtime, standing) and push.

@@ -61,6 +61,18 @@ zero. Report selection and tuning exposure alongside any comparison. Prefer the 
 learning comparison that decides the question; exhaustive diagnosis, exact maxima and
 search-before-learning need a concrete purpose.
 
+Performance claims account for full work: import/build/init, rollout and learning, replay,
+evaluation, synchronization, publication and readback. Separate cold/warm runs, preparation,
+queue/support, sum of fit walls, batch elapsed and actual node occupancy. Report user/system
+CPU and children without double-counting threads when parallelism matters; name internal
+BLAS/OpenMP/native teams and RSS scope. Never omit scientific work to claim speed; unknown
+cost is not zero. These are claim-specific measurements, not a mandatory profiling fit.
+
+Transfer claims state the held-out task/population, perturbations and aggregation actually
+tested. Simulator results do not establish physical deployment safety. Exact theorem claims
+need assumptions matching the implemented scheme. These limits do not create evidence
+classes, a C-consumption ladder or a universal held-out requirement for exploration.
+
 ## Pro
 
 Use `hmasd-pro-research-prompt-author` for a hypothesis batch before an exploration cycle or

@@ -13,15 +13,27 @@ implementation: small edits directly, bounded tasks through your Implementer.
 
 Order of checks: owner pause first; then docs/research/RESEARCH.md (your direction must be
 active and Codex-led); then the fit allowance of constitution section 3; then fresh node
-admission. Finishing an idea or batch grants no successor, retry, new host or extra fits.
+admission. Ordinary new ideas in a chosen active direction may proceed within the default
+per-idea allowance after a prospective notebook entry; no per-idea owner approval is added.
+Completion never extends that same batch or grants extra fits, a duplicate retry, or a renamed
+failed idea. An explicitly assigned reserve preparation is reasoning only: record the idea,
+then let Root update the index under the existing reserve authority before any result run.
 
 Method: .agents/skills/hmasd-scientific-tools/SKILL.md for design, comparators, counts and
 reading; .agents/skills/hmasd-research-engineering/SKILL.md for code, review and launch. Read
-only the current NOTES.md, claim note and owned code; no spec or citation preload. Write a
+the current NOTES.md, claim note and owned code. For a frozen object linked by RESEARCH.md,
+read its original card and directly required bound inputs instead of inventing a replacement
+claim note; retain its seeds, stopping rule, output contract and exceptions. No recursive
+historical preload. Write a
 concise L0 scope note and hand each bounded code task to an Implementer child
 (HMASDImplementer, Sol/high) to spare your context; review its diff, run or read its checks,
 and accept it yourself. Independent Reviewer for core or semantic changes. Scout, Critic,
-Verifier and Operator are optional bounded leaves that return to you.
+Verifier and Operator are existing bounded methods under your responsibility, not additional
+scientific decision owners. They return facts and spawn no children. You own the notebook;
+Implementer and Monitor do not acquire shared-file write permission by being assigned a task.
+For a changed control revision, reread affected methods at a safe boundary and report actual
+adoption or conflict through the existing return/NOTES entry. Disk publication is not proof of
+loaded instructions. Do not rebind, relaunch or resend accepted or uncertain work to migrate it.
 
 Pro: hmasd-pro-research-prompt-author for a hypothesis batch or one critic pass; your
 Transport child (HMASDTransport) sends it. Read the whole answer and record your response in
