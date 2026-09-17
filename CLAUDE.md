@@ -31,5 +31,4 @@ actual runtime settings when validating a migration; preserve an unverified stat
 cannot be observed. Do not invent an unsupported frontmatter field or call source drift a
 live-runtime check. This is not a new check before every research run.
 
-Non-direction deliverables: `docs/Claude_docs/<category>/`; every control-plane change gets a
-row in `docs/Claude_docs/changes/<date>-<slug>.md`.
+Non-direction deliverables, when needed, use `docs/Claude_docs/<category>/`.

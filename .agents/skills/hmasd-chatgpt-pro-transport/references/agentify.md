@@ -5,7 +5,7 @@ The callable tool schemas prevail over this note.
 
 - `agentify_tabs({})` and `agentify_status({tabId})` expose tab identity, protection and the
   stable key. Protected or default tabs are read-only inspection surfaces; send only from a
-  dedicated non-protected tab keyed by the assigned subject key (direction id or portfolio).
+  dedicated non-protected tab keyed by the committed question, as described in SKILL.md.
 - `agentify_review_preflight({tabId, productModel, reasoningEffort, timeoutMs:60000})` checks
   the tab without sending. Product is GPT-6 Astra (the picker may show `Latest`); effort is
   `Pro`. An account badge alone is not proof; the composer's current model and effort must be
@@ -19,8 +19,11 @@ The callable tool schemas prevail over this note.
   written before the external click; from then on only observe. For a new conversation use
   the provider root URL, `conversationId="__new__"` and `firstBinding=true` on a clean tab,
   and record the observed conversation URL afterwards.
-- After sendAttempted=true or uncertain acceptance, this workflow uses wait_response and
-  read_page to observe the same operation; do not call review_query again to recover it.
+- After confirmed sendAttempted=true, wait_response/read_page normally suffice. If native
+  pairing or exact response recovery is needed, review_query with the same immutable
+  arguments and verifyExisting=true observes the existing operation without sending.
+  verifyExisting alone is not a no-send guarantee: sendAttempted=false can still send.
+  For unknown state reconcile first; never create an operation to observe a prior manual Send.
 - `agentify_wait_response({tabId, timeoutMs:60000})` never sends. `IN_PROGRESS` means keep
   waiting; `COMPLETE` is the observation. Strict completion needs matching assistant text
   across two samples at least three seconds apart and no Stop, Continue or Retry control in

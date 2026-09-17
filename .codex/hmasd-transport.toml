@@ -2,9 +2,6 @@ schema_version = 1
 mode = "dm_native"
 status = "active"
 backend = "agentify"
-# Legacy recovery compatibility only. New questions use the explicit assignment target
-# and never read this registry; keep this field until dependent old helpers are retired.
-registry_path = "C:/Projects/HMASD/temp/sessions/hmasd-chatgpt-pro-transport/registry.json"
 environment = "local"
 model = "gpt-5.6-luna"
 reasoning_effort = "high"
@@ -17,8 +14,6 @@ label = "6 Pro"
 selector_hint = "Latest"
 
 # The author supplies the current conversation URL from NOTES.md or the Portfolio section.
-# One writer per conversation. The record below is historical exclusion data, not an
-# active binding/state authority; its observed-ID inventory is not exhaustive.
+# Tool keys belong to questions, not permanent direction bindings.
 [conversation_policy]
 mode = "serial_reuse"
-retired_ids_record = "docs/research/portfolio/decisions/2026-09-04-retired-provider-conversations.json"

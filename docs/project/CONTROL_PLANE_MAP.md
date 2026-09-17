@@ -62,11 +62,14 @@ fallback → 原作者读取并记录采纳意见。目标不是固定 NOTES。�
 PORTFOLIO、APPROVED_SET、dossiers、旧 cards／intakes／handoffs／ledger／packets 与旧治理规格是历史材料；
 冻结对象中直接绑定的事实和科学约定仍保留。Grok／Sonnet clerk 已退役，不因旧引用重新注册。
 
-**仍存在的遗留工具不可当作当前默认：** 两个 Pro skills 目录下的旧 renderer、registry／binding／archive helpers、
-旧 state／delivery references，及 `hmasd-owner-item` 的退役 notice。当前新工作流程不调用这些工具；但文件仍在，
-当前 publisher 的递归复制也仍会包含它们。孤儿检测的修复不等于退休工作完成。
-在确认没有 accepted／uncertain legacy 操作依赖后，才把这些工具及对应测试按原字节迁出活动树；
-保留 Git 来源与恢复说明，不移除用户本地 registry、进程状态、科学结果或未知 worktree。
+旧 renderer、registry／binding／archive helpers、旧 state／delivery references、owner-item skill
+及其对应测试已退出活动树与生成副本。旧源码可在 `987c7241e` 按原路径恢复；历史 registry、
+已交付正文、旧操作参数和科学证据保留原位，不转抄成新流程记录。发现旧未决操作时按其原 key
+和消息查询、收取正文；不重发。新工作不需要维护它们的旧状态机。
+
+Agentify 的 stableKey/idempotencyKey 使用同一个问题 key；新问题可以复用原会话或换会话，
+无需方向 binding 或 generation 登记。恢复已发送的同一操作可用原参数和 verifyExisting=true
+只观察；未知发送状态先核对，不把“再次调用工具”误当作“再次发送消息”。
 
 已运行会话在安全边界通过现有返回路径报告实际采用的 revision／冲突；源码发布不能替代这个事实。
 Windows／WSL／Agentify、用户级配置、Claude effective effort／权限隔离仍需原生观察。

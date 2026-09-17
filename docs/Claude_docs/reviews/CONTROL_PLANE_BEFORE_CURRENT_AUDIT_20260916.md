@@ -96,3 +96,8 @@ Owner pause、独立高风险 review、真实节点物理及有效可用内存�
 本次实际运行 publisher --check：`drift: 0`。读取已有 21 项定向测试及迁移结果；没有无改动重复跑同一测试。测试覆盖生成、孤儿、header、锚点、目标字段和关键文字；没有覆盖“同方向会话替换→真实 Agentify binding”，这解释了为什么通过 21 项检查仍会漏掉问题 1。研究实现与 `.codex/hmasd-compute.toml` 在本区间无 diff；scripts/envs/experiments 范围内变化仅为 AGENTS 入口。这不认证既有科学实现。
 
 没有进行真实 provider Send、native effort/权限验证、WSL launch、旧运行句柄交接或旧 helper 依赖清理。本报告只记录证据和最小修复候选，不修改控制面源码、不恢复研究、不改变历史科研结论。
+
+后续 owner 澄清：旧流程复杂度不适合当前研究项目，要求实际完成迁移。本文是上述固定快照的审计，
+不构成继续保留这些手续的理由。随后已采用问题级工具 key、恢复不发送的同操作查询、移除旧 helper／
+references／owner-item 与对应测试、对齐菜单提示并取消逐修改文书要求；真实 Agentify 模块的无外部发送
+测试通过。实施事实见[原迁移记录](../changes/2026-09-16-control-plane-alignment.md)的 owner clarification 段落。

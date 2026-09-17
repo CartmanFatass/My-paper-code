@@ -30,7 +30,11 @@ class AcpsSelectorRepair(unittest.TestCase):
             self.assertEqual(result["external_sends"], 0)
             self.assertTrue(result["same_operation_repair"])
             self.assertTrue(result["uncertain_observe_only"])
+            self.assertTrue(result["same_question_key_recovery_zero_resend"])
             self.assertTrue(result["archive_exact"])
+            self.assertTrue(result["old_key_different_conversation_rejected"])
+            self.assertTrue(result["new_question_key_existing_conversation"])
+            self.assertTrue(result["new_question_key_first_binding"])
         finally:
             (scratch / "HANDOFF.json").unlink(missing_ok=True)
             scratch.rmdir()

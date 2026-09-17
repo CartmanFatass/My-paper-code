@@ -83,3 +83,30 @@ performed separately. The two ignored test directories under the isolated worktr
 `temp/tests/control-alignment-root*-20260916` were retained, not bypass-deleted. Existing-session
 adoption, effective Claude settings, live Agentify/WSL handover and legacy helper retirement
 remain explicitly unverified; these were not inferred from passing source checks.
+
+## Owner clarification and practical simplification
+
+The owner clarified that the old procedural complexity does not suit this research project
+and asked to finish legacy migration. Followed Claude's original shared-method rewrite intent:
+removed the old registry/packet/binding/archive helpers, their legacy references, owner-item
+skill and nine obsolete tests from shared and generated trees. Recovery source remains at
+`987c7241e`; local legacy data were not deleted. The inspected legacy registry had 29 ARCHIVED
+bindings and one DIRECTION_VERIFIED entry with no recorded send count/effect/generation;
+this is a registry snapshot, not a claim about live provider activity.
+
+Agentify itself permits different conversations. Its key cannot silently change an already
+bound conversation, so the method now uses the committed question's key for both stableKey
+and idempotencyKey, without a direction-generation registry. Original keys/arguments remain
+unchanged when recovering an old operation. Confirmed sent operations can use the tool's
+same-operation, verifyExisting observation path; unknown state is reconciled first. Aligned
+the menu prompt for both answer targets and removed mandatory per-control-edit paperwork.
+No research resumed, no live Pro message sent, and no Agentify production code changed.
+
+Validation: the 21 publication/alignment/science-tool checks passed. The extended existing
+Agentify fixture passed against the real local runReviewQuery module with mocked browser
+effects: old-key conversation change is rejected, fresh question keys work for existing and
+new conversations, and confirmed-sent recovery adds zero sends. Independent review found no
+remaining runtime defect and identified one obsolete owner-console routing assertion, now
+removed. Publisher drift is zero; retained active callers have no deleted-helper dependency.
+The `temp/tests/control-simplify-20260916` test directory remains because automatic approval
+rejected its explicit cleanup command with `blocked by policy`; tracked legacy removal succeeded.

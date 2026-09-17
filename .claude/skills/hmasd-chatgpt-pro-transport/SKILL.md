@@ -13,24 +13,32 @@ fields in the assignment, not another record or registry. Output: factual delive
 Direction questions target NOTES.md; owner-triggered Portfolio questions target RESEARCH.md.
 Do not infer the target from the role name. Read the pinned question and confirm that its
 answer subsection is empty and the heading uniquely identifies this question before sending.
-One send per question. Provider settings and historical exclusion data come from
-`.codex/hmasd-transport.toml`; historical registry state is not used for new requests.
+One send per question. Provider settings come from `.codex/hmasd-transport.toml`.
 
 ## Steps
 
-1. **Tab.** `agentify_tabs`; use or create one dedicated non-protected tab for this
-   conversation with `stableKey = <subject key>`. Navigate to the URL, or the provider root
+1. **Tab.** Derive one question key from an unambiguous encoding of repository, branch,
+   subject key, source_sha, target_path and question_heading (for example `hmasd:` plus
+   their JSON array's SHA-256). Use it as both Agentify stableKey and idempotencyKey.
+   `agentify_tabs`; use or create one dedicated non-protected tab for this question.
+   Navigate to the conversation URL, or the provider root
    for a new conversation. Never send from a protected or default tab. One writer per
-   conversation at a time.
+   conversation at a time. Each new question has its own tool key, so changing conversations
+   needs no binding-generation workflow. Recovery of an existing operation always retains
+   its original keys and arguments, including legacy operations; never derive replacement
+   keys to escape an uncertain send.
 2. **Preflight.** `agentify_review_preflight` on that tab: product GPT-6 Astra (shown as
    Latest) with Pro effort. Repair the tab or model selection, never the message. Do not repeat
    a passed check.
-3. **Send once.** `agentify_review_query` with `idempotencyKey` derived from an unambiguous encoding of
-   repository, branch, subject key, source_sha, target_path and question_heading, the exact prompt, and the conversation. The tool attempts at most one
+3. **Send once.** `agentify_review_query` with those keys, the exact prompt, and the conversation. The tool attempts at most one
    send per operation. Read its result:
    - `sendAttempted=false` with an error: repair the named fact (tab key, model) and reuse the
      same operation once.
-   - `sendAttempted=true`, or unknown: never call `review_query` again; observe only.
+   - `sendAttempted=true`: observe only. Normally use wait_response. When native pairing or
+     exact response recovery is needed, the same operation with unchanged arguments and
+     `verifyExisting=true` observes without another send.
+   - unknown: inspect the existing operation/page first; do not assume verifyExisting is
+     send-free when sendAttempted is false or unknown, and do not create a replacement.
 4. **Wait.** `agentify_wait_response` in calls of at most 60 s until COMPLETE (stable assistant
    text across two samples, no Stop, Continue or Retry control). Unchanged waits are silent.
    Never click Stop, Regenerate or Continue.

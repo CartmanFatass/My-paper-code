@@ -13,9 +13,11 @@ may bypass the persisted sendAttempted boundary.
 3. Only a persisted sendAttempted=false result permits repair of the reported pre-send
    problem and reuse of review_query for that same operation with its original arguments
    and repaired tab identity. Fresh page appearance alone is not this evidence.
-4. If sendAttempted=true or its value is unknown, do not call review_query again or click
-   Send, even if the composer appears unchanged. Observe with wait_response/read_page and
-   reconcile the same conversation and operation; do not change its idempotency key.
+4. If sendAttempted=true, never click Send, even if the composer appears unchanged.
+   Observe with wait_response/read_page; the same immutable operation with verifyExisting=true
+   may recover native pairing/archive without sending. If its value is unknown, reconcile
+   first: verifyExisting can send when the stored flag is false. Never change the operation's
+   keys or create another operation to bypass uncertainty.
 5. If acceptance remains unresolved, return SEND_UNCERTAIN with the concrete evidence and
    prerequisite or engineering fix to the assigning author. Preserve the operation for
    reconciliation; do not spin on clicks.

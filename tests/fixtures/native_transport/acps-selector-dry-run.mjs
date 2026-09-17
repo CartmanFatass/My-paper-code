@@ -12,6 +12,17 @@ const { readReviewTransportState } = await load('state.mjs');
 const handoff = JSON.parse(await fs.readFile(handoffPath, 'utf8'));
 const prompt = handoff.transport_request.prompt;
 const sha = value => crypto.createHash('sha256').update(value).digest('hex');
+const hmasdQuestionKey = ({repository,branch,subject,sourceSha,targetPath,questionHeading}) =>
+  `hmasd:${sha(JSON.stringify([repository,branch,subject,sourceSha,targetPath,questionHeading]))}`;
+const questionIdentity = {
+  repository:'firesurfer/HMASD', branch:'main', subject:'actuator_conditioned_partial_sharing',
+  sourceSha:'aaf0b977de1f547794ac0a540480be9778f1524e',
+  targetPath:'docs/research/candidates/actuator_conditioned_partial_sharing/NOTES.md',
+  questionHeading:'2026-09-12 Pro question — post-B02 use'
+};
+const questionKey = hmasdQuestionKey(questionIdentity);
+assert.match(questionKey,/^hmasd:[0-9a-f]{64}$/);
+assert.equal(questionKey,hmasdQuestionKey({...questionIdentity}));
 assert.equal(sha(prompt), 'bee9b6e037f7b68e37143d152dd004cfefd10a9904d5c13bb648750ee9a2ab84');
 assert.equal(handoff.parent_thread_id, '/root/dm_acps_resume');
 assert.equal(handoff.operator_thread_id, '/root/dm_acps_resume/transport_lh_acps');
@@ -90,9 +101,9 @@ const directories=[];
 async function scenario(name, uncertain=false) {
   const stateDir=path.join(scratch,name); directories.push(stateDir);
   let repaired=uncertain;
-  const request={stableKey:handoff.conversation_binding_key,provider:'chatgpt',productModel:'GPT-6 Astra',
+  const request={stableKey:questionKey,provider:'chatgpt',productModel:'GPT-6 Astra',
     reasoningEffort:'Pro',conversationUrl:'https://chatgpt.com/',conversationId:'__new__',firstBinding:true,
-    idempotencyKey:handoff.request_id,prompt,promptSha256:sha(prompt),responsePath:path.join(stateDir,'response.md'),
+    idempotencyKey:questionKey,prompt,promptSha256:sha(prompt),responsePath:path.join(stateDir,'response.md'),
     existingTabId:'fixture-existing-Q-tab',timeoutMs:1000};
   const identity={conversationUrl:'https://chatgpt.com/c/fixture-q',conversationId:'fixture-q',userMessageId:'fixture-user'};
   const response='Fixture complete response. No external effect.\n';
@@ -114,7 +125,9 @@ async function scenario(name, uncertain=false) {
   await assert.rejects(run(), uncertain?/fixture_uncertain_effect/:/product_model_unavailable/);
   const before=await op(); assert.equal(before.sendAttempted,uncertain);
   await assert.rejects(run({...request,productModel:'Latest'}),/idempotency_conflict/);
+  const sendsBeforeRepair=sends;
   repaired=true;const after=await run({...request,verifyExisting:true});
+  if(uncertain)assert.equal(sends,sendsBeforeRepair);
   assert.equal(after.operationId,before.operationId);
   assert.equal(after.requestFingerprint,before.requestFingerprint);
   assert.equal(after.productModel,'GPT-6 Astra');
@@ -124,16 +137,67 @@ async function scenario(name, uncertain=false) {
   assert.equal(after.providerAssistantMessageId,'fixture-assistant');
   const sendsAtArchive=sends;await run({...request,verifyExisting:true});assert.equal(sends,sendsAtArchive);
 }
+
+async function conversationKeyScenario() {
+  const stateDir=path.join(scratch,'conversation-key-migration'); directories.push(stateDir);
+  let firstBindingNumber=0;
+  const response='Fixture complete response. No external effect.\n';
+  const controller={runExclusive:async fn=>await fn(),reviewQuery:async args=>{
+    assert.equal(args.requireTargetPreflight,true);
+    const identity=args.firstBinding
+      ? {conversationUrl:`https://chatgpt.com/c/fixture-new-${++firstBindingNumber}`,conversationId:`fixture-new-${firstBindingNumber}`}
+      : {conversationUrl:args.expectedUrl,conversationId:args.expectedConversationId};
+    await args.onSendAttempted(); sends++;
+    await args.onUserTurnObserved({...identity,userMessageId:`fixture-user-${sends}`});
+    return {...identity,userMessageId:`fixture-user-${sends}`};
+  },observeReviewResponse:async args=>({conversationUrl:args.expectedUrl,conversationId:args.expectedConversationId,
+    userMessageId:args.userMessageId,assistantMessageId:`fixture-assistant-${args.expectedConversationId}`,
+    text:response,snapshots:[1000,4000].map(observedAt=>({assistantMessageId:`fixture-assistant-${args.expectedConversationId}`,
+      textSha256:sha(response),observedAt})),controls:{stop:false,continue:false,retry:false},clickedControls:[]})};
+  const tabs={adoptTab:async()=>{},ensureTab:async()=> 'fixture-existing-key-tab',
+    getWindowById:()=>({show:async()=>{}}),getControllerById:()=>controller,updateTabUrl:()=>{}};
+  const request=(stableKey,idempotencyKey,conversationId,{firstBinding=false,responseName}={})=>({
+    stableKey,provider:'chatgpt',productModel:'GPT-6 Astra',reasoningEffort:'Pro',
+    conversationUrl:firstBinding?'https://chatgpt.com/':`https://chatgpt.com/c/${conversationId}`,
+    conversationId:firstBinding?'__new__':conversationId,firstBinding,idempotencyKey,prompt,promptSha256:sha(prompt),
+    responsePath:path.join(stateDir,responseName),existingTabId:'fixture-existing-key-tab',timeoutMs:1000
+  });
+
+  const oldKey=handoff.conversation_binding_key;
+  await runReviewQuery({stateDir,tabs,request:request(oldKey,handoff.request_id,'fixture-old-a',{responseName:'old-a.md'})});
+  const beforeRejected=sends;
+  await assert.rejects(runReviewQuery({stateDir,tabs,request:request(oldKey,`${handoff.request_id}-next`,
+    'fixture-old-b',{responseName:'old-b-rejected.md'})}),/review_binding_mismatch/);
+  assert.equal(sends,beforeRejected);
+
+  const nextQuestionKey=hmasdQuestionKey({...questionIdentity,questionHeading:'2026-09-16 Pro question — next idea'});
+  assert.notEqual(nextQuestionKey,questionKey);
+  const existingConversation=await runReviewQuery({stateDir,tabs,request:request(nextQuestionKey,nextQuestionKey,
+    'fixture-old-b',{responseName:'new-key-existing-conversation.md'})});
+  assert.equal(existingConversation.stableKey,nextQuestionKey);
+  assert.equal(existingConversation.idempotencyKey,nextQuestionKey);
+
+  const freshQuestionKey=hmasdQuestionKey({...questionIdentity,questionHeading:'2026-09-16 Pro question — fresh conversation'});
+  const freshConversation=await runReviewQuery({stateDir,tabs,request:request(freshQuestionKey,freshQuestionKey,
+    '__new__',{firstBinding:true,responseName:'new-key-new-conversation.md'})});
+  assert.equal(freshConversation.observedConversationId,'fixture-new-1');
+  const state=await readReviewTransportState(stateDir);
+  assert.equal(state.bindings[freshQuestionKey].conversationId,'fixture-new-1');
+  assert.equal(sends,beforeRejected+2);
+}
 try {
   await scenario('verified-nonacceptance');assert.equal(sends,1);
   await scenario('uncertain-effect',true);assert.equal(sends,2);
+  await conversationKeyScenario();assert.equal(sends,5);
   process.stdout.write(JSON.stringify({selector_cases:checks,real_preflight_fixture:true,
     frozen_handoff_sha_verified:true,same_operation_repair:true,latest_argument_conflict_preserved:true,
-    uncertain_observe_only:true,archive_exact:true,mock_sends:sends,external_sends:0}));
+    uncertain_observe_only:true,same_question_key_recovery_zero_resend:true,archive_exact:true,
+    old_key_different_conversation_rejected:true,new_question_key_existing_conversation:true,
+    new_question_key_first_binding:true,mock_sends:sends,external_sends:0}));
 } finally {
   for(const dir of directories) {
     const entries=await fs.readdir(dir);
-    for(const entry of entries)assert.ok(['review-transport.json','response.md'].includes(entry),entry);
+    for(const entry of entries)assert.ok(entry==='review-transport.json'||entry.endsWith('.md'),entry);
     for(const entry of entries)await fs.unlink(path.join(dir,entry));
     await fs.rmdir(dir);
   }
