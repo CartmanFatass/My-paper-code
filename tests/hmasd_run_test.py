@@ -475,7 +475,7 @@ def test_unknown_run_does_not_emit_or_retry_operator_result(
     command = (
         "import subprocess, sys, time; from pathlib import Path; "
         f"p=Path({str(count_path)!r}); p.write_text(p.read_text()+'x' if p.exists() else 'x'); "
-        "subprocess.Popen([sys.executable, '-c', 'import time; time.sleep(30)']); "
+        "subprocess.Popen([sys.executable, '-c', 'import time; time.sleep(30)'], creationflags=getattr(subprocess, 'CREATE_NO_WINDOW', 0)); "
         "time.sleep(0.25)"
     )
     manifest_path = _prepare(monkeypatch, tmp_path, sys.executable, "-c", command)
@@ -550,7 +550,7 @@ def test_success_waits_for_and_proves_process_group_quiescence(
 ) -> None:
     command = (
         "import subprocess, sys, time; "
-        "subprocess.Popen([sys.executable, '-c', 'import time; time.sleep(30)']); "
+        "subprocess.Popen([sys.executable, '-c', 'import time; time.sleep(30)'], creationflags=getattr(subprocess, 'CREATE_NO_WINDOW', 0)); "
         "time.sleep(0.25)"
     )
     manifest_path = _prepare(monkeypatch, tmp_path, sys.executable, "-c", command)
@@ -841,7 +841,8 @@ def test_exec_gate_eof_prevents_popen_to_persistence_orphan(tmp_path: Path) -> N
                 sys.executable,
                 "-c",
                 f"from pathlib import Path; Path({str(marker)!r}).touch()",
-            ]
+            ],
+            creationflags=subprocess.CREATE_NO_WINDOW,
         )
         gate.unlink()
         assert child.wait(timeout=5) != 0

@@ -7,6 +7,7 @@ arbitrary code or a substitute for reviewing that admission precedes side effect
 import ast
 from pathlib import Path
 import subprocess
+import os
 import sys
 
 
@@ -19,6 +20,7 @@ def test_new_and_migrated_runners_call_admission():
     baseline = subprocess.run(
         ["git", "-C", str(ROOT), "ls-tree", "-r", "--name-only", ROLLOUT_BASE, "scripts"],
         check=True, capture_output=True, text=True,
+        creationflags=subprocess.CREATE_NO_WINDOW if os.name == "nt" else 0,
     )
     historical = set(baseline.stdout.splitlines())
     candidates = {
@@ -45,6 +47,7 @@ def test_migrated_runner_direct_cli_refuses_before_output_creation(tmp_path):
          "--evaluation-seed", "1781901", "--launch-sha", "0" * 40,
          "--out", str(output)],
         cwd=ROOT, capture_output=True, text=True, timeout=30,
+        creationflags=subprocess.CREATE_NO_WINDOW if os.name == "nt" else 0,
     )
     assert result.returncode != 0
     assert "missing HMASD admission" in result.stderr

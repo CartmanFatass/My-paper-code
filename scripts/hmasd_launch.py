@@ -151,6 +151,7 @@ def _run_git(
             text=True,
             timeout=timeout,
             env=environment,
+            creationflags=subprocess.CREATE_NO_WINDOW if os.name == "nt" else 0,
         )
     except (OSError, subprocess.SubprocessError) as exc:
         raise LaunchRefusal(f"git {' '.join(arguments)} failed: {exc}") from exc

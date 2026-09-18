@@ -425,6 +425,7 @@ def _require_omp_branch(cwd: Path) -> str:
             check=False,
             capture_output=True,
             text=True,
+            creationflags=subprocess.CREATE_NO_WINDOW if os.name == "nt" else 0,
         )
     except OSError as exc:
         raise RunRefusal(5, f"cannot inspect Git branch: {exc}") from exc
@@ -441,6 +442,7 @@ def _git_head(cwd: Path) -> str:
             check=False,
             capture_output=True,
             text=True,
+            creationflags=subprocess.CREATE_NO_WINDOW if os.name == "nt" else 0,
         )
     except OSError as exc:
         raise RunRefusal(5, f"cannot inspect Git HEAD: {exc}") from exc
@@ -1539,7 +1541,7 @@ def _spawn_gated_child(
             manifest["command"],
             cwd=manifest["cwd"],
             shell=False,
-            creationflags=subprocess.CREATE_NEW_PROCESS_GROUP | create_suspended,
+            creationflags=subprocess.CREATE_NEW_PROCESS_GROUP | create_suspended | subprocess.CREATE_NO_WINDOW,
             stdout=stdout,
             stderr=stderr,
         )
@@ -1624,7 +1626,10 @@ def _exec_gate(args: argparse.Namespace) -> int:
         return 125
     if os.name == "nt":
         try:
-            return subprocess.call(command, shell=False)
+            return subprocess.call(
+                command, shell=False,
+                creationflags=subprocess.CREATE_NO_WINDOW if os.name == "nt" else 0,
+            )
         except OSError as exc:
             print(f"hmasd exec gate failed: {exc}", file=sys.stderr)
             return 126

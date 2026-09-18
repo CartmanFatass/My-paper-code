@@ -22,7 +22,9 @@ def run_suite(suite, *args):
     env = {**os.environ, "PYTEST_DISABLE_PLUGIN_AUTOLOAD": "1"}
     env.pop("PYTEST_ADDOPTS", None)
     return subprocess.run([sys.executable, "-m", "pytest", "-q", *args, "tests"],
-                          cwd=suite, env=env, text=True, capture_output=True)
+                          cwd=suite, env=env, text=True, capture_output=True,
+        creationflags=subprocess.CREATE_NO_WINDOW if os.name == "nt" else 0,
+    )
 
 
 @pytest.mark.parametrize("outcome,code", [("True", 0), ("False", 1)])
@@ -123,7 +125,9 @@ def cleanup_checkout(tmp_path):
     (suite / "scripts").mkdir(parents=True)
     shutil.copyfile(Path(__file__).parents[1] / "scripts/cleanup_test_scratch.ps1",
                     suite / "scripts/cleanup_test_scratch.ps1")
-    subprocess.run(["git", "init", str(suite)], check=True, capture_output=True)
+    subprocess.run(["git", "init", str(suite)], check=True, capture_output=True,
+        creationflags=subprocess.CREATE_NO_WINDOW if os.name == "nt" else 0,
+    )
     (suite / "temp/tests/owned").mkdir(parents=True)
     (suite / "temp/tests/owned/sentinel").write_text("fixture")
     return suite
@@ -142,7 +146,9 @@ def cleanup_probe(suite, arguments, *, busy=False):
                      "& ./scripts/cleanup_test_scratch.ps1 " + arguments + " | ForEach-Object { $_ | ConvertTo-Json -Compress }\n"
                      "} catch { Write-Output $_; exit 1 }\n")
     return subprocess.run([pwsh, "-NoProfile", "-File", str(probe)], cwd=suite,
-                          capture_output=True, text=True)
+                          capture_output=True, text=True,
+        creationflags=subprocess.CREATE_NO_WINDOW if os.name == "nt" else 0,
+    )
 
 
 def test_cleanup_requires_explicit_delete_target(cleanup_checkout):
@@ -163,7 +169,9 @@ def test_cleanup_preview_delete_and_absent(cleanup_checkout):
 
 
 def test_cleanup_reports_each_target_and_preserves_tracked(cleanup_checkout):
-    subprocess.run(["git", "-C", str(cleanup_checkout), "add", "temp/tests/owned/sentinel"], check=True)
+    subprocess.run(["git", "-C", str(cleanup_checkout), "add", "temp/tests/owned/sentinel"], check=True,
+        creationflags=subprocess.CREATE_NO_WINDOW if os.name == "nt" else 0,
+    )
     result = cleanup_probe(cleanup_checkout,
                            "-RunDirectory @('temp/tests/owned','temp/tests/missing','../outside') -Delete")
     assert result.returncode != 0
@@ -180,7 +188,9 @@ def test_cleanup_busy_preserves_target(cleanup_checkout):
 
 @pytest.mark.skipif(os.name != "nt", reason="Windows case-insensitive paths")
 def test_cleanup_mixed_case_cannot_hide_tracked_content(cleanup_checkout):
-    subprocess.run(["git", "-C", str(cleanup_checkout), "add", "temp/tests/owned/sentinel"], check=True)
+    subprocess.run(["git", "-C", str(cleanup_checkout), "add", "temp/tests/owned/sentinel"], check=True,
+        creationflags=subprocess.CREATE_NO_WINDOW if os.name == "nt" else 0,
+    )
     result = cleanup_probe(cleanup_checkout, "-RunDirectory TEMP/TESTS/OWNED -Delete")
     assert result.returncode != 0 and 'tracked content' in result.stdout
     assert (cleanup_checkout / "temp/tests/owned/sentinel").exists()
@@ -217,7 +227,9 @@ def test_review_fixture_mode_keeps_tracked_and_busy_guards(cleanup_checkout):
     arguments = '-ReviewFixture -RunDirectory temp/scratch-review-fixture -Delete'
     busy = cleanup_probe(cleanup_checkout, arguments, busy=True)
     assert busy.returncode != 0 and 'Tests may still be running' in busy.stdout
-    subprocess.run(['git', '-C', str(cleanup_checkout), 'add', 'temp/scratch-review-fixture/sentinel'], check=True)
+    subprocess.run(['git', '-C', str(cleanup_checkout), 'add', 'temp/scratch-review-fixture/sentinel'], check=True,
+        creationflags=subprocess.CREATE_NO_WINDOW if os.name == "nt" else 0,
+    )
     tracked = cleanup_probe(cleanup_checkout, arguments)
     assert tracked.returncode != 0 and 'tracked content' in tracked.stdout
     assert (review / 'sentinel').exists()

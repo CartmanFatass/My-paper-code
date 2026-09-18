@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import subprocess
 import sys
 from pathlib import Path, PureWindowsPath
@@ -83,6 +84,7 @@ def doctor(item: dict[str, Any]) -> dict[str, Any]:
             translated = subprocess.run(
                 ["wslpath", "-u", item["entrypoint"]], check=True,
                 capture_output=True, text=True, timeout=5,
+                creationflags=subprocess.CREATE_NO_WINDOW if os.name == "nt" else 0,
             )
         except (OSError, subprocess.SubprocessError) as exc:
             result["observed"]["reason"] = f"Windows entrypoint unavailable from this Linux host: {exc}"
@@ -96,7 +98,8 @@ def doctor(item: dict[str, Any]) -> dict[str, Any]:
         result["observed"]["reason"] = f"environment record is absent: {item['environment']}"
         return result
     completed = subprocess.run(
-        [str(entrypoint), "--version"], check=False, capture_output=True, text=True, timeout=15
+        [str(entrypoint), "--version"], check=False, capture_output=True, text=True, timeout=15,
+        creationflags=subprocess.CREATE_NO_WINDOW if os.name == "nt" else 0,
     )
     result["observed"] = {
         "available": completed.returncode == 0,
