@@ -28,9 +28,15 @@ Rules that carry scientific meaning:
   and cuts the recursion; `truncated` cuts the recursion but keeps V(s') of the
   post-truncation observation, captured by the collector before the reset. `rollout.dones`
   stays the collapsed flag every other consumer reads, including the recurrent reset masks.
+  The high level makes the same distinction: an R30 check row closes `policy_truncated` with
+  the post-truncation value instead of `terminal` with zero, and the SMDP segment route
+  bootstraps a truncated segment from its stored end state. `Segment.terminal` stays the
+  collapsed flag; `Segment.terminated`/`truncated` carry the reason.
   The legacy relay environments only ever truncate, so collapsing the two biases their value
   targets; that is what `legacy_truncation_as_termination` reproduces and it must stay off by
-  default. Changing this is a semantic change
+  default. It is one flag for both levels, and `low_boundary_flags_resolved` /
+  `low_boundary_legacy_collapse` in the update metrics say which arithmetic actually ran.
+  Changing this is a semantic change
   (`docs/Claude_docs/changes/2026-09-17-truncation-bootstrap-gae-fix.md`).
 - Checkpointing has two owners: `checkpoint_io.py` on the standard route;
   `variable_roster_event_checkpoint.py` for event and variable-roster payloads, called directly by

@@ -50,6 +50,9 @@ class StandaloneLowUpdateMixin:
             "low_team_return_range": 0.0,
             "low_team_value_error_abs_std": 0.0,
             "return_mean": 0.0,
+            "low_boundary_flags_resolved": 0.0,
+            "low_boundary_legacy_collapse": 0.0,
+            "low_truncation_rows": 0.0,
         }
 
     @staticmethod
@@ -94,7 +97,14 @@ class StandaloneLowUpdateMixin:
         skill_value_error = self._group_mean_summary(skills, value_error_abs, self.n_skills)
         team_return = self._group_mean_summary(team_codes, returns_flat, self.num_team_codes)
         team_value_error = self._group_mean_summary(team_codes, value_error_abs, self.num_team_codes)
+        resolution = getattr(self, "_last_boundary_resolution", None) or {
+            "low_boundary_flags_resolved": 0.0,
+            "low_boundary_legacy_collapse": 0.0,
+        }
+        truncated_rows = getattr(rollout, "truncated", None) or []
         return {
+            **resolution,
+            "low_truncation_rows": float(sum(1 for flag in truncated_rows if bool(flag))),
             "low_value_error_abs_mean": float(np.mean(value_error_abs)) if value_error_abs.size else 0.0,
             "low_value_error_rmse": float(np.sqrt(np.mean(value_error * value_error))) if value_error.size else 0.0,
             "low_advantage_std": float(np.std(advantages_flat)) if advantages_flat.size else 0.0,
@@ -133,7 +143,15 @@ class StandaloneLowUpdateMixin:
             and len(terminated_raw) == int(dones.size)
             and len(truncated_raw) == int(dones.size)
         )
-        if not resolved or bool(getattr(self, "legacy_truncation_as_termination", False)):
+        legacy = bool(getattr(self, "legacy_truncation_as_termination", False))
+        # Recorded so every update's metrics state which arithmetic actually ran. Without
+        # this, a rollout that silently fell back to the collapsed reading would still
+        # ship a manifest asserting the corrected semantics.
+        self._last_boundary_resolution = {
+            "low_boundary_flags_resolved": float(bool(resolved)),
+            "low_boundary_legacy_collapse": float(bool(legacy)),
+        }
+        if not resolved or legacy:
             # Collapsed arithmetic: every boundary is treated as a real terminal state.
             # This is the pre-2026-09-17 behaviour, reachable two ways - deliberately via
             # `legacy_truncation_as_termination` to reproduce a historical run, and as the
@@ -175,13 +193,16 @@ class StandaloneLowUpdateMixin:
                 "StandaloneProcessAgent.low_bootstrap_value_for_env."
             )
         fitted = np.asarray(value, dtype=np.float32).reshape(-1)
-        if fitted.size == n_agents_zero.size:
-            return fitted
-        padded = np.zeros_like(n_agents_zero)
-        n = min(padded.size, fitted.size)
-        if n > 0:
-            padded[:n] = fitted[:n]
-        return padded
+        if fitted.size != n_agents_zero.size:
+            # Unlike `bootstrap_values`, which must tolerate historically shaped entries,
+            # this dict has exactly one producer and is always n_agents wide. Zero-padding
+            # a short entry would silently reapply the bias being fixed to the missing
+            # agents, so a wrong width is an error too.
+            raise ValueError(
+                f"truncation bootstrap for row {int(row_index)} has width "
+                f"{fitted.size}, expected {n_agents_zero.size}"
+            )
+        return fitted
 
     def _low_returns(self, rollout: standalone_segments.Rollout) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
         rewards = np.asarray(rollout.rewards, dtype=np.float32)

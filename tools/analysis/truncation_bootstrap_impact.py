@@ -244,8 +244,13 @@ def build_parser() -> argparse.ArgumentParser:
     return parser
 
 
-def run(argv: list[str] | None = None) -> dict[str, Any]:
-    """Collect one rollout and return the impact report, printing nothing."""
+def build_run_inputs(argv=None):
+    """The setup half of `run`: the config and args needed to collect one rollout.
+
+    Separated so a test can reach the collected `(agent, rollout)` pair through exactly
+    the setup a reported measurement uses, rather than a second hand-made copy of it.
+    Returns `(config, args, args_ns)`.
+    """
 
     args_ns = build_parser().parse_args(argv)
 
@@ -291,7 +296,13 @@ def run(argv: list[str] | None = None) -> dict[str, Any]:
     config.scenario = normalize_scenario(str(args_ns.scenario))
     # Short episodes are the point: the rollout must contain truncations to measure.
     config.max_steps = int(args_ns.max_steps)
+    return config, args, args_ns
 
+
+def run(argv: list[str] | None = None) -> dict[str, Any]:
+    """Collect one rollout and return the impact report, printing nothing."""
+
+    config, args, args_ns = build_run_inputs(argv)
     report = measure(config, args)
     report["episode_max_steps"] = int(args_ns.max_steps)
     return report

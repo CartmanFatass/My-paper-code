@@ -71,6 +71,11 @@ class Segment:
     end_joint_obs: np.ndarray | None = None
     end_state: np.ndarray | None = None
     terminal: bool = False
+    # `terminal` stays the collapsed `terminated or truncated` flag. The two below record
+    # *why* the segment ended, which the SMDP high-level bootstrap needs: a real terminal
+    # state has no future value, a time-limit truncation still does.
+    terminated: bool = False
+    truncated: bool = False
     kappa_start: int = -1
     kappa_end: int = -1
     raw_kappa_start: int = -1
@@ -93,6 +98,8 @@ class Segment:
         next_joint_obs=None,
         next_state=None,
         done: bool = False,
+        terminated: bool | None = None,
+        truncated: bool | None = None,
         pre_state_info=None,
         pre_reward_info=None,
         deterministic_action=None,
@@ -116,6 +123,11 @@ class Segment:
         self.end_joint_obs = None if next_joint_obs is None else np.asarray(next_joint_obs, dtype=np.float32)
         self.end_state = None if next_state is None else np.asarray(next_state, dtype=np.float32)
         self.terminal = bool(done)
+        # Absent an explicit reason, a boundary is recorded as a termination, which is
+        # exactly the pre-2026-09-17 reading and keeps any caller that passes only
+        # `done` on its existing arithmetic.
+        self.terminated = bool(done) if terminated is None else bool(terminated)
+        self.truncated = bool(False if truncated is None else truncated) and not self.terminated
 
     @property
     def length(self) -> int:
@@ -298,6 +310,8 @@ class SegmentManager:
         state_info=None,
         next_state=None,
         done: bool = False,
+        terminated: bool | None = None,
+        truncated: bool | None = None,
         pre_state_info=None,
         pre_reward_info=None,
         deterministic_actions=None,
@@ -316,6 +330,8 @@ class SegmentManager:
                 next_joint_obs=next_obs,
                 next_state=next_state,
                 done=done,
+                terminated=terminated,
+                truncated=truncated,
                 pre_state_info=pre_state_info,
                 pre_reward_info=pre_reward_info,
                 deterministic_action=(
@@ -363,6 +379,9 @@ class Rollout:
     # kind of boundary genuinely breaks the recurrence.  The two flags below record *why*
     # the boundary happened, which the low-level GAE needs: a termination zeroes the
     # bootstrap, a truncation must keep it.
+    # Note the position: these two sit between `dones` and `bootstrap_values`, so any
+    # caller that builds a Rollout positionally rather than by keyword would now pass its
+    # bootstrap dict into `terminated`. Every caller in the tree uses keywords.
     terminated: list[bool] = field(default_factory=list)
     truncated: list[bool] = field(default_factory=list)
     bootstrap_values: dict[int, np.ndarray] = field(default_factory=dict)

@@ -476,6 +476,8 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
                         state_info=info.get("state_info", {}),
                         next_state=info.get("next_state", states[env_id]),
                         done=done,
+                        terminated=bool(terminated),
+                        truncated=bool(truncated),
                         pre_state_info=prev_state_info[env_id],
                         pre_reward_info=prev_reward_info[env_id],
                         deterministic_actions=low_context.get("deterministic_actions"),
@@ -515,6 +517,8 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
                         next_obs=next_obs,
                         next_state=info.get("next_state", states[env_id]),
                         done=done,
+                        terminated=bool(terminated),
+                        truncated=bool(truncated),
                     )
                     observations[env_id] = next_obs
                     states[env_id] = info.get("next_state", states[env_id])

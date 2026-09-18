@@ -571,7 +571,7 @@ def apply_standalone_overrides(config, args: argparse.Namespace) -> None:
         value = int(getattr(args, name))
         if value > 0:
             setattr(config, name, value)
-    if args.legacy_truncation_as_termination:
+    if bool(getattr(args, "legacy_truncation_as_termination", False)):
         config.legacy_truncation_as_termination = True
     if args.disable_process_reward:
         config.use_process_reward_for_discoverer = False

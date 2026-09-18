@@ -435,6 +435,11 @@ def checkpoint_payload(
         "team_disc_warmup_steps": int(getattr(agent, "team_disc_warmup_steps", 0)),
         "team_disc_hidden_dim": int(getattr(config, "team_disc_hidden_dim", 128)),
         "z_assignment_residual_gain": float(getattr(config, "z_assignment_residual_gain", 0.0) or 0.0),
+        # Which GAE boundary semantics produced this checkpoint. Recorded so a resume
+        # continues on the same arithmetic instead of silently switching halfway.
+        "legacy_truncation_as_termination": bool(
+            getattr(config, "legacy_truncation_as_termination", False)
+        ),
         "team_disc_actionability_floor": float(
             getattr(config, "team_disc_actionability_floor", 0.0) or 0.0
         ),
@@ -1314,6 +1319,7 @@ def load_checkpoint_metadata(path: str | Path) -> dict[str, Any]:
         "team_disc_warmup_steps": checkpoint.get("team_disc_warmup_steps"),
         "team_disc_hidden_dim": checkpoint.get("team_disc_hidden_dim"),
         "z_assignment_residual_gain": meta("z_assignment_residual_gain"),
+        "legacy_truncation_as_termination": meta("legacy_truncation_as_termination"),
         "team_disc_actionability_floor": meta("team_disc_actionability_floor"),
         "enable_assignment_actionability_probe": meta("enable_assignment_actionability_probe"),
         "enable_assignment_actionability_reward": meta("enable_assignment_actionability_reward"),
@@ -1387,6 +1393,13 @@ def apply_checkpoint_structure(config, args: argparse.Namespace, metadata: dict[
         config.low_actor_condition_on_team_code = bool(metadata.get("low_actor_condition_on_team_code"))
     if metadata.get("team_bridge_type"):
         config.team_bridge_type = str(metadata.get("team_bridge_type"))
+    # A resume must not switch GAE boundary semantics halfway through a run: if the
+    # checkpoint was produced under the legacy collapse, the continuation keeps it even
+    # when the flag is absent from this invocation.
+    if metadata.get("legacy_truncation_as_termination") is not None:
+        config.legacy_truncation_as_termination = bool(
+            metadata.get("legacy_truncation_as_termination")
+        )
     for name in (
         "use_prototype_response_skills",
         "high_condition_on_omega",

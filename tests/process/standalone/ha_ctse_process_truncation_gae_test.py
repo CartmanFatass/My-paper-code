@@ -672,3 +672,352 @@ def test_the_captured_value_is_not_the_post_reset_one():
     assert evidence["comparable_rows"] > 0, "the fixture must end a pass on a truncation"
     assert evidence["identical"] is False
     assert evidence["abs_gap_mean"] > 1e-4
+
+
+# --------------------------------------------------------------------------------------
+# The high level: the same distinction, on the critic that chooses skills
+# --------------------------------------------------------------------------------------
+
+
+def test_the_boundary_decision_helper_truth_table():
+    """One helper decides for both high-level paths, so pin every case."""
+
+    agent = _agent()
+    # Not a boundary at all.
+    assert agent._boundary_is_terminal(False, False, False) is False
+    assert agent._boundary_is_terminal(False, True, True) is False
+    # A real termination.
+    assert agent._boundary_is_terminal(True, True, False) is True
+    # A pure truncation: the only case that must not zero the bootstrap.
+    assert agent._boundary_is_terminal(True, False, True) is False
+    # Termination wins when both are set.
+    assert agent._boundary_is_terminal(True, True, True) is True
+    # A done row with neither reason, and a caller that supplies no reason at all,
+    # both keep the collapsed pre-fix reading.
+    assert agent._boundary_is_terminal(True, False, False) is True
+    assert agent._boundary_is_terminal(True, None, None) is True
+    # The legacy flag collapses a truncation back onto a termination.
+    legacy = _agent(legacy_truncation_as_termination=True)
+    assert legacy._boundary_is_terminal(True, False, True) is True
+
+
+def _r30_agent(**config_overrides):
+    """An R30 agent with one pending high row, plus the arrays the boundary will see.
+
+    Seeded so the critic returns a fixed number rather than a random one, which is what
+    lets the assertions below compare against exact values.
+    """
+
+    import torch
+
+    torch.manual_seed(0)
+    agent = _agent(high_controller="r30_fixed_clock_ar_edit", **config_overrides)
+    assert agent.r30_enabled
+    assert agent.high_check_buffer is not None
+
+    rng = np.random.default_rng(0)
+    joint_obs = rng.normal(size=(agent.n_agents, agent.obs_dim)).astype(np.float32)
+    state = rng.normal(size=agent.state_dim).astype(np.float32)
+    agent.high_check_buffer.start_decision(
+        env_id=0,
+        episode_id=0,
+        state=state,
+        joint_obs=joint_obs,
+        prev_skills=np.zeros(agent.n_agents, dtype=np.int64),
+        prev_active=np.zeros(agent.n_agents, dtype=bool),
+        prev_ages=np.zeros(agent.n_agents, dtype=np.int64),
+        steps_to_check=1,
+        old_value=0.25,
+    )
+    return agent, joint_obs, state
+
+
+def _close_one_r30_step(agent, joint_obs, state, **reason_flags):
+    agent.record_environment_step(
+        0,
+        reward=1.0,
+        next_obs=joint_obs,
+        next_state=state,
+        done=True,
+        **reason_flags,
+    )
+    rows = agent.high_check_buffer.pop_completed()
+    assert len(rows) == 1
+    return rows[0]
+
+
+def test_r30_termination_closes_a_terminal_row_with_no_bootstrap():
+    agent, joint_obs, state = _r30_agent()
+    row = _close_one_r30_step(agent, joint_obs, state, terminated=True, truncated=False)
+
+    assert row.terminal is True
+    assert row.policy_truncated is False
+    assert row.old_next_value == 0.0
+
+
+def test_r30_truncation_closes_a_non_terminal_row_with_a_real_bootstrap():
+    """The high-level half of the fix: a time limit keeps V(s') and cuts the recursion.
+
+    ``policy_truncated=True`` is the same marking ``truncate_high_rows_for_update``
+    already applies at a PPO update boundary, so the corrected episode case reuses
+    machinery that existed but was unreachable from an episode truncation.
+    """
+
+    agent, joint_obs, state = _r30_agent()
+    row = _close_one_r30_step(agent, joint_obs, state, terminated=False, truncated=True)
+
+    assert row.terminal is False
+    assert row.policy_truncated is True
+    assert row.old_next_value != 0.0
+    # The stored bootstrap is the value of the post-truncation observation under the
+    # same skill/age arrays the boundary saw.
+    expected = agent._r30_value_for_arrays(
+        0, state, joint_obs, steps_to_check=int(agent.steps_to_check[0])
+    )
+    assert row.old_next_value == pytest.approx(expected)
+
+
+def test_r30_legacy_flag_collapses_the_high_level_boundary_too():
+    """Legacy reproduction has to cover the hierarchy, not only the low level."""
+
+    agent, joint_obs, state = _r30_agent(legacy_truncation_as_termination=True)
+    row = _close_one_r30_step(agent, joint_obs, state, terminated=False, truncated=True)
+
+    assert row.terminal is True
+    assert row.policy_truncated is False
+    assert row.old_next_value == 0.0
+
+
+def test_r30_a_caller_without_reason_flags_keeps_the_collapsed_close():
+    agent, joint_obs, state = _r30_agent()
+    row = _close_one_r30_step(agent, joint_obs, state)
+
+    assert row.terminal is True
+    assert row.policy_truncated is False
+    assert row.old_next_value == 0.0
+
+
+def _segment_with(agent, rng, *, terminated, truncated, supply_flags=True):
+    from ha_ctse_process.standalone_segments import Segment
+
+    obs = rng.normal(size=agent.obs_dim).astype(np.float32)
+    joint_obs = rng.normal(size=(agent.n_agents, agent.obs_dim)).astype(np.float32)
+    state = rng.normal(size=agent.state_dim).astype(np.float32)
+    segment = Segment(
+        env_id=0,
+        agent_id=0,
+        skill=0,
+        duration_idx=0,
+        start_step=0,
+        high_obs=obs,
+        high_logp=0.0,
+        high_value=0.0,
+        high_entropy=0.0,
+        high_state=state,
+    )
+    reasons = {"terminated": terminated, "truncated": truncated} if supply_flags else {}
+    segment.append(
+        obs,
+        np.zeros(1, dtype=np.float32),
+        1.0,
+        obs,
+        0,
+        next_joint_obs=joint_obs,
+        next_state=state,
+        done=bool(terminated or truncated),
+        **reasons,
+    )
+    return segment
+
+
+def _legacy_high_agent(**config_overrides):
+    import torch
+
+    torch.manual_seed(0)
+    agent = _agent(**config_overrides)
+    assert not agent.r30_enabled
+    assert agent.use_smdp_bootstrap, "the SMDP bootstrap is the path under test"
+    return agent, np.random.default_rng(0)
+
+
+def test_the_legacy_high_route_bootstraps_a_truncated_segment_but_not_a_terminated_one():
+    """``_bootstrap_high_values`` must skip only genuine terminations.
+
+    This is the non-R30 SMDP path. A truncated segment already stores ``end_state`` and
+    ``end_joint_obs``, so it has everything needed to bootstrap; before the fix it was
+    skipped because ``Segment.terminal`` could not tell the two reasons apart.
+    """
+
+    agent, rng = _legacy_high_agent()
+    terminated = _segment_with(agent, rng, terminated=True, truncated=False)
+    truncated = _segment_with(agent, rng, terminated=False, truncated=True)
+    assert agent._segment_is_terminal(terminated) is True
+    assert agent._segment_is_terminal(truncated) is False
+
+    values = agent._bootstrap_high_values([terminated, truncated])
+    assert values[0] == 0.0, "a real terminal state has no future value"
+    assert values[1] != 0.0, "a time limit must still be bootstrapped"
+    assert np.isfinite(values[1])
+
+
+def test_the_legacy_high_route_collapses_under_the_legacy_flag():
+    agent, rng = _legacy_high_agent(legacy_truncation_as_termination=True)
+    truncated = _segment_with(agent, rng, terminated=False, truncated=True)
+
+    assert agent._segment_is_terminal(truncated) is True
+    assert agent._bootstrap_high_values([truncated])[0] == 0.0
+
+
+def test_a_segment_built_without_reason_flags_records_the_collapsed_reading():
+    """Older callers pass only ``done``; their segments must read exactly as before."""
+
+    agent, rng = _legacy_high_agent()
+    segment = _segment_with(agent, rng, terminated=False, truncated=True, supply_flags=False)
+
+    assert segment.terminal is True
+    assert segment.terminated is True  # indistinguishable, so read as terminal
+    assert segment.truncated is False
+    assert agent._segment_is_terminal(segment) is True
+    assert agent._bootstrap_high_values([segment])[0] == 0.0
+
+
+def test_the_runner_passes_both_reason_flags_to_the_high_level_paths():
+    """The segment manager and the R30 check buffer must both receive the reasons."""
+
+    source = inspect.getsource(standalone_train_runner.train_loop)
+    assert source.count("terminated=bool(terminated),") >= 2
+    assert source.count("truncated=bool(truncated),") >= 2
+
+
+# --------------------------------------------------------------------------------------
+# Both low-level architectures, and the whole update rather than only the arithmetic
+# --------------------------------------------------------------------------------------
+
+
+LOW_ARCHITECTURES = ("strict_hmasd_mappo", "feedforward")
+
+
+@pytest.mark.parametrize("architecture", LOW_ARCHITECTURES)
+def test_single_env_bootstrap_matches_a_direct_critic_call(architecture):
+    """Independent recomputation, so a shared assembly error cannot pass unnoticed.
+
+    Comparing against ``low_bootstrap_values`` alone only proves the two agree. This
+    rebuilds the critic call for one environment by hand - that environment's own skills,
+    team code and recurrent critic state, agent ids in order - so a wrong reshape, a
+    transposed agent axis or the wrong environment's hidden state would show up.
+    """
+
+    import torch
+
+    torch.manual_seed(0)
+    agent = make_agent(
+        config=make_process_config(low_level_architecture=architecture), num_envs=3
+    )
+    assert agent.low_level_architecture == architecture
+    env_id = 1
+
+    rng = np.random.default_rng(7)
+    observations = [
+        rng.normal(size=(agent.n_agents, agent.obs_dim)).astype(np.float32)
+        for _ in range(agent.num_envs)
+    ]
+    states = [
+        rng.normal(size=agent.state_dim).astype(np.float32)
+        for _ in range(agent.num_envs)
+    ]
+    if agent.use_recurrent_low_level:
+        # A distinct hidden state per environment is what makes the check discriminating.
+        shape = np.asarray(agent.low_critic_hxs).shape
+        agent.low_critic_hxs[:] = rng.normal(size=shape).astype(np.float32)
+
+    joint_obs = agent._joint_obs_array(observations[env_id])
+    skills_t = torch.as_tensor(agent.active_skills[env_id], dtype=torch.long)
+    if agent.use_recurrent_low_level:
+        state_t = (
+            torch.as_tensor(
+                agent._state_array(states[env_id], joint_obs), dtype=torch.float32
+            )
+            .unsqueeze(0)
+            .expand(agent.n_agents, agent.state_dim)
+        )
+        team_t = torch.full(
+            (agent.n_agents,), int(agent.active_team_codes[env_id]), dtype=torch.long
+        )
+        hxs_t = torch.as_tensor(
+            np.asarray(agent.low_critic_hxs)[env_id], dtype=torch.float32
+        )
+        agent_ids_t = torch.arange(agent.n_agents, dtype=torch.long)
+        with torch.no_grad():
+            direct = agent.low.value(state_t, skills_t, team_t, hxs_t, agent_ids_t)
+            if agent.low_value_norm is not None:
+                direct = agent.low_value_norm.denormalize_tensor(direct)
+    else:
+        # The feedforward critic reads the observation and is not denormalized here,
+        # which is how `low_bootstrap_values` has always read it; this test pins that
+        # reading rather than changing it.
+        with torch.no_grad():
+            _a, _logp, _entropy, direct = agent.low.act(
+                torch.as_tensor(joint_obs, dtype=torch.float32),
+                skills_t,
+                deterministic=True,
+            )
+    expected = direct.detach().cpu().numpy().reshape(-1)
+
+    single = agent.low_bootstrap_value_for_env(env_id, observations[env_id], states[env_id])
+    np.testing.assert_allclose(single, expected, rtol=0.0, atol=1e-6)
+    # And still the same number the batched end-of-pass call produces.
+    batched = agent.low_bootstrap_values(observations, states)
+    np.testing.assert_allclose(single, batched[env_id], rtol=0.0, atol=1e-6)
+
+
+@pytest.mark.parametrize("architecture", LOW_ARCHITECTURES)
+def test_a_truncated_rollout_survives_the_whole_low_level_update(architecture):
+    """Past the arithmetic: the value normalizer, the chunking and the PPO epochs.
+
+    ``_low_returns`` is tested directly above. This drives a real rollout containing
+    truncations through ``update_low`` itself, which is where the corrected returns meet
+    ``low_value_norm.update``, the recurrent sequence chunking and the optimizer. It runs
+    on both architectures because only one of them takes the recurrent branch.
+
+    This is a test, not a training fit: one update on a 48-row rollout, weights discarded
+    with the agent.
+    """
+
+    tool = _load_impact_tool()
+    config, args, _args_ns = tool.build_run_inputs(
+        [
+            "--scenario",
+            "belief_map",
+            "--rollout-length",
+            "24",
+            "--max-steps",
+            "8",
+            "--num-envs",
+            "2",
+            "--seed",
+            "999",
+        ]
+    )
+    config.low_level_architecture = architecture
+    agent, rollout = tool._capture_one_rollout(config, args)
+    assert agent.low_level_architecture == architecture
+
+    truncated_rows = int(sum(bool(flag) for flag in rollout.truncated))
+    assert truncated_rows > 0, "the fixture must contain truncations to be worth running"
+    assert int(sum(bool(flag) for flag in rollout.terminated)) == 0
+    assert len(rollout.truncation_bootstrap_values) == truncated_rows
+
+    metrics = agent.update_low(rollout)
+    assert metrics["low_boundary_flags_resolved"] == 1.0
+    assert metrics["low_boundary_legacy_collapse"] == 0.0
+    assert metrics["low_truncation_rows"] == float(truncated_rows)
+    for name in ("low_loss", "low_value_loss", "low_actor_loss"):
+        assert np.isfinite(metrics[name]), f"{name} is not finite"
+
+    # The legacy flag is readable from the metrics of the same rollout. Only the two
+    # resolution flags are compared here: the second update starts from the weights the
+    # first one left, so its losses are not a before/after pair.
+    agent.legacy_truncation_as_termination = True
+    legacy_metrics = agent.update_low(rollout)
+    assert legacy_metrics["low_boundary_flags_resolved"] == 1.0
+    assert legacy_metrics["low_boundary_legacy_collapse"] == 1.0

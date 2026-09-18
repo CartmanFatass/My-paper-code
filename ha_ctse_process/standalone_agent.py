@@ -1029,6 +1029,8 @@ class StandaloneProcessAgent(
         next_obs=None,
         next_state=None,
         done: bool = False,
+        terminated: bool | None = None,
+        truncated: bool | None = None,
     ) -> None:
         env_id = int(env_id)
         self.episode_steps[env_id] += 1
@@ -1044,12 +1046,32 @@ class StandaloneProcessAgent(
         self.skill_age[env_id, active] += 1
         self.steps_to_check[env_id] = max(int(self.steps_to_check[env_id]) - 1, 0)
         if done:
-            self.high_check_buffer.close(
-                env_id,
-                old_next_value=0.0,
-                terminal=True,
-                policy_truncated=False,
-            )
+            if self._boundary_is_terminal(done, terminated, truncated):
+                self.high_check_buffer.close(
+                    env_id,
+                    old_next_value=0.0,
+                    terminal=True,
+                    policy_truncated=False,
+                )
+            else:
+                # A time limit, not a terminal state. Bootstrap from the post-truncation
+                # state and cut only the recursion - exactly what
+                # truncate_high_rows_for_update already does at an update boundary. This
+                # runs before reset_env_state clears the skill and age arrays the value
+                # is conditioned on.
+                with torch.no_grad():
+                    next_value = self._r30_value_for_arrays(
+                        env_id,
+                        next_state,
+                        next_obs,
+                        steps_to_check=int(self.steps_to_check[env_id]),
+                    )
+                self.high_check_buffer.close(
+                    env_id,
+                    old_next_value=next_value,
+                    terminal=False,
+                    policy_truncated=True,
+                )
 
     def truncate_high_rows_for_update(self, observations, states) -> None:
         if not self.r30_enabled or self.constant_skill_no_high:
@@ -1486,6 +1508,28 @@ class StandaloneProcessAgent(
         if denormalize and self.high_value_norm is not None:
             value = self.high_value_norm.denormalize_tensor(value)
         return value
+
+    def _boundary_is_terminal(
+        self, done: bool, terminated: bool | None, truncated: bool | None
+    ) -> bool:
+        """Whether an episode boundary should zero the bootstrap.
+
+        A real terminal state has no future, so it should.  A time-limit truncation still
+        has future value, so it should not.  Three cases fall back to "terminal", which is
+        the pre-2026-09-17 reading: the legacy-reproduction flag, a caller that supplies
+        only `done` and cannot distinguish the two, and a `done` row with neither reason
+        set.
+        """
+
+        if not bool(done):
+            return False
+        if bool(getattr(self, "legacy_truncation_as_termination", False)):
+            return True
+        if terminated is None or truncated is None:
+            return True
+        if bool(terminated):
+            return True
+        return not bool(truncated)
 
     def _r30_value_for_arrays(
         self,
@@ -4870,6 +4914,18 @@ class StandaloneProcessAgent(
             return 1.0
         return float(float(self.gamma) ** max(int(segment.length), 0))
 
+    def _segment_is_terminal(self, segment: standalone_segments.Segment) -> bool:
+        """Whether a completed segment ended in a real terminal state.
+
+        Segments built before the reason flags existed, and any built by a caller that
+        passes only `done`, record `terminated = done`, so they keep the collapsed
+        reading.
+        """
+
+        if bool(getattr(self, "legacy_truncation_as_termination", False)):
+            return bool(segment.terminal)
+        return bool(getattr(segment, "terminated", segment.terminal))
+
     def _bootstrap_high_values(self, segments: list[standalone_segments.Segment]) -> np.ndarray:
         values = np.zeros(len(segments), dtype=np.float32)
         if not self.use_smdp_bootstrap or not segments:
@@ -4878,7 +4934,12 @@ class StandaloneProcessAgent(
         bootstrap_indices = [
             idx
             for idx, segment in enumerate(segments)
-            if not segment.terminal and segment.end_obs is not None and segment.length > 0
+            # A truncated segment is bootstrapped from its stored end state: only a
+            # genuine termination has zero future value. `legacy_truncation_as_termination`
+            # restores the collapsed reading.
+            if not self._segment_is_terminal(segment)
+            and segment.end_obs is not None
+            and segment.length > 0
         ]
         if not bootstrap_indices:
             return values
