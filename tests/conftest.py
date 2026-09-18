@@ -9,6 +9,15 @@ import warnings
 import pytest
 
 
+def pytest_addoption(parser):
+    parser.addoption("--keep-scratch-on-failure", action="store_true", default=False,
+                     help="Preserve this invocation's scratch if tests/collection fail")
+
+
+def pytest_sessionfinish(session, exitstatus):
+    session.config._hmasd_failed = int(exitstatus) != 0
+
+
 @pytest.hookimpl(tryfirst=True)
 def pytest_configure(config):
     root = Path(__file__).resolve().parents[1] / "temp"
@@ -38,6 +47,9 @@ def pytest_configure(config):
 def pytest_unconfigure(config):
     target = getattr(config, "_hmasd_owned_scratch", None)
     if target is None:
+        return
+    if config.getoption("--keep-scratch-on-failure") and getattr(config, "_hmasd_failed", False):
+        warnings.warn(pytest.PytestWarning(f"Failed-test scratch retained by request at {target}"))
         return
     try:
         if target.resolve() != target:

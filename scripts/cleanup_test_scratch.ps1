@@ -16,8 +16,9 @@ function Assert-PlainDirectory([string]$Path) {
     }
 }
 
-if (-not (Test-Path -LiteralPath $tempRoot)) { return }
-Assert-PlainDirectory $tempRoot
+if ($Delete -and -not $PSBoundParameters.ContainsKey('RunDirectory')) {
+    throw 'Deletion requires explicit -RunDirectory targets; omit -Delete to preview'
+}
 if ($PSBoundParameters.ContainsKey('RunDirectory') -and
     (-not $RunDirectory -or @($RunDirectory | Where-Object { [string]::IsNullOrWhiteSpace($_) }).Count)) {
     throw 'RunDirectory must name an invocation; omit it to preview all test scratch'
@@ -30,52 +31,60 @@ if (-not $PSBoundParameters.ContainsKey('RunDirectory')) {
         Select-Object -ExpandProperty FullName)
 }
 
-# Validate the complete selection before deleting any member of it.
-$targets = @($RunDirectory | ForEach-Object {
-    $target = if ([IO.Path]::IsPathRooted($_)) { [IO.Path]::GetFullPath($_) }
-              else { [IO.Path]::GetFullPath((Join-Path $repoRoot $_)) }
+# Conservative maintenance only: callers must prevent concurrent test startup.
+$busyReason = $null
+if ($Delete) {
+    try {
+        $busy = @(Get-CimInstance Win32_Process | Where-Object {
+            $_.Name -match '^(python|pythonw|pypy|pytest).*\.exe$' -and
+            (-not $_.CommandLine -or $_.Name -match '^pytest' -or
+             $_.CommandLine -match '(?i)(?:^|[\s"/\\])pytest(?:\.exe)?(?:[\s"]|$)')
+        })
+        if ($busy.Count) { $busyReason = "Tests may still be running: $($busy.ProcessId -join ', ')" }
+    } catch { $busyReason = "Could not establish test inactivity: $_" }
+}
+
+$failed = $false
+foreach ($rawTarget in ($RunDirectory | Sort-Object -Unique)) {
+  $target = $rawTarget
+  try {
+    $target = if ([IO.Path]::IsPathRooted($rawTarget)) { [IO.Path]::GetFullPath($rawTarget) }
+              else { [IO.Path]::GetFullPath((Join-Path $repoRoot $rawTarget)) }
     $relative = [IO.Path]::GetRelativePath($repoRoot, $target).Replace('\', '/')
     if ($relative -notmatch '^temp/tests/[^/]+$' -and
         $relative -notmatch '^temp/directions/[^/]+/test/[^/]+$') {
         throw "Not a single test invocation directory: $target"
     }
+    if ($relative -match '~[0-9]') { throw 'Short-name aliases require separate inspection' }
     # Check every ancestor under temp as Resolve-Path alone does not reject junctions.
     $ancestor = $target
-    while ($ancestor -ne $tempRoot) {
-        Assert-PlainDirectory $ancestor
+    while ($ancestor -ne $repoRoot) {
+        if (Test-Path -LiteralPath $ancestor) { Assert-PlainDirectory $ancestor }
         $ancestor = [IO.Path]::GetDirectoryName($ancestor)
+    }
+    # Windows paths are case-insensitive even though literal Git pathspecs are not.
+    $tracked = @(& git -C $repoRoot ls-files -- ":(icase,literal)$relative")
+    if ($LASTEXITCODE -ne 0) { throw 'Could not verify Git ownership of scratch' }
+    if ($tracked.Count) { throw "Refusing tracked content: $target" }
+    if (-not (Test-Path -LiteralPath $target)) {
+        [pscustomobject]@{Action='AlreadyAbsent'; Directory=$target; Reason=$null}
+        continue
     }
     $links = @(Get-ChildItem -LiteralPath $target -Recurse -Force |
         Where-Object { $_.Attributes -band [IO.FileAttributes]::ReparsePoint })
     if ($links.Count) { throw "Linked fixture requires separate inspection: $($links[0].FullName)" }
-    $tracked = @(& git --literal-pathspecs -C $repoRoot ls-files -- $relative)
-    if ($LASTEXITCODE -ne 0) { throw 'Could not verify Git ownership of scratch' }
-    if ($tracked.Count) { throw "Refusing tracked content: $target" }
-    $target
-} | Sort-Object -Unique)
-
-if (-not $targets.Count) { return }
-if (-not $Delete) {
-    $targets | ForEach-Object { [pscustomobject]@{Action='Preview'; Directory=$_} }
-    return
-}
-
-# Default pytest scratch does not appear on the command line, so refuse collection
-# while any native pytest process is visible. This is a maintenance command, not
-# a concurrent janitor or a process-killing tool.
-$pythonProcesses = @(Get-CimInstance Win32_Process |
-    Where-Object { $_.Name -match '^(python|pythonw|pypy|pytest).*\.exe$' })
-$busy = @($pythonProcesses | Where-Object {
-    -not $_.CommandLine -or $_.Name -match '^pytest' -or
-    $_.CommandLine -match '(?i)(?:^|[\s"/\\])pytest(?:\.exe)?(?:[\s"]|$)'
-})
-if ($busy.Count) {
-    throw "Tests may still be running; no deletion. Process IDs: $($busy.ProcessId -join ', ')"
-}
-
-foreach ($target in $targets) {
+    if (-not $Delete) {
+        [pscustomobject]@{Action='Preview'; Directory=$target; Reason=$null}
+        continue
+    }
+    if ($busyReason) { throw $busyReason }
     Assert-PlainDirectory $target
     Remove-Item -LiteralPath $target -Recurse -Force
     if (Test-Path -LiteralPath $target) { throw "Cleanup incomplete: $target" }
-    [pscustomobject]@{Action='Deleted'; Directory=$target}
+    [pscustomobject]@{Action='Deleted'; Directory=$target; Reason=$null}
+  } catch {
+    $failed = $true
+    [pscustomobject]@{Action='PreservedOrIncomplete'; Directory=$target; Reason="$($_.Exception.Message)"}
+  }
 }
+if ($failed) { throw 'Some targets were preserved or could not be fully reclaimed; see per-target results' }
