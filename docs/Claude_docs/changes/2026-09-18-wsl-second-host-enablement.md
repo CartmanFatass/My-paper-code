@@ -81,14 +81,32 @@ These are not traceable in the repository, so they are recorded here.
 | where | change | revert |
 |---|---|---|
 | `/home/fires/hmasd-main/.git/config` | `core.autocrlf` `true` → `input` | `git config core.autocrlf true` |
+| `/home/fires/hmasd-main/.git/config` | `user.name`/`user.email` `Jacob <firestonecrying@gmail.com>` → `CartmanFatass <czqtpkqc@gmail.com>` | `git config user.name Jacob; git config user.email firestonecrying@gmail.com` |
 | `/home/fires/.codex/config.toml` | appended `[projects."/home/fires/hmasd-main"] trust_level = "trusted"` | delete the block; backup at `~/.codex/config.toml.bak-20260918-hmasd-main` |
 
+The identity change is the one judgement call here that is the owner's to overturn. The WSL
+clone would otherwise have authored commits as a second person on a history where every commit
+is `CartmanFatass`. A config edit is trivially reversible; mis-attributed commits are not, so
+the alignment was made rather than left for discovery. Revert in one command if the two
+identities were deliberate.
+
 `core.autocrlf=true` on a Linux clone writes CRLF into the working tree on every checkout.
+
 `trust_level` matters more than it looks: Codex loads a project's in-repo `.codex/` layer —
 config, hooks, rules, and the nine role layers — **only for a trusted project**, and trust is
 keyed by absolute path, so the existing `[projects."/home/fires"]` entry does not cover the
 checkout. Without that entry the entire in-repo Codex control plane was silently skipped in
 WSL, with no error.
+
+That is the load-bearing claim of this change, so it was verified rather than assumed.
+`codex doctor` (v0.155.0, no model call) run from `/home/fires/hmasd-main` reports
+`feature flags 48 enabled · 3 overridden`, `overrides hooks, multi_agent_v2,
+context_management` and `sandbox unrestricted fs + enabled network · approval Never`. Those
+are the repository's values from `.codex/config.toml` — `[features] hooks = false`,
+`[features.multi_agent_v2]`, `approval_policy = "never"`, `sandbox_mode =
+"danger-full-access"` — and not the WSL user config's `workspace-write` / `on-request`. The
+project layer is therefore loaded and wins, as documented. The same report shows
+`MCP servers 0`, which is the intended effect of the `wsl` branch's second hunk.
 
 ## Verified on the WSL host
 
