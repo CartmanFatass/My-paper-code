@@ -327,10 +327,17 @@ one `done` flag, and `standalone_low_update.py:140-142` then sets
 wrong: a time-limit truncation is not the end of the world, so dropping the bootstrap biases
 the value targets low at every window boundary.
 
+This is **pre-existing, not specific to this environment**: the legacy relay environments
+also end only by truncation (`is_terminated = False` in `belief_map.py:1855`,
+`forced_relay.py:2657`, `routed_core.py:3484`), so every legacy episode boundary takes the
+same zeroed-bootstrap branch. Because of that, a correct fix changes legacy training
+numerics by construction and cannot be guarded by an identity test.
+
 The environment is left as it is — correct truncation semantics — and no legacy training
 file was modified. Running this environment through the standalone trainer as it stands
 would fit on biased value targets. The minimal patch is to carry `truncated` separately and
-bootstrap on it; that is a change to shared training semantics and is not made here.
+bootstrap on it; that is a change to shared training semantics and is not made here. See
+`docs/Claude_docs/changes/2026-09-17-uav-service-restoration-v0.md` for the two options.
 
 ## Not implemented in v0
 

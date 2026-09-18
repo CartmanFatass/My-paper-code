@@ -17,7 +17,7 @@ read in full from `docs/Claude_docs/plans/UAV_Service_Restoration_English_Packag
 | `LEGACY_NONREGRESSION_VERIFIED` | yes — both scenario fingerprints identical; no tracked file changed except `.gitattributes` |
 | `DATA_NOT_VALIDATED` | yes — no real Telecom Italia Milan data is present on this machine |
 | `ROLLOUT_ADAPTER_VERIFIED` | yes — the unmodified shared adapter accepts the environment |
-| `TRAINER_INTEGRATION_PENDING` | yes — truncation bootstrap blocker, described below, not patched |
+| `TRAINER_INTEGRATION_PENDING` | yes — truncation-bootstrap blocker, not patched; **pre-existing and affecting the legacy relay environments too**, see below |
 | `FORMAL_TRAINING_NOT_RUN` | yes — 0 training fits, 0 optimizer updates |
 
 The owner's research pause was not touched: this is engineering work, no direction was
@@ -323,8 +323,35 @@ time-limit truncation is not the end of the world, so zeroing `next_nonterminal`
 the bootstrap value and biases the GAE value targets low at every window boundary. Running
 this environment through the standalone trainer as it stands would fit on biased targets.
 
-This is not a defect *for the legacy environments*, which terminate rather than truncate;
-that is why no change was made.
+### Correction: this is pre-existing, and it affects the legacy environments too
+
+An earlier version of this report said the defect did not apply to the legacy
+environments "which terminate rather than truncate". That is false, and the correction
+matters for whoever decides the patch. All three legacy relay environments end **only** by
+truncation:
+
+```
+envs/pettingzoo/relay/belief_map.py:1853-1855
+    is_truncated = self.current_step >= self.max_steps
+    is_terminated = False
+envs/pettingzoo/relay/forced_relay.py:2652,2657    same pattern ("永不提前终止")
+envs/pettingzoo/relay/routed_core.py:3479,3484     same pattern
+```
+
+`envs/pettingzoo/uav_env.py:323` sets `truncations[agent] = False`, and the adapter reduces
+with `truncated = any(truncations_dict.values())`
+(`envs/pettingzoo/env_adapter.py:278`), so for the relay scenarios every episode boundary
+is a truncation with `terminated` never true.
+
+Consequences:
+
+- The zeroed-bootstrap branch is not a new-environment edge case. It is the branch every
+  legacy relay episode boundary has always taken. The defect is pre-existing in the shared
+  trainer, and `uav_service_restoration_v0` only surfaced it.
+- Step 5 below, as originally written, is vacuous: there is no terminating legacy scenario
+  to hold byte-identical. **Any correct fix changes legacy training numerics.** That is a
+  substantive change to shared scientific behaviour, not a guarded drop-in, which is
+  exactly why it is reported rather than made here.
 
 ### Minimal patch proposal (not applied)
 
@@ -366,10 +393,20 @@ reasons, so a truncation takes the zeroing branch.
 4. Default both new buffers to all-False / empty, so any caller that does not supply them
    takes exactly today's branch and reproduces today's arithmetic bit for bit.
 
-5. Guard with an identity test: an existing terminating scenario must produce byte-identical
-   advantages and returns before and after. The two fingerprints in
-   `tests/fixtures/uav_service_restoration/legacy_fingerprints/` cover the environment side
-   of that boundary; the GAE side would need its own.
+5. Guarding is the hard part, and cannot be done by an identity test. Because every legacy
+   relay episode ends in truncation, a correct fix changes legacy advantages by
+   construction. Two honest options, both the owner's call:
+
+   - **Opt-in**: gate the corrected branch behind a config flag defaulting to today's
+     behaviour, so legacy runs stay bit-identical and only this environment opts in. Cheap
+     and safe; leaves the legacy bias in place.
+   - **Fix outright**: accept that legacy training numerics change, and pin the *new*
+     arithmetic with a fresh GAE identity test plus a recorded before/after on one legacy
+     scenario so the size of the change is documented rather than discovered later.
+
+   The two fingerprints in `tests/fixtures/uav_service_restoration/legacy_fingerprints/`
+   cover only the *environment* side of the boundary; they say nothing about GAE and would
+   not catch this either way.
 
 Until that is decided by whoever owns shared training semantics, the supported use of this
 environment is forward-only: `smoke.py`, `evaluate_baselines.py`, and the diagnostic
