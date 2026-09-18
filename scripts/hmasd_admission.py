@@ -90,6 +90,7 @@ def _git_head(source_root: Path) -> str:
             stderr=subprocess.PIPE,
             text=True,
             timeout=10,
+            creationflags=subprocess.CREATE_NO_WINDOW if os.name == "nt" else 0,
         )
     except (OSError, subprocess.SubprocessError) as exc:
         raise AdmissionRefused(f"cannot verify admitted source HEAD: {exc}") from exc
@@ -461,6 +462,9 @@ def _run_admitted(argv: Sequence[str]) -> int:
                     env=child_environment,
                     stdin=subprocess.DEVNULL,
                     shell=False,
+                    # The supervisor has no console. Without this flag Windows
+                    # allocates a new visible console for its console-app child.
+                    creationflags=subprocess.CREATE_NO_WINDOW if os.name == "nt" else 0,
                 )
                 child_identity = _child_process_identity(child)
                 _write_message(

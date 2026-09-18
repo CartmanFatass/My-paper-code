@@ -43,6 +43,7 @@ def _run(*command: str, cwd: Path, check: bool = True, env=None):
         stderr=subprocess.PIPE,
         env=env,
         timeout=30,
+        creationflags=subprocess.CREATE_NO_WINDOW if os.name == "nt" else 0,
     )
 
 
@@ -77,7 +78,15 @@ args = parser.parse_args()
 admission = require_admission(__file__, direction='demo_direction')
 output = Path(args.output)
 output.mkdir(parents=True, exist_ok=True)
-(output / 'summary.json').write_text(json.dumps({'sha': admission['sha']}), encoding='utf-8')
+import os
+console = None
+if os.name == 'nt':
+    import ctypes
+    console = ctypes.windll.kernel32.GetConsoleWindow()
+print('fixture stdout', flush=True)
+import sys
+print('fixture stderr', file=sys.stderr, flush=True)
+(output / 'summary.json').write_text(json.dumps({'sha': admission['sha'], 'console': console}), encoding='utf-8')
 """
 
 
@@ -501,6 +510,10 @@ def test_successful_fixture_is_admitted_and_detached(
     assert process_exit["exit_code"] == 0
     assert process_exit["termination"] == "process_exit"
     assert process_exit["process_identity"] == manifest["runner_process"]["identity"]
+    if os.name == "nt":
+        assert summary["console"] == 0
+    assert "fixture stdout" in (output / "stdout.log").read_text()
+    assert "fixture stderr" in (output / "stderr.log").read_text()
 
 
 def test_memory_failure_never_releases_child(
@@ -994,6 +1007,7 @@ def test_runner_admission_is_single_use(launch_repo: tuple[Path, Path, str]) -> 
             env=environment,
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
+            creationflags=subprocess.CREATE_NO_WINDOW if os.name == "nt" else 0,
         )
         peer, _address = listener.accept()
         with peer, peer.makefile("rwb", buffering=0) as stream:

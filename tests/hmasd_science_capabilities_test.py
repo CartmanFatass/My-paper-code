@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import os
 import subprocess
 import sys
 from pathlib import Path
@@ -23,22 +24,26 @@ def test_cli_list_show_and_doctor_are_observation_only() -> None:
     list_result = subprocess.run(
         [sys.executable, "scripts/hmasd_science_capabilities.py", "list"],
         cwd=ROOT, capture_output=True, text=True, check=False,
+        creationflags=subprocess.CREATE_NO_WINDOW if os.name == "nt" else 0,
     )
     assert list_result.returncode == 0, list_result.stderr
     assert json.loads(list_result.stdout)["capabilities"]
     show = subprocess.run(
         [sys.executable, "scripts/hmasd_science_capabilities.py", "show", "--id", "networkx"],
         cwd=ROOT, capture_output=True, text=True, check=False,
+        creationflags=subprocess.CREATE_NO_WINDOW if os.name == "nt" else 0,
     )
     assert json.loads(show.stdout)["status"] == "active"
     doctor = subprocess.run(
         [sys.executable, "scripts/hmasd_science_capabilities.py", "doctor", "--id", "wolfram"],
         cwd=ROOT, capture_output=True, text=True, check=False,
+        creationflags=subprocess.CREATE_NO_WINDOW if os.name == "nt" else 0,
     )
     assert json.loads(doctor.stdout)["observed"]["available"] is False
     active_doctor = subprocess.run(
         [sys.executable, "scripts/hmasd_science_capabilities.py", "doctor", "--id", "networkx"],
         cwd=ROOT, capture_output=True, text=True, check=False,
+        creationflags=subprocess.CREATE_NO_WINDOW if os.name == "nt" else 0,
     )
     observed = json.loads(active_doctor.stdout)["observed"]
     assert active_doctor.returncode == 0

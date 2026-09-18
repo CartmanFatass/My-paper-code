@@ -8,6 +8,11 @@ support work stays in temp/. Retain the exact entrypoint and output contract of 
 frozen object, including hmasd_run.py and historical temp paths where bound. The notebook
 links the recoverable artifacts; layout alignment is not a reason to relaunch or move them.
 
+On Windows, noninteractive subprocesses must run without opening console windows. Use
+CREATE_NO_WINDOW for Python subprocess calls or -WindowStyle Hidden for Start-Process;
+retain output capture, exit status and process handles. Open a visible window only when
+the user needs an interactive application. Detached parents also need hidden child creation.
+
 Prefer a simple list of commands for a queue; use scheduling when the actual workload benefits.
 New result entries use hmasd_launch.py and call hmasd_admission.require_admission before
 scientific effects; direct CLI invocation without the single-use admission refuses.

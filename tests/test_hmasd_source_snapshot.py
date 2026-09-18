@@ -10,8 +10,11 @@ def test_snapshot_uses_committed_bytes_and_shared_git_store(tmp_path):
     root.mkdir()
 
     def git(source, *args, timeout=30):
-        return subprocess.run(['git', '-C', str(source), *args], check=True,
-                              capture_output=True, text=True, timeout=timeout)
+        return subprocess.run(
+            ['git', '-C', str(source), *args], check=True,
+            capture_output=True, text=True, timeout=timeout,
+            creationflags=subprocess.CREATE_NO_WINDOW if os.name == "nt" else 0,
+        )
 
     git(root, 'init')
     git(root, 'config', 'user.name', 'Fixture')
