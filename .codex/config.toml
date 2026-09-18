@@ -57,10 +57,19 @@ config_file = "./agents/hmasd-experiment-operator.toml"
 description = "Optional independent scientific-criticism method."
 config_file = "./agents/hmasd-research-critic.toml"
 
-# [mcp_servers.agentify-desktop] is intentionally absent on this branch.
-#
-# On main it points at a Windows desktop application under C:/Projects/agentify-desktop.
-# Codex documents no environment-variable expansion, per-OS override or profile route for
-# an MCP server entry, and mcp_servers is not a key a profile can carry, so there is no
-# spelling that serves both hosts. Consequence, stated plainly: the ChatGPT Pro transport
-# route is unavailable from a session on this host.
+# The agentify desktop application lives on the Windows side of this machine
+# (C:/Projects/agentify-desktop). Owner decision 2026-09-18: a session on this host drives
+# it directly. The server is started with the Windows node.exe through WSL interop, so it
+# runs as a Windows process: it reads the real %USERPROFILE%/.agentify-desktop state and
+# token, reaches the app on the Windows loopback, and can start the app when it is down.
+# Only MCP JSON crosses the boundary; no checkout, index or interpreter is shared, so the
+# /mnt/c prohibition for python.exe and checkouts is untouched.
+# Paths handed to the tools are read or written by Windows processes: pass `prompt` inline,
+# and spell `responsePath` (and any `promptPath`) as `wslpath -w` output, for example
+# \\wsl.localhost\Ubuntu-24.04\home\fires\hmasd-wsl\temp\sessions\...; agentify
+# fingerprints that form as the POSIX path. interop has appendWindowsPath=false here, hence
+# the absolute node.exe path.
+[mcp_servers.agentify-desktop]
+command = "/mnt/c/Program Files/nodejs/node.exe"
+args = ['C:\Projects\agentify-desktop\bin\agentify-desktop.mjs', "mcp"]
+tool_timeout_sec = 2700

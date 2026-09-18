@@ -177,3 +177,15 @@ writing. Changed with it: `project_root` of `local_linux` in `.codex/hmasd-compu
 `~/.codex/config.toml.bak-20260918-hmasd-wsl-rename`). `main` still records the old path in
 the first three; that is a pending integration fact for Root. Revert: `mv` back and restore
 the four spellings.
+
+## Addendum 2026-09-18: agentify reachable from this host
+
+Owner decision: use the Windows agentify application directly (only MCP JSON crosses, no large
+files). `.codex/config.toml` on `wsl` now carries `[mcp_servers.agentify-desktop]` with
+`/mnt/c/Program Files/nodejs/node.exe` and the `C:\Projects\agentify-desktop` entry script; this
+replaces the earlier "route unavailable" comment. Checked: MCP `initialize` + `tools/list` over
+interop returned 39 tools (node.exe v24.18.0); `codex mcp list` shows the server enabled. No tool
+was called, so the application was neither started nor contacted. The path rule (`wslpath -w` for
+`responsePath`/`promptPath`) is recorded in the transport skill's `references/agentify.md`. The
+Claude user-level registration (`claude mcp add --scope user ...`) is the owner's to run: the
+session's permission mode refuses self-modification of Claude configuration.

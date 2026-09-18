@@ -3,6 +3,14 @@
 Implementation: `C:/Projects/agentify-desktop/` (`mcp-server.mjs`, `review-transport.mjs`).
 The callable tool schemas prevail over this note.
 
+On the WSL host the same Windows application is driven through `node.exe` over WSL interop
+(`.codex/config.toml` on the `wsl` branch; Claude user-level MCP entry). The server and the
+application are Windows processes, so a path argument must be one Windows can open: pass
+`prompt` inline, and give `responsePath` (or a `promptPath`) as `wslpath -w <posix path>`,
+for example `\\wsl.localhost\Ubuntu-24.04\home\fires\hmasd-wsl\temp\sessions\...`. Agentify
+fingerprints that spelling as the POSIX path. A bare `/home/...` path is resolved by a Windows
+process against its own drive, not against this checkout.
+
 - `agentify_tabs({})` and `agentify_status({tabId})` expose tab identity, protection and the
   stable key. Protected or default tabs are read-only inspection surfaces; send only from a
   dedicated non-protected tab keyed by the committed question, as described in SKILL.md.
