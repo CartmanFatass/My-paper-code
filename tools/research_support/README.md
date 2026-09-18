@@ -8,9 +8,25 @@ locally generated bundles. It is a **reading** layer. It starts no research.
 python -m tools.research_support --help
 ```
 
-Interpreter: `C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe`. Nothing here needs a new
-dependency; GIF and MP4 export use an encoder only if one is already installed and refuse
-with an actionable message if not.
+Interpreter, by host:
+
+| host | scientific (3.10 + torch) | control-plane (3.11+, `tomllib`) |
+|---|---|---|
+| Windows | `C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe` | `C:/Users/fires/.conda/envs/hmasd-science-tools/python.exe` |
+| WSL2 / Linux | `/home/fires/.venvs/hmasd-linux-cpu/bin/python` | `/home/fires/.venvs/hmasd-linux-science-tools/bin/python` |
+
+`interpreters.py` resolves these for the running host, so `recommend-tests` and
+`inspect-env --probe` emit a command that is runnable where it is read. Override with
+`HMASD_SCIENTIFIC_PYTHON` / `HMASD_CONTROL_PLANE_PYTHON`. Never point a Linux checkout at
+`/mnt/c/.../python.exe`: that runs a Windows torch build against Linux paths and nothing
+in the record would say the run crossed an OS boundary.
+
+On Linux, put the venv's `bin` on `PATH` (or activate it) for anything that builds the
+native C++ geometry backend — `ninja` lives in the venv, and `torch.utils.cpp_extension`
+looks for it on `PATH`, not in `sys.prefix`.
+
+Nothing here needs a new dependency; GIF and MP4 export use an encoder only if one is
+already installed and refuse with an actionable message if not.
 
 ## What it will not do
 

@@ -38,15 +38,19 @@ from enum import Enum
 from pathlib import Path
 from typing import Any, Iterable, Sequence
 
+from .interpreters import control_plane_interpreter, scientific_interpreter
+
 # --------------------------------------------------------------------------------------
 # Interpreters (tests/AGENTS.md)
 # --------------------------------------------------------------------------------------
 
 #: Scientific surfaces: Python 3.10 with torch. Never install into it.
-SCIENTIFIC_INTERPRETER = "C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe"
+#: Resolved for the running host — see ``interpreters.py``; a recommended command has to
+#: be runnable on the host that reads it, and a Windows path is not runnable from WSL.
+SCIENTIFIC_INTERPRETER = scientific_interpreter()
 
 #: Control-plane surfaces: Python 3.11+ (``tomllib``), no torch.
-CONTROL_PLANE_INTERPRETER = "C:/Users/fires/.conda/envs/hmasd-science-tools/python.exe"
+CONTROL_PLANE_INTERPRETER = control_plane_interpreter()
 
 #: Test path prefixes that must run on the 3.11+ interpreter, per ``tests/AGENTS.md``.
 CONTROL_PLANE_TEST_PREFIXES = ("tests/skills/",)

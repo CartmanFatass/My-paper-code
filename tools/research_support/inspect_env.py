@@ -26,11 +26,14 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Mapping
 
+from .interpreters import scientific_interpreter
 from .records import Measured, Validity, dumps, file_hash
 
 #: Interpreter used for a probe. The scientific environment is the one that can import the
-#: environment packages; nothing is ever installed into it.
-DEFAULT_PROBE_INTERPRETER = r"C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe"
+#: environment packages; nothing is ever installed into it. Resolved for the running host
+#: (see ``interpreters.py``) so a probe from a WSL checkout uses the Linux build rather
+#: than reaching across ``/mnt/c`` for a Windows one.
+DEFAULT_PROBE_INTERPRETER = scientific_interpreter()
 
 ROUTES = ("service-restoration", "legacy-mobile-relay", "scenario1")
 
