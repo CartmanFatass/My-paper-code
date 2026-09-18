@@ -64,9 +64,23 @@ mechanism lets one file serve both hosts:
    a WSL session.** That is a real capability gap, not a configuration detail.
 
 Keep the branch this thin. It touches only `/.codex/**`, which `.gitattributes` pins to
-`eol=lf`, so a rebase cannot conflict on line endings. Workflow: integrate on `main` as usual,
-then `git rebase main` on `wsl`. Anything that grows the branch beyond "which machine am I"
-belongs on `main` instead, made additive.
+`eol=lf`, so no integration can conflict on line endings.
+
+**Workflow: integrate on `main` as usual, then `git merge origin/main` on `wsl`. Merge, not
+rebase.** I tried rebase first and it was wrong: rebasing moves an already-published tip, so
+the push is rejected and the only way through is `--force-with-lease` — the force-push
+`AGENTS.md` forbids without the owner's explicit request. A merge keeps the overlay commit
+untouched, moves only its merge base, and pushes as a fast-forward. The recovery is recorded in
+this branch's history: `247261e32` is the original overlay commit and `d7096b110` the first such
+merge; the rebased duplicate was never published.
+
+Anything that grows the branch beyond "which machine am I" belongs on `main` instead, made
+additive.
+
+One clone-level fix was needed for this to work at all: `/home/fires/hmasd-main` was cloned
+single-branch, so `remote.origin.fetch` was `+refs/heads/main:refs/remotes/origin/main` and no
+`refs/remotes/origin/wsl` ever existed. `--force-with-lease` therefore failed with `stale info`
+rather than a useful message. The refspec is now `+refs/heads/*:refs/remotes/origin/*`.
 
 The cleaner long-term fix for item 2 is to move the MCP entry out of the repository into each
 host's `~/.codex/config.toml`, which is where the docs put machine-specific server commands.
@@ -82,6 +96,7 @@ These are not traceable in the repository, so they are recorded here.
 |---|---|---|
 | `/home/fires/hmasd-main/.git/config` | `core.autocrlf` `true` → `input` | `git config core.autocrlf true` |
 | `/home/fires/hmasd-main/.git/config` | `user.name`/`user.email` `Jacob <firestonecrying@gmail.com>` → `CartmanFatass <czqtpkqc@gmail.com>` | `git config user.name Jacob; git config user.email firestonecrying@gmail.com` |
+| `/home/fires/hmasd-main/.git/config` | `remote.origin.fetch` single-branch → `+refs/heads/*:refs/remotes/origin/*` | `git config --unset-all remote.origin.fetch; git config --add remote.origin.fetch "+refs/heads/main:refs/remotes/origin/main"` |
 | `/home/fires/.codex/config.toml` | appended `[projects."/home/fires/hmasd-main"] trust_level = "trusted"` | delete the block; backup at `~/.codex/config.toml.bak-20260918-hmasd-main` |
 
 The identity change is the one judgement call here that is the owner's to overturn. The WSL
