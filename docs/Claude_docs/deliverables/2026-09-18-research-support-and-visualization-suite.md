@@ -30,7 +30,7 @@ RESEARCH_DIRECTIONS_TOUCHED:  0
 | Event seeking | `VERIFIED` | Event timeline, `full_site_failure @120s`, recorded time not reconstructed |
 | Synchronised two-policy comparison | `VERIFIED` | Screen 05, aligned by simulated time |
 | Portable exports | `VERIFIED` | html 3.7 MB, png, json 5.9 MB, gif 1.5 MB; mp4 refuses with an actionable message |
-| Failure bundles | `VERIFIED` | 51 tests |
+| Failure bundles | `VERIFIED` as a library API | 51 tests; `write_failure_bundle()` has no CLI subcommand and no in-repo caller outside its tests — see the review packet §4 |
 | Change-aware test recommendation | `VERIFIED` | 51 tests |
 | English Claude context bundles | `VERIFIED` | generated locally, nothing is sent anywhere |
 | Data / scenario diagnostics | `VERIFIED` | `dataset-report`, `scenario-report`, 48 tests |
