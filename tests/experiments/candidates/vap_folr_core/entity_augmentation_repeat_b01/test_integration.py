@@ -1,4 +1,5 @@
 import importlib.util
+import hashlib
 import json
 from pathlib import Path
 import random
@@ -151,6 +152,8 @@ def test_runner_binds_block_and_reads_g_only_after_its_complete_fit(tmp_path, mo
 
     def collect(*_):
         collected.append(1)
+        if arm == "AUGMENTED_PERSISTENT":
+            generic_path.write_text("source changed after binding")
         return {}, 2.0, {}
 
     monkeypatch.setattr(learner, "Learner", FakeLearner)
@@ -168,18 +171,21 @@ def test_runner_binds_block_and_reads_g_only_after_its_complete_fit(tmp_path, mo
     if arm == "AUGMENTED_PERSISTENT":
         generic_path = tmp_path / "generic.json"
         generic_path.write_text(json.dumps(endpoint("GENERIC_RETAIN", 3-block if foreign else block)))
-        original_read = Path.read_text
+        original_read = Path.read_bytes
 
         def guarded_read(path, *args, **kwargs):
             if path == generic_path:
-                assert len(collected) == 5128
+                assert len(collected) == 0
             return original_read(path, *args, **kwargs)
 
-        monkeypatch.setattr(Path, "read_text", guarded_read)
-        argv += ["--generic-summary", str(generic_path)]
+        digest = hashlib.sha256(generic_path.read_bytes()).hexdigest()
+        monkeypatch.setattr(Path, "read_bytes", guarded_read)
+        argv += ["--generic-summary", str(generic_path), "--generic-summary-sha256", digest]
     monkeypatch.setattr("sys.argv", argv)
     runner.main()
     summary = json.loads((out / "summary.json").read_text())
+    if arm == "AUGMENTED_PERSISTENT":
+        assert hashlib.sha256((out / "generic-input.json").read_bytes()).hexdigest() == digest
     assert constructed == [arm] and summary["block"] == block
     assert torch.load(out / "final.pt", weights_only=True) == {"arm": arm, "updates": 4969}
     assert (summary["training_episodes"], summary["training_ticks"], summary["optimizer_steps"]) == (5000, 100000, 4969)
@@ -193,3 +199,25 @@ def test_runner_binds_block_and_reads_g_only_after_its_complete_fit(tmp_path, mo
         assert summary["pair_primary"]["block"] == block
         assert summary["pair_primary"]["persistent_minus_generic"] == 2.0
     assert seed_calls == [(label, seed) for seed in BLOCKS[block] for label in ("python", "numpy", "torch")]
+
+
+@pytest.mark.parametrize("digest", [None, "0" * 64])
+def test_generic_input_requires_matching_digest_before_training(tmp_path, monkeypatch, digest):
+    runner_path = Path(__file__).resolve().parents[5] / "scripts/run_folr_entity_augmentation_repeat_b01.py"
+    spec = importlib.util.spec_from_file_location("folr_digest_test", runner_path)
+    runner = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(runner)
+    monkeypatch.setattr(runner, "require_admission", lambda *a, **kw: {"sha": "synthetic-source"})
+    generic = tmp_path / "generic.json"
+    generic.write_text('{}')
+    output = tmp_path / 'unused'
+    argv = [str(runner_path), '--block', '1', '--arm', 'AUGMENTED_PERSISTENT',
+            '--seed', str(BLOCKS[1][0]), '--evaluation-seed', str(BLOCKS[1][1]),
+            '--launch-sha', 'synthetic-source', '--out', str(output), '--generic-summary', str(generic)]
+    if digest:
+        argv += ['--generic-summary-sha256', digest]
+    monkeypatch.setattr('sys.argv', argv)
+    with pytest.raises(SystemExit) as error:
+        runner.main()
+    assert error.value.code == 2
+    assert not output.exists()

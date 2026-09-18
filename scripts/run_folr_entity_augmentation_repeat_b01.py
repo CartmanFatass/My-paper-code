@@ -6,6 +6,7 @@ START_WALL = time.monotonic()
 START_CPU = time.process_time()
 
 import argparse
+import hashlib
 import json
 from pathlib import Path
 import random
@@ -52,16 +53,28 @@ def main():
     parser.add_argument("--launch-sha", required=True)
     parser.add_argument("--out", type=Path, required=True)
     parser.add_argument("--generic-summary", type=Path)
+    parser.add_argument("--generic-summary-sha256")
     args = parser.parse_args()
     if (args.seed, args.evaluation_seed) != BLOCKS[args.block]:
         parser.error("seeds must match the selected repetition block")
     if args.arm == "GENERIC_RETAIN" and args.generic_summary is not None:
         parser.error("only the augmented arm consumes the collected Generic summary")
+    if bool(args.generic_summary) != bool(args.generic_summary_sha256):
+        parser.error("--generic-summary and --generic-summary-sha256 must be supplied together")
 
     admission = require_admission(__file__, direction="vap_folr_core")
     if args.launch_sha != admission["sha"]:
         parser.error("--launch-sha must equal the admitted source SHA")
+    # Freeze bytes before the fit, but interpret the comparator only after the
+    # candidate's complete fit as before. Later source changes cannot change pairing.
+    generic_bytes = None
+    if args.generic_summary is not None:
+        generic_bytes = args.generic_summary.read_bytes()
+        if hashlib.sha256(generic_bytes).hexdigest() != args.generic_summary_sha256:
+            parser.error("Generic summary digest mismatch; no training started")
     args.out.mkdir(parents=True, exist_ok=True)
+    if generic_bytes is not None:
+        (args.out / "generic-input.json").write_bytes(generic_bytes)
     summary = {
         "object": OBJECT,
         "block": args.block,
@@ -79,6 +92,10 @@ def main():
         "training_returns": [],
         "evaluation_returns": [],
     }
+    if generic_bytes is not None:
+        summary.update(generic_input=str(args.generic_summary),
+                       generic_input_sha256=args.generic_summary_sha256,
+                       generic_input_snapshot=str(args.out / "generic-input.json"))
     try:
         import numpy as np
         import torch
@@ -179,9 +196,8 @@ def main():
             generic = None
             if args.generic_summary is not None:
                 try:
-                    generic = json.loads(args.generic_summary.read_text())
-                    summary["generic_input"] = str(args.generic_summary)
-                except (OSError, json.JSONDecodeError) as exc:
+                    generic = json.loads(generic_bytes)
+                except (UnicodeError, json.JSONDecodeError) as exc:
                     summary["generic_input"] = str(args.generic_summary)
                     summary["pair_primary"] = None
                     summary["pair_primary_unavailable"] = (
