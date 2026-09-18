@@ -57,7 +57,10 @@ config_file = "./agents/hmasd-experiment-operator.toml"
 description = "Optional independent scientific-criticism method."
 config_file = "./agents/hmasd-research-critic.toml"
 
-[mcp_servers.agentify-desktop]
-command = "node"
-args = ['C:\Projects\agentify-desktop\bin\agentify-desktop.mjs', "mcp"]
-tool_timeout_sec = 2700
+# [mcp_servers.agentify-desktop] is intentionally absent on this branch.
+#
+# On main it points at a Windows desktop application under C:/Projects/agentify-desktop.
+# Codex documents no environment-variable expansion, per-OS override or profile route for
+# an MCP server entry, and mcp_servers is not a key a profile can carry, so there is no
+# spelling that serves both hosts. Consequence, stated plainly: the ChatGPT Pro transport
+# route is unavailable from a session on this host.

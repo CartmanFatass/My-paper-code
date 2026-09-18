@@ -1,7 +1,7 @@
 schema_version = 1
 status = "active"
 routing_policy = "task_suitable_node"
-control_plane_node = "local_windows"
+control_plane_node = "local_linux"
 default_result_node = "wsl_4070"
 fallback_policy = "reconcile_existing_process_preserve_frozen_semantics_admit_destination"
 
