@@ -511,3 +511,204 @@ ECC 固定参考版本：`affaan-m/ECC@dd6ee538aee0f548d4a6b520118f875431fd749e`
 写入成功请返回实际 answer commit 和目标路径；写入失败或无仓库访问权限时，在聊天返回完整答案及依据/限制，不只给 SHA、链接或短回执。仅缺可选写入能力不妨碍完成审计；关键设计/治理内容不可取得时，清楚限制结论或说明所缺内容，不编造已读。不要开 PR、修改代码/宪章、追加实验或提出自动重发。
 
 ### Answer
+
+#### 总体判断与最强反对理由
+
+**建议实施一个明显更小的版本，不建议把 §§10–12 作为六项 ECC 做法和全工作流 helper 的整套交付计划。** §§1–2、5、8–9 的基本分工正确：确定的机械步骤交给工具，科学选择、解释和实际 writer 的责任留在人；维护和观察不应被新实验的准入条件绑住。这与现行宪章 §§1–9 一致。本文是针对 `7c62035715b010dbab742469a433a1e9370a81e3` 的静态设计/源码审计，不是运行认证；研究暂停没有解除。[宪章][constitution] [设计][design]
+
+**最强反对理由：设计仍可能把“减少重复工作”变成“维护更多工具状态和能力说明”。** 草案已经明确“不建同样数量的新脚本”“不是流水线”，这应保留；但 §12 第一步仍同时装入六个 skills、status/check、Pro 校验、测试入口和清理扩展，后面又要求六项 ECC 分别验收。这里没有证据证明这些增量同样值得做。最直接的收益来自已有操作的恢复、执行输入隔离和对象自己的确定性计算，不来自新增诊断分类、通用回放格式或并发垃圾回收。如果必须整体落地，我反对；如果拆成下述独立补丁，我支持。[设计 §§10–12][design]
+
+能预期减少的具体工作是：反复拼启动链、人工串读进程/退出/输出文件、因无关编辑整理工作树、手工展开已定 fits、手算冻结 selection/reducer，以及重复核对 Pro 的 Git 写入范围。**不能据此声称已经节省多少时间或降低多少失败率。** 本次没有执行测试、训练、外部 Send、服务重启、清理或配置修改；历史 overhead 数字和作者报告的 passed 数不构成本设计的收益测量。[宪章 §9][constitution] [问题 Context D][design]
+
+#### 按影响排序的实质问题
+
+##### 1. 优先解决“能安全停住，却不能简单恢复”的现有接口缺口
+
+**性质：源码证实的当前行为；设计提出了方向，但恢复接口未闭合。** `hmasd_launch.launch` 在查询 existing claim 之前先做路径/配置、policy 和 source 检查；existing claim 除两个 retryable 状态外直接报错。即使是 `preflight_refused` 或 `spawn_failed`，同一输出目录已被创建，重试同一 tag 仍会被 `output root already exists` 拒绝。当前 CLI 只有 `launch`，没有可直接调用的 `status` 或 `collect`。因此丢响应后，LLM 仍要自己找 claim、manifest、runner PID 和退出文件；控制源不可达或作者继续编辑，还会先挡住重复调用。不能把这种行为称作已经实现“同请求返回原句柄”。[launcher：`launch`、`_parser`][launcher]
+
+最小修正是先加 **`status <既有 manifest 或稳定操作引用>`**，复用现有原生身份和退出见证，且不要求当前暂停解除、源码仍干净或远端控制源在线。随后让普通重复 `launch` 先找原请求并返回它，不创建进程。明确的新尝试才进入准入；已有失败目录和日志保留，不让调用者删目录、改 tag 或改 SHA 解锁。这个补丁可以在自动快照、doctor、跨节点服务之前独立交付。
+
+旧 `hmasd_run` 的 `_reconcile` 已有 PID 重用、身份未持久化和失联保留 UNKNOWN 的语义；其测试也覆盖 unknown claim 不重启、跨 run root 去重和身份落盘后才释放。应复用这些语义与适合的底层函数，**不要把旧 `_execute` 的长运行审批、旧目录或 promote 流程一起移植**。[旧 run：`_execute`、`_reconcile`][oldrun] [旧 run tests][oldtests]
+
+##### 2. 请求键、输入摘要、科学 fit 和显式重跑需要分开；自动快照不能改变 claim 的管辖范围
+
+**性质：现有去重边界由源码证实；新语义属于设计未决。** 当前 `_claim_key` 绑定 direction、完整 SHA、规范化后的命令；`_command_identity` 去掉输出参数并处理部分路径，但不是 runner 的完整参数解析。同义参数拼法、未显式给出的默认值、解释器路径或仅文档变化造成的 SHA 变化，都可能使“相同科学工作”不再具有相同 key。反过来，终态 claim 仍然阻挡相同输入的明确新训练。§7 换成 direction + tag 后，如果没有另外的在途重复检测，仅换 tag 又会重新成为入口。[launcher：`_command_identity`、`_claim_key`、`_claim_lock`][launcher]
+
+还有一个容易漏掉的交叉问题：当前 claim 在 Git common directory 下。§6 自动快照若放开独立 clone 的控制来源解析、却仍沿用各自 Git common directory 存储 claim，可能在同一物理节点生成第二套 claim；这说的是拟议扩展的风险，不是声称当前代码已经接受任意独立 clone。**执行快照身份、规范控制来源、操作状态存储必须分开定义；不能因为快照换了目录，就丢失旧操作。** 这不是要求新建 registry，而是固定现有机器状态的位置。
+
+最小规则应是：普通重放只观察；同一请求的输入不可变，改变输入返回具体差异；新尝试必须显式关联原尝试，保留旧输出并核对剩余额度。代码修复改变 SHA 时，建立关联的新请求，而不是覆盖旧请求的摘要。对已列出的批次，利用已有对象/阶段/arm/seed/horizon 得到稳定 fit 槽位，避免改 tag 或无关提交绕过同一槽位的 live/unknown；不要建一个推断任意程序“科学等价”的通用系统。没有可解析对象契约的入口，就如实声明只覆盖哪一种 argv 级去重。
+
+`status` 应能合成相互冲突的事实，而不是反复覆写一个粗糙状态：有效退出见证与 manifest 中的 runner 身份匹配才可读出真实退出码；supervisor 死亡而 child 仍活着，继续观察 child；PID 被复用或退出见证丢失，保留不确定性；TTL 到期、PID 消失、SSH 断线都不释放重跑资格。新 supervisor 的 `child.wait()` 是真实 child exit 的证据，不等于证明任意后代写入者都已经结束；只有实际使用这种拓扑的 consumer 才需要补后代/输出关闭契约。[admission：`require_admission`、`_run_admitted`][admission] [kernel tests][kerneltests]
+
+##### 3. 语义比较值得做，但必须先钉住控制来源、调用方预期和最后放行边界
+
+**性质：全文件比较是已证实的无关阻塞；其替换方式存在未决点。** `_require_policy` 比较整份 RESEARCH 文本，最后又比较整份文本摘要；无关 standing 或说明变化可以挡住启动。这里应比较已严格解析的 pause、目标 direction/state 和 lead，并拒绝重复或不认识的字段，而不是变成宽松自然语言猜测。[launcher：`parse_research_state`、`_require_policy`、最终握手分支][launcher]
+
+但 `_published_control_text` 目前从 canonical checkout 的当前 branch/upstream 推导发布来源。“规范 checkout”不是“已钉住规范控制 ref”：若该 checkout 被切到另一个有旧 lifted 状态的分支，仅确认它与自己的 upstream 一致，不足以证明读取的是 acting integrator 的现行控制状态。最小修正是在现有配置/方法里明确那一条规范控制来源，不能由科学快照、当前作者分支或随意换 remote 推断。冻结科学 SHA 仍可以不是 main 最新提交。[launcher：`_published_control_text`、`_resolve_control_root`][launcher] [compute][compute] [宪章 §§2、6、9][constitution]
+
+§4 自动读取 lead 可以省输入，却会削弱一个防误操作检查：旧 DM 在交接后继续调用时，工具若直接把新 lead 字符串填进去，就不再发现它与原 assignment 不一致。保留调用上下文已有的 expected lead/责任范围断言，由既有任务字段传入即可，不要求每次人工抄表，也不把字符串当身份认证。
+
+最后，现有放行前重检后还有 source 检查、memory preflight 和落盘，且远端控制读取早于此边界；现有 race fixture 不能证明这些全部窗口都关闭。应在临近 grant 的位置重读本地相关状态，记录实际观察到的规范 ref/版本和放行证据，保留 actual-node preflight。控制源不可验证只拒绝新效果；不能用旧缓存推定恢复。**没有协调协议就不宣称对远端 owner 写入实现瞬时撤销或全局线性化。** 草案已经排除自动终止在途运行，应保留这个限制；已观察到的新 pause 必须拒绝后续放行，而不是以旧 check 通过为由继续。
+
+##### 4. 隔离快照是真正减负项；“干净 Git 树”仍不等于全部实际输入已经冻结
+
+**性质：当前整树限制和环境继承由源码证实；完整输入绑定尚未实现。** 当前 `_validate_source_local` 会拒绝无关 tracked 编辑及大部分 untracked 文件，但忽略 Git ignored 内容，并专门容许 untracked runs/temp；启动又继承 `os.environ`。这说明它既会过度阻塞，也不是任意动态导入、editable 依赖或外部 artifact 的完整证明。不能只删掉 dirty 检查，继续在作者目录运行。[launcher：`_validate_source_local`、`launch`][launcher]
+
+先用普通 Git 能力准备已发布源码的隔离快照，保留现有 runner 接口；首版不必有缓存淘汰器、环境管理器或依赖发现框架。明确实际 cwd、解释器、必要库/数值环境、可写输出位置和导入路径，避免从作者目录或未绑定的可变文件取代码。所选方案能隔离哪些写入、哪些环境变化仍靠约定，应如实写出，不称同 UID 沙箱。
+
+外部输入不能一律推迟到 §12 最后。已迁移的 FOLR entry 就有 `--generic-summary`，并在训练后读取其内容形成配对输出；launcher 绑定的是命令，不是该文件内容。它不意味着这个 fit 的所有单臂观察都无效，但**依赖该 summary 的配对结论需要绑定实际读到的版本**。FSD 的 stage-0 selection 也是 stage-1 的必要输入。对当前 consumer 的这些少量文件做摘要和不可变消费即可；无需扫描全部仓库或让 NOTES 重写成 YAML。[FOLR entry：`--generic-summary`、`attach_primary` 路径][folr] [设计 §§6、12][design]
+
+自动快照还必须回答 §4 的路径问题：在作者目录执行 `status runs/<id>/<tag>`，怎样找到快照里或远端的真实输出？最小答案是 launch 返回稳定操作引用以及真实 manifest/source/output 路径，status/collect 使用这个引用，不依赖调用者 cwd。只要还有 live/unknown 操作或唯一未收集证据，快照不能被当作普通 scratch 清掉。复用相同源码字节和保存不同尝试的可写输出，是两件事。
+
+##### 5. 暂缓跨节点共享准入，不等于默许跨节点重发；同时避免把网络等待放大为全局阻塞
+
+**性质：本地范围由代码及 method 明示；共享仓库保留协议仍是设计，不是现成功能。** “通过已有 SSH 命令原子保留”虽然没有 daemon，仍带来中央可用性、持久状态、节点绑定、崩溃恢复和并发排序。这些成本不会因不用数据库而消失。当前锁只覆盖同一 Git common directory 的路径，独立 clone 和另一节点不能自动互相排重。[launcher：`_claim_lock`][launcher] [local-execution][execution]
+
+更小替代是：首版一个请求绑定一个执行节点和一个固定操作状态位置，保留当前局部保证；不实现自动 failover，也不并行向不同节点重派同一 fit。dispatch unknown 后查原节点/原 supervisor/原 operation；无法查清就保留该依赖，不把它扩成整个项目 blocked。以后实际出现跨节点竞争需求，再实现并测试共享保留，而不是让它阻挡本地 status、快照和清理补丁。
+
+当前全局 admission lock 内还有 fetch、远端 policy 检查和 child handshake。可以先把只读取证和快照准备移出不必要的长锁区，在短的保留/放行临界区复查会变的必要事实；但不能简单删锁，导致并发请求各自通过内存检查。先在已支持的单节点范围处理，未验证的 WSL 路径单独用无科学训练夹具验证。Windows 的测试报告和 compute 的版本字段都不是 WSL 已可运行的证据。[launcher：`launch`][launcher] [kernel tests][kerneltests] [compute][compute]
+
+##### 6. fits、选择和 reducer 应进一步自动化，但不能用“进程接受”冒充“训练开始”
+
+**性质：科学分工基本正确；训练计量事件和批次恢复是设计缺口。** 宪章按已经开始的 training attempt 计 fit；admission accepted、进程创建、首次 optimizer update 都不与它等价。训练在首次 update 前失败仍可能已消耗 fit；导入或准入失败则可能没有训练。当前 FOLR summary 记录 completed episodes/updates，并明确 interrupted prefix 未测；因此零计数不能证明没有训练。[宪章 §3][constitution] [FOLR entry：异常输出][folr]
+
+最小修正是在实际训练边界留下与 attempt 绑定的事实，并复用 runner 的现有状态/计数。输出区分“已知开始”“已知训练前失败”“是否开始未知”；预算检查不能自动释放 unknown 的可能占用，但报告也不能把 unknown 伪装成已知消耗。无需建立手填 exposure ledger。批次工具只执行已列的 fits；每 fit 重新准入，而不是给一个长循环一次 grant 后自动穿过后续 pause。
+
+FSD 的 `select-stage0` 与 `reduce` **应由对象代码实现，而不是让 DM 手算，也不能用通用 `summarize_runs.py` 冒充**。后者只有描述统计和调用方声明的配对交集，还会报告 unmatched seeds；它没有冻结 FSD 的完整性、选择和区间规则。[统计 helper][summary] [冻结卡 §§2–6、8][fsd]
+
+FSD 的必要约束包括：六个 stage-0 fits 全部有效才按最高两块 J45 均值选择 λ；精确相等时用 `1, 0.5, 2`，不加 near-tie tolerance；缺失/非有限/影响选择的完整性问题返回 `SELECTION_INCOMPLETE`，不回退、不补 seed、不自动重试。选择及依据在任何 stage-1 fit/panel 前固定并绑定。随后按原计划执行五个新 blocks、十个 fits，J45 是唯一主终点。reducer 报告五个配对差、十个 J45、规定的世界级差和曲线，以及 `mean(G) ± t(.975,4) × s_G/√5`；importance 和 uncertainty 标签独立，±.05 与零端点按原卡处理。少于五个完整有效 pairs 进入 `PRIMARY_INCOMPLETE_OR_INVALID`，不取交集伪装完成、不补零、不删负块。区间在 MEI 内也不能改写成 equivalence；这仍是 D1280 与 central-input flat 的有界方法比较，不是 interruption 或 hierarchy necessity 的证明。[冻结卡 §§1–6][fsd]
+
+collect 同样应按这个具体 consumer 的输出契约判断 complete，而不是按 exit 0 或几个文件名判断。复制中断、源文件仍增长或本地内容冲突时，保留 partial/conflict；核对后再发布收集结果，不覆盖不同证据、不默认删源。多一个通用 promote 命令没有增量。
+
+##### 7. 清理先修现有窄入口，不宜先造“每个临时目录一套进程生命周期系统”
+
+**性质：现有行为由源码证实；并发回收属于尚未证明值得做的扩展。** conftest 已自动分配独立 scratch 并在正常 teardown 清理，包括失败测试；清理失败会报路径。恢复脚本已有目录范围、祖先/链接、tracked 内容和全局 pytest busy 检查。但当前无参数 `-Delete` 会枚举并删除所识别的 tests 子目录；不存在的目标不会稳定返回 already_absent；一项校验失败会中止整个选择；没有草案承诺的每运行元数据、保留标记和生命周期锁。`tests/AGENTS.md` 还推荐无参数 `-Delete`。这些不能写成已经解决。[conftest][conftest] [cleanup][cleanup] [tests/AGENTS][testmethod]
+
+**最小可交付修正**：删除必须显式指定目标；继续默认预览；不存在目标幂等返回；逐目标报告保留/失败；不得只凭名称和年龄给旧目录补上归属。修正 tests/AGENTS 的实际调用例子，避免新设计已收窄、消费者仍用旧批量命令。日常测试继续自动 teardown，LLM 通常不调用恢复脚本。
+
+失败证据应在生产者端解决。当前方法要求 teardown 前保留诊断，但测试调用返回时 teardown 可能早已结束，LLM 无法事后救回唯一 tmp_path 证据。为确需诊断的测试提供一个明确的 keep-on-failure/保留方式，或由测试在清理前保存必要复现材料；不要求所有失败生成新档案，也不把每个临时副本永久保留。
+
+首版可以继续保守地禁止与 pytest 启动并发回收。只有确有并发清理需求，才增加自动归属和共享锁；锁存在或父 PID 消失都不证明仍使用目录的后代已经停了，未覆盖的拓扑应保留。不要为了移除一次 maintenance busy 返回，先实现跨平台进程树追踪。保留现有针对本次复制品的只读属性修复边界，不扩展为 ACL 接管。脚本不能豁免平台 policy；拒绝后不能换 Python、shell、编码或文件名执行同一被拒动作。[设计 §11.3–11.6][design]
+
+##### 8. Pro 与研究记录需要一个窄的“读取/局部写入”边界，不需要第二套传输工作流
+
+**性质：多数保护已在现有 skills；仍有导航冲突和可消除的重复劳动。** Pro author/transport 已要求固定问题、最新目标 blob、完整正文、实际 parent diff 和目标 branch；Agentify reference 也明确 `verifyExisting` 只有结合 `sendAttempted=true` 才是观察恢复路径。MAP 那句不带此条件的“verifyExisting=true 只观察”应直接修正文案；未知状态用真正只读的观察工具，不调用可能创建/发送操作的 query 来“查一下”。Agentify 未发布脏树不在本仓库，本审计没有证明其实现已满足这些文字。[Pro author][proauthor] [Transport][transport] [Agentify reference][agentify] [MAP][map]
+
+值得抽取的 helper 是纯机械部分：按给定字段核对 pinned source、唯一目标和答案范围，必要时计算同一 key；不挑科学材料，不发送，不导航浏览器。写入使用最新 blob 的条件更新，按原始字节偏移仅插入正文，不能 Markdown round-trip 重排全文；定位应区分真正标题与代码块/引用中的标题。question 变化、已有答案或写冲突就停止；写结果未知先读实际分支和提交，不盲重试。Git 的版本冲突检查并不代替实际 writer 分工。
+
+NOTES/CLAIM/RESEARCH 的正文与状态含义继续由原作者提供。机器句柄、配置、路径等留在 manifest，NOTES 引用并解释，顺手收窄 engineering Execution 中“再次手录 command/node/handle/sha/cwd/output”的文字。共享 integrator 只在自己的 checkout 集成明确提交，不给每次方向内动作发 ACK；Pro 临时持有的 Answer 不由 DM 或 leaf 并发写。论文判断不能因 helper 核验通过而自动采纳。[engineering][engineering] [loop-dispatch][loop] [宪章 §§2、4–5][constitution]
+
+##### 9. 全链路覆盖基本充分，主要问题不是漏一个角色，而是重复方法可能被重新包装为必经步骤
+
+**性质：设计取舍，不是现有程序 bug。** 文献定位、计算已知工作量、实现/review、批次、观察、判读、记录、集成和旁路维护在 §2.1 都有位置；Portfolio 保持 owner-triggered 是正确的。责任分配也没有理由再拆出一个“工具管理员”。[设计 §2.1][design] [Portfolio][portfolio]
+
+仍应收窄三处：已有且仍适用的文献证据、同一探索周期的 Pro 假设批次和相关检查可复用，不因每次普通实现重新查询/发送/走查；纯控制面维护的明确 scope 不必为满足“L0 放 NOTES”而新建方向科研记录或补历史；显式 pytest 命令已经足够时，删除独立薄测试 launcher 的默认建设项，只有解释器选择确实反复出错时再包装。科学上要读什么、检查什么和采取哪个假设，仍由责任人决定。[scientific-tools][science] [local-literature][literature] [engineering][engineering]
+
+六项 ECC 的取舍也应不同：10.2 的已知故障序列回归最有增量，但直接放进已有测试即可；10.1 只诊断当前选定动作，不把 publisher/全部插件状态放进启动门禁；10.3–10.5 大部分是现有 MAP/GUIDANCE 和方法已有原则的局部澄清；10.6 可补一句按相关失败条件提出可证伪假设，不要求每次生成全套切片。ECC replay 确实绑定工具、参数和响应摘要且缺失不回退 live；其 record 模式会调用实现，不能顺带移入本项目的默认测试。ECC gate 明确没有已验证 OS containment，因此禁用候选执行；这不是 HMASD 连无训练本地进程夹具也不能测试的理由。草案应把“禁止真实 launch”明确为禁止真实研究/生产外部效果，允许隔离测试目录里的无科学副作用子进程，否则只剩 mock 就无法验证真实 OS exit。[ECC replay][eccreplay] [ECC gate][eccgate] 其余 ECC 参考见末尾。
+
+#### 保留 / 简化 / 推迟 / 删除
+
+| 处理 | 建议 |
+| --- | --- |
+| **保留** | 一个新实验 launcher、runner guard、fresh actual-node preflight、原生身份及真实退出见证；unknown 不重放；确定性 selection/reducer；producer 自清理；现有 Pro/Reviewer 触发条件和实际 writer 边界。 |
+| **简化** | status 直接消费既有 manifest；只对相关控制字段比较；快照先用普通 Git；Pro 只抽机械校验；每次修改只同步实际消费者；故障夹具随对应修复加入现有测试。 |
+| **推迟** | 跨节点原子保留、自动快照缓存/回收、并发 scratch janitor、通用依赖发现、全能力诊断表；通用 collect 先让位于一个真实 consumer 的输出契约。所用 consumer 的必要外部输入绑定不能推迟。 |
+| **删除** | 六项 ECC 必须齐套交付/分别成为项目里程碑的要求；没有重复故障依据的测试总入口；对简单原生命令再包装一层；无目标批量删除；手抄 manifest 字段和任何新 packet/registry/ACK/promote 变体。 |
+
+#### 最小实施顺序与针对性验证
+
+**第一项独立交付：只读 status + 同请求返回已有操作。** 只改 launcher/可复用身份读取及直接 execution reference，不先改齐六个 skills。检查 accepted 后丢响应、当前 paused/控制源断线仍可观察、runner 与 supervisor 状态不同、PID 重用、缺失/错配退出见证、同请求不同输入和并发重复请求。断言没有第二个科学子进程；现有 guard/真实退出测试保留。若暂不实现显式新尝试，明确返回所缺恢复能力，不能诱导换 tag。
+
+**第二项：隔离已发布执行快照 + 规范控制来源/相关字段比较。** 对一个 consumer 完成路径/输出定位和其必要输入绑定；检查作者无关脏改动不进入运行，ignored/外部导入边界不被误称覆盖，无关 RESEARCH 文字不拒绝，pause/lead/state 变化拒绝，错误规范 ref 不采信，放行临界点崩溃保留 unknown。新快照不能产生第二套独立 claim。先验清单由测试执行，不要求 DM 逐项签字。
+
+**第三项：在原本的 FSD 实现任务内交付对象级 fits 展开、selection/reducer 和所需 WSL 工程夹具。** 不新建通用科研编排器，不重跑历史 FOLR 来证明 launcher 有用。用构造数据覆盖所有最大值 tie 子集、非有限/缺失选择、±.05/零区间端点、零方差、不足五对、阶段输入被替换，以及正确的 panel/count 绑定；独立 review 仍只按实际 core/高风险改动触发。工程夹具不授予 FSD 运行许可。[冻结卡 §8][fsd]
+
+**清理小修和 Pro 机械核对可以各自旁路交付，互不等待。** 在测试自建目录验证显式目标、路径逃逸/链接/tracked 保留、已不存在、失败证据保留和逐项报告；不要对 owner 旧目录做破坏性验收。Pro 核对用构造文件覆盖重复/代码块标题、并发非重叠变化、question 变化、已有答案、截断正文和条件写失败，不通过真实 Send 验收。只随实际入口变化更新相关 MAP/GUIDANCE、skill/reference 和生成副本；publisher check 只证明生成一致。
+
+收益复核只需在本次交付说明中，利用已有调用/失败记录说明删除了哪几步、哪些错误现在直接得到可恢复事实。没有可比历史时就报告预期机制，不新建定期 overhead 统计。
+
+#### 可直接替换的关键段落建议
+
+以下是本设计中的替换建议，不是另立治理文本。
+
+**§§4、7 的请求/恢复段：**
+
+> 普通重复请求只返回同一不可变请求及已有尝试的事实，不启动新进程。操作状态位置独立于作者目录和执行快照；返回稳定 manifest 引用、目标节点和实际输出路径。改变输入不能覆盖旧请求。明确的新尝试关联原尝试并保留旧输出，核对原操作和剩余额度；live/unknown 不因更换 tag、快照、SHA、节点或租约到期而自动释放。首版只承诺已测试的单节点/固定状态存储范围，不实现自动跨节点重派。
+
+**§6 的控制来源/快照段：**
+
+> 科学输入来自指定已发布快照；当前权限来自明确的规范控制来源，不能由作者 branch 或冻结 snapshot 推定。严格比较目标相关的 pause/state/lead，保留 assignment 的期望责任断言及取证版本；无关正文变化不拒绝。控制源不可验证只阻止新效果。临近最终放行重读相关本地状态并做 actual-node preflight；不宣称未实现的跨节点瞬时撤销。先绑定当前 consumer 真正使用的外部输入，并明确输出、导入和环境未覆盖边界。
+
+**§11.3 的首版范围段：**
+
+> 日常 scratch 继续由 conftest 分配和回收；必要失败证据在生产者清理前保存。恢复入口默认预览，删除必须指定目标，逐目标检查并报告，保留链接、tracked、在用及归属未知对象。首版不与测试启动并发回收；每运行元数据/生命周期锁仅在真实并发需求下追加。策略拒绝时保留并报告，不换工具绕过，也不阻塞其他独立工作。
+
+**§12 的实施要求段：**
+
+> 先交付既有操作的读取/恢复，再交付一个 consumer 的隔离输入与相关控制检查；对象级确定性计算随该对象实现。清理和 Pro 机械校验按实际重复问题独立交付。ECC 是可选参考，不是齐套验收清单；方法只修改直接受影响段落。跨节点协调、通用框架和缓存回收不进入首版关键路径。
+
+#### 三个场景的正常路径与关键失败路径
+
+**一次新探索。** 以下仅是假设未来已经明确恢复、方向责任明确且“先执行 FSD B01”的既有顺序已经满足。DM 使用仍适用的文献证据和该探索周期已有的 Pro 建议，在 NOTES 前瞻记录比较、arms/seeds/horizon 和不超过既定额度的 fits；直接实现或有益时委派，相关 checks/必要 review 后发布输入。工具展开明确 fits，从隔离快照启动，返回同一可恢复 handle；统计只计算指定总体，DM 解释 keep/kill/revise，integrator 按实际边界集成。正常路径没有额外 doctor、清理审批或 Root ACK。[宪章 §§3、5、10][constitution] [scientific-tools][science]
+
+关键失败是 grant 后响应丢失。重放原请求返回原操作，查询已记录的 child 身份/退出/输出；是否开始训练未知就如实保留可能 exposure，不自动换 tag 重跑。该 fit 的不确定性不妨碍读文献、修代码或处理不依赖它的既有结果；也不能借“独立工作”给同一个未决 fit 另开节点。
+
+**冻结 FSD B01。** 现在仍然 paused。未来获明确恢复后，沿原卡实现 CF 的 central snapshot 刷新/重置及 collector/replay/evaluator 一致性，保留 CPU FP32、四线程、每 fit 45×16×500、九个 32-world panels、原训练/评价 seed 和输出契约；不能因 Windows kernel 有测试就默认替换其 WSL 执行条件。完成相关工程检查/必要 review，依次完成六个 selection fits，机器固定唯一 λ 和输入依据，再执行十个 confirmation fits，reducer 输出原规则的数值与标签，DM 作范围解释。不新增 CLAIM 转抄、常规 Pro 结果复审或 Portfolio 回路。[冻结卡 §§1–8][fsd] [宪章 §10][constitution]
+
+关键失败是任一选择结果缺失或其 J45 完整性有问题：返回 `SELECTION_INCOMPLETE`，保留其余证据和真实 exposure，停止 stage-1 依赖链；不能让通用 retry、默认 λ=1 或剩余样本均值替它“完成”。若 stage 0 有效而之后 owner 再次暂停，则下一 fit 准入拒绝，已有 fits 继续按事实观察；未来恢复仍先 reconcile 原操作。工程重试能力不覆盖原卡的不追加规则。
+
+**纯工程维护/测试清理。** 从 owner 指定 scope 和相关 engineering 方法进入，直接选择适用解释器和明确测试路径，conftest 自动处理本次 scratch；非代码方法修改做作者一致性检查，改到高风险可执行行为才做相应 review。不读取全部方向历史、不发 Pro、不申请 fit，也不为了工具维护补写两个方向的旧 NOTES。[engineering][engineering] [tests/AGENTS][testmethod]
+
+关键失败是进程被硬杀或平台拒绝遗留目录删除。仅列出这一个明确目标的归属/占用/拒绝理由；无证据就保留，不杀子进程制造可删条件、不改 ACL、不换语言重试同一被拒动作。其他新的隔离测试和文档修改继续。失败复现材料需要保留时，生产者提前保存或显式 retain，而不是把“目录已删”当作维护成功的唯一指标。
+
+#### 实际来源与结论限制
+
+推理来源固定在 `7c62035715b010dbab742469a433a1e9370a81e3`；FSD 卡单独使用 `345b9474fb084fd2744072c79cb0e44f670af8c3`，ECC 单独使用 `dd6ee538aee0f548d4a6b520118f875431fd749e`。目标分支最新 blob 仅用于安全写入，不替代审计输入。
+
+实际使用了：设计 §§1–13 和完整文末问题；宪章全文、[RESEARCH 的 pause/Active/Reserve][research]；[MAP][map]/[GUIDANCE][guidance] 的来源、路由、方法承接和维护段；六个共享 SKILL、[DM role][dmrole]，以及 Context B 指定的 local-literature、local-execution、[pro-reading-context][readingcontext]、Agentify references；launcher/admission 和 kernel tests；旧 run 的 manifest/execute/reconcile 及相关测试片段；conftest、cleanup、tests/AGENTS；描述统计 helper、[publisher][publisher]、compute 和 FOLR entry；FSD 冻结卡，重点 §§2–6、8。引用旧代码仅为实现比较，不恢复其旧权限。
+
+ECC 实际使用的是 [install-lifecycle 的诊断分支][eccdoctor]、[replay][eccreplay]、[gate][eccgate]、[compliance 的实现层次定义][ecccompliance]、[iterative-retrieval][eccretrieval]、[skill-stocktake 的具体去向/理由要求][eccstocktake]、[mle-workflow 的 Error Analysis Loop][eccmle]。未递归审计整个 installer 或借其产品支持表证明今日运行能力；也未要求安装 ECC。
+
+关键未读/不可取得材料是：作者本地未发布的 Agentify 重构及 repair-only patch、真实页面/持久状态和服务采用情况；Context 中未提供的完整 Windows 验证原始日志、真实 Linux/WSL 端到端运行证据及活会话 adoption；My-lib/Inst-sci 的真实 corpus 与索引覆盖；待实现 FSD CF 的完整科学调用链及历史卡直接绑定的全部原始代码/输出、原 Pro archive；全部其他角色原生配置、用户设置和 Remember 的实际行为。本次也未核查所有历史 runner、worktree 和存储依赖，没有把“未读到”说成这些材料不存在。它们分别限制传输实现、运行可用性、文献覆盖、科学实现正确性和删除安全的结论，不应反向阻止独立的 status 或方法小修。
+
+本次没有重新运行已有测试，因此测试源码只证明存在相应检查与断言，作者报告的 passed 只作为报告，均不证明拟议能力已落地。以上最小修改不改变现行权限、fit 额度或冻结科学语义，无需新增 owner 审批。恢复研究、追加预算、改变冻结 seeds/endpoint/比较含义、离线推定许可或自动终止在途实验都不属于这些建议；若将来提出这种变化，应作为真实权限/科学变更交由既有责任人处理，而不是藏在工具优化里。
+
+**MATERIAL_DISSENT: yes** — 实质异议针对恢复/身份/控制来源的未闭合语义，以及把六项参考扩成同步建设计划；不反对脚本承担确定性机械工作的方向。
+
+[constitution]: https://github.com/CartmanFatass/My-paper-code/blob/7c62035715b010dbab742469a433a1e9370a81e3/docs/project/OPERATING_CONSTITUTION.md
+[design]: https://github.com/CartmanFatass/My-paper-code/blob/7c62035715b010dbab742469a433a1e9370a81e3/docs/Claude_docs/plans/SCRIPT_FIRST_RESEARCH_EXECUTION_DESIGN_20260917.md
+[launcher]: https://github.com/CartmanFatass/My-paper-code/blob/7c62035715b010dbab742469a433a1e9370a81e3/scripts/hmasd_launch.py
+[admission]: https://github.com/CartmanFatass/My-paper-code/blob/7c62035715b010dbab742469a433a1e9370a81e3/scripts/hmasd_admission.py
+[kerneltests]: https://github.com/CartmanFatass/My-paper-code/blob/7c62035715b010dbab742469a433a1e9370a81e3/tests/test_hmasd_launch.py
+[oldrun]: https://github.com/CartmanFatass/My-paper-code/blob/7c62035715b010dbab742469a433a1e9370a81e3/scripts/hmasd_run.py
+[oldtests]: https://github.com/CartmanFatass/My-paper-code/blob/7c62035715b010dbab742469a433a1e9370a81e3/tests/hmasd_run_test.py
+[compute]: https://github.com/CartmanFatass/My-paper-code/blob/7c62035715b010dbab742469a433a1e9370a81e3/.codex/hmasd-compute.toml
+[execution]: https://github.com/CartmanFatass/My-paper-code/blob/7c62035715b010dbab742469a433a1e9370a81e3/.agents/skills/hmasd-research-engineering/references/local-execution.md
+[folr]: https://github.com/CartmanFatass/My-paper-code/blob/7c62035715b010dbab742469a433a1e9370a81e3/scripts/run_folr_entity_augmentation_repeat_b01.py
+[summary]: https://github.com/CartmanFatass/My-paper-code/blob/7c62035715b010dbab742469a433a1e9370a81e3/.agents/skills/hmasd-scientific-tools/scripts/summarize_runs.py
+[fsd]: https://github.com/CartmanFatass/My-paper-code/blob/345b9474fb084fd2744072c79cb0e44f670af8c3/docs/research/candidates/flexible_skill_duration/FSD_MATCHED_INFORMATION_BASELINE_B01_PROSPECTIVE_CARD_20260916.md
+[conftest]: https://github.com/CartmanFatass/My-paper-code/blob/7c62035715b010dbab742469a433a1e9370a81e3/tests/conftest.py
+[cleanup]: https://github.com/CartmanFatass/My-paper-code/blob/7c62035715b010dbab742469a433a1e9370a81e3/scripts/cleanup_test_scratch.ps1
+[testmethod]: https://github.com/CartmanFatass/My-paper-code/blob/7c62035715b010dbab742469a433a1e9370a81e3/tests/AGENTS.md
+[proauthor]: https://github.com/CartmanFatass/My-paper-code/blob/7c62035715b010dbab742469a433a1e9370a81e3/.agents/skills/hmasd-pro-research-prompt-author/SKILL.md
+[transport]: https://github.com/CartmanFatass/My-paper-code/blob/7c62035715b010dbab742469a433a1e9370a81e3/.agents/skills/hmasd-chatgpt-pro-transport/SKILL.md
+[agentify]: https://github.com/CartmanFatass/My-paper-code/blob/7c62035715b010dbab742469a433a1e9370a81e3/.agents/skills/hmasd-chatgpt-pro-transport/references/agentify.md
+[map]: https://github.com/CartmanFatass/My-paper-code/blob/7c62035715b010dbab742469a433a1e9370a81e3/docs/project/CONTROL_PLANE_MAP.md
+[engineering]: https://github.com/CartmanFatass/My-paper-code/blob/7c62035715b010dbab742469a433a1e9370a81e3/.agents/skills/hmasd-research-engineering/SKILL.md
+[loop]: https://github.com/CartmanFatass/My-paper-code/blob/7c62035715b010dbab742469a433a1e9370a81e3/.agents/skills/hmasd-loop-dispatch/SKILL.md
+[portfolio]: https://github.com/CartmanFatass/My-paper-code/blob/7c62035715b010dbab742469a433a1e9370a81e3/.agents/skills/hmasd-portfolio-task/SKILL.md
+[science]: https://github.com/CartmanFatass/My-paper-code/blob/7c62035715b010dbab742469a433a1e9370a81e3/.agents/skills/hmasd-scientific-tools/SKILL.md
+[literature]: https://github.com/CartmanFatass/My-paper-code/blob/7c62035715b010dbab742469a433a1e9370a81e3/.agents/skills/hmasd-scientific-tools/references/local-literature.md
+[eccdoctor]: https://github.com/affaan-m/ECC/blob/dd6ee538aee0f548d4a6b520118f875431fd749e/scripts/lib/install-lifecycle.js
+[eccreplay]: https://github.com/affaan-m/ECC/blob/dd6ee538aee0f548d4a6b520118f875431fd749e/scripts/lib/eval-harness/replay.js
+[eccgate]: https://github.com/affaan-m/ECC/blob/dd6ee538aee0f548d4a6b520118f875431fd749e/scripts/lib/eval-harness/gate.js
+[ecccompliance]: https://github.com/affaan-m/ECC/blob/dd6ee538aee0f548d4a6b520118f875431fd749e/scripts/lib/harness-adapter-compliance.js
+[eccretrieval]: https://github.com/affaan-m/ECC/blob/dd6ee538aee0f548d4a6b520118f875431fd749e/skills/iterative-retrieval/SKILL.md
+[eccstocktake]: https://github.com/affaan-m/ECC/blob/dd6ee538aee0f548d4a6b520118f875431fd749e/skills/skill-stocktake/SKILL.md
+[eccmle]: https://github.com/affaan-m/ECC/blob/dd6ee538aee0f548d4a6b520118f875431fd749e/skills/mle-workflow/SKILL.md
+
+[research]: https://github.com/CartmanFatass/My-paper-code/blob/7c62035715b010dbab742469a433a1e9370a81e3/docs/research/RESEARCH.md
+[guidance]: https://github.com/CartmanFatass/My-paper-code/blob/7c62035715b010dbab742469a433a1e9370a81e3/docs/project/CONTROL_PLANE_GUIDANCE.md
+[dmrole]: https://github.com/CartmanFatass/My-paper-code/blob/7c62035715b010dbab742469a433a1e9370a81e3/.codex/agents/hmasd-direction-manager.toml
+[readingcontext]: https://github.com/CartmanFatass/My-paper-code/blob/7c62035715b010dbab742469a433a1e9370a81e3/.agents/skills/hmasd-pro-research-prompt-author/references/pro-reading-context.md
+[publisher]: https://github.com/CartmanFatass/My-paper-code/blob/7c62035715b010dbab742469a433a1e9370a81e3/tools/publish_claude_control.py
