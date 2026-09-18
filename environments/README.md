@@ -32,7 +32,7 @@ portable fallback; `wsl_4070` remains the default result/heavy-compute node. Sou
 revision, admission and frozen card constraints still determine a valid invocation.
 
 The node name is `local_linux` in `.codex/hmasd-compute.toml`, whose `project_root` is
-`/home/fires/hmasd-main`. Earlier revisions of this file named `local_linux_cpu`, which no
+`/home/fires/hmasd-wsl`. Earlier revisions of this file named `local_linux_cpu`, which no
 node ever defined, so selecting it made `hmasd_launch.py` refuse with
 `execution node 'local_linux_cpu' is not configured`. `wsl_4070` is a **different machine**
 (`LAPTOP-U9TDKC8A`, user `wu`, reached over ssh); it is not this WSL instance.

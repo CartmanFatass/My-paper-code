@@ -16,7 +16,7 @@ runs `tools/publish_claude_control.py`. Never install into any of them.
 | host | scientific | control-plane |
 |---|---|---|
 | Windows, `C:/Projects/HMASD` | `C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe` | `C:/Users/fires/.conda/envs/hmasd-science-tools/python.exe` |
-| WSL2 Ubuntu, `/home/fires/hmasd-main` | `/home/fires/.venvs/hmasd-linux-cpu/bin/python` | `/home/fires/.venvs/hmasd-linux-science-tools/bin/python` |
+| WSL2 Ubuntu, `/home/fires/hmasd-wsl` | `/home/fires/.venvs/hmasd-linux-cpu/bin/python` | `/home/fires/.venvs/hmasd-linux-science-tools/bin/python` |
 
 A WSL session uses the Linux venvs. Never reach across `/mnt/c` for `python.exe`: that runs a
 Windows torch build against a Linux checkout and no record would show the run crossed hosts.

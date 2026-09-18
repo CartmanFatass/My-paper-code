@@ -166,3 +166,14 @@ with `RuntimeError: Ninja is required to load C++ extensions`. Recorded in `CLAU
   Windows session's memory does not reach a WSL session. `autoMemoryDirectory` could converge
   them, but any shared location has to be reachable from both hosts, which conflicts with the
   rule against working across the boundary. Left as a deliberate gap.
+
+## Addendum 2026-09-18: checkout renamed
+
+The owner asked for the directory to carry the branch name. `/home/fires/hmasd-main` is now
+`/home/fires/hmasd-wsl`; every `/home/fires/hmasd-main` above is the path at the time of
+writing. Changed with it: `project_root` of `local_linux` in `.codex/hmasd-compute.toml`
+(`hmasd_launch.py` resolves the control root from it), the host table in `CLAUDE.md`,
+`environments/README.md`, and the path-keyed trust block in `~/.codex/config.toml` (backup
+`~/.codex/config.toml.bak-20260918-hmasd-wsl-rename`). `main` still records the old path in
+the first three; that is a pending integration fact for Root. Revert: `mv` back and restore
+the four spellings.
