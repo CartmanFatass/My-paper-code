@@ -3,6 +3,8 @@
 日期：2026-09-17。Owner 请求的设计稿；尚未采纳、尚未实施，不是新的治理来源。
 研究暂停、现行宪章、冻结实验和现有运行行为保持不变。Remember、Claude 用户设置与记忆行为不在本次修改范围。
 
+供 Pro 审计：请先读文末 `Pro question 2026-09-17 script-first-workflow-design-audit`，再按其中的 Context 阅读本稿和相关源。设计正文是审计对象，不能当作已经采纳的规则。
+
 v1.1 按 owner 后续要求，将已筛选的六项 ECC 借鉴完整纳入设计与实施顺序；它们不再只是参考备注。以下接口和方法仍是待实施方案。
 
 v1.2 补充具体的“脚本承担什么、skill 调用什么”分工，特别说明测试临时目录的自动清理、遗留目录回收与工具 policy 边界。
@@ -380,3 +382,132 @@ pwsh -NoProfile -File scripts/cleanup_test_scratch.ps1 -RunDirectory 'temp/tests
 本稿不请求新增角色、审批层、定期报告或新的研究记录；不改变 owner pause、fit 额度、科学最低要求、提交发布和必要 review。按上述范围实施主要是工具和方法变化，不需要为了普通实现选择修改宪章。
 
 本次交付止于设计。后续若要允许未发布结果执行、离线推定恢复、自动超预算重试或自动停止在途实验，这些均超出本稿，不能作为“减少阻塞”的隐含实现。
+
+## Pro question 2026-09-17 script-first-workflow-design-audit
+
+### 审计问题与 owner 意图
+
+请独立审计本文件 §§1–13：这套面向 LLM 协作的脚本/skill 分工，是否真正减轻完整研究工作流中的机械负担、降低可达错误并减少无关阻塞？哪些设计应保留、简化、推迟或删除；还缺哪些会影响实际落地的接口或恢复语义？允许给出“整体方向不值得实施”或比本稿更小的替代方案，不以通过审计为目标。
+
+本次是 owner 明确要求的控制面设计审计，**不是 Portfolio、科学结果复审、研究恢复或新增运行授权**。在此之前的 owner 要求与纠正如下，供理解设计目的，不假设你拥有聊天历史：
+
+- 项目已有 `run` 类脚本能为 LLM 提供稳定执行能力，owner 希望扩展这种方式，减少过去规则堆叠造成的流程性阻塞。
+- owner 要求吸收 ECC 中有增量价值的做法，但要结合 HMASD 已有控制面；不是安装整个 ECC 或照搬它的角色、记录系统和通用门槛。
+- owner 特别要求回答“哪些工作可交给脚本、在 skill 中直接调用”，以临时目录清理反复受阻作为实例，随后要求检查**整个工作流**以免只设计删除/启动门禁。
+- owner 希望清理更稳定且避免误删。草案已经区分这一诉求与技术事实：脚本仍受工具 policy 检查，不能承诺免审或以包装动作绕过拒绝。请评估边界是否正确，不假定 user 要求取消安全约束。
+- Remember 以及相关 Claude 记忆行为本次不修改；只提供独立报告，owner 将在 Claude 中处理。可指出它与设计有关的残余风险，不把修改它列成本次实施的前置条件。
+
+项目是个人快速研究迭代，不是多人企业平台。目标是尽快完成“问题—实现—实验—判读”；现有框架可以使用合理设施和并行，但不会因为一个有名字的方法就要求引入它。请按实际收益、维护成本和科学语义判断，不套用固定行数、覆盖率或治理成熟度模板。
+
+### 审计基线与当前状态
+
+Repository：`CartmanFatass/My-paper-code`。
+Branch / answer target：`codex/admission-kernel-20260917`。
+Target path：`docs/Claude_docs/plans/SCRIPT_FIRST_RESEARCH_EXECUTION_DESIGN_20260917.md`。
+Question heading：`## Pro question 2026-09-17 script-first-workflow-design-audit`。
+Answer heading：本问题下唯一的 `### Answer`，当前为空。
+Conversation：由 owner 手动选择；本问题尚未由本次作者发送，不需要已有 conversation registry。
+Allowance：本审计不授予任何训练 fits、实验启动、外部 Send、服务重启、删除或配置修改。
+
+版本含义：
+
+| 版本 | 用途 |
+| --- | --- |
+| `source_sha` | 实际发送消息中给出的完整已发布 commit；含本问题。以下未另指定版本的 HMASD 路径均从这个 commit 读取，不用移动分支替代 |
+| `1719f9b37f842290905f1ad503c6679123a9c872` | 本次加审计上下文之前的设计 v1.3；§§1–13 的审计对象，不因文末补问题而成为已实施规则 |
+| `da15cf264920b04c04c5df42c19aeeb287ed4952` | 本分支此前提交的新 admission kernel、FOLR 接入、对应测试和执行方法修改；它是已有实现，不是本次设计已全面落地的证明 |
+| `8ba67835276d15a3392fc6e0a9c7adeeaa1cb388` | 新 admission 修改之前的比较基点；其中已有 Windows 测试 scratch 恢复脚本，不是最新治理的替代来源 |
+| `345b9474fb084fd2744072c79cb0e44f670af8c3` | 下述 FSD B01 冻结卡的独立来源版本。科学参数及规则保留原义，旧权限措辞以当前宪章为准 |
+
+当前 pause 为 in force。RESEARCH 的 active 为 FSD（当前 Claude lead，等待恢复后执行冻结 B01）和 FOLR（Codex DM，下一步应是有区分力的新 idea，不自动重跑旧对象）；TRDL 是 reserve，不需要填满三名 DM。Codex Root 协调并集成，DM 端到端负责；Claude session 自身是单方向 DM。研究状态不是运行时实际存活证明。
+
+共享 main/RESEARCH 由 acting integrator 在自己的 checkout 写；DM 拥有方向 NOTES，Pro 暂时只获得指定 Answer 小节。普通方向内工作不逐步等 Root ACK；已授权普通 idea 不新增 owner 审批。科研记录仅 NOTES / runs / 确认前 CLAIM；机器运行状态不是新增手填台账。当前 checkout 两个 active 方向的 NOTES 尚未创建，不补录旧历史作为实施门槛。
+
+### Context：按用途读取，不递归加载全部历史
+
+先读 A，再按 B 追踪完整工作流，最后只对需要判断的具体设计读 C。D 是外部借鉴与本地证据范围。每个结论应引用实际读取的文件/节；你没有读到的来源不能被声称验证过。
+
+**A. 必需的治理、目标和现状（均为 source_sha）。**
+
+| 路径 / 节 | 阅读目的 |
+| --- | --- |
+| [OPERATING_CONSTITUTION.md](../../project/OPERATING_CONSTITUTION.md)，全文，重点 §§1–9 | 唯一现行治理；角色、普通工作权限、fits、三种记录、Pro adviser、工程风险判断及不增设规则的边界 |
+| [RESEARCH.md](../../research/RESEARCH.md)，Owner pause / Active / Reserve | 当前方向及暂停；不需重读所有 archive，历史 overhead 数字不是当前量化评估 |
+| 本文件 §§1–13，尤其 §2.1–2.2、§10、§11 | 真正待审计的设计和脚本分工，含完整闭环与具体调用实例 |
+| [CONTROL_PLANE_MAP.md](../../project/CONTROL_PLANE_MAP.md) 的维护源、roles→skills、两条执行路径；[GUIDANCE](../../project/CONTROL_PLANE_GUIDANCE.md) 的项目取舍、方法承接和修改方式 | 导航和设计理由，不是第二权威。二者仍有旧 wrapper 描述；遇到冲突查实际 method/code，不据旧说明恢复旧要求 |
+
+**B. 完整工作流的方法与消费者（source_sha）。**
+
+| 源 / 对应消费者 | 必读部分与要防止的误解 |
+| --- | --- |
+| [loop-dispatch](../../../.agents/skills/hmasd-loop-dispatch/SKILL.md)；`.codex/agents/hmasd-direction-manager.toml` | Procedure / Messages / Git and cleanup / Control revision handover；Root 集成而不逐步审批，native handle 不是模型自己造的 ID，发布不等于活会话采纳 |
+| [scientific-tools](../../../.agents/skills/hmasd-scientific-tools/SKILL.md)；[local-literature](../../../.agents/skills/hmasd-scientific-tools/references/local-literature.md) | Explore / Confirm / Comparators / Statistics / Cost and exposure / Tools；区分机械计算和科学选择，真实文献覆盖不能由文件数量或 synthetic registry 推定 |
+| [research-engineering](../../../.agents/skills/hmasd-research-engineering/SKILL.md)；[local-execution](../../../.agents/skills/hmasd-research-engineering/references/local-execution.md) | L0 / Checks and review / Execution / Stops；相关检查、必要 review、当前准入与冻结接口，独立任务不因局部问题全部停摆 |
+| [pro-research-prompt-author](../../../.agents/skills/hmasd-pro-research-prompt-author/SKILL.md)；[pro-reading-context](../../../.agents/skills/hmasd-pro-research-prompt-author/references/pro-reading-context.md) | Steps / Method context、Control-plane review profile、source precedence；来源选取是作者工作，版本校验可以机械化，不恢复 packet/registry |
+| [chatgpt-pro-transport](../../../.agents/skills/hmasd-chatgpt-pro-transport/SKILL.md)；[Agentify 接口说明](../../../.agents/skills/hmasd-chatgpt-pro-transport/references/agentify.md) | 单次 Send、unknown 的恢复、完整答案及 answer-only 写入；verifyExisting 不能脱离 sendAttempted 状态作为普遍“不发送”保证 |
+| [portfolio-task](../../../.agents/skills/hmasd-portfolio-task/SKILL.md) | owner-triggered Steps / Boundaries；Portfolio 不是每个对象完成后的自动回路，工具汇总证据不替 owner 改方向 |
+
+若要质疑某个角色的实际路由，进一步查 `source_sha` 的 `.codex/config.toml`、`.codex/agents/`、`.codex/hmasd-compute.toml`、`.codex/hmasd-transport.toml`、`CLAUDE.md` 和 `tools/publish_claude_control.py` 的受影响部分；不要求无关角色逐一审计。脚本/skill 都不能从配置文字证明实际模型 effort、权限隔离或会话采用。
+
+**C. 判定可行性和实际增量所需的代码/对象。**
+
+| 来源 | 重点核对，不必无差别通读整个历史脚本 |
+| --- | --- |
+| [hmasd_launch.py](../../../scripts/hmasd_launch.py)，source_sha | `_require_policy` / `_validate_source_local` / `_command_identity` / `_claim_key` / `launch`：整文件比较、全树干净、claim 作用域、握手后再检查和不确定效果持久化；哪些限制真可放宽、哪些只是搬了复杂度 |
+| [hmasd_admission.py](../../../scripts/hmasd_admission.py)，source_sha；[kernel tests](../../../tests/test_hmasd_launch.py) | `require_admission` / supervisor 与真实 OS exit、token 绑定、race/exit fixtures；合作式防误操作，不是同 UID 安全沙箱 |
+| [旧 hmasd_run.py](../../../scripts/hmasd_run.py)，source_sha；[其 tests](../../../tests/hmasd_run_test.py) | 仅对比 manifest、execute/reconcile、原生结果与不可盲重放的语义。旧路径/审批/时长规则不自动成为新入口需求 |
+| [cleanup_test_scratch.ps1](../../../scripts/cleanup_test_scratch.ps1)、[conftest](../../../tests/conftest.py)、[tests/AGENTS](../../../tests/AGENTS.md)，source_sha | 当前 producer 清理和遗留回收到底已有何种保护；草案的 metadata/锁/逐目标恢复是否值得新增，是否使维护变得更重 |
+| [summarize_runs.py](../../../.agents/skills/hmasd-scientific-tools/scripts/summarize_runs.py)、[publisher](../../../tools/publish_claude_control.py)，source_sha | 已可复用的计算与发布能力。前者只是描述统计、配对需调用者有依据；后者不能证明 live adoption |
+| [FSD B01 冻结卡](https://github.com/CartmanFatass/My-paper-code/blob/345b9474fb084fd2744072c79cb0e44f670af8c3/docs/research/candidates/flexible_skill_duration/FSD_MATCHED_INFORMATION_BASELINE_B01_PROSPECTIVE_CARD_20260916.md)，§§2–6、8 | 实际 acceptance case：六个 selection fits、固定 tie order、selection incomplete 不追加、十个 confirmation fits与固定 reducer。审计是否正确减少手工步骤，不重新优化这项实验或修改 frozen budget |
+
+**D. ECC 和不可直接访问的本地事实。**
+
+ECC 固定参考版本：`affaan-m/ECC@dd6ee538aee0f548d4a6b520118f875431fd749e`。本地路径只是作者曾读过的位置，你无需也不能假装能读取作者的 `C:/Projects/`。
+
+| 固定版本来源 | 本设计借鉴的有限内容 |
+| --- | --- |
+| [install-lifecycle.js](https://github.com/affaan-m/ECC/blob/dd6ee538aee0f548d4a6b520118f875431fd749e/scripts/lib/install-lifecycle.js) | missing / drifted / unverified 等可解释诊断；不是移植整个 installer |
+| [replay.js](https://github.com/affaan-m/ECC/blob/dd6ee538aee0f548d4a6b520118f875431fd749e/scripts/lib/eval-harness/replay.js)；[gate.js](https://github.com/affaan-m/ECC/blob/dd6ee538aee0f548d4a6b520118f875431fd749e/scripts/lib/eval-harness/gate.js) | fixture 参数/响应绑定、缺失不回退 live；ECC 本身也明确没有已验证 OS containment 时不能把 JS 拦截当隔离 |
+| [harness-adapter-compliance.js](https://github.com/affaan-m/ECC/blob/dd6ee538aee0f548d4a6b520118f875431fd749e/scripts/lib/harness-adapter-compliance.js) | 原生/适配/仅指令/参考的实现层次，而非把该表中各产品支持状态当成今日事实 |
+| [iterative-retrieval](https://github.com/affaan-m/ECC/blob/dd6ee538aee0f548d4a6b520118f875431fd749e/skills/iterative-retrieval/SKILL.md) | 按具体缺口补材料；不引入固定轮数和检索角色 |
+| [skill-stocktake](https://github.com/affaan-m/ECC/blob/dd6ee538aee0f548d4a6b520118f875431fd749e/skills/skill-stocktake/SKILL.md) | 内容合并/退役给出具体去向和理由；不引入定期盘点数据库 |
+| [mle-workflow](https://github.com/affaan-m/ECC/blob/dd6ee538aee0f548d4a6b520118f875431fd749e/skills/mle-workflow/SKILL.md)，Error Analysis Loop | 从失败条件产生可证伪假设；不改造成服务上线流程，不把事后切片当确认结果 |
+
+外部 ECC 无法访问时，可基于本表和 §10 审计 HMASD 提案，但对 ECC 原实现的判断应降为未核实，不要求 owner先安装或迁移 ECC。全文和源码优先于作者摘要；允许指出借鉴其实没有增量。
+
+作者此前报告的验证与限制如下，**本轮没有重新运行，也没有把所有原始终端日志提交到此问题中**：
+
+- HMASD kernel 在 Windows Python 3.10 和 3.11 各 23 passed；FOLR/guard 29 passed；控制发布与对齐 21 passed；独立 review 修复了放行前重检、真实退出码、Windows HANDLE 类型和等号路径归一化问题。对应源码/测试在 source_sha 可见；不把这些计数当成对设计新增能力的验证。
+- 未完成真实研究启动或 Linux/WSL 端到端验证，未证明 live sessions 已采用，也未将历史 runner 全部迁移。当前 claim 只在同 node / Git common directory 内；外部 artifact 独立绑定仍是设计工作。
+- Agentify 是另一个本地工作树，基点 `9bb227557591187034c6df21f18c7b8bd3b28e80` 上存在未提交重构。作者叠加的 baseline 持久化/旧消息排除/重复请求修复曾报告 37 项针对性测试通过，但 `state.test.mjs` 仍有旧接口导入故障；未重启服务。该脏树和 repair-only patch不在本问题的 GitHub source_sha 中，不能引用基点冒充修复后源码。本审计可评价传输设计及 repo 内方法，若要判断该未发布实现必须明确证据缺口，不反向要求整个设计停住。
+- cleanup 脚本的 `8ba678352` 提交说明记录了语法与预览通过、删除验证被工具 policy 阻止；这只证明当次情况。不能由“脚本存在”推定删除能力获豁免，也不能由那次拒绝推定所有安全范围内清理永远不可用。
+
+### 希望审计真正解决的决定
+
+1. **完整性与减负：** 沿 §2.1 的完整闭环检查机器/LLM 分工有没有遗漏或放错位置。哪些本来可确定的工作仍让 LLM 重复判断？哪些判断被错误交给脚本？是否把一次查询/普通实现包装成更多必经步骤？
+2. **最小工具边界：** 已有 launcher、旧 run、publisher、conftest、统计 helper、Agentify 和原生 task/wait 应怎样复用？哪些拟增 helper值得实现，哪些应直接删掉？请对比“只补现有工具的少量缺口”这个更小替代，而非假定全部六项 ECC 借鉴都必需。
+3. **当前性与快照：** 执行已发布快照、作者继续修改、语义比较 pause/lead 的组合能否减少无关阻塞又保留真正依赖？考虑最终放行窗口、控制源不可达、动态导入/外部 artifact、环境身份；不要提出用陈旧缓存默认恢复。
+4. **请求/尝试与跨节点：** 当前 claim 与拟议请求键、输入摘要和尝试有什么冲突？丢 ack、supervisor 崩溃、PID 复用、同输入显式重跑、跨节点 dispatch unknown 如何恢复而不误去重或重复 fits？共享控制仓库是否变成过重的新服务？可建议先不做跨节点，但必须说明现有边界。
+5. **清理和安全：** producer 自清理、遗留目录回收、失败证据保留是否够简单且可验证？哪些检查属于必要保护，哪些元数据/锁可以直接复用？不要建议换语言或包装命令绕过平台拒绝。
+6. **科学与记录：** 固定 stage selection/reducer 可以自动执行到哪一步？fits 与不确定启动如何记事实？如何保护 NOTES/CLAIM/RESEARCH 和 Pro Answer 的实际 writer，而不恢复旧 registry/packet/ACK 流程？
+7. **成本与交付：** 请按减少真实重复劳动与实际错误的收益排序，而非功能数量。指出最小可独立交付的第一步、应推迟的部分和需要修改的具体设计段落；不要要求先完成全套框架才交付任何改善。
+
+请分别使用一次新探索、冻结 FSD B01、纯工程维护/测试清理三个场景走查。正常路径和一个关键失败/恢复路径都要覆盖；保持场景精简，不把它们变成新的常设验收表。你无需为审计运行实验、发送消息或访问 owner 私人目录。
+
+### 请求的回答
+
+先给总体判断与最强反对理由；随后按影响列出实质问题。每项说明：具体文件/节、可达触发条件、后果、最小修正，以及该修正如何避免增加无关步骤。区分已经由源码证实的问题、设计未决点和证据不可取得，不把三者混为 bug。
+
+再给一份精简的“保留 / 简化 / 推迟 / 删除”建议和最小实施顺序，标明可直接替换的关键段落建议及必要的针对性验证。若认为某一建议需要改变现行权限或科学语义，明确指出需要 owner 决定的事项；普通实现细节无需再造审批。无需给设计打分、建立新 registry 或生成第二份治理文本。
+
+最后列出你实际使用的关键来源、会限制结论的未读材料，以及 `MATERIAL_DISSENT: yes/no`（只是是否存在影响实施的实质异议，不是新的审批标签）。没有重大问题时直接说明，并保留实现与运行证据的限制。
+
+### 来源优先关系与交付方式
+
+本问题所述当前 owner 意图和现行宪章支配本审计；skills 是方法，MAP/GUIDANCE 是导航，§§1–13 是待质疑的提案。它们替代本对话中可能残留的旧控制面指令；冻结卡的科学输入保留其原义。不要用聊天记忆或当前 main 替代固定来源，也不要把历史 PRO_FINAL 当成当前 Pro 权限。
+
+推理读取实际发送消息指定的 source_sha。若有仓库写入能力，交付时获取指定 branch 上 target_path 的**最新文件与实际 blob SHA**，确认该 question 未变化、Answer 仍为空，仅向本问题末尾 `### Answer` 写入完整答案。保持设计正文、问题、其他所有字节不变；遇到重叠修改或已有答案停止写入并报告，不能用固定旧副本覆盖最新文件。
+
+写入成功请返回实际 answer commit 和目标路径；写入失败或无仓库访问权限时，在聊天返回完整答案及依据/限制，不只给 SHA、链接或短回执。仅缺可选写入能力不妨碍完成审计；关键设计/治理内容不可取得时，清楚限制结论或说明所缺内容，不编造已读。不要开 PR、修改代码/宪章、追加实验或提出自动重发。
+
+### Answer
