@@ -11,10 +11,12 @@ conditions are in "Execution and admission".
 
 ## L0 and the Implementer
 
-Before a code task the DM records a concise L0 scope in the current `NOTES.md` entry: deliverable;
+Before a direction code task the DM records a concise L0 scope in the current `NOTES.md` entry: deliverable;
 owned paths and entry points; semantics that must not change; checks; budget and stop. Add
 interface, state-flow or skeleton detail only where there is real risk. Read the nearest
 directory `AGENTS.md`.
+Owner-requested control-plane maintenance uses its existing task/design scope; do not create
+direction research records merely to perform that maintenance.
 
 The DM may implement directly or delegate a bounded task to the Implementer (Claude: Opus, high
 effort; Codex: Sol, high effort) with the scope note, the checkout and branch, and the entry.
@@ -117,8 +119,9 @@ The DM repairs and accepts; the reviewer decides neither science nor permission.
    Historical frozen launch interfaces stay at their original SHA; they are not silently migrated.
 3. Launch detached from the committed sha with the configured interpreter. The kernel returns
    a native JSON manifest; supervisor command acceptance is not child admission. Use a worktree or
-   source snapshot when necessary to keep active inputs unchanged while authoring continues. Record command,
-   node, handle, sha, cwd and output root in `NOTES.md`.
+   source snapshot when necessary to keep active inputs unchanged while authoring continues.
+   Link the manifest/operation reference from `NOTES.md` and explain the scientific context;
+   do not manually duplicate its command, node, native identities, SHA, cwd and output fields.
 4. Observe directly or delegate to a monitor/tracker when useful. On transfer, retain observation
    responsibility until the recipient adopts the accepted handle. Timeout or a lost connection is
    unknown, not terminal. Never launch a duplicate; reconcile the same handle.

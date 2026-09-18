@@ -747,3 +747,15 @@ ECC 实际使用的是 [install-lifecycle 的诊断分支][eccdoctor]、[replay]
 推迟跨节点协调、快照缓存回收、并发 scratch 回收、通用依赖发现和全能力诊断表。删除没有重复故障依据的薄测试 launcher、无目标批量删除、手抄机器字段和新 packet/registry/promote。文献与同一探索周期仍适用的 Pro 建议可复用；纯控制面维护不补建科研记录。
 
 本次只更新设计并保存审计响应，没有实施上述接口、重跑测试、改变科学权限或恢复研究。Claude／Remember 行为仍按 owner 要求留给 Claude；后续实际补丁只更新直接消费者，并按可执行行为风险完成相关检查与独立 review。
+
+### 2026-09-18 实施记录
+
+Owner 随后明确要求开始改动。本批实现 v1.4 的前两项及清理旁路：launcher 的只读 `status`、同请求恢复、可选 `--snapshot`；固定 `control_source`、相关控制字段比较和临近 grant 的本地重检。快照为保留的 Git linked worktree，操作状态仍在原 common directory，输出仍在调用方指定的 run 目录。显式重试、跨节点去重/自动转移、自动快照回收未实现；`status` 如实返回 `explicit_retry_available=false`。FOLR 外部配对 summary 现在必须提供 SHA-256，训练前保存校验过的字节，完成 fit 后才解释比较内容；原科学循环及随机数顺序未改。
+
+清理恢复改为默认预览、删除必选明确目标、逐目标报告、不存在幂等；修复 Windows 大小写别名可能绕过 tracked 检查的问题。测试新增 `--keep-scratch-on-failure`，在 teardown 前主动保留所需失败证据。直接方法及生成副本同步；没有修改 Claude 用户设置、Remember 或记忆行为。MAP 澄清 `verifyExisting` 仅在已确认既有操作 `sendAttempted=true` 时用于恢复观察，本批不修改 Agentify 或真实发送。
+
+独立工程审查发现并修复两项恢复/隔离问题：原输入移走导致请求 identity 改变、作者工作树删除 runner 仍阻塞 published snapshot。复审无剩余实质发现。无真实研究运行；Linux/WSL 端到端、活会话采纳与训练预算自动计量不由本批 Windows 夹具证明。FSD 对象级展开/selection/reducer 留在原科学实现任务，暂停未解除；Pro 通用 helper 没有因候选清单而额外建设。
+
+清理审查者自己的隔离夹具 `temp/scratch-review-lij0n4vj` 留有 Git 对象：原生精确路径清理被平台 policy 拒绝，已保留并停止该删除，没有换工具重试。其余测试使用自身 invocation scratch，不触及 owner 旧目录或其他写入者的 UAV 工作。
+
+验证：启动/快照组在系统 Python 与配置的 `hmasd-amd-cpu` Python 3.10 下分别 `40 passed`；FOLR 集成与 admission contract `31 passed`；scratch 生命周期 `17 passed`；控制发布/一致性 `21 passed`，合计 109 个不同测试。生成副本 `drift: 0`，diff 检查通过。检查对象是本分支改动，不能据此声称 main、远端服务或既有会话已经采用。

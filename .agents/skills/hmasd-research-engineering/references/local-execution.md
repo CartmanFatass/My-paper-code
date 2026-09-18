@@ -8,10 +8,17 @@ research or lift the owner's pause.
 
 ## Prepare and invoke
 
-Commit and publish the exact inputs; use a source worktree kept unchanged during execution.
+Commit and publish the exact inputs. `--snapshot` prepares a retained detached linked worktree
+from that SHA; author edits are excluded and may continue. Without that option, the supplied
+source worktree must remain clean and unchanged. Snapshot preparation shares the original Git
+common directory and claim store; it does not clone, evict, or clean old snapshots.
 Read the node, interpreter and canonical project location from `.codex/hmasd-compute.toml`.
 The live canonical checkout must have current `docs/research/RESEARCH.md` and compute config;
 a frozen source worktree cannot override the owner's current pause or assigned lead.
+`control_source.remote` and `control_source.ref` pin the authority independently of the
+canonical checkout's branch (currently origin / refs/heads/main). Relevant pause/state/lead
+must agree with the fresh published version; unrelated prose need not match. Preserve the
+assignment's expected lead in `--lead`; do not silently substitute a newly assigned lead.
 An explicitly resumed index uses `**Owner pause: lifted**`; missing, ambiguous and unfamiliar
 states fail closed. Only an owner-authorized update can change that state.
 
@@ -21,7 +28,7 @@ scientific argv. The runner's output argument must name the same directory as `-
 
 ```text
 <configured-python> scripts/hmasd_launch.py launch
-  --node <executing-node> --source-root <unchanged-source-checkout>
+  --node <executing-node> --source-root <author-checkout> --snapshot
   --direction <direction> --lead "<exact-current-lead>" --sha <full-sha>
   --output runs/<direction>/<fresh-tag>
   -- scripts/run_<object>.py --out runs/<direction>/<fresh-tag> <scientific-arguments>
@@ -35,13 +42,25 @@ Remote sparse checkouts must include the current compute config and research ind
 canonical repo; unavailable or stale policy is a refusal, never a reason to fall back to an
 old source snapshot. Synchronizing policy does not resume research.
 
+Snapshot output remains at the declared author-checkout run path; the returned manifest gives
+the actual execution cwd/source and stable operation reference. Relative code inputs refer to
+the snapshot. The migrated FOLR `--generic-summary` path remains caller-relative and requires
+`--generic-summary-sha256`; its bytes are verified and saved before training, then interpreted
+after the completed fit. Other consumers need their own declared external-input contract.
+Snapshot launch removes PYTHONPATH/PYTHONHOME/PYTHONUSERBASE and disables user site and bytecode
+writes. Configured site packages, editable dependencies and remaining numerical environment
+are still environment dependencies, not proven immutable by Git or isolated from the same UID.
+
 The kernel serializes admission through the child handshake. It rechecks policy and source,
 applies the existing actual-node memory-floor check immediately before release, and preserves
 a claim before uncertain external effects. Changing only the output tag cannot bypass that
 claim within the same node and Git common directory, including its linked worktrees.
 Independent clones and other nodes do not share that claim store; reconcile their accepted
-handles before moving execution. A lost acknowledgement, timeout or missing PID is unknown; inspect the same outputs
-and process identity rather than launching a replacement. A short-lived admission is
+handles before moving execution. A lost acknowledgement, timeout or missing PID is unknown.
+Ordinary replay of the same request returns the existing operation before new-effect gates;
+it never retries even a known spawn/preflight failure. Changed inputs at an existing output
+tag refuse with a mismatch. Explicit new attempts are not implemented; changing tags, deleting
+outputs or TTL expiry does not provide that capability. A short-lived admission is
 single-use and bound to the child, parent, interpreter, source, direction and exact argv.
 
 ## Runner integration and observation
@@ -63,9 +82,15 @@ Tests isolate the scientific loop with an explicit mocked admission; production 
 no test/bypass switch.
 
 Retain the manifest, preflight, stdout/stderr and `process-exit.json` in the run's output.
+Use `<configured-python> scripts/hmasd_launch.py status <operation_ref>` on the original
+executing node. A manifest path or original output directory is also accepted. This is read-only
+and works during a pause, dirty author edits or control-network failure; it never grants retry.
+The response separates admission, runner/supervisor identity, exit witness and basic artifact
+presence. Missing or conflicting evidence stays unknown; presence alone does not certify
+scientific completeness. A copied remote record does not establish a local process identity.
 The manifest's `process` identifies the detached supervisor; `runner_process` identifies the
-scientific child. Record both native identities and artifact paths in the existing NOTES.md
-entry and pass the same facts to any observer. The supervisor waits for the child's actual
+scientific child. Link this manifest/operation from the existing NOTES.md entry and pass the
+same reference to any observer, without retyping its fields. The supervisor waits for the child's actual
 OS exit before writing the terminal witness; it does not certify scientific success. Loss
 of the supervisor can prevent that write; preserve uncertainty rather than inventing an exit.
 Runner summaries, curves and complete scientific outputs remain required.

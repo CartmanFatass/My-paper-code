@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+from concurrent.futures import ThreadPoolExecutor
 import json
 import os
 from pathlib import Path
@@ -156,6 +157,10 @@ def launch_repo(tmp_path: Path) -> tuple[Path, Path, str]:
 status = "active"
 control_plane_node = "fixture"
 
+[control_source]
+remote = "origin"
+ref = "refs/heads/main"
+
 [nodes.fixture]
 role = "test"
 project_root = "{configured_root}"
@@ -202,6 +207,58 @@ def _wait_for(path: Path, timeout: float = 10.0) -> None:
             return
         time.sleep(0.02)
     raise AssertionError(f"timed out waiting for {path}")
+
+
+@pytest.mark.parametrize("equals_output", [False, True])
+def test_snapshot_excludes_author_edits_and_replays_original_operation(launch_repo, monkeypatch, equals_output):
+    source, _remote, sha = launch_repo
+    args = _arguments(source, sha, "snapshot")
+    args.snapshot = True
+    if equals_output:
+        args.runner_argv = [args.runner_argv[0], "--output=" + args.output]
+    if equals_output:
+        _git(source, 'rm', 'scripts/fixture_runner.py')
+    else:
+        (source / 'scripts/fixture_runner.py').write_text("raise RuntimeError('author edit must never execute')")
+    (source / 'untracked-input.py').write_text('not published')
+    monkeypatch.setenv('PYTHONPATH', str(source))
+    monkeypatch.setattr(hmasd_launch.hmasd_resource_preflight, 'capture_snapshot', lambda: dict(SAFE_SNAPSHOT))
+    manifest = hmasd_launch.launch(args)
+    snapshot = Path(manifest['source_root'])
+    assert snapshot != source
+    assert (snapshot / 'scripts/fixture_runner.py').read_text() == RUNNER
+    assert not (snapshot / 'untracked-input.py').exists()
+    assert Path(manifest['output_root']) == Path(args.output)
+    _wait_for(Path(args.output) / 'process-exit.json')
+    assert json.loads((Path(args.output) / 'summary.json').read_text())['sha'] == sha
+    before = _git(source, 'worktree', 'list', '--porcelain').stdout
+    repeated = hmasd_launch.launch(args)
+    assert repeated['operation_ref'] == manifest['operation_ref']
+    assert repeated['request_resolution'] == 'existing_operation'
+    assert _git(source, 'worktree', 'list', '--porcelain').stdout == before
+
+
+def test_recovery_identity_survives_external_input_removal(launch_repo, monkeypatch):
+    source, _remote, sha = launch_repo
+    args = _arguments(source, sha)
+    path = source / 'generic.json'
+    path.write_text('{}')
+    args.runner_argv += ['--generic-summary', 'generic.json', '--generic-summary-sha256', 'a' * 64]
+    probe = hmasd_launch._probe_launch_request(args, sha)
+    key = hmasd_launch._claim_key(args.direction, sha, ['fixture-python', *probe.identity_command_tail])
+    with hmasd_launch._claim_lock(probe.git_common_dir) as store:
+        claim = store / (key + '.json')
+        hmasd_launch._atomic_write_json(claim, {
+            'claim_key': key, 'direction': args.direction, 'sha': sha,
+            'output_root': args.output, 'identity_command': ['fixture-python', *probe.identity_command_tail],
+            'status': 'spawn_failed', 'acceptance': 'not_released',
+        })
+    path.rename(source / 'moved-generic.json')
+    monkeypatch.setattr(hmasd_launch, '_prepare_paths_and_config',
+                        lambda *_: pytest.fail('recovery must precede input/policy validation'))
+    recovered = hmasd_launch.launch(args)
+    assert recovered['operation_ref'] == str(claim)
+    assert recovered['request_resolution'] == 'existing_operation'
 
 
 @pytest.mark.parametrize("pause", ["in force", "unknown", ""])
@@ -256,7 +313,54 @@ def test_stale_lifted_control_is_refused_when_published_control_is_paused(
     _git(publisher, "commit", "-m", "pause")
     _git(publisher, "push", "origin", "main")
     _git(source, "fetch", "origin")
-    with pytest.raises(hmasd_launch.LaunchRefusal, match="differs from the fresh published"):
+    with pytest.raises(hmasd_launch.LaunchRefusal, match="fresh published control state"):
+        hmasd_launch._require_policy(source, "demo_direction", "Codex DM", "origin")
+
+
+def test_unrelated_local_research_prose_does_not_change_policy(
+    launch_repo: tuple[Path, Path, str]
+) -> None:
+    source, _remote, _sha = launch_repo
+    research = source / "docs" / "research" / "RESEARCH.md"
+    research.write_text(
+        research.read_text(encoding="utf-8") + "\nUnrelated local maintenance note.\n",
+        encoding="utf-8",
+    )
+    state, digest = hmasd_launch._require_policy(
+        source, "demo_direction", "Codex DM", "origin"
+    )
+    assert state == hmasd_launch.DirectionState(
+        direction="demo_direction", state="exploring", lead="Codex DM"
+    )
+    assert digest == hmasd_launch._policy_digest(state)
+
+
+def test_duplicate_active_direction_is_refused() -> None:
+    text = _research().replace(
+        "## Reserve",
+        "| `demo_direction` | Duplicate? | exploring | Codex DM | Duplicate. |\n\n## Reserve",
+    )
+    with pytest.raises(hmasd_launch.LaunchRefusal, match="exactly once"):
+        hmasd_launch.parse_research_state(text, "demo_direction")
+
+
+def test_switched_checkout_branch_cannot_replace_pinned_control_ref(
+    launch_repo: tuple[Path, Path, str], tmp_path: Path
+) -> None:
+    source, remote, _sha = launch_repo
+    _git(source, "checkout", "-b", "local-lifted-decoy")
+    publisher = tmp_path / "publisher-pinned"
+    _git(tmp_path, "clone", "-b", "main", str(remote), str(publisher))
+    _git(publisher, "config", "user.email", "fixture@example.invalid")
+    _git(publisher, "config", "user.name", "Fixture")
+    research = publisher / "docs" / "research" / "RESEARCH.md"
+    research.write_text(_research(pause="in force"), encoding="utf-8")
+    _git(publisher, "add", "docs/research/RESEARCH.md")
+    _git(publisher, "commit", "-m", "pause pinned main")
+    _git(publisher, "push", "origin", "main")
+    _git(source, "fetch", "origin")
+
+    with pytest.raises(hmasd_launch.LaunchRefusal, match="fresh published control state"):
         hmasd_launch._require_policy(source, "demo_direction", "Codex DM", "origin")
 
 
@@ -420,6 +524,45 @@ def test_memory_failure_never_releases_child(
     assert not (output / "summary.json").exists()
     assert json.loads((output / "launch-status.json").read_text())["status"] == "preflight_refused"
 
+    monkeypatch.setattr(
+        hmasd_launch,
+        "_prepare_paths_and_config",
+        lambda *_args, **_kwargs: (_ for _ in ()).throw(
+            AssertionError("existing operation reached new-effect gates")
+        ),
+    )
+    recovered = hmasd_launch.launch(args)
+    assert recovered["request_resolution"] == "existing_operation"
+    assert recovered["admission"]["claim_state"] == "preflight_refused"
+    assert recovered["explicit_retry_available"] is False
+
+
+def test_spawn_failure_replay_returns_original_operation(
+    launch_repo: tuple[Path, Path, str], monkeypatch: pytest.MonkeyPatch
+) -> None:
+    source, _remote, sha = launch_repo
+    args = _arguments(source, sha, "spawn-refused")
+
+    def refuse_spawn(*_args, **_kwargs):
+        raise OSError("fixture spawn refusal")
+
+    monkeypatch.setattr(hmasd_launch, "_spawn", refuse_spawn)
+    with pytest.raises(hmasd_launch.LaunchRefusal, match="cannot start admitted runner"):
+        hmasd_launch.launch(args)
+    monkeypatch.setattr(
+        hmasd_launch,
+        "_prepare_paths_and_config",
+        lambda *_args, **_kwargs: (_ for _ in ()).throw(
+            AssertionError("existing operation reached new-effect gates")
+        ),
+    )
+
+    recovered = hmasd_launch.launch(args)
+    assert recovered["request_resolution"] == "existing_operation"
+    assert recovered["admission"]["claim_state"] == "spawn_failed"
+    assert recovered["execution"]["state"] == "not_started"
+    assert recovered["explicit_retry_available"] is False
+
 
 def test_supervisor_records_actual_exit_after_atexit_changes_code(
     launch_repo: tuple[Path, Path, str], monkeypatch: pytest.MonkeyPatch
@@ -487,6 +630,35 @@ def test_pause_change_after_spawn_is_denied_before_preflight(
     assert not (Path(args.output) / "summary.json").exists()
 
 
+def test_pause_change_during_memory_assessment_is_denied_before_grant(
+    launch_repo: tuple[Path, Path, str], monkeypatch: pytest.MonkeyPatch
+) -> None:
+    source, _remote, sha = launch_repo
+    monkeypatch.setattr(
+        hmasd_launch.hmasd_resource_preflight,
+        "capture_snapshot",
+        lambda: SAFE_SNAPSHOT,
+    )
+    real_assess = hmasd_launch.hmasd_resource_preflight.assess_memory_floor
+
+    def assess_then_pause(snapshot):
+        result = real_assess(snapshot)
+        (source / "docs" / "research" / "RESEARCH.md").write_text(
+            _research(pause="in force"), encoding="utf-8"
+        )
+        return result
+
+    monkeypatch.setattr(
+        hmasd_launch.hmasd_resource_preflight,
+        "assess_memory_floor",
+        assess_then_pause,
+    )
+    args = _arguments(source, sha, "pause-final-window")
+    with pytest.raises(hmasd_launch.LaunchRefusal, match="control authority changed|pause"):
+        hmasd_launch.launch(args)
+    assert not (Path(args.output) / "summary.json").exists()
+
+
 def test_source_change_after_spawn_is_denied_before_preflight(
     launch_repo: tuple[Path, Path, str], monkeypatch: pytest.MonkeyPatch
 ) -> None:
@@ -524,13 +696,220 @@ def test_duplicate_claim_cannot_be_bypassed_with_new_output(
         lambda: SAFE_SNAPSHOT,
     )
     first = _arguments(source, sha, "first-output")
-    hmasd_launch.launch(first)
+    first_manifest = hmasd_launch.launch(first)
     _wait_for(Path(first.output) / "summary.json")
     second = _arguments(source, sha, "renamed-output")
-    with pytest.raises(hmasd_launch.LaunchRefusal, match="duplicate or uncertain") as caught:
-        hmasd_launch.launch(second)
-    assert caught.value.exit_code == 5
+    recovered = hmasd_launch.launch(second)
+    assert recovered["request_resolution"] == "existing_operation"
+    assert recovered["operation_ref"] == first_manifest["operation_ref"]
+    assert recovered["output_root"] == str(Path(first.output).resolve())
     assert not Path(second.output).exists()
+
+
+def test_replay_and_status_do_not_consult_current_policy_or_source(
+    launch_repo: tuple[Path, Path, str], monkeypatch: pytest.MonkeyPatch
+) -> None:
+    source, _remote, sha = launch_repo
+    monkeypatch.setattr(
+        hmasd_launch.hmasd_resource_preflight,
+        "capture_snapshot",
+        lambda: SAFE_SNAPSHOT,
+    )
+    args = _arguments(source, sha, "lost-response")
+    manifest = hmasd_launch.launch(args)
+    output = Path(args.output)
+    _wait_for(output / "process-exit.json")
+
+    (source / "docs" / "research" / "RESEARCH.md").write_text(
+        _research(pause="in force"), encoding="utf-8"
+    )
+    runner = source / "scripts" / "fixture_runner.py"
+    runner.write_text(runner.read_text(encoding="utf-8") + "\n# author edit\n", encoding="utf-8")
+    monkeypatch.setattr(
+        hmasd_launch,
+        "_prepare_paths_and_config",
+        lambda *_args, **_kwargs: (_ for _ in ()).throw(
+            AssertionError("existing operation reached new-effect gates")
+        ),
+    )
+
+    observed = hmasd_launch.status(output)
+    replayed = hmasd_launch.launch(args)
+    assert observed["execution"]["state"] == "exited"
+    assert observed["execution"]["exit_code"] == 0
+    assert observed["operation_ref"] == manifest["operation_ref"]
+    assert replayed["request_resolution"] == "existing_operation"
+    assert replayed["operation_ref"] == manifest["operation_ref"]
+    assert hmasd_launch.status(manifest["manifest_ref"])["operation_ref"] == manifest[
+        "operation_ref"
+    ]
+    assert hmasd_launch.status(manifest["operation_ref"])["manifest_ref"] == manifest[
+        "manifest_ref"
+    ]
+
+
+def test_same_output_with_changed_input_reports_the_difference(
+    launch_repo: tuple[Path, Path, str], monkeypatch: pytest.MonkeyPatch
+) -> None:
+    source, _remote, sha = launch_repo
+    monkeypatch.setattr(
+        hmasd_launch.hmasd_resource_preflight,
+        "capture_snapshot",
+        lambda: SAFE_SNAPSHOT,
+    )
+    args = _arguments(source, sha, "immutable-request")
+    hmasd_launch.launch(args)
+    _wait_for(Path(args.output) / "process-exit.json")
+    changed = _arguments(source, sha, "immutable-request")
+    changed.runner_argv.extend(["--seed", "2"])
+    with pytest.raises(hmasd_launch.LaunchRefusal, match="input mismatch.*runner_argv"):
+        hmasd_launch.launch(changed)
+
+
+def test_status_keeps_missing_or_mismatched_exit_uncertain(
+    launch_repo: tuple[Path, Path, str], monkeypatch: pytest.MonkeyPatch
+) -> None:
+    source, _remote, sha = launch_repo
+    monkeypatch.setattr(
+        hmasd_launch.hmasd_resource_preflight,
+        "capture_snapshot",
+        lambda: SAFE_SNAPSHOT,
+    )
+    args = _arguments(source, sha, "witness-validation")
+    manifest = hmasd_launch.launch(args)
+    output = Path(args.output)
+    witness_path = output / "process-exit.json"
+    _wait_for(witness_path)
+    witness = json.loads(witness_path.read_text(encoding="utf-8"))
+    witness["process_identity"] = {**witness["process_identity"], "pid": 999999}
+    witness_path.write_text(json.dumps(witness), encoding="utf-8")
+
+    mismatched = hmasd_launch.status(manifest["manifest_ref"])
+    assert mismatched["execution"]["state"] == "unknown"
+    assert mismatched["execution"]["exit_witness"]["state"] == "invalid"
+    assert "runner_identity" in mismatched["execution"]["exit_witness"]["mismatches"]
+    assert "exit_code" not in mismatched["execution"]
+
+    witness_path.unlink()
+    missing = hmasd_launch.status(manifest["operation_ref"])
+    assert missing["execution"]["state"] == "unknown"
+    assert missing["execution"]["exit_witness"]["state"] == "absent"
+    assert missing["execution"]["runner"]["state"] in {"absent", "not_running"}
+    assert "exit_code" not in missing["execution"]
+
+
+def test_status_follows_runner_when_supervisor_and_runner_diverge(
+    launch_repo: tuple[Path, Path, str], monkeypatch: pytest.MonkeyPatch
+) -> None:
+    source, _remote, sha = launch_repo
+    monkeypatch.setattr(
+        hmasd_launch.hmasd_resource_preflight,
+        "capture_snapshot",
+        lambda: SAFE_SNAPSHOT,
+    )
+    args = _arguments(source, sha, "divergent-processes")
+    manifest = hmasd_launch.launch(args)
+    output = Path(args.output)
+    _wait_for(output / "process-exit.json")
+    (output / "process-exit.json").unlink()
+    runner_identity = manifest["runner_process"]["identity"]
+
+    def observe(recorded):
+        if recorded == runner_identity:
+            return {"state": "running", "recorded_identity": dict(recorded)}
+        return {"state": "identity_mismatch", "recorded_identity": dict(recorded)}
+
+    monkeypatch.setattr(hmasd_launch, "_observe_native_identity", observe)
+    observed = hmasd_launch.status(manifest["manifest_ref"])
+    assert observed["execution"]["state"] == "running"
+    assert observed["execution"]["supervisor"]["state"] == "identity_mismatch"
+    assert observed["execution"]["runner"]["state"] == "running"
+
+
+def test_status_refuses_local_pid_probe_for_another_host_and_live_exit_conflict(
+    launch_repo: tuple[Path, Path, str], monkeypatch: pytest.MonkeyPatch
+) -> None:
+    source, _remote, sha = launch_repo
+    monkeypatch.setattr(
+        hmasd_launch.hmasd_resource_preflight,
+        "capture_snapshot",
+        lambda: SAFE_SNAPSHOT,
+    )
+    args = _arguments(source, sha, "host-bound")
+    manifest = hmasd_launch.launch(args)
+    output = Path(args.output)
+    _wait_for(output / "process-exit.json")
+    manifest_path = Path(manifest["manifest_ref"])
+    stored = json.loads(manifest_path.read_text(encoding="utf-8"))
+    stored["host_identity"] = "definitely-another-host"
+    manifest_path.write_text(json.dumps(stored), encoding="utf-8")
+
+    remote_observation = hmasd_launch.status(manifest_path)
+    assert remote_observation["execution"]["runner"]["state"] == "unavailable"
+    assert remote_observation["execution"]["state"] == "exited"
+
+    stored["host_identity"] = hmasd_launch.platform.node()
+    manifest_path.write_text(json.dumps(stored), encoding="utf-8")
+    monkeypatch.setattr(
+        hmasd_launch,
+        "_observe_native_identity",
+        lambda recorded: {"state": "running", "recorded_identity": dict(recorded)},
+    )
+    conflicted = hmasd_launch.status(manifest_path)
+    assert conflicted["execution"]["state"] == "unknown"
+    assert "exit_code" not in conflicted["execution"]
+    assert "live with exit witness" in conflicted["execution"]["conflict"]
+
+
+def test_status_exposes_claim_manifest_identity_conflict(
+    launch_repo: tuple[Path, Path, str], monkeypatch: pytest.MonkeyPatch
+) -> None:
+    source, _remote, sha = launch_repo
+    monkeypatch.setattr(
+        hmasd_launch.hmasd_resource_preflight,
+        "capture_snapshot",
+        lambda: SAFE_SNAPSHOT,
+    )
+    args = _arguments(source, sha, "record-conflict")
+    manifest = hmasd_launch.launch(args)
+    _wait_for(Path(args.output) / "process-exit.json")
+    claim_path = Path(manifest["operation_ref"])
+    claim = json.loads(claim_path.read_text(encoding="utf-8"))
+    claim["sha"] = "0" * 40
+    claim_path.write_text(json.dumps(claim), encoding="utf-8")
+
+    observed = hmasd_launch.status(manifest["manifest_ref"])
+    assert observed["record_consistency"] == {"state": "conflict", "mismatches": ["sha"]}
+    assert observed["admission"]["state"] == "unknown"
+    assert observed["execution"]["state"] == "unknown"
+    assert "exit_code" not in observed["execution"]
+
+
+def test_concurrent_identical_requests_spawn_once(
+    launch_repo: tuple[Path, Path, str], monkeypatch: pytest.MonkeyPatch
+) -> None:
+    source, _remote, sha = launch_repo
+    monkeypatch.setattr(
+        hmasd_launch.hmasd_resource_preflight,
+        "capture_snapshot",
+        lambda: SAFE_SNAPSHOT,
+    )
+    real_spawn = hmasd_launch._spawn
+    spawn_count = 0
+
+    def counted_spawn(*args, **kwargs):
+        nonlocal spawn_count
+        spawn_count += 1
+        return real_spawn(*args, **kwargs)
+
+    monkeypatch.setattr(hmasd_launch, "_spawn", counted_spawn)
+    first = _arguments(source, sha, "concurrent")
+    second = _arguments(source, sha, "concurrent")
+    with ThreadPoolExecutor(max_workers=2) as pool:
+        results = list(pool.map(hmasd_launch.launch, (first, second)))
+    assert spawn_count == 1
+    assert sum(result.get("request_resolution") == "existing_operation" for result in results) == 1
+    assert len({result["operation_ref"] for result in results}) == 1
 
 
 @pytest.mark.parametrize(

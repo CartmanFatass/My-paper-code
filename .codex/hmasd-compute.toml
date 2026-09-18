@@ -5,6 +5,10 @@ control_plane_node = "local_windows"
 default_result_node = "wsl_4070"
 fallback_policy = "reconcile_existing_process_preserve_frozen_semantics_admit_destination"
 
+[control_source]
+remote = "origin"
+ref = "refs/heads/main"
+
 [nodes.local_windows]
 role = "control_plane_and_optional_compute"
 project_root = "C:/Projects/HMASD"
