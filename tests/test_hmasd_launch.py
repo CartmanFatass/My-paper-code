@@ -1022,3 +1022,27 @@ def test_runner_admission_is_single_use(launch_repo: tuple[Path, Path, str]) -> 
         stdout, stderr = process.communicate(timeout=10)
     assert process.returncode == 0, (stdout, stderr)
     assert "single-use" in (output / "replay-refused.txt").read_text(encoding="utf-8")
+
+
+def test_configured_path_prefix_reaches_the_child_environment(monkeypatch) -> None:
+    monkeypatch.setenv("PATH", "/inherited/bin")
+    monkeypatch.setenv("PYTHONPATH", "/author/edits")
+    prefix = os.pathsep.join(["/node/venv/bin", "/node/local/bin"])
+
+    plain = hmasd_launch._child_environment({"path_prefix": prefix}, snapshot=False)
+    assert plain["PATH"] == prefix + os.pathsep + "/inherited/bin"
+    assert plain["PYTHONPATH"] == "/author/edits"
+
+    snapshot = hmasd_launch._child_environment({"path_prefix": prefix}, snapshot=True)
+    assert snapshot["PATH"] == prefix + os.pathsep + "/inherited/bin"
+    assert "PYTHONPATH" not in snapshot
+
+    assert hmasd_launch._child_environment({}, snapshot=False)["PATH"] == "/inherited/bin"
+    monkeypatch.delenv("PATH")
+    assert hmasd_launch._child_environment({"path_prefix": prefix}, snapshot=False)["PATH"] == prefix
+
+
+@pytest.mark.parametrize("value", ["", "   ", 7, ["/node/venv/bin"]])
+def test_malformed_path_prefix_is_refused(value) -> None:
+    with pytest.raises(hmasd_launch.LaunchRefusal, match="path_prefix"):
+        hmasd_launch._configured_path_prefix({"path_prefix": value})

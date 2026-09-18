@@ -211,6 +211,28 @@ def _configured_root(entry: Mapping[str, Any]) -> Path:
     return Path(raw).expanduser().resolve(strict=False)
 
 
+def _configured_path_prefix(entry: Mapping[str, Any]) -> str | None:
+    raw = entry.get("path_prefix")
+    if raw is None:
+        return None
+    if not isinstance(raw, str) or not raw.strip():
+        raise LaunchRefusal("configured path_prefix must be a non-empty string")
+    return raw
+
+
+def _child_environment(entry: Mapping[str, Any], *, snapshot: bool) -> dict[str, str]:
+    # A node's path_prefix names tools its runners need but the interpreter does not imply:
+    # torch.utils.cpp_extension finds ninja on PATH, not in sys.prefix. The launcher may be
+    # called from a shell that never exported it, and the failure would surface only in a
+    # detached child's stderr.log, so the kernel applies the configured value itself.
+    environment = hmasd_source_snapshot.environment() if snapshot else dict(os.environ)
+    prefix = _configured_path_prefix(entry)
+    if prefix is not None:
+        inherited = environment.get("PATH", "")
+        environment["PATH"] = prefix + os.pathsep + inherited if inherited else prefix
+    return environment
+
+
 def _locate_config(source_root: Path, common_root: Path | None) -> Path:
     # In a linked worktree the common worktree is the live control checkout.
     # Never let an exact-SHA source snapshot redirect control by supplying a
@@ -1485,6 +1507,7 @@ def _prepare_paths_and_config(args: argparse.Namespace) -> tuple[LaunchPaths, st
     python = Path(python_raw).expanduser().resolve(strict=True)
     if not python.is_file():
         raise LaunchRefusal(f"configured interpreter is not a file: {python}")
+    _configured_path_prefix(entry)
     return (
         LaunchPaths(
             source_root=source_root,
@@ -1515,7 +1538,7 @@ def launch(args: argparse.Namespace) -> Mapping[str, Any]:
             recovered["request_resolution"] = "existing_operation"
             return recovered
 
-    paths, node, _node_entry, python, runner_arguments = _prepare_paths_and_config(args)
+    paths, node, node_entry, python, runner_arguments = _prepare_paths_and_config(args)
     _require_policy(paths.control_root, args.direction, args.lead, args.remote)
     _validate_source(paths.source_root, sha, args.remote)
 
@@ -1614,7 +1637,7 @@ def launch(args: argparse.Namespace) -> Mapping[str, Any]:
                 "command_sha256": command_sha256,
                 "parent_pid": os.getpid(),
             }
-            environment = hmasd_source_snapshot.environment() if getattr(args, "snapshot", False) else dict(os.environ)
+            environment = _child_environment(node_entry, snapshot=getattr(args, "snapshot", False))
             environment[hmasd_admission.ENVIRONMENT_KEY] = json.dumps(
                 admission_spec, sort_keys=True, separators=(",", ":")
             )
