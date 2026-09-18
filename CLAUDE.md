@@ -9,9 +9,20 @@ observe directly. When useful it delegates a bounded task to `hmasd-implementer`
 The tracker observes one bounded window and returns facts; `hmasd-pro-transport`
 sends one committed Pro question and collects the answer; `hmasd-reviewer` reviews core changes.
 
-Interpreters: `C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe` (3.10, torch, pytest) and
-`C:/Users/fires/.conda/envs/hmasd-science-tools/python.exe` (3.11, analysis; also runs
-`tools/publish_claude_control.py`). Never install into either.
+Interpreters are two roles, and the file name depends on the host the session runs on.
+Scientific: 3.10 with torch and pytest. Control-plane: 3.11+ for `tomllib`, no torch, and it
+runs `tools/publish_claude_control.py`. Never install into any of them.
+
+| host | scientific | control-plane |
+|---|---|---|
+| Windows, `C:/Projects/HMASD` | `C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe` | `C:/Users/fires/.conda/envs/hmasd-science-tools/python.exe` |
+| WSL2 Ubuntu, `/home/fires/hmasd-main` | `/home/fires/.venvs/hmasd-linux-cpu/bin/python` | `/home/fires/.venvs/hmasd-linux-science-tools/bin/python` |
+
+A WSL session uses the Linux venvs. Never reach across `/mnt/c` for `python.exe`: that runs a
+Windows torch build against a Linux checkout and no record would show the run crossed hosts.
+On Linux put the venv's `bin` on `PATH` for anything that builds the native C++ geometry
+backend — `torch.utils.cpp_extension` finds `ninja` on `PATH`, not in `sys.prefix`. Each host
+keeps its own checkout: no `/mnt/c/Projects/HMASD`, no `\\wsl$\...` path, never a shared index.
 
 Shared methods live in `.agents/skills`; role bodies come from `.codex/agents` and the
 explicit adapters in `tools/publish_claude_control.py`. Claude agent frontmatter (including

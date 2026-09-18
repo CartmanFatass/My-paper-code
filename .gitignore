@@ -75,6 +75,9 @@ temp_collection_log/
 # Agent runtime state (agent definitions and settings are tracked; worktrees and locks are not)
 /.claude/worktrees/
 /.claude/*.lock
+# Per-machine Claude settings. On Windows a user-level ~/.config/git/ignore excludes this
+# already; a WSL clone has no such entry, so the rule belongs here where both hosts see it.
+.claude/settings.local.json
 /.remember/
 /.codex/runtime/
 

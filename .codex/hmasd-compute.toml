@@ -16,6 +16,25 @@ python = "C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe"
 task_supervisor = "powershell_start_process"
 result_memory_floor_gib = 4
 
+[nodes.local_linux]
+role = "control_plane_and_optional_compute"
+enabled = true
+project_root = "/home/fires/hmasd-main"
+python = "/home/fires/.venvs/hmasd-linux-cpu/bin/python"
+control_plane_python = "/home/fires/.venvs/hmasd-linux-science-tools/bin/python"
+# The native C++ geometry loader calls torch.utils.cpp_extension, which finds ninja on PATH
+# rather than in sys.prefix; ninja is installed inside the scientific venv.
+path_prefix = "/home/fires/.venvs/hmasd-linux-cpu/bin:/home/fires/.local/bin"
+run_shell = "bash -lc"
+task_supervisor = "posix_detached_child"
+host_identity = "Jacob"
+os = "Ubuntu 24.04 on WSL2"
+accelerator = "cpu"
+result_memory_floor_gib = 4
+# A separate clone, never a worktree or shared index across the OS boundary, and never
+# /mnt/c: both vendors document degraded I/O and broken file watching across that mount.
+shares_checkout_with_local_windows = false
+
 [nodes.wsl_4070]
 role = "primary_result_and_heavy_compute"
 enabled = true
