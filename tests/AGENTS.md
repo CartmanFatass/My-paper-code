@@ -85,6 +85,9 @@ Do not run it concurrently with test startup. It does not sweep experiment outpu
 whole temp tree, kill processes, change ACLs or install a scheduled service. On non-Windows
 hosts, normal pytest teardown still works; this recovery script is for Windows.
 A tool-policy rejection must still be reported; a script is not a permission bypass.
+Report the actual rejected invocation and its stated reason. A generic rejection alone does
+not establish a target-wide deletion ban; consult the engineering skill's Stops guidance to
+distinguish policy evidence, uncertain interpretation and a permitted safer implementation.
 The ReviewFixture mode only adds explicit single-directory recovery under the old
 `temp/scratch-review-*` layout; it retains all existing safety checks and never enumerates
 those directories for automatic deletion. It does not grant an exception to platform policy.

@@ -171,3 +171,14 @@ not invalidate a run. A terminated invocation remains terminated; adjustment doe
 A real scope, semantics, writer, resource or uncertain-effect conflict stops only the dependent
 action; report the evidence and the owner of the decision and continue independent work. Clean
 only your own verified scratch under `temp/`.
+
+Interpret a tool rejection at the scope supported by its actual return. Preserve the relevant
+command/action and quote the stated reason; distinguish that evidence from your inference.
+A bare `blocked by policy` establishes refusal of that invocation, not a permanent ban on the
+target, all implementations, or the user's objective. If the scope is unclear, say so and
+inspect the original return before repeating a broader prohibition. Consider a transparent,
+substantively safer implementation within existing authorization and submit it to normal tool
+review when permitted; neither scripts nor user authorization exempt it from actual policy.
+Do not disguise a prohibited action or repeat it through another tool. When new evidence
+contradicts your interpretation, correct the interpretation and resume the authorized work;
+do not convert your own conservative recommendation into a platform rule or a new approval gate.

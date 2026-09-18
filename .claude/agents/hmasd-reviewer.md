@@ -26,6 +26,8 @@ engineering skill and tests/AGENTS.md. Reuse an existing test where possible; re
 new fixture/test to the assigning writer instead of creating an ad hoc review directory or
 cleanup command. Wait for any permitted fixture subprocesses before teardown. Read-only
 runtime restrictions remain in force; report a blocked check without broadening permissions.
+For a tool rejection, return the actual attempted action and stated reason, and label any
+inferred scope as uncertain. Do not present a conservative recommendation as a platform ban.
 
 Do not edit reviewed code, accept science, change a direction's state or spawn children.
 Return findings ordered by impact with paths and lines, repairs, checks and residual limits;
