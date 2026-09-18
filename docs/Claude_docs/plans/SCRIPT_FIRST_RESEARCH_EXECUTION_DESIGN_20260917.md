@@ -1,5 +1,7 @@
 # LLM 研究协作的脚本与 skill 分工：设计草案 v1.3
 
+当前设计取舍见文末 `审计响应与收缩方案 v1.4`。以下 v1.3 正文与 Pro 问答保留为审计证据；相冲突的建设范围由 v1.4 收缩，不代表代码已经实现。
+
 日期：2026-09-17。Owner 请求的设计稿；尚未采纳、尚未实施，不是新的治理来源。
 研究暂停、现行宪章、冻结实验和现有运行行为保持不变。Remember、Claude 用户设置与记忆行为不在本次修改范围。
 
@@ -712,3 +714,36 @@ ECC 实际使用的是 [install-lifecycle 的诊断分支][eccdoctor]、[replay]
 [dmrole]: https://github.com/CartmanFatass/My-paper-code/blob/7c62035715b010dbab742469a433a1e9370a81e3/.codex/agents/hmasd-direction-manager.toml
 [readingcontext]: https://github.com/CartmanFatass/My-paper-code/blob/7c62035715b010dbab742469a433a1e9370a81e3/.agents/skills/hmasd-pro-research-prompt-author/references/pro-reading-context.md
 [publisher]: https://github.com/CartmanFatass/My-paper-code/blob/7c62035715b010dbab742469a433a1e9370a81e3/tools/publish_claude_control.py
+
+## 审计响应与收缩方案 v1.4
+
+本节回应独立审计提交 `c59a9d5c4723a4c7ce664c40bdd2c7a7421fe883`，属于 owner 所请求设计的修订。接受 `MATERIAL_DISSENT: yes`：原方案覆盖了全流程，但把可借鉴原则、必要修复和可选工具放进同一建设顺序，会增加维护负担。撤回“六项 ECC 分别完成验收”的齐套要求；§§10–12 的相关内容降为候选参考。保留上述原文与完整 Answer，便于检查异议及响应，不将 Pro 建议转成新审批要求。
+
+### 独立交付与停止边界
+
+1. **首先修复原操作查询与重复请求恢复。** 在现有 launcher 中提供只读 status，返回稳定操作引用、实际节点/source/manifest/output 路径和原生进程、退出、产物事实。查询不依赖研究恢复、作者目录干净或远端控制在线。普通重复 launch 返回原操作，不产生第二个子进程；改变输入报告差异。不能以换 tag、删除失败目录或 TTL 到期解锁。首项可以不提供显式新尝试，但必须明确这一能力尚缺失。覆盖丢响应、PID 重用、错配/缺失退出见证、supervisor 与 child 状态不同和并发重复请求。
+2. **随后隔离一个真实 consumer 的输入。** 使用普通 Git 准备已发布快照，固定独立于快照的操作状态位置与规范控制 ref；严格解析相关 pause/state/lead，保留调用上下文的 expected lead 断言。它是责任匹配检查，不是身份认证。作者无关编辑不得混入输入，也不应阻止观察。临近 grant 重检必要状态并保留 actual-node preflight；不承诺远端瞬时撤销。明确 cwd、导入路径、解释器及环境边界，同批绑定该 consumer 实际使用的外部文件，例如 FOLR generic summary；不能只移除 dirty 检查。
+3. **对象级计算随对象的原实现任务交付。** 明确列出的 fits 展开、FSD selection/reducer 和依赖输入核验属于 runner/对象代码；不新建通用科研编排器。冻结的六 selection + 十 confirmation fits、tie 顺序、缺失停止、端点与区间规则保持原义。每 fit 单独准入；记录真实训练边界，区分已知开始、已知训练前失败、开始与否未知，不能用进程 accepted 或零 updates 代替 fit 事实。这不启动 FSD 实现或实验，也不要求为 launcher 重跑历史 FOLR。
+
+首版绑定一个请求的执行节点及固定状态位置，不建设跨节点共享准入或自动 failover。请求、输入版本、attempt 和已有对象的 fit 槽位分别表达；代码修复对应关联的新请求，明确重试对应保留旧证据的新 attempt。live/unknown 不自动释放；没有对象契约时只声明实际 argv 去重范围，不声称识别任意程序的科学等价。未知状态仅阻塞依赖它的工作。
+
+### 可旁路的小修与 skill 分工
+
+| 机械工作 | 最小落点及 skill 用法 |
+| --- | --- |
+| 观察/恢复已有运行 | 调现有 launcher 的拟议 status/同请求查询；skill 说明如何使用返回事实，不再手工串读多个状态文件或重抄 manifest。 |
+| 测试 scratch | 保留 conftest 自清理。修现有恢复脚本：默认预览，删除必须指定目标，already absent 幂等，逐目标报告；保留链接、tracked、在用及归属不明内容。同步直接调用例子。 |
+| 失败诊断材料 | 由确有需要的测试在 teardown 前保存，或显式 keep-on-failure；不让 LLM 在删除后补救，也不要求所有失败建立档案。 |
+| Pro 局部写入核对 | 必要时抽取固定 source、唯一真实标题、最新 blob 和 answer-only diff 的机械检查；不发送、不选科学材料、不复制 Agentify 工作流。未知写入先回读。 |
+| 科学统计与阶段选择 | 通用 helper 只做其声明的描述统计；冻结 selection/reducer 使用对象自己的契约，由 DM 解释结论及适用范围。 |
+| Git 集成与方法维护 | 使用现有 Git/publisher，检查明确提交与实际消费者；不包装简单命令，不要求六个 skills 同步重写或每步 Root ACK。 |
+
+清理首版继续保守避开并发 pytest，不引入 janitor、进程树追踪或每目录生命周期系统。测试仅使用自建夹具；平台拒绝后保留并报告，不换语言或工具执行同一被拒动作。脚本的价值是收窄目标并稳定检查，不是 policy 豁免。
+
+### ECC 保留方式
+
+六项借鉴仍纳入设计，但按实际用途采用：已知故障序列加入对应修复的现有测试；诊断只覆盖当前动作需要的能力；能力层次、按缺失依赖检索、skill 合并去向在相关方法中局部澄清；错误分析只在相关失败条件下帮助提出可证伪假设。它们没有独立建设配额，也不是实验前必经步骤。无科学副作用的真实本地子进程夹具允许验证 OS 身份和退出；默认测试不触发真实研究、生产 Send 或其他生产外部效果。
+
+推迟跨节点协调、快照缓存回收、并发 scratch 回收、通用依赖发现和全能力诊断表。删除没有重复故障依据的薄测试 launcher、无目标批量删除、手抄机器字段和新 packet/registry/promote。文献与同一探索周期仍适用的 Pro 建议可复用；纯控制面维护不补建科研记录。
+
+本次只更新设计并保存审计响应，没有实施上述接口、重跑测试、改变科学权限或恢复研究。Claude／Remember 行为仍按 owner 要求留给 Claude；后续实际补丁只更新直接消费者，并按可执行行为风险完成相关检查与独立 review。
