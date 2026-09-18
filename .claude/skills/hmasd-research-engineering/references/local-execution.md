@@ -3,7 +3,7 @@
 New result-bearing Python entries use `scripts/hmasd_launch.py launch` on the actual
 executing node. It selects the configured interpreter, detaches the admitted process and
 returns a JSON manifest with native identity and output paths. Do not generate a per-run
-PowerShell wrapper or call the scientific runner directly. This method does not authorize
+PowerShell or shell wrapper or call the scientific runner directly. This method does not authorize
 research or lift the owner's pause.
 
 ## Prepare and invoke
@@ -35,7 +35,10 @@ scientific argv. The runner's output argument must name the same directory as `-
 ```
 
 On Windows invoke the configured Python directly: the kernel hides and detaches the child;
-there is no second `Start-Process` wrapper to maintain. On a remote node invoke the same
+there is no second `Start-Process` wrapper to maintain. On a Linux node (`local_linux`
+included) do the same: the kernel starts the child in its own session, so no `nohup` or
+`setsid` wrapper is needed, and it prepends the node's `path_prefix` to the child's `PATH`
+(the native C++ loader resolves `ninja` from there, not from the interpreter). On a remote node invoke the same
 kernel in the configured supervisor's command. Do not treat the supervisor accepting its
 command as scientific-run admission; retain the returned native manifest as well.
 Remote sparse checkouts must include the current compute config and research index in their

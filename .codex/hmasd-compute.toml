@@ -19,7 +19,7 @@ result_memory_floor_gib = 4
 [nodes.local_linux]
 role = "control_plane_and_optional_compute"
 enabled = true
-project_root = "/home/fires/hmasd-main"
+project_root = "/home/fires/hmasd-wsl"
 python = "/home/fires/.venvs/hmasd-linux-cpu/bin/python"
 control_plane_python = "/home/fires/.venvs/hmasd-linux-science-tools/bin/python"
 # The native C++ geometry loader calls torch.utils.cpp_extension, which finds ninja on PATH
