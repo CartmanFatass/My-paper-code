@@ -190,6 +190,11 @@ class Config(EnvConfig):
     low_sequence_batch_size = 32
     low_ppo_epochs = 15
     low_gae_lambda = 0.95
+    # Legacy reproduction only.  Before 2026-09-17 the low-level GAE collapsed
+    # `terminated or truncated` into one flag and zeroed the bootstrap for both, which
+    # biases value targets at every time-limit boundary.  Correct semantics are now the
+    # default; set this true only to reproduce a run recorded under the old arithmetic.
+    legacy_truncation_as_termination = False
     low_value_clip = 10.0
     low_value_loss_coef = 1.0
     low_max_grad_norm = 0.5

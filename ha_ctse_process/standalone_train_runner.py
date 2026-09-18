@@ -500,6 +500,12 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
                     rollout.low_critic_hxs.append(np.asarray(low_context["critic_hxs"], dtype=np.float32))
                     rollout.rewards.append(individual_rewards.copy())
                     rollout.dones.append(done)
+                    # Record *why* the episode ended, not only that it did. The low-level
+                    # GAE needs the distinction: a termination zeroes the bootstrap, a
+                    # truncation keeps it.
+                    rollout.terminated.append(bool(terminated))
+                    rollout.truncated.append(bool(truncated))
+                    rollout_row = len(rollout.dones) - 1
                     episode_rewards.append(float(np.mean(individual_rewards)))
 
                     total_steps += 1
@@ -513,6 +519,18 @@ def train_loop(config, args: argparse.Namespace, writer) -> tuple[StandaloneProc
                     observations[env_id] = next_obs
                     states[env_id] = info.get("next_state", states[env_id])
                     if done:
+                        if bool(truncated) and not bool(terminated):
+                            # Capture V(s') now: `observations[env_id]` still holds the
+                            # post-truncation observation and the agent still holds this
+                            # environment's recurrent critic state. Both are gone after
+                            # reset_one/reset_env_state below, and the end-of-pass
+                            # bootstrap_values would see the post-reset observation
+                            # instead, which belongs to the next episode.
+                            rollout.truncation_bootstrap_values[rollout_row] = (
+                                agent.low_bootstrap_value_for_env(
+                                    env_id, observations[env_id], states[env_id]
+                                )
+                            )
                         agent.segments.flush(env_id, reason="episode")
                         observations[env_id], info = collector.reset_one(env_id)
                         states[env_id] = info.get("state")

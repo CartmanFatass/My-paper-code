@@ -358,4 +358,16 @@ class Rollout:
     low_critic_hxs: list[np.ndarray] = field(default_factory=list)
     rewards: list[np.ndarray] = field(default_factory=list)
     dones: list[bool] = field(default_factory=list)
+    # `dones` stays the collapsed `terminated or truncated` flag every existing consumer
+    # reads, including the recurrent reset masks in `_low_sequence_chunks`, where either
+    # kind of boundary genuinely breaks the recurrence.  The two flags below record *why*
+    # the boundary happened, which the low-level GAE needs: a termination zeroes the
+    # bootstrap, a truncation must keep it.
+    terminated: list[bool] = field(default_factory=list)
+    truncated: list[bool] = field(default_factory=list)
     bootstrap_values: dict[int, np.ndarray] = field(default_factory=dict)
+    # V(s') at a truncation, keyed by row index into the flat lists above (not by env id,
+    # because a truncation is a specific row and an env can truncate mid-rollout).  It is
+    # captured before the environment is reset, so it is the value of the post-truncation
+    # observation rather than of the post-reset one.
+    truncation_bootstrap_values: dict[int, np.ndarray] = field(default_factory=dict)

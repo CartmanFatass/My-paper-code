@@ -24,6 +24,14 @@ Rules that carry scientific meaning:
 - The `subproc` collector runs only environment `reset/step` in workers; inference, rollout
   storage, segment closure and PPO/process updates stay in the main process. That is what keeps
   the algorithm on-policy. Do not move update work into workers.
+- Episode boundaries are two different facts. `terminated` zeroes the low-level GAE bootstrap
+  and cuts the recursion; `truncated` cuts the recursion but keeps V(s') of the
+  post-truncation observation, captured by the collector before the reset. `rollout.dones`
+  stays the collapsed flag every other consumer reads, including the recurrent reset masks.
+  The legacy relay environments only ever truncate, so collapsing the two biases their value
+  targets; that is what `legacy_truncation_as_termination` reproduces and it must stay off by
+  default. Changing this is a semantic change
+  (`docs/Claude_docs/changes/2026-09-17-truncation-bootstrap-gae-fix.md`).
 - Checkpointing has two owners: `checkpoint_io.py` on the standard route;
   `variable_roster_event_checkpoint.py` for event and variable-roster payloads, called directly by
   `event_process_runner.py` and `standalone_variable_roster_runner.py`. Changing either format is

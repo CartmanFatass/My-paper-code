@@ -503,6 +503,9 @@ class StandaloneProcessAgent(
             self.low_actor_condition_on_team_code = False
         self.use_low_value_norm = bool(getattr(config, "use_low_value_norm", True))
         self.low_gae_lambda = float(getattr(config, "low_gae_lambda", getattr(config, "gae_lambda", 0.95)))
+        self.legacy_truncation_as_termination = bool(
+            getattr(config, "legacy_truncation_as_termination", False)
+        )
         self.low_value_loss_coef = float(getattr(config, "low_value_loss_coef", getattr(config, "value_loss_coef", 1.0)))
         self.low_value_clip = float(getattr(config, "low_value_clip", getattr(config, "value_clip", 0.0)))
         self.low_max_grad_norm = float(getattr(config, "low_max_grad_norm", getattr(config, "max_grad_norm", 0.5)))
@@ -1265,6 +1268,32 @@ class StandaloneProcessAgent(
             env_id: values_np[env_id].copy()
             for env_id in range(self.num_envs)
         }
+
+    def low_bootstrap_value_for_env(self, env_id: int, obs, state) -> np.ndarray:
+        """V(s') for one environment at a truncation, anywhere inside a rollout.
+
+        ``low_bootstrap_values`` answers the same question for every environment at the
+        end of a collection pass.  A truncation can happen at any row, and the value it
+        needs is of the observation that *followed* the truncation, before the collector
+        resets the environment.  So this must be called while the agent still holds that
+        environment's recurrent critic state and active skill - that is, before
+        ``reset_env_state(env_id)`` clears them.
+
+        Implemented by delegating at full width and keeping one row.  A truncation happens
+        once per episode, so the discarded no-grad rows cost nothing measurable, and the
+        batched path stays the single definition of this value.
+        """
+
+        index = int(env_id)
+        if not 0 <= index < self.num_envs:
+            raise ValueError(
+                f"env_id {index} is out of range for num_envs={self.num_envs}"
+            )
+        # Every slot gets the target row's inputs so the shapes are right; only the
+        # target environment's own critic state and skill influence the row we keep.
+        observations = [obs] * self.num_envs
+        states = [state] * self.num_envs
+        return self.low_bootstrap_values(observations, states)[index].copy()
 
     def _fit_vector(self, value, dim: int) -> np.ndarray:
         arr = np.asarray(value, dtype=np.float32).reshape(-1)

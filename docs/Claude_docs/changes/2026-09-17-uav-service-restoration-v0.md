@@ -17,7 +17,7 @@ read in full from `docs/Claude_docs/plans/UAV_Service_Restoration_English_Packag
 | `LEGACY_NONREGRESSION_VERIFIED` | yes — both scenario fingerprints identical; no tracked file changed except `.gitattributes` |
 | `DATA_NOT_VALIDATED` | yes — no real Telecom Italia Milan data is present on this machine |
 | `ROLLOUT_ADAPTER_VERIFIED` | yes — the unmodified shared adapter accepts the environment |
-| `TRAINER_INTEGRATION_PENDING` | yes — truncation-bootstrap blocker, not patched; **pre-existing and affecting the legacy relay environments too**, see below |
+| `TRAINER_INTEGRATION_PENDING` | **resolved 2026-09-17** — the truncation-bootstrap defect was fixed globally in the shared trainer at the owner's instruction; see `2026-09-17-truncation-bootstrap-gae-fix.md` |
 | `FORMAL_TRAINING_NOT_RUN` | yes — 0 training fits, 0 optimizer updates |
 
 The owner's research pause was not touched: this is engineering work, no direction was
@@ -298,10 +298,20 @@ Diagnostic provenance: every number in this report is `fixture_based`. Each roll
 carries `episode.provenance` and `episode.is_real_activity_data` so this cannot be lost
 downstream.
 
-## Blocker: trainer integration
+## Blocker: trainer integration — resolved
 
-**Not patched, by instruction.** Correct integration would require changing shared training
-semantics, so the independent environment is complete and the boundary is reported instead.
+**Status: fixed on 2026-09-17**, after this report was first written. The owner reviewed the
+finding below and directed that the correct semantics become the default for all future
+training. The fix, its tests and a before/after measurement on two real legacy scenarios are
+recorded in `2026-09-17-truncation-bootstrap-gae-fix.md`.
+
+The original finding is kept below unchanged, because it is the reasoning that produced the
+fix and it states why the environment was left with correct truncation semantics rather than
+bent to match the trainer.
+
+*As reported at the time:* not patched, by instruction. Correct integration would require
+changing shared training semantics, so the independent environment is complete and the
+boundary is reported instead.
 
 Where: `ha_ctse_process/standalone_train_runner.py:453-456`
 
@@ -408,9 +418,11 @@ reasons, so a truncation takes the zeroing branch.
    cover only the *environment* side of the boundary; they say nothing about GAE and would
    not catch this either way.
 
-Until that is decided by whoever owns shared training semantics, the supported use of this
-environment is forward-only: `smoke.py`, `evaluate_baselines.py`, and the diagnostic
-controllers. That is what was run here.
+*What was decided:* the owner chose the second option - fix outright, with the impact
+recorded. The corrected semantics are now the default, mid-rollout truncation is handled,
+and `legacy_truncation_as_termination` reproduces the old arithmetic for a historical run.
+The forward-only results in this report were produced before that fix and are unaffected by
+it: they take no optimizer step, so no GAE runs in any of them.
 
 ## Budget
 

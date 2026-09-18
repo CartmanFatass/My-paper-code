@@ -281,6 +281,15 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--switch_penalty_beta", type=float, default=None)
     parser.add_argument("--opt_cd_coef", type=float, default=None)
     parser.add_argument("--opt_cmi_coef", type=float, default=None)
+    parser.add_argument(
+        "--legacy_truncation_as_termination",
+        action="store_true",
+        help=(
+            "Reproduce a pre-2026-09-17 run: collapse truncation into termination in the "
+            "low-level GAE, zeroing the bootstrap at every time limit. Biases value "
+            "targets; use only to reproduce a recorded historical result."
+        ),
+    )
     parser.add_argument("--disable_process_reward", action="store_true")
     parser.add_argument("--disable_process_posterior_mi", action="store_true")
     parser.add_argument("--disable_residual_process_posterior", action="store_true")
@@ -562,6 +571,8 @@ def apply_standalone_overrides(config, args: argparse.Namespace) -> None:
         value = int(getattr(args, name))
         if value > 0:
             setattr(config, name, value)
+    if args.legacy_truncation_as_termination:
+        config.legacy_truncation_as_termination = True
     if args.disable_process_reward:
         config.use_process_reward_for_discoverer = False
     if args.disable_process_posterior_mi:

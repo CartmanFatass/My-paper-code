@@ -321,7 +321,13 @@ construct it explicitly.
 
 ### Trainer integration
 
-**Open blocker.** `standalone_train_runner.py:456` collapses `terminated or truncated` into
+**Resolved 2026-09-17.** The defect described below was fixed globally in the shared
+trainer: correct semantics are now the default, mid-rollout truncation is handled, and
+`legacy_truncation_as_termination` reproduces the old arithmetic for a historical run. See
+`docs/Claude_docs/changes/2026-09-17-truncation-bootstrap-gae-fix.md`. The description is
+kept because it explains why this environment reports truncation rather than termination.
+
+*The defect, as found.* `standalone_train_runner.py:456` collapses `terminated or truncated` into
 one `done` flag, and `standalone_low_update.py:140-142` then sets
 `next_nonterminal = 0.0` and discards the bootstrap value. For a `continuing` task that is
 wrong: a time-limit truncation is not the end of the world, so dropping the bootstrap biases
@@ -333,11 +339,8 @@ also end only by truncation (`is_terminated = False` in `belief_map.py:1855`,
 same zeroed-bootstrap branch. Because of that, a correct fix changes legacy training
 numerics by construction and cannot be guarded by an identity test.
 
-The environment is left as it is — correct truncation semantics — and no legacy training
-file was modified. Running this environment through the standalone trainer as it stands
-would fit on biased value targets. The minimal patch is to carry `truncated` separately and
-bootstrap on it; that is a change to shared training semantics and is not made here. See
-`docs/Claude_docs/changes/2026-09-17-uav-service-restoration-v0.md` for the two options.
+The environment was left as it is - correct truncation semantics - and the trainer was
+brought to meet it rather than the reverse.
 
 ## Not implemented in v0
 

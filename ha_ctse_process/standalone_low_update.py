@@ -110,10 +110,85 @@ class StandaloneLowUpdateMixin:
             "low_team_value_error_abs_std": team_value_error["std"],
         }
 
+    def _boundary_flags(
+        self, rollout: standalone_segments.Rollout, dones: np.ndarray
+    ) -> tuple[np.ndarray, np.ndarray]:
+        """Split the collapsed ``dones`` flag into termination and truncation.
+
+        A terminal state really has no future, so its bootstrap is zero.  A truncation is
+        a time limit imposed from outside the environment: the state still has future
+        value, so the bootstrap must be kept even though credit must not flow across the
+        boundary.  Collapsing the two is only correct when every boundary is a genuine
+        termination.
+
+        Returns two disjoint masks.  When both flags are set on the same row, termination
+        wins: a real terminal state is not made non-terminal by also hitting a limit.
+        """
+
+        terminated_raw = getattr(rollout, "terminated", None)
+        truncated_raw = getattr(rollout, "truncated", None)
+        resolved = (
+            terminated_raw is not None
+            and truncated_raw is not None
+            and len(terminated_raw) == int(dones.size)
+            and len(truncated_raw) == int(dones.size)
+        )
+        if not resolved or bool(getattr(self, "legacy_truncation_as_termination", False)):
+            # Collapsed arithmetic: every boundary is treated as a real terminal state.
+            # This is the pre-2026-09-17 behaviour, reachable two ways - deliberately via
+            # `legacy_truncation_as_termination` to reproduce a historical run, and as the
+            # fallback for a caller that supplies only `dones`, where the two reasons
+            # genuinely cannot be told apart.
+            return dones.copy(), np.zeros_like(dones)
+
+        terminated = np.asarray(terminated_raw, dtype=np.bool_)
+        truncated = np.asarray(truncated_raw, dtype=np.bool_) & ~terminated
+        if not np.array_equal(terminated | truncated, dones):
+            raise ValueError(
+                "rollout terminated/truncated flags disagree with dones; the advantages "
+                "would silently use a different set of episode boundaries than the "
+                "recurrent reset masks. Fix the collector rather than proceeding."
+            )
+        return terminated, truncated
+
+    def _truncation_bootstrap(
+        self,
+        stored: dict[int, np.ndarray],
+        row_index: int,
+        n_agents_zero: np.ndarray,
+    ) -> np.ndarray:
+        """V(s') for a truncated row, from the value the collector captured pre-reset.
+
+        There is deliberately no fallback to ``bootstrap_values[env_id]``: that value is
+        read after the collection loop, by which time a truncated environment has already
+        been reset, so it is the value of the *post-reset* observation and not of the one
+        that followed the truncation.  Using it would be a quiet off-by-one-episode error,
+        so a missing entry is an error instead.
+        """
+
+        value = stored.get(int(row_index))
+        if value is None:
+            raise ValueError(
+                f"row {int(row_index)} is flagged truncated but carries no "
+                "truncation bootstrap value. The collector must record V(s') for the "
+                "post-truncation observation before resetting the environment; see "
+                "StandaloneProcessAgent.low_bootstrap_value_for_env."
+            )
+        fitted = np.asarray(value, dtype=np.float32).reshape(-1)
+        if fitted.size == n_agents_zero.size:
+            return fitted
+        padded = np.zeros_like(n_agents_zero)
+        n = min(padded.size, fitted.size)
+        if n > 0:
+            padded[:n] = fitted[:n]
+        return padded
+
     def _low_returns(self, rollout: standalone_segments.Rollout) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
         rewards = np.asarray(rollout.rewards, dtype=np.float32)
         values = np.asarray(rollout.values, dtype=np.float32)
         dones = np.asarray(rollout.dones, dtype=np.bool_)
+        terminated, truncated = self._boundary_flags(rollout, dones)
+        truncation_bootstrap = getattr(rollout, "truncation_bootstrap_values", {}) or {}
         env_ids = np.asarray(
             rollout.env_ids if rollout.env_ids else [0 for _ in range(len(rewards))],
             dtype=np.int64,
@@ -137,17 +212,31 @@ class StandaloneLowUpdateMixin:
                 final_bootstrap = fitted
             for pos in range(indices.size - 1, -1, -1):
                 idx = int(indices[pos])
-                if bool(dones[idx]):
+                # Two independent coefficients, because an episode boundary does two
+                # separable things.  `bootstrap_mask` decides whether the next state has
+                # any value at all; `recursion_mask` decides whether advantage credit
+                # flows backwards across the boundary.  A termination zeroes both; a
+                # truncation zeroes only the recursion.
+                if bool(terminated[idx]):
                     next_value = default_bootstrap
-                    next_nonterminal = 0.0
+                    bootstrap_mask = 0.0
+                    recursion_mask = 0.0
+                elif bool(truncated[idx]):
+                    next_value = self._truncation_bootstrap(
+                        truncation_bootstrap, idx, default_bootstrap
+                    )
+                    bootstrap_mask = 1.0
+                    recursion_mask = 0.0
                 elif pos + 1 < indices.size:
                     next_value = values[int(indices[pos + 1])]
-                    next_nonterminal = 1.0
+                    bootstrap_mask = 1.0
+                    recursion_mask = 1.0
                 else:
                     next_value = final_bootstrap
-                    next_nonterminal = 1.0
-                delta = rewards[idx] + self.gamma * next_value * next_nonterminal - values[idx]
-                last_gae = delta + self.gamma * self.low_gae_lambda * next_nonterminal * last_gae
+                    bootstrap_mask = 1.0
+                    recursion_mask = 1.0
+                delta = rewards[idx] + self.gamma * next_value * bootstrap_mask - values[idx]
+                last_gae = delta + self.gamma * self.low_gae_lambda * recursion_mask * last_gae
                 advantages[idx] = last_gae
                 returns[idx] = advantages[idx] + values[idx]
         finite = np.isfinite(advantages)

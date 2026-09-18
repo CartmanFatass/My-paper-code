@@ -208,6 +208,9 @@ ALGORITHM_MANIFEST_FIELDS = (
 
 TRAINING_MANIFEST_FIELDS = (
     "gamma",
+    # Which GAE boundary semantics a run used. Recorded because it changes value targets:
+    # false is the correct default, true reproduces the pre-2026-09-17 collapsed flag.
+    "legacy_truncation_as_termination",
     "clip_epsilon",
     "low_clip_epsilon",
     "high_entropy_coef",
