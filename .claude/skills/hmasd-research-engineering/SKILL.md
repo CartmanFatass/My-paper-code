@@ -58,6 +58,15 @@ result stays recoverable, and its required outputs are preserved before scratch 
 - **Tests**: use focused checks sufficient for the changed behavior and risk. Do not cap their
   duration or count; report concrete coverage gaps and actual costs. Reuse unchanged evidence
   instead of repeating smoke checks solely because another launch or slice begins.
+  Review reproductions that create files use the same pytest lifecycle: `tmp_path` or
+  `tmp_path_factory` owns fixture repositories, copies and subprocess outputs under
+  `temp/tests/<invocation>/`. Do not create standalone `temp/scratch-review-*` directories or
+  hand-write their teardown commands. Use `--keep-scratch-on-failure` when diagnostics must
+  survive; wait for fixture subprocesses before teardown. The exact recovery command and
+  interpreter choices are in [tests/AGENTS.md](../../../tests/AGENTS.md).
+  A read-only reviewer can run existing checks when its runtime permits their scratch writes;
+  when a new test is needed, return the minimal reproduction to the assigning writer to add
+  to the relevant tests. This does not expand reviewer source-write or deletion permissions.
 - **Staging**: only committed source and declared artifacts at their recorded digest reach the
   node; never dirty source. Currentness is the byte content of the declared paths, not the
   commit id, so an unrelated commit does not refuse a run.

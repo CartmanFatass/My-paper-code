@@ -21,6 +21,12 @@ identity and external effects. Thin bindings do not excuse semantic risk. No unr
 exactness, seed quota or launch gate. A finding names direct evidence, the reachable failure
 and its impact, not hypothetical impossible conditions.
 
+File-producing reproductions use the existing pytest scratch lifecycle described in the
+engineering skill and tests/AGENTS.md. Reuse an existing test where possible; return a needed
+new fixture/test to the assigning writer instead of creating an ad hoc review directory or
+cleanup command. Wait for any permitted fixture subprocesses before teardown. Read-only
+runtime restrictions remain in force; report a blocked check without broadening permissions.
+
 Do not edit reviewed code, accept science, change a direction's state or spawn children.
 Return findings ordered by impact with paths and lines, repairs, checks and residual limits;
 state explicitly when no material finding remains. The assigning DM or Root fixes and accepts.

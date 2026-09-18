@@ -45,6 +45,21 @@ collection diagnostics must survive teardown; the invocation reports its retaine
 Success still cleans up. Tests may instead save selected diagnostics outside scratch before
 teardown; do not treat temporary output as the only scientific evidence.
 
+Review reproductions use this same lifecycle, including temporary Git repositories and copied
+read-only fixtures. Put all generated files below `tmp_path` / `tmp_path_factory`, and wait
+for fixture subprocesses before the test returns. Reuse an existing regression when it covers
+the question; an assigning writer adds a needed new reproduction to the relevant test file.
+A read-only reviewer does not create a standalone `temp/scratch-review-*` directory or edit
+test sources. Existing checks run only where the runtime permits their scratch writes.
+For example, the tracked-file case-alias regression can be run directly:
+
+```powershell
+python -m pytest -q tests/test_scratch_lifecycle.py -k mixed_case --keep-scratch-on-failure
+```
+
+Normal teardown is already the cleanup entrypoint. Use the recovery script below only for
+known owned leftovers; do not widen its accepted paths to absorb an ad hoc review directory.
+
 A hard process kill or machine crash cannot run teardown. At the end of test work, after
 all pytest processes have exited, use the fixed recovery command for any leftovers:
 
