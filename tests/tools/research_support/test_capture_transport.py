@@ -30,6 +30,7 @@ if _REPO_ROOT in sys.path:
     sys.path.remove(_REPO_ROOT)
 sys.path.insert(0, _REPO_ROOT)
 
+from tools.research_support.capture import transport  # noqa: E402
 from tools.research_support.capture.transport import (  # noqa: E402
     BoundedQueueSink,
     CompositeSink,
@@ -448,6 +449,24 @@ def test_breaker_opens_on_repeated_slow_captures() -> None:
 
 
 def test_breaker_throttles_its_diagnostic_but_still_counts_the_trip() -> None:
+    breaker = OverloadBreaker(failure_threshold=1, diagnostic_interval_s=3600.0)
+    assert breaker.record(ok=False, latency_s=0.0) is not None
+    assert breaker.record(ok=False, latency_s=0.0) is None, "one diagnostic per interval"
+    assert breaker.trips == 2
+
+
+def test_breaker_emits_its_first_diagnostic_on_a_host_whose_monotonic_clock_is_young(
+    monkeypatch,
+) -> None:
+    """A young monotonic clock must not look like "a diagnostic was already emitted".
+
+    ``time.monotonic()`` is uptime-based, so it is a small number on a freshly started
+    WSL2 VM and within the first minute after a Windows reboot. A zero-initialised
+    "last diagnostic" timestamp silently swallowed the very first suspension notice
+    under exactly those conditions, which is the one notice an operator needs.
+    """
+
+    monkeypatch.setattr(transport.time, "monotonic", lambda: 4.0)
     breaker = OverloadBreaker(failure_threshold=1, diagnostic_interval_s=3600.0)
     assert breaker.record(ok=False, latency_s=0.0) is not None
     assert breaker.record(ok=False, latency_s=0.0) is None, "one diagnostic per interval"

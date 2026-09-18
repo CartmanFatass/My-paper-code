@@ -461,7 +461,11 @@ class OverloadBreaker:
         self._failures = 0
         self._slow = 0
         self._trips = 0
-        self._last_diagnostic = 0.0
+        # ``None``, not ``0.0``: a zero origin would claim a diagnostic was emitted at
+        # monotonic time zero and swallow the first trip on any host whose monotonic
+        # clock is still below ``diagnostic_interval_s`` — a freshly started WSL2 VM, or
+        # Windows within a minute of a reboot.
+        self._last_diagnostic: float | None = None
         self.last_reason: str | None = None
 
     @property
@@ -493,7 +497,10 @@ class OverloadBreaker:
         self._trips += 1
         self.last_reason = reason
         now = time.monotonic()
-        if (now - self._last_diagnostic) < self.diagnostic_interval_s:
+        if (
+            self._last_diagnostic is not None
+            and (now - self._last_diagnostic) < self.diagnostic_interval_s
+        ):
             return None
         self._last_diagnostic = now
         return (
