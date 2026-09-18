@@ -86,8 +86,9 @@ PORTFOLIO、APPROVED_SET、dossiers、旧 cards／intakes／handoffs／ledger／
 和消息查询、收取正文；不重发。新工作不需要维护它们的旧状态机。
 
 Agentify 的 stableKey/idempotencyKey 使用同一个问题 key；新问题可以复用原会话或换会话，
-无需方向 binding 或 generation 登记。恢复已发送的同一操作可用原参数和 verifyExisting=true
-只观察；未知发送状态先核对，不把“再次调用工具”误当作“再次发送消息”。
+无需方向 binding 或 generation 登记。仅当既有操作已确认 sendAttempted=true 时，才可用原参数和
+verifyExisting=true 恢复观察；该参数本身不保证只读。未知发送状态先用只读观察核对，不把
+“再次调用工具”误当作“再次发送消息”。
 
 已运行会话在安全边界通过现有返回路径报告实际采用的 revision／冲突；源码发布不能替代这个事实。
 Windows／WSL／Agentify、用户级配置、Claude effective effort／权限隔离仍需原生观察。

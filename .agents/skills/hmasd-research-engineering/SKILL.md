@@ -11,10 +11,12 @@ conditions are in "Execution and admission".
 
 ## L0 and the Implementer
 
-Before a code task the DM records a concise L0 scope in the current `NOTES.md` entry: deliverable;
+Before a direction code task the DM records a concise L0 scope in the current `NOTES.md` entry: deliverable;
 owned paths and entry points; semantics that must not change; checks; budget and stop. Add
 interface, state-flow or skeleton detail only where there is real risk. Read the nearest
 directory `AGENTS.md`.
+Owner-requested control-plane maintenance uses its existing task/design scope; do not create
+direction research records merely to perform that maintenance.
 
 The DM may implement directly or delegate a bounded task to the Implementer (Claude: Opus, high
 effort; Codex: Sol, high effort) with the scope note, the checkout and branch, and the entry.
@@ -55,6 +57,15 @@ result stays recoverable, and its required outputs are preserved before scratch 
 - **Tests**: use focused checks sufficient for the changed behavior and risk. Do not cap their
   duration or count; report concrete coverage gaps and actual costs. Reuse unchanged evidence
   instead of repeating smoke checks solely because another launch or slice begins.
+  Review reproductions that create files use the same pytest lifecycle: `tmp_path` or
+  `tmp_path_factory` owns fixture repositories, copies and subprocess outputs under
+  `temp/tests/<invocation>/`. Do not create standalone `temp/scratch-review-*` directories or
+  hand-write their teardown commands. Use `--keep-scratch-on-failure` when diagnostics must
+  survive; wait for fixture subprocesses before teardown. The exact recovery command and
+  interpreter choices are in [tests/AGENTS.md](../../../tests/AGENTS.md).
+  A read-only reviewer can run existing checks when its runtime permits their scratch writes;
+  when a new test is needed, return the minimal reproduction to the assigning writer to add
+  to the relevant tests. This does not expand reviewer source-write or deletion permissions.
 - **Staging**: only committed source and declared artifacts at their recorded digest reach the
   node; never dirty source. Currentness is the byte content of the declared paths, not the
   commit id, so an unrelated commit does not refuse a run.
@@ -107,14 +118,19 @@ The DM repairs and accepts; the reviewer decides neither science nor permission.
 ## Execution and admission
 
 1. Commit and push the exact inputs.
-2. On the executing node, `scripts/hmasd_resource_preflight.py admit-memory --out <receipt>`
-   must pass its physical and effective available-memory safety check, immediately before
-   the runner, in the same supervised command or wrapper. Remote uses `preflight && runner`
-   under the configured `agent-task`; local Windows uses the [local execution method](references/local-execution.md).
-   Concurrent checks reserve nothing: serialise launch and acceptance, then remeasure.
-3. Launch detached from the committed sha with the configured interpreter. Use a worktree or
-   source snapshot when necessary to keep active inputs unchanged while authoring continues. Record command,
-   node, handle, sha, cwd and output root in `NOTES.md`.
+2. New result-bearing entries use `scripts/hmasd_launch.py launch` and call
+   `scripts.hmasd_admission.require_admission` before scientific effects. The kernel checks
+   current canonical pause/direction/lead, published SHA, source and invocation identity,
+   then applies the same physical/effective memory floor as
+   `scripts/hmasd_resource_preflight.py admit-memory` immediately before releasing the child.
+   It serializes launch through acceptance and preserves uncertain claims. Follow the
+   [execution method](references/local-execution.md) for both local and remote nodes.
+   Historical frozen launch interfaces stay at their original SHA; they are not silently migrated.
+3. Launch detached from the committed sha with the configured interpreter. The kernel returns
+   a native JSON manifest; supervisor command acceptance is not child admission. Use a worktree or
+   source snapshot when necessary to keep active inputs unchanged while authoring continues.
+   Link the manifest/operation reference from `NOTES.md` and explain the scientific context;
+   do not manually duplicate its command, node, native identities, SHA, cwd and output fields.
 4. Observe directly or delegate to a monitor/tracker when useful. On transfer, retain observation
    responsibility until the recipient adopts the accepted handle. Timeout or a lost connection is
    unknown, not terminal. Never launch a duplicate; reconcile the same handle.
@@ -154,3 +170,14 @@ not invalidate a run. A terminated invocation remains terminated; adjustment doe
 A real scope, semantics, writer, resource or uncertain-effect conflict stops only the dependent
 action; report the evidence and the owner of the decision and continue independent work. Clean
 only your own verified scratch under `temp/`.
+
+Interpret a tool rejection at the scope supported by its actual return. Preserve the relevant
+command/action and quote the stated reason; distinguish that evidence from your inference.
+A bare `blocked by policy` establishes refusal of that invocation, not a permanent ban on the
+target, all implementations, or the user's objective. If the scope is unclear, say so and
+inspect the original return before repeating a broader prohibition. Consider a transparent,
+substantively safer implementation within existing authorization and submit it to normal tool
+review when permitted; neither scripts nor user authorization exempt it from actual policy.
+Do not disguise a prohibited action or repeat it through another tool. When new evidence
+contradicts your interpretation, correct the interpretation and resume the authorized work;
+do not convert your own conservative recommendation into a platform rule or a new approval gate.

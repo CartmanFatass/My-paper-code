@@ -9,7 +9,9 @@ frozen object, including hmasd_run.py and historical temp paths where bound. The
 links the recoverable artifacts; layout alignment is not a reason to relaunch or move them.
 
 Prefer a simple list of commands for a queue; use scheduling when the actual workload benefits.
-The execution method requires one fresh
-actual-node admit-memory immediately adjacent to each invocation. Remote preflight &&
-runner belong inside the same supervised command. A failed run retains log and partial
+New result entries use hmasd_launch.py and call hmasd_admission.require_admission before
+scientific effects; direct CLI invocation without the single-use admission refuses.
+The kernel applies fresh actual-node memory admission immediately before release, with current
+pause/lead, published-source and duplicate-claim checks. Frozen historical commands retain
+their bound interface at their original sha. A failed run retains log and partial
 output; another authorized attempt gets a new root, never overwrites or silently resumes.

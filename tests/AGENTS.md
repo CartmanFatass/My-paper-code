@@ -40,8 +40,25 @@ Use `tmp_path` / `tmp_path_factory` for generated test files. The session remove
 own directory on normal teardown, including failed tests and collection errors. Copied
 Windows read-only attributes are cleared only in those test copies; source permissions
 are unchanged. Cleanup failures report the exact path and error rather than disappearing.
-Pytest's cache provider is disabled. Retain needed failure diagnostics outside scratch
-before teardown; do not treat temporary output as the only scientific evidence.
+Pytest's cache provider is disabled. Use `--keep-scratch-on-failure` when failed-test or
+collection diagnostics must survive teardown; the invocation reports its retained path.
+Success still cleans up. Tests may instead save selected diagnostics outside scratch before
+teardown; do not treat temporary output as the only scientific evidence.
+
+Review reproductions use this same lifecycle, including temporary Git repositories and copied
+read-only fixtures. Put all generated files below `tmp_path` / `tmp_path_factory`, and wait
+for fixture subprocesses before the test returns. Reuse an existing regression when it covers
+the question; an assigning writer adds a needed new reproduction to the relevant test file.
+A read-only reviewer does not create a standalone `temp/scratch-review-*` directory or edit
+test sources. Existing checks run only where the runtime permits their scratch writes.
+For example, the tracked-file case-alias regression can be run directly:
+
+```powershell
+python -m pytest -q tests/test_scratch_lifecycle.py -k mixed_case --keep-scratch-on-failure
+```
+
+Normal teardown is already the cleanup entrypoint. Use the recovery script below only for
+known owned leftovers. New reproductions continue to use pytest-managed scratch.
 
 A hard process kill or machine crash cannot run teardown. At the end of test work, after
 all pytest processes have exited, use the fixed recovery command for any leftovers:
@@ -49,19 +66,31 @@ all pytest processes have exited, use the fixed recovery command for any leftove
 ```powershell
 # Preview completed-test scratch under temp/tests/.
 ./scripts/cleanup_test_scratch.ps1
-# Reclaim it after checking the preview; no separate approval is needed for owned scratch.
-./scripts/cleanup_test_scratch.ps1 -Delete
-# Limit recovery to a specific invocation, including direction-specific test scratch.
+# Reclaim only an explicitly identified owned invocation after checking the preview.
+./scripts/cleanup_test_scratch.ps1 -RunDirectory temp/tests/<invocation> -Delete
+# Direction-specific test scratch is also supported.
 ./scripts/cleanup_test_scratch.ps1 -RunDirectory temp/directions/<direction>/test/<tag> -Delete
+# An old review fixture requires explicit mode AND a caller-verified exact target.
+# Verify its creation history, contents and inactivity; its name alone proves no ownership.
+./scripts/cleanup_test_scratch.ps1 -ReviewFixture -RunDirectory temp/scratch-review-<id>
+./scripts/cleanup_test_scratch.ps1 -ReviewFixture -RunDirectory temp/scratch-review-<id> -Delete
 ```
 
 Ordinary pytest teardown remains automatic; this command is the fallback for interrupted
-sessions and historical leftovers. It validates the selected invocation directories, refuses
-tracked content and links/junctions, checks for native pytest processes and reports failures.
+sessions and verified owned leftovers; a name or age alone does not establish ownership.
+Deletion requires explicit targets. Missing targets return AlreadyAbsent; every target reports
+its outcome, and any refusal/incomplete deletion makes the command fail. It validates the
+selected directories, refuses tracked content and links/junctions and checks native pytest processes.
 Do not run it concurrently with test startup. It does not sweep experiment outputs or the
 whole temp tree, kill processes, change ACLs or install a scheduled service. On non-Windows
 hosts, normal pytest teardown still works; this recovery script is for Windows.
 A tool-policy rejection must still be reported; a script is not a permission bypass.
+Report the actual rejected invocation and its stated reason. A generic rejection alone does
+not establish a target-wide deletion ban; consult the engineering skill's Stops guidance to
+distinguish policy evidence, uncertain interpretation and a permitted safer implementation.
+The ReviewFixture mode only adds explicit single-directory recovery under the old
+`temp/scratch-review-*` layout; it retains all existing safety checks and never enumerates
+those directories for automatic deletion. It does not grant an exception to platform policy.
 
 ## What tests are for here
 

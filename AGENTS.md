@@ -33,9 +33,11 @@ launch, and the carried-over engineering standards), `hmasd-loop-dispatch` (Code
 directory `AGENTS.md` before a code task.
 
 Execution: node, interpreter and supervisor come from `.codex/hmasd-compute.toml`. Commit and
-push the exact inputs, run `scripts/hmasd_resource_preflight.py admit-memory` on the executing
-node, launch detached at that sha. Preserve live process handles. Uncertain launch or Send
-acceptance means same-request reconciliation, never a blind repeat.
+push the exact inputs. New result entries use `scripts/hmasd_launch.py` and a runner-side
+admission guard: current pause/lead, published source, fresh actual-node memory and duplicate
+claims are checked before detached execution. The engineering method describes invocation;
+frozen historical interfaces retain their bound contract. Preserve live process handles.
+Uncertain launch or Send acceptance means same-request reconciliation, never a blind repeat.
 
 Git: use branches/worktrees when isolating experiments or concurrent writers helps; a separate
 authoring checkout per direction is not mandatory. A coordinating Codex Root is the shared
