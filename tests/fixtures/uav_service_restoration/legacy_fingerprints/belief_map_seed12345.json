@@ -1,0 +1,68 @@
+{
+  "action_dim": 3,
+  "n_uavs": 6,
+  "obs_dim": 167,
+  "reset_obs_sha256": "be3c906a78dcb6f9b24777aa4ab4645d2fbc7ff68f4fcff73dcb1b91c5b52f5a",
+  "reset_rng_sha256": "5603bb261a19def8d77088383df97bbda6174a71dd969e527cdd52d92f05e8c9",
+  "reset_state_sha256": "e32f7f378a6437ca4da8dceb543edec550f57b5e81b62cfa2a800f09a54b42cf",
+  "scenario": "belief_map",
+  "seed": 12345,
+  "state_dim": 2652,
+  "steps": 6,
+  "transitions": [
+    {
+      "action_sha256": "3f115feb5b85403ed0d5aa4c3b4a47285a64096b842f8ddc67e334bfbe45d990",
+      "next_state_sha256": "344f4985a2cc461d74742f4c44fe1d44ad3ef41caec16f279745fc504d4a43b1",
+      "obs_sha256": "906d0bb6889a6e16db3fb3401d871b2fc2573f0e42265052556f72331870f372",
+      "reward": 0.15268927561164647,
+      "rng_sha256": "420e3d5020b37822ce4aa96d67aed46c8ea609e95c909e39f61a98a72d7f3fcf",
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action_sha256": "c2a0329a48d0626f71ce792ca4504b32c691cfd519033b1a20a06c483710b841",
+      "next_state_sha256": "2597e7855c081dd52e6eb90a56d9ab768a24adc2b58794b4dca26ac426a44798",
+      "obs_sha256": "e75d7f9b019d07f39bed0edd91e779ea7c8439b9479f20354c9748e3f489c7b1",
+      "reward": 0.150826652496601,
+      "rng_sha256": "5a3634b6af03932abb948eb9b0af523a093c5ab2015eef6e9124f7c845ee38ec",
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action_sha256": "47c0d76356fad49acefd6961c7653b816c54e1f42a372035bf86cfdd23e3bd4f",
+      "next_state_sha256": "664480a8c35978d61502ca12eb3c3ba25527b3b4cecf8bc40a5c15587e80d92b",
+      "obs_sha256": "86808b96048ad63d538bd99ff492b0287e398c6539a31af3fa9aa7ac1b13a066",
+      "reward": 0.1503574991587736,
+      "rng_sha256": "5a3634b6af03932abb948eb9b0af523a093c5ab2015eef6e9124f7c845ee38ec",
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action_sha256": "092066b6591989564720d8d22a56b8138994e98917318cb38502fba539d61ddc",
+      "next_state_sha256": "505cf45c3a6f92040565b6671e80215b1fa7c2f7517ff3f92cec3ebc88f11cfa",
+      "obs_sha256": "9ec54fe119192d5f05bb2ed6e0ed12bd45e6a05f42080882ef09204b67b8b328",
+      "reward": 0.15099627425098996,
+      "rng_sha256": "4551755966dbaa5da1dea1f7f4e2097c6e2dd308b27684c32d302dfa0f5cd0f7",
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action_sha256": "220460ddda00dfd5cd0ab3cf223adfe052ac2698c8819ff0753c7ae996270412",
+      "next_state_sha256": "f97a3ca7057bf121981e1eec19f5f2629cf7c93c3c7c09b14c1fa5ff236226e4",
+      "obs_sha256": "a01f098e42a9f49716f6c11b8dac2210228d4474aa0a7354f793f70d6e5be3fb",
+      "reward": 0.15062584047211428,
+      "rng_sha256": "dacd9e44ccdba68b8afb0daca616b36b7d6c2f4d38e27398b2f7ed96b6ff3a78",
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action_sha256": "85fb111ad7d4746f2243ef66636749a81ef40275158a321869f27312ae8aa102",
+      "next_state_sha256": "783191de1e09148f26e7c2d45c033daa2a45573d179d2f85eb95a755369cb6cd",
+      "obs_sha256": "24a1f3ef056fd2f819964a180f138b254ab4abe3395c6f5a2534b1c0bdbde833",
+      "reward": 0.1512509144806857,
+      "rng_sha256": "289072a74769876ddc99d6a0ae2ab8ae4c8ab2d9a718906353f7de7ff780979d",
+      "terminated": false,
+      "truncated": false
+    }
+  ]
+}

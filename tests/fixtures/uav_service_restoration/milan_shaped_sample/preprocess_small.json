@@ -1,0 +1,37 @@
+{
+  "utm_zone": 32,
+  "interval_duration_ms": 600000,
+  "activity_field": "internet",
+  "columns": {
+    "n_columns": 8,
+    "square_id": 0,
+    "time_interval_ms": 1,
+    "country_code": 2,
+    "internet_activity": 7,
+    "delimiter": "\t",
+    "has_header": false
+  },
+  "region": {
+    "rule": "latlon_bbox",
+    "min_lat_deg": 45.44,
+    "max_lat_deg": 45.5,
+    "min_lon_deg": 9.15,
+    "max_lon_deg": 9.23,
+    "max_cells": 400
+  },
+  "duplicate_key_rule": "reject",
+  "missing_value_policy": "unknown",
+  "reference_scale_quantile": 0.95,
+  "train_dates": [
+    "2013-11-01"
+  ],
+  "validation_dates": [],
+  "test_dates": [
+    "2013-11-02"
+  ],
+  "dataset_version": "SYNTHETIC-MILAN-SHAPED-FIXTURE",
+  "description": "NOT REAL DATA. Milan-shaped fixture authored for this repository to test the parser.",
+  "source_url": "not-applicable-synthetic-fixture",
+  "license_note": "Authored here; no external data licence applies.",
+  "max_activity_value": 1000000000.0
+}

@@ -1,0 +1,256 @@
+{
+  "environment_id": "uav_service_restoration_v0",
+  "schema_version": "uav_service_restoration_v0.config.1",
+  "preset_name": "milan_temporary_pressure",
+  "seed": 20260917,
+  "n_uavs": 4,
+  "notes": "REAL-DATA PRESET. The demand process is a proxy mapped from real aggregated Telecom Italia Milan *Internet activity*; it is not measured Mbps, not a user count and not individual traffic. Everything else below - the three terrestrial sites, their positions, their egress capacities, the radio parameters, the failure timing, the UAV roster and the deployment positions - is an explicitly declared engineering assumption and is NOT calibrated against any operator topology or recorded outage. Site positions and the region box correspond to the default preprocessing bounding box (45.458-45.480 N, 9.175-9.205 E) projected to UTM 32N with the origin at its south-west corner: about 2351 m by 2450 m. Before using this preset, read the prepared cache's metadata.json and quality_report.json and confirm the actual extent, cell count and observed fraction; adjust region, max_demand_points and the candidate path limits to what the cache really contains. Scenario: load variation inside a real-data window against a terrestrial network whose access capacity is explicitly degraded for part of the window. The demand envelope in source.event_overlay is event_source='synthetic_overlay': a CONSTRUCTED load surge, not a real concert, match or dispersal, and a peak in activity does not by itself identify any event type. Describe results only as a load surge.",
+  "parameter_provenance": {
+    "source.demand_scale_mbps": "engineering_assumption",
+    "network.sites": "engineering_assumption",
+    "network.sites[*].core_egress_capacity_mbps": "engineering_assumption",
+    "network.radio_models": "engineering_assumption",
+    "events": "engineering_assumption",
+    "deployment": "engineering_assumption",
+    "dynamics": "engineering_assumption",
+    "source.activity_field": "empirically_calibrated"
+  },
+  "region": {
+    "min_xy_m": [
+      0.0,
+      0.0
+    ],
+    "max_xy_m": [
+      2400.0,
+      2500.0
+    ]
+  },
+  "episode": {
+    "semantics": "continuing",
+    "duration_s": 7200.0,
+    "decision_dt_s": 10.0,
+    "physics_dt_s": 1.0,
+    "quadrature": "midpoint"
+  },
+  "source": {
+    "kind": "milan_activity",
+    "demand_scale_mbps": 30.0,
+    "dataset_root": "prepared_datasets/milan_internet_v1",
+    "split": "train",
+    "region_id": "milan_center_2p4km",
+    "activity_field": "internet",
+    "max_demand_points": 25,
+    "require_fully_observed_episodes": true,
+    "event_overlay": {
+      "event_source": "synthetic_overlay",
+      "cell_indices": [
+        12,
+        13,
+        17,
+        18
+      ],
+      "start_s": 2400.0,
+      "end_s": 4800.0,
+      "peak_gain": 2.5
+    }
+  },
+  "network": {
+    "max_backhaul_hops": 2,
+    "access_and_backhaul_share_band": false,
+    "allow_spatial_reuse_between_nodes": true,
+    "max_candidate_paths_per_demand": 40,
+    "max_total_candidate_paths": 4096,
+    "site_access_radius_m": 1100.0,
+    "sites": [
+      {
+        "site_id": "milan_site_sw",
+        "position_m": [
+          620.0,
+          620.0,
+          25.0
+        ],
+        "core_egress_capacity_mbps": 400.0,
+        "serves_access": true,
+        "serves_uav_backhaul": true,
+        "accepts_uav_wireless_backhaul": false
+      },
+      {
+        "site_id": "milan_site_ne",
+        "position_m": [
+          1780.0,
+          1880.0,
+          25.0
+        ],
+        "core_egress_capacity_mbps": 400.0,
+        "serves_access": true,
+        "serves_uav_backhaul": true,
+        "accepts_uav_wireless_backhaul": false
+      },
+      {
+        "site_id": "milan_site_se",
+        "position_m": [
+          1820.0,
+          620.0,
+          25.0
+        ],
+        "core_egress_capacity_mbps": 400.0,
+        "serves_access": true,
+        "serves_uav_backhaul": true,
+        "accepts_uav_wireless_backhaul": false
+      }
+    ],
+    "radio_models": {
+      "site_access": {
+        "frequency_hz": 2100000000.0,
+        "bandwidth_hz": 20000000.0,
+        "tx_power_dbm": 43.0,
+        "antenna_gain_db": 15.0,
+        "noise_figure_db": 7.0,
+        "reference_distance_m": 1.0,
+        "reference_loss_db": 38.5,
+        "path_loss_exponent": 3.2,
+        "extra_loss_db": 0.0,
+        "spectral_efficiency": 0.7,
+        "min_snr_db": -3.0,
+        "max_range_m": 1200.0,
+        "calibration_status": "engineering_assumption"
+      },
+      "uav_access": {
+        "frequency_hz": 2100000000.0,
+        "bandwidth_hz": 20000000.0,
+        "tx_power_dbm": 30.0,
+        "antenna_gain_db": 8.0,
+        "noise_figure_db": 7.0,
+        "reference_distance_m": 1.0,
+        "reference_loss_db": 38.5,
+        "path_loss_exponent": 2.4,
+        "extra_loss_db": 0.0,
+        "spectral_efficiency": 0.7,
+        "min_snr_db": -3.0,
+        "max_range_m": 900.0,
+        "calibration_status": "engineering_assumption"
+      },
+      "site_uav_backhaul": {
+        "frequency_hz": 28000000000.0,
+        "bandwidth_hz": 50000000.0,
+        "tx_power_dbm": 33.0,
+        "antenna_gain_db": 18.0,
+        "noise_figure_db": 8.0,
+        "reference_distance_m": 1.0,
+        "reference_loss_db": 61.4,
+        "path_loss_exponent": 2.1,
+        "extra_loss_db": 0.0,
+        "spectral_efficiency": 0.6,
+        "min_snr_db": 0.0,
+        "max_range_m": 2600.0,
+        "calibration_status": "engineering_assumption"
+      },
+      "uav_uav_backhaul": {
+        "frequency_hz": 28000000000.0,
+        "bandwidth_hz": 50000000.0,
+        "tx_power_dbm": 27.0,
+        "antenna_gain_db": 18.0,
+        "noise_figure_db": 8.0,
+        "reference_distance_m": 1.0,
+        "reference_loss_db": 61.4,
+        "path_loss_exponent": 2.0,
+        "extra_loss_db": 0.0,
+        "spectral_efficiency": 0.6,
+        "min_snr_db": 0.0,
+        "max_range_m": 2000.0,
+        "calibration_status": "engineering_assumption"
+      }
+    }
+  },
+  "scheduler": {
+    "objective": "max_delivered",
+    "secondary_rule": "epsilon_resource",
+    "secondary_weight": 1e-06,
+    "feasibility_tolerance": 1e-07,
+    "max_variables": 20000,
+    "max_constraints": 20000,
+    "solver_method": "highs"
+  },
+  "events": {
+    "source_kind": "explicit",
+    "events": [
+      {
+        "event_type": "capacity_degradation",
+        "site_index": 1,
+        "start_s_range": [
+          1800.0,
+          1800.0
+        ],
+        "duration_s_range": [
+          3600.0,
+          3600.0
+        ],
+        "access_capacity_scale": 0.4,
+        "backhaul_capacity_scale": 1.0
+      }
+    ]
+  },
+  "deployment": {
+    "mode": "prepositioned",
+    "positions_m": [
+      [
+        1200.0,
+        1250.0,
+        130.0
+      ],
+      [
+        800.0,
+        1700.0,
+        130.0
+      ],
+      [
+        1600.0,
+        900.0,
+        130.0
+      ],
+      [
+        1200.0,
+        500.0,
+        130.0
+      ]
+    ],
+    "alert_delay_s": 0.0,
+    "launch_delay_s": 0.0
+  },
+  "dynamics": {
+    "max_speed_mps": 20.0,
+    "altitude_range_m": [
+      100.0,
+      180.0
+    ],
+    "bounds_margin_m": 0.0,
+    "record_min_separation": true,
+    "collision_avoidance": "none"
+  },
+  "observations": {
+    "mode": "central_delayed_telemetry",
+    "telemetry_delay_s": 0.0,
+    "telemetry_ttl_s": 180.0,
+    "sensing_radius_m": 900.0,
+    "include_time_of_day": true,
+    "include_episode_progress": false,
+    "position_reference_m": 2500.0,
+    "demand_reference_mbps": 60.0,
+    "fixed_entity_order": true,
+    "on_entity_limit_exceeded": "aggregate"
+  },
+  "reward": {
+    "reference_scale_mbps": 200.0,
+    "reference_dt_s": 10.0,
+    "motion_weight": 0.0,
+    "motion_weight_rationale": ""
+  },
+  "evaluation": {
+    "recovery_fraction_rho": 0.9,
+    "recovery_sustain_s": 60.0
+  },
+  "output": {
+    "run_root": null,
+    "debug_privileged_dump": false
+  }
+}

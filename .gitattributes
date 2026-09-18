@@ -29,3 +29,9 @@
 # Deterministically generated Claude control copies
 .claude/agents/*.md text eol=lf
 .claude/skills/** text eol=lf
+
+# uav_service_restoration_v0: the shaped Milan sample is byte-hashed by the preprocessing
+# path (raw_file_sha256 in a prepared cache's metadata), so its checkout must be stable
+# across hosts. Applies only to these new paths.
+/tests/fixtures/uav_service_restoration/** text eol=lf
+/configs/uav_service_restoration/*.json text eol=lf

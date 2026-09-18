@@ -1,0 +1,243 @@
+{
+  "environment_id": "uav_service_restoration_v0",
+  "schema_version": "uav_service_restoration_v0.config.1",
+  "preset_name": "smoke_fixture",
+  "seed": 20260917,
+  "n_uavs": 3,
+  "notes": "Self-contained smoke preset. The demand trace is an ANALYTIC FIXTURE, not real data: no Telecom Italia record, no measured Mbps, no population count. Every radio, capacity and event number below is an engineering assumption chosen to exercise the code paths, not a calibrated value. UAVs start clustered near the western site so that a static controller leaves the eastern demand unserved after the site_east failure at t=120 s, which is what gives the greedy diagnostics something to show. That is a property of this fixture, not evidence about any algorithm.",
+  "parameter_provenance": {
+    "source.demand_scale_mbps": "engineering_assumption",
+    "network.sites[*].core_egress_capacity_mbps": "engineering_assumption",
+    "events": "engineering_assumption",
+    "dynamics.max_speed_mps": "engineering_assumption",
+    "network.radio_models[*].antenna_gain_db": "engineering_assumption"
+  },
+  "region": {
+    "min_xy_m": [
+      0.0,
+      0.0
+    ],
+    "max_xy_m": [
+      3000.0,
+      3000.0
+    ]
+  },
+  "episode": {
+    "semantics": "continuing",
+    "duration_s": 600.0,
+    "decision_dt_s": 10.0,
+    "physics_dt_s": 1.0,
+    "quadrature": "midpoint"
+  },
+  "source": {
+    "kind": "synthetic_fixture",
+    "demand_scale_mbps": 12.0,
+    "split": "train",
+    "region_id": "fixture_grid_3x3",
+    "activity_field": "internet",
+    "max_demand_points": 9,
+    "require_fully_observed_episodes": true,
+    "synthetic_fixture": {
+      "grid_shape": [
+        3,
+        3
+      ],
+      "cell_spacing_m": 900.0,
+      "origin_offset_m": [
+        600.0,
+        600.0
+      ],
+      "interval_duration_s": 600.0,
+      "n_intervals": 24,
+      "start_utc_ms": 1383264000000,
+      "base_activity": 40.0,
+      "diurnal_amplitude": 25.0,
+      "hotspot_cell": [
+        2,
+        1
+      ],
+      "hotspot_gain": 3.0,
+      "hotspot_start_interval": 3,
+      "hotspot_end_interval": 9
+    }
+  },
+  "network": {
+    "max_backhaul_hops": 2,
+    "access_and_backhaul_share_band": false,
+    "allow_spatial_reuse_between_nodes": true,
+    "max_candidate_paths_per_demand": 32,
+    "max_total_candidate_paths": 2048,
+    "site_access_radius_m": 1400.0,
+    "sites": [
+      {
+        "site_id": "site_west",
+        "position_m": [
+          600.0,
+          1500.0,
+          25.0
+        ],
+        "core_egress_capacity_mbps": 120.0,
+        "serves_access": true,
+        "serves_uav_backhaul": true,
+        "accepts_uav_wireless_backhaul": false
+      },
+      {
+        "site_id": "site_east",
+        "position_m": [
+          2400.0,
+          1500.0,
+          25.0
+        ],
+        "core_egress_capacity_mbps": 120.0,
+        "serves_access": true,
+        "serves_uav_backhaul": true,
+        "accepts_uav_wireless_backhaul": false
+      }
+    ],
+    "radio_models": {
+      "site_access": {
+        "frequency_hz": 2100000000.0,
+        "bandwidth_hz": 20000000.0,
+        "tx_power_dbm": 43.0,
+        "noise_figure_db": 7.0,
+        "reference_distance_m": 1.0,
+        "reference_loss_db": 38.5,
+        "path_loss_exponent": 3.0,
+        "extra_loss_db": 0.0,
+        "spectral_efficiency": 0.7,
+        "min_snr_db": -3.0,
+        "max_range_m": 1600.0,
+        "calibration_status": "engineering_assumption",
+        "antenna_gain_db": 15.0
+      },
+      "uav_access": {
+        "frequency_hz": 2100000000.0,
+        "bandwidth_hz": 20000000.0,
+        "tx_power_dbm": 30.0,
+        "noise_figure_db": 7.0,
+        "reference_distance_m": 1.0,
+        "reference_loss_db": 38.5,
+        "path_loss_exponent": 2.4,
+        "extra_loss_db": 0.0,
+        "spectral_efficiency": 0.7,
+        "min_snr_db": -3.0,
+        "max_range_m": 1200.0,
+        "calibration_status": "engineering_assumption",
+        "antenna_gain_db": 8.0
+      },
+      "site_uav_backhaul": {
+        "frequency_hz": 28000000000.0,
+        "bandwidth_hz": 50000000.0,
+        "tx_power_dbm": 33.0,
+        "noise_figure_db": 8.0,
+        "reference_distance_m": 1.0,
+        "reference_loss_db": 61.4,
+        "path_loss_exponent": 2.1,
+        "extra_loss_db": 0.0,
+        "spectral_efficiency": 0.6,
+        "min_snr_db": 0.0,
+        "max_range_m": 2600.0,
+        "calibration_status": "engineering_assumption",
+        "antenna_gain_db": 18.0
+      },
+      "uav_uav_backhaul": {
+        "frequency_hz": 28000000000.0,
+        "bandwidth_hz": 50000000.0,
+        "tx_power_dbm": 27.0,
+        "noise_figure_db": 8.0,
+        "reference_distance_m": 1.0,
+        "reference_loss_db": 61.4,
+        "path_loss_exponent": 2.0,
+        "extra_loss_db": 0.0,
+        "spectral_efficiency": 0.6,
+        "min_snr_db": 0.0,
+        "max_range_m": 2000.0,
+        "calibration_status": "engineering_assumption",
+        "antenna_gain_db": 18.0
+      }
+    }
+  },
+  "scheduler": {
+    "objective": "max_delivered",
+    "secondary_rule": "epsilon_resource",
+    "secondary_weight": 1e-06,
+    "feasibility_tolerance": 1e-07,
+    "max_variables": 20000,
+    "max_constraints": 20000,
+    "solver_method": "highs"
+  },
+  "events": {
+    "source_kind": "explicit",
+    "events": [
+      {
+        "event_type": "full_site_failure",
+        "site_index": 1,
+        "start_s_range": [
+          120.0,
+          120.0
+        ],
+        "duration_s_range": null,
+        "access_capacity_scale": 0.0,
+        "backhaul_capacity_scale": 0.0
+      }
+    ]
+  },
+  "deployment": {
+    "mode": "prepositioned",
+    "positions_m": [
+      [
+        900.0,
+        1500.0,
+        120.0
+      ],
+      [
+        1100.0,
+        1000.0,
+        120.0
+      ],
+      [
+        1100.0,
+        2000.0,
+        120.0
+      ]
+    ],
+    "alert_delay_s": 0.0,
+    "launch_delay_s": 0.0
+  },
+  "dynamics": {
+    "max_speed_mps": 20.0,
+    "altitude_range_m": [
+      90.0,
+      160.0
+    ],
+    "bounds_margin_m": 0.0,
+    "record_min_separation": true,
+    "collision_avoidance": "none"
+  },
+  "observations": {
+    "mode": "central_delayed_telemetry",
+    "telemetry_delay_s": 0.0,
+    "telemetry_ttl_s": 120.0,
+    "sensing_radius_m": 1200.0,
+    "include_time_of_day": true,
+    "include_episode_progress": false,
+    "position_reference_m": 3000.0,
+    "demand_reference_mbps": 40.0,
+    "fixed_entity_order": true,
+    "on_entity_limit_exceeded": "error"
+  },
+  "reward": {
+    "reference_scale_mbps": 40.0,
+    "reference_dt_s": 10.0,
+    "motion_weight": 0.0,
+    "motion_weight_rationale": ""
+  },
+  "evaluation": {
+    "recovery_fraction_rho": 0.9,
+    "recovery_sustain_s": 30.0
+  },
+  "output": {
+    "run_root": null,
+    "debug_privileged_dump": false
+  }
+}
