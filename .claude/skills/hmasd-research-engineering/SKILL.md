@@ -108,12 +108,16 @@ The DM repairs and accepts; the reviewer decides neither science nor permission.
 ## Execution and admission
 
 1. Commit and push the exact inputs.
-2. On the executing node, `scripts/hmasd_resource_preflight.py admit-memory --out <receipt>`
-   must pass its physical and effective available-memory safety check, immediately before
-   the runner, in the same supervised command or wrapper. Remote uses `preflight && runner`
-   under the configured `agent-task`; local Windows uses the [local execution method](references/local-execution.md).
-   Concurrent checks reserve nothing: serialise launch and acceptance, then remeasure.
-3. Launch detached from the committed sha with the configured interpreter. Use a worktree or
+2. New result-bearing entries use `scripts/hmasd_launch.py launch` and call
+   `scripts.hmasd_admission.require_admission` before scientific effects. The kernel checks
+   current canonical pause/direction/lead, published SHA, source and invocation identity,
+   then applies the same physical/effective memory floor as
+   `scripts/hmasd_resource_preflight.py admit-memory` immediately before releasing the child.
+   It serializes launch through acceptance and preserves uncertain claims. Follow the
+   [execution method](references/local-execution.md) for both local and remote nodes.
+   Historical frozen launch interfaces stay at their original SHA; they are not silently migrated.
+3. Launch detached from the committed sha with the configured interpreter. The kernel returns
+   a native JSON manifest; supervisor command acceptance is not child admission. Use a worktree or
    source snapshot when necessary to keep active inputs unchanged while authoring continues. Record command,
    node, handle, sha, cwd and output root in `NOTES.md`.
 4. Observe directly or delegate to a monitor/tracker when useful. On transfer, retain observation

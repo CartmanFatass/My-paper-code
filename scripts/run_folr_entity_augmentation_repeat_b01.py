@@ -13,6 +13,8 @@ import sys
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
+from scripts.hmasd_admission import require_admission
+
 
 def publish(out, summary):
     summary["runner_wall_seconds"] = time.monotonic() - START_WALL
@@ -56,6 +58,9 @@ def main():
     if args.arm == "GENERIC_RETAIN" and args.generic_summary is not None:
         parser.error("only the augmented arm consumes the collected Generic summary")
 
+    admission = require_admission(__file__, direction="vap_folr_core")
+    if args.launch_sha != admission["sha"]:
+        parser.error("--launch-sha must equal the admitted source SHA")
     args.out.mkdir(parents=True, exist_ok=True)
     summary = {
         "object": OBJECT,

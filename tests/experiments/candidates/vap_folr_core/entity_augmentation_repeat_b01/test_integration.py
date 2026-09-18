@@ -127,6 +127,9 @@ def test_runner_binds_block_and_reads_g_only_after_its_complete_fit(tmp_path, mo
     spec = importlib.util.spec_from_file_location("folr_repeat_runner_test", runner_path)
     runner = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(runner)
+    # This test isolates the frozen scientific loop. Real admission and direct
+    # CLI refusal are covered separately; no real experiment is authorized here.
+    monkeypatch.setattr(runner, "require_admission", lambda *a, **kw: {"sha": "synthetic-source"})
     from experiments.candidates.vap_folr_core.entity_history_augmentation_b01 import learner
     from experiments.candidates.vap_folr_core.entity_history_b01 import environment
     from experiments.candidates.vap_folr_core.public_lifecycle_b01 import collection

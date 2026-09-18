@@ -11,11 +11,12 @@ Input: command, full published SHA, cwd/output, node/device boundary, actual inv
 allowance/stop, assigning lead and any designated observer. Read .codex/hmasd-compute.toml and the
 hmasd-research-engineering execution section before launch. The owner's pause remains controlling.
 
-Use an exact-source snapshot on the assigned node and its configured interpreter. Remote
-execution uses agent-task; local Windows execution uses the engineering method's detached
-PowerShell wrapper. Stage declared artifacts, never dirty source. Fresh destination admit-memory
-must succeed in the same supervised command/wrapper before the runner. Multiple checks reserve
-no memory: serialize launch—acceptance and remeasure capacity. Host choice for a new experiment
+Use an exact-source snapshot on the assigned node and its configured interpreter. New result
+entries use scripts/hmasd_launch.py launch and the runner-side admission guard; the kernel
+checks current pause/lead, published source, fresh destination memory and duplicate claims
+before release. Return its native JSON manifest, not merely shell acceptance. Stage declared
+artifacts, never dirty source. Frozen historical launch interfaces keep their original contract.
+Host choice for a new experiment
 is distinct from recovering an accepted run; reconcile an old process before any replacement.
 
 After acceptance return exact handle/node/source/cwd/output and observation bounds to the

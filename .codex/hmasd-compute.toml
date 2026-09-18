@@ -39,6 +39,8 @@ artifact_transport = "scp"
 frozen_input_transport = "scp_with_declared_sha256"
 result_memory_floor_gib = 4
 sparse_checkout = [
+  ".codex",
+  "docs/research",
   "hmasd",
   "ha_ctse_process",
   "envs",
