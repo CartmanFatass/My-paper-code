@@ -58,7 +58,7 @@ python -m pytest -q tests/test_scratch_lifecycle.py -k mixed_case --keep-scratch
 ```
 
 Normal teardown is already the cleanup entrypoint. Use the recovery script below only for
-known owned leftovers; do not widen its accepted paths to absorb an ad hoc review directory.
+known owned leftovers. New reproductions continue to use pytest-managed scratch.
 
 A hard process kill or machine crash cannot run teardown. At the end of test work, after
 all pytest processes have exited, use the fixed recovery command for any leftovers:
@@ -70,6 +70,10 @@ all pytest processes have exited, use the fixed recovery command for any leftove
 ./scripts/cleanup_test_scratch.ps1 -RunDirectory temp/tests/<invocation> -Delete
 # Direction-specific test scratch is also supported.
 ./scripts/cleanup_test_scratch.ps1 -RunDirectory temp/directions/<direction>/test/<tag> -Delete
+# An old review fixture requires explicit mode AND a caller-verified exact target.
+# Verify its creation history, contents and inactivity; its name alone proves no ownership.
+./scripts/cleanup_test_scratch.ps1 -ReviewFixture -RunDirectory temp/scratch-review-<id>
+./scripts/cleanup_test_scratch.ps1 -ReviewFixture -RunDirectory temp/scratch-review-<id> -Delete
 ```
 
 Ordinary pytest teardown remains automatic; this command is the fallback for interrupted
@@ -81,6 +85,9 @@ Do not run it concurrently with test startup. It does not sweep experiment outpu
 whole temp tree, kill processes, change ACLs or install a scheduled service. On non-Windows
 hosts, normal pytest teardown still works; this recovery script is for Windows.
 A tool-policy rejection must still be reported; a script is not a permission bypass.
+The ReviewFixture mode only adds explicit single-directory recovery under the old
+`temp/scratch-review-*` layout; it retains all existing safety checks and never enumerates
+those directories for automatic deletion. It does not grant an exception to platform policy.
 
 ## What tests are for here
 

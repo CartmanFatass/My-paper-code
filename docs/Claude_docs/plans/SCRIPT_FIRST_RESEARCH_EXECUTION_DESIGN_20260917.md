@@ -759,3 +759,5 @@ Owner 随后明确要求开始改动。本批实现 v1.4 的前两项及清理�
 清理审查者自己的隔离夹具 `temp/scratch-review-lij0n4vj` 留有 Git 对象：原生精确路径清理被平台 policy 拒绝，已保留并停止该删除，没有换工具重试。其余测试使用自身 invocation scratch，不触及 owner 旧目录或其他写入者的 UAV 工作。
 
 验证：启动/快照组在系统 Python 与配置的 `hmasd-amd-cpu` Python 3.10 下分别 `40 passed`；FOLR 集成与 admission contract `31 passed`；scratch 生命周期 `17 passed`；控制发布/一致性 `21 passed`，合计 109 个不同测试。生成副本 `drift: 0`，diff 检查通过。检查对象是本分支改动，不能据此声称 main、远端服务或既有会话已经采用。
+
+2026-09-18 清理后续：回查原始拒绝只得到针对那条 shell 调用的 `blocked by policy`，没有目标级禁止删除的说明；此前将其扩大解释为禁止删除该夹具，依据不足。Owner 明确要求通过受限脚本处理。恢复脚本增加显式 `-ReviewFixture` 模式，仅接受明确指定的旧 `temp/scratch-review-<id>` 夹具，保留原路径、链接、tracked 和进程检查，不自动枚举，不授予 policy 豁免。新增测试后 scratch 组 `23 passed`，独立审查无实质发现。对已核验创建历史的 `temp/scratch-review-lij0n4vj` 先预览，再正常提交脚本删除调用，返回 `Deleted`；随后 `Test-Path` 返回 `False`，该遗留已清理。新夹具仍使用 pytest 管理的目录。

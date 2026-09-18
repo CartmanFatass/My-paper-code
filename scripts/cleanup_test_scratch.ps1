@@ -2,6 +2,8 @@
 [CmdletBinding()]
 param(
     [string[]]$RunDirectory,
+    # Explicit recovery of a caller-verified old review fixture, never a sweep.
+    [switch]$ReviewFixture,
     [switch]$Delete
 )
 
@@ -18,6 +20,9 @@ function Assert-PlainDirectory([string]$Path) {
 
 if ($Delete -and -not $PSBoundParameters.ContainsKey('RunDirectory')) {
     throw 'Deletion requires explicit -RunDirectory targets; omit -Delete to preview'
+}
+if ($ReviewFixture -and -not $PSBoundParameters.ContainsKey('RunDirectory')) {
+    throw 'ReviewFixture requires explicit -RunDirectory targets and verified fixture ownership'
 }
 if ($PSBoundParameters.ContainsKey('RunDirectory') -and
     (-not $RunDirectory -or @($RunDirectory | Where-Object { [string]::IsNullOrWhiteSpace($_) }).Count)) {
@@ -51,8 +56,9 @@ foreach ($rawTarget in ($RunDirectory | Sort-Object -Unique)) {
     $target = if ([IO.Path]::IsPathRooted($rawTarget)) { [IO.Path]::GetFullPath($rawTarget) }
               else { [IO.Path]::GetFullPath((Join-Path $repoRoot $rawTarget)) }
     $relative = [IO.Path]::GetRelativePath($repoRoot, $target).Replace('\', '/')
+    $reviewTarget = $ReviewFixture -and $relative -match '^temp/scratch-review-[a-z0-9_-]+$'
     if ($relative -notmatch '^temp/tests/[^/]+$' -and
-        $relative -notmatch '^temp/directions/[^/]+/test/[^/]+$') {
+        $relative -notmatch '^temp/directions/[^/]+/test/[^/]+$' -and -not $reviewTarget) {
         throw "Not a single test invocation directory: $target"
     }
     if ($relative -match '~[0-9]') { throw 'Short-name aliases require separate inspection' }

@@ -184,3 +184,40 @@ def test_cleanup_mixed_case_cannot_hide_tracked_content(cleanup_checkout):
     result = cleanup_probe(cleanup_checkout, "-RunDirectory TEMP/TESTS/OWNED -Delete")
     assert result.returncode != 0 and 'tracked content' in result.stdout
     assert (cleanup_checkout / "temp/tests/owned/sentinel").exists()
+
+
+def test_review_fixture_requires_explicit_mode_and_preserves_default_preview(cleanup_checkout):
+    review = cleanup_checkout / 'temp/scratch-review-fixture'
+    review.mkdir()
+    (review / 'sentinel').write_text('owned fixture')
+    refused = cleanup_probe(cleanup_checkout, '-RunDirectory temp/scratch-review-fixture -Delete')
+    assert refused.returncode != 0 and review.exists()
+    preview = cleanup_probe(cleanup_checkout, '-ReviewFixture -RunDirectory temp/scratch-review-fixture')
+    assert preview.returncode == 0 and 'Preview' in preview.stdout and review.exists()
+    deleted = cleanup_probe(cleanup_checkout, '-ReviewFixture -RunDirectory temp/scratch-review-fixture -Delete')
+    assert deleted.returncode == 0 and 'Deleted' in deleted.stdout and not review.exists()
+
+
+@pytest.mark.parametrize('arguments', [
+    '-ReviewFixture -Delete',
+    '-ReviewFixture -RunDirectory temp -Delete',
+    '-ReviewFixture -RunDirectory temp/scratch-review-fixture/child -Delete',
+    '-ReviewFixture -RunDirectory temp/unrelated -Delete',
+])
+def test_review_fixture_mode_keeps_narrow_scope(cleanup_checkout, arguments):
+    result = cleanup_probe(cleanup_checkout, arguments)
+    assert result.returncode != 0
+    assert (cleanup_checkout / 'temp/tests/owned/sentinel').exists()
+
+
+def test_review_fixture_mode_keeps_tracked_and_busy_guards(cleanup_checkout):
+    review = cleanup_checkout / 'temp/scratch-review-fixture'
+    review.mkdir()
+    (review / 'sentinel').write_text('owned fixture')
+    arguments = '-ReviewFixture -RunDirectory temp/scratch-review-fixture -Delete'
+    busy = cleanup_probe(cleanup_checkout, arguments, busy=True)
+    assert busy.returncode != 0 and 'Tests may still be running' in busy.stdout
+    subprocess.run(['git', '-C', str(cleanup_checkout), 'add', 'temp/scratch-review-fixture/sentinel'], check=True)
+    tracked = cleanup_probe(cleanup_checkout, arguments)
+    assert tracked.returncode != 0 and 'tracked content' in tracked.stdout
+    assert (review / 'sentinel').exists()
