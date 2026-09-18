@@ -35,3 +35,7 @@
 # across hosts. Applies only to these new paths.
 /tests/fixtures/uav_service_restoration/** text eol=lf
 /configs/uav_service_restoration/*.json text eol=lf
+
+# hmasd-science-tools: manifest.json records lock_sha256 over the file as conda wrote it on
+# Windows (CRLF). Pin that checkout form so the digest holds on a Linux host as well.
+/environments/hmasd-science-tools/conda-win-64.lock.txt text eol=crlf
