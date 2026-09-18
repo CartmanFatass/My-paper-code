@@ -1,0 +1,39 @@
+{
+  "schema": "research_support.capture.1",
+  "notes": "Default visualization settings. These are engineering starting points, not measured performance guarantees. 'off' is the profile every existing training command uses; on that path no scene is built, no writer or server is created, and no clock is read. Raising a rate here does not make the resulting overhead acceptable: measure it.",
+  "profile": "off",
+  "preview": {
+    "lane_ids": [0],
+    "min_completed_env_steps_between_frames": 100,
+    "min_wall_interval_s": 1.0,
+    "max_session_wall_s": 300,
+    "require_active_viewer": true,
+    "viewer_lease_timeout_s": 10,
+    "record_trace": false,
+    "max_queued_frames": 2,
+    "max_frame_bytes": 524288,
+    "max_output_bytes_per_wall_s": 1048576
+  },
+  "optional_event_journal": {
+    "enabled": false
+  },
+  "recent_transition_ring": {
+    "enabled": false,
+    "size": 16
+  },
+  "render": {
+    "enabled": false,
+    "default_view": "2d"
+  },
+  "record_eval": {
+    "auto_start": false,
+    "default_selected_episodes": 1,
+    "capture_every_decision": true,
+    "capture_substeps": false,
+    "max_trace_bytes": 268435456,
+    "chunk_frames": 64
+  },
+  "report": {
+    "auto_generate": false
+  }
+}

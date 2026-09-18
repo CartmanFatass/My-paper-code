@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>__RS_TITLE__</title>
+<!-- An inline icon keeps the browser from requesting /favicon.ico, which this read-only
+     server does not serve. PNG rather than SVG so the page contains no absolute URL at
+     all: an inline SVG needs its xmlns, and that literal breaks a plain no-external-URL
+     check even though nothing ever fetches it. -->
+<link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAAAL0lEQVR42mOQj59HEmIYQhr+//9PSw3/YYA2Gv6jAgIa/mMD1NPwHzegkobBkZYABpJwnbx1QcUAAAAASUVORK5CYII=">
+<link rel="stylesheet" href="/static/app.css">
+</head>
+<body>
+<!--
+  Research cockpit, not a training control panel. There is deliberately no Start, Stop,
+  Reset, Change-action or Change-reward control anywhere on this page: the server exposes
+  no endpoint that could carry one.
+-->
+<header id="header">
+  <div class="brand">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <span id="title-text">HMASD research support</span>
+  </div>
+  <dl class="identity" id="identity"></dl>
+  <div class="header-right">
+    <span id="stream-state" class="state state-waiting" role="status">WAITING</span>
+    <button id="theme-toggle" type="button" title="Switch light / dark theme">Theme</button>
+    <button id="contrast-toggle" type="button" title="High-contrast encoding">Contrast</button>
+  </div>
+</header>
+
+<div id="banner" class="banner" hidden></div>
+
+<nav id="tabs" role="tablist">
+  <button type="button" role="tab" data-tab="live" class="active">Live</button>
+  <button type="button" role="tab" data-tab="replay">Replay</button>
+  <button type="button" role="tab" data-tab="compare">Compare</button>
+  <button type="button" role="tab" data-tab="report">Capability report</button>
+  <button type="button" role="tab" data-tab="runconfig">Run / config</button>
+  <button type="button" role="tab" data-tab="data">Data / scenario</button>
+</nav>
+
+<main id="main">
+  <!-- ============================ Scene tabs ============================ -->
+  <section class="panel-grid" data-panel="live replay compare">
+    <div class="scene-column">
+      <div class="scene-toolbar">
+        <div class="group">
+          <label for="view-mode">View</label>
+          <select id="view-mode">
+            <option value="2d" selected>2-D (default scientific view)</option>
+            <option value="3d">3-D inspection</option>
+          </select>
+        </div>
+        <!-- Trace pickers. The server can serve several traces; without these the client
+             could only ever reach the first one it was given. -->
+        <div class="group" id="trace-group" hidden>
+          <label for="trace-pick" id="trace-pick-label">Trace</label>
+          <select id="trace-pick"></select>
+          <label for="trace-pick-right" id="trace-pick-right-label" hidden>against</label>
+          <select id="trace-pick-right" hidden></select>
+        </div>
+        <div class="group" id="playback-group" hidden>
+          <button id="pb-first" type="button" title="First frame">⏮</button>
+          <button id="pb-prev" type="button" title="Step back">◀|</button>
+          <button id="pb-play" type="button" title="Play / pause">▶</button>
+          <button id="pb-next" type="button" title="Step forward">|▶</button>
+          <button id="pb-last" type="button" title="Last frame">⏭</button>
+          <label for="pb-speed">Speed</label>
+          <select id="pb-speed">
+            <option value="0.25">0.25x</option>
+            <option value="0.5">0.5x</option>
+            <option value="1" selected>1x</option>
+            <option value="2">2x</option>
+            <option value="4">4x</option>
+          </select>
+          <label class="check"><input type="checkbox" id="pb-frame-index"> frame-index pacing</label>
+        </div>
+        <div class="group" id="live-group">
+          <button id="freeze" type="button">Freeze display</button>
+          <button id="resume" type="button" class="primary">Resume live</button>
+          <label class="check"><input type="checkbox" id="follow-latest" checked> Follow latest</label>
+        </div>
+        <div class="group">
+          <button id="capture-frame" type="button" title="Download the displayed frame as JSON">Capture displayed frame</button>
+          <button id="reset-camera" type="button">Reset camera</button>
+        </div>
+        <div class="group">
+          <label for="info-view">Information</label>
+          <select id="info-view">
+            <option value="truth" selected>Simulator truth (privileged)</option>
+            <option value="policy">Policy-visible</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="scrubber-row">
+        <input type="range" id="scrubber" min="0" max="0" value="0" step="1" aria-label="Frame position">
+        <span id="scrubber-label" class="mono">—</span>
+        <span id="scrubber-note" class="note"></span>
+      </div>
+
+      <div id="scene-wrap" class="scene-wrap">
+        <canvas id="scene2d" tabindex="0" aria-label="Scene, two dimensional"></canvas>
+        <canvas id="scene3d" tabindex="0" aria-label="Scene, three dimensional" hidden></canvas>
+        <canvas id="scene2d-right" tabindex="0" aria-label="Comparison scene, right" hidden></canvas>
+        <div id="tooltip" class="tooltip" hidden></div>
+        <div id="scene-empty" class="scene-empty"></div>
+      </div>
+      <!-- The key lives beside the scene, not on top of it: drawn into the canvas it covered
+           the entities it was explaining. Here it is also selectable text for a screen reader. -->
+      <div id="scene-legend" class="scene-legend" aria-label="Scene key"></div>
+
+      <div class="charts" id="charts">
+        <canvas id="chart-service" aria-label="Service over time"></canvas>
+        <canvas id="chart-util" aria-label="Utilization over time"></canvas>
+      </div>
+
+      <div class="timeline-wrap">
+        <h3>Event timeline <span class="note">actual recorded event times</span></h3>
+        <canvas id="timeline" aria-label="Event timeline"></canvas>
+        <div id="timeline-legend" class="legend"></div>
+      </div>
+    </div>
+
+    <aside class="side-column">
+      <div class="card">
+        <h3>Layers</h3>
+        <div id="layer-controls" class="layers"></div>
+        <label class="check"><input type="checkbox" id="show-trails"> UAV trails</label>
+        <label class="slider">Trail length
+          <input type="range" id="trail-length" min="0" max="120" value="24" step="1">
+          <span id="trail-length-label" class="mono">24</span>
+        </label>
+        <label class="check"><input type="checkbox" id="follow-selected"> Follow selected UAV</label>
+      </div>
+
+      <div class="card">
+        <h3>Find entity</h3>
+        <input type="search" id="entity-search" placeholder="stable id, e.g. uav:2:0 or ue_7" autocomplete="off">
+        <div id="search-results" class="search-results"></div>
+      </div>
+
+      <div class="card" id="inspector-card">
+        <h3>Inspector <span class="note" id="inspector-mode"></span></h3>
+        <div id="inspector" class="inspector">
+          <p class="note">Hover an entity to preview it; click to pin it here.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Capability &amp; provenance</h3>
+        <div id="capability" class="capability"></div>
+      </div>
+
+      <div class="card">
+        <h3>Entity table</h3>
+        <div class="table-scroll"><table id="entity-table"><thead></thead><tbody></tbody></table></div>
+      </div>
+    </aside>
+  </section>
+
+  <!-- ============================ Report tab ============================ -->
+  <section data-panel="report" hidden>
+    <div class="card wide" id="report-card">
+      <h3>Capability report</h3>
+      <div id="report-body"></div>
+    </div>
+  </section>
+
+  <!-- ============================ Run/config tab ============================ -->
+  <section data-panel="runconfig" hidden>
+    <div class="card wide" id="runconfig-card">
+      <h3>Run and effective configuration</h3>
+      <div id="runconfig-body"></div>
+    </div>
+  </section>
+
+  <!-- ============================ Data/scenario tab ============================ -->
+  <section data-panel="data" hidden>
+    <div class="card wide" id="data-card">
+      <h3>Data and scenario diagnostics</h3>
+      <div id="data-body"></div>
+    </div>
+  </section>
+</main>
+
+<footer id="footer">
+  <span>sim <b id="f-sim">—</b></span>
+  <span>geometry <b id="f-geom">—</b></span>
+  <span>measured <b id="f-window">—</b></span>
+  <span>sample age <b id="f-age">—</b></span>
+  <span>capture <b id="f-resolution">—</b></span>
+  <span>seq <b id="f-seq">—</b></span>
+  <span>drops <b id="f-drops">—</b></span>
+  <span>gated <b id="f-gated">—</b></span>
+  <span>trace <b id="f-trace">—</b></span>
+  <span id="f-error" class="err"></span>
+</footer>
+
+<script id="bootstrap" type="application/json">__RS_BOOTSTRAP__</script>
+<script src="/static/scene3d.js"></script>
+<script src="/static/app.js"></script>
+</body>
+</html>

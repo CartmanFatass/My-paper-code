@@ -47,6 +47,8 @@ is returned for each agent and is **not** divided by the UAV count.
 
 from __future__ import annotations
 
+import contextlib
+
 import copy
 from typing import Any, Sequence
 
@@ -88,6 +90,27 @@ REWARD_INFO_FIELDS = (
 )
 
 _RNG_STREAM_NAMES = ("episode", "layout", "events", "observation_noise", "channel")
+
+
+@contextlib.contextmanager
+def _readonly(*arrays: np.ndarray):
+    """Make arrays temporarily read-only while a diagnostic observer holds them.
+
+    The capture seam hands the observer live arrays that this module reads back afterwards -
+    one of them becomes the simulation's own position state. The observer is contractually
+    required to copy anything it retains; this turns a violation of that contract into an
+    immediate ``ValueError`` instead of a silently altered reward. Only the armed branch pays
+    for it, and the original flags are restored even if the observer raises.
+    """
+
+    previous = [array.flags.writeable for array in arrays]
+    for array in arrays:
+        array.flags.writeable = False
+    try:
+        yield
+    finally:
+        for array, was_writeable in zip(arrays, previous):
+            array.flags.writeable = was_writeable
 
 
 class UAVServiceRestorationEnv(ParallelEnv):
@@ -181,11 +204,102 @@ class UAVServiceRestorationEnv(ParallelEnv):
         self.max_speed = float(config.dynamics.max_speed_mps)
         self.height_range = tuple(float(value) for value in config.dynamics.altitude_range_m)
 
+        # Optional human-diagnostic capture observer.  ``None`` is the only state any
+        # training or evaluation path ever sets, and on that path the seams below cost one
+        # attribute load and one ``is not None`` test per decision step and per substep.
+        # See :meth:`set_capture_observer`.
+        self._capture_observer: Any | None = None
+
         self._reset_episode_state()
 
     # ----------------------------------------------------------------------------------
     # Spaces and dimensions
     # ----------------------------------------------------------------------------------
+
+    # ----------------------------------------------------------------------------------
+    # Optional diagnostic capture seam
+    # ----------------------------------------------------------------------------------
+
+    def set_capture_observer(self, observer: Any | None) -> None:
+        """Attach or detach a human-diagnostic observer.  Default and only training state
+        is ``None``.
+
+        The observer is a duck-typed object supplied by the explicit visualization layer.
+        This environment imports no renderer, server or browser library, and the observer
+        never influences dynamics: it receives values that were *already computed* for the
+        simulation and may only read them.
+
+        Required protocol - every one of these is called unconditionally, with no
+        ``hasattr`` guard, so an observer missing any of them raises::
+
+            observer.begin_decision(env, decision_step, time_s) -> None
+            observer.armed -> bool
+            observer.on_service_evaluated(**kwargs) -> None      # only when ``armed``
+            observer.on_decision_complete(**kwargs) -> None
+            observer.on_episode_reset(env, time_s) -> None
+
+        ``decision_step`` is the index of the interval being computed, and it is the same
+        value at all three of ``begin_decision``, ``on_service_evaluated`` and
+        ``on_decision_complete``.  ``on_service_evaluated`` receives both
+        ``window_start_s`` (the start of the measurement window) and ``geometry_time_s``
+        (the quadrature point the handed-over positions actually hold at); under the default
+        midpoint rule these differ by half a substep and must not be conflated.
+
+        ``begin_decision`` is where the observer decides, once per decision interval,
+        whether this interval is eligible at all.  ``armed`` is then a plain attribute
+        read, so an ineligible interval performs no substep work beyond that read.  The
+        observer must copy anything it retains: the arrays it is handed belong to the
+        caller and the later substeps of the same interval will reuse or replace them.
+
+        Setting an observer must not change any scientific quantity.  A capture that
+        raises is the caller's defect and is not absorbed here, so a broken observer is
+        visible instead of silently corrupting a diagnostic stream.  An observer that is
+        optional to the operator - a live preview - is expected to absorb its own errors
+        before they reach this seam; ``ServiceRestorationObserver`` does exactly that.
+
+        While a callback runs, the numpy arrays handed to it are made read-only, so an
+        observer that writes into one fails immediately rather than altering a reward.
+        The observer must still copy anything it keeps past the call: the arrays belong to
+        the caller and later substeps reuse or replace them.
+        """
+
+        self._capture_observer = observer
+
+    @property
+    def capture_observer(self) -> Any | None:
+        return self._capture_observer
+
+    def capture_capabilities(self) -> dict[str, Any]:
+        """What a scene captured from this environment can truthfully contain."""
+
+        return {
+            "environment_id": self._config.environment_id,
+            "preset_name": self._config.preset_name,
+            "entity_kind_ground": "aggregate_demand_point",
+            "individual_ues": False,
+            "aggregate_demand": True,
+            "demand_rates": True,
+            "delivered_rates": True,
+            "links": True,
+            "link_flows": True,
+            "link_capacity": True,
+            "resource_domains": True,
+            "candidate_paths": True,
+            "sinr": True,
+            "skill_labels": False,
+            "energy": False,
+            "roster_changes": False,
+            "observation_view": True,
+            "quadrature": self._config.episode.quadrature,
+            "physics_dt_s": float(self._config.episode.physics_dt_s),
+            "decision_dt_s": float(self._config.episode.decision_dt_s),
+            "notes": [
+                "ground entities are aggregated demand proxies for source grid cells, "
+                "not individual people or tracked devices",
+                "service is evaluated at the substep quadrature point; the displayed "
+                "geometry belongs to that point, not to the interval end position",
+            ],
+        }
 
     def observation_space(self, agent: str) -> Box:
         return self._observation_spaces[agent]
@@ -423,6 +537,9 @@ class UAVServiceRestorationEnv(ParallelEnv):
             }
             for agent in self.agents
         }
+        observer = self._capture_observer
+        if observer is not None:
+            observer.on_episode_reset(env=self, time_s=float(self._time_s))
         return observations, infos
 
     def _seed_history_telemetry(self, history_intervals: int) -> None:
@@ -527,6 +644,17 @@ class UAVServiceRestorationEnv(ParallelEnv):
             | set(self._demand_boundaries_within(t0, t1))
         )
 
+        # Optional diagnostic capture.  One attribute load; when nothing is attached the
+        # remaining seams in this method are a single ``is not None`` test each.
+        observer = self._capture_observer
+        # Captured before ``_step_index`` advances, and reused by every seam in this method.
+        # Reading the attribute again after the increment made ``on_decision_complete``
+        # report k+1 for the same interval the other two seams reported as k.
+        decision_index = self._step_index
+        if observer is not None:
+            observer.begin_decision(self, decision_step=decision_index, time_s=t0)
+        substep_index = 0
+
         interval_offered = np.zeros(self._layout.n_slots, dtype=np.float64)
         interval_delivered = np.zeros(self._layout.n_slots, dtype=np.float64)
         interval_sensed = np.zeros(self._layout.n_slots, dtype=bool)
@@ -558,11 +686,47 @@ class UAVServiceRestorationEnv(ParallelEnv):
                 evaluation_position = (
                     mid_position if config.episode.quadrature == "midpoint" else start_position
                 )
+                # The quadrature rule decides WHICH geometry the solve used, so it also
+                # decides the time that geometry holds at. Only this method knows the rule,
+                # so the offset is computed here rather than guessed by the consumer.
+                geometry_offset_s = (
+                    0.5 * h if config.episode.quadrature == "midpoint" else 0.0
+                )
 
                 snapshot, result = self._evaluate_service(
                     evaluation_position, site_states, demand
                 )
                 delivered = result.delivered_mbps_per_demand
+                # Truthful capture seam: hand over the solve that actually happened,
+                # paired with the geometry and measurement time it was computed at.  The
+                # scheduler is never asked to solve again on the viewer's behalf, and an
+                # unarmed interval never reaches this call's body.
+                if observer is not None:
+                    if observer.armed:
+                        # Read-only for the duration of the call: the env reads all of these
+                        # back after it returns, and `end_position` becomes the live
+                        # `_positions_m`. A mutating observer now fails loudly here instead
+                        # of silently changing a reward or the trajectory.
+                        with _readonly(
+                            evaluation_position, end_position, requested, demand, source_observed
+                        ):
+                            observer.on_service_evaluated(
+                                env=self,
+                                window_start_s=sub_start,
+                                geometry_time_s=sub_start + geometry_offset_s,
+                                duration_s=h,
+                                substep_index=substep_index,
+                                decision_step=decision_index,
+                                positions_m=evaluation_position,
+                                end_positions_m=end_position,
+                                requested_velocity_mps=requested,
+                                site_states=site_states,
+                                demand_mbps=demand,
+                                source_observed=source_observed,
+                                snapshot=snapshot,
+                                result=result,
+                            )
+                    substep_index += 1
                 link_utilization = {
                     int(link.link_id): float(
                         result.link_flow_mbps[int(link.link_id)]
@@ -677,6 +841,21 @@ class UAVServiceRestorationEnv(ParallelEnv):
             }
             for agent in self.agents
         }
+        # Final diagnostic seam of the interval.  It runs before ``self.agents`` is
+        # emptied and before any caller can reset, so a terminal frame describes the
+        # episode that just ended rather than the next one's initial state.
+        if observer is not None:
+            observer.on_decision_complete(
+                env=self,
+                decision_step=decision_index,
+                interval_start_s=t0,
+                interval_end_s=t1,
+                reward_info=reward_info,
+                terminated=terminated_flag,
+                truncated=truncated_flag,
+                finished=finished,
+                n_substeps=substep_index,
+            )
         if finished:
             # The real terminal observation above is what is returned; the agent list is
             # emptied only afterwards, and no implicit reset happens here.

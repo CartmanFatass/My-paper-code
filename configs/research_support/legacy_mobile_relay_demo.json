@@ -1,0 +1,42 @@
+{
+  "schema": "research_support.legacy_demo.1",
+  "route": "legacy-mobile-relay",
+  "scenario": "base",
+  "notes": "Explicit demonstration configuration for the mobile-UE viewer check. Scenario alias 'base' constructs envs.pettingzoo.relay.forced_relay.UAVForcedRelayEnv behind ParallelToArrayAdapter; it is NOT routed_core. Every override below is an engineering choice made so that six UAVs can reach three moving UE clusters inside a short episode on a laptop. None of it is calibrated, and none of it is evidence about any algorithm. The UEs move because the environment's own RPGM mobility model moves them at user_max_speed; no motion is added by the viewer.",
+  "parameter_provenance": {
+    "area_size": "engineering_assumption: shrunk from the 8000 m default so the fleet reaches the UE clusters within a demonstration-length episode",
+    "n_users": "engineering_assumption: fewer UEs keep the scene legible and the frame under the byte budget",
+    "n_clusters": "engineering_assumption",
+    "cluster_std": "engineering_assumption",
+    "episode_length": "engineering_assumption: demonstration length, not an evaluation horizon",
+    "uav_start_area_size": "engineering_assumption",
+    "observation_radius": "engineering_assumption",
+    "user_movement_model": "environment default (rpgm); kept so UE motion is the environment's own",
+    "min_sinr": "environment default; deliberately NOT altered, see the finding on base_to_uav_sinr"
+  },
+  "config_overrides": {
+    "area_size": 2000,
+    "n_agents": 6,
+    "n_users": 24,
+    "n_clusters": 3,
+    "cluster_std": 120,
+    "episode_length": 150,
+    "max_steps": 150,
+    "uav_start_area_size": 400,
+    "observation_radius": 1200
+  },
+  "controller": {
+    "name": "legacy_cluster_coverage",
+    "kind": "untuned_diagnostic_rule",
+    "options": {
+      "relay_fraction": 0.34,
+      "target_altitude_m": 120.0
+    }
+  },
+  "known_limitations": [
+    "uav_bs_connections is identically False on this scenario because the modelled base-to-UAV SINR is about 146 dB below the UAV-to-base SINR at the same path loss. See docs/Claude_docs/findings/2026-09-18-forced-relay-downlink-sinr-and-dead-backhaul-adjacency.md. The scene therefore reports the SINR adjacency and the widest-path route as two separate criteria and counts their disagreement; it does not pick one and present it as the backhaul truth.",
+    "This environment has no traffic-demand model. Offered and delivered Mbps are reported as not applicable and are never drawn as zero.",
+    "There is no skill layer on this route, so no skill raster is produced and none is invented.",
+    "The per-agent local observation is not exposed through the adapter's state_info, so the policy-visible panel reports that it was not reconstructed rather than showing simulator truth in its place."
+  ]
+}
