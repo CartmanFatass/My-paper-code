@@ -6,6 +6,8 @@
 源码、生成结果、运行中会话的有效设置必须区分；本图不声称验证过用户机上的会话。
 如何使用与修改这些文件，见 [CONTROL_PLANE_GUIDANCE.md](CONTROL_PLANE_GUIDANCE.md)。
 本图说明“在哪里、如何连接”；guidance 说明“为什么这样分工、改动会影响谁、如何避免丢失方法”。
+在 Windows/WSL 主机之间或 Claude/Codex 之间切换的步骤与主机自检，见
+[HOST_AND_RUNTIME_SWITCHING.md](HOST_AND_RUNTIME_SWITCHING.md)。
 完整文档分类见 [docs index](../README.md)；退役 project 规格与迁移计划已移到
 [archive](../archive/README.md)，旧实验绑定和原始外部回答继续保留其来源记录。
 

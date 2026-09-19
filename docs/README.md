@@ -5,6 +5,8 @@ or the [project map](project/PROJECT_MAP.md) for code and tooling. The
 [constitution](project/OPERATING_CONSTITUTION.md) is the sole governance text;
 the [control map](project/CONTROL_PLANE_MAP.md) and
 [operating guide](project/CONTROL_PLANE_GUIDANCE.md) explain the current implementation.
+Moving between the Windows and WSL hosts, or between Claude and Codex, follows the
+[switching protocol](project/HOST_AND_RUNTIME_SWITCHING.md).
 
 ## Current entrypoints
 
