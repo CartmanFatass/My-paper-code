@@ -38,12 +38,15 @@ PLANNED_CONFIG_DIFFERENCES = frozenset({
     "lambda_D", "lambda_d", "lambda_h", "high_level_buffer_size", "high_level_batch_size", "use_process_exploration"})
 FLAT_ONLY_ZERO = ("coordinator", "team_discriminator", "individual_discriminator")
 FLAT_K = 10  # identical recurrent chunk length and skill period to the D arms; one constant skill
+# The arm key whose construction is the flat reduction. A thin entry over this runner rebinds it
+# together with ARMS when its own object names that arm differently (the value is unchanged here).
+FLAT_ARM = "FLAT"
 T975 = {1: 12.7062, 2: 4.3027, 3: 3.1824, 4: 2.7764, 5: 2.5706, 6: 2.4469, 7: 2.3646, 8: 2.3060}
 
 
 def make_config(arm, envs, seed):
     renewal, batch = ARMS[arm]
-    if arm == "FLAT":
+    if arm == FLAT_ARM:
         # Ordinary `off` route, then the flat switch: constant single skill with the switch-selected long k,
         # no coordinator/discriminator training, private recurrent actor and central-state critic.
         config = shared.e0._make_config("off", seed, len(envs), shared.HORIZON, shared.HORIZON, shared.N_UAVS,
@@ -323,7 +326,7 @@ def arm_panels(summary):
             or not all(r["updated"] for r in rows)
             or any(summary["optimizer_calls"][k] <= 0 for k in ("discoverer_actor", "discoverer_critic"))):
         raise ValueError("missing learner updates")
-    if arm == "FLAT":
+    if arm == FLAT_ARM:
         if any(summary["optimizer_calls"][k] != 0 for k in FLAT_ONLY_ZERO):
             raise ValueError("FLAT trained a coordinator or discriminator")
     elif summary["optimizer_calls"]["coordinator"] <= 0:
@@ -333,7 +336,7 @@ def arm_panels(summary):
         config = summary[key]
         expected = {"n_agents": shared.N_UAVS, "n_users": shared.N_USERS, "num_envs": count,
                     "rollout_length": horizon, "seed": phase_seed}
-        if arm == "FLAT":
+        if arm == FLAT_ARM:
             expected.update(policy_interruption_mode="off", n_Z=1, n_z=1, k=FLAT_K,
                             lambda_D=0., lambda_d=0., lambda_h=0., use_process_exploration=False)
         else:
