@@ -13,6 +13,9 @@ from that SHA; author edits are excluded and may continue. Without that option, 
 source worktree must remain clean and unchanged. Snapshot preparation shares the original Git
 common directory and claim store; it does not clone, evict, or clean old snapshots.
 Read the node, interpreter and canonical project location from `.codex/hmasd-compute.toml`.
+Without `--node` the kernel takes `HMASD_CONTROL_PLANE_NODE`, then the file's
+`[control_plane_by_platform]` entry for this platform, then `control_plane_node`; one tracked
+file therefore serves the Windows and the WSL checkout. A remote node is always named.
 The live canonical checkout must have current `docs/research/RESEARCH.md` and compute config;
 a frozen source worktree cannot override the owner's current pause or assigned lead.
 `control_source.remote` and `control_source.ref` pin the authority independently of the

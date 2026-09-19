@@ -208,7 +208,7 @@ def _control_plane_node(config: Mapping[str, Any]) -> Any:
             for key, value in by_platform.items()
         ):
             raise LaunchRefusal("control_plane_by_platform must map platform names to node names")
-        selected = by_platform.get("win32" if sys.platform == "win32" else sys.platform)
+        selected = by_platform.get(sys.platform)
         if selected is not None:
             return selected
     return config.get("control_plane_node")
@@ -241,6 +241,24 @@ def _configured_path_prefix(entry: Mapping[str, Any]) -> str | None:
     if not isinstance(raw, str) or not raw.strip():
         raise LaunchRefusal("configured path_prefix must be a non-empty string")
     return raw
+
+
+def _configured_python(node: str, entry: Mapping[str, Any]) -> Path:
+    raw = entry.get("python")
+    if not isinstance(raw, str) or not raw:
+        raise LaunchRefusal(f"execution node {node!r} has no configured interpreter")
+    try:
+        python = Path(raw).expanduser().resolve(strict=True)
+    except OSError as exc:
+        # Usually the wrong node for this host: a default resolved from the platform table
+        # on a machine that is really a remote node.
+        raise LaunchRefusal(
+            f"execution node {node!r} interpreter is unavailable on this host: {raw}; "
+            "name the executing node with --node"
+        ) from exc
+    if not python.is_file():
+        raise LaunchRefusal(f"configured interpreter is not a file: {python}")
+    return python
 
 
 def _child_environment(entry: Mapping[str, Any], *, snapshot: bool) -> dict[str, str]:
@@ -1458,6 +1476,8 @@ def _prepare_paths_and_config(args: argparse.Namespace) -> tuple[LaunchPaths, st
     config_path = _locate_config(source_root, common_root)
     config = _load_config(config_path)
     node, entry = _node_config(config, args.node)
+    # Node-level refusals precede every effect, snapshot preparation included.
+    python = _configured_python(node, entry)
     _configured_path_prefix(entry)
     configured_root = _configured_root(entry)
     control_root = _resolve_control_root(source_root, common_root, configured_root)
@@ -1525,12 +1545,6 @@ def _prepare_paths_and_config(args: argparse.Namespace) -> tuple[LaunchPaths, st
     )
     if bootstrap_tracked.returncode != 0:
         raise LaunchRefusal("admission bootstrap is not tracked at the requested source")
-    python_raw = entry.get("python")
-    if not isinstance(python_raw, str) or not python_raw:
-        raise LaunchRefusal(f"execution node {node!r} has no configured interpreter")
-    python = Path(python_raw).expanduser().resolve(strict=True)
-    if not python.is_file():
-        raise LaunchRefusal(f"configured interpreter is not a file: {python}")
     return (
         LaunchPaths(
             source_root=source_root,

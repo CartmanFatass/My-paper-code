@@ -1111,3 +1111,11 @@ def test_tracked_compute_file_names_a_configured_node_for_each_platform() -> Non
     assert set(table) == {"win32", "linux"}
     for node in table.values():
         assert config["nodes"][node]["role"].startswith("control_plane")
+
+
+def test_interpreter_absent_on_this_host_is_a_refusal_naming_the_node(tmp_path: Path) -> None:
+    entry = {"python": str(tmp_path / "other-host" / "bin" / "python")}
+    with pytest.raises(hmasd_launch.LaunchRefusal, match=r"'local_linux'.*--node"):
+        hmasd_launch._configured_python("local_linux", entry)
+    with pytest.raises(hmasd_launch.LaunchRefusal, match="no configured interpreter"):
+        hmasd_launch._configured_python("local_linux", {})
