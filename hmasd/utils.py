@@ -194,6 +194,7 @@ class RolloutBuffer:
         compact_dim=0,
         sampler_seed=0,
         d2_enabled=False,
+        central_snapshot=False,
     ):
         self.num_steps = num_steps
         self.num_envs = num_envs
@@ -210,6 +211,10 @@ class RolloutBuffer:
         # the team table are allocated only in `d2`; `off` keeps exactly the
         # arrays it had before.
         self.d2_enabled = bool(d2_enabled)
+        # CF central snapshot (FSD matched-information baseline B01).  The per-step held
+        # snapshot the actor actually consumed is stored raw, exactly like `states`/`obs`,
+        # and replayed from here.  Nothing is allocated unless the arm asks for it.
+        self.central_snapshot = bool(central_snapshot)
         self._sampler_rng = np.random.default_rng(int(sampler_seed))
 
         self.reset()
@@ -293,6 +298,14 @@ class RolloutBuffer:
 
         if self.d2_enabled:
             self._reset_d2_tables()
+        if self.central_snapshot:
+            self.central_snapshot_states = np.zeros(
+                (self.num_steps, self.num_envs, self.state_dim), dtype=np.float32
+            )
+            self.central_snapshot_obs = np.zeros(
+                (self.num_steps, self.num_envs, self.n_agents, self.obs_dim), dtype=np.float32
+            )
+            self.central_snapshot_mask = np.zeros((self.num_steps, self.num_envs), dtype=np.bool_)
 
         self._cached_rollout_data = None
         self._profile = {
@@ -399,6 +412,39 @@ class RolloutBuffer:
         self.reward_team_disc[t, env_idx] = reward_team_disc_arr
         self.reward_ind_disc[t, env_idx] = reward_ind_disc_arr
         self.reward_process[t, env_idx] = reward_process_arr
+        self._cached_rollout_data = None
+        return True
+
+    def add_central_snapshot_batch(self, t, snapshot_states, snapshot_obs):
+        """Store the CF central snapshot the actor consumed at step `t` for every env.
+
+        `snapshot_states` is (num_envs, state_dim) and `snapshot_obs` is
+        (num_envs, n_agents, obs_dim): the raw held values, not the normalized tensor.
+        Replay re-applies the same normalization the collector applied at use time.
+        """
+        if not self.central_snapshot:
+            raise RuntimeError("this rollout buffer was not built with the CF central snapshot")
+        if t < 0 or t >= self.num_steps:
+            main_logger.error(f"RolloutBuffer.add_central_snapshot_batch: 时间步索引越界! t={t}")
+            return False
+        states = np.asarray(snapshot_states, dtype=np.float32)
+        obs = np.asarray(snapshot_obs, dtype=np.float32)
+        if states.shape != (self.num_envs, self.state_dim):
+            main_logger.error(
+                f"中心快照状态维度错误: 期望 {(self.num_envs, self.state_dim)}, 实际 {states.shape}"
+            )
+            return False
+        if obs.shape != (self.num_envs, self.n_agents, self.obs_dim):
+            main_logger.error(
+                f"中心快照观测维度错误: 期望 {(self.num_envs, self.n_agents, self.obs_dim)}, 实际 {obs.shape}"
+            )
+            return False
+        if np.any(self.central_snapshot_mask[t]):
+            main_logger.error(f"RolloutBuffer.add_central_snapshot_batch: 重复写入 t={t}")
+            return False
+        self.central_snapshot_states[t] = states
+        self.central_snapshot_obs[t] = obs
+        self.central_snapshot_mask[t] = True
         self._cached_rollout_data = None
         return True
 
@@ -736,6 +782,10 @@ class RolloutBuffer:
             "reward_ind_disc": self.reward_ind_disc[sl],
             "reward_process": self.reward_process[sl],
         }
+        if self.central_snapshot:
+            data["central_snapshot_states"] = self.central_snapshot_states[sl]
+            data["central_snapshot_obs"] = self.central_snapshot_obs[sl]
+            data["central_snapshot_mask"] = self.central_snapshot_mask[sl]
         self._cached_rollout_data = data
         self._profile["full_rollout_pack"] += time.perf_counter() - start_time
         self._profile["full_rollout_pack_calls"] += 1
@@ -1194,6 +1244,20 @@ class RolloutBuffer:
                 arr = arr.reshape(actual_chunk_length, num_chunks * E * self.n_agents, *remaining_dims)
                 return arr
 
+        def flatten_and_chunk_env_sequences(arr):
+            """Chunk a per-environment array without broadcasting the agent dimension.
+
+            Output: (chunk_len, num_chunks * E, ...).  The batch index of the full
+            (chunk, env, agent) flattening is c * E * A + e * A + a, so the row of this
+            array belonging to sequence i is i // A and its agent identity is i % A.
+            """
+            E = arr.shape[1]
+            remaining_dims = arr.shape[2:]
+            arr = arr[:effective_steps]
+            arr = arr.reshape(num_chunks, actual_chunk_length, E, *remaining_dims)
+            arr = arr.transpose(1, 0, *range(2, len(arr.shape)))
+            return arr.reshape(actual_chunk_length, num_chunks * E, *remaining_dims)
+
         def flatten_and_chunk_joint_observations(arr):
             T, E, A, O = arr.shape
             arr = arr[:effective_steps]
@@ -1216,6 +1280,15 @@ class RolloutBuffer:
         joint_observations_flat = flatten_and_chunk_joint_observations(data["obs"])
         team_skills_flat = flatten_and_chunk_sequences(data["team_skills"], with_agent_dim=False)
         agent_skills_flat = flatten_and_chunk_sequences(data["agent_skills"])
+        central_states_flat = central_obs_flat = None
+        if self.central_snapshot:
+            if not np.all(data["central_snapshot_mask"][:effective_steps]):
+                raise RuntimeError(
+                    "CF central snapshot rows are missing for some stored steps; "
+                    "the replayed actor input would not be the collected one"
+                )
+            central_states_flat = flatten_and_chunk_env_sequences(data["central_snapshot_states"])
+            central_obs_flat = flatten_and_chunk_env_sequences(data["central_snapshot_obs"])
         
         # --- 处理初始 Hidden State ---
         # 我们需要取出每个 Chunk 起始时刻的 Hidden State
@@ -1256,7 +1329,12 @@ class RolloutBuffer:
                 'dones': torch.as_tensor(dones_flat, dtype=torch.float32, device=device),
                 'masks': torch.as_tensor(masks_flat, dtype=torch.bool, device=device),
             }
-        
+            if self.central_snapshot:
+                tensor_cache['central_snapshot_states'] = torch.as_tensor(
+                    central_states_flat, dtype=torch.float32, device=device)
+                tensor_cache['central_snapshot_obs'] = torch.as_tensor(
+                    central_obs_flat, dtype=torch.float32, device=device)
+
         for epoch in range(ppo_epochs):
             self._sampler_rng.shuffle(sequence_indices)
             for start in range(0, num_total_sequences, num_sequences_per_batch):
@@ -1269,9 +1347,14 @@ class RolloutBuffer:
                     main_logger.error(f"发现无效的agent_skill值! 范围: [{np.min(agent_skills_batch)}, {np.max(agent_skills_batch)}]")
                     continue
 
+                # The full flattening is chunk-major, then env, then agent, so the
+                # per-environment row of sequence i is i // n_agents and its fixed agent
+                # identity is i % n_agents.
+                env_sequence_indices = batch_indices // self.n_agents
+                ego_indices = batch_indices % self.n_agents
                 if tensor_cache is not None:
                     batch_tensor = torch.as_tensor(batch_indices, dtype=torch.long, device=device)
-                    yield {
+                    batch = {
                         'observations': tensor_cache['observations'][:, batch_tensor],
                         'actions': tensor_cache['actions'][:, batch_tensor],
                         'log_probs': tensor_cache['log_probs'][:, batch_tensor],
@@ -1287,8 +1370,15 @@ class RolloutBuffer:
                         'dones': tensor_cache['dones'][:, batch_tensor],
                         'masks': tensor_cache['masks'][:, batch_tensor],
                     }
+                    if self.central_snapshot:
+                        env_tensor = torch.as_tensor(
+                            env_sequence_indices, dtype=torch.long, device=device)
+                        batch['central_snapshot_states'] = (
+                            tensor_cache['central_snapshot_states'][:, env_tensor])
+                        batch['central_snapshot_obs'] = (
+                            tensor_cache['central_snapshot_obs'][:, env_tensor])
                 else:
-                    yield {
+                    batch = {
                         'observations': torch.from_numpy(obs_flat[:, batch_indices]).float(),
                         'actions': torch.from_numpy(actions_flat[:, batch_indices]).float(),
                         'log_probs': torch.from_numpy(log_probs_flat[:, batch_indices]).float(),
@@ -1304,6 +1394,16 @@ class RolloutBuffer:
                         'dones': torch.from_numpy(dones_flat[:, batch_indices]).float(),
                         'masks': torch.from_numpy(masks_flat[:, batch_indices]).bool()
                     }
+                    if self.central_snapshot:
+                        batch['central_snapshot_states'] = torch.from_numpy(
+                            central_states_flat[:, env_sequence_indices]).float()
+                        batch['central_snapshot_obs'] = torch.from_numpy(
+                            central_obs_flat[:, env_sequence_indices]).float()
+                if self.central_snapshot:
+                    batch['central_ego_indices'] = torch.as_tensor(
+                        ego_indices, dtype=torch.long,
+                        device=device if device is not None else None)
+                yield batch
 
     def get_d2_coordinator_sampler(self, num_steps, ppo_epochs, num_sequences_per_batch, device=None):
         """

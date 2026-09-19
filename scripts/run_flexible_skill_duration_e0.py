@@ -219,6 +219,8 @@ CONFIG_DUMP_FIELDS = (
     "interruption_cost_c_Z", "skill_cap_k_max", "team_cap_k_Z", "age_feature",
     "use_horizon_window", "use_process_exploration", "strict_hmasd_alignment",
     "use_compact_team_discriminator", "use_compact_individual_discriminator",
+    # CF pathway flag of the FSD matched-information baseline B01; False for every other arm.
+    "use_central_snapshot_in_flat_actor",
 )
 
 LOSS_FIELDS = (

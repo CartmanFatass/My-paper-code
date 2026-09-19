@@ -77,6 +77,8 @@ class Config(BaseConfig):
     skill_entropy_coef = 0.01
     high_level_assignment_mode = "parallel"
     use_compact_in_low_level_actor = False
+    # See configs/config_1.py: CF-only central snapshot pathway, off by default.
+    use_central_snapshot_in_flat_actor = False
     use_team_code_discriminator = False
     use_individual_skill_discriminator = True
     discriminator_condition_on_compact = False

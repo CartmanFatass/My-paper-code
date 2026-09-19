@@ -490,6 +490,17 @@ class HMASDAgent:
             self.d2_k_Z = self.d2_k_max
             self.d2_age_feature = 'off'
         self.use_low_level_compact = bool(getattr(config, 'use_compact_in_low_level_actor', False))
+        # CF ("central-input flat", FSD matched-information baseline B01).  Every CF branch
+        # below is guarded by this flag; `off` allocates nothing, draws nothing and keeps the
+        # existing arms byte-identical.
+        self.use_central_snapshot = bool(getattr(config, 'use_central_snapshot_in_flat_actor', False))
+        if self.use_central_snapshot and (self.use_ha_ctse or self.d2_enabled):
+            # The snapshot cadence is read from the `off` route's skill timer.  The d2 and
+            # HA-CTSE routes decide on their own clocks, so the k-cadence the card fixes
+            # would not be the one the code applies.
+            raise ValueError(
+                "use_central_snapshot_in_flat_actor is defined for the `off` route only"
+            )
         self.use_process_exploration = bool(
             self.use_ha_ctse and getattr(config, 'use_process_exploration', False)
         )
@@ -794,6 +805,7 @@ class HMASDAgent:
             compact_dim=getattr(config, 'opt_compact_dim', 0) if (self.use_ha_ctse or self.use_low_level_compact) else 0,
             sampler_seed=rollout_sampler_seed,
             d2_enabled=self.d2_enabled,
+            central_snapshot=self.use_central_snapshot,
         )
         main_logger.info(f"初始化统一Rollout Buffer: 长度={rollout_length}, 环境数={num_envs}, "
                         f"智能体数={config.n_agents}, 团队技能数={config.n_Z}, 个体技能数={config.n_z}")
@@ -868,6 +880,16 @@ class HMASDAgent:
         self.prev_actor_hidden_np = None
         self.prev_critic_hidden_np = None
         self._hidden_state_array_valid = None
+
+        # CF per-lane held central snapshot: raw global state and raw joint observations of
+        # the step the snapshot was taken at, plus a validity flag.  Nothing exists in `off`.
+        self._central_snapshot_capacity = 0
+        self._central_snapshot_states = None
+        self._central_snapshot_obs = None
+        self._central_snapshot_valid = None
+        self._central_snapshot_source_step = None
+        if self.use_central_snapshot:
+            self._ensure_central_snapshot_arrays(getattr(config, 'num_envs', 1))
         
         # 动态初始化环境状态字典 - 将在实际使用时按需初始化
         # 不再预分配固定数量的环境槽位
@@ -1223,6 +1245,130 @@ class HMASDAgent:
         self.prev_critic_hidden_np = prev_critic_hidden
         self._hidden_state_array_valid = valid
         self._hidden_batch_capacity = new_capacity
+
+    # ------------------------------------------------------------------
+    # CF central snapshot (FSD matched-information baseline B01, card section 1).
+    # The snapshot is refreshed only at the team-decision steps the D arms use
+    # (`env_timers == 0` after skill assignment) and at the first decision step after a
+    # lane reset; it is held unchanged for the intervening steps.  It stores raw values and
+    # reuses the existing observation/state normalization at use time, exactly like the
+    # actor's own observation, so collection, stored replay and evaluation assemble the
+    # actor input from the same code with the same statistics.  The ego one-hot is never
+    # normalized and has no running statistics.
+    # ------------------------------------------------------------------
+
+    def _ensure_central_snapshot_arrays(self, num_envs):
+        required = int(max(num_envs, 1))
+        if self._central_snapshot_states is not None and self._central_snapshot_capacity >= required:
+            return
+        old_capacity = self._central_snapshot_capacity
+        new_capacity = max(required, old_capacity * 2 if old_capacity else required)
+        states = np.zeros((new_capacity, self.config.state_dim), dtype=np.float64)
+        observations = np.zeros(
+            (new_capacity, self.config.n_agents, self.config.obs_dim), dtype=np.float32
+        )
+        valid = np.zeros(new_capacity, dtype=np.bool_)
+        source = np.full(new_capacity, -1, dtype=np.int64)
+        if old_capacity > 0:
+            states[:old_capacity] = self._central_snapshot_states[:old_capacity]
+            observations[:old_capacity] = self._central_snapshot_obs[:old_capacity]
+            valid[:old_capacity] = self._central_snapshot_valid[:old_capacity]
+            source[:old_capacity] = self._central_snapshot_source_step[:old_capacity]
+        self._central_snapshot_states = states
+        self._central_snapshot_obs = observations
+        self._central_snapshot_valid = valid
+        self._central_snapshot_source_step = source
+        self._central_snapshot_capacity = new_capacity
+
+    def _clear_central_snapshot(self, env_id):
+        """Drop a lane's held snapshot; the lane's next decision step rebuilds it."""
+        if not self.use_central_snapshot or self._central_snapshot_valid is None:
+            return
+        env_id = int(env_id)
+        if env_id >= self._central_snapshot_capacity:
+            return
+        self._central_snapshot_valid[env_id] = False
+        self._central_snapshot_source_step[env_id] = -1
+        self._central_snapshot_states[env_id].fill(0.0)
+        self._central_snapshot_obs[env_id].fill(0.0)
+
+    def _refresh_central_snapshots(self, states_batch, observations_batch, refresh_mask,
+                                   source_step=None):
+        """Take a fresh central snapshot for the lanes selected by `refresh_mask`."""
+        num_envs = int(np.asarray(refresh_mask).shape[0])
+        self._ensure_central_snapshot_arrays(num_envs)
+        indices = np.flatnonzero(np.asarray(refresh_mask, dtype=np.bool_))
+        if indices.size:
+            self._central_snapshot_states[indices] = np.asarray(
+                states_batch, dtype=np.float64)[indices]
+            self._central_snapshot_obs[indices] = np.asarray(
+                observations_batch, dtype=np.float32)[indices]
+            self._central_snapshot_valid[indices] = True
+            self._central_snapshot_source_step[indices] = (
+                -1 if source_step is None else int(source_step))
+
+    def _central_snapshot_refresh_mask(self, num_envs):
+        """Lanes that take a fresh snapshot this step.
+
+        `env_timers[i] == 0` holds exactly for the lanes the skill assignment re-decided at
+        this step (a lane that is not re-decided has its timer incremented), which is the
+        k = 10 team-decision cadence of the D arms, including the first step after a lane
+        reset.  A lane without a held snapshot also refreshes.
+        """
+        self._ensure_central_snapshot_arrays(num_envs)
+        decided = np.asarray(
+            [int(self.env_timers.get(i, 0)) == 0 for i in range(num_envs)], dtype=np.bool_
+        )
+        return decided | ~self._central_snapshot_valid[:num_envs]
+
+    def _central_actor_input(self, env_indices, n_agents):
+        """Assemble (len(env_indices) * n_agents, central_dim), env-major and agent-minor.
+
+        Layout: normalized held global state, the normalized held joint observations in
+        fixed agent-identity order, then the agent's own ego one-hot.
+        """
+        env_indices = np.asarray(env_indices, dtype=np.int64).reshape(-1)
+        if not self._central_snapshot_valid[env_indices].all():
+            raise RuntimeError(
+                "CF central snapshot is missing for an active lane; the actor would read "
+                "a state it never captured"
+            )
+        count = env_indices.size
+        states = self._normalize_states(
+            self._central_snapshot_states[env_indices], update=False)
+        observations = self._normalize_observations(
+            self._central_snapshot_obs[env_indices][:, :n_agents], update=False)
+        per_env = np.concatenate(
+            [
+                np.asarray(states, dtype=np.float32).reshape(count, -1),
+                np.asarray(observations, dtype=np.float32).reshape(count, -1),
+            ],
+            axis=1,
+        )
+        ego = np.tile(np.eye(n_agents, dtype=np.float32), (count, 1))
+        return np.concatenate([np.repeat(per_env, n_agents, axis=0), ego], axis=1)
+
+    def _central_actor_input_tensor(self, env_indices, n_agents):
+        return torch.as_tensor(
+            self._central_actor_input(env_indices, n_agents), dtype=torch.float32, device=self.device
+        )
+
+    def _central_actor_input_from_replay(self, central_states_seq, central_obs_seq, ego_indices):
+        """The same layout from stored rows: (T, B, state_dim), (T, B, A, obs_dim), (B,)."""
+        time_steps, batch = central_states_seq.shape[:2]
+        n_agents = central_obs_seq.shape[2]
+        ego = F.one_hot(ego_indices.long(), num_classes=n_agents).to(
+            dtype=central_states_seq.dtype, device=central_states_seq.device
+        )
+        ego = ego.unsqueeze(0).expand(time_steps, batch, n_agents)
+        return torch.cat(
+            [
+                central_states_seq,
+                central_obs_seq.reshape(time_steps, batch, -1),
+                ego,
+            ],
+            dim=-1,
+        )
 
     def _hidden_to_numpy(self, hidden_state, n_agents=None):
         if hidden_state is None:
@@ -1585,7 +1731,10 @@ class HMASDAgent:
             self.env_prev_hidden_states[critic_hidden_key] = None
 
         self._reset_hidden_state_arrays_for_env(env_id)
-        
+        # CF: the lane's old central snapshot is dropped here and rebuilt from the new
+        # episode's initial information at the lane's next decision step (card section 1).
+        self._clear_central_snapshot(env_id)
+
         # 【关键修复】将技能标记为无效值(-1)，强制在下一个step中重新分配
         # 这确保了新Episode的第一步会触发技能重新分配
         if env_id in self.env_team_skills:
@@ -1834,10 +1983,29 @@ class HMASDAgent:
 
             # 【关键修复】应用观测归一化，解决输入尺度问题
             observations_normalized = self._normalize_observations(observations)
-            
+
             # 将所有智能体作为单个批次处理
             obs_batch = torch.FloatTensor(observations_normalized).to(self.device)
             skill_batch = torch.tensor(agent_skills, device=self.device)
+
+            # CF: this route carries no batched decision mask, so the snapshot refreshes at
+            # the lane's `env_timers == 0` steps (the same k-cadence the batched route uses)
+            # and whenever the lane holds none, e.g. right after `reset_env_state`.
+            central_input = None
+            if self.use_central_snapshot:
+                if state is None:
+                    raise ValueError(
+                        "use_central_snapshot_in_flat_actor=True requires the global state"
+                    )
+                self._ensure_central_snapshot_arrays(env_id + 1)
+                if (int(self.env_timers.get(env_id, 0)) == 0
+                        or not bool(self._central_snapshot_valid[env_id])):
+                    self._central_snapshot_states[env_id] = np.asarray(state, dtype=np.float64)
+                    self._central_snapshot_obs[env_id, :n_agents] = np.asarray(
+                        observations, dtype=np.float32)
+                    self._central_snapshot_valid[env_id] = True
+                    self._central_snapshot_source_step[env_id] = -1
+                central_input = self._central_actor_input_tensor([env_id], n_agents)
 
             # 将环境的 Actor hidden_state 传入网络
             actions_batch, logprobs_batch, _, new_actor_hidden_state = self.skill_discoverer.forward(
@@ -1846,6 +2014,7 @@ class HMASDAgent:
                 actor_hidden_state,
                 deterministic,
                 compact_context=low_level_compact_context,
+                central_input=central_input,
             )
             
             # 存储更新后的 Actor hidden_state
@@ -2954,6 +3123,14 @@ class HMASDAgent:
                     -1,
                 )
             # === 3. 批量运行 Actor 网络获取动作 ===
+            # CF: the held snapshot is normalized here, after this step's observation and
+            # state normalizer updates, so the actor's own observation and the snapshot see
+            # the same statistics.
+            central_input_flat = (
+                self._central_actor_input_tensor(np.arange(num_envs), n_agents)
+                if self.use_central_snapshot
+                else None
+            )
             policy_start = time.perf_counter() if profile_enabled else 0.0
             actions_flat, logprobs_flat, _, new_actor_hidden_flat = self.skill_discoverer(
                 obs_tensor,
@@ -2961,6 +3138,7 @@ class HMASDAgent:
                 actor_hidden_tensor,
                 deterministic,
                 compact_context=low_level_compact_flat,
+                central_input=central_input_flat,
             )
             if profile_enabled:
                 self._sync_cuda_for_profile()
@@ -3093,6 +3271,14 @@ class HMASDAgent:
         if profile_enabled:
             self._sync_cuda_for_profile()
             self._step_profile['skill_assign'] += time.perf_counter() - profile_start
+
+        # 1b. CF: refresh the held central snapshot at this step's team decisions only.
+        if self.use_central_snapshot:
+            self._refresh_central_snapshots(
+                states_batch,
+                observations_batch,
+                self._central_snapshot_refresh_mask(num_envs),
+            )
 
         # 2. 批量选择动作
         profile_start = time.perf_counter() if profile_enabled else 0.0
@@ -3920,6 +4106,23 @@ class HMASDAgent:
                 ],
                 dtype=np.int64,
             )
+
+        if self.use_central_snapshot:
+            # The snapshot the actor consumed at this step is still the held one: `step`
+            # refreshes it before the actor forward and nothing between that call and this
+            # one touches it (a lane reset happens after storage).  Store it raw so replay
+            # reads exactly the same values.
+            if rollout_step_idx is None:
+                raise ValueError("CF central snapshot storage requires rollout_step_idx")
+            self._ensure_central_snapshot_arrays(num_envs)
+            if not self._central_snapshot_valid[:num_envs].all():
+                raise RuntimeError("CF central snapshot is missing for a stored lane")
+            if not self.rollout_buffer.add_central_snapshot_batch(
+                int(rollout_step_idx),
+                self._central_snapshot_states[:num_envs],
+                self._central_snapshot_obs[:num_envs],
+            ):
+                raise RuntimeError("CF central snapshot could not be stored for replay")
 
         intrinsic_batch = self._compute_intrinsic_rewards_batch(
             next_states=next_states,
@@ -6214,12 +6417,36 @@ class HMASDAgent:
                 )
                 compact_context_seq = compact_context_flat.reshape(T_ctx, B_ctx, -1)
 
+            central_input_seq = None
+            if self.use_central_snapshot:
+                if 'central_snapshot_states' not in batch:
+                    raise RuntimeError(
+                        "use_central_snapshot_in_flat_actor=True requires the stored central "
+                        "snapshot in the rollout sampler"
+                    )
+                central_states_seq = batch['central_snapshot_states'].to(self.device)
+                central_obs_seq = batch['central_snapshot_obs'].to(self.device)
+                # The same normalization the collector applied at use time, with the current
+                # statistics, exactly as the private observation and the critic state above.
+                if obs_norm_mean is not None:
+                    central_obs_seq = (central_obs_seq - obs_norm_mean) / torch.sqrt(obs_norm_var + 1e-8)
+                    central_obs_seq = torch.clamp(central_obs_seq, -10.0, 10.0)
+                if state_norm_mean is not None:
+                    central_states_seq = (central_states_seq - state_norm_mean) / torch.sqrt(state_norm_var + 1e-8)
+                    central_states_seq = torch.clamp(central_states_seq, -10.0, 10.0)
+                central_input_seq = self._central_actor_input_from_replay(
+                    central_states_seq, central_obs_seq, batch['central_ego_indices'].to(self.device)
+                )
+
             profile_start = time.perf_counter() if self.enable_runtime_profiling else 0.0
             with self._update_autocast():
-                actor_observations_seq = self.skill_discoverer._apply_compact_context(
-                    observations_seq,
-                    compact_context_seq,
-                    self.skill_discoverer.actor_context_adapter,
+                actor_observations_seq = self.skill_discoverer._apply_central_input(
+                    self.skill_discoverer._apply_compact_context(
+                        observations_seq,
+                        compact_context_seq,
+                        self.skill_discoverer.actor_context_adapter,
+                    ),
+                    central_input_seq,
                 )
                 new_log_probs, entropy = self.skill_discoverer.actor.evaluate_actions(
                     actor_observations_seq,

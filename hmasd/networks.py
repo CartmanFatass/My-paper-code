@@ -1579,7 +1579,17 @@ class SkillDiscoverer(nn.Module):
         self.logger = logger if logger is not None else main_logger
         self.device = device if device is not None else torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
         self.use_compact_context = bool(getattr(config, "use_compact_in_low_level_actor", False))
-        
+        # CF ("central-input flat", FSD matched-information baseline B01): the actor's own
+        # observation is concatenated with a held central snapshot and a fixed ego one-hot.
+        # Only the actor's input projection widens; when the flag is off nothing here runs
+        # and the actor is constructed exactly as before (same shapes, same RNG draws).
+        self.use_central_snapshot = bool(getattr(config, "use_central_snapshot_in_flat_actor", False))
+        self.central_input_dim = (
+            int(config.state_dim) + int(config.n_agents) * int(config.obs_dim) + int(config.n_agents)
+            if self.use_central_snapshot
+            else 0
+        )
+
         # Adapt hmasd config to r_mappo's args format
         class Args:
             def __init__(self, config):
@@ -1639,7 +1649,14 @@ class SkillDiscoverer(nn.Module):
         
         cent_obs_space = (config.state_dim,)
 
-        self.actor = R_Actor(args, obs_space, action_space, config.n_z, self.device)
+        actor_obs_space = obs_space
+        if self.use_central_snapshot:
+            actor_obs_space = spaces.Box(
+                low=-np.inf,
+                high=np.inf,
+                shape=(int(config.obs_dim) + self.central_input_dim,),
+            )
+        self.actor = R_Actor(args, actor_obs_space, action_space, config.n_z, self.device)
         self.critic = R_Critic(args, cent_obs_space, config.n_Z, self.device)
         if self.use_compact_context:
             compact_dim = int(getattr(config, "opt_compact_dim", getattr(config, "embedding_dim", 128)))
@@ -1672,6 +1689,38 @@ class SkillDiscoverer(nn.Module):
             compact_context = compact_context.to(device=tensor.device, dtype=tensor.dtype)
         return tensor + adapter(compact_context)
 
+    def _apply_central_input(self, tensor, central_input):
+        """Concatenate the CF central input onto the actor's observation.
+
+        `central_input` carries, in this fixed order, the normalized held global state, the
+        six normalized joint observations in fixed agent-identity order and the ego one-hot.
+        The flag-off path returns the observation unchanged and allocates nothing.
+        """
+        # `getattr` default: existing inference-only callers build this module without
+        # running `__init__` (tests/hmasd_r_mappo_utils_contract_test.py), and the flag-off
+        # path must stay inert for them, exactly as before this pathway existed.
+        if not getattr(self, "use_central_snapshot", False):
+            return tensor
+        if central_input is None:
+            raise ValueError(
+                "use_central_snapshot_in_flat_actor=True requires a central input for the actor"
+            )
+        if not torch.is_tensor(central_input):
+            central_input = torch.as_tensor(central_input, dtype=tensor.dtype, device=tensor.device)
+        else:
+            central_input = central_input.to(device=tensor.device, dtype=tensor.dtype)
+        if central_input.shape[-1] != self.central_input_dim:
+            raise ValueError(
+                f"central input must have last dimension {self.central_input_dim}, "
+                f"got {tuple(central_input.shape)}"
+            )
+        if central_input.shape[:-1] != tensor.shape[:-1]:
+            raise ValueError(
+                f"central input batch shape {tuple(central_input.shape[:-1])} does not match "
+                f"the observation batch shape {tuple(tensor.shape[:-1])}"
+            )
+        return torch.cat([tensor, central_input], dim=-1)
+
     def actor_update_parameters(self):
         params = list(self.actor.parameters())
         if self.actor_context_adapter is not None:
@@ -1684,9 +1733,11 @@ class SkillDiscoverer(nn.Module):
             params.extend(self.critic_context_adapter.parameters())
         return params
 
-    def forward(self, observation, agent_skill, hidden_state, deterministic=False, compact_context=None):
+    def forward(self, observation, agent_skill, hidden_state, deterministic=False, compact_context=None,
+                central_input=None):
         # The new R_Actor expects masks. We can pass ones.
         observation = self._apply_compact_context(observation, compact_context, self.actor_context_adapter)
+        observation = self._apply_central_input(observation, central_input)
         masks = torch.ones(observation.size(0), 1, device=observation.device)
         actions, log_probs, new_hidden = self.actor(observation, hidden_state, masks, agent_skill, deterministic=deterministic)
         # The original forward returned a dummy distribution, we return None for that.
@@ -1698,7 +1749,7 @@ class SkillDiscoverer(nn.Module):
         masks = torch.ones(state.size(0), 1, device=state.device)
         return self.critic(state, critic_hidden_state, masks, team_skill)
 
-    def evaluate_sequence(self, observations_seq, agent_skills_seq, actions_seq, global_states_seq, team_skills_seq, initial_hxs=None, dones_seq=None, initial_critic_hxs=None, compact_context_seq=None):
+    def evaluate_sequence(self, observations_seq, agent_skills_seq, actions_seq, global_states_seq, team_skills_seq, initial_hxs=None, dones_seq=None, initial_critic_hxs=None, compact_context_seq=None, central_input_seq=None):
         T, B, _ = observations_seq.shape
         if dones_seq is None:
             dones_seq = torch.zeros((T, B), device=observations_seq.device)
@@ -1713,10 +1764,13 @@ class SkillDiscoverer(nn.Module):
         masks = torch.ones_like(dones_seq, dtype=torch.float32)
         if T > 1:
             masks[1:] = 1.0 - dones_seq[:-1].float()
-        actor_observations = self._apply_compact_context(
-            observations_seq,
-            compact_context_seq,
-            self.actor_context_adapter,
+        actor_observations = self._apply_central_input(
+            self._apply_compact_context(
+                observations_seq,
+                compact_context_seq,
+                self.actor_context_adapter,
+            ),
+            central_input_seq,
         )
         critic_states = self._apply_compact_context(
             global_states_seq,

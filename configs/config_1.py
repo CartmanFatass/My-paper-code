@@ -239,6 +239,11 @@ class Config:
     opt_cmi_coef = 0.005
     opt_aggregation_entropy_coef = 0.005
     use_compact_in_low_level_actor = False
+    # FSD matched-information baseline B01, arm CF ("central-input flat"): the low-level
+    # actor reads a held central snapshot (global state + joint observations in fixed agent
+    # order) and a fixed ego one-hot alongside its own observation.  Off everywhere else;
+    # with this flag off nothing below the actor's input projection changes.
+    use_central_snapshot_in_flat_actor = False
 
     use_team_bridge = False
     team_bridge_type = "stochastic"  # none, deterministic, stochastic
