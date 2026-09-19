@@ -185,3 +185,18 @@ Publish these exact accepted inputs, then admit the two original arms through th
 local_linux kernel with source snapshots. No change to the scientific scope or two-fit exposure.
 FSD's new main notebook commit `ff0725db5` acknowledges the shared host and separate direction
 writers; its work stays with Claude. Run identities will be linked here from native manifests.
+
+## 2026-09-19 — A01 two original arms admitted
+
+Both selected original invocations were accepted by the configured actual-node kernel after
+fresh publication/policy/memory checks. Native manifests preserve operation refs, source
+snapshots, command identities and process witnesses:
+
+- [DETACHED launch](../../../../runs/vap_folr_core/predictive_aux_a01_detached_783101/launch-manifest.json)
+- [COUPLED launch](../../../../runs/vap_folr_core/predictive_aux_a01_coupled_783101/launch-manifest.json)
+
+The published accepted implementation is `356bb3cc53479946bc031a24ada1ea979769fddf`.
+Both runners entered training: two fits started of the two selected; no repeat or additional
+fit is selected. A bounded Monitor is assigned these exact operations; the DM retains acceptance
+and collection/read responsibility. These retained snapshots remain immutable while notebook
+work continues. Final scientific reading awaits complete outputs and cross-arm probe identity.
