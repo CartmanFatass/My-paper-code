@@ -76,12 +76,18 @@ WSL 主机上传给 agentify 的路径参数必须是 Windows 能打开的写法
 
 ## 6. 当前状态（2026-09-18）
 
-- WSL 主机：第 5 节各项已在 `main` 上实测通过。
-- Windows 主机：checkout 仍在 `23d6dc41d`，**尚未拉取今天的 `main`，第 5 节尚未在 Windows 上执行**。
-  拉取前先处理 `C:/Projects/HMASD/.git/sequencer` 里自 2026-09-15 停着的 cherry-pick（完成或中止，由 owner 定）。
-  Windows 上未推送的 `codex/hmasd-clerk`、不在 origin 上的 tag 与 bundle 在任何 `worktree prune`/`gc` 之前先推送或打包。
-- 已知与主机无关的 4 个陈旧测试失败在 `tests/production_backend_policy_test.py`
-  （RIDGEGATE 注册表断言、RCLE 旧源码摘要），属于归档方向，未改动。
+- WSL 主机：第 5 节各项已在 `main` 的独立 detached worktree 上实测通过。控制面副本 `drift: 0`，
+  节点解析为 `local_linux`；启动器 51 passed，控制面技能 22 passed/1 skipped，FSD 守卫 13 passed，
+  UAV 原生后端 30 passed/2 skipped；Codex 与 Claude 均连接 `agentify-desktop`，结果节点返回
+  `LAPTOP-U9TDKC8A`。验证 worktree 已移除，原方向 checkout 未切分支或改动。
+- Windows 主机：checkout 已快进到当天的 `main` 并完成第 5 节自检。控制面副本 `drift: 0`，节点解析为
+  `local_windows`；启动器 50 passed/1 skipped，控制面技能 23 passed，FSD 守卫 13 passed，UAV
+  原生后端 32 passed；Codex 与 Claude 均连接 `agentify-desktop`，两台主机的 Codex 用户级条目均为
+  `tool_timeout_sec = 2700`，结果节点返回 `LAPTOP-U9TDKC8A`。补充检查中 relay 生命周期 24 passed，
+  远端日志同步 3 passed。
+- `tests/production_backend_policy_test.py` 当前为 62 passed/12 failed；12 个参数化 case 属于 4 类已知
+  陈旧断言（RIDGEGATE 注册表以及 TBVUUS、RCLE、TBCC 的旧原生构件摘要），与本次双主机控制面适配无关，
+  未据此改动归档方向。
 
-本节是状态快照；Windows 自检通过后由执行它的会话更新这一节。背景与逐项改动见
+本节是状态快照；背景与逐项改动见
 [2026-09-18 变更记录](../Claude_docs/changes/2026-09-18-wsl-second-host-enablement.md)。
