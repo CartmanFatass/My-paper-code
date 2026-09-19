@@ -86,7 +86,7 @@ if os.name == 'nt':
 print('fixture stdout', flush=True)
 import sys
 print('fixture stderr', file=sys.stderr, flush=True)
-(output / 'summary.json').write_text(json.dumps({'sha': admission['sha'], 'console': console, 'path': os.environ.get('PATH')}), encoding='utf-8')
+(output / 'summary.json').write_text(json.dumps({'sha': admission['sha'], 'console': console, 'path': os.environ.get('PATH'), 'prefix': sys.prefix}), encoding='utf-8')
 """
 
 
@@ -159,7 +159,8 @@ def launch_repo(tmp_path: Path) -> tuple[Path, Path, str]:
     (source / "docs" / "research" / "RESEARCH.md").write_text(
         _research(), encoding="utf-8"
     )
-    configured_python = Path(sys.executable).resolve().as_posix()
+    # Deliberately not resolved: under a POSIX venv this is a symlink, as on the real nodes.
+    configured_python = Path(sys.executable).absolute().as_posix()
     configured_root = source.resolve().as_posix()
     (source / ".codex" / "hmasd-compute.toml").write_text(
         f'''schema_version = 1
@@ -502,6 +503,8 @@ def test_successful_fixture_is_admitted_and_detached(
     _wait_for(output / "summary.json")
     summary = json.loads((output / "summary.json").read_text(encoding="utf-8"))
     assert summary["sha"] == sha
+    # The runner runs inside the configured environment, not its base interpreter.
+    assert summary["prefix"] == sys.prefix
     # The node's path_prefix reaches the real runner through the detached supervisor.
     assert summary["path"].startswith(source.resolve().as_posix() + "/node-bin" + os.pathsep)
     assert manifest["acceptance"] == "accepted"
@@ -1119,3 +1122,19 @@ def test_interpreter_absent_on_this_host_is_a_refusal_naming_the_node(tmp_path: 
         hmasd_launch._configured_python("local_linux", entry)
     with pytest.raises(hmasd_launch.LaunchRefusal, match="no configured interpreter"):
         hmasd_launch._configured_python("local_linux", {})
+
+
+@pytest.mark.skipif(os.name == "nt", reason="POSIX venv interpreters are symlinks")
+def test_posix_venv_interpreter_is_started_by_its_configured_path(tmp_path: Path) -> None:
+    venv_python = tmp_path / "venv" / "bin" / "python"
+    venv_python.parent.mkdir(parents=True)
+    venv_python.symlink_to(Path(sys.executable).resolve())
+    selected = hmasd_launch._configured_python("fixture", {"python": str(venv_python)})
+    assert selected == venv_python
+    assert selected.resolve() != selected
+    # Identity is spelling-independent, so existing claims and digests are unaffected.
+    runner = tmp_path / "runner.py"
+    assert hmasd_admission.command_digest(selected, runner, ["--x"]) == hmasd_admission.command_digest(
+        selected.resolve(), runner, ["--x"]
+    )
+    assert hmasd_launch._normalized_path(selected) == hmasd_launch._normalized_path(selected.resolve())

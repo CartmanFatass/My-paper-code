@@ -247,8 +247,9 @@ def _configured_python(node: str, entry: Mapping[str, Any]) -> Path:
     raw = entry.get("python")
     if not isinstance(raw, str) or not raw:
         raise LaunchRefusal(f"execution node {node!r} has no configured interpreter")
+    configured = Path(raw).expanduser()
     try:
-        python = Path(raw).expanduser().resolve(strict=True)
+        python = configured.resolve(strict=True)
     except OSError as exc:
         # Usually the wrong node for this host: a default resolved from the platform table
         # on a machine that is really a remote node.
@@ -258,6 +259,13 @@ def _configured_python(node: str, entry: Mapping[str, Any]) -> Path:
         ) from exc
     if not python.is_file():
         raise LaunchRefusal(f"configured interpreter is not a file: {python}")
+    if os.name != "nt" and configured.is_absolute():
+        # A POSIX venv's bin/python is a symlink to the base interpreter, and CPython finds
+        # pyvenv.cfg from the path it was started with. Executing the resolved target would
+        # run the base interpreter without the environment's packages. Every identity
+        # comparison (command_digest, the claim key, the child's samefile check) resolves
+        # the path itself, so the spelling used to start the process does not enter them.
+        return Path(os.path.abspath(configured))
     return python
 
 
