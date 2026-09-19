@@ -693,3 +693,19 @@ paths only, fetches before each commit, never cleans or stages files it did not 
 edits only the FSD row of `RESEARCH.md`. That branch states that FSD stays with the Claude
 session and that there is no Root dispatch layer, so this session keeps integrating its own
 FSD commits on `main`.
+
+## 2026-09-19 08:21 PDT — coordinator batch B02: all six fits admitted; three terminal
+
+Execution facts only; no B02 score has been read. `b02_d128_772803_a01`, `b02_d1280_772803_a01`
+and `b02_d128_772903_a01` ended with exit 0 and 45 rows each; `b02_d128_773003_a01` was at 44
+rows. Two slots were free, so the last two planned fits were launched at the same launch sha
+`0cb5093578d16f9baaa2bd96cb3b395ad4e14012`, after fast-forwarding the node checkout to the
+published `main` (`ff0725db5`). Both admitted at the first request, alive with an empty
+`stderr.log`. Never more than four fits ran at once.
+
+| tag | arm | block | operation ref (under `/home/wu/projects/HMASD/.git/hmasd-admission/`) |
+| --- | --- | --- | --- |
+| `b02_d128_773103_a01` | D128 | 773103 | `af2f9072c8a2eb8b53eeda01352d5dd976f656856a6faf649c57110113ad3a84.json` |
+| `b02_d128_773203_a01` | D128 | 773203 | `519d27ad0032b08745c520758c06a61ba4774d9b62e425ae8a5eed1bdfaaca26.json` |
+
+The plan is now fully launched: six of six. Collection and the reduction wait for all six exits.
