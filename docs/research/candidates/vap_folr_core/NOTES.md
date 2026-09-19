@@ -200,3 +200,71 @@ Both runners entered training: two fits started of the two selected; no repeat o
 fit is selected. A bounded Monitor is assigned these exact operations; the DM retains acceptance
 and collection/read responsibility. These retained snapshots remain immutable while notebook
 work continues. Final scientific reading awaits complete outputs and cross-arm probe identity.
+
+## 2026-09-19 — A01 complete: adverse native observation, slightly better predictive transfer
+
+Both original accepted operations have matching terminal witnesses, exit zero and complete
+runner summaries. Monitor returned an empty active set; its terminal notice also used the
+owner-authorized relay task. The DM reconciled the same handles, with no retry or new fit.
+
+| Reading | DETACHED | COUPLED |
+| --- | ---: | ---: |
+| Sole-final native mean, 128 greedy episodes | 2.69046875 | -3.8690625000000014 |
+| Negative-return final episodes (descriptive) | 51 / 128 | 95 / 128 |
+| Own-policy prediction MSE (different induced data/laws) | 1.2180755787628395 | 1.2475613021859853 |
+| Common uniform-policy transfer MSE | 1.91582951272241 | 1.803888307163275 |
+| Eligible common-probe agent-time entries | 6173 | 6173 |
+| Runner wall seconds, single process including imports/preparation | 1785.3945803509996 | 1844.1139315610053 |
+| Single-process CPU seconds | 1785.940704938 | 1844.257223117 |
+| Single-process peak RSS, KiB | 671212 | 681528 |
+
+Primary signed observation COUPLED minus DETACHED = **-6.559531250000001**.
+Both have 5000 training episodes, 100000 training transitions, 4969 native and 4969 predictor
+optimizer steps, one final checkpoint, 128 final plus 128 probe episodes, zero evaluation
+updates. Total consumed is exactly the two selected fits; no failed or hidden training attempt.
+Both actors and predictors moved from initialization. The first/last 200 update-row mean
+prediction MSE changed from 2.4397651 to 1.4403850 in DETACHED and 2.0597891 to 1.2190964 in
+COUPLED. These are changing replay distributions, not held-out learning curves or evidence
+that prediction progress caused the native difference.
+
+### Verification and retained evidence
+
+- [DETACHED summary](../../../../runs/vap_folr_core/predictive_aux_a01_detached_783101/summary.json)
+- [COUPLED summary](../../../../runs/vap_folr_core/predictive_aux_a01_coupled_783101/summary.json)
+
+The DM independently reconstructed complete counts, label alignment/activity masks and panel
+MSE from retained arrays, checked finite checkpoint tensors, checkpoint/update/panel SHA256s,
+and the recorded source hashes against each immutable launch snapshot. Recomputed sums of
+FP32 reward storage differ from native accumulated returns by at most 0.000001038; the primary
+uses original native returns. Common-probe semantic input digest is identical in both arms:
+`f34109d178270b3c4ae4b123e8c8910cba8850fe87567d1329b2d0f55fd57435`.
+Thus the reported transfer-error contrast has the required common-input support. No additional
+policy evaluation or training was run for verification.
+
+Text summaries, full per-update JSONL, admission/preflight and terminal manifests are published
+with this entry. Binary checkpoints/panels and stdout/stderr remain at their original durable
+local output paths under
+`/home/fires/.codex/worktrees/folr-predictive-aux/hmasd-wsl/runs/vap_folr_core/`, in the two linked
+tag directories; their exact names and SHA256s are in the summaries. They are not in Git and
+must be preserved before any worktree cleanup. Source and native operation claims/snapshots
+also remain in place; there is no cleanup in this task.
+
+### Explanation update and next choice
+
+The expected positive native sign failed in this single fitted comparison. This weakens the
+case for using the exact short-window/.1 coupled auxiliary package and provides no reason to
+advance it to confirmation or pretraining. A modest reduction of common-policy prediction
+error coexists with worse native return, reinforcing the distinction between predictive
+transfer and usefulness for control. It does not establish a stable adverse effect across
+training instances, a causal representation defect, or a general failure of auxiliary learning.
+The two policies induce different data, targets and optimization trajectories; optimization
+interference, policy/head co-adaptation and training-instance variation remain undistinguished.
+History necessity (H-need), pretraining increment (H-pre), and UAV deployment value are untouched.
+
+End this exact two-fit batch without seed extension or coefficient/horizon search. Keep the
+broader auxiliary idea unresolved, and deprioritize this implementation given its adverse
+native observation. The next useful work is reasoning-only: specify a small membership-change
+prototype with a controllable difference between current cues and legitimate history, so an
+opportunity claim can be separated from finite-learning failure before another architecture is
+chosen. Such a prototype must state the MARL coupling it omits and cannot establish a native
+Traffic-Junction/UAV effect. No new prototype implementation or fit is selected by this entry.

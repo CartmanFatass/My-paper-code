@@ -1,0 +1,11 @@
+{
+  "claim_key": "c80038a5efdc297dc9d97327e3299a4da506b1da8c6c9dc239c64d1f83db0852",
+  "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/c80038a5efdc297dc9d97327e3299a4da506b1da8c6c9dc239c64d1f83db0852.json",
+  "manifest_ref": "/home/fires/.codex/worktrees/folr-predictive-aux/hmasd-wsl/runs/vap_folr_core/predictive_aux_a01_coupled_783101/launch-manifest.json",
+  "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/c80038a5efdc297dc9d97327e3299a4da506b1da8c6c9dc239c64d1f83db0852.json",
+  "pid": 883137,
+  "runner_pid": 883138,
+  "schema_version": 1,
+  "status": "accepted",
+  "updated_at": "2026-09-19T13:52:49.028426Z"
+}
