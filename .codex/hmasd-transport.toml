@@ -17,3 +17,17 @@ selector_hint = "Latest"
 # Tool keys belong to questions, not permanent direction bindings.
 [conversation_policy]
 mode = "serial_reuse"
+
+# WSL host: Jev Ultrafast drives a local Chrome on the owner's second ChatGPT account.
+# Conversation URLs of the Agentify account do not exist on this account; a question sent here
+# starts from "new" or from a URL this account returned. Credentials stay in Jev's own .env.
+[jev]
+root = "~/test/Jev/jev-ultrafast"
+chrome = "~/.omp/puppeteer/chrome/linux-150.0.7871.24/chrome-linux64/chrome"
+profile = "~/.config/google-chrome-for-testing"
+cdp_url = "http://127.0.0.1:9222"
+provider_root = "https://chatgpt.com/"
+default_mode = "headless"
+effort_label = "6 Pro"
+user_agent = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36"
+state_dir = "~/.local/state/hmasd-pro-transport"

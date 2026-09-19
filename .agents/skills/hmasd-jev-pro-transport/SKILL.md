@@ -1,0 +1,76 @@
+---
+name: hmasd-jev-pro-transport
+description: On the WSL host, send one committed HMASD Pro question through Jev Ultrafast and a local headless Chrome on the owner's second ChatGPT account, wait read-only for completion, read the complete answer at the assigned repository target (or preserve the chat text), and return facts. Never science, never a resend.
+---
+
+# Pro transport (Jev Ultrafast, WSL host)
+
+Authority: `docs/project/OPERATING_CONSTITUTION.md` section 5. The assignment, the target
+check before sending, the delivery reading (step 5) and the return facts are those of
+`hmasd-chatgpt-pro-transport`; this skill replaces only the browser route. Use it on the WSL
+host. The Windows host keeps Agentify.
+
+Jev does the browser work itself: it observes the page as an indexed element table and chooses
+each operation and target. The driver `tools/pro_transport/jev_send.py` hands Jev the committed
+text verbatim (no model writes or paraphrases it), keeps the books, and guards one click: the
+send click is refused unless the effort pill shows the configured label and the box equals the
+committed prompt. `send_attempted` is persisted before that click. Settings are `[jev]` in
+`.codex/hmasd-transport.toml`; Jev's credentials stay in its own ignored `.env` (the native
+TypeSafe key is preferred; the Vercel gateway key rate-limits).
+
+**Account.** This is a different ChatGPT account from the Agentify one. A conversation URL
+recorded from the other account does not exist here: send with `--conversation new`, or with a
+URL this account returned. Never paste an Agentify-account URL into this route.
+
+**Private facts stay local (owner, 2026-09-18).** This account's conversation URLs, its name
+and anything else identifying it live only in the driver's state directory
+(`~/.local/state/hmasd-pro-transport/operations/<key>.json`), never in NOTES.md, RESEARCH.md,
+a change note, a commit message or anything else that is pushed. Shared records name a
+question by its key; the URL for a follow-up is read from the local operation file.
+
+## Steps
+
+Interpreter: `~/test/Jev/jev-ultrafast/.venv/bin/python` (written `$JEV` below), never an HMASD
+venv, and nothing is installed into either.
+
+1. **Key and text.** Derive the question key as the old skill does (`hmasd:` plus the SHA-256
+   of the JSON array of repository, branch, subject key, source_sha, target_path and
+   question_heading; `:` is accepted). Write the exact message to a scratch file under `temp/`.
+2. **Send once, headless by default.**
+   `$JEV tools/pro_transport/jev_send.py send --key <key> --prompt-file <file> --conversation new|<url>`
+   starts the headless Chrome on the logged-in profile if none runs, sets the effort slider to
+   its top position (`6 Pro`; a slider is outside Jev's action space, so arrow keys set it and
+   the observed pill label is the fact), then lets Jev type and send. `--mode headed` shows the
+   window; use it only when a human must look (login, CAPTCHA) and stop the other mode first
+   with `chrome stop`. Read the result:
+   - `{"error": ..., "pre_send": true}`: nothing was submitted. Repair the named fact and run
+     the same command with the same key.
+   - `send_attempted: true`: from here on observe only. `send_effect` is `sent` when the exact
+     message was seen in the conversation, otherwise `uncertain` with `unresolved`.
+   - Running `send` again under an attempted key never sends; it returns the stored operation.
+3. **Wait, read-only.** `$JEV tools/pro_transport/jev_send.py wait --key <key> --answer-file <path> --timeout 60`
+   in repeated calls until `COMPLETE` (equal assistant text across two samples three seconds
+   apart, no Stop control). It verifies that the conversation holds this operation's prompt.
+   If the send could not observe the settled address (a new conversation first shows a
+   provisional `/c/WEB:` address that cannot be reopened), find the conversation and pass
+   `--conversation-url`. Unchanged waits are silent. Nothing here clicks.
+4. **Read delivery.** As step 5 of `hmasd-chatgpt-pro-transport`: fetch the branch, find the
+   answer commit, read the complete answer subsection, compare against source_sha. If the
+   connector write did not land, the saved `--answer-file` and its SHA-256 are the preserved
+   chat text for the author to insert.
+5. **Return.** Question key (the conversation URL stays in the local operation file), send effect, completion state, answer commit
+   or saved text path and hash, target and headings, unresolved facts. Jev closes its own tab.
+   Leave the headless Chrome running between questions; `chrome stop` ends it.
+
+## Recovery
+
+An error, a timeout or a stale page does not prove the send failed. With `send_attempted: true`
+never send again under any key: run `wait`, or open the conversation read-only and look for the
+exact message. With `send_attempted: false` the same key and text may be retried after the
+named repair. A restored draft in the box is overwritten by Jev's fill and recorded as
+`draft_replaced_sha256`. A login page, a challenge or an inaccessible provider is reported
+plainly and stops this send; switch to `--mode headed` for the human, not to a new question.
+
+Verified 2026-09-18 on the WSL host: one headed and one headless test question, each typed and
+sent by Jev in two steps, completed and read back exactly; a repeated `send` under the same key
+did not send.

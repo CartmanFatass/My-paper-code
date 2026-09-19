@@ -28,7 +28,8 @@ minimums are section 8.
 Methods are execution detail, not a second rulebook, in `.agents/skills/`:
 `hmasd-scientific-tools` (design and reading), `hmasd-research-engineering` (code, review,
 launch, and the carried-over engineering standards), `hmasd-loop-dispatch` (Codex Root),
-`hmasd-chatgpt-pro-transport` (Pro send and collect), `hmasd-pro-research-prompt-author`
+`hmasd-chatgpt-pro-transport` (Pro send and collect; on the WSL host
+`hmasd-jev-pro-transport`), `hmasd-pro-research-prompt-author`
 (Pro question), `hmasd-portfolio-task` (owner-triggered review only). Read the nearest
 directory `AGENTS.md` before a code task.
 

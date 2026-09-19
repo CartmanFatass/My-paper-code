@@ -16,6 +16,7 @@ owner 要求（2026-09-18）：`main` 必须支持在 Claude 与 Codex 之间、
 | 两个运行时读同一套方法：`.agents/skills` 是维护源，`.claude/**` 由 `tools/publish_claude_control.py` 生成 | [CONTROL_PLANE_MAP.md](CONTROL_PLANE_MAP.md) |
 | 结果节点相同：两台主机都经 ssh 使用 `wsl_4070` | `.codex/hmasd-compute.toml` |
 | Pro 通道相同：两台主机驱动同一个 Windows agentify 应用，注册在各主机、各运行时的用户级配置里 | `.agents/skills/hmasd-chatgpt-pro-transport/references/agentify.md` |
+| WSL 主机另有本机 Pro 通道（2026-09-18 起为 WSL 默认）：Jev Ultrafast 驱动本机无头 Chrome，登录的是 owner 的第二个 ChatGPT 账号；另一账号的会话 URL 在这里不存在，发送用 `new` 或本账号返回的 URL | `.agents/skills/hmasd-jev-pro-transport/SKILL.md`，`.codex/hmasd-transport.toml` `[jev]` |
 
 每台主机只保留自己的 checkout（Windows `C:/Projects/HMASD`，WSL `/home/fires/hmasd-wsl`）。不跨 `/mnt/c` 或
 `\\wsl$` 使用对方的 checkout、index 或解释器。
