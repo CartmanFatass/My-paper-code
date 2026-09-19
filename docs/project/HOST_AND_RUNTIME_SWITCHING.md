@@ -89,5 +89,19 @@ WSL 主机上传给 agentify 的路径参数必须是 Windows 能打开的写法
   陈旧断言（RIDGEGATE 注册表以及 TBVUUS、RCLE、TBCC 的旧原生构件摘要），与本次双主机控制面适配无关，
   未据此改动归档方向。
 
+### Windows 遗留状态的归类与清理
+
+- 停留的 cherry-pick 只指向 `1d3cc67ce`、`4cb511f26` 两个旧 ACVC
+  `TASK`／`HANDOFF` 记录；两者已由 `origin/codex/acvc` 保存。该记录格式属于退役控制流程，未合入
+  当前 `main`，本机 sequencer 已退出并删除。
+- `codex/hmasd-clerk` 的唯一提交 `7bb924068` 是 Clerk 常设角色退役前的控制面快照，不是待整合功能。
+  历史已由远端 tag `archive/retired-hmasd-clerk-20260913` 固定；本地 Clerk 分支、对应 detached
+  worktree 和旧 Clerk 任务均已移出活动面。
+- 清理前的 19 个本地 tag 均已存在于 `origin`；上述 Clerk 归档 tag 也已单独推送，不再有仅靠本地
+  tag 保存的这批遗留。
+- 本机 16 个旧 bundle 已按其 advertised heads 审计：15 个由远端历史或保留包完整覆盖，已经删除；
+  `temp/recovery-retained/frrie_p59_full.bundle` 因仍含远端不可达的旧快照而保留。它只是本机历史恢复
+  材料，不是活动控制输入，也不代表应恢复其中的 Clerk、packet、registry 或旧方向流程。
+
 本节是状态快照；背景与逐项改动见
 [2026-09-18 变更记录](../Claude_docs/changes/2026-09-18-wsl-second-host-enablement.md)。
