@@ -587,7 +587,8 @@ def compute_radio_libm_oracle_batch(**kwargs) -> BatchedUAVRadio:
     The native code calls ``std::log10``. NumPy's ``log10`` agrees with glibc's only to about
     1 ULP, so on Linux the ``python_reference`` backend and the native backend differ by up to
     ~3e-14 dB while being the same arithmetic. ``math.log10`` is the host C library's
-    function, which makes native-versus-oracle equality exact on every host. The
+    function; with it native-versus-oracle equality is exact on Linux (verified), and the
+    Windows tests keep their original ``np.log10`` comparison. The
     ``python_reference`` backend keeps ``np.log10``: changing it would change that backend's
     numbers.
     """
