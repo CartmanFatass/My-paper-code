@@ -63,6 +63,9 @@ venv, and nothing is installed into either.
    in repeated calls until `COMPLETE` (equal assistant text across two samples three seconds
    apart, no Stop control). It verifies that the conversation holds the committed short text
    and records `attachment_seen`; this also settles a `send_effect` left `uncertain`.
+   `NEEDS_HUMAN` means the page shows a permission prompt (for example "Allow GitHub for this
+   conversation"): that consent belongs to the account owner. Report it and wait for the owner
+   to answer it in a headed window or to say which button to press; never click it unasked.
    If the send could not observe the settled address (a new conversation first shows a
    provisional `/c/WEB:` address that cannot be reopened), find the conversation and pass
    `--conversation-url`. Unchanged waits are silent. Nothing here clicks.

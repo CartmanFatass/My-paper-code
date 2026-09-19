@@ -43,6 +43,8 @@ PAGE_FACTS = """(() => {
       .filter(e => e.querySelector('[data-message-author-role="user"]')).map(text) : [],
     stop_button: !!document.querySelector('[data-testid="stop-button"]'),
     login: !!document.querySelector('[data-testid="login-button"]'),
+    approval: [...document.querySelectorAll('main button')].map(text)
+      .filter(t => /^(允许一次|始终允许|拒绝|Allow once|Always allow|Deny)$/.test(t)),
     challenge: /just a moment|verify you are human/i.test(document.title + ' ' + text(document.body).slice(0, 400)),
     users, assistants,
   };
@@ -411,12 +413,18 @@ def command_wait(args, cfg):
         while time.monotonic() < deadline:
             page = facts(browser)
             answer = page["assistants"][-1] if len(page["assistants"]) >= len(page["users"]) else ""
+            if page["approval"]:
+                # A connector permission prompt is the account owner's decision; nothing here clicks it.
+                state = "NEEDS_HUMAN"
+                break
             if answer and not page["stop_button"] and answer == previous:
                 state = "COMPLETE"
                 break
             previous = answer
             time.sleep(3)
         result = {"state": state, "conversation_url": url, "users": len(prompt_seen["users"])}
+        if state == "NEEDS_HUMAN":
+            result.update(approval_prompt=page["approval"], partial_answer_chars=len(answer))
         if state == "COMPLETE":
             out = Path(args.answer_file)
             out.parent.mkdir(parents=True, exist_ok=True)
