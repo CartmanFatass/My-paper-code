@@ -34,14 +34,25 @@ question by its key; the URL for a follow-up is read from the local operation fi
 Interpreter: `~/test/Jev/jev-ultrafast/.venv/bin/python` (written `$JEV` below), never an HMASD
 venv, and nothing is installed into either.
 
-1. **Key and text.** Derive the question key as the old skill does (`hmasd:` plus the SHA-256
-   of the JSON array of repository, branch, subject key, source_sha, target_path and
-   question_heading; `:` is accepted). Write the exact message to a scratch file under `temp/`.
+1. **Key, document and short message.** Derive the question key as the old skill does (`hmasd:`
+   plus the SHA-256 of the JSON array of repository, branch, subject key, source_sha,
+   target_path and question_heading; `:` is accepted). Under `temp/pro_transport/` write the
+   author's complete message, unchanged, as a document
+   `hmasd-pro-question-<slug>.md`, and a short message of a few lines that names the direction,
+   the document and its SHA-256, says the document is the complete message to be read in full
+   and followed exactly, and asks Pro to say so and stop if it cannot open it. This is the
+   default for any message longer than a few lines: the short text is compared verbatim, the
+   document by name and hash. It is delivery form, not a shortened question: every line the
+   author wrote reaches Pro. (A 2900-character message typed into the box was not submitted by
+   the send click, 2026-09-19.)
 2. **Send once, headless by default.**
-   `$JEV tools/pro_transport/jev_send.py send --key <key> --prompt-file <file> --conversation new|<url>`
+   `$JEV tools/pro_transport/jev_send.py send --key <key> --prompt-file <short> --attach <document> --conversation new|<url>`
    starts the headless Chrome on the logged-in profile if none runs, sets the effort slider to
    its top position (`6 Pro`; a slider is outside Jev's action space, so arrow keys set it and
-   the observed pill label is the fact), then lets Jev type and send. `--mode headed` shows the
+   the observed pill label is the fact), empties a restored draft, gives the document to the
+   composer's own upload input (uploads are outside Jev's action space too), then lets Jev type
+   and send. Before each of Jev's decisions the driver states the one fact Jev cannot see:
+   whether the box already holds the prepared message. `--mode headed` shows the
    window; use it only when a human must look (login, CAPTCHA) and stop the other mode first
    with `chrome stop`. Read the result:
    - `{"error": ..., "pre_send": true}`: nothing was submitted. Repair the named fact and run
@@ -49,9 +60,10 @@ venv, and nothing is installed into either.
    - `send_attempted: true`: from here on observe only. `send_effect` is `sent` when the exact
      message was seen in the conversation, otherwise `uncertain` with `unresolved`.
    - Running `send` again under an attempted key never sends; it returns the stored operation.
-3. **Wait, read-only.** `$JEV tools/pro_transport/jev_send.py wait --key <key> --answer-file <path> --timeout 60`
+3. **Wait, read-only.** `$JEV tools/pro_transport/jev_send.py wait --key <key> --prompt-file <short> --answer-file <path> --timeout 120`
    in repeated calls until `COMPLETE` (equal assistant text across two samples three seconds
-   apart, no Stop control). It verifies that the conversation holds this operation's prompt.
+   apart, no Stop control). It verifies that the conversation holds the committed short text
+   and records `attachment_seen`; this also settles a `send_effect` left `uncertain`.
    If the send could not observe the settled address (a new conversation first shows a
    provisional `/c/WEB:` address that cannot be reopened), find the conversation and pass
    `--conversation-url`. Unchanged waits are silent. Nothing here clicks.
@@ -67,11 +79,15 @@ venv, and nothing is installed into either.
 
 An error, a timeout or a stale page does not prove the send failed. With `send_attempted: true`
 never send again under any key: run `wait`, or open the conversation read-only and look for the
-exact message. With `send_attempted: false` the same key and text may be retried after the
+exact message. The one exception is `reconcile --key <key>`: read-only, it releases the key once,
+and only when no settled conversation was recorded and the committed text still sits as the
+unsent new-chat draft (the provider clears the draft when it accepts a message). A second
+uncertain send under a released key goes to the owner. With `send_attempted: false` the same key and text may be retried after the
 named repair. A restored draft in the box is overwritten by Jev's fill and recorded as
 `draft_replaced_sha256`. A login page, a challenge or an inaccessible provider is reported
 plainly and stops this send; switch to `--mode headed` for the human, not to a new question.
 
-Verified 2026-09-18 on the WSL host: one headed and one headless test question, each typed and
+Verified 2026-09-19: one real direction question sent headless as short message plus document,
+both seen in the conversation. Verified 2026-09-18 on the WSL host: one headed and one headless test question, each typed and
 sent by Jev in two steps, completed and read back exactly; a repeated `send` under the same key
 did not send.

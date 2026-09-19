@@ -37,7 +37,10 @@ PAGE_FACTS = """(() => {
   return {
     url: location.href,
     composer: composer ? text(composer) : null,
-    send_button: !!document.querySelector('[data-testid="send-button"]'),
+    send_button: !!document.querySelector('[data-testid="send-button"]:not(:disabled)'),
+    form_text: text(composer?.closest('form')),
+    user_turns: users.length ? [...document.querySelectorAll('article,[data-testid^="conversation-turn"]')]
+      .filter(e => e.querySelector('[data-message-author-role="user"]')).map(text) : [],
     stop_button: !!document.querySelector('[data-testid="stop-button"]'),
     login: !!document.querySelector('[data-testid="login-button"]'),
     challenge: /just a moment|verify you are human/i.test(document.title + ' ' + text(document.body).slice(0, 400)),
@@ -211,9 +214,20 @@ def ensure_effort(browser, effort):
     return page
 
 
+def attach(browser, path):
+    """Uploads are outside Jev's action space: the composer's own file input receives the file over CDP."""
+    root = browser.call("DOM.getDocument", depth=0)["root"]["nodeId"]
+    node = browser.call("DOM.querySelector", nodeId=root, selector="form input#upload-files")["nodeId"]
+    if not node:
+        raise PreSendFailure("the composer has no document upload input")
+    browser.call("DOM.setFileInputFiles", nodeId=node, files=[str(path)])
+    wait_for(browser, lambda f: path.name in (f["form_text"] or "") and f["send_button"], 90,
+             f"the uploaded attachment {path.name}")
+
+
 GOAL = """You are on ChatGPT. Do these in order, each once.
 1. The reasoning-effort button beside the message box already shows '{effort}'. Leave it alone.
-2. Type the prepared message into the message box.{draft}
+2. Type the prepared message into the message box.{draft}{attachment}
 3. Click the send button exactly once.
 After the message is sent do nothing else: never click Stop, Regenerate, Edit, Retry, or send again.
 DONE as soon as the sent message is visible in the conversation."""
@@ -227,12 +241,19 @@ def command_send(args, cfg):
     operation = Operation(cfg, args.key)
     if operation.data.get("send_attempted"):
         return {**operation.data, "note": "send already attempted for this key; observe with `wait`, never resend"}
-    if operation.data and operation.data.get("prompt_sha256") != digest:
+    if operation.data.get("prompt_sha256") and operation.data["prompt_sha256"] != digest:
         raise PreSendFailure("this key is bound to a different prompt")
     url = cfg["provider_root"] if args.conversation == "new" else args.conversation
     operation.save(key=args.key, prompt_sha256=digest, conversation=args.conversation,
                    squashed_sha256=hashlib.sha256(squash(prompt).encode()).hexdigest(),
                    mode=args.mode, effort=args.effort, send_attempted=False)
+
+    document = Path(args.attach).resolve(strict=True) if args.attach else None
+    note = (f" The document {document.name} is already attached to the message; do not add, open or remove files."
+            if document else "")
+    if document:
+        operation.save(attachment=document.name,
+                       attachment_sha256=hashlib.sha256(document.read_bytes()).hexdigest())
 
     chrome_start(cfg, args.mode)
     load_jev(cfg)
@@ -241,9 +262,10 @@ def command_send(args, cfg):
 
     # The text is the committed prompt, verbatim; no model writes or paraphrases it.
     jev_agent.field_text = lambda context: (prompt, {"model": "committed-prompt", "latency_ms": 0, "usage": {}})
-    agent = jev_agent.Agent(url, GOAL.format(effort=args.effort, draft=""))
+    agent = jev_agent.Agent(url, GOAL.format(effort=args.effort, draft="", attachment=note))
     browser, state = agent.browser, agent.state
-    sent = lambda f: any(squash(u) == squash(prompt) for u in f["users"])  # noqa: E731
+    # With an attachment the user turn also carries the file chip; the committed text is contained in it.
+    sent = lambda f: any(squash(prompt) in squash(u) for u in f["users"] + f["user_turns"])  # noqa: E731
     try:
         page = wait_for(browser, lambda f: f["composer"] is not None or f["login"] or f["challenge"],
                         40, "the composer")
@@ -257,18 +279,41 @@ def command_send(args, cfg):
             # The provider restores local drafts. Jev's fill replaces the whole box (select-all, insert),
             # and the send click is refused unless the box equals the committed prompt.
             operation.save(draft_replaced_sha256=hashlib.sha256(page["composer"].encode()).hexdigest())
-            state["goal"] = GOAL.format(effort=args.effort, draft=" The box currently holds an outdated draft, "
-                                        "not the prepared message: typing replaces it, so step 2 is still required.")
-            state["plan"] = [state["goal"]]
+            # A long restored draft makes the box taller than the viewport, and Jev rightly refuses a
+            # target whose centre it cannot hit. Select-all and Backspace empty the box first.
+            browser.evaluate("document.querySelector('#prompt-textarea').focus()")
+            for key, code, virtual, extra in (("a", "KeyA", 65, {"modifiers": 2, "commands": ["selectAll"]}),
+                                              ("Backspace", "Backspace", 8, {})):
+                browser.call("Input.dispatchKeyEvent", type="keyDown", key=key, code=code,
+                             windowsVirtualKeyCode=virtual, **extra)
+                browser.call("Input.dispatchKeyEvent", type="keyUp", key=key, code=code,
+                             windowsVirtualKeyCode=virtual, **{k: v for k, v in extra.items() if k == "modifiers"})
+            wait_for(browser, lambda f: not f["composer"], 10, "the emptied message box")
         time.sleep(2)  # the composer's pills render after the box
         state["page"] = ensure_effort(browser, args.effort)
+        if document:
+            if document.name in (facts(browser)["form_text"] or ""):
+                raise PreSendFailure(f"an attachment named {document.name} is already in the composer")
+            attach(browser, document)
+            state["page"] = browser.observe(screenshot=False)
 
         # Jev runs the whole goal. The loop only keeps the books: it records the attempt before a
         # send click, refuses that one click if effort or text is wrong, and ends once the outcome shows.
         steps = []
         while state["status"] not in {"done", "blocked"} and len(steps) < 14:
-            if operation.data["send_attempted"] or sent(facts(browser)):
+            current = facts(browser)
+            if operation.data["send_attempted"] or sent(current):
                 break
+            # Jev cannot compare the box with a text it never sees; the driver states that one fact.
+            if squash(current["composer"]) == squash(prompt):
+                box = " The box now holds the prepared message in full: step 2 is complete, do not type again."
+            elif current["composer"]:
+                box = (" The box currently holds an outdated draft, not the prepared message: typing replaces "
+                       "it, so step 2 is still required.")
+            else:
+                box = ""
+            state["goal"] = GOAL.format(effort=args.effort, attachment=note, draft=box)
+            state["plan"] = [state["goal"]]
             try:
                 agent.command("predict")
                 choice = state["decision"]["choice"]
@@ -280,12 +325,15 @@ def command_send(args, cfg):
                     labels = {a["label"] for a in state["page"]["actions"]}
                     if args.effort not in labels:
                         raise PreSendFailure(f"send chosen while no control shows effort {args.effort!r}")
+                    if document and document.name not in (facts(browser)["form_text"] or ""):
+                        raise PreSendFailure(f"send chosen while {document.name} is not attached")
                     if squash(facts(browser)["composer"]) != squash(prompt):
                         operation.save(steps=steps)
                         raise PreSendFailure(f"composer text differs from the committed prompt: {steps}")
                     operation.save(send_attempted=True, send_effect="uncertain", steps=steps)
                 agent.command("act", {"fingerprint": state["page"]["fingerprint"]})
-            except StalePage:
+            except StalePage as stale:
+                steps.append(f"STALE {stale}")
                 state.update(decision=None, status="ready")
                 state["page"] = browser.observe(screenshot=False)
         operation.save(steps=steps)
@@ -294,6 +342,8 @@ def command_send(args, cfg):
         try:
             page = wait_for(browser, sent, 45, "the submitted message")
             operation.save(send_effect="sent", conversation_url=page["url"])
+            if document:
+                operation.save(attachment_seen=any(document.name in turn for turn in page["user_turns"]))
             page = wait_for(browser, lambda f: SETTLED_URL.search(f["url"]), 90, "the settled conversation URL")
             operation.save(conversation_url=page["url"])
         except PreSendFailure as error:
@@ -301,6 +351,37 @@ def command_send(args, cfg):
         return operation.data
     finally:
         agent.close()
+
+
+def command_reconcile(args, cfg):
+    """Read-only evidence for an uncertain send. The provider clears the draft when it accepts a message,
+    so the committed text still sitting as the new-chat draft, with no settled conversation recorded,
+    shows the click did not submit. Only then is the key released, once."""
+    operation = Operation(cfg, args.key)
+    data = operation.data
+    if not data.get("send_attempted") or data.get("send_effect") == "sent":
+        raise PreSendFailure("nothing uncertain under this key")
+    if data.get("released"):
+        raise PreSendFailure("this key was already released once; a second uncertain send goes to the owner")
+    if SETTLED_URL.search(data.get("conversation_url") or ""):
+        raise PreSendFailure("a settled conversation was recorded; observe it with `wait`")
+    chrome_start(cfg, data["mode"])
+    load_jev(cfg)
+    from jev_ultrafast.browser import Browser
+    browser = Browser(cfg["provider_root"])
+    try:
+        page = wait_for(browser, lambda f: f["composer"] is not None, 40, "the composer")
+        time.sleep(3)
+        page = facts(browser)
+        draft = hashlib.sha256(squash(page["composer"]).encode()).hexdigest()
+        if draft != data["squashed_sha256"]:
+            return {"released": False, "reason": "the new-chat draft is not the committed text; still uncertain"}
+        operation.save(send_attempted=False, send_effect="not submitted", released=True,
+                       released_evidence="committed text still present as the unsent new-chat draft",
+                       released_prompt_sha256=data["prompt_sha256"], prompt_sha256=None)
+        return {"released": True, "evidence": operation.data["released_evidence"]}
+    finally:
+        browser.close()
 
 
 def command_wait(args, cfg):
@@ -317,9 +398,13 @@ def command_wait(args, cfg):
     browser = Browser(url)
     try:
         prompt_seen = wait_for(browser, lambda f: f["users"], 40, "the conversation")
-        wanted = operation.data.get("squashed_sha256")
-        if wanted and not any(hashlib.sha256(squash(u).encode()).hexdigest() == wanted for u in prompt_seen["users"]):
+        committed = squash(Path(args.prompt_file).read_text(encoding="utf-8")) if args.prompt_file else None
+        if committed and hashlib.sha256(committed.encode()).hexdigest() != operation.data.get("squashed_sha256"):
+            raise PreSendFailure("--prompt-file is not this operation's committed text")
+        if committed and not any(committed in squash(u) for u in prompt_seen["users"] + prompt_seen["user_turns"]):
             raise PreSendFailure("this conversation does not hold the operation's prompt")
+        if operation.data.get("attachment"):
+            operation.save(attachment_seen=any(operation.data["attachment"] in t for t in prompt_seen["user_turns"]))
         operation.save(conversation_url=url, send_effect="sent")
         deadline = time.monotonic() + args.timeout
         previous, state = None, "IN_PROGRESS"
@@ -355,11 +440,15 @@ def main():
     send.add_argument("--prompt-file", required=True)
     send.add_argument("--conversation", required=True, help="'new' or the conversation URL of this account")
     send.add_argument("--effort", default=None)
+    send.add_argument("--attach", default=None, help="one document uploaded with the message")
     send.add_argument("--mode", choices=("headless", "headed"), default="headless")
+    reconcile = sub.add_parser("reconcile")
+    reconcile.add_argument("--key", required=True)
     wait = sub.add_parser("wait")
     wait.add_argument("--key", required=True)
     wait.add_argument("--answer-file", required=True)
     wait.add_argument("--timeout", type=float, default=60)
+    wait.add_argument("--prompt-file", default=None, help="the committed text, to verify the conversation holds it")
     wait.add_argument("--conversation-url", default=None, help="reconcile a URL the send could not observe")
     wait.add_argument("--mode", choices=("headless", "headed"), default=None)
     args = parser.parse_args()
@@ -374,6 +463,8 @@ def main():
         elif args.command == "send":
             args.effort = args.effort or cfg["effort_label"]
             result = command_send(args, cfg)
+        elif args.command == "reconcile":
+            result = command_reconcile(args, cfg)
         else:
             result = command_wait(args, cfg)
     except PreSendFailure as error:
