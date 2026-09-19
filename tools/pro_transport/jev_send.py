@@ -45,6 +45,13 @@ PAGE_FACTS = """(() => {
     login: !!document.querySelector('[data-testid="login-button"]'),
     approval: [...document.querySelectorAll('main button')].map(text)
       .filter(t => /^(允许一次|始终允许|拒绝|Allow once|Always allow|Deny)$/.test(t)),
+    // The words of the prompt those buttons belong to: the largest enclosing block that is still short.
+    approval_text: (() => {
+      let e = [...document.querySelectorAll('main button')].find(b => /^(始终允许|Always allow)$/.test(text(b)));
+      let words = '';
+      for (let i = 0; e && i < 7; i++, e = e.parentElement) if (text(e).length < 500) words = text(e);
+      return words;
+    })(),
     challenge: /just a moment|verify you are human/i.test(document.title + ' ' + text(document.body).slice(0, 400)),
     users, assistants,
   };
@@ -386,8 +393,54 @@ def command_reconcile(args, cfg):
         browser.close()
 
 
+ALWAYS_ALLOW = ("始终允许", "Always allow")
+
+
+def approve_connector(agent, operation, cfg):
+    """Owner, 2026-09-19: Jev answers a connector permission prompt with "Always allow", for the
+    connectors the owner named in ``approval_connectors`` (GitHub, needed for engineering collaboration).
+
+    Jev finds and clicks the button. The one click that executes is "Always allow" on a prompt that
+    names an allowed connector; any other prompt or target leaves the prompt for a human.
+    """
+    from jev_ultrafast.browser import StalePage
+    state, browser = agent.state, agent.browser
+    words = facts(browser)["approval_text"]
+    connector = next((c for c in cfg.get("approval_connectors", []) if c.lower() in words.lower()), None)
+    if cfg.get("approval_policy") != "always_allow" or connector is None:
+        return False
+    goal = (f"A permission prompt asks whether to allow the {connector} connector for this conversation. "
+            "Click the button named exactly '始终允许' (Always allow). Click nothing else. "
+            "DONE when the prompt is gone.")
+    state.update(goal=goal, plan=[goal], history=[], status="ready", decision=None)
+    for _ in range(4):
+        if not facts(browser)["approval"]:
+            break
+        state["page"] = browser.observe(screenshot=False)
+        try:
+            agent.command("predict")
+            choice = state["decision"]["choice"]
+            action = next((a for a in state["page"]["actions"] if a["id"] == choice), None)
+            if action and action["kind"] == "wait":
+                state["decision"] = None
+                time.sleep(1)
+                continue
+            node = browser.evaluate(NODE_FACTS + f"({json.dumps(action['node'])})") \
+                if action and action["kind"] == "click" else None
+            if not node or node["text"] not in ALWAYS_ALLOW:
+                state["decision"] = None
+                return False
+            agent.command("act", {"fingerprint": state["page"]["fingerprint"]})
+            operation.save(approvals=operation.data.get("approvals", []) + [f"{connector}: always allow"])
+            time.sleep(2)
+        except StalePage:
+            state.update(decision=None, status="ready")
+    return not facts(browser)["approval"]
+
+
 def command_wait(args, cfg):
-    """Read-only. COMPLETE needs equal assistant text across two samples three seconds apart and no Stop."""
+    """Observation. COMPLETE needs equal assistant text across two samples three seconds apart and no Stop.
+    The one click it may make is the owner-authorised connector consent above."""
     operation = Operation(cfg, args.key)
     if not operation.data.get("send_attempted"):
         raise PreSendFailure("no attempted send under this key")
@@ -396,8 +449,9 @@ def command_wait(args, cfg):
         raise PreSendFailure("no settled conversation URL; find the conversation and pass --conversation-url")
     chrome_start(cfg, args.mode or operation.data["mode"])
     load_jev(cfg)
-    from jev_ultrafast.browser import Browser
-    browser = Browser(url)
+    import jev_ultrafast.agent as jev_agent
+    agent = jev_agent.Agent(url, "Observe this conversation.")
+    browser = agent.browser
     try:
         prompt_seen = wait_for(browser, lambda f: f["users"], 40, "the conversation")
         committed = squash(Path(args.prompt_file).read_text(encoding="utf-8")) if args.prompt_file else None
@@ -414,7 +468,10 @@ def command_wait(args, cfg):
             page = facts(browser)
             answer = page["assistants"][-1] if len(page["assistants"]) >= len(page["users"]) else ""
             if page["approval"]:
-                # A connector permission prompt is the account owner's decision; nothing here clicks it.
+                if approve_connector(agent, operation, cfg):
+                    previous = None
+                    continue
+                # Not a connector the owner named, or Jev did not reach the instructed button.
                 state = "NEEDS_HUMAN"
                 break
             if answer and not page["stop_button"] and answer == previous:
@@ -424,7 +481,8 @@ def command_wait(args, cfg):
             time.sleep(3)
         result = {"state": state, "conversation_url": url, "users": len(prompt_seen["users"])}
         if state == "NEEDS_HUMAN":
-            result.update(approval_prompt=page["approval"], partial_answer_chars=len(answer))
+            result.update(approval_prompt=page["approval"], approval_text=page["approval_text"][:200],
+                          partial_answer_chars=len(answer))
         if state == "COMPLETE":
             out = Path(args.answer_file)
             out.parent.mkdir(parents=True, exist_ok=True)
@@ -434,7 +492,7 @@ def command_wait(args, cfg):
             operation.save(completion="COMPLETE", answer_sha256=result["answer_sha256"])
         return result
     finally:
-        browser.close()
+        agent.close()
 
 
 def main():

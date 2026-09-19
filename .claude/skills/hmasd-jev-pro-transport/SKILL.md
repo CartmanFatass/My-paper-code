@@ -64,12 +64,17 @@ venv, and nothing is installed into either.
    in repeated calls until `COMPLETE` (equal assistant text across two samples three seconds
    apart, no Stop control). It verifies that the conversation holds the committed short text
    and records `attachment_seen`; this also settles a `send_effect` left `uncertain`.
-   `NEEDS_HUMAN` means the page shows a permission prompt (for example "Allow GitHub for this
-   conversation"): that consent belongs to the account owner. Report it and wait for the owner
-   to answer it in a headed window or to say which button to press; never click it unasked.
-   If the send could not observe the settled address (a new conversation first shows a
+   **Connector consent (owner, 2026-09-19).** When the page shows "Allow GitHub for this
+   conversation", Jev answers it with "始终允许" (Always allow); the owner authorised this for the
+   GitHub connector, as needed for engineering collaboration (`approval_policy`,
+   `approval_connectors` in `[jev]`). The driver executes that one click only on a prompt that
+   names a listed connector and records it under `approvals`. A prompt for any other connector,
+   or any other consent, returns `NEEDS_HUMAN`: report it to the owner and click nothing.
+   `COMPLETE` on a short receipt is not the answer: with the connector allowed, Pro writes the
+   answer into the repository and leaves a few lines with the commit SHA in chat, so go on to
+   step 4. If the send could not observe the settled address (a new conversation first shows a
    provisional `/c/WEB:` address that cannot be reopened), find the conversation and pass
-   `--conversation-url`. Unchanged waits are silent. Nothing here clicks.
+   `--conversation-url`. Unchanged waits are silent. Apart from that consent, nothing here clicks.
 4. **Read delivery.** As step 5 of `hmasd-chatgpt-pro-transport`: fetch the branch, find the
    answer commit, read the complete answer subsection, compare against source_sha. If the
    connector write did not land, the saved `--answer-file` and its SHA-256 are the preserved

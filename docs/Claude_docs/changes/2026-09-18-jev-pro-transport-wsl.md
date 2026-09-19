@@ -55,3 +55,18 @@ Chrome for Testing,登录的是 owner 的第二个 ChatGPT 账号(额度原因);
 | `wait --prompt-file` | 以"提交的短消息包含在用户消息里"核对会话,并记录 `attachment_seen` |
 
 结果:同一问题 key 在 `reconcile` 释放后,以短消息 + 文档的形式无头发送成功,会话里核对到短消息和附件。
+
+## 2026-09-19 补充:连接器授权交给 Jev
+
+Owner 指示:GitHub connector 的授权提示由 Jev 以"始终允许"统一处理;单独授权的只有 GitHub
+connector,出于工程协作的必要。
+
+- `[jev]` 新增 `approval_policy = "always_allow"`、`approval_connectors = ["GitHub"]`。
+- `wait` 看到授权提示时由 Jev 找到并点击按钮;驱动只放行"提示文字点名了列出的连接器、且按钮
+  文字恰为'始终允许'/'Always allow'"的那一次点击,并记入本地操作文件的 `approvals`。其他连接器
+  或其他授权仍返回 `NEEDS_HUMAN`,不点击。
+- 结果:授权后 Pro 读取了仓库固定版本的全部指定来源,并通过连接器把完整回答写回方向分支的
+  `### Answer` 小节(单个提交,父提交为问题的 source_sha,只有新增行),聊天里只留带提交 SHA 的
+  回执。技能已写明:`COMPLETE` 的短回执不是答案,要接着读交付。
+
+至此这条通道覆盖了:无头发送、长问题(短消息 + 文档)、长时间等待、连接器读与写回。

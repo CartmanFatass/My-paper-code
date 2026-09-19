@@ -29,5 +29,10 @@ cdp_url = "http://127.0.0.1:9222"
 provider_root = "https://chatgpt.com/"
 default_mode = "headless"
 effort_label = "6 Pro"
+# Owner, 2026-09-19: Jev answers connector permission prompts with "Always allow" for the
+# connectors named here. Only GitHub is authorised, as needed for engineering collaboration;
+# a prompt for any other connector is left for a human.
+approval_policy = "always_allow"
+approval_connectors = ["GitHub"]
 user_agent = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36"
 state_dir = "~/.local/state/hmasd-pro-transport"

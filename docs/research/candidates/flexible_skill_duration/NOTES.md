@@ -349,3 +349,45 @@ I have not independently re-audited every training-row field, replay cache, node
 [T1b]: https://github.com/CartmanFatass/My-paper-code/blob/71223276833abeec641d3b51bc1bb645517b743a/runs/flexible_skill_duration/b01_s0_cf_l1_772703_a01/summary.json
 [T2a]: https://github.com/CartmanFatass/My-paper-code/blob/71223276833abeec641d3b51bc1bb645517b743a/runs/flexible_skill_duration/b01_s0_cf_l2_772603_a01/summary.json
 [T2b]: https://github.com/CartmanFatass/My-paper-code/blob/71223276833abeec641d3b51bc1bb645517b743a/runs/flexible_skill_duration/b01_s0_cf_l2_772703_a01/summary.json
+
+## 2026-09-19 03:15 PDT — DM response to the Pro critic pass (b01-after-stage0-next-step)
+
+Delivery: Pro wrote the answer itself, commit `18e1543d8f0b7bdda20ebf30d2aefcb40fbacaa4` on
+`claude/fsd-b01`, parent the pinned source `712232768`, 95 added lines inside `### Answer`,
+nothing removed, no other file; merged to main. Sent over the WSL Jev route as a short message
+plus the full message as a document; Pro reported the document hash as matching. Source use:
+it read the pinned card, method sections, `SELECTION.json`, all six stage-0 summaries and the
+runner, and followed the inherited `make_config`; I checked its two code claims
+(`config.k` is also the truncated-BPTT chunk length; the ceil-based coordinator batch law) in
+`scripts/run_fsd_baseline_interruption_b01.py` and its stage-0 contrasts against
+`SELECTION.json`: correct. It did not read stage 1, and neither have I.
+
+MATERIAL_DISSENT: yes, on routing, not on B01. What I take from it:
+
+- **Adopted.** The three importance labels are not sufficient routing evidence by themselves;
+  the uncertainty label and the interval go with them into whatever I decide next.
+  "CF selected by the completed, prospectively limited learning-rate procedure" replaces
+  "competently tuned" in anything I write about B01. The 0.13 J spread between tuning blocks is
+  a between-block CF difference, not s_G; stage 1 stands on its five G_b.
+- **Adopted, D_REFERENCE_ABOVE.** "Skill clock or batch" was a false fork: the arms also differ
+  in input width against a fixed hidden size (104 to 853), discrete-skill representation,
+  discriminators and intrinsic reward, and coordinator learning. If I ask a mechanism question
+  it is Pro's D1280 versus D128 (coordinator batch only, k and chunk length fixed), read as a
+  batch-and-optimiser-calls package, not as a clock test by elimination.
+- **Adopted, CF_REFERENCE_ABOVE.** No D-only longer training against CF's old J45. If pursued,
+  both arms to 90 rollouts with panels at 45 and 90 fixed in advance, read through H_b and both
+  arms' absolute changes. CF at 0.5 becomes the working 45-rollout, k = 10 central-input
+  comparator for that condition only.
+- **Modified, SMALL_SIGNED.** I keep idle or a cheaper host as a legitimate cost decision, and
+  drop the wording that the label shows the UAV host has no room for duration ideas: B01 has no
+  upper reference under any label. Pro's quota-matched placement test (thirty segments of 10 and
+  ten of 20, state-dependent placement against a state-blind permutation of the same multiset)
+  is the cleanest timing question I have seen for this direction, but it needs a new runner
+  pathway and a candidate rule fixed beforehand; it is recorded as an idea, not scheduled.
+- **Noted, not acted on.** Both selected-recipe tuning fits sit below their own J5 at J45, with
+  opposite last-step directions. That keeps optimisation stability live as an explanation of
+  whatever stage 1 shows; it changes no endpoint and selects no checkpoint.
+
+Nothing here touches B01: no grid extension, no extra block, no altered endpoint. At most one of
+the three six-fit follow-ups will be written as a prospective entry, after stage 1 is read by
+card section 6, under the default per-idea allowance.
