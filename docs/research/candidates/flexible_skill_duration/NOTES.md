@@ -709,3 +709,84 @@ published `main` (`ff0725db5`). Both admitted at the first request, alive with a
 | `b02_d128_773203_a01` | D128 | 773203 | `519d27ad0032b08745c520758c06a61ba4774d9b62e425ae8a5eed1bdfaaca26.json` |
 
 The plan is now fully launched: six of six. Collection and the reduction wait for all six exits.
+
+## 2026-09-19 10:00 PDT — coordinator batch B02 read: no detectable difference between D1280 and D128 at 45 rollouts; the D1280 rerun is bit-exact
+
+Prior explanation this reads against: the B01 reading (entry "stage 1 complete", section "What
+the gap is made of") and the prospective entry "coordinator batch, D1280 versus D128". The
+written rule there is followed; nothing was added after seeing scores. Exploration: no MEI
+verdict, no effect claim.
+
+**Execution facts.** Six of six planned fits admitted at the first request on `wsl_4070`, launch
+sha `0cb5093578d16f9baaa2bd96cb3b395ad4e14012`, never more than four at once, all exit 0 with 45
+training rows, `summary.json` status complete, empty `stderr.log`. Collected in one rsync, 54
+files sha256-identical to the node; node originals untouched. `reduce` status complete, no
+invalid input, every pair differing only in `coordinator_batch_size`;
+`runs/flexible_skill_duration/b02_reduce/summary.json`, sha256
+`fe5178b2cea1175c3bd675f6bb0836ebf606be1fb58571b5efc944909b873940`. Wall before publication:
+first wave (four concurrent) D128 9,852 / 9,839 / 10,047 s and the D1280 rerun 9,885 s; second
+wave (two concurrent) D128 5,619 / 5,554 s. Peak RSS: D128 about 1.9 GiB, D1280 2.75 GiB.
+Exposure as declared: 2,160,000 training team steps.
+
+**Observations.** M_b = J45(D1280, b) − J45(D128, b), D1280 from the five completed B01 fits.
+
+| block | J45 D1280 | J45 D128 | M_b | D1280 J45 − J5 | D128 J45 − J5 |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| 772803 | .4559 | .4362 | +.0197 | +.228 | +.136 |
+| 772903 | .3547 | .4540 | −.0993 | +.051 | +.223 |
+| 773003 | .4994 | .4216 | +.0778 | −.003 | +.048 |
+| 773103 | .4004 | .4876 | −.0872 | +.079 | +.073 |
+| 773203 | .4282 | .4646 | −.0364 | +.077 | +.204 |
+
+Mean M = −0.0251, s = 0.0743, SE = 0.0332, t(.975, 4) interval [−0.1173, +0.0671], two blocks
+positive and three negative. Levels, descriptive: D1280 0.4277 (SD .055), D128 0.4528 (SD .025).
+Arm-mean curves over rollouts 5…45: D1280 .341 .319 .358 .368 .438 .422 .434 .449 .428; D128
+.316 .357 .363 .377 .420 .424 .458 .436 .453. The mean paired difference stays within ±.04 at
+every panel and changes sign five times. D128 rises from rollout 5 to 45 in five of five
+blocks; nothing in it resembles the CF decline seen in B01.
+
+D1280 rerun on 772803: all nine panel means and every world score equal the B01 fit exactly
+(maximum absolute difference 0.0) across the two launch shas.
+
+**Interpretation.** Separated from the above; qualitative.
+
+- Weakened: the account that D1280's standing in B01 owes something to its batch law (one large
+  coordinator batch, 675 optimizer calls per fit). Replacing it with 4,725 smaller calls and
+  smaller normalisation groups moved J45 by an amount not distinguishable from zero, with the
+  point estimate on D128's side. This is a package screen: it does not say that batch size,
+  step count and normalisation group size are each irrelevant, only that their sum was not
+  seen to matter here.
+- Not established: equivalence. The interval admits a difference of either sign as large as
+  the .05 J used as B01's MEI. "No detectable difference with five blocks" is the statement.
+- Weakened as well: "many small coordinator updates destabilise training on this host over 45
+  rollouts". The skill learner took seven times the updates and rose in every block. B02 has no
+  CF arm, so this does not explain the CF decline; it only removes one candidate account of it
+  that would have worked through the coordinator update count.
+- Strengthened: run-to-run variation at a fixed seed is nil for D1280 on this node and
+  interpreter, across launch shas. The non-contemporaneous reference arm cost nothing, and
+  block-to-block variation is seed variation, not scheduling noise. Shown on one block.
+- Untouched: why the selected flat learner declines; whether skills are needed; whether the
+  B01 gap would survive a flat learner that does not decline; anything about unfixed k.
+- Suggested by the result, not predicted: D128's endpoints are less dispersed across blocks
+  (SD .025 against .055) and the blocks where D128 wins are those where D1280 ended low. With
+  five blocks this is a conjecture and I am not acting on it.
+
+**Predictions, scored as written** (pre-revision probabilities, uncalibrated guesses): mean M in
+|M| ≤ .05, assigned .55, log score −0.60; interval includes zero, assigned .75, −0.29; rerun
+exact, assigned .5, −0.69. The lean to "irrelevant" held; the rerun was a coin flip I had no
+basis for, and it is now a known fact about this node.
+
+**Decision, as written beforehand.** The batch law is dropped as an explanation of D1280's
+standing. The hoped-for by-product does not exist in wall time: at four concurrent, D128 cost
+the same as D1280 (about 9,850–10,050 s); it is cheaper only in memory (about 0.85 GiB less).
+D1280 stays the reference; no reason to switch. The idea is ended with its six fits used; no
+extension.
+
+**Next.** The follow-up I had named (the flat learner's step size) was conditioned on D128
+decaying like CF, and it did not. The question survives on B01's own evidence (CF declines in
+four of five blocks at the grid-edge multiplier 0.5), and it bears on the constitution's
+"competent matched-information baseline": as long as the comparator deteriorates with
+training, the +0.29 J gap overstates what a well-trained flat policy would concede. That would
+be a new prospective entry with its own allowance, not scheduled by this one. Re-entry
+condition: I write that entry, or the owner points the direction elsewhere. No Pro round is
+owed for this result.

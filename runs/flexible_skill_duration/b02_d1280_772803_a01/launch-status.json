@@ -1,0 +1,11 @@
+{
+  "claim_key": "dba478b1d80feccde0892410e490aa7fcaa5e6121311a61becb5412770804c00",
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/dba478b1d80feccde0892410e490aa7fcaa5e6121311a61becb5412770804c00.json",
+  "manifest_ref": "/home/wu/projects/HMASD/runs/flexible_skill_duration/b02_d1280_772803_a01/launch-manifest.json",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/dba478b1d80feccde0892410e490aa7fcaa5e6121311a61becb5412770804c00.json",
+  "pid": 32951,
+  "runner_pid": 32952,
+  "schema_version": 1,
+  "status": "accepted",
+  "updated_at": "2026-09-19T12:27:36.035469Z"
+}
