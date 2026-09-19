@@ -1,9 +1,18 @@
 schema_version = 1
 status = "active"
 routing_policy = "task_suitable_node"
+# Fallback for a platform the table below does not name. `--node` and
+# HMASD_CONTROL_PLANE_NODE take precedence over both.
 control_plane_node = "local_windows"
 default_result_node = "wsl_4070"
 fallback_policy = "reconcile_existing_process_preserve_frozen_semantics_admit_destination"
+
+# The same tracked file serves the Windows checkout and the native WSL checkout; the launcher
+# selects the control-plane node from the platform it runs on. A remote node is never selected
+# this way: a launch there names it with `--node`.
+[control_plane_by_platform]
+win32 = "local_windows"
+linux = "local_linux"
 
 [control_source]
 remote = "origin"

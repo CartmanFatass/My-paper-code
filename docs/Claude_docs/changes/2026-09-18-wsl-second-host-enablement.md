@@ -166,3 +166,52 @@ with `RuntimeError: Ninja is required to load C++ extensions`. Recorded in `CLAU
   Windows session's memory does not reach a WSL session. `autoMemoryDirectory` could converge
   them, but any shared location has to be reachable from both hosts, which conflicts with the
   rule against working across the boundary. Left as a deliberate gap.
+
+## Addendum 2026-09-18: checkout renamed
+
+The owner asked for the directory to carry the branch name. `/home/fires/hmasd-main` is now
+`/home/fires/hmasd-wsl`; every `/home/fires/hmasd-main` above is the path at the time of
+writing. Changed with it: `project_root` of `local_linux` in `.codex/hmasd-compute.toml`
+(`hmasd_launch.py` resolves the control root from it), the host table in `CLAUDE.md`,
+`environments/README.md`, and the path-keyed trust block in `~/.codex/config.toml` (backup
+`~/.codex/config.toml.bak-20260918-hmasd-wsl-rename`). `main` still records the old path in
+the first three; that is a pending integration fact for Root. Revert: `mv` back and restore
+the four spellings.
+
+## Addendum 2026-09-18: agentify reachable from this host
+
+Owner decision: use the Windows agentify application directly (only MCP JSON crosses, no large
+files). `.codex/config.toml` on `wsl` now carries `[mcp_servers.agentify-desktop]` with
+`/mnt/c/Program Files/nodejs/node.exe` and the `C:\Projects\agentify-desktop` entry script; this
+replaces the earlier "route unavailable" comment. Checked: MCP `initialize` + `tools/list` over
+interop returned 39 tools (node.exe v24.18.0); `codex mcp list` shows the server enabled. No tool
+was called, so the application was neither started nor contacted. The path rule (`wslpath -w` for
+`responsePath`/`promptPath`) is recorded in the transport skill's `references/agentify.md`. The
+Claude user-level registration (`claude mcp add --scope user ...`) is the owner's to run: the
+session's permission mode refuses self-modification of Claude configuration.
+
+## Addendum 2026-09-18: one `main` for both hosts, the `wsl` overlay retired
+
+Owner requirement: `main` must support switching between Claude and Codex and between the two
+hosts with research progress always in step, the hosts differing only in control-plane
+adaptation. Research authority was already host-independent (`control_source` pins
+`origin refs/heads/main`; the launcher compares the control checkout's `RESEARCH.md` with the
+published one). What stood in the way was the per-host branch: a session in the WSL checkout
+sat on `wsl`, so a research commit made there would not reach `main`.
+
+The overlay had two real differences and both are now host-neutral on `main`:
+
+1. `control_plane_node`: the launcher resolves `--node`, then `HMASD_CONTROL_PLANE_NODE`, then
+   `[control_plane_by_platform]` (`win32`, `linux`), then the legacy scalar. A remote node is
+   still named with `--node`.
+2. The agentify MCP entry left the project `.codex/config.toml` for each host's user-level
+   configuration. Done on the WSL host (`~/.codex/config.toml`, backup
+   `config.toml.bak-20260918-agentify-user-level`; Claude user scope). **Windows step, not done
+   from here:** the Windows `~/.codex/config.toml` entry has no `tool_timeout_sec`; add
+   `tool_timeout_sec = 2700` there before or with pulling this commit, or long Pro waits fall
+   back to the default tool timeout.
+
+After this lands, `/home/fires/hmasd-wsl` checks out `main` and `wsl` receives no further
+commits. What git cannot carry stays a working rule: process handles and ignored `temp/`
+output live on the host that launched, so switch hosts after a run is collected and its
+record committed, and reconcile an accepted handle before moving (constitution, AGENTS.md).

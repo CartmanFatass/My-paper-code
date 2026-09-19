@@ -1073,3 +1073,41 @@ def test_malformed_path_prefix_refuses_before_any_effect(
     with pytest.raises(hmasd_launch.LaunchRefusal, match="path_prefix"):
         hmasd_launch.launch(args)
     assert not Path(args.output).exists()
+
+
+def test_control_plane_node_is_selected_by_platform_then_fallback(monkeypatch) -> None:
+    monkeypatch.delenv(hmasd_launch.CONTROL_PLANE_NODE_ENV, raising=False)
+    nodes = {"win": {}, "lin": {}, "legacy": {}, "remote": {}}
+    config = {
+        "control_plane_node": "legacy",
+        "control_plane_by_platform": {"win32": "win", "linux": "lin"},
+        "nodes": nodes,
+    }
+    monkeypatch.setattr(hmasd_launch.sys, "platform", "linux")
+    assert hmasd_launch._node_config(config, None)[0] == "lin"
+    monkeypatch.setattr(hmasd_launch.sys, "platform", "win32")
+    assert hmasd_launch._node_config(config, None)[0] == "win"
+    monkeypatch.setattr(hmasd_launch.sys, "platform", "darwin")
+    assert hmasd_launch._node_config(config, None)[0] == "legacy"
+    # An explicit request and the environment override both outrank the table.
+    assert hmasd_launch._node_config(config, "remote")[0] == "remote"
+    monkeypatch.setenv(hmasd_launch.CONTROL_PLANE_NODE_ENV, "remote")
+    assert hmasd_launch._node_config(config, None)[0] == "remote"
+    monkeypatch.setenv(hmasd_launch.CONTROL_PLANE_NODE_ENV, "absent")
+    with pytest.raises(hmasd_launch.LaunchRefusal, match="not configured"):
+        hmasd_launch._node_config(config, None)
+
+
+@pytest.mark.parametrize("table", ["local_linux", {"linux": 7}, {"linux": ""}])
+def test_malformed_platform_table_is_refused(table, monkeypatch) -> None:
+    monkeypatch.delenv(hmasd_launch.CONTROL_PLANE_NODE_ENV, raising=False)
+    with pytest.raises(hmasd_launch.LaunchRefusal, match="control_plane_by_platform"):
+        hmasd_launch._node_config({"control_plane_by_platform": table, "nodes": {}}, None)
+
+
+def test_tracked_compute_file_names_a_configured_node_for_each_platform() -> None:
+    config = hmasd_launch._load_config(ROOT / ".codex" / "hmasd-compute.toml")
+    table = config["control_plane_by_platform"]
+    assert set(table) == {"win32", "linux"}
+    for node in table.values():
+        assert config["nodes"][node]["role"].startswith("control_plane")

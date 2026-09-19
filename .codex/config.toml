@@ -57,7 +57,9 @@ config_file = "./agents/hmasd-experiment-operator.toml"
 description = "Optional independent scientific-criticism method."
 config_file = "./agents/hmasd-research-critic.toml"
 
-[mcp_servers.agentify-desktop]
-command = "node"
-args = ['C:\Projects\agentify-desktop\bin\agentify-desktop.mjs', "mcp"]
-tool_timeout_sec = 2700
+# The agentify MCP server is registered per host in the user-level configuration of each
+# runtime (~/.codex/config.toml, `claude mcp add --scope user`), not here. Its command is
+# host-specific (`node` on Windows; the Windows node.exe over WSL interop on the WSL host),
+# Codex has no per-OS form for a project entry, and a project entry was the only reason a
+# per-host branch of this file existed. Keep `tool_timeout_sec = 2700` in the user-level
+# entry: a Pro answer can take that long.

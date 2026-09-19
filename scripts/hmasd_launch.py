@@ -191,8 +191,31 @@ def _load_config(path: Path) -> Mapping[str, Any]:
     return value
 
 
+CONTROL_PLANE_NODE_ENV = "HMASD_CONTROL_PLANE_NODE"
+
+
+def _control_plane_node(config: Mapping[str, Any]) -> Any:
+    # One tracked compute file serves every host that works from this repository: an explicit
+    # environment override, then the node recorded for this platform, then the legacy scalar.
+    # A per-host branch carrying a different scalar is what this replaces.
+    override = os.environ.get(CONTROL_PLANE_NODE_ENV)
+    if override:
+        return override
+    by_platform = config.get("control_plane_by_platform")
+    if by_platform is not None:
+        if not isinstance(by_platform, Mapping) or any(
+            not isinstance(key, str) or not isinstance(value, str) or not value
+            for key, value in by_platform.items()
+        ):
+            raise LaunchRefusal("control_plane_by_platform must map platform names to node names")
+        selected = by_platform.get("win32" if sys.platform == "win32" else sys.platform)
+        if selected is not None:
+            return selected
+    return config.get("control_plane_node")
+
+
 def _node_config(config: Mapping[str, Any], requested: str | None) -> tuple[str, Mapping[str, Any]]:
-    node = requested or config.get("control_plane_node")
+    node = requested or _control_plane_node(config)
     if not isinstance(node, str) or not node:
         raise LaunchRefusal("no execution node was selected")
     nodes = config.get("nodes")
