@@ -933,3 +933,21 @@ summary wrapper is now installed for the duration of a fit only, so a fit of ano
 the same process is not marked as this one's (production runs one fit per process).
 
 Launch order: both arms on 772803 and 772903 first (four concurrent), then both on 773003.
+
+## 2026-09-19 15:02 PDT — flat entropy B03: first wave admitted on `wsl_4070`
+
+Launch sha `051e8c7ab955a348fe868e6271eb72c77bbf50e3`, node idle beforehand (14 GiB free), node
+checkout fast-forwarded to the published `main` first, each fit through
+`flat_entropy_b03/launch_fit.sh` and the admission kernel, all admitted at the first request.
+Alive with an empty `stderr.log` after the fourth admission; each manifest carries the declared
+`entropy_arm`.
+
+| tag | arm | block | operation ref (under `/home/wu/projects/HMASD/.git/hmasd-admission/`) |
+| --- | --- | --- | --- |
+| `b03_e005_772803_a01` | CF_E005 | 772803 | `01b1b6860d5d81d3cffca352fdd225807a42d9dd8ddb0ab0df8c0fec8187e19e.json` |
+| `b03_e0005_772803_a01` | CF_E0005 | 772803 | `390679e9cb8ac4f0a047bd023aa4e2ed65557e004696e0b162ccfea3c6449ed1.json` |
+| `b03_e005_772903_a01` | CF_E005 | 772903 | `7e2f391f470fff839905c8f3acac252e337915b771fe12025f2e794466c60225.json` |
+| `b03_e0005_772903_a01` | CF_E0005 | 772903 | `6151fe9d6ced143f2125372ac5e4e0f231c00ff7ae9537f82ed34c3d563de7f7.json` |
+
+Still to launch as slots free, same sha: both arms on 773003. No B03 score or diagnostic is read
+before all six are terminal.
