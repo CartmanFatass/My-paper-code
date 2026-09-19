@@ -137,3 +137,32 @@ minute. Records kept on the node under `runs/flexible_skill_duration/b01_s0_cf_l
 no fit (constitution section 3). Repair: `configs` added to the declared sparse list; the next
 attempt runs from the new sha under a fresh tag, so it is a new claim, not a replay of this one.
 The runner imports repository code only from `configs`, `envs`, `hmasd` and `scripts`.
+
+## 2026-09-18 19:45 PDT — stage 0 running on `wsl_4070` (four of six CF fits admitted)
+
+All from published sha `dd53e8d51112f4eb6128cd91ec797fa85329890a`, node `wsl_4070`
+(`ssh hmasd-wsl-node`, canonical checkout `/home/wu/projects/HMASD`), through
+`launch_fit.sh` and the admission kernel, detached. Output roots are
+`runs/flexible_skill_duration/<tag>/` on the node; each holds the native manifest,
+`admission-preflight.json`, `launch-status.json`, stdout/stderr and, at exit, `process-exit.json`.
+Observe from either host with
+`ssh hmasd-wsl-node 'cd /home/wu/projects/HMASD && python3 scripts/hmasd_launch.py status <operation_ref>'`.
+
+| tag | λ | block | operation ref (under `/home/wu/projects/HMASD/.git/hmasd-admission/`) |
+| --- | --- | --- | --- |
+| `b01_s0_cf_l1_772603_a02` | 1 | 772603 | `0e3efb4589922c3341043d9b3bac2806ac8a054f0ca96f4967ae84c0b0190d7f.json` |
+| `b01_s0_cf_l1_772703_a01` | 1 | 772703 | `a1bb803c36bebf9ce9e6181c859edb684003ef8814c32019a170a5ad9174a639.json` |
+| `b01_s0_cf_l05_772603_a01` | 0.5 | 772603 | `61893241fc7cf32315ac827db11f9106989d2401bc9f98240b001f49256e6ba4.json` |
+| `b01_s0_cf_l05_772703_a01` | 0.5 | 772703 | `213868c1ebbeb9457bc039bcac95e9d9abdcc01e60c18d4d89b8d93a608e69d3.json` |
+
+Still to launch when a slot frees: λ = 2 on 772603 and 772703 (tags `b01_s0_cf_l2_<block>_a01`).
+Node operating facts for whoever continues: network commands on the node need `zsh -lic`
+(proxy); the node has no control-plane venv, so the launch script is called with
+`HMASD_CONTROL_PLANE_PYTHON=/usr/bin/python3` (3.12, the kernel is standard-library only).
+
+Resource reading, first fit after three rollouts with two fits side by side: about 50 s per
+rollout (collection plus update, no panel yet), runner RSS 1.13 GB and flat, node 13 GB
+available, load 7 on 20 cores. Basis for the expected end: about 45 × 50–70 s plus nine
+32-world panels per fit at four concurrent, i.e. roughly one to one and a half hours per fit;
+to be corrected from the first completed fit. No score has been read; selection reads only
+the six J45 after all six complete.
