@@ -562,3 +562,28 @@ learning tests without toy/proof prerequisites; they did not require this diagno
 Do not turn a bounded engineering assignment into the unit of scientific progress or a reason
 to return control after each step. Reassess the next learning comparison by the direction-level
 question and the decision its result could change; no extra governance gate is introduced.
+
+## 2026-09-19 — owner-requested transfer to a new independent Astra/max DM task
+
+The owner enabled memory for new sessions and requests a new independent Codex task with
+Astra at max effort to continue FOLR directly as DM, without a Root dispatch layer. This old
+task (01a0b9c5-7303-70d2-a6b7-12dc66d4ea79) relinquishes direction writing/launching when the
+new task is created; it does not remain a coordinating Root. FSD stays exclusively with Claude.
+The new task receives the current branch, notebook, completed evidence and local artifact
+locations. There are no live FOLR scientific operations to transfer. Memory availability itself
+is an application setting, not established by this repository entry.
+
+Preserve the previously untracked action_contrast_a01 implementation and tests in this same
+commit for recoverability. Focused/admission checks passed 10 tests; independent Reviewer ran
+8 focused tests and found no material engineering defect. The diagnostic remains DESELECTED,
+unexecuted and scientifically unaccepted as a next investment; publication grants no launch.
+Do not spend another review/run merely to finish the discarded plan. The prior entry's
+"untracked" status is superseded only as a storage fact, not as a scientific decision.
+
+Continue by choosing a direction-level research question and a result that could change its
+judgment. Compare worthwhile learning options against simple baselines, inherited adverse
+evidence and actual cost. A prototype, formal explanation or diagnostic is not a required
+pre-stage. The owner explicitly wants a continuous research loop: use bounded subagents where
+useful, retain DM decisions, and do not return for permission at each ordinary step. Internal
+reports and engineering scopes are not separate scientific milestones. No governance rewrite
+or new rulebook is authorized by this handover.
