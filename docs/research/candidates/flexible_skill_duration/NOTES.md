@@ -391,3 +391,30 @@ MATERIAL_DISSENT: yes, on routing, not on B01. What I take from it:
 Nothing here touches B01: no grid extension, no extra block, no altered endpoint. At most one of
 the three six-fit follow-ups will be written as a prospective entry, after stage 1 is read by
 card section 6, under the default per-idea allowance.
+
+## 2026-09-19 05:10 PDT — stage 1: all ten fits admitted; six terminal
+
+All from launch sha `887563f4713177d76999ef5832ce2dfa946d8505`, same path as the first wave, each
+taking a slot as one freed (never more than four concurrent). Terminal so far, each on its own
+with exit code 0, 45 training rows and an empty `stderr.log`: CF and D1280 on 772803, CF and
+D1280 on 772903, CF on 773003, CF on 773103. Running: D1280 773003, D1280 773103, CF 773203,
+D1280 773203. No stage-1 panel or score has been read.
+
+| tag | arm | block | operation ref (under `/home/wu/projects/HMASD/.git/hmasd-admission/`) |
+| --- | --- | --- | --- |
+| `b01_s1_cf_773003_a01` | CF λ 0.5 | 773003 | `381823497e8b2fdd9314bdf4cc9ea11319b20884fa0f8e5720ee03dfa26bcbc9.json` |
+| `b01_s1_d1280_773003_a01` | D1280 | 773003 | `d8e9ce1dbb390045f847791896a59458114e83f583380bf45e42f9d3212f29e3.json` |
+| `b01_s1_cf_773103_a01` | CF λ 0.5 | 773103 | `724c339a89c227058ec981ef8c875a5d56fe2ed0ac89d20ed5e2b5b772994119.json` |
+| `b01_s1_d1280_773103_a01` | D1280 | 773103 | `2ba4fa2ded43173eedf4868a085da19d1d69f38695b198bfbfa875dce318e666.json` |
+| `b01_s1_cf_773203_a01` | CF λ 0.5 | 773203 | `76cbcd238f93b3fc79294db8ff0c514bae766f78538c05d2a332538c26588779.json` |
+| `b01_s1_d1280_773203_a01` | D1280 | 773203 | `f278de05e9a32acd95687ade79a40fb1e6276f5e6b78aa03d21153f635c852dc.json` |
+
+One pre-training refusal, no fit consumed: the first request for `b01_s1_cf_773003_a01` was
+refused with "canonical control checkout has not fetched the published control head", because
+main had moved (transport work) since the node was synced. The node checkout was fast-forwarded
+and the same request admitted. Operating fact: fast-forward the node's canonical checkout to
+published main before each launch; the launch sha stays the one that holds `SELECTION.json`.
+
+Observed cost at four concurrent: CF about 1.85 h per fit as in stage 0; D1280 somewhat slower
+than CF on this node (in the first wave the two D1280 fits finished about 35 minutes after
+their CF partners), the opposite of the card's wall plan ordering. Plans, not caps.
