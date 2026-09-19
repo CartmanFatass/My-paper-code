@@ -604,3 +604,37 @@ pairing, a missing pair, and the rerun comparison (exact equality reported as a 
 the maximum absolute panel difference). No learner, environment or evaluator change, so no
 shared-core review; the D1280 config produced by the new entry must equal B01's field for
 field, and a test asserts it.
+
+## 2026-09-19 05:26 PDT — coordinator batch B02: entry code written and accepted; design confirmed by the owner
+
+The owner preferred my design (five D128 fits paired with B01's completed D1280 fits, plus one
+D1280 rerun) over Pro's two arms on three fresh blocks, because it was written after reading the
+new result. No change to the prospective entry above.
+
+Code, written by me and accepted by me; no learner, environment, evaluator or shared-runner file
+is touched, so no independent review:
+
+- `scripts/run_fsd_coordinator_batch_b02.py`: thin entry over the frozen B01 loop, as the
+  matched-information runner is. Arms `D128` and `D1280`, both the ordinary D0 construction;
+  `plan_guard` admits exactly the six planned fits (D128 on the five blocks, D1280 on 772803
+  only) before an admission is spent. `reduce` reads this object's fits with its own validator
+  and the five reference fits with the matched-information validator, refuses a pair whose
+  host, precision, seeds or configuration differ in anything but `coordinator_batch_size` (the
+  launch sha differs by design and is reported), and reports the rerun as exact-or-not plus the
+  maximum panel-mean and world-score differences; the rerun never enters M_b.
+- `experiments/candidates/flexible_skill_duration/coordinator_batch_b02/launch_fit.sh`: one
+  kernel invocation per fit.
+- Tests (six, fake learner and host, 45 rollouts and nine panels through the frozen loop): the
+  plan guard; the **real** config of the new D1280 equals the matched-information D1280 field for
+  field and D128 differs from it in `coordinator_batch_size` only; identity and cross-object
+  refusal; the paired readout end to end with exact dyadic values; a differing rerun measured
+  and not substituted; missing, invalid, unplanned-difference and duplicate inputs. Run with
+  the matched-information (57) and baseline x interruption (18) folders: all pass, and the two
+  thin entries pass in one process.
+- Checked against the real records: the real D1280 config built by this entry equals the
+  `learner_config` recorded in `b01_s1_d1280_772803_a01/summary.json` with no differing field,
+  and `reduce` validates all five real B01 D1280 summaries (level mean 0.4277, as B01 reported).
+
+Launch next, at the commit that holds this code: four first (D128 on 772803, 772903, 773003
+and the D1280 rerun on 772803), the remaining two D128 as slots free. Tags `b02_d128_<block>_a01`
+and `b02_d1280_772803_a01`. No B02 score is read before all six are terminal.
