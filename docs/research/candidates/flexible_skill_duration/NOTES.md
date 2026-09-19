@@ -166,3 +166,23 @@ available, load 7 on 20 cores. Basis for the expected end: about 45 × 50–70 s
 32-world panels per fit at four concurrent, i.e. roughly one to one and a half hours per fit;
 to be corrected from the first completed fit. No score has been read; selection reads only
 the six J45 after all six complete.
+
+## 2026-09-18 21:35 PDT — stage 0: all six CF fits admitted; first two terminal
+
+The two λ = 1 fits exited on their own with code 0, 45 training rows and an empty `stderr.log`:
+`b01_s0_cf_l1_772603_a02` after 6650 s and `b01_s0_cf_l1_772703_a01` after 6820 s (admission
+preflight to `process-exit.json`). That corrects the earlier guess: at four concurrent fits the
+node gives about 140 s per rollout including panels, about 1.85 h per CF fit; each runner used
+about 3.9 cores and 1.0–1.25 GB RSS, load 15 on 20 cores, so four concurrent is the ceiling.
+
+Each freed slot took one of the remaining λ = 2 fits, same sha `dd53e8d51112f4eb6128cd91ec797fa85329890a`,
+same launch path:
+
+| tag | λ | block | operation ref (under `/home/wu/projects/HMASD/.git/hmasd-admission/`) |
+| --- | --- | --- | --- |
+| `b01_s0_cf_l2_772603_a01` | 2 | 772603 | `77b25c84f310deb24c7732026a6da4976b23e85a6df5bf0551c8ee5f8e9a11f1.json` |
+| `b01_s0_cf_l2_772703_a01` | 2 | 772703 | `1437db79508cc73a5f26b751736fab5b04c5b8e2b94e78fb59a6d526ce206de2.json` |
+
+The two λ = 0.5 fits are past rollout 41 and still running. No score has been read. Stage-1
+planning from the measured wall: ten fits at four concurrent is about three waves, roughly
+five to six hours on this node.
