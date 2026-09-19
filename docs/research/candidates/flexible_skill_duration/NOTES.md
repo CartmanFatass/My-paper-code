@@ -118,3 +118,22 @@ plan is kept as the watchdog basis until the first fit reports.
 through `launch_fit.sh` and the admission kernel from the published sha. Two first, RSS and
 per-rollout wall read from their progress, then up to four concurrent. No stage-1 fit or panel
 is read before `SELECTION.json` is committed.
+
+## 2026-09-18 19:35 PDT — stage 0, first launch attempt: pre-training refusal on the node (no fit consumed)
+
+Node preparation: the canonical checkout on `wsl_4070` (`/home/wu/projects/HMASD`) was 953
+commits behind and its sparse cone lacked `.codex` and `docs/research`, which the admission
+kernel reads there. Fetched `main` through the node's network shell (`zsh -lic`; a plain
+`bash` fetch times out on SSL), fast-forwarded to `1e3a0b981`, added the two declared paths.
+Untracked bundles and the existing worktrees were not touched.
+
+Attempt `b01_s0_cf_l1_772603_a01` (CF, λ = 1, block 772603, sha `1e3a0b981`): the kernel
+refused with "runner did not request admission before the deadline; claim is blocked". The
+child exited 1 at import, before admission and before any output, environment or learner:
+`ModuleNotFoundError: No module named 'configs'` — the node's sparse list in
+`.codex/hmasd-compute.toml` predates the `configs/` package. Launch-to-exit wall under one
+minute. Records kept on the node under `runs/flexible_skill_duration/b01_s0_cf_l1_772603_a01/`
+(manifest, status, `process-exit.json`, `stderr.log`). A pre-training launch failure consumes
+no fit (constitution section 3). Repair: `configs` added to the declared sparse list; the next
+attempt runs from the new sha under a fresh tag, so it is a new claim, not a replay of this one.
+The runner imports repository code only from `configs`, `envs`, `hmasd` and `scripts`.
