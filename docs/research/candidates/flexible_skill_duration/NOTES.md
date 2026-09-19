@@ -906,3 +906,30 @@ D1280 summaries and refuses any config difference other than `lambda_l` (against
 reports the per-rollout diagnostics above; launch script on the admission kernel; tests for the
 arm table, the single-field difference against the recorded B01 CF config, the plan guard and
 the reduce. No learner, environment or evaluator change, so no shared-core review.
+
+## 2026-09-19 14:59 PDT — flat entropy B03: entry code written and accepted
+
+`scripts/run_fsd_flat_entropy_b03.py` (thin entry over the frozen B01 loop),
+`experiments/candidates/flexible_skill_duration/flat_entropy_b03/launch_fit.sh`, six tests under
+`tests/experiments/candidates/flexible_skill_duration/flat_entropy_b03/`. No learner, environment
+or evaluator change, so accepted by the DM without an independent review.
+
+The frozen runner knows one flat arm by name, so both arms run as its `CF` arm and carry
+`entropy_arm` (`CF_E005`, `CF_E0005`) and `entropy_coefficient` in the summary. The plan guard
+refuses anything but the six planned fits before the admission is spent. `reduce` reads the new
+fits with this object's validator (recorded `lambda_l` must be the arm's, central input on) and
+the B01 CF and D1280 fits with B01's own; a new fit whose configuration differs from the CF fit
+of its block in any field other than `lambda_l` is refused. It reports, per fit, J by rollout
+and the entropy, actor displacement, value loss and training return at rollouts 1, 5, …, 45,
+and per arm the three differences against CF and against D1280.
+
+Checks: 6 new tests pass; with the B02 tests in one process 12 pass; matched-information 57 and
+baseline-interruption 18 pass. On the real configuration: the construction without an entropy
+arm equals the `learner_config` recorded in `b01_s1_cf_772803_a01/summary.json` with no
+differing field; each arm differs from it in `lambda_l` only; entropy targets and annealing are
+off, and the learner reads `config.lambda_l` at every low-level update (`hmasd/agent.py`). The
+six real reference summaries pass validation. One thing found while testing and fixed: the
+summary wrapper is now installed for the duration of a fit only, so a fit of another object in
+the same process is not marked as this one's (production runs one fit per process).
+
+Launch order: both arms on 772803 and 772903 first (four concurrent), then both on 773003.
