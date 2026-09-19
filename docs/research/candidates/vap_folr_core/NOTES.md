@@ -425,3 +425,140 @@ policy/target law and compute scope before implementation. A target based on pri
 must remain a training/diagnostic label, never silently enter actor inputs. Do not start another
 reward-head fit merely because this counterexample exists. This continuation used zero new
 fits, optimizer steps, model calls or environment transitions; A01 remains 2/2 fits completed.
+
+## 2026-09-19 — continuous DM work: selected frozen-action diagnostic A01 and L0
+
+Owner requests a continuous research loop, not a permission stop at each routine step. Within
+this direction the DM proceeds through design, checks, execution and reading at scientific
+boundaries. This does not change fit allowances or FSD ownership. The completed predictive
+auxiliary A01 stays ended; the following is a new zero-fit diagnostic of its frozen outputs.
+
+Question: on the prespecified seen/hidden axis-distance-two stratum in each retained final
+panel, does carrying the trained Generic recurrence change the selected action's immediate
+team-reward consequence, conditional on the recorded teammates' greedy actions? The contrast
+is full frozen recurrence versus setting the same actor's hidden state to zero at each
+observation; all current legal inputs INCLUDING seen/age/public lifecycle metadata remain.
+The latter is an out-of-distribution state-reset intervention, not a trained memoryless
+baseline or a measure of what the representation could learn/linearly decode. Expect the
+DETACHED actor's carried state to reduce conditional immediate regret, low confidence.
+Intermediate prediction: reset changes some actions in the selected stratum. Read a null or
+adverse contrast narrowly; neither proves history redundancy or a defect worth training away.
+
+Inputs: the two A01 sole-final panels/checkpoints, fixed before this diagnostic:
+
+| Input | SHA256 |
+| --- | --- |
+| DETACHED final.pt | 6c59f47535e6887c58c5bd4484044077e6acf1cde7b60181baf8334a136aed6e |
+| DETACHED final-panel.npz | 6e140a6c23feb25481d3fb5705a26bed1acbbd5de85428408759b15f48cc7e7d |
+| COUPLED final.pt | b8ccb717c22ce11254436d8873e26be25d14882b9a0f82c4179ab47dce28c7b0 |
+| COUPLED final-panel.npz | 8a5f7b110fc027a86feef17810846d43d590909883be924ccc44d07556fd683f |
+
+Their known tags are predictive_aux_a01_detached_783101 and
+predictive_aux_a01_coupled_783101 under the durable author-checkout runs/vap_folr_core root.
+Use native NumPy seed 1783101 at the start of EACH panel replay, then all 128 episode resets
+and recorded joint actions in original order. Reconstruct each native observation, lifecycle,
+reward and final boundary and check against stored arrays before reading the dependent result.
+Native float64 replay returns are checked against summaries; FP32 reward casts against panels.
+
+At each of the selected 718 DETACHED and 180 COUPLED observer ticks, hold every other slot's
+recorded action fixed and evaluate each of the four non-factual focal actions through a deep
+copy of the real native environment. Save/restore GLOBAL NumPy state around every branch;
+branch births and removals never alter the factual continuation. Reuse the verified factual
+reward for the fifth action. This is exactly 3592 counterfactual single steps plus 5120 factual
+replay steps = 8712 native transition calls, not 5-to-the-number-of-agents joint search. Each
+branch stops after one step; no new policy rollout or fitted model. No measured geometric row
+is selected by its reward or by whether reset changes an action.
+
+Replay the frozen actor serially at all 21 observation boundaries, as the original collector
+did, with full hidden state and independently with zero incoming hidden state. Confirm full
+active greedy actions equal stored actions before accepting a panel; do not switch to a batch
+path whose numerical ties could change actions. This is 10752 actor calls across both panels,
+no predictor/mixer forward needed, zero optimizer steps and zero parameter movement. CPU FP32,
+Torch threads 1/1, configured local_linux. Initial wall estimate five minutes, adjustable for
+engineering health but not a scientific stopping endpoint. No search, sweep or new fit.
+
+Retain each selected row's episode/time/agent, five native reward values, full/reset actions,
+full/reset conditional regret, action-change flag and public-event stratum. Summarize each
+panel separately: counts, changed-action fraction, mean full/reset regret and signed
+full-minus-reset immediate reward, and per-episode sums/counts. The oracle here has privileged
+state and frozen other actions: its gap is not achievable actor headroom or H20 policy value.
+Do not compare the two panels as a causal arm effect. One-step regret may disagree with good
+long-horizon behavior; it is an operational local diagnostic of these actual frozen actions.
+Invalid replay/action identity means technical incompleteness, never a negative scientific
+finding. Preserve invalid counts/errors and all outcomes; no outcome-selected extension.
+
+L0: Implementer owns only experiments/candidates/vap_folr_core/action_contrast_a01/,
+scripts/run_folr_action_contrast_a01.py and mirrored tests. Reuse native env and Generic Actor
+by import; no historical/core source edit. DM owns this notebook and index/Git. Entry requires
+admission before loading scientific inputs, construction or output effects, with --launch-sha
+matching admission and --input-root resolving the declared external files at their digests.
+Output summary.json has complete/incomplete, input/source hashes, zero fits/updates and actual
+forward/factual/counterfactual counts, runtime/RSS, rows and per-episode readings. Verify input
+checkpoint hashes unchanged after execution. Use a runner-written JSONL for selected rows.
+No generic evaluator framework. Check native branch isolation/global RNG, masks and selected
+predicate, analytic two-case reward vectors, full serial action agreement, parameter immutability,
+zero optimizer use, mismatch/error publication and admission refusal using managed pytest
+scratch. Independent engineering Reviewer before DM acceptance/commit/push/admitted execution.
+
+### A01 diagnostic scope clarification before implementation acceptance
+
+Accept ResearchCritic's two material qualifications. Full carry outperforming zero carry does
+not establish adequate memory capacity or informative history: a trained GRU can prefer its
+usual operating state even when the carried content is uninformative. This diagnostic will
+not infer a representation deficit or sufficiency from reset effects. Also multiple focal
+deviations can concern the same collision and retain factual later states. Per-episode sums
+are explicitly nonadditive overlapping local deviations, not a recoverable episode return.
+Counterfactual reward/regret is evaluated only for the 898 selected observer ticks; other
+active ticks receive no fabricated zero regret. Full-action identity checks still cover all
+active ticks. Report per-row five-action reward range and aggregate nonflat-contrast count
+(tolerance 1e-12), full/reset positive-regret counts and per-episode means/counts, derived from
+the same selected rows with no extra native calls. These reveal whether the selected immediate
+action contrast actually varies; they do not establish learnable history-specific headroom.
+The DM will use the reading to decide the next question, with no automatic decoder fit,
+second diagnostic, or extension. No additional empirical exposure is introduced by this note.
+
+The DM accepts the Critic's final refinement before executable acceptance: selected actual
+one-step action consequences/factual regret are PRIMARY; carry reset is secondary sensitivity.
+For the same five branches also retain changes in native `collision_times` from the common
+pre-state. The factual delta reuses the actual factual step. A row is collision-sensitive
+when these five deltas differ; report its count and the same regret readings separately,
+with null for an empty subset. This is a fixed descriptive partition of all selected rows,
+not a reward-selected extension. Collision counts include the rest of the native team;
+variation under focal action establishes that local intervention changes a collision outcome,
+not that history could predict or prevent it. No new environment calls. Small collision-related
+variation weakens this stratum as a target; little factual regret despite variation weakens
+its immediate improvement rationale. Substantial regret leaves prediction, learnability and
+H20 consequences unresolved. This smaller measurement does not claim to answer the stronger
+question of history's incremental predictability, and is not a prerequisite for a learning test.
+
+### Method choice after the owner's question about stepwise replay
+
+The owner questioned whether this is a usual RL research choice. Distinguish experience replay
+(training from stored samples; [DeepMind's DQN explanation](https://research.google/blog/from-pixels-to-actions-human-level-control-through-deep-reinforcement-learning/))
+from this custom environment reconstruction/one-step branch diagnostic. A relevant conceptual
+precedent is [COMA](https://arxiv.org/abs/1705.08926), whose centralized critic marginalizes one
+agent's action while fixing others, efficiently in one forward pass. That is not a precedent
+requiring real simulator branch replay, and this diagnostic is not COMA or an RL standard.
+Primary passages were checked; their empirical results provide no evidence for this project.
+
+DM judgment: the construction is proportionate only as this closed, small-host census, with
+implementation already at its focused check boundary. It answers a limited local consequence
+question, not learning efficacy. Finish this bounded reading, then choose a real learning
+intervention or retire the subidea based on remaining scientific reason. No routine replay
+stage, expandable forensic framework or additional diagnosis chain is adopted. A direct
+learning comparison can be preferable even when the causal explanation is incomplete.
+
+## 2026-09-19 — DM scope correction before any diagnostic launch
+
+After the owner's questions about unusual scopes, the DM deselects the frozen-action diagnostic
+from the current execution plan. Its implementation and independent engineering review found
+no material defect, but that is not a scientific reason to run it: its possible readings do
+not yet justify their cost relative to a direct learning comparison, and neither sign identifies
+a history-representation deficit. No diagnostic operation, actual-checkpoint replay or new fit
+was launched. Preserve the untracked implementation; do not delete or silently promote it.
+The prior analytical example and A01's adverse result remain valid within their stated scope.
+This is DM prioritization, not an owner research pause. Current methods already allow direct
+learning tests without toy/proof prerequisites; they did not require this diagnostic chain.
+Do not turn a bounded engineering assignment into the unit of scientific progress or a reason
+to return control after each step. Reassess the next learning comparison by the direction-level
+question and the decision its result could change; no extra governance gate is introduced.
