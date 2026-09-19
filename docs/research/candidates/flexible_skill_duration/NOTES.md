@@ -653,3 +653,43 @@ first request. Alive with an empty `stderr.log` after the fourth admission.
 | `b02_d128_773003_a01` | D128 | 773003 | `b06453dea598bfa64b4f4eac5818c1cefa06936e7d324cfdd756de91cb6eee92.json` |
 
 Still to launch as slots free, same sha: D128 on 773103 and 773203.
+
+## 2026-09-19 06:45 PDT — control revision `fb3d225fb` (cumulative research understanding): read and adopted for future work
+
+The owner pointed this session at the merged control revision (PR #26, `fb3d225fb`). Read at a
+safe boundary while the B02 first wave runs: the constitution sections 1, 2, 4 and 5, `AGENTS.md`,
+`hmasd-research-hub`, `hmasd-scientific-tools` with `references/cumulative-research.md`,
+`hmasd-pro-research-prompt-author`, `hmasd-portfolio-task`, and the Scout and ResearchCritic
+bodies. `tools/publish_claude_control.py --check` reports `drift: 0`, so the generated Claude
+bodies on disk are the revised ones. The subagent descriptions this session loaded at start
+are the earlier ones; a subagent started from now on reads the revised body from disk.
+
+What does not change: B02 is in flight and is not touched. Same launch sha, same six planned
+fits, same fixed rule for the rerun, no relaunch, no re-read of the design. The B01 reading by
+card section 6 stands as written.
+
+What changes in how this session works from here:
+
+- The B02 reading will separate execution facts, observations and interpretation, and will say
+  what it strengthens, weakens and leaves untouched in the current explanation (the B01 entry's
+  "What the gap is made of"). "No useful discrimination" is an allowed outcome.
+- B02 is a package screen. D128 changes the batch, the number of optimizer steps (seven times
+  as many) and the normalisation group size together; the prospective entry already says so.
+  The reading therefore forgoes attributing a difference to any one of the three.
+- The numeric probabilities in the B02 prospective entry were written before this revision.
+  They will be scored as written, as uncalibrated guesses. Later prospective entries give the
+  expected sign and, for a targeted change, one intermediate and one native prediction, not
+  invented probabilities.
+- A boundary return is one paragraph: state, evidence and commit, what the evidence does and
+  does not establish, the judgment changed or unresolved, the next step or real dependency.
+- No Pro round is owed after B02; one is written only if a focused question needs it.
+
+Operating fact: a Codex session drives `vap_folr_core` as DM from its own worktree of this same
+repository on this host (`~/.codex/worktrees/folr-predictive-aux/hmasd-wsl`, branch
+`codex/folr-predictive-aux-a01`), and its planned fits use node `local_linux`, whose
+`project_root` is this checkout. This checkout may therefore be fast-forwarded and may receive
+`runs/vap_folr_core/` outputs that are not this session's. This session stages explicit FSD
+paths only, fetches before each commit, never cleans or stages files it did not write, and
+edits only the FSD row of `RESEARCH.md`. That branch states that FSD stays with the Claude
+session and that there is no Root dispatch layer, so this session keeps integrating its own
+FSD commits on `main`.
