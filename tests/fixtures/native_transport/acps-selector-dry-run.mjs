@@ -9,6 +9,8 @@ const load = name => import(pathToFileURL(path.join(source, name)).href);
 const { ChatGPTController, classifyChatgptStrictProductSelection: classify } = await load('chatgpt-controller.mjs');
 const { runReviewQuery } = await load('review-transport.mjs');
 const { readReviewTransportState } = await load('state.mjs');
+const { REVIEW_PLAIN_TEXT_MODEL, reviewPlainTextIdentity } = await load('review-text-identity.mjs');
+const { REVIEW_COMPOSER_REPLACEMENT_MODEL } = await load('review-composer-replacement.mjs');
 const handoff = JSON.parse(await fs.readFile(handoffPath, 'utf8'));
 const prompt = handoff.transport_request.prompt;
 const sha = value => crypto.createHash('sha256').update(value).digest('hex');
@@ -98,6 +100,18 @@ await assert.rejects(wrongPower.controller.reviewPreflight({productModel:'GPT-6 
 
 let sends=0;
 const directories=[];
+async function prepareVerifiedComposer(args, baselineMessageIds) {
+  await args.onPrepared({baselineMessageIds});
+  const canonicalPromptSha256=reviewPlainTextIdentity(args.prompt).canonicalSha256;
+  await args.onComposerVerified({
+    ok:true,
+    textModel:REVIEW_PLAIN_TEXT_MODEL,
+    replacementModel:REVIEW_COMPOSER_REPLACEMENT_MODEL,
+    sourceSha256:sha(args.prompt),
+    canonicalPromptSha256,
+    observedCanonicalSha256:canonicalPromptSha256
+  });
+}
 async function scenario(name, uncertain=false) {
   const stateDir=path.join(scratch,name); directories.push(stateDir);
   let repaired=uncertain;
@@ -112,6 +126,7 @@ async function scenario(name, uncertain=false) {
     assert.equal(args.requireTargetPreflight,true);
     if(!repaired)throw new Error('chatgpt_product_model_unavailable_or_unselected');
     assert.equal(classify(base).matched,true);
+    await prepareVerifiedComposer(args, []);
     await args.onSendAttempted(); sends++;
     if(uncertain)throw new Error('fixture_uncertain_effect');
     await args.onUserTurnObserved(identity); return identity;
@@ -147,6 +162,7 @@ async function conversationKeyScenario() {
     const identity=args.firstBinding
       ? {conversationUrl:`https://chatgpt.com/c/fixture-new-${++firstBindingNumber}`,conversationId:`fixture-new-${firstBindingNumber}`}
       : {conversationUrl:args.expectedUrl,conversationId:args.expectedConversationId};
+    await prepareVerifiedComposer(args, args.firstBinding?[]:['fixture-existing-user']);
     await args.onSendAttempted(); sends++;
     await args.onUserTurnObserved({...identity,userMessageId:`fixture-user-${sends}`});
     return {...identity,userMessageId:`fixture-user-${sends}`};
