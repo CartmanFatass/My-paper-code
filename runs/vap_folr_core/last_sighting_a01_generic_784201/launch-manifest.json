@@ -1,0 +1,102 @@
+{
+  "acceptance": "accepted",
+  "accepted_at": "2026-09-19T23:01:17.720555Z",
+  "bootstrap_command": [
+    "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/b63233ddbe9548189b08f6fe95107893/scripts/hmasd_admission.py",
+    "_run-admitted",
+    "--runner",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/b63233ddbe9548189b08f6fe95107893/scripts/run_folr_last_sighting_a01.py",
+    "--output",
+    "/home/fires/.codex/worktrees/1275/hmasd-wsl/runs/vap_folr_core/last_sighting_a01_generic_784201",
+    "--",
+    "--arm",
+    "GENERIC_RETAIN",
+    "--seed",
+    "784201",
+    "--evaluation-seed",
+    "1784101",
+    "--launch-sha",
+    "e7ba09858760a29903e5d23e91b274a333d8feb6",
+    "--out",
+    "/home/fires/.codex/worktrees/1275/hmasd-wsl/runs/vap_folr_core/last_sighting_a01_generic_784201"
+  ],
+  "claim_key": "4b4bf4c6546d24fa7e2b2fe917a3765328e3655d26008ed742a2fb58a52f69a8",
+  "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/4b4bf4c6546d24fa7e2b2fe917a3765328e3655d26008ed742a2fb58a52f69a8.json",
+  "command": [
+    "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/b63233ddbe9548189b08f6fe95107893/scripts/run_folr_last_sighting_a01.py",
+    "--arm",
+    "GENERIC_RETAIN",
+    "--seed",
+    "784201",
+    "--evaluation-seed",
+    "1784101",
+    "--launch-sha",
+    "e7ba09858760a29903e5d23e91b274a333d8feb6",
+    "--out",
+    "/home/fires/.codex/worktrees/1275/hmasd-wsl/runs/vap_folr_core/last_sighting_a01_generic_784201"
+  ],
+  "command_sha256": "ad29ecd3bf1cd00bf84d348485e2694c5397589c1a12d261325cc00db4f87100",
+  "control_observation": {
+    "observed_at": "2026-09-19T23:01:17.533245Z",
+    "ref": "refs/heads/main",
+    "remote": "origin",
+    "sha": "22f998ae22be147ec000edfeef630f7008fad47d"
+  },
+  "control_root": "/home/fires/hmasd-wsl",
+  "created_at": "2026-09-19T23:01:17.556583Z",
+  "cwd": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/b63233ddbe9548189b08f6fe95107893",
+  "direction": "vap_folr_core",
+  "host_identity": "Jacob",
+  "identity_command": [
+    "/home/fires/.local/share/uv/python/cpython-3.10.20-linux-x86_64-gnu/bin/python3.10",
+    "scripts/run_folr_last_sighting_a01.py",
+    "--arm",
+    "GENERIC_RETAIN",
+    "--seed",
+    "784201",
+    "--evaluation-seed",
+    "1784101",
+    "--launch-sha",
+    "e7ba09858760a29903e5d23e91b274a333d8feb6"
+  ],
+  "lead": "Codex DM",
+  "manifest_ref": "/home/fires/.codex/worktrees/1275/hmasd-wsl/runs/vap_folr_core/last_sighting_a01_generic_784201/launch-manifest.json",
+  "node": "local_linux",
+  "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/4b4bf4c6546d24fa7e2b2fe917a3765328e3655d26008ed742a2fb58a52f69a8.json",
+  "output_root": "/home/fires/.codex/worktrees/1275/hmasd-wsl/runs/vap_folr_core/last_sighting_a01_generic_784201",
+  "preflight": "/home/fires/.codex/worktrees/1275/hmasd-wsl/runs/vap_folr_core/last_sighting_a01_generic_784201/admission-preflight.json",
+  "process": {
+    "detached": true,
+    "identity": {
+      "boot_id": "0c48e432-2a4b-4bcc-9576-32954aa2c6b8",
+      "kind": "linux_pid_start_ticks",
+      "pid": 1292852,
+      "session_id": 1292852,
+      "start_ticks": 12130790
+    },
+    "native_handle_kind": "posix_session",
+    "pid": 1292852,
+    "process_group_id": 1292852
+  },
+  "process_exit": "/home/fires/.codex/worktrees/1275/hmasd-wsl/runs/vap_folr_core/last_sighting_a01_generic_784201/process-exit.json",
+  "published_remote": "origin",
+  "runner_process": {
+    "identity": {
+      "boot_id": "0c48e432-2a4b-4bcc-9576-32954aa2c6b8",
+      "kind": "linux_pid_start_ticks",
+      "pid": 1292853,
+      "session_id": 1292852,
+      "start_ticks": 12130794
+    },
+    "pid": 1292853,
+    "process_group_id": 1292852,
+    "supervisor_pid": 1292852
+  },
+  "schema_version": 1,
+  "sha": "e7ba09858760a29903e5d23e91b274a333d8feb6",
+  "source_root": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/b63233ddbe9548189b08f6fe95107893",
+  "stderr": "/home/fires/.codex/worktrees/1275/hmasd-wsl/runs/vap_folr_core/last_sighting_a01_generic_784201/stderr.log",
+  "stdout": "/home/fires/.codex/worktrees/1275/hmasd-wsl/runs/vap_folr_core/last_sighting_a01_generic_784201/stdout.log"
+}

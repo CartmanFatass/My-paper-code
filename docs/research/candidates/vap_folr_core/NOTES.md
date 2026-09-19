@@ -738,3 +738,25 @@ training exposure or source-native evaluator is introduced.
 Publish the accepted exact source, then admit the six already selected original fits. This
 acceptance adds no scientific fit, arm, parameter search or diagnostic. Each native operation
 will be linked below; original accepted handles must be reconciled, never blindly repeated.
+
+
+### Six original A01 operations admitted
+
+All six selected original requests returned accepted at published source
+`e7ba09858760a29903e5d23e91b274a333d8feb6` after fresh canonical policy/publication and
+actual local_linux memory checks. There are six selected attempts and no replacement/retry.
+Snapshots preserve input code while authoring continues. Native operation identities, process
+witnesses and commands are retained in the following runner-owned manifests:
+
+- [generic 784101](../../../../runs/vap_folr_core/last_sighting_a01_generic_784101/launch-manifest.json)
+- [cached 784101](../../../../runs/vap_folr_core/last_sighting_a01_cached_784101/launch-manifest.json)
+- [generic 784201](../../../../runs/vap_folr_core/last_sighting_a01_generic_784201/launch-manifest.json)
+- [cached 784201](../../../../runs/vap_folr_core/last_sighting_a01_cached_784201/launch-manifest.json)
+- [generic 784301](../../../../runs/vap_folr_core/last_sighting_a01_generic_784301/launch-manifest.json)
+- [cached 784301](../../../../runs/vap_folr_core/last_sighting_a01_cached_784301/launch-manifest.json)
+
+The bounded Monitor has these exact original handles; DM retains scientific reading and
+collection responsibility. The first sampled progress shows 200 episodes / 169 updates for
+the earliest three launches; later starts have not yet emitted their first 200-episode summary.
+No early score is used for selection. Terminal witnesses, final artifacts and scientific
+interpretation are pending. This is an active producer, not a new authorization request.
