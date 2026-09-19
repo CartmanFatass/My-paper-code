@@ -1435,6 +1435,7 @@ def _prepare_paths_and_config(args: argparse.Namespace) -> tuple[LaunchPaths, st
     config_path = _locate_config(source_root, common_root)
     config = _load_config(config_path)
     node, entry = _node_config(config, args.node)
+    _configured_path_prefix(entry)
     configured_root = _configured_root(entry)
     control_root = _resolve_control_root(source_root, common_root, configured_root)
     author_root = source_root
@@ -1507,7 +1508,6 @@ def _prepare_paths_and_config(args: argparse.Namespace) -> tuple[LaunchPaths, st
     python = Path(python_raw).expanduser().resolve(strict=True)
     if not python.is_file():
         raise LaunchRefusal(f"configured interpreter is not a file: {python}")
-    _configured_path_prefix(entry)
     return (
         LaunchPaths(
             source_root=source_root,

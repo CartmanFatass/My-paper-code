@@ -86,7 +86,7 @@ if os.name == 'nt':
 print('fixture stdout', flush=True)
 import sys
 print('fixture stderr', file=sys.stderr, flush=True)
-(output / 'summary.json').write_text(json.dumps({'sha': admission['sha'], 'console': console}), encoding='utf-8')
+(output / 'summary.json').write_text(json.dumps({'sha': admission['sha'], 'console': console, 'path': os.environ.get('PATH')}), encoding='utf-8')
 """
 
 
@@ -174,6 +174,7 @@ ref = "refs/heads/main"
 role = "test"
 project_root = "{configured_root}"
 python = "{configured_python}"
+path_prefix = "{configured_root}/node-bin"
 ''',
         encoding="utf-8",
     )
@@ -501,6 +502,8 @@ def test_successful_fixture_is_admitted_and_detached(
     _wait_for(output / "summary.json")
     summary = json.loads((output / "summary.json").read_text(encoding="utf-8"))
     assert summary["sha"] == sha
+    # The node's path_prefix reaches the real runner through the detached supervisor.
+    assert summary["path"].startswith(source.resolve().as_posix() + "/node-bin" + os.pathsep)
     assert manifest["acceptance"] == "accepted"
     assert manifest["process"]["pid"] > 0
     assert json.loads((output / "launch-status.json").read_text())["status"] == "accepted"
@@ -1046,3 +1049,27 @@ def test_configured_path_prefix_reaches_the_child_environment(monkeypatch) -> No
 def test_malformed_path_prefix_is_refused(value) -> None:
     with pytest.raises(hmasd_launch.LaunchRefusal, match="path_prefix"):
         hmasd_launch._configured_path_prefix({"path_prefix": value})
+
+
+def test_malformed_path_prefix_refuses_before_any_effect(
+    launch_repo: tuple[Path, Path, str], monkeypatch: pytest.MonkeyPatch
+) -> None:
+    source, _remote, _sha = launch_repo
+    monkeypatch.setattr(
+        hmasd_launch.hmasd_resource_preflight,
+        "capture_snapshot",
+        lambda: SAFE_SNAPSHOT,
+    )
+    config = source / ".codex" / "hmasd-compute.toml"
+    text = config.read_text(encoding="utf-8")
+    config.write_text(
+        text.replace(f'path_prefix = "{source.resolve().as_posix()}/node-bin"', "path_prefix = 7"),
+        encoding="utf-8",
+    )
+    _git(source, "commit", "-am", "malformed prefix")
+    _git(source, "push", "origin", "main")
+    sha = _git(source, "rev-parse", "HEAD").stdout.strip()
+    args = _arguments(source, sha, tag="malformed-prefix")
+    with pytest.raises(hmasd_launch.LaunchRefusal, match="path_prefix"):
+        hmasd_launch.launch(args)
+    assert not Path(args.output).exists()
