@@ -268,3 +268,29 @@ prototype with a controllable difference between current cues and legitimate his
 opportunity claim can be separated from finite-learning failure before another architecture is
 chosen. Such a prototype must state the MARL coupling it omits and cannot establish a native
 Traffic-Junction/UAV effect. No new prototype implementation or fit is selected by this entry.
+
+## 2026-09-19 — continued: analytic history opportunity and retained-panel inspection scope
+
+Owner approved continuation after A01 closeout. Keep its two-fit result and fixed batch ended.
+The next work is a source-derived finite conditional counterexample, not an implemented toy or
+new fit. Scout maps actual host information/dynamics; ResearchCritic independently checks the
+analytic construction. No additional role or Root layer is introduced.
+
+Before reading new descriptive counts, select one fixed post-hoc inspection of the already
+retained A01 panels: DETACHED final, COUPLED final, and the shared uniform probe (once, since
+its input digest matches). Across all 128 episodes and action times 0..19, count active observer
+ticks and the subset having at least one active, previously seen, currently hidden subject in
+the same row/column exactly two cells away (Manhattan distance 2, Chebyshev distance 2).
+Use integer positions recovered from the stored native coordinates times dimension 7; verify
+rounding error. This geometric condition permits a shared reachable next cell on the native
+cross road. Count each observer tick once, not once per hidden subject. Also report how many
+such ticks overlap the already declared union of first three action times following noninitial
+public lifecycle events, plus episode counts. No favorable subset/lag search is selected.
+
+Hidden current positions are privileged only for this retrospective geometric description,
+never an actor input. Presence of this condition does not establish that lawful history locates
+the hidden subject, that a collision was avoidable, that action ranking changed, or that the
+conditional counterexample's teammate law occurs. This is direct reading of existing artifacts:
+zero new transitions, fits, optimizer steps, model inference or counterfactual environment calls.
+The purpose is to distinguish a potentially relevant geometric stratum from a source-only
+existence argument; it cannot estimate a memory effect or new-policy performance.
