@@ -2,13 +2,21 @@ from __future__ import annotations
 
 import ctypes
 import hashlib
+from importlib.machinery import EXTENSION_SUFFIXES
 import math
+import os
 from pathlib import Path
 from types import ModuleType
 
 import pytest
 
 from envs.native import production_backend as policy
+
+# These hosts belong to archived directions and build only with MSVC: their native backends
+# locate Visual Studio and have no other toolchain branch. They are exercised on Windows.
+requires_msvc_native_host = pytest.mark.skipif(
+    os.name != "nt", reason="archived-direction native host builds with MSVC only"
+)
 
 
 def _fake_native_module(path: Path, name: str = "fake_native") -> ModuleType:
@@ -139,7 +147,8 @@ def test_registry_truthfully_separates_native_slices_from_full_environments() ->
 def test_preactivity_guard_requires_cpp_batch_and_native_load(
     monkeypatch: pytest.MonkeyPatch, tmp_path: Path, batch_width: int
 ) -> None:
-    artifact = tmp_path / f"native-{batch_width}.pyd"
+    # The guard accepts only this interpreter's extension suffixes (.pyd on Windows, .so here).
+    artifact = tmp_path / f"native-{batch_width}{EXTENSION_SUFFIXES[-1]}"
     calls: list[object] = []
 
     def load(*, build_root):
@@ -351,6 +360,7 @@ def test_risp_g_init_wrong_backend_fails_before_native_load(
         )
 
 
+@requires_msvc_native_host
 def test_risp_g_init_real_shared_loader_uses_source_keyed_build_root(
     tmp_path: Path,
 ) -> None:
@@ -376,6 +386,7 @@ def test_risp_g_init_real_shared_loader_uses_source_keyed_build_root(
     ).hexdigest()
 
 
+@requires_msvc_native_host
 @pytest.mark.parametrize("batch_width", (1, 8, 32))
 def test_risp_g_init_real_shared_preflight_reports_exact_abi_without_fallback(
     batch_width: int,
@@ -450,6 +461,7 @@ def test_onlgr_tbvuus_build_root_override_is_wrapped_fail_closed(
     assert "does not accept a build_root override" in str(raised.value.__cause__)
 
 
+@requires_msvc_native_host
 @pytest.mark.parametrize("batch_width", (1, 8, 32))
 def test_onlgr_tbvuus_real_shared_preflight_reports_current_exact_artifact(
     batch_width: int,
@@ -824,6 +836,7 @@ def test_scdmp_tbcc_build_root_override_is_wrapped_fail_closed(
     assert "one fixed candidate build root" in str(raised.value.__cause__)
 
 
+@requires_msvc_native_host
 @pytest.mark.parametrize("batch_width", (8, 12, 32, 120, 144))
 def test_scdmp_tbcc_real_receipts_bind_exact_host_abi_and_warm_artifact(
     batch_width: int,
@@ -888,6 +901,7 @@ def test_scdmp_tbcc_real_receipts_bind_exact_host_abi_and_warm_artifact(
     assert first.tbcc_r02_fixture_magic() == 6071489204069610049
 
 
+@requires_msvc_native_host
 def test_scdmp_tbcc_abi2_native_reward_trace_is_complete_and_canonical() -> None:
     from experiments.candidates.scdmp_variable_k.target_bound_competent_controller_order_value import (
         NativeBatch,
@@ -929,6 +943,7 @@ def test_scdmp_tbcc_abi2_native_reward_trace_is_complete_and_canonical() -> None
         )
 
 
+@requires_msvc_native_host
 def test_scdmp_tbcc_abi2_raw_guards_and_malformed_reward_traces_fail_closed() -> None:
     from experiments.candidates.scdmp_variable_k.target_bound_competent_controller_order_value import (
         ResetLane,
@@ -988,6 +1003,7 @@ def test_scdmp_tbcc_abi2_raw_guards_and_malformed_reward_traces_fail_closed() ->
         native_backend._output(malformed)
 
 
+@requires_msvc_native_host
 @pytest.mark.parametrize("batch_width", (1, 8, 32))
 def test_vnfc_bpcr_real_shared_preflight_loads_exact_abi_without_fallback(
     batch_width: int,
@@ -1027,6 +1043,7 @@ def test_vnfc_bpcr_real_shared_preflight_loads_exact_abi_without_fallback(
     }
 
 
+@requires_msvc_native_host
 @pytest.mark.parametrize("batch_width", (1, 8, 32))
 def test_scdmp_real_shared_preflight_loads_exact_abi_without_fallback(
     batch_width: int,
@@ -1055,6 +1072,7 @@ def test_scdmp_real_shared_preflight_loads_exact_abi_without_fallback(
     assert library.scdmp_uav_sp_abi_version() == native_backend.NATIVE_ABI_VERSION
 
 
+@requires_msvc_native_host
 @pytest.mark.parametrize("batch_width", (1, 8, 32))
 def test_onlgr_real_shared_preflight_does_not_consult_or_mutate_activity_authority(
     monkeypatch: pytest.MonkeyPatch, batch_width: int,
