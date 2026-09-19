@@ -418,3 +418,92 @@ published main before each launch; the launch sha stays the one that holds `SELE
 Observed cost at four concurrent: CF about 1.85 h per fit as in stage 0; D1280 somewhat slower
 than CF on this node (in the first wave the two D1280 fits finished about 35 minutes after
 their CF partners), the opposite of the card's wall plan ordering. Plans, not caps.
+
+## 2026-09-19 05:05 PDT — stage 1 complete; B01 read by card section 6: D_REFERENCE_ABOVE, INTERVAL_POSITIVE
+
+Clock correction first. The heading times of four earlier entries were my estimates and run
+ahead of the clock: "23:15" and "23:40" (2026-09-18) were committed at 22:38 and 22:42, "03:15"
+and "05:10" (2026-09-19) at 02:55 and 03:18. The commit times are the facts; the entries stay as
+written. This heading is from `date`.
+
+**Completion.** All ten stage-1 fits are terminal, each with its own `process-exit.json`
+(exit code 0), 45 training rows, nine panels and an empty `stderr.log`; the last,
+`b01_s1_d1280_773203_a01`, finished 04:59 PDT. Every fit reports launch sha `887563f47`, CF at
+multiplier 0.5, D1280 at 1.0, 360,000 training transitions, 45 update stages, 144,000 evaluation
+steps, two model constructions, no checkpoint load; optimizer calls 101,250 actor and critic in
+both arms, coordinator 675 in D1280 and 0 in CF, as the card planned. No stage-1 score was read
+before the tenth exit. The ten folders were copied from the node in one pull (90 files,
+sha256-identical to the node's; node originals untouched) into `runs/flexible_skill_duration/`.
+`reduce` over the ten summaries and the committed `SELECTION.json` wrote
+`runs/flexible_skill_duration/b01_s1_reduce/summary.json`
+(sha256 `c8d16765ac258ef15602f56c375780dfc92de008dbdb77889a436531b685c22d`), status `complete`,
+no missing or invalid arm.
+
+**Primary.** G_b = J45(D1280) − J45(CF, λ 0.5), five paired blocks.
+
+| block | J45 D1280 | J45 CF | G_b | world-difference SD / SE (32 worlds) |
+| --- | ---: | ---: | ---: | ---: |
+| 772803 | 0.4559 | 0.0747 | +0.3812 | 0.048 / 0.0085 |
+| 772903 | 0.3547 | 0.1587 | +0.1960 | 0.061 / 0.0107 |
+| 773003 | 0.4994 | 0.0802 | +0.4192 | 0.039 / 0.0069 |
+| 773103 | 0.4004 | 0.1894 | +0.2110 | 0.054 / 0.0096 |
+| 773203 | 0.4282 | 0.1880 | +0.2402 | 0.077 / 0.0136 |
+
+mean(G) = **+0.2895 J**, s_G = 0.1032, SE_G = 0.0461, t(.975, 4) = 2.7764, working-model interval
+**[+0.1614, +0.4176]**; blocks 5 positive, 0 negative, 0 zero (listed, not a gate). Levels,
+descriptive only: D1280 0.4277 (SD 0.055), CF 0.1382 (SD 0.057).
+
+**Labels by the card's sole numeric conditions.** mean(G) > +.05: `D_REFERENCE_ABOVE`. Interval
+lower end > 0: `INTERVAL_POSITIVE`. The interval is not inside [−.05, +.05]; its lower end is
+about three MEI. Fixed reading: the fixed D1280 recipe has a development-scale positive point
+difference on these five blocks over the central-input flat learner selected by the completed,
+prospectively limited learning-rate procedure; D1280 is retained as a locally supported
+comparison reference. A record for later use: no interruption object follows automatically, no
+default changes. The outcome is covered by the rule, so no result review. The interval is the
+declared iid-normal df = 4 working model, conditional on λ* = 0.5 and excluding the variation
+of rerunning the tuning; five blocks do not validate its coverage.
+
+**Curves G_r (reported, never selected among).** Mean G_r by rollout 5…40: .124, .094, .095,
+.158, .199, .144, .260, .292; four of five blocks positive through rollout 20, five of five from
+25 on. Arm means by panel, rollout 5…45:
+
+| arm | 5 | 10 | 15 | 20 | 25 | 30 | 35 | 40 | 45 |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| D1280 | .341 | .319 | .358 | .368 | .438 | .422 | .434 | .449 | .428 |
+| CF | .217 | .225 | .264 | .210 | .239 | .278 | .173 | .157 | .138 |
+
+**What the gap is made of (descriptive; changes no label).** From rollout 5 to 45 the D1280
+mean rises by .087 and the CF mean falls by .079. CF ends below its own J5 in four of five
+blocks (773103 is the exception) and its mean drops after rollout 30; D1280 ends above its J5
+in four of five (773003: −.003). So about .12 of the .29 is there at the first panel, and the
+rest is half D1280 improving and half CF deteriorating. This is what the Pro pass flagged from
+the two stage-0 fits at 0.5 (both below their J5 at J45), now seen on five fresh blocks: the
+selected flat learner is not stable over 45 rollouts at the smallest multiplier of the fixed
+grid, and 0.5 was the grid edge. The card's reading stands as written, and it claims nothing
+about hierarchy necessity, an upper reference or headroom (section 9). What I will not write
+from B01: "skills are needed on this host" or "D1280 beats a well-trained flat policy". What it
+does support: at this budget and under this limited tuning, the standing D1280 recipe is the
+better and the more stable of the two learners, by a margin far outside the MEI, on every block.
+
+**Predictions scored (card section 10).** I gave D_REFERENCE_ABOVE .25 (SMALL_SIGNED .50,
+CF_REFERENCE_ABOVE .25) and INTERVAL_INCLUDES_ZERO .80. Both missed: log score −1.39 on the
+label, −1.61 on the interval. I expected a central-input flat learner with the same information
+to be roughly level with D1280 and did not price in that it would degrade with training. The
+lesson I take is about my model of the flat learner on this host, not about the rule.
+
+**Cost, measured.** Native wall before publication, summed: CF 33,882 s (5 fits, mean 6,776 s),
+D1280 41,241 s (mean 8,248 s; the last ran partly alone, 5,814 s). Stage 1 total 75,123 s
+against the card's plan of 111,500 s for these ten; the plan had CF as the slower arm and the
+node shows the opposite. Peak RSS: D1280 2.75–2.79 GiB, CF 1.26–1.33 GiB. Makespan at no more
+than four concurrent fits on `wsl_4070`: first admission 22:42 PDT, last exit 04:59 PDT.
+
+**The object ends here.** B01 used its 16 fits (plus one pre-training refusal in each stage, no
+fit consumed). No extra block, no grid extension, no longer training under this object.
+
+**Next, not scheduled.** Under `D_REFERENCE_ABOVE` the routing I adopted after the Pro pass
+applies: if I ask a mechanism question it is D1280 versus D128 (coordinator batch only, k and
+chunk length fixed), read as a batch-and-optimiser-calls package. The CF decline adds a second
+candidate I had not listed: whether the flat learner's deterioration is a step-size effect
+(it would be a new object with its own prospective entry, not a repair of B01's comparator, and
+B01's reading would not be re-judged by it). At most one six-fit entry, written prospectively,
+under the default per-idea allowance; neither is started.
