@@ -262,10 +262,11 @@ def _configured_python(node: str, entry: Mapping[str, Any]) -> Path:
     if os.name != "nt" and configured.is_absolute():
         # A POSIX venv's bin/python is a symlink to the base interpreter, and CPython finds
         # pyvenv.cfg from the path it was started with. Executing the resolved target would
-        # run the base interpreter without the environment's packages. Every identity
-        # comparison (command_digest, the claim key, the child's samefile check) resolves
-        # the path itself, so the spelling used to start the process does not enter them.
-        return Path(os.path.abspath(configured))
+        # run the base interpreter without the environment's packages. The spelling used to
+        # start the process enters no identity: command_digest and _normalized_path (which
+        # feeds the claim key) resolve it, and the child compares with samefile. Returned
+        # as configured, not lexically normalised, so the file checked is the file run.
+        return configured
     return python
 
 

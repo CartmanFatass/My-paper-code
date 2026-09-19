@@ -504,7 +504,7 @@ def test_successful_fixture_is_admitted_and_detached(
     summary = json.loads((output / "summary.json").read_text(encoding="utf-8"))
     assert summary["sha"] == sha
     # The runner runs inside the configured environment, not its base interpreter.
-    assert summary["prefix"] == sys.prefix
+    assert os.path.realpath(summary["prefix"]) == os.path.realpath(sys.prefix)
     # The node's path_prefix reaches the real runner through the detached supervisor.
     assert summary["path"].startswith(source.resolve().as_posix() + "/node-bin" + os.pathsep)
     assert manifest["acceptance"] == "accepted"
