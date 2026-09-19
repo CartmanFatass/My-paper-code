@@ -213,3 +213,23 @@ Stage 1 launches from the commit that contains this `SELECTION.json`, CF with th
 repository-relative `--selection runs/flexible_skill_duration/b01_s0_selection/SELECTION.json`,
 ten fits at no more than four concurrent on `wsl_4070`, D1280 and CF of the same block side by
 side where the slots allow.
+
+## 2026-09-18 23:40 PDT — stage 1, first wave admitted on `wsl_4070`
+
+Launch sha `887563f4713177d76999ef5832ce2dfa946d8505`, the commit that contains
+`SELECTION.json`. The node checkout was fast-forwarded to it and
+`runs/flexible_skill_duration/b01_s0_selection` was added to the node's sparse list, because
+the launch snapshot inherits the sparse patterns and CF reads the selection from the snapshot
+(sha256 of the file equal on both sides, `468a5fa7…cad26a`). CF manifests record stage 1,
+`lr_multiplier` 0.5. All four alive, `stderr.log` empty.
+
+| tag | arm | block | operation ref (under `/home/wu/projects/HMASD/.git/hmasd-admission/`) |
+| --- | --- | --- | --- |
+| `b01_s1_cf_772803_a01` | CF λ 0.5 | 772803 | `5e0151193e2d1d28a8a004194a8c4bb409a25ddec2e14e1e40c7e023643ac9ce.json` |
+| `b01_s1_d1280_772803_a01` | D1280 | 772803 | `57213538a0804bb844713338ec6e820c44d17aaf713701330295501e540733dc.json` |
+| `b01_s1_cf_772903_a01` | CF λ 0.5 | 772903 | `e4e665436835072d171273ce772ed7211aaf3529c90483e4b8100a31806e5c62.json` |
+| `b01_s1_d1280_772903_a01` | D1280 | 772903 | `0bf4b0c7a8ed388c46882a36101c4b4b6060d02efca0d79af675b4bd032aa88e.json` |
+
+Still to launch as slots free, same sha and path: blocks 773003, 773103, 773203, one D1280 and
+one CF each (tags `b01_s1_<arm>_<block>_a01`). No stage-1 panel or score is read before all ten
+are terminal; the reading is `reduce` and card section 6 only.
