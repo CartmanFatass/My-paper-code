@@ -44,7 +44,9 @@ Run the tests with the explicit interpreter and an isolated basetemp:
         tests/flexible_skill_duration_d2_test.py \
         --basetemp C:/Projects/HMASD/temp/pytest_d2_policy_interrupt
 
-Regenerate the fixture (baseline code only, never after a D2 edit):
+Each platform has its own baseline (see `FIXTURE_PATH`); the Linux one was generated from a
+checkout of the phase 0 commit on a Linux host. Regenerate a fixture (baseline code only, never
+after a D2 edit):
 
     C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe \
         tests/flexible_skill_duration_d2_test.py
@@ -80,8 +82,16 @@ NUM_ENVS = 2
 ROLLOUT_LENGTH = 40
 EPISODE_LENGTH = 40
 
-FIXTURE_PATH = (
-    REPO_ROOT / "tests" / "fixtures" / "flexible_skill_duration_d2" / "fingerprint_off.json"
+# Invariant 1 is a same-host statement: `off` on this host equals pre-D2 HMASD on this host.
+# Identical numpy/torch versions still differ by one or two float32 ULP between the Windows and
+# Linux builds, and the rollout amplifies that into different discrete skills, so each platform
+# keeps its own phase 0 baseline. `fingerprint_off.linux.json` was generated on WSL2 Ubuntu 24.04
+# (glibc 2.39, torch 2.7.0+cpu, numpy 1.26.3) from a checkout of the phase 0 commit 307992fe6,
+# i.e. from pre-D2 code, never from a later tree. Another Linux host that disagrees with it is a
+# host fact to report, not a reason to regenerate.
+_FIXTURE_DIR = REPO_ROOT / "tests" / "fixtures" / "flexible_skill_duration_d2"
+FIXTURE_PATH = _FIXTURE_DIR / (
+    "fingerprint_off.json" if sys.platform == "win32" else "fingerprint_off.linux.json"
 )
 
 
