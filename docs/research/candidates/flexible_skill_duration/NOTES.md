@@ -507,3 +507,100 @@ candidate I had not listed: whether the flat learner's deterioration is a step-s
 (it would be a new object with its own prospective entry, not a repair of B01's comparator, and
 B01's reading would not be re-judged by it). At most one six-fit entry, written prospectively,
 under the default per-idea allowance; neither is started.
+
+## 2026-09-19 05:20 PDT — prospective: coordinator batch, D1280 versus D128 at 45 rollouts (explore, six fits)
+
+Written before any code for it exists and before any of its fits. Exploration under section 3
+(one idea, up to six fits): no claim note, no MEI verdict, no label with a consequence.
+
+**The idea in one sentence.** The standing D recipe trains its coordinator on batches of 1280;
+if that batch law is part of why D1280 learns and stays stable over 45 rollouts, the same
+recipe with `coordinator_batch_size = 128` should end lower, or be less stable, on the same
+blocks.
+
+**Structure it touches.** Learning of the high-level (coordinator) policy only: how the 800
+coordinator rows a rollout produces (16 lanes, H500, k = 10) are cut into optimizer chunks and
+normalisation groups. D1280 takes them in one chunk, 15 coordinator calls per rollout, 675 per
+fit; D128 takes ceil(800 / 128) = 7 chunks, 105 calls per rollout, 4,725 per fit. The treatment
+is therefore a package of three things that cannot be separated here: smaller batches, seven
+times as many coordinator optimizer steps, smaller advantage-normalisation groups. Nothing
+else changes: k = 10 and the skill clock, information rights, skill representation,
+discriminators and intrinsic reward, the primitive actor and critic with their learning rates
+and 10-step recurrent chunks, the 45-rollout horizon, the nine 32-world panels, the evaluator.
+`scripts/run_fsd_uav_individual_renewal_b01.py make_config` already takes the batch size as an
+argument independent of the renewal arm; `hmasd/agent.py` reads it in the coordinator update.
+
+**What is already known.** `FSD_INTERRUPTION_BATCH_B01` (2026-09-15) ran D128 and D1280 side by
+side at **five** rollouts on two blocks: D1280 − D128 = +.028 and +.006 J (its MB contrast, the
+average over the D and I rows, was −.003 J, SD .023). At that short horizon the batch law did
+not visibly matter. Nobody has run D128 at 45 rollouts. B01 now shows D1280 rising from .341 at
+rollout 5 to .428 at rollout 45 with a J45 block SD of .055, so the question is about rollouts
+5 to 45, where the older object says nothing. It is context and is not pooled with this one.
+
+**Strongest simpler explanation.** The batch law is irrelevant at this scale, as it looked at
+five rollouts: D1280's level and stability come from the rest of the recipe, and D128 lands
+within block noise of D1280. A second one: D128 is better, because 7× the coordinator updates
+is more learning per rollout, and 1280 was chosen for the interruption arm's row counts, not
+because the fixed-clock arm needed it.
+
+**The observation that distinguishes them.** Per block b, M_b = J45(D1280, b) − J45(D128, b),
+and the two nine-panel curves side by side. Batch law matters in the proposed direction: M_b
+positive on most blocks and the D128 curve flat or falling after the early panels, the way
+CF's did. Irrelevant: M_b of both signs, mean small against its own spread, curves overlapping.
+D128 better: M_b mostly negative. I will report the five M_b, their mean, sample SD, SE and the
+t(.975, 4) working-model interval (same caveats as B01), the panel curves and the per-arm
+levels; mixed signs or a wide interval are reported as such. Whatever the result, this does
+**not** say how much of B01's D − CF gap the batch law carries: there is no CF arm here, and
+B01's CF levels are context, not a third arm. It also says nothing about the skill clock.
+
+**Arms, blocks, fits: 6 fits, 45 rollouts each.**
+
+| fits | arm | blocks (training / evaluation seed) |
+| ---: | --- | --- |
+| 5 | D128 | the five B01 confirmation blocks, 772803/782803 … 773203/783203 |
+| 1 | D1280 | 772803/782803 again, at the new launch sha |
+
+The D1280 side of M_b is B01's five stage-1 D1280 fits, already complete at sha `887563f47`.
+This departs from Pro's 2 arms × 3 fresh blocks, and the reason is precision per fit: three
+pairs give df = 2 (t = 4.30), five pairs give df = 4 (t = 2.78) for the same six fits, and
+pairing on the same training and evaluation seeds removes the block component exactly as in
+B01. The price is that the D1280 arm is not contemporaneous and its scores are known to me
+while D128's are not; all five blocks are used, none chosen, so knowing them selects nothing.
+The sixth fit pays for the non-contemporaneity: D1280 rerun on block 772803 at the new sha, on
+the same node and interpreter. If its nine panel means reproduce B01's fit exactly, the old
+D1280 fits stand as the arm without qualification. If they differ, the difference is the
+measured size of rerun variation at fixed seed (thread scheduling, not the seed), it is
+reported next to the M_b, and M_b still uses the five B01 fits as declared here; the rerun
+never replaces one. This is fixed now so that the choice cannot follow the numbers.
+
+Exposure: 6 × 360,000 = 2,160,000 training team steps, 864,000 evaluation team steps, 54
+panels. Wall: D1280 measured 8,200–9,300 s per fit at four concurrent on `wsl_4070`; D128 at
+45 rollouts unmeasured (seven times the coordinator steps, smaller each). Plan, not a cap:
+two waves, about five hours of node time. Budget: the default per-idea allowance, no more
+fits whatever the scores show; a failed training attempt counts, a pre-training refusal does
+not.
+
+**Expected sign (DM, before any output).** P(mean M > +.05) = .25, P(|mean M| ≤ .05) = .55,
+P(mean M < −.05) = .20; P(interval includes zero) = .75; P(the D1280 rerun reproduces the nine
+panel means exactly) = .5. I lean to "irrelevant" because of the five-rollout record; B01 has
+just shown me that my model of what degrades over 45 rollouts on this host is poor, which is
+why the tails are not thinner.
+
+**What I would do with it (no automatic step).** Irrelevant or D128 better: drop the batch law
+as an explanation of D1280's standing and note D128's wall, since a cheaper reference is worth
+having. D1280 clearly better with D128 decaying like CF: coordinator-side optimisation
+stability becomes the live account of both the D128 and the CF curves, and the step-size
+question about the flat learner noted at the end of the B01 reading becomes the natural next
+entry. Either way one new entry, written prospectively.
+
+**Code needed (L0 scope, not yet written).** A thin entry
+`scripts/run_fsd_coordinator_batch_b02.py` over the B01 runner's loop, panel law and fit
+validation, exactly as the matched-information runner does it: arms `D128` = ("D0", 128) and
+`D1280` = ("D0", 1280), blocks restricted to the five above, no stage or multiplier argument,
+no CF code path touched; a `reduce` that takes the five new D128 summaries, the five B01 D1280
+summaries by path with their recorded sha, and the rerun, and writes the quantities above; a
+launch script on the admission kernel; tests for the arm table, the block restriction, the
+pairing, a missing pair, and the rerun comparison (exact equality reported as a boolean plus
+the maximum absolute panel difference). No learner, environment or evaluator change, so no
+shared-core review; the D1280 config produced by the new entry must equal B01's field for
+field, and a test asserts it.
