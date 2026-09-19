@@ -160,3 +160,28 @@ clipping and checkpoint ownership; deterministic identical uniform probes; termi
 evaluation boundaries; runner refuses without admission. Synthetic tests use managed scratch,
 no undeclared training/evaluation exposure. Independent Reviewer checks the executable change
 before the DM accepts and publishes exact inputs. This note selects the study, not unreviewed code.
+
+## 2026-09-19 — A01 implementation accepted before execution
+
+The DM read and accepts the Implementer diff for the selected L0. The Generic actor is the
+history-aware `entity_history_b01.model.Actor` constructed through
+`entity_history_augmentation_b01.learner.Learner`, not the older simplified public-lifecycle
+actor. Synthetic DETACHED parity covers exact actor/mixer/target parameters, native optimizer,
+constructor/update RNG and target synchronization. Both heads learn through their own optimizer;
+COUPLED alone adds the prescribed actor-backbone gradient. Full-window/activity masking,
+future departure inclusion, post-event union, panel hashes, final-only counts, zero evaluation
+updates and admission-before-effects have focused checks.
+
+Independent Reviewer traced the collector through publication. Two failure-accounting findings
+were repaired: completed optimizer counts are captured before diagnostic serialization, and
+nonfinite diagnostics retain an incomplete/error summary with null values and explicit invalid
+paths. The repaired runner has synthetic regressions for both failures. Reviewer concludes no
+material finding remains; the DM accepts. Implementer reports 13 focused/admission tests passed;
+Reviewer independently ran the original 9 candidate checks and the repaired 5 runner checks.
+No native fit or result-bearing smoke was used as a test. Runtime resource use and identical
+cross-arm probe inputs remain observations to verify from the selected runs.
+
+Publish these exact accepted inputs, then admit the two original arms through the configured
+local_linux kernel with source snapshots. No change to the scientific scope or two-fit exposure.
+FSD's new main notebook commit `ff0725db5` acknowledges the shared host and separate direction
+writers; its work stays with Claude. Run identities will be linked here from native manifests.
