@@ -587,3 +587,120 @@ pre-stage. The owner explicitly wants a continuous research loop: use bounded su
 useful, retain DM decisions, and do not return for permission at each ordinary step. Internal
 reports and engineering scopes are not separate scientific milestones. No governance rewrite
 or new rulebook is authorized by this handover.
+
+
+## 2026-09-19 — new direct DM: last-sighting cache learning comparison A01
+
+This independent task accepts direction ownership from the relinquished task, with no Root
+or second DM. It read the constitution, current RESEARCH, complete current notebook and the
+scientific/engineering methods including `f3402661876781536afd23226aa212c21623e5fb`.
+Author checkout is `/home/fires/.codex/worktrees/1275/hmasd-wsl`, branch
+`codex/folr-direct-dm`; merge `99d0a65e3` retains main `22f998ae2` and the inherited direction
+commits, preserving main's newer FSD row. FSD remains exclusively with Claude; there is no
+live FOLR operation to recover. The previous checkout and its untracked binary evidence stay
+in place. Available memory had no relevant project entry; Git and this notebook supplied the
+continuity. No memory write or governance change was made.
+
+### Direction question and choice
+
+Question: on the existing small host with changing membership, can an explicit lifetime-scoped
+cache of lawful last observations improve learned team control over the competent Generic64
+recurrent baseline? A consistent useful result would support taking this simple representation
+forward; an adverse or unresolved batch would leave no reason to promote it, and would lower
+the priority of further small-host history packaging without a materially new reason. Neither
+outcome establishes the benefit specifically caused by N changes, arbitrary-N generalization,
+UAV performance, memory necessity or optimality.
+
+This follows the adverse auxiliary reading and the scope correction above. The old persistent
+augmentation added a learned pair-GRU stream and fusion, and its initial positive was not
+reproduced. A01's coupled reward predictor also had an adverse native observation. Those facts
+weaken those packages, not every use of lawful history. Selected here is a different hypothesis:
+a deterministic last-sighting cache can make useful past measurements accessible without
+asking a second learned memory system or proxy loss to discover what to store. It does not
+reopen either closed study or claim to diagnose their failure.
+
+Alternatives considered: further auxiliary coefficients/seeds would rescue an already adverse
+package without a new discriminating reason; scaling Generic capacity/horizon would study an
+optimization budget choice but not directly answer whether simple history organization earns
+its cost; repeating old augmentation lacks new information beyond its failed repetition.
+Idling remains a legitimate alternative, but a same-parameter, direct native comparison can now
+resolve the use choice more directly than further geometry, reconstruction or hidden-state
+intervention diagnostics. This is a package screen, not a mechanism-identification experiment.
+
+### Fixed comparison and reading
+
+- GENERIC_RETAIN: unchanged `entity_history_b01.model.Actor` with GRU64 and all existing legal
+  visibility/seen/age and truthful public lifecycle metadata.
+- LAST_SIGHTING: the exact same trainable modules, parameter shapes, constructor RNG and
+  Generic GRU64, but the attention token for an active previously seen subject carries that
+  observer's last visibly observed nine physical/previous-action values. Both observer and
+  subject continuation are required to retain a cache cell. Clear on either lifetime break;
+  overwrite only on current visibility. Attend over active seen subjects. The existing
+  current visibility, seen and age metadata stay current, so old values are not labelled fresh.
+  Never cache hidden current values, another observer's sightings, privileged motion or future
+  labels. No new learned parameter, auxiliary target, predictor, trainable branch or loss.
+
+Both arms retain the unchanged entity-history environment, local actor information rights,
+central FlexQMixer information, gamma .99 double-Q loss, RMSprop .0005/.99/.00001, norm 10,
+200-episode target schedule, full-episode replay and epsilon law. Capacity in trainable
+parameters and training exposure are matched; deterministic storage, available attention
+tokens and read bandwidth intentionally differ. The cache is a last-observation heuristic,
+not a Bayesian belief or a forecast. It can hurt through stale tokens and attention dilution.
+Expected native sign is LAST_SIGHTING minus GENERIC_RETAIN positive, with low confidence.
+
+Exactly SIX fresh fits: both arms at unscreened training seeds 784101, 784201, 784301.
+Each runs 5000 H20 training episodes / 100000 transitions / 4969 optimizer updates, then
+one final checkpoint and 128 greedy evaluation episodes with evaluation seed 1784101.
+No tuning, prefit, interim evaluation, selected checkpoint, probe panel, diagnostic replay,
+additional seed or outcome-based extension. Totals: 30000 training episodes, 600000 training
+transitions, 29814 optimizer updates, 768 final episodes / 15360 final transitions, six final
+checkpoints. This new idea consumes all six of its default fits; every started attempt counts.
+The six are selected prospectively together; partial scores do not select which fits finish.
+
+Primary reading is each sole-final mean native episode return, all three signed within-label
+contrasts and their descriptive mean/range. Independent training instances, not episodes, are
+the replication units. Common initialization/seed labels do not supply paired counterfactual
+worlds; evaluation remains conditional on one common nominal evaluation schedule. Report all
+scores and curves without a significance, equivalence or frozen-confirmation verdict. Native
+benefit across instances supports this complete cache package for further consideration;
+mixed/adverse outcomes constrain it and do not become a memory-capacity verdict. No amount of
+cache activation substitutes for native gain. No population precision is promised from three
+instances. Lifecycle counts and retained final trajectories are descriptive/recoverability
+outputs, not another scientific selection stage.
+
+Execution is local_linux CPU FP32, one Torch intra/inter-op thread per fit, independent RNG,
+replay, learner and output. Up to six original fits may overlap subject to actual admission;
+FSD's remote compute is untouched. Current host reports 16 logical CPUs and about 11 GiB
+available; that observation does not substitute for fresh launch memory checks. A01 used about
+30 minutes and 0.7 GiB RSS per fit locally; cache/runtime cost is not yet measured. Planning
+estimate is 45–75 minutes for the concurrent batch, not an endpoint or kill line. Retain wall,
+CPU and single-process peak RSS and the actual batch span.
+
+### L0: cache actor and fixed six-fit runner
+
+Implementer owns only `experiments/candidates/vap_folr_core/last_sighting_a01/`,
+`scripts/run_folr_last_sighting_a01.py` and mirrored tests under
+`tests/experiments/candidates/vap_folr_core/last_sighting_a01/`. Reuse environment, collection,
+native learner update and mixer by import; do not edit historical code or control tools.
+DM alone owns NOTES and Git index/commits. Return unstaged diff, focused checks and limitations;
+no result-bearing run, other source edit, Pro send or children.
+
+Actor may pack GRU64 plus the 5x9 raw cache per observer for online collection, while replay
+reconstructs the same causal cache from complete observation sequences. Learner constructor
+selects the actor, then uses the existing native update/save contract unchanged. Bind arms,
+training seeds, single evaluation seed and counts in the new entry. Admission and exact launch
+SHA precede model/environment/output effects. Publish source/config, actual counts, incremental
+returns and update loss JSONL, parameter movement, final checkpoint, full final arrays and their
+digests, lifecycle counts, incomplete/error status and resource scope. Final evaluation has
+zero new updates. Do not import the auxiliary learner or invoke the deselected diagnostic.
+
+Focused checks cover identical initial trainable state and RNG; exact unchanged Generic native
+update/target synchronization; cache contents against hand-computed lawful sequences; no hidden
+current/other-observer leakage; observer/subject departure, birth and slot reuse; online versus
+whole-sequence Q/state equivalence; no stale cache after lifetime breaks; same Q/GRU as Generic
+when all subjects are always visible; real loss updates for candidate on synthetic complete
+batches; fixed-runner counts, admission-before-effects, terminal/no-update evaluation and
+failure retention. Tests use managed scratch and synthetic inputs, with no undeclared native
+fit/evaluation. Independent Reviewer checks this executable change before acceptance/launch.
+A focused Critic is assessing scientific value and the distinction from old augmentation;
+the DM will record any material change before publishing executable inputs.
