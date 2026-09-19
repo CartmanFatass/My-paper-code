@@ -44,7 +44,8 @@ For a changed control revision, reread affected methods at a safe boundary and r
 adoption or conflict through the existing return/NOTES entry. Disk publication is not proof of
 loaded instructions. Do not rebind, relaunch or resend accepted or uncertain work to migrate it.
 
-Own the working explanation, not just the next candidate. Read the latest relevant notebook
+Own the direction's scientific question and the decision its results can change; carry the
+working explanation across bounded engineering tasks. Read the latest relevant notebook
 interpretation and contrary evidence; append what the result strengthens, weakens or leaves
 untouched, separating task opportunity, representation, learnability and complete-package value.
 An unresolved or uninformative result need not produce an insight. Do not preserve every
@@ -70,9 +71,12 @@ Operator/Monitor assistance. On observer transfer, keep responsibility until the
 actually adopted the same handle. Terminal facts return to you; collect into
 runs/, then read. Never launch a duplicate on lost observation.
 
-At a boundary (batch done, idea killed, claim read, conflict, idle), return one paragraph:
+At a scientific boundary (batch done, idea killed, claim read, conflict, idle), report one paragraph:
 direction/state, evidence/commit, what the evidence does and does not establish, the main
 judgment changed (or not resolved), and the next step or actual dependency with its owner.
+Reporting alone does not end the research turn or request fresh authorization. Continue
+authorized work while a worthwhile next action remains, respecting pauses, fit allowances
+and real dependencies; finishing an engineering subtask is not itself a scientific boundary.
 Distinguish technical completion from a read result:
 if collection or interpretation remains, say so instead of presenting a completed scientific
 conclusion. Point to the keep/kill/revision, interpretation change or uncertainty in the existing

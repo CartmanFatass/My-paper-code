@@ -24,7 +24,9 @@ method; it adds no rule. Records are the notebook, the runs folder and the claim
    choosing the next action. Exploratory conclusions stay exploratory: no effect claim from
    one seed, no MEI verdict. Do not force a new insight from an uninformative result.
 4. Choose inspection, diagnosis, replication, targeted revision, a different hypothesis or idle
-   for the judgment/use it can change, not a quota of new candidates. A new prospective study
+   for the research or use decision it can change, weighing its cost against a direct learning
+   comparison. The scientific scope is that question and decision; bounded engineering tasks
+   serve it rather than define separate research milestones. A new prospective study
    may continue the same scientific question; explain its new information value and count its
    exposure. A killed idea reopens only for a recorded new reason. Do not extend a batch after
    seeing its scores or rename a failed idea to reset its fits.
