@@ -760,3 +760,128 @@ collection responsibility. The first sampled progress shows 200 episodes / 169 u
 the earliest three launches; later starts have not yet emitted their first 200-episode summary.
 No early score is used for selection. Terminal witnesses, final artifacts and scientific
 interpretation are pending. This is an active producer, not a new authorization request.
+
+
+## 2026-09-19 — last-sighting A01 complete: three adverse native contrasts
+
+All six original operations have matching native terminal witnesses, exit zero and complete
+runner summaries. Monitor reconciled the original identities and returned an empty active set;
+DM collected and read every selected outcome. There was no failed fit, replacement, added seed,
+selected checkpoint or new scientific execution during readback. This exact exploratory study
+ends at its six selected fits, with all six charged to the idea.
+
+| Training seed | Generic sole-final mean | Last-sighting sole-final mean | Cache minus Generic |
+| --- | ---: | ---: | ---: |
+| 784101 | -0.195781250 | -0.429843750 | -0.234062500 |
+| 784201 | 3.774531250 | 0.935390625 | -2.839140625 |
+| 784301 | 1.964140625 | -1.224453125 | -3.188593750 |
+
+Descriptive mean difference is **-2.087265625**, range [-3.18859375, -0.2340625]. Generic's
+three-fit mean is 1.8476302083 and cache's is -0.2396354167. All three signs oppose the
+prospective positive expectation; the first contrast is small relative to its conditional
+panel variation. These are three fresh instances per arm in an exploratory package screen,
+not a new confirmation, a significance/equivalence verdict or episode-level replication.
+The common evaluation label does not create paired counterfactual worlds. Episode standard
+errors in each summary are conditional panel descriptions, not uncertainty on a learning effect.
+
+### Complete exposure, validation and recoverability
+
+Each fit has exactly 5000 H20 training episodes, 100000 native training transitions and 4969
+native actor/mixer optimizer updates, one final checkpoint, then 128 greedy episodes / 2560
+transitions and zero evaluation updates. Totals: six fits, 30000 training episodes, 600000
+training transitions, 29814 updates, six final checkpoints and 768 final episodes / 15360
+transitions. Both arms have 103173 actor parameters; all actors and mixers moved from their
+initial values. First-500 train means were between -12.1862 and -11.05586; last-500 means
+between -2.30656 and +1.26492. This documents learning under the fixed recipe, not convergence
+or optimality; exploratory behavior and policy-induced data differ over training.
+
+DM independently checked the admitted and summary SHA against
+`e7ba09858760a29903e5d23e91b274a333d8feb6`; all recorded source hashes; every checkpoint,
+progress file and panel container/content digest; finite checkpoint/optimizer tensors and
+nonempty optimizer state; all 5000 progress rows with exact cumulative update counts and
+4969 finite losses; 128x20 final reward arrays and finite retained inputs; and all terminal
+exit-zero witnesses. Checkpoints retain actor, mixer, targets and optimizer. Recomputing final
+returns from FP32 reward arrays differs from native float64 sums by at most 9.211153e-7;
+primary values use the original native sums. The committed six-endpoint `study_result` reader
+and independent arithmetic agree. No new model call, environment step or fit was used to
+verify these outputs.
+
+The source review's 34-check invocation covered
+`tests/experiments/candidates/vap_folr_core/last_sighting_a01` and
+`tests/experiments/candidates/vap_folr_core/entity_history_b01`, with the configured scientific
+interpreter; the separate admission/source regression passed two checks. No source changed
+after acceptance or during execution.
+
+All six summary/progress/exit files are published together with this reading:
+
+- [generic 784101 summary](../../../../runs/vap_folr_core/last_sighting_a01_generic_784101/summary.json)
+- [cached 784101 summary](../../../../runs/vap_folr_core/last_sighting_a01_cached_784101/summary.json)
+- [generic 784201 summary](../../../../runs/vap_folr_core/last_sighting_a01_generic_784201/summary.json)
+- [cached 784201 summary](../../../../runs/vap_folr_core/last_sighting_a01_cached_784201/summary.json)
+- [generic 784301 summary](../../../../runs/vap_folr_core/last_sighting_a01_generic_784301/summary.json)
+- [cached 784301 summary](../../../../runs/vap_folr_core/last_sighting_a01_cached_784301/summary.json)
+
+The final.pt, final-panel.npz and stdout/stderr for each tag remain at their original durable
+local output paths under `/home/fires/.codex/worktrees/1275/hmasd-wsl/runs/vap_folr_core/`.
+These binaries total 28421192 bytes and are ignored by Git; exact paths and hashes are in the
+summaries. Preserve this checkout and these outputs before any later cleanup. The old author
+checkout and its A01 binaries were not modified or removed. All snapshots and native claims
+also remain available; no cleanup is part of this study.
+
+| Fit | Runner wall seconds | Process CPU seconds | Process peak RSS KiB |
+| --- | ---: | ---: | ---: |
+| generic 784101 | 2236.081 | 2236.435 | 571816 |
+| cached 784101 | 2411.219 | 2411.447 | 525360 |
+| generic 784201 | 2275.363 | 2275.779 | 575692 |
+| cached 784201 | 2426.246 | 2426.342 | 524996 |
+| generic 784301 | 2254.167 | 2254.532 | 576612 |
+| cached 784301 | 2425.922 | 2425.816 | 523636 |
+
+First native acceptance to last OS exit was 2526.038 seconds (42.10 minutes); runner walls
+sum to 14028.998 seconds and single-process CPU seconds to 14030.350. These fits overlapped;
+the sum is not elapsed batch time. Maximum individual process peak RSS was 576612 KiB, not
+a simultaneous six-process memory peak. Runner walls include imports/preparation from the
+runner clock; code development, source publication and launch preparation before acceptance
+are outside the batch span. No controlled speed/efficiency claim is made.
+
+### Working explanation and scientific decision
+
+Observed: the expected positive native sign failed in all three instances, with two sizable
+adverse point contrasts. This strengthens the practical reason to prefer the unchanged Generic
+recipe over this cache package for the measured use. It weakens the conjecture that making raw
+last sightings explicit, while removing the old extra learned memory/fusion or auxiliary
+objective, is by itself enough to improve finite-budget control here. A stable population
+ranking is not established, and the small first contrast does not establish equivalence.
+
+Representation opportunity remains conditional: lawful history can distinguish some actions,
+but that source-derived possibility never predicted an automatic learned benefit. Cached input
+can be stale, attention access is changed, and learning/team co-adaptation differs. These
+remain possible explanations, not diagnosed causes of the observed loss. The result does not
+measure a Generic capacity deficit, a causal N-change increment, arbitrary-N transfer or UAV
+value. Equal learned parameter count does not make storage, read bandwidth or computation equal.
+
+Decision: end this raw last-sighting idea without extension, age-gating/size tuning, confirmation
+or UAV promotion. Retain the old augmentation and auxiliary adverse evidence alongside this
+new three-instance result. No currently specified next intervention has enough independent
+scientific reason to justify another small-host packaging or diagnostic chain. FOLR therefore
+remains an owner-chosen **exploring direction, currently idle**, with no running producer or
+outstanding user-approval request. This is an investment judgment about the available next
+steps, not archiving, an owner pause, or falsification of useful history generally.
+
+A concrete re-entry reason would be independently grounded evidence of a modifiable learning
+or target-host membership mechanism that predicts a different native outcome, or a better
+justified direction-level comparison. Mere completion, a new name, another auxiliary
+coefficient, a raw-cache attention tweak or a hidden-state intervention is not such evidence.
+No additional result invocation is selected by this entry. The task has progressed from its
+inherited unresolved choice through an entire reviewed learning comparison to this readable
+scientific boundary, rather than returning after an internal engineering step.
+
+
+Independent ResearchCritic read all six summaries and returned MATERIAL_DISSENT=no on this
+update and idle decision. Accepted wording: removing the extra learned stream/proxy loss
+through this raw-cache design did not produce the predicted benefit; it does not identify
+whether optimization burden caused older failures, since content and attention also changed.
+Improving exploratory training returns do not establish convergence or horizon adequacy.
+The idle judgment is "no worthwhile next intervention presently identified", not a permanent
+prohibition on future exploration. No additional comparison is selected or needed for the
+present decision not to promote this package.
