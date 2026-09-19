@@ -22,7 +22,7 @@ max_concurrent_threads_per_session = 40
 interrupt_message = true
 
 [agents.HMASDDirectionManager]
-description = "Direction owner under the operating constitution: ideas, code, runs, reading, three records."
+description = "Direction owner under the constitution: cumulative understanding, ideas, code, runs and three records."
 config_file = "./agents/hmasd-direction-manager.toml"
 
 [agents.HMASDImplementer]
@@ -30,7 +30,7 @@ description = "DM-owned Sol/high implementer for one bounded code task from an L
 config_file = "./agents/hmasd-implementer.toml"
 
 [agents.HMASDScout]
-description = "Optional engineering-surface mapping method."
+description = "Optional read-only engineering/evidence mapping or primary-source simple-model bridge."
 config_file = "./agents/hmasd-scout.toml"
 
 [agents.HMASDReviewer]
@@ -54,7 +54,7 @@ description = "Optional executor for a bounded launch, observation and collectio
 config_file = "./agents/hmasd-experiment-operator.toml"
 
 [agents.HMASDResearchCritic]
-description = "Optional independent scientific-criticism method."
+description = "Optional independent criticism of claims, belief updates and discriminating predictions."
 config_file = "./agents/hmasd-research-critic.toml"
 
 # The agentify MCP server is registered per host in the user-level configuration of each

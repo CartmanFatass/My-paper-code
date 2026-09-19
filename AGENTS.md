@@ -17,7 +17,11 @@ its Implementer (Claude: Opus; Codex: Sol; both high effort) from a concise scop
 diff itself. Transport and Monitor absorb waits and return facts. Reviewer checks changes to
 shared learners, runners, environments and evaluators. Existing Operator (execution), Scout,
 Verifier and ResearchCritic names are bounded methods of DM/Reviewer responsibility, not new
-decision owners. No additional role or renamed authority without owner amendment.
+decision owners. The DM maintains the direction's working explanation across results:
+strengthened/weakened/untouched judgments, contrary evidence and the next useful observation.
+Scout may map a primary-source/simple-model bridge; Critic tests the update and its predictions.
+Innovation is a work mode, not a compulsory new-candidate stage. No additional role or renamed
+authority without owner amendment.
 
 Records (section 4). Per direction: `NOTES.md` (append-only notebook; Pro questions and
 answers as sections), `runs/<direction>/<tag>/` (runner-written), `CLAIM_<slug>.md` (before a
@@ -26,7 +30,7 @@ handoffs, packets, registries or receipts. Budget is fits (section 3); the five 
 minimums are section 8.
 
 Methods are execution detail, not a second rulebook, in `.agents/skills/`:
-`hmasd-scientific-tools` (design and reading), `hmasd-research-engineering` (code, review,
+`hmasd-scientific-tools` (cumulative reasoning, design and reading), `hmasd-research-engineering` (code, review,
 launch, and the carried-over engineering standards), `hmasd-loop-dispatch` (Codex Root),
 `hmasd-chatgpt-pro-transport` (Pro send and collect; on the WSL host
 `hmasd-jev-pro-transport`), `hmasd-pro-research-prompt-author`
@@ -56,3 +60,8 @@ Respect the LF paths in `.gitattributes`. Tests own their scratch under `temp/` 
 Control-plane navigation: `docs/project/CONTROL_PLANE_MAP.md` maps sources and runtime routes;
 `docs/project/CONTROL_PLANE_GUIDANCE.md` explains operation and maintenance. Both are descriptive,
 not another authority or a mandatory preload.
+
+Owner-requested research proposal (not an execution instruction or new standing record):
+`docs/research/designs/PREDICTIVE_INTERACTION_AUGMENTATION_PROPOSAL_20260919.md`.
+Read it only for the proposed simple-model and predictive-augmentation questions; it changes no
+direction, fit allowance, frozen experiment or runtime model by being merged.

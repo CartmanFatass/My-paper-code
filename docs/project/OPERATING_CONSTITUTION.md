@@ -18,13 +18,21 @@ adoption by live sessions; research remains paused until explicitly resumed.
 engineering judgment, permit useful reuse and dependency reading, and use author self-checks
 for non-code control documentation rather than automatic repeated Reviewer passes.
 
+2026-09-19 owner-requested PR revision: cumulative research understanding, simple-model
+reasoning and advisory roles. These changes take effect on owner merge/adoption; publication
+alone does not establish live-session adoption. No direction, pause, fit allowance, frozen
+experiment or accepted operation is changed by this revision.
+
 ## 1. What this project is
 
 A personal exploratory research project on unfixed skill duration k and unfixed agent count N,
 studied separately. Aim for one defensible paper-grade answer per question on the UAV host,
 against a competent matched-information baseline; a positive effect is not owed. Small hosts
-may support exploration, not an unmeasured UAV claim. Fast idea turnover is primary;
-confirmation is a bounded final step, not the default mode.
+may support exploration, not an unmeasured UAV claim. Prefer rapid, evidence-led improvement
+of understanding to turnover of candidate names. Results should revise the working explanation:
+what is strengthened, weakened or untouched, and which observation is useful next. An experiment
+may be uninformative; neither a new insight nor a new architecture is owed. Confirmation is a
+bounded final step, not the default mode.
 
 Owner clarification: this is one person's rapid research project, not a collaborative
 organization or production service. The control plane exists to shorten the path from an idea
@@ -40,7 +48,10 @@ operation. A method, tool, conversation or historical workflow is not a permanen
 - **Owner** chooses directions, pauses/resumes research, and adopts/amends this page.
   Ordinary ideas, implementation, interpretation and within-budget runs do not await owner approval.
 - **DM** owns a direction end to end: idea, code, run, reading and records. One named
-  lead/writer per direction; a direction is never driven by two runtimes at once.
+  lead/writer per direction; a direction is never driven by two runtimes at once. The DM owns
+  continuity of the scientific explanation across results, advisers and session changes, not
+  just the next run. It distinguishes opportunity, representation, learning and net-use judgments,
+  preserving contrary evidence and explaining why a next action changes understanding or use.
 - **Codex side (owner clarification 2026-09-16 17:50 PDT):** a Root session coordinates and
   each DM child owns one direction. Soft ceiling: three concurrent DMs. When fewer than three
   are active, Root may start a DM for a direction already chosen by an owner-triggered
@@ -61,6 +72,13 @@ operation. A method, tool, conversation or historical workflow is not a permanen
   delegate when useful for context, independent work or waits. These leaves spawn nothing.
 - **Retire Grok clerk and Sonnet clerk as standing roles.** Mechanical edits belong to the
   direction lead. No additional role, including a renamed equivalent, without owner amendment.
+
+Innovation, diagnosis and prototype reasoning are work modes of the DM, assisted when useful
+by the existing Scout or ResearchCritic; they are not additional standing roles. Scout can map
+code/evidence or retrieve a primary-source bandit/single-agent prototype, stating assumptions
+and the MARL coupling it omits. Critic challenges belief updates and discriminating predictions,
+not only claim strength. Portfolio remains owner-triggered and weighs remaining scientific
+reasons and opportunity cost, not a leaderboard or a required post-failure verdict.
 
 Role limits allocate responsibility for the assigned task; they are not project-wide bans on
 the underlying capability. Necessary reading may follow dependencies beyond owned edit paths.
@@ -100,8 +118,11 @@ launch failure consumes no fit; retain its error and wall time. Fix before retry
 ## 4. Three record types, and one repository table
 
 1. `docs/research/candidates/<direction>/NOTES.md`: append-only dated entries with the question,
-   proposed comparison/budget, sha, observations, keep/kill and next step. Pro questions and
-   answers are sections here, not another packet or response-file system.
+   proposed comparison/budget, sha, observations, interpretation changes and next step.
+   Link the prior explanation and its relevant supporting/contrary evidence; separate observed
+   facts, working inference and new conjecture. "No useful discrimination" is valid. Qualitative
+   updates do not manufacture calibrated probabilities or alter frozen result readings.
+   Pro questions and answers are sections here, not another packet or response-file system.
 2. `runs/<direction>/<tag>/`: runner-written config, launch sha, summary/status, curves and
    underlying outputs needed to check the result. Keep failed and adverse runs. Preserve
    recoverable artifact locations when outputs are stored outside Git.
@@ -117,8 +138,13 @@ audit ledger, owner inbox, handoffs, packets, registries or receipts for new wor
 
 ## 5. Pro is an adviser
 
-Use Pro for a batch of hypotheses and one critic pass before confirmation, not approval
-at each step. The hub owns the choice and records its response to material criticism.
+Use Pro when useful for a focused scientific question: evidence synthesis, competing failure
+explanations, a simple-model/literature bridge, a targeted revision, or candidate generation;
+retain one critic pass before confirmation. None is a mandatory post-result round or approval.
+Ask for the kind of reasoning the unresolved question needs, not a fixed number of new ideas.
+The DM owns the choice and records its response to material criticism and resulting belief
+changes. Scientific reflection belongs in the existing notebook, not a new agent, registry,
+score, checklist service or permanent document type.
 
 **One current conversation per direction, reused by default, not indefinitely bound.** Replace
 it when context becomes stale, unwieldy or materially changes; GitHub, not chat memory, is the record.
