@@ -12,6 +12,8 @@ On Windows, noninteractive subprocesses must run without opening console windows
 CREATE_NO_WINDOW for Python subprocess calls or -WindowStyle Hidden for Start-Process;
 retain output capture, exit status and process handles. Open a visible window only when
 the user needs an interactive application. Detached parents also need hidden child creation.
+On POSIX the counterpart is `start_new_session=True` with the same retained output, exit
+status and handles.
 
 Prefer a simple list of commands for a queue; use scheduling when the actual workload benefits.
 New result entries use hmasd_launch.py and call hmasd_admission.require_admission before

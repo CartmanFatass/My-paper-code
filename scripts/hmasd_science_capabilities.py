@@ -22,8 +22,22 @@ DEFAULT_CATALOG = ROOT / "configs" / "scientific-capabilities-v1.toml"
 FIELDS = {"capability", "status", "purpose", "entrypoint", "environment", "allowed_effects"}
 
 
+#: Environment records whose role has a separately recorded installation on a non-Windows host.
+HOST_ENVIRONMENT_COUNTERPARTS = {
+    "environments/hmasd-science-tools/manifest.json": "environments/hmasd-linux-science-tools/manifest.json",
+}
+
+
 class CapabilityError(Exception):
     pass
+
+
+def _host_control_plane_python() -> str:
+    if str(ROOT) not in sys.path:
+        sys.path.insert(0, str(ROOT))
+    from tools.research_support.interpreters import control_plane_interpreter
+
+    return control_plane_interpreter()
 
 
 def load_catalog(path: Path) -> dict[str, Any]:
@@ -77,25 +91,27 @@ def doctor(item: dict[str, Any]) -> dict[str, Any]:
         result["observed"]["reason"] = "catalog status is unavailable"
         return result
     entrypoint = Path(item["entrypoint"])
-    if sys.platform == "linux" and PureWindowsPath(item["entrypoint"]).is_absolute():
-        # The catalog still describes the installed Windows environment; WSL only
-        # translates its executable path for the observation-only version probe.
-        try:
-            translated = subprocess.run(
-                ["wslpath", "-u", item["entrypoint"]], check=True,
-                capture_output=True, text=True, timeout=5,
-                creationflags=subprocess.CREATE_NO_WINDOW if os.name == "nt" else 0,
+    environment_record = item["environment"]
+    if os.name != "nt" and PureWindowsPath(item["entrypoint"]).is_absolute():
+        # The catalog names the Windows installation. A non-Windows host observes its own
+        # counterpart of the same role; it never translates the path to /mnt/c, because
+        # that would execute the Windows interpreter across the host boundary.
+        counterpart = HOST_ENVIRONMENT_COUNTERPARTS.get(environment_record)
+        host_python = _host_control_plane_python() if counterpart else ""
+        if not host_python:
+            result["observed"]["reason"] = (
+                f"Windows entrypoint has no recorded counterpart on this host: {item['entrypoint']}"
             )
-        except (OSError, subprocess.SubprocessError) as exc:
-            result["observed"]["reason"] = f"Windows entrypoint unavailable from this Linux host: {exc}"
             return result
-        entrypoint = Path(translated.stdout.strip())
-    environment = ROOT / item["environment"]
+        entrypoint = Path(host_python)
+        environment_record = counterpart
+        result["observed_binding"] = {"entrypoint": host_python, "environment": counterpart}
+    environment = ROOT / environment_record
     if not entrypoint.is_file():
         result["observed"]["reason"] = f"entrypoint is absent: {entrypoint}"
         return result
     if not environment.is_file():
-        result["observed"]["reason"] = f"environment record is absent: {item['environment']}"
+        result["observed"]["reason"] = f"environment record is absent: {environment_record}"
         return result
     completed = subprocess.run(
         [str(entrypoint), "--version"], check=False, capture_output=True, text=True, timeout=15,

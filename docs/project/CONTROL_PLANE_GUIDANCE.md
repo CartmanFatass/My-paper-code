@@ -87,8 +87,8 @@ Monitor/Transport 返回事实，不据此增加实验、裁决科学或扩展�
 均可由有相应工具的 DM/session 直接完成；只有减轻上下文、独立工作或等待确有收益时才委派。
 
 新实验按任务选择本地或远端；配置的默认节点是便利值，不是 remote-first 硬绑定。
-Windows 使用 [本地执行说明](../../.agents/skills/hmasd-research-engineering/references/local-execution.md)中的
-一次性 PowerShell wrapper，远端使用 agent-task；两者均先准入再启动并保留可核对的进程事实。
+本地节点（Windows 或 `local_linux`）按[本地执行说明](../../.agents/skills/hmasd-research-engineering/references/local-execution.md)
+用配置的解释器直接调用准入内核，不生成一次性 wrapper；远端在 agent-task 命令内调用同一内核；两者均先准入再启动并保留可核对的进程事实。
 在途实验不能借换节点绕过原语义或制造重复进程。
 
 Git 的分支/worktree 服务于真实隔离需要，不再每方向强制建立。按完整工作边界提交和推送，
@@ -155,6 +155,13 @@ Codex Root 集成共享 main/RESEARCH，方向 lead 拥有自己的 NOTES；Clau
 ```powershell
 & 'C:/Users/fires/.conda/envs/hmasd-science-tools/python.exe' tools/publish_claude_control.py
 & 'C:/Users/fires/.conda/envs/hmasd-science-tools/python.exe' tools/publish_claude_control.py --check
+```
+
+WSL 主机（`local_linux`）的等价命令：
+
+```bash
+~/.venvs/hmasd-linux-science-tools/bin/python tools/publish_claude_control.py
+~/.venvs/hmasd-linux-science-tools/bin/python tools/publish_claude_control.py --check
 ```
 
 这是当前本机的开发命令，解释器事实见 CLAUDE/compute；不用于覆盖科学运行环境。

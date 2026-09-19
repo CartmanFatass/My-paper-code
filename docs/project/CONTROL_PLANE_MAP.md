@@ -60,7 +60,7 @@ Monitor／Implementer 的任务分配不自动授予 NOTES／RESEARCH 写入权�
 accepted handle → 直接观察或委派时确认 adoption → terminal facts → DM 收集、核对并判读。
 失联／timeout 不等于终止。local handle 要稳定进程身份与可访问 terminal witness；替换观察者先核对同一
 handle，再完成新观察者 adoption。节点安全底线、declared artifacts、scope 和冻结科学合约未取消。
-Windows 本地路径见 [local execution](../../.agents/skills/hmasd-research-engineering/references/local-execution.md)；
+本地路径（Windows 与 `local_linux`）见 [local execution](../../.agents/skills/hmasd-research-engineering/references/local-execution.md)；
 远端使用配置的 agent-task。新实验选机与已有进程恢复是两件事。分支/worktree 按隔离需要选择，
 在完成工作、外部交付或运行前 push，不要求逐提交 scope 尾注或月度治理计数。
 

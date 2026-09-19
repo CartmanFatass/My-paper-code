@@ -4,6 +4,8 @@ import shutil
 import subprocess
 from pathlib import Path
 
+import pytest
+
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 CONFIG_PATH = REPO_ROOT / "dist" / "remote_log_sync" / "remote_log_sync.config.json"
@@ -13,7 +15,8 @@ AUTO_LOCAL_ROOT = REPO_ROOT / "dist" / "remote_log_sync" / "synced" / "logs_clou
 def _powershell() -> str:
     exe = shutil.which("pwsh") or shutil.which("powershell")
     if exe is None:
-        raise AssertionError("PowerShell executable not found")
+        # The scripts under test are PowerShell; a host without it cannot exercise them.
+        pytest.skip("PowerShell executable not found")
     return exe
 
 

@@ -79,6 +79,9 @@ For example, the tracked-file case-alias regression can be run directly:
 python -m pytest -q tests/test_scratch_lifecycle.py -k mixed_case --keep-scratch-on-failure
 ```
 
+That regression needs a case-insensitive filesystem: on Linux it skips, so a green run there
+is not evidence about it.
+
 Normal teardown is already the cleanup entrypoint. Use the recovery script below only for
 known owned leftovers. New reproductions continue to use pytest-managed scratch.
 
@@ -105,7 +108,8 @@ its outcome, and any refusal/incomplete deletion makes the command fail. It vali
 selected directories, refuses tracked content and links/junctions and checks native pytest processes.
 Do not run it concurrently with test startup. It does not sweep experiment outputs or the
 whole temp tree, kill processes, change ACLs or install a scheduled service. On non-Windows
-hosts, normal pytest teardown still works; this recovery script is for Windows.
+hosts, normal pytest teardown still works; this recovery script is for Windows, and no
+equivalent exists there: report an interrupted session's leftovers instead of sweeping them.
 A tool-policy rejection must still be reported; a script is not a permission bypass.
 Report the actual rejected invocation and its stated reason. A generic rejection alone does
 not establish a target-wide deletion ban; consult the engineering skill's Stops guidance to
