@@ -230,8 +230,21 @@ def attach(browser, path):
     if not node:
         raise PreSendFailure("the composer has no document upload input")
     browser.call("DOM.setFileInputFiles", nodeId=node, files=[str(path)])
-    wait_for(browser, lambda f: path.name in (f["form_text"] or "") and f["send_button"], 90,
-             f"the uploaded attachment {path.name}")
+    wait_for(browser, lambda f: path.name in (f["form_text"] or ""), 60, f"the attachment chip {path.name}")
+    ready_to_send(browser, 120)
+
+
+def ready_to_send(browser, seconds):
+    """The send button is disabled while a file is processed, and a disabled control is not in Jev's
+    element table. Asking Jev before it is back only burns decisions, so the driver waits for it:
+    enabled on four samples in a row, because it is briefly enabled before the upload starts."""
+    deadline, streak = time.monotonic() + seconds, 0
+    while time.monotonic() < deadline:
+        streak = streak + 1 if facts(browser)["send_button"] else 0
+        if streak >= 4:
+            return
+        time.sleep(0.7)
+    raise PreSendFailure("the send button did not become available")
 
 
 GOAL = """You are on ChatGPT. Do these in order, each once.
@@ -258,8 +271,7 @@ def command_send(args, cfg):
                    mode=args.mode, effort=args.effort, send_attempted=False)
 
     document = Path(args.attach).resolve(strict=True) if args.attach else None
-    note = (f" The document {document.name} is already attached to the message; do not add, open or remove files."
-            if document else "")
+    note = ""
     if document:
         operation.save(attachment=document.name,
                        attachment_sha256=hashlib.sha256(document.read_bytes()).hexdigest())
@@ -300,22 +312,30 @@ def command_send(args, cfg):
             wait_for(browser, lambda f: not f["composer"], 10, "the emptied message box")
         time.sleep(2)  # the composer's pills render after the box
         state["page"] = ensure_effort(browser, args.effort)
-        if document:
-            if document.name in (facts(browser)["form_text"] or ""):
-                raise PreSendFailure(f"an attachment named {document.name} is already in the composer")
-            attach(browser, document)
-            state["page"] = browser.observe(screenshot=False)
+        if document and document.name in (facts(browser)["form_text"] or ""):
+            raise PreSendFailure(f"an attachment named {document.name} is already in the composer")
 
         # Jev runs the whole goal. The loop only keeps the books: it records the attempt before a
         # send click, refuses that one click if effort or text is wrong, and ends once the outcome shows.
-        steps = []
+        steps, attached = [], False
         while state["status"] not in {"done", "blocked"} and len(steps) < 14:
             current = facts(browser)
             if operation.data["send_attempted"] or sent(current):
                 break
             # Jev cannot compare the box with a text it never sees; the driver states that one fact.
             if squash(current["composer"]) == squash(prompt):
-                box = " The box now holds the prepared message in full: step 2 is complete, do not type again."
+                if document and not attached:
+                    # Uploaded only once the text is in place: a typing failure before this point
+                    # leaves no copy of the document in the account's file store.
+                    attach(browser, document)
+                    attached = True
+                    note = (f" The document {document.name} is already attached to the message; "
+                            "do not add, open or remove files.")
+                ready_to_send(browser, 60)
+                state["page"] = browser.observe(screenshot=False)
+                box = (" The box now holds the prepared message in full: steps 1 and 2 are complete. Do not type "
+                       "and do not click the message box. The only remaining action is step 3: click the send "
+                       "button now.")
             elif current["composer"]:
                 box = (" The box currently holds an outdated draft, not the prepared message: typing replaces "
                        "it, so step 2 is still required.")
@@ -328,6 +348,11 @@ def command_send(args, cfg):
                 choice = state["decision"]["choice"]
                 action = next((a for a in state["page"]["actions"] if a["id"] == choice), None)
                 steps.append(f"{state['decision']['operation']} {action['label'] if action else choice}")
+                if os.environ.get("HMASD_JEV_DEBUG"):
+                    table = [a["label"][:24] for a in state["page"]["actions"] if a["kind"] == "click"][-8:]
+                    print(json.dumps({"step": steps[-1], "last_clickables": table,
+                                      "op_p": state["decision"].get("operation_probabilities")},
+                                     ensure_ascii=False), file=sys.stderr, flush=True)
                 node = browser.evaluate(NODE_FACTS + f"({json.dumps(action['node'])})") \
                     if action and action["kind"] == "click" else None
                 if node and node["testid"] == "send-button":
@@ -339,6 +364,12 @@ def command_send(args, cfg):
                     if squash(facts(browser)["composer"]) != squash(prompt):
                         operation.save(steps=steps)
                         raise PreSendFailure(f"composer text differs from the committed prompt: {steps}")
+                    if args.dry_run:
+                        # Everything up to the click was exercised and checked; the click is withheld.
+                        state["decision"] = None
+                        operation.save(steps=steps, dry_run="reached the send button with effort, text and "
+                                       "attachment verified; not clicked")
+                        return operation.data
                     operation.save(send_attempted=True, send_effect="uncertain", steps=steps)
                 agent.command("act", {"fingerprint": state["page"]["fingerprint"]})
             except StalePage as stale:
@@ -439,7 +470,7 @@ def approve_connector(agent, operation, cfg):
 
 
 def command_wait(args, cfg):
-    """Observation. COMPLETE needs equal assistant text across two samples three seconds apart and no Stop.
+    """Observation. COMPLETE needs equal assistant text across four samples three seconds apart and no Stop.
     The one click it may make is the owner-authorised connector consent above."""
     operation = Operation(cfg, args.key)
     if not operation.data.get("send_attempted"):
@@ -463,18 +494,24 @@ def command_wait(args, cfg):
             operation.save(attachment_seen=any(operation.data["attachment"] in t for t in prompt_seen["user_turns"]))
         operation.save(conversation_url=url, send_effect="sent")
         deadline = time.monotonic() + args.timeout
-        previous, state = None, "IN_PROGRESS"
+        previous, stable, state, told = None, 0, "IN_PROGRESS", None
         while time.monotonic() < deadline:
             page = facts(browser)
             answer = page["assistants"][-1] if len(page["assistants"]) >= len(page["users"]) else ""
             if page["approval"]:
                 if approve_connector(agent, operation, cfg):
-                    previous = None
+                    previous, stable = None, 0
                     continue
                 # Not a connector the owner named, or Jev did not reach the instructed button.
                 state = "NEEDS_HUMAN"
                 break
-            if answer and not page["stop_button"] and answer == previous:
+            # One long call replaces a polling loop of short ones; it reports a change, not every sample.
+            seen = "generating" if page["stop_button"] else "text" if answer else "waiting"
+            if seen != told:
+                print(f"wait: {seen}", file=sys.stderr, flush=True)
+                told = seen
+            stable = stable + 1 if answer and not page["stop_button"] and answer == previous else 0
+            if stable >= 3:  # four equal samples over nine seconds, no Stop control
                 state = "COMPLETE"
                 break
             previous = answer
@@ -489,10 +526,104 @@ def command_wait(args, cfg):
             out.write_text(answer + "\n", encoding="utf-8")
             result.update(answer_file=str(out), answer_sha256=hashlib.sha256(answer.encode()).hexdigest(),
                           answer_chars=len(answer))
-            operation.save(completion="COMPLETE", answer_sha256=result["answer_sha256"])
+            # With the connector allowed Pro writes into the repository and leaves a receipt in chat.
+            # A receipt is not the answer: `deliver` reads and checks the commit it names.
+            commits = re.findall(r"\b[0-9a-f]{40}\b", answer)
+            result.update(kind="receipt" if commits and len(answer) < 1500 else "chat answer",
+                          receipt_commits=commits)
+            operation.save(completion="COMPLETE", answer_sha256=result["answer_sha256"], receipt_commits=commits)
         return result
     finally:
         agent.close()
+
+
+def git(*argv):
+    return subprocess.run(["git", "-C", str(REPO), *argv], check=True, capture_output=True, text=True).stdout
+
+
+def answer_block(text, question_heading, answer_heading):
+    """(before, answer, after) around the answer subsection of one question; None if the headings are not unique."""
+    lines = text.split("\n")
+    starts = [i for i, line in enumerate(lines) if line.strip() == question_heading.strip()]
+    if len(starts) != 1:
+        return None
+    end = next((i for i in range(starts[0] + 1, len(lines)) if lines[i].startswith("## ")), len(lines))
+    heads = [i for i in range(starts[0], end) if lines[i].strip() == answer_heading.strip()]
+    if len(heads) != 1:
+        return None
+    return "\n".join(lines[:heads[0] + 1]), "\n".join(lines[heads[0] + 1:end]), "\n".join(lines[end:])
+
+
+def command_deliver(args, cfg):
+    """Read the delivery, not the receipt: find the answer commit and check it against the pinned source."""
+    git("fetch", "--quiet", args.remote, args.branch)
+    tip = f"{args.remote}/{args.branch}"
+    candidates = git("rev-list", "--reverse", f"{args.source_sha}..{tip}", "--", args.target_path).split()
+    receipt = Operation(cfg, args.key).data.get("receipt_commits", []) if args.key else []
+    source = answer_block(git("show", f"{args.source_sha}:{args.target_path}"), args.question_heading,
+                          args.answer_heading)
+    if source is None:
+        raise PreSendFailure("the pinned source does not hold exactly one such question and answer heading")
+    found = []
+    for commit in candidates:
+        parent = git("rev-parse", f"{commit}^").strip()
+        block = answer_block(git("show", f"{commit}:{args.target_path}"), args.question_heading, args.answer_heading)
+        before = answer_block(git("show", f"{parent}:{args.target_path}"), args.question_heading, args.answer_heading)
+        if block is None or before is None or block[1].strip() == before[1].strip():
+            continue  # this commit did not write this answer
+        files = git("diff", "--name-only", parent, commit).split()
+        found.append({
+            "commit": commit, "parent": parent, "parent_is_source": parent == args.source_sha,
+            "named_in_receipt": commit in receipt, "files": files,
+            "question_unchanged": block[0] == source[0],
+            "rest_of_file_unchanged": block[0] == before[0] and block[2] == before[2],
+            "answer_was_empty": not before[1].strip(), "answer_chars": len(block[1].strip()),
+        })
+    clean = [f for f in found if f["files"] == [args.target_path] and f["question_unchanged"]
+             and f["rest_of_file_unchanged"] and f["answer_was_empty"]]
+    state = "DELIVERED" if len(found) == 1 and clean else "CONFLICT" if found else "NOT_DELIVERED"
+    result = {"state": state, "branch": tip, "commits": found,
+              "receipt_commits_not_on_branch": [c for c in receipt if c not in candidates]}
+    if state == "DELIVERED" and args.answer_out:
+        out = Path(args.answer_out)
+        out.parent.mkdir(parents=True, exist_ok=True)
+        out.write_text(answer_block(git("show", f"{found[0]['commit']}:{args.target_path}"),
+                                    args.question_heading, args.answer_heading)[1].strip() + "\n", encoding="utf-8")
+        result["answer_out"] = str(out)
+    return result
+
+
+def question_key(repository, branch, subject, source_sha, target_path, question_heading):
+    fields = [repository, branch, subject, source_sha, target_path, question_heading]
+    return "hmasd:" + hashlib.sha256(json.dumps(fields).encode()).hexdigest()
+
+
+def command_compose(args, cfg):
+    """The author's complete message becomes the document; the short message names it by file and hash."""
+    message = Path(args.message_file).read_text(encoding="utf-8").strip() + "\n"
+    if not re.fullmatch(r"[a-z0-9][a-z0-9-]{2,60}", args.slug):
+        raise PreSendFailure("slug: lower-case letters, digits and hyphens")
+    out = Path(args.out_dir)
+    out.mkdir(parents=True, exist_ok=True)
+    document = out / f"hmasd-pro-question-{args.slug}.md"
+    document.write_text(message, encoding="utf-8")
+    digest = hashlib.sha256(message.encode()).hexdigest()
+    short = out / f"{args.slug}.short.txt"
+    short.write_text(
+        f"HMASD Pro question, subject {args.subject}. The attached document {document.name} (sha256 {digest}) "
+        "is the complete message: repository, branch, source_sha, target path, headings, reading instructions "
+        "and the answer-writing instruction. Read it in full and follow it exactly.\n\n"
+        "If you cannot open the attachment, say so plainly and stop; do not answer from memory.\n",
+        encoding="utf-8")
+    return {"document": str(document), "document_sha256": digest, "short_message": str(short)}
+
+
+def public(result, show_url):
+    """Owner, 2026-09-18: this account's conversation addresses stay in the local operation file."""
+    if show_url or not isinstance(result, dict):
+        return result
+    return {key: ("recorded locally" if key == "conversation_url" and value else value)
+            for key, value in result.items()}
 
 
 def main():
@@ -508,15 +639,35 @@ def main():
     send.add_argument("--effort", default=None)
     send.add_argument("--attach", default=None, help="one document uploaded with the message")
     send.add_argument("--mode", choices=("headless", "headed"), default="headless")
+    send.add_argument("--dry-run", action="store_true", help="stop at the send button without clicking it")
     reconcile = sub.add_parser("reconcile")
     reconcile.add_argument("--key", required=True)
     wait = sub.add_parser("wait")
     wait.add_argument("--key", required=True)
     wait.add_argument("--answer-file", required=True)
-    wait.add_argument("--timeout", type=float, default=60)
+    wait.add_argument("--timeout", type=float, default=3600, help="seconds; one long call, run it in the background")
     wait.add_argument("--prompt-file", default=None, help="the committed text, to verify the conversation holds it")
     wait.add_argument("--conversation-url", default=None, help="reconcile a URL the send could not observe")
     wait.add_argument("--mode", choices=("headless", "headed"), default=None)
+    question = argparse.ArgumentParser(add_help=False)
+    for name in ("--repository", "--branch", "--subject", "--source-sha", "--target-path", "--question-heading"):
+        question.add_argument(name, required=True)
+    sub.add_parser("key", parents=[question])
+    compose = sub.add_parser("compose")
+    compose.add_argument("--message-file", required=True, help="the author's complete message, unchanged")
+    compose.add_argument("--slug", required=True)
+    compose.add_argument("--subject", required=True, help="direction id or 'portfolio'")
+    compose.add_argument("--out-dir", default=str(REPO / "temp" / "pro_transport"))
+    deliver = sub.add_parser("deliver")
+    deliver.add_argument("--key", default=None, help="to compare against the commits the chat receipt named")
+    for name in ("--branch", "--source-sha", "--target-path", "--question-heading"):
+        deliver.add_argument(name, required=True)
+    deliver.add_argument("--answer-heading", default="### Answer")
+    deliver.add_argument("--remote", default="origin")
+    deliver.add_argument("--answer-out", default=None, help="also save the delivered answer text here")
+    for command in (send, wait, reconcile):
+        command.add_argument("--show-url", action="store_true",
+                             help="print the conversation address; by default it stays in the local operation file")
     args = parser.parse_args()
     cfg = settings()
     try:
@@ -531,12 +682,19 @@ def main():
             result = command_send(args, cfg)
         elif args.command == "reconcile":
             result = command_reconcile(args, cfg)
+        elif args.command == "key":
+            result = {"key": question_key(args.repository, args.branch, args.subject, args.source_sha,
+                                          args.target_path, args.question_heading)}
+        elif args.command == "compose":
+            result = command_compose(args, cfg)
+        elif args.command == "deliver":
+            result = command_deliver(args, cfg)
         else:
             result = command_wait(args, cfg)
     except PreSendFailure as error:
         print(json.dumps({"error": str(error), "pre_send": args.command == "send"}, ensure_ascii=False))
         return 2
-    print(json.dumps(result, indent=2, ensure_ascii=False))
+    print(json.dumps(public(result, getattr(args, "show_url", False)), indent=2, ensure_ascii=False))
     return 0
 
 

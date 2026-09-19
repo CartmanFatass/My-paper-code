@@ -32,56 +32,67 @@ question by its key; the URL for a follow-up is read from the local operation fi
 ## Steps
 
 Interpreter: `~/test/Jev/jev-ultrafast/.venv/bin/python` (written `$JEV` below), never an HMASD
-venv, and nothing is installed into either.
+venv, and nothing is installed into either. `$D` is `tools/pro_transport/jev_send.py`. Output
+never prints the conversation address unless `--show-url` is given.
 
-1. **Key, document and short message.** Derive the question key as the old skill does (`hmasd:`
-   plus the SHA-256 of the JSON array of repository, branch, subject key, source_sha,
-   target_path and question_heading; `:` is accepted). Under `temp/pro_transport/` write the
-   author's complete message, unchanged, as a document
-   `hmasd-pro-question-<slug>.md`, and a short message of a few lines that names the direction,
-   the document and its SHA-256, says the document is the complete message to be read in full
-   and followed exactly, and asks Pro to say so and stop if it cannot open it. This is the
-   default for any message longer than a few lines: the short text is compared verbatim, the
-   document by name and hash. It is delivery form, not a shortened question: every line the
-   author wrote reaches Pro. (A 2900-character message typed into the box was not submitted by
-   the send click, 2026-09-19.)
-2. **Send once, headless by default.**
-   `$JEV tools/pro_transport/jev_send.py send --key <key> --prompt-file <short> --attach <document> --conversation new|<url>`
+1. **Key.** `$JEV $D key --repository … --branch … --subject … --source-sha … --target-path … --question-heading …`
+   prints the question key (`hmasd:` plus the SHA-256 of that JSON array, as in the old skill).
+2. **Compose.** Save the author's complete message, unchanged, to a file and run
+   `$JEV $D compose --message-file <file> --slug <slug> --subject <direction>`. It writes
+   `temp/pro_transport/hmasd-pro-question-<slug>.md` (the complete message) and
+   `<slug>.short.txt` (a few lines naming the document and its SHA-256). This is the delivery
+   form for every question, not a shortened question: every line the author wrote reaches Pro,
+   the short text is compared verbatim and the document by name and hash. (A 2900-character
+   message typed into the box was not submitted by the send click, 2026-09-19.)
+3. **Send once, headless by default.**
+   `$JEV $D send --key <key> --prompt-file <short> --attach <document> --conversation new|<url>`
    starts the headless Chrome on the logged-in profile if none runs, sets the effort slider to
    its top position (`6 Pro`; a slider is outside Jev's action space, so arrow keys set it and
-   the observed pill label is the fact), empties a restored draft, gives the document to the
-   composer's own upload input (uploads are outside Jev's action space too), then lets Jev type
-   and send. Before each of Jev's decisions the driver states the one fact Jev cannot see:
-   whether the box already holds the prepared message. `--mode headed` shows the
-   window; use it only when a human must look (login, CAPTCHA) and stop the other mode first
-   with `chrome stop`. Read the result:
+   the observed pill label is the fact) and empties a restored draft. Jev types; only when the
+   box equals the short message does the driver give the document to the composer's own upload
+   input (uploads are outside Jev's action space too, and a typing failure then leaves no stray
+   copy in the account's file store), wait until the send button is enabled again (it is
+   disabled while the file is processed, and a disabled control is not in Jev's element table),
+   and let Jev click it. Before each decision the driver states the one fact Jev cannot see:
+   whether the box already holds the prepared message. `--dry-run` does all of that and
+   withholds the click: use it after a provider UI change, it costs no Pro request.
+   `--mode headed` shows the window; use it only when a human must look (login, CAPTCHA) and
+   stop the other mode first with `chrome stop`. `HMASD_JEV_DEBUG=1` traces what Jev saw and
+   chose at each step. Read the result:
    - `{"error": ..., "pre_send": true}`: nothing was submitted. Repair the named fact and run
      the same command with the same key.
    - `send_attempted: true`: from here on observe only. `send_effect` is `sent` when the exact
      message was seen in the conversation, otherwise `uncertain` with `unresolved`.
    - Running `send` again under an attempted key never sends; it returns the stored operation.
-3. **Wait, read-only.** `$JEV tools/pro_transport/jev_send.py wait --key <key> --prompt-file <short> --answer-file <path> --timeout 120`
-   in repeated calls until `COMPLETE` (equal assistant text across two samples three seconds
-   apart, no Stop control). It verifies that the conversation holds the committed short text
-   and records `attachment_seen`; this also settles a `send_effect` left `uncertain`.
+4. **Wait: one long call in the background.**
+   `$JEV $D wait --key <key> --prompt-file <short> --answer-file <path>` (default 3600 s; repeat
+   it if it returns `IN_PROGRESS`). It keeps one tab open, reports a change of state on stderr
+   rather than every sample, verifies that the conversation holds the short message and the
+   attachment, and also settles a `send_effect` left `uncertain`. `COMPLETE` needs equal text on
+   four samples and no Stop control, and says what it saved: `kind: "receipt"` with
+   `receipt_commits` when Pro wrote into the repository, or `"chat answer"` when the text itself
+   is the answer.
    **Connector consent (owner, 2026-09-19).** When the page shows "Allow GitHub for this
    conversation", Jev answers it with "始终允许" (Always allow); the owner authorised this for the
    GitHub connector, as needed for engineering collaboration (`approval_policy`,
    `approval_connectors` in `[jev]`). The driver executes that one click only on a prompt that
    names a listed connector and records it under `approvals`. A prompt for any other connector,
    or any other consent, returns `NEEDS_HUMAN`: report it to the owner and click nothing.
-   `COMPLETE` on a short receipt is not the answer: with the connector allowed, Pro writes the
-   answer into the repository and leaves a few lines with the commit SHA in chat, so go on to
-   step 4. If the send could not observe the settled address (a new conversation first shows a
+   If the send could not observe the settled address (a new conversation first shows a
    provisional `/c/WEB:` address that cannot be reopened), find the conversation and pass
-   `--conversation-url`. Unchanged waits are silent. Apart from that consent, nothing here clicks.
-4. **Read delivery.** As step 5 of `hmasd-chatgpt-pro-transport`: fetch the branch, find the
-   answer commit, read the complete answer subsection, compare against source_sha. If the
-   connector write did not land, the saved `--answer-file` and its SHA-256 are the preserved
-   chat text for the author to insert.
-5. **Return.** Question key (the conversation URL stays in the local operation file), send effect, completion state, answer commit
-   or saved text path and hash, target and headings, unresolved facts. Jev closes its own tab.
-   Leave the headless Chrome running between questions; `chrome stop` ends it.
+   `--conversation-url`. Apart from that consent, nothing here clicks.
+5. **Read delivery, not the receipt.**
+   `$JEV $D deliver --key <key> --branch … --source-sha … --target-path … --question-heading … --answer-out <path>`
+   fetches the branch and finds the commit that filled this question's `### Answer`. `DELIVERED`
+   means exactly one such commit, touching only the target file, with the question and every
+   other byte unchanged and the subsection empty before; unrelated later commits do not count.
+   `CONFLICT` lists what differs: preserve both versions and report, never choose silently.
+   `NOT_DELIVERED` with a `"chat answer"` saved in step 4 means the author inserts that text,
+   noted "saved from chat"; with only a receipt it is `answer unavailable`.
+6. **Return.** Question key (the conversation address stays in the local operation file), send
+   effect, completion state, delivery state with the answer commit or the saved text path and
+   hash, target and headings, unresolved facts. Jev closes its own tab. Leave the headless
+   Chrome running between questions; `chrome stop` ends it.
 
 ## Recovery
 
@@ -96,6 +107,7 @@ named repair. A restored draft in the box is overwritten by Jev's fill and recor
 plainly and stops this send; switch to `--mode headed` for the human, not to a new question.
 
 Verified 2026-09-19: one real direction question sent headless as short message plus document,
-both seen in the conversation. Verified 2026-09-18 on the WSL host: one headed and one headless test question, each typed and
+consent answered by Jev, the 21 000-character answer written by Pro into the repository and
+confirmed by `deliver`; after the reordering, a dry run reached the send button in two Jev steps. Verified 2026-09-18 on the WSL host: one headed and one headless test question, each typed and
 sent by Jev in two steps, completed and read back exactly; a repeated `send` under the same key
 did not send.
