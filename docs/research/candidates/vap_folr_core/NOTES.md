@@ -294,3 +294,134 @@ conditional counterexample's teammate law occurs. This is direct reading of exis
 zero new transitions, fits, optimizer steps, model inference or counterfactual environment calls.
 The purpose is to distinguish a potentially relevant geometric stratum from a source-only
 existence argument; it cannot estimate a memory effect or new-policy performance.
+
+## 2026-09-19 — native analytic counterexample and completed artifact reading
+
+### Accepted reasoning and rejected shortcuts
+
+The abstract binary-choice model clarifies the disputed link without a simulation. Let
+b=P(Z=1|I), reward R=1{a=Z}, and let a fixed behavior choose a=1 with probability u,
+independently of Z conditional on predictor information I. Then
+E[R|I]=(1-u)+(2u-1)b, while Q(1|I)-Q(0|I)=2b-1. At u=1/2 the reward mean is constant even
+when extra lawful history changes the optimal action. This is a counterexample to treating
+factual-reward mean prediction as a universally informative control target, not an A01 diagnosis.
+A binary-cue prototype also shows that lower posterior squared error need not change the
+optimal action when a more reliable current cue already determines its sign. No toy training
+is needed to establish these conditional identities.
+
+Scout's first source map required correction, accepted before using it: masking a currently
+hidden subject does NOT stop the Generic GRU from retaining earlier visible observations.
+Also native `wait` increments for all slots on every tick, resets on removal but not movement
+or birth, and includes inactive elapsed time. It is not a blocked-step counter. At a fixed
+state the immediate time penalty is computed before arrival/collision removal and is common
+to the alternative actions. Predicting it better need not improve one-step action choice;
+longer-term duration effects would require their own argument. No frozen environment is changed.
+
+### A conditional case in the actual native host
+
+Use easy mode's 7x7 cross road, vision 1, two active cars A and B, and no unrelated births.
+Targets are A=(3,6), B=(0,3); these are legitimate visible entity fields, not hidden types.
+Construct the following positive-support prefix from a legal reset/birth. Time labels below
+are transition indices, so the state after transition 6 is observation boundary 7.
+
+| Boundary/action | A position after action | B position after action, left / right branch |
+| --- | --- | --- |
+| reset | (3,0) | absent |
+| transition 0 | (3,1) | birth at (6,3) |
+| transition 1 | (3,1) | (5,3) |
+| transition 2 | (3,1) | (4,3) |
+| transition 3 | (3,2) | (3,3) |
+| transition 4 | (3,3) | (3,2) / (3,4) |
+| transition 5 | (3,3) | (3,1) / (3,5) |
+| transition 6 | (3,3) | (3,1) / (3,5) |
+
+The transition-4 swap in the left branch is legal under this native implementation: collision
+checks compare final positions, not edge crossings. Neither target has been reached.
+At boundary 7 both branches have the same CURRENT permitted inputs for A: its target/position,
+previous stay action, public active/birth/departure/continuation/event table, and local seen/age.
+B is hidden with seen=true and age=2 in both. Global raw entity rows differ; they are masked
+before actor learned processing. Earlier lawful visible histories differ in B's branch.
+
+The conditional two-case population gives the branches equal prior weight and specifies a
+known B phase law: outward at transition 5, stay at 6, then move one horizontal cell toward
+column 3 at the candidate transition 7. History observes the branch; the known law supplies
+the intervening hidden moves. Those hidden actions are NOT claimed observable to A. This
+specified support/law is essential, and is not asserted to describe the learned teammates.
+A current-only oracle knows the same law and prior but lacks the earlier branch observation.
+
+Native immediate TEAM rewards, before the common time penalty, are:
+
+| B case / A action | stay | right | left | up | down |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| B left: (3,1) -> (3,2) | 1 | 2 | -10 | 0 | 0 |
+| B right: (3,5) -> (3,4) | 1 | -8 | 0 | 0 | 0 |
+
+B contributes +1 progress in each case; A contributes 0,+1,-1,-1,-1. A collision subtracts
+10 once from total reward. Both native wait counters are 7 before the candidate step and
+become 8, so subtract .16 from every displayed entry. Consequences:
+
+- Uniform focal-A action averaging yields **-1.56 in both cases**.
+- Under the equal-case prior, the best current-only action is stay, expected reward **.84**.
+- History identifies the case and chooses right in the left branch, stay in the right branch:
+  expected reward **1.34**, a conditional one-step value difference **+.5**.
+
+Thus lawful history can change native action preference while the squared-error-optimal
+behavior-averaged reward mean hides that distinction. The full reward distributions do differ.
+Uniform focal A with this structured B law is NOT A01's fully uniform team probe, and the
+one-step calculation is NOT its three-step target or H20 endpoint. This establishes conditional
+opportunity only: no prevalence, trained-Generic shortfall, learned-policy improvement or UAV
+claim. Generic has legitimate access to the distinguishing history and could represent it.
+Birth/lifecycle validity is preserved, but no incremental benefit specific to N-change is proved.
+
+Source anchors: [movement/reward/removal](../../../../experiments/candidates/vap_folr_core/public_lifecycle_b01/native_env.py),
+[public lifecycle](../../../../experiments/candidates/vap_folr_core/public_lifecycle_b01/environment.py),
+[local seen/age](../../../../experiments/candidates/vap_folr_core/entity_history_b01/environment.py),
+[actor masking and recurrence](../../../../experiments/candidates/vap_folr_core/entity_history_b01/model.py).
+Scout and ResearchCritic independently checked the actual source and arithmetic. Critic's
+material qualifications (known hidden-motion law, reward mean versus distribution, structured
+B versus fully random team) are accepted above; final MATERIAL_DISSENT=no. No simulator or
+model was instantiated, and no learned or empirical result is claimed for this construction.
+
+### Selected retained-panel counts
+
+Artifact SHA256s were checked against the existing summaries. Multiplying stored positions by
+7 reconstructed integer coordinates with zero observed rounding error. The fixed geometric
+predicate from the preceding scope entry gives:
+
+| Existing panel | Qualifying / active observer ticks | Fraction | Episodes containing at least one / 128 | Qualifying ticks in post-event window / all active observer ticks in that window |
+| --- | ---: | ---: | ---: | ---: |
+| DETACHED final | 718 / 7281 | 9.8613% | 88 / 128 | 363 / 4264 |
+| COUPLED final | 180 / 7591 | 2.3712% | 44 / 128 | 102 / 4049 |
+| Common uniform probe | 297 / 7072 | 4.1997% | 54 / 128 | 134 / 3944 |
+
+The calculation is reproducible directly from each retained `*-panel.npz`: restrict time to
+0..19, recover positions with round(7*entities[...,2:4]), form observer-subject absolute position
+differences, select Manhattan==2 AND Chebyshev==2 AND both active AND seen AND NOT visible,
+then reduce `any` over subjects. Divide by all active observer ticks. Public event windows are
+the union [t,t+3) clipped to 20 for events at t>0, counted once per primitive time. No subject,
+episode, action or lag was selected by reward; full panels are retained unchanged.
+
+These are descriptive counts on existing policy-induced data, not independent training units.
+The geometric stratum occurs in all three panels, including around lifecycle events; this
+makes it more concrete than a source-only possible configuration. It remains an upper-scope
+candidate stratum, not a count of identifiable or avoidable collisions. COUPLED's smaller
+fraction does not explain its lower score or show better avoidance: policy-induced survival,
+positions, visibility and histories differ. The records do not supply conditional counterfactual
+action rankings or prove that old observations predict the currently hidden positions.
+
+### Judgment and next scientific choice
+
+H-need is now supported as a conditional possibility inside the existing native dynamics;
+its materiality under learned teams remains unresolved. The old conjecture that history might
+help because of persistent hidden velocity/type is not used. Scalar factual-reward prediction
+is a weaker proxy for useful information than an action contrast in this example. This does
+not attribute A01's loss to that limitation, and no auxiliary coefficient/seed rescue is selected.
+
+Next discriminating question: under a specified actual frozen teammate continuation, does a
+lawful history feature predict collision-relevant action differences beyond current cues, and
+does Generic already preserve that feature? A bounded action-contrast or hidden-state forecast
+measurement could answer parts of this question, but needs its own declared information rights,
+policy/target law and compute scope before implementation. A target based on privileged state
+must remain a training/diagnostic label, never silently enter actor inputs. Do not start another
+reward-head fit merely because this counterexample exists. This continuation used zero new
+fits, optimizer steps, model calls or environment transitions; A01 remains 2/2 fits completed.
