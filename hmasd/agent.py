@@ -887,7 +887,6 @@ class HMASDAgent:
         self._central_snapshot_states = None
         self._central_snapshot_obs = None
         self._central_snapshot_valid = None
-        self._central_snapshot_source_step = None
         if self.use_central_snapshot:
             self._ensure_central_snapshot_arrays(getattr(config, 'num_envs', 1))
         
@@ -1268,16 +1267,13 @@ class HMASDAgent:
             (new_capacity, self.config.n_agents, self.config.obs_dim), dtype=np.float32
         )
         valid = np.zeros(new_capacity, dtype=np.bool_)
-        source = np.full(new_capacity, -1, dtype=np.int64)
         if old_capacity > 0:
             states[:old_capacity] = self._central_snapshot_states[:old_capacity]
             observations[:old_capacity] = self._central_snapshot_obs[:old_capacity]
             valid[:old_capacity] = self._central_snapshot_valid[:old_capacity]
-            source[:old_capacity] = self._central_snapshot_source_step[:old_capacity]
         self._central_snapshot_states = states
         self._central_snapshot_obs = observations
         self._central_snapshot_valid = valid
-        self._central_snapshot_source_step = source
         self._central_snapshot_capacity = new_capacity
 
     def _clear_central_snapshot(self, env_id):
@@ -1288,12 +1284,10 @@ class HMASDAgent:
         if env_id >= self._central_snapshot_capacity:
             return
         self._central_snapshot_valid[env_id] = False
-        self._central_snapshot_source_step[env_id] = -1
         self._central_snapshot_states[env_id].fill(0.0)
         self._central_snapshot_obs[env_id].fill(0.0)
 
-    def _refresh_central_snapshots(self, states_batch, observations_batch, refresh_mask,
-                                   source_step=None):
+    def _refresh_central_snapshots(self, states_batch, observations_batch, refresh_mask):
         """Take a fresh central snapshot for the lanes selected by `refresh_mask`."""
         num_envs = int(np.asarray(refresh_mask).shape[0])
         self._ensure_central_snapshot_arrays(num_envs)
@@ -1304,8 +1298,6 @@ class HMASDAgent:
             self._central_snapshot_obs[indices] = np.asarray(
                 observations_batch, dtype=np.float32)[indices]
             self._central_snapshot_valid[indices] = True
-            self._central_snapshot_source_step[indices] = (
-                -1 if source_step is None else int(source_step))
 
     def _central_snapshot_refresh_mask(self, num_envs):
         """Lanes that take a fresh snapshot this step.
@@ -1988,24 +1980,14 @@ class HMASDAgent:
             obs_batch = torch.FloatTensor(observations_normalized).to(self.device)
             skill_batch = torch.tensor(agent_skills, device=self.device)
 
-            # CF: this route carries no batched decision mask, so the snapshot refreshes at
-            # the lane's `env_timers == 0` steps (the same k-cadence the batched route uses)
-            # and whenever the lane holds none, e.g. right after `reset_env_state`.
-            central_input = None
+            # CF: this single-environment route never advances `env_timers`, so it cannot hold
+            # the snapshot between the k = 10 team decisions; serving it would hand the actor a
+            # fresh central read every step, which the card forbids.  The object's collector and
+            # evaluator use the batched `step` route.
             if self.use_central_snapshot:
-                if state is None:
-                    raise ValueError(
-                        "use_central_snapshot_in_flat_actor=True requires the global state"
-                    )
-                self._ensure_central_snapshot_arrays(env_id + 1)
-                if (int(self.env_timers.get(env_id, 0)) == 0
-                        or not bool(self._central_snapshot_valid[env_id])):
-                    self._central_snapshot_states[env_id] = np.asarray(state, dtype=np.float64)
-                    self._central_snapshot_obs[env_id, :n_agents] = np.asarray(
-                        observations, dtype=np.float32)
-                    self._central_snapshot_valid[env_id] = True
-                    self._central_snapshot_source_step[env_id] = -1
-                central_input = self._central_actor_input_tensor([env_id], n_agents)
+                raise NotImplementedError(
+                    "use_central_snapshot_in_flat_actor is served by the batched step route only"
+                )
 
             # 将环境的 Actor hidden_state 传入网络
             actions_batch, logprobs_batch, _, new_actor_hidden_state = self.skill_discoverer.forward(
@@ -2014,7 +1996,6 @@ class HMASDAgent:
                 actor_hidden_state,
                 deterministic,
                 compact_context=low_level_compact_context,
-                central_input=central_input,
             )
             
             # 存储更新后的 Actor hidden_state

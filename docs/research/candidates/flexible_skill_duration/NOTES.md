@@ -66,3 +66,55 @@ handle and no open Pro request were inherited (handoff of 2026-09-16).
 fits on `wsl_4070` with fresh admission per fit, `SELECTION.json` before any stage-1 read,
 then ten stage-1 fits. CF wall and RSS are unmeasured: the first stage-0 fits are watched for
 RSS before filling four concurrent slots.
+
+## 2026-09-18 evening — CF comparator and B01 runner accepted; independent review; plan for stage 0
+
+**Accepted work (DM).** Implementer commits `f8532f99e` (flag-gated CF pathway in
+`hmasd/networks.py`, `hmasd/agent.py`, `hmasd/utils.py`, flag default False in both configs,
+`CONFIG_DUMP_FIELDS`) and `f3d082f81` (runner
+`scripts/run_fsd_matched_information_baseline_b01.py`, launch entry, 57 tests; the superseded
+host-headroom runner, launch script and test deleted). I read the core diff and the card
+transcriptions myself. Checks: new object tests 57 passed; the whole FSD test tree 201 passed
+(`--import-mode=importlib`; duplicate test basenames across frozen directories predate this);
+D2 guard 13 passed. Known failures that predate this change and were reproduced at the parent
+commit: `tests/ha_ctse_test.py::test_process_mode_clear_buffers_invalidates_old_policy_state`
+(stub agent lacks `d2_enabled`) and the host-dependent P4 tape digest in
+`tests/update_phase_equivalence_test.py` — the tape rebuilt from the parent and from this
+change is identical on this host, which is the flag-off identity evidence.
+
+**How the card's interface was realised.** CF runs the `off` route. The held snapshot refreshes
+exactly where that route re-decides skills, `(env_steps % k == 0) | done | invalid skill`, with
+k = 10, i.e. steps 0, 10, 20, … of an episode and the first step after a lane reset, from that
+step's state and joint observations, before the actor forward. Raw values are held and stored
+per step; normalisation is applied at use by the same code in collection, replay and evaluator.
+Both arms instantiate `use_obsnorm = use_statenorm = False`, so the normalisers are the identity
+and replay of the actor input is bit-exact; with them forced on, the snapshot would share the
+private observation's existing end-of-rollout-statistics mismatch, no new one. Actor input
+104 → 853 (state 119 + 6 × 104 + ego 6); only the actor's input projection widens. The frozen
+B01 runner gained a `FLAT_ARM` constant (same value) so an arm named CF is validated as the flat.
+
+**Independent review (`hmasd-reviewer`).** One material finding, operational: stage-1 CF could
+not launch as documented, because the kernel's snapshot rebinds an absolute author path and
+refuses one absent from the published snapshot, and `runs/` outputs are never in it. Repair
+chosen: after stage 0, `SELECTION.json` is committed and stage 1 launches from that sha with
+the repository-relative path; this also pins λ in Git before any stage-1 fit (card section 3).
+Launch-script comment corrected. No leak, cadence, pairing, isolation or D1280-perturbation
+finding; config differences CF versus D1280 are all inside the planned set. Nits repaired in
+the same follow-up commit: the single-environment `select_action` route now refuses the flag
+(it never advances the timer and would have read the centre every step; unreachable for this
+object); dead `_central_snapshot_source_step` removed; `stage_guard` runs before the single-use
+admission; `fit_endpoint` checks the flag in the evaluation config too. Left as is, on purpose:
+`interval_inside_mei` uses the closed interval the card words ("entirely inside [−.05, +.05]");
+the inherited descriptive `cost_law` string; the evaluator's unused snapshot buffer (≈48 MB).
+After the repairs: object + frozen B01 + D2 guard + buffer/RNN suites 105 passed.
+
+**Cost facts (timing probe by the Implementer, one rollout at full training shape, outside
+`runs/`, no endpoint, no admission; not a fit).** CF 70.4 s per rollout and peak RSS 870 MiB;
+flag-off flat 66.0 s and 845 MiB on this host. Collection and update alone extrapolate to about
+3,200 s per CF fit; the nine 32-world panels are not included, so the card's 12,000 s ordinary
+plan is kept as the watchdog basis until the first fit reports.
+
+**Stage 0 plan.** Six CF fits (λ ∈ {0.5, 1, 2} × blocks 772603, 772703) on `wsl_4070`, each
+through `launch_fit.sh` and the admission kernel from the published sha. Two first, RSS and
+per-rollout wall read from their progress, then up to four concurrent. No stage-1 fit or panel
+is read before `SELECTION.json` is committed.

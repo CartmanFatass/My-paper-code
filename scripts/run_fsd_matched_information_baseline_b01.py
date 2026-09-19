@@ -156,10 +156,10 @@ def fit_endpoint(summary):
     if summary.get("matched_information_object") != OBJECT_ID:
         raise ValueError("not a matched-information baseline fit")
     scores = b01.arm_panels(summary)
-    config = summary["learner_config"]
     expected_flag = summary["factorial_arm"] == CF_ARM
-    if bool(config.get(CF_FLAG, False)) != expected_flag:
-        raise ValueError(f"{summary['factorial_arm']} has the wrong central-input setting")
+    for key in ("learner_config", "evaluation_config"):
+        if bool(summary[key].get(CF_FLAG, False)) != expected_flag:
+            raise ValueError(f"{summary['factorial_arm']} {key} has the wrong central-input setting")
     if summary["factorial_arm"] != CF_ARM and float(summary.get("lr_multiplier", 1.0)) != 1.0:
         raise ValueError("D1280 must run at its standing learning rates")
     return scores
@@ -418,6 +418,8 @@ def main(argv=None):
             parser.error("stage-1 CF requires --selection with the completed SELECTION.json")
         if args.stage == 0 and selection is not None:
             parser.error("stage 0 precedes the selection")
+        # Refuse an out-of-plan stage, block or multiplier before the single-use admission is spent.
+        stage_guard(args.arm, args.seed, args.stage, args.lr_multiplier, selection)
         # Nothing scientific has happened yet: no output, environment, learner or evaluator.
         # The literal direction is the launch kernel's guard contract; keep it inline.
         admission = require_admission(__file__, direction="flexible_skill_duration")

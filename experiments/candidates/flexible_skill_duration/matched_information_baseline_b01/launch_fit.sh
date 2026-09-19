@@ -16,9 +16,12 @@
 #   seed           training block seed (772603/772703 at stage 0, 772803..773203 at stage 1)
 #   stage          0 (CF tuning) | 1 (confirmation)
 #   lr_multiplier  CF only: 0.5 | 1 | 2 at stage 0, the selected value at stage 1
-#   selection_json ABSOLUTE path of the completed stage-0 SELECTION.json; required for stage-1 CF
-#                  (a relative path would resolve inside the snapshot worktree, which holds no
-#                  run outputs)
+#   selection_json required for stage-1 CF: the repository-relative path of the completed stage-0
+#                  SELECTION.json, COMMITTED at <launch_sha>
+#                  (runs/flexible_skill_duration/<selection-tag>/SELECTION.json).  The kernel
+#                  runs the fit inside a snapshot worktree of <launch_sha> and refuses an author
+#                  input that is absent from it, so an uncommitted selection cannot be read;
+#                  committing it also pins the selected multiplier before any stage-1 fit.
 #
 # Fixed by the card and the runner, not by this script: CPU FP32, torch four threads, 16
 # training lanes, 45 rollouts, panels after 5,10,...,45, 32 evaluation worlds.
