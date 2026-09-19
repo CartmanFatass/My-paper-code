@@ -27,9 +27,12 @@ current checkout. Start with what changed and follow relevant dependencies as ne
 2. **Read RESEARCH.md.** Active directions in priority order with their lead runtime and
    standing line; the reserve list. A direction whose lead runtime is the Claude session is
    not started here.
-3. **DM children.** For each active Codex-led direction without a live DM, start or resume one
-   `HMASDDirectionManager` with minimal context: direction id, `NOTES.md` path, the standing
-   line, the fit allowance from constitution section 3, and the pause state. Soft ceiling:
+3. **DM children.** Check the existing DM's return and whether concrete authorized work is
+   pending; absence of a live DM alone does not reopen an unchanged idle/no-idea direction.
+   Start or resume one `HMASDDirectionManager` for an actionable task, carrying direction id,
+   `NOTES.md` path, standing, relevant prior explanation and contrary evidence, the question
+   changed by new evidence, the fit allowance from constitution section 3 and pause state.
+   A new model, adviser answer or available slot alone is not a scientific task. Soft ceiling:
    three concurrent DMs. Under an explicit research resume, Root may assign a chosen reserve
    DM to prepare an idea with no empirical exposure. Preparation is not activation or a fit
    grant. If a worthwhile discriminator is recorded, Root may activate that existing reserve
@@ -43,6 +46,9 @@ current checkout. Start with what changed and follow relevant dependencies as ne
 5. **Keep RESEARCH.md current.** When a DM reports a boundary (idea killed, batch done, claim
    read, direction idle), update that direction's one standing line and push. This needs no
    extra routine record; an owner-requested analysis or manual remains within its assigned scope.
+   Preserve the DM's main judgment update and next question by linking its existing notebook;
+   do not flatten this to the latest score or invent a second research-state ledger.
+   Duplicate/unchanged returns do not require another edit or redispatch.
 6. **Queue, never send.** Archive or activate recommendations, budget concerns and closing
    notes wait as `NOTES.md` entries for the owner-triggered Portfolio review
    (`hmasd-portfolio-task`).
@@ -55,7 +61,9 @@ current checkout. Start with what changed and follow relevant dependencies as ne
 
 `followup_task` resumes an existing DM; `send_message` carries information that needs no turn
 restart. A DM reports one paragraph at a boundary: direction, state, evidence or commit, next
-step or dependency and its owner. Specialists (Implementer, Reviewer, Monitor, Transport, Operator,
+step or dependency and its owner, with the main judgment changed or still unresolved.
+Reuse the same notebook explanation across session handoffs; publication/terminal facts are
+not proof that results were scientifically read. Specialists (Implementer, Reviewer, Monitor, Transport, Operator,
 Scout, Critic, Verifier) return to the DM that assigned them, never through Root. A message and a
 final that describe the same boundary are one event.
 

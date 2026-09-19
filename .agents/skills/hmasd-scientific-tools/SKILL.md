@@ -1,6 +1,6 @@
 ---
 name: hmasd-scientific-tools
-description: Design, run and read HMASD experiments as a DM under docs/project/OPERATING_CONSTITUTION.md - explore an idea within its fit allowance, write a claim note, choose a matched-information comparator, read results by the prewritten rule, record in NOTES.md. Not for Git mechanics or formatting.
+description: Develop cumulative HMASD research understanding - update judgments from evidence, use simple-model prototypes when helpful, select a discriminating next action within the fit allowance, and read confirmation by its fixed rule. Record in NOTES.md; not a gate or a new workflow.
 ---
 
 # Research method
@@ -10,16 +10,23 @@ method; it adds no rule. Records are the notebook, the runs folder and the claim
 
 ## Explore an idea
 
-1. Write the `NOTES.md` entry before running: the idea in one sentence, the MARL structure it
-   touches (roster, duration, credit, partial observation, information flow), the strongest
-   simpler explanation, the observation that would distinguish them, the arms, the training
-   horizon, the total fits (up to six including tuning) and the expected sign.
+1. Start from the direction's current explanation and the observation or gap motivating this
+   work. In `NOTES.md`, link the relevant prior interpretation and contrary evidence. State the
+   question, MARL structure, strongest simpler explanation and discriminating observation.
+   For a targeted change predict both an intermediate effect and its native consequence;
+   a package screen can instead explicitly forgo mechanism attribution. Declare the arms,
+   training horizon, total fits (up to six including tuning) and expected sign before running.
 2. Run on any host that can show the effect; single seed is fine. Commit first, preflight,
    launch detached at that sha (engineering skill). The runner writes `runs/<direction>/<tag>/`.
-3. Read curves and `summary.json` directly. Write the observation, keep or kill, and the next
-   step. Exploratory conclusions stay exploratory: no effect claim from one seed, no MEI verdict.
-4. Kill, revise materially, or move on. A killed idea reopens only for a recorded new reason.
-   Do not extend a batch after seeing its scores; do not rename a failed idea to reset its fits.
+3. Read curves and `summary.json` directly. Separate technical execution facts, observations
+   and interpretation. Update what is strengthened, weakened, untouched or unresolved before
+   choosing the next action. Exploratory conclusions stay exploratory: no effect claim from
+   one seed, no MEI verdict. Do not force a new insight from an uninformative result.
+4. Choose inspection, diagnosis, replication, targeted revision, a different hypothesis or idle
+   for the judgment/use it can change, not a quota of new candidates. A new prospective study
+   may continue the same scientific question; explain its new information value and count its
+   exposure. A killed idea reopens only for a recorded new reason. Do not extend a batch after
+   seeing its scores or rename a failed idea to reset its fits.
 
 For mechanism questions trace environment event -> entity ownership -> available information
 -> action/credit -> learning -> native consequence. For changing rosters distinguish entity
@@ -33,6 +40,45 @@ evaluator ran: read transition, optimizer-update and evaluation counts and learn
 from the run summary. Claimed training needs actual updates; recurrent-state evolution alone
 is not parameter learning. Fixed-policy evaluation reports zero new updates and its conditional
 scope, never new learning. Use an informative horizon, without a prerequisite learnability run.
+
+## Update the working explanation
+
+In the existing notebook, connect the prior judgment and prediction to the observation and
+the resulting interpretation. Use only distinctions relevant to the question: task opportunity,
+representation, finite learnability, and complete-package benefit/cost are not interchangeable.
+Identify which competing explanations actually predicted different observations. A negative
+package comparison need not identify a bad component; nonactivation and technical failure
+cannot count as evidence of an active mechanism's adverse effect.
+
+A working update may be qualitative and conditional. Missing population precision does not
+forbid learning from the result, but does forbid fabricated confidence or a stable ranking.
+Keep positive and negative evidence, distinguish newly suggested explanations from pre-result
+predictions, and revise interpretations by appending rather than rewriting prior entries.
+No useful discrimination is a valid conclusion. Do not repeatedly list "optimization, capacity,
+seed" as equally surviving excuses without asking what could weaken each explanation.
+
+Prefer a targeted revision when evidence points to a modifiable link and the revision makes a
+different prediction. Lower expectations when tested repairs fail their intermediate predictions,
+the proposed bottleneck is not material in the target conditions, or remaining rescue stories
+make no different feasible prediction. These are research judgments, not automatic failure-count
+gates. Stopping because the next information is not worth its cost is distinct from falsification.
+An unchanged replication is useful when recurrence itself changes a decision; a new architecture
+is not a prerequisite. A cheap direct learner test may beat an elaborate diagnostic.
+
+## Simple-model and literature bridges
+
+Use a bandit, single-agent MDP/POMDP or small joint-action game when it clarifies the disputed
+link. Map variables, information rights, objective, intervention and prediction to MARL; name
+what the simplification removes, such as endogenous teammate learning, decentralized information,
+joint credit or asynchronous commitments. Derive or inspect a counterexample where useful.
+A prototype, proof or literature search is not a required preliminary stage. Toy success does
+not establish MARL/UAV benefit, and toy failure constrains only assumptions actually shared.
+
+Verify the relevant primary passage; separate its result from our analogy and proposed design.
+A return to an older branch inherits its adverse evidence and selection history. Neither model
+agreement nor a literature analogy supplies new empirical replication. Examples and selectively
+borrowed agent-project ideas are in [cumulative-research.md](references/cumulative-research.md);
+read it for a concrete reasoning need, not as a mandatory preload.
 
 ## Confirm a claim
 
@@ -106,9 +152,12 @@ classes, a C-consumption ladder or a universal held-out requirement for explorat
 
 ## Pro
 
-Use `hmasd-pro-research-prompt-author` for a hypothesis batch before an exploration cycle or
-one critic pass on a claim note. Read the whole answer; record in `NOTES.md` what you adopt,
-modify or reject and why. Pro advises; the DM chooses.
+Use `hmasd-pro-research-prompt-author` when a focused synthesis, failure explanation,
+simple-model/source bridge, targeted revision or hypothesis search would help; retain the
+pre-confirmation critic pass. No fixed idea count, post-result consultation or adviser agreement
+is required. Read the whole answer; in `NOTES.md` record what you adopt, modify or reject,
+which judgment changes and why. Pro advises; the DM chooses. Existing frozen review exceptions
+remain tied to their original object, not expanded by this method.
 
 ## Tools, only as needed
 

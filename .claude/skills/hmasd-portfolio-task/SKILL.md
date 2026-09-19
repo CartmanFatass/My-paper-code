@@ -15,7 +15,10 @@ as `NOTES.md` entries.
 
 1. **Gather.** The `RESEARCH.md` tables, each active and reserve direction's last notebook
    entries and claim notes, and the queued recommendations. Verify a standing line against the
-   runs folder when it conflicts with the notebook.
+   runs folder when it conflicts with the notebook. Read the latest working explanation and
+   the relevant predecessor: what has been learned, which reasons for hope were weakened,
+   what remains untested and what next observation would matter. Do not rank by the latest
+   sign or count reviewed experiments as accumulated mechanism understanding.
 2. **Write the section.** Append to `RESEARCH.md`:
 
    ```
@@ -35,6 +38,10 @@ as `NOTES.md` entries.
    Use these comparisons to judge the value of the next investment, not merely the best observed
    score. Explain practical effect importance or headroom only where it bears on that choice;
    an untuned reference gap or a proof unrelated to the claim is not an investment verdict.
+   Compare informative continuation (including an unchanged replication) with diagnosis, a
+   targeted repair, switching and idle as relevant. Do not require a new architecture to keep
+   a question alive, or exhaustive falsification to decline its current cost. Investment
+   stopping and scientific weakening are different judgments; neither creates a new gate.
    Include the applicable method context as described in `hmasd-pro-research-prompt-author`,
    within this same section; Pro does not inherit local skills. No separate packet or review trigger.
    Use its [Portfolio reading profile](../hmasd-pro-research-prompt-author/references/pro-reading-context.md):
@@ -63,6 +70,6 @@ as `NOTES.md` entries.
 
 ## Boundaries
 
-A narrow negative closes only the idea it tested; archiving for investment reasons is not a
+A narrow negative constrains the claims it actually tested; it does not automatically close a direction. Archiving for investment reasons is not a
 scientific verdict. Fusion of two directions needs materially the same question, comparator,
 estimand and next step, not shared code. Allowances outside section 3 are the owner's to grant.
