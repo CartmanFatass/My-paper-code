@@ -233,6 +233,26 @@ def _radio_test_kwargs(
     )
 
 
+def _exact_radio_oracle(**kwargs):
+    """The oracle the native radio boundary must equal bit for bit on this host.
+
+    The native code calls the C library's log10. On Windows NumPy's log10 has always matched
+    it, and that comparison is kept unchanged. On Linux NumPy and glibc differ by about 1 ULP,
+    so the exact comparison uses the libm oracle, and the python_reference backend is held to
+    the native result within a bound far below any physical meaning.
+    """
+
+    if os.name == "nt":
+        return backend.compute_radio_reference_batch(**kwargs)
+    exact = backend.compute_radio_libm_oracle_batch(**kwargs)
+    reference = backend.compute_radio_reference_batch(**kwargs)
+    for name in ("access_sinr", "air_sinr", "uav_to_base_sinr", "base_to_uav_sinr"):
+        np.testing.assert_allclose(
+            getattr(reference, name), getattr(exact, name), rtol=0.0, atol=1.0e-12
+        )
+    return exact
+
+
 @pytest.mark.parametrize("batch_width", (1, 8, 32))
 @pytest.mark.parametrize("exclude_receiver_uav", (False, True))
 def test_native_radio_batch_matches_exact_python_oracle(
@@ -241,7 +261,7 @@ def test_native_radio_batch_matches_exact_python_oracle(
     kwargs = _radio_test_kwargs(
         batch_width, exclude_receiver_uav=exclude_receiver_uav
     )
-    expected = backend.compute_radio_reference_batch(**kwargs)
+    expected = _exact_radio_oracle(**kwargs)
     actual = backend.compute_radio_batch(**kwargs)
     for left, right in zip(
         (
@@ -274,7 +294,7 @@ def test_native_radio_preserves_interference_boundaries_and_empty_noise_only_lis
         use_fdma=use_fdma,
         interference_radius=interference_radius,
     )
-    expected = backend.compute_radio_reference_batch(**kwargs)
+    expected = _exact_radio_oracle(**kwargs)
     actual = backend.compute_radio_batch(**kwargs)
     np.testing.assert_array_equal(actual.access_sinr, expected.access_sinr)
     np.testing.assert_array_equal(actual.air_sinr, expected.air_sinr)

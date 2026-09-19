@@ -6,6 +6,7 @@ from contextlib import contextmanager
 from dataclasses import dataclass
 from functools import lru_cache
 import hashlib
+import math
 import os
 from pathlib import Path
 import platform
@@ -577,6 +578,24 @@ def _validated_radio_inputs(
 def compute_radio_reference_batch(**kwargs) -> BatchedUAVRadio:
     """Exact Python oracle for the stateless native radio tensor boundary."""
 
+    return _radio_reference_batch(np.log10, **kwargs)
+
+
+def compute_radio_libm_oracle_batch(**kwargs) -> BatchedUAVRadio:
+    """The same oracle with the C library's ``log10``; a bit-identity check, not a backend.
+
+    The native code calls ``std::log10``. NumPy's ``log10`` agrees with glibc's only to about
+    1 ULP, so on Linux the ``python_reference`` backend and the native backend differ by up to
+    ~3e-14 dB while being the same arithmetic. ``math.log10`` is the host C library's
+    function, which makes native-versus-oracle equality exact on every host. The
+    ``python_reference`` backend keeps ``np.log10``: changing it would change that backend's
+    numbers.
+    """
+
+    return _radio_reference_batch(math.log10, **kwargs)
+
+
+def _radio_reference_batch(log10, **kwargs) -> BatchedUAVRadio:
     (
         uavs,
         users,
@@ -606,7 +625,7 @@ def compute_radio_reference_batch(**kwargs) -> BatchedUAVRadio:
         return np.sqrt(np.sum((first - second) ** 2)) <= radius
 
     def sinr(signal: float, powers: list[float]) -> float:
-        return signal - 10 * np.log10(noise_linear + np.sum(powers))
+        return signal - 10 * log10(noise_linear + np.sum(powers))
 
     for b in range(batch):
         for tx in range(uav_count):
