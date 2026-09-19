@@ -790,3 +790,119 @@ training, the +0.29 J gap overstates what a well-trained flat policy would conce
 be a new prospective entry with its own allowance, not scheduled by this one. Re-entry
 condition: I write that entry, or the owner points the direction elsewhere. No Pro round is
 owed for this result.
+
+## 2026-09-19 14:55 PDT — inspection of existing fits (no new fit): the flat learner's evaluation decline coincides with an action-noise blow-up, not with a training-return decline
+
+The owner asked for the next step. Before spending fits on "the flat learner's step size" I read
+what the sixteen completed B01 fits and the five B02 D128 fits already record per training
+rollout (`training_rows[*].losses`, `episode_returns_U`, `relative_initialization_displacement`).
+Prior explanation: B01 reading, "What the gap is made of" (CF evaluation J falls .217 → .138
+while D1280 rises), and its open question whether a lower learning rate would stop the decline.
+
+**Observations** (arm means over the five stage-1 blocks, rollouts 1 / 15 / 30 / 45).
+
+| quantity | CF (selected, ×0.5) | D1280 | D128 |
+| --- | --- | --- | --- |
+| training episode return U (stochastic policy) | 19.7 / 22.1 / 22.9 / 22.7 | 19.5 / 27.5 / 30.2 / 28.7 | 19.5 / 23.5 / 30.4 / 29.5 |
+| evaluation J (deterministic policy), rollouts 5 / 15 / 30 / 45 | .217 / .264 / .278 / .138 | .341 / .358 / .422 / .428 | .316 / .363 / .424 / .453 |
+| low-level action entropy | 4.32 / 5.69 / 7.27 / 8.92 | 4.33 / 5.51 / 6.57 / 7.46 | 4.33 / 5.51 / 6.58 / 7.48 |
+| actor displacement from initialisation (relative) | .027 / .063 / .079 / .094 | .158 / .710 / .973 / 1.148 | .158 / .708 / .976 / 1.149 |
+| low-level value loss (normalised) | .087 / .097 / .141 / .175 | .136 / .033 / .010 / .008 | .136 / .045 / .012 / .006 |
+
+- CF's training return does not decline; it rises a little and plateaus. Only the deterministic
+  evaluation declines. Training acts by sampling, evaluation by the mean action
+  (`deterministic=True` in the B01 panel loop), and the environment clamps a motion request to
+  the unit ball.
+- The action entropy rises in every fit of every arm, almost identically across blocks (CF
+  8.84–9.01 at rollout 45). The policy is a 3-dimensional Gaussian per agent with a learned
+  log-std initialised at 0 and capped at 2.0 (`hmasd/networks.py`); entropy 4.32 is std 1.0,
+  8.92 is std about 4.7, 7.46 is about 2.9. The entropy term is `-lambda_l * entropy` with
+  `lambda_l = 0.05`, fixed (no entropy targets, no annealing in these configs).
+- In the six stage-0 CF fits the entropy at rollout 45 orders with the learning-rate multiplier:
+  8.95 (×0.5), 9.82 (×1), 10.12 (×2; the cap is 10.26). The stage-0 selection of ×0.5 picked the
+  multiplier under which the noise grew slowest.
+- CF's actor has moved about a twelfth as far from initialisation as D's, at half D's learning
+  rate; its recorded policy loss is near zero (order 1e-4 against D's order 5e-3).
+
+**Interpretation (working, conditional).** The strongest account I can now give of the CF
+decline is not a step-size problem of the usual kind. With std several times the action range,
+the sampled actions are mostly clamped, the policy-gradient signal on the mean is weak, the
+entropy bonus keeps pushing the log-std up, and the mean action (the only thing evaluation
+uses) is barely trained and drifts. Training return cannot show this because it is measured
+under the noise. The learning-rate grid could only slow it. This weakens "CF needs a smaller
+learning rate" as the repair, and it strengthens the B01 caveat: the +0.29 J gap is measured
+against a flat learner whose evaluated policy is partly untrained.
+
+What it does not settle: D's entropy rises too (std about 2.9) and D still improves, so noise
+growth alone is not sufficient for decline; D's low-level learner optimises a short-horizon
+intrinsic reward with a critic that fits (value loss falls to .008) and its actor moves. The
+difference between "noise blow-up with a usable gradient" and "noise blow-up with none" is my
+inference, not an observation. The CF critic's rising value loss is compatible with the same
+account (returns get noisier) and with an independent critic problem; the inspection cannot
+separate them.
+
+## 2026-09-19 15:00 PDT — prospective: flat learner with a smaller entropy coefficient (explore, six fits)
+
+**Question.** Is the central-input flat learner's evaluation decline caused by the entropy
+bonus inflating its action noise, and how much of the B01 gap remains when it is removed?
+This continues the matched-information question of B01, with new information value: B01 tuned
+only the learning rate, and the inspection above says the learning rate was not the lever.
+
+**Structure touched.** None of roster, duration, credit or information flow. This is
+comparator competence (constitution section 1: "a competent matched-information baseline").
+
+**Simpler explanations it must be told from.** (a) The decline is a central-input or recurrent
+evaluation artefact unrelated to noise: then entropy stays low under the change and J still
+falls. (b) The flat learner is simply poor on this host: then entropy stays low, the actor
+moves, and J stays flat near .2 without decline or gain. (c) The entropy account: entropy stays
+low, the actor moves further, J45 ≥ J5 and J45 above the B01 CF fit on the same block.
+
+**Arms.** `CF` exactly as selected in B01 (learning-rate multiplier 0.5, everything else equal)
+with one field changed: `lambda_l` = 0.005 (`CF_E005`) or 0.0005 (`CF_E0005`), against B01's
+0.05. Exactly zero is not used because the learner records the entropy as 0 when the
+coefficient is 0 (`hmasd/agent.py`, `action_entropy_val`), which would blind the intermediate
+observable. Two values because a tenfold cut may not be enough to stop the growth and a
+hundredfold cut may collapse exploration; which of the two happens is itself informative.
+
+**Blocks and count.** Both values on B01 stage-1 blocks 772803, 772903, 773003 (the first three
+in order, none chosen by score): six fits, the whole default allowance, 45 rollouts, panels at
+5…45, same evaluation seeds, node `wsl_4070`. References are the completed B01 fits on the same
+blocks: CF (`lambda_l` .05) and D1280, not contemporaneous. B02 showed a D1280 rerun to be
+bit-exact across launch shas on this node; the same is assumed, not shown, for CF. No rerun fit
+is spent on it.
+
+**Predictions (signs; targeted change, so one intermediate and one native).**
+- Intermediate: action entropy at rollout 45 stays below 5.5 for both values (B01 CF: 8.9), and
+  the actor's displacement at rollout 45 is at least twice B01 CF's .094.
+- Native: J45 ≥ J5 in at least four of the six fits, and J45 above the B01 CF fit on the same
+  block in at least five of six.
+- Gap: D1280 − CF_E stays positive on most blocks and is smaller than B01's on the same block.
+  I expect a gap to remain because D's training return is also far above CF's; I do not put a
+  number on it.
+If the intermediate holds and the native fails, the entropy account of the decline is weakened
+and (a) or (b) gains; if J improves without the entropy staying low, the gain is kept and the
+story reconsidered.
+
+**Reading.** Per fit: entropy, displacement, training return and J by rollout. Per value, three
+paired differences against CF and against D1280 on J45 with mean and range; with three pairs a
+t interval has df = 2 and is reported only as a description. Exploration: no MEI verdict, no
+claim about the size of a matched-information gap. Selecting the better of two values on these
+blocks and then comparing to D1280 on the same blocks is selection on the evaluation blocks;
+any number quoted for the remaining gap carries that caveat, and a gap claim would need fresh
+blocks and a claim note.
+
+**Exposure.** 6 × 360,000 = 2,160,000 training team steps; CF measured about 6,800 s per fit at
+four concurrent; two waves (four, then two). No extension whatever the scores show.
+
+**What I would do with it.** Entropy account holds: the B01 comparator was not competent, the
+RESEARCH row says so, and the next entry is a fresh-block comparison against the repaired flat
+learner (and the question whether D's own entropy growth costs it anything). Account fails:
+record which of (a), (b) the curves favour and stop tuning CF blind.
+
+**Code (L0).** A thin entry `scripts/run_fsd_flat_entropy_b03.py` over the matched-information
+runner: arms `CF_E005`, `CF_E0005`, the three blocks, stage-1 CF construction at the selected
+multiplier with `lambda_l` overridden, a plan guard, a `reduce` that pairs with the B01 CF and
+D1280 summaries and refuses any config difference other than `lambda_l` (against CF), and
+reports the per-rollout diagnostics above; launch script on the admission kernel; tests for the
+arm table, the single-field difference against the recorded B01 CF config, the plan guard and
+the reduce. No learner, environment or evaluator change, so no shared-core review.
