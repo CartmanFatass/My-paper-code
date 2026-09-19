@@ -4,15 +4,15 @@ The only current view of the research programme (constitution section 4). States
 `exploring`, `confirming`, `reserve`, `archived`. One line of standing per active direction,
 with evidence links; nothing here is retranscribed from older records.
 
-**Owner pause: in force** since 2026-09-15 22:23 PDT ("Prepare to pause"). Adoption of the
-constitution on 2026-09-16 17:53 PDT did not lift it. After explicit resumption the first
-execution batch is FSD B01 exactly as frozen.
+**Owner pause: lifted** 2026-09-18 about 17:55 PDT by the owner in the Claude session on the WSL
+host ("我们继续研究"). It had been in force since 2026-09-15 22:23 PDT ("Prepare to pause"). The
+first execution batch is FSD B01 exactly as frozen; no other DM slot is filled by this resumption.
 
 ## Active
 
 | Direction | Question | State | Lead runtime | Standing and next step |
 | --- | --- | --- | --- | --- |
-| `flexible_skill_duration` | Does an unfixed skill duration k help on the UAV host against a matched-information baseline? | confirming | Claude session (current lead; a Codex DM may take it, never both) | Frozen object [FSD_MATCHED_INFORMATION_BASELINE_B01](candidates/flexible_skill_duration/FSD_MATCHED_INFORMATION_BASELINE_B01_PROSPECTIVE_CARD_20260916.md): D1280 versus central-input flat, six selection plus ten confirmation fits, MEI .05 J, no established headroom. The card stands in for the claim note. It calibrates the baseline; it does not test an interruption benefit. Waits on the owner's resume; entry point [HANDOFF_2026-09-16_matched_information_baseline](candidates/flexible_skill_duration/HANDOFF_2026-09-16_matched_information_baseline.md). |
+| `flexible_skill_duration` | Does an unfixed skill duration k help on the UAV host against a matched-information baseline? | confirming | Claude session (current lead; a Codex DM may take it, never both) | Frozen object [FSD_MATCHED_INFORMATION_BASELINE_B01](candidates/flexible_skill_duration/FSD_MATCHED_INFORMATION_BASELINE_B01_PROSPECTIVE_CARD_20260916.md): D1280 versus central-input flat, six selection plus ten confirmation fits, MEI .05 J, no established headroom. The card stands in for the claim note. It calibrates the baseline; it does not test an interruption benefit. Resumed 2026-09-18: CF comparator implementation in progress on `claude/fsd-b01`, no fit launched; notebook [NOTES.md](candidates/flexible_skill_duration/NOTES.md), code map in [HANDOFF_2026-09-16_matched_information_baseline](candidates/flexible_skill_duration/HANDOFF_2026-09-16_matched_information_baseline.md). |
 | `vap_folr_core` | After membership changes, can organising the history a continuing agent may legitimately access beat a competent generic recurrent baseline? | exploring | Codex DM | [The latest two-block repetition](candidates/vap_folr_core/FOLR_ENTITY_AUGMENTATION_REPEAT_B01_RESULT_EVIDENCE_20260915.md) did not reproduce the earlier positive. Next step is a materially discriminating idea, not another A to G repeat; with no worthwhile idea the direction stays idle. |
 
 ## Reserve
