@@ -638,3 +638,18 @@ is touched, so no independent review:
 Launch next, at the commit that holds this code: four first (D128 on 772803, 772903, 773003
 and the D1280 rerun on 772803), the remaining two D128 as slots free. Tags `b02_d128_<block>_a01`
 and `b02_d1280_772803_a01`. No B02 score is read before all six are terminal.
+
+## 2026-09-19 05:28 PDT — coordinator batch B02: first wave admitted on `wsl_4070`
+
+Launch sha `0cb5093578d16f9baaa2bd96cb3b395ad4e14012`, node checkout fast-forwarded to it first,
+each through `coordinator_batch_b02/launch_fit.sh` and the admission kernel, all admitted at the
+first request. Alive with an empty `stderr.log` after the fourth admission.
+
+| tag | arm | block | operation ref (under `/home/wu/projects/HMASD/.git/hmasd-admission/`) |
+| --- | --- | --- | --- |
+| `b02_d128_772803_a01` | D128 | 772803 | `cf275abaca1b0cfef5c347e3c1e441bc0a337fef0f6388d87865dd757b8893cb.json` |
+| `b02_d1280_772803_a01` | D1280 rerun | 772803 | `dba478b1d80feccde0892410e490aa7fcaa5e6121311a61becb5412770804c00.json` |
+| `b02_d128_772903_a01` | D128 | 772903 | `2f90f77197c2d097e94e803c199e768ee3262323aa28493ff06e4bb48b192a24.json` |
+| `b02_d128_773003_a01` | D128 | 773003 | `b06453dea598bfa64b4f4eac5818c1cefa06936e7d324cfdd756de91cb6eee92.json` |
+
+Still to launch as slots free, same sha: D128 on 773103 and 773203.
