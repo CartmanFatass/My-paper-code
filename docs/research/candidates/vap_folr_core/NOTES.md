@@ -704,3 +704,37 @@ failure retention. Tests use managed scratch and synthetic inputs, with no undec
 fit/evaluation. Independent Reviewer checks this executable change before acceptance/launch.
 A focused Critic is assessing scientific value and the distinction from old augmentation;
 the DM will record any material change before publishing executable inputs.
+
+
+### Independent scientific criticism before execution
+
+ResearchCritic checked the actual old actors/learner and A01 summaries and returned
+MATERIAL_DISSENT=no. Accepted: the smallest useful discriminator is this learning comparison,
+not a prerequisite diagnosis. Equal trainable shape does not equal storage or computation;
+cache success cannot identify N-change causality or defeat every tuned Generic alternative.
+Stale-token interference can cause failure without proving history redundancy. The negative
+history/auxiliary observations remain constraints on expectations. No extra arm, diagnostic or
+design change is selected. The six-fit scope and all outcome branches above remain in force.
+
+
+### Cache A01 implementation accepted before the six original launches
+
+The direct owner is Codex task `01a0bbd6-6cfa-74e3-82d3-b2afe7fa9426`. The DM read the complete
+actor, learner, artifact, publication and runner diff and accepts the declared L0. Independent
+Reviewer traced the full path and reports no material finding; it ran 34 focused new/inherited
+checks. Implementer separately reports 16 new and 12 inherited entity-history checks. The DM's
+source/CLI admission regression passed 2 tests. These are synthetic/source checks, with no native
+training or policy evaluation. Scratch was managed and cleaned by pytest.
+
+Both actor/mixer initial trainable states and constructor RNG match exactly. The Generic
+wrapper retains exact inherited update, optimizer and target synchronization on the checked
+batch. The cache actor's online and whole-sequence Q/state replay are exact in its focused
+check. With all subjects visible, its per-step attention versus Generic's batched-time
+attention differs by ordinary FP32 rounding (observed max Q difference 2.24e-8); this is not
+claimed bit-identical or a universal error bound. The intervention includes its deterministic
+state/read path and numerical execution organization. No changed reward, actor privilege,
+training exposure or source-native evaluator is introduced.
+
+Publish the accepted exact source, then admit the six already selected original fits. This
+acceptance adds no scientific fit, arm, parameter search or diagnostic. Each native operation
+will be linked below; original accepted handles must be reconciled, never blindly repeated.
