@@ -206,10 +206,10 @@ The overlay had two real differences and both are now host-neutral on `main`:
    still named with `--node`.
 2. The agentify MCP entry left the project `.codex/config.toml` for each host's user-level
    configuration. Done on the WSL host (`~/.codex/config.toml`, backup
-   `config.toml.bak-20260918-agentify-user-level`; Claude user scope). **Windows step, not done
-   from here:** the Windows `~/.codex/config.toml` entry has no `tool_timeout_sec`; add
-   `tool_timeout_sec = 2700` there before or with pulling this commit, or long Pro waits fall
-   back to the default tool timeout.
+   `config.toml.bak-20260918-agentify-user-level`; Claude user scope). The Windows `~/.codex/config.toml` entry had no `tool_timeout_sec`, so removing the project
+   entry would have dropped long Pro waits to the default tool timeout; with the owner's
+   explicit approval `tool_timeout_sec = 2700` was added there from the WSL host (one line, no
+   other key changed, parse-checked; backup `config.toml.bak-20260918-agentify-timeout`).
 
 After this lands, `/home/fires/hmasd-wsl` checks out `main` and `wsl` receives no further
 commits. What git cannot carry stays a working rule: process handles and ignored `temp/`
