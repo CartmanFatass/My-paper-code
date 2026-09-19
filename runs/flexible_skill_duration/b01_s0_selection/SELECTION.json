@@ -1,0 +1,51 @@
+{
+  "object_id": "FSD_MATCHED_INFORMATION_BASELINE_B01",
+  "card": "docs/research/candidates/flexible_skill_duration/FSD_MATCHED_INFORMATION_BASELINE_B01_PROSPECTIVE_CARD_20260916.md",
+  "stage": 0,
+  "planned_candidates": 6,
+  "available_candidates": 6,
+  "per_seed_J45": {
+    "0.5": {
+      "772603": 0.2233236246931919,
+      "772703": 0.09082099109493934
+    },
+    "1.0": {
+      "772603": 0.11620219199531034,
+      "772703": 0.07425135659765238
+    },
+    "2.0": {
+      "772603": 0.13206992353737199,
+      "772703": 0.06825932274475421
+    }
+  },
+  "missing_or_invalid": [],
+  "invalid_inputs": [],
+  "rule": "highest mean J45 over the two tuning blocks; an exact tie inside the maximal set is broken in the fixed order 1, 0.5, 2; any missing, non-finite or integrity-failed fit ends the object at SELECTION_INCOMPLETE with no fallback",
+  "launch_sha": "8fc96416c45d293f9d1b9e928761d3d8399829a5",
+  "status": "complete",
+  "selected_lr_multiplier": 0.5,
+  "means_J45": {
+    "0.5": 0.15707230789406562,
+    "1.0": 0.09522677429648135,
+    "2.0": 0.1001646231410631
+  },
+  "maximal_set": [
+    0.5
+  ],
+  "tie": false,
+  "selection_basis": {
+    "mean_J45": 0.15707230789406562,
+    "per_seed_J45": {
+      "772603": 0.2233236246931919,
+      "772703": 0.09082099109493934
+    }
+  },
+  "input_summaries": [
+    "runs/flexible_skill_duration/b01_s0_cf_l05_772603_a01/summary.json",
+    "runs/flexible_skill_duration/b01_s0_cf_l05_772703_a01/summary.json",
+    "runs/flexible_skill_duration/b01_s0_cf_l1_772603_a02/summary.json",
+    "runs/flexible_skill_duration/b01_s0_cf_l1_772703_a01/summary.json",
+    "runs/flexible_skill_duration/b01_s0_cf_l2_772603_a01/summary.json",
+    "runs/flexible_skill_duration/b01_s0_cf_l2_772703_a01/summary.json"
+  ]
+}

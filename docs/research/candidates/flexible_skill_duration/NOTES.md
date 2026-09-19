@@ -186,3 +186,30 @@ same launch path:
 The two λ = 0.5 fits are past rollout 41 and still running. No score has been read. Stage-1
 planning from the measured wall: ten fits at four concurrent is about three waves, roughly
 five to six hours on this node.
+
+## 2026-09-18 23:15 PDT — stage 0 complete: λ* = 0.5, `SELECTION.json` committed before stage 1
+
+All six CF tuning fits exited on their own with code 0, 45 training rows, empty `stderr.log`.
+The two λ = 2 fits ran two-concurrent: 3873 s and 3751 s (about 75–85 s per rollout with panels),
+against 6650–6820 s at four concurrent. Outputs were collected into
+`runs/flexible_skill_duration/<tag>/` on the WSL host and all 59 files match the node by sha256;
+node originals untouched. The refused first attempt `b01_s0_cf_l1_772603_a01` is kept beside them.
+
+Selection by the card's rule, from `select-stage0` over the six `summary.json` (no other quantity
+was read before it): `runs/flexible_skill_duration/b01_s0_selection/SELECTION.json`.
+
+| λ | J45 block 772603 | J45 block 772703 | mean |
+| --- | --- | --- | --- |
+| 0.5 | 0.2233 | 0.0908 | **0.1571** |
+| 1 | 0.1162 | 0.0743 | 0.0952 |
+| 2 | 0.1321 | 0.0683 | 0.1002 |
+
+Maximal set {0.5}, no tie, status `complete`. λ* = 0.5 is the edge of the grid; the card fixes
+the grid at {0.5, 1, 2} and gives no extension, so none is made. Block-to-block spread inside one
+λ (0.13 J at λ = 0.5) is larger than the MEI, a reminder that the stage-1 reading rests on the
+five paired blocks, not on any single fit. Tuning blocks are not reused in stage 1.
+
+Stage 1 launches from the commit that contains this `SELECTION.json`, CF with the
+repository-relative `--selection runs/flexible_skill_duration/b01_s0_selection/SELECTION.json`,
+ten fits at no more than four concurrent on `wsl_4070`, D1280 and CF of the same block side by
+side where the slots allow.
