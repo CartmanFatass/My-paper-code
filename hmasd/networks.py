@@ -1589,6 +1589,24 @@ class SkillDiscoverer(nn.Module):
             if self.use_central_snapshot
             else 0
         )
+        # FSD flat input scale B05: an optional fixed affine `(block - offset) / scale` on the
+        # state block of the CF central input, applied inside `_apply_central_input` only, so
+        # acting, replay and evaluation see the identical transform.  Absent by default; the
+        # offset/scale are non-trainable, non-persistent buffers, so the parameter list, the
+        # optimizer groups and the `state_dict` keys are unchanged and construction draws no
+        # random number here.  Nothing else (critic, coordinator, discriminators, the running
+        # normalizers) is touched.
+        self.use_central_state_affine = getattr(config, "central_snapshot_state_affine", None) is not None
+        if self.use_central_state_affine:
+            if not self.use_central_snapshot:
+                raise ValueError(
+                    "central_snapshot_state_affine requires use_central_snapshot_in_flat_actor=True"
+                )
+            offset, scale = self._validated_central_state_affine(
+                config.central_snapshot_state_affine, int(config.state_dim)
+            )
+            self.register_buffer("central_state_offset", offset.to(self.device), persistent=False)
+            self.register_buffer("central_state_scale", scale.to(self.device), persistent=False)
 
         # Adapt hmasd config to r_mappo's args format
         class Args:
@@ -1678,6 +1696,40 @@ class SkillDiscoverer(nn.Module):
             self.actor_context_adapter = None
             self.critic_context_adapter = None
 
+    @staticmethod
+    def _validated_central_state_affine(affine, state_dim):
+        """Return the (offset, scale) buffers of the CF state-block affine, or raise.
+
+        Both are float32 copies of length `state_dim`; every scale entry must be finite and
+        strictly positive, so the transform is invertible and cannot produce a non-finite input.
+        """
+        try:
+            offset, scale = affine
+        except (TypeError, ValueError):
+            raise ValueError(
+                "central_snapshot_state_affine must be a pair (offset, scale) of float sequences"
+            ) from None
+        tensors = []
+        for name, values in (("offset", offset), ("scale", scale)):
+            try:
+                tensor = torch.as_tensor(values, dtype=torch.float32).detach().clone()
+            except (TypeError, ValueError, RuntimeError) as exc:
+                raise ValueError(
+                    f"central_snapshot_state_affine {name} is not a float sequence: {exc}"
+                ) from None
+            tensor = tensor.reshape(-1) if tensor.dim() <= 1 else tensor
+            if tensor.dim() != 1 or tensor.numel() != state_dim:
+                raise ValueError(
+                    f"central_snapshot_state_affine {name} must have length {state_dim}, "
+                    f"got {tuple(tensor.shape)}"
+                )
+            if not bool(torch.isfinite(tensor).all()):
+                raise ValueError(f"central_snapshot_state_affine {name} has a non-finite entry")
+            tensors.append(tensor)
+        if not bool((tensors[1] > 0).all()):
+            raise ValueError("central_snapshot_state_affine scale must be strictly positive")
+        return tensors[0], tensors[1]
+
     def _apply_compact_context(self, tensor, compact_context, adapter):
         if adapter is None or compact_context is None:
             return tensor
@@ -1695,6 +1747,11 @@ class SkillDiscoverer(nn.Module):
         `central_input` carries, in this fixed order, the normalized held global state, the
         six normalized joint observations in fixed agent-identity order and the ego one-hot.
         The flag-off path returns the observation unchanged and allocates nothing.
+
+        When `central_snapshot_state_affine` is configured, the leading `state_dim` entries are
+        mapped by `(block - offset) / scale` here, at the single application point shared by
+        acting, replayed update and evaluation.  Without the field the concatenation below is
+        exactly the one that ran before the field existed.
         """
         # `getattr` default: existing inference-only callers build this module without
         # running `__init__` (tests/hmasd_r_mappo_utils_contract_test.py), and the flag-off
@@ -1719,6 +1776,14 @@ class SkillDiscoverer(nn.Module):
                 f"central input batch shape {tuple(central_input.shape[:-1])} does not match "
                 f"the observation batch shape {tuple(tensor.shape[:-1])}"
             )
+        # `getattr` default again: an inference-only module built without `__init__` has no such
+        # attribute, and the unconfigured path must stay the plain concatenation.
+        if getattr(self, "use_central_state_affine", False):
+            state_dim = self.central_state_offset.shape[0]
+            offset = self.central_state_offset.to(device=central_input.device, dtype=central_input.dtype)
+            scale = self.central_state_scale.to(device=central_input.device, dtype=central_input.dtype)
+            state_block = (central_input[..., :state_dim] - offset) / scale
+            return torch.cat([tensor, state_block, central_input[..., state_dim:]], dim=-1)
         return torch.cat([tensor, central_input], dim=-1)
 
     def actor_update_parameters(self):

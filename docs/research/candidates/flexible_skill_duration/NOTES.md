@@ -1827,3 +1827,56 @@ k = 1; native: lower training return and J at k = 1 if coherence is what D's low
 from. That would be evidence about fixed persistence, the first half of this direction's
 question, obtained inside the D family; it would still say nothing about an *unfixed* k.
 Recorded as the candidate that follows B05, not scheduled and not yet a prospective entry.
+
+## 2026-09-19 21:35 PDT — flat input scale B05: code written, independently reviewed, accepted
+
+Implementer (Opus) from my scope note; independent Reviewer (read-only); I read the diff, ran the
+checks and applied the Reviewer's fixes myself.
+
+**Shared learner** (`hmasd/networks.py`, `SkillDiscoverer`, +65 lines): optional config field
+`central_snapshot_state_affine` = (offset, scale), validated, held as non-trainable
+non-persistent buffers, applied to the leading `state_dim` entries of the central input inside
+`_apply_central_input` only. Field absent: the executed line is the old concatenation.
+Implementer's bit-identity check against `HEAD`'s module (flag off and on, no affine): RNG state
+after construction, `state_dict`, parameter count, `forward`, `evaluate_sequence`, `get_value`
+all identical; the update-phase reference tape rebuilt under both sources has the same digest.
+
+**Thin entry** `scripts/run_fsd_flat_input_scale_b05.py` (`fit`, `probe`, `reduce`), object
+`FSD_FLAT_INPUT_SCALE_B05`, arm `CF_S` run as the frozen `CF` arm. The affine is derived from the
+actual environment instances (area 1,000; heights 50–150; 6 UAVs × (x, y, z), 50 users × (x, y),
+clock) and refuses a layout that does not close at `state_dim` = 119. With no arm the config
+equals the recorded `b03_e0005_772803_a01` `learner_config` (tested against the real file). The
+affine is outside the frozen config dump, so a CF_S fit's recorded config equals CF_E0005's and
+the declared difference is the summary's `central_snapshot_state_affine`, which `fit_endpoint`
+recomputes from the recorded bounds.
+
+**Reviewer: ACCEPT WITH FIXES**; no finding in the shared-learner change. Verified by the
+Reviewer independently: the transform reaches acting, the replayed update and the separately
+built evaluator; the PPO ratio before the first step is 1 everywhere except the episode's last
+stored transition, where old and new log-probs differ by up to .005 — with and without the
+affine alike (.0064 without), so it is a property of the CF recurrent replay already at `HEAD`,
+one row in 500, not of this change; the probe's hooks leave the panel bit-identical to the frozen
+evaluation; gate packing, masked hidden state and block ranges are right. Findings and what I
+did: F1 (the probe reader accepted a probe of another panel size, construction or source, e.g.
+the tiny test's, and `reduce` would have differenced it against full fits): fixed — the reader
+now requires the frozen panel size, the block's evaluation seed, a recorded source equal to the
+requested one and equal configs in both constructions, and `reduce` refuses a probe whose
+configs, affine or source are not the fits'. F2 (the probe executes policy without admission):
+accepted as designed and recorded in the prospective entry; `--launch-sha` is now mandatory and
+must equal `HEAD`. F3 (block shares published without their definition): definition added — the
+share is over the sum of the four per-block squared norms, bias and cross terms left out, not a
+share of the actual pre-activation norm. Also added a guard that the log-std correction's three
+action dimensions are the recorded ones. The Reviewer notes the correction is exact only for
+equal per-dimension log-stds (otherwise a lower bound on the log-std part) and is at most .2 %
+of the total on the three references, so my "network part" prediction is in effect about the raw
+displacement.
+
+**Checks (mine, after the fixes).** B05 + B04 + B03 tests 26 passed; CF pathway tests with the
+new affine tests 69 passed. Pre-existing and unrelated (Reviewer confirmed): one `ha_ctse` stub
+test, the stale cached update-phase tape under `temp/`, a basename clash when the whole FSD test
+tree is collected at once.
+
+**Deviation from the prospective entry.** The probe runs on `wsl_4070`, not locally: three UCOPE
+fits of the Codex session are running on this machine's CPU and I will not add load to their
+walls. It runs from the node checkout at the published sha, unadmitted as designed, zero
+optimizer steps; outputs under `runs/flexible_skill_duration/b05_probe_<block>/`.
