@@ -2207,3 +2207,69 @@ entry. `D_K1` *above* `D_K10`: contrary to the explanation; recorded as such.
 **Cost.** Six fits (the idea's allowance; `D_K10` reruns are started training attempts and
 count). `D_K1` costs more per rollout: a decision pass every step and ten times the coordinator
 update rows. Node `wsl_4070`, at most four concurrent. Nothing is added after scores are seen.
+
+## 2026-09-20 00:25 PDT — read: owner-supplied cross-interpretation (FSD × UCOPE × temporal alignment); what I adopt for FSD
+
+**Source.** A package the owner handed me (`research_cross_interpretation_20260919.zip`, sha256
+`dbbd19e2c1a7425d…`, local, not in the repository): a main report, three proposed notebook
+fragments and an exact-arithmetic check of its finite models. It is advisory, pinned to this
+notebook at `33dbff37e` — so it predates the B06 reading (23:50) and the persistence entry
+(23:58). I record my response here in my own words rather than pasting its FSD fragment; the
+UCOPE and temporal-design fragments belong to their own lead and I do not touch those files.
+No fit, no code, no run follows from this entry.
+
+**Checked before adopting.** Its B05 numbers against the run files: CF_S minus CF_E0005 at the
+last panel (rollout 45) is −.130 / +.050 / +.091, mean +.004 — correct
+(`b05_s_*` against `b03_e0005_*`); in the late window it is −.046 / +.150 / +.072, mean +.059,
+one block adverse.
+
+**Adopted, and it sharpens my 22:55 reading.**
+1. *Four different judgments*: the input contains the information; the module responds to it;
+   the learner progresses from its own initialisation; the attained native level is higher.
+   B05 established the second at initialisation and the third (+.086 / +.102 / +.101 from its
+   own J_init on three of three blocks). It did **not** establish the fourth: scaled against
+   unscaled the endpoint difference is about zero at rollout 45 and mixed in the late window,
+   and the block where CF_S starts lowest (.158) admits the reading "recovered to the level the
+   unscaled construction started at". My 22:55 entry says "the flat actor trains"; that stands.
+   Anything that reads as "the repaired flat is better at the end" does not, and I did not
+   measure the trained policy's sensitivity (no checkpoints). CF_S remains the flat
+   construction because the unscaled one is blind to its own observation, not because it
+   scores higher. B01's frozen label and the narrowing of its meaning stand as written.
+2. *UCOPE is a contrary constraint, not support.* UCOPE's B04 found no established advantage of
+   short command persistence over ordinary feedback (B − G: −.030 / +.008 / +.007). It neither
+   supports nor refutes persistent skill-mode value here: D holds a *label* while the low level
+   keeps sampling feedback-dependent actions every tick; UCOPE's KEEP copies the *command*.
+   Different interventions; their scores are not pooled and I will not cite either for the
+   other.
+3. *Retraining and a fixed-weight intervention answer different questions.* B07 is a
+   retraining contrast (Δ_train in the report's terms): it can say whether training with caps
+   of 1 ends somewhere else, not whether the trained D1280 *needs* its held label at
+   deployment. The second would take a checkpoint these runners do not save; not planned.
+4. *Exchange / projection / best restricted gate are three quantities.* For a binary END/KEEP
+   choice with advantage A and retained information C, the value of new information to the
+   best gate is (E|A| − E|E[A|C]|)/2: it needs A to change *sign* within some C, not merely to
+   vary. This is the right yardstick for the direction's second half (an unfixed k, i.e. an
+   interruption gate) when it comes back; nothing in FSD estimates it today, and it is a local
+   ideal-gate identity, not a native estimate.
+
+**One place I go further than the report.** It cautions that a high skill entropy is not
+per-state independence, marginal and conditional entropy being different statistics. Correct
+in general; here the logged number is the conditional one — `update_coordinator_d2` averages
+the per-sample entropy of the coordinator's own distribution (`hmasd/agent.py`, the
+`team_entropy`/`agent_entropies` terms of the PPO loss). So 1.74–1.78 against ln 6 = 1.79 means
+a mean KL from uniform of .01–.05 nats *per state*: near-uniform at almost every visited
+state. That supports "near-uniform assigner" as a description of the sampling distribution in
+training. It still does not license "random skills beat flat" as a mechanism — the argmax
+used at evaluation can be strongly state-dependent under a near-uniform distribution — and
+B07's capture will log the skill-change rate in training for exactly that reason.
+
+**Against the B07 entry (23:58).** The report asks that a k comparison name its coupled
+changes in update frequency, return boundaries and exposure. The entry names the coordinator's
+sample pool (×10), the update steps (matched by batch size), the per-hop discount and segment
+return (intrinsic), and the deterministic evaluation. One addition, recorded now before any
+score exists: the *low level's* exposure is identical in both arms (same steps, same update
+law, `config.k` held), but its conditioning input changes about ten times as often, so its GRU
+sees a faster-switching label — a consequence of the intervention itself, not separable, and a
+reason a lower J at caps of 1 would show that *this* low level gains from a held label, not
+that temporal coherence of exploration is the channel. The action-autocorrelation and coverage
+measures are what speak to the channel. B07's design is otherwise unchanged.
