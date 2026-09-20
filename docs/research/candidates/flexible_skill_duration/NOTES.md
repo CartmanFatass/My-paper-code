@@ -2632,7 +2632,7 @@ changes a label at only 10–15 % of its decisions). Read as description of acce
 as END-minus-KEEP value. If (b) and (c) show an inert label, this part is reported and not
 interpreted further.
 
-## 2026-09-20 07:05 PDT — B08 probe extension (accessible END) written and accepted; no probe score exists
+## 2026-09-20 07:00 PDT — B08 probe extension (accessible END) written and accepted; no probe score exists
 
 Implementer from my scope note; I checked that the diff touches only the probe and the reduce
 (`_run`, `run_probe`, `run_rule_panel`, `probe_row`, `reduce_inputs`, additive constants and
