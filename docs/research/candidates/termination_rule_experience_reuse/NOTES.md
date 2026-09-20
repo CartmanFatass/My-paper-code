@@ -1587,3 +1587,170 @@ B：普通方法就是候选，但其有限样本使用价值仍是未回答的�
 C：机会存在且已被一个训练历史实现，但当前透明规则已经完成了全部决策计算。 下一项学习理由应来自合法、目标相关的未知量，而不是来自正 toy 的惯性。
 
 这三项建议不要求更多顾问一致意见，不要求穷尽所有解释，也不新增实验批准条件。本次没有启动实验、改变任何预写科学参数或写入仓库；实际成功的 GitHub Answer 提交：无。
+
+## 2026-09-20 — A post-Pro decision: retain ordinary reuse; pause direction investment
+
+**Delivery and ownership.** The complete cross-direction answer was saved from chat in
+`8904327f9598d4896cb9425550f84584deaa902a`. Before insertion the remote question and empty
+Answer were byte-identical to `f3fe65778da4e58fb5eb0ca7a34f9c6896c9c945`; the answer body
+compared byte-for-byte with Root's collected file. Its final LF explains the two recorded
+hashes. Even its one trailing space and display-extracted formula/citation fragments were
+preserved. Nothing was resent and no private conversation address was published. The
+answer-only loan is reconciled and A's DM again owns this notebook. I read the complete
+answer; the adoption below concerns A only. B/C's DMs own their respective decisions.
+
+**Adopt, clarify and do not infer.** I adopt Pro's distinction between an available
+ordinary route and a route that is adequate at a specified exposure. Entry condition 3
+asks whether *additional complexity* has a useful discriminant; it does not forbid an
+existing-method study or make prior ordinary-method failure a permission requirement.
+An ordinary sufficient route can itself be a useful answer to a bounded research question.
+I retain the A01/A02 reading unchanged, including the genuine multistep gain over one-step,
+mixed Retrace-minus-Q(beta) primary, adverse long-minus-matched primary, contrary early
+A02 panel, corrected fixed-denominator update and package-not-component interpretation.
+
+I also adopt the qualification that the DAG's eight backups count work **after obtaining
+the specified coverage**, not the cost of collecting it. Its nine primitive rows are
+constructed legally realizable records, not a new collected dataset. The strict zeta=0
+two-world counterexample is an identification result; positive support with a finite
+missing branch is not that impossibility. For an unknown R-service success probability
+theta in the DAG, `Q_L^beta=7 theta/8` crosses safe=.75 at `theta=6/7`, as Pro observes.
+That is a possible decision-sensitive estimation problem, not a demonstrated current use
+need or a newly selected fit. The ordinary rival must have the same observations and
+uncertainty information. I do not adopt a claim that a sufficient statistic or a plug-in
+model is automatically the most efficient finite-data estimator.
+
+Source-use limits matter. Pro identified the intended umbrella source and its correct
+blob, which our own pre-insertion check independently verified. It disclosed that it did
+not redo all A/B raw-array checks. I rely on A's earlier actual readback for those facts,
+not on Pro as additional replication or engineering verification. Its A arithmetic and
+consequential Q(beta)/intra-option source boundaries agree with the independently checked
+passages and algebra above. No extra consultation is needed merely to increase agreement.
+
+### Additional read-only discrimination while transport was running
+
+The notebook was not edited during its loan. I checked one specific finite-resource
+countercondition rather than enumerating new hosts: marginalizing unobserved option paths
+when different options share primitive actions. It supplies the following **positive
+efficiency opportunity and ordinary reduction**, both analytical, not new runs.
+
+First, this mechanism was absent in A01/A02. In
+`experiments/candidates/termination_rule_experience_reuse/off_termination_a01/host.py`,
+`closed_loop_move` maps L/R to stay/right at position 0, left/right at 1–3, and left/stay
+at 4. Given position, the primitive move identifies the option. Thus those empirical
+comparisons cannot refute a benefit from marginalizing ambiguous option labels; their
+scope is not silently enlarged by this new question.
+
+Second, there is a relevant stronger ordinary multistep precedent: Jain and Precup,
+*Eligibility Traces for Options*, AAMAS 2018,
+[primary PDF](https://www.ifaamas.org/Proceedings/aamas2018/pdfs/p1008.pdf), sections 2–3,
+Eq.1/5/12 and the trace algorithms. I checked the primary derivations and their section 4
+experimental conditions. They include action-compatible option-action learning and
+option-path multistep corrections. This is not evidence that the paper already implements
+complete action-history marginalization, nor that its function-approximation results
+guarantee convergence or a MARL advantage. The narrow local catalog query had no match;
+that miss is not a novelty conclusion.
+
+Here is the ordinary reduction for fixed known Markov controllers on a common legal
+state. Let H contain the primitive state/action/
+reward history, initial option and all required observed teammate commitments, but not
+the intermediate nominal option/renewal path being marginalized. For each law v in
+{beta,zeta}, maintain its conditional option belief b^v. The observed-action likelihood,
+posterior and next belief are
+
+`ell_t^v = sum_o b_t^v(o) pi_o(a_t|x_t)`,
+`bpost_t^v(o) = b_t^v(o) pi_o(a_t|x_t) / ell_t^v`,
+`b_(t+1)^v = bpost_t^v K^v(x_(t+1))`.
+
+The ratio `ell_t^beta/ell_t^zeta` is precisely ordinary history-policy importance
+sampling. Under positive support and no omitted termination side effect, the unknown
+environmental kernel cancels for the same physical state/action history. With
+`K^v(o'|x,o)=(1-v_o(x)) 1[o'=o]+v_o(x) mu^v(o'|x)`, the filter arithmetic uses O(K)
+per step given the evaluated controller probabilities: a diagonal term plus one weighted
+renewal sum. This is O(TK) for **one fixed starting belief**, not a cost guarantee for
+every start row/initial option in a learning batch. Controller evaluations, extra filters
+or a justified shared computation must be counted for both methods. No full S-by-S
+environment model is required by this ordinary reference. If controller memory depends
+on a counterfactual initiation history, a belief over option labels alone is insufficient:
+the joint option/memory state must be treated explicitly. The O(K) count does not price
+that larger class for free; the present bridges use Markov controllers.
+
+For an untruncated IS return G(H), `E_zeta[W_option | H]=W_action` implies that the
+action-history estimator is a Rao–Blackwellization. In the earlier three-opportunity DAG,
+conditional on initial L, the first transition to R occurs at steps 1/2/3 with behavior
+probabilities `1/8, 7/64, 49/512` and option-path weights `4, 16/7, 64/49`. The return
+estimate has mean 7/8 and second moment 134/49. Marginalizing the shared prefix gives
+R probability 169/512, R weight 448/169 and second moment 392/169: a strict variance
+reduction of `3438/8281`. This is a finite-efficiency difference despite identical
+underlying information, but the same-data small branch model still covers this DAG.
+
+The independent Critic also checked a random-loop analogue, removing dependence on an
+acyclic example. Start safe (payoff .5) or L with positive collection probability. At a
+common state both skills take the same action: with unknown environmental probability
+p_exit it reaches a fork, otherwise it returns to the common state. Renew after each
+such move with probability eta; the selector always picks R. At the fork, L/R execute
+different terminal actions with true payoff 0/1, learned from actual outcome observations.
+Both terminal actions have behavior support. This is a **single-agent bridge**, not the
+old four-tick teammate model: its unbounded geometric waiting time cannot silently assume
+that an old finite teammate commitment remains unexpired. Gamma=1 is justified here by
+bounded terminal returns and almost-sure arrival for p_exit>0, not a discount contraction.
+
+`P(T=t)=p_exit (1-p_exit)^(t-1)` and
+`P_eta(R at fork)=eta/[p_exit+(1-p_exit) eta]`.
+
+At true p_exit=.5, target beta=.5 gives value 2/3, behavior zeta=.125 gives 2/9, and safe
+is .5: there is a genuine native decision opportunity. Given T=2 and the R terminal,
+option-path weights are 4 or 16/7 with behavior conditional probabilities 8/15 and 7/15;
+the action-history weight is always 16/5, eliminating conditional variance 128/175.
+Nevertheless the ordinary history-policy reference uses the identical filter/weights.
+This small loop also admits a practical empirical model using exit counts and real
+terminal observations; its structure or replay cannot be denied to manufacture a gap.
+
+I accept the Critic's two important limits: this variance argument does **not** directly
+apply to clipped Retrace, an option-specific bootstrapped TD update or learned native J;
+the value/readout transformation must also be valid. And the single-query filter work
+does not price all-start-row training. The independent check is mathematical criticism,
+not empirical replication. No scripts, new trajectories or fits were run for these bridges.
+
+### Direction decision and actual re-entry condition
+
+**Pause this direction's current investment; retain the ordinary reuse route.** There is
+no selected next learner, collector comparison, confirmation claim or live operation.
+This is a direction-level investment judgment under the owner's requested re-entry, not
+a change to the owner's global pause and not a theorem that termination reuse is useless.
+Root can record the paused investment in A's standing; A remains recoverable at its
+published code/results. No evidence or worktree is being removed.
+
+The reasons now go beyond one failed package: A01/A02 did not support their extra-benefit
+predictions; a source-grounded shared-prefix opportunity has an explicit finite-work
+ordinary solution; a random-loop finite-variance opportunity has an equally legal ordinary
+history-policy implementation; and the genuinely unsupported alternative cannot identify
+the new action branch. A hypothetical algorithm versus that exact same history estimator
+would have identical trajectory targets and updates when read out identically, so a
+learning batch between their two names would not answer a new question. A different
+finite estimator could have different bias/variance/native decisions, but none is selected
+by the present evidence merely because such differences are possible.
+
+What is strengthened is the existence of lawful off-termination learning and concrete
+ordinary solutions when fixed controller semantics, required teammate state and action
+support are retained. What is weakened is a reason to add the tested trace/collector
+complexity or to revive the shared-prefix story as an unaddressed special correction.
+What remains unresolved includes real target uses near an estimation-sensitive decision
+threshold, harder approximation/compute regimes, hidden-but-inferable commitments and
+endogenous teammate changes. The current algebra and small-host fits do not establish
+UAV value, general estimator optimality or a stable population ranking.
+
+Re-entry needs a **concrete use/research question with a distinguishing prediction**, not
+permission, a new algorithm, a prior proof or a positive pilot. For example, an actual
+supported target decision could be sensitive to finite estimation error at declared
+exposure; compare the distinct estimators with shared data/uncertainty rights, measuring
+fixed-query bias/variance and full computation together with the learned target decision's
+native return. A real recurrence/precision decision could also justify replication.
+Neither need be known to favor a new method. No such current use is identified, and no
+producer is being awaited to invent one. Do not automatically sweep beta/alpha, add seeds,
+transfer to the UAV host, or read Claude B08 to fill that absence.
+
+Incremental cost since A02 remains **zero fits and zero new simulator trajectories**;
+cumulative actual cost remains the 15 started/read local-CPU fits reported above. Advice,
+source reading and exact algebra are not additional training evidence or a wall-time
+measurement. The Pro answer is fully collected and interpreted for A; Root's remaining
+role is shared-index integration, not scientific approval or a launch dependency.
