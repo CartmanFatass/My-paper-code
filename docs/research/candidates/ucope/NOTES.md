@@ -841,3 +841,46 @@ workflow registry or scientific claim.
 The owner subsequently changed the heartbeat interval to **25 minutes** to reduce gaps
 between continuations. The native app accepted that update; the same expiry, fit allowance,
 direction and publication boundaries remain in force. No cache-lifetime guarantee is inferred.
+
+### A timing-matched scalar bridge, zero native exposure
+
+For the exact B eligibility law, take a constant KEEP probability q and independent,
+zero-mean fresh commands of variance sigma squared, with no feedback, boundaries or
+teammate coupling. Let h_t be the probability of a held command at tick t, with reset
+h_0=0. Then h_t=q(1-h_(t-1))=q/(1+q) * (1-(-q)^t). A command can be copied only once,
+so adjacent-command covariance is h_t*sigma squared and higher-lag covariance is zero.
+For T ticks, displacement variance is sigma squared times
+`T + 2*sum(h_t, t=1..T-1)`. At q=.5 and T=256 this is approximately **1.66493** times
+the always-fresh variance, with 85.1111 expected held edges. Exact rational arithmetic
+checked the recurrence against its closed-form sum. No native episode, checkpoint
+evaluation or fit was used.
+
+This maps the supplied temporal insight to B's actual forced-fresh law and supplies a
+specific simpler explanation that remains compatible with a near-half scalar rate.
+It is not a prediction of native state coverage or return: learned means, local feedback,
+tanh commands, boundaries and coupled agents violate the simplified model. A positive
+B04 package result would not by itself distinguish this temporal-noise path from learning
+or phase effects.
+
+### B04 engineering accepted before native execution
+
+The Implementer delivered only the six new code/test files in the assigned scope. The DM
+read the study differences from B03, the new runner and tests, and accepts the B/G dispatch,
+absent-G-gate handling, fixed seed/exposure scope and publication contract. The unchanged
+reactive B and ordinary G/H learning/evaluation paths remain recoverable at their original
+source versions. No native smoke fit or diagnostic episode was used.
+
+The focused synthetic check result is **32 passed in 3.26 seconds**: twelve new B04 checks,
+thirteen B03 checks and seven reactive B01 checks. Compilation passed. An earlier combined
+test collection encountered duplicate flat module names before executing tests; only the
+new files were renamed to `test_b04_*`, after which the complete combination passed. The
+DM's staged whitespace check, which also sees new files, then caught two trailing blank
+EOF lines in test files and removed only those blank lines. This changes no executable
+semantics and does not require repeated tests or review.
+
+Independent read-only engineering review found no material issue in the final scientific
+code, including inherited collector/learner calls, initialization/private RNG, information
+and phase, evaluation isolation, checkpoint/hash identity, partial results and admission
+ordering. It reused the focused check evidence. Actual native admission and forced-process
+termination were not tested synthetically; those are limits of this engineering evidence.
+The DM accepts the reviewed scope for exact-source publication and guarded native launch.
