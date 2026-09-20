@@ -258,6 +258,43 @@ def test_stable_joint_weights_are_bit_identical_to_uniform_learning():
     assert (joint["transitions"]["replay_normalized_weights"] == 1.0).all()
 
 
+def test_drifting_joint_loop_retains_the_complete_behavior_ratio():
+    config = small_config()
+    result = study.run_fit(config, arm="joint_is", seed=41)
+    transitions = result["transitions"]
+    for update, samples in enumerate(transitions["replay_indices"]):
+        current = int(transitions["collection_version"][update])
+        expected = []
+        for sample in samples:
+            past = int(transitions["collection_version"][sample])
+            peer_goal = int(transitions["teammate_goal"][sample])
+            now_q = config.teammate_right_probabilities[current]
+            old_q = config.teammate_right_probabilities[past]
+            ratio = now_q / old_q if peer_goal else (1 - now_q) / (1 - old_q)
+            now_p = config.ego_move_probabilities[current]
+            old_p = config.ego_move_probabilities[past]
+            target = 4 * int(transitions["ego_goal"][sample])
+            # The unchanged teammate primitive factors cancel. At an endpoint,
+            # actual ego hold also has probability 1 under both controllers.
+            for position, action in zip(
+                transitions["pre_positions"][sample, :, 0],
+                transitions["primitive_actions"][sample, :, 0],
+            ):
+                if position != target:
+                    ratio *= now_p / old_p if action else (1 - now_p) / (1 - old_p)
+            expected.append(ratio)
+        expected = np.asarray(expected)
+        np.testing.assert_allclose(
+            transitions["replay_raw_ratios"][update], expected,
+            rtol=2e-15, atol=0,
+        )
+        np.testing.assert_allclose(
+            transitions["replay_normalized_weights"][update],
+            expected / expected.mean(), rtol=2e-15, atol=0,
+        )
+    assert np.any(transitions["replay_raw_ratios"] != 1.0)
+
+
 def test_fit_counts_movement_rng_addresses_and_transition_audit_arrays():
     config = small_config()
     result = study.run_fit(config, arm="recent", seed=123)

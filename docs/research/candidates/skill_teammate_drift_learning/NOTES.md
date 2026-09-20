@@ -268,3 +268,34 @@ unchanged/unresolved: this is a concrete test of whether off-version data adds
 finite-learning value beyond a strong exact-context baseline. The pending shared
 dependency remains canonical active/lead integration by Root; no result request,
 native process handle or consumed scientific fit exists.
+
+## 2026-09-20 06:40 PDT — B01 implementation accepted; scientific result still unrun
+
+Published implementation commit: `fa4fb2cfed3724cdf517103fa8d036966fdaf2e4`, branch
+`codex/skill-teammate-drift-learning`. Independent read-only Reviewer
+`/root/dm_teammate_drift/review_joint_replay` read the complete changed numerical,
+collection, replay, evaluator and runner paths against this contract, ran the 15
+focused checks and whitespace check, and returned **no material finding / no repair
+requested**. Its scope did not include a successful native admission or production
+fit. The reviewer also identified the existing coverage limit: stable candidate
+learning had an end-to-end fixture, whereas drifted likelihood composition had
+component tests and static tracing.
+
+The DM closed that test coverage gap with a tiny A/B/A candidate fixture. An
+independent calculation from recorded actual actions and controller parameters
+reconstructs every raw joint likelihood ratio and global normalization across
+drift; it does not call the candidate likelihood helper. The scientific executable
+bytes are unchanged from the reviewed commit. Combined check now: **16 passed in
+0.23 s**, `git diff --check` clean. These checks establish implementation properties,
+not a native learning comparison. The DM accepts the implementation and its revised
+primary baseline; review advice itself is not empirical scientific evidence.
+
+**Boundary.** Direction remains exploring, with one prospective B01 and zero
+started production fits. There is no scientific result to read, and the judgment
+about corrected off-version replay versus strong exact-context replay remains
+unresolved. No baseline superiority, co-learning, current-HMASD skill utility or
+UAV claim follows from the source or tests. The concrete next observation is the
+predeclared 12-fit local-CPU batch and its full curves/diagnostics. Its current
+dependency is Root's shared-writer coordination and canonical active/lead index
+integration, followed by the existing actual-node admission. There is no duplicate
+request, live run handle, periodic watcher or owner science approval to invent.
