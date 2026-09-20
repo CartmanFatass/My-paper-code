@@ -1,0 +1,11 @@
+{
+  "claim_key": "11dec668684f33e3eae0d7e120ff7a58601d81947711547e84dfd7379e1af86e",
+  "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/11dec668684f33e3eae0d7e120ff7a58601d81947711547e84dfd7379e1af86e.json",
+  "manifest_ref": "/home/fires/.codex/worktrees/1275/hmasd-wsl/runs/ucope/reactive_rate_b03_8921/launch-manifest.json",
+  "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/11dec668684f33e3eae0d7e120ff7a58601d81947711547e84dfd7379e1af86e.json",
+  "pid": 1537717,
+  "runner_pid": 1537718,
+  "schema_version": 1,
+  "status": "accepted",
+  "updated_at": "2026-09-20T03:14:11.520804Z"
+}

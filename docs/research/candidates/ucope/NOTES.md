@@ -549,3 +549,124 @@ and owns read-only observation through their terminal witnesses. It reports actu
 arm transitions, exceptions and completion, not routine episode-count increments.
 The DM owns collection and the joint reading after all three are terminal. No B03
 scientific score has been read, and no successor or replacement is allocated.
+
+## 2026-09-19 — B03 complete: retain the simpler scalar package as a candidate
+
+The Monitor returned valid terminal witnesses for all three original invocations:
+COMPLETE, exit zero, empty stderr, 1097728 native team steps and 8192 Adam calls per
+invocation. Its active set is empty. Only then did the DM read the three scientific
+panels together. No restart, replacement, extra fit, checkpoint selection or additional
+evaluation occurred. The executed source is
+`5101c921e7ba793b95ec7ffef3289114cb9b27b9` throughout.
+
+### Native result and interpretation
+
+| Master | R | B | H | R−B, primary | B−H |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| 8921 | 0.1373240773 | 0.2061958493 | 0.1611799077 | −0.0688717720 | +0.0450159416 |
+| 8922 | 0.2045608641 | 0.2307566494 | 0.1717527103 | −0.0261957853 | +0.0590039391 |
+| 8923 | 0.1976960173 | 0.1857490713 | 0.1451625662 | +0.0119469460 | +0.0405865051 |
+
+The descriptive mean R−B is **−0.0277068705**, range [−0.0688717720, +0.0119469460].
+The third block is contrary evidence to a universal B advantage and remains visible.
+R−B has 12/52, 21/43 and 36/28 positive/negative world differences respectively;
+these are conditional panel descriptions, not additional training replications.
+R8921 is below hover by −0.0238558304. B−H is positive in each block, with descriptive
+mean +0.0482021286; this is a weak reference check, not a competent learned ordinary
+controller comparison. Mean arm returns are R 0.1798603195, B 0.2075671900 and
+H 0.1593650614. All individual outcomes and full final vectors remain published.
+
+This follows the prospective simplification branch: **provisionally retain B as the
+simpler development candidate**. R did not display a consistent useful increment
+in this batch, so the evidence is insufficient to prioritize its more complex gate.
+This is a bounded development choice, not proof that B is reliably superior or
+equivalent across training instances, and not confirmation. The three new blocks
+are not pooled with B02 or historical 8901 into an enlarged post-hoc result.
+
+### The mechanism that was active, and what remains unknown
+
+R has 68553 trainable actor/critic parameters and B 66313. All six common actors,
+critics and gates moved. R gate displacements are 1.3041175604 / 1.0691225529 /
+1.0823279619; B scalar displacements are 0.0332339108 / 0.0496865548 / 0.0344341621.
+B's initial logit norm is zero, so its relative displacement is correctly undefined.
+Its final KEEP probabilities are **0.488252 / 0.517560 / 0.487828**, verified from
+the saved two-logit checkpoints. Their observed eligible KEEP fractions are
+0.484159 / 0.518567 / 0.485003. R's corresponding observed fractions are
+0.347514 / 0.469431 / 0.582243; no unrecorded mean R probability is inferred.
+
+B therefore trained and operated, but its endpoint probabilities stayed close to
+half/half. This does not establish that learning the rate supplied B's result,
+that it was useless, or that freezing the rate at .5 would be equivalent. There
+was no frozen-B arm under this timing. Historical F differs in phase representation
+and training rules and cannot fill that missing comparison. The changed parameter
+count and absence of a gate-to-backbone gradient in B also prevent attribution solely
+to state conditioning. B's velocity actor still uses local feedback.
+
+The broader update is that the tested state-conditioned gate package has not earned
+priority over this simpler alternative at the selected exposure. The need for state
+feedback in other renewal designs is untouched. B02's two positive R−G observations
+remain real; this B03 result does not negate them. Equally, R−G from B02 plus B−R
+here cannot establish B−G: G/F were not fitted on these blocks, and the policies and
+worlds differ. Ordinary-feedback advantage and the benefit of rate learning remain
+open questions, without an automatic new fit allocation.
+
+The independent ResearchCritic returned `MATERIAL_DISSENT: no` for this provisional
+choice and advised the precise wording “this batch did not show a consistent useful
+increment,” rather than suggesting a reliable increment was proven absent. The DM
+adopts that wording and its qualifications. Current B03 is ended. The direction
+remains exploring, with B retained, no live operation and no selected successor or
+confirmation. Existing evidence suffices for this investment decision; another
+diagnostic, fixed-rate control or G comparison is not required merely to close it.
+
+### Complete exposure, independent reconstruction and recovery
+
+All six selected fits completed: 12288 training episodes / 3145728 training team
+steps / 24576 Adam calls; 576 evaluation episodes / 147456 evaluation team steps,
+including H. Total native team steps are 3293184. Evaluation used zero updates and
+left all learned parameters and training RNG states unchanged. The reactive sequence
+now contains fifteen related completed fits including 8901 and B02; the earlier T/L
+work remains additional. These counts do not turn development exposure into independent
+confirmation evidence.
+
+The DM read all 12864 episode rows and 6144 update rows and checked consecutive IDs,
+master/world-seed addresses, 256-step horizons, two-episode rollouts, four epochs and
+4096 updates per learned arm. J reconstructs from native reward_sum/256. All nine
+R−B/R−H/B−H final vectors, their means, and all R/B/H panels reproduce from the raw
+episode records. All JSON numerical values and six checkpoint tensor sets are finite;
+checkpoint object/arm/master/exposure identities and runner-recorded SHA256s match.
+The published episode/update SHA256s also match the final native files. This was
+retained-artifact reading only, with no new scientific execution.
+
+Complete summary, episode/update JSONL, native acceptance/preflight and exit files
+are retained under these original run directories:
+
+- [8921 summary](../../../../runs/ucope/reactive_rate_b03_8921/summary.json).
+- [8922 summary](../../../../runs/ucope/reactive_rate_b03_8922/summary.json).
+- [8923 summary](../../../../runs/ucope/reactive_rate_b03_8923/summary.json).
+
+Each directory's `checkpoints-and-console.tar.gz` preserves native `R_final.pt`,
+`B_final.pt`, stdout and stderr. Every member was compared byte-for-byte with its
+original; originals and admitted source snapshots remain untouched. Extracting the
+archive in its run directory restores the native names. Archive identities are:
+
+| Master | Bytes | Archive SHA256 |
+| --- | ---: | --- |
+| 8921 | 504027 | `5b3f332d98485eed30f65ae619e38a2a4a749bc510d1bab01fdf7db7f46194e2` |
+| 8922 | 504090 | `758a41d3f521486e5e7f0c476d4d78f7029515057e4f0e5bf7fa0ab1ddfab94a` |
+| 8923 | 503852 | `2aabf76b2ee00f12e4d8e0c124338212fd13aab1dcc07ade8e822c14d18787cc` |
+
+### Measured cost
+
+| Master | Runner-scoped wall s | Study-loop CPU s | Single-process peak RSS KiB | Native acceptance-to-exit s |
+| --- | ---: | ---: | ---: | ---: |
+| 8921 | 1673.8398 | 1672.5604 | 349512 | 1674.4235 |
+| 8922 | 1652.6217 | 1651.3547 | 349164 | 1653.1457 |
+| 8923 | 1657.5883 | 1656.2968 | 350724 | 1658.0749 |
+
+The parallel first-acceptance-to-last-exit span is 1728.8473 seconds (28.81 minutes),
+ending 2026-09-20 03:43:00.357607 UTC. Summed runner-scoped wall is 4984.0498 seconds
+and summed study-loop CPU is 4980.2119 seconds. The individual RSS maximum is not
+the simultaneous process total. Runner timing excludes final publication/exit;
+CPU excludes parser/admission/import preparation. Complete preparation, engineering,
+support and concurrent total memory remain unmeasured. Different arm counts and
+concurrency preclude treating the shorter span than B02 as a method speedup.
