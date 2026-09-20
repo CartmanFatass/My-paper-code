@@ -2655,3 +2655,38 @@ this way during implementation); the horizontal-nearest rule remains only as the
 fallback. The agent applies no conversion or clipping to actions; the environment scales by
 `max_speed × time_step` = 30 m per action unit and clips positions. The extension leaves the
 four rule panels and the label-effect block bit-identical with it on or off.
+
+## 2026-09-20 08:35 PDT — B08 fits complete and bit-identical; local probes stopped at the faithful-load check (technical, host numerics suspected); rerun of the probe on the fit's own host
+
+**Fits.** `b08_save_{772803,772903,773003}_a01` exited 0 on `wsl_4070` at launch sha
+`fbae667d9`, each with `final_weights.pt` (66,030,843 bytes) and `weights.json`. Collected by
+rsync; sha256 of weights, summary and sidecar equal the node's on all three. All 27 panels
+equal the recorded `b01_s1_d1280_<block>_a01` panels in every field except
+`d2_metrics.coordinator_inference_seconds`, a wall-clock timing. The save addition changed no
+result.
+
+**Local probes: technical failure, no probe score.** Run on the WSL host at launch sha
+`6ee15d7dd` as declared. All three stopped at `faithful_load`: the `as_trained` panel from the
+loaded weights does not equal the recorded rollout-45 panel (first differing world 0). Roots
+`b08_probe_{772803,772903,773003}` are kept as failed attempts. What the stop recorded:
+
+| block | J as_trained, loaded, WSL host | J recorded, rollout 45, node | max world diff | world corr | worlds exact |
+|---|---:|---:|---:|---:|---:|
+| 772803 | .45611 | .45587 | .034 | .93 | 0 / 32 |
+| 772903 | .35367 | .35470 | .099 | .85 | 0 / 32 |
+| 773003 | .50061 | .49935 | .042 | .80 | 0 / 32 |
+
+**Diagnosis so far.** The checkpoint is complete for the deployed policy: `use_obsnorm` and
+`use_statenorm` are False in the saved config (so no input normaliser exists to lose), the
+value normalisers are saved, and both policy modules are saved. The fit ran on an Intel
+i9-13900H, the probe on an AMD Ryzen 7 8745H. Same world seeds, means within .001, per-world
+scores correlated but none exact: this is the pattern of kernel-level float differences
+amplified over 500 closed-loop steps, not of a missing module. Not yet excluded: a silent skip
+in the non-strict `load_model`.
+
+**Decision (mine, recorded before any probe score exists).** Run the same probe, same code,
+on `wsl_4070`, where the fits ran and where the recorded D1280 roots exist; tags
+`b08_probe_<block>_n01`. This discriminates the two causes: exact equality there means host
+numerics, and the probe proceeds; inequality there means the load path, and I fix the load,
+not the check. The check is not relaxed in either case. No measure, rule, stratum or
+prediction of the 05:45 and 06:25 entries changes. Zero optimizer steps; not a fit.
