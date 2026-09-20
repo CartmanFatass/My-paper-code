@@ -2799,3 +2799,50 @@ labels differ, J responds to them, and the coordinator does not exploit it.
   conditions becomes the right next comparison, with random-mixture as its mandatory baseline.
   Either way `uniform_every_10` joins `as_trained` as a required comparator for any later
   termination arm on this learner.
+
+## 2026-09-20 15:28 PDT — prospective: label → J map at fixed weights, B09 (zero fits); owner decisions recorded
+
+**Owner, 2026-09-20 (after the B08 reply).** Codex's frozen-foundation termination training is
+paused by the owner; Claude continues. The two sides' changes are essentially orthogonal, so
+Claude keeps pushing FSD-only paths to `main`. The fast-forward of this checkout to
+`b254ed1ea` was the owner's own operation.
+
+**Object `FSD_LABEL_MAP_B09`.** Zero optimizer steps, the three B08 checkpoints, run on
+`wsl_4070` (the training host; B08 showed a fixed-weight panel is exact only there). Per block,
+on the same 32 worlds: `as_trained` (must equal the recorded rollout-45 panel exactly, and
+B08's `as_trained`), six `constant_c` panels (every agent executes label c for the whole
+episode), and — added now, before any score, to separate the strongest alternative —
+`uniform_frozen_episode` (each agent's label drawn uniformly at reset and held for the
+episode). Reduce adds the per-world best constant label (an upper envelope selected on the
+same scores, to be read as such). Eight panels per block, 24 in all; no fit.
+
+**Why the added rule.** B08's random rules mix labels across agents *and* over time. If every
+constant label is ≤ the random mixture, `uniform_frozen_episode` says whether the mixture's
+value is heterogeneity across agents (frozen-random ≈ random-every-10) or change over time
+(frozen-random < random-every-10).
+
+**Predictions (held loosely, as at 08:41):** P1 on 772903 some constant label beats as-trained
+by > .03; P2 best constant within .03 of as-trained on the other two; P3 per-world envelope
+exceeds as-trained by > .05 on 3/3. New: P4 `uniform_frozen_episode` within .02 of B08's
+`uniform_every_10` on 3/3 (B08 found every-step ≈ every-10, so time-mixing should not matter).
+Strongest alternative A: on 772903 every constant label ≤ `uniform_every_10`.
+
+**What each outcome changes** is as written at 08:41. Panel noise ≈ .03 J; three blocks, one
+checkpoint each; direction only.
+
+## 2026-09-20 15:55 PDT — B09 entry code written and accepted; no score exists
+
+`scripts/run_fsd_label_map_b09.py` and tests under `tests/.../label_map_b09/` (Implementer,
+accepted by me). New files only; B08's script, the frozen runners, `hmasd/` and `envs/` are
+untouched. `MapExecutionRule` subclasses B08's rule and overrides only the choice of executed
+label for the seven new rules; attachment, the infinite-cost guard, write-back, histograms and
+change fractions are B08's. B08's module tables are extended for one run and restored in a
+`finally` (tested, including after a raising run). Run-time checks raise unless a `constant_c`
+panel's agent histogram has mass only on c and every map rule's label change fraction is
+exactly 0. Lane ↔ world: the frozen panel runs one episode per lane, so lane i is world score
+i; `episodes_per_lane` is published and the join is invalid if it is ever not all ones.
+Reduce refuses a block unless faithful load holds, the weights sha256 equals B08's and the 32
+`as_trained` scores equal B08's exactly. Checks: 65 passed (23 B09 + 42 B08), mine; the
+Implementer's cross-object run gave 117 passed. Known limit: no production-scale panel has
+run; a constant label is off-distribution, and a non-finite component would stop that block
+with status incomplete — that would then be a decision, not an automatic rerun.
