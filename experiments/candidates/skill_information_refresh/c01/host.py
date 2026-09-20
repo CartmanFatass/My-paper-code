@@ -184,7 +184,8 @@ class CrossingHost:
         self.spent = np.zeros((self.batch, 2), dtype=bool)
         metric_names = ("jobs_started", "completed_jobs", "conflicts", "wait_ticks", "gate_opportunities",
             "gate_disagreement", "unknown_gate", "packets", "delivered", "choice_opportunities",
-            "forced_packets", "message_age_sum", "message_age_count", "send_peer_actionable",
+            "forced_packets", "message_age_sum", "message_age_count", "send_peer_near_crossing",
+            "send_peer_shared_near_gate",
             "send_before_peer_decision", "send_changed", "send_own_age_sum", "shared_jobs",
             "bypass_jobs", "route_choices_with_valid_peer")
         self.metrics = {name: np.zeros(self.batch, dtype=np.int64) for name in metric_names}
@@ -268,9 +269,12 @@ class CrossingHost:
         self.metrics["wait_ticks"] += (gate_opportunity & ~decisions).sum(1)
         self.metrics["message_age_sum"] += np.where(valid, age, 0).sum(1)
         self.metrics["message_age_count"] += valid.sum(1)
-        actionable_peer = (own[:, receiver, 0] == CROSSING) | (
+        nearby_peer = (own[:, receiver, 0] == CROSSING) | (
             (own[:, receiver, 0] == APPROACH) & (own[:, receiver, 1] <= 1))
-        self.metrics["send_peer_actionable"] += sent & actionable_peer
+        shared_near_gate = (own[:, receiver, 4] == SHARED) & (
+            own[:, receiver, 0] == APPROACH) & (own[:, receiver, 1] <= 1) & (own[:, receiver, 3] >= 2)
+        self.metrics["send_peer_near_crossing"] += sent & nearby_peer
+        self.metrics["send_peer_shared_near_gate"] += sent & shared_near_gate
 
         approaching = (self.stage == APPROACH) & (self.distance > 0)
         moves = approaching & self.worlds.advances[:, self.t]
