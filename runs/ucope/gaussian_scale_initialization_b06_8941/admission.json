@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "direction": "ucope",
+  "sha": "7ad9a8668d17a25724b9649dece7d5479e7d22c5",
+  "command_sha256": "5873a13fc3b97ff7ef72e0dc0837574fd59cdc1c0fc9c0833676e67d7f22607e",
+  "parent_pid": 1979089,
+  "child_pid": 1979090,
+  "accepted_at_epoch": 1789896978.5629637
+}

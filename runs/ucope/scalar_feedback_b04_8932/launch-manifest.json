@@ -1,0 +1,90 @@
+{
+  "acceptance": "accepted",
+  "accepted_at": "2026-09-20T04:18:16.918746Z",
+  "bootstrap_command": [
+    "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/6432770f64604ecc9b9bb280f5e0d419/scripts/hmasd_admission.py",
+    "_run-admitted",
+    "--runner",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/6432770f64604ecc9b9bb280f5e0d419/scripts/run_ucope_scalar_feedback_b04.py",
+    "--output",
+    "/home/fires/.codex/worktrees/1275/hmasd-wsl/runs/ucope/scalar_feedback_b04_8932",
+    "--",
+    "--master",
+    "8932",
+    "--out",
+    "/home/fires/.codex/worktrees/1275/hmasd-wsl/runs/ucope/scalar_feedback_b04_8932",
+    "--launch-sha",
+    "cab5b6ca26a4af101f72db0e89cb641bb0b63ad8"
+  ],
+  "claim_key": "24bda0f741dbd294458dcd55cfd0b5058cad2591de615d738f8567177b516b9e",
+  "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/24bda0f741dbd294458dcd55cfd0b5058cad2591de615d738f8567177b516b9e.json",
+  "command": [
+    "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/6432770f64604ecc9b9bb280f5e0d419/scripts/run_ucope_scalar_feedback_b04.py",
+    "--master",
+    "8932",
+    "--out",
+    "/home/fires/.codex/worktrees/1275/hmasd-wsl/runs/ucope/scalar_feedback_b04_8932",
+    "--launch-sha",
+    "cab5b6ca26a4af101f72db0e89cb641bb0b63ad8"
+  ],
+  "command_sha256": "52c3dd6b2083fc91b07f39e7d959f54cb570a8728c1ab6cb7f18dfc3d8897bf0",
+  "control_observation": {
+    "observed_at": "2026-09-20T04:18:16.704301Z",
+    "ref": "refs/heads/main",
+    "remote": "origin",
+    "sha": "fedb396e0d6995c207e0625bbb99fccb58b2ee26"
+  },
+  "control_root": "/home/fires/hmasd-wsl",
+  "created_at": "2026-09-20T04:18:16.720497Z",
+  "cwd": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/6432770f64604ecc9b9bb280f5e0d419",
+  "direction": "ucope",
+  "host_identity": "Jacob",
+  "identity_command": [
+    "/home/fires/.local/share/uv/python/cpython-3.10.20-linux-x86_64-gnu/bin/python3.10",
+    "scripts/run_ucope_scalar_feedback_b04.py",
+    "--master",
+    "8932",
+    "--launch-sha",
+    "cab5b6ca26a4af101f72db0e89cb641bb0b63ad8"
+  ],
+  "lead": "Codex DM",
+  "manifest_ref": "/home/fires/.codex/worktrees/1275/hmasd-wsl/runs/ucope/scalar_feedback_b04_8932/launch-manifest.json",
+  "node": "local_linux",
+  "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/24bda0f741dbd294458dcd55cfd0b5058cad2591de615d738f8567177b516b9e.json",
+  "output_root": "/home/fires/.codex/worktrees/1275/hmasd-wsl/runs/ucope/scalar_feedback_b04_8932",
+  "preflight": "/home/fires/.codex/worktrees/1275/hmasd-wsl/runs/ucope/scalar_feedback_b04_8932/admission-preflight.json",
+  "process": {
+    "detached": true,
+    "identity": {
+      "boot_id": "0c48e432-2a4b-4bcc-9576-32954aa2c6b8",
+      "kind": "linux_pid_start_ticks",
+      "pid": 1631864,
+      "session_id": 1631864,
+      "start_ticks": 14032707
+    },
+    "native_handle_kind": "posix_session",
+    "pid": 1631864,
+    "process_group_id": 1631864
+  },
+  "process_exit": "/home/fires/.codex/worktrees/1275/hmasd-wsl/runs/ucope/scalar_feedback_b04_8932/process-exit.json",
+  "published_remote": "origin",
+  "runner_process": {
+    "identity": {
+      "boot_id": "0c48e432-2a4b-4bcc-9576-32954aa2c6b8",
+      "kind": "linux_pid_start_ticks",
+      "pid": 1631865,
+      "session_id": 1631864,
+      "start_ticks": 14032711
+    },
+    "pid": 1631865,
+    "process_group_id": 1631864,
+    "supervisor_pid": 1631864
+  },
+  "schema_version": 1,
+  "sha": "cab5b6ca26a4af101f72db0e89cb641bb0b63ad8",
+  "source_root": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/6432770f64604ecc9b9bb280f5e0d419",
+  "stderr": "/home/fires/.codex/worktrees/1275/hmasd-wsl/runs/ucope/scalar_feedback_b04_8932/stderr.log",
+  "stdout": "/home/fires/.codex/worktrees/1275/hmasd-wsl/runs/ucope/scalar_feedback_b04_8932/stdout.log"
+}

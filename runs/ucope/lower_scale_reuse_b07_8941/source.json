@@ -1,0 +1,128 @@
+{
+  "object": "UCOPE_LOWER_SCALE_REUSE_B07",
+  "launch_sha": "088d0ca32fd50f6264904a5a0d7e01b9a5b0f6e8",
+  "runner": {
+    "path": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/a25f731d5db94b0685a0306d20e13bfc/scripts/run_ucope_lower_scale_reuse_b07.py",
+    "present": true,
+    "bytes": 1663,
+    "sha256": "c11bce21a56174bd9dbb7e461e73ac7abbaa8c8e9afa94c10046de04269075b2"
+  },
+  "study": {
+    "path": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/a25f731d5db94b0685a0306d20e13bfc/experiments/candidates/ucope/lower_scale_reuse_b07/study.py",
+    "present": true,
+    "bytes": 49401,
+    "sha256": "9564709a8ec48375116df9500ef7aa924bb429005753951ef7a289da8eaa968b"
+  },
+  "reactive_learner": {
+    "path": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/a25f731d5db94b0685a0306d20e13bfc/experiments/candidates/ucope/reactive_renewal_b01/reactive.py",
+    "present": true,
+    "bytes": 7727,
+    "sha256": "5de62a9fe8512601f427e3995a3bfa22a86d5bfb2f61b12792beaae435c6428a"
+  },
+  "scalar_gate": {
+    "path": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/a25f731d5db94b0685a0306d20e13bfc/experiments/candidates/ucope/reactive_rate_b03/scalar.py",
+    "present": true,
+    "bytes": 663,
+    "sha256": "adbb038a374a5566ec344dbb30d4b3546b647dda2d148d60f9e0a681cab04894"
+  },
+  "ordinary_learner": {
+    "path": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/a25f731d5db94b0685a0306d20e13bfc/experiments/candidates/ucope/uav_motion_prefix_b01/learner.py",
+    "present": true,
+    "bytes": 14150,
+    "sha256": "466ec7b0efabdf474f838b662e781a2b7a3b5e1c1a41096b6ccf0f00eb0471f1"
+  },
+  "ordinary_policy": {
+    "path": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/a25f731d5db94b0685a0306d20e13bfc/experiments/candidates/ucope/uav_motion_prefix_b01/policy.py",
+    "present": true,
+    "bytes": 6887,
+    "sha256": "e324640251d0d025549705ff7541b765e7b96733f422c48ee9c2f5bd07709614"
+  },
+  "inherited_input": {
+    "source_sha": "7ad9a8668d17a25724b9649dece7d5479e7d22c5",
+    "originals": {
+      "checkpoint": {
+        "path": "runs/ucope/gaussian_scale_initialization_b06_8941/Ghalf_final.pt",
+        "bytes": 271050,
+        "expected_sha256": "67b85e626f7d56c7e099f74b175c9ab147db3980463684f78f85d1b7017a82df",
+        "sha256": "67b85e626f7d56c7e099f74b175c9ab147db3980463684f78f85d1b7017a82df"
+      },
+      "summary": {
+        "path": "runs/ucope/gaussian_scale_initialization_b06_8941/summary.json",
+        "bytes": 65474,
+        "expected_sha256": "04bc2a22e5e1fa31e4c2075d7ce9e7ed2fcc283413eeb6cb1a9cd98ad185467a",
+        "sha256": "04bc2a22e5e1fa31e4c2075d7ce9e7ed2fcc283413eeb6cb1a9cd98ad185467a"
+      },
+      "source": {
+        "path": "runs/ucope/gaussian_scale_initialization_b06_8941/source.json",
+        "bytes": 1330,
+        "expected_sha256": "6ed1487b1e8c49357529a384df5ac8d2e324e4a2dbc0d3a825b37921c6654b46",
+        "sha256": "6ed1487b1e8c49357529a384df5ac8d2e324e4a2dbc0d3a825b37921c6654b46"
+      }
+    },
+    "copies": {
+      "checkpoint": {
+        "path": "/home/fires/.codex/worktrees/1275/hmasd-wsl/runs/ucope/lower_scale_reuse_b07_8941/inherited_Ghalf_final.pt",
+        "present": true,
+        "bytes": 271050,
+        "sha256": "67b85e626f7d56c7e099f74b175c9ab147db3980463684f78f85d1b7017a82df"
+      },
+      "summary": {
+        "path": "/home/fires/.codex/worktrees/1275/hmasd-wsl/runs/ucope/lower_scale_reuse_b07_8941/inherited_B06_summary.json",
+        "present": true,
+        "bytes": 65474,
+        "sha256": "04bc2a22e5e1fa31e4c2075d7ce9e7ed2fcc283413eeb6cb1a9cd98ad185467a"
+      },
+      "source": {
+        "path": "/home/fires/.codex/worktrees/1275/hmasd-wsl/runs/ucope/lower_scale_reuse_b07_8941/inherited_B06_source.json",
+        "present": true,
+        "bytes": 1330,
+        "sha256": "6ed1487b1e8c49357529a384df5ac8d2e324e4a2dbc0d3a825b37921c6654b46"
+      }
+    },
+    "checkpoint_metadata": {
+      "object": "UCOPE_GAUSSIAN_SCALE_INITIALIZATION_B06",
+      "arm": "Ghalf",
+      "seed": 8941,
+      "train_episodes": 2048,
+      "optimizer_steps": 4096,
+      "initial_log_std": [
+        -0.6931471824645996,
+        -0.6931471824645996,
+        -0.6931471824645996
+      ]
+    },
+    "common_initial_sha256": {
+      "Bhalf": "869831a92041996f603a980ed7b636fd70dd51cce1fa3432d317288ded4c91d4",
+      "Ghalf_recreated": "869831a92041996f603a980ed7b636fd70dd51cce1fa3432d317288ded4c91d4",
+      "B06_recorded": "869831a92041996f603a980ed7b636fd70dd51cce1fa3432d317288ded4c91d4"
+    },
+    "bound_source_identities": {
+      "ordinary_learner": {
+        "path": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/a25f731d5db94b0685a0306d20e13bfc/experiments/candidates/ucope/uav_motion_prefix_b01/learner.py",
+        "present": true,
+        "bytes": 14150,
+        "sha256": "466ec7b0efabdf474f838b662e781a2b7a3b5e1c1a41096b6ccf0f00eb0471f1"
+      },
+      "ordinary_policy": {
+        "path": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/a25f731d5db94b0685a0306d20e13bfc/experiments/candidates/ucope/uav_motion_prefix_b01/policy.py",
+        "present": true,
+        "bytes": 6887,
+        "sha256": "e324640251d0d025549705ff7541b765e7b96733f422c48ee9c2f5bd07709614"
+      },
+      "reactive_learner": {
+        "path": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/a25f731d5db94b0685a0306d20e13bfc/experiments/candidates/ucope/reactive_renewal_b01/reactive.py",
+        "present": true,
+        "bytes": 7727,
+        "sha256": "5de62a9fe8512601f427e3995a3bfa22a86d5bfb2f61b12792beaae435c6428a"
+      },
+      "scalar_gate": {
+        "path": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/a25f731d5db94b0685a0306d20e13bfc/experiments/candidates/ucope/reactive_rate_b03/scalar.py",
+        "present": true,
+        "bytes": 663,
+        "sha256": "adbb038a374a5566ec344dbb30d4b3546b647dda2d148d60f9e0a681cab04894"
+      }
+    },
+    "g_optimizer_constructed": false,
+    "retained_selection_scope": "Ghalf is a selected B06 instance reused without retraining; this is conditional selected-instance evidence, not a fresh G learning replicate."
+  }
+}

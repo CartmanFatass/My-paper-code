@@ -1,0 +1,90 @@
+{
+  "acceptance": "accepted",
+  "accepted_at": "2026-09-20T09:37:19.529673Z",
+  "bootstrap_command": [
+    "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/ee0926cee0b34392b3adc23755e6c82b/scripts/hmasd_admission.py",
+    "_run-admitted",
+    "--runner",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/ee0926cee0b34392b3adc23755e6c82b/scripts/run_ucope_gaussian_scale_initialization_b06.py",
+    "--output",
+    "/home/fires/.codex/worktrees/1275/hmasd-wsl/runs/ucope/gaussian_scale_initialization_b06_8943",
+    "--",
+    "--master",
+    "8943",
+    "--out",
+    "/home/fires/.codex/worktrees/1275/hmasd-wsl/runs/ucope/gaussian_scale_initialization_b06_8943",
+    "--launch-sha",
+    "7ad9a8668d17a25724b9649dece7d5479e7d22c5"
+  ],
+  "claim_key": "6b2b4df556bb2ea66d6f15b84487f1c27d9f31e33968eb6ce4a1aa49111f0e3b",
+  "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/6b2b4df556bb2ea66d6f15b84487f1c27d9f31e33968eb6ce4a1aa49111f0e3b.json",
+  "command": [
+    "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/ee0926cee0b34392b3adc23755e6c82b/scripts/run_ucope_gaussian_scale_initialization_b06.py",
+    "--master",
+    "8943",
+    "--out",
+    "/home/fires/.codex/worktrees/1275/hmasd-wsl/runs/ucope/gaussian_scale_initialization_b06_8943",
+    "--launch-sha",
+    "7ad9a8668d17a25724b9649dece7d5479e7d22c5"
+  ],
+  "command_sha256": "338be277c561b2fcf30d5529c0d2d74450b66bd65d724bacb2d4ff0490caf1e5",
+  "control_observation": {
+    "observed_at": "2026-09-20T09:37:19.340414Z",
+    "ref": "refs/heads/main",
+    "remote": "origin",
+    "sha": "a5d178a3c107f449621fa941285213d6ef9242e3"
+  },
+  "control_root": "/home/fires/hmasd-wsl",
+  "created_at": "2026-09-20T09:37:19.365201Z",
+  "cwd": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/ee0926cee0b34392b3adc23755e6c82b",
+  "direction": "ucope",
+  "host_identity": "Jacob",
+  "identity_command": [
+    "/home/fires/.local/share/uv/python/cpython-3.10.20-linux-x86_64-gnu/bin/python3.10",
+    "scripts/run_ucope_gaussian_scale_initialization_b06.py",
+    "--master",
+    "8943",
+    "--launch-sha",
+    "7ad9a8668d17a25724b9649dece7d5479e7d22c5"
+  ],
+  "lead": "Codex DM",
+  "manifest_ref": "/home/fires/.codex/worktrees/1275/hmasd-wsl/runs/ucope/gaussian_scale_initialization_b06_8943/launch-manifest.json",
+  "node": "local_linux",
+  "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/6b2b4df556bb2ea66d6f15b84487f1c27d9f31e33968eb6ce4a1aa49111f0e3b.json",
+  "output_root": "/home/fires/.codex/worktrees/1275/hmasd-wsl/runs/ucope/gaussian_scale_initialization_b06_8943",
+  "preflight": "/home/fires/.codex/worktrees/1275/hmasd-wsl/runs/ucope/gaussian_scale_initialization_b06_8943/admission-preflight.json",
+  "process": {
+    "detached": true,
+    "identity": {
+      "boot_id": "0c48e432-2a4b-4bcc-9576-32954aa2c6b8",
+      "kind": "linux_pid_start_ticks",
+      "pid": 1980441,
+      "session_id": 1980441,
+      "start_ticks": 15946971
+    },
+    "native_handle_kind": "posix_session",
+    "pid": 1980441,
+    "process_group_id": 1980441
+  },
+  "process_exit": "/home/fires/.codex/worktrees/1275/hmasd-wsl/runs/ucope/gaussian_scale_initialization_b06_8943/process-exit.json",
+  "published_remote": "origin",
+  "runner_process": {
+    "identity": {
+      "boot_id": "0c48e432-2a4b-4bcc-9576-32954aa2c6b8",
+      "kind": "linux_pid_start_ticks",
+      "pid": 1980442,
+      "session_id": 1980441,
+      "start_ticks": 15946975
+    },
+    "pid": 1980442,
+    "process_group_id": 1980441,
+    "supervisor_pid": 1980441
+  },
+  "schema_version": 1,
+  "sha": "7ad9a8668d17a25724b9649dece7d5479e7d22c5",
+  "source_root": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/ee0926cee0b34392b3adc23755e6c82b",
+  "stderr": "/home/fires/.codex/worktrees/1275/hmasd-wsl/runs/ucope/gaussian_scale_initialization_b06_8943/stderr.log",
+  "stdout": "/home/fires/.codex/worktrees/1275/hmasd-wsl/runs/ucope/gaussian_scale_initialization_b06_8943/stdout.log"
+}

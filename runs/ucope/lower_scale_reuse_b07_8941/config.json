@@ -1,0 +1,9 @@
+{
+  "master": 8941,
+  "horizon": 256,
+  "train_episodes": 2048,
+  "eval_episodes": 64,
+  "chunk": 32,
+  "watchdog_seconds": 6000.0,
+  "fixture": false
+}

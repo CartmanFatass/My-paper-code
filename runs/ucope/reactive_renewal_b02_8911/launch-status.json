@@ -1,0 +1,11 @@
+{
+  "claim_key": "b9380a7c35f00da2d4000196ce2d4ef729ddd8c36992c8d900ca4745e71d104d",
+  "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/b9380a7c35f00da2d4000196ce2d4ef729ddd8c36992c8d900ca4745e71d104d.json",
+  "manifest_ref": "/home/fires/.codex/worktrees/1275/hmasd-wsl/runs/ucope/reactive_renewal_b02_8911/launch-manifest.json",
+  "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/b9380a7c35f00da2d4000196ce2d4ef729ddd8c36992c8d900ca4745e71d104d.json",
+  "pid": 1459467,
+  "runner_pid": 1459468,
+  "schema_version": 1,
+  "status": "accepted",
+  "updated_at": "2026-09-20T02:04:48.607048Z"
+}

@@ -1,0 +1,7 @@
+{
+  "master": 8931,
+  "horizon": 256,
+  "eval_episodes": 64,
+  "watchdog_seconds": 1800.0,
+  "fixture": false
+}

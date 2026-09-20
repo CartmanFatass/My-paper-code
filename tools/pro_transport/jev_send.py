@@ -18,6 +18,7 @@ import hashlib
 import json
 import os
 import re
+import signal
 import subprocess
 import sys
 import time
@@ -34,8 +35,17 @@ PAGE_FACTS = """(() => {
   const composer = document.querySelector('#prompt-textarea');
   const users = [...document.querySelectorAll('[data-message-author-role="user"]')].map(text);
   const assistants = [...document.querySelectorAll('[data-message-author-role="assistant"]')].map(text);
+  const turns = [...document.querySelectorAll('[data-message-author-role]')].map(message => {
+    const container = message.closest('article,[data-testid^="conversation-turn"]') || message;
+    const messageBody = message.getAttribute('data-message-author-role') === 'user'
+      ? message.querySelector('.whitespace-pre-wrap') : null;
+    return {role: message.getAttribute('data-message-author-role'), text: text(message),
+      message_body: messageBody ? text(messageBody) : null, turn_text: text(container)};
+  });
+  const pageText = text(document.body).slice(0, 800);
   return {
     url: location.href,
+    title: document.title,
     composer: composer ? text(composer) : null,
     send_button: !!document.querySelector('[data-testid="send-button"]:not(:disabled)'),
     form_text: text(composer?.closest('form')),
@@ -53,7 +63,9 @@ PAGE_FACTS = """(() => {
       return words;
     })(),
     challenge: /just a moment|verify you are human/i.test(document.title + ' ' + text(document.body).slice(0, 400)),
-    users, assistants,
+    auth_required: !composer && /log in|sign in|sign up|登录|登入|注册/i.test(document.title + ' ' + pageText),
+    page_error: location.protocol === 'chrome-error:' || /aw, snap|page unresponsive|页面崩溃/i.test(document.title),
+    users, assistants, turns,
   };
 })()"""
 
@@ -425,6 +437,132 @@ def command_reconcile(args, cfg):
 
 
 ALWAYS_ALLOW = ("始终允许", "Always allow")
+WAIT_RPC_SECONDS = 20.0
+WAIT_OPEN_SECONDS = 40.0
+WAIT_RECOVERY_ATTEMPTS = 2
+WAIT_SAMPLE_SECONDS = 3.0
+
+
+class WaitCallTimeout(BaseException):
+    """A wait-side watchdog escaped browser helpers that catch Exception/OSError."""
+
+
+class WaitReadFailure(RuntimeError):
+    """The read-only browser target, page or operation binding is unusable."""
+
+
+def bounded_wait_call(call, seconds, label):
+    """Bound one wait-side browser/harness call on POSIX without a worker thread.
+
+    Browser Harness currently bounds each CDP IPC response at five seconds. This outer
+    timer also covers constructor retry loops and protects against a wedged harness call.
+    The wait recovery path is supported on the WSL/POSIX transport host; it refuses an
+    unbounded fallback on platforms without ``setitimer``.
+    """
+    seconds = max(0.001, float(seconds))
+    if not hasattr(signal, "setitimer"):
+        raise WaitCallTimeout(f"{label} cannot be bounded on this platform")
+    previous_handler = signal.getsignal(signal.SIGALRM)
+    previous_timer = signal.getitimer(signal.ITIMER_REAL)
+
+    def expired(_signum, _frame):
+        raise WaitCallTimeout(f"{label} timed out after {seconds:g}s")
+
+    signal.signal(signal.SIGALRM, expired)
+    signal.setitimer(signal.ITIMER_REAL, seconds)
+    started = time.monotonic()
+    try:
+        return call()
+    finally:
+        signal.setitimer(signal.ITIMER_REAL, 0)
+        signal.signal(signal.SIGALRM, previous_handler)
+        if previous_timer[0] > 0:
+            remaining = max(0.001, previous_timer[0] - (time.monotonic() - started))
+            signal.setitimer(signal.ITIMER_REAL, remaining, previous_timer[1])
+
+
+def make_wait_agent(url):
+    import jev_ultrafast.agent as jev_agent
+
+    return jev_agent.Agent(url, "Observe this conversation without sending anything.")
+
+
+def _conversation_id(url):
+    match = SETTLED_URL.search(url or "")
+    return match.group(0) if match else None
+
+
+def _wait_seconds(deadline, limit):
+    seconds = deadline - time.monotonic()
+    if seconds <= 0:
+        raise WaitCallTimeout("the total wait deadline expired")
+    return min(limit, seconds)
+
+
+def _observe_wait_page(agent, cfg, deadline):
+    if not bounded_wait_call(
+        lambda: cdp_version(cfg), _wait_seconds(deadline, WAIT_RPC_SECONDS), "CDP health check"
+    ):
+        raise WaitReadFailure("Chrome/CDP is not running")
+    page = bounded_wait_call(
+        lambda: facts(agent.browser), _wait_seconds(deadline, WAIT_RPC_SECONDS), "browser observation"
+    )
+    if not isinstance(page, dict) or not isinstance(page.get("turns"), list):
+        raise WaitReadFailure("browser observation returned no conversation facts")
+    return page
+
+
+def _bind_operation_turn(page, operation, committed):
+    """Relocate this operation's user turn in the current DOM observation."""
+    expected_hash = operation.get("squashed_sha256")
+    candidates = []
+    for index, turn in enumerate(page["turns"]):
+        if turn.get("role") != "user":
+            continue
+        body = turn.get("message_body")
+        message = squash(body if body is not None else turn.get("text"))
+        matches = message == committed if committed is not None else (
+            bool(expected_hash)
+            and hashlib.sha256(message.encode()).hexdigest() == expected_hash
+        )
+        if matches:
+            candidates.append((index, turn))
+    if len(candidates) != 1:
+        raise WaitReadFailure(
+            "conversation does not contain exactly one user turn for this operation"
+        )
+    index, turn = candidates[0]
+    attachment = operation.get("attachment")
+    if attachment and attachment not in (turn.get("turn_text") or ""):
+        raise WaitReadFailure("the operation's attachment is absent from its user turn")
+    return index
+
+
+def _answer_after_turn(page, user_index):
+    """Return only assistant text belonging to the bound user turn."""
+    answers = []
+    for turn in page["turns"][user_index + 1:]:
+        if turn.get("role") == "user":
+            break
+        if turn.get("role") == "assistant" and (turn.get("text") or "").strip():
+            answers.append(turn["text"].strip())
+    return answers[-1] if answers else ""
+
+
+def _receipt_commits(answer):
+    """Keep only hashes presented as a newly written result, not arbitrary source references."""
+    receipt_words = re.compile(
+        r"\b(?:wrote|written|created|pushed|committed|updated)\b|"
+        r"(?:已|成功)?(?:写入|提交|推送|更新)",
+        re.IGNORECASE,
+    )
+    delivery_words = re.compile(r"github|answer|notes|repository|repo|答案|答复|仓库|文件", re.IGNORECASE)
+    failed_words = re.compile(r"unavailable|failed|unable|cannot|can't|不可用|失败|无法|不能", re.IGNORECASE)
+    commits = []
+    for line in answer.splitlines():
+        if receipt_words.search(line) and delivery_words.search(line) and not failed_words.search(line):
+            commits.extend(re.findall(r"\b[0-9a-f]{40}\b", line, re.IGNORECASE))
+    return list(dict.fromkeys(commit.lower() for commit in commits))
 
 
 def approve_connector(agent, operation, cfg):
@@ -470,71 +608,221 @@ def approve_connector(agent, operation, cfg):
 
 
 def command_wait(args, cfg):
-    """Observation. COMPLETE needs equal assistant text across four samples three seconds apart and no Stop.
-    The one click it may make is the owner-authorised connector consent above."""
+    """Observe one accepted conversation and recover a failed read channel without resending."""
     operation = Operation(cfg, args.key)
-    if not operation.data.get("send_attempted"):
+    data = operation.data
+    if not data.get("send_attempted"):
         raise PreSendFailure("no attempted send under this key")
-    url = args.conversation_url or operation.data.get("conversation_url") or ""
+    recorded_url = data.get("conversation_url") or ""
+    url = args.conversation_url or recorded_url
     if not SETTLED_URL.search(url):
         raise PreSendFailure("no settled conversation URL; find the conversation and pass --conversation-url")
-    chrome_start(cfg, args.mode or operation.data["mode"])
+    if _conversation_id(recorded_url) and _conversation_id(recorded_url) != _conversation_id(url):
+        raise PreSendFailure("--conversation-url is not this operation's settled conversation")
+
+    committed = squash(Path(args.prompt_file).read_text(encoding="utf-8")) \
+        if args.prompt_file else None
+    if committed and hashlib.sha256(committed.encode()).hexdigest() != data.get("squashed_sha256"):
+        raise PreSendFailure("--prompt-file is not this operation's committed text")
+
+    deadline = time.monotonic() + max(0.0, args.timeout)
+    mode = args.mode or data["mode"]
+    told = None
+    agent = None
+    recoveries = 0
+    last_error_type = None
+    verified = False
+    previous, stable, answer = None, 0, ""
+    needs_recovery = False
+
+    def status(value):
+        nonlocal told
+        if value != told:
+            print(f"wait: {value}", file=sys.stderr, flush=True)
+            told = value
+
+    def remaining(limit):
+        return _wait_seconds(deadline, limit)
+
+    def close_agent():
+        nonlocal agent
+        if agent is not None:
+            try:
+                bounded_wait_call(agent.close, min(WAIT_RPC_SECONDS, 2.0), "browser close")
+            except WaitCallTimeout:
+                pass
+            except Exception:
+                pass
+        agent = None
+
+    def finish(state, reason=None, **extra):
+        value = {"state": state, "conversation_url": url, "recoveries": recoveries, **extra}
+        if reason:
+            value["reason"] = reason
+        return value
+
     load_jev(cfg)
-    import jev_ultrafast.agent as jev_agent
-    agent = jev_agent.Agent(url, "Observe this conversation.")
-    browser = agent.browser
     try:
-        prompt_seen = wait_for(browser, lambda f: f["users"], 40, "the conversation")
-        committed = squash(Path(args.prompt_file).read_text(encoding="utf-8")) if args.prompt_file else None
-        if committed and hashlib.sha256(committed.encode()).hexdigest() != operation.data.get("squashed_sha256"):
-            raise PreSendFailure("--prompt-file is not this operation's committed text")
-        if committed and not any(committed in squash(u) for u in prompt_seen["users"] + prompt_seen["user_turns"]):
-            raise PreSendFailure("this conversation does not hold the operation's prompt")
-        if operation.data.get("attachment"):
-            operation.save(attachment_seen=any(operation.data["attachment"] in t for t in prompt_seen["user_turns"]))
-        operation.save(conversation_url=url, send_effect="sent")
-        deadline = time.monotonic() + args.timeout
-        previous, stable, state, told = None, 0, "IN_PROGRESS", None
         while time.monotonic() < deadline:
-            page = facts(browser)
-            answer = page["assistants"][-1] if len(page["assistants"]) >= len(page["users"]) else ""
-            if page["approval"]:
-                if approve_connector(agent, operation, cfg):
+            if agent is None:
+                try:
+                    cdp_alive = bool(bounded_wait_call(
+                        lambda: cdp_version(cfg), remaining(WAIT_RPC_SECONDS), "CDP health check"
+                    ))
+                except WaitCallTimeout as error:
+                    cdp_alive = False
+                    last_error_type = type(error).__name__
+                except Exception:
+                    cdp_alive = False
+                    last_error_type = "CDPHealthCheckError"
+                needs_recovery = needs_recovery or not cdp_alive
+                if needs_recovery:
+                    if recoveries >= WAIT_RECOVERY_ATTEMPTS:
+                        status("error")
+                        return finish(
+                            "ERROR",
+                            "browser recovery budget exhausted before the conversation was readable",
+                            error_type=last_error_type or "ChromeUnavailable",
+                        )
+                    recoveries += 1
+                    status("recovering")
+                try:
+                    if not cdp_alive:
+                        bounded_wait_call(
+                            lambda: chrome_start(cfg, mode),
+                            remaining(WAIT_OPEN_SECONDS),
+                            "Chrome recovery",
+                        )
+                    agent = bounded_wait_call(
+                        lambda: make_wait_agent(url),
+                        remaining(WAIT_OPEN_SECONDS),
+                        "conversation open",
+                    )
+                    page = _observe_wait_page(agent, cfg, deadline)
+                except WaitCallTimeout as error:
+                    last_error_type = type(error).__name__
+                    close_agent()
+                    needs_recovery = True
+                    continue
+                except Exception as error:
+                    last_error_type = type(error).__name__
+                    close_agent()
+                    needs_recovery = True
+                    continue
+            else:
+                try:
+                    page = _observe_wait_page(agent, cfg, deadline)
+                except WaitCallTimeout as error:
+                    last_error_type = type(error).__name__
+                    close_agent()
+                    needs_recovery = True
                     previous, stable = None, 0
                     continue
-                # Not a connector the owner named, or Jev did not reach the instructed button.
-                state = "NEEDS_HUMAN"
-                break
-            # One long call replaces a polling loop of short ones; it reports a change, not every sample.
-            seen = "generating" if page["stop_button"] else "text" if answer else "waiting"
-            if seen != told:
-                print(f"wait: {seen}", file=sys.stderr, flush=True)
-                told = seen
-            stable = stable + 1 if answer and not page["stop_button"] and answer == previous else 0
+                except Exception as error:
+                    last_error_type = type(error).__name__
+                    close_agent()
+                    needs_recovery = True
+                    previous, stable = None, 0
+                    continue
+
+            if page.get("login") or page.get("auth_required"):
+                status("auth")
+                return finish("NEEDS_HUMAN", "provider login is required")
+            if page.get("challenge"):
+                status("auth")
+                return finish("NEEDS_HUMAN", "provider human verification is required")
+            if page.get("page_error"):
+                status("error")
+                return finish("ERROR", "provider page reported an unrecoverable error")
+            current = _conversation_id(page.get("url"))
+            if current and current != _conversation_id(url):
+                status("error")
+                return finish("ERROR", "browser moved to a different settled conversation")
+            if current is None:
+                last_error_type = "ConversationPageUnavailable"
+                close_agent()
+                needs_recovery = True
+                previous, stable = None, 0
+                continue
+            if not page["turns"]:
+                status("loading")
+                time.sleep(min(WAIT_SAMPLE_SECONDS, max(0.0, deadline - time.monotonic())))
+                continue
+            try:
+                bound_turn = _bind_operation_turn(page, data, committed)
+            except WaitReadFailure as error:
+                status("error")
+                return finish("ERROR", str(error), error_type=type(error).__name__)
+            needs_recovery = False
+            if not verified:
+                operation.save(
+                    conversation_url=url,
+                    send_effect="sent",
+                    attachment_seen=bool(
+                        not data.get("attachment")
+                        or data["attachment"] in (page["turns"][bound_turn].get("turn_text") or "")
+                    ),
+                )
+                verified = True
+                previous, stable = None, 0
+                status("accepted")
+
+            if page.get("approval"):
+                try:
+                    approved = bounded_wait_call(
+                        lambda: approve_connector(agent, operation, cfg),
+                        remaining(WAIT_OPEN_SECONDS),
+                        "connector approval",
+                    )
+                except WaitCallTimeout:
+                    approved = False
+                except Exception:
+                    approved = False
+                if approved:
+                    previous, stable = None, 0
+                    continue
+                status("auth")
+                return finish(
+                    "NEEDS_HUMAN",
+                    "an authorization prompt requires human review",
+                    approval_prompt=page["approval"],
+                )
+
+            answer = _answer_after_turn(page, bound_turn)
+            status("generating" if page.get("stop_button") else "accepted")
+            stable = stable + 1 if answer and not page.get("stop_button") and answer == previous else 0
             if stable >= 3:  # four equal samples over nine seconds, no Stop control
-                state = "COMPLETE"
                 break
             previous = answer
-            time.sleep(3)
-        result = {"state": state, "conversation_url": url, "users": len(prompt_seen["users"])}
-        if state == "NEEDS_HUMAN":
-            result.update(approval_prompt=page["approval"], approval_text=page["approval_text"][:200],
-                          partial_answer_chars=len(answer))
-        if state == "COMPLETE":
-            out = Path(args.answer_file)
-            out.parent.mkdir(parents=True, exist_ok=True)
-            out.write_text(answer + "\n", encoding="utf-8")
-            result.update(answer_file=str(out), answer_sha256=hashlib.sha256(answer.encode()).hexdigest(),
-                          answer_chars=len(answer))
-            # With the connector allowed Pro writes into the repository and leaves a receipt in chat.
-            # A receipt is not the answer: `deliver` reads and checks the commit it names.
-            commits = re.findall(r"\b[0-9a-f]{40}\b", answer)
-            result.update(kind="receipt" if commits and len(answer) < 1500 else "chat answer",
-                          receipt_commits=commits)
-            operation.save(completion="COMPLETE", answer_sha256=result["answer_sha256"], receipt_commits=commits)
-        return result
+            time.sleep(min(WAIT_SAMPLE_SECONDS, max(0.0, deadline - time.monotonic())))
+
+        if stable < 3:
+            return finish(
+                "IN_PROGRESS",
+                "observation window ended while Pro was still thinking"
+                if told == "generating"
+                else "observation window ended before a final reply was observed",
+                partial_answer_chars=len(answer),
+            )
+
+        out = Path(args.answer_file)
+        out.parent.mkdir(parents=True, exist_ok=True)
+        out.write_text(answer + "\n", encoding="utf-8")
+        answer_sha256 = hashlib.sha256(answer.encode()).hexdigest()
+        commits = _receipt_commits(answer)
+        kind = "receipt" if commits and len(answer) < 1500 else "chat answer"
+        operation.save(completion="COMPLETE", answer_sha256=answer_sha256, receipt_commits=commits)
+        status("complete")
+        return finish(
+            "COMPLETE",
+            answer_file=str(out),
+            answer_sha256=answer_sha256,
+            answer_chars=len(answer),
+            kind=kind,
+            receipt_commits=commits,
+        )
     finally:
-        agent.close()
+        close_agent()
 
 
 def git(*argv):
@@ -599,7 +887,7 @@ def question_key(repository, branch, subject, source_sha, target_path, question_
 
 
 def command_compose(args, cfg):
-    """The author's complete message becomes the document; the short message names it by file and hash."""
+    """Keep the complete author message in the attachment and compose its short cover note."""
     message = Path(args.message_file).read_text(encoding="utf-8").strip() + "\n"
     if not re.fullmatch(r"[a-z0-9][a-z0-9-]{2,60}", args.slug):
         raise PreSendFailure("slug: lower-case letters, digits and hyphens")
@@ -610,10 +898,12 @@ def command_compose(args, cfg):
     digest = hashlib.sha256(message.encode()).hexdigest()
     short = out / f"{args.slug}.short.txt"
     short.write_text(
-        f"HMASD Pro question, subject {args.subject}. The attached document {document.name} (sha256 {digest}) "
-        "is the complete message: repository, branch, source_sha, target path, headings, reading instructions "
-        "and the answer-writing instruction. Read it in full and follow it exactly.\n\n"
-        "If you cannot open the attachment, say so plainly and stop; do not answer from memory.\n",
+        f"这是一项 HMASD Pro 研究请求（主题：{args.subject}）。完整请求在附件 {document.name} 中，"
+        "请阅读全文，包括其中的材料读取要求、答复要求和 GitHub Answer 写入位置，并严格据此作答。\n\n"
+        "请优先将完整答复写入附件指定的 GitHub Answer。若 GitHub 读取或写入不可用，请如实说明；"
+        "若已读材料足以支持答复，仍请在当前聊天中输出完整答复，并明确任何信息缺口。"
+        "若缺少关键来源，请说明缺口，不要假装已经阅读，也不要凭记忆补全。"
+        "若无法读取附件，请说明后停止，不要凭记忆作答。\n",
         encoding="utf-8")
     return {"document": str(document), "document_sha256": digest, "short_message": str(short)}
 
