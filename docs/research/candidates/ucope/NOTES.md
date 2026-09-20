@@ -3013,3 +3013,208 @@ work after execution was the full result reading, contrary-curve check, independ
 and objective-level explanation above. UCOPE remains exploring; spending the authorized
 fits is not a scientific closure, owner pause or archive decision. Further native investment
 would need a fresh bounded allocation tied to that unresolved question.
+
+## 2026-09-20 — continued zero-fit reasoning: copying is temporal correlation, not variance reduction
+
+The investment question after B06 is whether another K comparison would buy useful evidence,
+not whether a completed experiment mechanically requires a successor. Before deciding that,
+I examine a common possible rationale for B: reusing a noisy command might be described as
+"smoothing" it. The following exact model separates fewer fresh draws from smaller command
+variance and gives a concrete reason why matching initial sigma does not match exploration.
+
+Fix a fresh-command distribution with mean m and centered innovation variance v in one
+coordinate. Each fresh draw is independent; the scalar KEEP gate has a fixed probability q,
+independent of these innovations. Keep B's actual eligibility law: the initial tick is fresh,
+and a KEEP must be followed by a fresh tick. Let c_t be the probability of copying at tick t,
+starting from t=0. Then
+
+`c_0=0; c_t=q*(1-c_(t-1)) = q/(1+q) * [1-(-q)^t]`.
+
+Every executed command still has marginal variance v. Only adjacent ticks can share the
+same fresh innovation, so `Cov(a_(t-1),a_t)=c_t*v`; covariances at lag two or more are zero.
+Consequently, for T ticks,
+
+`Var(sum_t (a_t-m)) = v * [T + 2*sum_(t=1)^(T-1) c_t]`.
+
+The long-horizon variance per tick approaches `v*[1+2q/(1+q)]`, between v and 2v. The
+stationary copied fraction is q/(1+q); fewer independent draws do not reduce single-command
+variance, and repetition increases the variance of the accumulated command in this model.
+The result requires no Gaussian assumption. It also applies to a fixed tanh-Gaussian fresh
+distribution after centering at its actual expected action, rather than at tanh(mu).
+
+The Critic identifies an important complementary fact: the command increments are smoother,
+because `E[(a_t-a_(t-1))^2]=2v*(1-c_t)`. Thus copying reduces increment roughness while
+preserving marginal variance and increasing accumulated-command variance. These are different
+quantities. The bridge rejects a generic denoising claim, not the possibility of smoother
+successive commands or a task that benefits from that property.
+
+I independently enumerated all finite branch laws using exact Fraction arithmetic for
+q in {0, 1/4, 1/2, 3/4, 1} and T=1..8. All 40 laws satisfy probability normalization,
+the recurrence, every covariance entry and the accumulated-variance identity. This is exact
+algebraic checking; no random simulation, environment evaluation or fit was performed.
+
+For scale only, B04's stored endpoint q values are .481144637/.488013893/.486103565. The
+same eligibility law predicts reset-to-T256 copy fractions .323989767/.327102313/.326239600;
+the recorded B04 evaluation fractions are .324645996/.329187012/.326232910. The corresponding
+**toy** accumulated-variance multipliers are 1.647979533/1.654204627/1.652479200. These are
+not estimates of native position variance or return effects. The finite-state copy-frequency
+calculation maps to the fixed scalar gate; the fixed-distribution covariance assumptions do
+not map to the recurrent, changing native command centers.
+
+A separate simple tracking example makes the omitted task structure explicit. Suppose the
+current fresh mean is the true target b_t with a deterministic/exogenous path independent
+of fresh innovations, fresh errors have zero mean and variance v, and loss is `(a_t-b_t)^2`.
+G's expected loss is v. With the same independent scalar gate,
+B's expected loss at t is `v+c_t*(b_(t-1)-b_t)^2`: copying preserves error variance and can add
+tracking lag. This is not a statement about the UAV reward, whose useful action is unknown
+and whose future consequences depend on coupled trajectories. Native B updates its recurrent
+state every tick; changing conditional means, tanh, boundary clipping, feedback and teammate
+coupling invalidate a direct application of the toy return or position formulas.
+In particular, making target drift endogenous can introduce the cross term
+`-2*E[1_KEEP*epsilon_(t-1)*(b_t-b_(t-1))]`; dropping it would falsely import the exogenous
+tracking conclusion into feedback control.
+
+The update is limited but useful: no general noise-reduction benefit follows from B's scalar
+copying operation. A future matched-sigma B/G gain could still reflect useful temporal
+exploration or representation/finite-learning effects, but needs an empirical justification
+in that regime. This does not supply a favorable Bhalf prediction, revive the failed C
+selection rule, or select a rate/AR control that earlier work declined. An independent Critic
+is now challenging whether a further bounded package comparison is worth preparing and
+which deployment endpoint would confront the improved ordinary controller honestly.
+
+### B07 prepared practical comparison: reuse against the improved ordinary endpoint
+
+The independent Critic recommends preparing one bounded comparison, with no material dissent,
+and I adopt that recommendation. After challenging the incremental cost, we select a
+conditional screen with three new B fits against the three retained Ghalf controllers.
+The new reason is B06's material improvement in ordinary control at the selected
+initialization, not a newly demonstrated K mechanism. B04 supplied no stable B advantage;
+B's gate is input-independent, C failed, and the host has no explicit switching reward.
+Further generic covariance algebra cannot rank these native learning packages. This
+comparison can inform whether to retain the simpler scalar-reuse package against the
+improved ordinary endpoint, including a decision to leave it idle.
+
+Prepared object **UCOPE_LOWER_SCALE_REUSE_B07** uses the existing B06 masters
+**8941, 8942, 8943**, with one new **Bhalf** fit per master and the corresponding retained
+**Ghalf** checkpoint from source `7ad9a8668d17a25724b9649dece7d5479e7d22c5`. Both learning
+histories initialize trainable log_std to log(.5). All other initial common actor and critic
+parameter bytes are paired by reproducing the recorded B06 initialization and checking its
+digest against the retained summary. Ghalf is never retrained in B07. Bhalf retains B04's
+two trainable scalar gate logits initialized to zero, the minimum-one / maximum-two-tick
+command law, primitive-time recurrent updates and unchanged reactive PPO. Ghalf retains
+ordinary phase-zero, every-tick fresh control with no gate or duration head. Both have the
+same legal local observations, own-command history and native actuator. B's eligibility bit
+is private state, not an extra exogenous observation. The package comparison does not isolate
+its representation, critic inputs, likelihood/credit route or copying.
+
+Each new Bhalf fit trains for **2048 episodes of 256 ticks**, matching Ghalf's already
+completed exposure, with two episodes per rollout, four PPO epochs, 32-tick recurrent chunks,
+gamma-one raw returns, entropy zero, agent-compound policy ratios, common actor-plus-critic
+norm clipping .5, Adam .0003 and no value normalization. Bhalf's log_std remains trainable;
+inherited Ghalf's was trainable during B06 and is now frozen. The learning histories have
+independent environments, optimizers, actor/critic tensors, recurrent states and private
+random generators. For base=100000*master, common initial parameters follow templates(master),
+which uses base+11. Paired training worlds are base+10000+episode. B's velocity and gate
+generators start at base+21 and base+22, the same initial addresses used by B06 Ghalf. B
+consumes fewer velocity draws, so equal initial generator states do not align later
+innovations by primitive tick or guarantee variance reduction. Ghalf's historical duration
+generator was unused. Its provenance, checkpoint digest and the frozen ordinary learner /
+policy source identities must match before training.
+
+After B training, evaluate all four frozen modes on **64 new worlds per master**, reset seeds
+base+40000+episode, disjoint from B06's base+30000 evaluation worlds. Shared private slot arrays
+are Gaussian[256,5,3] at base+90000+episode and uniform[256,5] at base+95000+episode. Arrays assign
+randomness by world/tick/agent, irrespective of which decisions consume it; they add no
+information to the actors. Bhalf_sampled uses the learned stochastic scalar gate and sampled
+fresh velocities. **Bhalf_mean keeps that same stochastic gate**, replacing only fresh
+velocities by tanh(mu); it is not a deterministic gate or C. Ghalf_sampled is ordinary sampled
+deployment; Ghalf_mean uses tanh(mu) every tick. Neither mean mode consumes Gaussian slots
+in command execution. G uses no gate slots. All modes reset full private histories and make
+zero optimizer updates. For the two B modes, the fixed scalar gate and shared gate slots imply
+identical branch/eligibility sequences even though their commands and world histories differ;
+retain and check this identity.
+
+**Primary: Bhalf_sampled minus Ghalf_mean.** This preserves B's existing deployment law and
+confronts the currently selected ordinary endpoint. The candidate's testable prediction is a
+positive primary, but present evidence supplies no strong favorable forecast. This is a
+practical package screen, with no claimed mechanism identification. Required secondary
+contrasts are Bhalf_mean minus Ghalf_mean, Bhalf_sampled minus Ghalf_sampled, Bhalf_mean minus
+Bhalf_sampled, and Ghalf_mean minus Ghalf_sampled. Save every paired-world vector, conditional
+SE and sign count per master, and the descriptive mean/range of all three training-instance
+comparisons. No outcome chooses the primary, a preferred deployment mode, checkpoint or
+world subset. Evaluate the inherited Ghalf checkpoints anew on every selected world; their
+old scores do not substitute for evaluation. Evaluation worlds do not become independent
+training replicates. Sigma .5 was selected using precisely these three Ghalf instances, so
+this is conditional selected-instance evidence, not a fresh independently sampled learning
+comparison after scale selection. Reconstructing initialization does not remove selection.
+Its effect on B-minus-G is unknown; do not describe it as necessarily conservative.
+
+Read a favorable primary as exploratory support for retaining this initialization-plus-reuse
+package on these selected instances, not proof of feedback-conditioned gating, a copying
+mechanism or a population ranking. A win only against Ghalf_sampled does not meet the practical
+primary. A favorable Bhalf_mean secondary is a separate deployment observation, not primary
+success or an automatic rescue. Mixed, adverse or imprecise primary evidence may justify
+leaving this scalar package idle; it does not establish a population K deficit, equivalence
+or prohibit all feedback-conditioned renewal. Three fresh G fits would improve the scope for
+generalization beyond these selected learning instances, but that is not necessary for the
+current investment decision. We do not buy those fits or promise a subsequent fresh batch.
+No scale/gate grid, extra seed, timing arm, confirmation or further Pro question follows from
+any result branch.
+
+Record B's scale and scalar-gate curves before collection and after each update, all new
+training returns, actual gate/fresh counts, common-actor/critic/gate movement and complete
+frozen-mode primitives. These observations distinguish actual package activity or scale
+collapse from the intended treatment; they do not act as post-result inclusion filters.
+There is no uniform training-curve dominance prediction, given B06's contrary 8942 curve.
+
+The prepared request is **three additional started fits**, 6,144 training episodes /
+1,572,864 training team steps / 12,288 optimizer calls, plus 768 final evaluations /
+196,608 evaluation steps and zero evaluation updates: **1,769,472 new native team steps**
+total. The three reused G fits retain their B06 development/selection provenance and are
+not newly started B07 fits; expose inherited and new work separately in the summary. All
+failed started attempts count; the request includes no replacement allowance. It would raise
+this owner's current-window total from 12 to 15 fits and therefore **cannot execute under
+the present authorization**. The 2026-09-21 04:06:07 UTC deadline is not extended by preparation.
+B04's matched B/G runner scopes were 1542–1587 seconds per pair and B06's were 1436–1437;
+these are a rough planning reference, not a guaranteed B07 duration. B07 trains only B and
+adds fresh evaluation of both saved endpoints; its actual duration remains to be measured.
+A prospective launch would use local_linux CPU FP32, one Torch/BLAS thread per process, at
+most three master invocations concurrently after fresh admission, and a 6000-second watchdog
+per invocation.
+
+### L0: prepare B07 without executing a new native batch
+
+Own only new code under `experiments/candidates/ucope/lower_scale_reuse_b07/`, runner
+`scripts/run_ucope_lower_scale_reuse_b07.py`, and tests under
+`tests/experiments/candidates/ucope/lower_scale_reuse_b07/`. The deliverable is the fixed
+three-fit conditional comparison above, reviewable before any request to amend the owner's
+fit ceiling. Existing
+shared/historical policy, learners, environment, collectors and run roots remain immutable.
+Use B's accepted training route and load each fixed Ghalf without an optimizer; private
+evaluation code may adapt the fixed-slot B05
+pattern without C or its quadrature calculation. Small existing accounting/identity helpers
+may be reused without generalizing the runner or creating a framework.
+
+The runner accepts only the three masters, output path and launch SHA, and requires admission
+before scientific imports/effects. Production configuration, environment factory, scale,
+horizon, inherited input mapping, learning route and endpoints have no CLI override.
+Before B scientific effects, validate all bound input bytes/provenance and the recreated
+paired initialization against B06. Record exact copied input checkpoint/summary bytes in
+the new result root, including their original SHA/path/digests; no lookup of latest or best.
+Keep config/source identity,
+checkpoint metadata, JSONL curves and episodes, complete raw evaluation arrays and summary
+artifacts sufficient to reconstruct every contrast. Register live counters before native
+effects and retain partial exposure on training, evaluation, watchdog or close failures.
+Count an episode-start scale only after an actual reset, including a subsequently failed
+episode. Preserve input RNGs, snapshots and terminal process identities.
+
+Focused checks use a fixed tiny **synthetic** fixture under pytest-managed temp scratch:
+paired initial common bytes and independent states, B-only training dispatch, actual
+movement, scalar-gate eligibility and forced renewal, sampled/mean execution and RNG slot
+semantics, unchanged evaluation parameters, fixed primary/secondary reductions, incomplete
+panel exclusion, partial-failure accounting and runner admission. In particular test that
+Bhalf_mean still samples the gate while using no Gaussian command slots, and both B modes
+produce identical branches under shared slots. No real UAV constructor, native episode,
+checkpoint replay, production fit or Pro call is authorized by this L0. The Implementer
+returns a diff/checks; the DM accepts after independent high-risk review, then publishes a
+concrete pending request. Execution remains contingent on a new explicit owner allocation.
