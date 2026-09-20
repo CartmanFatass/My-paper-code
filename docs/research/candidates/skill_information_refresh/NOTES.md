@@ -1359,3 +1359,91 @@ with this decision but is not the evidence that establishes it. This adoption ad
 fits, updates, simulations or launches; C remains at four exploratory fits, 1,277,952
 training ticks, 2,048 updates and 3,591,672 total team ticks across the recorded hosts.
 No code, results, A/B answer or shared-control file was changed.
+
+## 2026-09-20 — Final feasibility verdict: NOT_VIABLE_CLOSE
+
+### Decision on the current direction
+
+**NOT_VIABLE_CLOSE. Recommend closing `skill_information_refresh` and removing it from
+the active direction set.** This is the DM's current-scope scientific investment verdict,
+not a request to retain an active direction while waiting for a new target. It supersedes
+the idle/prepared-pause language in `176a5cbc74c16a7343e7856068594326e1a29163` and the
+direction-investment suspension plus open-ended re-entry task in
+`491504442972ee0d37c0055767c4ae5831ee04ca`. Those entries remain as historical reasoning;
+their proposed standing is no longer the decision. Root owns the shared RESEARCH index
+and should record this closure using the existing archived-direction vocabulary.
+
+The original question was whether learning **when** to refresh has independent practical
+value with skills, termination, message content and communication access fixed. The
+available evidence establishes a lawful timing-value opportunity, but does not establish
+an independent learned-scheduling problem worth further investment in the current scope.
+On the constructed host that isolates receiver-relevant value, a transparent VoI rule
+already solves the timing decision. On the original coupled crossing host, the tested
+learned policies do not improve on the strongest observed same-information stage rule.
+There is no selected next comparison using an already available legal target interface
+and feedback stream that changes this judgment.
+
+### Evidence that determines the verdict
+
+- **C01–C04: no residual practical learned advantage.** The three independent training
+  histories either reproduced polling or produced small conditional improvements over
+  AGE_CHANGE/POLL. On C04's common evaluation panel, ACTIVE_FIRST exceeded the frozen
+  learned policies by 12, 1 and 1 completed jobs respectively. This is an empirical
+  comparator result, not a proof that ACTIVE_FIRST is globally optimal. C03's targeted
+  stale-release repair reduced its intended stale-wait intermediate but lost 9 and 5
+  jobs in the two affected learned policies. Thus fresher information or fewer stale
+  waits cannot stand in for native usefulness. The complete readings remain in
+  `43d271914c20b1b3c496153a902d41a2e42ceef2` and the bound C01–C04 run directories.
+- **C05: the lawful opportunity is absorbed by transparent VoI.** With the mandatory
+  paid receiver context, fixed decoder, one data send, fixed delay and two available
+  send opportunities, the native advantage of early over late is exactly
+  `Delta = w * X - 4 * q`. Sending early iff `Delta > 0` (late on ties) optimizes this
+  declared decision. One exploratory learned history attained the same greedy choices
+  on all 18 contexts and exact mean reward 5.322222222, compared with 5 for the best
+  restricted stage/age/change rule. It did not exceed VOI. The positive existence and
+  narrow learnability result stand; multi-seed learning reliability, extra practical
+  value of learning, or the value of purchasing context were not established. Source
+  `d8680026026b06f0861601839444392c452e8c20`, collected/read results
+  `4ef39c08ae55c6dd623718b4072a7ddcc9b9e913`.
+- **The adverse predecessor is not redeemed.** Archived CADC's learned communication
+  package remained worse than polling in its recorded comparison (net difference
+  -0.013354921301). C's collision-free access and fixed behavior are a different
+  object. Neither C05's positive timing result nor its trained imitation of VOI
+  overturns that package-level contrary evidence.
+- **Pro supplies no presently executable exception.** The complete delivered answer at
+  `8904327f9598d4896cb9425550f84584deaa902a` (parent equals the committed question source;
+  only the assigned A answer subsection changed) has been read and adopted with the
+  qualifications in the preceding entry. It supports no successor fit on solved C05.
+  Its unknown `q(z)` example did not supply an existing target observation/history/
+  feedback mapping with an unresolved, practically relevant comparison against the
+  strongest same-information posterior-plus-VoI reference. Advice is not a new replicate
+  or independent empirical evidence.
+
+### Why this closes the current question rather than postponing it
+
+Hiding `q` in actual C05 does not expose a justified new learning opportunity: `q` is
+independent across cycles, so previous cycles do not identify the current hidden value.
+Under the unchanged two-action contract the strongest transparent decision uses the
+conditional flip probability in the same VoI expression. Giving the learner current
+`q`, a request, a priority or a receiver state unavailable to that comparator changes
+the information problem; such signals are not free. Replacing the host with a new
+unknown-regime or new target-feedback construction solely to maintain an active
+direction is not the original current-scope comparison. No such successor is selected,
+and none is left as an open admission, investigation or re-entry task.
+
+This closure does **not** assert that all learned communication scheduling is impossible,
+or erase lawful refresh value. It preserves the narrower result: recipient commitment,
+next action opportunity and uncertainty can matter, but in the available isolating host
+their value is captured by the transparent rule; the coupled host supplies no observed
+learned increment over its strong simple reference. These fixed scripted-host findings
+also do not establish benefits for current HMASD learned skills or a UAV deployment.
+Those scope limits are limits on the claim, not a reason to keep this direction active.
+
+No additional fit, seed, threshold search, architecture change, simulation or Pro request
+is authorized by this conclusion or planned by the DM. All accepted runs are collected
+and read; there is no pending scientific producer, launch, approval or adviser dependency.
+Cost is unchanged: four exploratory fits, 1,277,952 training team ticks, 2,048 optimizer
+updates and 3,591,672 total team ticks across the declared hosts. This entry adds zero
+result execution. Preserve the notebook, code and run evidence; perform no destructive
+cleanup. The only remaining coordination action is Root's shared-index closure update,
+not further direction research.
