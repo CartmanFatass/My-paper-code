@@ -911,3 +911,113 @@ actual arm transitions, exceptions and completion, without scores or routine epi
 increments. The DM will collect and jointly read all three completed panels. No B04
 scientific score has been read. The bounded continuation has six fits allocated to B04,
 no second batch selected and no Jev Pro question sent in this window.
+
+## Pro question 2026-09-19 scalar-rate-identification
+
+Conversation: Jev route; private account/conversation details remain only in the local
+transport operation, never in this notebook. This is the first of at most two Pro questions
+in the owner's bounded continuation window. B04's original operations remain under Monitor;
+all three have reached their G arm, but no B04 scientific score has been read or supplied.
+
+**Question.** If the pending B04 development comparison justifies retaining scalar renewal
+B, what is the smallest useful way to distinguish the value of learning the scalar rate
+from the value of the persistence package itself? Critique a fresh learned-B versus
+frozen-q=.5 B comparison under the same reactive timing. State exactly what it identifies,
+what it does not, and whether a bounded frozen-policy intervention could change the
+investment decision more cheaply. This is a targeted identification/design question, not
+a request to judge B04 before its results or to manufacture a new architecture.
+
+### Standing and strongest alternative
+
+Historical 8901 R−G was −0.0180633. B02's two fresh R−G differences were +0.0188447 and
++0.0331383, while R−F was −0.0062014 and +0.1504105. B03 then found R−B differences
+−0.0688717720, −0.0261957853 and +0.0119469460 and provisionally retained simpler B.
+Keep the third block as contrary evidence. B's final KEEP probabilities were 0.488252,
+0.517560 and 0.487828 after 2048 training episodes; its two logits and common actor/critic
+all moved. Endpoint proximity to .5 does not reveal the training path or prove equivalence
+to a frozen gate. There is no existing frozen-B arm under this exact timing. Historical F
+uses precommitted durations and different phase/credit semantics and cannot substitute.
+
+B has two global, input-independent logits, starts at .5, and uses full reactive PPO credit.
+Forced fresh becomes eligible; eligible KEEP copies the actual last command and makes the
+next tick forced fresh; END draws fresh and stays eligible. The velocity actor uses lawful
+local observations, previous command and recurrent history on every tick, including holds.
+G draws fresh innovations each tick but its recurrent action means are not IID. B04 directly
+compares B and G on three new training blocks, six fits, at the same inherited training
+budget, final sampled 64-world panel and native J. Its frozen source is
+`cab5b6ca26a4af101f72db0e89cb641bb0b63ad8`; it is in flight and not part of the observed
+score evidence for this question. Do not seek live/unpublished B04 scores.
+
+The simpler explanation is that command copying changes temporal noise, visited states and
+learning exposure even with an entirely fixed gate. The supplied temporal-alignment work
+also shows that whole-calendar exchange does not identify the value of a newest observation:
+retained-command information can produce the same gap, and contributions can cancel. The
+one-decision covariance identity is not a full-MARL trajectory decomposition. No AR-noise
+arm or calendar-exchange panel is currently selected.
+
+One candidate follow-up, **not yet selected**, would compare independently trained B and
+identical B with both gate logits frozen at zero, with three fresh masters and no change to
+phase, recurrent update, eligibility, native objective or conditional action likelihood.
+This removes learned rate adaptation but can change exploration during training as well as
+deployment behavior. A second possibility is to clamp q=.5 only during a new frozen-policy
+evaluation of learned B. That keeps learned velocity weights fixed, but changes their
+deployment distribution and says little by itself about the training benefit. We need a
+careful estimand and decision value, not the assertion that one of these must be run.
+
+### Context and source precedence
+
+Paths marked `source_sha` resolve at the full published question commit supplied by Transport.
+Use current owner authorization and constitution as governance; methods are not additional
+approval rules; older cards and runs are evidence with their frozen meaning.
+
+- `source_sha`: `docs/project/OPERATING_CONSTITUTION.md` sections 1, 3, 5 and 8, and
+  `.agents/skills/hmasd-scientific-tools/SKILL.md` sections Update the working explanation,
+  Simple-model and literature bridges, Comparators and MARL information, and Statistics.
+  Exploration may remain inconclusive; fit count alone does not turn it into confirmation.
+- `source_sha`: this notebook's B02-complete and B03-complete sections, plus selected B04
+  and its temporal-insight/constant-q bridge. These contain the prior explanations and all
+  consequential contrary results. Supporting native summaries, if needed, are
+  `runs/ucope/reactive_renewal_b02_8911/summary.json`,
+  `runs/ucope/reactive_renewal_b02_8912/summary.json`, and the three
+  `runs/ucope/reactive_rate_b03_8921/summary.json`,
+  `runs/ucope/reactive_rate_b03_8922/summary.json`, and
+  `runs/ucope/reactive_rate_b03_8923/summary.json` paths.
+- `source_sha`: `experiments/candidates/ucope/reactive_rate_b03/scalar.py` and
+  `experiments/candidates/ucope/reactive_renewal_b01/reactive.py` establish actual B gate,
+  eligibility, branch likelihood and PPO credit. Read the directly relevant source before
+  proposing a frozen-gate or imposed-policy intervention.
+- Explicit separate source: the owner-supplied
+  [`TEMPORAL_BEHAVIOR_STATE_ALIGNMENT_20260919.md` at 646ab539d2a2ef689d0e4ee977f327f79cf2215b](https://github.com/CartmanFatass/My-paper-code/blob/646ab539d2a2ef689d0e4ee977f327f79cf2215b/docs/research/designs/TEMPORAL_BEHAVIOR_STATE_ALIGNMENT_20260919.md),
+  especially Exact one-decision result and Interpretation update. It supplies finite-model
+  counterexamples, not native evidence. No unrelated FSD conclusion is requested.
+
+### Allowance, constraints and requested answer
+
+Owner has explicitly continued this direction through 2026-09-21 04:06:07 UTC, with at most
+twelve new fits in at most two exploratory batches in this window. B04 allocates six; at
+most one further six-fit batch remains, with no more than 2048 × 256 steps per fit. No
+follow-up is selected until the DM jointly reads B04. Any proposed native evaluation must
+also name its checkpoint population, fresh worlds, RNG coupling, estimand and non-fit cost;
+zero fits does not make an unbounded evaluation search free. Twenty-one related reactive
+fits will have been exposed if B04 completes, plus older T/L work. No confirmation is granted.
+
+Please return a focused argument that changes the next decision: what near-.5 endpoints do
+and do not imply; an explicit counterexample or simple derivation where useful; the most
+informative feasible control if B04 supports retaining B; and how a mixed/adverse B04 reading
+would change that recommendation. Distinguish training-path effects from conditional
+deployment substitution, and a controlled component comparison from a claim of universal
+mechanism value. Predict both an intermediate observation and its possible native consequence,
+state the strongest remaining alternative and omitted MARL coupling, and give fit/non-fit
+cost. A conclusion that the next fit is not worth buying is acceptable if it identifies the
+remaining reasoning question. Include `MATERIAL_DISSENT: yes/no` for the proposed conditional
+follow-up, cite consequential sources actually read, and name decision-critical unread gaps.
+
+Do not train, evaluate a native checkpoint, change any in-flight input, allocate fits or
+create a new workflow requirement. Write advice only into the empty `### Answer` subsection
+of this question in `docs/research/candidates/ucope/NOTES.md` on branch
+`codex/ucope-feedback-renewal`. Read the question at the pinned source, fetch the latest
+target file before writing and use its actual blob SHA, preserving every other byte.
+Stop on overlapping edits. Report the actual answer commit on success. If the GitHub write
+fails, return the entire answer in chat, not only a commit SHA, link or delivery status.
+
+### Answer
