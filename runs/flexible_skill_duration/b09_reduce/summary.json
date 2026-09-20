@@ -1,0 +1,2746 @@
+{
+  "object_id": "FSD_LABEL_MAP_B09",
+  "card": "docs/research/candidates/flexible_skill_duration/NOTES.md (2026-09-20 08:41 PDT next research judgment; B09 prospective entry)",
+  "command": "reduce",
+  "launch_sha": "fd8402f592ac310cdccc4619137c041796df29b6",
+  "probe_launch_sha": "fd8402f592ac310cdccc4619137c041796df29b6",
+  "b08_probe_launch_sha": "1c21cbc93e0d756de4db28b7e654469cace267de",
+  "reference_object_ids": [
+    "FSD_LABEL_CONTENT_B08"
+  ],
+  "status": "complete",
+  "arm": {
+    "name": "D_SAVE",
+    "overrides": {},
+    "coordinator_batch_size": 1280,
+    "caps": {
+      "skill_cap_k_max": 10,
+      "team_cap_k_Z": 10
+    }
+  },
+  "rules": [
+    "as_trained",
+    "constant_0",
+    "constant_1",
+    "constant_2",
+    "constant_3",
+    "constant_4",
+    "constant_5",
+    "uniform_frozen_episode"
+  ],
+  "rule_definitions": {
+    "constant_0": "at every step, in every lane, every agent executes agent label 0 and the team label is 0 % n_Z. the executed labels are written back into `env_team_skills`/`env_agent_skills` exactly as B08's rewriting rules write them (scripts/run_fsd_label_content_b08.py, `ExecutionRule._step`), so the label the agent holds is the label it executed. No cap is moved (`RULE_CAPS` adds nothing for these rules): the frozen caps-10 cadence stands, the coordinator decides at the same ticks as `as_trained` and only its choice is discarded. hmasd/networks.py:1801-1809 `SkillDiscoverer.forward` passes only the observation, the *agent* label and the hidden state, so the team label never reaches the low-level actor: it reaches the low-level critic (hmasd/networks.py:1557-1560) and the coordinator only. On a fixed-weight execution panel neither of those can move an action, so under `constant_c` the team label `c % n_Z` is bookkeeping - it keeps the agent's held team label and the executed one equal - and the behaviour is the agent label c alone",
+    "constant_1": "at every step, in every lane, every agent executes agent label 1 and the team label is 1 % n_Z. the executed labels are written back into `env_team_skills`/`env_agent_skills` exactly as B08's rewriting rules write them (scripts/run_fsd_label_content_b08.py, `ExecutionRule._step`), so the label the agent holds is the label it executed. No cap is moved (`RULE_CAPS` adds nothing for these rules): the frozen caps-10 cadence stands, the coordinator decides at the same ticks as `as_trained` and only its choice is discarded. hmasd/networks.py:1801-1809 `SkillDiscoverer.forward` passes only the observation, the *agent* label and the hidden state, so the team label never reaches the low-level actor: it reaches the low-level critic (hmasd/networks.py:1557-1560) and the coordinator only. On a fixed-weight execution panel neither of those can move an action, so under `constant_c` the team label `c % n_Z` is bookkeeping - it keeps the agent's held team label and the executed one equal - and the behaviour is the agent label c alone",
+    "constant_2": "at every step, in every lane, every agent executes agent label 2 and the team label is 2 % n_Z. the executed labels are written back into `env_team_skills`/`env_agent_skills` exactly as B08's rewriting rules write them (scripts/run_fsd_label_content_b08.py, `ExecutionRule._step`), so the label the agent holds is the label it executed. No cap is moved (`RULE_CAPS` adds nothing for these rules): the frozen caps-10 cadence stands, the coordinator decides at the same ticks as `as_trained` and only its choice is discarded. hmasd/networks.py:1801-1809 `SkillDiscoverer.forward` passes only the observation, the *agent* label and the hidden state, so the team label never reaches the low-level actor: it reaches the low-level critic (hmasd/networks.py:1557-1560) and the coordinator only. On a fixed-weight execution panel neither of those can move an action, so under `constant_c` the team label `c % n_Z` is bookkeeping - it keeps the agent's held team label and the executed one equal - and the behaviour is the agent label c alone",
+    "constant_3": "at every step, in every lane, every agent executes agent label 3 and the team label is 3 % n_Z. the executed labels are written back into `env_team_skills`/`env_agent_skills` exactly as B08's rewriting rules write them (scripts/run_fsd_label_content_b08.py, `ExecutionRule._step`), so the label the agent holds is the label it executed. No cap is moved (`RULE_CAPS` adds nothing for these rules): the frozen caps-10 cadence stands, the coordinator decides at the same ticks as `as_trained` and only its choice is discarded. hmasd/networks.py:1801-1809 `SkillDiscoverer.forward` passes only the observation, the *agent* label and the hidden state, so the team label never reaches the low-level actor: it reaches the low-level critic (hmasd/networks.py:1557-1560) and the coordinator only. On a fixed-weight execution panel neither of those can move an action, so under `constant_c` the team label `c % n_Z` is bookkeeping - it keeps the agent's held team label and the executed one equal - and the behaviour is the agent label c alone",
+    "constant_4": "at every step, in every lane, every agent executes agent label 4 and the team label is 4 % n_Z. the executed labels are written back into `env_team_skills`/`env_agent_skills` exactly as B08's rewriting rules write them (scripts/run_fsd_label_content_b08.py, `ExecutionRule._step`), so the label the agent holds is the label it executed. No cap is moved (`RULE_CAPS` adds nothing for these rules): the frozen caps-10 cadence stands, the coordinator decides at the same ticks as `as_trained` and only its choice is discarded. hmasd/networks.py:1801-1809 `SkillDiscoverer.forward` passes only the observation, the *agent* label and the hidden state, so the team label never reaches the low-level actor: it reaches the low-level critic (hmasd/networks.py:1557-1560) and the coordinator only. On a fixed-weight execution panel neither of those can move an action, so under `constant_c` the team label `c % n_Z` is bookkeeping - it keeps the agent's held team label and the executed one equal - and the behaviour is the agent label c alone",
+    "constant_5": "at every step, in every lane, every agent executes agent label 5 and the team label is 5 % n_Z. the executed labels are written back into `env_team_skills`/`env_agent_skills` exactly as B08's rewriting rules write them (scripts/run_fsd_label_content_b08.py, `ExecutionRule._step`), so the label the agent holds is the label it executed. No cap is moved (`RULE_CAPS` adds nothing for these rules): the frozen caps-10 cadence stands, the coordinator decides at the same ticks as `as_trained` and only its choice is discarded. hmasd/networks.py:1801-1809 `SkillDiscoverer.forward` passes only the observation, the *agent* label and the hidden state, so the team label never reaches the low-level actor: it reaches the low-level critic (hmasd/networks.py:1557-1560) and the coordinator only. On a fixed-weight execution panel neither of those can move an action, so under `constant_c` the team label `c % n_Z` is bookkeeping - it keeps the agent's held team label and the executed one equal - and the behaviour is the agent label c alone",
+    "uniform_frozen_episode": "at each lane's episode reset the team label and each agent's label are drawn uniformly at random from a dedicated generator, `label_generator(evaluation_seed, 'uniform_frozen_episode')`, and then held for the whole episode by the same holding logic B08's `frozen_episode` uses for the coordinator's own reset labels; the drawn labels are written back like every other rewriting rule and the caps-10 cadence is untouched, so the coordinator still decides at the same ticks and its choice is discarded. It is the random counterpart of `frozen_episode`: one fixed assignment per episode that the coordinator did not choose. The draws come from that dedicated generator alone and touch no global NumPy, Python or torch stream. The drawn assignment of every lane-episode is recorded, so a reading can relate the heterogeneity of an assignment to the world score it produced",
+    "as_trained": "the frozen evaluation route exactly: deterministic (argmax) coordinator labels, caps of 10, nothing replaced. The labels are only read, so this panel is the unmodified one that (a) compares with the recorded fit"
+  },
+  "b08_rules": [
+    "as_trained",
+    "frozen_episode",
+    "uniform_every_step",
+    "uniform_every_10"
+  ],
+  "b08_reference_rule": "uniform_every_10",
+  "quantity": "J of a rule is the mean of its panel's native world scores at the saved weights; a difference is the rule minus `as_trained` on the same block, the same worlds and the same evaluation seeds, so every comparison here is paired within a block. B08's four rules come from B08's own probe of the same checkpoint, and `uniform_every_10` is the rule this map is read against",
+  "blocks": [
+    {
+      "training_seed": 772803,
+      "evaluation_seed": 782803,
+      "status": "complete",
+      "missing_or_invalid": {},
+      "weights_match": true,
+      "as_trained_identical_to_b08": true,
+      "J_by_rule": {
+        "as_trained": 0.45587469857693386,
+        "constant_0": 0.34900398680386885,
+        "constant_1": 0.43896236008144474,
+        "constant_2": 0.4542809793576539,
+        "constant_3": 0.4009353833957562,
+        "constant_4": 0.4228362867215988,
+        "constant_5": 0.3256863019712888,
+        "uniform_frozen_episode": 0.4161708938785986
+      },
+      "J_minus_as_trained": {
+        "as_trained": 0.0,
+        "constant_0": -0.10687071177306501,
+        "constant_1": -0.01691233849548912,
+        "constant_2": -0.0015937192192799765,
+        "constant_3": -0.05493931518117767,
+        "constant_4": -0.03303841185533507,
+        "constant_5": -0.13018839660564507,
+        "uniform_frozen_episode": -0.03970380469833523
+      },
+      "b08_J_by_rule": {
+        "as_trained": 0.45587469857693386,
+        "frozen_episode": 0.4390673201556599,
+        "uniform_every_step": 0.4216415898407049,
+        "uniform_every_10": 0.4338708303022286
+      },
+      "b08_J_minus_as_trained": {
+        "as_trained": 0.0,
+        "frozen_episode": -0.016807378421273944,
+        "uniform_every_step": -0.03423310873622898,
+        "uniform_every_10": -0.02200386827470524
+      },
+      "best_constant": {
+        "label": 2,
+        "J": 0.4542809793576539,
+        "J_minus_as_trained": -0.0015937192192799765,
+        "worst_label": 5,
+        "worst_J": 0.3256863019712888,
+        "max_minus_min": 0.1285946773863651,
+        "J_by_label": {
+          "0": 0.34900398680386885,
+          "1": 0.43896236008144474,
+          "2": 0.4542809793576539,
+          "3": 0.4009353833957562,
+          "4": 0.4228362867215988,
+          "5": 0.3256863019712888
+        },
+        "ranking": [
+          2,
+          1,
+          4,
+          3,
+          0,
+          5
+        ],
+        "definition": "the constant label whose own panel has the highest mean J on this block's 32 worlds, the lowest label breaking an exact tie; `ranking` is every label from the highest to the lowest panel J. One panel per label on the same worlds and the same evaluation seeds, so the comparison is paired; the conditional noise of a panel is about 0.03 J and a gap smaller than that is not read"
+      },
+      "best_constant_minus_as_trained": -0.0015937192192799765,
+      "best_constant_minus_b08_uniform_every_10": 0.020410149055425264,
+      "max_constant_minus_min_constant": 0.1285946773863651,
+      "constants_above_as_trained_by_the_margin": [],
+      "constants_at_or_below_b08_uniform_every_10": [
+        0,
+        3,
+        4,
+        5
+      ],
+      "every_constant_at_or_below_b08_uniform_every_10": false,
+      "uniform_frozen_episode_minus_as_trained": -0.03970380469833523,
+      "uniform_frozen_episode_minus_b08_uniform_every_10": -0.01769993642362999,
+      "oracle_constant_envelope_J": 0.4653065913177006,
+      "oracle_envelope_minus_as_trained": 0.009431892740766723,
+      "oracle_envelope_selection_note": "for each world separately, the maximum over the constant labels of that world's score, averaged over the worlds. It is an upper envelope *selected on the same 32 scores it is computed from*: with 6 labels and a per-panel conditional evaluation noise of about .03 J the maximum of 6 noisy scores is biased upward by construction, so the envelope is a ceiling on what a perfect per-world label oracle could have scored here and is not an achievable policy, not a held-out estimate and not a difference anyone can act on",
+      "per_world_best_constant_label_counts": {
+        "0": 0,
+        "1": 6,
+        "2": 18,
+        "3": 0,
+        "4": 8,
+        "5": 0
+      },
+      "published_oracle_constant_envelope_J": 0.4653065913177006,
+      "oracle_envelope_matches_the_published_one": true,
+      "constant_ranking": [
+        {
+          "rank": 1,
+          "label": 2,
+          "J": 0.4542809793576539,
+          "J_minus_as_trained": -0.0015937192192799765,
+          "J_minus_b08_uniform_every_10": 0.020410149055425264,
+          "as_trained_executions": 24680,
+          "as_trained_execution_fraction": 0.25708333333333333
+        },
+        {
+          "rank": 2,
+          "label": 1,
+          "J": 0.43896236008144474,
+          "J_minus_as_trained": -0.01691233849548912,
+          "J_minus_b08_uniform_every_10": 0.00509152977921612,
+          "as_trained_executions": 61180,
+          "as_trained_execution_fraction": 0.6372916666666667
+        },
+        {
+          "rank": 3,
+          "label": 4,
+          "J": 0.4228362867215988,
+          "J_minus_as_trained": -0.03303841185533507,
+          "J_minus_b08_uniform_every_10": -0.01103454358062983,
+          "as_trained_executions": 1040,
+          "as_trained_execution_fraction": 0.010833333333333334
+        },
+        {
+          "rank": 4,
+          "label": 3,
+          "J": 0.4009353833957562,
+          "J_minus_as_trained": -0.05493931518117767,
+          "J_minus_b08_uniform_every_10": -0.03293544690647243,
+          "as_trained_executions": 6720,
+          "as_trained_execution_fraction": 0.07
+        },
+        {
+          "rank": 5,
+          "label": 0,
+          "J": 0.34900398680386885,
+          "J_minus_as_trained": -0.10687071177306501,
+          "J_minus_b08_uniform_every_10": -0.08486684349835977,
+          "as_trained_executions": 530,
+          "as_trained_execution_fraction": 0.005520833333333333
+        },
+        {
+          "rank": 6,
+          "label": 5,
+          "J": 0.3256863019712888,
+          "J_minus_as_trained": -0.13018839660564507,
+          "J_minus_b08_uniform_every_10": -0.10818452833093983,
+          "as_trained_executions": 1850,
+          "as_trained_execution_fraction": 0.019270833333333334
+        }
+      ],
+      "as_trained_agent_label_histogram": [
+        530,
+        61180,
+        24680,
+        6720,
+        1040,
+        1850
+      ],
+      "b08_as_trained_agent_label_histogram": [
+        530,
+        61180,
+        24680,
+        6720,
+        1040,
+        1850
+      ],
+      "as_trained_histogram_matches_b08": true,
+      "coordinator_most_used_label": {
+        "label": 1,
+        "executions": 61180,
+        "execution_fraction": 0.6372916666666667,
+        "rank_among_constants": 2,
+        "J_as_a_constant": 0.43896236008144474,
+        "J_as_a_constant_minus_as_trained": -0.01691233849548912,
+        "is_the_best_constant": false,
+        "is_the_worst_constant": false,
+        "definition": "the agent label the coordinator executed most often during the unmodified `as_trained` panel of this block, and where the same label ranks when it is the *only* label executed. A rank is a rank on 6 paired panels with a conditional noise of about .03 J; it is not a statement about what the coordinator's choice is for"
+      },
+      "weights_sha256": "7cb214151d4e954af541391013686fd712a66655e050d27d2f0f2903134b08f7",
+      "episodes_per_lane": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "frozen_episode_assignments": [
+        {
+          "lane": 0,
+          "episode": 0,
+          "step": 0,
+          "team_label": 0,
+          "agent_labels": [
+            4,
+            1,
+            3,
+            5,
+            1,
+            0
+          ],
+          "distinct_agent_labels": 5
+        },
+        {
+          "lane": 1,
+          "episode": 0,
+          "step": 0,
+          "team_label": 1,
+          "agent_labels": [
+            1,
+            3,
+            0,
+            1,
+            1,
+            1
+          ],
+          "distinct_agent_labels": 3
+        },
+        {
+          "lane": 2,
+          "episode": 0,
+          "step": 0,
+          "team_label": 4,
+          "agent_labels": [
+            4,
+            2,
+            3,
+            5,
+            0,
+            0
+          ],
+          "distinct_agent_labels": 5
+        },
+        {
+          "lane": 3,
+          "episode": 0,
+          "step": 0,
+          "team_label": 5,
+          "agent_labels": [
+            3,
+            1,
+            2,
+            4,
+            2,
+            4
+          ],
+          "distinct_agent_labels": 4
+        },
+        {
+          "lane": 4,
+          "episode": 0,
+          "step": 0,
+          "team_label": 3,
+          "agent_labels": [
+            0,
+            3,
+            0,
+            5,
+            5,
+            3
+          ],
+          "distinct_agent_labels": 3
+        },
+        {
+          "lane": 5,
+          "episode": 0,
+          "step": 0,
+          "team_label": 2,
+          "agent_labels": [
+            4,
+            1,
+            1,
+            1,
+            3,
+            1
+          ],
+          "distinct_agent_labels": 3
+        },
+        {
+          "lane": 6,
+          "episode": 0,
+          "step": 0,
+          "team_label": 0,
+          "agent_labels": [
+            5,
+            4,
+            2,
+            4,
+            4,
+            0
+          ],
+          "distinct_agent_labels": 4
+        },
+        {
+          "lane": 7,
+          "episode": 0,
+          "step": 0,
+          "team_label": 5,
+          "agent_labels": [
+            3,
+            0,
+            3,
+            3,
+            0,
+            2
+          ],
+          "distinct_agent_labels": 3
+        },
+        {
+          "lane": 8,
+          "episode": 0,
+          "step": 0,
+          "team_label": 3,
+          "agent_labels": [
+            4,
+            2,
+            5,
+            0,
+            3,
+            3
+          ],
+          "distinct_agent_labels": 5
+        },
+        {
+          "lane": 9,
+          "episode": 0,
+          "step": 0,
+          "team_label": 2,
+          "agent_labels": [
+            5,
+            3,
+            1,
+            1,
+            1,
+            2
+          ],
+          "distinct_agent_labels": 4
+        },
+        {
+          "lane": 10,
+          "episode": 0,
+          "step": 0,
+          "team_label": 0,
+          "agent_labels": [
+            1,
+            4,
+            0,
+            5,
+            4,
+            4
+          ],
+          "distinct_agent_labels": 4
+        },
+        {
+          "lane": 11,
+          "episode": 0,
+          "step": 0,
+          "team_label": 4,
+          "agent_labels": [
+            0,
+            1,
+            3,
+            2,
+            2,
+            0
+          ],
+          "distinct_agent_labels": 4
+        },
+        {
+          "lane": 12,
+          "episode": 0,
+          "step": 0,
+          "team_label": 3,
+          "agent_labels": [
+            0,
+            3,
+            0,
+            1,
+            5,
+            3
+          ],
+          "distinct_agent_labels": 4
+        },
+        {
+          "lane": 13,
+          "episode": 0,
+          "step": 0,
+          "team_label": 3,
+          "agent_labels": [
+            1,
+            3,
+            4,
+            1,
+            2,
+            2
+          ],
+          "distinct_agent_labels": 4
+        },
+        {
+          "lane": 14,
+          "episode": 0,
+          "step": 0,
+          "team_label": 0,
+          "agent_labels": [
+            1,
+            2,
+            2,
+            3,
+            2,
+            4
+          ],
+          "distinct_agent_labels": 4
+        },
+        {
+          "lane": 15,
+          "episode": 0,
+          "step": 0,
+          "team_label": 5,
+          "agent_labels": [
+            5,
+            1,
+            1,
+            4,
+            3,
+            0
+          ],
+          "distinct_agent_labels": 5
+        },
+        {
+          "lane": 16,
+          "episode": 0,
+          "step": 0,
+          "team_label": 5,
+          "agent_labels": [
+            0,
+            3,
+            2,
+            3,
+            5,
+            5
+          ],
+          "distinct_agent_labels": 4
+        },
+        {
+          "lane": 17,
+          "episode": 0,
+          "step": 0,
+          "team_label": 3,
+          "agent_labels": [
+            2,
+            3,
+            4,
+            0,
+            5,
+            5
+          ],
+          "distinct_agent_labels": 5
+        },
+        {
+          "lane": 18,
+          "episode": 0,
+          "step": 0,
+          "team_label": 2,
+          "agent_labels": [
+            4,
+            0,
+            4,
+            0,
+            5,
+            3
+          ],
+          "distinct_agent_labels": 4
+        },
+        {
+          "lane": 19,
+          "episode": 0,
+          "step": 0,
+          "team_label": 4,
+          "agent_labels": [
+            5,
+            0,
+            5,
+            3,
+            2,
+            3
+          ],
+          "distinct_agent_labels": 4
+        },
+        {
+          "lane": 20,
+          "episode": 0,
+          "step": 0,
+          "team_label": 4,
+          "agent_labels": [
+            3,
+            4,
+            5,
+            0,
+            5,
+            4
+          ],
+          "distinct_agent_labels": 4
+        },
+        {
+          "lane": 21,
+          "episode": 0,
+          "step": 0,
+          "team_label": 2,
+          "agent_labels": [
+            2,
+            2,
+            0,
+            2,
+            1,
+            2
+          ],
+          "distinct_agent_labels": 3
+        },
+        {
+          "lane": 22,
+          "episode": 0,
+          "step": 0,
+          "team_label": 2,
+          "agent_labels": [
+            5,
+            2,
+            5,
+            4,
+            4,
+            5
+          ],
+          "distinct_agent_labels": 3
+        },
+        {
+          "lane": 23,
+          "episode": 0,
+          "step": 0,
+          "team_label": 1,
+          "agent_labels": [
+            5,
+            0,
+            5,
+            2,
+            3,
+            5
+          ],
+          "distinct_agent_labels": 4
+        },
+        {
+          "lane": 24,
+          "episode": 0,
+          "step": 0,
+          "team_label": 3,
+          "agent_labels": [
+            4,
+            0,
+            0,
+            5,
+            3,
+            1
+          ],
+          "distinct_agent_labels": 5
+        },
+        {
+          "lane": 25,
+          "episode": 0,
+          "step": 0,
+          "team_label": 0,
+          "agent_labels": [
+            2,
+            5,
+            0,
+            0,
+            0,
+            3
+          ],
+          "distinct_agent_labels": 4
+        },
+        {
+          "lane": 26,
+          "episode": 0,
+          "step": 0,
+          "team_label": 4,
+          "agent_labels": [
+            0,
+            5,
+            3,
+            2,
+            3,
+            2
+          ],
+          "distinct_agent_labels": 4
+        },
+        {
+          "lane": 27,
+          "episode": 0,
+          "step": 0,
+          "team_label": 1,
+          "agent_labels": [
+            5,
+            4,
+            4,
+            3,
+            2,
+            1
+          ],
+          "distinct_agent_labels": 5
+        },
+        {
+          "lane": 28,
+          "episode": 0,
+          "step": 0,
+          "team_label": 2,
+          "agent_labels": [
+            0,
+            3,
+            2,
+            3,
+            5,
+            1
+          ],
+          "distinct_agent_labels": 5
+        },
+        {
+          "lane": 29,
+          "episode": 0,
+          "step": 0,
+          "team_label": 0,
+          "agent_labels": [
+            5,
+            0,
+            2,
+            2,
+            2,
+            4
+          ],
+          "distinct_agent_labels": 4
+        },
+        {
+          "lane": 30,
+          "episode": 0,
+          "step": 0,
+          "team_label": 3,
+          "agent_labels": [
+            3,
+            3,
+            3,
+            5,
+            0,
+            2
+          ],
+          "distinct_agent_labels": 4
+        },
+        {
+          "lane": 31,
+          "episode": 0,
+          "step": 0,
+          "team_label": 0,
+          "agent_labels": [
+            1,
+            2,
+            0,
+            5,
+            1,
+            5
+          ],
+          "distinct_agent_labels": 4
+        }
+      ],
+      "worlds": 32
+    },
+    {
+      "training_seed": 772903,
+      "evaluation_seed": 782903,
+      "status": "complete",
+      "missing_or_invalid": {},
+      "weights_match": true,
+      "as_trained_identical_to_b08": true,
+      "J_by_rule": {
+        "as_trained": 0.35469677422138435,
+        "constant_0": 0.34303296930634497,
+        "constant_1": 0.5212269708739312,
+        "constant_2": 0.4005968459859748,
+        "constant_3": 0.30523984174957075,
+        "constant_4": 0.39923519399947327,
+        "constant_5": 0.3602225797542209,
+        "uniform_frozen_episode": 0.41573120049750745
+      },
+      "J_minus_as_trained": {
+        "as_trained": 0.0,
+        "constant_0": -0.011663804915039377,
+        "constant_1": 0.16653019665254687,
+        "constant_2": 0.04590007176459043,
+        "constant_3": -0.0494569324718136,
+        "constant_4": 0.04453841977808892,
+        "constant_5": 0.005525805532836547,
+        "uniform_frozen_episode": 0.0610344262761231
+      },
+      "b08_J_by_rule": {
+        "as_trained": 0.35469677422138435,
+        "frozen_episode": 0.34303296930634497,
+        "uniform_every_step": 0.41953089338338806,
+        "uniform_every_10": 0.4205045593763724
+      },
+      "b08_J_minus_as_trained": {
+        "as_trained": 0.0,
+        "frozen_episode": -0.011663804915039377,
+        "uniform_every_step": 0.06483411916200371,
+        "uniform_every_10": 0.06580778515498803
+      },
+      "best_constant": {
+        "label": 1,
+        "J": 0.5212269708739312,
+        "J_minus_as_trained": 0.16653019665254687,
+        "worst_label": 3,
+        "worst_J": 0.30523984174957075,
+        "max_minus_min": 0.21598712912436047,
+        "J_by_label": {
+          "0": 0.34303296930634497,
+          "1": 0.5212269708739312,
+          "2": 0.4005968459859748,
+          "3": 0.30523984174957075,
+          "4": 0.39923519399947327,
+          "5": 0.3602225797542209
+        },
+        "ranking": [
+          1,
+          2,
+          4,
+          5,
+          0,
+          3
+        ],
+        "definition": "the constant label whose own panel has the highest mean J on this block's 32 worlds, the lowest label breaking an exact tie; `ranking` is every label from the highest to the lowest panel J. One panel per label on the same worlds and the same evaluation seeds, so the comparison is paired; the conditional noise of a panel is about 0.03 J and a gap smaller than that is not read"
+      },
+      "best_constant_minus_as_trained": 0.16653019665254687,
+      "best_constant_minus_b08_uniform_every_10": 0.10072241149755884,
+      "max_constant_minus_min_constant": 0.21598712912436047,
+      "constants_above_as_trained_by_the_margin": [
+        1,
+        2,
+        4
+      ],
+      "constants_at_or_below_b08_uniform_every_10": [
+        0,
+        2,
+        3,
+        4,
+        5
+      ],
+      "every_constant_at_or_below_b08_uniform_every_10": false,
+      "uniform_frozen_episode_minus_as_trained": 0.0610344262761231,
+      "uniform_frozen_episode_minus_b08_uniform_every_10": -0.004773358878864931,
+      "oracle_constant_envelope_J": 0.5212269708739312,
+      "oracle_envelope_minus_as_trained": 0.16653019665254687,
+      "oracle_envelope_selection_note": "for each world separately, the maximum over the constant labels of that world's score, averaged over the worlds. It is an upper envelope *selected on the same 32 scores it is computed from*: with 6 labels and a per-panel conditional evaluation noise of about .03 J the maximum of 6 noisy scores is biased upward by construction, so the envelope is a ceiling on what a perfect per-world label oracle could have scored here and is not an achievable policy, not a held-out estimate and not a difference anyone can act on",
+      "per_world_best_constant_label_counts": {
+        "0": 0,
+        "1": 32,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0
+      },
+      "published_oracle_constant_envelope_J": 0.5212269708739312,
+      "oracle_envelope_matches_the_published_one": true,
+      "constant_ranking": [
+        {
+          "rank": 1,
+          "label": 1,
+          "J": 0.5212269708739312,
+          "J_minus_as_trained": 0.16653019665254687,
+          "J_minus_b08_uniform_every_10": 0.10072241149755884,
+          "as_trained_executions": 90,
+          "as_trained_execution_fraction": 0.0009375
+        },
+        {
+          "rank": 2,
+          "label": 2,
+          "J": 0.4005968459859748,
+          "J_minus_as_trained": 0.04590007176459043,
+          "J_minus_b08_uniform_every_10": -0.019907713390397597,
+          "as_trained_executions": 13560,
+          "as_trained_execution_fraction": 0.14125
+        },
+        {
+          "rank": 3,
+          "label": 4,
+          "J": 0.39923519399947327,
+          "J_minus_as_trained": 0.04453841977808892,
+          "J_minus_b08_uniform_every_10": -0.021269365376899108,
+          "as_trained_executions": 5870,
+          "as_trained_execution_fraction": 0.06114583333333334
+        },
+        {
+          "rank": 4,
+          "label": 5,
+          "J": 0.3602225797542209,
+          "J_minus_as_trained": 0.005525805532836547,
+          "J_minus_b08_uniform_every_10": -0.06028197962215148,
+          "as_trained_executions": 700,
+          "as_trained_execution_fraction": 0.007291666666666667
+        },
+        {
+          "rank": 5,
+          "label": 0,
+          "J": 0.34303296930634497,
+          "J_minus_as_trained": -0.011663804915039377,
+          "J_minus_b08_uniform_every_10": -0.07747159007002741,
+          "as_trained_executions": 62280,
+          "as_trained_execution_fraction": 0.64875
+        },
+        {
+          "rank": 6,
+          "label": 3,
+          "J": 0.30523984174957075,
+          "J_minus_as_trained": -0.0494569324718136,
+          "J_minus_b08_uniform_every_10": -0.11526471762680163,
+          "as_trained_executions": 13500,
+          "as_trained_execution_fraction": 0.140625
+        }
+      ],
+      "as_trained_agent_label_histogram": [
+        62280,
+        90,
+        13560,
+        13500,
+        5870,
+        700
+      ],
+      "b08_as_trained_agent_label_histogram": [
+        62280,
+        90,
+        13560,
+        13500,
+        5870,
+        700
+      ],
+      "as_trained_histogram_matches_b08": true,
+      "coordinator_most_used_label": {
+        "label": 0,
+        "executions": 62280,
+        "execution_fraction": 0.64875,
+        "rank_among_constants": 5,
+        "J_as_a_constant": 0.34303296930634497,
+        "J_as_a_constant_minus_as_trained": -0.011663804915039377,
+        "is_the_best_constant": false,
+        "is_the_worst_constant": false,
+        "definition": "the agent label the coordinator executed most often during the unmodified `as_trained` panel of this block, and where the same label ranks when it is the *only* label executed. A rank is a rank on 6 paired panels with a conditional noise of about .03 J; it is not a statement about what the coordinator's choice is for"
+      },
+      "weights_sha256": "87a703fc18120738c25f7812a0248f5aab0e66a4959de8711aef76a6f1c85eca",
+      "episodes_per_lane": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "frozen_episode_assignments": [
+        {
+          "lane": 0,
+          "episode": 0,
+          "step": 0,
+          "team_label": 2,
+          "agent_labels": [
+            3,
+            3,
+            2,
+            2,
+            1,
+            5
+          ],
+          "distinct_agent_labels": 4
+        },
+        {
+          "lane": 1,
+          "episode": 0,
+          "step": 0,
+          "team_label": 5,
+          "agent_labels": [
+            2,
+            5,
+            2,
+            5,
+            1,
+            5
+          ],
+          "distinct_agent_labels": 3
+        },
+        {
+          "lane": 2,
+          "episode": 0,
+          "step": 0,
+          "team_label": 2,
+          "agent_labels": [
+            4,
+            4,
+            4,
+            2,
+            5,
+            5
+          ],
+          "distinct_agent_labels": 3
+        },
+        {
+          "lane": 3,
+          "episode": 0,
+          "step": 0,
+          "team_label": 1,
+          "agent_labels": [
+            0,
+            1,
+            2,
+            1,
+            2,
+            1
+          ],
+          "distinct_agent_labels": 3
+        },
+        {
+          "lane": 4,
+          "episode": 0,
+          "step": 0,
+          "team_label": 0,
+          "agent_labels": [
+            1,
+            4,
+            2,
+            2,
+            4,
+            3
+          ],
+          "distinct_agent_labels": 4
+        },
+        {
+          "lane": 5,
+          "episode": 0,
+          "step": 0,
+          "team_label": 3,
+          "agent_labels": [
+            0,
+            5,
+            2,
+            1,
+            1,
+            4
+          ],
+          "distinct_agent_labels": 5
+        },
+        {
+          "lane": 6,
+          "episode": 0,
+          "step": 0,
+          "team_label": 5,
+          "agent_labels": [
+            4,
+            4,
+            4,
+            4,
+            3,
+            4
+          ],
+          "distinct_agent_labels": 2
+        },
+        {
+          "lane": 7,
+          "episode": 0,
+          "step": 0,
+          "team_label": 0,
+          "agent_labels": [
+            0,
+            4,
+            1,
+            3,
+            5,
+            4
+          ],
+          "distinct_agent_labels": 5
+        },
+        {
+          "lane": 8,
+          "episode": 0,
+          "step": 0,
+          "team_label": 2,
+          "agent_labels": [
+            4,
+            3,
+            5,
+            1,
+            4,
+            4
+          ],
+          "distinct_agent_labels": 4
+        },
+        {
+          "lane": 9,
+          "episode": 0,
+          "step": 0,
+          "team_label": 5,
+          "agent_labels": [
+            3,
+            0,
+            5,
+            4,
+            3,
+            5
+          ],
+          "distinct_agent_labels": 4
+        },
+        {
+          "lane": 10,
+          "episode": 0,
+          "step": 0,
+          "team_label": 0,
+          "agent_labels": [
+            1,
+            3,
+            5,
+            0,
+            2,
+            4
+          ],
+          "distinct_agent_labels": 6
+        },
+        {
+          "lane": 11,
+          "episode": 0,
+          "step": 0,
+          "team_label": 3,
+          "agent_labels": [
+            4,
+            4,
+            0,
+            1,
+            5,
+            1
+          ],
+          "distinct_agent_labels": 4
+        },
+        {
+          "lane": 12,
+          "episode": 0,
+          "step": 0,
+          "team_label": 2,
+          "agent_labels": [
+            0,
+            0,
+            1,
+            1,
+            5,
+            1
+          ],
+          "distinct_agent_labels": 3
+        },
+        {
+          "lane": 13,
+          "episode": 0,
+          "step": 0,
+          "team_label": 2,
+          "agent_labels": [
+            2,
+            5,
+            3,
+            3,
+            2,
+            3
+          ],
+          "distinct_agent_labels": 3
+        },
+        {
+          "lane": 14,
+          "episode": 0,
+          "step": 0,
+          "team_label": 2,
+          "agent_labels": [
+            5,
+            2,
+            5,
+            0,
+            4,
+            5
+          ],
+          "distinct_agent_labels": 4
+        },
+        {
+          "lane": 15,
+          "episode": 0,
+          "step": 0,
+          "team_label": 3,
+          "agent_labels": [
+            2,
+            0,
+            5,
+            0,
+            3,
+            1
+          ],
+          "distinct_agent_labels": 5
+        },
+        {
+          "lane": 16,
+          "episode": 0,
+          "step": 0,
+          "team_label": 2,
+          "agent_labels": [
+            3,
+            0,
+            3,
+            3,
+            1,
+            0
+          ],
+          "distinct_agent_labels": 3
+        },
+        {
+          "lane": 17,
+          "episode": 0,
+          "step": 0,
+          "team_label": 4,
+          "agent_labels": [
+            0,
+            5,
+            4,
+            0,
+            5,
+            3
+          ],
+          "distinct_agent_labels": 4
+        },
+        {
+          "lane": 18,
+          "episode": 0,
+          "step": 0,
+          "team_label": 1,
+          "agent_labels": [
+            3,
+            5,
+            3,
+            2,
+            4,
+            2
+          ],
+          "distinct_agent_labels": 4
+        },
+        {
+          "lane": 19,
+          "episode": 0,
+          "step": 0,
+          "team_label": 0,
+          "agent_labels": [
+            0,
+            1,
+            3,
+            4,
+            5,
+            0
+          ],
+          "distinct_agent_labels": 5
+        },
+        {
+          "lane": 20,
+          "episode": 0,
+          "step": 0,
+          "team_label": 0,
+          "agent_labels": [
+            4,
+            0,
+            2,
+            2,
+            5,
+            3
+          ],
+          "distinct_agent_labels": 5
+        },
+        {
+          "lane": 21,
+          "episode": 0,
+          "step": 0,
+          "team_label": 3,
+          "agent_labels": [
+            1,
+            1,
+            1,
+            2,
+            4,
+            2
+          ],
+          "distinct_agent_labels": 3
+        },
+        {
+          "lane": 22,
+          "episode": 0,
+          "step": 0,
+          "team_label": 5,
+          "agent_labels": [
+            3,
+            0,
+            5,
+            4,
+            5,
+            2
+          ],
+          "distinct_agent_labels": 5
+        },
+        {
+          "lane": 23,
+          "episode": 0,
+          "step": 0,
+          "team_label": 2,
+          "agent_labels": [
+            5,
+            0,
+            5,
+            5,
+            2,
+            2
+          ],
+          "distinct_agent_labels": 3
+        },
+        {
+          "lane": 24,
+          "episode": 0,
+          "step": 0,
+          "team_label": 5,
+          "agent_labels": [
+            4,
+            5,
+            4,
+            0,
+            1,
+            0
+          ],
+          "distinct_agent_labels": 4
+        },
+        {
+          "lane": 25,
+          "episode": 0,
+          "step": 0,
+          "team_label": 1,
+          "agent_labels": [
+            1,
+            5,
+            1,
+            3,
+            5,
+            2
+          ],
+          "distinct_agent_labels": 4
+        },
+        {
+          "lane": 26,
+          "episode": 0,
+          "step": 0,
+          "team_label": 3,
+          "agent_labels": [
+            5,
+            3,
+            2,
+            1,
+            2,
+            0
+          ],
+          "distinct_agent_labels": 5
+        },
+        {
+          "lane": 27,
+          "episode": 0,
+          "step": 0,
+          "team_label": 1,
+          "agent_labels": [
+            4,
+            2,
+            4,
+            2,
+            2,
+            4
+          ],
+          "distinct_agent_labels": 2
+        },
+        {
+          "lane": 28,
+          "episode": 0,
+          "step": 0,
+          "team_label": 4,
+          "agent_labels": [
+            3,
+            1,
+            4,
+            0,
+            5,
+            4
+          ],
+          "distinct_agent_labels": 5
+        },
+        {
+          "lane": 29,
+          "episode": 0,
+          "step": 0,
+          "team_label": 4,
+          "agent_labels": [
+            0,
+            1,
+            2,
+            3,
+            3,
+            4
+          ],
+          "distinct_agent_labels": 5
+        },
+        {
+          "lane": 30,
+          "episode": 0,
+          "step": 0,
+          "team_label": 2,
+          "agent_labels": [
+            1,
+            1,
+            4,
+            2,
+            4,
+            3
+          ],
+          "distinct_agent_labels": 4
+        },
+        {
+          "lane": 31,
+          "episode": 0,
+          "step": 0,
+          "team_label": 3,
+          "agent_labels": [
+            5,
+            1,
+            5,
+            3,
+            3,
+            5
+          ],
+          "distinct_agent_labels": 3
+        }
+      ],
+      "worlds": 32
+    },
+    {
+      "training_seed": 773003,
+      "evaluation_seed": 783003,
+      "status": "complete",
+      "missing_or_invalid": {},
+      "weights_match": true,
+      "as_trained_identical_to_b08": true,
+      "J_by_rule": {
+        "as_trained": 0.49935211030661386,
+        "constant_0": 0.5190327462006576,
+        "constant_1": 0.48546744663145813,
+        "constant_2": 0.3925557846310054,
+        "constant_3": 0.42177516857170333,
+        "constant_4": 0.48664084946135155,
+        "constant_5": 0.5173522443832025,
+        "uniform_frozen_episode": 0.4958986301003678
+      },
+      "J_minus_as_trained": {
+        "as_trained": 0.0,
+        "constant_0": 0.019680635894043785,
+        "constant_1": -0.013884663675155728,
+        "constant_2": -0.10679632567560848,
+        "constant_3": -0.07757694173491053,
+        "constant_4": -0.012711260845262307,
+        "constant_5": 0.018000134076588625,
+        "uniform_frozen_episode": -0.0034534802062460845
+      },
+      "b08_J_by_rule": {
+        "as_trained": 0.49935211030661386,
+        "frozen_episode": 0.5058190403294555,
+        "uniform_every_step": 0.4747820472332011,
+        "uniform_every_10": 0.4735447400338383
+      },
+      "b08_J_minus_as_trained": {
+        "as_trained": 0.0,
+        "frozen_episode": 0.006466930022841599,
+        "uniform_every_step": -0.02457006307341275,
+        "uniform_every_10": -0.025807370272775576
+      },
+      "best_constant": {
+        "label": 0,
+        "J": 0.5190327462006576,
+        "J_minus_as_trained": 0.019680635894043785,
+        "worst_label": 2,
+        "worst_J": 0.3925557846310054,
+        "max_minus_min": 0.12647696156965227,
+        "J_by_label": {
+          "0": 0.5190327462006576,
+          "1": 0.48546744663145813,
+          "2": 0.3925557846310054,
+          "3": 0.42177516857170333,
+          "4": 0.48664084946135155,
+          "5": 0.5173522443832025
+        },
+        "ranking": [
+          0,
+          5,
+          4,
+          1,
+          3,
+          2
+        ],
+        "definition": "the constant label whose own panel has the highest mean J on this block's 32 worlds, the lowest label breaking an exact tie; `ranking` is every label from the highest to the lowest panel J. One panel per label on the same worlds and the same evaluation seeds, so the comparison is paired; the conditional noise of a panel is about 0.03 J and a gap smaller than that is not read"
+      },
+      "best_constant_minus_as_trained": 0.019680635894043785,
+      "best_constant_minus_b08_uniform_every_10": 0.04548800616681936,
+      "max_constant_minus_min_constant": 0.12647696156965227,
+      "constants_above_as_trained_by_the_margin": [],
+      "constants_at_or_below_b08_uniform_every_10": [
+        2,
+        3
+      ],
+      "every_constant_at_or_below_b08_uniform_every_10": false,
+      "uniform_frozen_episode_minus_as_trained": -0.0034534802062460845,
+      "uniform_frozen_episode_minus_b08_uniform_every_10": 0.02235389006652949,
+      "oracle_constant_envelope_J": 0.544472354911419,
+      "oracle_envelope_minus_as_trained": 0.045120244604805126,
+      "oracle_envelope_selection_note": "for each world separately, the maximum over the constant labels of that world's score, averaged over the worlds. It is an upper envelope *selected on the same 32 scores it is computed from*: with 6 labels and a per-panel conditional evaluation noise of about .03 J the maximum of 6 noisy scores is biased upward by construction, so the envelope is a ceiling on what a perfect per-world label oracle could have scored here and is not an achievable policy, not a held-out estimate and not a difference anyone can act on",
+      "per_world_best_constant_label_counts": {
+        "0": 9,
+        "1": 1,
+        "2": 0,
+        "3": 0,
+        "4": 3,
+        "5": 19
+      },
+      "published_oracle_constant_envelope_J": 0.544472354911419,
+      "oracle_envelope_matches_the_published_one": true,
+      "constant_ranking": [
+        {
+          "rank": 1,
+          "label": 0,
+          "J": 0.5190327462006576,
+          "J_minus_as_trained": 0.019680635894043785,
+          "J_minus_b08_uniform_every_10": 0.04548800616681936,
+          "as_trained_executions": 32190,
+          "as_trained_execution_fraction": 0.3353125
+        },
+        {
+          "rank": 2,
+          "label": 5,
+          "J": 0.5173522443832025,
+          "J_minus_as_trained": 0.018000134076588625,
+          "J_minus_b08_uniform_every_10": 0.0438075043493642,
+          "as_trained_executions": 4360,
+          "as_trained_execution_fraction": 0.04541666666666667
+        },
+        {
+          "rank": 3,
+          "label": 4,
+          "J": 0.48664084946135155,
+          "J_minus_as_trained": -0.012711260845262307,
+          "J_minus_b08_uniform_every_10": 0.01309610942751327,
+          "as_trained_executions": 35360,
+          "as_trained_execution_fraction": 0.36833333333333335
+        },
+        {
+          "rank": 4,
+          "label": 1,
+          "J": 0.48546744663145813,
+          "J_minus_as_trained": -0.013884663675155728,
+          "J_minus_b08_uniform_every_10": 0.011922706597619848,
+          "as_trained_executions": 9580,
+          "as_trained_execution_fraction": 0.09979166666666667
+        },
+        {
+          "rank": 5,
+          "label": 3,
+          "J": 0.42177516857170333,
+          "J_minus_as_trained": -0.07757694173491053,
+          "J_minus_b08_uniform_every_10": -0.051769571462134956,
+          "as_trained_executions": 13770,
+          "as_trained_execution_fraction": 0.1434375
+        },
+        {
+          "rank": 6,
+          "label": 2,
+          "J": 0.3925557846310054,
+          "J_minus_as_trained": -0.10679632567560848,
+          "J_minus_b08_uniform_every_10": -0.08098895540283291,
+          "as_trained_executions": 740,
+          "as_trained_execution_fraction": 0.0077083333333333335
+        }
+      ],
+      "as_trained_agent_label_histogram": [
+        32190,
+        9580,
+        740,
+        13770,
+        35360,
+        4360
+      ],
+      "b08_as_trained_agent_label_histogram": [
+        32190,
+        9580,
+        740,
+        13770,
+        35360,
+        4360
+      ],
+      "as_trained_histogram_matches_b08": true,
+      "coordinator_most_used_label": {
+        "label": 4,
+        "executions": 35360,
+        "execution_fraction": 0.36833333333333335,
+        "rank_among_constants": 3,
+        "J_as_a_constant": 0.48664084946135155,
+        "J_as_a_constant_minus_as_trained": -0.012711260845262307,
+        "is_the_best_constant": false,
+        "is_the_worst_constant": false,
+        "definition": "the agent label the coordinator executed most often during the unmodified `as_trained` panel of this block, and where the same label ranks when it is the *only* label executed. A rank is a rank on 6 paired panels with a conditional noise of about .03 J; it is not a statement about what the coordinator's choice is for"
+      },
+      "weights_sha256": "9a8ebe9057455b1b8fd6fe9bcfa41f4530ced9b84820f364985de13c61c1a14d",
+      "episodes_per_lane": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "frozen_episode_assignments": [
+        {
+          "lane": 0,
+          "episode": 0,
+          "step": 0,
+          "team_label": 3,
+          "agent_labels": [
+            0,
+            0,
+            1,
+            0,
+            1,
+            1
+          ],
+          "distinct_agent_labels": 2
+        },
+        {
+          "lane": 1,
+          "episode": 0,
+          "step": 0,
+          "team_label": 3,
+          "agent_labels": [
+            2,
+            5,
+            1,
+            3,
+            4,
+            5
+          ],
+          "distinct_agent_labels": 5
+        },
+        {
+          "lane": 2,
+          "episode": 0,
+          "step": 0,
+          "team_label": 3,
+          "agent_labels": [
+            5,
+            0,
+            4,
+            2,
+            1,
+            0
+          ],
+          "distinct_agent_labels": 5
+        },
+        {
+          "lane": 3,
+          "episode": 0,
+          "step": 0,
+          "team_label": 2,
+          "agent_labels": [
+            0,
+            4,
+            5,
+            2,
+            5,
+            2
+          ],
+          "distinct_agent_labels": 4
+        },
+        {
+          "lane": 4,
+          "episode": 0,
+          "step": 0,
+          "team_label": 0,
+          "agent_labels": [
+            1,
+            1,
+            5,
+            3,
+            0,
+            0
+          ],
+          "distinct_agent_labels": 4
+        },
+        {
+          "lane": 5,
+          "episode": 0,
+          "step": 0,
+          "team_label": 0,
+          "agent_labels": [
+            2,
+            2,
+            5,
+            3,
+            3,
+            5
+          ],
+          "distinct_agent_labels": 3
+        },
+        {
+          "lane": 6,
+          "episode": 0,
+          "step": 0,
+          "team_label": 0,
+          "agent_labels": [
+            5,
+            5,
+            1,
+            3,
+            3,
+            5
+          ],
+          "distinct_agent_labels": 3
+        },
+        {
+          "lane": 7,
+          "episode": 0,
+          "step": 0,
+          "team_label": 2,
+          "agent_labels": [
+            4,
+            3,
+            0,
+            2,
+            0,
+            2
+          ],
+          "distinct_agent_labels": 4
+        },
+        {
+          "lane": 8,
+          "episode": 0,
+          "step": 0,
+          "team_label": 1,
+          "agent_labels": [
+            4,
+            5,
+            1,
+            0,
+            5,
+            3
+          ],
+          "distinct_agent_labels": 5
+        },
+        {
+          "lane": 9,
+          "episode": 0,
+          "step": 0,
+          "team_label": 1,
+          "agent_labels": [
+            1,
+            5,
+            3,
+            2,
+            0,
+            0
+          ],
+          "distinct_agent_labels": 5
+        },
+        {
+          "lane": 10,
+          "episode": 0,
+          "step": 0,
+          "team_label": 5,
+          "agent_labels": [
+            4,
+            1,
+            4,
+            0,
+            4,
+            2
+          ],
+          "distinct_agent_labels": 4
+        },
+        {
+          "lane": 11,
+          "episode": 0,
+          "step": 0,
+          "team_label": 2,
+          "agent_labels": [
+            1,
+            2,
+            3,
+            1,
+            1,
+            0
+          ],
+          "distinct_agent_labels": 4
+        },
+        {
+          "lane": 12,
+          "episode": 0,
+          "step": 0,
+          "team_label": 1,
+          "agent_labels": [
+            2,
+            5,
+            2,
+            1,
+            2,
+            0
+          ],
+          "distinct_agent_labels": 4
+        },
+        {
+          "lane": 13,
+          "episode": 0,
+          "step": 0,
+          "team_label": 5,
+          "agent_labels": [
+            4,
+            5,
+            1,
+            1,
+            5,
+            2
+          ],
+          "distinct_agent_labels": 4
+        },
+        {
+          "lane": 14,
+          "episode": 0,
+          "step": 0,
+          "team_label": 2,
+          "agent_labels": [
+            5,
+            0,
+            0,
+            4,
+            5,
+            3
+          ],
+          "distinct_agent_labels": 4
+        },
+        {
+          "lane": 15,
+          "episode": 0,
+          "step": 0,
+          "team_label": 5,
+          "agent_labels": [
+            3,
+            3,
+            1,
+            5,
+            0,
+            2
+          ],
+          "distinct_agent_labels": 5
+        },
+        {
+          "lane": 16,
+          "episode": 0,
+          "step": 0,
+          "team_label": 5,
+          "agent_labels": [
+            3,
+            1,
+            4,
+            1,
+            3,
+            0
+          ],
+          "distinct_agent_labels": 4
+        },
+        {
+          "lane": 17,
+          "episode": 0,
+          "step": 0,
+          "team_label": 3,
+          "agent_labels": [
+            1,
+            0,
+            3,
+            4,
+            3,
+            3
+          ],
+          "distinct_agent_labels": 4
+        },
+        {
+          "lane": 18,
+          "episode": 0,
+          "step": 0,
+          "team_label": 0,
+          "agent_labels": [
+            1,
+            0,
+            1,
+            2,
+            3,
+            5
+          ],
+          "distinct_agent_labels": 5
+        },
+        {
+          "lane": 19,
+          "episode": 0,
+          "step": 0,
+          "team_label": 4,
+          "agent_labels": [
+            0,
+            4,
+            4,
+            2,
+            4,
+            0
+          ],
+          "distinct_agent_labels": 3
+        },
+        {
+          "lane": 20,
+          "episode": 0,
+          "step": 0,
+          "team_label": 4,
+          "agent_labels": [
+            3,
+            2,
+            5,
+            1,
+            3,
+            3
+          ],
+          "distinct_agent_labels": 4
+        },
+        {
+          "lane": 21,
+          "episode": 0,
+          "step": 0,
+          "team_label": 5,
+          "agent_labels": [
+            5,
+            0,
+            2,
+            2,
+            5,
+            0
+          ],
+          "distinct_agent_labels": 3
+        },
+        {
+          "lane": 22,
+          "episode": 0,
+          "step": 0,
+          "team_label": 4,
+          "agent_labels": [
+            4,
+            5,
+            4,
+            2,
+            1,
+            0
+          ],
+          "distinct_agent_labels": 5
+        },
+        {
+          "lane": 23,
+          "episode": 0,
+          "step": 0,
+          "team_label": 4,
+          "agent_labels": [
+            5,
+            5,
+            3,
+            0,
+            1,
+            5
+          ],
+          "distinct_agent_labels": 4
+        },
+        {
+          "lane": 24,
+          "episode": 0,
+          "step": 0,
+          "team_label": 0,
+          "agent_labels": [
+            2,
+            0,
+            5,
+            2,
+            3,
+            0
+          ],
+          "distinct_agent_labels": 4
+        },
+        {
+          "lane": 25,
+          "episode": 0,
+          "step": 0,
+          "team_label": 2,
+          "agent_labels": [
+            4,
+            1,
+            4,
+            1,
+            1,
+            4
+          ],
+          "distinct_agent_labels": 2
+        },
+        {
+          "lane": 26,
+          "episode": 0,
+          "step": 0,
+          "team_label": 3,
+          "agent_labels": [
+            2,
+            0,
+            4,
+            5,
+            1,
+            5
+          ],
+          "distinct_agent_labels": 5
+        },
+        {
+          "lane": 27,
+          "episode": 0,
+          "step": 0,
+          "team_label": 2,
+          "agent_labels": [
+            1,
+            5,
+            1,
+            5,
+            1,
+            0
+          ],
+          "distinct_agent_labels": 3
+        },
+        {
+          "lane": 28,
+          "episode": 0,
+          "step": 0,
+          "team_label": 2,
+          "agent_labels": [
+            3,
+            0,
+            3,
+            2,
+            5,
+            0
+          ],
+          "distinct_agent_labels": 4
+        },
+        {
+          "lane": 29,
+          "episode": 0,
+          "step": 0,
+          "team_label": 4,
+          "agent_labels": [
+            3,
+            1,
+            4,
+            5,
+            4,
+            2
+          ],
+          "distinct_agent_labels": 5
+        },
+        {
+          "lane": 30,
+          "episode": 0,
+          "step": 0,
+          "team_label": 5,
+          "agent_labels": [
+            0,
+            0,
+            2,
+            4,
+            3,
+            0
+          ],
+          "distinct_agent_labels": 4
+        },
+        {
+          "lane": 31,
+          "episode": 0,
+          "step": 0,
+          "team_label": 0,
+          "agent_labels": [
+            1,
+            5,
+            0,
+            0,
+            4,
+            5
+          ],
+          "distinct_agent_labels": 4
+        }
+      ],
+      "worlds": 32
+    }
+  ],
+  "blocks_read": 3,
+  "invalid_probes": {},
+  "invalid_b08_probes": {},
+  "refusals": "a batch of probes at more than one launch sha, a duplicate block among either set of probes, a summary that is not this object's probe, an incomplete probe, a probe without all eight rules or with an optimizer step, a probe that did not establish a faithful load, a block whose B08 probe was not supplied or is not readable by B08's own reader, a block whose weights sha256 is not B08's probe's, and a block whose `as_trained` world scores are not exactly B08's",
+  "interpretation_limit": "a fixed-weight forward measurement, not a fit: zero optimizer steps, one block, one panel per execution rule on the same 32 worlds and the same evaluation seeds. Exploration; three blocks; one checkpoint per block. These rules are deployment-time interventions on fixed weights and say nothing about what training under a fixed label would produce, and nothing about what the coordinator would learn if a label were held. A panel's conditional evaluation noise on this direction is about .03 J, so smaller J differences between rules are not read; the oracle constant envelope is an upper envelope selected on the same scores. A fixed-weight panel is bit-reproducible only on the host that trained the checkpoint - B08's own local probe attempts failed the faithful load off that host - so this command runs on wsl_4070.",
+  "J_by_rule": {
+    "as_trained": {
+      "available_blocks": 3,
+      "planned_blocks": 3,
+      "mean": 0.43664119436831067,
+      "min": 0.35469677422138435,
+      "max": 0.49935211030661386,
+      "sample_sd": 0.07422086854510677,
+      "t_multiplier": 4.3027,
+      "working_model_95pct_interval": [
+        0.2522643102183164,
+        0.6210180785183049
+      ],
+      "positive_blocks": 3,
+      "negative_blocks": 0,
+      "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+    },
+    "constant_0": {
+      "available_blocks": 3,
+      "planned_blocks": 3,
+      "mean": 0.4036899007702905,
+      "min": 0.34303296930634497,
+      "max": 0.5190327462006576,
+      "sample_sd": 0.09993443979164096,
+      "t_multiplier": 4.3027,
+      "working_model_95pct_interval": [
+        0.15543626282128098,
+        0.6519435387193
+      ],
+      "positive_blocks": 3,
+      "negative_blocks": 0,
+      "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+    },
+    "constant_1": {
+      "available_blocks": 3,
+      "planned_blocks": 3,
+      "mean": 0.4818855925289447,
+      "min": 0.43896236008144474,
+      "max": 0.5212269708739312,
+      "sample_sd": 0.04124910673358382,
+      "t_multiplier": 4.3027,
+      "working_model_95pct_interval": [
+        0.37941600516637347,
+        0.5843551798915159
+      ],
+      "positive_blocks": 3,
+      "negative_blocks": 0,
+      "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+    },
+    "constant_2": {
+      "available_blocks": 3,
+      "planned_blocks": 3,
+      "mean": 0.415811203324878,
+      "min": 0.3925557846310054,
+      "max": 0.4542809793576539,
+      "sample_sd": 0.033557524013811686,
+      "t_multiplier": 4.3027,
+      "working_model_95pct_interval": [
+        0.33244877657430716,
+        0.4991736300754488
+      ],
+      "positive_blocks": 3,
+      "negative_blocks": 0,
+      "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+    },
+    "constant_3": {
+      "available_blocks": 3,
+      "planned_blocks": 3,
+      "mean": 0.37598346457234344,
+      "min": 0.30523984174957075,
+      "max": 0.42177516857170333,
+      "sample_sd": 0.06214554923011742,
+      "t_multiplier": 4.3027,
+      "working_model_95pct_interval": [
+        0.22160366606762033,
+        0.5303632630770665
+      ],
+      "positive_blocks": 3,
+      "negative_blocks": 0,
+      "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+    },
+    "constant_4": {
+      "available_blocks": 3,
+      "planned_blocks": 3,
+      "mean": 0.43623744339414117,
+      "min": 0.39923519399947327,
+      "max": 0.48664084946135155,
+      "sample_sd": 0.04521758951781557,
+      "t_multiplier": 4.3027,
+      "working_model_95pct_interval": [
+        0.3239094899830123,
+        0.5485653968052701
+      ],
+      "positive_blocks": 3,
+      "negative_blocks": 0,
+      "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+    },
+    "constant_5": {
+      "available_blocks": 3,
+      "planned_blocks": 3,
+      "mean": 0.4010870420362374,
+      "min": 0.3256863019712888,
+      "max": 0.5173522443832025,
+      "sample_sd": 0.10215863437987274,
+      "t_multiplier": 4.3027,
+      "working_model_95pct_interval": [
+        0.14730813773074186,
+        0.654865946341733
+      ],
+      "positive_blocks": 3,
+      "negative_blocks": 0,
+      "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+    },
+    "uniform_frozen_episode": {
+      "available_blocks": 3,
+      "planned_blocks": 3,
+      "mean": 0.44260024149215793,
+      "min": 0.41573120049750745,
+      "max": 0.4958986301003678,
+      "sample_sd": 0.04615828207094754,
+      "t_multiplier": 4.3027,
+      "working_model_95pct_interval": [
+        0.327935452561728,
+        0.5572650304225879
+      ],
+      "positive_blocks": 3,
+      "negative_blocks": 0,
+      "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+    }
+  },
+  "b08_J_by_rule": {
+    "as_trained": {
+      "available_blocks": 3,
+      "planned_blocks": 3,
+      "mean": 0.43664119436831067,
+      "min": 0.35469677422138435,
+      "max": 0.49935211030661386,
+      "sample_sd": 0.07422086854510677,
+      "t_multiplier": 4.3027,
+      "working_model_95pct_interval": [
+        0.2522643102183164,
+        0.6210180785183049
+      ],
+      "positive_blocks": 3,
+      "negative_blocks": 0,
+      "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+    },
+    "frozen_episode": {
+      "available_blocks": 3,
+      "planned_blocks": 3,
+      "mean": 0.4293064432638201,
+      "min": 0.34303296930634497,
+      "max": 0.5058190403294555,
+      "sample_sd": 0.08183081490525762,
+      "t_multiplier": 4.3027,
+      "working_model_95pct_interval": [
+        0.2260251966893887,
+        0.6325876898382515
+      ],
+      "positive_blocks": 3,
+      "negative_blocks": 0,
+      "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+    },
+    "uniform_every_step": {
+      "available_blocks": 3,
+      "planned_blocks": 3,
+      "mean": 0.43865151015243137,
+      "min": 0.41953089338338806,
+      "max": 0.4747820472332011,
+      "sample_sd": 0.031307755304275514,
+      "t_multiplier": 4.3027,
+      "working_model_95pct_interval": [
+        0.3608778800954797,
+        0.516425140209383
+      ],
+      "positive_blocks": 3,
+      "negative_blocks": 0,
+      "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+    },
+    "uniform_every_10": {
+      "available_blocks": 3,
+      "planned_blocks": 3,
+      "mean": 0.44264004323747974,
+      "min": 0.4205045593763724,
+      "max": 0.4735447400338383,
+      "sample_sd": 0.027586038364940824,
+      "t_multiplier": 4.3027,
+      "working_model_95pct_interval": [
+        0.374111772153197,
+        0.5111683143217625
+      ],
+      "positive_blocks": 3,
+      "negative_blocks": 0,
+      "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+    }
+  },
+  "J_as_trained_minus_as_trained": {
+    "available_blocks": 3,
+    "planned_blocks": 3,
+    "mean": 0.0,
+    "min": 0.0,
+    "max": 0.0,
+    "sample_sd": 0.0,
+    "t_multiplier": 4.3027,
+    "working_model_95pct_interval": [
+      0.0,
+      0.0
+    ],
+    "positive_blocks": 0,
+    "negative_blocks": 0,
+    "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+  },
+  "J_constant_0_minus_as_trained": {
+    "available_blocks": 3,
+    "planned_blocks": 3,
+    "mean": -0.0329512935980202,
+    "min": -0.10687071177306501,
+    "max": 0.019680635894043785,
+    "sample_sd": 0.06590659132371653,
+    "t_multiplier": 4.3027,
+    "working_model_95pct_interval": [
+      -0.19667414124738303,
+      0.1307715540513426
+    ],
+    "positive_blocks": 1,
+    "negative_blocks": 2,
+    "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+  },
+  "J_constant_1_minus_as_trained": {
+    "available_blocks": 3,
+    "planned_blocks": 3,
+    "mean": 0.045244398160634004,
+    "min": -0.01691233849548912,
+    "max": 0.16653019665254687,
+    "sample_sd": 0.10504749111982681,
+    "t_multiplier": 4.3027,
+    "working_model_95pct_interval": [
+      -0.21571090295763581,
+      0.30619969927890384
+    ],
+    "positive_blocks": 1,
+    "negative_blocks": 2,
+    "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+  },
+  "J_constant_2_minus_as_trained": {
+    "available_blocks": 3,
+    "planned_blocks": 3,
+    "mean": -0.020829991043432677,
+    "min": -0.10679632567560848,
+    "max": 0.04590007176459043,
+    "sample_sd": 0.07814456515377965,
+    "t_multiplier": 4.3027,
+    "working_model_95pct_interval": [
+      -0.21495398499203222,
+      0.1732940029051669
+    ],
+    "positive_blocks": 1,
+    "negative_blocks": 2,
+    "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+  },
+  "J_constant_3_minus_as_trained": {
+    "available_blocks": 3,
+    "planned_blocks": 3,
+    "mean": -0.060657729795967265,
+    "min": -0.07757694173491053,
+    "max": -0.0494569324718136,
+    "sample_sd": 0.014906673992515693,
+    "t_multiplier": 4.3027,
+    "working_model_95pct_interval": [
+      -0.09768836764291547,
+      -0.023627091949019054
+    ],
+    "positive_blocks": 0,
+    "negative_blocks": 3,
+    "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+  },
+  "J_constant_4_minus_as_trained": {
+    "available_blocks": 3,
+    "planned_blocks": 3,
+    "mean": -0.00040375097416948485,
+    "min": -0.03303841185533507,
+    "max": 0.04453841977808892,
+    "sample_sd": 0.0402262016724229,
+    "t_multiplier": 4.3027,
+    "working_model_95pct_interval": [
+      -0.10033227338216542,
+      0.09952477143382644
+    ],
+    "positive_blocks": 1,
+    "negative_blocks": 2,
+    "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+  },
+  "J_constant_5_minus_as_trained": {
+    "available_blocks": 3,
+    "planned_blocks": 3,
+    "mean": -0.0355541523320733,
+    "min": -0.13018839660564507,
+    "max": 0.018000134076588625,
+    "sample_sd": 0.08219265393012265,
+    "t_multiplier": 4.3027,
+    "working_model_95pct_interval": [
+      -0.23973426674888165,
+      0.16862596208473507
+    ],
+    "positive_blocks": 2,
+    "negative_blocks": 1,
+    "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+  },
+  "J_uniform_frozen_episode_minus_as_trained": {
+    "available_blocks": 3,
+    "planned_blocks": 3,
+    "mean": 0.005959047123847261,
+    "min": -0.03970380469833523,
+    "max": 0.0610344262761231,
+    "sample_sd": 0.05102445049209883,
+    "t_multiplier": 4.3027,
+    "working_model_95pct_interval": [
+      -0.12079410709828906,
+      0.13271220134598358
+    ],
+    "positive_blocks": 1,
+    "negative_blocks": 2,
+    "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+  },
+  "best_constant_minus_as_trained": {
+    "available_blocks": 3,
+    "planned_blocks": 3,
+    "mean": 0.061539037775770224,
+    "min": -0.0015937192192799765,
+    "max": 0.16653019665254687,
+    "sample_sd": 0.09154510979887658,
+    "t_multiplier": 4.3027,
+    "working_model_95pct_interval": [
+      -0.16587412020456382,
+      0.28895219575610426
+    ],
+    "positive_blocks": 2,
+    "negative_blocks": 1,
+    "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+  },
+  "best_constant_minus_b08_uniform_every_10": {
+    "available_blocks": 3,
+    "planned_blocks": 3,
+    "mean": 0.05554018890660115,
+    "min": 0.020410149055425264,
+    "max": 0.10072241149755884,
+    "sample_sd": 0.041088923787549,
+    "t_multiplier": 4.3027,
+    "working_model_95pct_interval": [
+      -0.046531477587314136,
+      0.15761185540051645
+    ],
+    "positive_blocks": 3,
+    "negative_blocks": 0,
+    "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+  },
+  "max_constant_minus_min_constant": {
+    "available_blocks": 3,
+    "planned_blocks": 3,
+    "mean": 0.15701958936012594,
+    "min": 0.12647696156965227,
+    "max": 0.21598712912436047,
+    "sample_sd": 0.05107836371160517,
+    "t_multiplier": 4.3027,
+    "working_model_95pct_interval": [
+      0.03013250580487986,
+      0.283906672915372
+    ],
+    "positive_blocks": 3,
+    "negative_blocks": 0,
+    "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+  },
+  "uniform_frozen_episode_minus_as_trained": {
+    "available_blocks": 3,
+    "planned_blocks": 3,
+    "mean": 0.005959047123847261,
+    "min": -0.03970380469833523,
+    "max": 0.0610344262761231,
+    "sample_sd": 0.05102445049209883,
+    "t_multiplier": 4.3027,
+    "working_model_95pct_interval": [
+      -0.12079410709828906,
+      0.13271220134598358
+    ],
+    "positive_blocks": 1,
+    "negative_blocks": 2,
+    "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+  },
+  "uniform_frozen_episode_minus_b08_uniform_every_10": {
+    "available_blocks": 3,
+    "planned_blocks": 3,
+    "mean": -3.9801745321810245e-05,
+    "min": -0.01769993642362999,
+    "max": 0.02235389006652949,
+    "sample_sd": 0.02044216662876854,
+    "t_multiplier": 4.3027,
+    "working_model_95pct_interval": [
+      -0.050821516674954256,
+      0.050741913184310636
+    ],
+    "positive_blocks": 1,
+    "negative_blocks": 2,
+    "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+  },
+  "oracle_envelope_minus_as_trained": {
+    "available_blocks": 3,
+    "planned_blocks": 3,
+    "mean": 0.07369411133270624,
+    "min": 0.009431892740766723,
+    "max": 0.16653019665254687,
+    "sample_sd": 0.08235483390686547,
+    "t_multiplier": 4.3027,
+    "working_model_95pct_interval": [
+      -0.13088888490655332,
+      0.2782771075719658
+    ],
+    "positive_blocks": 3,
+    "negative_blocks": 0,
+    "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+  },
+  "best_constant_label_by_block": {
+    "772803": 2,
+    "772903": 1,
+    "773003": 0
+  },
+  "constant_ranking_by_block": {
+    "772803": [
+      2,
+      1,
+      4,
+      3,
+      0,
+      5
+    ],
+    "772903": [
+      1,
+      2,
+      4,
+      5,
+      0,
+      3
+    ],
+    "773003": [
+      0,
+      5,
+      4,
+      1,
+      3,
+      2
+    ]
+  },
+  "as_trained_agent_label_histogram_by_block": {
+    "772803": [
+      530,
+      61180,
+      24680,
+      6720,
+      1040,
+      1850
+    ],
+    "772903": [
+      62280,
+      90,
+      13560,
+      13500,
+      5870,
+      700
+    ],
+    "773003": [
+      32190,
+      9580,
+      740,
+      13770,
+      35360,
+      4360
+    ]
+  },
+  "coordinator_most_used_label_by_block": {
+    "772803": {
+      "label": 1,
+      "executions": 61180,
+      "execution_fraction": 0.6372916666666667,
+      "rank_among_constants": 2,
+      "J_as_a_constant": 0.43896236008144474,
+      "J_as_a_constant_minus_as_trained": -0.01691233849548912,
+      "is_the_best_constant": false,
+      "is_the_worst_constant": false,
+      "definition": "the agent label the coordinator executed most often during the unmodified `as_trained` panel of this block, and where the same label ranks when it is the *only* label executed. A rank is a rank on 6 paired panels with a conditional noise of about .03 J; it is not a statement about what the coordinator's choice is for"
+    },
+    "772903": {
+      "label": 0,
+      "executions": 62280,
+      "execution_fraction": 0.64875,
+      "rank_among_constants": 5,
+      "J_as_a_constant": 0.34303296930634497,
+      "J_as_a_constant_minus_as_trained": -0.011663804915039377,
+      "is_the_best_constant": false,
+      "is_the_worst_constant": false,
+      "definition": "the agent label the coordinator executed most often during the unmodified `as_trained` panel of this block, and where the same label ranks when it is the *only* label executed. A rank is a rank on 6 paired panels with a conditional noise of about .03 J; it is not a statement about what the coordinator's choice is for"
+    },
+    "773003": {
+      "label": 4,
+      "executions": 35360,
+      "execution_fraction": 0.36833333333333335,
+      "rank_among_constants": 3,
+      "J_as_a_constant": 0.48664084946135155,
+      "J_as_a_constant_minus_as_trained": -0.012711260845262307,
+      "is_the_best_constant": false,
+      "is_the_worst_constant": false,
+      "definition": "the agent label the coordinator executed most often during the unmodified `as_trained` panel of this block, and where the same label ranks when it is the *only* label executed. A rank is a rank on 6 paired panels with a conditional noise of about .03 J; it is not a statement about what the coordinator's choice is for"
+    }
+  },
+  "one_best_constant_label_across_blocks": null,
+  "predictions": {
+    "P1_a_constant_label_beats_as_trained_on_772903": {
+      "statement": "on block 772903 at least one constant label's panel J exceeds `as_trained` by more than 0.03 J",
+      "value_definition": "best constant J minus as_trained J on that block",
+      "blocks_considered": [
+        772903
+      ],
+      "blocks_read": 1,
+      "blocks_holding": 1,
+      "per_block": {
+        "772903": {
+          "read": true,
+          "value": 0.16653019665254687,
+          "holds": true
+        }
+      }
+    },
+    "P2_the_best_constant_is_within_the_margin_on_772803_and_773003": {
+      "statement": "on blocks 772803 and 773003 the best constant label's panel J is within 0.03 J of `as_trained`",
+      "value_definition": "best constant J minus as_trained J on that block",
+      "blocks_considered": [
+        772803,
+        773003
+      ],
+      "blocks_read": 2,
+      "blocks_holding": 2,
+      "per_block": {
+        "772803": {
+          "read": true,
+          "value": -0.0015937192192799765,
+          "holds": true
+        },
+        "773003": {
+          "read": true,
+          "value": 0.019680635894043785,
+          "holds": true
+        }
+      }
+    },
+    "P3_the_oracle_envelope_exceeds_as_trained_on_every_block": {
+      "statement": "on all three blocks the oracle constant envelope exceeds `as_trained` by more than 0.05 J",
+      "value_definition": "mean of the per-world maxima over the constant labels, minus as_trained J; for each world separately, the maximum over the constant labels of that world's score, averaged over the worlds. It is an upper envelope *selected on the same 32 scores it is computed from*: with 6 labels and a per-panel conditional evaluation noise of about .03 J the maximum of 6 noisy scores is biased upward by construction, so the envelope is a ceiling on what a perfect per-world label oracle could have scored here and is not an achievable policy, not a held-out estimate and not a difference anyone can act on",
+      "blocks_considered": [
+        772803,
+        772903,
+        773003
+      ],
+      "blocks_read": 3,
+      "blocks_holding": 1,
+      "per_block": {
+        "772803": {
+          "read": true,
+          "value": 0.009431892740766723,
+          "holds": false
+        },
+        "772903": {
+          "read": true,
+          "value": 0.16653019665254687,
+          "holds": true
+        },
+        "773003": {
+          "read": true,
+          "value": 0.045120244604805126,
+          "holds": false
+        }
+      }
+    },
+    "A_every_constant_at_or_below_b08_uniform_every_10_on_772903": {
+      "statement": "the strongest alternative: on block 772903 every constant label's panel J is at or below B08's `uniform_every_10`",
+      "value_definition": "whether max over labels of constant J <= B08's uniform_every_10 J on that block",
+      "blocks_considered": [
+        772903
+      ],
+      "blocks_read": 1,
+      "blocks_holding": 0,
+      "per_block": {
+        "772903": {
+          "read": true,
+          "value": false,
+          "holds": false
+        }
+      }
+    },
+    "counting_note": "the counts are the arithmetic of statements declared before the run, on the blocks that were read. A count of three blocks is not an interval and not a weight of evidence, and no margin here is a decision rule; a panel's conditional evaluation noise on this direction is about 0.03 J"
+  },
+  "input_probes": [
+    "runs/flexible_skill_duration/b09_map_772803_n02/summary.json",
+    "runs/flexible_skill_duration/b09_map_772903_n02/summary.json",
+    "runs/flexible_skill_duration/b09_map_773003_n02/summary.json"
+  ],
+  "input_b08_probes": [
+    "runs/flexible_skill_duration/b08_probe_772803_n02/summary.json",
+    "runs/flexible_skill_duration/b08_probe_772903_n02/summary.json",
+    "runs/flexible_skill_duration/b08_probe_773003_n02/summary.json"
+  ]
+}

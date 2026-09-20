@@ -2846,3 +2846,77 @@ Reduce refuses a block unless faithful load holds, the weights sha256 equals B08
 Implementer's cross-object run gave 117 passed. Known limit: no production-scale panel has
 run; a constant label is off-distribution, and a non-finite component would stop that block
 with status incomplete — that would then be a decision, not an automatic rerun.
+
+## 2026-09-20 16:03 PDT — label map B09 read: the six labels are very different policies, and the coordinator does not find the good one
+
+**Technical record.** Node probes at launch sha `fd8402f59`, tags `b09_map_<block>_n02`:
+complete 3/3, faithful load true 3/3, `as_trained` equal to B08's 32 scores 3/3, zero optimizer
+steps, about 310 s per block, one episode per lane on every panel. `_n01` (3 roots) failed at
+once with no score: the node's fast-forward removed the three copied D1280 reference summaries
+(tracked paths outside its sparse checkout); re-copied (sha256 equal to the git blobs) and
+rerun. Reduce `runs/flexible_skill_duration/b09_reduce/summary.json`, sha256
+`7978b2d7c7a56000…`, status complete.
+
+**J with one label held by every agent for the whole episode (same 32 worlds).**
+
+| block | as trained | c0 | c1 | c2 | c3 | c4 | c5 | max − min | frozen random | B08 random/10 | mean of constants |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| 772803 | .456 | .349 | .439 | **.454** | .401 | .423 | .326 | .129 | .416 | .434 | .399 |
+| 772903 | .355 | .343 | **.521** | .401 | .305 | .399 | .360 | .216 | .416 | .421 | .388 |
+| 773003 | .499 | **.519** | .486 | .393 | .422 | .487 | .517 | .127 | .496 | .474 | .471 |
+
+Coordinator's as-trained label use (share of agent-steps): 772803 label 1 64 %, label 2 26 %;
+772903 label 0 65 %, label 1 **0.09 %**; 773003 label 4 37 %, label 0 34 %, label 5 4.5 %.
+Best constant minus as-trained, paired over worlds: −.002 (se .005), **+.167 (se .008, 32 of
+32 worlds)**, +.020 (se .007, 20 of 32). Per-world envelope minus best constant: +.011, .000,
++.025 (upward-biased by selection on the same scores). Frozen-random: correlation of the
+number of distinct labels in the team with the world score −.36, +.06, −.08.
+
+**Predictions.** P1 held (+.167 on 772903). P2 held (−.002, +.020). P3 failed (envelope minus
+as-trained +.010, +.167, +.045: 1/3 over .05). P4 held on 2/3 (frozen-random minus random/10:
+−.018, −.005, +.022). Alternative A rejected: on 772903 constant 1 (.521) is far above the
+random mixture (.42).
+
+**Reading.**
+- *The skill object is real.* At fixed weights the six labels are six policies whose scores
+  span .13–.22 J on the same worlds, four to seven times the panel noise. My B07 sentence that
+  the label "may carry little behavioural content" is wrong at deployment and is withdrawn.
+- *The defect is selection, and it is bandit-sized.* On 772903 one label is best in 32 of 32
+  worlds and would lift the weakest block (.355) to the highest score seen on any block (.521);
+  the coordinator executes it on 0.09 % of agent-steps and sits on a label worth .343. On the
+  other two blocks its mostly-used labels are among the good ones and it matches the best
+  constant. Across blocks: as trained .437, best constant .498 (selected on the same worlds,
+  so not a claim; the 772903 gap does not depend on that selection).
+- *State-dependent selection adds little here.* The per-world best label exceeds the best
+  single label by ≤ .025, within the selection bias. At this checkpoint the problem is "which
+  arm", not "which arm when".
+- *Mixtures are averages.* Random assignments score about the mean of the constants plus
+  .02–.03, and team heterogeneity does not correlate with the score. B08's "random beats the
+  coordinator on 772903" is explained: random includes label 1, the coordinator does not. The
+  role-diversity alternative is weakened; nothing here asks for team-conditioned reassignment.
+- *Termination.* On this foundation when to re-ask is immaterial; what is asked for is the
+  wrong arm on one block in three. Any later termination arm on this learner needs three
+  comparators: as trained, random/10, and best constant label.
+- *Weakened:* "D1280's margin over CF_S comes from skill selection" — a random mixture scores
+  about as D does. *Strengthened:* the margin comes from the label-conditioned family itself
+  (six policies trained on shared experience). *Untouched:* why that family trains better than
+  one flat policy.
+
+**Next research judgment: why does the high level miss a six-armed bandit with a .17 gap?**
+Two explanations I can separate without a fit.
+- *E1, the gap is invisible in training.* The map was measured with mean actions. Training
+  executes sampled actions with std ≈ 2.9 units around a mean the label moves by ≈ .6; under
+  that noise the labels' returns may be nearly equal, so the coordinator's return signal
+  carries no ranking. Prediction: the same constant-label panels with *sampled* actions shrink
+  max − min to below .05 on 3/3, and label 1's lead on 772903 to below .05.
+- *E2, the gap is visible and the coordinator does not learn it.* Then max − min stays above
+  .08 under sampled actions, and the object is the coordinator's update (near-flat q with
+  entropy 1.74–1.78 of 1.79, 15 steps per rollout, a state-value critic with no per-label
+  signal, and an argmax read off a nearly flat law at deployment).
+- *What each changes.* E1 → the lever is the low-level action noise (the state-independent
+  log-std grew threefold; B03 found the same mechanism in the flat learner), and a smaller
+  entropy bonus on D is the next fit-level idea. E2 → the lever is the high-level learner, and
+  a bandit-style prototype of its update is the next step before any fit.
+- *Next observation (zero-fit, node, saved weights):* B10 — `as_trained` for faithful load,
+  then the six constant-label panels with sampled actions, two evaluation-noise seeds each so
+  the sampled panels' own noise is measured rather than assumed.
