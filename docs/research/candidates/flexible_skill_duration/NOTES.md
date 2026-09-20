@@ -1776,3 +1776,54 @@ every flat setting since B01, so no gap size and no competence claim; no MEI ver
 **Engineering.** The scaling touches the shared learner (`hmasd/networks.py`
 `SkillDiscoverer._apply_central_input`, one application point for acting, replay and
 evaluation): Implementer from a scope note, independent Reviewer, DM acceptance, then launch.
+
+## 2026-09-19 21:05 PDT — read: the temporary temporal-alignment design (independent collaborator); what it changes for FSD
+
+The owner pointed me to `docs/research/designs/TEMPORAL_BEHAVIOR_STATE_ALIGNMENT_20260919.md` on
+the published branch `codex/temporal-state-alignment` at
+`646ab539d2a2ef689d0e4ee977f327f79cf2215b` (an owner-assigned bounded design and prototype, not a
+direction; it had read this notebook up to the response entry at `1b1b91400`). Read in full. It
+runs nothing on FSD, claims no FSD result and says so; I treat it as a simple-model bridge.
+
+**What I take from it.**
+- A sharper wording of the skill-channel explanation, now that "learning coordinator" is
+  withdrawn. D's skill is a *persistent policy mode*: a label held k = 10 ticks that modulates
+  the actor's features before the GRU while per-tick feedback and action sampling continue. A
+  mode drawn without regard to state still makes behaviour temporally coherent: with a mode
+  mean m_z held two ticks and independent residual e_t, Var(a0 + a1) = 4 Var(m_z) + 2 Var(e)
+  against 2 Var(m_z) + 2 Var(e) when the mode is redrawn each tick, at equal per-tick variance.
+  So D may explore (and cover the area) differently from CF, whose only randomness is an
+  independent Gaussian per tick, without any learned skill selection. This is a bridge with its
+  stated omissions (no boundaries, feedback, teammates, learning); it predicts neither J nor a
+  D advantage.
+- Two estimands that my notes have blurred: what persistence does for *training-time
+  exploration* and what it is worth at *deployment*. In these runners training samples actions
+  and evaluation is deterministic, so a D-over-CF difference in J45 can come from how the policy
+  was explored into, from the mode mixture still present at evaluation, or both.
+- The identification caution for any later exchange-style diagnostic: an online-minus-exchanged
+  gap is Cov(p, A) and splits into a new-observation part and a retained-history part that can
+  cancel; a zero gap does not show that state is unused, a positive one does not show that new
+  information is used. For FSD the analogous exchange (joint skill-label sequences between
+  worlds under a frozen checkpoint) would ask about state-aligned skill *identity*, not timing,
+  since the clock is fixed; with skill choice near uniform I expect it to show little, and these
+  runners save no checkpoint, so it is not free. Not scheduled.
+- The likelihood warning: giving a flat learner temporally correlated action noise while keeping
+  independent marginal Normal likelihoods credits parameters that cannot affect return (the
+  document's exact two-step example gives a spurious gradient component of rho). Any
+  "CF with coherent exploration" arm must carry the conditional density through PPO's ratio and
+  the recurrent replay, or it confounds the learner with the mechanism.
+
+**What it does not change.** B05 stands as written: it tests a confirmed construction hazard
+that is present from the first update, and nothing in the design speaks to it. The design
+itself says it neither diagnoses the CF input hazard nor replaces this repair.
+
+**What it changes.** The branch of B05's "what I would do with it" where scaling is not enough.
+The next explanation in line is then persistent-mode exploration, and the direction's own axis
+gives the cleanest contrast for it without touching the flat learner or any likelihood: D with
+its skill held k = 10 against D with the skill redrawn every tick (k = 1), same coordinator,
+same low-level code, the coordinator being near-uniform in both. Intermediate prediction:
+lower temporal autocorrelation of actions and less area covered per episode in training at
+k = 1; native: lower training return and J at k = 1 if coherence is what D's low level gains
+from. That would be evidence about fixed persistence, the first half of this direction's
+question, obtained inside the D family; it would still say nothing about an *unfixed* k.
+Recorded as the candidate that follows B05, not scheduled and not yet a prospective entry.
