@@ -2026,3 +2026,43 @@ logits are insensitive to the state or saturated from initialisation. If they ar
 direction's own question has been asked so far of a coordinator that cannot see, and the next
 prospective entry is a scaled-state D, which is also the prerequisite for any k contrast,
 including the k = 10 against k = 1 persistence contrast recorded at 21:05.
+
+## 2026-09-19 23:20 PDT — zero-fit inspection planned: does D's coordinator see the state? (forward probe of the untrained D1280, no learner change)
+
+Follows the "Next" of the B05 reading. No fit, no learner change: the probe feeds the untrained
+coordinator the state as it is (raw metres) and, separately, the same state pre-transformed by
+B05's affine, which at initialisation is exactly what a scaled-state D would compute.
+
+**Source facts (read now).** `SkillCoordinator` embeds the 119-entry raw state with one
+`nn.Linear` (gain 1) into one token and each agent's scaled observation into another; the seven
+tokens go through a default (post-norm) `nn.TransformerEncoder`, so attention queries and keys
+are formed from the un-normalised token embeddings; team and agent skill logits come from a
+decoder on top. The low-level critic (`R_Critic`) takes the central observation through the same
+`MLPBase` → FiLM → GRU path as the actor, with no input normalisation.
+
+**What is measured**, per block (772803, 772903, 773003), D1280 construction, untrained, on the
+inputs of one frozen evaluation panel (32 worlds), zero optimizer steps, for the raw and the
+pre-scaled state: (a) the norm of the state token's embedding against the observation tokens';
+(b) first encoder layer attention: mean maximum attention weight per query and mean attention
+entropy (recomputed from the layer's own projection weights); (c) sensitivity of the team-skill
+and agent-skill probabilities (total-variation change) to an agent's own observation × 1.05, to
+moving one UAV by 50 m in the state, and to swapping two agents' observations; (d) the skill
+distributions' entropy at initialisation; (e) for the low-level critic: GRU gate saturation and
+the change in value when one UAV is moved 50 m. J_init of the untrained D1280 is recorded too
+(raw state only; the pre-scaled state is a forward calculation, not a policy that is executed).
+
+**Expected (sign; held loosely where said).** Raw: the state token's norm is more than 100 times
+an observation token's; first-layer attention is near one-hot (mean maximum weight above .9);
+skill probabilities move less under an own-observation perturbation than they do with the
+pre-scaled state, by at least a factor of three. Loosely held: post-norm layers may rescue much
+of this, and the decoder may start so close to uniform that every sensitivity is tiny in both.
+Critic: gates mostly saturated with raw state, as in the CF actor; yet D's critic does fit, so I
+expect its saturation to be lower than the actor's 98 % or harmless for a value function of the
+state. If raw and pre-scaled differ little on (b) and (c), the coordinator's standing still has
+another cause (its reward, its batch, its learning rate) and a scaled-state D is not the next
+entry.
+
+**What I would do with it.** Material difference: prospective entry for a scaled-state D
+(coordinator and both critics read the state through the same affine, flag-gated, reviewed), read
+first on whether the coordinator moves and its skill choice leaves uniform, then on J. No
+material difference: go to the persistence contrast (k = 10 against k = 1) with D as it is.
