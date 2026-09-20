@@ -522,3 +522,30 @@ The DM's staged-file check then exposed four trailing blank EOF lines that the
 earlier unstaged check did not include. They were removed in a follow-up publication
 before any launch; executable semantics and the reviewed tests are unchanged. No
 history rewrite or repeated synthetic/native work is needed for that whitespace fix.
+
+### Three original B03 block invocations admitted
+
+All three original invocations were admitted on `local_linux` at published source
+`5101c921e7ba793b95ec7ffef3289114cb9b27b9`, with separate immutable source snapshots
+and outputs in this Codex author worktree. Current canonical/published control policy
+was observed at `a41dbb31e5806d0b7c3e8958b6e74396406aa5cd`; Claude's checkout/index and
+FSD operations were untouched. Native identity, node, argv and source/output bindings
+remain in these manifests rather than a separately maintained command record:
+
+- [8921 manifest](../../../../runs/ucope/reactive_rate_b03_8921/launch-manifest.json),
+  accepted 2026-09-20 03:14:11.510350 UTC.
+- [8922 manifest](../../../../runs/ucope/reactive_rate_b03_8922/launch-manifest.json),
+  accepted 2026-09-20 03:14:54.979489 UTC.
+- [8923 manifest](../../../../runs/ucope/reactive_rate_b03_8923/launch-manifest.json),
+  accepted 2026-09-20 03:15:22.282681 UTC.
+
+The three fresh node preflights passed the 4 GiB available-memory floor, observing
+12055461888 / 11731087360 / 11500441600 physical/effective available bytes. These are
+admission observations, not experiment memory peaks. Each invocation runs R then B;
+admitting three invocations does not claim all six arm fits have already begun.
+
+The sole bounded Monitor explicitly acknowledged all three exact operation references
+and owns read-only observation through their terminal witnesses. It reports actual
+arm transitions, exceptions and completion, not routine episode-count increments.
+The DM owns collection and the joint reading after all three are terminal. No B03
+scientific score has been read, and no successor or replacement is allocated.
