@@ -1199,3 +1199,25 @@ Alive with an empty `stderr.log` after the fourth admission; each manifest carri
 
 Still to launch as slots free, same sha: both arms on 773003. No B04 score or diagnostic is read
 before all six are terminal.
+
+## 2026-09-19 19:05 PDT — flat update B04: all six fits admitted; two terminal; shared write with UCOPE
+
+Execution facts only. `b04_m5_772803_a01` and `b04_m5_772903_a01` exited with code 0 and 45
+training rows, empty `stderr.log`, about 50 minutes after admission at four concurrent (the
+60-step-per-rollout update is much faster than the 2,250-step one; observed 60 low-level steps per
+rollout in every fit). The last two fits were launched into the freed slots at the same sha, both
+admitted at the first request, alive with an empty `stderr.log`; never more than four concurrent.
+
+| tag | arm | block | operation ref (under `/home/wu/projects/HMASD/.git/hmasd-admission/`) |
+| --- | --- | --- | --- |
+| `b04_m1_773003_a01` | CF_M1 | 773003 | `e3f4c34c2463e0bc2fd5eb490eb634d9793ad03b499ddb8d2783b731897fd1e9.json` |
+| `b04_m5_773003_a01` | CF_M5 | 773003 | `fbd3faaa8247a341dde470a04522d725d3f5b4f6e51e5dc5bd5308009407e21d.json` |
+
+No B04 score or diagnostic is read before all six are terminal.
+
+Shared write: by the owner's choice of 2026-09-19 a Codex session owns the reopened `ucope`
+feedback-renewal branch in parallel with FSD, FOLR idle; Codex integrated PR #27 into `main`
+(`801184245`). This session held its FSD writes to `main` until that merge (coordination note left
+on the PR), then fast-forwarded its checkout and the `wsl_4070` checkout. The merge touches no FSD
+path and not the FSD row of `RESEARCH.md`. UCOPE's first batch is planned on `local_linux` from a
+separate worktree; this session touches no UCOPE file or `runs/ucope/` output.
