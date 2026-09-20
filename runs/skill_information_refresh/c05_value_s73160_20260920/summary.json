@@ -1,0 +1,442 @@
+{
+  "object": "SIR-C05",
+  "direction": "skill_information_refresh",
+  "status": "COMPLETE",
+  "launch_sha": "d8680026026b06f0861601839444392c452e8c20",
+  "config": {
+    "seed": 73160,
+    "train_cycles": 16384,
+    "batch": 128,
+    "epochs": 4,
+    "final_cycles": 4096
+  },
+  "counts": {
+    "started_fits": 1,
+    "train_cycles": 16384,
+    "train_transitions": 98304,
+    "optimizer_steps": 512,
+    "eval_cycles": 26196,
+    "eval_transitions": 157176,
+    "evaluation_optimizer_steps": 0
+  },
+  "limits": [],
+  "device": "cpu",
+  "dtype": "float32",
+  "native_threads": 1,
+  "arms": [
+    "LEARNED",
+    "VOI",
+    "PRE_FIRST",
+    "PRE_LAST",
+    "AGE_CHANGE",
+    "INVERSE_CHANGE"
+  ],
+  "primary_reference": "VOI",
+  "selection": "none; all four restricted mappings reported",
+  "information": "current sender X/q plus the paid receiver context already delivered at t=1",
+  "channel": {
+    "packets_per_cycle": 2,
+    "bytes_per_cycle": 11,
+    "context_bytes": 7,
+    "data_bytes": 4,
+    "delay": 1,
+    "sender_slots": [
+      1,
+      3
+    ],
+    "receiver_slot": 0,
+    "binary_timing_choices": 1
+  },
+  "claim_scope": "fixed scripted commitments; exact opportunity is not learned package value",
+  "phases_seconds": {
+    "training": 0.594915863010101,
+    "evaluation": 0.18624527199426666
+  },
+  "initial_exact": {
+    "cycles": 180,
+    "native_utility": 4.0,
+    "first_correct": 1.0,
+    "second_correct": 0.5,
+    "early_fraction": 1.0,
+    "packets": 360,
+    "bytes": 1980
+  },
+  "final": {
+    "LEARNED": {
+      "cycles": 4096,
+      "native_utility": 5.31396484375,
+      "first_correct": 0.72607421875,
+      "second_correct": 0.953857421875,
+      "early_fraction": 0.22119140625,
+      "packets": 8192,
+      "bytes": 45056
+    },
+    "VOI": {
+      "cycles": 4096,
+      "native_utility": 5.31396484375,
+      "first_correct": 0.72607421875,
+      "second_correct": 0.953857421875,
+      "early_fraction": 0.22119140625,
+      "packets": 8192,
+      "bytes": 45056
+    },
+    "PRE_FIRST": {
+      "cycles": 4096,
+      "native_utility": 3.95703125,
+      "first_correct": 1.0,
+      "second_correct": 0.4931640625,
+      "early_fraction": 1.0,
+      "packets": 8192,
+      "bytes": 45056
+    },
+    "PRE_LAST": {
+      "cycles": 4096,
+      "native_utility": 5.001220703125,
+      "first_correct": 0.5048828125,
+      "second_correct": 1.0,
+      "early_fraction": 0.0,
+      "packets": 8192,
+      "bytes": 45056
+    },
+    "AGE_CHANGE": {
+      "cycles": 4096,
+      "native_utility": 4.990234375,
+      "first_correct": 1.0,
+      "second_correct": 0.75146484375,
+      "early_fraction": 0.4951171875,
+      "packets": 8192,
+      "bytes": 45056
+    },
+    "INVERSE_CHANGE": {
+      "cycles": 4096,
+      "native_utility": 3.968017578125,
+      "first_correct": 0.5048828125,
+      "second_correct": 0.74169921875,
+      "early_fraction": 0.5048828125,
+      "packets": 8192,
+      "bytes": 45056
+    }
+  },
+  "final_exact": {
+    "LEARNED": {
+      "cycles": 180,
+      "native_utility": 5.322222222222222,
+      "first_correct": 0.7222222222222222,
+      "second_correct": 0.9555555555555556,
+      "early_fraction": 0.2222222222222222,
+      "packets": 360,
+      "bytes": 1980
+    },
+    "VOI": {
+      "cycles": 180,
+      "native_utility": 5.322222222222222,
+      "first_correct": 0.7222222222222222,
+      "second_correct": 0.9555555555555556,
+      "early_fraction": 0.2222222222222222,
+      "packets": 360,
+      "bytes": 1980
+    },
+    "PRE_FIRST": {
+      "cycles": 180,
+      "native_utility": 4.0,
+      "first_correct": 1.0,
+      "second_correct": 0.5,
+      "early_fraction": 1.0,
+      "packets": 360,
+      "bytes": 1980
+    },
+    "PRE_LAST": {
+      "cycles": 180,
+      "native_utility": 5.0,
+      "first_correct": 0.5,
+      "second_correct": 1.0,
+      "early_fraction": 0.0,
+      "packets": 360,
+      "bytes": 1980
+    },
+    "AGE_CHANGE": {
+      "cycles": 180,
+      "native_utility": 5.0,
+      "first_correct": 1.0,
+      "second_correct": 0.75,
+      "early_fraction": 0.5,
+      "packets": 360,
+      "bytes": 1980
+    },
+    "INVERSE_CHANGE": {
+      "cycles": 180,
+      "native_utility": 4.0,
+      "first_correct": 0.5,
+      "second_correct": 0.75,
+      "early_fraction": 0.5,
+      "packets": 360,
+      "bytes": 1980
+    }
+  },
+  "zero_risk_exact": {
+    "LEARNED": {
+      "cycles": 60,
+      "native_utility": 6.0,
+      "first_correct": 1.0,
+      "second_correct": 1.0,
+      "early_fraction": 0.5,
+      "packets": 120,
+      "bytes": 660
+    },
+    "VOI": {
+      "cycles": 60,
+      "native_utility": 6.0,
+      "first_correct": 1.0,
+      "second_correct": 1.0,
+      "early_fraction": 0.5,
+      "packets": 120,
+      "bytes": 660
+    },
+    "PRE_FIRST": {
+      "cycles": 60,
+      "native_utility": 6.0,
+      "first_correct": 1.0,
+      "second_correct": 1.0,
+      "early_fraction": 1.0,
+      "packets": 120,
+      "bytes": 660
+    },
+    "PRE_LAST": {
+      "cycles": 60,
+      "native_utility": 5.0,
+      "first_correct": 0.5,
+      "second_correct": 1.0,
+      "early_fraction": 0.0,
+      "packets": 120,
+      "bytes": 660
+    },
+    "AGE_CHANGE": {
+      "cycles": 60,
+      "native_utility": 6.0,
+      "first_correct": 1.0,
+      "second_correct": 1.0,
+      "early_fraction": 0.5,
+      "packets": 120,
+      "bytes": 660
+    },
+    "INVERSE_CHANGE": {
+      "cycles": 60,
+      "native_utility": 5.0,
+      "first_correct": 0.5,
+      "second_correct": 1.0,
+      "early_fraction": 0.5,
+      "packets": 120,
+      "bytes": 660
+    }
+  },
+  "comparisons": {
+    "final": {
+      "learned_minus_voi": 0.0,
+      "learned_minus_voi_total": 0,
+      "best_restricted_value": 5.001220703125,
+      "voi_minus_best_restricted": 0.312744140625,
+      "learned_minus_best_restricted": 0.312744140625,
+      "learned_positive_worlds": 0,
+      "learned_negative_worlds": 0,
+      "learned_tied_worlds": 4096
+    },
+    "final_exact": {
+      "learned_minus_voi": 0.0,
+      "learned_minus_voi_total": 0,
+      "best_restricted_value": 5.0,
+      "voi_minus_best_restricted": 0.32222222222222197,
+      "learned_minus_best_restricted": 0.32222222222222197,
+      "learned_positive_worlds": 0,
+      "learned_negative_worlds": 0,
+      "learned_tied_worlds": 180
+    },
+    "zero_risk_exact": {
+      "learned_minus_voi": 0.0,
+      "learned_minus_voi_total": 0,
+      "best_restricted_value": 6.0,
+      "voi_minus_best_restricted": 0.0,
+      "learned_minus_best_restricted": 0.0,
+      "learned_positive_worlds": 0,
+      "learned_negative_worlds": 0,
+      "learned_tied_worlds": 60
+    }
+  },
+  "contexts": [
+    {
+      "condition": 0,
+      "received_weight": 1,
+      "risk_tenths": 1,
+      "delta": -0.4,
+      "learned_early": false,
+      "learned_probability": 0.026788517832756042,
+      "voi_early": false
+    },
+    {
+      "condition": 0,
+      "received_weight": 1,
+      "risk_tenths": 5,
+      "delta": -2.0,
+      "learned_early": false,
+      "learned_probability": 0.0017050706082955003,
+      "voi_early": false
+    },
+    {
+      "condition": 0,
+      "received_weight": 1,
+      "risk_tenths": 9,
+      "delta": -3.6,
+      "learned_early": false,
+      "learned_probability": 0.00035340842441655695,
+      "voi_early": false
+    },
+    {
+      "condition": 0,
+      "received_weight": 2,
+      "risk_tenths": 1,
+      "delta": -0.4,
+      "learned_early": false,
+      "learned_probability": 0.055108003318309784,
+      "voi_early": false
+    },
+    {
+      "condition": 0,
+      "received_weight": 2,
+      "risk_tenths": 5,
+      "delta": -2.0,
+      "learned_early": false,
+      "learned_probability": 0.0026926102582365274,
+      "voi_early": false
+    },
+    {
+      "condition": 0,
+      "received_weight": 2,
+      "risk_tenths": 9,
+      "delta": -3.6,
+      "learned_early": false,
+      "learned_probability": 0.000439695140812546,
+      "voi_early": false
+    },
+    {
+      "condition": 0,
+      "received_weight": 3,
+      "risk_tenths": 1,
+      "delta": -0.4,
+      "learned_early": false,
+      "learned_probability": 0.11900657415390015,
+      "voi_early": false
+    },
+    {
+      "condition": 0,
+      "received_weight": 3,
+      "risk_tenths": 5,
+      "delta": -2.0,
+      "learned_early": false,
+      "learned_probability": 0.0048445588909089565,
+      "voi_early": false
+    },
+    {
+      "condition": 0,
+      "received_weight": 3,
+      "risk_tenths": 9,
+      "delta": -3.6,
+      "learned_early": false,
+      "learned_probability": 0.000600613362621516,
+      "voi_early": false
+    },
+    {
+      "condition": 1,
+      "received_weight": 1,
+      "risk_tenths": 1,
+      "delta": 0.6,
+      "learned_early": true,
+      "learned_probability": 0.9394329190254211,
+      "voi_early": true
+    },
+    {
+      "condition": 1,
+      "received_weight": 1,
+      "risk_tenths": 5,
+      "delta": -1.0,
+      "learned_early": false,
+      "learned_probability": 0.26848265528678894,
+      "voi_early": false
+    },
+    {
+      "condition": 1,
+      "received_weight": 1,
+      "risk_tenths": 9,
+      "delta": -2.6,
+      "learned_early": false,
+      "learned_probability": 0.011233470402657986,
+      "voi_early": false
+    },
+    {
+      "condition": 1,
+      "received_weight": 2,
+      "risk_tenths": 1,
+      "delta": 1.6,
+      "learned_early": true,
+      "learned_probability": 0.9692012071609497,
+      "voi_early": true
+    },
+    {
+      "condition": 1,
+      "received_weight": 2,
+      "risk_tenths": 5,
+      "delta": 0.0,
+      "learned_early": false,
+      "learned_probability": 0.4593871235847473,
+      "voi_early": false
+    },
+    {
+      "condition": 1,
+      "received_weight": 2,
+      "risk_tenths": 9,
+      "delta": -1.6,
+      "learned_early": false,
+      "learned_probability": 0.020655538886785507,
+      "voi_early": false
+    },
+    {
+      "condition": 1,
+      "received_weight": 3,
+      "risk_tenths": 1,
+      "delta": 2.6,
+      "learned_early": true,
+      "learned_probability": 0.9829890131950378,
+      "voi_early": true
+    },
+    {
+      "condition": 1,
+      "received_weight": 3,
+      "risk_tenths": 5,
+      "delta": 1.0,
+      "learned_early": true,
+      "learned_probability": 0.6647146940231323,
+      "voi_early": true
+    },
+    {
+      "condition": 1,
+      "received_weight": 3,
+      "risk_tenths": 9,
+      "delta": -0.6,
+      "learned_early": false,
+      "learned_probability": 0.042073629796504974,
+      "voi_early": false
+    }
+  ],
+  "strict_context_errors": 0,
+  "parameters": {
+    "count": 162,
+    "displacement": 4.983677387237549,
+    "evaluation_displacement": 0.0,
+    "finite": true
+  },
+  "wall_seconds": 0.7870121269952506,
+  "resources": {
+    "peak_rss_kib": 301052,
+    "rss_scope": "one Linux scientific child, not aggregate node occupancy",
+    "user_cpu_seconds": 2.179584,
+    "system_cpu_seconds": 1.133703
+  }
+}
