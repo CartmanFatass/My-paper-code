@@ -619,3 +619,132 @@ floor. DM directly retains observation and collection; uncertainty must be recon
 the same operation, never by changing the tag. No additional owner/Root permission is
 needed after the recorded active registration. The direction continues through collection
 and interpretation rather than ending at accepted launch or a terminal process.
+
+## 2026-09-20 — A02 read: persistent collection improves its own return, not target learning
+
+All six declared fits were natively admitted and exited zero at exact source
+`739344301e965134d44ba754e7a7363258731e81`, serially on local_linux. No failed attempt,
+retry, observer transfer or scored input change occurred. The paired run roots contain
+the full native handles, exit witnesses, logs, configs, summaries and underlying arrays:
+
+| Seed | long_behavior | matched_termination |
+| --- | --- | --- |
+| 91031 | [run](../../../../runs/termination_rule_experience_reuse/a02_long_behavior_91031_20260920/launch-manifest.json) | [run](../../../../runs/termination_rule_experience_reuse/a02_matched_termination_91031_20260920/launch-manifest.json) |
+| 91032 | [run](../../../../runs/termination_rule_experience_reuse/a02_long_behavior_91032_20260920/launch-manifest.json) | [run](../../../../runs/termination_rule_experience_reuse/a02_matched_termination_91032_20260920/launch-manifest.json) |
+| 91033 | [run](../../../../runs/termination_rule_experience_reuse/a02_long_behavior_91033_20260920/launch-manifest.json) | [run](../../../../runs/termination_rule_experience_reuse/a02_matched_termination_91033_20260920/launch-manifest.json) |
+
+**Independent collection/read acceptance.** No learner import or trajectory replay was used.
+Reconciled manifest, runner/supervisor identities, OS exit witnesses, admitted command hash,
+source and all object/arm/learner/seed metadata. Every declared artifact byte count/hash
+matches. Each fit has 49,152 training steps/target rows/visits, 6,144 update calls, 256
+evaluation episodes/24,576 evaluation steps, and zero evaluation updates. Independently
+decoded recorded state transitions, closed-loop movements, rewards and teammate countdowns;
+reconstructed visit tables and actual conditional option probabilities. Every recorded
+label change has a real behavior renewal. Paired initial states/options and all exogenous
+teammate/demand state components match; focal paths differ as expected. Initial evaluation
+panels match exactly. Reconstructed each of the 1,536 evaluation episode scores, every
+checkpoint/primary mean, and update-row sums from the underlying outputs. All checks pass;
+final tables are finite and their reported movement matches the saved arrays.
+
+**Prewritten target J contrast.** Primary is again the equal mean of checkpoints
+32/128/512. These three fresh blocks are the independent units; A01's nine development
+fits are not additional A02 replication or a confirmation batch.
+
+| Seed | Long primary | Matched primary | Long − matched primary | Long final | Matched final |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| 91031 | .70764974 | .71115994 | −.00351020 | .73331706 | .73924154 |
+| 91032 | .71059028 | .71375326 | −.00316298 | .74752604 | .75704753 |
+| 91033 | .70496962 | .72088759 | −.01591797 | .73994141 | .74086914 |
+
+Mean long-minus-matched primary is **−.00753038**, with descriptive paired t95 interval
+**[−.02557997, +.01051921]** (df=2, approximate normal block differences). Final differences
+are **−.00592448 / −.00952148 / −.00092773**, mean **−.00545790**, interval
+**[−.01617902, +.00526322]**. All six primary/final block contrasts are adverse, but there
+are only three independent training blocks and wide intervals; this is not a population
+inferiority, equivalence or practical-threshold verdict. At checkpoint 32, long is higher
+in two blocks; at 128 and 512 it is lower in all three. Do not select the early panel to
+rescue the fixed primary. Both are actual learners: the common mean initial J is .57329102,
+and long/matched final means are .74026150/.74571940 with nonzero table movement in each fit.
+
+**Intermediate prediction versus native consequence.** Long behavior has the predicted
+larger endpoint start-state occupancy: **.826233 / .825297 / .829997**, versus matched
+**.567566 / .563680 / .568929**. Renewals are 6,134/6,205/6,123 versus
+24,342/24,615/24,459, with actual label changes 3,113/3,167/3,078 versus
+12,134/12,306/12,232. These finite-episode fractions accord with the physical persistence
+prediction, not an assumption that target learning must benefit from it.
+
+Long trace mass is 3.28722/3.29156/3.31107 versus 2.47368/2.47138/2.49339. Raw ratios
+reach 8 versus 2, and mean squared return increments are 5.56–5.67 versus 3.93–4.12.
+The latter is not measured estimator variance. Long visits 655/651/648 table entries and
+matched 666/668/665; merely counting entries does not identify whether useful target-state
+coverage or correction/clipping dominates the result. In particular, the long collector's
+own mean training rewards (.65492/.65706/.65647) exceed matched's
+(.57781/.57831/.58144), while its target J is lower. Training reward, endpoint occupancy
+and longer return propagation are therefore not sufficient proxies for this target-learning
+benefit. None of these observational diagnostics identifies a causal mediator.
+
+**Working judgment changed.** Drop the favorable A02 long-collector conjecture as a reason
+to invest further in that collection choice at this exposure. Use matched termination as
+a provisional default if making this same fresh-data choice; do not claim a general ranking.
+The expected intermediate change occurred, while its predicted favorable native consequence
+failed. This weakens the proposed persistence-to-useful-learning link in this fixed host,
+not the legality or possible usefulness of reusing already existing long data. It supplies
+no evidence for learning a gate, changing teammate laws or adding a bespoke team correction.
+
+**Cost and continuation.** Six started/completed fits, 294,912 training and 147,456
+evaluation team steps, 36,864 tabular updates. Summed entry-to-summary wall **6.841153 s**;
+first native acceptance to last exit **173.390543 s**, including serial staging/observation
+gaps but excluding preceding first-launch staging. Maximum individual process peak RSS is
+**41,180 KiB**. The timing limitations stated before A01 still apply; no equal-work speed
+or wall-to-threshold claim follows. Across A01/A02, 15 fits have been started/read, with
+737,280 executed training and 368,640 evaluation steps; no fit entitlement was consumed.
+
+The next action is a cumulative boundary reading, not another fit. In this fully observed,
+fixed-teammate model, remaining commitments can be retained in the state and ordinary
+off-policy learning already supplies the lawful route. A01 did not establish useful
+extra value from Retrace over direct Q(beta); A02 did not support choosing this long
+collector to improve target J. Neither observation provides a new reason for an automatic
+beta/alpha sweep, longer training, extra seeds or a special multi-agent correction. DM is
+checking the strongest contrary reading before deciding whether any concrete next
+comparison is worth its cost. No A03 or confirmation batch is selected by this entry.
+
+## 2026-09-20 — Cumulative boundary: keep the ordinary route; this prototype path is idle
+
+The independent Critic read the six A02 configs/summaries and found no material dissent
+from the above update or a concrete successor favored by the present evidence. I accept
+two refinements. First, retain the early contrary panel explicitly: long-minus-matched
+at 32 episodes is **+.00566406 / +.00901693 / −.00209961**, mean **+.00419379**. Thus this
+is not "long is never useful at any stage"; the observed early advantage does not change
+the prewritten primary or, by itself, justify a new collection curriculum. Second,
+independent repetition is not inherently screening: it can test recurrence. Here there
+is no present decision that needs a more precise ranking, so its information value does
+not justify another batch. No need to exhaust all coverage/clipping explanations first.
+Adviser agreement is not additional replication.
+
+**DM decision.** Keep ordinary target-termination learning as the reference implementation;
+keep the matched-termination collector as the provisional fresh-data default in this host.
+Do not add a special termination learner, joint correction, new representation, beta/alpha
+sweep, confirmatory claim or more seeds on the strength of A01/A02. The direction remains
+`exploring`, but this prototype path is **idle with no selected successor or live producer**.
+All 15 fits are collected and scientifically read, not merely terminal. This is an
+investment decision, not completion of the direction, general falsification, or a claim
+that the ordinary method is optimal.
+
+What is strengthened: observed low-level skills with recorded teammate commitments permit
+a lawful ordinary augmented-state learning route; in A01, established multi-step learning
+beats its one-step reference at the declared exposure. What is weakened: useful extra
+Retrace value over direct Q(beta) at that exposure, and the favorable target-J prediction
+for the particular long uniform collector in A02. What remains untouched: effects on the
+UAV host/current learned skills, hidden commitments, changing teammate laws, general
+termination-rule populations, convergence and wall-time savings. The full-state fixed-law
+reduction should not be sold as solving those omitted multi-agent couplings.
+
+Re-entry needs a concrete new scientific reason and a distinguishable native prediction,
+for example an identified fixed-skill collection/support condition under which the strong
+ordinary reference may fail or a real use decision that requires recurrence/precision.
+This is not a requirement for a positive pilot, proof or exhaustive bottleneck diagnosis.
+The DM owns selecting such a question; none is selected now. There is **no external
+dependency** and no waiting on Claude B08, Root permission, or a nonexistent producer.
+Root owns only shared-index integration of this published standing; it is not being asked
+to approve a batch or to invent the next idea. All evidence and negative constraints stay
+available for a future reasoned continuation.

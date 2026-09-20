@@ -1,0 +1,20 @@
+{
+  "arm": "matched_termination",
+  "counts": {
+    "evaluation_episodes": 256,
+    "evaluation_new_updates": 0,
+    "evaluation_team_steps": 24576,
+    "gradient_optimizer_steps": 0,
+    "started_fits": 1,
+    "table_entries_written": 47813,
+    "tabular_update_calls": 6144,
+    "target_rows": 49152,
+    "train_episodes": 512,
+    "train_team_steps": 49152
+  },
+  "error": null,
+  "learner": "retrace",
+  "object": "termination_reuse_behavior_clock_a02",
+  "seed": 91033,
+  "status": "COMPLETE"
+}
