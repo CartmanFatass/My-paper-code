@@ -957,3 +957,17 @@ parameter movement in the finalizer. A new managed-scratch second-optimizer-step
 regression requires one completed batch, exactly one successful update, partial raw traces
 and TECHNICAL_FAILURE, without a final checkpoint. This is an engineering repair before
 the first C05 scientific run, not a failed scientific seed or a renamed retry.
+
+The complete direction suite passes **46 tests in 4.45 s**. The Reviewer independently
+accepted the repair at `91a0127c2`, running the new failure regression (1 passed, 1.67 s)
+and finding no remaining material issue. I read the full review and accept the C05 delta.
+The Critic also checked the concrete information view and value algebra, with no material
+dissent. I adopt its sharper learning read: exact native regret is
+`sum_context |Delta| * I[learned_choice != VOI_choice] / 18`; ties contribute zero, and an
+accidental advantage on 4,096 random cycles cannot beat VOI in expectation. Calibrated local
+q and the fixed, non-inferential receiver are essential limits; the paid w contributes
+only 1/18 task unit independently, not the entire restricted-rule gap. This single fit ends
+the bridge's finite-learnability question at its exact regret, with no seed extension or
+superiority confirmation. A later target-host question requires its own lawful mapping and
+strong simple reference; neither sign of this toy automatically decides that question.
+These reviews establish consistency and interpretation constraints, not an empirical result.
