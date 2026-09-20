@@ -4339,3 +4339,220 @@ change before the team boundary. If that evidence warrants J/I/F, record the exa
 comparison and planned cost/reason; these engineering checks do not authorize its launch.
 This task's existing follow-up is being repurposed to read B08 when published, quietly while
 unchanged, with no automatic fits, probes or takeover of Claude's operations.
+
+
+## 2026-09-20 16:00 UTC — B08-informed termination judgment: an active label, an unproven renewal opportunity
+
+**Decision.** Do not turn the conditional six-fit J / I / F proposal into a launch. B08
+rejects the practically inert-label explanation on its measured support and establishes
+that an optional local END can change behaviour. It does not establish the proposed
+team-conditioned reason to renew. The strong simple alternative has also changed:
+fixed-clock uniform label assignment competes with the trained selector. I therefore
+retain the reviewed termination implementation at `d2dcb4188`, leave its production binding
+unstarted, and read Claude's already selected label-to-J comparison before choosing the
+next native study. This is an investment decision for this construction, not a finding
+that adaptive termination is ineffective. No scientific fit, native evaluation, checkpoint
+forward pass, Pro request or repeated tiny-host test was performed in this update.
+
+This supersedes the two-outcome shortcut in my 12:50 entry: **behavioural content does not
+automatically select the six-fit comparison**. Nor does this result activate the
+inert-label/service-responsibility fallback. The current labels do have behavioural content;
+I do not replace Claude's skill object to obtain a more convenient termination story.
+
+### Fixed evidence and technical acceptance
+
+Read the complete new B08 notebook entries and runner-written artifacts at published main
+[`9ade1733724d4a2d4eb5d44bd4f2bad62a63d985`](https://github.com/CartmanFatass/My-paper-code/commit/9ade1733724d4a2d4eb5d44bd4f2bad62a63d985),
+including the preceding technical decision at `1c21cbc93`. The relevant original reading
+is [FSD NOTES, 08:34 / 08:41 PDT](https://github.com/CartmanFatass/My-paper-code/blob/9ade1733724d4a2d4eb5d44bd4f2bad62a63d985/docs/research/candidates/flexible_skill_duration/NOTES.md).
+The [B08 reduction](https://github.com/CartmanFatass/My-paper-code/blob/9ade1733724d4a2d4eb5d44bd4f2bad62a63d985/runs/flexible_skill_duration/b08_reduce/summary.json)
+has SHA256 `2e63ac3bfcd5d4e426280c36ea016fd64db7c915c9ff9c33f76042ac3f31bdcd`,
+recomputed from its published bytes in this reading. I used Git/JSON arithmetic only.
+
+- All three `b08_save_<block>_a01` fits are complete at source
+  `fbae667d9731f081a6fdcaf0a08e5df3005b8524`. I independently compared the published
+  learner/evaluation configs and all nine panels per block against their recorded B01
+  D1280 counterparts: equal, excluding only `coordinator_inference_seconds` from the panels.
+- All three accepted probes are `b08_probe_<block>_n02`, source
+  `1c21cbc93e0d756de4db28b7e654469cace267de`, on the fit's `wsl_4070` host. Direct comparison
+  of their as-trained world-score lists with both B08 and B01 confirms exact equality on
+  32/32 worlds per block. Each records zero optimizer steps and matching checkpoint hashes.
+  I checked the published metadata bindings, not the binary weight files afresh.
+- The three failed local probes remain technical failures of faithful-load on the AMD host;
+  the three `_n01` node attempts failed before a panel because the sparse checkout lacked
+  the reference summary. Their acceptance identities and failure roots are preserved by
+  Claude. Successful same-host reproduction supports his host-numerics explanation. It
+  does not prove that every other host must fail or that no other implementation can port
+  these weights faithfully. Any future production acceptance must bind the actual runtime.
+- The accessibility probe reproduces four real decoder decisions per block. Its held-label
+  actor check has a recorded exact-equality failure: maximum action differences are
+  1.91e-6 / 1.91e-6 / 1.43e-6. Decoder q batch differences are at most 7.46e-8 and leave
+  the tested greedy label unchanged. These are reported numerical limits, not silently
+  converted to bit-exact checks. The separate 4,800-row label-effect recomputation is exact.
+
+Recoverable checkpoint bindings (each `final_weights.pt`, 66,030,843 bytes, under
+`/home/wu/projects/HMASD/runs/flexible_skill_duration/b08_save_<block>_a01/`):
+
+| Block | Checkpoint SHA256 from the accepted sidecar/probe |
+| --- | --- |
+| 772803 | `7cb214151d4e954af541391013686fd712a66655e050d27d2f0f2903134b08f7` |
+| 772903 | `87a703fc18120738c25f7812a0248f5aab0e66a4959de8711aef76a6f1c85eca` |
+| 773003 | `9a8ebe9057455b1b8fd6fe9bcfa41f4530ced9b84820f364985de13c61c1a14d` |
+
+This supplies the missing foundation identities, without requiring another foundation fit.
+D_K10 still means both caps and config.k 10, six labels per layer, coordinator batch 1280,
+the saved ValueNorm state, input normalization off, and deterministic reference evaluation.
+My CPU engineering fixture is not a substitute for this production acceptance.
+
+### What the native and fixed-input observations change
+
+The fixed-weight J readings below are copied from the raw rule panels, on the same 32 worlds
+within each block. They are development observations on three repeatedly used foundations,
+one checkpoint and one random-label realization per world/rule, not a new confirmation.
+
+| Block | As trained | Frozen at reset | Uniform each step | Uniform each 10 steps |
+| --- | ---: | ---: | ---: | ---: |
+| 772803 | .455875 | .439067 | .421642 | .433871 |
+| 772903 | .354697 | .343033 | .419531 | .420505 |
+| 773003 | .499352 | .505819 | .474782 | .473545 |
+
+Uniform-10 minus as-trained is **-.022004 / +.065808 / -.025807** (mean +.005999).
+Frozen minus as-trained is -.016807 / -.011664 / +.006467. Uniform-every-step minus
+uniform-10 is -.012229 / -.000974 / +.001237. These weaken the case that persistence or
+the existing argmax selector explains the score. They establish neither equivalence nor
+a population ranking. The approximate .03 J noise cited in FSD is not a universal
+significance threshold for a paired contrast; I do not discard the two negative
+uniform-minus-trained blocks or turn a small three-block mean into a zero-value theorem.
+
+At fixed observation and actor hidden state, label RMS spread / action std is
+.2312 / .2043 / .1854. Mean per-dimension RMS spread is .6564 / .6145 / .5426 action units.
+At 30 metres per unit this is about 16–20 metres of **commanded displacement**, before
+position clipping, not a measured increase in coverage or actual trajectory distance.
+The actor's Gaussian std is 2.74–3.16 units across blocks/dimensions; evaluation uses its
+mean, so a small ratio to *training* noise does not make the deployed effect unimportant.
+The label does matter; a useful continuing service role has not thereby been identified.
+I adopt the correction to the earlier near-white-action argument: large sampled action
+noise can conceal a label-dependent mean, so autocorrelation did not isolate persistence.
+
+Each block contributes 64 outcome-blind mid-cycle histories, with 384 singleton queries
+and one serving/strongest-competitor pair per history. This is the operational kept-first
+partial decoder, not a conditional distribution derived from its usual full-renewal law.
+
+| Block | Greedy single END changes label | Mean greedy action change / std | Mean next-GRU relative difference | Pair changes neither / one / both |
+| --- | ---: | ---: | ---: | --- |
+| 772803 | 42/384 (10.94%) | .07137 | .06740 | 54 / 8 / 2 |
+| 772903 | 42/384 (10.94%) | .05427 | .06972 | 52 / 9 / 3 |
+| 773003 | 143/384 (37.24%) | .16967 | .21638 | 25 / 26 / 13 |
+
+This strengthens **reachability**, especially on 773003; it is not universal nonactivation.
+On these same deterministic histories, sampling q would change a singleton label with
+probability about .798 / .798 / .813. That is a hypothetical sampled law on deployment
+histories, not a measurement of stochastic-training occupancy. The gate-learning design's
+sampled foundation and deterministic deployment therefore still implement materially
+different END interventions. A learned training hazard alone would be insufficient evidence.
+
+The time-to-team-cap strata contain 7 / 22 / 35 histories (42 / 132 / 210 singleton queries)
+per block. Greedy label-change fractions at 1, 2–4, 5–9 ticks are respectively
+19.05 / 9.09 / 10.48% on 772803; 7.14 / 13.64 / 10.00% on 772903; and
+30.95 / 43.18 / 34.76% on 773003. There is no consistent monotone pattern. These small,
+correlated, fixed-history samples contain no return comparison, and synchronized local/team
+clocks make local age and time to the team boundary collinear. They cannot dismiss an age
+rule or identify the effect of a teammate's independently varying remaining commitment.
+
+Most importantly, the pair counts are **label changes, not four native KEEP/END values**.
+The selected pair is a serving UAV and a strong interfering/service competitor, not two
+simultaneously feasible servers under Scenario1's 0 dB co-channel threshold. A different
+pair outcome can arise from decoder order. No native successor was executed for these
+queries, so they do not show that the two singleton ENDs help while the joint END harms,
+or the reverse. Whether service is lost, reassigned, or improved remains unresolved.
+
+### My next choice and the comparison that remains worth developing
+
+I agree with postponing the original six-fit batch, but **do not adopt a zero upper bound
+from average selector value**. A globally unhelpful replacement rule can still be useful
+when applied only at favourable histories; opposite signed END effects can average to
+zero. Many same-label queries likewise do not bound the value of the remaining changes,
+other masks, or histories a learned rule visits. Nothing in B08 bounds termination benefit
+by uniform-minus-argmax J. My reason for postponement is the weak present case for *team
+timing*, the newly competitive simple selection rule, and the already selected, finite
+next observation—not a requirement to prove useful END before exploratory learning.
+
+The question I retain is concrete: **when a currently serving UAV could change its
+closed-loop label, does the other UAV's continuing service/interference role make that
+same renewal preferable or harmful before the common team renewal?** KEEP retains the
+label and recurrent feedback; END calls the existing partial selector, possibly returning
+the same label. The gate sees the same lawful central state/observations, held labels and
+clocks in J and I. Serving/SINR annotations describe the task event; logging them does not
+silently add them as gate inputs. The native consequence sought is preservation or
+improvement of team service, accompanied by native J, not just more label diversity.
+
+If this comparison is selected later, retain J versus the full-information independent-bit
+I as the primary learning contrast; I can express any deterministic coordinated mask, so J
+does not get a claimed information advantage. Retain F (caps 10, original selector) and add
+**R10 (`uniform_every_10`)** as the strongest currently observed simple practical reference.
+R10 changes the replacement law as well as the policy package; it is not an identifying
+control for mask dependence. A gain only against F while losing to R10 would not support
+retaining a more complex package. Match frozen foundation, worlds and native objective;
+keep the sampled-versus-greedy distinction explicit and retain ordinary fixed/age rules
+as possible final choices. Any change to the accepted selector or skill object requires a
+new explicit interface decision with Claude, not a hidden change in my termination arm.
+
+The old three-rule cost paragraph is consequently incomplete. Under its otherwise unchanged
+illustrative geometry, six gate fits remain 2,160,000 training team steps; four final rules
+on three foundations at 32 worlds x 500 ticks require **192,000 evaluation team steps**
+(384 episodes), 48,000 more than the old J/I/F-only plan. Total 2,352,000 native team steps,
+plus its at-most 24,576 complete-mask likelihood forwards. This is a cost correction to a
+conditional design, not a selected batch, seed reservation or launch declaration. Exact
+gate/world seeds, optimizer exposure, native endpoint and production runner binding will
+be fixed only when the next actual experiment is chosen; no allowance is being consumed
+or reset. No additional fit is justified merely by having implemented its learner.
+
+**Concrete next dependency.** Read Claude's published constant-label map and his resulting
+object/selector decision. His 08:41 proposal is six homogeneous constant-label panels per
+block; that costs 18 x 32 x 500 = 288,000 native evaluation steps if executed as described,
+despite zero fits. I neither launch nor enlarge it. For my use, keep all six labels,
+per-world scores, rule definitions and exact checkpoint/runtime bindings. A better
+constant label can weaken the need for timing, but does not locate a critic or optimizer
+defect. If a random mixture beats all six homogeneous policies, that does not isolate
+simultaneous role diversity: time variation and heterogeneous assignments changed together.
+The per-world best label uses outcome information; it is an empirical upper envelope over
+six tested constant policies, not a deployable selector or an upper bound on dynamic ones.
+Selecting the best constant on these same worlds is development selection; its winning
+score is not an independently tested baseline advantage.
+
+The lowest-cost missing contrast *if that mixture interpretation becomes decisive* is
+an outcome-independent heterogeneous assignment held for an episode, distinguished from
+periodic random reassignment. B08's frozen-at-reset arm is not this control: it freezes the
+trained selector's concentrated initial assignment. This is an interface/interpretation
+request, not an addition to Claude's batch. Even that contrast would distinguish assignment
+diversity from renewal, not by itself prove useful team-conditioned timing. I will make one
+new prospective choice after the map, rather than accumulate automatic diagnostic stages
+or condition advancement on a guaranteed positive mechanism result.
+
+Service responsibility remains a conditional future object requirement if Claude eventually
+finds no useful continuing label/selection construction. It would need an explicit intent
+identifier tied to a legally observed user group or region, a held responsibility and its
+age/forced boundary, and a replacement law with the other intents held. KEEP must continue
+feedback control for that intent; END must release/reassign it without resetting the GRU.
+Existing greedy connections alone are consequences, not contracts we can terminate. Task
+credit would remain actual coverage/SINR/capacity reward, with no added switching fee.
+Claude owns construction and validation; I own the team-conditioned release decision once
+that object is agreed. B08 does not yet justify taking this alternative.
+
+**Cost and continuity.** B08 cost belongs to Claude's completed object: three 45-rollout
+fits, 360,000 training team steps each, reported fit walls 7,573.61 / 7,513.42 / 7,397.96 s
+(sum 22,485.00 s, not batch elapsed), and 675 coordinator / 101,250 actor updates each.
+Their nine evaluation panels cost 144,000 team steps each. The accepted zero-update probes
+add 64,000 steps per block, walls 170.00 / 167.75 / 171.38 s; failed probe attempts are
+retained separately and are not free or negative science. This read adds zero native work.
+UCOPE's closed scalar-copy evidence and local-value-versus-new-policy distinction remain
+inherited. This update completes the one B08 dependency reading, so the `fsd-b07` heartbeat
+is to be paused after publication. The research direction remains open with the concrete
+selection-map/interface dependency above; no Claude operation or shared index is taken over.
+
+An independent ResearchCritic checked this DM's proposed belief update against the fixed
+B08 evidence and returned **MATERIAL_DISSENT: no**. I adopt its emphasis on both practical
+references, the selected-history scope of same-label re-query, and the limits of the
+constant-label map. I explicitly do not require Claude to first make the selector better
+before any future termination exploration. The arithmetic above uses the raw published
+panels; the critic's rounded first R10 contrast was corrected to -.022004 here.
