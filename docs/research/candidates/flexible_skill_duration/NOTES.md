@@ -2066,3 +2066,75 @@ entry.
 (coordinator and both critics read the state through the same affine, flag-gated, reviewed), read
 first on whether the coordinator moves and its skill choice leaves uniform, then on J. No
 material difference: go to the persistence contrast (k = 10 against k = 1) with D as it is.
+
+## 2026-09-19 23:50 PDT — D state probe B06 read (zero fits): the untrained coordinator sees its observations and the state as it is; the blindness conjecture is weakened
+
+**Execution facts.** `scripts/probe_fsd_d_state_scale_b06.py` (Implementer from my scope note;
+I read the script, ran its checks — 24 passed with B05's — and accepted it myself: no shared
+learner, runner, environment or evaluator is touched, so no independent Reviewer). Commit
+`bc244d1f5`, run locally (load average below 1; the node was not needed), three blocks in
+parallel, 61–62 s each, `status: complete`, `optimizer_steps: 0`, learner and evaluation config
+differences from the recorded `b01_s1_d1280_<block>_a01` fits `{}` on all three. Capture per
+block: 25 of 50 decision calls (800 rows) for the coordinator, 25 of 500 critic calls (4,800
+rows); `assign_and_value_batch` is never called on the D route; the held replay reproduces the
+deterministic chain exactly. Outputs `runs/flexible_skill_duration/b06_probe_{772803,772903,
+773003}/summary.json` (sha256 `8f196920…`, `494c376e…`, `e308bda8…`). Exposure, not fits: three
+untrained 32-world panels.
+
+**Observations** (772803 / 772903 / 773003; raw → pre-scaled).
+
+| measure | raw | pre-scaled |
+| --- | --- | --- |
+| state token norm ÷ observation token norm | 5,110 / 4,170 / 4,260 | 5.2 / 4.5 / 4.5 |
+| first-layer attention, mean max weight (uniform 1/7 = .143) | .67 / .62 / .57 | .16 / .16 / .16 |
+| first-layer attention entropy (ln 7 = 1.946) | .73 / .84 / .95 | 1.94 / 1.94 / 1.94 |
+| attention mass on the state token | .54 / .48 / .39 | .14 / .14 / .14 |
+| team-skill entropy (ln 6 = 1.792) | 1.72 / 1.68 / 1.60 | 1.67 / 1.60 / 1.54 |
+| agent-skill entropy, mean | 1.73 / 1.65 / 1.63 | 1.70 / 1.59 / 1.63 |
+| agent 0's skill TV, own observation × 1.05 | 4.2e-4 / 1.3e-3 / 2.2e-3 | 9.3e-4 / 1.1e-3 / 7.9e-4 |
+| agents 0, 1 skill TV, observations swapped | .008 / .020 / .016 | .011 / .011 / .011 |
+| team-skill TV, observations swapped | .0018 / .0040 / .0041 | .0004 / .0003 / .0003 |
+| agent-skill TV, UAV 0 moved +50 m | .0028 / .0028 / .0036 | 1.0e-4 / 1.0e-4 / 1.0e-4 |
+| low-level critic GRU gates saturated (update) | .969 / .972 / .968 | 0 / 0 / 0 |
+| critic \|Δv\| for the +50 m move (mean \|v\| .5–1.1) | .043 / .029 / .035 | 4e-4 / 6e-4 / 1e-3 |
+
+Raw per-head attention is uneven: some heads at a max weight of 1.0, others at .3. `J_init` of
+the untrained D1280: .327 / .132 / .141 (mean .200).
+
+**Against what I wrote at 23:20.** State token more than 100 times an observation token: held
+(about 4,000–5,000 times). First-layer attention near one-hot, mean max above .9: **failed**
+(.57–.67; partly saturated, not one-hot). Own-observation sensitivity at least three times
+higher pre-scaled: **failed** — the ratio pre-scaled/raw is 2.2, .85 and .36 on the three
+blocks, no consistent sign; the swap contrast agrees (.011 against .008–.020). Critic gates
+mostly saturated raw: held, and as expected it does not make the critic blind — its value
+moves *more* under the physical move on the raw state than on the pre-scaled one, because the
+critic reads nothing but the state, so there is nothing for the state to swamp.
+
+**Interpretation.** The CF actor's defect was one block of an additive first layer drowning the
+others ahead of a GRU. The coordinator does not have it: each token is embedded separately and
+the post-norm LayerNorm after the first layer renormalises every token, so the observation
+tokens keep a path to the logits of about the same strength in both versions, and the state
+reaches the logits more strongly raw than pre-scaled. In both versions all sensitivities are
+small in absolute terms (TV of 1e-3 to 2e-2) because the decoder starts near uniform. So:
+"D's coordinator barely learns because it cannot see its input" is **weakened** — at
+initialisation it sees both. **Untouched:** whether partly saturated first-layer heads and a
+saturated critic GRU slow *learning* (gradient through a saturated softmax or gate is small;
+a forward probe cannot say) — but D's critic fits its target and D's J rises, so I do not
+pursue it now. **Strengthened, mildly:** the reading of D1280 as a near-uniform skill
+assigner whose gains come from the low level.
+
+Two side observations, recorded without a conclusion. (1) The untrained coordinator's skill
+entropy is 1.60–1.73; the trained D1280's logged entropy is 1.74–1.78 — training moves the
+coordinator *toward* uniform, not away (different sampling: evaluation-panel decision states,
+deterministic chain, here; training rollouts there). (2) D1280's rise from its untrained level
+is +.105 / +.263 / +.311 (mean +.23, late window .432 / .395 / .452) against the repaired flat
+CF_S's +.086 / +.102 / +.101 (mean +.10); one untrained panel per block and different
+initialisations, so a level comparison only, but it says D's advantage over CF_S is made
+during training rather than inherited from its starting point (D starts *lower* on two of
+three blocks).
+
+**What follows, as written at 23:20.** No material difference on the measure that matters, so
+no scaled-state D. Next is the persistence contrast inside the D family — k = 10 against
+k = 1 with D as it is — as one prospective entry, after I have read how k enters the D route's
+high-level reward, discount and coordinator batch, since those change with k and have to be
+named as package differences before the fits, not after.
