@@ -1160,3 +1160,24 @@ guard, `reduce` pairing with the B03 CF_E0005 and B01 D1280 summaries. `sequence
 not among the snapshot fields, so the fit validator checks the behaviour instead: 60 low-level
 optimizer steps per rollout, 2,700 per fit. Launch script, tests. No learner, environment or
 evaluator change.
+
+## 2026-09-19 18:14 PDT — flat update B04: entry code written and accepted
+
+`scripts/run_fsd_flat_update_b04.py` (thin entry, same pattern as B03),
+`experiments/candidates/flexible_skill_duration/flat_update_b04/launch_fit.sh`, six tests under
+`tests/experiments/candidates/flexible_skill_duration/flat_update_b04/`. No learner, environment or
+evaluator change (`sequence_batch_size` is an existing learner setting read by
+`update_discoverer_from_rollout`), so accepted by the DM without an independent review.
+
+Checks: 6 new tests pass, one of them a real tiny execution (real environment and agent, two
+lanes, twenty-step episodes) in which a minibatch of 8 sequences gives exactly
+epochs × 3 × rollouts low-level optimizer steps where the default would give epochs × 1: the
+setting reaches the sampler. With the B03 and B02 tests in one process 18 pass;
+matched-information 57 pass. On the real configuration: the construction without an update arm
+equals the `learner_config` recorded in `b03_e0005_772803_a01/summary.json` with no differing
+field; each arm differs from it in the two learning-rate fields only (1e-4, 5e-4), carries
+`sequence_batch_size` 1200, and is expected to take 15 × 4 × 45 = 2,700 low-level steps, which the
+fit validator requires of both low-level optimizers. The six real reference summaries (three
+CF_E0005, three D1280) pass their own objects' validators through this entry.
+
+Launch order: both arms on 772803 and 772903 first (four concurrent), then both on 773003.
