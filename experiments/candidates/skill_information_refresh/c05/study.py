@@ -89,6 +89,15 @@ def run_study(out, launch_sha, config=Config()):
     write_json(out / "config.json", asdict(config))
     write_json(out / "summary.json", summary)
     traces = {}
+    training_traces = []
+    frozen = None
+
+    def persist_training_traces():
+        if training_traces:
+            np.savez_compressed(out / "training_LEARNED.npz", **{
+                key: np.concatenate([trace[key] for trace in training_traces])
+                for key in training_traces[0]})
+
     with (out / "episodes.jsonl").open("x") as episodes, (out / "updates.jsonl").open("x") as updates:
         def evaluate(phase, name, worlds):
             host = FixedHost(worlds)
@@ -116,7 +125,6 @@ def run_study(out, launch_sha, config=Config()):
             counts["started_fits"] = 1
             train_start = time.monotonic()
             worlds = Worlds.make(config.seed, 0, config.train_cycles)
-            training_traces = []
             for start in range(0, config.train_cycles, config.batch):
                 host = FixedHost(worlds.take(start, start + config.batch))
                 view = host.prepare()
@@ -130,6 +138,8 @@ def run_study(out, launch_sha, config=Config()):
                 train_trace["early_probability"] = old_distribution.probs.numpy()
                 train_trace["delta_tenths"] = view.delta_tenths()
                 training_traces.append(train_trace)
+                counts["train_cycles"] += config.batch
+                counts["train_transitions"] += config.batch * HORIZON
                 target = torch.tensor(reward / 7., dtype=torch.float32)
                 advantage = target - old_values
                 # One terminal decision: no GAE, hidden future observation or analytic target.
@@ -156,11 +166,7 @@ def run_study(out, launch_sha, config=Config()):
                         entropy=float(entropy.detach()), gradient_norm=float(grad_norm),
                         batch_native_utility=float(reward.mean())), allow_nan=False) + "\n")
                 updates.flush()
-                counts["train_cycles"] += config.batch
-                counts["train_transitions"] += config.batch * HORIZON
-            np.savez_compressed(out / "training_LEARNED.npz", **{
-                key: np.concatenate([trace[key] for trace in training_traces])
-                for key in training_traces[0]})
+            persist_training_traces()
             summary["phases_seconds"]["training"] = time.monotonic() - train_start
             frozen = parameters(model)
             torch.save(dict(model=model.state_dict(), config=asdict(config), launch_sha=launch_sha),
@@ -202,14 +208,22 @@ def run_study(out, launch_sha, config=Config()):
                 raise RuntimeError("evaluation changed model parameters")
             if not all(torch.isfinite(p).all() for p in model.parameters()):
                 raise RuntimeError("nonfinite final model")
-            summary["parameters"] = dict(count=len(original),
-                displacement=float((frozen - original).norm()), evaluation_displacement=0., finite=True)
             summary["status"] = "COMPLETE"
         except Exception as error:
             summary["status"] = "TECHNICAL_FAILURE"
             summary["limits"].append(f"{type(error).__name__}: {error}")
+            try:
+                persist_training_traces()
+            except Exception as persistence_error:
+                summary["limits"].append(f"training trace persistence failed: {persistence_error}")
             raise
         finally:
+            current = parameters(model)
+            finite = bool(torch.isfinite(current).all())
+            summary["parameters"] = dict(count=len(original),
+                displacement=float((current - original).norm()) if finite else None,
+                evaluation_displacement=float((current - frozen).norm())
+                    if finite and frozen is not None else None, finite=finite)
             summary["wall_seconds"] = time.monotonic() - started
             usage = resource.getrusage(resource.RUSAGE_SELF)
             summary["resources"] = dict(peak_rss_kib=usage.ru_maxrss,
