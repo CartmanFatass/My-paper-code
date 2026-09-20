@@ -12,6 +12,7 @@ import numpy as np
 import pytest
 
 from scripts import run_stdl_joint_replay_b01 as runner
+from scripts import hmasd_launch
 
 
 SHA = "1" * 40
@@ -52,6 +53,10 @@ def test_admission_refusal_precedes_science_and_output(tmp_path, monkeypatch):
     with pytest.raises(PermissionError, match="admission refusal"):
         runner.main(argv(out))
     assert not out.exists()
+
+
+def test_runner_satisfies_native_static_admission_contract():
+    hmasd_launch._validate_guard_contract(Path(runner.__file__), runner.DIRECTION)
 
 
 def test_real_cli_refuses_missing_admission_without_creating_output(tmp_path):

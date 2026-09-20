@@ -62,7 +62,7 @@ def main(argv=None):
 
     # This must precede source imports which construct the host, output writes,
     # NumPy initialization, and every learning/evaluation effect.
-    admission = require_admission(__file__, direction=DIRECTION)
+    admission = require_admission(__file__, direction="skill_teammate_drift_learning")
     if args.launch_sha != admission["sha"]:
         parser.error("--launch-sha must equal the admitted source SHA")
 
