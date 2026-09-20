@@ -2240,3 +2240,125 @@ current canonical pause/lead, exact published source and duplicate claims are ch
 the admission kernel immediately before each of the three launches. Canonical lead text
 is still `Codex DM`; that names this owner-assigned direct DM and is the expected launch
 lead, even though the branch index spells out `Codex session (direct DM)`.
+
+### B05 admitted execution
+
+All three selected invocations were accepted on local_linux from published source
+`82279c8a9ab8052f364b100143e93b5d4e157d8b`, after current canonical lead/pause, published
+inputs, duplicate claims and fresh actual-node memory checks. The actual node/command,
+immutable execution cwd, supervisor/runner identities, operation reference, preflight and
+terminal-witness paths are retained in the native manifests:
+
+- [8931 launch](../../../../runs/ucope/mean_agreement_deployment_b05_8931/launch-manifest.json)
+- [8932 launch](../../../../runs/ucope/mean_agreement_deployment_b05_8932/launch-manifest.json)
+- [8933 launch](../../../../runs/ucope/mean_agreement_deployment_b05_8933/launch-manifest.json)
+
+Admission ran from 08:31:07 to 08:32:30 UTC on 2026-09-20, before the original deadline.
+These are the only three invocations in B05; no retry, additional fit or preliminary native
+smoke was used. Science acceptance awaits terminal witnesses, complete raw outputs and DM
+reading. Monitor receives these exact manifests; the DM retains observation until adoption.
+
+### B05 complete: observed returns, verification and DM update
+
+All three invocations completed with valid native exit-zero witnesses and COMPLETE summaries;
+last process exit was **2026-09-20 08:33:29.668 UTC**. The DM reconciled the exact handles
+while still retaining observation responsibility; Monitor independently returned terminal
+facts and an empty active set. No handle remains live and no retry was made.
+
+Observed arm mean J (all 64 worlds per arm; complete vectors and signs stay in each runner summary):
+
+| Master | C | B | G_sampled | G_mean | Native summary |
+| --- | ---: | ---: | ---: | ---: | --- |
+| 8931 | +0.1946270407 | +0.2110915222 | +0.2406428353 | +0.2589324253 | [summary](../../../../runs/ucope/mean_agreement_deployment_b05_8931/summary.json) |
+| 8932 | +0.2390446623 | +0.2321790738 | +0.2235082858 | +0.2443650205 | [summary](../../../../runs/ucope/mean_agreement_deployment_b05_8932/summary.json) |
+| 8933 | +0.2373537518 | +0.2201845367 | +0.2158362164 | +0.2540087803 | [summary](../../../../runs/ucope/mean_agreement_deployment_b05_8933/summary.json) |
+
+Each contrast cell gives mean / conditional panel SE / favorable:adverse:tied worlds.
+The SE varies worlds and fixed-slot policy randomness conditional on its frozen checkpoints;
+it is not precision over fresh training instances.
+
+| Contrast | 8931 | 8932 | 8933 | Descriptive mean; range of three means |
+| --- | --- | --- | --- | --- |
+| C minus G_sampled | -0.0460157946 / 0.0071919977 / 11:53:0 | +0.0155363765 / 0.0091548045 / 41:23:0 | +0.0215175355 / 0.0063303427 / 44:20:0 | -0.0029872942; [-0.0460157946, +0.0215175355] |
+| C minus B | -0.0164644816 / 0.0056416157 / 25:39:0 | +0.0068655885 / 0.0060335503 / 41:23:0 | +0.0171692151 / 0.0069523688 / 41:23:0 | +0.0025234407; [-0.0164644816, +0.0171692151] |
+| C minus G_mean | -0.0643053846 / 0.0082038846 / 11:53:0 | -0.0053203582 / 0.0112315126 / 31:33:0 | -0.0166550285 / 0.0071549915 / 29:35:0 | -0.0287602571; [-0.0643053846, -0.0053203582] |
+| G_mean minus G_sampled | +0.0182895900 / 0.0075020233 / 43:21:0 | +0.0208567347 / 0.0088171315 / 45:19:0 | +0.0381725640 / 0.0069984219 / 47:17:0 | +0.0257729629; [+0.0182895900, +0.0381725640] |
+
+All **768 evaluation episodes / 196,608 native team steps** were completed, with **zero new
+fits, training episodes or optimizer updates**. Each invocation reports 65,536 actor calls
+and 327,680 agent recurrent observations; all 12 deployed actor instances have unchanged
+before/after digests and zero measured parameter movement. Six original B04 fitted models
+remain the inherited development exposure. These worlds do not add training replicates.
+
+The DM's independent read-only reconstruction verified every stored artifact digest, all
+archive/member identities, full 256-tick episode/world addresses, all arm return vectors,
+all four paired vectors/signs/means/SEs, actor identities, actual counts and private RNG slots.
+It reconstructed actual sampled/mean commands from saved means, original FP32 scales and
+fixed slots, checked exact copying on KEEP, B probabilities, forced/eligible transitions and
+G's zero phase. Independent NumPy GH64 reconstruction of C agreed on every observed branch;
+maximum proxy arithmetic discrepancies were 8.88e-16 / 8.88e-16 / 1.78e-15. Minimum observed
+absolute D_keep-D_fresh margins were 5.34e-5 / 3.03e-5 / 3.93e-6. This checks the fixed
+implemented rule, not continuous-domain accuracy against an exact Gaussian expectation.
+No native world or actor forward was executed by this reconstruction.
+
+C fresh-command fractions were .646692 / .649829 / .680884; B fractions were .676343 /
+.673022 / .673877. C's eligible KEEP fractions were .548485 / .540980 / .470476. Thus C
+actually changed decisions, with different directions of rate change across checkpoints;
+these descriptive counts do not identify a causal rate or state-selection explanation.
+Both G modes were fresh every tick, and G_mean consumed zero Gaussian draws in execution.
+
+Runner wall scopes were 58.322 / 58.839 / 58.789 seconds; study-entry process CPU scopes
+57.165 / 57.839 / 57.540 seconds. Single-process peak RSS was 274200 / 274372 / 274264 KiB,
+not a simultaneous batch memory peak. Accepted-to-native-exit durations from the manifests
+and exit witnesses were 58.978 / 59.443 / 59.377 seconds; first acceptance to final exit was
+142.164 seconds. Runner telemetry itself marks full process-exit wall unmeasured; these last
+durations are separately derived supervisor timestamps, not a rewrite of that field.
+All stderr files are empty, and the raw/compressed evidence is retained at the linked run roots.
+
+**DM inference and investment choice.** The selected rule's practical retention prediction
+was not met: C-minus-B and C-minus-G_sampled have mixed checkpoint-panel means, and C-minus-
+G_mean is negative in all three. The descriptive average near zero against sampled G is not
+an equivalence result. I do not carry this concrete frozen mean-agreement rule into a learned
+head or tune its threshold after these scores. The finding weakens the proposed proximity-
+to-policy-center proxy as a useful deployment package for these B endpoints. It does not
+show that lawful local KEEP/END opportunity is absent, that a learned selective rule cannot
+work, or that one-step command distance caused the return differences. Co-adapted histories,
+renewal rate, visitation and native team coupling remain confounded by this full intervention.
+
+A separate observed fact is that ordinary G_mean has higher panel mean than G_sampled in
+all three current checkpoints, and is the highest arm mean in every block. This strengthens
+the simpler deployment explanation for these endpoints, without new training or selective
+reuse. The older P85 adverse mean-deployment observation remains contrary evidence to any
+universal claim that removing sampling helps. No historical pooling, fresh confirmation,
+positive one-decision advantage claim or exploration-during-training inference follows.
+
+B05 completes the second and final selected native exploration batch of the original window.
+Total newly started fits remain six of the twelve-fit cap; the other six are deliberately
+unspent. No third native panel, follow-up training, threshold sweep or Pro request is selected.
+This ends investment in the tested proxy at this evidence state, not the owner-chosen UCOPE
+direction. The next useful conceptual distinction is reward-relevant prediction versus
+agreement with a learned policy center; an ordinary G_mean comparator remains necessary
+when judging whether any future reuse proposal adds practical value. A new within-direction
+proposal must supply a materially different reason and prospective discrimination rather
+than use remaining capacity to rescue the same rule.
+
+### B05 interpretation critique and non-native conceptual closure
+
+The independent ResearchCritic supports non-retention without material dissent. I adopt its
+precision: this rule **did not meet the prospective retention condition**; negative panel
+means in all three C-minus-G_mean comparisons do not establish statistically resolved
+inferiority separately in each checkpoint. In particular, the 8932 contrast is -0.0053204
+with conditional SE 0.0112315. The two favorable C-minus-B and C-minus-G_sampled means stay
+as contrary evidence to any blanket claim that reuse is harmful.
+
+The critique also exposes a useful limit of the original proxy, requiring no native run.
+For the same actor and predecision history, the one-decision loss L(a)=||a-m||^2 gives direct
+mean execution a=m exactly zero loss. C chooses between D_keep and expected D_fresh, so its
+idealized proxy loss is min(D_keep,D_fresh) >= 0. Consequently this command-distance proxy
+alone cannot justify an advantage for copying over available execution of that actor's
+center. This is a simple-model implication, not a measured B_mean result, a missing mandatory
+panel, or an explanation of B05's comparison with differently trained G weights. Native
+nonquadratic reward and future histories remain outside that proof. A useful future reuse
+rationale must add a reward-relevant temporal or other concrete reason beyond closeness to
+its own current center. It cannot obtain that reason merely by making the distance estimate
+more accurate. No new native batch or learned-head recipe follows from this closure.

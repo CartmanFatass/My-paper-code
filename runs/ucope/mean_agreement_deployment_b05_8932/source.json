@@ -1,0 +1,49 @@
+{
+  "object": "UCOPE_MEAN_AGREEMENT_DEPLOYMENT_B05",
+  "launch_sha": "82279c8a9ab8052f364b100143e93b5d4e157d8b",
+  "runner": {
+    "path": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/64752f83e5424c67be2965556f54c2d8/scripts/run_ucope_mean_agreement_deployment_b05.py",
+    "present": true,
+    "bytes": 1620,
+    "sha256": "02748f838aff4f72ff1d850d98214aaea620ce4725b6ac7ab0ba64b454451c9e"
+  },
+  "study": {
+    "path": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/64752f83e5424c67be2965556f54c2d8/experiments/candidates/ucope/mean_agreement_deployment_b05/study.py",
+    "present": true,
+    "bytes": 31406,
+    "sha256": "10bb2968236354f9baf6a180d46ca71179c1ba715192e8b950b7fbec57188da7"
+  },
+  "checkpoint_archive": {
+    "path": "runs/ucope/scalar_feedback_b04_8932/checkpoints-and-console.tar.gz",
+    "bytes": 495613,
+    "expected_sha256": "e6d5b28087152353ab7de164e38de84afe80ad769b30f22156aa6093c5827f59",
+    "sha256": "e6d5b28087152353ab7de164e38de84afe80ad769b30f22156aa6093c5827f59",
+    "members": {
+      "B": {
+        "name": "B_final.pt",
+        "bytes": 270771,
+        "sha256": "2fb09544a7f744c06f68e40c6fab1c9ab0e9b2bb274fea3216bcbb9f880da157",
+        "metadata": {
+          "object": "UCOPE_SCALAR_FEEDBACK_B04",
+          "arm": "B",
+          "seed": 8932,
+          "train_episodes": 2048,
+          "optimizer_steps": 4096
+        }
+      },
+      "G": {
+        "name": "G_final.pt",
+        "bytes": 270454,
+        "sha256": "dd137563da64a40659e41d3cc13a1bd76284930b6bf08022ce412e63071ca9fc",
+        "metadata": {
+          "object": "UCOPE_SCALAR_FEEDBACK_B04",
+          "arm": "G",
+          "seed": 8932,
+          "train_episodes": 2048,
+          "optimizer_steps": 4096
+        }
+      }
+    },
+    "in_memory_extraction_only": true
+  }
+}
