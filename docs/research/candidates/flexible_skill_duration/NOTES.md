@@ -951,3 +951,19 @@ Alive with an empty `stderr.log` after the fourth admission; each manifest carri
 
 Still to launch as slots free, same sha: both arms on 773003. No B03 score or diagnostic is read
 before all six are terminal.
+
+## 2026-09-19 17:00 PDT — flat entropy B03: all six fits admitted; two terminal
+
+Execution facts only; no B03 score or diagnostic has been read. `b03_e005_772803_a01` and
+`b03_e0005_772803_a01` ended with exit 0 and 45 rows; the two fits on 772903 were at 43 and 44
+rows. Two slots were free, so the last two planned fits were launched at the same launch sha
+`051e8c7ab955a348fe868e6271eb72c77bbf50e3`, after fast-forwarding the node checkout to the
+published `main`. Both admitted at the first request, alive with an empty `stderr.log`. Never
+more than four fits ran at once.
+
+| tag | arm | block | operation ref (under `/home/wu/projects/HMASD/.git/hmasd-admission/`) |
+| --- | --- | --- | --- |
+| `b03_e005_773003_a01` | CF_E005 | 773003 | `52b55e115c94de5979881d30b8fde16b1975840be84923548ba05787306fa60d.json` |
+| `b03_e0005_773003_a01` | CF_E0005 | 773003 | `d3890de28dc218231c0f9a8d0931ca8e06e34d6c69eaf89c7b1dda0a77bb0335.json` |
+
+The plan is fully launched: six of six. Collection and the reduction wait for all six exits.
