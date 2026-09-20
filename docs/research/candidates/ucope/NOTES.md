@@ -3257,3 +3257,19 @@ Pro call or main merge. Current actual usage remains 12; no B07 native handle ha
 This request is required by the owner's explicitly retained total-fit ceiling, not by a rule
 that research stops at the end of an experiment. B06 interpretation, the temporal-model
 critique and the cheaper conditional B07 design have all continued within that boundary.
+
+## 2026-09-20 10:46 UTC — owner authorizes the three additional B07 fits
+
+The owner answered the concrete published request: **"允许 B07 新增 3 fit，总上限 15，
+保留原截止时间"**. This authorizes exactly the reviewed B07 scope at preparation commit
+`1c1c390b636a6954e6b7198658d68ac646418b16`: one Bhalf fit at each of 8941/8942/8943,
+the fixed inherited Ghalf inputs and the prescribed new-world four-mode evaluation.
+The total started-fit ceiling is now **15**, and **2026-09-21 04:06:07 UTC** remains the
+deadline. Twelve fits have already started and completed; the three newly allocated fits
+have not yet launched at this entry. No further batch, replacement fit, Pro call or main
+merge is authorized by this amendment. The paused scheduler stays paused.
+
+Publish this authorization with the exact accepted implementation, then admit each fixed
+invocation on local_linux. Preserve each native operation handle and reconcile uncertain
+acceptance on the same request. The direct DM retains observation and scientific reading
+responsibility through exit, result reconstruction, criticism and the next investment update.
