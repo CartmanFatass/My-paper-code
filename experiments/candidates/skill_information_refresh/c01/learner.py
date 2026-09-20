@@ -62,7 +62,7 @@ def collect(host, *, model=None, rng=None, arm="LEARNED", stochastic=False,
     if stochastic and rng is None:
         raise ValueError("stochastic collection requires its explicit RNG")
     features, actions, logps, values, rewards, masks = [], [], [], [], [], []
-    sent_trace = []
+    sent_trace, state_trace, cache_trace, cache_time_trace = [], [], [], []
     while host.t < host.horizon:
         view = host.view()
         x = torch.from_numpy(view.features())
@@ -88,6 +88,10 @@ def collect(host, *, model=None, rng=None, arm="LEARNED", stochastic=False,
             values.append(value)
         if retain_trace:
             sent_trace.append(view.available & (requested.numpy() | view.forced))
+            # Offline decision-site audit only; neither network consumes these arrays.
+            state_trace.append(host.payloads().copy())
+            cache_trace.append(host.cache.copy())
+            cache_time_trace.append(host.cache_time.copy())
         reward = host.step(requested.numpy())
         if stochastic:
             rewards.append(torch.from_numpy(reward))
@@ -105,6 +109,9 @@ def collect(host, *, model=None, rng=None, arm="LEARNED", stochastic=False,
             requested=torch.stack(actions).numpy().T.astype(bool),
             choice_mask=torch.stack(masks).numpy().T,
             sent=np.stack(sent_trace).T,
+            state=np.stack(state_trace).transpose(1, 0, 2, 3),
+            delivered_cache=np.stack(cache_trace).transpose(1, 0, 2, 3),
+            cache_send_time=np.stack(cache_time_trace).transpose(1, 0, 2),
             world_ids=np.asarray(host.worlds.ids, dtype=np.int64))
     return host.rows(), rollout, trace
 
