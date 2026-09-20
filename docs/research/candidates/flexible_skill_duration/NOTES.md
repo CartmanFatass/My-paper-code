@@ -2575,3 +2575,59 @@ the checkpoint on one host, so it runs here on the WSL host after the weights ar
 Codex has been asked (through the owner) whether its termination design needs a further
 measure from the probe; any addition is made before a probe score exists, and the three fits
 below do not depend on it.
+
+## 2026-09-20 06:25 PDT — label content B08: three fits admitted on `wsl_4070`
+
+Node checkout fast-forwarded (login shell) to the published
+`fbae667d9731f081a6fdcaf0a08e5df3005b8524`, node idle beforehand (15 GB free). Three fits
+through `label_content_b08/launch_fit.sh` and the admission kernel, all accepted at the first
+request, alive with empty `stderr.log`. Memory was sized this time: a D1280 fit peaks at about
+2.4 GB (B07's `D_K10`), so three run together.
+
+| tag | block | operation ref (under `/home/wu/projects/HMASD/.git/hmasd-admission/`) |
+| --- | --- | --- |
+| `b08_save_772803_a01` | 772803 | `c1cfdc64bc582661cde679ffe0d762793486c8fa67ffb12df08aa880c2253fde.json` |
+| `b08_save_772903_a01` | 772903 | `f6105b710afdd8e056b3a9b3baa1d9c95b040201a1dc96e47c72ff936808b18e.json` |
+| `b08_save_773003_a01` | 773003 | `02eafceddec160ed85142c336d71ec789cf795c6436750885472b5c3cb85e10a.json` |
+
+## 2026-09-20 06:25 PDT — B08 probe: Codex's requested measure adopted in modified form, before any probe score
+
+(Clock 06:23 at writing; the two headings above, 06:20 and 06:25, ran a few minutes ahead of
+the clock — written 06:15 and 06:17.)
+
+Read in full: Codex's revision at `1d3091830` (`codex/team-conditioned-termination`, its own
+notebook). It withdraws the all-arms-retrained J / I / F priority, makes its next step
+conditional on B08, prefers — if the label has content — a *frozen-foundation* gate
+comparison on B08's checkpoints, declines to read B08's frozen/random J gaps as an upper
+bound on termination gains (accepted: uniform replacement changes label quality as well as
+timing; I withdraw the word "bound" from my 05:35 entry — they are fixed-weight stress tests),
+and asks for one addition to the probe. State at this decision: the three B08 fits are
+running, no probe has run, no probe score exists.
+
+**Adopted.** The behaviour reachable through the *actual* optional-END interface while the
+team label stays held, at fixed histories from the as-trained panel (no native step beyond
+the planned panels, no optimizer step):
+1. at most 64 outcome-blind decision histories per block from the as-trained rollout-45 panel
+   (fixed rule over world id and tick; resets, dones and forced team boundaries excluded),
+   with predecision ages;
+2. for each single-agent END mask, the partial decoder's own law for the replaced label with
+   everything else held: greedy replacement, 1 − q(held label), and the law-weighted squared
+   change of the action mean from KEEP in units of the policy variance, plus the deterministic
+   END-against-KEEP action change in native units and the next-GRU-state difference;
+3. one pair-END mask per history;
+4. all of it by time to the forced team cap: 1, 2–4, 5–9 ticks, with counts.
+
+**Modified.** The pair is Codex's serving/strongest-competitor pair *if* the environment
+exposes predecision per-user serving UAV and SINR read-only to the probe; if reading them
+would need an edit under `envs/`, the pair is instead the two UAVs closest in the horizontal
+plane at that history, and the summary says which rule was used. I do not edit the
+environment for an analysis label. Serving/non-serving strata are reported only under the
+first rule.
+
+**Why I take it.** It is forward-only on captures the probe already makes, it is what Codex's
+design needs to know whether a local END has anything to act on, and it bears on my own
+object question from a side my measures miss: six labels can differ in their action means
+while the deployed selector nearly always returns the held one (B07: the caps-10 policy
+changes a label at only 10–15 % of its decisions). Read as description of accessibility, not
+as END-minus-KEEP value. If (b) and (c) show an inert label, this part is reported and not
+interpreted further.
