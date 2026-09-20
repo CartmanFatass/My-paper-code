@@ -537,3 +537,58 @@ identity and unchanged A01 default, action-kernel support, source guard and coun
 No scientific run, seed/horizon choice, notebook edit, shared index or child delegation by
 Implementer. An independent Reviewer checks the result-identity and collector interface
 change before DM acceptance and result execution. No outcome has been observed for A02.
+
+## 2026-09-20 — A02 preparation: coverage prediction and reading limits
+
+The A01 evidence and A02 prospective/L0 are published at `068985d0b`. All nine A01
+directories include the underlying NPZ arrays and native logs despite the repository's
+generic NPZ/log ignore rules. Rechecked canonical `origin/main@6ee15d7dd`: A remains active
+under `Codex DM`, pause lifted; the constitution, loaded scientific/engineering methods,
+compute configuration and launcher/admission/resource-preflight code are unchanged from
+the versions already adopted. This is not a memory admission for A02. The Implementer has
+the isolated checkout `fsd-a02-impl` / branch `codex/termination-reuse-a02-impl` and only the
+one code task above; DM retains the notebook, scientific choice, review acceptance and runs.
+
+**Simple-model bridge, no new fit.** Under uniform behavior reselection, the actual focal
+label switches with probability p=zeta/2 per tick, so an untruncated label run has mean
+length 1/p: 16 ticks for long_behavior and four for matched_termination. The ten-state
+focal position/option marginal has stationary total endpoint mass 1/(1+3p), namely
+.842105 and .571429. One direct balance derivation assigns mass C to each interior
+oriented state, C/p to each endpoint after summing its orientations, and normalizes
+6C+2C/p=1. This is an analytical statement about the fixed five-cell behavior walk,
+not a simulated fit or a claim about finite 96-tick episodes. Uniform initial states
+and resets cause a transient, and greedy target evaluation does not obey this uniform
+behavior marginal. The reduction removes demand/teammate effects on action selection;
+their joint reward and remaining-commitment coupling are still present in learned J.
+
+As a descriptive check of already collected A01 data, its start-row endpoint fractions
+are .82779948 / .83076986 / .82427979. Actual behavior renewals are 6,114 / 6,070 / 6,193,
+and label changes 3,067 / 3,040 / 3,148. These were read from saved arrays, not reexecuted
+trajectories. They make the predicted occupancy difference concrete; they do not show
+that endpoint-heavy coverage is desirable for learning the beta=.5 target.
+
+A02 reading will reuse the independent config/hash/count/reward/evaluation checks, with
+the crucial change that paired behavior trajectories are expected to differ. Check that
+initial states and the exogenous teammate/demand components agree within each pair, that
+logged option probabilities match the arm's actual marginal law, and that the initial
+target evaluation panels agree. Compute support and endpoint/interior occupancy on the
+same training start rows; retain all curve contrasts rather than select the late panel.
+Training reward is not the target-policy endpoint. Longer traces, more endpoint visits,
+or larger Q movement cannot substitute for the prewritten primary J comparison.
+
+The prospective preference for clock-matched collection if long behavior has no useful
+consistent gain is an **operational default for this fixed implementation/exposure**, not
+an equivalence or general superiority inference from a wide three-block interval. Neither
+arm is tuned separately; this leaves algorithm-by-collection-law tuning interactions
+untested. No arms, seeds, horizons, counts or primary endpoint are changed by this
+clarification, and no A02 outcome has been observed.
+
+The independent Critic read A01's nine summaries and this transition and found no material
+design dissent. It independently checked the marginal occupancy calculation and emphasized
+the same conditional choice limit. I adopt its additional wording correction: A02 can
+weaken the expectation that **this uniform long-commitment collector at this exposure**
+improves target J, not falsify a general motivation for off-termination reuse. Equal-step
+J differences do not themselves measure saved wall time or the cost to reach a fixed J.
+Mixed or imprecise results leave comparative ranking unresolved even if I choose a
+provisional default for subsequent work. This advice supplies no independent empirical
+replication and changes no batch input.
