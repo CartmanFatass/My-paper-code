@@ -354,3 +354,34 @@ recognized the pair/branch enumeration and conditional-density autograd as indep
 arithmetic checks and reused the recorded test evidence; it did not reverify FSD history or
 run native evaluation. I accept this continuation within its fixed-decision mathematical
 scope. No new fit, checkpoint evaluation or native experiment is selected or executed.
+
+## 2026-09-19 — owner-triggered cross-interpretation: projected-gate value versus optimal new-information value
+
+Added by the Claude session (lead of flexible_skill_duration, not of this record) on 2026-09-20 at the owner's explicit instruction. The text below is the owner-supplied cross-interpretation package's fragment (research_cross_interpretation_20260919.zip, sha256 dbbd19e2c1a7425d…), unchanged. What I checked myself before adding it: the strict-sign example by hand (online 3/4, retained projection 1/2, best retained-only gate 1 = best full gate 1) and a rerun of the package's standard-library exact-fraction script, whose output equals its published analytic_checks.json (20 finite populations). I checked no UCOPE number against UCOPE run files. FSD's own response is in the FSD notebook (2026-09-20 00:25 PDT). The design's author has not reviewed this addition.
+
+Advisory mathematical extension of the [existing design at 646ab539](https://github.com/CartmanFatass/My-paper-code/blob/646ab539d2a2ef689d0e4ee977f327f79cf2215b/docs/research/designs/TEMPORAL_BEHAVIOR_STATE_ALIGNMENT_20260919.md). Not yet adopted by either direction lead. No new native evaluation, training comparison, standing record type or control-plane change is selected.
+
+The established local identity remains correct: with retained information C, new observation S, p=P(END), and A=Q_END-Q_KEEP under a fixed predecision population and common continuation,
+
+    Delta_total = Cov(p,A)
+                = E[Cov(p,A|C)] + Cov(E[p|C],E[A|C]).
+
+However, the retained projection `p_C=E[p|C]` is not generally the best retained-only gate. Its comparison measures one particular policy substitution, not the optimal value of receiving S.
+
+Take independent uniform C,S in {-1,+1}, KEEP value zero, A=2C+S and p=1/2+(C+S)/4. The four (C,S,A,p) rows are (-1,-1,-3,0), (-1,+1,-1,1/2), (+1,-1,+1,1/2), (+1,+1,+3,1). Exact expectations give online value 3/4, retained-projection value 1/2 and a positive conditional gap 1/4. Yet END iff C=+1 gives value 1 and is also full-information optimal: S never changes A's sign within a C stratum. No tie or zero advantage is needed for the example.
+
+More generally, when binary gates may be arbitrary deterministic functions of their allowed information and there is no additional rate/entropy constraint,
+
+    V_full* - V_C*
+      = E[max(A,0)] - E[max(E[A|C],0)]
+      = (E[|A|] - E[|E[A|C]|]) / 2 >= 0.
+
+The first equality cancels the common expected KEEP value; the second uses max(x,0)=(x+|x|)/2 and iterated expectation. A means expected action value conditioned on the lawful information available to the full gate, holding the continuation controller fixed in both comparisons. It is not privileged simulator truth supplied to a policy. Positive value requires opposite-sign action advantages with positive conditional mass inside some C strata. Variation of advantages without an action-ranking change is insufficient in this unconstrained binary setting.
+
+The ideal C-only gate is not the implemented UCOPE B, whose gate reads neither C nor S. To compare with the best constant gate, let C be constant. This is an ideal one-decision gating result, not the best full-horizon policy value, a native estimator, an independent training result, a sample-complexity guarantee or a decomposition that can be summed over baseline trajectories. Extra gate-rate budgets, entropy objectives or coupled simultaneous choices require a new formulation. It is an elementary extension for this record, with no claim of literature novelty.
+
+A second distributional observation sharpens the existing AR warning. A nonzero eligible KEEP probability produces a command kernel `q*delta(previous_command)+(1-q)*P_fresh`. A nondegenerate continuous AR Gaussian kernel has no atom at that command. Matching a marginal variance, lag-one covariance or long-horizon displacement does not identify equality of these command kernels. The original proper-conditional-likelihood requirement remains unchanged; no AR implementation is proposed here.
+
+Updated empirical context is deliberately not used as proof of the identities. [FSD B05 at 33dbff37](https://github.com/CartmanFatass/My-paper-code/blob/33dbff37e6d270f125157512af855d00cc9bf1e6/docs/research/candidates/flexible_skill_duration/NOTES.md) supports an information-preserving construction repair and learning from initialization, not unfixed-k efficacy. [UCOPE B04 at 735a1b6a](https://github.com/CartmanFatass/My-paper-code/blob/735a1b6a10a43038b3cab63326e18fa61ebd464f/docs/research/candidates/ucope/NOTES.md) has mixed small B-G differences and no established persistence-package margin. The two leads already accepted portions of the original temporal interpretation; this new qualification awaits their separate scientific acceptance.
+
+Arithmetic verification for this extension used Python standard-library Fractions: the four original finite examples, the strict-sign example above, and fifteen nonuniform/dependent-C,S variants satisfy the covariance and optimal-value identities exactly. The Gaussian score counterexample and copy-versus-AR toy moments were also checked algebraically. This did not rerun the repository prototype suites, instantiate an environment, load a checkpoint, evaluate a native policy or start a fit. Preserve the existing frozen replay tool as a possible substitution assay, not a required diagnostic or proof of newest-observation necessity.
