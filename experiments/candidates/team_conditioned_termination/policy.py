@@ -32,7 +32,10 @@ def _seeded_build(seed: int, build: Callable[[], nn.Module]) -> nn.Module:
     """Build a module reproducibly without advancing PyTorch's global RNG."""
 
     with torch.random.fork_rng(devices=[]):
-        torch.manual_seed(int(seed))
+        # Modules are constructed on CPU.  Seed only the CPU default generator;
+        # torch.manual_seed would also reseed CUDA generators that this
+        # devices=[] fork does not save and restore.
+        torch.random.default_generator.manual_seed(int(seed))
         return build()
 
 
@@ -206,6 +209,8 @@ class MaskPolicy(nn.Module):
             [self._agent_logits(context, actions, agent) for agent in range(self.n_agents)],
             dim=-1,
         )
+        if not bool(torch.isfinite(logits[eligible]).all()):
+            raise FloatingPointError("active policy logits must be finite")
         bit_log_prob, bit_entropy = self._eligible_bit_terms(logits, actions, eligible)
         zeros = torch.zeros((), dtype=logits.dtype, device=logits.device)
         team_log_prob = torch.where(eligible, bit_log_prob, zeros).sum(dim=-1)
@@ -238,6 +243,8 @@ class MaskPolicy(nn.Module):
             logits = self._agent_logits(context, actions, agent)
             logits_by_agent.append(logits)
             optional = eligible[:, agent]
+            if not bool(torch.isfinite(logits[optional]).all()):
+                raise FloatingPointError("active policy logits must be finite")
             if deterministic:
                 selected = logits >= 0.0
             else:
@@ -509,9 +516,15 @@ class PPOUpdater:
                         batch.forced_end[actor_indices],
                         batch.actions[actor_indices],
                     )
-                    ratio = torch.exp(
-                        evaluation.log_prob - batch.old_log_prob[actor_indices].detach()
+                    log_ratio = (
+                        evaluation.log_prob
+                        - batch.old_log_prob[actor_indices].detach()
                     )
+                    if not bool(torch.isfinite(log_ratio).all()):
+                        raise FloatingPointError("PPO log ratios must be finite")
+                    ratio = torch.exp(log_ratio)
+                    if not bool(torch.isfinite(ratio).all()):
+                        raise FloatingPointError("PPO ratios must be finite")
                     advantage = normalized_advantages[actor_indices].detach()
                     clipped_ratio = torch.clamp(
                         ratio, 1.0 - self.clip_epsilon, 1.0 + self.clip_epsilon
@@ -521,11 +534,26 @@ class PPOUpdater:
                     ).mean()
                     entropy = evaluation.entropy.mean()
                     objective = actor_loss - self.entropy_coef * entropy
+                    if not bool(
+                        torch.isfinite(
+                            torch.stack((actor_loss, entropy, objective))
+                        ).all()
+                    ):
+                        raise FloatingPointError(
+                            "actor loss, entropy, and objective must be finite"
+                        )
                     self.actor_optimizer.zero_grad(set_to_none=True)
                     objective.backward()
-                    actor_grad_norm = nn.utils.clip_grad_norm_(
-                        self.policy.parameters(), self.max_grad_norm
-                    )
+                    try:
+                        actor_grad_norm = nn.utils.clip_grad_norm_(
+                            self.policy.parameters(),
+                            self.max_grad_norm,
+                            error_if_nonfinite=True,
+                        )
+                    except RuntimeError as error:
+                        raise FloatingPointError(
+                            "actor gradient norm must be finite before optimizer step"
+                        ) from error
                     self.actor_optimizer.step()
                     actor_steps += 1
                     actor_visited_rows += optional_count
@@ -536,14 +564,30 @@ class PPOUpdater:
                     )
 
                 predicted_values = self.critic(batch.context[indices])
+                if not bool(torch.isfinite(predicted_values).all()):
+                    raise FloatingPointError("critic predictions must be finite")
                 critic_loss = torch.mean(
                     (predicted_values - batch.returns[indices].detach()) ** 2
                 )
+                critic_objective = self.value_coef * critic_loss
+                if not bool(
+                    torch.isfinite(torch.stack((critic_loss, critic_objective))).all()
+                ):
+                    raise FloatingPointError(
+                        "critic loss and objective must be finite"
+                    )
                 self.critic_optimizer.zero_grad(set_to_none=True)
-                (self.value_coef * critic_loss).backward()
-                critic_grad_norm = nn.utils.clip_grad_norm_(
-                    self.critic.parameters(), self.max_grad_norm
-                )
+                critic_objective.backward()
+                try:
+                    critic_grad_norm = nn.utils.clip_grad_norm_(
+                        self.critic.parameters(),
+                        self.max_grad_norm,
+                        error_if_nonfinite=True,
+                    )
+                except RuntimeError as error:
+                    raise FloatingPointError(
+                        "critic gradient norm must be finite before optimizer step"
+                    ) from error
                 self.critic_optimizer.step()
                 critic_steps += 1
                 critic_loss_sum += float(critic_loss.detach()) * minibatch_rows

@@ -64,6 +64,16 @@ def test_paired_initialization_probability_and_private_sampling_rng() -> None:
     torch.testing.assert_close(joint_sample.log_prob, independent_sample.log_prob)
 
 
+def test_initialization_does_not_call_all_device_manual_seed(monkeypatch: pytest.MonkeyPatch) -> None:
+    def forbidden_manual_seed(_seed: int) -> None:
+        raise AssertionError("module initialization must not reseed all devices")
+
+    monkeypatch.setattr(torch, "manual_seed", forbidden_manual_seed)
+    policy = MaskPolicy(2, 2, "joint", hidden_size=4, seed=702)
+    critic = ValueCritic(2, hidden_size=4, seed=703)
+    assert policy.context_dim == critic.context_dim == 2
+
+
 def test_one_team_log_probability_credits_every_eligible_keep_and_end() -> None:
     policy = MaskPolicy(2, 4, "joint", hidden_size=8, seed=5)
     context = torch.zeros(1, 2)
@@ -115,6 +125,11 @@ def test_undefined_forced_diagnostic_cannot_enter_actor_reduction() -> None:
     assert torch.isnan(result.logits[0, 0])
     assert torch.isfinite(result.log_prob).all()
     assert torch.isfinite(result.entropy).all()
+
+    active = torch.tensor([[True, False]])
+    no_forcing = torch.zeros_like(active)
+    with pytest.raises(FloatingPointError, match="active policy logits"):
+        policy.evaluate_actions(context, active, no_forcing, torch.zeros_like(active))
 
 
 def test_joint_uses_realized_forced_prefix_while_independent_zeros_it() -> None:
@@ -318,3 +333,102 @@ def test_all_forced_update_skips_actor_optimizer_even_with_existing_momentum() -
                 assert torch.equal(current_value, prior_value)
             else:
                 assert current_value == prior_value
+
+
+def test_ppo_ratio_overflow_fails_before_actor_optimizer_step() -> None:
+    policy = MaskPolicy(1, 1, "joint", hidden_size=4, seed=111)
+    critic = ValueCritic(1, hidden_size=4, seed=112)
+    updater = PPOUpdater(policy, critic, epochs=1, minibatch_size=2, seed=113)
+    context = torch.zeros(2, 1)
+    eligible = torch.ones(2, 1, dtype=torch.bool)
+    forced = torch.zeros_like(eligible)
+    actions = torch.tensor([[False], [True]])
+    batch = RolloutBatch(
+        context=context,
+        actions=actions,
+        eligible=eligible,
+        forced_end=forced,
+        old_log_prob=torch.full((2,), -1e30),
+        advantages=torch.tensor([1.0, -1.0]),
+        returns=torch.zeros(2),
+    )
+    actor_before = _state(policy)
+    with pytest.raises(FloatingPointError, match="PPO ratios"):
+        updater.update(batch)
+    for name, value in policy.state_dict().items():
+        torch.testing.assert_close(value, actor_before[name], rtol=0, atol=0)
+    assert not updater.actor_optimizer.state
+    assert not updater.critic_optimizer.state
+
+
+def test_nonfinite_critic_loss_fails_before_critic_optimizer_step() -> None:
+    policy = MaskPolicy(1, 1, "joint", hidden_size=4, seed=121)
+    critic = ValueCritic(1, hidden_size=4, seed=122)
+    updater = PPOUpdater(policy, critic, epochs=1, minibatch_size=2, seed=123)
+    context = torch.zeros(2, 1)
+    eligible = torch.zeros(2, 1, dtype=torch.bool)
+    forced = torch.tensor([[True], [False]])
+    critic_before = _state(critic)
+    batch = RolloutBatch(
+        context=context,
+        actions=forced.clone(),
+        eligible=eligible,
+        forced_end=forced,
+        old_log_prob=torch.zeros(2),
+        advantages=torch.zeros(2),
+        returns=torch.full((2,), torch.finfo(torch.float32).max),
+    )
+    with pytest.raises(FloatingPointError, match="critic loss"):
+        updater.update(batch)
+    for name, value in critic.state_dict().items():
+        torch.testing.assert_close(value, critic_before[name], rtol=0, atol=0)
+    assert not updater.actor_optimizer.state
+    assert not updater.critic_optimizer.state
+
+
+def test_nonfinite_actor_gradient_fails_before_actor_optimizer_step() -> None:
+    class InfiniteBackward(torch.autograd.Function):
+        @staticmethod
+        def forward(ctx: object, weight: torch.Tensor) -> torch.Tensor:
+            return weight * 0.0
+
+        @staticmethod
+        def backward(ctx: object, gradient: torch.Tensor) -> tuple[torch.Tensor]:
+            return (torch.full_like(gradient, float("inf")),)
+
+    class FiniteLogitInfiniteGradient(torch.nn.Module):
+        def __init__(self) -> None:
+            super().__init__()
+            self.weight = torch.nn.Parameter(torch.tensor(0.0))
+
+        def forward(self, features: torch.Tensor) -> torch.Tensor:
+            return InfiniteBackward.apply(self.weight).expand(features.shape[0])
+
+    policy = MaskPolicy(1, 1, "joint", hidden_size=4, seed=131)
+    policy.actor = FiniteLogitInfiniteGradient()
+    critic = ValueCritic(1, hidden_size=4, seed=132)
+    updater = PPOUpdater(policy, critic, epochs=1, minibatch_size=2, seed=133)
+    context = torch.zeros(2, 1)
+    eligible = torch.ones(2, 1, dtype=torch.bool)
+    forced = torch.zeros_like(eligible)
+    actions = torch.tensor([[False], [True]])
+    with torch.no_grad():
+        old_log_prob = policy.evaluate_actions(
+            context, eligible, forced, actions
+        ).log_prob
+    batch = RolloutBatch(
+        context=context,
+        actions=actions,
+        eligible=eligible,
+        forced_end=forced,
+        old_log_prob=old_log_prob,
+        advantages=torch.tensor([1.0, -1.0]),
+        returns=torch.zeros(2),
+    )
+    actor_before = _state(policy)
+    with pytest.raises(FloatingPointError, match="actor gradient norm"):
+        updater.update(batch)
+    for name, value in policy.state_dict().items():
+        torch.testing.assert_close(value, actor_before[name], rtol=0, atol=0)
+    assert not updater.actor_optimizer.state
+    assert not updater.critic_optimizer.state
