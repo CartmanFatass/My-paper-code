@@ -1,0 +1,35 @@
+{
+  "object": "termination_reuse_off_termination_a01",
+  "config": {
+    "arm": "retrace",
+    "seed": 91021,
+    "train_episodes": 512,
+    "horizon": 96,
+    "eval_episodes": 64,
+    "checkpoints": [
+      0,
+      32,
+      128,
+      512
+    ],
+    "chunk": 8,
+    "gamma": 0.95,
+    "alpha": 1.0,
+    "beta": 0.5,
+    "zeta": 0.125
+  },
+  "launch_sha": "63b0ca73a212344d653ea8c3e5d0ae271ef10c29",
+  "admission": {
+    "schema_version": 1,
+    "direction": "termination_rule_experience_reuse",
+    "sha": "63b0ca73a212344d653ea8c3e5d0ae271ef10c29",
+    "command_sha256": "56c5f96aa58b94d73753e6163e201c37d2ed43e843ad11f21a80ca6e6c7f9740",
+    "parent_pid": 2267997,
+    "child_pid": 2267998,
+    "accepted_at_epoch": 1789912280.4758675
+  },
+  "host": "independent_two_agent_service_line",
+  "dtype": "float64",
+  "numpy_version": "1.26.3",
+  "evaluation_new_updates": 0
+}

@@ -1,0 +1,125 @@
+{
+  "arm": "qbeta",
+  "artifacts": [
+    {
+      "bytes": 874,
+      "path": "config.json",
+      "sha256": "6cc776cca9d3437df98148fb608f533d713133ea7d8a1f4709e53f9876a39d8c"
+    },
+    {
+      "bytes": 50558,
+      "path": "behavior.npz",
+      "sha256": "3463d34ba8185071396df7594392d928d159babe52e3e47ea4ff5498f3a3ecf6"
+    },
+    {
+      "bytes": 18548,
+      "path": "final.npz",
+      "sha256": "2da08f2f93d4a2b830cd8cd5bf85d14e01f140ac3b3dd95fa29749c74fd8beb7"
+    },
+    {
+      "bytes": 3084142,
+      "path": "updates.jsonl",
+      "sha256": "8b0d7c936082c8a114969a08bfc4b49c374569efaa36c6503d601510fe9a9d49"
+    },
+    {
+      "bytes": 44404,
+      "path": "evaluation.jsonl",
+      "sha256": "f8bc533c6bf734f0705e500bf65d27eb9912bbd27dd0167dcde74ff3e9641e14"
+    },
+    {
+      "bytes": 675,
+      "path": "curve.json",
+      "sha256": "6c77aa8ab003c860b0caca9ad96ba8faa300ad234a1d9a534e59722d98a9b7ec"
+    }
+  ],
+  "counts": {
+    "evaluation_episodes": 256,
+    "evaluation_new_updates": 0,
+    "evaluation_team_steps": 24576,
+    "gradient_optimizer_steps": 0,
+    "started_fits": 1,
+    "table_entries_written": 45469,
+    "tabular_update_calls": 6144,
+    "target_rows": 49152,
+    "train_episodes": 512,
+    "train_team_steps": 49152
+  },
+  "curve": [
+    {
+      "mean_J": 0.5794921875000003,
+      "nonzero_q_entries": 0,
+      "q_l2_from_initial": 0.0,
+      "train_episodes": 0,
+      "train_team_steps": 0
+    },
+    {
+      "mean_J": 0.705729166666667,
+      "nonzero_q_entries": 322,
+      "q_l2_from_initial": 60.69874450013702,
+      "train_episodes": 32,
+      "train_team_steps": 3072
+    },
+    {
+      "mean_J": 0.7188802083333337,
+      "nonzero_q_entries": 452,
+      "q_l2_from_initial": 144.49708238350638,
+      "train_episodes": 128,
+      "train_team_steps": 12288
+    },
+    {
+      "mean_J": 0.7525065104166668,
+      "nonzero_q_entries": 666,
+      "q_l2_from_initial": 243.9701787128934,
+      "train_episodes": 512,
+      "train_team_steps": 49152
+    }
+  ],
+  "diagnostics": {
+    "coefficient_sum": 35254.0,
+    "coefficient_zero_count": 5330,
+    "discounted_trace_mass_sum": 142593.9170200141,
+    "mean_discounted_trace_mass": 2.9010806685386985,
+    "mean_squared_return_increment": 5.182647460790141,
+    "positive_residual_terms": 167342,
+    "ratio_above_one_count": 35370,
+    "ratio_count": 43008,
+    "raw_ratio_max": 8.0,
+    "raw_ratio_square_sum": 61102.71999999889,
+    "raw_ratio_sum": 42771.466666668915,
+    "renewal_edges": 5330,
+    "renewal_edges_retained": 0,
+    "return_increment_square_sum": 254737.48799275703,
+    "table_entries_written": 45469,
+    "target_rows": 49152,
+    "td_square_sum": 120957.25464334697
+  },
+  "error": null,
+  "final_mean_J": 0.7525065104166668,
+  "launch_sha": "63b0ca73a212344d653ea8c3e5d0ae271ef10c29",
+  "learner_movement": {
+    "absolute_l2": 243.9701787128934,
+    "final_l2": 243.9701787128934,
+    "initial_l2": 0.0,
+    "nonzero_entries": 666,
+    "relative_l2": null
+  },
+  "limits": [
+    "exploratory independent host; no UAV or novelty claim",
+    "fixed teammate and focal termination law; no termination learning",
+    "same data/update rows, different target-construction arithmetic",
+    "constant step size and finite exposure; no convergence claim"
+  ],
+  "object": "termination_reuse_off_termination_a01",
+  "primary_mean_J": 0.7257052951388893,
+  "resources": {
+    "peak_rss_kib_linux_process": 40748,
+    "resources_unmeasured": false,
+    "scope": "one Linux scientific process, no children",
+    "scratch_bytes_at_summary": 3199201,
+    "system_cpu_seconds_process": 0.040083,
+    "user_cpu_seconds_process": 1.45905,
+    "wall_seconds_from_entry": 1.5681599040108267
+  },
+  "seed": 91021,
+  "status": "COMPLETE"
+}

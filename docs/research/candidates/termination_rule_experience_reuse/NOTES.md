@@ -392,3 +392,148 @@ Proceed with the fixed nine fits on local_linux, serial seed-major/arm order as 
 DM retains direct launch/observation/collection responsibility. Native manifest links and
 the eventual result reading will be appended below; technical exit alone will not end
 the scientific work. No additional learning batch is selected by this activation entry.
+
+## 2026-09-20 — A01 read: ordinary multi-step reuse works; longer Retrace traces add no clear gain
+
+All nine declared fits were natively admitted on local_linux at source
+`63b0ca73a212344d653ea8c3e5d0ae271ef10c29` and exited zero. DM directly retained and
+reconciled every handle; no failure, retry or observer transfer occurred. Native manifests
+and all runner outputs are in the following directories (each contains
+`launch-manifest.json`, `process-exit.json`, `config.json`, `summary.json`, underlying
+behavior/checkpoint arrays and full update/evaluation rows):
+
+| Seed | one_step | qbeta | retrace |
+| --- | --- | --- | --- |
+| 91021 | [run](../../../../runs/termination_rule_experience_reuse/a01_one_step_91021_20260920/launch-manifest.json) | [run](../../../../runs/termination_rule_experience_reuse/a01_qbeta_91021_20260920/launch-manifest.json) | [run](../../../../runs/termination_rule_experience_reuse/a01_retrace_91021_20260920/launch-manifest.json) |
+| 91022 | [run](../../../../runs/termination_rule_experience_reuse/a01_one_step_91022_20260920/launch-manifest.json) | [run](../../../../runs/termination_rule_experience_reuse/a01_qbeta_91022_20260920/launch-manifest.json) | [run](../../../../runs/termination_rule_experience_reuse/a01_retrace_91022_20260920/launch-manifest.json) |
+| 91023 | [run](../../../../runs/termination_rule_experience_reuse/a01_one_step_91023_20260920/launch-manifest.json) | [run](../../../../runs/termination_rule_experience_reuse/a01_qbeta_91023_20260920/launch-manifest.json) | [run](../../../../runs/termination_rule_experience_reuse/a01_retrace_91023_20260920/launch-manifest.json) |
+
+**Collection acceptance.** Independently read JSON/NPZ without importing the learner or
+executing a trajectory. Reconciled each native runner identity/exit with its manifest,
+source/config, every declared artifact SHA256, all counts and final finite Q/visit shapes.
+Reconstructed service rewards from recorded old demand and next positions, behavior
+probabilities from observed option changes, each of the 2,304 evaluation episode scores,
+all curve means and the declared primary. Behavior arrays match exactly across arms within
+each seed. All checks pass. Each fit has 49,152 training and 24,576 evaluation steps,
+6,144 tabular update calls and 49,152 target rows/visits, with zero evaluation updates.
+The three blocks visit 666, 640 and 656 of 800 table entries, identically across arms;
+the unvisited entries do not become evidence about unsupported states.
+
+**Observed native service J.** Primary is the prewritten equal mean of checkpoints
+32/128/512; no checkpoint or execution-mode choice was made after observing results.
+
+| Seed | one_step primary | Q(beta) primary | Retrace primary | Retrace − Q(beta) | Retrace − one_step |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| 91021 | .71171332 | .72570530 | .72479926 | −.00090603 | +.01308594 |
+| 91022 | .70009223 | .71195747 | .71357964 | +.00162218 | +.01348741 |
+| 91023 | .70439453 | .71429579 | .71360677 | −.00068902 | +.00921224 |
+
+Mean primary Retrace minus Q(beta) is **+.00000904**, with descriptive paired t interval
+**[−.00347179, +.00348988]** (three independent blocks, df=2, approximate normal-difference
+assumption). Its final differences are **−.00026042 / +.00667318 / −.00222982**, mean
+**+.00139431**, corresponding interval **[−.01022270, +.01301133]**. These are mixed,
+small exploratory estimates, not an equivalence result or evidence of stable superiority.
+
+The ordinary one-step reference is a real learner: mean initial J is .57548828 and its
+mean final J is .70976563; all three blocks improve. Q(beta) and Retrace final means are
+.74343533 and .74482964. Retrace's final advantages over one_step are
+**+.03704427 / +.04005534 / +.02809245**, mean **+.03506402**; its primary advantage is
+**+.01192853**, descriptive interval [.00606366, .01779340]. Q(beta)'s primary/final
+advantages are likewise positive in all three blocks. The curves retain the timing:
+at 32/128 episodes the methods are close; the larger multistep advantage appears at 512.
+This is finite-exposure exploratory learning evidence on this small host, with no claim
+about tuned optimality, general superiority, current HMASD skills or UAV service.
+
+**Intermediate prediction and changed judgment.** Retrace's discounted trace mass is
+3.29344 / 3.30886 / 3.29157 versus Q(beta)'s 2.90108 / 2.93005 / 2.90295. It retains
+2,997 / 3,010 / 3,069 actual renewal edges inside chunks; Q(beta) correctly retains none.
+Thus the implemented extra reuse is active. Retrace also has larger mean squared return
+increments (about 5.50–5.57 versus 5.13–5.18), not a measured reduction of estimator
+variance or value error. Raw ratios reach 8 and are clipped as specified. Both state
+support and actual learner movement are present; the missing clear Retrace advantage
+cannot be explained by a dormant extra trace or a nonlearning one_step comparator.
+
+The point-mean primary has the predicted positive sign by only .000009, while two of
+three differences are negative. I do not credit that arithmetic sign as the anticipated
+useful native consequence. The prediction of additional practical value from longer
+Retrace propagation is weakened at this exposure. The result supports using established
+multistep target-termination learning in the observed fixed-teammate reduction, and gives
+no empirical reason to add a special team correction or attribute a gain to crossing
+renewal boundaries. It leaves the *choice of behavior termination for collecting data*
+untested: A01 used the same zeta=.125 in every arm. It also leaves simultaneous changes
+to teammate laws, hidden commitments and learned skills untouched.
+
+**Cost.** Nine started/completed fits; 442,368 executed training plus 221,184 evaluation
+team steps and 55,296 tabular updates. Summed entry-to-summary wall is **11.851759 s**;
+first native acceptance to last exit spans **234.149267 s**, including intervening serial
+launch/staging waits. The first launch's preceding staging is outside that latter span.
+Maximum observed single-process peak RSS is **41,028 KiB**, not a simultaneous sum.
+Preserved output occupies about 28 MiB. Timing scopes and excluded final publication remain
+as declared; no end-to-end speedup is inferred from these numbers. All outcomes stay kept.
+
+**Next scientific action selected.** Retain ordinary Retrace as the standard implementation,
+not as a discovered winner over Q(beta). Do not tune alpha, extend A01 or add an attribution
+arm. The useful unresolved question is whether long behavior commitments actually help
+target-policy learning compared with collecting under the target termination frequency.
+That changes collection and state/option coverage, which A01 did not test, and can falsify
+a central practical motivation for off-termination reuse without inventing an algorithm.
+
+## 2026-09-20 — A02 prospective comparison: long behavior versus matched termination
+
+One question: with **the same ordinary Retrace learner and fixed target beta=.5**, does
+behavior zeta=.125 improve finite-interaction target J relative to **zeta=.5**? The latter
+is the competent matched-termination reference. Its option choices are still uniform
+during collection, so it is clock-matched, not on-policy with the learned greedy selector.
+All skill dynamics, teammate law/countdown, information, table, gamma=.95, fixed-chunk
+alpha=1.0, eight-row chunks, initial distribution and greedy target evaluation remain A01.
+
+Arms `long_behavior` (zeta=.125) and `matched_termination` (zeta=.5), both using Retrace.
+Three **fresh** blocks **91031, 91032, 91033**; **six planned fits**, each 512×96 training
+ticks and four 64×96 evaluation panels at 0/32/128/512. Planned totals: **294,912 training
+and 147,456 evaluation team steps; 36,864 tabular updates**. Fixed target evaluation worlds
+are paired across arms/checkpoints within each fresh block. Behavior uses the same addressed
+exogenous random draws in each pair, but different termination laws mean different observed
+option/state trajectories; these must not be asserted identical. The joint initial/data
+randomness varies independently across blocks. No A01 seed or selected checkpoint is reused.
+Local_linux CPU, serial seed-major/arm order, same admission/collection rules. Six fits are
+chosen for a two-law paired comparison across three new data blocks, not an allowance.
+
+The primary is long-minus-matched mean J over the same three nonzero checkpoints; retain
+all curves/final contrasts and block-level uncertainty. Expect longer behavior options to
+produce more persistent primitive paths and more boundary/endpoint occupancy, potentially
+helping delayed return propagation; this also risks worse coverage of alternative mid-path
+choices. The **falsifiable native conjecture is a favorable primary across these blocks**,
+not a guarantee from longer traces. Record actual termination/label-change counts, visited
+state-option support, endpoint/interior occupancy, trace mass and native J from the existing
+artifacts. These are descriptions of a collection-law package, not causal mediation or an
+assumed larger trace-mass ordering. A01's mixed extra-trace result lowers confidence in a
+simple "longer trace implies better J" explanation.
+
+If long behavior loses or has no useful consistent gain, prefer matched-termination
+collection when a fresh choice is available, while retaining off-termination learning for
+already existing long data. That would weaken the claim that long commitments should be
+chosen to save learning cost, not falsify their lawful reuse. If it helps, retain the
+bounded collection-law observation and distinguish coverage/exploration from return
+estimation. Neither outcome licenses a new gate, a joint-teammate-correction claim or a
+UAV novelty claim. This is a new prospective collection-law question after A01 has been
+read, not extension or renaming of its failed incremental-estimator prediction.
+
+**L0 for one bounded behavior change.** Add A02's fixed `--arm/--seed` guarded runner
+`scripts/run_termination_reuse_a02.py` and small study wrapper under
+`experiments/candidates/termination_rule_experience_reuse/behavior_clock_a02/`. Reuse A01's
+actual dynamics/learner and artifact producer. Add an optional per-call object identifier
+to the shared experimental `run_study` if needed, preserving A01's default and frozen
+source. Arm identity in artifacts must name long/matched while explicitly recording
+learner `retrace`; do not overload the existing learner-arm field ambiguously. Either
+separate run label from learner name through a minimal argument or make this explicit in
+the A02 wrapper. No table/update/data/evaluation semantics change beyond the declared
+collection zeta. Preserve actual conditional behavior probabilities (.9375/.0625 versus
+.75/.25), ratio construction and isolated random streams.
+
+Implementer owns only that executable wrapper/entry, the minimal shared experimental
+producer interface change and matching correctness tests in its separate assigned checkout;
+DM owns this notebook and accepts the diff. Tests must cover both fixed laws, artifact
+identity and unchanged A01 default, action-kernel support, source guard and count contracts.
+No scientific run, seed/horizon choice, notebook edit, shared index or child delegation by
+Implementer. An independent Reviewer checks the result-identity and collector interface
+change before DM acceptance and result execution. No outcome has been observed for A02.
