@@ -211,3 +211,31 @@ The existing bounded Monitor has been assigned both exact operation references; 
 DM retains observation responsibility through actual adoption, and retains collection
 and scientific reading throughout. Results will be read together after both invocations
 are terminal. No successor or extra fit is allocated.
+
+### Observation responsibility and pre-result interpretation
+
+At 02:14:25 UTC the bounded Monitor returned a native snapshot confirming both exact
+operations still running, accepted and identity-consistent, with no exit witnesses.
+It reported R progress of 1536 episodes for 8911 and 1280 for 8912. A continuous
+adoption message had not arrived, so the DM retained direct observation and narrowed
+the helper task to that snapshot; the helper reconciled and aborted only its own
+read-only observer sessions. Both scientific processes were untouched. The DM now
+directly owns observation through completion as well as collection and reading.
+
+A source comparison against 8901's `831b83c15` finds no change in the reused
+`reactive_renewal_b01` or `uav_motion_prefix_b01` trees. The selected PettingZoo
+environment/adapter and vectorized path are unchanged. The unrelated added libm
+oracle in `uav_cpp_backend.py` is outside this selected backend. This supports the
+declared unchanged-method replication; the explicit local-node/runtime change still
+precludes a bit-identity claim.
+
+Before reading any B02 scores, retain an important interpretation boundary. G's
+ability to request a fresh velocity each tick does not make its implemented sampling
+and learning package identical to R: G samples a tanh-Gaussian with clamped log standard
+deviation, whereas R's KEEP copies an actual previous command and has a separately
+trained gate. F also creates temporal persistence without learning that gate. Thus
+R−G can reflect useful persistence, the induced action-noise pattern, representation
+or finite learning; a gain is not automatically an information or termination-causality
+result. R−F limits the practical reason to learn the added gate, while phase inputs,
+capacity and learning differences still prevent unique component attribution. This
+refinement changes no arm, endpoint, expected direction or stopping decision.
