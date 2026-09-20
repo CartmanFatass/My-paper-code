@@ -3315,3 +3315,175 @@ reuse of its old evaluation scores; they do not create new ordinary learning ins
 erase scale selection. Favorable and adverse panels receive the same conditional scope.
 The practical investment decision may change without pretending to estimate a population
 ranking or promising a later fresh confirmation batch.
+
+## 2026-09-20 11:13 UTC — B07 complete: scalar reuse does not earn practical retention
+
+All three admitted invocations at source
+`088d0ca32fd50f6264904a5a0d7e01b9a5b0f6e8` exited normally with code zero and COMPLETE
+summaries. Native exit witnesses are 11:01:41.019159 / 11:02:50.108005 /
+11:03:17.410896 UTC for 8941 / 8942 / 8943. The observer reconciled each original
+runner/supervisor identity through actual exit and is now closed. There was no retry,
+replacement fit, missing panel or technical failure. Complete runner evidence is retained in
+[8941](../../../../runs/ucope/lower_scale_reuse_b07_8941/summary.json),
+[8942](../../../../runs/ucope/lower_scale_reuse_b07_8942/summary.json) and
+[8943](../../../../runs/ucope/lower_scale_reuse_b07_8943/summary.json).
+
+### Fixed endpoint reading
+
+Each value below uses every one of the 64 prescribed new worlds for that fixed checkpoint.
+Bs and Bm mean Bhalf_sampled and Bhalf_mean; Gs and Gm mean Ghalf_sampled and Ghalf_mean.
+Bm continues to use the learned stochastic scalar gate. No result selected a deployment
+mode, checkpoint, world subset or replacement primary.
+
+| Frozen mode mean J | 8941 | 8942 | 8943 |
+| --- | ---: | ---: | ---: |
+| Bs | 0.19610219 | 0.22908860 | 0.21867154 |
+| Bm | 0.20833675 | 0.26087822 | 0.25040062 |
+| Gs | 0.25722325 | 0.22946465 | 0.23943058 |
+| Gm | 0.27480071 | 0.24941402 | 0.23810539 |
+
+Cells in the next table are signed difference / conditional world-panel SE / positive:negative:tie
+world count. The descriptive final column averages the three training-instance differences;
+neither the 64 worlds nor their SEs enlarge the number of learning instances.
+
+| Prespecified contrast | 8941 | 8942 | 8943 | Descriptive mean |
+| --- | --- | --- | --- | ---: |
+| **Bs - Gm, primary** | **-0.07869852 / 0.00785203 / 7:57:0** | **-0.02032542 / 0.01084391 / 28:36:0** | **-0.01943386 / 0.00807012 / 24:40:0** | **-0.03948593** |
+| Bm - Gm | -0.06646396 / 0.00685364 / 8:56:0 | +0.01146420 / 0.01053630 / 36:28:0 | +0.01229523 / 0.00670743 / 39:25:0 | -0.01423485 |
+| Bs - Gs | -0.06112106 / 0.00830337 / 8:56:0 | -0.00037605 / 0.00992612 / 31:33:0 | -0.02075905 / 0.00731166 / 23:41:0 | -0.02741872 |
+| Bm - Bs | +0.01223456 / 0.00632221 / 42:22:0 | +0.03178962 / 0.00840902 / 47:17:0 | +0.03172909 / 0.00767526 / 40:24:0 | +0.02525109 |
+| Gm - Gs | +0.01757746 / 0.00632391 / 42:22:0 | +0.01994937 / 0.00703637 / 43:21:0 | -0.00132519 / 0.00497493 / 30:34:0 | +0.01206722 |
+
+All three primary point estimates are adverse, spanning -0.07869852 to -0.01943386.
+The practical candidate prediction is not supported, and **the sampled scalar-reuse package
+is not retained against the selected ordinary mean endpoint**. The second and third panels
+do not individually establish a precise deficit, and no population ranking follows. The
+near-zero Bs-Gs panel at 8942 is unresolved, not equivalence. The Bm-Gm advantages at 8942
+and 8943 are preserved as contrary secondary evidence, with their stated uncertainty; they
+do not rescue the primary or select Bm automatically. Gm-Gs is slightly negative at 8943,
+again preventing a universal mean-execution claim.
+
+This is conditional evidence on the three retained Ghalf learning instances used to select
+sigma .5, even though all evaluation worlds are new. The selected-comparator argument above
+still applies to the adverse result. B07 is a package screen, not identification of a copying,
+representation, critic, likelihood or learning mechanism. In particular, it does not test the
+value of a feedback-conditioned gate: B's gate is input-independent.
+
+### Treatment activity and independent reconstruction
+
+All B fits started with sigma [.5,.5,.5] and eligible KEEP probability .5. Mean sigma over
+the first 256 actual episode starts was .49592910 / .50435192 / .50269412; the retained Ghalf
+histories were .49552684 / .50297991 / .49501164. B's final coordinate scales were
+[.49382612,.51602089,.47109926], [.51690912,.51105112,.51174712] and
+[.49981624,.51145422,.50019950]. Thus neither scale collapse nor a silent reversion to
+initial sigma 1 explains the comparison.
+
+Final eligible KEEP probabilities were **.46337768 / .50190848 / .49695495**. Actual copies
+occupied **31.5710% / 33.2813% / 33.0066%** of the final B agent-ticks; both B modes had
+exactly identical gate and eligibility sequences. This is an active copying treatment,
+with compulsory renewal still enforced. Common-actor displacements from initialization were
+3.30892 / 3.11050 / 2.79924; critic displacements were 12.76614 / 13.32131 / 12.43148;
+gate-logit displacements were .10376944 / .00539806 / .00861277. These and the training curves
+establish actual learning activity, not adequate optimization or useful gate-rate adaptation.
+
+The DM independently reconstructed the result using raw arrays, JSONL and tensor-only
+checkpoint loading, without importing candidate code, calling a model forward, constructing
+an environment or updating a parameter. Every assertion passed. Checks covered:
+
+- Exact launched source blobs and artifact hashes; the copied B06 checkpoint/summary/source
+  bytes against both original run roots and the published input commit; common initialization
+  digest, inherited training provenance, finite CPU FP32 tensors and final checkpoint metadata.
+- All 2,048 training rows, 1,024 four-epoch updates and 2,048 before/after curve rows per fit;
+  scale and softmax-gate reconstruction, episode/seed sequence, final curve/checkpoint identity
+  and the first-256 episode-start reduction.
+- All four 64-world panels, raw reward reductions and every fixed difference vector, SE and
+  sign count; all prescribed Gaussian/uniform slots regenerated bit-for-bit from their private
+  addresses; fresh/KEEP/forced-renewal commands, stochastic Bm gate, G phase-zero behavior,
+  exact copied commands, mean-mode zero Gaussian consumption and zero G gate consumption.
+- Exact per-mode transition/decision/reset counts, unchanged frozen parameters, zero evaluation
+  optimizer calls, unchanged global Torch RNG, one new B fit and zero new G fits per invocation.
+
+Maximum raw-reward-to-J reconstruction error was 5.56e-16; maximum independent tanh-command
+reconstruction error was 1.11e-7. All retained underlying arrays, final/copied checkpoints,
+full curves, source/config and launch/exit evidence remain recoverable beside each summary.
+
+### Actual cost and allocation
+
+The three new fits completed **6,144 training episodes / 1,572,864 training team steps /
+12,288 optimizer calls**. The prescribed four-mode evaluation completed **768 episodes /
+196,608 team steps / zero updates**. Total new work is **1,769,472 native team steps**.
+The three ordinary Ghalf fits are inherited B06 selection/development exposure, not new B07
+training. All **15 of 15** owner-allocated started fits are now complete: B04 six, B06 six,
+B07 three; B05 used none. Both allocated Pro calls are complete. There is no active native
+handle, unused replacement allowance or automatic new-idea replenishment of this owner cap.
+
+Acceptance-to-actual-exit durations were 831.997 / 835.593 / 838.265 seconds, totaling
+2,505.855 invocation-seconds. First acceptance to final exit was **928.389 seconds**.
+Runner-main-through-publication walls were 831.135 / 834.776 / 837.417 seconds; study-scope
+process CPU totaled 2,499.730 seconds. Single-process ru_maxrss peaks were 363,184 / 363,348 /
+362,812 KiB; their sum is not a simultaneous batch peak. The runner summary does not measure
+complete-process wall internally; the independently scoped acceptance/exit durations use
+native witnesses. These measures omit preparation and this readback and establish no
+algorithmic efficiency advantage. The original deadline remains **2026-09-21 04:06:07 UTC**.
+
+### Post-result decomposition and contrary training history
+
+To distinguish a deployment-noise story from a remaining attained-controller difference,
+the DM computed the identity `Bs-Gm = (Bm-Gm) - (Bm-Bs)` on every saved paired world.
+For 8942 and 8943, the +.01146 / +.01230 Bm advantage is smaller than the .03179 / .03173
+mean-extraction increment within B, producing an adverse sampled primary. For 8941, a large
+-.06646 Bm-Gm deficit remains even after that execution change. These are descriptive
+decompositions of deployed packages; changing mode also changes trajectories and histories.
+They are not isolated causal effects of Gaussian variance or command copying.
+
+The post-result differential extraction `(Bm-Bs)-(Gm-Gs)` is -.00534290 / +.01184024 /
++.03305428, with conditional SE .00794319 / .00901770 / .00744476. Its mixed pattern does
+not establish a uniform extra sampling penalty caused by reuse. No new native observation,
+endpoint selection or fit was used for this calculation.
+
+Training also prevents a blanket failure narrative. In 8942, B's on-policy mean J exceeds
+the inherited Ghalf history in seven of eight descriptive 256-episode blocks (differences
++.02096, -.00619, +.06390, +.04376, +.03737, +.07020, +.05142, +.02140), despite its adverse
+final practical primary. In 8943, B is higher in the first three blocks and lower in the
+last five; 8941 is mixed. These evolving on-policy returns use the fixed paired reset worlds,
+but different policy histories and unaligned consumed velocity draws. They are not frozen
+checkpoint evaluation, a uniform sample-efficiency claim or permission to select an earlier
+checkpoint. Actual learning occurred; uniformly worse online reward is not the common
+explanation for all three practical deficits.
+
+The direction's current working update is therefore: retain the B06 ordinary-initialization
+finding; weaken the practical case for the tested scalar-reuse package further than B04's
+mixed result; preserve the two favorable Bm panels and unresolved magnitudes; leave lawful
+feedback-conditioned branch opportunity unidentified. Independent scientific criticism is
+now testing whether any additional observation is worth its cost. No next fit, gate/scale
+sweep, mean-mode rescue, fresh-seed confirmation or extra Pro call has been selected.
+
+### Independent criticism adopted; next is an identification question, not a rescue fit
+
+The independent ResearchCritic reports **MATERIAL_DISSENT: no**. I adopt its practical
+reading and leave this scalar package idle. This follows from the evidence and the cost of
+the remaining information, independently of the exhausted fit allowance. The strongest
+alternative to "copying caused the loss" is co-adaptation of the learned controller,
+renewal law and execution distribution, together with conditioning on the retained Ghalf
+instances. Bm-Gm does not isolate mean-head quality: its stochastic B gate and visited
+histories still differ. The decomposition already obtained refines the explanation enough
+for this investment decision.
+
+I also adopt the Critic's reason not to compute another gate-score slope. An infinitesimal
+rate response at a frozen B endpoint would not predict a useful finite replacement against
+Gm or separate training co-adaptation, and no present decision depends on its sign. B05's
+imprecise slopes do not prove a B07 estimate would also be imprecise; decision relevance,
+rather than assumed variance, is the reason to decline this calculation.
+
+The broader unresolved question remains lawful, feedback-conditioned branch opportunity.
+The next bounded **zero-fit** reasoning task asks whether a randomized scalar gate can
+identify a conditional one-decision END-minus-KEEP value under common fixed-B continuation,
+and whether the saved logs actually retain the lawful predecision variables needed to use
+that identity. This adds an identification/recoverability question to the earlier analytic
+`O_X` opportunity formula. It is not another slope estimate, gate search, learned predictor,
+checkpoint evaluation or native batch. Inspect the existing schema and derive/check one
+finite randomized model; distinguish hidden-state opportunity, legal-history opportunity,
+logged-feature opportunity and finite-sample estimation. Coupled teammates, endogenous
+eligibility, predecision versus postdecision variables and world-level clustering must stay
+explicit. A result that the relevant input is absent is useful and grants no new data run.
+UCOPE remains exploring under the direct DM; the original deadline and 15-fit cap remain.
