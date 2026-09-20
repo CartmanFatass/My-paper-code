@@ -2548,3 +2548,30 @@ termination on it still has nothing to gain.
 **Cost and limits.** Three fits on `wsl_4070`, about two hours together; probes are policy
 execution only (4 rules × 32 worlds × 500 steps per block), recorded as exposure. Blocks are
 reused development blocks; no size claim. Nothing is added after scores are seen.
+
+## 2026-09-20 06:20 PDT — label content B08: entry code written and accepted
+
+Implementer (Opus) from my scope note; I read the save, the rule wrapper and the fit wiring,
+ran the checks (58 passed with B07; the Implementer's cross-object run of 151 passed) and
+accepted it myself: no shared learner, runner, environment or evaluator is edited.
+`scripts/run_fsd_label_content_b08.py` (`fit`, `probe`, `reduce`), launch script, tests.
+
+Facts fixed before any score. The weights are written only after the frozen `run_fit` has
+returned complete (`HMASDAgent.save_model`; the file holds coordinator, low level including the
+actor's state-independent log-std, discriminators, optimizers, ValueNorm; the observation and
+state normalisers are off on this construction, so nothing the evaluation reads is missing).
+The probe loads them into a learner-shaped agent and lets the frozen evaluator sync
+(`run_flexible_skill_duration_e0.py:319-335`) carry them, because that sync would overwrite a
+direct load; `load_model` is non-strict, so the bit-exact reproduction of the recorded
+rollout-45 panel is the proof of a faithful load, and an unfaithful one stops the probe. The
+four execution rules wrap the evaluator instance's `_batched_assign_skills` for one panel
+(call first, replace after, write the executed label back as the held one; refused unless both
+interruption costs are infinite); `uniform_every_step` sets the instance's caps to 1 for that
+panel and checks from the panel's own metrics that a decision fired every step; random labels
+come from a generator seeded by (evaluation seed, rule) that leaves every global stream
+untouched. In the actor the agent label enters by FiLM before the GRU; the team label never
+reaches the actor, only the low-level critic and the coordinator. The probe needs `runs/` and
+the checkpoint on one host, so it runs here on the WSL host after the weights are fetched.
+Codex has been asked (through the owner) whether its termination design needs a further
+measure from the probe; any addition is made before a probe score exists, and the three fits
+below do not depend on it.
