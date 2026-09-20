@@ -37,8 +37,10 @@ PAGE_FACTS = """(() => {
   const assistants = [...document.querySelectorAll('[data-message-author-role="assistant"]')].map(text);
   const turns = [...document.querySelectorAll('[data-message-author-role]')].map(message => {
     const container = message.closest('article,[data-testid^="conversation-turn"]') || message;
+    const messageBody = message.getAttribute('data-message-author-role') === 'user'
+      ? message.querySelector('.whitespace-pre-wrap') : null;
     return {role: message.getAttribute('data-message-author-role'), text: text(message),
-      turn_text: text(container)};
+      message_body: messageBody ? text(messageBody) : null, turn_text: text(container)};
   });
   const pageText = text(document.body).slice(0, 800);
   return {
@@ -517,7 +519,8 @@ def _bind_operation_turn(page, operation, committed):
     for index, turn in enumerate(page["turns"]):
         if turn.get("role") != "user":
             continue
-        message = squash(turn.get("text"))
+        body = turn.get("message_body")
+        message = squash(body if body is not None else turn.get("text"))
         matches = message == committed if committed is not None else (
             bool(expected_hash)
             and hashlib.sha256(message.encode()).hexdigest() == expected_hash

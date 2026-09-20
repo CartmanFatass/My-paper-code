@@ -58,6 +58,7 @@ def test_compose_keeps_document_hash_but_gives_pro_a_natural_cover_note(tmp_path
 
 CONVERSATION = 'https://chatgpt.com/c/12345678-1234-1234-1234-123456789abc'
 WAIT_PROMPT = 'read the attached complete question'
+MISSING = object()
 
 
 def wait_page(turns=(), *, stop=False, login=False, challenge=False, approval=(),
@@ -82,9 +83,14 @@ def wait_page(turns=(), *, stop=False, login=False, challenge=False, approval=()
     }
 
 
-def user_turn(text=WAIT_PROMPT, attachment=None):
+def user_turn(text=WAIT_PROMPT, attachment=None, *, message_body=MISSING):
     suffix = f'\n{attachment}' if attachment else ''
-    return {'role': 'user', 'text': text, 'turn_text': text + suffix}
+    turn = {'role': 'user', 'text': text + suffix, 'turn_text': text + suffix}
+    if message_body is MISSING:
+        message_body = text
+    if message_body is not None:
+        turn['message_body'] = message_body
+    return turn
 
 
 def assistant_turn(text):
@@ -287,22 +293,60 @@ def test_wait_surfaces_auth_challenge_and_page_errors(tmp_path, monkeypatch, pro
     assert operation.data['send_attempted'] is True
 
 
-@pytest.mark.parametrize('wrong_prompt, attachment, shown_attachment', [
-    (True, None, None),
-    (False, 'question.md', None),
-])
-def test_wait_rejects_wrong_prompt_or_missing_attachment(tmp_path, monkeypatch, wrong_prompt,
-                                                         attachment, shown_attachment):
-    text = 'another prompt' if wrong_prompt else WAIT_PROMPT
-    page = wait_page([user_turn(text, shown_attachment)])
-    agent = FakeWaitAgent(FakeWaitBrowser([page]))
+def test_wait_binds_message_body_separately_from_attachment_card(tmp_path, monkeypatch):
+    attachment = 'question.md'
+    agent = FakeWaitAgent(FakeWaitBrowser(stable_answer_pages(
+        'complete attached answer', attachment=attachment
+    )))
     cfg, args, _state, operation = install_wait(
         tmp_path, monkeypatch, [agent], attachment=attachment
     )
     result = driver.command_wait(args, cfg)
+    assert result['state'] == 'COMPLETE'
+    assert Path(args.answer_file).read_text() == 'complete attached answer\n'
+    assert driver.Operation(cfg, operation.data['key']).data['attachment_seen'] is True
+
+
+@pytest.mark.parametrize('body', ['another prompt', WAIT_PROMPT + ' trailing text'])
+def test_wait_rejects_wrong_or_superstring_message_body(tmp_path, monkeypatch, body):
+    page = wait_page([user_turn(body)])
+    agent = FakeWaitAgent(FakeWaitBrowser([page]))
+    cfg, args, _state, operation = install_wait(tmp_path, monkeypatch, [agent])
+    result = driver.command_wait(args, cfg)
     assert result['state'] == 'ERROR'
     assert 'user turn' in result['reason']
     assert operation.data['send_attempted'] is True
+
+
+def test_wait_rejects_duplicate_exact_message_bodies(tmp_path, monkeypatch):
+    page = wait_page([user_turn(), assistant_turn('old answer'), user_turn()])
+    agent = FakeWaitAgent(FakeWaitBrowser([page]))
+    cfg, args, _state, _operation = install_wait(tmp_path, monkeypatch, [agent])
+    result = driver.command_wait(args, cfg)
+    assert result['state'] == 'ERROR'
+    assert result['reason'] == 'conversation does not contain exactly one user turn for this operation'
+
+
+def test_wait_rejects_missing_attachment_after_exact_body_match(tmp_path, monkeypatch):
+    page = wait_page([user_turn()])
+    agent = FakeWaitAgent(FakeWaitBrowser([page]))
+    cfg, args, _state, operation = install_wait(
+        tmp_path, monkeypatch, [agent], attachment='question.md'
+    )
+    result = driver.command_wait(args, cfg)
+    assert result['state'] == 'ERROR'
+    assert result['reason'] == "the operation's attachment is absent from its user turn"
+    assert operation.data['send_attempted'] is True
+
+
+def test_wait_falls_back_to_exact_full_message_when_body_field_is_absent(tmp_path, monkeypatch):
+    turns = [user_turn(message_body=None), assistant_turn('legacy exact answer')]
+    page = wait_page(turns)
+    agent = FakeWaitAgent(FakeWaitBrowser([page, page, page, page]))
+    cfg, args, _state, _operation = install_wait(tmp_path, monkeypatch, [agent])
+    result = driver.command_wait(args, cfg)
+    assert result['state'] == 'COMPLETE'
+    assert Path(args.answer_file).read_text() == 'legacy exact answer\n'
 
 
 def test_wait_selects_answer_after_bound_turn_and_source_hash_is_not_a_receipt(tmp_path, monkeypatch):
