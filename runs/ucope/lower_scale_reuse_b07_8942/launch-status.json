@@ -1,0 +1,11 @@
+{
+  "claim_key": "dbd3643258989b3756a343e7da3a381e4160c79ce60ced545e0530ef83ab2004",
+  "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/dbd3643258989b3756a343e7da3a381e4160c79ce60ced545e0530ef83ab2004.json",
+  "manifest_ref": "/home/fires/.codex/worktrees/1275/hmasd-wsl/runs/ucope/lower_scale_reuse_b07_8942/launch-manifest.json",
+  "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/dbd3643258989b3756a343e7da3a381e4160c79ce60ced545e0530ef83ab2004.json",
+  "pid": 2039389,
+  "runner_pid": 2039390,
+  "schema_version": 1,
+  "status": "accepted",
+  "updated_at": "2026-09-20T10:48:54.531639Z"
+}

@@ -3273,3 +3273,26 @@ Publish this authorization with the exact accepted implementation, then admit ea
 invocation on local_linux. Preserve each native operation handle and reconcile uncertain
 acceptance on the same request. The direct DM retains observation and scientific reading
 responsibility through exit, result reconstruction, criticism and the next investment update.
+
+### B07 admitted native execution
+
+All three invocations were accepted at published source
+`088d0ca32fd50f6264904a5a0d7e01b9a5b0f6e8`. Native process identities, exact commands,
+fresh actual-node admission evidence and durable operation references are retained in:
+
+- [8941 manifest](../../../../runs/ucope/lower_scale_reuse_b07_8941/launch-manifest.json)
+- [8942 manifest](../../../../runs/ucope/lower_scale_reuse_b07_8942/launch-manifest.json)
+- [8943 manifest](../../../../runs/ucope/lower_scale_reuse_b07_8943/launch-manifest.json)
+
+The DM's direct read-only observer checked all three original handles at 10:50 UTC:
+runner/supervisor identities are running and consistent, stderr is empty, and flushed Bhalf
+training rows number 385/195/125. Thus all three new fits have actually started, taking
+window consumption to **15 of 15 started fits**. Ghalf has no new fit. These are progress
+facts, not final learning exposure or scientific results. Exact inherited inputs have passed
+the production loader and their byte-identical copies are retained in each native run root.
+
+The observer remains live until every assigned native handle has a consistent OS-exit
+witness. No uncertain request was repeated, no duplicate/replacement invocation was made,
+and no training result was used to change the fixed endpoint, mode or sample count. After
+terminal evidence, the DM will reconstruct all fixed panels and account for actual work
+before updating the scientific judgment.
