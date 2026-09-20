@@ -748,3 +748,70 @@ dependency** and no waiting on Claude B08, Root permission, or a nonexistent pro
 Root owns only shared-index integration of this published standing; it is not being asked
 to approve a batch or to invent the next idea. All evidence and negative constraints stay
 available for a future reasoned continuation.
+
+## 2026-09-20 — Owner-directed re-entry: test the scientific entry condition itself
+
+Root relays the owner's instruction to reopen A: the direction must determine whether a
+worthwhile termination-rule reuse condition exists, rather than stop after the present
+fully observed host's package comparisons. The prior idle investment decision is therefore
+superseded. A01/A02 results and their limits remain unchanged. Author checkout is still
+`fsd-a`, branch `codex/termination-rule-experience-reuse`, clean at `961750ee5` before this
+entry. The freshly checked canonical index still has pause lifted and A active under
+`Codex DM`; loaded constitution, methods and compute inputs are unchanged. Cost remains
+recorded without any fit allowance. There is no new gate-learning question or B08 dependency.
+
+**Falsifiable scientific entry conditions, not new governance gates.** A concrete condition
+qualifies for a further direct study if it passes all of the following tests:
+
+1. Behavior and target terminations are fixed, explicit and causally distinct; changing
+   the termination rule changes the relevant target value/control problem, not only a
+   nominal label count. Skills are fixed, behaviorally different controllers, not copied
+   aliases manufactured to disadvantage a label table.
+2. The target quantity is identified by the legal observations and actual behavior support
+   available to *both* arms. Teammate remaining commitments, option controller memory and
+   any termination-event side effect must be represented or lawfully inferable. A missing
+   post-interruption branch cannot be supplied by renaming an observed continuation.
+3. There is a specific finite-data or finite-computation deficit of a **competent** ordinary
+   reference, and a lawful structure capable of addressing it. The reference includes
+   target-beta Bellman bootstrapping/Q(beta), appropriate augmented-state multistep learning,
+   and action-compatible intra-option sharing where known controllers permit it. When
+   a small same-data learned primitive model is practical, it is a serious simple rival;
+   an oracle transition model is not a learned baseline. Ideal-state representability is
+   not itself evidence that all finite learning is adequate.
+4. An intermediate prediction distinguishes the proposed explanation, and a predeclared
+   native consequence can change a use/research judgment at the declared exposure. Merely
+   increasing trace mass, decreasing nominal label ratios, or recovering a known semantic
+   correction does not pass this test. A matched-rule or equivalent-action comparison must
+   expose if the alleged issue is generic slow TD or label duplication instead.
+
+These conditions are a scientific selection question for this owner-requested re-entry,
+not a universal prototype/proof prerequisite. A demonstrated lawful finite-exposure gap
+can justify learning tests without an asymptotic novelty theorem. A negative analytic
+bridge constrains its stated class, never every possible host or representation.
+
+**First bounded bridge selected; no new fits yet.** Investigate one source-grounded case:
+small target-label probability during a shared primitive-action prefix, with delayed value
+propagation. Check whether termination mismatch creates a genuine deficit after admitting
+ordinary action-compatible learning. Do not enumerate architectures or extend A02. The
+bridge will also use an unsupported-divergence counterpart, so it can distinguish a
+recoverable label-space mismatch from an unidentifiable real-action branch.
+
+Primary-source check: the Q(beta) paper's section 8, p. 3180 (PDF p. 8), explicitly notes
+that its target option-selector factor can suppress traces despite primitive-action
+compatibility, and discusses action-level correction. Its section 4.4, Eqs. 15–16, separates
+the two corrections. This is not a new idea or an established online-convergence result.
+Sutton, Precup and Singh, *Between MDPs and Semi-MDPs* (1999), pp. 202–205,
+[primary paper PDF](https://people.cs.umass.edu/~barto/courses/cs687/Sutton-Precup-Singh-AIJ99.pdf),
+Eqs. 18–21 and Theorem 3, already supplies action-compatible intra-option model/TD learning
+for deterministic Markov controllers under its visitation assumptions. I verified those
+passages directly after the Scout's retrieval. Thus lack of sampled option labels alone
+cannot establish a missing ordinary solution. Local catalog search found no matching
+off-termination/intra-option source; adjacent asynchronous actor-critic titles were not
+treated as evidence for this particular correction.
+
+The Scout's proposed rare-label example blurred the behavior selector with target mu.
+I do **not** adopt that identification: in Q(beta), `mu(o|s)` is the target selector;
+small behavior selection probability by itself does not make the Q(beta) coefficient
+small. The bridge must specify both distributions separately, keep their real action
+support explicit, and test a strong action-compatible baseline rather than an intentionally
+unshared label learner. The DM owns this correction and the eventual study/stop choice.
