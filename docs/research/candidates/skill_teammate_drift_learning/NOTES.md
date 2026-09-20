@@ -1552,3 +1552,95 @@ The DM verified that commit's file scope; the full answer content and exact
 LF/hash reconciliation were already read above. B's earlier unused Answer slot
 is not a second Send or separate response requirement. Pro adoption remains as
 recorded and did not change the frozen B04 batch.
+
+## 2026-09-20 16:56 PDT — Final feasibility decision: NOT_VIABLE_CLOSE
+
+**Decision.** Recommend closing `skill_teammate_drift_learning` as an independent
+research direction and archiving it for investment purposes. This explicitly
+supersedes the preceding entry's idle/target-host re-entry wording: there is no
+active successor, future-target placeholder, waiting producer or selected B05.
+The decision is **NOT_VIABLE_CLOSE**, not a claim that joint drift is impossible
+to correct or that the B03 positive observation has disappeared. The owner asked
+for an immediately actionable comparison on an existing lawful target interface,
+not another constructed condition or sweep; I do not have such a comparison whose
+answer would justify continuing this direction. No further permission is missing.
+
+**Cumulative evidence, including the strongest case against closure.** B01/B02
+used a genuine full joint trajectory ratio with fixed clocks. After correcting
+the fingerprint competence/initialization confound, B02 joint-minus-fingerprint
+was -.05592306/-.03405732/-.04777791, and joint-minus-uniform was negative on all
+three blocks. That rejects the tested unconditioned global-IS package on the
+recurrent-context host, not the direction's entire question.
+
+B03 subsequently answered a real, narrower existence question affirmatively:
+nonrepeating contexts can leave a direct context/reward regression unidentified
+on its source manifold while actual joint outcome/reward cells remain supported.
+Ordinary conditional-response regression, integrated under the legally known
+current joint law, then used old observations to improve early native decisions.
+Its first-64 advantage over saturated full fingerprint was
++.032835322/+.072580077/+.058488228 and over recent saturated fingerprint was
++.021146390/+.017653905/+.088782489. Ordinary all-history macro-value mixing also
+had a native liability relative to recent replay. This is empirical learning
+evidence in the specified host, not merely a rank argument or an ego-only
+correction. It is the strongest contrary evidence to a blanket negative verdict,
+and remains preserved at B03 result commit
+`c96aed19f7050c12d0d58b14edc128787bf2e480`.
+
+B04, read at `4e2dafaf34fe4cb982624322ea0aae1bf26a9340`, preserved each marginal
+context set while removing the exact product constraint. Rank and initial
+fingerprint error improved on all three blocks, but the predeclared native
+difference-in-differences was +.025759620/0/-.009575933. The predicted native
+shrinkage was not stable. Conditional regression still beat the fixed full
+fingerprint implementation in both conditions on all blocks; B04 therefore
+does **not** negate that package observation. It does weaken the proposed
+support-repair-to-decision explanation. Both B03 and B04 also show late baseline
+catch-up, and B04 did not retest all of B03's strongest comparator families.
+
+**What these results can and cannot support.** Task opportunity exists in the
+constructed early-transfer problem; an outcome representation makes historical
+data usable; and the ordinary learner realizes that use in finite samples.
+Those are retained findings. They are not an independent new correction method:
+the strongest same-information conditional/model-based regression is the
+candidate itself. Ordinary-method identity alone would not rule out an important
+empirical finding, but here the finding remains tied to deliberately scripted
+drift, a known joint completion law, invariant conditional rewards and a terminal
+macro host. We have neither a demonstrated target limitation beyond that setup
+nor a stable native support criterion distinguishing it from ordinary finite-data
+regression/prior geometry. No endogenous teammate learning, unknown correlated
+joint law, learned HMASD skill benefit, partial-observation correction or UAV
+value was established. The verified HIRO and multi-agent replay sources motivate
+off-policy concerns; they do not fill these empirical gaps or diagnose Claude's
+PPO path.
+
+**Why there is no decisive continuation on the current object.** I checked the
+owned executable interfaces again: B01/B02 provide recurrent scripted policies;
+`joint_response_b03/study.py` supplies product/permuted scripted schedules and
+the explicit independent joint completion law, rather than learning that law
+from changing controllers. A further seed/permutation/regularization study could
+characterize this finite regression comparison, but would not test a newly
+identified target limitation. Giving the equivalent conditional regression a
+second baseline name would not add a discriminating arm. Removing the known law,
+introducing endogenous co-learning or choosing a new response decomposition
+would build another problem, not execute a decisive comparison already specified
+by the existing interface.
+
+A bounded read of the existing relay HMASD driver and UAV service-restoration
+host interface does not supply the missing mapping: an available simulator or
+rollout loop is not itself the lawfully identified joint-outcome/response model
+used by B03. I have not established that mapping, and do not claim a repository-
+wide impossibility theorem. Transplanting the premise into Claude's coordinator
+or B08 is outside this question and is not a continuation. Thus the current
+scientific contribution is a bounded ordinary conditional-regression result,
+insufficient to justify this as a continuing independent direction. Closure is
+an evidence/opportunity-cost judgment, not a fit cap or a fixed-failure-count rule.
+
+**Disposition and cost.** All **57 exploratory fits** (B01 12, B02 15, B03 18,
+B04 12) are complete, collected and read; the earlier B01 pre-training refusal
+remains separately retained. This final assessment starts **zero** additional
+fits and makes no confirmation claim. All source, adverse/positive raw outputs,
+reviews and the Pro adoption record remain recoverable at their published SHAs.
+No live handle, queued experiment, uncollected result or pending Pro answer is
+left behind. Stop maintenance and further experiment selection for B; do not
+delete its evidence. Root owns the shared `RESEARCH.md` integration and should
+record the direction as archived with this final judgment, not as exploring
+while awaiting a future target. No new closure/handoff record is created.
