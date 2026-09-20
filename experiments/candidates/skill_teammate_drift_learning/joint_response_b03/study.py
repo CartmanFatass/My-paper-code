@@ -8,6 +8,7 @@ from __future__ import annotations
 
 from collections import deque
 from dataclasses import asdict, dataclass
+from math import gcd
 from typing import Any
 
 import numpy as np
@@ -40,6 +41,7 @@ class Config:
     skill_ticks: int = 3
     recent_window: int = 64
     prior_strength: float = 2.0
+    source_schedule: str = "product"
 
     @property
     def total_macros(self) -> int:
@@ -53,6 +55,10 @@ def validate_config(config: Config) -> None:
         raise ValueError("skill_ticks and recent_window must be positive")
     if not np.isfinite(config.prior_strength) or config.prior_strength <= 0.0:
         raise ValueError("prior_strength must be finite and positive")
+    if config.source_schedule not in ("product", "permuted"):
+        raise ValueError("source_schedule must be product or permuted")
+    if config.source_schedule == "permuted" and gcd(37, config.source_macros) != 1:
+        raise ValueError("permuted source_macros must be coprime to 37")
 
 
 def completion_probability_to_tick_probability(
@@ -81,6 +87,9 @@ def context_schedule(config: Config) -> dict[str, np.ndarray]:
     source_index = np.arange(config.source_macros, dtype=np.float64)
     source_u = 0.25 + 0.55 * (source_index + 0.5) / config.source_macros
     source_v = 0.16 / source_u
+    if config.source_schedule == "permuted":
+        permutation = (37 * np.arange(config.source_macros)) % config.source_macros
+        source_v = source_v[permutation]
     target_index = np.arange(config.target_macros, dtype=np.float64)
     target_u = 0.82 + 0.10 * (target_index + 0.5) / config.target_macros
     target_v = 0.84 + 0.10 * (target_index + 0.5) / config.target_macros
