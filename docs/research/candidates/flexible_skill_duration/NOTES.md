@@ -1312,7 +1312,7 @@ the flat arm (episode horizon against skill segment, bootstrap at skill boundari
 and scale), and what explained variance each critic reaches in the recorded logs. A new
 prospective entry only if that inspection yields a change with a predicted intermediate effect.
 
-## 2026-09-19 20:10 PDT — inspection (no new fit): D's discriminator reward is a near-constant offset; both critics fit the same kind of target
+## 2026-09-19 19:55 PDT — inspection (no new fit): D's discriminator reward is a near-constant offset; both critics fit the same kind of target
 
 Follows the "Next" of the B04 reading. Code read: `hmasd/agent.py`
 `update_discoverer_from_rollout` (advantage and value-loss sections), `hmasd/utils.py`
