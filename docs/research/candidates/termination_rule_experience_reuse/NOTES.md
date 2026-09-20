@@ -815,3 +815,165 @@ small behavior selection probability by itself does not make the Q(beta) coeffic
 small. The bridge must specify both distributions separately, keep their real action
 support explicit, and test a strong action-compatible baseline rather than an intentionally
 unshared label learner. The DM owns this correction and the eventual study/stop choice.
+
+## 2026-09-20 — A Pro input: termination-reuse entry conditions and finite-data bridge
+
+**Author and live decision.** This section is authored by A's DM for the owner's single
+cross-direction Pro consultation. It is A's input, not B/C's proposal or a Portfolio
+ranking. The preceding owner-directed re-entry remains active. No new result fit, code,
+claim note or native launch was made for this analytical bridge. The question is whether
+there is a concrete, worthwhile condition for studying termination-rule reuse beyond the
+competent ordinary route, or whether to pause this direction's investment with an honest
+scope. A later umbrella question will bind the independently authored B/C sections; this
+section does not substitute for them.
+
+### A standing, entry definition and contrary evidence
+
+The four scientific entry conditions above are the object of criticism, not new permission
+gates: (1) fixed, behaviorally different skills and a real value/control effect of changing
+the fixed termination rule; (2) identification from the same legal observations and actual
+support, including teammates' remaining commitments and relevant controller memory;
+(3) a specific finite-data or finite-computation limitation of a competent ordinary
+same-information reference, with lawful structure that could address it; and (4) an
+intermediate prediction and native consequence that could change a research/use judgment.
+No learned gate, counterfeit interrupted suffix, oracle model or deliberately unshared
+label learner supplies that comparison. Direct Q(beta) is established prior work, not our
+innovation. These conditions need not be proved before an exploratory test.
+
+Cumulative evidence is in **A01 read** and **A02 read** above, with all 15 fits and raw
+outputs committed at `961750ee58664022bbd3fad3365886e46fb3facc`. A01 compared one-step,
+direct Q(beta) and ordinary augmented-state Retrace on the same behavior data, three
+independent training blocks each. Both multistep arms beat one-step in all three primary
+contrasts; Retrace-minus-Q(beta) primary was mixed, mean +.00000904. A02 compared the same
+Retrace learner under long versus matched behavior termination on three fresh blocks:
+primary differences were -.00351020 / -.00316298 / -.01591797, mean -.00753038 with a
+wide paired t95 interval [-.02557997, +.01051921]. Longer behavior raised endpoint occupancy
+and trace mass but not the declared target-J primary. Its early 32-episode contrast was
+positive in two blocks, mean +.00419379; this contrary panel remains, not a replacement
+endpoint. These are fixed fully observed two-agent-host findings, not equivalence,
+population inferiority, a general impossibility result, or UAV evidence.
+
+### A exact shared-prefix bridge: opportunity exists, this strong ordinary reference suffices
+
+This is our constructed finite model and algebra, **not collected trajectories or a
+measured learning result**. States x0 -> x1 -> x2 -> x3 -> terminal form a DAG, with at
+most four primitive transitions. Gamma is 1; the derivation uses finite backward
+induction, not an infinite-horizon contraction. The environment class here is deterministic
+conditional on the actual action; the service transition is initially unknown. At x0 a
+high-level decision chooses safe (immediate .75) or starts L. R may be initiated only at
+x1/x2/x3. Both fixed feedback
+skills issue ADVANCE at x0/x1/x2 where applicable; at x3 they issue genuinely different
+L-service and R-service actions. Thus they are not copied aliases. All advance rewards
+are zero. A teammate occupies the L station for an observed four-tick commitment with
+recorded countdown. L-service adds no coverage; in this example R-service succeeds and
+adds one unit of coverage. The reward rule can be known, while the service-success
+transition is learned from observations. Teammate behavior is unchanged and exogenous;
+endogenous co-learning and hidden commitments are absent.
+
+After each advance there is a renewal opportunity. Both behavior and target renewal
+selectors deterministically choose R; only their termination probabilities differ:
+zeta=1/8 and beta=1/2. Once R is active, a renewal selects R again. The complete behavior
+collector initially chooses safe/L with probability 1/2 each; the following Q_L is
+conditional on choosing L, not a collector forced always to choose L. Therefore
+
+`Q_L^beta(x0) = 1 - (1-beta)^3 = 7/8 > 3/4`, whereas
+`Q_L^zeta(x0) = 1 - (1-zeta)^3 = 169/512 < 3/4`.
+
+This positive control gives a real native decision distinction: revaluing the target rule
+chooses L with value .875 rather than safe with value .75. It changes no termination gate.
+At renewal states the target mu(L|x) is zero; it is not being confused with a rare behavior
+selector. A matched-rule beta=zeta control correctly chooses safe.
+
+Consider three constructed, positive-probability records from that one behavior collector:
+`D_L` starts L, has no renewal on the three advances and observes terminal L reward 0;
+`D_R` starts L, truly renews to R after the first advance, then observes R success/reward 1;
+`D_safe` chooses safe and observes .75. These are nine primitive rows containing six
+distinct state-action pairs. A same-data empirical primitive model reads those rows; it
+is not supplied with an oracle transition table. Ordinary action-compatible intra-option
+TD with replay may back up the same observed pairs in reverse order. Both use the known
+controllers, target beta and renewal selector, and obtain:
+
+| Backup location | L value | R value |
+| --- | ---: | ---: |
+| x3, actual distinct service observations | 0 | 1 |
+| x2, common ADVANCE | .5 | 1 |
+| x1, common ADVANCE | .75 | 1 |
+| x0, initial allowed choices | .875 | not an allowed initial choice |
+
+The recurrence is `Q_i(L)=(1-beta) Q_(i+1)(L)+beta Q_(i+1)(R)` and
+`Q_i(R)=Q_(i+1)(R)`; the separate safe backup is .75. Eight relevant scalar Bellman
+backups suffice after reading the nine rows, including the two distinct service values
+and safe. This is a logical work count, not measured runtime or a speed claim. Shared
+ADVANCE observations are reusable; **D_L's terminal reward is never assigned to R**.
+For a deterministic common prefix with known beta_i, the same argument gives the L-end
+weight `product_i(1-beta_i)` and complementary R-end weight, with linear backward work.
+Consequently this selected shared-prefix/delayed-propagation condition is not evidence
+that the strong ordinary reference is insufficient. This finite-work comparison, unlike
+an ideal representability statement alone, directly absorbs the proposed local deficit.
+
+Primary passages motivating the bridge are Q(beta), section 4.3 Eq.15 and section 8
+[publisher PDF](https://ojs.aaai.org/index.php/AAAI/article/view/11740/11599), and
+Sutton, Precup and Singh (1999), sections 5–6 Eqs.18–21
+[primary PDF](https://people.cs.umass.edu/~barto/courses/cs687/Sutton-Precup-Singh-AIJ99.pdf).
+They distinguish label-based correction from already established action-compatible
+learning. The DAG, its work count and the following counterexample are our deductions,
+not the papers' experiments or theorems. A primitive flat marginal alone is not a valid
+replacement for the latent option/continuation law when beta is below one.
+
+### A identification boundary and finite-resource uncertainty
+
+Merely removing D_R from the displayed finite data does **not** remove population support
+under zeta=1/8. It is finite missing coverage, potentially repairable by further genuine
+observations. For a strict unsupported counterpart set behavior zeta=0 and prohibit an
+initial or reset R: all behavior chooses safe or L and never executes R-service. Two
+worlds can then share the known coverage reward rule, fixed controllers and the entire
+behavior-data distribution, but differ in the unobserved R-service transition: success
+probability 0 versus 1. Target beta=.5 gives Q_L of 0 versus 7/8, and different optimal
+initial choices. No same-information learner identifies which world holds. Continuing the
+observed L suffix cannot supply the missing R outcome. The pair changes an unknown
+transition, not a reward rule the learner was already told.
+
+A broader but carefully limited observation: with complete legal Markov state, recorded
+or reconstructible joint primitive actions, fixed known collection/controller laws and
+an unknown environmental kernel P, the data likelihood conditional on the initial state
+factors as `C(D) product_t P(x_next,r | x,a_joint)`, where C(D) does not contain P.
+Complete joint transition/reward counts are sufficient in a discrete tabular class.
+Target beta changes a known controller law, not the environmental information in those
+counts. Termination-event side effects must be represented as state/action variables if
+they affect that kernel; hidden variables cannot be silently discarded. This is **not**
+an efficiency theorem for plug-in values, compressed models, approximate state or planning.
+Finite-sample estimation efficiency, sensitivity to beta and finite-computation advantages
+are still logically possible even with the same sufficient data.
+
+The independent Critic verified the DAG and raised the finite-coverage/structural-support,
+conditional-start and known-reward distinctions above; I adopt them. It also explicitly
+rejected upgrading the local comparison or sufficiency observation to a direction-wide
+nonexistence claim. I agree. Adviser agreement adds no independent empirical evidence.
+My present inclination is an **investment pause**, not a falsification: A01/A02 failed
+their extra-benefit predictions, this source-grounded bridge is covered by a cheap
+same-data ordinary route, and the unsupported version is not an estimable target. I have
+not yet identified a concrete remaining finite-resource condition worth the next fit.
+The owner's requested Pro consultation will challenge that inclination before I record
+the next action. No external permission or missing canonical admission is the cause.
+
+### A requested Pro discriminator
+
+Criticize A's entry definition and the above implication. Give the strongest concrete
+countercondition, if any, under fixed behaviorally explicit skills and fixed unequal
+behavior/target termination: what legal data identify it, what real teammate commitment
+or controller feature matters, why a competent ordinary augmented-state/Q(beta)/
+action-compatible reference or practical same-data model may fail at a stated exposure,
+and the smallest observation that could refute that story. Predict an intermediate
+quantity **and** native value/decision effect; state the matched baseline's information,
+learning/tuning rights, fit cost and dominant non-fit work. An existing-method comparison
+can be worthwhile; neither novelty nor a positive toy test is mandatory. If the admission
+premise itself wrongly excludes a worthwhile boundary question, explain with such a
+concrete discriminator, not a general appeal to MARL complexity.
+
+Alternatively explain why the presently supported conditions justify stopping investment,
+and delimit precisely what has not been ruled out. Do not turn another package failure
+into nonexistence, treat same sufficient information as optimal finite learning, invent
+unobserved suffixes, learn a gate, revive residual-MC, or require an unbounded search before
+either an ordinary study or a pause. A concrete new reason and prediction are sufficient
+for re-entry; no prior proof or positive result is required. Additional cost for this
+bridge is **zero fits**; previous cumulative cost remains 15 started/read local-CPU fits.
