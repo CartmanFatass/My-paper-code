@@ -2942,3 +2942,62 @@ B09 by weights sha256 and exact `as_trained` scores. Checks: 50 passed (27 B10 +
 the Implementer's run with B08 gave 92 passed. Limits known now: two replicates give a
 one-degree-of-freedom noise estimate per label; this isolates action noise only — training
 also samples labels and resets them on the caps-10 cadence.
+
+## 2026-09-20 16:40 PDT — B10 read: the label gap survives training-level action noise; E1 rejected, the object is the high level's learning signal
+
+**Technical record.** Node probes at launch sha `63328ec7b`, tags `b10_sampled_<block>_n02`:
+complete 3/3, faithful load 3/3, `as_trained` equal to B09's scores 3/3, zero optimizer steps,
+about 500 s per block, every sampled panel passed the executed-versus-mean action check.
+`_n01` (3 roots) failed at once with no score: the node's fast-forward had deleted its copies
+of the now-tracked B08 record files (`weights.json` among them; sparse checkout), the weights
+themselves intact with matching sha256; records restored from the published copies and rerun.
+Reduce `runs/flexible_skill_duration/b10_reduce/summary.json`, sha256 `c40c760290611a38…`.
+
+**Constant label, mean action (B09) → sampled action (B10, mean of two replicates).**
+
+| block | c0 | c1 | c2 | c3 | c4 | c5 | max − min | replicate noise |
+|---|---|---|---|---|---|---|---:|---:|
+| 772803 | .349 → .299 | .439 → .345 | **.454 → .360** | .401 → .335 | .423 → .325 | .326 → .281 | .129 → .080 | .003 |
+| 772903 | .343 → .236 | **.521 → .368** | .401 → .315 | .305 → .240 | .399 → .334 | .360 → .302 | .216 → .133 | .006 |
+| 773003 | **.519** → .356 | .485 → .368 | .393 → .320 | .422 → .298 | .487 → .359 | .517 → **.371** | .127 → .073 | .003 |
+
+Rank correlation between the two maps .79 on average; the best label is the same on two blocks
+and label 5 for label 0 (a .015 difference) on the third.
+
+**Predictions.** E1 (spread below .05 on 3/3): 0/3 — rejected. Its second clause (label 1's
+lead over the second-best sampled label on 772903 below .05) holds at +.034, but label 1
+against the coordinator's own label 0 is +.13 under sampling. E2 (spread above .08 on 3/3):
+1/3 by the letter (.080, .133, .073); by substance the spreads are 12–25 times the sampled
+panels' own replicate noise on every block.
+
+**Reading.**
+- Action noise costs .05–.16 J on every label (a second, separate fact: the deployed mean
+  action is worth about .1 J over the behaviour that is trained on) and compresses the label
+  gaps by about 40 %, but it does not erase or reorder them. The explanation "the ranking is
+  invisible under training noise" is weakened as stated.
+- What this does **not** show is that the coordinator's *own* signal contains the ranking.
+  B09/B10 intervene on all six agents for 500 steps. Training assigns each agent its own
+  sampled label, redraws on the caps-10 cadence, and credits one team reward; an agent's label
+  then moves the team return by roughly a sixth of the joint effect over a tenth-of-an-episode
+  window, against the variation from five other agents' labels and the state. A joint .13 gap
+  can be a per-decision signal far below the advantage noise. That is a credit-assignment
+  statement about the skill object, not about termination.
+
+**Next research judgment.** Two explanations again, separable without a fit:
+- *E2a, the signal is present and the update does not use it* (flat q at entropy 1.74–1.78,
+  15 optimizer steps per rollout, entropy bonus on the label law). Prediction: in training-law
+  rollouts at the saved weights, the coordinator's own advantage estimates, grouped by the
+  agent label chosen at that decision, rank 772903's label 1 first and label 0 low, with a
+  between-label spread above twice its standard error.
+- *E2b, the signal is absent at the decision level* (dilution across agents and windows).
+  Prediction: grouped advantages are flat within their standard errors although the joint
+  map has a .13 gap.
+- *Next observation (zero-fit):* B11 — at the saved weights, collect training-law rollouts
+  through the frozen collector with no update, compute the coordinator's advantages exactly as
+  its update would, and tabulate them by chosen label (agent and team), with segment returns
+  alongside. Also the simple-model side: for six agents, caps 10 and the measured joint map,
+  the expected per-decision advantage difference under additive label effects.
+- *What each changes.* E2a → the lever is the coordinator's optimiser and entropy term (a
+  fit-level idea, my object). E2b → the lever is the structure of the signal: per-agent
+  counterfactual credit or label-conditioned value baselines; that is where the skill object
+  and Codex's team-conditioned question genuinely meet, and the interface to agree on.

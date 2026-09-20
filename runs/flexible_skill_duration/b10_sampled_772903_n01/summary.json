@@ -1,0 +1,116 @@
+{
+  "object_id": "FSD_LABEL_MAP_SAMPLED_B10",
+  "card": "docs/research/candidates/flexible_skill_duration/NOTES.md (2026-09-20 16:03 PDT, next research judgment, B10)",
+  "command": "probe",
+  "launch_sha": "63328ec7bc2b21ec9785331aca10f30b3f223b42",
+  "requested_launch_sha": "63328ec7bc2b21ec9785331aca10f30b3f223b42",
+  "arm": "D_SAVE",
+  "block_seed": 772903,
+  "evaluation_seed": 782903,
+  "weights": "/home/wu/projects/HMASD/runs/flexible_skill_duration/b08_save_772903_a01/final_weights.pt",
+  "rules": [
+    "as_trained",
+    "sampled_constant_0_r0",
+    "sampled_constant_1_r0",
+    "sampled_constant_2_r0",
+    "sampled_constant_3_r0",
+    "sampled_constant_4_r0",
+    "sampled_constant_5_r0",
+    "sampled_constant_0_r1",
+    "sampled_constant_1_r1",
+    "sampled_constant_2_r1",
+    "sampled_constant_3_r1",
+    "sampled_constant_4_r1",
+    "sampled_constant_5_r1"
+  ],
+  "labels": 6,
+  "replicates": [
+    0,
+    1
+  ],
+  "construction_source": "FSD_LABEL_CONTENT_B08 D_SAVE (the recorded stage-1 D1280 construction): the frozen baseline x interruption B01 runner with B08's identities bound, B08's saved final weights loaded, zero optimizer steps; FSD_LABEL_MAP_B09's constant-label rules bound for the panels, and this object's action noise on the sampled ones",
+  "reference_object_ids": [
+    "FSD_LABEL_MAP_B09",
+    "FSD_LABEL_CONTENT_B08"
+  ],
+  "recorded_d1280_summary": "/home/wu/projects/HMASD/runs/flexible_skill_duration/b01_s1_d1280_772903_a01/summary.json",
+  "reference_summary": "/home/wu/projects/HMASD/runs/flexible_skill_duration/b01_s1_d1280_772903_a01/summary.json",
+  "host_geometry": {
+    "train_lanes": 16,
+    "eval_lanes": 32,
+    "horizon": 500
+  },
+  "frozen_host_geometry": true,
+  "source_notes": {
+    "deterministic_effects": "everything the frozen evaluation route's `deterministic` flag controls, and nothing else. The panel calls `agent.step(..., deterministic=True)` (scripts/run_fsd_baseline_interruption_b01.py:224-225). `step` passes that one flag to two places: (1) hmasd/agent.py:3249-3251 `_batched_assign_skills`, which on this construction dispatches to `_batched_assign_skills_d2` (hmasd/agent.py:2085-2092) and reaches `SkillCoordinator.assign_partial_batch(..., deterministic=deterministic)` (hmasd/agent.py:2652-2661), where it selects argmax over sample for the team label (hmasd/networks.py:1072) and for each agent label (hmasd/networks.py:1099); and (2) hmasd/agent.py:3266-3268 `_batched_select_action`, which passes it as the fourth positional argument of the low-level actor's forward (hmasd/agent.py:3116-3123) through `SkillDiscoverer.forward` (hmasd/networks.py:1801-1807), `R_Actor.forward` (hmasd/networks.py:1463) and `ACTLayer.forward`'s Box branch (hmasd/r_mappo_utils.py:254-255) to `DiagGaussian.forward`, where `action = dist.mean if deterministic else dist.sample()` (hmasd/r_mappo_utils.py:91-94). It switches nothing else: `deterministic` occurs exactly once inside `_batched_select_action` (hmasd/agent.py:3120) and exactly once inside `_batched_assign_skills_d2` (hmasd/agent.py:2660), so the decision cadence, the GRU hidden-state bookkeeping (hmasd/agent.py:3187-3191), the observation and state normalisation (hmasd/agent.py:3062, 3074) and the ValueNorm denormalisation (hmasd/agent.py:3139-3140) run identically under either value",
+    "no_learner_state_written": "`step` writes no buffer and takes no optimizer step under either value of `deterministic`: rollout storage is `store_rollout_step` (hmasd/agent.py:3331) and the high-level counterpart, and the evaluation panel calls neither - it calls only `agent.step(..., return_step_data=True, build_infos=False)` (scripts/run_fsd_baseline_interruption_b01.py:224-225) and then `env.step`. Train/eval mode is not a function of the flag either: `Evaluator._sync` calls `agent.train(False)` before every panel (scripts/run_flexible_skill_duration_e0.py:319-335), which is why the probe publishes `coordinator_training_mode`. The running observation and state normalisers are disabled on this construction (`use_obsnorm` and `use_statenorm` are False, so `_normalize_observations` and `_normalize_states` return their input unchanged, hmasd/agent.py:1502-1503, 1554-1555), and both agents' optimizer `step` raises for the whole command anyway (`run_fsd_flat_input_scale_b05._forbid_optimizer_steps`). Nothing needed neutralising: the flag reaches two label/action selections and no learner state at all",
+    "action_sampling_attachment": "the evaluator agent instance's `_batched_select_action` (hmasd/agent.py:3007, called by the frozen `step` at hmasd/agent.py:3266-3268) is wrapped for the duration of one panel and the frozen method is called with `deterministic=False`; the wrapper is an instance attribute only and is removed in a `finally`, so the class is untouched, exactly as `b08.ExecutionRule.attached` wraps `_batched_assign_skills`. It is the narrowest callable that carries the flag to the low level alone: wrapping `step` would sample the coordinator's labels as well, and the actor's own forward is an `nn.Module.__call__` shared with the after-the-panel mean-action recomputation. The wrapper records the value the frozen caller asked for and refuses the panel unless it was `True`, which is the runtime proof that the panel really is the frozen evaluation route with this one flag replaced",
+    "coordinator_determinism_under_a_constant_label": "the coordinator's own determinism cannot reach the executed behaviour of a constant-label panel, so this object leaves it at the frozen route's argmax. Under `constant_c` B09's rule overwrites the labels the coordinator returned - `scripts/run_fsd_label_map_b09.py:212-213` sets every agent label to c and the team label to `c % n_Z` - and writes them back into `env_team_skills`/`env_agent_skills` (scripts/run_fsd_label_map_b09.py:236-238); `step` then passes those returned labels, not the coordinator's, to `_batched_select_action` (hmasd/agent.py:3266-3268). The decision cadence is set before the coordinator runs (the caps, both interruption costs being infinite on this construction), so it does not depend on the flag either",
+    "sampling_seed": "the executed action is drawn from the global torch generator (hmasd/r_mappo_utils.py:94 `dist.sample()` on a `FixedNormal`), so a sampled panel is seeded locally and deterministically: torch.manual_seed(int.from_bytes(sha256(f'{evaluation_seed}:{rule}').digest()[:8], 'big') % 2 ** 63), applied *inside* the panel at its first action selection. It has to be inside, because the frozen `evaluate_panel` re-seeds Python, NumPy and torch from the block's evaluation seed at its own start (scripts/run_fsd_baseline_interruption_b01.py:202-205, run_fsd_uav_individual_renewal_b01.py:38-41): a seed applied before the call would be overwritten and the two replicates would draw the identical stream. Everything the panel does before its first action - the environment construction and reset - is therefore the frozen seeded route's, identical on every panel. The Python, NumPy and torch states are saved before the panel and restored in a `finally`, so a sampled panel cannot move any other panel: a sampled panel is a function of (block, label, replicate) alone, independent of the order the panels ran in, and `as_trained` is bit-identical to the recorded panel whether or not sampled panels ran before it. The environments draw from their own `numpy.random.RandomState` (envs/pettingzoo/uav_env.py:98, 223), not from the global stream",
+    "executed_action_check": "the runtime proof that the panel executed samples and not means, taken read-only: B08's own actor hook (`b08.ActorCapture`, a forward hook on the evaluator's `skill_discoverer` that only copies) keeps the actor's own inputs and the action it returned at an even stride of the panel, and *after* the panel, under `torch.no_grad()` and preserved RNG, the deterministic action at exactly those inputs and that same held label is recomputed with B08's `_deterministic_actions`. The executed action is then compared with the mean action row by row. This is the comparison the entry asked for and it is feasible read-only, so no surrogate is used: the report carries the fraction of rows that differ from the mean, the root mean square of (executed - mean) per action dimension, and that RMS over the policy's own per-dimension standard deviation, which is 1 in expectation when the action is a draw from the policy's Gaussian. The panel is refused if no row differs from its mean, or if the ratio leaves a factor of 2.0 of the policy standard deviation",
+    "action_standard_deviation": "the policy's per-dimension action standard deviation, read from the actor at the saved weights by B08's own reader `b08.action_standard_deviation` (scripts/run_fsd_label_content_b08.py:667-693): exp of the state-independent `AddBias` log-std the diagonal Gaussian head uses (hmasd/r_mappo_utils.py:82, 89), with the head's own clamp where it has one. It is read after the `as_trained` panel, because the evaluator receives the loaded weights through `Evaluator._sync` inside the panel and not before it",
+    "replicate_noise": "two panels of the same block and the same label differ only in the seed of the action draw, so `r1 - r0` is a paired draw of this panel's own sampling noise on the same 32 worlds. Its root mean square over the six labels is `sampled_panel_noise_estimate`: the size of the difference this measurement can resolve, from two replicates per label and nothing else. It is a noise estimate on 6 paired differences, not an interval",
+    "team_label_path": "hmasd/networks.py:1801-1809 `SkillDiscoverer.forward` passes only the observation, the *agent* label and the hidden state, so the team label never reaches the low-level actor: it reaches the low-level critic (hmasd/networks.py:1557-1560) and the coordinator only. On a fixed-weight execution panel neither of those can move an action, so under `constant_c` the team label `c % n_Z` is bookkeeping - it keeps the agent's held team label and the executed one equal - and the behaviour is the agent label c alone",
+    "constant_write_back": "the executed labels are written back into `env_team_skills`/`env_agent_skills` exactly as B08's rewriting rules write them (scripts/run_fsd_label_content_b08.py, `ExecutionRule._step`), so the label the agent holds is the label it executed. No cap is moved (`RULE_CAPS` adds nothing for these rules): the frozen caps-10 cadence stands, the coordinator decides at the same ticks as `as_trained` and only its choice is discarded",
+    "lane_to_world": "an evaluation panel gives every lane exactly one episode of the whole horizon and scores that lane as its own world: `run_fsd_baseline_interruption_b01.py:211-254` sets `episode_ids` to `range(lanes)` and fills `return_sums_U`, `returns_U` and `native_scores_J` per lane, so entry `lane` of a per-lane record is index `lane` of `J_world_scores`. The drawn assignments are recorded in lane order with their own lane index and their episode index, and `episodes_per_lane` records how many episodes each lane actually ran: a lane with more than one would make the record a lane record and not a world record, which is why the count is published rather than assumed",
+    "execution_rule_attachment": "the evaluator agent instance's `_batched_assign_skills` (hmasd/agent.py:2067, the dispatcher `step` calls at hmasd/agent.py:3249) is wrapped for the duration of one panel: the wrapper calls the frozen method, reads the D2 decision masks the method just recorded in `_d2_last_step` (hmasd/agent.py:2721-2733) and replaces the executed labels according to the rule, writing them back into `env_team_skills`/`env_agent_skills` so the agent's held label is the executed one. Both interruption costs are infinite on this construction, so the held label cannot move a decision boundary: only the caps can, and the probe refuses to run a rule if either cost is finite",
+    "weight_transfer_to_evaluator": "scripts/run_flexible_skill_duration_e0.py:319-335 `Evaluator._sync`, called by the frozen `run_fsd_baseline_interruption_b01.evaluate_panel` at line 207 of that file, before every panel: `skill_coordinator` and `skill_discoverer` are moved by `load_state_dict` of the learner's own `state_dict`, the team and individual discriminators likewise where both exist, and `obs_norm`, `state_norm`, `value_norm_coordinator` and `value_norm_discoverer` are `copy.deepcopy`d; then `agent.train(False)` and `reset_env_state(lane)` for every lane, so the evaluator starts each panel in eval mode with no held skill, zero timers and zero recurrent state. This probe loads the checkpoint into the learner and lets that same route carry it to the evaluator, so nothing about the transfer differs from a fit's panel",
+    "evaluation_route": "the panel calls `agent.step(..., deterministic=True)` (run_fsd_baseline_interruption_b01.py:224-225), so the coordinator's team and agent labels are argmax choices, not samples, and the low-level action is the Gaussian's mean",
+    "low_level_actor_label": "hmasd/networks.py:1449-1452 `R_Actor.forward`: the agent label's one-hot goes through `film_generator` (an nn.Linear from n_z to 2 * hidden_size) and the resulting (gamma, beta) modulate the MLP base's features *before* the GRU and the action head. The team label does not reach the actor at all: `SkillDiscoverer.forward` (hmasd/networks.py:1801-1809) passes only the observation, the agent label and the hidden state. The team label reaches the low-level critic the same way (hmasd/networks.py:1557-1560) and the coordinator"
+  },
+  "sampled_panel_seeds": {
+    "sampled_constant_0_r0": {
+      "torch_seed": 1821673179905856340,
+      "derivation": "torch.manual_seed(int.from_bytes(sha256(f'{evaluation_seed}:{rule}').digest()[:8], 'big') % 2 ** 63)"
+    },
+    "sampled_constant_1_r0": {
+      "torch_seed": 7595403878379375484,
+      "derivation": "torch.manual_seed(int.from_bytes(sha256(f'{evaluation_seed}:{rule}').digest()[:8], 'big') % 2 ** 63)"
+    },
+    "sampled_constant_2_r0": {
+      "torch_seed": 8279336891726167500,
+      "derivation": "torch.manual_seed(int.from_bytes(sha256(f'{evaluation_seed}:{rule}').digest()[:8], 'big') % 2 ** 63)"
+    },
+    "sampled_constant_3_r0": {
+      "torch_seed": 2139608443648415683,
+      "derivation": "torch.manual_seed(int.from_bytes(sha256(f'{evaluation_seed}:{rule}').digest()[:8], 'big') % 2 ** 63)"
+    },
+    "sampled_constant_4_r0": {
+      "torch_seed": 6025130242640135691,
+      "derivation": "torch.manual_seed(int.from_bytes(sha256(f'{evaluation_seed}:{rule}').digest()[:8], 'big') % 2 ** 63)"
+    },
+    "sampled_constant_5_r0": {
+      "torch_seed": 3463804726696558430,
+      "derivation": "torch.manual_seed(int.from_bytes(sha256(f'{evaluation_seed}:{rule}').digest()[:8], 'big') % 2 ** 63)"
+    },
+    "sampled_constant_0_r1": {
+      "torch_seed": 2243751870308676815,
+      "derivation": "torch.manual_seed(int.from_bytes(sha256(f'{evaluation_seed}:{rule}').digest()[:8], 'big') % 2 ** 63)"
+    },
+    "sampled_constant_1_r1": {
+      "torch_seed": 804088728746447806,
+      "derivation": "torch.manual_seed(int.from_bytes(sha256(f'{evaluation_seed}:{rule}').digest()[:8], 'big') % 2 ** 63)"
+    },
+    "sampled_constant_2_r1": {
+      "torch_seed": 4833566364243509035,
+      "derivation": "torch.manual_seed(int.from_bytes(sha256(f'{evaluation_seed}:{rule}').digest()[:8], 'big') % 2 ** 63)"
+    },
+    "sampled_constant_3_r1": {
+      "torch_seed": 1344456773315776497,
+      "derivation": "torch.manual_seed(int.from_bytes(sha256(f'{evaluation_seed}:{rule}').digest()[:8], 'big') % 2 ** 63)"
+    },
+    "sampled_constant_4_r1": {
+      "torch_seed": 8547810497142190782,
+      "derivation": "torch.manual_seed(int.from_bytes(sha256(f'{evaluation_seed}:{rule}').digest()[:8], 'big') % 2 ** 63)"
+    },
+    "sampled_constant_5_r1": {
+      "torch_seed": 3727402939564090603,
+      "derivation": "torch.manual_seed(int.from_bytes(sha256(f'{evaluation_seed}:{rule}').digest()[:8], 'big') % 2 ** 63)"
+    }
+  },
+  "status": "incomplete",
+  "failure": "ValueError: /home/wu/projects/HMASD/runs/flexible_skill_duration/b08_save_772903_a01/weights.json does not exist; the weights carry no sidecar record",
+  "faithful_load": null,
+  "wall_seconds": 0.0012796969967894256,
+  "interpretation_limit": "a fixed-weight forward measurement, not a fit: zero optimizer steps, one block, one panel per (label, replicate) on the same 32 worlds and the same evaluation seeds. Exploration; three blocks; one checkpoint per block; the weights are fixed and nothing here is trained under a label or under action noise. The sampled panels isolate *action* noise alone: training also differs from these panels by drawing its skill labels instead of holding one, and by its own caps cadence, so a small or a large spread here says nothing about what a fit under a held label would do. The comparison with B09 is paired within a block - the same checkpoint, the same worlds, the same evaluation seeds - and a mean-action panel's conditional evaluation noise on this direction is about 0.03 J, while the sampled panels carry their own noise, which the two replicates estimate. A fixed-weight panel is bit-reproducible only on the host that trained the checkpoint - B08's own local probe attempts failed the faithful load off that host - so this command runs on wsl_4070."
+}
