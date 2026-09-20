@@ -1,3 +1,5 @@
+"""C03 contract checks; distinct module name permits combined C01/C03 collection."""
+
 from dataclasses import replace
 import hashlib
 import json
