@@ -2731,3 +2731,22 @@ Evidence: [P85 result](UCOPE_UAV_MEAN_VELOCITY_RENEWAL_B01_P85_RESULT_EVIDENCE_2
 [B04 first panel](../../../../runs/ucope/scalar_feedback_b04_8931/summary.json), and all
 three B05 run roots already linked in the completed-result entry. This inspection involved
 no model forward, new native call or fit and introduces no new historical maintenance.
+
+### B06 interpretation kept fixed before any execution
+
+The initial mean-deployed policies are identical as functions of their legal histories:
+all weights except log_std match, and the actor forward/mean-execution route does not read
+log_std. On the same reset, identical initial hidden states and mean commands therefore
+inductively produce the same subsequent history before training. No native initial-policy
+panel is needed to establish this source-level invariant. A final primary difference would
+arise from the intervening learning histories and attained mean controllers, not from merely
+inserting different sigma into the final mean action formula. It still cannot separate
+visited data from score geometry, finite optimization or their interaction.
+
+The first-256-episode scale contrast is an exposure check, not by itself evidence that
+reduced exploration caused better learning. If the primary is favorable, retain the full
+three-master pattern and both sampled comparisons before judging practical usefulness;
+do not choose whichever deployment mode makes the package look best. A sampled-only gain
+does not meet the primary prediction. An adverse or mixed primary stays adverse or mixed,
+without an automatic scale grid, extra seed or revived mean-agreement rule. These are
+interpretation commitments, not new pass/fail thresholds or another execution allowance.
