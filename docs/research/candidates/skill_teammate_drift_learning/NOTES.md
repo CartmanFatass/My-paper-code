@@ -570,3 +570,24 @@ refusal, SHA/seed/arm identity and output/failure retention. These are correctne
 fixtures, not B02 scientific evidence. B02 production fits started: **0**.
 Publication is for independent high-risk review; scientific acceptance/launch
 awaits the DM's reading of that review, not a new owner or Root authorization.
+
+### B02 implementation accepted for the declared batch
+
+Independent read-only Reviewer `/root/dm_teammate_drift/review_joint_replay` reviewed
+published `37ceaeb993039a1248a0359f72b92e6dea318faf` against the B01 result commit,
+returned **no material finding / no repair requested**, and independently ran the
+33 focused tests (0.34 s) and whitespace check. It checked the one-time reward bound,
+independent fingerprint tables, no model leakage, initial-relative movement,
+current-version coverage, preserved replay/numerics, frozen runner mapping,
+literal admission guard and retained outputs. Review did not perform a production
+fit or successful native admission, and default-preservation evidence in that
+review is static tracing rather than cross-revision runtime equivalence.
+The DM accepts the changed code after reading that review and the implementation.
+
+Fresh readback found published main and the actual canonical control checkout at
+`6ee15d7dda2a82688f60e25ae225c030ab8a6043`; its pause/direction index, constitution,
+compute configuration and both affected methods are byte-unchanged from the
+previously adopted canonical controls. The no-allowance cost regime and B's active
+Codex DM assignment remain adopted. Next is the fixed fifteen-fit B02 batch through
+native local_linux admission. No result has yet been read, and no scientific
+prediction or budget is changed by review acceptance.
