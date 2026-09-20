@@ -263,3 +263,27 @@ diagnostic arrays never enter either network; scheduler observations remain lega
 After the repair, the same focused pytest command reports **19 passed in 2.48 s** and
 `git diff --check` passes. No C01 result batch has started and no selection/final scores have
 been inspected; the original engineering review does not substitute for review of this delta.
+
+## 2026-09-20 — final C01 review and execution preparation
+
+The Reviewer read `a3c4f32b3..ef52fd155`, confirmed the new skill/packet/feature law, and ran
+19 checks (2.76 s). It found one P2 diagnostic issue: the old `send_peer_actionable` counter
+also counted receivers already executing BYPASS, which ignores within-skill peer feedback.
+I accept and repair it before running. The old route-agnostic quantity is now honestly named
+`send_peer_near_crossing`; an additional `send_peer_shared_near_gate` counts only a SHARED
+receiver approaching at distance <=1 with at least two commitment ticks left. Both are
+encountered-state proximity counts, not proof of causal actionability. The bypass fixture now
+sends at tick 2 and checks that only the route-agnostic count increments. No scheduling,
+physics, learner or primary endpoint is changed by this repair.
+
+Root reports owner-authorized registration on canonical main `b254ed1ea` and synchronization
+of the actual control checkout: pause lifted, `skill_information_refresh` lead `Codex DM`.
+This removes the shared-index dependency. After accepting the repaired review, publish the
+exact inputs and execute the already specified C01 batch via the local_linux native launcher;
+fresh admission and memory checks still apply. No extra approval, score-driven extension,
+fit allowance, or inherited deadline is introduced.
+The requested repair passes **19 checks in 3.12 s** and the whitespace check. I read both
+engineering reviews and the scientific criticism in full, accept the implementation with
+this verified diagnostic repair, and select the declared single-fit C01 execution. Source
+identity, native process and output location will be retained by its launch manifest; test
+success is not scientific support for the timing hypothesis.

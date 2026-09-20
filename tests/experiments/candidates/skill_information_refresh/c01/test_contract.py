@@ -164,13 +164,15 @@ def test_bypass_is_committed_four_tick_skill_and_never_collides():
     host.route[0] = [SHARED, BYPASS]
     fixed = host.route.copy()
     for tick in range(4):
-        host.step(np.array([False]))
+        host.step(np.array([tick == 2]))
         np.testing.assert_array_equal(host.route, fixed)
         assert host.metrics["conflicts"][0] == 0
         if tick < 3:
             assert host.stage[0, 1] == CROSSING
     assert host.stage[0, 1] == DONE
     assert host.metrics["completed_jobs"][0] == 2
+    assert host.metrics["send_peer_near_crossing"][0] == 1
+    assert host.metrics["send_peer_shared_near_gate"][0] == 0
 
 
 def test_packet_arrives_before_and_can_change_actual_boundary_skill_choice():
