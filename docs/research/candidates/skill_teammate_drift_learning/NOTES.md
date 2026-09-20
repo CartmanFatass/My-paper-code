@@ -1063,3 +1063,20 @@ fixed bytes. No B03 launch, training-result exposure, claim or confirmation has
 occurred. The six-arm contract and 18-fit cost remain unchanged. The owner-requested
 B-only consultation input above is ready for Root to transport; its Answer is
 still empty and owned by this DM until the explicit write handover.
+
+## 2026-09-20 16:03 PDT — B03 independent engineering review accepted
+
+The independent Reviewer read the complete collector, learners, evaluator,
+publication path and tests at published source
+`7435fec3191926b61186ad7f97c39c182d10e932`, against `2973ba512`, and returned
+**no material finding**. It verified the three-tick joint dynamics, arm-independent
+random slots/data, legal learner inputs, saturated/additive/conditional sufficient
+statistics and priors, eviction with both affected skill solves, pre-update
+evaluation and exact endpoint slices, literal admission/SHA/identity guard, finite
+non-pickle retention and technical-failure publication. Its independent focused
+run was **28 passed in .25 s**; whitespace checks passed and reviewed checkout was
+clean. No production fit or successful native admission was part of this review.
+The DM accepts the reviewed implementation for the declared comparison. The Pro
+question remains pinned to `7435fec3191926b61186ad7f97c39c182d10e932`; this
+review-only note changes no reasoning input or scientific setting and is not a
+reason to resend a question. No B03 result has started.
