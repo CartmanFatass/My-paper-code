@@ -239,3 +239,131 @@ or finite learning; a gain is not automatically an information or termination-ca
 result. R−F limits the practical reason to learn the added gate, while phase inputs,
 capacity and learning differences still prevent unique component attribution. This
 refinement changes no arm, endpoint, expected direction or stopping decision.
+
+## 2026-09-19 — B02 complete: positive R−G, unresolved learned-gate increment
+
+After the owner pointed out excessive direct polling, observation was transferred to
+the sole bounded Monitor `ucope_b02_monitor`, which explicitly adopted both original
+operation references. It reported arm transitions and terminal facts; the DM waited
+for both terminal notices before reading either scientific panel. Both original
+invocations exited zero with matching process witnesses and empty stderr. The Monitor
+reported an empty active set. There was no restart, replacement fit or additional
+evaluation. Published scientific source remains `21b7c9aeb8587a130402ec1d7c99c8fa9cfbb9cb`.
+
+### Native observations and exposure
+
+| Master | R | F | G | H | R−G, primary | R−F | F−G |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 8911 | 0.2194721648 | 0.2256735644 | 0.2006274557 | 0.1484030494 | +0.0188447092 | −0.0062013995 | +0.0250461087 |
+| 8912 | 0.1898158760 | 0.0394053595 | 0.1566775553 | 0.1651953028 | +0.0331383207 | +0.1504105165 | −0.1172721959 |
+
+The two-block descriptive means are R−G **+0.0259915149**, R−F **+0.0721045585**,
+and F−G **−0.0461130436**. The positive mean R−F is dominated by 8912; 8911 does
+not show a learned-gate increment. These are two independent new training blocks,
+not 128 independent training replications or a confirmation. Historical 8901's
+R−G −0.0180632903 and R−F −0.0032978553 remain separate adverse context; it is
+not pooled into a newly declared three-block result.
+
+In 8911, the R−G world differences have 37 positive / 27 negative signs and R−F
+has 30 / 34. In 8912, those counts are 47 / 17 and 64 / 0. F is below hover in
+61 / 64 of 8912's worlds, versus 6 / 64 in 8911. This is broad poor performance
+of this particular fitted F policy on its final panel, not one removable outlier
+world. It does not establish that F is generally fragile. In 8912 G−H is also
+slightly negative (−0.0085177475); R−H stays positive in both blocks (+0.0710691155,
++0.0246205732). All final vectors, including unfavorable rows, are retained.
+
+Exactly six fresh fits completed. Each learned arm has 2048 training episodes,
+524288 training team steps, 1024 rollouts, 4096 Adam calls and 64 fixed-policy
+final evaluation episodes. The batch has 12288 training episodes / 3145728 training
+team steps / 24576 Adam calls, plus 512 evaluation episodes / 131072 evaluation
+team steps including H. All evaluation optimizer counts are zero. This completes
+the whole prospective allocation; including historical 8901, this reactive R/F/G
+design has nine fits, with older T/L development exposure still additional.
+
+### DM verification, behavior and bounded post-hoc description
+
+The DM checked both native summaries against the exact manifest source and master,
+terminal witness and empty stderr. It independently read all 6400 episode rows and
+3072 update rows per block: consecutive episode/rollout IDs, world-seed addresses,
+256 steps per episode, four epochs per rollout, and all per-arm exposure counts
+match. J reconstructs from each logged native reward sum divided by 256. All six
+contrast vectors and four final arm means per block reproduce from the episode
+records; JSON numerical values and all six checkpoint tensor sets are finite.
+Checkpoint arm/master/horizon identities match. This was reading retained outputs,
+with no scientific construction, policy evaluation or optimizer update.
+
+All six common actors and critics moved from initialization. R's gate displacement
+is 0.7909386754 / 1.4589626789 for 8911 / 8912; F's frozen gate displacement is
+exactly zero in each. The runner reports zero evaluation parameter movement and
+unchanged training generators in every learned arm. R's evaluation KEEP fraction
+among eligible gates is 0.507231 / 0.334782; its held-command fraction among all
+agent ticks is 0.335657 / 0.250085. F's corresponding held-tick fractions are
+0.332739 / 0.333118. An active, changing gate is not proof that its state
+conditioning supplied the return difference.
+
+A bounded post-hoc reading of existing training logs found F8912's first/last
+256-episode J means to be 0.1047965 / 0.1828324, followed by final-panel 0.0394054.
+Its last two 32-episode training groups are 0.2175353 and 0.1015119, so some
+late deterioration is visible before final evaluation. F8911's corresponding
+last groups are 0.2517324 and 0.2408599. These selected summaries describe changing
+training policies and worlds; they do not diagnose the cause, measure a matched
+generalization gap, justify selecting an earlier checkpoint, or alter the sole-final
+endpoint. Final F mean served connections are 13.4364 / 2.2061 and command norms
+1.1326 / 1.3686. R's collector does not log these two fields, so no symmetric R/F
+telemetry comparison is claimed. One local reading attempt initially assumed those
+fields existed for R; the reader was corrected and the complete checks above passed.
+The scientific runs and their records were unchanged.
+
+### Recoverability and measured cost
+
+- [8911 summary](../../../../runs/ucope/reactive_renewal_b02_8911/summary.json),
+  [episodes](../../../../runs/ucope/reactive_renewal_b02_8911/episodes.jsonl),
+  [updates](../../../../runs/ucope/reactive_renewal_b02_8911/updates.jsonl),
+  [exit](../../../../runs/ucope/reactive_renewal_b02_8911/process-exit.json).
+- [8912 summary](../../../../runs/ucope/reactive_renewal_b02_8912/summary.json),
+  [episodes](../../../../runs/ucope/reactive_renewal_b02_8912/episodes.jsonl),
+  [updates](../../../../runs/ucope/reactive_renewal_b02_8912/updates.jsonl),
+  [exit](../../../../runs/ucope/reactive_renewal_b02_8912/process-exit.json).
+
+Each run's `checkpoints-and-console.tar.gz` preserves its three native final `.pt`
+files and stdout/stderr. Every archived member was compared byte-for-byte with its
+original; the original local files and launch snapshots remain untouched. Archive
+SHA256s are `d48ed47362edcfaa56d6fda9838a5d9b04c8a3b4dc3dab80f301583139725afc`
+(8911, 759742 bytes) and
+`5bea32a0c9e7fbbbb735b2016bc1713989238b3d00e6761be68358698097a6f4`
+(8912, 760089 bytes). Extracting an archive in its run directory restores the native
+checkpoint/console names; raw JSONL and summary records are published separately.
+
+Runner-scoped wall is 2345.0049 / 2352.8686 seconds; inherited-loop single-process
+CPU is 2343.2145 / 2351.5037 seconds. Single-process peak RSS is 353148 / 354032 KiB.
+Native acceptance-to-exit wall is 2345.9588 / 2353.5758 seconds, ending at
+2026-09-20 02:43:54.554926 / 02:44:52.894596 UTC. First acceptance to last exit
+spans 2404.2985 seconds (40.07 minutes); the two measured runner walls sum to
+4697.8736 seconds. These scopes differ. Preflight/launch preparation, engineering
+and support time, and the simultaneous total memory peak remain unmeasured; the
+maximum individual RSS is not the concurrent batch peak.
+
+### Cumulative explanation and current decision
+
+The two new positive R−G signs weaken the prospective pessimistic expectation and
+strengthen retaining this complete R package as a candidate. They also weaken any
+practical assumption that G is the settled winner. They do not overturn old 8901
+or establish a training-population effect, adequate precision, arbitrary-duration
+benefit or FSD's learned-skill claim.
+
+R−F remains mixed and fails the stated favorable development pattern of useful
+positive margins over both G and F in both new blocks. In particular, the aggregate
+R−F mean must not hide F8912's poor policy. The respective contributions of state
+conditioning, average persistence, action-noise distribution, capacity and finite
+joint learning remain unresolved. The changed KEEP rate offers a concrete competing
+explanation, not evidence that rate alone caused the advantage.
+
+The independent ResearchCritic returned `MATERIAL_DISSENT: no` with the substantive
+qualification that retaining R is weaker than crossing the prospective development
+condition. The DM accepts that qualification. Current B02 is ended, with no seed
+extension, retuned F replacement, selected earlier checkpoint or confirmation.
+The next candidate question under consideration is whether state-conditioned renewal
+adds use value beyond learning only an overall renewal rate under the same R timing.
+It is not selected or funded by this result entry; any such new learning comparison
+needs its own specific scientific reason and prospective exposure. Existing outputs
+already suffice for the present mixed reading; another diagnostic is not owed.
