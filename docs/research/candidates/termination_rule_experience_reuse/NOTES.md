@@ -368,3 +368,27 @@ any next learning batch requires a new prospective scientific reason. If only es
 ordering is resolved, choose the next action for the remaining question rather than add
 an automatic control, new architecture or seed. Current scientific judgments remain
 unresolved because no A01 score exists; direction ownership and continuation stay with DM.
+
+## 2026-09-20 13:48 UTC — A01 execution begins after canonical registration
+
+Root reports the owner's explicit authorization to register and continue worthwhile A/B/C
+experiments without per-batch approval. I verified published `origin/main` and the actual
+canonical checkout `/home/fires/hmasd-wsl` both at
+`b254ed1ea86cf8c39d925d87ded4fee368c5e0a1`, with pause lifted and A's active lead exactly
+`Codex DM`. The earlier missing-row dependency is resolved. A's loaded constitution,
+scientific/engineering methods, compute and admission/launcher dependencies remain
+byte-identical to the versions already adopted. The local node reports about 11 GiB
+available memory; this is planning information, not the fresh native admission itself.
+
+Root requested the latest reviewed direction source including the compatibility/reading
+preparation. Therefore the previously proposed `0bc787070` launch source is superseded
+before any accepted operation: use the published commit containing this execution entry,
+whose full SHA will be bound in every native manifest. An executable/test-path diff against
+reviewed `ec3f7ee0f` is empty. Only notebook entries have changed; there is no code/config,
+arm, seed, horizon, alpha, evaluation-panel, endpoint or planned-cost revision. This is
+not migration, rebind or retry of accepted work: there are no A01 handles yet.
+
+Proceed with the fixed nine fits on local_linux, serial seed-major/arm order as declared.
+DM retains direct launch/observation/collection responsibility. Native manifest links and
+the eventual result reading will be appended below; technical exit alone will not end
+the scientific work. No additional learning batch is selected by this activation entry.
