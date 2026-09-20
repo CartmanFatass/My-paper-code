@@ -1895,3 +1895,69 @@ engineering action is one read-only retrieval from the already completed second 
 checking the full saved answer against the published fallback. No third Pro request or new
 fit is allocated. The original research window, remaining six-fit capacity, branch-only
 write boundary and continuous agent-wait preference carry over unchanged.
+
+
+## 2026-09-20 — real Jev acceptance, effective permissions and direct DM ownership
+
+The successor initially still received workspace-write/network-restricted permissions even
+though user configuration declared full access. After the owner restarted the app, the
+actual permission instructions changed to danger-full-access, network enabled and
+approval_policy=never. Creating, writing, reading and cleaning an owned temporary file in
+the original 1275 worktree, and reading PR #28 through the GitHub API, both succeeded
+without escalation. No security configuration was changed. The authoring checkout remains
+`/home/fires/.codex/worktrees/1275/hmasd-wsl`, branch `codex/ucope-feedback-renewal`.
+
+The first real same-key read at 7f08ea33 reached the original conversation but returned
+WaitReadFailure: the full user-message container included attachment-card text, so it did
+not equal the committed short prompt. A bounded read-only probe found the exact prompt in
+the message's own body node and the complete 19,665-character assistant answer. This was
+a reproduced DOM extraction defect, not a missing request or failed server-side answer.
+
+The small repair in **aacddb12767867ba69f2b376d24f087f86d0637b** extracts the user body for
+exact normalized matching while retaining the full container for attachment verification.
+Duplicate-body rejection, per-observation rebinding and full answer extraction remain.
+The focused suite passed **24 tests in 0.78 s**; compilation and diff checks passed. An
+independent Reviewer found no material issue and identified the real DOM test as the
+remaining coverage requirement. The code was committed and pushed before that acceptance.
+
+The unchanged `wait` CLI on the existing second key returned **COMPLETE** in 13.833 s
+(loading, accepted, complete; zero recovery attempts), writing
+`temp/pro_transport/ucope-post-b04-next-discrimination-20260920.acceptance.answer.md`.
+The 19,665-character text has SHA256
+`af268c171ed8e33a42e5cf7293ac2c8eb673167be0126097fedbf8abd51e825a` and exactly matches both
+the earlier complete saved answer and the published Answer at 20d938324. Original request,
+prompt, attachment and conversation identities were unchanged. No Send was repeated;
+receipt_commits was empty. The prior NOT_DELIVERED finding and DM saved-from-chat publication
+remain the correct delivery account. Existing tabs were preserved, no new tab remained,
+and shared Chrome stayed running. This acceptance did not deliberately stop shared Chrome;
+the missing-browser recovery branch retains its existing focused-test coverage.
+PR #28 was updated and read back to remove the stale claim that the second answer was pending.
+Private account and conversation facts remain only in local transport state.
+
+The owner clarifies that this single-direction session itself is the **DM**. The temporary
+DM child returned its read-only work and stopped: no edits, index mutations, commits,
+experiments or live handles. The primary session now directly owns scientific decisions,
+NOTES, code, runs and interpretation, using bounded Implementer/Reviewer/Transport/Monitor
+help only as useful. The constitution, scientific/engineering skills and corresponding
+role specifications have been read. This is a responsibility clarification, not a new
+research allowance or a main-integration handover. The same deadline and remaining
+six-fit capacity apply; both Pro requests are complete and no new batch is selected.
+
+### Next bounded analysis: what a predictive gate target could add
+
+The unresolved lawful-history question remains as recorded after the second Pro answer.
+The owner proposal's factual-outcome auxiliary head is now relevant only as a possible
+representation change; its N-axis programme and open-model alternatives are not adopted.
+The next analysis asks whether an action-tagged predictor can identify the conditional
+KEEP/END return difference from the gate's own randomized samples, and whether that signal
+is actually new relative to the current PPO gate score. This is a source/algebra comparison,
+not another reward-level list-entry shortcut or a claim of native opportunity.
+
+Use a fixed controller, eligible decision population and common subsequent policy rule
+applied to each branch's own history. Distinguish a factual mixture-return predictor, a
+branch-conditioned predictor and the current score-function update. Check an exact two-case
+model and the source mapping, including positivity, hidden teammate state, training-only
+baselines, and the changed meaning of a short-horizon target. Cost: zero fits, native
+episodes, checkpoint evaluations and optimizer updates; no new model download or Pro use.
+The decision is whether this supplies a specific learning revision worth selecting, rather
+than treating improved factual prediction or unavailable paired outcomes as decisive.
