@@ -269,3 +269,102 @@ into canonical main and the live canonical checkout, followed by native admissio
 local_linux. Re-entry is that integration notification; no recurring check or extra
 approval of ordinary science is requested. Keep the batch fixed and preserve any eventual
 admitted handle. Nothing here grants a result claim or changes another direction.
+
+## 2026-09-20 — A01 compatibility, launch-interface checks and result-reading preparation
+
+Direction remains **exploring**, with the fixed A01 comparison as the next scientific
+action. Root integrated the accepted code and review note at
+`origin/codex/fsd-parallel-root@2640d7fcaa0cee30077d597b8d243ef2b035726b`. A path-limited
+diff verifies byte identity with A's `0bc787070` on all seven owned files. Published main
+has advanced to `eaa1401c97d5fd068f94d862656b08a640555e03`; relative to A's base, it
+changes none of A's governing constitution/methods, compute configuration, launcher,
+admission/resource code or test scratch contract. No compatibility repair or source
+rebase is needed for this independent NumPy host. No B08 result was consulted.
+
+Both CLIs parse their documented `--help` interface. A read-only call to the launcher's
+runner/output resolver and guard-contract checker accepts the actual A01 entry, direction,
+source SHA argument and first declared output path, which does not exist. This is an
+interface check, not a launch, fresh-memory admission or accepted operation. Additional
+existing control-plane regressions passed under the configured science-tools interpreter:
+**11 passed, 42 deselected in 2.45 s**, selecting new-runner guarding, direct refusal,
+snapshot isolation/output placement, successful detached fixture admission, stable claim
+identity, duplicate rejection and missing/expired/mismatched admission. Their repositories,
+detached children and outputs were test fixtures under pytest-owned scratch; they do not
+create an A01 process or scientific result. No production memory check was substituted by
+the fixture's memory data.
+
+The concrete current dependency was checked using the native **read-only local policy
+function**, against `/home/fires/hmasd-wsl` and expected lead `Codex DM`. It returned:
+`LaunchRefusal: direction 'termination_rule_experience_reuse' must appear exactly once in the Active table`.
+Fresh `git ls-remote` confirms the canonical published main above and the published A
+source `0bc7870700e7d9ce0cd5846b0bd2987150df1ea9`. Root owns integration of the A row into
+published `origin/main` and coordination of the actual canonical checkout's matching
+RESEARCH content. The pause must remain lifted and the lead cell must remain `Codex DM`;
+a changed assignment is a conflict to reconcile, not a string to silently substitute.
+After Root supplies that integration fact, DM performs actual-node admission and executes.
+
+The selected result source remains the already published, reviewed
+`0bc7870700e7d9ce0cd5846b0bd2987150df1ea9`; this continuation entry changes no executable
+input, cost or endpoint. Planned tags are `a01_<arm>_<seed>_20260920`, for arms
+`one_step`, `qbeta`, `retrace` and seeds `91021`, `91022`, `91023`. Execute serially in
+seed-major order, with that arm order inside each seed. Preserve each returned manifest
+and terminal witness before proceeding. The first command, **prepared and not executed**, is:
+
+```sh
+/home/fires/.venvs/hmasd-linux-science-tools/bin/python scripts/hmasd_launch.py launch \
+  --node local_linux \
+  --source-root /home/fires/.codex/worktrees/fsd-a/hmasd-wsl --snapshot \
+  --direction termination_rule_experience_reuse --lead 'Codex DM' \
+  --sha 0bc7870700e7d9ce0cd5846b0bd2987150df1ea9 \
+  --output runs/termination_rule_experience_reuse/a01_one_step_91021_20260920 \
+  -- scripts/run_termination_reuse_a01.py --arm one_step --seed 91021 \
+  --out runs/termination_rule_experience_reuse/a01_one_step_91021_20260920 \
+  --launch-sha 0bc7870700e7d9ce0cd5846b0bd2987150df1ea9
+```
+
+The configured child is `/home/fires/.venvs/hmasd-linux-cpu/bin/python`. Actual local
+physical/effective available memory must meet the unchanged 4 GiB native floor immediately
+before release. The check is intentionally left to the actual launch; an earlier snapshot
+would not admit it. Local CPU resources remain shared even though this batch uses no GPU.
+On uncertain acceptance, reconcile the same native manifest/operation; do not change the
+tag or relaunch. No accepted handle currently exists.
+
+**Collection and reading are ready, not performed.** Snapshot output stays under this
+author checkout's `runs/termination_rule_experience_reuse/<tag>/`, not the snapshot tree.
+No remote copy is needed. Read in this order:
+
+1. Reconcile native manifest, launch status and `process-exit.json`, then runner status.
+   A missing/contradictory exit remains unknown. Preserve each failure and any partial files.
+2. Validate the recorded source/config and all artifact hashes. Per completed fit require
+   512 training episodes, 49,152 training team steps, 6,144 tabular update calls, 49,152
+   target start rows and visit-count sum, 256 evaluation episodes, 24,576 evaluation team
+   steps and zero evaluation updates. Read Q movement and actual support/renewal records.
+   Different numbers of unique table entries written are not extra start-row exposure.
+3. Reconstruct checkpoint J from all `evaluation.jsonl` reward sums divided by 96, and
+   primary from the fixed 32/128/512 checkpoint means. Compare within-block behavior
+   arrays exactly across arms, independently of archive-container hashes. Read all
+   checkpoints, final Q/visits and per-update trace/ratio diagnostics; do not reexecute a
+   model, environment or trajectory merely to collect this evidence.
+4. Report each of the three paired Retrace-minus-Q(beta) primary differences, their
+   mean/range, each final difference, both comparisons with one_step and training-relative
+   changes from the untrained panel. A descriptive paired Student-t interval, if shown,
+   uses the three block differences (df=2, approximate normal block-difference assumption),
+   never the evaluation episodes as n. With only three exploratory blocks it is fragile;
+   neither interval crossing zero nor a small mean establishes equivalence. An incomplete
+   pair is absent, not zero, and is not silently replaced.
+5. Compare the intermediate trace-mass/support prediction with native J while retaining
+   the package-attribution limitation adopted above. Lower Q error is not measured here;
+   TD residual magnitude is not relabelled as value error. Interpret task opportunity,
+   finite learning, and additional useful complexity separately. In particular, success
+   of ordinary Retrace can favor using the simple existing route without creating an
+   algorithm-novelty or current-HMASD skill claim.
+
+Per-fit recorded wall is entry-to-summary-assembly, with whole-process CPU/RSS at that
+point; interpreter startup and final summary/status publication are outside that wall
+field. Native acceptance/exit timestamps supply their own scope, not exact compute time.
+There is no complete-path speed claim. Preserve this timing limit when reporting summed
+fit walls versus batch elapsed time. All fits stay fixed while the batch is being read;
+any next learning batch requires a new prospective scientific reason. If only estimator
+ordering is resolved, choose the next action for the remaining question rather than add
+an automatic control, new architecture or seed. Current scientific judgments remain
+unresolved because no A01 score exists; direction ownership and continuation stay with DM.
