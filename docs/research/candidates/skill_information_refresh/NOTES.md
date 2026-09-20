@@ -1250,3 +1250,112 @@ cost remains four fits and the counts already recorded in the C05 read. The note
 the complete C01–C05 evidence remain available; no code, result, claim, A/B record or shared
 index was altered. On receipt of the actual Pro answer I will read it and append the
 specific adoption/rejection and any changed experiment decision here.
+
+## 2026-09-20 — Pro answer adoption and formal direction-investment suspension
+
+I read the complete 474-line ABC Pro answer, including its source/readability limitations,
+then checked its C recommendations. The actual delivered answer is preserved in A's
+[notebook at answer commit 8904327f9598d4896cb9425550f84584deaa902a](https://github.com/CartmanFatass/My-paper-code/blob/8904327f9598d4896cb9425550f84584deaa902a/docs/research/candidates/termination_rule_experience_reuse/NOTES.md#pro-question-2026-09-20-abc-admission-conditions-and-minimal-discriminators),
+under the umbrella question's `### Answer`, marked saved from chat. I fetched that exact
+commit: its parent is the pinned question source `f3fe65778da4e58fb5eb0ca7a34f9c6896c9c945`,
+and its only changed file is A NOTES. The extracted complete answer hashes to
+`0b11d7216f66daea006f943a239aea6237d2a20f3fca4b2c6f21fb803df2a429`, matching the transport
+file I read. Removing only its final LF gives the driver's reported
+`35ace3a0d98a55c311a28f6eb56d212752c02467f80bb783b757bc2ac013b8b3`; the apparent hash
+discrepancy is reconciled, not a changed answer. Root reported native `DELIVERED`, originally
+empty Answer, unchanged question/rest and no repeated Send. I made no A-file edit and do not
+duplicate the umbrella answer in C's unused answer slot.
+
+Pro used C's pinned `4ef39c08ae55c6dd623718b4072a7ddcc9b9e913`, so it read C05's result and
+consultation input but not my subsequent `176a5cbc7` narrowing. It explicitly could not read
+C05 episodes.jsonl, only sampled the update log, and did not independently inspect binary
+traces/checkpoints. I accept that disclosure: the answer is scientific advice and a direct
+summary/code reading, **not another raw-data audit, fit or empirical replicate**. My prior
+full C05 read remains the source of those raw checks. I rechecked the cited C05 summary
+values, eighteen conditional actions and causal view, and matched the C03/C04/CADC numbers
+to their published local records; no factual C discrepancy was found.
+
+The two consequential primary-source boundaries also check out on rereading. SchedNet
+jointly trains message encoding, action selection and scheduling weights and specifies
+medium-access rules; it is not a fixed-skill timing-only comparison or a free priority
+channel. See [sections 3.1–3.3 and appendix D](https://arxiv.org/html/1902.01554v1).
+Soleymani et al.'s result uses its Gauss–Markov/quadratic-control setup, causal information
+sets and a one-step channel, with jointly optimized triggering/control; its continuation
+value does not imply extra learned value for our frozen receiver. See
+[sections II–III, equations 10–12 and Theorem 1](https://people.kth.se/~kallej/papers/Value_TAC2023_Soleymani.pdf).
+
+### C-specific response to the advice
+
+1. **Adopt the four-way separation.** C05 is a constructive timing-value opportunity with
+   legal representation and one exploratory training history realizing it. Initial value4
+   becomes5.322222222, and exact greedy regret to the transparent rule is0 on the finite
+   context support. This neither establishes multi-seed reliability nor incremental
+   learned-package value. The strong VOI rule, not the restricted age/change family, stays
+   the implementation choice. The existence answer is not withdrawn by the pause.
+
+2. **Adopt the adverse evidence and information limits unchanged.** The q=0 control removes
+   the restricted-rule residual; the paid w contributes only1/18 task unit independently
+   when q is known. Context was already paid by every C05 arm, so no package-purchase value
+   follows. C03's successful proxy repair lost9/5 jobs, C04's stage rule removed the learned
+   remainder, and CADC's adverse single pair remains adverse. Silence decoding, unpaid
+   receiver intent or future flip input would change the tested problem. Pro did not read
+   the later eight-byte allocation example; that remains my bounded cross-quota analytical
+   comparison, not adviser-verified evidence and not a new C05 primary.
+
+3. **Modify the post-C05 narrowing's possible over-strong reading.** A transparent posterior/
+   plug-in value route *exists* does not mean finite data and computation have already
+   solved a new target decision. The previous unknown-q derivation is conditional on its
+   declared information and model; it is not a reason to dismiss ordinary learned risk
+   estimation or another competent existing method. Re-entry need not break the algebraic
+   `wX-4q` form, require endogenous multi-agent coupling, invent a new algorithm, or first
+   prove a positive headroom gap. A target-sensitive finite-estimation question can itself
+   justify an ordinary-method comparison. This is the substantive clarification I adopt
+   from Pro; it does not create an empirical gain missing from the current data.
+
+4. **Retain the suggested q(z) condition, but do not adopt it as a ready experiment.**
+   Pro proposes a locally observed regime z with unknown q(z), estimated from common lawful
+   history, and a charged timestamped request arriving before fixed receiver decisions.
+   The useful intermediate error is placing q(z) on the wrong side of wX/4; the native
+   prediction is avoidable loss from choosing the wrong transmission time, not merely lower
+   calibration MSE. This remains inside a transparent learned-predictor-plus-VOI baseline.
+   Pro explicitly supplies no actual target interface, existing feedback source/cost or
+   action-support evidence. C01 has constant .75 progress and uniform job weights; C05 gives
+   calibrated q and redraws it independently each cycle. Neither currently supplies the
+   proposed new finite-estimation problem. I therefore reject an immediate successor fit
+   from this example alone, **not** the possibility or legitimacy of such future research.
+
+5. **Adopt the support and comparator requirements as scientific design, not new gates.**
+   A later target can use genuine early/late action support or an identified conditional
+   model from common data; two different historical paths are not observed counterfactuals.
+   A candidate and the transparent predictive/value reference must share calibration data,
+   feedback/reward rights, model access, delay, full request/header cost and tuning exposure.
+   A worthwhile new question need not demonstrate victory in advance. No duplicate
+   comparator identical to the candidate, exhaustive rule search, additional Pro approval
+   or mandatory architecture change is needed.
+
+### Final boundary
+
+**Formal scientific decision: suspend further experimental investment in
+`skill_information_refresh` at the present boundary.** This replaces the earlier wording
+"prepared pause" or "idle": no successor training, simulation, rule sweep, confirmation
+or repeated adviser request is selected. Retain the transparent stage rule for the original
+crossing comparison and transparent VOI for C05, with all positive and adverse evidence.
+The reason is that C05's actual decision calculation is solved and the proposed new
+finite-estimation target mapping is not established—not that every ordinary route always
+solves every task, that lawful refresh value is absent, or that Pro permission is missing.
+
+The specific re-entry is a target-grounded legal observation/feedback chain in which an
+unknown, estimable quantity affects the relative native value of the fixed action
+opportunities, plus a bounded comparison against the strongest same-information predictive/
+value rule at declared data and compute. The q(z) threshold example is one possible form;
+it is not a new toy to manufacture solely to keep this direction running. A concrete new
+question may change the investment judgment without first proving a gain. Until then there
+is no unresolved producer, observation task or approval dependency to wait on.
+
+This is a direction-investment suspension, **not an owner-wide pause, new RESEARCH state or
+archival decision**. Root owns the shared index and can record `exploring` with experimental
+investment paused and this re-entry condition. Pro's `MATERIAL_DISSENT: no` is consistent
+with this decision but is not the evidence that establishes it. This adoption adds zero
+fits, updates, simulations or launches; C remains at four exploratory fits, 1,277,952
+training ticks, 2,048 updates and 3,591,672 total team ticks across the recorded hosts.
+No code, results, A/B answer or shared-control file was changed.
