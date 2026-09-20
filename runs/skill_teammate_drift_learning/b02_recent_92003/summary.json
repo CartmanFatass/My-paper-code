@@ -1,0 +1,189 @@
+{
+  "object": "STDL_JOINT_REPLAY_B02",
+  "direction": "skill_teammate_drift_learning",
+  "arm": "recent",
+  "replay_arm": "recent",
+  "initialization": "reward_upper",
+  "seed": 92003,
+  "launch_sha": "3ac44381f093748ffe57f3da87fcb1ac201943ed",
+  "status": "complete",
+  "started_fits": 1,
+  "scientific_scope": "exploratory common-initialization repair; scripted two-agent line host",
+  "learning": {
+    "object": "STDL_JOINT_REPLAY_B02",
+    "status": "COMPLETE",
+    "arm": "recent",
+    "seed": 92003,
+    "config": {
+      "version_names": [
+        "A",
+        "B"
+      ],
+      "ego_move_probabilities": [
+        0.8,
+        0.6
+      ],
+      "teammate_right_probabilities": [
+        0.8,
+        0.2
+      ],
+      "teammate_move_probability": 0.8,
+      "version_schedule": [
+        "A",
+        "B",
+        "A",
+        "B",
+        "A"
+      ],
+      "episodes_per_block": 60,
+      "macros_per_episode": 10,
+      "macro_duration": 3,
+      "gamma": 0.95,
+      "epsilon": 0.2,
+      "alpha": 0.025,
+      "batch_size": 32,
+      "recent_capacity": 300,
+      "evaluation_interval": 10,
+      "primary_evaluation_episodes": [
+        70,
+        80,
+        90,
+        130,
+        140,
+        150,
+        190,
+        200,
+        210,
+        250,
+        260,
+        270
+      ],
+      "initialization": "reward_upper"
+    },
+    "counts": {
+      "episodes": 300,
+      "macro_transitions": 3000,
+      "primitive_transitions": 9000,
+      "minibatch_updates": 3000,
+      "replay_sample_uses": 96000,
+      "evaluation_panels": 31,
+      "evaluation_episodes_simulated": 0,
+      "evaluation_parameter_updates": 0
+    },
+    "movement": {
+      "initial_q_l2": 253.1728339226402,
+      "initial_q_l2_norm": 253.1728339226402,
+      "initial_q_nonzero_entries": 500,
+      "final_q_l1_movement": 1148.1597284321615,
+      "final_q_l2_movement": 57.48405536904149,
+      "final_q_linf_movement": 5.021067775376231,
+      "final_changed_q_entries": 467,
+      "final_q_nonzero_entries": 500,
+      "q_entries": 550,
+      "terminal_q_linf": 0.0
+    },
+    "primary_adaptation_endpoint": {
+      "episodes": [
+        70,
+        80,
+        90,
+        130,
+        140,
+        150,
+        190,
+        200,
+        210,
+        250,
+        260,
+        270
+      ],
+      "complete": true,
+      "normalized_service_returns": [
+        0.5526385479791653,
+        0.6161987712978305,
+        0.6208118476323619,
+        0.5908267568165616,
+        0.5895187729342051,
+        0.6225523883550188,
+        0.541560541666333,
+        0.5943716450897334,
+        0.6253491855858322,
+        0.6417283951694688,
+        0.6392340980901569,
+        0.6435236596153217
+      ],
+      "mean_normalized_service_return": 0.6065262175193323
+    },
+    "optimal_informational_reference": {
+      "A": {
+        "discounted_service_return": 12.022275771631746,
+        "normalized_service_return": 0.7653978334855224
+      },
+      "B": {
+        "discounted_service_return": 11.72644451409533,
+        "normalized_service_return": 0.7465637451733943
+      }
+    },
+    "final_collection_diagnostics": {
+      "current_version_sample_count": 1800,
+      "collected_right_fraction": 0.3238888888888889,
+      "distinct_state_action_entries": 383,
+      "both_actions_state_time_cells": 157,
+      "greedy_right_fraction_nonterminal_cells": 0.436,
+      "changed_current_table_nonterminal_q_entries": 467
+    },
+    "final_normalized_service_return": 0.6874460760282256
+  },
+  "version_adaptation_endpoints": {
+    "A": {
+      "episodes": [
+        130,
+        140,
+        150,
+        250,
+        260,
+        270
+      ],
+      "normalized_service_returns": [
+        0.5908267568165616,
+        0.5895187729342051,
+        0.6225523883550188,
+        0.6417283951694688,
+        0.6392340980901569,
+        0.6435236596153217
+      ],
+      "mean_normalized_service_return": 0.6212306784967888
+    },
+    "B": {
+      "episodes": [
+        70,
+        80,
+        90,
+        190,
+        200,
+        210
+      ],
+      "normalized_service_returns": [
+        0.5526385479791653,
+        0.6161987712978305,
+        0.6208118476323619,
+        0.541560541666333,
+        0.5943716450897334,
+        0.6253491855858322
+      ],
+      "mean_normalized_service_return": 0.5918217565418761
+    }
+  },
+  "artifacts": [
+    "config.json",
+    "curves.json",
+    "transitions.npz",
+    "q_values.npy"
+  ],
+  "runner_wall_seconds": 0.712807174975751,
+  "runner_cpu_seconds": 0.6207120859999999,
+  "resource_scope": "single scientific child process; CPU user plus system",
+  "peak_rss_kib": 44504,
+  "user_cpu_seconds": 0.601063,
+  "system_cpu_seconds": 0.032056
+}

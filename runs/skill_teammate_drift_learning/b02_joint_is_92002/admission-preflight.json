@@ -1,0 +1,21 @@
+{
+  "assessed_at": "2026-09-20T14:24:21.213005Z",
+  "available_physical_bytes": 12002988032,
+  "captured_at": "2026-09-20T14:24:21.212341Z",
+  "cgroup_headroom_bytes": null,
+  "cgroup_memory_current_bytes": null,
+  "cgroup_memory_max_bytes": null,
+  "claim_key": "37398c88463f7407730bb933f7edb4c20633ed10b34e5495b2b2ad484c2ca189",
+  "direction": "skill_teammate_drift_learning",
+  "effective_available_bytes": 12002988032,
+  "effective_floor_pass": true,
+  "failure_reasons": [],
+  "measurement_source": "/proc/meminfo",
+  "minimum_available_bytes": 4294967296,
+  "node": "local_linux",
+  "passed": true,
+  "physical_floor_pass": true,
+  "preflight_id": "resource_c06c43ad212f4d6c925c2c532cedf971",
+  "schema_version": 1,
+  "sha": "3ac44381f093748ffe57f3da87fcb1ac201943ed"
+}

@@ -591,3 +591,130 @@ previously adopted canonical controls. The no-allowance cost regime and B's acti
 Codex DM assignment remain adopted. Next is the fixed fifteen-fit B02 batch through
 native local_linux admission. No result has yet been read, and no scientific
 prediction or budget is changed by review acceptance.
+
+## 2026-09-20 07:31 PDT — B02 read: initialization matters; joint correction not retained
+
+**Execution and validity.** The full declared fifteen-fit batch completed at
+`3ac44381f093748ffe57f3da87fcb1ac201943ed`, with fifteen native exit-0 witnesses,
+complete summaries and consistent same-operation identities. There was no refused
+B02 admission, training failure, duplicate, retry, missing cell or mid-batch
+scientific change. The DM held every observer through terminal readback, then read
+the entire batch. All native records, configurations, curves/policies, replay
+trajectories/weights and final Q arrays are retained in Git. The primary scores
+below link each native manifest; the scientific files are in the same directory.
+
+| Seed | joint_is | fingerprint | recent | uniform | fingerprint_zero |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| 92001 | [.591040](../../../../runs/skill_teammate_drift_learning/b02_joint_is_92001/launch-manifest.json) | [.646963](../../../../runs/skill_teammate_drift_learning/b02_fingerprint_92001/launch-manifest.json) | [.596169](../../../../runs/skill_teammate_drift_learning/b02_recent_92001/launch-manifest.json) | [.649188](../../../../runs/skill_teammate_drift_learning/b02_uniform_92001/launch-manifest.json) | [.608502](../../../../runs/skill_teammate_drift_learning/b02_fingerprint_zero_92001/launch-manifest.json) |
+| 92002 | [.619018](../../../../runs/skill_teammate_drift_learning/b02_joint_is_92002/launch-manifest.json) | [.653075](../../../../runs/skill_teammate_drift_learning/b02_fingerprint_92002/launch-manifest.json) | [.609529](../../../../runs/skill_teammate_drift_learning/b02_recent_92002/launch-manifest.json) | [.658481](../../../../runs/skill_teammate_drift_learning/b02_uniform_92002/launch-manifest.json) | [.614882](../../../../runs/skill_teammate_drift_learning/b02_fingerprint_zero_92002/launch-manifest.json) |
+| 92003 | [.611206](../../../../runs/skill_teammate_drift_learning/b02_joint_is_92003/launch-manifest.json) | [.658984](../../../../runs/skill_teammate_drift_learning/b02_fingerprint_92003/launch-manifest.json) | [.606526](../../../../runs/skill_teammate_drift_learning/b02_recent_92003/launch-manifest.json) | [.648152](../../../../runs/skill_teammate_drift_learning/b02_uniform_92003/launch-manifest.json) | [.610819](../../../../runs/skill_teammate_drift_learning/b02_fingerprint_zero_92003/launch-manifest.json) |
+| Mean | .607088 | .653007 | .604075 | .651941 | .611401 |
+
+The fixed joint-minus-fingerprint primary differences are **-.05592306 /
+-.03405732 / -.04777791** (mean **-.04591943**). Joint-minus-uniform is -.05814847 /
+-.03946323 / -.03694680 (mean -.04485283); joint-minus-recent is -.00512907 /
++.00948878 / +.00467938 (mean +.00301303). Candidate loses to both fingerprint and
+ordinary whole-buffer replay in all three development blocks, while its contrast
+with recent is mixed. Ordinary replay and fingerprint themselves are mixed across
+seeds; their close means are not an equivalence result or proof that context is
+unnecessary. No arm/checkpoint was selected to replace the primary.
+
+**The targeted repair has a real native effect, with a cost.** The paired
+optimistic-minus-zero fingerprint contrasts are:
+
+| Seed | Combined primary | B adaptation | A adaptation | B both-action cells at episode 90, optimistic / zero |
+| --- | ---: | ---: | ---: | ---: |
+| 92001 | +.038461 | +.131469 | -.054547 | 60 / 13 |
+| 92002 | +.038193 | +.145381 | -.068996 | 53 / 15 |
+| 92003 | +.048165 | +.138371 | -.042041 | 69 / 9 |
+
+Mean B benefit is +.138407, A cost -.055195 and combined benefit +.041606. Thus the
+prediction of greater coverage and better B-native learning occurs on all three
+paired blocks; the stronger hope of retaining/recovering A without a cost does
+not. At episode 210 the cumulative B both-action counts are 124/115/115 versus
+34/31/37. First-B-block collected RIGHT fractions are .652/.598/.642 versus
+.178/.122/.092; second-B-block fractions are .800/.817/.817 versus .180/.148/.092.
+This is changed collected behavior, not merely more initialized nonzero entries.
+At the last B evaluation optimistic fingerprint yields .708314/.701563/.733195
+versus zero fingerprint .482951/.477877/.493369; the informational B optimum is
+.746564, not a tuned achievable headroom estimate. Final A changes are mixed
+and negative on two blocks (+.005517/-.030619/-.030914).
+
+The paired intervention supports a useful initialization **total effect** on this
+combined endpoint and a much stronger B-learning reference. It is compatible with
+B01's action-lock-in explanation, but does not isolate coverage as the mediator
+or make this a fully tuned/optimal baseline. Retain this preparation only with its
+A adaptation cost, not as an unqualified improvement. The correction arm has no
+paired zero control in B02, so its initialization treatment effect is not inferred
+by subtracting the different-seed B01 results.
+
+**Correction predictions fail after the common repair.** Candidate's primary
+mean absolute current Bellman residual is 1.27114 / 1.30471 / 1.28172 versus
+ordinary replay 1.20894 / 1.21087 / 1.19190: the predicted improvement reverses
+sign on all three blocks. Candidate is also worse than fingerprint on each seed's
+B adaptation component (-.014976/-.014355/-.049227), not just the A component.
+Candidate residual remains below fingerprint's, but that proxy does not override
+the latter's better native result. Correction is active: Kish concentration/draw
+count is .4031/.3972/.4014; .7730/.7629/.7834 of weight is outside the recent window,
+only .4324/.4345/.4447 is from the current version, and maximum normalized draw
+weights are 17.04/14.69/20.02. These observations neither identify weight variance
+as the sole cause nor justify claiming a correct conditional ratio must improve
+finite bootstrapped control. The uniform contrast uses the same representation,
+initialization, sampling scope and update count, so fingerprint's separate tables
+are not sufficient to explain the candidate's adverse package comparisons.
+
+**Raw evidence and counts.** Every fit executed the declared 300 episodes, 3,000
+macros, 9,000 primitive transitions, 3,000 minibatch updates, 96,000 replay uses
+and 31 exact evaluation panels, with no evaluation updates. The DM recomputed
+each combined/A/B endpoint from saved curves. A read-only independent calculation
+reconstructed all fifteen actual-action behavior likelihood streams and 288,000
+candidate replay ratios/normalizations; physical positions/rewards, terminal
+semantics, replay causality and baseline eligibility pass. All five arms share
+the exact saved exogenous random slots within each seed. All 465 current-version
+coverage panels agree with independent tuple-set counts. Reconstructed reward-bound
+initial arrays give the emitted Q movement and changed-entry counts; terminal rows
+stay zero and values stay within the finite reward bound. No new training or
+result-bearing evaluation was used for this readback, and no scientific defect
+was found that would turn the adverse result into a technical failure.
+
+**Cumulative judgment and stopping this idea.** Do not retain or confirm the
+unconditioned, globally minibatch-normalized joint-trajectory IS package on this
+known recurrent-version host. B01's weak positive fingerprint contrast did not
+survive a common repair that made B learning substantially more effective; B02
+fails both its current-target proxy prediction against uniform and its native
+comparison against stronger simple replay. I will not add seeds, clip weights,
+change the endpoint or increase the horizon to rescue this batch. This retires
+the selected package in these conditions, not the direction or the mathematical
+possibility of reusing old macro experience. Plain and context-matched replay
+already reuse old data and provide contrary evidence to a general old-data
+unusability story. No inference is made about endogenous co-learning, hidden
+teammate policies, nonrecurring behavioral drift, learned HMASD skills, Claude's
+PPO coordinator or UAV benefit.
+
+The direction is now **idle after a read scientific boundary**, not blocked on an
+owner decision, adviser, monitor or missing artifact. No immediate successor is
+selected: the present evidence does not justify more machinery on this small
+recurrent-version object. A concrete re-entry condition would be an independently
+motivated target with unavailable/nonrecurring behavior contexts and evidence
+that obsolete transitions—not the common learner's initialization—limit native
+learning; that could justify a new prospective comparison with the right simple
+baseline. No producer or periodic check is invented for that condition. The DM
+owns this judgment; Root alone integrates the current index. All B handles are
+terminal and no additional fit is queued.
+
+**Cost and exposure.** Fifteen started/completed B02 fits; 135,000 primitive
+transitions, 1,440,000 replay uses and 465 exact panels. Runner wall seconds,
+ordered joint/fingerprint/recent/uniform/fingerprint_zero per seed:
+92001 = .940/.786/.702/.709/.790;
+92002 = .960/.857/.716/.711/.765;
+92003 = .966/.761/.713/.718/.746.
+Sum runner wall 11.8406 s; summed single-child user+system CPU 10.4807 s;
+maximum single-child peak RSS 45,700 KiB. Own fits were serial, with one native
+numeric thread, on the admitted local_linux shared WSL host. First acceptance to
+last process exit is 377.246 s, not active occupancy; launch/publication/interaction
+time is not fully instrumented and no speed claim is made. Total development
+exposure for this selected correction is **27 started/completed fits** across B01
+and B02, 243,000 primitive transitions and 2,592,000 replay uses, plus the one
+separately retained B01 pre-training refusal. B02 is an outcome-informed targeted
+revision, not fresh confirmation; three seed blocks do not establish a universal
+ranking or population precision. No claim note or confirmation batch was started.
