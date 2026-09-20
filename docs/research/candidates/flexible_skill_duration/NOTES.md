@@ -1311,3 +1311,46 @@ the two low-level critics are asked to fit: how low-level returns and GAE are bu
 the flat arm (episode horizon against skill segment, bootstrap at skill boundaries, reward terms
 and scale), and what explained variance each critic reaches in the recorded logs. A new
 prospective entry only if that inspection yields a change with a predicted intermediate effect.
+
+## 2026-09-19 20:10 PDT — inspection (no new fit): D's discriminator reward is a near-constant offset; both critics fit the same kind of target
+
+Follows the "Next" of the B04 reading. Code read: `hmasd/agent.py`
+`update_discoverer_from_rollout` (advantage and value-loss sections), `hmasd/utils.py`
+`compute_gae`, the matched-information entry's CF description; data: `training_rows[].losses` of
+the ten completed D fits (B01 D1280, B02 D128) and of the flat fits.
+
+**Facts.**
+- One code path builds the low-level targets for D and for the flat arm: GAE over the whole
+  rollout buffer, gamma .99, lambda .95, no cut or bootstrap at skill boundaries, episode `dones`
+  only. `use_valuenorm` is on in both, so the recorded low-level value loss is an MSE on a
+  running-normalised return: roughly one minus the explained variance. Flat critics therefore
+  explain about 70–93 % of return variance, D's about 99 %.
+- The recorded reward components of D, per agent-step: environment .038 at rollout 1 rising to
+  .056–.063; team discriminator term −.040 to −.044; individual term −.017 to −.018, in every
+  one of ten fits at rollouts 1, 25 and 45. The discriminator terms are as large as the
+  environment reward, not small as I wrote at 18:10, and they do not change over training.
+  Discriminator losses stay at 1.72–1.76 (ln 6 = 1.79) and accuracies fall from .31–.37 to
+  .24–.35 (chance .167): the skills do not become more distinguishable.
+- The flat arm's per-step environment reward rises from .038 to about .05 (CF_E0005), D's to
+  about .057, consistent with the training returns already recorded.
+- D's action entropy climbs to 7.4 under the same `lambda_l` .05 that inflated CF's noise to
+  8.9; D's evaluation does not decline with it.
+
+**Interpretation.**
+- Weakened: my 18:10 account that D's low-level learner moves because the discriminator terms
+  give each agent an immediate signal it controls. In the recorded means those terms are an
+  offset of about −.06 per step that training does not improve; a constant offset leaves GAE
+  advantages unchanged after the critic absorbs it. Their per-sample variation is not logged, so
+  this is weakened, not excluded.
+- What remains different between the two low-level learners, all untested: the skill input (a
+  one-hot held for k = 10 steps and chosen by a learning coordinator, which gives temporally
+  extended, state-dependent variation in behaviour); the actor's input (D: own observation plus
+  skill; CF: own observation plus the central snapshot, a much wider input); D's better critic
+  fit, which may be cause or consequence.
+- Three of my mechanism predictions have now failed in a row (B03 displacement, B04 surrogate and
+  displacement, and this account of the discriminator terms). The observations are solid; my
+  explanations of why the flat learner stands still are not. Before another fit I want the
+  explanation challenged rather than extended.
+
+**Next.** One critic pass on the working explanation and on which single observation would most
+discriminate between the remaining differences. No fit is scheduled.
