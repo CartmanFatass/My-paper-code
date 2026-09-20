@@ -1247,3 +1247,86 @@ is not zero. Per-fit walls in the six-arm table order:
 93003 .319/.363/.350/.280/.423/.328.
 Direction exposure is **45 completed exploratory fits** (27 B01/B02 plus 18
 B03), with the earlier B01 pre-training refusal separately preserved.
+
+## 2026-09-20 16:32 PDT — B04 prospective: remove the exact product constraint
+
+**Question and why this is new work.** B03 established early native transfer
+under a deliberately rank-deficient historical behavioral context. The next
+useful uncertainty is whether its benefit depends on that exact missing feature
+direction. I adopt the Critic's targeted support intervention, not an automatic
+confirmation or added B03 seeds. A paired product-curve reference on fresh seeds
+is necessary to distinguish the source-support intervention from unrelated
+training-block variation. No Pro permission is required; no B04 outcomes have
+been generated. Source result/evidence before this design is published at
+`c96aed19f7050c12d0d58b14edc128787bf2e480`.
+
+**One intervention, fixed before data.** Keep B03's 2048 source plus 256 target
+macros, three-tick skill duration, two physical skills, rewards, legal information,
+random collection, priors, algorithms and all target contexts. In the new source
+condition keep ego `u_j=.25+.55*(j+.5)/2048`, but permute the same teammate marginal
+trajectory: `v_j=.16/u_(37*j mod 2048)`. The multiplier 37 is fixed once, is
+coprime to 2048, and is not chosen by an outcome/conditioning sweep. Each marginal
+set of u and v values is exactly the B03 set; only their pairing/order changes.
+The source product is no longer constant and the saturated fingerprint design
+can have full rank. Both controllers still change at every fixed macro boundary.
+Target u/v, all exogenous random slots and high-level collection actions remain
+matched across source conditions. Target data are therefore identical across
+conditions; source joint outcomes/rewards can differ under the intended new
+joint law. No current-state or reward oracle is added.
+
+This is a controlled source-context distribution intervention, not a pure
+identifiability-mediator isolation: outcome frequencies, reward distribution and
+source feature conditioning may change together. Coordinate-wise historical
+ranges are unchanged and target remains partly outside them. Full rank alone
+does not guarantee good finite-sample extrapolation. The two compared learners
+retain all history through sufficient statistics; no recency/order-sensitive
+window is part of this diagnostic.
+
+**Four arms and counts.** `joint_product` and `fingerprint_product` are B03's
+joint_response and fingerprint_full under the original product curve;
+`joint_permuted` and `fingerprint_permuted` are those identical learners under
+the teammate permutation. Three fresh independent seed blocks **94001, 94002,
+94003**, all four arms: **12 fits**, 27,648 macro labels/statistic updates/exact
+panels, 82,944 primitive ticks. The six fingerprint fits require 13,824 small
+ridge solves; the conditional means require none. One four-column source-design
+singular-value computation per fit diagnoses support, not a search. Own fits
+remain serial on native-admitted local_linux, one numeric thread. Prior runner
+times suggest small active work but do not replace actual resource measurement.
+This finite causal comparison costs more than two arms alone because both source
+conditions are rerun on the same new random blocks; it is not an expansion of
+the already closed B03 batch.
+
+**Predictions and fixed reading.** Use the same first-64 target native and MAE
+endpoints, with full-target and late-64 summaries as secondary. Let G_product
+and G_permuted be joint minus fingerprint early native return within each source
+condition. The primary intervention contrast is **G_product - G_permuted**;
+prediction: positive, as broader source joint contexts help direct fingerprint
+more than the already identifiable response table. The intermediate predictions
+are positive fourth source design singular value/full rank, and lower fingerprint
+absolute error on the first target panel (zero target labels), with its early
+target MAE also reported. Retain the actual design singular values, source joint
+outcome counts, first-target raw predictions and both candidates' parameter
+movement. All same-information comparisons remain paired by the actual shared
+random slots, not merely common seed labels.
+
+If fingerprint's estimate/native decisions improve and the gap closes, narrow
+the useful B03 opportunity to the special support gap; do not call the direction
+universally disproven. If a native gap survives with full rank, exact
+nonidentifiability is not necessary in this tested finite sample, but poor
+conditioning/extrapolation and regularization still remain possible explanations.
+If source rank improves without the predicted value/native change, the rank
+story alone is insufficient. Report all per-seed signs; do not force a stable
+ranking from three blocks. No lambda, permutation, seed, window or payoff sweep,
+no post-score batch extension and no confirmation claim.
+
+**L0.** Reuse the reviewed B03 scientific module with one explicit source-schedule
+Config option whose default preserves the product schedule. Add the fixed
+permutation branch and validate it; do not change learners, reward law, target
+path, RNG addressing or evaluator. Add guarded entry
+`scripts/run_stdl_joint_response_b04.py` and focused runner/scientific tests.
+Outputs retain the B03 numeric artifact contract, plus source-design diagnostics.
+Check marginal multiset identity, full source rank, unchanged target/random slots,
+within-condition paired data, preserved default path and literal native admission.
+DM implements this small, already-understood extension; an independent Reviewer
+checks the changed scientific and launch paths before publication/execution.
+No B01/B02, shared launcher, Claude coordinator or B08 edits.
