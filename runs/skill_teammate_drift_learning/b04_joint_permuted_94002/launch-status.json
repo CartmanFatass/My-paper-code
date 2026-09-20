@@ -1,0 +1,11 @@
+{
+  "claim_key": "24d921abe5473889c337a08aed0847aeb2021c6dce374923808f56d932d9bbb1",
+  "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/24d921abe5473889c337a08aed0847aeb2021c6dce374923808f56d932d9bbb1.json",
+  "manifest_ref": "/home/fires/.codex/worktrees/fsd-b/hmasd-wsl/runs/skill_teammate_drift_learning/b04_joint_permuted_94002/launch-manifest.json",
+  "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/24d921abe5473889c337a08aed0847aeb2021c6dce374923808f56d932d9bbb1.json",
+  "pid": 2773809,
+  "runner_pid": 2773810,
+  "schema_version": 1,
+  "status": "accepted",
+  "updated_at": "2026-09-20T23:43:46.338333Z"
+}
