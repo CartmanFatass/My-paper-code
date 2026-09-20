@@ -1061,3 +1061,102 @@ what reward D's low-level learner is given, against the same quantities for D. T
 reading and existing `training_rows`, zero fits. A fit-bearing entry follows only if that
 reading names a modifiable link with a prediction of its own. Re-entry condition: that
 inspection is written up, or the owner redirects.
+
+## 2026-09-19 18:10 PDT — inspection (no new fit): the flat actor's updates are small because they are incoherent; the low-level minibatch is 320 samples
+
+Follows the "Next" of the B03 reading. Code read: `hmasd/agent.py`
+`update_discoverer_from_rollout`, `hmasd/utils.py` `get_discoverer_sampler`,
+`hmasd/baselines.py` `apply_algorithm_config("mappo")`; data: `training_rows` of the completed
+B01, B02 and B03 fits on blocks 772803–773003 (stage-0 blocks for the ×2 learning rate).
+
+**Facts.**
+- Flat and D low-level learners run the same update: GAE on the buffer, PPO clip, advantage
+  normalisation *per minibatch*, recurrent chunks of k = 10 steps, 15 epochs. The minibatch is
+  `sequence_batch_size` sequences, which no FSD config sets, so the default 32 applies: 32 × 10 =
+  320 agent-steps per minibatch, 150 minibatches per epoch, 2,250 optimizer steps per rollout
+  (matches the recorded `optimizer_calls_delta`). The config fields `num_mini_batch = 4` and
+  `batch_size = 12000` exist but this sampler does not read them.
+- Both learners receive the environment reward with weight 1. D's low-level reward adds the
+  team and individual discriminator terms (weights .05 and .02), whose recorded per-step
+  magnitude (−.038, −.017) is comparable to the environment component (+.034).
+- Recorded low-level policy loss (the clipped surrogate after the epochs; 0 means the update did
+  not improve the surrogate), and actor displacement per unit of learning rate × steps:
+
+| arm | fits | policy loss, mean | last ten rollouts | displacement at 45 | displacement / (lr × steps) |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| CF `lambda_l` .05 | 3 | +0.0002 | +0.0003 | .093 | .018 |
+| CF .005 | 3 | −0.0006 | −0.0004 | .071 | .014 |
+| CF .0005 | 3 | −0.0005 | −0.0003 | .071 | .014 |
+| CF .05, learning rate ×2 (stage 0) | 2 | +0.0017 | +0.0020 | .219 | .011 |
+| D1280 | 3 | −0.0258 | −0.0483 | 1.156 | .114 |
+| D128 | 3 | −0.0259 | −0.0494 | 1.148 | .113 |
+
+**Interpretation (working).** The flat actor takes as many steps as D's and moves an eighth as
+far per unit of learning rate, and its surrogate does not improve: its steps largely cancel.
+That is what gradient noise looks like, and the update law invites it: a team-shared,
+long-horizon reward estimated on 320 samples with the advantages re-normalised inside each of
+those minibatches. D's low-level learner runs the same law but also optimises discriminator
+terms that each agent controls directly and immediately, which would give it a coherent
+gradient whatever the minibatch. Conventional MAPPO practice is the opposite corner: one to a
+few minibatches over the whole buffer, a handful of steps per rollout, learning rate around
+5e-4. The flat comparator here has never been run that way.
+
+Not established: that minibatch size is the cause (clip, the central-input actor, or credit
+among six agents could each matter), or that D's gain comes from the discriminator signal. No
+gradient statistics are recorded, and a probe that trains is a fit under section 3, so the
+cheaper route is a direct learner test.
+
+## 2026-09-19 18:15 PDT — prospective: flat learner with a conventional large-minibatch update (explore, six fits, package screen)
+
+**Question.** Does the central-input flat learner learn on this host within 45 rollouts when its
+low-level update uses whole-buffer-scale minibatches and a learning rate suited to the smaller
+number of steps? This continues the comparator-competence question; B03 removed the decline and
+left a learner that stands still.
+
+**Package, declared.** Two things change together against the best flat setting so far
+(`CF_E0005`: selected CF, `lambda_l` .0005): `sequence_batch_size` 32 → 1200 (four minibatches of
+12,000 agent-steps per epoch, 60 optimizer steps per rollout instead of 2,250) and the
+actor/critic learning rate. This screen forgoes attributing a change to either one.
+
+**Arms.** `CF_M1`: learning rate 1e-4 (the standing base rate, multiplier 1.0). `CF_M5`: 5e-4 (the
+usual MAPPO rate). Two rates because 37 times fewer steps at an unchanged small rate may simply
+not move, and I have no measurement to pick one.
+
+**Blocks and count.** Both arms on 772803, 772903, 773003: six fits, the whole default
+allowance, 45 rollouts, panels 5…45, node `wsl_4070`. References on the same blocks, not
+contemporaneous: the three B03 `CF_E0005` fits and the three B01 D1280 fits.
+
+**Simpler explanations it must be told from.** (a) The flat learner cannot extract a usable
+gradient from this reward at any batch size in 45 rollouts (credit among six agents, horizon):
+then the surrogate improves (large batches make that easy) but training return and J do not.
+(b) Steps too few: nothing moves, policy loss and displacement stay near zero.
+
+**Predictions (signs).**
+- Intermediate: mean policy loss at least five times more negative than CF_E0005's −0.0005 in
+  both arms; actor displacement at 45 above .2 for `CF_M5`.
+- Native: training return over rollouts 35–45 above 25 (CF_E0005: 23.8; D1280: 29.3) and the
+  late-window J (panels 30–45) above CF_E0005's on the same block in at least two of three
+  blocks, for at least one arm. I expect `CF_M5` to be that arm.
+- Gap: D1280 stays above on most blocks. I hold this loosely; a flat learner that overtakes
+  D1280 would be the most consequential outcome for the direction and is not excluded.
+
+**Reading.** Per fit: J by rollout, window means (5–20, 30–45; declared now), policy loss,
+displacement, value loss, entropy, training return. Differences against CF_E0005 and D1280 on the
+same block, three pairs, description only. Exploration: no MEI verdict, no gap-size claim; the
+settings are being tried on the blocks the gap is read on.
+
+**Exposure.** 6 × 360,000 training team steps; wall unmeasured for this update law (fewer,
+larger steps), planned as CF's 7,000 s. No extension whatever the scores show.
+
+**What I would do with it.** Learns: this becomes the flat construction, and the next entry is
+a fresh-block D1280 comparison against it with a claim note if the owner wants a confirmation.
+Does not learn with a clearly improving surrogate: explanation (a) gains, and the question
+moves from the optimiser to credit and information. Nothing moves: (b), record and stop
+tuning blind.
+
+**Code (L0).** Thin entry `scripts/run_fsd_flat_update_b04.py` as B03's: arms, three blocks,
+CF_E0005 construction with `sequence_batch_size` and the two learning rates overridden, plan
+guard, `reduce` pairing with the B03 CF_E0005 and B01 D1280 summaries. `sequence_batch_size` is
+not among the snapshot fields, so the fit validator checks the behaviour instead: 60 low-level
+optimizer steps per rollout, 2,700 per fit. Launch script, tests. No learner, environment or
+evaluator change.
