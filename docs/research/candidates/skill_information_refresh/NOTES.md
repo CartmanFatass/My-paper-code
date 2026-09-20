@@ -699,3 +699,11 @@ Check stage truth tables and irrelevance of other features, quotas, development-
 full output arithmetic/identity, and CLI admission. Independent review covers the new selection
 and fixed-rule adapter before acceptance. Publish exact input SHA and use local_linux's native
 admission; keep the original handle and report any technical failure without rerunning blindly.
+
+C04 implementation reuses C03 code byte-for-byte. The parameter-free adapter is explicitly
+reported as a fixed rule; its use of the collector's policy-call interface is not called
+learning. Six new checks verify exact stage truth tables, independence from all other legal
+features, equality to an independently implemented direct stage predicate, channel quotas,
+complete synthetic selection/output arithmetic and admission refusal. The full C01/C03/C04
+direction suite reports **37 passed in 4.36 s**, and whitespace checks pass. The new C04
+selection/adapter/entry delta goes to the independent Reviewer before any scientific run.
