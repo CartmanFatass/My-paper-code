@@ -2656,7 +2656,7 @@ fallback. The agent applies no conversion or clipping to actions; the environmen
 `max_speed × time_step` = 30 m per action unit and clips positions. The extension leaves the
 four rule panels and the label-effect block bit-identical with it on or off.
 
-## 2026-09-20 08:35 PDT — B08 fits complete and bit-identical; local probes stopped at the faithful-load check (technical, host numerics suspected); rerun of the probe on the fit's own host
+## 2026-09-20 08:34 PDT — B08 fits complete and bit-identical; local probes stopped at the faithful-load check (technical, host numerics suspected); rerun of the probe on the fit's own host
 
 **Fits.** `b08_save_{772803,772903,773003}_a01` exited 0 on `wsl_4070` at launch sha
 `fbae667d9`, each with `final_weights.pt` (66,030,843 bytes) and `weights.json`. Collected by
@@ -2690,3 +2690,112 @@ on `wsl_4070`, where the fits ran and where the recorded D1280 roots exist; tags
 numerics, and the probe proceeds; inequality there means the load path, and I fix the load,
 not the check. The check is not relaxed in either case. No measure, rule, stratum or
 prediction of the 05:45 and 06:25 entries changes. Zero optimizer steps; not a fit.
+
+## 2026-09-20 08:41 PDT — label content B08 read: the label moves the action and the score, the coordinator's choice of label is worth nothing on average; my inert/content dichotomy was too coarse
+
+**Technical record.** Probe on `wsl_4070` at launch sha `1c21cbc93`, tags
+`b08_probe_<block>_n02`: complete on 3/3, zero optimizer steps, `faithful_load` true on 3/3
+(the 32 recorded rollout-45 scores reproduced exactly). So the local stop was host numerics
+(Intel fit, AMD probe), not the load path; a fixed-weight panel is only bit-reproducible on the
+host that trained it. `_n01` (3 roots) failed at once with no score: the node's sparse
+checkout lacked the published D1280 `summary.json`; I copied the three git-published files
+(sha256 equal) and reran as `_n02`. Local roots `b08_probe_<block>` are the failed local
+attempts. Capture sanity 72 / 8 / 64 on 3/3; strata 42 / 132 / 210 agent queries; decision
+replay 4/4 on 3/3; pair rule `serving_competitor` on 3/3 (position gap 3e-5 m); q batch
+invariance 4e-8. One check reads False by exact equality: label means reproduce the panel
+action to 1.9e-6, a batch-size float difference, not a logic difference. Reduce:
+`runs/flexible_skill_duration/b08_reduce/summary.json`, sha256 `2e63ac3bfcd5d4e4…`, status
+complete. Panel conditional noise is about .03 J.
+
+**J by execution rule at fixed weights (same 32 worlds per block).**
+
+| block | as trained | frozen episode | uniform every step | uniform every 10 |
+|---|---:|---:|---:|---:|
+| 772803 | .4559 | .4391 (−.017) | .4216 (−.034) | .4339 (−.022) |
+| 772903 | .3547 | .3430 (−.012) | .4195 (+.065) | .4205 (+.066) |
+| 773003 | .4994 | .5058 (+.007) | .4748 (−.025) | .4735 (−.026) |
+| mean difference | | −.007 | +.002 | +.006 |
+
+Label change per agent-step: as trained .008–.013, random every step .83, random every 10 .082.
+As-trained label use is concentrated: label 1 on 64 % of agent-steps (772803), label 0 on 65 %
+(772903), labels 0 and 4 on 70 % together (773003).
+
+**Label effect on the low level (4,800 rows per block, held state and history).** RMS spread
+of the mean action across the six labels / action std: .23, .20, .19. Largest pairwise
+distance / std, mean: .68, .59, .53. The action std is 2.8–3.2 action units per dimension
+(log-std is state-independent; default init 0, so it grew about threefold), and the
+environment does not clip actions (`uav_env.py:282-285`), one unit = 30 m. In native units the
+label therefore moves the mean action by about .6 units RMS (18 m per step) and up to 1.5–2
+units between the farthest pair. Team label on the low-level critic: RMS value spread / mean
+|V| = .30, .53, .78.
+
+**Accessible END (deterministic re-query of the real partial decoder mid-cycle).**
+
+| block | same label re-selected | 1 − q(held) | greedy action change / std | native max-abs | pair: neither / one / both |
+|---|---:|---:|---:|---:|---|
+| 772803 | .89 | .80 | .07 | .18 | 54 / 8 / 2 |
+| 772903 | .89 | .80 | .05 | .14 | 52 / 9 / 3 |
+| 773003 | .63 | .81 | .17 | .42 | 25 / 26 / 13 |
+
+No gradient across the 1 / 2–4 / 5–9 strata on any block. q is nearly flat (q(held) ≈ .2 of
+six) while its argmax is stable: the sampled training law and the deployed argmax law are
+very different objects.
+
+**Predictions of the 05:45 entry.** (1) label spread below a tenth of the action std: failed
+3/3 (.19–.23). (2) frozen within .02 of as trained on 3/3: held (−.017, −.012, +.007).
+(3) random within .02 on 3/3: failed 3/3 for both random rules (|difference| .022–.066).
+
+**Reading.**
+- *The label is not inert.* It shifts the deterministic action by tens of metres per step and
+  replacing the labels moves J by .02–.07 on every block, up to twice the panel noise.
+- *The coordinator's selection carries no demonstrated value.* Uniform random labels score
+  +.002 on average against the trained argmax, and beat it by .065 on 772903, the weakest
+  block, where the coordinator sits on one label for 65 % of steps. On the other two blocks
+  its advantage over random (.02–.03) is at the panel-noise scale. This is three blocks at one
+  checkpoint each: a direction, not a size.
+- *Holding or re-drawing the label does not matter at deployment.* Random every step and random
+  every 10 agree within .012 on 3/3; frozen and as-trained agree within .017, and as-trained is
+  nearly frozen anyway. With B07 (retraining at cadence 1 changed nothing on one block), both
+  the fixed-weight and the retrained view now say persistence of the label is not where D's
+  score comes from. Strengthened.
+- *A correction to my own B07 behaviour reading.* Training samples actions with std ≈ 2.9 units
+  (≈ 87 m per dimension per step) around a mean that the label moves by ≈ .6. The near-zero
+  action autocorrelation in B07 at both cadences is what that noise produces whatever the label
+  does; it did not test whether held labels make behaviour persistent. The same ratio
+  (label signal ≈ .2 of the noise) is a candidate reason the discriminators stay near chance
+  (.25–.30 against .167) and the intrinsic term teaches little. Conjecture, not measured.
+- *Untouched.* Why D1280 exceeds CF_S by about .10. The label-conditioned low level is a
+  six-member family of policies, and even a random mixture of them scores as D does; whether the
+  gain is from that family, from the coordinator's critic path, or from something else is open.
+
+**Where my dichotomy was wrong.** I declared "inert → no termination comparison; content →
+D_K10 is Codex's foundation". The result is a third case: content at the low level, no value
+in the high-level choice. On this foundation a termination rule decides *when to re-ask a
+selector whose answers are worth no more than a die*, and a deterministic END returns the same
+label 63–89 % of the time. The checkpoints are technically usable (faithful on the training
+host) but I do not recommend a J / I / F termination comparison on them: its expected contrast
+is bounded by the value of selection, which is ≈ 0 here. Codex's caution stands — this is a
+fixed-weight reading, not a bound on what training with a terminator would produce — so this
+is a recommendation on order, not a proof of futility.
+
+**Next research judgment.** The object to clarify is now *selection*, not persistence: the
+labels differ, J responds to them, and the coordinator does not exploit it.
+- *Next observation (zero-fit, saved weights, node host):* the label → J map. For each block,
+  six panels with one constant label for all agents and the team for the whole episode, plus
+  the per-world best label. It answers: is there a constant label that beats the trained
+  selector (selection headroom without state dependence), and how much does the per-world best
+  label add (headroom for state-dependent selection).
+- *Predictions, held loosely:* on 772903 at least one constant label beats as-trained by > .03;
+  the best constant label is within .03 of as-trained on the other two; per-world oracle
+  exceeds as-trained by > .05 on 3/3 (partly selection on noise — it is an upper envelope, to
+  be read against the as-trained panel's own per-world spread).
+- *Strongest alternative:* the random-label gain on 772903 comes from mixing (diversity across
+  agents at one time), not from any single better label. Then every constant label is ≤ the
+  random mixture there, and the useful object is heterogeneous assignment, which is Codex's
+  team-conditioned territory more than mine.
+- *What each outcome changes:* a better constant label → the coordinator's learning signal is
+  the defect (its critic, its near-flat q, 15 updates per rollout) and that is my next object;
+  mixture only → the skill's value is role diversity, and termination/re-assignment under team
+  conditions becomes the right next comparison, with random-mixture as its mandatory baseline.
+  Either way `uniform_every_10` joins `as_trained` as a required comparator for any later
+  termination arm on this learner.
