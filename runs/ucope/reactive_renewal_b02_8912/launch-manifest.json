@@ -1,0 +1,90 @@
+{
+  "acceptance": "accepted",
+  "accepted_at": "2026-09-20T02:05:39.318782Z",
+  "bootstrap_command": [
+    "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/2b049e10471d4307a0119a6f1ba36c4b/scripts/hmasd_admission.py",
+    "_run-admitted",
+    "--runner",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/2b049e10471d4307a0119a6f1ba36c4b/scripts/run_ucope_reactive_renewal_b02.py",
+    "--output",
+    "/home/fires/.codex/worktrees/1275/hmasd-wsl/runs/ucope/reactive_renewal_b02_8912",
+    "--",
+    "--master",
+    "8912",
+    "--out",
+    "/home/fires/.codex/worktrees/1275/hmasd-wsl/runs/ucope/reactive_renewal_b02_8912",
+    "--launch-sha",
+    "21b7c9aeb8587a130402ec1d7c99c8fa9cfbb9cb"
+  ],
+  "claim_key": "df9acc3b56674997faa576095ad57835497f0b7de21384a25d0916e25f9c2e34",
+  "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/df9acc3b56674997faa576095ad57835497f0b7de21384a25d0916e25f9c2e34.json",
+  "command": [
+    "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/2b049e10471d4307a0119a6f1ba36c4b/scripts/run_ucope_reactive_renewal_b02.py",
+    "--master",
+    "8912",
+    "--out",
+    "/home/fires/.codex/worktrees/1275/hmasd-wsl/runs/ucope/reactive_renewal_b02_8912",
+    "--launch-sha",
+    "21b7c9aeb8587a130402ec1d7c99c8fa9cfbb9cb"
+  ],
+  "command_sha256": "eb407fa212693257ac546d0f973f38f5b2ac0a685515c300b13fd6a504267ce9",
+  "control_observation": {
+    "observed_at": "2026-09-20T02:05:39.137666Z",
+    "ref": "refs/heads/main",
+    "remote": "origin",
+    "sha": "1880287803423a748a1b88f419cc492480406d80"
+  },
+  "control_root": "/home/fires/hmasd-wsl",
+  "created_at": "2026-09-20T02:05:39.155295Z",
+  "cwd": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/2b049e10471d4307a0119a6f1ba36c4b",
+  "direction": "ucope",
+  "host_identity": "Jacob",
+  "identity_command": [
+    "/home/fires/.local/share/uv/python/cpython-3.10.20-linux-x86_64-gnu/bin/python3.10",
+    "scripts/run_ucope_reactive_renewal_b02.py",
+    "--master",
+    "8912",
+    "--launch-sha",
+    "21b7c9aeb8587a130402ec1d7c99c8fa9cfbb9cb"
+  ],
+  "lead": "Codex DM",
+  "manifest_ref": "/home/fires/.codex/worktrees/1275/hmasd-wsl/runs/ucope/reactive_renewal_b02_8912/launch-manifest.json",
+  "node": "local_linux",
+  "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/df9acc3b56674997faa576095ad57835497f0b7de21384a25d0916e25f9c2e34.json",
+  "output_root": "/home/fires/.codex/worktrees/1275/hmasd-wsl/runs/ucope/reactive_renewal_b02_8912",
+  "preflight": "/home/fires/.codex/worktrees/1275/hmasd-wsl/runs/ucope/reactive_renewal_b02_8912/admission-preflight.json",
+  "process": {
+    "detached": true,
+    "identity": {
+      "boot_id": "0c48e432-2a4b-4bcc-9576-32954aa2c6b8",
+      "kind": "linux_pid_start_ticks",
+      "pid": 1460369,
+      "session_id": 1460369,
+      "start_ticks": 13236950
+    },
+    "native_handle_kind": "posix_session",
+    "pid": 1460369,
+    "process_group_id": 1460369
+  },
+  "process_exit": "/home/fires/.codex/worktrees/1275/hmasd-wsl/runs/ucope/reactive_renewal_b02_8912/process-exit.json",
+  "published_remote": "origin",
+  "runner_process": {
+    "identity": {
+      "boot_id": "0c48e432-2a4b-4bcc-9576-32954aa2c6b8",
+      "kind": "linux_pid_start_ticks",
+      "pid": 1460370,
+      "session_id": 1460369,
+      "start_ticks": 13236954
+    },
+    "pid": 1460370,
+    "process_group_id": 1460369,
+    "supervisor_pid": 1460369
+  },
+  "schema_version": 1,
+  "sha": "21b7c9aeb8587a130402ec1d7c99c8fa9cfbb9cb",
+  "source_root": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/2b049e10471d4307a0119a6f1ba36c4b",
+  "stderr": "/home/fires/.codex/worktrees/1275/hmasd-wsl/runs/ucope/reactive_renewal_b02_8912/stderr.log",
+  "stdout": "/home/fires/.codex/worktrees/1275/hmasd-wsl/runs/ucope/reactive_renewal_b02_8912/stdout.log"
+}

@@ -1,0 +1,21 @@
+{
+  "assessed_at": "2026-09-20T02:04:48.567982Z",
+  "available_physical_bytes": 12195426304,
+  "captured_at": "2026-09-20T02:04:48.567388Z",
+  "cgroup_headroom_bytes": null,
+  "cgroup_memory_current_bytes": null,
+  "cgroup_memory_max_bytes": null,
+  "claim_key": "b9380a7c35f00da2d4000196ce2d4ef729ddd8c36992c8d900ca4745e71d104d",
+  "direction": "ucope",
+  "effective_available_bytes": 12195426304,
+  "effective_floor_pass": true,
+  "failure_reasons": [],
+  "measurement_source": "/proc/meminfo",
+  "minimum_available_bytes": 4294967296,
+  "node": "local_linux",
+  "passed": true,
+  "physical_floor_pass": true,
+  "preflight_id": "resource_31f0edf2509d49038a04f1007fb4fae8",
+  "schema_version": 1,
+  "sha": "21b7c9aeb8587a130402ec1d7c99c8fa9cfbb9cb"
+}

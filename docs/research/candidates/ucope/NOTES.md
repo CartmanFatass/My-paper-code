@@ -182,3 +182,32 @@ exit/support telemetry limits cost claims rather than invalidating scientific da
 Before launch, zero B02 fits have started. The next authorized action is publication,
 main/control-state integration and two admitted local_linux block invocations at the
 published source, followed by collection and the prospective six-fit reading.
+
+## 2026-09-19 — B02 block invocations admitted in the Codex worktree
+
+PR #27 merged at `801184245a2466af73a92ddd364c2e56fda3bdf0`. The owner relayed Claude's
+coordination: Claude withheld main pushes during this integration, retained ownership
+of its canonical checkout/index, and would fast-forward it after the merge. Read-only
+observation then found canonical main at `1880287803423a748a1b88f419cc492480406d80` with
+the UCOPE exploring / Codex DM row. Codex only fast-forwarded its own author worktree;
+it did not modify Claude's checkout/index or FSD source/operations.
+
+Both original block invocations were accepted on `local_linux` at published scientific
+source `21b7c9aeb8587a130402ec1d7c99c8fa9cfbb9cb`. Source snapshots keep active inputs
+unchanged while this notebook advances. Native operation identities, SHA, source cwd,
+author-worktree outputs, process identities and argv are in the runner-owned manifests:
+
+- [master 8911 launch manifest](../../../../runs/ucope/reactive_renewal_b02_8911/launch-manifest.json),
+  accepted 2026-09-20 02:04:48 UTC.
+- [master 8912 launch manifest](../../../../runs/ucope/reactive_renewal_b02_8912/launch-manifest.json),
+  accepted 2026-09-20 02:05:39 UTC.
+
+Both fresh actual-node memory checks passed the configured 4 GiB physical/effective
+floor (12,195,426,304 and 11,971,981,312 available bytes respectively); these are admission
+facts, not peak training memory. The two independent invocations each execute R/F/G
+sequentially. Six fits remain the whole allocation; process admission does not mean
+all six arm fits have already started or completed. No score-based change is selected.
+The existing bounded Monitor has been assigned both exact operation references; the
+DM retains observation responsibility through actual adoption, and retains collection
+and scientific reading throughout. Results will be read together after both invocations
+are terminal. No successor or extra fit is allocated.
