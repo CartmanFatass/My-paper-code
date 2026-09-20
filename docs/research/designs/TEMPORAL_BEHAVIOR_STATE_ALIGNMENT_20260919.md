@@ -189,3 +189,168 @@ not occurred. No checkpoint was loaded, no native episode was run, and no fit wa
   bridge, not evidence of benefit on either HMASD host.
 - Schulman et al., [Proximal Policy Optimization Algorithms](https://arxiv.org/pdf/1707.06347),
   section 3 equations 6-7: new/old policy probability ratio.
+
+
+## 2026-09-19 PDT — owner continues the temporary question: identification scope
+
+The owner explicitly continues this temporary research question. The earlier prototype stop
+was the boundary of that completed task, not a continuing pause. This continuation develops an
+exact finite-model argument and checks its arithmetic; it adds no native run or training fit,
+and leaves the two direction sessions in charge of their own work. The next useful observation
+is whether identical exchange gaps can arise with and without new environmental information.
+
+New accepted context read in the [FSD lead correction](https://github.com/CartmanFatass/My-paper-code/blob/1b1b91400627ca2629181e372eb50170a369690d/docs/research/candidates/flexible_skill_duration/NOTES.md)
+at commit `1b1b91400627ca2629181e372eb50170a369690d`: the lead has withdrawn the claim that
+the coordinator had demonstrably learned to select skills; recorded choices remain near uniform,
+and a confirmed CF input-scale hazard is the next targeted construction issue. Thus the table
+above describes the architecture's *available* state dependence, not observed successful use.
+A state-blind but persistent skill can still modulate a trained low-level policy. High entropy
+alone does not prove exact state independence, and no new FSD result is inferred here.
+
+L0 extension: add `tools/analysis/temporal_alignment_identification.py` and its mirrored test
+`tests/tools/analysis/test_temporal_alignment_identification.py`; append the derivation and its
+implications to this same requested design artifact. Use exact rational expectations over a
+single eligible renewal decision and an analytic two-step Gaussian score counterexample.
+No environment, training, checkpoint, action-noise tuning or simulation batch is involved.
+The checks validate identities and known finite counterexamples, not an empirical fit/result
+entry. Keep the existing frozen replay prototype unchanged. Review the mathematical semantics
+and independent arithmetic checks before publishing the continuation.
+
+The hypotheses to discriminate are: (a) the gate benefits from the new private observation;
+(b) it only filters its previous command/retained history; (c) those contributions cancel in
+an aggregate exchange contrast. Any distinction found in the finite model remains local to
+its stated assumptions; no full-horizon MARL decomposition is presumed.
+
+
+### Exact one-decision result: what an exchange gap contains
+
+Let C be retained information immediately before the new observation: recurrent memory,
+previous actual command, phase and clock, as relevant. Let S be the new private observation.
+The velocity controller still receives its lawful full information in every comparison;
+only the renewal gate's information dependence is varied. At one eligible decision in a
+fixed predecision population, write p(C,S) for P(END) and A(C,S) for the frozen-controller
+expected return of END minus KEEP. Any future continuation in this one-decision definition
+is fixed identically; the return can include later native consequences.
+
+Subtracting the common expected KEEP value, define
+
+    V_online = E[p A]
+    V_independent = E[p] E[A]
+    V_retained = E[E[p | C] A].
+
+The independent calendar is drawn from another IID episode's gate, with its marginal END
+rate preserved. The ideal retained-only gate instead draws with probability E[p | C]; it
+preserves each C-conditioned rate while dropping dependence on the recipient S. This is a
+mathematical intervention, not an estimated native controller selected for training.
+
+Direct expansion, requiring no independence between C and S, gives
+
+    Delta_total = V_online - V_independent = Cov(p, A)
+                = E[Cov(p, A | C)] + Cov(E[p | C], E[A | C])
+                = Delta_new + Delta_retained,
+    Delta_new = V_online - V_retained,
+    Delta_retained = V_retained - V_independent.
+
+Thus global calendar exchange measures total trajectory alignment in this model, not just
+new-observation value. This is an exact local identity, not a decomposition of a 256-tick
+calendar-exchange experiment: wholesale exchange changes later histories, eligibility and
+joint-agent interactions. Summing this expression over logged baseline rows does not identify
+the full-episode intervention. An independently observed donor calendar is exogenous to the
+recipient initially, but its later state is naturally affected by the imposed choices.
+
+Take C and S independently uniform on {-1,+1}, KEEP value zero, and terminal END value A.
+The following expectations are exact fractions; no sampled score or learned fit is involved.
+
+| Example | p(END) | A | END rate | Delta_total | Delta_new | Delta_retained |
+| --- | --- | --- | ---: | ---: | ---: | ---: |
+| Only new observation matters | (1+S)/2 | S | 1/2 | 1/2 | 1/2 | 0 |
+| Only previous-command information matters | (1+C)/2 | C | 1/2 | 1/2 | 0 | 1/2 |
+| Both contribute | 1/2+(C+S)/4 | C+S | 1/2 | 1/2 | 1/4 | 1/4 |
+| Contributions cancel | 1/2+(C+S)/4 | S-C | 1/2 | 0 | 1/4 | -1/4 |
+
+In the second row, C can be an internally generated good/bad previous command and S can be
+irrelevant noise: no changing external task signal is needed. This still is a form of
+state/history-dependent timing. It specifically refutes equating a positive exchange gap
+with useful *new environmental information*, not all forms of adaptive renewal. The first
+two rows have identical online return 1/2, independent-calendar return 0 and END rate 1/2.
+In the fourth, online and independent returns both equal zero, while retained-only return
+is -1/4. A zero net exchange gap therefore need not mean the new observation is useless.
+
+Each gate can be embedded in a two-tick legal commitment episode: forced fresh first,
+one eligible KEEP/END choice second, then termination. Donor swapping preserves the entire
+calendar distribution. This tiny model removes learned features, recurrent optimization,
+state-occupancy feedback after the choice, decentralized teammate coupling and training-time
+exploration. It proves a non-identification possibility, not that either mechanism occurs
+in a UAV checkpoint. F already supplies a state-independent short hold construction; these
+examples introduce no random-hold baseline.
+
+### A likelihood error can create credit for a parameter that cannot affect return
+
+This second example addresses the owner's correlated-noise constraint quantitatively. For
+fixed |rho|<1 and unit marginal variances, let
+
+    a0 = mu0 + epsilon0,
+    a1 = mu1 + rho*epsilon0 + sqrt(1-rho^2)*epsilon1,
+    epsilon0, epsilon1 independent standard Normal.
+
+The terminal reward, delivered after both actions, is a0. Hence J=mu0 and its true gradient
+is (1,0). Use the valid zero baseline. With the correct joint/conditional Gaussian likelihood,
+E[a0 * grad_mu log p(a0,a1)] = (1,0). With the product of the two independent *marginal*
+Normal likelihoods, that expectation is (1,rho): it credits mu1 even though changing mu1
+cannot affect the reward. At rho=3/5, the spurious second component is exactly 3/5.
+
+At mu=(0,0), covariance is [[1,rho],[rho,1]], and the correct score is its inverse times
+(a0,a1). Taking its product with reward a0 uses only E[a0^2]=1 and E[a0*a1]=rho, proving the
+claim by second moments. The wrong marginal score uses the identity matrix instead. At the
+start of a PPO update its ratio is one, so clipping cannot repair this already wrong score.
+This does not assert the same bias size for UCOPE; it is a concrete counterexample to using
+an independent likelihood merely because each correlated action has a Normal marginal.
+
+The check separately differentiates the explicit conditional Normal log densities in Torch,
+using two-node Gaussian quadrature per independent innovation. The reward-times-score terms
+are degree-two polynomials, so those four integration points recover the Gaussian moments
+exactly (up to Float64 arithmetic). They are not a discrete replacement behavior distribution,
+Monte Carlo episodes or a training batch. No tanh is needed for this counterexample; an actual
+tanh policy must additionally keep the correct transformation convention already stated above.
+
+### Interpretation update and decision
+
+Strengthened: calendar exchange is a narrowly defined deployment substitution test. Its
+marginal scheduling match is useful, but a positive gap can reflect previous-command filtering
+and a zero gap can hide offsetting information contributions. The earlier caution about
+attribution now has an explicit pair of indistinguishable models and a cancellation example.
+The frozen replay implementation remains valid for its original operational intervention.
+
+Weakened: spending a native diagnostic solely to decide whether the newest environmental
+observation is useful. The proposed global exchange does not identify that question. I retain
+it as an optional answer to "can an external calendar replace this whole online gate?", and do
+not select the previously costed native panel on the strength of this derivation. This is an
+information-value decision within this temporary problem, not an owner permission requirement.
+
+A genuine new-observation comparison would need a justified retained-information control or
+an explicit one-decision counterfactual design. Exact matching on a continuous GRU/history is
+not available for free: naïve binning, nearest-neighbor donor selection or fitting a control on
+the final panel changes the estimand and exposure. No such uncosted native control is adopted.
+B03 already asks a practical R-versus-scalar learning question; this temporary work does not
+append arms to it. The new-observation/retained-history decomposition is not a third K claim.
+
+For FSD, a skill sampled independently of the state can still produce coherent low-level
+behavior. With a frozen mode mean m_z held for two ticks and independent residual noise e_t,
+Var(a0+a1)=4 Var(m_z)+2 Var(e), against 2 Var(m_z)+2 Var(e) with independent mode resampling,
+under independent zero-mean mode/noise draws. Per-tick variances agree. This bridge concerns
+exploration/representation without learned skill selection; it neither diagnoses CF's input
+hazard nor replaces FSD's own prospective repair. The FSD source update makes such separation
+more relevant while reducing any basis to describe its current standing as learned timing.
+
+Verification: the new exact-identification suite passed 22 tests in 1.14 s under the
+configured scientific interpreter. Independent enumeration of world pairs and realized
+KEEP/END choices checks the exchange expectations; unequal group masses check conditional
+weighting; explicit conditional-density autograd checks the separate Gaussian moment formula.
+The earlier 25-check replay suite concerns unchanged code and is not recast as new research.
+
+Independent read-only review found no material issue in the covariance decomposition, four
+examples, conditional weighting, Gaussian scores or the stated identification limits. It
+recognized the pair/branch enumeration and conditional-density autograd as independent
+arithmetic checks and reused the recorded test evidence; it did not reverify FSD history or
+run native evaluation. I accept this continuation within its fixed-decision mathematical
+scope. No new fit, checkpoint evaluation or native experiment is selected or executed.
