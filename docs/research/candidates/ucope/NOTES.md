@@ -2074,3 +2074,169 @@ The next empirical choice needs a concrete learner/representation prediction or 
 materially different comparison; no recurring status check, automatic extra seeds or
 pretend producer is created to fill the remaining time. No owner pause, archive decision
 or claim that the direction has no opportunity is inferred from this boundary.
+
+
+## 2026-09-20 — selected B05: frozen-policy mean-agreement deployment
+
+The owner asks to continue the research flow. I select a concrete lawful reuse rule and a
+finite native deployment comparison, rather than another unconstrained opportunity oracle
+or a new training recipe without a specific prediction. This selection follows the
+randomized-contrast analysis above: the missing issue is useful native behavior, not a
+missing gate score. The source scan found no prior executed mean-agreement KEEP/END rule.
+The historical [P85 mean-deployment result](UCOPE_UAV_MEAN_VELOCITY_RENEWAL_B01_P85_RESULT_EVIDENCE_20260909.md)
+did find G_mean minus G_sampled = -0.0565540683 in one older fitted instance. That is contrary
+evidence against blanket removal of sampling, not a result for these B04 checkpoints or
+for selective command reuse; P85 is not reopened or pooled.
+
+### Question, concrete rule and competing prediction
+
+Can the already trained B velocity controller benefit from keeping its previous command
+only when that command is still close to its current feedback-dependent preferred action,
+and can that complete deployment rule beat the current ordinary controllers? This uses
+only existing local recurrent features, own previous command/eligibility and actor parameters.
+It gives the gate no global reward, assignment, future outcome or extra observation.
+
+For eligible agent i, let m=tanh(mu_i) be the current policy center, sigma the existing
+clamped Gaussian scale, and a_previous the actual previous normalized command. Define
+`D_keep = sum_j (a_previous_j-m_j)^2` and
+`D_fresh = sum_j E[(tanh(mu_j+sigma_j*Z)-m_j)^2]`, Z standard normal.
+The selected deterministic rule C keeps iff D_keep <= D_fresh, otherwise it draws a fresh
+command from the unchanged tanh-Gaussian actor. Forced-fresh ticks and the maximum two-tick
+hold follow B's existing law; every tick still updates the GRU. The expectation is an
+algorithmically fixed 64-node Gauss-Hermite calculation in float64 from the actor's FP32
+outputs; actions and the actor remain CPU FP32. It is a fixed proxy, not a native Q estimate.
+There is no threshold, temperature or quadrature sweep selected from returns.
+
+In a one-decision quadratic command-loss reduction centered at m, this rule selects the
+better of exact copying and the existing fresh-command law. Native utility need not have
+that shape: service/interference/assignment are coupled and nonquadratic, the learned center
+need not maximize native Q, boundary clipping changes motion, and branch choices alter
+later history. Those are the strongest alternatives to a useful rule. The native prediction
+is a positive C-minus-B deployment effect and a positive C-minus-G_sampled practical
+contrast, not merely smaller command distance. G_mean tests the simpler possibility that
+ordinary mean execution suffices; its prior adverse instance stays visible. Behavioral
+proxy/count measurements show which rule executed and do not establish the reward mechanism.
+
+### Fixed population, exposure and reading
+
+Object **UCOPE_MEAN_AGREEMENT_DEPLOYMENT_B05** uses all three B04 endpoint pairs at masters
+**8931, 8932, 8933**, without choosing checkpoints from their scores. The selected arms per
+pair are **C** (B actor plus the rule above), **B** (original learned scalar stochastic gate),
+**G_sampled**, and **G_mean** (ordinary G with fresh tanh(mu) each tick). B and C share exactly
+the same frozen actor parameters; the two G modes share exactly their G parameters. Actor
+histories and phases evolve separately under each deployment. No optimizer, critic fitting,
+checkpoint modification, new initialization selection or retraining occurs.
+
+Each arm receives **64 new 256-tick worlds**. Per master, base=100000*master; world addresses
+are base+30000+episode for episode 0..63, disjoint from B04 training/final worlds. A fixed
+slot tensor of standard normal innovations is generated with a private Torch CPU generator
+at base+80000+episode, indexed by primitive tick, UAV and action coordinate, and shared
+across stochastic arms for coupling. B's gate uniforms use base+85000+episode, likewise
+fixed by tick/UAV. C and G_mean use no gate coin. This preserves each arm's conditional
+law while preventing one branch's draw count from shifting later slots. It does not promise
+reproduction of B04's old sampled trajectories. Each episode resets the complete local
+history and environment. The native environment, team objective J and information rights
+remain those of B04.
+
+Total new work is **768 evaluation episodes / 196,608 native team steps, zero new fits and
+zero optimizer updates**. The six inherited B04 training fits remain development exposure;
+these are post-selection, fixed-checkpoint deployment effects, not independent learning
+replication or confirmation. This is the **second and final new native exploration batch**
+in the original window. The six remaining fit slots are left unspent; this selection does
+not reserve a later third native batch or replenish any allowance. Source/model reasoning
+may continue, but follow-up training after reading B05 is not selected by this entry.
+
+Primary practical endpoint: every master's paired C-minus-G_sampled world vector and mean,
+then the descriptive three-master mean/range. Required accompanying contrasts are C-minus-B,
+C-minus-G_mean and G_mean-minus-G_sampled. Report all four arm vectors, conditional world-
+panel SEs and all signs; world rows are not extra independent training instances. No pooled
+historical mean, equivalence verdict or new MEI rule is introduced. Consistent positive
+contrasts against both ordinary modes and B would retain this concrete rule for future
+learning consideration; a B-only gain does not establish a practical advance, and mixed or
+adverse effects supply no automatic extra panel. Even a useful C-B effect does not separate
+state selection from changed average renewal rate or induced visitation.
+
+Use configured local_linux, CPU FP32, one Torch/BLAS thread per invocation. Three independent
+checkpoint-pair invocations may run concurrently after actual-node admission. The inherited
+B04 total wall gives only a rough planning scale; allow an ordinary 1800-second observation
+watchdog per invocation and report actual wall/CPU/peak RSS. Preserve any accepted handle or
+partial failure; never repeat an uncertain invocation. No deliberate shared-browser action,
+Pro question, FSD work, main merge or other direction is part of this batch.
+
+### L0: bounded frozen-policy evaluator
+
+Owned new paths: `experiments/candidates/ucope/mean_agreement_deployment_b05/`,
+`scripts/run_ucope_mean_agreement_deployment_b05.py`, and matching tests under
+`tests/experiments/candidates/ucope/mean_agreement_deployment_b05/`. Existing B04 and native
+policy/environment/learner code remain reference/reuse sources. The CLI has the three fixed
+master choices and an output/launch-sha contract; it calls require_admission before output,
+checkpoint loading or native effects. There is no production fixture or exposure override.
+
+Read the committed `runs/ucope/scalar_feedback_b04_<master>/checkpoints-and-console.tar.gz`
+archive at its already recorded digest, extract only B_final.pt/G_final.pt in memory, and
+validate object, arm, master, 2048 training episodes and 4096 optimizer-step metadata before
+use. Record each archive/member digest in the runner summary. No checkpoint is loaded from
+an unverified path and no archive is unpacked into another checkout.
+
+Save config/source/admission/summary, all episode rows and compressed primitive arrays needed
+to reconstruct team returns, actual commands, eligibility/branches and C's proxy decisions.
+Report unchanged actor digests before/after, zero parameter movement/optimizer updates,
+actual counts, policy definitions, inherited selection exposure and scoped resources. Keep
+partial outputs and errors. Tests cover the command rule and ties/forced ticks, independent
+histories, both G modes, fixed-slot noise, checkpoint validation, immutable weights, raw
+contrast reconstruction, incomplete publication and admission-before-effects. Use the
+existing synthetic adapter only inside the test API. Independent engineering review and
+DM acceptance precede published-input admission; no native smoke is added.
+
+### B05 independent design critique and numerical proxy check
+
+The independent ResearchCritic found **no material scientific objection** to this bounded
+four-arm deployment test. I accept its scope precisions before execution: C-minus-B is a
+joint-policy intervention across agents and time, not evidence for a positive one-decision
+A(X) or a reward mechanism mediated by command distance. The quadratic reduction uses an
+exact expectation; implemented C is the fixed GH64 approximation to that rule. New panel
+SEs describe world and policy-randomness variation conditional on the inherited checkpoints,
+not a newly trained population. Current-slot Gaussian noise must stay independent of the
+predecision history, and C must decide from its expectation without inspecting that realized
+sample. Coupling by fixed slots does not promise variance reduction.
+
+A source-critical comparator invariant is now explicit: **G_sampled and G_mean pass phase
+zero at every primitive tick**. Only B/C use fresh-to-eligible and KEEP-to-forced transitions;
+using B/C eligibility for G would change its original observation law. The Implementer has
+this invariant and a corresponding fixture-test requirement.
+
+A read-only numerical check of all three frozen B parameter sets found Gaussian scales
+0.97636 to 1.05247. The GRU-bounded mean-head row-L1 bounds were at most 5.38913. At 101
+mean values per coordinate spanning those bounds, fixed GH64 versus GH256 differed by at
+most 5.228e-9 / 2.680e-9 / 7.559e-9 per-coordinate expectation for 8931/8932/8933. This
+checks sampled numerical accuracy of the already fixed approximation; it is neither a
+continuous-domain error bound nor proof of identical decisions at arbitrarily close ties.
+No actor rollout, native world, optimizer update or policy/quadrature selection occurred.
+
+### B05 engineering acceptance before native execution
+
+The Implementer returned only the three assigned new code/test paths, with no native
+execution, git-index mutation or notebook edits. I read the evaluator, entry, tests and
+original B/G command/feature/environment callers. The independent engineering Reviewer
+reported **no material finding** and requested no repair. I accept this implementation for
+the selected batch. The 15 focused synthetic tests passed in 0.43 seconds; compilation and
+diff checks passed. The existing runner-admission contract check, now including B05, passed
+2 tests in 0.10 seconds. The production loader also verified all three fixed B04 archives
+and six checkpoint members without running a policy or native episode.
+
+The accepted path checks admission and launch SHA before scientific imports/output, validates
+archive bytes and checkpoint metadata, keeps G phase zero, updates all four independent GRUs
+every tick, and emits per-world and primitive records. The source fixes private slot addresses
+and computes C's proxy before using the current innovation. No optimizer, critic evaluation
+or fitting occurs. Existing actor-template helpers do construct unused critic modules;
+that incidental construction is not an evaluation or learning update. Actor before/after
+hashes and measured parameter movement will verify frozen execution in the actual run.
+
+Native behavior remains unverified until the admitted batch. The 1800-second cooperative
+watchdog checks around environment steps but cannot preempt a step that never returns;
+accepted process handles and native status remain the observation boundary. This is a
+coverage limit, not permission for a duplicate or another native smoke. Actual-node memory,
+current canonical pause/lead, exact published source and duplicate claims are checked by
+the admission kernel immediately before each of the three launches. Canonical lead text
+is still `Codex DM`; that names this owner-assigned direct DM and is the expected launch
+lead, even though the branch index spells out `Codex session (direct DM)`.
