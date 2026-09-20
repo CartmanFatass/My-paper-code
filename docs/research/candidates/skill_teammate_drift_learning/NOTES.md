@@ -1330,3 +1330,84 @@ within-condition paired data, preserved default path and literal native admissio
 DM implements this small, already-understood extension; an independent Reviewer
 checks the changed scientific and launch paths before publication/execution.
 No B01/B02, shared launcher, Claude coordinator or B08 edits.
+
+## 2026-09-20 — Complete Pro answer read; B adoption and B04 review acceptance
+
+**Answer identity and source use.** The DM read all 474 lines of the completed
+umbrella chat answer supplied by Root at
+`/home/fires/.codex/worktrees/fac0/hmasd-wsl/temp/pro_transport/abc-admission-conditions-20260920.answer.txt`.
+No GitHub Answer commit was claimed. The initially different hashes were
+reconciled, not resent: the driver hashes the answer string without the one LF
+added on file write, SHA256
+`35ace3a0d98a55c311a28f6eb56d212752c02467f80bb783b757bc2ac013b8b3`;
+the complete disk bytes hash to
+`0b11d7216f66daea006f943a239aea6237d2a20f3fca4b2c6f21fb803df2a429`.
+The DM reproduced both, including removing only that final byte for the first
+hash. Root retains the complete fallback answer in the existing consultation
+record. This entry addresses only B; it does not adopt decisions for A or C.
+
+Pro explicitly reasoned from B input `7435fec3191926b61186ad7f97c39c182d10e932`,
+where B03 had not run. Its prospective "learning value remains untested" is
+therefore correctly time-scoped, not contrary evidence to later result commit
+`c96aed19f7050c12d0d58b14edc128787bf2e480`. Pro did not independently revalidate
+all B raw arrays; its static code/source reading is advice, not another experiment
+or engineering acceptance. No completion or source claim is inferred beyond
+what the answer actually says.
+
+**Adopt.** First, describe the useful distinction as representation/use of old
+experience, not old experience being inherently unusable. Success means old
+joint outcome records remain useful under the stated invariant response.
+Second, the scheme is ordinary conditional regression; an identical five-cell
+regression under a new baseline name would add no information. B03's six arms
+remain exactly as run. Third, retain first-64 pre-update native performance
+against saturated full/recent fingerprint and additive, alongside MAE—not MAE
+as a substitute endpoint. B03's actual reading now supplies that finite-learning
+observation; Pro's agreement adds no replication. Its predicted source 11-cell
+count 163.84 is a design expectation; actual B03 counts are 169/149/161, not an
+exact target or a selection filter.
+
+**Adopt the limits and sharpen attribution.** Current joint outcome law must be
+known/identified, and the response given skill/outcomes must stay invariant.
+Unknown completion correlation or a changed reward conditional would invalidate
+the simple integration argument. Neither B03 nor frozen B04 tests these cases.
+Additive and saturated models have different prior geometry, so outperforming
+additive is an actual package comparison consistent with decision-relevant
+joint structure, not an isolated causal effect size of adding one interaction
+coefficient. Keep B02's failed IS comparison and B03's late baseline catch-up.
+Do not infer endogenous co-learning, general replay correction, current-PPO
+defects or HMASD/UAV utility.
+
+**Verified references.** I reopened the primary originals, rather than treating
+Pro's rendered citation labels as verification. Foerster et al. section 4.1,
+equations 3–7 and its page-5 partial-observation caveat support the full-state
+factorization and warn that extra history-dependent terms remain; section 4.2
+conditions fingerprints on the replayed policy trajectory. This supports a
+bounded analogy, not B03's finite-sample result. [PMLR original](https://proceedings.mlr.press/v70/foerster17b/foerster17b.pdf).
+HIRO appendix A separates likelihood-based goal relabeling from high-variance
+direct IS and reports its tested-domain difficulty; it is not B03's terminal
+conditional-regression algorithm. [Original appendix](https://arxiv.org/pdf/1805.08296).
+The two reward-table equality/opposite-action numbers were already independently
+checked in the B03 algebra and tests. These source checks leave the earlier
+scientific interpretation intact.
+
+**Modify/reject any stronger reading, not the advice's actual scope.** Pro's
+recommendation to keep the existing B03 comparison applies to its pinned,
+pre-result question; it does not prohibit a separately motivated support-boundary
+diagnostic after B03 is read. B04 had already been prospectively frozen before
+this answer arrived, and Root explicitly directed that advice not alter it.
+No extra arm, retuned threshold, additional B03 seed, unknown-law architecture,
+confirmation claim or adviser-approval gate is added. I reject treating
+adviser consensus as empirical evidence or treating ordinary-method identity
+as a reason to suppress its measured finite-use value. No material B-specific
+recommendation needs a scientific-design change. B remains exploring with a
+bounded positive bridge and the already declared B04 falsifier.
+
+**B04 executable acceptance.** Independent Reviewer checked published
+`33add1138e6aa70098ec534c0b81af4f9fc9608f` against `c96aed19f` and returned no
+material finding. It verified exact fixed permutation/marginal preservation,
+unchanged targets/RNG/learners/physics/evaluation, four-arm mapping, one descriptive
+SVD on actual cooperative source rows (including empty design), first pre-update
+target diagnostics and preserved admission/retention behavior. Its independent
+focused suite was **40 passed in .33 s**, clean diff/checkout. DM accepts; this
+is not native admission or a scientific result. Next action is the frozen 12-fit
+native batch, with fresh actual-node checks and no change to B04's contract.
