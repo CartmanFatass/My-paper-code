@@ -287,3 +287,99 @@ engineering reviews and the scientific criticism in full, accept the implementat
 this verified diagnostic repair, and select the declared single-fit C01 execution. Source
 identity, native process and output location will be retained by its launch manifest; test
 success is not scientific support for the timing hypothesis.
+
+## 2026-09-20 — C01 accepted execution
+
+Native admission accepted the frozen C01 request at 13:50:52 UTC after checking current
+canonical direction/lead and fresh local-node memory. Its
+[launch manifest](../../../../runs/skill_information_refresh/c01_s73141_20260920/launch-manifest.json)
+retains source, invocation, process identity and output paths; the sibling admission-preflight
+and later process-exit records retain the native checks. DM observes this same operation
+directly; no observer transfer, duplicate invocation or expanded batch. Training and collection
+are in progress at this entry. Acceptance is technical, not a read scientific result.
+
+## 2026-09-20 — C01 read: trained execution recovers the simple clock
+
+The accepted operation exited zero. I read the runner
+[summary](../../../../runs/skill_information_refresh/c01_s73141_20260920/summary.json), complete
+episode/update streams, selected baseline and final traces. All declared exposure completed:
+4,096 training episodes/393,216 transitions, 512 optimizer steps, 64 initial episodes,
+2,304 rule-selection episodes and 1,024 final episodes; 718,848 total team transitions.
+Every final arm has all 256 world IDs, 96 ticks, 14 jobs and exactly 24 packets/192 bytes per
+world. Evaluation updates are zero. Actor displacement is 2.38828349, critic 4.15770912,
+all 3,778 parameters finite. This is a real learning attempt, not nonactivation. Cost: one
+started fit, local_linux; runner wall 19.738879 s (training 12.728538 s), approximately 21.49 s
+from native acceptance to child exit including scientific import/start overhead. Peak RSS
+306,756 KiB is the single scientific child; user/system CPU 19.735485/1.762812 s. Queue/control
+publication time is not included in that process wall. No GPU usage or speed claim.
+
+| Final 256-world mean | LEARNED | Selected AGE_CHANGE | PRE_DECISION | POLL |
+| --- | ---: | ---: | ---: | ---: |
+| Completed-job fraction | .944196429 | .944196429 | .899553571 | .944196429 |
+| Physical conflicts/episode | .1484375 | .1484375 | .43359375 | .1484375 |
+| Wait ticks/episode | 6.80859375 | 6.80859375 | 1.82421875 | 6.80859375 |
+| Gate disagreement/opportunity | .255621757 | .255621757 | .136212625 | .255621757 |
+| BYPASS choices/episode | 2.21875 | 2.21875 | 2.453125 | 2.21875 |
+
+The development winner was `delta1_age8` (.950613839); every age-8 variant tied it.
+`delta1_age12` and `delta1_ageoff` scored .949776786; other variants ranged .938616071–.944754464.
+Thus nonpolling variants were actually evaluated, not silently omitted. Final LEARNED sends
+in the first eligible slot of every frame, just as the selected rule and POLL do. Direct
+array comparison finds **all final sent masks, choice masks, legal features, physical states,
+delivered caches/timestamps and world IDs identical** across those three arms. All 256 primary
+LEARNED-minus-AGE_CHANGE differences are exactly zero. This is observed execution identity on
+this panel, not statistical equivalence or a population zero effect. The trained greedy policy
+has no executed state-sensitive timing increment here.
+
+Relative to PRE_DECISION the conditional mean difference is +.044642857, with 89 positive,
+13 negative and 154 tied worlds. That contrast is shared equally by the no-learning POLL rule;
+it is not a learned communication advantage. Its larger gate disagreement and extra waiting
+alongside fewer conflicts/higher service contradict a monotone “closer to full-snapshot gate
+decisions means better return” reading. The diagnostic compares different encountered states
+and is not an upper bound or mediator; I will not optimize that proxy as if it were the task.
+The training curve rises descriptively (successive 512-episode means .896066, .909877, .918945,
+.925502, .929269, .928571, .935965, .924386), but final-world gains cannot be inferred from
+the initial .869420 mean on a different 64-world panel.
+
+Working update: **complete-package incremental value is weakened**—the trained policy pays
+training cost to reproduce a no-learning rule. The predicted state-sensitive redistribution
+and improvement over the informed primary did not occur. **Task opportunity** for timing
+matters conditionally (clock policies differ), but useful private-context opportunity beyond
+POLL remains unresolved. **Representation** has a verified lawful action path; that does not
+show the policy used it beyond a public clock. **Finite learning** is active but its final
+readout learns a simple schedule; one initialization does not establish inevitable collapse.
+The pre-recorded public-clock alternative is strengthened. CADC's adverse result remains an
+independent constraint on its different package, unchanged by these numbers. No UAV, current
+HMASD skill-content, adaptive-termination, novelty or population claim follows.
+
+## 2026-09-20 — C02 prospective recurrence check, same idea and unchanged code
+
+Select a small independent repetition to change the unresolved *recurrence* judgment, not to
+rescue the mean or search a new architecture. C01's greedy execution exactly matching POLL is
+stronger than an ordinary small score difference; whether another initialization/world history
+does the same changes whether another learned refinement in this host is worth considering.
+The measured complete path is about 22 s per attempt, making two independent histories a
+proportionate direct observation. C01 remains fully read with its zero primary; this is a new
+prospective batch, not an extension of its 256-world panel or a renamed failed idea.
+
+Run the unchanged accepted C01 program at master seeds **73142 and 73143**, sequentially on
+local_linux. Two new started fits planned. Each retains 4,096 x 96 training transitions,
+512 optimizer calls, 64 initial, nine x 256 development-rule and four x 256 final episodes,
+the same final greedy extraction, route/channel law and primary LEARNED-minus-selected-AGE_CHANGE.
+Total new exposure: 1,437,696 team transitions and 1,024 optimizer calls; no tuning changes,
+new arms, checkpoint selection, stochastic-policy rescue evaluation or further seeds selected
+after scores. Approximate process occupancy 45 s follows C01, not a hard deadline or entitlement.
+Each seed gets fresh model/action/environment streams and its own disjoint development/final
+panels. Within a seed all final arms share the declared exogenous world addresses; across seeds
+there are independent training histories. Fixed rules still have zero learning updates.
+
+Prediction being checked: the finite learner again executes the simple first-slot clock and
+therefore offers no increment over a competent selected rule. Read each seed's actual sends,
+state/return differences and learner movement, then report all three exploratory histories
+including C01; do not pool their evaluation worlds as extra training n. If a new history
+executes context-sensitive timing with useful return, the recurrence explanation weakens and
+the saved lawful traces can discriminate it from a different fixed periodic schedule. If the
+same simple solution recurs, retain the simple rule and stop spending fits on this unchanged
+learned package; a successor would need a different, explicit information-value question,
+not merely more training or a new initialization. These are exploratory readings, not a
+confirmation batch or a prewritten population-equivalence test.
