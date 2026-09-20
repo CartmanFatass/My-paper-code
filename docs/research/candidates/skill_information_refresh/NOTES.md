@@ -383,3 +383,123 @@ same simple solution recurs, retain the simple rule and stop spending fits on th
 learned package; a successor would need a different, explicit information-value question,
 not merely more training or a new initialization. These are exploratory readings, not a
 confirmation batch or a prewritten population-equivalence test.
+
+## 2026-09-20 — C02 accepted, collected and read: contextual timing, negligible observed net gain
+
+The two prospectively fixed C02 histories ran sequentially at published source
+`118d8bc391c0e9acafc054ed16a8899ccd795de9`. Native local_linux admission checked canonical
+main `b254ed1ea86cf8c39d925d87ded4fee368c5e0a1`, the current lead/pause and actual-node memory.
+The [73142 manifest](../../../../runs/skill_information_refresh/c02_s73142_20260920/launch-manifest.json)
+records acceptance at 13:58:12.359732 UTC, runner 2283929 and supervisor 2283928; the
+[73143 manifest](../../../../runs/skill_information_refresh/c02_s73143_20260920/launch-manifest.json)
+records acceptance at 13:59:09.109857 UTC, runner 2285644 and supervisor 2285643. Both original
+operations exited zero with valid process-exit witnesses and consistent native records.
+The DM retained observation of those handles; neither operation was duplicated or rebound.
+Both terminal states preceded this whole-batch outcome reading.
+
+I read both summaries, complete episode/update streams, rule selection and saved final traces.
+Each completed the declared 4,096 training episodes/393,216 team transitions, 512 optimizer
+calls, 64 initial episodes, 2,304 selection episodes and 1,024 final episodes: 718,848 total
+team transitions per history. Each has 7,488 episode rows and 512 finite update rows, with
+zero evaluation updates. All final arms retain 256 unique matched world IDs, 96 ticks,
+14 job opportunities and exactly one eight-byte packet per sender per eight-tick frame:
+24 packets/192 bytes each world. All four trace sets are finite. The initial/final checkpoints
+agree on source/seed and all 3,778 final parameters are finite. Actor displacements are
+2.00846004/1.72397602; critic displacements 3.86843610/3.92253280.
+
+Cost is **two new started fits**, not a quota allocation. Runner wall is 15.015690/14.676739 s
+(training 9.456738/9.354606 s); acceptance-to-child-exit 16.418754/16.108145 s. Peak RSS is
+306,344/306,580 KiB per scientific child, not aggregate node occupancy. User/system CPU is
+15.207562/1.679928 and 15.151713/1.444166 s. These exclude the earlier queue/control/publication
+path; the two child processes were sequential and used no GPU. C01 plus C02 now represent
+**three exploratory training histories**, 12,288 training episodes/1,179,648 training team
+transitions and 2,156,544 total team transitions. The 768 final worlds are not training n=768.
+
+| Final mean / contrast | 73142 | 73143 |
+| --- | ---: | ---: |
+| LEARNED completed-job fraction | .949776786 | .946986607 |
+| Selected AGE_CHANGE = POLL | .949218750 | .946707589 |
+| PRE_DECISION | .908482143 | .907087054 |
+| Primary LEARNED minus selected AGE_CHANGE | +.000558036 | +.000279018 |
+| Positive / negative / tied final worlds | 6 / 10 / 240 | 8 / 13 / 235 |
+| Net additional completed jobs / 3,584 opportunities | +2 | +1 |
+| LEARNED versus POLL total conflict difference | -6 | -8 |
+| LEARNED versus POLL total wait-tick difference | +320 | +489 |
+| LEARNED versus POLL total BYPASS-choice difference | +154 | +181 |
+
+The independent development panels both selected `delta1_age8`, with selection means
+.950055804/.948939732. All age-8 variants tied; the six nonpolling variants were actually
+evaluated and ranged .933314732–.946149554 and .934430804–.946986607 respectively. On each
+final panel the selected AGE_CHANGE and POLL have identical executed sends, choice masks,
+legal features, physical state, delivered caches/timestamps and world IDs. Their raw
+requests sometimes differ after a frame's packet has already been spent; those requests
+have no effect. Execution identity is not identity of unused network/rule outputs.
+
+**The recurrence prediction failed.** Both new learned policies execute a different send
+schedule from POLL in every final world. There are 245/235 distinct full schedules and
+31/37 absolute time slots at which some worlds send and others do not, although clocks,
+identity and remaining horizon agree. This cannot be described as merely another fixed
+periodic clock. At tick 8, for example, all 256 worlds still have the same prior first-frame
+schedule and a legal choice. Seed 73142 sends for all 58 APPROACH and 33 CROSSING senders but
+for none of the 165 DONE senders; seed 73143 sends for all 73 APPROACH senders and none of
+the 14 CROSSING or 169 DONE senders. This is observed lawful contextual execution, not proof
+that a particular feature is individually causal or that receiver actionability was learned.
+Packet counts, payload, skill selector/controller, terminal law and latency remain fixed.
+
+The small aggregate primary masks opposing native outcomes, not a broad per-world advantage.
+For 73142, six worlds have one fewer physical conflict and two additional completed jobs
+each; the other 250 worlds contribute ten fewer completed jobs in total. For 73143, eight
+worlds have one fewer conflict and 15 additional completions in total; the other 248 worlds
+contribute 14 fewer completions. All worlds with fewer completions have unchanged conflict
+count and extra waiting. These are paired factual outcome associations after policies change
+their histories, not an identified decomposition into conflict, route and waiting mediators.
+In particular, more BYPASS decisions or better conflict counts cannot be credited as net
+learned value while omitting the completion losses. Higher gate disagreement accompanies
+these learned policies too; the diagnostic remains unsuitable as a monotone native target.
+
+I read the Critic's complete post-C01 answer and accept two interpretation corrections:
+C02 changes initialization, action samples and environments together, so it tests independent
+*training histories*, not initialization in isolation; execution recurrence against POLL
+and the primary against independently selected AGE_CHANGE must be read separately. Here the
+two simple arms happen to execute identically, but that was not guaranteed by the protocol.
+The Critic also verifies that initial negative actor logits are guaranteed by bounded tanh,
+final-row norm .01 and bias -1.1 (maximum logit <= -1.1 + .01 sqrt(32) < 0). All 64 initial
+episodes per history indeed send only through the 24 forced slots. The learned behavioral
+change is real. Different initial evaluation worlds still preclude claiming a same-panel
+return gain from their means. No adviser agreement is independent empirical evidence.
+
+Working update: retract the simple-clock-collapse account as a general explanation for this
+finite learner. **Representation and finite learning** can produce legal context-dependent
+timing on this host, although C01 used only the simple clock. **Task opportunity** beyond a
+public clock is not established merely by variable schedules; useful conditional information
+must ultimately improve native completions. **Complete-package value** remains unsupported:
+observed increments are 0, +2 and +1 completions over three separate 3,584-opportunity panels,
+with training cost and opposing losses. This is neither population equivalence nor a proof
+of no worthwhile timing policy. The CADC adverse evidence, simple-baseline requirement and
+small fixed-skill host ceiling remain in force; nothing here establishes current HMASD
+learned-skill effectiveness, repaired CADC, UAV performance or novelty.
+
+## 2026-09-20 — C02 saved-trace critic: delayed release, not demonstrated useful freshness
+
+The Critic independently read the C02 saved arrays and classified the first native decision
+difference while paired physical histories still match. For 73142/73143 it finds 177/177
+within-skill gate-first worlds, 48/60 boundary-route-first worlds, and 31/19 worlds with no
+recorded physical difference. All 354 gate-first cases have robot 0 actually DONE, a still-
+valid LEARNED cache projected as SHARED APPROACH at distance zero, and POLL's cache correctly
+DONE. Robot 1 waits under LEARNED but enters under POLL and under the factual full-snapshot
+gate. The result is a read of saved states through the unchanged `project`/`gate` functions,
+not a new simulated trajectory or fit. It locates a real information-to-action entry site;
+it does not isolate the native return effect of that wait from subsequent coupled histories.
+The Critic also finds 17/23 absolute slots with both requested actions among genuinely free
+choices, so the context-dependence reading survives excluding forced and budget-masked actions.
+
+I read and accept the full critique (`MATERIAL_DISSENT: no`). It contradicts the original
+intermediate story of reducing stale gate errors: the common initial effect instead prolongs
+a stale block by withholding a release update. It leaves two materially different explanations:
+needless waiting cancels conflict benefits, or the stale block itself supplies useful
+conservative pacing. Both can produce the observed aggregate counts. No extra training is
+selected to resolve them. The next useful decision is whether a prospectively specified
+frozen-policy release intervention, available equally to the simple reference, can separate
+those explanations at the same packet quota. C02 is technically complete and scientifically
+read; such an intervention would be a new diagnostic comparison, not more C02 seeds or a
+confirmation/promotion of its tiny positive means.
