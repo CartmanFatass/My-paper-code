@@ -3218,3 +3218,42 @@ produce identical branches under shared slots. No real UAV constructor, native e
 checkpoint replay, production fit or Pro call is authorized by this L0. The Implementer
 returns a diff/checks; the DM accepts after independent high-risk review, then publishes a
 concrete pending request. Execution remains contingent on a new explicit owner allocation.
+
+### B07 engineering accepted; three-fit allocation request is now concrete
+
+The Implementer completed the owned B07 source, admission-first CLI and synthetic fixtures.
+The DM accepts this implementation after source reading and an independent high-risk review
+that reports **no remaining material finding**. No existing learner, policy, evaluator,
+environment, result root or other direction changed. The inherited ordinary endpoint has no
+optimizer or training route. The four modes and five fixed contrasts match the prospective
+reading, including Bs-minus-Gm primary and stochastic scalar gating in Bhalf_mean.
+
+Focused tests: **17 passed in 1.43 seconds**; all new source/test files compile. The tests
+exercise B-only learning/movement, independent states, fixed input mappings and overrides,
+branch eligibility/forced renewal, identical B-mode branches, zero Gaussian use by mean
+commands, zero G gate use, complete raw-panel reconstruction, fixed reductions and admission.
+Failure fixtures retain partial training/evaluation exposure, actual reset starts, completed
+rows and close errors; a pre-constructor watchdog reports no started fit.
+
+Two reachable failure-publication defects found by the DM were repaired before acceptance.
+Rejected-input provenance now serializes Path values so it can still publish an INCOMPLETE
+summary with zero fits/effects. An environment transition that returns is now counted before
+reward extraction/finite validation; the raw completion mask separately requires a valid
+reward. The invalid-reward fixture records two returned transitions and one valid primitive.
+The independent Reviewer inspected both repairs and their regression fixtures.
+
+The DM also ran **tensor-only input validation against all three actual retained B06 input
+sets**, independently rehashing the copied bytes and checking recreated initial digests,
+separate B/G storage and unchanged global Torch RNG. After final provenance checks were
+strengthened, all three actual input sets passed the final loader again. These checks used
+owned temporary scratch, which was cleaned; no model forward, environment, optimizer or fit
+ran. The Reviewer independently matched all nine fixed input hashes and final metadata.
+Synthetic checks and tensor loading establish the preparation contracts, not native outcomes.
+
+The reviewable request is now exactly **three additional Bhalf fits**, taking the owner-window
+total from **12 to 15**, with the original **2026-09-21 04:06:07 UTC** deadline unchanged.
+It includes only the fixed B07 new-world evaluation above and no replacement fits, further
+Pro call or main merge. Current actual usage remains 12; no B07 native handle has been created.
+This request is required by the owner's explicitly retained total-fit ceiling, not by a rule
+that research stops at the end of an experiment. B06 interpretation, the temporal-model
+critique and the cheaper conditional B07 design have all continued within that boundary.
