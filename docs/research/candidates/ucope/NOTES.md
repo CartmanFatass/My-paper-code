@@ -4788,3 +4788,87 @@ steps and synthetic optimizer updates; do not promote their scores to research e
 Independent Reviewer examines checkpoint/RNG/evaluation semantics; DM accepts the diff.
 Stop this implementation at tested/reviewed components and a published notebook acceptance,
 without inferring that scientific training is authorized or that a skill object is settled.
+
+
+## 2026-09-20 22:59 UTC — Accepted evaluation and checkpoint components; scientific gate batch remains paused
+
+**DM acceptance.** The preceding L0 produced two bounded components on the existing
+termination branch: evaluator `6365c72557a3eb93b32357241645c20633e549d0` (short
+`6365c7255`) and gate checkpoint `2b76fc3a9b19ef7f2394d61af062a5dc620970f2`.
+The DM read the source and checks and accepts the implementation. The independent
+Reviewer found no material finding in the combined `0eaca9744..2b76fc3a9` diff,
+reusing the reported checks and adding no execution. No Claude-owned or shared
+learner/runner/result path changed. This is future FSD termination preparation, not
+another UCOPE result.
+
+The L0's heading says 22:46 UTC; that was a timestamp transcription error. Its
+commit `0eaca97445147168a901cefab8c83d79c21ed6a7` is timestamped 22:44:05 UTC and
+the post-publication clock read 22:44:08 UTC. The prospective scope preceded all
+checks; this append-only correction preserves the published entry.
+
+**What is ready.** `evaluation.evaluate_episode` gives as_trained (F), R10
+(uniform_every_10), J and I the same separate evaluation worlds, seeds, finite
+horizon and native objective. Native J is agent count times adapter return divided
+by horizon. It reuses B08's execution-rule and label-generator definitions read-only:
+R10 draws its private stream every tick and applies labels only at the original
+clock decisions. Those two definitions were checked structurally equal to
+`main@9ade17337`; the local script remains recoverable in this branch. Primitive
+actions, J/I masks and their selector are deterministic; R10 label draws remain
+random. Executed label changes and decision queries are counted separately.
+GRU state carries through END, and temporary hooks/wrappers and caller RNG are
+restored even after a controlled failure. Actual returned native steps survive
+failure reporting.
+
+`save_gate_checkpoint` / `load_gate_checkpoint` preserve actor/critic tensors,
+both Adam states, gate/private-policy/shuffle streams, and completed episode/update
+counts. Load requires exact intended arm/mode, foundation digest, source SHA,
+feature/rule metadata, architecture and PPO configuration, and returns fresh
+objects. It refuses binding mismatches and malformed tensor/Adam states without
+mutating a live learner. The format uses tensor/primitive data and
+`torch.load(weights_only=True)`. This is the current CPU gate format, checked
+on the current float32 learner; it restores gate-owned state at completed
+episode/update boundaries, not native environments, foundation/global random
+streams or mid-episode GRU state. It does not independently authenticate a
+foundation artifact or implement result admission/publication. Future binding must
+include actual feature/collection rules, including horizon and GAE settings;
+a declared digest alone is not verification of an artifact's bytes.
+
+**Checks and actual technical cost.** Eighteen new distinct checks pass: eight
+evaluator checks and ten checkpoint checks. The evaluator command used the
+configured scientific interpreter and took 4.04 seconds (14 existing
+matplotlib/pyparsing warnings). Its initialized, untrained six-agent/twelve-user,
+two-lane, 20-tick fixtures used seeds 920701 (foundation), 920711 + lane (worlds)
+and 920721 (gate initialization). Eleven initialized models executed 362 native
+team steps in total: per-test 80, 80, 80, 80, 40, 1, 1, 0. Foundation and gate
+optimizer steps were both zero. The fixed path matches an independently written
+native loop exactly; initial KEEP J/I match it, and nonzero END, R10's draw cadence,
+caller isolation and partial-failure accounting are covered. Their returns are
+correctness fixtures, not scientific performance evidence.
+
+Checkpoint tests use synthetic tensors only and establish nonempty Adam moments
+before checking exact next private/gate sample and next PPO update. Development
+had six pytest invocations: 8 passed/1 failed (1.76 s), 9 passed (1.92 s),
+10 passed (2.34 s), 22 passed (1.93 s), 10 passed (1.88 s), 22 passed (1.88 s).
+The first failure was an incorrect expected actor-step count in the test;
+the assertion was corrected. The two 22-test invocations each include twelve
+existing policy checks; they are not 22 new checks. Total reported pytest time is
+11.71 s. Across checkpoint tests, 62 synthetic PPO calls executed 364 actor and
+372 critic Adam steps (736 total). The two repeated policy suites also performed
+synthetic optimizer work whose exact total was not measured; all-invocation
+optimizer work therefore exceeds 736, rather than being reported as zero or as
+the 132 steps of one final focused checkpoint run. Checkpoint work used no native
+steps or foundation forward. Final combined-check process wall was 2.70 s and
+maximum RSS 299,064 KiB; that peak describes one process, not all development work.
+No peak/scratch total was measured for the complete batch.
+
+**Scientific standing and next dependency.** This preparation adds no scientific
+fit, B08 checkpoint forward/probe, native research panel or Pro use. The previously
+accepted tiny trained foundation checks were not repeated. It supplies reusable
+evaluation and recovery components, not evidence that learned termination helps
+and not a production launcher. The six scientific J/I gate fits remain paused
+under the owner's B08 investment-order decision. The next empirical choice still
+depends on Claude's published label-to-J map and resulting object/selector
+decision; service-responsibility semantics and the limits on interpreting mixed
+versus homogeneous labels remain as recorded in the preceding entries. Any future
+comparison on this learner must retain both as_trained and R10. No new record
+system or automation is introduced, and the completed B08 follow-up remains paused.
