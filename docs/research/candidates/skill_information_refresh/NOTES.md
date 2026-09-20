@@ -713,3 +713,98 @@ information and phase-6/phase-7 selection separation, and ran six focused checks
 It returned no material finding or requested repair; unchanged C01/C03 code retains its
 accepted checks. I read the full review and accept C04 for its frozen native-admission run.
 This acceptance establishes implementation consistency only, not a scientific result.
+
+## 2026-09-20 — C04 read: a stage-only rule captures the native advantage
+
+The [C04 native manifest](../../../../runs/skill_information_refresh/c04_stage_s73151_20260920/launch-manifest.json)
+binds the published source and accepted request. Its same operation exited zero with a valid
+process-exit witness and consistent native records; DM retained observation, with no duplicate
+or rebind. I read the [summary](../../../../runs/skill_information_refresh/c04_stage_s73151_20260920/summary.json),
+all 5,120 episode rows, the twelve development variants and all eight final trace sets.
+Actual exposure is 3,072 development/294,912 transitions and 2,048 final/196,608 transitions:
+**491,520 team transitions, zero fits, training transitions and optimizer updates**. The update
+stream is empty; all three checkpoint parameter movements are exactly zero and all parameters
+are finite. All eight arms retain every common final world, 96 ticks/14 jobs and exactly
+24 eight-byte packets, one per sender per frame. All trace values are finite.
+
+Runner wall is 8.291329 s (selection 4.349858, evaluation 3.918602), acceptance-to-child-exit
+9.408551 s. Peak RSS 241,884 KiB is the single child, user/system CPU 9.058556/1.144322 s;
+the native memory admission passed on the actual local node. This is not full authoring,
+queue or publication time and no speed claim follows. Across C01–C04 the cost remains **three
+started training fits**, 1,179,648 training team transitions/1,536 optimizer calls, plus the
+recorded initial/development/frozen evaluations: 3,336,192 total team transitions. Reusing
+three trained checkpoints on more world panels never increases independent training n.
+
+Development selected `ACTIVE_FIRST` (.948381696), ahead of selected AGE_CHANGE `delta1_age8`
+(.947823661), APPROACH_FIRST (.946707589) and PRE_DECISION (.890066964). Selection occurred
+before the final panel. The final comparison is:
+
+| Final arm | Completed-job fraction | Physical conflicts/episode | Stale-release waits/episode |
+| --- | ---: | ---: | ---: |
+| ACTIVE_FIRST (selected simple) | .944475446 | .16015625 | 6.56640625 |
+| APPROACH_FIRST | .944196429 | .16015625 | 6.734375 |
+| L73141 | .941127232 | .19921875 | 4.8046875 |
+| L73142 | .944196429 | .16015625 | 6.59375 |
+| L73143 | .944196429 | .16015625 | 6.734375 |
+| Selected AGE_CHANGE = POLL | .941127232 | .19921875 | 4.8046875 |
+| PRE_DECISION | .907924107 | .40234375 | 1.4296875 |
+
+L73141/L73142/L73143 minus the development-selected reference are -.003348214/-.000279018/
+-.000279018: **12/1/1 fewer completed jobs** on the 3,584-opportunity panel. Positive/negative/
+tied worlds are 8/10/238, 0/1/255 and 0/1/255. The two contextual models and APPROACH_FIRST
+have identical per-world completion counts, not merely the same mean, and all three lose
+the same single job versus ACTIVE_FIRST in world 126. ACTIVE_FIRST versus POLL has 12 more
+completions, ten fewer conflicts, 367 extra ordinary waiting ticks, 451 extra stale-release
+waiting ticks and 159 extra BYPASS choices. Thus a parameter-free own-stage rule can produce
+the native pacing pattern and the conditional benefit attributed to contextual timing.
+
+Do not turn those counts into policy equivalence. L73142 matches ACTIVE_FIRST's full send
+schedule in only 37/256 worlds (832 different send bits), but physical state histories in
+249/256. L73143 matches ACTIVE_FIRST's schedule in 10 worlds and physical histories in 209;
+against APPROACH_FIRST its schedule matches in 143 worlds and physical histories in 254.
+Messages may move without affecting a later physical choice. By contrast, L73141, selected
+AGE_CHANGE and POLL are actually identical in the saved executed sends, legal features,
+choice masks, physical states and caches on this panel. No equality outside the observed
+panels, statistical equivalence, global optimality or stable learned-versus-rule ranking
+is claimed.
+
+**Decision: prefer the transparent stage rule on this host and stop the unchanged learned
+package/repair cycle.** The stronger simple explanation predicted additional stale-release
+waiting together with comparable native benefit, and that is observed. Legal representation
+and finite learnability are supported: two genuine trained policies do execute contextually.
+Complete-package learning value is not established once the outcome-informed but independently
+selected stage-only comparator is included. The discarded release-priority repair is an
+especially useful negative constraint: reaching a freshness-related proxy can hurt service.
+These effects are contingent on this host's fixed projection, yielding and route-selection
+laws; they are not evidence that outdated data is desirable in general or that current HMASD
+learned skills, UAV communication or archived CADC have been validated.
+
+The direction is now **idle at a scientific boundary**, not waiting for an owner ACK, a fit
+allowance, a process, an uncollected result or an adviser. No further training, rule variant,
+panel expansion or confirmation is selected for this small host. A concrete re-entry would
+be a distinct target-relevant timing question with a recorded information/receiver law and
+a prediction separating learned scheduling from the now-carried-forward stage-only null;
+it need not use a new architecture or earn a toy pass. Merely adding seeds, training longer,
+or omitting the stronger simple rule is not that new reason. Root remains the shared
+main/RESEARCH integrator; the direction's evidence and code are published on its own branch.
+
+### Final saved-trace criticism and factual correction
+
+I read the Critic's full final answer and adopt its limited closure (`MATERIAL_DISSENT: no`),
+not as another empirical replicate. Against POLL, first gate/route/no-native-difference counts
+are ACTIVE_FIRST 166/52/38, APPROACH_FIRST 174/57/25, L73142 168/48/40 and L73143 174/56/26.
+All C04 gate-first cases prolong robot 1's wait on a valid projected APPROACH-at-zero while
+the actual peer is DONE; POLL and the factual full-snapshot gate enter. ACTIVE_FIRST matches
+L73142's first-decision signature in 252/256 worlds, including 38 common no-event worlds;
+APPROACH_FIRST matches L73143 in 254/256, including 25 common no-event worlds. Their first-send
+signatures match only 221/256 and 255/256 respectively. This independent saved-trace read
+supports reproduction of the initial behavioral pattern, not identity of whole policies or
+a decomposition of return into waiting effects. C03's packet-allocation tradeoff still limits
+the causal interpretation. Preferring simplicity is not a statistical superiority/equivalence
+claim, and earlier conditional gains over POLL remain valid evidence.
+
+Correction to the earlier C02 critic entry: its phrase “all 354 ... at distance zero” was too
+specific. The direct audit finds 352 projected distance-zero cases and two distance-one cases
+(both from seed 73143). All 354 satisfy the same <=1 yielding condition; the gate-first counts,
+outcome cross-tabs and delayed-release interpretation are unchanged. This correction is
+appended without rewriting the historical reading.
