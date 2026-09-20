@@ -475,3 +475,45 @@ and execution boundary before DM acceptance/publication and original admission.
 At selection there are **zero B03 fits started**. The original B02 remains complete
 and unchanged. Claude retains FSD ownership and its running operations; this work
 uses only the Codex author worktree/index and its own outputs.
+
+### Simple-model reading of the scalar alternative
+
+For a constant eligible KEEP probability q, each fresh command lasts one tick plus
+a second tick with probability q. Its expected duration is 1+q, and in the long-run
+renewal abstraction the held-tick fraction is q/(1+q). Thus q=.5 gives one-third held
+ticks; a learned scalar explores more than F's single half/half setting. This is a
+derivation from the declared timing, not an experimental result. Finite episodes
+have reset/end effects, and the relation supplies no native-return prediction by
+itself. It also does not make B identical to historical F: their policy phase inputs
+and gate-learning laws differ. Within B03 those timing/phase rules are matched.
+
+B still learns from return and advantage during training. Its restriction is that,
+at an eligible execution decision, its probability does not condition on the local
+state/history. R can condition that probability and sends its gate loss through the
+recurrent feature path. This separates a potentially useful simpler learning choice
+from claims that “any feedback” has been removed. The B03 outcome can guide package
+selection even if it cannot uniquely identify the causal contribution of fresh
+observations.
+
+### B03 implementation and review accepted before execution
+
+The Implementer delivered only the assigned new scalar helper, R/B/H study, admitted
+runner and mirrored tests. The DM read their final source and focused checks. The
+scalar has exactly two parameters, ignores input values, begins at half/half, and
+receives eligible-row return credit through the unchanged reactive update. R's
+construction matches the original and both arms share common initial parameters;
+their generator ownership and the fixed seed addresses match this entry.
+
+The final combined synthetic check reports **20 passed in 2.76s**: 13 B03 checks and
+7 inherited reactive semantics checks. Compilation and diff checks passed; managed
+test scratch cleaned normally. The independent Reviewer read the final files and
+reported no material findings, including the admission/publication/failure boundary,
+scalar gradient restriction, incomplete fit accounting and evaluation isolation.
+It reused the final checks and did not run native admission, fits or an abrupt-process
+termination test. These checks establish implementation evidence, not native efficacy.
+
+The DM accepts the diff and review. No historical B01/B02 or FSD scientific source
+changed. B03 still has zero started fits at this acceptance boundary. The next action
+is exact-source publication followed by the three original admitted block invocations;
+the Monitor will receive the accepted handles, and the DM will read all three final
+panels together after terminal notices.
