@@ -503,3 +503,86 @@ frozen-policy release intervention, available equally to the simple reference, c
 those explanations at the same packet quota. C02 is technically complete and scientifically
 read; such an intervention would be a new diagnostic comparison, not more C02 seeds or a
 confirmation/promotion of its tiny positive means.
+
+## 2026-09-20 — C03 prospective frozen-policy release-priority comparison and L0
+
+The Critic's outcome cross-tab makes the next question concrete. Across the two C02 panels,
+the 354 gate-first worlds jointly have ten fewer conflicts but zero additional completions;
+the other first-difference groups contribute the aggregate +3 jobs. This grouping is factual,
+not a decomposition of the first event's causal effect. I accept the Critic's further limit:
+an earlier release consumes the packet otherwise available for a later snapshot. A release
+intervention therefore identifies the package value of **release priority**, not uniquely the
+value of removing conservative waiting. The cross-tab cannot answer that counterfactual.
+
+Select a zero-new-fit diagnostic on all three existing final checkpoints, with no checkpoint
+selection, retraining or calibration. A local `release_due` predicate is true when the sender
+is currently DONE and projecting its own last transmitted packet under the unchanged public
+projection law still yields a valid SHARED APPROACH at distance <=1. Its inputs are exclusively
+the sender's current state, own last-sent payload/time and public time. It never inspects
+untransmitted receiver state, reward, privileged diagnostics or a scheduler request channel.
+For each release-priority arm, request send when either its ordinary scheduler requests or
+`release_due` is true. Existing availability/forced-slot logic still enforces exactly one
+packet per sender per frame. The guard neither creates a packet nor changes payload content,
+latency, routes, controllers or termination. The same predicate is supplied to simple rules.
+
+The primary targeted prediction is **fewer stale-release blocked gate decisions and more
+completed jobs** for the guarded contextual policies versus their own unguarded frozen version.
+That prediction would support trying a release-aware timing rule, not prove that fresher
+messages are generally better. Reduced blocking with flat/worse service would weaken this
+repair and emphasize scarce-token/future-snapshot tradeoffs or useful conservative pacing.
+No reduction in blocking would mean the intended intermediate link was not reached by this
+legal guard. If a guarded learner improves, compare it with the same-information simple
+release rule before crediting learning. Do not optimize disagreement or collision counts
+while ignoring native completed jobs.
+
+Exposure is fixed now: master world seed **73150**, development phase 4 and final phase 5,
+256 independent 96-tick worlds each, batch 32. The world addresses are disjoint from C01/C02.
+Evaluate the existing nine AGE_CHANGE variants, and the identical nine with release priority,
+on the same development worlds: 18 x 256 episodes. Select the best within each family by
+completed-job fraction then the existing lexical tie rule, and separately record the best
+development-selected simple family (lexical family tie: ordinary AGE_CHANGE first). This
+selection uses no final worlds or policy fitting. The strongest selected simple reference
+therefore has all legal release information supplied to the candidate.
+
+Final arms are the six frozen-checkpoint variants (`L73141`, `L73141_RELEASE`, `L73142`,
+`L73142_RELEASE`, `L73143`, `L73143_RELEASE`) plus selected `AGE_CHANGE`, selected `AGE_RELEASE`,
+`PRE_DECISION` and `POLL`: ten x 256 episodes on one common exogenous panel. Report every arm,
+within-checkpoint guarded-minus-original per-world differences, and each learned arm minus
+the development-selected simple reference. Sharing this evaluation panel does not create
+new independent training histories. **Zero new fits, zero training transitions and zero
+optimizer calls**; total work is 4,608 development + 2,560 final episodes = 688,128 team
+transitions. The existing measurements suggest roughly 15–30 s of single-child CPU work,
+not a hard runtime endpoint. No post-score variants, thresholds, seeds or extra panels.
+
+Frozen model inputs are the published `final.pt` files from C01 seed 73141 and C02 seeds
+73142/73143. Their SHA-256 digests, respectively, are
+`461db24607e23cc3c92c9e636850c61e1a9e29b703ed3b9a09d4e4a4f6b5b10e`,
+`2d7d1a3d6db1f16b0f6fe4ad1041ea0dfc3afce0746748adf7fe936ae8ce43f7`, and
+`522011e9b8dc0ce6e4d16f91b856e3278dda6bf3e575bddcb97bd16965048e55`.
+Record their original source SHA/seed, reject digest or metadata mismatch before evaluation,
+and verify exactly zero parameter movement relative to those loaded bytes. This is evaluation
+of previously learned schedules, never new learning or a confirmation batch.
+
+L0: implement this one intervention/evaluator under
+`experiments/candidates/skill_information_refresh/c03/`, entry `scripts/run_sir_c03.py`, with
+mirrored tests; DM owns the edits and accepts the review. Import unchanged C01 host/model/rule
+functions rather than modifying accepted C01 semantics. Retain per-episode counts, complete
+selection results, paired differences, legal/raw/guarded requests, executed sends and factual
+state/cache traces; privileged stale-release waiting counts are offline diagnostics only.
+Runner artifacts stay under this direction's new C03 run root. Check legal-info isolation,
+guard truth cases and forced/budget behavior, unguarded collector replay against C01,
+checkpoint digest/identity and immutability, exact counts/primary arithmetic and CLI admission
+refusal. High-risk evaluator/checkpoint behavior gets independent review before DM acceptance.
+Publish exact inputs, then use the existing local_linux native-admission path. No new shared
+core, main/RESEARCH write, external dependency or GPU work. Stop on an unresolved technical
+failure and retain the original operation; costs remain recorded without fit allowances.
+
+C03 is implemented without editing C01. The focused suite reports **12 passed in 2.37 s**:
+legal guard truth cases, peer-information independence, all four unguarded collector replay
+paths, exact frame quotas/masks, one-tick release delivery and unavailable-budget refusal,
+checkpoint digest/metadata validation, parameter immutability, complete synthetic output
+arithmetic/selection, technical-failure labeling and the actual CLI's missing-admission
+refusal. Author review caught an initially ineffective CLI test path and repaired it to
+assert the specific admission rejection before this result. `git diff --check` passes.
+These are synthetic correctness checks, not extra scientific evaluations. The independent
+Reviewer now receives this C03-only evaluator/identity delta before execution.
