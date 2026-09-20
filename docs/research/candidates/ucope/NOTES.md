@@ -2770,3 +2770,22 @@ with the exact inputs, then admit the three pair invocations on local_linux in s
 their native processes may overlap. The kernel will check current canonical pause/lead,
 publication, actual-node memory and duplicate claims before each release. Preserve returned
 native handles and any uncertain acceptance; no direct-run or repeated new-request fallback.
+
+### B06 admitted native execution
+
+All three fixed pair invocations were accepted at published source
+`7ad9a8668d17a25724b9649dece7d5479e7d22c5`. Their native manifests, preflight measurements,
+runner admission, configuration and source hashes are retained at:
+
+- [8941 manifest](../../../../runs/ucope/gaussian_scale_initialization_b06_8941/launch-manifest.json)
+- [8942 manifest](../../../../runs/ucope/gaussian_scale_initialization_b06_8942/launch-manifest.json)
+- [8943 manifest](../../../../runs/ucope/gaussian_scale_initialization_b06_8943/launch-manifest.json)
+
+The DM verified all three runner/supervisor identities as running with consistent records;
+the Monitor adopted these same handles. At 09:38 UTC, flushed train/update rows establish
+the three G1 fits have started, with Ghalf still to follow in each invocation. Window
+consumption is then nine started fits, with three remaining already allocated within B06.
+This is a progress observation, not completed exposure or a scientific result. Native
+summaries and exit witnesses are expected only after each complete training/evaluation pair.
+No duplicate request or replacement invocation was made. Read the fixed final panels and
+all intermediate/secondary readings after completion, then continue the scientific update.
