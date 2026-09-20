@@ -1116,3 +1116,457 @@ If B04 is mixed/small, the primary unresolved question is still whether the pack
 [learner]: https://github.com/CartmanFatass/My-paper-code/blob/be8d897e3ad94191b59ed7be6274bc40df9846fe/experiments/candidates/ucope/uav_motion_prefix_b01/learner.py#L12-L25
 [temporal]: https://github.com/CartmanFatass/My-paper-code/blob/646ab539d2a2ef689d0e4ee977f327f79cf2215b/docs/research/designs/TEMPORAL_BEHAVIOR_STATE_ALIGNMENT_20260919.md
 [temporal-id]: https://github.com/CartmanFatass/My-paper-code/blob/646ab539d2a2ef689d0e4ee977f327f79cf2215b/docs/research/designs/TEMPORAL_BEHAVIOR_STATE_ALIGNMENT_20260919.md#exact-one-decision-result-what-an-exchange-gap-contains
+
+## 2026-09-19 — B04 complete: scalar renewal has no established advantage over ordinary feedback
+
+### Accepted operations, exposure and checked evidence
+
+The existing Monitor observed all three original B04 operations terminal with native exit
+zero and runner status COMPLETE, then returned an empty active set. The DM jointly read
+their final panels only after all three had completed. Exact executed source remains
+**cab5b6ca26a4af101f72db0e89cb641bb0b63ad8**; neither the subsequent Pro question commit nor
+this collection entry changes that identity. No replacement, extra seed or checkpoint
+selection was used.
+
+All **six fits** completed: B and G at each of masters 8931/8932/8933, with 2048 complete
+256-step training episodes and 4096 Adam updates per fit. Across the batch this is
+12,288 training episodes, 3,145,728 training team steps and 24,576 Adam calls. The final
+B/G/H panels add 576 evaluation episodes and 147,456 team steps, with zero optimizer
+updates. Total native exposure is **3,293,184 team steps**. The 64 worlds per checkpoint
+are nested observations, not additional independent training instances.
+
+The DM independently reconstructed all nine B-G/B-H/G-H contrast vectors, means,
+conditional panel standard errors and signed-world counts from the raw episode rows.
+Checks passed for 12,864 episode rows, 6,144 rollout/update rows, all six finite
+checkpoints, exact source/master/world identities, 256-step episodes, native reward
+normalization, four PPO epochs per rollout, B eligibility/branch totals, G's absent
+duration head, unchanged evaluation parameters/training RNG, and the recorded artifact
+hashes. Reconstructing initialization also reproduced actor/critic/gate displacement
+and B's endpoint probabilities. These are checks of retained outputs, not new native
+evaluations or fits. All three stderr files are empty.
+
+Native summaries and full raw episode/update records are preserved for
+[8931](../../../../runs/ucope/scalar_feedback_b04_8931/summary.json),
+[8932](../../../../runs/ucope/scalar_feedback_b04_8932/summary.json) and
+[8933](../../../../runs/ucope/scalar_feedback_b04_8933/summary.json).
+Each directory's `checkpoints-and-console.tar.gz` contains B_final.pt, G_final.pt,
+stdout.log and stderr.log; every member was compared byte-for-byte with its native file:
+
+| Master | Archive bytes | Archive SHA256 |
+| --- | ---: | --- |
+| 8931 | 495287 | a95ef61361aaa823c2c00fcfc9c77e7660d3c7402f3eb3de7dca0d371140ef86 |
+| 8932 | 495613 | e6d5b28087152353ab7de164e38de84afe80ad769b30f22156aa6093c5827f59 |
+| 8933 | 495153 | d9f47cec19cc6e5c7629687932d0435dec1318cfa1a33ee425e464a8b0bd4528 |
+
+Runner wall seconds were 1586.892 / 1546.240 / 1542.361; process CPU seconds were
+1585.260 / 1544.242 / 1540.863; process peak RSS was 351172 / 351164 / 352132 KiB.
+These invocation measurements include each sequential B/G pair and evaluation; separate
+per-fit wall measurements are unavailable. The first admission to final native exit
+spanned 1668.923 seconds, ending 2026-09-20 04:45:03.360649 UTC. This excludes prior
+authoring/review and later collection/Pro time and is not a full-work speedup claim.
+Per-process RSS peaks are not a simultaneous host peak.
+
+### Frozen final-panel reading
+
+| Master | B J | G J | H J | B-G | B-H | G-H | B final KEEP probability |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 8931 | 0.2014387411 | 0.2309719499 | 0.1491821652 | -0.0295332088 | +0.0522565759 | +0.0817897847 | 0.4811446369 |
+| 8932 | 0.2366575444 | 0.2291447915 | 0.1618531170 | +0.0075127528 | +0.0748044274 | +0.0672916746 | 0.4880138934 |
+| 8933 | 0.2253556167 | 0.2185345108 | 0.1475909762 | +0.0068211059 | +0.0777646405 | +0.0709435346 | 0.4861035645 |
+
+The descriptive mean B-G is **-0.0050664500**, with range [-0.0295332088, +0.0075127528].
+The corresponding means B-H and G-H are +0.0682752146 and +0.0733416646. The conditional
+B-G panel standard errors are 0.0075458553 / 0.0085781595 / 0.0086658800; positive versus
+negative paired-world counts are 18/46, 36/28 and 35/29. These conditional summaries do
+not estimate training-population precision or turn two positive blocks into superiority.
+
+Observed learning is real in both arms: actor and critic weights moved, optimizers ran,
+and the first-to-last 256-episode mean training J increased for all six fits. B also
+changed its scalar logits. Both learned arms exceed hover in all three final panels.
+G is therefore not an obviously failed baseline being used to manufacture an advantage.
+
+**Working update.** This is the prospectively named mixed/small-difference branch.
+The evidence weakens the practical case for developing this B package over the attained
+ordinary controller at this exposure. It establishes neither equivalence nor a stable
+negative population effect. B03's reason to provisionally prefer simpler B over R is
+retained as a relative development choice; B04 does not turn that choice into a B-G
+benefit. State-conditioned timing, rate adaptation, noise persistence, phase representation
+and learning-path effects remain different questions, and this package comparison
+does not identify any one of them. The prior adverse 8901, mixed B02 R-F and third-block
+B03 R advantage remain part of the cumulative explanation.
+
+The independent Critic returned MATERIAL_DISSENT: no for this reading and advised against
+automatically spending the remaining six fits on learned B versus frozen q=.5. The DM
+adopts that advice: such a result would mainly explain a benefit not yet established over
+G. A favorable frozen-B result would itself still need a direct ordinary-feedback comparison.
+Neither capacity remaining nor the end of B04 selects a new fit.
+
+### One bounded inspection of the retained training path, zero new native exposure
+
+Prompted by the Critic, the DM examined all eight consecutive 256-episode bins, once,
+for each B04 arm. This is post-result description, not a selected checkpoint, new endpoint
+or causal test. KEEP/eligible is a sampled frequency, not an exact recorded logit path.
+
+| Master | First-bin KEEP/eligible | Last-bin KEEP/eligible | Range over eight bins | B J in last two bins | G J in last two bins |
+| --- | ---: | ---: | --- | --- | --- |
+| 8931 | 0.496641 | 0.484742 | [0.484742, 0.497997] | 0.201041 / 0.199457 | 0.215052 / 0.216019 |
+| 8932 | 0.492374 | 0.488820 | [0.482151, 0.492374] | 0.147253 / 0.197245 | 0.206036 / 0.227259 |
+| 8933 | 0.488765 | 0.487114 | [0.486832, 0.490749] | 0.217967 / 0.217365 | 0.188167 / 0.225117 |
+
+No large sustained coarse-bin rate excursion appears. In 8931, the late training gap
+is more consistent descriptively with B plateauing and G catching up than with a collapse
+of B. Other blocks retain their substantial return fluctuations despite narrow coarse
+rate frequencies. These observations lower the priority of a proposed large rate-drift
+explanation; they do not exclude brief changes, prove that rate learning is inert, or
+identify the cause of return differences. Training-bin returns are from changing policies
+and do not replace the frozen final-panel reading.
+
+Six of the twelve fits in the owner's 24-hour window are now consumed, with one of the
+two permitted batches complete. The related reactive-development exposure is now 21 fits,
+plus the older T/L work; prior B02/B03 are not charged again to this window. No second
+batch, new native evaluation or confirmation has been selected. The direction stays
+exploring. The original targeted Pro answer and the fixed-policy identification argument
+below inform the next decision without selecting a new experiment.
+
+### Fixed-policy rate sensitivity bridge, zero native exposure
+
+The endpoint probabilities above raise a specific reasoning question: do these small
+offsets from one half by themselves certify a negligible effect of clamping the deployed
+rate? Consider the same fixed B velocity controller, initial-world law, recurrent update
+and conditional environment kernels, changing only the scalar gate from q to q0=.5.
+Assume five fixed agents, T=256 full ticks, an initial forced-fresh tick and separate
+Bernoulli draws for every eligible agent. This is a distribution under the intended
+stochastic kernels, not two deterministic paths conditioned on fixed PRNG seeds.
+
+For one agent h_0=0 and h_t=q(1-h_(t-1)). The expected number of eligible decisions is
+
+`N(q,T) = (T-1)/(1+q) + q/(1+q)^2 * (1-(-q)^(T-1)).`
+
+In a trajectory augmented by its gate branches, the chain rule gives
+
+`KL(P_q || P_half) = 5*N(q,T) * [q*log(2*q) + (1-q)*log(2*(1-q))].`
+
+At the same full history, the two velocity kernels and environment kernels agree and
+cancel from the likelihood ratio; only eligible gate choices contribute. Different
+visitation and physical interaction between agents do not introduce a new conditional
+kernel term. No independence of the agents' physical trajectories is assumed. Removing
+latent variables can only reduce this KL.
+
+For B04's three q endpoints, expected team eligible counts are
+861.9173 / 857.9489 / 859.0488; augmented-trajectory KL to a clamped-half copy is
+0.6130112 / 0.2465411 / 0.3318261 nats. Pinsker's resulting total-variation upper bounds
+are 0.5536295 / 0.3510990 / 0.4073243. These bounds are too loose to certify small effects
+for these particular offsets; they do not show large actual variation, adverse return,
+or a predicted native J difference. At fixed horizon and agent count the bound does
+vanish as q approaches .5. Nothing here identifies the effect of learning q during
+training or establishes equivalence to a separately trained fixed-rate controller.
+
+Direct enumeration of every legal calendar for horizons 1 through 9 at q=.1,
+.4811446369 (using its full saved precision), .5 and .9 agreed with the chain-rule
+expression and expected hold count within 1e-12. The independent Critic found no material
+error, provided the constant-q/full-horizon/separate-draw/common-kernel qualifications
+above, and returned MATERIAL_DISSENT: no. No simulator episode, policy evaluation,
+optimization or fit was added.
+
+In the earlier zero-mean independent-fresh-command illustration, the same endpoints
+would give displacement-variance multipliers 1.64798 / 1.65420 / 1.65248 versus 1.66493
+at q=.5. That is a fact about the simplified command model only. Taken together, these
+arguments reject an unsupported shortcut from near-half endpoints to either native
+equivalence or a necessary rate-learning benefit. They do not supply a reason to run a
+clamp intervention unless its conditional answer would change the development decision.
+
+
+### Pro advice received, adopted conditionally, and next direction work
+
+The owner explicitly approved export of the original committed B02/B03 question, its
+repository links and allowance to the connected Jev Pro account, including the specified
+GitHub read and Answer-only write. The previously rejected send was resumed under the
+same question identity after that approval; it was not bypassed or repackaged. Jev reports
+send_attempted=true, send_effect=sent, effort 6 Pro and attachment present. Transport
+reports COMPLETE and DELIVERED at **6223f439fc5acaad3acf88671cc471661f500f3d**, whose parent
+is the question source be8d897e3ad94191b59ed7be6274bc40df9846fe. Only the assigned Answer
+was filled; question and all other bytes remained unchanged. The DM read the complete
+20,627-character answer and fast-forwarded this worktree to that accepted commit.
+
+The public question key is
+`hmasd:4d72981a1143590c0dbd30e351d89b9cbb99490d386789c2a71df43aa92ca6e9`.
+Private account/conversation facts stay solely in native local transport state. This is
+**one of at most two** authorized Pro questions in the bounded window. The original
+payload was unchanged and contained no B04 scores; Pro explicitly used the pinned
+pre-result source and left B04 native outcomes unread. The DM had read B04 before delivery;
+this response is advice conditioned on possible outcomes, not an independent B04 audit.
+The Answer loan is now returned and no transport operation remains unresolved.
+
+Pro returned MATERIAL_DISSENT: no for the proposed conditional learned-B/frozen-half
+comparison. Its decisive qualification is adopted: with B04 mixed/small, attribution of
+rate adaptation has lower priority unless a concrete rate-specific failure would change
+whether this package is retained over ordinary feedback. The retained-path inspection
+above supplied no large sustained rate excursion. The DM therefore selects neither a new
+six-fit rate comparison nor the optional 384-episode/98,304-step deployment clamp panel.
+Both clamp outcomes currently leave the primary package-use question unresolved, so
+zero-fit cost alone would not make that panel useful.
+
+The answer's estimands are retained for a future distinct reason: learned versus frozen
+training estimates the total enable-rate-learning treatment, including trajectory and
+optimization effects; a fixed-weight clamp estimates conditional deployment substitution.
+Their difference can be split algebraically under common .5 deployment, but not into a
+unique universal mechanism attribution. In particular, common actor/critic/gate norm
+clipping and compound PPO ratios are concrete optimization mediators; the effect cannot
+be described solely as learning a better final numeric rate. The equal-endpoint analytic
+counterexample and the DM's finite-horizon KL argument both reject endpoint proximity
+as sufficient evidence of training or native-return equivalence.
+
+The next selected action is **zero fits and zero native evaluations**: a bounded primary-
+source/simple-model bridge on feedback with temporally correlated residuals. B copies both
+its old feedback-dependent command mean and a realized innovation; an ordinary controller
+could instead refresh its feedback-dependent mean each tick while correlating only its
+residual innovations. The question is whether such a density-correct control would provide
+a discriminating, affordable test of command commitment within UCOPE, and whether its
+answer would change investment after B04. The proposed distinction is a new reasoning
+question, not an accepted beneficial mechanism or a selected AR arm.
+
+The existing Scout reads Korenkevych et al.'s primary autoregressive-policy formulation,
+the owner's pinned temporal insight and the actual UCOPE sampling/recurrent replay paths.
+It will distinguish matching adjacent covariance from matching longer lags/displacement,
+and identify the cost of correct new/old conditional likelihood and recurrent replay.
+Paper results on other environments are not evidence of native benefit. A simple source
+bridge may conclude that the added control is not worth implementing; no fits, model
+search, noise sweep, native panel or change to G has been authorized by this selection.
+The DM retains the decision and will use the returned facts to choose the next useful
+observation rather than extend or rename B04.
+
+### Owner changes continuation from scheduled wakeups to agent wait
+
+After a quiet scheduled return, the owner requested: "我们不用定时任务 你用agent wait来保持持续流程".
+The native app accepted PAUSED for automation `ucope-24-12`, and its saved configuration
+was checked. This disables the scheduler, not research. The DM now keeps this task's
+continuous flow active, delegating bounded waits and using agent wait for leaf returns.
+The original 2026-09-21 04:06:07 UTC deadline, twelve-fit/two-batch cap, at most two Pro
+questions, own-worktree/branch scope and no-main-merge limit remain unchanged; changing
+the continuation mechanism does not renew the allowance or resume another direction.
+
+### Residual-coherence source bridge returned; no AR experiment selected
+
+The Scout read the primary [Korenkevych et al., IJCAI 2019 paper, sections 4-5 and
+experiments](https://www.ijcai.org/proceedings/2019/0382.pdf), the pinned temporal insight
+and the actual UCOPE policy/collector/replay source. The paper constructs stationary
+Gaussian AR exploration with a preserved marginal law and an explicit history-conditional
+density; its empirical environments do not supply UCOPE evidence. The DM adopts the
+technical distinction, not a native-performance expectation.
+
+In B's constant-q, independent zero-mean fresh-command toy, stationary lag-one correlation
+is c=q/(1+q), while higher-lag covariance is zero. An AR(1) matching c has correlations
+c^k at all longer lags. Its long-horizon displacement-variance multiplier is (1+c)/(1-c),
+whereas B's is 1+2*c; at q=.5 these are 2 versus 5/3. Matching the asymptotic displacement
+multiplier instead would require AR rho=c/(1+c)=.25, which no longer matches B's lag-one
+correlation 1/3. B's actual forced-fresh reset has the finite-boundary correction derived
+above; the Scout's stationary-start finite-window formula does not replace it. No one
+AR coefficient matches the full toy law, let alone feedback means, tanh actions, visited
+states, phase and PPO credit in the native controller.
+
+Current G uses independent tanh-Gaussian conditional scores; its recurrent replay starts
+32-step chunks from detached GRU states. Correct residual correlation would need history-
+conditional old/new densities, reconstruction of past residuals under the corresponding
+actor, boundary/reset handling and meaningful checks of replay. Keeping stored old-policy
+residuals in the new-policy score would be wrong. With global log standard deviations the
+formula is simpler than the paper's state-dependent scale, but it still changes a scientific
+learner boundary. A future AR-G/G contrast could test a correlated-exploration package;
+it would not by itself establish the necessity of B's command commitment or explain a
+B advantage that B04 has not established.
+
+The DM therefore does not select an AR arm or a covariance-matching search. The bridge
+resolves why a seemingly simple noise control is not an identifying substitute and
+identifies its engineering cost; it does not create empirical support for spending fits.
+
+The next zero-fit question is more direct: does the current actor credit actually optimize
+the recorded joint native objective, or does own-agent return omit effects on other UAVs'
+rewards? This is a hypothesis to check against source, not a defect inferred from near-half
+q or adverse scores. The Scout will trace native reward coupling, collected returns,
+critic targets, policy-row credit and shared parameters, explicitly looking for global
+reward mixing or a cancellation that refutes the concern. Only if a distinction exists
+will it supply a minimal exact two-agent example and identify what is shared by R/B/G.
+No environment run, code edit, fit or native evaluation is selected; the original results
+remain valid for the algorithm actually run regardless of this subsequent analysis.
+
+### Team-credit check returned: the proposed objective mismatch is absent
+
+The Scout traced `uav_motion_prefix_b01/environment.py:49-50`, ordinary collection in
+`learner.py:146-161`, reactive collection in `reactive.py:104-110`, scalar returns and
+critic targets in `learner.py:12-25,229-248`, and reactive update at `reactive.py:130-146`.
+The adapter sums native per-agent rewards before storing the one scalar tick reward.
+The scalar full future team return trains the scalar centralized critic and is broadcast
+to every eligible policy row. The episode J is the same team-reward sum divided by horizon.
+
+Therefore the proposed omission of cross-agent reward terms is absent. In the underlying
+on-policy score identity, team return multiplies the sum of agent log-policy scores;
+sharing parameters alone would not establish this, but the explicit team scalar does.
+Actual PPO then uses its declared clipped, advantage-normalized surrogate, so this check
+is not a claim that every finite PPO update equals the exact objective gradient. R/B KEEP,
+END and forced-fresh rows retain their correct branch terms and full future/current reward,
+including the final tick. G and the reactive packages share this team-objective convention.
+
+The DM rejects the suspected own-return mismatch as an explanation for B04 and selects no
+repair. A counterfactual credit baseline could change variance, but its absence is not
+missing objective credit or an evidenced bottleneck here. No fit, native evaluation or
+repository code execution was added. The negative source finding remains part of the
+explanation rather than being replaced by an unsupported optimization rescue.
+
+## Pro question 2026-09-19 post-b04-next-discrimination
+
+Conversation: continue the existing Jev UCOPE conversation from the prior native transport
+operation. Private account/conversation details remain local. This is the second and last
+potential Pro question in the owner's bounded continuation window, not another allocation.
+
+**Question.** After the completed B04 package comparison and the zero-fit findings below,
+what remaining, materially distinct UCOPE question could most usefully change whether we
+invest in reactive velocity-command renewal, and what is its smallest discriminating next
+observation? Critique the DM's present choice to avoid both a learned/frozen-rate batch and
+an AR-noise comparison. A concrete revision or a tighter simple-model/source question is
+welcome only if it has a different feasible prediction. No new candidate is required;
+identify the actual remaining uncertainty if no fresh fit is worth buying. The owner wants
+continuous direction reasoning rather than stopping when a particular hypothesis ends.
+This is targeted cumulative synthesis and hypothesis formation, not a confirmation review.
+
+### Standing, evidence and rejected shortcuts
+
+The implemented branch asks KEEP versus END of the actual previous velocity after a new
+private observation. A forced-fresh tick becomes eligible; eligible KEEP copies the previous
+command and forces fresh sampling next tick; END samples a new velocity and remains
+eligible. Maximum command persistence is two ticks. The actor's recurrent state updates
+with lawful local feedback on every tick, including holds. R learns a feature/previous-
+command gate; B learns two global input-independent logits; G draws a fresh Gaussian
+innovation each tick with a feedback/history-dependent mean. G's actions are not IID.
+No renewal computation, message or switch-cost reward has been introduced.
+
+Historical 8901 R-G was -0.0180632903 and R-F -0.0032978553. B02 R-G was
++0.0188447092 / +0.0331383207, while R-F was -0.0062013995 / +0.1504105165;
+the latter difference includes a poor but valid F8912 policy. B03 R-B was
+-0.0688717720 / -0.0261957853 / +0.0119469460, provisionally favoring simpler B
+while retaining the third contrary block. Historical F is not a timing-identical fixed B.
+Older precommitted T/L failures and the earlier one-block negative R outcome remain
+selection history, not erased evidence.
+
+B04 has now completed all six prospective fits at source
+cab5b6ca26a4af101f72db0e89cb641bb0b63ad8. On masters 8931/8932/8933 the final
+B-G contrasts are **-0.0295332088 / +0.0075127528 / +0.0068211059**, descriptive
+mean **-0.0050664500**. B and G both exceed hover on every block; actual updates and
+actor/critic movement were verified. The B endpoint probabilities are
+.4811446369 / .4880138934 / .4861035645. Each final checkpoint has its sole 64-world
+sampled panel; these are three independent training blocks, not 192 replications. All
+raw rows, checkpoints, native exit witnesses and output hashes were checked. The result
+weakens practical investment in current B over the attained G, without establishing
+superiority, equivalence, a stable adverse population effect or a broken learner.
+
+One post-result inspection used all eight consecutive 256-episode training bins per B04
+arm. B's sampled KEEP/eligible frequencies stayed in .484742-.497997 / .482151-.492374 /
+.486832-.490749. These are coarse sampled frequencies, not exact parameter paths. In the
+worst final block, B's last two training-bin J values were .201041/.199457 and G's were
+.215052/.216019: no large late B collapse appeared. Other blocks retain fluctuations.
+This weakens a large sustained rate-drift rescue, not all training-path effects.
+
+The preceding Pro answer (6223f439fc5acaad3acf88671cc471661f500f3d) correctly separates
+learned-versus-frozen training from fixed-weight deployment clamping and identifies joint
+norm clipping/compound ratios as optimization mediators. It was outcome-blind to B04.
+The DM now declines both follow-ups because neither has shown decision value after the
+actual mixed B04 result; proximity to .5 alone is not the reason. A subsequent exact
+constant-q full-trajectory KL calculation also fails to certify tight deployment closeness
+at these particular offsets. Do not repeat the old conditional recommendation as though
+B04 were still pending or favorable.
+
+The owner's temporal insight and a subsequent source bridge showed why an AR-G control
+would not isolate command commitment: even in an independent zero-mean toy, B's stationary
+lag-one correlation is q/(1+q) and its higher-lag covariance is zero, whereas AR(1) retains
+higher lags. Matching adjacent covariance and long-horizon displacement requires different
+AR coefficients. Correct AR PPO would also need conditional densities and new-policy
+residual reconstruction across recurrent chunks. Neither matched moments nor successful
+AR exploration in another host establishes a native benefit. No AR arm, noise sweep or
+calendar exchange is selected. Global calendar exchange does not identify newest-
+observation value; the source's exact one-decision identity has conditional assumptions.
+
+A separate code trace **rejected** the proposed own-agent-credit mismatch: both collectors
+store the sum of all five native rewards; scalar full team returns train the centralized
+critic and are broadcast to all policy rows. KEEP receives current/future team credit,
+including final-tick decisions. A new counterfactual baseline might affect variance, but
+no current evidence identifies its absence as the bottleneck. Do not propose fixing a
+missing team reward that the actual implementation already contains.
+
+### A useful answer must change a concrete decision
+
+The strongest simpler explanation is still that the current short-hold family is a
+finite-learning/action-distribution modification whose useful advantage over ordinary
+feedback has not been established. Copying suppresses feedback-dependent command changes
+as well as resampling; representation, exploration, credit variance and shared-parameter
+optimization can interact. No generic claim that temporal coherence or interruption must
+help is acceptable. The existing G is an attained competent learning comparator here,
+not a proven tuned optimum or a universal upper bound.
+
+If you propose a new native comparison, explain what **recorded new reason** distinguishes
+it from adding seeds to B04, changing the name of an ended idea, sweeping rates/hold caps,
+or merely attributing an unestablished gain. State the one intermediate observation and
+native outcome that differ under the proposal and its strongest alternative. Trace the
+relevant local information, previous command, decision opportunity, credit and interaction
+between agents. A simple model may expose a missing opportunity or an assumption; say
+which features the native host actually shares and which remain unchecked. A literature
+bridge must use a primary source actually read, not import other-environment performance.
+
+Keep the question inside the UCOPE velocity-command K branch. Do not redirect to Claude's
+FSD skill-mode experiment, N-axis churn/history, an LLM/model-capacity programme, a new
+reward or privileged actor information. Finite exploratory package hypotheses are allowed;
+a proof or exhaustive headroom/tuning campaign is not required. Continuing research does
+not require consuming the remaining allowance or inventing a positive story.
+
+### Context and source precedence
+
+All source_sha paths resolve at the immutable full question commit supplied by Transport.
+Current owner authorization and OPERATING_CONSTITUTION govern; methods guide reasoning;
+older contracts retain their stated historical experiment meaning. Read the consequential
+source rather than infer implementation from names or earlier chat memory.
+
+- source_sha: `docs/project/OPERATING_CONSTITUTION.md` sections 1, 3, 5 and 8;
+  `.agents/skills/hmasd-scientific-tools/SKILL.md` sections Update the working explanation,
+  Simple-model and literature bridges, Comparators and MARL information, Statistics and Cost.
+  Source/read-only reasoning adds no native exposure or fit permission.
+- source_sha: this notebook's B02-complete, B03-complete, B04-complete and subsequent
+  fixed-policy KL/source/credit passages, plus the full preceding Pro Answer and DM adoption.
+  The B04 tables and their raw evidence links are the current result, not in-flight data.
+- source_sha: `runs/ucope/scalar_feedback_b04_8931/summary.json`,
+  `runs/ucope/scalar_feedback_b04_8932/summary.json` and
+  `runs/ucope/scalar_feedback_b04_8933/summary.json` when consequential to your reasoning.
+- source_sha: `experiments/candidates/ucope/reactive_renewal_b01/reactive.py`,
+  `experiments/candidates/ucope/reactive_rate_b03/scalar.py`,
+  `experiments/candidates/ucope/uav_motion_prefix_b01/{environment,policy,learner}.py`, and
+  `experiments/candidates/ucope/scalar_feedback_b04/study.py` for actual policy, objective,
+  observation/phase, learning and evaluation semantics. Read native reward/dynamics source
+  only if a proposed prediction depends on it; state an unread dependency honestly.
+- Separately pinned owner insight: `docs/research/designs/TEMPORAL_BEHAVIOR_STATE_ALIGNMENT_20260919.md`
+  at 646ab539d2a2ef689d0e4ee977f327f79cf2215b on origin/codex/temporal-state-alignment.
+  Its finite-model identification result is not full-horizon MARL evidence.
+- Primary AR-policy source already used in the local bridge, only if relevant:
+  https://www.ijcai.org/proceedings/2019/0382.pdf, sections 4-5. No new mandatory reading survey.
+
+### Remaining allowance and delivery boundary
+
+The owner replaced the scheduled heartbeat with continuous agent wait in this same task;
+this does not reset scope. The window still ends **2026-09-21 04:06:07 UTC**. Six of the
+maximum twelve new fits have completed in B04; at most **one further exploratory batch,
+six fits**, remains, each no more than 2048 episodes of 256 ticks. The related reactive
+sequence has 21 fits plus older T/L exposure. Failed started attempts count, B02/B03 are
+not repeated, and no confirmation is authorized. Use of all six fits is not obligatory.
+Any native diagnostic must explicitly name checkpoint/world population, endpoints, RNG
+coupling and total non-fit cost; a combinatorial or repeated zero-fit search is not free.
+No new native experiment is selected by this question or by your answer.
+
+Return a focused working update and the single next observation you think can change the
+decision, or explain the unresolved reasoning question if no finite comparison is worthwhile.
+Distinguish observed facts, inference and new conjecture. Include feasible cost and what
+would weaken your recommendation; retain contrary outcomes and unread-source limitations.
+Include MATERIAL_DISSENT: yes/no for the DM's current no-rate-batch/no-AR-batch choice.
+Do not train, evaluate checkpoints, change code, allocate fits or create workflow records.
+
+Write advice only in this empty `### Answer` subsection of this question, in
+`docs/research/candidates/ucope/NOTES.md` on `codex/ucope-feedback-renewal`. Read the pinned
+input, fetch the latest writable target and actual blob SHA immediately before writing,
+preserve all other bytes and stop on overlapping edits. Report the actual answer commit.
+If GitHub writing fails, return the entire answer in chat rather than only a commit/link/status.
+
+### Answer

@@ -1,0 +1,11 @@
+{
+  "claim_key": "a75d762baf21d4621dd0e7ad78a1fe2c3ee626fd8db9f3b4a1d0f78a4c949a9b",
+  "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/a75d762baf21d4621dd0e7ad78a1fe2c3ee626fd8db9f3b4a1d0f78a4c949a9b.json",
+  "manifest_ref": "/home/fires/.codex/worktrees/1275/hmasd-wsl/runs/ucope/scalar_feedback_b04_8931/launch-manifest.json",
+  "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/a75d762baf21d4621dd0e7ad78a1fe2c3ee626fd8db9f3b4a1d0f78a4c949a9b.json",
+  "pid": 1629842,
+  "runner_pid": 1629843,
+  "schema_version": 1,
+  "status": "accepted",
+  "updated_at": "2026-09-20T04:17:14.453243Z"
+}
