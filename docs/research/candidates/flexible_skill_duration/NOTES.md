@@ -2300,3 +2300,19 @@ What the code fixes beyond the 23:58 entry, recorded before any score exists.
   that is the one I read for the declared J prediction; the other is reported beside it.
   Behaviour measures are read over rollouts 35–45 as declared.
 - Path length is three-dimensional, cells are the 50 m x, y grid.
+
+## 2026-09-20 00:55 PDT — persistence B07: first wave admitted on `wsl_4070`
+
+Node checkout fast-forwarded to the published `4a654ca0e4868a28df3d487e5d83ddc6049fe1db`
+(the node reaches GitHub only from its login shell; a plain-shell fetch hung and was stopped,
+nothing else affected), node idle beforehand. Four fits launched through
+`persistence_b07/launch_fit.sh` and the admission kernel, all accepted at the first request,
+alive with empty `stderr.log`. The three `D_K1` fits go first because they are the slower arm;
+the other two `D_K10` fits follow as slots free (at most four concurrent).
+
+| tag | arm | block | operation ref (under `/home/wu/projects/HMASD/.git/hmasd-admission/`) |
+| --- | --- | --- | --- |
+| `b07_k1_772803_a01` | D_K1 | 772803 | `a5ae3d1a0d36d7c6ba8ddaed2bffd427d8e8a941463fa423875d590dd7e322c6.json` |
+| `b07_k1_772903_a01` | D_K1 | 772903 | `afad43bb886e0866844c2c95af9cf32a3805e0495d72cdd437f81e079f051beb.json` |
+| `b07_k1_773003_a01` | D_K1 | 773003 | `d58454c1d727566e88bc8dd3c71d03c58b0c049b8c2e15d593045c6dbb3c6a4b.json` |
+| `b07_k10_772803_a01` | D_K10 | 772803 | `cd23a74bcbb2974c3ba7a48652971a6e87d7668fdacce02109d4ca27c7fc1681.json` |
