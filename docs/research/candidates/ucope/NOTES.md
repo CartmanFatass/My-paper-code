@@ -4248,3 +4248,94 @@ waiting for scores. Once B08 is published, read its actual acceptance and measur
 inert labels end this comparison; service-responsibility skills remain a design request
 for Claude, not an object I construct. Content plus useful accessible variation permits
 writing a concrete prospective J/I/F launch entry, not an automatic launch from this L0.
+
+
+## 2026-09-20 13:51 UTC — future FSD termination implementation accepted; scientific comparison still conditional
+
+**Engineering accepted by this DM.** Executable source is `dac80c84a`, consisting of
+`63631c198` (J/I policy and PPO), `cb25c67a0` (hook, frozen adapter and native checks),
+and `dac80c84a` (numerical/RNG guards), against the L0 at `56b203dfc`. This is preparation
+for the same conditional frozen-foundation comparison, not a new UCOPE result.
+The independent Reviewer examined `56b203dfc..dac80c84a` and returned **no material
+findings remain**. I read the Implementer's diffs and checks and accept the combined
+implementation within its CPU correctness scope.
+
+The shared core change is 55 additive lines in `hmasd/agent.py`: explicit installation
+of an instance-only optional-END callback, copied predecision context, eligibility
+validation and its own diagnostic cause. No checkpoint/config format changes. An absent
+or removed callback takes the original path. Team/reset/invalid/local-cap events retain
+precedence. The real partial selector and actor execute normally; END may reselect the
+same label and does not reset recurrent state. No Claude-owned source/notebook/runs or
+shared index was edited. His current B08 probe implementation remains in his checkout.
+
+Candidate code is under `experiments/candidates/team_conditioned_termination/`:
+`policy.py` implements J/I mask laws, a separate context-only value critic, native-return
+GAE and full-mask PPO; `runtime.py` freezes the accepted-shaped D_K10 foundation and
+collects complete finite Scenario1 episodes. Both gates see explicitly scaled current
+geometry, observations, held labels, clocks and forced/reset flags. They share network
+shape and initialization; only J uses the realized preceding mask bits. This matches
+nominal architecture/parameter count, not a theorem of equal effective capacity or
+optimization. The initial law is the same independent 0.1 END probability. The critic
+never receives the sampled mask. KEEP likelihoods are retained; forced positions have
+no actor term, including skipping the actor optimizer on all-forced minibatches.
+
+Minibatches are bounded and retain the tail. Sampling and permutation use private
+streams, and initialization seeds only the CPU generator inside a preserving context.
+PPO refuses active nonfinite logits, overflowed ratios/objectives and nonfinite gradients
+before the corresponding optimizer step. This is fail-fast numerical detection, not
+transactional rollback of preceding valid minibatches. The generic GAE distinguishes
+terminal and continuation truncation; the finite native host's time limit is terminal
+for this collector. No intrinsic term, new switch fee, skill co-adaptation or alternative
+label decoder is introduced.
+
+**Checks, interpreted at their actual scope.** 37 distinct checks across the focused
+sets: 13 existing D2 regressions, 7 new hook tests, 12 mask/PPO tests and 5 native adapter
+checks. The core plus existing D2 invocation passed 20 in 13.60 s, including the frozen
+pre-D2 off fingerprint and an independent reference extracted from the committed pre-hook
+D2 method (outputs and RNG). Final Reviewer reran hook plus policy at `dac80c84a`: 19 passed
+in 2.65 s. The final policy unit suite alone passed 12 in 2.54 s. The five real tiny-host
+checks passed in 5.16 s before the added finite/RNG guard patch; Reviewer reused these
+finite-domain results because the adapter was unchanged and the new guards add failure
+detection. No repeated native fixture was requested merely for review.
+
+One initial native-test setup failed before any environment step or optimizer update:
+I had treated `RunningMeanStd` as a torch module. Source inspection showed numpy mean,
+variance and count; the adapter now freezes torch parameter owners through eval mode and
+the tests snapshot all three ValueNorm fields explicitly. This was a technical error,
+not a negative learning observation. The corrected invocation then passed.
+
+**Actual new technical fixture exposure (local Linux CPU).** One small foundation at
+seed 920611, six agents/twelve users, two lanes, two 20-tick rollouts: 80 native team
+steps; optimizer calls coordinator 2, actor 4, critic 4, team discriminator 2, individual
+discriminator 8; fixture wall 1.43 s. From its saved weights, J at gate seed 920621 and I
+at 920622 each used two 40-row gate rollouts: 80 team steps, 16 gate actor and 16 gate
+critic optimizer calls per arm, walls .73/.67 s. Each rollout had 36 optional decision
+rows; minibatches 13 retained their one-row tail. Base-network and ValueNorm snapshots
+were bit-identical throughout, and foundation optimizer/storage calls were forbidden by
+the tests. Both gates and their critics moved; that establishes executed updates only.
+One paired deterministic fixed-clock/initial-KEEP execution added 80 total native team
+steps, and its actions, labels and GRU states matched exactly. Total new fixture native
+exposure was 320 team steps, plus a two-forward GRU-carry check per lane without native
+steps. These three tiny training fixtures are engineering cost, not the six proposed
+scientific gate fits. The unchanged D2 regression fixtures have their own recorded test
+scope; none of their outputs is promoted into new research evidence. Resource RSS was not
+measured, so no memory-use claim is made.
+
+**Remaining boundary.** This is a tested CPU component/collector, not a result-launcher
+or B08 checkpoint acceptance. Production binding of accepted checkpoint/config/digest,
+gate checkpoint metadata and optimizer/RNG state, fresh seed addresses, native metrics,
+runner admission and a concrete prospective cost entry still precedes a scientific run.
+No B08 weights, probes, Pro calls, research evaluations or result-bearing gate fits were
+used here. The 0.1 hazard, small-test optimizer settings and fixture scores are not tuning
+or scientific choices for the future six-fit batch.
+
+Claude's published B08 foundation/probe decision remains the next scientific dependency.
+I will read its original committed interpretation, acceptance and phase-stratified
+accessible-END results in this independent task. An inert object closes the current-label
+comparison; the next design conversation concerns a legally observable service intent
+that Claude constructs and validates, not a new label semantics silently supplied here.
+A meaningful object alone is insufficient: local renewal must access a relevant behavioral
+change before the team boundary. If that evidence warrants J/I/F, record the exact next
+comparison and planned cost/reason; these engineering checks do not authorize its launch.
+This task's existing follow-up is being repurposed to read B08 when published, quietly while
+unchanged, with no automatic fits, probes or takeover of Claude's operations.
