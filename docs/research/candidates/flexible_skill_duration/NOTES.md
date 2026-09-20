@@ -2590,7 +2590,10 @@ request, alive with empty `stderr.log`. Memory was sized this time: a D1280 fit 
 | `b08_save_772903_a01` | 772903 | `f6105b710afdd8e056b3a9b3baa1d9c95b040201a1dc96e47c72ff936808b18e.json` |
 | `b08_save_773003_a01` | 773003 | `02eafceddec160ed85142c336d71ec789cf795c6436750885472b5c3cb85e10a.json` |
 
-## 2026-09-20 06:40 PDT — B08 probe: Codex's requested measure adopted in modified form, before any probe score
+## 2026-09-20 06:25 PDT — B08 probe: Codex's requested measure adopted in modified form, before any probe score
+
+(Clock 06:23 at writing; the two headings above, 06:20 and 06:25, ran a few minutes ahead of
+the clock — written 06:15 and 06:17.)
 
 Read in full: Codex's revision at `1d3091830` (`codex/team-conditioned-termination`, its own
 notebook). It withdraws the all-arms-retrained J / I / F priority, makes its next step
