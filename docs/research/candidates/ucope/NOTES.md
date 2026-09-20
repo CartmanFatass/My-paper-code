@@ -4742,3 +4742,49 @@ fixture is introduced. The previously completed B08 heartbeat remains paused; th
 message authorizes the independent work completed here, not automatic resumption of a
 scientific batch. Next empirical choice will use Claude's published map and concrete
 object/selector decision, with the above interpretation limits and baseline requirement.
+
+
+## 2026-09-20 22:46 UTC — L0: complete independent evaluation and gate-checkpoint preparation
+
+The owner asks to do the currently possible work. The scientific six-fit pause remains;
+the useful unfinished engineering is a common evaluator for the now-required controls and
+recoverable gate state. This does not choose a scientific batch or alter Claude's object.
+
+**Deliverable and ownership.** On `codex/team-conditioned-termination`, add
+`experiments/candidates/team_conditioned_termination/evaluation.py` and its mirrored tests
+(DM), and `checkpoint.py` with mirrored tests (one Sol/high Implementer). The Implementer
+owns only those checkpoint files, shares no Git staging, and edits no notebook. Leave core,
+Claude's runner/tests/notebook/runs and the shared index unchanged. Reuse the already
+published B08 `ExecutionRule`/label-generator semantics read-only for R10, not a new random
+baseline. This source dependency stays recoverable at the branch's committed revision.
+
+**Evaluation semantics.** One separate CPU evaluation agent and its own seeded complete
+Scenario1 episodes; no learner updates or buffers. Support as_trained, uniform_every_10,
+joint and independent. J/I use the existing hook and deterministic masks/selector/actions;
+R10 uses the original caps and independent uniform team/local replacements, with a private
+rule generator; count executed label changes separately from decision opportunities.
+All arms share world seeds, horizon, reward and native J conversion. Carry GRU through
+renewal; reset at episode start. Protect caller RNG, reject an agent with a live gate/hook,
+restore temporary attachments on success/error, retain actual partial counts on failure.
+This is an importable component, not an unadmitted command or automatic batch launcher.
+
+**Checkpoint semantics.** Save/load the new gate actor and critic, both Adam states,
+private sampling and minibatch-permutation RNG states, feature/config/arm metadata, an
+explicit frozen-foundation digest and source identity, and completed-episode/update counts.
+Resume support is at complete-episode/update boundaries only; it does not claim to restore
+native environment or foundation sampling streams/mid-episode recurrent state. Caller must
+provide the intended binding on load; mismatched arm/foundation/features/config are refused
+before mutating a live learner. Use plain tensor/primitive payloads and strict state loads.
+No checkpoint infrastructure is added to the core learner or Claude's artifact format.
+
+**Checks and cost.** Unit tensor checkpoints must reproduce the next gate sample and next
+PPO update, including nonempty optimizer moments, and reject binding/config mismatches.
+Native evaluator checks use initialized small CPU foundations, not the trained fixture from
+the prior 37 checks: six agents/twelve users, two lanes, 20 ticks, hidden width 32. Compare
+fixed and initial-KEEP paths, both learned mask modes, R10's held-label cadence/private RNG,
+native reward accounting, and attachment cleanup after a controlled failure. No foundation
+fit, B08 forward, research evaluation or remote execution. Report actual technical episode
+steps and synthetic optimizer updates; do not promote their scores to research evidence.
+Independent Reviewer examines checkpoint/RNG/evaluation semantics; DM accepts the diff.
+Stop this implementation at tested/reviewed components and a published notebook acceptance,
+without inferring that scientific training is authorized or that a skill object is settled.
