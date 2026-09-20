@@ -1880,3 +1880,65 @@ tree is collected at once.
 fits of the Codex session are running on this machine's CPU and I will not add load to their
 walls. It runs from the node checkout at the published sha, unadmitted as designed, zero
 optimizer steps; outputs under `runs/flexible_skill_duration/b05_probe_<block>/`.
+
+## 2026-09-19 21:40 PDT — B05 step 1 read (zero fits): unscaled, the CF actor's own observation does not reach its GRU; the three fits are launched
+
+**Execution facts.** Three probes on `wsl_4070` from the node checkout at the published
+`52400ff4d3ebe284cbc12dc8b8c510022b850d98` (recorded and requested sha equal), unadmitted as
+designed, node otherwise idle, about 18 s per construction; status complete, optimizer steps 0 on
+learner and evaluator, 2 × 32 evaluation episodes per block (192 in all, 96,000 team steps of
+policy execution, no training), the recomputed baseline action reproduces the panel's action
+exactly in all six. Collected by one rsync; the three `summary.json` sha256-identical to the node.
+Outputs `runs/flexible_skill_duration/b05_probe_{772803,772903,773003}/`.
+
+**Observations** (untrained policy, same seed for both constructions; ranges over three blocks).
+
+| measure | unscaled (CF_E0005 as run so far) | scaled (CF_S) |
+| --- | ---: | ---: |
+| state block's share of the first layer's per-block pre-activation norm | 1.0000 | .73–.76 |
+| own current observation's share | below 5e-6 (raw input share 4–5e-8) | .031–.035 |
+| GRU update / reset gate units saturated | .976–.980 / .975–.981 | 0 / 0 |
+| mean-action change, own observation × 1.05 | 3.9–4.4e-7 | 7.7e-6–1.0e-5 |
+| mean-action change, ego one-hot moved | 8.8–9.6e-6 | 1.9–2.1e-4 |
+| J_init (32 worlds) | .299, .271, .212 | .158, .262, .254 |
+
+(The share's denominator is the sum of the four per-block terms; bias and cross terms are left
+out. Absolute sensitivities are tiny in both because the action head starts at gain .01; the
+ratio is the read.)
+
+**Predictions, scored.** Unscaled state share above 90 %: held (1.0000). Unscaled sensitivities
+small: held. Scaled state share below one half: failed (.73–.76; 118 coordinates of order .5
+still outweigh a sparse 104-entry observation; the point of the prediction, that the other
+blocks become visible, holds: own observation from under 5e-6 to .03). Scaled own-observation
+sensitivity at least three times higher: held, 18 to 26 times; ego 21 to 23 times. Gate
+saturation lower when scaled (loosely held, I doubted it): held decisively, 98 % to 0.
+
+**A fact I did not predict.** The untrained unscaled policy scores J_init .299, .271, .212 on
+the three blocks; the CF_E0005 fits' late-window J after 45 rollouts is .290, .214, .283. The
+difference is −.009, −.057, +.071, mean +.002. The best flat learner so far ends where its
+untrained policy starts. "Does not learn" is now measured against a level, not inferred from
+displacement or a surrogate. (B04's arms end within about .07 of the same level on every block, some above and some below; B01's CF, with the entropy bonus, ends below it.)
+
+**Interpretation.** Strengthened, strongly: with raw-metre coordinates the CF actor is, from
+initialisation, a function of the held snapshot almost alone, fed through a GRU whose gates are
+98 % saturated, so neither the agent's own current observation nor its identity measurably
+changes its action; every flat fit since B01 trained that construction. This is a defect of the
+comparator's construction, present in B01's frozen CF as carded and implemented (my
+implementation note of 2026-09-18 called the snapshot "normalized"; it never was, because the
+running normalisers are off in these configs). Untouched: whether repairing it makes the flat
+learner learn (that is step 2), how much of the D1280–CF gap it explains, and anything about k.
+Contrary evidence kept: the scaled policy's J_init is not higher (.158/.262/.254 against
+.299/.271/.212), so conditioning by itself buys no better starting policy.
+
+**Decision, as written beforehand.** The probe shows a material difference in (a)–(c), so the
+three fits run. Launched through `flat_input_scale_b05/launch_fit.sh` and the admission kernel
+at launch sha `52400ff4d3ebe284cbc12dc8b8c510022b850d98` (the probes' source), node idle
+beforehand, all admitted at the first request, alive with empty `stderr.log`.
+
+| tag | arm | block | operation ref (under `/home/wu/projects/HMASD/.git/hmasd-admission/`) |
+| --- | --- | --- | --- |
+| `b05_s_772803_a01` | CF_S | 772803 | `4001f96dd3bc79448ec5b910edbbaad3899ae01ae85783d762ddd18fda99d8e9.json` |
+| `b05_s_772903_a01` | CF_S | 772903 | `c5f8f6079c786b3fdb8bfa7fdc83e0e8a0cbe372852013fb674754525f3c027a.json` |
+| `b05_s_773003_a01` | CF_S | 773003 | `881b27d0df8a9364dffa8f306eb512e7bdec28f61d4c5de9b5d9f347d05fd85a.json` |
+
+No B05 fit score or diagnostic is read before all three are terminal.
