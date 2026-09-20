@@ -1866,3 +1866,32 @@ checkpoint evaluations and optimizer updates. A bounded critic now challenges th
 investment judgment: identify a concrete differing prediction that makes a new observation
 useful, or state the missing counterfactual information without reviving the closed batches.
 The remaining six fits are capacity, not a requirement to spend them.
+
+The independent critic returned MATERIAL_DISSENT: no. The DM accepts its sharper boundary:
+decision usefulness needs the conditional expected KEEP/END difference under lawful history,
+not the same sign for every hidden team state. The retained aggregate episode/update files
+do not contain paired branch inputs and continuation outcomes; checkpoints alone cannot
+recover their conditional distribution without new native trajectories. No proposed revision
+currently has a concrete differing prediction sufficient to select the remaining six fits.
+This holds expenditure on these packages, not the UCOPE direction or the owner's continuing
+research authorization. The owner-requested Transport repair proceeds independently.
+
+### 2026-09-20 — owner requests an independent Astra Max session
+
+The owner requests a new independent Codex session using Astra at Max effort, carrying
+this work forward so the configured Full Access can take effect. The old session observed
+`approval_policy=never` and `sandbox_mode=danger-full-access` in its active configuration,
+but was still given a restricted runtime permission profile. The successor should check
+its effective permissions rather than assume that a new task proves the mismatch resolved.
+The old writer hands over this same authoring worktree/branch and stops writing after
+publication; Claude's checkout and FSD remain outside the assignment.
+
+The accompanying Transport repair keeps the existing commands and operation, reopens the
+accepted conversation after browser failure, bounds browser reads, and saves complete chat
+answers. Independent review found and prompted fixes for async DOM loading, changing turn
+indices and a swallowed timeout. The final focused suite passed 20 tests in 0.78 s; compile
+and whitespace checks passed. No new Chrome/Jev smoke or Send was performed. The next
+engineering action is one read-only retrieval from the already completed second request,
+checking the full saved answer against the published fallback. No third Pro request or new
+fit is allocated. The original research window, remaining six-fit capacity, branch-only
+write boundary and continuous agent-wait preference carry over unchanged.

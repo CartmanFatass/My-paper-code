@@ -39,10 +39,10 @@ never prints the conversation address unless `--show-url` is given.
 2. **Compose.** Save the author's complete message, unchanged, to a file and run
    `$JEV $D compose --message-file <file> --slug <slug> --subject <direction>`. It writes
    `temp/pro_transport/hmasd-pro-question-<slug>.md` (the complete message) and
-   `<slug>.short.txt` (a few lines naming the document and its SHA-256). This is the delivery
-   form for every question, not a shortened question: every line the author wrote reaches Pro,
-   the short text is compared verbatim and the document by name and hash. (A 2900-character
-   message typed into the box was not submitted by the send click, 2026-09-19.)
+   `<slug>.short.txt` (a brief request to read it, write the assigned Answer, or provide the
+   complete reply in chat if GitHub writeback is unavailable). Digests stay in local transport
+   metadata, outside the visible cover note. The complete question reaches Pro unchanged;
+   the driver compares the prepared text and attachment before sending.
 3. **Send once, headless by default.**
    `$JEV $D send --key <key> --prompt-file <short> --attach <document> --conversation new|<url>`
    starts the headless Chrome on the logged-in profile if none runs, sets the effort slider to
@@ -63,14 +63,17 @@ never prints the conversation address unless `--show-url` is given.
    - `send_attempted: true`: from here on observe only. `send_effect` is `sent` when the exact
      message was seen in the conversation, otherwise `uncertain` with `unresolved`.
    - Running `send` again under an attempted key never sends; it returns the stored operation.
-4. **Wait: one long call in the background.**
-   `$JEV $D wait --key <key> --prompt-file <short> --answer-file <path>` (default 3600 s; repeat
-   it if it returns `IN_PROGRESS`). It keeps one tab open, reports a change of state on stderr
-   rather than every sample, verifies that the conversation holds the short message and the
-   attachment, and also settles a `send_effect` left `uncertain`. `COMPLETE` needs equal text on
-   four samples and no Stop control, and says what it saved: `kind: "receipt"` with
-   `receipt_commits` when Pro wrote into the repository, or `"chat answer"` when the text itself
-   is the answer.
+4. **Wait and collect from the existing conversation.**
+   `$JEV $D wait --key <key> --prompt-file <short> --answer-file <path>` runs in the background
+   (default 3600 s). Once Send is accepted, Pro continues server-side; reopening Chrome does
+   not restart the research request. The driver checks Chrome while waiting and, if it closes
+   or its connection fails, restarts it as needed and reopens the recorded conversation.
+   Browser calls and retries are bounded. The flow is: thinking → wait; stable final reply →
+   save the full text; login, human verification or an unrecoverable error → return it promptly.
+   `IN_PROGRESS` ends only this observation window: call `wait` again on the same key.
+   Transport returns acceptance and material errors to the DM instead of leaving them behind
+   an idle agent wait. Completion saves the chat text even when GitHub could not write;
+   a hash mentioned in a reply is not evidence of delivery. Step 5 checks actual writeback.
    **Connector consent (owner, 2026-09-19).** When the page shows "Allow GitHub for this
    conversation", Jev answers it with "始终允许" (Always allow); the owner authorised this for the
    GitHub connector, as needed for engineering collaboration (`approval_policy`,
@@ -95,15 +98,16 @@ never prints the conversation address unless `--show-url` is given.
 
 ## Recovery
 
-An error, a timeout or a stale page does not prove the send failed. With `send_attempted: true`
-never send again under any key: run `wait`, or open the conversation read-only and look for the
-exact message. The one exception is `reconcile --key <key>`: read-only, it releases the key once,
-and only when no settled conversation was recorded and the committed text still sits as the
-unsent new-chat draft (the provider clears the draft when it accepts a message). A second
-uncertain send under a released key goes to the owner. With `send_attempted: false` the same key and text may be retried after the
-named repair. A restored draft in the box is overwritten by Jev's fill and recorded as
-`draft_replaced_sha256`. A login page, a challenge or an inaccessible provider is reported
-plainly and stops this send; switch to `--mode headed` for the human, not to a new question.
+After an accepted Send, recovery means reopening the same conversation and checking whether
+Pro is still thinking or has finished. Run `wait` with the existing key; do not resend the
+question because Chrome closed or a local wait timed out. Authentication or an error that
+prevents reading is reported with its concrete cause. Leave normal recovery to the driver.
+
+Only a genuine pre-send failure may retry the original key and text. For an uncertain Send,
+`reconcile --key <key>` is the existing read-only check: it releases the key once only when no
+settled conversation was recorded and the exact text is still the unsent new-chat draft.
+This exception does not apply to an accepted conversation. A second uncertain attempt is
+reported to the DM. Private conversation URLs remain in local operation files.
 
 Verified 2026-09-19: one real direction question sent headless as short message plus document,
 consent answered by Jev, the 21 000-character answer written by Pro into the repository and
