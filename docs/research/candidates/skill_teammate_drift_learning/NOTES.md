@@ -718,3 +718,348 @@ and B02, 243,000 primitive transitions and 2,592,000 replay uses, plus the one
 separately retained B01 pre-training refusal. B02 is an outcome-informed targeted
 revision, not fresh confirmation; three seed blocks do not establish a universal
 ranking or population precision. No claim note or confirmation batch was started.
+
+## 2026-09-20 15:50 PDT — B03 admission question, one bounded existence test
+
+**Owner re-entry and current control.** The owner has required this direction to
+answer its own admission question rather than treating B01/B02's rejected package
+as evidence that the whole direction is empty. Canonical main at
+`9ade1733724d4a2d4eb5d44bd4f2bad62a63d985` has pause lifted and this direction
+exploring under `Codex DM`; the author checkout remains
+`/home/fires/.codex/worktrees/fsd-b/hmasd-wsl`, branch
+`codex/skill-teammate-drift-learning`, previously clean/published at `2973ba512`.
+Affected constitution/method/compute bytes are unchanged from the prior accepted
+control. Fits remain a cost, without any allowance or per-batch permission gate.
+This entry supersedes the idle action above, not its negative results. No B03
+result or training data has been generated or inspected at this declaration.
+
+**Working explanation and primary-source bridge.** The useful distinction is
+between support of policy contexts and support of realized joint outcomes.
+Foerster et al., ICML 2017, section 4.1, equations 3–5 (PDF pages 4–5), explicitly
+factor stationary reward/transition given joint actions from the changing
+teammate policy. Section 4.2 motivates a low-dimensional fingerprint along the
+policy trajectory represented by replay; it does not establish extrapolation
+away from that trajectory. I reread those original passages at
+https://proceedings.mlr.press/v70/foerster17b/foerster17b.pdf . Their partially
+observed extension is approximate and is not the model tested here. HIRO's
+current-low-level likelihood relabeling and its appendix IS difficulties remain
+separate off-policy precedents, not evidence about Claude's current PPO.
+
+The new inference is deliberately small: old direct macro values can mix an
+obsolete joint outcome law, while old *outcome-conditioned* reward observations
+remain useful if that conditional reward is stationary and all relevant joint
+outcomes are covered. An exact-capacity behavioral fingerprint can nevertheless
+have an unobserved feature direction when historical contexts lie on a curve.
+This is ordinary conditional regression plus integration under a known current
+controller law, not a new algorithm or a revival of B02's normalized IS package.
+
+**Bounded design criticism before data.** A first analytical draft used historical
+`u=v`; an independent critic correctly showed its native task contrast was only
+`.7*(u-v)`, with the joint interaction cancelling. That draft was discarded before
+code or fits. The selected family instead has historical `u*v=.16`, leaving the
+intercept/joint-product direction unidentified for direct macro regression.
+The critic accepted this as a lawful, limited joint-conditioning example but
+identified that safe reward .45 let an additive outcome model choose correctly
+despite prediction error. Its population additive projection of `X*Y` under the
+declared historical distribution is approximately
+`-.187631 + .340116*X + .499660*Y`. I therefore set the safe reward to **.60 before
+any data**: over the declared target region the true joint payoff is about
+.670–.828, while that historical additive projection gives about .510–.586.
+This is explicit analytical construction of a decision-relevant interaction,
+not a naturally sampled task or a post-result threshold adjustment. One family
+will be tested; no subsequent payoff/window/seed search is planned. Critic advice
+is not empirical evidence.
+
+**B03 object and legal information.** A terminal one-macro contextual task has
+two high-level skills and two agents. Every macro lasts exactly **3 primitive
+ticks**. Safe skill 0 makes both agents hold at their initial positions and yields
+a Bernoulli terminal reward of mean .60. Cooperative skill 1 makes each agent
+attempt to reach its own one-step target, holding after first success. At each
+tick their independent success probabilities are p and q. Thus terminal
+completion bits X,Y have probabilities `u=1-(1-p)^3`, `v=1-(1-q)^3`. Cooperative
+reward is Bernoulli with stationary conditional means .05 for 00/01/10 and .95
+for 11. Only the evaluator/environment knows these means. The learner learns
+them from sampled rewards. The entire joint primitive trajectory is retained.
+
+Both controller probabilities change at every fixed macro boundary. Source has
+2048 macros, with `u=.25+.55*(j+.5)/2048`, `v=.16/u`, j=0..2047. Target has 256,
+with `u=.82+.10*(j+.5)/256`, `v=.84+.10*(j+.5)/256`, j=0..255. Primitive p/q are
+the inverse of the completion formula. Contexts never repeat; the target leaves
+the historical product curve. All four cooperative joint outcomes have positive
+source support. This is scripted controller drift, not endogenous low-level or
+teammate learning. Safe behavior is unaffected, but the alternative being learned
+depends genuinely on both changing agents, not an ego-only correction.
+
+Every arm receives exactly the same legal history: sampled rewards, skills,
+actual joint outcomes/primitive trajectories, and current p/q. The public skill
+law permits computation of current u/v. No target outcome, future context,
+conditional reward mean, phase label or optimal action is an actor input.
+High-level *collection* is uniformly random and shared across arms within seed;
+this removes exploration differences. A learned greedy policy is evaluated
+prequentially at each current context, before receiving that macro's reward.
+This measures direct off-policy high-level value learning, not exploration or
+long-horizon credit assignment. Exact expected native reward and both-action
+value errors are evaluator-only, do not update the learner, and use no extra
+sampled rewards. New target labels are then provided normally and identically,
+so any benefit may be finite-sample adaptation rather than permanent incapacity.
+
+**Six fixed arms, same samples and no tuning.** All use float64, prior mean .5,
+regularization/pseudocount strength 2, greedy ties choosing safe 0, and predictions
+clipped to [0,1] for decision/error reporting (also retain raw predictions).
+
+* `joint_response`: all-history empirical reward mean per (skill,X,Y),
+  `(reward_sum+1)/(count+2)`. Integrate the cooperative four cells against
+  `phi=[(1-u)(1-v),(1-u)v,u(1-v),uv]`; safe uses only its 00 cell. This is exactly
+  ordinary joint-outcome conditional regression, with five reachable cells.
+* `fingerprint_full`: strongest direct full-history fingerprint; ridge linear
+  regression per skill on the exact saturated phi basis (safe basis [1,0,0,0]),
+  lambda 2 and coefficient prior [.5,.5,.5,.5]. Its class contains the true
+  current value, including the joint product term. It is not a table of fresh
+  context identifiers or an age-only fingerprint. **Primary comparator.**
+* `fingerprint_recent`: identical saturated ridge model and prior, fitted to the
+  latest 64 macro observations (both skills share that window).
+* `uniform`: all-history skill reward means with the same Beta(1,1) prior; exact
+  full-buffer squared-loss sufficient statistics, not weak/noisy SGD replay.
+* `recent`: the same skill means, using the latest 64 macro observations.
+* `additive_response`: all-history actual-outcome ridge regression per skill on
+  [1,X,Y], lambda 2 and prior [.5,0,0], integrated as b0+bX*u+bY*v (safe uses
+  [1,0,0]). This receives the same outcome observations but lacks interaction;
+  its prior geometry is not identical to the saturated models. It is required to
+  distinguish joint native value from prediction accuracy alone.
+
+The scheme is not claimed superior to an equivalent ordinary joint conditional
+regression: that is its identity. Equal information does not imply equal use of
+the assumed stationary decomposition. The known completion law, observed joint
+outcomes and conditional stationarity are material assumptions, not oracle
+rewards; general settings may lack them.
+
+**Prospective horizon, endpoints and costs.** Fresh seed blocks
+**93001, 93002, 93003**, all six arms, **18 fits**. Each fit consumes 2304 macros,
+6912 primitive ticks, 2304 sampled reward labels and 2304 learner updates. Every
+macro has one pre-update exact current-context evaluation panel. Total planned
+cost: 41,472 macros/reward labels/updates/panels and 124,416 primitive ticks.
+Regression solves are small per-skill systems, not iterative replay draws; keep
+actual solve/update counts and memory scope distinct. Own fits run serially on
+`local_linux`, one numeric CPU thread; fresh native admission determines node
+availability. No wall/RSS performance assumption is made. There is no separate
+confirmation or claim note, and no additional fits are granted by completion.
+
+Primary native endpoint is mean expected greedy return on the **first 64 target
+macros**, each before its own reward (0 through 63 preceding target labels).
+Primary intermediate endpoint is mean absolute error over both current skill
+values at those same panels. Full target 256 and late target 64 are fixed
+secondary summaries. Keep all curves, actions, predictions, exact truth,
+contexts, sampled primitive randomness/outcomes/rewards, final sufficient
+statistics and resource/timing facts. No selected best checkpoint.
+
+**Falsifiable admission and action rule.** First verify source outcome support,
+nonrepeated contexts, changing joint law, causal paired data and actual learning.
+The old-macro liability prediction is that uniform full replay loses native
+return to recent replay on the **late target 64**, once recent data can replace
+the old mixture. The scheme predicts lower current-value error and higher
+primary native return than saturated `fingerprint_full`, with every seed block
+and every other comparator reported. Independent *joint* decision value also
+requires native improvement over `additive_response`; lower prediction error
+alone does not establish it. The recent saturated fingerprint is an explicit
+strong adaptation competitor, not an optional ablation. Positive paired native
+differences on all three seeds against these simple alternatives, together with
+the proxy/support checks, would be a finite constructed existence witness, not
+a population estimate or universality claim. If a simple baseline absorbs the
+native effect or these predictions fail, do not retune the construction or add
+seeds; append the bounded negative/pause judgment and exact re-entry condition.
+A narrower partial result will be stated as such, not silently counted as the
+full admission condition.
+
+**L0 engineering scope.** Add independent research module
+`experiments/candidates/skill_teammate_drift_learning/joint_response_b03/study.py`,
+matching tests, and guarded entry `scripts/run_stdl_joint_response_b03.py` with
+runner tests. No B01/B02, shared learner, environment, launcher or Claude path
+changes. Separate environment/evaluator reward truth from learner APIs; tests
+must cover product-curve rank/target support, joint-outcome projection and
+additive limitation, closed-loop three-tick dynamics, same-seed arm-independent
+data, before-update causality, recent eviction, priors/solves and exact native
+metrics. Production outputs are config/summary/curves JSON, transitions NPZ and
+learner-state NPZ, all non-pickle and round-trip checked. A bounded Implementer
+may own only the new scientific module/tests; DM owns runner, notebook, index
+operations and acceptance. Independent high-risk review precedes publication
+and result execution. Existing accepted-handle reconciliation rules apply.
+
+### 15:53 PDT — analytical support witness, before implementation results
+
+There is an explicit non-oracle identification contrast, not just a claim that
+contexts do not repeat. For cooperative fingerprint basis phi, take
+`n=(-.16,-.16,-.16,.84)`; then `phi dot n = u*v-.16`. The two legal conditional
+reward tables `mu=(.05,.05,.05,.95)` and
+`mu-.5*n=(.13,.13,.13,.53)` both give source expected reward .194 everywhere on
+the product curve. At current context (.87,.89), however, their expected values
+are .74687 and .43972, on opposite sides of the .60 safe alternative. Historical
+context/reward pairs alone cannot identify which extrapolation is right even
+with a saturated function class. Actual observed (X,Y,reward) cells can do so
+because they have source support. The learners receive those cells equally;
+the chosen scheme exploits them, while direct fingerprint does not. Off-curve
+target rewards progressively remove the ambiguity for direct fingerprint.
+This exact algebra does not promise a finite-sample native gain, which B03 must
+still test against the specified recent and additive competitors.
+
+## Pro consultation input — 2026-09-20 B03 joint-support admission
+
+Conversation: new (Root coordinates the requested consultation; no Send has been
+made by this DM). This input concerns **only B**, not a portfolio or A/C judgment.
+Question type: critique of a primary-source/simple-model bridge and its next
+direct-learning comparison. The decision is whether the proposed B03 identifies
+a lawful, scientifically useful admission condition for this direction, or
+whether its strongest simple alternative makes the direction pause more honest.
+
+**Owner request and standing.** The owner explicitly reopened B: answer when
+old macro experience genuinely limits high-level learning under simultaneous
+skill and teammate change, instead of treating the failure of one recurrent-
+context IS package as proof that the direction is empty. Fix termination clocks;
+do not diagnose/change Claude PPO or B08. Behavioral contexts must be nonrepeating,
+missing or not simply absorbed by competent fingerprint/replay. A one-agent
+correction, renamed recency filter or unavailable-information construction does
+not qualify. Pause is lifted and B remains `exploring`, lead `Codex DM`, verified
+against canonical main `9ade1733724d4a2d4eb5d44bd4f2bad62a63d985`. Constitution
+section 3 has **no fit allowance**; old skill/role quota text is superseded. B03
+costs 18 prospectively declared exploratory fits, not a confirmation or entitlement.
+
+**Evidence that must survive this consultation.** B01/B02 are 27 completed fits
+of globally normalized joint-trajectory IS in a fixed-clock, fully observed,
+scripted recurrent-context host. B01's modest advantage over a weak fingerprint
+did not survive the common optimistic-initialization repair. In B02 candidate
+minus stronger fingerprint primary effects were -.055923/-.034057/-.047778;
+candidate minus ordinary replay mean was -.044853, and its predicted residual
+improvement against ordinary replay reversed on all three seeds. Raw readback
+found no scientific defect. This kills that package there, not conditional
+reuse in every joint-drift setting. Keep that adverse result and the fact that
+ordinary/fingerprint replay already reused old data.
+
+**B03 admission witness, not a novelty claim.** See the 15:50 prospective entry
+and 15:53 algebra immediately above for the exact design. Over 3 fixed primitive
+ticks, two stochastic controllers independently reach their goals with known
+completion probabilities u and v; both controller probabilities drift at each
+macro boundary. Historical contexts are nonrepeating on `uv=.16`, while all
+realized (X,Y) outcomes have support. New contexts leave that curve. Two legal
+conditional reward tables, (.05,.05,.05,.95) and (.13,.13,.13,.53), give identical
+historical macro means .194, but at (.87,.89) give .74687/.43972, requiring
+opposite decisions versus the .60 safe alternative. Actual joint outcome/reward
+observations distinguish them; context/reward-only regression does not, until
+new off-curve labels arrive. Is this a valid and useful support mismatch for B,
+or an identification exercise whose assumptions remove the practical question?
+
+The sole scheme is ordinary stationary joint-outcome reward regression integrated
+under the legally known current joint controller law. It uses no reward oracle,
+future context or target outcome at decision time. **It is equivalent to ordinary
+joint conditional regression; no superiority or novelty beyond that method is
+claimed.** Every arm receives the same current policy parameters and same paired
+sampled trajectory/reward history. The host is a terminal one-macro bandit with
+scripted controllers: no endogenous co-learning, unknown transition dynamics,
+partial observation, communication cost, bootstrapping or exploration coupling.
+Known analytic completion law and stationary conditional rewards are substantial
+restrictions. Please distinguish a legitimate limited existence witness from
+evidence about learned HMASD skills, which it cannot provide.
+
+**Strong alternatives and strongest objection.** The primary is all-history
+ridge regression on exact saturated fingerprint features
+[(1-u)(1-v),(1-u)v,u(1-v),uv], so its class contains the truth. Also test the same
+model on the latest 64 macros, full/recent skill reward replay, and all-history
+actual-outcome additive regression on [1,X,Y] integrated at current u/v. All
+share prior mean .5, strength 2, identical samples and target reward exposure.
+The additive control was added after an independent critic showed that joint
+prediction error need not cause wrong native choices. The .60 safe threshold
+was analytically selected before data to make the interaction decision-relevant;
+that deliberate construction and its earlier rejected .45 draft are disclosed.
+
+The strongest objection is not merely that the fingerprint is nonlinear: it is
+already exact-capacity. It is that a competent same-information simple model
+can itself use the stationary outcome decomposition—indeed that is the scheme—
+and new target rewards may let direct/recent fingerprints adapt with negligible
+native loss. Thus B03 may establish only a narrow finite-sample model-based
+transfer effect, no special replay-correction innovation or target-domain
+opportunity. Please identify any still-missing *distinct* simple alternative or
+illegal information use, rather than ask us to beat an algebraically identical
+regression under a different name.
+
+**Falsification and advice that changes action.** B03 fixes 2048 source plus 256
+target macros, six arms, new seeds 93001/2/3 (18 fits); primary is pre-update
+expected greedy native return and current value MAE on the first 64 target
+macros. Late target 64 compares full ordinary replay with recent replay to test
+actual old-mixture liability. Native advantage over saturated recent fingerprint
+and additive regression is required for the full proposed admission, not proxy
+accuracy alone. No B03 result has been read at this question's publication.
+
+Please answer one focused question: **Does this bounded comparison meaningfully
+answer B's lawful admission condition, and what is the single most discriminating
+correction to its design or interpretation, if any?** Return the strongest
+counterargument and a source-grounded reason, separate analytical identifiability
+from finite-learning and package value, and state MATERIAL_DISSENT yes/no.
+An actual information leak, native-absorbing simple baseline, or coupling that
+does not implement joint drift would change or cancel B03 before a result
+launch. A feasible targeted change should predict both an intermediate and a
+native effect with explicit additional fit/non-fit cost. If the assumptions
+make this scientifically unhelpful even as a small bridge, say what concrete
+re-entry evidence would justify pausing now. More adviser agreement, a larger
+parameter sweep, a quota of new candidates or a theorem of universal usefulness
+will not by themselves change the decision. No new idea is owed and advice is
+not independent empirical evidence.
+
+**Context and source precedence.** Unless another full SHA is explicitly given,
+the following paths resolve at the `source_sha` supplied in the transport message:
+
+- `docs/project/OPERATING_CONSTITUTION.md`, sections 1–5 and 7–8: current authority,
+  advisory role, cost/no allowance, records and scientific minimums.
+- `.agents/skills/hmasd-scientific-tools/SKILL.md`, Update the working explanation,
+  Simple-model and literature bridges, Comparators, Statistics, Cost and exposure:
+  applicable reasoning method; its stale allowance language does not override
+  the constitution. Engineering Checks and review in
+  `.agents/skills/hmasd-research-engineering/SKILL.md` is relevant only if design
+  feasibility or executable semantics are disputed.
+- This NOTES file: B02 read at `2026-09-20 07:31 PDT`, B03 prospective at
+  `2026-09-20 15:50 PDT`, and 15:53 support witness. B02 evidence is the fifteen
+  `runs/skill_teammate_drift_learning/b02_*` directories' summary/curves/retained
+  transitions; their scientific inputs are frozen at
+  `3ac44381f093748ffe57f3da87fcb1ac201943ed`. These are adverse evidence, not a
+  contract that constrains B03 to the same scheme.
+- `experiments/candidates/skill_teammate_drift_learning/joint_response_b03/study.py`
+  and `scripts/run_stdl_joint_response_b03.py`: proposed executable semantics,
+  not empirical evidence. No B03 claim note or result exists yet.
+- Foerster et al., https://proceedings.mlr.press/v70/foerster17b/foerster17b.pdf ,
+  sections 4.1–4.2 equations 3–5: original stationary joint-action conditional
+  factorization, partial-observation caveat and fingerprint rationale. HIRO,
+  https://arxiv.org/pdf/1805.08296 , section 3.3 and appendix A: separate off-policy
+  precedent and adverse IS evidence, not a premise about PPO. Distinguish these
+  primary passages from our constructed support argument.
+
+Read the pinned question and selected context before answering. Current owner
+instructions and constitution govern; skills are methods; frozen/historical
+files retain only their explicitly bounded evidence meaning. These replace
+conflicting old chat instructions. Do not substitute chat memory or moving
+branch contents for reasoning inputs. Cite consequential sources actually used
+and explicitly identify any decision-critical source that could not be read.
+
+**Answer-only write boundary.** No training, launches, new records or edits
+outside the empty `### Answer` subsection belonging to this question. After Root
+hands over that subsection, write only it on branch
+`codex/skill-teammate-drift-learning`, target
+`docs/research/candidates/skill_teammate_drift_learning/NOTES.md`. Fetch the latest
+target file and actual blob SHA for writing; preserve every other byte and stop
+on overlapping edits. Return the actual successful commit; on write failure
+return the complete answer in chat, not just a receipt, link or status. Until
+that explicit handover the DM retains notebook ownership. Pro advises; the DM
+chooses and records adoption/rejection after reading the complete answer.
+
+### Answer
+
+## 2026-09-20 16:00 PDT — B03 implementation accepted for independent review
+
+The DM read and accepted the bounded Implementer's new 606-line scientific module
+and its eight focused checks, without importing any B01/B02 changes. The DM added
+the guarded runner, sixteen mocked publication/admission tests, three deterministic
+augmented-least-squares comparisons for the regression arms, and a fixed-default/
+64-panel indexing test. The combined focused suite passes **28 tests in .28 s**;
+`git diff --check` passes. These are small fixtures and mocked outputs, not B03
+production fits or comparative results. Independent runner review found no
+material issue; the full scientific path review is in progress against these
+fixed bytes. No B03 launch, training-result exposure, claim or confirmation has
+occurred. The six-arm contract and 18-fit cost remain unchanged. The owner-requested
+B-only consultation input above is ready for Root to transport; its Answer is
+still empty and owned by this DM until the explicit write handover.
