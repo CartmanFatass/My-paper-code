@@ -3296,3 +3296,22 @@ witness. No uncertain request was repeated, no duplicate/replacement invocation 
 and no training result was used to change the fixed endpoint, mode or sample count. After
 terminal evidence, the DM will reconstruct all fixed panels and account for actual work
 before updating the scientific judgment.
+
+### During B07: why retained-comparator selection has no guaranteed bias direction
+
+Before reading the final panels, one exact counterexample clarifies the adopted conditional
+scope. Let Z be equally likely -1 or +1, and let the exact ordinary-controller value be
+G=.5+.1Z while the candidate value is B=.5+.1*kappa*Z. There is no evaluation noise. In both
+cases kappa=1/2 and kappa=3/2, the unconditional mean of B-G is zero and B/G quality is
+positively associated. Selecting a setting whose ordinary value exceeds .5 leaves B-G=-.05
+for kappa=1/2 but +.05 for kappa=3/2. Exact Fraction arithmetic verifies both two-state laws.
+Fresh evaluation cannot erase this conditioning, since the values already are exact.
+
+This example does not model B06's actual selection statistic or claim that seeds were chosen
+by their scores: all three prescribed instances remain included, while sigma .5 was chosen
+using their B06 results. It only refutes a general claim that reusing a selected strong
+ordinary comparator necessarily makes the B-G contrast conservative. B07's new worlds remove
+reuse of its old evaluation scores; they do not create new ordinary learning instances or
+erase scale selection. Favorable and adverse panels receive the same conditional scope.
+The practical investment decision may change without pretending to estimate a population
+ranking or promising a later fresh confirmation batch.
