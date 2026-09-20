@@ -299,3 +299,34 @@ predeclared 12-fit local-CPU batch and its full curves/diagnostics. Its current
 dependency is Root's shared-writer coordination and canonical active/lead index
 integration, followed by the existing actual-node admission. There is no duplicate
 request, live run handle, periodic watcher or owner science approval to invent.
+
+## 2026-09-20 — canonical activation and first pre-training admission refusal
+
+Root reported the owner's explicit continuing experiment authority and canonical
+integration. Direct readback verified both published main and the actual control
+checkout `/home/fires/hmasd-wsl` at `b254ed1ea86cf8c39d925d87ded4fee368c5e0a1`,
+pause lifted, B exploring with lead `Codex DM`. The relevant constitution, compute
+configuration, methods and admission code are unchanged from the loaded controls.
+Published B source `167da1073f95fd35b01b3418f9ea84db60e3040a` also matched readback.
+
+At 13:48:24 UTC the DM submitted the first cell, `joint_is` / 91001, through the
+native local_linux snapshot launcher. It exited 4 before training with:
+`runner must contain exactly one require_admission(__file__, direction='skill_teammate_drift_learning') call before it can be spawned`.
+The runner used the same-valued `DIRECTION` constant; the launcher's static AST
+contract accepts only a literal. This is a reproduced launch-compatibility defect,
+not adverse scientific evidence. Inspection found no B operation claim and no
+output directory. Source ordering confirms this refusal preceded claim creation,
+output creation and runner spawn. A retained source snapshot may exist and is not
+deleted. Started production fits remain **0**. Exact failed-launch wall was not
+instrumented; request and refusal inspection fell within 13:48:24–13:48:59 UTC,
+which includes interaction time and is not a measured process duration.
+
+The repair replaces only the call's direction argument with the required literal
+and adds a regression invoking the actual static validator on this runner.
+Seven runner tests passed (DM .24 s; independent Reviewer .21 s). The same Reviewer
+returned no material finding, confirmed the refusal-before-effects ordering and
+that `study.py` is unchanged. DM accepts this compatibility repair. The next native
+request will use the published repaired SHA and the still-uncreated first-cell
+output tag. No accepted operation is rebound or duplicated. All scientific arms,
+seeds, horizon, endpoints and the twelve-fit batch are unchanged; no extra owner
+or Root permission is needed for these ordinary steps.
