@@ -2138,3 +2138,72 @@ no scaled-state D. Next is the persistence contrast inside the D family — k = 
 k = 1 with D as it is — as one prospective entry, after I have read how k enters the D route's
 high-level reward, discount and coordinator batch, since those change with k and have to be
 named as package differences before the fits, not after.
+
+## 2026-09-19 23:58 PDT — prospective: persistence contrast inside the D family, skill held 10 steps against redrawn every step (explore, six fits)
+
+**Idea.** D1280's coordinator is a near-uniform assigner (entropy 1.74–1.78 of 1.79), its
+discriminator reward a near-constant offset, and yet D1280 rises +.23 J from its untrained
+level where the repaired flat CF_S rises +.10. The explanation in line (21:05 entry, from the
+temporal-alignment design): a skill held for 10 steps is a *persistent policy mode*, so D's
+training-time exploration is temporally coherent — Var(a0 + a1) = 4Var(m) + 2Var(e) with the
+mode held, 2Var(m) + 2Var(e) with it redrawn — and the low level gains from that. The
+direction's own axis tests it without touching the flat learner: the same D with the skill
+redrawn every step.
+
+**How k enters the D route** (Scout map, static, read before this entry). Decision cadence on
+the d2 route is governed by `skill_cap_k_max` and `team_cap_k_Z` (`hmasd/agent.py:482-483,
+2596, 2613`), *not* by `config.k`; with c = c_Z = inf decisions fire only at resets and caps.
+`config.k` on this route only sets the low-level update's BPTT chunk length
+(`agent.py:6306-6309`; the sampler carries skills per step, `hmasd/utils.py:1281-1282`) and
+two unconsumed buffer fields. The team and individual discriminators have no k dependence.
+The high-level return is a discounted within-segment sum with `gamma ** elapsed` per hop
+(`agent.py:2353-2355`, `utils.py:1018+`). No validation refuses caps of 1
+(`configs/config_1.py:803-812`); the frozen runner's `arm_panels` does hard-code 10/10/10, so
+this object reduces with its own reader, as B05 did.
+
+**Arms** (thin entry over the frozen B01 runner, blocks 772803 / 772903 / 773003, 45 rollouts,
+panels as B01 stage 1, no shared-learner change):
+
+- `D_K10` — D1280 exactly as recorded, rerun with a read-only behaviour capture. B02 showed a
+  D1280 rerun is bit-exact on the node; here bit-identical panel scores against
+  `b01_s1_d1280_<block>_a01` are the runtime proof that the capture changes nothing. If a block
+  is not bit-identical, the capture is suspect and that block's behaviour measures are not read.
+- `D_K1` — the same with `skill_cap_k_max = team_cap_k_Z = 1`. `config.k` stays 10, so the
+  low-level update (chunk length, minibatches, epochs) is the same law in both arms.
+
+**Package differences other than persistence, named now.** (1) The coordinator's sample pool is
+about 8,000 rows per rollout instead of 800. I set `coordinator_batch_size = 12800` on `D_K1`,
+so both arms take one full-pool minibatch per epoch, 15 coordinator optimizer steps per
+rollout; B02 found no detectable difference between 15 and 105 steps at k = 10. The pool size
+itself cannot be matched. (2) The coordinator's per-hop discount and segment return are over 1
+step instead of 10: intrinsic to persistence, not separable. (3) Evaluation is deterministic
+(argmax skill) in both arms; at caps of 1 the evaluator re-chooses the argmax every step, which
+on a slowly changing state is *not* a random redraw. So J compares deployed policies, and the
+exploration claim is read on training-time measures first.
+
+**Behaviour capture** (training collection, per rollout, both arms): autocorrelation of the
+executed actions at lags 1, 2, 5, 9, 10, 20 (per lane × agent × action dimension series,
+mean-removed, averaged); per-UAV distinct 50 m cells visited per episode and path length over
+net displacement; fraction of steps on which an agent's skill changes (expected about .083 at
+10, .83 at 1 for a uniform assigner).
+
+**Expected, if persistence is what D's low level gains from.** Intermediate, rollouts 35–45:
+action autocorrelation at lag 5 higher in `D_K10` than in `D_K1` by at least .05 on three of
+three blocks, and more cells visited in `D_K10`. Native: late-window J of `D_K1` below
+`D_K10` by at least .05 in the mean and on at least two of three blocks (half of the
+D1280 − CF_S gap of .105), training return U lower as well. I hold this loosely: at
+initialisation the FiLM modulation by the skill may move the mean action very little against
+unit action noise, in which case the first intermediate prediction fails outright.
+
+**What each outcome would do.** Both hold: the persistent-mode explanation is strengthened, and
+the direction's first half — does a *fixed* persistence matter — has its first evidence inside
+the D family; an unfixed k is still untouched. Autocorrelation differs but J does not: mode
+persistence exists but is not what makes D better; weakened. Autocorrelation does not differ:
+the skills are behaviourally inert at this training length, the hierarchy's advantage is
+unrelated to skills, and the live difference between D and CF_S becomes the actor's input (104
+entries of own observation against 853) and the state-only critic — that would be the next
+entry. `D_K1` *above* `D_K10`: contrary to the explanation; recorded as such.
+
+**Cost.** Six fits (the idea's allowance; `D_K10` reruns are started training attempts and
+count). `D_K1` costs more per rollout: a decision pass every step and ten times the coordinator
+update rows. Node `wsl_4070`, at most four concurrent. Nothing is added after scores are seen.
