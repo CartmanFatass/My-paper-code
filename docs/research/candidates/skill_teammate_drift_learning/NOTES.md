@@ -1080,3 +1080,170 @@ The DM accepts the reviewed implementation for the declared comparison. The Pro
 question remains pinned to `7435fec3191926b61186ad7f97c39c182d10e932`; this
 review-only note changes no reasoning input or scientific setting and is not a
 reason to resend a question. No B03 result has started.
+
+## 2026-09-20 16:16 PDT — B03 native batch begins, Pro remains parallel advice
+
+Root explicitly clarified to continue the frozen B03 comparison without waiting
+for Pro. I adopt that clarification: adviser timing is not a launch gate, and
+later advice cannot change an already-started batch. Exact published input is
+`458cd9479533b435314d86cfb868757af0001caa`; its scientific source/test bytes equal
+the independently reviewed `7435fec31`. The author checkout was clean. Current
+canonical control at `a548c9748f4279d2d1a33f91f66e6d7bcb48f325` still has pause
+lifted and B exploring under `Codex DM`; affected constitution, methods and compute
+configuration are unchanged from the loaded control. Actual local_linux admission
+accepted the first fit with fresh memory/publication/lead/duplicate checks.
+
+The first recoverable handle is
+[joint_response 93001 manifest](../../../../runs/skill_teammate_drift_learning/b03_joint_response_93001/launch-manifest.json).
+Native status reports its actual process exit 0 and a consistent retained record;
+this is technical completion, not a read result. The rest of the declared six
+arms by three seeds run serially under the same input SHA and fresh per-run
+admission. No comparative scores have been read, no batch setting is changed,
+and no fit is added. Each output retains its own original manifest/preflight/
+process-exit and scientific artifacts. The DM retains observation responsibility.
+
+## 2026-09-20 16:25 PDT — B03 read: a bounded support condition exists
+
+**Technical facts and retained inputs.** All **18 planned fits** were admitted
+on actual local_linux at published input
+`458cd9479533b435314d86cfb868757af0001caa`, executed serially and have native
+exit 0, consistent handles and complete outputs. No rejection, retry, missing
+cell or extension occurred. The first acceptance was 23:15:52.939 UTC and final
+exit 23:22:28.504 UTC. Results were read only after all cells were terminal.
+Every manifest, actual-node admission/preflight, stdout/stderr, process-exit,
+config, summary, complete curves, transitions NPZ and learner-state NPZ remains
+under the following exact run roots (each contains `launch-manifest.json`):
+
+| Arm | 93001 | 93002 | 93003 |
+| --- | --- | --- | --- |
+| joint_response | [run](../../../../runs/skill_teammate_drift_learning/b03_joint_response_93001/) | [run](../../../../runs/skill_teammate_drift_learning/b03_joint_response_93002/) | [run](../../../../runs/skill_teammate_drift_learning/b03_joint_response_93003/) |
+| fingerprint_full | [run](../../../../runs/skill_teammate_drift_learning/b03_fingerprint_full_93001/) | [run](../../../../runs/skill_teammate_drift_learning/b03_fingerprint_full_93002/) | [run](../../../../runs/skill_teammate_drift_learning/b03_fingerprint_full_93003/) |
+| fingerprint_recent | [run](../../../../runs/skill_teammate_drift_learning/b03_fingerprint_recent_93001/) | [run](../../../../runs/skill_teammate_drift_learning/b03_fingerprint_recent_93002/) | [run](../../../../runs/skill_teammate_drift_learning/b03_fingerprint_recent_93003/) |
+| uniform | [run](../../../../runs/skill_teammate_drift_learning/b03_uniform_93001/) | [run](../../../../runs/skill_teammate_drift_learning/b03_uniform_93002/) | [run](../../../../runs/skill_teammate_drift_learning/b03_uniform_93003/) |
+| recent | [run](../../../../runs/skill_teammate_drift_learning/b03_recent_93001/) | [run](../../../../runs/skill_teammate_drift_learning/b03_recent_93002/) | [run](../../../../runs/skill_teammate_drift_learning/b03_recent_93003/) |
+| additive_response | [run](../../../../runs/skill_teammate_drift_learning/b03_additive_response_93001/) | [run](../../../../runs/skill_teammate_drift_learning/b03_additive_response_93002/) | [run](../../../../runs/skill_teammate_drift_learning/b03_additive_response_93003/) |
+
+**Read by the fixed endpoint.** Each cell below is mean expected greedy native
+return on the first 64 target macros, evaluated before its current reward. These
+are conditional exact evaluations of learned decisions, not collection-policy
+reward totals or 64 independent training replicates.
+
+| Arm | 93001 | 93002 | 93003 |
+| --- | ---: | ---: | ---: |
+| joint_response | .688782489 | .688782489 | .688782489 |
+| fingerprint_full | .655947166 | .616202412 | .630294261 |
+| fingerprint_recent | .667636099 | .671128584 | .600000000 |
+| uniform | .600000000 | .600000000 | .600000000 |
+| recent | .637686068 | .638676802 | .600000000 |
+| additive_response | .600000000 | .600000000 | .600000000 |
+
+Candidate minus primary saturated full fingerprint is
+**+.032835322 / +.072580077 / +.058488228**, mean +.054634542.
+Against recent saturated fingerprint it is
+**+.021146390 / +.017653905 / +.088782489**, mean +.042527594.
+Against ordinary recent replay it is +.051096420 / +.050105686 / +.088782489;
+against additive actual-outcome regression and uniform full replay it is
++.088782489 on every block. All prescribed native signs hold on all three fresh
+seed blocks, with no checkpoint or endpoint change.
+
+The intermediate prediction also holds. Candidate first-64 current-value MAE is
+.005337105 / .009986714 / .017008376; full fingerprint is
+.051214513 / .096701229 / .082992411, recent fingerprint
+.066186640 / .114493712 / .104023487, additive
+.077096009 / .102789136 / .100584118. Candidate's MAE is also below both plain
+replay arms on each seed. This is not a proxy-only result: candidate selects
+cooperation on all 64 early target panels, versus full fingerprint 37/10/19,
+recent fingerprint 46/49/0, recent replay 24/25/0 and additive 0/0/0.
+
+**Old-data liability and strongest contrary observation.** On late target 64,
+uniform full replay remains at .600000 while recent replay reaches .807582489
+on every seed: **recent minus uniform = +.207582489**. Old macro-value mixing
+really delays the task change here; this is not just a feature-rank argument
+with no native loss. In contrast, both saturated fingerprint arms and recent
+replay also reach .807582489, equal to candidate, on the late window. Full-target
+candidate minus full fingerprint shrinks to +.008208831 / +.018145019 /
++.014622057. Candidate is not persistently necessary once target data arrive.
+Target contexts also become more favorable, so late recovery is not solely
+attributed to added labels. On seed 93003 full fingerprint beats recent
+fingerprint, contrary to a blanket old-data-harm claim. Additive late returns
+are .807582489 / .731404676 / .669312261: interaction matters for the declared
+early decisions, not a guarantee that additive can never choose correctly.
+
+Candidate chooses target-optimal cooperation at the first target panel, with
+**zero target reward labels**, then throughout all 256 target macros. Its three
+exact native scores therefore match despite distinct estimates and sampled data.
+This is a saturated decision on a fixed context path, not zero training
+variability, zero population uncertainty or universal optimality. Independent
+units remain three training/data seeds; panels are nested. This is exploration,
+not confirmation.
+
+**Support, learning and independent readback.** All 2048 source and 256 target
+contexts are distinct; source uv=.16 and target leaves it. All cooperative
+outcomes occur in every source seed: 00/01/10/11 counts are respectively
+313/177/382/169, 305/191/384/149 and 325/173/387/161. Same-seed arms receive
+identical numerical trajectory/random-slot arrays. Each fit makes 2304 learner
+updates and pre-update panels, 6912 primitive ticks, zero evaluation updates
+and no additional sampled evaluation rewards. Candidate source parameter L2
+movement from prior is .923124/.910786/.907416; further target movement is
+.008747/.010990/.015832. Reward cells were learned from samples, not supplied.
+
+The DM recomputed all fixed endpoints, checked every joint physical transition
+and addressed reward against primitive random slots, and independently rebuilt
+complete final sufficient statistics. Augmented least-squares estimates at five
+causal history cutoffs per fit agree with saved pre-update predictions to maximum
+absolute discrepancy `4.28e-14`; source/target movement and solve counts also
+reconstruct. These are read-only arithmetic checks on retained data, not new
+reward collection, fits or result-bearing evaluations. No technical defect was
+found that would change the reading. An independent Critic separately checked
+all 18 summaries/curves, native exit/SHA/pre-update counts and the three fixed
+windows, and returned MATERIAL_DISSENT **no**. It agrees that the limited
+admission is met; its agreement is not independent empirical replication.
+
+**Cumulative interpretation and decision.** The declared **limited admission
+condition is met**: with nonrepeating/off-support behavioral contexts, stationary
+conditional rewards and lawful supported joint outcomes, old experience can be
+harmful as an unconditioned macro-value mixture yet useful as conditional response
+data. Learning and integrating that response provided early native value beyond
+exact-capacity full/recent fingerprint, recency and an outcome-additive model.
+Support, intermediate and native observations agree on this constructed host.
+This is ordinary joint conditional regression with a known current outcome law,
+not a new replay algorithm. Equal available information does not imply identical
+representation or stationarity assumptions. An equivalent ordinary joint
+conditional model is the scheme, not a missing different algorithm it beat.
+
+This strengthens conditional early-transfer opportunity and finite learnability.
+It weakens the broad interpretation that competent fingerprint/replay must
+always absorb the direction's opportunity. B02's rejection of normalized IS
+and simple baselines' late catch-up remain intact. The analytically selected
+product curve and .60 threshold, known independent completion law, random
+collection, terminal horizon, observed joint outcomes and stationary response
+are major scope limits. This does not establish endogenous co-learning, learned
+HMASD skill usefulness, unknown physics, partial-observation correction,
+communication benefit, Claude-PPO defects or UAV value.
+
+Do **not** pause B because no lawful condition exists: one now has a direct
+finite-learning witness. Keep the narrow bridge, not a general claim. B03 is
+closed and will not receive more seeds, settings or reruns. The Critic's useful
+next discriminator is to remove the exact historical product constraint while
+holding horizon and target path fixed: FP should start the target more accurately
+and the native gap should shrink if that special missing feature direction is
+the main opportunity. I adopt this as the next question to specify prospectively,
+ahead of adding an unknown-dynamics architecture. Such a successor would test
+the boundary of the positive finding, not enlarge B03 or search for bigger
+scores. Pro remains parallel advice and cannot rewrite the completed batch.
+
+**Cost.** Eighteen started/completed B03 fits, 41,472 macro observations/reward
+labels/statistic updates/panels and 124,416 primitive ticks. Same-seed rewards
+are deliberately reused across arms, not independent label sets. Full regression
+arms solve 2304 systems/fit; recent fingerprint solves 3433/3420/3412 due to
+cross-skill eviction, totaling **24,089** small solves. Mean arms use no linear
+solve or gradient optimizer steps. Sum runner walls **6.46493 s**, summed
+single-child CPU **4.94972 s**, maximum one-child peak RSS **47,288 KiB**. Own fits
+were serial with one numeric thread. First acceptance to final exit is
+**395.565 s**, not active occupancy; uninstrumented preparation/interaction time
+is not zero. Per-fit walls in the six-arm table order:
+93001 .284/.355/.373/.373/.280/.378;
+93002 .334/.390/.557/.341/.338/.400;
+93003 .319/.363/.350/.280/.423/.328.
+Direction exposure is **45 completed exploratory fits** (27 B01/B02 plus 18
+B03), with the earlier B01 pre-training refusal separately preserved.
