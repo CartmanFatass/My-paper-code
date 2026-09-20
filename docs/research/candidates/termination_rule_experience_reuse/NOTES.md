@@ -1754,3 +1754,102 @@ cumulative actual cost remains the 15 started/read local-CPU fits reported above
 source reading and exact algebra are not additional training evidence or a wall-time
 measurement. The Pro answer is fully collected and interpreted for A; Root's remaining
 role is shared-index integration, not scientific approval or a launch dependency.
+
+## 2026-09-20 — Final feasibility verdict: NOT_VIABLE_CLOSE
+
+**Decision: close `termination_rule_experience_reuse` as an independent research
+direction in its assigned fixed-skill, fixed-termination-rule scope.** This is the DM's
+current binary feasibility judgment under the owner's narrowed direction space. It
+supersedes the preceding idle, paused-investment and open-ended re-entry arrangements,
+including the immediately preceding entry. No admission investigation, future comparison
+or producer remains assigned to A. Root should remove A from active investment and record
+the direction as closed/archived in the shared index; that integration is administrative,
+not permission needed for this judgment. The owner's global pause is unchanged.
+
+### Answer to the original question
+
+Experience generated under one termination rule can lawfully improve learning for another
+rule. A01 already supports the practical value of ordinary multistep reuse relative to its
+one-step reference. The target rule changes a known controller transition law, however,
+not an otherwise new environmental law. With the required physical/controller state,
+teammate remaining commitments and actual action support retained, its identifiable
+effects belong to ordinary target-rule Bellman learning, Q(beta), augmented-state/SMDP
+learning, action-compatible intra-option learning, or model/history-belief off-policy
+learning. Direct adaptation of those methods is a legitimate solution, not an independent
+new correction merely because the experience has another termination label.
+
+The DAG and history-filter reductions cover both a real target-decision change and a
+strict finite-variance opportunity. In the latter, the proposed marginal correction is
+exactly the ordinary same-information history-policy likelihood ratio. This is not only
+an appeal to an unlimited state representation or asymptotic convergence. The DAG has a
+small same-data branch model/action-compatible reverse update, and the marginal filter
+has explicit finite arithmetic, with its all-start-row and controller-memory costs kept
+visible. An added learned gate would change the assigned question and is excluded.
+
+If the target requires an action branch with no behavior support and no independently
+justified model knowledge, the two-environment construction gives identical legal data
+but different target values and decisions. That branch is not identifiable here. The
+observed suffix of continuing the old skill is not the outcome after earlier termination;
+relabeling it cannot supply the missing data. Finite missing coverage despite positive
+support is instead ordinary sampling uncertainty, not this impossibility result.
+
+Thus, within this scope, lawful identifiable reuse is an ordinary learning problem,
+whereas the unsupported alternative is not learnable from the admitted observations.
+That classification does not say every ordinary estimator has the same finite-data
+performance. It says there is no remaining independently specified termination-reuse
+object, with a distinct legal target and practical discriminant, for this direction to
+continue pursuing now.
+
+### Evidence supporting closure, including contrary evidence
+
+- A01: both multistep arms improved on one-step in all three independent training blocks.
+  Retrace minus Q(beta) primary mean was +0.00000904, with mixed seed signs and a wide
+  interval. This supports ordinary reuse, not stable extra value from the selected trace
+  correction. It is not an equivalence result.
+- A02: the long-behavior package increased endpoint occupancy and effective trace mass,
+  as predicted, but long minus matched primary was negative in all three new blocks,
+  mean -0.00753038. The interval remained wide and the early panel favored long behavior
+  on average. The selected package did not earn continued investment; these observations
+  neither isolate the causal component nor establish general long-collector inferiority.
+- The shared-prefix DAG separates the target value 7/8 from behavior value 169/512 and
+  safe value 3/4. Its nine constructed legal primitive rows support the ordinary solution
+  in eight scalar backups after coverage. The count is not a collection-cost claim or
+  an additional empirical result.
+- Marginalizing option paths strictly reduces untruncated return-estimator variance in
+  both the DAG and random-loop analogue, but an ordinary history-policy filter produces
+  the identical weights. The latter bridge is single-agent, not evidence about persistent
+  unobserved teammate commitments. Its variance statement does not prove a clipped-TD or
+  native-return ranking. The zero-support example closes only the genuinely unsupported
+  alternative.
+
+The conclusion therefore does not rest on a failed package alone. It combines the
+empirical extra-benefit failures with explicit ordinary reductions of the strongest
+lawful counterconditions examined and an identification boundary for the unsupported
+case. The fully observed fixed service host is the available collected-data/target
+interface. The bridges are exact constructed examples, not an existing new target use.
+No current legal host/data/target combination supplies a distinct next comparison that
+survives the same-information ordinary references. Merely saying that finite samples,
+approximation or computation might matter does not identify one, and is not retained as
+a standing task or a reason to keep A active.
+
+I read the complete Pro answer preserved in
+`8904327f9598d4896cb9425550f84584deaa902a`. I retain its qualifications about coverage
+cost, finite estimation, non-equivalence and ordinary reuse, and its recommendation not
+to extend the current incremental learner/collector pathway. Adviser agreement is not
+independent empirical evidence or an approval gate. The final closure, rather than the
+previous pause, is my own direction judgment under the owner's current binary request.
+
+### Closed scope and preserved result
+
+The rejected proposition is a currently viable **independent termination-rule experience
+reuse research direction** under these fixed skills/rules and admitted observations.
+It is not that off-termination learning is useless, that all finite estimators are optimal,
+or that arbitrary hidden-state, adaptive-teammate or UAV problems have been disproved.
+Those different questions are not carried forward as A's open work. There is no final
+confirmation claim and no queued fit, new toy, sweep, replication or consultation.
+
+All 15 actual fits are collected and scientifically read. Incremental cost since A02 is
+zero fits and zero new simulator trajectories. Published code, raw outputs, notebook
+history and the verbatim Pro answer remain intact; no process is stopped and no evidence
+is deleted. This entry closes A's scientific work and replaces its earlier open-ended
+standing, leaving only Root's shared-index record of `NOT_VIABLE_CLOSE`.
