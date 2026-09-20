@@ -2604,3 +2604,39 @@ unclamped replay score Z/sigma for its latent mean and Z^2-1 for log_std; the re
 scales are far from clamp bounds. Halving initial sigma also changes score/Fisher geometry,
 not just visited commands, under otherwise identical finite PPO/Adam settings. The package
 reading and mean-deployment endpoint retain exactly that uncertainty.
+
+### B06 engineering acceptance: concrete preparation, native execution pending
+
+The Implementer completed only the three assigned new B06 path groups. The DM read the
+implementation, existing collector/update route and tests against the preceding design;
+the paired initial states, trainable scales, private RNG objects, unchanged ordinary G
+learning and four frozen final deployments match it. No shared or historical learner,
+environment or evaluator was changed. The production CLI admits before scientific imports,
+output creation, model construction or native effects and exposes no fixture/scale/horizon
+override.
+
+Independent engineering review found two reachable interruption-accounting defects, both
+repaired before acceptance. Evaluation counters are now attached to the summary before any
+evaluation effects, retaining completed episodes and partial calls if collection or close
+fails. Early-scale observations are appended only after each actual episode reset, including
+an episode that subsequently fails, so failure in the first episode cannot invent the second
+start or falsely complete the 256-episode window. Focused fixtures cover partial later
+evaluation, close failure, the first failed training episode, and the 255/256/257-start boundary.
+The independent re-review closed both findings with no remaining material defect; the DM
+accepts the repaired implementation for publication.
+
+Implementer checks: 16 focused B06 tests passed in 3.82 seconds; changed-source compilation
+and whitespace checks passed. DM separately ran the existing runner admission contract:
+2 tests passed in 0.10 seconds. No native environment, checkpoint evaluation or result fit
+ran during preparation. These synthetic/source checks do not establish native performance.
+Primitive reward arrays inherit FP32 storage from the unchanged collector; reconstruction
+uses dtype-appropriate tolerances, with emitted episode returns as the contrast source,
+rather than promising bit equality to sums of rounded primitive values.
+
+The fixed proposed exposure remains six started fits on masters 8941/8942/8943, 2048 by 256
+training steps per arm, 3,342,336 total native team steps including final evaluation, and
+no further Pro call. B04 and B05 already used the two allowed batches; six of twelve fits
+have started. Publication of this prepared implementation does not amend that limit. Once
+the concrete inputs are published, the DM will ask one scope question about allowing this
+third batch, preserving the twelve-fit ceiling and 2026-09-21 04:06:07 UTC deadline, while
+continuing useful work that needs no new native batch.
