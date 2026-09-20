@@ -2750,3 +2750,23 @@ do not choose whichever deployment mode makes the package look best. A sampled-o
 does not meet the primary prediction. An adverse or mixed primary stays adverse or mixed,
 without an automatic scale grid, extra seed or revived mean-agreement rule. These are
 interpretation commitments, not new pass/fail thresholds or another execution allowance.
+
+## 2026-09-20 09:35 UTC — owner authorizes the concrete B06 third batch
+
+In response to the published six-fit scope question, the owner explicitly answered:
+"允许 B06 第三批，保留总 fit 数和原截止时间". This amends only the prior two-batch limit
+to include the reviewed B06 comparison. The original total ceiling of twelve started fits
+and deadline **2026-09-21 04:06:07 UTC** remain. Six B04 fits have already started and
+completed; B05 used zero fits. B06 allocates the remaining six, including any failed start,
+with the recorded 2048 by 256 exposure, masters 8941/8942/8943, fixed arms, endpoints and
+6000-second watchdog. No further Pro question, retry, scale search, main merge or other
+direction launch is added. The scheduler stays paused; the direct DM carries this work
+through the active task.
+
+The repaired implementation was independently reviewed and published in `6eebed3f4`;
+subsequent commits contain interpretation only. The source-level initial mean-policy
+identity and all prospective comparisons remain unchanged. Publish this explicit amendment
+with the exact inputs, then admit the three pair invocations on local_linux in sequence;
+their native processes may overlap. The kernel will check current canonical pause/lead,
+publication, actual-node memory and duplicate claims before each release. Preserve returned
+native handles and any uncertain acceptance; no direct-run or repeated new-request fallback.
