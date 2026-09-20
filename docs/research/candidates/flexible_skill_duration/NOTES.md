@@ -2631,3 +2631,27 @@ while the deployed selector nearly always returns the held one (B07: the caps-10
 changes a label at only 10–15 % of its decisions). Read as description of accessibility, not
 as END-minus-KEEP value. If (b) and (c) show an inert label, this part is reported and not
 interpreted further.
+
+## 2026-09-20 07:05 PDT — B08 probe extension (accessible END) written and accepted; no probe score exists
+
+Implementer from my scope note; I checked that the diff touches only the probe and the reduce
+(`_run`, `run_probe`, `run_rule_panel`, `probe_row`, `reduce_inputs`, additive constants and
+the new section; `run_fit`, `make_config`, `save_final_weights` and the launch script are
+byte-identical, and the three running fits execute a snapshot of `fbae667d9` in any case), ran
+the checks (42 passed in the B08 directory; the Implementer's cross-object run of 163 passed)
+and accepted it.
+
+Fixed before any score. Histories: stride 7 over ticks with a fixed world rotation, decisions
+(resets, dones, forced caps) excluded — 64 per block at the production geometry, strata
+7 / 22 / 35 for 1 / 2–4 / 5–9 ticks to the team cap; ages are read before the route overwrites
+them. The replacement law q comes from a forward hook on the coordinator's own decoder during
+the real `assign_partial_batch` call (kept-first order), with the run-time checks that its
+argmax is the label the method returned and that up to four real decisions of the panel are
+reproduced exactly offline. **Pair rule: Codex's serving/strongest-competitor rule is
+available read-only** (`uav_env.py:980-997` keeps `sinr_matrix` and `connections`; no edit
+under `envs/`), guarded by a position check between the captured state and the environment
+read (the evaluator rebuilds its environments at every panel, and a stale handle was caught
+this way during implementation); the horizontal-nearest rule remains only as the recorded
+fallback. The agent applies no conversion or clipping to actions; the environment scales by
+`max_speed × time_step` = 30 m per action unit and clips positions. The extension leaves the
+four rule panels and the label-effect block bit-identical with it on or off.

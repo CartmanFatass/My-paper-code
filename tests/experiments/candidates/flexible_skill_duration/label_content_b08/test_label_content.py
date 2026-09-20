@@ -45,6 +45,7 @@ N_UAVS, N_USERS, AREA, HEIGHTS = 6, 50, 1000., (50., 150.)
 # Exact dyadic offsets from the block base, per arm and block; every panel of a fit carries them.
 # `D_SAVE` carries the D1280 reference's own scores, which is the bit-identical case.
 OFFSET = {"D1280": [0., 0., 0.], "D_SAVE": [0., 0., 0.]}
+PAIR_RULE_KEYS = tuple(f"pair_rule_{name}" for name in label.PAIR_RULES)
 
 
 def lanes(count):
@@ -409,6 +410,190 @@ def test_the_low_level_value_spread_recovers_a_known_team_label_offset():
     assert result["value_norm"]["use_valuenorm"] is True
 
 
+# ---------------------------------------------------------------------------
+# (d): the pure measures of the accessible-END reading
+# ---------------------------------------------------------------------------
+
+
+def test_the_law_weighted_action_change_is_the_laws_own_squared_distance_from_keep():
+    """A synthetic label sweep with a known offset, a known law and a known variance."""
+    labels, dims = 6, 3
+    delta = np.array([.1, .2, .4])
+    means = np.arange(labels)[:, None] * delta[None, :]  # label l shifts dimension d by l * delta
+    variance = np.array([1., 4., 16.])
+    law = np.array([.5, .2, .1, .1, .05, .05])
+    held = 2
+    expected = float(sum(
+        law[l] * np.mean(((means[l] - means[held]) ** 2) / variance) for l in range(labels)))
+    assert label.law_weighted_action_change(means, held, law, variance) == pytest.approx(expected)
+
+    # KEEP contributes zero, so a law that keeps with probability one reaches nothing
+    certain = np.zeros(labels)
+    certain[held] = 1.
+    assert label.law_weighted_action_change(means, held, certain, variance) == 0.
+    # an inert label sweep is zero under every law
+    assert label.law_weighted_action_change(
+        np.zeros((labels, dims)), held, law, variance) == 0.
+    # the per-dimension normaliser is the variance, not the standard deviation
+    assert label.law_weighted_action_change(means, held, law, variance * 4.) == pytest.approx(
+        expected / 4.)
+
+
+def test_the_capture_rule_at_the_production_geometry_covers_every_phase():
+    """What the fixed rule selects on the real panel: 32 worlds, 500 ticks, caps of 10.
+
+    Arithmetic only, no model: the rule is an even stride over ticks crossed with a world rotation,
+    and a candidate tick that falls on the forced team boundary yields nothing.
+    """
+    horizon, limit, lanes, period = 500, label.HISTORY_LIMIT, 32, 10
+    capture = label.HistoryCapture(
+        SimpleNamespace(config=SimpleNamespace(n_agents=6, n_z=6, n_Z=6, state_dim=STATE_DIM,
+                                               obs_dim=OBS_DIM)),
+        limit=limit, horizon=horizon)
+    assert capture.stride == 7  # 500 // 64
+    candidates = list(range(0, horizon, capture.stride))
+    assert len(candidates) == 72
+    # a_Z is the predecision team age: tick 0 resets, and the cap fires at every multiple of 10
+    kept = [tick for tick in candidates if tick % period]
+    assert len(kept) == limit == 64  # the eight excluded candidates are the multiples of 70
+    assert [tick for tick in candidates if tick not in kept] == list(range(0, horizon, 70))
+    # every world is taken exactly twice, in the fixed rotation
+    worlds = [index % lanes for index in range(len(kept))]
+    assert sorted(set(worlds)) == list(range(lanes))
+    assert all(worlds.count(world) == 2 for world in range(lanes))
+    # and every time-to-forced-cap from 1 to 9 is present, so the three strata are all populated
+    strata = {}
+    for tick in kept:
+        strata[label.stratum_name(period - tick % period)] = strata.get(
+            label.stratum_name(period - tick % period), 0) + 1
+    assert strata == {"1": 7, "2-4": 22, "5-9": 35}
+    assert sum(strata.values()) == limit
+    assert len({tick % period for tick in kept}) == 9  # phases 1..9, never 0
+
+
+def test_the_strata_are_the_entrys_own_three():
+    assert [name for name, _low, _high in label.PHASE_STRATA] == ["1", "2-4", "5-9"]
+    assert [label.stratum_name(value) for value in range(1, 10)] == [
+        "1", "2-4", "2-4", "2-4", "5-9", "5-9", "5-9", "5-9", "5-9"]
+    assert label.stratum_name(0) is None and label.stratum_name(10) is None
+
+
+def test_the_serving_competitor_pair_is_codexs_rule_on_a_known_serving_state():
+    """Five UAVs, four users, a hand-built serving assignment: the rule has one answer."""
+    sinr = np.array([
+        [10., 10., -5., -5.],   # UAV 0 serves users 0 and 1
+        [3., 2., 9., -8.],      # UAV 1 serves user 2, and is the best other link for user 0
+        [1., 4., 1., 7.],       # UAV 2 serves user 3, and is the best other link for user 1
+        [9., 9., 9., 9.],       # UAV 3 serves nobody: it is never a competitor
+        [-20., -20., -20., -20.]])
+    connections = np.zeros((5, 4), dtype=bool)
+    connections[0, 0] = connections[0, 1] = connections[1, 2] = connections[2, 3] = True
+    snapshot = {"sinr": sinr, "connections": connections, "positions": np.zeros((5, 3)),
+                "min_sinr": 0., "max_connections": 10, "users": 4}
+    pair = label.serving_competitor_pair(snapshot)
+    # user 0: server 0, best other serving link 1 (3 dB > 1 dB) -> (0, 1)
+    # user 1: server 0, best other serving link 2 (4 dB > 2 dB) -> (0, 2)
+    # user 2: server 1, best other serving link 2 (1 dB > -5 dB) -> (1, 2)
+    # user 3: server 2, best other serving link 0 (-5 dB > -8 dB) -> (0, 2)
+    # so (0, 2) is counted twice and wins; UAV 3 serves nobody and is never a competitor
+    assert pair["agents"] == [0, 2] and pair["count"] == 2
+    assert pair["rule"] == "serving_competitor" and pair["candidate_pairs"] == 3
+    assert pair["service_loads"] == [2, 1]
+    assert pair["serving_sinr_mean_dB"] == pytest.approx(np.mean([10., 7.]))
+    assert pair["competitor_sinr_mean_dB"] == pytest.approx(np.mean([4., -5.]))
+    assert pair["served_users"] == 4 and pair["serving_uavs"] == 3
+
+    # nobody is served: no pair
+    empty = dict(snapshot, connections=np.zeros((5, 4), dtype=bool))
+    assert label.serving_competitor_pair(empty) is None
+    # a single serving UAV has no other serving UAV to pair with
+    single = np.zeros((5, 4), dtype=bool)
+    single[0, 0] = True
+    assert label.serving_competitor_pair(dict(snapshot, connections=single)) is None
+
+
+def test_the_nearest_horizontal_pair_ignores_height_and_breaks_ties_by_id():
+    positions = np.array([[0., 0., 100.], [10., 0., 50.], [0., 10., 150.], [500., 500., 100.]])
+    pair = label.nearest_horizontal_pair(positions)
+    assert pair["agents"] == [0, 1] and pair["rule"] == "nearest_horizontal"
+    assert pair["horizontal_distance_metres"] == pytest.approx(10.)
+    # the height differs by 50 m and does not enter; an exact tie takes the lowest ids
+    tied = np.array([[0., 0., 0.], [1., 0., 0.], [2., 0., 0.], [3., 0., 0.]])
+    assert label.nearest_horizontal_pair(tied)["agents"] == [0, 1]
+
+
+def test_the_pair_rule_falls_back_when_the_snapshots_are_not_the_histories_own():
+    """A snapshot from another environment or tick does not establish a predecision serving state."""
+    good = [{"serving": {"connections": np.zeros((6, 4), dtype=bool)}, "position_gap": 1e-5}
+            for _ in range(4)]
+    rule, reason, worst = label.resolve_pair_rule("serving_competitor", good)
+    assert rule == "serving_competitor" and reason is None and worst == 1e-5
+
+    stale = copy.deepcopy(good)
+    stale[2]["position_gap"] = 993.4  # the whole-area difference a never-stepped lane gives
+    rule, reason, worst = label.resolve_pair_rule("serving_competitor", stale)
+    assert rule == "nearest_horizontal" and worst == 993.4
+    assert "not the captured states' own" in reason
+
+    missing = copy.deepcopy(good)
+    missing[0] = {"serving": None, "position_gap": None}
+    rule, reason, _worst = label.resolve_pair_rule("serving_competitor", missing)
+    assert rule == "nearest_horizontal" and "carry no predecision serving state" in reason
+
+    # the fallback is never overridden, and it carries the reason it was requested with
+    assert label.resolve_pair_rule("nearest_horizontal", good, "no serving state here") == (
+        "nearest_horizontal", "no serving state here", None)
+
+
+def test_a_host_without_the_serving_state_selects_the_fallback_pair_rule():
+    available, reason = label.serving_available([SimpleNamespace(env=None)], 6)
+    assert available is False and "does not expose" in reason
+    available, reason = label.serving_available([], 6)
+    assert available is False and "no evaluation environments" in reason
+    assert label.serving_snapshot(SimpleNamespace(env=SimpleNamespace()), 6) is None
+    assert label.action_scale([SimpleNamespace(env=None)]) is None
+    assert label.action_scale([SimpleNamespace(env=SimpleNamespace(max_speed=30., time_step=1.))]) \
+        == 30.
+
+
+def test_the_end_aggregates_count_every_query_and_every_stratum():
+    records = [
+        {"label_changes": True, "one_minus_q_held": .8, "law_weighted_action_change": .2,
+         "greedy_action_change_in_std_units": .4, "greedy_action_change_native_max_abs": .1,
+         "next_hidden_relative_difference": .3, "min_remaining": 1, "stratum": "1"},
+        {"label_changes": False, "one_minus_q_held": .2, "law_weighted_action_change": .0,
+         "greedy_action_change_in_std_units": .0, "greedy_action_change_native_max_abs": .0,
+         "next_hidden_relative_difference": None, "min_remaining": 3, "stratum": "2-4"},
+        {"label_changes": False, "one_minus_q_held": .5, "law_weighted_action_change": .1,
+         "greedy_action_change_in_std_units": .2, "greedy_action_change_native_max_abs": .05,
+         "next_hidden_relative_difference": .1, "min_remaining": 7, "stratum": "5-9"}]
+    overall = label.aggregate_end_records(records)
+    assert overall["agent_queries"] == 3
+    assert overall["same_label_reselection"] == {"count": 2, "of": 3, "fraction": 2 / 3}
+    assert overall["label_changes"] == {"count": 1, "of": 3, "fraction": 1 / 3}
+    assert overall["mean_one_minus_q_held"] == pytest.approx(.5)
+    assert overall["mean_next_hidden_relative_difference"] == pytest.approx(.2)  # None is skipped
+    strata = label.by_stratum(records, label.aggregate_end_records)
+    assert [strata[name]["agent_queries"] for name in ("1", "2-4", "5-9")] == [1, 1, 1]
+    assert strata["outside_1_to_9"]["agent_queries"] == 0
+    assert sum(strata[name]["agent_queries"] for name in strata) == overall["agent_queries"]
+    assert label.aggregate_end_records([])["same_label_reselection"]["fraction"] is None
+
+    pairs = [
+        {"pair": {"agents": [0, 1]}, "stratum": "1", "label_changes": [True, True],
+         "singleton_label_changes": [True, False], "action_change_in_std_units": [.4, .2]},
+        {"pair": {"agents": [0, 2]}, "stratum": "5-9", "label_changes": [True, False],
+         "singleton_label_changes": [False, False], "action_change_in_std_units": [.1, .0]},
+        {"pair": None, "stratum": "2-4", "label_changes": (),
+         "singleton_label_changes": (), "action_change_in_std_units": ()}]
+    outcomes = label.aggregate_pair_records(pairs)
+    assert outcomes["histories"] == 3 and outcomes["histories_with_a_pair"] == 2
+    assert outcomes["histories_without_a_pair"] == 1
+    assert outcomes["outcome_counts"] == {"neither": 0, "one": 1, "both": 1}
+    assert outcomes["both_singletons_also_change"] == {"count": 0, "of": 2, "fraction": 0.}
+    assert outcomes["mean_action_change_in_std_units"] == pytest.approx(np.mean([.4, .2, .1, .0]))
+
+
 def test_the_action_standard_deviation_is_the_heads_own_log_std():
     head = DiagGaussian(4, 3, use_orthogonal=True, gain=.01, args=None)
     with torch.no_grad():
@@ -430,6 +615,13 @@ def test_every_recorded_measure_carries_a_definition():
         assert name in label.RULES and isinstance(text, str) and len(text) > 40
     for name, text in label.SOURCE_NOTES.items():
         assert isinstance(text, str) and len(text) > 40
+    for name, text in label.END_DEFINITIONS.items():
+        assert isinstance(text, str) and len(text) > 40
+    for name in PAIR_RULE_KEYS:
+        assert name in label.END_DEFINITIONS
+    # the strata definition says what these strata cannot identify on this construction
+    assert "collinear" in label.END_DEFINITIONS["strata"]
+    assert "synchronised" in label.END_DEFINITIONS["strata"]
     actor = SyntheticActor(np.zeros((6, 3)))
     result = label.label_action_effect(actor, synthetic_capture(2, 3, 6, actor), np.ones(3), n_z=6)
     for key in ("rms_label_deviation", "over_std", "max_pairwise_label_distance",
@@ -548,6 +740,43 @@ def placed(summary, arm, index):
     return summary
 
 
+def accessible_end_summary(index):
+    """The shape of (d) that `reduce` reads, with per-stratum counts that add up."""
+    stratum = lambda queries, reselection: {
+        "agent_queries": queries,
+        "same_label_reselection": {"count": int(queries * reselection), "of": queries,
+                                   "fraction": reselection},
+        "label_changes": {"count": queries - int(queries * reselection), "of": queries,
+                          "fraction": 1. - reselection},
+        "mean_one_minus_q_held": .3 + .01 * index,
+        "mean_law_weighted_action_change": .02,
+        "mean_greedy_action_change_in_std_units": .1,
+        "mean_greedy_action_change_native_max_abs": .05,
+        "mean_next_hidden_relative_difference": .2,
+        "mean_min_remaining": 5.}
+    return {
+        "pair_rule": "serving_competitor", "pair_rule_reason": None,
+        "histories": 57, "agent_queries": 342,
+        "caps": {"skill_cap_k_max": 10, "team_cap_k_Z": 10, "labels": 6},
+        "metres_per_action_unit": 30.,
+        "overall": stratum(342, .8),
+        "by_stratum": {"1": stratum(36, .75), "2-4": stratum(114, .8),
+                       "5-9": stratum(192, .82), "outside_1_to_9": stratum(0, 0.)},
+        "stratum_counts": {"1": 36, "2-4": 114, "5-9": 192},
+        "by_serving": {"serving": stratum(200, .8), "not_serving": stratum(142, .8)},
+        "pairs": {"histories": 57, "histories_with_a_pair": 50, "histories_without_a_pair": 7,
+                  "outcome_counts": {"neither": 40, "one": 8, "both": 2},
+                  "outcome_fractions": {"neither": .8, "one": .16, "both": .04}},
+        "pairs_by_stratum": {},
+        "checks": {"q_sums_to_one_max_deviation": 1e-7,
+                   "actor_label_is_the_held_label": True,
+                   "label_means_reproduce_the_panel_action": True},
+        "capture": {"histories": 57, "capture_stride": 7, "candidate_ticks": 64},
+        "normalisers": {"use_obsnorm": False, "use_statenorm": False},
+        "decision_replay": {"checked": 4, "reproduced": 4},
+        "wall_seconds": 2.}
+
+
 def probe_summary(seed, sha, **overrides):
     """A published probe summary of this object, in the shape `reduce` reads."""
     measured = {}
@@ -575,16 +804,18 @@ def probe_summary(seed, sha, **overrides):
                 "held_label_to_others_over_std_mean": .03,
                 "held_label_to_others_in_std_units": .06,
                 "action_standard_deviation_per_dimension": [1., 1., 1.]},
-            "low_level_value": {"rows": 100, "rms_label_spread_over_mean_absolute_value": .12}}}
+            "low_level_value": {"rows": 100, "rms_label_spread_over_mean_absolute_value": .12}},
+        "accessible_end": accessible_end_summary(SEEDS.index(seed))}
     summary.update(overrides)
     return summary
 
 
-def supplied(tmp_path):
+def supplied(tmp_path, probe_sha="synthetic-source"):
     fits = [placed(template(tmp_path, label.SAVE_ARM)[0], label.SAVE_ARM, index)
             for index in range(3)]
     references = [placed(template(tmp_path, "D1280")[0], "D1280", index) for index in range(3)]
-    probes = [probe_summary(SEEDS[index], f"sha-{SEEDS[index]}") for index in range(3)]
+    probes = [probe_summary(SEEDS[index], f"sha-{SEEDS[index]}", launch_sha=probe_sha)
+              for index in range(3)]
     return fits, probes, references
 
 
@@ -681,6 +912,22 @@ def test_reduce_reads_three_fits_three_probes_and_the_published_d1280_fits(tmp_p
         assert block["label_effect"]["rms_label_deviation_over_std_mean"] == .02
         assert block["decision_fraction_by_rule"]["uniform_every_step"] == 1.
     assert result["J_by_rule"]["as_trained"]["available_blocks"] == 3
+    # (d) is carried through per block and described across them, with no verdict
+    end = result["accessible_end"]
+    assert end["one_pair_rule_across_blocks"] == "serving_competitor"
+    assert set(end["pair_rule_by_block"]) == {str(seed) for seed in SEEDS}
+    assert end["histories_by_block"] == {str(seed): 57 for seed in SEEDS}
+    assert end["same_label_reselection_fraction"]["available_blocks"] == 3
+    assert end["same_label_reselection_fraction"]["mean"] == pytest.approx(.8)
+    assert end["same_label_reselection_fraction_by_stratum"]["1"]["mean"] == pytest.approx(.75)
+    assert end["mean_one_minus_q_held"]["available_blocks"] == 3
+    assert end["pair_outcome_fractions"]["both"]["mean"] == pytest.approx(.04)
+    assert end["agent_queries_by_stratum"]["2-4"] == {str(seed): 114 for seed in SEEDS}
+    for block in result["blocks"]:
+        carried = block["accessible_end"]
+        assert carried["pair_rule"] == "serving_competitor" and carried["histories"] == 57
+        assert sum(carried["stratum_counts"].values()) == carried["agent_queries"]
+        assert carried["decision_replay"] == {"checked": 4, "reproduced": 4}
     counts = result["J_difference_counts"]
     assert counts["threshold"] == .05 and counts["small_difference"] == .02
     assert counts["as_trained"]["blocks_below_small_difference"] == 3
@@ -723,13 +970,46 @@ def test_reduce_refuses_inputs_it_cannot_read(tmp_path, fakes):
             (lambda s: s["rules_measured"].pop("uniform_every_10"), "all four execution rules"),
             (lambda s: s.update(faithful_load={"faithful_load": False,
                                                "first_differing_world": 3}), "faithful load"),
-            (lambda s: s.update(label_effect={}), "no label-effect reading")):
+            (lambda s: s.update(label_effect={}), "no label-effect reading"),
+            (lambda s: s.update(accessible_end={}), "no accessible-END reading")):
         damaged = copy.deepcopy(probes)
         mutate(damaged[2])
         result = label.reduce_inputs(fits, damaged, references)
         assert result["status"] == "incomplete"
         assert message in result["invalid_probes"][str(SEEDS[2])]
         assert result["blocks"][2]["status"] == "incomplete"
+
+
+def test_reduce_accepts_probes_published_later_than_their_fits(tmp_path, fakes):
+    """The probe is a later command from a later source; only the checkpoint ties it to its fit."""
+    fits, probes, references = supplied(tmp_path, probe_sha="a-later-source")
+    assert {fit["launch_sha"] for fit in fits} == {"synthetic-source"}
+    result = label.reduce_inputs(fits, probes, references)
+    assert result["status"] == "complete"
+    assert result["batch_launch_sha"] == "synthetic-source"
+    assert result["probe_launch_sha"] == "a-later-source"
+    assert result["invalid_probes"] == {}
+    for index, block in enumerate(result["blocks"]):
+        assert block["status"] == "complete"
+        assert block["probe"]["launch_sha"] == "a-later-source"
+        assert block["fit"]["launch_sha"] == "synthetic-source"
+        # what ties the probe to the fit is the checkpoint, which is still compared
+        assert block["weights_match"] is True
+        assert block["probe"]["weights_sha256"] == block["fit"]["weights"]["sha256"] == (
+            f"sha-{SEEDS[index]}")
+    assert "one launch sha is required within the fits and one within the probes" in result[
+        "fit_and_probe_launch_shas"]
+
+    # a probe whose weights are not its fit's is still refused, whatever its sha
+    damaged = copy.deepcopy(probes)
+    damaged[0]["weights_record"] = {"sha256": "sha-of-another-fit"}
+    assert label.reduce_inputs(fits, damaged, references)["blocks"][0]["weights_match"] is False
+
+    # mixed shas *within* the probes are refused, exactly as mixed shas within the fits are
+    mixed = copy.deepcopy(probes)
+    mixed[2]["launch_sha"] = "a-third-source"
+    with pytest.raises(ValueError, match="mixed launch shas among the probes"):
+        label.reduce_inputs(fits, mixed, references)
 
 
 def test_reduce_refuses_a_probe_whose_weights_are_not_its_blocks(tmp_path, fakes):

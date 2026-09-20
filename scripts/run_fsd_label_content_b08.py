@@ -43,6 +43,18 @@ the first panel must reproduce the recorded rollout-45 panel's 32 world scores b
   (c) execution rules `as_trained` (that first panel), `frozen_episode`, `uniform_every_step` and
                       `uniform_every_10`, one panel each, same weights, same 32 worlds and
                       evaluation seeds, each from a freshly reset evaluator.
+  (d) accessible END  from that same unmodified panel, at most 64 outcome-blind decision histories
+                      per block (a fixed stride over ticks crossed with a fixed world rotation,
+                      excluding resets, dones and forced boundaries), with the *predecision* ages;
+                      then, on frozen copies with zero optimizer steps and no additional environment
+                      step, the behaviour the *actual* optional-END interface can reach with the team
+                      label held: `SkillCoordinator.assign_partial_batch` is queried once per history
+                      with one agent marked for resampling and everything else held, its own
+                      categorical law over the n_z replacements is read, and the reachable change of
+                      the deterministic action mean is scored against KEEP; one pair-END mask per
+                      history is scored beside it.  Everything is reported by time to the forced team
+                      cap.  Description of accessibility at fixed histories, not an END-minus-KEEP
+                      value: see `run_fsd_label_content_b08.END_DEFINITIONS['interpretation_limit']`.
 
 The rules are imposed without touching `hmasd/`: the evaluator agent's own `_batched_assign_skills`
 is wrapped on the instance for the duration of one panel and removed in a `finally`, and
@@ -59,7 +71,7 @@ import inspect
 import json
 import sys
 import time
-from contextlib import contextmanager
+from contextlib import ExitStack, contextmanager
 from pathlib import Path
 
 import numpy as np
@@ -111,6 +123,15 @@ DIFFERENCE_THRESHOLD = .05  # the notebook entry's declared size for a J differe
 SMALL_DIFFERENCE = .02  # the entry's "within .02 of J as trained"
 ACTOR_CAPTURE_CALLS = 25  # evenly spaced calls of the panel, with a hard row limit (B06's bound)
 CRITIC_CAPTURE_CALLS = 25
+HISTORY_LIMIT = 64  # (d): decision histories per block, the notebook entry's own bound
+DECISION_CHECK_LIMIT = 4  # real decisions replayed through the query path, as its runtime proof
+# Time to the forced team cap, `k_Z - a_Z`, in the three strata the entry names.
+PHASE_STRATA = (("1", 1, 1), ("2-4", 2, 4), ("5-9", 5, 9))
+PAIR_RULES = ("serving_competitor", "nearest_horizontal")
+LOGIT_CLAMP = 50.  # the clamp the coordinator applies to every decoder output
+# The state stores the UAV positions in float32, so a metre position agrees with the environment's
+# own float64 array to about 1e-4 m; anything above this is a different environment or tick.
+POSITION_TOLERANCE_METRES = .01
 RULES = ("as_trained", "frozen_episode", "uniform_every_step", "uniform_every_10")
 BASELINE_RULE = "as_trained"
 RANDOM_RULES = ("uniform_every_step", "uniform_every_10")  # the rules that draw labels
@@ -180,6 +201,51 @@ SOURCE_NOTES = {
         "the panel calls `agent.step(..., deterministic=True)` "
         "(run_fsd_baseline_interruption_b01.py:224-225), so the coordinator's team and agent labels "
         "are argmax choices, not samples, and the low-level action is the Gaussian's mean"),
+    "predecision_ages": (
+        "hmasd/agent.py:2525-2528: `_batched_assign_skills_d2` reads this step's ages out of "
+        "`self.env_skill_ages` and `self.env_team_ages` into `agent_ages` and `team_ages` before "
+        "anything resets or increments them, and at hmasd/agent.py:2718-2719 it overwrites those "
+        "same attributes with `exec_agent_ages + 1` / `exec_team_ages + 1`, where the *execution* "
+        "ages (hmasd/agent.py:2708-2709) are zero wherever this step re-decided. The capture in (d) "
+        "therefore reads `agent.env_skill_ages` and `agent.env_team_ages` immediately before calling "
+        "the panel's own `_batched_assign_skills`, which is exactly the `a_i` and `a_Z` the route "
+        "reads at 2525-2528. `_d2_last_step['agent_ages']` and `['team_ages']` hold the execution "
+        "ages and are not interchangeable with them"),
+    "partial_decoder_logits": (
+        "`SkillCoordinator.assign_partial_batch` (hmasd/networks.py:1027-1126) returns labels, "
+        "log-probabilities, values and the decode order, not the categorical logits, so the law "
+        "`q_i` is read from a forward hook on the coordinator's own `skill_decoder` submodule "
+        "(hmasd/networks.py:533 `SkillDecoder`, called inside that method at networks.py:1069 for "
+        "the team token and at networks.py:1089-1096 for each agent token) during the actual call, "
+        "with the same `torch.clamp(torch.nan_to_num(..., nan=0, posinf=50, neginf=-50), -50, 50)` "
+        "the method itself applies at networks.py:1097 and at the same decode position: the hook's "
+        "(p+1)-th output is the token at decode position p, and the `order` the method returns says "
+        "which agent sits there (kept agents first in canonical order, then the sampled ones, "
+        "networks.py:1057-1061). Nothing under `hmasd/` is edited, replaced or monkeypatched; the "
+        "hook only copies, and the runtime proof that it is the right call at the right position is "
+        "that the argmax of the recorded logits equals the label `assign_partial_batch` itself "
+        "returned for every resampled agent, which every query checks"),
+    "native_action_units": (
+        "the agent applies no conversion and no clipping to the low level's action between the "
+        "actor and the environment: `_batched_select_action` reshapes the actor's output to "
+        "[lanes, agents, action_dim] (hmasd/agent.py:3170-3174) and the panel passes that row "
+        "straight to `env.step` (scripts/run_flexible_skill_duration_e0.py:353), whose adapter only "
+        "rebuilds the dict (envs/pettingzoo/env_adapter.py:221, 427-440). The environment multiplies "
+        "the action by `max_speed` to obtain a velocity and clips the resulting *position*, not the "
+        "action (envs/pettingzoo/uav_env.py:280-294). The action changes reported in (d) are "
+        "therefore in the environment's own action units, and `metres_per_action_unit` "
+        "(`max_speed * time_step`) converts one unit into metres of commanded displacement"),
+    "serving_state": (
+        "envs/pettingzoo/uav_env.py:980-997 `_update_channel_state_vectorized` writes `sinr_matrix` "
+        "[n_uavs, n_users] and `connections` [n_uavs, n_users] at the end of every `step` "
+        "(uav_env.py:300), together with the positions `_get_state` flattens into the first "
+        "3 * n_uavs entries of the state (uav_env.py:353-365). The evaluation lanes are in-process "
+        "`ParallelToArrayAdapter` objects that hold the scenario environment at `.env` "
+        "(envs/pettingzoo/env_adapter.py:36), so at a decision tick - before `env.step` of that tick "
+        "- those attributes are the predecision serving assignment and per-(UAV, user) SINR of "
+        "exactly the captured state, which the probe checks by comparing the state's own UAV "
+        "positions with `uav_positions`. They are read and never written; nothing under `envs/` is "
+        "edited, and a host that does not expose them falls back to the horizontal-distance pair"),
 }
 
 
@@ -798,6 +864,815 @@ def label_value_effect(critic, captured, *, n_Z, use_valuenorm):
 
 
 # ---------------------------------------------------------------------------
+# (d): what the actual optional-END interface can reach at fixed histories
+# ---------------------------------------------------------------------------
+
+
+END_DEFINITIONS = {
+    "history_rule": (
+        "at most `limit` decision histories per block, fixed before any outcome is known. The "
+        "candidate ticks of the panel are the even stride `max(1, horizon // limit)` from tick 0; at "
+        "the j-th candidate tick the worlds are scanned in the fixed rotation "
+        "`j % lanes, j % lanes + 1, ...` (wrapping) and the first *eligible* one is taken, so the "
+        "worlds rotate through the panel and no world is preferred. A world is eligible at a tick "
+        "when the D2 route took no decision there: `_d2_last_step['decision']` is False, which "
+        "excludes the episode reset, a done, the forced team boundary (`a_Z >= k_Z`) and a forced "
+        "agent boundary (`a_i >= k_max`) alike - on this construction both interruption costs are "
+        "infinite, so a cap is the only thing that can fire. A candidate tick at which no world is "
+        "eligible yields no history and is counted. The rule reads the tick index, the world index "
+        "and the decision masks only: never a score, an action, a label or anything an END query "
+        "later returns"),
+    "predecision_ages": SOURCE_NOTES["predecision_ages"],
+    "single_end": (
+        "per history and per agent i: the actual partial interface "
+        "`SkillCoordinator.assign_partial_batch(..., deterministic=True)` is called with the team "
+        "label held (`sample_Z_mask` all False), every other agent forced to its held label and only "
+        "agent i marked for resampling, which is the kept-first decode order the deployed D2 route "
+        "itself uses (its own call is hmasd/agent.py:2653-2662). `greedy_label` is the label that "
+        "call returned, "
+        "`q` is the categorical law of the decoder at agent i's own decode position, and "
+        "`one_minus_q_held` is 1 - q(held label). No label is sampled and no successor is executed"),
+    "law_weighted_action_change": (
+        "sum over the n_z replacement labels of q_i(label) * mean over action dimensions of "
+        "((mean action under that label - mean action under the held label) ** 2 / variance), where "
+        "the variance is the square of the policy's own per-dimension action standard deviation and "
+        "every mean action is the actor's own deterministic output at exactly the captured "
+        "observation, actor GRU hidden state and entry mask of that history. It is the change of the "
+        "executed action the single-END law can reach from KEEP, in units of the policy's own noise; "
+        "it is not a value, an advantage or a return"),
+    "greedy_action_change": (
+        "the deterministic END-against-KEEP change: mean action under the greedy replacement label "
+        "minus mean action under the held label, at the same captured input. `_native` is per action "
+        "dimension in the environment's own action units and `_in_std_units` is its Euclidean norm "
+        "after dividing each dimension by that dimension's action standard deviation"),
+    "native_action_units": SOURCE_NOTES["native_action_units"],
+    "next_hidden_relative_difference": (
+        "the Euclidean distance between the next actor GRU hidden state under the greedy replacement "
+        "and under KEEP, divided by the norm of the KEEP hidden state (None where that norm is "
+        "zero); both come from the same forwards as the action means. A zero immediate action "
+        "difference is not a zero recurrent effect, and this is the warning against reading it as "
+        "one. It is not a surrogate task reward"),
+    "pair_end": (
+        "one pair-END mask per history: both agents of the chosen pair marked for resampling, the "
+        "team label and every other agent held, through the same partial interface and the same "
+        "deterministic path. Reported beside the two singleton results for the same agents; the "
+        "outcome counts how many of the two labels differ from the held ones. Four fixed-input "
+        "descriptions (KEEP, two singletons, the pair) are not four native Q values and cannot "
+        "establish that unilateral ENDs help but a joint END hurts, or the reverse; a "
+        "pair-dependent label may come from the decode ordering rather than from team coupling"),
+    "pair_rule_serving_competitor": (
+        "for every currently served user take its serving UAV and, among the UAVs currently serving "
+        "at least one user, the other one with the highest SINR to that user (lowest UAV id on a "
+        "tie); count the unordered pairs so formed and take the pair with the largest positive "
+        "count, the lowest ids breaking a tie; report no pair when no such pair exists. Both SINRs "
+        "and both UAVs' service loads are kept. Scenario 1 uses full co-channel interference and a "
+        "0 dB service threshold, so two links to one user cannot both pass it: the competitor marks "
+        "possible interference or service reallocation, it is not a currently feasible backup server "
+        "and it is not evidence of substitutability"),
+    "pair_rule_nearest_horizontal": (
+        "the two UAVs closest in the horizontal plane at that history, from the UAV positions the "
+        "captured state itself carries (its first 3 * n_agents entries, "
+        "envs/pettingzoo/uav_env.py:353-365), the lowest ids breaking a tie. The fallback used when "
+        "the evaluation environments do not expose the predecision serving assignment and SINR "
+        "read-only; under it the serving strata are not reported, because nothing establishes them"),
+    "strata": (
+        "time to the forced team cap, `k_Z - a_Z` with the predecision team age, in the three strata "
+        "1, 2-4 and 5-9 ticks, with the count of every stratum. `min_remaining` is "
+        "`min(k_max - a_i, k_Z - a_Z)`, the latest forced-renewal distance of that agent; it is not "
+        "a promise that any other agent will KEEP. In this baseline D_K10 construction the local and "
+        "the team clock are synchronised (k_max = k_Z = k = 10 and every agent is resampled at a "
+        "team decision), so local age and time to the team cap are collinear: the strata locate an "
+        "effect within a cycle and identify nothing about a distinct causal effect of a teammate's "
+        "remaining time"),
+    "cost": (
+        "no fit, no optimizer step, no environment step and no native trajectory beyond the "
+        "`as_trained` panel the probe already runs: the histories are captured inside that panel by "
+        "read-only hooks, and everything else is scored afterwards on frozen copies under "
+        "`torch.no_grad()` with the RNG streams preserved. Wall time is measured, not assumed zero"),
+    "interpretation_limit": (
+        "a description of what the deployed partial selector can reach at histories the deterministic "
+        "deployment itself visited, with the team label held. Applying the selector's categorical "
+        "probabilities to those histories describes a different action law on them, not observed "
+        "stochastic-training occupancy; six singleton masks and one greedy pair do not cover the "
+        "joint masks; an accessible change is not a useful change and says nothing about whether END "
+        "would beat KEEP; and a small accessible change on these histories does not rule out every "
+        "actionable mask. Nothing here is a judgment and no threshold is applied to it"),
+}
+
+
+def _finite(value):
+    """A float, or None where it is not finite: this object's writer refuses nonfinite numbers."""
+    value = float(value)
+    return value if np.isfinite(value) else None
+
+
+def stratum_name(remaining):
+    """The entry's stratum of a time-to-forced-team-cap, or None outside 1..9."""
+    for name, low, high in PHASE_STRATA:
+        if low <= int(remaining) <= high:
+            return name
+    return None
+
+
+def serving_snapshot(env, n_agents):
+    """One lane's predecision serving assignment, SINR and UAV positions, or None.
+
+    Read-only attribute access on the in-process evaluation environment; nothing under `envs/` is
+    edited and no environment step is taken.  A host that does not expose them returns None, which
+    is what selects the horizontal-distance pair rule.
+    """
+    raw = getattr(env, "env", None)
+    if raw is None:
+        return None
+    sinr = getattr(raw, "sinr_matrix", None)
+    connections = getattr(raw, "connections", None)
+    positions = getattr(raw, "uav_positions", None)
+    if sinr is None or connections is None or positions is None:
+        return None
+    sinr = np.asarray(sinr, dtype=np.float64)
+    connections = np.asarray(connections, dtype=bool)
+    positions = np.asarray(positions, dtype=np.float64)
+    if sinr.ndim != 2 or connections.shape != sinr.shape or positions.ndim != 2:
+        return None
+    if int(sinr.shape[0]) != int(n_agents) or int(positions.shape[0]) != int(n_agents):
+        return None
+    threshold = getattr(raw, "min_sinr", None)
+    return {"sinr": sinr.copy(), "connections": connections.copy(),
+            "positions": positions.copy(),
+            "min_sinr": None if threshold is None else float(threshold),
+            "max_connections": int(getattr(raw, "max_connections", 0)),
+            "users": int(sinr.shape[1])}
+
+
+def action_scale(envs):
+    """Metres of commanded displacement per unit of one action dimension, where the host says so."""
+    for env in envs:
+        raw = getattr(env, "env", None)
+        speed, step = getattr(raw, "max_speed", None), getattr(raw, "time_step", None)
+        if speed is not None and step is not None:
+            return float(speed) * float(step)
+    return None
+
+
+def serving_available(envs, n_agents):
+    """Whether every evaluation lane exposes the predecision serving state, and why not."""
+    if not envs:
+        return False, "the probe was given no evaluation environments to read"
+    for index, env in enumerate(envs):
+        if serving_snapshot(env, n_agents) is None:
+            return False, (f"evaluation lane {index} ({type(env).__name__}) does not expose "
+                           "`sinr_matrix`, `connections` and `uav_positions` read-only")
+    return True, None
+
+
+def resolve_pair_rule(requested, histories, reason=None,
+                      tolerance=POSITION_TOLERANCE_METRES):
+    """The pair rule the captured histories actually support, and the reason where it is not.
+
+    Returns `(rule, reason, worst_position_gap)`.  The serving rule needs a predecision snapshot on
+    every history *and* those snapshots to be the histories' own: the state the coordinator was
+    given carries the same UAV positions, so a gap larger than float32 storage error means the
+    snapshot came from another environment or another tick, and the fallback is used instead.
+    """
+    if requested != "serving_competitor":
+        return requested, reason, None
+    gaps = [entry.get("position_gap") for entry in histories
+            if entry.get("position_gap") is not None]
+    worst = max(gaps) if gaps else None
+    missing = sum(1 for entry in histories if entry.get("serving") is None)
+    if missing:
+        return PAIR_RULES[1], (f"{missing} of {len(histories)} captured histories carry no "
+                               "predecision serving state"), worst
+    if worst is None or worst > float(tolerance):
+        return PAIR_RULES[1], (
+            "the environments' UAV positions are not the captured states' own (largest difference "
+            f"{worst} m against a {tolerance} m tolerance), so they are not this history's "
+            "predecision serving state"), worst
+    return requested, reason, worst
+
+
+def serving_competitor_pair(snapshot):
+    """Codex's predecision serving/strongest-competitor pair, or None when there is none."""
+    sinr, connections = snapshot["sinr"], snapshot["connections"]
+    served = np.flatnonzero(connections.any(axis=0))  # users with a serving UAV
+    active = [int(i) for i in np.flatnonzero(connections.any(axis=1))]  # UAVs serving someone
+    loads = connections.sum(axis=1).astype(np.int64)
+    counts, links = {}, {}
+    for user in served:
+        server = int(np.flatnonzero(connections[:, int(user)])[0])  # one server per user
+        others = [i for i in active if i != server]
+        if not others:
+            continue
+        # the highest SINR to that user among the other serving UAVs, the lowest id on a tie
+        competitor = max(others, key=lambda i: (float(sinr[i, int(user)]), -i))
+        key = (min(server, competitor), max(server, competitor))
+        counts[key] = counts.get(key, 0) + 1
+        links.setdefault(key, []).append(
+            (float(sinr[server, int(user)]), float(sinr[competitor, int(user)])))
+    if not counts:
+        return None
+    key = max(counts, key=lambda pair: (counts[pair], -pair[0], -pair[1]))
+    serving_sinr = [value[0] for value in links[key]]
+    competitor_sinr = [value[1] for value in links[key]]
+    return {"rule": "serving_competitor", "agents": [int(key[0]), int(key[1])],
+            "count": int(counts[key]), "candidate_pairs": len(counts),
+            # a link with zero received power has SINR -inf in dB; the summary records no such
+            # value, because the run's own writer refuses a nonfinite measured number
+            "serving_sinr_mean_dB": _finite(np.mean(serving_sinr)),
+            "competitor_sinr_mean_dB": _finite(np.mean(competitor_sinr)),
+            "service_loads": [int(loads[key[0]]), int(loads[key[1]])],
+            "served_users": int(served.size), "serving_uavs": len(active),
+            "min_sinr_threshold_dB": snapshot["min_sinr"],
+            "max_connections": snapshot["max_connections"]}
+
+
+def nearest_horizontal_pair(positions):
+    """The two UAVs closest in the horizontal plane; ascending ids break a tie."""
+    positions = np.asarray(positions, dtype=np.float64)
+    best, distance = None, None
+    for first in range(positions.shape[0]):
+        for second in range(first + 1, positions.shape[0]):
+            gap = float(np.linalg.norm(positions[first, :2] - positions[second, :2]))
+            if distance is None or gap < distance:
+                best, distance = (first, second), gap
+    if best is None:
+        return None
+    return {"rule": "nearest_horizontal", "agents": [int(best[0]), int(best[1])],
+            "horizontal_distance_metres": distance}
+
+
+class HistoryCapture:
+    """Outcome-blind decision histories of one panel, captured read-only while it runs.
+
+    Two inert attachments to the evaluator agent's own instance, both removed in a `finally`:
+    the instance's `_batched_assign_skills` is wrapped (it is called once per step for every lane,
+    hmasd/agent.py:3249, so ordinary non-decision ticks are visible, which `assign_partial_batch`
+    calls are not), and a forward hook on `SkillDiscoverer` copies the low-level actor's own inputs
+    at the captured tick.  The wrapper calls the panel's own callable first and returns its result
+    unchanged; nothing is replaced, nothing is written back and no RNG is drawn.
+    """
+
+    def __init__(self, agent, evaluator=None, limit=HISTORY_LIMIT, horizon=None,
+                 decision_checks=DECISION_CHECK_LIMIT):
+        config = agent.config
+        self.agent = agent
+        # The evaluator, not its lane list: `evaluate_panel` rebuilds `evaluator.envs` for every
+        # panel (run_fsd_baseline_interruption_b01.py:205), so a list held from construction time
+        # would be a set of never-stepped environments.
+        self.evaluator = evaluator
+        self.n_agents = int(config.n_agents)
+        self.horizon = int(shared.HORIZON if horizon is None else horizon)
+        self.limit = max(1, int(limit))
+        self.stride = max(1, self.horizon // self.limit)
+        self.decision_checks = max(0, int(decision_checks))
+        self.tick, self.actor_calls = 0, 0
+        self.candidate_ticks, self.ticks_without_an_eligible_world = 0, 0
+        self.histories, self.decision_histories = [], []
+        self._pending = None
+
+    # -- attachment ---------------------------------------------------------
+
+    @contextmanager
+    def attached(self):
+        agent = self.agent
+        if not getattr(agent, "d2_enabled", False):
+            raise ValueError("the decision histories are defined on the D2 route")
+        held = "_batched_assign_skills" in agent.__dict__
+        original = agent._batched_assign_skills
+
+        def assign(*args, **kwargs):
+            return self._assign(original, *args, **kwargs)
+
+        agent._batched_assign_skills = assign  # an instance attribute only; the class is untouched
+        handle = agent.skill_discoverer.register_forward_hook(self._actor_hook, with_kwargs=True)
+        try:
+            yield self
+        finally:
+            handle.remove()
+            if held:  # an execution rule's own wrapper is underneath and stays
+                agent._batched_assign_skills = original
+            else:
+                agent.__dict__.pop("_batched_assign_skills", None)
+
+    # -- the capture --------------------------------------------------------
+
+    def _assign(self, original, states_batch, observations_batch, env_steps_batch, dones_batch,
+                deterministic=False, *args, **kwargs):
+        tick = self.tick
+        self.tick += 1
+        wanted = tick % self.stride == 0 and len(self.histories) < self.limit
+        if not wanted:
+            return original(states_batch, observations_batch, env_steps_batch, dones_batch,
+                            deterministic, *args, **kwargs)
+        self.candidate_ticks += 1
+        agent = self.agent
+        lanes = int(np.asarray(states_batch).shape[0])
+        zeros = np.zeros(self.n_agents, dtype=np.int64)
+        # PREDECISION, read before the route resets or increments anything: see
+        # SOURCE_NOTES["predecision_ages"] (hmasd/agent.py:2525-2528 against 2718-2719).
+        agent_ages = np.stack([np.asarray(agent.env_skill_ages.get(lane, zeros), dtype=np.int64)
+                               for lane in range(lanes)])
+        team_ages = np.array([int(agent.env_team_ages.get(lane, 0)) for lane in range(lanes)],
+                             dtype=np.int64)
+        held_team = np.array([int(agent.env_team_skills.get(lane, -1)) for lane in range(lanes)],
+                             dtype=np.int64)
+        held_agents = np.stack([
+            np.asarray(agent.env_agent_skills.get(lane, np.full(self.n_agents, -1, dtype=np.int64)),
+                       dtype=np.int64) for lane in range(lanes)])
+        states = np.array(states_batch, copy=True)
+        observations = np.array(observations_batch, copy=True)
+        env_steps = np.asarray(env_steps_batch, dtype=np.int64).reshape(lanes).copy()
+        dones = np.asarray(dones_batch, dtype=np.bool_).reshape(lanes).copy()
+
+        team, agents, log_probs = original(states_batch, observations_batch, env_steps_batch,
+                                           dones_batch, deterministic, *args, **kwargs)
+
+        last = agent._d2_last_step
+        decision = np.asarray(last["decision"], dtype=bool)
+        team_cause = np.asarray(last["team_cause"], dtype=np.int64)
+        eligible = (~decision) & (~dones) & (env_steps > 0)
+        start = len(self.histories) % lanes  # the fixed world rotation
+        chosen = next((int((start + offset) % lanes) for offset in range(lanes)
+                       if eligible[int((start + offset) % lanes)]), None)
+        if chosen is None:
+            self.ticks_without_an_eligible_world += 1
+            self._keep_decision_check(tick, start, states, observations, held_team, held_agents,
+                                      team_ages, agent_ages, decision, team_cause, last, team,
+                                      agents, lanes)
+            return team, agents, log_probs
+        record = {
+            "tick": int(tick), "world": chosen, "lanes": lanes,
+            "env_step": int(env_steps[chosen]),
+            "state": states[chosen].copy(), "observations": observations[chosen].copy(),
+            "held_Z": int(held_team[chosen]), "held_z": held_agents[chosen].copy(),
+            "team_age": int(team_ages[chosen]), "agent_ages": agent_ages[chosen].copy(),
+            "executed_Z": int(np.asarray(team)[chosen]),
+            "executed_z": np.asarray(agents)[chosen].copy()}
+        lanes_now = self.lanes()
+        environment = lanes_now[chosen] if chosen < len(lanes_now) else None
+        snapshot = None if environment is None else serving_snapshot(environment, self.n_agents)
+        record["serving"] = snapshot
+        # The proof that the snapshot is this history's own predecision environment: the state the
+        # coordinator was given carries the same UAV positions, up to its float32 storage.
+        record["position_gap"] = (None if snapshot is None else float(np.abs(
+            np.asarray(record["state"], dtype=np.float64)[:3 * self.n_agents].reshape(
+                self.n_agents, 3) - snapshot["positions"]).max()))
+        self._pending = record
+        return team, agents, log_probs
+
+    def lanes(self):
+        """The panel's current evaluation lanes, read at the moment of the capture."""
+        return list(getattr(self.evaluator, "envs", None) or [])
+
+    def _keep_decision_check(self, tick, lane, states, observations, held_team, held_agents,
+                             team_ages, agent_ages, decision, team_cause, last, team, agents,
+                             lanes):
+        """A real, non-reset decision of the panel, kept so the offline query path can be replayed."""
+        if len(self.decision_histories) >= self.decision_checks:
+            return
+        candidates = [int((lane + offset) % lanes) for offset in range(lanes)]
+        chosen = next((i for i in candidates
+                       if decision[i] and int(team_cause[i]) != int(self.agent.D2_CAUSE_RESET)
+                       and int(held_team[i]) >= 0 and int(held_agents[i].min()) >= 0), None)
+        if chosen is None:
+            return
+        self.decision_histories.append({
+            "tick": int(tick), "world": chosen,
+            "state": states[chosen].copy(), "observations": observations[chosen].copy(),
+            "held_Z": int(held_team[chosen]), "held_z": held_agents[chosen].copy(),
+            "team_age": int(team_ages[chosen]), "agent_ages": agent_ages[chosen].copy(),
+            "sampled_mask": np.asarray(last["sampled_mask"], dtype=bool)[chosen].copy(),
+            "sample_Z": bool(np.asarray(last["sample_Z"], dtype=bool)[chosen]),
+            "team_cause": int(team_cause[chosen]),
+            "executed_Z": int(np.asarray(team)[chosen]),
+            "executed_z": np.asarray(agents)[chosen].copy()})
+
+    def _actor_hook(self, module, args, kwargs, output):
+        self.actor_calls += 1
+        record, self._pending = self._pending, None
+        if record is None:
+            return
+        observation = args[0] if args else kwargs["observation"]
+        agent_skill = args[1] if len(args) > 1 else kwargs["agent_skill"]
+        hidden = args[2] if len(args) > 2 else kwargs["hidden_state"]
+        rows, lanes = int(observation.shape[0]), record["lanes"]
+        if rows != lanes * self.n_agents:
+            raise ValueError(
+                f"the actor was called with {rows} rows, not the {lanes * self.n_agents} "
+                "(lane, agent) rows of this panel's step")
+        first = record["world"] * self.n_agents
+        window = slice(first, first + self.n_agents)
+        record["actor"] = {
+            "observation": observation[window].detach().clone(),
+            "agent_skill": agent_skill[window].detach().clone(),
+            "hidden": hidden[window].detach().clone(),
+            # `SkillDiscoverer.forward` builds the entry mask itself (hmasd/networks.py:1806)
+            "masks": torch.ones(self.n_agents, 1),
+            "action": output[0][window].detach().clone(),
+            "next_hidden": output[3][window].detach().clone()}
+        self.histories.append(record)
+
+    # -- the record ---------------------------------------------------------
+
+    def provenance(self):
+        return {
+            "histories": len(self.histories), "limit": self.limit,
+            "capture_stride": self.stride, "horizon": self.horizon,
+            "candidate_ticks": self.candidate_ticks,
+            "ticks_without_an_eligible_world": self.ticks_without_an_eligible_world,
+            "decision_histories_kept": len(self.decision_histories),
+            "actor_calls": self.actor_calls, "panel_steps": self.tick,
+            "worlds": sorted({entry["world"] for entry in self.histories}),
+            "ticks": [entry["tick"] for entry in self.histories],
+            "definition": END_DEFINITIONS["history_rule"],
+            "predecision_ages": SOURCE_NOTES["predecision_ages"]}
+
+
+class DecoderLogits:
+    """The coordinator's own `skill_decoder` outputs, in call order, for one partial query."""
+
+    def __init__(self, coordinator):
+        self.decoder = coordinator.skill_decoder
+        self.outputs = []
+        self._handle = None
+
+    def __enter__(self):
+        self._handle = self.decoder.register_forward_hook(self._hook)
+        return self
+
+    def __exit__(self, *exception):
+        self._handle.remove()
+        self._handle = None
+        return False
+
+    def _hook(self, module, args, output):
+        self.outputs.append(output.detach().clone())
+
+
+def clamped_logits(logits):
+    """The clamp `assign_partial_batch` applies to its decoder outputs (networks.py:1070, 1097)."""
+    return torch.clamp(
+        torch.nan_to_num(logits, nan=0., posinf=LOGIT_CLAMP, neginf=-LOGIT_CLAMP),
+        -LOGIT_CLAMP, LOGIT_CLAMP)
+
+
+def partial_end_query(coordinator, state, observations, held_Z, held_z, sampled_mask):
+    """The actual partial interface with the team held: its own labels and its own law.
+
+    One call of `SkillCoordinator.assign_partial_batch(..., deterministic=True)` per row, in the
+    kept-first decode order it really uses.  The method returns no logits, so `q` is read from the
+    coordinator's own decoder during that call and mapped back through the `order` it returned; the
+    argmax of those logits is checked against the label the method itself produced for every
+    resampled agent, which is the runtime proof that the law belongs to this query.
+    """
+    rows, n_agents = tuple(sampled_mask.shape)
+    sample_Z = torch.zeros(rows, dtype=torch.bool)
+    with DecoderLogits(coordinator) as recorded:
+        assignment = coordinator.assign_partial_batch(
+            state, observations, held_Z, held_z, sample_Z, sampled_mask, deterministic=True)
+    if len(recorded.outputs) != n_agents + 1:
+        raise ValueError(f"the partial query made {len(recorded.outputs)} decoder calls, not the "
+                         f"team token and {n_agents} agent tokens")
+    by_position = torch.stack([clamped_logits(value) for value in recorded.outputs[1:]], dim=1)
+    order = assignment["order"].long()  # order[r, p] is the agent at decode position p
+    logits = torch.zeros_like(by_position)
+    logits.scatter_(1, order.unsqueeze(-1).expand(-1, -1, by_position.shape[-1]), by_position)
+    labels = assignment["agent_skills"].long()
+    greedy = logits.argmax(dim=-1)
+    if not torch.equal(labels[sampled_mask], greedy[sampled_mask]):
+        raise ValueError("the decoder logits read from the partial query do not reproduce the "
+                         "label that query itself returned")
+    if not torch.equal(labels[~sampled_mask], held_z[~sampled_mask]):
+        raise ValueError("the partial query moved a label it was told to keep")
+    if not torch.equal(assignment["team_skills"].long(), held_Z.long()):
+        raise ValueError("the partial query moved the held team label")
+    return {"labels": labels, "q": torch.softmax(logits, dim=-1), "order": order,
+            "team_skills": assignment["team_skills"].long()}
+
+
+def _query_inputs(agent, entry, rows):
+    """One history's coordinator inputs, normalised exactly as the D2 decision path normalises them.
+
+    `update=False` everywhere: a probe never moves a running statistic.  On this construction
+    `use_obsnorm` and `use_statenorm` are both False, so both calls are the identity
+    (hmasd/agent.py:1502-1503, 1554-1555) and the decision path's own `update=True` would be too.
+    """
+    state = np.asarray(entry["state"], dtype=np.float64).reshape(1, -1)
+    observations = np.asarray(entry["observations"], dtype=np.float32)[None, ...]
+    state = agent._normalize_states(state, update=False)
+    observations = agent._normalize_observations(observations, update=False)
+    return (torch.as_tensor(np.asarray(state), dtype=torch.float32).repeat(rows, 1),
+            torch.as_tensor(np.asarray(observations), dtype=torch.float32).repeat(rows, 1, 1))
+
+
+def history_pair(entry, pair_rule, n_agents):
+    """The one pair of this history under the block's pair rule, or None."""
+    if pair_rule == "serving_competitor":
+        snapshot = entry.get("serving")
+        return None if snapshot is None else serving_competitor_pair(snapshot)
+    positions = np.asarray(entry["state"], dtype=np.float64)[:3 * n_agents].reshape(n_agents, 3)
+    return nearest_horizontal_pair(positions)
+
+
+def law_weighted_action_change(means, held, law, variance):
+    """The single-END law's reachable squared change of the mean action, in units of the variance.
+
+    `means` is [labels, dimensions] at one fixed actor input, `held` the label the row actually
+    holds, `law` the decoder's own categorical law over the same labels and `variance` the policy's
+    per-dimension action variance.  KEEP contributes zero by construction.
+    """
+    law = torch.as_tensor(law).double().reshape(-1)
+    means = torch.as_tensor(means).double()
+    variance = torch.as_tensor(variance).double().reshape(-1)
+    deltas = means - means[int(held)]
+    return float((law * ((deltas ** 2) / variance).mean(dim=-1)).sum())
+
+
+def _mean(values):
+    values = [float(v) for v in values if v is not None]
+    return float(np.mean(values)) if values else None
+
+
+def _largest(values):
+    values = [float(v) for v in values if v is not None]
+    return max(values) if values else None
+
+
+def _fraction(count, total):
+    return {"count": int(count), "of": int(total),
+            "fraction": (int(count) / int(total)) if total else None}
+
+
+def aggregate_end_records(records):
+    """Everything reported per (history, agent), over whatever subset is passed in."""
+    total = len(records)
+    changes = sum(1 for record in records if record["label_changes"])
+    return {
+        "agent_queries": total,
+        "same_label_reselection": _fraction(total - changes, total),
+        "label_changes": _fraction(changes, total),
+        "mean_one_minus_q_held": _mean(r["one_minus_q_held"] for r in records),
+        "mean_law_weighted_action_change": _mean(
+            r["law_weighted_action_change"] for r in records),
+        "mean_greedy_action_change_in_std_units": _mean(
+            r["greedy_action_change_in_std_units"] for r in records),
+        "mean_greedy_action_change_native_max_abs": _mean(
+            r["greedy_action_change_native_max_abs"] for r in records),
+        "mean_next_hidden_relative_difference": _mean(
+            r["next_hidden_relative_difference"] for r in records),
+        "mean_min_remaining": _mean(r["min_remaining"] for r in records)}
+
+
+def aggregate_pair_records(records):
+    """The pair outcomes, over whatever subset is passed in."""
+    with_a_pair = [record for record in records if record["pair"] is not None]
+    outcomes = {"neither": 0, "one": 0, "both": 0}
+    for record in with_a_pair:
+        changed = sum(1 for value in record["label_changes"] if value)
+        outcomes[("neither", "one", "both")[changed]] += 1
+    total = len(with_a_pair)
+    return {"histories": len(records), "histories_with_a_pair": total,
+            "histories_without_a_pair": len(records) - total,
+            "outcome_counts": dict(outcomes),
+            "outcome_fractions": {name: (count / total if total else None)
+                                  for name, count in outcomes.items()},
+            "mean_action_change_in_std_units": _mean(
+                value for record in with_a_pair
+                for value in record["action_change_in_std_units"]),
+            "both_singletons_also_change": _fraction(
+                sum(1 for record in with_a_pair if all(record["singleton_label_changes"])), total)}
+
+
+def by_stratum(records, aggregate):
+    """The same aggregate per time-to-forced-team-cap stratum, plus anything outside 1..9."""
+    result = {name: aggregate([r for r in records if r["stratum"] == name])
+              for name, _low, _high in PHASE_STRATA}
+    outside = [r for r in records if r["stratum"] is None]
+    result["outside_1_to_9"] = aggregate(outside)
+    return result
+
+
+def replay_decisions(agent, capture):
+    """The panel's own decisions, replayed through this probe's offline query path.
+
+    The mask, the held labels and the inputs are the ones the panel actually used at a real
+    decision tick, so reproducing the labels it executed is the runtime proof that the tensor
+    build, the normalisation and the interface call below are the route's own.
+    """
+    coordinator, config = agent.skill_coordinator, agent.config
+    n_agents = int(config.n_agents)
+    replays = []
+    for entry in capture.decision_histories:
+        state, observations = _query_inputs(agent, entry, 1)
+        assignment = coordinator.assign_partial_batch(
+            state, observations,
+            torch.tensor([int(entry["held_Z"])], dtype=torch.long),
+            torch.as_tensor(entry["held_z"], dtype=torch.long).reshape(1, n_agents),
+            torch.tensor([bool(entry["sample_Z"])], dtype=torch.bool),
+            torch.as_tensor(entry["sampled_mask"], dtype=torch.bool).reshape(1, n_agents),
+            deterministic=True)
+        team = int(assignment["team_skills"][0])
+        agents = [int(value) for value in assignment["agent_skills"][0]]
+        replays.append({
+            "tick": entry["tick"], "world": entry["world"], "team_cause": entry["team_cause"],
+            "sampled_agents": int(np.asarray(entry["sampled_mask"]).sum()),
+            "sample_Z": bool(entry["sample_Z"]),
+            "reproduces_the_panel": bool(team == int(entry["executed_Z"])
+                                         and agents == [int(v) for v in entry["executed_z"]]),
+            "panel_team_label": int(entry["executed_Z"]),
+            "query_team_label": team,
+            "panel_agent_labels": [int(v) for v in entry["executed_z"]],
+            "query_agent_labels": agents})
+    return {
+        "replays": replays, "checked": len(replays),
+        "reproduced": int(sum(1 for value in replays if value["reproduces_the_panel"])),
+        "definition": (
+            "at a real, non-reset decision tick of the same panel, the same partial interface is "
+            "called offline with the mask, the team flag, the held labels and the inputs the panel "
+            "itself used; `reproduces_the_panel` is exact equality of the executed team label and "
+            "all agent labels. Exactness requires the identity normalisers of this construction: "
+            "the route normalises its decision subset with `update=True`, this replay with "
+            "`update=False`, and with `use_obsnorm` and `use_statenorm` both False the two agree")}
+
+
+def end_accessibility(agent, capture, standard_deviation, *, pair_rule, pair_rule_reason=None,
+                      metres_per_action_unit=None):
+    """(d): what a single END and one pair END can reach at the captured histories.
+
+    Zero optimizer steps, no environment step, no sampling: every label here is the deterministic
+    choice of the actual partial interface and every action is the actor's own deterministic mean at
+    a captured input.  The caller holds `torch.no_grad()` and preserved RNG.
+    """
+    started = time.perf_counter()
+    coordinator, discoverer, config = agent.skill_coordinator, agent.skill_discoverer, agent.config
+    n_agents, n_z = int(config.n_agents), int(config.n_z)
+    k_max, k_Z = int(agent.d2_k_max), int(agent.d2_k_Z)
+    std = torch.as_tensor(np.asarray(standard_deviation, dtype=np.float64))
+    variance = std ** 2
+    records, pairs = [], []
+    q_deviation, action_difference = 0., 0.
+    held_labels_agree, batch_invariance = True, None
+    for index, entry in enumerate(capture.histories):
+        actor = entry["actor"]
+        held_z = torch.as_tensor(entry["held_z"], dtype=torch.long).reshape(1, n_agents)
+        held_labels_agree = held_labels_agree and bool(
+            torch.equal(actor["agent_skill"].long().reshape(-1), held_z.reshape(-1)))
+        means, hiddens = [], []
+        for label in range(n_z):
+            actions, _log_probs, _none, next_hidden = discoverer(
+                actor["observation"],
+                torch.full((n_agents,), int(label), dtype=actor["agent_skill"].dtype),
+                actor["hidden"], True)
+            means.append(actions.detach().double())
+            hiddens.append(next_hidden.detach().double())
+        means, hiddens = torch.stack(means), torch.stack(hiddens)  # [n_z, agents, *]
+        held_rows = held_z.reshape(-1)
+        keep = means[held_rows, torch.arange(n_agents)]  # [agents, dims]
+        action_difference = max(action_difference, float(
+            (keep - actor["action"].detach().double()).abs().max()))
+
+        pair = history_pair(entry, pair_rule, n_agents)
+        rows = n_agents + (1 if pair is not None else 0)
+        masks = torch.zeros(rows, n_agents, dtype=torch.bool)
+        masks[torch.arange(n_agents), torch.arange(n_agents)] = True
+        if pair is not None:
+            masks[n_agents, torch.as_tensor(pair["agents"], dtype=torch.long)] = True
+        state, observations = _query_inputs(agent, entry, rows)
+        query = partial_end_query(coordinator, state, observations,
+                                  torch.full((rows,), int(entry["held_Z"]), dtype=torch.long),
+                                  held_z.repeat(rows, 1), masks)
+        if index == 0:  # the same row alone: the query is a property of the row, not of the batch
+            alone = partial_end_query(coordinator, state[:1], observations[:1],
+                                      torch.full((1,), int(entry["held_Z"]), dtype=torch.long),
+                                      held_z, masks[:1])
+            batch_invariance = {
+                "checked": True,
+                "max_absolute_q_difference": float(
+                    (alone["q"][0, 0] - query["q"][0, 0]).abs().max()),
+                "same_greedy_label": bool(int(alone["labels"][0, 0]) == int(query["labels"][0, 0])),
+                "definition": (
+                    "the singleton query of agent 0 at the first history, run alone and inside the "
+                    "same batch as the other masks: the partial decoder has no batch-coupled layer, "
+                    "so only floating-point reassociation should separate them")}
+
+        team_remaining = k_Z - int(entry["team_age"])
+        serving = entry.get("serving")
+        for agent_index in range(n_agents):
+            law = query["q"][agent_index, agent_index].double()
+            q_deviation = max(q_deviation, abs(float(law.sum()) - 1.))
+            held = int(held_rows[agent_index])
+            greedy = int(query["labels"][agent_index, agent_index])
+            deltas = means[:, agent_index, :] - keep[agent_index]  # [n_z, dims]
+            native = deltas[greedy]
+            keep_hidden = hiddens[held, agent_index]
+            keep_norm = float(torch.linalg.vector_norm(keep_hidden))
+            hidden_gap = float(torch.linalg.vector_norm(hiddens[greedy, agent_index] - keep_hidden))
+            agent_remaining = k_max - int(entry["agent_ages"][agent_index])
+            records.append({
+                "tick": entry["tick"], "world": entry["world"], "agent": agent_index,
+                "held_label": held, "greedy_label": greedy, "label_changes": greedy != held,
+                "q": [float(value) for value in law],
+                "one_minus_q_held": float(1. - law[held]),
+                "law_weighted_action_change": law_weighted_action_change(
+                    means[:, agent_index, :], held, law, variance),
+                "greedy_action_change_native": [float(value) for value in native],
+                "greedy_action_change_native_max_abs": float(native.abs().max()),
+                "greedy_action_change_in_std_units": float(
+                    torch.linalg.vector_norm(native / std)),
+                "next_hidden_difference": hidden_gap,
+                "next_hidden_keep_norm": keep_norm,
+                "next_hidden_relative_difference": (hidden_gap / keep_norm
+                                                    if keep_norm > 0. else None),
+                "team_age": int(entry["team_age"]), "agent_age": int(entry["agent_ages"][agent_index]),
+                "team_remaining": int(team_remaining), "agent_remaining": int(agent_remaining),
+                "min_remaining": int(min(agent_remaining, team_remaining)),
+                "stratum": stratum_name(team_remaining),
+                "serving": (None if serving is None
+                            else bool(serving["connections"][agent_index].any())),
+                "service_load": (None if serving is None
+                                 else int(serving["connections"][agent_index].sum()))})
+        pair_record = {"tick": entry["tick"], "world": entry["world"], "pair": pair,
+                       "stratum": stratum_name(team_remaining),
+                       "team_remaining": int(team_remaining),
+                       # the state's own UAV positions, so the pair can be re-read without a rerun
+                       "uav_positions": np.asarray(
+                           entry["state"], dtype=np.float64)[:3 * n_agents].reshape(
+                               n_agents, 3).tolist(),
+                       "agents": None, "held_labels": None, "greedy_labels": None,
+                       "label_changes": (), "singleton_label_changes": (),
+                       "action_change_in_std_units": ()}
+        if pair is not None:
+            members = [int(value) for value in pair["agents"]]
+            greedy_pair = [int(query["labels"][n_agents, member]) for member in members]
+            singles = [int(query["labels"][member, member]) for member in members]
+            held_pair = [int(held_rows[member]) for member in members]
+            pair_record.update(
+                agents=members, held_labels=held_pair, greedy_labels=greedy_pair,
+                singleton_labels=singles,
+                label_changes=[greedy_pair[i] != held_pair[i] for i in range(2)],
+                singleton_label_changes=[singles[i] != held_pair[i] for i in range(2)],
+                pair_and_singleton_agree=[greedy_pair[i] == singles[i] for i in range(2)],
+                action_change_native=[
+                    [float(value) for value in
+                     means[greedy_pair[i], members[i], :] - keep[members[i]]] for i in range(2)],
+                action_change_in_std_units=[
+                    float(torch.linalg.vector_norm(
+                        (means[greedy_pair[i], members[i], :] - keep[members[i]]) / std))
+                    for i in range(2)])
+        pairs.append(pair_record)
+
+    serving_strata = None
+    if pair_rule == "serving_competitor" and records:
+        serving_strata = {
+            "serving": aggregate_end_records([r for r in records if r["serving"] is True]),
+            "not_serving": aggregate_end_records([r for r in records if r["serving"] is False]),
+            "definition": ("the same aggregate split by whether that agent was serving at least one "
+                           "user at the captured predecision tick; reported only under the "
+                           "serving/competitor pair rule, whose evidence it comes from")}
+    return {
+        "histories": len(capture.histories),
+        "agent_queries": len(records),
+        "pair_rule": pair_rule,
+        "pair_rule_definition": END_DEFINITIONS[f"pair_rule_{pair_rule}"],
+        "pair_rule_reason": pair_rule_reason,
+        "pair_rules_considered": list(PAIR_RULES),
+        "caps": {"skill_cap_k_max": k_max, "team_cap_k_Z": k_Z, "labels": n_z},
+        "metres_per_action_unit": (None if metres_per_action_unit is None
+                                   else float(metres_per_action_unit)),
+        "capture": capture.provenance(),
+        "overall": aggregate_end_records(records),
+        "by_stratum": by_stratum(records, aggregate_end_records),
+        "stratum_counts": {name: sum(1 for r in records if r["stratum"] == name)
+                           for name, _low, _high in PHASE_STRATA},
+        "by_serving": serving_strata,
+        "pairs": aggregate_pair_records(pairs),
+        "pairs_by_stratum": by_stratum(pairs, aggregate_pair_records),
+        "checks": {
+            "q_sums_to_one_max_deviation": q_deviation,
+            "largest_state_to_environment_position_gap_metres": _largest(
+                entry.get("position_gap") for entry in capture.histories),
+            "position_tolerance_metres": POSITION_TOLERANCE_METRES,
+            "actor_label_is_the_held_label": bool(held_labels_agree),
+            "label_means_reproduce_the_panel_action": action_difference == 0.,
+            "max_absolute_difference_from_the_panel_action": action_difference,
+            "batch_invariance": batch_invariance,
+            "definition": (
+                "`actor_label_is_the_held_label`: at a captured history no agent was resampled, so "
+                "the label the actor actually ran must be the held one. "
+                "`label_means_reproduce_the_panel_action`: the recomputation at the held label is "
+                "compared with the action the panel's own forward returned, row for row. "
+                "`q_sums_to_one_max_deviation`: the largest |sum(q) - 1| over every single-END law. "
+                "`largest_state_to_environment_position_gap_metres`: the largest difference between "
+                "the UAV positions the captured state carries and the environment's own array at "
+                "the moment of the capture, which is what establishes that the serving snapshot is "
+                "this history's predecision one; above the tolerance the fallback pair rule is "
+                "used")},
+        "records": records, "pair_records": pairs,
+        "wall_seconds": time.perf_counter() - started,
+        "definitions": dict(END_DEFINITIONS)}
+
+
+# ---------------------------------------------------------------------------
 # (c): the four execution rules
 # ---------------------------------------------------------------------------
 
@@ -1010,10 +1885,11 @@ def run_rule_panel(name, learner, evaluator, summary, out, index, *, evaluation_
     generator = label_generator(evaluation_seed, name) if name in RANDOM_RULES else None
     rule = ExecutionRule(name, evaluator.agent, generator=generator)
     with rule.attached():
-        if captures:
-            with captures[0].attached(), captures[1].attached():
-                b01.evaluate_panel(learner, evaluator, summary, out, index)
-        else:
+        # Every capture is read-only and attached inside the rule, for this panel only; `ExitStack`
+        # takes them off in reverse order, including the one that wraps the rule's own callable.
+        with ExitStack() as stack:
+            for capture in captures:
+                stack.enter_context(capture.attached())
             b01.evaluate_panel(learner, evaluator, summary, out, index)
     panel = summary["panels"][-1]
     if panel["status"] != "complete":
@@ -1074,11 +1950,18 @@ def run_probe(seed, weights, out, launch_sha=None):
             "evaluation noise on this direction is about .03 J, so smaller J differences are not "
             "read")
         shared.write_json(out / "summary.json", result)
+    end = result.get("accessible_end") or {}
     print(json.dumps({"status": result["status"], "failure": result["failure"],
                       "block_seed": seed,
                       "faithful_load": (result.get("faithful_load") or {}).get("faithful_load"),
                       "J_by_rule": {name: (result.get("rules_measured") or {}).get(name, {}).get(
                           "J_mean") for name in RULES},
+                      "accessible_end": {
+                          "pair_rule": end.get("pair_rule"),
+                          "histories": end.get("histories"),
+                          "same_label_reselection": (end.get("overall") or {}).get(
+                              "same_label_reselection", {}).get("fraction"),
+                          "wall_seconds": end.get("wall_seconds")},
                       "optimizer_steps": result.get("optimizer_steps")}))
     return 0 if result["status"] == "complete" else 1
 
@@ -1133,13 +2016,16 @@ def _run(result, seed, evaluation_seed, out, weights):
         config = evaluator.agent.config
         actor = ActorCapture(evaluator.agent)
         critic = CriticCapture(evaluator.agent)
+        history = HistoryCapture(evaluator.agent, evaluator=evaluator)
+        available, pair_reason = serving_available(evaluator.envs, int(config.n_agents))
+        requested_rule = PAIR_RULES[0] if available else PAIR_RULES[1]
 
         measured = {}
         for index, name in enumerate(RULES):
             measured[name] = run_rule_panel(
                 name, learner, evaluator, summary, out, index,
                 evaluation_seed=evaluation_seed,
-                captures=(actor, critic) if name == BASELINE_RULE else ())
+                captures=(actor, critic, history) if name == BASELINE_RULE else ())
             result["rules_measured"] = dict(measured)
             if name == BASELINE_RULE:
                 scores = measured[name]["J_world_scores"]
@@ -1164,6 +2050,8 @@ def _run(result, seed, evaluation_seed, out, weights):
                         f"world index {first}")
                 if not actor.captured or not critic.captured:
                     raise ValueError("the panel produced no actor call or no critic call")
+                if not history.histories:
+                    raise ValueError("the panel produced no eligible decision history")
                 standard_deviation, std_note = action_standard_deviation(
                     evaluator.agent.skill_discoverer.actor)
                 with shared.e0._preserve_rng(), torch.no_grad():
@@ -1175,8 +2063,32 @@ def _run(result, seed, evaluation_seed, out, weights):
                         "low_level_value": label_value_effect(
                             evaluator.agent.skill_discoverer.critic, critic.captured,
                             n_Z=int(config.n_Z), use_valuenorm=bool(config.use_valuenorm))}
+                    # (d) runs on the same frozen copies, after (b), with no further panel.
+                    pair_rule, reason, position_gap = resolve_pair_rule(
+                        requested_rule, history.histories, pair_reason)
+                    result["pair_rule"] = {
+                        "rule": pair_rule, "requested": requested_rule,
+                        "serving_state_available": bool(available), "reason": reason,
+                        "largest_state_to_environment_position_gap_metres": position_gap,
+                        "position_tolerance_metres": POSITION_TOLERANCE_METRES,
+                        "definition": END_DEFINITIONS[f"pair_rule_{pair_rule}"],
+                        "source": SOURCE_NOTES["serving_state"]}
+                    result["accessible_end"] = end_accessibility(
+                        evaluator.agent, history, standard_deviation, pair_rule=pair_rule,
+                        pair_rule_reason=reason,
+                        metres_per_action_unit=action_scale(evaluator.envs))
+                    result["accessible_end"]["pair_rule_record"] = result["pair_rule"]
+                    result["accessible_end"]["decision_replay"] = replay_decisions(
+                        evaluator.agent, history)
+                    result["accessible_end"]["normalisers"] = {
+                        "use_obsnorm": bool(getattr(config, "use_obsnorm", False)),
+                        "use_statenorm": bool(getattr(config, "use_statenorm", False)),
+                        "note": ("both False on this construction, so the offline queries' "
+                                 "`update=False` normalisation is the identity and cannot differ "
+                                 "from the decision path's own")}
                 result["capture"] = {"actor": actor.provenance(),
-                                     "low_level_critic": critic.provenance()}
+                                     "low_level_critic": critic.provenance(),
+                                     "decision_history": history.provenance()}
     finally:
         for optimizer, original in restore:
             optimizer.step = original
@@ -1282,11 +2194,23 @@ def probe_row(summary):
     value = (summary.get("label_effect") or {}).get("low_level_value") or {}
     if not action or not value:
         raise ValueError("the probe carries no label-effect reading")
+    end = summary.get("accessible_end") or {}
+    if not end.get("overall") or not end.get("pair_rule"):
+        raise ValueError("the probe carries no accessible-END reading")
     if summary.get("optimizer_steps") != 0:
         raise ValueError("the probe took an optimizer step")
     baseline = float(measured[BASELINE_RULE]["J_mean"])
     return {
         "block_seed": seed, "launch_sha": summary.get("launch_sha"),
+        "accessible_end": {
+            key: end.get(key) for key in (
+                "pair_rule", "pair_rule_reason", "pair_rule_record", "histories",
+                "agent_queries", "caps",
+                "metres_per_action_unit", "overall", "by_stratum", "stratum_counts", "by_serving",
+                "pairs", "pairs_by_stratum", "checks", "capture", "normalisers", "wall_seconds")
+        } | {"decision_replay": {key: entry
+                                 for key, entry in (end.get("decision_replay") or {}).items()
+                                 if key != "replays"}},
         "weights_sha256": (summary.get("weights_record") or {}).get("sha256"),
         "faithful_load": True,
         "reference": summary.get("reference"),
@@ -1320,6 +2244,12 @@ def reduce_inputs(fits, probes, references):
     shas = {s.get("launch_sha") for s in fits}
     if len(shas) > 1:
         raise ValueError(f"mixed launch shas within the batch: {sorted(str(s) for s in shas)}")
+    # The probes are a later command than the fits and are published from a later source; the batch
+    # must be one sha *within* the fits and one *within* the probes, and the two need not agree.
+    probe_shas = {s.get("launch_sha") for s in probes}
+    if len(probe_shas) > 1:
+        raise ValueError(
+            f"mixed launch shas among the probes: {sorted(str(s) for s in probe_shas)}")
     recorded, reference_failures, seen = {}, {}, set()
     for summary in references:
         seed = int(summary.get("block_seed", -1))
@@ -1407,6 +2337,7 @@ def reduce_inputs(fits, probes, references):
                 entry["status"] = "complete"
                 entry["faithful_load"] = probe_rows[seed]["faithful_load"]
                 entry["label_effect"] = probe_rows[seed]["label_effect"]
+                entry["accessible_end"] = probe_rows[seed]["accessible_end"]
                 entry["J_by_rule"] = probe_rows[seed]["J_by_rule"]
                 entry["J_minus_as_trained"] = probe_rows[seed]["J_minus_as_trained"]
                 entry["label_change_fraction_by_rule"] = probe_rows[seed][
@@ -1422,6 +2353,13 @@ def reduce_inputs(fits, probes, references):
         "reference_object_ids": [matched.OBJECT_ID],
         "launch_sha": shared.e0._git("rev-parse", "HEAD"),
         "batch_launch_sha": next(iter(shas), None) if len(shas) == 1 else None,
+        "probe_launch_sha": next(iter(probe_shas), None) if len(probe_shas) == 1 else None,
+        "fit_and_probe_launch_shas": (
+            "the fits and the probes are separate commands published from separate sources: one "
+            "launch sha is required within the fits and one within the probes, and a probe sha that "
+            "differs from its fit's is recorded, not refused. What ties a probe to its fit is the "
+            "checkpoint: the probe recomputes the weights file's sha256 and compares it with the "
+            "sidecar the fit wrote, and `weights_match` compares it again here"),
         "status": "complete" if len(complete) == len(BLOCKS) else "incomplete",
         "arm": {"name": SAVE_ARM, "overrides": dict(ARM_OVERRIDES[SAVE_ARM]),
                 "coordinator_batch_size": ARMS[SAVE_ARM][1],
@@ -1445,7 +2383,8 @@ def reduce_inputs(fits, probes, references):
         "invalid_probes": {str(seed): text for seed, text in probe_failures.items()},
         "invalid_references": dict(reference_failures),
         "refusals": (
-            "a batch of fits at more than one launch sha, a duplicate block among the fits or the "
+            "a batch of fits at more than one launch sha, a batch of probes at more than one launch "
+            "sha, a duplicate block among the fits or the "
             "probes, a summary that is not this object's, an incomplete fit or probe, a block whose "
             "published D1280 fit was not supplied, any configuration difference from that fit, a "
             "probe whose weights sha256 is not the one its block's fit recorded, and a probe of a "
@@ -1487,7 +2426,56 @@ def reduce_inputs(fits, probes, references):
         name: entropy.described([b["label_change_fraction_by_rule"][name] for b in complete
                                  if b["label_change_fraction_by_rule"][name] is not None])
         if complete else None for name in RULES}
+    result["accessible_end"] = accessible_end_across_blocks(blocks, complete)
     return result
+
+
+def _across(blocks, read):
+    """`described` over the blocks that carry a value, or None when none does."""
+    values = [read(block) for block in blocks]
+    values = [v for v in values if v is not None]
+    return entropy.described(values) if values else None
+
+
+def accessible_end_across_blocks(blocks, complete):
+    """(d) carried through: per block and, where every block agrees, described across them.
+
+    No verdict and no threshold: the fractions, the counts and the definitions only.
+    """
+    per_block = {str(block["training_seed"]): block.get("accessible_end") for block in blocks}
+    rules = {value.get("pair_rule") for value in per_block.values() if value}
+    overall = lambda block: (block.get("accessible_end") or {}).get("overall") or {}
+    strata = [name for name, _low, _high in PHASE_STRATA]
+    return {
+        "per_block": per_block,
+        "pair_rule_by_block": {seed: (value or {}).get("pair_rule")
+                               for seed, value in per_block.items()},
+        "one_pair_rule_across_blocks": (next(iter(rules)) if len(rules) == 1 else None),
+        "histories_by_block": {seed: (value or {}).get("histories")
+                               for seed, value in per_block.items()},
+        "same_label_reselection_fraction": _across(
+            complete, lambda b: overall(b).get("same_label_reselection", {}).get("fraction")),
+        "mean_one_minus_q_held": _across(
+            complete, lambda b: overall(b).get("mean_one_minus_q_held")),
+        "mean_law_weighted_action_change": _across(
+            complete, lambda b: overall(b).get("mean_law_weighted_action_change")),
+        "mean_greedy_action_change_in_std_units": _across(
+            complete, lambda b: overall(b).get("mean_greedy_action_change_in_std_units")),
+        "mean_next_hidden_relative_difference": _across(
+            complete, lambda b: overall(b).get("mean_next_hidden_relative_difference")),
+        "same_label_reselection_fraction_by_stratum": {
+            name: _across(complete, lambda b, name=name: (
+                (b.get("accessible_end") or {}).get("by_stratum", {}).get(name, {})
+                .get("same_label_reselection", {}).get("fraction"))) for name in strata},
+        "agent_queries_by_stratum": {
+            name: {seed: ((value or {}).get("by_stratum", {}).get(name, {}).get("agent_queries"))
+                   for seed, value in per_block.items()} for name in strata},
+        "pair_outcome_fractions": {
+            outcome: _across(complete, lambda b, outcome=outcome: (
+                (b.get("accessible_end") or {}).get("pairs", {})
+                .get("outcome_fractions", {}).get(outcome)))
+            for outcome in ("neither", "one", "both")},
+        "definitions": dict(END_DEFINITIONS)}
 
 
 def main(argv=None):

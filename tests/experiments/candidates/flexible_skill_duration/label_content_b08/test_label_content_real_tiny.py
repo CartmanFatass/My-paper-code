@@ -8,12 +8,14 @@ any measured quantity. Kept apart from the fake-learner tests, whose helper forb
 construction.
 """
 import json
+import random
 import sys
 from contextlib import contextmanager
 from pathlib import Path
 
 import numpy as np
 import pytest
+import torch
 
 ROOT = Path(__file__).resolve().parents[5]
 for _directory in (ROOT, ROOT / "scripts"):
@@ -269,6 +271,95 @@ def test_the_probe_reproduces_the_fits_own_final_panel_and_takes_no_step(
     assert summary["J_minus_as_trained"]["as_trained"] == 0.
     assert set(summary["J_by_rule"]) == set(label.RULES)
 
+    # (d) the accessible-END reading, from the same panel and with no further environment step
+    end = summary["accessible_end"]
+    history = capture["decision_history"]
+    assert summary["pair_rule"]["serving_state_available"] is True
+    assert summary["pair_rule"]["rule"] == end["pair_rule"] == "serving_competitor"
+    assert summary["pair_rule"]["requested"] == "serving_competitor"
+    assert end["pair_rule_reason"] is None
+    # the serving snapshots are the histories' own: the state carries the same UAV positions
+    assert summary["pair_rule"]["largest_state_to_environment_position_gap_metres"] < label.\
+        POSITION_TOLERANCE_METRES
+    assert end["checks"]["largest_state_to_environment_position_gap_metres"] == summary[
+        "pair_rule"]["largest_state_to_environment_position_gap_metres"]
+    assert end["metres_per_action_unit"] == 30.  # max_speed * time_step of Scenario 1
+    assert end["normalisers"] == {"use_obsnorm": False, "use_statenorm": False,
+                                  "note": end["normalisers"]["note"]}
+    # the capture rule: every tick of this tiny panel is a candidate, and the two decision ticks
+    # (the reset at 0 and the forced team boundary at 10) are the ones with no eligible world
+    assert history["capture_stride"] == 1 and history["candidate_ticks"] == HORIZON
+    assert history["panel_steps"] == history["actor_calls"] == HORIZON
+    assert history["ticks_without_an_eligible_world"] == 2
+    assert history["ticks"] == [t for t in range(HORIZON) if t % SKILL_PERIOD]
+    assert end["histories"] == history["histories"] == HORIZON - 2
+    assert end["agent_queries"] == end["histories"] * N_UAVS
+    assert sorted(history["worlds"]) == list(range(LANES))
+
+    # the ages are the predecision ones, and the strata that follow from them add up
+    records = end["records"]
+    assert len(records) == end["agent_queries"]
+    for record in records:
+        assert record["team_age"] == record["tick"] % SKILL_PERIOD  # predecision, not 0
+        assert record["agent_age"] == record["team_age"]  # synchronised clocks on this arm
+        assert record["team_remaining"] == SKILL_PERIOD - record["team_age"]
+        assert record["min_remaining"] == min(record["agent_remaining"], record["team_remaining"])
+        assert record["stratum"] == label.stratum_name(record["team_remaining"])
+        assert len(record["q"]) == N_z and sum(record["q"]) == pytest.approx(1., abs=1e-6)
+        assert 0. <= record["one_minus_q_held"] <= 1.
+        assert record["law_weighted_action_change"] >= 0.
+        assert record["label_changes"] is (record["greedy_label"] != record["held_label"])
+        assert record["serving"] in (True, False)
+    assert sum(end["stratum_counts"].values()) == end["agent_queries"]
+    assert sum(end["by_stratum"][name]["agent_queries"] for name in end["by_stratum"]) == end[
+        "agent_queries"]
+    assert end["stratum_counts"] == {name: end["by_stratum"][name]["agent_queries"]
+                                     for name in ("1", "2-4", "5-9")}
+    assert end["by_stratum"]["outside_1_to_9"]["agent_queries"] == 0
+    assert end["overall"]["agent_queries"] == end["agent_queries"]
+    assert (end["overall"]["same_label_reselection"]["count"]
+            + end["overall"]["label_changes"]["count"]) == end["agent_queries"]
+    assert end["by_serving"]["serving"]["agent_queries"] + end["by_serving"]["not_serving"][
+        "agent_queries"] == end["agent_queries"]
+
+    # the query's own runtime proofs
+    checks = end["checks"]
+    assert checks["actor_label_is_the_held_label"] is True
+    assert checks["label_means_reproduce_the_panel_action"] is True
+    assert checks["max_absolute_difference_from_the_panel_action"] == 0.
+    assert checks["q_sums_to_one_max_deviation"] < 1e-5
+    assert checks["batch_invariance"]["max_absolute_q_difference"] < 1e-5
+    # a real decision of the panel, replayed through the same offline query path
+    replay = end["decision_replay"]
+    assert replay["checked"] >= 1 and replay["reproduced"] == replay["checked"]
+    for entry in replay["replays"]:
+        assert entry["tick"] % SKILL_PERIOD == 0 and entry["tick"] > 0
+        assert entry["sampled_agents"] == N_UAVS and entry["sample_Z"] is True
+        assert entry["query_team_label"] == entry["panel_team_label"]
+        assert entry["query_agent_labels"] == entry["panel_agent_labels"]
+
+    # one pair per history, from the environment's own predecision serving state
+    pairs = end["pair_records"]
+    assert len(pairs) == end["histories"]
+    for record in pairs:
+        if record["pair"] is None:
+            continue
+        assert record["pair"]["rule"] == "serving_competitor"
+        first, second = record["agents"]
+        assert 0 <= first < second < N_UAVS
+        assert len(record["greedy_labels"]) == len(record["held_labels"]) == 2
+        assert record["label_changes"] == [record["greedy_labels"][i] != record["held_labels"][i]
+                                           for i in range(2)]
+        singles = [r for r in records if r["tick"] == record["tick"]
+                   and r["agent"] in record["agents"]]
+        assert [r["greedy_label"] for r in sorted(singles, key=lambda r: r["agent"])] == record[
+            "singleton_labels"]
+    counted = end["pairs"]
+    assert counted["histories"] == end["histories"]
+    assert sum(counted["outcome_counts"].values()) == counted["histories_with_a_pair"]
+    assert counted["histories_with_a_pair"] + counted["histories_without_a_pair"] == end[
+        "histories"]
+
 
 def test_the_probe_refuses_weights_whose_sha256_is_not_the_sidecars(
         tmp_path, tiny, tiny_fit, monkeypatch):
@@ -384,7 +475,7 @@ def test_a_rule_that_cannot_be_imposed_leaves_the_agent_untouched(tmp_path, tiny
 
 
 def test_the_captures_leave_the_panel_bit_identical(tmp_path, tiny, tiny_fit):
-    """The same panel with and without the actor/critic captures attached."""
+    """The same panel with and without the actor, critic and decision-history captures attached."""
     _fit_summary, fit_out = tiny_fit
     summary, learner, evaluator = build_harness(
         tmp_path / "harness_capture", fit_out / label.WEIGHTS_NAME)
@@ -393,13 +484,16 @@ def test_the_captures_leave_the_panel_bit_identical(tmp_path, tiny, tiny_fit):
                                  evaluation_seed=EVALUATION_SEED)
     actor = label.ActorCapture(evaluator.agent)
     critic = label.CriticCapture(evaluator.agent)
+    history = label.HistoryCapture(evaluator.agent, evaluator=evaluator)
     captured = label.run_rule_panel("as_trained", learner, evaluator, summary,
                                     tmp_path / "harness_capture", 1,
-                                    evaluation_seed=EVALUATION_SEED, captures=(actor, critic))
+                                    evaluation_seed=EVALUATION_SEED,
+                                    captures=(actor, critic, history))
     assert captured["J_world_scores"] == plain["J_world_scores"]
     assert captured["component_means"] == plain["component_means"]
     assert comparable_metrics(captured["d2_metrics"]) == comparable_metrics(
         plain["d2_metrics"])
+    assert captured["agent_label_histogram"] == plain["agent_label_histogram"]
     assert actor.calls == HORIZON and critic.calls == HORIZON
     assert all(entry["deterministic"] is True for entry in actor.captured)
     assert all(entry["compact_context"] is None and entry["central_input"] is None
@@ -412,3 +506,118 @@ def test_the_captures_leave_the_panel_bit_identical(tmp_path, tiny, tiny_fit):
                                        standard_deviation, n_z=N_z)
     assert result["recomputed_action_at_held_label_reproduces_the_panel"] is True
     assert np.isfinite(result["rms_label_deviation_over_std_mean"])
+
+    # every wrapper and hook of all three captures is off again
+    assert "_batched_assign_skills" not in evaluator.agent.__dict__
+    assert evaluator.agent.skill_discoverer._forward_hooks == {}
+    assert evaluator.agent.skill_coordinator.skill_decoder._forward_hooks == {}
+
+
+def test_the_decision_histories_are_outcome_blind_and_carry_predecision_ages(
+        tmp_path, tiny, tiny_fit):
+    """What the capture kept, and the one fact that tells predecision ages from execution ages."""
+    _fit_summary, fit_out = tiny_fit
+    summary, learner, evaluator = build_harness(
+        tmp_path / "harness_history", fit_out / label.WEIGHTS_NAME)
+    history = label.HistoryCapture(evaluator.agent, evaluator=evaluator)
+    label.run_rule_panel("as_trained", learner, evaluator, summary, tmp_path / "harness_history", 0,
+                         evaluation_seed=EVALUATION_SEED, captures=(history,))
+
+    # the reset (tick 0) and the forced team boundary (tick 10) are excluded; nothing else is
+    assert [entry["tick"] for entry in history.histories] == [
+        t for t in range(HORIZON) if t % SKILL_PERIOD]
+    assert history.ticks_without_an_eligible_world == 2
+    # the world rotation is the fixed one: the j-th kept history takes world j % lanes
+    assert [entry["world"] for entry in history.histories] == [
+        index % LANES for index in range(len(history.histories))]
+    for entry in history.histories:
+        assert entry["team_age"] == entry["tick"] % SKILL_PERIOD
+        assert entry["agent_ages"].tolist() == [entry["tick"] % SKILL_PERIOD] * N_UAVS
+        # no agent was resampled here, so the executed labels are the held ones
+        assert entry["executed_z"].tolist() == entry["held_z"].tolist()
+        assert entry["executed_Z"] == entry["held_Z"]
+        assert entry["actor"]["agent_skill"].tolist() == entry["held_z"].tolist()
+        assert entry["actor"]["observation"].shape[0] == N_UAVS
+        assert entry["actor"]["masks"].tolist() == [[1.]] * N_UAVS
+        assert entry["serving"]["connections"].shape[0] == N_UAVS
+        # the environment's own predecision positions are the ones the captured state carries,
+        # up to the state's float32 storage: this is what ties the snapshot to the history
+        assert entry["position_gap"] < label.POSITION_TOLERANCE_METRES
+        assert np.allclose(entry["state"][:3 * N_UAVS].reshape(N_UAVS, 3),
+                           entry["serving"]["positions"], atol=label.POSITION_TOLERANCE_METRES)
+
+    # the decision history at the forced boundary is the discriminator: a *predecision* team age of
+    # 10 is what fires the cap, while the execution ages the D2 route records there are all zero
+    assert len(history.decision_histories) == 1
+    decision = history.decision_histories[0]
+    assert decision["tick"] == SKILL_PERIOD and decision["team_age"] == SKILL_PERIOD
+    assert decision["agent_ages"].tolist() == [SKILL_PERIOD] * N_UAVS
+    assert decision["sample_Z"] is True and decision["sampled_mask"].all()
+    assert decision["team_cause"] == evaluator.agent.D2_CAUSE_TEAM_CAP
+    executed = evaluator.agent._d2_last_step  # the route's own ages, at the panel's last step
+    assert np.asarray(executed["team_ages"]).tolist() != [SKILL_PERIOD] * LANES
+
+
+def test_the_end_scoring_takes_no_step_and_leaves_every_stream_untouched(tmp_path, tiny, tiny_fit):
+    """(d) on frozen copies: no optimizer step, no environment step, no global RNG draw."""
+    _fit_summary, fit_out = tiny_fit
+    summary, learner, evaluator = build_harness(
+        tmp_path / "harness_end", fit_out / label.WEIGHTS_NAME)
+    history = label.HistoryCapture(evaluator.agent, evaluator=evaluator)
+    label.run_rule_panel("as_trained", learner, evaluator, summary, tmp_path / "harness_end", 0,
+                         evaluation_seed=EVALUATION_SEED, captures=(history,))
+    standard_deviation, _note = label.action_standard_deviation(
+        evaluator.agent.skill_discoverer.actor)
+    steps = [env.env.current_step for env in evaluator.envs]
+    restore = label.scale._forbid_optimizer_steps(evaluator.agent)
+    before = (random.getstate(), np.random.get_state(), torch.get_rng_state().clone())
+    try:
+        with torch.no_grad():
+            first = label.end_accessibility(evaluator.agent, history, standard_deviation,
+                                            pair_rule="serving_competitor")
+            replay = label.replay_decisions(evaluator.agent, history)
+            second = label.end_accessibility(evaluator.agent, history, standard_deviation,
+                                             pair_rule="serving_competitor")
+    finally:
+        for optimizer, original in restore:
+            optimizer.step = original
+    after = (random.getstate(), np.random.get_state(), torch.get_rng_state().clone())
+    assert before[0] == after[0]
+    assert before[1][0] == after[1][0] and before[1][2:] == after[1][2:]
+    np.testing.assert_array_equal(before[1][1], after[1][1])
+    assert torch.equal(before[2], after[2])
+    # no environment stepped, and the query is deterministic: the same histories twice agree
+    assert [env.env.current_step for env in evaluator.envs] == steps
+    assert first["records"] == second["records"]
+    assert first["pair_records"] == second["pair_records"]
+    assert replay["reproduced"] == replay["checked"] >= 1
+    # the decoder hook came off after every query
+    assert evaluator.agent.skill_coordinator.skill_decoder._forward_hooks == {}
+
+
+def test_the_fallback_pair_rule_is_used_where_the_serving_state_is_not_exposed(
+        tmp_path, tiny, tiny_fit):
+    """No `envs` given to the capture: the pair comes from the state's own UAV positions."""
+    _fit_summary, fit_out = tiny_fit
+    summary, learner, evaluator = build_harness(
+        tmp_path / "harness_fallback", fit_out / label.WEIGHTS_NAME)
+    history = label.HistoryCapture(evaluator.agent)  # no evaluator, so no lanes to read
+    label.run_rule_panel("as_trained", learner, evaluator, summary, tmp_path / "harness_fallback",
+                         0, evaluation_seed=EVALUATION_SEED, captures=(history,))
+    assert all(entry["serving"] is None for entry in history.histories)
+    standard_deviation, _note = label.action_standard_deviation(
+        evaluator.agent.skill_discoverer.actor)
+    with torch.no_grad():
+        result = label.end_accessibility(evaluator.agent, history, standard_deviation,
+                                         pair_rule="nearest_horizontal",
+                                         pair_rule_reason="a host without the serving state")
+    assert result["pair_rule"] == "nearest_horizontal"
+    assert result["by_serving"] is None  # the serving strata are not reported under the fallback
+    assert all(record["serving"] is None for record in result["records"])
+    assert result["pairs"]["histories_without_a_pair"] == 0  # a nearest pair always exists
+    for record in result["pair_records"]:
+        positions = np.asarray([entry["state"] for entry in history.histories
+                                if entry["tick"] == record["tick"]][0])[:3 * N_UAVS]
+        expected = label.nearest_horizontal_pair(positions.reshape(N_UAVS, 3))
+        assert record["pair"] == expected
+    assert "serving" not in json.dumps(result["pairs"])
