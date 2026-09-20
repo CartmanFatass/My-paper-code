@@ -26,7 +26,7 @@ authority without owner amendment.
 Records (section 4). Per direction: `NOTES.md` (append-only notebook; Pro questions and
 answers as sections), `runs/<direction>/<tag>/` (runner-written), `CLAIM_<slug>.md` (before a
 confirmation batch). Nothing else for new work: no cards, intake, ledger, owner items,
-handoffs, packets, registries or receipts. Budget is fits (section 3); the five scientific
+handoffs, packets, registries or receipts. Cost is recorded in fits, with no allowance (section 3); the five scientific
 minimums are section 8.
 
 Methods are execution detail, not a second rulebook, in `.agents/skills/`:

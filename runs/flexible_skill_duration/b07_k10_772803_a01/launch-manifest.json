@@ -1,0 +1,99 @@
+{
+  "acceptance": "accepted",
+  "accepted_at": "2026-09-20T07:51:21.425630Z",
+  "bootstrap_command": [
+    "/home/wu/.venvs/hmasd/bin/python",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/9e1d0652bee24594937d5d14c5517b0b/scripts/hmasd_admission.py",
+    "_run-admitted",
+    "--runner",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/9e1d0652bee24594937d5d14c5517b0b/scripts/run_fsd_persistence_b07.py",
+    "--output",
+    "/home/wu/projects/HMASD/runs/flexible_skill_duration/b07_k10_772803_a01",
+    "--",
+    "fit",
+    "--arm",
+    "D_K10",
+    "--seed",
+    "772803",
+    "--launch-sha",
+    "4a654ca0e4868a28df3d487e5d83ddc6049fe1db",
+    "--output-root",
+    "/home/wu/projects/HMASD/runs/flexible_skill_duration/b07_k10_772803_a01"
+  ],
+  "claim_key": "cd23a74bcbb2974c3ba7a48652971a6e87d7668fdacce02109d4ca27c7fc1681",
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/cd23a74bcbb2974c3ba7a48652971a6e87d7668fdacce02109d4ca27c7fc1681.json",
+  "command": [
+    "/home/wu/.venvs/hmasd/bin/python",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/9e1d0652bee24594937d5d14c5517b0b/scripts/run_fsd_persistence_b07.py",
+    "fit",
+    "--arm",
+    "D_K10",
+    "--seed",
+    "772803",
+    "--launch-sha",
+    "4a654ca0e4868a28df3d487e5d83ddc6049fe1db",
+    "--output-root",
+    "/home/wu/projects/HMASD/runs/flexible_skill_duration/b07_k10_772803_a01"
+  ],
+  "command_sha256": "33f3a74287a1fa174e1718b90d0afd3c6efa70199f62142a658117af994cb9a6",
+  "control_observation": {
+    "observed_at": "2026-09-20T07:51:18.602357Z",
+    "ref": "refs/heads/main",
+    "remote": "origin",
+    "sha": "4a654ca0e4868a28df3d487e5d83ddc6049fe1db"
+  },
+  "control_root": "/home/wu/projects/HMASD",
+  "created_at": "2026-09-20T07:51:18.617396Z",
+  "cwd": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/9e1d0652bee24594937d5d14c5517b0b",
+  "direction": "flexible_skill_duration",
+  "host_identity": "LAPTOP-U9TDKC8A",
+  "identity_command": [
+    "/home/wu/.local/share/uv/python/cpython-3.10.21-linux-x86_64-gnu/bin/python3.10",
+    "scripts/run_fsd_persistence_b07.py",
+    "fit",
+    "--arm",
+    "D_K10",
+    "--seed",
+    "772803",
+    "--launch-sha",
+    "4a654ca0e4868a28df3d487e5d83ddc6049fe1db"
+  ],
+  "lead": "Claude session (current lead; a Codex DM may take it, never both)",
+  "manifest_ref": "/home/wu/projects/HMASD/runs/flexible_skill_duration/b07_k10_772803_a01/launch-manifest.json",
+  "node": "wsl_4070",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/cd23a74bcbb2974c3ba7a48652971a6e87d7668fdacce02109d4ca27c7fc1681.json",
+  "output_root": "/home/wu/projects/HMASD/runs/flexible_skill_duration/b07_k10_772803_a01",
+  "preflight": "/home/wu/projects/HMASD/runs/flexible_skill_duration/b07_k10_772803_a01/admission-preflight.json",
+  "process": {
+    "detached": true,
+    "identity": {
+      "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+      "kind": "linux_pid_start_ticks",
+      "pid": 61027,
+      "session_id": 61027,
+      "start_ticks": 26012324
+    },
+    "native_handle_kind": "posix_session",
+    "pid": 61027,
+    "process_group_id": 61027
+  },
+  "process_exit": "/home/wu/projects/HMASD/runs/flexible_skill_duration/b07_k10_772803_a01/process-exit.json",
+  "published_remote": "origin",
+  "runner_process": {
+    "identity": {
+      "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+      "kind": "linux_pid_start_ticks",
+      "pid": 61028,
+      "session_id": 61027,
+      "start_ticks": 26012333
+    },
+    "pid": 61028,
+    "process_group_id": 61027,
+    "supervisor_pid": 61027
+  },
+  "schema_version": 1,
+  "sha": "4a654ca0e4868a28df3d487e5d83ddc6049fe1db",
+  "source_root": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/9e1d0652bee24594937d5d14c5517b0b",
+  "stderr": "/home/wu/projects/HMASD/runs/flexible_skill_duration/b07_k10_772803_a01/stderr.log",
+  "stdout": "/home/wu/projects/HMASD/runs/flexible_skill_duration/b07_k10_772803_a01/stdout.log"
+}

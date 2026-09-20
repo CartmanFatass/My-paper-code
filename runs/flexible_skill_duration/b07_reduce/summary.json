@@ -1,0 +1,1752 @@
+{
+  "object_id": "FSD_PERSISTENCE_B07",
+  "card": "docs/research/candidates/flexible_skill_duration/NOTES.md (2026-09-19 23:58 PDT, persistence contrast inside the D family, skill held 10 steps against redrawn every step)",
+  "reference_object_ids": [
+    "FSD_MATCHED_INFORMATION_BASELINE_B01",
+    "FSD_FLAT_INPUT_SCALE_B05"
+  ],
+  "launch_sha": "5d56acf7b97a2f485538fa4ca27c1183005c3d33",
+  "batch_launch_sha": "4a654ca0e4868a28df3d487e5d83ddc6049fe1db",
+  "status": "incomplete",
+  "arms": {
+    "D_K10": {
+      "overrides": {},
+      "coordinator_batch_size": 1280,
+      "caps": {
+        "skill_cap_k_max": 10,
+        "team_cap_k_Z": 10
+      }
+    },
+    "D_K1": {
+      "overrides": {
+        "skill_cap_k_max": 1,
+        "team_cap_k_Z": 1,
+        "coordinator_batch_size": 12800
+      },
+      "coordinator_batch_size": 12800,
+      "caps": {
+        "skill_cap_k_max": 1,
+        "team_cap_k_Z": 1
+      }
+    }
+  },
+  "quantity": "J45 = mean of the 32 final world scores; `late` is the mean over panels 30, 35, 40, 45 (B05's reduce's window) and `late_35_45` the mean over panels 35, 40, 45; behaviour windows are training rollouts 1-5 and 35-45; differences are D_K10 minus D_K1 on the same training and evaluation seeds",
+  "declared_difference": "skill_cap_k_max, team_cap_k_Z and coordinator_batch_size only; every other recorded configuration field of both arms must equal the published stage-1 D1280 fit of the block, and config.k stays 10 in both",
+  "blocks": [
+    {
+      "training_seed": 772803,
+      "evaluation_seed": 782803,
+      "arms": {
+        "D_K10": {
+          "J_by_rollout": {
+            "5": 0.2275892964714526,
+            "10": 0.3366604903841566,
+            "15": 0.35318105016325024,
+            "20": 0.380982424343549,
+            "25": 0.37281391894452576,
+            "30": 0.423212911668479,
+            "35": 0.40412636845335764,
+            "40": 0.4459268870888592,
+            "45": 0.45587469857693386
+          },
+          "J_early_window": 0.32460331534060205,
+          "J_late_window": 0.4322852164469074,
+          "J_late_window_35_45": 0.43530931803971695,
+          "endpoint_scores_J": [
+            0.45357511414156954,
+            0.5020362606640331,
+            0.40059441634749243,
+            0.4989370180324188,
+            0.4100085092356054,
+            0.4674970123446343,
+            0.39108772819998533,
+            0.4473475055239409,
+            0.5078531273532473,
+            0.43926278630621446,
+            0.47595656831645017,
+            0.4077214150399054,
+            0.45336175344514823,
+            0.5368689005445793,
+            0.4226169594350697,
+            0.43574388140509895,
+            0.4541685576589916,
+            0.4434311528521006,
+            0.41262050619343055,
+            0.4390681098887388,
+            0.5236370375415192,
+            0.48115466793544603,
+            0.5009340895754457,
+            0.47544058331281713,
+            0.5072235179006562,
+            0.42481383436436443,
+            0.4330085689124202,
+            0.40681509653888487,
+            0.42634876382105125,
+            0.46644674568483985,
+            0.465496421698428,
+            0.47691374424735655
+          ],
+          "object_id": "FSD_PERSISTENCE_B07",
+          "launch_sha": "4a654ca0e4868a28df3d487e5d83ddc6049fe1db",
+          "coordinator_batch_size": 1280,
+          "skill_cap_k_max": 10,
+          "team_cap_k_Z": 10,
+          "k": 10,
+          "diagnostics": {
+            "1": {
+              "discoverer_policy_loss": 0.0012455456890165806,
+              "discoverer_value_loss": 0.18436717987060547,
+              "action_entropy": 4.324311316013336,
+              "actor_displacement": 0.15379872709884004,
+              "training_return_U": 19.16760525830241,
+              "coordinator_policy_loss": -0.0065710414201021194,
+              "coordinator_value_loss": 1.964505672454834,
+              "team_skill_entropy": 1.7064260244369507,
+              "agent_skill_entropy": 1.7383214235305786,
+              "mean_high_level_reward": 0.36659589409828186,
+              "coordinator_displacement": 0.007943257958200113,
+              "segment_length_agent_mean": 10.0,
+              "segment_length_team_mean": 10.0
+            },
+            "5": {
+              "discoverer_policy_loss": -0.00229754694737494,
+              "discoverer_value_loss": 0.1388183832168579,
+              "action_entropy": 4.671536982059479,
+              "actor_displacement": 0.4129479380314338,
+              "training_return_U": 17.155401974049113,
+              "coordinator_policy_loss": -0.014139862731099129,
+              "coordinator_value_loss": 2.736558675765991,
+              "team_skill_entropy": 1.69879150390625,
+              "agent_skill_entropy": 1.774480938911438,
+              "mean_high_level_reward": 0.32811272144317627,
+              "coordinator_displacement": 0.022908166378406095,
+              "segment_length_agent_mean": 10.0,
+              "segment_length_team_mean": 10.0
+            },
+            "10": {
+              "discoverer_policy_loss": -0.0054632010869681835,
+              "discoverer_value_loss": 0.10856562852859497,
+              "action_entropy": 5.082237124443054,
+              "actor_displacement": 0.5855767347193543,
+              "training_return_U": 14.159207744494855,
+              "coordinator_policy_loss": -0.014537242241203785,
+              "coordinator_value_loss": 0.7804821133613586,
+              "team_skill_entropy": 1.534720778465271,
+              "agent_skill_entropy": 1.770645260810852,
+              "mean_high_level_reward": 0.27083754539489746,
+              "coordinator_displacement": 0.0350107213060996,
+              "segment_length_agent_mean": 10.0,
+              "segment_length_team_mean": 10.0
+            },
+            "15": {
+              "discoverer_policy_loss": -0.012400741688907146,
+              "discoverer_value_loss": 0.03828759491443634,
+              "action_entropy": 5.489385724067688,
+              "actor_displacement": 0.7132929140964004,
+              "training_return_U": 28.9958038571134,
+              "coordinator_policy_loss": 0.020475076511502266,
+              "coordinator_value_loss": 0.9927892684936523,
+              "team_skill_entropy": 1.4671320915222168,
+              "agent_skill_entropy": 1.7797045707702637,
+              "mean_high_level_reward": 0.5545176267623901,
+              "coordinator_displacement": 0.039452692442314086,
+              "segment_length_agent_mean": 10.0,
+              "segment_length_team_mean": 10.0
+            },
+            "20": {
+              "discoverer_policy_loss": -0.020574182271957397,
+              "discoverer_value_loss": 0.01847437210381031,
+              "action_entropy": 5.85618793964386,
+              "actor_displacement": 0.8246668988168586,
+              "training_return_U": 29.2585339856251,
+              "coordinator_policy_loss": 0.04196270927786827,
+              "coordinator_value_loss": 0.36665523052215576,
+              "team_skill_entropy": 1.6330548524856567,
+              "agent_skill_entropy": 1.780869960784912,
+              "mean_high_level_reward": 0.5595058798789978,
+              "coordinator_displacement": 0.04095065531446032,
+              "segment_length_agent_mean": 10.0,
+              "segment_length_team_mean": 10.0
+            },
+            "25": {
+              "discoverer_policy_loss": -0.030722282826900482,
+              "discoverer_value_loss": 0.010089187882840633,
+              "action_entropy": 6.203104257583618,
+              "actor_displacement": 0.9175569361311288,
+              "training_return_U": 26.854248114423278,
+              "coordinator_policy_loss": 0.003637786954641342,
+              "coordinator_value_loss": 0.2860231399536133,
+              "team_skill_entropy": 1.7135828733444214,
+              "agent_skill_entropy": 1.7824325561523438,
+              "mean_high_level_reward": 0.5135807394981384,
+              "coordinator_displacement": 0.04344109923001911,
+              "segment_length_agent_mean": 10.0,
+              "segment_length_team_mean": 10.0
+            },
+            "30": {
+              "discoverer_policy_loss": -0.03830203413963318,
+              "discoverer_value_loss": 0.006841175723820925,
+              "action_entropy": 6.527836322784424,
+              "actor_displacement": 0.9941148164090691,
+              "training_return_U": 27.928895012104093,
+              "coordinator_policy_loss": 0.011141964234411716,
+              "coordinator_value_loss": 0.17471548914909363,
+              "team_skill_entropy": 1.7245124578475952,
+              "agent_skill_entropy": 1.7807602882385254,
+              "mean_high_level_reward": 0.534055769443512,
+              "coordinator_displacement": 0.04529163162396853,
+              "segment_length_agent_mean": 10.0,
+              "segment_length_team_mean": 10.0
+            },
+            "35": {
+              "discoverer_policy_loss": -0.046014994382858276,
+              "discoverer_value_loss": 0.00667562335729599,
+              "action_entropy": 6.837109327316284,
+              "actor_displacement": 1.0635071912381835,
+              "training_return_U": 29.578215897299394,
+              "coordinator_policy_loss": -0.009690286591649055,
+              "coordinator_value_loss": 0.20871709287166595,
+              "team_skill_entropy": 1.7477171421051025,
+              "agent_skill_entropy": 1.7830039262771606,
+              "mean_high_level_reward": 0.5656763911247253,
+              "coordinator_displacement": 0.04630463934789653,
+              "segment_length_agent_mean": 10.0,
+              "segment_length_team_mean": 10.0
+            },
+            "40": {
+              "discoverer_policy_loss": -0.05166948214173317,
+              "discoverer_value_loss": 0.007429271470755339,
+              "action_entropy": 7.117566466331482,
+              "actor_displacement": 1.1211762823838174,
+              "training_return_U": 29.1988605590781,
+              "coordinator_policy_loss": 0.00042624823981896043,
+              "coordinator_value_loss": 0.15566377341747284,
+              "team_skill_entropy": 1.7406585216522217,
+              "agent_skill_entropy": 1.7793469429016113,
+              "mean_high_level_reward": 0.558341920375824,
+              "coordinator_displacement": 0.04759749489248372,
+              "segment_length_agent_mean": 10.0,
+              "segment_length_team_mean": 10.0
+            },
+            "45": {
+              "discoverer_policy_loss": -0.05573546141386032,
+              "discoverer_value_loss": 0.006427439395338297,
+              "action_entropy": 7.382565140724182,
+              "actor_displacement": 1.1724109045953839,
+              "training_return_U": 28.503186782109037,
+              "coordinator_policy_loss": -7.220990664791316e-05,
+              "coordinator_value_loss": 0.12599197030067444,
+              "team_skill_entropy": 1.6794756650924683,
+              "agent_skill_entropy": 1.7828642129898071,
+              "mean_high_level_reward": 0.5450027585029602,
+              "coordinator_displacement": 0.048751420862861564,
+              "segment_length_agent_mean": 10.0,
+              "segment_length_team_mean": 10.0
+            },
+            "mean_policy_loss": -0.026597472177672898,
+            "training_return_U_rollouts_35_45": 29.17001704927807,
+            "mean_coordinator_policy_loss": -0.006494277266513867,
+            "mean_team_skill_entropy": 1.6603153281741672
+          },
+          "actor_displacement_parts": {
+            "1": {
+              "rollout": 1,
+              "total": 0.15379872709884004,
+              "action_entropy": 4.324311316013336,
+              "initial_actor_parameter_norm": 41.176319125605275,
+              "logstd_part": 0.0009480063378538024,
+              "network_part": 0.15379580534334109,
+              "clamped_at_zero": false,
+              "constant": 1.4189,
+              "action_dimensions": 3
+            },
+            "45": {
+              "rollout": 45,
+              "total": 1.1724109045953839,
+              "action_entropy": 7.382565140724182,
+              "initial_actor_parameter_norm": 41.176319125605275,
+              "logstd_part": 0.043829053173558646,
+              "network_part": 1.1715913721567242,
+              "clamped_at_zero": false,
+              "constant": 1.4189,
+              "action_dimensions": 3
+            }
+          },
+          "behaviour": {
+            "early": {
+              "rollouts": [
+                1,
+                2,
+                3,
+                4,
+                5
+              ],
+              "available_rollouts": 5,
+              "cells_visited_mean": 115.23958333333333,
+              "path_length_metres_mean": 22436.12312325724,
+              "net_displacement_metres_mean": 548.6805954455025,
+              "path_over_net_displacement_mean": 61.19861968823644,
+              "agent_skill_change_fraction": 0.08068637274549098,
+              "team_skill_change_fraction": 0.07955911823647295,
+              "team_decision_fraction": 0.1,
+              "agent_sampled_fraction": 0.1,
+              "action_autocorrelation": {
+                "1": -0.0004905357116934654,
+                "2": -0.00012829700237959704,
+                "5": 0.0002940090496707577,
+                "9": -0.0010184417701309242,
+                "10": -0.00061652940728259,
+                "20": 0.0004628199157145083
+              },
+              "action_series_skipped": 0
+            },
+            "late": {
+              "rollouts": [
+                35,
+                36,
+                37,
+                38,
+                39,
+                40,
+                41,
+                42,
+                43,
+                44,
+                45
+              ],
+              "available_rollouts": 11,
+              "cells_visited_mean": 222.8892045454545,
+              "path_length_metres_mean": 55130.501701399386,
+              "net_displacement_metres_mean": 574.4056172615096,
+              "path_over_net_displacement_mean": 134.53097819686477,
+              "agent_skill_change_fraction": 0.08191003218558329,
+              "team_skill_change_fraction": 0.07922663508835853,
+              "team_decision_fraction": 0.1,
+              "agent_sampled_fraction": 0.1,
+              "action_autocorrelation": {
+                "1": 0.054465968025905025,
+                "2": -0.018195954570240345,
+                "5": 0.016207620170368683,
+                "9": 0.021578065681437976,
+                "10": 0.012142936117300935,
+                "20": 0.003970694801352385
+              },
+              "action_series_skipped": 0
+            }
+          },
+          "behaviour_capture": {
+            "attached_at": "scripts/run_fsd_persistence_b07.py:352 wraps the learner agent instance's `step`, from the build_learner wrapper this object binds onto run_fsd_baseline_interruption_b01; the frozen collector calls it at run_fsd_baseline_interruption_b01.py:113",
+            "agent_step_calls": 22500,
+            "finalized_rollouts": 45,
+            "steps_per_rollout": 500,
+            "lags": [
+              1,
+              2,
+              5,
+              9,
+              10,
+              20
+            ],
+            "cell_metres": 50.0,
+            "definitions": {
+              "action_autocorrelation": "per (lane, agent, action dimension) series of the executed action over the rollout's steps: with x the series and m its mean over the rollout, r(h) = sum_t (x_t - m)(x_{t+h} - m) / sum_t (x_t - m)^2, the sums over every t for which both entries exist; the reported value is the mean of r(h) over the series whose entries are not all exactly equal and whose mean-removed sum of squares is positive, and the others are counted in `action_series_skipped`. Lags cross episode boundaries only if a rollout holds more than one episode, which the frozen loop's full-terminal-episode rule forbids",
+              "executed_actions": "the array `agent.step` returns at run_fsd_baseline_interruption_b01.py:113, which the frozen collector hands lane by lane to the training environment at run_fsd_baseline_interruption_b01.py:121 without touching it; the environment converts it to a velocity and never writes into it (envs/pettingzoo/uav_env.py:280-294), and the capture stores a copy",
+              "cells_visited": "number of distinct (50 m x 50 m) cells, indexed by floor(x / 50) and floor(y / 50), that a UAV's position occupies over the steps of one episode, averaged over the lanes and the UAVs of the rollout; the positions are the ones the learner was handed at each of its own steps, so an episode contributes its `rollout_length` visited positions",
+              "path_length": "sum over consecutive steps of one episode of the Euclidean distance in metres between a UAV's (x, y, z) positions, averaged over the lanes and the UAVs of the rollout",
+              "net_displacement": "Euclidean distance in metres between a UAV's last and first (x, y, z) position of one episode, averaged over the lanes and the UAVs of the rollout",
+              "path_over_net_displacement": "per (lane, UAV) episode, path length divided by net displacement, averaged over the lanes and UAVs with a positive net displacement; the others are counted in `net_displacement_zero_series`",
+              "skill_change_fraction": "fraction of the (step, lane, agent) triples of the rollout whose previous step belongs to the same episode on which the agent's skill differs from that previous step's, and the same over (step, lane) for the team skill; the skills are the ones `agent.step` returns in its `step_data` for the step it just decided (hmasd/agent.py:3285-3287)",
+              "decision_fraction": "fraction of the (step, lane) pairs on which the d2 route took a team decision, and the mean over (step, lane, agent) of its sampled mask, both read from the same `step_data` (hmasd/agent.py:3297-3300); at caps of 1 every step is a team decision and every agent is in S_t, at caps of 10 one step in ten is",
+              "state_layout": "envs/pettingzoo/uav_env.py MultiUAVEnv._get_state (lines 353-366) concatenates n_uavs x (x, y, z) UAV positions in metres, then n_users x (x, y) user positions in metres, then current_step / max_steps; the UAV block is the leading 3 * n_uavs entries and x, y are clipped to [0, area_size] and z to the height band by the environment's own step"
+            }
+          },
+          "counts": {
+            "model_constructions": 2,
+            "training_starts": 1,
+            "checkpoint_loads": 0,
+            "training_transitions": 360000,
+            "stored_training_transitions": 360000,
+            "training_episodes": 720,
+            "update_stages": 45,
+            "training_agent_step_batches": 22500,
+            "evaluation_steps": 144000,
+            "evaluation_episodes": 288,
+            "evaluation_agent_step_batches": 4500
+          },
+          "optimizer_calls": {
+            "coordinator": 675,
+            "discoverer_actor": 101250,
+            "discoverer_critic": 101250,
+            "team_discriminator": 675,
+            "individual_discriminator": 2700
+          },
+          "wall_seconds_before_publication": 6814.314357835014,
+          "peak_rss_bytes": 2367836160
+        }
+      },
+      "missing_or_invalid_arms": {
+        "D_K1": "incomplete or wrong arm/block/object"
+      },
+      "references": {
+        "D1280": {
+          "J_by_rollout": {
+            "5": 0.2275892964714526,
+            "10": 0.3366604903841566,
+            "15": 0.35318105016325024,
+            "20": 0.380982424343549,
+            "25": 0.37281391894452576,
+            "30": 0.423212911668479,
+            "35": 0.40412636845335764,
+            "40": 0.4459268870888592,
+            "45": 0.45587469857693386
+          },
+          "J_early_window": 0.32460331534060205,
+          "J_late_window": 0.4322852164469074,
+          "J_late_window_35_45": 0.43530931803971695,
+          "endpoint_scores_J": [
+            0.45357511414156954,
+            0.5020362606640331,
+            0.40059441634749243,
+            0.4989370180324188,
+            0.4100085092356054,
+            0.4674970123446343,
+            0.39108772819998533,
+            0.4473475055239409,
+            0.5078531273532473,
+            0.43926278630621446,
+            0.47595656831645017,
+            0.4077214150399054,
+            0.45336175344514823,
+            0.5368689005445793,
+            0.4226169594350697,
+            0.43574388140509895,
+            0.4541685576589916,
+            0.4434311528521006,
+            0.41262050619343055,
+            0.4390681098887388,
+            0.5236370375415192,
+            0.48115466793544603,
+            0.5009340895754457,
+            0.47544058331281713,
+            0.5072235179006562,
+            0.42481383436436443,
+            0.4330085689124202,
+            0.40681509653888487,
+            0.42634876382105125,
+            0.46644674568483985,
+            0.465496421698428,
+            0.47691374424735655
+          ],
+          "object_id": "FSD_MATCHED_INFORMATION_BASELINE_B01",
+          "launch_sha": "887563f4713177d76999ef5832ce2dfa946d8505",
+          "arm": "D1280",
+          "diagnostics": {
+            "1": {
+              "discoverer_policy_loss": 0.0012455456890165806,
+              "discoverer_value_loss": 0.18436717987060547,
+              "action_entropy": 4.324311316013336,
+              "actor_displacement": 0.15379872709884004,
+              "training_return_U": 19.16760525830241
+            },
+            "5": {
+              "discoverer_policy_loss": -0.00229754694737494,
+              "discoverer_value_loss": 0.1388183832168579,
+              "action_entropy": 4.671536982059479,
+              "actor_displacement": 0.4129479380314338,
+              "training_return_U": 17.155401974049113
+            },
+            "10": {
+              "discoverer_policy_loss": -0.0054632010869681835,
+              "discoverer_value_loss": 0.10856562852859497,
+              "action_entropy": 5.082237124443054,
+              "actor_displacement": 0.5855767347193543,
+              "training_return_U": 14.159207744494855
+            },
+            "15": {
+              "discoverer_policy_loss": -0.012400741688907146,
+              "discoverer_value_loss": 0.03828759491443634,
+              "action_entropy": 5.489385724067688,
+              "actor_displacement": 0.7132929140964004,
+              "training_return_U": 28.9958038571134
+            },
+            "20": {
+              "discoverer_policy_loss": -0.020574182271957397,
+              "discoverer_value_loss": 0.01847437210381031,
+              "action_entropy": 5.85618793964386,
+              "actor_displacement": 0.8246668988168586,
+              "training_return_U": 29.2585339856251
+            },
+            "25": {
+              "discoverer_policy_loss": -0.030722282826900482,
+              "discoverer_value_loss": 0.010089187882840633,
+              "action_entropy": 6.203104257583618,
+              "actor_displacement": 0.9175569361311288,
+              "training_return_U": 26.854248114423278
+            },
+            "30": {
+              "discoverer_policy_loss": -0.03830203413963318,
+              "discoverer_value_loss": 0.006841175723820925,
+              "action_entropy": 6.527836322784424,
+              "actor_displacement": 0.9941148164090691,
+              "training_return_U": 27.928895012104093
+            },
+            "35": {
+              "discoverer_policy_loss": -0.046014994382858276,
+              "discoverer_value_loss": 0.00667562335729599,
+              "action_entropy": 6.837109327316284,
+              "actor_displacement": 1.0635071912381835,
+              "training_return_U": 29.578215897299394
+            },
+            "40": {
+              "discoverer_policy_loss": -0.05166948214173317,
+              "discoverer_value_loss": 0.007429271470755339,
+              "action_entropy": 7.117566466331482,
+              "actor_displacement": 1.1211762823838174,
+              "training_return_U": 29.1988605590781
+            },
+            "45": {
+              "discoverer_policy_loss": -0.05573546141386032,
+              "discoverer_value_loss": 0.006427439395338297,
+              "action_entropy": 7.382565140724182,
+              "actor_displacement": 1.1724109045953839,
+              "training_return_U": 28.503186782109037
+            },
+            "mean_policy_loss": -0.026597472177672898,
+            "training_return_U_rollouts_35_45": 29.17001704927807
+          },
+          "counts": {
+            "model_constructions": 2,
+            "training_starts": 1,
+            "checkpoint_loads": 0,
+            "training_transitions": 360000,
+            "stored_training_transitions": 360000,
+            "training_episodes": 720,
+            "update_stages": 45,
+            "training_agent_step_batches": 22500,
+            "evaluation_steps": 144000,
+            "evaluation_episodes": 288,
+            "evaluation_agent_step_batches": 4500
+          },
+          "optimizer_calls": {
+            "coordinator": 675,
+            "discoverer_actor": 101250,
+            "discoverer_critic": 101250,
+            "team_discriminator": 675,
+            "individual_discriminator": 2700
+          },
+          "wall_seconds_before_publication": 9337.322970244015
+        },
+        "CF_S": {
+          "J_by_rollout": {
+            "5": 0.2975459815780642,
+            "10": 0.2166777794628659,
+            "15": 0.3487398268315439,
+            "20": 0.33795065221170134,
+            "25": 0.28359661858442264,
+            "30": 0.24836501073977385,
+            "35": 0.28487417936964265,
+            "40": 0.2423002732935947,
+            "45": 0.19842848436112895
+          },
+          "J_early_window": 0.30022856002104387,
+          "J_late_window": 0.24349198694103502,
+          "J_late_window_35_45": 0.24186764567478877,
+          "endpoint_scores_J": [
+            0.2630743371056287,
+            0.1957120747656602,
+            0.19376875494717302,
+            0.24281446411403232,
+            0.2563991856638294,
+            0.1279445740363843,
+            0.17946618782334497,
+            0.24667762646542435,
+            0.07242536532124186,
+            0.13876415790421584,
+            0.1937408236144618,
+            0.08750653603531214,
+            0.0686637210303864,
+            0.3254294044755583,
+            0.23239417646195118,
+            0.09503174465687293,
+            0.22745019358287716,
+            0.26516814935069966,
+            0.07029844096520887,
+            0.26823649777281944,
+            0.30104002623698767,
+            0.20157471736157936,
+            0.25987014048867785,
+            0.2569933720299044,
+            0.1898916791791806,
+            0.22375053432345954,
+            0.15792472462822615,
+            0.29940917749186097,
+            0.022646693722539715,
+            0.2782806602420485,
+            0.2734382962632031,
+            0.13392506149537592
+          ],
+          "object_id": "FSD_FLAT_INPUT_SCALE_B05",
+          "launch_sha": "52400ff4d3ebe284cbc12dc8b8c510022b850d98",
+          "arm": "CF_S",
+          "diagnostics": {
+            "1": {
+              "discoverer_policy_loss": -0.004062322899699211,
+              "discoverer_value_loss": 0.08896605670452118,
+              "action_entropy": 4.255923442542553,
+              "actor_displacement": 0.08865116071315711,
+              "training_return_U": 19.640696275997463
+            },
+            "5": {
+              "discoverer_policy_loss": -0.009338569827377796,
+              "discoverer_value_loss": 0.09705488383769989,
+              "action_entropy": 4.2410073801875114,
+              "actor_displacement": 0.1779045645997283,
+              "training_return_U": 23.668096811568166
+            },
+            "10": {
+              "discoverer_policy_loss": -0.011948722414672375,
+              "discoverer_value_loss": 0.11282790452241898,
+              "action_entropy": 4.186214879155159,
+              "actor_displacement": 0.24523844510374973,
+              "training_return_U": 24.53420755697381
+            },
+            "15": {
+              "discoverer_policy_loss": -0.013297881931066513,
+              "discoverer_value_loss": 0.08951794356107712,
+              "action_entropy": 4.160451237112284,
+              "actor_displacement": 0.3047405605658952,
+              "training_return_U": 29.668239761138608
+            },
+            "20": {
+              "discoverer_policy_loss": -0.016663825139403343,
+              "discoverer_value_loss": 0.10303355008363724,
+              "action_entropy": 4.128565080463886,
+              "actor_displacement": 0.35564612264622086,
+              "training_return_U": 26.98389012024797
+            },
+            "25": {
+              "discoverer_policy_loss": -0.01575200818479061,
+              "discoverer_value_loss": 0.10630439966917038,
+              "action_entropy": 4.094679374247789,
+              "actor_displacement": 0.40143581753496366,
+              "training_return_U": 20.738217276096307
+            },
+            "30": {
+              "discoverer_policy_loss": -0.01820516586303711,
+              "discoverer_value_loss": 0.0973103940486908,
+              "action_entropy": 4.073004238307476,
+              "actor_displacement": 0.44139955509761897,
+              "training_return_U": 25.659285203565293
+            },
+            "35": {
+              "discoverer_policy_loss": -0.023204652592539787,
+              "discoverer_value_loss": 0.11858563870191574,
+              "action_entropy": 4.033052362501621,
+              "actor_displacement": 0.4734935218993638,
+              "training_return_U": 25.076561343156637
+            },
+            "40": {
+              "discoverer_policy_loss": -0.023006360977888107,
+              "discoverer_value_loss": 0.12146910279989243,
+              "action_entropy": 3.974976483732462,
+              "actor_displacement": 0.5036723334338005,
+              "training_return_U": 26.022836813087572
+            },
+            "45": {
+              "discoverer_policy_loss": -0.026001326739788055,
+              "discoverer_value_loss": 0.12279794365167618,
+              "action_entropy": 3.8813846185803413,
+              "actor_displacement": 0.5301043579200928,
+              "training_return_U": 20.584853741162583
+            },
+            "mean_policy_loss": -0.01529113007709384,
+            "training_return_U_rollouts_35_45": 23.259070613335027
+          },
+          "counts": {
+            "model_constructions": 2,
+            "training_starts": 1,
+            "checkpoint_loads": 0,
+            "training_transitions": 360000,
+            "stored_training_transitions": 360000,
+            "training_episodes": 720,
+            "update_stages": 45,
+            "training_agent_step_batches": 22500,
+            "evaluation_steps": 144000,
+            "evaluation_episodes": 288,
+            "evaluation_agent_step_batches": 4500
+          },
+          "optimizer_calls": {
+            "coordinator": 0,
+            "discoverer_actor": 101250,
+            "discoverer_critic": 101250,
+            "team_discriminator": 0,
+            "individual_discriminator": 0
+          },
+          "wall_seconds_before_publication": 4182.09730478999
+        }
+      },
+      "capture_bit_identical": {
+        "bit_identical": true,
+        "failure": null,
+        "first_differing_panel": null
+      },
+      "status": "incomplete"
+    },
+    {
+      "training_seed": 772903,
+      "evaluation_seed": 782903,
+      "arms": {},
+      "missing_or_invalid_arms": {
+        "D_K10": "not supplied",
+        "D_K1": "incomplete or wrong arm/block/object"
+      },
+      "references": {
+        "D1280": {
+          "J_by_rollout": {
+            "5": 0.30391562453869253,
+            "10": 0.2736318698544382,
+            "15": 0.3157287536657319,
+            "20": 0.3348677119108596,
+            "25": 0.4242978865719844,
+            "30": 0.37480047249350246,
+            "35": 0.419948055700354,
+            "40": 0.43064689256962807,
+            "45": 0.35469677422138435
+          },
+          "J_early_window": 0.30703598999243054,
+          "J_late_window": 0.3950230487462172,
+          "J_late_window_35_45": 0.40176390749712215,
+          "endpoint_scores_J": [
+            0.339861959848236,
+            0.43762693320005935,
+            0.37483306475037287,
+            0.28902793258818027,
+            0.39002235788425366,
+            0.32132931236507606,
+            0.3617399950113606,
+            0.41946064930088434,
+            0.4143735966401455,
+            0.32531174050715694,
+            0.28332139315127003,
+            0.38724284873448533,
+            0.39551443319568375,
+            0.3071686793733928,
+            0.29940939957998425,
+            0.2916879198272122,
+            0.3823052377869385,
+            0.3576578816405397,
+            0.314945080071461,
+            0.3562145838298099,
+            0.3437501776246244,
+            0.3870907267937409,
+            0.36294199774559777,
+            0.36737590445539936,
+            0.41208124917008215,
+            0.3936979270999385,
+            0.34348243443648274,
+            0.3224229200927701,
+            0.3981226170004961,
+            0.2694983525922383,
+            0.3746148908165873,
+            0.3261625779698386
+          ],
+          "object_id": "FSD_MATCHED_INFORMATION_BASELINE_B01",
+          "launch_sha": "887563f4713177d76999ef5832ce2dfa946d8505",
+          "arm": "D1280",
+          "diagnostics": {
+            "1": {
+              "discoverer_policy_loss": 0.0011249198578298092,
+              "discoverer_value_loss": 0.14126870036125183,
+              "action_entropy": 4.332762956619263,
+              "actor_displacement": 0.1509169703241636,
+              "training_return_U": 20.02008869487603
+            },
+            "5": {
+              "discoverer_policy_loss": -0.003145088441669941,
+              "discoverer_value_loss": 0.05409293621778488,
+              "action_entropy": 4.706589579582214,
+              "actor_displacement": 0.43821286903207185,
+              "training_return_U": 22.02283440002252
+            },
+            "10": {
+              "discoverer_policy_loss": -0.00634004594758153,
+              "discoverer_value_loss": 0.05898004025220871,
+              "action_entropy": 5.1265281438827515,
+              "actor_displacement": 0.6070357646556847,
+              "training_return_U": 19.644186918489694
+            },
+            "15": {
+              "discoverer_policy_loss": -0.01140531525015831,
+              "discoverer_value_loss": 0.05412103608250618,
+              "action_entropy": 5.529291033744812,
+              "actor_displacement": 0.7226604243580289,
+              "training_return_U": 19.104088201137046
+            },
+            "20": {
+              "discoverer_policy_loss": -0.017765602096915245,
+              "discoverer_value_loss": 0.023584352806210518,
+              "action_entropy": 5.898718237876892,
+              "actor_displacement": 0.8151578083923016,
+              "training_return_U": 25.239289660946028
+            },
+            "25": {
+              "discoverer_policy_loss": -0.027251526713371277,
+              "discoverer_value_loss": 0.015712160617113113,
+              "action_entropy": 6.259528994560242,
+              "actor_displacement": 0.899855507683342,
+              "training_return_U": 29.468225378187842
+            },
+            "30": {
+              "discoverer_policy_loss": -0.03289611265063286,
+              "discoverer_value_loss": 0.013258126564323902,
+              "action_entropy": 6.60774290561676,
+              "actor_displacement": 0.972661977578178,
+              "training_return_U": 28.52962786376682
+            },
+            "35": {
+              "discoverer_policy_loss": -0.03844926133751869,
+              "discoverer_value_loss": 0.013459607027471066,
+              "action_entropy": 6.9357335567474365,
+              "actor_displacement": 1.03585719288764,
+              "training_return_U": 29.175903978075706
+            },
+            "40": {
+              "discoverer_policy_loss": -0.0442674495279789,
+              "discoverer_value_loss": 0.008680100552737713,
+              "action_entropy": 7.242647409439087,
+              "actor_displacement": 1.0926673880436093,
+              "training_return_U": 29.02632043408033
+            },
+            "45": {
+              "discoverer_policy_loss": -0.04847473278641701,
+              "discoverer_value_loss": 0.008342435583472252,
+              "action_entropy": 7.555184960365295,
+              "actor_displacement": 1.144512122773888,
+              "training_return_U": 27.99688125354571
+            },
+            "mean_policy_loss": -0.0235870722157415,
+            "training_return_U_rollouts_35_45": 28.85433234010791
+          },
+          "counts": {
+            "model_constructions": 2,
+            "training_starts": 1,
+            "checkpoint_loads": 0,
+            "training_transitions": 360000,
+            "stored_training_transitions": 360000,
+            "training_episodes": 720,
+            "update_stages": 45,
+            "training_agent_step_batches": 22500,
+            "evaluation_steps": 144000,
+            "evaluation_episodes": 288,
+            "evaluation_agent_step_batches": 4500
+          },
+          "optimizer_calls": {
+            "coordinator": 675,
+            "discoverer_actor": 101250,
+            "discoverer_critic": 101250,
+            "team_discriminator": 675,
+            "individual_discriminator": 2700
+          },
+          "wall_seconds_before_publication": 9033.072333488992
+        },
+        "CF_S": {
+          "J_by_rollout": {
+            "5": 0.3173718864761901,
+            "10": 0.4053422667472962,
+            "15": 0.34294347713079026,
+            "20": 0.344870349756686,
+            "25": 0.3287499668158609,
+            "30": 0.3203608771238793,
+            "35": 0.36941947343658693,
+            "40": 0.4086848487487833,
+            "45": 0.35787183276868495
+          },
+          "J_early_window": 0.3526319950277406,
+          "J_late_window": 0.36408425801948363,
+          "J_late_window_35_45": 0.3786587183180184,
+          "endpoint_scores_J": [
+            0.5300024932102726,
+            0.29154065841785204,
+            0.3339818140720119,
+            0.3298382315779597,
+            0.2573917025660417,
+            0.23508336062496782,
+            0.39691532730077356,
+            0.5675575396888519,
+            0.2723773371004522,
+            0.3742622900002506,
+            0.3884586204535862,
+            0.35243339407411156,
+            0.1989219110036987,
+            0.3586352797525912,
+            0.41066932202917755,
+            0.44216654199427324,
+            0.4388320701314201,
+            0.3622766654464466,
+            0.3694539973436809,
+            0.2058602013291244,
+            0.33388212382218857,
+            0.3749394284093505,
+            0.3867685500675746,
+            0.3540990687409127,
+            0.44500181459080496,
+            0.2498078024793295,
+            0.24367054318678288,
+            0.4224389752862557,
+            0.5646695141846623,
+            0.14661493487798968,
+            0.4598330404202503,
+            0.35351409441427195
+          ],
+          "object_id": "FSD_FLAT_INPUT_SCALE_B05",
+          "launch_sha": "52400ff4d3ebe284cbc12dc8b8c510022b850d98",
+          "arm": "CF_S",
+          "diagnostics": {
+            "1": {
+              "discoverer_policy_loss": -0.0036207742523401976,
+              "discoverer_value_loss": 0.10152003169059753,
+              "action_entropy": 4.250374156981707,
+              "actor_displacement": 0.09130635451729435,
+              "training_return_U": 20.193691299733835
+            },
+            "5": {
+              "discoverer_policy_loss": -0.009932374581694603,
+              "discoverer_value_loss": 0.15873070061206818,
+              "action_entropy": 4.225363023579121,
+              "actor_displacement": 0.18191603060386244,
+              "training_return_U": 21.873175381270137
+            },
+            "10": {
+              "discoverer_policy_loss": -0.010714706033468246,
+              "discoverer_value_loss": 0.13462455570697784,
+              "action_entropy": 4.204812925308943,
+              "actor_displacement": 0.25470844617147415,
+              "training_return_U": 24.907528026737534
+            },
+            "15": {
+              "discoverer_policy_loss": -0.01452556997537613,
+              "discoverer_value_loss": 0.14569707214832306,
+              "action_entropy": 4.195001907646656,
+              "actor_displacement": 0.31711374101618905,
+              "training_return_U": 25.232945433683366
+            },
+            "20": {
+              "discoverer_policy_loss": -0.015296008437871933,
+              "discoverer_value_loss": 0.14131703972816467,
+              "action_entropy": 4.181082360446453,
+              "actor_displacement": 0.3721835521492057,
+              "training_return_U": 26.420884177524314
+            },
+            "25": {
+              "discoverer_policy_loss": -0.017320336773991585,
+              "discoverer_value_loss": 0.1576758474111557,
+              "action_entropy": 4.134185146540403,
+              "actor_displacement": 0.42113468092131695,
+              "training_return_U": 20.617425126811774
+            },
+            "30": {
+              "discoverer_policy_loss": -0.02345545031130314,
+              "discoverer_value_loss": 0.11172963678836823,
+              "action_entropy": 4.052952863276005,
+              "actor_displacement": 0.4603965590884783,
+              "training_return_U": 27.852785234302793
+            },
+            "35": {
+              "discoverer_policy_loss": -0.02385116182267666,
+              "discoverer_value_loss": 0.14009396731853485,
+              "action_entropy": 3.9829956367611885,
+              "actor_displacement": 0.49236502670611487,
+              "training_return_U": 23.885428395522673
+            },
+            "40": {
+              "discoverer_policy_loss": -0.02772778458893299,
+              "discoverer_value_loss": 0.12943661212921143,
+              "action_entropy": 3.905461635440588,
+              "actor_displacement": 0.5205326786826534,
+              "training_return_U": 25.786178125724515
+            },
+            "45": {
+              "discoverer_policy_loss": -0.022036666050553322,
+              "discoverer_value_loss": 0.14188453555107117,
+              "action_entropy": 3.7924449425190687,
+              "actor_displacement": 0.5464805092412756,
+              "training_return_U": 29.381321551849602
+            },
+            "mean_policy_loss": -0.017722013887638846,
+            "training_return_U_rollouts_35_45": 27.46181644501021
+          },
+          "counts": {
+            "model_constructions": 2,
+            "training_starts": 1,
+            "checkpoint_loads": 0,
+            "training_transitions": 360000,
+            "stored_training_transitions": 360000,
+            "training_episodes": 720,
+            "update_stages": 45,
+            "training_agent_step_batches": 22500,
+            "evaluation_steps": 144000,
+            "evaluation_episodes": 288,
+            "evaluation_agent_step_batches": 4500
+          },
+          "optimizer_calls": {
+            "coordinator": 0,
+            "discoverer_actor": 101250,
+            "discoverer_critic": 101250,
+            "team_discriminator": 0,
+            "individual_discriminator": 0
+          },
+          "wall_seconds_before_publication": 4231.053505950025
+        }
+      },
+      "capture_bit_identical": {
+        "bit_identical": false,
+        "first_differing_panel": null,
+        "failure": "the D_K10 fit or the published D1280 fit of this block is missing"
+      },
+      "status": "incomplete"
+    },
+    {
+      "training_seed": 773003,
+      "evaluation_seed": 783003,
+      "arms": {
+        "D_K1": {
+          "J_by_rollout": {
+            "5": 0.29311824602454023,
+            "10": 0.4131206948245548,
+            "15": 0.4309805489212374,
+            "20": 0.4620125073751394,
+            "25": 0.3818486875630104,
+            "30": 0.42889911416357174,
+            "35": 0.48784224998707026,
+            "40": 0.44481872531236255,
+            "45": 0.46449657273205885
+          },
+          "J_early_window": 0.3998079992863679,
+          "J_late_window": 0.45651416554876584,
+          "J_late_window_35_45": 0.4657191826771639,
+          "endpoint_scores_J": [
+            0.5229284881890037,
+            0.5397447661460401,
+            0.48490698383118636,
+            0.5248446306537399,
+            0.3962448468987495,
+            0.4872688597913207,
+            0.5116276432111538,
+            0.42734448700423106,
+            0.5232071002655744,
+            0.4255309519986162,
+            0.4842341027001688,
+            0.37845806818036626,
+            0.5969522871589477,
+            0.42464597839191776,
+            0.3838894295019745,
+            0.44333449693719296,
+            0.50903879983917,
+            0.4149746900650765,
+            0.4245010579973491,
+            0.5046488507211158,
+            0.46247774156049515,
+            0.435260260039429,
+            0.44249788631381115,
+            0.3874235875303494,
+            0.5465343891758409,
+            0.36985813889620045,
+            0.44849195139928844,
+            0.5025798918158539,
+            0.5316473113079814,
+            0.4213168985646632,
+            0.4039079511740297,
+            0.5035678001650469
+          ],
+          "object_id": "FSD_PERSISTENCE_B07",
+          "launch_sha": "4a654ca0e4868a28df3d487e5d83ddc6049fe1db",
+          "coordinator_batch_size": 12800,
+          "skill_cap_k_max": 1,
+          "team_cap_k_Z": 1,
+          "k": 10,
+          "diagnostics": {
+            "1": {
+              "discoverer_policy_loss": 0.0006863444577902555,
+              "discoverer_value_loss": 0.08676229417324066,
+              "action_entropy": 4.337150156497955,
+              "actor_displacement": 0.1627976918616768,
+              "training_return_U": 18.123406326481785,
+              "coordinator_policy_loss": 0.02669166401028633,
+              "coordinator_value_loss": 1.9537912607192993,
+              "team_skill_entropy": 1.6036125421524048,
+              "agent_skill_entropy": 1.7061898708343506,
+              "mean_high_level_reward": 0.03624681383371353,
+              "coordinator_displacement": 0.0062111895500086,
+              "segment_length_agent_mean": 1.0,
+              "segment_length_team_mean": 1.0
+            },
+            "5": {
+              "discoverer_policy_loss": -0.002885236870497465,
+              "discoverer_value_loss": 0.08606737852096558,
+              "action_entropy": 4.685845673084259,
+              "actor_displacement": 0.4272911467663264,
+              "training_return_U": 17.175115801176204,
+              "coordinator_policy_loss": 0.010313152335584164,
+              "coordinator_value_loss": 0.9254223108291626,
+              "team_skill_entropy": 1.7041118144989014,
+              "agent_skill_entropy": 1.7825491428375244,
+              "mean_high_level_reward": 0.034350231289863586,
+              "coordinator_displacement": 0.01936184299082696,
+              "segment_length_agent_mean": 1.0,
+              "segment_length_team_mean": 1.0
+            },
+            "10": {
+              "discoverer_policy_loss": -0.012973709963262081,
+              "discoverer_value_loss": 0.018831120803952217,
+              "action_entropy": 5.090601444244385,
+              "actor_displacement": 0.6290074554762747,
+              "training_return_U": 29.09105187607944,
+              "coordinator_policy_loss": -0.007042486686259508,
+              "coordinator_value_loss": 0.45246219635009766,
+              "team_skill_entropy": 1.7544968128204346,
+              "agent_skill_entropy": 1.786662220954895,
+              "mean_high_level_reward": 0.05818210169672966,
+              "coordinator_displacement": 0.02998662058355715,
+              "segment_length_agent_mean": 1.0,
+              "segment_length_team_mean": 1.0
+            },
+            "15": {
+              "discoverer_policy_loss": -0.026780221611261368,
+              "discoverer_value_loss": 0.011252690106630325,
+              "action_entropy": 5.449081659317017,
+              "actor_displacement": 0.7769203091791462,
+              "training_return_U": 33.79378419878248,
+              "coordinator_policy_loss": 0.008950632996857166,
+              "coordinator_value_loss": 0.22479519248008728,
+              "team_skill_entropy": 1.7516309022903442,
+              "agent_skill_entropy": 1.788088083267212,
+              "mean_high_level_reward": 0.06758756935596466,
+              "coordinator_displacement": 0.033256050009475485,
+              "segment_length_agent_mean": 1.0,
+              "segment_length_team_mean": 1.0
+            },
+            "20": {
+              "discoverer_policy_loss": -0.0383952297270298,
+              "discoverer_value_loss": 0.00669708289206028,
+              "action_entropy": 5.759897828102112,
+              "actor_displacement": 0.8885107899048339,
+              "training_return_U": 34.54359898162761,
+              "coordinator_policy_loss": -0.03323988988995552,
+              "coordinator_value_loss": 0.09603599458932877,
+              "team_skill_entropy": 1.7656203508377075,
+              "agent_skill_entropy": 1.7877250909805298,
+              "mean_high_level_reward": 0.0690871998667717,
+              "coordinator_displacement": 0.0346202208268452,
+              "segment_length_agent_mean": 1.0,
+              "segment_length_team_mean": 1.0
+            },
+            "25": {
+              "discoverer_policy_loss": -0.04755434766411781,
+              "discoverer_value_loss": 0.007694055326282978,
+              "action_entropy": 6.084431409835815,
+              "actor_displacement": 0.9766409427933331,
+              "training_return_U": 35.21929998511182,
+              "coordinator_policy_loss": 0.057326897978782654,
+              "coordinator_value_loss": 0.10107259452342987,
+              "team_skill_entropy": 1.7718241214752197,
+              "agent_skill_entropy": 1.7879096269607544,
+              "mean_high_level_reward": 0.07043860107660294,
+              "coordinator_displacement": 0.036127817733273775,
+              "segment_length_agent_mean": 1.0,
+              "segment_length_team_mean": 1.0
+            },
+            "30": {
+              "discoverer_policy_loss": -0.05237876623868942,
+              "discoverer_value_loss": 0.009101230651140213,
+              "action_entropy": 6.377665996551514,
+              "actor_displacement": 1.0499308677598373,
+              "training_return_U": 34.92497268151166,
+              "coordinator_policy_loss": 0.009666966274380684,
+              "coordinator_value_loss": 0.07511783391237259,
+              "team_skill_entropy": 1.7520085573196411,
+              "agent_skill_entropy": 1.7791682481765747,
+              "mean_high_level_reward": 0.06984994560480118,
+              "coordinator_displacement": 0.037175938592062904,
+              "segment_length_agent_mean": 1.0,
+              "segment_length_team_mean": 1.0
+            },
+            "35": {
+              "discoverer_policy_loss": -0.060582466423511505,
+              "discoverer_value_loss": 0.009058626368641853,
+              "action_entropy": 6.6542768478393555,
+              "actor_displacement": 1.112189409479131,
+              "training_return_U": 33.954512615775414,
+              "coordinator_policy_loss": -0.06153157725930214,
+              "coordinator_value_loss": 0.06545699387788773,
+              "team_skill_entropy": 1.7782604694366455,
+              "agent_skill_entropy": 1.7851417064666748,
+              "mean_high_level_reward": 0.06790902465581894,
+              "coordinator_displacement": 0.03797461708062099,
+              "segment_length_agent_mean": 1.0,
+              "segment_length_team_mean": 1.0
+            },
+            "40": {
+              "discoverer_policy_loss": -0.06563618034124374,
+              "discoverer_value_loss": 0.007928756065666676,
+              "action_entropy": 6.898474097251892,
+              "actor_displacement": 1.1676099168414988,
+              "training_return_U": 33.19556995312588,
+              "coordinator_policy_loss": -0.13698773086071014,
+              "coordinator_value_loss": 0.07029411196708679,
+              "team_skill_entropy": 1.7796837091445923,
+              "agent_skill_entropy": 1.789224624633789,
+              "mean_high_level_reward": 0.06639113277196884,
+              "coordinator_displacement": 0.03890914168526931,
+              "segment_length_agent_mean": 1.0,
+              "segment_length_team_mean": 1.0
+            },
+            "45": {
+              "discoverer_policy_loss": -0.06732120364904404,
+              "discoverer_value_loss": 0.01009525265544653,
+              "action_entropy": 7.115688920021057,
+              "actor_displacement": 1.2190539437743049,
+              "training_return_U": 32.25641170190735,
+              "coordinator_policy_loss": -0.05523427575826645,
+              "coordinator_value_loss": 0.08049974590539932,
+              "team_skill_entropy": 1.7740728855133057,
+              "agent_skill_entropy": 1.7892528772354126,
+              "mean_high_level_reward": 0.06451281905174255,
+              "coordinator_displacement": 0.03977299607822651,
+              "segment_length_agent_mean": 1.0,
+              "segment_length_team_mean": 1.0
+            },
+            "mean_policy_loss": -0.03800737033339424,
+            "training_return_U_rollouts_35_45": 33.27268727804342,
+            "mean_coordinator_policy_loss": -0.019875034264340584,
+            "mean_team_skill_entropy": 1.755144508679708
+          },
+          "actor_displacement_parts": {
+            "1": {
+              "rollout": 1,
+              "total": 0.1627976918616768,
+              "action_entropy": 4.337150156497955,
+              "initial_actor_parameter_norm": 41.09486830299038,
+              "logstd_part": 0.0011302608191364409,
+              "network_part": 0.16279376826515873,
+              "clamped_at_zero": false,
+              "constant": 1.4189,
+              "action_dimensions": 3
+            },
+            "45": {
+              "rollout": 45,
+              "total": 1.2190539437743049,
+              "action_entropy": 7.115688920021057,
+              "initial_actor_parameter_norm": 41.09486830299038,
+              "logstd_part": 0.040166524209646906,
+              "network_part": 1.2183920420638843,
+              "clamped_at_zero": false,
+              "constant": 1.4189,
+              "action_dimensions": 3
+            }
+          },
+          "behaviour": {
+            "early": {
+              "rollouts": [
+                1,
+                2,
+                3,
+                4,
+                5
+              ],
+              "available_rollouts": 5,
+              "cells_visited_mean": 116.93541666666667,
+              "path_length_metres_mean": 22648.73073209976,
+              "net_displacement_metres_mean": 563.9585853433284,
+              "path_over_net_displacement_mean": 62.35624295812745,
+              "agent_skill_change_fraction": 0.8167835671342685,
+              "team_skill_change_fraction": 0.7863977955911823,
+              "team_decision_fraction": 1.0,
+              "agent_sampled_fraction": 1.0,
+              "action_autocorrelation": {
+                "1": -0.0005671109052198427,
+                "2": -0.0013941260843359584,
+                "5": -0.0005947837186837045,
+                "9": -0.0026509975178494955,
+                "10": -0.0022956376045766788,
+                "20": -0.000916977468604863
+              },
+              "action_series_skipped": 0
+            },
+            "late": {
+              "rollouts": [
+                35,
+                36,
+                37,
+                38,
+                39,
+                40,
+                41,
+                42,
+                43,
+                44,
+                45
+              ],
+              "available_rollouts": 11,
+              "cells_visited_mean": 220.63541666666663,
+              "path_length_metres_mean": 53634.75849898518,
+              "net_displacement_metres_mean": 581.0590643853235,
+              "path_over_net_displacement_mean": 130.22154473678867,
+              "agent_skill_change_fraction": 0.8334434019554261,
+              "team_skill_change_fraction": 0.8287028602659864,
+              "team_decision_fraction": 1.0,
+              "agent_sampled_fraction": 1.0,
+              "action_autocorrelation": {
+                "1": 0.06920799993808352,
+                "2": 0.007761564813851401,
+                "5": -0.013165087695288085,
+                "9": 0.003315260950442492,
+                "10": 0.007717416353395118,
+                "20": -0.0009783173180605879
+              },
+              "action_series_skipped": 0
+            }
+          },
+          "behaviour_capture": {
+            "attached_at": "scripts/run_fsd_persistence_b07.py:352 wraps the learner agent instance's `step`, from the build_learner wrapper this object binds onto run_fsd_baseline_interruption_b01; the frozen collector calls it at run_fsd_baseline_interruption_b01.py:113",
+            "agent_step_calls": 22500,
+            "finalized_rollouts": 45,
+            "steps_per_rollout": 500,
+            "lags": [
+              1,
+              2,
+              5,
+              9,
+              10,
+              20
+            ],
+            "cell_metres": 50.0,
+            "definitions": {
+              "action_autocorrelation": "per (lane, agent, action dimension) series of the executed action over the rollout's steps: with x the series and m its mean over the rollout, r(h) = sum_t (x_t - m)(x_{t+h} - m) / sum_t (x_t - m)^2, the sums over every t for which both entries exist; the reported value is the mean of r(h) over the series whose entries are not all exactly equal and whose mean-removed sum of squares is positive, and the others are counted in `action_series_skipped`. Lags cross episode boundaries only if a rollout holds more than one episode, which the frozen loop's full-terminal-episode rule forbids",
+              "executed_actions": "the array `agent.step` returns at run_fsd_baseline_interruption_b01.py:113, which the frozen collector hands lane by lane to the training environment at run_fsd_baseline_interruption_b01.py:121 without touching it; the environment converts it to a velocity and never writes into it (envs/pettingzoo/uav_env.py:280-294), and the capture stores a copy",
+              "cells_visited": "number of distinct (50 m x 50 m) cells, indexed by floor(x / 50) and floor(y / 50), that a UAV's position occupies over the steps of one episode, averaged over the lanes and the UAVs of the rollout; the positions are the ones the learner was handed at each of its own steps, so an episode contributes its `rollout_length` visited positions",
+              "path_length": "sum over consecutive steps of one episode of the Euclidean distance in metres between a UAV's (x, y, z) positions, averaged over the lanes and the UAVs of the rollout",
+              "net_displacement": "Euclidean distance in metres between a UAV's last and first (x, y, z) position of one episode, averaged over the lanes and the UAVs of the rollout",
+              "path_over_net_displacement": "per (lane, UAV) episode, path length divided by net displacement, averaged over the lanes and UAVs with a positive net displacement; the others are counted in `net_displacement_zero_series`",
+              "skill_change_fraction": "fraction of the (step, lane, agent) triples of the rollout whose previous step belongs to the same episode on which the agent's skill differs from that previous step's, and the same over (step, lane) for the team skill; the skills are the ones `agent.step` returns in its `step_data` for the step it just decided (hmasd/agent.py:3285-3287)",
+              "decision_fraction": "fraction of the (step, lane) pairs on which the d2 route took a team decision, and the mean over (step, lane, agent) of its sampled mask, both read from the same `step_data` (hmasd/agent.py:3297-3300); at caps of 1 every step is a team decision and every agent is in S_t, at caps of 10 one step in ten is",
+              "state_layout": "envs/pettingzoo/uav_env.py MultiUAVEnv._get_state (lines 353-366) concatenates n_uavs x (x, y, z) UAV positions in metres, then n_users x (x, y) user positions in metres, then current_step / max_steps; the UAV block is the leading 3 * n_uavs entries and x, y are clipped to [0, area_size] and z to the height band by the environment's own step"
+            }
+          },
+          "counts": {
+            "model_constructions": 2,
+            "training_starts": 1,
+            "checkpoint_loads": 0,
+            "training_transitions": 360000,
+            "stored_training_transitions": 360000,
+            "training_episodes": 720,
+            "update_stages": 45,
+            "training_agent_step_batches": 22500,
+            "evaluation_steps": 144000,
+            "evaluation_episodes": 288,
+            "evaluation_agent_step_batches": 4500
+          },
+          "optimizer_calls": {
+            "coordinator": 675,
+            "discoverer_actor": 101250,
+            "discoverer_critic": 101250,
+            "team_discriminator": 675,
+            "individual_discriminator": 2700
+          },
+          "wall_seconds_before_publication": 15465.029019190988,
+          "peak_rss_bytes": 14098178048
+        }
+      },
+      "missing_or_invalid_arms": {
+        "D_K10": "not supplied"
+      },
+      "references": {
+        "D1280": {
+          "J_by_rollout": {
+            "5": 0.5024827163202581,
+            "10": 0.40927584306978143,
+            "15": 0.3671297759264831,
+            "20": 0.46538860374623203,
+            "25": 0.5072189021503397,
+            "30": 0.4207113925819752,
+            "35": 0.4437338326992297,
+            "40": 0.4428582482123822,
+            "45": 0.49935211030661386
+          },
+          "J_early_window": 0.43606923476568865,
+          "J_late_window": 0.45166389595005024,
+          "J_late_window_35_45": 0.46198139707274194,
+          "endpoint_scores_J": [
+            0.5211052903004072,
+            0.5212518396291561,
+            0.47674155443906463,
+            0.4653089066341627,
+            0.4843619919624848,
+            0.5017021504987915,
+            0.5169248611596772,
+            0.4754373451115139,
+            0.5120396660228892,
+            0.5327473842851482,
+            0.49181204587713684,
+            0.4311415454592388,
+            0.5235020533925492,
+            0.4657302645362438,
+            0.5472611821075132,
+            0.5022049350254072,
+            0.5212303182930181,
+            0.5076357500073302,
+            0.42682072800577375,
+            0.5333783188289732,
+            0.543064102068203,
+            0.5061743995249778,
+            0.5195133339538691,
+            0.5231725248194589,
+            0.45741849060152423,
+            0.4576763092258504,
+            0.5207227070885719,
+            0.45562093333487996,
+            0.5034558954914441,
+            0.5096298589692677,
+            0.5031316298868385,
+            0.5213492132702762
+          ],
+          "object_id": "FSD_MATCHED_INFORMATION_BASELINE_B01",
+          "launch_sha": "887563f4713177d76999ef5832ce2dfa946d8505",
+          "arm": "D1280",
+          "diagnostics": {
+            "1": {
+              "discoverer_policy_loss": 0.0005872739711776376,
+              "discoverer_value_loss": 0.10452928394079208,
+              "action_entropy": 4.330809712409973,
+              "actor_displacement": 0.15467362303069956,
+              "training_return_U": 19.18320038465099
+            },
+            "5": {
+              "discoverer_policy_loss": -0.0029685674235224724,
+              "discoverer_value_loss": 0.0603477768599987,
+              "action_entropy": 4.710242450237274,
+              "actor_displacement": 0.42955043082922906,
+              "training_return_U": 25.892755089807007
+            },
+            "10": {
+              "discoverer_policy_loss": -0.010091510601341724,
+              "discoverer_value_loss": 0.03167778626084328,
+              "action_entropy": 5.154826641082764,
+              "actor_displacement": 0.6101621305775643,
+              "training_return_U": 29.4266014240767
+            },
+            "15": {
+              "discoverer_policy_loss": -0.01646425575017929,
+              "discoverer_value_loss": 0.020410671830177307,
+              "action_entropy": 5.544025301933289,
+              "actor_displacement": 0.7329588565755665,
+              "training_return_U": 31.220111083351952
+            },
+            "20": {
+              "discoverer_policy_loss": -0.02291944995522499,
+              "discoverer_value_loss": 0.020120546221733093,
+              "action_entropy": 5.912985801696777,
+              "actor_displacement": 0.8326271633791241,
+              "training_return_U": 29.560659296808943
+            },
+            "25": {
+              "discoverer_policy_loss": -0.029875217005610466,
+              "discoverer_value_loss": 0.017209764569997787,
+              "action_entropy": 6.255531907081604,
+              "actor_displacement": 0.9139899575179357,
+              "training_return_U": 31.085600478398362
+            },
+            "30": {
+              "discoverer_policy_loss": -0.037899453192949295,
+              "discoverer_value_loss": 0.013972165063023567,
+              "action_entropy": 6.578127145767212,
+              "actor_displacement": 0.9849483354913822,
+              "training_return_U": 31.703318851324692
+            },
+            "35": {
+              "discoverer_policy_loss": -0.044441260397434235,
+              "discoverer_value_loss": 0.013253413140773773,
+              "action_entropy": 6.879004240036011,
+              "actor_displacement": 1.0471359839652827,
+              "training_return_U": 30.873062971177536
+            },
+            "40": {
+              "discoverer_policy_loss": -0.04766816645860672,
+              "discoverer_value_loss": 0.013374021276831627,
+              "action_entropy": 7.168323397636414,
+              "actor_displacement": 1.1008594758260448,
+              "training_return_U": 29.806350796350202
+            },
+            "45": {
+              "discoverer_policy_loss": -0.05274014174938202,
+              "discoverer_value_loss": 0.012313894927501678,
+              "action_entropy": 7.450556755065918,
+              "actor_displacement": 1.1500054232625527,
+              "training_return_U": 29.126621845913032
+            },
+            "mean_policy_loss": -0.027110383363444474,
+            "training_return_U_rollouts_35_45": 29.72132329213687
+          },
+          "counts": {
+            "model_constructions": 2,
+            "training_starts": 1,
+            "checkpoint_loads": 0,
+            "training_transitions": 360000,
+            "stored_training_transitions": 360000,
+            "training_episodes": 720,
+            "update_stages": 45,
+            "training_agent_step_batches": 22500,
+            "evaluation_steps": 144000,
+            "evaluation_episodes": 288,
+            "evaluation_agent_step_batches": 4500
+          },
+          "optimizer_calls": {
+            "coordinator": 675,
+            "discoverer_actor": 101250,
+            "discoverer_critic": 101250,
+            "team_discriminator": 675,
+            "individual_discriminator": 2700
+          },
+          "wall_seconds_before_publication": 8521.369515690982
+        },
+        "CF_S": {
+          "J_by_rollout": {
+            "5": 0.38251751742456974,
+            "10": 0.2844896803719391,
+            "15": 0.2807116001441644,
+            "20": 0.33670097709139624,
+            "25": 0.3361936500161632,
+            "30": 0.3492209590360284,
+            "35": 0.387499977387309,
+            "40": 0.3580735320611692,
+            "45": 0.3258857456829619
+          },
+          "J_early_window": 0.32110494375801735,
+          "J_late_window": 0.35517005354186715,
+          "J_late_window_35_45": 0.3571530850438134,
+          "endpoint_scores_J": [
+            0.4291643795646295,
+            0.3326289706017893,
+            0.383401886312142,
+            0.24633004003417636,
+            0.24981489979026264,
+            0.28529697214039995,
+            0.33764231809156514,
+            0.24250850285567208,
+            0.3546813605957312,
+            0.449762007653559,
+            0.2652722468195171,
+            0.38223118546938223,
+            0.4697520895430755,
+            0.30745231026428016,
+            0.3153237045872073,
+            0.2280537111495616,
+            0.2752060869340278,
+            0.22443732092716845,
+            0.3178133267709429,
+            0.2420977084059919,
+            0.2947692388162457,
+            0.3287157258203452,
+            0.35990787732038826,
+            0.2570459207547235,
+            0.3771005397175373,
+            0.4629372427098589,
+            0.32979713483331363,
+            0.3470176660305651,
+            0.45587367333056067,
+            0.30034884279146923,
+            0.26072345408726094,
+            0.31523551713143216
+          ],
+          "object_id": "FSD_FLAT_INPUT_SCALE_B05",
+          "launch_sha": "52400ff4d3ebe284cbc12dc8b8c510022b850d98",
+          "arm": "CF_S",
+          "diagnostics": {
+            "1": {
+              "discoverer_policy_loss": -0.004548052791506052,
+              "discoverer_value_loss": 0.10246723890304565,
+              "action_entropy": 4.255111794918776,
+              "actor_displacement": 0.09396807863572315,
+              "training_return_U": 19.620579280722097
+            },
+            "5": {
+              "discoverer_policy_loss": -0.00992105808109045,
+              "discoverer_value_loss": 0.051516395062208176,
+              "action_entropy": 4.198049195110798,
+              "actor_displacement": 0.18459807791499408,
+              "training_return_U": 24.711573064152383
+            },
+            "10": {
+              "discoverer_policy_loss": -0.01123841479420662,
+              "discoverer_value_loss": 0.06676658242940903,
+              "action_entropy": 4.177235532552004,
+              "actor_displacement": 0.24782600349571324,
+              "training_return_U": 23.960358703996622
+            },
+            "15": {
+              "discoverer_policy_loss": -0.011345306411385536,
+              "discoverer_value_loss": 0.06324853003025055,
+              "action_entropy": 4.147093277424574,
+              "actor_displacement": 0.2980923599195372,
+              "training_return_U": 21.004921584931193
+            },
+            "20": {
+              "discoverer_policy_loss": -0.014960973523557186,
+              "discoverer_value_loss": 0.058567728847265244,
+              "action_entropy": 4.101605620235205,
+              "actor_displacement": 0.34769318591543935,
+              "training_return_U": 23.303279337377475
+            },
+            "25": {
+              "discoverer_policy_loss": -0.016125071793794632,
+              "discoverer_value_loss": 0.09762762486934662,
+              "action_entropy": 4.064877517521381,
+              "actor_displacement": 0.3879342098716141,
+              "training_return_U": 27.04001097576182
+            },
+            "30": {
+              "discoverer_policy_loss": -0.019025981426239014,
+              "discoverer_value_loss": 0.06386681646108627,
+              "action_entropy": 3.9991363883018494,
+              "actor_displacement": 0.42419773367917574,
+              "training_return_U": 23.333842041820823
+            },
+            "35": {
+              "discoverer_policy_loss": -0.018579674884676933,
+              "discoverer_value_loss": 0.10281576216220856,
+              "action_entropy": 3.93840204924345,
+              "actor_displacement": 0.457425532990277,
+              "training_return_U": 27.672206043125346
+            },
+            "40": {
+              "discoverer_policy_loss": -0.02196980081498623,
+              "discoverer_value_loss": 0.09721489250659943,
+              "action_entropy": 3.8863143417984247,
+              "actor_displacement": 0.4876628194175433,
+              "training_return_U": 25.111378667483603
+            },
+            "45": {
+              "discoverer_policy_loss": -0.023519139736890793,
+              "discoverer_value_loss": 0.08722596615552902,
+              "action_entropy": 3.8338969461619854,
+              "actor_displacement": 0.5162551707281843,
+              "training_return_U": 25.07775502218037
+            },
+            "mean_policy_loss": -0.01526878885924816,
+            "training_return_U_rollouts_35_45": 26.84082431248229
+          },
+          "counts": {
+            "model_constructions": 2,
+            "training_starts": 1,
+            "checkpoint_loads": 0,
+            "training_transitions": 360000,
+            "stored_training_transitions": 360000,
+            "training_episodes": 720,
+            "update_stages": 45,
+            "training_agent_step_batches": 22500,
+            "evaluation_steps": 144000,
+            "evaluation_episodes": 288,
+            "evaluation_agent_step_batches": 4500
+          },
+          "optimizer_calls": {
+            "coordinator": 0,
+            "discoverer_actor": 101250,
+            "discoverer_critic": 101250,
+            "team_discriminator": 0,
+            "individual_discriminator": 0
+          },
+          "wall_seconds_before_publication": 4190.7253656840185
+        }
+      },
+      "capture_bit_identical": {
+        "bit_identical": false,
+        "first_differing_panel": null,
+        "failure": "the D_K10 fit or the published D1280 fit of this block is missing"
+      },
+      "status": "incomplete"
+    }
+  ],
+  "capture_bit_identical_blocks": 1,
+  "behaviour_definitions": {
+    "action_autocorrelation": "per (lane, agent, action dimension) series of the executed action over the rollout's steps: with x the series and m its mean over the rollout, r(h) = sum_t (x_t - m)(x_{t+h} - m) / sum_t (x_t - m)^2, the sums over every t for which both entries exist; the reported value is the mean of r(h) over the series whose entries are not all exactly equal and whose mean-removed sum of squares is positive, and the others are counted in `action_series_skipped`. Lags cross episode boundaries only if a rollout holds more than one episode, which the frozen loop's full-terminal-episode rule forbids",
+    "executed_actions": "the array `agent.step` returns at run_fsd_baseline_interruption_b01.py:113, which the frozen collector hands lane by lane to the training environment at run_fsd_baseline_interruption_b01.py:121 without touching it; the environment converts it to a velocity and never writes into it (envs/pettingzoo/uav_env.py:280-294), and the capture stores a copy",
+    "cells_visited": "number of distinct (50 m x 50 m) cells, indexed by floor(x / 50) and floor(y / 50), that a UAV's position occupies over the steps of one episode, averaged over the lanes and the UAVs of the rollout; the positions are the ones the learner was handed at each of its own steps, so an episode contributes its `rollout_length` visited positions",
+    "path_length": "sum over consecutive steps of one episode of the Euclidean distance in metres between a UAV's (x, y, z) positions, averaged over the lanes and the UAVs of the rollout",
+    "net_displacement": "Euclidean distance in metres between a UAV's last and first (x, y, z) position of one episode, averaged over the lanes and the UAVs of the rollout",
+    "path_over_net_displacement": "per (lane, UAV) episode, path length divided by net displacement, averaged over the lanes and UAVs with a positive net displacement; the others are counted in `net_displacement_zero_series`",
+    "skill_change_fraction": "fraction of the (step, lane, agent) triples of the rollout whose previous step belongs to the same episode on which the agent's skill differs from that previous step's, and the same over (step, lane) for the team skill; the skills are the ones `agent.step` returns in its `step_data` for the step it just decided (hmasd/agent.py:3285-3287)",
+    "decision_fraction": "fraction of the (step, lane) pairs on which the d2 route took a team decision, and the mean over (step, lane, agent) of its sampled mask, both read from the same `step_data` (hmasd/agent.py:3297-3300); at caps of 1 every step is a team decision and every agent is in S_t, at caps of 10 one step in ten is",
+    "state_layout": "envs/pettingzoo/uav_env.py MultiUAVEnv._get_state (lines 353-366) concatenates n_uavs x (x, y, z) UAV positions in metres, then n_users x (x, y) user positions in metres, then current_step / max_steps; the UAV block is the leading 3 * n_uavs entries and x, y are clipped to [0, area_size] and z to the height band by the environment's own step"
+  },
+  "invalid_inputs": {
+    "772803:D_K1": "incomplete or wrong arm/block/object",
+    "772903:D_K1": "incomplete or wrong arm/block/object"
+  },
+  "invalid_references": {},
+  "refusals": "a batch of fits at more than one launch sha, a duplicate arm/block, a summary that is not this object's, an incomplete fit, a block whose published D1280 fit was not supplied, and any configuration difference from that fit outside the arm's three declared fields (the host-geometry fields are exempt only on a shrunken test host)",
+  "interpretation_limit": "exploration; three blocks; the D1280 reference is the published stage-1 fit and is not contemporaneous; these blocks carried every flat and skill setting since B01, so no gap-size claim and no competence claim; the coordinator's sample pool, its per-hop discount and its one-step segment return differ with the caps and are not separable from persistence; no MEI verdict",
+  "D_K10_minus_D_K1_late": {
+    "available_blocks": 0,
+    "planned_blocks": 3,
+    "mean": null,
+    "min": null,
+    "max": null,
+    "sample_sd": null,
+    "t_multiplier": null,
+    "working_model_95pct_interval": null,
+    "positive_blocks": 0,
+    "negative_blocks": 0,
+    "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+  },
+  "D_K10_minus_D_K1_late_35_45": {
+    "available_blocks": 0,
+    "planned_blocks": 3,
+    "mean": null,
+    "min": null,
+    "max": null,
+    "sample_sd": null,
+    "t_multiplier": null,
+    "working_model_95pct_interval": null,
+    "positive_blocks": 0,
+    "negative_blocks": 0,
+    "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+  },
+  "D_K10_minus_D_K1_J45": {
+    "available_blocks": 0,
+    "planned_blocks": 3,
+    "mean": null,
+    "min": null,
+    "max": null,
+    "sample_sd": null,
+    "t_multiplier": null,
+    "working_model_95pct_interval": null,
+    "positive_blocks": 0,
+    "negative_blocks": 0,
+    "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+  },
+  "lag5_autocorrelation_difference_late": null,
+  "cells_visited_difference_late": null,
+  "blocks_at_or_above_threshold": {
+    "D_K10_minus_D_K1_late": 0,
+    "D_K10_minus_D_K1_late_35_45": 0,
+    "D_K10_minus_D_K1_J45": 0,
+    "lag5_autocorrelation_difference_late": 0,
+    "threshold": 0.05,
+    "planned_blocks": 3,
+    "definition": "number of blocks whose D_K10 minus D_K1 difference is at least the threshold; the J counts are over the blocks read as complete and the lag-5 count over the blocks whose behaviour was read"
+  },
+  "blocks_with_behaviour_read": 0,
+  "input_summaries": [
+    "runs/flexible_skill_duration/b07_k10_772803_a01/summary.json",
+    "runs/flexible_skill_duration/b07_k1_773003_a01/summary.json",
+    "runs/flexible_skill_duration/b07_k1_772803_a01/summary.json",
+    "runs/flexible_skill_duration/b07_k1_772903_a01/summary.json"
+  ],
+  "reference_summaries": [
+    "runs/flexible_skill_duration/b01_s1_d1280_772803_a01/summary.json",
+    "runs/flexible_skill_duration/b01_s1_d1280_772903_a01/summary.json",
+    "runs/flexible_skill_duration/b01_s1_d1280_773003_a01/summary.json",
+    "runs/flexible_skill_duration/b05_s_772803_a01/summary.json",
+    "runs/flexible_skill_duration/b05_s_772903_a01/summary.json",
+    "runs/flexible_skill_duration/b05_s_773003_a01/summary.json"
+  ]
+}

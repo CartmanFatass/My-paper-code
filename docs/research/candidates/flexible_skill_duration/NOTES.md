@@ -2348,3 +2348,286 @@ the behaviour contrast (autocorrelation, cells, skill change) is three `D_K1` bl
 one `D_K10` block, and the declared "three of three blocks" reading of the lag-5 difference
 becomes one paired block plus two unpaired ones. That is a weaker intermediate reading than
 the entry promised, recorded here before any score.
+
+## 2026-09-20 05:30 PDT — persistence B07 read: redrawing every skill every step changed neither behaviour nor attained J on the one block that has it; the batch is closed with two cells missing
+
+**Execution facts, by kind.**
+- *New training results (two fits, both exit 0, launch sha `4a654ca0e`).*
+  `b07_k10_772803_a01` (`D_K10`, 6,814 s, peak RSS 2.4 GB) and `b07_k1_773003_a01` (`D_K1`,
+  15,465 s, peak RSS 14.1 GB). Both took 675 coordinator and 101,250 low-level optimizer
+  steps. Collected by rsync, `summary.json` sha256 equal to the node's.
+- *Technical failures (two fits consumed, no score).* `b07_k1_772803_a01`, `b07_k1_772903_a01`:
+  killed by the node's out-of-memory killer at their first coordinator update (01:10 entry).
+  Partial roots collected and kept.
+- *Missing cells.* `D_K1` on 772803 and 772903; `D_K10` with capture on 772903 and 773003. At
+  01:10 I planned two `_a02` retries. The admission kernel resolves that request to the
+  existing terminal operation (`request_resolution: existing_operation`,
+  `explicit_retry_available: false`): operation identity is direction, sha and runner arguments,
+  not the output tag, by design ("cannot turn into an … output-renamed retry"). I did not work
+  around it, and the owner's instruction of this morning is not to add experiments to
+  complete an original plan. **The retries are withdrawn; the two unused fits stay unused; the
+  batch is closed at four started fits.**
+- *Historical references.* The recorded D1280 stage-1 fits (B01) and, as context, CF_S (B05).
+  `D_K10` reproduces the recorded D1280 of 772803 bit for bit on all nine panels, so the
+  capture is read-only on the real host and the recorded D1280 of 773003 is the same
+  construction as `D_K10` would have been there (not rerun; no behaviour capture for it).
+- Reduce: `runs/flexible_skill_duration/b07_reduce/summary.json` (sha256 `3945044e…`), status
+  `incomplete` as it must be; no block has both new arms.
+
+**Observations.** The only J contrast is block 773003, `D_K1` (new) against the recorded D1280.
+
+| 773003 | D1280 (recorded, caps 10) | `D_K1` (caps 1) |
+| --- | ---: | ---: |
+| J late window (panels 30–45, the declared one) | .4517 | .4565 |
+| J panels 35–45 / J45 | .462 / .499 | .466 / .464 |
+| training return U, rollouts 35–45 | 29.7 | 33.3 |
+| low-level policy loss / actor displacement at 45 | −.053 / 1.15 | −.067 / 1.22 |
+| coordinator displacement at 45 | .047 | .040 |
+| team / agent skill entropy at 45 (ln 6 = 1.792) | 1.66 / 1.78 | 1.77 / 1.79 |
+| discriminator accuracy, team / individual, rollouts 35–45 (chance .167) | .30 / .25 | .20 / .21 |
+| deployed (argmax) label changes per agent-step, last panel | .015 | .028 |
+
+Behaviour in training, rollouts 35–45 — **different blocks**, `D_K10` on 772803 and `D_K1` on
+773003, so descriptive only: agent skill change per step .082 against .833 (the intervention
+took: a uniform assigner would give .083 and .833); executed-action autocorrelation at lags
+1 / 5 / 10 of +.055 / +.016 / +.012 against +.069 / −.013 / +.008; cells visited per UAV per
+episode 223 against 221; path length 55.1 km against 53.6 km; net displacement 574 m against
+581 m. In rollouts 1–5 the two are equally indistinguishable (cells 115 / 117, all
+autocorrelations below .003 in size).
+
+**Against the 23:58 entry.** Lag-5 autocorrelation higher with the skill held, by at least
+.05: **failed** — it is about +.02 with the skill held and the unpaired difference is +.03;
+executed actions are close to white in both arms. More cells visited with the skill held:
+**failed** (223 against 221, unpaired). `D_K1` below `D_K10` by at least .05 J: **failed** on
+the one block that can speak (−.005 in the declared window; J45 alone is +.035 the other way
+round; one block, conditional evaluation noise of a panel about .03). Training return lower at
+caps of 1: **failed**, it is higher (33.3 against 29.7). The outcome I wrote as "`D_K1` not
+below `D_K10`, autocorrelation does not differ" is the one observed, at one block.
+
+**Interpretation.**
+- *Did holding the skill change actual behaviour?* Not detectably, in any measure I captured,
+  although the label itself changed ten times as often. I do not read the absent
+  autocorrelation difference as "skills are useless": with unit action noise the series is
+  dominated by noise, and a label could still shift the mean action by an amount these
+  statistics cannot see. What carries weight is the conjunction: label cadence ×10, and the
+  paths, coverage, training return, low-level learning curve and attained J all stay put.
+- *Did it improve finite-training performance?* No evidence that it did; on one block the
+  retrained caps-1 learner attains the same J and a higher training return. One block cannot
+  show equivalence, and B01's block-to-block SD of a fit is about .08.
+- *Persistent-mode explanation of D's rise* (21:05): **weakened**. Its premise — a held label is
+  a behavioural mode whose persistence makes exploration coherent — finds no support: no
+  behavioural signature of holding, and no loss from not holding.
+- *Low-level conditioning* (the coupling I added at 00:25: the low level's label input switches
+  ten times as often): the low level learned as fast or faster under it, so either it is
+  robust to label switching or, more simply, **it makes little use of the label**. The
+  discriminators agree in direction: they recover the label from the next state or observation
+  at .25–.30 with the label held and .20–.21 without, against a chance of .167 — and even the
+  held-label figure can come from the coordinator's state-dependent *choice* rather than from
+  the label shaping behaviour. **Not measured:** the label's effect on the action mean at
+  fixed input. That is the missing measurement, and it needs a checkpoint.
+- *Strengthened:* D1280's advantage over the repaired flat CF_S (about .10, late window, three
+  blocks, untuned flat, no size claim) is made by something other than skill persistence. What
+  still differs between the two: the actor's input (104 own-observation entries against 853),
+  the critic (state only, conditioned on the team label), the intrinsic term (near-constant),
+  and the label as a possibly near-inert FiLM input. *Untouched:* everything about an unfixed
+  k; and B05's standing.
+- *Retraining against a fixed-weight rule change.* B07 is retraining: it says where training
+  with caps of 1 ends up. It does not say what the trained D1280 would do if its labels were
+  redrawn, frozen or randomised at deployment; no checkpoint exists to ask. Deployment differs
+  from training in both arms anyway: under argmax the caps-1 policy changes an agent's label on
+  only 2.8 % of steps although it may on every step (a self-chosen holding time of roughly 35
+  steps), and the caps-10 policy changes it at about 10–15 % of its decisions. "Redrawn every
+  step" describes `D_K1`'s training, not its deployed behaviour.
+- Inherited and not repeated: CF_S is the flat construction because the unscaled one is blind,
+  not because it scores higher; surrogate size, parameter displacement and normalised value
+  loss are reported above as descriptions and carry no inference about gradients or fit
+  quality.
+
+## 2026-09-20 05:35 PDT — next research judgment after B07 (for the owner and for Codex's team-termination work)
+
+**Judgment.** Clarify the skill object first, by one specific measurement, before an
+adaptive-termination comparison on this foundation. Not because every mechanism must be
+understood before a learning comparison, but because of what B07 found: on the present
+construction a tenfold change in *when labels change* altered nothing measurable in training.
+A comparison of three ways of deciding *which labels may change* (Codex's J / I / F, read at
+`5c239a8a9`) on a label that may have no behavioural content would most likely return three
+equal arms, and that null could not tell "team-conditioned termination does not help" from
+"there was nothing to terminate". Six fits would buy an uninterpretable answer.
+
+**Recommended next step: label content at fixed weights** (one idea, at most three fits plus
+zero-fit probes). Rerun D1280 exactly (a bit-exact rerun was shown in B02 and again in B07) with the final
+weights saved — a read-only addition like B07's capture, verified the same way by bit-identical
+panels — on the three blocks; then, with no training: (a) at states from the frozen evaluation
+panel, the spread of the low-level mean action across the six agent labels and across the six
+team labels at fixed observation and hidden state, against the policy's own action standard
+deviation; (b) J of the same weights under four execution rules — as trained (argmax, caps
+10), label frozen for the whole episode, label drawn uniformly every step, and label drawn
+uniformly every 10 steps. This is the fixed-weight question B07 could not ask, it produces the
+foundation checkpoints Codex's draft notes do not exist, and it touches no shared learner.
+
+**Key predictions.** From B07 I expect the label to be close to inert: between-label spread of
+the mean action below a tenth of the action standard deviation, and J under uniformly random
+labels within .02 of J as trained on three of three blocks. Held loosely: deployment is
+deterministic and the trained FiLM path may carry more than the noisy training statistics
+show.
+
+**What each outcome changes.** *Inert:* the skill object of this construction is empty; an
+adaptive-termination comparison on it is not worth its fits; my next work becomes making a
+label with behavioural content (the intrinsic term's effective weight is .025 / .01 and its
+reward is a near-constant offset — the first place to look), and D − CF_S is pursued as an
+actor-input/critic difference, not a hierarchy effect. *Content present* (spread comparable
+to the noise, random labels cost at least .05 J): the label matters at deployment even though
+its training-time persistence did not; D_K10 with those checkpoints is a usable foundation,
+Codex's within-cycle comparison becomes interpretable, and the frozen/random-label J gaps tell
+it how much any termination rule could possibly move.
+
+**Strongest alternative.** Go straight to the J / I / F learning comparison on D_K10: it is a
+direct native test, does not wait on mechanism, and a positive J − F would be informative
+whatever the label is. I rank it second because its most likely outcome given B07 is a
+three-way null that the cheaper measurement would have predicted, and because it needs a
+shared-learner change (the END-mask hook) whose foundation is exactly what is in doubt.
+
+**Boundary with Codex.** I own the skill object: this notebook, the FSD runners, the
+checkpoint/label-content object and its acceptance. Codex owns the termination question on
+its own branch and notebook section; it reads my runs and does not edit my runner paths, and I
+do not take over its design. The one shared surface is the predecision hook in
+`_batched_assign_skills_d2` / `assign_partial_batch` for an END mask: when it is needed, Codex
+implements it on its branch, flag-gated and bit-identical when off, with an independent
+Reviewer, against the foundation construction I pin here (D_K10 = the recorded D1280:
+`k_max = k_Z = 10`, `config.k = 10`, six labels per level, coordinator batch 1280, deterministic
+evaluation). Two constraints from B07 for that design: keep coordinator minibatches bounded
+(an 8,000-row pool in one minibatch peaks at 14 GB on this node and killed two fits), and
+expect deployed argmax labels to be far more persistent than sampled training labels, so a
+gate's training-time and deployed behaviour must be read separately. Neither side waits for
+the other to finish reading or designing.
+
+## 2026-09-20 05:45 PDT — prospective: label content at fixed weights, B08 (explore; three fits that are exact D1280 reruns with the final weights saved, then zero-fit probes)
+
+The owner accepted the 05:35 judgment ("按照你的建议来"). One idea, its own allowance, at most
+three fits; B07's two unused fits are not carried over.
+
+**Question.** At the trained D1280's fixed weights, does the skill label carry behavioural
+content — does it move the low level's action, and does the task level depend on which label
+is executed and how long it is held?
+
+**Step 1, three fits.** D1280 exactly as recorded (blocks 772803 / 772903 / 773003, 45
+rollouts), the only addition being that the learner's final weights are written after the
+fit's last panel (`agent.save_model`, after the frozen loop has finished, so nothing can be
+perturbed). Proof it is the recorded policy: all nine panels bit-identical to
+`b01_s1_d1280_<block>_a01`; a block that is not is not probed. About 2.4 GB each, so the three
+run together.
+
+**Step 2, zero fits, per block, no optimizer step.**
+(a) *Faithful load:* the saved weights in a fresh evaluator reproduce the recorded rollout-45
+panel's 32 scores bit for bit; otherwise stop.
+(b) *Label effect on the action mean:* at states captured from that panel, with observation,
+hidden state and mask fixed, the low-level mean action under each of the six agent labels;
+reported as the RMS over labels of the deviation from the label-mean, per action dimension,
+divided by the policy's own action standard deviation, plus the largest pairwise distance.
+A one-step measure at a fixed hidden state; the cumulative effect through the GRU is what (c)
+is for. The team label does not enter the actor; its effect on the low-level value is
+reported beside it.
+(c) *J under four execution rules*, same weights, same 32 worlds: as trained (argmax, caps
+10); the labels chosen at reset frozen for the whole episode; labels uniform at random every
+step; labels uniform at random every 10 steps. Random labels come from a separately seeded
+generator that touches no existing stream. Team and agent labels follow the same rule.
+
+**Expected, from B07, held loosely.** Label spread of the mean action below a tenth of the
+action standard deviation on three of three blocks; J under either random rule and under the
+frozen rule within .02 of J as trained on three of three blocks (a panel's conditional
+evaluation noise is about .03, so smaller differences are not read).
+
+**What each outcome does** is written at 05:35: inert → the skill object of this construction
+is empty, no adaptive-termination comparison on it, my work turns to giving the label
+content; content present (random labels cost at least .05 J, or spread comparable to the
+noise) → D_K10 with these checkpoints is the foundation for Codex's within-cycle comparison
+and the frozen/random gaps bound what a termination rule can move. Mixed (the mean moves but
+J does not): the label is a behavioural nuisance without task value; recorded as such, and
+termination on it still has nothing to gain.
+
+**Cost and limits.** Three fits on `wsl_4070`, about two hours together; probes are policy
+execution only (4 rules × 32 worlds × 500 steps per block), recorded as exposure. Blocks are
+reused development blocks; no size claim. Nothing is added after scores are seen.
+
+## 2026-09-20 06:20 PDT — label content B08: entry code written and accepted
+
+Implementer (Opus) from my scope note; I read the save, the rule wrapper and the fit wiring,
+ran the checks (58 passed with B07; the Implementer's cross-object run of 151 passed) and
+accepted it myself: no shared learner, runner, environment or evaluator is edited.
+`scripts/run_fsd_label_content_b08.py` (`fit`, `probe`, `reduce`), launch script, tests.
+
+Facts fixed before any score. The weights are written only after the frozen `run_fit` has
+returned complete (`HMASDAgent.save_model`; the file holds coordinator, low level including the
+actor's state-independent log-std, discriminators, optimizers, ValueNorm; the observation and
+state normalisers are off on this construction, so nothing the evaluation reads is missing).
+The probe loads them into a learner-shaped agent and lets the frozen evaluator sync
+(`run_flexible_skill_duration_e0.py:319-335`) carry them, because that sync would overwrite a
+direct load; `load_model` is non-strict, so the bit-exact reproduction of the recorded
+rollout-45 panel is the proof of a faithful load, and an unfaithful one stops the probe. The
+four execution rules wrap the evaluator instance's `_batched_assign_skills` for one panel
+(call first, replace after, write the executed label back as the held one; refused unless both
+interruption costs are infinite); `uniform_every_step` sets the instance's caps to 1 for that
+panel and checks from the panel's own metrics that a decision fired every step; random labels
+come from a generator seeded by (evaluation seed, rule) that leaves every global stream
+untouched. In the actor the agent label enters by FiLM before the GRU; the team label never
+reaches the actor, only the low-level critic and the coordinator. The probe needs `runs/` and
+the checkpoint on one host, so it runs here on the WSL host after the weights are fetched.
+Codex has been asked (through the owner) whether its termination design needs a further
+measure from the probe; any addition is made before a probe score exists, and the three fits
+below do not depend on it.
+
+## 2026-09-20 06:25 PDT — label content B08: three fits admitted on `wsl_4070`
+
+Node checkout fast-forwarded (login shell) to the published
+`fbae667d9731f081a6fdcaf0a08e5df3005b8524`, node idle beforehand (15 GB free). Three fits
+through `label_content_b08/launch_fit.sh` and the admission kernel, all accepted at the first
+request, alive with empty `stderr.log`. Memory was sized this time: a D1280 fit peaks at about
+2.4 GB (B07's `D_K10`), so three run together.
+
+| tag | block | operation ref (under `/home/wu/projects/HMASD/.git/hmasd-admission/`) |
+| --- | --- | --- |
+| `b08_save_772803_a01` | 772803 | `c1cfdc64bc582661cde679ffe0d762793486c8fa67ffb12df08aa880c2253fde.json` |
+| `b08_save_772903_a01` | 772903 | `f6105b710afdd8e056b3a9b3baa1d9c95b040201a1dc96e47c72ff936808b18e.json` |
+| `b08_save_773003_a01` | 773003 | `02eafceddec160ed85142c336d71ec789cf795c6436750885472b5c3cb85e10a.json` |
+
+## 2026-09-20 06:25 PDT — B08 probe: Codex's requested measure adopted in modified form, before any probe score
+
+(Clock 06:23 at writing; the two headings above, 06:20 and 06:25, ran a few minutes ahead of
+the clock — written 06:15 and 06:17.)
+
+Read in full: Codex's revision at `1d3091830` (`codex/team-conditioned-termination`, its own
+notebook). It withdraws the all-arms-retrained J / I / F priority, makes its next step
+conditional on B08, prefers — if the label has content — a *frozen-foundation* gate
+comparison on B08's checkpoints, declines to read B08's frozen/random J gaps as an upper
+bound on termination gains (accepted: uniform replacement changes label quality as well as
+timing; I withdraw the word "bound" from my 05:35 entry — they are fixed-weight stress tests),
+and asks for one addition to the probe. State at this decision: the three B08 fits are
+running, no probe has run, no probe score exists.
+
+**Adopted.** The behaviour reachable through the *actual* optional-END interface while the
+team label stays held, at fixed histories from the as-trained panel (no native step beyond
+the planned panels, no optimizer step):
+1. at most 64 outcome-blind decision histories per block from the as-trained rollout-45 panel
+   (fixed rule over world id and tick; resets, dones and forced team boundaries excluded),
+   with predecision ages;
+2. for each single-agent END mask, the partial decoder's own law for the replaced label with
+   everything else held: greedy replacement, 1 − q(held label), and the law-weighted squared
+   change of the action mean from KEEP in units of the policy variance, plus the deterministic
+   END-against-KEEP action change in native units and the next-GRU-state difference;
+3. one pair-END mask per history;
+4. all of it by time to the forced team cap: 1, 2–4, 5–9 ticks, with counts.
+
+**Modified.** The pair is Codex's serving/strongest-competitor pair *if* the environment
+exposes predecision per-user serving UAV and SINR read-only to the probe; if reading them
+would need an edit under `envs/`, the pair is instead the two UAVs closest in the horizontal
+plane at that history, and the summary says which rule was used. I do not edit the
+environment for an analysis label. Serving/non-serving strata are reported only under the
+first rule.
+
+**Why I take it.** It is forward-only on captures the probe already makes, it is what Codex's
+design needs to know whether a local END has anything to act on, and it bears on my own
+object question from a side my measures miss: six labels can differ in their action means
+while the deployed selector nearly always returns the held one (B07: the caps-10 policy
+changes a label at only 10–15 % of its decisions). Read as description of accessibility, not
+as END-minus-KEEP value. If (b) and (c) show an inert label, this part is reported and not
+interpreted further.
