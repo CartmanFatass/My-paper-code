@@ -1221,3 +1221,93 @@ feedback-renewal branch in parallel with FSD, FOLR idle; Codex integrated PR #27
 on the PR), then fast-forwarded its checkout and the `wsl_4070` checkout. The merge touches no FSD
 path and not the FSD row of `RESEARCH.md`. UCOPE's first batch is planned on `local_linux` from a
 separate worktree; this session touches no UCOPE file or `runs/ucope/` output.
+
+## 2026-09-19 19:50 PDT — flat update B04 read: a conventional large-minibatch update changes nothing; the noise explanation is weakened
+
+Reads against the inspection and prospective entries of 2026-09-19 (18:10 and 18:15 PDT). Nothing
+was added to the plan after seeing scores. Exploration and a package screen: no MEI verdict, no
+mechanism attribution between minibatch size, step count and learning rate, no gap-size claim.
+
+**Execution facts.** Six of six planned fits admitted at the first request on `wsl_4070`, launch
+sha `af66e79141f518be22c997d704e137bfd23419c2`, never more than four at once, all exit 0 with 45
+rows, status complete, empty `stderr.log`; every fit took exactly 2,700 low-level optimizer steps
+(60 per rollout) on both low-level optimizers, which the fit validator requires. One rsync, 54
+files, the six `summary.json` sha256-identical to the node. `reduce` complete, no invalid input,
+each new fit differing from the CF_E0005 fit of its block in the two learning-rate fields only
+(the minibatch size is carried outside the config snapshot and proved by the step count);
+`runs/flexible_skill_duration/b04_reduce/summary.json`, sha256
+`67e2150cc287a2115397abe00d08073a300a3aed08b8ca4850e03d4ba39a2ae1`. Wall 2,640–3,720 s per fit at
+four concurrent (CF_E0005: about 7,000 s), peak RSS 2.1 GiB.
+
+**Observations.** Late-window J (panels 30–45, declared beforehand) and J45, with the completed
+fits of the same block.
+
+| block | CF_E0005 late | CF_M1 late | CF_M5 late | D1280 late | CF_E0005 J45 | CF_M1 J45 | CF_M5 J45 | D1280 J45 |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 772803 | .290 | .254 | .321 | .432 | .329 | .282 | .353 | .456 |
+| 772903 | .214 | .202 | .188 | .395 | .307 | .183 | .162 | .355 |
+| 773003 | .283 | .222 | .257 | .452 | .235 | .181 | .230 | .499 |
+| mean | .262 | .226 | .255 | .426 | .290 | .215 | .248 | .437 |
+
+New minus CF_E0005, late window: CF_M1 −.036 (three of three below), CF_M5 −.007 (one above, two
+below); both inside the panel-to-panel noise of a fit (SD about .07). D1280 minus new, late
+window: +.201 and +.171, three of three positive for both arms.
+
+Diagnostics at rollout 45, mean of three blocks (policy loss: mean over the fit):
+
+| | CF_E0005 | CF_M1 | CF_M5 | D1280 |
+| --- | ---: | ---: | ---: | ---: |
+| optimizer steps per rollout | 2,250 | 60 | 60 | 2,250 |
+| mean policy loss | −.0005 | −.0016 | −.0006 | −.026 |
+| actor displacement | .071 | .062 | .085 | 1.156 |
+| action entropy | 3.96 | 4.14 | 3.84 | 7.46 |
+| low-level value loss | .086 | .212 | .269 | .009 |
+| training return U, rollouts 35–45 | 23.3 | 23.1 | 24.9 | 29.2 |
+
+Displacement does not scale with learning rate × steps: after rollout 1 CF_M5 has moved 4.5
+times as far as CF_M1 (.042 against .009, the ratio of the rates), and by rollout 45 both sit
+where CF_E0005 sat after 37 times as many steps at half of CF_M1's rate (.06–.10). The flat
+actor goes a short, similar distance under every update tried and then stops; D's actor keeps
+moving for 45 rollouts.
+
+**Predictions, scored.**
+- Intermediate, mean policy loss at least five times more negative than −.0005 in both arms:
+  failed in both (CF_M1 about three times, CF_M5 unchanged).
+- Intermediate, CF_M5 actor displacement above .2: failed in three of three (.075, .080, .100).
+- Native, for at least one arm: training return over rollouts 35–45 above 25 and late-window J
+  above CF_E0005 on at least two of three blocks: failed. CF_M5 passes 25 on one block (26.2)
+  and is above CF_E0005 on one block; CF_M1 on none.
+- D1280 stays above on most blocks (loosely held): three of three for both arms.
+
+**Interpretation.**
+- Weakened: my explanation that the flat actor stands still because 320-sample minibatches with
+  per-minibatch advantage normalisation make its gradient mostly noise. A 37-fold larger
+  minibatch, at the old and at the conventional MAPPO rate, leaves the surrogate no better and
+  the policy no better. As a package screen this does not exonerate every component (a larger
+  minibatch with many more steps was not run), but the result I said would follow from the
+  noise account did not appear in either arm, and I will not rescue it with a third setting.
+- Strengthened: the flat learner's failure is not an optimiser-setting matter. Four different
+  update regimes (entropy .05/.005/.0005, 2,250 or 60 steps, rates .5e-4 to 5e-4) give the same
+  picture: surrogate about zero, displacement saturating below .1, training return 22–25.
+- Not predicted, seen in the diagnostics, so descriptive only: the flat critic does not fit. Its
+  value loss stays at .07–.30 in every flat fit of B01, B03 and B04 while D's low-level value
+  loss falls from .10–.18 to .02 or less by rollout 25 and about .01 by rollout 45. A critic that explains little of the return gives
+  advantages that are mostly return noise whatever the minibatch. Whether the two critics are
+  even fitting comparable targets (horizon, bootstrapping at skill boundaries, reward scale) I
+  have not checked.
+- Untouched: D1280's standing as the reference and B02's reading; the B03 reading that the
+  entropy bonus caused the evaluation decline; whether an unfixed k helps (nothing here tests it).
+- Contrary evidence I keep in view: D128 and D1280 learn with this same low-level code and the
+  same 320-sample minibatches, so whatever stops the flat learner is something the flat
+  construction lacks or has, not the update law by itself.
+
+**Standing.** CF_E0005 remains the best flat setting seen; the B04 construction is not adopted
+(no better, and a worse critic fit). The flat comparator is still not a learning baseline, so
+B01's `D_REFERENCE_ABOVE` remains a statement about a comparator that does not learn. Fits used:
+6 of 6; the batch is closed.
+
+**Next.** As written beforehand for this outcome: stop tuning blind. Zero-fit inspection of what
+the two low-level critics are asked to fit: how low-level returns and GAE are built for D and for
+the flat arm (episode horizon against skill segment, bootstrap at skill boundaries, reward terms
+and scale), and what explained variance each critic reaches in the recorded logs. A new
+prospective entry only if that inspection yields a change with a predicted intermediate effect.
