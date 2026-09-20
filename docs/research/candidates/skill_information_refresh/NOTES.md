@@ -210,3 +210,56 @@ offline one-step disagreement/timing diagnostics. Technical completion is not a 
 result: the hypothesis, representation and finite learnability judgments remain unresolved.
 Independent engineering review is next; result launch still waits for canonical active/lead
 integration plus native admission, owned by Root for the shared-index coordination.
+
+## 2026-09-20 — pre-run repair: a real fixed skill decision at the boundary
+
+Engineering Reviewer `/root/dm_info_refresh/c01_engineering_review` independently inspected
+`45945dd7f..a3c4f32b3`, reran 14 focused checks (2.33 s), and returned no material engineering
+finding. Two existing admission-contract checks also passed (0.13 s). I accept that engineering
+reading, but caught a scientific scope gap during the final review: the original boundary only
+started a new exogenous job. No message-conditioned skill choice occurred there, so its
+`PRE_DECISION` was only a pre-job-boundary clock rule. The Critic verified that fact in the
+actual reset/gate code. The owner's requirement includes a skill-decision refresh reference;
+disclosure alone would not make that contrast meaningful.
+
+Before any result execution, retain the C01 question, arms, seeds, horizon and cost, and make
+one targeted host repair. There are now **two immutable closed-loop route skills**: SHARED,
+the existing two-tick shared crossing, and BYPASS, a four-tick independent detour after the
+same local approach. Only SHARED occupancy can conflict. Skills are selected solely at the
+existing 12/16 boundaries and cannot switch mid-commitment. A fixed, untrained selector chooses
+BYPASS when the last legally delivered, still-valid peer packet predicts a SHARED crossing
+within three ticks of our expected arrival, and expected approach plus detour fits the
+remaining commitment with one tick of slack; otherwise SHARED. Arrival prediction is distance
+divided by .75 (zero for a crossing peer); a predicted peer commitment ending first does not
+establish a current conflict. Invalid/expired peer packets select SHARED. The selector uses
+the new local job distance and cached peer only, not the peer's unsent new job or skill.
+
+Add the sender's committed route as one uint8 in the fixed payload for **all** arms: five
+uint8 fields plus timestamp/sender header = eight bytes, hence 192 bytes per 96-tick episode.
+Actor features grow from 22 to 24 by own route and valid cached-peer route; remaining crossing
+ticks are scaled by four. Packet access, latency, 24-packet quota, timing-bit accounting and
+all learner/evaluator exposure stay unchanged. Gate feedback respects the committed route;
+a BYPASS robot does not block or yield for the shared crossing. Count chosen routes and
+skill choices using valid peer information. This creates a meaningful decision-before-refresh
+reference while retaining the within-skill timing question; it does not learn or adapt
+termination, message coding, physical control or channel access.
+
+The pre-result prediction now has two possible information-use sites: the fixed route choice
+at a boundary and gate feedback within the selected SHARED skill. Primary service remains
+completed-job fraction versus selected AGE_CHANGE; PRE_DECISION now serves actual route
+choices. A service difference may involve both sites, so gate-disagreement alone cannot
+attribute it to the latter. Keep route counts, clock-conditioned sends and legal traces.
+All claims remain conditional small-host package readings. This repairs an unrun design,
+not a score-driven extension, renamed failed idea or retroactive change to accepted results.
+The changed host/features will receive focused checks and an independent review of the delta.
+
+The Critic's focused follow-up agrees that this repair is required by the owner's exact
+skill-decision reference wording and is a small, scope-respecting change; `MATERIAL_DISSENT:
+yes` records the original semantic mismatch. Two controlled traces now exercise a packet
+arriving before and changing the boundary route choice, and a later packet changing within-
+skill feedback with the route unchanged. Final traces also retain the factual two-agent
+state and delivered caches/timestamps for offline auditing of both decision sites. Those
+diagnostic arrays never enter either network; scheduler observations remain legal and local.
+After the repair, the same focused pytest command reports **19 passed in 2.48 s** and
+`git diff --check` passes. No C01 result batch has started and no selection/final scores have
+been inspected; the original engineering review does not substitute for review of this delta.

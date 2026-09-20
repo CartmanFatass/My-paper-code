@@ -11,8 +11,8 @@ import pytest
 import torch
 
 from experiments.candidates.skill_information_refresh.c01.host import (
-    APPROACH, CROSSING, DONE, CrossingHost, FRAME, LocalView, OBS_SIZE, PERIODS,
-    Worlds, gate, predecision_slot, project, simple_requests,
+    APPROACH, CROSSING, DONE, SHARED, BYPASS, CrossingHost, FRAME, LocalView, OBS_SIZE, PERIODS,
+    Worlds, choose_route, gate, predecision_slot, project, simple_requests,
 )
 from experiments.candidates.skill_information_refresh.c01.learner import (
     Rollout, advantages, build_scheduler, collect, flat_parameters, update,
@@ -63,7 +63,7 @@ def test_exact_budget_fixed_clocks_and_pending_accounting(should_send):
     row = host.rows()[0]
     assert row["jobs_started"] == 48 // 12 + 48 // 16
     assert row["delivered"] + row["pending_at_end"] == row["packets"]
-    assert row["bytes"] == 84
+    assert row["bytes"] == 96
     assert row["timing_slot_bits"] == 48
     assert len(row["send_clock_phase"]) == 48
 
@@ -88,7 +88,7 @@ def test_controller_collision_and_priority_fixtures():
 
 
 def test_projection_expiry_and_crossing_complete():
-    packet = np.array([[APPROACH, 7, 0, 12], [CROSSING, 0, 2, 4]])
+    packet = np.array([[APPROACH, 7, 0, 12, SHARED], [CROSSING, 0, 2, 4, SHARED]])
     projected, valid, age = project(packet, np.array([0, 0]), 2)
     assert projected[0, 1] == 6
     assert projected[1, 0] == DONE
@@ -109,9 +109,9 @@ def test_event_baseline_can_hold_past_first_slot_on_lawful_history():
     # Robot 1's t=7 snapshot is DONE; robot 0's packet (crossing) changed, but neither
     # robot can act now, so a disabled/12 age rule retains the t=8 frame token.
     view = LocalView(t=8, horizon=48, sender=0,
-        own=np.array([[DONE, 0, 0, 4]]),
-        last_sent=np.array([[APPROACH, 0, 0, 6]]), last_sent_time=np.array([6]),
-        peer=np.array([[DONE, 0, 0, 8]]), peer_valid=np.array([True]), peer_age=np.array([1]),
+        own=np.array([[DONE, 0, 0, 4, SHARED]]),
+        last_sent=np.array([[APPROACH, 0, 0, 6, SHARED]]), last_sent_time=np.array([6]),
+        peer=np.array([[DONE, 0, 0, 8, SHARED]]), peer_valid=np.array([True]), peer_age=np.array([1]),
         available=np.array([True]))
     assert simple_requests(view, "POLL")[0]
     assert not simple_requests(view, "AGE_CHANGE", 1, None)[0]
@@ -131,6 +131,83 @@ def test_exogenous_worlds_do_not_depend_on_actor_requests():
     np.testing.assert_array_equal(one.worlds.advances, two.worlds.advances)
     other = Worlds.make(17, 5, range(2), 48)
     assert not np.array_equal(one.worlds.advances, other.advances)
+
+
+def test_fixed_skill_choice_uses_delivered_cache_and_affordability():
+    peer = np.array([[APPROACH, 2, 0, 10, SHARED]])
+    assert choose_route(np.array([2]), 12, peer, np.array([True]))[0] == BYPASS
+    assert choose_route(np.array([2]), 12, peer, np.array([False]))[0] == SHARED
+    peer[0, 4] = BYPASS
+    assert choose_route(np.array([2]), 12, peer, np.array([True]))[0] == SHARED
+    peer[:] = [APPROACH, 7, 0, 12, SHARED]
+    assert choose_route(np.array([7]), 12, peer, np.array([True]))[0] == SHARED
+
+
+def test_boundary_choice_depends_on_cache_not_current_unsent_peer():
+    one, two = CrossingHost(fixture_worlds(batch=1)), CrossingHost(fixture_worlds(batch=1))
+    for host in (one, two):
+        host.t = 12
+        own_distance = host.worlds.jobs[0, 12, 0]
+        host.cache[0, 0] = [APPROACH, own_distance, 0, 5, SHARED]
+        host.cache_time[0, 0] = 11
+    two.stage[0, 1] = CROSSING
+    two.route[0, 1] = BYPASS
+    one._prepare_tick()
+    two._prepare_tick()
+    assert one.route[0, 0] == two.route[0, 0]
+    assert one.metrics["route_choices_with_valid_peer"][0] == 1
+
+
+def test_bypass_is_committed_four_tick_skill_and_never_collides():
+    host = CrossingHost(fixture_worlds(batch=1))
+    host.distance.fill(0)
+    host.route[0] = [SHARED, BYPASS]
+    fixed = host.route.copy()
+    for tick in range(4):
+        host.step(np.array([False]))
+        np.testing.assert_array_equal(host.route, fixed)
+        assert host.metrics["conflicts"][0] == 0
+        if tick < 3:
+            assert host.stage[0, 1] == CROSSING
+    assert host.stage[0, 1] == DONE
+    assert host.metrics["completed_jobs"][0] == 2
+
+
+def test_packet_arrives_before_and_can_change_actual_boundary_skill_choice():
+    worlds = fixture_worlds(batch=1)
+    worlds.jobs[0, 12, 0] = 2
+    refreshed, stale = CrossingHost(worlds), CrossingHost(worlds)
+    for host in (refreshed, stale):
+        host.t = 11
+        host.stage[0] = [DONE, APPROACH]
+        host.distance[0] = [0, 2]
+    refreshed.step(np.array([True]))
+    stale.step(np.array([False]))
+    assert refreshed.t == stale.t == 12
+    assert refreshed.cache_time[0, 0] == 11
+    assert refreshed.route[0, 0] == BYPASS
+    assert stale.route[0, 0] == SHARED
+
+
+def test_later_packet_changes_feedback_without_changing_committed_skill():
+    worlds = fixture_worlds(batch=1)
+    worlds.advances[0, 4, 1] = True
+    refreshed, stale = CrossingHost(worlds), CrossingHost(worlds)
+    for host in (refreshed, stale):
+        host.t = 4
+        host.stage[0] = [CROSSING, APPROACH]
+        host.distance[0] = [0, 1]
+        host.cross_left[0] = [2, 0]
+    refreshed.step(np.array([True]))
+    stale.step(np.array([False]))
+    assert refreshed.t == stale.t == 5
+    refreshed.step(np.array([False]))
+    stale.step(np.array([False]))
+    assert refreshed.metrics["wait_ticks"][0] == 1
+    assert refreshed.metrics["conflicts"][0] == 0
+    assert stale.metrics["conflicts"][0] == 1
+    assert (refreshed.route == stale.route).all()
+    assert (refreshed.route == SHARED).all()
 
 
 def test_gae_and_actor_mask_have_independent_meaning():
@@ -184,6 +261,8 @@ def test_complete_small_fixture_preserves_counts_and_outputs(tmp_path):
     with np.load(tmp_path / "run" / "final_trace_LEARNED.npz") as trace:
         assert trace["features"].shape == (2, 48, OBS_SIZE)
         assert trace["sent"].sum(axis=1).tolist() == [12, 12]
+        assert trace["state"].shape == (2, 48, 2, 5)
+        assert trace["delivered_cache"].shape == (2, 48, 2, 5)
     assert (tmp_path / "run" / "initial.pt").is_file()
     assert (tmp_path / "run" / "final.pt").is_file()
     with pytest.raises(FileExistsError):

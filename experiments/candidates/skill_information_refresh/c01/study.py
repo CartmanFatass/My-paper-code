@@ -46,7 +46,8 @@ def mean_reading(rows):
         return None
     scalars = ("service", "completed_jobs", "conflicts", "wait_ticks", "gate_opportunities",
         "gate_disagreement", "unknown_gate", "packets", "bytes", "timing_slot_bits",
-        "send_peer_actionable", "send_before_peer_decision", "send_changed")
+        "send_peer_actionable", "send_before_peer_decision", "send_changed", "shared_jobs",
+        "bypass_jobs", "route_choices_with_valid_peer")
     result = {key: float(np.mean([r[key] for r in rows])) for key in scalars}
     for numerator, denominator, name in (
         ("gate_disagreement", "gate_opportunities", "gate_disagreement_rate"),

@@ -6,10 +6,11 @@ import numpy as np
 
 
 APPROACH, CROSSING, DONE = 0, 1, 2
+SHARED, BYPASS = 0, 1
 PERIODS = (12, 16)
 FRAME = 8
-OBS_SIZE = 22
-PACKET_BYTES = 7
+OBS_SIZE = 24
+PACKET_BYTES = 8
 
 
 @dataclass(frozen=True)
@@ -54,10 +55,22 @@ def project(payload, sent, t):
 
 def gate(own, peer, valid, identity):
     """Immutable feedback: known occupancy blocks; robot 1 also yields near the gate."""
-    eligible = (own[..., 0] == APPROACH) & (own[..., 1] == 0) & (own[..., 3] >= 2)
-    blocked = valid & (peer[..., 0] == CROSSING)
-    yields = (identity == 1) & valid & (peer[..., 0] == APPROACH) & (peer[..., 1] <= 1)
+    duration = np.where(own[..., 4] == BYPASS, 4, 2)
+    eligible = (own[..., 0] == APPROACH) & (own[..., 1] == 0) & (own[..., 3] >= duration)
+    shared_peer = valid & (peer[..., 4] == SHARED) & (own[..., 4] == SHARED)
+    blocked = shared_peer & (peer[..., 0] == CROSSING)
+    yields = (identity == 1) & shared_peer & (peer[..., 0] == APPROACH) & (peer[..., 1] <= 1)
     return eligible & ~blocked & ~yields
+
+
+def choose_route(distance, commitment, peer, valid):
+    """Fixed boundary selector over two immutable skills, using only a delivered cache."""
+    own_arrival = distance / .75
+    peer_arrival = np.where(peer[..., 0] == APPROACH, peer[..., 1] / .75, 0)
+    conflict = valid & (peer[..., 4] == SHARED) & (peer[..., 0] != DONE) & (
+        np.abs(own_arrival - peer_arrival) < 3) & (peer[..., 3] >= own_arrival)
+    affordable = own_arrival + 4 <= commitment - 1
+    return np.where(conflict & affordable, BYPASS, SHARED).astype(np.int16)
 
 
 @dataclass(frozen=True)
@@ -98,19 +111,20 @@ class LocalView:
         peer_onehot = np.eye(3, dtype=np.float32)[self.peer[:, 0]] * self.peer_valid[:, None]
         last_valid = self.last_sent_time >= 0
         scalars = np.column_stack((
-            self.own[:, 1] / 7, self.own[:, 2] / 2, self.own[:, 3] / 16,
+            self.own[:, 1] / 7, self.own[:, 2] / 4, self.own[:, 3] / 16,
             np.full(n, self.peer_remaining / 16), last_valid,
             np.minimum(self.own_age, 16) / 16,
             (~last_valid) | (self.own[:, 0] != self.last_sent[:, 0]),
             np.where(last_valid, np.abs(self.own[:, 1] - self.last_sent[:, 1]) / 7, 1),
-            self.peer_valid,
+            self.peer_valid, self.own[:, 4],
         ))
         tail = np.column_stack((
             np.where(self.peer_valid, self.peer[:, 1] / 7, 0),
-            np.where(self.peer_valid, self.peer[:, 2] / 2, 0),
+            np.where(self.peer_valid, self.peer[:, 2] / 4, 0),
             np.minimum(self.peer_age, 16) / 16,
             np.full(n, self.sender), np.full(n, (self.horizon - self.t) / self.horizon),
             np.full(n, self.t % FRAME / FRAME), self.available,
+            np.where(self.peer_valid, self.peer[:, 4], 0),
         ))
         features = np.concatenate((own_onehot, scalars, peer_onehot, tail), axis=1).astype(np.float32)
         assert features.shape == (n, OBS_SIZE)
@@ -137,7 +151,8 @@ def simple_requests(view, arm, distance_delta=2, age_limit=None):
         raise ValueError(f"unknown fixed scheduler {arm}")
     previous = view.last_sent_time >= 0
     changed = (~previous) | (view.own[:, 0] != view.last_sent[:, 0]) | (
-        np.abs(view.own[:, 1] - view.last_sent[:, 1]) >= distance_delta)
+        np.abs(view.own[:, 1] - view.last_sent[:, 1]) >= distance_delta) | (
+        view.own[:, 4] != view.last_sent[:, 4])
     own_near = (view.own[:, 0] == CROSSING) | (
         (view.own[:, 0] == APPROACH) & (view.own[:, 1] <= 2))
     peer_near = (~view.peer_valid) | (view.peer[:, 0] == CROSSING) | (
@@ -158,7 +173,8 @@ class CrossingHost:
         self.stage = np.full((self.batch, 2), DONE, dtype=np.int16)
         self.distance = np.zeros((self.batch, 2), dtype=np.int16)
         self.cross_left = np.zeros((self.batch, 2), dtype=np.int16)
-        self.cache = np.zeros((self.batch, 2, 4), dtype=np.int16)
+        self.route = np.zeros((self.batch, 2), dtype=np.int16)
+        self.cache = np.zeros((self.batch, 2, 5), dtype=np.int16)
         self.cache_time = np.full((self.batch, 2), -1, dtype=np.int16)
         self.last_sent = np.zeros_like(self.cache)
         self.last_sent_time = np.full_like(self.cache_time, -1)
@@ -169,7 +185,8 @@ class CrossingHost:
         metric_names = ("jobs_started", "completed_jobs", "conflicts", "wait_ticks", "gate_opportunities",
             "gate_disagreement", "unknown_gate", "packets", "delivered", "choice_opportunities",
             "forced_packets", "message_age_sum", "message_age_count", "send_peer_actionable",
-            "send_before_peer_decision", "send_changed", "send_own_age_sum")
+            "send_before_peer_decision", "send_changed", "send_own_age_sum", "shared_jobs",
+            "bypass_jobs", "route_choices_with_valid_peer")
         self.metrics = {name: np.zeros(self.batch, dtype=np.int64) for name in metric_names}
         self.send_phase = np.zeros((self.batch, FRAME), dtype=np.int64)
         self.send_peer_remaining = np.zeros((self.batch, max(PERIODS)), dtype=np.int64)
@@ -192,12 +209,17 @@ class CrossingHost:
                 self.stage[:, agent] = APPROACH
                 self.distance[:, agent] = self.worlds.jobs[:, self.t, agent]
                 self.cross_left[:, agent] = 0
+                peer, valid, _ = project(self.cache[:, agent], self.cache_time[:, agent], self.t)
+                self.route[:, agent] = choose_route(self.distance[:, agent], period, peer, valid)
+                self.metrics["shared_jobs"] += self.route[:, agent] == SHARED
+                self.metrics["bypass_jobs"] += self.route[:, agent] == BYPASS
+                self.metrics["route_choices_with_valid_peer"] += valid
                 self.metrics["jobs_started"] += 1
 
     def payloads(self):
         remaining = np.broadcast_to(np.asarray(PERIODS) - self.t % np.asarray(PERIODS),
                                     (self.batch, 2))
-        return np.stack((self.stage, self.distance, self.cross_left, remaining), axis=-1)
+        return np.stack((self.stage, self.distance, self.cross_left, remaining, self.route), axis=-1)
 
     def view(self):
         if self.t >= self.horizon:
@@ -229,14 +251,15 @@ class CrossingHost:
         self.send_clock_phase[:, self.t % 48] += sent
         self.metrics["send_before_peer_decision"] += sent & (view.peer_remaining == 1)
         changed = (view.last_sent_time < 0) | (view.own[:, 0] != view.last_sent[:, 0]) | (
-            view.own[:, 1] != view.last_sent[:, 1])
+            view.own[:, 1] != view.last_sent[:, 1]) | (view.own[:, 4] != view.last_sent[:, 4])
         self.metrics["send_changed"] += sent & changed
         self.metrics["send_own_age_sum"] += np.where(sent, view.own_age, 0)
 
         own = self.payloads()
         peer, valid, age = project(self.cache, self.cache_time, self.t)
         decisions = gate(own, peer, valid, np.arange(2))
-        gate_opportunity = (own[..., 0] == APPROACH) & (own[..., 1] == 0) & (own[..., 3] >= 2)
+        duration = np.where(self.route == BYPASS, 4, 2)
+        gate_opportunity = (own[..., 0] == APPROACH) & (own[..., 1] == 0) & (own[..., 3] >= duration)
         # Factual current-snapshot comparison at the encountered state, diagnostic only.
         oracle_decisions = gate(own, own[:, ::-1], np.ones_like(valid), np.arange(2))
         self.metrics["gate_opportunities"] += gate_opportunity.sum(1)
@@ -253,8 +276,8 @@ class CrossingHost:
         moves = approaching & self.worlds.advances[:, self.t]
         self.distance[moves] -= 1
         self.stage[decisions] = CROSSING
-        self.cross_left[decisions] = 2
-        occupying = self.stage == CROSSING
+        self.cross_left[decisions] = duration[decisions]
+        occupying = (self.stage == CROSSING) & (self.route == SHARED)
         conflicts = occupying.sum(1) == 2
         self.metrics["conflicts"] += conflicts
         self.stage[conflicts] = DONE
