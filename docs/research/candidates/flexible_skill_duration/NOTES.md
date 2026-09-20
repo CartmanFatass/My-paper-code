@@ -1942,3 +1942,87 @@ beforehand, all admitted at the first request, alive with empty `stderr.log`.
 | `b05_s_773003_a01` | CF_S | 773003 | `881b27d0df8a9364dffa8f306eb512e7bdec28f61d4c5de9b5d9f347d05fd85a.json` |
 
 No B05 fit score or diagnostic is read before all three are terminal.
+
+## 2026-09-19 22:55 PDT — flat input scale B05 read: with the coordinates scaled the flat actor trains; it rises from its starting level on three of three blocks and stays below D1280
+
+Reads against the prospective entry of 20:40 PDT and the step-1 entry of 21:40 PDT. Nothing was
+added after seeing scores. Exploration, targeted single change: no MEI verdict, no gap size.
+
+**Execution facts.** Three of three planned fits admitted at the first request on `wsl_4070`,
+launch sha `52400ff4d3ebe284cbc12dc8b8c510022b850d98` (the probes' source), all exit 0 with 45
+rows, status complete, empty `stderr.log`; one rsync, 27 files, the three `summary.json`
+sha256-identical to the node. `reduce` complete with the three probes, no invalid fit, reference
+or probe: every new fit's recorded configuration equals its CF_E0005 reference's, the recorded
+affine is the one its recorded bounds imply, and each probe's configurations, affine and source
+are its fit's. `runs/flexible_skill_duration/b05_reduce/summary.json`, sha256
+`f57b3e281a221d1c9e60790ba177e24feda7d6755df2143172029a5d2dcc4f8d`. Wall about 4,200 s per fit at
+three concurrent, peak RSS 1.3 GiB. Fits used: 3 of the idea's 6; the batch is closed.
+
+**Observations.**
+
+| block | J_init unscaled | CF_E0005 late | rise | J_init scaled | CF_S late | rise | D1280 late | D1280 − CF_S late |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 772803 | .299 | .290 | −.010 | .158 | .244 | +.086 | .432 | +.189 |
+| 772903 | .271 | .214 | −.057 | .262 | .364 | +.102 | .395 | +.031 |
+| 773003 | .212 | .283 | +.071 | .254 | .355 | +.101 | .452 | +.097 |
+| mean | .261 | .262 | +.002 | .225 | .321 | +.096 | .426 | +.105 |
+
+CF_S minus CF_E0005: late window −.046, +.150, +.072 (mean +.059); J45 −.130, +.050, +.091
+(mean +.004). On 772803 CF_S is at .30 by panel 5 and drifts down to .198 at panel 45 (early
+window .300, late .244); on the other two it holds or rises.
+
+Diagnostics, mean of three blocks (CF_E0005 / CF_S / D1280): actor displacement after rollout 1
+.027 / .091 / .153; at rollout 45 .071 / .531 / 1.156 (log-std part under 1 % in the flat arms);
+mean policy loss −.0005 / −.016 / −.026; action entropy at rollout 45 3.96 / 3.84 / 7.46;
+training return U over rollouts 35–45 23.3 / 25.9 / 29.2 (per block CF_S 23.3, 27.5, 26.8 against
+23.7, 21.2, 25.1).
+
+**Predictions, scored.**
+- Intermediate, displacement after rollout 1 above the reference on three of three: held
+  (.089, .091, .094 against .026, .029, .027).
+- Intermediate, network displacement at rollout 45 at least twice the reference's: held, 7.5
+  times. Both are parameter distances; the better read I asked for, the sensitivity measure
+  repeated on the trained policy, was not taken: these runners save no checkpoint, which I should
+  have seen when writing the entry. Unmeasured, not failed.
+- Native, U over rollouts 35–45 above the reference on at least two of three and above 25 in the
+  mean: held (two of three; 25.9), narrowly.
+- Native, late-window J above the reference on at least two of three: held (two of three).
+- Native, J_late − J_init larger than the reference's on at least two of three: held, three of
+  three, and the rise is the same size on every block (+.086, +.102, +.101) while the reference's
+  is −.010, −.057, +.071.
+
+**Interpretation.**
+- Strengthened: the comparator's failure to train was, in large part, its input construction. One
+  information-preserving change to the actor's appended block, nothing else, turns an actor that
+  moved .07 in 45 rollouts into one that moves .53, makes the surrogate improve, and gives a
+  consistent rise of about .10 J from the untrained level where the unscaled learner had none.
+  Pro's diagnosis is borne out on the intermediate and, more modestly, on the native side.
+- Weakened: that the scale hazard is the whole D1280–flat difference. CF_S is below D1280 on
+  three of three in the late window (+.19, +.03, +.10), its training return is 3 below D's, its
+  actor moves half as far, and on one block it peaks early and declines. With three blocks every
+  interval here contains zero; signs and the per-block pattern are what I read.
+- Untouched: persistent-mode exploration, critic quality, discriminator residuals; and the
+  question of k. Also untouched and now plainly relevant: CF_S runs at a learning-rate multiplier
+  (.5) and an entropy coefficient that were selected for the blind construction, so it is an
+  untuned learner; I am not going to tune it on these blocks.
+- Contrary evidence kept: the scaled policy starts lower on 772803 (.158) and part of "rise" on
+  that block is recovery to the level the unscaled policy starts at; the rise criterion alone
+  would flatter CF_S there. Late-window level against CF_E0005 on that block is negative.
+
+**Standing.** CF_S replaces CF_E0005 as the flat construction for anything that follows. The
+frozen B01 object and its label `D_REFERENCE_ABOVE` stand as read under its card; what the label
+means is narrowed: B01's CF actor was, by construction, nearly blind to its own observation and
+identity (step-1 probe), so B01 compared D1280 with a defective comparator, and +.29 J is not an
+estimate of a matched-information gap. The defect was mine (2026-09-18 implementation note
+called the snapshot normalised; the normalisers are off in these configs). The present
+description: on three blocks already used for selection, D1280 is above the repaired, untuned
+flat learner by about .1 J in the late window, three of three; no size claim.
+
+**Next.** As written beforehand: put the same question to D's coordinator, at zero fits first.
+It embeds the same raw-metre state through one linear layer, its skill choice stays near uniform
+and it barely moves; both low-level critics read the raw state too. A forward probe of the
+untrained and (since no checkpoint exists) only the untrained coordinator can say whether its
+logits are insensitive to the state or saturated from initialisation. If they are, the
+direction's own question has been asked so far of a coordinator that cannot see, and the next
+prospective entry is a scaled-state D, which is also the prerequisite for any k contrast,
+including the k = 10 against k = 1 persistence contrast recorded at 21:05.
