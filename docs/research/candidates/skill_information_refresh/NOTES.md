@@ -808,3 +808,142 @@ specific. The direct audit finds 352 projected distance-zero cases and two dista
 (both from seed 73143). All 354 satisfy the same <=1 yielding condition; the gate-first counts,
 outcome cross-tabs and delayed-release interpretation are unchanged. This correction is
 appended without rewriting the historical reading.
+
+## 2026-09-20 — Owner re-entry: a falsifiable receiver-value condition
+
+The owner explicitly reopens C to answer its recorded admission question, not to repeat C04
+or infer that timing value cannot exist. I verified the clean direction checkout at
+`43d271914c20b1b3c496153a902d41a2e42ceef2`, current canonical owner pause lifted, C exploring
+and assigned to Codex DM. I reread the current constitution and both scientific/engineering
+methods. Fits remain measured cost, **not an allowance**; the methods' stale allowance prose
+does not apply. The previous idle boundary is superseded by this owner-directed question.
+
+The discriminating condition is: **two legal sender histories matched on stage, cache age,
+cache change, public clock and remaining quota have opposite rankings of the native values
+of sending now and later, because of received task context or locally observable uncertainty.**
+Merely correlating a neural score with age, or assuming that the receiver wants a packet,
+does not satisfy it. A receiver request/priority is information and must arrive through a
+declared, charged channel. "Not captured by stage/age/change" is a restricted representation
+statement, not an assertion that no transparent rule can encode the answer. A model-aware,
+budget-aware value rule is the strongest same-information simple comparator if available.
+
+I verified the primary author PDF of Soleymani, Baras, Hirche and Johansson,
+[Value of Information in Feedback Control: Global Optimality, IEEE TAC 2023](https://people.kth.se/~kallej/papers/Value_TAC2023_Soleymani.pdf)
+(DOI 10.1109/TAC.2022.3194125), especially sections II–III and equations 10–12. Its trigger
+uses a specified causal information set, a costly channel with one-step delay, and a value
+difference containing both current estimation error and future continuation value. Its
+optimality result assumes its Gauss–Markov/quadratic-control model and jointly chosen
+controller/trigger; it does not establish a fixed-skill MARL result. In particular, its
+trigger's access to past controls is not free feedback that our host may import. The useful
+bridge is the opportunity cost of consuming a finite communication opportunity, not the
+paper's optimality claim. The SchedNet full-text reading and adverse CADC result above remain
+binding contrary evidence: removing collisions or using fixed skills cannot redeem CADC.
+
+The independent Critic returned a two-decision counterexample in which a fixed, paid
+receiver-mode packet indicates which private observation is unreliable. It correctly notes
+that comparing the two Bayesian gains solves that toy exactly, and that timing after seeing
+the condition could itself signal it. I accept these constraints. C05 below uses a related
+explicit cache-refresh law with a task weight and sensor-observed obsolescence risk. Its
+receiver decoder is fixed and does not infer hidden state from silence; the visible timing
+choice is nevertheless recorded as an information-bearing channel. No adviser opinion is
+counted as another experiment.
+
+### C05 minimal host, causal information and analytical admission
+
+One six-tick cycle has two agents, a sender S and receiver R. R executes fixed commitments
+`[0,3)` and `[3,6)` with immutable feedback branches at ticks 2 and 4. At either branch it
+uses its last delivered binary cache value; a correct branch completes a job worth `w` and
+4 task-service units respectively. Skills, endpoints, branch law, packet content and access
+are identical across arms. The initial cache is 0 and the initial true condition X is an
+independent fair bit, so that default is not worse than another fixed prior guess.
+
+R privately observes the first job weight `w in {1,2,3}`. At tick 0 it always sends the fixed
+context payload `(w, 4, 2, 4)`: four uint8 payload fields, a uint16 timestamp and uint8 sender
+header, **seven bytes**. This reaches S at tick 1. Treat it as a charged priority/context
+request, not a free scheduler feature. S at tick 1 locally observes X and a calibrated
+sensor regime `q in {.1,.5,.9}`. At tick 3 the condition flips with probability q, independently
+of the packet choice. q is an observed probability, **not the future flip realization**.
+The three weights, three risk regimes and two initial conditions are independent/uniform.
+
+Fixed TDMA permits R only at 0 and S at 1 or 3. S has one data token: send at 1, or save it
+and obligatorily send at 3. The payload is always the currently observed condition, one
+uint8 plus the same three-byte timestamp/sender header. Delay is exactly one tick, before
+the branch at 2 or 4. Thus every arm spends **two packets / eleven bytes per cycle**, including
+the context request; there are two visible S access slots and one binary timing choice.
+Neither requests, priority ordering nor fresh global states are otherwise accessible. All
+policies receive the same lawful `(X, delivered w, q)` view. The evaluator can log future
+state but cannot supply it to the scheduler. R uses the received bit, not timing inference,
+q, oracle state, or an arm-specific decoder. These are explicit fixed-host limits.
+
+Conditional native values are `Q_early = w + 4(1-q)` and
+`Q_late = w(1-X) + 4`, so **Delta = w*X - 4*q**. With X=1 and q=.5, w=1 prefers late
+and w=3 prefers early even though sender stage/age/change/clock/quota match. With X=1 and
+w=2, q=.1 prefers early and q=.9 prefers late. The full same-information transparent
+`VOI` rule sends early iff Delta>0 (ties late); it is exactly optimal for this fixed decoder
+and these two timing choices. There is no prediction that a learner beats it.
+
+The complete deterministic stage/age/change family here consists of the four Boolean
+mappings from X to early/late; all other family inputs are constant. `PRE_FIRST` always
+sends before the first action (also first-slot polling/active-first), `PRE_LAST` always
+saves for the next commitment's action, `AGE_CHANGE` sends early iff X differs from cache0,
+and `INVERSE_CHANGE` supplies the fourth mapping. A randomized mixture cannot improve on
+their maximum expected value. Their analytical maximum is 5 task units/cycle. VOI is
+`5 + 5.8/18 = 5.322222...`; the extra .322222 is the specified representation opportunity,
+not an observed learning gain. Setting q=0 removes obsolescence: AGE_CHANGE and VOI then
+coincide in value at 6, and the claimed context-dependent residual is zero. Giving the
+scheduler an uncharged w or realized future flip would invalidate the admission, not rescue it.
+The charged context itself adds only .055555... over a rule that knows q but averages unknown
+w; most of the restricted-family gap involves local predictive risk. We will not attribute
+the whole gap to the receiver packet or assume it is worth adding in a different system.
+
+### C05 prospective direct comparison, cost and L0
+
+Proceed once with this bounded bridge, without transferring the old crossing host's rewards
+or checkpoint. **One exploratory fit, training seed 73160, 16,384 six-tick cycles**, 128/call,
+four full-batch PPO epochs per call = 512 optimizer calls and 98,304 training team ticks.
+The sender policy and value functions each use the three normalized legal inputs, a 16-unit
+tanh hidden layer and scalar head; float32 CPU. Adam lr .003, PPO clip .2, entropy .01,
+value coefficient .5 on squared-error/2, gradient norm .5. Native reward is divided by the
+fixed upper bound seven for training only. Each episode has one learnable Bernoulli timing
+choice and terminal reward; there is no bootstrapped future target or analytic-VoI label.
+Final greedy send iff probability >=.5. Random initialization and action draws use the seed;
+world generation uses separate phase-keyed generators. No development tuning/selection.
+
+Final six arms are LEARNED, VOI, PRE_FIRST, PRE_LAST, AGE_CHANGE and INVERSE_CHANGE on 4,096
+common new cycles. Read final LEARNED minus **VOI** as the primary learned-increment comparison,
+and separately report the best of the exhaustive restricted family; never substitute the
+weaker family as the strongest primary. A finite exact panel enumerates all 18 contexts and
+ten equiprobable flip outcomes: 180 cycles for initial LEARNED, and 180 for each final arm.
+A prespecified q=0 control enumerates six contexts and the same ten outcomes: 60/arm, no
+retraining. Exact panels are model enumeration, not independent training seeds or real-world
+replicas. Total exposure is 42,580 cycles / **255,480 team ticks**, one started fit, 512
+optimizer calls; no other fits, seed extensions, hyperparameter variants or confirmation.
+
+Intermediate prediction: the exact-value comparator reverses its send choice within matched
+change strata as legal w/q vary, whereas each restricted rule cannot. Those choices must
+change the receiver's actual branch correctness, not merely an information-age proxy.
+Native prediction: VOI's enumerated .322222 advantage over the strongest restricted rule
+is recovered, and disappears at q=0. For the learner, parameter movement alone is insufficient:
+read greedy conditional choices, exact native regret to VOI and initial-to-final movement.
+Learning may recover some/all of the opportunity but cannot establish extra package value
+over the rule. A wrong exact identity, context arriving too late, or leaked future bit is
+a technical failure; the disappearance of the legal value reversal would instead defeat
+this scientific condition. An unsuccessful fit would weaken finite learnability for this
+declared procedure, not the algebraic existence claim.
+
+L0: add only `experiments/candidates/skill_information_refresh/c05/`, admitted
+`scripts/run_sir_c05.py`, and uniquely named mirrored tests. Do not change C01–C04, shared
+learners, canonical control or RESEARCH. Implement explicit packet bytes, one-tick delivery,
+the frozen receiver branches and a view isolated from future state; preserve raw traces,
+updates, checkpoint, phase counts and exact context tables. Test packet/causal boundaries,
+all finite contexts and the q=0 falsifier, sampling/phase separation, real parameter updates,
+complete output arithmetic and admission refusal using managed pytest scratch. Independent
+engineering review precedes acceptance, publication and native local_linux admission.
+This is an existence/representation and finite-learnability bridge under fixed scripted
+commitments, not evidence for current HMASD learned skills, endogenous coordination or UAVs.
+
+C05's focused synthetic checks initially passed (8 tests, 1.66 s). They verify the exact
+counterfactual value identity and q=0 boundary as implementation checks, not a completed
+scientific fit. The implementation also retains all sampled training-cycle traces, rather
+than relying only on update-mean rewards to recover actual exposure. Final review/tests
+follow before any result-bearing execution.
