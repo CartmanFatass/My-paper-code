@@ -947,3 +947,13 @@ counterfactual value identity and q=0 boundary as implementation checks, not a c
 scientific fit. The implementation also retains all sampled training-cycle traces, rather
 than relying only on update-mean rewards to recover actual exposure. Final review/tests
 follow before any result-bearing execution.
+
+The independent Reviewer read `43d271914..7dd0673e4` and ran the eight focused tests
+(1.68 s). Its sole material finding was P2 failure instrumentation: completed training
+rollouts were counted only after all optimizer epochs, and raw training traces were saved
+only after all batches. I accepted the finding and moved exposure counting immediately
+after rollout, retained accumulated traces on handled failures, and recorded available
+parameter movement in the finalizer. A new managed-scratch second-optimizer-step failure
+regression requires one completed batch, exactly one successful update, partial raw traces
+and TECHNICAL_FAILURE, without a final checkpoint. This is an engineering repair before
+the first C05 scientific run, not a failed scientific seed or a renamed retry.

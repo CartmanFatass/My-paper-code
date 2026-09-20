@@ -130,3 +130,35 @@ def test_cli_refuses_without_admission(tmp_path):
         capture_output=True, text=True, check=False)
     assert result.returncode != 0 and "missing HMASD admission" in result.stderr
     assert not out.exists()
+
+
+def test_optimizer_failure_preserves_completed_exposure_and_partial_raw_trace(tmp_path, monkeypatch):
+    original_step = torch.optim.Adam.step
+    attempts = 0
+
+    def fail_second(optimizer, *args, **kwargs):
+        nonlocal attempts
+        attempts += 1
+        if attempts == 2:
+            raise RuntimeError("injected second optimizer-step failure")
+        return original_step(optimizer, *args, **kwargs)
+
+    monkeypatch.setattr(torch.optim.Adam, "step", fail_second)
+    out = tmp_path / "failed"
+    config = Config(seed=5, train_cycles=32, batch=16, epochs=2, final_cycles=8)
+    with pytest.raises(RuntimeError, match="injected second optimizer-step failure"):
+        run_study(out, "a" * 40, config)
+    summary = json.loads((out / "summary.json").read_text())
+    assert summary["status"] == "TECHNICAL_FAILURE"
+    assert summary["counts"]["started_fits"] == 1
+    assert summary["counts"]["train_cycles"] == 16
+    assert summary["counts"]["train_transitions"] == 96
+    assert summary["counts"]["optimizer_steps"] == 1
+    assert summary["parameters"]["displacement"] > 0
+    assert summary["parameters"]["evaluation_displacement"] is None
+    trace = np.load(out / "training_LEARNED.npz")
+    assert np.array_equal(trace["world_ids"], np.arange(16))
+    assert trace["utility"].shape == (16,)
+    assert (trace["packets"] == 2).all() and (trace["bytes"] == 11).all()
+    assert len((out / "updates.jsonl").read_text().splitlines()) == 1
+    assert not (out / "final.pt").exists()
