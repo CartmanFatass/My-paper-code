@@ -1,0 +1,90 @@
+{
+  "acceptance": "accepted",
+  "accepted_at": "2026-09-20T22:56:32.065558Z",
+  "bootstrap_command": [
+    "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/dc428cd9d31c45c48556479ad4295005/scripts/hmasd_admission.py",
+    "_run-admitted",
+    "--runner",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/dc428cd9d31c45c48556479ad4295005/scripts/run_sir_c05.py",
+    "--output",
+    "/home/fires/.codex/worktrees/fsd-c/hmasd-wsl/runs/skill_information_refresh/c05_value_s73160_20260920",
+    "--",
+    "--out",
+    "/home/fires/.codex/worktrees/fsd-c/hmasd-wsl/runs/skill_information_refresh/c05_value_s73160_20260920",
+    "--launch-sha",
+    "d8680026026b06f0861601839444392c452e8c20",
+    "--seed",
+    "73160"
+  ],
+  "claim_key": "6a2824b43e43a0c99ffad472a87efa178ec3774c19507dda0f2a825c1308edd5",
+  "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/6a2824b43e43a0c99ffad472a87efa178ec3774c19507dda0f2a825c1308edd5.json",
+  "command": [
+    "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/dc428cd9d31c45c48556479ad4295005/scripts/run_sir_c05.py",
+    "--out",
+    "/home/fires/.codex/worktrees/fsd-c/hmasd-wsl/runs/skill_information_refresh/c05_value_s73160_20260920",
+    "--launch-sha",
+    "d8680026026b06f0861601839444392c452e8c20",
+    "--seed",
+    "73160"
+  ],
+  "command_sha256": "f37321665ef913b9c6184a64c1915f647c6ad2f323216fdf7bf5b02005b2bfd6",
+  "control_observation": {
+    "observed_at": "2026-09-20T22:56:31.915428Z",
+    "ref": "refs/heads/main",
+    "remote": "origin",
+    "sha": "fd8402f592ac310cdccc4619137c041796df29b6"
+  },
+  "control_root": "/home/fires/hmasd-wsl",
+  "created_at": "2026-09-20T22:56:31.924066Z",
+  "cwd": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/dc428cd9d31c45c48556479ad4295005",
+  "direction": "skill_information_refresh",
+  "host_identity": "Jacob",
+  "identity_command": [
+    "/home/fires/.local/share/uv/python/cpython-3.10.20-linux-x86_64-gnu/bin/python3.10",
+    "scripts/run_sir_c05.py",
+    "--launch-sha",
+    "d8680026026b06f0861601839444392c452e8c20",
+    "--seed",
+    "73160"
+  ],
+  "lead": "Codex DM",
+  "manifest_ref": "/home/fires/.codex/worktrees/fsd-c/hmasd-wsl/runs/skill_information_refresh/c05_value_s73160_20260920/launch-manifest.json",
+  "node": "local_linux",
+  "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/6a2824b43e43a0c99ffad472a87efa178ec3774c19507dda0f2a825c1308edd5.json",
+  "output_root": "/home/fires/.codex/worktrees/fsd-c/hmasd-wsl/runs/skill_information_refresh/c05_value_s73160_20260920",
+  "preflight": "/home/fires/.codex/worktrees/fsd-c/hmasd-wsl/runs/skill_information_refresh/c05_value_s73160_20260920/admission-preflight.json",
+  "process": {
+    "detached": true,
+    "identity": {
+      "boot_id": "0c48e432-2a4b-4bcc-9576-32954aa2c6b8",
+      "kind": "linux_pid_start_ticks",
+      "pid": 2702677,
+      "session_id": 2702677,
+      "start_ticks": 20742227
+    },
+    "native_handle_kind": "posix_session",
+    "pid": 2702677,
+    "process_group_id": 2702677
+  },
+  "process_exit": "/home/fires/.codex/worktrees/fsd-c/hmasd-wsl/runs/skill_information_refresh/c05_value_s73160_20260920/process-exit.json",
+  "published_remote": "origin",
+  "runner_process": {
+    "identity": {
+      "boot_id": "0c48e432-2a4b-4bcc-9576-32954aa2c6b8",
+      "kind": "linux_pid_start_ticks",
+      "pid": 2702678,
+      "session_id": 2702677,
+      "start_ticks": 20742230
+    },
+    "pid": 2702678,
+    "process_group_id": 2702677,
+    "supervisor_pid": 2702677
+  },
+  "schema_version": 1,
+  "sha": "d8680026026b06f0861601839444392c452e8c20",
+  "source_root": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/dc428cd9d31c45c48556479ad4295005",
+  "stderr": "/home/fires/.codex/worktrees/fsd-c/hmasd-wsl/runs/skill_information_refresh/c05_value_s73160_20260920/stderr.log",
+  "stdout": "/home/fires/.codex/worktrees/fsd-c/hmasd-wsl/runs/skill_information_refresh/c05_value_s73160_20260920/stdout.log"
+}

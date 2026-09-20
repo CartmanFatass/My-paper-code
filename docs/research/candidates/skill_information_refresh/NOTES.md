@@ -971,3 +971,183 @@ the bridge's finite-learnability question at its exact regret, with no seed exte
 superiority confirmation. A later target-host question requires its own lawful mapping and
 strong simple reference; neither sign of this toy automatically decides that question.
 These reviews establish consistency and interpretation constraints, not an empirical result.
+
+## 2026-09-20 — C05 read: the legal value condition exists; learning implements the rule
+
+The [C05 manifest](../../../../runs/skill_information_refresh/c05_value_s73160_20260920/launch-manifest.json)
+binds published source `d8680026026b06f0861601839444392c452e8c20` and the original native
+operation `6a2824b43e43a0c99ffad472a87efa178ec3774c19507dda0f2a825c1308edd5`. Admission
+observed canonical `fd8402f592ac310cdccc4619137c041796df29b6`, accepted at 22:56:32.065558 UTC,
+and passed fresh actual-node memory (11,771,940,864 available bytes, four-GiB floor).
+The same handle exited zero with a valid OS process-exit witness and consistent native records.
+No duplicate, retry or observer rebind occurred. At this boundary I compared the changed
+canonical revision's AGENTS, constitution and three used methods with the accepted source:
+no relevant content changed; the loaded no-allowance rule remains adopted.
+
+I read the complete [summary](../../../../runs/skill_information_refresh/c05_value_s73160_20260920/summary.json),
+26,196 evaluation rows, 512 update rows and all twenty saved trace arrays, including every
+sampled training cycle. Actual cost matches the prospectus: **one fit, 16,384 training cycles,
+98,304 training ticks, 512 updates; 42,580 total cycles / 255,480 total ticks**. Every recorded
+cycle uses two packets/eleven bytes, with context arrival at 1 and data arrival at 2 or 4.
+All numeric arrays and parameters are finite. Independent reconstruction from raw conditions,
+actions, weights and flip draws matches every native reward; phase row counts and summary
+counts agree. Checkpoint displacement is 4.983677387 for 162 parameters; evaluation movement
+is zero. Runner wall is .787012 s (training .594916, evaluation .186245); acceptance-to-exit
+2.726698 s. Peak child RSS is 301,052 KiB and user/system CPU 2.179584/1.133703 s, not total
+node occupancy or complete research cost. Across C01–C05: four started fits, 1,277,952 training
+ticks, 2,048 updates and 3,591,672 total team ticks across the different declared hosts.
+
+| Arm | Exact expected task units | Fresh 4,096-cycle mean | q=0 exact control |
+| --- | ---: | ---: | ---: |
+| LEARNED | 5.322222222 | 5.313964844 | 6.0 |
+| VOI (primary) | 5.322222222 | 5.313964844 | 6.0 |
+| PRE_FIRST / first-slot polling | 4.0 | 3.957031250 | 6.0 |
+| PRE_LAST | 5.0 | 5.001220703 | 5.0 |
+| AGE_CHANGE | 5.0 | 4.990234375 | 6.0 |
+| INVERSE_CHANGE | 4.0 | 3.968017578 | 5.0 |
+
+The claimed intermediate reversal occurs. At X=1,q=.5, learned early probabilities for
+w=1/2/3 are .268483/.459387/.664715: greedy late/late/early, agreeing with the exact
+negative/tied/positive value differences. The initial greedy policy was early everywhere
+(exact value 4.0). Final greedy choices match VOI on all eighteen contexts, including the
+tie; strict errors and the independently reconstructed **exact native regret are both zero**.
+Across final exact, random and q=0 panels, every saved native trace field matches VOI,
+not only the mean return (the neural probabilities differ from a deterministic rule).
+This is finite-support executed-greedy equality for this one training history, not equality
+of neural functions, stochastic training policies or out-of-support policies.
+
+The native prediction also holds: the exhaustive restricted family's expected maximum is
+5.0 and VOI/LEARNED are higher by .322222222. The fresh panel difference from its best
+restricted rule is .312744141, or 1,281 weighted task units. That final-panel maximum is
+descriptive, not a development-selected baseline; the primary VOI was fixed beforehand.
+At q=0 the expected gap vanishes exactly, as predicted. The learned control-panel match is
+an observation at the specified out-of-training-support q=0, not broad distribution-shift
+evidence. Adding the receiver context has not been shown to be net worthwhile relative to
+spending its seven bytes on something else; its independent value in the fixed comparison
+is only 1/18 task unit, and all compared arms already pay those bytes.
+
+**Judgment changed:** a legal, task-relevant refresh-value condition beyond a restricted
+stage/age/change mapping now has an explicit constructive answer, and one actual fit learns
+it. C01–C04's failure to beat ACTIVE_FIRST therefore does not justify an absence judgment
+for the direction. **Judgment not changed:** learning has no incremental value over the
+strong transparent comparator here; the exact VOI rule is the preferred implementation.
+The calibrated q, predetermined two-decision law and fixed non-inferential receiver make
+this a small information-decision bridge, not general MARL, learned-skill, UAV or CADC evidence.
+The old CADC adverse result and C03's failed freshness repair remain unchanged.
+
+The prespecified C05 bridge is complete and read; no extra seed, longer fit, architecture,
+rule sweep or confirmation follows from zero regret. C remains exploring at the positive
+existence boundary, with the owner's now-requested C-specific Pro consultation as the next
+action. The live question is a target-relevant lawful mapping that would make estimation/
+learning useful beyond a matched value rule, not whether an extra rule can be found to win
+this solved toy. I do not mark the entire direction absent or paused from this result.
+
+## Pro question 2026-09-20 C05 receiver-value bridge — Pro consultation input
+
+Conversation: new / actual conversation and dispatch are coordinated by Root. This is C's
+independently authored input only, not an A/B synthesis or a request for an independent Send.
+The owner explicitly requested this consultation section after reopening C's admission
+question. Root will supply the full question `source_sha` after publication. C DM owns the
+whole notebook until an explicit answer-only loan is dispatched; no adviser currently owns
+or may edit this file merely because the empty answer slot below exists.
+
+Question: **Does C05 establish a useful admission condition for continuing information-refresh
+research, and what single smallest target-grounded observation/comparison would justify a
+learning test beyond a strong same-information value rule—or justify suspending the learned
+line without claiming that refresh value is absent?** This is a source/target bridge and
+scientific choice, not a request to approve C05, invent a menu of schedulers or recommend
+more seeds because the toy is positive.
+
+Standing: C05 constructs the condition that legally available task context reverses timing
+value at matched stage/age/cache-change/clock/quota. A receiver with fixed two commitments
+and cache-feedback branches at ticks 2/4 privately sees job weight w=1/2/3 and sends its
+fixed seven-byte context at tick0, arriving at tick1. The sender locally sees fair bit X
+and calibrated flip probability q=.1/.5/.9, never the future flip. Its one fixed four-byte
+snapshot must be sent at1 or3 and arrives one tick later; every arm pays two packets/eleven
+bytes. The receiver does not learn, change termination or decode silence. Native rewards
+are weighted correct branches w and4. `Delta=wX−4q` flips sign with paid w or local q;
+transparent VOI sends iff Delta>0 and explicitly includes the saved-token opportunity cost.
+This same-information rule is the strongest primary, not a myopic freshness or polling null.
+All four deterministic change-only mappings are reported, including refresh before the
+first decision and before the later commitment decision. Their exact best is 5; VOI is
+5.322222222. One declared 16,384-cycle PPO fit matches VOI on every one of eighteen contexts
+and every native trace in the final random/exact panels: exact regret 0, no incremental
+learning value. The q=0 falsifier removes the restricted-rule gap. The whole .322222 gap
+must not be credited to recipient context: paid w independently adds only 1/18 over using
+the known average w. We have not tested whether that context packet is worth buying.
+
+Strongest alternatives/contrary evidence: (1) C05 may be a valid but too specially solved
+fixed-decoder example: perfectly calibrated q and a known law eliminate the need for a
+learned scheduler. (2) C04's own-stage ACTIVE_FIRST beats three frozen policies by12/1/1 jobs;
+learning's earlier tiny advantage over age/poll rules disappeared with a stronger simple
+reference. C03 reduced stale-release waits but lost native completions, so freshness is not
+itself the objective. (3) archived CADC's one learned/RR pair was adverse, net service
+-.013354921301 and physical-.012099183996, with16,744 versus0 collided attempts; this is not
+a causal collision diagnosis and this collision-free fixed host does not redeem it.
+(4) If a proposed target needs current receiver intent/uncertainty without a timestamped
+packet, or learns a priority/backoff/request channel without charging it, it changes the
+information problem. Timing itself can signal X; C05 holds the receiver's no-silence decoder
+fixed and records the binary timing opportunity, not a proof for jointly optimized signaling.
+
+Context (repository-relative paths resolve at the full `source_sha` Root supplies, except
+the explicitly frozen C05 execution source and external primary URLs):
+
+- Governance: `docs/project/OPERATING_CONSTITUTION.md` sections1–8, especially3 (fits are cost,
+  no allowance),4 (existing records),5 (Pro advisory),8 (matched information and baselines).
+  `docs/research/RESEARCH.md`: owner pause and only the skill_information_refresh row; current
+  owner instruction is the re-entry/consultation described here, not a portfolio review.
+- Methods: `.agents/skills/hmasd-scientific-tools/SKILL.md`, "Update the working explanation",
+  "Simple-model and literature bridges", "Comparators and MARL information", "Statistics"
+  and "Cost and exposure". Its stale allowance wording is superseded by constitution section3.
+  Engineering "Checks and review" / "Execution and admission" only if feasibility is contested.
+- Current question/interpretation: this notebook's "Owner re-entry" and "C05 read" sections;
+  the immediately preceding exact protocol is frozen at execution source
+  `d8680026026b06f0861601839444392c452e8c20` and must not be retrospectively changed.
+- Actual C05 evidence: `runs/skill_information_refresh/c05_value_s73160_20260920/summary.json`,
+  `episodes.jsonl`, `updates.jsonl`, `final_exact_LEARNED.npz`, `final_exact_VOI.npz` and
+  `zero_risk_exact_AGE_CHANGE.npz`; causal implementation in
+  `experiments/candidates/skill_information_refresh/c05/host.py` and `study.py`.
+  Binary traces may be unavailable to Pro; state that gap rather than claim to have read them.
+  Summary contains all eighteen conditional actions/probabilities and exact expected values.
+- Contrary evidence: this notebook's C03/C04 reads and
+  `runs/skill_information_refresh/c04_stage_s73151_20260920/summary.json`; archived
+  `docs/research/candidates/contention_aware_decentralized_communication/CADC_B01_RESULT.md`
+  (its source `22e009c9387f2507aab6ebab4555d92e27f5070e` remains the historical contract).
+- Primary bridges: SchedNet <https://arxiv.org/html/1902.01554v1>, sections3.1–3.3/4/appendixD,
+  and Soleymani et al. <https://people.kth.se/~kallej/papers/Value_TAC2023_Soleymani.pdf>,
+  sectionsII–III/equations10–12. Use their actual information/controller assumptions, not
+  a remembered slogan or a claim that either establishes this fixed-skill learning advantage.
+
+Cost, not allowance: four cumulative exploratory training fits in C, one being C05; C05
+alone cost 255,480 team ticks (42,580 six-tick cycles) and 512 optimizer updates. There is no
+numerical fit allowance or extra approval gate. No successor fit is prospectively selected
+yet. The adviser cannot grant a budget, launch runs or resume a pause. Any chosen next batch
+will declare arms, seeds, horizon, fit/non-fit cost and intermediate/native predictions;
+a confirmation claim, if ever justified, needs 3–5 fresh independent training seeds/arm.
+
+Return: give a focused judgment and strongest objection, preserving separate claims about
+opportunity, representation, one-history learnability and package value. If continuation is
+worthwhile, identify **one** concrete lawful receiver-commitment/action-opportunity/uncertainty
+mapping; explain how the sender obtains it with delay and full bit/packet cost; name the
+strongest transparent same-information comparator (including calibrated/plug-in VoI if
+appropriate), what remains unknown to both, and a discriminating intermediate/native
+prediction with fit and dominant non-fit work. Do not create a richer learned arm by giving
+it feedback, request bits, simulator queries, calibration data or model knowledge denied to
+the comparator. A specific observation showing this mapping exists and changes the relative
+timing value would justify a new prospective comparison. An argument that all proposed
+benefit is from an unpaid context channel, a changed receiver, or an already solved rule
+would instead justify suspending this learned line while retaining C05's bounded existence
+result. "Try a bigger network" or "the toy passed, so test UAVs" would not change the next
+action. It is legitimate to recommend no useful next learning experiment; do not infer a
+general absence theorem or require an endless baseline/rule search. State consequential
+source-use gaps and `MATERIAL_DISSENT: yes/no`.
+
+Constraints for any later answer-only dispatch: no training and no edits outside this
+question's empty `### Answer` subsection on branch `codex/skill-information-refresh`, target
+`docs/research/candidates/skill_information_refresh/NOTES.md`. Read reasoning inputs at the
+pinned question/source SHA, fetch the latest target blob before writing, preserve every
+other byte, and stop on overlap. Report the actual answer commit; on write failure return
+the complete answer in chat, not only a SHA/status/link. Root coordinates the actual Send;
+C DM will verify the complete answer and append its own adoption/rejection judgment.
+
+### Answer

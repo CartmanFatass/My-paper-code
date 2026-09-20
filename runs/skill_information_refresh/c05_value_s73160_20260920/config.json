@@ -1,0 +1,7 @@
+{
+  "seed": 73160,
+  "train_cycles": 16384,
+  "batch": 128,
+  "epochs": 4,
+  "final_cycles": 4096
+}
