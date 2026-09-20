@@ -367,3 +367,111 @@ adds use value beyond learning only an overall renewal rate under the same R tim
 It is not selected or funded by this result entry; any such new learning comparison
 needs its own specific scientific reason and prospective exposure. Existing outputs
 already suffice for the present mixed reading; another diagnostic is not owed.
+
+## 2026-09-19 — selected B03: state-conditioned versus learned scalar renewal
+
+### Scientific reason and development exposure
+
+Select a new, finite direct learning comparison: can a learned scalar renewal rate
+replace R's state-conditioned gate without giving up a useful native-return margin?
+B02's two positive R−G observations make retaining some renewal package a live choice,
+while its fixed half/half F does not answer whether an equally timed, learned global
+rate is an adequate simpler alternative. This is a result-inspired simplification
+and attribution follow-up, not an unexposed discovery or continuation of B02. The
+old B02 favorable-development pattern remains unmet. The different observed KEEP
+rates motivate a competing explanation but do not supply causal evidence for it.
+
+The bounded Critic supports the limited decision value: the new comparison can change
+which actual learning package is retained, provided the DM will simplify or stop
+when R does not earn its complexity. It is not merely buying more R/F/G seeds. The
+DM accepts the strongest qualification: changing the gate also changes parameter
+count and its gradient into the actor backbone, so the result is a package comparison,
+not isolated causality of current feedback. No additional diagnostic/control matrix
+is selected. This entry explicitly costs **six new fits**, bringing the reactive
+R/F/G and R/B development sequence to **fifteen related fits** including 8901 and B02;
+older T/L development remains additional. No prior fit is refunded or erased.
+
+### Fixed arms, exposure and reading
+
+Use three unscreened fresh masters **8921, 8922, 8923**. Each invocation trains R then
+B, each for **2048 complete 256-tick episodes / 1024 two-episode rollouts / 4096 Adam
+calls**, and evaluates its sole final checkpoint on 64 sampled worlds. H evaluates
+the same worlds with no fit. Both arms use the unchanged reactive forced-fresh,
+eligible, KEEP/END law: KEEP copies the actual previous command, END draws a fresh
+velocity, a held command lasts at most two ticks, and recurrence updates every tick.
+
+- **R:** the existing learned `67→32→2` gate over recurrent features and the actual
+  previous command, initialized half/half, with its existing actor-gradient path.
+- **B:** two learned global logits, initially zero/half-half, shared across the five
+  UAVs, worlds and eligible times within this one fit. Its KEEP/END probabilities
+  never read observation, recurrent state, previous command or clock. It receives
+  exactly the same eligible-row PPO gate credit, including final-tick current reward,
+  and the same Adam/update law. Its velocity actor and centralized critic still
+  receive all original lawful information and the same phase fields. Removing the
+  gate-input gradient and 2240 gate parameters is part of this declared package.
+
+Keep the actual UAV configuration/native J, CPU FP32, one Torch/BLAS thread, gamma-one
+Monte Carlo return, raw value targets, entropy zero, clip .2, value coefficient .5,
+gradient clip .5, Adam 3e-4 and four epochs unchanged. Reuse the reactive collector
+and update for BOTH learned arms. No earlier source or frozen runner is edited.
+Common velocity-actor and critic initialization is identical within each master;
+optimizers and RNG streams are arm-owned. With base=master*100000, common initialization
+is base+11, R gate initialization base+12, training worlds base+10000+episode, and
+evaluation worlds base+20000+episode. R uses velocity/gate streams base+41/+42 in
+training and base+70000+episode/+80000+episode in evaluation. B uses base+51/+52 and
+base+90000+episode/+95000+episode. B's logits use deterministic zeros. Final evaluation
+uses separate generators and zero updates, preserving training generators and weights.
+No B probability is fitted to B02 evaluation data or supplied from its observed rates.
+
+The primary is **R−B**, with all three within-master differences, their descriptive
+mean/range, full world vectors, and R−H/B−H retained. Independent learning variation
+is at the three training-block level. Conditional world-panel SEs are not uncertainty
+over training instances. This is exploratory selection, with no significance/equivalence
+label, new confirmation or automatic fourth seed. G/F are not rerun: this object
+cannot establish that either selected package beats a fresh ordinary controller.
+
+Prospective investment reading: useful positive R−B margins across all three blocks
+would strengthen retaining the state-conditioned package for a later use comparison.
+If B is competitive and R does not show a consistent useful margin, prefer the simpler
+B package as the development candidate, without asserting equivalence. Mixed, small
+or broadly poor results may leave neither selected for further fits. The existing
+0.01 J scale is practical context, not a retrospective statistical verdict. Preserve
+all block outcomes and hover deficits; no performance-based early stop, earlier
+checkpoint selection, rate tuning, replacement, or automatic extension is allowed.
+
+Whole B03 exposure: **6 fits / 12288 training episodes / 3145728 training team steps /
+24576 Adam calls**, plus **576 evaluation episodes / 147456 evaluation team steps**
+including three H panels. Total native team steps are **3293184**. Use `local_linux`
+in up to three independently admitted instance-owned invocations, R/B sequential
+within each. Fresh actual-node memory admission precedes each original launch. The
+ordinary 6000-second invocation watchdog preserves incomplete attempts; B02's measured
+timing is context, not a promised B03 rate. Each failed started arm consumes its fit.
+
+### L0: bounded implementation and checks
+
+Owned new source: `experiments/candidates/ucope/reactive_rate_b03/`,
+`scripts/run_ucope_reactive_rate_b03.py`, and mirrored focused tests. The Implementer
+owns those paths only; the DM owns this notebook, RESEARCH and acceptance. Add the
+two-logit input-independent gate and a small R/B/H study binding. Reuse existing
+environment, policy templates, reactive collector/update, native hover collection,
+counter/publication helpers where correct; adapt exposure grouping locally because
+the old helper assumes R's three-layer gate when `duration_conditioned` is true.
+Preserve half/half initialization and exactly identical common parameters; do not
+misreport dormant extra layers as scalar gate parameters. No global monkey-patching.
+
+The runner fixes the three masters and exposure, requires admission before scientific
+imports/effects, checks the admitted SHA, exposes no fixture/bypass CLI, and publishes
+per-arm activity/fit accounting, movement, gate probabilities, final vectors, checkpoint
+identity and scoped wall/CPU/RSS. Keep exact original admission/operation/exit artifacts
+and preserve incomplete work without complete contrasts. The scientific tests use
+synthetic environments in pytest-managed scratch: prove B's probability ignores input,
+its eligible gate gets nonzero gradient while no gate gradient reaches the backbone,
+KEEP/END replay and terminal credit remain valid, matched common initialization,
+fixed scope/admission ordering, complete/incomplete counts and train/eval isolation.
+Add an off-path synthetic R comparison to the existing implementation where useful;
+do not run native UAV smoke fits. An independent Reviewer checks the new scientific
+and execution boundary before DM acceptance/publication and original admission.
+
+At selection there are **zero B03 fits started**. The original B02 remains complete
+and unchanged. Claude retains FSD ownership and its running operations; this work
+uses only the Codex author worktree/index and its own outputs.
