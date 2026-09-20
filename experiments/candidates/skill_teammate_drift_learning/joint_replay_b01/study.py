@@ -45,6 +45,7 @@ class Config:
     primary_evaluation_episodes: tuple[int, ...] = (
         70, 80, 90, 130, 140, 150, 190, 200, 210, 250, 260, 270,
     )
+    initialization: str = "zero"
 
     @property
     def total_episodes(self) -> int:
@@ -85,6 +86,8 @@ def validate_config(config: Config) -> None:
         raise ValueError("gamma and alpha must be positive, with gamma at most one")
     if config.alpha * config.batch_size > 0.8 + 1e-15:
         raise ValueError("alpha * batch_size must preserve the B01 0.8 step bound")
+    if config.initialization not in ("zero", "reward_upper"):
+        raise ValueError("initialization must be 'zero' or 'reward_upper'")
     if any(
         episode <= 0
         or episode > config.total_episodes
@@ -528,6 +531,80 @@ def _selected_q(q_values: np.ndarray, arm: str, current_version: int) -> np.ndar
     return q_values[current_version] if arm == "fingerprint" else q_values
 
 
+def initialize_q_values(config: Config, arm: str) -> np.ndarray:
+    """Construct the one-time Q initialization without consulting the host model."""
+    validate_config(config)
+    if arm not in ARMS:
+        raise ValueError(f"arm must be one of {ARMS}")
+    q_shape = (config.macros_per_episode + 1, 5, 5, 2)
+    base = np.zeros(q_shape, dtype=np.float64)
+    if config.initialization == "reward_upper":
+        for remaining in range(1, config.macros_per_episode + 1):
+            primitive_horizon = config.macro_duration * remaining
+            upper = sum(config.gamma ** tick for tick in range(primitive_horizon))
+            base[remaining].fill(upper)
+    if arm == "fingerprint":
+        return np.stack(
+            [base.copy() for _version in config.version_names], axis=0
+        )
+    return base
+
+
+def collection_diagnostics(
+    q_values: np.ndarray,
+    initial_q_values: np.ndarray,
+    *,
+    arm: str,
+    current_version: int,
+    transitions: Mapping[str, np.ndarray],
+    stop: int,
+) -> dict[str, float | int | None]:
+    """Audit current-version collection and table coverage through ``stop`` macros."""
+    if stop < 0 or stop > len(transitions["collection_version"]):
+        raise ValueError("collection diagnostic stop is outside transition storage")
+    versions = transitions["collection_version"][:stop]
+    selected_indices = np.flatnonzero(versions == current_version)
+    current_q = _selected_q(q_values, arm, current_version)
+    initial_q = _selected_q(initial_q_values, arm, current_version)
+    greedy = np.argmax(current_q[1:], axis=-1)
+    changed = np.count_nonzero(current_q[1:] != initial_q[1:])
+    if selected_indices.size == 0:
+        return {
+            "current_version_sample_count": 0,
+            "collected_right_fraction": None,
+            "distinct_state_action_entries": 0,
+            "both_actions_state_time_cells": 0,
+            "greedy_right_fraction_nonterminal_cells": float(
+                np.mean(greedy == RIGHT)
+            ),
+            "changed_current_table_nonterminal_q_entries": int(changed),
+        }
+
+    # Cast before arithmetic so identifiers remain safe if a fixture widens time.
+    remaining = transitions["remaining"][selected_indices].astype(np.int64)
+    positions = transitions["start_positions"][selected_indices].astype(np.int64)
+    actions = transitions["ego_goal"][selected_indices].astype(np.int64)
+    state_time_ids = (
+        (remaining * np.int64(N_POSITIONS) + positions[:, 0])
+        * np.int64(N_POSITIONS)
+        + positions[:, 1]
+    )
+    state_action_ids = state_time_ids * np.int64(2) + actions
+    left_cells = np.unique(state_time_ids[actions == LEFT])
+    right_cells = np.unique(state_time_ids[actions == RIGHT])
+    both_actions = np.intersect1d(left_cells, right_cells, assume_unique=True)
+    return {
+        "current_version_sample_count": int(selected_indices.size),
+        "collected_right_fraction": float(np.mean(actions == RIGHT)),
+        "distinct_state_action_entries": int(np.unique(state_action_ids).size),
+        "both_actions_state_time_cells": int(both_actions.size),
+        "greedy_right_fraction_nonterminal_cells": float(
+            np.mean(greedy == RIGHT)
+        ),
+        "changed_current_table_nonterminal_q_entries": int(changed),
+    }
+
+
 def _weight_diagnostics(
     transitions: Mapping[str, np.ndarray], start: int, stop: int, current_version: int,
     recent_capacity: int,
@@ -574,9 +651,9 @@ def _weight_diagnostics(
 
 
 def _record_panel(
-    curves: dict[str, list[Any]], q_values: np.ndarray, arm: str, config: Config,
-    episode: int, current_version: int, transitions: Mapping[str, np.ndarray],
-    weight_start: int,
+    curves: dict[str, list[Any]], q_values: np.ndarray,
+    initial_q_values: np.ndarray, arm: str, config: Config, episode: int,
+    current_version: int, transitions: Mapping[str, np.ndarray], weight_start: int,
 ) -> None:
     selected = _selected_q(q_values, arm, current_version)
     evaluation = exact_policy_evaluation(selected, config, current_version)
@@ -601,8 +678,24 @@ def _record_panel(
         ]
     )
     curves["policy"].append(evaluation["policy"])
-    curves["q_l2_movement"].append(float(np.linalg.norm(q_values)))
+    curves["q_l2_movement"].append(
+        float(np.linalg.norm(q_values - initial_q_values))
+    )
+    curves["q_changed_entries"].append(
+        int(np.count_nonzero(q_values != initial_q_values))
+    )
+    curves["q_initial_l2_norm"].append(float(np.linalg.norm(initial_q_values)))
     curves["weight_diagnostics"].append(diagnostics)
+    curves["collection_diagnostics"].append(
+        collection_diagnostics(
+            q_values,
+            initial_q_values,
+            arm=arm,
+            current_version=current_version,
+            transitions=transitions,
+            stop=weight_stop,
+        )
+    )
 
 
 def _json_config(config: Config) -> dict[str, Any]:
@@ -610,21 +703,20 @@ def _json_config(config: Config) -> dict[str, Any]:
     return {key: list(item) if isinstance(item, tuple) else item for key, item in value.items()}
 
 
-def run_fit(config: Config, *, arm: str, seed: int) -> dict[str, Any]:
+def run_fit(
+    config: Config, *, arm: str, seed: int, object_name: str = OBJECT
+) -> dict[str, Any]:
     """Run one deterministic-addressed B01 fit without any file or launch effects."""
     validate_config(config)
     if arm not in ARMS:
         raise ValueError(f"arm must be one of {ARMS}")
     if not isinstance(seed, (int, np.integer)):
         raise TypeError("seed must be an integer")
+    if not isinstance(object_name, str) or not object_name:
+        raise ValueError("object_name must be a nonempty string")
 
-    versions = len(config.version_names)
-    q_shape = (config.macros_per_episode + 1, 5, 5, 2)
-    q_values = (
-        np.zeros((versions, *q_shape), dtype=np.float64)
-        if arm == "fingerprint"
-        else np.zeros(q_shape, dtype=np.float64)
-    )
+    q_values = initialize_q_values(config, arm)
+    initial_q_values = q_values.copy()
     transitions = _transition_storage(config)
     slots = common_random_slots(config, int(seed))
     transitions["episode_reset_positions"][:] = slots["reset_positions"]
@@ -641,12 +733,16 @@ def run_fit(config: Config, *, arm: str, seed: int) -> dict[str, Any]:
         "optimal_normalized_service_return": [],
         "policy": [],
         "q_l2_movement": [],
+        "q_changed_entries": [],
+        "q_initial_l2_norm": [],
         "weight_diagnostics": [],
+        "collection_diagnostics": [],
     }
 
     initial_version = version_index(config, 0)
     _record_panel(
-        curves, q_values, arm, config, 0, initial_version, transitions, 0
+        curves, q_values, initial_q_values, arm, config, 0, initial_version,
+        transitions, 0
     )
     last_panel_macro = 0
     for episode in range(config.total_episodes):
@@ -852,6 +948,7 @@ def run_fit(config: Config, *, arm: str, seed: int) -> dict[str, Any]:
             _record_panel(
                 curves,
                 q_values,
+                initial_q_values,
                 arm,
                 config,
                 completed_episodes,
@@ -866,6 +963,7 @@ def run_fit(config: Config, *, arm: str, seed: int) -> dict[str, Any]:
         _record_panel(
             curves,
             q_values,
+            initial_q_values,
             arm,
             config,
             config.total_episodes,
@@ -886,11 +984,15 @@ def run_fit(config: Config, *, arm: str, seed: int) -> dict[str, Any]:
         [panel_by_episode[episode] for episode in config.primary_evaluation_episodes]
         if primary_complete else []
     )
+    q_change = q_values - initial_q_values
     movement = {
-        "initial_q_l2": 0.0,
-        "final_q_l1_movement": float(np.abs(q_values).sum()),
-        "final_q_l2_movement": float(np.linalg.norm(q_values)),
-        "final_q_linf_movement": float(np.abs(q_values).max()),
+        "initial_q_l2": float(np.linalg.norm(initial_q_values)),
+        "initial_q_l2_norm": float(np.linalg.norm(initial_q_values)),
+        "initial_q_nonzero_entries": int(np.count_nonzero(initial_q_values)),
+        "final_q_l1_movement": float(np.abs(q_change).sum()),
+        "final_q_l2_movement": float(np.linalg.norm(q_change)),
+        "final_q_linf_movement": float(np.abs(q_change).max()),
+        "final_changed_q_entries": int(np.count_nonzero(q_change)),
         "final_q_nonzero_entries": int(np.count_nonzero(q_values)),
         "q_entries": int(q_values.size),
         "terminal_q_linf": float(
@@ -899,7 +1001,7 @@ def run_fit(config: Config, *, arm: str, seed: int) -> dict[str, Any]:
         ),
     }
     summary = {
-        "object": OBJECT,
+        "object": object_name,
         "status": "COMPLETE",
         "arm": arm,
         "seed": int(seed),
@@ -934,6 +1036,7 @@ def run_fit(config: Config, *, arm: str, seed: int) -> dict[str, Any]:
             }
             for index, name in enumerate(config.version_names)
         },
+        "final_collection_diagnostics": curves["collection_diagnostics"][-1],
         "final_normalized_service_return": curves["normalized_service_return"][-1],
     }
     if any(value.dtype == object for value in transitions.values()):
