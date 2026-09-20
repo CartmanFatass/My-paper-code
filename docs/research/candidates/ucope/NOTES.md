@@ -884,3 +884,30 @@ and phase, evaluation isolation, checkpoint/hash identity, partial results and a
 ordering. It reused the focused check evidence. Actual native admission and forced-process
 termination were not tested synthetically; those are limits of this engineering evidence.
 The DM accepts the reviewed scope for exact-source publication and guarded native launch.
+
+### Three original B04 invocations admitted and Monitor adopted
+
+All three original B04 invocations were accepted on `local_linux` at published source
+**`cab5b6ca26a4af101f72db0e89cb641bb0b63ad8`**, in separate immutable snapshots with
+outputs in this author worktree. Native control observation agreed with published main
+`fedb396e0d6995c207e0625bbb99fccb58b2ee26` on active UCOPE, lifted owner pause and the
+`Codex DM` lead. The current main's older narrative is not rewritten from this worktree.
+
+- [8931 manifest](../../../../runs/ucope/scalar_feedback_b04_8931/launch-manifest.json),
+  accepted 2026-09-20 04:17:14.437564 UTC.
+- [8932 manifest](../../../../runs/ucope/scalar_feedback_b04_8932/launch-manifest.json),
+  accepted 2026-09-20 04:18:16.918746 UTC.
+- [8933 manifest](../../../../runs/ucope/scalar_feedback_b04_8933/launch-manifest.json),
+  accepted 2026-09-20 04:19:20.497875 UTC.
+
+Fresh actual-node memory checks passed the 4 GiB floor before each release, with
+12234178560 / 11533803520 / 11651088384 effective available bytes. These are admission
+observations, not resource peaks. Each invocation trains B then G: three accepted
+invocations allocate six fits and do not mean all six fits have already started.
+
+The existing `/root/ucope_b02_monitor` explicitly acknowledged all three exact operation
+references and retains read-only observation until their terminal witnesses. It reports
+actual arm transitions, exceptions and completion, without scores or routine episode
+increments. The DM will collect and jointly read all three completed panels. No B04
+scientific score has been read. The bounded continuation has six fits allocated to B04,
+no second batch selected and no Jev Pro question sent in this window.
