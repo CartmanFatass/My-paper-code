@@ -2317,7 +2317,7 @@ the other two `D_K10` fits follow as slots free (at most four concurrent).
 | `b07_k1_773003_a01` | D_K1 | 773003 | `d58454c1d727566e88bc8dd3c71d03c58b0c049b8c2e15d593045c6dbb3c6a4b.json` |
 | `b07_k10_772803_a01` | D_K10 | 772803 | `cd23a74bcbb2974c3ba7a48652971a6e87d7668fdacce02109d4ca27c7fc1681.json` |
 
-## 2026-09-20 01:15 PDT — persistence B07: two `D_K1` fits killed by the node's out-of-memory killer at their first coordinator update; plan for the remaining two fits (no score seen)
+## 2026-09-20 01:10 PDT — persistence B07: two `D_K1` fits killed by the node's out-of-memory killer at their first coordinator update; plan for the remaining two fits (no score seen)
 
 **Execution facts.** About one minute after admission, `b07_k1_772803_a01` and then
 `b07_k1_772903_a01` exited with code −9 at boundary "rollout 0 collected"; the node's kernel
