@@ -18,6 +18,11 @@ adoption by live sessions; research remains paused until explicitly resumed.
 engineering judgment, permit useful reuse and dependency reading, and use author self-checks
 for non-code control documentation rather than automatic repeated Reviewer passes.
 
+2026-09-20 (owner, in the Claude session on the WSL host: "这个额度制似乎不是一个很好的设计 我们取消掉"): the fit allowance of section 3 is removed; fits remain the unit in which cost is recorded, and the
+rules that protect a reading (declare before running, no extension after scores, fixed confirmation
+batch) stay. Where a skill, role body or notebook still speaks of an allowance or a consumed budget,
+this page prevails; publication alone does not establish adoption by another live session.
+
 2026-09-19 owner-requested PR revision: cumulative research understanding, simple-model
 reasoning and advisory roles. These changes take effect on owner merge/adoption; publication
 alone does not establish live-session adoption. No direction, pause, fit allowance, frozen
@@ -92,28 +97,29 @@ commits and returns facts. The direction lead owns NOTES.md, handing only the ta
 subsection to Pro and reconciling uncertain writes before taking it back. Leaves return facts;
 an assignment does not implicitly grant shared-file or another checkout's index ownership.
 
-## 3. Budget is counted in fits
+## 3. Cost is recorded in fits, not rationed
 
 One fit is one started training attempt for one arm and seed at a declared training horizon
-on the declared node. State the horizon, arms and total fits before running; different
+on the declared node. State the horizon, arms, seeds and planned fits before running; different
 horizons are not interchangeable compute. Record actual wall time rather than assume a universal fit rate.
 
-| Stage | Default allowance | Records |
-| --- | --- | --- |
-| Explore one idea | Up to 6 total fits, usually 3–6; include all arms and tuning; stop earlier when informative | notebook + run artifacts |
-| Confirm one claim | 3–5 fresh independent training seeds per arm, normally candidate + one primary baseline; one fixed batch | notebook + run artifacts + claim note |
+**No fit allowance** (owner, 2026-09-20): no per-idea cap, no weekly cap or entitlement, no
+budget to consume, refund or reset. The lead decides how many fits an idea deserves, says so
+with the reason in the prospective note, and reports cost as started fits, wall time and node.
 
-**No fixed weekly cap or weekly entitlement.** Work on one idea at a time per direction.
-A prospective new idea within an owner-chosen active direction may use this default allowance
-without another owner decision; completion alone never extends the same batch or replenishes
-its fits. Root may assign reasoning-only preparation to an existing chosen reserve, then
-activate it under the existing reserve authority if a worthwhile idea is recorded. This
-preparation adds no empirical grant and does not lift a pause.
-Additional attribution controls must be justified and costed in the same prospective note.
-Do not extend a batch after seeing its scores or rename the same failed idea to reset its allowance.
-Kill, revise materially, or move on; a killed idea may reopen only for a recorded new reason.
-A failed training attempt consumes a fit but is not a scientific negative. A pre-training
-launch failure consumes no fit; retain its error and wall time. Fix before retrying; no hidden refunds.
+What remains protects the reading, not a ration. Work on one idea at a time per direction.
+Do not extend a batch after seeing its scores: a further batch is a new prospective entry with
+its own stated reason, and the same failed idea is not renamed to try again. Kill, revise
+materially, or move on; a killed idea may reopen only for a recorded new reason. Additional
+attribution controls are justified and costed in the same prospective note. A failed training
+attempt is counted and reported as a technical failure, not a scientific negative; rerunning
+its cell is a recorded decision of the lead, never automatic. A pre-training launch failure is
+recorded with its error and wall time. Confirming one claim still takes 3–5 fresh independent
+training seeds per arm, normally candidate plus one primary baseline, in one fixed batch with a
+claim note (section 8). Root may assign reasoning-only preparation to an existing chosen
+reserve, then activate it under the existing reserve authority if a worthwhile idea is
+recorded; preparation does not lift a pause. The owner pause, node admission and actual
+resource-safety checks are unchanged.
 
 ## 4. Three record types, and one repository table
 
