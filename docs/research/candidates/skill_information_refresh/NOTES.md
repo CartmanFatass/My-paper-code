@@ -1151,3 +1151,102 @@ the complete answer in chat, not only a SHA/status/link. Root coordinates the ac
 C DM will verify the complete answer and append its own adoption/rejection judgment.
 
 ### Answer
+
+## 2026-09-20 — Post-C05 narrowing: prefer transparent value prediction; no successor fit
+
+Root explicitly asked C to continue its own judgment while the owner-requested Pro
+consultation proceeds, without editing A's answer. I rechecked the clean C checkout at
+`4ef39c08ae55c6dd623718b4072a7ddcc9b9e913`, current canonical pause lifted/Codex DM assignment,
+and the constitution and scientific/engineering methods. The no-allowance cost regime is
+still adopted. This entry is only in C's owned notebook; it neither changes the pinned Pro
+input nor writes in its empty answer subsection. Pro is not permission for the next action.
+
+The current explanation is stronger and narrower than the earlier C04 idle judgment:
+lawful task-sensitive timing value demonstrably exists, and one trained history realizes
+it, but the complete C05 policy is a transparent value rule. The next useful question must
+change that decision/use, not merely make the toy larger. I examined two concrete proposed
+extensions before selecting any implementation or experiment.
+
+**Unknown q alone is not a new scheduling-learning question.** Let H be the same lawful,
+passively observed sender history available to both arms. Under the unchanged fixed
+two-action receiver and exogenous transition law,
+`E[Delta | H,X,w] = wX - 4 * Pr(next flip | H,X,w)`.
+Thus a model-consistent posterior-predictive probability plugged into the same transparent
+threshold is sufficient for this decision. For a persistent Bernoulli risk with n locally
+observed flips and k successes, for example, a declared discrete prior has
+`Pr(q | H) proportional to Pr(q) q^k (1-q)^(n-k)`; use its predictive mean, with identical
+history/model/prior rights for a learned arm. A frequency or calibrated predictor is a
+necessary practical comparator when the prior/model is estimated, not an extra privilege
+reserved for the rule. This is a conditional derivation, not a new training result or a
+claim that known-model Bayes performance describes every empirical estimator.
+
+There is a sharper point for the *actual C05* law: q is independently redrawn each cycle.
+If its local calibration observation is simply hidden, earlier cycles do not identify the
+current draw; under the known uniform prior the predictive flip probability remains .5.
+The optimal same-information rule becomes early only when X=1,w=3 (ties late), with
+analytical expected value `31/6 = 5.166666...`, not the full-information `479/90`.
+Giving a new neural arm the true current q while this comparator only gets history would
+manufacture an information advantage. Making q persist, making observations depend on the
+schedule, or adding informative local covariates could be legitimate new hypotheses, but
+they change the scientific condition and need an actual target reason. Neither "unknown q"
+nor a larger recurrent network by itself supplies one here. The single predictive probability
+is sufficient for this law; I do **not** claim that a scalar is sufficient for an arbitrary
+feedback problem or that a full Bayesian posterior is generally inadequate.
+
+**The paid-context construction is not a demonstrated best communication allocation.**
+If the per-sender R1/S1 quota is relaxed while retaining the two available S slots and a
+total two-packet/eleven-byte ceiling, omit the seven-byte R context and send two four-byte
+S snapshots at ticks1 and3. They arrive before both fixed receiver decisions, so each branch
+is correct and expected native value is `E[w]+4 = 6` using only eight bytes. This exceeds
+C05's 5.322222... without learning. It is a useful resource-design dominance example, not
+a legal new primary under C05: it changes sender quota/allocation and the information
+received, whereas C05 explicitly fixes one mandatory R packet and one S token. It therefore
+limits the claim that buying C05 context is a useful overall communication design; it does
+not invalidate the legal timing-value reversal within that bound contract. No new arm was
+silently added to C05 and no run was relabelled. The already-read independent w value of
+only1/18 task unit remains a warning against crediting the entire .322222 gap to context.
+
+The nearest coupled-host mapping is also not automatic. In C01's actual `Worlds.make`,
+local progress probability is the constant .75; `LocalView` contains own/last-sent state,
+the delivered projected peer cache and public12/16 commitment clocks. Native jobs have
+equal weight. It has no C05-style variable calibrated q or recipient-private w. Packets do
+affect the fixed gate/route choice and hence later physical states, so endogenous coupling
+is not missing from that host. But C02–C04 already show that a stage-only rule reproduces
+the observed native pattern and removes the learned increment; C03's targeted freshness
+repair attained its intermediate effect while harming native service. Merely citing this
+known coupling again does not distinguish a new explanation from the carried-forward
+ACTIVE_FIRST null. These facts do not prove that no better crossing scheduler exists.
+
+The independent Critic checked this proposed narrowing and returned no material dissent.
+I adopt its two qualifications: the eight-byte schedule changes quota, and the statement
+about posterior sufficiency concerns C05's *one predictive probability*, not complete
+belief-state reasoning in general. Its conclusion is advice, not another empirical unit.
+
+**Decision: retain transparent VOI for the solved C05 object, and suspend additional fits
+on the current learned-scheduler line; no C06 or larger-host experiment is selected now.**
+This is a scientific narrowing/prepared pause, not an owner pause, an allowance limit,
+a failed seed count, or a claim that information refresh has no value. C remains indexed
+`exploring`; Root owns any standing update. In particular, no result or theory here validates
+HMASD learned skills, UAV benefit, or the archived CADC package. Pro consultation can still
+change this choice when its concrete argument is read, but its pending answer is not the
+reason to stop these uninformative extensions and does not block independent reasoning.
+
+A concrete re-entry would identify, in a specified target, how a lawful refresh changes
+receiver feedback and future opportunities so that the C05 single exogenous value difference
+does not settle the useful choice, and give a new native prediction against the carried-
+forward stage rule and a competent same-information predictive/value comparator. Legal
+context must have a timestamp, delay and full request/packet cost; any estimation or
+amortized-computation benefit must compare the same data/model access and full work. For
+the already-studied crossing host, this needs a discriminating reason beyond its previously
+known gate/route coupling. These are examples of information that would change the present
+judgment, **not** a new approval requirement, an exact-headroom proof or a toy-pass prerequisite.
+A sufficiently concrete new hypothesis may be tested prospectively without waiting for Pro
+or the owner to approve an ordinary within-direction idea. At present I have selected none;
+there is no fabricated external blocker or recurring check.
+
+This continuation used source reading, analytic counterexamples and criticism only:
+**zero new fits, optimizer updates, simulations or result-bearing launches**. C's cumulative
+cost remains four fits and the counts already recorded in the C05 read. The notebook and
+the complete C01–C05 evidence remain available; no code, result, claim, A/B record or shared
+index was altered. On receipt of the actual Pro answer I will read it and append the
+specific adoption/rejection and any changed experiment decision here.
