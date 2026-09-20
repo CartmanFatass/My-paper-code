@@ -1181,3 +1181,21 @@ fit validator requires of both low-level optimizers. The six real reference summ
 CF_E0005, three D1280) pass their own objects' validators through this entry.
 
 Launch order: both arms on 772803 and 772903 first (four concurrent), then both on 773003.
+
+## 2026-09-19 18:16 PDT — flat update B04: first wave admitted on `wsl_4070`
+
+Launch sha `af66e79141f518be22c997d704e137bfd23419c2`, node idle beforehand (13 GiB free, no other
+runner), node checkout fast-forwarded to the published `main` first, each fit through
+`flat_update_b04/launch_fit.sh` and the admission kernel, all admitted at the first request.
+Alive with an empty `stderr.log` after the fourth admission; each manifest carries the declared
+`update_arm`.
+
+| tag | arm | block | operation ref (under `/home/wu/projects/HMASD/.git/hmasd-admission/`) |
+| --- | --- | --- | --- |
+| `b04_m1_772803_a01` | CF_M1 | 772803 | `c361870b0978eb660bd3401d248ff89d8e61c644601e03b4df6fbe38442fb31d.json` |
+| `b04_m5_772803_a01` | CF_M5 | 772803 | `bc7ba2e1a40c2661f2c33aa0ba177d099b0ff37ef8223f04fd051b8c60cfc9b2.json` |
+| `b04_m1_772903_a01` | CF_M1 | 772903 | `a8213e81cf56f5c767b1863055382e0e53b0ec8fc64049557bab2f1351a0c7b5.json` |
+| `b04_m5_772903_a01` | CF_M5 | 772903 | `38e599ade237554f247b396a76ab89bb86fed3aa7f79dbee621760ca8c344b31.json` |
+
+Still to launch as slots free, same sha: both arms on 773003. No B04 score or diagnostic is read
+before all six are terminal.
