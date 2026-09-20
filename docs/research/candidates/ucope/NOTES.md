@@ -1961,3 +1961,116 @@ baselines, and the changed meaning of a short-horizon target. Cost: zero fits, n
 episodes, checkpoint evaluations and optimizer updates; no new model download or Pro use.
 The decision is whether this supplies a specific learning revision worth selecting, rather
 than treating improved factual prediction or unavailable paired outcomes as decisive.
+
+
+### Predictive-target calculation: identifiable randomized contrast, existing score signal
+
+**Source observations.** In `reactive_renewal_b01/reactive.py`, the eligible gate draws
+from its categorical distribution using local recurrent features and the previous command;
+`row_log_probs` scores that branch and, only when fresh, its velocity density. Collection
+keeps primitive observations, hidden state, branch and team reward in memory. The update uses
+full gamma-one returns-to-go and a centralized predecision value baseline, then batch
+advantage normalization, agent-compound PPO clipping and four shared-parameter epochs.
+The actor recurrent state is 64-dimensional; it is not the entire lawful history. Existing
+published episode/update rows do not retain the primitive inputs and behavior propensities
+needed for the following estimate. This analysis does not reconstruct B04 counterfactuals.
+
+**Analytic scope.** Fix the controller, eligible decision population and common subsequent
+policy rule, applied to each branch's resulting history. Let X be the gate's lawful input,
+Z=1 denote END and Z=0 KEEP, and p(X) in (0,1) be the behavior END probability. Y is the
+remaining undiscounted team return. Assume consistency and the same transition/continuation kernels under each intervention,
+with exogenous randomized policy coins: own Z is independent of the potential future
+outcomes conditional on X. In the intended generative model, predecision hidden team
+conditions and the exogenous future noise supply those outcomes. Independence from a
+predecision state alone without these kernel assumptions would not suffice. This does not
+condition on the complete deterministic PRNG state. Hidden teammate dynamics, own fresh-
+command sampling and all later consequences remain inside each branch's Y; they are not
+assumed absent.
+
+Write `m_z(X)=E[Y | X,Z=z]` and `A(X)=m_1(X)-m_0(X)`. Randomization identifies these
+one-decision conditional branch expectations at population level. It does not require
+observing both potential returns in one world. For any action-independent predecision
+baseline b, including a centralized training-only baseline,
+
+`psi = [Z/p - (1-Z)/(1-p)] * (Y-b)`
+
+satisfies `E[psi | X] = A(X)`. The raw categorical logit score is, on each sampled row,
+
+`g = (Z-p)*(Y-b) = p*(1-p)*psi`.
+
+Thus a branch-contrast regression can use unpaired randomized outcomes, but its target is
+already present, up to a propensity-dependent factor, in the raw gate policy-gradient
+signal. At a zero prediction, squared-error regression on psi has a gradient proportional
+to this same sampled score for the same features on each row. The factor is
+1/[p(X)*(1-p(X))]; when p varies, summing rows need not give collinear regression and
+policy gradients, even before PPO clipping. It is not a missing-team-credit repair
+or access to newly observed counterfactual outcomes. Regression adds a training loss, although it does not change the native reward objective.
+Regression, feature learning and PPO can still have different finite-sample behavior. Batch normalization, clipping, shared
+velocity gradients and later PPO epochs prevent identifying the complete optimizers.
+
+**Exact counterexample.** Let X and hidden U be independent uniform signs and
+`Y = 1/2 + X*(2*Z-1)/10 + U/10`, with p=1/2. Then:
+
+| X | Factual mean E[Y given X] | END minus KEEP | Mean raw gate score with b=1/2 |
+| --- | --- | --- | --- |
+| -1 | 1/2 | -1/5 | -1/20 |
+| +1 | 1/2 | +1/5 | +1/20 |
+
+The best constant branch obtains 1/2; selecting the better branch from X obtains 3/5,
+so the model's O_X is 1/10. A perfect factual conditional-mean predictor need not
+represent the branch preference. The average scalar-gate gradient is zero while a
+state-conditioned gate with feature X has a useful expected gradient already. Neither
+observation establishes native opportunity or an advantage over G, whose fresh-command
+law is itself learned rather than fixed to this two-choice model.
+
+With b=1/2, psi's conditional variance is 1/25. With the allowed predecision central
+baseline b=1/2+U/10 it is zero in this model; the raw score is still exactly psi/4.
+The toy therefore cannot justify claiming that the proposed contrast target removes
+noise that the existing score necessarily lacks a way to remove. Python Fraction
+enumeration checked all 48 combinations of X, U, Z, p in {1/5,1/2,4/5} and these two
+baselines; the expectation and per-row identities held exactly. There were zero native
+episodes, checkpoint evaluations, optimizer updates or fits.
+
+**Working update.** Paired simulator branches are not an identification prerequisite
+under a suitably logged randomized policy; the missing current artifact is decision-level
+data, not a logical inability to learn a conditional contrast. Conversely, a factual
+reward predictor or a renamed contrast target does not by itself add the missing native
+opportunity evidence. The unresolved question is finite representation/estimation/use,
+including whether useful conditional preferences occur under the attained policies.
+An auxiliary target could help by organizing available information; this calculation is
+not a proof that it cannot help, nor a proof that current PPO learns the contrast adequately.
+
+A future implementation would need the actual behavior propensity saved at collection,
+valid overlap, fixed/factually accounted-for controller and continuation distributions,
+and a target matched to the intended return horizon. Near-zero probabilities amplify
+noise; changing policies cannot silently be pooled as one stationary target. A W-step
+prediction is a different estimand from full future return. Privileged training baselines
+must not become actor inputs. None of these requires a preliminary native diagnostic:
+a concrete direct learner comparison remains available within a prospectively declared
+budget when it has a useful prediction.
+
+I do not select a new six-fit batch merely to add this auxiliary head. No current observation
+identifies a native representation or variance defect that this particular target would
+repair, and its algebra alone predicts no gain over ordinary feedback. B02/B03/B04,
+the declined rate/clamp/AR comparisons, and the remaining allowance are unchanged. A bounded
+independent critic is checking the new identity and its interpretation; that is the only
+current producer, not a new direction manager or a repeated audit of the old experiments.
+
+
+The bounded independent critic returned **MATERIAL_DISSENT: no** for this new derivation,
+source mapping and interpretation. I adopted two precision points before publication:
+exogenous intervention/continuation assumptions are explicit, and propensity-dependent
+row scaling does not imply collinear aggregate gradients. The collection-time detached
+value is a valid predecision baseline; retrospectively fitting a baseline with the same
+row's outcome would require separate analysis. Auxiliary regression adds a training loss
+without supplying a different native reward objective or observed counterfactual label.
+
+This closes the selected source/algebra question. It establishes a feasible population
+identification route and limits an unsupported auxiliary-head rationale; it does not
+select an implementation or consume any of the remaining six fits. The single-direction
+primary DM has no live training, pending Pro request or unresolved leaf producer. UCOPE
+remains active and authorized within the original window, with no newly selected batch.
+The next empirical choice needs a concrete learner/representation prediction or other
+materially different comparison; no recurring status check, automatic extra seeds or
+pretend producer is created to fill the remaining time. No owner pause, archive decision
+or claim that the direction has no opportunity is inferred from this boundary.
