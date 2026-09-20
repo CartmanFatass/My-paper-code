@@ -2500,3 +2500,51 @@ evaluation). Two constraints from B07 for that design: keep coordinator minibatc
 expect deployed argmax labels to be far more persistent than sampled training labels, so a
 gate's training-time and deployed behaviour must be read separately. Neither side waits for
 the other to finish reading or designing.
+
+## 2026-09-20 05:45 PDT — prospective: label content at fixed weights, B08 (explore; three fits that are exact D1280 reruns with the final weights saved, then zero-fit probes)
+
+The owner accepted the 05:35 judgment ("按照你的建议来"). One idea, its own allowance, at most
+three fits; B07's two unused fits are not carried over.
+
+**Question.** At the trained D1280's fixed weights, does the skill label carry behavioural
+content — does it move the low level's action, and does the task level depend on which label
+is executed and how long it is held?
+
+**Step 1, three fits.** D1280 exactly as recorded (blocks 772803 / 772903 / 773003, 45
+rollouts), the only addition being that the learner's final weights are written after the
+fit's last panel (`agent.save_model`, after the frozen loop has finished, so nothing can be
+perturbed). Proof it is the recorded policy: all nine panels bit-identical to
+`b01_s1_d1280_<block>_a01`; a block that is not is not probed. About 2.4 GB each, so the three
+run together.
+
+**Step 2, zero fits, per block, no optimizer step.**
+(a) *Faithful load:* the saved weights in a fresh evaluator reproduce the recorded rollout-45
+panel's 32 scores bit for bit; otherwise stop.
+(b) *Label effect on the action mean:* at states captured from that panel, with observation,
+hidden state and mask fixed, the low-level mean action under each of the six agent labels;
+reported as the RMS over labels of the deviation from the label-mean, per action dimension,
+divided by the policy's own action standard deviation, plus the largest pairwise distance.
+A one-step measure at a fixed hidden state; the cumulative effect through the GRU is what (c)
+is for. The team label does not enter the actor; its effect on the low-level value is
+reported beside it.
+(c) *J under four execution rules*, same weights, same 32 worlds: as trained (argmax, caps
+10); the labels chosen at reset frozen for the whole episode; labels uniform at random every
+step; labels uniform at random every 10 steps. Random labels come from a separately seeded
+generator that touches no existing stream. Team and agent labels follow the same rule.
+
+**Expected, from B07, held loosely.** Label spread of the mean action below a tenth of the
+action standard deviation on three of three blocks; J under either random rule and under the
+frozen rule within .02 of J as trained on three of three blocks (a panel's conditional
+evaluation noise is about .03, so smaller differences are not read).
+
+**What each outcome does** is written at 05:35: inert → the skill object of this construction
+is empty, no adaptive-termination comparison on it, my work turns to giving the label
+content; content present (random labels cost at least .05 J, or spread comparable to the
+noise) → D_K10 with these checkpoints is the foundation for Codex's within-cycle comparison
+and the frozen/random gaps bound what a termination rule can move. Mixed (the mean moves but
+J does not): the label is a behavioural nuisance without task value; recorded as such, and
+termination on it still has nothing to gain.
+
+**Cost and limits.** Three fits on `wsl_4070`, about two hours together; probes are policy
+execution only (4 rules × 32 worlds × 500 steps per block), recorded as exposure. Blocks are
+reused development blocks; no size claim. Nothing is added after scores are seen.
