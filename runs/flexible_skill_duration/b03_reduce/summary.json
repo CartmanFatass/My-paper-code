@@ -1,0 +1,1973 @@
+{
+  "object_id": "FSD_FLAT_ENTROPY_B03",
+  "card": "docs/research/candidates/flexible_skill_duration/NOTES.md (2026-09-19 15:00 PDT, flat learner with a smaller entropy coefficient)",
+  "reference_object_id": "FSD_MATCHED_INFORMATION_BASELINE_B01",
+  "launch_sha": "f6f42359180889de9181a59899c5cc6337b73953",
+  "status": "complete",
+  "quantity": "J45 = mean of the 32 final world scores; differences are taken on the same training and evaluation seeds against the completed matched-information stage-1 fits",
+  "blocks": [
+    {
+      "training_seed": 772803,
+      "evaluation_seed": 782803,
+      "arms": {
+        "CF_E005": {
+          "J_by_rollout": {
+            "5": 0.26278832576477207,
+            "10": 0.22121774238481545,
+            "15": 0.1725324882240546,
+            "20": 0.26736747746090683,
+            "25": 0.17986044779915777,
+            "30": 0.12710366866903333,
+            "35": 0.16395603421574217,
+            "40": 0.35031745049083146,
+            "45": 0.2667593290099469
+          },
+          "endpoint_scores_J": [
+            0.28847468124392434,
+            0.10057242164776659,
+            0.32293509547898325,
+            0.22973119178790619,
+            0.37793887073309906,
+            0.3123377419098303,
+            0.20718687218949322,
+            0.12856896801511844,
+            0.2139590959103788,
+            0.2419998951992395,
+            0.2630455985278996,
+            0.31134191953352025,
+            0.22163989095269124,
+            0.15431456219585618,
+            0.23586115304720545,
+            0.3277748191211609,
+            0.32055313772348304,
+            0.29446584909623313,
+            0.3137404047732968,
+            0.3593553724783206,
+            0.3334549071575235,
+            0.16918906950221385,
+            0.3499153212354396,
+            0.3556875366429309,
+            0.1684247694172701,
+            0.29478975491945936,
+            0.09928134845686049,
+            0.3266685551504736,
+            0.24597562727593159,
+            0.2536417984490426,
+            0.38914655235472556,
+            0.32432574619102356
+          ],
+          "object_id": "FSD_FLAT_ENTROPY_B03",
+          "launch_sha": "051e8c7ab955a348fe868e6271eb72c77bbf50e3",
+          "lambda_l": 0.005,
+          "diagnostics": {
+            "1": {
+              "action_entropy": 4.258556291460991,
+              "discoverer_value_loss": 0.08309434354305267,
+              "actor_displacement": 0.026676125502647353,
+              "training_return_U": 18.975521403386985
+            },
+            "5": {
+              "action_entropy": 4.281427711248398,
+              "discoverer_value_loss": 0.1088089793920517,
+              "actor_displacement": 0.04608059947029813,
+              "training_return_U": 20.674127458578567
+            },
+            "10": {
+              "action_entropy": 4.276655614376068,
+              "discoverer_value_loss": 0.0938483402132988,
+              "actor_displacement": 0.0523696737064521,
+              "training_return_U": 22.10585448648782
+            },
+            "15": {
+              "action_entropy": 4.286231845617294,
+              "discoverer_value_loss": 0.09365779906511307,
+              "actor_displacement": 0.057021065605957724,
+              "training_return_U": 22.73059073712532
+            },
+            "20": {
+              "action_entropy": 4.289587214589119,
+              "discoverer_value_loss": 0.10803460329771042,
+              "actor_displacement": 0.060318616909493916,
+              "training_return_U": 26.409355569989863
+            },
+            "25": {
+              "action_entropy": 4.319170489907265,
+              "discoverer_value_loss": 0.10119712352752686,
+              "actor_displacement": 0.062177761914407964,
+              "training_return_U": 19.980307076662957
+            },
+            "30": {
+              "action_entropy": 4.346774145960808,
+              "discoverer_value_loss": 0.08090731501579285,
+              "actor_displacement": 0.06601278037250186,
+              "training_return_U": 15.33946727515976
+            },
+            "35": {
+              "action_entropy": 4.377166926860809,
+              "discoverer_value_loss": 0.11999435722827911,
+              "actor_displacement": 0.06675711026121194,
+              "training_return_U": 18.932202052638694
+            },
+            "40": {
+              "action_entropy": 4.413803294301033,
+              "discoverer_value_loss": 0.10193775594234467,
+              "actor_displacement": 0.06761040038728892,
+              "training_return_U": 25.507204234847237
+            },
+            "45": {
+              "action_entropy": 4.4501278549432755,
+              "discoverer_value_loss": 0.09188464283943176,
+              "actor_displacement": 0.06866284667415651,
+              "training_return_U": 20.466129448212175
+            }
+          },
+          "counts": {
+            "model_constructions": 2,
+            "training_starts": 1,
+            "checkpoint_loads": 0,
+            "training_transitions": 360000,
+            "stored_training_transitions": 360000,
+            "training_episodes": 720,
+            "update_stages": 45,
+            "training_agent_step_batches": 22500,
+            "evaluation_steps": 144000,
+            "evaluation_episodes": 288,
+            "evaluation_agent_step_batches": 4500
+          },
+          "optimizer_calls": {
+            "coordinator": 0,
+            "discoverer_actor": 101250,
+            "discoverer_critic": 101250,
+            "team_discriminator": 0,
+            "individual_discriminator": 0
+          },
+          "wall_seconds_before_publication": 7065.605908835976,
+          "peak_rss_bytes": 1394548736
+        },
+        "CF_E0005": {
+          "J_by_rollout": {
+            "5": 0.18760649802600177,
+            "10": 0.2710225070426413,
+            "15": 0.16872993757582383,
+            "20": 0.18449814881652304,
+            "25": 0.19639136758056752,
+            "30": 0.28608626429462464,
+            "35": 0.35016187091743295,
+            "40": 0.1933070549324226,
+            "45": 0.32867228055174363
+          },
+          "endpoint_scores_J": [
+            0.3622074763718111,
+            0.2114263796814719,
+            0.37488009086733837,
+            0.38741521794662687,
+            0.23401687760168866,
+            0.34558649546110864,
+            0.26699216713729956,
+            0.2672879130580669,
+            0.21063081956232685,
+            0.40096708319844004,
+            0.3877103348115061,
+            0.41634425309589346,
+            0.3613309334274419,
+            0.19168286968720635,
+            0.3335233002285893,
+            0.2880596243084425,
+            0.295172532106985,
+            0.26755056023238105,
+            0.41020636929548937,
+            0.3197307067315289,
+            0.4371831078684385,
+            0.3637015765020427,
+            0.4054636907535459,
+            0.42199638491824554,
+            0.2811168995456622,
+            0.35700913878052953,
+            0.17140820737047743,
+            0.39222487054951033,
+            0.26873965075951667,
+            0.37604871167258774,
+            0.4097098269859189,
+            0.3001889071376798
+          ],
+          "object_id": "FSD_FLAT_ENTROPY_B03",
+          "launch_sha": "051e8c7ab955a348fe868e6271eb72c77bbf50e3",
+          "lambda_l": 0.0005,
+          "diagnostics": {
+            "1": {
+              "action_entropy": 4.25171572715044,
+              "discoverer_value_loss": 0.08309434354305267,
+              "actor_displacement": 0.026441648441780548,
+              "training_return_U": 18.975521403386985
+            },
+            "5": {
+              "action_entropy": 4.246583674103022,
+              "discoverer_value_loss": 0.10309195518493652,
+              "actor_displacement": 0.046644911303018385,
+              "training_return_U": 18.868952225056674
+            },
+            "10": {
+              "action_entropy": 4.17889142408967,
+              "discoverer_value_loss": 0.08769820630550385,
+              "actor_displacement": 0.05499528016190758,
+              "training_return_U": 21.886370916270458
+            },
+            "15": {
+              "action_entropy": 4.1652582585811615,
+              "discoverer_value_loss": 0.10702009499073029,
+              "actor_displacement": 0.06036300594922692,
+              "training_return_U": 24.138263880932993
+            },
+            "20": {
+              "action_entropy": 4.126696847379208,
+              "discoverer_value_loss": 0.10307727009057999,
+              "actor_displacement": 0.062443767452707175,
+              "training_return_U": 17.93013685200418
+            },
+            "25": {
+              "action_entropy": 4.1002994403243065,
+              "discoverer_value_loss": 0.11161002516746521,
+              "actor_displacement": 0.064706199264305,
+              "training_return_U": 24.640278932409586
+            },
+            "30": {
+              "action_entropy": 4.059827886521816,
+              "discoverer_value_loss": 0.0616312138736248,
+              "actor_displacement": 0.06553050091841545,
+              "training_return_U": 18.808180620126734
+            },
+            "35": {
+              "action_entropy": 4.033620934933424,
+              "discoverer_value_loss": 0.1049400344491005,
+              "actor_displacement": 0.06645248033020427,
+              "training_return_U": 20.29705888327451
+            },
+            "40": {
+              "action_entropy": 4.018885549157858,
+              "discoverer_value_loss": 0.09158351272344589,
+              "actor_displacement": 0.06746026547253775,
+              "training_return_U": 22.10410375920508
+            },
+            "45": {
+              "action_entropy": 3.9881751872599125,
+              "discoverer_value_loss": 0.09546753764152527,
+              "actor_displacement": 0.06866317763739711,
+              "training_return_U": 25.764298204550133
+            }
+          },
+          "counts": {
+            "model_constructions": 2,
+            "training_starts": 1,
+            "checkpoint_loads": 0,
+            "training_transitions": 360000,
+            "stored_training_transitions": 360000,
+            "training_episodes": 720,
+            "update_stages": 45,
+            "training_agent_step_batches": 22500,
+            "evaluation_steps": 144000,
+            "evaluation_episodes": 288,
+            "evaluation_agent_step_batches": 4500
+          },
+          "optimizer_calls": {
+            "coordinator": 0,
+            "discoverer_actor": 101250,
+            "discoverer_critic": 101250,
+            "team_discriminator": 0,
+            "individual_discriminator": 0
+          },
+          "wall_seconds_before_publication": 7015.8079044049955,
+          "peak_rss_bytes": 1406787584
+        },
+        "CF": {
+          "J_by_rollout": {
+            "5": 0.28397652154696673,
+            "10": 0.3183146597176847,
+            "15": 0.28880270352803067,
+            "20": 0.19266518706645092,
+            "25": 0.26687921260580444,
+            "30": 0.2871196991417543,
+            "35": 0.1837824194485984,
+            "40": 0.2211087733717793,
+            "45": 0.07468199342662883
+          },
+          "endpoint_scores_J": [
+            0.12235490584959677,
+            0.030306294561051116,
+            0.07559015710058956,
+            0.08538990536603377,
+            0.04843137851598965,
+            0.08472624169342736,
+            0.07548492870916101,
+            0.035949257714571387,
+            0.03128808943547339,
+            0.08818396117781535,
+            0.07987597283160967,
+            0.07968328225674398,
+            0.08649443034976485,
+            0.024011855877979122,
+            0.09407056543319112,
+            0.0593352347540679,
+            0.0524651684075144,
+            0.03779306870496717,
+            0.07384368006116303,
+            0.08002987474412387,
+            0.1017309906117863,
+            0.09469491688987927,
+            0.09019805556355706,
+            0.09004495550663591,
+            0.057912453167798306,
+            0.08698107766885718,
+            0.046208258286704086,
+            0.07514741774691047,
+            0.06185631712793695,
+            0.11360079060741787,
+            0.11313105939809094,
+            0.11300924353171365
+          ],
+          "object_id": "FSD_MATCHED_INFORMATION_BASELINE_B01",
+          "launch_sha": "887563f4713177d76999ef5832ce2dfa946d8505",
+          "lambda_l": 0.05,
+          "diagnostics": {
+            "1": {
+              "action_entropy": 4.3124255537986755,
+              "discoverer_value_loss": 0.08309434354305267,
+              "actor_displacement": 0.027001913286649384,
+              "training_return_U": 18.975521403386985
+            },
+            "5": {
+              "action_entropy": 4.701147377490997,
+              "discoverer_value_loss": 0.11561420559883118,
+              "actor_displacement": 0.04612274893936324,
+              "training_return_U": 20.969606974373338
+            },
+            "10": {
+              "action_entropy": 5.175983905792236,
+              "discoverer_value_loss": 0.098371222615242,
+              "actor_displacement": 0.05650591446973936,
+              "training_return_U": 18.648538855007825
+            },
+            "15": {
+              "action_entropy": 5.675026774406433,
+              "discoverer_value_loss": 0.09105770289897919,
+              "actor_displacement": 0.06258502111113759,
+              "training_return_U": 22.388963917158215
+            },
+            "20": {
+              "action_entropy": 6.193103790283203,
+              "discoverer_value_loss": 0.11381110548973083,
+              "actor_displacement": 0.06721279450888704,
+              "training_return_U": 23.52193506817808
+            },
+            "25": {
+              "action_entropy": 6.723657846450806,
+              "discoverer_value_loss": 0.1281093806028366,
+              "actor_displacement": 0.0711180484335776,
+              "training_return_U": 22.82480855769149
+            },
+            "30": {
+              "action_entropy": 7.293735146522522,
+              "discoverer_value_loss": 0.15555883944034576,
+              "actor_displacement": 0.07661168587606085,
+              "training_return_U": 23.264457716103482
+            },
+            "35": {
+              "action_entropy": 7.856113910675049,
+              "discoverer_value_loss": 0.13981471955776215,
+              "actor_displacement": 0.08102813906105946,
+              "training_return_U": 22.574359698507678
+            },
+            "40": {
+              "action_entropy": 8.434727787971497,
+              "discoverer_value_loss": 0.1575443148612976,
+              "actor_displacement": 0.08580139528275713,
+              "training_return_U": 22.49569324958667
+            },
+            "45": {
+              "action_entropy": 9.006790518760681,
+              "discoverer_value_loss": 0.1814466267824173,
+              "actor_displacement": 0.09079190289411655,
+              "training_return_U": 22.274469452157355
+            }
+          },
+          "counts": {
+            "model_constructions": 2,
+            "training_starts": 1,
+            "checkpoint_loads": 0,
+            "training_transitions": 360000,
+            "stored_training_transitions": 360000,
+            "training_episodes": 720,
+            "update_stages": 45,
+            "training_agent_step_batches": 22500,
+            "evaluation_steps": 144000,
+            "evaluation_episodes": 288,
+            "evaluation_agent_step_batches": 4500
+          },
+          "optimizer_calls": {
+            "coordinator": 0,
+            "discoverer_actor": 101250,
+            "discoverer_critic": 101250,
+            "team_discriminator": 0,
+            "individual_discriminator": 0
+          },
+          "wall_seconds_before_publication": 7496.256865706004,
+          "peak_rss_bytes": 1431175168
+        },
+        "D1280": {
+          "J_by_rollout": {
+            "5": 0.2275892964714526,
+            "10": 0.3366604903841566,
+            "15": 0.35318105016325024,
+            "20": 0.380982424343549,
+            "25": 0.37281391894452576,
+            "30": 0.423212911668479,
+            "35": 0.40412636845335764,
+            "40": 0.4459268870888592,
+            "45": 0.45587469857693386
+          },
+          "endpoint_scores_J": [
+            0.45357511414156954,
+            0.5020362606640331,
+            0.40059441634749243,
+            0.4989370180324188,
+            0.4100085092356054,
+            0.4674970123446343,
+            0.39108772819998533,
+            0.4473475055239409,
+            0.5078531273532473,
+            0.43926278630621446,
+            0.47595656831645017,
+            0.4077214150399054,
+            0.45336175344514823,
+            0.5368689005445793,
+            0.4226169594350697,
+            0.43574388140509895,
+            0.4541685576589916,
+            0.4434311528521006,
+            0.41262050619343055,
+            0.4390681098887388,
+            0.5236370375415192,
+            0.48115466793544603,
+            0.5009340895754457,
+            0.47544058331281713,
+            0.5072235179006562,
+            0.42481383436436443,
+            0.4330085689124202,
+            0.40681509653888487,
+            0.42634876382105125,
+            0.46644674568483985,
+            0.465496421698428,
+            0.47691374424735655
+          ],
+          "object_id": "FSD_MATCHED_INFORMATION_BASELINE_B01",
+          "launch_sha": "887563f4713177d76999ef5832ce2dfa946d8505",
+          "lambda_l": 0.05,
+          "diagnostics": {
+            "1": {
+              "action_entropy": 4.324311316013336,
+              "discoverer_value_loss": 0.18436717987060547,
+              "actor_displacement": 0.15379872709884004,
+              "training_return_U": 19.16760525830241
+            },
+            "5": {
+              "action_entropy": 4.671536982059479,
+              "discoverer_value_loss": 0.1388183832168579,
+              "actor_displacement": 0.4129479380314338,
+              "training_return_U": 17.155401974049113
+            },
+            "10": {
+              "action_entropy": 5.082237124443054,
+              "discoverer_value_loss": 0.10856562852859497,
+              "actor_displacement": 0.5855767347193543,
+              "training_return_U": 14.159207744494855
+            },
+            "15": {
+              "action_entropy": 5.489385724067688,
+              "discoverer_value_loss": 0.03828759491443634,
+              "actor_displacement": 0.7132929140964004,
+              "training_return_U": 28.9958038571134
+            },
+            "20": {
+              "action_entropy": 5.85618793964386,
+              "discoverer_value_loss": 0.01847437210381031,
+              "actor_displacement": 0.8246668988168586,
+              "training_return_U": 29.2585339856251
+            },
+            "25": {
+              "action_entropy": 6.203104257583618,
+              "discoverer_value_loss": 0.010089187882840633,
+              "actor_displacement": 0.9175569361311288,
+              "training_return_U": 26.854248114423278
+            },
+            "30": {
+              "action_entropy": 6.527836322784424,
+              "discoverer_value_loss": 0.006841175723820925,
+              "actor_displacement": 0.9941148164090691,
+              "training_return_U": 27.928895012104093
+            },
+            "35": {
+              "action_entropy": 6.837109327316284,
+              "discoverer_value_loss": 0.00667562335729599,
+              "actor_displacement": 1.0635071912381835,
+              "training_return_U": 29.578215897299394
+            },
+            "40": {
+              "action_entropy": 7.117566466331482,
+              "discoverer_value_loss": 0.007429271470755339,
+              "actor_displacement": 1.1211762823838174,
+              "training_return_U": 29.1988605590781
+            },
+            "45": {
+              "action_entropy": 7.382565140724182,
+              "discoverer_value_loss": 0.006427439395338297,
+              "actor_displacement": 1.1724109045953839,
+              "training_return_U": 28.503186782109037
+            }
+          },
+          "counts": {
+            "model_constructions": 2,
+            "training_starts": 1,
+            "checkpoint_loads": 0,
+            "training_transitions": 360000,
+            "stored_training_transitions": 360000,
+            "training_episodes": 720,
+            "update_stages": 45,
+            "training_agent_step_batches": 22500,
+            "evaluation_steps": 144000,
+            "evaluation_episodes": 288,
+            "evaluation_agent_step_batches": 4500
+          },
+          "optimizer_calls": {
+            "coordinator": 675,
+            "discoverer_actor": 101250,
+            "discoverer_critic": 101250,
+            "team_discriminator": 675,
+            "individual_discriminator": 2700
+          },
+          "wall_seconds_before_publication": 9337.322970244015,
+          "peak_rss_bytes": 2990456832
+        }
+      },
+      "missing_or_invalid_arms": {}
+    },
+    {
+      "training_seed": 772903,
+      "evaluation_seed": 782903,
+      "arms": {
+        "CF_E005": {
+          "J_by_rollout": {
+            "5": 0.29463196694767846,
+            "10": 0.19260121051006862,
+            "15": 0.2199693337295433,
+            "20": 0.3152968423340886,
+            "25": 0.20635197323275029,
+            "30": 0.15651294706318508,
+            "35": 0.14261755361850256,
+            "40": 0.2239349369583955,
+            "45": 0.2899973989917579
+          },
+          "endpoint_scores_J": [
+            0.21834452646552602,
+            0.3807390567589861,
+            0.4496956202288919,
+            0.14031428234874851,
+            0.25112283400270585,
+            0.21969832573182405,
+            0.2863029422374949,
+            0.3349017381042949,
+            0.14639126049310938,
+            0.32009380661896025,
+            0.26844682092222144,
+            0.38000797451893437,
+            0.34339392819445164,
+            0.2014263741032961,
+            0.19223572126517705,
+            0.24751425893023885,
+            0.33524307734002434,
+            0.26048539051827047,
+            0.354869386331225,
+            0.23924566287339508,
+            0.20288677878251832,
+            0.2806722735918044,
+            0.3899929548548413,
+            0.38271285045602954,
+            0.28336162703987405,
+            0.4051921692629521,
+            0.38685545225380313,
+            0.43358720349024926,
+            0.2568949824615045,
+            0.15348861129319663,
+            0.18779426751318795,
+            0.34600460874851663
+          ],
+          "object_id": "FSD_FLAT_ENTROPY_B03",
+          "launch_sha": "051e8c7ab955a348fe868e6271eb72c77bbf50e3",
+          "lambda_l": 0.005,
+          "diagnostics": {
+            "1": {
+              "action_entropy": 4.257301986217499,
+              "discoverer_value_loss": 0.10489288717508316,
+              "actor_displacement": 0.028638716524552327,
+              "training_return_U": 19.814153666955793
+            },
+            "5": {
+              "action_entropy": 4.263284429907799,
+              "discoverer_value_loss": 0.14277969300746918,
+              "actor_displacement": 0.048862258379647715,
+              "training_return_U": 21.774308083115084
+            },
+            "10": {
+              "action_entropy": 4.303364083170891,
+              "discoverer_value_loss": 0.15336096286773682,
+              "actor_displacement": 0.05752693323780609,
+              "training_return_U": 26.019586744717493
+            },
+            "15": {
+              "action_entropy": 4.3319497257471085,
+              "discoverer_value_loss": 0.12671206891536713,
+              "actor_displacement": 0.06169859898364939,
+              "training_return_U": 12.260200925369379
+            },
+            "20": {
+              "action_entropy": 4.352953657507896,
+              "discoverer_value_loss": 0.11915303766727448,
+              "actor_displacement": 0.06453283486435613,
+              "training_return_U": 22.608639421397537
+            },
+            "25": {
+              "action_entropy": 4.367794468998909,
+              "discoverer_value_loss": 0.16010451316833496,
+              "actor_displacement": 0.06691627064599301,
+              "training_return_U": 23.06137175558733
+            },
+            "30": {
+              "action_entropy": 4.4060539454221725,
+              "discoverer_value_loss": 0.10197381675243378,
+              "actor_displacement": 0.06895388608173013,
+              "training_return_U": 20.24322767848509
+            },
+            "35": {
+              "action_entropy": 4.410559684038162,
+              "discoverer_value_loss": 0.1496468484401703,
+              "actor_displacement": 0.0713867884791643,
+              "training_return_U": 19.743252842046626
+            },
+            "40": {
+              "action_entropy": 4.445834457874298,
+              "discoverer_value_loss": 0.14454348385334015,
+              "actor_displacement": 0.07255271878079493,
+              "training_return_U": 25.57344652654464
+            },
+            "45": {
+              "action_entropy": 4.4634319841861725,
+              "discoverer_value_loss": 0.16927564144134521,
+              "actor_displacement": 0.07342532547310364,
+              "training_return_U": 27.220553662775117
+            }
+          },
+          "counts": {
+            "model_constructions": 2,
+            "training_starts": 1,
+            "checkpoint_loads": 0,
+            "training_transitions": 360000,
+            "stored_training_transitions": 360000,
+            "training_episodes": 720,
+            "update_stages": 45,
+            "training_agent_step_batches": 22500,
+            "evaluation_steps": 144000,
+            "evaluation_episodes": 288,
+            "evaluation_agent_step_batches": 4500
+          },
+          "optimizer_calls": {
+            "coordinator": 0,
+            "discoverer_actor": 101250,
+            "discoverer_critic": 101250,
+            "team_discriminator": 0,
+            "individual_discriminator": 0
+          },
+          "wall_seconds_before_publication": 7195.37927489102,
+          "peak_rss_bytes": 1431814144
+        },
+        "CF_E0005": {
+          "J_by_rollout": {
+            "5": 0.23790119492316655,
+            "10": 0.11259789180277617,
+            "15": 0.23555642586873277,
+            "20": 0.2775994207676672,
+            "25": 0.18345561654933867,
+            "30": 0.20686567998138672,
+            "35": 0.1840933484452704,
+            "40": 0.1569489223938243,
+            "45": 0.3074936230889518
+          },
+          "endpoint_scores_J": [
+            0.3075138829558902,
+            0.3812529973099419,
+            0.4578334597616473,
+            0.13515688496342212,
+            0.24941634001766888,
+            0.27430211821419676,
+            0.3326556688181796,
+            0.36312920774421603,
+            0.14515843006572407,
+            0.317875913162394,
+            0.2869499103103705,
+            0.3688985464872911,
+            0.36214723699148427,
+            0.19732816437259948,
+            0.19380739590778107,
+            0.2645385033579791,
+            0.3498942787837349,
+            0.2674722390733891,
+            0.4310107141020508,
+            0.24806682488213602,
+            0.20837964548692048,
+            0.317616457738343,
+            0.40948966515591156,
+            0.36926214950318353,
+            0.2890441223766285,
+            0.459133319130036,
+            0.417227536831808,
+            0.42388866266844194,
+            0.2853967816413586,
+            0.1299318115697248,
+            0.1876232967091392,
+            0.40839377275286415
+          ],
+          "object_id": "FSD_FLAT_ENTROPY_B03",
+          "launch_sha": "051e8c7ab955a348fe868e6271eb72c77bbf50e3",
+          "lambda_l": 0.0005,
+          "diagnostics": {
+            "1": {
+              "action_entropy": 4.250961821526289,
+              "discoverer_value_loss": 0.10489288717508316,
+              "actor_displacement": 0.029078489059643695,
+              "training_return_U": 19.814153666955793
+            },
+            "5": {
+              "action_entropy": 4.220524802803993,
+              "discoverer_value_loss": 0.17203354835510254,
+              "actor_displacement": 0.050895050865417596,
+              "training_return_U": 23.115127812250304
+            },
+            "10": {
+              "action_entropy": 4.1867820546031,
+              "discoverer_value_loss": 0.12873391807079315,
+              "actor_displacement": 0.06085864916274479,
+              "training_return_U": 23.925344793273318
+            },
+            "15": {
+              "action_entropy": 4.171328153461218,
+              "discoverer_value_loss": 0.1449306160211563,
+              "actor_displacement": 0.06460278882217048,
+              "training_return_U": 20.83181670142483
+            },
+            "20": {
+              "action_entropy": 4.132820758968592,
+              "discoverer_value_loss": 0.12338979542255402,
+              "actor_displacement": 0.0673361015126947,
+              "training_return_U": 23.536968772439753
+            },
+            "25": {
+              "action_entropy": 4.050889518111944,
+              "discoverer_value_loss": 0.13493205606937408,
+              "actor_displacement": 0.06882729798924468,
+              "training_return_U": 24.309211038099892
+            },
+            "30": {
+              "action_entropy": 4.0086377412080765,
+              "discoverer_value_loss": 0.13037191331386566,
+              "actor_displacement": 0.0700291918757302,
+              "training_return_U": 26.8407157715807
+            },
+            "35": {
+              "action_entropy": 3.9499839767813683,
+              "discoverer_value_loss": 0.12414146959781647,
+              "actor_displacement": 0.07068982116434766,
+              "training_return_U": 21.607058433452295
+            },
+            "40": {
+              "action_entropy": 3.906598314642906,
+              "discoverer_value_loss": 0.1279601752758026,
+              "actor_displacement": 0.07186916058292789,
+              "training_return_U": 25.50976853634902
+            },
+            "45": {
+              "action_entropy": 3.8743240293115377,
+              "discoverer_value_loss": 0.09219098091125488,
+              "actor_displacement": 0.07256872258559154,
+              "training_return_U": 23.18585348854957
+            }
+          },
+          "counts": {
+            "model_constructions": 2,
+            "training_starts": 1,
+            "checkpoint_loads": 0,
+            "training_transitions": 360000,
+            "stored_training_transitions": 360000,
+            "training_episodes": 720,
+            "update_stages": 45,
+            "training_agent_step_batches": 22500,
+            "evaluation_steps": 144000,
+            "evaluation_episodes": 288,
+            "evaluation_agent_step_batches": 4500
+          },
+          "optimizer_calls": {
+            "coordinator": 0,
+            "discoverer_actor": 101250,
+            "discoverer_critic": 101250,
+            "team_discriminator": 0,
+            "individual_discriminator": 0
+          },
+          "wall_seconds_before_publication": 7259.736064255005,
+          "peak_rss_bytes": 1434124288
+        },
+        "CF": {
+          "J_by_rollout": {
+            "5": 0.23376174919654913,
+            "10": 0.17727077001389763,
+            "15": 0.19803321042102157,
+            "20": 0.3401942108970891,
+            "25": 0.13751389971470718,
+            "30": 0.293102083383581,
+            "35": 0.13111705665435233,
+            "40": 0.06540263773759579,
+            "45": 0.15873341021380014
+          },
+          "endpoint_scores_J": [
+            0.17795468581550944,
+            0.20971998860125798,
+            0.2448104552475641,
+            0.0874190922034887,
+            0.13049370606038063,
+            0.1257970061982644,
+            0.20665275374412168,
+            0.14871768383855977,
+            0.051284094586390674,
+            0.1631749312290271,
+            0.16413549350143825,
+            0.18608461368033938,
+            0.24559211555852928,
+            0.15771915777359555,
+            0.10122159661350537,
+            0.13552735202709515,
+            0.1698451078847812,
+            0.16349877412799577,
+            0.1978823190273565,
+            0.08245863118185541,
+            0.09685449083648552,
+            0.18187882063218655,
+            0.2255797209774314,
+            0.1794973618353513,
+            0.14832731667432858,
+            0.21612820985786202,
+            0.218467198284714,
+            0.22095710257506937,
+            0.11543251409379383,
+            0.06241079421660962,
+            0.08910380453076418,
+            0.17484223342595206
+          ],
+          "object_id": "FSD_MATCHED_INFORMATION_BASELINE_B01",
+          "launch_sha": "887563f4713177d76999ef5832ce2dfa946d8505",
+          "lambda_l": 0.05,
+          "diagnostics": {
+            "1": {
+              "action_entropy": 4.316607117652893,
+              "discoverer_value_loss": 0.10489288717508316,
+              "actor_displacement": 0.028451222249419997,
+              "training_return_U": 19.814153666955793
+            },
+            "5": {
+              "action_entropy": 4.692976772785187,
+              "discoverer_value_loss": 0.1205715760588646,
+              "actor_displacement": 0.0493905064942047,
+              "training_return_U": 17.842050886035157
+            },
+            "10": {
+              "action_entropy": 5.193376541137695,
+              "discoverer_value_loss": 0.11288964003324509,
+              "actor_displacement": 0.060970849528028545,
+              "training_return_U": 22.580720305771973
+            },
+            "15": {
+              "action_entropy": 5.71921169757843,
+              "discoverer_value_loss": 0.1262837052345276,
+              "actor_displacement": 0.06602322131967645,
+              "training_return_U": 20.179706064530315
+            },
+            "20": {
+              "action_entropy": 6.244137287139893,
+              "discoverer_value_loss": 0.13144683837890625,
+              "actor_displacement": 0.07031057857564556,
+              "training_return_U": 21.821735725489596
+            },
+            "25": {
+              "action_entropy": 6.7509925365448,
+              "discoverer_value_loss": 0.13645881414413452,
+              "actor_displacement": 0.07749958319613229,
+              "training_return_U": 20.41502413254617
+            },
+            "30": {
+              "action_entropy": 7.2822147607803345,
+              "discoverer_value_loss": 0.17550908029079437,
+              "actor_displacement": 0.0809202231651077,
+              "training_return_U": 21.455007275538378
+            },
+            "35": {
+              "action_entropy": 7.786185145378113,
+              "discoverer_value_loss": 0.13687554001808167,
+              "actor_displacement": 0.08584266914305592,
+              "training_return_U": 21.909198219149033
+            },
+            "40": {
+              "action_entropy": 8.333794474601746,
+              "discoverer_value_loss": 0.17158354818820953,
+              "actor_displacement": 0.08990046012884413,
+              "training_return_U": 21.97618819918359
+            },
+            "45": {
+              "action_entropy": 8.892401456832886,
+              "discoverer_value_loss": 0.20767365396022797,
+              "actor_displacement": 0.09624920301109582,
+              "training_return_U": 22.165461326736743
+            }
+          },
+          "counts": {
+            "model_constructions": 2,
+            "training_starts": 1,
+            "checkpoint_loads": 0,
+            "training_transitions": 360000,
+            "stored_training_transitions": 360000,
+            "training_episodes": 720,
+            "update_stages": 45,
+            "training_agent_step_batches": 22500,
+            "evaluation_steps": 144000,
+            "evaluation_episodes": 288,
+            "evaluation_agent_step_batches": 4500
+          },
+          "optimizer_calls": {
+            "coordinator": 0,
+            "discoverer_actor": 101250,
+            "discoverer_critic": 101250,
+            "team_discriminator": 0,
+            "individual_discriminator": 0
+          },
+          "wall_seconds_before_publication": 7636.392614507,
+          "peak_rss_bytes": 1354633216
+        },
+        "D1280": {
+          "J_by_rollout": {
+            "5": 0.30391562453869253,
+            "10": 0.2736318698544382,
+            "15": 0.3157287536657319,
+            "20": 0.3348677119108596,
+            "25": 0.4242978865719844,
+            "30": 0.37480047249350246,
+            "35": 0.419948055700354,
+            "40": 0.43064689256962807,
+            "45": 0.35469677422138435
+          },
+          "endpoint_scores_J": [
+            0.339861959848236,
+            0.43762693320005935,
+            0.37483306475037287,
+            0.28902793258818027,
+            0.39002235788425366,
+            0.32132931236507606,
+            0.3617399950113606,
+            0.41946064930088434,
+            0.4143735966401455,
+            0.32531174050715694,
+            0.28332139315127003,
+            0.38724284873448533,
+            0.39551443319568375,
+            0.3071686793733928,
+            0.29940939957998425,
+            0.2916879198272122,
+            0.3823052377869385,
+            0.3576578816405397,
+            0.314945080071461,
+            0.3562145838298099,
+            0.3437501776246244,
+            0.3870907267937409,
+            0.36294199774559777,
+            0.36737590445539936,
+            0.41208124917008215,
+            0.3936979270999385,
+            0.34348243443648274,
+            0.3224229200927701,
+            0.3981226170004961,
+            0.2694983525922383,
+            0.3746148908165873,
+            0.3261625779698386
+          ],
+          "object_id": "FSD_MATCHED_INFORMATION_BASELINE_B01",
+          "launch_sha": "887563f4713177d76999ef5832ce2dfa946d8505",
+          "lambda_l": 0.05,
+          "diagnostics": {
+            "1": {
+              "action_entropy": 4.332762956619263,
+              "discoverer_value_loss": 0.14126870036125183,
+              "actor_displacement": 0.1509169703241636,
+              "training_return_U": 20.02008869487603
+            },
+            "5": {
+              "action_entropy": 4.706589579582214,
+              "discoverer_value_loss": 0.05409293621778488,
+              "actor_displacement": 0.43821286903207185,
+              "training_return_U": 22.02283440002252
+            },
+            "10": {
+              "action_entropy": 5.1265281438827515,
+              "discoverer_value_loss": 0.05898004025220871,
+              "actor_displacement": 0.6070357646556847,
+              "training_return_U": 19.644186918489694
+            },
+            "15": {
+              "action_entropy": 5.529291033744812,
+              "discoverer_value_loss": 0.05412103608250618,
+              "actor_displacement": 0.7226604243580289,
+              "training_return_U": 19.104088201137046
+            },
+            "20": {
+              "action_entropy": 5.898718237876892,
+              "discoverer_value_loss": 0.023584352806210518,
+              "actor_displacement": 0.8151578083923016,
+              "training_return_U": 25.239289660946028
+            },
+            "25": {
+              "action_entropy": 6.259528994560242,
+              "discoverer_value_loss": 0.015712160617113113,
+              "actor_displacement": 0.899855507683342,
+              "training_return_U": 29.468225378187842
+            },
+            "30": {
+              "action_entropy": 6.60774290561676,
+              "discoverer_value_loss": 0.013258126564323902,
+              "actor_displacement": 0.972661977578178,
+              "training_return_U": 28.52962786376682
+            },
+            "35": {
+              "action_entropy": 6.9357335567474365,
+              "discoverer_value_loss": 0.013459607027471066,
+              "actor_displacement": 1.03585719288764,
+              "training_return_U": 29.175903978075706
+            },
+            "40": {
+              "action_entropy": 7.242647409439087,
+              "discoverer_value_loss": 0.008680100552737713,
+              "actor_displacement": 1.0926673880436093,
+              "training_return_U": 29.02632043408033
+            },
+            "45": {
+              "action_entropy": 7.555184960365295,
+              "discoverer_value_loss": 0.008342435583472252,
+              "actor_displacement": 1.144512122773888,
+              "training_return_U": 27.99688125354571
+            }
+          },
+          "counts": {
+            "model_constructions": 2,
+            "training_starts": 1,
+            "checkpoint_loads": 0,
+            "training_transitions": 360000,
+            "stored_training_transitions": 360000,
+            "training_episodes": 720,
+            "update_stages": 45,
+            "training_agent_step_batches": 22500,
+            "evaluation_steps": 144000,
+            "evaluation_episodes": 288,
+            "evaluation_agent_step_batches": 4500
+          },
+          "optimizer_calls": {
+            "coordinator": 675,
+            "discoverer_actor": 101250,
+            "discoverer_critic": 101250,
+            "team_discriminator": 675,
+            "individual_discriminator": 2700
+          },
+          "wall_seconds_before_publication": 9033.072333488992,
+          "peak_rss_bytes": 2953797632
+        }
+      },
+      "missing_or_invalid_arms": {}
+    },
+    {
+      "training_seed": 773003,
+      "evaluation_seed": 783003,
+      "arms": {
+        "CF_E005": {
+          "J_by_rollout": {
+            "5": 0.26119047677499935,
+            "10": 0.20768550615989262,
+            "15": 0.17340056689666863,
+            "20": 0.10655758896865927,
+            "25": 0.14926877942843753,
+            "30": 0.23699779469881777,
+            "35": 0.114205021563585,
+            "40": 0.31334835009605366,
+            "45": 0.29005288362917625
+          },
+          "endpoint_scores_J": [
+            0.35996789713944444,
+            0.1719013210772408,
+            0.38918830635749807,
+            0.3135565349341205,
+            0.28875936842916794,
+            0.2028023009120797,
+            0.41629663388293775,
+            0.23441899021960413,
+            0.37997772374358185,
+            0.41258510310664825,
+            0.23523679119926386,
+            0.2575828679188205,
+            0.20834124135225413,
+            0.2733671400322773,
+            0.4016084368088219,
+            0.0713353118004277,
+            0.3495041868033186,
+            0.3001068074829467,
+            0.3111471352006611,
+            0.26135563536286766,
+            0.20499686823071836,
+            0.3465373937912633,
+            0.33739428847453345,
+            0.3763928515062424,
+            0.2612289446199088,
+            0.30199729866020136,
+            0.268603643537971,
+            0.3905881733630154,
+            0.2947056456463276,
+            0.21474682291299277,
+            0.26262480849416114,
+            0.182835803132321
+          ],
+          "object_id": "FSD_FLAT_ENTROPY_B03",
+          "launch_sha": "051e8c7ab955a348fe868e6271eb72c77bbf50e3",
+          "lambda_l": 0.005,
+          "diagnostics": {
+            "1": {
+              "action_entropy": 4.263719171285629,
+              "discoverer_value_loss": 0.1089605838060379,
+              "actor_displacement": 0.026112909089694093,
+              "training_return_U": 19.028846355704786
+            },
+            "5": {
+              "action_entropy": 4.268085956573486,
+              "discoverer_value_loss": 0.04466603696346283,
+              "actor_displacement": 0.04394761075450294,
+              "training_return_U": 18.69092863828647
+            },
+            "10": {
+              "action_entropy": 4.2964596301317215,
+              "discoverer_value_loss": 0.09010029584169388,
+              "actor_displacement": 0.05537297749133136,
+              "training_return_U": 22.34967957134619
+            },
+            "15": {
+              "action_entropy": 4.271368682384491,
+              "discoverer_value_loss": 0.05450553447008133,
+              "actor_displacement": 0.05980489218279346,
+              "training_return_U": 25.8041913222741
+            },
+            "20": {
+              "action_entropy": 4.283444583415985,
+              "discoverer_value_loss": 0.06712771207094193,
+              "actor_displacement": 0.06229531366866211,
+              "training_return_U": 18.061047986287768
+            },
+            "25": {
+              "action_entropy": 4.293325915932655,
+              "discoverer_value_loss": 0.0743580311536789,
+              "actor_displacement": 0.06511539745404048,
+              "training_return_U": 18.660570405658838
+            },
+            "30": {
+              "action_entropy": 4.316175729036331,
+              "discoverer_value_loss": 0.0750347152352333,
+              "actor_displacement": 0.06634280642814691,
+              "training_return_U": 24.012455045926878
+            },
+            "35": {
+              "action_entropy": 4.3938204646110535,
+              "discoverer_value_loss": 0.07135343551635742,
+              "actor_displacement": 0.0681510072559621,
+              "training_return_U": 23.122747346329174
+            },
+            "40": {
+              "action_entropy": 4.443581774830818,
+              "discoverer_value_loss": 0.07702836394309998,
+              "actor_displacement": 0.07031775972597074,
+              "training_return_U": 26.863253046762306
+            },
+            "45": {
+              "action_entropy": 4.434076696634293,
+              "discoverer_value_loss": 0.073173888027668,
+              "actor_displacement": 0.07215017573092669,
+              "training_return_U": 18.596645333649057
+            }
+          },
+          "counts": {
+            "model_constructions": 2,
+            "training_starts": 1,
+            "checkpoint_loads": 0,
+            "training_transitions": 360000,
+            "stored_training_transitions": 360000,
+            "training_episodes": 720,
+            "update_stages": 45,
+            "training_agent_step_batches": 22500,
+            "evaluation_steps": 144000,
+            "evaluation_episodes": 288,
+            "evaluation_agent_step_batches": 4500
+          },
+          "optimizer_calls": {
+            "coordinator": 0,
+            "discoverer_actor": 101250,
+            "discoverer_critic": 101250,
+            "team_discriminator": 0,
+            "individual_discriminator": 0
+          },
+          "wall_seconds_before_publication": 3626.8341497459915,
+          "peak_rss_bytes": 1393340416
+        },
+        "CF_E0005": {
+          "J_by_rollout": {
+            "5": 0.18939037912220574,
+            "10": 0.322871109892811,
+            "15": 0.2502073716237641,
+            "20": 0.13412171064128606,
+            "25": 0.14093777335757723,
+            "30": 0.2858318879394313,
+            "35": 0.29080836724110487,
+            "40": 0.3209656647987621,
+            "45": 0.23467262170180442
+          },
+          "endpoint_scores_J": [
+            0.3233016934111235,
+            0.14375966852701555,
+            0.3385408499092907,
+            0.27826034760350954,
+            0.12103073771032023,
+            0.15783615136177015,
+            0.27598053994883137,
+            0.20749005544580626,
+            0.28304839602506093,
+            0.22595351603949587,
+            0.15485254205516957,
+            0.27108391033149404,
+            0.12592718376187065,
+            0.28696492405540913,
+            0.33922493251628894,
+            0.11148670187563058,
+            0.27643384135487686,
+            0.1939018838669079,
+            0.187439762009213,
+            0.20071164250266288,
+            0.12477982182246856,
+            0.20794908478235136,
+            0.21319952185097985,
+            0.273032260523108,
+            0.3800850029687426,
+            0.32501011545123865,
+            0.23069991278445012,
+            0.26046776809080885,
+            0.20744806527575496,
+            0.25003861169997443,
+            0.3021477782491645,
+            0.23143667064695245
+          ],
+          "object_id": "FSD_FLAT_ENTROPY_B03",
+          "launch_sha": "051e8c7ab955a348fe868e6271eb72c77bbf50e3",
+          "lambda_l": 0.0005,
+          "diagnostics": {
+            "1": {
+              "action_entropy": 4.258178640156984,
+              "discoverer_value_loss": 0.1089605838060379,
+              "actor_displacement": 0.02664933594635695,
+              "training_return_U": 19.028846355704786
+            },
+            "5": {
+              "action_entropy": 4.229800309985876,
+              "discoverer_value_loss": 0.049807168543338776,
+              "actor_displacement": 0.047473422831291745,
+              "training_return_U": 19.75235409590119
+            },
+            "10": {
+              "action_entropy": 4.212682601064444,
+              "discoverer_value_loss": 0.05840383470058441,
+              "actor_displacement": 0.05649894120889518,
+              "training_return_U": 22.0061305703934
+            },
+            "15": {
+              "action_entropy": 4.152970854192972,
+              "discoverer_value_loss": 0.0559854619204998,
+              "actor_displacement": 0.05937293517960428,
+              "training_return_U": 23.3594795932772
+            },
+            "20": {
+              "action_entropy": 4.108533728867769,
+              "discoverer_value_loss": 0.06990943849086761,
+              "actor_displacement": 0.061096259733696846,
+              "training_return_U": 18.080860020253347
+            },
+            "25": {
+              "action_entropy": 4.068158101290464,
+              "discoverer_value_loss": 0.0809561163187027,
+              "actor_displacement": 0.06417483604906528,
+              "training_return_U": 24.756655003000684
+            },
+            "30": {
+              "action_entropy": 4.044801462441683,
+              "discoverer_value_loss": 0.09354442358016968,
+              "actor_displacement": 0.0661341458135009,
+              "training_return_U": 25.194841578582768
+            },
+            "35": {
+              "action_entropy": 4.035682883113623,
+              "discoverer_value_loss": 0.06908803433179855,
+              "actor_displacement": 0.0679719451809705,
+              "training_return_U": 22.44113334313149
+            },
+            "40": {
+              "action_entropy": 4.038562998175621,
+              "discoverer_value_loss": 0.09594256430864334,
+              "actor_displacement": 0.06927814885889011,
+              "training_return_U": 26.294359033965186
+            },
+            "45": {
+              "action_entropy": 4.009782802313566,
+              "discoverer_value_loss": 0.06917518377304077,
+              "actor_displacement": 0.07075281849154151,
+              "training_return_U": 27.198296002145508
+            }
+          },
+          "counts": {
+            "model_constructions": 2,
+            "training_starts": 1,
+            "checkpoint_loads": 0,
+            "training_transitions": 360000,
+            "stored_training_transitions": 360000,
+            "training_episodes": 720,
+            "update_stages": 45,
+            "training_agent_step_batches": 22500,
+            "evaluation_steps": 144000,
+            "evaluation_episodes": 288,
+            "evaluation_agent_step_batches": 4500
+          },
+          "optimizer_calls": {
+            "coordinator": 0,
+            "discoverer_actor": 101250,
+            "discoverer_critic": 101250,
+            "team_discriminator": 0,
+            "individual_discriminator": 0
+          },
+          "wall_seconds_before_publication": 3571.576036851009,
+          "peak_rss_bytes": 1366712320
+        },
+        "CF": {
+          "J_by_rollout": {
+            "5": 0.21252454793246944,
+            "10": 0.262367654351117,
+            "15": 0.2742553037093924,
+            "20": 0.11562065630168758,
+            "25": 0.1844159224916037,
+            "30": 0.27918376415660884,
+            "35": 0.09908347834057685,
+            "40": 0.1263415394038025,
+            "45": 0.08015286632526682
+          },
+          "endpoint_scores_J": [
+            0.10569735756879242,
+            0.03808854348239046,
+            0.10656603314932138,
+            0.10149284871390042,
+            0.07848854725683134,
+            0.06052681373604583,
+            0.10631235116046935,
+            0.05107187500881347,
+            0.09995525624458076,
+            0.1365506529191121,
+            0.07124018434260447,
+            0.07663958918503655,
+            0.04844992881415848,
+            0.06650859241191558,
+            0.10927026526964705,
+            0.023532886417051747,
+            0.08178231708838589,
+            0.08593521323875422,
+            0.06427847023688076,
+            0.06500310644297096,
+            0.07642797316011096,
+            0.11315745306561935,
+            0.11750643593298733,
+            0.0762124568928895,
+            0.0898307170391507,
+            0.06938331250536334,
+            0.04929297416914888,
+            0.10850832984313011,
+            0.06621279187647755,
+            0.06842915924815839,
+            0.09935792363056326,
+            0.05318136235727538
+          ],
+          "object_id": "FSD_MATCHED_INFORMATION_BASELINE_B01",
+          "launch_sha": "887563f4713177d76999ef5832ce2dfa946d8505",
+          "lambda_l": 0.05,
+          "diagnostics": {
+            "1": {
+              "action_entropy": 4.316655695438385,
+              "discoverer_value_loss": 0.1089605838060379,
+              "actor_displacement": 0.027206336166674196,
+              "training_return_U": 19.028846355704786
+            },
+            "5": {
+              "action_entropy": 4.684953987598419,
+              "discoverer_value_loss": 0.04202117398381233,
+              "actor_displacement": 0.04648637111315869,
+              "training_return_U": 19.879654691813105
+            },
+            "10": {
+              "action_entropy": 5.168956518173218,
+              "discoverer_value_loss": 0.05028781294822693,
+              "actor_displacement": 0.05579565649219702,
+              "training_return_U": 20.823323798533686
+            },
+            "15": {
+              "action_entropy": 5.642349720001221,
+              "discoverer_value_loss": 0.0605485700070858,
+              "actor_displacement": 0.06191062441863996,
+              "training_return_U": 22.508340430590977
+            },
+            "20": {
+              "action_entropy": 6.164448857307434,
+              "discoverer_value_loss": 0.06854720413684845,
+              "actor_displacement": 0.06770895981294403,
+              "training_return_U": 20.599553605515666
+            },
+            "25": {
+              "action_entropy": 6.686779260635376,
+              "discoverer_value_loss": 0.09171625226736069,
+              "actor_displacement": 0.07355249607471578,
+              "training_return_U": 23.05095187262562
+            },
+            "30": {
+              "action_entropy": 7.1952223777771,
+              "discoverer_value_loss": 0.09494589269161224,
+              "actor_displacement": 0.07853621058864159,
+              "training_return_U": 22.623167428664097
+            },
+            "35": {
+              "action_entropy": 7.754966616630554,
+              "discoverer_value_loss": 0.10990101099014282,
+              "actor_displacement": 0.0838200247147345,
+              "training_return_U": 23.42662924206307
+            },
+            "40": {
+              "action_entropy": 8.3356374502182,
+              "discoverer_value_loss": 0.11206281930208206,
+              "actor_displacement": 0.08880514982831982,
+              "training_return_U": 23.32359052781404
+            },
+            "45": {
+              "action_entropy": 8.841965198516846,
+              "discoverer_value_loss": 0.12604930996894836,
+              "actor_displacement": 0.09315702309391143,
+              "training_return_U": 22.797431573074462
+            }
+          },
+          "counts": {
+            "model_constructions": 2,
+            "training_starts": 1,
+            "checkpoint_loads": 0,
+            "training_transitions": 360000,
+            "stored_training_transitions": 360000,
+            "training_episodes": 720,
+            "update_stages": 45,
+            "training_agent_step_batches": 22500,
+            "evaluation_steps": 144000,
+            "evaluation_episodes": 288,
+            "evaluation_agent_step_batches": 4500
+          },
+          "optimizer_calls": {
+            "coordinator": 0,
+            "discoverer_actor": 101250,
+            "discoverer_critic": 101250,
+            "team_discriminator": 0,
+            "individual_discriminator": 0
+          },
+          "wall_seconds_before_publication": 6170.914933552005,
+          "peak_rss_bytes": 1394839552
+        },
+        "D1280": {
+          "J_by_rollout": {
+            "5": 0.5024827163202581,
+            "10": 0.40927584306978143,
+            "15": 0.3671297759264831,
+            "20": 0.46538860374623203,
+            "25": 0.5072189021503397,
+            "30": 0.4207113925819752,
+            "35": 0.4437338326992297,
+            "40": 0.4428582482123822,
+            "45": 0.49935211030661386
+          },
+          "endpoint_scores_J": [
+            0.5211052903004072,
+            0.5212518396291561,
+            0.47674155443906463,
+            0.4653089066341627,
+            0.4843619919624848,
+            0.5017021504987915,
+            0.5169248611596772,
+            0.4754373451115139,
+            0.5120396660228892,
+            0.5327473842851482,
+            0.49181204587713684,
+            0.4311415454592388,
+            0.5235020533925492,
+            0.4657302645362438,
+            0.5472611821075132,
+            0.5022049350254072,
+            0.5212303182930181,
+            0.5076357500073302,
+            0.42682072800577375,
+            0.5333783188289732,
+            0.543064102068203,
+            0.5061743995249778,
+            0.5195133339538691,
+            0.5231725248194589,
+            0.45741849060152423,
+            0.4576763092258504,
+            0.5207227070885719,
+            0.45562093333487996,
+            0.5034558954914441,
+            0.5096298589692677,
+            0.5031316298868385,
+            0.5213492132702762
+          ],
+          "object_id": "FSD_MATCHED_INFORMATION_BASELINE_B01",
+          "launch_sha": "887563f4713177d76999ef5832ce2dfa946d8505",
+          "lambda_l": 0.05,
+          "diagnostics": {
+            "1": {
+              "action_entropy": 4.330809712409973,
+              "discoverer_value_loss": 0.10452928394079208,
+              "actor_displacement": 0.15467362303069956,
+              "training_return_U": 19.18320038465099
+            },
+            "5": {
+              "action_entropy": 4.710242450237274,
+              "discoverer_value_loss": 0.0603477768599987,
+              "actor_displacement": 0.42955043082922906,
+              "training_return_U": 25.892755089807007
+            },
+            "10": {
+              "action_entropy": 5.154826641082764,
+              "discoverer_value_loss": 0.03167778626084328,
+              "actor_displacement": 0.6101621305775643,
+              "training_return_U": 29.4266014240767
+            },
+            "15": {
+              "action_entropy": 5.544025301933289,
+              "discoverer_value_loss": 0.020410671830177307,
+              "actor_displacement": 0.7329588565755665,
+              "training_return_U": 31.220111083351952
+            },
+            "20": {
+              "action_entropy": 5.912985801696777,
+              "discoverer_value_loss": 0.020120546221733093,
+              "actor_displacement": 0.8326271633791241,
+              "training_return_U": 29.560659296808943
+            },
+            "25": {
+              "action_entropy": 6.255531907081604,
+              "discoverer_value_loss": 0.017209764569997787,
+              "actor_displacement": 0.9139899575179357,
+              "training_return_U": 31.085600478398362
+            },
+            "30": {
+              "action_entropy": 6.578127145767212,
+              "discoverer_value_loss": 0.013972165063023567,
+              "actor_displacement": 0.9849483354913822,
+              "training_return_U": 31.703318851324692
+            },
+            "35": {
+              "action_entropy": 6.879004240036011,
+              "discoverer_value_loss": 0.013253413140773773,
+              "actor_displacement": 1.0471359839652827,
+              "training_return_U": 30.873062971177536
+            },
+            "40": {
+              "action_entropy": 7.168323397636414,
+              "discoverer_value_loss": 0.013374021276831627,
+              "actor_displacement": 1.1008594758260448,
+              "training_return_U": 29.806350796350202
+            },
+            "45": {
+              "action_entropy": 7.450556755065918,
+              "discoverer_value_loss": 0.012313894927501678,
+              "actor_displacement": 1.1500054232625527,
+              "training_return_U": 29.126621845913032
+            }
+          },
+          "counts": {
+            "model_constructions": 2,
+            "training_starts": 1,
+            "checkpoint_loads": 0,
+            "training_transitions": 360000,
+            "stored_training_transitions": 360000,
+            "training_episodes": 720,
+            "update_stages": 45,
+            "training_agent_step_batches": 22500,
+            "evaluation_steps": 144000,
+            "evaluation_episodes": 288,
+            "evaluation_agent_step_batches": 4500
+          },
+          "optimizer_calls": {
+            "coordinator": 675,
+            "discoverer_actor": 101250,
+            "discoverer_critic": 101250,
+            "team_discriminator": 675,
+            "individual_discriminator": 2700
+          },
+          "wall_seconds_before_publication": 8521.369515690982,
+          "peak_rss_bytes": 2949578752
+        }
+      },
+      "missing_or_invalid_arms": {}
+    }
+  ],
+  "arms": {
+    "CF_E005": {
+      "lambda_l": 0.005,
+      "pairs": [
+        {
+          "training_seed": 772803,
+          "status": "complete",
+          "J45": {
+            "CF_E005": 0.2667593290099469,
+            "CF": 0.07468199342662883,
+            "D1280": 0.45587469857693386
+          },
+          "rise_J45_minus_J5": 0.003971003245174853,
+          "new_minus_CF_J45": 0.19207733558331808,
+          "D1280_minus_new_J45": 0.18911536956698694,
+          "D1280_minus_CF_J45": 0.381192705150305,
+          "new_minus_CF_by_rollout": {
+            "5": -0.021188195782194663,
+            "10": -0.09709691733286924,
+            "15": -0.11627021530397608,
+            "20": 0.07470229039445592,
+            "25": -0.08701876480664666,
+            "30": -0.16001603047272095,
+            "35": -0.019826385232856236,
+            "40": 0.12920867711905215,
+            "45": 0.19207733558331808
+          },
+          "D1280_minus_new_by_rollout": {
+            "5": -0.03519902929331947,
+            "10": 0.11544274799934112,
+            "15": 0.18064856193919565,
+            "20": 0.11361494688264218,
+            "25": 0.19295347114536798,
+            "30": 0.2961092429994457,
+            "35": 0.24017033423761547,
+            "40": 0.09560943659802773,
+            "45": 0.18911536956698694
+          }
+        },
+        {
+          "training_seed": 772903,
+          "status": "complete",
+          "J45": {
+            "CF_E005": 0.2899973989917579,
+            "CF": 0.15873341021380014,
+            "D1280": 0.35469677422138435
+          },
+          "rise_J45_minus_J5": -0.004634567955920543,
+          "new_minus_CF_J45": 0.13126398877795778,
+          "D1280_minus_new_J45": 0.06469937522962643,
+          "D1280_minus_CF_J45": 0.1959633640075842,
+          "new_minus_CF_by_rollout": {
+            "5": 0.06087021775112933,
+            "10": 0.015330440496170994,
+            "15": 0.021936123308521738,
+            "20": -0.02489736856300051,
+            "25": 0.06883807351804311,
+            "30": -0.13658913632039593,
+            "35": 0.01150049696415023,
+            "40": 0.1585322992207997,
+            "45": 0.13126398877795778
+          },
+          "D1280_minus_new_by_rollout": {
+            "5": 0.009283657591014072,
+            "10": 0.0810306593443696,
+            "15": 0.09575941993618858,
+            "20": 0.01957086957677101,
+            "25": 0.21794591333923413,
+            "30": 0.21828752543031738,
+            "35": 0.2773305020818514,
+            "40": 0.20671195561123257,
+            "45": 0.06469937522962643
+          }
+        },
+        {
+          "training_seed": 773003,
+          "status": "complete",
+          "J45": {
+            "CF_E005": 0.29005288362917625,
+            "CF": 0.08015286632526682,
+            "D1280": 0.49935211030661386
+          },
+          "rise_J45_minus_J5": 0.028862406854176903,
+          "new_minus_CF_J45": 0.20990001730390945,
+          "D1280_minus_new_J45": 0.2092992266774376,
+          "D1280_minus_CF_J45": 0.41919924398134706,
+          "new_minus_CF_by_rollout": {
+            "5": 0.048665928842529904,
+            "10": -0.054682148191224356,
+            "15": -0.10085473681272375,
+            "20": -0.009063067333028307,
+            "25": -0.035147143063166186,
+            "30": -0.04218596945779107,
+            "35": 0.015121543223008155,
+            "40": 0.18700681069225117,
+            "45": 0.20990001730390945
+          },
+          "D1280_minus_new_by_rollout": {
+            "5": 0.24129223954525875,
+            "10": 0.2015903369098888,
+            "15": 0.19372920902981447,
+            "20": 0.35883101477757273,
+            "25": 0.3579501227219022,
+            "30": 0.18371359788315744,
+            "35": 0.3295288111356447,
+            "40": 0.12950989811632851,
+            "45": 0.2092992266774376
+          }
+        }
+      ],
+      "status": "complete",
+      "new_minus_CF_J45": {
+        "available_blocks": 3,
+        "planned_blocks": 3,
+        "mean": 0.17774711388839512,
+        "min": 0.13126398877795778,
+        "max": 0.20990001730390945,
+        "sample_sd": 0.04123011867497839,
+        "t_multiplier": 4.3027,
+        "working_model_95pct_interval": [
+          0.07532469599649103,
+          0.28016953178029924
+        ],
+        "positive_blocks": 3,
+        "negative_blocks": 0,
+        "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+      },
+      "D1280_minus_new_J45": {
+        "available_blocks": 3,
+        "planned_blocks": 3,
+        "mean": 0.15437132382468366,
+        "min": 0.06469937522962643,
+        "max": 0.2092992266774376,
+        "sample_sd": 0.07831117925040915,
+        "t_multiplier": 4.3027,
+        "working_model_95pct_interval": [
+          -0.04016656703180968,
+          0.34890921468117697
+        ],
+        "positive_blocks": 3,
+        "negative_blocks": 0,
+        "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+      },
+      "fits_with_J45_at_least_J5": 2,
+      "fits_above_CF_at_J45": 3,
+      "fits_with_smaller_gap_than_CF": 3,
+      "J_by_rollout_mean": {
+        "5": 0.2728702564958166,
+        "10": 0.2071681530182589,
+        "15": 0.18863412961675552,
+        "20": 0.22974063625455157,
+        "25": 0.17849373348678185,
+        "30": 0.17353813681034538,
+        "35": 0.14025953646594325,
+        "40": 0.2958669125150935,
+        "45": 0.282269870543627
+      }
+    },
+    "CF_E0005": {
+      "lambda_l": 0.0005,
+      "pairs": [
+        {
+          "training_seed": 772803,
+          "status": "complete",
+          "J45": {
+            "CF_E0005": 0.32867228055174363,
+            "CF": 0.07468199342662883,
+            "D1280": 0.45587469857693386
+          },
+          "rise_J45_minus_J5": 0.14106578252574187,
+          "new_minus_CF_J45": 0.2539902871251148,
+          "D1280_minus_new_J45": 0.12720241802519022,
+          "D1280_minus_CF_J45": 0.381192705150305,
+          "new_minus_CF_by_rollout": {
+            "5": -0.09637002352096496,
+            "10": -0.047292152675043386,
+            "15": -0.12007276595220684,
+            "20": -0.008167038249927872,
+            "25": -0.07048784502523692,
+            "30": -0.001033434847129644,
+            "35": 0.16637945146883454,
+            "40": -0.02780171843935672,
+            "45": 0.2539902871251148
+          },
+          "D1280_minus_new_by_rollout": {
+            "5": 0.03998279844545083,
+            "10": 0.06563798334151527,
+            "15": 0.1844511125874264,
+            "20": 0.19648427552702596,
+            "25": 0.17642255136395824,
+            "30": 0.13712664737385438,
+            "35": 0.053964497535924694,
+            "40": 0.2526198321564366,
+            "45": 0.12720241802519022
+          }
+        },
+        {
+          "training_seed": 772903,
+          "status": "complete",
+          "J45": {
+            "CF_E0005": 0.3074936230889518,
+            "CF": 0.15873341021380014,
+            "D1280": 0.35469677422138435
+          },
+          "rise_J45_minus_J5": 0.06959242816578523,
+          "new_minus_CF_J45": 0.14876021287515165,
+          "D1280_minus_new_J45": 0.047203151132432564,
+          "D1280_minus_CF_J45": 0.1959633640075842,
+          "new_minus_CF_by_rollout": {
+            "5": 0.0041394457266174245,
+            "10": -0.06467287821112146,
+            "15": 0.0375232154477112,
+            "20": -0.06259479012942193,
+            "25": 0.045941716834631496,
+            "30": -0.0862364034021943,
+            "35": 0.05297629179091806,
+            "40": 0.09154628465622851,
+            "45": 0.14876021287515165
+          },
+          "D1280_minus_new_by_rollout": {
+            "5": 0.06601442961552598,
+            "10": 0.16103397805166203,
+            "15": 0.08017232779699912,
+            "20": 0.05726829114319243,
+            "25": 0.24084227002264574,
+            "30": 0.16793479251211574,
+            "35": 0.2358547072550836,
+            "40": 0.2736979701758038,
+            "45": 0.047203151132432564
+          }
+        },
+        {
+          "training_seed": 773003,
+          "status": "complete",
+          "J45": {
+            "CF_E0005": 0.23467262170180442,
+            "CF": 0.08015286632526682,
+            "D1280": 0.49935211030661386
+          },
+          "rise_J45_minus_J5": 0.045282242579598675,
+          "new_minus_CF_J45": 0.15451975537653762,
+          "D1280_minus_new_J45": 0.26467948860480944,
+          "D1280_minus_CF_J45": 0.41919924398134706,
+          "new_minus_CF_by_rollout": {
+            "5": -0.0231341688102637,
+            "10": 0.06050345554169401,
+            "15": -0.024047932085628276,
+            "20": 0.018501054339598477,
+            "25": -0.04347814913402648,
+            "30": 0.006648123782822479,
+            "35": 0.19172488890052802,
+            "40": 0.1946241253949596,
+            "45": 0.15451975537653762
+          },
+          "D1280_minus_new_by_rollout": {
+            "5": 0.31309233719805235,
+            "10": 0.08640473317697045,
+            "15": 0.116922404302719,
+            "20": 0.33126689310494595,
+            "25": 0.3662811287927625,
+            "30": 0.1348795046425439,
+            "35": 0.15292546545812485,
+            "40": 0.12189258341362008,
+            "45": 0.26467948860480944
+          }
+        }
+      ],
+      "status": "complete",
+      "new_minus_CF_J45": {
+        "available_blocks": 3,
+        "planned_blocks": 3,
+        "mean": 0.18575675179226803,
+        "min": 0.14876021287515165,
+        "max": 0.2539902871251148,
+        "sample_sd": 0.05916210434450802,
+        "t_multiplier": 4.3027,
+        "working_model_95pct_interval": [
+          0.03878832266147772,
+          0.33272518092305836
+        ],
+        "positive_blocks": 3,
+        "negative_blocks": 0,
+        "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+      },
+      "D1280_minus_new_J45": {
+        "available_blocks": 3,
+        "planned_blocks": 3,
+        "mean": 0.14636168592081075,
+        "min": 0.047203151132432564,
+        "max": 0.26467948860480944,
+        "sample_sd": 0.10999680677102361,
+        "t_multiplier": 4.3027,
+        "working_model_95pct_interval": [
+          -0.12688853192816105,
+          0.4196119037697825
+        ],
+        "positive_blocks": 3,
+        "negative_blocks": 0,
+        "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+      },
+      "fits_with_J45_at_least_J5": 3,
+      "fits_above_CF_at_J45": 3,
+      "fits_with_smaller_gap_than_CF": 3,
+      "J_by_rollout_mean": {
+        "5": 0.20496602402379138,
+        "10": 0.23549716957940947,
+        "15": 0.2181645783561069,
+        "20": 0.19873976007515878,
+        "25": 0.17359491916249448,
+        "30": 0.2595946107384809,
+        "35": 0.27502119553460275,
+        "40": 0.223740547375003,
+        "45": 0.2902795084475
+      }
+    }
+  },
+  "invalid_inputs": {},
+  "interpretation_limit": "exploration; three blocks, references not contemporaneous; two entropy values were tried on the blocks the D1280 comparison is read on, so any remaining-gap number is selected on its own evaluation blocks; no MEI verdict and no claim about the size of a matched-information gap",
+  "input_summaries": [
+    "runs/flexible_skill_duration/b03_e0005_772803_a01/summary.json",
+    "runs/flexible_skill_duration/b03_e0005_772903_a01/summary.json",
+    "runs/flexible_skill_duration/b03_e0005_773003_a01/summary.json",
+    "runs/flexible_skill_duration/b03_e005_772803_a01/summary.json",
+    "runs/flexible_skill_duration/b03_e005_772903_a01/summary.json",
+    "runs/flexible_skill_duration/b03_e005_773003_a01/summary.json"
+  ],
+  "reference_summaries": [
+    "runs/flexible_skill_duration/b01_s1_cf_772803_a01/summary.json",
+    "runs/flexible_skill_duration/b01_s1_cf_772903_a01/summary.json",
+    "runs/flexible_skill_duration/b01_s1_cf_773003_a01/summary.json",
+    "runs/flexible_skill_duration/b01_s1_d1280_772803_a01/summary.json",
+    "runs/flexible_skill_duration/b01_s1_d1280_772903_a01/summary.json",
+    "runs/flexible_skill_duration/b01_s1_d1280_773003_a01/summary.json"
+  ]
+}

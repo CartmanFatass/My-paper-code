@@ -967,3 +967,97 @@ more than four fits ran at once.
 | `b03_e0005_773003_a01` | CF_E0005 | 773003 | `d3890de28dc218231c0f9a8d0931ca8e06e34d6c69eaf89c7b1dda0a77bb0335.json` |
 
 The plan is fully launched: six of six. Collection and the reduction wait for all six exits.
+
+## 2026-09-19 18:05 PDT — flat entropy B03 read: the decline goes away, the flat learner still does not learn
+
+Reads against the inspection entry and the prospective entry of 2026-09-19 (14:55 and 15:00 PDT).
+Nothing was added to the plan after seeing scores. Exploration: no MEI verdict, no claim about
+the size of a matched-information gap.
+
+**Execution facts.** Six of six planned fits admitted at the first request on `wsl_4070`, launch
+sha `051e8c7ab955a348fe868e6271eb72c77bbf50e3`, never more than four at once, all exit 0 with 45
+rows, status complete, empty `stderr.log`; recorded `lambda_l` is the arm's in every learner and
+evaluation config. One rsync, 54 files sha256-identical to the node. `reduce` complete, no
+invalid input, every new fit differing from the CF fit of its block in `lambda_l` only;
+`runs/flexible_skill_duration/b03_reduce/summary.json`, sha256
+`73eb2fd72f298e0255e4288a7b5edf62c5492d722932639306ab85dde8d39ab2`. Wall 7,000–7,260 s per fit at
+four concurrent, about 3,600 s at two; peak RSS 1.3 GiB.
+
+**Observations.** J45 by block, with the completed B01 fits of the same block.
+
+| block | CF (.05) | CF_E005 | CF_E0005 | D1280 | D1280 − CF | D1280 − E005 | D1280 − E0005 |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 772803 | .075 | .267 | .329 | .456 | .381 | .189 | .127 |
+| 772903 | .159 | .290 | .307 | .355 | .196 | .065 | .047 |
+| 773003 | .080 | .290 | .235 | .499 | .419 | .209 | .265 |
+| mean | .105 | .282 | .290 | .437 | .332 | .154 | .146 |
+
+Both arms end above CF on all three blocks (+.13 to +.25) and below D1280 on all three. With
+three pairs the t interval (df = 2) for D1280 − new is [−.04, +.35] and [−.13, +.42]: description
+only.
+
+Diagnostics at rollout 45, mean of three blocks (rollout 1 in brackets):
+
+| | CF (.05) | CF_E005 | CF_E0005 | D1280 |
+| --- | ---: | ---: | ---: | ---: |
+| action entropy (4.3) | 8.91 | 4.45 | 3.96 | 7.46 |
+| actor displacement (.027; D .153) | .093 | .071 | .071 | 1.156 |
+| low-level value loss | .172 | .111 | .085 | .009 |
+| training return U, rollouts 35–45 | 22.5 | 22.9 | 23.8 | 29.3 |
+
+J within a fit moves a great deal from panel to panel (SD over the nine panels about .07–.08
+for every flat fit, .06 for D1280), so J45 alone is a noisy reading of a fit. Window means,
+computed after seeing the curves and therefore descriptive only:
+
+| | CF (.05) | CF_E005 | CF_E0005 | D1280 |
+| --- | ---: | ---: | ---: | ---: |
+| early, panels 5–20 | .241 | .225 | .214 | .356 |
+| late, panels 30–45 | .167 | .223 | .262 | .426 |
+
+**Predictions, scored.**
+- Intermediate, entropy at rollout 45 below 5.5: held in six of six (3.87–4.46).
+- Intermediate, actor displacement at least twice CF's .094: failed in six of six. It is lower
+  than CF's (.069–.073); CF's extra displacement is plausibly its own log-std parameter growing.
+- Native, J45 ≥ J5 in at least four of six: five of six, but two of the five by less than .005.
+  On window means: CF falls, E005 is flat, E0005 rises a little.
+- Native, J45 above the CF fit of the block in at least five of six: six of six.
+- Gap positive and smaller than B01's on the same block: six of six for both parts.
+
+**Interpretation.**
+- Strengthened: the entropy bonus is what made the selected flat learner's evaluated policy
+  deteriorate. Cutting the coefficient stops the noise growth and removes the decline, ordered
+  by dose in the window means (.05 falls, .005 flat, .0005 slightly up). On J45 this accounts for
+  roughly half of the B01 gap on these blocks (.33 → about .15); on the late-window means for
+  less (.26 → .16–.20), because CF's J45 happened to be low points and the new arms' high points.
+- Weakened: my mechanism for it. I predicted that with less noise the actor would move further;
+  it moved no further. The flat actor's displacement from initialisation is about .07–.09 under
+  every entropy coefficient and about .15–.22 at the larger learning rates of stage 0, against
+  1.15 for D's low-level actor. So "noise swamps the gradient on the mean" is not the reason the
+  flat actor barely trains; something else keeps its updates small or incoherent.
+- New, and the main thing this batch shows: with the decline removed, the flat learner does not
+  learn in 45 rollouts. Its J stays in the .2–.3 band it occupies at rollout 5 (D1280 is in the
+  same band at rollout 5 on two of three blocks and then climbs), its training return stays
+  near 23 against D's 29, and its policy loss is of order 1e-4. What B01 measured as +.29 J is
+  therefore one part comparator deterioration (removed here by one hyperparameter) and one
+  part a flat learner that stands still while D learns.
+- Not established: that a flat learner cannot learn on this host, that skills are why D
+  learns, or any size for a matched-information gap. D's low-level actor optimises an intrinsic
+  reward that includes the discriminator terms; whether its large displacement and its gain
+  come from the skill structure or from having a denser learning signal is untouched. The two
+  entropy values were tried on the blocks the gap is read on; three blocks.
+- Simpler explanation (b) of the prospective entry ("the flat learner is simply poor on this
+  host") gains, in the modified form "its actor is hardly being trained"; (a), an evaluation
+  artefact unrelated to noise, loses.
+
+**Decision.** The idea is ended with its six fits used; no extension. `lambda_l` = 0.0005 is the
+better of the two flat settings seen so far and is recorded as such, not adopted as "the"
+baseline: a baseline whose actor does not train is not the competent comparator the
+constitution asks for.
+
+**Next (not scheduled, no fit needed to start).** Read why the flat actor's updates are so
+small: the `mappo` route's advantage computation and normalisation, the clip and minibatch
+settings it actually runs with, the recorded policy loss, KL and clip fraction if present, and
+what reward D's low-level learner is given, against the same quantities for D. That is code
+reading and existing `training_rows`, zero fits. A fit-bearing entry follows only if that
+reading names a modifiable link with a prediction of its own. Re-entry condition: that
+inspection is written up, or the owner redirects.
