@@ -4171,3 +4171,80 @@ have a behaviourally effective object to reorganize before the next team boundar
 and reading can continue, but the current owner instruction launches nothing. UCOPE's
 negative scalar-copy results, contrary panels and local-versus-policy-value distinctions
 remain inherited. No new empirical result is claimed by this revision.
+
+
+## 2026-09-20 13:35 UTC — future FSD termination: L0 for isolated implementation before B08
+
+The owner relayed Claude's recommendation to implement the hook and J/I learners now,
+while the six proposed scientific gate fits still depend on B08. I proceed with that
+engineering preparation on `codex/team-conditioned-termination`. This is future FSD
+termination work, not another UCOPE experiment. The revised constitution section 3
+continues to apply: planned cost with reasons, no allowance/balance/reset arithmetic.
+
+Read Claude's published `eaa1401c9` notebook: the three B08 operations are already
+accepted and remain his responsibility; he adopted the accessible-END probe with an
+explicit read-only pair fallback and withdrew the claimed upper bound. No B08 probe
+result is available to this implementation. I merged published main into this own
+checkout to use its current interfaces; no Claude checkout, notebook, runner, runs,
+shared index or operation is edited or taken over.
+
+**Deliverable and ownership.** One opt-in predecision local END-mask callback in
+`hmasd/agent.py`; independent J/I mask policies, their native-return critics and bounded
+PPO updates in `experiments/candidates/team_conditioned_termination/`; focused tests
+mirrored under `tests/`. The DM owns the hook, frozen-foundation adapter/collector,
+integration checks and this notebook. A Sol/high Implementer may own only the mask
+policy/PPO module and its unit tests in a separate checkout. Independent read-only
+Reviewer examines the combined executable change. No result launch entry is created yet.
+
+**Hook contract.** Explicit installation only on D2 with both interruption costs infinite.
+Disabled means the existing path, RNG, outputs and checkpoint format remain unchanged.
+Before partial assignment, expose copied predecision states/observations, held Z/z,
+local/team ages, reset flags, mandatory END bits and eligible bits. A callback returns a
+boolean optional-END mask of the exact batch/agent shape; reject bits outside eligibility.
+Reset/invalid/team-cap forces all agents and team renewal; local cap remains mandatory.
+The callback cannot cancel a forced event or alter the team clock. Original kept-first
+partial-decoder order, same-label reselection, fresh low-level feedback, GRU carry and
+native reward are preserved. Optional END gets its own diagnostic cause, not a gap label.
+
+**Learner contract.** J and I share architecture, dimensions, initialization, full legal
+context and per-agent IDs. J additionally consumes the realized canonical-order prefix;
+I zeros that input. A zero-initialized logit head gives the same initial independent
+END probability (0.1, a technical default subject to a prospective scientific plan).
+Use a private torch generator for sampling/shuffling; never silently reseed global
+foundation RNG. Sum log probabilities across eligible bits for one team action; KEEP
+and END both receive credit, forced bits receive no actor term, and a forced bit's
+executed value may condition subsequent J bits. The critic has context only, no sampled
+mask or future information. Teacher-forced replay uses the stored whole mask. PPO clips
+one full-mask ratio; bounded minibatches keep tails and visit each planned sample once
+per epoch. Advantages normalize once over optional decision rows, not separately per
+minibatch. Critic targets span forced ticks too. No intrinsic reward, switching penalty,
+per-bit advantage or foundation update. Entropy coefficient defaults to zero; any
+conditional-entropy diagnostic is not claimed to be exact entropy under changed prefixes.
+
+The adapter freezes foundation parameters and normalization state, preserves recurrent
+state evolution, and does not call foundation optimizers or populate its training buffer.
+It encodes central geometry with explicit fixed task scales, observations, held labels,
+ages and reset/forced masks equally for J/I; no raw-metre saturation or hidden future
+service information. Training samples the frozen foundation law; evaluation uses greedy
+gate/selector/actions without learning. Native finite episodes have zero terminal
+bootstrap, including the host's finite time limit; a generic GAE utility must distinguish
+an actual terminal from continuation truncation and stop traces at either boundary.
+
+**Checks and planned technical exposure.** Algebraic distribution/replay/forced-bit,
+KEEP credit, bootstrap, minibatch tail and RNG-isolation checks; disabled-hook identity
+against the existing D2 route plus the frozen off fingerprint; reset/team/local-cap,
+partial-order and same-label/GRU tests; then a small real Scenario1 smoke using its own
+small foundation, never B08 checkpoints. Plan one foundation construction/training
+fixture (seed 920611, two lanes, 20 ticks, at most two rollouts) and one gate-update smoke
+per J/I (seeds 920621/920622, two lanes, 20 ticks, two rollouts); deterministic reload/
+execution checks use only this test fixture. These are correctness fixtures on local CPU,
+not native research evaluation or evidence of learning benefit. Report actual optimizer
+and transition counts and wall time in the acceptance entry; failures motivate targeted
+repairs, not scientific seed expansion. No scientific gate fit, B08 probe, Pro call or
+node launch is authorized or performed here. All scratch belongs to pytest under temp/.
+
+**Stop and next science.** Finish reviewable implementation and scaled-host checks without
+waiting for scores. Once B08 is published, read its actual acceptance and measurements:
+inert labels end this comparison; service-responsibility skills remain a design request
+for Claude, not an object I construct. Content plus useful accessible variation permits
+writing a concrete prospective J/I/F launch entry, not an automatic launch from this L0.
