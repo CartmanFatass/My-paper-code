@@ -596,3 +596,106 @@ code. The combined direction suite now reports **31 passed in 3.47 s**, with whi
 checks clean. This fixes test discovery, not the experiment or its exposure. Reviewer facts
 do not establish scientific value. DM accepts C03 for the already specified native launch
 after publication of this final input revision.
+
+## 2026-09-20 — C03 read: release-priority repair reaches its proxy but loses native value
+
+The [C03 manifest](../../../../runs/skill_information_refresh/c03_release_s73150_20260920/launch-manifest.json)
+records native acceptance of the exact published inputs; its same operation exited zero with
+a consistent process-exit witness. The DM retained observation throughout. Canonical control
+had advanced to `6ee15d7d`; comparison against the earlier admitted control shows no change
+to AGENTS, constitution, RESEARCH, skills or compute configuration, so no adopted governance
+method or bound input was silently replaced. No duplicate, rebind or score-driven extension.
+
+I read the [summary](../../../../runs/skill_information_refresh/c03_release_s73150_20260920/summary.json),
+all 7,168 episode rows, the 18 development readings and ten final trace sets. Actual exposure
+is exactly 4,608 development and 2,560 final episodes/688,128 team transitions, **zero fits,
+training transitions and optimizer updates**; `updates.jsonl` is empty. Each loaded policy
+has 3,778 finite parameters and exactly zero movement from its recorded input. All final
+arms have the complete common 256-world panel, 14 jobs/96 ticks, 24 packets/192 bytes and
+one packet per sender per frame. Trace values are finite. Runner wall is 12.206326 s
+(selection 6.870426, final evaluation 5.311254), acceptance-to-child-exit 13.541678 s;
+peak single-child RSS 241,596 KiB, user/system CPU 13.082793/1.029478 s. No GPU, training
+replication, full-path speed claim or aggregate-node memory claim.
+
+Both simple families independently selected `delta1_age8` on development (.938895089);
+the predeclared family tie rule selected ordinary AGE_CHANGE. The selected AGE_CHANGE,
+AGE_RELEASE, POLL, L73141 and L73141_RELEASE all have identical executed sends, legal
+features, choice masks, physical states and caches on this fresh final panel. Guarded
+nonpolling development variants did receive interventions (means 1.3125–1.48828125 per
+episode), so the guard was not globally dormant. Final PRE_DECISION service is .898437500.
+
+| Frozen checkpoint | Original service | Release-priority service | Guard minus original | Native jobs gained/lost | Stale-release waits removed | Conflicts added |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| 73141 | .931361607 | .931361607 | 0 | 0 | 0 | 0 |
+| 73142 | .934430804 | .931919643 | -.002511161 | -9 | 561 | 9 |
+| 73143 | .933314732 | .931919643 | -.001395089 | -5 | 593 | 10 |
+
+For 73142/73143 the guard actually overrides 1,173/1,454 free requests across all 256 worlds;
+the first checkpoint has no override. Total ordinary waiting falls 472/495 ticks and BYPASS
+choices fall 126/136. Guarded-minus-original positive/negative/tied worlds are 8/9/239 and
+12/10/234. Thus the intervention is active and reaches its intermediate prediction, while
+the predicted native improvement fails with the opposite sign. **Kill this release-priority
+repair for the current package.** Better agreement with a fresh DONE state is not enough:
+the intervention changes passage timing, routing and which later snapshot can use the quota.
+The result identifies this legal guard's package effect, not a unique mediation effect of
+waiting and not proof that intentional misinformation or delay is generally beneficial.
+
+On the same fresh panel, original L73141/L73142/L73143 minus the selected simple reference
+are 0/+.003069196/+.001953125: exactly 0/+11/+7 completed jobs among 3,584 opportunities.
+The corresponding guarded increments are 0/+2/+2 jobs. The conditional original-policy
+advantages are real readings and should not be erased by the failed repair. They are not
+three newly trained replicas or a stable population/importance claim. Together with C02,
+they strengthen the possibility that lawful contextual timing changes native pacing, while
+weakening “remove stale blocks” as the useful-learning mechanism. The simple-clock explanation
+does not cover the two contextual policies; a more plausible *simple* explanation is to
+defer packets reporting a non-APPROACH/DONE stage, which the current freshness-oriented rules
+do not directly express. Learning's increment over that transparent rule remains untested.
+
+## 2026-09-20 — C04 prospective stage-only null comparison and L0
+
+Select one final zero-new-fit comparator check to address the newly concrete simpler
+explanation, not to optimize another learned architecture. Two untuned rules are fixed now:
+`ACTIVE_FIRST` requests at any available slot if own stage is APPROACH or CROSSING, otherwise
+waits for the ordinary forced slot; `APPROACH_FIRST` requests only if own stage is APPROACH,
+otherwise waits for that same forced slot. They read only the sender's observed stage, not
+distance, unsent teammate state, reward or a newly free priority channel. No threshold fitting,
+learning, payload, access, delay, skill/route/controller or termination changes. C02's stage
+slice motivates these two rules explicitly after observing outcomes; this is new exploration,
+not a retrospectively prespecified C01 baseline or fresh confirmation.
+
+Keep all three frozen checkpoint inputs/digests from C03, original greedy extraction only;
+the failed release guard is not retained as a candidate. World master seed **73151**, disjoint
+development phase 6 and final phase 7, each 256 x 96 ticks, batch 32. Develop the same nine
+AGE_CHANGE variants plus ACTIVE_FIRST, APPROACH_FIRST and PRE_DECISION: twelve x 256 episodes.
+Select the best AGE_CHANGE variant by its existing lexical rule, then the strongest simple
+arm among that winner and the three fixed rules by development service and lexical arm name.
+Final arms are original L73141/L73142/L73143, selected AGE_CHANGE, ACTIVE_FIRST, APPROACH_FIRST,
+PRE_DECISION and POLL: eight x 256 episodes on one common exogenous panel. POLL is already
+represented by the age-8 development variants, so no duplicate development execution is needed.
+Report all arms and each frozen learner minus the development-selected simple reference.
+Total 3,072 development + 2,048 final episodes = **491,520 team transitions, zero new fits,
+zero training and zero updates**. Rough occupancy expectation 10–20 s from C03, not a deadline.
+No outcome-selected further rule, panel, seed, horizon or network; the three training units
+remain the original exploratory histories regardless of final episode count.
+
+Prediction: at least one transparent stage-only rule produces the characteristic extra
+stale-release waiting and much of the conditional native advantage, leaving little learned
+increment against the development-selected reference. Check both executed schedules/initial
+decision sites and completed jobs rather than claiming the rule matches a neural policy
+from mean return alone. If the rule is stronger, prefer it and stop this unchanged learned
+package; if a learned remainder survives, report the residual conditional gap honestly rather
+than seeking confirmation in this bespoke host merely because its sign is positive. In either
+case this closes the current small-host comparator/repair cycle. A further training study
+would need a distinct target-relevant information-value question, not another initialization
+or an ad hoc fourth stage rule.
+
+L0: add only `experiments/candidates/skill_information_refresh/c04/`, the explicit admitted
+entry `scripts/run_sir_c04.py` and mirrored uniquely named tests. Reuse C03's reviewed frozen
+loader, collector, mean readings and paired arithmetic without changing C01/C03 code. The
+two fixed stage predicates can use a parameter-free policy adapter to that collector; their
+names/counts must remain unambiguously nonlearning. Preserve checkpoint digest/metadata,
+zero movement/update verification, full twelve-variant selection and all eight final traces.
+Check stage truth tables and irrelevance of other features, quotas, development-only selection,
+full output arithmetic/identity, and CLI admission. Independent review covers the new selection
+and fixed-rule adapter before acceptance. Publish exact input SHA and use local_linux's native
+admission; keep the original handle and report any technical failure without rerunning blindly.

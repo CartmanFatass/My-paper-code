@@ -1,0 +1,7 @@
+{
+  "seed": 73150,
+  "horizon": 96,
+  "selection_episodes": 256,
+  "final_episodes": 256,
+  "batch": 32
+}
