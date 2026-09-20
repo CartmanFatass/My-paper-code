@@ -1221,3 +1221,558 @@ feedback-renewal branch in parallel with FSD, FOLR idle; Codex integrated PR #27
 on the PR), then fast-forwarded its checkout and the `wsl_4070` checkout. The merge touches no FSD
 path and not the FSD row of `RESEARCH.md`. UCOPE's first batch is planned on `local_linux` from a
 separate worktree; this session touches no UCOPE file or `runs/ucope/` output.
+
+## 2026-09-19 19:50 PDT — flat update B04 read: a conventional large-minibatch update changes nothing; the noise explanation is weakened
+
+Reads against the inspection and prospective entries of 2026-09-19 (18:10 and 18:15 PDT). Nothing
+was added to the plan after seeing scores. Exploration and a package screen: no MEI verdict, no
+mechanism attribution between minibatch size, step count and learning rate, no gap-size claim.
+
+**Execution facts.** Six of six planned fits admitted at the first request on `wsl_4070`, launch
+sha `af66e79141f518be22c997d704e137bfd23419c2`, never more than four at once, all exit 0 with 45
+rows, status complete, empty `stderr.log`; every fit took exactly 2,700 low-level optimizer steps
+(60 per rollout) on both low-level optimizers, which the fit validator requires. One rsync, 54
+files, the six `summary.json` sha256-identical to the node. `reduce` complete, no invalid input,
+each new fit differing from the CF_E0005 fit of its block in the two learning-rate fields only
+(the minibatch size is carried outside the config snapshot and proved by the step count);
+`runs/flexible_skill_duration/b04_reduce/summary.json`, sha256
+`67e2150cc287a2115397abe00d08073a300a3aed08b8ca4850e03d4ba39a2ae1`. Wall 2,640–3,720 s per fit at
+four concurrent (CF_E0005: about 7,000 s), peak RSS 2.1 GiB.
+
+**Observations.** Late-window J (panels 30–45, declared beforehand) and J45, with the completed
+fits of the same block.
+
+| block | CF_E0005 late | CF_M1 late | CF_M5 late | D1280 late | CF_E0005 J45 | CF_M1 J45 | CF_M5 J45 | D1280 J45 |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 772803 | .290 | .254 | .321 | .432 | .329 | .282 | .353 | .456 |
+| 772903 | .214 | .202 | .188 | .395 | .307 | .183 | .162 | .355 |
+| 773003 | .283 | .222 | .257 | .452 | .235 | .181 | .230 | .499 |
+| mean | .262 | .226 | .255 | .426 | .290 | .215 | .248 | .437 |
+
+New minus CF_E0005, late window: CF_M1 −.036 (three of three below), CF_M5 −.007 (one above, two
+below); both inside the panel-to-panel noise of a fit (SD about .07). D1280 minus new, late
+window: +.201 and +.171, three of three positive for both arms.
+
+Diagnostics at rollout 45, mean of three blocks (policy loss: mean over the fit):
+
+| | CF_E0005 | CF_M1 | CF_M5 | D1280 |
+| --- | ---: | ---: | ---: | ---: |
+| optimizer steps per rollout | 2,250 | 60 | 60 | 2,250 |
+| mean policy loss | −.0005 | −.0016 | −.0006 | −.026 |
+| actor displacement | .071 | .062 | .085 | 1.156 |
+| action entropy | 3.96 | 4.14 | 3.84 | 7.46 |
+| low-level value loss | .086 | .212 | .269 | .009 |
+| training return U, rollouts 35–45 | 23.3 | 23.1 | 24.9 | 29.2 |
+
+Displacement does not scale with learning rate × steps: after rollout 1 CF_M5 has moved 4.5
+times as far as CF_M1 (.042 against .009, the ratio of the rates), and by rollout 45 both sit
+where CF_E0005 sat after 37 times as many steps at half of CF_M1's rate (.06–.10). The flat
+actor goes a short, similar distance under every update tried and then stops; D's actor keeps
+moving for 45 rollouts.
+
+**Predictions, scored.**
+- Intermediate, mean policy loss at least five times more negative than −.0005 in both arms:
+  failed in both (CF_M1 about three times, CF_M5 unchanged).
+- Intermediate, CF_M5 actor displacement above .2: failed in three of three (.075, .080, .100).
+- Native, for at least one arm: training return over rollouts 35–45 above 25 and late-window J
+  above CF_E0005 on at least two of three blocks: failed. CF_M5 passes 25 on one block (26.2)
+  and is above CF_E0005 on one block; CF_M1 on none.
+- D1280 stays above on most blocks (loosely held): three of three for both arms.
+
+**Interpretation.**
+- Weakened: my explanation that the flat actor stands still because 320-sample minibatches with
+  per-minibatch advantage normalisation make its gradient mostly noise. A 37-fold larger
+  minibatch, at the old and at the conventional MAPPO rate, leaves the surrogate no better and
+  the policy no better. As a package screen this does not exonerate every component (a larger
+  minibatch with many more steps was not run), but the result I said would follow from the
+  noise account did not appear in either arm, and I will not rescue it with a third setting.
+- Strengthened: the flat learner's failure is not an optimiser-setting matter. Four different
+  update regimes (entropy .05/.005/.0005, 2,250 or 60 steps, rates .5e-4 to 5e-4) give the same
+  picture: surrogate about zero, displacement saturating below .1, training return 22–25.
+- Not predicted, seen in the diagnostics, so descriptive only: the flat critic does not fit. Its
+  value loss stays at .07–.30 in every flat fit of B01, B03 and B04 while D's low-level value
+  loss falls from .10–.18 to .02 or less by rollout 25 and about .01 by rollout 45. A critic that explains little of the return gives
+  advantages that are mostly return noise whatever the minibatch. Whether the two critics are
+  even fitting comparable targets (horizon, bootstrapping at skill boundaries, reward scale) I
+  have not checked.
+- Untouched: D1280's standing as the reference and B02's reading; the B03 reading that the
+  entropy bonus caused the evaluation decline; whether an unfixed k helps (nothing here tests it).
+- Contrary evidence I keep in view: D128 and D1280 learn with this same low-level code and the
+  same 320-sample minibatches, so whatever stops the flat learner is something the flat
+  construction lacks or has, not the update law by itself.
+
+**Standing.** CF_E0005 remains the best flat setting seen; the B04 construction is not adopted
+(no better, and a worse critic fit). The flat comparator is still not a learning baseline, so
+B01's `D_REFERENCE_ABOVE` remains a statement about a comparator that does not learn. Fits used:
+6 of 6; the batch is closed.
+
+**Next.** As written beforehand for this outcome: stop tuning blind. Zero-fit inspection of what
+the two low-level critics are asked to fit: how low-level returns and GAE are built for D and for
+the flat arm (episode horizon against skill segment, bootstrap at skill boundaries, reward terms
+and scale), and what explained variance each critic reaches in the recorded logs. A new
+prospective entry only if that inspection yields a change with a predicted intermediate effect.
+
+## 2026-09-19 19:55 PDT — inspection (no new fit): D's discriminator reward is a near-constant offset; both critics fit the same kind of target
+
+Follows the "Next" of the B04 reading. Code read: `hmasd/agent.py`
+`update_discoverer_from_rollout` (advantage and value-loss sections), `hmasd/utils.py`
+`compute_gae`, the matched-information entry's CF description; data: `training_rows[].losses` of
+the ten completed D fits (B01 D1280, B02 D128) and of the flat fits.
+
+**Facts.**
+- One code path builds the low-level targets for D and for the flat arm: GAE over the whole
+  rollout buffer, gamma .99, lambda .95, no cut or bootstrap at skill boundaries, episode `dones`
+  only. `use_valuenorm` is on in both, so the recorded low-level value loss is an MSE on a
+  running-normalised return: roughly one minus the explained variance. Flat critics therefore
+  explain about 70–93 % of return variance, D's about 99 %.
+- The recorded reward components of D, per agent-step: environment .038 at rollout 1 rising to
+  .056–.063; team discriminator term −.040 to −.044; individual term −.017 to −.018, in every
+  one of ten fits at rollouts 1, 25 and 45. The discriminator terms are as large as the
+  environment reward, not small as I wrote at 18:10, and they do not change over training.
+  Discriminator losses stay at 1.72–1.76 (ln 6 = 1.79) and accuracies fall from .31–.37 to
+  .24–.35 (chance .167): the skills do not become more distinguishable.
+- The flat arm's per-step environment reward rises from .038 to about .05 (CF_E0005), D's to
+  about .057, consistent with the training returns already recorded.
+- D's action entropy climbs to 7.4 under the same `lambda_l` .05 that inflated CF's noise to
+  8.9; D's evaluation does not decline with it.
+
+**Interpretation.**
+- Weakened: my 18:10 account that D's low-level learner moves because the discriminator terms
+  give each agent an immediate signal it controls. In the recorded means those terms are an
+  offset of about −.06 per step that training does not improve; a constant offset leaves GAE
+  advantages unchanged after the critic absorbs it. Their per-sample variation is not logged, so
+  this is weakened, not excluded.
+- What remains different between the two low-level learners, all untested: the skill input (a
+  one-hot held for k = 10 steps and chosen by a learning coordinator, which gives temporally
+  extended, state-dependent variation in behaviour); the actor's input (D: own observation plus
+  skill; CF: own observation plus the central snapshot, a much wider input); D's better critic
+  fit, which may be cause or consequence.
+- Three of my mechanism predictions have now failed in a row (B03 displacement, B04 surrogate and
+  displacement, and this account of the discriminator terms). The observations are solid; my
+  explanations of why the flat learner stands still are not. Before another fit I want the
+  explanation challenged rather than extended.
+
+**Next.** One critic pass on the working explanation and on which single observation would most
+discriminate between the remaining differences. No fit is scheduled.
+
+## Pro question 2026-09-19 flat-learner-stands-still-critic
+Conversation: new (WSL Jev route; the address stays in the local operation file, named here by question key)
+Question: Why does the matched-information flat learner (CF) not train on the UAV host while the hierarchical learner (D1280) trains with the same low-level update code, and which single next observation would most discriminate between the remaining explanations? The answer changes the DM's next prospective entry (or the decision to write none); it does not change any completed batch or its reading. This is a critic pass on the DM's belief update: the owner asked that this key criticism come from Pro. A local read-only critic runs in parallel as a comparison and its text is deliberately not in this notebook at the pinned revision.
+Standing:
+  Observations (completed, committed). B01: D1280 above CF by +0.290 J over five blocks, read `D_REFERENCE_ABOVE`; the selected CF declines over training. B02: D128 versus D1280 coordinator batch, no detectable difference, the batch law is dropped. B03: CF's evaluation decline was its entropy bonus (`lambda_l` .05) inflating the action noise; at .005 and .0005 the decline is gone, J45 rises from .105 to .28–.29 on three blocks, D1280 still above on all three; the flat actor barely moves from initialisation. B04 (package screen): CF at `lambda_l` .0005 with 1,200-sequence minibatches (60 optimizer steps per rollout instead of 2,250) at rates 1e-4 and 5e-4 changes nothing. In every flat fit of B01, B03 and B04: mean low-level policy loss (the PPO surrogate) about 0 (−.0005 to −.0016) against −.026 for D; actor displacement from initialisation saturates at .06–.10 whatever the learning rate × steps (D: 1.15 and still rising at rollout 45); normalised low-level value loss .07–.30 (D: about .01); training return over rollouts 35–45 of 22–25 (D: 29); late-window J .19–.32 (D: .40–.45).
+  The DM's explanations so far, and their fate. (1) B03 prediction that removing the entropy bonus would at least double actor displacement: failed six of six. (2) 18:10 inspection account that 320-sample minibatches with per-minibatch advantage normalisation make the flat gradient mostly noise: B04's three predictions (surrogate five times more negative, CF_M5 displacement above .2, late-window J above CF_E0005 on two of three blocks) all failed. (3) 18:10 account that D's low-level actor moves because the discriminator terms give each agent an immediate controllable signal: the 19:55 inspection finds those terms are a near-constant offset of about −.06 per agent-step in all ten D fits, with discriminators near chance and not improving. Three mechanism predictions failed in a row; the observations stand, the explanations do not.
+  What the DM currently believes remains different between the two low-level learners, all untested: (a) the skill input, a one-hot held for k = 10 steps and chosen by a learning coordinator (temporally extended, state-dependent behavioural variation); (b) the actor input, D: own observation (104) plus skill, CF: own observation plus the held central snapshot, reported as 853 wide at the same hidden width in the accepted implementation note, a point the earlier Pro answer in this notebook ("Pro question 2026-09-19 b01-after-stage0-next-step", section 1) already raised as a live simpler explanation; (c) D's better critic fit, cause or consequence unknown. Not yet excluded at zero fits: a construction detail or defect specific to the CF path (central snapshot at acting time versus in the replayed update, PPO ratio against mismatched log-probabilities, clip fraction saturating, gradient clipping at `max_grad_norm` .5 with the wide input, log-std handling, the `n_z = 1` path). Clip fraction, approximate KL, gradient norms and explained variance are not logged; that telemetry is missing, not diagnosed.
+  Contrary evidence kept in view: D128 and D1280 learn with the same low-level code and the same 320-sample minibatches; D's action entropy climbs to 7.4 under the same `lambda_l` .05 without an evaluation decline; CF's training return does rise a little (19 to 22–25), so the flat learner is not strictly inert; every flat setting since B01 was tried on the blocks the D1280 comparison is read on, so no gap size is claimed.
+Context:
+  Governance: `docs/project/OPERATING_CONSTITUTION.md` sections 1, 3, 5, 7, 8 (source_sha). The owner's pause is lifted; FSD is active and led by the Claude session (`docs/research/RESEARCH.md`, pause line, the 2026-09-19 parallel-work paragraph and the `flexible_skill_duration` row, source_sha). Advice grants no fits and adds no gate. One fit is one started training attempt, so an instrumented training probe counts as a fit; an exploratory idea may use up to six.
+  Method: `.agents/skills/hmasd-scientific-tools/SKILL.md` sections "Update the working explanation", "Explore an idea", "Comparators and MARL information", "Statistics", "Cost and exposure", and `.agents/skills/hmasd-scientific-tools/references/cumulative-research.md` (source_sha): they govern how a belief update separates observation from interpretation, what a targeted change must predict (an intermediate effect and a native consequence) and what a matched-information comparator must hold equal.
+  Evidence: this notebook (source_sha), entries "2026-09-19 14:55 PDT — inspection of existing fits", "15:00 PDT — prospective: flat learner with a smaller entropy coefficient", "18:05 PDT — flat entropy B03 read", "18:10 PDT — inspection (no new fit): the flat actor's updates are small because they are incoherent", "18:15 PDT — prospective: flat learner with a conventional large-minibatch update", "19:50 PDT — flat update B04 read", "19:55 PDT — inspection (no new fit): D's discriminator reward is a near-constant offset", and the entry "2026-09-18 evening — CF comparator and B01 runner accepted". Reduced outputs `runs/flexible_skill_duration/b01_s1_reduce/summary.json`, `b02_reduce/summary.json`, `b03_reduce/summary.json`, `b04_reduce/summary.json`; per-fit `runs/flexible_skill_duration/{b01_s1_cf_*,b01_s1_d1280_*,b02_d128_*,b03_*,b04_*}_a01/summary.json`, field `training_rows[].losses` (policy loss, value loss, entropy, reward components, discriminator accuracy) and `relative_initialization_displacement` (source_sha).
+  Code, actual learning path (source_sha): `hmasd/agent.py` `update_discoverer_from_rollout` (advantage computation, sampler call, central input in the replayed update near `_central_actor_input_from_replay`, ratio, clipping, value loss with ValueNorm, entropy term) and the acting-time central input near `central_input_flat`; `hmasd/utils.py` `get_discoverer_sampler` and `compute_gae`; `hmasd/networks.py` the skill discoverer's `central_input_dim` and `_apply_central_input`; `scripts/run_fsd_matched_information_baseline_b01.py` `make_config` (CF construction) and `scripts/run_fsd_baseline_interruption_b01.py` `make_config` (flat reduction, D arms); thin entries `scripts/run_fsd_flat_entropy_b03.py`, `scripts/run_fsd_flat_update_b04.py`.
+  Frozen contract: `docs/research/candidates/flexible_skill_duration/FSD_MATCHED_INFORMATION_BASELINE_B01_PROSPECTIVE_CARD_20260916.md` sections 1, 3, 6 (source_sha) for what CF is required to be and how B01 was read. B01 is ended; nothing here reopens it or its labels.
+Allowance: none is requested. Whatever follows is a new prospective notebook entry under the default per-idea allowance of constitution section 3 (up to six fits); zero-fit inspection of code and recorded logs is free.
+Constraints: seeds and matched baseline per constitution section 8; no training, no edits
+  outside the empty "### Answer" subsection; write only there on branch claude/fsd-pro-critic.
+  Read the question at the pinned source, but fetch the latest target file before editing
+  and use its actual blob SHA. Preserve all other bytes; stop on overlapping edits.
+  On successful write, report the actual commit. On write failure return the complete
+  answer in chat, not just a SHA, status message or link.
+Return: a critic pass with diagnosis. (1) Is the DM's belief update sound: what the recorded evidence strengthens, weakens and leaves unresolved, including anything misread (does displacement really saturate regardless of learning rate × steps; is a near-constant discriminator mean enough to weaken the immediate-signal account; are the normalised value losses comparable across arms). (2) Any more mundane explanation that the code or the recorded logs can confirm or exclude at zero fits, in particular a construction detail or defect specific to the CF/flat path; for each concrete suspect give the file and function, and what it predicts in the recorded diagnostics. (3) The competing explanations that remain, each with its prediction for an intermediate quantity and for native J, and the strongest simpler alternative. (4) Among candidate next observations, which single one discriminates most per fit and what each outcome would imply: (i) D with both discriminator reward weights at 0; (ii) a plain flat learner without the central snapshot (own observation only); (iii) D with skills but a frozen or uniform-random coordinator; (iv) an instrumented probe of one CF and one D fit logging clip fraction, approximate KL, pre-clip gradient norm and explained variance; or a better one you propose, with fit and non-fit cost. Replication, a targeted repair or "no useful new fit yet" are legitimate answers. (5) What none of this can say about the direction's actual question (does an unfixed skill duration k help against a matched-information baseline), and whether the direction should keep spending fits on making CF competent. (6) Any decision-critical source you could not read. (7) MATERIAL_DISSENT yes/no on the DM's current belief update, one paragraph.
+### Answer
+
+*Saved from chat by the DM (2026-09-19): Pro read the repository at the pinned sha but its GitHub connector exposed no file-write action, so nothing was written on `claude/fsd-pro-critic`; `deliver` returned NOT_DELIVERED with no commit on that branch and the question unchanged. Chat text sha256 `146aed298e983c8a8dcce15ca3d133e1c9a639c909b6989e9669a05b6949e8ca` (26,672 characters). Wording unchanged; the three displayed formulas, which the chat rendered one symbol per line, are re-typeset on one line each, the two tab-separated tables are set as Markdown tables, and section titles are set as headings.*
+
+Reasoning source: a41dbb31e5806d0b7c3e8958b6e74396406aa5cd. This critique leaves completed batches and their frozen readings intact.
+
+#### 1. The DM’s belief update is partly sound, but several diagnostic inferences are not
+
+The supported conclusion is narrower than “the flat learner’s failure is not an optimiser-setting matter.” B03 demonstrated a useful entropy-coefficient intervention: the selected CF’s evaluation deterioration disappeared, while the predicted increase in actor displacement did not occur. B04 failed to produce its specified rescue under the larger-minibatch/fewer-update packages at either learning rate. Those are reasons to abandon the particular predictions, not to exonerate optimization, input conditioning, or CF construction generally. Every intervention retained the same CF input-processing path. CF also is not literally inert: its training return rises somewhat, its parameters change, and B04’s learning rate affects early displacement. The descriptive diagnosis is limited learning under the tested constructions, not absence of training.
+
+Displacement does not establish a learning-rate-independent stopping radius. The implemented statistic is
+
+`d_t = ||θ_t − θ_0||_2 / ||θ_0||_2`,
+
+over the actor parameter group, including its Gaussian scale parameters. It is neither cumulative update distance nor policy change on a fixed input distribution. Updates can reverse direction while this statistic barely changes; conversely, log-standard-deviation changes can increase it without improving the deterministic policy. CF and D also have different parameterizations and initialization norms.
+
+The recorded B04 block 772803 illustrates the qualification. CF_M1 and CF_M5 move approximately .00907 and .04100 after rollout 1, but .05840 and .07513 after rollout 45. CF_M5 continues from .06917 at rollout 15 to .07513 at rollout 45: flattening, not an exact stop. The notebook also records larger displacements for higher-rate stage-0 CF fits, contradicting an unrestricted “every flat fit stays below .1.” That does not remove CF’s large descriptive contrast with D; it removes the claimed universal law. Learning rate multiplied by optimizer-call count is not a sufficient statistic for Adam trajectories with changing minibatches, advantages, clipping, and data distributions.
+
+A near-zero PPO surrogate is not evidence of a near-zero gradient. This implementation centers and scales advantages within each minibatch. At the old policy, before any change in probabilities,
+
+`L_policy = −mean(Â) = 0`,
+
+yet
+
+`∇_θ L_policy = −mean(Â ∇_θ log π_θ(a | x))`
+
+need not vanish. The logged quantity averages losses across changing minibatches and update times; it is not fixed-batch improvement or a measurement of gradient coherence. Thus “surrogate about zero → gradient mostly noise → actor hardly trained” was not established. Clip fraction, probability-ratio consistency, gradient norms, and functional policy changes are needed to distinguish those possibilities.
+
+The discriminator inspection is not a third intervention that falsified its mechanism. A stable rollout-average reward does not establish a nearly constant reward across transitions, states, agents, or actions. A zero-mean residual can still be the entire useful signal. The means weaken a story about increasing average discriminator reward; they do not, by themselves, appreciably weaken an immediate, controllable conditional signal. Likewise, the reported classification accuracies are not literally chance, and class frequencies matter when interpreting them. What is missing is the residual variation and its relation to actions, transitions, advantages, and subsequent native return. The notebook explicitly acknowledges that per-sample variation was not logged.
+
+Even a genuinely constant per-step reward offset requires care. In a finite episode its value offset depends on remaining time. With the appropriately shifted, exact critic, the offset cancels in temporal-difference residuals. With an imperfect critic and a changing ValueNorm state, that cancellation need not hold during learning. Therefore “a constant offset is irrelevant after the critic absorbs it” is an idealized conditional argument, not evidence that absorption occurred here.
+
+The ValueNorm losses cannot be converted into explained-variance percentages. The inspected low-level path does share primitive-time GAE, with episode termination rather than skill-boundary termination. However, D and CF have different rewards, policies, visited states, and skill-conditioned critic inputs. Their targets are GAE-derived returns, and each normalizer has its own history. The value loss is minibatch MSE against normalized—and potentially clipped—targets, averaged during optimization. It is not a final explained-variance measurement on a fixed dataset.
+
+Ignoring target clipping for the moment,
+
+`L_V = MSE(G, V) / σ²_running`, `EV = 1 − Var(G − V) / Var(G)`.
+
+Equating `1 − L_V` with EV additionally requires matching variance denominators, zero residual bias, and matching prediction/target evaluation conditions. Those conditions were not shown. The estimates “CF explains 70–93%” and “D explains 99%” should therefore be withdrawn. D’s smaller logged loss remains an observation; superior native-relevant prediction, and whether it causes better actor learning, remain unresolved.
+
+Finally, panel-to-panel variation is not the sampling uncertainty of a paired treatment effect. The B04 differences may be small and uncertain, but comparing them with within-fit panel SD does not establish equivalence. These corrections preserve B01’s frozen D_REFERENCE_ABOVE and B02’s bounded reading while substantially reducing confidence in the DM’s causal explanations.
+
+#### 2. A concrete CF construction hazard is present: mixed physical units enter an unnormalized recurrent actor
+
+The strongest mundane explanation found is not merely “853 inputs are harder than 104.” It is that CF adds metre-scale global coordinates to already scaled local features, without normalization before the GRU. The construction is confirmed; its proposed effect on learning is not yet measured.
+
+The source chain is explicit:
+
+MultiUAVEnv._get_state in envs/pettingzoo/uav_env.py concatenates raw UAV positions, raw user positions, and a normalized clock. For this host that is 18 UAV-coordinate entries, 100 user-coordinate entries, and one clock entry. The observation builders, by contrast, scale local positions and relative positions by area or height ranges and normalize SINR features. The actual runner constructs the Scenario 1 environment with its default 1,000-metre area and 50–150-metre height range; the generic configuration’s other environment defaults are not the bounds to use here.
+
+ParallelToArrayAdapter._state_array casts and reshapes that state but does not scale it. The recorded CF learner and evaluator configurations have use_statenorm=false and use_obsnorm=false; accordingly, HMASDAgent._normalize_states returns the state unchanged. Calling the helper “normalize” does not make this input normalized.
+
+_central_actor_input, its replay counterpart, and SkillDiscoverer._apply_central_input assemble and concatenate the held state, joint observations, and ego identity. The actor therefore receives 104+119+6(104)+6=853 entries with very different units. R_Actor sends these through MLPBase, then FiLM modulation, then the GRU. MLPBase contains two linear/ReLU layers, not an input normalization layer. RNNLayer applies LayerNorm after the GRU. SkillDiscoverer.Args explicitly disables feature normalization; moreover, the shown MLPBase.forward does not implement that option. Merely toggling a similarly named configuration flag is therefore not a demonstrated repair.
+
+Mechanistic prediction: the appended coordinate block can dominate the actor’s pre-recurrent features, pushing GRU nonlinearities into saturated regions and reducing sensitivity to current private observations and ego identity. Post-GRU LayerNorm cannot undo a lost derivative through those gates. This predicts weak useful feature learning despite changes in the output head or log standard deviation, limited native learning, and little rescue from the entropy or minibatch interventions that leave this construction unchanged.
+
+That prediction is compatible with the recorded symptoms, but the logs do not contain the required activations or layerwise gradients. I have confirmed an input-conditioning hazard, not demonstrated that CF’s gates saturate or that this explains the entire gap.
+
+There is also important contrary evidence: both low-level critics ingest raw global state, and D still succeeds. Hence “raw coordinates make every network untrainable” is false as a general explanation. The CF-specific difference is that its primitive actor receives this heterogeneous input, while D’s primitive actor receives scaled local observations and skill conditioning. Different FiLM conditioning, target distributions, and learned parameters also prevent treating the critic comparison as a controlled saturation test.
+
+Other concrete suspects have different evidential status:
+
+| Suspect and location | What the source establishes, and its diagnostic prediction |
+| --- | --- |
+| Single-skill FiLM: networks.py::R_Actor, R_Critic; baselines.py::apply_algorithm_config | The flat switch makes both skill counts one; it does not remove FiLM. One-hot skill zero is [1], so the learned scale and offset are the linear layer’s column plus bias—not identity, but not an all-zero gate either. This leaves a parameterization/initialization interaction worth checking, especially with large inputs. It does not establish an n_z=1 dead-gradient defect. The prediction is a bottleneck localized to FiLM or its downstream activations, not necessarily a global zero gradient. |
+| Acting/replay mismatch: agent.py central-input helpers, _batched_select_action, update_discoverer_from_rollout; utils.py::get_discoverer_sampler | The inspected layout, held-snapshot handling, environment/agent indexing, stored input hidden states, and shifted recurrent masks are structurally consistent. Disabled running input normalization also removes one possible source of changing normalization statistics in these fits. This is not a numerical equivalence test. A defect predicts nonzero replay log-probability error before the first optimizer step, at fixed weights and identical stored inputs/actions. |
+| Missing optimizer coverage or clipped gradients: networks.py::actor_update_parameters; agent.py::update_discoverer_from_rollout | The widened actor’s parameters are included, actor and critic updates execute, and their gradient clipping is separate. This weakens “the new projection was omitted from Adam” and “the critic consumes the actor’s clipping allowance.” It does not exclude tiny feature gradients or excessive actor clipping. Those predict different layerwise norms and clipping multipliers; the existing total displacement and loss do not distinguish them. |
+| Gaussian/action handling: r_mappo_utils.py::DiagGaussian; env_adapter.py::step; uav_env.py::step | The active Gaussian has no implemented log-standard-deviation clamp. Actions pass through the adapter; the environment clips resulting positions to spatial boundaries, not motion requests to a unit ball. The notebook’s cap/unit-ball account is therefore incorrect for this path. These are shared semantics, not a sufficient CF-specific explanation. They predict noise-dependent boundary occupancy and a stochastic-training/deterministic-evaluation difference. |
+
+These conclusions come from the active implementations, rather than similarly named alternative distributions or configuration fields.
+
+The strongest zero-fit numerical exclusion, given recoverable stored data, is a pre-update replay identity check: reconstruct the same policy inputs, hidden states, masks, and stored actions at unchanged weights, then inspect log-probability differences, ratios, approximate KL, and clip fraction. Ratios should be approximately one. A substantial discrepancy there is an implementation problem, not a finding about credit assignment. I did not execute that check.
+
+#### 3. Competing explanations that remain
+
+These are conditional predictions, not newly established mechanisms.
+
+Input-scale/conditioning bottleneck — the leading simpler alternative. Intermediate prediction: scaling only the actor’s appended physical coordinates reduces their disproportionate contribution, reduces any observed gate saturation, and restores sensitivity and useful gradients from private/ego inputs to mean actions. Native prediction: CF shows greater within-fit improvement and higher late-window J than unchanged CF. The strongest simpler alternative is a better initial policy or changed feature weighting, rather than restored gradient flow specifically; an initialization panel and activation measurements distinguish that alternative.
+
+A different CF implementation or parameterization bottleneck. Intermediate prediction: replay identity fails, clipping persistently suppresses otherwise useful actor gradients, or the constant-skill FiLM path accounts for the layerwise bottleneck after units are corrected. Native prediction: a repair of the identified link improves learning and J. The strongest simpler alternative is that these diagnostics are consequences of poor data or parameterization rather than the binding cause. No such defect has yet been demonstrated by the available telemetry.
+
+Critic/advantage quality is the binding limitation. Intermediate prediction: after measuring actual target variance and residual bias, CF has poor predictive quality on a relevant fixed target, with noisy or uninformative advantages despite a functioning actor. A targeted critic improvement should improve those quantities before useful actor learning appears. Native prediction: subsequent training return and J increase. The strongest simpler alternative is that the apparent critic difference is a normalization/target-distribution artifact, or a consequence of D visiting more learnable states. Current normalized losses do not adjudicate this.
+
+Skill conditioning and coordinated persistent behavior help learnability. Intermediate prediction: with implementation and conditioning problems removed, D still produces more useful state-dependent action variation or return-aligned policy gradients; removing learned coordination changes those quantities. Native prediction: an appropriately controlled frozen/random-coordinator D loses J if learned coordination is necessary in this package. The strongest simpler alternative is that persistent random context, easier parameterization, or a different training signal—not learned coordination—provides the benefit. This explanation concerns the fixed-k package, not flexible duration.
+
+Discriminator reward supplies useful residual shaping. Intermediate prediction: transition-level discriminator residuals retain meaningful conditional variation and contribute to useful advantages despite stable overall means. Removing their actual contribution degrades useful policy learning if that shaping is necessary. Native prediction: D’s learning curve and J decline. The strongest simpler alternative is an optimization effect of changing target offsets, scale, and critic fitting, rather than useful skill-discrimination information.
+
+These explanations can interact. In particular, good skill-conditioned behavior does not exclude a broken comparator, and a conditioning repair need not eliminate every remaining D–CF difference. The method guidance calls for separating such alternatives and predicting both an intermediate effect and a native consequence, rather than promoting whichever explanation remains after an unsuccessful batch.
+
+#### 4. The most useful next observation is a targeted, same-information input-scaling contrast
+
+My choice is a new CF construction that changes only the physical-unit scaling of the actor’s appended global-state block, with the relevant telemetry collected in that contrast. It addresses a concrete, verified construction hazard while retaining CF’s information, width, recurrence, and constant skill. It is more discriminating than another optimizer grid, less confounded than removing the snapshot, and more causally informative than merely observing two unmodified learners.
+
+Use the stable CF_E0005 recipe as the comparator: entropy coefficient .0005, the original sequence-batch setting and selected actor/critic learning rates, k=10, and the same information interface. In the treatment, scale appended x/y coordinates by the actual environment’s area size and UAV altitude by its actual height range. Leave the already normalized clock unchanged. Leave own observations, joint observations, and ego identity unchanged. Apply the identical fixed transformation in collection, recurrent replay, and evaluation. A shared application point already exists in SkillDiscoverer._apply_central_input, which the low-level update also calls.
+
+This transformation is information-preserving and changes neither width nor refresh opportunities. Do not simultaneously normalize the critic, enable global running-state normalization, remove FiLM, change reward weights, alter clipping, or increase width. Those would prevent attributing the result to this actor-input change. This is a new prospective construction, not a retroactive repair of the frozen B01 comparator.
+
+The central observation is:
+
+When CF keeps the same information and architecture but the appended coordinates no longer have a radically different scale, does useful policy learning recover?
+
+The required intermediate measurement is not “total displacement exceeds .2.” Record input-block magnitudes and contributions, pre-GRU activation/gate behavior, and sensitivity of mean actions to private observations and ego identity on fixed probe inputs. Separate feature/FiLM/GRU/mean-head changes from log-standard-deviation changes. Add pre-update replay identity, clip fraction, approximate KL, pre-clip actor gradient norm and clipping multiplier. For the critic, record target variance, residual bias, and actual explained variance on clearly specified frozen samples, not 1 - value_loss.
+
+Native assessment should include the pretraining level as well as within-fit improvement and the prospectively chosen late-window/final J quantities. Scaling changes the initialized policy’s function even with the same parameter draws. A higher final J caused entirely by a higher initial J would be useful comparator evidence, but not evidence that gradient flow recovered.
+
+Interpret the outcomes separately.
+
+Intermediate repair and improved native learning: strengthens the input-conditioning account and demonstrates a more competent flat construction on the tested conditions. It does not show that scaling explains the entire D–CF gap, or that skills are unnecessary.
+
+Intermediate repair without native improvement: shows that the repaired feature was not sufficient; critic quality, reward/credit structure, and other representation limits remain. Do not rescue the account with an automatic second scaling setting.
+
+Native improvement without the predicted intermediate change, or only a better initial policy: retain the practical gain, but revise the mechanism toward initialization or another representation effect.
+
+Neither changes: weakens the specific scale-bottleneck explanation, provided the intended transformation actually reached all three paths. It does not establish that flat learning is impossible. A pre-update replay failure instead identifies an integrity problem whose dependent results require separate treatment.
+
+Cost and scope. Source inspection and a forward-only check on recoverable stored tensors cost zero fits. An instrumented training attempt costs a fit even when called a probe or when unsuccessful. One paired treatment/control diagnostic costs two fits and remains exploratory. A seed-backed version of this single contrast can use three independent paired training blocks: six fits total, with no additional D fits or separate instrumentation batch. That is a possible prospective design within the existing allowance, not a grant or a requirement to consume all six. The constitution explicitly allows rough single-seed exploration while requiring at least three independent training seeds per arm for empirical learning claims.
+
+At the existing 45-rollout law, six fits imply 2.16 million training team steps. The existing nine evaluation panels imply 864,000 evaluation team steps; one additional 32-world initialization panel per fit would add 96,000. Instrumentation adds measurement/storage overhead, not another training attempt; its wall overhead is unmeasured. Historical CF references could reduce new-fit cost for a localized exploratory observation, but do not remove the exposure and selection caveats or provide a fresh competence claim.
+
+The alternatives in the question remain useful, but are lower priority for the present diagnosis:
+
+| Candidate | What it discriminates, and what it would not establish |
+| --- | --- |
+| D with both discriminator reward contributions zero | Retained performance weakens necessity of those contributions in this package; lost performance supports their importance. Loss does not distinguish controllable residual shaping from target-offset/critic-conditioning effects. It leaves the concrete CF input hazard untouched. Verify the actual applied reward components, not just nominal fields. |
+| Own-observation-only flat | Success implicates the appended-input construction, but simultaneously removes information and changes input width. It cannot distinguish scale from dimensionality or other representation effects and is not the matched-information primary comparator. Failure still does not establish hierarchy necessity. |
+| D with frozen or uniform-random coordinator | Tests whether learned coordination is needed beyond skills/persistence and the remaining D machinery. A frozen initial network is still state-dependent and is not the same intervention as uniform random selection. Success weakens the need for learned coordination; failure does not demonstrate a flexible-duration benefit. |
+| One instrumented CF and one instrumented D fit | Useful localization, but primarily observational and only one seed per arm. Large clipping or poor EV could be causes or consequences. Put these measurements into the targeted scaling contrast instead; include activation and per-module diagnostics that total norms alone miss. |
+
+I would not start with a discriminator ablation merely because the most recent narrative concerned discriminator means. The next observation should address the strongest concrete competing explanation, not continue the order in which stories were proposed.
+
+#### 5. Consequences for flexible skill duration and further comparator work
+
+None of these observations establishes that an unfixed k helps. B01 compares complete methods with the declared central-information opportunities; it does not isolate hierarchy, and it does not estimate the interruption increment. B03/B04 modify flat learning. The proposed scaling contrast would establish, at most, something about the learnability of a fixed-information flat construction. Neither a recovered flat learner nor a remaining D advantage supplies the missing flexible-duration comparison. The frozen card explicitly maintains these limits.
+
+Continue bounded comparator work, but stop blind tuning. A competent matched-information baseline is part of the direction’s actual scientific question, and the verified scale mismatch is a materially new reason for one targeted investigation. That is different from repeatedly choosing new hyperparameters until CF approaches D.
+
+The stopping condition should concern information gained, not attainment of D’s score. A flat learner can be competent without winning. Conversely, larger parameter displacement or a more negative surrogate does not certify competence. If the targeted investigation fails to identify a useful learning improvement or a further specific causal link, record the unresolved comparator limitation and leave the next fit unscheduled. No new approval loop is needed, and no result automatically grants another batch.
+
+#### 6. Source coverage and decision-critical gaps
+
+I read the pinned question, the applicable governance and method sources, the relevant notebook entries, the frozen card, and the actual construction, acting, replay, loss, environment, and adapter code cited above. I used the named reductions and directly inspected representative CF and D per-fit configuration/loss records. I did not independently re-audit every row of every wildcard-matched fit; statements about all ten D fits’ reward means remain the notebook’s recorded inspection, not a newly reproduced all-fit reduction.
+
+No governing source was inaccessible. The decisive empirical gaps are transition-level reward variation, saved replay equivalence, actor activations and layerwise gradients, and correctly defined critic prediction statistics. I did not load a checkpoint or execute a numerical replay/activation test. Consequently, the physical-unit mismatch and the active-code corrections are source-confirmed; GRU saturation, a PPO implementation failure, true critic EV, and the unique cause of the performance difference are not. Missing telemetry cannot be recovered by interpreting aggregate losses more confidently.
+
+#### 7. MATERIAL_DISSENT: yes
+
+The DM is right to stop blind tuning, retain the observed outcomes, and request criticism before another fit. I materially dissent from the stronger belief update: small relative displacement and a near-zero centered PPO surrogate do not show that the actor is untrained or its gradients incoherent; failed optimizer packages do not exonerate optimization and construction; stable discriminator means do not establish an uninformative immediate reward; and ValueNorm MSE does not justify the reported explained-variance percentages. Most importantly, the inspected CF actor concatenates raw physical coordinates with scaled local features without pre-GRU normalization—a concrete alternative untouched by B03/B04. The appropriate next step is a bounded, information-preserving test of that construction with intermediate and native measurements, not another hierarchy narrative. This dissent changes the proposed next observation, not any completed batch, frozen label, budget, or conclusion about unfixed skill duration.
+
+## 2026-09-19 20:50 PDT — local critic (comparison to the Pro answer above), saved verbatim
+
+The owner asked that the key critic pass come from Pro and that the local read-only critic
+(`hmasd-research-critic`, launched before that instruction) finish as a comparison. Its report was
+written without sight of the Pro question or answer, from `main` at `8f105a6bc`; it was kept out of
+the notebook until the Pro answer was in, so neither text could lean on the other. The DM checked
+its stage-0 displacement numbers, the rollout-1 displacements, D's skill entropies and coordinator
+displacement, and the two `configs/config_1.py` fields against the recorded fits: they are as
+reported.
+
+> Critic pass on FSD, 2026-09-19 19:55 update. Read-only: no runs, no edits. All numbers below are from recorded `summary.json` files and source at current main (8f105a6bc).
+> 
+> ## Verdict in one line
+> The update is mostly sound and the big conclusion ("the flat learner's failure is not an optimiser-setting matter") holds, but three of its supporting premises are contradicted by the record: displacement does scale with learning rate at matched update law; the normalised value loss is not comparable across arms; and D's coordinator is not learning, so hypothesis (a) as worded is false on the record. The discriminator-offset weakening, which I tried hardest to break, survives and is better supported than you stated.
+> 
+> ---
+> 
+> ## 1. Soundness of the belief update
+> 
+> **FACT — "displacement saturates at .06–.10 regardless of lr × steps" is wrong at matched update law.** At 2,250 steps/rollout the flat actor's relative displacement at rollout 45 is .091–.096 (lr 5e-5), .153/.158 (lr 1e-4, `b01_s0_cf_l1_772603_a02`, `b01_s0_cf_l1_772703_a01`), .217/.220 (lr 2e-4, `b01_s0_cf_l2_*`). Subtracting the log-std contribution (sqrt(3)·|H/3 − 1.4189| / ‖θ0‖, with ‖θ0‖ in `initial_parameter_norms.discoverer_actor` ≈ 46.1–46.3) the *network* part is .076 / .136 / .204 — i.e. essentially **linear in lr**. Your parenthetical at NOTES:1020 ("CF's extra displacement is plausibly its own log-std parameter growing") is exactly right and quantitative: B01 CF .0908 = .0592 log-std + .0688 network, and B03 E0005 .0687 = .0034 + .0686. The network moves the same distance under λ_l .05 and .0005; that is the clean statement. The true invariance is in *steps*, not lr: 37× fewer steps at the same lr costs only ~2.3× displacement (.136 → .058–.065). Neither a coherent-gradient law (∝ lr·steps) nor a diffusive one (∝ lr·√steps) reproduces B03 vs B04; both predict a large difference and none appeared. That is a stronger fact than "saturates", and it points at a near-stationary point rather than at noise accumulation.
+> 
+> **FACT — the surrogate and the displacement are not two independent observations.** `discoverer_policy_loss` is −E[min(rA, clip(r)A)] evaluated at the current parameters with advantages normalised per minibatch (`hmasd/agent.py:6485-6491`); at ratio ≡ 1 it is identically 0. So "surrogate ≈ 0" is a statement about how far the policy drifted from the behaviour policy inside the epochs — nearly the same quantity as displacement, not evidence about gradient quality. Two of your three "failed predictions" (B03 displacement, B04 surrogate + displacement) are therefore one failed prediction measured twice, on optimiser-side accounts that your own contrary evidence (D128/D1280 learn with the identical update law) already argued against. The run of failures is less damning than the notebook implies. What the surrogate *does* add is its **sign**: CF's mean is positive and grows with lr (+.0002 at 5e-5, +.0010 at 1e-4, +.0017 at 2e-4) — the pessimistic clip branch dominating, i.e. updates that do not improve the objective on re-sampled minibatches — while B04's large-batch arms turned it negative (−.0005 … −.0018) without producing movement or return. The stage-0 lr sweep, not B04, is where the "incoherent" account has support.
+> 
+> **FACT — the value loss is not comparable across arms.** `value_norm_discoverer` is an SB3 `RunningMeanStd` (`hmasd/agent.py:1036-1037`), full-history, no decay, updated once per rollout over all 48,000 returns (`:6319-6322`), and the loss is MSE against (R − m_hist)/s_hist (`:6496-6508`). It equals 1 − EV only if the return distribution is stationary. It is not: CF's mean predicted value rises 0.45 → 3.7–4.5 over the run while D's stays near zero (−0.86 → −0.15), because D's discriminator terms almost exactly cancel its environment reward (`avg_intrinsic_reward` −.022 → −.002 for D, +.038 → +.055 for CF). A current-rollout return SD that exceeds the history SD inflates the recorded loss by (σ_cur/σ_hist)² with no change in critic quality, and predicts exactly what CF shows: a loss that *rises* (.083 → .13–.25) while the critic keeps moving. So "flat critics explain 70–93 %, D's 99 %" (NOTES 19:55) is not established. Two further confounds in the same comparison: CF's critic displacement is .31–.35 at the selected lr and .49–.72 at lr 1e-4/2e-4, i.e. **equal to or larger than D's .48–.53** — the flat critic is not frozen; and the B04 arms had 2,700 total critic updates against B03's 101,250, so "the B04 construction has a worse critic fit" (NOTES 19:50 Standing) is confounded by step count and should not have counted against it.
+> 
+> **FACT — hypothesis (a) as worded is contradicted.** You describe D's skill input as "chosen by a learning coordinator (temporally extended, state-dependent behavioural variation)". In all ten D fits `agent_skill_entropy` is 1.74–1.78 against ln 6 = 1.7918 at rollouts 1, 5, 15, 25 and 45, `team_skill_entropy` 1.47–1.71, and the coordinator's relative displacement ends at .049 (r1 .008). The coordinator stays a near-uniform random assigner for the whole run. Whatever the skill channel does for D's low-level actor, it is **a near-uniform random 6-way FiLM modulation re-drawn every 10 steps**, not a learned state-dependent decomposition. This kills your candidate (iii) as an experiment (a frozen/uniform-random coordinator is what D already effectively has, so it predicts no difference) and it re-words (a): the live claim is "temporally extended random behavioural modulation + a 6-row FiLM channel", which is testable but is not the DIAYN story.
+> 
+> **FACT — no log-std cap on this path.** `DiagGaussian` (`hmasd/r_mappo_utils.py:73-95`) uses `AddBias(torch.zeros(num_outputs))` and ignores `continuous_logstd_min/max`; those are read only by `TanhDiagGaussian` (`:112-127`), selected by `continuous_action_distribution`, which `E0Config` never sets, so `networks.py:1608` falls back to "gaussian". Evidence: `b01_s0_cf_l2_772603_a01` ends at entropy 10.32, above the "cap" of 10.26 quoted at NOTES:818-819. This does not change the B03 conclusion (cutting λ_l stopped the growth); it removes the cap from the narrative.
+> 
+> **SURVIVES — the discriminator-offset weakening.** I tried to break it and could not. `legacy_mi_reward_coef = 0.5` (`configs/config_1.py:316`), so the effective weights are 0.025 and 0.01, not the .05/.02 written at NOTES:1080; and `use_prior_corrected_intrinsic = False` (`:288`) so the term is 0.025·log q with no +ln n_z (`hmasd/agent.py:1158-1166`, `:4826-4827`). Back-solving the recorded components gives mean log q_team = −1.67 and log q_ind = −1.75, matching both the recorded discriminator losses (1.72, 1.76) and the skill-marginal entropies (team 1.47–1.71, individual 1.75–1.78). A discriminator that has learned only the marginal skill frequency and ignores the state produces exactly these numbers *and* the observed accuracies (team .30–.38 ≈ max_Z p(Z) at entropy 1.47–1.71; individual .24–.28 against a near-uniform marginal). So the record is consistent with a **per-skill constant** the low-level actor cannot control, which is your conclusion. Two refinements: "discriminators near chance" understates it (they encode the marginal, which is why their accuracy beats 1/6 without any state information), and per-sample variance is still unlogged, so this is consistency, not proof.
+> 
+> ---
+> 
+> ## 2. Mundane explanations: what I checked and cleared, and the one suspect that survives
+> 
+> Cleared at zero fits:
+> - **Central snapshot, acting vs replay.** Stored raw per step (`agent.py:4101` → `utils.py:418-447`), refusal if any row is missing (`utils.py:1285-1289`), env-major chunking (`:1290-1291`) with `env_sequence_indices = batch_indices // n_agents` and `ego = batch_indices % n_agents` (`:1353-1354`), which matches the acting layout `np.repeat(per_env, n_agents)` + `np.tile(np.eye(n_agents))` (`agent.py:1340-1341`). `use_obsnorm = use_statenorm = False` in every recorded `learner_config`, so `_normalize_*` are identity (`agent.py:1502`) on both sides and the replay is bit-exact, as NOTES:90-92 claims. No detach, no shape error, no staleness bug.
+> - **Ratio / log-probs.** `old_log_probs` are the stored acting log-probs; valid-mask filtering is applied to policy and value (`:6472-6482`). One inert nit: the entropy term (`:6521`) is not masked and not `active_masks`-weighted, but with 500-step rollouts equal to the episode length every mask is 1, so it changes nothing here.
+> - **max_grad_norm 0.5 with a wide input.** Clips both arms identically; with Adam the per-parameter step is ~lr regardless, so clipping cannot produce the 8.6× network-displacement gap at matched lr.
+> - **Learning rate.** Excluded at zero fits: CF at D's own rate (1e-4, stage-0) and at 2e-4 also fails to learn — J goes .293→.116 and .171→.074 (lr 1e-4), −.043→.132 and .113→.068 (lr 2e-4). You can drop "CF ran at half D's rate" from the list of live differences and cite these two fits.
+> - **Parameter-count artefact in the displacement metric.** ‖θ0‖ is 46.05–46.35 (CF) against 41.07–41.18 (D), so the denominators are comparable; and CF has ~190k *more* actor parameters (853×256 vs 104×256 first layer), which under any noise-driven motion would make ‖Δθ‖ larger, not smaller. The metric does not flatter D.
+> 
+> **The suspect that survives, and it is your (b): input dilution.** `_central_actor_input` (`agent.py:1316-1341`) builds 853 dims = own obs 104 + held state 119 + six held joint observations 624 + ego one-hot 6. Of those, **743 are byte-identical across the six agents of a lane and constant inside each 10-step chunk**; the agent's own *current* observation is 12 % of the input energy and its only private identifier is a 6-dim one-hot, in a trunk with `use_feature_normalization = False` (`networks.py:1606`) and orthogonal init. Conjecture (mine, not established): the six agents' gradients through the shared trunk are then nearly parallel while their advantages differ per agent, so the agent-distinguishing component of the update is a small fraction of the gradient and largely cancels. Prediction already visible in the record: the asymmetry must exist at the **first** update, before any learning difference can exist — and it does. At matched lr 1e-4, rollout-1 actor displacement is .0396/.0440 for CF and .151–.172 for D (3.7×). That single number is the most useful unused fact in the direction: it forbids any account of the form "D's actor moves because D is learning and CF is not".
+> 
+> Second-order construction asymmetry worth one line in the notebook: with n_z = 1 the FiLM generator is `nn.Linear(1, 512)` (`networks.py:1418`), so CF's feature modulation γ is drawn from a bound of 1/√1 while D's is 1/√6 — CF's trunk gain is ~2.5× D's at init, and CF's FiLM channel has 512 effective dof against D's 6 separate rows gated per sample. Nobody chose this; it rides along with the `mappo` switch (`hmasd/baselines.py:127-148` sets n_Z = n_z = 1, λ_D = λ_d = 0, discriminators and high-level training off).
+> 
+> ---
+> 
+> ## 3. The single most discriminating next observation
+> 
+> **Recommend (ii): a plain flat learner with the central snapshot off.** Reasons, in order of weight:
+> 1. It is the only live difference that has never been varied: all twelve flat fits carry the 853-dim input.
+> 2. It is a **single-field change against an exactly matched recorded reference**. Run it at D's low-level settings (lr 1e-4, λ_l .05, 2,250 steps, k = 10, 45 rollouts) on blocks 772603/772703 and the reference is `b01_s0_cf_l1_772603_a02` / `b01_s0_cf_l1_772703_a01`, which differ in the flag alone.
+> 3. Both endpoints of the read are already calibrated, and the read arrives at **rollout 1** (~70–150 s of wall): CF .040/.044, D .151–.172.
+> 4. Either outcome moves the direction. Learns → the "matched-information" comparator was crippled by how the information was delivered, B01's +.29 is a representation artefact, and the comparator question reopens as a representation question. Stalls → the central input is exonerated, the flat MAPPO learner genuinely does not learn here in 45 rollouts, and that is the honest caveat on any D-versus-flat statement.
+> 5. Nearly no code: the frozen runner already has a validated FLAT arm at k = 10 (`scripts/run_fsd_baseline_interruption_b01.py:24, 49-66, 329-340`); a thin entry in the B03/B04 pattern suffices.
+> 
+> Design note, cheap: two fits, not one — one at (1e-4, λ_l .05) on 772603 for the clean *mechanism* read against the CF-l1 twin, one at (5e-5, λ_l .0005) on 772803 for the clean *outcome* read against `b03_e0005_772803_a01`, because at λ_l .05 the entropy blow-up will make J uninterpretable again. Each is a single-field change from its own reference. Declare: intermediate = network displacement (log-std part subtracted) ≥ .10 at rollout 1 and ≥ .4 at rollout 45; native = training return U over rollouts 35–45 ≥ 26 (flat fits 22–25, D 29.2) and late-window J above the matched reference. Intermediate passes with native failing would mean the wide input limited parameter movement but not the outcome.
+> 
+> **The designated follow-up, (i) D with λ_D = λ_d = 0**, is the arm that splits the remainder if the plain flat stalls: it is D minus the reward difference, so against recorded D1280 it tests the discriminator terms, and against the plain flat it tests the skill channel. Set the two weights only — do not set `disable_discriminator_rewards`, which also flips `use_discriminator_path` (`agent.py:531-534`) and changes construction and RNG. Note that it changes the coordinator's high-level reward too, which is tolerable only because the coordinator barely learns. Bonus: it tests my ValueNorm objection for free — with env-only reward D's return starts drifting like CF's, so if its recorded value loss climbs from .006 toward .1+ while its actor still moves and J still rises, the "critic fit" difference between the arms is an artefact of the full-history normaliser and can be struck from the list of live differences.
+> 
+> Against the others: **(iii) frozen/uniform-random coordinator is already what D runs** (skill entropy ≈ ln 6 throughout, coordinator displacement .049) and would spend a fit to reproduce D. **(iv) the instrumented probe** costs a fit to produce numbers that need a second D fit to interpret, and its main prize — pre-clip gradient norm, to tell "vanishing gradient" from "cancelling gradient" — is only weakly decision-relevant because Adam normalises the step anyway. If you judge that the precedent at NOTES:111-115 (one rollout, full training shape, outside `runs/`, no endpoint, no admission, recorded as not a fit) covers it, then instrumenting rollout 1 of CF and of D is much cheaper than a fit and targets exactly the place where the asymmetry is already visible — but that classification is your call, not mine, and I am not recommending you reclassify a training attempt to save budget.
+> 
+> ---
+> 
+> ## 4. Inherited contrary evidence, and limits
+> 
+> Keep in view: D128 ≡ D1280 on every low-level diagnostic (coordinator capacity is irrelevant, and the update law is not the obstacle); the coordinator does not learn and the discriminators do not separate skills, so D's gain cannot be attributed to skill discovery in any DIAYN sense; D's actor already moves 3.7× further than CF's after the *first* rollout at matched lr; CF's critic moves as much as D's; B01's D_REFERENCE_ABOVE remains a statement about a comparator that does not learn, and B03 showed roughly half of it was comparator deterioration; panel-to-panel J SD is .06–.09 for every flat fit, so no single-fit J difference below ~.1 is readable, and every setting since B01 was tried on the blocks the gap is read on.
+> 
+> Limits of this pass: I ran nothing and measured no gradients; the input-dilution mechanism is conjecture supported only by being the untested difference plus the rollout-1 asymmetry; the ValueNorm inflation factor is a mechanism argument with no measured σ_cur/σ_hist because return SDs are not logged; and the discriminator-variance question remains unlogged either way.
+> 
+> Limit on the direction: **none of B02–B04, and none of the fits I recommend, tests an unfixed skill duration k.** Twelve fits since B01 have gone into comparator repair and the next two would make fourteen. Worth recording as an option rather than a recommendation: the k-axis question (D0 versus the interruption arm I, both hierarchical, both learning) is answerable *within* the D family with D as its own control and needs no competent flat baseline; a flat baseline is needed for "hierarchy helps", not for "unfixed k beats fixed k". If the plain-flat fit stalls, that may be the cheaper road back to the direction's own question, with the flat comparator recorded as an open caveat rather than a prerequisite.
+> 
+> MATERIAL_DISSENT: yes — two premises the current explanation rests on (displacement is insensitive to lr; the normalised value losses are comparable as explained variance) are contradicted by the recorded runs, and the "learning coordinator" wording of hypothesis (a) is contradicted by the logged skill entropy, though the headline conclusion and the discriminator-offset weakening both survive.
+
+
+## 2026-09-19 21:00 PDT — response to the Pro critic pass (and the local comparison): inferences withdrawn, one concrete construction hazard adopted as the next thing to test
+
+Both critics return MATERIAL_DISSENT yes, on the belief update and not on any completed batch.
+I read both in full. The owner's own note of the same evening makes the same three points about
+the diagnostics (a near-zero centred PPO loss is not a near-zero gradient; a running-normalised
+value loss is not explained variance; a stable mean discriminator reward says nothing about the
+per-sample signal). What follows is what I adopt, modify and reject, and what changes.
+
+**Delivery facts.** Question key `hmasd:aa7e79bf…b94ff`, sent once through the Jev route
+(`send_effect` sent, effort `6 Pro`, document attached and seen), completed, answer kind "chat
+answer": Pro's connector could read but not write, so the text above is saved from chat; the
+branch `claude/fsd-pro-critic` carries no answer commit. No decision-critical source was
+unreadable to Pro; it did not re-audit every fit and ran nothing.
+
+**Withdrawn (both critics, and I agree after checking the record).**
+- "Displacement saturates at .06–.10 whatever the learning rate × steps" (B04 read). At the
+  original update law the flat actor's displacement at rollout 45 is .09, .155 and .22 at rates
+  5e-5, 1e-4 and 2e-4 (stage-0 fits): about linear in the rate. What the record shows is a weak
+  dependence on the number of steps (37 times fewer steps, about 2.3 times less displacement),
+  and a statistic that mixes the network with the log-std parameter and is not policy change.
+- "Surrogate about zero, so the gradient is mostly noise / updates cancel" (18:10 inspection).
+  With advantages centred per minibatch the logged loss is 0 at ratio 1 whatever the gradient.
+  Surrogate and displacement are close to one observation, so my "three failed predictions" were
+  nearer two, both about quantities that did not measure what I took them to measure.
+- "Flat critics explain 70–93 % of return variance, D's 99 %" (19:55) and "the B04 construction
+  has a worse critic fit" (19:50 Standing). The normaliser is a full-history running statistic,
+  targets may be clipped, CF's return level drifts while D's stays near zero, and B04's critic
+  took 37 times fewer steps. D's smaller logged loss stays an observation; nothing about critic
+  quality follows. The flat critic's own displacement (.31–.72) is as large as D's (.48–.53).
+- "Log-std is capped at 2.0 and actions are clamped to the unit ball" (14:55 inspection). The
+  active `DiagGaussian` has no clamp (one stage-0 fit ends at entropy 10.32, above that "cap") and
+  the environment clips positions, not action requests. B03's reading does not depend on it.
+- "Chosen by a learning coordinator" (19:55, difference (a)). In all D fits the agent-skill
+  entropy stays at 1.74–1.78 against ln 6 = 1.79 and the coordinator's displacement ends at
+  .049: D's skills are, in effect, drawn near-uniformly at random every ten steps for the whole
+  run. Candidate (iii) of my question would re-run what D already is.
+- B04's "inside the panel-to-panel noise of a fit" is not a statement about the uncertainty of a
+  paired difference (Pro). The B04 differences are small and uncertain; no equivalence is read.
+
+**Discriminator terms: the two critics differ; my position.** Pro: a stable mean hardly weakens
+an immediate-signal account, and even a constant offset cancels only with an exact critic. The
+local critic: the recorded components back-solve (effective weights .025 and .01, since
+`legacy_mi_reward_coef` = .5) to log q equal to the skills' marginal entropy, which is what a
+discriminator that ignores the state produces, i.e. a per-skill constant the primitive actor
+cannot influence. I keep "weakened, not excluded", now resting on the second argument rather
+than on the mean alone; per-sample variation remains unlogged.
+
+**Adopted: a concrete construction hazard in CF that none of B03/B04 touched (Pro).** Checked at
+source by me: `MultiUAVEnv._get_state` concatenates raw UAV and user positions in metres (area
+1,000 m, heights 50–150 m) plus a normalised clock; `use_statenorm` and `use_obsnorm` are false
+in every recorded config, so `_normalize_states` is the identity; the CF actor therefore reads
+118 entries of order 10²–10³ next to 734 scaled entries of order 1, through two linear/ReLU
+layers and FiLM into the GRU with no normalisation before it. By the environment's bounds the
+raw block carries essentially all of the input's squared norm (order 10⁷ against 10²–10³); this
+is arithmetic from the bounds, not a measured activation. D's primitive actor reads only scaled
+local observations plus the skill. The local critic found the neighbouring fact (743 of 853
+entries identical across a lane's agents and constant within a chunk) and the most useful
+recorded number: at the same rate 1e-4 the actor's displacement after the *first* rollout is
+.040/.044 for CF and .151–.172 for D, so the asymmetry exists before any learning difference
+can. It missed the units: it treated "normalisation is the identity on both sides" as clearing
+the input path. The two readings are compatible; Pro's is the sharper and keeps the information.
+- Contrary evidence kept: both low-level critics read the same raw state and D still learns, so
+  raw coordinates do not make every network untrainable (Pro).
+- A conjecture of mine that this raises, untested: D's coordinator embeds the same raw state
+  through one linear layer and barely moves (displacement .049, skill choice near uniform). If
+  the same scale problem silences the coordinator, then B02's "coordinator batch makes no
+  difference" is what a coordinator that does not learn would show, and it bears on this
+  direction's own question, because any duration or interruption decision lives at that level.
+
+**Rejected or deferred.**
+- Own-observation-only flat first (local critic's recommendation): it removes information and
+  width at once and leaves the matched-information comparator where it is; Pro's objection
+  holds. Deferred, not dismissed: its rollout-1 read is cheap.
+- D with discriminator weights at zero: deferred; it does not address the confirmed hazard.
+- A separate instrumented CF/D probe: rejected as a separate batch; a training probe is a fit.
+  Measurements belong inside the targeted contrast.
+- The local critic's option of answering the k question inside the D family without a competent
+  flat baseline: kept as an option for the next portfolio look, together with the coordinator
+  conjecture above. Neither critic's advice, nor anything in B02–B04, tests an unfixed k.
+
+**How the two critiques compare (the owner asked).** Agreement on every withdrawn inference
+above. Pro alone: the unit mismatch, the conditional nature of the constant-offset argument, the
+panel-noise point, the insistence on a pretraining level and on functional rather than
+parameter-distance measurements. Local critic alone: the quantitative record (linear-in-rate
+displacement with the log-std part separated, the rollout-1 asymmetry, the coordinator's
+near-uniform skill choice, the effective discriminator weights, CF failing at D's own rate) and
+the FiLM `nn.Linear(1, 512)` initialisation asymmetry. Pro was the better judge of what the
+diagnostics can support and found the decisive construction fact; the local critic was the better
+auditor of the recorded numbers. They are complements; the key pass goes to Pro from now on.
+
+**What changes.** My working explanation is now: CF's limited learning is unexplained; the
+leading concrete candidate is an input-conditioning bottleneck from raw-metre coordinates in the
+actor's input, present from the first update; skill-channel, reward-residual and critic accounts
+remain open and unranked behind it. B01's label and the B02/B03/B04 outcome readings stand.
+
+**Next.** One prospective entry: CF_E0005 with the appended physical coordinates scaled by the
+environment's own bounds, identical in acting, replay and evaluation, nothing else changed, paired
+with the completed CF_E0005 fits on the same three blocks; intermediate reads that are functions
+of the policy rather than parameter distance, and the initial-policy level so that a better
+start is not mistaken for restored learning. The change touches the shared learner, so it goes
+through the Implementer and an independent Reviewer before any fit.
+
+## 2026-09-19 20:40 PDT — prospective: CF with the appended physical coordinates on the observations' own scale (explore; a zero-fit forward probe, then three fits)
+
+(The two entries above carry heading times 20:50 and 21:00; they were written between 20:15 and
+20:30 PDT. This entry's time is the clock's.)
+
+**Idea, targeted (not a package).** The CF actor reads the held global state as raw metres (x, y
+in 0–1,000; UAV height 50–150) beside 734 entries scaled to order 1, with no normalisation before
+the GRU. The change: inside the actor's appended block only, map the state's coordinates with the
+same affine convention the environment already uses for an agent's own position in its
+observation (x and y divided by the area size; UAV height as (z − 50) / 100; the normalised clock
+untouched). Nothing else: same information, same width, same held-snapshot clock, same FiLM,
+GRU, critic (still raw state), rewards, update law. Construction otherwise exactly CF_E0005
+(`lambda_l` .0005, rate multiplier .5, default 32-sequence minibatches, k = 10, 45 rollouts).
+Identical in acting, replayed update and evaluation. Flag off: bit-identical to today.
+
+**Step 1, zero fits: forward-only probe at initialisation**, per block (772803, 772903, 773003),
+for the unscaled and the scaled construction from the same seed: one evaluation panel of the
+untrained policy (32 worlds, the block's evaluation seeds) giving J_init; and on the inputs met
+in that panel, (a) the share of the first layer's pre-activation squared norm that comes from
+each input block (own observation, state, joint observations, ego), (b) the GRU's update/reset
+gate saturation (fraction of gate units below .05 or above .95), (c) the sensitivity of the mean
+action to the agent's own current observation and to its ego one-hot (finite perturbation of
+fixed relative size, mean absolute change in the mean action). No optimizer step anywhere; policy
+execution of 2 × 3 × 32 evaluation episodes is recorded as exposure, not as a fit.
+- Expected (unscaled): the state block gives more than 90 % of the first layer's pre-activation
+  norm; own-observation and ego sensitivities are small.
+- Expected (scaled): the state block's share falls below one half; own-observation sensitivity
+  rises by at least a factor of three. Gate saturation: expected lower when scaled; loosely held,
+  because two ReLU layers and orthogonal init with gain .01 may already keep the gates unsaturated.
+- If the probe shows no material difference in (a)–(c), the conditioning account is weakened
+  before any fit; I would then run at most one scaled fit (772803) rather than three, to see
+  whether the native outcome disagrees with the probe, and say so here before launching.
+
+**Step 2, three fits:** the scaled construction on 772803, 772903, 773003, each paired with the
+completed CF_E0005 fit of its block (`b03_e0005_*`), which differs in the scaling flag alone; the
+flag-off path is bit-identical and B02 showed a rerun reproduces bit for bit across launch shas,
+so references are not rerun. D1280 of the same blocks (`b01_s1_d1280_*`) is carried for
+description. Three of the idea's six fits; the other three are not reserved for anything and
+nothing is added after scores are seen.
+
+**Predictions (sign and threshold; no invented probabilities).**
+- Intermediate, in the fits: actor displacement after rollout 1 above the reference's on three of
+  three blocks (reference .026–.029); at rollout 45 the network part of the displacement (the
+  log-std part removed as sqrt(3)·|H/3 − 1.4189| / ‖θ0‖) at least twice the reference's. These
+  are parameter distances and I hold them as weak evidence of function change; the probe's
+  sensitivity measure, repeated on the trained policy at rollout 45, is the better read and is
+  expected above its own initial value.
+- Native: training return U over rollouts 35–45 above the reference on at least two of three
+  blocks and above 25 in the mean; late-window J (panels 30–45) above the reference on at least
+  two of three blocks; and J_late − J_init larger than the reference's on at least two of three,
+  so that a better starting policy is not read as restored learning.
+- D1280 relation: no prediction. Scaling could close much of the gap or little of it.
+
+**Strongest simpler alternatives.** A higher J from a better initial function rather than from
+learning (hence J_init); scaling acting as a learning-rate change on the first layer rather than
+as restored sensitivity (the probe's sensitivities before/after speak to it); block noise (late
+windows, three blocks, sign counts only).
+
+**What I would do with it.** Intermediate and native both move: this becomes the flat
+construction, the scale hazard is reported as a defect of the B01 comparator (B01's label stands
+as read; its meaning is narrowed in RESEARCH), and the same scaling question is put to D's
+coordinator, which reads the same raw state and does not learn. Intermediate moves, native does
+not: conditioning was real but not binding; no second scaling variant; the comparator limitation
+is recorded and the direction's k question is taken up inside the D family. Native moves without
+the intermediate: keep the construction, revise the mechanism. Neither: the account is weakened
+and I stop comparator repair here.
+
+**Reading limits.** Exploration; three blocks; historical references; blocks already used for
+every flat setting since B01, so no gap size and no competence claim; no MEI verdict.
+
+**Engineering.** The scaling touches the shared learner (`hmasd/networks.py`
+`SkillDiscoverer._apply_central_input`, one application point for acting, replay and
+evaluation): Implementer from a scope note, independent Reviewer, DM acceptance, then launch.
