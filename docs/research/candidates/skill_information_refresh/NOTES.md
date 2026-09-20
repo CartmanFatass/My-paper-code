@@ -707,3 +707,9 @@ features, equality to an independently implemented direct stage predicate, chann
 complete synthetic selection/output arithmetic and admission refusal. The full C01/C03/C04
 direction suite reports **37 passed in 4.36 s**, and whitespace checks pass. The new C04
 selection/adapter/entry delta goes to the independent Reviewer before any scientific run.
+
+The Reviewer read `a9bbf9dbf..96a8d9dee`, independently verified the declared stage-only
+information and phase-6/phase-7 selection separation, and ran six focused checks (1.75 s).
+It returned no material finding or requested repair; unchanged C01/C03 code retains its
+accepted checks. I read the full review and accept C04 for its frozen native-admission run.
+This acceptance establishes implementation consistency only, not a scientific result.
