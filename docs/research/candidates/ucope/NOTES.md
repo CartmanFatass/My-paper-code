@@ -4872,3 +4872,150 @@ decision; service-responsibility semantics and the limits on interpreting mixed
 versus homogeneous labels remain as recorded in the preceding entries. Any future
 comparison on this learner must retain both as_trained and R10. No new record
 system or automation is introduced, and the completed B08 follow-up remains paused.
+
+## 2026-09-20 23:55 UTC — Owner reopens original UCOPE; selected frozen-mean gate learning B08
+
+**Scope and reason to reopen.** The owner explicitly clarified: "恢复原 UCOPE，保留负结果并选择新的研究比较".
+This restores the original velocity-command KEEP/END question, independent of Claude's
+FSD progress. New work uses `codex/ucope-frozen-feedback`; the accepted future-FSD code
+and interpretation remain recoverable on `codex/team-conditioned-termination@fd7e77635`.
+This is not a rename of Claude's B08 and does not take over his skill object or B11.
+Before this clarification I read `main@37f13aebc` B09/B10 and verified the three-way
+B08/B09/B10 as-trained score identity, common checkpoint digests, complete probe counts,
+and zero updates from the raw published summaries. No FSD comparison or code extension
+was executed. B09's development-selected constants (2,1,0) and B10's persisting label
+spread lower the priority of our old frozen-label six-fit proposal; they do not bound
+conditional END value. That separate proposal stays inactive.
+
+UCOPE B03 already tested state-conditioned R against scalar B with joint controller/gate
+learning: R-B = -.06887, -.02620, +.01195. B05's fixed mean-agreement proxy was not
+retained. B07's sampled scalar reuse lost to retained Ghalf mean control on all three
+primary panels; two favorable mean-B secondary panels remain contrary evidence. These
+results and the B06 initialization-selection exposure stand. I will not infer that
+feedback termination was never tested, or that an omitted log field proves opportunity.
+
+**One new comparison.** Object `UCOPE_FROZEN_MEAN_GATE_B08`: after freezing an attained
+ordinary controller, is a gate with richer legal context more useful than a learned
+command-disagreement rule? This removes gate-to-controller adaptation and sampled fresh
+velocity from the present learning question. It does not retrospectively identify why
+old R failed: several package conditions differ. Neither gate is input-independent.
+
+The task event is a change in local service/interference geometry or own history after
+the last executed command. At the same difference between that command and the current
+ordinary controller's fresh mean, retaining the previous command for one more tick may
+have different team consequences. Both branches take fresh observations and update the
+frozen GRU. The rich gate can use those differences; the simple gate tests whether a
+learned command-distance rule already suffices. Smoother motion or fewer renewals is not
+itself a reward benefit: native coverage/quality/altitude reward is unchanged, with no
+switching fee, bonus, minimum-service obligation or new observation.
+
+**Fixed foundation and semantics.** Use all three retained B06 Ghalf actors at masters
+8941/8942/8943 and their already published hashes, without choosing a favorable subset.
+They are development-selected controllers, not new ordinary-learning replications.
+Every tick, including KEEP, their original actor input is local observation + actual
+previous command + phase **zero**. Feeding the gate eligibility into this frozen ordinary
+actor would silently change its interface and is forbidden. Parameters/log-std stay
+unchanged; actual observations, previous commands and GRU histories evolve on each arm's
+own trajectory. Fresh command is always `tanh(mu)`; no Gaussian is drawn. The original
+reactive law stands: reset is forced fresh; eligible KEEP copies the last actual command
+and makes the next tick forced fresh; eligible END sends the current mean and remains
+eligible. Maximum command lifetime is two ticks, and there is no GRU reset at END.
+
+Let `d = sum((fresh_mean_command - previous_command)^2)/12`, bounded in [0,1]. Arms:
+
+- `agreement`: learned KEEP logit `b0 + b1*d`, with free sign/intercept. It contains a
+  scalar rate and either monotone agreement direction; finite PPO does not guarantee it
+  dominates every separately fitted scalar. It is a competitive simple reference, not a
+  proven optimum.
+- `contextual`: the same affine term plus a 175->32->1 tanh residual network. Inputs are
+  the 104 current local observation values, own previous command (3), current fresh mean
+  command (3), frozen actor recurrent output (64), and the identical scalar d (1). This
+  is a legal finite history representation, not all possible lawful history. The affine
+  parameters and final residual layer start at zero; both arms initially KEEP with .5.
+- `ordinary`: that identical frozen Ghalf actor executes its fresh mean every tick,
+  with no gate or new fit. This is the mandatory practical reference.
+
+The two learned arms sample their gates in both training and final evaluation. All five
+local actors share one gate within an arm but access only their own stated inputs. A
+separate centralized critic sees the original normalized state, all actual prior commands
+and actual gate eligibility, identically in both learned arms. It is freshly initialized
+identically within a block, not the frozen controller's historical critic. Gate and critic
+use separate Adam optimizers at 3e-4, separate norm clipping .5, no entropy bonus. PPO uses
+per-agent eligible-bit likelihoods and the common team return; clip .2 and the native
+finite undiscounted return-to-go divided by horizon, no terminal bootstrap. Advantages
+are centered/scaled over the complete two-episode rollout. Masked actor terms sum over
+agents and average over team-time rows, including forced rows in the denominator. Critic
+loss is .5 times squared error. Four epochs, random minibatches of at most 256 team rows;
+the frozen actor's recorded gate inputs need no gradient/recurrent replay. This common
+gate-learning package is new; a gain does not separately identify information value.
+
+**Prospective exposure.** Three new gate/world masters 8951/8952/8953 map in order to
+foundations 8941/8942/8943. Per block train `agreement` then `contextual`, each for 2048
+complete 256-tick episodes, two episodes per rollout, 1024 updates. Six new gate fits,
+no new foundation fit. Each arm has 524288 training team steps; at the declared batch
+sizes each complete fit has 8192 gate and 8192 critic Adam calls. Whole training cost:
+3145728 team steps and 98304 optimizer calls. Evaluate only the final learned gates plus
+ordinary on the same 64 new worlds per block: 576 episodes / 147456 evaluation team steps,
+zero evaluation updates. Total planned native work is 3293184 team steps. No earlier
+checkpoint choice, deterministic-gate selection, rate/noise sweep, hover arm, extra seed,
+or post-score extension belongs to this batch.
+
+For base=100000*new master, critic initialization is base+12; the contextual residual uses
+base+11 (the affine gate needs no random initialization). Train worlds are base+10000+e,
+e=0..2047. A private full [tick,agent] uniform array uses base+50000+e in both arms, so
+endogenous eligibility cannot shift later coin addresses. Minibatch generators are
+base+41 for agreement and base+51 for contextual. Final world seeds are base+30000+e,
+e=0..63, and shared addressed gate coins base+70000+e. Ordinary consumes no gate coins.
+World and coin coupling does not make different learned histories identical. Current
+source and exact inherited bytes are pinned before admission on `local_linux`, CPU FP32,
+one Torch/BLAS thread per invocation. Up to three paired invocations may run concurrently.
+The inherited hard deadline remains 2026-09-21 04:06:07 UTC; no reset on returning to UCOPE.
+Fit allowances have been abolished by constitution section 3: these are planned costs and
+their reason, not an extension of 15 or a replenished balance. No additional Pro is used.
+
+**Prediction and reading.** Primary is final contextual-minus-agreement; retain all three
+per-block vectors, means/range and conditional world-panel SEs. Also report contextual-
+minus-ordinary and agreement-minus-ordinary. The working prediction is that comparable d
+can require different decisions across observed contexts, the rich gate learns an active
+nonconstant residual, and its actual changed trajectories improve native J over both
+references. Conditional gate variation alone does not verify the mechanism; nonlinear
+use of d and finite optimization remain alternative explanations. Rich only beating the
+simple gate while losing to ordinary is insufficient practical retention. If agreement
+is as useful or better, prefer it; if ordinary suffices, retain ordinary. Mixed or small
+results may leave no successor selected. The .01 J scale is context, not an equivalence
+claim or new significance rule. The three selected foundations and three fresh gate
+fits per arm support exploratory conditional learning evidence, not confirmation over
+freshly trained ordinary controllers. An independent ResearchCritic found no material
+dissent and these scope/interpretation tightenings are adopted.
+
+### L0: frozen-controller gate engine, bounded study, and native admission
+
+Owned new paths: `experiments/candidates/ucope/frozen_mean_gate_b08/{engine,study}.py`,
+its package initializer, `scripts/run_ucope_frozen_mean_gate_b08.py`, and mirrored tests.
+One Sol/high Implementer owns engine.py and test_engine.py only; DM owns study/runner,
+remaining checks and this notebook. No shared index, native environment, old experiment,
+FSD runner/notebook/test/result or frozen foundation source changes. Preserve all original
+artifacts and hashes. The entry has fixed master/exposure arguments and calls
+`require_admission(..., direction="ucope")` before scientific effects. The production
+loop has no fixture bypass and retains original handles and partial failures.
+
+Reuse the old Actor/Critic/environment interface read-only. Verify inherited checkpoint,
+summary and source against the B07-pinned B06 digests before a foundation forward. Save
+input provenance, config/source/admission, complete episode/update rows, final gate/critic
+weights and curves, optimizer/native-step counts, unchanged foundation digests and actual
+wall/CPU/RSS. Final primitive arrays retain all commands, means, gate probabilities,
+eligibility, branches, fixed coin slots and rewards. For prospectively fixed evaluation
+world indices 0,8,16,24,32,40,48,56 additionally retain every full 175-value predecision
+gate input; this is current study instrumentation, not reconstruction of old logs. Training
+inputs exist in each live two-episode rollout; storing every training history is not promised.
+
+Tests use the existing synthetic adapter only, with fixed small exposure, plus pure tensor
+checks. Cover phase-zero frozen feedback on all ticks, KEEP/END/forced and terminal credit,
+private fixed-slot RNG, identical initial arms, ordinary exact execution, eligible masking,
+normalized full return, bounded minibatches, actual gate/critic learning and zero foundation
+movement, fixed hashes/identity/admission before effects, partial counts and final return
+reduction. No new trained foundation smoke or B08 FSD forward. Reuse unchanged old checks;
+report actual synthetic updates. Independent engineering review and DM acceptance precede
+published-input launch. A technical failure remains a failure, not a negative scientific
+score or automatic retry. Read the complete batch together, then update the research
+explanation; finishing this batch does not by itself finish UCOPE.
