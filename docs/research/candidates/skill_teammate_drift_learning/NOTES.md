@@ -330,3 +330,114 @@ request will use the published repaired SHA and the still-uncreated first-cell
 output tag. No accepted operation is rebound or duplicated. All scientific arms,
 seeds, horizon, endpoints and the twelve-fit batch are unchanged; no extra owner
 or Root permission is needed for these ordinary steps.
+
+## 2026-09-20 07:07 PDT — B01 read: active correction, no benefit over recent replay
+
+**Execution and retained evidence.** The fixed twelve-fit batch is complete at
+`d97b26c70b88d1b899148f3ee9acce14bf1822d6`: every native process exited 0 and every
+scientific summary is complete. The DM retained each accepted handle until its
+same-operation terminal record, launching its own fits serially. There was no
+training failure, retry, added seed or score-conditioned change. The earlier
+pre-training compatibility refusal remains separately recorded above. All outputs,
+including raw trajectories, replay draws/weights, Q arrays, per-panel policies and
+native manifests, are retained in Git under `runs/skill_teammate_drift_learning/`.
+Each score below links its native manifest; `summary.json`, `curves.json`,
+`transitions.npz` and `q_values.npy` are siblings.
+
+Primary normalized-service adaptation endpoint (the twelve predeclared panels):
+
+| Seed | joint_is | fingerprint | recent | uniform |
+| --- | ---: | ---: | ---: | ---: |
+| 91001 | [.609685](../../../../runs/skill_teammate_drift_learning/b01_joint_is_91001/launch-manifest.json) | [.600465](../../../../runs/skill_teammate_drift_learning/b01_fingerprint_91001/launch-manifest.json) | [.611987](../../../../runs/skill_teammate_drift_learning/b01_recent_91001/launch-manifest.json) | [.610273](../../../../runs/skill_teammate_drift_learning/b01_uniform_91001/launch-manifest.json) |
+| 91002 | [.602737](../../../../runs/skill_teammate_drift_learning/b01_joint_is_91002/launch-manifest.json) | [.590282](../../../../runs/skill_teammate_drift_learning/b01_fingerprint_91002/launch-manifest.json) | [.617788](../../../../runs/skill_teammate_drift_learning/b01_recent_91002/launch-manifest.json) | [.591958](../../../../runs/skill_teammate_drift_learning/b01_uniform_91002/launch-manifest.json) |
+| 91003 | [.596615](../../../../runs/skill_teammate_drift_learning/b01_joint_is_91003/launch-manifest.json) | [.595648](../../../../runs/skill_teammate_drift_learning/b01_fingerprint_91003/launch-manifest.json) | [.591326](../../../../runs/skill_teammate_drift_learning/b01_recent_91003/launch-manifest.json) | [.586429](../../../../runs/skill_teammate_drift_learning/b01_uniform_91003/launch-manifest.json) |
+| Mean | .603012 | .595465 | .607034 | .596220 |
+
+Paired joint-minus-fingerprint values are +.00922031 / +.01245509 / +.00096720
+(mean +.00754753); joint-minus-recent are -.00230173 / -.01505165 / +.00528857
+(mean -.00402160); joint-minus-uniform are -.00058761 / +.01077840 / +.01018608
+(mean +.00679229). These are three independent development blocks, not a stable
+ranking, an equivalence reading, or confirmation. The primary fingerprint contrast
+is retained even though recent has the higher mean; the comparator is not changed
+after observing scores.
+
+**Actual learning and implementation checks.** Every fit records 300 episodes,
+3,000 macro transitions, 9,000 primitive transitions, 3,000 minibatch updates,
+96,000 replay uses and 31 exact frozen-policy panels (zero simulated evaluation
+episodes or evaluation updates). Direct recomputation from the saved twelve panels
+matches every emitted primary endpoint. Q movement is substantial, not absent;
+terminal rows remain zero. Read-only raw-array reconstruction checks actual
+positions/actions, endpoint service, discounted macro rewards, terminal/remaining
+time, causal replay indices, the recent window and fingerprint version matching.
+The five exogenous reset/exploration/teammate/primitive random-slot arrays match
+bit-for-bit across all four arms within each seed. A separate vector calculation
+from actual recorded actions reproduces all twelve behavior-likelihood streams and
+all 288,000 candidate replay ratios/normalizations, without calling the scientific
+likelihood helper. These checks found no scientific implementation defect.
+
+**Predictions and contrary evidence.** Candidate mean absolute Bellman residual at
+the primary panels is 2.1513 / 2.2856 / 2.3249 versus uniform 2.3049 / 2.4159 /
+2.5285. This predicted intermediate change occurs on all three blocks. Candidate
+Kish concentration divided by replay-draw count is about .419 on each block;
+about .764 / .774 / .777 of normalized weight comes from outside the 300-macro
+recent window, and only .445 / .424 / .437 from the current behavior version.
+Maximum normalized single-draw weights are 13.45 / 19.49 / 14.08. Correction and
+old/off-version use are active and not an age-filter alias. The residual gain does
+**not** establish useful control improvement: the pre-result prediction of better
+native adaptation than recent fails on two blocks and in the mean. Nor does
+weight concentration by itself establish independent sample efficiency.
+
+The sharper limitation is common poor B-version learning. Across arms the early
+B windows are roughly .46–.49, while the runner's informational optimum for B is
+.746564. Initial all-LEFT in A already yields .763942 versus the A informational
+optimum .765398; final A values are roughly .726–.755. This is not a tuned-baseline
+headroom estimate. It also does not mean no parameter learning occurred. Saved
+policies favor LEFT strongly: fingerprint's last B panels choose RIGHT on only
+4.8% / 2.8% / 6.0% of the 250 nonterminal state/time cells, and 291 / 291 / 288 of
+its 500 B action values are still exactly zero. In each 60-episode B block only
+26–37 state/time cells across the twelve fits observe both actions (out of 250);
+RIGHT collection is about 11%–22%, not balanced exploration. Low RIGHT frequency
+alone is not proof that every state should choose RIGHT. Together with the native
+B underperformance and exact zero values, it supports testing a coverage/initial
+value bottleneck before treating fingerprint as competent.
+
+**Judgment and next useful observation.** The complete B01 correction package is
+not retained as superior and is not advanced to confirmation. The ability to form
+lawful, active joint weights is strengthened; incremental finite-learning value
+beyond simple replay is weakened/unresolved. The positive fingerprint contrast is
+not a matched-competent-baseline gap. A new, post-result hypothesis is that
+pessimistic zero initialization under nonnegative reward, LEFT tie-breaking and
+sparse epsilon exploration locks in an early action. This is an inference to test,
+not an identified causal explanation. The next comparison should repair this
+common learner issue with a single information-fair change and predict both
+coverage/behavioral movement and B-native performance. It must preserve the replay
+correction, clocks, task and B01 reading. An independent bounded ResearchCritic is
+checking that inference while the DM audits the raw evidence; its advice is not
+empirical replication. No UAV, endogenous teammate-learning, current-HMASD skill
+or Claude-PPO diagnosis follows from this scripted host.
+
+**Cost.** Twelve started/completed fits, 108,000 primitive transitions and 1,152,000
+replay uses. Runner wall seconds, ordered joint/fingerprint/recent/uniform per seed:
+91001 = 1.094 / .751 / .774 / .731; 91002 = .946 / .799 / .722 / .864;
+91003 = 1.138 / .951 / .711 / .733. Sum runner wall 10.2134 s and CPU user+system
+9.0470 s. Maximum single-scientific-process peak RSS is 44,872 KiB, not a sum or
+simultaneous node peak. Numeric libraries use one thread; own fits were serial on
+`local_linux` on the shared WSL host. First native acceptance to last process exit
+is 369.349 s, including admission and interaction gaps, not occupancy or a speed
+claim. External launch/preparation time is not fully instrumented and is not zero.
+The earlier pre-training refusal's process wall remains unknown. Fits are cost,
+not an allowance to exhaust or replenish.
+
+### B01 reading refinement from independent criticism (same boundary)
+
+The bounded critic separated the already-declared panels by current version; the
+DM independently recomputed its numbers from saved curves. Joint-minus-fingerprint
+on the A portions is +.007102 / +.030751 / +.019316; on the B portions it is
++.011339 / -.005840 / -.017382. Thus the all-positive combined primary contrasts
+do not show replicated adaptation improvement in B: preserving performance in A,
+where initial LEFT is already near its informational optimum, drives much of the
+combined observation. This is a post-result diagnostic, not a replacement primary
+endpoint. The initial all-state A Bellman residual is 1.305712, below the trained
+A residuals; improvement versus uniform is only relative, not evidence of an
+absolute fitted solution. DM adopts both limits. They strengthen the decision not
+to promote B01's small positive fingerprint contrast as useful replay benefit.
