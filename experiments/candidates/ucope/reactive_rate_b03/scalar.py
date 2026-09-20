@@ -23,4 +23,3 @@ def scalar_actor(common):
     actor.duration_conditioned = True
     actor.duration = ScalarGate()
     return actor, critic
-

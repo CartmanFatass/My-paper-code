@@ -517,3 +517,8 @@ changed. B03 still has zero started fits at this acceptance boundary. The next a
 is exact-source publication followed by the three original admitted block invocations;
 the Monitor will receive the accepted handles, and the DM will read all three final
 panels together after terminal notices.
+
+The DM's staged-file check then exposed four trailing blank EOF lines that the
+earlier unstaged check did not include. They were removed in a follow-up publication
+before any launch; executable semantics and the reviewed tests are unchanged. No
+history rewrite or repeated synthetic/native work is needed for that whitespace fix.

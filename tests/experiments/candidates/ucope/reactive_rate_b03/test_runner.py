@@ -84,4 +84,3 @@ def test_admitted_runner_passes_exact_config_and_admission(tmp_path, monkeypatch
     assert observed_out == out and observed_admission == admitted
     assert isinstance(start, float)
     assert config == study.Config(seed=8922)
-
