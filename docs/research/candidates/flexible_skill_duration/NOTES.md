@@ -2316,3 +2316,35 @@ the other two `D_K10` fits follow as slots free (at most four concurrent).
 | `b07_k1_772903_a01` | D_K1 | 772903 | `afad43bb886e0866844c2c95af9cf32a3805e0495d72cdd437f81e079f051beb.json` |
 | `b07_k1_773003_a01` | D_K1 | 773003 | `d58454c1d727566e88bc8dd3c71d03c58b0c049b8c2e15d593045c6dbb3c6a4b.json` |
 | `b07_k10_772803_a01` | D_K10 | 772803 | `cd23a74bcbb2974c3ba7a48652971a6e87d7668fdacce02109d4ca27c7fc1681.json` |
+
+## 2026-09-20 01:15 PDT — persistence B07: two `D_K1` fits killed by the node's out-of-memory killer at their first coordinator update; plan for the remaining two fits (no score seen)
+
+**Execution facts.** About one minute after admission, `b07_k1_772803_a01` and then
+`b07_k1_772903_a01` exited with code −9 at boundary "rollout 0 collected"; the node's kernel
+log names the out-of-memory killer (killed python at 8.3 GB anonymous RSS while still
+growing; the node has 15.8 GB). Cause, measured on the survivor: a `D_K1` coordinator update
+takes the whole 8,000-row pool in one minibatch (`coordinator_batch_size = 12800`, my design
+choice at 23:58) and its resident memory swings between about 6 and 12 GB on the CPU within
+every update. Three at once cannot fit. Neither killed fit completed an update or a panel, so
+no score exists from them; their partial roots stay on the node as they are and will be
+collected with the batch. They are started training attempts: **two of the six fits are
+consumed**. My error: I sized the wall for `D_K1` and did not size its memory; the tiny-host
+test has a 40-row pool and could not show it.
+
+`b07_k1_773003_a01` survived (it started its update after the other two were gone) and
+`b07_k10_772803_a01` runs beside it: about 5 min per rollout for `D_K1` (collection plus
+update, some of it under memory pressure), about 150 s for `D_K10`; free memory about 1.2 GB
+at the `D_K1` peaks. Nothing else is launched while they run together.
+
+**Plan for the remaining two fits, fixed now.** Both go to `D_K1` on the two blocks that lost
+theirs — `b07_k1_772803_a02` and `b07_k1_772903_a02`, new roots, same launch sha, same
+construction, run **one at a time** with nothing else heavy on the node. I do not change
+`coordinator_batch_size` to make them fit: the surviving block already runs the declared
+construction, and mixing constructions across blocks would cost more than the hours.
+Consequence: `D_K10` with the behaviour capture exists on block 772803 only. For the J
+contrast the `D_K10` side on 772903 and 773003 is the recorded D1280 fit of the same
+construction (B02 showed the rerun bit-exact on this node, and 772803 checks it again here);
+the behaviour contrast (autocorrelation, cells, skill change) is three `D_K1` blocks against
+one `D_K10` block, and the declared "three of three blocks" reading of the lag-5 difference
+becomes one paired block plus two unpaired ones. That is a weaker intermediate reading than
+the entry promised, recorded here before any score.
