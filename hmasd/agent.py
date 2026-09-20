@@ -2196,6 +2196,7 @@ class HMASDAgent:
     D2_CAUSE_TEAM_CAP = 3
     D2_CAUSE_GAP = 4
     D2_CAUSE_CAP = 5
+    D2_CAUSE_OPTIONAL_END = 6
     D2_CAUSE_NAMES = {
         0: 'none',
         1: 'reset',
@@ -2203,6 +2204,7 @@ class HMASDAgent:
         3: 'team_cap',
         4: 'gap',
         5: 'cap',
+        6: 'optional_end',
     }
 
     @staticmethod
@@ -2477,6 +2479,22 @@ class HMASDAgent:
             'target_var_agent': float(m['target_var_agent']),
         }
 
+    def set_optional_end_hook(self, hook=None):
+        """Install a local END-mask callback on fixed-clock D2, or remove it.
+
+        This is an instance-only extension, not checkpoint/config state. The callback
+        receives copied predecision arrays and returns only optional END requests.
+        It owns its random stream and any learner state; the core imports no candidate.
+        Without a callback, the original D2 execution and RNG path are unchanged.
+        """
+        if hook is not None:
+            if not callable(hook):
+                raise TypeError('optional END hook must be callable')
+            if not self.d2_enabled or not (np.isposinf(self.d2_cost_c)
+                                           and np.isposinf(self.d2_cost_c_Z)):
+                raise ValueError('optional END requires D2 with both costs +inf')
+        self._optional_end_hook = hook
+
     def _batched_assign_skills_d2(self, states_batch, observations_batch, env_steps_batch,
                                   dones_batch, deterministic=False):
         """
@@ -2618,6 +2636,40 @@ class HMASDAgent:
                 )
                 agent_cause[hold_idx] = np.where(fire, cause_here, self.D2_CAUSE_NONE)
 
+        # Optional local termination, after mandatory-clock decisions and before the
+        # original partial decoder. No snapshot, callback or random draw on the off path.
+        end_hook = getattr(self, '_optional_end_hook', None)
+        end_snapshot = None
+        if end_hook is not None:
+            if not (np.isposinf(self.d2_cost_c) and np.isposinf(self.d2_cost_c_Z)):
+                raise ValueError('optional END requires both D2 costs to remain +inf')
+            end_snapshot = {
+                'states': np.array(states_batch, copy=True),
+                'observations': np.array(observations_batch, copy=True),
+                'held_team': held_team.copy(),
+                'held_agents': held_agents.copy(),
+                'agent_ages': agent_ages.copy(),
+                'team_ages': team_ages.copy(),
+                'reset': reset_mask.copy(),
+                'forced_end': sampled_mask.copy(),
+                'team_forced': sample_Z_mask.copy(),
+                'eligible': ~sampled_mask,
+            }
+            for array in end_snapshot.values():
+                array.setflags(write=False)
+            optional_end = np.asarray(end_hook(end_snapshot, deterministic=deterministic))
+            if optional_end.dtype != np.bool_ or optional_end.shape != sampled_mask.shape:
+                raise ValueError('optional END hook must return a boolean [env, agent] mask')
+            if np.any(optional_end & sampled_mask):
+                raise ValueError('optional END requested outside eligible positions')
+            optional_end = optional_end.copy()
+            sampled_mask |= optional_end
+            agent_cause[optional_end] = self.D2_CAUSE_OPTIONAL_END
+            self.d2_metrics['cause_counts']['optional_end'] = (
+                self.d2_metrics['cause_counts'].get('optional_end', 0)
+                + int(optional_end.sum())
+            )
+
         # Cheap D2-only invariant asserts (plan section 5).
         if not np.isfinite(self.d2_cost_c):
             assert not np.any(agent_cause == self.D2_CAUSE_GAP), \
@@ -2731,6 +2783,9 @@ class HMASDAgent:
             'g_agents': g_agents,
             'g_team': g_team,
         }
+        if end_snapshot is not None:
+            self._d2_last_step['termination_predecision'] = end_snapshot
+            self._d2_last_step['optional_end'] = optional_end
         for env_idx in range(num_envs):
             self.env_d2_last_decision[env_idx] = {
                 'decision': bool(decision_mask[env_idx]),
