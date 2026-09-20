@@ -2362,3 +2362,245 @@ nonquadratic reward and future histories remain outside that proof. A useful fut
 rationale must add a reward-relevant temporal or other concrete reason beyond closeness to
 its own current center. It cannot obtain that reason merely by making the distance estimate
 more accurate. No new native batch or learned-head recipe follows from this closure.
+
+## 2026-09-20 — owner correction: continue the scientific workflow after B05
+
+The owner explicitly instructs continued long-form research and says completion of an
+experiment is not completion of the scientific workflow. I correct the premature task
+handback: the primary session continues directly as DM, carrying the explanation into
+next questions and useful work, with actual leaf producers when independent work helps.
+B05's non-retention decision remains; it is not a decision to stop UCOPE. The recorded
+original time, batch, fit and Pro boundaries have not been explicitly expanded. Continued
+reasoning and analysis of already recorded trajectories remain useful within those bounds.
+
+### Next question: local gate-policy response from the existing B05 randomized logs
+
+The original B05 panel measured a full gate replacement C minus B, with all subsequent
+history and visitation changes. B05 also newly preserved actual B propensities, branches,
+commands, means, eligibility and team rewards, which earlier public episode-only artifacts
+did not retain. I now use those existing randomized B trajectories to ask a different,
+local question: does an infinitesimal change toward the same fixed C rule improve J near
+B? This is post-result interpretation, not a held-out validation or revival of C.
+
+Define the eligible gate law pi_epsilon=(1-epsilon)pi_B+epsilon*pi_C, retaining B actor
+weights, fresh-command Gaussian law, recurrent updates and forced/eligible transitions.
+At an eligible gate let Z=1 denote END, p=1-pKEEP and z_star=1{D_keep>D_fresh}, with the
+already fixed GH64 rule evaluated from that B history. Its likelihood score at epsilon=0 is
+
+`delta=(z_star-p)*(Z/p-(1-Z)/(1-p))`.
+
+For J equal to full team return divided by H=256, the proposed derivative is the B-law
+expectation of `sum_(t,i eligible) delta_ti * (Y_t-b_ti)`, where Y_t is remaining team return
+from the current tick divided by H and b is predecision/action-independent. This is a local
+simultaneous policy perturbation over all eligible agent/tick gates, not independent replay
+of states and not the finite endpoint C-B. Forced ticks contribute zero score. The source
+provides positivity (pKEEP .481145/.488014/.486104) and preserves the same stochastic kernels.
+The derivative includes downstream phase, recurrence, teammate and visitation consequences
+through Y. It does not average away those effects or require observed paired counterfactuals.
+An independent Critic checks this identity and its limits while the DM inspects saved arrays.
+
+Read every one of the 64 B worlds at each of the three fixed checkpoints. Compute both the
+raw b=0 derivative moment and a leave-one-world-out return baseline at each tick; do not
+choose the estimator by its sign. All five agents and all ticks stay inside their original
+world for uncertainty. LOO baselines couple worlds: with S_et=sum_i delta_eti, their mean is
+sum_t the unbiased sample covariance between S_t and Y_t across worlds. Use a delete-one-
+world jackknife that recomputes the other-world baseline for its approximate conditional SE,
+not a naive SE treating LOO contributions as independent. Keep each checkpoint separate.
+No proxy threshold/bin search, new predictor, optimizer, actor forward, environment call,
+new native panel or Pro request is part of this calculation. It consumes zero new fits and
+zero native steps, and uses the existing B05 raw artifacts as its complete data source.
+
+Interpretation in advance: a resolved adverse local direction would weaken a favorable
+small-change story for this proxy at B; a favorable local direction together with an adverse
+full replacement would make a nonlinear/history interaction relevant, without identifying
+its cause. Wide conditional uncertainty would leave that distinction unresolved. Neither
+case automatically selects a new panel, proves absence of local-history opportunity, or
+changes the observed C-G comparisons.
+
+### Existing-log local response: correct identity, insufficient precision
+
+The independent Critic confirms the derivative and LOO-covariance identity, with no material
+objection. The policy mixture uses independent local coins at every eligible gate. It
+perturbs expected return over the intended world/policy-randomness law, not the pathwise
+step function obtained by changing epsilon against these finitely fixed uniform tables.
+No factor dividing by agent count or eligible-event count belongs in the derivative.
+Recurrent and eligibility visitation changes enter through earlier scores and later rewards.
+
+The DM evaluated the declared two estimators over the complete existing B05 B trajectories.
+Each row remains conditional on one inherited checkpoint and 64 independent world draws;
+the derivative is per unit epsilon, while the last column is a finite epsilon=1 endpoint.
+
+| Master | Raw derivative / world-cluster SE | LOO derivative / recomputed delete-world jackknife SE | Observed finite C-B |
+| --- | --- | --- | ---: |
+| 8931 | -0.28603230 / 0.50149282 | -0.09673961 / 0.11096525 | -0.01646448 |
+| 8932 | -0.13794326 / 0.50957533 | -0.02041081 / 0.15958282 | +0.00686559 |
+| 8933 | +0.02386399 / 0.43942726 | +0.07370270 / 0.11647098 | +0.01716922 |
+
+The LOO form and its covariance algebra agreed within 1e-14. No actor forward, native
+step, fitted predictor or optimizer ran. C's target END fractions on the B-occupied eligible
+histories were .448523 / .462452 / .522392, versus B END probabilities .518855 / .511986 /
+.513896. These are descriptive occupancy quantities, not isolated rate effects.
+
+The approximation is too imprecise to resolve the local sign in any checkpoint; the LOO
+plus/minus-two-SE ranges all include zero. Using other-world time-dependent return baselines
+reduces this estimator's observed uncertainty substantially, but does not make the local
+versus finite-replacement distinction readable here. This is a limitation of these moments
+on these 64-world samples. It neither measures the training critic's quality nor demonstrates
+that PPO lacks an effective baseline or that auxiliary prediction would fix learning. I do
+not search more bins or thresholds until a favorable statistic appears.
+
+The Critic's exact two-step example preserves the logical distinction: start eligible, B
+END probability 1/2, C always END; after KEEP force a fresh next tick, after END remain
+eligible. Terminal returns 0 (first KEEP), 1 (END-KEEP), 1/4 (END-END) give, for
+q=(1+epsilon)/2, E[J]=q-(3/4)q^2. The derivative at zero is +1/8 yet full C-B is -1/16.
+Thus a resolved sign disagreement could demonstrate nonlinearity along this policy path;
+it would not identify a particular visitation, rate or co-adaptation mechanism. Our actual
+moments do not resolve that disagreement. B05's non-retention judgment is unchanged.
+
+### Next research question under preparation: ordinary-controller training noise
+
+B05's current three G_mean gains motivate a different finite-learning question. Verified G
+endpoint standard deviations are (.98540,.99157,1.00554), (.98415,1.00291,.98165), and
+(.98432,.99906,.98143), all near the initial 1. Both B04 learning routes explicitly use
+entropy coefficient zero, so an entropy-bonus explanation is inapplicable to these fits.
+The small scale movement alone is not proof of a freeze or optimizer fault; a bounded Scout
+is tracing the actual G gradient and optimizer route.
+
+I prepare a direct ordinary-controller initialization comparison: G1 starts at std 1 and
+Ghalf at std .5, with both log_std vectors still trainable. Keep paired common actor/critic
+initialization, native rights, phase zero, original ordinary learner, 2048 training episodes
+of 256 ticks and CPU FP32 unchanged. Three fresh checkpoint pairs would require six fits.
+Primary final comparison is Ghalf_mean minus G1_mean on 64 new worlds, with both deployed
+by tanh(mean), so concurrent evaluation noise does not itself supply the primary effect.
+Both sampled deployments remain required secondary readings. The expected intermediate is
+lower early training scale; the native prediction is a higher final mean-deployed return.
+The strongest contrary account is that test-time noise hurts while broad training exploration
+is useful, or that finite training erases the scale difference. This is an initialization
+package, not isolated proof about exploration, and it does not revive C.
+
+The question matters because a stronger ordinary controller changes the benchmark a useful
+K proposal must exceed. Scientific critique and concrete engineering scope come next.
+**Execution is not yet selected under the original two-batch allowance:** B04 and B05 used
+those two batches. The owner's continuation request keeps research active; it has not been
+silently converted into a third-batch grant. Reversible preparation can proceed, and any
+execution decision will be presented as a concrete six-fit request within the original
+12-fit total and time bound, after the implementation is reviewable.
+
+### B06 prepared design: initial Gaussian scale and attained ordinary control
+
+The Scout traced the actual B04 G path: log_std is a trainable parameter, is included in
+Adam, enters replayed tanh-Gaussian log probability and the PPO ratio, and is inside the
+ordinary [-5,2] clamp away from either bound. Collection no_grad is detached on-policy
+sampling, not freezing. Existing objective tests cover a reachable nonzero log_std policy
+gradient; native logs record overall gradient norms but not each log_std gradient. Final
+checkpoint movement proves some movement, not that every update had a useful scale gradient.
+There is no supported freeze/optimizer-exclusion repair to make.
+
+Independent scientific critique finds the following prepared comparison useful and minimal,
+with no material objection. The intervention is **initial latent Gaussian scale**; after
+tanh, halving it neither exactly halves command variation nor preserves the expected command
+when the latent mean is nonzero. It changes a finite learning package. A deployment-only
+clamp would not answer the primary question below.
+
+Prepared object **UCOPE_GAUSSIAN_SCALE_INITIALIZATION_B06**, fresh masters **8941, 8942, 8943**:
+G1 initializes log_std to 0; Ghalf initializes log_std to log(.5). Both three-dimensional
+vectors remain trainable. Every other initial actor and critic byte is identical within a
+pair. Both arms use the unchanged ordinary G collector/recurrent PPO update: 2048 complete
+256-tick training episodes, two episodes per rollout, four epochs, 32-tick recurrent chunks,
+gamma-one raw returns, entropy 0, agent-compound ratios, common actor+critic norm clip .5,
+Adam .0003 and no value normalization. Each tick is fresh, G phase is always zero, there is
+no duration/gate head, and local actor/central critic information is unchanged.
+
+Per master base=100000*master. Common initialization is the existing templates(base+11 law).
+Train worlds base+10000+e, e=0..2047, are paired. Both arms own separate private generators
+with identical initial addresses base+21 (Gaussian innovations) and base+22 (unused duration
+stream), plus independent optimizers/environments/GRU histories. Same innovations couple
+comparisons without requiring equal histories or promising variance reduction. Evaluation
+worlds are base+30000+e, e=0..63, disjoint from training. Each final actor is evaluated both
+sampled and mean; sampled innovations use a fresh per-episode generator base+80000+e, and
+an unused duration generator base+85000+e. Mean mode uses tanh(mu) each tick and no velocity
+random draws. Both modes reset full histories and weights stay unchanged during evaluation.
+
+Primary endpoint is **Ghalf_mean minus G1_mean**; report every paired world vector, conditional
+SE and sign count per master, then the descriptive mean/range of all three master means.
+Required secondary contrasts are Ghalf_sampled minus G1_sampled, Ghalf_mean minus
+Ghalf_sampled, and G1_mean minus G1_sampled. No best-mode selection, old-score replacement,
+MEI/equivalence verdict or historical pooling. Mean deployment removes concurrent Gaussian
+sampling but still compares complete recurrent controllers and their induced world trajectories.
+
+Intermediate prediction: Ghalf's arithmetic mean latent scale across the three coordinates,
+averaged at episode-start across the **first 256 training episodes**, is lower than G1's.
+Record scales before every two-episode rollout and after its update, with final vectors and
+curves; the guaranteed initial difference alone is not sustained-exposure evidence. Native
+prediction: positive primary final mean-deployment contrast. Read both predictions separately:
+sustained lower scale without native gain weakens the proposed benefit; sampled-only gain
+does not meet the primary prediction. Rapid later convergence cannot erase a possible early
+trajectory/optimization effect. This is exploratory, not a population ranking.
+
+If separately authorized for execution, this fixed batch would use **six started fits**,
+12,288 training episodes / 3,145,728 training team steps / 24,576 optimizer calls, followed by
+768 evaluation episodes / 196,608 evaluation team steps with zero evaluation updates.
+Total 3,342,336 native team steps. It would bring this window to twelve started fits. No
+additional seed, timing arm, scale grid, checkpoint selection, Pro request or native smoke
+is included. Use local_linux CPU FP32, one Torch/BLAS thread per pair invocation, up to three
+independent pair invocations after fresh actual-node admission, watchdog 6000 seconds each.
+Any failed started fit counts; uncertain native effects require same-handle reconciliation.
+The prior two-batch execution limit still requires an owner amendment before B06 runs.
+
+### L0: prepare the B06 implementation without native execution
+
+Owned new paths: `experiments/candidates/ucope/gaussian_scale_initialization_b06/`,
+`scripts/run_ucope_gaussian_scale_initialization_b06.py`, and matching tests under
+`tests/experiments/candidates/ucope/gaussian_scale_initialization_b06/`. No historical/shared
+learner, policy, environment, runner, run directory or authority is edited. Reuse existing
+small helpers and ordinary collector/update directly. Initialize the second actor's log_std
+only in the new constructor after copying the common template; do not modify templates.
+The production CLI is fixed masters plus out/launch-sha and calls require_admission before
+scientific imports, outputs, model/environment construction or native effects. No production
+fixture, horizon, std or seed override is exposed.
+
+Provide native config/source/admission/summary, flushed train/eval episode and PPO update
+rows, per-rollout scale records, final checkpoints with identity/hashes, raw evaluation
+rewards/actions/masks sufficient to reconstruct primary/secondary contrasts and ordinary
+phase-zero execution, actual fit/transition/optimizer counts, initialization and learning
+movement, evaluation immutability, RNG-isolation evidence, and honestly scoped wall/CPU/RSS.
+Partial failure must retain started/completed fit counts, logs and usable partial outputs.
+No optimizer runs in evaluation. Declare first-256-episode scale statistics explicitly.
+
+Use a fixed small SyntheticAdapter engineering API inside tests only. Check common initial
+bytes except log_std, trainability/optimizer inclusion, actual scale updates in the fixture,
+unchanged ordinary-G route and phase, private paired generators, both final deployment modes,
+raw contrast reconstruction, independent fit state, partial failure and admission ordering.
+Reuse unchanged evidence; no native smoke or existing-checkpoint evaluation is needed.
+Implementer writes only its new code/test paths, no index/notebook/git publication, native
+execution or children. DM reads and accepts; independent engineering review precedes
+publication of reviewable inputs. Execution approval, if sought, comes only once these
+concrete inputs and total exposure are available to the owner.
+
+### A simple-model reason to keep training and deployment noise separate
+
+While B06 is prepared, an exact one-step model clarifies why B05's mean-deployment gain is
+not itself a prediction of a learning gain. Take a latent command U=mu+sigma*Z, Z standard
+normal, quadratic reward Y=-(U-theta)^2/2 + tau*V, with independent uniform sign V and no
+state dynamics. Let m=mu-theta and use the exact predecision mean-return baseline
+b=-(m^2+sigma^2)/2. The score gradient for mu is
+
+`g=(Y-b)*Z/sigma = -m*Z^2 -(sigma/2)*(Z^3-Z) +(tau/sigma)*V*Z`.
+
+Therefore E[g]=-m and Var(g)=2*m^2+(5/2)*sigma^2+tau^2/sigma^2. Removing action sampling
+at deployment improves expected reward by sigma^2/2 in every case. But decreasing training
+sigma can increase score-gradient variance when action-independent return variation is
+large. For m=1/2, lowering sigma from 1 to 1/2 changes variance from 3 to 9/8 when tau=0,
+yet from 4 to 41/8 when tau=1, despite the same mean gradient -1/2. Exact Fraction arithmetic
+with Gaussian moments checked all eight combinations m in {0,1/2}, sigma in {1,1/2}, and
+tau in {0,1}. There was no simulation, fitted model, native episode or optimizer update.
+
+This is a conditional analogy: tau can stand for return variation a predecision baseline
+cannot remove, including teammate-induced outcomes. The model omits endogenous teammate
+adaptation, recurrence, tanh, boundaries and long-horizon credit, so it does not diagnose
+native B04 variance or predict B06's sign. It establishes a concrete competing mechanism,
+not a requirement for another diagnostic. The actual frozen G likelihood has the matching
+unclamped replay score Z/sigma for its latent mean and Z^2-1 for log_std; the recorded
+scales are far from clamp bounds. Halving initial sigma also changes score/Fisher geometry,
+not just visited commands, under otherwise identical finite PPO/Adam settings. The package
+reading and mean-deployment endpoint retain exactly that uncertainty.
