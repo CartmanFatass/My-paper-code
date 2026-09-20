@@ -19,6 +19,12 @@ from .learning import ARMS, greedy_probabilities, update_chunk
 
 OBJECT = "termination_reuse_off_termination_a01"
 SEEDS = (91021, 91022, 91023)
+LIMITS = (
+    "exploratory independent host; no UAV or novelty claim",
+    "fixed teammate and focal termination law; no termination learning",
+    "same data/update rows, different target-construction arithmetic",
+    "constant step size and finite exposure; no convergence claim",
+)
 
 
 @dataclass(frozen=True)
@@ -87,9 +93,21 @@ def _identity(path: Path):
             "sha256": hashlib.sha256(path.read_bytes()).hexdigest()}
 
 
-def run_study(config: Config, out: Path, admission: Mapping, start: float | None = None):
+def run_study(config: Config, out: Path, admission: Mapping, start: float | None = None,
+              *, object_id: str = OBJECT, run_label: str | None = None,
+              limits: tuple[str, ...] = LIMITS):
     """The guarded script is the production entry. Tests may use small fixtures."""
     config.validate()
+    run_label = config.arm if run_label is None else run_label
+    if not isinstance(object_id, str) or not object_id:
+        raise ValueError("object identifier must be nonempty")
+    if not isinstance(run_label, str) or not run_label:
+        raise ValueError("run label must be nonempty")
+    if not isinstance(limits, tuple) or not limits or not all(
+            isinstance(limit, str) and limit for limit in limits):
+        raise ValueError("limits must be a nonempty tuple of strings")
+    identity = {"object": object_id, "arm": run_label,
+                "learner": config.arm, "seed": config.seed}
     start = time.monotonic() if start is None else start
     if (admission.get("direction") != "termination_rule_experience_reuse"
             or len(admission.get("sha", "")) != 40):
@@ -101,7 +119,7 @@ def run_study(config: Config, out: Path, admission: Mapping, start: float | None
     if any((out / name).exists() for name in scientific_files):
         raise FileExistsError("scientific output already exists; no overwrite or resume")
     with (out / "config.json").open("x", encoding="utf-8", newline="\n") as stream:
-        json.dump({"object": OBJECT, "config": asdict(config),
+        json.dump({**identity, "config": asdict(config),
                    "launch_sha": admission["sha"], "admission": dict(admission),
                    "host": "independent_two_agent_service_line",
                    "dtype": "float64", "numpy_version": np.__version__,
@@ -119,7 +137,7 @@ def run_study(config: Config, out: Path, admission: Mapping, start: float | None
     curve, episodes, checkpoint_tables = [], [], []
     status = "RUNNING"
     error = None
-    write_json(out / "status.json", {"status": status, "counts": counts})
+    write_json(out / "status.json", {**identity, "status": status, "counts": counts})
 
     def publish_panel(checkpoint, evaluation_stream):
         before = q.copy()
@@ -165,8 +183,9 @@ def run_study(config: Config, out: Path, admission: Mapping, start: float | None
                 if counts["train_episodes"] in config.checkpoints:
                     updates.flush()
                     publish_panel(counts["train_episodes"], evaluations)
-                    write_json(out / "status.json", {"status": status, "counts": counts})
-                    print(f"{config.arm} seed={config.seed} episodes={counts['train_episodes']}",
+                    write_json(out / "status.json",
+                               {**identity, "status": status, "counts": counts})
+                    print(f"{run_label} seed={config.seed} episodes={counts['train_episodes']}",
                           flush=True)
             status = "COMPLETE"
     except Exception as exc:
@@ -191,8 +210,8 @@ def run_study(config: Config, out: Path, admission: Mapping, start: float | None
         artifacts = [_identity(out / name) for name in scientific_files
                      if name not in ("status.json", "summary.json") and (out / name).exists()]
         summary = {
-            "object": OBJECT, "status": status, "error": error,
-            "arm": config.arm, "seed": config.seed, "launch_sha": admission["sha"],
+            **identity, "status": status, "error": error,
+            "launch_sha": admission["sha"],
             "counts": counts, "diagnostics": diagnostics, "curve": curve,
             "primary_mean_J": float(np.mean([row["mean_J"] for row in curve[1:]]))
                 if status == "COMPLETE" else None,
@@ -209,11 +228,9 @@ def run_study(config: Config, out: Path, admission: Mapping, start: float | None
                           "scope": "one Linux scientific process, no children",
                           "resources_unmeasured": False},
             "artifacts": artifacts,
-            "limits": ["exploratory independent host; no UAV or novelty claim",
-                       "fixed teammate and focal termination law; no termination learning",
-                       "same data/update rows, different target-construction arithmetic",
-                       "constant step size and finite exposure; no convergence claim"],
+            "limits": list(limits),
         }
         write_json(out / "summary.json", summary)
-        write_json(out / "status.json", {"status": status, "error": error, "counts": counts})
+        write_json(out / "status.json",
+                   {**identity, "status": status, "error": error, "counts": counts})
     return summary
