@@ -2273,3 +2273,30 @@ sees a faster-switching label — a consequence of the intervention itself, not 
 reason a lower J at caps of 1 would show that *this* low level gains from a held label, not
 that temporal coherence of exploration is the channel. The action-autocorrelation and coverage
 measures are what speak to the channel. B07's design is otherwise unchanged.
+
+## 2026-09-20 00:50 PDT — persistence B07: entry code written and accepted
+
+Implementer (Opus) from my scope note; I read the construction, the capture and the fit wiring,
+ran the checks (52 passed with B05 and B06; the Implementer's cross-object run of 133 passed in
+both orders) and accepted it myself: no shared learner, runner, environment or evaluator is
+edited. `scripts/run_fsd_persistence_b07.py`, its launch script and tests.
+
+What the code fixes beyond the 23:58 entry, recorded before any score exists.
+- Both arms are built as the recorded D1280 construction, then the arm's overrides; the fit
+  refuses unless the changed config fields are *exactly* the declared ones (`D_K10`: none;
+  `D_K1`: `skill_cap_k_max`, `team_cap_k_Z`, `coordinator_batch_size`), on learner and
+  evaluation config. `config.k` is 10 in both arms.
+- At caps of 1 the team decision fires every step and forces every agent to be redrawn (the
+  team cap is tested first, `hmasd/agent.py:2596`), so `D_K1` is "every skill redrawn every
+  step" (tiny run: all segments of length 1), and both arms take 15 coordinator optimizer steps
+  per rollout (asserted at read time).
+- The capture wraps the learner agent instance's `step` (call first, copy after; the evaluator
+  is another instance). A real tiny fit with and without it is bit-identical in panels and
+  training rows; on the real host the proof is `D_K10` against the recorded D1280 panels.
+- The wall plan is recorded, never a deadline. Tiny-host cost ratio of a `D_K1` rollout to a
+  `D_K10` one: 1.74, a floor (the gap pass plus a decision pass every step).
+- **Late window.** The reduce reports two: B05's definition (the last four panels, 30–45) and
+  panels 35–45. My earlier late-window numbers (D1280 .426, CF_S .321) are B05's definition, so
+  that is the one I read for the declared J prediction; the other is reported beside it.
+  Behaviour measures are read over rollouts 35–45 as declared.
+- Path length is three-dimensional, cells are the 50 m x, y grid.
