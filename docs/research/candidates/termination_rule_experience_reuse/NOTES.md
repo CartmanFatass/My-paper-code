@@ -592,3 +592,30 @@ J differences do not themselves measure saved wall time or the cost to reach a f
 Mixed or imprecise results leave comparative ranking unresolved even if I choose a
 provisional default for subsequent work. This advice supplies no independent empirical
 replication and changes no batch input.
+
+## 2026-09-20 — A02 engineering acceptance and fixed-batch execution decision
+
+Accepted Implementer `d216577a997bedb987a8a57dd8296028b21f29cf`, integrated into the DM
+branch as `c96df2756`; the owned executable/test diff between those revisions is empty.
+The change is the fixed A02 wrapper/entry plus a small shared producer identity interface.
+No dynamics, probability law implementation, TD/trace arithmetic, data addressing or
+evaluation code changed. A01's default scientific semantics remain unchanged; new identity
+fields in producer metadata are additive, and its completed results remain bound to `63b0ca73a`.
+
+DM read the whole diff and ran the combined A01/A02 suite: **25 passed in .28 s**; the
+control runner guard regression passed **two tests in .13 s**. Independent Reviewer read
+`068985d0b..d216577a`, ran **25 tests in .25 s**, and found no material executable finding.
+It also checked paired exogenous components, differing actual behavior trajectories and
+identical initial target panels in non-learning in-memory fixtures. The reviewer did not
+exercise native admission or the full horizon; those remain actual-run responsibilities.
+No production A02 fit has started and these checks select no arm, seed or endpoint.
+
+I accept this implementation for the already declared **six** local_linux fits. Publish
+the commit containing this entry and bind that exact full SHA in every native manifest;
+execute serial seed-major order 91031, 91032, 91033, with long_behavior then
+matched_termination in each block. All dimensions and prospective reading remain fixed.
+Use the configured native launcher/snapshot route and its fresh actual-node 4 GiB memory
+floor. DM directly retains observation and collection; uncertainty must be reconciled on
+the same operation, never by changing the tag. No additional owner/Root permission is
+needed after the recorded active registration. The direction continues through collection
+and interpretation rather than ending at accepted launch or a terminal process.
