@@ -2640,3 +2640,94 @@ have started. Publication of this prepared implementation does not amend that li
 the concrete inputs are published, the DM will ask one scope question about allowing this
 third batch, preserving the twelve-fit ceiling and 2026-09-21 04:06:07 UTC deadline, while
 continuing useful work that needs no new native batch.
+
+### Existing-log question while the B06 scope request is pending
+
+B06's reviewed inputs are published at `6eebed3f4f48f44cfe3d9d76739b8dadfcad9519` in
+[PR #28](https://github.com/CartmanFatass/My-paper-code/pull/28). The owner has been asked
+once whether to permit that concrete third batch while retaining the original fit and time
+ceilings. No answer is inferred from elapsed time; only dependent native execution waits.
+
+One useful distinction is already observable in B05 without rerunning a model: does the
+G_mean-minus-G_sampled reward difference appear at the shared initial state, before the
+policies have induced different histories? Read the first executed tick in all 64 paired
+worlds for each checkpoint, first verifying identical predecision G latent means. Report
+the complete-world mean/conditional SE of that first-tick reward contrast and its exact
+contribution to the recorded full-horizon J difference. The rest of J is an accounting
+remainder, not a separately identified path mechanism. This is explicitly post-result
+description, not another retention criterion, an additional panel or a selected time-bin
+search. No actor forward, environment step, predictor fitting or optimization is involved.
+The native source updates positions, clips boundaries and recomputes service/channel state
+before the first reward, so the initial contrast is already a joint five-agent command
+intervention; it cannot be assigned to one agent or treated as a purely quadratic noise cost.
+
+The saved first-tick latent means match exactly between G modes in every world. Reading
+all existing arrays gives the following; the first-tick reward uses its natural single-step
+units, while the last two columns use the declared J=sum(rewards)/256 units.
+
+| Master | First-tick reward difference / conditional SE | Positive:negative:tied worlds | First tick's J contribution | Remaining 255 ticks' J contribution |
+| --- | --- | --- | ---: | ---: |
+| 8931 | +0.00271430 / 0.00332739 | 39:24:1 | +0.000010603 | +0.018278987 |
+| 8932 | +0.00452496 / 0.00263561 | 44:20:0 | +0.000017676 | +0.020839059 |
+| 8933 | +0.00687631 / 0.00289790 | 41:22:1 | +0.000026861 | +0.038145703 |
+
+The accounting identity reconstructs every full-world contrast within 1e-14. Favorable
+initial-state point estimates are present in all three panels; the first two are imprecise.
+Thus the observed direction is not restricted to already-divergent later histories, but
+this small descriptive panel does not establish a general immediate reward benefit.
+The later contribution mixes subsequent action-law differences with changed states and
+histories. Its much larger arithmetic share is unsurprising for 255 ticks and is not proof
+of a history-mediated mechanism. No finer time windows or action bins are selected.
+
+### A precise limit of the word "mean" in this comparison
+
+The implemented mean deployment is tanh(mu), not E[tanh(mu+sigma*Z)] and not an optimized
+deterministic controller. Even a one-step bounded action and linear reward can reverse its
+benefit without any teammate, memory or optimization change. Let reward r(a)=a, take
+a=tanh(mu+sigma*Z) with symmetric nondegenerate Z, and put t=tanh(mu), v=tanh(sigma*Z).
+Pairing Z with -Z gives the exact identity
+
+`[tanh(mu+sigma*Z)+tanh(mu-sigma*Z)]/2 = t*(1-v^2)/(1-t^2*v^2)`.
+
+For finite nonzero mu and sigma>0, the factor multiplying t is below one whenever Z is
+nonzero. Therefore mean-minus-sampled expected reward is positive for mu>0 and negative
+for mu<0; at zero both are equal. This is a counterexample to a universal de-noising gain,
+not a diagnosis of P85 or B05. The native task also updates clipped positions and nonlinear
+team service before reward, so the earlier quadratic latent-reward model cannot supply a
+Jensen guarantee there. B06's primary endpoint still usefully compares attained controllers
+under the same explicit extraction rule; both sampled secondary endpoints stay necessary.
+
+### Contrary P85 evidence: same ordinary learning route, different attained instances
+
+The bounded read-only Scout compared P85 source
+`52bf50a089d3389d9fada0b531e4f4e56e83f9b8` and its durable summary with B04 source
+`cab5b6ca26a4af101f72db0e89cb641bb0b63ad8` and B05's frozen deployments. P85 master 8401
+trained ordinary G for 512 episodes / 131,072 team steps / 1,024 Adam updates, followed
+by 32 worlds per sampled/mean mode. B04 trained each G for 2048 episodes / 524,288 steps /
+4,096 updates; B05 evaluates each of those final checkpoints on 64 new worlds per mode.
+P85's G_mean-minus-G_sampled is -0.0565540683, conditional SE 0.0091321933, with 4 favorable
+and 28 adverse worlds. That is a substantive adverse instance, not discarded old evidence.
+
+The source comparison found no relevant change in the ordinary G information, collector
+or objective: local observations plus own previous command and recurrent history; phase
+zero and fresh tanh-Gaussian actions every tick; unchanged central critic; gamma-one raw
+returns, agent-compound PPO ratios, four epochs, Adam .0003, shared norm clipping, entropy
+zero and no value normalization. Added optional credit-baseline and execution-filter paths
+were not enabled for B04 G. Mean deployment in both cases replaces the latent draw by mu
+before tanh. B's reactive gate never enters the B04 G branch.
+
+The clear differences are fourfold training exposure, distinct master/initialization and
+training random streams, attained parameters, evaluation worlds/panel size and execution
+host context. These were not independently intervened on. No traced source change predicts
+the sign reversal, and this comparison does not establish that longer training caused it.
+The old summary does not supply the missing per-step scale/mean/gradient histories needed
+to attribute it. The stronger update is that the sign depends on the attained instance or
+its surrounding conditions, rather than on a universal property of deterministic extraction.
+P85 remains separate from B05; no cross-study population estimate is computed. B06's paired
+fixed-exposure design will address its declared initialization package only if authorized.
+
+Evidence: [P85 result](UCOPE_UAV_MEAN_VELOCITY_RENEWAL_B01_P85_RESULT_EVIDENCE_20260909.md),
+[P85 durable summary](UCOPE_UAV_MEAN_VELOCITY_RENEWAL_B01_P85_RESULT_SUMMARY_20260909.json),
+[B04 first panel](../../../../runs/ucope/scalar_feedback_b04_8931/summary.json), and all
+three B05 run roots already linked in the completed-result entry. This inspection involved
+no model forward, new native call or fit and introduces no new historical maintenance.
