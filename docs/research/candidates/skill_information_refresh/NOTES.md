@@ -586,3 +586,13 @@ refusal. Author review caught an initially ineffective CLI test path and repaire
 assert the specific admission rejection before this result. `git diff --check` passes.
 These are synthetic correctness checks, not extra scientific evaluations. The independent
 Reviewer now receives this C03-only evaluator/identity delta before execution.
+
+The independent Reviewer read `d6d588450..052763ff6`, ran 12 tests (2.33 s), loaded and checked
+all three actual frozen inputs against their declared digests/metadata, and returned no
+material engineering finding. I read and accept that review. An additional author check of
+combined C01/C03 collection exposed pytest's duplicate bare module name `test_contract`;
+rename only the new C03 test to `test_release_contract.py`, preserving C01 and scientific
+code. The combined direction suite now reports **31 passed in 3.47 s**, with whitespace
+checks clean. This fixes test discovery, not the experiment or its exposure. Reviewer facts
+do not establish scientific value. DM accepts C03 for the already specified native launch
+after publication of this final input revision.
