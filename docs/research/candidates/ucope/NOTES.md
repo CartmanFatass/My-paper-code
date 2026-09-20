@@ -3595,3 +3595,279 @@ against competent ordinary control, and its cost. That is the unresolved scienti
 not an automatically queued batch or an additional standing approval rule. The current
 scalar package stays idle, UCOPE stays exploring, and all 15 allocated fits and both Pro
 calls remain consumed with the original deadline unchanged.
+
+## 2026-09-20 12:05 UTC — owner reassignment: future FSD team-conditioned termination
+
+**Scope and ownership.** The owner now assigns this Codex session directly to the FSD-family
+question of team-conditioned skill termination and commitment reorganization. Claude continues
+to own the persistent closed-loop skill/mode foundation and its current B07. This is future
+FSD research preparation in the existing notebook, **not another UCOPE batch or result**.
+There is no new Root layer. I work in the author checkout on
+`codex/team-conditioned-termination`, based on merged source
+`5d56acf7b97a2f485538fa4ca27c1183005c3d33` (PR #28). Claude's checkout, notebook, running
+code and the shared `RESEARCH.md` are read-only for this work. The table still describes the
+previous assignment; this entry records the owner's newer division without concurrently
+rewriting that table.
+
+This authorization is reading, scientific synthesis and concrete preparation only. The
+**15 started fits and both Pro calls remain consumed**; no native evaluation, replay,
+training, new Pro request or replacement allowance is created by this topic change. The old
+deadline remains **2026-09-21 04:06:07 UTC**, and the UCOPE scheduler remains paused.
+
+### Safe closure and what the new question inherits
+
+The last UCOPE work has reached a scientific stopping point. All three B07 summaries are
+COMPLETE with exit code zero at source `088d0ca32fd50f6264904a5a0d7e01b9a5b0f6e8`;
+the original manifests and OS-exit witnesses identify the completed operations. No accepted
+UCOPE operation or observer remains outstanding. The 11:13 and 11:23 entries already contain
+the result, contrary panels, independent reconstruction, criticism and the completed
+conditional-identification/logging analysis. Those tasks are not repeated here.
+
+The resulting constraints are substantive, not a reason to delete the evidence:
+
+- Ordinary-controller preparation and deployment matter. B06's mean-mode improvement from
+  initial sigma .5 is retained for its particular construction and exposure; it is not an
+  FSD hyperparameter prescription. B07's sampled-B minus retained-mean-G differences were
+  -.07870 / -.02033 / -.01943, while mean-B minus mean-G retained two favorable panels.
+  Selection of the ordinary construction and changed trajectories limit causal attribution.
+- An input-independent renewal rate, a feedback-conditioned gate, repeated velocity commands
+  and a persistent feedback-conditioned skill label are four different interventions.
+  The scalar-copy package is left idle. Its result does not falsify adaptive termination of
+  a closed-loop skill, and no switching penalty will be added to make persistence pay.
+- Randomization can identify a local conditional END-minus-KEEP value under its fixed
+  continuation. That does not establish improvement after learning a new termination policy
+  and visiting different histories. The logged projection is not the complete legal history.
+
+Recoverable source/checkpoints, manifests, complete runs and the tested likelihood,
+forced-action and private-randomness accounting remain useful assets. The UCOPE controllers
+themselves are not an FSD skill library: their five-agent, 256-tick command-copy construction
+differs from the six-agent, 500-tick FSD host. No copy-rate sweep, noise sweep, local slope,
+observation reconstruction or rescue fit is selected.
+
+### Present skill foundation, rather than an assumed option library
+
+I read Claude's [current FSD notebook](../flexible_skill_duration/NOTES.md), including B05,
+B06 and the prospective/accepted B07 entries. The latest published notebook change at this
+read is `a5d178a3c`; its last entry is 2026-09-20 01:10 PDT. **B07 has no completed
+interpretation yet.** Its two OOM attempts count toward Claude's allocation and its remaining
+operations stay Claude's responsibility; I do not read partial scores or manage those runs.
+
+B05 repaired a real flat-actor input-scale defect and demonstrated movement/learning from
+initialization, without establishing that its final level is better than the old flat
+construction. D1280 still has a higher attained level on those reused blocks, but the old
+B01 +.29 is not a competent matched-information gap estimate. B06 shows that the coordinator
+responds to state/observations; near-uniform training skill probabilities do not establish
+randomness of deterministic argmax deployment. These facts leave useful learned skill
+semantics and useful learned termination unresolved.
+
+B07 compares retraining with D_K10 and D_K1. It changes both the local and team skill caps,
+coordinator sample pool, segment boundaries/discounting and conditioning-label cadence; the
+low-level TBPTT `config.k` remains 10. Its interpretation must be read before this draft is
+turned into an actual experiment. Those runners do not save foundation checkpoints, so a
+free frozen-skill comparison cannot be assumed.
+
+The actual interface at the source above is precise:
+
+- [R_Actor](../../../../hmasd/networks.py) applies local skill `z_i` through FiLM before its
+  GRU and computes a fresh continuous action from current feedback every tick. Team `Z`
+  conditions selection/value machinery; it is not the local actor's FiLM label. KEEP holds
+  `z_i`, not a velocity. END asks for a new draw, which may return the same label. The GRU
+  carries through either choice; [batched action selection](../../../../hmasd/agent.py)
+  resets recurrent state on episode dones, not on skill renewal.
+- `_batched_assign_skills_d2` knows held `Z`, all held `z_i`, elapsed ages and forced caps.
+  A team renewal forces every local label to be redrawn. Between team boundaries,
+  `assign_partial_batch` first teacher-forces kept labels, then autoregressively chooses the
+  resampled labels. **Replacement identities are already coordinated.** The missing proposed
+  learning object is the joint decision about which labels become replaceable.
+- The current D2 logit gap is a difference between skill-policy logits, not an END/KEEP
+  return advantage. Ages supply time until the latest forced renewal; for example
+  `min(k_max-age_i, k_Z-age_Z)`. They do not promise that a teammate will actually continue
+  that long. Under a learned optional gate, its current KEEP commits only to this tick.
+
+### The one team question selected
+
+**Does learning which subset of agents may renew within a held team-skill cycle improve
+service, compared with fully informed independent renewal and the accepted fixed clock?**
+The first conjecture is that avoidable simultaneous replacement can destroy temporarily
+substitutable service: one UAV can change its feedback mode while another maintains service,
+whereas both changing together may leave users without any serving UAV. The reverse is
+also possible: neither unilateral change resolves mutual interference, but a joint change
+does. Neither sign pattern has been established in this FSD host.
+
+The physical path is specific. In
+[Scenario1](../../../../envs/pettingzoo/scenario1.py), six UAVs serve 50 static users;
+the task has no relay queue or synthetic shared submission slot. After all UAVs move,
+[the native environment](../../../../envs/pettingzoo/uav_env.py) recomputes interference
+and assigns users by descending SINR, at most one UAV per user and ten users per UAV.
+Movement across a coverage/interference boundary can therefore change another UAV's useful
+service capacity. The team reward combines .7 coverage fraction, .3 normalized SINR quality,
+and the **existing** .1 normalized mean-altitude penalty. This is the real consequence to
+learn; there is no new skill-switch fee or invented service-absorption event.
+
+The coordinator legally receives current central positions/user positions/time and all
+current local observations. It also owns the issued labels and their ages. These connect a
+possible service overlap to which modes remain in force and which may be replaced. The
+proposal does not grant local actors central observations, provide the gate private actor
+GRU states, expose future random draws, or feed it postdecision connections/outcomes.
+Predecision channel/assignment snapshots may label analysis strata, but are not additional
+policy inputs. In particular, a learned label cannot simply be called a "serve this region"
+option: its actual behavioral effect must survive Claude's B07 reading and our observations.
+
+Why this is worth one learning comparison: the host supplies an actual nonadditive service
+consequence, the coordinator already has the relevant lawful team context, and optional
+renewal can be inserted without replacing the skill object. The strongest simpler account
+is equally live: closed-loop actors and the existing joint label selector already resolve
+the interaction, while a fixed/age clock supplies all useful persistence. That account can
+win; there is no obligation to build a more complicated gate.
+
+### Narrow historical constraints on this judgment
+
+The read-only Scouts mapped the assigned questions; I retain their adverse evidence and
+decline to turn their missing factorial controls into a mandatory prerequisite experiment.
+
+| Evidence read | Consequence for this proposal |
+| --- | --- |
+| [VSP-03 B02 shared-slot law](../vsp_03/VSP03_B02_SCIENCE_CARD_20260907.md), B02/B03/B04 outcomes, and [B07 result](../vsp_03/VSP03_B07_RESULT_EVIDENCE_20260910.md) | A submission at t=26 locks a shared slot through t=34 and removes partner opportunities at t=28/32. That is real team coupling in the old two-agent host, not proof of beneficial waiting or of the FSD conjecture. Learned-versus-rule outcomes and execution-mode effects were mixed; B07's positive endpoint also had negative 128-to-512 continuation. No paired joint-END sign reversal was tested. |
+| [CRTO RAW pilot](../commitment_residual_triggered_options/CRTO_RAW_PILOT_EVIDENCE_20260831.md) and [K8 census](../commitment_residual_triggered_options/CRTO_K8_FIRST_BOUNDARY_SUPPORT_CENSUS_RESULT_20260831.md) | Old four-agent queue/relay dynamics and a legal commitment summary make the question meaningful, but these specific executed probes stopped before learner evidence: the census had KEEP 0 / MIDDLE 353 / REPLAN 159 under its material threshold. A possible host-level branch is not demonstrated support on the generated decision distribution. Do not import its renewal charge or queues into Scenario1. |
+| [VSP-C1 B01](../vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B01_RESULT_EVIDENCE_20260908.md) and [B13](../vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B13_RESULT_EVIDENCE_20260909.md) | The favorable single-pair value-gate result was followed by an adverse native GATED-V minus MLP-V result of -.03207. These opening-command-hold/critic interventions neither test FSD termination nor license substituting value accuracy for policy benefit. |
+| [SCDMP native mapping](../semigroup_consistent_duration_model_policy/SCDMP_NATIVE_RETURN_COMPOSITION_P56_SOURCE_INTAKE_20260908.md) and [opportunity-law analysis](../semigroup_consistent_duration_model_policy/SCDMP_OPPORTUNITY_LAW_CONVERGENCE_RESULT_INTAKE_20260830.md) | Coupling values across a real release boundary changes credit/optimization, not directly the termination policy. An unbiased value for a finite selector's chosen action is not oracle opportunity or learned-policy improvement. The old graph host's absorbing holds are not a property of Scenario1. |
+| [Temporal-alignment note at 646ab539](https://github.com/CartmanFatass/My-paper-code/blob/646ab539d2a2ef689d0e4ee977f327f79cf2215b/docs/research/designs/TEMPORAL_BEHAVIOR_STATE_ALIGNMENT_20260919.md) | Training exposure and fixed-weight deployment are different estimands; persistent skill labels differ from copied commands. A local advantage or calendar-exchange identity cannot be summed into a changed-policy return claim, and conditional joint likelihoods must match execution. No new toy/prototype run is needed before preparing the native learning comparison. |
+
+### Selected learning comparison, conditional on the foundation update
+
+The provisional foundation is Claude's accepted D_K10 construction: `k_max=k_Z=10`,
+unchanged local actors, six labels per level, intrinsic low-level learning objective,
+physical host and existing reward. Team `Z` keeps its fixed clock. The study concerns
+**optional local interruptions within that cycle**; it cannot prevent mandatory all-agent
+renewal at the team boundary and makes no claim about fully flexible team-Z duration.
+
+| Arm | Optional termination rule | Common object and rights |
+| --- | --- | --- |
+| **J: joint learned renewal** | A central actor samples a six-bit END mask autoregressively in fixed agent-ID order. Each bit sees the same predecision context plus previously chosen bits in this mask. It can choose none, one, several or all. | Current central state/all observations, held Z/z and all ages/caps; the unchanged partial label selector receives the resulting mask. |
+| **I: fully informed independent renewal** | Six conditionally independent Bernoulli bits, each seeing the full same team context and agent identities, with the same encoder/head capacity, critic, initialization, objective and tuning rights. No within-mask sampled prefix. | The same information, caps, available masks and already-autoregressive replacement-label selector as J. It can learn state/age-dependent deterministic coordination. |
+| **F: accepted fixed clock** | No optional early renewal; retain the accepted fixed/age rule after Claude's B07 reading, provisionally D_K10. | Same skill construction, low-level information/reward and learning horizon. No deliberately weakened local-information or unscaled-flat baseline. |
+
+J versus I asks about a finite-learning advantage of coordinating stochastic renewal
+choices, **not** new external information or a larger set of deterministic optimal masks.
+I can represent any deterministic joint mask given the central context and identities.
+It is the strongest simpler learned reference chosen here, and F is the practical reference.
+Existing replacement-label autoregression might make J redundant. No "at most one END"
+constraint, forced change to a different label, hand-labelled skill semantics or extra
+reward is introduced to manufacture its advantage.
+
+Both learned gates start from the same product-Bernoulli law and use the same full-mask
+PPO likelihood/clipping and a predecision team-value baseline. Native-return credit must
+include **KEEP as well as END** at every optional decision. Forced bits have probability
+one and no learned gate term. Record the actual mask order/prefix for teacher-forced
+replay; the existing D2 boundary-only label sampler is not a termination learner by itself.
+The gate has its own actor/value parameters and optimizer; its gradients do not silently
+change the foundation's shared encoder or its low-level objective. No learned counterfactual
+Q-search or enumeration of native successor trajectories is proposed.
+
+Within a seed block, copy common initial parameters before gate construction, give J/I
+matching gate initialization, and use paired reset worlds with separately addressed policy
+randomness. All three arms retrain the same skill construction; their learned skill weights
+can co-adapt differently. Renewal frequencies change visited histories, label-segment
+populations and possibly optimizer exposure. Equal hyperparameters do not erase those
+differences. Before implementation, pin the coordinator sampling/update budget with Claude;
+retain its fifteen optimizer calls per rollout if compatible, rather than silently taking
+extra updates as the decision pool grows. Actual sampled rows/valid label terms and compute
+must still be reported. A J gain is initially a learning-package result, not isolated
+termination causality on a shared frozen skill library.
+
+### Predictions, smallest proposed cost, and losing outcomes
+
+Primary outcome: final-checkpoint **J minus I** on complete native team return; a practical
+retention decision also requires **J minus F** to be favorable. Provisionally use 45
+rollouts, 16 training lanes and 500 ticks, then one deterministic final panel of 32 fresh
+worlds per fit. Both gate and replacement-label execution modes are fixed in advance;
+no sampled/mean or checkpoint selection after results. This final-only endpoint is a new
+prospective choice, not the historical B07 late-window endpoint.
+
+The concrete exploratory proposal is **three arms times two fresh training seeds = six
+new fits**, not nine. It would use 2,160,000 training team steps and 96,000 final evaluation
+team steps (192 evaluation episodes), totaling **2,256,000 native team steps**. Two seeds
+support an exploratory investment judgment only; they do not meet the constitution's
+three-seed minimum for an empirical learning claim. No automatic third seed, tuning fit,
+failure refund, mode panel or confirmation batch is attached. The 32 worlds measure
+conditional evaluation uncertainty, not 32 independent learned policies.
+
+For a discriminating intermediate prediction, declare a service-overlap proxy before the
+run: among UAVs each currently serving users, select the pair most often appearing as a
+user's serving link and strongest other eligible link; break ties by fixed IDs, and report
+the frequency of histories with no such pair. This uses the **predecision** snapshot only,
+as an analysis label. On optional histories so labelled, predict that J tends to negatively
+correlate the two END bits at the same full gate input:
+
+`C_ij(X) = P_J(END_i, END_j | X) - P_J(END_i | X) P_J(END_j | X) < 0`.
+
+I has zero conditional excess by construction; pooling different states is not this test.
+Thus merely lowering both marginal END rates does not satisfy the prediction. Inspect at
+most 64 outcome-blind sampled optional states per learned fit from the last training
+rollout, retaining their contemporaneous gate parameters. With six bits, exact joint
+probabilities cost at most 64 masks per state: at most 16,384 complete-mask likelihood
+evaluations across four learned fits, with no cloned environment or new native step.
+This analysis is part of the future cost proposal, not executed under today's reading grant.
+
+The corresponding task prediction is fewer previously served users becoming **unserved
+by the whole team** on the next tick, on every predeclared opportunity history, together
+with improved final native J. Count requested ENDs and actual label changes separately;
+report forced boundaries, all reward components, and how behavior differs by age/time to
+the team cap. A gain due only to altitude cost does not support the service-continuity
+story. This stochastic-dependence prediction primarily concerns training; deterministic
+deployment and subsequent co-adaptation are different laws. Different visited histories
+also prevent treating these observations as causal mediation or identifying the native
+four-cell END/KEEP interaction.
+
+The opposite interaction remains admissible: J can put positive mass on joint changes
+when they are complementary. If J improves return without the predicted negative dependence
+and service pattern, keep a bounded package observation and weaken this particular
+anti-coincidence explanation. If it only improves a local predictor/behavior statistic,
+or beats I while losing to F, do not retain it for task performance. If the simpler rule
+is as useful at this resolution, its lower complexity is a legitimate final choice;
+two noisy seeds do not prove equivalence. A null or adverse result does not justify adding
+a switching fee, new reward or a post hoc longer cap.
+
+The independent ResearchCritic supports this six-fit exploratory design with
+**MATERIAL_DISSENT: no**. I adopt its strongest objection: even J minus I cannot identify
+beneficial service coupling by itself, because marginal hazards, stochastic exploration,
+entropy geometry and skill co-adaptation remain alternatives. I also adopt the conditional
+co-renewal prediction in place of an uninformative aggregate "fewer simultaneous ENDs"
+claim. A native factorial branch audit is not made a compulsory stage.
+
+### What must be supplied or agreed with Claude next
+
+After Claude publishes B07's completed interpretation, read and cite that update before
+fixing an actual experiment. The necessary common interface is concrete:
+
+1. Pin the accepted foundation construction/source: what B07 supports about held labels,
+   behavior and native return; the accepted local/team caps; actor/critic/discriminator
+   objectives, normalization, initialization, update and deterministic execution settings.
+   No assumption of saved B07 checkpoints or semantically stable label IDs across fits.
+2. Confirm the predecision hook: current state/all observations, held Z/z, elapsed ages,
+   reset/cap masks, and its output to `assign_partial_batch`. Fix forced-team precedence,
+   same-label redraw semantics, GRU carry, segment close/bootstrap rules and legal info.
+3. Agree the gate's separate credit buffer and the foundation's sampler/update exposure.
+   Optional KEEP must be trained; gate likelihood must not be confused with replacement
+   label likelihood. Fix gate initialization/entropy and update batches equally for J/I,
+   without a tuning search. Keep bounded minibatches: B07's full 8,000-row attention pool
+   caused real OOMs, so identical nominal update counts are not a memory-safety argument.
+4. Agree source ownership and compute availability after Claude's accepted operations are
+   accounted for. Future implementation belongs on this separate branch/isolated experiment
+   path with reviewed hooks, not an edit to Claude's live runner or notebook.
+
+If B07 weakens the case for useful held modes, revise or abandon this within-cycle proposal;
+do not silently manufacture a new skill object or a longer commitment to preserve it.
+If its result supports an age/fixed clock as the useful choice, that remains a permissible
+outcome. B07's retraining result alone still does not identify a fixed-weight termination
+effect.
+
+Only after that revision and a concrete implementation plan is an execution increment
+decision-ready. The present estimate would require **six additional started fits (15 to
+21 total under the carried budget), the explicitly counted evaluation and likelihood
+analysis above, and zero new Pro calls**. It grants none of them. Actual gate/selector
+optimizer work and wall/memory estimates remain to be fixed with the shared interface;
+UCOPE's small-fit timings are not an estimate for this host. The original deadline is
+not extended; if the agreed work cannot fit, a time increment must be explicit as well.
+For now the next action is the B07-informed revision, not a launch or a routine-step
+approval request. No empirical result was produced in this preparation.
