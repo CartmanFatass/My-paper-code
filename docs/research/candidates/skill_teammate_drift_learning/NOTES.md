@@ -441,3 +441,132 @@ endpoint. The initial all-state A Bellman residual is 1.305712, below the traine
 A residuals; improvement versus uniform is only relative, not evidence of an
 absolute fitted solution. DM adopts both limits. They strengthen the decision not
 to promote B01's small positive fingerprint contrast as useful replay benefit.
+
+## 2026-09-20 07:13 PDT — B02 prospective common-initialization repair
+
+**Reason and adviser response.** B01 is closed/read, with all raw outcomes published
+at `f830125994bb0e5f8b57ddabf5ae3026a290b7da`. Its sparse action coverage, unchanged
+zero values and poor B-native behavior motivate one targeted common-learner
+revision, not an extension of that batch or a renamed correction. The independent
+ResearchCritic read the evidence and endorsed this minimal intervention/control
+with no material dissent. The DM adopts its central limitation: an initialization
+contrast can identify the total effect on both coverage and return, but cannot
+establish coverage as the causal mediator because bootstrap and action ordering
+also change. The critic also noted policy-table changes can leave native return
+unchanged; therefore actual collected actions and native B scores remain beside
+table-wide counts. Adviser agreement is not new empirical evidence.
+
+**One change.** Replace pessimistic zero Q initialization with the known reward
+upper bound `U(h) = sum(gamma**t for t in range(3*h))` for every nonterminal
+state/action with `h` macro decisions remaining. Initialize once at fit start;
+`Q(0)=0`, LEFT ties remain, and no table is reinitialized on a version switch.
+Fingerprint initializes both version tables identically and retains each. The
+bound uses only shared reward range [0,1], discount and fixed duration, not the
+transition model, future data, current teammate draw or exact optimal policy.
+The joint correction, per-entry update law, full buffers, exact behavioral
+fingerprint, recent window, actor information and evaluation all stay unchanged.
+This is a common exploration/value-initialization repair, not an extra replay
+correction, relabeling or age filter.
+
+**Arms and comparisons.** Five arm labels in this fixed batch:
+`joint_is`, `fingerprint`, `recent`, `uniform` all with reward-upper initialization;
+`fingerprint_zero` with B01's original zero initialization and otherwise identical
+fingerprint learner. The primary replay contrast remains joint-minus-fingerprint
+at the same twelve adaptation panels as B01. Recent is a required strong
+same-information competitor because it had the best B01 mean; a positive
+fingerprint contrast alone is not enough to retain a useful package if recent
+still wins. Uniform retains the active-correction comparison. The paired
+fingerprint-minus-fingerprint_zero contrast is the initialization diagnostic,
+not a candidate modification selected by its score. It does not estimate the
+candidate's initialization treatment effect; new-vs-B01 seed comparisons are only
+descriptive. This design is outcome-informed exploration, not confirmation.
+
+**Predictions and reading.** Relative to paired fingerprint_zero, optimistic
+fingerprint should collect more alternative actions / visit more state-time cells
+with both actions, then improve B-native service. Track the six B adaptation
+panels (70/80/90/190/200/210) separately, with A adaptation panels as the retained
+native cost. Also read collected RIGHT fractions for each B block, cumulative
+current-version distinct state-action/both-action coverage at every panel, greedy
+RIGHT fraction and Q movement from the actual initial table. Coverage is a
+diagnostic, never a surrogate success criterion. The replay hypothesis remains
+lower current residual versus optimistic uniform plus higher native adaptation
+than simple replay; weight concentration and off-version/old-data use stay visible.
+
+If coverage and B return both improve while A is retained/recovered, keep the
+initialization repair and strengthen its practical-use judgment, without claiming
+mediation or a unique explanation. If coverage rises without native B benefit,
+weaken the claim that sparse exploration adequately explains B01. If B improves
+without coverage movement, credit the initialization intervention but weaken the
+coverage story. If neither improves, reject this repair at this horizon; do not
+call that proof of intrinsically unusable macro experience. If a simple replay
+baseline matches/beats correction after this common repair, lower the value of
+explicit correction in this recurrent, known-version host. Negative A consequences
+remain in the combined primary and are not hidden by the B diagnostic. No
+post-result checkpoint/arm selection or batch extension is allowed.
+
+**Fixed exposure and cost.** Fifteen planned fits = five arms × three new independent
+development seeds 92001/92002/92003. The same event-addressed common random numbers
+pair arms within a seed. Every fit retains B01's 300 episodes / A-B-A-B-A blocks of
+60 / 3,000 macros / 9,000 primitive transitions / 3,000 minibatch updates /
+96,000 replay uses / 31 exact evaluation panels. The twelve primary panels,
+epsilon .2, alpha .025, batch 32, gamma .95 and recent capacity 300 are unchanged.
+Total planned work: 135,000 primitive transitions, 1,440,000 replay uses, 465 exact
+panels; zero sampled evaluation episodes/updates. No hidden lower-level training,
+warm start from a learned B01 table or model-based learning is introduced. Expected
+single-process runner work is on B01's roughly one-second scale, but actual costs
+will be measured; this is not a deadline or performance claim. Planned node
+`local_linux`, CPU float64 NumPy, one numeric thread and own fits serial on shared
+WSL. The extra three zero-FP fits are justified by within-batch initialization
+attribution, not by a generic quota. No claim note or confirmation rule is implied.
+
+### L0: implement B02 without changing the frozen B01 result
+
+Reuse the direction's B01 scientific module for an optional initialization mode,
+defaulting to zero. Add the named B02 runner
+`scripts/run_stdl_joint_replay_b02.py` and its focused tests, restricting its CLI to
+these five arms/three seeds and its frozen configuration. Scientific source and
+test ownership for a bounded Implementer is only
+`experiments/candidates/skill_teammate_drift_learning/joint_replay_b01/` and mirrored
+`tests/experiments/candidates/skill_teammate_drift_learning/joint_replay_b01/` in
+the fsd-b checkout; the DM owns runner/tests, notebook, index and all Git actions.
+Other authors are active; nobody edits their paths or reverts their changes.
+
+The optional initialization must use actual finite remaining time, handle gamma=1,
+keep terminal zero and leave default numerical/RNG/training semantics unchanged.
+Movement in curves/summary must be `Q-Q_initial`, not norm(Q); retain initial norm,
+and do not call initialized nonzero entries evidence of learning. Expose an
+explicit optional object name for the B02 summary identity (B01 default retained).
+Add diagnostic coverage derived solely from collected arrays, including current
+version sample count/RIGHT fraction, distinct state-actions, both-action cells,
+greedy RIGHT fraction and changed entries relative to initialization. Use safe
+integer widths for state keys. Do not change likelihoods, updates, evaluation
+numerics, buffers, seed addressing, reward, clocks or terminal rules. Retain raw
+arrays/policies/Q and existing publication/admission semantics. Check the bound,
+fingerprint table independence/no reset, truthful movement and coverage, stable
+candidate/uniform identity with optimism, default behavior and B02 CLI refusal /
+identity / output retention. Tiny fixtures are engineering checks only. Obtain
+independent high-risk review of the changed initialization/instrumentation and
+runner, then DM accepts, commits/publishes and performs native admission before
+any B02 result fit. Stop only dependent work for a real conflict.
+
+### B02 implementation self-check; independent review next
+
+The Implementer returned only its two assigned scientific/test files, without
+index or notebook writes; the DM read the full diff and owns the new runner and
+runner tests. The new mode initializes once from the finite reward bound, records
+movement from a copied actual initial table, retains separate fingerprint tables,
+and derives coverage from already collected arrays. The B02 CLI fixes the five
+arm mappings/three seeds, uses the native literal admission guard before science,
+and records replay arm separately from the `fingerprint_zero` study-arm label.
+Its A/B adaptation diagnostics do not replace the common primary endpoint.
+
+Combined focused command:
+`/home/fires/.venvs/hmasd-linux-cpu/bin/python -m pytest -q tests/experiments/candidates/skill_teammate_drift_learning/joint_replay_b01 tests/scripts/test_run_stdl_joint_replay_b01.py tests/scripts/test_run_stdl_joint_replay_b02.py`
+returned **33 passed in 0.36 s**, with `git diff --check` clean. Checks cover bound
+arithmetic including gamma=1, independent/persistent fingerprint tables, truthful
+initial-relative movement, tuple-based coverage reconstruction, stable optimistic
+joint/uniform identity, default-zero behavior, native static/missing-admission
+refusal, SHA/seed/arm identity and output/failure retention. These are correctness
+fixtures, not B02 scientific evidence. B02 production fits started: **0**.
+Publication is for independent high-risk review; scientific acceptance/launch
+awaits the DM's reading of that review, not a new owner or Root authorization.

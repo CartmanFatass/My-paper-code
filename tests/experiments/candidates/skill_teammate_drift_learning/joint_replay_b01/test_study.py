@@ -1,4 +1,5 @@
 import numpy as np
+import pytest
 
 from experiments.candidates.skill_teammate_drift_learning.joint_replay_b01 import study
 
@@ -344,3 +345,191 @@ def test_fit_counts_movement_rng_addresses_and_transition_audit_arrays():
         assert likelihood["total"] == transitions[
             "behavior_trajectory_likelihood"
         ][index]
+
+
+def test_reward_upper_initialization_is_exact_including_gamma_one():
+    config = small_config(
+        initialization="reward_upper",
+        gamma=0.5,
+        macro_duration=2,
+        macros_per_episode=3,
+    )
+    q_values = study.initialize_q_values(config, "uniform")
+    assert not q_values[0].any()
+    for remaining in range(1, 4):
+        expected = sum(0.5 ** tick for tick in range(2 * remaining))
+        assert (q_values[remaining] == expected).all()
+
+    undiscounted = study.initialize_q_values(
+        small_config(
+            initialization="reward_upper",
+            gamma=1.0,
+            macro_duration=2,
+            macros_per_episode=3,
+        ),
+        "uniform",
+    )
+    for remaining in range(1, 4):
+        assert (undiscounted[remaining] == 2 * remaining).all()
+
+    fingerprint = study.initialize_q_values(config, "fingerprint")
+    np.testing.assert_array_equal(fingerprint[0], fingerprint[1])
+    assert not np.shares_memory(fingerprint[0], fingerprint[1])
+    before = fingerprint[1].copy()
+    fingerprint[0, 1, 0, 0, 0] -= 1.0
+    np.testing.assert_array_equal(fingerprint[1], before)
+
+    with pytest.raises(ValueError, match="initialization"):
+        study.validate_config(small_config(initialization="invalid"))
+
+
+def test_default_and_explicit_zero_initialization_have_identical_behavior():
+    implicit = small_config()
+    explicit = small_config(initialization="zero")
+    assert implicit == explicit
+    implicit_result = study.run_fit(implicit, arm="uniform", seed=77)
+    explicit_result = study.run_fit(explicit, arm="uniform", seed=77)
+    np.testing.assert_array_equal(
+        implicit_result["q_values"], explicit_result["q_values"]
+    )
+    assert implicit_result["curves"] == explicit_result["curves"]
+    assert implicit_result["summary"] == explicit_result["summary"]
+    for key in implicit_result["transitions"]:
+        np.testing.assert_array_equal(
+            implicit_result["transitions"][key],
+            explicit_result["transitions"][key],
+        )
+
+
+def test_optimistic_stable_joint_and_uniform_remain_bit_identical():
+    config = small_config(
+        initialization="reward_upper",
+        version_schedule=("A",),
+        episodes_per_block=4,
+        macros_per_episode=3,
+        recent_capacity=3,
+        evaluation_interval=2,
+    )
+    joint = study.run_fit(config, arm="joint_is", seed=92001)
+    uniform = study.run_fit(config, arm="uniform", seed=92001)
+    np.testing.assert_array_equal(joint["q_values"], uniform["q_values"])
+    np.testing.assert_array_equal(
+        joint["transitions"]["replay_indices"],
+        uniform["transitions"]["replay_indices"],
+    )
+    np.testing.assert_array_equal(
+        joint["transitions"]["primitive_actions"],
+        uniform["transitions"]["primitive_actions"],
+    )
+    assert joint["curves"]["q_l2_movement"] == uniform["curves"][
+        "q_l2_movement"
+    ]
+
+
+def test_fingerprint_tables_retain_updates_across_version_switch():
+    common = dict(
+        initialization="reward_upper",
+        episodes_per_block=1,
+        macros_per_episode=2,
+        batch_size=8,
+        recent_capacity=2,
+        evaluation_interval=1,
+        primary_evaluation_episodes=(),
+    )
+    only_a = study.run_fit(
+        study.Config(version_schedule=("A",), **common),
+        arm="fingerprint",
+        seed=91,
+    )
+    a_then_b = study.run_fit(
+        study.Config(version_schedule=("A", "B"), **common),
+        arm="fingerprint",
+        seed=91,
+    )
+    # The A table receives no B-block updates and is neither aliased nor reset.
+    np.testing.assert_array_equal(
+        a_then_b["q_values"][0], only_a["q_values"][0]
+    )
+    initial = study.initialize_q_values(
+        study.Config(version_schedule=("A", "B"), **common), "fingerprint"
+    )
+    assert np.any(a_then_b["q_values"][0] != initial[0])
+    assert np.any(a_then_b["q_values"][1] != initial[1])
+
+
+def test_optimistic_movement_coverage_and_object_identity_are_truthful():
+    config = small_config(initialization="reward_upper")
+    result = study.run_fit(
+        config,
+        arm="fingerprint",
+        seed=1234,
+        object_name="STDL_JOINT_REPLAY_B02",
+    )
+    summary = result["summary"]
+    curves = result["curves"]
+    transitions = result["transitions"]
+    initial = study.initialize_q_values(config, "fingerprint")
+    change = result["q_values"] - initial
+    assert summary["object"] == "STDL_JOINT_REPLAY_B02"
+    assert summary["movement"]["initial_q_l2"] == np.linalg.norm(initial)
+    assert summary["movement"]["initial_q_l2_norm"] == np.linalg.norm(initial)
+    assert summary["movement"]["initial_q_nonzero_entries"] == np.count_nonzero(
+        initial
+    )
+    assert summary["movement"]["final_q_l2_movement"] == np.linalg.norm(change)
+    assert summary["movement"]["final_changed_q_entries"] == np.count_nonzero(
+        change
+    )
+    assert curves["q_l2_movement"][0] == 0.0
+    assert curves["q_changed_entries"][0] == 0
+    assert all(value == np.linalg.norm(initial) for value in curves["q_initial_l2_norm"])
+
+    for panel, current_version in zip(
+        curves["evaluation_episode"], curves["version_index"]
+    ):
+        diagnostic = curves["collection_diagnostics"][
+            curves["evaluation_episode"].index(panel)
+        ]
+        stop = panel * config.macros_per_episode
+        selected = [
+            index for index in range(stop)
+            if int(transitions["collection_version"][index]) == current_version
+        ]
+        assert diagnostic["current_version_sample_count"] == len(selected)
+        if not selected:
+            assert diagnostic["collected_right_fraction"] is None
+            assert diagnostic["distinct_state_action_entries"] == 0
+            assert diagnostic["both_actions_state_time_cells"] == 0
+            continue
+        entries = {
+            (
+                int(transitions["remaining"][index]),
+                int(transitions["start_positions"][index, 0]),
+                int(transitions["start_positions"][index, 1]),
+                int(transitions["ego_goal"][index]),
+            )
+            for index in selected
+        }
+        action_sets = {}
+        for remaining, ego, teammate, action in entries:
+            action_sets.setdefault((remaining, ego, teammate), set()).add(action)
+        right_fraction = np.mean(
+            transitions["ego_goal"][selected].astype(np.int64) == study.RIGHT
+        )
+        assert diagnostic["collected_right_fraction"] == right_fraction
+        assert diagnostic["distinct_state_action_entries"] == len(entries)
+        assert diagnostic["both_actions_state_time_cells"] == sum(
+            actions == {study.LEFT, study.RIGHT} for actions in action_sets.values()
+        )
+
+    final_version = curves["version_index"][-1]
+    final_q = result["q_values"][final_version]
+    final_initial = initial[final_version]
+    final_diagnostic = curves["collection_diagnostics"][-1]
+    assert final_diagnostic["greedy_right_fraction_nonterminal_cells"] == np.mean(
+        np.argmax(final_q[1:], axis=-1) == study.RIGHT
+    )
+    assert final_diagnostic[
+        "changed_current_table_nonterminal_q_entries"
+    ] == np.count_nonzero(final_q[1:] != final_initial[1:])
+    assert summary["final_collection_diagnostics"] == final_diagnostic
