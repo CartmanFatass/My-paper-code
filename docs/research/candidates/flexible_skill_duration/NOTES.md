@@ -2920,3 +2920,25 @@ Two explanations I can separate without a fit.
 - *Next observation (zero-fit, node, saved weights):* B10 — `as_trained` for faithful load,
   then the six constant-label panels with sampled actions, two evaluation-noise seeds each so
   the sampled panels' own noise is measured rather than assumed.
+
+## 2026-09-20 16:30 PDT — B10 entry code written and accepted; no score exists
+
+Object `FSD_LABEL_MAP_SAMPLED_B10`, declared in the 16:03 entry (E1 / E2 and their
+thresholds stand as written there). `scripts/run_fsd_label_map_sampled_b10.py` and tests under
+`tests/.../label_map_sampled_b10/` (Implementer, accepted by me); new files only. Per block 13
+panels: `as_trained` with the faithful-load check, then six constant-label panels with sampled
+low-level actions, two noise replicates each. Facts established while writing it:
+`deterministic` reaches exactly two places from the frozen `step` — the coordinator's label
+choice (`networks.py:1072, 1099`) and the actor's `dist.mean`/`dist.sample()`
+(`r_mappo_utils.py:91-94`) — and nothing else, so there is no learner-state effect to
+neutralise. The wrapper sits on the evaluator instance's `_batched_select_action` only, so the
+coordinator path stays B09's argmax (and is overwritten by the constant rule anyway). The
+frozen panel re-seeds all global streams at its start, so each sampled panel applies its own
+torch seed, sha256(evaluation seed : rule), at its first action selection, and restores the
+global states afterwards; worlds come from the environments' own generators and are the same
+32. Each sampled panel is refused unless captured executed actions differ from the recomputed
+mean action with an RMS within a factor of two of the policy std. Reduce ties each block to
+B09 by weights sha256 and exact `as_trained` scores. Checks: 50 passed (27 B10 + 23 B09), mine;
+the Implementer's run with B08 gave 92 passed. Limits known now: two replicates give a
+one-degree-of-freedom noise estimate per label; this isolates action noise only — training
+also samples labels and resets them on the caps-10 cadence.
