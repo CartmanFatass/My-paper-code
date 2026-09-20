@@ -112,7 +112,8 @@ runner. The new entry fixes the two allowed masters and scientific exposure, req
 `scripts.hmasd_admission.require_admission` before creating output or scientific objects,
 and checks any supplied launch SHA against admission. No fixture/bypass CLI is shipped.
 
-Publication identifies this B02 note, the admitted SHA/node and actual started fits;
+Publication identifies this B02 note and admitted SHA, distinguishes the declared node
+from actual-node evidence in the native launch manifest, and preserves fit-start evidence;
 it preserves episode/update records and final checkpoints. The new summary marks
 R−G as primary and removes the historical UP/WITHIN/DOWN label for this exploratory
 object. Incomplete attempts cannot acquire a complete comparison. Reuse the existing
@@ -135,3 +136,49 @@ comparison would leave the simpler F explanation unanswered. The outcome branche
 therefore require useful margins over both comparisons for a strengthened development
 case. Adviser agreement adds no empirical evidence or fit authority. The adverse active
 8901 gate result and the full prior exposure remain part of the working explanation.
+
+## 2026-09-19 — worktree preparation; owner defers integration
+
+The owner explicitly replies: “你在worktree进行即可 后续我们根据需要合并”. Work continues
+in this existing isolated checkout on `codex/ucope-feedback-renewal`; main and Claude's
+checkout are not modified. [PR #27](https://github.com/CartmanFatass/My-paper-code/pull/27)
+is a reviewable publication for later integration, not authority to merge it now.
+No new task, standing Root layer or control-plane policy change is selected.
+
+The bounded Implementer delivered the new adapter and runner without changing B01
+scientific sources. Its B02 synthetic checks passed 9 tests in 1.10s; the retained
+B01 likelihood/credit/replay suite passed 7 tests in 3.19s. The DM read the diff and
+requested independent source review. The local scientific environment was read as
+Python 3.10.20, NumPy 1.26.3 and Torch 2.7.0+cpu. This inspection is not a native fit.
+
+Source review of the launch kernel and a read-only `parse_research_state` check confirm
+the present execution dependency: this branch parses as UCOPE exploring / Codex DM,
+while the canonical main index has no UCOPE Active row. Its actual parser response is
+`direction 'ucope' must appear exactly once in the Active table`. The launch kernel
+also compares canonical policy with published main. This was policy inspection only:
+no launch was attempted, no admission or native fit was accepted, and no preflight
+receipt was borrowed from another node. Formal B02 execution remains pending the
+later control-state integration; no workaround or automatic merge is selected.
+
+## 2026-09-19 — engineering accepted; owner authorizes main integration
+
+The owner subsequently states: “你可以写入main 我通知claude即可”. This explicitly
+authorizes this task's current main integration; it supersedes the earlier defer-merge
+boundary for this change. The owner will coordinate with Claude. Publication or this
+record does not claim that Claude has already read the new assignment. Integration
+preserves Claude's FSD work and all accepted operation identities.
+
+The independent Reviewer reports no material findings in the new B02 sources after
+checking admission-before-effects, fixed scope, unchanged B01 science, source/node
+provenance, incomplete-result handling, primary/secondary readings and fit accounting.
+It reused the 9-pass B02 and 7-pass B01 evidence and ran `git diff --check`; it did not
+run live admission or scientific work. The DM accepts the implementation and checks.
+Synthetic verification does not establish native performance or a learning result.
+
+Implementation timing fields name their measured scope: main-entry wall through the
+inherited loop, inherited-loop process CPU and one-process peak RSS. Actual-node proof
+comes from the native launch manifest, not a fabricated admission field. Missing full
+exit/support telemetry limits cost claims rather than invalidating scientific data.
+Before launch, zero B02 fits have started. The next authorized action is publication,
+main/control-state integration and two admitted local_linux block invocations at the
+published source, followed by collection and the prospective six-fit reading.
