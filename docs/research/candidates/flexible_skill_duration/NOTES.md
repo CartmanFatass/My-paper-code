@@ -2575,3 +2575,17 @@ the checkpoint on one host, so it runs here on the WSL host after the weights ar
 Codex has been asked (through the owner) whether its termination design needs a further
 measure from the probe; any addition is made before a probe score exists, and the three fits
 below do not depend on it.
+
+## 2026-09-20 06:25 PDT — label content B08: three fits admitted on `wsl_4070`
+
+Node checkout fast-forwarded (login shell) to the published
+`fbae667d9731f081a6fdcaf0a08e5df3005b8524`, node idle beforehand (15 GB free). Three fits
+through `label_content_b08/launch_fit.sh` and the admission kernel, all accepted at the first
+request, alive with empty `stderr.log`. Memory was sized this time: a D1280 fit peaks at about
+2.4 GB (B07's `D_K10`), so three run together.
+
+| tag | block | operation ref (under `/home/wu/projects/HMASD/.git/hmasd-admission/`) |
+| --- | --- | --- |
+| `b08_save_772803_a01` | 772803 | `c1cfdc64bc582661cde679ffe0d762793486c8fa67ffb12df08aa880c2253fde.json` |
+| `b08_save_772903_a01` | 772903 | `f6105b710afdd8e056b3a9b3baa1d9c95b040201a1dc96e47c72ff936808b18e.json` |
+| `b08_save_773003_a01` | 773003 | `02eafceddec160ed85142c336d71ec789cf795c6436750885472b5c3cb85e10a.json` |
