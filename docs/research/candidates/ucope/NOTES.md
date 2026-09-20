@@ -2789,3 +2789,227 @@ This is a progress observation, not completed exposure or a scientific result. N
 summaries and exit witnesses are expected only after each complete training/evaluation pair.
 No duplicate request or replacement invocation was made. Read the fixed final panels and
 all intermediate/secondary readings after completion, then continue the scientific update.
+
+### During B06: what the command-reuse comparison can establish
+
+Native source makes an important part of the problem concrete: ordinary G already receives
+its own previous executed command, and B updates its actor/GRU from legal observations at
+every primitive tick before its gate decision. The selected native reward contains service
+and SINR terms without an explicit command-switch charge. KEEP therefore does not itself
+establish fewer observations, fewer actor forwards or a saved switching fee. Switching can
+still affect reward through positions, interference and subsequent histories.
+
+Let e be B's private eligibility bit, a_minus its previous actual command, and q_e=e*q(h).
+In ideal real arithmetic its joint command/next-private-state kernel is
+
+`K_B(da,de'|h,e) = q_e*delta_(a_minus)(da)*delta_0(de')
+                 + (1-q_e)*g_theta(da|h,e)*delta_1(de')`.
+
+An unrestricted primitive-time history policy can implement this same kernel and initial
+private state using the same legal observations, its own commands and private randomness.
+Equality includes the eligibility transition, not just action moments, so the resulting
+trajectory/return laws are identical. Track the sampled branch internally: inferring it
+from repeated command values would fail when a fresh FP32 draw happens to coincide.
+
+The implemented G is a restricted comparator, not that abstract emulator. In ideal arithmetic
+its positive-scale fresh tanh-Gaussian lacks the explicit copy atom; G_mean also cannot
+reproduce a nondegenerate copy/fresh mixture conditional on complete policy information.
+FP32 rounding/tanh saturation and physical position clipping can produce repeated commands
+or movements, so "fresh" does not mean repetition is impossible. B also receives eligibility
+explicitly while G's phase input is zero. This adds no exogenous information but can matter
+for finite representation and learning; exact emulation by G's fixed 64-unit GRU is unproved.
+
+The independent Critic reports no material dissent after these qualifications. The useful
+constraint is that no return advantage can follow solely from naming an exact primitive
+emulator "commitment" versus "ordinary feedback". Any future observed B/G benefit must
+concern the actual policy families, representation, finite learning or measured execution
+costs. This inclusion argument identifies none of those causes in B04 and supplies no new
+empirical advantage or automatic successor to B06. It leaves useful finite-learning reuse
+possible while removing an unsupported unrestricted-action or extra-information rationale.
+
+Source: `reactive_renewal_b01/reactive.py` (every-tick recurrent update),
+`uav_motion_prefix_b01/environment.py` (own-command features), and
+`envs/pettingzoo/uav_env.py` (movement then native service/SINR reward).
+
+Observation responsibility remains with the DM. After the leaf returned running snapshots
+and ended its turn, the DM reconciled the same three handles and continued a live read-only
+observer in the primary task; no native child was stopped or replaced. At 09:43 UTC all
+three were consistent/running with empty stderr and 1285/1166/1097 completed G1 episodes.
+The observer's active set will be retired only after actual native exit witnesses, and the
+DM will independently reconstruct the fixed panels/counts from the retained artifacts.
+
+## 2026-09-20 — B06 complete: lower-scale initialization improves the attained controllers
+
+All three native invocations completed at source
+`7ad9a8668d17a25724b9649dece7d5479e7d22c5`, with consistent runner/supervisor identities,
+exit code zero, empty stderr and complete scientific summaries. Final native exit was
+**2026-09-20 10:01:17.653960 UTC**. The primary observer reconciled every exit witness and
+ended with an empty active set; there is no live B06 process or pending leaf producer for
+execution. Scientific interpretation continues below.
+
+Actual exposure exactly matches the selected six fits: **12,288 training episodes /
+3,145,728 training team steps / 24,576 optimizer calls**, then **768 final evaluation
+episodes / 196,608 evaluation steps / zero evaluation updates**. Total native work is
+**3,342,336 team steps**. Each arm completed its 2048 by 256 exposure. Every policy and
+critic moved from initialization; all final evaluation parameter displacements were zero.
+The twelve-fit window ceiling is now consumed (six B04 plus six B06); B05 added zero fits.
+No fit failed, retry ran or unrecorded native panel was added.
+
+Native summaries and underlying records:
+[8941](../../../../runs/ucope/gaussian_scale_initialization_b06_8941/summary.json),
+[8942](../../../../runs/ucope/gaussian_scale_initialization_b06_8942/summary.json),
+[8943](../../../../runs/ucope/gaussian_scale_initialization_b06_8943/summary.json).
+Each root retains the checkpoint pair, raw evaluation primitives, train/eval episode rows,
+all PPO update and scale rows, source identities and native launch/exit evidence.
+
+### Fixed final panels
+
+The arm means below use every one of the 64 paired worlds per mode and master. No historical
+score substitutes for G1, and no mode or checkpoint was selected by its result.
+
+| Master | G1 sampled | Ghalf sampled | G1 mean | Ghalf mean |
+| --- | ---: | ---: | ---: | ---: |
+| 8941 | 0.220335699 | 0.263129232 | 0.194046900 | 0.284329192 |
+| 8942 | 0.206862939 | 0.243833525 | 0.205549588 | 0.257928566 |
+| 8943 | 0.150372560 | 0.244439246 | 0.160032864 | 0.245683811 |
+
+Each contrast cell gives mean / conditional world-panel SE / favorable:adverse:tied worlds.
+Independent learning units are the three paired fits, not the 192 worlds or four modes.
+
+| Contrast | 8941 | 8942 | 8943 | Descriptive mean of the three means |
+| --- | --- | --- | --- | ---: |
+| Ghalf_mean - G1_mean (primary) | +0.090282292 / 0.005896918 / 63:1:0 | +0.052378978 / 0.008418335 / 46:18:0 | +0.085650947 / 0.010959090 / 51:13:0 | +0.076104072 |
+| Ghalf_sampled - G1_sampled | +0.042793534 / 0.007672792 / 49:15:0 | +0.036970586 / 0.006753307 / 47:17:0 | +0.094066686 / 0.009102268 / 59:5:0 | +0.057943602 |
+| Ghalf_mean - Ghalf_sampled | +0.021199959 / 0.006666672 / 41:23:0 | +0.014095041 / 0.006381326 / 39:25:0 | +0.001244565 / 0.004970130 / 34:30:0 | +0.012179855 |
+| G1_mean - G1_sampled | -0.026288798 / 0.007323622 / 21:43:0 | -0.001313351 / 0.005792424 / 33:31:0 | +0.009660303 / 0.008793869 / 31:33:0 | -0.005980615 |
+
+Primary means range from +0.052378978 to +0.090282292. Both mean- and sampled-deployment
+between-initialization comparisons are favorable in every master. Mean extraction itself
+is again conditional: G1 has two adverse point estimates, while the third Ghalf extraction
+gain is small relative to its conditional SE. Neither extraction mode is universally better.
+
+### Exposure prediction and contrary training-curve evidence
+
+The predeclared first-256-episode start-scale statistic and all final three-coordinate
+scales show a sustained treatment difference; both vectors remained trainable throughout.
+
+| Master | Early G1 / Ghalf mean scale | Final G1 scale vector | Final Ghalf scale vector |
+| --- | --- | --- | --- |
+| 8941 | 1.003947699 / 0.495526836 | 1.012405, 1.049709, 1.009983 | 0.483635, 0.491470, 0.507353 |
+| 8942 | 0.998952423 / 0.502979913 | 0.978155, 1.005636, 0.991931 | 0.503366, 0.499769, 0.480644 |
+| 8943 | 0.999237991 / 0.495011636 | 1.012677, 0.987524, 0.995732 | 0.486000, 0.489424, 0.467484 |
+
+Common-actor displacements for G1/Ghalf are 4.266160/4.064531, 2.984776/3.686273 and
+3.884316/3.745896; critic displacements are 12.658068/12.859602, 12.516694/10.997166 and
+11.946999/12.974455. Thus the result is not untrained frozen-policy comparison, and larger
+parameter displacement is not a consistent signature of the favorable arm.
+
+First-to-last 256-episode on-policy training means are G1 .11239→.21612, .10385→.20748,
+.15646→.17166; Ghalf .11368→.24681, .06364→.19936, .07527→.25049. Full eight-block curve
+reading retains a particularly important contrary fact: 8942 Ghalf is below G1 in **every**
+descriptive 256-episode training block, despite its favorable final frozen comparisons.
+Its eight means are .06364/.12484/.13981/.17159/.17617/.14716/.17413/.19936 versus G1
+.10385/.15646/.17197/.17365/.18187/.17205/.19134/.20748. In 8943, Ghalf is below G1 in the
+first three blocks and above in the last five. These are evolving on-policy trajectories,
+not fixed-controller evaluations or extra independent learning units. B06 supports its
+final-controller endpoint, not uniform online-reward or training-curve dominance.
+
+### Independent reconstruction and measured cost
+
+The DM recomputed all return vectors, four paired difference vectors, means, conditional
+SEs and signs directly from complete episode rows, without the runner's reduction helper.
+All counts, episode/seed identities, before/after scale sequences, fixed first-256 statistic,
+phase-zero/fresh masks, unused duration streams, mean/sampled RNG behavior, private paired
+training generators and evaluation immutability agree with the recorded contract. All
+artifact digests and source bytes match the published source/manifest. Tensor-only readback
+of all six checkpoints verifies their object/arm/master/exposure metadata, finite CPU FP32
+weights, absent duration heads and exact stored log_std/final-scale values. No model forward,
+environment call or optimization was used for this verification.
+
+FP32 primitive rewards reconstruct authoritative episode J with maximum absolute errors
+1.5072e-9 / 1.5258e-9 / 1.2153e-9. Independently evaluating tanh on stored latent actions
+differs from the saved FP32 commands by at most 3.018e-8. These are appropriate rounding
+differences and do not alter any reported contrast or sign. An offline timestamp parser
+initially rejected the UTC Z suffix under Python 3.10; correcting that parser to +00:00
+allowed the readback to finish. This was no native failure or result retry.
+
+Runner wall scopes are 1436.653 / 1435.754 / 1437.469 seconds; study-entry process CPU
+scopes are 1434.065 / 1434.469 / 1436.078 seconds (sum 4304.613 seconds). Single-process
+peak RSS is 367908 / 368916 / 368860 KiB, not a simultaneous batch peak. Separate native
+timestamps give accepted-to-exit durations 1437.421 / 1436.498 / 1438.124 seconds and
+first acceptance to final exit 1499.090 seconds. Full authoring/build/collection and per-fit
+wall scopes are not thereby measured; no controlled efficiency claim follows.
+
+### DM update and next scientific decision
+
+Both declared predictions are met in these three pairs: lower early training scale persists,
+and the final mean-deployed controller improves. I retain initial latent sigma .5 as the
+better-supported **exploratory ordinary-controller initialization at this fixed exposure**.
+The primary cannot be explained by merely applying a smaller sigma in final execution:
+both mean deployments use u=mu, and their initial mean-policy functions were identical.
+The intervening learning package produced the favorable attained controllers. It does not
+identify reduced exploration, better score-gradient variance, different visitation or
+optimizer geometry as the sole cause, prove optimal sigma, or provide population precision.
+
+B04's mixed B-versus-G result and B05's failed mean-agreement retention remain intact.
+Subtracting old B scores from these new Ghalf scores would create an unmatched comparison
+and cannot establish a new KEEP/END effect. Nor do these ordinary-G fits show whether B
+would benefit equally, more or less from the same initialization. A potentially useful
+next question is whether reuse adds value once both arms share this better-supported
+preparation; the value of buying that observation, versus other within-direction reasoning,
+is being independently challenged before selecting any successor. No scale grid, new
+empirical batch or Pro question follows automatically. All twelve authorized fits are used;
+continued scientific reasoning does not replenish them.
+
+### Interpretation critique, exact objective example, and the next question
+
+The independent Critic checked the three native summaries against the prospective reading
+and reports **MATERIAL_DISSENT: no**. I adopt its correction to the future question:
+**incremental reuse-package benefit at the selected lower initial scale**, rather than
+"survival of a K gain"; B04 never established a stable gain to preserve. A fresh Bhalf/Ghalf
+comparison could change the practical judgment in that new preparation regime, but would
+neither explain B04 nor isolate temporal copying as the causal component. Equal latent sigma
+does not make temporal exploration equal. B06 provides a material new baseline reason, not
+evidence favoring Bhalf, and it does not reopen the failed mean-agreement C rule.
+
+The Critic also supplied a useful zero-fit alternative to attributing everything to gradient
+variance. Independently deriving and checking its Gaussian moments with exact Fraction
+arithmetic, take a one-step latent-action model
+
+`U ~ Normal(mu,sigma^2), r(U)=-(U^2-1)^2`.
+
+At a fixed positive sigma, the expected reward is
+
+`E[r(U)] = -[mu^4 + (6*sigma^2-2)*mu^2 + 3*sigma^4 - 2*sigma^2 + 1]`.
+
+Writing x=mu^2, exact optimization over the center gives
+`x_star=max(1-3*sigma^2,0)`. For sigma=1 the center is mu=0, sampled objective -2 and
+mean-deployed reward -1. For sigma=1/2 the centers are mu=+/-1/2, sampled objective -5/8
+and mean-deployed reward -9/16. Mean deployment therefore improves by **7/16** under the
+lower-variance preparation, even with exact population optimization and no sampling error
+or exploration task. The raw reward is unchanged; averaging it over different sampling
+variances changes which center is preferred. This explains a logically possible route,
+not the native B06 effect.
+
+The example fixes sigma when optimizing the center, whereas B06 trains sigma and records
+its persistent finite-exposure separation. It omits tanh, recurrence, decentralized
+information and teammate coupling. It makes no claim that a jointly optimized trainable-
+sigma system has different global optima because of initialization, or that either native
+fit reached a conditional optimum. Together with the earlier exact variance example, it
+keeps at least two distinct links open: changes in the sampled-policy objective seen by the
+center, and changes in finite score/optimization behavior. B06's primary isolates neither.
+No native replay, predictor fit or additional objective measurement was needed for this
+conceptual discrimination.
+
+**Investment decision at the current boundary.** Retain .5 initialization as the working
+ordinary-controller preparation for a future explicitly declared comparison at this exposure;
+do not change historical/core defaults, claim global tuning or extend B06. Any future K
+comparison must give its ordinary baseline the same selected preparation and explicitly fix
+deployment modes before new outcomes. The current evidence supports asking about an
+incremental reuse package, not claiming a gain from mixing old B with new Ghalf or adding
+a switching fee absent from the host. No fourth native batch, confirmation, extra seed,
+scale sweep or Pro question is selected under the exhausted window. The useful within-budget
+work after execution was the full result reading, contrary-curve check, independent critique
+and objective-level explanation above. UCOPE remains exploring; spending the authorized
+fits is not a scientific closure, owner pause or archive decision. Further native investment
+would need a fresh bounded allocation tied to that unresolved question.
