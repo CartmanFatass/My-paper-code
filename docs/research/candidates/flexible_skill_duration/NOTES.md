@@ -1702,3 +1702,77 @@ with the completed CF_E0005 fits on the same three blocks; intermediate reads th
 of the policy rather than parameter distance, and the initial-policy level so that a better
 start is not mistaken for restored learning. The change touches the shared learner, so it goes
 through the Implementer and an independent Reviewer before any fit.
+
+## 2026-09-19 20:40 PDT — prospective: CF with the appended physical coordinates on the observations' own scale (explore; a zero-fit forward probe, then three fits)
+
+(The two entries above carry heading times 20:50 and 21:00; they were written between 20:15 and
+20:30 PDT. This entry's time is the clock's.)
+
+**Idea, targeted (not a package).** The CF actor reads the held global state as raw metres (x, y
+in 0–1,000; UAV height 50–150) beside 734 entries scaled to order 1, with no normalisation before
+the GRU. The change: inside the actor's appended block only, map the state's coordinates with the
+same affine convention the environment already uses for an agent's own position in its
+observation (x and y divided by the area size; UAV height as (z − 50) / 100; the normalised clock
+untouched). Nothing else: same information, same width, same held-snapshot clock, same FiLM,
+GRU, critic (still raw state), rewards, update law. Construction otherwise exactly CF_E0005
+(`lambda_l` .0005, rate multiplier .5, default 32-sequence minibatches, k = 10, 45 rollouts).
+Identical in acting, replayed update and evaluation. Flag off: bit-identical to today.
+
+**Step 1, zero fits: forward-only probe at initialisation**, per block (772803, 772903, 773003),
+for the unscaled and the scaled construction from the same seed: one evaluation panel of the
+untrained policy (32 worlds, the block's evaluation seeds) giving J_init; and on the inputs met
+in that panel, (a) the share of the first layer's pre-activation squared norm that comes from
+each input block (own observation, state, joint observations, ego), (b) the GRU's update/reset
+gate saturation (fraction of gate units below .05 or above .95), (c) the sensitivity of the mean
+action to the agent's own current observation and to its ego one-hot (finite perturbation of
+fixed relative size, mean absolute change in the mean action). No optimizer step anywhere; policy
+execution of 2 × 3 × 32 evaluation episodes is recorded as exposure, not as a fit.
+- Expected (unscaled): the state block gives more than 90 % of the first layer's pre-activation
+  norm; own-observation and ego sensitivities are small.
+- Expected (scaled): the state block's share falls below one half; own-observation sensitivity
+  rises by at least a factor of three. Gate saturation: expected lower when scaled; loosely held,
+  because two ReLU layers and orthogonal init with gain .01 may already keep the gates unsaturated.
+- If the probe shows no material difference in (a)–(c), the conditioning account is weakened
+  before any fit; I would then run at most one scaled fit (772803) rather than three, to see
+  whether the native outcome disagrees with the probe, and say so here before launching.
+
+**Step 2, three fits:** the scaled construction on 772803, 772903, 773003, each paired with the
+completed CF_E0005 fit of its block (`b03_e0005_*`), which differs in the scaling flag alone; the
+flag-off path is bit-identical and B02 showed a rerun reproduces bit for bit across launch shas,
+so references are not rerun. D1280 of the same blocks (`b01_s1_d1280_*`) is carried for
+description. Three of the idea's six fits; the other three are not reserved for anything and
+nothing is added after scores are seen.
+
+**Predictions (sign and threshold; no invented probabilities).**
+- Intermediate, in the fits: actor displacement after rollout 1 above the reference's on three of
+  three blocks (reference .026–.029); at rollout 45 the network part of the displacement (the
+  log-std part removed as sqrt(3)·|H/3 − 1.4189| / ‖θ0‖) at least twice the reference's. These
+  are parameter distances and I hold them as weak evidence of function change; the probe's
+  sensitivity measure, repeated on the trained policy at rollout 45, is the better read and is
+  expected above its own initial value.
+- Native: training return U over rollouts 35–45 above the reference on at least two of three
+  blocks and above 25 in the mean; late-window J (panels 30–45) above the reference on at least
+  two of three blocks; and J_late − J_init larger than the reference's on at least two of three,
+  so that a better starting policy is not read as restored learning.
+- D1280 relation: no prediction. Scaling could close much of the gap or little of it.
+
+**Strongest simpler alternatives.** A higher J from a better initial function rather than from
+learning (hence J_init); scaling acting as a learning-rate change on the first layer rather than
+as restored sensitivity (the probe's sensitivities before/after speak to it); block noise (late
+windows, three blocks, sign counts only).
+
+**What I would do with it.** Intermediate and native both move: this becomes the flat
+construction, the scale hazard is reported as a defect of the B01 comparator (B01's label stands
+as read; its meaning is narrowed in RESEARCH), and the same scaling question is put to D's
+coordinator, which reads the same raw state and does not learn. Intermediate moves, native does
+not: conditioning was real but not binding; no second scaling variant; the comparator limitation
+is recorded and the direction's k question is taken up inside the D family. Native moves without
+the intermediate: keep the construction, revise the mechanism. Neither: the account is weakened
+and I stop comparator repair here.
+
+**Reading limits.** Exploration; three blocks; historical references; blocks already used for
+every flat setting since B01, so no gap size and no competence claim; no MEI verdict.
+
+**Engineering.** The scaling touches the shared learner (`hmasd/networks.py`
+`SkillDiscoverer._apply_central_input`, one application point for acting, replay and
+evaluation): Implementer from a scope note, independent Reviewer, DM acceptance, then launch.
