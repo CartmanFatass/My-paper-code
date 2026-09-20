@@ -1755,3 +1755,114 @@ This answer uses reasoning input 735a1b6a10a43038b3cab63326e18fa61ebd464f: the B
 I did not repeat the DM’s raw-row, checkpoint or artifact-hash audit, and do not present those recorded checks as my own independent reconstruction. The decision-critical unknowns are the native prevalence of useful conditional branch preferences, their accessibility through the attained recurrent representation, and whether exploiting them would beat the ordinary controller after learning. The illustrative reward calculation does not fill those gaps.
 
 Bottom line: keep the no-rate-batch/no-AR-batch decision. Retain one unresolved question—whether selective reuse has a useful preference signal accessible through existing local information—and pursue at most the bounded source-grounded observation that could make that question actionable. Without such a reason, no additional native comparison is presently worth buying.
+
+## 2026-09-19 — second Pro answer saved from chat; local opportunity question retained
+
+**Saved from chat.** The second Jev request was accepted once, at effort 6 Pro with the
+original attachment present, under key
+`hmasd:f97583aa427f639c2e13af7542091198b50ce8f3e022ed14fa1652841ff87ffd` and question source
+735a1b6a10a43038b3cab63326e18fa61ebd464f. Pro reported that the GitHub connector could read
+the pinned sources but exposed no file-write operation. Transport independently found
+NOT_DELIVERED, no Answer commit and the branch still at the question source. Source SHAs
+quoted in the chat were not delivery commits.
+
+After the owner observed a completed reply, the DM checked the recorded accepted send.
+The existing local wait had not returned a result and Chrome was no longer running.
+A bounded read-only recovery reopened the same recorded conversation and returned
+COMPLETE with the entire chat answer. This establishes a local collection failure and
+successful recovery, not a proven cause of Chrome's disappearance or a new question.
+No Send was repeated and the payload/key were unchanged.
+
+The DM read the complete 19,665-character answer, verified its text SHA256
+`af268c171ed8e33a42e5cf7293ac2c8eb673167be0126097fedbf8abd51e825a`, and rechecked that the
+remote target was still empty. The preceding Answer was then filled byte-for-byte from
+the recovered file and published in 20d938324. Flattened mathematical text and three
+trailing spaces from the browser extraction are retained rather than silently rewritten.
+The source, question and all prior notebook bytes were preserved. This is DM publication
+of a complete chat fallback, not a claim that Pro wrote a GitHub commit. Both authorized
+Pro questions in this window have now been sent and answered; no third is allocated.
+
+### Working update and the next bounded observation
+
+The answer returns MATERIAL_DISSENT: no and supports the current no-rate-batch/no-AR-batch
+choice. The DM adopts that recommendation for the reasons already recorded: B04 did not
+establish a practical B advantage and neither the rate-path nor source checks identified
+a specific repair with a predicted useful native effect. This is an investment judgment
+about the tested package, not equivalence, a broken learner or closure of the direction.
+
+The remaining question is whether lawful gate information can distinguish opposite
+KEEP-versus-END preferences at a fixed controller and decision population. For the
+one-decision model, define A(X)=E[Q_END-Q_KEEP | X], using the actual allowed gate input
+and a common subsequent policy rule applied to each branch's own resulting history.
+The best unrestricted X-conditioned branch choice has an increment over the best
+input-independent branch choice of
+`O_X = E[max(A(X),0)] - max(E[A(X)],0) >= 0`.
+A positive value requires positive and negative conditional expected advantages with
+positive probability. A privileged hidden-state crossover is insufficient if lawful X
+cannot distinguish its sign. This is an analytic opportunity quantity, not a measured
+native value, a guarantee for the finite R network, new-observation-only attribution,
+headroom over G, or a full-horizon multi-agent decomposition.
+
+The DM selects one bounded source/model inspection, with zero fits, native episodes,
+checkpoint evaluations or optimizer updates: test the proposed local event of entering
+or leaving the communicable-user list against the actual selected native reward,
+assignment and observation functions. The Scout must verify the answer's reward formula
+and local-information statements before using them, and distinguish a reward-level
+counterexample from reachable KEEP/END consequences under the actual sampled fresh-command
+law. A favorable END velocity, global reward statistic or hidden joint state cannot be
+silently supplied to the actor. The result may simply show that this one cue does not yet
+provide a defensible branch-preference rule; no native diagnostic is pre-authorized by it.
+The DM will retain any contrary source finding rather than promote Pro's illustration to
+native evidence. The six remaining fits remain unselected.
+
+### Owner clarifies routine Pro transport and requests recovery repair
+
+The owner explicitly states: "问题外发送pro为工作流的组成部分 请不要再拦截".
+Within the already authorized direction, account and allowance, sending research questions
+and values, reading the specified repository context, and writing the assigned Answer are
+routine workflow authorization, not a new per-payload confirmation step imposed by the DM.
+The earlier two specific approvals remain recorded facts. This clarification neither
+adds Pro questions/fits nor changes the expiry, branch or no-main-merge boundary.
+
+The owner additionally requests that Transport detect an unavailable Chrome, reopen the
+accepted conversation, surface unresolved authentication or real errors promptly, and
+reliably collect replies through Jev when GitHub writeback is unavailable. The operational
+model is simple: after an accepted Send, recover the existing conversation; if Pro is
+thinking, continue observing; if the answer is complete, save it; if access needs a human
+or a real error prevents observation, report that fact. A browser restart is not a new
+research request or evidence that server-side thinking failed. The owner also requests
+removal of engineering digest clutter from future visible cover prompts while keeping
+local identity checks. These are authorized transport repairs; they allocate no native
+research exposure and do not alter either already sent question.
+
+### Source check returned: local list entry does not identify branch preference
+
+The bounded Scout inspection verified the selected native reward and information path.
+B04 uses five UAVs, 50 static users, H=256, `paper_reward=False` and `use_fdma=False`
+(`uav_motion_prefix_b01/environment.py:8`). Native `MultiUAVEnv.step` returns one fifth
+of the global reward to each UAV; the adapter's team sum recovers, rather than multiplies,
+the global quantity (`envs/pettingzoo/uav_env.py:279`, `environment.py:49`). The reward is
+`r=.7*n/50+.3*mean(q)`, with `q=clip((SINR_dB-3)/30,0,1)` over assigned connections
+(`uav_env.py:1421`). Assignment greedily orders all UAV-user SINRs, with capacity ten
+per UAV and at most one assignment per user (`uav_env.py:947`).
+
+The actor sees the top twenty locally communicable users' relative xy and SINR, using
+the different normalization `clip((SINR_dB+10)/50,0,1)`, plus local UAV features
+(`uav_env.py:393`, `:575`). Global assignment/count/SINR fields in `infos` do not enter
+`actor_features` (`environment.py:27`). The GRU can retain local history, so absence of an
+explicit global statistic does not prove that all useful conditional information is absent.
+
+Pro's arithmetic is correct under its stated condition: adding one assigned link while
+holding all others fixed gives `delta_r=.014+.3*(q-qbar)/(n+1)`, hence -.034 at n=4 and
++.0025714 at n=20 for q=0, qbar=.8. Native movement need not satisfy that condition:
+it changes multiple SINRs, interference and assignments, and a user can enter a local list
+without being served. These source facts establish a reward-level possibility, not a
+reachable KEEP/END counterfactual pair or a predictable sign of A(X).
+
+The DM therefore does not promote list entry/exit to a gate rule or select another fit.
+This weakens that specific proposed shortcut; it leaves lawful full-history opportunity
+and finite learnability unresolved. All work in this inspection used zero native episodes,
+checkpoint evaluations and optimizer updates. A bounded critic now challenges the next
+investment judgment: identify a concrete differing prediction that makes a new observation
+useful, or state the missing counterfactual information without reviving the closed batches.
+The remaining six fits are capacity, not a requirement to spend them.
