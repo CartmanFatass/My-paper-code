@@ -3487,3 +3487,111 @@ logged-feature opportunity and finite-sample estimation. Coupled teammates, endo
 eligibility, predecision versus postdecision variables and world-level clustering must stay
 explicit. A result that the relevant input is absent is useful and grants no new data run.
 UCOPE remains exploring under the direct DM; the original deadline and 15-fit cap remain.
+
+## 2026-09-20 11:23 UTC — conditional opportunity: randomization is available, full input is not logged
+
+This zero-fit reasoning task is complete. Its new finding is the **specific B07 recording
+boundary**, not a newly discovered score identity or a native opportunity estimate. The
+identity below is the conditional version of the randomized-score argument already used
+for B05. The independent Critic confirms it and the recording limits, with no material
+dissent; I adopt that distinction rather than count a repeated derivation as new evidence.
+
+Fix one checkpoint, one deployment mode, agent i and tick t. Let E be predecision eligibility,
+X lawful predecision history, Z=1 an END coin, p=1-q its probability, and Y the remaining team
+return divided by the fixed episode horizon. With 0<p<1, independent gate randomization,
+consistency and exogenous future randomness,
+
+`E[(Z/p - (1-Z)/q)*Y | X,E=1] = E[Y(END)-Y(KEEP) | X,E=1] = A_X`.
+
+Conditioning first on each potential return proves the identity: the independent current
+coin averages Z/p and (1-Z)/q to one. Each potential return uses the same frozen continuation
+rule on its own resulting history, including different next eligibility, recurrent states
+and teammate responses. The other agents' simultaneous coins and fresh draws are integrated
+under their unchanged laws; physical coupling does not require treating them as independent
+trajectories. Eligibility is determined before the current coin, so conditioning on it is
+valid but restricts the question to B's eligible-history distribution. The resulting A_X is
+neither an ordinary-G advantage nor an additive full-horizon policy improvement. Bs and Bm
+have different continuation kernels and must be read separately. Prior scale/checkpoint
+selection limits generalization without undoing within-checkpoint current-coin randomization.
+
+An exact two-agent, two-tick finite model checks the claim with coupled rewards and a real
+downstream eligibility effect. Both eligible END probabilities are 2/3. Current previous
+commands are -1 and +1; current fresh commands are independent fair signs, while next-tick
+fresh commands are independent fair draws from {0,1}. A current KEEP forces fresh next tick;
+a current END leaves the next gate eligible. For lawful X and hidden W, both signs, reward
+at either tick is `r=X*a+W*b+a*b/2`, and Y=(5+r_current+r_next)/10. The predecision population
+has masses P(X=+1,E=1)=3/8, P(X=-1,E=1)=1/8, P(X=+1,E=0)=1/8 and P(X=-1,E=0)=3/8;
+W is an independent fair sign. Thus eligibility can be associated with X before the coin.
+Exact Fraction enumeration over 1,024 eligible joint cases makes the weighted factual
+identity and direct potential-return difference agree: **A_-1=-151/2160**, **A_+1=209/2160**.
+The future part alone contributes `(-X/6-7/216)/10`, so the check has not equated continuation
+with replaying a shared realized next state. This finite model verifies the algebra under
+its stated artificial reward/laws, not reachable native UAV values or a useful native gate.
+
+### What B07 actually retained
+
+The DM checked the arrays in all three native roots and the evaluator's order of operations
+in [study.py](../../../../experiments/candidates/ucope/lower_scale_reuse_b07/study.py).
+Each array archive has rewards, commands, three-dimensional means, eligibility, branches,
+fresh flags, KEEP propensities, random slots and completion/mode labels. It does **not
+explicitly retain local observations, actor-feature vectors or the 64-dimensional recurrent
+state**. The actor's mean head is a 64-to-3 linear map, with no established inverse or
+sufficiency property on the visited histories.
+
+A recorded lawful projection S may include the focal agent's current mean (computed before
+the coin), previous own command (`commands[t-1]`, initially zero), current eligibility and
+their histories truncated before the decision. The current sent command, current fresh flag,
+next eligibility, subsequent means and later rewards are treatment descendants; they must
+not enter a predecision signal. Conditioning on the saved current gate uniform makes
+assignment deterministic and destroys overlap. Complete teammate arrays are not automatically
+lawful local inputs. Neither reset seeds nor future Gaussian slots become legal gate features
+merely because the evaluator saves them.
+
+This is a statement about explicitly recorded arrays. The published simulator, checkpoints
+and seeds may permit a separately checked reconstruction of omitted observations; no such
+environment/actor replay was performed here. I do not claim irrecoverable information loss
+from the complete artifact package or infer that a projection actually loses native value
+merely from its dimension.
+
+### Why an absent projection signal would not close the history question
+
+For S=f(X), conditional expectation gives `A_S=E[A_X | S,E=1]`. Convexity of the positive
+part implies `O_S <= O_X` for the earlier opportunity functional
+`O = E[max(A,0)] - max(E[A],0)`, using the same eligible population and fixed continuation.
+A reliably established conditional crossover in a lawful S would therefore exhibit some
+lawful local opportunity. Failure to find one in S would not rule out omitted-history value.
+No native crossover has been estimated or established in this task.
+
+An exact observational-equivalence example makes that limit concrete. Let lawful X be a
+fair sign but the recorded S constant; randomize END independently with probability 2/3.
+In model 1, `Y(END)=1/2+X/10`, `Y(KEEP)=1/2-X/10`, so A_X=X/5 and O_X=1/10. In model 2,
+replace X in those returns by an independent hidden fair sign. Then A_X=0 and O_X=0.
+The complete recorded `(S,Z,Y)` law is identical in the two models; both have A_S=O_S=0.
+Exact Fraction enumeration verifies that equality. Common additional fields unrelated to
+the omitted sign can be appended without distinguishing the models. This shows a possible
+projection limitation, not that B07's omitted observations contain a helpful native signal.
+
+Randomization thus solves an identification problem **in principle**, while complete lawful
+conditioning, estimator precision and a usable learned rule remain separate questions.
+B07 offers only 64 world clusters per checkpoint, despite many correlated agent/tick rows;
+rich histories may have sparse coverage. Outcome-selected bins or features would also carry
+selection exposure. Adequate overlap alone supplies neither precision nor learnability,
+changed-visitation performance or superiority to ordinary control.
+
+### Investment update after the additional reasoning
+
+No fitted predictor, gate-score statistic, feature/threshold search, model forward, native
+step, optimizer update or Pro call was added. This analysis closes the selected
+recoverability question: the randomization/return fields exist, but the complete lawful
+input is not explicitly logged, and reconstructibility has not been tested. It supplies
+no positive native reason to revive C or R, retune scalar B, or request additional fits.
+The broader feedback-opportunity question remains open; it is not resolved negatively by
+B07 or by the recording boundary.
+
+At this evidence state there is no selected, worthwhile native successor. Any later empirical
+proposal must state the particular reward-relevant predecision distinction it expects to
+matter, the actual information and selection exposure, the changed-visitation comparison
+against competent ordinary control, and its cost. That is the unresolved scientific burden,
+not an automatically queued batch or an additional standing approval rule. The current
+scalar package stays idle, UCOPE stays exploring, and all 15 allocated fits and both Pro
+calls remain consumed with the original deadline unchanged.
