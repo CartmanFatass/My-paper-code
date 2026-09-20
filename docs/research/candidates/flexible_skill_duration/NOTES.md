@@ -2589,3 +2589,42 @@ request, alive with empty `stderr.log`. Memory was sized this time: a D1280 fit 
 | `b08_save_772803_a01` | 772803 | `c1cfdc64bc582661cde679ffe0d762793486c8fa67ffb12df08aa880c2253fde.json` |
 | `b08_save_772903_a01` | 772903 | `f6105b710afdd8e056b3a9b3baa1d9c95b040201a1dc96e47c72ff936808b18e.json` |
 | `b08_save_773003_a01` | 773003 | `02eafceddec160ed85142c336d71ec789cf795c6436750885472b5c3cb85e10a.json` |
+
+## 2026-09-20 06:40 PDT — B08 probe: Codex's requested measure adopted in modified form, before any probe score
+
+Read in full: Codex's revision at `1d3091830` (`codex/team-conditioned-termination`, its own
+notebook). It withdraws the all-arms-retrained J / I / F priority, makes its next step
+conditional on B08, prefers — if the label has content — a *frozen-foundation* gate
+comparison on B08's checkpoints, declines to read B08's frozen/random J gaps as an upper
+bound on termination gains (accepted: uniform replacement changes label quality as well as
+timing; I withdraw the word "bound" from my 05:35 entry — they are fixed-weight stress tests),
+and asks for one addition to the probe. State at this decision: the three B08 fits are
+running, no probe has run, no probe score exists.
+
+**Adopted.** The behaviour reachable through the *actual* optional-END interface while the
+team label stays held, at fixed histories from the as-trained panel (no native step beyond
+the planned panels, no optimizer step):
+1. at most 64 outcome-blind decision histories per block from the as-trained rollout-45 panel
+   (fixed rule over world id and tick; resets, dones and forced team boundaries excluded),
+   with predecision ages;
+2. for each single-agent END mask, the partial decoder's own law for the replaced label with
+   everything else held: greedy replacement, 1 − q(held label), and the law-weighted squared
+   change of the action mean from KEEP in units of the policy variance, plus the deterministic
+   END-against-KEEP action change in native units and the next-GRU-state difference;
+3. one pair-END mask per history;
+4. all of it by time to the forced team cap: 1, 2–4, 5–9 ticks, with counts.
+
+**Modified.** The pair is Codex's serving/strongest-competitor pair *if* the environment
+exposes predecision per-user serving UAV and SINR read-only to the probe; if reading them
+would need an edit under `envs/`, the pair is instead the two UAVs closest in the horizontal
+plane at that history, and the summary says which rule was used. I do not edit the
+environment for an analysis label. Serving/non-serving strata are reported only under the
+first rule.
+
+**Why I take it.** It is forward-only on captures the probe already makes, it is what Codex's
+design needs to know whether a local END has anything to act on, and it bears on my own
+object question from a side my measures miss: six labels can differ in their action means
+while the deployed selector nearly always returns the held one (B07: the caps-10 policy
+changes a label at only 10–15 % of its decisions). Read as description of accessibility, not
+as END-minus-KEEP value. If (b) and (c) show an inert label, this part is reported and not
+interpreted further.
