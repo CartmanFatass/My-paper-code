@@ -1411,3 +1411,144 @@ target diagnostics and preserved admission/retention behavior. Its independent
 focused suite was **40 passed in .33 s**, clean diff/checkout. DM accepts; this
 is not native admission or a scientific result. Next action is the frozen 12-fit
 native batch, with fresh actual-node checks and no change to B04's contract.
+
+## 2026-09-20 16:48 PDT — B04 read: rank repair improves estimates, not reliably decisions
+
+**Execution and collection.** The frozen **12 fits** ran serially after real
+local_linux admission from published source
+`6a1a7e221cdc8f35bda0cc48d2efa2982dcb2a4b` (scientific bytes reviewed at
+`33add1138e6aa70098ec534c0b81af4f9fc9608f`). Every native handle has consistent
+accepted identity, successful fresh physical/effective memory checks, exit 0 and
+complete retained outputs; there was no refusal, retry, missing cell, extension
+or source change. First acceptance 23:41:59.646604 UTC, last exit
+23:45:12.871439 UTC. Native first-admission control was canonical
+`37f13aebc926f11303864389769a2ca56381e338`; pause and exact lead passed. All
+comparative results were read after all twelve cells were terminal.
+
+Each linked root retains the original `launch-manifest.json`, admission/preflight,
+process-exit, stdout/stderr, config, summary, complete curves, transitions and
+learner-state arrays; these are the recoverable handles and evidence, not new
+handback records:
+
+| Arm | 94001 | 94002 | 94003 |
+| --- | --- | --- | --- |
+| joint_product | [run](../../../../runs/skill_teammate_drift_learning/b04_joint_product_94001/) | [run](../../../../runs/skill_teammate_drift_learning/b04_joint_product_94002/) | [run](../../../../runs/skill_teammate_drift_learning/b04_joint_product_94003/) |
+| fingerprint_product | [run](../../../../runs/skill_teammate_drift_learning/b04_fingerprint_product_94001/) | [run](../../../../runs/skill_teammate_drift_learning/b04_fingerprint_product_94002/) | [run](../../../../runs/skill_teammate_drift_learning/b04_fingerprint_product_94003/) |
+| joint_permuted | [run](../../../../runs/skill_teammate_drift_learning/b04_joint_permuted_94001/) | [run](../../../../runs/skill_teammate_drift_learning/b04_joint_permuted_94002/) | [run](../../../../runs/skill_teammate_drift_learning/b04_joint_permuted_94003/) |
+| fingerprint_permuted | [run](../../../../runs/skill_teammate_drift_learning/b04_fingerprint_permuted_94001/) | [run](../../../../runs/skill_teammate_drift_learning/b04_fingerprint_permuted_94002/) | [run](../../../../runs/skill_teammate_drift_learning/b04_fingerprint_permuted_94003/) |
+
+**Fixed primary result.** First-64 target expected greedy native returns:
+
+| Arm | 94001 | 94002 | 94003 |
+| --- | ---: | ---: | ---: |
+| joint_product | .688782489 | .688782489 | .688782489 |
+| fingerprint_product | .661925808 | .607728165 | .612908143 |
+| joint_permuted | .688782489 | .688782489 | .688782489 |
+| fingerprint_permuted | .687685429 | .607728165 | .603332211 |
+
+The predeclared intervention contrast `G_product - G_permuted` is
+**+.025759620 / .000000000 / -.009575933**, descriptive mean +.005394563.
+The predicted native shrinkage occurs in only one block; it is absent in one
+and reverses in one. Do not call this a stable intervention benefit or replace
+it with the all-positive error prediction. G_product is
+.026856680/.081054324/.075874345; G_permuted is
+.001097060/.081054324/.085450278. Conditional response still wins this fixed
+ridge comparison in each condition/block, but one permuted gap is just one
+early decision. B04 did not rerun recent fingerprint or additive under the
+permutation, so it does not independently renew B03's full comparator claim.
+
+**Intermediate prediction passes; the native link does not generally follow.**
+Actual collected cooperative source designs have rank 3 on the product curve,
+with fourth singular value 1.63e-15/2.45e-15/2.16e-15, and rank 4 under
+permutation, with fourth singular value **1.03207/1.09601/1.07889**. Source
+marginal u/v/p/q sets are exactly preserved. Full fingerprint's first-target
+MAE falls from .197988/.205708/.195428 to **.035752/.104028/.100753** before any
+target label. Its first-64 MAE also falls from
+.042565/.096908/.097029 to .022782/.084525/.081818. These are genuine estimate
+improvements, not an inactive intervention.
+
+Nevertheless fingerprint's early cooperative choices change from 42/6/8 to
+63/6/2 out of 64. On 94003 prediction error improves while native choices get
+worse, a direct counterexample to crediting every proxy improvement as control
+value. Both response arms choose cooperation on all target panels. Their early
+MAEs are .013302/.020466/.005466 (product) and
+.011148/.019304/.004861 (permuted), reflecting distinct fitted values despite
+identical saturated native actions. All four arms reach .807582489 on late-64;
+the diagnosis remains early transfer, not lasting superiority. The moving
+target path is also becoming more favorable, so late recovery is not attributed
+solely to new labels.
+
+**What changed in the working explanation.** Exact historical rank deficiency
+is **not necessary for an early gap in these fixed finite-sample implementations**:
+the full-rank condition retains a positive joint-minus-fingerprint difference
+on all three new blocks. This is weaker than saying every competent direct
+fingerprint must lose. Finite information, ridge prior geometry, extrapolation
+beyond coordinate ranges and decision thresholds remain material; no tuning
+experiment isolated them. Removing the exact null direction improves the
+initial estimate consistently, but the proposed implication to native gap
+shrinkage is weakened by its mixed signs. I do not promote rank to a sufficient
+admission criterion or assert an untested variance/regularization diagnosis.
+The intervention also changes actual joint outcome/reward frequencies, so this
+is not a pure causal effect of rank alone.
+
+B03's lawful supported-outcome/unsupported-context witness survives, as do its
+strict known-law, stationary-response and terminal-host limits. B04 advances
+that understanding by showing both a less degenerate positive fixed-learner
+comparison and a failure of the anticipated native response to support repair.
+B02's rejected IS package is unchanged. Neither batch establishes new algorithmic
+novelty, endogenous co-learning, learned HMASD skill benefit, partial-observation
+correction, PPO defects or UAV utility. A change in the conditional reward or an
+unknown joint completion correlation remains a counterexample to treating the
+current integration law as generally identified.
+
+**Readback.** Every fixed endpoint was reconstructed from saved curves.
+Within each source condition, paired arms have identical full numerical
+trajectories. Across conditions, primitive/collection/reward random slots,
+collection actions and all target-stage transitions match exactly, while source
+joint outcomes legitimately differ. The fixed permutation and every primitive
+move/hold/reward were independently reconstructed. Final sufficient statistics,
+source/target movement, and causal value predictions at five history cutoffs
+per fit agree with independent augmented least-squares/conditional-mean
+calculations; maximum raw prediction discrepancy is `6.37e-14`. Source SVD/rank
+diagnostics also reproduce. No new labels, fits or result evaluations were
+generated by this arithmetic readback, and no defect reclassifies a negative
+native sign as a technical failure.
+
+**Scientific boundary and next use.** The owner's re-entry question now has a
+bounded affirmative answer plus a tested limitation: a legal condition exists
+and simple joint conditioning can realize early native value, but identifying
+more context directions is not alone enough to predict that value. No B05,
+lambda/permutation sweep, extra seed or confirmation batch is selected. Further
+work on this same constructed object would not presently change that decision.
+Keep the ordinary conditional-response bridge and the adverse/passing controls;
+do not mark B scientifically disproven or claim paper-grade target validation.
+A concrete useful re-entry is a target-host decision with lawful recorded joint
+outcomes and current policy information, where conditional response stationarity
+and current joint-law identification can actually be checked or learned, and
+where an early adaptation cost matters against a competent same-information
+direct or model-based baseline. No such target mapping is established by these
+runs. This is a present scientific scope boundary, not an owner-approval gate,
+missing Pro answer or fabricated producer. Root owns any current-index wording;
+the DM has no live run or queued fit.
+
+**Cost and final consultation provenance.** Twelve started/completed B04 fits;
+27,648 macro observations/reward labels/updates/exact panels, 82,944 primitive
+ticks, 13,824 small ridge solves and 12 descriptive source-design SVDs. Zero
+extra reward samples or learner updates at evaluation. Summed runner wall
+**3.97237 s**, summed one-child CPU **2.91472 s**, maximum one-child peak RSS
+**48,228 KiB**, first acceptance to final exit **193.225 s**, not active
+occupancy. Per-fit walls in the four-arm table order:
+94001 .293/.339/.309/.338;
+94002 .339/.333/.320/.347;
+94003 .305/.386/.296/.366.
+All own fits were serial with one numeric thread; unmeasured preparation/queue/
+interaction cost is not zero. Direction exposure is **57 completed exploratory
+fits**, plus the earlier separately retained B01 pre-training refusal.
+
+Root reports the completed Pro fallback formally DELIVERED; the actual retained
+answer commit is `8904327f9598d4896cb9425550f84584deaa902a`, limited to the
+[original umbrella Answer in A NOTES](https://github.com/CartmanFatass/My-paper-code/blob/8904327f9598d4896cb9425550f84584deaa902a/docs/research/candidates/termination_rule_experience_reuse/NOTES.md).
+The DM verified that commit's file scope; the full answer content and exact
+LF/hash reconciliation were already read above. B's earlier unused Answer slot
+is not a second Send or separate response requirement. Pro adoption remains as
+recorded and did not change the frozen B04 batch.
