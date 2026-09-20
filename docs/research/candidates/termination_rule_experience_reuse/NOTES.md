@@ -977,3 +977,136 @@ unobserved suffixes, learn a gate, revive residual-MC, or require an unbounded s
 either an ordinary study or a pause. A concrete new reason and prediction are sufficient
 for re-entry; no prior proof or positive result is required. Additional cost for this
 bridge is **zero fits**; previous cumulative cost remains 15 started/read local-CPU fits.
+
+## Pro question 2026-09-20 abc-admission-conditions-and-minimal-discriminators
+
+Conversation: new. Root operates the owner's requested **single Jev consultation**; no
+separate Send is requested for the B/C input sections. A DM assembles this common question
+and owns this target notebook. Each direction's scientific input is independently authored
+by its own DM at the fixed source below. This is a cross-direction scientific critique,
+not a Portfolio allocation/ranking, confirmation review or experiment-approval request.
+
+**Question.** For each of A, B and C, does its proposed scientific entry condition expose
+a worthwhile, legally observable learning/reuse question, or has the strongest ordinary
+same-information reference already absorbed it? Criticize the condition itself, supply
+its strongest lawful counterexample or hidden-information objection, and identify the
+smallest decisive next observation if one is worthwhile. The answer should change each
+DM's continue-versus-pause judgment without converting one package failure into absence
+of opportunity, demanding novelty for its own sake, or requiring an endless search.
+
+### Independently authored inputs and exact revision boundaries
+
+Read the named section and its directly selected evidence/context, not an unbounded
+history. The fixed sources are the scientific inputs; the latest writable target is used
+only for preserving concurrent bytes when delivering the answer.
+
+- **A — termination-rule experience reuse.** Source
+  `250635b824cfe5ee175319f0c458f1034abfb814`, branch
+  `codex/termination-rule-experience-reuse`, path
+  `docs/research/candidates/termination_rule_experience_reuse/NOTES.md`, exact heading
+  `## 2026-09-20 — A Pro input: termination-reuse entry conditions and finite-data bridge`.
+  [Pinned A input](https://github.com/CartmanFatass/My-paper-code/blob/250635b824cfe5ee175319f0c458f1034abfb814/docs/research/candidates/termination_rule_experience_reuse/NOTES.md).
+  Its four entry conditions, A01/A02 reads, finite DAG and strict-support counterexample
+  are A's own input. Stage: 15 earlier fits read; the new bridge is algebra, **zero new
+  fits**, and its proposed shared-prefix deficit is absorbed by a finite-work ordinary
+  same-data reference. No direction-wide impossibility or final pause has been declared.
+- **B — joint skill/teammate drift learning.** Source
+  `7435fec3191926b61186ad7f97c39c182d10e932`, branch
+  `codex/skill-teammate-drift-learning`, path
+  `docs/research/candidates/skill_teammate_drift_learning/NOTES.md`, exact heading
+  `## Pro consultation input — 2026-09-20 B03 joint-support admission`.
+  [Pinned B input](https://github.com/CartmanFatass/My-paper-code/blob/7435fec3191926b61186ad7f97c39c182d10e932/docs/research/candidates/skill_teammate_drift_learning/NOTES.md).
+  Read that DM's question and the directly cited B03 prospective/algebra and B02 adverse
+  evidence. Stage: **B03 has not run** at this source; its 18 fits are prospective, not
+  evidence of learning or admission. A does not rewrite B's scheme or scientific question.
+- **C — skill information refresh.** Source
+  `4ef39c08ae55c6dd623718b4072a7ddcc9b9e913`, branch
+  `codex/skill-information-refresh`, path
+  `docs/research/candidates/skill_information_refresh/NOTES.md`, exact heading
+  `## Pro question 2026-09-20 C05 receiver-value bridge — Pro consultation input`.
+  [Pinned C input](https://github.com/CartmanFatass/My-paper-code/blob/4ef39c08ae55c6dd623718b4072a7ddcc9b9e913/docs/research/candidates/skill_information_refresh/NOTES.md).
+  Read that DM's question and directly cited C05 protocol/read/evidence and contrary
+  C03/C04 evidence. Stage: **C05 already has a bounded positive timing-value result**;
+  the single learned history matches the strong transparent VoI reference, not an extra
+  learning gain. Preserve the DM's distinction between opportunity and learned-package
+  value. A does not rewrite C's proposal or select its next experiment.
+
+Within B's input and its nested Context, `source_sha` means B's full fixed SHA above;
+within C's it means C's full fixed SHA above. Do **not** resolve their code/results against
+A's question branch. Explicitly frozen execution or historical SHAs inside any input keep
+their stated identity and meaning. A's historical 15-fit evidence remains at
+`961750ee58664022bbd3fad3365886e46fb3facc`; the newer A bridge does not change those runs.
+
+The B and C inputs each contain an empty Answer slot and conditional write instructions.
+They are **read-only inputs for this consultation**, not writable destinations: no B/C
+notebook has been lent to Pro. The only answer-only loan is the slot below this umbrella
+question in A's notebook. Stop rather than write to a different question or file.
+
+### Common current context and source precedence
+
+The actual transport message supplies this umbrella question's full `source_sha` after
+publication. Unless a different fixed revision is explicitly given above, read at that
+source: `docs/project/OPERATING_CONSTITUTION.md` sections 1–5 and 7–8, and
+`.agents/skills/hmasd-scientific-tools/SKILL.md` sections "Update the working explanation",
+"Simple-model and literature bridges", "Comparators and MARL information", "Statistics"
+and "Cost and exposure". Read research-engineering's "Checks and review" or "Execution
+and admission" only if a consequential recommendation depends on executable feasibility.
+
+For control state only, `docs/research/RESEARCH.md` at canonical main
+`fd8402f592ac310cdccc4619137c041796df29b6` has owner pause lifted and all three directions
+`exploring`, lead `Codex DM`. Its registration-era standing is not the latest scientific
+reading; the independently authored pinned inputs above provide that. The current owner
+explicitly reopened each entry-condition question and requested this consultation.
+Ordinary direction work is already authorized: Pro neither resumes a pause nor grants a
+batch. Constitution section 3 as amended 2026-09-20 has **no fit allowance**; stale
+"allowance/up to six" text in skills or old notes is superseded. Fits record cost only.
+Prospective arms, seeds and horizons, no scored-batch extension, preservation of failures,
+matched-information baselines and a fixed 3–5-new-seed/arm confirmation rule still apply.
+
+Read the pinned question and these Context sources before answering. Treat the stated
+current owner instruction and constitution as governance, skills as applicable methods,
+and historical/frozen files as their bounded evidence or contract. These replace
+conflicting old chat instructions for this question; preserve named frozen meanings.
+Do not substitute chat memory or a moving branch for inputs. Cite consequential sources
+actually used and identify decision-critical sources you could not read. Unavailable
+binary evidence is a stated limit, not permission to claim it was verified.
+
+### Requested return and the sole write boundary
+
+Return separate **A / B / C** judgments, preserving their different stages, and address
+the following for each without prescribing a quota of new candidates:
+
+1. Which entry conditions are established, falsified or still untested? Separate task
+   opportunity, lawful representation/identification, finite learnability and package
+   value; an ordinary-method reduction may be a useful answer rather than an innovation.
+2. Has the strongest ordinary/transparent same-information reference already absorbed
+   the proposed advantage? Name a missing *distinct* simple reference only if it changes
+   the comparison; an algebraically identical renamed arm is not extra evidence.
+3. Give the strongest legal counterexample or hidden leakage/unsupported-branch objection,
+   with the exact assumption or observation it turns on. Do not posit free teammate state,
+   context/request bits, new reward labels or model knowledge; do not silently change the
+   gates/controllers that the respective direction holds fixed. B's declared joint drift
+   remains its intervention, not a forbidden change or an inference about A/C.
+4. If useful continuation exists, specify its **single smallest decisive observation or
+   comparison**, what could falsify it, the strongest baseline and shared information/
+   tuning rights, an intermediate prediction plus native consequence, fit cost and the
+   dominant non-fit work. It can be an existing-method study; no prior proof, positive
+   pilot, new architecture or automatic larger-host migration is required.
+5. If no present continuation is worth its cost, explain the bounded investment-pause
+   judgment, what remains unresolved, and a concrete re-entry reason. Distinguish this
+   from universal nonexistence and from waiting for approval. State
+   `MATERIAL_DISSENT: yes/no` for that direction and why. Advice is not replication.
+
+Give advice within this question only: no experiments, new records, budget grants or new
+approval requirements. Write the complete answer **only inside the empty `### Answer`
+subsection immediately below this umbrella heading**, on branch
+`codex/termination-rule-experience-reuse`, target
+`docs/research/candidates/termination_rule_experience_reuse/NOTES.md` in
+`CartmanFatass/My-paper-code`. Fetch the latest target file and use its actual blob SHA
+for the write, while reasoning from the fixed sources. Preserve every other byte,
+including the question and all B/C files; stop on overlapping edits. Report the actual
+successful answer commit. If writing fails, return the **complete answer in chat**, not
+only a receipt, SHA, status or link. Root reconciles uncertain Send/write state without
+a duplicate consultation; each DM subsequently records its own adoption/rejection.
+
+### Answer
