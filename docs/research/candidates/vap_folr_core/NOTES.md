@@ -885,3 +885,263 @@ Improving exploratory training returns do not establish convergence or horizon a
 The idle judgment is "no worthwhile next intervention presently identified", not a permanent
 prohibition on future exploration. No additional comparison is selected or needed for the
 present decision not to promote this package.
+
+
+## Pro question 2026-09-19 folr-n-axis-cumulative-synthesis
+
+Conversation: new via Jev; the private account conversation address stays only in the local
+transport operation, never in this notebook or Git. The question key will identify delivery.
+
+Question type: direction-level evidence synthesis and next-useful-comparison advice, not
+Portfolio, confirmation approval, a compulsory post-result review, or an execution request.
+
+**核心问题：在成员变化后的合法历史组织这一 N 轴问题内，累计证据究竟改变了什么判断，
+现在是否存在一项比暂时空闲更值得投入的比较？如有，为什么它能改变一个有价值的选择；
+如无，哪些具体证据会使这个判断值得重看？** 请审视目前 DM 的空闲判断，不必赞同它，
+也不必为了继续而发明新架构。最后推荐一个下一步（可以是 idle）及其最强替代选项。
+
+### Owner instruction, current status and allowance
+
+Owner now asks: “可以 做好证据综合发送Pro即可 使用Jev”. The scope of this request is the
+synthesis and Pro consultation; no new fit is selected. The existing owner instruction keeps
+this Codex task itself as FOLR DM, with no Root layer/additional DM and with bounded advisers
+returning facts. FSD remains exclusively Claude-owned; do not take over FSD, start TRDL or make
+Portfolio decisions about other directions. General research pause is lifted in RESEARCH;
+FOLR is exploring but currently idle after the completed cache batch. No live FOLR experiment
+or uncertain launch exists. Advice itself grants neither a fit nor a direction change.
+
+The old auxiliary batch ended at its selected 2/2 fits; unused default allowance is not an
+extension. The cache idea used all selected 6/6 fits and ended. A genuinely prospective idea
+inside the already chosen direction can use the constitution's default up to six fits after
+its own question/design/exposure is recorded; this is not a per-idea owner-approval gate.
+Do not rename the same tuning or extend a closed batch after scores. A claim confirmation
+would need a new prospective claim, its own fresh seeds and fixed rule. Nothing here selects it.
+
+Current evidence and methods are published on `codex/folr-direct-dm`. Main at
+`22f998ae22be147ec000edfeef630f7008fad47d` still has the earlier FOLR standing; accepted direction
+commits through `b8167ff68e49f1f3aaff1ef8a99154c401c8e853` have not been integrated there.
+Use the pinned source of THIS question, not moving main. The main integration is a shared-write
+follow-up, not scientific evidence or a prerequisite to this advice. Preserve FSD's current row.
+
+### Direction question and actual comparison setting
+
+The research goal is a defensible answer about organizing a continuing agent's legitimately
+available history after physical membership changes, against competent generic recurrence,
+ultimately relevant to the UAV host. The present native results are on easy Traffic Junction:
+7x7 cross road, H20, five padded slots/five actions, vision 1, actual arrival/departure/slot
+replacement and a native team reward. `collect` resets without a curriculum `t_env`, so the
+arrival law stays at its initial setting. This is not a held-out agent-count transfer experiment,
+open ad hoc teamwork with unknown partner policies, or a measured UAV result. Current actor
+labels/metadata and FlexQMixer are fixed to five slots; changing max N is not a neutral config edit.
+
+The lawful interface supplies truthful public lifecycle information; each observer sees only
+allowed current physical/previous-action values. Modern Generic additionally receives its own
+subject-wise visible/seen/age metadata and has a 64-dimensional recurrent state, reset only on
+its own lifetime break. It can already retain lawful history through other agents' departures.
+The current-only augmentation Z still has this Generic recurrence. Neither G nor Z is a
+memoryless baseline. Central training mixer information does not become actor information.
+All joint team policies co-adapt during training; changing one learning package changes data,
+partner continuation and future visibility as well as fitted weights.
+
+The recent native recipe is complete-episode replay/double-Q FlexQMixer, gamma .99, RMSprop
+lr .0005/alpha .99/eps .00001, norm 10, target update every 200 episodes, fixed epsilon law.
+A full fresh fit is 5000 H20 episodes / 100000 transitions / 4969 optimizer updates, one final
+checkpoint, then 128 greedy episodes with zero updates. The earlier public-lifecycle B01-B03
+used only 32 final episodes and a simpler public-input actor without the later seen/age table.
+Training-instance effects and conditional evaluation noise must remain distinct. Shared seed
+labels do not certify paired counterfactual worlds. No pooled leaderboard, cross-study causal
+A/Z/G ranking, or trained-population significance/equivalence is licensed by these tables.
+No tuned same-information headroom or converged Generic optimum has been established.
+
+### Cumulative evidence: preserve positive, adverse and incomplete observations
+
+The following is a bounded synthesis of the scientific families relevant to this decision,
+not a claim that all direction-lifetime fits, failed attempts and support costs were enumerated.
+Paths in this section are relative to `docs/research/candidates/vap_folr_core/` unless otherwise
+stated. Historical file vocabulary and decision rules remain evidence, not current governance.
+
+| Earlier family | Observations and comparison unit | What this changes / leaves unresolved |
+| --- | --- | --- |
+| N3 routing B04 on the separate B3 three-transition host | Three seeds; TYPED minus GENERIC stale-load AUC +0.0026041667, within original .05 MEI; both learned final returns .98828125, RESET .5065104167, simple LATCH .9986979167. Writer/routing horizons differ entirely from H20 Traffic Junction. | Lawful carried information can be useful in that constructed task, while a typed route did not establish an increment over learned Generic. Not a Traffic Junction or UAV result; within-MEI is not equivalence. Source: [B04](N3_FOLR_ROUTING_B04_RESULT_EVIDENCE_20260904.md). |
+| Public-lifecycle RETAIN vs event RESET B01-B03 | Three successive fresh pairs, 32 final episodes per fit: RETAIN minus RESET -2.0021875, -1.9228125, +2.559375. | Two reset-favoring observations followed by reversal; both sides must survive. These are separately trained reset policies, not post-training hidden-state erasure. Sources: [B01](FOLR_PUBLIC_LIFECYCLE_B01_RESULT_EVIDENCE_20260909.md), [B02](FOLR_PUBLIC_LIFECYCLE_B02_RESULT_EVIDENCE_20260909.md), [B03](FOLR_PUBLIC_LIFECYCLE_B03_RESULT_EVIDENCE_20260909.md). |
+| Event timing B01-B03 | At 128 final episodes: EVENT minus RETAIN +2.804765625, -.590703125, -5.44609375. In B01 EVENT minus RANDOM +1.363671875; B02 RANDOM minus RETAIN -.140859375. B03 was a RETAIN/EVENT pair. RANDOM uses p=.1 per eligible survivor and is not reset-dose matched. | Initial apparent timing benefit did not persist across the later realizations. No event-timing causality or universal retention/reset ranking. Sources: [timing B01](FOLR_PUBLIC_LIFECYCLE_TIMING_B01_RESULT_EVIDENCE_20260909.md), [B02](FOLR_PUBLIC_LIFECYCLE_TIMING_B02_RESULT_EVIDENCE_20260910.md), [B03](FOLR_PUBLIC_LIFECYCLE_TIMING_B03_RESULT_EVIDENCE_20260910.md). |
+| Fixed-half and learned scalar retention | HALF minus RETAIN +1.56546875 then -4.293046875; LEARNED minus RETAIN +1.763359375, -1.76953125, -1.215546875. Each is a fresh selected pair at 5000/4969/128. The learned gate adds 129 coefficients. | More gradual/trainable retention did not establish a stable package gain. Does not identify useful-memory selection or prove gates inherently harmful. Sources: [HALF B01](FOLR_PUBLIC_LIFECYCLE_HALF_B01_RESULT_EVIDENCE_20260910.md), [B02](FOLR_PUBLIC_LIFECYCLE_HALF_B02_RESULT_EVIDENCE_20260910.md); [LEARNED B01](FOLR_LEARNED_RETENTION_B01_RESULT_EVIDENCE_20260911.md), [B02](FOLR_LEARNED_RETENTION_B02_RESULT_EVIDENCE_20260911.md), [B03](FOLR_LEARNED_RETENTION_B03_RESULT_EVIDENCE_20260911.md). |
+| Entity-history replacement BANK | B01 Generic stopped at 4253/5000 episodes with no final endpoint, so no pair polarity. A later reference-use comparison used one new Generic fit against the fixed old BANK and observed -5.932421875; zero new BANK fits. Fresh/fresh B02/B03 then gave BANK minus Generic -4.830859375 and -6.63671875. | Technical incompleteness and retained-policy evaluation are not extra learning replications. The two fresh negatives constrain the replacement GRU16 entity-bank package, which differs in architecture/capacity from Generic64. Sources: [incomplete B01](FOLR_ENTITY_HISTORY_B01_RESULT_EVIDENCE_20260912.md), [reference-use](FOLR_RETAINED_REFERENCE_USE_B01_RESULT_EVIDENCE_20260913.md), [B02](FOLR_ENTITY_HISTORY_B02_RESULT_EVIDENCE_20260914.md), [B03](FOLR_ENTITY_HISTORY_B03_RESULT_EVIDENCE_20260914.md). |
+
+The historical public families and newer entity-history families differ in actor interface and
+intervention; do not pool them to infer a single memory effect. The B3 writer/routing phases
+and native H20 fits also have different exposure units. Original MEI/category readings remain
+unchanged; this consultation does not reclassify frozen results under a new rule.
+
+| Recent family | Complete observed native evidence | Design and interpretation |
+| --- | --- | --- |
+| Learned persistent augmentation A vs Generic G | Discovery A-G +5.29640625 (one fresh fit per arm); prospective later repetition -5.830625 and -.109921875 (two fresh fits per arm), original MIXED_BLOCK_PATTERN retained. | A keeps Generic64 and adds learned pair-GRU16 plus attention/fusion; actor params G103173/A192741. The positive discovery is preserved, but it did not reproduce in the two later blocks. Package evidence, not isolated persistence. Sources: [discovery](FOLR_ENTITY_HISTORY_AUGMENTATION_B01_RESULT_EVIDENCE_20260914.md), [repeat](FOLR_ENTITY_AUGMENTATION_REPEAT_B01_RESULT_EVIDENCE_20260915.md). |
+| Persistence/current-augmentation decomposition | Separate fresh comparisons: A-Z -3.069453125; Z-G -4.44375. One fit per arm in each different study. | Z retains Generic recurrence; A/Z have the same augmented modules, G fewer parameters. These outcomes cannot be algebraically chained into a cross-study causal ranking. Sources: [A-Z](FOLR_ENTITY_PERSISTENCE_B01_RESULT_EVIDENCE_20260914.md), [Z-G](FOLR_ENTITY_CURRENT_INCREMENT_B01_RESULT_EVIDENCE_20260914.md). |
+| Predictive auxiliary A01 | DETACHED 2.69046875, COUPLED -3.8690625; difference -6.55953125. One fresh fit per arm, complete. Common uniform-policy prediction MSE 1.9158295 vs 1.8038883 on identical semantic panel bytes. | Both train a separate linear head predicting next-three-step mean team reward; only COUPLED sends .1-weight head-loss gradient into Generic actor. Slightly better probe prediction with worse native control weakens this package; probe law differs from trained behavior. It diagnoses neither history redundancy nor a causal representation failure. Source: earlier A01 prospective/result entries in this NOTES; implementation `356bb3cc53479946bc031a24ada1ea979769fddf`. |
+| Deterministic last-sighting cache A01 | Six fresh fits, three per arm. Ordered cache-G differences -.2340625, -2.839140625, -3.18859375; descriptive mean -2.087265625. | Same learned Generic64 modules/103173 actor parameters and constructor RNG, unchanged native learner; own last-visible 5x9 measurements cached and cleared on either observer/subject lifetime break, attend over active seen subjects. No learned bank/fusion or auxiliary loss. Storage/read bandwidth and numerical execution organization differ. All three point signs adverse; not a confirmation, universal population harm or equivalence of the smallest contrast. Source: prospective/result entries in this NOTES; implementation `e7ba09858760a29903e5d23e91b274a333d8feb6`. |
+
+Cache sole-final values (all 128 episodes, common evaluation seed 1784101):
+
+| Training seed | Generic | Cache | Cache minus Generic |
+| --- | ---: | ---: | ---: |
+| 784101 | -.19578125 | -.42984375 | -.2340625 |
+| 784201 | 3.77453125 | .935390625 | -2.839140625 |
+| 784301 | 1.964140625 | -1.224453125 | -3.18859375 |
+
+These recent tables together contain 18 selected fresh fits across different questions; that
+is not the lifetime total, not 18 repetitions of one hypothesis and not a pooled inference unit.
+All new A01 outputs retain native summaries/progress/terminal witnesses, actual counts and
+parameter movement. The DM verified finite populated checkpoints and artifact/source hashes;
+Pro must distinguish that reported local verification from what it can itself inspect remotely.
+Binary checkpoints/panels are local only at the recoverable paths in the preceding NOTES entries.
+They are not available through GitHub. Per-episode train/final returns and per-update progress
+for the new studies are in Git. Improving exploratory train returns do not prove convergence.
+
+Recent supporting output roots, all at source_sha:
+- `runs/vap_folr_core/predictive_aux_a01_detached_783101/` and
+  `runs/vap_folr_core/predictive_aux_a01_coupled_783101/`: `summary.json`, update JSONL and exits.
+- `runs/vap_folr_core/last_sighting_a01_generic_784101/`, `last_sighting_a01_cached_784101/`,
+  `last_sighting_a01_generic_784201/`, `last_sighting_a01_cached_784201/`,
+  `last_sighting_a01_generic_784301/`, `last_sighting_a01_cached_784301/`, all under
+  `runs/vap_folr_core/`: `summary.json`, `training-progress.jsonl`, `process-exit.json`.
+
+### What the analytical and diagnostic work does NOT add
+
+The source-derived 7x7 counterexample in this NOTES establishes conditional one-step opportunity:
+with a specified known teammate motion law, the same lawful current cues but different earlier
+sightings permit different preferred actions, while uniform focal-action-averaged reward means
+can coincide. It is not the actual learned teammate law, the fully uniform team probe, the
+three-step target, H20 gain, a Generic representational shortfall, or an N-change-specific increment.
+Post-hoc retained-panel geometry counted 718/7281 (DETACHED final), 180/7591 (COUPLED final) and
+297/7072 (common probe) active observer ticks. These are policy-induced geometric strata, not
+avoidable collisions, causal effects or realizable headroom. One-step local gains cannot be
+summed into episode benefit. Erasing trained hidden state would be a distribution-shifting
+intervention and would not identify insufficient/sufficient memory capacity.
+
+The implemented `action_contrast_a01` environment-reconstruction/counterfactual diagnostic was
+DESELECTED before launch. It has zero actual-checkpoint replay and zero new fits; code review
+success supplies no scientific reason to execute it. Do not revive it merely because it exists.
+The owner corrected an earlier chain of narrow toy/geometry/replay questions that could be
+answered rigorously but did not justify their cost or reliably identify long-run learning
+bottlenecks. Direct learning comparisons are permitted without toy success, history-necessity
+proof, a perfect mechanistic account or exhaustive headroom/diagnostic preliminaries.
+
+### Working explanation to challenge, and the live decision
+
+Observed package failures lower the practical case for the tested ways of organizing history.
+They do not by themselves separate (i) decision-relevant opportunity under the actual joint
+policy, (ii) what a generic recurrent representation can hold, (iii) what it learns at this
+exposure, and (iv) whether the total candidate earns its extra costs. The source counterexample
+supports a possibility in (i), not its materiality; the learning screens mostly address (iv).
+The older positive observations prevent rewriting the history as uniformly negative.
+
+DM's present judgment: do not promote the failed cache/auxiliary/old augmentation packages.
+With no specifically justified successor currently selected, leave FOLR idle for investment
+reasons. This is open to challenge and is not a claim that the N-axis question is exhausted.
+In particular, a list of negative packages is not already a paper-grade negative answer about
+legal history or membership changes. A generic capacity/horizon issue, task/distribution issue,
+attention/credit issue or new useful representation is not established just by naming it.
+
+Compare a small number of actually plausible choices, not an obligation to fill a candidate
+list: a direct finite-learning comparison on this host when a concrete alternative supports it;
+a materially justified focus on a membership mechanism/target-host question within FOLR;
+a specifically useful existing-evidence or primary-source bridge; and remaining idle. A change
+of task/population/question must be named, not presented as replication or a budget reset. Do
+not assume the UAV adapter/baseline already exists for the proposed question. Broader direction
+activation/archive/reprioritization can only be advice for an owner-triggered Portfolio later.
+
+If you recommend a next comparison, explain the resulting defensible claim or use decision,
+its strongest simpler explanation, the competent matched-information baseline and any relevant
+training/tuning exposure, the predictions that differ, and what each outcome would change.
+For a targeted repair give intermediate AND native predictions; for a package screen explicitly
+forgo attribution where appropriate. Propose the smallest informative exposure, count every arm,
+seed and tuning/auxiliary fit, and account for dominant non-fit work. Unchanged replication can
+be valid when repeatability really changes a decision; a new architecture is not required.
+Do not automatically tune one of the closed packages or propose a long diagnostic prerequisite
+chain. If idle remains best, state why compared with the strongest feasible continuation and
+what would make a return worthwhile; exhaustive falsification is not required.
+
+Known cost context: cache A01's six overlapping local CPU FP32 fits took 42.10 minutes from
+first acceptance to last OS exit; summed runner wall 14028.998 s, max individual RSS 576612 KiB.
+Each cache fit was about 40 minutes, each Generic about 37–38 in that concurrent batch. Auxiliary
+A01 took 1785.395 and 1844.114 s per process. These are recorded implementation facts, not a
+universal fit rate or total research cost. Full lifetime engineering/provider/support cost is
+unknown. Larger models, supervised preparation, simulation branching and nested search are real
+work even if they are called zero RL fits. No universal benchmark sweep or prototype is required.
+
+### Context and source precedence
+
+All repository paths here resolve at **source_sha**, the full immutable question commit supplied
+in the actual send message, unless an explicit older execution revision is named. The older
+execution SHAs identify the original experimental semantics; current methods do not rewrite them.
+Read the question and the decision-relevant sources before answering; use the synthesis as a map,
+not a substitute for consequential source checks. No recursive historical-governance preload.
+
+Current governance / method:
+- `docs/project/OPERATING_CONSTITUTION.md`, sections 1–5 and 7–8: project objective, current
+  responsibility, fits, records, advisory Pro and scientific minima. The newer direct-DM owner
+  assignment and consultation-only scope above apply to this task.
+- `docs/research/RESEARCH.md`, owner pause and FOLR row: branch's current direction standing;
+  other directions are context only.
+- `.agents/skills/hmasd-scientific-tools/SKILL.md`, Explore an idea / Update the working
+  explanation / Simple-model and literature bridges / Comparators / Statistics / Cost and
+  exposure: cumulative judgments, direct comparisons, no required toy gate, information and cost.
+- `.agents/skills/hmasd-research-engineering/SKILL.md`, Core versus experimental / Checks and
+  review / Execution and admission: only when a proposed next step depends on implementation
+  or feasibility. It adds no scientific authority or mandatory pre-research approval.
+
+Core evidence and mechanism checks:
+- This `NOTES.md`: inherited evidence; predictive auxiliary A01 prospective and complete result;
+  native counterexample and qualifications; scope correction before diagnostic launch; cache
+  A01 prospective entry and complete six-fit reading. Older family result files are linked above;
+  follow the ones that bear on your consequential conclusions, preserving their bound meanings.
+- `experiments/candidates/vap_folr_core/public_lifecycle_b01/native_env.py`, `environment.py`,
+  `collection.py`, `learner.py`, `flex_qmix.py`: actual reward/dynamics, lifetime and training path.
+- `experiments/candidates/vap_folr_core/entity_history_b01/environment.py`, `model.py` and
+  `entity_history_augmentation_b01/model.py`: lawful own-observer information, Generic, BANK and A/Z.
+- `experiments/candidates/vap_folr_core/predictive_aux_a01/learner.py` and
+  `last_sighting_a01/model.py`: actual two recent interventions. Their runners are
+  `scripts/run_folr_predictive_aux_a01.py` and `scripts/run_folr_last_sighting_a01.py`.
+- New run summaries/progress listed above; read the fields/output needed to substantiate your
+  conclusion. Do not claim to have read unavailable local binaries or to reproduce a local check.
+- `docs/research/designs/PREDICTIVE_INTERACTION_AUGMENTATION_PROPOSAL_20260919.md`, sections 1–2
+  and 4–6, is the original optional proposal, not an adopted experiment roadmap. H-aux has now
+  one adverse realization; H-pre is untested. A larger pretrained model is not the default rescue.
+- If recommending a concrete UAV path, inspect relevant actual source such as
+  `envs/uav_service_restoration/README.md`, `env.py`, `observations.py`, `events.py`, `baselines.py`
+  and `adapter.py` as needed. Name any missing membership/history/comparator implementation;
+  no UAV outcome or feasibility claim follows from this list or FSD's unrelated K-axis results.
+
+For literature-based recommendations, verify primary passages and state the mapping, assumptions
+and MARL coupling they omit. Literature and adviser agreement do not supply empirical replication
+here. State any decision-critical source you could not read and narrow dependent conclusions.
+Historical DIRECTION/Portfolio/packet rules and old chat instructions do not govern this question.
+
+### Return and answer-only write boundary
+
+Please answer in Chinese with a connected research argument, an explicit recommendation and
+its strongest competing option. Distinguish observed facts, strengthened/weakened/untouched
+judgments and fresh conjectures. Make the next observation's decision value concrete; no new
+insight, positive result, prototype, fixed candidate count or new architecture is owed. Address
+whether the DM's idle decision is justified and what a defensible eventual contribution would
+actually require. Return MATERIAL_DISSENT yes/no for material disagreement with the current
+interpretation/decision, and explain the disagreement if present. Do not create workflow rules.
+
+Repository: `CartmanFatass/My-paper-code`.
+Target branch: `codex/folr-direct-dm`.
+Target path: `docs/research/candidates/vap_folr_core/NOTES.md`.
+Question heading: `## Pro question 2026-09-19 folr-n-axis-cumulative-synthesis`.
+Answer heading: `### Answer` immediately below, inside THIS question only.
+
+Read the immutable question/source for reasoning, then fetch the latest target file and actual
+blob SHA for writing. Write only the currently empty answer subsection. Preserve the question,
+all preceding notebook bytes, all other files and all other answer sections; stop on overlap.
+Do not add a top-level `## ` heading inside the answer (use `####` or prose) or it would end this
+question's subsection. No training, model execution, new budget, governance edit, FSD/Portfolio
+change or main integration is requested from Pro. Do not include private account identifiers
+or the Jev conversation address in a repository write. On success report the actual answer
+commit. If GitHub writing fails, return the full answer in chat so the author can preserve it
+in this same subsection, not merely a receipt, link or invented commit. DM will read and record
+adoption/modification/rejection separately; advice is not acceptance or execution authorization.
+
+### Answer
