@@ -1,0 +1,189 @@
+{
+  "object": "STDL_JOINT_REPLAY_B02",
+  "direction": "skill_teammate_drift_learning",
+  "arm": "joint_is",
+  "replay_arm": "joint_is",
+  "initialization": "reward_upper",
+  "seed": 92002,
+  "launch_sha": "3ac44381f093748ffe57f3da87fcb1ac201943ed",
+  "status": "complete",
+  "started_fits": 1,
+  "scientific_scope": "exploratory common-initialization repair; scripted two-agent line host",
+  "learning": {
+    "object": "STDL_JOINT_REPLAY_B02",
+    "status": "COMPLETE",
+    "arm": "joint_is",
+    "seed": 92002,
+    "config": {
+      "version_names": [
+        "A",
+        "B"
+      ],
+      "ego_move_probabilities": [
+        0.8,
+        0.6
+      ],
+      "teammate_right_probabilities": [
+        0.8,
+        0.2
+      ],
+      "teammate_move_probability": 0.8,
+      "version_schedule": [
+        "A",
+        "B",
+        "A",
+        "B",
+        "A"
+      ],
+      "episodes_per_block": 60,
+      "macros_per_episode": 10,
+      "macro_duration": 3,
+      "gamma": 0.95,
+      "epsilon": 0.2,
+      "alpha": 0.025,
+      "batch_size": 32,
+      "recent_capacity": 300,
+      "evaluation_interval": 10,
+      "primary_evaluation_episodes": [
+        70,
+        80,
+        90,
+        130,
+        140,
+        150,
+        190,
+        200,
+        210,
+        250,
+        260,
+        270
+      ],
+      "initialization": "reward_upper"
+    },
+    "counts": {
+      "episodes": 300,
+      "macro_transitions": 3000,
+      "primitive_transitions": 9000,
+      "minibatch_updates": 3000,
+      "replay_sample_uses": 96000,
+      "evaluation_panels": 31,
+      "evaluation_episodes_simulated": 0,
+      "evaluation_parameter_updates": 0
+    },
+    "movement": {
+      "initial_q_l2": 253.1728339226402,
+      "initial_q_l2_norm": 253.1728339226402,
+      "initial_q_nonzero_entries": 500,
+      "final_q_l1_movement": 1120.619730526994,
+      "final_q_l2_movement": 56.982813742438395,
+      "final_q_linf_movement": 4.826142596605248,
+      "final_changed_q_entries": 465,
+      "final_q_nonzero_entries": 500,
+      "q_entries": 550,
+      "terminal_q_linf": 0.0
+    },
+    "primary_adaptation_endpoint": {
+      "episodes": [
+        70,
+        80,
+        90,
+        130,
+        140,
+        150,
+        190,
+        200,
+        210,
+        250,
+        260,
+        270
+      ],
+      "complete": true,
+      "normalized_service_returns": [
+        0.6313625490409682,
+        0.5700281206207873,
+        0.5905775163934757,
+        0.5968170580480054,
+        0.6063471032821983,
+        0.6548660754883068,
+        0.596378121719297,
+        0.6390484867151097,
+        0.6334510228005452,
+        0.6229687685646889,
+        0.639547937070291,
+        0.6468204198791218
+      ],
+      "mean_normalized_service_return": 0.6190177649685663
+    },
+    "optimal_informational_reference": {
+      "A": {
+        "discounted_service_return": 12.022275771631746,
+        "normalized_service_return": 0.7653978334855224
+      },
+      "B": {
+        "discounted_service_return": 11.72644451409533,
+        "normalized_service_return": 0.7465637451733943
+      }
+    },
+    "final_collection_diagnostics": {
+      "current_version_sample_count": 1800,
+      "collected_right_fraction": 0.3511111111111111,
+      "distinct_state_action_entries": 381,
+      "both_actions_state_time_cells": 160,
+      "greedy_right_fraction_nonterminal_cells": 0.44,
+      "changed_current_table_nonterminal_q_entries": 465
+    },
+    "final_normalized_service_return": 0.7000632210200209
+  },
+  "version_adaptation_endpoints": {
+    "A": {
+      "episodes": [
+        130,
+        140,
+        150,
+        250,
+        260,
+        270
+      ],
+      "normalized_service_returns": [
+        0.5968170580480054,
+        0.6063471032821983,
+        0.6548660754883068,
+        0.6229687685646889,
+        0.639547937070291,
+        0.6468204198791218
+      ],
+      "mean_normalized_service_return": 0.6278945603887687
+    },
+    "B": {
+      "episodes": [
+        70,
+        80,
+        90,
+        190,
+        200,
+        210
+      ],
+      "normalized_service_returns": [
+        0.6313625490409682,
+        0.5700281206207873,
+        0.5905775163934757,
+        0.596378121719297,
+        0.6390484867151097,
+        0.6334510228005452
+      ],
+      "mean_normalized_service_return": 0.6101409695483638
+    }
+  },
+  "artifacts": [
+    "config.json",
+    "curves.json",
+    "transitions.npz",
+    "q_values.npy"
+  ],
+  "runner_wall_seconds": 0.9603266269841697,
+  "runner_cpu_seconds": 0.853739024,
+  "resource_scope": "single scientific child process; CPU user plus system",
+  "peak_rss_kib": 45132,
+  "user_cpu_seconds": 0.830178,
+  "system_cpu_seconds": 0.035748999999999996
+}
