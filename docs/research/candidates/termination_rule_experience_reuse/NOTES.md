@@ -234,3 +234,38 @@ executed. Review will inspect the accepted estimator correction and result ident
 Root still owns canonical active/lead integration; no result launch or run handle exists.
 The current judgment is unchanged: ordinary off-policy methods may already suffice under
 the declared fixed teammate reduction; the proposed native ordering remains unmeasured.
+
+## 2026-09-20 — A01 independent engineering review accepted; canonical-index dependency
+
+Published inputs: `ec3f7ee0fbbce7dcfe7d0bef620d5722feb2d3d7` on
+`origin/codex/termination-rule-experience-reuse`. Independent Reviewer
+`/root/dm_termination_reuse/a01_engineering_review` read the committed diff and contract,
+traced CLI/admission/source binding, collector, return/update, evaluator and artifacts,
+and independently ran the focused suite: **16 passed in .16 s**. It found no material
+executable defect and requested one prospective wording clarification. I accept the
+implementation and its checks; the Reviewer does not own the scientific decision.
+
+**Evaluation-panel clarification, before any result:** each block has **64 worlds fresh
+relative to training**, reused at all four checkpoints and across all three arms in that
+block. The word "fresh" in the original entry did not mean 64 new worlds per checkpoint.
+This common panel is exactly the addressed RNG scheme and existing test; no code, seed,
+world, endpoint or selection rule has changed. There are 192 distinct evaluation worlds
+across the three independent blocks, executed 12 times each (four checkpoints times three
+arms), for the declared 221,184 evaluation team steps. Checkpoints/episodes are nested
+within three independent training blocks, not extra training samples.
+
+Similarly, each block's 512 behavior episodes is identical across its three arms. There
+are 147,456 unique seeded behavior transitions across the three blocks, generated and
+processed three times for the declared 442,368 executed training team transitions. Data
+reuse across comparison arms matches the sample exposure; repeated generation remains
+part of measured work and is not an efficiency claim. Different arms' target arithmetic
+and resulting update magnitudes remain package differences.
+
+No A01 result-bearing fit, evaluation, accepted operation or live observer exists. The
+tiny correctness fixtures establish implementation behavior only. Current state is
+exploring, implementation accepted, native learning comparison unread/unrun. The sole
+current execution dependency is Root's confirmed integration of the A active/lead row
+into canonical main and the live canonical checkout, followed by native admission on
+local_linux. Re-entry is that integration notification; no recurring check or extra
+approval of ordinary science is requested. Keep the batch fixed and preserve any eventual
+admitted handle. Nothing here grants a result claim or changes another direction.
