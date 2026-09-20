@@ -670,3 +670,174 @@ the simultaneous process total. Runner timing excludes final publication/exit;
 CPU excludes parser/admission/import preparation. Complete preparation, engineering,
 support and concurrent total memory remain unmeasured. Different arm counts and
 concurrency preclude treating the shorter span than B02 as a method speedup.
+
+## 2026-09-19 — owner continuation and selected B04: scalar renewal versus ordinary feedback
+
+The owner clarified that closing one hypothesis must not end the direction's research
+flow. UCOPE remains the Codex session's active K direction alongside Claude's independent
+FSD work. The earlier idle wording described the end of B03, not an owner pause or an
+investment decision against UCOPE. After each bounded result the DM will update the
+working explanation and select a useful next observation, diagnosis, revision or source
+question. This does not extend a completed batch or increase the credibility of a hypothesis.
+
+### New question and inherited evidence
+
+B03 provisionally retained the simpler B package over R: R minus B was −0.0688717720,
+−0.0261957853 and +0.0119469460. The third block remains contrary evidence. B02's two
+positive R minus G differences and historical 8901's negative R minus G difference remain
+part of selection history. Neither those results nor B03 identifies B minus G on matched
+fresh training blocks. This direct use comparison is the reason for B04, not an attempt
+to add seeds until B03 becomes uniform.
+
+**Question:** does the selected learned scalar-renewal package B outperform ordinary
+per-tick feedback G under the inherited information and training budget? The prospective
+prediction is a positive descriptive B−G difference if the package is useful here.
+We expect actual KEEP exposure, movement of B's scalar gate and both arms' actors/critics;
+these are execution/learning observations, not identifying evidence for a mechanism.
+
+The strongest simpler explanation of a B advantage is altered action-noise persistence
+and command copying, without any benefit from learning a renewal rate. B's phase feature
+and policy-gradient exposure also differ from G. The study is explicitly a package
+comparison; it cannot attribute an effect to state conditioning, rate learning or short
+duration alone. B's velocity actor still uses local feedback. G is the inherited ordinary
+feedback comparator under this fixed exposure, not an established optimum over tuned
+ordinary controllers. Its actual learning and native performance will be inspected and
+all valid adverse instances retained.
+
+### Prospective exposure, information and outcome reading
+
+- Object: `UCOPE_SCALAR_FEEDBACK_B04`; masters **8931, 8932, 8933**; two learned arms
+  B and G per master, **six new fits total** on `local_linux`. B then G run sequentially
+  inside each invocation; up to three independent invocations may run concurrently after
+  separate fresh actual-node admission. There is no new R, F or fixed-rate B fit.
+- Each arm trains **2048 episodes × 256 primitive steps**, in 1024 two-episode rollouts
+  with four PPO epochs each: 4096 Adam calls per arm. Final sampled-policy evaluation is
+  64 fresh shared exogenous worlds per arm, with a zero-fit hover H reference. Only the
+  final checkpoint is evaluated; no intermediate selection, tuning or additional panel.
+- The native five-UAV/50-user environment, reward and objective J (sum of five native
+  rewards divided by 256), CPU FP32, one Torch/BLAS thread, model sizes and all learner
+  settings remain as in B03 and historical G: gamma 1 raw Monte Carlo returns, global
+  advantage normalization, agent-compound PPO ratios, clip .2, value coefficient .5,
+  entropy 0, gradient clip .5, Adam .0003 and recurrent chunks of 32. Recurrent state
+  updates every primitive tick and resets only at episode boundaries.
+- B is exactly B03's zero-initialized two-logit input-independent KEEP/END gate and
+  reactive collector/update. Forced-fresh becomes eligible; eligible KEEP copies the
+  actual previous command and forces freshness next tick; eligible END samples a fresh
+  command and stays eligible. Maximum hold remains two ticks; full return and final-tick
+  gate credit remain. Its probability is learned independently in each fit, never set
+  from earlier endpoint probabilities.
+- G has no duration head, samples a fresh velocity each tick and uses the unchanged
+  ordinary collector/update with `renewal=True`, support `(1,2)`, `agent_compound`,
+  entropy 0 and no value moments. Both arms share initial common actor/critic bytes per
+  master but have private model, optimizer and RNG state. Both see current local
+  observations, previous actual command and their own phase; G's phase is zero, B's is
+  its eligibility flag. The centralized critic receives the same state/command fields
+  and each arm's own phase. No actor receives other agents' hidden information or future
+  observations. Equal dimensions/exogenous information do not make phase representation
+  or optimization exposure identical.
+- With `base=100000*master`, common initialization is base+11; B's gate is deterministically
+  zero. Training worlds are base+10000+episode and evaluation worlds base+20000+episode.
+  B training velocity/gate offsets are 51/52 and evaluation offsets 90000/95000+episode;
+  G uses 21/22 and 50000/60000+episode. Evaluation leaves training RNGs and learned weights
+  unchanged and makes zero optimizer updates. H uses the same final world addresses.
+- Primary: the complete **B−G** vector and mean in every block, then the descriptive
+  mean/range across three independent training blocks. B−H and G−H are secondary reference
+  checks. World rows are conditional panel observations, not more independent training
+  instances. There is no significance/equivalence verdict or new categorical MEI threshold.
+- Consistent useful positive differences strengthen keeping B as a development candidate;
+  mixed/small differences leave practical use unresolved; repeated negative differences
+  reduce B's priority and end this package's current investment. Poor native performance
+  of both arms limits usefulness even when a relative difference is favorable. Every
+  branch preserves all outcomes and selects the next scientific action rather than
+  automatically appending seeds or closing UCOPE. No branch automatically confirms a claim.
+
+There are fifteen completed related reactive fits before B04, plus older T/L development;
+completion of these six would make **21 related fits**, not six unselected fits and not
+confirmation. A failed started fit counts. A technical failure, partial panel or missing
+telemetry is treated at its actual scope; no replacement is authorized by this allocation.
+Each invocation has the inherited ordinary 6000-second watchdog; B03's roughly 29-minute
+parallel span is a planning reference, not a resource or speed claim for B04.
+
+The independent ResearchCritic returned `MATERIAL_DISSENT: no`: the direct same-batch B/G
+comparison changes the development decision and is not a disguised B03 extension. The DM
+adopts its cautions about package confounds, baseline tuning limits and conditional panels.
+Adding a frozen-rate arm would reduce the main comparison to two training blocks and answer
+the secondary attribution question first; that control is not selected here.
+
+### L0 engineering scope
+
+Deliver a fixed B/G/H study in `experiments/candidates/ucope/scalar_feedback_b04/`, an
+admission-first `scripts/run_ucope_scalar_feedback_b04.py`, and focused tests under
+`tests/experiments/candidates/ucope/scalar_feedback_b04/`. Reuse unchanged B03 ScalarGate,
+the reactive collector/update for B and the ordinary collector/update for G/H. Do not edit
+historical studies, common policies/learners, native environments, FSD paths or launch
+infrastructure. The new study may reuse appropriate read-only publication helpers; do not
+monkeypatch an earlier study's global scope or build a general experiment framework.
+
+Preserve the scope above, incomplete-output handling and original terminal evidence. Save
+raw episode/update JSONL, complete contrast panels, actual learning/evaluation counts,
+parameter displacement by common actor/critic and B gate, B final logits/probabilities,
+native checkpoint identity and SHA256, artifact hashes and honestly scoped wall/CPU/RSS.
+Handle G's absent gate explicitly, without invented zero-logit probabilities or scalar
+parameter groups. The CLI only admits the three selected masters and frozen scientific
+exposure; any synthetic fixture stays internal and has no scientific launch flag.
+
+Checks must protect dispatch to the correct collector/update, unchanged G semantics,
+common initialization/private state, scalar learning/input independence, G's absent gate,
+fixed scope, final-panel reconstruction, failure publication, evaluation isolation and
+admission-before-effects. Reuse prior checks for unchanged code. Test scratch follows
+tests/AGENTS.md. No native smoke fit is allocated. Independent engineering review precedes
+DM acceptance, commit/push and guarded detached launch; Monitor adopts exact accepted handles.
+Implementer owns only the three new code/test path groups above, no notebook or index edits,
+no commit/push, native launch, Pro transport or child delegation.
+
+### Owner-supplied temporal-alignment insight, adopted before B04 execution
+
+The owner supplied the independent design/prototype
+[`TEMPORAL_BEHAVIOR_STATE_ALIGNMENT_20260919.md` at 646ab539](https://github.com/CartmanFatass/My-paper-code/blob/646ab539d2a2ef689d0e4ee977f327f79cf2215b/docs/research/designs/TEMPORAL_BEHAVIOR_STATE_ALIGNMENT_20260919.md).
+The DM read its complete, clean committed version in the temporal-alignment worktree,
+including the later exact one-decision identification argument. This is advice and
+synthetic/theoretical evidence, not a native result or a new authority over UCOPE.
+
+Adopted clarification: G's innovations are sampled freshly each tick, but its actions are
+not IID because their means depend on recurrent history, current observation and the
+previous command. Copying a command in B changes temporal correlation, state visitation
+and learning exposure. The document's two-step displacement-variance example gives a
+possible explanation, not a UAV coverage or return prediction. B−G remains a useful
+whole-package comparison, not evidence for clever renewal timing or necessary rate learning.
+
+The one-decision covariance decomposition separates dependence on new observations and
+retained information only under its fixed predecision distribution and common continuation.
+Its counterexamples show that global exchange gaps can come from previous-command filtering
+or can hide cancelling contributions. The identity does not extend by summing logged rows
+through an altered full-horizon MARL trajectory. Therefore the proposed native calendar
+exchange is not selected to answer the value of the newest observation. A frozen-calendar
+substitution question remains distinct. No AR-noise arm, conditional-likelihood change,
+new diagnostic panel or additional fit is introduced into B04.
+
+The independent Critic read the supplied source and returned `MATERIAL_DISSENT: no`:
+the insight tightens interpretation but does not displace B04's direct development question.
+The DM retains the selected scope and all adverse/selection history. No B04 fit has started.
+
+### Bounded continuation window explicitly authorized by the owner
+
+After an automatic approval review rejected an unbounded recurring workflow, the owner
+explicitly authorized a bounded one: 24 hours of 30-minute continuation in this task,
+at most two new exploratory batches and twelve new fits including B04's six, with branch
+publication and Jev Pro allowed, no main merge and no other direction launch. The accepted
+window is **2026-09-20 04:06:07 UTC through 2026-09-21 04:06:07 UTC**. Any failed started
+fit consumes this allowance. The scheduler prompt further limits each fit to 2048 episodes
+of 256 steps and at most two focused Jev Pro questions in this window. A second batch is
+not selected merely because capacity remains.
+
+The native app accepted the active current-task heartbeat `ucope-24-12`. It must resume
+saved progress and accepted handles, not recreate B04. At the time or fit boundary it
+stops new result execution and reports; an explicit owner pause takes precedence. Native
+in-flight operations and evidence are preserved. The initial rejection was not bypassed:
+the accepted request is narrower and follows the owner's specific authorization. This
+paragraph records the owner's execution boundary in the existing notebook, not a new
+workflow registry or scientific claim.
+
+The owner subsequently changed the heartbeat interval to **25 minutes** to reduce gaps
+between continuations. The native app accepted that update; the same expiry, fit allowance,
+direction and publication boundaries remain in force. No cache-lifetime guarantee is inferred.
