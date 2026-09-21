@@ -1,0 +1,66 @@
+{
+  "compute_wall_scope": "learner expiry, prediction, and observation only",
+  "compute_wall_seconds": 0.04797639697790146,
+  "cooperative_observations": 1134,
+  "cooperative_posterior_updates": 0,
+  "expiration_recomputations": 1003,
+  "full_target_cumulative_regret": 3.1999999999999993,
+  "initial_to_final_l2_movement": 0.6715261274209564,
+  "initial_to_source_l2_movement": 0.7300197460262293,
+  "launch_sha": "afe4f8ec74d48b2485db3d935de7871c86cc0e6c",
+  "learner_observations": 2304,
+  "object": "unknown_joint_law_b05",
+  "posterior_updates": 1170,
+  "regression_solves": 2137,
+  "regression_statistic_updates": 1134,
+  "safe_posterior_updates": 1170,
+  "seed": 95001,
+  "setting_id": "fingerprint_recent__law__prior2__window256",
+  "source_to_final_l2_movement": 0.5413906345837637,
+  "spec": {
+    "family": "fingerprint_recent",
+    "prior_strength": 2.0,
+    "recent_window": 256,
+    "representation": "law"
+  },
+  "spec_id": "fingerprint_recent__law__prior2__window256",
+  "stage": "development",
+  "target_by_endpoint": {
+    "first64": {
+      "action_counts": [
+        43,
+        21
+      ],
+      "cumulative_regret": 2.814999999999999,
+      "mean_expected_return": 0.618515625,
+      "mean_regret": 0.043984374999999985,
+      "mean_value_mae": 0.05858441873254638,
+      "panel_count": 64,
+      "sign_mistakes": 17
+    },
+    "full": {
+      "action_counts": [
+        150,
+        106
+      ],
+      "cumulative_regret": 3.1999999999999993,
+      "mean_expected_return": 0.6499999999999999,
+      "mean_regret": 0.012499999999999997,
+      "mean_value_mae": 0.039129275047056176,
+      "panel_count": 256,
+      "sign_mistakes": 28
+    },
+    "late64": {
+      "action_counts": [
+        40,
+        24
+      ],
+      "cumulative_regret": 0.28000000000000025,
+      "mean_expected_return": 0.6581249999999998,
+      "mean_regret": 0.004375000000000004,
+      "mean_value_mae": 0.03360366505590232,
+      "panel_count": 64,
+      "sign_mistakes": 8
+    }
+  }
+}

@@ -1918,3 +1918,29 @@ diff is being independently rechecked before publication and the first admitted 
 The Reviewer subsequently confirmed this literal satisfies the actual `ast.Constant`
 requirement and the negative regression reproduces the old defect; no material issue
 remains. The DM accepts the narrow repair. Review added zero execution/learning.
+
+## 2026-09-21 03:14 PDT — B05 development complete; held-out choices fixed
+
+The [native development manifest](../../../../runs/skill_teammate_drift_learning/b05_unknown_law_development/launch-manifest.json)
+was accepted and the same operation has a consistent exit-0 witness. Source:
+`afe4f8ec74d48b2485db3d935de7871c86cc0e6c`. All **60 decision + 3 shared-law fits**
+completed: 6,912 unique macros / 20,736 ticks, 138,240 decision-reading macros /
+414,720 tick exposure, and 3,440 action-conditional probability updates. Complete
+scientific-process wall 4.203792 s, CPU 4.113188 s, process peak RSS 48,516 KiB.
+These timings include the runner's import/collection/learning/evaluation/serialization,
+not source publication or kernel startup. No gradient-optimizer calls occurred.
+
+The predeclared feedback-only rule selected:
+
+- response: `response_all__response__prior2`;
+- full direct: `fingerprint_full__hybrid__prior2`;
+- recent direct: `fingerprint_recent__hybrid__prior16__window256`.
+
+The [selection bytes](../../../../runs/skill_teammate_drift_learning/b05_unknown_law_development/selection.json)
+have SHA256 **ca32b21255d9bc60efb2c17fb1a7757d506d7fcaa49594db9a5ed9e3d3bd16e5**.
+They are the only setting input to the already declared held-out stage. DM readback
+verified all 186 per-block artifact hashes, exact seed/config/setting coverage and
+2,304 observations in every decision fit. Full raw arrays, final states, all settings
+and failed-launch context are retained; no dev truth value is used to override this
+selection. Continue the existing batch with 95101/95102/95103, 9 decision + 3 law fits,
+without changing any scientific input or expanding the setting bank.

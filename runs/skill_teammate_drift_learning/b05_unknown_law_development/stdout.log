@@ -1,0 +1,6 @@
+{"event": "block_started", "stage": "development", "seed": 95001, "decision_fits": 20}
+{"event": "block_complete", "stage": "development", "seed": 95001}
+{"event": "block_started", "stage": "development", "seed": 95002, "decision_fits": 20}
+{"event": "block_complete", "stage": "development", "seed": 95002}
+{"event": "block_started", "stage": "development", "seed": 95003, "decision_fits": 20}
+{"event": "block_complete", "stage": "development", "seed": 95003}
