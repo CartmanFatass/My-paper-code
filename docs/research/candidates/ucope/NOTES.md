@@ -5401,3 +5401,107 @@ section 3; the owner's withdrawal of prior AGENTS instructions remains respected
 new Root child, direction owner, shared-index write or notebook system is introduced.
 The three B09 invocations continue under their original accepted identities; collection
 and scientific reading remain this DM's responsibility.
+
+
+## 2026-09-21 03:50 UTC — B09 read: distance response expressed, no retained task gain
+
+All three original operations exited zero, with valid exit witnesses and consistent native
+records. Last exit was 2026-09-21 03:45:36.693530 UTC, before the original 04:06:07 deadline.
+All six planned gate fits completed 2048 episodes each; all 576 final evaluation episodes
+completed. No retry, expansion, foundation fit, new noise setting or Pro call. Exact producing
+source remains `a20583ee128bb04e2e638804a0b5493322a3edf6`; later notebook/method-adoption
+commits never changed an accepted snapshot. Training/evaluation steps were exactly
+3,145,728 / 147,456, total 3,293,184 team ticks. Gate/critic Adam calls were
+49,152 / 49,152, total 98,304; final evaluations had zero optimizer updates.
+
+The DM checked all recorded artifact sizes/hashes, frozen Actor digests against inherited
+weights, exact foundation/scale bindings, saved optimizer step counters and actual one/two
+parameter ownership, complete episode/update counts, phase-zero context layout, actual
+previous-command/KEEP/forced-fresh laws, paired coin arrays, equal first two predecision
+contexts, final-gate probability reconstruction and raw float64 rewards against all panels.
+Every check passed. Saved-gate arithmetic reconstructed 61,440 probabilities on the eight
+predeclared context worlds per learned arm. This added no native step, Actor/Critic forward,
+optimizer step or scientific fit. A separate Reviewer waited for all three COMPLETE summaries
+and independently recomputed every contrast from the raw reward NPZs; its reading agrees.
+The reproducible readback and reduction are retained under
+`runs/ucope/normalized_distance_gate_b09_reduce/` alongside the three full original run folders.
+
+| Master / frozen basis | S_N J | B_0 J | G J | S_N-G | S_N-B_0 | B_0-G |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| 8961 / 8941 | 0.2980710839 | 0.2980397859 | 0.2976663554 | +0.0004047285 | +0.0000312980 | +0.0003734305 |
+| 8962 / 8942 | 0.2441950038 | 0.2442722626 | 0.2453086819 | -0.0011136781 | -0.0000772588 | -0.0010364193 |
+| 8963 / 8943 | 0.2481845763 | 0.2477292431 | 0.2473407077 | +0.0008438687 | +0.0004553333 | +0.0003885354 |
+| Mean of three development blocks | | | | +0.0000449730 | +0.0001364575 | -0.0000914845 |
+
+The predeclared continuation rule fails twice: each S_N comparison has one negative block,
+and both mean contrasts are below .01 J. B_0 also fails to offer a consistent net advantage
+over G. Retain G as the practical controller; stop this frozen-controller distance/scalar
+route. This is a research investment decision from the observed package comparisons, not
+an equivalence test or a proof of zero possible benefit.
+
+Conditional paired-world SEs for S_N-G are .0006065171/.0006936748/.0006789688; for
+S_N-B_0 they are .0000260770/.0000792646/.0004685290. The 64 worlds are nested inside
+each fitted gate and its selected foundation, not independent fit replications. Each block
+has only one stochastic gate realization per world. Preserve the positive exceptions: blocks
+8961 and 8963 have positive means against both comparators. Conversely, positive world counts
+for S_N-G are only 22/21/27 out of 64, with observed single-world changes from -.0398744
+to +.0366382. The trajectories are not universally inert; these occasional changes do not
+establish a predictable beneficial decision rule or rescue the failed prospective criterion.
+
+**What the targeted revision changed.** The normalized gate does express distance dependence.
+Its eligible KEEP probability SD is .0117024/.0161530/.0393870, while the new scalar gate is
+exactly constant within each final policy. This is materially different from B08 raw S's
+roughly 1e-6 probability SD. Final normalized slopes are -.00516517/-.01219790/+.04273443
+(raw-distance equivalents -307.37/-841.22/+2330.85); the direction reverses on the third
+foundation. Both normalized and scalar parameters moved, and critic parameter displacements
+are about 3.8/5.1/5.7. Thus a non-started learner or a wholly inactive gate does not explain
+this batch's absence of a retained gain.
+
+The behavioral qualification matters. S_N's mean eligible KEEP probabilities remain
+.490584/.482356/.519408; scalar probabilities are .492617/.486732/.510864. S_N's p10–p90
+widths are only .001589/.002946/.009301; the wider SD comes mainly from large-distance tails.
+Its full probability ranges are .1676–.4922/.1776–.4852/.5121–.9988, and actual copying occupies
+32.85/32.66/34.10 percent of all primitive ticks. We therefore observed an expressed,
+tail-concentrated response, not broadly strong modulation, converged optimal gating, or a
+uniformly learned 'copy when closer' rule. Training-quarter native returns remain close
+between the two arms; parameter change and input conditioning are not by themselves useful
+credit assignment.
+
+**Scientific update and next action.** The review was right that B08's raw S could not stand
+in for a well-scaled finite distance learner, and that R's failure was no class-wide upper
+bound. B09 directly addressed that specific unresolved comparison. Its intermediate numerical
+prediction partly succeeds (observable conditional response); its predicted worthwhile native
+consequence fails. This weakens scale alone as a reason to keep investing in this frozen-basis
+package. It does not turn B08 into a technical failure, prove that scaling caused R's behavior,
+or remove B06's foundation-selection exposure. Command disagreement remains a lawful input,
+not an END-minus-KEEP value label. Identifying a local intervention contrast is also different
+from learning a gate that earns more return on its changed trajectories.
+
+No further normalization, clipping, learning-rate, training-length, copy-rate/noise or rich-gate
+rescue batch is selected. The practical package is G, with the retained trained gates, frozen
+bases, scale bindings, critic/optimizer states, full reward/command panels and reusable
+collector available for later work. Original UCOPE is idle with a concrete re-entry condition:
+new evidence or a materially different task-grounded hypothesis must identify why the original
+lawful velocity commitment should have reproducible beneficial opportunity over ordinary
+feedback and why a learner should exploit it. Merely changing another scale or noting that
+all adaptive termination has not been disproved does not meet that condition. No such producer
+or next comparison is presently selected; this is not a fabricated wait on Claude. Claude's
+FSD skill-object work and the separate team-termination design remain independent. The narrow
+frozen route is stopped; the broader research question is not declared disproven or complete.
+
+**Observed cost and retained identity.** Per-fit training walls (S_N/B_0 seconds) were
+662.44/661.03, 688.74/667.96 and 660.52/641.05. Full invocation walls were
+1383.91/1413.34/1356.92 s (sum 4154.17 s), with process CPU 1382.47/1412.22/1353.10 s
+(sum 4147.79 s). First acceptance to last exit was 1452.79 s, or 24.21 minutes of parallel
+batch time. Per-process peak RSS was 364592/364052/361664 KiB; these are separate process
+peaks, not a simultaneous sum. Admission/source preparation and publication are outside those
+fit-training intervals; no end-to-end speed claim is made. Final summary SHA256 values:
+
+- 8961: `5d995c3ba3b7a449ab87b29f4cbd9a9341424a2046c88ba82fb3fbe571365485`
+- 8962: `3b34fe474e16a44a4dca40e0dcdd1858f5946d5c9a798739ef6e313d413b779f`
+- 8963: `222493e1bf793c1005e22f882b8140b01201fb1ad42f8791f401022456b8279a`
+
+All original handles are terminal and the read-only monitor has exited. The producing snapshots
+and recorded outputs remain recoverable. Both older automations stay paused. The acting Root
+continues to own shared main/RESEARCH integration; this branch owns the published scientific
+record, with no shared-index edit made by this DM.

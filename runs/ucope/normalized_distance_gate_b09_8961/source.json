@@ -1,0 +1,61 @@
+{
+  "object": "UCOPE_NORMALIZED_DISTANCE_GATE_B09",
+  "launch_sha": "a20583ee128bb04e2e638804a0b5493322a3edf6",
+  "files": {
+    "experiments/candidates/ucope/uav_motion_prefix_b01/policy.py": {
+      "path": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/8933df58e9d14089bd92d992e8e6ecba/experiments/candidates/ucope/uav_motion_prefix_b01/policy.py",
+      "bytes": 6887,
+      "sha256": "e324640251d0d025549705ff7541b765e7b96733f422c48ee9c2f5bd07709614"
+    },
+    "experiments/candidates/ucope/uav_motion_prefix_b01/environment.py": {
+      "path": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/8933df58e9d14089bd92d992e8e6ecba/experiments/candidates/ucope/uav_motion_prefix_b01/environment.py",
+      "bytes": 4819,
+      "sha256": "fb25e48857cc8531ac9b80f13243ccd6ca88fa5bf2b194a43dffed21c80690e6"
+    },
+    "experiments/candidates/ucope/uav_motion_prefix_b01/learner.py": {
+      "path": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/8933df58e9d14089bd92d992e8e6ecba/experiments/candidates/ucope/uav_motion_prefix_b01/learner.py",
+      "bytes": 14150,
+      "sha256": "466ec7b0efabdf474f838b662e781a2b7a3b5e1c1a41096b6ccf0f00eb0471f1"
+    },
+    "experiments/candidates/ucope/lower_scale_reuse_b07/study.py": {
+      "path": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/8933df58e9d14089bd92d992e8e6ecba/experiments/candidates/ucope/lower_scale_reuse_b07/study.py",
+      "bytes": 49401,
+      "sha256": "9564709a8ec48375116df9500ef7aa924bb429005753951ef7a289da8eaa968b"
+    },
+    "experiments/candidates/ucope/frozen_mean_gate_b08/engine.py": {
+      "path": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/8933df58e9d14089bd92d992e8e6ecba/experiments/candidates/ucope/frozen_mean_gate_b08/engine.py",
+      "bytes": 21063,
+      "sha256": "a2401bccecd1fb9ebad772188c69a1bf9fca55af3e12a99dbb748af0ed961e40"
+    },
+    "experiments/candidates/ucope/frozen_mean_gate_b08/study.py": {
+      "path": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/8933df58e9d14089bd92d992e8e6ecba/experiments/candidates/ucope/frozen_mean_gate_b08/study.py",
+      "bytes": 20695,
+      "sha256": "7d10bfee01921e648c9acdf581fe660cbb39613044f3e8a0e9a2d58ff6bfff50"
+    },
+    "experiments/candidates/ucope/normalized_distance_gate_b09/gate.py": {
+      "path": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/8933df58e9d14089bd92d992e8e6ecba/experiments/candidates/ucope/normalized_distance_gate_b09/gate.py",
+      "bytes": 2072,
+      "sha256": "fa1ff3234b422e09134593bbb0d13b65b8ebccbe94e8af22280efb100d04d9b0"
+    },
+    "experiments/candidates/ucope/normalized_distance_gate_b09/scales.py": {
+      "path": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/8933df58e9d14089bd92d992e8e6ecba/experiments/candidates/ucope/normalized_distance_gate_b09/scales.py",
+      "bytes": 2244,
+      "sha256": "cea28c2c9f3cd181ede2f3dd332a1b5dffb5d6e63dfc18a57b731fbde636c60b"
+    },
+    "experiments/candidates/ucope/normalized_distance_gate_b09/scales.json": {
+      "path": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/8933df58e9d14089bd92d992e8e6ecba/experiments/candidates/ucope/normalized_distance_gate_b09/scales.json",
+      "bytes": 1445,
+      "sha256": "eb80b7ca97a77a3b9b90d78d4efe29d4ad00857a3153465aa9054d7afd6fcd0a"
+    },
+    "experiments/candidates/ucope/normalized_distance_gate_b09/study.py": {
+      "path": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/8933df58e9d14089bd92d992e8e6ecba/experiments/candidates/ucope/normalized_distance_gate_b09/study.py",
+      "bytes": 21392,
+      "sha256": "7c92d31f680db33c764d94dbe182267bd7c1f97a4a06b863ad677df1e6f949f4"
+    },
+    "scripts/run_ucope_normalized_distance_gate_b09.py": {
+      "path": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/8933df58e9d14089bd92d992e8e6ecba/scripts/run_ucope_normalized_distance_gate_b09.py",
+      "bytes": 1493,
+      "sha256": "e73b6e5c16859296f5f44f01fe7f6d7e87ec692a9624fa4609631980baae7c88"
+    }
+  }
+}
