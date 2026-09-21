@@ -769,3 +769,143 @@ Portable evidence for canonical-main readers (code and runs remain on the direct
 [B08 development](https://github.com/CartmanFatass/My-paper-code/tree/a5a87aa223727b2673781009c90810e7a4842584/runs/vsp_03/opportunity_b08_21801_21803),
 [B09 fixed confirmation](https://github.com/CartmanFatass/My-paper-code/tree/f877dbda7d2e8d1a199e6936ebed0ae0168d7f12/runs/vsp_03/opportunity_b09_21901_21905),
 [B10 one guard](https://github.com/CartmanFatass/My-paper-code/tree/4310e203b20c9b38332dd2b431e67048f781ac4c/runs/vsp_03/opportunity_guard_b10_21801_21803).
+
+## 2026-09-21 — owner-requested stopping audit and DM-owned continuation work
+
+The owner asks whether this direction should close and whether any insight should enter
+shared understanding before closure. The owner then makes the responsibility explicit:
+"这里的重点就在于 你提出了所谓阻碍与重开条件 那么问题就是这个重开条件实际上得你自己去解决".
+The prior paragraph's unspecified re-entry condition is not an external dependency. I
+withdraw its use as a reason to leave the direction idle before doing that work. The
+completed B08/B09/B10 observations and their scope are unchanged; no new fit has run.
+
+One concrete unresolved resource assumption is now visible: O was fitted cheaply, but
+its public observations were supplied by 65,536 complete G-training episodes per block.
+That is a valid comparison of complete declared packages, not yet a self-contained cheap
+O learning procedure. Whether a fixed transparent collector can replace that training
+history changes which method one would retain. Internal Critic agrees this is DM-solvable
+and dissents from waiting for an externally supplied re-entry trigger.
+
+The candidate is one fixed small-data collection, not a budget sweep: four batches of128
+complete R0 episodes, one unchanged MLE and unchanged planner per block. This128-fold
+collection reduction is a chosen resource target, not a minimum or an accuracy theorem.
+It is not an empty identifiability exercise: R0 initially waits, so both target endpoints
+from t0 to t2 are observed in every episode. For the declared family,
+P(present,age2)=(c-1)/(c+1) and P(present,age0)=p/c. These distinguish the two parameters;
+512 episodes guarantee1,024 such target endpoint observations, plus later public endpoints.
+Finite-data decision quality remains unknown. Changing collector and amount together is
+a package intervention, not a pure sample-size or exploration-policy mechanism test.
+
+The target bridge also needs substance. The separate service-restoration environment's
+README explicitly describes fixed velocity actions, instantaneous shared-flow allocation,
+delayed telemetry and no skill-duration action; it is not automatically the adopted UAV
+research host. Its existence supplies no ready eight-tick exclusive-service mapping.
+A bounded Scout is checking actual source and the legacy UAV interface. Merely naming
+partial information, model misspecification or UAV transfer will not serve as a successor
+or as an owner-supplied prerequisite. No target-host result is claimed by this inspection.
+
+### Conditional L0 — self-contained opportunity calibration
+
+Prepare only a new disposable `experiments/candidates/vsp_03/opportunity_calibration_b11/`
+module, `scripts/run_vsp03_opportunity_calibration_b11.py` and mirrored focused tests.
+Reuse B02 physics/rollout and B08 EndpointCounts, fit_model, Planner and native panel
+serialization without changing them. No G construction, forward, backward or optimizer.
+The author owns the notebook and scientific choice; an Implementer may prepare these
+three paths while Pro considers the changed resource question. No scientific execution
+until that reasoning is read and the exact final declaration is appended and published.
+
+Proposed blocks are fresh seeds22001/22002/22003; collection is split100 episodes0..511,
+four128 batches; evaluation is fresh split200 episodes0..4095. Save collection worlds,
+the public x/episode/time endpoints supplied to the fit, endpoint counts, fitted parameters,
+planner tables, complete native rows/decisions/paired results and actual counts/cost.
+New method O_R0 uses no evaluation data, old fitted parameters or old G observations.
+
+Proposed three panels: O_R0, frozen O_full from each corresponding B08 block21801/21802/
+21803, and R0. Load all three preselected fitted_model.json files with their pinned B08
+identities; no source-block selection or refit. The primary descriptive difference is
+O_R0-O_full, retaining the strongest ordinary reference; O_R0-R0 tests practical gain
+without neural data acquisition. Same current information and model family, unequal
+collection policy and amount are explicit. Fresh common evaluation worlds create the
+pairing; there is no common calibration randomness with the old full-data fit. Three
+new MLE fits, no Adam;1,536 collection episodes plus36,864 panel episodes =38,400 total,
+1,536,000 team ticks and3,072,000 target transitions. Actual wall is unknown.
+
+This is development, not a new confirmation or noninferiority claim. Keep every block,
+absolute/native components and signed differences. The hypothesis predicts positive
+O_R0-R0 and preserved useful scheduling with much less collection; it does not predict
+exact equivalence with O_full. Mixed or adverse results retain the full-data finding and
+may expose a data/collection dependence, without diagnosing its unique cause or starting
+a sweep. A technical fitting failure remains a failed attempt, not negative utility.
+Synthetic tests check leakage boundaries, correct public collector input, fixed identities,
+zero-neural work, native accounting and admission; they do not tune on scientific worlds.
+
+## Pro question 2026-09-21 stopping-audit-self-contained-calibration
+
+Conversation: reuse this direction's existing Jev adviser; private address remains local.
+Question: After B09/B10, should we finish this fixed-host route now, or is the proposed
+self-contained low-data O calibration a worthwhile concrete next observation? Challenge
+the choice and its reference, and assess the bounded insights suitable for shared
+FOUNDATIONS. The DM must resolve its own alleged re-entry conditions; neither an external
+idea nor a neural win is owed. This is direction-level advice, not Portfolio selection.
+
+Standing: B09's five fresh blocks give O-G mean+.017577881, t95[.010699359,.024456403],
+O_SUPERIOR; an advantage exceeding.02 is not established. G-R0 remains positive at+.012848145.
+O-O_self mean+.012602783 is mostly a waiting benefit, not a pure partner-utility mediator.
+B10 reuses all three old B08 panels: a t22/both-pending override recovers56.4831% of the
+old O-O_self gap, eliminates missed attempts and final blocking; O-guard is+.012221680,
++.009738770,-.001394043. It supports a coarse feasibility explanation but neither guard
+equivalence nor full-planner necessity. Your earlier answer preceded these outcomes.
+
+The previous idle/re-entry wording was premature as an external waiting condition. The
+new candidate removes a specific disclosed dependency, G-generated data acquisition, with
+one fixed512-episode R0 calibration. The conditional L0 immediately above gives the full
+proposal and counts. Critic suggested fresh O_R0/R0/O_known panels; my current preference
+is fresh O_R0/frozen O_full/R0 panels so the strongest fitted ordinary method stays visible
+at the same total rollout cost. O_known has additional exact parameter knowledge. Please
+identify a material reason to choose either reference; no fit or result exists for B11.
+Do not demand a minimum-data census, tuned headroom, a new architecture or a UAV gate merely
+to permit this exploration. Conversely, do not recommend a cheap run solely because cheap.
+
+Context (all paths marked source_sha use the full published question SHA in the message):
+- Governance at source_sha: docs/project/OPERATING_CONSTITUTION.md §§1-5,7-8;
+  docs/research/RESEARCH.md owner pause and vsp_03 row. Owner pause is lifted; this independent
+  DM already has research authorization. The new owner instruction is quoted above.
+- Method at source_sha: .agents/skills/hmasd-scientific-tools/SKILL.md, Update the working
+  explanation / Simple-model and literature bridges / Comparators / Cost and exposure / Pro.
+- Evidence at source_sha: this NOTES.md, B09/B10 result readings and current stopping audit;
+  docs/research/candidates/vsp_03/CLAIM_fitted_opportunity_b09.md, fixed plan plus result;
+  runs/vsp_03/opportunity_b09_21901_21905/summary.json;
+  runs/vsp_03/opportunity_guard_b10_21801_21803/summary.json;
+  runs/vsp_03/opportunity_b08_21801_21803/{21801,21802,21803}/fitted_model.json.
+  Complete B08 evidence is pinned at a5a87aa223727b2673781009c90810e7a4842584;
+  B09 at f877dbda7d2e8d1a199e6936ebed0ae0168d7f12; B10 at4310e203b20c9b38332dd2b431e67048f781ac4c.
+- Exact source at source_sha: experiments/candidates/vsp_03/vsp03_b02/b02.py,
+  rule_actions/rollout; experiments/candidates/vsp_03/opportunity_b08/opportunity.py,
+  EndpointCounts/fit_model/Planner. Check the t0-to-t2 argument and model-resource premise.
+- Shared knowledge at source_sha: docs/rl-marl-foundations-20260907/FOUNDATIONS.md §§4-6.
+  Potential additions are evidence-scoped examples, not new governance: legal next-clock
+  opportunity matters; earlier commitment can preserve team opportunities; scalar J and
+  diagnostic directions may disagree; coarse feasibility correction can explain much of
+  a planner increment; same raw history does not imply equal model knowledge or free data.
+- Target-boundary context at source_sha: envs/uav_service_restoration/README.md, Timing,
+  Information, Integration, Not implemented. It is a separate host, not proof of a VSP/UAV
+  bridge. No direct UAV claim or host change is proposed in B11.
+
+Prospective cost: three transition MLE fits, zero neural fits/updates,1,536,000 team ticks
+including all three evaluation panels. No tuning or same-batch expansion. Evidence-reading
+and source inspection add no new scientific episodes. Historical sixteen fits stay visible.
+
+Please return a focused choice with the strongest contrary case, what the new observation
+would change, any material adjustment to the proposed comparison, and which shared-insight
+wording is supported or overreaches. Identify untested conjectures and unread critical
+sources. Advice does not close/select a direction, grant a budget or authorize execution;
+the DM reads the complete answer and owns the next choice.
+
+Constraints: no training, no experiments, no code or shared-knowledge edits. Read the
+question at the pinned source, then fetch the latest target blob before writing and use
+its actual blob SHA. On branch codex/vsp03-opportunity-rule edit only the empty Answer
+subsection below, preserving every other byte. Stop on overlap; do not overwrite from the
+pinned copy. Return the actual answer commit; if GitHub writeback fails, give the complete
+answer in chat for recovery. No private conversation/account facts in the repository.
+
+### Answer
