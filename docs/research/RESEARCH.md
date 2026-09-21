@@ -92,11 +92,14 @@ an entry in that inventory is not a direction activation or a selected experimen
 
 **Current Portfolio plan (owner-requested, 2026-09-21):** the
 [information-first three-DM plan](#portfolio-review-2026-09-21-information-first-three-dm-plan)
-recommends two fixed-clock questions — local interaction representation and task-predictive
-auxiliary training — alongside joint-duration learning with the existing Claude FSD owner.
-This expands the earlier main/alternative choice in response to the owner's information-use
-priority and proposed three-session concurrency. All three first comparisons use full HMASD
-on Scenario1 and are independent; partner-skill recombination becomes the first backup.
+recommends three independent DM sessions for two fixed-clock questions — local interaction
+representation and task-predictive auxiliary training — and FSD joint-duration learning.
+Owner clarification after the initial plan: the existing Claude session is stopped and will
+be restarted manually by the owner; it is excluded from these three planned sessions.
+The owner explicitly retains FSD as a research question. The earlier proposal to reuse Claude
+for the third seat is superseded; this is not a transfer or restart of that session.
+All three first comparisons use full HMASD on Scenario1 and are independent;
+partner-skill recombination remains the first backup.
 The complete Pro reply and Root Decision give interventions, controls, costs and stopping
 judgments. This is a concrete planning result: no session creation, direction activation,
 owner reassignment or scientific execution occurred; existing standing remains as recorded below.
@@ -114,7 +117,7 @@ owner reassignment or scientific execution occurred; existing standing remains a
 | `tail_return_distributional_learning` | reserve | B01 positive retained, B02 inside the MEI, Pro review of B02 never started ([DIRECTION.md](candidates/tail_return_distributional_learning/DIRECTION.md)). Codex Root may start a DM for it under the three-DM soft ceiling when a discriminating idea exists; no obligation. The reserve list changes only by an owner-triggered Portfolio review. |
 | `cross_play_compatible_population_learning` | reserve | Owner-selected next reserve on 2026-09-21. Zero historical implementation/experiment is an investment park, not a negative result. The concrete candidate is mixing-trained versus exposure-matched ordinary self-play in independently trained five-agent populations; include all predeclared cross-population compositions and own-team tradeoffs. Three proposed complete bundles including the stated own-team panel cost 2,162,688 team ticks and 24,576 Adam calls, plus unmeasured implementation/wall. No DM task or fit is started by this reserve entry. [Portfolio rationale](#portfolio-review-2026-09-21-closed-direction-research-value); [original scope](https://github.com/CartmanFatass/My-paper-code/blob/b793cf69b4935306708ad744b355acc4d5b33712/docs/research/portfolio/pro_packets/20260912_new_direction_discovery/archive/RESPONSE.md). |
 | `variable_n_fleet_churn` | reserve | Owner-selected following reserve on 2026-09-21. Preserve the old MAPR/DIRECT/BCRH evidence; the later INTERVAL/TERMINAL service-credit comparison has no final primary after two SIG11 failures and remains unanswered. Revisit through a stable isolated implementation and a new declared comparison only for its information value, not to recover sunk cost. No repair, replay or fit is automatically started. [Portfolio rationale](#portfolio-review-2026-09-21-closed-direction-research-value); [B03 technical failure](https://github.com/CartmanFatass/My-paper-code/blob/51965a896a4e3b9288fccb6abe277c2547dc07b8/docs/research/candidates/variable_n_fleet_churn/VNFC_N7_NATIVE_SERVICE_CREDIT_B03_RESULT_INTAKE_20260912.md). |
-| `flexible_skill_duration` | reserve | Owner decision 2026-09-21 in the Claude session ("可以 那么做好收尾吧"), on the DM's recommendation after two Pro passes: rested, not closed and not disproved. Question kept open: on a skill basis that has task meaning, does changing or adaptively choosing the duration give a repeatable native gain against a competent matched-information baseline? Standing after B01–B14 (UAV host, three development blocks reused throughout, no claim note, no positive performance result): D1280 above the matched-information flat comparator by +.29 J, but that comparator never trained competently (B01, B03, B04), so no size is claimed; no high-level lever moved D's score — coordinator batch (B02), label persistence in training or execution (B07 one block, B08), the coordinator's own selection (B08, B09), an external additive label credit with or without concentrated exposure (B13: P1 holds, P2–P4 fail; a learner with no coordinator optimizer step reached historical D1280's level, a feasibility observation and not an equivalence), and that credit deployed in its own ten-step regime (B14, zero fits: G +.019 / +.016 / −.019, no reversal). Descriptive results retained: the six labels are distinct closed-loop behaviours produced by the low level's objectives (B08–B10), their consequences are long-horizon and roughly per-agent (B12), the coordinator's loss sums entropy over agents so its per-agent temperature is 6·`lambda_h` (code fact, 2026-09-20 22:41 entry), and deployment's argmax amplifies a near-uniform law. Not tested: the native value of an unfixed duration; state-dependent, per-agent or team-conditioned reassignment (nothing here speaks for or against the Codex team-decision directions). Reopening needs evidence that can change the investment judgment — a competent matched-information baseline on this host, or a mechanism with a native prediction for an unfixed duration — not a small η², a high entropy, an unused head, or a renamed scheme. Reserve ideas I2 (longer high-level commitment) and I3 (lower coordinator entropy) and their material: notebook entry 2026-09-20 20:36. No active producer, no declared successor batch, no open Pro question. Checkpoints stay on `wsl_4070` under their run roots (`b08_save_*_a01` D1280 with exact panels; `b13_*_a01`, which must never seed coordinator PPO). Notebook with the rest record (entries 2026-09-21 02:51, B14 read, closing entry): [NOTES.md](candidates/flexible_skill_duration/NOTES.md); code map in [HANDOFF_2026-09-16_matched_information_baseline](candidates/flexible_skill_duration/HANDOFF_2026-09-16_matched_information_baseline.md); the last active row is in Git at `6e10702c6`. |
+| `flexible_skill_duration` | reserve | Owner clarification 2026-09-21 in the Root task: the existing Claude session is temporarily stopped and only the owner will restart it manually. That session is outside the current three-DM plan; FSD joint-duration research remains a proposed question for an independent DM. This planning clarification does not change the historical execution identity or resume/reassign the Claude session; actual new lead and record scope are not initialized here. Owner decision 2026-09-21 in the Claude session ("可以 那么做好收尾吧"), on the DM's recommendation after two Pro passes: rested, not closed and not disproved. Question kept open: on a skill basis that has task meaning, does changing or adaptively choosing the duration give a repeatable native gain against a competent matched-information baseline? Standing after B01–B14 (UAV host, three development blocks reused throughout, no claim note, no positive performance result): D1280 above the matched-information flat comparator by +.29 J, but that comparator never trained competently (B01, B03, B04), so no size is claimed; no high-level lever moved D's score — coordinator batch (B02), label persistence in training or execution (B07 one block, B08), the coordinator's own selection (B08, B09), an external additive label credit with or without concentrated exposure (B13: P1 holds, P2–P4 fail; a learner with no coordinator optimizer step reached historical D1280's level, a feasibility observation and not an equivalence), and that credit deployed in its own ten-step regime (B14, zero fits: G +.019 / +.016 / −.019, no reversal). Descriptive results retained: the six labels are distinct closed-loop behaviours produced by the low level's objectives (B08–B10), their consequences are long-horizon and roughly per-agent (B12), the coordinator's loss sums entropy over agents so its per-agent temperature is 6·`lambda_h` (code fact, 2026-09-20 22:41 entry), and deployment's argmax amplifies a near-uniform law. Not tested: the native value of an unfixed duration; state-dependent, per-agent or team-conditioned reassignment (nothing here speaks for or against the Codex team-decision directions). Reopening needs evidence that can change the investment judgment — a competent matched-information baseline on this host, or a mechanism with a native prediction for an unfixed duration — not a small η², a high entropy, an unused head, or a renamed scheme. Reserve ideas I2 (longer high-level commitment) and I3 (lower coordinator entropy) and their material: notebook entry 2026-09-20 20:36. No active producer, no declared successor batch, no open Pro question. Checkpoints stay on `wsl_4070` under their run roots (`b08_save_*_a01` D1280 with exact panels; `b13_*_a01`, which must never seed coordinator PPO). Notebook with the rest record (entries 2026-09-21 02:51, B14 read, closing entry): [NOTES.md](candidates/flexible_skill_duration/NOTES.md); code map in [HANDOFF_2026-09-16_matched_information_baseline](candidates/flexible_skill_duration/HANDOFF_2026-09-16_matched_information_baseline.md); the last active row is in Git at `6e10702c6`. |
 
 ## Archived (investment only, not scientifically disproved)
 
@@ -5952,7 +5955,7 @@ Root 完整读取了本次 Pro 答复；**采纳三个独立问题的组合：�
 | --- | --- | --- | --- |
 | **DM 1：固定周期的局部交互表示**，第一优先 | 分布式 UAV 从局部用户／邻机观测中组织与覆盖、容量及位置配合有关的信息；检验相同输入下的表示归纳偏置能否改善有限学习。 | 固定技能周期、动作空间与训练目标。原完整 HMASD；同合法槽位与关系特征的普通稠密编码；在同类打分／值变换上加入一种选择性汇聚。主比较是选择性对稠密，原网络提供改造前参照。 | 三臂完整原生学习结果、服务分量、全部失败／不利结果及实际成本。若收益由普通稠密重组吸收，保留简单改进并停止额外选择机制；稀疏图本身不构成增益。 |
 | **DM 2：固定周期的任务预测辅助训练**，第二优先 | 在既有局部循环表示中学习与未来团队服务结果有关的特征；检验训练监督怎样改变 actor 的控制能力。 | 保持原 actor／GRU 与合法历史。两臂都训练相同预测头：一臂对 actor 表示停止辅助梯度；另一臂允许预写权重的辅助梯度进入原编码器／GRU。原生 PPO 项相同。 | 两臂完整学习结果，标签与梯度边界、服务结果及实际成本。预测更准但原生控制无益，削弱当前目标到控制的解释；没有新的任务理由时不追加预测头、窗口或损失。 |
-| **DM 3：完整技能共学习下的联合时长**，第三优先，沿用 Claude FSD DM | UAV 调整技能与位置时，何时重新选择才能学会并保留有用的覆盖／容量配合；直接检验更多时间选择与探索、优化成本的权衡。 | 同一完整 HMASD 路径下比较有能力的固定周期、充分知情的条件分解时长、普通 AR 联合时长。共同信息、团队 cap、技能分配与承诺感知 critic 匹配，主干预为时长分布参数化。 | 完整原生回报、实际时长／截断及共同决策暴露、服务配合与成本。AR 仅胜分解但不及固定，不推广其复杂度；若可变时长有益而 AR 无增量，保留更简单的时长方法。 |
+| **DM 3：FSD／完整技能共学习下的联合时长**，第三优先，由本次计划的独立 DM 承担 | UAV 调整技能与位置时，何时重新选择才能学会并保留有用的覆盖／容量配合；直接检验更多时间选择与探索、优化成本的权衡。 | 同一完整 HMASD 路径下比较有能力的固定周期、充分知情的条件分解时长、普通 AR 联合时长。共同信息、团队 cap、技能分配与承诺感知 critic 匹配，主干预为时长分布参数化。 | 完整原生回报、实际时长／截断及共同决策暴露、服务配合与成本。AR 仅胜分解但不及固定，不推广其复杂度；若可变时长有益而 AR 无增量，保留更简单的时长方法。 |
 
 DM 1 与 DM 2 的区别是**表示结构**与**进入既有表示的训练监督**。一个获益、另一个
 不获益会改变不同的设计选择，因此可以独立开展。两者第一版均不接入另一项新模块、
@@ -6033,9 +6036,12 @@ MGTAP／ACVC 小宿主秒级耗时估算原生 HMASD。三个科学 session 可�
 
 #### 独立责任、替补与判断更新
 
-三席是**两个新的独立问题负责人，加上现有 Claude FSD DM**，不为 FSD 另设负责人，
-也不安排三个新 DM 后再额外保留第四个 FSD。每项从独立可恢复的普通 HMASD 源码／配方
-开始，在隔离 checkout 中自己承担想法、实现、运行、读数和发布；共享核心修改沿用
+按业主随后明确的会话边界，三席是**本次计划的三个独立 DM**：局部交互表示、任务预测
+辅助训练、FSD 联合时长学习。**已暂停的 Claude session 不计入三席，是否重新开启由
+业主自行手动决定；FSD 研究题目保留。** 第三席按本次联合时长首问规划，不自动接管、
+恢复或改派原 Claude session 的工作。实际 lead／记录范围在未来初始化时绑定，当前
+FSD 行的历史执行身份保留。每项从独立可恢复的普通 HMASD 源码／配方开始，
+在隔离 checkout 中自己承担想法、实现、运行、读数和发布；共享核心修改沿用
 现有独立审查，DM 自行接受与维护。Root 负责本次 Portfolio 取舍和共享索引，
 不增加逐批审批、统一跑数部门、例行跨 session 通信或等待 Root 合并结果的环节。
 未来实际初始化时再记录真实 session 地址／checkout，不在计划中发明 ID 或模型配置。
@@ -6057,7 +6063,8 @@ MGTAP 的条件几何、ACVC 的 proposer wrapper、FOLR 的历史缓存负面�
 保留已证收益和相反证据。候选预测没有升级为 FOUNDATIONS 中的已证算法收益；已有
 共识与本次候选计划的证据级别保持清楚。
 
-Pro 建议的三项组合、稠密／detached 控制、Scenario1 首轮、FSD 归属和成本边界均已采用；
+Pro 建议的三项科学问题、稠密／detached 控制、Scenario1 首轮和成本边界继续采用；
+其中“第三席复用现有 Claude FSD DM”的会话安排已由业主后续指令纠正，不能继续沿用。
 Root 明确了阶段性交付、奖励索引需绑定实际 runner、对照训练隔离、无依赖并发与普通方法
 吸收的退出分支。没有把 Pro 当作审批，也未因本次答复增加新的前置阳性门槛。
 本次定向源码和既有记录核查不替代历史全数组审计；新臂尚未实现和运行，性能／计算均待验证。
@@ -6067,3 +6074,22 @@ Root 明确了阶段性交付、奖励索引需绑定实际 runner、对照训�
 “暂时考虑三个并发独立 DM”请求下的具体方案。下一次实际执行采用时，可据本节各任务
 直接初始化，不需要重新发明方向清单；既有科学授权、暂停、任务创建与启动约束仍按当时
 真实状态处理，不由本计划代为发生。
+
+
+#### Owner correction 2026-09-21 Claude session and FSD question
+
+业主先澄清：“Claude方向已经暂时停止 这个是我会根据情况自己手动开启 你不要将其纳入计划”，
+随后纠正 Root 的过度解释：“FSD并不需要移出”。因此排除的是**现有 Claude 会话的参与与
+自动恢复**，不是 FSD 科学问题。Root 撤回了把 FSD 移出并重新挑选第三题的临时理解；
+那项理解没有产生文件修改、咨询、会话操作或实验。
+
+当前计划仍为三个独立 DM：**局部交互表示、任务预测辅助训练、FSD 联合时长学习**。
+伙伴技能重组保持替补，未因本次更正晋升；3＋2＋3 个探索 fits 的规模示例及所有科学
+比较保持原义。这是会话规划与业主手动恢复边界的更正，没有新的核心问题、对照或实验，
+所以复用已完整留存的 Pro 建议，不重复发问。上面的 Pro 原答逐字保留为当时建议，
+现行安排以本次业主更正及已同步的 Root 任务表／责任段落为准。
+
+本次仅修订 Portfolio 和 FSD standing 中的会话边界：没有创建、联系、接管或恢复
+Claude／任何 DM session，没有改动运行中的输入、实验或方向状态。Claude 的手动恢复
+由业主掌握，未来实际新 DM 绑定在初始化时记录；研究主题相同不构成共享会话或
+复用已有执行身份的授权。
