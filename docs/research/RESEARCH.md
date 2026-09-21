@@ -78,7 +78,7 @@ adds no fits or rollouts and does not resume FSD or frozen G33.
 
 | Direction | Question | State | Lead runtime | Standing and next step |
 | --- | --- | --- | --- | --- |
-| `skill_teammate_drift_learning` | When current joint outcome laws and acquired data are uncertain, when does stable conditional-response reuse improve adaptation? | exploring | Codex DM (independent session) | Independent DM task `01a0bdb4-cd2c-71a3-af95-a196aeed70cd`, host `local`; checkout `/home/fires/.codex/worktrees/b-unknown-joint-law/hmasd-wsl`, branch `codex/b-unknown-joint-law`. B06 remains inconclusive (first64 mean +.008187500, t95 [-.015186418,+.031561418]); B07 own-collection feedback interaction remains adverse in all3 blocks. B08 complete: six fixed-source target continuations crossing the two already-collected histories. Full256 R-minus-F on R history is -.002218750 / -.000515625 / -.005968750; on F history -.009000000 / -.000343750 / -.006296875. This weakens an acquisition-only repair explanation for the frozen R package; same-history losses do not reject all drift learning or establish general calibration. Both95303 prospective mapping/history predictions occurred, but reward-noise cancellation remains a competing explanation. Early contrary evidence is preserved. Off-diagonal values are fixed-history recommendation readouts, not executed online counterfactuals or six independent replications. All32 scientific-file and25 required-input digests, donor/source equality and arithmetic reductions verified. B05-B08 totals125 production fits,158976 collected ticks,10.228s summed scientific-process wall; historical/tiny work remains separate. Next: zero-fit source audit of actual Scenario1 observation/action -> joint service outcome -> known reward -> next-state/continuation interfaces, to choose a meaningful drift-learning object and competent simple reference before a new comparison and focused Pro review. No automatic calibration/epsilon sweep, Claude or Root dependency. [B08 interpretation and costs](https://github.com/CartmanFatass/My-paper-code/blob/fe0e5719836f16cc5a44f02d80f53c95592250bd/docs/research/candidates/skill_teammate_drift_learning/NOTES.md); [B08 raw/readback](https://github.com/CartmanFatass/My-paper-code/tree/fe0e5719836f16cc5a44f02d80f53c95592250bd/runs/skill_teammate_drift_learning/b08_fixed_history_crossing); [B07 and full Pro reasoning](https://github.com/CartmanFatass/My-paper-code/blob/6ab8db786a2dc2397d883e8476ccb0303b059f0e/docs/research/candidates/skill_teammate_drift_learning/NOTES.md). Independent decision/publication; no Root or peer communication. |
+| `skill_teammate_drift_learning` | When teammates change, what must be learned or reused to improve decisions beyond competent simple controls? | exploring | Codex DM (independent session) | Independent DM task `01a0bdb4-cd2c-71a3-af95-a196aeed70cd`, host `local`; checkout `/home/fires/.codex/worktrees/b-unknown-joint-law/hmasd-wsl`, branch `codex/b-unknown-joint-law`. B06 remains inconclusive (first64 mean +.008187500, t95 [-.015186418,+.031561418]); B07 own-collection feedback interaction remains adverse in all3 blocks. B08 complete: six fixed-source target continuations crossing the two already-collected histories. Full256 R-minus-F on R history is -.002218750 / -.000515625 / -.005968750; on F history -.009000000 / -.000343750 / -.006296875. This weakens an acquisition-only repair explanation for the frozen R package; same-history losses do not reject all drift learning or establish general calibration. Both95303 prospective mapping/history predictions occurred, but reward-noise cancellation remains a competing explanation. Early contrary evidence is preserved. Off-diagonal values are fixed-history recommendation readouts, not executed online counterfactuals or six independent replications. All32 scientific-file and25 required-input digests, donor/source equality and arithmetic reductions verified. B05-B08 totals125 production fits,158976 collected ticks,10.228s summed scientific-process wall; historical/tiny work remains separate. Native source audit and focused Pro review complete; unspecified three-arm successor rejected. Physical coupling alone does not imply dependent action innovations, and current central HMASD can directly query its own policies. B09 prospectively selects an explicit external-controller information contract: ordinary version-specific joint counts versus their exact marginal-product view through identical native Scenario1 physics. Three planned fits,384 collection ticks,3072 actual closed-loop evaluation ticks and24576 planning branches; main endpoint is64-observation/64-tick return. Code is in preparation; no B09 production launched. This controlled3-UAV/1-user study tests finite-data/myopic package value, not cross-version count reuse, endogenous co-learning, novel architecture or a current HMASD deficiency. No automatic R calibration/epsilon rescue or Claude/Root dependency. [Full Pro adoption and fixed B09 design](https://github.com/CartmanFatass/My-paper-code/blob/ee2d70c69abc0c5a45881da6e74937a7ac166689/docs/research/candidates/skill_teammate_drift_learning/NOTES.md). [B08 interpretation and costs](https://github.com/CartmanFatass/My-paper-code/blob/fe0e5719836f16cc5a44f02d80f53c95592250bd/docs/research/candidates/skill_teammate_drift_learning/NOTES.md); [B08 raw/readback](https://github.com/CartmanFatass/My-paper-code/tree/fe0e5719836f16cc5a44f02d80f53c95592250bd/runs/skill_teammate_drift_learning/b08_fixed_history_crossing); [B07 and full Pro reasoning](https://github.com/CartmanFatass/My-paper-code/blob/6ab8db786a2dc2397d883e8476ccb0303b059f0e/docs/research/candidates/skill_teammate_drift_learning/NOTES.md). Independent decision/publication; no Root or peer communication. |
 
 ## Reserve
 
@@ -2470,11 +2470,20 @@ categories are impossible. No standing search for a re-entry excuse or maintenan
 is assigned. A concrete future question can justify a later selection without first
 proving that it will succeed.
 
-B remains the one currently active direction. Its independent DM owns the selected
-Scenario1 source-to-consequence audit and subsequent scientific choice; Root neither
-duplicates that investigation nor changes its accepted inputs. B08 weakens the current
-acquisition-only explanation, while early positives and the reward-noise alternative
-remain. FSD remains owner-reserved and Claude-owned. CPCP, VNFC and tail-return retain
+B remains the one currently active direction. Before final publication, its DM independently
+published the completed native audit, Pro adoption and declared B09 design at main
+`61beb9b94cca00afc837ce331173ea084aa336a0`, with the full notebook at
+[`ee2d70c69`](https://github.com/CartmanFatass/My-paper-code/blob/ee2d70c69abc0c5a45881da6e74937a7ac166689/docs/research/candidates/skill_teammate_drift_learning/NOTES.md).
+Root preserves that latest row exactly. B09 compares version-specific empirical joint
+counts with their exact marginal-product view through the same native physics, under an
+explicit external-controller information contract. It declares three fits, 384 collection
+ticks, 3,072 evaluation ticks and 24,576 planning branches; code was in preparation at that
+publication, not a completed result. Physical coupling alone does not establish correlated
+action innovations or a current HMASD deficiency. The imposed correlation, three-UAV/one-user
+construction, finite-data and myopic-comparison limits are retained. The earlier Question
+and Pro reply reflect B08 standing and are not rewritten. Root does not duplicate the now
+completed audit, change B09 inputs or add a new approval dependency. B08's adverse findings,
+earlier positives and the reward-noise alternative survive. FSD remains owner-reserved and Claude-owned. CPCP, VNFC and tail-return retain
 their reserve status. G33 remains frozen. No slot has to be filled, no new direction or
 native batch is registered here, and no independent App task is started or messaged.
 
@@ -2489,11 +2498,12 @@ native batch is registered here, and no independent App task is started or messa
 
 #### Next investment order
 
-1. **Finish the existing B interface question independently.** This remains the DM's current work,
-   with no Root-imposed calibration sweep or parallel clone. The desired output is an
-   actual unknown joint consequence and lawful feedback path, with a simple reference
-   and a prediction that could distinguish reuse from ordinary estimation. Shared
-   preparation does not wait for B, and B does not wait for a Root message.
+1. **Continue B's independently declared B09 work.** The source question recommended in
+   the frozen Pro exchange is now answered. The current external-controller contract and
+   ordinary joint-count versus marginal-product comparison replace that earlier pending
+   step. Preserve the DM's declaration, engineering checks and scientific reading; no
+   Root-imposed calibration sweep, parallel clone or message is needed. Shared preparation
+   does not wait for B, and B does not wait for Root.
 2. **Prepare one native timing diagnostic before a large new training comparison.**
    The supplemental scripted-controller suggestion is useful at this position, but
    its proposed sweep is not yet executable as specified. This review performs the

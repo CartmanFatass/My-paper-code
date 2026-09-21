@@ -32,6 +32,8 @@ a_t\sim\pi_\theta(\cdot\mid o_t,z_t).
 
 已知奖励公式不等于已知联合物理后果、队友响应或未来状态。如果奖励为已知的 g(Y)，需要预测的可能是合法历史与行动条件下的 E[g(Y)]；当 g 非线性时，g(E[Y]) 一般不能替代它。普通后果模型仍是有意义的参照，是否足够要由反馈、支持范围与具体决策判断，不能由“奖励已知”直接排除学习问题。[B 的原生问题与项目级解释](../research/RESEARCH.md#portfolio-review-2026-09-21-project-research-management)
 
+联合物理后果相互耦合，也不自动意味着给定完整策略输入后的动作采样相关。中心方法能够直接查询自身当前策略时，比较必须保留这些查询权。B09 因此将未知混合概率明确放在外部控制者的信息契约中，比较普通联合计数与相同边缘分布的乘积；这是新的受控问题，尚无结果，不能写成当前 HMASD 的既有缺陷。[B 的源码判断与 B09 声明](https://github.com/CartmanFatass/My-paper-code/blob/ee2d70c69abc0c5a45881da6e74937a7ac166689/docs/research/candidates/skill_teammate_drift_learning/NOTES.md)
+
 可识别性取决于具体未知量及可用反馈。C05 中当前周期独立重抽且未被观测的风险量，不能由过去周期识别；这不排除从合法本地历史估计共享转移参数。C 的后续源码核查发现，符合条件的相邻自身距离记录能给出一次 0/1 前进观测，形成共享前进概率的估计路径。该路径尚未拟合，也未验证有限数据能否保留决策收益。模型已知、参数可识别与有限数据足以支持有效决策，是三个不同判断。[C 的模型知识与反馈边界](https://github.com/CartmanFatass/My-paper-code/blob/a76339b5f13244daed94cabb06809fa8923f7f27/docs/research/candidates/skill_information_refresh/NOTES.md#L3181-L3204)
 
 ## 3. MARL 增加的是联合行为和信息结构
