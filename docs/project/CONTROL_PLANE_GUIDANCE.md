@@ -43,17 +43,19 @@
 | 要回答的问题 | 维护源/入口 | 使用方式 |
 | --- | --- | --- |
 | 谁能决定、什么额度、暂停是否生效？ | [Constitution](OPERATING_CONSTITUTION.md)、owner 当前指示 | 治理；不在其他文件维护平行版本 |
-| 当前推进哪个方向、由谁负责？ | [RESEARCH](../research/RESEARCH.md) | 当前状态与证据导航；状态不解除暂停 |
+| 当前推进哪个方向、联系哪个会话？ | [RESEARCH](../research/RESEARCH.md) | 状态、证据及当前 Root/DM 的真实原生地址和工作区；状态不解除暂停 |
 | 会话从哪里进入？ | [AGENTS](../../AGENTS.md)、[CLAUDE](../../CLAUDE.md)、就近 AGENTS | 短入口；具体代码任务读取适用目录说明 |
 | 角色负责什么、使用哪个方法？ | [.codex/config.toml](../../.codex/config.toml)、[角色源](../../.codex/agents)、[Claude 原生角色](../../.claude/agents) | Codex 注册与角色正文；Claude frontmatter 的 model/tools 独立维护 |
-| 任务怎么做？ | [.agents/skills](../../.agents/skills) | 六个共享方法，按任务选取；不是每次全读 |
+| 任务怎么做？ | [.agents/skills](../../.agents/skills) | 按任务选取共享方法；不是每次全读 |
 | 方法如何到 Claude？ | [publisher](../../tools/publish_claude_control.py) → [.claude/skills](../../.claude/skills)、Claude role bodies | 确定性复制与 runtime 适配；生成正文不手改 |
 | 节点、解释器、supervisor/provider 在哪里？ | [compute](../../.codex/hmasd-compute.toml)、[transport](../../.codex/hmasd-transport.toml) | 部署参数；配置不是授权或运行事实 |
 | 问题、观察与原始证据在哪里？ | 方向 NOTES、CLAIM、runs；冻结对象的原来源 | 每个对象的事实与约定，不是通用手册 |
 | 方法为什么如此、旧结论如何得出？ | 历史 specs、foundation、Claude_docs、Git 固定版本 | 按问题取证；不复活历史权限和记录流程 |
 
 skills 的描述用于发现，正文在任务使用时读取，references 只在相关时读取。
-Codex 子角色获得自身角色配置，不意味着 Root 主会话已经加载同一正文。
+Codex 子角色获得自身角色配置，不意味着主会话已经加载同一正文。
+Codex 的 Root 与独立 DM 都从 loop-dispatch 进入；直接 DM 明确读取 direction-manager 的职责正文，
+但继续使用主会话实际模型与权限，角色选择不等于原生配置发生变化。
 Claude 导入 AGENTS，研究 session 使用生成的 research-hub；它不是又一名 Root。
 Pro 是外部会话，不继承本地 skills：问题作者在现有问题段内提供适用方法摘录或固定版本的具体节。
 具体选读见 [Pro reading context](../../.agents/skills/hmasd-pro-research-prompt-author/references/pro-reading-context.md)：
@@ -62,12 +64,36 @@ Portfolio、假设批次、确认前 review、owner 明确要求的控制面 rev
 现行治理替代冲突的旧聊天规则、冻结输入保持原义。Pro 在回答中引用实际采用的依据，说明关键未读材料；
 缺失材料只限制依赖它的结论，不产生新审批或自动补发。Transport 原样发送，作者负责判断来源是否适用。
 
+## Codex 会话怎样选择和恢复职责
+
+Owner 可直接说“本任务作为 Root 协调 A、B”或“本任务直接作为 UCOPE 的 DM”。
+会话按当前指示与已记录归属选择职责；已有明确归属时不要求重新确认模式。
+独立 DM 自己推进一个方向，可以使用 Implementer、Reviewer、Monitor；无需先创建一个 DM child
+再把工作转交一次。Root 既可联系已有独立 DM 任务，也可使用 children，两种形式合计遵守三方向
+soft ceiling。Claude 仍是单方向 DM，本次没有扩大 Claude 的角色。
+
+当前地址放在 RESEARCH：协调段说明 acting Root/integrator、范围、返回地址和工作区，方向 standing
+给出独立 DM 的 task id/host 或 child 的 parent/agent 地址、作者 checkout/branch。不要为新地址改写
+启动器逐字匹配的 Lead runtime 字段。地址须来自真实原生返回；老标题或临时聊天指向不是所有权证明。
+缺失时先恢复已有会话，不凭“没看到 agent”创建第二位 DM，也不为历史闲置方向补一套联系台账。
+
+独立任务使用当前可用的 Codex task 读取、发送、等待工具；children 使用原生 agent 工具。
+`send_message_to_thread` 会启动或排队工作，查状态用 `read_thread`/`wait_threads`。
+只有 owner 明确请求新独立任务时才调用 `create_thread`；一般子任务仍可用 child。
+独立 DM 在有意义的边界返回已记录的 Root；没有 Root 时直接向 owner 报告。Root 暂时 idle 不会
+暂停已经获准、真实依赖已满足的研究。工具不可用时报告具体联系限制，不虚构跨 runtime 工具。
+
+换 DM、换 Root 或改变本会话职责时，在安全边界核对在途进程、未收集结果、未确定的 Send 和写入；
+由接任者实际接回同一 handle，再更新现有索引里的地址。方向结论、冻结输入、原截止时间继续有效，
+不能把换会话当成新批次或自动重跑。普通进度不需要反复交接确认，也不新增 handoff 文件。
+完整执行细节见 [loop-dispatch](../../.agents/skills/hmasd-loop-dispatch/SKILL.md)。
+
 ## 一项研究如何经过控制面
 
 ```mermaid
 flowchart TD
     A[Owner 指示与暂停状态] --> B[RESEARCH 方向与 lead]
-    B --> C[DM：NOTES 中的 idea、比较与额度]
+    B --> C[DM：NOTES 中的 idea、比较与 fits 成本]
     C --> D[科学 skill：设计与解释]
     C --> E[工程 skill：实现、检查与必要 review]
     E --> F[提交输入、实际节点准入、detached launch]
@@ -94,8 +120,9 @@ Monitor/Transport 返回事实，不据此增加实验、裁决科学或扩展�
 Git 的分支/worktree 服务于真实隔离需要，不再每方向强制建立。按完整工作边界提交和推送，
 在外部交付及结果运行前确保输入可取得；不要求 scope 尾注、每次 commit 立即 push 或月度治理指标。
 
-Codex Root 集成共享 main/RESEARCH，方向 lead 拥有自己的 NOTES；Claude 仅在无 acting Root
-或明确交接后承担共享集成。Pro 临时写指定 answer subsection，不能覆盖整个旧版本文件。
+同一时刻一个 acting integrator 集成共享 main/RESEARCH；协调中的 Codex Root 持有此职责，方向 lead
+拥有自己的 NOTES。直接 Codex DM 或 Claude 仅在无 acting Root 或明确交接后，经实际 writer 核对，
+从自己的 checkout 承担共享集成。Pro 临时写指定 answer subsection，不能覆盖整个旧版本文件。
 启动/发送是否被接受不确定时核对原操作；修改控制面不是再次启动/发送的理由。
 
 角色限制只分配当前任务的责任，不是整个系统的能力黑名单。Root 可以做共享控制面修复、

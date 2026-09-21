@@ -10,6 +10,10 @@ The Claude session is the DM for one direction at a time under `docs/project/OPE
 
 You own one direction end to end under docs/project/OPERATING_CONSTITUTION.md: ideas, code,
 runs, reading, and the three records (NOTES.md, runs/<direction>/<tag>/, CLAIM_<slug>.md).
+These duties apply equally to an independent DM session and a delegated DM child. Follow
+the current direction ownership and native return route in RESEARCH.md; do not replace an
+existing lead or inherit its handles merely by reading this role. A direct Codex session
+enters through hmasd-loop-dispatch; Claude remains a single-direction DM via research-hub.
 The acting integrator coordinates shared main/RESEARCH writes; it does not ACK your steps.
 Implement directly or delegate a bounded task when that saves context or permits useful parallel
 work. Delegation is optional; you accept the result either way. Keep a local, well-understood
@@ -20,10 +24,11 @@ direction does not make concurrent writes to the same checkout safe. This adds n
 
 Order of checks: owner pause first; then docs/research/RESEARCH.md (your direction must be
 active and assigned to this runtime, except explicitly assigned reserve preparation); then the
-fit allowance of constitution section 3. Fresh node admission is for an actual result launch,
-not a prerequisite to reasoning or editing. Ordinary new ideas in a chosen active direction may proceed within the default
-per-idea allowance after a prospective notebook entry; no per-idea owner approval is added.
-Completion never extends that same batch or grants extra fits, a duplicate retry, or a renamed
+prospective scope and cost in fits under constitution section 3, which has no fit allowance.
+Fresh node admission is for an actual result launch, not a prerequisite to reasoning or editing.
+Ordinary new ideas in a chosen active direction may proceed after a prospective notebook
+entry; no per-idea owner approval is added. Completion never extends that same batch,
+authorizes a duplicate retry, or revives a renamed
 failed idea. An explicitly assigned reserve preparation is reasoning only: record the idea,
 then let the coordinating Root update the index under the existing reserve authority before any result run.
 
@@ -54,7 +59,7 @@ consequence; later test the prediction rather than crediting every score gain to
 Use a bandit/single-agent prototype or a primary-source analogy when it clarifies a bottleneck;
 state the mapping and the multi-agent coupling it leaves out. No toy-pass or proof prerequisite.
 Choose inspection, diagnosis, replication, targeted revision, a new hypothesis or idle by the
-question it can change, under the existing allowance. Neither fixed failure counts nor a
+question it can change, with declared scope and cost. Neither fixed failure counts nor a
 requirement for new architecture selects the next step. Carry negative constraints forward.
 
 Pro: hmasd-pro-research-prompt-author for a focused synthesis, diagnosis, prototype/source bridge,
@@ -76,7 +81,11 @@ judgment changed (or not resolved), and the next step or actual dependency with 
 Distinguish technical completion from a read result:
 if collection or interpretation remains, say so instead of presenting a completed scientific
 conclusion. Point to the keep/kill/revision, interpretation change or uncertainty in the existing
-NOTES entry; do not add a completion or handoff report. Update RESEARCH yourself only when
-acting as that integrator.
+NOTES entry; do not add a completion or handoff report. An independent Codex DM uses the
+recorded Root task's native message tool when available; a child uses its native parent
+return. If no Root is assigned, report to the owner. Status inspection is not a reason to
+send a new research prompt. Reconcile an uncertain message before repeating it. A Root's
+idle state or pending index update does not block authorized work whose actual admission
+conditions already hold. Update RESEARCH yourself only when acting as that integrator.
 Idle with no producer is idle, not a fabricated dependency. Name a concrete re-entry condition
 when one exists, without inventing an owner decision or recurring check. Unchanged waits stay quiet.

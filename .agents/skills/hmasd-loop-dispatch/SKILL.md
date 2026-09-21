@@ -1,107 +1,144 @@
 ---
 name: hmasd-loop-dispatch
-description: Codex Root coordination of the active HMASD directions under docs/project/OPERATING_CONSTITUTION.md - start or resume DM children, integrate accepted commits, keep RESEARCH.md current, wait for producers. Not a trigger to resume research on a status question or workflow edit.
+description: Enter or resume a Codex session as coordinating Root or independent single-direction DM under the HMASD constitution. Resolve existing session ownership, dispatch to independent tasks or children, integrate shared state and reconcile returns. Status questions and workflow edits do not resume research.
 ---
 
-# Root coordination (Codex)
+# Codex sessions: Root or direct DM
 
-Authority: `docs/project/OPERATING_CONSTITUTION.md`. Current state: `docs/research/RESEARCH.md`.
-Root coordinates direction work without duplicating the assigned DM's scientific ownership.
-It may read relevant evidence, handle shared-control repairs and perform owner-requested
-analysis. Role boundaries assign responsibility; they do not prohibit these capabilities
-throughout the project or prevent reading needed to resolve an actual shared dependency.
+Authority: `docs/project/OPERATING_CONSTITUTION.md`. Current state and session routing:
+`docs/research/RESEARCH.md`. Root coordinates; a DM owns science and its three records.
+An independent DM session and a DM child have the same scientific responsibility.
+Claude remains a single-direction DM through its generated `hmasd-research-hub`.
 
-## Inputs
+## Select the session's work
 
-The current owner instruction (pause or resume), `RESEARCH.md`, the thing that changed (a DM
-message, a merged commit, an owner edit), actual native agent names from tool results, and the
-current checkout. Start with what changed and follow relevant dependencies as needed. Machine and provider values come from
-`.codex/hmasd-compute.toml` and `.codex/hmasd-transport.toml`, never from old task text.
+Read the owner instruction, pause, current direction standing and relevant native session
+status. Infer the mode from the actual assignment or recorded ownership; do not ask the
+owner to repeat an already clear choice.
 
-## Procedure at entry, on an actionable return, and before the first wait
+- **Root:** coordinate a named set of directions, resolve shared dependencies, integrate
+  accepted commits and maintain the shared index. Count independent DMs and children
+  together toward the soft ceiling of three concurrent direction DMs. Do not fill slots
+  without a worthwhile authorized task or duplicate a direct DM's scientific work.
+- **Direct DM:** the session itself owns one direction. Explicitly read the
+  `developer_instructions` body in `.codex/agents/hmasd-direction-manager.toml`, then the
+  relevant notebook and scientific/engineering methods. Main sessions do not automatically
+  inherit that child role body. Apply its responsibilities, not its TOML model, effort or
+  permissions as alleged current settings. The session's actual native settings and the
+  owner's explicit choices still apply. Implement, delegate, review, launch, collect and
+  read as the DM; no extra Root child or forwarding layer is needed.
+- **Status/control only:** inspect or perform the requested edit. A workflow change,
+  restart, unarchive or address repair does not select a new experiment or lift a pause.
 
-1. **Owner pause first.** A status question, workflow edit, migration or restart never
-   resumes research. While paused, perform only the explicitly requested status/control work;
-   do not start research, Send, or result-bearing runs.
-2. **Read RESEARCH.md.** Active directions in priority order with their lead runtime and
-   standing line; the reserve list. A direction whose lead runtime is the Claude session is
-   not started here. Preserve the first-execution-batch order recorded there on a research resume;
-   resumption is not a request to launch every active direction at once.
-3. **DM children.** Match an authorized, actionable direction task to its existing DM before
-   creating a child. No visible live DM is not by itself a dispatch reason: check its last native
-   return and standing. An unchanged idle/no-idea return stays idle; a missing or uncertain
-   agent/experiment state is reconciled, not replaced. Resume for an unfinished authorized
-   deliverable, new evidence or a concrete idea that changes the recorded next step, or an owner
-   instruction that actually requests work. A status question or another direction's completion
-   does not reopen an idle direction. Ordinary within-budget next ideas remain the DM's choice;
-   this is not a new owner approval requirement.
-   Start or resume one `HMASDDirectionManager` with the direction id, `NOTES.md` path, standing,
-   specific next deliverable/re-entry reason, relevant prior explanation and contrary evidence,
-   the question changed by new evidence, fit allowance and pause state. Reuse its native
-   continuation when available. A new model, adviser answer or available slot alone is not a
-   scientific task. Soft ceiling: three concurrent DMs, not a staffing target.
-   Under an explicit research resume, Root may assign a chosen reserve
-   DM to prepare an idea with no empirical exposure. Preparation is not activation or a fit
-   grant. If a worthwhile discriminator is recorded, Root may activate that existing reserve
-   and set its Codex lead under the Constitution's reserve authority before result execution.
-   With no worthwhile idea, leave it idle. Never start work just to fill capacity.
-4. **Integrate.** Bring named accepted commits into `main` by cherry-pick or fast-forward;
-   stage explicit paths if an integration needs edits. Check what is already integrated and
-   publish the completed integration. Resolve real
-   shared-writer or shared-runtime conflicts. Direction acceptance belongs to the DM; shared-control
-   acceptance belongs to the acting integrator. Ordinary direction steps need no Root ACK.
-5. **Keep RESEARCH.md current.** When a DM reports a boundary (idea killed, batch done, claim
-   read, direction idle), update that direction's standing line when its meaning or evidence
-   changes, then publish the completed update. Preserve "collected, not yet read" when that is
-   the actual boundary; a terminal handle, passing test or answer commit is not a scientific
-   conclusion. Repeated delivery of the same boundary needs no second edit or redispatch.
-   Preserve the DM's main judgment update and next question by linking its existing notebook;
-   do not flatten this to the latest score or invent a second research-state ledger.
-   This needs no extra routine record; an owner-requested analysis or manual remains in scope.
-6. **Queue, never send.** Archive or activate recommendations, budget concerns and closing
-   notes wait as `NOTES.md` entries for the owner-triggered Portfolio review
-   (`hmasd-portfolio-task`).
-7. **Wait.** After independent work, wait natively for the named producers with the configured
-   long timeout. An unchanged timeout normally continues waiting quietly. Read status, relevant
-   sources or agent state when new evidence, a user question or concrete uncertainty requires it;
-   avoid repeated polling or redispatch without a reason. Waiting discipline is not a tool blacklist.
+If a request changes the session's responsibility, resolve its current ownership and
+in-flight work before taking the new assignment. Switching to Root does not silently
+abandon a direction, and switching to direct DM does not silently replace its existing
+lead. Scientific standing and accepted operations survive the switch. Ask only for an
+unresolved scope or ownership choice that cannot be recovered from current evidence.
 
-## Messages
+## Keep the contact recoverable
 
-`followup_task` resumes an existing DM; `send_message` carries information that needs no turn
-restart. A DM reports one paragraph at a boundary: direction, state, evidence or commit,
-what it does and does not establish (or what remains unread), the main judgment changed or
-still unresolved, and next step or actual dependency and its owner. Reuse the same notebook
-explanation across session handoffs. Root integrates this accepted reading rather than
-duplicating the DM's analysis.
-Specialists (Implementer, Reviewer, Monitor, Transport, Operator,
-Scout, Critic, Verifier) return to the DM that assigned them, never through Root. A message and a
-final that describe the same boundary are one event.
+Use the existing RESEARCH index, with no separate session registry or handoff file:
 
-## Git and cleanup
+- Coordination prose identifies the acting Root/shared integrator, its scope and actual
+  native return address. Record its authoring checkout/branch when that matters to writers.
+- A direction's standing identifies its independent DM task id and host, or its parent task
+  and child agent address, plus its authoring checkout/branch. This gives a replacement
+  Root a route to the existing producer instead of just a runtime label.
+- Keep the launch-bound **Lead runtime** cell stable. Put addresses and explanatory
+  session text in standing/coordination prose, not in a value compared by a frozen runner.
+  A real lead change must reconcile canonical and published control before dependent runs.
 
-Root is the shared main/RESEARCH.md integrator while coordinating Codex. Use separate authoring
-branches/worktrees for real isolation or concurrent writers, not automatically per direction.
-A Claude session publishes direction commits and returns facts
-while Root holds shared integration. With no acting Root or an explicit handover, Claude may
-integrate accepted commits from its own checkout after fetching current main and coordinating
-the actual writer. Never assume a different runtime has no writer; uncertain ownership delays
-only the shared edit. Nobody mutates another checkout/index. Preserve
-overlapping writers, commit by pathspec, and push at completed work or external handoff/run boundaries.
-Remove an obsolete worktree only
-after its unique commits are on the remote, dirty evidence is preserved and no live process or
-delivery depends on it; verify absence on disk and in `git worktree list`.
+Use only ids/addresses returned by native tools or established records, then verify them
+with the runtime before dispatch. A title, a process name, a previous message or an app's
+archived/idle state alone does not establish scientific ownership or permission to resume.
+An unavailable address is a reconciliation question, not evidence that no DM exists.
+Keep unknowns explicit; do not backfill addresses for dormant historical directions.
 
-## Control revision handover
+## Root dispatch and integration
 
-Publishing files does not change already running sessions. Send affected leads the actual
-revision and applicability boundary through their existing return path; use available native
-communication or report the pending handover to the owner, never invent a cross-runtime tool.
-At a safe boundary each lead rereads the changed methods and reports actual adoption or a
-specific conflict in its existing status/NOTES entry. Do not assert loading from publisher
-success. Preserve frozen inputs, accepted handles and uncertain Sends; no migration resend,
-restart, global ACK registry or per-run reloading ritual. An unresolved migration concern
-blocks only dependent new effects, not independent authorized work or evidence preservation.
+1. **Owner pause and scope first.** Read the current index. Preserve the owner's direction
+   choices and first-batch order; a status request never starts research. Do not take over
+   a direction assigned to Claude. A new active idea needs its prospective entry; fits are
+   recorded cost, not an allowance or entitlement.
+2. **Find the existing DM.** Read its latest native return and standing. Reuse an independent
+   session or child that already owns the direction. An unchanged idle/no-idea return stays
+   idle unless the owner requests work or new evidence/a concrete idea changes the next
+   step. An app task being archived is not the direction being scientifically closed.
+3. **Use the matching native route.** Tool availability comes from the current runtime,
+   not these example names. Independent Codex tasks use `list_threads` (and archived-task
+   lookup when needed), `read_thread` or compact `wait_threads` snapshots to resolve status;
+   `set_thread_archived(false)` restores a task when the owner's continuation requires it;
+   `send_message_to_thread` continues it. This last tool starts/queues work: use it for an
+   authorized task, an actionable boundary return or relevant coordination, not a status
+   poll. Children use the native agent list, follow-up/message and wait tools. Resolve an
+   uncertain dispatch against the same task/turn before sending again.
+4. **Create only when needed and authorized.** An explicit owner request for a new standalone
+   task uses `create_thread` with a verified project and supported environment; wait for the
+   real thread id before recording or addressing it. Do not use a provisional client id as
+   a thread id. Without such a request, a new bounded direction assignment may use the
+   configured direction-manager child under existing research authority. Do not create a
+   sidebar task merely because a subtask exists. Preserve current/default session model
+   settings unless the owner explicitly chooses them; a role name does not set a main model.
+5. **Give one concrete assignment.** Supply direction, notebook, prior judgment and contrary
+   evidence, what changed, next deliverable, declared scope/cost, pause and any actual owner
+   deadline, checkout/index ownership and Root return address. The DM accepts the science.
+   Independent preparation continues while a real shared dependency is resolved; already
+   valid admission does not need another Root ACK for each batch.
+6. **Integrate meaningful boundaries.** Bring named accepted commits or the required shared
+   index update into main from the integrator's own checkout, preserving other writers.
+   A result branch can retain code/runs with pinned evidence links; do not roll an older
+   whole index over newer direction work. Update standing when its meaning changes, then
+   publish. A terminal process is not a read result: retain collection/interpretation work
+   explicitly. Repeated delivery of the same boundary needs no duplicate edit or redispatch.
+7. **Wait for actual producers.** For independent tasks prefer bounded `wait_threads` calls
+   with the returned cursor; for children use native agent wait. Back off on unchanged
+   state and keep it quiet. A queued prompt, active task, accepted launch, terminal handle
+   and scientifically read result are different observations. Do not call them all done.
+
+Root may assign reasoning-only preparation to an already chosen reserve, then activate it
+under the constitution's existing reserve authority if a worthwhile idea is recorded.
+Preparation neither lifts a pause nor starts a result batch. Portfolio recommendations
+remain in the existing notebook/index for the owner-triggered review; this method does not
+send them to Pro automatically.
+
+## DM returns, independence and handover
+
+At a meaningful boundary, the DM returns direction/state, evidence/commit, what the result
+establishes and does not, the main judgment update and the next action or real dependency.
+An independent Codex DM sends this to the recorded Root task through the available native
+message tool; a child returns to its actual parent. With no assigned Root, report directly
+to the owner. Leaves report to their assigning DM, not through Root. The notebook remains
+the scientific record; do not create a packet to repeat it.
+
+A Root being idle or temporarily unreachable does not suspend authorized independent work.
+Publish the direction evidence, retain the pending integration fact and continue work whose
+actual dependencies are met. Before taking shared integration with no acting Root or on an
+explicit handover, verify the real writer and published main. Do not infer vacancy just
+because a task disappeared from the current list, and never write another checkout/index.
+
+For a real DM or Root replacement, reconcile live processes, uncertain Sends, uncollected
+results and writes at a safe boundary. The recipient reads the latest notebook, adopts
+existing handles and confirms the concrete responsibility through the native return path;
+then update the address in the index. Ordinary progress does not need repeated adoption.
+A restored session continues the same work, not a new batch. If the runtime lacks a native
+route, report that specific handover limit; do not invent a cross-runtime messenger or
+launch a replacement process to obtain a new handle.
+
+## Git and control changes
+
+One acting integrator owns shared main/RESEARCH at a time; each DM owns its notebook and
+direction work. Use independent checkouts for concurrent writers, explicit pathspec commits,
+and push completed work and exact result inputs. Branches and worktrees are useful isolation,
+not a mandatory new checkout per direction. Keep accepted source identities and other writers.
+Remove an obsolete worktree only when its unique commits/evidence are preserved and no live
+process or delivery depends on it; verify absence on disk and in the worktree list.
+
+Publishing methods does not reload running sessions. Send affected leads the actual revision
+and applicability boundary on their recorded route. At a safe boundary they read the affected
+methods and report actual adoption or a concrete conflict in the existing return/notebook.
+Do not migrate by resend, restart or reloading every run, and do not create an ACK registry.
+An unresolved migration concern blocks only the dependent new effect.
 
 ## Optional source inspection
 
@@ -118,5 +155,6 @@ registry is required, and this command is not a prerequisite to dispatch or rese
 
 ## Return
 
-Pause state, what changed, commits integrated, `RESEARCH.md` lines updated, the live DM set,
-actual adoption or still-unverified handover, and the next action or none.
+State the session mode and owned scope, pause state, actual DM/Root route, changes published,
+observed progress versus still-unverified adoption, and the next action or actual dependency.
+Do not claim live adoption from source publication or scientific completion from dispatch.

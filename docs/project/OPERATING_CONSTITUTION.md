@@ -28,6 +28,12 @@ reasoning and advisory roles. These changes take effect on owner merge/adoption;
 alone does not establish live-session adoption. No direction, pause, fit allowance, frozen
 experiment or accepted operation is changed by this revision.
 
+2026-09-20 (owner, Codex session workflow): a Codex session may coordinate multiple directions
+as Root or directly own one direction as an independent DM. Root may coordinate existing
+independent DM sessions as well as DM children. The owner explicitly keeps Claude as a
+single-direction DM. This formalizes session routing and ownership; it does not resume
+research, change model settings or restart accepted work.
+
 ## 1. What this project is
 
 A personal exploratory research project on unfixed skill duration k and unfixed agent count N,
@@ -57,10 +63,15 @@ operation. A method, tool, conversation or historical workflow is not a permanen
   continuity of the scientific explanation across results, advisers and session changes, not
   just the next run. It distinguishes opportunity, representation, learning and net-use judgments,
   preserving contrary evidence and explaining why a next action changes understanding or use.
-- **Codex side (owner clarification 2026-09-16 17:50 PDT):** a Root session coordinates and
-  each DM child owns one direction. Soft ceiling: three concurrent DMs. When fewer than three
-  are active, Root may start a DM for a direction already chosen by an owner-triggered
-  Portfolio review (the reserve list in RESEARCH.md); there is no requirement to fill three.
+- **Codex side (owner amendment 2026-09-20):** a session may act as **Root**, coordinating
+  a named set of directions, or as the **direct DM** for one direction. A DM may be an
+  independent session or a Root child; its scientific responsibility is the same. Reuse the
+  current lead rather than creating a second DM. Root's soft ceiling is three concurrent
+  direction DMs across both forms, not three of each; there is no obligation to fill it.
+  When fewer than three are active, Root may start a DM for a direction already chosen by
+  an owner-triggered Portfolio review (the reserve list in RESEARCH.md). Independent sessions
+  do not create an additional allowance, approval layer or automatic authority for new tasks.
+  Native task creation still follows the owner's task-creation request and available tools.
 - **Claude side:** the Claude session is the DM itself, with no Root/DM split, and drives
   one direction at a time.
 - **Implementer** (owner amendment 2026-09-16 18:32 PDT): each DM may hand one bounded code
@@ -90,8 +101,19 @@ the underlying capability. Necessary reading may follow dependencies beyond owne
 Shared-control repairs and owner-requested analysis remain work for the acting Root/session;
 direction ownership and scientific acceptance remain with the assigned DM.
 
-Shared writing: a coordinating Codex Root integrates main and RESEARCH.md. A Claude session
-may take that function only when no Root is acting or on explicit handover, from its own
+Session ownership is recoverable from RESEARCH.md: identify the acting Root/integrator and
+its coordination scope, and the current DM's native address and authoring checkout in the
+direction's standing. Use actual task ids/hosts for independent sessions and actual parent
+and agent addresses for children; a title or old assignment alone does not establish a live
+lead. An absent or idle Root does not stop already authorized direction work. A DM reports
+meaningful boundaries to its recorded Root, or directly to the owner when no Root is assigned.
+Changing session, mode or lead preserves accepted handles, frozen inputs, the notebook and
+scientific standing. The outgoing owner reconciles in-flight work; the incoming owner
+actually adopts it before responsibility is relinquished. No new handoff record is required.
+
+Shared writing: one acting integrator at a time coordinates main and RESEARCH.md; a
+coordinating Codex Root holds that function. A direct Codex DM or Claude session
+may take it only when no Root is acting or on explicit handover, from its own
 checkout after checking current main and the actual writer; otherwise it publishes direction
 commits and returns facts. The direction lead owns NOTES.md, handing only the target answer
 subsection to Pro and reconciling uncertain writes before taking it back. Leaves return facts;
@@ -138,6 +160,10 @@ resource-safety checks are unchanged.
 
 `docs/research/RESEARCH.md` is the only current index: direction, question, state
 (`exploring / confirming / reserve / archived`), lead runtime, and one-line standing/next step with evidence links.
+Session contact and checkout information belong in this existing index, not a separate
+registry. Keep the lead-runtime value used by an accepted launch contract stable; task
+addresses and return routes belong in standing/coordination prose. Unknown contact details
+are reconciled through the native runtime, not replaced with invented ids or a duplicate DM.
 Record any owner pause there; a state label does not cancel a pause. It replaces PORTFOLIO,
 APPROVED_SET, tracking, dossiers and lifecycle-decision paperwork. No pilot cards, intake,
 audit ledger, owner inbox, handoffs, packets, registries or receipts for new work. Historical files stay unmaintained.

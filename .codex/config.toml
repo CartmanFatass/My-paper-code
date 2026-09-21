@@ -3,6 +3,8 @@
 # New chats use the model and reasoning effort selected in the Codex app.
 # Root role preference remains Sol/low; select it per task.
 # Individual named agent configurations retain their own defaults.
+# Main sessions can be Root or direct DM; the role choice does not load a child model/config.
+# Session entry: .agents/skills/hmasd-loop-dispatch/SKILL.md.
 approval_policy = "never"
 sandbox_mode = "danger-full-access"
 
@@ -16,7 +18,8 @@ default_wait_timeout_ms = 1500000
 max_wait_timeout_ms = 3600000
 
 [agents]
-# Up to three DM children (docs/project/OPERATING_CONSTITUTION.md section 2), a ceiling, not a target.
+# Root coordinates up to three direction DMs, independent sessions and children combined.
+# This is the constitutional soft ceiling, not a separate ceiling for each form.
 # This runtime fan-out also accommodates their monitors, transports and independent reviewers.
 max_concurrent_threads_per_session = 40
 interrupt_message = true

@@ -16,7 +16,7 @@
 | 层 | 入口／维护源 | 含义 |
 | --- | --- | --- |
 | Owner 与治理 | 当前 owner 指示；[OPERATING_CONSTITUTION.md](OPERATING_CONSTITUTION.md) | 研究暂停、方向选择与预算权限；修订不自动恢复研究 |
-| 当前研究状态 | [RESEARCH.md](../research/RESEARCH.md) | active／reserve／archived、lead runtime、standing、pause；不是另一本规则书 |
+| 当前研究状态与会话联系 | [RESEARCH.md](../research/RESEARCH.md) | active／reserve／archived、lead runtime、standing、pause；现有文字内记录 Root、DM 原生地址与工作区，不另设 registry |
 | 自动加载入口 | 根 `AGENTS.md`；`CLAUDE.md` 导入它；就近目录的 `AGENTS.md` | 导航与局部技术边界。新记录用 NOTES／CLAIM／runs；冻结对象从索引直接读原卡 |
 | 手工维护的方法 | `.agents/skills/hmasd-*/SKILL.md` 及其实际使用的 references/helpers | 科学、工程、Root coordination、提问、Transport、owner-triggered Portfolio |
 | Codex 原生角色 | `.codex/config.toml` 注册 `.codex/agents/*.toml` | 原生 model／effort／sandbox 和共享角色正文 |
@@ -38,15 +38,21 @@ HMASD 生成文件；不自动删除孤儿文件，不检查真实会话是否�
 
 | 工作 | Codex | Claude | 方法／记录归属 |
 | --- | --- | --- | --- |
-| 方向推进 | Root 协调 DM children，保留 owner 指定 soft ceiling | session 本身是单方向 DM | loop-dispatch／research-hub；direction lead 拥有 NOTES |
+| 方向推进 | session 可做 Root 或直接做单方向 DM；Root 协调独立 DM tasks 与 children，合计 soft ceiling 为三方向 | session 本身是单方向 DM | Codex 两种模式均从 loop-dispatch 进入；Claude 用 research-hub；direction lead 拥有 NOTES |
 | 实现 | DM 直接实现，或按需 Sol/high Implementer | session 直接实现，或按需 Opus/high Implementer | research-engineering；原生 Claude effort 未实测，不能从描述证明 |
 | Review／事实 | Reviewer，既有 Scout／Verifier／ResearchCritic | 对应原生 leaves | engineering／scientific-tools；是受限方法，不是额外决策者 |
 | 启动 | DM 直接启动或按需 Operator | session 直接启动或按需 Operator | engineering execution；精确来源、fresh preflight、accepted handle |
 | 观察 | DM 直接观察或按需 ExperimentMonitor | session 直接观察或按需 bounded tracker | 委派者返回事实；解释与记录仍由 DM 负责 |
 | Pro | 有工具时直接执行，或按需 Transport | session 自行 Agentify，或 Sonnet Transport | 同一 transport 方法；目标由问题作者指定 |
-| 共享 Git 写入 | 协调中的 Root 集成 main／RESEARCH | 向共享 integrator 返回已接受提交；无 Root 或明确交接后才自行集成 | 使用自己的 checkout，确认实际 writer，不跨 runtime 共用 index |
+| 共享 Git 写入 | 一个 acting integrator；协调中的 Root 持有此职责，独立 DM 向它返回提交 | 向共享 integrator 返回已接受提交 | 无 acting Root 或明确交接后，直接 DM 才可自行集成；用自己的 checkout，确认实际 writer，不共用 index |
 
-DM 可在已选 active 方向内提出并前瞻记录新 idea，使用既定 per-idea fits；不是批次结束自动加额。
+独立 Codex DM 与 child DM 的科学职责相同。主会话不会自动加载 child TOML：loop-dispatch 的 DM
+入口明确读取 direction-manager 的职责正文，不把该 TOML 的模型/权限冒称为主会话实际设置。
+Root 用现有任务的原生消息与等待工具恢复联系，child 用原生 parent/agent 返回；具体工具路径在
+[loop-dispatch](../../.agents/skills/hmasd-loop-dispatch/SKILL.md)，不假定跨 runtime 具备同一工具。
+任务是否在侧栏归档、消息是否排队、实验是否终止和科学结果是否读完是不同状态。
+
+DM 可在已选 active 方向内提出并前瞻记录新 idea，声明 fits 成本；宪章 section 3 已取消 fit allowance。
 已选 reserve 可先由指定 DM 做无实证的准备，再由 Root 按现有 reserve 权限更新状态。
 Monitor／Implementer 的任务分配不自动授予 NOTES／RESEARCH 写入权。Pro 只接管目标 answer subsection；
 写入是否成功不确定时先核对实际 commit，再归还 writer，不建立 lease 或 ACK 服务。
@@ -57,7 +63,7 @@ Monitor／Implementer 的任务分配不自动授予 NOTES／RESEARCH 写入权�
 `runs/<direction>/<tag>/`。远端输出用可恢复位置关联；`temp/` 是 scratch，不是唯一证据仓库。
 旧 FSD B01 按 RESEARCH 的原卡／原输出约定恢复，不转抄、不重新设计、不重跑已有 accepted 工作。
 
-**执行路径：** owner pause／方向状态／idea allowance → DM 的明确代码任务 → 实现及必要 review →
+**执行路径：** owner pause／方向与会话所有权／前瞻范围和成本 → DM 的明确代码任务 → 实现及必要 review →
 提交并发布精确输入 → 按新实验需要选择配置中的本地/远端节点 → 同一 wrapper 内 preflight 成功后 runner →
 accepted handle → 直接观察或委派时确认 adoption → terminal facts → DM 收集、核对并判读。
 失联／timeout 不等于终止。local handle 要稳定进程身份与可访问 terminal witness；替换观察者先核对同一

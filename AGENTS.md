@@ -10,8 +10,12 @@ Current state: `docs/research/RESEARCH.md` lists active, reserve and archived di
 lead runtime and the owner pause. It replaces PORTFOLIO,
 APPROVED_SET, EXPERIMENT_TRACKING, dossiers and lifecycle paperwork.
 
-Roles (constitution section 2). Codex: a Root session coordinates up to three DM children, one
-direction each, starting a reserve direction only for a recorded idea, never by obligation.
+Roles (constitution section 2). Codex: a session may coordinate as Root or directly own one
+direction as an independent DM. Root coordinates up to three direction DMs total, independent
+sessions and children combined; reuse the recorded lead. `hmasd-loop-dispatch` is the session
+entry for both modes. RESEARCH records the acting Root and actual DM addresses/checkouts;
+keep task routing separate from launch-bound lead-runtime values. Start a reserve only for
+a recorded idea, never by obligation.
 Claude: the session is the DM for one direction at a time. A DM may work directly or delegate to
 its Implementer (Claude: Opus; Codex: Sol; both high effort) from a concise scope note and accepts the
 diff itself. Transport and Monitor absorb waits and return facts. Reviewer checks changes to
@@ -31,7 +35,7 @@ minimums are section 8.
 
 Methods are execution detail, not a second rulebook, in `.agents/skills/`:
 `hmasd-scientific-tools` (cumulative reasoning, design and reading), `hmasd-research-engineering` (code, review,
-launch, and the carried-over engineering standards), `hmasd-loop-dispatch` (Codex Root),
+launch, and the carried-over engineering standards), `hmasd-loop-dispatch` (Codex Root/direct DM),
 `hmasd-chatgpt-pro-transport` (Pro send and collect; on the WSL host
 `hmasd-jev-pro-transport`), `hmasd-pro-research-prompt-author`
 (Pro question), `hmasd-portfolio-task` (owner-triggered review only). Read the nearest
@@ -46,7 +50,7 @@ Uncertain launch or Send acceptance means same-request reconciliation, never a b
 
 Git: use branches/worktrees when isolating experiments or concurrent writers helps; a separate
 authoring checkout per direction is not mandatory. A coordinating Codex Root is the shared
-main/RESEARCH integrator. Claude may take integration only with no acting Root or explicit
+main/RESEARCH integrator. A direct DM may take integration only with no acting Root or explicit
 handover, from its own checkout after checking current main and the actual writer. Otherwise
 it publishes direction commits and returns facts for integration. Never share an index or
 assume another runtime is idle. The DM owns NOTES.md and lends only the assigned answer
