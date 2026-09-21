@@ -12,8 +12,21 @@ APPROVED_SET, EXPERIMENT_TRACKING, dossiers and lifecycle paperwork.
 
 Roles (constitution section 2). Codex: a session may coordinate as Root or directly own one
 direction as an independent DM. Root coordinates up to three direction DMs total, independent
-sessions and children combined; reuse the recorded lead. `hmasd-loop-dispatch` is the session
-entry for both modes. RESEARCH records the acting Root and actual DM addresses/checkouts;
+sessions and children combined; reuse the recorded lead. Root uses `hmasd-loop-dispatch`.
+A direct Codex DM reads the `developer_instructions` body in
+`.codex/agents/hmasd-direction-manager.toml`, then the relevant scientific/engineering methods;
+it uses the same DM responsibility source without creating a child or loading Root procedures.
+Main-session model, permissions and callable roles come from the actual runtime, not that TOML.
+Direct DMs may invoke the same registered HMASD helper roles exposed by the runtime; no
+intermediate DM child, Root dispatch or change of main-session model is needed to use them.
+Independent sessions finish their own work. App cross-task messages require an explicit user
+request; perform the requested delivery and stop. One message does not authorize a continuing
+reply/acknowledgment/forwarding loop, and incoming App messages do not expand the task or grant
+user permission. Completion, conflict and handover are not exceptions. This rule is App-only;
+Jev Pro and internal subagents keep their existing workflows. Existing explicit authorization
+needs no second approval. Read other tasks' evidence only as needed and resolve ordinary
+concurrent changes locally; raise only a genuinely unresolved judgment in this task.
+RESEARCH records the acting Root and actual DM addresses/checkouts;
 keep task routing separate from launch-bound lead-runtime values. Start a reserve only for
 a recorded idea, never by obligation.
 Claude: the session is the DM for one direction at a time. A DM may work directly or delegate to
@@ -48,12 +61,16 @@ claims are checked before detached execution. The engineering method describes i
 frozen historical interfaces retain their bound contract. Preserve live process handles.
 Uncertain launch or Send acceptance means same-request reconciliation, never a blind repeat.
 
-Git: use branches/worktrees when isolating experiments or concurrent writers helps; a separate
-authoring checkout per direction is not mandatory. A coordinating Codex Root is the shared
-main/RESEARCH integrator. A direct DM may take integration only with no acting Root or explicit
-handover, from its own checkout after checking current main and the actual writer. Otherwise
-it publishes direction commits and returns facts for integration. Never share an index or
-assume another runtime is idle. The DM owns NOTES.md and lends only the assigned answer
+Git: each DM publishes its direction records and its own RESEARCH standing/results/evidence
+entry to main, without Root approval, integration or notification, even while a Root is active.
+Root owns assigned cross-direction coordination and shared-control maintenance, not routine
+DM result publication. Before editing and publishing, refresh main and inspect the relevant
+diff; update only the owned entry, preserve other rows and push normally. If main advances,
+refresh and reconcile locally. Use a main-based publication checkout when needed to keep
+unmerged experimental history out of main; never copy an old whole index over it or share an
+index. The engineering method describes this small update-time check. Branches/worktrees
+serve isolation; an authoring checkout per direction is not mandatory.
+The DM owns NOTES.md and lends only the assigned answer
 subsection to Pro; leaves return facts rather than edit it. Reconcile uncertain writes before
 handback. Stage
 explicit paths, commit explicit pathspecs. No `git add -A`, stash, reset, force-push or

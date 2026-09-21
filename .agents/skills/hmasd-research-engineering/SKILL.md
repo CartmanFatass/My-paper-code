@@ -1,6 +1,6 @@
 ---
 name: hmasd-research-engineering
-description: Implement, delegate, check, review and execute HMASD code as a DM, Implementer or Reviewer under docs/project/OPERATING_CONSTITUTION.md section 6 - L0 scope, Implementer handoff, core versus disposable code, carried-over engineering standards, independent review, commit-preflight-detached launch. Not for status or mechanical collection.
+description: Implement, delegate, check, review, execute and publish HMASD direction results under docs/project/OPERATING_CONSTITUTION.md - L0 scope, Implementer handoff, core versus disposable code, engineering standards, independent review, native launch and DM publication of its own RESEARCH entry. Not for status or mechanical collection.
 ---
 
 # Research engineering
@@ -114,6 +114,23 @@ consistency, intent and affected consumers; no automatic or repeated Reviewer pa
 alone does not determine whether a change alters executable behavior. Give a required reviewer the contract, invariants,
 diff and evidence, not the conversation. A finding names the reachable failure and its impact.
 The DM repairs and accepts; the reviewer decides neither science nor permission.
+
+## Publishing direction results
+
+Each DM publishes its own read results and RESEARCH entry without waiting for Root. Directions
+normally touch separate content; use a small update-time check, not a coordination service.
+At a meaningful result boundary:
+
+1. Publish the direction evidence. Before editing the shared entry, fetch `origin/main`, check
+   the owned checkout/index and inspect upstream changes to the affected content. Use a
+   main-based publication checkout if needed to keep experimental branch history out of main.
+2. Update only the owned direction's standing, evidence links and next step. Preserve other
+   rows, owner controls and launch-bound lead values; link to the published evidence rather
+   than copying an old whole index. Check the diff and commit explicit paths.
+3. Refresh main before pushing and reconcile any new relevant changes locally. Push normally
+   and verify publication. A last-moment advance may reject the push; fetch, merge the relevant
+   update and retry without force-pushing. An ordinary Git conflict needs no Root acknowledgment
+   or App message. Raise only an unresolved ownership/meaning question in this task.
 
 ## Execution and admission
 

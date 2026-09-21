@@ -4,7 +4,8 @@
 # Root role preference remains Sol/low; select it per task.
 # Individual named agent configurations retain their own defaults.
 # Main sessions can be Root or direct DM; the role choice does not load a child model/config.
-# Session entry: .agents/skills/hmasd-loop-dispatch/SKILL.md.
+# Root entry: .agents/skills/hmasd-loop-dispatch/SKILL.md.
+# Direct DM entry: read agents/hmasd-direction-manager.toml's instruction body via AGENTS.md.
 approval_policy = "never"
 sandbox_mode = "danger-full-access"
 
