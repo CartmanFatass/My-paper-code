@@ -117,29 +117,20 @@ The DM repairs and accepts; the reviewer decides neither science nor permission.
 
 ## Publishing direction results
 
-The DM owns publication of its direction's read results, including its RESEARCH standing,
-summary, evidence links and next step. This does not wait for Root, even when a Root is active.
-Publish at a meaningful result boundary, not on every progress check. A helper assignment does
-not transfer this ownership. Keep existing owner authority over pause, direction selection,
-lead changes and scientific claims.
+Each DM publishes its own read results and RESEARCH entry without waiting for Root. Directions
+normally touch separate content; use a small update-time check, not a coordination service.
+At a meaningful result boundary:
 
-1. Commit and push the direction's NOTES/CLAIM and recoverable run evidence. Code and large
-   result artifacts may remain on that direction branch; use immutable commit links in the index.
-2. Fetch current `origin/main`. Work from an owned checkout/index based on it. If the direction
-   checkout contains unmerged experimental history, use a separate owned publication checkout
-   based on `origin/main`; do not push the entire direction branch into main just to update a row.
-3. Check the current direction ownership and apply only its standing/result/evidence change. Preserve
-   other rows, owner controls and launch-bound lead values. Check the diff, stage explicit paths
-   and commit explicit pathspecs. Do not copy an older whole RESEARCH file over the current one.
-4. Push normally to `refs/heads/main`. A concurrent advance is ordinary Git work: fetch the new
-   main, merge it into the publication branch, preserve the other changes and retry the normal
-   fast-forward push. No force push, reset, rebase, shared index, lock service or Root ACK.
-   Resolve an overlap from the current evidence. If ownership or meaning cannot be resolved,
-   explain the actual issue in this task; messaging another Codex App task still needs an explicit
-   user request. A non-fast-forward rejection is not a request for inter-session coordination.
-5. Verify that the result commit is present in published main. No separate receipt, handoff
-   file or message to Root is needed. Keep any actual publication failure distinct from the
-   completed scientific reading; a transient Git conflict does not authorize a new experiment.
+1. Publish the direction evidence. Before editing the shared entry, fetch `origin/main`, check
+   the owned checkout/index and inspect upstream changes to the affected content. Use a
+   main-based publication checkout if needed to keep experimental branch history out of main.
+2. Update only the owned direction's standing, evidence links and next step. Preserve other
+   rows, owner controls and launch-bound lead values; link to the published evidence rather
+   than copying an old whole index. Check the diff and commit explicit paths.
+3. Refresh main before pushing and reconcile any new relevant changes locally. Push normally
+   and verify publication. A last-moment advance may reject the push; fetch, merge the relevant
+   update and retry without force-pushing. An ordinary Git conflict needs no Root acknowledgment
+   or App message. Raise only an unresolved ownership/meaning question in this task.
 
 ## Execution and admission
 
