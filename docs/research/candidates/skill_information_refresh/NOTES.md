@@ -2861,3 +2861,118 @@ process logs. Complete C06 evidence remains at
 These pinned links also resolve from the main-line notebook publication, where raw
 experimental history is kept on the independent research branch. The C07 claim and
 C01-C06 program bytes remain unchanged from their accepted execution inputs.
+
+## Pro question 2026-09-21 C post-C07 reentry feasibility and current-scope closure
+
+Conversation: reuse the existing Jev direction conversation from its local operation
+state; no private account facts in the repository.
+
+Owner asks: "重新进入的条件是否真的可以达成 如何达成 如果不能达成或者概率较低是否要关闭本方向".
+This is an owner-requested feasibility and direction-investment judgment, not a new
+experiment, a restart of the completed batch or a cross-direction Portfolio review.
+The current index at `43c93e4cfeac65f383c4ef6f4a49997fc1c89352` marks C exploring/idle.
+Its final two re-entry suggestions were: a concrete later receiver effect missed by
+NEAR, or an unavailable-model/resource constraint with a discriminating comparison.
+The DM now challenges whether these are attainable research options or merely generic
+future conditions that do not justify keeping an active direction open.
+
+Question: Given the complete C06-C07 outcome and inherited C01-C05 constraints, should
+the DM recommend closing current C investment rather than retaining exploring/idle?
+Assess the actual attainability and means of obtaining the two recorded conditions;
+separate an implementable variant, a measurable hypothesis and a worthwhile task-grounded
+next question. If a concrete, useful near-term alternative survives, name its lawful
+observation/feedback, receiver action and native consequence, its strongest simple
+reference and the smallest observation that can change this decision. Do not require
+proving a positive gain before ordinary exploration. Do not invent a new simulator
+feature or hypothetical feedback stream merely to maintain the direction, and do not
+require a learned/neural method to justify the positive ordinary-planning result.
+
+Standing: C07 is complete, all native handles terminal and all raw artifacts published.
+The full reading immediately above preserves every block and the frozen interpretation.
+NEAR-AF +102 completions in 1,280 new worlds, +.0796875/world, approximate normal95%
+[.0560616544,.1033133456], all five block means positive; the original primary passes.
+The weakest block mean is .0234375 with an interval crossing zero, and the confirmation
+mean is smaller than C06's exploratory .1328125. LONG-NEAR is +3 / +.00234375, with
+5 positive, 3 adverse and 1,272 tied worlds. Its prospectively corrected finite upper
+is .043452695085522186 < the declared .05 task scale, under the stated independence/
+equal-mean assumptions. This bounds this fixed LONG program, not every possible use of
+later consequences. The prewritten branch retains NEAR and ends this LONG pursuit.
+
+The confirmed ordinary planner is a positive result, not a failed research package.
+It uses the known model and lawful own history; its physical belief omits state-dependent
+sending/silence likelihood. C07 adds no model/learning/real-UAV evidence. NEAR's 92.160862s
+panel wall versus AF's 3.529101s is 26.1x here; no measured deployment latency deadline,
+energy constraint or compensating utility scale has been identified. Relative wall alone
+cannot establish an actionable deployment bottleneck. All C06-C07 work is zero fits;
+the original four C training fits and all adverse evidence remain as recorded.
+
+Inherited constraints: C03 reduced its stale-wait proxy while losing 9/5 native jobs;
+C04 ACTIVE_FIRST beat the three frozen learners by 12/1/1; C05's known lawful value
+is Delta=wX-4q and one learner reproduced it, while hiding its iid q does not create
+a history-identifiable target. Earlier Pro's q(z) suggestion had no actual target
+interface/feedback mapping. C07 now overturns no such negative and does not require
+every possible future direction to break a transparent VoI formula. The older closure
+was superseded by the owner's actual multistep question and its C06-C07 answer; do not
+reuse that closure as a current scientific verdict without accounting for this positive.
+
+DM's provisional reasoning: the current long-increment question is answered at the
+declared scale. No concrete successor is selected. A favorable hypothetical future
+condition need not be impossible for present investment to close, but lack of a mapped
+target is not a calibrated low success probability or evidence that all refresh timing
+is useless. Re-entry should be a future material reason for a new investment decision,
+not a standing obligation to search forever. A read-only shared-host mapping is being
+checked locally; no new host execution or special data collection is authorized here.
+Please criticize this reasoning rather than merely endorse a closure label.
+
+Context (paths inherit source_sha unless an explicit revision follows):
+- Governance: `docs/project/OPERATING_CONSTITUTION.md` sections 1-5, 7-8; current owner
+  request above, current owner pause/selection as `43c93e4cfeac65f383c4ef6f4a49997fc1c89352:
+  docs/research/RESEARCH.md` first paragraphs and C row only. Owner chooses directions;
+  DM owns scientific route/investment judgments and its own published standing. No
+  Root integration, peer messages or new owner-approval procedure is part of this review.
+- Methods: `.agents/skills/hmasd-scientific-tools/SKILL.md`, Update the working explanation,
+  Comparators and MARL information, Cost and exposure, and Pro. Distinguish opportunity,
+  representation, finite learnability and full-program benefit; no invented probabilities
+  or obligation to propose a new architecture. A useful ordinary-method comparison can
+  be legitimate without a prior headroom proof.
+- Read the complete C07 result, cost and direction judgment immediately above; its
+  frozen `CLAIM_near_commit_c07.md`; C06 complete reading and C07 full prior Pro answer /
+  adoption in this notebook. Earlier advice covered the bounded LONG outcome branch,
+  not whether the entire C direction should remain active after the owner's challenge.
+- Raw C07 `runs/skill_information_refresh/c07_fixed_s73180_73184_20260921/summary.json`
+  and `episodes.jsonl`, at `a97233da59fdbd6349803b8b157901cd50286bdf`. All 240 NPZs are
+  there if a disputed conclusion needs them; do not imply a whole-data audit from reading
+  the notebook. C06 raw at `8a651c9a0a299fa6f5e90dca5f3c5ecc72655c5b` same direction
+  `c06_multistep_s73170_20260921`; consult only for a concrete disputed premise.
+- Actual C01 `host.py` and C06 `belief.py` / `planning.py` under
+  `experiments/candidates/skill_information_refresh/`, as needed for the hypothesized
+  later-receiver mechanism or legal information. These are unchanged from C06 launch
+  `45a1f534539032c021f5d44a7d78f4b503b0ba51`. C07 execution source is
+  `71055f9907059fdd334ebba0e4d414d44f9ad656`.
+- This notebook's original C01 question/host mapping, C03/C04 readings, C05 lawful-value
+  result and prior q(z) target-mapping gap supply inherited evidence. Historical governance
+  and owner selection have been superseded where the current constitution says so.
+  Do not inspect unrelated B/VSP/FSD experiment work or assume their task outcomes.
+
+Prospective cost: zero fits, zero policy evaluations, zero model simulations and no new
+result launch. This is bounded source/evidence reading and advice; any proposed empirical
+next action must state its real fit and dominant non-fit cost, not silently execute it.
+
+Return: a source-grounded answer to whether each condition is currently attainable,
+what would actually obtain it, and whether current-scope investment should close. Give
+the strongest reason against your preferred decision, preserve C07's positive result,
+and state what remains unknown. Unsupported future hope is not a producer/dependency;
+resource ratio is not itself a deadline. No fabricated numerical probability, exhaustive
+search or mandatory next candidate. Include MATERIAL_DISSENT yes/no and the actual
+scope of the recommendation. A closure recommendation concerns current investment and
+maintenance, not impossibility of the broader scientific topic or erasure of evidence.
+
+Read the pinned question and Context sources before answering. Current owner instruction
+and constitution govern; skills are methods and historical/frozen files keep their bound
+meaning. Do not replace inputs with chat memory or a moving branch. Cite consequential
+sources actually read and disclose decision-critical gaps. No experiments or approval gates.
+Write only the empty Answer below on `codex/c-multistep-send-value`, fetching the latest
+target blob and preserving all other bytes. Stop on overlap. Report the actual answer
+commit, or return the complete text in chat if writeback fails; no receipt-only response.
+
+### Answer
