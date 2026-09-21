@@ -6386,7 +6386,11 @@ class HMASDAgent:
                 dones_for_masks = dones_seq.squeeze(-1)
             else:
                 dones_for_masks = dones_seq
-            masks_for_eval = (1 - dones_for_masks.float())
+            # Stored done ends this row's transition; reset before the next input.
+            # The first row already has its collector-provided input hidden state.
+            masks_for_eval = torch.ones_like(dones_for_masks, dtype=torch.float32)
+            if dones_for_masks.size(0) > 1:
+                masks_for_eval[1:] = 1.0 - dones_for_masks[:-1].float()
             compact_context_seq = None
             if self.use_low_level_compact and self.low_level_compact_extractor is not None:
                 if joint_observations_seq is None:
