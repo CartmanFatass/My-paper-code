@@ -4136,3 +4136,44 @@ evidence that can change the investment judgment — for instance the matched te
 deployment gain above, or a competent flat baseline on this host (CF never trained; B03,
 B04) — not a small η², a high entropy, an unused head, or a new name for a failed scheme.
 Reserve ideas I2 and I3 and their material stay in the 2026-09-20 20:36 entry.
+
+## 2026-09-21 02:59 PDT — owner allows the reopening probe; prospective B14 (zero fits): does the ten-step credit pay in its own regime?
+
+Owner, in reply to the 02:51 recommendation: the probe is allowed, and no fit or probe
+allowance applies. The direction's status is unchanged; this is the one observation named at
+02:51 as able to reverse the reserve recommendation, declared here before any of its scores.
+
+**Object `FSD_LABEL_LAW_DEPLOYMENT_B14`.** Zero fits: fixed weights, no optimizer step, on
+the fit host `wsl_4070` (fixed-weight panels are exact only there). Checkpoints: the six B13
+final weights, by their `weights.json` digests. Estimate: each fit's own final β̂, z (the
+last record of its `bandit.jsonl`), frozen. Same 32 evaluation worlds and evaluation seeds
+as B13's panels, mean actions, whole horizon, coordinator bypassed as in B08/B13 panels.
+- *Faithful load first:* rerunning `uniform_every_10` with the fit's own panel stream must
+  reproduce the fit's recorded rollout-45 `uniform_every_10` panel exactly; otherwise the
+  probe stops for that checkpoint and reports a technical failure, not a score.
+- *Rules, per checkpoint:* `uniform_every_10` and `law_every_10` — every agent's label
+  redrawn independently every ten steps from q = .7 softmax(z) + .3 uniform (B13's declared
+  law, its constants, nothing tuned) — each under two fresh label streams (replicates a, b)
+  that are the same for both rules' seeding scheme, so label-draw noise is measured and not
+  read as an effect. Four panels per checkpoint, 24 panels in all.
+- *Primary (Pro's test):* the three `UNIFORM` checkpoints, whose six label policies had
+  equal exposure. G = J(`law_every_10`) − J(`uniform_every_10`), paired by world, averaged
+  over the two replicates. *Secondary:* the same on the three `BANDIT` checkpoints, where
+  the law is also the training law (matched training and deployment); reported separately,
+  never pooled with the primary.
+- *Intermediate check:* executed label shares under `law_every_10` follow q (largest
+  executed share within .03 of max q), i.e. the estimate really changes ten-step exposure.
+
+**Predictions.** Mine: G falls short — mean over the three `UNIFORM` checkpoints below .03
+and at most one block at or above .03 — because B12 put the whole all-equal label spread at
+commitment ten at .02–.03 J on D1280's weights and a law with a .3 floor realises part of
+it. Reversal outcome (fixed at 02:51 from Pro's answer): G ≥ .03 in the mean with a positive
+paired gain on at least two blocks, larger than twice the replicate difference. Secondary,
+no prediction of sign; I expect |G| < .03.
+**What each outcome changes.** Reversal → the ten-step credit is useful where it was
+estimated, the constant deployment hid it, and the reserve recommendation is withdrawn in
+favour of a prospective entry for a per-agent sampled-law scheme. No reversal → the
+recommendation stands with its last named doubt removed. Either way nothing is added after
+the scores: no extra laws, floors, temperatures or checkpoints.
+**Limits.** Three reused blocks; mean actions only; the estimate is each fit's own final
+one; panel conditional noise ≈ .03 J is why the comparison is paired by world.
