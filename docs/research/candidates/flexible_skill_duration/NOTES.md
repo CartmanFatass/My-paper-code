@@ -3519,3 +3519,377 @@ Constraints: seeds and matched baseline per constitution section 8; no training,
   answer in chat, not just a SHA, status message or link.
 Return: (1) For the explanation above: what B07–B12 strengthen, weaken and leave unresolved, naming any quantity the DM misreads — in particular whether η² of the standardised advantage by label is the right measure of what 15 PPO steps on 4,800 rows can learn, whether the entropy argument is quantitatively right for this loss (standardised advantages, clip .2, coefficient .07, six labels), and what would explain the concentrated yet valueless laws actually observed. (2) The strongest simpler or contrary account the code or the recorded outputs can confirm or exclude at zero fits, with the file and quantity to look at. (3) For B13 as declared: which conclusions each outcome pattern of P1–P4 licenses and which it does not, given the comparators, the switched-off coordinator, the different label streams and the optimism of a best-of-six reference; any reading rule the DM should fix before scores exist (it will be recorded as adopted or rejected before the reduce is run, never applied after). (4) A simple-model bridge if one helps: a bandit or SMDP prototype for label credit under a shared additive reward, with its assumptions and the MARL coupling it omits (low-level co-adaptation, non-stationary map, discriminator pressure). (5) The follow-up best justified under each B13 outcome, with a predicted intermediate change, a native consequence, and fit and non-fit cost; "none" is a legitimate answer. (6) Whether the recorded evidence supports the DM's advice that team-conditioned termination or reassignment has no support on this learner yet. End with MATERIAL_DISSENT yes/no.
 ### Answer
+
+*Saved from chat by the DM (2026-09-20): Pro read the repository at the pinned sha through the GitHub connector but did not complete the write (its interface required a whole-file replacement it could not verify); `deliver` returned NOT_DELIVERED with no commit on `claude/fsd-pro-critic` and the question unchanged. Chat text sha256 `45493b976d0f07e4f3fa6a2906ce97828584da78d75234df24a2cbe227604957` (13,970 characters). Wording unchanged; the displayed and inline formulas, which the chat rendered one symbol per line, are re-typeset on one line each, the tab-separated tables are set as Markdown tables, section titles are set as headings or bold, and a source chip the chat showed after the COMA sentence is kept as a parenthesis.*
+
+GitHub 读取成功，但本次未完成写回，没有生成 commit。 最后刷新时，claude/fsd-pro-critic 上目标文件的 blob SHA 仍是 b587ed9e23e89a305886ea1508a8789192a109a7，指定 ### Answer 仍为空。当前写入接口要求整文件替换，而连接器返回的长文件未能通过 files.materialize 落盘以校验其余字节；我没有执行无法可靠保证保留原文的覆盖。这不是已经确认的权限拒绝。以下提供完整答复。
+
+依据版本： d279082068380b497abf76b412ea0c11b2a519eb。以下仓库路径、数量和代码判断均指该固定版本；最新分支只用于检查写入位置，没有用于替换研究输入。B13 后来的结果没有作为输入。本答复没有启动训练或探测，没有修改 B13 的批次，也没有代替 DM 作出批准决定。题面将本次咨询限定为解释、读法与后续建议，并保留现有种子、比较器和批次约束。
+
+总判断：标签具有任务相关的行为内容、十步数据中存在可提取的标签差异，这两点得到加强；“现有信用不可学习”“熵已经被确认为失败原因”“长承诺没有成本”“近似加性排除了 team-conditioned 决策价值”，则超出了证据。 B13 可以检验一个外部选择与训练暴露方案是否有效，但不是自动裁决 I1、I2、I3 的机制实验。尤其需要在看分前撤回两条过强的解释规则：P2 失败不直接推出 I2；P2 成功而 P3 失败也不直接否定选择瓶颈。
+
+#### （1）B07–B12 加强、削弱和留下了什么
+**证据链的有效部分**
+
+| 研究 | 得到支持的结论 | 不能随之推出的结论 |
+| --- | --- | --- |
+| B07 | 唯一可用的同块 J 比较，没有显示训练时 cap 10 优于 cap 1：晚窗约 .4517 对 .4565。 | 不是三块等价性结果。行为捕获实际上比较了不同块的 D_K10 与 D_K1；没有任何一块同时完成两个新臂。不能把“未看到自相关差异”当作标签无内容。 |
+| B08 | 固定输入下标签改变动作均值；RMS 差异为动作标准差的 .19–.23。改变执行规则也改变 J。 | 不能由跨块平均收益接近零，推出每块的选择都无价值。更不能把高动作噪声下近零自相关解释成标签不起作用。 |
+| B09 | 至少在 772903，存在很大的常量标签选择机会：.521 对原部署 .355。 | 每个 world 从六个“全员同标签、整回合持有”的策略中选最优，只是一个受限策略类的 oracle；不是一般状态依赖、逐 agent、回合内重分配的价值上界。 |
+| B10 | “标签差异在训练动作噪声下消失”受到直接反证：跨度仍约 .080/.133/.073。 | 这些仍是固定权重、全员同标签、长持有的面板，不等于真实训练中十步混合分配的价值函数。 |
+| B11 | 当前信用的边际标签统计弱、逐 rollout 排名不稳定，是合理的学习困难线索。 | 小 η²、较大的所谓 placebo 跨度，都不能证明真实 PPO 梯度不含可学习信号。 |
+| B12 | 十步计数数据已经能提取与固定权重标签表现有关的结构；部分长 cap 的区分度更强。 | 不是长期训练收益实验，也没有证明所有交互可以忽略，更没有证明百倍 η² 等于百倍学习效率。 |
+
+B07 的不完整性、未配对行为比较，以及 B08 对先前自相关解释的修正，都已在笔记自身记载；不应在新的解释中再次压缩成“重抽标签改变不了行为”。 B09–B12 的相应范围和限制见固定问题、原始 B10 输出及 B12 汇总。
+
+还应收窄“六个 materially different policies”的措辞：证据支持这个标签条件化策略族中存在实质差异，并不证明六个标签彼此都实质不同，也不证明这种区分贯穿训练。例如 B09 的 773003 中标签 0 与 5 的差别很小。
+
+**第一处数量误读：.024/.019/.021 不是标准化优势跨度**
+
+B11 原始汇总的 quantity 明确说统计的是 mean raw advantage；.0238115… 对应字段也是 agent_label_spread。固定问题把这组数称作“mean standardised advantage”的跨度，是实质性的单位误写。
+
+以 772803 为例，由已记录的 `mean_standardised_advantage_indicator_c / share_c` 直接相除，可得标准化优势的六个条件均值约为
+
+(.01345, .00774, .02198, .04051, −.01301, −.01883),
+
+跨度约 .05934，而不是 .02381。这是对已记录数量的算术换算，不是新的梯度测量。B11 的 policy_gradient 还明确标为 score_function_with_shares_as_q：它把边际执行份额当成条件概率，不能替代实际网络梯度。
+
+**第二处误读：η² 不是 PPO 梯度的信噪比**
+
+这里的 η² 衡量的是标签分组均值解释了多少优势方差。真实策略更新涉及的却是
+
+`g = E[ ∇_θ log q_θ(C_i | x, 解码前缀) · A_i ]`.
+
+边际分组忽略了状态、agent 身份、自回归前缀和网络 Jacobian。不同上下文的有效梯度可能在边际标签均值中抵消；反过来，边际标签均值也可能包含状态选择造成的差异。因此，η² 小是诊断线索，不是“梯度不可用”的判决量。B11 的统计实现和实际 PPO 路径支持这一测量对象的区分。
+
+“4,800 rows × 15 steps × 45 rollouts”同样不能直接作为独立样本量。每个 rollout 的 4,800 agent rows 来自 800 个共同 team 决策，六个 agent 共享环境回报，且位于 16 条 lane 的连续轨迹中；15 个 PPO epoch 反复使用同一批数据，不产生 15 倍新证据。另一方面，也不能由这些依赖关系反推“有效样本只有一个”或“肯定学不会”。跨 rollout 的策略族还在变化，不能把 45 批当作同一个静态标签模型的独立重复。
+
+**第三处误读：实际 loss 的熵比例不是简单的 .07**
+
+agent.py 的 agent policy loss 除以有效 agent 总数，而 entropy 先对同一 team row 的 agent 熵求和，再除以 team batch size。对于这里六个 agent 同时有效的构造，忽略共享参数、team 分支、value loss 和 clipping，agent 部分的局部 bandit 类比是
+
+`max_{q_i}  (1/6) Σ_i E_{q_i}[A_i] + λ_h Σ_i H(q_i)`.
+
+对应的独立分布解是
+
+`q_i(c) ∝ exp( a_i(c) / (6 λ_h) )`,
+
+即这个类比下的有效温度约为 .42，不是 .07。这里的六倍来自六个 agent 的 sum/mean 不一致，不是“类别数是六”本身。
+
+数量上，优势差 .02 在温度 .42 下的最大最小概率比约为 1.049；用 .07 则为 1.331。用上面 772803 的实际标准化边际跨度 .05934，前一个比值约为 1.152。这些只能说明“近均匀分布与当前量级相容”，不能证明真实网络达到这一平衡，也不能把最大最小概率比直接写成相对均匀的 ±15%。
+
+还有三点影响解释：
+
+熵梯度在严格均匀分布处为零，不是一个恒定大小 .07 的力压住任何小信号。
+
+在旧参数处 ratio 为 1，.2 clipping 尚未截断该点的局部策略梯度；后续 epoch 的情况必须另读。
+
+共享 encoder 同时接收 policy、entropy 和 value 梯度；局部 bandit 公式不是整个神经网络的收敛证明。
+
+甚至 Standing 中沿用的“标准化使旧策略处 policy loss 必为零”，在这个具体实现上也不应照搬：共同标准化保证的是
+
+`Ā_team + 6 Ā_agent = 0`,
+
+而代码把两个分别求平均的 policy loss 相加，旧策略处的标量是 `−Ā_team − Ā_agent`，不必为零。无论它是否接近零，都不能据此判断梯度是否有效。
+
+**第四处误读：“近均匀却集中”的缺口其实已经有代码答案**
+
+训练时的采样概率与部署时的 argmax 使用频率不是同一个量。
+
+networks.py 在 deterministic=False 时采样，在 True 时取 argmax。即使每个状态上的概率都很接近均匀，一个很小但方向稳定的 logit 偏好，也可以让同一标签几乎总是被 argmax 选中。因而训练份额 .14–.19、熵接近 ln 6，与部署中 64%、65% 等集中使用率完全相容，不需要额外的“概率集中机制”。08:41 的 B08 笔记本来已经明确指出这一点。
+
+但这只解释集中，尚未证明那些微小偏好全部是噪声。它们也可能包含训练目标与部署目标不一致、状态依赖偏好、critic/encoder 耦合或早期路径依赖。应把“argmax of noise”降为待检验解释，而不是由高熵直接推出的事实。
+
+**第五处误读：team label 不是这里有效的零效应 placebo**
+
+B11 的说明从“team label 不直接进入低层 actor”，推出“固定权重时不能改变执行动作，因此其分组结构全是状态造成的”。这个推论漏掉了路径：
+
+`Z ⟶ q(C_1, …, C_6 | s, Z) ⟶ 低层动作 ⟶ R`.
+
+SkillDecoder.forward 确实把 team_skill_embedding(Z) 放入解码序列，之后的 agent-label 分布依赖它。固定权重并不会切断这条路径。只有当 agent labels 被外部固定、覆盖时，才能用“不直接进入 actor”排除这条行为影响。B11 的原生采样收集没有这一条件。
+
+因此，较大的 team-label 跨度不能作为 agent-label 效应无效的校准证据；B12 中“不通过该 placebo”也不能补上这个因果论证。另一个较小但相关的措辞问题是：agent value head 读取经过中央 encoder 的 observation token，并非未经交互的“只看自己原始 observation”的简单线性 baseline。
+
+**B12 的积极结果应保留，但须改写其强度**
+
+B12 的 r_squared 是标签计数与位置固定效应共同模型的 R²，不是标签单独解释的方差。将 .015→.24 直接说成“标签解释的回报比例”不准确；应另比较位置-only 模型或报告增量解释量。其置换将完整计数向量在相同 position 内重排，保留了同一时刻的组成，但不保留状态与历史条件。原生 coordinator 又是状态依赖、自回归的。因此这些 p 值是在所设置换模型下的强关联证据，不等于已经排除了状态混杂的随机化因果检验。
+
+“加性预测复现 B10 地图”也过强。772903 的标签 0，预测约 .348，B10 实测约 .236，差约 .112。这不自动证明非加性，因为收集与评估 worlds 不同；但足以说明绝对地图并未复现。一个略负的 `Σ_c n_c²` 系数，只削弱“全员同标签才有收益”这一特定解释，不能排除身份相关、标签对相关或状态相关的协作效应。
+
+η² × rows 还有单位问题。 cap 10 每 rollout 有 4,800 agent rows；cap 500 只有 96。结合笔记列出的 η²，单 rollout 的乘积量级应分别约为 .5–1.6、1.8–3.2，而不是 8–25、29–50。后者与 16 个 rollout 池化后的行数相容。应核对原始 probe 的该字段；不能把它继续称作“每 rollout 信息量”。即使单位改正，`n η²` 也只是启发式，不是考虑了聚类、参数化和目标变化的有效信息量。这里我完成的是量纲核对，没有重算未读取的逐行优势数组。
+
+最后，实际 GAE 是
+
+`δ_j = R_j^(γ,k) + γ^{k_j} V_{j+1} − V_j`,  `A_j = δ_j + γ^{k_j} λ A_{j+1}`.
+
+十步是决策间隔，不是信用的硬截断。 改 cap 同时改变承诺、样本数、GAE 的物理时间尺度，并把固定 critic 用到非训练 cap 上。“百倍每决策 η²”可以保留为特定固定权重统计的变化，不能改写成百倍可学习性；“episode J 在 ±.01 内”也只是这些条件下的点估计，不是训练无成本或行为等价证明。
+
+#### （2）最强的更简单或相反解释，以及零 fit 的区分方法
+
+我认为最值得优先检验的是：
+
+当前 learner 可能在学习一个近均匀、强正则化的随机训练策略；部署却把它的微小偏好用 argmax 放大。与此同时，B09 的长持有常量标签地图，与 coordinator 真正优化的随机动作、原生续接策略下的 SMDP 价值并不是同一个被估计对象。失败可能首先是训练—部署及目标错位，而不是“十步回报没有可学信用”。
+
+其中“argmax 放大近均匀偏好”已经由代码和 B08 记录确认；“真实梯度是否稳定、是否被正则化抵消、是否优化了不同排序”仍未确认。原始 coordinator 有跨 segment 的 GAE，而 B13 回归的是十步段的未折扣平均即时回报，这也是需要保持的目标区别。
+
+最有区分力的零-fit 检查不是再看 loss 标量，而是：
+
+| 检查 | 文件与数量 | 什么结果会改变解释 |
+| --- | --- | --- |
+| 区分概率与 argmax | B11 label_law、B09 部署 histogram；networks.py 的选择分支和实际条件 logits | 已足以排除“训练概率必须集中才能产生集中部署”的说法。完整条件 q 可进一步区分稳定微偏好与边际平均掩盖的状态结构。 |
+| 真实局部梯度分解 | agent.py:6115–6210 的原 loss；B11 collector 的实际输入、顺序、mask、优势；分别读 policy、entropy、value 对标签对比方向的投影 | 若正确排序方向跨 lane/rollout 稳定，却主要被 entropy/共享梯度抵消，I3 的优先级上升；若方向本身不稳定或不对应正确的续接价值，不能只降温度。 |
+| 匹配被估计对象 | 用 B11/B12 的 collector 和同一 checkpoint，比较同一前缀下标签改变对“原生续接回报”与“整回合固定标签回报”的排序 | 若二者稳定不同，就不能拿 B09 排名直接判定原 PPO 信用错误；若原生续接也存在稳定机会而真实梯度提不出来，才加强信用改造解释。 |
+
+这些是建议，不是已执行的结果。真实梯度检查需要条件概率及上下文，不能从 chosen log-prob 和边际份额补造；若上下文未保留，只能在 fit host 做新的只前向收集，再进行不含 optimizer step、normalizer 更新的计算。它也只能在固定参数处检查局部梯度，不能假装重放了 15 次实际 PPO 更新。题面给出的零-fit 探测成本约为每项 10–30 分钟，应计入成本，不应自动全做。
+
+#### （3）B13 的结果究竟许可什么；看分前应固定什么读法
+**先限定 B13 识别的对象**
+
+B13 的主比较是 coordinator update 关闭条件下，外部自适应标签分布与外部均匀分布的训练方案比较。它不是原 D1280 的信用头单因素替换。关闭的还包括 coordinator value 更新；低层和判别器继续训练，team label 仍参与这些路径。两臂标签 RNG 不同，因此即使第一轮都均匀，轨迹也不相同。历史 D1280 是重要参照，但不是这个批次的同时重跑控制。
+
+也不应反过来把 BANDIT 的回归一概称为“非随机化、因此有选择偏倚”：它在给定 rollout 历史后，以不依赖当前状态的同一个 q 独立抽取 agent labels。非均匀不等于非随机化。 其主要问题是覆盖度、有限样本、模型误设、跨 rollout 非平稳，以及短期回报不等于长期部署价值；不是仅仅因为 q 集中了就失去当前段的随机分配性质。
+
+**P1–P4 必须按原定义报告**
+
+| 指标 | 成功许可的结论 | 不许可的结论 |
+| --- | --- | --- |
+| P1：15 rollout 内最大执行份额 > .4，三块 | 外部训练暴露机制确实离开了均匀。 | 不证明标签选对、信用估计正确或 J 提升。失败也不否定被动估计加部署选择的价值。 |
+| P2：最终估计标签位于本臂六标签地图 top two，两臂各三块 | 最终估计与该臂当时的常量策略地图有一定一致性。 | 不证明整段训练都选对；也不证明学会了原 D1280 的排序。集中暴露可能把被偏爱的标签训练成最后的赢家。 |
+| P3：BANDIT 对历史 D 的最终及晚窗增益达阈值 | 整个方案在这些重复使用的开发块上取得宣告的 native 改善。 | 不独立识别 additive credit、coordinator-off、暴露变化或低层共同适应的贡献。 |
+| P4：两臂最终 best_estimate 差在 ±.03 内，至少两块 | 达到了预先给定的描述性接近规则。 | 不是统计等价性结论；两臂一起很差也能满足它。 |
+
+P3 原文只对 BANDIT 定义。“P3 在两臂都成立”不应被当成已经定义好的原始预测；UNIFORM 对历史 D 的同类比较可以明确列为辅助结果，不能悄悄改写原预测。
+
+**最重要的预先读法：把选择收益与训练方案收益拆开**
+
+建议 DM 在首次 reduce 前记录采用或拒绝以下辅助读法，不改变 P1–P4，也不增加面板或 fits。
+
+对每臂 a 的最终权重，定义：
+
+`E_a = J(best_estimate)`,  `R_a = J(uniform_every_10)`,  `C_a = (1/6) Σ_{c=0}^{5} J(constant_c)`,  `M_a = max_c J(constant_c)`.
+
+读三个不同的差：
+
+- `E_a − R_a`：固定权重上的部署规则收益。 它包含“选哪个标签”及“整回合持有，而非每十步独立重抽”的共同变化，不是纯标签选择效应。
+
+- `E_a − C_a`：同一常量策略类内的选择收益。 `C_a` 是“每回合均匀抽一个全员常量标签”的期望分数。它与 `E_a` 的承诺方式一致，更适合回答“估计器是否在六个常量策略中选出了有用的一个”。这完全利用已宣告的最终六标签面板；不要把它误称为 uniform_every_10。
+
+- `M_a − E_a`：受限策略类内的选择遗憾诊断。 这里的 `M_a` 是同一评估集上的事后最大值，有 best-of-six 乐观性；只能辅助解释，不能替换主结果或充当一般最优策略上界。
+
+这些量使两臂差具有明确的代数分解：
+
+`E_B − E_U = (R_B − R_U) + [ (E_B − R_B) − (E_U − R_U) ]`.
+
+第一项是在共同部署规则下比较训练所得策略族；第二项是两臂部署规则收益的差。它不是完整因果分解，但比“BANDIT 赢了，所以 additive credit 正确”更有信息。最终六标签地图只在 rollout 45 宣告；不能事后假装较早边界也有这张地图。B13 的面板安排支持这些零新增执行的派生量。
+
+**P3 的一个先验陷阱必须明说**
+
+旧 D1280 权重上，B09 最佳常量标签对原部署的增益约为
+
+−.002,+.167,+.020.
+
+所以，即使完美选出旧策略族的最佳常量标签，也达不到“两块至少 +.03”的 P3 条件。B13 若做到两块达标，可能还改善了低层策略族；若 P2 成功而 P3 失败，可能只是多数块没有足够的这类选择机会，或 coordinator-off/训练变化抵消了选择收益。不能据此直接宣告“选择原来就不是瓶颈”。
+
+**联合结果的读法**
+
+| 结果模式 | 合理解释 | 不应自动采取的解释或行动 |
+| --- | --- | --- |
+| 两臂 P2 好，BANDIT P3 好，P4 接近，且两臂有清楚的类内选择收益 | 被动计数估计加常量部署已经可用；集中训练暴露未显示额外必要性。 | 不自动证明需要把估计器移进共享 learner。 |
+| BANDIT 明显优于 UNIFORM，P2 好 | 自适应暴露的整个训练方案有价值；用共同规则差和选择收益差判断表现来自哪里。 | 不能只归因于“信用方差降低”，也不能推出熵或长 cap 的作用。 |
+| UNIFORM 好、BANDIT 差，或只有 BANDIT 的 P2 失败 | 优先怀疑暴露集中、反馈自强化、跟踪滞后或覆盖不足。 | 不应先把共同的十步窗口判死，更不宜默认再降低熵。 |
+| P2 好、P3 失败 | 先查 E−C、E−R、地图跨度和对历史 D 的共同规则差。可能有选择收益，但策略族或机会限制了整体收益。 | 不能仅凭这一组合否定选择解释，也不能自动把工作转回低层。 |
+| P2 失败、P3 成功 | 方案确有 native 改善，但“最终排序准确”不是已显示的机制；top-two 判据也可能受近似并列影响。 | 不要宣布 additive ranking 已被验证；也不需要为挽救 P2 自动启动 I2。 |
+| P2、P3 都失败 | 该方案未支持宣告的效果；需区分地图平坦、估计滞后、短期/长期错序、训练伤害和机制未充分启动。 | 不是 I2 或 I3 的自动入场券。 |
+| P1 失败，无论其余如何 | 单独报告“暴露集中未按预测启动”，再读被动估计和部署收益。 | B13 中 coordinator 熵项已关闭；不能把 P1 失败归咎于原 .07。 |
+
+对近似并列应报告实际 J 差和 M−E，但保留 P2 原始排名成败，不能看分后把 top two 改成“差不多前四”。P4 的 ±.03 也不应升级为置信区间。所有块、宣告的最终点和晚窗都应保留；不要以最好 checkpoint、最好子集或六标签 oracle 代替它们。三条训练轨迹各有 32 个评估 worlds，不是 96 个独立训练种子。
+
+**对 estimator 修订的解释也应提前收窄**
+
+“16 clusters、55 design columns”可以使完整 sandwich covariance 奇异，不等于 55 列设计矩阵不可识别，更不等于六个标签对比的每个标准误只能偏小。标签对比实际只有五个自由度。创新方差下限是合理的稳健化尝试，但它还混入跨 rollout 漂移，不是已经校准的频率学置信界。
+
+还应同时读 `β̂`, `z`, `q`：训练用 softmax(z)，部署用 argmax β̂，标准误不同时两者未必偏爱同一标签。.05 的每标签概率下限保证正的期望暴露，不保证六个策略都保持质量。EMA .8/.2 在独立平稳理想化下的平均年龄为四个 rollout、有效样本量约九个，也不是字面上的五轮滑窗；实际低层非平稳，不能把这些理想化数值当作已验证跟踪性能。
+
+#### （4）一个有用但严格有界的 bandit/SMDP 桥
+
+先考虑一个刻意简化的模型：
+
+`R_j = α(x_j) + Σ_{i=1}^{6} b_{C_ij} + ε_j`,  `C_ij ∼ q_i(· | x_j)`,
+
+假设低层固定、标签效应平稳可加、当前标签条件随机化，暂时忽略跨段状态影响。
+
+此时计数回归可以估计 `b_c` 的对比。理想的每-agent 标签优势为
+
+`A_i^add(c, x) = b_c − Σ_d q_i(d | x) b_d`.
+
+它去掉了共同状态项和其他 agent 带来的噪声，保留该 agent 选标签的相对收益。这个桥说明为什么共享回报的信用分解可能有用，但不证明当前 B13 的估计已经达到该理想。
+
+关键是：label-free baseline 本身不是错误。 对任何不依赖当前所选标签的 B(x)，
+
+`E_C[ ∇_θ log q_θ(C | x) · B(x) | x ] = B(x) ∇_θ Σ_c q_θ(c | x) = 0`.
+
+因此它可以保持策略梯度的期望而减少方差。若把“label-conditioned baseline”理解成直接减去所选标签的 `b_c`，反而可能把要学习的效果一并减掉。I1 应明确是学习 Q/标签相对优势，还是采用有正确消项性质的反事实 baseline，而不是笼统地给 baseline 加一个标签输入。
+
+COMA 可提供一个具体概念参照：其作者在论文摘要中明确描述，对一个 agent 的动作求边际、其他 agent 动作保持固定，以构造反事实 baseline。这里使用的是这一具体设计思想，不是把 COMA 的实验结论移植成当前项目的有效性证明。
+（聊天界面在此处显示的来源标注：AAAI 出版物。）
+
+在独立策略的理想模型中，可写成
+
+`A_i^cf = Q(x, C_i, C_{−i}) − Σ_c q_i(c | x) Q(x, c, C_{−i})`.
+
+但本项目是自回归解码：后续 agent labels 会依赖前面的 label。不能未经推导就把所有其他 labels 当成与 `C_i` 无关的条件。需要按策略因子化处理前缀、后续分配及其边际化；这正是 in-learner 实现的非 fit 成本之一。
+
+加入持续时间后，应回到
+
+`Q(x, c, k) = E[ Σ_{t=0}^{k−1} γ^t r_t + γ^k V(x′) ]`,
+
+而不是只比较段内均值。当前代码已有跨 segment 的 GAE，所以 I2 的问题是承诺长度如何改变行为、目标、方差与样本供给的组合，不是“把原来硬截断的十步信用接长”。
+
+这个简单模型省略了低层 FiLM/GRU 共同适应、状态分布随标签改变、非平稳排序、agent 身份和交互、判别器压力、动作噪声，以及共享参数的 policy/value/entropy 竞争。B13 的 .3 floor 不会使这些省略自动成立。它是用来澄清假设与估计目标的桥，不是新实验的先决条件。
+
+#### （5）哪些后续最有依据：中间预测、native 后果与成本
+
+默认不是“B13 结束后必接一个六-fit 批次”。 以下是结果条件化建议，不改变已经运行的 B13，也不是新预算或审批要求。
+
+| 后续 | 何时最有依据 | 应预测的中间变化 | 必须对应的 native 后果与成本 |
+| --- | --- | --- | --- |
+| None／保留外部方案 | UNIFORM 的被动估计已经带来稳定类内选择收益，BANDIT 没有额外价值；或者地图平坦、机会不足、结果混杂，尚无可区分机制。 | 不必新增机制。把估计准确性、选择收益和策略族质量读清楚。 | 没有新增 fit；完成已宣告结果及必要的静态分析。外部方案有效，不自动使共享 learner 改造值得做。 |
+| I1：in-learner additive credit | 外部估计在非平坦地图上稳定有效，而原 coordinator 的真实局部信用确实不能稳定利用相同机会；且有明确理由需要把选择整合进 learner，而不只使用外部读出。 | 正确标签对比方向更稳定、与目标一致；概率质量移向有益标签，而非仅仅熵下降。 | 应保留或增加同权重选择收益及整体 J。题面成本约两臂×三训练种子，即六 fits；共享 advantage 改造、Implementer 工作和既有独立 review 是主要非 fit 成本。 |
+| I2：更长 high-level commitment | P2 失败后，已排除明显 EMA 滞后/实现问题，且固定最终权重下十步目标持续错排有实质机会的标签，而更长目标更一致。 | 长期相关排序或真实梯度方向改善；按样本供给调整后的证据改善，而非只看每决策 η²。 | 需要在较少决策与重新训练低层后仍有 native 改善。选一个有依据的 cap，与 cap 10 作匹配比较，约六 fits；配置和 host geometry／内存核对为主，不默认同时扫 50、100。 |
+| I3：降低 coordinator entropy | 零-fit 的实际 loss 分解显示：正确方向已经稳定，主要限制来自现有正则化比例，而非不稳定或错误信用。 | 正确标签的概率增加，所需方向上的 policy/entropy 平衡改变；不能只预测 entropy <1.6。 | 应提升 native 选择收益或整体 J，且不是牺牲未用标签后的暂时集中。选一个较低系数作匹配比较，约六 fits；配置级成本较低，但须区分 lambda_h 与低层 lambda_l。 |
+
+这些成本沿用题面，不是对新配置的实测运行时承诺。长 cap 的行数减少与 B07 cap 1 的大池 OOM 是不同几何，不能混为同一种内存证据。任何确认性或 competence 主张仍受既有种子和 competent matched-information baseline 规则约束；B13 的重复开发块本身不能提供新的效应量确认。
+
+几个直接的排序结论是：
+
+两臂都有效且接近： none 常常优于立刻 I1。先保留已经有效的简单外部方案；“能嵌进去”不等于“值得嵌进去”。
+
+BANDIT 优于 UNIFORM： 先确定是策略族质量、最终选择收益，还是两者改善。I1 可以成为后续，但不是仅凭胜负就获得机制背书；I2、I3 也没有因此获得直接支持。
+
+UNIFORM 优于 BANDIT： 优先保留 UNIFORM 加读出。进一步集中或降熵可能加重问题，长 cap 也未被指定。
+
+P2 失败： 当前原始回归排序正确而 EMA 错，首先是跟踪问题；两者都在相同条件下短视、且更长目标有稳定改善，才支持 I2；地图平坦则可能什么都不值得做。
+
+I3 不必永远排在 I1 后面。 如果实际梯度检查支持“信用已有稳定方向，而 sum/mean 比例造成过强正则化”，配置级 I3 可能比共享 learner 改造更便宜、更有区分力。但现有记录尚未完成这一步，不能现在就作此判决。
+
+最后保留 21:59 的明确约束：不从 B13 checkpoint 及其执行标签／旧 log-prob 失配的 rows 恢复 coordinator PPO 训练。 不能把已有六 fits 当成免费、有效的 coordinator warm start 来缩小后续成本。
+
+#### （6）是否支持继续建议暂停 team-conditioned termination／reassignment
+
+支持一个局部、成本导向、可撤回的优先级建议；不支持“此 learner 上 team-conditioned 决策没有潜在价值”的科学结论。
+
+支持暂缓的理由仍然存在：当前固定基础上的 selector 没有显示可靠、普遍的部署优势，deterministic END 经常返回原标签，B08 测到的是可访问动作变化而不是 END-minus-KEEP 的任务价值。立即在这个基础上做较昂贵的 termination 学习比较，确实可能得到难以区分“时机无用”与“可用替换很差”的结果。
+
+但暂停理由应删除或改写三项：
+
+不能再用“标签可能没有内容”作主要理由。 B08–B10 已经反驳了这个解释。
+
+不能把 .025 当一般状态依赖价值上界。 那只是六个全员常量策略之间的 per-world oracle 差。
+
+不能把略负的 `Σ n_c²` 当 team-conditioned reassignment 无价值的证据。 这个统计不检验具体 agent 角色、标签对、状态条件，以及某个前缀下继续与结束的价值差；近似加性的平均回报也不排除状态依赖的最优时机。
+
+更准确的建议是：
+
+当前证据优先支持把可重复的选择机会、实际信用与部署方式区分清楚，而不是直接扩大 frozen-foundation termination 训练；这不构成对 Codex 团队决策问题的否定，也不是“必须先通过 I1”这一新的准入条件。
+
+将来真正增加 team-conditioned 方案依据的，是同一前缀下、实际可执行替换所带来的 KEEP／END／联合重分配回报差，以及 team 信息是否能稳定预测其符号；不是单看 label-change rate、动作距离或全局 homogeneity 系数。B13 成功可以提供更清楚的选择基准，但不会自动证明 termination 有增益；B13 失败也不会证明它不可能通过改变承诺与学习过程产生价值。owner 对两条方向的职责划分和当前治理约束保持不变。
+
+剩余信息缺口： 本答复核对了固定版本中的相关笔记、reduce 字段、D1280 构造和所列学习代码路径，但没有读取并重放 checkpoint 二进制、完整条件 logits／决策张量或逐项复算 B12 的优势数组。因此，真实梯度是否被 entropy 抵消、跨训练期排序能否追踪，以及 η²×rows 的每项精确复算，仍不能声称已验证。B13 结果未作为输入；上述结果读法须由 DM 在首次 reduce 前明确记录采用或拒绝，而不能见分后选择性应用。
+
+MATERIAL_DISSENT yes
+
+## 2026-09-20 22:41 PDT — response to Pro (MATERIAL_DISSENT yes): four of my quantities were misread, the explanation is narrowed, and B13's reading rules are fixed here before any score is read
+
+No B13 score has been read: wave 1 is running, wave 2 is not launched, no reduce exists. I
+checked Pro's four factual corrections against the repository before adopting them.
+
+**Adopted, verified.**
+1. *Units.* B11's .024 / .019 / .021 are spreads of the mean **raw** advantage
+   (`b11_reduce/summary.json`, `quantity`), not standardised as my question said. Dividing the
+   recorded `mean_standardised_advantage_indicator` by `share`, the standardised conditional
+   means span .059 / .042 / .049.
+2. *The entropy term is six times stronger per agent than I assumed.* `hmasd/agent.py`
+   6145–6148: the entropy sums the six agents' entropies per team row and divides by the
+   batch size; 6175: the agent policy loss divides by the agent row count (six per team row).
+   In the local bandit analogy the per-agent law is q ∝ exp(a / (6 λ_h)), temperature .42,
+   not .07. With the spreads of item 1 the max/min probability ratio is ≈ 1.15 / 1.11 / 1.12
+   at .42 (≈ 2.3 / 1.8 / 2.0 at .07); the executed shares in B11's collection have ratio
+   ≈ 1.29 on 772803. Near-uniform laws are what this loss asks for at these advantages. It is
+   an analogy (shared encoder, value loss, clipping, zero entropy gradient at exact
+   uniformity), not a convergence statement.
+3. *The "unexplained concentration" was not a gap.* Training samples the law; deployment
+   takes its argmax (`networks.py` 1072, 1099). A near-uniform law with a small stable logit
+   preference deploys one label most of the time. I had written this at 08:41 and lost it in
+   the question. That the preference is noise remains a hypothesis, not a finding.
+4. *The team label is not a null placebo.* `networks.py` 643: the team label's embedding
+   enters the decoder sequence, so it moves the agent labels and through them the actions and
+   the reward. I withdraw the placebo as the calibration of B11 and the "no placebo passes"
+   line of B12 as support. B11 then reads: a weak marginal signal (spread 2.2–2.8 clustered
+   standard errors, a statistic biased upward under no effect), η² ≈ 3e-4, and a ranking that
+   agrees poorly and unstably with the label map (rank correlation −.26 to .66). "Weak and
+   unstable in the marginal", not "absent", and not a statement about the actual gradient.
+5. *B12 wording.* η² × rows (8 → 50 etc.) was pooled over the 16 collected rollouts, not
+   "per rollout"; the ratios across caps stand, the label does not, and n η² is a heuristic.
+   `r_squared` includes the position effects. "Additive predictions reproduce the B10 map" is
+   too strong (772903 label 0: predicted ≈ .348, measured ≈ .236). The permutation test keeps
+   composition but not state, so it is strong association under that null, not a randomised
+   causal test. GAE already spans segments: ten steps is the decision interval, not a
+   truncation of credit, so "hundredfold per-decision η²" is a fixed-weight statistic and not
+   a learnability ratio.
+6. *Scope of earlier statements.* B07 is one block. B09's ≤ .025 is an oracle within the
+   six all-agents-constant policies, not a bound on state-dependent or per-agent selection.
+   The label family contains materially different policies; not every pair differs (773003:
+   labels 0 and 5).
+
+**Working explanation after this.** Strengthened: labels carry task-relevant behaviour
+(B08–B10); ten-step count data contain an extractable label contrast (B12). Narrowed: the
+coordinator is asked by its own loss for a near-uniform law (effective temperature 6 λ_h),
+deployment amplifies whatever small preference exists by argmax, and the fixed-weight
+constant-label map is not the quantity its PPO optimises (sampled actions, native
+continuation). Untested: whether the actual policy gradient has a stable correct direction
+that the entropy and shared-encoder terms cancel, or no stable direction. "The credit is
+unlearnable", "entropy is the confirmed cause" and "long commitment is free" are not
+supported and I do not hold them.
+
+**B13 reading rules, fixed now.** Arms, seeds, panels and P1–P4 are unchanged.
+- P1–P4 are reported as declared, per block, at the declared final point and late window; no
+  best checkpoint, no subset, ties reported with their J difference while P2's top-two count
+  stays as written. P3 is defined for `BANDIT` only; `UNIFORM` against the historical D is an
+  auxiliary line. P4's ±.03 is a descriptive rule, not an equivalence test.
+- I withdraw two of my 20:44 rules: "P2 fails → I2 moves ahead" and "P3 fails with P2
+  holding → selection was not what limited D". Known before scores: on D1280's own weights
+  the best constant label gains −.002 / +.166 / +.020 over as-trained, so perfect selection
+  within the old family could not meet P3's "≥ .03 on two of three"; P3 can hold only if the
+  low-level family also improves. P3 stays as declared and is read with this stated.
+- Auxiliary quantities from the declared panels, per arm at rollout 45: E = J(`best_estimate`),
+  R = J(`uniform_every_10`), C = mean of the six constant-label J, M = their maximum. E − R is
+  the deployment-rule gain (selection plus whole-episode holding); E − C is selection within
+  the constant class; M − E is a regret diagnostic with best-of-six optimism, never a
+  headline. E_B − E_U = (R_B − R_U) + [(E_B − R_B) − (E_U − R_U)] separates the trained family
+  under a common rule from the rule's gain. These are arithmetic on declared outputs; nothing
+  is added to the batch.
+- The scheme is identified as a whole: coordinator update and value update off, external law,
+  different label streams per arm, historical (not contemporaneous) D reference, three reused
+  development blocks. No outcome by itself certifies additive credit as the mechanism, and
+  none is an automatic entry for I1, I2 or I3; "none — keep the external scheme or stop" is a
+  legitimate follow-up. β̂, z and q are read together (the law uses z, deployment uses β̂).
+  P1 failing cannot be blamed on `lambda_h`, which is off in B13.
+
+**Follow-ups, reordered but not started.** I3 is no longer behind I1 by default: item 2 makes
+the entropy scale a configuration-level suspect. The observation that separates them is
+Pro's zero-fit gradient decomposition (projection of the policy, entropy and value gradients
+on the label-contrast direction at the saved D1280 weights, forward passes only, on the fit
+host). I do not launch it now: the node is carrying three fits and the owner asked that
+probes not be added by default; I decide after B13 is read, and record it prospectively if I
+run it. A B13 checkpoint is never a coordinator warm start.
+
+**Advice to Codex, reworded.** I keep a local, cost-ordered, revocable priority: separate
+the repeatable selection opportunity, the actual credit and the deployment rule before
+enlarging frozen-foundation termination training. I drop three reasons I had given: "labels
+may have no content" (refuted by B08–B10), ".025 bounds state-dependent value" (it bounds a
+constant-class oracle) and "the negative Σn² term speaks against team-conditioned
+reassignment" (it does not test roles, label pairs, state or KEEP-versus-END value). This is
+not a finding against the team-decision question and not an entry condition on it.
+
+Not adopted as action: Pro's second zero-fit check (native-continuation against whole-episode
+ranking under a common prefix) is kept as a candidate, behind the gradient decomposition.
