@@ -1014,3 +1014,97 @@ DM 应把自己提出的条件转成具体源代码问题、原生动作/信息/
 [B11索引]: https://github.com/CartmanFatass/My-paper-code/blob/e3e167fcf40a7492cda31f178a8b1216e80c5bb3/docs/research/RESEARCH.md
 [B11基础]: https://github.com/CartmanFatass/My-paper-code/blob/e3e167fcf40a7492cda31f178a8b1216e80c5bb3/docs/rl-marl-foundations-20260907/FOUNDATIONS.md
 [B11目标边界]: https://github.com/CartmanFatass/My-paper-code/blob/e3e167fcf40a7492cda31f178a8b1216e80c5bb3/envs/uav_service_restoration/README.md
+
+## 2026-09-21 — Pro adoption, target-source audit and fixed B11 declaration
+
+Read the complete105-line answer at `f6fd364f2d7d3f7d368c872c2c98ea43199a96c6`, for
+published question `e3e167fcf40a7492cda31f178a8b1216e80c5bb3`. The Jev question key is
+`hmasd:205a49d5c92b63557a589d06b31e191456fd1bd9e2f3c1f09d37e1a671a69993`; its private
+address remains local. DM independently verified the answer commit changes only NOTES,
+its parent is `ff468a67c180ea0da92873418c57b82e80c2a838`, all pinned question/notebook
+bytes are unchanged and the empty Answer alone gained18,489 bytes. No uncertain notebook
+write remains; the complete advice is above, not a receipt substituted for an answer.
+
+Adopt the advice: perform one self-contained calibration development batch, retaining
+O_R0 / frozen O_full / R0. This resolves a specific DM-owned resource condition; it does
+not wait for an owner-supplied idea or chase a neural win. The distinction between historical
+construction cost, current artifact reuse cost, and a new method's from-scratch construction
+cost is material: the already saved O_full can be used without retraining G. B11 asks how
+one can construct the method independently, not whether recalibration is needed each time.
+The correct two-parameter family, target independence, exact public states and fixed host
+remain strong structural resources. Pro did not audit every raw artifact; the earlier DM
+full readbacks retain their own provenance, and B11 needs its own native readback.
+
+Keep all per-block differences, descriptive block SD and conditional-world uncertainty.
+Small/mixed O_R0-O_full is not equivalence, and fresh evaluation does not make the new
+calibrations paired with old training. No O_known panel, G rerun, parameter averaging,
+new margin or search is added. A useful O_R0 can still trade quality for collection cost.
+MLE iterations/function calls are optimization work; the runner's zero optimizer_steps
+means neural updates only, now stated explicitly in its metadata.
+
+### DM completion of the alleged target-bridge dependency
+
+The bounded Scout inspected both the separate service-restoration source and legacy UAV
+source. In restoration, `envs/uav_service_restoration/env.py:624-699` accepts velocities
+and integrates service by physics substep; `scheduler.py:157-230` solves instantaneous
+rates; `network.py:313-330` imposes per-solve resource domains. Those domains do not reserve
+a resource across decision intervals. Diagnostic controllers in `baselines.py` are not
+already tuned research comparators. Its README explicitly says this package is independent
+of the existing entry points; no adoption or VSP mechanism follows merely from its name.
+
+The current FSD frozen card independently identifies the actual target as Scenario1,
+`envs.pettingzoo.scenario1.UAVBaseStationEnv`, six UAVs/fifty users/H500. In the actual
+`envs/pettingzoo/uav_env.py`, velocity actions are defined at177-180; `step` moves and
+recomputes channel/connection state at265-300. `_greedy_connection_assignment` at947-978
+assigns each user to at most one UAV subject to a connection cap, then rebuilds this
+assignment each step. Rewards at1421-1484 and `scenario1.py:80-125` use current coverage,
+SINR and height costs. This is real instantaneous coupling, but has no action-triggered
+submit/reservation/blocked-clock state, persistence requirement or completion reward.
+Historical Scenario7 charging descriptions do not establish that mechanism in this host.
+
+Therefore I have checked the proposed direct bridge rather than leaving it as an external
+condition: VSP's eight-tick reservation mechanism is not present in the inspected target
+interface. Adding it would change the task. This does not prove that predicting service
+or adaptive termination cannot help a UAV; it means that such a claim needs its own actual
+intervention and comparison. No arbitrary model-misspecification or hidden-information toy
+is selected merely to manufacture the missing bridge. B11's independent data question is
+the concrete remaining use decision selected here. No FSD/B/C code or record is changed.
+
+### Final B11 declaration, before any new scientific result
+
+Adopt the conditional L0 without changing its arms, seeds or work. Fresh calibration seeds
+**22001,22002,22003**, exactly512 full H40 episodes each under R0, four128 batches on
+split100. One unchanged endpoint MLE per seed, same c6/p.4 start, bounds and optimizer
+settings as B08. New calibration receives only its public x/episode/time fields. No
+hidden intermediate state, tape, reward, evaluation observation or old parameter is a fit
+input. Batch-local IDs stay separate and saved aggregate IDs are offset by the batch start.
+
+Each new fitted joint planner and its fixed old reference are evaluated with R0 on4,096
+fresh split200 common worlds. Reference mapping is exactly22001→21801,22002→21802,
+22003→21803; three preselected B08 instances of the B09-confirmed method, all validated
+against their published model hashes before collection. New world addresses total12,288;
+executed evaluation episodes total36,864 because there are three panels per world.
+The primary descriptive difference is O_R0-O_full; secondary O_R0-R0 retains usefulness
+against readiness. Predict positive mean O_R0-R0 across the new calibrations and a useful
+timing policy; do not predict zero missed attempts, a particular componentwise improvement,
+or equivalence with O_full. The new-native-result branches in Pro's answer are adopted.
+
+**Three new MLE fits, zero neural fits/forwards/backwards/Adam**. Collection1,536 episodes/
+61,440 team ticks; evaluation36,864 episodes/1,474,560 ticks; total38,400 episodes,
+**1,536,000 team ticks /3,072,000 target transitions**. Each block reconstructs the two
+fixed-family planner tables once. No tuning, checkpoint choice, early score stopping or
+same-batch extension. A technical failure is retained and not automatically retried.
+This is development, not confirmation; actual wall, MLE work and full native losses are
+read after execution. The128-fold collection reduction is not a wall-speedup claim.
+
+Implementation is accepted after source reading and independent Reviewer review. Six
+focused synthetic/mocked tests passed (Implementer1.11s, Reviewer1.66s); all three model
+hashes match the pinned B08 blobs. Public-only fitter inputs, batch identity, fresh-world
+pairing, callback binding, failure retention and admission-before-science were checked.
+Two subsequently added reporting strings only clarify neural versus MLE optimizer counts;
+they do not change computation. No real scientific episode or fit was used by these checks.
+
+Use configured local_linux scientific Python, one CPU/BLAS/OpenMP thread and one detached
+process. Native admission checks fresh memory and current published/canonical pause and
+lead. Exact source will be committed/pushed before launch; the retained snapshot excludes
+uncommitted shared-knowledge drafting. No App cross-task message or new permission gate.
