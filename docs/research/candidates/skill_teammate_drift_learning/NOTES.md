@@ -3933,3 +3933,650 @@ account/conversation facts in repository text. End with MATERIAL_DISSENT yes/no 
 proposed successor and name the decision-changing objection if yes.
 
 ### Answer
+
+GitHub 读取成功，但本次没有完成写回，仓库未改动，也没有新 commit。 最新目标中的指定 Answer 仍为空。连接器提供的是整文件替换动作；本次未能建立保留其余内容逐字节不变的可靠写回路径，因此没有调用更新动作。这不是已经验证的权限拒绝。以下给出完整 Answer。
+
+Answer
+一、选择：支持改变学习对象，但不建议把暂定的三个标签直接落实为九个 fits
+
+我支持把下一项研究对象从“可复用的标量奖励响应”改为“使用已知物理响应所需的当前联合行为分布”。但对原样三臂后继有实质异议。
+
+异议不是 B08 为负，也不是原生实验必须先有阳性结果，而是目前三臂描述混合了三个不同问题：给定合法信息后，队友行为是否还有需要预测的联合依赖；保留这种依赖是否改变有价值的焦点选择；哪些历史数据在版本变化后仍可复用。此外，“联合预测候选”与“最强普通联合模型”尚未定义出实质区别，不能仅凭两个名称就把它们算成两种科学方法。附件本身也把这些问题留给本次咨询，而没有把九个 fits 声明成已选定批次。
+
+hmasd-pro-question-b08-native-j… +1
+
+我的具体选择是一个更小的原生学习比较：以普通、版本条件化的联合频数模型为方法本体，用同一个已学习分布的边际乘积作为控制视图；两者通过完全相同的原生物理计算选择动作，再比较真实闭环回报。 不另造一个与普通联合模型重复的候选，不再训练即时 reward head，也不把这个比较称为已经实现了跨版本经验修正。
+
+这样保留的是有实际未知量的问题：有限历史中学得的联合信息，在付出明确的物理控制计算后，是否仍有任务收益。仅仅证明“某个非线性奖励需要对联合分布求期望”，则不值得再购买一批学习 fits——下面的简单原生构造已经能解释那件事。
+
+二、证据更新：B08 削弱 acquisition-only 修复解释，没有证明一般校准优势
+
+本次读取了指定固定版本的相关笔记条目、宪章和科学方法；B08 的完整根 summary.json、完整 readback.json，以及三个逐种子 summary 中包含的完整 reduction；B07 的完整 readback.json；原生环境、适配器、指定保留路径和 E0 构造／采集调用。科学输入采用附件指定的固定提交，最新分支仅用于检查写入位置。
+
+hmasd-pro-question-b08-native-j…
+
+本次没有获取并解码 NPZ，没有独立验证原始 artifact digests，没有重建中间回归系数，也没有执行任何 fit、环境 step、策略评估或模拟。 因此，JSON 中的原始数组校验是作者已经记录的检查，不是我的第二次复核。下面的原生事件是从已读代码作出的代数构造，不是新增原生实验结果。
+
+B06 的原结论不变：first64 均值为正，但预写区间跨零，确认仍然 inconclusive。B07 则已经观察到自采集下 R−F 的 full256 均值为 −.002921875，匹配反馈交互在三个块中均为负；这削弱了此前“R 会通过自采集更好地维持有价值合作”的方向预测，不能用 sampled-return 的不同符号或早期端点代替它。
+
+B08 的关键新增事实是把两个学习器放在相同的已获得历史上：
+
+full256：R−F	95301	95302	95303
+同用 R 的历史	−.002218750	−.000515625	−.005968750
+同用 F 的历史	−.009000000	−.000343750	−.006296875
+
+这些逐块值由对应逐种子 summary 支持；两行均值分别为 −.002901042 和 −.005213542。它们是三个旧世界上的固定历史 recommendation readouts，不是六个独立重复，也不是六条实际执行的在线反事实轨迹。
+
+这使“只要改好 acquisition，原封不动的 R 映射就会恢复优势”更不可信，但没有把具体机制彻底识别出来。95303 的两个预写 mapping/history 预测确实发生：在 F 历史的 .55 context，R 仍比 F 更乐观；把 F 放到 R 的密集历史上，F 的合作推荐也明显增加。可是这些局部预测发生，并没有变成 R 的 full256 优势。早期反例也须保留：95301 在 F 历史上的 first64，R−F 为 +.0085625。
+
+因此，我接受当前笔记把 reward-noise cancellation 保留为竞争解释，而不把结果升级成“F 通常具有更好的校准”。同样，转到没有额外 Bernoulli reward head 的原生物理计算，也不会反过来识别 B08 为什么输；那是新的比较对象，不是旧实验的归因干预。
+
+当前合理的投资判断是：不再为这个冻结的 R 包安排 acquisition-only、epsilon 或 prior 的救援；允许一个明确不同的原生学习问题。 这与否定所有 drift learning、宣告方向关闭，是不同判断。
+
+三、原生接口真正支持什么，以及一个必须避免的混淆
+
+Scenario1 的即时全队奖励由覆盖率、已连接链路的平均归一化 SINR，以及平均高度惩罚构成。SINR 包含其他 UAV 的接收功率干扰；连接分配还经过全局排序、每用户唯一连接和 UAV 容量约束。完整的联合动作通过位置更新、信道和连接计算，才产生即时物理奖励。
+
+这支持使用联合物理响应，但不自动证明必须学习一个非因子化的队友行为分布。
+
+设所有队友都是无记忆闭环控制器，条件变量已经包含它们使用的完整当前状态，并且各自的随机创新独立，那么即便奖励强烈耦合，仍可以有
+
+P
+ν
+	​
+
+(u
+1
+	​
+
+,u
+2
+	​
+
+∣x)=P
+ν
+	​
+
+(u
+1
+	​
+
+∣x)P
+ν
+	​
+
+(u
+2
+	​
+
+∣x).
+
+此时，合格的 factorized predictor 应把这个动作分布送进完整的同一个物理模型。它不应该被削弱成“各 UAV 的服务收益独立相加”，也不能被削弱成“先平均未来位置，再算一次奖励”。物理非线性与行为条件依赖是两回事；这个区分是由所选控制器的信息结构决定的，不是由奖励函数名字决定的。
+
+因此，后继必须明确一种在合法条件集下仍存在的依赖来源。对于第一项小研究，最干净的选择是：B 所有的两个无记忆闭环队友共享一个当前随机创新，但其本次实现对焦点学习器不可见；联合随机分布在公开版本切换后改变。 学习器只能在动作发生后，从实际记录的联合命令学习它，不能提前读取当前模式、随机槽或真实概率。
+
+这仍然是人为规定的、外生的协调变化，不是内生 co-learning。但它使要学习的依赖真实存在于明确定义的条件分布中，而不是指望“用了多智能体模拟器”就自动得到该性质。
+
+四、最小原生判别事件：三机、一用户、一步干扰选择
+
+下面给出一个具体事件，目的在于把机制落到源代码，而不是要求先做一轮阳性 pilot。
+
+使用 Scenario1 的 free-space 信道、默认发射功率和噪声、min_sinr=0、原奖励权重与原位置更新。一个用户在区域中央，三架 UAV 位于以该用户为中心、水平半径 80 米的等边三角形顶点，高度均为 50 米。一架为焦点，两架为队友。每架本步的两个合法命令分别是以 30 米／秒径向靠近或远离用户，持续原生的一秒。于是下一水平半径是 50 或 110 米，三维距离平方分别为 5,000 和 14,600。这里没有改奖励、干扰规则或动作物理。
+
+在已读 free-space 公式下，近、远接收功率之比为
+
+S
+far
+	​
+
+S
+near
+	​
+
+	​
+
+=
+5000
+14600
+	​
+
+=2.92.
+
+由默认噪声与功率公式可得：恰有一架处于近位置时，它的 SINR 高于 0 dB；有两架处于近位置时，两者相互干扰使最大 SINR 低于 0 dB；三架全近或全远时亦低于阈值。等高度使高度项在这些选择间相同，且这里位于高度下界。这是对代码公式的代数推导，尚未调用环境进行数值复核。
+
+令队友位 z
+j
+	​
+
+=1 表示靠近，z
+j
+	​
+
+=0 表示远离；令 r
+⋆
+	​
+
+>0 是“恰有一架靠近”时的物理奖励。按全队奖励尺度，名义事件的响应表为：
+
+焦点动作	队友 00	队友 01	队友 10	队友 11
+靠近	r
+⋆
+	​
+
+	0	0	0
+远离	0	r
+⋆
+	​
+
+	r
+⋆
+	​
+
+	0
+
+这里只检验干扰耦合，不声称容量约束在一用户情况下也被激活。它是模拟器允许的受控几何，不代表默认任务分布中的事件频率，更不是物理部署结果。
+
+为隔离联合依赖，建议一个明确的外生版本变化：
+
+P
+ρ
+	​
+
+(00)=P
+ρ
+	​
+
+(11)=
+4
+1+ρ
+	​
+
+,P
+ρ
+	​
+
+(01)=P
+ρ
+	​
+
+(10)=
+4
+1−ρ
+	​
+
+,
+
+从 source 的 ρ=−.6 变为 target 的 ρ=+.6。这些数值是本答复提出的实验设定，不是已观察到的 native law；真实参数不进入学习器。
+
+两个版本中，每个队友的边际都为 1/2，但：
+
+ρ=−.6:
+ρ=+.6:
+	​
+
+Q(靠近)=.1r
+⋆
+	​
+
+,Q(远离)=.8r
+⋆
+	​
+
+;
+Q(靠近)=.4r
+⋆
+	​
+
+,Q(远离)=.2r
+⋆
+	​
+
+.
+	​
+
+
+正确联合分布下，动作排序随版本改变。边际乘积始终给出 .25r
+⋆
+	​
+
+ 对 .5r
+⋆
+	​
+
+，仍选择远离。这样，所谓“联合预测有用”不再只是“预测了两个 UAV”或“改变了一个概率指标”，而是对应一个明确的原生选择差异。
+
+更一般地，设两个焦点动作的四格物理响应分别为 r
+a
+jk
+	​
+
+ 与 r
+b
+jk
+	​
+
+，并定义
+
+K
+a
+	​
+
+=r
+a
+00
+	​
+
++r
+a
+11
+	​
+
+−r
+a
+01
+	​
+
+−r
+a
+10
+	​
+
+.
+
+相同边际、不同相关性对动作优势的影响是
+
+Q
+ρ
+	​
+
+(a)−Q
+ρ
+	​
+
+(b)=d
+0
+	​
+
++
+4
+ρ
+	​
+
+(K
+a
+	​
+
+−K
+b
+	​
+
+).
+
+非零的物理交叉项本身还不够。 两个动作可能具有相同交叉项，或两种联合律下仍是同一个动作更好。上面的具体构造同时提供了条件依赖、不同的交叉响应和动作排序变化。
+
+这已经回答了一个局部“存在性”问题。下一批学习值得购买的，只能是它尚未回答的有限学习与闭环后果，而不是再训练一个模型来重复这张表。
+
+五、实际选择的学习比较：普通联合模型与同边际控制，不再虚构第三种方法
+
+建议固定两个控制视图：
+
+J
+emp
+	​
+
+：普通联合模型。 对每个公开版本维护四格联合命令计数，使用固定总质量 2、每格 .5 的平滑。每次只在实际联合命令被观察之后更新。版本内不断复用所有已观察命令；新版本开新表，不把旧版本样本当作当前律的样本。
+
+M
+proj
+	​
+
+：同边际投影视图。 从同一个已学习联合分布 
+p
+^
+	​
+
+ 精确求出两个边际，再使用
+
+p
+^
+	​
+
+prod
+	​
+
+(z
+1
+	​
+
+,z
+2
+	​
+
+)=
+p
+^
+	​
+
+1
+	​
+
+(z
+1
+	​
+
+)
+p
+^
+	​
+
+2
+	​
+
+(z
+2
+	​
+
+).
+
+它与 J
+emp
+	​
+
+ 接收相同历史，具有完全相同的估计边际；唯一删除的是已估计的联合依赖。两者枚举同样的四种队友命令组合，对同样的两个焦点动作调用完整原生物理计算，再作期望与 argmax。不得让其中一个用真实概率，另一个用估计概率；也不得让其中一个获得更多物理采样或更深规划。
+
+这里的 J
+emp
+	​
+
+ 就是透明、完整的普通联合方法，而不是另一个候选的陪衬。 在所声明的“版本内命令混合权重不随状态变化、已知有限命令字典”条件下，联合计数已经提供相应多项观测的充分统计量。没有理由先让普通参照学习高维几何、降低它的数据量，再把绕过这些负担的候选叫作创新。
+
+这个比较识别的是：在同一个实际学得的边际信息上，使用还是丢弃联合依赖，是否改变净控制价值。 它不是“联合模型训练算法胜过所有边际学习算法”，也不是一种新的联合学习架构。固定平滑也不是总体最优先验的证明。
+
+由于两个控制视图可以共享同一次频数学习，三个独立世界需要的是 3 个联合律学习 fits，而不是 9 个 predictor fits；没有额外训练的 actor、critic、reward head 或 foundation。两个视图分别执行评价轨迹，但不因此变成六个独立训练重复。若实现选择重复训练两套相同计数器，应按实际新增 attempts 计费，不能仍宣称只做三次。
+
+合法条件集与标签
+
+第一项研究明确使用中央信息：当前全体 UAV／用户位置、当前时间与公开版本、固定环境参数，以及已收集的过去命令。队友的两个闭环命令形式可公开，例如“径向靠近／远离用户”，但本步选了哪一个及其真实选择概率不公开。所有实际命令都必须由同一个动作前快照生成，再一起传给 step。这不是 decentralized execution。
+
+学习目标优先选择实际发出的联合归一化命令，而不是从末端连接数反推一个不可见意图。遇到位置边界导致不同命令产生相同位移时，保留真实命令；不能把这种合并当作观测到了唯一隐模式。在方向未定义的几何点，闭环命令的确定性 tie convention 也应先写明。
+
+在这个一 tick、无记忆、当前随机创新独立于过去的构造下，完整当前几何与版本足以生成物理响应；队友本步不观察焦点尚未执行的候选动作。因此同一组联合命令概率可用于两个焦点动作的物理积分。若以后允许队友在一个多 tick 宏内反应焦点的运动，这个简化就不成立：必须预测候选动作条件化的联合路径，不能把同一份末端律套给所有动作。
+
+哪些东西真正跨版本复用
+
+能够直接复用的是固定命令的含义、已知运动规则、信道与奖励计算。在本提案中，source 联合频率并不能直接作为 target 联合频率的样本：边际不变不代表联合律不变，四格都有共同支持也不代表两批数据可交换。
+
+旧观察可继续保留在历史中，但若没有新的稳定性假设、可识别的重复版本或经过声明的参数共享结构，就不应把旧计数灌入 target 表。这里不将“保留了文件”叫作已经证明的经验复用收益。
+
+尤其需要保留三个失效条件：队友选择概率实际依赖被省略的几何或历史时，跨状态汇总会变成混合分布；新控制器改变命令字典或进入旧数据没有的动作支持时，原表不能覆盖新行为；宏长度或未来控制策略改变时，即使即时物理函数不变，旧的后续回报也不再是同一学习目标。这些不是多加一个 version 字段就普遍解决的问题。
+
+六、最小学习与评价范围：真正走闭环，但不借此扩大结论
+
+我建议把后继写成一次很小的、无调参的原生探索，而不是先建框架：
+
+采用上述三机、一用户干扰任务，free_space、原默认干扰规则、原奖励权重，固定 k=1、原生一秒 tick。每个 episode 为 64 ticks。为保持事件可解释，初始分布预先固定在上述三角形几何的小邻域，例如半径 75–85 米、各顶点角度作小幅固定范围扰动、高度 50 米；用户位置固定在区域中央。这改变的是声明的初始任务分布，不是奖励或动力学；它不是默认五机五十用户任务的无条件验证。 核心环境不改，B 只实现自己的初始化、控制器与记录封装。原生参数和默认接口由已读构造支持。
+
+每个世界共同采集 source 64 ticks、target 64 ticks，焦点 collector 固定以 1/2 选择两个命令。source 到 target 的版本变化只改变联合混合律，两个学习视图都不知道真实概率。建议使用三个新独立主种子；95401–95403 可作为待 DM 定稿并核对未用性的编号，不复用已经结果暴露的 95301–95303。这些均是本答复的新建议，不是 launch declaration。
+
+在 target 第 16 和第 64 个观测后保存模型。每个快照、每个视图执行四个新的 64-tick 原生评价 episode；模型在评价期间冻结，动作则逐 tick 根据当前合法状态重新选择。J/M 配对共享初始条件和按 episode／tick 寻址的队友随机创新，而不是仅仅种子数字相同。
+
+主终点选第 64 个 target 观测后的完整 episode 回报差；第 16 个观测的读数是预写的早期描述。 不做 checkpoint selection，不用前者失败后的早期结果替换主终点。评价是实际走过不同状态占用的闭环轨迹，但不是评价中继续拟合、也不是各方法自采集训练的比较。
+
+收益尺度必须从接口继承而不是凭变量名猜测：底层把全队奖励除以 UAV 数分发给各 agent，适配器返回这些 agent reward 的平均，因此这里的标量是全队物理奖励的 1/3，不是未经缩放的全队总分，也不应再除一次。建议主返回直接累计这个实际标量，同时保存全队物理奖励以便对账。
+
+中间预测与任务预测
+
+中间预测不是泛泛的“joint NLL 更低”，而是：在版本切换后，普通计数学习能从新的合法命令中恢复有决策意义的联合质量变化，例如名义事件中的
+
+c
+ν
+	​
+
+=p
+ν
+	​
+
+(00)−p
+ν
+	​
+
+(01)−p
+ν
+	​
+
+(10).
+
+它在所建议的 source／target 中分别为 −.7 和 +.2；相同真实边际的乘积则给 −.25。训练时保存 pre-update 联合预测、边际、joint log loss 与这个对比量，不能事后用新概率回填旧输入。
+
+任务预测是：恢复该差异后，J
+emp
+	​
+
+ 在相关干扰事件减少错误的焦点选择，并在第 64 个 target 观测后的实际 64-tick 闭环评价中取得更高回报。后半句是不确定的经验预测，不由那张八格表保证。
+
+普通或更简单的方法完全可能胜出。有限样本下丢弃依赖可能降低估计波动；实际轨迹可能很快离开判别邻域；或者 J 的即时更优选择把系统带入更差的未来几何。即使联合预测更准、一步 regret 更低，完整 episode 回报也可能没有改善。发生这种结果，应降低这套一步物理控制包的净使用判断，而不是自动给它增加网络、窗口或更长试验来争取阳性。
+
+评价中已经为动作选择计算的八个物理响应，可供评价器在选择固定后作一步价值误差归约。真实当前律只用于这种事后解释，不进入控制器；该一步真值参照不是完整 episode 的最优上界。
+
+七、fit 与非-fit 成本：这项研究的主要开销未必是“训练”
+
+按上述建议，一次固定批次的主要工作为：
+
+工作	计划数量
+共享联合律学习 fits	3
+实际共同采集 ticks／联合命令标签	3×(64+64)=384
+pre-update 分布查询与计数更新	各 384 次
+原生闭环评价 episodes	3×2×2×4=48
+实际评价 ticks	48×64=3,072
+控制所需的假设物理分支	3,072×2×4=24,576 次单步物理求值
+
+每个控制决策都枚举两个焦点动作与四种队友联合命令，没有联合轨迹树，也没有额外 Monte Carlo 物理采样。J/M 使用相同枚举预算。真实采集加真实评价是 3,456 个执行的 team ticks；加上控制内部物理分支，共 28,032 次 step 等价的物理工作。不能把后面的 24,576 次隐藏成“零环境成本”。
+
+若为上面的名义事件做一次实际八格一致性核对，另计八次单步物理求值，总计 28,040；这不是额外学习 fit，也不是要求先通过一项收益 pilot。重复的检查、分支复制或初始化仍按实际发生记录，不能靠“verification”名字免计。
+
+共同采集有六个逻辑 episode reset，评价有四十八个，共五十四个；构造器自动 reset、初始几何设置后必要的信道重算、状态复制与缓存准备另外记录。它们不是免费的，也不能只报数十个计数器更新的微小耗时来声称高效。这个成本口径符合当前科学方法对算法内搜索、核验工作和完整运行开销的区分。
+
+两个队友和焦点的闭环命令形式都是 B 的固定代码，没有隐藏的 teammate／foundation training；没有梯度优化、reward-head fit 或 actor fit。代码构造、测试、序列化、审阅及发布有实际工作量，但当前 wall、CPU 和 RSS 未知。删除重复模型不等于宣称端到端速度提高三倍。
+
+三组独立学习历史才是推断单位；四个评价 episodes、两个 checkpoint 和大量物理分支是嵌套观察，不增加训练 n。这是一项允许正、负或无区分结果的探索，不继承 B06 的 .005 规则，不合并旧块，也不事后扩批。
+
+八、保留接口与结论边界：不要从已有调用假装得到未保存的联合数据
+
+现有 E0 调用把联合动作、state、next-state 等传给 store_transition_batch，但 infos_batch=None；指定的 RolloutBuffer 保存当前 state／obs、动作、奖励、skills 和隐藏状态等，没有一个完整的显式联合物理响应记录表，且训练更新后会清空。适配器虽然返回连接和 SINR 信息，但这不等于 E0 已经把它们永久保存。
+
+因此，B 应直接记录动作前原始中央状态、实际联合命令、动作后几何、连接、SINR、奖励组成、版本、预测和更新次序，以及 episode／terminal 身份。对环境返回的可变数组要复制，不能持有会被下一次 channel update 改写的视图。get_current_state 的复制字段与原始 infos_dict 的字段也不能混为一谈。
+
+这不是说任何旧 state/action 片段都无法重算；在确实完整保留、物理条件相同的片段中，已知物理可能允许重算。它只是禁止把未核实保存的数据、缺失的 terminal／reset 连接或不完整的物理信息当作现成训练集。本次不修改 FSD，也不从 E0 接口读取得出 FSD 当前实验结果。
+
+最后，必须把本后继与当前策略 continuation value 区分开：
+
+Q
+π,ν
+(x,a)=E
+P
+ν
+	​
+
+	​
+
+[r(x,a,u
+−i
+	​
+
+)+γV
+π,ν
+(x
+′
+)].
+
+知道即时物理奖励，不会让 V
+π,ν
+ 在队友策略或焦点未来策略改变后保持不变。服务数量、当前连接图乃至一个末端几何标签，也不能未经论证就成为多 tick 回报的充分统计量。若采用更长固定宏，奖励在路径上累积，便需要相应联合路径与续接策略条件，而不是把一步结论直接放大。现有原生定义明确逐 tick 更新位置、连接与奖励。
+
+我选择的一步方法有意不解决这个 continuation 问题。若它的一步判断改善而完整回报不改善，那会限制这套 myopic 包的使用价值；不能据此否定需要学习当前策略续接值的另一问题，也不构成自动启动更深规划的理由。
+
+最终判断：保留“当前联合行为分布＋已知物理”的研究转向，采用普通联合模型与同边际控制的一个小型真实闭环比较；不保留尚未区分方法身份的原样三臂，也不把旧概率数据的保留偷换成跨版本可迁移性。 这个选择能够检验有限学习和完整轨迹收益，且允许普通方法成为最终方法；它不声称新架构、一般 MARL 优势、内生 co-learning、学得技能有效性或默认 UAV 任务上的普遍收益。
+
+决策改变点是：先明确合法条件下的行为联合依赖，并让普通联合模型承担完整方法角色；不能仅因物理奖励耦合，就为一个未定义的历史复用候选安排额外 fits。 科学选择与后续执行仍由 DM 负责，本答复没有增加批准层、预算或执行授权。
+
+MATERIAL_DISSENT yes
+
+## 2026-09-21 06:18 PDT — Pro adopted with an explicit new information contract; B09 prospective and L0
+
+**Advice identity and reading.** The preceding complete answer was saved verbatim from chat
+for question key `hmasd:446b9f1fbbc5529b62f07f2995b757b7e7288b67e7a9d289187d8970dcf12ac7`,
+source `aeaa6960e6c5d4a1d372f2eeaa808c5915359ba6`. One accepted Send was preserved across
+two observation windows; no resend. Completion returned 9,890 text characters, text SHA256
+`0097031af3cad186f8ffcb135204f4bcd3722c83d85110f8d0139abee8e5cca2`; the saved file includes
+its final newline, 23,538 UTF-8 bytes, SHA256
+`0c4e07ee6fe087b81e6705c8ef0a3471e8d223811e679da83a34c8e1d0f0aa49`.
+Delivery checked `NOT_DELIVERED`, no remote answer commit, and the target was still empty.
+The reported difficulty was preserving other file bytes, not a verified permission denial.
+The private conversation remains local. I read the entire answer and accept its material
+objection to the unspecified three-arm/nine-fit proposal. It is superseded, not launched.
+
+**Accept and narrow.** Select Pro's ordinary joint-frequency method and its own marginal
+projection as one small controlled-Scenario1 comparison. There is no distinct novel joint
+predictor to pit against an equivalent ordinary model. Both views will integrate their
+probabilities through the same complete physical response. Source count reuse across a
+changed version is not assumed, and this experiment will not test such reuse. The new
+observation is finite-data prediction followed by actual 64-tick closed-loop task return;
+it is not another proof that nonlinear rewards can depend on a joint distribution.
+
+The independent ResearchCritic `/root/portfolio_closed_control_evidence` read the full advice
+and relevant source, and supports that bounded information value (MATERIAL_DISSENT no for
+this narrowed study). Its earlier material dissent remains: physical service coupling alone
+does not show a residual joint action law, and this construction is not evidence of a current
+HMASD deficiency. The DM reached the same boundary from the actual action call path.
+
+In particular, `HMASDAgent` owns the current discoverer/coordinator parameters, normalized
+observations, assigned skills and per-agent recurrent states (`hmasd/agent.py:610,3007–3135`).
+Conditional on the complete actual actor inputs and parameters, ordinary row-wise Gaussian
+sampling factorizes; joint physical interference is still produced by that product action
+law propagated through the joint environment. Shared weights alone do not add aleatoric
+cross-agent dependence. A central method with those query rights must retain direct current
+policy queries as a reference. Here we deliberately study **external B-owned controllers**
+whose current random mixture probabilities are not exposed to the focal learner. This is a
+new declared information regime, not withholding an existing HMASD API from a comparator.
+No Claude skill, checkpoint, runner, tests, notebook or run directory is involved.
+
+**Source verification, not a new simulation.** The DM and Critic independently evaluated the
+source formulas with tx23dBm, noise−80dBm,2GHz and the proposed height50/radii50,110. Maximum
+SINR for zero/one/two/three near UAVs is approximately −3.0214/+1.6324/−1.2847/−3.0141dB.
+Only one near UAV connects, with team reward .716323911 and adapter scalar .238774637.
+The extracted Pro formula is typographically damaged: the power ratio is **near/far=2.92**,
+not its inverse. Preserve the answer rather than silently repairing its extracted text.
+No environment call, learner or policy forward was used for this arithmetic check. The
+nominal response table and its ranking change are consequently not an unknown benefit
+that the coming fit could discover. Whether it survives the moving geometry is unknown.
+
+**Fixed scientific design.** Use unmodified `UAVBaseStationEnv` and `ParallelToArrayAdapter`,
+three UAVs, one user, area1000, height range50–150, max_speed30, time_step1, max_steps64,
+free_space/vectorized, native interference, min_sinr0, max_connections10, original .7/.3
+reward weights and height penalty. The only task construction is B's initialized geometry
+and fixed controllers. User is at (500,500); UAV i starts at height50 with radius drawn
+uniformly75–85 and angle common uniform rotation +2*pi*i/3 + independent uniform jitter
+[-pi/36,pi/36]. Each episode's geometry is fixed by its recorded random address before any
+score. No default five-UAV/fifty-user-distribution claim follows.
+
+Each agent has two closed-loop unit horizontal commands: bit0 moves radially away from the
+user; bit1 moves toward it. Recompute from the common pre-action geometry every tick. At
+radius <=1e-12 use the outward direction (cos(2*pi*i/3),sin(2*pi*i/3)); the inward command is
+its negative. Vertical command is zero. Keep the environment's own position clipping,
+connection ranking and terminal semantics. Do not clamp an otherwise legal radial command
+or substitute a held open-loop velocity. All three commands use the same pre-step snapshot.
+
+The two external teammates share a fresh private uniform innovation per tick. Row order is
+00,01,10,11. Public source version0 has q=(.1,.4,.4,.1); target version1 has
+q=(.4,.1,.1,.4). This mixture is state-independent but commands are closed-loop functions
+of state. The focal learner knows geometry, dictionary, environment constants, time/version
+and past observed joint commands. It does not receive q, the current draw or a query to the
+external mixture. Decode observed teammate bits from the **actual issued commands** and
+pre-state, not from an unobserved intention or post-clipping displacement. Store random
+slots for audit outside learner/control inputs. The known native physics is available to
+both control views; there is no unknown reward head, dynamics fit or continuation critic.
+
+Use fresh master seeds **95401,95402,95403** (no prior B fit at these seeds found). One
+joint-law learner per seed retains two version-specific four-cell tables, each initialized
+with mass .5/cell. Collect source64 then target64 in separate real episodes using a fixed
+uniform focal collector. Update only after the actual joint command; keep source history,
+but do not pool it into the target table. This is **three fits**, each128 actual observations;
+two evaluation views are not extra independent fits. There is no actor/foundation training.
+
+After target observations16 and64 save complete frozen count/probability snapshots. For each
+snapshot, evaluate **J_emp** (that joint distribution) and **M_proj** (its exact marginal
+product) on four fresh64-tick episodes. Both enumerate two focal commands by four teammate
+command combinations using cloned native states, then choose by estimated one-step adapter
+reward; exact ties choose bit0. Both have the same learned marginals and eight native
+one-step physical branches per decision. No averaging geometry before applying physics and
+no additive independent-service surrogate. At each visited state the already computed
+response table may also reduce the other view's choice and, after fixing the action, true-q
+one-step diagnostics; these are arithmetic readings, not extra trajectories or oracle inputs.
+
+Address geometry and external innovations by master seed, training/evaluation stream,
+phase/episode and tick. The same four evaluation episode addresses are reused across both
+views and both snapshots; do not include view or checkpoint in those RNG addresses. The
+closed-loop command vectors and resulting states can diverge while their underlying bits
+remain paired. Training/evaluation streams are disjoint. Never consume environment or
+external-controller RNG through a hypothetical branch. Evaluators never update counts.
+
+**Predictions and reading.** Target joint contrast c=p00-p01-p10 should move from its prior
+value toward+.2, while the corresponding true-marginal product has c=−.25; source truth is
+−.7. Record pre-update predictions, both joint log losses, snapshot contrast and all count
+movement. Whether finite estimated marginals or dependence suffice at16/64 is measured,
+not assumed. Prediction: J should reduce true-q one-step regret in the visited interference
+choices and achieve larger actual cumulative adapter reward at the64-observation snapshot.
+The primary is each seed's mean-over-four-episodes **J minus M cumulative64-tick return**,
+then its three-block mean; show all paired seed and episode values. Early16 is descriptive.
+No checkpoint selection, pass threshold, claim note, pooling with B06 or extension after
+scores. Three training histories are the independent units; episodes/checkpoints/branches
+are nested. Also preserve full physical team reward (=3*adapter scalar) for reconciliation.
+
+Finite count noise may favor projection; trajectories may leave the special geometry; or
+myopic J may improve immediate choices while harming future geometry. These are real ways
+for M or neither method to be preferable. A positive read supports only this ordinary
+model package under this imposed correlation and initial distribution. It establishes no
+new architecture, cross-version replay benefit, endogenous co-learning, learned skill
+semantics or default-HMASD gain. A negative result will not trigger an automatic longer
+planner, window, neural density or geometry sweep. The next investment is decided from the
+closed-loop reading and its cost, not the predetermined nominal table.
+
+**Cost.** Three production fits;384 training team steps/observed joint labels/pre-update
+queries/count updates;48 actual evaluation episodes and3,072 evaluation team steps;
+24,576 hypothetical native one-step branches. Total **3,456 real team ticks**, **28,032
+native step calls including planning**. No new random reward draws beyond native deterministic
+physics, no gradients, no actor/value-network forwards. Source work remains included even
+though its counts do not transfer. Record native constructors/implicit resets,54 logical
+episode initializations/geometry channel refreshes, deep copies, probability/choice/truth
+arithmetic, actual fit starts/completions and process wall/CPU/RSS. Initialization and code/
+review/publication are not free. Use sequential local_linux, one numeric thread; runtime
+is unknown and will be measured. Counts above assume no extra production nominal probe.
+
+**Engineering L0.** Own only new package
+`experiments/candidates/skill_teammate_drift_learning/native_joint_b09/`, runner
+`scripts/run_skill_drift_native_joint_b09.py`, and mirrored research tests, plus this DM's
+notebook and B09 outputs. Implement the exact protocol, copied before/action/after geometry,
+observations, connections, full SINR, components/rewards, terminal IDs, count snapshots,
+probabilities, random addresses/slots and all evaluation response tables. Preserve failures
+and partial exposure; never report unfinished work as zero. Use a literal runner admission
+call, fixed production seeds/horizons/config/output suffix, declared source SHA and normal
+single-use native launch. Permit the launcher's bookkeeping files but refuse existing
+scientific outputs. Preserve stable artifact digests separately from mutable kernel records.
+No old B learner, shared environment, HMASD/FSD code or shared launcher is changed.
+
+Use focused pytest checks with one shared tiny real-host fixture: seed95991, source2 and
+target2, snapshots1/2, one2-tick evaluation episode per view/snapshot. This is one tiny fit,
+4 training ticks,8 evaluation ticks and64 planner branch calls:76 native step calls. A
+separate nominal eight-cell physics/clone-consistency check adds8, making84 planned native
+step calls in the first full correctness invocation, plus constructors/refreshes. No
+production seed evaluation or geometry search. Pure checks can reuse those recorded fixture
+arrays for counts, before-update causality, exact marginal matching, immutable snapshots,
+paired innovations, clone/state/RNG isolation, scaling, primary arithmetic, bit/command
+identity, terminal/reset boundaries, tampering/output refusal and the actual admission AST.
+Additional necessary checks or repairs retain their actual costs; do not repeat unchanged
+learning fixtures merely to mark a launch boundary. An unexpected physical table is a
+failed premise to assess, not permission to tune it until positive. Independent Reviewer
+checks executable semantics; DM accepts the diff and publishes the exact source before
+production. Implementer may choose routine implementation details, but no new arm, seed,
+endpoint, trial or scientific interpretation, and no launch. This entry is the prospective
+scientific declaration; an implementation failure does not authorize an automatic retry.
