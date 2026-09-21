@@ -1,0 +1,96 @@
+{
+  "acceptance": "accepted",
+  "accepted_at": "2026-09-21T10:36:50.656854Z",
+  "bootstrap_command": [
+    "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/ab78a40110a441bc8bca1f6845d5248d/scripts/hmasd_admission.py",
+    "_run-admitted",
+    "--runner",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/ab78a40110a441bc8bca1f6845d5248d/scripts/run_vsp03_opportunity_guard_b10.py",
+    "--output",
+    "/home/fires/.codex/worktrees/e481/hmasd-wsl/runs/vsp_03/opportunity_guard_b10_21801_21803",
+    "--",
+    "--seeds",
+    "21801",
+    "21802",
+    "21803",
+    "--launch-sha",
+    "6a7cb636ed35d2d5fa7ef0e25673a1e2aa11234c",
+    "--out",
+    "/home/fires/.codex/worktrees/e481/hmasd-wsl/runs/vsp_03/opportunity_guard_b10_21801_21803"
+  ],
+  "claim_key": "de8a1ddcebb7dcba7ba7bd7f60805afc1158659ebefa059fb85e071c15946401",
+  "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/de8a1ddcebb7dcba7ba7bd7f60805afc1158659ebefa059fb85e071c15946401.json",
+  "command": [
+    "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/ab78a40110a441bc8bca1f6845d5248d/scripts/run_vsp03_opportunity_guard_b10.py",
+    "--seeds",
+    "21801",
+    "21802",
+    "21803",
+    "--launch-sha",
+    "6a7cb636ed35d2d5fa7ef0e25673a1e2aa11234c",
+    "--out",
+    "/home/fires/.codex/worktrees/e481/hmasd-wsl/runs/vsp_03/opportunity_guard_b10_21801_21803"
+  ],
+  "command_sha256": "212f55f438d24efb022e35e25e73166c038810d9064b4e77bca00cd0b99f4c13",
+  "control_observation": {
+    "observed_at": "2026-09-21T10:36:50.483977Z",
+    "ref": "refs/heads/main",
+    "remote": "origin",
+    "sha": "cc544037f691d1c554ed557890547be9622cd967"
+  },
+  "control_root": "/home/fires/hmasd-wsl",
+  "created_at": "2026-09-21T10:36:50.503137Z",
+  "cwd": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/ab78a40110a441bc8bca1f6845d5248d",
+  "direction": "vsp_03",
+  "host_identity": "Jacob",
+  "identity_command": [
+    "/home/fires/.local/share/uv/python/cpython-3.10.20-linux-x86_64-gnu/bin/python3.10",
+    "scripts/run_vsp03_opportunity_guard_b10.py",
+    "--seeds",
+    "21801",
+    "21802",
+    "21803",
+    "--launch-sha",
+    "6a7cb636ed35d2d5fa7ef0e25673a1e2aa11234c"
+  ],
+  "lead": "Codex DM (independent session)",
+  "manifest_ref": "/home/fires/.codex/worktrees/e481/hmasd-wsl/runs/vsp_03/opportunity_guard_b10_21801_21803/launch-manifest.json",
+  "node": "local_linux",
+  "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/de8a1ddcebb7dcba7ba7bd7f60805afc1158659ebefa059fb85e071c15946401.json",
+  "output_root": "/home/fires/.codex/worktrees/e481/hmasd-wsl/runs/vsp_03/opportunity_guard_b10_21801_21803",
+  "preflight": "/home/fires/.codex/worktrees/e481/hmasd-wsl/runs/vsp_03/opportunity_guard_b10_21801_21803/admission-preflight.json",
+  "process": {
+    "detached": true,
+    "identity": {
+      "boot_id": "0c48e432-2a4b-4bcc-9576-32954aa2c6b8",
+      "kind": "linux_pid_start_ticks",
+      "pid": 3488961,
+      "session_id": 3488961,
+      "start_ticks": 24944085
+    },
+    "native_handle_kind": "posix_session",
+    "pid": 3488961,
+    "process_group_id": 3488961
+  },
+  "process_exit": "/home/fires/.codex/worktrees/e481/hmasd-wsl/runs/vsp_03/opportunity_guard_b10_21801_21803/process-exit.json",
+  "published_remote": "origin",
+  "runner_process": {
+    "identity": {
+      "boot_id": "0c48e432-2a4b-4bcc-9576-32954aa2c6b8",
+      "kind": "linux_pid_start_ticks",
+      "pid": 3488962,
+      "session_id": 3488961,
+      "start_ticks": 24944088
+    },
+    "pid": 3488962,
+    "process_group_id": 3488961,
+    "supervisor_pid": 3488961
+  },
+  "schema_version": 1,
+  "sha": "6a7cb636ed35d2d5fa7ef0e25673a1e2aa11234c",
+  "source_root": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/ab78a40110a441bc8bca1f6845d5248d",
+  "stderr": "/home/fires/.codex/worktrees/e481/hmasd-wsl/runs/vsp_03/opportunity_guard_b10_21801_21803/stderr.log",
+  "stdout": "/home/fires/.codex/worktrees/e481/hmasd-wsl/runs/vsp_03/opportunity_guard_b10_21801_21803/stdout.log"
+}

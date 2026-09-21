@@ -1,0 +1,96 @@
+{
+  "source_revision": "a5a87aa223727b2673781009c90810e7a4842584",
+  "source_run": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/ab78a40110a441bc8bca1f6845d5248d/runs/vsp_03/opportunity_b08_21801_21803",
+  "blocks": {
+    "21801": {
+      "seed": 21801,
+      "source_block": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/ab78a40110a441bc8bca1f6845d5248d/runs/vsp_03/opportunity_b08_21801_21803/21801",
+      "artifacts": {
+        "fitted_model.json": {
+          "sha256": "e16c7bb048c1544c2900fa3ae459898cdef64431adaf30613f2917c350b73bc7",
+          "bytes": 37008
+        },
+        "evaluation_worlds.npz": {
+          "sha256": "7bb84d71f980ce498c7afc47af887c6fcf3d098de79d6e77b494a9af6e34890a",
+          "bytes": 2999488
+        },
+        "G.json": {
+          "sha256": "797149b954314542c58c7eda2a0db52687e10a06db617191ed05a54f09b4436c",
+          "bytes": 3427712
+        },
+        "O.json": {
+          "sha256": "a97495a6d0699bf14485f3bd5f1ed09a7ec6f30139218454af93773c2539e1f3",
+          "bytes": 3431286
+        },
+        "O_self.json": {
+          "sha256": "1a95382825e75726c57a4abf542d838ea6e9fbb1f146f55e48175cdcc6cd7bd8",
+          "bytes": 3434358
+        },
+        "O_self_decisions.npz": {
+          "sha256": "562e2ecff2c8d43e20623a2648c5bbc74d8d5384074390470a083b7f18d0e936",
+          "bytes": 179943
+        }
+      }
+    },
+    "21802": {
+      "seed": 21802,
+      "source_block": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/ab78a40110a441bc8bca1f6845d5248d/runs/vsp_03/opportunity_b08_21801_21803/21802",
+      "artifacts": {
+        "fitted_model.json": {
+          "sha256": "095dc71376317c8c6601fcf83f177ca397203bf76b349c33d8a0a4cd015f3a25",
+          "bytes": 38144
+        },
+        "evaluation_worlds.npz": {
+          "sha256": "bb8583c00b15adadbeb7674edfa5dd7c911b3134a32905caa54680af91f771dd",
+          "bytes": 2999408
+        },
+        "G.json": {
+          "sha256": "4a4141585de8eb712464a87ad3b470453cbef3f8391b61a80bedd124c2b61ded",
+          "bytes": 3427754
+        },
+        "O.json": {
+          "sha256": "ca1bc538ebd3dc48a2e6f8a1e741db1027095b9a5ca4c781e11fda68dd85bb08",
+          "bytes": 3431506
+        },
+        "O_self.json": {
+          "sha256": "bcff6c84c89a41c6f1953979e5c56e97f1ffae7938373a198cf18bc427b3f18d",
+          "bytes": 3434580
+        },
+        "O_self_decisions.npz": {
+          "sha256": "9ae6de68970b51a873f6b4b28a055baeb979bba3423d6a61f5488e22c90e5f3e",
+          "bytes": 180088
+        }
+      }
+    },
+    "21803": {
+      "seed": 21803,
+      "source_block": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/ab78a40110a441bc8bca1f6845d5248d/runs/vsp_03/opportunity_b08_21801_21803/21803",
+      "artifacts": {
+        "fitted_model.json": {
+          "sha256": "f7252a0adb6bdf03d3e1494caabeb244ac872db2024d5213e31b075a029017af",
+          "bytes": 39506
+        },
+        "evaluation_worlds.npz": {
+          "sha256": "5879afe100e32285711bd7278b81b24997be8eae57208e6792c4ca1ac594e9c8",
+          "bytes": 2999289
+        },
+        "G.json": {
+          "sha256": "094f37f5b75c33695285fcc62b05902879a54bcbcb6ae1602cc2559d40c51d6b",
+          "bytes": 3430635
+        },
+        "O.json": {
+          "sha256": "41031d0674eec0768cf20f96cbfb5b602e05229a5baf700c432f798a1fe05cb0",
+          "bytes": 3431569
+        },
+        "O_self.json": {
+          "sha256": "17eed9a8715202896cc77b7acac79ced60ed85bec38561e64ea5f454508d7d98",
+          "bytes": 3434632
+        },
+        "O_self_decisions.npz": {
+          "sha256": "c970c7637040f2a563481b3e3034eb3fffc94f28c226604803265330f5d98355",
+          "bytes": 180852
+        }
+      }
+    }
+  }
+}

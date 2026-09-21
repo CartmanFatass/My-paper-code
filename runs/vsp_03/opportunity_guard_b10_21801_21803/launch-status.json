@@ -1,0 +1,11 @@
+{
+  "claim_key": "de8a1ddcebb7dcba7ba7bd7f60805afc1158659ebefa059fb85e071c15946401",
+  "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/de8a1ddcebb7dcba7ba7bd7f60805afc1158659ebefa059fb85e071c15946401.json",
+  "manifest_ref": "/home/fires/.codex/worktrees/e481/hmasd-wsl/runs/vsp_03/opportunity_guard_b10_21801_21803/launch-manifest.json",
+  "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/de8a1ddcebb7dcba7ba7bd7f60805afc1158659ebefa059fb85e071c15946401.json",
+  "pid": 3488961,
+  "runner_pid": 3488962,
+  "schema_version": 1,
+  "status": "accepted",
+  "updated_at": "2026-09-21T10:36:50.669206Z"
+}

@@ -1,0 +1,25 @@
+{
+  "object": "VSP03_OPPORTUNITY_GUARD_B10",
+  "seeds": [
+    21801,
+    21802,
+    21803
+  ],
+  "launch_sha": "6a7cb636ed35d2d5fa7ef0e25673a1e2aa11234c",
+  "source_revision": "a5a87aa223727b2673781009c90810e7a4842584",
+  "source_run": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/ab78a40110a441bc8bca1f6845d5248d/runs/vsp_03/opportunity_b08_21801_21803",
+  "intervention": "published fitted O_self; force SUBMIT only at t22 with partner pending",
+  "planned_fits": 0,
+  "planned_optimizer_steps": 0,
+  "planned_gradient_steps": 0,
+  "planned_guard_panels": 3,
+  "planned_evaluation_episodes": 12288,
+  "planned_team_ticks": 491520,
+  "planned_target_transitions": 983040,
+  "reference_panels_replayed": 0,
+  "new_worlds": 0,
+  "threads": 1,
+  "device": "cpu",
+  "dtype": "float64 planner; inherited float64 worlds",
+  "selection": "one fixed Pro-proposed feasibility boundary; no threshold or score search"
+}
