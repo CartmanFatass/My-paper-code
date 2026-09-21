@@ -1,0 +1,10 @@
+{"event": "block_started", "stage": "confirmation", "seed": 95201, "decision_fits": 3}
+{"event": "block_complete", "stage": "confirmation", "seed": 95201}
+{"event": "block_started", "stage": "confirmation", "seed": 95202, "decision_fits": 3}
+{"event": "block_complete", "stage": "confirmation", "seed": 95202}
+{"event": "block_started", "stage": "confirmation", "seed": 95203, "decision_fits": 3}
+{"event": "block_complete", "stage": "confirmation", "seed": 95203}
+{"event": "block_started", "stage": "confirmation", "seed": 95204, "decision_fits": 3}
+{"event": "block_complete", "stage": "confirmation", "seed": 95204}
+{"event": "block_started", "stage": "confirmation", "seed": 95205, "decision_fits": 3}
+{"event": "block_complete", "stage": "confirmation", "seed": 95205}

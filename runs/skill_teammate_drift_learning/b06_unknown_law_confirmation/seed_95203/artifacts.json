@@ -1,0 +1,13 @@
+{
+  "common.npz": "faa1c9604ed69a49461277647104df4494a217840a0cd4690037fced51442720",
+  "fingerprint_full__hybrid__prior2/curves.npz": "c0b2c6668b53efeae03a46c2d709b77709fdd4f3e362d4da2fba70e3a5da845c",
+  "fingerprint_full__hybrid__prior2/state.npz": "ec690aa956ed47807317b17383d7d2bdbf73cb04244eb43e8a6aefc49db904fe",
+  "fingerprint_full__hybrid__prior2/summary.json": "62009ac244a75a875deeee3980af382b0b991251e186a46127808fca5aa6ab49",
+  "fingerprint_recent__hybrid__prior16__window256/curves.npz": "8a906ca8cf6ed135bd9755f9e2ac0ac98e3812cb6201b013987def8c8b9b65ac",
+  "fingerprint_recent__hybrid__prior16__window256/state.npz": "e97e855209b7ada9cdb292d9c47a24a652ae29945345b09d409b6e0450e9c2fc",
+  "fingerprint_recent__hybrid__prior16__window256/summary.json": "3d09794befeeaad3adb87f8c38bff27fb69dec5990eed7d3714890d9ef18806b",
+  "response_all__response__prior2/curves.npz": "2e8553b83828a0424620bec33c42e597338e2b402a45117206f8725f4d4fa2f4",
+  "response_all__response__prior2/state.npz": "0c88915ec277a153462cd37fcfb0767d6fb06c3f85ab6d53a3a3307880abd8ab",
+  "response_all__response__prior2/summary.json": "53453f730b5c7fcc7afbe8a171d670c91a23daef9e1165f91332b1b0c537cfb2",
+  "summary.json": "31fcefffd8e407c605a0ebb8ae87f3437ce839d06a8320305c609ef6d3c66342"
+}

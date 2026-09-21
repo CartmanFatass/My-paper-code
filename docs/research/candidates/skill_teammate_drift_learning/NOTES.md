@@ -2537,3 +2537,105 @@ published snapshot/native admission. Reviewed executable at
 changed before launch. Read all five blocks and terminal evidence, do not extend the
 batch after scores, retain actual update/solve and process-resource counts. This step
 needs no owner/Root message or new permission under the current authorization.
+
+## 2026-09-21 03:59 PDT — B06 complete: positive mean, confirmation inconclusive
+
+**Execution and acceptance.** The only B06 launch used published source
+`542a244e4b67a8226e395377195e8edba0825b23`; native admission accepted at
+2026-09-21T10:54:17.156659Z. Preserve operation
+`/home/fires/hmasd-wsl/.git/hmasd-admission/79102fbf9c824518db327d6bcb51f524259295c8a318e1ceb9a877bd706f5ebf.json`
+and [manifest](../../../../runs/skill_teammate_drift_learning/b06_unknown_law_confirmation/launch-manifest.json).
+The supervisor recorded actual child exit zero; status reconciled the process identities
+and terminal witness with no mismatch. Stderr is empty. All five declared blocks, 15
+decision fits and five shared-law fits completed. The final root includes the primary
+reduction, so acceptance does not rely on an intermediate COMPLETE flag.
+
+DM read all 15 fit summaries and their common/curve/state arrays, checked all 55 declared
+artifact digests and the exact copied selection bytes, recomputed exact expected rewards
+and regrets from .05+.90*p11 / .60, and independently reduced the five paired values
+with scalar statistics. All 2,304 pre-update counts per fit are consecutive; final
+states agree with recorded estimates, and all decision/law states moved in both the
+source and target phases. [Readback](../../../../runs/skill_teammate_drift_learning/b06_unknown_law_confirmation/readback.json)
+contains these reductions and complete context-specific observations. This was reading
+saved outputs, with no new fit, policy forward, environment step or evaluator call.
+
+**Read by the frozen rule.** Seeds are 95201, 95202, 95203, 95204, 95205, in that order.
+Values below are response minus the named reference; positive favors response.
+
+| Endpoint/reference | 95201 | 95202 | 95203 | 95204 | 95205 | Mean |
+|---|---:|---:|---:|---:|---:|---:|
+| **first64/full (primary)** | -.012500000 | +.031484375 | +.023828125 | -.005156250 | +.003281250 | **+.008187500** |
+| first64/recent | -.006640625 | +.015859375 | +.035703125 | -.004921875 | +.004375000 | +.008875000 |
+| full256/full | -.002421875 | +.009160156 | +.008554688 | -.003007812 | +.001777344 | +.002812500 |
+| full256/recent | -.002246094 | +.004394531 | +.013574219 | -.003027344 | +.002187500 | +.002976563 |
+| late64/full | +.001718750 | .000000000 | +.005468750 | -.000859375 | +.001640625 | +.001593750 |
+| late64/recent | .000000000 | .000000000 | +.007656250 | -.001718750 | +.001640625 | +.001515625 |
+
+Primary sample SD is .0188246723. The predeclared two-sided df4 t95 interval is
+**[-.0151864178, +.0315614178]**. The mean clears .005, the interval does not clear zero;
+therefore the operational support rule **fails and the confirmation is inconclusive**.
+There is neither a confirmed positive effect nor an equivalence/no-value result. The
+interval still relies on approximate normality of five independent block differences.
+No pooling with B05, no additional seed and no promotion of secondary endpoints. Two
+blocks are adverse against both references in first64 and full256; B05's all-positive
+full256 pattern did not recur. That contrary evidence is part of the update.
+
+**What the negative and positive blocks show.** On 95201, response agrees exactly with
+the known-response diagnostic on all 64 early choices yet loses .0125 to full. In the
+.55-context it makes seven COOPERATIVE choices versus full's one, adding .33 regret;
+in the .35-context it makes two versus full's zero, adding .47. The .85 and .65 contexts
+have identical action counts and regret. These differences exactly account for the
+.80 cumulative early loss. Here the direct fit's more conservative mapping protects
+against noisy law-induced false-positive choices; making response means more accurate
+would not remove the observed difference.
+
+On 95204 all three learners make the severe .35-context error repeatedly: response and
+full each cooperate 14/16 times, losing 3.29 expected reward there. The response-minus-
+full loss instead comes entirely from six additional .55-context cooperative choices
+(.33/64=.00515625). Response's early value .598203125 is slightly below the analytic
+always-SAFE expectation .60. This reference is task arithmetic, not a new fitted arm.
+
+The opposite opportunity appears in 95202/95203: in their .85-contexts response makes
+15/16 cooperative choices versus full's 9/7, avoiding respectively 1.29/1.935 cumulative
+missed opportunity. Those gains are partly offset or augmented by other contexts. Thus
+response's sharper outcome-informed mapping sometimes avoids valuable missed cooperation
+and sometimes exposes extra harmful cooperation; a universal claim that direct-model
+conservatism is a defect is weakened. This is saved-trajectory explanation, not an
+intervention establishing the cause of coefficients or learning dynamics.
+
+Across the five blocks, the response error decomposition's early absolute response term
+is .00206–.01189 versus .07544–.14301 for the law term. This repeats the limitation that
+more accurate stable response means alone do not solve the current absolute loss. The
+known-response diagnostic changes both SAFE and cooperative means, and can benefit or
+hurt through error cancellation; it remains neither an upper bound nor causal attribution.
+
+**Cost.** B06: 20 completed fits, 11,520 unique macros /34,560 primitive ticks,
+34,560 decision-reading macros /103,680 tick exposure; 34,560 exact decision panels and
+11,520 shared diagnostics; zero new evaluation environment ticks/reward draws and zero
+gradient optimizer calls. Actual updates: 5,769 shared-law, 17,253 SAFE posterior,
+5,769 cooperative-response posterior, 11,538 regression-statistic updates, 16,668 ridge
+solves and 34,560 decision observations. Scientific-process wall 1.665734620 s, CPU
+1.567011442 s, single-process peak RSS 41,816 KiB. These exclude code/advice/launch/
+publication/readback time and are not end-to-end research speed. B05+B06 now account
+for 95 completed production fits and 76,032 unique ticks; earlier B history and tiny
+checks remain separately recorded rather than erased or reclassified as free work.
+
+**Working judgment and next useful observation.** B stays exploring. The fixed package
+has repeated positive means with real adverse blocks; population gain is unresolved,
+and the investment case for another unchanged passive-collector repetition is weaker.
+No claim is promoted. Stable outcome-conditioned reuse still supplies an intelligible
+learning bias; its consequence depends on costly action errors under a learned law.
+
+The next question worth formulating is whether this bias helps when each learner's
+choices determine which cooperative outcomes become observable. All B05/B06 learners
+received a uniform common collector regardless of their recommendation. A real online
+learner that becomes pessimistic may stop collecting the very cooperative outcomes
+needed to repair its current law; optimism may instead pay for information with harmful
+actions. This dependency is absent from the current experiment and cannot be settled
+by its greedy readout or an oracle law-error percentage. I will formulate one bounded
+comparison of response versus the same full direct learner under matched exploration,
+with uniform-collection branches as controls, and obtain focused criticism of this
+changed data-collection premise before execution. This is about endogenous *own-data
+collection* on the same exogenous teammate-law host, not a claim of endogenous teammate
+learning or native UAV evidence. No B07 fit or new scientific evaluation is started by
+this interpretation; no peer task is asked to update or decide for this DM.
