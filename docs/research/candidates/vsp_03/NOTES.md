@@ -1108,3 +1108,125 @@ Use configured local_linux scientific Python, one CPU/BLAS/OpenMP thread and one
 process. Native admission checks fresh memory and current published/canonical pause and
 lead. Exact source will be committed/pushed before launch; the retained snapshot excludes
 uncommitted shared-knowledge drafting. No App cross-task message or new permission gate.
+
+## 2026-09-21 — B11 completed: independent calibration removes the G-history prerequisite
+
+The one native invocation at source `9ab9ce6c990286ed9ba9c05cdb65473adc7bfd46` was
+accepted11:32:04 UTC and exited0 at11:32:11. Its
+[`launch-manifest.json`](../../../../runs/vsp_03/opportunity_calibration_b11_22001_22003/launch-manifest.json)
+and terminal witness retain the handles; both runner and supervisor are absent and native
+status is consistent. Three declared MLE fits completed, zero technical/scientific retries,
+zero neural constructions/forwards/gradient/Adam calls. No panel, fit or calibration episode
+was added after scores. The complete60-file result, including all public inputs, world/decision
+arrays and native logs, is published at
+[`4780940a613c595a49fd19d94ad6d3f7ffb0dd9d`](https://github.com/CartmanFatass/My-paper-code/tree/4780940a613c595a49fd19d94ad6d3f7ffb0dd9d/runs/vsp_03/opportunity_calibration_b11_22001_22003).
+
+### Complete reading, conditional on the three frozen O_full instances
+
+| New seed → old reference | O_R0 J | O_full J | R0 J | O_R0−O_full | O_R0−R0 |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| 22001 →21801 | .379931641 | .379992676 | .351320801 | −.000061035 | +.028610840 |
+| 22002 →21802 | .380808105 | .381560059 | .350878906 | −.000751953 | +.029929199 |
+| 22003 →21803 | .378430176 | .378430176 | .352593994 | .000000000 | +.025836182 |
+
+Primary descriptive mean **O_R0−O_full =−.00027099609375**, block SD.000417637488746.
+Conditional-world SEs are.000298675911/.000465648059/0. The third block has zero paired
+return difference on all4,096 sampled worlds; this does not establish policy equivalence
+outside them. Secondary mean **O_R0−R0 =+.028125406901042**, block SD.002089241986968;
+conditional SEs.004059354526/.004095925200/.004053346569. All three secondary differences
+are positive. No new inferential label, noninferiority verdict, practical-margin test or
+comparison to G is inferred from B11. Fresh worlds do not turn the old references into
+new full-data fits. Three calibrations remain the independent new fitted units.
+
+The fitted (c,p) values are (4.182854952,.497218660), (4.072368221,.479814071),
+(4.088743772,.489238273). They moved from6/.4 and converged in9/8/9 iterations with
+39/33/42 objective calls. Initial negative log likelihoods6916.290491/6934.524562/6566.339411
+fell to6826.727480/6843.127435/6478.306958 on5,980/6,014/5,780 public endpoint pairs.
+Parameter changes did not force proportional policy-value changes; fitting convergence
+alone was not the success criterion. None used old O parameters, evaluation information
+or intermediate hidden target states.
+
+All12,288 O_R0 evaluation worlds make both attempts, with zero non-submission and zero
+final-clock blocking, as do the frozen references on these panels. Relative to O_full,
+the new method loses.000569661 success/team on average and reduces waiting by.005533854
+ticks; attempts are identical. Its J difference is success−.000284831 plus waiting+.000013835.
+Relative to R0, O_R0 adds.084635417 successes, .176188151 attempts, .091552734 failed attempts,
+3.915039063 waiting ticks and.434895833 expiry events/team. The J terms are
+success+.042317708, attempts−.004404704, waiting−.009787598, totaling+.028125407.
+Thus usefulness coexists with more failures, waiting and expiry. Those diagnostics are not
+extra penalties or separately identified causal mechanisms.
+
+### What changed and what did not
+
+The prediction of useful scheduling and positive mean return over readiness is supported
+in all three new calibrations. The previously untested dependence on a G training history
+is now **resolved as a development construction question**: under this fixed correct family,
+the tested512-R0 collection produced useful fitted controllers without training G. It is
+no longer left as a condition for the owner or a later unexplained reopening. Two small
+observed losses versus O_full remain visible; this is not a proved lossless replacement,
+minimal sample requirement or general sample-efficiency result.
+
+Keep the already available O_full as the confirmed method reference; using its artifact
+does not require paying its historical acquisition cost again. Preserve O_R0 as a working
+from-scratch calibration construction, with its512-episode exposure and correct-family
+prior explicit. B09's G−R0 gain, O−G confirmation and B10's bounded guard explanation remain
+unchanged. The result supplies neither a new neural ranking nor general MARL/UAV evidence.
+
+Actual work matches the declaration:1,536 collection episodes,36,864 evaluation-panel
+episodes,38,400 total,1,536,000 team ticks and3,072,000 target transitions. There were10,423
+collection decision rows and286,653 evaluation decision rows. All114 MLE objective calls
+and26 iterations are reported; zero neural optimizer calls is not zero optimization work.
+Scientific-process wall6.278838s, CPU6.177741s, peak single-process RSS333,643,776 bytes;
+fresh effective memory9,855,705,088 bytes passed the4 GiB floor, cgroup values unknown.
+Collection including its persistence took.186699s, MLE.019644s, the six planner reconstructions
+.004691s. These are components, not total research turnaround or a128-fold speedup.
+
+Readback verified all50 stable artifact digests, all36,864 native rows and arrays, every
+paired return/aggregate, fixed workload and independent reconstruction of all public endpoint
+counts. A first read-only checker passed in45.645s but repeatedly decompressed an NPZ inside
+its row loop; the same checks with each array loaded once passed in.608s. Both add zero
+fits/rollouts and did not alter scientific artifacts. This support work, implementation,
+tests, Pro waiting and publication are outside the reported scientific-process wall.
+
+Across the resumed B08–B11 work: **19 completed fits** (eight G, eleven MLE), zero failed
+fits,804,352 executed episodes,32,174,080 team ticks,64,348,160 target transitions and
+4,096 Adam calls. Summed scientific-process wall102.173746s; historical pre-B08 experiments
+remain separate rather than being omitted from a lifetime-cost claim.
+
+### Stopping audit conclusion and shared understanding
+
+The completed Pro transport returned DELIVERED for `f6fd364f2`, the same answer already
+read and byte-verified by the DM. Send was accepted04:02:40 PDT at6 Pro; same-key read-only
+collection completed without recovery/resend, and its owned tab was closed. No live
+scientific process, uncertain send/write, uncollected result or unresolved external input
+remains for this work.
+
+Independent Critic read B11 and agrees with ending the current fixed-host route as
+answered, MATERIAL_DISSENT no. The strongest contrary case is real: three development
+calibrations do not establish rare-fit reliability, noninferiority, a minimum sufficient
+budget or generality. The two negative O_R0-O_full differences remain. I accept these
+limits, but a new reliability/minimum-data claim is not needed to choose the existing
+O_full artifact or to preserve the demonstrated standalone construction. Another fit
+would refine a broader claim rather than change the present use decision.
+
+**DM decision: end this fixed public H40/two-target route with its ordinary-method answer;
+select no further fits.** B09 answered the strong-comparator question, B10 narrowed the
+coupling explanation, and B11 answered the specific data-acquisition question. The source
+audit rejected the proposed direct reservation-to-Scenario1 mapping on actual code facts.
+Those are completed scientific actions, not conditions left for the owner to solve.
+Do not leave a standing requirement that the owner supply a new idea, model or information
+condition. An artificial task change solely to restore a neural advantage is not selected.
+This is an investment conclusion for the answered route, not falsification of all timing
+learning, all model-based control or all UAV adaptive-duration questions. Direction-level
+archiving remains the owner's selection; the registered direction state is not silently
+changed by this route decision or by a claim that every possible continuation is exhausted.
+
+The owner-requested shared insight destination is the existing
+`docs/rl-marl-foundations-20260907/FOUNDATIONS.md`, the repository's shared conceptual
+summary. Add bounded evidence examples to its existing §§5–6: persistent exclusive
+commitment changes the next legal opportunity; earlier use can preserve later team
+opportunities; the guard recovers part of the observed increment without causal/equivalence
+overreach; equal raw history does not mean equal model priors or free acquisition; and the
+specific512-R0 construction now has positive development evidence. Preserve original
+positive learning results and native costs. These are conditional scientific lessons,
+not new governance, new launch gates, a general planner victory or an unmeasured UAV claim.
