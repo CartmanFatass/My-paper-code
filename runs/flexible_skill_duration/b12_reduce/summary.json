@@ -1,0 +1,3266 @@
+{
+  "object_id": "FSD_COMMITMENT_VISIBILITY_B12",
+  "card": "docs/research/candidates/flexible_skill_duration/NOTES.md (2026-09-20 19:11 PDT, B12 specified before any score)",
+  "command": "reduce",
+  "launch_sha": "aad162d0d858a27c4807d7bc80420d04b57df623",
+  "probe_launch_sha": "aad162d0d858a27c4807d7bc80420d04b57df623",
+  "b09_probe_launch_sha": "fd8402f592ac310cdccc4619137c041796df29b6",
+  "b10_probe_launch_sha": "63328ec7bc2b21ec9785331aca10f30b3f223b42",
+  "reference_object_ids": [
+    "FSD_COORDINATOR_SIGNAL_B11",
+    "FSD_LABEL_MAP_SAMPLED_B10",
+    "FSD_LABEL_MAP_B09",
+    "FSD_LABEL_CONTENT_B08"
+  ],
+  "status": "complete",
+  "arm": {
+    "name": "D_SAVE",
+    "overrides": {},
+    "coordinator_batch_size": 1280,
+    "frozen_caps": {
+      "skill_cap_k_max": 10,
+      "team_cap_k_Z": 10
+    }
+  },
+  "labels": 6,
+  "caps": [
+    10,
+    50,
+    100,
+    500
+  ],
+  "primary_response": "undiscounted_mean_reward_per_step",
+  "responses": [
+    "undiscounted_mean_reward_per_step",
+    "discounted_segment_reward"
+  ],
+  "rollouts_per_cap": {
+    "772803": 16,
+    "772903": 16,
+    "773003": 16
+  },
+  "quantity": "a commitment is one closed team segment of the D2 route; its two responses are the frozen discounted credit quantity and the undiscounted mean reward per step over the same steps. A cap's coefficient for a label is the least-squares effect of one more agent holding that label in a commitment, with a fixed effect per commitment position and the six coefficients centred to mean zero, and its calibration is the permutation distribution of the same statistic under label vectors reshuffled among commitments at the same position. B09's mean-action J and B10's sampled J are those objects' own fixed-weight panels of the same checkpoint, so every comparison is within one block, one checkpoint and one set of weights - but the coefficients are collected on this object's own sixteen worlds and the panels on the block's 32 evaluation worlds, so the pairing is the checkpoint, not the world",
+  "blocks": [
+    {
+      "training_seed": 772803,
+      "evaluation_seed": 782803,
+      "status": "complete",
+      "missing_or_invalid": {},
+      "weights_match": true,
+      "as_trained_identical_to_b09_and_b10": true,
+      "J_as_trained": 0.45587469857693386,
+      "caps": [
+        10,
+        50,
+        100,
+        500
+      ],
+      "rollouts_per_cap": 16,
+      "by_cap": {
+        "10": {
+          "cap": 10,
+          "rollouts": 16,
+          "lane_episodes": 256,
+          "commitments": 12800,
+          "commitments_per_lane_episode": 50,
+          "clusters": 256,
+          "mean_commitment_elapsed": 10.0,
+          "behaviour": {
+            "lane_episodes": 256,
+            "mean_episode_return_U": 29.25397959207456,
+            "clustered_se_episode_return_U": 0.12283634418016218,
+            "mean_episode_J": 0.3510477551048947,
+            "clustered_se_episode_J": 0.001474036130161946,
+            "mean_reward_per_step": 0.058507959184149125,
+            "definition": "one lane-episode is one cluster - the whole episode of one collection lane - so the standard error over the lane-episodes is already the clustered one. J is the runner's own native score of the same return. the runner converts a scalar episode return U to the native score J by the pure factor `N_UAVS / HORIZON` = 6 / 500 = .012: `scripts/run_fsd_baseline_interruption_b01.py:254` computes `native_scores_J = shared.N_UAVS * returns / horizon` with `horizon = shared.HORIZON` (line 201), and `scripts/run_fsd_uav_individual_renewal_b01.py:140` publishes the same number as `native_score_factor` on every summary. There is no offset and no per-world term, so a mean reward per step multiplied by N_UAVS is an episode J, and the additive model's predicted all-equal mean reward per step converts directly"
+          },
+          "label_law_entropy_estimate": 1.7834122535539791,
+          "best_mean_action_label": 2,
+          "wall_seconds": 410.78179819800425,
+          "undiscounted_mean_reward_per_step": {
+            "centred_coefficients": {
+              "0": -0.0004125626274026524,
+              "1": 0.00021728329400403512,
+              "2": 0.00037642830266680643,
+              "3": 0.00045803013625723987,
+              "4": -0.00019881271482183668,
+              "5": -0.000440366390703592
+            },
+            "clustered_se": {
+              "0": 7.023949672224397e-05,
+              "1": 6.343680567690427e-05,
+              "2": 6.580249685791594e-05,
+              "3": 7.037426802368632e-05,
+              "4": 6.998683860460513e-05,
+              "5": 6.922656914352784e-05
+            },
+            "ranking": [
+              3,
+              2,
+              1,
+              4,
+              0,
+              5
+            ],
+            "max_minus_min": 0.0008983965269608318,
+            "max_minus_min_clustered_se": 0.00010862267359382628,
+            "r_squared": 0.016748308401930534,
+            "residual_sd": 0.00829619572307229,
+            "permutation_percentile_value": 0.0003035580665867566,
+            "permutation_p_value": 0.000999000999000999,
+            "spread_exceeds_permutation_percentile": true,
+            "best_mean_action_label_rank": 2,
+            "best_mean_action_label_in_top_two": true,
+            "shows_the_ranking": true,
+            "placebo_max_minus_min": 0.0007107347953525312,
+            "placebo_permutation_percentile_value": 0.0007773879088466683,
+            "placebo_permutation_p_value": 0.09090909090909091,
+            "placebo_passes_the_same_spread_test": false,
+            "placebo_invalidates_this_reading": false,
+            "rank_correlation_with_mean_action_b09": 0.6571428571428571,
+            "rank_correlation_with_sampled_b10": 0.8285714285714286,
+            "criterion": "the notebook's, declared before any score: the cap shows the ranking if the centred coefficient spread exceeds the 95th percentile of its own permutation spread *and* B09's best mean-action label is ranked first or second by the same coefficients. It is read on the undiscounted response; the discounted one is reported beside it. A placebo that passes the same spread test invalidates the cap's reading",
+            "drop_invariance": {
+              "alternate_dropped_label": 0,
+              "max_absolute_difference": 1.1504469252243688e-15,
+              "definition": "the same model refitted with a different dropped label; the centred coefficients are invariant to the choice, so this is a check and not a second estimate"
+            }
+          },
+          "discounted_segment_reward": {
+            "centred_coefficients": {
+              "0": -0.003960059759548217,
+              "1": 0.0021234721688821456,
+              "2": 0.0035988170656782725,
+              "3": 0.004371495642575607,
+              "4": -0.001917376541164806,
+              "5": -0.004216348576423001
+            },
+            "clustered_se": {
+              "0": 0.0006719643503566098,
+              "1": 0.0006068033726251805,
+              "2": 0.0006299558041862386,
+              "3": 0.0006728188171162169,
+              "4": 0.0006690848151265799,
+              "5": 0.0006622207483480035
+            },
+            "ranking": [
+              3,
+              2,
+              1,
+              4,
+              0,
+              5
+            ],
+            "max_minus_min": 0.008587844218998608,
+            "max_minus_min_clustered_se": 0.001039558126996449,
+            "r_squared": 0.016814501709725538,
+            "residual_sd": 0.07936769693063797,
+            "permutation_percentile_value": 0.0029594883180488587,
+            "permutation_p_value": 0.000999000999000999,
+            "spread_exceeds_permutation_percentile": true,
+            "best_mean_action_label_rank": 2,
+            "best_mean_action_label_in_top_two": true,
+            "shows_the_ranking": true,
+            "placebo_max_minus_min": 0.006717642212266468,
+            "placebo_permutation_percentile_value": 0.007563805642940922,
+            "placebo_permutation_p_value": 0.1008991008991009,
+            "placebo_passes_the_same_spread_test": false,
+            "placebo_invalidates_this_reading": false,
+            "rank_correlation_with_mean_action_b09": 0.6571428571428571,
+            "rank_correlation_with_sampled_b10": 0.8285714285714286,
+            "criterion": "the notebook's, declared before any score: the cap shows the ranking if the centred coefficient spread exceeds the 95th percentile of its own permutation spread *and* B09's best mean-action label is ranked first or second by the same coefficients. It is read on the undiscounted response; the discounted one is reported beside it. A placebo that passes the same spread test invalidates the cap's reading",
+            "drop_invariance": {
+              "alternate_dropped_label": 0,
+              "max_absolute_difference": 1.1834283553113778e-14,
+              "definition": "the same model refitted with a different dropped label; the centred coefficients are invariant to the choice, so this is a check and not a second estimate"
+            }
+          }
+        },
+        "50": {
+          "cap": 50,
+          "rollouts": 16,
+          "lane_episodes": 256,
+          "commitments": 2560,
+          "commitments_per_lane_episode": 10,
+          "clusters": 256,
+          "mean_commitment_elapsed": 50.0,
+          "behaviour": {
+            "lane_episodes": 256,
+            "mean_episode_return_U": 28.65954023639955,
+            "clustered_se_episode_return_U": 0.11850583660155042,
+            "mean_episode_J": 0.3439144828367946,
+            "clustered_se_episode_J": 0.001422070039218605,
+            "mean_reward_per_step": 0.0573190804727991,
+            "definition": "one lane-episode is one cluster - the whole episode of one collection lane - so the standard error over the lane-episodes is already the clustered one. J is the runner's own native score of the same return. the runner converts a scalar episode return U to the native score J by the pure factor `N_UAVS / HORIZON` = 6 / 500 = .012: `scripts/run_fsd_baseline_interruption_b01.py:254` computes `native_scores_J = shared.N_UAVS * returns / horizon` with `horizon = shared.HORIZON` (line 201), and `scripts/run_fsd_uav_individual_renewal_b01.py:140` publishes the same number as `native_score_factor` on every summary. There is no offset and no per-world term, so a mean reward per step multiplied by N_UAVS is an episode J, and the additive model's predicted all-equal mean reward per step converts directly"
+          },
+          "label_law_entropy_estimate": 1.784663025367384,
+          "best_mean_action_label": 2,
+          "wall_seconds": 431.084771430993,
+          "undiscounted_mean_reward_per_step": {
+            "centred_coefficients": {
+              "0": -0.00015059191748033817,
+              "1": 0.00020214730799780344,
+              "2": 0.0006893329483398808,
+              "3": 0.00030079274164024274,
+              "4": 2.9748594140565536e-05,
+              "5": -0.0010714296746381538
+            },
+            "clustered_se": {
+              "0": 0.00011074743228093159,
+              "1": 9.043628876675329e-05,
+              "2": 9.270743605305253e-05,
+              "3": 0.0001067665289939891,
+              "4": 0.00010056600424597148,
+              "5": 9.499951965355732e-05
+            },
+            "ranking": [
+              2,
+              3,
+              1,
+              4,
+              0,
+              5
+            ],
+            "max_minus_min": 0.0017607626229780345,
+            "max_minus_min_clustered_se": 0.00013770312990589402,
+            "r_squared": 0.06405369694412755,
+            "residual_sd": 0.0053410969835558045,
+            "permutation_percentile_value": 0.00044418418028194055,
+            "permutation_p_value": 0.000999000999000999,
+            "spread_exceeds_permutation_percentile": true,
+            "best_mean_action_label_rank": 1,
+            "best_mean_action_label_in_top_two": true,
+            "shows_the_ranking": true,
+            "placebo_max_minus_min": 0.0009688476446493265,
+            "placebo_permutation_percentile_value": 0.0011887480805319408,
+            "placebo_permutation_p_value": 0.15184815184815184,
+            "placebo_passes_the_same_spread_test": false,
+            "placebo_invalidates_this_reading": false,
+            "rank_correlation_with_mean_action_b09": 0.8285714285714286,
+            "rank_correlation_with_sampled_b10": 0.9428571428571428,
+            "criterion": "the notebook's, declared before any score: the cap shows the ranking if the centred coefficient spread exceeds the 95th percentile of its own permutation spread *and* B09's best mean-action label is ranked first or second by the same coefficients. It is read on the undiscounted response; the discounted one is reported beside it. A placebo that passes the same spread test invalidates the cap's reading",
+            "drop_invariance": {
+              "alternate_dropped_label": 0,
+              "max_absolute_difference": 8.912141857830846e-17,
+              "definition": "the same model refitted with a different dropped label; the centred coefficients are invariant to the choice, so this is a check and not a second estimate"
+            }
+          },
+          "discounted_segment_reward": {
+            "centred_coefficients": {
+              "0": -0.006539299019956582,
+              "1": 0.007769898255775606,
+              "2": 0.02655832413658164,
+              "3": 0.011780359615781319,
+              "4": 0.0007482370033119294,
+              "5": -0.04031751999149387
+            },
+            "clustered_se": {
+              "0": 0.004402505248448633,
+              "1": 0.003561776391893477,
+              "2": 0.0036830619120301143,
+              "3": 0.004239660433064926,
+              "4": 0.003973934234319611,
+              "5": 0.003799265685117914
+            },
+            "ranking": [
+              2,
+              3,
+              1,
+              4,
+              0,
+              5
+            ],
+            "max_minus_min": 0.06687584412807551,
+            "max_minus_min_clustered_se": 0.005470338024721844,
+            "r_squared": 0.058885451680420586,
+            "residual_sd": 0.21273294972595572,
+            "permutation_percentile_value": 0.01795317625797097,
+            "permutation_p_value": 0.000999000999000999,
+            "spread_exceeds_permutation_percentile": true,
+            "best_mean_action_label_rank": 1,
+            "best_mean_action_label_in_top_two": true,
+            "shows_the_ranking": true,
+            "placebo_max_minus_min": 0.038332791381295875,
+            "placebo_permutation_percentile_value": 0.04606118748788508,
+            "placebo_permutation_p_value": 0.17182817182817184,
+            "placebo_passes_the_same_spread_test": false,
+            "placebo_invalidates_this_reading": false,
+            "rank_correlation_with_mean_action_b09": 0.8285714285714286,
+            "rank_correlation_with_sampled_b10": 0.9428571428571428,
+            "criterion": "the notebook's, declared before any score: the cap shows the ranking if the centred coefficient spread exceeds the 95th percentile of its own permutation spread *and* B09's best mean-action label is ranked first or second by the same coefficients. It is read on the undiscounted response; the discounted one is reported beside it. A placebo that passes the same spread test invalidates the cap's reading",
+            "drop_invariance": {
+              "alternate_dropped_label": 0,
+              "max_absolute_difference": 4.014150123410332e-15,
+              "definition": "the same model refitted with a different dropped label; the centred coefficients are invariant to the choice, so this is a check and not a second estimate"
+            }
+          }
+        },
+        "100": {
+          "cap": 100,
+          "rollouts": 16,
+          "lane_episodes": 256,
+          "commitments": 1280,
+          "commitments_per_lane_episode": 5,
+          "clusters": 256,
+          "mean_commitment_elapsed": 100.0,
+          "behaviour": {
+            "lane_episodes": 256,
+            "mean_episode_return_U": 28.644315928821605,
+            "clustered_se_episode_return_U": 0.12209744610903668,
+            "mean_episode_J": 0.3437317911458592,
+            "clustered_se_episode_J": 0.0014651693533084403,
+            "mean_reward_per_step": 0.05728863185764321,
+            "definition": "one lane-episode is one cluster - the whole episode of one collection lane - so the standard error over the lane-episodes is already the clustered one. J is the runner's own native score of the same return. the runner converts a scalar episode return U to the native score J by the pure factor `N_UAVS / HORIZON` = 6 / 500 = .012: `scripts/run_fsd_baseline_interruption_b01.py:254` computes `native_scores_J = shared.N_UAVS * returns / horizon` with `horizon = shared.HORIZON` (line 201), and `scripts/run_fsd_uav_individual_renewal_b01.py:140` publishes the same number as `native_score_factor` on every summary. There is no offset and no per-world term, so a mean reward per step multiplied by N_UAVS is an episode J, and the additive model's predicted all-equal mean reward per step converts directly"
+          },
+          "label_law_entropy_estimate": 1.7850830340757966,
+          "best_mean_action_label": 2,
+          "wall_seconds": 390.4667830289691,
+          "undiscounted_mean_reward_per_step": {
+            "centred_coefficients": {
+              "0": -0.00017530548502645325,
+              "1": 2.423194845838268e-05,
+              "2": 0.0006697600858456938,
+              "3": 0.0006399896110180875,
+              "4": 1.8656401903811262e-05,
+              "5": -0.001177332562199521
+            },
+            "clustered_se": {
+              "0": 0.00012454642942269983,
+              "1": 0.00011758494203561982,
+              "2": 0.00011871322284178836,
+              "3": 0.00012848448918571396,
+              "4": 0.00012217083566640755,
+              "5": 0.00011768172864785498
+            },
+            "ranking": [
+              2,
+              3,
+              1,
+              4,
+              0,
+              5
+            ],
+            "max_minus_min": 0.0018470926480452148,
+            "max_minus_min_clustered_se": 0.0001815108852642312,
+            "r_squared": 0.09429181757353455,
+            "residual_sd": 0.004644542915272126,
+            "permutation_percentile_value": 0.0005325360297414263,
+            "permutation_p_value": 0.000999000999000999,
+            "spread_exceeds_permutation_percentile": true,
+            "best_mean_action_label_rank": 1,
+            "best_mean_action_label_in_top_two": true,
+            "shows_the_ranking": true,
+            "placebo_max_minus_min": 0.000430741658658515,
+            "placebo_permutation_percentile_value": 0.0014706683182210468,
+            "placebo_permutation_p_value": 0.9310689310689311,
+            "placebo_passes_the_same_spread_test": false,
+            "placebo_invalidates_this_reading": false,
+            "rank_correlation_with_mean_action_b09": 0.8285714285714286,
+            "rank_correlation_with_sampled_b10": 0.9428571428571428,
+            "criterion": "the notebook's, declared before any score: the cap shows the ranking if the centred coefficient spread exceeds the 95th percentile of its own permutation spread *and* B09's best mean-action label is ranked first or second by the same coefficients. It is read on the undiscounted response; the discounted one is reported beside it. A placebo that passes the same spread test invalidates the cap's reading",
+            "drop_invariance": {
+              "alternate_dropped_label": 0,
+              "max_absolute_difference": 7.936359902593892e-17,
+              "definition": "the same model refitted with a different dropped label; the centred coefficients are invariant to the choice, so this is a check and not a second estimate"
+            }
+          },
+          "discounted_segment_reward": {
+            "centred_coefficients": {
+              "0": -0.00831132032843504,
+              "1": -0.00034999459861462245,
+              "2": 0.040457447964676874,
+              "3": 0.04220405765071411,
+              "4": -0.0016262430034121866,
+              "5": -0.07237394768492911
+            },
+            "clustered_se": {
+              "0": 0.007883833861880803,
+              "1": 0.007467317111277294,
+              "2": 0.00754907020776201,
+              "3": 0.008033758148486033,
+              "4": 0.007871932490192704,
+              "5": 0.0076733909889943495
+            },
+            "ranking": [
+              3,
+              2,
+              1,
+              4,
+              0,
+              5
+            ],
+            "max_minus_min": 0.11457800533564322,
+            "max_minus_min_clustered_se": 0.012346650500171742,
+            "r_squared": 0.08878637165484005,
+            "residual_sd": 0.2972264534730854,
+            "permutation_percentile_value": 0.035118888842844545,
+            "permutation_p_value": 0.000999000999000999,
+            "spread_exceeds_permutation_percentile": true,
+            "best_mean_action_label_rank": 2,
+            "best_mean_action_label_in_top_two": true,
+            "shows_the_ranking": true,
+            "placebo_max_minus_min": 0.026931149527014607,
+            "placebo_permutation_percentile_value": 0.09755531063082329,
+            "placebo_permutation_p_value": 0.951048951048951,
+            "placebo_passes_the_same_spread_test": false,
+            "placebo_invalidates_this_reading": false,
+            "rank_correlation_with_mean_action_b09": 0.6571428571428571,
+            "rank_correlation_with_sampled_b10": 0.8285714285714286,
+            "criterion": "the notebook's, declared before any score: the cap shows the ranking if the centred coefficient spread exceeds the 95th percentile of its own permutation spread *and* B09's best mean-action label is ranked first or second by the same coefficients. It is read on the undiscounted response; the discounted one is reported beside it. A placebo that passes the same spread test invalidates the cap's reading",
+            "drop_invariance": {
+              "alternate_dropped_label": 0,
+              "max_absolute_difference": 3.823330541052883e-15,
+              "definition": "the same model refitted with a different dropped label; the centred coefficients are invariant to the choice, so this is a check and not a second estimate"
+            }
+          }
+        },
+        "500": {
+          "cap": 500,
+          "rollouts": 16,
+          "lane_episodes": 256,
+          "commitments": 256,
+          "commitments_per_lane_episode": 1,
+          "clusters": 256,
+          "mean_commitment_elapsed": 500.0,
+          "behaviour": {
+            "lane_episodes": 256,
+            "mean_episode_return_U": 28.51282190400613,
+            "clustered_se_episode_return_U": 0.13614047892857847,
+            "mean_episode_J": 0.3421538628480736,
+            "clustered_se_episode_J": 0.0016336857471429419,
+            "mean_reward_per_step": 0.05702564380801226,
+            "definition": "one lane-episode is one cluster - the whole episode of one collection lane - so the standard error over the lane-episodes is already the clustered one. J is the runner's own native score of the same return. the runner converts a scalar episode return U to the native score J by the pure factor `N_UAVS / HORIZON` = 6 / 500 = .012: `scripts/run_fsd_baseline_interruption_b01.py:254` computes `native_scores_J = shared.N_UAVS * returns / horizon` with `horizon = shared.HORIZON` (line 201), and `scripts/run_fsd_uav_individual_renewal_b01.py:140` publishes the same number as `native_score_factor` on every summary. There is no offset and no per-world term, so a mean reward per step multiplied by N_UAVS is an episode J, and the additive model's predicted all-equal mean reward per step converts directly"
+          },
+          "label_law_entropy_estimate": 1.7826843611740817,
+          "best_mean_action_label": 2,
+          "wall_seconds": 389.14150855201297,
+          "undiscounted_mean_reward_per_step": {
+            "centred_coefficients": {
+              "0": -0.0004488950315651431,
+              "1": 0.000547389468839685,
+              "2": 0.0009823743900666815,
+              "3": 0.0006816421205612068,
+              "4": -0.0002388189963545437,
+              "5": -0.001523691951547886
+            },
+            "clustered_se": {
+              "0": 0.00023043932170547563,
+              "1": 0.00019121744507796963,
+              "2": 0.00021959691147185265,
+              "3": 0.000265587482633447,
+              "4": 0.0002507590544297793,
+              "5": 0.00021111166042782817
+            },
+            "ranking": [
+              2,
+              3,
+              1,
+              4,
+              0,
+              5
+            ],
+            "max_minus_min": 0.0025060663416145677,
+            "max_minus_min_clustered_se": 0.0003382548260885514,
+            "r_squared": 0.24419630809898696,
+            "residual_sd": 0.003787405076017366,
+            "permutation_percentile_value": 0.0011366480158575077,
+            "permutation_p_value": 0.000999000999000999,
+            "spread_exceeds_permutation_percentile": true,
+            "best_mean_action_label_rank": 1,
+            "best_mean_action_label_in_top_two": true,
+            "shows_the_ranking": true,
+            "placebo_max_minus_min": 0.0017909225723791691,
+            "placebo_permutation_percentile_value": 0.0029881896265901414,
+            "placebo_permutation_p_value": 0.46653346653346656,
+            "placebo_passes_the_same_spread_test": false,
+            "placebo_invalidates_this_reading": false,
+            "rank_correlation_with_mean_action_b09": 0.8285714285714286,
+            "rank_correlation_with_sampled_b10": 0.9428571428571428,
+            "criterion": "the notebook's, declared before any score: the cap shows the ranking if the centred coefficient spread exceeds the 95th percentile of its own permutation spread *and* B09's best mean-action label is ranked first or second by the same coefficients. It is read on the undiscounted response; the discounted one is reported beside it. A placebo that passes the same spread test invalidates the cap's reading",
+            "drop_invariance": {
+              "alternate_dropped_label": 0,
+              "max_absolute_difference": 2.168404344971009e-17,
+              "definition": "the same model refitted with a different dropped label; the centred coefficients are invariant to the choice, so this is a check and not a second estimate"
+            }
+          },
+          "discounted_segment_reward": {
+            "centred_coefficients": {
+              "0": -0.02177954873774622,
+              "1": 0.057950725554441584,
+              "2": 0.08010338775060695,
+              "3": 0.060604859884513695,
+              "4": -0.029252866669417413,
+              "5": -0.14762655778239853
+            },
+            "clustered_se": {
+              "0": 0.02593335371666509,
+              "1": 0.01994212946654659,
+              "2": 0.023858609466738144,
+              "3": 0.03101679245585444,
+              "4": 0.02794961094460896,
+              "5": 0.02191772964697717
+            },
+            "ranking": [
+              2,
+              3,
+              1,
+              0,
+              4,
+              5
+            ],
+            "max_minus_min": 0.22772994553300546,
+            "max_minus_min_clustered_se": 0.035035884314832066,
+            "r_squared": 0.17991517793124545,
+            "residual_sd": 0.4226480636564022,
+            "permutation_percentile_value": 0.11469996054883962,
+            "permutation_p_value": 0.000999000999000999,
+            "spread_exceeds_permutation_percentile": true,
+            "best_mean_action_label_rank": 1,
+            "best_mean_action_label_in_top_two": true,
+            "shows_the_ranking": true,
+            "placebo_max_minus_min": 0.132281351780546,
+            "placebo_permutation_percentile_value": 0.3191473993044065,
+            "placebo_permutation_p_value": 0.7992007992007992,
+            "placebo_passes_the_same_spread_test": false,
+            "placebo_invalidates_this_reading": false,
+            "rank_correlation_with_mean_action_b09": 0.7142857142857143,
+            "rank_correlation_with_sampled_b10": 0.8857142857142857,
+            "criterion": "the notebook's, declared before any score: the cap shows the ranking if the centred coefficient spread exceeds the 95th percentile of its own permutation spread *and* B09's best mean-action label is ranked first or second by the same coefficients. It is read on the undiscounted response; the discounted one is reported beside it. A placebo that passes the same spread test invalidates the cap's reading",
+            "drop_invariance": {
+              "alternate_dropped_label": 0,
+              "max_absolute_difference": 1.4016565685892601e-15,
+              "definition": "the same model refitted with a different dropped label; the centred coefficients are invariant to the choice, so this is a check and not a second estimate"
+            }
+          },
+          "non_additivity": {
+            "homogeneity_coefficient": -4.591510859196582e-05,
+            "homogeneity_clustered_se": 8.036395845358438e-05,
+            "homogeneity_permutation_p_value": 0.5984015984015985,
+            "homogeneity_permutation_percentile_value": 0.0001709041204466431,
+            "homogeneity_exceeds_permutation_percentile": false,
+            "all_equal_prediction_episode_J": {
+              "0": 0.3232732926063304,
+              "1": 0.3591395346209042,
+              "2": 0.3747989917850761,
+              "3": 0.363972630082879,
+              "4": 0.33083602987391203,
+              "5": 0.2845806034869517
+            },
+            "all_equal_prediction_J_max_minus_min": 0.09021838829812444,
+            "b10_sampled_J_max_minus_min": 0.07977762826122659,
+            "prediction_fraction_of_b10_sampled_spread": 1.1308732819520564,
+            "prediction_below_half_of_b10_sampled_spread": false,
+            "definition": "the strongest alternative the notebook names is that the joint map is not additive - a label pays only when all six agents hold it. `sum_c n_c^2` is the homogeneity of the configuration (6 when all six agents hold different labels, 36 when they all hold the same), centred to its own mean so it does not absorb the level; a positive coefficient is the coordination term. Beside it, the additive model's predicted all-equal score for each label, `6 * beta_c + mean_p delta_p` in the drop parametrisation, which is invariant to the dropped label, converted to an episode J by the reporting factor"
+          }
+        }
+      },
+      "caps_showing_the_ranking": [
+        10,
+        50,
+        100,
+        500
+      ],
+      "smallest_cap_showing_the_ranking": 10,
+      "caps_with_a_passing_placebo": [],
+      "placebo_flag": false,
+      "spread_by_cap": {
+        "10": 0.0008983965269608318,
+        "50": 0.0017607626229780345,
+        "100": 0.0018470926480452148,
+        "500": 0.0025060663416145677
+      },
+      "permutation_percentile_by_cap": {
+        "10": 0.0003035580665867566,
+        "50": 0.00044418418028194055,
+        "100": 0.0005325360297414263,
+        "500": 0.0011366480158575077
+      },
+      "permutation_p_value_by_cap": {
+        "10": 0.000999000999000999,
+        "50": 0.000999000999000999,
+        "100": 0.000999000999000999,
+        "500": 0.000999000999000999
+      },
+      "rank_correlation_with_sampled_b10_by_cap": {
+        "10": 0.8285714285714286,
+        "50": 0.9428571428571428,
+        "100": 0.9428571428571428,
+        "500": 0.9428571428571428
+      },
+      "rank_correlation_with_mean_action_b09_by_cap": {
+        "10": 0.6571428571428571,
+        "50": 0.8285714285714286,
+        "100": 0.8285714285714286,
+        "500": 0.8285714285714286
+      },
+      "mean_episode_return_U_by_cap": {
+        "10": 29.25397959207456,
+        "50": 28.65954023639955,
+        "100": 28.644315928821605,
+        "500": 28.51282190400613
+      },
+      "mean_episode_J_by_cap": {
+        "10": 0.3510477551048947,
+        "50": 0.3439144828367946,
+        "100": 0.3437317911458592,
+        "500": 0.3421538628480736
+      },
+      "wall_seconds_by_cap": {
+        "10": 410.78179819800425,
+        "50": 431.084771430993,
+        "100": 390.4667830289691,
+        "500": 389.14150855201297
+      },
+      "mean_action_J_by_label": {
+        "0": 0.34900398680386885,
+        "1": 0.43896236008144474,
+        "2": 0.4542809793576539,
+        "3": 0.4009353833957562,
+        "4": 0.4228362867215988,
+        "5": 0.3256863019712888
+      },
+      "sampled_J_by_label": {
+        "0": 0.2987757435759687,
+        "1": 0.34503874352441216,
+        "2": 0.36041692157470473,
+        "3": 0.3348727219028823,
+        "4": 0.3245014706630319,
+        "5": 0.28063929331347814
+      },
+      "mean_action_ranking": [
+        2,
+        1,
+        4,
+        3,
+        0,
+        5
+      ],
+      "sampled_ranking": [
+        2,
+        1,
+        3,
+        4,
+        0,
+        5
+      ],
+      "best_mean_action_label": 2,
+      "sampled_J_max_minus_min": 0.07977762826122659,
+      "coordinator_most_used_label": 1,
+      "rank_correlation_definition": "Spearman's rank correlation, ties sharing their average rank (B10's own function), between the six centred coefficients of one cap and the six labels' fixed-weight panel J - B09's mean-action map and B10's sampled map of the same checkpoint. Six paired points: a description of the order, not a test",
+      "weights_sha256": "7cb214151d4e954af541391013686fd712a66655e050d27d2f0f2903134b08f7"
+    },
+    {
+      "training_seed": 772903,
+      "evaluation_seed": 782903,
+      "status": "complete",
+      "missing_or_invalid": {},
+      "weights_match": true,
+      "as_trained_identical_to_b09_and_b10": true,
+      "J_as_trained": 0.35469677422138435,
+      "caps": [
+        10,
+        50,
+        100,
+        500
+      ],
+      "rollouts_per_cap": 16,
+      "by_cap": {
+        "10": {
+          "cap": 10,
+          "rollouts": 16,
+          "lane_episodes": 256,
+          "commitments": 12800,
+          "commitments_per_lane_episode": 50,
+          "clusters": 256,
+          "mean_commitment_elapsed": 10.0,
+          "behaviour": {
+            "lane_episodes": 256,
+            "mean_episode_return_U": 28.529760121340317,
+            "clustered_se_episode_return_U": 0.10923102585625599,
+            "mean_episode_J": 0.34235712145608377,
+            "clustered_se_episode_J": 0.0013107723102750719,
+            "mean_reward_per_step": 0.057059520242680635,
+            "definition": "one lane-episode is one cluster - the whole episode of one collection lane - so the standard error over the lane-episodes is already the clustered one. J is the runner's own native score of the same return. the runner converts a scalar episode return U to the native score J by the pure factor `N_UAVS / HORIZON` = 6 / 500 = .012: `scripts/run_fsd_baseline_interruption_b01.py:254` computes `native_scores_J = shared.N_UAVS * returns / horizon` with `horizon = shared.HORIZON` (line 201), and `scripts/run_fsd_uav_individual_renewal_b01.py:140` publishes the same number as `native_score_factor` on every summary. There is no offset and no per-world term, so a mean reward per step multiplied by N_UAVS is an episode J, and the additive model's predicted all-equal mean reward per step converts directly"
+          },
+          "label_law_entropy_estimate": 1.7793082256304722,
+          "best_mean_action_label": 1,
+          "wall_seconds": 432.866561871022,
+          "undiscounted_mean_reward_per_step": {
+            "centred_coefficients": {
+              "0": 0.00014995207616802145,
+              "1": 0.00023504851509447504,
+              "2": -0.00020843088477895462,
+              "3": 9.811886400906629e-05,
+              "4": 1.1448982673092315e-05,
+              "5": -0.0002861375531657002
+            },
+            "clustered_se": {
+              "0": 6.475163871398875e-05,
+              "1": 6.916063499214388e-05,
+              "2": 6.30453061546837e-05,
+              "3": 5.859143757663696e-05,
+              "4": 6.479602176749027e-05,
+              "5": 6.460580889039615e-05
+            },
+            "ranking": [
+              1,
+              0,
+              3,
+              4,
+              2,
+              5
+            ],
+            "max_minus_min": 0.0005211860682601753,
+            "max_minus_min_clustered_se": 9.787643896015784e-05,
+            "r_squared": 0.014640628350323093,
+            "residual_sd": 0.007946144983677274,
+            "permutation_percentile_value": 0.0002826800145497122,
+            "permutation_p_value": 0.000999000999000999,
+            "spread_exceeds_permutation_percentile": true,
+            "best_mean_action_label_rank": 1,
+            "best_mean_action_label_in_top_two": true,
+            "shows_the_ranking": true,
+            "placebo_max_minus_min": 0.0007269266400556362,
+            "placebo_permutation_percentile_value": 0.0007797104105099122,
+            "placebo_permutation_p_value": 0.07692307692307693,
+            "placebo_passes_the_same_spread_test": false,
+            "placebo_invalidates_this_reading": false,
+            "rank_correlation_with_mean_action_b09": 0.08571428571428572,
+            "rank_correlation_with_sampled_b10": 0.08571428571428572,
+            "criterion": "the notebook's, declared before any score: the cap shows the ranking if the centred coefficient spread exceeds the 95th percentile of its own permutation spread *and* B09's best mean-action label is ranked first or second by the same coefficients. It is read on the undiscounted response; the discounted one is reported beside it. A placebo that passes the same spread test invalidates the cap's reading",
+            "drop_invariance": {
+              "alternate_dropped_label": 0,
+              "max_absolute_difference": 3.3068166260807885e-16,
+              "definition": "the same model refitted with a different dropped label; the centred coefficients are invariant to the choice, so this is a check and not a second estimate"
+            }
+          },
+          "discounted_segment_reward": {
+            "centred_coefficients": {
+              "0": 0.0014006115472320927,
+              "1": 0.0022453656869251158,
+              "2": -0.0020018805889546304,
+              "3": 0.0009399340871473645,
+              "4": 7.687563203733166e-05,
+              "5": -0.0026609063643872727
+            },
+            "clustered_se": {
+              "0": 0.0006192033737904386,
+              "1": 0.0006620430656642645,
+              "2": 0.0006030788376756578,
+              "3": 0.0005600932404473179,
+              "4": 0.0006194899595241142,
+              "5": 0.0006172161259426253
+            },
+            "ranking": [
+              1,
+              0,
+              3,
+              4,
+              2,
+              5
+            ],
+            "max_minus_min": 0.004906272051312388,
+            "max_minus_min_clustered_se": 0.0009370100586177946,
+            "r_squared": 0.014606574470493405,
+            "residual_sd": 0.07600014148229282,
+            "permutation_percentile_value": 0.002730627410691132,
+            "permutation_p_value": 0.000999000999000999,
+            "spread_exceeds_permutation_percentile": true,
+            "best_mean_action_label_rank": 1,
+            "best_mean_action_label_in_top_two": true,
+            "shows_the_ranking": true,
+            "placebo_max_minus_min": 0.007015581710766439,
+            "placebo_permutation_percentile_value": 0.007367799375907631,
+            "placebo_permutation_p_value": 0.07292707292707293,
+            "placebo_passes_the_same_spread_test": false,
+            "placebo_invalidates_this_reading": false,
+            "rank_correlation_with_mean_action_b09": 0.08571428571428572,
+            "rank_correlation_with_sampled_b10": 0.08571428571428572,
+            "criterion": "the notebook's, declared before any score: the cap shows the ranking if the centred coefficient spread exceeds the 95th percentile of its own permutation spread *and* B09's best mean-action label is ranked first or second by the same coefficients. It is read on the undiscounted response; the discounted one is reported beside it. A placebo that passes the same spread test invalidates the cap's reading",
+            "drop_invariance": {
+              "alternate_dropped_label": 0,
+              "max_absolute_difference": 1.4611792678587143e-15,
+              "definition": "the same model refitted with a different dropped label; the centred coefficients are invariant to the choice, so this is a check and not a second estimate"
+            }
+          }
+        },
+        "50": {
+          "cap": 50,
+          "rollouts": 16,
+          "lane_episodes": 256,
+          "commitments": 2560,
+          "commitments_per_lane_episode": 10,
+          "clusters": 256,
+          "mean_commitment_elapsed": 50.0,
+          "behaviour": {
+            "lane_episodes": 256,
+            "mean_episode_return_U": 28.729080518148237,
+            "clustered_se_episode_return_U": 0.11753793294052282,
+            "mean_episode_J": 0.34474896621777884,
+            "clustered_se_episode_J": 0.0014104551952862738,
+            "mean_reward_per_step": 0.05745816103629647,
+            "definition": "one lane-episode is one cluster - the whole episode of one collection lane - so the standard error over the lane-episodes is already the clustered one. J is the runner's own native score of the same return. the runner converts a scalar episode return U to the native score J by the pure factor `N_UAVS / HORIZON` = 6 / 500 = .012: `scripts/run_fsd_baseline_interruption_b01.py:254` computes `native_scores_J = shared.N_UAVS * returns / horizon` with `horizon = shared.HORIZON` (line 201), and `scripts/run_fsd_uav_individual_renewal_b01.py:140` publishes the same number as `native_score_factor` on every summary. There is no offset and no per-world term, so a mean reward per step multiplied by N_UAVS is an episode J, and the additive model's predicted all-equal mean reward per step converts directly"
+          },
+          "label_law_entropy_estimate": 1.7831336399928357,
+          "best_mean_action_label": 1,
+          "wall_seconds": 404.76027100201463,
+          "undiscounted_mean_reward_per_step": {
+            "centred_coefficients": {
+              "0": 0.00032591728370169235,
+              "1": 0.0006330234563377259,
+              "2": -0.00016928355352664243,
+              "3": -0.0003467024276030964,
+              "4": 4.709876027306537e-05,
+              "5": -0.0004900535191827447
+            },
+            "clustered_se": {
+              "0": 9.47586775596761e-05,
+              "1": 0.00010967109500820416,
+              "2": 0.00010219988711513979,
+              "3": 9.711830509223235e-05,
+              "4": 9.625914587060252e-05,
+              "5": 0.00010812372816482463
+            },
+            "ranking": [
+              1,
+              0,
+              4,
+              2,
+              3,
+              5
+            ],
+            "max_minus_min": 0.0011230769755204706,
+            "max_minus_min_clustered_se": 0.00016956537748749088,
+            "r_squared": 0.05389293536274542,
+            "residual_sd": 0.005438200475670823,
+            "permutation_percentile_value": 0.00044472331582501084,
+            "permutation_p_value": 0.000999000999000999,
+            "spread_exceeds_permutation_percentile": true,
+            "best_mean_action_label_rank": 1,
+            "best_mean_action_label_in_top_two": true,
+            "shows_the_ranking": true,
+            "placebo_max_minus_min": 0.00040193909317329257,
+            "placebo_permutation_percentile_value": 0.0011949727338465218,
+            "placebo_permutation_p_value": 0.922077922077922,
+            "placebo_passes_the_same_spread_test": false,
+            "placebo_invalidates_this_reading": false,
+            "rank_correlation_with_mean_action_b09": 0.4857142857142857,
+            "rank_correlation_with_sampled_b10": 0.37142857142857144,
+            "criterion": "the notebook's, declared before any score: the cap shows the ranking if the centred coefficient spread exceeds the 95th percentile of its own permutation spread *and* B09's best mean-action label is ranked first or second by the same coefficients. It is read on the undiscounted response; the discounted one is reported beside it. A placebo that passes the same spread test invalidates the cap's reading",
+            "drop_invariance": {
+              "alternate_dropped_label": 0,
+              "max_absolute_difference": 7.730361489821647e-17,
+              "definition": "the same model refitted with a different dropped label; the centred coefficients are invariant to the choice, so this is a check and not a second estimate"
+            }
+          },
+          "discounted_segment_reward": {
+            "centred_coefficients": {
+              "0": 0.011975028169627706,
+              "1": 0.022953783282849912,
+              "2": -0.007330267146243685,
+              "3": -0.012209656980643413,
+              "4": 0.002320051132701951,
+              "5": -0.017708938458292467
+            },
+            "clustered_se": {
+              "0": 0.0037523139237429916,
+              "1": 0.004309876193873375,
+              "2": 0.004060446266374926,
+              "3": 0.003818945513844565,
+              "4": 0.003793760906924647,
+              "5": 0.004253923878630828
+            },
+            "ranking": [
+              1,
+              0,
+              4,
+              2,
+              3,
+              5
+            ],
+            "max_minus_min": 0.04066272174114238,
+            "max_minus_min_clustered_se": 0.006677478308162509,
+            "r_squared": 0.04889390982486086,
+            "residual_sd": 0.21567579106073312,
+            "permutation_percentile_value": 0.01748305520334831,
+            "permutation_p_value": 0.000999000999000999,
+            "spread_exceeds_permutation_percentile": true,
+            "best_mean_action_label_rank": 1,
+            "best_mean_action_label_in_top_two": true,
+            "shows_the_ranking": true,
+            "placebo_max_minus_min": 0.014238133588467813,
+            "placebo_permutation_percentile_value": 0.047803186945049564,
+            "placebo_permutation_p_value": 0.949050949050949,
+            "placebo_passes_the_same_spread_test": false,
+            "placebo_invalidates_this_reading": false,
+            "rank_correlation_with_mean_action_b09": 0.4857142857142857,
+            "rank_correlation_with_sampled_b10": 0.37142857142857144,
+            "criterion": "the notebook's, declared before any score: the cap shows the ranking if the centred coefficient spread exceeds the 95th percentile of its own permutation spread *and* B09's best mean-action label is ranked first or second by the same coefficients. It is read on the undiscounted response; the discounted one is reported beside it. A placebo that passes the same spread test invalidates the cap's reading",
+            "drop_invariance": {
+              "alternate_dropped_label": 0,
+              "max_absolute_difference": 4.826000710167477e-15,
+              "definition": "the same model refitted with a different dropped label; the centred coefficients are invariant to the choice, so this is a check and not a second estimate"
+            }
+          }
+        },
+        "100": {
+          "cap": 100,
+          "rollouts": 16,
+          "lane_episodes": 256,
+          "commitments": 1280,
+          "commitments_per_lane_episode": 5,
+          "clusters": 256,
+          "mean_commitment_elapsed": 100.0,
+          "behaviour": {
+            "lane_episodes": 256,
+            "mean_episode_return_U": 28.780664838433246,
+            "clustered_se_episode_return_U": 0.11168932199260673,
+            "mean_episode_J": 0.3453679780611989,
+            "clustered_se_episode_J": 0.001340271863911281,
+            "mean_reward_per_step": 0.057561329676866495,
+            "definition": "one lane-episode is one cluster - the whole episode of one collection lane - so the standard error over the lane-episodes is already the clustered one. J is the runner's own native score of the same return. the runner converts a scalar episode return U to the native score J by the pure factor `N_UAVS / HORIZON` = 6 / 500 = .012: `scripts/run_fsd_baseline_interruption_b01.py:254` computes `native_scores_J = shared.N_UAVS * returns / horizon` with `horizon = shared.HORIZON` (line 201), and `scripts/run_fsd_uav_individual_renewal_b01.py:140` publishes the same number as `native_score_factor` on every summary. There is no offset and no per-world term, so a mean reward per step multiplied by N_UAVS is an episode J, and the additive model's predicted all-equal mean reward per step converts directly"
+          },
+          "label_law_entropy_estimate": 1.783308185900872,
+          "best_mean_action_label": 1,
+          "wall_seconds": 393.96614229201805,
+          "undiscounted_mean_reward_per_step": {
+            "centred_coefficients": {
+              "0": 3.4469154979569025e-05,
+              "1": 0.001009121449104958,
+              "2": -5.65742382994534e-05,
+              "3": -0.0004902690928734173,
+              "4": 7.716809566660194e-05,
+              "5": -0.0005739153685782579
+            },
+            "clustered_se": {
+              "0": 0.00011432709329401294,
+              "1": 0.00012160620449341882,
+              "2": 0.00012413883199806342,
+              "3": 0.00013583572161381192,
+              "4": 0.00010826495498651294,
+              "5": 0.00012655866219384577
+            },
+            "ranking": [
+              1,
+              4,
+              0,
+              2,
+              3,
+              5
+            ],
+            "max_minus_min": 0.001583036817683216,
+            "max_minus_min_clustered_se": 0.00019315976045089435,
+            "r_squared": 0.09444096537688351,
+            "residual_sd": 0.004539981746319444,
+            "permutation_percentile_value": 0.000548826425110753,
+            "permutation_p_value": 0.000999000999000999,
+            "spread_exceeds_permutation_percentile": true,
+            "best_mean_action_label_rank": 1,
+            "best_mean_action_label_in_top_two": true,
+            "shows_the_ranking": true,
+            "placebo_max_minus_min": 0.00040788225863131725,
+            "placebo_permutation_percentile_value": 0.0014702161328133312,
+            "placebo_permutation_p_value": 0.954045954045954,
+            "placebo_passes_the_same_spread_test": false,
+            "placebo_invalidates_this_reading": false,
+            "rank_correlation_with_mean_action_b09": 0.6,
+            "rank_correlation_with_sampled_b10": 0.6,
+            "criterion": "the notebook's, declared before any score: the cap shows the ranking if the centred coefficient spread exceeds the 95th percentile of its own permutation spread *and* B09's best mean-action label is ranked first or second by the same coefficients. It is read on the undiscounted response; the discounted one is reported beside it. A placebo that passes the same spread test invalidates the cap's reading",
+            "drop_invariance": {
+              "alternate_dropped_label": 0,
+              "max_absolute_difference": 1.3373633797608697e-16,
+              "definition": "the same model refitted with a different dropped label; the centred coefficients are invariant to the choice, so this is a check and not a second estimate"
+            }
+          },
+          "discounted_segment_reward": {
+            "centred_coefficients": {
+              "0": 0.0034216697237192915,
+              "1": 0.05658248549714071,
+              "2": -0.007875880357513212,
+              "3": -0.023163942336469703,
+              "4": 0.004338782488558547,
+              "5": -0.03330311501543562
+            },
+            "clustered_se": {
+              "0": 0.007180220233296787,
+              "1": 0.00764280639734869,
+              "2": 0.008064337507793956,
+              "3": 0.00849091201981538,
+              "4": 0.0070214855817154415,
+              "5": 0.008029625769854137
+            },
+            "ranking": [
+              1,
+              4,
+              0,
+              2,
+              3,
+              5
+            ],
+            "max_minus_min": 0.08988560051257632,
+            "max_minus_min_clustered_se": 0.012262876349550603,
+            "r_squared": 0.07448771159888878,
+            "residual_sd": 0.28925851533093644,
+            "permutation_percentile_value": 0.03430329025986605,
+            "permutation_p_value": 0.000999000999000999,
+            "spread_exceeds_permutation_percentile": true,
+            "best_mean_action_label_rank": 1,
+            "best_mean_action_label_in_top_two": true,
+            "shows_the_ranking": true,
+            "placebo_max_minus_min": 0.034606034785776826,
+            "placebo_permutation_percentile_value": 0.0944011886562008,
+            "placebo_permutation_p_value": 0.8891108891108891,
+            "placebo_passes_the_same_spread_test": false,
+            "placebo_invalidates_this_reading": false,
+            "rank_correlation_with_mean_action_b09": 0.6,
+            "rank_correlation_with_sampled_b10": 0.6,
+            "criterion": "the notebook's, declared before any score: the cap shows the ranking if the centred coefficient spread exceeds the 95th percentile of its own permutation spread *and* B09's best mean-action label is ranked first or second by the same coefficients. It is read on the undiscounted response; the discounted one is reported beside it. A placebo that passes the same spread test invalidates the cap's reading",
+            "drop_invariance": {
+              "alternate_dropped_label": 0,
+              "max_absolute_difference": 8.566064524373473e-15,
+              "definition": "the same model refitted with a different dropped label; the centred coefficients are invariant to the choice, so this is a check and not a second estimate"
+            }
+          }
+        },
+        "500": {
+          "cap": 500,
+          "rollouts": 16,
+          "lane_episodes": 256,
+          "commitments": 256,
+          "commitments_per_lane_episode": 1,
+          "clusters": 256,
+          "mean_commitment_elapsed": 500.0,
+          "behaviour": {
+            "lane_episodes": 256,
+            "mean_episode_return_U": 29.052423838637587,
+            "clustered_se_episode_return_U": 0.13259461033387596,
+            "mean_episode_J": 0.34862908606365106,
+            "clustered_se_episode_J": 0.0015911353240065115,
+            "mean_reward_per_step": 0.058104847677275175,
+            "definition": "one lane-episode is one cluster - the whole episode of one collection lane - so the standard error over the lane-episodes is already the clustered one. J is the runner's own native score of the same return. the runner converts a scalar episode return U to the native score J by the pure factor `N_UAVS / HORIZON` = 6 / 500 = .012: `scripts/run_fsd_baseline_interruption_b01.py:254` computes `native_scores_J = shared.N_UAVS * returns / horizon` with `horizon = shared.HORIZON` (line 201), and `scripts/run_fsd_uav_individual_renewal_b01.py:140` publishes the same number as `native_score_factor` on every summary. There is no offset and no per-world term, so a mean reward per step multiplied by N_UAVS is an episode J, and the additive model's predicted all-equal mean reward per step converts directly"
+          },
+          "label_law_entropy_estimate": 1.787405769418304,
+          "best_mean_action_label": 1,
+          "wall_seconds": 393.03049886599183,
+          "undiscounted_mean_reward_per_step": {
+            "centred_coefficients": {
+              "0": -2.2400530083041916e-05,
+              "1": 0.0014116465262390726,
+              "2": 0.00041083139926761274,
+              "3": -0.001189913870118592,
+              "4": -8.536845729978514e-05,
+              "5": -0.0005247950680052658
+            },
+            "clustered_se": {
+              "0": 0.0002220913589625378,
+              "1": 0.00023924369813777333,
+              "2": 0.00022209432956718923,
+              "3": 0.0002497512670341415,
+              "4": 0.00019649223523554796,
+              "5": 0.00023603785334416492
+            },
+            "ranking": [
+              1,
+              2,
+              0,
+              4,
+              5,
+              3
+            ],
+            "max_minus_min": 0.0026015603963576647,
+            "max_minus_min_clustered_se": 0.0003708139961616917,
+            "r_squared": 0.21198782008546246,
+            "residual_sd": 0.0037665376657939,
+            "permutation_percentile_value": 0.001129777223002988,
+            "permutation_p_value": 0.000999000999000999,
+            "spread_exceeds_permutation_percentile": true,
+            "best_mean_action_label_rank": 1,
+            "best_mean_action_label_in_top_two": true,
+            "shows_the_ranking": true,
+            "placebo_max_minus_min": 0.002088074935017987,
+            "placebo_permutation_percentile_value": 0.0029249352667708468,
+            "placebo_permutation_p_value": 0.3106893106893107,
+            "placebo_passes_the_same_spread_test": false,
+            "placebo_invalidates_this_reading": false,
+            "rank_correlation_with_mean_action_b09": 0.8285714285714286,
+            "rank_correlation_with_sampled_b10": 0.5428571428571428,
+            "criterion": "the notebook's, declared before any score: the cap shows the ranking if the centred coefficient spread exceeds the 95th percentile of its own permutation spread *and* B09's best mean-action label is ranked first or second by the same coefficients. It is read on the undiscounted response; the discounted one is reported beside it. A placebo that passes the same spread test invalidates the cap's reading",
+            "drop_invariance": {
+              "alternate_dropped_label": 0,
+              "max_absolute_difference": 3.0791341698588326e-17,
+              "definition": "the same model refitted with a different dropped label; the centred coefficients are invariant to the choice, so this is a check and not a second estimate"
+            }
+          },
+          "discounted_segment_reward": {
+            "centred_coefficients": {
+              "0": -0.0295475963387932,
+              "1": 0.12006087770125438,
+              "2": 0.03195068348827179,
+              "3": -0.08575578006723895,
+              "4": -0.02812393761922905,
+              "5": -0.008584247164264987
+            },
+            "clustered_se": {
+              "0": 0.01874605218794631,
+              "1": 0.025567136917278348,
+              "2": 0.02323626859534144,
+              "3": 0.023367658759425623,
+              "4": 0.020398626787644314,
+              "5": 0.024179656608860966
+            },
+            "ranking": [
+              1,
+              2,
+              5,
+              4,
+              0,
+              3
+            ],
+            "max_minus_min": 0.20581665776849334,
+            "max_minus_min_clustered_se": 0.036166450040974005,
+            "r_squared": 0.15222494808842424,
+            "residual_sd": 0.3780263779625942,
+            "permutation_percentile_value": 0.10631825722150919,
+            "permutation_p_value": 0.000999000999000999,
+            "spread_exceeds_permutation_percentile": true,
+            "best_mean_action_label_rank": 1,
+            "best_mean_action_label_in_top_two": true,
+            "shows_the_ranking": true,
+            "placebo_max_minus_min": 0.14939594030380052,
+            "placebo_permutation_percentile_value": 0.28443618011474453,
+            "placebo_permutation_p_value": 0.6223776223776224,
+            "placebo_passes_the_same_spread_test": false,
+            "placebo_invalidates_this_reading": false,
+            "rank_correlation_with_mean_action_b09": 0.9428571428571428,
+            "rank_correlation_with_sampled_b10": 0.7714285714285715,
+            "criterion": "the notebook's, declared before any score: the cap shows the ranking if the centred coefficient spread exceeds the 95th percentile of its own permutation spread *and* B09's best mean-action label is ranked first or second by the same coefficients. It is read on the undiscounted response; the discounted one is reported beside it. A placebo that passes the same spread test invalidates the cap's reading",
+            "drop_invariance": {
+              "alternate_dropped_label": 0,
+              "max_absolute_difference": 2.2343238370581275e-15,
+              "definition": "the same model refitted with a different dropped label; the centred coefficients are invariant to the choice, so this is a check and not a second estimate"
+            }
+          },
+          "non_additivity": {
+            "homogeneity_coefficient": -0.00020766071696893314,
+            "homogeneity_clustered_se": 9.086957671176707e-05,
+            "homogeneity_permutation_p_value": 0.02197802197802198,
+            "homogeneity_permutation_percentile_value": 0.0001800573416020521,
+            "homogeneity_exceeds_permutation_percentile": true,
+            "all_equal_prediction_episode_J": {
+              "0": 0.3478368009591229,
+              "1": 0.39946249498671904,
+              "2": 0.3634331504157465,
+              "3": 0.3058063207178431,
+              "4": 0.34556995557932013,
+              "5": 0.32975059759392283
+            },
+            "all_equal_prediction_J_max_minus_min": 0.09365617426887593,
+            "b10_sampled_J_max_minus_min": 0.13252770621642948,
+            "prediction_fraction_of_b10_sampled_spread": 0.7066912794516123,
+            "prediction_below_half_of_b10_sampled_spread": false,
+            "definition": "the strongest alternative the notebook names is that the joint map is not additive - a label pays only when all six agents hold it. `sum_c n_c^2` is the homogeneity of the configuration (6 when all six agents hold different labels, 36 when they all hold the same), centred to its own mean so it does not absorb the level; a positive coefficient is the coordination term. Beside it, the additive model's predicted all-equal score for each label, `6 * beta_c + mean_p delta_p` in the drop parametrisation, which is invariant to the dropped label, converted to an episode J by the reporting factor"
+          }
+        }
+      },
+      "caps_showing_the_ranking": [
+        10,
+        50,
+        100,
+        500
+      ],
+      "smallest_cap_showing_the_ranking": 10,
+      "caps_with_a_passing_placebo": [],
+      "placebo_flag": false,
+      "spread_by_cap": {
+        "10": 0.0005211860682601753,
+        "50": 0.0011230769755204706,
+        "100": 0.001583036817683216,
+        "500": 0.0026015603963576647
+      },
+      "permutation_percentile_by_cap": {
+        "10": 0.0002826800145497122,
+        "50": 0.00044472331582501084,
+        "100": 0.000548826425110753,
+        "500": 0.001129777223002988
+      },
+      "permutation_p_value_by_cap": {
+        "10": 0.000999000999000999,
+        "50": 0.000999000999000999,
+        "100": 0.000999000999000999,
+        "500": 0.000999000999000999
+      },
+      "rank_correlation_with_sampled_b10_by_cap": {
+        "10": 0.08571428571428572,
+        "50": 0.37142857142857144,
+        "100": 0.6,
+        "500": 0.5428571428571428
+      },
+      "rank_correlation_with_mean_action_b09_by_cap": {
+        "10": 0.08571428571428572,
+        "50": 0.4857142857142857,
+        "100": 0.6,
+        "500": 0.8285714285714286
+      },
+      "mean_episode_return_U_by_cap": {
+        "10": 28.529760121340317,
+        "50": 28.729080518148237,
+        "100": 28.780664838433246,
+        "500": 29.052423838637587
+      },
+      "mean_episode_J_by_cap": {
+        "10": 0.34235712145608377,
+        "50": 0.34474896621777884,
+        "100": 0.3453679780611989,
+        "500": 0.34862908606365106
+      },
+      "wall_seconds_by_cap": {
+        "10": 432.866561871022,
+        "50": 404.76027100201463,
+        "100": 393.96614229201805,
+        "500": 393.03049886599183
+      },
+      "mean_action_J_by_label": {
+        "0": 0.34303296930634497,
+        "1": 0.5212269708739312,
+        "2": 0.4005968459859748,
+        "3": 0.30523984174957075,
+        "4": 0.39923519399947327,
+        "5": 0.3602225797542209
+      },
+      "sampled_J_by_label": {
+        "0": 0.2359608374569557,
+        "1": 0.3684885436733852,
+        "2": 0.3146647535575825,
+        "3": 0.23980559673129992,
+        "4": 0.3343804367303461,
+        "5": 0.30229057182755115
+      },
+      "mean_action_ranking": [
+        1,
+        2,
+        4,
+        5,
+        0,
+        3
+      ],
+      "sampled_ranking": [
+        1,
+        4,
+        2,
+        5,
+        3,
+        0
+      ],
+      "best_mean_action_label": 1,
+      "sampled_J_max_minus_min": 0.13252770621642948,
+      "coordinator_most_used_label": 0,
+      "rank_correlation_definition": "Spearman's rank correlation, ties sharing their average rank (B10's own function), between the six centred coefficients of one cap and the six labels' fixed-weight panel J - B09's mean-action map and B10's sampled map of the same checkpoint. Six paired points: a description of the order, not a test",
+      "weights_sha256": "87a703fc18120738c25f7812a0248f5aab0e66a4959de8711aef76a6f1c85eca"
+    },
+    {
+      "training_seed": 773003,
+      "evaluation_seed": 783003,
+      "status": "complete",
+      "missing_or_invalid": {},
+      "weights_match": true,
+      "as_trained_identical_to_b09_and_b10": true,
+      "J_as_trained": 0.49935211030661386,
+      "caps": [
+        10,
+        50,
+        100,
+        500
+      ],
+      "rollouts_per_cap": 16,
+      "by_cap": {
+        "10": {
+          "cap": 10,
+          "rollouts": 16,
+          "lane_episodes": 256,
+          "commitments": 12800,
+          "commitments_per_lane_episode": 50,
+          "clusters": 256,
+          "mean_commitment_elapsed": 10.0,
+          "behaviour": {
+            "lane_episodes": 256,
+            "mean_episode_return_U": 29.471337786322906,
+            "clustered_se_episode_return_U": 0.11098456197965616,
+            "mean_episode_J": 0.3536560534358749,
+            "clustered_se_episode_J": 0.001331814743755874,
+            "mean_reward_per_step": 0.05894267557264581,
+            "definition": "one lane-episode is one cluster - the whole episode of one collection lane - so the standard error over the lane-episodes is already the clustered one. J is the runner's own native score of the same return. the runner converts a scalar episode return U to the native score J by the pure factor `N_UAVS / HORIZON` = 6 / 500 = .012: `scripts/run_fsd_baseline_interruption_b01.py:254` computes `native_scores_J = shared.N_UAVS * returns / horizon` with `horizon = shared.HORIZON` (line 201), and `scripts/run_fsd_uav_individual_renewal_b01.py:140` publishes the same number as `native_score_factor` on every summary. There is no offset and no per-world term, so a mean reward per step multiplied by N_UAVS is an episode J, and the additive model's predicted all-equal mean reward per step converts directly"
+          },
+          "label_law_entropy_estimate": 1.7840889417969932,
+          "best_mean_action_label": 0,
+          "wall_seconds": 451.7832872060244,
+          "undiscounted_mean_reward_per_step": {
+            "centred_coefficients": {
+              "0": 0.0003610327963612816,
+              "1": 0.00010895420600609383,
+              "2": -0.0005626499689759205,
+              "3": 0.00019991569136638103,
+              "4": 0.00034190794136806755,
+              "5": -0.0004491606661259032
+            },
+            "clustered_se": {
+              "0": 6.785537655456882e-05,
+              "1": 6.351811186758832e-05,
+              "2": 6.682785979467955e-05,
+              "3": 6.50777626092338e-05,
+              "4": 5.9223740909585574e-05,
+              "5": 6.298859517097399e-05
+            },
+            "ranking": [
+              0,
+              4,
+              3,
+              1,
+              5,
+              2
+            ],
+            "max_minus_min": 0.0009236827653372021,
+            "max_minus_min_clustered_se": 0.0001041737074206302,
+            "r_squared": 0.015644674047729512,
+            "residual_sd": 0.008105322752753759,
+            "permutation_percentile_value": 0.00029241364169819566,
+            "permutation_p_value": 0.000999000999000999,
+            "spread_exceeds_permutation_percentile": true,
+            "best_mean_action_label_rank": 1,
+            "best_mean_action_label_in_top_two": true,
+            "shows_the_ranking": true,
+            "placebo_max_minus_min": 0.000539473893850137,
+            "placebo_permutation_percentile_value": 0.0008442834948921466,
+            "placebo_permutation_p_value": 0.38161838161838163,
+            "placebo_passes_the_same_spread_test": false,
+            "placebo_invalidates_this_reading": false,
+            "rank_correlation_with_mean_action_b09": 0.6,
+            "rank_correlation_with_sampled_b10": -0.14285714285714285,
+            "criterion": "the notebook's, declared before any score: the cap shows the ranking if the centred coefficient spread exceeds the 95th percentile of its own permutation spread *and* B09's best mean-action label is ranked first or second by the same coefficients. It is read on the undiscounted response; the discounted one is reported beside it. A placebo that passes the same spread test invalidates the cap's reading",
+            "drop_invariance": {
+              "alternate_dropped_label": 0,
+              "max_absolute_difference": 2.983724378680108e-16,
+              "definition": "the same model refitted with a different dropped label; the centred coefficients are invariant to the choice, so this is a check and not a second estimate"
+            }
+          },
+          "discounted_segment_reward": {
+            "centred_coefficients": {
+              "0": 0.0034300096370647373,
+              "1": 0.0010355637124233171,
+              "2": -0.005366264923582318,
+              "3": 0.001926838330012461,
+              "4": 0.0032827016794301353,
+              "5": -0.004308848435348332
+            },
+            "clustered_se": {
+              "0": 0.0006496218668670521,
+              "1": 0.0006090907485547628,
+              "2": 0.0006387495004539594,
+              "3": 0.0006227721040786722,
+              "4": 0.0005671848352243092,
+              "5": 0.0006019409067981533
+            },
+            "ranking": [
+              0,
+              4,
+              3,
+              1,
+              5,
+              2
+            ],
+            "max_minus_min": 0.008796274560647056,
+            "max_minus_min_clustered_se": 0.0009974212963005478,
+            "r_squared": 0.015661018602349586,
+            "residual_sd": 0.0775188091668848,
+            "permutation_percentile_value": 0.0026840086764105928,
+            "permutation_p_value": 0.000999000999000999,
+            "spread_exceeds_permutation_percentile": true,
+            "best_mean_action_label_rank": 1,
+            "best_mean_action_label_in_top_two": true,
+            "shows_the_ranking": true,
+            "placebo_max_minus_min": 0.005162986094226318,
+            "placebo_permutation_percentile_value": 0.007897466434253013,
+            "placebo_permutation_p_value": 0.37962037962037964,
+            "placebo_passes_the_same_spread_test": false,
+            "placebo_invalidates_this_reading": false,
+            "rank_correlation_with_mean_action_b09": 0.6,
+            "rank_correlation_with_sampled_b10": -0.14285714285714285,
+            "criterion": "the notebook's, declared before any score: the cap shows the ranking if the centred coefficient spread exceeds the 95th percentile of its own permutation spread *and* B09's best mean-action label is ranked first or second by the same coefficients. It is read on the undiscounted response; the discounted one is reported beside it. A placebo that passes the same spread test invalidates the cap's reading",
+            "drop_invariance": {
+              "alternate_dropped_label": 0,
+              "max_absolute_difference": 1.813653394133752e-15,
+              "definition": "the same model refitted with a different dropped label; the centred coefficients are invariant to the choice, so this is a check and not a second estimate"
+            }
+          }
+        },
+        "50": {
+          "cap": 50,
+          "rollouts": 16,
+          "lane_episodes": 256,
+          "commitments": 2560,
+          "commitments_per_lane_episode": 10,
+          "clusters": 256,
+          "mean_commitment_elapsed": 50.0,
+          "behaviour": {
+            "lane_episodes": 256,
+            "mean_episode_return_U": 30.13368656027007,
+            "clustered_se_episode_return_U": 0.10950265212210149,
+            "mean_episode_J": 0.3616042387232408,
+            "clustered_se_episode_J": 0.0013140318254652179,
+            "mean_reward_per_step": 0.06026737312054014,
+            "definition": "one lane-episode is one cluster - the whole episode of one collection lane - so the standard error over the lane-episodes is already the clustered one. J is the runner's own native score of the same return. the runner converts a scalar episode return U to the native score J by the pure factor `N_UAVS / HORIZON` = 6 / 500 = .012: `scripts/run_fsd_baseline_interruption_b01.py:254` computes `native_scores_J = shared.N_UAVS * returns / horizon` with `horizon = shared.HORIZON` (line 201), and `scripts/run_fsd_uav_individual_renewal_b01.py:140` publishes the same number as `native_score_factor` on every summary. There is no offset and no per-world term, so a mean reward per step multiplied by N_UAVS is an episode J, and the additive model's predicted all-equal mean reward per step converts directly"
+          },
+          "label_law_entropy_estimate": 1.7854859771905467,
+          "best_mean_action_label": 0,
+          "wall_seconds": 406.4705115510151,
+          "undiscounted_mean_reward_per_step": {
+            "centred_coefficients": {
+              "0": 0.0003762634667063627,
+              "1": 1.1044116279491283e-05,
+              "2": -0.0004584788928267569,
+              "3": -8.632529303521057e-05,
+              "4": 0.00032716448978922097,
+              "5": -0.00016966788691310722
+            },
+            "clustered_se": {
+              "0": 0.0001057052505002713,
+              "1": 8.990265835025031e-05,
+              "2": 9.558824142500529e-05,
+              "3": 0.0001035907674682193,
+              "4": 9.662577376495054e-05,
+              "5": 0.00010000737467925865
+            },
+            "ranking": [
+              0,
+              4,
+              1,
+              3,
+              5,
+              2
+            ],
+            "max_minus_min": 0.0008347423595331196,
+            "max_minus_min_clustered_se": 0.00015351866175605938,
+            "r_squared": 0.019250208119881873,
+            "residual_sd": 0.005247046852750863,
+            "permutation_percentile_value": 0.00041842580481395516,
+            "permutation_p_value": 0.000999000999000999,
+            "spread_exceeds_permutation_percentile": true,
+            "best_mean_action_label_rank": 1,
+            "best_mean_action_label_in_top_two": true,
+            "shows_the_ranking": true,
+            "placebo_max_minus_min": 0.0007680276261521808,
+            "placebo_permutation_percentile_value": 0.001193194976928225,
+            "placebo_permutation_p_value": 0.4025974025974026,
+            "placebo_passes_the_same_spread_test": false,
+            "placebo_invalidates_this_reading": false,
+            "rank_correlation_with_mean_action_b09": 0.6571428571428571,
+            "rank_correlation_with_sampled_b10": 0.08571428571428572,
+            "criterion": "the notebook's, declared before any score: the cap shows the ranking if the centred coefficient spread exceeds the 95th percentile of its own permutation spread *and* B09's best mean-action label is ranked first or second by the same coefficients. It is read on the undiscounted response; the discounted one is reported beside it. A placebo that passes the same spread test invalidates the cap's reading",
+            "drop_invariance": {
+              "alternate_dropped_label": 0,
+              "max_absolute_difference": 9.361543658326088e-16,
+              "definition": "the same model refitted with a different dropped label; the centred coefficients are invariant to the choice, so this is a check and not a second estimate"
+            }
+          },
+          "discounted_segment_reward": {
+            "centred_coefficients": {
+              "0": 0.015816288165259904,
+              "1": 0.00018097330402394064,
+              "2": -0.01826984154418216,
+              "3": -0.0023629025544160184,
+              "4": 0.013207154967207974,
+              "5": -0.008571672337893637
+            },
+            "clustered_se": {
+              "0": 0.004232298100059339,
+              "1": 0.003568330470573676,
+              "2": 0.0037851255436118637,
+              "3": 0.0041211194419791914,
+              "4": 0.003812160065636795,
+              "5": 0.003948796133523773
+            },
+            "ranking": [
+              0,
+              4,
+              1,
+              3,
+              5,
+              2
+            ],
+            "max_minus_min": 0.03408612970944207,
+            "max_minus_min_clustered_se": 0.006092057184247634,
+            "r_squared": 0.020432182067626203,
+            "residual_sd": 0.20800224571202208,
+            "permutation_percentile_value": 0.01737311014959231,
+            "permutation_p_value": 0.000999000999000999,
+            "spread_exceeds_permutation_percentile": true,
+            "best_mean_action_label_rank": 1,
+            "best_mean_action_label_in_top_two": true,
+            "shows_the_ranking": true,
+            "placebo_max_minus_min": 0.03063706654837819,
+            "placebo_permutation_percentile_value": 0.046523269825262746,
+            "placebo_permutation_p_value": 0.36663336663336665,
+            "placebo_passes_the_same_spread_test": false,
+            "placebo_invalidates_this_reading": false,
+            "rank_correlation_with_mean_action_b09": 0.6571428571428571,
+            "rank_correlation_with_sampled_b10": 0.08571428571428572,
+            "criterion": "the notebook's, declared before any score: the cap shows the ranking if the centred coefficient spread exceeds the 95th percentile of its own permutation spread *and* B09's best mean-action label is ranked first or second by the same coefficients. It is read on the undiscounted response; the discounted one is reported beside it. A placebo that passes the same spread test invalidates the cap's reading",
+            "drop_invariance": {
+              "alternate_dropped_label": 0,
+              "max_absolute_difference": 3.803728165774345e-14,
+              "definition": "the same model refitted with a different dropped label; the centred coefficients are invariant to the choice, so this is a check and not a second estimate"
+            }
+          }
+        },
+        "100": {
+          "cap": 100,
+          "rollouts": 16,
+          "lane_episodes": 256,
+          "commitments": 1280,
+          "commitments_per_lane_episode": 5,
+          "clusters": 256,
+          "mean_commitment_elapsed": 100.0,
+          "behaviour": {
+            "lane_episodes": 256,
+            "mean_episode_return_U": 30.189938706036042,
+            "clustered_se_episode_return_U": 0.11355280130364041,
+            "mean_episode_J": 0.36227926447243247,
+            "clustered_se_episode_J": 0.001362633615643685,
+            "mean_reward_per_step": 0.06037987741207208,
+            "definition": "one lane-episode is one cluster - the whole episode of one collection lane - so the standard error over the lane-episodes is already the clustered one. J is the runner's own native score of the same return. the runner converts a scalar episode return U to the native score J by the pure factor `N_UAVS / HORIZON` = 6 / 500 = .012: `scripts/run_fsd_baseline_interruption_b01.py:254` computes `native_scores_J = shared.N_UAVS * returns / horizon` with `horizon = shared.HORIZON` (line 201), and `scripts/run_fsd_uav_individual_renewal_b01.py:140` publishes the same number as `native_score_factor` on every summary. There is no offset and no per-world term, so a mean reward per step multiplied by N_UAVS is an episode J, and the additive model's predicted all-equal mean reward per step converts directly"
+          },
+          "label_law_entropy_estimate": 1.7846869389526545,
+          "best_mean_action_label": 0,
+          "wall_seconds": 404.43945815000916,
+          "undiscounted_mean_reward_per_step": {
+            "centred_coefficients": {
+              "0": 0.00024363134332128388,
+              "1": 0.00028399173611018126,
+              "2": -0.0003190662882489898,
+              "3": -0.0005680888327656175,
+              "4": 0.00028389648823510627,
+              "5": 7.563555334803573e-05
+            },
+            "clustered_se": {
+              "0": 0.00011508313826272977,
+              "1": 0.00012704502190839163,
+              "2": 0.00013361903870706275,
+              "3": 0.00012066852604086974,
+              "4": 0.00012214816732593543,
+              "5": 0.0001231921892576705
+            },
+            "ranking": [
+              1,
+              4,
+              0,
+              5,
+              2,
+              3
+            ],
+            "max_minus_min": 0.0008520805688757987,
+            "max_minus_min_clustered_se": 0.00019713263768166562,
+            "r_squared": 0.031528960931193284,
+            "residual_sd": 0.004598497642538679,
+            "permutation_percentile_value": 0.0005361937054925186,
+            "permutation_p_value": 0.000999000999000999,
+            "spread_exceeds_permutation_percentile": true,
+            "best_mean_action_label_rank": 3,
+            "best_mean_action_label_in_top_two": false,
+            "shows_the_ranking": false,
+            "placebo_max_minus_min": 0.0007844047425741972,
+            "placebo_permutation_percentile_value": 0.0014578902026279206,
+            "placebo_permutation_p_value": 0.6343656343656343,
+            "placebo_passes_the_same_spread_test": false,
+            "placebo_invalidates_this_reading": false,
+            "rank_correlation_with_mean_action_b09": 0.42857142857142855,
+            "rank_correlation_with_sampled_b10": 0.6571428571428571,
+            "criterion": "the notebook's, declared before any score: the cap shows the ranking if the centred coefficient spread exceeds the 95th percentile of its own permutation spread *and* B09's best mean-action label is ranked first or second by the same coefficients. It is read on the undiscounted response; the discounted one is reported beside it. A placebo that passes the same spread test invalidates the cap's reading",
+            "drop_invariance": {
+              "alternate_dropped_label": 0,
+              "max_absolute_difference": 6.917209860457518e-17,
+              "definition": "the same model refitted with a different dropped label; the centred coefficients are invariant to the choice, so this is a check and not a second estimate"
+            }
+          },
+          "discounted_segment_reward": {
+            "centred_coefficients": {
+              "0": 0.01965916096896206,
+              "1": 0.016787137819347528,
+              "2": -0.021392664615835076,
+              "3": -0.031053055469322095,
+              "4": 0.016090621436670654,
+              "5": -9.120013982307114e-05
+            },
+            "clustered_se": {
+              "0": 0.007515083953770089,
+              "1": 0.008093442052710134,
+              "2": 0.008911244026531425,
+              "3": 0.007642280869666384,
+              "4": 0.007766030242108464,
+              "5": 0.008042614080807881
+            },
+            "ranking": [
+              0,
+              1,
+              4,
+              5,
+              2,
+              3
+            ],
+            "max_minus_min": 0.05071221643828415,
+            "max_minus_min_clustered_se": 0.011012776824998717,
+            "r_squared": 0.02787502806970288,
+            "residual_sd": 0.29687036169715014,
+            "permutation_percentile_value": 0.03513798269944988,
+            "permutation_p_value": 0.001998001998001998,
+            "spread_exceeds_permutation_percentile": true,
+            "best_mean_action_label_rank": 1,
+            "best_mean_action_label_in_top_two": true,
+            "shows_the_ranking": true,
+            "placebo_max_minus_min": 0.05794283287355047,
+            "placebo_permutation_percentile_value": 0.09444459228471296,
+            "placebo_permutation_p_value": 0.47952047952047955,
+            "placebo_passes_the_same_spread_test": false,
+            "placebo_invalidates_this_reading": false,
+            "rank_correlation_with_mean_action_b09": 0.7142857142857143,
+            "rank_correlation_with_sampled_b10": 0.4857142857142857,
+            "criterion": "the notebook's, declared before any score: the cap shows the ranking if the centred coefficient spread exceeds the 95th percentile of its own permutation spread *and* B09's best mean-action label is ranked first or second by the same coefficients. It is read on the undiscounted response; the discounted one is reported beside it. A placebo that passes the same spread test invalidates the cap's reading",
+            "drop_invariance": {
+              "alternate_dropped_label": 0,
+              "max_absolute_difference": 3.698430450782553e-15,
+              "definition": "the same model refitted with a different dropped label; the centred coefficients are invariant to the choice, so this is a check and not a second estimate"
+            }
+          }
+        },
+        "500": {
+          "cap": 500,
+          "rollouts": 16,
+          "lane_episodes": 256,
+          "commitments": 256,
+          "commitments_per_lane_episode": 1,
+          "clusters": 256,
+          "mean_commitment_elapsed": 500.0,
+          "behaviour": {
+            "lane_episodes": 256,
+            "mean_episode_return_U": 30.29776867748166,
+            "clustered_se_episode_return_U": 0.12191715869778633,
+            "mean_episode_J": 0.3635732241297799,
+            "clustered_se_episode_J": 0.001463005904373436,
+            "mean_reward_per_step": 0.06059553735496332,
+            "definition": "one lane-episode is one cluster - the whole episode of one collection lane - so the standard error over the lane-episodes is already the clustered one. J is the runner's own native score of the same return. the runner converts a scalar episode return U to the native score J by the pure factor `N_UAVS / HORIZON` = 6 / 500 = .012: `scripts/run_fsd_baseline_interruption_b01.py:254` computes `native_scores_J = shared.N_UAVS * returns / horizon` with `horizon = shared.HORIZON` (line 201), and `scripts/run_fsd_uav_individual_renewal_b01.py:140` publishes the same number as `native_score_factor` on every summary. There is no offset and no per-world term, so a mean reward per step multiplied by N_UAVS is an episode J, and the additive model's predicted all-equal mean reward per step converts directly"
+          },
+          "label_law_entropy_estimate": 1.7903746258622657,
+          "best_mean_action_label": 0,
+          "wall_seconds": 384.6686651869677,
+          "undiscounted_mean_reward_per_step": {
+            "centred_coefficients": {
+              "0": -2.6499583062536164e-05,
+              "1": 0.0005108112341553146,
+              "2": -0.0005048068141260394,
+              "3": -0.001178292395351383,
+              "4": 0.0005922819100091182,
+              "5": 0.0006065056483755252
+            },
+            "clustered_se": {
+              "0": 0.00021135345506458398,
+              "1": 0.00018893491022316553,
+              "2": 0.00020003115147916402,
+              "3": 0.0002194807062536221,
+              "4": 0.00023715104702365708,
+              "5": 0.0002199180451221422
+            },
+            "ranking": [
+              5,
+              4,
+              1,
+              0,
+              2,
+              3
+            ],
+            "max_minus_min": 0.0017847980437269081,
+            "max_minus_min_clustered_se": 0.0003458263801183177,
+            "r_squared": 0.16096778930628453,
+            "residual_sd": 0.0035735850946982013,
+            "permutation_percentile_value": 0.0010019083814364117,
+            "permutation_p_value": 0.000999000999000999,
+            "spread_exceeds_permutation_percentile": true,
+            "best_mean_action_label_rank": 4,
+            "best_mean_action_label_in_top_two": false,
+            "shows_the_ranking": false,
+            "placebo_max_minus_min": 0.0013945550868687557,
+            "placebo_permutation_percentile_value": 0.0027435276361424256,
+            "placebo_permutation_p_value": 0.6573426573426573,
+            "placebo_passes_the_same_spread_test": false,
+            "placebo_invalidates_this_reading": false,
+            "rank_correlation_with_mean_action_b09": 0.6,
+            "rank_correlation_with_sampled_b10": 0.9428571428571428,
+            "criterion": "the notebook's, declared before any score: the cap shows the ranking if the centred coefficient spread exceeds the 95th percentile of its own permutation spread *and* B09's best mean-action label is ranked first or second by the same coefficients. It is read on the undiscounted response; the discounted one is reported beside it. A placebo that passes the same spread test invalidates the cap's reading",
+            "drop_invariance": {
+              "alternate_dropped_label": 0,
+              "max_absolute_difference": 5.410168840702667e-17,
+              "definition": "the same model refitted with a different dropped label; the centred coefficients are invariant to the choice, so this is a check and not a second estimate"
+            }
+          },
+          "discounted_segment_reward": {
+            "centred_coefficients": {
+              "0": 0.005025953524917557,
+              "1": 0.04743268063742608,
+              "2": -0.056879994771244544,
+              "3": -0.08838109147875409,
+              "4": 0.0371315293104407,
+              "5": 0.05567092277721428
+            },
+            "clustered_se": {
+              "0": 0.022474165359966637,
+              "1": 0.01918171666831008,
+              "2": 0.021630654272758718,
+              "3": 0.02233504272626301,
+              "4": 0.026126865314003,
+              "5": 0.02395152080007249
+            },
+            "ranking": [
+              5,
+              1,
+              4,
+              0,
+              2,
+              3
+            ],
+            "max_minus_min": 0.14405201425596836,
+            "max_minus_min_clustered_se": 0.035689898691178494,
+            "r_squared": 0.1091387026181444,
+            "residual_sd": 0.37479093162961263,
+            "permutation_percentile_value": 0.10267688233910016,
+            "permutation_p_value": 0.000999000999000999,
+            "spread_exceeds_permutation_percentile": true,
+            "best_mean_action_label_rank": 4,
+            "best_mean_action_label_in_top_two": false,
+            "shows_the_ranking": false,
+            "placebo_max_minus_min": 0.09509102994745247,
+            "placebo_permutation_percentile_value": 0.2739599696831514,
+            "placebo_permutation_p_value": 0.9140859140859141,
+            "placebo_passes_the_same_spread_test": false,
+            "placebo_invalidates_this_reading": false,
+            "rank_correlation_with_mean_action_b09": 0.5428571428571428,
+            "rank_correlation_with_sampled_b10": 1.0,
+            "criterion": "the notebook's, declared before any score: the cap shows the ranking if the centred coefficient spread exceeds the 95th percentile of its own permutation spread *and* B09's best mean-action label is ranked first or second by the same coefficients. It is read on the undiscounted response; the discounted one is reported beside it. A placebo that passes the same spread test invalidates the cap's reading",
+            "drop_invariance": {
+              "alternate_dropped_label": 0,
+              "max_absolute_difference": 6.2727600891321345e-15,
+              "definition": "the same model refitted with a different dropped label; the centred coefficients are invariant to the choice, so this is a check and not a second estimate"
+            }
+          },
+          "non_additivity": {
+            "homogeneity_coefficient": -0.0003280542529497483,
+            "homogeneity_clustered_se": 8.406076731605402e-05,
+            "homogeneity_permutation_p_value": 0.000999000999000999,
+            "homogeneity_permutation_percentile_value": 0.00016956120526003684,
+            "homogeneity_exceeds_permutation_percentile": true,
+            "all_equal_prediction_episode_J": {
+              "0": 0.3619530060700323,
+              "1": 0.38129619548987487,
+              "2": 0.34473394575174615,
+              "3": 0.3204884648276338,
+              "4": 0.3842291398206118,
+              "5": 0.3847411944018025
+            },
+            "all_equal_prediction_J_max_minus_min": 0.0642527295741687,
+            "b10_sampled_J_max_minus_min": 0.07268722684329487,
+            "prediction_fraction_of_b10_sampled_spread": 0.883961768313022,
+            "prediction_below_half_of_b10_sampled_spread": false,
+            "definition": "the strongest alternative the notebook names is that the joint map is not additive - a label pays only when all six agents hold it. `sum_c n_c^2` is the homogeneity of the configuration (6 when all six agents hold different labels, 36 when they all hold the same), centred to its own mean so it does not absorb the level; a positive coefficient is the coordination term. Beside it, the additive model's predicted all-equal score for each label, `6 * beta_c + mean_p delta_p` in the drop parametrisation, which is invariant to the dropped label, converted to an episode J by the reporting factor"
+          }
+        }
+      },
+      "caps_showing_the_ranking": [
+        10,
+        50
+      ],
+      "smallest_cap_showing_the_ranking": 10,
+      "caps_with_a_passing_placebo": [],
+      "placebo_flag": false,
+      "spread_by_cap": {
+        "10": 0.0009236827653372021,
+        "50": 0.0008347423595331196,
+        "100": 0.0008520805688757987,
+        "500": 0.0017847980437269081
+      },
+      "permutation_percentile_by_cap": {
+        "10": 0.00029241364169819566,
+        "50": 0.00041842580481395516,
+        "100": 0.0005361937054925186,
+        "500": 0.0010019083814364117
+      },
+      "permutation_p_value_by_cap": {
+        "10": 0.000999000999000999,
+        "50": 0.000999000999000999,
+        "100": 0.000999000999000999,
+        "500": 0.000999000999000999
+      },
+      "rank_correlation_with_sampled_b10_by_cap": {
+        "10": -0.14285714285714285,
+        "50": 0.08571428571428572,
+        "100": 0.6571428571428571,
+        "500": 0.9428571428571428
+      },
+      "rank_correlation_with_mean_action_b09_by_cap": {
+        "10": 0.6,
+        "50": 0.6571428571428571,
+        "100": 0.42857142857142855,
+        "500": 0.6
+      },
+      "mean_episode_return_U_by_cap": {
+        "10": 29.471337786322906,
+        "50": 30.13368656027007,
+        "100": 30.189938706036042,
+        "500": 30.29776867748166
+      },
+      "mean_episode_J_by_cap": {
+        "10": 0.3536560534358749,
+        "50": 0.3616042387232408,
+        "100": 0.36227926447243247,
+        "500": 0.3635732241297799
+      },
+      "wall_seconds_by_cap": {
+        "10": 451.7832872060244,
+        "50": 406.4705115510151,
+        "100": 404.43945815000916,
+        "500": 384.6686651869677
+      },
+      "mean_action_J_by_label": {
+        "0": 0.5190327462006576,
+        "1": 0.48546744663145813,
+        "2": 0.3925557846310054,
+        "3": 0.42177516857170333,
+        "4": 0.48664084946135155,
+        "5": 0.5173522443832025
+      },
+      "sampled_J_by_label": {
+        "0": 0.35600631028900964,
+        "1": 0.3677748521165586,
+        "2": 0.31965995968076716,
+        "3": 0.29814070799734604,
+        "4": 0.35930541152628315,
+        "5": 0.3708279348406409
+      },
+      "mean_action_ranking": [
+        0,
+        5,
+        4,
+        1,
+        3,
+        2
+      ],
+      "sampled_ranking": [
+        5,
+        1,
+        4,
+        0,
+        2,
+        3
+      ],
+      "best_mean_action_label": 0,
+      "sampled_J_max_minus_min": 0.07268722684329487,
+      "coordinator_most_used_label": 4,
+      "rank_correlation_definition": "Spearman's rank correlation, ties sharing their average rank (B10's own function), between the six centred coefficients of one cap and the six labels' fixed-weight panel J - B09's mean-action map and B10's sampled map of the same checkpoint. Six paired points: a description of the order, not a test",
+      "weights_sha256": "9a8ebe9057455b1b8fd6fe9bcfa41f4530ced9b84820f364985de13c61c1a14d"
+    }
+  ],
+  "blocks_read": 3,
+  "invalid_probes": {},
+  "invalid_b09_probes": {},
+  "invalid_b10_probes": {},
+  "refusals": "a batch of this object's probes at more than one launch sha or with different cap sets, a duplicate block among any of the three sets, a summary that is not this object's probe, an incomplete probe, a probe that took an optimizer step or does not record unchanged parameters and value normalisers, a probe without a six-label coefficient table or a permutation calibration for both responses at every declared cap, a probe that did not establish a faithful load, a block whose B09 or B10 probe was not supplied or is not readable by that object's own reader, a block whose weights sha256 is not B09's and B10's, and a block whose `as_trained` world scores are not exactly theirs",
+  "interpretation_limit": "a fixed-weight measurement, not a fit and not a `k` sweep for performance: zero optimizer steps, nothing is trained and no J claim is made; it measures how visible a label is in its own credit as a function of the commitment length. Exploration; three blocks; one checkpoint per block, and that checkpoint is the end of training. The assignment is the coordinator's own near-flat law and not an exact randomisation - shares .14-.19 with a weak state dependence - so the permutation calibration is the reference for what no effect looks like here, and the regression is not an experiment with assigned treatment. The low level's weights were trained under ten-step commitments, so a long commitment executes six policies that were never asked to hold that long, and the coordinator's value head was trained on ten-step targets, which is why the advantage table off cap 10 is labelled arithmetic rather than signal. The collection worlds are the block's own sixteen lanes seeded 500 above the training seed and are not the fit's worlds, and the collection's random streams are this object's. A fixed-weight panel is bit-reproducible only on the host that trained the checkpoint - B08's own local probe attempts failed the faithful load off that host - so this command runs on wsl_4070.",
+  "source_notes": {
+    "cap_attributes": "the D2 decision cadence reads two attributes of the agent *instance*: `self.d2_k_Z` at hmasd/agent.py:2596 (`team_cap_fire = team_ages[eval_indices] >= self.d2_k_Z`) and `self.d2_k_max` at hmasd/agent.py:2613 (`agent_cap_fire = agent_ages[hold_idx] >= self.d2_k_max`), both inside `_batched_assign_skills_d2` (hmasd/agent.py:2480). They are set once from `config.skill_cap_k_max` and `config.team_cap_k_Z` at construction (hmasd/agent.py:482-484) and read nowhere else on the collection path: the rollout buffer allocates on the rollout length and never on a cap (hmasd/utils.py:485-516), the D2 storage path keys its rows on the segment's start index and its discounted accumulator on `t - start` with no length bound (hmasd/agent.py:2264-2377), and `config.k` reaches the D2 route nowhere - the three `env_steps % config.k` boundaries at hmasd/agent.py:2107, 2791 and 3283 are the `off` and HA-CTSE routes, and hmasd/agent.py:3283 takes the D2 decision mask instead when `d2_enabled`. The one remaining `config.k`, the GRU chunk length at hmasd/agent.py:6309, is inside the low-level update, which this probe never calls. B08 sets the same two attributes on the *evaluator* instance for one panel (scripts/run_fsd_label_content_b08.py:139 `RULE_CAPS`, `ExecutionRule.attached`); this object sets them on the *learner*, which is the instance that collects",
+    "cap_restoration": "the caps are set inside a context manager that restores the two attributes in a `finally` (`commitment_cap`), so a failure inside a cap's collection cannot leave the learner carrying that cap for the next one. The manager refuses to run at all unless both interruption costs are infinite - with a finite cost the held label enters the trigger statistic and the cap would not be the only thing that moved - and unless the D2 discriminator age feature is `off`, because `_d2_normalized_team_age` and `_d2_normalized_agent_age` (hmasd/agent.py:4253-4263) divide the stored age by the same two attributes",
+    "expected_geometry": "a team decision fires at the episode reset (`env_steps == 0`, hmasd/agent.py:2518) and thereafter whenever the team age reaches the cap, and the age at step `t` of an episode is `t`, so a cap of `k` decides at t = 0, k, 2k, ... and one lane-episode of `horizon` steps carries `ceil(horizon / k)` team commitments. With `d2_k_max = d2_k_Z` the agent cap can never fire before the team cap, so every commitment samples all six agents (ADR 01 invariant 7) and the causes are `reset` and `team_cap` only. The probe checks the row counts, the causes, `valid implies sampled`, the six agent segments sharing the team segment's start, and every segment's elapsed against `min(cap, horizon - start)`, and refuses the collection where they are not the cadence's",
+    "per_step_reward": "the response's undiscounted term needs the raw scalar team reward of every step, which the frozen storage keeps only in discounted form. B11's `collect_training_law` offers no per-step hook, so this object records the reward from the *environment* side: a `RewardTape` replaces `env.step` on each collection lane - an instance attribute on an environment this object constructed, popped in a `finally` - with a wrapper that calls the original first and unchanged, appends `result[1]` and returns the original result object. B11's loop, its call order and its arguments are untouched, and the tape draws no randomness. Each lane is stepped exactly once per step of every rollout, so the tape's flat per-lane list reshapes to (rollouts, horizon) and the probe refuses any other length. The recomputed gamma-discounted sum of the taped rewards over each commitment is compared with the buffer's own `team_reward` and the maximum difference is published",
+    "responses": "two responses per commitment. `discounted_segment_reward` is the frozen credit quantity: the gamma-discounted sum of the raw team reward over the commitment, accumulated by hmasd/agent.py:2348-2355 and read from the buffer's own `team_reward` row - at cap 500 it sees mostly the first hundred steps, since gamma ** 100 is about .37 and gamma ** 500 about .0066. `undiscounted_mean_reward_per_step` is the undiscounted sum of the same raw per-step rewards over the commitment's steps divided by its elapsed steps, so it is comparable across caps and is the response the criterion is read on",
+    "position_fixed_effects": "reward drifts within an episode, and a long commitment sits at a different part of the episode than a short one, so the model carries one fixed effect per commitment position (0-based commitment number within the lane-episode). The six counts sum to six and the position dummies sum to one, so the two blocks are exactly collinear: the design drops one label's count column (label 5 by default) and keeps every position dummy, which identifies the five remaining coefficients as differences from the dropped label. The published coefficients are then re-centred to mean zero over the six labels, which is invariant to *which* label was dropped (dropping label d gives beta_c - beta_d, and centring removes the common shift); the probe fits the model a second time with a different dropped label and publishes the maximum difference between the two centred vectors",
+    "centred_coefficients": "the six centred coefficients are `C A beta` where `A` selects the count columns with a zero row for the dropped label and `C = I - 11'/6` centres them, so their clustered covariance is `C A V A' C'` with `V` the cluster-robust sandwich of the whole fit. The spread is max minus min of the six, which is the same number before and after centring",
+    "permutation": "1,000 permutations of whole six-label vectors among the commitments at the same position index within this block and cap, from a generator seeded by (evaluation_seed, cap, response) and touching no global stream. Permuting the whole vector keeps every commitment's configuration intact and only breaks its link to its own reward; permuting within a position keeps the fixed effects exactly as they are. Every draw is the same `fit_centred` least squares on the same design the observed estimate used - there is no second estimator - and the routine refuses to run at all unless it reproduces the observed statistic at the identity permutation. `p_value` is (1 + #{permuted >= observed}) / (1 + permutations)",
+    "placebo": "the team label never reaches the low-level actor: `SkillDiscoverer.forward` (hmasd/networks.py:1801-1809) passes only the observation, the *agent* label and the hidden state. At fixed weights it therefore cannot move an executed action, so the same regression on the one-hot of the team label (counts summing to one) measures what this design finds when there is nothing to find. A placebo that passes the spread test invalidates that cap's reading, and `reduce` flags it",
+    "non_additivity": "the strongest alternative the notebook names is that the joint map is not additive - a label pays only when all six agents hold it. `sum_c n_c^2` is the homogeneity of the configuration (6 when all six agents hold different labels, 36 when they all hold the same), centred to its own mean so it does not absorb the level; a positive coefficient is the coordination term. Beside it, the additive model's predicted all-equal score for each label, `6 * beta_c + mean_p delta_p` in the drop parametrisation, which is invariant to the dropped label, converted to an episode J by the reporting factor",
+    "reporting_factor": "the runner converts a scalar episode return U to the native score J by the pure factor `N_UAVS / HORIZON` = 6 / 500 = .012: `scripts/run_fsd_baseline_interruption_b01.py:254` computes `native_scores_J = shared.N_UAVS * returns / horizon` with `horizon = shared.HORIZON` (line 201), and `scripts/run_fsd_uav_individual_renewal_b01.py:140` publishes the same number as `native_score_factor` on every summary. There is no offset and no per-world term, so a mean reward per step multiplied by N_UAVS is an episode J, and the additive model's predicted all-equal mean reward per step converts directly",
+    "secondary_advantage_table": "B11's own agent-label advantage table, computed by B11's `label_table` on this cap's rows. Off cap 10 it is arithmetic and not the signal a retrained critic would give: the value head was trained on ten-step targets, so at cap 50, 100 and 500 the stored segment value is a ten-step value being differenced against a much longer return. It is published as a secondary block and labelled so everywhere",
+    "lane_cluster": "segments within one lane-episode share a world, a state trajectory and five other agents' labels, so rows are not independent. The cluster is the (rollout, lane) pair - one episode of one lane, since HORIZON equals `rollout_length` and every lane terminates at the end of every rollout - giving `rollouts * 16` clusters. A clustered standard error is the spread of the per-cluster means; the iid standard error beside it treats the rows as independent and is reported only because the notebook asked for both",
+    "collector_transcription": "the collection is the frozen collector's own per-step calls, in its own order, with its own arguments: `scripts/run_fsd_baseline_interruption_b01.py:95-151` (`collect_training`). That function both collects *and* calls `agent.update` at line 158, so it is not called here; its per-step body is reproduced call for call - `shared.e0._reset_all(envs)` once (line 98), `agent.train(True)` (line 101), and per step `agent.step(states, observations, env_steps, dones, deterministic=False, return_step_data=True, build_infos=False)` (lines 112-113), `env.step(actions[lane])` per lane (line 120), `agent.store_transition_batch(...)` with the identical keyword arguments (lines 134-136), the terminal-lane reset with `agent.reset_env_state(lane)` (lines 141-148), and the same `require_finite` guards and the same terminal-episode refusal (lines 152-153). Where the frozen loop calls `agent.update` this object computes the coordinator's credit arithmetic instead and takes no optimizer step; everything the loop does after the update - `shared.renewal_metrics(agent)` (line 167) and `agent.clear_buffers()` (line 172) - is called unchanged. The sha256 of the frozen `collect_training` source text is published as `frozen_collector_source_sha256` so a reader can see which text this transcription mirrors",
+    "no_update": "`agent.update` and `update_coordinator_d2` are never called. `update_coordinator_d2` takes 15 optimizer steps per rollout (hmasd/agent.py:6207-6218) and updates `value_norm_coordinator` before the first of them (hmasd/agent.py:6075-6078), and `agent.update` additionally increments `global_step`, updates the discoverer and the discriminators and steps the schedulers. This probe calls only the three read-only pieces of the credit path: the bootstrap block, `_d2_flush_open_segments` and `compute_high_level_advantages`, which write nothing but the rollout-scoped advantage and return tables that `clear_buffers` resets at the same boundary a fit resets them",
+    "advantages": "`rollout_buffer.compute_high_level_advantages(bootstrap, gamma=config.gamma, value_normalizer=None)` with the arguments of hmasd/agent.py:6046-6050, which dispatches to `_compute_d2_high_level_advantages` (hmasd/utils.py:894, 1018): one discounted-GAE sequence per (env, team) over the valid team rows and one per (env, agent) over that agent's valid rows, `discounts = gamma ** elapsed`, `gae_lambda` at the function default .95, which equals `config.gae_lambda` on this construction (the call does not pass it). The stored segment values and the bootstrap values are already denormalised at collection (hmasd/agent.py:2664-2674), which is why `value_normalizer` must be None",
+    "segment_reward": "a segment's reward is the gamma-discounted sum of the raw scalar environment (team) reward over the segment (hmasd/agent.py:2348-2355, accumulating `current_reward`, which is the collector's own scalar `rewards[lane]`, hmasd/agent.py:3873-3875). No discriminator, entropy or process term enters a coordinator segment's reward",
+    "agent_label_of_a_row": "the label a row is grouped by is the label the segment executed: `d2_agent_skills[t, e, i]` is written at the decision step from `self.env_agent_skills` after the assignment (hmasd/agent.py:2322-2333, 2714-2716) and the segment row sits at that decision step. The team row's label is `d2_team_skill[t, e]` the same way",
+    "label_free_baseline": "an agent's advantage is the team's segment return minus a label-free baseline: the coordinator's critic reads the state and the agent's encoded observation, not the label (hmasd/networks.py:734-735, 1210-1213), and every agent's segment reward is the same team reward. The other five agents' labels are noise in one agent's advantage, which is the dilution E2b names",
+    "row_geometry": "a valid row is a closed segment written at its start index (hmasd/utils.py:567-599). `valid` implies `sampled` (ADR 01 invariant 6) and a team decision samples every agent (invariant 7), which on this construction makes every team row carry six valid agent rows: the recorded D1280 fits log `rows_M` 800, `rows_M_agent` 4800 and `rows_M_team` 800 for all 45 rollouts, with causes `reset` and `team_cap` only and mean segment length 10. The probe checks all of that at runtime and refuses the collection if the geometry it produced is not the recorded fit's",
+    "weights_and_route": "scripts/run_flexible_skill_duration_e0.py:319-335 `Evaluator._sync`, called by the frozen `run_fsd_baseline_interruption_b01.evaluate_panel` at line 207 of that file, before every panel: `skill_coordinator` and `skill_discoverer` are moved by `load_state_dict` of the learner's own `state_dict`, the team and individual discriminators likewise where both exist, and `obs_norm`, `state_norm`, `value_norm_coordinator` and `value_norm_discoverer` are `copy.deepcopy`d; then `agent.train(False)` and `reset_env_state(lane)` for every lane, so the evaluator starts each panel in eval mode with no held skill, zero timers and zero recurrent state. This probe loads the checkpoint into the learner and lets that same route carry it to the evaluator, so nothing about the transfer differs from a fit's panel",
+    "evaluation_route": "the panel calls `agent.step(..., deterministic=True)` (run_fsd_baseline_interruption_b01.py:224-225), so the coordinator's team and agent labels are argmax choices, not samples, and the low-level action is the Gaussian's mean",
+    "lane_to_world": "an evaluation panel gives every lane exactly one episode of the whole horizon and scores that lane as its own world: `run_fsd_baseline_interruption_b01.py:211-254` sets `episode_ids` to `range(lanes)` and fills `return_sums_U`, `returns_U` and `native_scores_J` per lane, so entry `lane` of a per-lane record is index `lane` of `J_world_scores`. The drawn assignments are recorded in lane order with their own lane index and their episode index, and `episodes_per_lane` records how many episodes each lane actually ran: a lane with more than one would make the record a lane record and not a world record, which is why the count is published rather than assumed"
+  },
+  "caps_showing_the_ranking_by_block": {
+    "772803": [
+      10,
+      50,
+      100,
+      500
+    ],
+    "772903": [
+      10,
+      50,
+      100,
+      500
+    ],
+    "773003": [
+      10,
+      50
+    ]
+  },
+  "smallest_cap_showing_the_ranking_by_block": {
+    "772803": 10,
+    "772903": 10,
+    "773003": 10
+  },
+  "placebo_flag_by_block": {
+    "772803": false,
+    "772903": false,
+    "773003": false
+  },
+  "blocks_showing_the_ranking_by_cap": {
+    "10": [
+      772803,
+      772903,
+      773003
+    ],
+    "50": [
+      772803,
+      772903,
+      773003
+    ],
+    "100": [
+      772803,
+      772903
+    ],
+    "500": [
+      772803,
+      772903
+    ]
+  },
+  "spread_by_cap": {
+    "10": {
+      "available_blocks": 3,
+      "planned_blocks": 3,
+      "mean": 0.000781088453519403,
+      "min": 0.0005211860682601753,
+      "max": 0.0009236827653372021,
+      "sample_sd": 0.00022543687777376557,
+      "t_multiplier": 4.3027,
+      "working_model_95pct_interval": [
+        0.0002210660513136246,
+        0.0013411108557251814
+      ],
+      "positive_blocks": 3,
+      "negative_blocks": 0,
+      "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+    },
+    "50": {
+      "available_blocks": 3,
+      "planned_blocks": 3,
+      "mean": 0.001239527319343875,
+      "min": 0.0008347423595331196,
+      "max": 0.0017607626229780345,
+      "sample_sd": 0.000473865902983206,
+      "t_multiplier": 4.3027,
+      "working_model_95pct_interval": [
+        6.236622692322967e-05,
+        0.0024166884117645202
+      ],
+      "positive_blocks": 3,
+      "negative_blocks": 0,
+      "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+    },
+    "100": {
+      "available_blocks": 3,
+      "planned_blocks": 3,
+      "mean": 0.0014274033448680764,
+      "min": 0.0008520805688757987,
+      "max": 0.0018470926480452148,
+      "sample_sd": 0.0005154401932510081,
+      "t_multiplier": 4.3027,
+      "working_model_95pct_interval": [
+        0.00014696485552952404,
+        0.002707841834206629
+      ],
+      "positive_blocks": 3,
+      "negative_blocks": 0,
+      "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+    },
+    "500": {
+      "available_blocks": 3,
+      "planned_blocks": 3,
+      "mean": 0.0022974749272330467,
+      "min": 0.0017847980437269081,
+      "max": 0.0026015603963576647,
+      "sample_sd": 0.00044655119391173346,
+      "t_multiplier": 4.3027,
+      "working_model_95pct_interval": [
+        0.0011881680791614958,
+        0.0034067817753045977
+      ],
+      "positive_blocks": 3,
+      "negative_blocks": 0,
+      "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+    }
+  },
+  "permutation_percentile_by_cap": {
+    "10": {
+      "available_blocks": 3,
+      "planned_blocks": 3,
+      "mean": 0.00029288390761155484,
+      "min": 0.0002826800145497122,
+      "max": 0.0003035580665867566,
+      "sample_sd": 1.0446967346428073e-05,
+      "t_multiplier": 4.3027,
+      "working_model_95pct_interval": [
+        0.00026693191693954413,
+        0.00031883589828356554
+      ],
+      "positive_blocks": 3,
+      "negative_blocks": 0,
+      "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+    },
+    "50": {
+      "available_blocks": 3,
+      "planned_blocks": 3,
+      "mean": 0.0004357777669736355,
+      "min": 0.00041842580481395516,
+      "max": 0.00044472331582501084,
+      "sample_sd": 1.5029657676630052e-05,
+      "t_multiplier": 4.3027,
+      "working_model_95pct_interval": [
+        0.00039844161736264064,
+        0.0004731139165846304
+      ],
+      "positive_blocks": 3,
+      "negative_blocks": 0,
+      "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+    },
+    "100": {
+      "available_blocks": 3,
+      "planned_blocks": 3,
+      "mean": 0.000539185386781566,
+      "min": 0.0005325360297414263,
+      "max": 0.000548826425110753,
+      "sample_sd": 8.54733075431576e-06,
+      "t_multiplier": 4.3027,
+      "working_model_95pct_interval": [
+        0.000517952406850559,
+        0.0005604183667125731
+      ],
+      "positive_blocks": 3,
+      "negative_blocks": 0,
+      "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+    },
+    "500": {
+      "available_blocks": 3,
+      "planned_blocks": 3,
+      "mean": 0.001089444540098969,
+      "min": 0.0010019083814364117,
+      "max": 0.0011366480158575077,
+      "sample_sd": 7.588633772728628e-05,
+      "t_multiplier": 4.3027,
+      "working_model_95pct_interval": [
+        0.0009009303556926259,
+        0.0012779587245053121
+      ],
+      "positive_blocks": 3,
+      "negative_blocks": 0,
+      "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+    }
+  },
+  "permutation_p_value_by_cap": {
+    "10": {
+      "available_blocks": 3,
+      "planned_blocks": 3,
+      "mean": 0.000999000999000999,
+      "min": 0.000999000999000999,
+      "max": 0.000999000999000999,
+      "sample_sd": 0.0,
+      "t_multiplier": 4.3027,
+      "working_model_95pct_interval": [
+        0.000999000999000999,
+        0.000999000999000999
+      ],
+      "positive_blocks": 3,
+      "negative_blocks": 0,
+      "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+    },
+    "50": {
+      "available_blocks": 3,
+      "planned_blocks": 3,
+      "mean": 0.000999000999000999,
+      "min": 0.000999000999000999,
+      "max": 0.000999000999000999,
+      "sample_sd": 0.0,
+      "t_multiplier": 4.3027,
+      "working_model_95pct_interval": [
+        0.000999000999000999,
+        0.000999000999000999
+      ],
+      "positive_blocks": 3,
+      "negative_blocks": 0,
+      "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+    },
+    "100": {
+      "available_blocks": 3,
+      "planned_blocks": 3,
+      "mean": 0.000999000999000999,
+      "min": 0.000999000999000999,
+      "max": 0.000999000999000999,
+      "sample_sd": 0.0,
+      "t_multiplier": 4.3027,
+      "working_model_95pct_interval": [
+        0.000999000999000999,
+        0.000999000999000999
+      ],
+      "positive_blocks": 3,
+      "negative_blocks": 0,
+      "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+    },
+    "500": {
+      "available_blocks": 3,
+      "planned_blocks": 3,
+      "mean": 0.000999000999000999,
+      "min": 0.000999000999000999,
+      "max": 0.000999000999000999,
+      "sample_sd": 0.0,
+      "t_multiplier": 4.3027,
+      "working_model_95pct_interval": [
+        0.000999000999000999,
+        0.000999000999000999
+      ],
+      "positive_blocks": 3,
+      "negative_blocks": 0,
+      "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+    }
+  },
+  "rank_correlation_with_sampled_b10_by_cap": {
+    "10": {
+      "available_blocks": 3,
+      "planned_blocks": 3,
+      "mean": 0.2571428571428572,
+      "min": -0.14285714285714285,
+      "max": 0.8285714285714286,
+      "sample_sd": 0.5078968238466051,
+      "t_multiplier": 4.3027,
+      "working_model_95pct_interval": [
+        -1.0045566579147491,
+        1.5188423722004634
+      ],
+      "positive_blocks": 2,
+      "negative_blocks": 1,
+      "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+    },
+    "50": {
+      "available_blocks": 3,
+      "planned_blocks": 3,
+      "mean": 0.4666666666666666,
+      "min": 0.08571428571428572,
+      "max": 0.9428571428571428,
+      "sample_sd": 0.4364357804719847,
+      "t_multiplier": 4.3027,
+      "working_model_95pct_interval": [
+        -0.6175118253445346,
+        1.5508451586778678
+      ],
+      "positive_blocks": 3,
+      "negative_blocks": 0,
+      "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+    },
+    "100": {
+      "available_blocks": 3,
+      "planned_blocks": 3,
+      "mean": 0.7333333333333333,
+      "min": 0.6,
+      "max": 0.9428571428571428,
+      "sample_sd": 0.18368858592367532,
+      "t_multiplier": 4.3027,
+      "working_model_95pct_interval": [
+        0.2770205766866907,
+        1.189646089979976
+      ],
+      "positive_blocks": 3,
+      "negative_blocks": 0,
+      "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+    },
+    "500": {
+      "available_blocks": 3,
+      "planned_blocks": 3,
+      "mean": 0.8095238095238096,
+      "min": 0.5428571428571428,
+      "max": 0.9428571428571428,
+      "sample_sd": 0.23094010767585033,
+      "t_multiplier": 4.3027,
+      "working_model_95pct_interval": [
+        0.23583047619047626,
+        1.3832171428571431
+      ],
+      "positive_blocks": 3,
+      "negative_blocks": 0,
+      "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+    }
+  },
+  "rank_correlation_with_mean_action_b09_by_cap": {
+    "10": {
+      "available_blocks": 3,
+      "planned_blocks": 3,
+      "mean": 0.44761904761904764,
+      "min": 0.08571428571428572,
+      "max": 0.6571428571428571,
+      "sample_sd": 0.31471831698777725,
+      "t_multiplier": 4.3027,
+      "working_model_95pct_interval": [
+        -0.33419318132127457,
+        1.2294312765593698
+      ],
+      "positive_blocks": 3,
+      "negative_blocks": 0,
+      "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+    },
+    "50": {
+      "available_blocks": 3,
+      "planned_blocks": 3,
+      "mean": 0.6571428571428571,
+      "min": 0.4857142857142857,
+      "max": 0.8285714285714286,
+      "sample_sd": 0.17142857142857146,
+      "t_multiplier": 4.3027,
+      "working_model_95pct_interval": [
+        0.2312859994441937,
+        1.0829997148415207
+      ],
+      "positive_blocks": 3,
+      "negative_blocks": 0,
+      "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+    },
+    "100": {
+      "available_blocks": 3,
+      "planned_blocks": 3,
+      "mean": 0.6190476190476191,
+      "min": 0.42857142857142855,
+      "max": 0.8285714285714286,
+      "sample_sd": 0.20067911910195696,
+      "t_multiplier": 4.3027,
+      "working_model_95pct_interval": [
+        0.12052757449306373,
+        1.1175676636021743
+      ],
+      "positive_blocks": 3,
+      "negative_blocks": 0,
+      "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+    },
+    "500": {
+      "available_blocks": 3,
+      "planned_blocks": 3,
+      "mean": 0.7523809523809524,
+      "min": 0.6,
+      "max": 0.8285714285714286,
+      "sample_sd": 0.13196577581477165,
+      "t_multiplier": 4.3027,
+      "working_model_95pct_interval": [
+        0.42455619047619036,
+        1.0802057142857144
+      ],
+      "positive_blocks": 3,
+      "negative_blocks": 0,
+      "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+    }
+  },
+  "mean_episode_return_U_by_cap": {
+    "10": {
+      "available_blocks": 3,
+      "planned_blocks": 3,
+      "mean": 29.085025833245925,
+      "min": 28.529760121340317,
+      "max": 29.471337786322906,
+      "sample_sd": 0.4930021848483625,
+      "t_multiplier": 4.3027,
+      "working_model_95pct_interval": [
+        27.86032705912368,
+        30.30972460736817
+      ],
+      "positive_blocks": 3,
+      "negative_blocks": 0,
+      "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+    },
+    "50": {
+      "available_blocks": 3,
+      "planned_blocks": 3,
+      "mean": 29.174102438272616,
+      "min": 28.65954023639955,
+      "max": 30.13368656027007,
+      "sample_sd": 0.831751301825634,
+      "t_multiplier": 4.3027,
+      "working_model_95pct_interval": [
+        27.107894962876234,
+        31.240309913668998
+      ],
+      "positive_blocks": 3,
+      "negative_blocks": 0,
+      "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+    },
+    "100": {
+      "available_blocks": 3,
+      "planned_blocks": 3,
+      "mean": 29.204973157763632,
+      "min": 28.644315928821605,
+      "max": 30.189938706036042,
+      "sample_sd": 0.8557251923081083,
+      "t_multiplier": 4.3027,
+      "working_model_95pct_interval": [
+        27.079210582639124,
+        31.33073573288814
+      ],
+      "positive_blocks": 3,
+      "negative_blocks": 0,
+      "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+    },
+    "500": {
+      "available_blocks": 3,
+      "planned_blocks": 3,
+      "mean": 29.287671473375127,
+      "min": 28.51282190400613,
+      "max": 30.29776867748166,
+      "sample_sd": 0.9154315011361472,
+      "t_multiplier": 4.3027,
+      "working_model_95pct_interval": [
+        27.013588575387235,
+        31.56175437136302
+      ],
+      "positive_blocks": 3,
+      "negative_blocks": 0,
+      "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+    }
+  },
+  "mean_episode_J_by_cap": {
+    "10": {
+      "available_blocks": 3,
+      "planned_blocks": 3,
+      "mean": 0.3490203099989511,
+      "min": 0.34235712145608377,
+      "max": 0.3536560534358749,
+      "sample_sd": 0.0059160262181803865,
+      "t_multiplier": 4.3027,
+      "working_model_95pct_interval": [
+        0.3343239247094841,
+        0.36371669528841816
+      ],
+      "positive_blocks": 3,
+      "negative_blocks": 0,
+      "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+    },
+    "50": {
+      "available_blocks": 3,
+      "planned_blocks": 3,
+      "mean": 0.35008922925927144,
+      "min": 0.3439144828367946,
+      "max": 0.3616042387232408,
+      "sample_sd": 0.00998101562190759,
+      "t_multiplier": 4.3027,
+      "working_model_95pct_interval": [
+        0.3252947395545149,
+        0.374883718964028
+      ],
+      "positive_blocks": 3,
+      "negative_blocks": 0,
+      "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+    },
+    "100": {
+      "available_blocks": 3,
+      "planned_blocks": 3,
+      "mean": 0.3504596778931635,
+      "min": 0.3437317911458592,
+      "max": 0.36227926447243247,
+      "sample_sd": 0.01026870230769731,
+      "t_multiplier": 4.3027,
+      "working_model_95pct_interval": [
+        0.32495052699166943,
+        0.3759688287946576
+      ],
+      "positive_blocks": 3,
+      "negative_blocks": 0,
+      "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+    },
+    "500": {
+      "available_blocks": 3,
+      "planned_blocks": 3,
+      "mean": 0.35145205768050153,
+      "min": 0.3421538628480736,
+      "max": 0.3635732241297799,
+      "sample_sd": 0.01098517801363374,
+      "t_multiplier": 4.3027,
+      "working_model_95pct_interval": [
+        0.3241630629046469,
+        0.37874105245635614
+      ],
+      "positive_blocks": 3,
+      "negative_blocks": 0,
+      "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+    }
+  },
+  "wall_seconds_by_cap": {
+    "10": {
+      "available_blocks": 3,
+      "planned_blocks": 3,
+      "mean": 431.8105490916835,
+      "min": 410.78179819800425,
+      "max": 451.7832872060244,
+      "sample_sd": 20.521132947800268,
+      "t_multiplier": 4.3027,
+      "working_model_95pct_interval": [
+        380.8326687958776,
+        482.78842938748943
+      ],
+      "positive_blocks": 3,
+      "negative_blocks": 0,
+      "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+    },
+    "50": {
+      "available_blocks": 3,
+      "planned_blocks": 3,
+      "mean": 414.1051846613409,
+      "min": 404.76027100201463,
+      "max": 431.084771430993,
+      "sample_sd": 14.72959625498844,
+      "t_multiplier": 4.3027,
+      "working_model_95pct_interval": [
+        377.5144371328112,
+        450.6959321898706
+      ],
+      "positive_blocks": 3,
+      "negative_blocks": 0,
+      "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+    },
+    "100": {
+      "available_blocks": 3,
+      "planned_blocks": 3,
+      "mean": 396.2907944903321,
+      "min": 390.4667830289691,
+      "max": 404.43945815000916,
+      "sample_sd": 7.270620220578014,
+      "t_multiplier": 4.3027,
+      "working_model_95pct_interval": [
+        378.2293741865071,
+        414.3522147941571
+      ],
+      "positive_blocks": 3,
+      "negative_blocks": 0,
+      "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+    },
+    "500": {
+      "available_blocks": 3,
+      "planned_blocks": 3,
+      "mean": 388.94689086832415,
+      "min": 384.6686651869677,
+      "max": 393.03049886599183,
+      "sample_sd": 4.184312685617418,
+      "t_multiplier": 4.3027,
+      "working_model_95pct_interval": [
+        378.55236773209094,
+        399.34141400455735
+      ],
+      "positive_blocks": 3,
+      "negative_blocks": 0,
+      "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+    }
+  },
+  "centred_coefficients_by_cap": {
+    "10": {
+      "0": {
+        "available_blocks": 3,
+        "planned_blocks": 3,
+        "mean": 3.280741504221689e-05,
+        "min": -0.0004125626274026524,
+        "max": 0.0003610327963612816,
+        "sample_sd": 0.0003998807617776015,
+        "t_multiplier": 4.3027,
+        "working_model_95pct_interval": [
+          -0.0009605623788355329,
+          0.0010261772089199667
+        ],
+        "positive_blocks": 2,
+        "negative_blocks": 1,
+        "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+      },
+      "1": {
+        "available_blocks": 3,
+        "planned_blocks": 3,
+        "mean": 0.00018709533836820135,
+        "min": 0.00010895420600609383,
+        "max": 0.00023504851509447504,
+        "sample_sd": 6.82526790332977e-05,
+        "t_multiplier": 4.3027,
+        "working_model_95pct_interval": [
+          1.754442173616035e-05,
+          0.00035664625500024234
+        ],
+        "positive_blocks": 3,
+        "negative_blocks": 0,
+        "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+      },
+      "2": {
+        "available_blocks": 3,
+        "planned_blocks": 3,
+        "mean": -0.00013155085036268955,
+        "min": -0.0005626499689759205,
+        "max": 0.00037642830266680643,
+        "sample_sd": 0.0004742361277220003,
+        "t_multiplier": 4.3027,
+        "working_model_95pct_interval": [
+          -0.0013096316421227821,
+          0.001046529941397403
+        ],
+        "positive_blocks": 1,
+        "negative_blocks": 2,
+        "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+      },
+      "3": {
+        "available_blocks": 3,
+        "planned_blocks": 3,
+        "mean": 0.0002520215638775624,
+        "min": 9.811886400906629e-05,
+        "max": 0.00045803013625723987,
+        "sample_sd": 0.00018552708005959223,
+        "t_multiplier": 4.3027,
+        "working_model_95pct_interval": [
+          -0.00020885831556019096,
+          0.0007129014433153157
+        ],
+        "positive_blocks": 3,
+        "negative_blocks": 0,
+        "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+      },
+      "4": {
+        "available_blocks": 3,
+        "planned_blocks": 3,
+        "mean": 5.1514736406441064e-05,
+        "min": -0.00019881271482183668,
+        "max": 0.00034190794136806755,
+        "sample_sd": 0.0002725777971043793,
+        "t_multiplier": 4.3027,
+        "working_model_95pct_interval": [
+          -0.0006256134878211119,
+          0.000728642960633994
+        ],
+        "positive_blocks": 2,
+        "negative_blocks": 1,
+        "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+      },
+      "5": {
+        "available_blocks": 3,
+        "planned_blocks": 3,
+        "mean": -0.00039188820333173184,
+        "min": -0.0004491606661259032,
+        "max": -0.0002861375531657002,
+        "sample_sd": 9.16882480362378e-05,
+        "t_multiplier": 4.3027,
+        "working_model_95pct_interval": [
+          -0.0006196569403119444,
+          -0.00016411946635151928
+        ],
+        "positive_blocks": 0,
+        "negative_blocks": 3,
+        "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+      }
+    },
+    "50": {
+      "0": {
+        "available_blocks": 3,
+        "planned_blocks": 3,
+        "mean": 0.00018386294430923893,
+        "min": -0.00015059191748033817,
+        "max": 0.0003762634667063627,
+        "sample_sd": 0.0002907382421815176,
+        "t_multiplier": 4.3027,
+        "working_model_95pct_interval": [
+          -0.0005383788220222431,
+          0.0009061047106407209
+        ],
+        "positive_blocks": 2,
+        "negative_blocks": 1,
+        "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+      },
+      "1": {
+        "available_blocks": 3,
+        "planned_blocks": 3,
+        "mean": 0.00028207162687167355,
+        "min": 1.1044116279491283e-05,
+        "max": 0.0006330234563377259,
+        "sample_sd": 0.0003185992740503473,
+        "t_multiplier": 4.3027,
+        "working_model_95pct_interval": [
+          -0.0005093815397825709,
+          0.001073524793525918
+        ],
+        "positive_blocks": 3,
+        "negative_blocks": 0,
+        "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+      },
+      "2": {
+        "available_blocks": 3,
+        "planned_blocks": 3,
+        "mean": 2.0523500662160486e-05,
+        "min": -0.0004584788928267569,
+        "max": 0.0006893329483398808,
+        "sample_sd": 0.0005969824486912995,
+        "t_multiplier": 4.3027,
+        "working_model_95pct_interval": [
+          -0.0014624794059265997,
+          0.0015035264072509207
+        ],
+        "positive_blocks": 1,
+        "negative_blocks": 2,
+        "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+      },
+      "3": {
+        "available_blocks": 3,
+        "planned_blocks": 3,
+        "mean": -4.407832633268807e-05,
+        "min": -0.0003467024276030964,
+        "max": 0.00030079274164024274,
+        "sample_sd": 0.0003258083841693429,
+        "t_multiplier": 4.3027,
+        "working_model_95pct_interval": [
+          -0.0008534401120490606,
+          0.0007652834593836844
+        ],
+        "positive_blocks": 1,
+        "negative_blocks": 2,
+        "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+      },
+      "4": {
+        "available_blocks": 3,
+        "planned_blocks": 3,
+        "mean": 0.00013467061473428394,
+        "min": 2.9748594140565536e-05,
+        "max": 0.00032716448978922097,
+        "sample_sd": 0.00016693015310738685,
+        "t_multiplier": 4.3027,
+        "working_model_95pct_interval": [
+          -0.00028001142960094915,
+          0.000549352659069517
+        ],
+        "positive_blocks": 3,
+        "negative_blocks": 0,
+        "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+      },
+      "5": {
+        "available_blocks": 3,
+        "planned_blocks": 3,
+        "mean": -0.0005770503602446686,
+        "min": -0.0010714296746381538,
+        "max": -0.00016966788691310722,
+        "sample_sd": 0.00045713227649809765,
+        "t_multiplier": 4.3027,
+        "working_model_95pct_interval": [
+          -0.0017126423633736809,
+          0.0005585416428843438
+        ],
+        "positive_blocks": 0,
+        "negative_blocks": 3,
+        "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+      }
+    },
+    "100": {
+      "0": {
+        "available_blocks": 3,
+        "planned_blocks": 3,
+        "mean": 3.426500442479989e-05,
+        "min": -0.00017530548502645325,
+        "max": 0.00024363134332128388,
+        "sample_sd": 0.00020946848878674354,
+        "t_multiplier": 4.3027,
+        "working_model_95pct_interval": [
+          -0.0004860892847012601,
+          0.0005546192935508598
+        ],
+        "positive_blocks": 2,
+        "negative_blocks": 1,
+        "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+      },
+      "1": {
+        "available_blocks": 3,
+        "planned_blocks": 3,
+        "mean": 0.0004391150445578406,
+        "min": 2.423194845838268e-05,
+        "max": 0.001009121449104958,
+        "sample_sd": 0.0005104402636340279,
+        "t_multiplier": 4.3027,
+        "working_model_95pct_interval": [
+          -0.0008289027946075352,
+          0.0017071328837232164
+        ],
+        "positive_blocks": 3,
+        "negative_blocks": 0,
+        "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+      },
+      "2": {
+        "available_blocks": 3,
+        "planned_blocks": 3,
+        "mean": 9.803985309908352e-05,
+        "min": -0.0003190662882489898,
+        "max": 0.0006697600858456938,
+        "sample_sd": 0.000512224108638549,
+        "t_multiplier": 4.3027,
+        "working_model_95pct_interval": [
+          -0.001174409351397732,
+          0.0013704890575958989
+        ],
+        "positive_blocks": 1,
+        "negative_blocks": 2,
+        "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+      },
+      "3": {
+        "available_blocks": 3,
+        "planned_blocks": 3,
+        "mean": -0.0001394561048736491,
+        "min": -0.0005680888327656175,
+        "max": 0.0006399896110180875,
+        "sample_sd": 0.0006761402931313211,
+        "t_multiplier": 4.3027,
+        "working_model_95pct_interval": [
+          -0.0018191001583524012,
+          0.001540187948605103
+        ],
+        "positive_blocks": 1,
+        "negative_blocks": 2,
+        "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+      },
+      "4": {
+        "available_blocks": 3,
+        "planned_blocks": 3,
+        "mean": 0.00012657366193517315,
+        "min": 1.8656401903811262e-05,
+        "max": 0.00028389648823510627,
+        "sample_sd": 0.0001393512049929847,
+        "t_multiplier": 4.3027,
+        "working_model_95pct_interval": [
+          -0.00021959772466802958,
+          0.0004727450485383759
+        ],
+        "positive_blocks": 3,
+        "negative_blocks": 0,
+        "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+      },
+      "5": {
+        "available_blocks": 3,
+        "planned_blocks": 3,
+        "mean": -0.0005585374591432477,
+        "min": -0.001177332562199521,
+        "max": 7.563555334803573e-05,
+        "sample_sd": 0.0006266255937309314,
+        "t_multiplier": 4.3027,
+        "working_model_95pct_interval": [
+          -0.0021151788292254944,
+          0.0009981039109389987
+        ],
+        "positive_blocks": 1,
+        "negative_blocks": 2,
+        "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+      }
+    },
+    "500": {
+      "0": {
+        "available_blocks": 3,
+        "planned_blocks": 3,
+        "mean": -0.00016593171490357373,
+        "min": -0.0004488950315651431,
+        "max": -2.2400530083041916e-05,
+        "sample_sd": 0.00024506199111840835,
+        "t_multiplier": 4.3027,
+        "working_model_95pct_interval": [
+          -0.0007747061368647753,
+          0.00044284270705762776
+        ],
+        "positive_blocks": 0,
+        "negative_blocks": 3,
+        "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+      },
+      "1": {
+        "available_blocks": 3,
+        "planned_blocks": 3,
+        "mean": 0.0008232824097446908,
+        "min": 0.0005108112341553146,
+        "max": 0.0014116465262390726,
+        "sample_sd": 0.0005098663962223997,
+        "t_multiplier": 4.3027,
+        "working_model_95pct_interval": [
+          -0.0004433098480802171,
+          0.002089874667569599
+        ],
+        "positive_blocks": 3,
+        "negative_blocks": 0,
+        "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+      },
+      "2": {
+        "available_blocks": 3,
+        "planned_blocks": 3,
+        "mean": 0.00029613299173608497,
+        "min": -0.0005048068141260394,
+        "max": 0.0009823743900666815,
+        "sample_sd": 0.0007501958257973241,
+        "t_multiplier": 4.3027,
+        "working_model_95pct_interval": [
+          -0.0015674772242880118,
+          0.002159743207760182
+        ],
+        "positive_blocks": 2,
+        "negative_blocks": 1,
+        "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+      },
+      "3": {
+        "available_blocks": 3,
+        "planned_blocks": 3,
+        "mean": -0.0005621880483029228,
+        "min": -0.001189913870118592,
+        "max": 0.0006816421205612068,
+        "sample_sd": 0.0010772041967061622,
+        "t_multiplier": 4.3027,
+        "working_model_95pct_interval": [
+          -0.0032381410151060006,
+          0.002113764918500155
+        ],
+        "positive_blocks": 1,
+        "negative_blocks": 2,
+        "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+      },
+      "4": {
+        "available_blocks": 3,
+        "planned_blocks": 3,
+        "mean": 8.936481878492981e-05,
+        "min": -0.0002388189963545437,
+        "max": 0.0005922819100091182,
+        "sample_sd": 0.000442245370205385,
+        "t_multiplier": 4.3027,
+        "working_model_95pct_interval": [
+          -0.0010092456527251794,
+          0.001187975290295039
+        ],
+        "positive_blocks": 1,
+        "negative_blocks": 2,
+        "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+      },
+      "5": {
+        "available_blocks": 3,
+        "planned_blocks": 3,
+        "mean": -0.00048066045705920894,
+        "min": -0.001523691951547886,
+        "max": 0.0006065056483755252,
+        "sample_sd": 0.001065784383256006,
+        "t_multiplier": 4.3027,
+        "working_model_95pct_interval": [
+          -0.0031282447229458543,
+          0.0021669238088274363
+        ],
+        "positive_blocks": 1,
+        "negative_blocks": 2,
+        "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+      }
+    }
+  },
+  "ranking_by_block_and_cap": {
+    "772803": {
+      "10": [
+        3,
+        2,
+        1,
+        4,
+        0,
+        5
+      ],
+      "50": [
+        2,
+        3,
+        1,
+        4,
+        0,
+        5
+      ],
+      "100": [
+        2,
+        3,
+        1,
+        4,
+        0,
+        5
+      ],
+      "500": [
+        2,
+        3,
+        1,
+        4,
+        0,
+        5
+      ]
+    },
+    "772903": {
+      "10": [
+        1,
+        0,
+        3,
+        4,
+        2,
+        5
+      ],
+      "50": [
+        1,
+        0,
+        4,
+        2,
+        3,
+        5
+      ],
+      "100": [
+        1,
+        4,
+        0,
+        2,
+        3,
+        5
+      ],
+      "500": [
+        1,
+        2,
+        0,
+        4,
+        5,
+        3
+      ]
+    },
+    "773003": {
+      "10": [
+        0,
+        4,
+        3,
+        1,
+        5,
+        2
+      ],
+      "50": [
+        0,
+        4,
+        1,
+        3,
+        5,
+        2
+      ],
+      "100": [
+        1,
+        4,
+        0,
+        5,
+        2,
+        3
+      ],
+      "500": [
+        5,
+        4,
+        1,
+        0,
+        2,
+        3
+      ]
+    }
+  },
+  "reference_rankings_by_block": {
+    "772803": {
+      "mean_action_b09": [
+        2,
+        1,
+        4,
+        3,
+        0,
+        5
+      ],
+      "sampled_b10": [
+        2,
+        1,
+        3,
+        4,
+        0,
+        5
+      ],
+      "best_mean_action_label": 2
+    },
+    "772903": {
+      "mean_action_b09": [
+        1,
+        2,
+        4,
+        5,
+        0,
+        3
+      ],
+      "sampled_b10": [
+        1,
+        4,
+        2,
+        5,
+        3,
+        0
+      ],
+      "best_mean_action_label": 1
+    },
+    "773003": {
+      "mean_action_b09": [
+        0,
+        5,
+        4,
+        1,
+        3,
+        2
+      ],
+      "sampled_b10": [
+        5,
+        1,
+        4,
+        0,
+        2,
+        3
+      ],
+      "best_mean_action_label": 0
+    }
+  },
+  "non_additivity_by_block": {
+    "772803": {
+      "homogeneity_coefficient": -4.591510859196582e-05,
+      "homogeneity_clustered_se": 8.036395845358438e-05,
+      "homogeneity_permutation_p_value": 0.5984015984015985,
+      "homogeneity_permutation_percentile_value": 0.0001709041204466431,
+      "homogeneity_exceeds_permutation_percentile": false,
+      "all_equal_prediction_episode_J": {
+        "0": 0.3232732926063304,
+        "1": 0.3591395346209042,
+        "2": 0.3747989917850761,
+        "3": 0.363972630082879,
+        "4": 0.33083602987391203,
+        "5": 0.2845806034869517
+      },
+      "all_equal_prediction_J_max_minus_min": 0.09021838829812444,
+      "b10_sampled_J_max_minus_min": 0.07977762826122659,
+      "prediction_fraction_of_b10_sampled_spread": 1.1308732819520564,
+      "prediction_below_half_of_b10_sampled_spread": false,
+      "definition": "the strongest alternative the notebook names is that the joint map is not additive - a label pays only when all six agents hold it. `sum_c n_c^2` is the homogeneity of the configuration (6 when all six agents hold different labels, 36 when they all hold the same), centred to its own mean so it does not absorb the level; a positive coefficient is the coordination term. Beside it, the additive model's predicted all-equal score for each label, `6 * beta_c + mean_p delta_p` in the drop parametrisation, which is invariant to the dropped label, converted to an episode J by the reporting factor"
+    },
+    "772903": {
+      "homogeneity_coefficient": -0.00020766071696893314,
+      "homogeneity_clustered_se": 9.086957671176707e-05,
+      "homogeneity_permutation_p_value": 0.02197802197802198,
+      "homogeneity_permutation_percentile_value": 0.0001800573416020521,
+      "homogeneity_exceeds_permutation_percentile": true,
+      "all_equal_prediction_episode_J": {
+        "0": 0.3478368009591229,
+        "1": 0.39946249498671904,
+        "2": 0.3634331504157465,
+        "3": 0.3058063207178431,
+        "4": 0.34556995557932013,
+        "5": 0.32975059759392283
+      },
+      "all_equal_prediction_J_max_minus_min": 0.09365617426887593,
+      "b10_sampled_J_max_minus_min": 0.13252770621642948,
+      "prediction_fraction_of_b10_sampled_spread": 0.7066912794516123,
+      "prediction_below_half_of_b10_sampled_spread": false,
+      "definition": "the strongest alternative the notebook names is that the joint map is not additive - a label pays only when all six agents hold it. `sum_c n_c^2` is the homogeneity of the configuration (6 when all six agents hold different labels, 36 when they all hold the same), centred to its own mean so it does not absorb the level; a positive coefficient is the coordination term. Beside it, the additive model's predicted all-equal score for each label, `6 * beta_c + mean_p delta_p` in the drop parametrisation, which is invariant to the dropped label, converted to an episode J by the reporting factor"
+    },
+    "773003": {
+      "homogeneity_coefficient": -0.0003280542529497483,
+      "homogeneity_clustered_se": 8.406076731605402e-05,
+      "homogeneity_permutation_p_value": 0.000999000999000999,
+      "homogeneity_permutation_percentile_value": 0.00016956120526003684,
+      "homogeneity_exceeds_permutation_percentile": true,
+      "all_equal_prediction_episode_J": {
+        "0": 0.3619530060700323,
+        "1": 0.38129619548987487,
+        "2": 0.34473394575174615,
+        "3": 0.3204884648276338,
+        "4": 0.3842291398206118,
+        "5": 0.3847411944018025
+      },
+      "all_equal_prediction_J_max_minus_min": 0.0642527295741687,
+      "b10_sampled_J_max_minus_min": 0.07268722684329487,
+      "prediction_fraction_of_b10_sampled_spread": 0.883961768313022,
+      "prediction_below_half_of_b10_sampled_spread": false,
+      "definition": "the strongest alternative the notebook names is that the joint map is not additive - a label pays only when all six agents hold it. `sum_c n_c^2` is the homogeneity of the configuration (6 when all six agents hold different labels, 36 when they all hold the same), centred to its own mean so it does not absorb the level; a positive coefficient is the coordination term. Beside it, the additive model's predicted all-equal score for each label, `6 * beta_c + mean_p delta_p` in the drop parametrisation, which is invariant to the dropped label, converted to an episode J by the reporting factor"
+    }
+  },
+  "predictions": {
+    "P1_cap_10_fails_the_criterion": {
+      "statement": "cap 10 fails the criterion on 3/3: B11's reading again, at the frozen cadence",
+      "value_definition": "`shows_the_ranking` at cap 10 on the undiscounted response; the prediction holds where it is False",
+      "blocks_considered": [
+        772803,
+        772903,
+        773003
+      ],
+      "blocks_read": 3,
+      "blocks_holding": 0,
+      "per_block": {
+        "772803": {
+          "read": true,
+          "value": true,
+          "holds": false
+        },
+        "772903": {
+          "read": true,
+          "value": true,
+          "holds": false
+        },
+        "773003": {
+          "read": true,
+          "value": true,
+          "holds": false
+        }
+      }
+    },
+    "P2_cap_500_passes_the_criterion": {
+      "statement": "cap 500 passes the criterion on 3/3",
+      "value_definition": "`shows_the_ranking` at cap 500 on the undiscounted response",
+      "blocks_considered": [
+        772803,
+        772903,
+        773003
+      ],
+      "blocks_read": 3,
+      "blocks_holding": 2,
+      "per_block": {
+        "772803": {
+          "read": true,
+          "value": true,
+          "holds": true
+        },
+        "772903": {
+          "read": true,
+          "value": true,
+          "holds": true
+        },
+        "773003": {
+          "read": true,
+          "value": false,
+          "holds": false
+        }
+      }
+    },
+    "P3_the_smallest_passing_cap_is_50_or_100": {
+      "statement": "the smallest passing cap is 50 or 100 on at least 2/3 of the blocks",
+      "value_definition": "the smallest cap whose undiscounted reading passes both clauses of the criterion, or None where none does",
+      "blocks_considered": [
+        772803,
+        772903,
+        773003
+      ],
+      "blocks_read": 3,
+      "blocks_holding": 0,
+      "per_block": {
+        "772803": {
+          "read": true,
+          "value": 10,
+          "holds": false
+        },
+        "772903": {
+          "read": true,
+          "value": 10,
+          "holds": false
+        },
+        "773003": {
+          "read": true,
+          "value": 10,
+          "holds": false
+        }
+      }
+    },
+    "ALTERNATIVE_the_map_is_joint_not_additive": {
+      "statement": "the strongest alternative, on at least 2/3 of the blocks: cap 500 fails the criterion *and* the additive model's all-equal predictions span less than 0.5 of B10's measured sampled constant-label spread in J on that block",
+      "value_definition": "cap 500's own criterion outcome beside the additive model's predicted all-equal episode-J spread and B10's measured sampled spread on the same block",
+      "blocks_considered": [
+        772803,
+        772903,
+        773003
+      ],
+      "blocks_read": 3,
+      "blocks_holding": 0,
+      "per_block": {
+        "772803": {
+          "read": true,
+          "value": {
+            "cap_500_shows_the_ranking": true,
+            "prediction_below_half_of_b10_sampled_spread": false,
+            "all_equal_prediction_J_max_minus_min": 0.09021838829812444,
+            "b10_sampled_J_max_minus_min": 0.07977762826122659
+          },
+          "holds": false
+        },
+        "772903": {
+          "read": true,
+          "value": {
+            "cap_500_shows_the_ranking": true,
+            "prediction_below_half_of_b10_sampled_spread": false,
+            "all_equal_prediction_J_max_minus_min": 0.09365617426887593,
+            "b10_sampled_J_max_minus_min": 0.13252770621642948
+          },
+          "holds": false
+        },
+        "773003": {
+          "read": true,
+          "value": {
+            "cap_500_shows_the_ranking": false,
+            "prediction_below_half_of_b10_sampled_spread": false,
+            "all_equal_prediction_J_max_minus_min": 0.0642527295741687,
+            "b10_sampled_J_max_minus_min": 0.07268722684329487
+          },
+          "holds": false
+        }
+      }
+    },
+    "PLACEBO_no_cap_has_a_passing_placebo": {
+      "statement": "not a prediction but a validity check: no cap's team-label placebo passes the same spread test. A block where one does has that cap's reading invalidated",
+      "value_definition": "the caps whose placebo spread exceeds the 95th percentile of its own permutation distribution on the undiscounted response",
+      "blocks_considered": [
+        772803,
+        772903,
+        773003
+      ],
+      "blocks_read": 3,
+      "blocks_holding": 3,
+      "per_block": {
+        "772803": {
+          "read": true,
+          "value": [],
+          "holds": true
+        },
+        "772903": {
+          "read": true,
+          "value": [],
+          "holds": true
+        },
+        "773003": {
+          "read": true,
+          "value": [],
+          "holds": true
+        }
+      }
+    },
+    "counting_note": "the counts are the arithmetic of statements declared before the run, on the blocks that were read. The criterion is the notebook's own and is read on the undiscounted response; the discounted response is reported beside it and is counted nowhere. A count of three blocks is not an interval and not a weight of evidence, and the permutation percentile is the notebook's declared reading rule, not a test of a model this design fits"
+  },
+  "input_probes": [
+    "runs/flexible_skill_duration/b12_visibility_772803_n01/summary.json",
+    "runs/flexible_skill_duration/b12_visibility_772903_n01/summary.json",
+    "runs/flexible_skill_duration/b12_visibility_773003_n01/summary.json"
+  ],
+  "input_b09_probes": [
+    "runs/flexible_skill_duration/b09_map_772803_n02/summary.json",
+    "runs/flexible_skill_duration/b09_map_772903_n02/summary.json",
+    "runs/flexible_skill_duration/b09_map_773003_n02/summary.json"
+  ],
+  "input_b10_probes": [
+    "runs/flexible_skill_duration/b10_sampled_772803_n02/summary.json",
+    "runs/flexible_skill_duration/b10_sampled_772903_n02/summary.json",
+    "runs/flexible_skill_duration/b10_sampled_773003_n02/summary.json"
+  ]
+}

@@ -3194,3 +3194,104 @@ Checks: 58 passed, mine; the Implementer's run across B08–B12 gave 187 passed.
 running: cap 500 has 256 commitments per block, so it can fail for power; the per-cap
 episode return is published so a change of behaviour quality with the cap is visible; a
 mid-probe failure loses that block's per-cap measures. Projected 22–25 min per block.
+
+## 2026-09-20 20:19 PDT — B12 read: the label ranking is in the reward at every commitment length, per-agent and additive; it grows with commitment, and my 17:31 "averaged away" was too strong
+
+**Technical record.** Node probes at launch sha `aad162d0d`, tags `b12_visibility_<block>_n01`:
+complete 3/3 on the first attempt, faithful load 3/3, zero optimizer steps, hashes unchanged,
+expected geometry at every cap (800 / 160 / 80 / 16 team rows per rollout), tape and buffer
+segment rewards agree, about 1,830 s per block. 16 rollouts per cap, 256 lane-episodes. Reduce
+`runs/flexible_skill_duration/b12_reduce/summary.json`, sha256 `3c3b1f8e87d0f6f1…`.
+
+**Position-adjusted regression of a commitment's undiscounted mean reward on the six label
+counts.** "Implied spread" is the coefficient spread × 6 agents × 6 (J = 6 × mean reward per
+step): what the additive model predicts for all-equal teams, best minus worst label.
+
+| block | cap | commitments | implied spread (J) | R² | permutation p | placebo p | best three labels | episode J at this cap |
+|---|---:|---:|---:|---:|---:|---:|---|---:|
+| 772803 | 10 | 12,800 | .032 | .017 | .001 | .09 | 3, 2, 1 | .351 |
+| | 50 | 2,560 | .063 | .064 | .001 | .15 | 2, 3, 1 | .344 |
+| | 100 | 1,280 | .067 | .094 | .001 | .93 | 2, 3, 1 | .344 |
+| | 500 | 256 | .090 | .244 | .001 | .47 | 2, 3, 1 | .342 |
+| 772903 | 10 | 12,800 | .019 | .015 | .001 | .08 | 1, 0, 3 | .342 |
+| | 50 | 2,560 | .040 | .054 | .001 | .92 | 1, 0, 4 | .345 |
+| | 100 | 1,280 | .057 | .094 | .001 | .95 | 1, 4, 0 | .345 |
+| | 500 | 256 | .094 | .212 | .001 | .31 | 1, 2, 0 | .349 |
+| 773003 | 10 | 12,800 | .033 | .016 | .001 | .38 | 0, 4, 3 | .354 |
+| | 50 | 2,560 | .030 | .019 | .001 | .40 | 0, 4, 1 | .362 |
+| | 100 | 1,280 | .031 | .032 | .001 | .63 | 1, 4, 0 | .362 |
+| | 500 | 256 | .064 | .161 | .001 | .66 | 5, 4, 1 | .364 |
+
+(p = .001 is the smallest a 1,000-draw permutation can give. The discounted response gives the
+same p and nearly the same rankings at every cap.) B09's best labels are 2, 1, 0; B10's under
+sampling 2, 1, 5.
+
+**Additive prediction against B10 (cap 500, all-equal teams, J):** 772803 predicted
+.323 .359 .375 .364 .331 .285 against measured .299 .345 .360 .335 .325 .281; 772903
+.348 .399 .363 .306 .346 .330 against .236 .368 .315 .240 .334 .302; 773003
+.362 .381 .345 .320 .384 .385 against .356 .368 .320 .298 .359 .371. Homogeneity term
+(Σn²): −.00005 (p .60), −.0002 (p .02), −.0003 (p .001): slightly *negative*, i.e. mild
+diminishing returns to everyone holding the same label, not a coordination requirement.
+
+**Secondary (arithmetic off cap 10): η² of the update's own advantage by label** rises from
+.0001–.0003 at cap 10 to .001–.003, .002–.009 and .019–.033 at caps 50, 100, 500. Rows per
+rollout fall 50-fold over the same range; η² × rows is 8 → 50, 16 → 40, 25 → 29.
+
+**Declared predictions, by the letter.** P1 (cap 10 fails on 3/3): **failed**, it passes on
+3/3. P2 (cap 500 passes on 3/3): 2/3 — the spread clause passes on 3/3, the rank clause fails
+on 773003, where B09's best label 0 is fourth and B10's best label 5 is first (the two differ
+by .002 in B09). P3 (smallest passing cap 50 or 100): failed, it is 10 everywhere. Alternative
+(joint, non-additive map): **rejected** — additive per-agent coefficients from mixed teams
+reproduce the all-equal map's ranking and most of its spread on 3/3. No placebo passes.
+
+**Reading, and what I take back.**
+- *Taken back:* at 17:31 I wrote that a label's consequence "is averaged away before it can
+  appear in the return that credits it". It is not. With 12,800 ten-step commitments, position
+  adjustment and per-agent counts the ranking is there at p = .001 on 3/3, with the right best
+  label on 3/3. B11 missed it for three reasons this probe removes: a quarter of the data,
+  no adjustment for the reward's drift within an episode, and a statistic (the raw advantage
+  by own label) in which the other five agents' labels and the state are unmodelled noise.
+- *Strengthened:* the labels are per-agent, approximately additive, long-horizon policies.
+  A label held for ten steps delivers a fifth to a half of what it delivers held for the
+  episode (.02–.03 against .06–.09 J implied spread), and the share of commitment reward it
+  explains rises from 1.5 % to 16–24 %. Holding labels for 500 steps costs the fixed low level
+  nothing (episode J within ±.01 of cap 10 on 3/3).
+- *The defect, stated more carefully:* the ranking reaches the coordinator's credit at a
+  per-decision signal-to-noise of about 10⁻⁴ (η²), because its advantage is a shared team
+  return against a label-free baseline. Against that stands an entropy bonus of .07 on
+  standardised advantages. A maximum-entropy learner's stationary law is
+  q(c) ∝ exp(A(c) / λ_h); with standardised label advantages of order .01 that is a law within
+  ±15 % of uniform — which is the law observed (shares .14–.19, entropy 1.78 of 1.79). The flat
+  law is what this signal and this temperature produce, and its argmax is the argmax of
+  noise. E2a and E2b were a false dichotomy: the signal is present *and* unusable as credited.
+  (Simple-model consistency, order of magnitude only; not a fit.)
+- *For the direction's question:* longer commitment raises the per-decision η² by two orders
+  of magnitude and the information per rollout (η² × rows) by one to six times, at no
+  behavioural cost at fixed weights. That is the first positive evidence in this direction
+  that skill duration matters — for the high level's learning signal, not for behaviour.
+- *Untouched:* whether the best label is the same through training (one checkpoint); whether a
+  low level trained under long commitments keeps six distinct policies; whether any of this
+  moves J in a fit.
+- *For Codex:* team-conditioned reassignment finds no support here (additive, mildly
+  sub-additive, no coordination term); a termination rule would act on a selector whose
+  credit is the defect. The pause on frozen-foundation termination training remains my
+  recommendation.
+
+**Next research judgment: three fit-level ideas now have a measured basis; I recommend one.**
+- *I1, additive label credit (recommended).* Give the coordinator a label value it can learn:
+  a per-agent, label-conditioned baseline or an explicit additive label-value estimate
+  (the count regression, online) used as the agent-label advantage. Measured basis: finds the
+  right best label at cap 10 on 3/3 from 16 rollouts. Prediction: the label law leaves
+  uniform within 15 rollouts (entropy below 1.6), the most-used label at the end is among the
+  fixed-weight top two on 3/3, late-window J above D1280 by > .03 on at least 2/3.
+  Strongest alternative: the ranking drifts during training faster than the estimate tracks
+  it, so the law sharpens onto stale labels and J does not move.
+- *I2, longer high-level commitment (caps 50–100).* Basis: η² × rows up to sixfold, no
+  behavioural cost at fixed weights. Risk: fewer high-level updates per rollout, and the low
+  level is retrained under it, which B12 cannot speak to.
+- *I3, lower coordinator entropy coefficient.* Cheapest, but it sharpens a law whose argmax is
+  currently noise; on its own I expect it to lock in arbitrary labels. Useful only with I1.
+- *Not recommended now:* adaptive termination — nothing measured here says *when* matters
+  before *which* is learnable.
+Before any fit: a prospective entry with arms, blocks, horizon, seeds and planned fits, and an
+independent review of the learner change (I1 touches the shared coordinator update).
