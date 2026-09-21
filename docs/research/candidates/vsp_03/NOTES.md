@@ -671,3 +671,24 @@ B08/B09 implementation, data, notebook, control or other tasks. Tests use synthe
 fixtures/mock panels, covering guard boundaries, input corruption rejection and no-fit
 accounting/failure retention. Independent Reviewer checks changed evaluator/entry paths;
 DM accepts the diff and launches. Source/launch binding precedes scientific imports.
+
+Pre-execution Critic response: no material dissent on B09 or this bounded guard question.
+The B09 O−O_self waiting reduction contributes+.011933838 J; success minus added attempt
+costs contributes only+.000668945 J. Adopt its stronger conditional intermediate prediction:
+guard should leave **zero non-submissions and zero final-clock blocking** under these
+saved fitted laws, since at t22 it preserves peer t32 and the solo rule submits even an
+absent target at the last clock. Failure of that prediction must be inspected, not hidden
+behind mean J. Also adopt the attribution limit: t22 forcing can change which job goes
+first and both survival outcomes, not merely append one missing attempt. "Majority" in
+the prewritten rule means recovering most of this observed development increment, not
+identifying a pure causal mechanism. No new fit follows automatically from either outcome.
+
+B10 engineering acceptance before execution: Implementer delivered the scoped study,
+admitted entry and synthetic tests; DM read the diff. Fixed one bookkeeping defect before
+launch: root digests must not include still-changing supervisor logs/status; only stable
+config/input digests are bound there, with completed block files bound separately.
+Independent Reviewer found no remaining material issue; six focused tests passed1.12 s
+after that fix. Reviewer checked all18 required input artifacts without scientific work;
+DM additionally byte-compared those plus the three summaries to `a5a87aa` (21 identical
+files). B08/B09 source/data are unchanged. Accept the reviewed B10 files and execute the
+prospective zero-fit batch once at the published SHA. No result exists at this acceptance.
