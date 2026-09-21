@@ -3894,7 +3894,7 @@ not a finding against the team-decision question and not an entry condition on i
 Not adopted as action: Pro's second zero-fit check (native-continuation against whole-episode
 ranking under a common prefix) is kept as a candidate, behind the gradient decomposition.
 
-## 2026-09-20 23:55 PDT — B13 wave 1 exited clean; wave 2 (three `UNIFORM` fits) admitted at the same sha
+## 2026-09-20 23:54 PDT — B13 wave 1 exited clean; wave 2 (three `UNIFORM` fits) admitted at the same sha
 
 Wave 1: the three `BANDIT` fits report `complete`, exit code 0, final weights and sidecars
 present on the node; no score or summary content read. Wave 2 admitted on `wsl_4070` about
