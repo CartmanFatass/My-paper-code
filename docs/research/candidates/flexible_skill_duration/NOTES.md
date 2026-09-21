@@ -3175,3 +3175,22 @@ parameter hashes unchanged, expected rows per rollout 16 × ⌈500 / cap⌉.
   randomisation (shares .14–.19, weak state dependence); fixed low-level weights trained under
   ten-step commitments; end-of-training checkpoint; three blocks.
 Predictions and what each outcome changes stand as written at 17:31.
+
+## 2026-09-20 19:45 PDT — B12 entry code written and accepted; no score exists
+
+`scripts/run_fsd_commitment_visibility_b12.py` and tests under
+`tests/.../commitment_visibility_b12/` (Implementer, accepted by me); new files only. Code
+facts found while writing it: the learner's cadence reads only the instance attributes
+`d2_k_max` / `d2_k_Z` (`agent.py:2596, 2613`), set once at construction; the D2 tables are
+allocated on the rollout length, not the cap, and rows are written at a segment's start, so a
+longer cap writes fewer rows and nothing blocks cap 500; no GRU chunking on the D2 collection
+path; the discriminator age feature that also reads the caps is off on this construction (the
+probe refuses otherwise). J = 6 × U / 500, a pure factor (`b01.py:254`). B11's collector runs
+unchanged: the per-step team reward is taped by an instance-level wrapper on the collection
+environments' `step`, and the tape's discounted sums must agree with the buffer's own segment
+rewards (1e-5) on every rollout. Every permutation draw uses the same full-design least
+squares as the observed estimate; coefficients are invariant to the dropped label (tested).
+Checks: 58 passed, mine; the Implementer's run across B08–B12 gave 187 passed. Known before
+running: cap 500 has 256 commitments per block, so it can fail for power; the per-cap
+episode return is published so a change of behaviour quality with the cap is visible; a
+mid-probe failure loses that block's per-cap measures. Projected 22–25 min per block.
