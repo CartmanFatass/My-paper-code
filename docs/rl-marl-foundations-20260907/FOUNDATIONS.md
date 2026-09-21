@@ -30,6 +30,8 @@ a_t\sim\pi_\theta(\cdot\mid o_t,z_t).
 
 用户移动、故障和恢复也可以是固定转移规律下的状态变化。只有相关转移规律、任务分布或其他机制发生未被当前状态解释的漂移时，才需要另外讨论环境非平稳性。这与训练时队友持续更新策略造成的学习问题不同。
 
+已知奖励公式不等于已知联合物理后果、队友响应或未来状态。如果奖励为已知的 g(Y)，需要预测的可能是合法历史与行动条件下的 E[g(Y)]；当 g 非线性时，g(E[Y]) 一般不能替代它。普通后果模型仍是有意义的参照，是否足够要由反馈、支持范围与具体决策判断，不能由“奖励已知”直接排除学习问题。[B 的原生问题与项目级解释](../research/RESEARCH.md#portfolio-review-2026-09-21-project-research-management)
+
 可识别性取决于具体未知量及可用反馈。C05 中当前周期独立重抽且未被观测的风险量，不能由过去周期识别；这不排除从合法本地历史估计共享转移参数。C 的后续源码核查发现，符合条件的相邻自身距离记录能给出一次 0/1 前进观测，形成共享前进概率的估计路径。该路径尚未拟合，也未验证有限数据能否保留决策收益。模型已知、参数可识别与有限数据足以支持有效决策，是三个不同判断。[C 的模型知识与反馈边界](https://github.com/CartmanFatass/My-paper-code/blob/a76339b5f13244daed94cabb06809fa8923f7f27/docs/research/candidates/skill_information_refresh/NOTES.md#L3181-L3204)
 
 ## 3. MARL 增加的是联合行为和信息结构
@@ -40,11 +42,19 @@ CTDE 允许训练时的 critic 等组件利用额外信息，而执行策略使�
 
 团队 return 把联合后果压成学习信号，因此既有跨时间的信用问题，也有 agent 之间的信用问题。共享参数、中心 critic、身份编码、通信和角色机制各自改变表达能力或学习过程；它们不是“已经学会合作”的证明。一个机制的价值最终仍要回到它帮助形成了什么联合行为，以及该行为在什么任务中改善了 return。
 
+比较的信息条件需要沿实际 actor 输入核对。普通 own-observation MAPPO 可以回答一个有用的实际基线问题；如果另一方法在执行时还能访问团队摘要，这个比较就同时改变了信息和方法，不能独自归因为分层的收益。FSD 的当前 B01 已明确将 D1280−CF 定义为完整方法包的差异，而非 hierarchy headroom；后来的 CF_S 缩放修复也不能被忽略。应分别说明实用比较、匹配信息的比较和组件归因各回答什么。[FSD 的固定 B01 问题](https://github.com/CartmanFatass/My-paper-code/blob/267d1bcaebafa5f8f9049098d645e2f548b7c678/docs/research/candidates/flexible_skill_duration/FSD_MATCHED_INFORMATION_BASELINE_B01_PROSPECTIVE_CARD_20260916.md)；[B05 修复及后续解释](https://github.com/CartmanFatass/My-paper-code/blob/267d1bcaebafa5f8f9049098d645e2f548b7c678/docs/research/candidates/flexible_skill_duration/NOTES.md)
+
+全局 coach 是否被允许取决于任务的信息条件，不能仅凭组件名称纳入或排除比较。COPA 的 coach 为部分观测的成员提供策略，论文也包含回合内成员加入；它是相关的队伍变化参照，但原来的离散动作、AQMIX 结构与当前 UAV 连续动作接口仍需匹配。其通信阈值是在计算新策略后决定是否发送，因此减少策略广播不能直接记作减少 coach 推理。[COPA 原文，§§3.2–3.4、4.1](https://proceedings.mlr.press/v139/liu21m/liu21m.pdf)
+
+把两个学习方法放在同一份已采集历史上，可以检验其学习映射对数据的敏感性，却不会产生它们在原环境中各自行动后的反事实轨迹。B08 的六个续学比较复用三个块；R 在两套相同历史上都落后于 F，削弱了“仅修复采集就能恢复当前 R 优势”的解释。早期有利结果、奖励噪声与估计误差相互抵消的替代解释仍然保留。六个相关比较不是六个独立复现，也没有证明所有条件响应复用无效。[B08 同历史比较与反例](https://github.com/CartmanFatass/My-paper-code/blob/fe0e5719836f16cc5a44f02d80f53c95592250bd/docs/research/candidates/skill_teammate_drift_learning/NOTES.md)
+
 ## 4. 学习理论、表示能力和有限训练结果处在不同层面
 
 Bellman 关系、策略梯度恒等式以及带条件的收敛定理，解释某些更新为什么有依据。它们不能直接保证任意神经网络、近似 critic 和有限训练预算下得到好策略。“网络能够表示某行为”和“当前数据及优化能学到该行为”也是两回事。
 
 合适的结构可以让有关行为更容易被表示、探索或学习；也可能限制表达、增加优化困难或放大估计误差。因此，对于可复用合作结构，应提出可检验的理由，而不是把“结构化”“分层”“可解释”本身当成有效性结论。[策略梯度原始论文](https://proceedings.neurips.cc/paper_files/paper/1999/hash/464d828b85b0bed98e80ade0a5c43b0f-Abstract.html)；[实现因素的经验研究](https://arxiv.org/abs/2005.12729)
+
+由此也不能反向推出“相同信息的重新表示必然获得严格为零的收益”。信息是否相同、固定程序的动作是否相同，以及有限数据和优化下是否学到相同行为，需要分别判断。具体程序在指定输入上的动作与回报完全相同，可以构成局部相等证据；它不能自动推广为表示类等价。透明规则赢过当前 learner 同样是有效结果，但不是“只有不存在简短规则时学习才有价值”的定理。[项目审阅中的适用范围核对](../research/RESEARCH.md#portfolio-review-2026-09-21-project-research-management)
 
 reward 的数学目标和训练时的数值处理也应分开。固定任务条件下，正比例缩放给出 \(J'=cJ\)，\(c>0\)，保持固定策略排序；但有限优化得到的策略可能改变。裁剪、一般 shaping 或策略相关的累计常数则可能改变目标。具体边界见 [RL 专题](topic-notes/01_RL.md)。
 
@@ -56,6 +66,12 @@ Option 由启动条件、内部行为和终止机制定义，这些部分可以�
 
 时间抽象可以组织较长时域的探索和行为，也可能使响应迟缓或承诺于不合适的技能。更少切换本身不是收益；它必须通过任务后果体现价值。
 
+重新计算策略、切换目标、保持速度、保持目标并继续反馈导航，是不同操作。只有在信息与资源相同、逐步策略类能够模拟保持行为时，才可由策略类包含关系说其最优回报不低于固定时钟；这不保证某个逐步 greedy 或有限训练策略更好。service-restoration 的当前四个 preset 均为 motion_weight=0；底层运动项衡量实际速度的平方，而非重新决策次数。脚本时机曲线可以筛查这套控制器的响应机制，不能凭平坦曲线否定全部技能时长，也不能把运动成本当成重算费用。[项目级源码核对及探针范围](../research/RESEARCH.md#portfolio-review-2026-09-21-project-research-management)
+
+汇总队友的结果证据可以改善共同隐状态的估计，但要说明证据能否合法取得、条件相关性及汇总成本。此次第三方 CUSUM 原型在已知奖励似然、共同隐状态及无通信损失的设定内保留强信号收益；弱信号下的收益接近零，部分汇总比较为负。刷新在原型中还会直接揭示真实状态并牺牲一步奖励，因此它提供的是一个有条件的检测例子，没有验证未知模型或原生 UAV 的终止算法。被称为 oracle 的指定策略也需要证明最优性，才能把它与基线的差距称作上界。[追加原型的源码、数据与限制](../research/RESEARCH.md#portfolio-review-2026-09-21-project-research-management)
+
+静态用户和固定机群数也不等于决策状态不变：UAV 的位置、当前承诺和可用行动机会仍可随轨迹变化。“事件频率 × 等待时长 × 响应收益”只能解释预设的事件响应机制，不能因没有外生事件就把所有自适应终止价值设为零。Relay corridor 的 exact references 已展示其设定内的机会；E3 实际使用固定 c=.25、无触发器梯度的 heuristic，且事件召回率已有报告。该实现失利限制的是它的校准和完整学习包，不构成 trained KEEP/END 的一般否定，也不建立 UAV 收益。[E3 已有结果及边界](https://github.com/CartmanFatass/My-paper-code/blob/267d1bcaebafa5f8f9049098d645e2f548b7c678/docs/research/candidates/flexible_skill_duration/FSD_E3_HETEROGENEOUS_HAZARD_RESULT_EVIDENCE_20260905.md)；[E3 实现](https://github.com/CartmanFatass/My-paper-code/blob/267d1bcaebafa5f8f9049098d645e2f548b7c678/scripts/run_flexible_skill_duration_e3.py)
+
 通信的信息价值也需要沿发送、到达、接收者行动与任务后果来解释。包到达时，接收者可能尚无受缓存影响的行动机会；只估到到达时刻或当前技能结束，可能漏掉消息第一次有用的后果。C06–C07 的 NEAR_COMMIT 将估值覆盖到第一个缓存敏感行动机会所在的完整承诺结束，或更早的整局终点，包括等待下一次任务边界的情形。它本身已经是多步方法；延长日历时域是否增加价值，需要相对这个有能力的近端参照检验。这里的终点来自固定 CrossingHost 的行动和奖励结构，不能直接成为所有任务的统一截断规则。[C06 终点修正及其适用条件](https://github.com/CartmanFatass/My-paper-code/blob/a76339b5f13244daed94cabb06809fa8923f7f27/docs/research/candidates/skill_information_refresh/NOTES.md#L1926-L1943)
 
 当承诺持续、排他地占用共享资源时，它可能改变队友下一次**合法行动的时刻**。资源释放时刻与队友的决策时钟不一定重合；失败的服务也可能继续占用资源。因此，协调可能表现为提前承诺、为后续任务保留机会，而不只是等待让位。在 VSP-03 的公开双任务模型中，一条末次可行时刻的提交规则，恢复了三个开发块中联合规划器相对孤立规划器平均增益的约 56.5%；剩余差值有正有负。这说明一个可行性修正能恢复部分观测增益，未隔离唯一因果机制，也未证明简单规则与完整规划等价，也未建立一般 MARL 或 UAV 的机制结论。[VSP-03 B10 的完整读法](https://github.com/CartmanFatass/My-paper-code/blob/16762710035b007287a72dc9c0f6f4c498ff339a/docs/research/candidates/vsp_03/NOTES.md)
@@ -63,6 +79,8 @@ Option 由启动条件、内部行为和终止机制定义，这些部分可以�
 ## 6. 实证研究是在具体条件下缩小解释空间
 
 一个结果首先说明某个任务、训练过程、策略实例和评价方式下发生了什么。多个评价 episode 主要反映同一策略执行时的变动，不能自动替代多个独立训练实例。学习曲线、指定训练终点的表现和从多个 checkpoint 中选出的最好表现回答不同问题，不能不加说明地互换。[实证方法专题](topic-notes/04_EMPIRICAL.md)
+
+最小可检测效应是实验设计下的量，取决于独立单位数、方差、检验和目标 power，不是一个环境固定不变的“分辨率”。当前 FSD 历史配对训练 SD .07428 与 .10316，在特定正态配对模型、双侧 .05、80% power 和五个独立单位下，对应约 .125 与 .174 J 的设计尺度；小样本 SD 本身仍有不确定性。增加同一检查点的评估世界，能减少世界层的噪声，不能消除训练实例间的差异。冻结检查点的配对干预可以更便宜地回答部署选择问题，但不能替代重新训练方法的效果估计。已见世界上选出的最佳标签或检查点，也需要和新的测试世界分开。[第三方重算、Root 算术核对及限制](../research/RESEARCH.md#portfolio-review-2026-09-21-project-research-management)
 
 端到端比较可以回答哪套完整方法在所给条件下更好；解释某个组件为什么有效，需要有针对性的控制或消融。探索信号可以推动下一步研究；跨任务泛化、稳定优势或机制归因则需要匹配的证据。这里没有从基础知识推出固定 seed 数、显著性阈值、阳性 toy 或理论证明的通用启动门槛。[Henderson 等，2018](https://ojs.aaai.org/index.php/AAAI/article/view/11694)；[Agarwal 等，2021](https://arxiv.org/abs/2108.13264)
 
@@ -83,5 +101,7 @@ C07 的固定双智能体 CrossingHost 确认中，已知模型规划 NEAR_COMMI
 原讨论已表达的选择、可否定的机制假设和未冻结实现分别保存在 [会话选择记录](SESSION_CHOICES.md)。该记录仅在当前任务明确采用其范围时适用，不是全局基线、排序或方向要求。
 
 2026-09-21 的 C07 后续评估建议结束当前 C 投入并保留 NEAR，依据是当前选定的问题已得到有边界的答案，且尚未选定值得续投的新比较；没有测得所有后续方案成功概率低。可复用的区别是：技术可达、已有价值证据与当前投入选择各需理由。一次投入可以带着正面成果结束；新的具体假设、有限模型数据问题或成本—回报目标也可能支持后续研究，无须事先证明会成功。笼统的重新进入条件本身不构成持续投入的证据。这是一次有来源的研究判断，不是共享知识文档替各方向作投入决定。[C 的可达性与结束投入建议](https://github.com/CartmanFatass/My-paper-code/blob/a76339b5f13244daed94cabb06809fa8923f7f27/docs/research/candidates/skill_information_refresh/NOTES.md#L3130-L3278)
+
+项目级复核同样区分“有可执行的新问题”和“已证明值得成功”。低精度或相互混合的原生结果，可以使一个类别仍然未决，同时使当前方案不值得继续投入；无需把负的观测抹去，也无需把它升级为类别失败。小模型能提供规则、反例、估计量或机制理解；通向原生任务所缺的信息、耦合和实施成本仍需明确承担。方向的当前排序、归档和执行归属只在 [研究索引的项目决定](../research/RESEARCH.md#portfolio-review-2026-09-21-project-research-management) 中记录，这份共享认识不产生新方向或自动重新启动实验。
 
 阅读入口：[四个专题与来源索引](README.md)。本次访问范围、书籍版本差异及初稿纠错分别保存在 [检索记录](working/RETRIEVAL_COVERAGE.md) 和 [核查记录](working/REVIEW_NOTES.md)。

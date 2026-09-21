@@ -67,21 +67,18 @@ this explicit selection. UCOPE's completed two-tick-copy route stays idle, and i
 current scientific responsibility moves to B. Claude's FSD ownership is unchanged.
 
 **Current project review:** [2026-09-21 whole-project reassessment](#portfolio-review-2026-09-21-project-research-management)
-reconciles the owner's third-party report with subsequently published results. Existing native
-operations retain their accepted inputs and owners while this review is prepared. Research
-priority is evaluated by the next useful observation and its route to the UAV question, with
-no obligation to keep three directions busy or to manufacture a successor for an answered route.
+records the completed assessment of both owner-supplied third-party reports, Pro's advice
+and current published results. B remains active; C, VSP-03, UCOPE and FOLR current routes are
+archived; FSD and the other reserves retain their existing owners and status. Research priority
+is evaluated by the next useful observation and its route to the UAV question, with no obligation
+to keep three directions busy or to manufacture a successor for an answered route. The review
+adds no fits or rollouts and does not resume FSD or frozen G33.
 
 ## Active
 
 | Direction | Question | State | Lead runtime | Standing and next step |
 | --- | --- | --- | --- | --- |
-| `vap_folr_core` | After membership changes, can organising the history a continuing agent may legitimately access beat a competent generic recurrent baseline? | exploring | Codex DM | Idle after completed cache A01 and cumulative Pro synthesis; no live operation or selected successor. All three cache contrasts were adverse (mean -2.087265625); this does not establish history redundancy or UAV value. The owner now assigns the Codex session to UCOPE. Latest accepted [notebook at cd3b97ab](https://github.com/CartmanFatass/My-paper-code/blob/cd3b97ab7982ac5efec86eace09d33328be841fa/docs/research/candidates/vap_folr_core/NOTES.md) is preserved on the published FOLR branch. |
-| `ucope` | Can feedback-conditioned KEEP/END of a UAV velocity commitment improve native return over ordinary feedback and fixed renewal? | exploring | Codex session (direct DM; resumed original UCOPE task) | Historical UCOPE DM task `01a0bdb4-cd2c-71a3-af95-a196aeed70cd`, host `local` (owner moved this task to B on 2026-09-21; UCOPE has no active operation); preserved authoring checkout `/home/fires/.codex/worktrees/1275/hmasd-wsl`, branch `codex/ucope-frozen-feedback`. Fully independent UCOPE owner, including its scoped index updates; no Root interaction or integration dependency and no cross-session action without an explicit owner instruction. B02–B07 adverse primaries and favorable exceptions remain preserved. B06 selected the exploratory Ghalf preparation (mean-controller improvement +.07610407 on three development foundations); B07 sampled-B minus mean-G was negative on all three (mean -.03948593), while mean-B minus mean-G was mixed. B08 completed six gate fits: contextual R changed behavior without a retained gain over ordinary G; raw-distance S remained nearly scalar. This justified one bounded, better-conditioned distance comparison, without turning B08 into a technical failure or a class-wide upper bound. B09 is now fully run and read: normalized distance S_N versus fresh trainable scalar B_0 and zero-fit G, masters 8961/8962/8963 on frozen B06 bases 8941/8942/8943, 2048 full 256-tick training episodes per learned arm and 64 fresh final worlds per block. All six gate fits and 576 evaluations completed; original handles exited zero by 2026-09-21 03:45:36 UTC, before the then-applicable 04:06:07 deadline. No retry or expansion; actual native work 3,293,184 team ticks and 98,304 Adam calls. S_N-G was +.00040473 / -.00111368 / +.00084387 (mean +.00004497); S_N-B_0 was +.00003130 / -.00007726 / +.00045533 (mean +.00013646). Both failed the prospective all-three-positive and mean-at-least-.01 continuation rule. S_N expresses distance dependence (eligible KEEP probability SD .01170/.01615/.03939 versus scalar zero), concentrated mainly in tails, without a retained task gain. Keep G; stop this frozen-controller distance/scalar route. Owner continuation on 2026-09-21 removes the inherited native running window ("不设窗口限制 允许自由研究"); no new time window or fit allowance. B10 completed and independently read on 2026-09-21: R_CF actual paired KEEP/END suffix credit versus rich full-data PPO R_FULL, strong one-logit full-data PPO S_FULL, and zero-fit G. Pro's material dissent remains recorded; the DM replaced the weak S_CF proposal, retained one direct test and now accepts its negative branch. All nine gate fits completed on their original source 07605eecde6bba632b86ac2e92862057ea6d9fe2 and handles; last exit zero at 05:49:54 UTC, with 4,915,200 native team ticks, 99,072 Adam calls, zero foundation/evaluation updates, and 35.63 minutes from first acceptance to last exit. The offline reading verified all 3,120 promised artifact hashes and all 3,072 raw pairs; a separate math.fsum reduction agrees. R_CF-G is -.000251365 / +.000373007 / -.000341161 (mean -.0000731732); R_CF-R_FULL mean -.0000748366, R_CF-S_FULL mean -.0000150407. All five declared contrasts fail the all-three-positive/mean-at-least-.01 rule; S_FULL-G mean -.0000581325 and R_FULL-G mean +.0000016634 do not retain either full-data learner. R_CF parameters moved but final context modulation remains weak (KEEP probability SD .001297/.000393/.000446); R_FULL changes copying substantially without a retained gain. Actual local targets and occasional favorable worlds remain nonzero, with both signs. Keep ordinary deterministic G; stop this B10 package without a credit-density, learning-rate, copy/noise or architecture rescue. UCOPE remains exploring, currently idle: no native operation, Pro answer, Root integration or Claude dependency is pending. Re-entry requires a materially new task-grounded reason why lawful velocity commitment should beat ordinary feedback and a discriminating comparison; a nonzero local delta or another isolated favorable world is insufficient. [Complete notebook, Pro response and scientific decision](https://github.com/CartmanFatass/My-paper-code/blob/0d6f299c007840596405b8a359952a082a6ba567/docs/research/candidates/ucope/NOTES.md); [B10 raw reading and costs](https://github.com/CartmanFatass/My-paper-code/tree/0d6f299c007840596405b8a359952a082a6ba567/runs/ucope/paired_branch_credit_b10_reduce). The remote result release contains the complete native text records, artifact inventories and reading; full NPZ/checkpoint data remain recoverable in the original author checkout and local Git commit 956fdc5ff7456700182f639e464f184b49182e1a. The first block's paired archives are also mirrored at 085874e656a8ee26b53f0380c0a3eef6358d94d7; slow further binary transfers were stopped with identities reconciled. No transfer is left pending. Preserve selected-foundation and conditional-world limits, occasional favorable world effects, and the distinction between local END-KEEP identification and changed-trajectory policy benefit. No equivalence or all-adaptive-termination rejection is claimed. Full evidence and independent reading: [NOTES at b7aa5f31f](https://github.com/CartmanFatass/My-paper-code/blob/b7aa5f31f4db26d1905fbcb95b68904f8fdf500b/docs/research/candidates/ucope/NOTES.md), [B09 readback](https://github.com/CartmanFatass/My-paper-code/tree/b7aa5f31f4db26d1905fbcb95b68904f8fdf500b/runs/ucope/normalized_distance_gate_b09_reduce). Claude FSD and the separately parked team-termination design remain independent. |
-
 | `skill_teammate_drift_learning` | When current joint outcome laws and acquired data are uncertain, when does stable conditional-response reuse improve adaptation? | exploring | Codex DM (independent session) | Independent DM task `01a0bdb4-cd2c-71a3-af95-a196aeed70cd`, host `local`; checkout `/home/fires/.codex/worktrees/b-unknown-joint-law/hmasd-wsl`, branch `codex/b-unknown-joint-law`. B06 remains inconclusive (first64 mean +.008187500, t95 [-.015186418,+.031561418]); B07 own-collection feedback interaction remains adverse in all3 blocks. B08 complete: six fixed-source target continuations crossing the two already-collected histories. Full256 R-minus-F on R history is -.002218750 / -.000515625 / -.005968750; on F history -.009000000 / -.000343750 / -.006296875. This weakens an acquisition-only repair explanation for the frozen R package; same-history losses do not reject all drift learning or establish general calibration. Both95303 prospective mapping/history predictions occurred, but reward-noise cancellation remains a competing explanation. Early contrary evidence is preserved. Off-diagonal values are fixed-history recommendation readouts, not executed online counterfactuals or six independent replications. All32 scientific-file and25 required-input digests, donor/source equality and arithmetic reductions verified. B05-B08 totals125 production fits,158976 collected ticks,10.228s summed scientific-process wall; historical/tiny work remains separate. Next: zero-fit source audit of actual Scenario1 observation/action -> joint service outcome -> known reward -> next-state/continuation interfaces, to choose a meaningful drift-learning object and competent simple reference before a new comparison and focused Pro review. No automatic calibration/epsilon sweep, Claude or Root dependency. [B08 interpretation and costs](https://github.com/CartmanFatass/My-paper-code/blob/fe0e5719836f16cc5a44f02d80f53c95592250bd/docs/research/candidates/skill_teammate_drift_learning/NOTES.md); [B08 raw/readback](https://github.com/CartmanFatass/My-paper-code/tree/fe0e5719836f16cc5a44f02d80f53c95592250bd/runs/skill_teammate_drift_learning/b08_fixed_history_crossing); [B07 and full Pro reasoning](https://github.com/CartmanFatass/My-paper-code/blob/6ab8db786a2dc2397d883e8476ccb0303b059f0e/docs/research/candidates/skill_teammate_drift_learning/NOTES.md). Independent decision/publication; no Root or peer communication. |
-| `vsp_03` | Can learned submission timing exploit shared service opportunities beyond a strong transparent same-information opportunity rule? | exploring | Codex DM (independent session) | DM task `01a0c347-9e60-77f1-b503-46ed4f80b314`, host `local`; checkout `/home/fires/.codex/worktrees/e481/hmasd-wsl`, branch `codex/vsp03-opportunity-rule`; independent direct owner, no App reporting or Claude FSD ownership. B09 fixed fresh confirmation: all five O−G block means positive, mean +.017577881, df4 t95 [.010699359,.024456403], `O_SUPERIOR`; superiority exceeding .02 is not established. Preserve G−R0 mean +.012848145 and descriptive O−isolated O_self +.012602783, mostly waiting reduction. B10 zero-fit development: one t22 both-pending guard recovers 56.4831% of the old B08 O−O_self mean; remaining O−guard +.012221680 / +.009738770 / −.001394043, no equivalence or full-planner necessity claim. B11 resolves the DM-owned acquisition question: three new MLE fits, each from 512 fixed-R0 episodes without G, evaluated on fresh 4096-world blocks. O_R0−R0 is positive in all three, mean +.028125407; O_R0−frozen O_full is −.000061035 / −.000751953 / 0, mean −.000270996. This supports a standalone construction within the correct model family, not equivalence, minimum-data or general unknown-model efficiency. Keep existing O_full as the confirmed reference and O_R0 as the tested from-scratch construction; model priors, collector/amount and artifact reuse costs stay explicit. Actual Scenario1 source lacks the persistent exclusive reservation needed for the proposed direct VSP transfer; this rejects that mapping, not general UAV timing research. The fixed-host route ends as answered: no further fits selected, no live producer, outstanding Pro answer or external re-entry prerequisite; direction-level archiving remains the owner's selection. Shared bounded insights are published in FOUNDATIONS. Resumed B08–B11: 19 completed fits (8 G, 11 MLE), zero failed fits, 32,174,080 team ticks and 102.174 s summed scientific-process wall, excluding research preparation/advice/publication; complete raw evidence retained. No general MARL/UAV claim. [Notebook and stopping audit](candidates/vsp_03/NOTES.md); [claim/result](candidates/vsp_03/CLAIM_fitted_opportunity_b09.md); [B09 evidence](https://github.com/CartmanFatass/My-paper-code/tree/f877dbda7d2e8d1a199e6936ebed0ae0168d7f12/runs/vsp_03/opportunity_b09_21901_21905); [B10 evidence](https://github.com/CartmanFatass/My-paper-code/tree/4310e203b20c9b38332dd2b431e67048f781ac4c/runs/vsp_03/opportunity_guard_b10_21801_21803); [complete B11 evidence](https://github.com/CartmanFatass/My-paper-code/tree/4780940a613c595a49fd19d94ad6d3f7ffb0dd9d/runs/vsp_03/opportunity_calibration_b11_22001_22003); [shared understanding](../rl-marl-foundations-20260907/FOUNDATIONS.md). |
-| `skill_information_refresh` | Can lawful estimates of multistep message value improve send-now versus retain-quota decisions through later receiver actions and communication opportunities? | exploring | Codex DM (independent session) | Independent DM task `01a0c348-428c-7f01-bd8b-121d69543032`, host `local`; checkout `/home/fires/.codex/worktrees/f987/hmasd-wsl`, branch `codex/c-multistep-send-value`. Owner-requested post-C07 re-entry feasibility review complete. DM recommends archiving current C investment and maintenance while preserving the positive NEAR result; this assessment leaves the owner direction-selection field unchanged. End current experimental investment, with no selected successor, standing re-entry search or pending producer. Owner-supplied third-party review reconciled: C07 is already complete; its bounded positive result and stop-current-investment recommendation stand. The conditions are technically attainable, not proven impossible or assigned a calibrated low success probability: later effects already exist; own legal approach observations can estimate progress probability; model-knowledge and cost-return studies could be new questions but are not unfinished C07 obligations. Inspected shared G0 current-state control lacks the C cache interface, but this is not repository-wide absence: archived CADC has a recoverable delayed-message/receiver-actor/service path and checkpoints, retaining its adverse one-pair result. A future matched, fixed-receiver question is possible, not selected or claimed transferred from C07. Full Pro advice agrees with bounded closure; its raw-array/source gaps and the DM code/archive checks are retained. C07 NEAR-AF +102 completions/1280 fresh worlds, mean +.0796875, approximate normal95% [.0560616544,.1033133456], all5 block means positive: frozen primary passes. LONG-NEAR +3/+.00234375; predeclared finite upper .0434526951<.05 for this fixed program and law. Retain NEAR and cheap ACTIVE_FIRST; no global optimality, learned/UAV or deployment-efficiency claim. NEAR panel wall26.1x AF does not establish a missed deployment deadline. C06+C07 zero new fits,491520 actual/203534144 model ticks; historical C fits remain4. This review adds no fits, policy evaluations or model simulations. All native/Pro operations terminal; no Root/peer dependency. [Complete feasibility judgment, Pro reply and third-party response](https://github.com/CartmanFatass/My-paper-code/blob/3ca4cb1f83ea869e1efca852a099db31c52b0e2c/docs/research/candidates/skill_information_refresh/NOTES.md); [frozen C07 claim](candidates/skill_information_refresh/CLAIM_near_commit_c07.md); [complete C07 raw evidence](https://github.com/CartmanFatass/My-paper-code/tree/a97233da59fdbd6349803b8b157901cd50286bdf/runs/skill_information_refresh/c07_fixed_s73180_73184_20260921); [complete C06 evidence](https://github.com/CartmanFatass/My-paper-code/tree/8a651c9a0a299fa6f5e90dca5f3c5ecc72655c5b/runs/skill_information_refresh/c06_multistep_s73170_20260921). Independent publication, no App peer messaging or FSD ownership. |
 
 ## Reserve
 
@@ -94,14 +91,28 @@ no obligation to keep three directions busy or to manufacture a successor for an
 
 ## Archived (investment only, not scientifically disproved)
 
+### Current routes archived by the 2026-09-21 project decision
+
+The owner delegated whole-project research management to the acting Root. The [completed review](#portfolio-review-2026-09-21-project-research-management) ends current investment in the following routes, preserving their full evidence and historical execution identities. This supersedes their earlier exploring labels and route-level recommendations awaiting project selection. No category-wide impossibility or low numerical success probability is asserted.
+
+| Direction | Question | State | Lead runtime | Standing and next step |
+| --- | --- | --- | --- | --- |
+| `skill_information_refresh` | Can lawful estimates of multistep message value improve send-now versus retain-quota decisions through later receiver actions and communication opportunities? | archived | Codex DM (independent session) | Root's 2026-09-21 whole-project decision archives current investment; retained DM evidence follows. Independent DM task `01a0c348-428c-7f01-bd8b-121d69543032`, host `local`; checkout `/home/fires/.codex/worktrees/f987/hmasd-wsl`, branch `codex/c-multistep-send-value`. Owner-requested post-C07 re-entry feasibility review complete. Root accepts the DM's recommendation to archive current C investment and maintenance while preserving the positive NEAR result, under the owner's whole-project management assignment. End current experimental investment, with no selected successor, standing re-entry search or pending producer. Owner-supplied third-party review reconciled: C07 is already complete; its bounded positive result and stop-current-investment recommendation stand. The conditions are technically attainable, not proven impossible or assigned a calibrated low success probability: later effects already exist; own legal approach observations can estimate progress probability; model-knowledge and cost-return studies could be new questions but are not unfinished C07 obligations. Inspected shared G0 current-state control lacks the C cache interface, but this is not repository-wide absence: archived CADC has a recoverable delayed-message/receiver-actor/service path and checkpoints, retaining its adverse one-pair result. A future matched, fixed-receiver question is possible, not selected or claimed transferred from C07. Full Pro advice agrees with bounded closure; its raw-array/source gaps and the DM code/archive checks are retained. C07 NEAR-AF +102 completions/1280 fresh worlds, mean +.0796875, approximate normal95% [.0560616544,.1033133456], all5 block means positive: frozen primary passes. LONG-NEAR +3/+.00234375; predeclared finite upper .0434526951<.05 for this fixed program and law. Retain NEAR and cheap ACTIVE_FIRST; no global optimality, learned/UAV or deployment-efficiency claim. NEAR panel wall26.1x AF does not establish a missed deployment deadline. C06+C07 zero new fits,491520 actual/203534144 model ticks; historical C fits remain4. This review adds no fits, policy evaluations or model simulations. All native/Pro operations terminal; no Root/peer dependency. [Complete feasibility judgment, Pro reply and third-party response](https://github.com/CartmanFatass/My-paper-code/blob/3ca4cb1f83ea869e1efca852a099db31c52b0e2c/docs/research/candidates/skill_information_refresh/NOTES.md); [frozen C07 claim](candidates/skill_information_refresh/CLAIM_near_commit_c07.md); [complete C07 raw evidence](https://github.com/CartmanFatass/My-paper-code/tree/a97233da59fdbd6349803b8b157901cd50286bdf/runs/skill_information_refresh/c07_fixed_s73180_73184_20260921); [complete C06 evidence](https://github.com/CartmanFatass/My-paper-code/tree/8a651c9a0a299fa6f5e90dca5f3c5ecc72655c5b/runs/skill_information_refresh/c06_multistep_s73170_20260921). Independent publication, no App peer messaging or FSD ownership. |
+| `vsp_03` | Can learned submission timing exploit shared service opportunities beyond a strong transparent same-information opportunity rule? | archived | Codex DM (independent session) | Root's 2026-09-21 whole-project decision archives current investment; retained DM evidence follows. DM task `01a0c347-9e60-77f1-b503-46ed4f80b314`, host `local`; checkout `/home/fires/.codex/worktrees/e481/hmasd-wsl`, branch `codex/vsp03-opportunity-rule`; independent direct owner, no App reporting or Claude FSD ownership. B09 fixed fresh confirmation: all five O−G block means positive, mean +.017577881, df4 t95 [.010699359,.024456403], `O_SUPERIOR`; superiority exceeding .02 is not established. Preserve G−R0 mean +.012848145 and descriptive O−isolated O_self +.012602783, mostly waiting reduction. B10 zero-fit development: one t22 both-pending guard recovers 56.4831% of the old B08 O−O_self mean; remaining O−guard +.012221680 / +.009738770 / −.001394043, no equivalence or full-planner necessity claim. B11 resolves the DM-owned acquisition question: three new MLE fits, each from 512 fixed-R0 episodes without G, evaluated on fresh 4096-world blocks. O_R0−R0 is positive in all three, mean +.028125407; O_R0−frozen O_full is −.000061035 / −.000751953 / 0, mean −.000270996. This supports a standalone construction within the correct model family, not equivalence, minimum-data or general unknown-model efficiency. Keep existing O_full as the confirmed reference and O_R0 as the tested from-scratch construction; model priors, collector/amount and artifact reuse costs stay explicit. Actual Scenario1 source lacks the persistent exclusive reservation needed for the proposed direct VSP transfer; this rejects that mapping, not general UAV timing research. The fixed-host route ends as answered: no further fits selected, no live producer, outstanding Pro answer or external re-entry prerequisite; this owner-requested whole-project decision now archives the current investment. Shared bounded insights are published in FOUNDATIONS. Resumed B08–B11: 19 completed fits (8 G, 11 MLE), zero failed fits, 32,174,080 team ticks and 102.174 s summed scientific-process wall, excluding research preparation/advice/publication; complete raw evidence retained. No general MARL/UAV claim. [Notebook and stopping audit](candidates/vsp_03/NOTES.md); [claim/result](candidates/vsp_03/CLAIM_fitted_opportunity_b09.md); [B09 evidence](https://github.com/CartmanFatass/My-paper-code/tree/f877dbda7d2e8d1a199e6936ebed0ae0168d7f12/runs/vsp_03/opportunity_b09_21901_21905); [B10 evidence](https://github.com/CartmanFatass/My-paper-code/tree/4310e203b20c9b38332dd2b431e67048f781ac4c/runs/vsp_03/opportunity_guard_b10_21801_21803); [complete B11 evidence](https://github.com/CartmanFatass/My-paper-code/tree/4780940a613c595a49fd19d94ad6d3f7ffb0dd9d/runs/vsp_03/opportunity_calibration_b11_22001_22003); [shared understanding](../rl-marl-foundations-20260907/FOUNDATIONS.md). |
+| `ucope` | Can feedback-conditioned KEEP/END of a UAV velocity commitment improve native return over ordinary feedback and fixed renewal? | archived | Codex session (direct DM; resumed original UCOPE task) | Root's 2026-09-21 whole-project decision archives current investment; retained DM evidence follows. Historical UCOPE DM task `01a0bdb4-cd2c-71a3-af95-a196aeed70cd`, host `local` (owner moved this task to B on 2026-09-21; UCOPE has no active operation); preserved authoring checkout `/home/fires/.codex/worktrees/1275/hmasd-wsl`, branch `codex/ucope-frozen-feedback`. Fully independent UCOPE owner, including its scoped index updates; no Root interaction or integration dependency and no cross-session action without an explicit owner instruction. B02–B07 adverse primaries and favorable exceptions remain preserved. B06 selected the exploratory Ghalf preparation (mean-controller improvement +.07610407 on three development foundations); B07 sampled-B minus mean-G was negative on all three (mean -.03948593), while mean-B minus mean-G was mixed. B08 completed six gate fits: contextual R changed behavior without a retained gain over ordinary G; raw-distance S remained nearly scalar. This justified one bounded, better-conditioned distance comparison, without turning B08 into a technical failure or a class-wide upper bound. B09 is now fully run and read: normalized distance S_N versus fresh trainable scalar B_0 and zero-fit G, masters 8961/8962/8963 on frozen B06 bases 8941/8942/8943, 2048 full 256-tick training episodes per learned arm and 64 fresh final worlds per block. All six gate fits and 576 evaluations completed; original handles exited zero by 2026-09-21 03:45:36 UTC, before the then-applicable 04:06:07 deadline. No retry or expansion; actual native work 3,293,184 team ticks and 98,304 Adam calls. S_N-G was +.00040473 / -.00111368 / +.00084387 (mean +.00004497); S_N-B_0 was +.00003130 / -.00007726 / +.00045533 (mean +.00013646). Both failed the prospective all-three-positive and mean-at-least-.01 continuation rule. S_N expresses distance dependence (eligible KEEP probability SD .01170/.01615/.03939 versus scalar zero), concentrated mainly in tails, without a retained task gain. Keep G; stop this frozen-controller distance/scalar route. Owner continuation on 2026-09-21 removes the inherited native running window ("不设窗口限制 允许自由研究"); no new time window or fit allowance. B10 completed and independently read on 2026-09-21: R_CF actual paired KEEP/END suffix credit versus rich full-data PPO R_FULL, strong one-logit full-data PPO S_FULL, and zero-fit G. Pro's material dissent remains recorded; the DM replaced the weak S_CF proposal, retained one direct test and now accepts its negative branch. All nine gate fits completed on their original source 07605eecde6bba632b86ac2e92862057ea6d9fe2 and handles; last exit zero at 05:49:54 UTC, with 4,915,200 native team ticks, 99,072 Adam calls, zero foundation/evaluation updates, and 35.63 minutes from first acceptance to last exit. The offline reading verified all 3,120 promised artifact hashes and all 3,072 raw pairs; a separate math.fsum reduction agrees. R_CF-G is -.000251365 / +.000373007 / -.000341161 (mean -.0000731732); R_CF-R_FULL mean -.0000748366, R_CF-S_FULL mean -.0000150407. All five declared contrasts fail the all-three-positive/mean-at-least-.01 rule; S_FULL-G mean -.0000581325 and R_FULL-G mean +.0000016634 do not retain either full-data learner. R_CF parameters moved but final context modulation remains weak (KEEP probability SD .001297/.000393/.000446); R_FULL changes copying substantially without a retained gain. Actual local targets and occasional favorable worlds remain nonzero, with both signs. Keep ordinary deterministic G; stop this B10 package without a credit-density, learning-rate, copy/noise or architecture rescue. The DM's pre-review status was exploring and idle: no native operation, Pro answer, Root integration or Claude dependency is pending. Re-entry requires a materially new task-grounded reason why lawful velocity commitment should beat ordinary feedback and a discriminating comparison; a nonzero local delta or another isolated favorable world is insufficient. [Complete notebook, Pro response and scientific decision](https://github.com/CartmanFatass/My-paper-code/blob/0d6f299c007840596405b8a359952a082a6ba567/docs/research/candidates/ucope/NOTES.md); [B10 raw reading and costs](https://github.com/CartmanFatass/My-paper-code/tree/0d6f299c007840596405b8a359952a082a6ba567/runs/ucope/paired_branch_credit_b10_reduce). The remote result release contains the complete native text records, artifact inventories and reading; full NPZ/checkpoint data remain recoverable in the original author checkout and local Git commit 956fdc5ff7456700182f639e464f184b49182e1a. The first block's paired archives are also mirrored at 085874e656a8ee26b53f0380c0a3eef6358d94d7; slow further binary transfers were stopped with identities reconciled. No transfer is left pending. Preserve selected-foundation and conditional-world limits, occasional favorable world effects, and the distinction between local END-KEEP identification and changed-trajectory policy benefit. No equivalence or all-adaptive-termination rejection is claimed. Full evidence and independent reading: [NOTES at b7aa5f31f](https://github.com/CartmanFatass/My-paper-code/blob/b7aa5f31f4db26d1905fbcb95b68904f8fdf500b/docs/research/candidates/ucope/NOTES.md), [B09 readback](https://github.com/CartmanFatass/My-paper-code/tree/b7aa5f31f4db26d1905fbcb95b68904f8fdf500b/runs/ucope/normalized_distance_gate_b09_reduce). Claude FSD and the separately parked team-termination design remain independent. |
+| `vap_folr_core` | After membership changes, can organising the history a continuing agent may legitimately access beat a competent generic recurrent baseline? | archived | Codex DM | Root's 2026-09-21 whole-project decision archives current investment; retained DM evidence follows. Idle after completed cache A01 and cumulative Pro synthesis; no live operation or selected successor. All three cache contrasts were adverse (mean -2.087265625); this does not establish history redundancy or UAV value. The owner then assigned the Codex session to UCOPE. Latest accepted [notebook at cd3b97ab](https://github.com/CartmanFatass/My-paper-code/blob/cd3b97ab7982ac5efec86eace09d33328be841fa/docs/research/candidates/vap_folr_core/NOTES.md) is preserved on the published FOLR branch. |
+
+### Earlier archive decisions and retained evidence
+
 Each keeps its notebook and recoverable code/run evidence; legacy directions also retain
 their `DIRECTION.md`. Code under `experiments/candidates/` stops being maintained.
 `acvc` left the set on 2026-09-16 with its
 [closing memo](candidates/acvc/ACVC_CLOSING_MEMO_20260916.md) queued for the next review.
 
 Historical 2026-09-20 owner-requested closure review: **UPHOLD_CLOSE for A, B and C**.
-The following preserves that review's reasoning; B and C are now reopened by the explicit
-2026-09-21 owner adoption above, while A remains archived as a reusable method result.
+The following preserves that review's reasoning. B and C were subsequently reopened by the
+2026-09-21 owner adoption; B remains active, while C's newly answered route is archived by
+the later whole-project decision above. A remains archived as a reusable method result.
 The 2026-09-20 entry superseded the shared closure summary at
 [`fe15893e9`](https://github.com/CartmanFatass/My-paper-code/blob/fe15893e99a1b3f5265c5d25f808749b6f0eb759/docs/research/RESEARCH.md).
 At that time their ongoing research investment and maintenance were closed, with no selected successor,
@@ -2171,4 +2182,1947 @@ Quoted text below preserves the supplied content, with line endings normalized.
 
 ### Answer
 
+Saved from chat by Root on 2026-09-21. Accepted question source
+`3c4ba6fec59152f51816b721d1afd62890226019`; transport key
+`hmasd:d9c7698cc28c96b97752091e931fdc5af1ef93da1b6b37e9f057eb1adcd39543`.
+One accepted send; wait COMPLETE after one driver recovery; GitHub delivery
+NOT_DELIVERED with no verified Answer-only commit. This is the full captured reply,
+not a receipt. Captured text SHA256 excluding the appended final newline:
+`18fafde4d31da425c5b21456943231abd6cd1099f1c5e9d6053b71b5073e9a0d`;
+saved file SHA256 including that newline:
+`40e7dd060796c0e259fc2b02b307f7271b7aceb79d91703f471f5049c33c10a4`.
+For repository Markdown, line-end whitespace alone is trimmed; the normalized answer
+text SHA256 including its final newline is `3b45b1a0142e398ab93d72c00852d2811a1e6552ecb7b0ae79501b12f1e4de29`.
+The later supplemental report was not part of this Pro question.
+
+<details>
+<summary>Complete Portfolio Pro reply — saved from chat</summary>
+
+<!-- BEGIN CAPTURED PORTFOLIO PRO ANSWER -->
+写回结果：GitHub 读取正常，但本轮没有完成经验证的 Answer-only 写回。未向仓库提交修改，实际 Answer commit SHA：无。 当前写入接口需要替换整文件，而我未完成最新目标文件的逐字节保真校验，因此没有冒险覆盖其他 Answer、问题或 Decision。按照附件中的回退要求，下面给出完整实质答复。
+
+hmasd-pro-question-project-rese…
+
+完整中文 Answer（Markdown，含固定版本来源链接）
+
+结论与最强分歧
+
+MATERIAL_DISSENT：对第三方报告为 yes；对 Root 更正后的主顺序总体为 no。 最重要的分歧不是是否需要好基线，而是第三方报告把不同问题合并了：own-observation MAPPO 的实用竞争力、同信息 flat 的完整方法比较、冻结 checkpoint 的标签选择，以及学习自适应 k／泛化 N，并不是一次“instrument first”就直接回答的同一个层级前提。静态用户也不推出时机收益为零；少量配对数据不支持统一的 UAV 噪声地板；停止投资更不需要先证明一类方法永远无效。
+
+hmasd-pro-question-project-rese…
+
+建议采取“收缩旧配方投入、保留 B 的已选原生桥接、先建立有界的原生比较能力，再购买一个原生 k 观察”的项目级方案。 结束当前 C、VSP 路线的继续投资和维护，保留它们的正面成果；A、UCOPE、FOLR 及现有停止配方不重开；FSD 维持 owner-reserved、Claude 所有权不变；CPCP、VNFC、TRDL 保留有条件备用，G33 不动。这是投资建议，不是已经执行的状态变更。当前方向状态和权限边界以固定问题及其 standing 为准。
+
+对 Root 方案的实施限定是：“基线优先”只能是一个有明确用途、能够结束的共享测量工作，不能变成整个项目的永久前置工程。 不应自动执行所有基线和 HMASD 各五次重训，也不应把 FSD 的常量标签探针默认为 Root 可以启动的免费附带工作。它需要真实评估、制品恢复和方向选择；FSD 当前的 reserve 与既有 DM 所有权不能被“零 fit”绕过。
+
+hmasd-pro-question-project-rese…
+
+“重入条件能否达到”应分成三个判断：所需接口或方法是否已经存在；是否可以设计合法、有限的比较；比较是否值得现在购买。材料支持若干技术条件已具备，也支持另一些条件尚待核实；没有材料给出各方向经校准的成功概率，因此不能用臆测的低成功率替代投资理由。 当前可以合理停止的原因，是已选问题已回答，或下一项具体信息不值得其完整成本，而不是要求无限证明失败。
+
+一、当前结果改变了哪些判断
+B：停止同类采集修补，保留已选原生假设检查
+
+B06 的 first64 均值为 +0.008187500，t95 [−0.015186418, +0.031561418]，仍不确定；B07 的 own-collection full256 均值为 −0.002921875，而 uniform-history 为 +0.002932292。完成后的 B08，在 R 历史上的三个 R−F 为 −0.002218750／−0.000515625／−0.005968750，在 F 历史上为 −0.009000000／−0.000343750／−0.006296875。这些读数削弱了纯 acquisition-only 修复解释；它们是三个复用块上的六个依赖对比，不是六次独立重训。
+
+hmasd-pro-question-project-rese…
+
+95303 的两个预写预测发生，增加了具体映射／历史解释的可信度，但 realized reward noise 抵消乐观 outcome 估计仍是替代解释，不能宣布 F 普遍校准更好。早期条件响应复用的有利证据和 B08 的早段反例都应保留。当前不再购买“只修采集即可救回 R”的同类补丁。
+
+下一步应回答实际原生链中“什么未知、什么需要学习”。已知奖励公式不等于已知联合服务后果，更不等于已知 continuation。若物理后果为 Y、奖励为已知函数 g，需要的可能是
+
+E[g(Y)∣合法历史、行动],
+
+而不是再学习一个重复的奖励公式；当 g 非线性时，g(E[Y∣历史、行动]) 一般也不能替代前者。这个数学区别给普通 outcome 模型一个实质参照位置，并不证明它在有限数据下足够。它正是 B 已选 source-only 桥接应厘清的对象，不值得另派一轮重复审计。
+
+VSP：当前路线已经成功回答，应带着答案结束
+
+B09 的 O−G 为 +0.017577881，df4 t95 为 [0.010699359, 0.024456403]；保留 G 相对 R0 的正收益，但在该正确模型族内应保留拟合规划器。B10 的 56.4831% 是三个块均值之比，不是每块统一捕获率，也不是机制中介比例或等价证明。
+
+hmasd-pro-question-project-rese…
+
+B11 已用每块 512 个 R0 采集 episode 独立构造三个 MLE 模型；新世界上 O_R0−R0 平均 +0.028125407，而 O_R0−O_full 平均 −0.000270996。故“必须先依赖 G 大量训练数据”的当前构造问题已经解决，不能继续把它当重入前置任务。保留 O_full 和测试过的 O_R0 构造，不购买为了维持 active 而制造的 successor。
+
+这种小模型答案并非无价值；但 S1 缺少直接映射所需的持续、排他 reservation，因而不能把 VSP 机会规则原样移植并称为 UAV 证据。拒绝这条特定映射，不等于拒绝所有 UAV 时机问题。
+
+C：同样是带着正面结果结束，不是等待 C07
+
+C07 已完成：NEAR−ACTIVE_FIRST 在 1,280 个世界中多完成 102 个任务，均值 +0.0796875，近似正态 95% 区间 [0.0560616544, 0.1033133456]，五块均值均正。LONG−NEAR 总增量只有 3；预写有限样本上界 0.0434526951 低于 0.05，约束的是固定 LONG 程序及其抽样条件，不是 NEAR 全局最优或所有长时域方法无用。
+
+这里没有新训练，不能机械套用“每个 master 才算一个独立训练样本”的解释。C 的主张是固定程序、固定模型制度下的世界平均性能；独立性及等均值条件仍须成立，但共同 master 的可复现寻址本身不把所有世界变成一次训练重复。相反，它也不支持神经训练总体可靠性。
+
+NEAR 的 26.1 倍面板运行时间未测得部署超时。合法本地历史估计共享参数，或 CADC 固定接收器下的原生消息问题，在技术上都有具体路径；它们是可能的新问题，不是 C07 未付清的义务。
+
+FSD：保留正确的包比较，承认参照能力和选择测量尚未解决
+
+这里应使用 20260916 matched-information B01，而不是旧的四块 interruption B01。五独立配对的 D1280−CF final45 为 +0.289511024，df4 t95 为 [0.161417, 0.417605]。学习率及多项配置不同，并不自动使这个预先声明的 package contrast 无效；但它不能被升级为纯层级或自适应 duration 的因果增益。CF 的历史最好 panel 是后选结果，不能用它把冻结 primary 改写为约 +0.11。
+
+hmasd-pro-question-project-rese…
+
+B05 已经实现 CF_S 并记录饱和缓解、实际学习及表现变化；因此“central input scaling 尚未修”是过时诊断。三个复用块上 CF_S late J 约 0.321、D 约 0.426，说明已有可用修正和学习证据，不等于已经确立有能力且选择权公平的最终 flat 参照。
+
+B09 的标签确有行为和回报差异，反驳了“空标签”；但同面板挑最好标签存在选择乐观。B13 中未更新 coordinator 的 learner 达到旧 D 量级，是 feasibility observation，不是等价。B14 的 UNIFORM 主比较均值 +0.005301759、BANDIT 次比较均值 +0.020454788，都不能成为状态依赖选择价值上界，不能事后把 BANDIT 换成 primary，也不证明应再扫熵或更长承诺。
+
+其余方向：保持停止或备用，但保留原结果层级
+
+A 的普通多步复用有用，额外 trace／长采集器的当前理由不足；UCOPE B10 已有真实配对后缀和九个 gate fits，失败的是预写保留规则，非“局部作用严格为零”；FOLR cache 三个对比均不利、均值 −2.087265625，但不能推出一般历史无用、Generic 最优或 N 泛化已解决。
+
+MGTAP 的十个观察跨 variants，不能当十次同设计重复；VSP-C1、SCDMP、ACPS、LCAC、CADC、TRDL 的稀疏／混合或包级结果，应保留不利点值和冻结分类，而不是统一重标成精确总体负效应，或抹去它们的负面信息。ACVC 提升较弱 proposer 不证明胜过有能力的 MAPPO。
+
+hmasd-pro-question-project-rese…
+
+CBSC、CRTO、EGRCR 的相等各有特定输出／行动／后果范围；后来 vsp_02 RESET/CARRY 的正负差、DISH 零 eligible transfer、RCLE 未胜参考，都不构成同一种“严格零收益定理”。这些具体档案限定采用本题提供的有界审阅；未重新审计的其他档案只保持现有状态，不声称逐制品重验。
+
+hmasd-pro-question-project-rese…
+
+二、只保留三个近期观察，新增资源先给哪里
+
+实际新增优先级：Root 的有界原生基线工作优先；B 的已选零-fit 检查并行、不等待它；之后才是一个原生 k 比较。 以下不是三项同时启动的实验，也不是新增 fit 额度。
+
+观察	顺序与依赖	会改变的实际判断	何时停止当前投入
+B 已选的原生假设检查	原 DM 独立完成；不另派同题、不等 Root 消息。	原生问题中究竟要学习联合后果、队友响应、采集律还是 continuation；R 式复用是否有区别于普通 outcome 建模的具体用途。	交付一条有来源的合法链和一个可区分比较，或指出具体缺口即结束；没有用途时停止当前 R 迁移配方，不自动改 ε、prior、horizon。
+Root 共享的原生参照能力／测量诊断	第一项新投入；先使用已有代码与记录，再提出能改变参照选择的最小诊断。	S1 的实用 flat 参照和同信息 flat 参照是否可用；现有 FSD 包差距能支持哪一级新问题。	得到可用参照及其选择、测量边界就停；若需无界调参或全面重训才能“修好旧分数”，不把它扩成长期主项目。
+一个版本明确的原生 k 观察	先选择单一宿主和合法控制契约；只复用第二项确实可迁移的部分，不等待全项目 headroom 证明。	改变重新选择技能的时钟，能否通过恢复／承诺行为改变完整原生后果；是否值得购买后续学习问题。	声明的比较结束即读全部结果；接口不成立只停依赖路径；无有用差异时停止这套时钟配方，不自动 c-sweep、加种子或升级网络。
+B 的检查不是新增审批，也不是永续审计链
+
+B 应检查实际可用观测和行动、联合物理后果及反馈、已知 reward 映射、下一状态与 continuation。尤其要区分“奖励函数已知”和“反馈足以识别备选行动后果”，不能从离线 crossing readout 推出新的在线 counterfactual。若普通合法 outcome 模型足以构成有意义的研究方案，研究普通方法本身可以是答案，不必再发明一个名义上的新校正。这延续 B 自己已选的动作，不改变其自主工作和发布方式。
+
+原生参照是最佳第一笔共享投入，但不是大批重训方案
+
+它至少区分三类参照：透明 scripted placement；own-observation actor 加 centralized critic 的普通 MAPPO 实用参照；获得实际 HMASD 所允许摘要、频率、延迟、历史和执行权的 flat 参照。若 HMASD 获得 held central summary，own-observation MAPPO 单独不足以归因层级价值；CF_S 是值得从已实现修正出发评估的候选，而非已经认证的胜任者。
+
+比较前固定训练曝光、超参数／checkpoint 的开发选择权、最终评价和失败处理。开发世界用于选择，测试世界不回流选优。检查应围绕真正有争议的饱和、训练响应和控制后果；无需先证明全局收敛或让每个旧方法都达到所谓 plateau。
+
+能力参照建立后，若 flat 吸收了旧差距，削弱的是旧包优势作为下一项层级投资理由；若差距保留，则是相应信息及训练／选择制度下的完整方法证据，不自动识别 duration 的因果贡献。相同信息是必要比较条件之一，而不是穷尽组件消融的命令。
+
+如果最小诊断显示旧 S1 校准需要一串没有停止标准的训练修补，就不要为了“仪器必须完善”延长它：将可复用的评测和信息合同带到真正选定的原生问题，其余保持未决。这不是要求先看到正 headroom 才允许探索，而是给共享工程本身设置有限用途。
+
+FSD 常量标签探针是条件性选项，不是必经第四项
+
+它的干净形式是：对每个原有 checkpoint，在 development worlds 上从预写常量标签集合选出一个标签，冻结 tie-break 和选择规则，再在 fresh matched worlds 上与同 checkpoint 的 as-trained coordinator 比较。应保持相同低层、动作执行、初始化和评测制度；不能在测试世界逐世界选标签，也不能暗中把“全队一个常量标签”扩大为任意逐 agent 标签组合。B09 的同面板选择结果为这个问题提供动机，但不提供新测试的答案。
+
+这个探针改变的是固定部署选择。正差不证明学会自适应时机，也不消除重训方差；未见差异只结束这套常量选择规则。checkpoint 仍是复用训练单位，不能把 world 或标签流复制算成新训练种子。零 fit 不免除原始权重恢复、平台载入核对及两臂评估成本。
+
+hmasd-pro-question-project-rese…
+
+FSD 未被选择重入时，Root 可做共享测量准备，但不能以此名义启动新的 FSD 实验；不能更换 Claude 或建立第二 DM。 不选这个探针不应阻塞项目其他工作。
+
+hmasd-pro-question-project-rese…
+
+原生 k：优先版本明确的 Scenario7，不同时购买两个宿主
+
+这是基于 Scenario7 已有实际 factory 注册和历史训练记录的工程次序判断，不是对收益或总成本的实测排名。若问题是故障恢复，候选应明确到具有故障机制的 S4 及实际接口／reward／arm，而不是笼统写“Scenario7”。当前默认 interface v3、reward v2、arm C／160Wh，与历史 S3、arm A／reward v1／200Wh 的 240 万步记录不能混用。历史八个 CSV 重构 episode 反驳“从未训练”，但不证明当前 S4 的性能、checkpoint 兼容性或 k 结论。
+
+新观察须沿“合法故障／能量信息实际到达 → 是否允许重选技能 → 同一低层产生的行为与承诺 → 恢复服务及完整回报”建立对比。一个清楚的首问是：在声明的控制基础上，预先选定的固定时钟与一种合法状态条件重决策规则，是否改变完整恢复—承诺取舍。
+
+持有技能不等于停止读取观测，也不等于把一个速度命令机械保持 k 步。若用冻结基础，结论限于固定部署；若要重新训练才能得到该基础，其 fits、数据和低层更新差异必须计入，而不能宣称这是现成零-fit 试验。此处不预定 fit 数、不宣告基础已可载入，也不要求先买一个冻结阳性 pilot 才能做有意义的直接学习比较。
+
+Service restoration 是明确的第二宿主候选，不是不存在：其 forward-only 包、array adapter、合法遥测及明确 outage law 都是资产。但它不等于已有 learner entry；preset 是 1,800 秒中在 300–600 秒抽取一次 outage 起点，10 秒步长，不是每 180 step 周期故障。实际训练数据、入口和 continuing-task bootstrap 仍须绑定，不能只凭数组形状认定 ready。若 Scenario7 的具体契约不可复用，而 restoration 的接入更简单，可以据这个新成本事实改变宿主选择；现在不同时开两套 k-sweep。
+
+Corridor 的三个 exact adaptive-minus-best-fixed margin 是可复用的机会说明，不是 native UAV 成绩。E3 已报告 recall；大行的负结果限定 c=.25 和原预算，小行还保留 competent 正例。它没有裁决所有 trained KEEP/END。无需为“再确认有机会”重买已经报告的指标或没有新判别目标的 c-sweep。
+
+三、为什么 CPCP、N 转移及其他备用不排在前面
+CPCP 有内容，但目前没有已核验的免费 flat population
+
+只有实际独立训练、接口兼容的队伍存在时，own-team／cross-play 冻结评价才是零新增 fits；仍有重组、恢复、评估和统计成本。六 agent central-input FSD 不能冒充原五 agent flat 群体，五个训练 seed 也不自动保证 observation、physical ID、normalization、action、mask 和 recurrence 兼容。
+
+hmasd-pro-question-project-rese… +1
+
+这个观察应包含所有声明的 composition 和 own-team 取舍，以训练队伍／群体生成过程为统计单位，而不是矩阵格子。若只见一套同质宿主没有 deficit，回答的是该训练人口和测试组合，不是所有协调场景或 N 泛化。此前三个完整 bundle 加 own-team 面板的 2,162,688 team ticks、24,576 Adam calls 仍是明确的备选设计成本，不是当下自动启动的最小工作量。当前未核验独立兼容队伍，所以我不把 CPCP 提到新增基线工作之前；未来已存在的合适 population 可以真实改变这个排序，但不能现在假装存在。
+
+Cross-play 和 held-out-N 是两个问题
+
+前者改变伙伴来源，后者改变人数分布与部署映射。真正的 specialists-versus-generalist table 需要分别说明训练 N、测试 N、同信息普通基线、每 N specialist 和 generalist 的训练／选择资源，以及测试时是否零更新。
+
+G 系列有 active-roster／mask 的工程和 toy 资产；已读的 continuous roster policy 也确实有匿名集合聚合、mask 和 recurrent storage。但这些不是 native specialists-versus-generalist 结果，constructor 接受 N 也不验证 selected path 的 tensor、身份和 recurrent reset 语义。故保留 N 目标，不把一个接口事实变成“现在马上可训练整张表”。
+
+hmasd-pro-question-project-rese…
+
+VNFC 的 INTERVAL／TERMINAL 没有 final primary；技术失败不是负效果，也不是因为已花成本就应重跑。相关稳定实现加有区分力的 service-credit／population 问题可以使它重入；不要求普遍内存测试或穷尽历史写坏内存的原因。
+
+TRDL 保留 B01 的 own-tail 正差和 B02 的 inside-MEI 反转；显式 eta-conditioned scalar 对照能回答一个具体条件化问题，有决策价值的 unchanged replication 也可以合法。当前两者都低于共享原生参照和有用 k／N 问题，不因“分布式 critic 更复杂”或“文献可能有 gap”自动续投。
+
+闲置优于制造 successor，小模型价值也不等于迁移免费
+
+若有界参照工作和单一 native 问题都没有清楚的信息用途，就保留资产并结束当前投入，不用新 toy、更多种子或更大网络填满名额。
+
+反过来，小模型能用较低的科学计算成本区分解释、检验合法信息和展示普通方法的充分性；B、VSP、C 已给出这类产出。需要支付的是未测过的迁移成本：实际接口与信息制度、模型先验和反馈、训练器及终止语义、参照能力、制品恢复和原生评价，而不是否定这些产出。不能把“非 UAV”当一票否决，也不能把其到 UAV 的成本当零。
+
+四、测量和成本：应进入共识的精确边界
+
+第三方报告把 SD 和检测能力混在了一起。题目 T6 及 Root 的设计计算区分得对：在配对正态、固定插入历史 SD、双侧 alpha=.05、80% power的假设下，数值如下。这是设计算术，不是实测成功概率或自动训练计划。
+
+hmasd-pro-question-project-rese…
+
+历史配对尺度	n=5 时 MDE	检测均值 .02 的配对数	检测均值 .05 的配对数
+B02 SD .07428	.1249387	111	20
+B01 包差 SD .103163385	.1735205	211	36
+B14 UNIFORM 固定 checkpoint 差 SD .021343685	.0359000	12	4
+
+因此 .125–.175 是上述设计中的 MDE，不是各 UAV 学习算法通用的单位间噪声；B14 较小的条件方差也不能替代重新训练实验的方差。历史 SD 只来自很少独立单位，自身不确定；更多世界主要减少给定策略的评估噪声，不会创造更多训练实例。D_SAVE 的逐 lane 相同副本不增加独立样本。这里不按习惯指定五 seed、256 worlds 或 109 对，也不从 power 表直接创建现行声明以外的批次。
+
+hmasd-pro-question-project-rese… +1
+
+还应避免把不同宿主的数值单位合并：C 的任务完成数、S1 的 J、restoration 的 unmet-demand 目标和不同版本 Scenario7 的回报不能共用一个未经说明的 .02 或 .05 意义。保留冻结 primary 和原 selection rights；新的 checkpoint／label 选择必须在开发数据上完成，再在独立测试数据上评价。
+
+成本记录也需保持层级。B05–B08 的 125 production fits、158,976 collected ticks、10.228 秒 scientific-process wall，不含全部准备、咨询及历史／tiny 工作；VSP B08–B11 的 19 fits、32,174,080 ticks、102.174 秒同样不是完整项目成本；C06–C07 没有新 fits，但有 491,520 actual ticks 和 203,534,144 model ticks。既不应按 fit 个数说它们一定昂贵，也不能按几秒钟科学计算说迁移和研究免费。
+
+第三方“5–10 fits／约一天”没有成为已测过的完整成本。今后真正选定的比较需把训练、采集、规则／checkpoint 选择、全部评估、模型模拟、制品恢复、实现与相应核对分开记录；复用已有模型的边际成本与当初构造成本也分开。不增加一套 owner-hour 账本或新额度制度。
+
+hmasd-pro-question-project-rese…
+
+五、共识如何更新，以及哪些话不能进入
+
+已读固定版本 FOUNDATIONS；它已经写入 C07、VSP B11、模型先验和数据成本的区别，以及“技术可达、已有价值证据、当前投入选择分别需要理由”。这些不应再作为待补发现，也无需复制一次结果台账。
+
+建议在原有 §2、§5、§6 中增补或强化以下有来源的认识，结果细节继续留在方向笔记。
+
+联合后果与已知 reward。 已知奖励函数不消除物理后果、队友行为、支持覆盖或 continuation 的未知性。B08 表明离线同历史方法比较、在线采集反馈与有限样本 reward-noise 效应须分开；预测更准确、一个预测分支发生、或者全程回报更高，不能互相替代为一般校准或在线因果结论。
+
+同信息与层级比较。 Actor 的实际可用信息、摘要节奏、延迟、记忆和模型先验必须写明；own-observation 实用 baseline 不自动是 HMASD 的同信息归因对照。FSD B01 的 package primary、B05 已实现修正、B09 的选择偏差和 B14 的条件部署单位，都应保留各自含义，不能用后选最佳 panel 或复制 checkpoint 改写旧结果。
+
+时机机会及方法边界。 外生事件率乘等待时间只描述指定事件反应机制。固定用户／固定 N 不排除由策略状态、几何、资源和承诺产生的时机价值；反过来，一个有事件的 host 也不保证某个 timing learner 有用。透明规则在测试条件下胜出，是可保留的研究答案，不是“只有不存在短规则，学习才有价值”的定理。
+
+hmasd-pro-question-project-rese…
+
+测量单位与投资关闭。 固定程序的世界抽样、冻结 checkpoint 的条件部署选择、独立重训总体，是不同层级；MDE 不是 SD，阴性或小样本不确定不强迫复制，也不证明方法类无效。停止当前投资与维护可以和保留正面发现同时成立；重入条件应描述能改变判断的具体问题，而不是保持常驻、无限搜索新理由的任务。
+
+以下不能作为已证实共识写入：静态任务 k 价值为零；所有档案共享一个 UAV 噪声地板；C/VSP 没有走向原生问题的可能；B08 证明 F 普遍校准更好；常量标签或 B14 给出 state-aware selection 上界；N 只是 constructor 参数所以转移已 ready；两个局部 SIG11 要求全节点通用 memory-test 门槛；以及“termination 即 quickest change detection／evidence pooling”已有 novelty 或性能保证。最后一项可以保留为标明未验证的 conjecture，本次没有重新做文献查新。
+
+hmasd-pro-question-project-rese… +1
+
+Central entropy 的 sum／mean 约定要对照预期目标，不因相差六倍就自动判 bug；finite-horizon true termination 与 continuing time-limit truncation 也须按实际 runner 契约区分。修复具体路径不应反向重写冻结实验或宣布所有旧数字损坏。
+
+hmasd-pro-question-project-rese…
+
+六、权限、读取范围与最终处置
+
+这里唯一实质性的实施权限冲突，是把“Root 共享测量准备”偷换为“重新选中 FSD 科学工作”，或让另一 DM 接管 Claude。当前 owner-reserved 状态须保留；本题也不选择新方向、发送 App 跨任务消息、改变 direction rows、写 shared foundations 或启动实验。普通 within-direction 工作无需由本答复再加审批；B 自主完成既选检查，不应等待 Root handoff。所有涉及新批次的建议仍需在实际被选择时保持 source publication、适用的预声明、比例适当的工程核对和真实执行记录，而不是新增 fit allowance。
+
+hmasd-pro-question-project-rese… +1
+
+来源范围。 完整读取了所附问题、第三方报告和 T1–T6 重算表；直接读取了固定治理与三项方法、当前 standing、B08 完整解释及已返回的 readback 范围、FSD 的冻结卡与 B05／B09／B13／B14 相关解释、VSP B09／B11、C07 及最终 feasibility 回复、A／UCOPE／FOLR 关键关闭解释、指定 VNFC、TRDL 与部分 archive 原记录，以及相关宿主／roster 源码。结论使用各自指定版本；更新的可写目标不是推理替代来源。
+
+没有重新训练、运行策略、进行模型模拟、重做 T1–T6 全部 raw-array 审计、核对每个历史文件 hash，或审计所有档案。第三方及原 DM 已做的检查仍归属于他们；本次阅读不制造独立复制。
+
+尚缺的执行证据包括：现有 FSD 权重在所选实际平台的可恢复／可评估状态；已接受的当前 S1 own-observation MAPPO 成绩和有能力的同信息 flat 最终参照；接口兼容的独立 CPCP flat 队伍；选定 native stage 的完整 learner／bootstrap／evaluation 接入；以及 lookahead 所需合法 snapshot/simulator 契约。相关本地权重、完整二进制和实际运行路径没有在本轮被直接验证。这些是执行与成本缺口，不是无法实现的判决；它们不妨碍本轮停止已回答路线和确定下一项有界问题。
+
+最终投资判断：保留 B 已选检查，Root 新投入先做有界原生参照；随后优先一个版本明确的 native k 问题。C／VSP 当前投资结束，旧救援配方不重开，FSD reserve 与 Claude 所有权保持，N／CPCP 机会按真实可用资产重新排序。不要用未测的低成功概率关闭整个研究类别，也不要因为技术上仍有可能而让每个方向持续投入。
+<!-- END CAPTURED PORTFOLIO PRO ANSWER -->
+
+</details>
+
 ### Decision
+
+2026-09-21, Root acting on the owner's explicit whole-project management assignment.
+The current Question was frozen and sent at source
+`3c4ba6fec59152f51816b721d1afd62890226019`. The later owner attachment arrived after
+that Send. Its assessment below is Root's additional reconciliation, not advice
+attributed to Pro or an alteration of the question Pro received.
+
+#### Advice received and Root reconciliation
+
+The complete Pro reply is saved from chat in the preceding Answer subsection; the
+transport completed with one send, one driver recovery and no verified remote answer
+commit. Root preserved the complete captured text, including attachment-reference
+labels produced by the chat UI. They are not additional source links or evidence of
+another independent artifact audit.
+
+Pro materially dissents from the first third-party report's overgeneralizations,
+and broadly agrees with Root's corrected closures and investment order. Root adopts
+its separation of practical baseline comparison, information-matched method comparison,
+frozen deployment selection and learning/transfer claims. B's existing work remains
+independent; a shared baseline effort must have a finite purpose, not become a
+permanent prerequisite. FSD's reserve cannot be bypassed by calling a new evaluation
+zero-fit. These limits are reflected in the decisions below.
+
+Pro preferred a version-specific Scenario7 route for a future trained k comparison,
+because it has a registered factory and historical training record. Root verified
+`configs/config_1.py`: S7-S4 enables UAV failures, whereas S7-S3 is the stage named
+by the historical 2.4-million-step arm-A artifact. Current interface v3 / reward v2 /
+arm C defaults cannot be treated as that historical arm A / reward v1 / 200Wh result.
+This makes Scenario7 the first candidate for a **trained** native timing question,
+not a verified reusable checkpoint or a measured best host.
+
+The later attachment adds a different, potentially cheaper scripted diagnostic.
+Root therefore gives its concrete preparation priority over committing to new
+training, while retaining Scenario7's registered route and restoration's actual
+missing-data/interface costs. The already completed source/asset review is the
+bounded shared measurement work for this turn; no second baseline audit or concurrent
+two-host sweep is assigned. The host for a later scientific batch must be chosen
+from an executable contract, not inferred from a paper or from zero fitting cost.
+The three frozen FSD weight checks below narrow one Pro evidence gap, but do not
+verify loading or evaluation and do not resume FSD.
+
+An independent ResearchCritic read the proposed decision, relevant notebooks,
+summaries and controller source, with no material dissent. Its useful alternative
+is retained: greedy target scores depend on delivered demand, so a clock effect
+could reflect endogenous target switching as well as outage-response delay. Neither
+the critic nor Pro independently reran the scientific experiments or every artifact
+audit; literature checks on the late attachment are Root's work.
+
+#### Project selection and scope
+
+This review ends investment in the completed C and VSP-03 routes and in the stopped
+UCOPE and FOLR packages. Their current rows move to the archived section; their positive,
+adverse and unresolved evidence, source-bound lead identities and recovery paths survive.
+This is the management decision requested by the owner, not a finding that those research
+categories are impossible. No standing search for a re-entry excuse or maintenance task
+is assigned. A concrete future question can justify a later selection without first
+proving that it will succeed.
+
+B remains the one currently active direction. Its independent DM owns the selected
+Scenario1 source-to-consequence audit and subsequent scientific choice; Root neither
+duplicates that investigation nor changes its accepted inputs. B08 weakens the current
+acquisition-only explanation, while early positives and the reward-noise alternative
+remain. FSD remains owner-reserved and Claude-owned. CPCP, VNFC and tail-return retain
+their reserve status. G33 remains frozen. No slot has to be filled, no new direction or
+native batch is registered here, and no independent App task is started or messaged.
+
+| Route | Current investment decision | Achievable observation that could matter later | Why it is not an automatic continuation |
+| --- | --- | --- | --- |
+| C information refresh | Archive the answered C06–C07 route; keep NEAR and ACTIVE_FIRST. | Estimate progress from legal own-history transitions, or study a specified cost–return tradeoff; a separate CADC fixed-receiver study has a recoverable native message path. | Neither finite-data value nor native transfer was tested; the positive C07 result does not leave these as unpaid obligations. No calibrated low success probability was measured. |
+| VSP-03 | Archive the answered fixed-host route; keep confirmed O_full and the B11 construction from R0 data. | A new host with persistent exclusive commitments could test a new timing question. | B11 has already resolved the proposed data-acquisition follow-up within its model family. Scenario1 does not expose the required reservation mechanism. |
+| UCOPE / FOLR | Archive the stopped packages, retaining ordinary feedback / generic recurrent references and contrary observations. | A task-grounded new commitment or accessible-history intervention with a competent comparator could change the decision. | Repeating distance gates, suffix-credit variants or the same cache package has no selected discriminating purpose. Local deltas and a favorable world do not establish a policy gain. |
+| FSD | Keep reserve and Claude ownership. | Competent same-information comparison; or a new native duration prediction. Frozen-checkpoint label effects on fresh worlds are technically attainable but answer a deployment question. | B01 is a method-package result; CF_S has already been tried. B14 is mixed on three reused blocks. A fixed-weight probe cannot establish the effect of retraining a duration method. |
+| N axis / CPCP / VNFC | Keep the distinct questions in reserve. | A matched specialist/generalist comparison requires a compatible native variable-roster interface and new fits; CPCP requires compatible independent populations; VNFC's unfinished credit comparison needs a fresh stable implementation. | G-series toy N-transfer is a real asset, but not a current UAV transfer result or a flat-population cross-play bank. Old VNFC relabel failures and an interrupted final primary cannot be converted into clean negative evidence. |
+| Tail-return and older native archives | Preserve the existing reserve/archive decisions. | A concrete scalar-with-eta comparator or a justified independent comparison can be informative when selected. | Sparse, mixed or sub-scale native comparisons stop present investment without establishing class-wide failure. CBSC/CRTO/EGRCR exact equalities remain limited to their tested objects; DISH and RCLE are not information-equivalence theorems. |
+
+#### Next investment order
+
+1. **Finish the existing B interface question independently.** This remains the DM's current work,
+   with no Root-imposed calibration sweep or parallel clone. The desired output is an
+   actual unknown joint consequence and lawful feedback path, with a simple reference
+   and a prediction that could distinguish reuse from ordinary estimation. Shared
+   preparation does not wait for B, and B does not wait for a Root message.
+2. **Prepare one native timing diagnostic before a large new training comparison.**
+   The supplemental scripted-controller suggestion is useful at this position, but
+   its proposed sweep is not yet executable as specified. This review performs the
+   feasibility work and defines the narrow question below. FSD is not reopened by
+   receiving a report or by preparing this option. No wrapper, rollout or fitting
+   batch has been launched. A flat outcome would stop this controller/host comparison;
+   it would not close the entire k axis.
+3. **Make competent, information-matched native measurement the next training priority
+   when a direction is selected.** An own-observation MAPPO comparison can answer a
+   practical baseline question, but hierarchy attribution requires matching the
+   information actually used at execution. Do not repeat an already attempted CF_S
+   repair as if it were new. COPA-informed N comparison follows a concrete compatible
+   task definition; it is not an immediate drop-in baseline or a reason to create a
+   second active direction now.
+
+The order is a project investment choice, not a mandatory gate for all future research.
+Scripted positives are not required before every learning study. A negative or unclear
+diagnostic can still support a different learning question if its prediction and cost
+are independently justified. No universal fit allowance, seed count or success-probability
+threshold is introduced.
+
+#### What the added k proposal would actually test
+
+At the inspected source, `envs/uav_service_restoration/baselines.py` already supplies
+legal current-telemetry greedy controllers and `evaluation.rollout_controller` already
+provides a native scripted rollout path. The missing legacy learner integration does
+not block that path. It does block treating the host as an already exercised HMASD
+training route.
+
+The baseline action is a normalized velocity request. Keeping that vector for k steps
+is different from keeping a selected service target while using the same feedback
+navigator each step. A useful target-renewal probe must expose target identity, use
+the same arrival-and-hold navigator in every arm, and change only when reassignment
+is permitted. It must not manufacture an advantage from overshoot or different
+low-level navigation. A raw-velocity commitment study would be a separate question.
+
+All four supplied presets have `motion_weight=0`. The optional motion term in
+`dynamics.py` / `env.py` uses realized squared speed, not electrical energy or a charge
+per replanning operation. Target latching need not reduce that integral. Record return,
+service shortfall, realized movement, reassignment count, controller calls, and measured
+inference time separately; do not insert a reward fee to force a clock preference.
+
+The Milan outage preset has four UAVs, three sites, a 1,800-second horizon, 10-second
+decision steps and one unrepaired site failure. A proposal for 1/4/8 outages changes
+the event law. Repeatedly failing an already failed site is not a fresh event; repair,
+site eligibility and the time law would have to be specified before comparing hazards.
+The configured `prepared_datasets/milan_internet_v1` cache is absent in the Root checkout,
+canonical local checkout and actual result-node path checked by SSH. The package correctly
+requires a prepared cache without silently substituting synthetic demand. The existing
+smoke fixture is deliberate analytic test data, useful for engineering but not evidence
+about real Milan demand.
+
+Consequently, the first meaningful scientific comparison, if selected, is a matched
+target-assignment timing panel on one explicit, available task law: the supplied
+`k={1,5,10,20,40}` candidate clocks and a lawful observed-event rule, with world pairing,
+units, horizon, readout and cost declared before execution. A future-event oracle must
+be labeled privileged and kept separate from the lawful event rule. No seed set or
+result entry is frozen by this preparation, and no synthetic-data substitution or
+1/4/8 sweep is silently accepted. A useful next observation would be task consequences
+tracking actual delayed reassignment under otherwise identical navigation, rather than
+merely fewer calls or smoother motion. A steep curve would justify investigating that
+mechanism; it would not automatically establish learned-skill headroom or license an
+entire HMASD sweep. Record the observed-event -> changed target -> realized delay ->
+service-consequence chain. If changes instead arise mainly from suppressing endogenous
+greedy target switching, retain that controller-specific result without relabeling it
+an outage-response mechanism.
+
+#### Frozen FSD artifact feasibility checked after Send
+
+Root read and hashed, without loading or evaluating, the three original-node files
+`/home/wu/projects/HMASD/runs/flexible_skill_duration/b08_save_<seed>_a01/final_weights.pt`.
+Each is 66,030,843 bytes. Their digests exactly match the tracked `weights.json` records
+at `cc544037f691d1c554ed557890547be9622cd967`:
+
+| Seed | SHA256 |
+| --- | --- |
+| 772803 | `7cb214151d4e954af541391013686fd712a66655e050d27d2f0f2903134b08f7` |
+| 772903 | `87a703fc18120738c25f7812a0248f5aab0e66a4959de8711aef76a6f1c85eca` |
+| 773003 | `9a8ebe9057455b1b8fd6fe9bcfa41f4530ced9b84820f364985de13c61c1a14d` |
+
+The original launch was `fbae667d9731f081a6fdcaf0a08e5df3005b8524`. The current node lacks
+the metadata sidecars, which are recoverable from Git. The existing B09 label-map
+runner binds its old 32 worlds and fidelity contract: a new-world probe needs a
+separate prospective evaluator that preserves faithful loading and original-node
+numerics. No sidecar was restored and no checkpoint was deserialized here. This is
+evidence of technical availability, not an accepted new result or an FSD resumption.
+
+#### Supplemental prototype and literature reconciliation
+
+The owner's added report is preserved below as received, including incomplete phrases.
+The stated `/home/fires/.claude/jobs/180ce9fmd` path is absent. The matching artifacts
+were recovered under `/home/fires/.claude/jobs/180ce9f1/tmp/new_approaches/` and read,
+not rerun. Their tables are preserved below; the source identities are recorded there.
+
+The bandit model has H=200, a shared latent binary state with change probability
+`lambda={.005,.02,.05,.1,.2}`, and known Bernoulli reward probabilities `.9/.1` or
+`.6/.4`. **Renewal reveals the true state perfectly, selects its matching arm, and
+earns zero for that step.** CUSUM observes reward and applies the known log-likelihood
+ratio, detecting after a step and renewing on the next. Pooled CUSUM centrally sums
+conditionally independent team evidence and renews the team; bandwidth, delay,
+dropout and unknown reward models are absent. Pooling itself is not an oracle; its
+information and cost assumptions must be explicit.
+
+There are 4,000 episodes per policy cell, clock grid `{2,3,5,8,10,15,20,30,40}` and
+threshold grid `{1,2,3,4,5,6,8}`. Best clock and best threshold are maxima from the
+same cells, without held-out selection. Root also reduced the supplied `task_b.json`
+with arithmetic only: fixed h=3 minus best clock ranges from **+.055387500 to
++.103392500** in the strong-signal cells, and **−.001243750 to +.005908750** in the
+weak-signal cells. Thus the strong-signal positive is
+retained, while the weak case does not support uniform superiority. Pooled gains
+reach about .051 J but are negative in some weak/high-hazard cells. The 61–87% number
+is the selected pooled-versus-best-common-clock gain divided by the particular
+privileged-reference gap in three heterogeneous settings, not native headroom. The
+so-called oracle always renews after a true flip and is not established as optimal:
+at weak signal / lambda=.2, best CUSUM is .500095 and this reference is .480045.
+This limits an upper-bound
+interpretation, not the observed toy comparison. EXP3 and sliding-window UCB over k
+remain below the selected best clock. None of this proves novelty or UAV transfer.
+
+The expression `c/k + lambda*Delta*(k-1)/2` is a conditional rare-change/waiting-cost
+heuristic, not a theorem about all hosts or all termination policies. Its continuous
+optimum must respect k>=1 and the approximation's event regime. The implementation
+has an implicit lost-reward renewal cost and perfect information restoration, not
+a native movement-cost parameter. Free policy recomputation implies an optimal
+per-step policy can emulate holding only when information, resources and policy
+classes are matched; it does not rank particular greedy or finitely trained methods.
+
+Primary-source checks also change three recommendations:
+
+- [COPA, ICML 2021](https://proceedings.mlr.press/v139/liu21m/liu21m.pdf), §§3.2–3.4 and
+  Fig. 3 / §4.1, includes within-episode agent arrivals. The coach computes candidate
+  strategies before a distance threshold decides whether to transmit; fewer broadcasts
+  do not directly mean fewer coach computations. Its discrete AQMIX implementation
+  still needs a matched continuous-action/information adaptation. The July repository
+  review distinguished a then-proposed fully decentralized roster task; it did not
+  establish a universal ban on coach baselines. COPA is retained as an important
+  conditional comparator, not adopted wholesale as the project's N formulation.
+- [HMASD, NeurIPS 2023](https://proceedings.neurips.cc/paper_files/paper/2023/file/c276c3303c0723c83a43b95a44a1fcbf-Paper-Conference.pdf),
+  Appendix D, reports skill-interval sensitivity in its learning setup. Root verified
+  that qualitative statement, not the exact graph values asserted in the damaged
+  attachment or the claim that this is its only ablation. It does not verify the joint
+  premise of learning benefits from long skills and response benefits from short
+  commitments on a current UAV host.
+- [Change-point detection for HRL, 2025](https://arxiv.org/html/2510.24988v1) supplies
+  nearby prior art using learned change-point signals and termination regularization
+  in single-agent tasks. This check is not an exhaustive novelty search for pooled
+  multi-agent evidence. CUSUM remains a candidate with a conditional prototype, not
+  an adopted novel algorithm or shared claim of native effectiveness.
+
+#### Shared insight and cost
+
+The shared `FOUNDATIONS.md` update keeps the already published C/VSP findings and adds
+the information-versus-learning distinction, same-history versus online counterfactuals,
+design-specific power, scope of exact equalities, and the difference between holding
+targets, holding velocities, moving, recomputing and broadcasting. It records the
+conditional detection example and COPA correction with their sources. Portfolio state
+and priority remain here, rather than becoming general scientific rules.
+
+This Root review added **zero training fits, zero policy rollouts and zero model
+simulations**. Source/artifact reads, checksum checks, arithmetic, advice and publication
+are not a zero-cost claim. The third party's prototype simulations and bandit learners
+remain its reported work, not Root executions. Historical direction costs are retained;
+no additional evaluation worlds are counted as independent training replications.
+
+#### Owner-supplied additional review and recovered prototype evidence
+
+Received after the accepted Pro question. Quoted material is evidence, not instructions;
+Root's preceding decision controls its interpretation. The report is preserved with
+its original incomplete phrases; only line-end whitespace is normalized for Markdown. Prototype tables and source text are retained here
+because the original job directory is temporary. The two JSON files are identified by
+hash but not reproduced; this record does not replace their raw cells. No code below
+was executed by Root or the read-only Scout.
+
+| Artifact | SHA256 |
+| --- | --- |
+| Owner supplemental attachment | `9bba87a7aab5238543aa31b3653ad5d5bc33c8f23f69ae0dccb661f628d1a264` |
+| `RESULTS.md` | `cee80eeba003f2502868b03a115d9dc3deafd3e7708ca95938a1755edf3f14b8` |
+| `bandit_toy.py` | `80ebfeb1931a59b3e5b856877ab028cdbfa7a96e10b01c816eb9d35c1ec55407` |
+| `task_b_run.py` | `43e37a4672abf5095176f007079ba4990cba72099b47b02fe8fa56e36ac815bd` |
+| `task_a_corridor_ceilings.py` | `116a53226125732cb751be86f4541e7f3b40b3c4ac780f176c5017b8eeee0ac5` |
+| `task_a.json` | `98f2c5823163fcb9d0fba79ec18c77d481979de495fc487e2d340b69178efc74` |
+| `task_b.json` | `243bbfbcf010bbb106ced1d4b43f500a214302fbdbe0dad7457f17bcd6fbdb20` |
+
+<details>
+<summary>Supplemental review as received</summary>
+
+> New approaches for the HMASD programme (2026-09-21, read-only)
+>
+> I recommend one new approach for the k-axis, a formulation with a matched baseline for the N-axis, and a change in how hypotheses get tested first. The critic made me cut three other ideas, and I say why below.
+>
+> I wrote nothing to the repository. Scouts ran on Sonnet and used CodeGraph first, the Implementer built a bandit-level prototype, and an Opus critic attacked the shortlist.
+>
+> The critic corrected how I describe "stuck". Two clean, small positives on toy hosts were recorded today:
+>
+> - VSP-03's confirmed +0.0176;
+> - B05's +0.010, which is positive in two of its three blocks.
+>
+> What is still missing is a positive t.
+> today:
+>
+> - VSP-03's confirmed +0.0176;
+> - B05's +0.010, which is positive in two of its three blocks.
+> What is still missing is a positive on either axis on the UAV host.
+> nothing has moved on k
+>
+> I use three quantities:
+>                                                                                                       is the cost of re-deciding.
+> - λ is how often the situation changes.
+> - Δ is the per-step gain from holdin
+>
+> A fixed clock loses about c/k + λΔ(k−1)/2 per step. The best k is √(2c/(λΔ)), and adaptive timing is   h about √(2cλΔ). A scout derived the same formulas independently. My hand approximation matches
+> the corridor's exact figures within a few thousandths.
+>
+> The formula gives zero when re-deciding is free or when nothing changes. One or both held in every k
+> experiment the programme has run.
+> - The critic's point. On the UAV hosts re-deciding is free, so no method can beat "decide every step"
+>   on return.e claim type that remains. COPA's claim is the same return with far fewer coordinator
+>   re-decisions, shown as a trade-off curve with no artificial fee in the reward.
+> - One way k can still raise return o
+>   - Learning may need long skills. In the HMASD paper's only k ablation, k=5 never learns on 3m, while
+>     k=25 reaches roughly 90–100%.
+>   - Events may also demand fast reactions.                                                            Whether both hold on a UAV host has never been tested.
+> - Why D2 lost.
+>   - Its trigger listened to the coorbel-preference gap), and no gradientever reached that trigger.
+>   - It fired on about 36% of agent-steps.
+>   - That cut skill segments to 2.7–4oved half as far as under the fixed
+>     clock.                                  In effect it destroyed what long
+> Approach 1 (k): trigger on surprise, fire rarely, pool the team's evidence
+>
+> This treats skill termination as change deteised outcomes fall below what wall. It re-decides only when the tally
+>                                                                                                     ribed honestly, this is D2 repeated with an outcome statistic in place of a belief statistic. D2's
+> loss stays on the record as contrary evidence.
+>
+> - Prototype results. The toy hides the change, so agents must detect it from their own noisy outcomes.
+>   - With informative evidence, the trigger with one untuned threshold beats the best tuned clock by
+>     0.06–0.10.
+>   - It loses at most 0.010 to the best threshold. A single k=10 loses up to 0.032 to the best k.   - Pooling beats independent detectors by 0.01–0.05.
+>   - On corridor-like mixed hazards it reaches 61–87% of the oracle headroom.
+>   - With weak evidence the advantage drops below 0.01.
+> - Novelty.                                                                                          Scouts found no work that combines change detection, skill termination and pooled team evidence.
+>     The nearest is a single-agent paper from October 2025.
+>   - They also found no UAV re-deployment paper that tests its trigger against a tuned re-plan period.
+> - Limits from the critic.                   The corridor's flagged version iiser works, because there greedy
+>     equals the oracle by construction.      A noisy version of the corridor  also lose the closed-formreferences, leaving only simulated ones.
+>
+> Approach 2 (N): adopt COPA as the formulation and the matched baseline
+>                                              (ICML 2021) has a global coach gies. Its team size changes between
+>                                                                                                     programme has never used COPA. A July external review set it aside for depending on a global
+> coach, which HMASD also has.
+>
+> The first observation for the N-axis is a transfer table of per-N specialists against one generalist.
+> It needs training fits, so it comes second.
+>
+> Approach 3 (method): test with scripted controllers first
+> The update is 91% of fit wall time, so more seeds are not affordable on this setup.
+> Retrain-and-compare will keep resolving only about 0.1 J unless the GPU or a lighter update recipe is
+> used.
+> Scripted controllers have no training-seed noise and run in minutes. I propose using them to find
+> where headroom exists before asking a learner to reach it.
+>                                             ons
+>                                             ───────────────────────────────┬─────┬──────────────────────────┐
+> │              Option              │           What it buys           │           Cost           │
+> ├──────────────────────────────────┼──────────────────────────────────┼──────────────────────────┤
+> │ 1. Zero-fit timing sweep on the  │ Whetherrvice-restoration host         │     │ Implementer time, no     │
+>                                  │ UAV-native host                  │ fits                     │    ───────────────────────────────┼──────────────────────────────────┼──────────────────────────┤
+> │ 2. Trained keep/end head on the  │ A check that the training stack  │ New code in the core     │
+> │ corridor                         │ can realise a known +0.05–0.27 J │ learner, plus review     │
+> ├──────────────────────────────────┼──────────────────────────────────┼──────────────────────────┤
+> │ 3. COPA formulation and baseline │ Literature standing and a        │ Porting work plus fits   │
+> │  for N                           │ matched comparator               │                          │
+> ├──────────────────────────────────┼──────────────────────────────────┼──────────────────────────┤ 4. Continue the three toy        │                                  │ Seconds of compute, with │
+> │ directions                       │ Clean answers at 1–2% of level   │  no route to the UAV     │
+> │                                  │                                  │ host                     │
+> └──────────────────────────────────┴──────────────────────────────────┴──────────────────────────┘
+> Recommendation: Option 1.
+>
+> - What it is.                               The scripted greedy controllers -plan every step today. TheImplementer would wrap them so t steps.
+>   - The sweep would cover k ∈ {1, 5, 10, 20, 40} against event-triggered and oracle-timed re-planning,
+>     at 1, 4 and 8 outages per episode.
+>   - Results would be read with the host's exediction declared in advance. Lon to outages × (k−1)/2. Latching also
+>   saves motion cost, which is the host's own price on re-deciding.
+> - How to read it.
+>   - A steep curve tells you which regime to train in. It also licenses an HMASD fixed-k sweep on that
+>     host, to test whether learning needs long skills there.                                        - A flat curve means the k-axis has no home on this host. That negative is capped, because the
+>     host's data is not validated.
+> - Why this option. It is the only option that meets FSD's recorded reopening condition, "a mechanism
+>   with a native prediction for an unfixed duration".
+> What I cut
+>
+> - k-free HMASD (a bandit over k).           The repo vendors only Alice_and_benchmark that shows k-sensitivity.
+>   - k is wired through the learner's hot path.
+>   - In the prototype the bandit still ends 0.011–0.028 below the best k.
+> - Hard capacity limits on skill assignment. On the corridor, agents sharing  duplication is optimal there.- Where roles are scarce, the scripted baseline already assigns one site per UAV.
+> - Coordinator selection repair.
+>   - It sits inside the rested FSD direction. Today's reserve row names "a high entropy" as not enough
+>     to reopen it.                                                                                   The +0.167 J gain comes from one seed of three.
+> - A faster experiment loop. Retracted, for the reason at the top.
+>
+> Process notes
+> - Subagent effort. It cannot be set per callnnot verify from inside a sessio
+> - What I need from you.                                                                             FSD is rested and this session is read-only, so I started nothing.
+>   - Say "go" and I will reopen FSD for exactly this probe: the Implementer writes the wrapper and I
+>     read the sweep.
+> - Filing.                                   I have not filed the review or te_docs/.
+>   - The prototype tables and scripts are in /home/fires/.claude/jobs/180ce9fmd. That folder is cleaned up whenthis job is deleted, so say "file it" if you want it all kept.
+
+</details>
+
+<details>
+<summary>Third-party prototype RESULTS.md</summary>
+
+> # New-approaches probe: corridor ceilings (A) and a bandit-level ladder (B)
+>
+> Produced by `task_a_corridor_ceilings.py`, `task_b_run.py` (world and policies in
+> `bandit_toy.py`) and rendered by `make_results.py`.  Machine-readable copies:
+> `task_a.json`, `task_b.json`, `tables.json`.  No interpretation is offered here;
+> every entry is a computed number with its provenance.
+>
+> ## Task A -- exact relay-corridor ceilings (closed forms)
+>
+> * Closed forms imported from the repository: `envs/relay_corridor/references.py (closed_form_j_switch, closed_form_j_fixed_k, commitment_fraction)`.
+> * imported from the repository; envs/relay_corridor/{config,renewal,rng,host,references,adapter}.py are pure NumPy and execute no environment stepping or learner construction at import.
+> * Object: `H = 400`, `N = 6`, `K = 2`,
+>   two regions, region weights `w_r = [0.5, 0.5]`
+>   (RelayCorridorConfig.region_weights = N_r / N; proposal_config has N = 6 agents balanced over 2 regions -> (3, 3)/6).
+> * Report compared against: `docs/Claude_docs/plans/RELAY_CORRIDOR_HOST_REPORT_20260902.md, section 3`.
+> * J_k closed form is exact iff k | H; the exact DP is reported alongside for the k in 1..40 that do not divide 400.
+>
+> Closed forms (verbatim from `envs/relay_corridor/references.py`):
+>
+> ```
+> C(k, lam) = (1 - (1 - lam)^k) / (k * lam)
+> J_switch  = Delta * sum_r w_r * (1 + (H - 1)(1 - lam_r)) / H
+> J_k       = Delta * sum_r w_r * [C(k, lam_r) - 1/k + 1/H]
+> ```
+>
+> ### A1 -- reproduction of the report's reference table
+>
+> | level | (lam_1, lam_2) | Delta | J_switch | J_1 | J_2 | J_5 | J_10 | J_20 | J_40 | best common k (1..40) | J at best k |
+> | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+> | small | (0.005, 0.02) | 0.4 | 0.39501250 | 0.00100000 | 0.19850000 | 0.31116838 | 0.33948667 | 0.33797505 | 0.31125478 | 14 | 0.34202684 |
+> | medium | (0.005, 0.1) | 0.6 | 0.56857875 | 0.00150000 | 0.28575000 | 0.42422096 | 0.43023569 | 0.38943206 | 0.33291125 | 7 | 0.43491007 |
+> | large | (0.02, 0.2) | 1.0 | 0.89027500 | 0.00250000 | 0.44750000 | 0.61905602 | 0.58297444 | 0.49154888 | 0.38642894 | 5 | 0.61905602 |
+>
+> Agreement with the printed report table (`J_switch`, `J_1`, `J_2`, `J_5`,
+> `J_20`, `J_40`; the report's D0 set has no `k = 10`, so that column has no
+> printed counterpart):
+>
+> | level | absdiff J_switch | absdiff J_1 | absdiff J_2 | absdiff J_5 | absdiff J_20 | absdiff J_40 | row max absdiff |
+> | --- | --- | --- | --- | --- | --- | --- | --- |
+> | small | 0.000000000000 | 0.000000000000 | 0.000000000000 | 0.000000001425 | 0.000000003573 | 0.000000002010 | 0.000000003573 |
+> | medium | 0.000000000000 | 0.000000000000 | 0.000000000000 | 0.000000002538 | 0.000000000988 | 0.000000002245 | 0.000000002538 |
+> | large | 0.000000000000 | 0.000000000000 | 0.000000000000 | 0.000000004000 | 0.000000003425 | 0.000000000144 | 0.000000004000 |
+>
+> * **max |difference| against the report's printed returns: 4.000e-09** (the report prints 8 decimals, so this is its rounding level).
+> * max |difference| on `m_dur` over the frozen D0 set {1,2,5,20,40}: 4.998e-13 (report prints 12 decimals); best-`k` over that set agrees for all three levels: True.
+> * Weighted-sum identity `J_k == sum_r w_r J_k(lam_r)`: max |difference| 5.551e-17.
+> * Closed form vs the repository's exact DP (`enumerate_references`): 3.664e-15 over every `k` that divides `H = 400`, but up to 6.094e-03 over `k = 1..40` as a whole -- the `J_k` closed form assumes the fixed boundaries tile the episode. Every `k` in the A1/A3 tables divides 400; the `1..40` search does not, so both values are given below.
+>
+> | level | best k (closed form) | J | best k (exact DP) | J | closed form - DP |
+> | --- | --- | --- | --- | --- | --- |
+> | small | 14 | 0.34202684 | 13 | 0.34195130 | 0.00007555 |
+> | medium | 7 | 0.43491007 | 8 | 0.43487697 | 0.00003310 |
+> | large | 5 | 0.61905602 | 5 | 0.61905602 | 0.00000000 |
+>
+> ### A2 -- per-region clocks and the three rungs
+>
+> `J_k(lam_r)` and `J_switch(lam_r)` are the same closed forms without the
+> weighted sum, and carry the level's `Delta`.  Region weights `w_r = (0.5, 0.5)`
+> come from `RelayCorridorConfig.region_weights = N_r / N`: `proposal_config`
+> places `N = 6` agents in two balanced regions, so `N_r = 3` each.
+>
+> Per-region `J_k(lam_r)`, `k = 1..40` (closed form):
+>
+> | k | small r1 (.005) | small r2 (.02) | medium r1 (.005) | medium r2 (.10) | large r1 (.02) | large r2 (.20) |
+> | --- | --- | --- | --- | --- | --- | --- |
+> | 1 | 0.001000 | 0.001000 | 0.001500 | 0.001500 | 0.002500 | 0.002500 |
+> | 2 | 0.200000 | 0.197000 | 0.300000 | 0.271500 | 0.492500 | 0.402500 |
+> | 3 | 0.265670 | 0.259720 | 0.398505 | 0.343500 | 0.649300 | 0.482500 |
+> | 4 | 0.298010 | 0.289159 | 0.447015 | 0.367350 | 0.722898 | 0.490500 |
+> | 5 | 0.317020 | 0.305317 | 0.475530 | 0.372912 | 0.763292 | 0.474820 |
+> | 6 | 0.329367 | 0.314859 | 0.494050 | 0.370059 | 0.787147 | 0.450713 |
+> | 7 | 0.337907 | 0.320641 | 0.506860 | 0.362960 | 0.801603 | 0.424132 |
+> | 8 | 0.344070 | 0.324092 | 0.516104 | 0.353650 | 0.810231 | 0.397642 |
+> | 9 | 0.348648 | 0.326005 | 0.522972 | 0.343220 | 0.815012 | 0.372379 |
+> | 10 | 0.352119 | 0.326854 | 0.528178 | 0.332293 | 0.817136 | 0.348813 |
+> | 11 | 0.354785 | 0.326943 | 0.532177 | 0.321240 | 0.817357 | 0.327091 |
+> | 12 | 0.356848 | 0.326472 | 0.535272 | 0.310285 | 0.816180 | 0.307200 |
+> | 13 | 0.358448 | 0.325581 | 0.537672 | 0.299568 | 0.813952 | 0.289048 |
+> | 14 | 0.359685 | 0.324369 | 0.539528 | 0.289171 | 0.810922 | 0.272507 |
+> | 15 | 0.360632 | 0.322908 | 0.540948 | 0.279144 | 0.807270 | 0.257439 |
+> | 16 | 0.361344 | 0.321253 | 0.542017 | 0.269512 | 0.803132 | 0.243704 |
+> | 17 | 0.361864 | 0.319445 | 0.542796 | 0.260286 | 0.798612 | 0.231171 |
+> | 18 | 0.362223 | 0.317516 | 0.543334 | 0.251468 | 0.793791 | 0.219718 |
+> | 19 | 0.362447 | 0.315492 | 0.543671 | 0.243052 | 0.788730 | 0.209234 |
+> | 20 | 0.362558 | 0.313392 | 0.543837 | 0.235027 | 0.783480 | 0.199618 |
+> | 21 | 0.362572 | 0.311233 | 0.543858 | 0.227380 | 0.778081 | 0.190780 |
+> | 22 | 0.362502 | 0.309027 | 0.543753 | 0.220097 | 0.772567 | 0.182641 |
+> | 23 | 0.362360 | 0.306785 | 0.543540 | 0.213162 | 0.766962 | 0.175130 |
+> | 24 | 0.362155 | 0.304516 | 0.543232 | 0.206558 | 0.761291 | 0.168183 |
+> | 25 | 0.361895 | 0.302228 | 0.542843 | 0.200270 | 0.755571 | 0.161744 |
+> | 26 | 0.361587 | 0.299927 | 0.542381 | 0.194282 | 0.749816 | 0.155765 |
+> | 27 | 0.361237 | 0.297617 | 0.541855 | 0.188578 | 0.744042 | 0.150200 |
+> | 28 | 0.360849 | 0.295303 | 0.541273 | 0.183143 | 0.738257 | 0.145012 |
+> | 29 | 0.360427 | 0.292989 | 0.540640 | 0.177962 | 0.732471 | 0.140164 |
+> | 30 | 0.359975 | 0.290677 | 0.539963 | 0.173022 | 0.726693 | 0.135627 |
+> | 31 | 0.359497 | 0.288371 | 0.539246 | 0.168309 | 0.720928 | 0.131373 |
+> | 32 | 0.358995 | 0.286073 | 0.538493 | 0.163812 | 0.715183 | 0.127376 |
+> | 33 | 0.358472 | 0.283785 | 0.537708 | 0.159518 | 0.709461 | 0.123616 |
+> | 34 | 0.357929 | 0.281507 | 0.536894 | 0.155415 | 0.703769 | 0.120072 |
+> | 35 | 0.357369 | 0.279243 | 0.536053 | 0.151495 | 0.698108 | 0.116728 |
+> | 36 | 0.356793 | 0.276993 | 0.535189 | 0.147745 | 0.692482 | 0.113566 |
+> | 37 | 0.356203 | 0.274757 | 0.534304 | 0.144158 | 0.686893 | 0.110573 |
+> | 38 | 0.355600 | 0.272538 | 0.533400 | 0.140724 | 0.681345 | 0.107736 |
+> | 39 | 0.354985 | 0.270335 | 0.532478 | 0.137435 | 0.675838 | 0.105043 |
+> | 40 | 0.354360 | 0.268150 | 0.531540 | 0.134283 | 0.670374 | 0.102483 |
+>
+> Best per-region `k` and the per-region switching oracle:
+>
+> | level | r1 best k | r1 J | r2 best k | r2 J | r1 J_switch | r2 J_switch | r1 best k (DP) | r2 best k (DP) |
+> | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+> | small | 21 | 0.362572 | 11 | 0.326943 | 0.398005 | 0.392020 | 20 | 10 |
+> | medium | 21 | 0.543858 | 5 | 0.372912 | 0.597008 | 0.540150 | 20 | 5 |
+> | large | 11 | 0.817357 | 4 | 0.490500 | 0.980050 | 0.800500 | 10 | 4 |
+>
+> The three rungs (`L0` best common clock, `L2` context-dependent clock, `L3`
+> switching oracle), closed form and exact DP:
+>
+> | level | source | L0 | L0 k* | L2 | L3 | L2-L0 | L3-L0 | (L2-L0)/(L3-L0) |
+> | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+> | small | closed form | 0.34202684 | 14 | 0.34475735 | 0.39501250 | 0.00273051 | 0.05298566 | 0.051533 |
+> | small | exact DP | 0.34195130 | 13 | 0.34470623 | 0.39501250 | 0.00275494 | 0.05306120 | 0.051920 |
+> | medium | closed form | 0.43491007 | 7 | 0.45838478 | 0.56857875 | 0.02347471 | 0.13366868 | 0.175619 |
+> | medium | exact DP | 0.43487697 | 8 | 0.45837456 | 0.56857875 | 0.02349759 | 0.13370178 | 0.175746 |
+> | large | closed form | 0.61905602 | 5 | 0.65392875 | 0.89027500 | 0.03487273 | 0.27121898 | 0.128578 |
+> | large | exact DP | 0.61905602 | 5 | 0.65381798 | 0.89027500 | 0.03476197 | 0.27121898 | 0.128169 |
+>
+> ### A3 -- loss from a mis-set common clock, `L0 - J_k`
+>
+> | level | L0 | L0 - J_2 | L0 - J_5 | L0 - J_10 | L0 - J_20 | L0 - J_40 |
+> | --- | --- | --- | --- | --- | --- | --- |
+> | small | 0.34202684 | 0.14352684 | 0.03085846 | 0.00254017 | 0.00405179 | 0.03077207 |
+> | medium | 0.43491007 | 0.14916007 | 0.01068911 | 0.00467439 | 0.04547801 | 0.10199882 |
+> | large | 0.61905602 | 0.17155602 | 0.00000000 | 0.03608158 | 0.12750713 | 0.23262708 |
+>
+> Same quantity with `L0` and `J_k` taken from the exact DP:
+>
+> | level | L0 | L0 - J_2 | L0 - J_5 | L0 - J_10 | L0 - J_20 | L0 - J_40 |
+> | --- | --- | --- | --- | --- | --- | --- |
+> | small | 0.34195130 | 0.14345130 | 0.03078291 | 0.00246462 | 0.00397624 | 0.03069652 |
+> | medium | 0.43487697 | 0.14912697 | 0.01065601 | 0.00464128 | 0.04544491 | 0.10196572 |
+> | large | 0.61905602 | 0.17155602 | 0.00000000 | 0.03608158 | 0.12750713 | 0.23262708 |
+>
+> ## Task B -- piecewise-stationary bandit toy
+>
+> * World: `H = 200`, latent flips with probability `lambda` per step,
+>   RENEW scores 0 at that step and reveals the latent; the episode starts matched.
+> * `lambda` grid [0.005, 0.02, 0.05, 0.1, 0.2]; informativeness ['0.9/0.1', '0.6/0.4']; `k` grid [2, 3, 5, 8, 10, 15, 20, 30, 40]; `h` grid [1, 2, 3, 4, 5, 6, 8].
+> * 4000 independent episodes per policy cell; base seed `20260921`, one `numpy.random.default_rng([seed, group])` per policy group.
+> * Bandit-over-k: 3000 episodes x 96 independent replicates, tail = episodes 1001..3000; EXP3 `gamma = 0.1`, SW-UCB window 200.
+> * CUSUM convention: log P(r|mismatched) - log P(r|matched); renewal one step after the crossing (a renewal step yields no observation); S reset at the crossing.
+> * **Largest standard error over every reported single-cell J: 0.00176** (target < 0.003).
+>
+> ### P1 -- fixed clock, RENEW every k steps
+>
+> `(p_hi, p_lo)` = 0.9/0.1:
+>
+> | lambda | k=2 | k=3 | k=5 | k=8 | k=10 | k=15 | k=20 | k=30 | k=40 | best k | J at best k | J at k=10 | max SE in row |
+> | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+> | 0.005 | 0.4525 | 0.5992 | 0.7166 | 0.7790 | 0.7973 | 0.8141 | 0.8238 | 0.8226 | 0.8146 | 20 | 0.8238 | 0.7973 | 0.00128 |
+> | 0.02 | 0.4470 | 0.5879 | 0.6934 | 0.7414 | 0.7495 | 0.7491 | 0.7386 | 0.7128 | 0.6838 | 10 | 0.7495 | 0.7495 | 0.00176 |
+> | 0.05 | 0.4347 | 0.5642 | 0.6523 | 0.6754 | 0.6749 | 0.6559 | 0.6343 | 0.6075 | 0.5795 | 8 | 0.6754 | 0.6749 | 0.00163 |
+> | 0.1 | 0.4148 | 0.5291 | 0.5936 | 0.5986 | 0.5931 | 0.5733 | 0.5580 | 0.5404 | 0.5354 | 8 | 0.5986 | 0.5931 | 0.00126 |
+> | 0.2 | 0.3740 | 0.4650 | 0.5090 | 0.5154 | 0.5156 | 0.5110 | 0.5094 | 0.5083 | 0.5072 | 10 | 0.5156 | 0.5156 | 0.00093 |
+>
+> `(p_hi, p_lo)` = 0.6/0.4:
+>
+> | lambda | k=2 | k=3 | k=5 | k=8 | k=10 | k=15 | k=20 | k=30 | k=40 | best k | J at best k | J at k=10 | max SE in row |
+> | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+> | 0.005 | 0.3026 | 0.4004 | 0.4810 | 0.5242 | 0.5387 | 0.5543 | 0.5646 | 0.5692 | 0.5704 | 40 | 0.5704 | 0.5387 | 0.00063 |
+> | 0.02 | 0.3010 | 0.3980 | 0.4752 | 0.5148 | 0.5266 | 0.5377 | 0.5427 | 0.5408 | 0.5383 | 20 | 0.5427 | 0.5266 | 0.00069 |
+> | 0.05 | 0.2972 | 0.3931 | 0.4646 | 0.4990 | 0.5080 | 0.5151 | 0.5186 | 0.5150 | 0.5116 | 20 | 0.5186 | 0.5080 | 0.00066 |
+> | 0.1 | 0.2926 | 0.3837 | 0.4501 | 0.4808 | 0.4884 | 0.4944 | 0.4974 | 0.4997 | 0.5006 | 40 | 0.5006 | 0.4884 | 0.00063 |
+> | 0.2 | 0.2831 | 0.3677 | 0.4286 | 0.4585 | 0.4673 | 0.4793 | 0.4859 | 0.4917 | 0.4926 | 40 | 0.4926 | 0.4673 | 0.00058 |
+>
+> Simulation against the exact closed form for this policy
+> (`J_k = (1/H)[p_hi + sum_{t=1}^{H-1} 1{t mod k != 0}(p_lo + (p_hi - p_lo) q_{t mod k})]`,
+> `q_j = (1 + (1 - 2 lambda)^j)/2`):
+>
+> * max |simulated - exact| over the 90 cells: 0.00336; max |z| 2.84.
+>
+> ### P2 -- bandit over k (one k per episode)
+>
+> | (p_hi,p_lo) | lambda | best fixed k | J best fixed k | EXP3 J (tail) | SE | gap to best fixed k | SW-UCB J (tail) | SE | gap to best fixed k |
+> | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+> | 0.9/0.1 | 0.005 | 20 | 0.8238 | 0.7998 | 0.00049 | 0.0240 | 0.7648 | 0.00010 | 0.0591 |
+> | 0.9/0.1 | 0.02 | 10 | 0.7495 | 0.7258 | 0.00057 | 0.0236 | 0.6965 | 0.00014 | 0.0530 |
+> | 0.9/0.1 | 0.05 | 8 | 0.6754 | 0.6476 | 0.00056 | 0.0278 | 0.6211 | 0.00014 | 0.0543 |
+> | 0.9/0.1 | 0.1 | 8 | 0.5986 | 0.5733 | 0.00051 | 0.0252 | 0.5554 | 0.00013 | 0.0432 |
+> | 0.9/0.1 | 0.2 | 10 | 0.5156 | 0.5050 | 0.00024 | 0.0106 | 0.4947 | 0.00012 | 0.0209 |
+> | 0.6/0.4 | 0.005 | 40 | 0.5704 | 0.5485 | 0.00042 | 0.0218 | 0.5175 | 0.00007 | 0.0529 |
+> | 0.6/0.4 | 0.02 | 20 | 0.5427 | 0.5261 | 0.00033 | 0.0166 | 0.5001 | 0.00008 | 0.0426 |
+> | 0.6/0.4 | 0.05 | 20 | 0.5186 | 0.5024 | 0.00028 | 0.0162 | 0.4805 | 0.00009 | 0.0381 |
+> | 0.6/0.4 | 0.1 | 40 | 0.5006 | 0.4851 | 0.00026 | 0.0155 | 0.4642 | 0.00009 | 0.0365 |
+> | 0.6/0.4 | 0.2 | 40 | 0.4926 | 0.4726 | 0.00038 | 0.0200 | 0.4496 | 0.00008 | 0.0430 |
+>
+> ### P3 -- oracle switch (RENEW at the first step after each flip)
+>
+> | (p_hi,p_lo) | lambda | J | SE | exact p_hi(1+(H-1)(1-lam))/H | z |
+> | --- | --- | --- | --- | --- | --- |
+> | 0.9/0.1 | 0.005 | 0.8958 | 0.00034 | 0.895522 | 0.90 |
+> | 0.9/0.1 | 0.02 | 0.8820 | 0.00036 | 0.882090 | -0.32 |
+> | 0.9/0.1 | 0.05 | 0.8557 | 0.00039 | 0.855225 | 1.15 |
+> | 0.9/0.1 | 0.1 | 0.8104 | 0.00044 | 0.810450 | -0.02 |
+> | 0.9/0.1 | 0.2 | 0.7220 | 0.00050 | 0.720900 | 2.08 |
+> | 0.6/0.4 | 0.005 | 0.5961 | 0.00055 | 0.597015 | -1.66 |
+> | 0.6/0.4 | 0.02 | 0.5881 | 0.00055 | 0.588060 | -0.01 |
+> | 0.6/0.4 | 0.05 | 0.5711 | 0.00055 | 0.570150 | 1.78 |
+> | 0.6/0.4 | 0.1 | 0.5399 | 0.00056 | 0.540300 | -0.62 |
+> | 0.6/0.4 | 0.2 | 0.4800 | 0.00057 | 0.480600 | -0.97 |
+>
+> ### P4 -- CUSUM trigger
+>
+> `(p_hi, p_lo)` = 0.9/0.1:
+>
+> | lambda | h=1 | h=2 | h=3 | h=4 | h=5 | h=6 | h=8 | best h | J at best h | J at h=3 | max SE in row |
+> | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+> | 0.005 | 0.8121 | 0.8112 | 0.8792 | 0.8787 | 0.8812 | 0.8816 | 0.8777 | 6 | 0.8816 | 0.8792 | 0.00059 |
+> | 0.02 | 0.7898 | 0.7902 | 0.8442 | 0.8432 | 0.8335 | 0.8327 | 0.8202 | 3 | 0.8442 | 0.8442 | 0.00070 |
+> | 0.05 | 0.7494 | 0.7491 | 0.7788 | 0.7794 | 0.7550 | 0.7562 | 0.7321 | 4 | 0.7794 | 0.7788 | 0.00085 |
+> | 0.1 | 0.6865 | 0.6861 | 0.6945 | 0.6950 | 0.6633 | 0.6640 | 0.6370 | 4 | 0.6950 | 0.6945 | 0.00088 |
+> | 0.2 | 0.5761 | 0.5762 | 0.5753 | 0.5760 | 0.5575 | 0.5563 | 0.5433 | 2 | 0.5762 | 0.5753 | 0.00082 |
+>
+> `(p_hi, p_lo)` = 0.6/0.4:
+>
+> | lambda | h=1 | h=2 | h=3 | h=4 | h=5 | h=6 | h=8 | best h | J at best h | J at h=3 | max SE in row |
+> | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+> | 0.005 | 0.5642 | 0.5790 | 0.5763 | 0.5726 | 0.5680 | 0.5633 | 0.5577 | 2 | 0.5790 | 0.5763 | 0.00084 |
+> | 0.02 | 0.5469 | 0.5516 | 0.5415 | 0.5360 | 0.5295 | 0.5248 | 0.5226 | 2 | 0.5516 | 0.5415 | 0.00079 |
+> | 0.05 | 0.5208 | 0.5239 | 0.5178 | 0.5130 | 0.5110 | 0.5087 | 0.5070 | 2 | 0.5239 | 0.5178 | 0.00069 |
+> | 0.1 | 0.4999 | 0.5051 | 0.5034 | 0.5027 | 0.5030 | 0.5017 | 0.5029 | 2 | 0.5051 | 0.5034 | 0.00065 |
+> | 0.2 | 0.4778 | 0.4921 | 0.4981 | 0.4986 | 0.4987 | 0.5001 | 0.5000 | 6 | 0.5001 | 0.4981 | 0.00062 |
+>
+> Parameter sensitivity of the two single fixed settings, `k = 10` (P1) and
+> `h = 3` (P4), against their own best setting per `lambda`:
+>
+> | (p_hi,p_lo) | lambda | P1 J at k=10 | loss vs best k | P4 J at h=3 | loss vs best h | h=3 minus k=10 |
+> | --- | --- | --- | --- | --- | --- | --- |
+> | 0.9/0.1 | 0.005 | 0.7973 | 0.0265 | 0.8792 | 0.0024 | 0.0819 |
+> | 0.9/0.1 | 0.02 | 0.7495 | 0.0000 | 0.8442 | 0.0000 | 0.0947 |
+> | 0.9/0.1 | 0.05 | 0.6749 | 0.0005 | 0.7788 | 0.0006 | 0.1039 |
+> | 0.9/0.1 | 0.1 | 0.5931 | 0.0055 | 0.6945 | 0.0005 | 0.1013 |
+> | 0.9/0.1 | 0.2 | 0.5156 | 0.0000 | 0.5753 | 0.0009 | 0.0597 |
+> | 0.6/0.4 | 0.005 | 0.5387 | 0.0317 | 0.5763 | 0.0027 | 0.0376 |
+> | 0.6/0.4 | 0.02 | 0.5266 | 0.0161 | 0.5415 | 0.0101 | 0.0149 |
+> | 0.6/0.4 | 0.05 | 0.5080 | 0.0106 | 0.5178 | 0.0061 | 0.0098 |
+> | 0.6/0.4 | 0.1 | 0.4884 | 0.0123 | 0.5034 | 0.0018 | 0.0150 |
+> | 0.6/0.4 | 0.2 | 0.4673 | 0.0253 | 0.4981 | 0.0020 | 0.0309 |
+>
+> ### P5 -- team pooling: pooled vs independent CUSUM (per-agent J)
+>
+> | N | (p_hi,p_lo) | lambda | pooled best h | pooled J | pooled J at h=3 | indep best h | indep J | indep J at h=3 | pooled - indep (best h) | single-agent oracle J | max SE in row |
+> | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+> | 3 | 0.9/0.1 | 0.005 | 5 | 0.8899 | 0.8892 | 6 | 0.8813 | 0.8793 | 0.0086 | 0.8958 | 0.00040 |
+> | 3 | 0.9/0.1 | 0.02 | 4 | 0.8618 | 0.8612 | 3 | 0.8432 | 0.8432 | 0.0186 | 0.8820 | 0.00064 |
+> | 3 | 0.9/0.1 | 0.05 | 4 | 0.8111 | 0.8096 | 3 | 0.7792 | 0.7792 | 0.0319 | 0.8557 | 0.00077 |
+> | 3 | 0.9/0.1 | 0.1 | 4 | 0.7340 | 0.7330 | 3 | 0.6951 | 0.6951 | 0.0389 | 0.8104 | 0.00080 |
+> | 3 | 0.9/0.1 | 0.2 | 4 | 0.6080 | 0.6080 | 2 | 0.5762 | 0.5749 | 0.0318 | 0.7220 | 0.00072 |
+> | 3 | 0.6/0.4 | 0.005 | 3 | 0.5854 | 0.5854 | 2 | 0.5789 | 0.5773 | 0.0065 | 0.5961 | 0.00072 |
+> | 3 | 0.6/0.4 | 0.02 | 3 | 0.5598 | 0.5598 | 2 | 0.5516 | 0.5420 | 0.0082 | 0.5881 | 0.00064 |
+> | 3 | 0.6/0.4 | 0.05 | 2 | 0.5320 | 0.5304 | 2 | 0.5233 | 0.5168 | 0.0087 | 0.5711 | 0.00051 |
+> | 3 | 0.6/0.4 | 0.1 | 3 | 0.5076 | 0.5076 | 2 | 0.5039 | 0.5032 | 0.0037 | 0.5399 | 0.00044 |
+> | 3 | 0.6/0.4 | 0.2 | 8 | 0.4988 | 0.4926 | 8 | 0.5011 | 0.4970 | -0.0023 | 0.4800 | 0.00043 |
+> | 6 | 0.9/0.1 | 0.005 | 8 | 0.8914 | 0.8906 | 6 | 0.8815 | 0.8792 | 0.0100 | 0.8958 | 0.00037 |
+> | 6 | 0.9/0.1 | 0.02 | 4 | 0.8660 | 0.8658 | 4 | 0.8434 | 0.8426 | 0.0226 | 0.8820 | 0.00062 |
+> | 6 | 0.9/0.1 | 0.05 | 2 | 0.8190 | 0.8179 | 4 | 0.7794 | 0.7791 | 0.0396 | 0.8557 | 0.00077 |
+> | 6 | 0.9/0.1 | 0.1 | 4 | 0.7456 | 0.7449 | 3 | 0.6946 | 0.6946 | 0.0510 | 0.8104 | 0.00078 |
+> | 6 | 0.9/0.1 | 0.2 | 1 | 0.6182 | 0.6180 | 1 | 0.5770 | 0.5760 | 0.0412 | 0.7220 | 0.00068 |
+> | 6 | 0.6/0.4 | 0.005 | 4 | 0.5884 | 0.5867 | 2 | 0.5793 | 0.5761 | 0.0091 | 0.5961 | 0.00069 |
+> | 6 | 0.6/0.4 | 0.02 | 3 | 0.5666 | 0.5666 | 2 | 0.5511 | 0.5418 | 0.0155 | 0.5881 | 0.00059 |
+> | 6 | 0.6/0.4 | 0.05 | 3 | 0.5388 | 0.5388 | 2 | 0.5234 | 0.5162 | 0.0154 | 0.5711 | 0.00045 |
+> | 6 | 0.6/0.4 | 0.1 | 3 | 0.5115 | 0.5115 | 2 | 0.5047 | 0.5037 | 0.0068 | 0.5399 | 0.00038 |
+> | 6 | 0.6/0.4 | 0.2 | 8 | 0.4976 | 0.4860 | 6 | 0.5004 | 0.4974 | -0.0028 | 0.4800 | 0.00036 |
+>
+> Full per-`h` grids for P5:
+>
+> N = 3, pooled, `(p_hi, p_lo)` = 0.9/0.1:
+>
+> | lambda | h=1 | h=2 | h=3 | h=4 | h=5 | h=6 | h=8 |
+> | --- | --- | --- | --- | --- | --- | --- | --- |
+> | 0.005 | 0.8675 | 0.8671 | 0.8892 | 0.8894 | 0.8899 | 0.8894 | 0.8875 |
+> | 0.02 | 0.8436 | 0.8443 | 0.8612 | 0.8618 | 0.8604 | 0.8616 | 0.8515 |
+> | 0.05 | 0.7991 | 0.7981 | 0.8096 | 0.8111 | 0.8089 | 0.8087 | 0.7879 |
+> | 0.1 | 0.7294 | 0.7296 | 0.7330 | 0.7340 | 0.7327 | 0.7315 | 0.7015 |
+> | 0.2 | 0.6056 | 0.6060 | 0.6080 | 0.6080 | 0.6071 | 0.6052 | 0.5813 |
+>
+> N = 3, pooled, `(p_hi, p_lo)` = 0.6/0.4:
+>
+> | lambda | h=1 | h=2 | h=3 | h=4 | h=5 | h=6 | h=8 |
+> | --- | --- | --- | --- | --- | --- | --- | --- |
+> | 0.005 | 0.5500 | 0.5788 | 0.5854 | 0.5841 | 0.5824 | 0.5808 | 0.5761 |
+> | 0.02 | 0.5362 | 0.5593 | 0.5598 | 0.5554 | 0.5500 | 0.5459 | 0.5391 |
+> | 0.05 | 0.5160 | 0.5320 | 0.5304 | 0.5264 | 0.5210 | 0.5199 | 0.5145 |
+> | 0.1 | 0.4909 | 0.5076 | 0.5076 | 0.5067 | 0.5058 | 0.5049 | 0.5040 |
+> | 0.2 | 0.4619 | 0.4836 | 0.4926 | 0.4947 | 0.4975 | 0.4986 | 0.4988 |
+>
+> N = 3, independent, `(p_hi, p_lo)` = 0.9/0.1:
+>
+> | lambda | h=1 | h=2 | h=3 | h=4 | h=5 | h=6 | h=8 |
+> | --- | --- | --- | --- | --- | --- | --- | --- |
+> | 0.005 | 0.8116 | 0.8111 | 0.8793 | 0.8785 | 0.8812 | 0.8813 | 0.8777 |
+> | 0.02 | 0.7900 | 0.7901 | 0.8432 | 0.8423 | 0.8330 | 0.8343 | 0.8193 |
+> | 0.05 | 0.7488 | 0.7494 | 0.7792 | 0.7782 | 0.7559 | 0.7568 | 0.7327 |
+> | 0.1 | 0.6866 | 0.6863 | 0.6951 | 0.6944 | 0.6635 | 0.6639 | 0.6364 |
+> | 0.2 | 0.5760 | 0.5762 | 0.5749 | 0.5749 | 0.5571 | 0.5567 | 0.5431 |
+>
+> N = 3, independent, `(p_hi, p_lo)` = 0.6/0.4:
+>
+> | lambda | h=1 | h=2 | h=3 | h=4 | h=5 | h=6 | h=8 |
+> | --- | --- | --- | --- | --- | --- | --- | --- |
+> | 0.005 | 0.5646 | 0.5789 | 0.5773 | 0.5719 | 0.5671 | 0.5641 | 0.5576 |
+> | 0.02 | 0.5463 | 0.5516 | 0.5420 | 0.5363 | 0.5283 | 0.5257 | 0.5215 |
+> | 0.05 | 0.5220 | 0.5233 | 0.5168 | 0.5137 | 0.5101 | 0.5090 | 0.5076 |
+> | 0.1 | 0.4988 | 0.5039 | 0.5032 | 0.5035 | 0.5036 | 0.5026 | 0.5030 |
+> | 0.2 | 0.4789 | 0.4917 | 0.4970 | 0.4983 | 0.4996 | 0.5001 | 0.5011 |
+>
+> N = 6, pooled, `(p_hi, p_lo)` = 0.9/0.1:
+>
+> | lambda | h=1 | h=2 | h=3 | h=4 | h=5 | h=6 | h=8 |
+> | --- | --- | --- | --- | --- | --- | --- | --- |
+> | 0.005 | 0.8902 | 0.8907 | 0.8906 | 0.8903 | 0.8908 | 0.8908 | 0.8914 |
+> | 0.02 | 0.8657 | 0.8657 | 0.8658 | 0.8660 | 0.8648 | 0.8654 | 0.8657 |
+> | 0.05 | 0.8171 | 0.8190 | 0.8179 | 0.8187 | 0.8160 | 0.8158 | 0.8154 |
+> | 0.1 | 0.7447 | 0.7450 | 0.7449 | 0.7456 | 0.7420 | 0.7412 | 0.7410 |
+> | 0.2 | 0.6182 | 0.6173 | 0.6180 | 0.6180 | 0.6152 | 0.6142 | 0.6140 |
+>
+> N = 6, pooled, `(p_hi, p_lo)` = 0.6/0.4:
+>
+> | lambda | h=1 | h=2 | h=3 | h=4 | h=5 | h=6 | h=8 |
+> | --- | --- | --- | --- | --- | --- | --- | --- |
+> | 0.005 | 0.5596 | 0.5801 | 0.5867 | 0.5884 | 0.5875 | 0.5869 | 0.5839 |
+> | 0.02 | 0.5473 | 0.5636 | 0.5666 | 0.5660 | 0.5611 | 0.5588 | 0.5536 |
+> | 0.05 | 0.5256 | 0.5378 | 0.5388 | 0.5370 | 0.5310 | 0.5292 | 0.5244 |
+> | 0.1 | 0.4985 | 0.5101 | 0.5115 | 0.5113 | 0.5084 | 0.5083 | 0.5071 |
+> | 0.2 | 0.4638 | 0.4791 | 0.4860 | 0.4898 | 0.4948 | 0.4953 | 0.4976 |
+>
+> N = 6, independent, `(p_hi, p_lo)` = 0.9/0.1:
+>
+> | lambda | h=1 | h=2 | h=3 | h=4 | h=5 | h=6 | h=8 |
+> | --- | --- | --- | --- | --- | --- | --- | --- |
+> | 0.005 | 0.8114 | 0.8113 | 0.8792 | 0.8788 | 0.8812 | 0.8815 | 0.8780 |
+> | 0.02 | 0.7894 | 0.7902 | 0.8426 | 0.8434 | 0.8337 | 0.8342 | 0.8201 |
+> | 0.05 | 0.7490 | 0.7494 | 0.7791 | 0.7794 | 0.7561 | 0.7560 | 0.7323 |
+> | 0.1 | 0.6859 | 0.6861 | 0.6946 | 0.6938 | 0.6624 | 0.6629 | 0.6382 |
+> | 0.2 | 0.5770 | 0.5763 | 0.5760 | 0.5755 | 0.5551 | 0.5558 | 0.5425 |
+>
+> N = 6, independent, `(p_hi, p_lo)` = 0.6/0.4:
+>
+> | lambda | h=1 | h=2 | h=3 | h=4 | h=5 | h=6 | h=8 |
+> | --- | --- | --- | --- | --- | --- | --- | --- |
+> | 0.005 | 0.5651 | 0.5793 | 0.5761 | 0.5731 | 0.5676 | 0.5641 | 0.5588 |
+> | 0.02 | 0.5472 | 0.5511 | 0.5418 | 0.5361 | 0.5292 | 0.5274 | 0.5211 |
+> | 0.05 | 0.5224 | 0.5234 | 0.5162 | 0.5133 | 0.5105 | 0.5091 | 0.5068 |
+> | 0.1 | 0.4993 | 0.5047 | 0.5037 | 0.5038 | 0.5032 | 0.5030 | 0.5023 |
+> | 0.2 | 0.4779 | 0.4923 | 0.4974 | 0.4988 | 0.4998 | 0.5004 | 0.5003 |
+>
+> ### Heterogeneous variant -- two regions, N = 6 (3 per region), (p_hi, p_lo) = (.9, .1)
+>
+> Region hazards are the corridor levels' `(lambda_1, lambda_2)`.  The corridor
+> value is the equal-weight mean of the two regions' per-agent `J`
+> (`w_r = 0.5`, matching `N_r / N = 3/6`); regions are independent given these
+> per-region policies, so each region is simulated separately.  The note's
+> "per-region CUSUM with one common h" is ambiguous between a statistic pooled
+> over a region's three agents and three independent per-agent statistics; both
+> are reported.
+>
+> | level | (lam_1, lam_2) | best common k | J | per-region k (r1/r2) | J | per-region minus common | pooled CUSUM best h | J | J at h=3 | indep CUSUM best h | J | J at h=3 | oracle J | max SE in row |
+> | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+> | small | (0.005, 0.02) | 20 | 0.7814 | 20/10 | 0.7866 | 0.0052 | 5 | 0.8753 | 0.8753 | 4 | 0.8610 | 0.8606 | 0.8890 | 0.00064 |
+> | medium | (0.005, 0.1) | 10 | 0.6955 | 20/8 | 0.7122 | 0.0167 | 4 | 0.8117 | 0.8111 | 3 | 0.7872 | 0.7872 | 0.8531 | 0.00051 |
+> | large | (0.02, 0.2) | 10 | 0.6326 | 10/8 | 0.6328 | 0.0003 | 3 | 0.7351 | 0.7351 | 3 | 0.7094 | 0.7094 | 0.8015 | 0.00048 |
+>
+> Per-region detail (per-agent `J`):
+>
+> | level | region | lambda | best k | J | J at k=10 | pooled best h | J | J at h=3 | indep best h | J | J at h=3 | oracle J |
+> | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+> | small | 1 | 0.005 | 20 | 0.8239 | 0.7960 | 5 | 0.8893 | 0.8892 | 5 | 0.8816 | 0.8789 | 0.8958 |
+> | small | 2 | 0.02 | 10 | 0.7492 | 0.7492 | 3 | 0.8615 | 0.8615 | 4 | 0.8429 | 0.8423 | 0.8821 |
+> | medium | 1 | 0.005 | 20 | 0.8238 | 0.7972 | 6 | 0.8895 | 0.8894 | 6 | 0.8819 | 0.8795 | 0.8954 |
+> | medium | 2 | 0.1 | 8 | 0.6006 | 0.5938 | 4 | 0.7341 | 0.7329 | 3 | 0.6949 | 0.6949 | 0.8107 |
+> | large | 1 | 0.02 | 10 | 0.7502 | 0.7502 | 3 | 0.8617 | 0.8617 | 4 | 0.8430 | 0.8425 | 0.8821 |
+> | large | 2 | 0.2 | 8 | 0.5154 | 0.5149 | 3 | 0.6085 | 0.6085 | 2 | 0.5762 | 0.5762 | 0.7209 |
+>
+> ### Precision achieved
+>
+> * 614 simulated cells; largest standard error of any single cell `J`: **0.00176** (target < 0.003); median 0.00047.
+> * Largest standard error of a derived corridor-level `J` (equal-weight mean of two regions): 0.00064.
+> * Episodes per cell: 4000; bandit replicates: 96.
+> * Simulator vs closed form, fixed-clock and oracle cells: max |difference| 0.00336, max |z| 2.84 over 160 checks.
+> * Task B wall time: 62.2 s.
+>
+> ### Conventions fixed where the task note was ambiguous
+>
+> 1. The exact reference table lives in `docs/Claude_docs/plans/RELAY_CORRIDOR_HOST_REPORT_20260902.md` (section 3), not in `docs/Claude_docs/experiments/`.
+> 2. Task A quantities are the closed forms named in the note; the repository's exact DP is reported next to them wherever `k` does not divide `H = 400` and the two therefore differ.
+> 3. `J_k(lam_r)` and `J_switch(lam_r)` carry the level's `Delta`, so that `sum_r w_r J_k(lam_r) = J_k`.
+> 4. Task B step order: latent transition, then the renewal decision, then scoring; `H = 200` scored steps and `H - 1` transitions; `theta_0` uniform on {0,1} and `a = theta_0`.
+> 5. CUSUM: the statistic needs the reward of step `t`, and a renewal step yields no reward, so a crossing detected after scoring step `t` renews at step `t + 1`; `S` is zeroed at the crossing and renewal steps contribute no LLR.
+> 6. Fixed clock: RENEW at every `t > 0` with `t % k == 0` (the repository's `FixedKOracle` convention); step 0 is the free, matched start.
+> 7. `best k` / `best h` are the argmax over the stated grid of the simulated means; ties within one SE are visible in the per-cell grids above.
+> 8. P5: all agents of a team start at `a_i = theta_0`; `J` is the per-agent mean.  The pooled statistic sums the agents' LLRs and renews the whole team.
+> 9. Heterogeneous variant: both readings of "per-region CUSUM" (pooled over the region's three agents, and three independent statistics) are reported.
+>
+
+</details>
+
+<details>
+<summary>Third-party source: bandit_toy.py</summary>
+
+````python
+"""TASK B -- piecewise-stationary bandit toy: vectorised NumPy world + policies.
+
+World (exactly as the task note states it):
+
+* episode length ``H = 200``; latent ``theta_t in {0, 1}`` flips with probability
+  ``lambda`` at each step;
+* an agent holds arm ``a``; at a **non-renewal** step the reward is
+  ``Bernoulli(p_hi)`` if ``a == theta_t`` else ``Bernoulli(p_lo)``;
+* ``RENEW`` at step ``t``: reward ``0`` at that step and ``a := theta_t`` (the
+  latent is revealed only by renewing);
+* the episode starts with ``a = theta_0``;  ``J`` = mean reward per step.
+
+Step order used throughout: at step ``t >= 1`` the latent transitions first
+(``theta_t = theta_{t-1} XOR Bernoulli(lambda)``), then the renewal decision for
+step ``t`` is applied, then the step is scored.  Step ``t = 0`` has no
+transition and no renewal, and is scored matched.  ``H`` steps are scored and
+``H - 1`` transitions occur, which is the relay-corridor host's convention.
+
+Policies are selected by ``mode``:
+
+``fixed``         RENEW at every ``t > 0`` with ``t % k == 0`` (param = k).
+``oracle``        RENEW at the first step after each flip (param unused).
+``cusum_pooled``  one CUSUM per *team* on the SUM of the agents' LLRs; when it
+                  crosses ``h`` every agent of the team renews (param = h).
+``cusum_indep``   one CUSUM per agent, each with its own RENEW (param = h).
+``never``         never renew (diagnostic only).
+
+CUSUM timing.  ``S_t = max(0, S_{t-1} + LLR_t)`` with
+``LLR_t = log P(r_t | mismatched) - log P(r_t | matched)`` needs the reward of
+step ``t``, and a renewal step yields no reward, so a crossing detected after
+scoring step ``t`` renews at step ``t + 1`` (``S`` is set to 0 at the crossing).
+Renewal steps contribute no LLR.
+
+This module writes nothing; ``task_b_run.py`` drives it.
+"""
+
+from __future__ import annotations
+
+from typing import Dict, Optional, Tuple
+
+import numpy as np
+
+HORIZON = 200
+
+
+def episode_batch(
+    rng: np.random.Generator,
+    mode: str,
+    lam: np.ndarray,
+    p_hi: np.ndarray,
+    p_lo: np.ndarray,
+    param: np.ndarray,
+    n_agents: int,
+    horizon: int = HORIZON,
+) -> np.ndarray:
+    """One episode for every lane, vectorised.  Returns per-agent J, shape (L, N).
+
+    ``lam``, ``p_hi``, ``p_lo``, ``param`` are 1-D per-lane arrays of length L;
+    one lane holds ``n_agents`` agents that share the lane's latent and (for
+    ``cusum_pooled``) one pooled statistic.  A corridor region is one such lane:
+    regions are independent given the per-region policies used here, so a
+    two-region corridor is two lanes combined afterwards by ``w_r``.
+    """
+    lam = np.asarray(lam, dtype=np.float64)
+    p_hi = np.asarray(p_hi, dtype=np.float64)
+    p_lo = np.asarray(p_lo, dtype=np.float64)
+    n_lanes = lam.size
+    shape = (n_lanes, int(n_agents))
+
+    theta = rng.random(n_lanes) < 0.5                      # theta_0 ~ Uniform{0,1}
+    arms = np.repeat(theta[:, None], n_agents, axis=1)     # a_i = theta_0
+    total = np.zeros(shape, dtype=np.float64)
+
+    llr_one = np.log(p_lo) - np.log(p_hi)                  # LLR of r = 1
+    llr_zero = np.log1p(-p_lo) - np.log1p(-p_hi)           # LLR of r = 0
+
+    if mode in ("cusum_pooled", "cusum_indep"):
+        thresh = np.asarray(param, dtype=np.float64)
+        if mode == "cusum_pooled":
+            stat = np.zeros(n_lanes, dtype=np.float64)
+            pending_lane = np.zeros(n_lanes, dtype=bool)
+        else:
+            stat = np.zeros(shape, dtype=np.float64)
+            pending = np.zeros(shape, dtype=bool)
+    elif mode == "fixed":
+        period = np.asarray(param, dtype=np.int64)
+    elif mode not in ("oracle", "never"):
+        raise ValueError(f"unknown mode {mode!r}")
+
+    hi_col = p_hi[:, None]
+    lo_col = p_lo[:, None]
+
+    for t in range(horizon):
+        if t > 0:
+            flip = rng.random(n_lanes) < lam
+            theta = theta ^ flip
+        else:
+            flip = np.zeros(n_lanes, dtype=bool)
+
+        if mode == "fixed":
+            renew_lane = (t > 0) & (np.remainder(t, period) == 0)
+            renew = np.repeat(renew_lane[:, None], n_agents, axis=1)
+        elif mode == "oracle":
+            renew = np.repeat(flip[:, None], n_agents, axis=1)
+        elif mode == "cusum_pooled":
+            renew = np.repeat(pending_lane[:, None], n_agents, axis=1)
+        elif mode == "cusum_indep":
+            renew = pending
+        else:  # never
+            renew = np.zeros(shape, dtype=bool)
+
+        if renew.any():
+            arms = np.where(renew, theta[:, None], arms)
+        matched = arms == theta[:, None]
+        success = rng.random(shape) < np.where(matched, hi_col, lo_col)
+        total += np.where(renew, 0.0, success)
+
+        if mode in ("cusum_pooled", "cusum_indep"):
+            llr = np.where(success, llr_one[:, None], llr_zero[:, None])
+            llr = np.where(renew, 0.0, llr)           # a renewal step observes nothing
+            if mode == "cusum_pooled":
+                stat = np.maximum(0.0, stat + llr.sum(axis=1))
+                pending_lane = stat >= thresh
+                stat = np.where(pending_lane, 0.0, stat)
+            else:
+                stat = np.maximum(0.0, stat + llr)
+                pending = stat >= thresh[:, None]
+                stat = np.where(pending, 0.0, stat)
+
+    return total / float(horizon)
+
+
+# ----------------------------------------------------------------------
+# exact closed forms, used only to validate the simulator
+# ----------------------------------------------------------------------
+def exact_fixed_k(lam: float, p_hi: float, p_lo: float, k: int, horizon: int = HORIZON) -> float:
+    """Exact ``E[J]`` of the fixed clock in this world.
+
+    After a renewal the arm equals the latent; ``j`` transitions later the arm
+    matches iff an even number of flips occurred, ``q_j = (1 + (1-2 lam)^j)/2``.
+    Step 0 is matched and unrenewed; steps ``t > 0`` with ``t % k == 0`` score 0.
+    """
+    lam = float(lam)
+    t = np.arange(1, int(horizon))
+    age = t % int(k)
+    q = 0.5 * (1.0 + (1.0 - 2.0 * lam) ** age)
+    per_step = p_lo + (p_hi - p_lo) * q
+    per_step = np.where(age == 0, 0.0, per_step)
+    return float((p_hi + per_step.sum()) / float(horizon))
+
+
+def exact_oracle(lam: float, p_hi: float, horizon: int = HORIZON) -> float:
+    """``p_hi * (1 + (H - 1)(1 - lam)) / H``: every non-renewal step is matched."""
+    h = float(horizon)
+    return float(p_hi) * (1.0 + (h - 1.0) * (1.0 - float(lam))) / h
+
+
+# ----------------------------------------------------------------------
+# bandit-over-k learners (one arm = one k, one pull = one episode)
+# ----------------------------------------------------------------------
+def run_exp3(
+    rng: np.random.Generator,
+    lam: np.ndarray,
+    p_hi: np.ndarray,
+    p_lo: np.ndarray,
+    k_grid: np.ndarray,
+    n_episodes: int,
+    gamma: float = 0.1,
+    horizon: int = HORIZON,
+) -> np.ndarray:
+    """EXP3 over the ``k`` grid, one arm per episode.  Returns J, shape (E, L).
+
+    Standard EXP3: ``p_i = (1 - gamma) w_i / sum(w) + gamma / K``; the played
+    arm's reward is importance weighted (``x / p_I``) and
+    ``log w_I += gamma * x / (K * p_I)``.  Log weights are renormalised by their
+    per-lane maximum every episode.
+    """
+    n_lanes = lam.size
+    n_arms = k_grid.size
+    log_w = np.zeros((n_lanes, n_arms), dtype=np.float64)
+    out = np.empty((n_episodes, n_lanes), dtype=np.float64)
+    lane_idx = np.arange(n_lanes)
+    for ep in range(n_episodes):
+        w = np.exp(log_w - log_w.max(axis=1, keepdims=True))
+        probs = (1.0 - gamma) * (w / w.sum(axis=1, keepdims=True)) + gamma / n_arms
+        cdf = np.cumsum(probs, axis=1)
+        draw = rng.random((n_lanes, 1))
+        arm = (draw > cdf).sum(axis=1)
+        arm = np.minimum(arm, n_arms - 1)
+        reward = episode_batch(
+            rng, "fixed", lam, p_hi, p_lo, k_grid[arm], 1, horizon=horizon
+        )[:, 0]
+        out[ep] = reward
+        p_played = probs[lane_idx, arm]
+        log_w[lane_idx, arm] += gamma * reward / (n_arms * p_played)
+    return out
+
+
+def run_sw_ucb(
+    rng: np.random.Generator,
+    lam: np.ndarray,
+    p_hi: np.ndarray,
+    p_lo: np.ndarray,
+    k_grid: np.ndarray,
+    n_episodes: int,
+    window: int = 200,
+    horizon: int = HORIZON,
+) -> np.ndarray:
+    """Sliding-window UCB1 over the ``k`` grid.  Returns J, shape (E, L).
+
+    Index over the last ``window`` episodes:
+    ``mean_i + sqrt(2 log(min(t, window)) / n_i)``; an arm unplayed inside the
+    window has index ``+inf``, so the first ``K`` episodes sweep the grid.
+    """
+    n_lanes = lam.size
+    n_arms = k_grid.size
+    counts = np.zeros((n_lanes, n_arms), dtype=np.float64)
+    sums = np.zeros((n_lanes, n_arms), dtype=np.float64)
+    hist_arm = np.zeros((n_lanes, window), dtype=np.int64)
+    hist_rew = np.zeros((n_lanes, window), dtype=np.float64)
+    out = np.empty((n_episodes, n_lanes), dtype=np.float64)
+    lane_idx = np.arange(n_lanes)
+    flat_lane = lane_idx * n_arms
+    for ep in range(n_episodes):
+        eff_t = float(min(ep + 1, window))
+        with np.errstate(divide="ignore", invalid="ignore"):
+            mean = np.where(counts > 0, sums / np.maximum(counts, 1.0), 0.0)
+            bonus = np.where(
+                counts > 0, np.sqrt(2.0 * np.log(eff_t) / np.maximum(counts, 1.0)), np.inf
+            )
+        index = mean + bonus
+        # deterministic tie-break on the first maximal arm (argmax does this)
+        arm = np.argmax(index, axis=1)
+        reward = episode_batch(
+            rng, "fixed", lam, p_hi, p_lo, k_grid[arm], 1, horizon=horizon
+        )[:, 0]
+        out[ep] = reward
+        slot = ep % window
+        if ep >= window:  # evict the entry leaving the window
+            old_arm = hist_arm[:, slot]
+            old_rew = hist_rew[:, slot]
+            flat = flat_lane + old_arm            # one entry per lane: no duplicates
+            counts.reshape(-1)[flat] -= 1.0
+            sums.reshape(-1)[flat] -= old_rew
+        hist_arm[:, slot] = arm
+        hist_rew[:, slot] = reward
+        flat = flat_lane + arm
+        counts.reshape(-1)[flat] += 1.0
+        sums.reshape(-1)[flat] += reward
+    return out
+````
+
+</details>
+
+<details>
+<summary>Third-party source: task_b_run.py</summary>
+
+````python
+"""TASK B driver: runs every policy cell, writes ``task_b.json`` next to itself.
+
+Every number is a Monte-Carlo mean over independent episodes of the world in
+``bandit_toy.py``; the fixed-clock and oracle cells are additionally checked
+against their exact closed forms.  Seeds are explicit and deterministic:
+``np.random.default_rng([BASE_SEED, group_id])`` per policy group, and
+``[BASE_SEED, 900 + algo_id, config_id]`` per bandit learner.
+
+Usage::
+
+    PYTHONDONTWRITEBYTECODE=1 /home/fires/.venvs/hmasd-linux-cpu/bin/python task_b_run.py [--quick]
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+import sys
+import time
+from pathlib import Path
+from typing import Dict, List, Sequence, Tuple
+
+import numpy as np
+
+HERE = Path(__file__).resolve().parent
+sys.path.insert(0, str(HERE))
+
+from bandit_toy import (  # noqa: E402
+    HORIZON,
+    episode_batch,
+    exact_fixed_k,
+    exact_oracle,
+    run_exp3,
+    run_sw_ucb,
+)
+
+BASE_SEED = 20260921
+LAMBDAS = (0.005, 0.02, 0.05, 0.10, 0.20)
+INFO = (("0.9/0.1", 0.9, 0.1), ("0.6/0.4", 0.6, 0.4))
+K_GRID = (2, 3, 5, 8, 10, 15, 20, 30, 40)
+H_GRID = (1, 2, 3, 4, 5, 6, 8)
+TEAM_SIZES = (3, 6)
+# corridor levels, (lambda_1, lambda_2) only -- the heterogeneous variant fixes
+# (p_hi, p_lo) = (.9, .1) and puts half of N = 6 agents in each region
+CORRIDOR_LEVELS = (
+    ("small", 0.005, 0.02),
+    ("medium", 0.005, 0.10),
+    ("large", 0.02, 0.20),
+)
+
+EPISODES = 4000        # per cell; SE is measured and reported
+CHUNK = 1000           # episodes per vectorised chunk
+BANDIT_EPISODES = 3000
+BANDIT_REPLICATES = 96
+BANDIT_EVAL_FROM = 1000  # 0-based: episodes 1001..3000
+
+
+def run_group(
+    group_id: int,
+    mode: str,
+    cells: Sequence[Dict[str, float]],
+    n_agents: int,
+    episodes: int,
+    chunk: int,
+) -> List[Dict[str, float]]:
+    """Run ``episodes`` independent episodes for every cell of one policy group.
+
+    Each cell dict carries ``lam``, ``p_hi``, ``p_lo`` and ``param``.  Returns one
+    record per cell with the mean per-agent J, its standard error over episodes
+    and the episode count.
+    """
+    rng = np.random.default_rng([BASE_SEED, group_id])
+    n_cells = len(cells)
+    lam = np.array([c["lam"] for c in cells], dtype=np.float64)
+    p_hi = np.array([c["p_hi"] for c in cells], dtype=np.float64)
+    p_lo = np.array([c["p_lo"] for c in cells], dtype=np.float64)
+    param = np.array([c["param"] for c in cells], dtype=np.float64)
+
+    total = np.zeros(n_cells, dtype=np.float64)
+    total_sq = np.zeros(n_cells, dtype=np.float64)
+    done = 0
+    while done < episodes:
+        this = min(chunk, episodes - done)
+        lanes = n_cells * this
+        j = episode_batch(
+            rng,
+            mode,
+            np.repeat(lam, this),
+            np.repeat(p_hi, this),
+            np.repeat(p_lo, this),
+            np.repeat(param, this),
+            n_agents,
+        )
+        per_episode = j.mean(axis=1).reshape(n_cells, this)  # per-agent mean J
+        total += per_episode.sum(axis=1)
+        total_sq += (per_episode ** 2).sum(axis=1)
+        done += this
+        assert lanes == per_episode.size
+
+    mean = total / episodes
+    var = np.maximum(total_sq / episodes - mean ** 2, 0.0) * episodes / (episodes - 1)
+    se = np.sqrt(var / episodes)
+    out = []
+    for i, cell in enumerate(cells):
+        rec = dict(cell)
+        rec.update({"J": float(mean[i]), "SE": float(se[i]), "episodes": int(episodes)})
+        out.append(rec)
+    return out
+
+
+def best_of(records: Sequence[Dict[str, float]], key: str) -> Dict[str, float]:
+    """The record with the largest J, plus the value of ``key`` it carries."""
+    best = max(records, key=lambda r: r["J"])
+    return {"param": best[key], "J": best["J"], "SE": best["SE"]}
+
+
+def main() -> None:
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--quick", action="store_true", help="tiny episode counts, smoke only")
+    args = ap.parse_args()
+    episodes = 200 if args.quick else EPISODES
+    bandit_episodes = 300 if args.quick else BANDIT_EPISODES
+    replicates = 8 if args.quick else BANDIT_REPLICATES
+    eval_from = 100 if args.quick else BANDIT_EVAL_FROM
+
+    t0 = time.time()
+    out: Dict[str, object] = {
+        "settings": {
+            "horizon": HORIZON,
+            "lambdas": list(LAMBDAS),
+            "informativeness": [[n, hi, lo] for n, hi, lo in INFO],
+            "k_grid": list(K_GRID),
+            "h_grid": list(H_GRID),
+            "team_sizes": list(TEAM_SIZES),
+            "corridor_levels": [[n, a, b] for n, a, b in CORRIDOR_LEVELS],
+            "episodes_per_cell": episodes,
+            "bandit_episodes": bandit_episodes,
+            "bandit_replicates": replicates,
+            "bandit_eval_episodes": f"{eval_from + 1}..{bandit_episodes}",
+            "base_seed": BASE_SEED,
+            "exp3_gamma": 0.1,
+            "sw_ucb_window": 200,
+            "cusum_llr": "log P(r|mismatched) - log P(r|matched); renewal one step "
+            "after the crossing (a renewal step yields no observation); S reset at "
+            "the crossing",
+        },
+    }
+
+    # ---------------- P1 fixed clock -------------------------------------
+    cells = [
+        {"info": name, "lam": lam, "p_hi": hi, "p_lo": lo, "param": float(k), "k": k}
+        for name, hi, lo in INFO
+        for lam in LAMBDAS
+        for k in K_GRID
+    ]
+    p1 = run_group(1, "fixed", cells, 1, episodes, CHUNK)
+    for rec in p1:
+        rec["exact"] = exact_fixed_k(rec["lam"], rec["p_hi"], rec["p_lo"], int(rec["k"]))
+        rec["z_vs_exact"] = (rec["J"] - rec["exact"]) / rec["SE"]
+    out["P1_fixed_clock"] = p1
+    print(f"P1 done {time.time() - t0:.1f}s", flush=True)
+
+    # ---------------- P3 oracle switch -----------------------------------
+    cells = [
+        {"info": name, "lam": lam, "p_hi": hi, "p_lo": lo, "param": 0.0}
+        for name, hi, lo in INFO
+        for lam in LAMBDAS
+    ]
+    p3 = run_group(3, "oracle", cells, 1, episodes, CHUNK)
+    for rec in p3:
+        rec["exact"] = exact_oracle(rec["lam"], rec["p_hi"])
+        rec["z_vs_exact"] = (rec["J"] - rec["exact"]) / rec["SE"]
+    out["P3_oracle_switch"] = p3
+    print(f"P3 done {time.time() - t0:.1f}s", flush=True)
+
+    # ---------------- P4 CUSUM trigger -----------------------------------
+    cells = [
+        {"info": name, "lam": lam, "p_hi": hi, "p_lo": lo, "param": float(h), "h": h}
+        for name, hi, lo in INFO
+        for lam in LAMBDAS
+        for h in H_GRID
+    ]
+    p4 = run_group(4, "cusum_indep", cells, 1, episodes, CHUNK)
+    out["P4_cusum"] = p4
+    print(f"P4 done {time.time() - t0:.1f}s", flush=True)
+
+    # ---------------- P5 team pooling ------------------------------------
+    p5: List[Dict[str, float]] = []
+    gid = 50
+    for n_agents in TEAM_SIZES:
+        for mode, label in (("cusum_pooled", "pooled"), ("cusum_indep", "independent")):
+            gid += 1
+            cells = [
+                {
+                    "info": name,
+                    "lam": lam,
+                    "p_hi": hi,
+                    "p_lo": lo,
+                    "param": float(h),
+                    "h": h,
+                    "N": n_agents,
+                    "mode": label,
+                }
+                for name, hi, lo in INFO
+                for lam in LAMBDAS
+                for h in H_GRID
+            ]
+            p5.extend(run_group(gid, mode, cells, n_agents, episodes, CHUNK))
+            print(f"P5 N={n_agents} {label} done {time.time() - t0:.1f}s", flush=True)
+    out["P5_team"] = p5
+
+    # ---------------- heterogeneous corridor variant ---------------------
+    # Two regions, 3 agents each, (p_hi, p_lo) = (.9, .1); regions are
+    # independent given these per-region policies, so each region is simulated
+    # as its own 3-agent cell and the corridor J is the 0.5/0.5 weighted mean.
+    het_cells_fixed = [
+        {
+            "level": name,
+            "region": r,
+            "lam": (lam1, lam2)[r],
+            "p_hi": 0.9,
+            "p_lo": 0.1,
+            "param": float(k),
+            "k": k,
+        }
+        for name, lam1, lam2 in CORRIDOR_LEVELS
+        for r in (0, 1)
+        for k in K_GRID
+    ]
+    het_fixed = run_group(61, "fixed", het_cells_fixed, 3, episodes, CHUNK)
+    for rec in het_fixed:
+        rec["exact"] = exact_fixed_k(rec["lam"], rec["p_hi"], rec["p_lo"], int(rec["k"]))
+        rec["z_vs_exact"] = (rec["J"] - rec["exact"]) / rec["SE"]
+
+    het_cells_oracle = [
+        {"level": name, "region": r, "lam": (lam1, lam2)[r], "p_hi": 0.9, "p_lo": 0.1,
+         "param": 0.0}
+        for name, lam1, lam2 in CORRIDOR_LEVELS
+        for r in (0, 1)
+    ]
+    het_oracle = run_group(62, "oracle", het_cells_oracle, 3, episodes, CHUNK)
+    for rec in het_oracle:
+        rec["exact"] = exact_oracle(rec["lam"], rec["p_hi"])
+        rec["z_vs_exact"] = (rec["J"] - rec["exact"]) / rec["SE"]
+
+    het_cells_cusum = [
+        {
+            "level": name,
+            "region": r,
+            "lam": (lam1, lam2)[r],
+            "p_hi": 0.9,
+            "p_lo": 0.1,
+            "param": float(h),
+            "h": h,
+        }
+        for name, lam1, lam2 in CORRIDOR_LEVELS
+        for r in (0, 1)
+        for h in H_GRID
+    ]
+    het_pooled = run_group(63, "cusum_pooled", het_cells_cusum, 3, episodes, CHUNK)
+    het_indep = run_group(64, "cusum_indep", het_cells_cusum, 3, episodes, CHUNK)
+    out["HET_fixed"] = het_fixed
+    out["HET_oracle"] = het_oracle
+    out["HET_cusum_pooled_within_region"] = het_pooled
+    out["HET_cusum_independent_within_region"] = het_indep
+    print(f"heterogeneous done {time.time() - t0:.1f}s", flush=True)
+
+    # ---------------- P2 bandit over k ------------------------------------
+    configs = [(name, hi, lo, lam) for name, hi, lo in INFO for lam in LAMBDAS]
+    k_arr = np.array(K_GRID, dtype=np.float64)
+    p2: List[Dict[str, float]] = []
+    for algo_id, (algo, fn) in enumerate(
+        (("exp3", run_exp3), ("sw_ucb", run_sw_ucb))
+    ):
+        lam_lane = np.repeat(np.array([c[3] for c in configs]), replicates)
+        hi_lane = np.repeat(np.array([c[1] for c in configs]), replicates)
+        lo_lane = np.repeat(np.array([c[2] for c in configs]), replicates)
+        rng = np.random.default_rng([BASE_SEED, 900 + algo_id])
+        traj = fn(rng, lam_lane, hi_lane, lo_lane, k_arr, bandit_episodes)
+        tail = traj[eval_from:, :].mean(axis=0)               # per lane
+        tail = tail.reshape(len(configs), replicates)
+        mean = tail.mean(axis=1)
+        se = tail.std(axis=1, ddof=1) / np.sqrt(replicates)
+        for i, (name, hi, lo, lam) in enumerate(configs):
+            p2.append(
+                {
+                    "algo": algo,
+                    "info": name,
+                    "lam": lam,
+                    "p_hi": hi,
+                    "p_lo": lo,
+                    "J_tail": float(mean[i]),
+                    "SE": float(se[i]),
+                    "replicates": int(replicates),
+                    "episodes": int(bandit_episodes),
+                }
+            )
+        print(f"P2 {algo} done {time.time() - t0:.1f}s", flush=True)
+    out["P2_bandit_over_k"] = p2
+
+    out["runtime_seconds"] = time.time() - t0
+    (HERE / ("task_b_quick.json" if args.quick else "task_b.json")).write_text(
+        json.dumps(out, indent=2), encoding="utf-8"
+    )
+
+    # ---- headline checks -------------------------------------------------
+    all_se = (
+        [r["SE"] for r in p1]
+        + [r["SE"] for r in p3]
+        + [r["SE"] for r in p4]
+        + [r["SE"] for r in p5]
+        + [r["SE"] for r in het_fixed + het_oracle + het_pooled + het_indep]
+        + [r["SE"] for r in p2]
+    )
+    z = [abs(r["z_vs_exact"]) for r in p1 + p3 + het_fixed + het_oracle]
+    d = [abs(r["J"] - r["exact"]) for r in p1 + p3 + het_fixed + het_oracle]
+    print(
+        json.dumps(
+            {
+                "max_SE_over_all_reported_J": max(all_se),
+                "max_abs_z_vs_closed_form": max(z),
+                "max_abs_diff_vs_closed_form": max(d),
+                "n_reported_cells": len(all_se),
+                "runtime_seconds": out["runtime_seconds"],
+            },
+            indent=2,
+        )
+    )
+
+
+if __name__ == "__main__":
+    main()
+````
+
+</details>
+
+<details>
+<summary>Third-party source: task_a_corridor_ceilings.py</summary>
+
+````python
+"""TASK A -- exact relay-corridor ceilings from the repository's closed forms.
+
+Reads nothing at run time except the frozen repository modules
+``envs/relay_corridor/{config,renewal,references}.py``; writes only
+``task_a.json`` next to this script.  No environment stepping, no learner
+construction, no Monte Carlo: every number below is a closed form, cross-checked
+against the repository's exact dynamic programme.
+
+Closed forms (``envs/relay_corridor/references.py``):
+
+    C(k, lam)   = (1 - (1 - lam)^k) / (k * lam)
+    J_switch    = Delta * sum_r w_r * (1 + (H - 1)(1 - lam_r)) / H
+    J_k         = Delta * sum_r w_r * [C(k, lam_r) - 1/k + 1/H]
+
+Per region r the same expressions without the weighted sum give
+``J_switch(lam_r)`` and ``J_k(lam_r)`` (both carry the level's Delta).
+
+The closed form for ``J_k`` assumes the fixed boundaries tile the episode, i.e.
+``k | H``.  For ``k`` that does not divide ``H = 400`` it disagrees with the
+exact dynamic programme ``references.enumerate_references`` (which scores the
+true partial last cycle); both sets of numbers are recorded, the closed form as
+the primary one the task asked for.
+
+Run with::
+
+    cd /home/fires/hmasd-wsl && PYTHONDONTWRITEBYTECODE=1 \
+        /home/fires/.venvs/hmasd-linux-cpu/bin/python <this file>
+"""
+
+from __future__ import annotations
+
+import json
+import sys
+from pathlib import Path
+from typing import Dict, List
+
+REPO = Path("/home/fires/hmasd-wsl")
+if str(REPO) not in sys.path:
+    sys.path.insert(0, str(REPO))
+
+import numpy as np  # noqa: E402
+
+from envs.relay_corridor.config import PROPOSAL_GRID, proposal_config  # noqa: E402
+from envs.relay_corridor.references import (  # noqa: E402
+    closed_form_j_fixed_k,
+    closed_form_j_switch,
+    commitment_fraction,
+    enumerate_references,
+)
+
+OUT = Path(__file__).resolve().parent
+LEVELS = ("small", "medium", "large")
+K_TABLE = (1, 2, 5, 10, 20, 40)          # A1 row of k values (all divide H = 400)
+K_RANGE = tuple(range(1, 41))            # A1/A2 search range
+K_MISSET = (2, 5, 10, 20, 40)            # A3 mis-set common clocks
+D0_SET = (1, 2, 5, 20, 40)               # the frozen D0 set the report uses
+
+# The report's printed reference returns, transcribed from
+# docs/Claude_docs/plans/RELAY_CORRIDOR_HOST_REPORT_20260902.md, section 3
+# "Supporting reference returns" (that file holds the exact reference table; the
+# L0 note pointed at docs/Claude_docs/experiments/, where it is not).
+REPORT_TABLE: Dict[str, Dict[str, float]] = {
+    "small": {
+        "J_switch": 0.39501250,
+        "J_1": 0.00100000,
+        "J_2": 0.19850000,
+        "J_5": 0.31116838,
+        "J_20": 0.33797505,
+        "J_40": 0.31125478,
+    },
+    "medium": {
+        "J_switch": 0.56857875,
+        "J_1": 0.00150000,
+        "J_2": 0.28575000,
+        "J_5": 0.42422096,
+        "J_20": 0.38943206,
+        "J_40": 0.33291125,
+    },
+    "large": {
+        "J_switch": 0.89027500,
+        "J_1": 0.00250000,
+        "J_2": 0.44750000,
+        "J_5": 0.61905602,
+        "J_20": 0.49154888,
+        "J_40": 0.38642894,
+    },
+}
+# m_dur over the frozen D0 set {1, 2, 5, 20, 40}, same report, margin table.
+REPORT_MARGIN = {
+    "small": {"m_dur": 0.057037446427, "best_k": 20},
+    "medium": {"m_dur": 0.144357787462, "best_k": 5},
+    "large": {"m_dur": 0.271218984000, "best_k": 5},
+}
+
+
+def region_j_switch(delta: float, horizon: int, lam: float) -> float:
+    """``Delta * (1 + (H - 1)(1 - lam)) / H`` -- one region's switching oracle."""
+    h = float(horizon)
+    return float(delta) * (1.0 + (h - 1.0) * (1.0 - float(lam))) / h
+
+
+def region_j_fixed_k(delta: float, horizon: int, lam: float, k: int) -> float:
+    """``Delta * [C(k, lam) - 1/k + 1/H]`` -- one region's fixed-k oracle."""
+    h = float(horizon)
+    return float(delta) * (
+        commitment_fraction(int(k), float(lam)) - 1.0 / float(k) + 1.0 / h
+    )
+
+
+def rungs(weights, per_region_k, per_region_switch, k_range):
+    """(L0, k*, L2, per-region k*, L3, fraction) from per-region tables."""
+    agg = {k: float(np.dot(weights, per_region_k[k])) for k in k_range}
+    k_star = max(k_range, key=lambda k: agg[k])
+    l0 = agg[k_star]
+    n_reg = len(per_region_switch)
+    per_best_k = [max(k_range, key=lambda k, i=i: per_region_k[k][i]) for i in range(n_reg)]
+    per_best_j = [per_region_k[per_best_k[i]][i] for i in range(n_reg)]
+    l2 = float(np.dot(weights, per_best_j))
+    l3 = float(np.dot(weights, per_region_switch))
+    return {
+        "aggregate_J_k": agg,
+        "L0_best_common_clock": l0,
+        "L0_k": int(k_star),
+        "per_region_best_k": [int(x) for x in per_best_k],
+        "per_region_best_J": per_best_j,
+        "L2_context_dependent_clock": l2,
+        "L3_J_switch": l3,
+        "L2_minus_L0": l2 - l0,
+        "L3_minus_L0": l3 - l0,
+        "fraction_L2_L0_over_L3_L0": (l2 - l0) / (l3 - l0),
+    }
+
+
+def main() -> None:
+    results: Dict[str, object] = {
+        "provenance": {
+            "closed_forms_from": "envs/relay_corridor/references.py "
+            "(closed_form_j_switch, closed_form_j_fixed_k, commitment_fraction)",
+            "exact_dp_from": "envs/relay_corridor/references.enumerate_references",
+            "import_note": "imported from the repository; envs/relay_corridor/"
+            "{config,renewal,rng,host,references,adapter}.py are pure NumPy and "
+            "execute no environment stepping or learner construction at import",
+            "report_table_source": "docs/Claude_docs/plans/"
+            "RELAY_CORRIDOR_HOST_REPORT_20260902.md, section 3",
+            "horizon": 400,
+            "n_agents": 6,
+            "n_regions": 2,
+            "n_roles": 2,
+            "region_weights": [0.5, 0.5],
+            "region_weight_source": "RelayCorridorConfig.region_weights = N_r / N; "
+            "proposal_config has N = 6 agents balanced over 2 regions -> (3, 3)/6",
+            "closed_form_validity": "J_k closed form is exact iff k | H; the exact "
+            "DP is reported alongside for the k in 1..40 that do not divide 400",
+        },
+        "levels": {},
+    }
+
+    a1_diffs: List[float] = []
+    margin_diffs: List[float] = []
+    dp_diff_kdivH: List[float] = []
+    dp_diff_all: List[float] = []
+
+    for level in LEVELS:
+        cfg = proposal_config(level)
+        horizon = int(cfg.horizon)
+        delta = float(cfg.delta)
+        lams = [float(x) for x in cfg.lambda_regions]
+        weights = [float(w) for w in cfg.region_weights]
+        assert PROPOSAL_GRID[level]["lambda_regions"] == tuple(lams)
+
+        # ---- closed forms -------------------------------------------------
+        j_switch = closed_form_j_switch(cfg)
+        j_k_all = {k: closed_form_j_fixed_k(cfg, k) for k in K_RANGE}
+        cf_region_switch = [region_j_switch(delta, horizon, lam) for lam in lams]
+        cf_region_k = {
+            k: [region_j_fixed_k(delta, horizon, lam, k) for lam in lams]
+            for k in K_RANGE
+        }
+        agg_identity = max(
+            abs(j_k_all[k] - float(np.dot(weights, cf_region_k[k]))) for k in K_RANGE
+        )
+        agg_identity = max(
+            agg_identity, abs(j_switch - float(np.dot(weights, cf_region_switch)))
+        )
+        cf_rungs = rungs(weights, cf_region_k, cf_region_switch, K_RANGE)
+
+        # ---- exact DP (same objects, k = 1..40) ---------------------------
+        dp = enumerate_references(proposal_config(level, d0_k_set=K_RANGE))
+        dp_region_switch = [delta * v for v in dp.per_region_switch]
+        dp_region_k = {
+            k: [delta * v for v in dp.per_region_fixed_k[k]] for k in K_RANGE
+        }
+        dp_rungs = rungs(weights, dp_region_k, dp_region_switch, K_RANGE)
+
+        per_k_diff = {}
+        for k in K_RANGE:
+            d = abs(j_k_all[k] - dp.j_fixed_k[k])
+            for i in range(len(lams)):
+                d = max(d, abs(cf_region_k[k][i] - dp_region_k[k][i]))
+            per_k_diff[str(k)] = d
+            dp_diff_all.append(d)
+            if horizon % k == 0:
+                dp_diff_kdivH.append(d)
+        d_sw = abs(j_switch - dp.j_switch)
+        for i in range(len(lams)):
+            d_sw = max(d_sw, abs(cf_region_switch[i] - dp_region_switch[i]))
+        dp_diff_kdivH.append(d_sw)
+        dp_diff_all.append(d_sw)
+
+        # ---- A1 agreement against the report ------------------------------
+        printed = REPORT_TABLE[level]
+        row_diffs = {"J_switch": abs(j_switch - printed["J_switch"])}
+        for k in D0_SET:
+            row_diffs[f"J_{k}"] = abs(j_k_all[k] - printed[f"J_{k}"])
+        a1_diffs.extend(row_diffs.values())
+
+        best_d0_k = max(D0_SET, key=lambda k: j_k_all[k])
+        m_dur_d0 = j_switch - j_k_all[best_d0_k]
+        margin_diffs.append(abs(m_dur_d0 - REPORT_MARGIN[level]["m_dur"]))
+
+        results["levels"][level] = {
+            "lambda_regions": lams,
+            "delta": delta,
+            "weights": weights,
+            "A1": {
+                "J_switch": j_switch,
+                "J_k_table": {str(k): j_k_all[k] for k in K_TABLE},
+                "J_k_table_exact_dp": {str(k): dp.j_fixed_k[k] for k in K_TABLE},
+                "best_common_k_1_40": cf_rungs["L0_k"],
+                "J_best_common_k": cf_rungs["L0_best_common_clock"],
+                "best_common_k_1_40_exact_dp": dp_rungs["L0_k"],
+                "J_best_common_k_exact_dp": dp_rungs["L0_best_common_clock"],
+                "report_printed": printed,
+                "abs_diff_vs_report": row_diffs,
+                "max_abs_diff_vs_report": max(row_diffs.values()),
+                "best_k_over_D0_set_1_2_5_20_40": int(best_d0_k),
+                "report_best_k_over_D0_set": REPORT_MARGIN[level]["best_k"],
+                "m_dur_over_D0_set": m_dur_d0,
+                "report_m_dur": REPORT_MARGIN[level]["m_dur"],
+                "abs_diff_m_dur": abs(m_dur_d0 - REPORT_MARGIN[level]["m_dur"]),
+            },
+            "A2": {
+                "per_region_J_k": {str(k): cf_region_k[k] for k in K_RANGE},
+                "per_region_J_k_exact_dp": {str(k): dp_region_k[k] for k in K_RANGE},
+                "per_region_J_switch": cf_region_switch,
+                "closed_form": cf_rungs,
+                "exact_dp": dp_rungs,
+            },
+            "A3": {
+                "L0": cf_rungs["L0_best_common_clock"],
+                "loss_L0_minus_J_k": {
+                    str(k): cf_rungs["L0_best_common_clock"] - j_k_all[k]
+                    for k in K_MISSET
+                },
+                "L0_exact_dp": dp_rungs["L0_best_common_clock"],
+                "loss_L0_minus_J_k_exact_dp": {
+                    str(k): dp_rungs["L0_best_common_clock"] - dp.j_fixed_k[k]
+                    for k in K_MISSET
+                },
+            },
+            "checks": {
+                "max_abs_aggregation_identity": agg_identity,
+                "closed_form_vs_exact_dp_per_k": per_k_diff,
+            },
+        }
+
+    results["A1_max_abs_diff_vs_report_returns"] = max(a1_diffs)
+    results["A1_max_abs_diff_vs_report_m_dur"] = max(margin_diffs)
+    results["A1_best_k_agreement_over_D0_set"] = all(
+        results["levels"][lv]["A1"]["best_k_over_D0_set_1_2_5_20_40"]
+        == REPORT_MARGIN[lv]["best_k"]
+        for lv in LEVELS
+    )
+    results["max_abs_closed_form_vs_dp_k_divides_H"] = max(dp_diff_kdivH)
+    results["max_abs_closed_form_vs_dp_all_k"] = max(dp_diff_all)
+    results["max_abs_aggregation_identity"] = max(
+        results["levels"][lv]["checks"]["max_abs_aggregation_identity"] for lv in LEVELS
+    )
+
+    (OUT / "task_a.json").write_text(json.dumps(results, indent=2), encoding="utf-8")
+    print(json.dumps({k: v for k, v in results.items() if k != "levels"}, indent=2))
+    for lv in LEVELS:
+        a2 = results["levels"][lv]["A2"]
+        print(
+            lv,
+            "cf: L0=%.8f (k=%d) L2=%.8f (k_r=%s) L3=%.8f frac=%.6f"
+            % (
+                a2["closed_form"]["L0_best_common_clock"],
+                a2["closed_form"]["L0_k"],
+                a2["closed_form"]["L2_context_dependent_clock"],
+                a2["closed_form"]["per_region_best_k"],
+                a2["closed_form"]["L3_J_switch"],
+                a2["closed_form"]["fraction_L2_L0_over_L3_L0"],
+            ),
+        )
+        print(
+            " " * len(lv),
+            "dp: L0=%.8f (k=%d) L2=%.8f (k_r=%s) L3=%.8f frac=%.6f"
+            % (
+                a2["exact_dp"]["L0_best_common_clock"],
+                a2["exact_dp"]["L0_k"],
+                a2["exact_dp"]["L2_context_dependent_clock"],
+                a2["exact_dp"]["per_region_best_k"],
+                a2["exact_dp"]["L3_J_switch"],
+                a2["exact_dp"]["fraction_L2_L0_over_L3_L0"],
+            ),
+        )
+
+
+if __name__ == "__main__":
+    main()
+````
+
+</details>
