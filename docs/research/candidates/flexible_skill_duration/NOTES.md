@@ -3141,3 +3141,37 @@ visibility in its own credit grows with the commitment length.
 - *This is not a k sweep for performance:* no training, no J claim; it measures signal
   visibility as a function of commitment. A fit-level idea (longer or adaptive commitment for
   the high level, or label-conditioned credit) is only worth declaring after it.
+
+## 2026-09-20 19:11 PDT — B12 specified before any score; owner agrees it is not a k sweep
+
+**Owner, 2026-09-20:** agrees that B12 (commitment length varied at fixed weights, zero fit)
+is outside "do not sweep k by default"; proceed.
+
+**Object `FSD_COMMITMENT_VISIBILITY_B12`.** As declared at 17:31, with these details fixed
+now. Per block on the node: `as_trained` faithful load, then for each cap in (10, 50, 100,
+500) sixteen training-law rollouts (256 lane-episodes) through B11's collection with the
+learner instance's two caps set to that value and restored afterwards; labels are still
+sampled from the coordinator's law, all six agents renewing together; zero optimizer steps,
+parameter hashes unchanged, expected rows per rollout 16 × ⌈500 / cap⌉.
+- *Primary measure:* least squares of a commitment's reward on the six label counts with
+  fixed effects for the commitment's position in the episode (reward drifts within an
+  episode), for two responses: the frozen credit quantity (gamma-discounted sum over the
+  commitment, which at cap 500 sees mostly the first hundred steps) and the undiscounted mean
+  reward per step of the commitment. Statistic: spread of the six label coefficients.
+- *Calibration:* 1,000 permutations of whole label vectors among commitments at the same
+  position (dedicated generator); plus the team-label indicator regression as placebo.
+- *Criterion (as at 17:31):* a cap shows the ranking if the coefficient spread exceeds the
+  95th percentile of its permutation spread and B09's best label is ranked first or second.
+  Read on the undiscounted response; the discounted one is reported beside it.
+- *Non-additivity check for the strongest alternative, cap 500 only:* add a homogeneity term
+  (Σ n_c², permutation-calibrated); and compare the additive model's predicted all-equal
+  episode score, 6 × coefficient converted to J by the runner's own reporting factor, with
+  B10's measured sampled constant-label J — additive predictions far below B10's spread mean
+  the map is joint, not per-agent.
+- *Secondary:* the update's own advantages by label per cap (the value head was trained on
+  ten-step targets, so off cap 10 this is arithmetic, not the signal a retrained critic
+  would give).
+- *Limits known now:* the assignment is the coordinator's near-flat law, not an exact
+  randomisation (shares .14–.19, weak state dependence); fixed low-level weights trained under
+  ten-step commitments; end-of-training checkpoint; three blocks.
+Predictions and what each outcome changes stand as written at 17:31.
