@@ -1,0 +1,16 @@
+{
+  "source_sha": "45a1f534539032c021f5d44a7d78f4b503b0ba51",
+  "seed": 73170,
+  "model_seed": 973170,
+  "horizon": 96,
+  "batch": 16,
+  "particles": 32,
+  "selection_episodes": 64,
+  "eval_episodes": 256,
+  "thresholds": [
+    -0.05,
+    0.0,
+    0.05,
+    0.1
+  ]
+}

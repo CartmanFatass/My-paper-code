@@ -1,0 +1,11 @@
+{
+  "claim_key": "6ec77e4c57bfe84967188022f5d0d773dc964f3ca7faf98385f79bf971ac4c48",
+  "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/6ec77e4c57bfe84967188022f5d0d773dc964f3ca7faf98385f79bf971ac4c48.json",
+  "manifest_ref": "/home/fires/.codex/worktrees/f987/hmasd-wsl/runs/skill_information_refresh/c06_multistep_s73170_20260921/launch-manifest.json",
+  "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/6ec77e4c57bfe84967188022f5d0d773dc964f3ca7faf98385f79bf971ac4c48.json",
+  "pid": 3443625,
+  "runner_pid": 3443626,
+  "schema_version": 1,
+  "status": "accepted",
+  "updated_at": "2026-09-21T10:17:21.816937Z"
+}

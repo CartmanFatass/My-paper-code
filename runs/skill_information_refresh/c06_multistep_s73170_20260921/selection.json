@@ -1,0 +1,114 @@
+{
+  "candidates": [
+    {
+      "arm": "NEAR_COMMIT",
+      "threshold": -0.05,
+      "reading": {
+        "worlds": 64,
+        "mean_completed_jobs": 13.28125,
+        "mean_service": 0.9486607142857143,
+        "mean_conflicts": 0.203125,
+        "mean_wait_ticks": 6.234375,
+        "mean_packets": 24.0,
+        "mean_bytes": 192.0
+      }
+    },
+    {
+      "arm": "NEAR_COMMIT",
+      "threshold": 0.0,
+      "reading": {
+        "worlds": 64,
+        "mean_completed_jobs": 13.40625,
+        "mean_service": 0.9575892857142858,
+        "mean_conflicts": 0.140625,
+        "mean_wait_ticks": 7.6875,
+        "mean_packets": 24.0,
+        "mean_bytes": 192.0
+      }
+    },
+    {
+      "arm": "NEAR_COMMIT",
+      "threshold": 0.05,
+      "reading": {
+        "worlds": 64,
+        "mean_completed_jobs": 13.34375,
+        "mean_service": 0.953125,
+        "mean_conflicts": 0.1875,
+        "mean_wait_ticks": 7.34375,
+        "mean_packets": 24.0,
+        "mean_bytes": 192.0
+      }
+    },
+    {
+      "arm": "NEAR_COMMIT",
+      "threshold": 0.1,
+      "reading": {
+        "worlds": 64,
+        "mean_completed_jobs": 13.25,
+        "mean_service": 0.9464285714285714,
+        "mean_conflicts": 0.234375,
+        "mean_wait_ticks": 6.953125,
+        "mean_packets": 24.0,
+        "mean_bytes": 192.0
+      }
+    },
+    {
+      "arm": "LONG",
+      "threshold": -0.05,
+      "reading": {
+        "worlds": 64,
+        "mean_completed_jobs": 13.34375,
+        "mean_service": 0.953125,
+        "mean_conflicts": 0.171875,
+        "mean_wait_ticks": 7.078125,
+        "mean_packets": 24.0,
+        "mean_bytes": 192.0
+      }
+    },
+    {
+      "arm": "LONG",
+      "threshold": 0.0,
+      "reading": {
+        "worlds": 64,
+        "mean_completed_jobs": 13.40625,
+        "mean_service": 0.9575892857142858,
+        "mean_conflicts": 0.140625,
+        "mean_wait_ticks": 7.96875,
+        "mean_packets": 24.0,
+        "mean_bytes": 192.0
+      }
+    },
+    {
+      "arm": "LONG",
+      "threshold": 0.05,
+      "reading": {
+        "worlds": 64,
+        "mean_completed_jobs": 13.34375,
+        "mean_service": 0.953125,
+        "mean_conflicts": 0.1875,
+        "mean_wait_ticks": 7.34375,
+        "mean_packets": 24.0,
+        "mean_bytes": 192.0
+      }
+    },
+    {
+      "arm": "LONG",
+      "threshold": 0.1,
+      "reading": {
+        "worlds": 64,
+        "mean_completed_jobs": 13.25,
+        "mean_service": 0.9464285714285714,
+        "mean_conflicts": 0.234375,
+        "mean_wait_ticks": 7.125,
+        "mean_packets": 24.0,
+        "mean_bytes": 192.0
+      }
+    }
+  ],
+  "selected": {
+    "NEAR_COMMIT": 0.0,
+    "LONG": 0.0
+  },
+  "rule": "largest mean completed_jobs; ties smallest abs(threshold), then numeric threshold",
+  "final_selection": "none"
+}

@@ -1,0 +1,96 @@
+{
+  "acceptance": "accepted",
+  "accepted_at": "2026-09-21T10:17:21.795026Z",
+  "bootstrap_command": [
+    "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/89e2adce48a24e8fadc7ed3d033f390c/scripts/hmasd_admission.py",
+    "_run-admitted",
+    "--runner",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/89e2adce48a24e8fadc7ed3d033f390c/scripts/run_sir_c06.py",
+    "--output",
+    "/home/fires/.codex/worktrees/f987/hmasd-wsl/runs/skill_information_refresh/c06_multistep_s73170_20260921",
+    "--",
+    "--out",
+    "/home/fires/.codex/worktrees/f987/hmasd-wsl/runs/skill_information_refresh/c06_multistep_s73170_20260921",
+    "--launch-sha",
+    "45a1f534539032c021f5d44a7d78f4b503b0ba51",
+    "--seed",
+    "73170",
+    "--model-seed",
+    "973170"
+  ],
+  "claim_key": "6ec77e4c57bfe84967188022f5d0d773dc964f3ca7faf98385f79bf971ac4c48",
+  "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/6ec77e4c57bfe84967188022f5d0d773dc964f3ca7faf98385f79bf971ac4c48.json",
+  "command": [
+    "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/89e2adce48a24e8fadc7ed3d033f390c/scripts/run_sir_c06.py",
+    "--out",
+    "/home/fires/.codex/worktrees/f987/hmasd-wsl/runs/skill_information_refresh/c06_multistep_s73170_20260921",
+    "--launch-sha",
+    "45a1f534539032c021f5d44a7d78f4b503b0ba51",
+    "--seed",
+    "73170",
+    "--model-seed",
+    "973170"
+  ],
+  "command_sha256": "3531fe1f614fd1180cb5ea9498a98f81c062d1104f11571bd3820c5b3745cec1",
+  "control_observation": {
+    "observed_at": "2026-09-21T10:17:21.620661Z",
+    "ref": "refs/heads/main",
+    "remote": "origin",
+    "sha": "a8eaf47e67bf8c2fe140db6359dc5db9b309f6a5"
+  },
+  "control_root": "/home/fires/hmasd-wsl",
+  "created_at": "2026-09-21T10:17:21.637809Z",
+  "cwd": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/89e2adce48a24e8fadc7ed3d033f390c",
+  "direction": "skill_information_refresh",
+  "host_identity": "Jacob",
+  "identity_command": [
+    "/home/fires/.local/share/uv/python/cpython-3.10.20-linux-x86_64-gnu/bin/python3.10",
+    "scripts/run_sir_c06.py",
+    "--launch-sha",
+    "45a1f534539032c021f5d44a7d78f4b503b0ba51",
+    "--seed",
+    "73170",
+    "--model-seed",
+    "973170"
+  ],
+  "lead": "Codex DM (independent session)",
+  "manifest_ref": "/home/fires/.codex/worktrees/f987/hmasd-wsl/runs/skill_information_refresh/c06_multistep_s73170_20260921/launch-manifest.json",
+  "node": "local_linux",
+  "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/6ec77e4c57bfe84967188022f5d0d773dc964f3ca7faf98385f79bf971ac4c48.json",
+  "output_root": "/home/fires/.codex/worktrees/f987/hmasd-wsl/runs/skill_information_refresh/c06_multistep_s73170_20260921",
+  "preflight": "/home/fires/.codex/worktrees/f987/hmasd-wsl/runs/skill_information_refresh/c06_multistep_s73170_20260921/admission-preflight.json",
+  "process": {
+    "detached": true,
+    "identity": {
+      "boot_id": "0c48e432-2a4b-4bcc-9576-32954aa2c6b8",
+      "kind": "linux_pid_start_ticks",
+      "pid": 3443625,
+      "session_id": 3443625,
+      "start_ticks": 24827198
+    },
+    "native_handle_kind": "posix_session",
+    "pid": 3443625,
+    "process_group_id": 3443625
+  },
+  "process_exit": "/home/fires/.codex/worktrees/f987/hmasd-wsl/runs/skill_information_refresh/c06_multistep_s73170_20260921/process-exit.json",
+  "published_remote": "origin",
+  "runner_process": {
+    "identity": {
+      "boot_id": "0c48e432-2a4b-4bcc-9576-32954aa2c6b8",
+      "kind": "linux_pid_start_ticks",
+      "pid": 3443626,
+      "session_id": 3443625,
+      "start_ticks": 24827202
+    },
+    "pid": 3443626,
+    "process_group_id": 3443625,
+    "supervisor_pid": 3443625
+  },
+  "schema_version": 1,
+  "sha": "45a1f534539032c021f5d44a7d78f4b503b0ba51",
+  "source_root": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/89e2adce48a24e8fadc7ed3d033f390c",
+  "stderr": "/home/fires/.codex/worktrees/f987/hmasd-wsl/runs/skill_information_refresh/c06_multistep_s73170_20260921/stderr.log",
+  "stdout": "/home/fires/.codex/worktrees/f987/hmasd-wsl/runs/skill_information_refresh/c06_multistep_s73170_20260921/stdout.log"
+}

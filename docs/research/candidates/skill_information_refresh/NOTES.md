@@ -2093,3 +2093,183 @@ memory evidence are in [launch-manifest.json](../../../../runs/skill_information
 and its referenced admission preflight. The same manifest is the read-only status handle;
 no second launch is planned. A bounded Monitor returns native facts while the DM prepares
 the complete reading. Acceptance is not scientific completion or a result claim.
+
+
+## 2026-09-21 — C06 complete reading and updated explanation
+
+Original accepted operation exited normally (code 0, matching process-exit witness),
+summary COMPLETE and stderr empty. Read all 1,280 episode rows, all 48 final trace NPZs,
+all 64 predeclared root NPZs, summary/config/selection and native identity. Independent
+math.fsum reduction agrees with every final contrast; per-world rewards, completion,
+conflict/wait/gate/bypass/job/packet trace sums agree with episode rows. Each world has
+14 started jobs, 24 packets and 192 bytes. No failed or missing panel, retry or expansion.
+
+Both arms select threshold zero from the fixed development candidates. In threshold
+order (-.05,0,.05,.10), NEAR_COMMIT mean completions were
+13.28125 / 13.40625 / 13.34375 / 13.25; LONG
+13.34375 / 13.40625 / 13.34375 / 13.25. These are development outcomes, not fresh tests.
+
+Final 256 common fresh worlds (3,584 started jobs per arm):
+
+| Arm | Completed jobs | Conflicts | Wait ticks | Bypass jobs |
+| --- | ---: | ---: | ---: | ---: |
+| ACTIVE_FIRST | 3370 | 47 | 2160 | 690 |
+| NEAR_COMMIT | 3404 | 34 | 2153 | 709 |
+| LONG | 3406 | 33 | 2139 | 717 |
+
+LONG minus NEAR_COMMIT is +2 total / +.0078125 jobs per world: 1 positive world,
+0 negative and 255 tied. Conditional world SE .0078125; descriptive normal 95% mean
+interval [-.0075,.023125]. LONG minus ACTIVE_FIRST is +36 / +.140625 (22 positive,
+2 negative, 232 tied), SE .0338812580, interval [.0742177343,.2070322657]. NEAR_COMMIT
+minus ACTIVE_FIRST is +34 / +.1328125 (21 positive,2 negative,233 tied), SE .0330914265,
+interval [.0679533040,.1976716960]. These describe this fixed development-selected
+program on the stated law. No equivalence, independent training or deployment claim.
+
+Behavior is separated even where completions tie: NEAR versus ACTIVE_FIRST changes
+actual packet times in 221 worlds (970 tick differences); LONG versus NEAR in 95 worlds
+(282 differences). At each first difference physical state still agrees across arms.
+For NEAR versus ACTIVE_FIRST the first difference is HOLD instead of SEND in 116 worlds
+and SEND instead of HOLD in 105. Thus the policy does not merely delay every active
+packet. The two negative worlds are 17 and 110; their first differences hold agent 1
+at tick 33 with delta/SE (-.03125,.03125) and (-.0625,.0625). LONG's only positive
+completion difference from NEAR occurs in world 165, first differing at tick 8 by holding
+with delta -.03125 and SE .03125. These selected outcome descriptions are post hoc;
+they do not causally assign whole-trajectory gain/loss to one root action.
+
+The blind development LONG/zero-threshold sample retained 64 of 2,256 optional roots.
+Six have a nonzero long-minus-near model tail (five magnitude1/32 or2/32, one3/32);
+none strictly reverses nonzero mean signs. Two roots have opposite first/last-half
+signs for each target; signs agree including zero in 55/64 near and56/64 long roots.
+One zero-to-negative long root (world48,t56) is zero in its first16 samples and negative
+in the last16; world37,t56 is negative in both halves. Therefore there are occasional
+extra-horizon preferences, including MC-sensitive ones, but no demonstrated pervasive
+stable sign-reversal mechanism. This is not a proof that no tail value exists.
+
+On final trajectories NEAR has 8,960 optional roots, 7,494 exact-zero deltas, and504
+requests differing from ACTIVE_FIRST on the same own state. LONG has9,045 roots,
+7,507 zeros and525 such differences. Mean sampled near endpoint lengths are14.694/14.703
+ticks versus27.140/27.163 for LONG; about25.1% of particles end at the same endpoint.
+A post-hoc offline belief check has zero true-state zero-mass roots, modal accuracy
+.6665/.6672 and Brier .38255/.38316. High-certainty states are correct in the logged
+sample, but omitted timing likelihood remains an approximation; these state diagnostics
+do not establish exact calibration or explain away any value error. No true state enters
+requests; diagnostics were populated only after actions were fixed.
+
+Cost: 0 new fits/optimizer steps; 512 selection and768 final episodes,122,880 actual
+team ticks;43,044 planning roots;64,978,560 model branch transitions;2,754,816 initialized
+model worlds;264,462,336 advance draws AND264,462,336 job draws (not a combined total).
+Belief12,288 batch observations /196,608 rows,23,846 packet constraints,0 contradictions.
+Scientific process wall92.7046s, userCPU92.7599s, systemCPU1.0363s, peakRSS66,404KiB.
+Final panels: NEAR18.4448s /11,342,208 model steps; LONG21.6396s /15,724,160;
+ACTIVE_FIRST .558964s /0. Near is cheaper than LONG here but about33 times baseline
+panel wall. This is no speed or resource-efficiency win. Source preparation, publication
+and readback are outside scientific child wall and are not claimed free. Historical
+cumulative C fits remain four.
+
+Updated explanation: strengthen the bounded value of known-model native-consequence
+reasoning beyond the active-stage timing rule. Weaken the claim that extending beyond
+the nearest cache-sensitive commitment is needed here: NEAR captures34 of36 observed
+extra completions, with fewer modeled steps. Leave general HMASD/UAV usefulness, model
+learning, exact-belief effects, and neural benefits untouched. Prior adverse C03/C04
+packages and exact C05 simplification remain intact. Ordinary planning is a valid outcome.
+
+Next useful observation is a bounded fresh confirmation of these now fixed programs,
+not extra development tuning or a rescue of LONG. Proposed primary: NEAR versus
+ACTIVE_FIRST. Five independent new world/model master pairs, all three arms unchanged,
+256 worlds each, no selection or fitting. Retain LONG as a secondary bound on incremental
+value, rather than assume equality from one-world separation. The actual claim, task-scale
+margin and fixed read rule are in the prospective claim note; Pro is consulted on that
+specific confirmation choice, not asked for permission.
+
+
+### C07 prospective engineering L0
+
+Implementer may prepare a bounded fixed-program evaluator while the actual confirmation
+claim is under Pro review. Own only new c07/confirm.py, scripts/run_sir_c07.py and mirrored
+tests. Reuse c06 _run_batch, lawful planning/filter and trace format unchanged; no edits
+to frozen c01–c06. Config follows CLAIM_near_commit_c07.md. Five world/model seed pairs,
+phase30, three arms, zero thresholds for both modeled arms, 256 worlds/block, batch16,
+H96/P32, no development selection or root-resampling. Count full actual/model/filter
+work per panel and aggregate, record all episode rows with block/master seeds, all native
+traces using block-specific filename prefix via stage (e.g. block0) with matching counter
+keys, and raw paired differences per block and pooled. Preserve handled-failure partial
+work/status. Empty updates.jsonl. Fixed rule at claim note: primary all5 block means>0
+and pooled normal95% lower>0.05; secondary LONG-NEAR upper<0.05. Record exact formulas,
+no training replication or joint-coverage claim. CLI validates source/config then native
+require_admission before effects; no bypass/overwrite/resume; permit native atomic temps.
+Focused fixtures test fixed no-selection scope, block/world pairing and arithmetic,
+boundary decision rule and handled failure. No science decisions, launch, Git index or
+extra helpers. DM reviews/accepts; independent Reviewer covers evaluator/admission delta.
+Pro may change the proposed claim before final freeze; no C07 results until that decision.
+
+## Pro question 2026-09-21 C07 fixed near-commit confirmation after C06
+
+Conversation: existing Jev account route, private URL only in local operation state.
+This is a new focused question, not a resend of C06. No permission or owner relay needed.
+
+Question: Does the specific fixed C07 claim and reading rule below provide a useful,
+proportionate confirmation of the C06 simplification, or is there a material design or
+interpretation defect that should change it before execution? The decision is whether
+and how to confirm an ordinary known-model NEAR_COMMIT rule, not to rescue LONG or
+manufacture a learned method. Your previous answer's broad negative/positive branches
+are adopted; this asks about the actual now-observed evidence and fixed confirmation.
+
+Standing: read the complete C06 result entry immediately above. In256 fresh final worlds
+NEAR completes3404 jobs, LONG3406, ACTIVE_FIRST3370. Near-minus-AF +34 (+.1328125/world;
+21+/2-/233ties; conditional SE .0330914). Long-minus-near +2, only one positive world and
+255 ties, SE .0078125. Conflicts34/33/47, waits2153/2139/2160, bypass709/717/690. Both
+selected threshold zero. No oracle/evaluation update; 0fits,122,880actual ticks and
+64,978,560 nested model transitions,92.70s process wall. Near/long final panel walls
+18.44/21.64s versus AF .559s, so return gain is not computational efficiency. Full native
+outcomes remain under runs/skill_information_refresh/c06_multistep_s73170_20260921.
+Source-run code is immutable45a1f534539032c021f5d44a7d78f4b503b0ba51.
+
+The corrected near opportunity rule follows your material dissent. Of64 blind hashed
+dev roots,6 have nonzero model tails, none strict nonzero-sign reversal, and two roots
+for each horizon disagree in first/last-half signs. Model tails cannot establish
+whole-trajectory value. NEAR and AF differ on packet times in221/256worlds, LONG and
+NEAR in95/256; sparse reward difference is not identity. About25% of near particle
+endpoints equal LONG. No scientific attempt to enlarge LONG or narrow NEAR followed.
+DM strengthens known-model native-consequence reasoning beyond stage timing, weakens
+need for added horizon beyond nearest commitment, leaves all learned/UAV claims untouched.
+
+Actual proposed claim and plan: read ALL of
+`docs/research/candidates/skill_information_refresh/CLAIM_near_commit_c07.md` at source_sha.
+Five fresh world/model seed pairs73180..73184/973180..973184, phase30,256worlds/block,
+all3 fixed arms, threshold0, P32/H96. Zero new fits and no selection. Primary NEAR-AF:
+all five block means positive and pooled paired-world normal95% lower bound >.05 jobs
+per96-tick episode (one extra completed job per20episodes, explicit within-host task
+scale, no external utility calibration). Secondary LONG-NEAR: report complete interval;
+if upper95% <.05, bound additional return below this task-scale margin, not identical
+programs or universal equivalence. Units are1280 independently addressed worlds, not
+training seeds; explain whether block dependence/MC design or interval interpretation
+requires a different rule. No joint coverage assertion across primary/secondary claims.
+
+Prospective cost:3,840episodes,368,640actual ticks, at most377,487,360 model branch ticks,
+plus filtering/init/draw/logging; C06-based expectation about135million and200s processwall.
+No new root diagnostic simulations. Full raw traces and every outcome retained. No
+post-score extension, seed replacement, threshold tuning, horizon/particle adjustment,
+or claim that short is free. The existing learned-arm seed requirement is not invoked
+for a zero-training fixed program. Preparation can proceed independently; Pro advises,
+DM decides and executes only after the fixed declaration and accepted implementation.
+
+Context required: current constitution sections1–6 and8; scientific-tools Comparators,
+Statistics, Cost and exposure and Pro; full C06 question/Answer/adoption, C06 declaration
+and result reading in this notebook; actual C06 planning.py, study.py and belief.py;
+full C07 claim note. Use current methods as authority, exact45a1f5345 code as executed
+object. Inspect summary/selection/episodes and relevant saved arrays if needed for the
+specific criticism; distinguish author reductions from independent raw readback. Prior
+C03/C04/C05 readings preserve their limits; no recursive unrelated-direction audit.
+
+Constraints: no experiments and no edits outside THIS question's empty ### Answer
+subsection on branch codex/c-multistep-send-value at this notebook. Read the immutable
+source_sha, fetch latest target blob and actual SHA before any write, preserve all other
+bytes, stop on overlapping edits. If connector writeback unavailable, return the COMPLETE
+answer in chat, not merely a receipt/blob SHA/link. Do not expose this account's URL.
+
+Return MATERIAL_DISSENT yes/no; actually read decision-critical sources and gaps; any
+material correction to the fixed claim/threshold/statistics/comparator/cost; whether the
+next observation is worth doing and what each result would justify retaining or stopping.
+No compulsory extra candidate, seed batch, profiling test or approval layer.
+
+### Answer

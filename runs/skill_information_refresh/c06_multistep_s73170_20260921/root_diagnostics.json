@@ -1,0 +1,1356 @@
+{
+  "phase": "selection",
+  "arm": "LONG",
+  "threshold": 0.0,
+  "eligible_roots": 2256,
+  "limit": 64,
+  "retained": 64,
+  "records": [
+    {
+      "file": "root_diagnostic_world63_tick72.npz",
+      "hash": "001d1d2a34db842c4c203df0efc2fa9ef15c7ea555b6265731cc45488537abcc",
+      "world_id": 63,
+      "tick": 72,
+      "delta_near": 0.0,
+      "delta_long": 0.0,
+      "delta_tail": 0.0,
+      "near_se": 0.0,
+      "long_se": 0.0,
+      "half_sample_deltas": {
+        "near": [
+          0.0,
+          0.0
+        ],
+        "long": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "file": "root_diagnostic_world16_tick56.npz",
+      "hash": "005d243d3d3cd5e432695aab23082c33b189f3f8965f472cc3028a4c788cc812",
+      "world_id": 16,
+      "tick": 56,
+      "delta_near": -0.0625,
+      "delta_long": -0.0625,
+      "delta_tail": 0.0,
+      "near_se": 0.062499998930358056,
+      "long_se": 0.062499998930358056,
+      "half_sample_deltas": {
+        "near": [
+          0.0,
+          -0.125
+        ],
+        "long": [
+          0.0,
+          -0.125
+        ]
+      }
+    },
+    {
+      "file": "root_diagnostic_world35_tick0.npz",
+      "hash": "007e8d95cbba32c748491255d849968b15ad6275373c85630e5820686afc6cde",
+      "world_id": 35,
+      "tick": 0,
+      "delta_near": 0.0,
+      "delta_long": 0.0,
+      "delta_tail": 0.0,
+      "near_se": 0.12700012924036122,
+      "long_se": 0.12700012924036122,
+      "half_sample_deltas": {
+        "near": [
+          -0.25,
+          0.25
+        ],
+        "long": [
+          -0.25,
+          0.25
+        ]
+      }
+    },
+    {
+      "file": "root_diagnostic_world34_tick77.npz",
+      "hash": "00a0d371465061a575050a228679a1f10ac1d945803236c51fdea625d62b4edf",
+      "world_id": 34,
+      "tick": 77,
+      "delta_near": 0.0,
+      "delta_long": 0.0,
+      "delta_tail": 0.0,
+      "near_se": 0.0,
+      "long_se": 0.0,
+      "half_sample_deltas": {
+        "near": [
+          0.0,
+          0.0
+        ],
+        "long": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "file": "root_diagnostic_world17_tick12.npz",
+      "hash": "00a67a1bef5b558d34506830fd815a00056d3fe1f09fdd87912d942118c46bc6",
+      "world_id": 17,
+      "tick": 12,
+      "delta_near": 0.0,
+      "delta_long": 0.0,
+      "delta_tail": 0.0,
+      "near_se": 0.0,
+      "long_se": 0.0,
+      "half_sample_deltas": {
+        "near": [
+          0.0,
+          0.0
+        ],
+        "long": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "file": "root_diagnostic_world45_tick17.npz",
+      "hash": "00b9a7d346084ce8f09ecdbb8296888476d1d6ea9b286f5bf752e0ad065be86e",
+      "world_id": 45,
+      "tick": 17,
+      "delta_near": 0.0,
+      "delta_long": 0.0,
+      "delta_tail": 0.0,
+      "near_se": 0.0,
+      "long_se": 0.0,
+      "half_sample_deltas": {
+        "near": [
+          0.0,
+          0.0
+        ],
+        "long": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "file": "root_diagnostic_world42_tick60.npz",
+      "hash": "00c6d57ece1f4d0d872edf11effb5c84a44a77c139396efaf418775f048abf93",
+      "world_id": 42,
+      "tick": 60,
+      "delta_near": 0.0625,
+      "delta_long": 0.0625,
+      "delta_tail": 0.0,
+      "near_se": 0.062499998930358056,
+      "long_se": 0.062499998930358056,
+      "half_sample_deltas": {
+        "near": [
+          0.125,
+          0.0
+        ],
+        "long": [
+          0.125,
+          0.0
+        ]
+      }
+    },
+    {
+      "file": "root_diagnostic_world27_tick88.npz",
+      "hash": "01368230f8d78fd709add73c0e03f2b69960d24490ce8a001bcbc23cb159e673",
+      "world_id": 27,
+      "tick": 88,
+      "delta_near": 0.0,
+      "delta_long": 0.0,
+      "delta_tail": 0.0,
+      "near_se": 0.0,
+      "long_se": 0.0,
+      "half_sample_deltas": {
+        "near": [
+          0.0,
+          0.0
+        ],
+        "long": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "file": "root_diagnostic_world0_tick89.npz",
+      "hash": "01484693be42d71b20dfd5e39625712cef77713f26ecbda7dea9f4c7718dbad1",
+      "world_id": 0,
+      "tick": 89,
+      "delta_near": 0.0,
+      "delta_long": 0.0,
+      "delta_tail": 0.0,
+      "near_se": 0.0,
+      "long_se": 0.0,
+      "half_sample_deltas": {
+        "near": [
+          0.0,
+          0.0
+        ],
+        "long": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "file": "root_diagnostic_world20_tick84.npz",
+      "hash": "0156d24b39a20d07945e2b982273cb7845756ef4a018b645a11d7f5bb817b6f7",
+      "world_id": 20,
+      "tick": 84,
+      "delta_near": 0.0,
+      "delta_long": 0.0,
+      "delta_tail": 0.0,
+      "near_se": 0.0,
+      "long_se": 0.0,
+      "half_sample_deltas": {
+        "near": [
+          0.0,
+          0.0
+        ],
+        "long": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "file": "root_diagnostic_world18_tick89.npz",
+      "hash": "017716763578740fa6e476302eb944c05ae3c5a701fb21ad5680bcd494dd72fa",
+      "world_id": 18,
+      "tick": 89,
+      "delta_near": 0.0,
+      "delta_long": 0.0,
+      "delta_tail": 0.0,
+      "near_se": 0.0,
+      "long_se": 0.0,
+      "half_sample_deltas": {
+        "near": [
+          0.0,
+          0.0
+        ],
+        "long": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "file": "root_diagnostic_world8_tick16.npz",
+      "hash": "018744d9703de7a727bc2082cd4f864d7e320531d8e6da625b755ee45dbf6a30",
+      "world_id": 8,
+      "tick": 16,
+      "delta_near": 0.0,
+      "delta_long": 0.0,
+      "delta_tail": 0.0,
+      "near_se": 0.0,
+      "long_se": 0.0,
+      "half_sample_deltas": {
+        "near": [
+          0.0,
+          0.0
+        ],
+        "long": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "file": "root_diagnostic_world56_tick40.npz",
+      "hash": "01adcc17ba124ecca55bc28a0ec2d4d35d2add3d50057e07d447d886dce1b0b4",
+      "world_id": 56,
+      "tick": 40,
+      "delta_near": 0.0,
+      "delta_long": 0.0,
+      "delta_tail": 0.0,
+      "near_se": 0.0,
+      "long_se": 0.0,
+      "half_sample_deltas": {
+        "near": [
+          0.0,
+          0.0
+        ],
+        "long": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "file": "root_diagnostic_world48_tick56.npz",
+      "hash": "01e8ad62e7443cd79858800ae1aeab52e94be23468312ba983f5a8e5fe2aae5d",
+      "world_id": 48,
+      "tick": 56,
+      "delta_near": 0.0,
+      "delta_long": -0.03125,
+      "delta_tail": -0.03125,
+      "near_se": 0.0,
+      "long_se": 0.031249999465179028,
+      "half_sample_deltas": {
+        "near": [
+          0.0,
+          0.0
+        ],
+        "long": [
+          0.0,
+          -0.0625
+        ]
+      }
+    },
+    {
+      "file": "root_diagnostic_world42_tick93.npz",
+      "hash": "020b926ce60656b79c080a4d7ff0a34aed6e55de53d42a4bd530492dc8ee2d02",
+      "world_id": 42,
+      "tick": 93,
+      "delta_near": 0.0,
+      "delta_long": 0.0,
+      "delta_tail": 0.0,
+      "near_se": 0.0,
+      "long_se": 0.0,
+      "half_sample_deltas": {
+        "near": [
+          0.0,
+          0.0
+        ],
+        "long": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "file": "root_diagnostic_world34_tick91.npz",
+      "hash": "02265adef2723692b1369915f12ca8c0bba40cae3095d690691a35b268df1f01",
+      "world_id": 34,
+      "tick": 91,
+      "delta_near": 0.0,
+      "delta_long": 0.0,
+      "delta_tail": 0.0,
+      "near_se": 0.0,
+      "long_se": 0.0,
+      "half_sample_deltas": {
+        "near": [
+          0.0,
+          0.0
+        ],
+        "long": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "file": "root_diagnostic_world34_tick65.npz",
+      "hash": "02607200e1d56471d6525f9f650c8a744d8419311ffc64af74958701130df5c9",
+      "world_id": 34,
+      "tick": 65,
+      "delta_near": 0.0,
+      "delta_long": 0.0,
+      "delta_tail": 0.0,
+      "near_se": 0.0,
+      "long_se": 0.0,
+      "half_sample_deltas": {
+        "near": [
+          0.0,
+          0.0
+        ],
+        "long": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "file": "root_diagnostic_world59_tick48.npz",
+      "hash": "02afb208fa4a618b32633cc71868e211375eea6308d3a1d24bc59fef0edfcd97",
+      "world_id": 59,
+      "tick": 48,
+      "delta_near": 0.125,
+      "delta_long": 0.125,
+      "delta_tail": 0.0,
+      "near_se": 0.08695104001533173,
+      "long_se": 0.08695104001533173,
+      "half_sample_deltas": {
+        "near": [
+          0.25,
+          0.0
+        ],
+        "long": [
+          0.25,
+          0.0
+        ]
+      }
+    },
+    {
+      "file": "root_diagnostic_world62_tick93.npz",
+      "hash": "02b314a15de6cfbeedc8b16bb7734489522d2ef43dbe7e34a1c9b7fd15027514",
+      "world_id": 62,
+      "tick": 93,
+      "delta_near": 0.0,
+      "delta_long": 0.0,
+      "delta_tail": 0.0,
+      "near_se": 0.0,
+      "long_se": 0.0,
+      "half_sample_deltas": {
+        "near": [
+          0.0,
+          0.0
+        ],
+        "long": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "file": "root_diagnostic_world9_tick12.npz",
+      "hash": "02d2a86c983057193d0f1b52058a6d3e94533facc9f53c92ce78e58cab3e6054",
+      "world_id": 9,
+      "tick": 12,
+      "delta_near": 0.0,
+      "delta_long": 0.0,
+      "delta_tail": 0.0,
+      "near_se": 0.0,
+      "long_se": 0.0,
+      "half_sample_deltas": {
+        "near": [
+          0.0,
+          0.0
+        ],
+        "long": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "file": "root_diagnostic_world17_tick0.npz",
+      "hash": "031cd33db48947ee3c64091dad85d0b317fc82e2d29677c90ece20ba8248b971",
+      "world_id": 17,
+      "tick": 0,
+      "delta_near": 0.0,
+      "delta_long": 0.0,
+      "delta_tail": 0.0,
+      "near_se": 0.0,
+      "long_se": 0.0,
+      "half_sample_deltas": {
+        "near": [
+          0.0,
+          0.0
+        ],
+        "long": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "file": "root_diagnostic_world2_tick41.npz",
+      "hash": "034b63f130392ee0d4ed0b4235590edbcd9e453b35d6fff75e482b5ca89da48f",
+      "world_id": 2,
+      "tick": 41,
+      "delta_near": 0.0,
+      "delta_long": 0.0,
+      "delta_tail": 0.0,
+      "near_se": 0.0,
+      "long_se": 0.0,
+      "half_sample_deltas": {
+        "near": [
+          0.0,
+          0.0
+        ],
+        "long": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "file": "root_diagnostic_world9_tick48.npz",
+      "hash": "0362f7cde157c32294764976ece77f91bd75bb34e77b917d077cc9e330d834d3",
+      "world_id": 9,
+      "tick": 48,
+      "delta_near": 0.25,
+      "delta_long": 0.25,
+      "delta_tail": 0.0,
+      "near_se": 0.11879774139083785,
+      "long_se": 0.11879774139083785,
+      "half_sample_deltas": {
+        "near": [
+          0.125,
+          0.375
+        ],
+        "long": [
+          0.125,
+          0.375
+        ]
+      }
+    },
+    {
+      "file": "root_diagnostic_world46_tick16.npz",
+      "hash": "036804b83c2d6c7943d3899a0ca2d2ec018c2dbf734d57841e3eb3821eb3018f",
+      "world_id": 46,
+      "tick": 16,
+      "delta_near": 0.0,
+      "delta_long": 0.0,
+      "delta_tail": 0.0,
+      "near_se": 0.0,
+      "long_se": 0.0,
+      "half_sample_deltas": {
+        "near": [
+          0.0,
+          0.0
+        ],
+        "long": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "file": "root_diagnostic_world40_tick10.npz",
+      "hash": "03ccb077833847a85197bb5672ee11a49b4bf4284243819154635a02081fb87a",
+      "world_id": 40,
+      "tick": 10,
+      "delta_near": 0.0,
+      "delta_long": 0.0,
+      "delta_tail": 0.0,
+      "near_se": 0.0,
+      "long_se": 0.0,
+      "half_sample_deltas": {
+        "near": [
+          0.0,
+          0.0
+        ],
+        "long": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "file": "root_diagnostic_world30_tick65.npz",
+      "hash": "03d124643f804cac6f7b7c9cb3beb7a1362fb359d5be2ec98700b80316b96267",
+      "world_id": 30,
+      "tick": 65,
+      "delta_near": -0.0625,
+      "delta_long": -0.03125,
+      "delta_tail": 0.03125,
+      "near_se": 0.043475520007665865,
+      "long_se": 0.031249999465179028,
+      "half_sample_deltas": {
+        "near": [
+          -0.125,
+          0.0
+        ],
+        "long": [
+          -0.0625,
+          0.0
+        ]
+      }
+    },
+    {
+      "file": "root_diagnostic_world51_tick81.npz",
+      "hash": "040f99aa3ed112343f8538940d25f1c0d3545146bcf8964c3d77a52451edb696",
+      "world_id": 51,
+      "tick": 81,
+      "delta_near": 0.0,
+      "delta_long": 0.0,
+      "delta_tail": 0.0,
+      "near_se": 0.0,
+      "long_se": 0.0,
+      "half_sample_deltas": {
+        "near": [
+          0.0,
+          0.0
+        ],
+        "long": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "file": "root_diagnostic_world40_tick33.npz",
+      "hash": "042e8bafb4b06b462de81bcd28bf51e8f1ba2e3664161e9de25d99197dd40d65",
+      "world_id": 40,
+      "tick": 33,
+      "delta_near": 0.0,
+      "delta_long": 0.0,
+      "delta_tail": 0.0,
+      "near_se": 0.0,
+      "long_se": 0.0,
+      "half_sample_deltas": {
+        "near": [
+          0.0,
+          0.0
+        ],
+        "long": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "file": "root_diagnostic_world30_tick1.npz",
+      "hash": "044d2e7ddc08f82eea64ec1252402120572705cd7d263044c3b69eefed772c1e",
+      "world_id": 30,
+      "tick": 1,
+      "delta_near": 0.0,
+      "delta_long": 0.0,
+      "delta_tail": 0.0,
+      "near_se": 0.0,
+      "long_se": 0.0,
+      "half_sample_deltas": {
+        "near": [
+          0.0,
+          0.0
+        ],
+        "long": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "file": "root_diagnostic_world41_tick45.npz",
+      "hash": "04551478b78821f4913cac5a5d24d8c61c1f140aa04d1b9181fc7a4290d67d87",
+      "world_id": 41,
+      "tick": 45,
+      "delta_near": 0.0,
+      "delta_long": 0.0,
+      "delta_tail": 0.0,
+      "near_se": 0.0,
+      "long_se": 0.0,
+      "half_sample_deltas": {
+        "near": [
+          0.0,
+          0.0
+        ],
+        "long": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "file": "root_diagnostic_world33_tick80.npz",
+      "hash": "04b5b5af7f141961110301d3ec3b095073c4c9efb9ee6f00ab66ecfc3b8be86d",
+      "world_id": 33,
+      "tick": 80,
+      "delta_near": 0.03125,
+      "delta_long": 0.03125,
+      "delta_tail": 0.0,
+      "near_se": 0.031249999465179028,
+      "long_se": 0.031249999465179028,
+      "half_sample_deltas": {
+        "near": [
+          0.0625,
+          0.0
+        ],
+        "long": [
+          0.0625,
+          0.0
+        ]
+      }
+    },
+    {
+      "file": "root_diagnostic_world3_tick64.npz",
+      "hash": "04db1a3ac869d649f356fe63562982663808d6064127d163b543c798b9ebb477",
+      "world_id": 3,
+      "tick": 64,
+      "delta_near": 0.0,
+      "delta_long": 0.0,
+      "delta_tail": 0.0,
+      "near_se": 0.0,
+      "long_se": 0.0,
+      "half_sample_deltas": {
+        "near": [
+          0.0,
+          0.0
+        ],
+        "long": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "file": "root_diagnostic_world26_tick40.npz",
+      "hash": "04fd6d654da382f869775ce1d95fad341524e9482b468d28d56b2ebf573bfcba",
+      "world_id": 26,
+      "tick": 40,
+      "delta_near": 0.0,
+      "delta_long": 0.0,
+      "delta_tail": 0.0,
+      "near_se": 0.0,
+      "long_se": 0.0,
+      "half_sample_deltas": {
+        "near": [
+          0.0,
+          0.0
+        ],
+        "long": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "file": "root_diagnostic_world32_tick4.npz",
+      "hash": "0500eff6c304801f240539fa5a646571cdc4c5a236625246d0c46de668d8429f",
+      "world_id": 32,
+      "tick": 4,
+      "delta_near": 0.0,
+      "delta_long": 0.0,
+      "delta_tail": 0.0,
+      "near_se": 0.08980264837037424,
+      "long_se": 0.08980264837037424,
+      "half_sample_deltas": {
+        "near": [
+          0.125,
+          -0.125
+        ],
+        "long": [
+          0.125,
+          -0.125
+        ]
+      }
+    },
+    {
+      "file": "root_diagnostic_world42_tick91.npz",
+      "hash": "051bd7c50635c3131ba1ffa6de2c5c45e1f4fed3673bdd2d6a4a0cb9d2d7c957",
+      "world_id": 42,
+      "tick": 91,
+      "delta_near": 0.0,
+      "delta_long": 0.0,
+      "delta_tail": 0.0,
+      "near_se": 0.0,
+      "long_se": 0.0,
+      "half_sample_deltas": {
+        "near": [
+          0.0,
+          0.0
+        ],
+        "long": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "file": "root_diagnostic_world33_tick93.npz",
+      "hash": "05823ad84f19a786aabd083a71a641038250830a74bc6a32d1a4f4b1d48e2dad",
+      "world_id": 33,
+      "tick": 93,
+      "delta_near": 0.0,
+      "delta_long": 0.0,
+      "delta_tail": 0.0,
+      "near_se": 0.0,
+      "long_se": 0.0,
+      "half_sample_deltas": {
+        "near": [
+          0.0,
+          0.0
+        ],
+        "long": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "file": "root_diagnostic_world42_tick17.npz",
+      "hash": "058ecfc823a49e6ec4d1475d6092d97ea18f1d4443c334393fe9c0d10541f73d",
+      "world_id": 42,
+      "tick": 17,
+      "delta_near": 0.0,
+      "delta_long": 0.0,
+      "delta_tail": 0.0,
+      "near_se": 0.0,
+      "long_se": 0.0,
+      "half_sample_deltas": {
+        "near": [
+          0.0,
+          0.0
+        ],
+        "long": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "file": "root_diagnostic_world43_tick8.npz",
+      "hash": "05f34460f4653828efc9f1fb441279ca66263210a86d88200c97bda603c9d1a0",
+      "world_id": 43,
+      "tick": 8,
+      "delta_near": 0.0,
+      "delta_long": 0.0,
+      "delta_tail": 0.0,
+      "near_se": 0.0,
+      "long_se": 0.0,
+      "half_sample_deltas": {
+        "near": [
+          0.0,
+          0.0
+        ],
+        "long": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "file": "root_diagnostic_world40_tick57.npz",
+      "hash": "05f4e7883462847e8c19105bdf1f3b3f3a9ee74f9ab23eb977ef742dc94d5307",
+      "world_id": 40,
+      "tick": 57,
+      "delta_near": 0.0,
+      "delta_long": 0.0,
+      "delta_tail": 0.0,
+      "near_se": 0.0,
+      "long_se": 0.0,
+      "half_sample_deltas": {
+        "near": [
+          0.0,
+          0.0
+        ],
+        "long": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "file": "root_diagnostic_world22_tick25.npz",
+      "hash": "060561968c5573a7e9ed95bddefe9369b1530610690aff5ca007c0b7142dce32",
+      "world_id": 22,
+      "tick": 25,
+      "delta_near": 0.0,
+      "delta_long": 0.0,
+      "delta_tail": 0.0,
+      "near_se": 0.0,
+      "long_se": 0.0,
+      "half_sample_deltas": {
+        "near": [
+          0.0,
+          0.0
+        ],
+        "long": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "file": "root_diagnostic_world37_tick16.npz",
+      "hash": "0622950d4d7338d2ba19a8f91271a55d60dfc2dd39c0c4712570ad0104002ce7",
+      "world_id": 37,
+      "tick": 16,
+      "delta_near": 0.0,
+      "delta_long": 0.0,
+      "delta_tail": 0.0,
+      "near_se": 0.0,
+      "long_se": 0.0,
+      "half_sample_deltas": {
+        "near": [
+          0.0,
+          0.0
+        ],
+        "long": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "file": "root_diagnostic_world54_tick72.npz",
+      "hash": "06797d9fa0a5c972fc97015ade7b3c6eaf83607a03cc565b91c4f335ee3c0cda",
+      "world_id": 54,
+      "tick": 72,
+      "delta_near": 0.0,
+      "delta_long": 0.0,
+      "delta_tail": 0.0,
+      "near_se": 0.0,
+      "long_se": 0.0,
+      "half_sample_deltas": {
+        "near": [
+          0.0,
+          0.0
+        ],
+        "long": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "file": "root_diagnostic_world43_tick88.npz",
+      "hash": "06d197fdc8ded9525b7d9813326bbce11fdedaba638c9dc1f30b5a1322eaf245",
+      "world_id": 43,
+      "tick": 88,
+      "delta_near": 0.0,
+      "delta_long": 0.0,
+      "delta_tail": 0.0,
+      "near_se": 0.0,
+      "long_se": 0.0,
+      "half_sample_deltas": {
+        "near": [
+          0.0,
+          0.0
+        ],
+        "long": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "file": "root_diagnostic_world48_tick29.npz",
+      "hash": "06e1f525b8ab1e2c589a5a49331582310d54a5c8dc8e393dc447c7fd8febe263",
+      "world_id": 48,
+      "tick": 29,
+      "delta_near": 0.0,
+      "delta_long": 0.0,
+      "delta_tail": 0.0,
+      "near_se": 0.0,
+      "long_se": 0.0,
+      "half_sample_deltas": {
+        "near": [
+          0.0,
+          0.0
+        ],
+        "long": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "file": "root_diagnostic_world54_tick48.npz",
+      "hash": "06e38811156ed4932d0110c037f83b3f821ae2a22a42cd9bf7c3423faccdc5fd",
+      "world_id": 54,
+      "tick": 48,
+      "delta_near": 0.0625,
+      "delta_long": 0.09375,
+      "delta_tail": 0.03125,
+      "near_se": 0.10941099548802195,
+      "long_se": 0.09374999576135905,
+      "half_sample_deltas": {
+        "near": [
+          0.0,
+          0.125
+        ],
+        "long": [
+          0.0625,
+          0.125
+        ]
+      }
+    },
+    {
+      "file": "root_diagnostic_world24_tick89.npz",
+      "hash": "06ed6c44317d846076e93078099d80c991feedf2659a80a7fc8a7aca88f2e109",
+      "world_id": 24,
+      "tick": 89,
+      "delta_near": 0.0,
+      "delta_long": 0.0,
+      "delta_tail": 0.0,
+      "near_se": 0.0,
+      "long_se": 0.0,
+      "half_sample_deltas": {
+        "near": [
+          0.0,
+          0.0
+        ],
+        "long": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "file": "root_diagnostic_world47_tick89.npz",
+      "hash": "06fea9a922e218d4b8a3022f94a5476d458826caefd169ed9398d46ac946d7f9",
+      "world_id": 47,
+      "tick": 89,
+      "delta_near": 0.0,
+      "delta_long": 0.0,
+      "delta_tail": 0.0,
+      "near_se": 0.0,
+      "long_se": 0.0,
+      "half_sample_deltas": {
+        "near": [
+          0.0,
+          0.0
+        ],
+        "long": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "file": "root_diagnostic_world29_tick73.npz",
+      "hash": "07003e7944b93a819e371f6416257bedbd6db862951a253a1d0262291e0b68fd",
+      "world_id": 29,
+      "tick": 73,
+      "delta_near": 0.0,
+      "delta_long": 0.0,
+      "delta_tail": 0.0,
+      "near_se": 0.0,
+      "long_se": 0.0,
+      "half_sample_deltas": {
+        "near": [
+          0.0,
+          0.0
+        ],
+        "long": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "file": "root_diagnostic_world8_tick89.npz",
+      "hash": "070f08bf3b1fa77094f403653ba5bd483dab6bb4c1f087a0b73430a5ce69dc4f",
+      "world_id": 8,
+      "tick": 89,
+      "delta_near": 0.0,
+      "delta_long": 0.0,
+      "delta_tail": 0.0,
+      "near_se": 0.0,
+      "long_se": 0.0,
+      "half_sample_deltas": {
+        "near": [
+          0.0,
+          0.0
+        ],
+        "long": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "file": "root_diagnostic_world24_tick56.npz",
+      "hash": "076871ac5585e062305d968e631a7f7d7dbaf9663cfb0962fd7bc9c0fee3bfc7",
+      "world_id": 24,
+      "tick": 56,
+      "delta_near": 0.0,
+      "delta_long": 0.0,
+      "delta_tail": 0.0,
+      "near_se": 0.0,
+      "long_se": 0.0,
+      "half_sample_deltas": {
+        "near": [
+          0.0,
+          0.0
+        ],
+        "long": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "file": "root_diagnostic_world1_tick8.npz",
+      "hash": "07e346d538f5a2feb090177ab3b63bdbabbb1343d8d1e8d21d6ad58f8fe89368",
+      "world_id": 1,
+      "tick": 8,
+      "delta_near": -0.1875,
+      "delta_long": -0.21875,
+      "delta_tail": -0.03125,
+      "near_se": 0.10470291855483976,
+      "long_se": 0.10752320653308262,
+      "half_sample_deltas": {
+        "near": [
+          -0.25,
+          -0.125
+        ],
+        "long": [
+          -0.3125,
+          -0.125
+        ]
+      }
+    },
+    {
+      "file": "root_diagnostic_world26_tick89.npz",
+      "hash": "07fa6913633cfd392bc45ae69ea00e4a964353726637a45c3f7398be940eff5c",
+      "world_id": 26,
+      "tick": 89,
+      "delta_near": 0.0,
+      "delta_long": 0.0,
+      "delta_tail": 0.0,
+      "near_se": 0.0,
+      "long_se": 0.0,
+      "half_sample_deltas": {
+        "near": [
+          0.0,
+          0.0
+        ],
+        "long": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "file": "root_diagnostic_world53_tick49.npz",
+      "hash": "080536de39f7bb317c4e4e188324263c1f5e09bc7dbbf752a9e453a07fb6dea0",
+      "world_id": 53,
+      "tick": 49,
+      "delta_near": 0.0,
+      "delta_long": 0.0,
+      "delta_tail": 0.0,
+      "near_se": 0.0,
+      "long_se": 0.0,
+      "half_sample_deltas": {
+        "near": [
+          0.0,
+          0.0
+        ],
+        "long": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "file": "root_diagnostic_world58_tick49.npz",
+      "hash": "08166b9b4bf4a4373f4c2e8739e673e272f475a68590d1a849cca617de213919",
+      "world_id": 58,
+      "tick": 49,
+      "delta_near": 0.0625,
+      "delta_long": 0.0,
+      "delta_tail": -0.0625,
+      "near_se": 0.043475520007665865,
+      "long_se": 0.0,
+      "half_sample_deltas": {
+        "near": [
+          0.0,
+          0.125
+        ],
+        "long": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "file": "root_diagnostic_world60_tick88.npz",
+      "hash": "08351bb26a88879ca91a34efd1bc1fc371b312e15b8a05f8b52721819563c05b",
+      "world_id": 60,
+      "tick": 88,
+      "delta_near": 0.0,
+      "delta_long": 0.0,
+      "delta_tail": 0.0,
+      "near_se": 0.0,
+      "long_se": 0.0,
+      "half_sample_deltas": {
+        "near": [
+          0.0,
+          0.0
+        ],
+        "long": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "file": "root_diagnostic_world15_tick64.npz",
+      "hash": "083e57702a2599cdb81084fef038c9b9d733ca9cfa4d757bf1a664f92712ff46",
+      "world_id": 15,
+      "tick": 64,
+      "delta_near": 0.0,
+      "delta_long": 0.0,
+      "delta_tail": 0.0,
+      "near_se": 0.0,
+      "long_se": 0.0,
+      "half_sample_deltas": {
+        "near": [
+          0.0,
+          0.0
+        ],
+        "long": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "file": "root_diagnostic_world11_tick29.npz",
+      "hash": "087ec4613b3b2f12661d2a7a998b2d0931605e924c04e49ddfecaacd074ec70c",
+      "world_id": 11,
+      "tick": 29,
+      "delta_near": 0.0,
+      "delta_long": 0.0,
+      "delta_tail": 0.0,
+      "near_se": 0.0,
+      "long_se": 0.0,
+      "half_sample_deltas": {
+        "near": [
+          0.0,
+          0.0
+        ],
+        "long": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "file": "root_diagnostic_world45_tick25.npz",
+      "hash": "08aa934f646ba971759154c653f682f6c4270404769021125cd9a9daf204ea3a",
+      "world_id": 45,
+      "tick": 25,
+      "delta_near": 0.0,
+      "delta_long": 0.0,
+      "delta_tail": 0.0,
+      "near_se": 0.0,
+      "long_se": 0.0,
+      "half_sample_deltas": {
+        "near": [
+          0.0,
+          0.0
+        ],
+        "long": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "file": "root_diagnostic_world44_tick41.npz",
+      "hash": "08b51bed90af8e34677a90eb53aa9de6845d097543931bfdf8d179ca33d63cd5",
+      "world_id": 44,
+      "tick": 41,
+      "delta_near": 0.0,
+      "delta_long": 0.0,
+      "delta_tail": 0.0,
+      "near_se": 0.0,
+      "long_se": 0.0,
+      "half_sample_deltas": {
+        "near": [
+          0.0,
+          0.0
+        ],
+        "long": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "file": "root_diagnostic_world41_tick57.npz",
+      "hash": "08ba8f0af32a3d80628905658220017972e4e4559274707e92382da9c950a285",
+      "world_id": 41,
+      "tick": 57,
+      "delta_near": 0.0,
+      "delta_long": 0.0,
+      "delta_tail": 0.0,
+      "near_se": 0.0,
+      "long_se": 0.0,
+      "half_sample_deltas": {
+        "near": [
+          0.0,
+          0.0
+        ],
+        "long": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "file": "root_diagnostic_world7_tick45.npz",
+      "hash": "0902c547076b7567629599f4f0726d36f01aff9b878e78b1b16cd1ceb392a525",
+      "world_id": 7,
+      "tick": 45,
+      "delta_near": 0.0,
+      "delta_long": 0.0,
+      "delta_tail": 0.0,
+      "near_se": 0.0,
+      "long_se": 0.0,
+      "half_sample_deltas": {
+        "near": [
+          0.0,
+          0.0
+        ],
+        "long": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "file": "root_diagnostic_world37_tick56.npz",
+      "hash": "09111a26ed3d530c606c6a417a261eaf1a0b755f97946f3fd8e14ebbbbe1e6ab",
+      "world_id": 37,
+      "tick": 56,
+      "delta_near": 0.0,
+      "delta_long": -0.09375,
+      "delta_tail": -0.09375,
+      "near_se": 0.0,
+      "long_se": 0.06896959286034093,
+      "half_sample_deltas": {
+        "near": [
+          0.0,
+          0.0
+        ],
+        "long": [
+          -0.125,
+          -0.0625
+        ]
+      }
+    },
+    {
+      "file": "root_diagnostic_world8_tick1.npz",
+      "hash": "094fa843edb2ff28b7617fcbf85bbef8dbf215c7f749c7b7593e3cce3338dfab",
+      "world_id": 8,
+      "tick": 1,
+      "delta_near": 0.0,
+      "delta_long": 0.0,
+      "delta_tail": 0.0,
+      "near_se": 0.0,
+      "long_se": 0.0,
+      "half_sample_deltas": {
+        "near": [
+          0.0,
+          0.0
+        ],
+        "long": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "file": "root_diagnostic_world46_tick12.npz",
+      "hash": "0995b6a967791fbd8d60b43043de01f634726ca402058e7080e170eecb63cd8e",
+      "world_id": 46,
+      "tick": 12,
+      "delta_near": 0.0,
+      "delta_long": 0.0,
+      "delta_tail": 0.0,
+      "near_se": 0.0,
+      "long_se": 0.0,
+      "half_sample_deltas": {
+        "near": [
+          0.0,
+          0.0
+        ],
+        "long": [
+          0.0,
+          0.0
+        ]
+      }
+    }
+  ],
+  "selection": "smallest SHA-256 of C06-root-v1:<world_id>:<tick> among optional roots",
+  "scope": "same LONG synthetic trajectories; local model predictions, not policy effects"
+}
