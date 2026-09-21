@@ -4348,5 +4348,138 @@ for pinned reasoning sources. Never put this Jev account's private conversation 
 
 ### Decision
 
-Pending the complete advisory answer and Root's written adoption or revision. This is a
-research-design decision; no experiment or direction status has changed in this section.
+#### Owner correction and current adoption scope
+
+During the accepted Pro request, the owner clarified:
+
+> 我发现当前切入点有问题 这本质是一个marl算法
+
+Root adopts this correction. The pinned Question stays unchanged, and Pro retains only
+its Answer subsection. The earlier draft priority of a common team-clock curriculum plus
+a UAV-specific lookahead controller is not adopted as the main algorithm route. The old
+request is being collected on the same accepted key; its advice will be reconciled below.
+No second Send, fit, rollout, direction activation or transfer of FSD's Claude ownership
+follows. This is research reframing, not a new algorithm claim or an accepted experiment.
+
+#### 研究对象：联合技能怎样被学会和使用
+
+HMASD 的主问题应当是：有限资源下怎样学到可组合的个体与团队技能，怎样探索和选择
+有效组合，以及高低层和不同成员的共同学习能否保持有效。UAV 是验证这些问题的任务域。
+物理模型、普通规划和服务规则可以提供先验或强参照；改进一个 UAV 控制器本身，尚未
+证明改进了 MARL 学习。环境规则完全已知也不使联合策略学习多余，无须人为制造一个
+未知物理量才允许研究学习算法。
+
+这不排除 model-based MARL，也不要求所有有效改进都只在多智能体中成立。模型、
+共享时钟或普通优化技术都可帮助联合策略；所需证据取决于声称改善的学习问题。
+“MARL”不能再变成排斥普通有效办法或强制个体异步的新门槛。
+
+[HMASD 原论文 §3](https://proceedings.neurips.cc/paper_files/paper/2023/file/c276c3303c0723c83a43b95a44a1fcbf-Paper-Conference.pdf)
+已有团队与个体技能、顺序联合分配和技能判别器。“加入协调”“技能标签能区分”不能
+直接当新意。FSD 已有部分标签产生不同闭环行为的证据，不能重新宣布技能为空；但行为
+不同、组合有用和组合容易学会仍是不同判断。Root 本轮读了原论文 §3 及相邻问题定义，
+并补读了附录 D、F、G，没有重新核验全部实验。其中技能用途、技能数敏感性与子队
+灵活性的限制，是固定 k 下的直接算法动机；[共识中的限定读法](../rl-marl-foundations-20260907/FOUNDATIONS.md#3-marl-增加的是联合行为和信息结构)
+保留了场景差异，不能替代本项目的瓶颈证据。全队一个 team skill 不等于联合个体
+技能不能表达分组，显式子队机制仍需面对现有协调器。
+
+Question 中的最优类差距减去学习缺口差异仍成立，但它是条件满足时的定义恒等式，
+没有诊断当前差距必然来自探索。更多时间选择也可能让探索更连贯；难度不由动作数
+单调决定。联合组合数量不是样本复杂度定理，增加 duration heads 也不是现成贡献。
+
+#### 可变 k：异步协作的可学习性
+
+优先保留的问题是：**个体技能持续时间不同以后，怎样探索并学会有效协作，而不只是
+分别增加各 agent 的时长选项？** 个体仍逐 primitive step 做低层控制；这里的异步性
+是技能重新选择的不同步。需要考虑谁正在执行已有技能、谁能够重选、承诺如何重叠，
+以及团队回报怎样训练高层选择。全队共享一个可变周期是有用参照，但不能独自回答
+个体异步协调。Critic 关于团队 cap 会截断个体长 duration 的异议保留；应明确这项
+干预，而非悄悄改成单一团队时钟来替代科学问题。
+
+一个可区分的候选，是在其他成员已有承诺的条件下，协调正在决策成员的技能—时长
+采样，与普通独立时长选择比较。参照保留现有 HMASD 联合技能分配，使用相同周期
+集合、信息和总训练资源。归因于跨成员协调时，应控制或明确报告边际时长、重选
+次数、信息刷新和更新量；更多周期被使用、联合覆盖率提高都不等于团队收益。
+固定周期起点可以是训练技巧，但课程本身并未解释 MARL 耦合。
+
+源码核查还给出一个更具体的学习假设：
+
+- [高层 value](../../hmasd/networks.py#L756) 只使用当前 state/joint observations。
+  [D2 held evaluation 与 partial assignment](../../hmasd/networks.py#L968) 使用 held
+  skills 和 masks 做触发统计与部分联合解码；这些量没有显式进入同一路径的 value
+  heads。age 可选输入走判别器，E2 则设置 age_feature=off。
+- 相同物理观测在不同队友承诺下，可能有不同 continuation。因此可检验：**表示
+  决策前的联合技能与时钟上下文，能否改善价值学习及完整团队回报？** 输入缺项不
+  直接证明 baseline 错误：它仍可作 action-independent baseline，当前状态可能已
+  解释大部分差异，新增输入也可能增加估计负担。不能将本次新选动作任意放入 baseline
+  而忽略 action-dependence，也不能提供未来真实终止时间。
+- 普通历史/承诺条件化 critic 是强的简单参照；不能故意删掉 coordinator 已有能力
+  来制造收益。若简单输入修正足够，应保留性能改进，不自动包装成新算法家族。
+- [每步 buffer 写入](../../hmasd/agent.py#L3886) 表明，固定 primitive 总步数及相同
+  更新安排下，低层/discriminator 原始行数不会仅因 k 改变而增减。改变的是技能驻留、
+  状态—技能分布和高层 segment 数。D arms 保留技能发现路径；D2 高层片段累积环境
+  reward，低层另有 intrinsic reward，不能把目标或曝光混算。
+
+这些是可直接比较的算法假设，没有证明 critic 上下文就是 E3/UCOPE 负结果的原因，
+也未建立新颖性。[异步 actor-critic / Mac-IAICC](https://arxiv.org/abs/2209.10113)
+和 [ACAC](https://proceedings.mlr.press/v267/jung25a.html) 已是相关参照。Root 阅读了
+后两者的官方摘要，对应 PDF 本次获取失败，没有据此采用具体更新公式或声称完成
+优先权核查。首个实现只应选择一个主要改变，不把采样、critic、技能发现目标和训练
+课程全部堆入。本节没有冻结新矩阵，也不增加阳性 toy 或最优 headroom 门槛。
+
+#### 固定 k 仍有三个直接的 MARL 问题
+
+| 算法问题 | 要改善的对象 | 继承的参照与反例 |
+| --- | --- | --- |
+| 技能用途与可组合性 | 区分技能可辨认性与团队任务中的互补作用；任务相关预测或目标应帮助形成、选择有效组合。局部子队协作是其中一个具体问题，不必首先改变 k。 | HMASD 已有 team/individual discovery；FSD 已有非空行为。普通小型辅助预测、现有联合协调器与关系编码是参照。FOLR、MGTAP、ACVC 的结果不支持单靠换表示或修补弱 proposer；预测准确、标签分离不等于团队收益。 |
+| 团队与时间信用 | 同一 native objective 下，检验高层选择、低层执行和队友行为的价值信息是否组织得更有利于学习。 | 保留正确 SMDP 记账和普通多步方法。A 额外修正、UCOPE suffix-credit、LCAC 的反例不能绕过；VNFC 中断不是科学负结果，事实未来也不是未执行选择的真值。 |
+| 共同更新的稳定性 | 检验联合策略或高低层变化，是否造成普通保守更新仍不能解决的训练干扰。 | 面对同一 HMASD 表示下普通学习率、clip/epoch 等调整。固定队友/固定一层可作窄的归因比较，共享参数按真实所有权处理。KL/loss 更稳不替代最终团队收益；B 的外部控制者契约没有测这一机制。 |
+
+这是问题分类，不是同时登记三个新方向。Critic 提出的共同更新问题作为 fixed-k
+候选保留；随后完成的只读核查表明，当前低层共享一个 actor 和一个 critic，分别
+使用 Adam，coordinator 整体使用一个 Adam。高层按 team/individual 条件概率分别
+计算 PPO clipped loss，D2 加有效片段 mask；低层也使用普通 PPO。未发现显式 joint
+policy KL/联合 trust-region 约束。同一训练周期依次更新 coordinator、低层和
+discriminators。这使共同更新问题具有明确代码对象，但没有诊断出更新干扰，也没有
+证明联合 KL 方案优于普通保守更新；共享参数下尤其不能把逐 agent 更新当成独立参数
+优化。[优化器](../../hmasd/agent.py#L641)；[标准高层 PPO](../../hmasd/agent.py#L5782)；
+[D2 PPO](../../hmasd/agent.py#L6018)；[低层 PPO](../../hmasd/agent.py#L6461)；
+[训练顺序](../../hmasd/agent.py#L7177)。
+
+另一个比较细节是，当前[低层序列采样](../../hmasd/agent.py#L6300)使用
+`chunk_length=config.k`。修改全局固定 k 可能同时改变循环训练的序列长度；原始数据
+行数相同不代表更新安排完全相同。后续周期比较应明确实际生效的分支及这项耦合，
+不能把优化语义的变化都归因为执行时长。任务相关未来预测也可作 MARL 训练辅助；
+无需重复拟合全部已知物理，但不因此排除学习表征和策略的价值。
+
+#### 全项目积累与 UAV 的位置
+
+A/C/VSP-03 的多步学习、信息价值与规划答案继续作为方法和边界证据，不能直接记成
+HMASD 学习算法进步。FSD/UCOPE 旧配方不重启；它们削弱有局部时机价值、曝光充分或
+标签更细就必然成功的解释。N 轴保留独立问题与真实 toy 资产，不与 k 合成首轮大项目。
+投资退出仍针对具体配方，无须先否定整个算法类别。
+
+写作期间 B 的独立 DM 已将 B09 发布到 main
+`4550565656009b810d0f23d378e4fef30629c264`。Root 阅读了
+[完整结果](https://github.com/CartmanFatass/My-paper-code/blob/69a55e71d9f1bca4e8cdd204adce256cd05a7676/docs/research/candidates/skill_teammate_drift_learning/NOTES.md)：
+联合计数的预测与已访问状态上的一步选择改善，但闭环回报三块两负一正，总均值受
+一个大收益 episode 主导，没有稳定闭环优势。B09 没有 actor/value 网络更新，也没有
+测当前 HMASD 内生共同学习。这支持中间预测与控制价值分开的读法，不能推出长规划
+或 continuation learner 必然有用。最新 B row 将原样保留；本节不重复其运行、改写
+其已接受咨询或自动给后继任务续投。
+
+随后 main `5653f8fa151f030be079596396e864843a91f2ac` 发布了该 DM 自己接受的
+[B10 固定规则比较](https://github.com/CartmanFatass/My-paper-code/blob/75ef4a931de474ab27e6903c6f16929eab932d85/docs/research/candidates/skill_teammate_drift_learning/NOTES.md)：
+冻结 B09 三个 final64 学习结果，在新随机世界中与始终向内/向外两条规则分别比较，
+零新 fit。Root 已读其完整声明；这是该径向部署配方的投入判断，不是所有 MARL 学习
+必须先胜过任意规则的通用门槛。本次全项目重定位不改变这项已接受的独立工作。
+
+UAV 应暴露真实团队耦合：容量竞争、共同覆盖，以及 Scenario 7 的接入—回传与返航
+接替。比较保持同一版本、信息和 native objective。Scenario 1 没有用户移动、回传、
+电池或用户 traffic queue，不能为这些主张提供证据；Scenario 7 当前接口也不等于
+历史 arm-A 结果。无需为使方法获胜新造切换费、预约或隐藏信息。专用规划器可作成本
+透明的强参照，不能替代有能力的信息匹配 HMASD/MARL 对照来支持算法改进。
+
+当前收敛的是研究问题和证据位置：可变 k 聚焦联合技能的协作探索与价值学习；固定 k
+聚焦技能用途、信用和共同学习。共享认识只收录经过源码或文献核对的区分与边界，新
+候选没有被写成已证实共识。收到完整咨询后，只采用仍适用的部分，不将旧问题的咨询
+当作新架构认证。
