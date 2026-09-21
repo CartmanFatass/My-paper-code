@@ -5998,3 +5998,50 @@ radial/overshoot physics and need no repeated fixture. Record any additional rep
 DM accepts the diff after independent Reviewer. Implementer may edit only these new code/test
 paths, run the focused checks, and return facts; no scientific choices, production, Pro, index/
 notebook edits, commits or children. Publish this prospective source before execution.
+
+## 2026-09-21 — B11 implementation accepted before production
+
+DM read the complete new study, runner and five focused tests. Independent Reviewer
+`/root/b09_native_review` found no blocking or material issue and independently verified:
+
+- init SHA256`932701c1d5d3b2d43e6ead6113e333f98fe48391a088de50afd97212edd2e639`;
+- study`ccaff39896945b4c7ffd2cc62c365c759342eed7af1a4255a6d9942f60123a1b`;
+- runner`5ccd41c36632382bc11e2bdfa397d2fd452c8055ce897d0566d6055ee8717812`;
+- tests`bdd8bf03c7effb6c586c8da2676ad968ee12decd2c59d7c6c52894f6deb21f03`.
+
+The six fixed probability tables, independent law/table ids, fresh paired addresses and correct
+law-specific CDFs are implemented. Both candidates are fixed before true-law diagnosis. Each
+actual occupancy retains both same-state regrets; complete native trajectories remain free
+to diverge. D_source/D_target signs and the sum interaction are explicit; paired per-world
+interaction variance is computed before the fixed-base Monte Carlo reduction. Native selected
+branches are checked against actual execution. Immutable source/input binding, single-use
+admission, output refusal, separate old costs and truthful partial-exposure reporting match
+the L0. Shared core, B09/B10 helpers, FSD and all prior results are unchanged.
+
+Actual correctness invocations: first module5passed/1.10s, final module5passed/0.66s, plus
+successful compilation. Each invocation used exactly one shared zero-fit native fixture.
+The second followed adding `_validate_pairing` to executable evaluation, with recorded
+geometry/uniform/within-law/first-choice assertions, four-cell root reductions,
+disagreement-specific regret summaries and root production/serialization accounting.
+These executable additions justified rechecking; no scientific arm, seed or horizon changed.
+Total correctness exposure is **0fits,16 actual+128 planned=144 native calls,8 constructors/
+implicit resets/logical setups/custom refreshes**,128 deep copies,0updates or network forwards.
+Pure synthetic/tamper/guard/source checks add arithmetic/read work, not fits. Only existing
+Matplotlib/Pyparsing deprecation warnings appeared. Reviewer ran no additional tests or
+native calls. After tests, DM changed only metadata wording from three exposed tables to
+three exposed bases(six tables); Reviewer inspected the final hashes. No unchanged native
+fixture was rerun for publication or launch.
+
+At main-publication update, DM read the relevant new foundation hunks at`9793fe22b`: the B09/
+B10 interpretation and distinction between known-model control and finite-resource MARL
+agree with this plan. B11 does not make unknown physical quantities a prerequisite for all
+learning research, or turn the imposed external-controller law into a central-HMASD deficit.
+Other directions and proposed temporal-learning work remain outside this session's ownership.
+The B11 prospective source stays`548ae30195031322d38804b3ac90bd37cb4d2b44`.
+
+One local notebook provenance assertion initially required an extra blank byte between the
+verbatim Pro answer and adoption. Its corrected boundary check passes: the entire e96d1cdc
+notebook prefix is unchanged and the full20301-byte answer appears exactly once before the
+new adoption. The assertion error altered no answer, input or experiment. Pro operation is
+complete; no retry or pending write remains. Publish these accepted code bytes and execute
+the single declared B11 batch via fresh local_linux snapshot admission.
