@@ -74,8 +74,8 @@ def test_claude_shared_writer_and_native_header(tmp_path, monkeypatch):
     publisher.publish(tmp_path)
     assert publisher.publish(tmp_path, check=True) == []
     hub=(tmp_path/'.claude/skills/hmasd-research-hub/SKILL.md').read_text()
-    assert 'acting integrator coordinates shared main/RESEARCH writes' in hub
-    assert 'acting as that integrator' in hub
+    assert "You publish your own direction's RESEARCH standing/results to main" in hub
+    assert 'no Root acknowledgment is required' in hub
     assert 'You also integrate your own commits into main' not in hub
     assert 'HMASDTransport' not in hub and 'HMASDExperimentMonitor' not in hub
     assert 'hmasd-experiment-tracker' in hub
@@ -98,8 +98,8 @@ def test_role_prose_changes_publish_without_sentence_anchors(tmp_path, monkeypat
     native_fixture(tmp_path, monkeypatch)
     path=tmp_path/'.codex/agents/hmasd-direction-manager.toml'
     text=path.read_text()
-    old='The acting integrator coordinates shared main/RESEARCH writes; it does not ACK your steps.'
-    replacement=old+'\n'+old if change == 'repeat' else 'Coordinate shared writes through the acting integrator.\nOrdinary steps need no ACK.'
+    old="You publish your own direction's RESEARCH standing/results to main; no Root acknowledgment is required."
+    replacement=old+'\n'+old if change == 'repeat' else 'Publish the owned direction result entry from current main.\nRoot approval is not required.'
     path.write_text(text.replace(old, replacement, 1))
     expected=tomllib.loads(path.read_text())['developer_instructions']
     output=publisher.generated(tmp_path)

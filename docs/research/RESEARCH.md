@@ -20,14 +20,18 @@ skills or an independent host and do not wait for Claude's label-content study; 
 not establish that the current HMASD learned skills are effective. Cross-duration/clock-perturbation
 generalisation is retained only as an unstarted candidate from the owner's supplied proposal.
 
-**Current Codex coordination:** Root/shared integrator is task
+**Current Codex coordination:** Root is task
 `01a0c1e3-7dfb-79d3-a7fd-fd3010b54c2b`, host `local`, for owner-requested shared-control
-changes and integration. The original UCOPE reopening was dispatched; its DM now proceeds
-autonomously in its own task and direction branch. Authoring checkout for this integrator:
+changes and assigned cross-direction coordination. Each DM publishes its own results and
+its own RESEARCH standing/evidence entry to main, with no Root approval or integration gate.
+The original UCOPE reopening was dispatched; its DM proceeds in its own task and branch.
+Authoring checkout for this Root:
 `/home/fires/.codex/worktrees/abc-closure-review/hmasd-wsl`, branch
-`codex/independent-dm-autonomy`. Independent DMs do not routinely message each other or this
-Root, synchronize progress, or acknowledge control publication. Root reads published evidence
-when integration or an owner request needs it. UCOPE's direct DM is identified in its standing;
+`codex/dm-result-self-publication`. Messages between independent Codex App tasks require an
+explicit user request; no autonomous sends, replies, acknowledgments or forwarding for results,
+conflicts, handover or control updates. This restriction is App-only; Jev Pro and internal
+helpers keep their existing workflows. DMs handle ordinary concurrent Git changes themselves.
+Root reads published evidence when its current assignment needs it. UCOPE's DM is identified in its standing;
 Claude remains the independent FSD DM. Addresses are recovery locators, not reporting duties
 or new research authorization.
 

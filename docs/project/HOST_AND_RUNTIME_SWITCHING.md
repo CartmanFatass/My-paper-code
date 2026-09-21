@@ -41,8 +41,9 @@ owner 要求（2026-09-18）：`main` 必须支持在 Claude 与 Codex 之间、
    预期结束时间已写入该方向的 `NOTES.md`。不确定的启动或 Send 先按同一请求对账，绝不盲目重发。
 2. **记录落盘。** 当前想法、读数、下一步写入 `NOTES.md`（追加）；`RESEARCH.md` 的该方向一行反映真实状态。
    不另写 handoff 文件：`NOTES.md` 的最后一节就是交接。
-3. **提交并发布。** 用显式 pathspec 提交，推送方向分支；要让对方看到的内容必须进入 `main`
-   （由在任 Codex Root 集成；没有在任 Root 或有明确移交时，Claude 从自己的 checkout 集成）。
+3. **提交并发布。** 用显式 pathspec 提交并推送方向分支；DM 自行将本方向 RESEARCH 条目和固定
+   证据链接发布到 `main`，无需 Root 代更。代码和结果可保留在已发布方向分支，接任者按链接取回。
+   从最新 main 的自有 checkout/index 更新，合并并发修改，保留其他方向；不要覆盖旧整表或共用 index。
 4. **工作区干净。** `git status` 为空；没有未完成的 merge、rebase 或 cherry-pick；临时 worktree 已移除或已说明。
 5. **Lead 如需变更**，在 `RESEARCH.md` 的 Lead runtime 单元格里改并发布到 `main`。一个方向任何时刻只有一个
    lead/writer（宪法第 2 节）；启动器的 `--lead` 必须与已发布的单元格逐字一致，所以不改单元格就换不了执行者。
