@@ -769,3 +769,464 @@ Portable evidence for canonical-main readers (code and runs remain on the direct
 [B08 development](https://github.com/CartmanFatass/My-paper-code/tree/a5a87aa223727b2673781009c90810e7a4842584/runs/vsp_03/opportunity_b08_21801_21803),
 [B09 fixed confirmation](https://github.com/CartmanFatass/My-paper-code/tree/f877dbda7d2e8d1a199e6936ebed0ae0168d7f12/runs/vsp_03/opportunity_b09_21901_21905),
 [B10 one guard](https://github.com/CartmanFatass/My-paper-code/tree/4310e203b20c9b38332dd2b431e67048f781ac4c/runs/vsp_03/opportunity_guard_b10_21801_21803).
+
+## 2026-09-21 — owner-requested stopping audit and DM-owned continuation work
+
+The owner asks whether this direction should close and whether any insight should enter
+shared understanding before closure. The owner then makes the responsibility explicit:
+"这里的重点就在于 你提出了所谓阻碍与重开条件 那么问题就是这个重开条件实际上得你自己去解决".
+The prior paragraph's unspecified re-entry condition is not an external dependency. I
+withdraw its use as a reason to leave the direction idle before doing that work. The
+completed B08/B09/B10 observations and their scope are unchanged; no new fit has run.
+
+One concrete unresolved resource assumption is now visible: O was fitted cheaply, but
+its public observations were supplied by 65,536 complete G-training episodes per block.
+That is a valid comparison of complete declared packages, not yet a self-contained cheap
+O learning procedure. Whether a fixed transparent collector can replace that training
+history changes which method one would retain. Internal Critic agrees this is DM-solvable
+and dissents from waiting for an externally supplied re-entry trigger.
+
+The candidate is one fixed small-data collection, not a budget sweep: four batches of128
+complete R0 episodes, one unchanged MLE and unchanged planner per block. This128-fold
+collection reduction is a chosen resource target, not a minimum or an accuracy theorem.
+It is not an empty identifiability exercise: R0 initially waits, so both target endpoints
+from t0 to t2 are observed in every episode. For the declared family,
+P(present,age2)=(c-1)/(c+1) and P(present,age0)=p/c. These distinguish the two parameters;
+512 episodes guarantee1,024 such target endpoint observations, plus later public endpoints.
+Finite-data decision quality remains unknown. Changing collector and amount together is
+a package intervention, not a pure sample-size or exploration-policy mechanism test.
+
+The target bridge also needs substance. The separate service-restoration environment's
+README explicitly describes fixed velocity actions, instantaneous shared-flow allocation,
+delayed telemetry and no skill-duration action; it is not automatically the adopted UAV
+research host. Its existence supplies no ready eight-tick exclusive-service mapping.
+A bounded Scout is checking actual source and the legacy UAV interface. Merely naming
+partial information, model misspecification or UAV transfer will not serve as a successor
+or as an owner-supplied prerequisite. No target-host result is claimed by this inspection.
+
+### Conditional L0 — self-contained opportunity calibration
+
+Prepare only a new disposable `experiments/candidates/vsp_03/opportunity_calibration_b11/`
+module, `scripts/run_vsp03_opportunity_calibration_b11.py` and mirrored focused tests.
+Reuse B02 physics/rollout and B08 EndpointCounts, fit_model, Planner and native panel
+serialization without changing them. No G construction, forward, backward or optimizer.
+The author owns the notebook and scientific choice; an Implementer may prepare these
+three paths while Pro considers the changed resource question. No scientific execution
+until that reasoning is read and the exact final declaration is appended and published.
+
+Proposed blocks are fresh seeds22001/22002/22003; collection is split100 episodes0..511,
+four128 batches; evaluation is fresh split200 episodes0..4095. Save collection worlds,
+the public x/episode/time endpoints supplied to the fit, endpoint counts, fitted parameters,
+planner tables, complete native rows/decisions/paired results and actual counts/cost.
+New method O_R0 uses no evaluation data, old fitted parameters or old G observations.
+
+Proposed three panels: O_R0, frozen O_full from each corresponding B08 block21801/21802/
+21803, and R0. Load all three preselected fitted_model.json files with their pinned B08
+identities; no source-block selection or refit. The primary descriptive difference is
+O_R0-O_full, retaining the strongest ordinary reference; O_R0-R0 tests practical gain
+without neural data acquisition. Same current information and model family, unequal
+collection policy and amount are explicit. Fresh common evaluation worlds create the
+pairing; there is no common calibration randomness with the old full-data fit. Three
+new MLE fits, no Adam;1,536 collection episodes plus36,864 panel episodes =38,400 total,
+1,536,000 team ticks and3,072,000 target transitions. Actual wall is unknown.
+
+This is development, not a new confirmation or noninferiority claim. Keep every block,
+absolute/native components and signed differences. The hypothesis predicts positive
+O_R0-R0 and preserved useful scheduling with much less collection; it does not predict
+exact equivalence with O_full. Mixed or adverse results retain the full-data finding and
+may expose a data/collection dependence, without diagnosing its unique cause or starting
+a sweep. A technical fitting failure remains a failed attempt, not negative utility.
+Synthetic tests check leakage boundaries, correct public collector input, fixed identities,
+zero-neural work, native accounting and admission; they do not tune on scientific worlds.
+
+## Pro question 2026-09-21 stopping-audit-self-contained-calibration
+
+Conversation: reuse this direction's existing Jev adviser; private address remains local.
+Question: After B09/B10, should we finish this fixed-host route now, or is the proposed
+self-contained low-data O calibration a worthwhile concrete next observation? Challenge
+the choice and its reference, and assess the bounded insights suitable for shared
+FOUNDATIONS. The DM must resolve its own alleged re-entry conditions; neither an external
+idea nor a neural win is owed. This is direction-level advice, not Portfolio selection.
+
+Standing: B09's five fresh blocks give O-G mean+.017577881, t95[.010699359,.024456403],
+O_SUPERIOR; an advantage exceeding.02 is not established. G-R0 remains positive at+.012848145.
+O-O_self mean+.012602783 is mostly a waiting benefit, not a pure partner-utility mediator.
+B10 reuses all three old B08 panels: a t22/both-pending override recovers56.4831% of the
+old O-O_self gap, eliminates missed attempts and final blocking; O-guard is+.012221680,
++.009738770,-.001394043. It supports a coarse feasibility explanation but neither guard
+equivalence nor full-planner necessity. Your earlier answer preceded these outcomes.
+
+The previous idle/re-entry wording was premature as an external waiting condition. The
+new candidate removes a specific disclosed dependency, G-generated data acquisition, with
+one fixed512-episode R0 calibration. The conditional L0 immediately above gives the full
+proposal and counts. Critic suggested fresh O_R0/R0/O_known panels; my current preference
+is fresh O_R0/frozen O_full/R0 panels so the strongest fitted ordinary method stays visible
+at the same total rollout cost. O_known has additional exact parameter knowledge. Please
+identify a material reason to choose either reference; no fit or result exists for B11.
+Do not demand a minimum-data census, tuned headroom, a new architecture or a UAV gate merely
+to permit this exploration. Conversely, do not recommend a cheap run solely because cheap.
+
+Context (all paths marked source_sha use the full published question SHA in the message):
+- Governance at source_sha: docs/project/OPERATING_CONSTITUTION.md §§1-5,7-8;
+  docs/research/RESEARCH.md owner pause and vsp_03 row. Owner pause is lifted; this independent
+  DM already has research authorization. The new owner instruction is quoted above.
+- Method at source_sha: .agents/skills/hmasd-scientific-tools/SKILL.md, Update the working
+  explanation / Simple-model and literature bridges / Comparators / Cost and exposure / Pro.
+- Evidence at source_sha: this NOTES.md, B09/B10 result readings and current stopping audit;
+  docs/research/candidates/vsp_03/CLAIM_fitted_opportunity_b09.md, fixed plan plus result;
+  runs/vsp_03/opportunity_b09_21901_21905/summary.json;
+  runs/vsp_03/opportunity_guard_b10_21801_21803/summary.json;
+  runs/vsp_03/opportunity_b08_21801_21803/{21801,21802,21803}/fitted_model.json.
+  Complete B08 evidence is pinned at a5a87aa223727b2673781009c90810e7a4842584;
+  B09 at f877dbda7d2e8d1a199e6936ebed0ae0168d7f12; B10 at4310e203b20c9b38332dd2b431e67048f781ac4c.
+- Exact source at source_sha: experiments/candidates/vsp_03/vsp03_b02/b02.py,
+  rule_actions/rollout; experiments/candidates/vsp_03/opportunity_b08/opportunity.py,
+  EndpointCounts/fit_model/Planner. Check the t0-to-t2 argument and model-resource premise.
+- Shared knowledge at source_sha: docs/rl-marl-foundations-20260907/FOUNDATIONS.md §§4-6.
+  Potential additions are evidence-scoped examples, not new governance: legal next-clock
+  opportunity matters; earlier commitment can preserve team opportunities; scalar J and
+  diagnostic directions may disagree; coarse feasibility correction can explain much of
+  a planner increment; same raw history does not imply equal model knowledge or free data.
+- Target-boundary context at source_sha: envs/uav_service_restoration/README.md, Timing,
+  Information, Integration, Not implemented. It is a separate host, not proof of a VSP/UAV
+  bridge. No direct UAV claim or host change is proposed in B11.
+
+Prospective cost: three transition MLE fits, zero neural fits/updates,1,536,000 team ticks
+including all three evaluation panels. No tuning or same-batch expansion. Evidence-reading
+and source inspection add no new scientific episodes. Historical sixteen fits stay visible.
+
+Please return a focused choice with the strongest contrary case, what the new observation
+would change, any material adjustment to the proposed comparison, and which shared-insight
+wording is supported or overreaches. Identify untested conjectures and unread critical
+sources. Advice does not close/select a direction, grant a budget or authorize execution;
+the DM reads the complete answer and owns the next choice.
+
+Constraints: no training, no experiments, no code or shared-knowledge edits. Read the
+question at the pinned source, then fetch the latest target blob before writing and use
+its actual blob SHA. On branch codex/vsp03-opportunity-rule edit only the empty Answer
+subsection below, preserving every other byte. Stop on overlap; do not overwrite from the
+pinned copy. Return the actual answer commit; if GitHub writeback fails, give the complete
+answer in chat for recovery. No private conversation/account facts in the repository.
+
+### Answer
+
+#### 结论与分歧
+
+**建议选择这一个固定的 B11 开发观察，而不是现在因“等待重开条件”结束整个方向；同时结束在不变条件下继续追逐 G 神经增量的做法。** 保留三个新块 22001–22003、每块四批各 128 个 R0 采集 episode、原 MLE/Planner，以及 `O_R0 / 冻结 O_full / R0` 三个面板。它回答一个尚未回答的具体问题：不借用 G 的训练历史，能否从少量合法观察独立构造仍有任务价值的调度规则？这不是 B09 的追加种子，也不是 B10 guard 的确认。[B11问题] [B11方法]
+
+**MATERIAL_DISSENT: no，针对当前已撤回外部等待条件后的提案。** 我同意继续这一项有明确资源干预的开发，不同意把原先未具体化的 re-entry 当作 owner 应提供的外部依赖。必要的收窄是：B11 测的是从零构造的资源替代，不是重新校准在当前固定律下必不可少，也不是对现有 O_full 的无损替换证明。以下意见不改变方向登记、既定结果或执行权限。[B11问题] [B11治理]
+
+#### 一、B09/B10 已留下足够明确的结果，不必靠 B11 才成立
+
+B09 五个新块的 `O−G` 为 **+.024663086 / +.009576416 / +.015843506 / +.019906006 / +.017900391**，均值 **+.017577881**，df4 t95 **[.010699359,.024456403]**，按原规则为 `O_SUPERIOR`；没有建立超过 .02 J 的优势。`G−R0` 的描述均值 **+.012848145** 同时保留。正确模型族、公共信息、G 采集制度和固定 G512 是这个确认的条件，不能把它写成学习无用、规划普遍优越或同模型知识下的算法胜负。[B11确认] [B11B09汇总]
+
+B09 的 `O−O_self` 均值 **+.012602783** 中，等待项贡献约 **+.011933838 J**，成功收益减新增尝试费只贡献约 **+.000668945 J**。B10 在旧 B08 面板上用一条 t22/both-pending 强制提交，得到三个正的 `guard−O_self`，回收固定开发均值差的 **56.4831%**；残余 `O−guard` 是 **+.012221680 / +.009738770 / −.001394043**。残余均值 **+.006855469** 又是少等待的 **+.009663086** 抵消较少成功的 **−.002807617**。这强化了粗可行性修正与自身时机的解释，削弱“多数增量必须依赖完整 peer-state 递归”的说法；既不证明 guard 等价，也不证明其余细节没有价值。[B11笔记] [B11B10汇总]
+
+这些是不同层次的收获：B09 确认一个条件包比较；B10 缩小一个开发解释空间。二者都没有回答只用 512 个 R0 episode 能否学出足够好的规则。原有正结果、反向块、失败的无代价保护预测及十六次已完成拟合均不因新问题而改写。[B11确认] [B11笔记]
+
+#### 二、为什么值得继续；最强反对意见是什么
+
+**继续的理由不是便宜，而是新读数会改变要保留的方法说明。** 目前可说的是“用 G 产生的 65,536 个完整训练 episode 的公共端点拟合一个透明规则”。B11 若保留有用的原生表现，才增加“固定透明采集器、512 个 episode、无需训练神经采集器”的独立构造证据；若显著损失任务值，则必须保留资源—质量取舍，而不是把几毫秒 MLE 当成整个方法的代价。改变采集策略和采集量是联合的包干预，不能单独归因于样本数或 R0 的探索质量。[B11问题] [B11模型] [B11方法]
+
+**最强反对意见有两部分。** 一是结构知识仍很强：正确的两参数 reciprocal-age 家族、同律独立目标、精确在场/年龄、固定初始状态和任务记账都未改变；这次实验不能说明一般未知系统也能如此廉价学习。二是这个固定宿主的旧 O_full 已经存在：立即部署它只需加载制品，并不需要重新支付 G 训练成本。B11 不会证明“在同一个已解决固定律上，每次重新采集 512 集比复用现有规则更便宜”。它的价值是验证从零获取数据的依赖是否可移除，而非制造已经部署时不存在的再训练必要性。[B11问题] [B11物理] [B11模型]
+
+我仍建议这一项，因为前者是清楚披露的边界，后者通过区分**历史构造成本、当前复用成本、新方法独立构造成本**即可避免误读；有限数据是否会改变关键动作仍是实质未知。完成这一问不自动产生数据量扫描、更多 guard、模型失配批次或下一轮确认的义务。[B11方法]
+
+#### 三、t0→t2 论证成立，但只排除了一个可识别性疑虑
+
+从实际 `rollout/rule_actions` 看，初始两个目标均 present、age0，armed 为假。t0 的 R0 因不 ready 而 WAIT，槽仍空闲；t2 的另一个 pending 作业获得合法观察，x 同时包含两个目标的在场与年龄。因此每个完整 episode 都有两个目标的 t0→t2 端点对，不需要读取中间随机 tape。`EndpointCounts` 用 x12 把相对 own/partner 还原到 episode 内稳定身份，正好可以保留这些对。[B11物理] [B11模型]
+
+在声明的家族内，令 q2 为两步后 present/age2 的概率，q0 为 present/age0 的概率，直接由代码转移顺序得：
+
+`q2 = (1−1/c)(1−1/(c+1)) = (c−1)/(c+1)`；
+`q0 = (1/c)p`；因而 `c=(1+q2)/(1−q2)`，`p=cq0`。
+
+这是从初始条件得到的总体可识别性推导，不是新增经验结果，也不是建议用两个频率取代已声明 MLE。512 个 episode 确保 **1,024 个这样的两步目标端点对**，不保证任何一个随机端点类别出现多少次，不保证参数精度，更不等于 1,024 次独立方法拟合。后续端点继续贡献信息。[B11物理] [B11模型]
+
+沿用 `Σ N(δ,s,s′) log[(P(c,p)^δ)_(s,s′)]` 的多步端点似然是有依据的：当前目标律不受 WAIT/SUBMIT 改变，下一合法观察间隔由已发生的观察/动作、pending 和固定占槽决定；服务失败也不提前释放。不应只因换成 R0 就补入未观察的中间状态，或另加无依据的逆概率修正。这个条件论证不保证有限样本无偏，也不适用于按未来事件决定是否记录端点的新采样机制。[B11物理] [B11模型]
+
+保留原起点 c6/p.4、边界、优化器和停止参数。收敛是技术完成，不是策略质量证明；低数据下，估计误差可能使 SUBMIT−WAIT 的价值差跨零，正确可识别模型也会作出不同决策。反过来，参数变化不一定改变动作。B11 要读的是后一层的完整 J，而不是把接近真参数、似然增加或零 blocking 单独判成成功。[B11模型] [B11基础]
+
+#### 四、保留 O_full；把参照条件和数据边界写准确
+
+**本题优先 O_full 而不是 O_known，有实质理由。** 前者直接回答新采集方案相对目前保留的拟合方法损失或保留多少任务值；后者更适合问相对真参数规划器的估计损失，且消除了旧拟合实例的差异，却把参照换成额外模型知识条件。它不是不合法，而是另一问题。当前三面板已同时给出“相对实际强参照”与“相对无拟合 readiness”的读数，不建议加第四面板或为此重训 G。O_known 的有限世界得分也不是逐世界上界。[B11问题] [B11模型] [B11B09汇总]
+
+我直接读取的三个 B08 `fitted_model.json` 参数依次为 **(4.0014025943,.4970716615)、(3.9877419363,.5014467451)、(4.0115149024,.4982661052)**，均记录拟合收敛。固定映射应写成 **22001→21801、22002→21802、22003→21803**，不从 B08/B09 另挑最好的一份，也不以三个参数均值生成新参照。准确称谓是“B09 已确认的拟合联合规划方法的三个预选 B08 实例”，不是三个新的全数据拟合，也不是已证明胜过所有普通规则的最强者。[B11拟合1] [B11拟合2] [B11拟合3] [B11确认]
+
+每块统计量可明确为：
+
+`D_b = (1/4096) Σ_i [J(O_R0,b,W_bi) − J(O_full,k(b),W_bi)]`。
+
+三个 D_b 及其均值是**条件于这三份冻结参照制品**的开发比较。配对依据是新评估世界的相同外生 tape 和 phase，不是新旧种子编号对应，更不是共有校准随机性。报告各块绝对 J、有符号差、块间 SD 与条件世界 SE；后者不能冒充跨校准不确定性。旧参照实例不同、且不在本批重抽，不能把这个设计包装成双方均重新拟合的三对总体确认。差小、区间含零或动作相同的有限面板都不建立非劣/等价；旧 .02 不能临时变成容许损失。[B11问题] [B11物理] [B11方法]
+
+**所需调整是落实边界，不改臂、种子或工作量。** 四个 `add_batch` 分别处理 batch 内从零开始的 episode IDs；保存端点时保留 batch 标识或全局 episode 地址，避免将四个 episode0 拼成同一轨迹。新拟合入口只收本块 split100 的 x/episode/time；保存的世界 tape 是核验材料，不是估计输入。旧参数只进入 O_full，不用于 O_R0 起点、回退或选模；split200 不进入拟合。没有 G 构造/forward/backward/Adam 是需要实际计数支持的执行事实，不是因为文件叫“规则”就自动为真。[B11问题] [B11模型]
+
+#### 五、事前预测、结果分支与成本
+
+新假设的合理中间预测是：少量公共端点仍让拟合模型产生有用的时机决策，保持相对 R0 的成功/提交机会优势；原生预测是 `O_R0−R0` 为正，同时完整报告 `O_R0−O_full` 的任何损失。不预言两策略必然完全一致，也不把旧拟合值下的零漏单性质无条件转给新的有限样本估计。等待、失败和 expiry 不必同向改善；始终按 `ΔJ=(200ΔS−10ΔA−ΔW)/400` 对账，expiry/blocking 不另收费，失败数 A−S 不二次扣费。[B11问题] [B11物理]
+
+若 O_R0 对 R0 有收益但落后 O_full，得到的是一个资源—质量选项，不能自动宣布替代成功。若相对 O_full 差小或符号混合，保留数值与不确定性，不宣称无损；若明显落后且没有保留对 R0 的价值，则削弱这一个 512-R0 包，不否定所有自包含采集。若有限面板超过 O_full，也不说明参数更真实或超过真律最优。拟合失败单列为技术失败；不补零、不偷偷加载旧参数、不追加样本直至通过。[B11问题] [B11方法]
+
+计划的算术正确，进一步拆开为：
+
+| 工作 | 执行 episode | team ticks |
+| --- | ---: | ---: |
+| 三块 R0 校准：3×512 | 1,536 | 61,440 |
+| 三块、三面板：3×3×4,096 | 36,864 | 1,474,560 |
+| 合计 | **38,400** | **1,536,000** |
+
+总目标转移为 **3,072,000**；新评估世界地址只有 **12,288** 个，被三个面板复用。新增是 **三个 MLE 拟合、零神经拟合/Adam**，不是零优化计算；记录 MLE 函数调用、两种参数下的规划重建、序列化和核验成本。每块 65,536→512 是采集 episode/ticks 的 **128 倍缩减**，不是端点信息量或端到端 wall 的 128 倍加速。评估占这次执行 episode/ticks 的 96%，更不能把总研究成本等同于校准量。旧十六次拟合保留且不重复算作 B11 新拟合；若本计划三次均开始，累计启动拟合才相应成为十九次。实际 wall 仍未知，不从旧几毫秒 MLE 推算整项任务。[B11问题] [B11笔记] [B11方法]
+
+#### 六、可以进入 FOUNDATIONS 的是有出处的例子，不是新门槛
+
+现有 §§4–6 已区分结构/有限学习、异步决策组织与实证归因。建议添加少量带固定证据链接的例子；不等待 B11 成功才保存 B09/B10，也不把尚未运行的低数据假设写成发现。以下是建议文字与边界，并非本次对共享文件的编辑。[B11基础]
+
+| 位置与主题 | 有证据支持的表述 | 应排除的扩张 |
+| --- | --- | --- |
+| §5：下一合法机会 | “VSP-03 的共享八 tick 占槽即使失败也持续；释放时刻 t+8 不等于伙伴下一合法决策时刻 t+10。机会成本必须按实际时钟和 pending 语义计算。”[B11物理] [B11模型] | 不把该算式照搬到其他时钟、服务长度或 UAV 宿主；不把发生 blocking 本身定义为策略错误。 |
+| §5：更早承诺 | “在 B08/B09 的 O 与 O_self 同历史首次分歧中，记录到的方向均为 O 先 SUBMIT；联合调度的好处可以表现为较早使用当前机会，而非一概等待让行。”[B11笔记] | “更早”只相对 O_self；O 对 G 等待更多。不是每个提前动作都赢，不是 G 的内部机制或普遍早提交定律。 |
+| §6：J 与诊断方向 | “B09 O 相对 G 同时增加等待/expiry 事件与完整 J；B10 O 相对 guard 的正均值来自少等待抵消较少成功。诊断代理的方向不能替代完整任务记账。”[B11确认] [B11笔记] | 不重复扣失败、expiry 或 blocking；不将成分代数分解称为纯因果中介。 |
+| §6：简单修正 | “B10 一条 t22 可行性 guard 在三个旧开发面板回收 56.4831% 的 O−O_self 均值差，并消除这些世界的非提交/最终阻塞；剩余 O−guard 为两正一负。”[B11B10汇总] [B11笔记] | 不写成 56.48% 的一般机制已被识别、guard 等价或完整规划必需；该比例不是所有调度任务的常数。 |
+| §§4、6：资源条件 | “同一公共原始历史不等于同一模型结构或免费数据。B08/B09 的拟合规划器具有声明的正确模型族，拟合虽快，端点来自 G 的训练采集。”[B11确认] [B11拟合1] [B11拟合2] [B11拟合3] | 不写成 model-free/同资源结论，也不提前写入‘512 个 R0 episode 足够’。 |
+
+#### 七、目标边界、停止责任与来源覆盖
+
+服务恢复 README 确实描述独立环境、固定三维速度动作、按子区间求解的共享流量分配、延迟 telemetry，并明确没有 variable skill duration；它不能直接提供 VSP 的八 tick 独占提交映射。Integration 还说明构造入口独立，并将先前 truncation 问题标为已解决，不能抓住前文保留的旧 blocker 句子再造一个当前外部障碍。本次只据已读 README 划定边界，没有独立检查 Scout 后续报告或 legacy UAV 的实际实现，因而不宣称桥已经完成，也不宣称桥不存在。[B11目标边界]
+
+DM 应把自己提出的条件转成具体源代码问题、原生动作/信息/成本对应关系，或说明为什么所检查的桥不成立；不是让 owner 补一个“新想法”。不过责任也不意味着必须不断制造下一批：本项资源问题能独立得到正、负或未决答案，之后是否值得继续应依据新的可区分预测，而不是自动升级成 UAV、失配测试或最小数据搜索。固定版本 RESEARCH 行仍保留旧 re-entry 文字，本题的明确撤回决定其当前适用范围；本答复不擅自修改该行。[B11问题] [B11索引] [B11治理] [B11方法]
+
+**覆盖说明。** 本次读了附件全文、固定版本 notebook（含 B08/B09/B10 与本题）、B09 固定 claim 及追加结果、指定治理/方法、FOUNDATIONS §§4–6、README 的相关段落，直接读了 B02 的 `rule_actions/rollout` 与完整 `opportunity.py`，并核对 B09/B10 汇总中的主要比较/读法/成本，以及三份 B08 拟合文件的参数、拟合状态和计数元数据。大汇总的全部端点频数、所有逐世界 JSON、checkpoint/NPZ 和运行日志没有全量重新审计；不把原 DM 的全量 readback 当作本次执行的核验。B11 最终 runner、技术验收和结果不是本题固定证据中已经完成的事实，本答复不认证它们。
+
+没有一个上述设计选择所必需的指定来源因 GitHub 访问失败而被记忆补齐。全部本次推理输入固定在 `e3e167fcf40a7492cda31f178a8b1216e80c5bb3`；历史原始结果发布位置保持原身份，不将后续可写分支替换成科学输入。本文没有训练、模型前向、环境执行或结果性仿真；公式和成本是源码推导及既有数字的算术。**最终选择是一次边界清楚的自包含采集开发，并保存已经成立的普通规则与解释性收获；不是现在以抽象重开条件搁置工作，也不是要求继续直到得到更强结果。**
+
+[B11问题]: https://github.com/CartmanFatass/My-paper-code/blob/e3e167fcf40a7492cda31f178a8b1216e80c5bb3/docs/research/candidates/vsp_03/NOTES.md#pro-question-2026-09-21-stopping-audit-self-contained-calibration
+[B11笔记]: https://github.com/CartmanFatass/My-paper-code/blob/e3e167fcf40a7492cda31f178a8b1216e80c5bb3/docs/research/candidates/vsp_03/NOTES.md
+[B11确认]: https://github.com/CartmanFatass/My-paper-code/blob/e3e167fcf40a7492cda31f178a8b1216e80c5bb3/docs/research/candidates/vsp_03/CLAIM_fitted_opportunity_b09.md
+[B11B09汇总]: https://github.com/CartmanFatass/My-paper-code/blob/e3e167fcf40a7492cda31f178a8b1216e80c5bb3/runs/vsp_03/opportunity_b09_21901_21905/summary.json
+[B11B10汇总]: https://github.com/CartmanFatass/My-paper-code/blob/e3e167fcf40a7492cda31f178a8b1216e80c5bb3/runs/vsp_03/opportunity_guard_b10_21801_21803/summary.json
+[B11拟合1]: https://github.com/CartmanFatass/My-paper-code/blob/e3e167fcf40a7492cda31f178a8b1216e80c5bb3/runs/vsp_03/opportunity_b08_21801_21803/21801/fitted_model.json
+[B11拟合2]: https://github.com/CartmanFatass/My-paper-code/blob/e3e167fcf40a7492cda31f178a8b1216e80c5bb3/runs/vsp_03/opportunity_b08_21801_21803/21802/fitted_model.json
+[B11拟合3]: https://github.com/CartmanFatass/My-paper-code/blob/e3e167fcf40a7492cda31f178a8b1216e80c5bb3/runs/vsp_03/opportunity_b08_21801_21803/21803/fitted_model.json
+[B11物理]: https://github.com/CartmanFatass/My-paper-code/blob/e3e167fcf40a7492cda31f178a8b1216e80c5bb3/experiments/candidates/vsp_03/vsp03_b02/b02.py
+[B11模型]: https://github.com/CartmanFatass/My-paper-code/blob/e3e167fcf40a7492cda31f178a8b1216e80c5bb3/experiments/candidates/vsp_03/opportunity_b08/opportunity.py
+[B11治理]: https://github.com/CartmanFatass/My-paper-code/blob/e3e167fcf40a7492cda31f178a8b1216e80c5bb3/docs/project/OPERATING_CONSTITUTION.md
+[B11方法]: https://github.com/CartmanFatass/My-paper-code/blob/e3e167fcf40a7492cda31f178a8b1216e80c5bb3/.agents/skills/hmasd-scientific-tools/SKILL.md
+[B11索引]: https://github.com/CartmanFatass/My-paper-code/blob/e3e167fcf40a7492cda31f178a8b1216e80c5bb3/docs/research/RESEARCH.md
+[B11基础]: https://github.com/CartmanFatass/My-paper-code/blob/e3e167fcf40a7492cda31f178a8b1216e80c5bb3/docs/rl-marl-foundations-20260907/FOUNDATIONS.md
+[B11目标边界]: https://github.com/CartmanFatass/My-paper-code/blob/e3e167fcf40a7492cda31f178a8b1216e80c5bb3/envs/uav_service_restoration/README.md
+
+## 2026-09-21 — Pro adoption, target-source audit and fixed B11 declaration
+
+Read the complete105-line answer at `f6fd364f2d7d3f7d368c872c2c98ea43199a96c6`, for
+published question `e3e167fcf40a7492cda31f178a8b1216e80c5bb3`. The Jev question key is
+`hmasd:205a49d5c92b63557a589d06b31e191456fd1bd9e2f3c1f09d37e1a671a69993`; its private
+address remains local. DM independently verified the answer commit changes only NOTES,
+its parent is `ff468a67c180ea0da92873418c57b82e80c2a838`, all pinned question/notebook
+bytes are unchanged and the empty Answer alone gained18,489 bytes. No uncertain notebook
+write remains; the complete advice is above, not a receipt substituted for an answer.
+
+Adopt the advice: perform one self-contained calibration development batch, retaining
+O_R0 / frozen O_full / R0. This resolves a specific DM-owned resource condition; it does
+not wait for an owner-supplied idea or chase a neural win. The distinction between historical
+construction cost, current artifact reuse cost, and a new method's from-scratch construction
+cost is material: the already saved O_full can be used without retraining G. B11 asks how
+one can construct the method independently, not whether recalibration is needed each time.
+The correct two-parameter family, target independence, exact public states and fixed host
+remain strong structural resources. Pro did not audit every raw artifact; the earlier DM
+full readbacks retain their own provenance, and B11 needs its own native readback.
+
+Keep all per-block differences, descriptive block SD and conditional-world uncertainty.
+Small/mixed O_R0-O_full is not equivalence, and fresh evaluation does not make the new
+calibrations paired with old training. No O_known panel, G rerun, parameter averaging,
+new margin or search is added. A useful O_R0 can still trade quality for collection cost.
+MLE iterations/function calls are optimization work; the runner's zero optimizer_steps
+means neural updates only, now stated explicitly in its metadata.
+
+### DM completion of the alleged target-bridge dependency
+
+The bounded Scout inspected both the separate service-restoration source and legacy UAV
+source. In restoration, `envs/uav_service_restoration/env.py:624-699` accepts velocities
+and integrates service by physics substep; `scheduler.py:157-230` solves instantaneous
+rates; `network.py:313-330` imposes per-solve resource domains. Those domains do not reserve
+a resource across decision intervals. Diagnostic controllers in `baselines.py` are not
+already tuned research comparators. Its README explicitly says this package is independent
+of the existing entry points; no adoption or VSP mechanism follows merely from its name.
+
+The current FSD frozen card independently identifies the actual target as Scenario1,
+`envs.pettingzoo.scenario1.UAVBaseStationEnv`, six UAVs/fifty users/H500. In the actual
+`envs/pettingzoo/uav_env.py`, velocity actions are defined at177-180; `step` moves and
+recomputes channel/connection state at265-300. `_greedy_connection_assignment` at947-978
+assigns each user to at most one UAV subject to a connection cap, then rebuilds this
+assignment each step. Rewards at1421-1484 and `scenario1.py:80-125` use current coverage,
+SINR and height costs. This is real instantaneous coupling, but has no action-triggered
+submit/reservation/blocked-clock state, persistence requirement or completion reward.
+Historical Scenario7 charging descriptions do not establish that mechanism in this host.
+
+Therefore I have checked the proposed direct bridge rather than leaving it as an external
+condition: VSP's eight-tick reservation mechanism is not present in the inspected target
+interface. Adding it would change the task. This does not prove that predicting service
+or adaptive termination cannot help a UAV; it means that such a claim needs its own actual
+intervention and comparison. No arbitrary model-misspecification or hidden-information toy
+is selected merely to manufacture the missing bridge. B11's independent data question is
+the concrete remaining use decision selected here. No FSD/B/C code or record is changed.
+
+### Final B11 declaration, before any new scientific result
+
+Adopt the conditional L0 without changing its arms, seeds or work. Fresh calibration seeds
+**22001,22002,22003**, exactly512 full H40 episodes each under R0, four128 batches on
+split100. One unchanged endpoint MLE per seed, same c6/p.4 start, bounds and optimizer
+settings as B08. New calibration receives only its public x/episode/time fields. No
+hidden intermediate state, tape, reward, evaluation observation or old parameter is a fit
+input. Batch-local IDs stay separate and saved aggregate IDs are offset by the batch start.
+
+Each new fitted joint planner and its fixed old reference are evaluated with R0 on4,096
+fresh split200 common worlds. Reference mapping is exactly22001→21801,22002→21802,
+22003→21803; three preselected B08 instances of the B09-confirmed method, all validated
+against their published model hashes before collection. New world addresses total12,288;
+executed evaluation episodes total36,864 because there are three panels per world.
+The primary descriptive difference is O_R0-O_full; secondary O_R0-R0 retains usefulness
+against readiness. Predict positive mean O_R0-R0 across the new calibrations and a useful
+timing policy; do not predict zero missed attempts, a particular componentwise improvement,
+or equivalence with O_full. The new-native-result branches in Pro's answer are adopted.
+
+**Three new MLE fits, zero neural fits/forwards/backwards/Adam**. Collection1,536 episodes/
+61,440 team ticks; evaluation36,864 episodes/1,474,560 ticks; total38,400 episodes,
+**1,536,000 team ticks /3,072,000 target transitions**. Each block reconstructs the two
+fixed-family planner tables once. No tuning, checkpoint choice, early score stopping or
+same-batch extension. A technical failure is retained and not automatically retried.
+This is development, not confirmation; actual wall, MLE work and full native losses are
+read after execution. The128-fold collection reduction is not a wall-speedup claim.
+
+Implementation is accepted after source reading and independent Reviewer review. Six
+focused synthetic/mocked tests passed (Implementer1.11s, Reviewer1.66s); all three model
+hashes match the pinned B08 blobs. Public-only fitter inputs, batch identity, fresh-world
+pairing, callback binding, failure retention and admission-before-science were checked.
+Two subsequently added reporting strings only clarify neural versus MLE optimizer counts;
+they do not change computation. No real scientific episode or fit was used by these checks.
+
+Use configured local_linux scientific Python, one CPU/BLAS/OpenMP thread and one detached
+process. Native admission checks fresh memory and current published/canonical pause and
+lead. Exact source will be committed/pushed before launch; the retained snapshot excludes
+uncommitted shared-knowledge drafting. No App cross-task message or new permission gate.
+
+## 2026-09-21 — B11 completed: independent calibration removes the G-history prerequisite
+
+The one native invocation at source `9ab9ce6c990286ed9ba9c05cdb65473adc7bfd46` was
+accepted11:32:04 UTC and exited0 at11:32:11. Its
+[`launch-manifest.json`](../../../../runs/vsp_03/opportunity_calibration_b11_22001_22003/launch-manifest.json)
+and terminal witness retain the handles; both runner and supervisor are absent and native
+status is consistent. Three declared MLE fits completed, zero technical/scientific retries,
+zero neural constructions/forwards/gradient/Adam calls. No panel, fit or calibration episode
+was added after scores. The complete60-file result, including all public inputs, world/decision
+arrays and native logs, is published at
+[`4780940a613c595a49fd19d94ad6d3f7ffb0dd9d`](https://github.com/CartmanFatass/My-paper-code/tree/4780940a613c595a49fd19d94ad6d3f7ffb0dd9d/runs/vsp_03/opportunity_calibration_b11_22001_22003).
+
+### Complete reading, conditional on the three frozen O_full instances
+
+| New seed → old reference | O_R0 J | O_full J | R0 J | O_R0−O_full | O_R0−R0 |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| 22001 →21801 | .379931641 | .379992676 | .351320801 | −.000061035 | +.028610840 |
+| 22002 →21802 | .380808105 | .381560059 | .350878906 | −.000751953 | +.029929199 |
+| 22003 →21803 | .378430176 | .378430176 | .352593994 | .000000000 | +.025836182 |
+
+Primary descriptive mean **O_R0−O_full =−.00027099609375**, block SD.000417637488746.
+Conditional-world SEs are.000298675911/.000465648059/0. The third block has zero paired
+return difference on all4,096 sampled worlds; this does not establish policy equivalence
+outside them. Secondary mean **O_R0−R0 =+.028125406901042**, block SD.002089241986968;
+conditional SEs.004059354526/.004095925200/.004053346569. All three secondary differences
+are positive. No new inferential label, noninferiority verdict, practical-margin test or
+comparison to G is inferred from B11. Fresh worlds do not turn the old references into
+new full-data fits. Three calibrations remain the independent new fitted units.
+
+The fitted (c,p) values are (4.182854952,.497218660), (4.072368221,.479814071),
+(4.088743772,.489238273). They moved from6/.4 and converged in9/8/9 iterations with
+39/33/42 objective calls. Initial negative log likelihoods6916.290491/6934.524562/6566.339411
+fell to6826.727480/6843.127435/6478.306958 on5,980/6,014/5,780 public endpoint pairs.
+Parameter changes did not force proportional policy-value changes; fitting convergence
+alone was not the success criterion. None used old O parameters, evaluation information
+or intermediate hidden target states.
+
+All12,288 O_R0 evaluation worlds make both attempts, with zero non-submission and zero
+final-clock blocking, as do the frozen references on these panels. Relative to O_full,
+the new method loses.000569661 success/team on average and reduces waiting by.005533854
+ticks; attempts are identical. Its J difference is success−.000284831 plus waiting+.000013835.
+Relative to R0, O_R0 adds.084635417 successes, .176188151 attempts, .091552734 failed attempts,
+3.915039063 waiting ticks and.434895833 expiry events/team. The J terms are
+success+.042317708, attempts−.004404704, waiting−.009787598, totaling+.028125407.
+Thus usefulness coexists with more failures, waiting and expiry. Those diagnostics are not
+extra penalties or separately identified causal mechanisms.
+
+### What changed and what did not
+
+The prediction of useful scheduling and positive mean return over readiness is supported
+in all three new calibrations. The previously untested dependence on a G training history
+is now **resolved as a development construction question**: under this fixed correct family,
+the tested512-R0 collection produced useful fitted controllers without training G. It is
+no longer left as a condition for the owner or a later unexplained reopening. Two small
+observed losses versus O_full remain visible; this is not a proved lossless replacement,
+minimal sample requirement or general sample-efficiency result.
+
+Keep the already available O_full as the confirmed method reference; using its artifact
+does not require paying its historical acquisition cost again. Preserve O_R0 as a working
+from-scratch calibration construction, with its512-episode exposure and correct-family
+prior explicit. B09's G−R0 gain, O−G confirmation and B10's bounded guard explanation remain
+unchanged. The result supplies neither a new neural ranking nor general MARL/UAV evidence.
+
+Actual work matches the declaration:1,536 collection episodes,36,864 evaluation-panel
+episodes,38,400 total,1,536,000 team ticks and3,072,000 target transitions. There were10,423
+collection decision rows and286,653 evaluation decision rows. All114 MLE objective calls
+and26 iterations are reported; zero neural optimizer calls is not zero optimization work.
+Scientific-process wall6.278838s, CPU6.177741s, peak single-process RSS333,643,776 bytes;
+fresh effective memory9,855,705,088 bytes passed the4 GiB floor, cgroup values unknown.
+Collection including its persistence took.186699s, MLE.019644s, the six planner reconstructions
+.004691s. These are components, not total research turnaround or a128-fold speedup.
+
+Readback verified all50 stable artifact digests, all36,864 native rows and arrays, every
+paired return/aggregate, fixed workload and independent reconstruction of all public endpoint
+counts. A first read-only checker passed in45.645s but repeatedly decompressed an NPZ inside
+its row loop; the same checks with each array loaded once passed in.608s. Both add zero
+fits/rollouts and did not alter scientific artifacts. This support work, implementation,
+tests, Pro waiting and publication are outside the reported scientific-process wall.
+
+Across the resumed B08–B11 work: **19 completed fits** (eight G, eleven MLE), zero failed
+fits,804,352 executed episodes,32,174,080 team ticks,64,348,160 target transitions and
+4,096 Adam calls. Summed scientific-process wall102.173746s; historical pre-B08 experiments
+remain separate rather than being omitted from a lifetime-cost claim.
+
+### Stopping audit conclusion and shared understanding
+
+The completed Pro transport returned DELIVERED for `f6fd364f2`, the same answer already
+read and byte-verified by the DM. Send was accepted04:02:40 PDT at6 Pro; same-key read-only
+collection completed without recovery/resend, and its owned tab was closed. No live
+scientific process, uncertain send/write, uncollected result or unresolved external input
+remains for this work.
+
+Independent Critic read B11 and agrees with ending the current fixed-host route as
+answered, MATERIAL_DISSENT no. The strongest contrary case is real: three development
+calibrations do not establish rare-fit reliability, noninferiority, a minimum sufficient
+budget or generality. The two negative O_R0-O_full differences remain. I accept these
+limits, but a new reliability/minimum-data claim is not needed to choose the existing
+O_full artifact or to preserve the demonstrated standalone construction. Another fit
+would refine a broader claim rather than change the present use decision.
+
+**DM decision: end this fixed public H40/two-target route with its ordinary-method answer;
+select no further fits.** B09 answered the strong-comparator question, B10 narrowed the
+coupling explanation, and B11 answered the specific data-acquisition question. The source
+audit rejected the proposed direct reservation-to-Scenario1 mapping on actual code facts.
+Those are completed scientific actions, not conditions left for the owner to solve.
+Do not leave a standing requirement that the owner supply a new idea, model or information
+condition. An artificial task change solely to restore a neural advantage is not selected.
+This is an investment conclusion for the answered route, not falsification of all timing
+learning, all model-based control or all UAV adaptive-duration questions. Direction-level
+archiving remains the owner's selection; the registered direction state is not silently
+changed by this route decision or by a claim that every possible continuation is exhausted.
+
+The owner-requested shared insight destination is the existing
+`docs/rl-marl-foundations-20260907/FOUNDATIONS.md`, the repository's shared conceptual
+summary. Add bounded evidence examples to its existing §§5–6: persistent exclusive
+commitment changes the next legal opportunity; earlier use can preserve later team
+opportunities; the guard recovers part of the observed increment without causal/equivalence
+overreach; equal raw history does not mean equal model priors or free acquisition; and the
+specific512-R0 construction now has positive development evidence. Preserve original
+positive learning results and native costs. These are conditional scientific lessons,
+not new governance, new launch gates, a general planner victory or an unmeasured UAV claim.
