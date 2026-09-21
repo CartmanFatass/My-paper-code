@@ -6631,3 +6631,22 @@ completed R_CF pairs and 48/24/8 gate updates, with each foundation digest uncha
 Thus real-prefix identity has passed for those declared training pairs; this is narrower
 than scientific success and is not a free preliminary probe. No final panels have been read.
 The direct DM retains observation, collection, interpretation and independent publication.
+
+### 2026-09-21 05:28 UTC — Offline reading prepared while the declared fits continue
+
+All three R_CF fits have completed their 1,024 pairs / 2,048 full training episodes and
+the full-data rich references are training; there is no reported technical failure and no
+final panel has been read. The original source and native operations are unchanged. Shared
+standing was independently published to main at `b3b1e0c7c`, changing only UCOPE's row and
+preserving every launch-bound owner field and other direction.
+
+The B10 package's new `readback.py` is an offline consumer of completed, recorded outputs,
+not an additional experiment: zero native steps, model construction, checkpoint forward or
+optimizer call. Its scope is the producing SHA/terminal identity, complete artifact digests,
+scheduled pair addresses and prefix reconstruction, full exposure/update counts, raw final
+reward reduction, exact recorded command/eligibility law, and the three-block investment rule.
+It retains the full-data references and treats world samples as nested. Raw training delta
+signs are descriptive targets under old behavior, not an oracle bound or deployment result.
+Four handwritten-array / artifact / rule checks passed in 1.30 s, with zero environments,
+checkpoint forwards and optimizer updates. Independent read-only review remains before using
+this new consumer for the scientific reading. It does not change any active source snapshot.
