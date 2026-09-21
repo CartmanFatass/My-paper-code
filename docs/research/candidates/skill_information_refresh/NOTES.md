@@ -2700,3 +2700,14 @@ Launch exactly once on local_linux through hmasd_launch.py, expected lead
 `scripts/run_sir_c07.py --out <same-output> --launch-sha <that-full-source>`.
 The manifest will retain the native identity; the DM will read all3,840episodes and240
 final trace files and apply the prewritten rule, with no score-dependent extension.
+
+
+### C07 accepted native operation
+
+One launch accepted2026-09-21 10:57:32UTC on local_linux from exact published source
+`71055f9907059fdd334ebba0e4d414d44f9ad656`. The complete accepted identity/control/
+preflight and read-only status handle are in
+[launch-manifest.json](../../../../runs/skill_information_refresh/c07_fixed_s73180_73184_20260921/launch-manifest.json).
+Keep that handle; do not repeat the launch. All3,840episodes are one fixed confirmation
+batch. A Monitor returns only native status and cost until terminal; no partial score
+changes its scope or the prewritten rule. Acceptance is not a confirmation outcome.
