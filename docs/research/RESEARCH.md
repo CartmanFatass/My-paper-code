@@ -75,9 +75,9 @@ is evaluated by the next useful observation and its route to the UAV question, w
 to keep three directions busy or to manufacture a successor for an answered route. The review
 adds no fits or rollouts and does not resume FSD or frozen G33.
 
-**Current concept formation:** [MARL skill timing and recombination](#portfolio-review-2026-09-21-marl-concept-formation)
-selects a finite-resource comparison of ordinary joint duration parameterizations as the main
-research question, with fixed-clock partner-skill recombination as the sole alternative.
+**Earlier concept formation:** [MARL skill timing and recombination](#portfolio-review-2026-09-21-marl-concept-formation)
+selected a finite-resource comparison of ordinary joint duration parameterizations as the main
+research question, with fixed-clock partner-skill recombination as its then-sole alternative.
 It records complete advice, concrete method scope and limits, without a new algorithm claim,
 direction activation or accepted experiment batch.
 The [Claude advice reconciliation](#claude-advisory-reconciliation-2026-09-21) incorporates
@@ -87,8 +87,19 @@ inferences that would make fixed-clock success a prerequisite.
 **Potential research questions:** the [2026-09-21 consolidated inventory](#potential-research-directions-2026-09-21)
 organizes the existing programme, both third-party reports, Claude's advice and the owner's
 predictive proposal into 20 distinguishable questions, with ordinary methods, source aliases
-and evidence limits. It preserves the main/alternative concept choice and current standing;
+and evidence limits. It retains the earlier main/alternative concept record and direction standing;
 an entry in that inventory is not a direction activation or a selected experiment.
+
+**Current Portfolio plan (owner-requested, 2026-09-21):** the
+[information-first three-DM plan](#portfolio-review-2026-09-21-information-first-three-dm-plan)
+recommends two fixed-clock questions — local interaction representation and task-predictive
+auxiliary training — alongside joint-duration learning with the existing Claude FSD owner.
+This expands the earlier main/alternative choice in response to the owner's information-use
+priority and proposed three-session concurrency. All three first comparisons use full HMASD
+on Scenario1 and are independent; partner-skill recombination becomes the first backup.
+The complete Pro reply and Root Decision give interventions, controls, costs and stopping
+judgments. This is a concrete planning result: no session creation, direction activation,
+owner reassignment or scientific execution occurred; existing standing remains as recorded below.
 
 ## Active
 
@@ -5922,3 +5933,137 @@ $$
 本答复读取了附件全文、固定提交 **`343756acf915da77b18dd6bbf4418c4f14df69a7`** 的相关治理和方法、当前 standing、20-question inventory、完整概念答复／Decision 及 Claude advisory reconciliation、业主预测提案相关章节，并定向核对了 Scenario1 观测与 R_Actor 接入位置；OPT 使用作者 v4 原文的方法及相关实验段落。没有复验全部历史数组或审计所有 archived directions，也没有运行模型、训练、原型或评估。上述建议以已读来源中的问题、边界和已有结果为依据；**仍未验证的是新臂在所选 runner 上的实际执行、梯度隔离、能力和 wall／RSS，而非这些成本或效果已经为零。** 本建议不把这些执行缺口变成全项目的先验阳性门槛，也没有改变任何方向状态。
 
 ### Decision
+
+
+Root 完整读取了本次 Pro 答复；**采纳三个独立问题的组合：局部交互表示、任务预测辅助训练、
+联合时长学习，优先顺序也按此排列。MATERIAL_DISSENT: no。** 完整聊天答复已由 Root
+恢复在 Answer，独立保存提交为 `4f02c23c51f47f3313bda1529a7224a598293a91`。这里的次序用于资源冲突时的
+投入取舍，不构成后项等待前项成功的科学依赖。
+
+本计划响应业主本次 Portfolio 请求及上一轮关于 OPT、局部网络和信息利用的判断，
+将原先“联合时长主问／技能重组替补”扩展成三个可并发的研究问题。信息表示和辅助监督
+可以本身成为 MARL 干预；不要求先改 PPO 公式，也不从 OPT 推出“MARL 算法已经饱和”。
+这不是完整 OPT 复现，当前已有的 OPT／StateEncoder 代码也不是所提局部 actor 模块已经
+生效的证明。这里选择研究投入，不声称已找到新的算法、文献空白或确定的收益。
+
+#### 三个独立 DM 的任务
+
+| 拟定责任 | 与 MARL／UAV 的直接联系 | 主干预与首轮完整比较 | 首次交付与后续取舍 |
+| --- | --- | --- | --- |
+| **DM 1：固定周期的局部交互表示**，第一优先 | 分布式 UAV 从局部用户／邻机观测中组织与覆盖、容量及位置配合有关的信息；检验相同输入下的表示归纳偏置能否改善有限学习。 | 固定技能周期、动作空间与训练目标。原完整 HMASD；同合法槽位与关系特征的普通稠密编码；在同类打分／值变换上加入一种选择性汇聚。主比较是选择性对稠密，原网络提供改造前参照。 | 三臂完整原生学习结果、服务分量、全部失败／不利结果及实际成本。若收益由普通稠密重组吸收，保留简单改进并停止额外选择机制；稀疏图本身不构成增益。 |
+| **DM 2：固定周期的任务预测辅助训练**，第二优先 | 在既有局部循环表示中学习与未来团队服务结果有关的特征；检验训练监督怎样改变 actor 的控制能力。 | 保持原 actor／GRU 与合法历史。两臂都训练相同预测头：一臂对 actor 表示停止辅助梯度；另一臂允许预写权重的辅助梯度进入原编码器／GRU。原生 PPO 项相同。 | 两臂完整学习结果，标签与梯度边界、服务结果及实际成本。预测更准但原生控制无益，削弱当前目标到控制的解释；没有新的任务理由时不追加预测头、窗口或损失。 |
+| **DM 3：完整技能共学习下的联合时长**，第三优先，沿用 Claude FSD DM | UAV 调整技能与位置时，何时重新选择才能学会并保留有用的覆盖／容量配合；直接检验更多时间选择与探索、优化成本的权衡。 | 同一完整 HMASD 路径下比较有能力的固定周期、充分知情的条件分解时长、普通 AR 联合时长。共同信息、团队 cap、技能分配与承诺感知 critic 匹配，主干预为时长分布参数化。 | 完整原生回报、实际时长／截断及共同决策暴露、服务配合与成本。AR 仅胜分解但不及固定，不推广其复杂度；若可变时长有益而 AR 无增量，保留更简单的时长方法。 |
+
+DM 1 与 DM 2 的区别是**表示结构**与**进入既有表示的训练监督**。一个获益、另一个
+不获益会改变不同的设计选择，因此可以独立开展。两者第一版均不接入另一项新模块、
+检查点或阳性结果；DM 3 也不依赖它们。若后来只能靠组合才能给出有意义的预测，
+就重新把组合当作一个问题，不继续占用两个名义独立席位。
+
+**DM 1 的具体边界。** 先在同一槽位关系编码上比较普通稠密注意力与一种选择性汇聚
+（例如 sparsemax），不同时堆叠交互原型、多样性损失、预测监督和动作规划。
+[Scenario1 观测源码](../../envs/pettingzoo/uav_env.py)给的是按 SINR 排序的用户与邻机
+数值槽、自身位置和时间；没有持久实体 ID、served-user 标志或显式 validity bit。
+双方可使用相同的、从已见数值确定计算的关系／全零特征，但不能从全局 state／info
+补造局部权限，也不能把排名槽视为跨时间同一用户。接入位置是实际
+[R_Actor](../../hmasd/networks.py) 的 observation encoder，输出继续进入既有技能调制
+和 GRU；不改变技能 ID、primitive action、技能发现目标或信息权限。
+稠密控制也应得到同等槽位拆分、合理容量与训练机会。选择性只是一种待检验偏置，
+不是已证明有合作含义的边，也不保证更低 FLOPs 或 wall time。
+
+**DM 2 的具体边界。** 采纳 Pro 推荐的“训练过的 detached readout”主对照。
+首选目标是在预写窗口内、当前动作之后的平均外在团队奖励；原生 reward 的索引与
+汇总方式以具体 runner 为准，不混入技能判别器内在奖励。一个原固定技能周期可作为
+窗口候选，DM 需按原生动态说明并在结果前固定，不照搬旧 H20 原型的 W=3。
+未来标签只进入训练，小头不参与执行；联合臂辅助梯度进入编码器／GRU，不直接
+训练动作输出头、critic 或判别器。停止梯度臂保留 actor 正常 PPO 更新；头部 optimizer、
+梯度裁剪与训练随机性应隔离，避免其无意改变普通 actor 的更新。终止／截断／rollout
+切块、不完整窗口及归一化的共同语义属于本实现的一部分。
+两个头都被训练，因而不把未训练的 lambda-zero 头误差当成机制比较；首轮不机械增加
+无头第三臂。未来事实不是反事实价值；各臂 rollout 分布不同，若要比较预测能力，
+需在事先规定的共同事实验证片段上读数，不能把各自数据上的 MSE 差直接解释为表示充分性。
+若原生收益存在而预测解释不成立，可以保留有边界的方法结果、修正解释。
+
+**DM 3 的具体边界。** 沿用[完整 MARL 概念答复与 Decision](#portfolio-review-2026-09-21-marl-concept-formation)，
+不是重做 B12 或在冻结技能探针上推出完整学习的结论。在相同 AR 技能分配之后，分解
+时长头能看到全部合法共同条件、当前联合技能、团队 latent 与已有承诺；AR 时长头
+另外条件化于本次已生成的成员时长。分解头已经能表示确定性配合和 latent 引起的相关性。
+只有一位成员可重选时，不存在本次跨成员时长采样优势。低层每 tick 闭环执行，
+名义时长、实际 cap 截断、技能标签变化与任务配合持续时间分别读出；固定时长被包含
+在更大策略类的论点，只有在相同约束确实容纳原策略时才成立，也不推出有限训练必然更优。
+共同承诺／历史 critic 属于合格参照；不叠加时钟课程、DM 1／2 模块或新的后缀信用。
+若共同重选很少或长时长被 cap 大量消除，读作削弱本参数化作用的证据，不人为制造同步
+事件挽救解释。更新次数、边际时长或占用改变也可能解释 AR 增量，不能只凭相关性认领探索机制。
+
+#### 原生宿主与推进顺序
+
+**采纳首轮三项都用 Scenario1 的完整 HMASD 路径。** 它已有实际学习／成本记录，
+能提供 UAV 覆盖、容量和位置耦合的任务。三者共享一个环境制度，不构成三次独立环境
+验证；此处没有移动用户、回传、能量管理或业务队列，结果也不包装成这些机制的收益。
+Scenario7 作为后续有明确服务／能量时序问题时的宿主，不将三项同时迁移作为前置工作。
+其当前 v3 observation／v2 reward／arm C 路径不能继承旧 arm A 的效果或 S1 的信息契约；
+已有 factory 注册也不等于本轮完整学习比较已接通。服务恢复宿主的 prepared Milan cache
+与 HMASD 接入问题仍有未解决成本。本选择不设“Scenario1 必须先阳性”的跨宿主门槛；
+未来直接选择 Scenario7 需一个针对其实际机制的新比较，而非只为寻找好分数。
+
+每个 DM 独立按下面顺序形成可读结果，阶段推进不依赖其他 DM：
+
+1. **把问题接到一个可恢复的完整配方。** 在本方向 NOTES 中固定首问、实际 runner／源码、
+   合法输入、目标／梯度或时长边界、原生预测、对照及预计成本；完成最小实现和与改动相称
+   的正确性检查。普通基线就在本项比较内，不另立全项目“先把所有基线练好”的前置方向。
+   已知共同正确性修复应明确来源和双方采用范围，不能作为候选算法收益。
+2. **交付首次完整学习观察。** 比较完整原生回报及服务分量，保留所有预写读数、
+   失败／不利结果、训练及评估暴露和 wall／RSS；局部诊断解释结果，不替代原生效果。
+3. **根据观测作下一次投入判断。** 保留简单方法吸收的实用收益；有新信息价值才声明
+   下一批。单个训练实例的小差值不能证明等价、稳定优势或某类方法无效。接入失败和
+   未完成运行是技术结果。缺少能改变判断的下一比较时结束当前配方；不要为占满席位
+   延长调参。只有选定的最终候选和主要对照才进入预写的 fresh-seed 确认。
+
+初步规模示例为 **3 + 2 + 3 = 8 个新 fits，每臂一个新训练实例，属于探索**。
+这不是额度、已接受批次、种子清单或启动指令。若沿用每 fit 360,000 training team steps
+的原生参考，总训练暴露为 **2,880,000 team steps**；评估另行预写，不机械继承旧九面板。
+最终 horizon、arms、seeds、拟运行 fits 与阅读规则由各 DM 在启动前说明。
+选定最终确认时按现行规则使用每臂 3–5 个全新独立训练种子，不自动对三项开展全矩阵确认。
+
+[FSD 实测成本](candidates/flexible_skill_duration/NOTES.md)中的旧 D1280 五 fits 合计
+41,241 秒，均值 8,248 秒（约 2.29 小时），单进程 peak RSS 2.75–2.79 GiB；另有一条
+部分独跑的 5,814 秒记录。这只是既有 CPU FP32 配方量级，不是新臂报价或完成期限。
+关系计算、辅助反传／标签存储、AR 解码与共同 critic 的新成本须实际计量；也不能使用
+MGTAP／ACVC 小宿主秒级耗时估算原生 HMASD。三个科学 session 可以并发研究，训练
+是否并发取决于实际节点、内存和既有 admission；资源冲突时依次优先 DM 1、DM 2、DM 3。
+
+#### 独立责任、替补与判断更新
+
+三席是**两个新的独立问题负责人，加上现有 Claude FSD DM**，不为 FSD 另设负责人，
+也不安排三个新 DM 后再额外保留第四个 FSD。每项从独立可恢复的普通 HMASD 源码／配方
+开始，在隔离 checkout 中自己承担想法、实现、运行、读数和发布；共享核心修改沿用
+现有独立审查，DM 自行接受与维护。Root 负责本次 Portfolio 取舍和共享索引，
+不增加逐批审批、统一跑数部门、例行跨 session 通信或等待 Root 合并结果的环节。
+未来实际初始化时再记录真实 session 地址／checkout，不在计划中发明 ID 或模型配置。
+
+**伙伴技能重组为首选替补。** 它仍需在固定周期下比较真实执行的重组暴露与充分知情、
+同暴露的普通 AR 技能采样，行为概率和 PPO 数据使用要合法；尚无原生技能脆弱性证据
+并不等于没有价值，但本轮信息辅助首问的接入点与两臂控制更直接，所以不替掉 DM 2。
+某项若没有独立预测或只剩无理由的旧模块调参，再比较重组与留空，不自动递补。
+VNFC 未答的 INTERVAL／TERMINAL、CPCP、TRDL 和 B 继续 reserve；技术中断与沉没成本
+均不构成必须恢复的理由。C、VSP-03、UCOPE、FOLR 的当前路线保持归档，G33 保持冻结。
+MGTAP 的条件几何、ACVC 的 proposer wrapper、FOLR 的历史缓存负面经验要继承，
+但它们没有直接检验本次固定动作的局部 actor 表示或事实辅助训练，不能据此宣告两题已失败。
+
+本次**加强**了“同信息下的表示结构、表示监督和时长参数化是可分离的研究干预”这一投入判断；
+**削弱**了“复制 OPT、增加容量、降低预测误差或提高时长相关性便保证原生增益”的预期。
+**仍未解决**的是当前 actor 的可改善瓶颈、这些原生预测是否成立、新开销是否值得，
+以及跨任务泛化／新颖性／模块可叠加性。没有经验校准的数值成功概率，故不用“低概率”
+替代下一观察与机会成本的判断。若没有进一步值得实施的比较，可以关闭当前配方，同时
+保留已证收益和相反证据。候选预测没有升级为 FOUNDATIONS 中的已证算法收益；已有
+共识与本次候选计划的证据级别保持清楚。
+
+Pro 建议的三项组合、稠密／detached 控制、Scenario1 首轮、FSD 归属和成本边界均已采用；
+Root 明确了阶段性交付、奖励索引需绑定实际 runner、对照训练隔离、无依赖并发与普通方法
+吸收的退出分支。没有把 Pro 当作审批，也未因本次答复增加新的前置阳性门槛。
+本次定向源码和既有记录核查不替代历史全数组审计；新臂尚未实现和运行，性能／计算均待验证。
+
+**完成边界：** 本轮交付是正式 Portfolio 计划及完整咨询留存，**0 新 fits、0 rollouts、
+0 科学评估、0 App 新建／派发／消息**。未修改当前方向状态、暂停或负责人；这是业主
+“暂时考虑三个并发独立 DM”请求下的具体方案。下一次实际执行采用时，可据本节各任务
+直接初始化，不需要重新发明方向清单；既有科学授权、暂停、任务创建与启动约束仍按当时
+真实状态处理，不由本计划代为发生。
