@@ -5200,3 +5200,57 @@ cause. No fit, model forward, environment/replay step, selected-world reconstruc
 Pro is planned. The observation can sharpen a re-entry condition; it does not automatically
 authorize another study. The running-operation observation responsibility is now closed;
 scientific judgment and publication continue in this notebook.
+
+### 2026-09-21 00:47 UTC — Saved motion reduction and current research standing
+
+The bounded reduction is complete, using only the eight prospectively saved ordinary
+worlds per foundation. Own-position observations are FP32 normalized coordinates; physical
+displacements multiply successive differences by (1000,1000,100) metres. An outward
+component is a nonzero command pointing beyond an exact 0 or 1 coordinate boundary.
+"No resolved motion" means all three successive saved coordinates are equal, at that
+logging precision. Jointly checking outward commands avoids identifying clipping from
+boundary occupancy alone. The final action has no following saved observation and is
+excluded: 8 worlds x 255 transitions x 5 agents = 10200 recorded agent transitions per
+foundation, 30600 in total. No new environment/replay step, model forward, optimizer call
+or predictor fit was executed; the reduction itself took .016 s in the measured process.
+
+| Foundation / gate block | Last-quarter requested displacement norm, m/tick | Observed displacement, m/tick | Median observed displacement | No resolved motion with outward command |
+| --- | ---: | ---: | ---: | ---: |
+| 8941 / 8951 | 16.947 | .851 | .378 | 30.79% |
+| 8942 / 8952 | 11.513 | 2.123 | 1.773 | 23.81% |
+| 8943 / 8953 | 14.355 | 1.033 | .478 | 2.38% |
+
+Last quarter here is ticks 192–254, 2520 recorded agent transitions per block. From
+tick 64 onward every sampled agent row is at a height boundary with an outward height
+component. First-quarter observed displacement averages 3.456/3.160/3.291 m/tick; late
+displacement is reduced but not universally absent. Nonzero commands can therefore be
+substantially clipped while horizontal movement continues. The equality between the
+fully outward-command fraction and the no-resolved-motion fraction corroborates those
+particular recorded stationary rows. It does not make the 24-world subset a population
+estimate, or establish that clipping caused the gate comparison's near-zero mean.
+
+**Cumulative judgment.** The new study was worth separating from the old jointly trained
+or sampled-copy packages: it directly trained conditional gates on fixed, retained mean
+controllers, and retained full input samples and propensity/trajectory evidence. It has
+now supplied a negative investment update rather than a new gain: R changes its decisions
+and moves toward frequent END, with no useful observed improvement over frozen ordinary
+feedback. S's nearly scalar realized behavior limits the distance-rule claim. Substantial
+clipping, persistent motion, small instantaneous command differences and occasional large
+world-level return changes coexist; none alone resolves conditional expected opportunity.
+The B03/B05/B07 adverse findings and favorable exceptions remain intact. No switching cost,
+controller change, noise sweep, extra seed, selected checkpoint or post-score continuation
+was introduced to obtain this reading.
+
+Keep G as the practical choice on these three foundations. Do not confirm or extend B08,
+and do not repair the distance scale merely because it could be repaired. Current UCOPE
+stays **exploring, with this frozen-command gate package idle**. A useful re-entry would
+have a new reason to expect that lawful predecision information can select favorable
+expected continuations, or a concretely different controller whose KEEP/END alternatives
+produce informative feasible motion. These are possible scientific reasons, not a new
+certification requirement or a claim that all such alternatives must first be proved.
+The present single-coin tail worlds do not yet supply that reason. No next native study
+is selected from this result, and unused time before the inherited deadline is not itself
+a reason to run one. The future FSD label-termination work remains separate and parked;
+Claude's paths, operations and shared index were not changed. All B08 raw results and
+weights are retained in Git at `de81d2850`; the author's current notebook supplies the
+updated standing until shared-index integration by its owner.
