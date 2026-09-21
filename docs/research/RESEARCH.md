@@ -126,3 +126,250 @@ Retained from adoption; current constitution section 9 does not require monthly 
 | Month | Governance-only commits / unique result-bearing run summaries | Completed, read confirmation studies / owner-hour | Note |
 | --- | --- | --- | --- |
 | reference, 2026-09-02 to 09-16 | 33 docs-touching commits per run summary (older, broader definition; not re-audited) | N/A (no completed confirmation study) | transition reference only, not comparable with later rows |
+
+## Portfolio review 2026-09-21 closed-direction-research-value
+
+### Question
+
+**Owner-triggered scope.** The owner asks which previously stopped directions still
+deserve actual research, explicitly distinguishing a stage/package stop from lack of
+research value and challenging the practice of moving a direction to idle after an
+adverse observation. This is a comparative investment review, not permission to revive
+every old object or launch experiments. The preceding status-only answer understated
+the distinction between the registry and the surviving scientific opportunities.
+No direction state, lead, accepted operation or frozen result is changed by this question.
+
+**Current authority and context (paths inherit the published question source_sha).**
+Read `docs/project/OPERATING_CONSTITUTION.md` sections 1–5 and 7–8;
+`.agents/skills/hmasd-portfolio-task/SKILL.md` Steps and Boundaries; and
+`.agents/skills/hmasd-scientific-tools/SKILL.md` working-explanation, comparators,
+statistics, cost/exposure and Pro sections. The constitution and current owner instruction
+supersede old quotas, recast limits, mandatory headroom gates and routine Root handoffs.
+Fits have no allowance; the owner also removed this session's old runtime deadline.
+Predeclaration, no score-driven batch extension and 3–5 fresh seeds per confirmation arm
+remain. Scientific understanding itself is a valid research use; no deployment customer,
+new algorithm, positive pilot or already implemented next host is a prerequisite.
+An ordinary method can provide a worthwhile answer. Conversely, not disproving a broad
+question is not sufficient reason to buy another arbitrary experiment.
+
+The owner requires this session to work independently, with no App cross-task dispatch
+or messages. The constitution expressly retains Jev Pro and bounded internal evidence
+helpers. This review is authored on this session's own branch; Claude's checkout,
+FSD notebook, runner and runs are read-only. Pro advises here, not as a second DM and
+not with authority to activate directions. The question targets this existing RESEARCH
+section; no new reporting system or historical rewrite is proposed.
+
+**Standing at `1fec6eb0918d60752df625777b55242b8fd5cbd8`.**
+FSD is the active Claude programme (B13 work in progress); FOLR and UCOPE have exploring
+rows but idle investment; tail-return distributional learning is reserve. A/B/C were
+explicitly archived after the prior owner narrowed their feasibility question. The older
+archived list also includes reversible parks, never-run proposals and technical failures.
+Thus the index is not a classification of scientific worth. The old A/B/C binary wording
+answered that earlier narrowed request; this review changes the question rather than
+pretending their empirical records were false.
+
+Read the relevant current rows above. FSD evidence is only dependency context: its
+NOTES entry `2026-09-20 22:41 PDT` at the standing revision withdraws “empty labels”,
+the constant-policy .025 bound on state-dependent value, and the negative-Sigma-n2
+argument against team reassignment. It treats advice to Codex as revocable priority,
+not an entry gate. This does not establish a useful team termination effect or release
+Claude's ownership. FOLR's full synthesis is at
+`cd3b97ab7982ac5efec86eace09d33328be841fa:docs/research/candidates/vap_folr_core/NOTES.md`.
+UCOPE's completed B10 note and three reductions are at
+`0d6f299c007840596405b8a359952a082a6ba567:docs/research/candidates/ucope/NOTES.md` and
+`runs/ucope/` at that revision. B10 real paired-suffix credit has mean R_CF−G
+−.0000731732, with mixed signs and no retained comparison. This is strong reason to
+stop the current frozen max-two-step velocity-copy package, not all adaptive commitment.
+
+### Evidence and concrete options
+
+The following are provisional investment options, not new frozen experiments. Counts
+are prospective costs; original declarations and failed attempts keep their identities.
+No new model, checkpoint forward pass, fit, environment evaluation or result-bearing
+simulation has been run for this review. Source reading and independent bounded
+factfinding are not replications.
+
+**1. VSP-03: learned timing under shared service opportunities — strongest existing
+positive reason for reopening.** Pinned evidence:
+`e130c1cdabae114ab98948f28f437167847e9a9e:docs/research/candidates/vsp_03/DIRECTION.md`,
+sections on B06, B07 and the two post-B07/fallback pauses; at the question revision,
+`VSP03_B06_RESULT_EVIDENCE_20260909.md`, `VSP03_B07_RESULT_EVIDENCE_20260910.md`
+in that directory and `experiments/candidates/vsp_03/vsp03_b02/b02.py`.
+
+Two controllers share an eight-tick service slot in a 40-tick task; a failed submission
+still occupies it. Waiting may preserve a partner's last service opportunity but lose
+one's own. Both controllers' public presence, residence ages, readiness/pending status
+and clock are legal inputs. The ordinary learner's final-512 G−R0 values are
++.025996 / +.014507 / +.009688 in B06 and +.011567 in B07, also above fixed R.
+B07's within-fit 128→512 change is −.001606: it weakens monotone-training explanations,
+not the positive final policy-versus-rule comparison. This is a scripted public
+shared-slot host, not a UAV or uniquely decentralized-MARL result.
+
+Smallest useful development: specify a transparent same-information opportunity rule
+using own service survival, partner's next/last opportunity and waiting cost, with
+training-data/model-access rights matched to ordinary G. Compare G at the existing
+512-update endpoint with that rule and retained R0/R; do not weaken the rule or hide
+its tuning cost. Three fresh paired learning blocks would give an initial independent
+test; 3–5 per learned arm if framed as confirmation. Existing G fits cost about 9 seconds
+each, but rule learning/selection and final evaluation are additional, currently unmeasured
+work. A positive task prediction is fewer lost last opportunities with higher complete
+team utility, retaining failed attempts, waiting and own-service costs. A transparent
+rule winning is a successful research outcome. Main risk: G merely learned an easily
+expressible public schedule; current positives are selected development evidence.
+
+**2. B: conditional response reuse under teammate drift — a positive learning effect
+whose proposed explanation failed.** Read final B03/B04/closure entries at
+`efd26695a9a223f953f614afdaafe87db9c8f92a:docs/research/candidates/skill_teammate_drift_learning/NOTES.md`;
+B03 raw summaries under `runs/skill_teammate_drift_learning/b03_*` at
+`c96aed19f7050c12d0d58b14edc128787bf2e480`; B04 `b04_*` at
+`4e2dafaf34fe4cb982624322ea0aae1bf26a9340`; the latter revision's
+`experiments/candidates/skill_teammate_drift_learning/joint_response_b03/study.py`.
+The complete preceding advice is preserved at
+`8904327f9598d4896cb9425550f84584deaa902a` in A's NOTES, not a new empirical result.
+
+Global joint-IS lost after fingerprint competence was repaired. But B03 ordinary
+conditional-response regression, integrated under a legally known current joint law,
+beat recent saturated fingerprint in all three blocks: +.021146 / +.017654 / +.088782
+on the first-64 native target decisions. B04 improved rank/prediction error but its
+proposed native gap-shrinkage contrast was +.025760 / 0 / −.009576. The conditional
+method still beat full fingerprint in every block/condition. B04 did not rerun the
+recent-fingerprint comparator, and all methods catch up late. Therefore the failed
+rank-to-return explanation does not invalidate the observed early learning benefit.
+
+Smallest useful comparison: in B04's existing nondegenerate/permuted-support condition,
+compare conditional-response regression, full fingerprint and recent fingerprint with
+matched full data and explicit prior/regularization selection rights: 3 arms × 3 fresh
+blocks = 9 planned fits, with tuning exposure declared separately if needed. Read early
+native decision loss as well as late convergence and model error. This tests whether
+the ordinary reusable response model earns early decisions against the strongest recent
+reference, not a claim to new IS. A later, separately specified question would estimate
+the current joint law from lawful outcomes rather than supply it; correlated law and
+endogenous teammate learning remain unmeasured. Main objection: B03 already established
+the narrow existence case, and a further toy comparison may have lower value than a
+real change of assumptions. Please challenge whether this next comparison is enough
+or whether the unknown-law question is the better first investment.
+
+**3. CPCP: compatibility with independently trained teammates — never tested, not a
+negative direction.** Evidence:
+`2492dcb06da495aed2cd4436342e81dec9507975:docs/research/candidates/cross_play_compatible_population_learning/DIRECTION.md`
+and registration response §6 at
+`b793cf69b4935306708ad744b355acc4d5b33712:docs/research/portfolio/pro_packets/20260912_new_direction_discovery/archive/RESPONSE.md`.
+It was parked with zero implementation and zero result. The concrete five-UAV question
+mixes independently trained populations at deployment; lawful local observations,
+physical IDs and private recurrent states stay unchanged. Compare training on fixed
+complementary 3/2 and 2/3 compositions against exposure-matched alternating whole-team
+self-play. Evaluate all eight predeclared cross-population compositions, plus own-team
+performance; no compatible-partner search or population-ID privilege.
+
+One complete exploratory method-pair bundle is four population training units, eight
+actor/critic instances, 655,360 team ticks and 8,192 Adam calls. These actors/compositions
+are not independent repetitions. Three independent bundles would cost 1,966,080 ticks
+and 24,576 Adam; the old wall-time quote was not measured. Implementation is still
+required. Predicted benefit is cross-play service recovery without unacceptable
+self-play loss; main objection is that homogeneous service policies may already be
+compatible, and no existing cross-play deficit has been measured. A positive headroom
+pilot is not a gate for the direct comparison.
+
+**4. C/CADC: learn when legal information should be refreshed in an actual motion task.**
+C closure is at `089e21f36fd51716bf15efde1abb3e4aca0100c5:docs/research/candidates/skill_information_refresh/NOTES.md`;
+its C05 fixed known-probability decision is exactly solved by the transparent rule
+Delta=wX−4q. That closes this fully known toy decision, not finite-sample learning of
+information value. CADC evidence at the standing revision is
+`docs/research/candidates/contention_aware_decentralized_communication/{DIRECTION.md,CADC_B01_RESULT.md}`
+and the actual `experiments/candidates/contention_aware_decentralized_communication/cadc_b01/`
+channel/learner/study. CADC B01 learned send+motion minus collision-free RR is −.013355
+net J and −.012099 physical J on one training pair. It has 16,744 collided attempts;
+these policy-induced counts do not isolate the cause. The native implementation already
+provides lawful seven-number local packets, sender pending state, receiver records and
+timestamps, public channel/clock, and delayed delivery affecting recurrent motion.
+
+A distinct, task-grounded C successor can hold the collision-free sender schedule fixed
+for all arms and compare learned send/skip within those opportunities with strongest
+same-information age/change or fitted-value rule and always-send RR, each with equally
+trained motion. This is a new timing comparison, not proof collision explains B01 or
+formal fusion of C with CADC. Preserve packet/header charges, pending and delay law;
+no receiver-private or future state may leak to the sender. Three arms × three fresh
+blocks at the historical 512-train/32-final/H256 exposure would be 9 fits, 1,253,376
+team ticks and 9,216 Adam, plus explicitly priced rule fitting/selection. Intermediate
+prediction: fewer obsolete transmissions while needed information arrives before useful
+motion changes; native prediction: net service improves without concealing physical loss.
+Main risk: RR already supplies adequate information, or a simple legal change rule wins.
+The rule and learner need implementation and predeclaration; no new experiment is frozen here.
+
+**5. VNFC: finish an unanswered temporal-credit comparison after technical failures.**
+Read `51965a896a4e3b9288fccb6abe277c2547dc07b8:docs/research/candidates/variable_n_fleet_churn/VNFC_N7_NATIVE_SERVICE_CREDIT_B03_RESULT_INTAKE_20260912.md`
+and the corresponding B03 SCIENCE_CARD; the standing revision's DIRECTION retains the
+old MAPR-vs-DIRECT small separation and loss to BCRH. The later INTERVAL/TERMINAL
+comparison is not negative: B02 and B03 exited SIG11 without the primary. Completing
+35 update rounds is not a final score.
+
+Existing public inputs and six joint decisions after member loss remain. Assign actual
+own-trajectory service reward to its six occurrence intervals versus terminal credit in
+the same MAPR learner, summing to exactly the same external J; keep BCRH as a no-fit
+reference. An isolated stable runtime and relevant numerical checks precede one newly
+declared batch, not a forensic hunt for every historical writer. Three independent pairs
+would be 6 fits, 3,271,680 team ticks and 12,288 optimizer calls, plus engineering and
+failed-attempt cost. Read recovery, complete J, intact service and both zones. Main
+objection: only six decisions and about .20 prior within-learner recovery gain leave an
+uncertain incremental credit benefit; occurrence time is not causal agent contribution.
+
+### Lower priority and legitimate stopping
+
+- **SCDMP** is a secondary finite credit-learning opportunity, not a negative result:
+  residual-MC versus full MLP-MC has +.006737/+.003658, each below the chosen .01 scale,
+  in two approximately 323/295-second runs. The tested hold is only opening t1–3 to t4.
+  A same-data ordinary segment-TD/multistep versus residual-MC/MC comparison can be useful,
+  but does not become a general duration result. Evidence:
+  `d3616268f7287c7ac9b760be7d9f14bb57eeba63:docs/research/candidates/semigroup_consistent_duration_model_policy/DIRECTION.md`.
+- **A off-termination reuse** legitimately supports ordinary multistep learning and rejects
+  the tested extra trace/collector benefit, not all finite-data reuse. A01 trace minus
+  ordinary multistep is +.00000904 with mixed signs; A02 long collector is −.00753038
+  across three adverse primary blocks. Known-state ordinary reductions and zero-support
+  nonidentifiability do not prove finite-sample optimality. No equally concrete higher-value
+  next target is identified in this review. Final record:
+  `6c1a38833a85a55574a0fba8714b51b38a4b988a:docs/research/candidates/termination_rule_experience_reuse/NOTES.md`.
+- **VSP-C1's multiplicative gate, CRTO's current fixed residual panel, ACPS's adapter,
+  UCOPE's frozen short command-copy package** have stronger reasons to stop their current
+  recipes. VSP-C1 intact-body gate B13 is −.032069; CRTO current RAW/TRUE/DERANGED actions
+  coincide and observed RAW regret .002129 is below that panel's .0025 effect scale;
+  ACPS B01/B02 are −.036808/−.005186. These are package/support limits, not broad impossibility.
+  Pinned direction records: VSP-C1 `6cd6e25470a4da048f69ee552a8232ca32fb8058`, CRTO
+  `63550cd8395fc9ede69bf331fe170145b739f272`; ACPS at standing revision.
+- **FRRIE** R09 is technically incomplete; weak/mixed prior projection gains lower its
+  present priority without converting missing outcomes to adverse results. **RCLE** and
+  **DISH** preserve recovery/source-history questions but their tested service packages
+  have substantial contrary evidence. **ACVC** reliably lifts a weaker proposer, while
+  gains over conventional MAPPO are much less persuasive; this supports stopping that
+  wrapper recipe's current investment, not all holding. **APFI/RECCT/EOCIV/EC4G/EGRCR/
+  Orbit/Scope** contain constructed-witness, non-expression or repeated package limits;
+  no priority is inferred merely from an untested broad theme. The current DIRECTION,
+  PARK and closing records retain those distinctions. These were screened, not exhaustively
+  re-audited; recommendations depending on unexamined specific records must say so.
+
+### Advice requested
+
+My preliminary recommendation is to put **VSP-03, B's conditional-response learning and
+CPCP** ahead of another unchanged UCOPE/FOLR/gated-critic rescue; consider native legal
+refresh timing and VNFC as concrete next alternatives, with SCDMP secondary. This is
+not a request to activate all five. Challenge this ordering, especially the risk of
+spending on another B toy replication or overvaluing a technically unfinished VNFC pair.
+
+Give a complete research argument: (1) which closures are defensible narrow stops,
+which are priority/technical/never-started states, and where the inference to “no research
+value” fails; (2) choose at most three useful next investments with the strongest simpler
+comparator, adverse evidence and a predicted intermediate-to-native link; (3) recommend
+what should stay stopped now. Do not demand novelty, an external customer, prior positive
+headroom or an already completed new host as an admission condition. Do not recommend
+reopening merely because universal failure is unproven. Identify consequential sources
+you could not read; prior advice and status words are not data.
+
+Cost of this review: zero scientific fits/evaluations and one focused Pro question;
+no change to any historical cost. No experiments, new directions or state changes are
+authorized by the answer. Current next action is the DM's synthesis for the owner.
+
+### Answer
+
+### Decision
+
+Pending complete advice and the acting DM's assessment. The owner has requested review,
+not activation; all existing direction rows and operation identities remain unchanged.
