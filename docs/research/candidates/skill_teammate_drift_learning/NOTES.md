@@ -2639,3 +2639,166 @@ changed data-collection premise before execution. This is about endogenous *own-
 collection* on the same exogenous teammate-law host, not a claim of endogenous teammate
 learning or native UAV evidence. No B07 fit or new scientific evaluation is started by
 this interpretation; no peer task is asked to update or decide for this DM.
+
+## 2026-09-21 04:05 PDT — Proposed B07: own collection can amplify or repair law errors
+
+**The changed question.** Does stable conditional-response reuse improve online target
+return when its decisions control its own access to cooperative outcome observations?
+B06 remains inconclusive by its first64 rule. This is not another chance to pass it:
+B07 changes the collection intervention and the estimand, explicitly preserving B06's
+failed confirmation. No new law estimator, reward, teammate policy or response model
+is introduced. The untested causal chain is recommendation -> collection propensity ->
+observed cooperative outcomes -> current-law/posterior updates -> later recommendation
+and return. The teammate-law process remains exogenous; only own-data collection becomes
+policy-dependent. Endogenous teammate learning and native UAV transfer remain absent.
+
+**One minimal exploratory factorial comparison.** Reuse exactly B05 response prior2
+(R) and full-history hybrid prior2 (F), without tuning or recent-window variants. Four
+branches per fresh block: R_U, F_U, R_E, F_E. U collects uniformly throughout. E collects
+uniformly through source, then uses epsilon-greedy target actions with fixed epsilon
+**.20**: P(COOPERATIVE)=.10+.80*greedy_bit, ties choosing SAFE as before. This gives each
+context at least a .10 collection chance for cooperative outcomes per visit without
+requiring an initial favorable estimate. It is a transparent matched exploration rule,
+not an uncertainty-aware algorithm or tuned optimum. No epsilon sweep or forced
+warm-up is planned. Source/target horizons remain 2,048/256 macros, four contexts and
+three ticks. Seeds **95301, 95302, 95303**, unused in B05/B06, are exploration rather
+than another confirmation.
+
+Each branch has its own actual decision and law learner and observed history. They
+share the world's source/target laws and addressed potential-random slots by block;
+identical source and U observations therefore reproduce exactly, while E branches
+receive only the outcomes of their own selected actions. Reinitialize and execute all
+four branches explicitly for simple accounting rather than introduce checkpoint forks.
+Source is duplicated actual work, not four independent source-data samples. Law priors
+at target activation are still learned from each branch's legally observed source data;
+there is no true-law feature, future outcome, other branch's history or law update on
+SAFE. Information rights, prior, SAFE estimator, precision and public keys are unchanged.
+
+**Readouts and prediction.** Primary exploratory quantity is the full-256 average exact
+expected return of the *executed .20-epsilon policy* in E, paired R_E minus F_E across
+three blocks; report all signs, values and actual sampled returns, with no confirmation
+threshold. Full horizon is selected because data feedback can delay or prevent repair;
+it is a new full-trajectory quantity, not promotion of B06's secondary endpoint. Retain
+first64 and late64 descriptively. Greedy readouts are also saved.
+
+To identify a data-feedback change rather than the trivial cost of collecting uniformly,
+evaluate the same .20-epsilon policy from each U branch's pre-update estimates. Those U
+policy values are explicitly off-collector readouts, not U's executed uniform returns.
+Then report the secondary interaction
+(R_E - F_E) - (R_U - F_U) on these matched .20-epsilon values. U's actual uniform-policy
+expected reward is separately recorded and must not substitute for its matched readout.
+The target context and laws are action-independent in this host; changes in state
+occupancy or teammate adaptation are not identified by this interaction.
+
+Working directional prediction (uncertain): the R mapping will more often discover and
+keep sampling high-value cooperative contexts, shortening false-SAFE streaks compared
+with F_E, so its full-target gap may grow relative to the matched U gap. The contrary
+prediction is serious: R's noisy law can also create false pessimism and stop the samples
+needed for repair, or optimism can spend reward on harmful .35-context cooperation.
+Measure target cooperative counts by context, law counts before decision, longest
+successive context-visit greedy-SAFE streaks, weighted mistake costs, p11/response/SAFE
+errors, and the complete return curves. Private true p11 is used only after decisions
+for this explanatory stratification, never by collection or learners. More cooperative
+samples or lower law error alone does not imply improved task return.
+
+**Plan cost and stopping scope.** Four decision +four law fits per block = **24 fits**
+over three blocks. All four branches actually execute: 27,648 collected macros /
+**82,944 primitive ticks**, including duplicated source/control realizations, and
+27,648 sampled reward labels. 27,648 pre-update Q-truth table evaluations with greedy,
+matched-epsilon and actual-collector reductions (three policy readouts per table,
+82,944 scalar policy values), zero additional evaluation environment ticks/reward draws,
+zero gradient calls. Posterior/ridge updates, total process wall and RSS will be measured.
+No source sharing is claimed as a speedup; previous B06 wall is not a B07 promise.
+One declared comparison; no score-dependent extension or method edit. A negative or
+mixed result changes the working explanation, not automatically the direction status.
+
+**Preparation L0 independent of the pending scientific choice.** Implement only
+`experiments/candidates/skill_teammate_drift_learning/collection_b07/`,
+`scripts/run_skill_drift_collection_b07.py`, and corresponding tests under
+`tests/experiments/candidates/skill_teammate_drift_learning/collection_b07/`.
+Reuse immutable B05 learners and pure host/schedule/RNG helpers; do not edit B05/B06
+source, frozen selections, other directions or shared launch tools. Store all actual
+trajectories, legal probabilities, pre-update predictions/counts, final/source states,
+fit identities, diagnostics and resources under the B07 run root. Bind literal native
+admission, exact three seeds, epsilon/horizons/settings and source SHA; no production
+bypass flag. Independent Reviewer before launch; DM accepts executable and science.
+
+Checks: pure epsilon/action mapping including epsilon=1 matching uniform, synthetic
+return/interaction arithmetic, argument/digest or source rejection as applicable,
+actual AST guard and direct-script --help. One shared tiny real-host fixture may use
+seed **95971**, source16/target16, all four branches at epsilon .20: eight tiny learning
+fits, 128 collected macros /384 primitive ticks, the same three policy reductions per
+macro. The fixture is created once per test invocation and its observations reused
+across tests. Count any repeat invocation explicitly; no production-seed pilot, new
+parameter search or extra learning test solely for a launch boundary. Compare identical
+source prefixes across all branches and identical U histories; verify E probabilities
+use pre-outcome estimates and each law sees only its own collected cooperative outcomes.
+Code preparation does not authorize B07 execution before the new premise is criticized.
+
+## Pro question 2026-09-21 b06-own-collection-b07-choice
+
+**Question.** After the fixed B06 recurrence attempt was inconclusive, is the precisely
+specified own-collection B07 above the most informative next bounded comparison for B,
+or does a material estimand/comparator/information problem make a different observation
+necessary first? The proposed change is from passive uniform data to each learner's
+matched epsilon-greedy collection, not a new estimator to repair a bad seed. Please test
+the claimed feedback discriminator and its intermediate/native-return predictions.
+
+**What changed since your prior advice.** The complete B06 result and DM interpretation
+are pinned at `a12d78ac73dbf5c03b1dd58e7f7f8fd8cb0f1cfc`. Five primary differences are
+-.0125, +.031484375, +.023828125, -.00515625, +.00328125: mean .0081875, sd .0188246723,
+t95 [-.0151864178,.0315614178]. The .005 scale passed and zero-exclusion failed. Two
+full256 differences are negative as well. No pooled confirmation, endpoint promotion,
+re-tuning or sixth seed. The same-law conditional-response errors are small while law
+errors remain larger; this does not assign regret percentages or justify an oracle.
+On 95201 R exactly matches the known-response diagnostic and still loses to F due to
+harmful cooperative choices in .55/.35 contexts. On 95202/3 R avoids valuable missed
+cooperation in .85 contexts. These costs support competing feedback predictions, not a
+claim that a lower-bias mapping universally dominates conservatism.
+
+Your prior complete answer, saved from chat at
+`542a244e4b67a8226e395377195e8edba0825b23` under the preceding question, covers B06 and
+its uncertainty/selection/representation limits. Those are adopted, not submitted for
+another review. It did not address policy-dependent collection. The proposed new
+primary is actual E full-target epsilon-policy return; U controls use matched policy
+readouts to distinguish data feedback from the uniform behavior policy's reward cost.
+This change of premise and interpretation is why focused advice is useful now.
+
+**Concrete sources and precedence.** At the pinned source_sha supplied with this message,
+read the B07 section immediately above, constitution sections 2–5 and 8, and scientific
+method sections Update the working explanation, Comparators and MARL information,
+Statistics, Cost and exposure, and Pro. The current constitution overrides obsolete
+allowance/Root/reporting rules; independent DMs run and publish within authorization,
+without App peer messages. Methods are reasoning context, not a new permission ladder.
+For new evidence read at `a12d78ac73dbf5c03b1dd58e7f7f8fd8cb0f1cfc`:
+`runs/skill_teammate_drift_learning/b06_unknown_law_confirmation/summary.json`,
+`readback.json` (all five blocks), and the preceding complete B06 notebook entry.
+The underlying B05 learner/host code is unchanged at
+`afe4f8ec74d48b2485db3d935de7871c86cc0e6c` in
+`experiments/candidates/skill_teammate_drift_learning/unknown_law_b05/{learning,study}.py`;
+trace only public observation, collection, prior activation and update pathways needed
+for the proposed change. State any inability to decode binary arrays; no broad history
+or other direction's research is needed. The current evidence is not endogenous MARL
+or a native UAV result. Native launch means an admitted local process, not a UAV host.
+
+**Decision and cost.** DM currently favors the four-branch exploratory B07, 24 fits at
+three fresh seeds, 82,944 actual collected ticks including repeated source work, 27,648
+Q-table evaluations with 82,944 scalar policy reductions, no new evaluation environment
+rollout or gradient optimizer. It is one idea with uniform-collection controls; not a
+search over epsilons, representations or baseline hyperparameters. Give a concrete
+reason if a simpler design would answer the same feedback question better. Do not
+replace full-history hybrid with a post hoc development winner or add a redundant
+renamed conditional-response baseline. A stronger materially different same-information
+reference can be proposed with its actual implementation/information/selection cost.
+
+**Return and write boundary.** Explain what B06 strengthens/weakens/leaves open and
+whether the B07 feedback test can change the investment decision. State MATERIAL_DISSENT
+yes/no for the actual proposed plan; if yes, give the smallest concrete correction and
+its cost, rather than a generic idea list. Advice is advisory; no owner/Root approval or
+positive pilot is needed. No fit, evaluation or experiment by Pro. Write only the empty
+Answer below on `codex/b-unknown-joint-law`, fetching the latest target blob before writing
+and preserving all other bytes; stop on overlapping changes. Report the actual commit
+if writing succeeds; otherwise provide the complete answer in chat, not just a receipt.
+Private transport addresses remain local. B07 execution has not started.
+
+### Answer
