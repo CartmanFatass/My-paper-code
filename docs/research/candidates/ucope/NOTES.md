@@ -6598,3 +6598,20 @@ R_CF pairs and all four policy panels; foundation and evaluation checks remained
 Across distinct cases, 26 focused checks now have passing evidence; that is not a claim that
 all 26 were rerun in one invocation. The revised executable delta still awaits independent
 review before DM launch acceptance. No B10 native effect has occurred.
+
+### 2026-09-21 05:12 UTC — Independent review closed; final native source accepted
+
+The independent Reviewer returned no material finding on `c0b18b4ff`, explicitly checking
+S_FULL's scalar gate, private critic/optimizer/shuffle state, complete-data route, reducer,
+changed tiny-fixture counts and artifact reconstruction. It reused the passing checks and
+performed no new optimization, checkpoint forward or native work. I accept the implementation
+for the revised prospective comparison above. Current main was refreshed to `d27908206`;
+its intervening changes are confined to Claude's FSD work, and UCOPE's active lead/pause
+authority is unchanged. No FSD path or canonical checkout is modified.
+
+Proceed through admission with the published source containing this acceptance, one invocation
+per declared master, at most three concurrently. Preserve every returned operation identity and
+read the finished results directly here. An admission refusal is not permission to bypass the
+kernel; uncertain acceptance is reconciled at the same handle. This acceptance adds no seeds,
+arms, endpoints or follow-on batch, and does not imply that native prefix fidelity has already
+been observed. Its first observation belongs to the declared training itself.
