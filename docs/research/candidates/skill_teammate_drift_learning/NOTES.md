@@ -1891,3 +1891,6 @@ identity and log/config but not a macro-level partial checkpoint; that partial e
 would be unknown, never zero. No crash or such result is currently observed. The planned
 75 fits remain the complete two-stage batch; after development the saved mechanical
 selection alone binds the held-out settings. No scientific adjustment between stages.
+
+Timestamp correction: the acceptance above was recorded at **03:09:25 PDT**
+(10:09:25 UTC, clock tool), before launch. Its 03:13 heading was a typing error.
