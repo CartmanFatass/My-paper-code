@@ -1621,3 +1621,366 @@ fails return the complete answer in chat, not just a receipt, SHA or link. This 
 reads the full answer and chooses; Pro introduces no permission layer.
 
 ### Answer
+
+Saved from chat (complete fallback answer; no GitHub answer commit):
+
+GitHub 读取正常，但本会话没有可调用的文件更新或提交接口，因此未写入，也未产生 Answer commit。 我检查了指定分支上的目标小节：本次读取时 C06 的 ### Answer 仍为空，目标文件的实际 blob SHA 为 66cb074a1faeb5c869600a06f64b8842542416e2。这是文件对象 SHA，不是答复提交。以下按附件指定的备用方式给出完整答复；仓库内容没有被修改。 
+
+hmasd-pro-question-c06-multiste…
+
+Answer
+一、判断与实质分歧
+
+建议保留这项已获 owner 授权的研究，采用三个臂：LONG32、修正后的 NEAR_COMMIT 和不调参的 ACTIVE_FIRST。两个预测臂共享合法物理信念、已知模型、32 对合成轨迹及 ACTIVE_FIRST continuation；只在开发集选择各自的发送阈值。普通透明规划可以直接成为最终方法，不需要再附加神经网络。
+
+MATERIAL_DISSENT: yes，范围有限。 我支持研究路线，也支持用承诺期内的完整任务后果代替一步 gate-agreement；实质异议是：“到达不是边界就截到当前接收者任务结束”不总是一个合格的最近决策参照。它可能在最近一次可受影响的接收者决策发生前就停止。 修正这个问题后，短规则有时也需要接近 32 ticks，原来的短规则 ≤17 成本界不再适用。这是比较器与计费修正，不是重新审批 C 的激活。
+
+历史证据给出的约束保持不变：C03 去掉了大量 stale-release waits，却少完成 9/5 个任务；C04 的 ACTIVE_FIRST 在其面板上分别比三个冻结学习策略多完成 12/1/1 个任务；C05 的一个学习历史匹配透明 VOI 的全部 18 个条件动作与精确值 479/90。因此，不能把 freshness 当目标，也不能把击败弱规则当作额外方法价值；但这些结果都没有证明 ACTIVE_FIRST 在 CrossingHost 全局最优。
+
+我也区分了 Portfolio 的两个层次：其完整 Pro Answer 评估的是 CADC 固定 RR 下的 send/skip 提案；后续 Decision 才明确发展原 CrossingHost 的多步配额取舍。前者不是已经覆盖 C06 的专门建议。
+
+二、最干净的主比较：最近可受缓存影响的机会，随后计完整承诺期结果
+
+为什么当前默认切点需要修改。 在代码中，接收者处于 DONE、已经 CROSSING，或者当前执行 BYPASS 时，新缓存未必还能影响当前任务的物理动作。BYPASS 的 gate 不受 peer cache 阻挡；DONE 和 CROSSING 不再通过 gate 选择是否进入当前 crossing。这时最近有意义的接收者选择可能是下一个技能边界的 choose_route，而不是当前任务内的某次 gate 调用。
+
+一个由代码允许、但不是本次实验观察的具体情形是：在 t=10，sender 0 和 receiver 1 都已 DONE，本帧 sender 0 的 token 尚未使用。SEND 会发送旧任务快照，它在 sender 的 t=12 边界过期，同时耗掉本帧 token；HOLD 后采用 ACTIVE_FIRST，则可在 t=12 新任务开始时发送新快照，t=13 到达，并可能改变 receiver 在 t=16 的选路。原短规则截到 16，恰好把这次最近可改变的选路排除。短评分为零不能解释为“最近决策无价值”，更不能直接把长规则的差异解释为更远期的多决策收益。这一例子只指出截断缺陷，不声称哪个选路最终更好。
+
+我建议如下定义 NEAR_COMMIT：最近可受缓存影响的机会所对应承诺期的 rollout。
+
+令当前 sender 为 i，receiver 为 j，其固定周期为 P
+j
+	​
+
+∈{12,16}，到达时刻为 a=t+1。对每对合成样本，从共同的合法根状态出发，寻找 a 之后的第一个机会 τ：
+
+接收者的技能边界，即一次 choose_route；或者
+
+接收者处于 SHARED、APPROACH、distance 为零且剩余时间至少两 tick 的 gate opportunity。是否实际被挡住不影响它作为机会的资格。
+
+这不是寻找“第一次恰好出现有利收益”，也不是无限追踪到两个动作终于不同。它是预先固定的、可能受缓存影响的机会定义。若到达恰好在边界，那个新任务的 route choice 就是该机会；若当前任务已经没有这样的 gate，就等到下一边界。
+
+在本题固定 ACTIVE_FIRST continuation 下，根发送首先只改变接收者缓存及发送配额；在第一个上述接收者机会之前，两分支的物理前缀相同。因此可以给这一对样本使用同一个 τ 和同一个终点，而不是给 SEND/HOLD 各挑一个更有利的停止时刻。实现时应检查这一性质，不把它扩展到读取缓存的任意 continuation。
+
+短终点定义为
+
+T
+S
+	​
+
+=min(96,P
+j
+	​
+
+(⌊τ/P
+j
+	​
+
+⌋+1)).
+
+若 episode 结束前没有上述机会，则取 T
+S
+	​
+
+=96。两分支均计 [t,T
+S
+	​
+
+) 内的完整 TEAM completed jobs。这样，边界处开始的新任务包括在内；截止时刻的新任务不再贡献区间内奖励。它仍不是精确的一步 VoI，而是对最近一个决策相关承诺期的任务后果估值。
+
+长规则保留
+
+T
+L
+	​
+
+=min(t+32,96),
+
+同样无额外 terminal value、无折扣、无人工 freshness 奖励。
+
+这个修正不需要扩大 LONG32。 最近的 route 边界一定会出现，所以短窗口最多到下一接收者任务结束，满足
+
+T
+S
+	​
+
+−t≤2P
+j
+	​
+
+≤32.
+
+某些根上 T
+S
+	​
+
+=T
+L
+	​
+
+，两个评分自然相同；这应作为“此处没有额外视野差异”报告，而不是再缩弱短规则或延长长规则来制造分离。上述定义和边界推导依据冻结的 gate、choose_route、固定周期及 tick 顺序。
+
+因此，本研究最准确的问题是：
+
+超出最近可受缓存影响的机会所对应承诺期后，额外的任务价值预测，是否在声明的有限计算量下改善完整部署表现？
+
+它不是“多步方法击败真正一步方法”，更不是“规划击败所有 VoI”。
+
+三、合法信念与状态重建：最重要的是时间对齐，而非滤波器名称
+
+首先固定根状态所在的执行相位。 CrossingHost 每 tick 先交付 pending 包，再重置本帧配额，再做边界任务初始化和选路，之后才提供 scheduler view。发送复制的是这个相位的快照；随后才执行 gate、approach movement、碰撞和完成更新。因此，当前根上的 route 已经选完，本次发送不能倒过来改变它。
+
+raw packet 必须按发送时间而非到达时间同化。 在 s+1 收到的包描述的是 s 的发送前物理状态，不是 s+1 的当前 peer 状态。正确做法是对 s 的状态施加包内容约束，再传播 s 的物理转移，并处理 s+1 的可能边界重置。把收到的 payload 直接钉成当前状态，会错过一次移动、碰撞、穿越倒计时或新任务重抽。固定 project() 是接收控制器的缓存投影，不是真实 peer 转移模型；规划信念不能把它当成无误差状态预测。
+
+缓存和配额可以合法重建，但需要明确来源。 receiver 持有的本 sender 缓存来自自己的已发送历史，且只包括已经到达的发送。当前 sender slot 上，peer 在 t−1 的发送已经交付，因此 peer 本帧 spent 可由最新已交付时间戳是否落在当前帧判断；不能把上一帧末尾、刚到达的包误算成新帧 token 已花掉。缺包、过期和未发送状态都应显式表示，不能填入真实 peer 值。当前题目允许双方每 tick 保留自己的观察，这是一项共同的局部历史接口扩展，不是新增接收信息，也不改变固定接收控制器。
+
+对自身物理转移的条件化不能偷用原因标签。 例如，自身进入 DONE 可能来自正常完成，也可能来自碰撞；某些前态可以区分，另一些不能。滤波器必须对所有与合法自身观察相容的隐藏转移求和，不能读取 evaluator 的 conflicts、team reward 或真实 peer trajectory 来选择隐藏原因。
+
+采用题目提出的“忽略状态依赖发送时机/沉默似然”的版本是可接受的第一近似，但必须称为 approximate physical belief。它不等于真实部署策略下的精确 Bayesian posterior。另一方面，忽略这类似然不意味着可以忽略已经交付的包、确定的配额事实或自身物理转移。两个预测臂共用同一近似与 fallback 规则，但因为部署轨迹不同，它们后来收到的历史和形成的信念当然可能不同。
+
+首版可以保留这个小有限物理状态空间的完整支持；32 个 rollout 样本不要求同时把滤波器也压成 32 粒子。 应记录零归一化质量、矛盾及 fallback 次数。若未裁剪的物理支持出现硬矛盾，不应直接用“忽略沉默，所以正常”解释；优先检查时间对齐、边界和碰撞语义。fallback 不能使用真实 peer 修复信念，且其执行轨迹与代价必须留在结果中。
+
+合成模型只能从这些合法重建量和抽样 latent state 初始化，不能复制真实 host 后仅覆盖几个明显隐藏字段。另一个具体工程陷阱是：冻结的 Worlds.make 要求 horizon 为 48 的倍数；17/32 是 H96 内的 rollout 截断长度，不是修改冻结宿主 horizon 的理由。t=96 不再执行 _prepare_tick，最后一个强制包可能仍 pending，不能补交付或启动额外任务。
+
+四、发送价值、阈值与 continuation 应怎样解释
+
+每个 unforced available 根使用 32 个独立的“latent peer 样本＋合成未来”对。每对 SEND/HOLD 共用 latent state、未来 movement draws 和任务距离 draws，且这些随机流与真实开发/最终世界的生成流分离。两个 horizon 在共同前缀上也使用相同样本。
+
+对 K∈{S,L}，记
+
+d
+k
+K
+	​
+
+=G
+k
+K
+	​
+
+(SEND)−G
+k
+K
+	​
+
+(HOLD),
+Δ
+K
+	​
+
+=
+32
+1
+	​
+
+k=1
+∑
+32
+	​
+
+d
+k
+K
+	​
+
+.
+
+这里 G 是规定窗口内 completed TEAM jobs。误差条使用配对差值：
+
+SE
+(
+Δ
+K
+	​
+
+)=
+32
+s
+2
+(d
+K
+)
+	​
+
+	​
+
+,
+
+不能把两分支当成独立样本后相加标准误。这个 SE 只描述给定近似信念和 continuation 的有限 Monte Carlo 误差，不覆盖信念偏差、截断误差或部署时的 continuation mismatch。32 次全为零也不证明真实差值为零。
+
+保留四个开发阈值
+
+λ∈{−0.05,0,0.05,0.10},
+
+发送条件明确为 
+Δ
+K
+	​
+
+>λ，相等时 HOLD；无 quota 时不查询规划器，forced slot 按原规则发送。开发配置之间的平局规则也应预先固定。
+
+这些 λ 应称为加性决策校准，而不是全部称为 token 的真实影子价格。 HOLD 分支已经通过未来 ACTIVE_FIRST 发送，计入了窗口内保留 quota 的部分机会价值；再扣一遍“完整未来 token 价格”会重复计费。负阈值也不是物理通信成本。它们可以补偿截断或有限估计误差，但不能因此改变任务奖励。所有臂仍必须是每 episode 24 包、192 字节、原有 96 个可见 slot outcomes；不能另加请求信道。
+
+在这里，单轨迹 completed jobs 是整数，所以等权 32 样本的均值差以 1/32=0.03125 任务单位变化。阈值网格和零附近决策的分辨率应如实解释，不把小数点后的多位输出当作高精度估值。
+
+最后，两分支在根后都使用 ACTIVE_FIRST，实际部署却由双方不断重新规划。这是相对于固定 continuation 的有限 rollout 改进尝试，不是求出了实际部署策略的精确 Q。补充核对的 Bhattacharya 等人 POMDP rollout 正文明确区分基策略价值、截断与 terminal approximation，其理论表述还要求能恢复真实 belief 的充分统计量。C06 的近似物理信念、零终值截断和双方重规划不能直接继承“不劣于基策略”的保证。
+arXiv
+
+五、一个有界且有用的首次观察：检查远期增量是否真的改变选择
+
+我不建议另加一个必须“先通过”的 pilot。在已计划的开发执行中，利用 λ=0 的 LONG32 轨迹，按预先固定、与评分无关的抽样方式保留最多 64 个 optional 根。 例如，对所有遇到的根按固定的 (world,t) 哈希取样。这个样本描述的是该开发策略实际遇到的历史，不是所有合法状态的无偏普查。
+
+对这些根，从同一套 LONG32 轨迹中读取短窗口累计值，无须另加 rollout，保存：
+
+Δ
+S
+	​
+
+,
+Δ
+L
+	​
+
+,
+Δ
+tail
+	​
+
+=
+Δ
+L
+	​
+
+−
+Δ
+S
+	​
+
+,
+
+以及配对差值、SE、机会类型、短终点、quota、根动作和后续包时刻。这里的 tail 是超过最近机会承诺期后的模型内收益差，不是已识别的配额因果贡献。
+
+最有辨别力的读数不是“长规则发得更晚”，而是：在相同合法根、相同信念和样本上，远期项是否使发送排序翻转；预测中被保存的 token 是否确实用于不同的后续快照；它是否改变 gate/route，以及完整任务数。先把这些局部模型预测与最终真实部署轨迹的包、物理决策及任务结果并置，再判断解释得到多少支持。
+
+已有 32 对样本可以按预写的前 16/后 16 做粗略方向一致性检查，不增加采样量、不据此事后扩展 batch。若大部分翻转都集中在零附近且半样本符号不一致，现有读数只能说明有限 MC 决策不稳，不能支持精细的远期机会分配解释。若需要区分信念误差，评估器可保留策略不可读取的真实状态支持/校准诊断；没有这类证据时，就不要把所有负差值归咎于 belief error。
+
+这些局部反事实依然只是声明模型和 continuation 下的诊断。最终收益必须来自各臂按自身历史完整部署得到的原生完成任务数，不能由几个正的根差值代替。
+
+六、成本、开发选择与统计范围
+
+原外层计数正确：
+
+8×64+3×256=1,280 episodes,1,280×96=122,880 host ticks.
+
+每个预测臂有 4×64+256=512 个 episode。每帧两 sender 各最多三个非强制机会，12 帧给出每世界最多 72 个 optional planning calls。按题目给定的 32 样本、两个根分支计算，内部工作上界如下；这是前瞻整数核算，不是实测执行量。
+
+内部 rollout 工作	保守 synthetic tick 上界
+LONG32	75,497,472
+原默认短规则，按 17 ticks 计	40,108,032
+原两预测臂合计	115,605,504
+修正后的 NEAR_COMMIT，按最多 32 ticks 计	75,497,472
+修正后两预测臂合计	150,994,944
+
+所以修正后的内部转移上界约为外层 host ticks 的 1,229 倍。实际工作会因提前用完 token、较早短终点及 episode 截断而减少，但不能以“零拟合、只有 1,280 episodes”描述它的主成本。滤波传播、随机数生成、状态复制、记录、初始化及读取开销还未包括在该转移上界中。wall/RSS 尚未知，不能从 C04 的几秒钟外推。科学方法明确要求计入这种算法内生的嵌套搜索。
+
+保留一次有界探索即可。两个预测臂分别在同一 64 个开发世界上按实际完整 completed jobs选择一个阈值，随后冻结，在 256 个新的共同世界上比较选定的 LONG32、NEAR_COMMIT 和 ACTIVE_FIRST。主比较是 LONG32−NEAR_COMMIT，同时完整报告各自相对 ACTIVE_FIRST 的结果；不能最后发现另一对更好就改换主比较。阈值单位是任务数，不是除以 14 后的 service fraction。
+
+共同的 32 样本预算是抽样权利匹配，不是计算量匹配。应报告实际 planning calls、各臂 branch transitions、过滤工作、完整 wall、CPU 与明确作用域的 RSS。参数更新为零，但阈值选择是有 outcome exposure 的优化工作，不能隐藏。高风险滤波/评估实现采用已有的独立工程审阅要求；不新增 Pro 批准或强制 profiling 实验。
+
+统计上，这里没有新训练历史。最终 256 个世界可以在明确的独立外生世界和规划随机流设计下，用于描述已选定规划程序在该世界律下的配对均值与不确定性；不能把根、粒子或 ticks 当成独立重复。它也不衡量重新开发选择的稳定性。反过来，不能机械要求一个零拟合规划比较制造三个“训练种子”才能开始探索；确认规则中的学习种子要求应适用于其实际学习主张。无论区间如何，当前比较都不能声称统计等价、全局最优或 UAV 效果。
+
+七、哪些结果改变解释，哪些结果支持采用透明规则
+
+LONG32 高于 NEAR_COMMIT，也高于 ACTIVE_FIRST，并出现预期的远期排序翻转和后续任务取舍： 这会加强“超过最近接收者机会的价值预测在此处有用”的解释。可考虑采用 LONG32，但结论限于共同已知模型、该近似信念、有限采样、固定 continuation 与实测计算代价。它不是神经学习收益，也不自动是纯 horizon 的因果效应。
+
+NEAR_COMMIT 吸收了 LONG32 的收益，并相对 ACTIVE_FIRST 有值得保留的表现： 采用 NEAR_COMMIT 是成功的研究答案，说明最近机会的任务后果估值已足够支持当前用途。若短规则在多数实际根上也需要 32 ticks，则不能未经计量称它更便宜。
+
+LONG32 只赢 NEAR_COMMIT，却不赢 ACTIVE_FIRST： 可以保留局部估值差异的科学观察，但没有建立新增规划包的实际使用价值。ACTIVE_FIRST 仍应是当前实现选择，而不是因“主比较正了”就采用更复杂的规则。
+
+两预测规则与 ACTIVE_FIRST 接近或更差： 结合日志区分没有动作分离、MC 不稳、近似信念问题、局部预测未转化为完整部署收益，以及明确技术错误。技术错误不算科学负结果；其余结果可以支持结束本次有限规划包，而不证明合法刷新价值不存在。C05 的有界存在结果仍保留。
+
+尤其应把冲突、等待、BYPASS 和过期任务留在完成任务数旁边。等待增加不自动有害，freshness 改善不自动有益；C03/C04 已经使这个区别成为本题的实质约束。
+
+八、实际来源与信息缺口
+
+推理使用附件指定的不可变来源 eeabf6b11585ccdd4420a83d379a415fdd90b7b5：已读取 C06 完整问题、紧邻初始化说明、C03/C04/C05 指定读数与解释；完整读取 C01 host.py；读取 constitution 第 1–6、8 节，以及指定 scientific-tools 和 research-engineering 方法。治理上采用当前 owner 任务与 no-fit-allowance 规则，不把历史归档、Root 路由或 allowance 文字恢复成当前约束。
+
+另已读取 b6093d211fa33a81d05d490ffa5bc920f43605eb 的完整 Portfolio Answer 与 Decision，但没有递归重审其中无关方向。补充方法核对使用了 Bhattacharya 等人论文第 II–III 节的实际正文，只用于限定 rollout 理论类比，不作为 C06 的经验支持。 
+arXiv
+
+指定的决策关键正文没有读取失败。 但本答复不是历史底层制品审计：C03/C04/C05 的结果数值来自已读 NOTES 的作者读数，没有重新读取并重算全部 episodes、NPZ、checkpoint 或 optimizer logs。没有 C06 实测结果、滤波校准、MC 稳定性或 wall/RSS 可以报告；没有单独验证当前 canonical activation 是否已发布，因而不声称现已满足启动条件。
+
+本次没有执行训练、环境评估或结果性仿真。建议是：修正最近机会比较器及其成本界后，保留一次声明清楚的透明规划探索；由完整任务结果决定采用 LONG32、NEAR_COMMIT 还是 ACTIVE_FIRST，而不是预先要求长视野获胜。
+
+
+## 2026-09-21 — C06 Pro reading, adoption and corrected-target L0
+
+The complete answer above was saved from chat after one accepted Jev send, operation
+key `hmasd:f781f5dfd6bea99f99983b9c7dfcc538ac9f68ad5f1d12963bad8321272d05c5`.
+The transport completed and closed its owned tab. GitHub writeback was unavailable;
+there is no Pro answer commit. The SHA `66cb074a1faeb5c869600a06f64b8842542416e2`
+mentioned in chat is the fetched NOTES blob, not an answer commit. The complete chat
+answer content SHA-256, excluding its transport final newline, is
+`c47ae11c3a88734f189859e2b0f3056dd0e942072f34426b4ba58d5e0c1b28e8`.
+No resend is needed. DM read the full answer and retains its material dissent.
+
+Adopt the nearest-opportunity correction. For each paired synthetic sample, find the
+first receiver cache-sensitive opportunity tau >= root t+1: a receiver job boundary
+(route choice), or SHARED APPROACH at distance zero with at least two remaining ticks
+(a gate opportunity, including a blocked attempt). Before that opportunity the paired
+physical prefixes must agree under the common ACTIVE_FIRST continuation. Detect a
+boundary before checking prefix equality because native pre-step preparation has
+already chosen routes. End the near return at min(H, P_receiver*(floor(tau/P_receiver)+1));
+if no opportunity precedes H, end at H. Each pair shares an endpoint regardless of
+whether either action actually changes. Never search for the first favorable difference.
+Name this arm NEAR_COMMIT. LONG retains min(t+32,H) with zero terminal value. In this
+host NEAR_COMMIT's end is no later than LONG's; equality is an observation, not a reason
+to weaken NEAR_COMMIT or lengthen LONG. The former SHORT implementation was provisional
+engineering only and has produced no scientific result.
+
+Adopt common approximate physical belief, known model, 32 paired samples, fixed
+ACTIVE_FIRST continuation and development-only additive thresholds {-0.05,0,0.05,0.10}.
+They are calibration offsets, not identified token prices: HOLD already contains later
+opportunity cost. Retain the implemented ACTIVE_FIRST choice on exact value/threshold
+ties instead of Pro's suggested HOLD tie. This preserves the simple reference where
+finite MC supplies no preference, applies identically to both predictive arms, and is
+fixed before results. P32 gives mean integer-return resolution 1/32; SE covers only
+synthetic paired-sampling uncertainty.
+
+Adopt a bounded diagnostic from development LONG at threshold zero: keep at most 64
+optional roots by smallest SHA-256 rank of the fixed string
+`C06-root-v1:<world_id>:<tick>`, independent of outcomes. Keep paired short/long returns,
+near endpoints and opportunity kinds, root local record/quota, actions and future model
+packet/state/wait/bypass traces. Reuse the same LONG rollouts, with no extra synthetic
+trajectories or tuning. Record first-16/last-16 delta signs and paired SE; read horizon
+tail reversals beside full-trajectory native rewards. These are model-based local
+predictions, not causal token-price estimates or policy-level gains.
+
+The corrected conservative upper bound for both predictive arms is 150,994,944 model
+branch transitions, plus filtering, model initialization, random draws, copying and
+logging. Outer scope remains 1,280 episodes / 122,880 actual host ticks, zero fits and
+zero optimizer updates. Retain exact counts, wall, CPU and child peak RSS. No scientific
+run has started. Paired evaluation worlds are the uncertainty unit; particles, roots
+and ticks are not independent replicates.
+
+DM checked the primary text of Bhattacharya et al., sections II–III,
+https://arxiv.org/html/2002.04175v1 . Its feature state determines the exact belief, and
+its rollout bound depends on terminal-cost approximation. C06's approximate belief,
+finite samples and zero terminal value provide no inherited non-worsening guarantee.
+This is a method analogy, not empirical evidence for C06.
+
+L0 for one bounded correction: Implementer owns c06/planning.py and mirrored
+ test_planning.py only. Replace SHORT by NEAR_COMMIT; implement per-particle first
+opportunity/endpoint, pre-opportunity physical equality checking and same-sample near
+prefix extraction during LONG. Return near_hold_samples, near_send_samples,
+long_hold_samples, long_send_samples, near_end, opportunity_tick, opportunity_kind
+as B x particles arrays (long sample keys only for LONG). Preserve selected-arm
+hold/send/delta/se and complete incremental counters, counting padded batch transitions.
+Optional diagnostics=True returns a diagnostics dict of native model sent/payloads/
+wait/bypass step traces, each B x 2(hold,send) x particles x time [...]; no extra rollouts.
+Kinds: 0=no opportunity before terminal, 1=route boundary, 2=gate. Add meaningful fixtures
+for arrival during DONE whose first affected opportunity is next route, gate-first,
+terminal absence, unequal per-particle endpoints, and identical near-prefix extraction
+from LONG samples. DM independently owns study.py and mirrored study tests, including
+blind reservoir retention and naming. No host/model law change, no result execution,
+no git-index operations by helper. Independent reviewer checks this delta before DM
+acceptance, prospective freeze/publication and native launch.
