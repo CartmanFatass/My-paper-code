@@ -5202,3 +5202,46 @@ Reuse the same tiny arrays rather than rerunning a fixture per assertion. Additi
 retain all actual test exposure. Independent Reviewer checks the executable semantics, DM
 accepts the diff and publishes before production. Implementer adds no method or run, edits
 neither this notebook nor shared index, and returns actual checks and limits.
+
+## 2026-09-21 — B10 implementation accepted before its only production evaluation
+
+DM read the full new study/runner and focused tests. Independent Reviewer
+`/root/b09_native_review` found no material remaining issue at independently verified SHA256s:
+
+- package init `5814e98c142e9c674877a5b8c2bd347f779277ffdc884b334da49665692ed5e8`;
+- study `8d66fbc2b144bebfe2871c20cbdda51626ed4ae701b0411d48c1d4c88ab45b6f`;
+- runner `ba61f2cbb69b18067a37e74e96ac3a184accc6e1e0203afb6cc2e9a060f01756`;
+- tests `148e152e53d5de2d34046297f9c73af13936d7f66ce2fc4a8c1f78bd2b9faca5`.
+
+The fixed B09 root artifact-manifest SHA256 is
+`236734838b59a4609f71bf305c806cc205eecec97cc379c28b5483701eadbc45`.
+The loader binds the root/per-seed manifests, state and summary, and validates final64;
+source checks preserve the exact B09 helper/native physics/adapter bytes. No training entry
+or learner construction is called. Source/target state tables remain separate and readonly.
+J/M alone call native planning, and true-q diagnostics occur after the action choice.
+Each stored planning row links back to its actual trajectory row. Fixed-bit rules preserve
+radial feedback, overshoot, tie convention and boundaries. The new RNG namespace is paired
+across policies and disjoint from B09. Partial failure, output protection and actual admission
+paths are present. No shared/B09/FSD code changed. Reviewer executed no checks/native calls.
+
+Six distinct focused tests passed. Retain all validation invocations: pure subset4 passed/
+2 deselected,0.97s; first full module6 passed,0.60s; final full module6 passed,1.07s. The two
+full invocations both executed the shared zero-fit fixture. The second was justified by added
+exposure fields/assertions, frozen-base identity and separate historical-input costs; there
+was no failed native physics result.14 third-party Matplotlib/Pyparsing warnings were reported.
+Compilation, source-manifest validation and source/diff checks also passed without training.
+
+Correctness total: **zero fits**,16 actual ticks+64 planner calls =80 native step calls,
+8 constructors/implicit resets/logical setups/custom refreshes,64 deep copies. No training
+observations, count updates, gradients or network forwards. Readonly state/hash/arithmetic
+checks are additional validation work, not hidden fits. No test ran after the frozen hashes.
+The synthetic reducer test uses unequal policy/base returns to cover J−IN/J−OUT/J−M/M−OUT;
+production reductions will also be checked against saved actual rewards after execution.
+
+One retained marginal product per base plus one equivalence-check recomputation are now
+reported separately:3 frozen projection constructions+3 equivalence calculations =6 total
+projection calculations in production. Actual focal choices and fixed-rule assignments are
+also counted. This clarifies cost, not the scientific protocol. The prospective source
+`75ef4a931de474ab27e6903c6f16929eab932d85`, three old bases, four arms, new namespace,
+48×64 evaluation and zero-fit contract are unchanged. Publish these bytes and run once via
+local_linux snapshot admission; retain the accepted operation until all results are read.
