@@ -5531,3 +5531,176 @@ The UCOPE B09 standing and owner correction are published; every other direction
 the parsed pause/state/lead remain unchanged. The remote main SHA was verified after a normal
 fast-forward push. No cross-session creation, dispatch or messaging was used for this update,
 and no other session's checkout was modified.
+
+
+## 2026-09-21 — B10 preparation: actual paired branch credit versus full-data PPO
+
+**Decision and boundary.** The owner's "请你继续任务" continues original UCOPE in this
+independently owned task. B09's negative investment reading stands; I do not extend its
+distance/scalar PPO recipe. I select one different learning comparison for preparation:
+execute actual KEEP and END continuations from the same predecision history, and learn from
+their difference, versus the existing rich gate's full-data PPO at the same native-step cost.
+The object, observations, reward, foundations, distance scale and horizon stay fixed. A scalar
+learner with the same paired credit and ordinary G are necessary references. The question is
+whether cancelling common outcome variation is worth the simulations and lost coverage.
+
+The owner-retained native deadline, **2026-09-21 04:06:07 UTC**, has elapsed. No B10 scientific
+fit, native evaluation, checkpoint forward or Pro call is accepted or started. This work is
+source reading, a concrete prospective design and isolated synthetic checks. No cross-session
+action, Root dependency or automatic wakeup is created. Fit allowances remain abolished;
+the numbers below are planned cost and reasons, not a consumed/remaining budget.
+
+**New reason, with contrary evidence.** The old
+[8801 credit package](UCOPE_UAV_CONTINUE_END_CREDIT_B01_8801_RESULT_EVIDENCE_20260911.md)
+already separated velocity/duration clipping and used a conditional suffix baseline; its
+single matched pair returned L-F = -.0241056. The September 20 predictive-target and
+randomization entries already established the factual score's conditional contrast identity.
+The "Team-credit check returned" entry ruled out omitted teammate rewards. Renaming that
+score, regressing the same factual outcome, or adding another conditional baseline would not
+meet the re-entry burden. B08/B09 weaken a feature/scale-only rescue, and occasional favorable
+worlds still do not establish a predictable local rule.
+
+The new method would actually observe both alternative suffixes. In this static, free-space,
+no-shadow host it can attempt complete prefix reproduction and address future policy coins
+by tick and agent. Common realized outcome components then cancel before a critic must
+predict them. This is a source/estimator argument; native prefix reproduction for this new
+collector and useful native branch differences remain unmeasured. The method is worth
+preparing because it changes the information obtained during learning, and can fail even
+when cancellation works. It does not diagnose B09 as a credit failure or guarantee net value.
+
+**Task and information.** The unchanged observation exposes own position, visible user
+relative xy/normalized SINR, visible UAV relative xyz/normalized SINR, and time
+(`uav_env.py::_get_observation_vectorized`). Holding the last velocity versus taking the
+fresh mean can lead to different service/interference geometry. Subsequent connected users,
+link quality and teammate feedback determine the team consequence. Native non-paper reward
+remains .7 connected-user fraction + .3 mean connected-user SINR quality. No service obligation,
+switching fee, new penalty or new actor observation is added. Opposite consequences at similar
+command distances are a hypothesis, not an observed native crossover. Logged user IDs, global
+state, teammate hidden state, reset seeds and future random slots are not legal gate features.
+
+Both rich learners use B08's unchanged 175-dimensional context (local observation 104,
+previous command 3, fresh mean command 3, frozen recurrent output 64, raw disagreement 1),
+the same affine-plus-175->32->1 gate and zero-logit initialization. Foundations are exactly
+B06 Ghalf 8941/8942/8943, retaining their selected-development exposure and byte bindings.
+Every frozen GRU advances every tick on its branch's own history, with foundation phase zero.
+Reset is fresh; eligible KEEP copies the last command and forces fresh next tick; END sends
+the fresh deterministic mean and leaves eligibility true. No GRU reset; lifetime at most two
+ticks. All future teammate actions are recomputed, not replayed from the other branch.
+
+**Actual paired credit.** Freeze the behavior gate for one collection round. Select one agent
+uniformly from five and a tick uniformly from 1..255, independently of outcomes. Run two full
+256-tick episodes in the same fresh world with shared addressed policy coins. If the chosen
+coordinate was eligible, force KEEP in one and END in the other; all other decisions follow
+the frozen behavior policy on that branch's actual history. If ineligible, keep an inactive
+zero-credit pair; do not resample a convenient event. Both full prefixes count as native work.
+Accept a pair only after exact prefix/context checks. A mismatch is a technical failure, not
+a noisy label or grounds to substitute another world. Final-tick credit is retained.
+
+Let Y_K,Y_E be each complete suffix's team reward divided by 256, p the old KEEP probability,
+and delta=Y_K-Y_E. Old advantages are `A_K=(1-p)*delta`, `A_E=-p*delta`. With per-action
+probability ratios r_K,r_E, maximize
+
+`p*min(r_K*A_K, clip(r_K)*A_K) + (1-p)*min(r_E*A_E, clip(r_E)*A_E)`.
+
+Targets and p are detached; ratio clip is [0.8,1.2]. Average over all scheduled pairs,
+including inactive rows, and multiply by **5*255=1275**, since Y already divides by 256.
+No data-dependent advantage normalization. At the first update the logit derivative is
+`1275*p*(1-p)*delta` per active sampled coordinate. Averaging coordinates and other policy
+randomness gives the usual shared-gate first-order policy gradient. Changed eligibility,
+motion and teammate responses are inside Y. Later clipped epochs and a fitted shared gate
+do not inherit a policy-improvement theorem.
+
+Conditional on the two potential suffixes and a pre-outcome baseline b, the unscaled derivative
+is the expectation of `(Z-p)*(Y_Z-b)` for Z~Bernoulli(p), or of two independent current-Z
+draws averaged together. Marginalization removes that current-choice variation and cancels
+common outcome components. Strict variance improvement is not universal: at p=.5, deterministic
+branch outcomes and their exact midpoint baseline, even a factual score can have zero
+conditional variance. Variation over histories/future coins and finite approximation remain.
+The connection is action-marginalized credit, as in
+[COMA, Foerster et al.](https://www.cs.ox.ac.uk/people/shimon.whiteson/pubs/foersteraaai18.pdf).
+COMA evaluates a learned centralized Q critic; this proposal pays for actual suffixes. That
+paper and this algebra establish neither native opportunity nor better finite UAV learning.
+
+**Proposed batch.** `UCOPE_PAIRED_BRANCH_CREDIT_B10` uses masters **8971/8972/8973** on frozen
+8941/8942/8943, without foundation selection or refitting. Per block:
+
+| Arm | Learning method | Native training allocation |
+| --- | --- | --- |
+| R_CF, candidate | Rich local gate; actual paired suffix credit; no learned critic | 1,024 pairs = 2,048 full episodes |
+| R_FULL, primary learning reference | Identical rich gate/context/initialization; unchanged B08 full-data PPO and central critic; all eligible factual rows | 2,048 full episodes on distinct training worlds |
+| S_CF, simple reference | One state-independent KEEP logit; paired credit; same schedule/worlds as R_CF | 1,024 pairs = 2,048 full episodes |
+| G, practical reference | Same frozen ordinary mean controller, fresh every tick | 0 new training episodes |
+
+R_FULL keeps the advantage of every factual decision and more distinct training worlds.
+A focal-only factual learner would be a useful algebraic control but a weak native reference;
+**that extra native arm is not selected**. The two-factual-rollout surrogate in the preparation
+code is only a correctness reference. This is a matched-native-cost package comparison, not
+an isolated causal effect of variance, data coverage, update count or PPO clipping.
+
+R_CF/S_CF collect 16 pairs under one fixed gate, then four full-batch gate-only Adam updates
+at 3e-4 with gradient norm clip .5: 64 rounds, **256 Adam calls per fit**. CPU FP32; subtract
+the raw FP64 suffixes before casting delta. Initial p=.5; no saturation repair or probability
+clipping sweep. Numerical loss of binary support fails the attempt. R_FULL keeps B08's
+two-episode rollout, four epochs, minibatch 256, separate gate/critic Adam 3e-4, gamma one,
+zero entropy bonus, old targets and original advantage normalization: **8,192 gate + 8,192
+critic Adam calls per fit**. Different update counts are explicit package costs. No shared
+optimizer/model state. The unchanged B09 scalar class in scalar mode supplies S_CF; its
+median/scale arguments are unused and do not constitute another normalization choice.
+
+For master m, b=100000*m. Rich initialization b+11; full-data critic b+12. Paired schedule
+uses private seed b+81; paired training world b+10000+j, j=0..1023; shared coin slots
+b+50000+j; separately addressed focal-reference slots b+60000+j. R_FULL worlds b+10000+e,
+e=0..2047, private gate slots b+50000+e and advancing shuffle generator b+91. Final worlds
+b+30000+e, e=0..63; learned-arm evaluation coins b+70000+e. Every arm gets all 64 same final
+worlds. Learned gates remain sampled; G uses no gate coin. No interim evaluation, selected
+epoch, extra diagnostic native panel, Pro call or automatically queued successor.
+
+Planned cost: **9 gate-learning attempts**, **4,718,592 training + 196,608 evaluation =
+4,915,200 native team ticks**, including both prefixes; **26,112 gate + 24,576 critic =
+50,688 Adam calls**. One foundation forward per tick, or 24,576,000 agent recurrent rows;
+zero foundation optimizer steps. G evaluation consumes 49,152 of these team ticks. Use
+local_linux CPU FP32 with one Torch/BLAS thread per invocation, fresh >=4 GiB memory admission,
+at most three block invocations concurrently and sequential arms within each block. B09's
+observed cost scaled by native steps suggests roughly 100 CPU minutes and 35-70 elapsed
+minutes; the changed collection/update mix makes this only an estimate. The proposed time
+extension is one **90-minute native window from the first accepted operation**, not a granted
+extension. Record actual wall/CPU/RSS and technical failures; no post-score batch expansion.
+
+**Prediction and reading.** Useful native gain is uncertain. If lawful service consequences
+are repeatable enough to outweigh the lost coverage, R_CF should learn a conditional rule
+and beat R_FULL and G; it must also beat S_CF to justify context-dependent termination.
+Parameter motion, probability variation, training alignment or oracle-positive deltas are
+insufficient. Retain raw paired episodes, sampled coordinates, eligibility and deltas, plus
+training/evaluation copying and probability dispersion. They describe behavior and learning;
+they are not independent fit replications or a substitute for changed-trajectory performance.
+
+Retain R_CF for further investment only if R_CF-R_FULL and R_CF-G are each strictly positive
+in all three blocks and each three-block mean is >=.01 J. A useful conditional increment
+also requires that same criterion for R_CF-S_CF. If S_CF alone achieves a >=.01 mean gain and
+three positive signs against G, prefer that simpler rule. Preserve a favorable R_FULL result
+as a reference-package finding. If paired credit works as designed but no learned package
+improves G, keep G and stop this method on these foundations. No new seeds, scales, architecture
+or local-value probe follow automatically. These are investment criteria, not equivalence or
+significance tests. The 64 worlds remain nested within each fit/foundation; B06-selected bases
+make this a development comparison, not fresh-population confirmation or a class upper bound.
+
+**Implemented preparation and actual validation.** Isolated modules under
+`experiments/candidates/ucope/paired_branch_credit_b10/` implement full-reset pair collection,
+action-marginalized clipping, the factual algebraic reference and a four-epoch paired update.
+They import no native environment and accept a supplied adapter. B08/B09 shared code and all
+Claude FSD paths are unchanged. The focused suite passed **16 tests in 1.07 s**. It checked
+the factual/paired expectation at three probabilities, non-strict variance example, fixed
+targets, clipping, all-scheduled-row denominator, private RNG, prefix failure, final-tick
+credit, KEEP's next eligibility, continued recurrence, changed teammate reaction in a
+handwritten coupled fixture, and update call semantics. Across the final suite, collection
+used 58 non-UAV synthetic team ticks; its fixed feedback rule was handwritten. Four mocked
+optimizer step calls changed no parameters or optimizer state. There were **zero actual Adam
+updates, scientific fits, native ticks or checkpoint forwards**. The earlier 13-test suite
+also passed in 1.05 s before the optional-critic/update additions, using 52 synthetic ticks;
+these two checks are engineering work, not scientific replication.
+
+Production admission/runner, durable raw-pair output and result reduction still require binding
+and review before execution. This is a concrete costed proposal with tested learning/collection
+primitives, not a launched or fully reviewed experiment. Writing it does not extend the original
+deadline. UCOPE owns the remaining preparation directly; no Claude result or Root action is
+required, and the stopped B09 route remains stopped.
