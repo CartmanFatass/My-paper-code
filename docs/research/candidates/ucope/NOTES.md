@@ -5054,3 +5054,19 @@ has active uncommitted FSD work in the canonical checkout; it is left untouched.
 snapshots and this direction's author index isolate the forthcoming runs. Native runtime
 cost and scientific outcomes are not yet measured. The original 04:06:07 UTC deadline
 and 7200 s per-invocation watchdog remain enforced.
+
+### 2026-09-21 00:14 UTC — B08 admitted operations
+
+The three paired invocations were accepted from the published immutable source
+`d39483ace5767817cc7df45247516eab642b8a41`. Their original native identities, preflights,
+source snapshots and outputs are bound by these manifests:
+
+- [8951](../../../../runs/ucope/frozen_mean_gate_b08_8951/launch-manifest.json)
+- [8952](../../../../runs/ucope/frozen_mean_gate_b08_8952/launch-manifest.json)
+- [8953](../../../../runs/ucope/frozen_mean_gate_b08_8953/launch-manifest.json)
+
+No operation was retried. Initial technical progress is valid with no error. A bounded
+Monitor owns observation of these exact handles; DM retains scientific reading and any
+decision. Only process/count/resource facts are read while the batch is incomplete;
+the three final score panels will be interpreted together. Accepted operations remain
+our responsibility through native exit, artifact collection and the resulting judgment.
