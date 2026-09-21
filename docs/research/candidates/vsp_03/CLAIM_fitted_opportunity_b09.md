@@ -104,3 +104,6 @@ Actual cost471,040 episodes/18,841,600 team ticks/37,683,200 target transitions,
 bytes on local_linux. All110 artifact hashes and143,360 native evaluation rows/arrays,
 curves and paired statistics were read back successfully. Results:
 [`runs/vsp_03/opportunity_b09_21901_21905/summary.json`](../../../../runs/vsp_03/opportunity_b09_21901_21905/summary.json).
+
+Canonical-main readers can access the complete immutable result at
+[B09 published evidence](https://github.com/CartmanFatass/My-paper-code/tree/f877dbda7d2e8d1a199e6936ebed0ae0168d7f12/runs/vsp_03/opportunity_b09_21901_21905).

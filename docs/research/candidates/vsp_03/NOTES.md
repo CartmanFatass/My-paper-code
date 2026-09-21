@@ -692,3 +692,80 @@ after that fix. Reviewer checked all18 required input artifacts without scientif
 DM additionally byte-compared those plus the three summaries to `a5a87aa` (21 identical
 files). B08/B09 source/data are unchanged. Accept the reviewed B10 files and execute the
 prospective zero-fit batch once at the published SHA. No result exists at this acceptance.
+
+## 2026-09-21 B10 reading and current comparison boundary
+
+Accepted10:36:50 UTC, source `6a7cb636ed35d2d5fa7ef0e25673a1e2aa11234c`, exited0
+at10:36:55 UTC. Zero new fits/Adam/gradient steps/neural forwards, three guard panels,
+12,288 episodes,491,520 team ticks,983,040 target transitions. No reference panel replay,
+new world, retry, threshold search or extension. Native manifest and full outputs are
+published at [B10 evidence](https://github.com/CartmanFatass/My-paper-code/tree/4310e203b20c9b38332dd2b431e67048f781ac4c/runs/vsp_03/opportunity_guard_b10_21801_21803).
+
+| Complete-world contrast, old development panels | 21801 | 21802 | 21803 | Mean |
+| --- | ---: | ---: | ---: | ---: |
+| O_guard−O_self | +.008011475 | +.008310547 | +.010372314 | +.008898112 |
+| O−O_guard | +.012221680 | +.009738770 | −.001394043 | +.006855469 |
+| O_guard−G | +.010859375 | +.013186035 | +.021754150 | +.015266520 |
+
+Guard J is `.385468750/.384470215/.395751953`. All319/280/278 first guard/self
+disagreements are exactly at t22, both pending, guard SUBMIT/self WAIT; all other worlds
+are retained. Both jobs are attempted in every guard world, with zero non-submission
+and zero final-clock blocking, meeting the stronger conditional intermediate prediction.
+The three guard−self gains are positive and recover **56.4831%** of the fixed B08 mean
+O−O_self increment. This meets the literal prewritten descriptive majority threshold;
+the runner label `MAJORITY_EXPLANATION` is read only as **most of this observed development
+increment recovered**, not a causal mediation result or independent confirmation.
+
+The recovered gain is itself a trade. Guard−self gives success+.017008464/team,
+attempts+.071370443, failures+.054361979 and waiting−.871256510 ticks. It changes which
+job goes first and both later outcomes, rather than merely appending an omitted attempt.
+Relative to the guard, O makes the same two attempts but waits3.865234375 ticks less;
+its mean success count is **lower** by.005615234 and failures higher by the same amount.
+Thus O−guard's mean+.006855469 J is a waiting benefit+.009663086 offset by success
+loss−.002807617. The third block has O−guard<0, and O does not beat the guard uniformly.
+Guard−G also waits more (+9.013834635 ticks), with success+.078043620 and failures−.029215495.
+No criterion demands all components improve. Complete per-world components, differences
+and unfavorable outcomes are in the native files.
+
+**Update.** A simple own-job rule with one legal final-feasibility correction reproduces
+a substantial part of the joint-versus-isolated improvement on these selected panels.
+That strengthens coarse scheduling as an explanation and weakens any implication that
+the full peer-state recursion was needed for most of the observed increment. Earlier
+state-dependent timing still has a positive remaining mean versus this specific guard,
+largely through waiting, but its mixed block signs and development exposure remain.
+Do not infer guard/O equivalence, general full-planner superiority, a pure partner-loss
+effect, or the mechanism learned by G. This observation does not alter B09's completed
+five-fresh-block reading. O remains the confirmed reference; O_guard is a simpler
+development alternative, not a newly confirmed winner.
+
+Scientific-process wall5.007999 s, CPU4.914784 s, peak RSS418,414,592 bytes.
+Fresh available/effective memory11,437,662,208 bytes passed the4 GiB floor; cgroup values
+were unavailable. Planner reconstruction .000764/.000731/.000594 s, guard panel execution
+including native output .241446/.192534/.195682 s; full process time also includes imports,
+input loading, validation and result reduction. There are112,499 guard decision rows.
+Readback took.476 s: all14 stable output digests, all12,288 native rows and decisions,
+every paired J, first disagreement and aggregate were checked. The pre-execution18 input
+artifact digests and21 pinned-file byte comparisons retain the original input identity.
+
+**Current use and next reason.** The owner-selected fixed-host comparison is completed:
+ordinary timing learning has a real positive readiness comparison, while a competent
+transparent fitted scheduler improves it under disclosed model/data conditions. Preserve
+that ordinary-rule result instead of trying to recover a neural increment. The guard
+adds a bounded explanation rather than a compulsory next confirmation. There is no
+declared successor batch or live producer; do not add seeds, thresholds or G training
+solely to resolve this development ranking. Direction state stays **exploring**, without
+closing or disproving the broader timing question. A useful re-entry would specify a
+target-relevant information/model/clocks condition not covered by the present correct-law,
+public fixed host, and a native prediction that changes the use decision; it must not
+be only a renamed attempt at the same neural advantage.
+
+This resumed comparison used16 completed fits (eight G512 plus eight O transition MLE),
+zero failed fits and one later zero-fit guard observation. Across B08/B09/B10:
+765,952 executed episodes,30,638,080 team ticks,61,276,160 target transitions,
+4,096 G Adam calls; summed scientific-process wall95.894908 s (excluding implementation,
+tests, Pro waiting, publication and reading). Every declared batch is complete.
+
+Portable evidence for canonical-main readers (code and runs remain on the direction branch):
+[B08 development](https://github.com/CartmanFatass/My-paper-code/tree/a5a87aa223727b2673781009c90810e7a4842584/runs/vsp_03/opportunity_b08_21801_21803),
+[B09 fixed confirmation](https://github.com/CartmanFatass/My-paper-code/tree/f877dbda7d2e8d1a199e6936ebed0ae0168d7f12/runs/vsp_03/opportunity_b09_21901_21905),
+[B10 one guard](https://github.com/CartmanFatass/My-paper-code/tree/4310e203b20c9b38332dd2b431e67048f781ac4c/runs/vsp_03/opportunity_guard_b10_21801_21803).
