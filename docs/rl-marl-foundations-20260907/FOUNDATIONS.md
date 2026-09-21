@@ -52,6 +52,8 @@ HMASD 的算法对象还包括团队技能、个体技能以及它们的共同�
 
 原论文也将技能用途、技能数敏感性和子队协作灵活性列为限制。附录 F 在三个 SMAC 场景、各五次运行的 50 个个体技能中报告 12 个对任务有用；同文还报告表现好的 Overcooked 运行中各技能均有用。因此 24% 不是 HMASD 的普遍常数，更不是当前 UAV 的测量。全队一个 team skill 缺少显式的子队层次，也不等于联合个体技能不能表达任何分组行为。上述限制提供研究动机，仍需检验当前任务的实际学习瓶颈。[HMASD，附录 D、F、G](https://proceedings.neurips.cc/paper_files/paper/2023/file/c276c3303c0723c83a43b95a44a1fcbf-Paper-Conference.pdf)
 
+技能的任务用途也可能依赖搭档组合。预测已执行组合的结果准确，不能直接证明更换伙伴技能后的用途；后者需要实际执行证据，同时不能要求每个技能与所有搭档都同样有效。搭档多样化和减少共同适应已有成熟先例：Other-Play 利用已知任务对称性，Fictitious Co-Play 训练对一组固定伙伴及其历史检查点的响应。它们研究陌生伙伴协作，不能直接当作同一 HMASD 团队内部技能重组的已验证方法；通用的伙伴随机化本身也不是新的机制。[Other-Play，§§3–5](https://proceedings.mlr.press/v119/hu20a/hu20a.pdf)；[Fictitious Co-Play，§2.1](https://proceedings.neurips.cc/paper/2021/file/797134c3e42371bb4979a462eb2f042a-Paper.pdf)
+
 比较的信息条件需要沿实际 actor 输入核对。普通 own-observation MAPPO 可以回答一个有用的实际基线问题；如果另一方法在执行时还能访问团队摘要，这个比较就同时改变了信息和方法，不能独自归因为分层的收益。FSD 的当前 B01 已明确将 D1280−CF 定义为完整方法包的差异，而非 hierarchy headroom；后来的 CF_S 缩放修复也不能被忽略。应分别说明实用比较、匹配信息的比较和组件归因各回答什么。[FSD 的固定 B01 问题](https://github.com/CartmanFatass/My-paper-code/blob/267d1bcaebafa5f8f9049098d645e2f548b7c678/docs/research/candidates/flexible_skill_duration/FSD_MATCHED_INFORMATION_BASELINE_B01_PROSPECTIVE_CARD_20260916.md)；[B05 修复及后续解释](https://github.com/CartmanFatass/My-paper-code/blob/267d1bcaebafa5f8f9049098d645e2f548b7c678/docs/research/candidates/flexible_skill_duration/NOTES.md)
 
 全局 coach 是否被允许取决于任务的信息条件，不能仅凭组件名称纳入或排除比较。COPA 的 coach 为部分观测的成员提供策略，论文也包含回合内成员加入；它是相关的队伍变化参照，但原来的离散动作、AQMIX 结构与当前 UAV 连续动作接口仍需匹配。其通信阈值是在计算新策略后决定是否发送，因此减少策略广播不能直接记作减少 coach 推理。[COPA 原文，§§3.2–3.4、4.1](https://proceedings.mlr.press/v139/liu21m/liu21m.pdf)
@@ -90,11 +92,19 @@ Option 由启动条件、内部行为和终止机制定义，这些部分可以�
 
 在多智能体中，个体持续时间还决定哪些成员能在此刻重新选择，哪些成员继续执行已有承诺；联合探索与信用学习需要面对这种不同步的行动机会。一个全队共享的可变时钟可以研究时间抽象，但不能单独证明解决了个体异步协调。联合动作组合数也不能直接当作学习样本复杂度定理。已有宏动作 MARL 和异步 actor-critic 方法是相关参照；新方法需要说明相对它们以及现有 HMASD 已有机制改进了什么。[宏动作 MARL](https://proceedings.mlr.press/v100/xiao20a.html)；[异步 actor-critic](https://arxiv.org/abs/2209.10113)；[ACAC](https://proceedings.mlr.press/v267/jung25a.html)
 
+联合时序影响回报，不意味着必须增加跨成员的随机采样相关性。在共同且充分的输入下，一个确定性的联合技能—时长映射可以分解成各成员的确定性输出；共同状态和已有 team latent 也能产生边缘相关。因而“独立时长 head”不能被先验断言无法等待、接力或错峰。若一次仅一名成员有权更新，事件内自回归采样也没有额外的跨成员随机关系可表达；两类策略仍需处理其他成员正在执行的承诺。普通自回归策略是学习参照，其更好的有限训练结果仍不唯一识别相关探索的原因。[本次概念审查的推理与范围](../research/RESEARCH.md#portfolio-review-2026-09-21-marl-concept-formation)
+
+队友 option 条件化与学习终止也并非空白：Dynamic Termination 已用队友最近广播的 option 估值，并学习带终止价格的终止动作；它的延迟通信和价格是该论文的设定，不能移植为当前 UAV 已有条件。顺序联合决策和优势分解亦已有 MAT 等方法。给高层增加时长、承诺输入、顺序解码或正确的异步结算，可以构成值得评价的实现改进，但组件组合本身没有建立新颖性或效果。[Dynamic Termination，§4](https://arxiv.org/pdf/1910.09508)；[MAT，§§2.2、4](https://arxiv.org/pdf/2205.14953)
+
+反事实 baseline 还须服从实际采样结构。COMA 的分散动作乘积条件下，可以固定其他成员动作并边缘化自身动作；对自回归策略，后采样动作可能已受当前动作影响，直接照搬不保证 baseline 的 score 项期望为零。合法前缀 baseline 可依赖决策前上下文与已采样前缀；共享参数不破坏这一条件恒等式，但不自动带来独立参数更新或联合信赖域保证。前缀条件优势是依赖顺序的学习信号，不是成员固有的因果贡献。此处只说明方法边界，没有诊断当前实现存在该错误。[COMA，§4、附录 A](https://arxiv.org/pdf/1705.08926)；[本次解析反例与核对](../research/RESEARCH.md#portfolio-review-2026-09-21-marl-concept-formation)
+
 技能执行、重新选择相同标签和学习片段边界也未必相同。当前 FSD/D2 的低层策略每个 primitive step 接收观测并更新循环隐藏状态；高层重新选择即使得到同一标签，也会关闭并新开 credit segment，重置 age 和片段统计，而低层记忆继续。协调器此时重新编码当前输入，未被采样的 agent/team token 保持；team renewal 会触发所有 agent renewal。因此，时长比较需要说明团队时钟、个体时钟、实际标签变化及片段结算的关系，不能用低层保持速度或隐藏态重置替代这些语义。这是当前实现事实，没有诊断出折扣或 credit 的错误，也不要求固定类模拟可变类的全部额外行为。[原生 segment 与选择实现](https://github.com/CartmanFatass/My-paper-code/blob/e9f77d1e03ee9d3bdb86187ecd90224a1822f74b/hmasd/agent.py#L2286)；[低层逐步反馈](https://github.com/CartmanFatass/My-paper-code/blob/e9f77d1e03ee9d3bdb86187ecd90224a1822f74b/hmasd/agent.py#L3045)
 
 同一实现中，held skills 与采样 mask 进入部分技能解码，但高层 value heads 只使用当前 state/joint observations；age 的可选特征进入判别器，不进入这些 value heads。这给出了异步 continuation context 是否影响有限学习的具体问题，没有直接证明当前 baseline 错误、价值误差大或加入输入就有收益。固定 primitive 步数和相同更新安排下，每步仍写入低层与判别器 buffer，改变 k 不必然改变原始样本行数；它主要改变技能驻留、标签分布和高层片段数。高层 D2 片段累积环境 reward，低层另有技能发现的 intrinsic reward，二者不能混作同一个目标。[value 与 partial assignment](https://github.com/CartmanFatass/My-paper-code/blob/e9f77d1e03ee9d3bdb86187ecd90224a1822f74b/hmasd/networks.py#L756)；[逐步 buffer 写入](https://github.com/CartmanFatass/My-paper-code/blob/e9f77d1e03ee9d3bdb86187ecd90224a1822f74b/hmasd/agent.py#L3886)
 
 上述相同更新安排是实质条件：当前低层循环序列采样将 `chunk_length` 设为 `config.k`。因此改变全局固定 k 还可能改变训练序列长度；相同 primitive 样本行数不等于相同优化过程。D2 的部分分配还会在决策子集上调用归一化：若启用且处于训练模式，该路径更新 running statistics，边界变化可能改变其采样权重；这不是统计量唯一的更新路径。应按实际生效的 sampler 和 normalizer 区分执行周期、训练序列、统计更新和优化量，而非把它们都称作探索成本。这里没有测得新增效应或诊断出现有失败。[低层序列采样](https://github.com/CartmanFatass/My-paper-code/blob/e9f77d1e03ee9d3bdb86187ecd90224a1822f74b/hmasd/agent.py#L6300)；[D2 决策子集](https://github.com/CartmanFatass/My-paper-code/blob/e9f77d1e03ee9d3bdb86187ecd90224a1822f74b/hmasd/agent.py#L2639)
+
+技能的决策频率与 primitive-time 占用频率也不同。在固定策略下的平稳驻留过程、有限平均时长及无选择性删失等条件下，实际驻留时间 \(\tau\) 给出 \(p_t(z)=p_d(z)\mathbb E[\tau\mid z]/\mathbb E[\tau]\)。若判别器准确拟合时间采样的后验，则 \(\mathbb E_t[\log p_t(z\mid x)-\log p_d(z)]=I_t(Z;X)+D_{\rm KL}(p_t\Vert p_d)\)。在 X 不携带技能信息的例子中，两种相同行为若决策概率各半、平均时长为 1 和 9，便可出现非零 KL 而无状态互信息。因此较好的判别分数未必代表更有用的技能。该推导不是原生 HMASD 目标的错误诊断；其 reward 与 entropy 路径需要分别核对，异步联合事件分布也不能直接用独立更新公式代替。较长有效服务的真实收益可以保留，统一占用率不是通用前提。[推导条件及原生差异](../research/RESEARCH.md#portfolio-review-2026-09-21-marl-concept-formation)
 
 不同持续时间也不必作为互不相关的选项从头学习。TempoRL 利用相同动作的已执行中间转移学习多个保持长度；Timing-as-an-Action 利用共同的一步转移模型联系不同延迟。后者假设中间状态与奖励不可见并有交互成本，与当前 FSD 的逐步观测不同。把共同模型迁移到闭环技能时，还要处理隐藏状态、策略版本和队友行为；持续学习的技能不能无条件视作固定 Markov 转移矩阵。合法的已执行前缀提供反馈，但没有提供提前换技能后的未执行后续轨迹。共享结构是候选学习办法，既不是本项目已实现的增益，也不是新颖性证明。[TempoRL，§3.2](https://proceedings.mlr.press/v139/biedenkapp21a/biedenkapp21a.pdf)；[Timing-as-an-Action，§§2、4](https://proceedings.mlr.press/v238/zhou24c/zhou24c.pdf)
 
