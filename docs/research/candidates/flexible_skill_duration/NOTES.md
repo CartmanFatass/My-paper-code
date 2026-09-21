@@ -3906,3 +3906,91 @@ moved between waves): `b13_uniform_772803_a01`
 mine were refused before any admission or output root (the kernel was started from the wrong
 host, then without the node's control-plane interpreter variable); neither created an
 operation. All six declared fits are now started; the batch is closed to additions.
+
+## 2026-09-21 01:47 PDT — B13 read: the declared effect is not there; a learner whose coordinator never learns scores like D1280; selection within the constant class is worth about the panel noise
+
+**Technical.** Six fits of six complete, exit code 0, all at launch sha `91e344eec`; no fit
+lost, none rerun. Collected roots verified against the node by sha256 (summary, weights
+sidecar, estimator record, exit record). `best_estimate`'s schedule slot equals its own
+constant panel in all six fits; no rank-deficient rollout. Reduce
+`runs/flexible_skill_duration/b13_reduce/summary.json`, sha256 `cae36e4ac7cb0baa…`. Read under
+the rules fixed at 22:41 on 2026-09-20, before any score. References are historical (D1280 of
+B01), not contemporaneous; the arms draw labels from different streams; three development
+blocks reused since B01; panel conditional noise ≈ .03 J; seed SD on this host ≈ .08 J.
+
+**Declared predictions.**
+- P1 (`BANDIT` largest share > .4 by rollout 15): **holds 3/3** (first at rollout 3 / 2 / 11).
+  It shows only that the exposure mechanism engaged.
+- P2 (argmax β̂ in the top two of the arm's own final map, 3/3, both arms): **fails.**
+  `BANDIT` rank 3 / 3 / 2, `UNIFORM` rank 1 / 2 / 5. Ties, as promised: `BANDIT` 772903's
+  rank 3 is .015 J below the map's best; `UNIFORM` 773003's rank 5 is .092 below, with
+  z ≈ 6 on the chosen label — the strongest ten-step credit of the batch points at a label
+  that is poor as a whole-episode constant.
+- P3 (`BANDIT` `best_estimate` J45 ≥ D1280 + .03 on ≥ 2/3, mean ≥ +.05; late window mean ≥
+  +.03): **fails.** J45 differences −.053 / +.087 / −.071, mean −.012; late window −.008 /
+  +.067 / +.028, mean +.029. The one block that gains is 772903, where D1280 as trained is
+  itself low (.355).
+- P4 (`BANDIT` − `UNIFORM` within ±.03 on ≥ 2/3): **fails 0/3**: −.082 / −.044 / +.053, mean
+  −.024, no consistent sign; late window −.035 / +.048 / +.056.
+- Alternative (argmax changes ≥ 3 times after rollout 15 *and* `best_estimate` no better than
+  `uniform_every_10`): 0/3 by its letter in `BANDIT` (changes 1 / 0 / 2). In `UNIFORM` the
+  argmax changed 7 / 4 / 2 times.
+
+| block | arm | E `best_estimate` | R `uniform_every_10` | C map mean | M map max | E − R | E − C | M − E | R − D1280 (J45 / late) |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 772803 | BANDIT | .403 | .444 | .404 | .520 | −.041 | −.001 | .117 | −.012 / +.008 |
+| 772803 | UNIFORM | .486 | .447 | .432 | .486 | +.038 | +.054 | .000 | −.008 / +.030 |
+| 772903 | BANDIT | .441 | .447 | .411 | .456 | −.006 | +.031 | .014 | +.093 / +.071 |
+| 772903 | UNIFORM | .485 | .462 | .443 | .496 | +.024 | +.043 | .011 | +.107 / +.073 |
+| 773003 | BANDIT | .429 | .407 | .380 | .485 | +.022 | +.049 | .056 | −.092 / −.032 |
+| 773003 | UNIFORM | .375 | .449 | .397 | .467 | −.074 | −.021 | .092 | −.050 / +.022 |
+
+D1280 as trained: J45 .456 / .355 / .499, late window .432 / .395 / .452.
+
+**Auxiliary quantities (fixed at 22:41).**
+- *Selection within the constant class, E − C:* mean +.026 (`BANDIT`), +.025 (`UNIFORM`),
+  four of six cells positive, each of the size of one panel's noise. Rank agreement of β̂
+  with the arm's own map (descriptive, not declared): Spearman .26 / .26 / .54 and
+  .26 / .89 / −.14. The ten-step count regression ranks labels weakly and unreliably for
+  whole-episode constant deployment.
+- *Deployment-rule gain, E − R:* mean −.008 and −.004. Executing the estimated best label for
+  the whole episode is not better than redrawing labels uniformly every ten steps, in either
+  arm. `best_estimate` is also volatile across boundaries (772803 `BANDIT`: .38, .16, .45,
+  .26, .36, .46 …) where `uniform_every_10` is steady (.41–.50).
+- *Trained family under a common rule, R_B − R_U:* −.003 / −.014 / −.042, 3/3 negative, mean
+  −.020, inside noise. Concentrating exposure shows no benefit and possibly a small cost.
+- *Coordinator off against D1280 as trained, R − D (auxiliary, historical reference):* late
+  window +.008 / +.071 / −.032 (`BANDIT`), +.030 / +.073 / +.022 (`UNIFORM`, mean +.042). A
+  learner whose coordinator takes no optimizer step, trained and deployed on uniformly random
+  labels, scores like D1280 with its learned coordinator.
+- The final maps stay wide (spread .135–.205 and .115–.164) with no learned selection at all:
+  label differentiation comes from the low level's own machinery, not from the coordinator.
+
+**What this changes.**
+- *Weakened:* the idea I1 was built on — "if label selection is learned from additive
+  per-agent credit, D's score rises". In its external form it does not, P2–P4 fail, and the
+  selection gain available inside the constant class is ≈ +.025, against an optimistic
+  best-of-six regret of .00–.12. Under my 22:41 rules this outcome is not an entry for I2 or
+  I3, and I do not rename it into one. I do not build the in-learner form.
+- *Strengthened:* the coordinator's learning contributes nothing measurable to D on this
+  host — now at training level (B13's R − D), not only at fixed weights (B08). And Pro's
+  caution about estimands: the label a ten-step mixed-label regression credits is not the
+  label that is best held by everyone for an episode (`UNIFORM` 773003).
+- *Untouched:* whether the actual coordinator gradient has a stable direction (not
+  measured); whether any of this holds on fresh blocks; the low level's share of D's score;
+  the state-dependent, per-agent or team-conditioned value of reassignment, which no batch
+  here tested. Nothing in B13 speaks for or against Codex's team-termination question.
+- *Not claimed:* equivalence of any two arms (three blocks, no equivalence test), a size, or
+  that label selection could never matter; the opportunity measured is within six
+  all-agents-constant policies on three reused blocks.
+
+**Direction-level standing after B01–B13.** No lever on the high level has moved D's score:
+the coordinator's batch (B02), label persistence in training (B07, one block) and execution
+(B08), the coordinator's selection (B08, B09), and now selection from an external additive
+credit with or without concentrated exposure (B13). What the direction has is descriptive:
+labels are distinct closed-loop behaviours produced by the low level's own objectives, their
+consequences are long-horizon and roughly per-agent, and the high level as built neither
+finds nor needs them. There is no positive performance result and no claim note. My
+recommendation to the owner is to stop spending fits on high-level label credit here; whether
+the direction closes, rests in reserve or turns to the low level is a route decision, on
+which constitution section 5 has me consult Pro and on which the owner decides.

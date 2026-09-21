@@ -1,0 +1,99 @@
+{
+  "acceptance": "accepted",
+  "accepted_at": "2026-09-21T06:53:36.772701Z",
+  "bootstrap_command": [
+    "/home/wu/.venvs/hmasd/bin/python",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/df0df5bd0d0e4f658812f0edfcb95126/scripts/hmasd_admission.py",
+    "_run-admitted",
+    "--runner",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/df0df5bd0d0e4f658812f0edfcb95126/scripts/run_fsd_label_bandit_b13.py",
+    "--output",
+    "/home/wu/projects/HMASD/runs/flexible_skill_duration/b13_uniform_772903_a01",
+    "--",
+    "fit",
+    "--arm",
+    "UNIFORM",
+    "--seed",
+    "772903",
+    "--launch-sha",
+    "91e344eecc9603f64f2e8c0504b92117fc35d5df",
+    "--output-root",
+    "/home/wu/projects/HMASD/runs/flexible_skill_duration/b13_uniform_772903_a01"
+  ],
+  "claim_key": "b7b65e97ef90d95a5ddce2276dda31b422f9c9f2c86c0ea7b5c33e25f4e56442",
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/b7b65e97ef90d95a5ddce2276dda31b422f9c9f2c86c0ea7b5c33e25f4e56442.json",
+  "command": [
+    "/home/wu/.venvs/hmasd/bin/python",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/df0df5bd0d0e4f658812f0edfcb95126/scripts/run_fsd_label_bandit_b13.py",
+    "fit",
+    "--arm",
+    "UNIFORM",
+    "--seed",
+    "772903",
+    "--launch-sha",
+    "91e344eecc9603f64f2e8c0504b92117fc35d5df",
+    "--output-root",
+    "/home/wu/projects/HMASD/runs/flexible_skill_duration/b13_uniform_772903_a01"
+  ],
+  "command_sha256": "df7d5f1df0f0cc661bc9d58c7ca253ef08875c6c133d3e71817e2c73ca124da4",
+  "control_observation": {
+    "observed_at": "2026-09-21T06:53:35.177359Z",
+    "ref": "refs/heads/main",
+    "remote": "origin",
+    "sha": "71b4e575829d1a65eabcdd30cf86514c368cb271"
+  },
+  "control_root": "/home/wu/projects/HMASD",
+  "created_at": "2026-09-21T06:53:35.227827Z",
+  "cwd": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/df0df5bd0d0e4f658812f0edfcb95126",
+  "direction": "flexible_skill_duration",
+  "host_identity": "LAPTOP-U9TDKC8A",
+  "identity_command": [
+    "/home/wu/.local/share/uv/python/cpython-3.10.21-linux-x86_64-gnu/bin/python3.10",
+    "scripts/run_fsd_label_bandit_b13.py",
+    "fit",
+    "--arm",
+    "UNIFORM",
+    "--seed",
+    "772903",
+    "--launch-sha",
+    "91e344eecc9603f64f2e8c0504b92117fc35d5df"
+  ],
+  "lead": "Claude session (current lead; a Codex DM may take it, never both)",
+  "manifest_ref": "/home/wu/projects/HMASD/runs/flexible_skill_duration/b13_uniform_772903_a01/launch-manifest.json",
+  "node": "wsl_4070",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/b7b65e97ef90d95a5ddce2276dda31b422f9c9f2c86c0ea7b5c33e25f4e56442.json",
+  "output_root": "/home/wu/projects/HMASD/runs/flexible_skill_duration/b13_uniform_772903_a01",
+  "preflight": "/home/wu/projects/HMASD/runs/flexible_skill_duration/b13_uniform_772903_a01/admission-preflight.json",
+  "process": {
+    "detached": true,
+    "identity": {
+      "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+      "kind": "linux_pid_start_ticks",
+      "pid": 81102,
+      "session_id": 81102,
+      "start_ticks": 34089039
+    },
+    "native_handle_kind": "posix_session",
+    "pid": 81102,
+    "process_group_id": 81102
+  },
+  "process_exit": "/home/wu/projects/HMASD/runs/flexible_skill_duration/b13_uniform_772903_a01/process-exit.json",
+  "published_remote": "origin",
+  "runner_process": {
+    "identity": {
+      "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+      "kind": "linux_pid_start_ticks",
+      "pid": 81103,
+      "session_id": 81102,
+      "start_ticks": 34089042
+    },
+    "pid": 81103,
+    "process_group_id": 81102,
+    "supervisor_pid": 81102
+  },
+  "schema_version": 1,
+  "sha": "91e344eecc9603f64f2e8c0504b92117fc35d5df",
+  "source_root": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/df0df5bd0d0e4f658812f0edfcb95126",
+  "stderr": "/home/wu/projects/HMASD/runs/flexible_skill_duration/b13_uniform_772903_a01/stderr.log",
+  "stdout": "/home/wu/projects/HMASD/runs/flexible_skill_duration/b13_uniform_772903_a01/stdout.log"
+}
