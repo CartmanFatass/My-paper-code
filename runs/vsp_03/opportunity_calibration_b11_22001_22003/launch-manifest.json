@@ -1,0 +1,96 @@
+{
+  "acceptance": "accepted",
+  "accepted_at": "2026-09-21T11:32:04.917147Z",
+  "bootstrap_command": [
+    "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/7ca47268dce6488ba1a6d81763d81b63/scripts/hmasd_admission.py",
+    "_run-admitted",
+    "--runner",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/7ca47268dce6488ba1a6d81763d81b63/scripts/run_vsp03_opportunity_calibration_b11.py",
+    "--output",
+    "/home/fires/.codex/worktrees/e481/hmasd-wsl/runs/vsp_03/opportunity_calibration_b11_22001_22003",
+    "--",
+    "--out",
+    "/home/fires/.codex/worktrees/e481/hmasd-wsl/runs/vsp_03/opportunity_calibration_b11_22001_22003",
+    "--seeds",
+    "22001",
+    "22002",
+    "22003",
+    "--launch-sha",
+    "9ab9ce6c990286ed9ba9c05cdb65473adc7bfd46"
+  ],
+  "claim_key": "1f97ada6733dfb8a10ce8260bdbc4105ae7a81eccb5adbde9e27a3477b2b6c21",
+  "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/1f97ada6733dfb8a10ce8260bdbc4105ae7a81eccb5adbde9e27a3477b2b6c21.json",
+  "command": [
+    "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/7ca47268dce6488ba1a6d81763d81b63/scripts/run_vsp03_opportunity_calibration_b11.py",
+    "--out",
+    "/home/fires/.codex/worktrees/e481/hmasd-wsl/runs/vsp_03/opportunity_calibration_b11_22001_22003",
+    "--seeds",
+    "22001",
+    "22002",
+    "22003",
+    "--launch-sha",
+    "9ab9ce6c990286ed9ba9c05cdb65473adc7bfd46"
+  ],
+  "command_sha256": "d38de8839be0460fea27c90344b49c7ee831d43d4424618ce34fb0d26fe1b03f",
+  "control_observation": {
+    "observed_at": "2026-09-21T11:32:04.729726Z",
+    "ref": "refs/heads/main",
+    "remote": "origin",
+    "sha": "43c93e4cfeac65f383c4ef6f4a49997fc1c89352"
+  },
+  "control_root": "/home/fires/hmasd-wsl",
+  "created_at": "2026-09-21T11:32:04.747407Z",
+  "cwd": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/7ca47268dce6488ba1a6d81763d81b63",
+  "direction": "vsp_03",
+  "host_identity": "Jacob",
+  "identity_command": [
+    "/home/fires/.local/share/uv/python/cpython-3.10.20-linux-x86_64-gnu/bin/python3.10",
+    "scripts/run_vsp03_opportunity_calibration_b11.py",
+    "--seeds",
+    "22001",
+    "22002",
+    "22003",
+    "--launch-sha",
+    "9ab9ce6c990286ed9ba9c05cdb65473adc7bfd46"
+  ],
+  "lead": "Codex DM (independent session)",
+  "manifest_ref": "/home/fires/.codex/worktrees/e481/hmasd-wsl/runs/vsp_03/opportunity_calibration_b11_22001_22003/launch-manifest.json",
+  "node": "local_linux",
+  "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/1f97ada6733dfb8a10ce8260bdbc4105ae7a81eccb5adbde9e27a3477b2b6c21.json",
+  "output_root": "/home/fires/.codex/worktrees/e481/hmasd-wsl/runs/vsp_03/opportunity_calibration_b11_22001_22003",
+  "preflight": "/home/fires/.codex/worktrees/e481/hmasd-wsl/runs/vsp_03/opportunity_calibration_b11_22001_22003/admission-preflight.json",
+  "process": {
+    "detached": true,
+    "identity": {
+      "boot_id": "0c48e432-2a4b-4bcc-9576-32954aa2c6b8",
+      "kind": "linux_pid_start_ticks",
+      "pid": 3619765,
+      "session_id": 3619765,
+      "start_ticks": 25275509
+    },
+    "native_handle_kind": "posix_session",
+    "pid": 3619765,
+    "process_group_id": 3619765
+  },
+  "process_exit": "/home/fires/.codex/worktrees/e481/hmasd-wsl/runs/vsp_03/opportunity_calibration_b11_22001_22003/process-exit.json",
+  "published_remote": "origin",
+  "runner_process": {
+    "identity": {
+      "boot_id": "0c48e432-2a4b-4bcc-9576-32954aa2c6b8",
+      "kind": "linux_pid_start_ticks",
+      "pid": 3619766,
+      "session_id": 3619765,
+      "start_ticks": 25275513
+    },
+    "pid": 3619766,
+    "process_group_id": 3619765,
+    "supervisor_pid": 3619765
+  },
+  "schema_version": 1,
+  "sha": "9ab9ce6c990286ed9ba9c05cdb65473adc7bfd46",
+  "source_root": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/7ca47268dce6488ba1a6d81763d81b63",
+  "stderr": "/home/fires/.codex/worktrees/e481/hmasd-wsl/runs/vsp_03/opportunity_calibration_b11_22001_22003/stderr.log",
+  "stdout": "/home/fires/.codex/worktrees/e481/hmasd-wsl/runs/vsp_03/opportunity_calibration_b11_22001_22003/stdout.log"
+}

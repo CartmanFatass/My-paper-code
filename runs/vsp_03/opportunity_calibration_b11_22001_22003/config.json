@@ -1,0 +1,35 @@
+{
+  "object": "VSP03_OPPORTUNITY_CALIBRATION_B11",
+  "seeds": [
+    22001,
+    22002,
+    22003
+  ],
+  "reference_seeds": {
+    "22001": 21801,
+    "22002": 21802,
+    "22003": 21803
+  },
+  "launch_sha": "9ab9ce6c990286ed9ba9c05cdb65473adc7bfd46",
+  "source_revision": "a5a87aa223727b2673781009c90810e7a4842584",
+  "reference_run": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/7ca47268dce6488ba1a6d81763d81b63/runs/vsp_03/opportunity_b08_21801_21803",
+  "collection": "split100 episodes0..511 in four batches of128 under R0",
+  "evaluation": "fresh split200 episodes0..4095; O_R0, frozen O_full, R0",
+  "primary": "descriptive O_R0-O_full",
+  "secondary": "descriptive O_R0-R0",
+  "package_intervention": "same public data rights and model family; collector and amount both change",
+  "planned_fits": 3,
+  "planned_neural_models": 0,
+  "planned_optimizer_steps": 0,
+  "optimizer_steps_scope": "neural updates only; see each block fit_optimizer_metadata for MLE work",
+  "planned_gradient_steps": 0,
+  "planned_collection_episodes": 1536,
+  "planned_evaluation_episodes": 36864,
+  "planned_total_episodes": 38400,
+  "planned_team_ticks": 1536000,
+  "planned_target_transitions": 3072000,
+  "threads": 1,
+  "device": "cpu",
+  "selection": "fixed collector, amount, references, seeds and panels; no sweep",
+  "claim_scope": "development only; no inferential, confirmation, noninferiority or equivalence claim"
+}

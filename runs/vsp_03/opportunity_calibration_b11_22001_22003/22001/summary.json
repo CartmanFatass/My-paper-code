@@ -1,0 +1,274 @@
+{
+  "seed": 22001,
+  "reference_seed": 21801,
+  "reference_identity": {
+    "sha256": "e16c7bb048c1544c2900fa3ae459898cdef64431adaf30613f2917c350b73bc7",
+    "bytes": 37008
+  },
+  "launch_sha": "9ab9ce6c990286ed9ba9c05cdb65473adc7bfd46",
+  "status": "complete",
+  "fits_started": 1,
+  "fits_completed": 1,
+  "fit_calls": 1,
+  "optimizer_steps": 0,
+  "optimizer_steps_scope": "neural updates only; MLE iterations are reported separately",
+  "gradient_steps": 0,
+  "neural_model_constructions": 0,
+  "neural_policy_forwards": 0,
+  "panels_started": 3,
+  "panels_completed": 3,
+  "collection": {
+    "episodes_started": 512,
+    "episodes_completed": 512,
+    "team_ticks": 20480,
+    "target_transitions": 40960,
+    "decision_rows": 3502,
+    "rollout_policy_forwards": 0
+  },
+  "evaluation": {
+    "episodes_started": 12288,
+    "episodes_completed": 12288,
+    "team_ticks": 491520,
+    "target_transitions": 983040,
+    "decision_rows": 95816,
+    "rollout_policy_forwards": 0
+  },
+  "arms": {
+    "O_R0": {
+      "episodes": 4096,
+      "return": 0.379931640625,
+      "fixed_clocks": 17.0,
+      "pending_clocks": 10.25244140625,
+      "eligible_decisions": 8.25244140625,
+      "blocked_pending": 2.0,
+      "blocked_final_clocks": 0.0,
+      "success_per_team": 1.034912109375,
+      "attempt_per_team": 2.0,
+      "failed_attempt_per_team": 0.965087890625,
+      "non_submission_per_team": 0.0,
+      "waiting_ticks_per_team": 35.009765625,
+      "expired_at_own_clock_per_team": 2.833251953125,
+      "blocked_final_ready_per_team": 0.0,
+      "submit_blocks_partner_next_clock_per_team": 1.0,
+      "submit_blocks_partner_last_clock_per_team": 0.0,
+      "wait_when_ready_per_team": 0.806884765625,
+      "submit_when_not_ready_per_team": 0.323974609375,
+      "panel_wall_s": 0.3408601630071644
+    },
+    "O_full": {
+      "episodes": 4096,
+      "return": 0.37999267578124996,
+      "fixed_clocks": 17.0,
+      "pending_clocks": 10.246337890625,
+      "eligible_decisions": 8.246337890625,
+      "blocked_pending": 2.0,
+      "blocked_final_clocks": 0.0,
+      "success_per_team": 1.034912109375,
+      "attempt_per_team": 2.0,
+      "failed_attempt_per_team": 0.965087890625,
+      "non_submission_per_team": 0.0,
+      "waiting_ticks_per_team": 34.9853515625,
+      "expired_at_own_clock_per_team": 2.829833984375,
+      "blocked_final_ready_per_team": 0.0,
+      "submit_blocks_partner_next_clock_per_team": 1.0,
+      "submit_blocks_partner_last_clock_per_team": 0.0,
+      "wait_when_ready_per_team": 0.802734375,
+      "submit_when_not_ready_per_team": 0.323486328125,
+      "panel_wall_s": 0.23719150299439207
+    },
+    "R0": {
+      "episodes": 4096,
+      "return": 0.35132080078125,
+      "fixed_clocks": 17.0,
+      "pending_clocks": 8.878662109375,
+      "eligible_decisions": 6.893798828125,
+      "blocked_pending": 1.98486328125,
+      "blocked_final_clocks": 0.016357421875,
+      "success_per_team": 0.949462890625,
+      "attempt_per_team": 1.81494140625,
+      "failed_attempt_per_team": 0.865478515625,
+      "non_submission_per_team": 0.18505859375,
+      "waiting_ticks_per_team": 31.21484375,
+      "expired_at_own_clock_per_team": 2.39794921875,
+      "blocked_final_ready_per_team": 0.005859375,
+      "submit_blocks_partner_next_clock_per_team": 0.9951171875,
+      "submit_blocks_partner_last_clock_per_team": 0.016357421875,
+      "wait_when_ready_per_team": 0.0,
+      "submit_when_not_ready_per_team": 0.0,
+      "panel_wall_s": 0.29431267801555805
+    }
+  },
+  "collection_wall_s": 0.061229385988553986,
+  "fit_wall_s": 0.008402704988839105,
+  "fit_optimizer_metadata": {
+    "method": "L-BFGS-B",
+    "start": {
+      "c": 6.0,
+      "p": 0.4
+    },
+    "bounds": {
+      "c": [
+        1.01,
+        30.0
+      ],
+      "p": [
+        0.01,
+        0.99
+      ]
+    },
+    "options": {
+      "maxiter": 200,
+      "ftol": 1e-12,
+      "gtol": 1e-07
+    },
+    "success": true,
+    "status": 0,
+    "message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+    "iterations": 9,
+    "function_evaluations": 39,
+    "negative_log_likelihood": 6826.727480180218,
+    "log_likelihood": -6826.727480180218,
+    "initial_negative_log_likelihood": 6916.290490536559,
+    "transition_observations": 5980
+  },
+  "public_endpoint_transitions": 5980,
+  "planning_wall_s_both_models": 0.0025424889754503965,
+  "model_parameters": {
+    "O_R0": {
+      "c": 4.182854951756999,
+      "p": 0.4972186599783547
+    },
+    "O_full": {
+      "c": 4.001402594298646,
+      "p": 0.4970716615455546,
+      "source_seed": 21801,
+      "identity": {
+        "sha256": "e16c7bb048c1544c2900fa3ae459898cdef64431adaf30613f2917c350b73bc7",
+        "bytes": 37008
+      }
+    }
+  },
+  "comparisons": {
+    "O_R0-O_full": {
+      "mean": -6.103515625000001e-05,
+      "conditional_world_sd": 0.019115258282241705,
+      "conditional_world_se": 0.00029867591066002664,
+      "worlds": 4096,
+      "signed_components": {
+        "return": -6.103515625000001e-05,
+        "fixed_clocks": 0.0,
+        "pending_clocks": 0.006103515625,
+        "eligible_decisions": 0.006103515625,
+        "blocked_pending": 0.0,
+        "blocked_final_clocks": 0.0,
+        "expired_at_own_clock": 0.00341796875,
+        "blocked_final_ready": 0.0,
+        "submit_blocks_partner_next_clock": 0.0,
+        "submit_blocks_partner_last_clock": 0.0,
+        "wait_when_ready": 0.004150390625,
+        "submit_when_not_ready": 0.00048828125,
+        "success_per_team": 0.0,
+        "attempt_per_team": 0.0,
+        "failed_attempt_per_team": 0.0,
+        "non_submission_per_team": 0.0,
+        "waiting_ticks_per_team": 0.0244140625
+      },
+      "scope": "descriptive development comparison"
+    },
+    "O_R0-R0": {
+      "mean": 0.028610839843749993,
+      "conditional_world_sd": 0.25979868964277003,
+      "conditional_world_se": 0.004059354525668282,
+      "worlds": 4096,
+      "signed_components": {
+        "return": 0.028610839843749993,
+        "fixed_clocks": 0.0,
+        "pending_clocks": 1.373779296875,
+        "eligible_decisions": 1.358642578125,
+        "blocked_pending": 0.01513671875,
+        "blocked_final_clocks": -0.016357421875,
+        "expired_at_own_clock": 0.435302734375,
+        "blocked_final_ready": -0.005859375,
+        "submit_blocks_partner_next_clock": 0.0048828125,
+        "submit_blocks_partner_last_clock": -0.016357421875,
+        "wait_when_ready": 0.806884765625,
+        "submit_when_not_ready": 0.323974609375,
+        "success_per_team": 0.08544921875,
+        "attempt_per_team": 0.18505859375,
+        "failed_attempt_per_team": 0.099609375,
+        "non_submission_per_team": -0.18505859375,
+        "waiting_ticks_per_team": 3.794921875
+      },
+      "scope": "descriptive development comparison"
+    }
+  },
+  "block_wall_s_through_publication_start": 1.7029686530004255,
+  "peak_rss_bytes": 332427264,
+  "peak_rss_scope": "single research process lifetime maximum, not block increment",
+  "artifacts": {
+    "O_R0.json": {
+      "sha256": "6e1ef5f648c3ce1d37a2e9ca6fce390579be270a82c611fd99376c3b583fd3d4",
+      "bytes": 3431641
+    },
+    "O_R0_decisions.npz": {
+      "sha256": "2569870070c123f11e32133eea021bb1be15a901cc435caaba251d26220fb6ba",
+      "bytes": 161684
+    },
+    "O_full.json": {
+      "sha256": "1147c54e78654d67d252b51a649412068de655641d697ac91f838de081336f83",
+      "bytes": 3431633
+    },
+    "O_full_decisions.npz": {
+      "sha256": "a9015c9a9e69f20b377d6d3fb707534ab446a3edec9c6465d2661357e514b995",
+      "bytes": 161599
+    },
+    "R0.json": {
+      "sha256": "ead0df761d61330883aa4ce07e2ea9ae869efd02e33dc5c705dd39eaf7b542bf",
+      "bytes": 3428274
+    },
+    "R0_decisions.npz": {
+      "sha256": "c86649cf95719a6c89d49cbef2fde1cf40abe1ccb67280527b32a8a60e9fdf19",
+      "bytes": 139283
+    },
+    "calibration_public_endpoints.npz": {
+      "sha256": "5ae01a4440b955ec3dd2e98d77db68c73941c6a82d6713e89bc9c13c993071c3",
+      "bytes": 14361
+    },
+    "collection_batch_00.npz": {
+      "sha256": "45ad86916ff8f71bc432d8731e4d8c9e67af31796eb22bf777a3550d3895898a",
+      "bytes": 81935
+    },
+    "collection_batch_01.npz": {
+      "sha256": "cc1335ccdffbd2b999f8a995a5693020473e3ba88bed86297a4bc4dcc0aa213b",
+      "bytes": 81672
+    },
+    "collection_batch_02.npz": {
+      "sha256": "4e56cbc1b28f71224c1f631c87a737cd6d3af8817ab5c031b38eead6004adaca",
+      "bytes": 81968
+    },
+    "collection_batch_03.npz": {
+      "sha256": "42efc7281b4307a664e257414c1d2e1e8a2318aa2df48c7fea5aaf4bacc37f12",
+      "bytes": 81982
+    },
+    "evaluation_worlds.npz": {
+      "sha256": "09dbd2713da6db78a2ce2548bd8040ed0c835a8942f6ad5e4b8e21493319210c",
+      "bytes": 2473897
+    },
+    "fitted_model.json": {
+      "sha256": "42af1fda7726414cd4038e9ea25685cb9bb9ffe2a5aea7387dc662cfc36afae9",
+      "bytes": 19661
+    },
+    "paired_differences.json": {
+      "sha256": "671457bbef4f8dfe4fae2e785bdd35a885eac5be289f82e6eb458b47d6258c3e",
+      "bytes": 5163565
+    },
+    "planner_tables.npz": {
+      "sha256": "2eb3117f04da8a1d1ffaecfb606a82deab5e39d94dafe27a2219d1b35231b27c",
+      "bytes": 248528
+    },
+    "public_endpoint_counts.npz": {
+      "sha256": "9fca8c6ce7420797682043dd45db725a86c00d7d1e168be57c1147dc56641db4",
+      "bytes": 1373
+    }
+  }
+}
