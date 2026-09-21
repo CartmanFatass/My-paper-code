@@ -5116,3 +5116,87 @@ would require additional assumptions even without the eligibility difference. B0
 to schedule its own future decisions or avoid a poor continuation choice. Small d is not
 proof of an ineffective gate, and gate activity is not proof of net benefit; the actual
 whole-trajectory comparison with ordinary feedback remains decisive for practical retention.
+
+## 2026-09-21 00:43 UTC — B08 completed: active rich gating, no retained return gain
+
+All three original admitted handles exited 0, with consistent native identities and valid
+exit witnesses (last exit 00:37:58 UTC). Six gate fits completed at the fixed 2048-episode
+horizon; no retry, expansion, new foundation fit or Pro call. Source is
+`d39483ace5767817cc7df45247516eab642b8a41`. All 576 final evaluation episodes completed.
+Actual training/evaluation team steps are 3145728/147456, total 3293184. Gate/critic Adam
+calls are 49152/49152, total 98304; evaluations have zero updates. These equal the declared
+exposure. Full invocation walls were 1454.61/1450.62/1454.95 s; CPU seconds
+1453.47/1449.34/1453.64; single-process peak RSS 364972/362000/362824 KiB. From first
+acceptance to last exit the parallel batch elapsed 1533.52 s, not the sum of fit walls.
+
+I independently checked every retained artifact hash/byte count, actual saved Adam step
+counters, frozen-foundation digests, exact command/previous-command and eligibility laws,
+coin-based KEEP decisions, paired coin tensors, equal first two predecision contexts,
+all complete reward arrays reduced back to J, and the declared context columns. The native
+status tool also reports all three handles exited with consistent records. No model
+forward, native transition or optimizer call was added by this reconstruction. Episode
+and update logs have exactly 4288 and 2048 rows per block, the correct world seeds and
+256-row update minibatches. Summary hashes, in block order:
+
+- 8951: `3b5f8e7f7835487a7d0934452333b51c7dd6bf8becbf26ff30f4965a01e207f5`
+- 8952: `628b4ba3175faf3291d62a026a2d0f2c43230fb1ec0a91514eba029424f1fd3e`
+- 8953: `a031cbd469079f77f64a43c288dfd6de83f2be9c4ab91d8151bfa41a5da65522`
+
+R denotes contextual, S the learned affine command-distance gate, G the frozen ordinary
+mean controller. Positive contrasts favor the first arm.
+
+| Gate/world block (foundation) | R J | S J | G J | R-S | R-G | S-G |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| 8951 (8941) | .28024186 | .28034141 | .27998354 | -.00009955 | +.00025833 | +.00035787 |
+| 8952 (8942) | .26728878 | .26788283 | .26743957 | -.00059405 | -.00015079 | +.00044326 |
+| 8953 (8943) | .24596557 | .24552155 | .24602927 | +.00044402 | -.00006370 | -.00050773 |
+| Mean of three development blocks | | | | -.00008319 | +.00001461 | +.00009780 |
+
+Conditional paired-world SEs are .00035263/.00112511/.00119289 for R-S and
+.00081462/.00014979/.00009394 for R-G. These describe each 64-world panel conditional
+on its learned policies; they do not turn worlds into independent training replicates.
+There is no equivalence or population-effect claim, and these selected foundations are
+still exploratory development instances. The predicted useful R improvement over both
+references did not occur. The practical choice on these retained bases is G, without the
+additional gate training or gate computation.
+
+**Behavior and learning.** R's eligible KEEP probabilities average .1995/.0558/.0253 with
+SD .03928/.01522/.002672. R gate displacement is 4.194/5.263/5.908 and critic displacement
+4.007/5.307/5.576. Its first-to-last training-quarter KEEP means fall .417->.272,
+.529->.107 and .482->.0237; final evaluation uses the final weights, not a quarter choice.
+Both critics' last-512-minibatch losses are lower than their first-512 losses. The
+corresponding R and S training-quarter J values remain very close on their common worlds;
+no ordinary training-return panel exists. The rich module learned and changed behavior,
+but that does not establish that its conditional decisions were beneficial. Particularly
+on the last two foundations, approaching G is consistent with suppressing reuse.
+
+S's probabilities stay near .485/.484/.488 with SD only 3.4e-6/5.3e-7/1.0e-6. Observed
+eligible d has median near 1e-7 and p90 around 1.4e-5 to 1.9e-5. Its learned slopes
+(-.08756,+.02558,+.03221) generate p90-minus-p10 logit ranges around 1e-6. Thus the realized
+S is nearly scalar: the study does **not** establish failure of a numerically well-conditioned
+learned distance rule. R also fails to improve G, however, so rescaling S or enlarging its
+learning solely to complete a comparator matrix lacks a practical retention reason here.
+
+Mean similarity must not erase contrary trajectory evidence. R-G on 8951 ranges from
+-.02194 to +.04677 across individual worlds; S-G reaches +.06990 on 8952 and ranges from
+-.06248 to +.04177 on 8953. These are single fixed-coin realizations of full-trajectory
+differences, not proof of predictable conditional expected END advantage. Small immediate
+d is not a global value bound. Neither the old B03/B05/B07 adverse evidence nor their
+favorable exceptions is rewritten by B08.
+
+**Update and one remaining observation.** Independent ResearchCritic read the completed
+summaries and agrees with keeping G and not starting confirmation or a d-rescaling repair
+fit. Its material caution about world-level cancellation is adopted above. This weakens
+the investment case for further gate learning on the present frozen bases; it does not
+disprove adaptive termination or conditional opportunity under other controllers.
+
+Before closing this specific learning attempt, perform one bounded, post-result reduction
+of already saved ordinary trajectories: the prospectively saved world indices 0,8,...,56,
+eight per foundation. Jointly inspect normalized own positions, outward commands at exact
+boundaries and next recorded position changes by fixed quarters of the episode. A boundary
+fraction alone cannot distinguish clipping from stable commands that still move the UAV.
+This is a fixed subsample description, not a new policy panel or identification of failure
+cause. No fit, model forward, environment/replay step, selected-world reconstruction or new
+Pro is planned. The observation can sharpen a re-entry condition; it does not automatically
+authorize another study. The running-operation observation responsibility is now closed;
+scientific judgment and publication continue in this notebook.

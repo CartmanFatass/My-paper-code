@@ -1,0 +1,11 @@
+{
+  "claim_key": "10451d173efa2393f810db83381c2ee68e83b6aa45ad23c17782d6188601a279",
+  "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/10451d173efa2393f810db83381c2ee68e83b6aa45ad23c17782d6188601a279.json",
+  "manifest_ref": "/home/fires/.codex/worktrees/1275/hmasd-wsl/runs/ucope/frozen_mean_gate_b08_8953/launch-manifest.json",
+  "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/10451d173efa2393f810db83381c2ee68e83b6aa45ad23c17782d6188601a279.json",
+  "pid": 2817214,
+  "runner_pid": 2817215,
+  "schema_version": 1,
+  "status": "accepted",
+  "updated_at": "2026-09-21T00:13:42.646505Z"
+}
