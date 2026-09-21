@@ -3295,3 +3295,56 @@ reproduce the all-equal map's ranking and most of its spread on 3/3. No placebo 
   before *which* is learnable.
 Before any fit: a prospective entry with arms, blocks, horizon, seeds and planned fits, and an
 independent review of the learner change (I1 touches the shared coordinator update).
+
+## 2026-09-20 20:36 PDT — owner decision: I1 goes first; I2 and I3 kept as reserve ideas with their material
+
+**Owner, 2026-09-20:** proceed with the recommended I1; record the material for the other two
+options as later alternatives. This entry is that record; it declares no run for I2 or I3.
+
+### Reserve idea I2 — longer high-level commitment
+- *What:* train D with both caps above 10 (candidates 50 and 100; `skill_cap_k_max` and
+  `team_cap_k_Z`, read once at construction, `agent.py:482-484`; cadence at `agent.py:2596,
+  2613`). `config.k` stays 10: it is only the low level's BPTT chunk (`agent.py:6306-6309`).
+- *Measured basis (B12, fixed weights):* per-decision η² of the coordinator's own advantage by
+  label rises from .0001–.0003 (cap 10) to .001–.003 (50), .002–.009 (100), .019–.033 (500);
+  η² × rows per rollout 8 → 48 → 72 → 50, 16 → 19 → 29 → 40, 25 → 28 → 16 → 29 on the three
+  blocks; a label's implied all-equal spread .02–.03 J at cap 10, .03–.07 at 50–100, .06–.09
+  at 500; episode J within ±.01 of cap 10 at every cap.
+- *What B12 cannot say:* the value head off cap 10 is arithmetic (trained on ten-step
+  targets); the low level would be retrained under long commitments and may not keep six
+  distinct policies (discriminator accuracy is already .25–.30 against .167); coordinator rows
+  per rollout fall to 160 (cap 50) or 80 (cap 100) with the same 15 epochs, so
+  `coordinator_batch_size` and the entropy balance change meaning; B07's cadence-1 arm needed
+  14 GB because its single minibatch held 8,000 rows — the opposite regime, no memory risk
+  here.
+- *Prediction if run alone:* law still within ±25 % of uniform (the credit is still a shared
+  return against a label-free baseline; η² .003–.009 is thirty times better and still small),
+  J unchanged within .03. I2 is more promising combined with I1 than alone.
+- *Discriminating observation:* label-law entropy by rollout and the fixed-weight label map
+  (B09) at the end; cost 3 fits for one cap, 6 for two.
+
+### Reserve idea I3 — lower coordinator entropy coefficient
+- *What:* `lambda_h` .07 → smaller (candidates .02, .007) for the coordinator's loss only
+  (`agent.py:6200`; constant on this construction, `config_1.py:165`). Check first whether
+  the same attribute feeds any low-level term — B03 found the flat learner's action-noise
+  inflation came from `lambda_l`, a different coefficient; the two must not be confused.
+- *Measured basis:* stationary maximum-entropy law q ∝ exp(A / λ_h); standardised label
+  advantages of order .01–.04 (B11) against .07 give shares within ±15 % of uniform, which is
+  what is observed (.14–.19).
+- *Why not alone:* the per-rollout best label by the coordinator's own advantage changes
+  almost every rollout (B11: [1,2,1,3], [5,4,4,2], [3,1,4,2]); a lower temperature sharpens
+  onto that noise. Prediction if run alone: entropy falls below 1.6, the most-used label at
+  the end is in the fixed-weight top two on at most 1/3, J unchanged or lower, and unused
+  labels' policies degrade from lack of exposure.
+- *When it becomes useful:* after I1 (or I1 with I2) gives a credit whose ranking is stable
+  across rollouts; then the temperature is the knob that converts a stable ranking into
+  exploitation. Cost 3 fits per value.
+
+### Also kept from this series (not ideas, facts a later design should reuse)
+- Action noise: the state-independent log-std grew to ≈ 2.9 units and costs every label
+  .05–.16 J against the mean action (B10); a D-side analogue of B03's flat-learner finding,
+  untested as a lever.
+- Required comparators for any later arm on this learner: as trained, random every 10, best
+  constant label (B08, B09).
+- A fixed-weight panel is exact only on the training host; node fast-forwards delete tracked
+  run records from the node's sparse checkout (restore before a probe).
