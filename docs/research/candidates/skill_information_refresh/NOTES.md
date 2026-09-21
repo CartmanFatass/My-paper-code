@@ -2273,3 +2273,430 @@ next observation is worth doing and what each result would justify retaining or 
 No compulsory extra candidate, seed batch, profiling test or approval layer.
 
 ### Answer
+
+Saved from chat (complete fallback; no GitHub answer commit):
+
+GitHub 文本读取可用，但本会话没有可调用的文件更新或提交接口，因此未写回，也没有产生 Answer commit。 已重新读取指定分支的最新目标：本次检查时，C07 的 ### Answer 仍为空，文件 blob SHA 为 9d2197e1253551294814a2f47273af5750eb200d。这不是答复提交；仓库内容未被修改。以下给出完整答复。
+
+Answer
+一、结论与实质分歧
+
+建议进行这一次固定 C07 比较，保留现有三臂、五组世界/规划随机种子、P32/H96、零阈值、0.05 任务尺度和不追加批次的约束。它能够回答一个有用的新问题：C06 中已选定的 NEAR_COMMIT 程序，对 ACTIVE_FIRST 的收益能否在新世界上超过预先声明的任务尺度，以及 LONG 的额外收益能否被有依据地限制在该尺度以下。 这不是重复寻找更有利的 LONG，也不需要加入学习器。
+
+MATERIAL_DISSENT: yes，范围限于次比较的统计保证及其结果分支。 我不反对主比较、样本单位、阈值或成本。需要修正的是：对于 C06 中仅一个世界非零的 LONG−NEAR，不能仅凭普通正态区间上端小于 0.05，就把描述性近似升级成有可靠覆盖保证的“额外期望收益低于 0.05”。这个问题可以只改最终读数计算，不增加实验、候选或规划调用。下文给出一个明确、可预先固定的有限样本上界。
+
+还应补齐一个结果分支：主比较通过，但 LONG 的额外收益既未被限制在 0.05 以下，也未被证明达到 0.05。 这时可以保留 NEAR 相对 ACTIVE_FIRST 的结果，但“LONG 没有达到任务尺度的增量”仍未解决；不能把上界未通过反过来解释成 LONG 已有实质增益。
+
+二、C06 足以支持这次确认，但不支持哪些更强说法
+
+我核对了固定来源中的 C06 结果条目、摘要的最终读数和选择文件。两个规划臂均在预定开发候选中选出零阈值。最终摘要对应 NEAR 完成 3,404 个任务、LONG 3,406 个、ACTIVE_FIRST 3,370 个；NEAR 相对 ACTIVE_FIRST 的均值增量为 0.1328125，而 LONG 相对 NEAR 的均值增量为 0.0078125。NOTES 进一步报告前者为 21 正、2 负、233 平，后者仅一个正世界、255 平。这是进行固定程序确认的具体依据，不是仅因研究方向尚未被否定而再买一批实验。
+
+C07 将主比较从 C06 的 LONG−NEAR 改为 NEAR−ACTIVE_FIRST，是由探索结果提出一个新的、事先声明的确认问题。声明已明确承认：C06 的开发面板和最终面板都影响了本次选择，不再把它们当确认数据。新批次不重用这些世界，也不重新选阈值，因此不构成对 C06 原主比较的事后改名。
+
+我同意 DM 对解释的收窄，但建议坚持以下准确措辞：
+
+支持的解释是：在这个已知模型、固定技能与接收控制器、有限通信配额的宿主上，按原生任务后果评估发送时机，可能比只看活动阶段的规则更有价值。被削弱的解释是：必须把估值继续延长到最近缓存敏感机会所属承诺期之后，才能取得大部分收益。它不等于“最近承诺期已是充分统计量”，也不等于“更远期价值不存在”。NEAR 本身仍是多步规划，而不是一步 VoI。
+
+NOTES 中的 64 个盲选根、少量非零尾项、缺少严格非零符号翻转，以及大量发送时刻差异，是解释范围的约束；它们不能替代完整部署结果。尤其不能把“NEAR 捕获了观察到的 34/36 个额外完成任务”写成已识别的因果贡献比例。那些行为与根诊断的全量数组，本次没有独立重算，仍属于作者归约。
+
+三、世界级推断成立；不需要把样本量强行降为五
+1. 明确估计对象包含有限规划随机性
+
+建议把主、次估计对象明确写成：
+
+μ
+NA
+	​
+
+=E
+W,U
+	​
+
+[R
+NEAR
+	​
+
+(W,U)−R
+AF
+	​
+
+(W)],
+μ
+LN
+	​
+
+=E
+W,U
+	​
+
+[R
+LONG
+	​
+
+(W,U)−R
+NEAR
+	​
+
+(W,U)].
+
+这里 W 是声明的外生任务距离和移动随机性，U 是固定 P32 程序的合成规划随机流。期望针对的是实际有限采样、实际近似信念、实际 tie rule 的程序，不是无限粒子或精确 belief 下的理想规划器。两个规划臂共用 U 是配对降噪设计，不改变各臂的边际估计对象。代码的真实世界流和合成流分别按世界及根时刻寻址，支持这种读法。
+
+根上保存的 Monte Carlo SE 不应再加到最终世界差值的 SE 上。前者描述一次局部估值的抽样误差；后者已经包含有限规划随机性如何通过行动影响最终回报。它们不是两个可以直接相加的独立误差项。
+
+2. 共享 master seed 不自动产生块内随机效应
+
+实际代码给出了比“种子数字不同”更具体的依据：
+
+真实世界使用 [master, phase, world_id, 1/2] 分别生成移动和任务；规划使用 [model_seed, phase, world_id, root_tick, 606]。PhysicalBelief 按行传播和归一化，没有跨世界拟合的参数或共享估计量。NEAR 虽然为了批处理执行到批内最长端点，但各粒子回报用自己的 near_end 掩码计分；其他世界的较晚端点增加计算，不应改变该世界的选定回报和动作。
+
+因此，在常规伪随机流近似独立的模拟假设下，1,280 个独立寻址的完整世界是合理的推断单位。没有发现必须仅用五个 block 均值计算标准误的程序依赖。NumPy 官方文档支持以唯一整数标识与 master seed 的序列构造分离随机流，同时把其独立性表述为高概率的伪随机性质，而不是形式上的数学独立证明。这里不需要因为 master 数字相邻就换掉已声明种子。
+NumPy
+
+五个 block 仍应分别报告；但它们不是五次重新训练、五次重新开发选择，也不包含模型结构误差。若 C07 新执行器引入跨世界在线调整或共享校准，上述判断才需要改变。配对应使用完整的 (block, world_id)，不能把不同 block 中重用的 world_id=0 混成同一世界。
+
+3. 主读数可以保留，需明确它是近似区间
+
+令 D
+bw
+	​
+
+=R
+NEAR,bw
+	​
+
+−R
+AF,bw
+	​
+
+，合并 n=1280 个差值，采用样本标准差 s
+D
+	​
+
+。主规则可保持：
+
+L
+N
+	​
+
+=
+D
+ˉ
+−1.96
+1280
+	​
+
+s
+D
+	​
+
+	​
+
+,
+
+并且仅在
+
+b
+min
+	​
+
+D
+ˉ
+b
+	​
+
+>0且L
+N
+	​
+
+>0.05
+
+时保留所声明的主结果。
+
+这里的“五块均为正”不意味着每块区间下端都要大于零，也不要求每块均值超过 0.05；它只是额外的预写一致性条件。边界相等不通过。标准差应使用 ddof=1，不能把 32 粒子、根数或 3,840 个臂级 episode 当成分母中的独立样本数。该规则与当前声明一致。
+
+应写“近似双侧 95% 正态均值区间”，而不是有限样本、分布无关的 95% 保证。双侧 95% 区间的一个端点对应约 2.5% 单尾；不要在实现时静默换成单侧 95% 的 1.645。置信水平描述的是区间构造方法的重复抽样覆盖，不是“真实均值有 95% 概率位于本次区间中”。
+NIST
+
+0.05 的任务尺度也可保留。 它是每 20 个 episode 多一个完成任务，或 14 个任务分母下约 0.0035714 的 service fraction。声明已经把它限定为 DM 的宿主内保留尺度，而非外部部署效用、实时成本补偿或通信收费；不需要为了确认而重新标定一个外部价格。
+
+四、需要改变的是稀疏次比较的上界判据
+为什么普通正态上端不够
+
+C06 的 LONG−NEAR 是一个 +2 和 255 个零。C07 增加世界数后，非零事件仍可能很少。若最终全零，普通样本方差为零，正态区间也退化为零；这不能排除未观察到的低概率大差值。把临界值从正态换成 t，或者对全零样本做普通重采样，都不会自动恢复这些未观察到的尾部。这里的问题是尾部覆盖，而不是要求原生回报逐世界服从正态。
+
+下面是一个统计反例，不是对 CrossingHost 实际分布的断言，也不是新模拟。设独立差值 Z 以概率 0.05/14 取 14，否则为零，则真实均值恰好是 0.05。在 1,280 个样本中，只观察到零次或一次非零时，普通双侧 95% 正态区间上端已经小于 0.05；该事件的精确二项概率约为 0.0573，高于这一上端名义上的 0.025 单尾错误率。这个反例说明：仅有“大样本数＋回报有界”不足以保证该稀疏上界的标称覆盖。它不证明本宿主一定具有这种极端尾部，但当前已读证据也没有证明可以排除所有相关尾部。
+
+一个不增加实验的具体修正
+
+建议保留完整正态区间供描述，但将“LONG 的额外期望收益低于 0.05”的判据改为下面这个预先固定的有限样本上界。 不在结果之后从多个区间中挑最有利的一个。
+
+每个 episode 至多完成 14 个任务，因此
+
+Z
+r
+	​
+
+=R
+LONG,r
+	​
+
+−R
+NEAR,r
+	​
+
+≤14.
+
+这是由固定任务数得到的全局上限，不能用 C06 观察到的最大差值 2 替代。声明中的 H96、12/16 周期及每世界 14 个任务提供了这个界。
+
+取 α=0.025、n=1280，定义
+
+U
+F
+	​
+
+=14−exp
+	​
+
+n
+r=1
+∑
+n
+	​
+
+log(14−Z
+r
+	​
+
+)+logα
+	​
+
+	​
+
+.
+	​
+
+
+若存在 Z
+r
+	​
+
+=14，取 U
+F
+	​
+
+=14。只有 U
+F
+	​
+
+<0.05 时，才给出低于任务尺度的单侧界结论。
+
+这是本答复根据有界性和独立性推导的建议，不是声称仓库已实现了它。其理由很短：对于待检验的均值下界 m<14，若真实均值 μ≥m，则
+
+T(m)=
+r=1
+∏
+n
+	​
+
+14−m
+14−Z
+r
+	​
+
+	​
+
+≥0,
+
+且在声明的独立同律抽样下，
+
+E[T(m)]=(
+14−m
+14−μ
+	​
+
+)
+n
+≤1.
+
+由 Markov 不等式，
+
+Pr{T(m)≥1/α}≤α.
+
+将这个检验反演，便得到上式的单侧、至少 97.5% 覆盖上界。它与原双侧 95% 区间上端的单尾水平相配，不要求正态近似，也不需要新增仿真。
+
+这个界可能保守；保守导致“不确定”应被接受，不能据此追加世界。另一方面，它并未把本次预算变成无法回答的问题：纯代数地说，若 1,280 个差值全部为零，U
+F
+	​
+
+≈0.04029，仍可低于 0.05，但不会虚报“额外期望收益精确为零”。这不是 C07 结果预测。
+
+主比较可以继续使用声明的常规近似区间，并明确近似性质；本次必须修正的是将极稀疏次比较的正态上端直接当作可靠收益界。原来的完整 LONG−NEAR、LONG−ACTIVE_FIRST 区间和所有差值仍应报告。对主、次声明不作联合覆盖保证的限制也应保留；不能把两条单独结论合写成具有未经证明的联合 95% 置信度。
+
+五、冻结的程序与比较器不需要再改
+
+实际执行代码已经采用修正后的 NEAR 端点：寻找接收者第一次缓存敏感的边界或 SHARED gate 机会，然后计到包含该机会的承诺期结束；不追逐第一次有利差异。根后两分支都用 ACTIVE_FIRST，实际部署双方重新规划。这是一个清楚的有限程序对象，而不是最优控制保证。
+
+特别确认一项与先前建议不同、但已在结果前由 DM 固定的细节：实际 C06 在估值恰好等于阈值时采用 ACTIVE_FIRST，不是一律 HOLD。 C07 声明正确保留了这一点。零阈值、32 粒子和大量精确零估值共同决定了程序行为；现在改 tie rule 就不再是在确认已观察的程序。
+
+belief.py 使用完整有限物理支持，按发送时间约束已交付包，再传播物理转移；它明确省略状态依赖发送时机和沉默的似然，并在零支持时抛出技术异常，而非用真实 peer 回填。study.py 在请求固定后才保存特权诊断。代码阅读支持当前信息边界的声明，但不等于本次已经独立审计了全部运行数组。
+
+因此，C07 不必加 exact-belief 臂、神经臂、另一种 continuation、更多粒子或新的根诊断。它确认的是已选定包的结果，不识别其中每个组件的贡献。ACTIVE_FIRST 是有既有证据支撑的强简洁参照，但确认 NEAR 胜过它仍不等于胜过所有合法规则。已知模型、额外局部历史处理与计算工作必须继续放在收益旁边说明。
+
+六、成本核算成立；“简化”仅是相对 LONG
+
+规划总量的整数核算正确：
+
+项目	C07 固定数量
+世界/规划 master 对	5
+独立世界	1,280
+三臂实际执行的 episodes	3,840
+实际宿主 team ticks	368,640
+训练 fits / optimizer updates	0 / 0
+合成 model branch ticks 保守上界	377,487,360
+
+最后一项是
+
+2,560×72×32×2×32.
+
+它不包含完整的过滤、初始化、随机数生成、复制和记录开销，声明已承认这些额外工作。
+
+约 1.35 亿 model transitions 和约 200 秒的科学进程时间，有 C06 最终面板的直接量级依据。 摘要中的 C06 最终 model transitions 为 27,066,368，乘五是 135,331,840；最终阶段时间约 40.6539 秒，乘五约 203.27 秒。这些只是对已读计数的比例计算，不是新测量、运行上限或成功保证。不能用包括阈值开发的 C06 总时间直接乘三，也不能把全部研究时间等同于科学子进程时间。
+
+还有一个会影响成本解释的实际代码细节：合成随机数组每次按完整 record.horizon 生成，而 NEAR 的批处理还执行到批内最长需要端点。因而粒子平均近端点约 14.7 ticks，并不意味着它的全路径成本只有 LONG 的一半。作者报告的最终面板时间是 NEAR 18.44 秒、LONG 21.64 秒、ACTIVE_FIRST 0.559 秒；这支持 NEAR 在本次实现中比 LONG 便宜，却仍约为 ACTIVE_FIRST 的 33 倍。
+
+所以，确认通过后的结论也应是“取得超过声明尺度的任务收益，并相对 LONG 保留较简单的估值目标”，而不是“计算高效”“通信更省”或“净部署效用为正”。不需要额外 profiling 批次；在既定执行中完整记录实际成本即可。
+
+七、预先写清结果会留下什么、停止什么
+结果	应保留的判断与行动
+主规则通过，且 U
+F
+	​
+
+<0.05	保留 NEAR 对 ACTIVE_FIRST 超过声明任务尺度的结果；把 LONG 的额外期望收益限制在该尺度以下。采用 NEAR 作为这个宿主、这套模型与计算条件下的规则，并结束本轮 LONG 增量追逐。
+主规则通过，但 U
+F
+	​
+
+≥0.05	NEAR 的主结果成立，LONG 的额外收益尚未被界定到要求精度。不能把“未能界定”写成“LONG 已有实质增益”；报告完整次比较，保留简化问题的不确定性，不自动扩批。
+主规则未通过	不作所声明的确认性改善结论。区分小正收益、区间跨尺度、某块非正与明确不利结果；保留 C06 的探索证据及便宜的 ACTIVE_FIRST，不把未通过写成等价或刷新价值不存在。
+技术失败或缺失配对	保留原操作和可信的部分事实；不补零、不替换种子、不把部分完成当固定 1,280 世界确认，也不自动重跑。
+
+若次比较出现明确的、与原简化预期相反的较大 LONG 增益，应保存它，而不是用“次要”把它压掉；但不因此事后将本次改造成第二个确认性 superiority 研究。原声明已经要求保留这种反证，建议继续遵守。
+
+这次比较值得做的原因，是它可能让方向从“一个已选面板上的小型规划结果”走到“按固定任务尺度读过的新世界结果”，并决定是否保留较近的估值目标。它不需要回答模型学习、神经方法、精确信念、真实 UAV 或任意 horizon。四种判断继续分开：合法刷新价值的机会、合法表示、有限学习、完整程序收益不是同一个结论；C07 对学习没有新增证据。现行治理允许这种有界确认，也不把零训练程序机械套成需要新增训练 seeds 的研究。
+
+八、实际来源、未读缺口和执行边界
+
+推理使用附件指定的 8a651c9a0a299fa6f5e90dca5f3c5ecc72655c5b，而不是用可写分支的后续变化替换科学输入。已阅读全文包括：C07 附件和完整 claim note；NOTES 中 C06 完整问题、保存的完整 Answer、DM adoption、最终前瞻声明及完整结果读数；constitution 第 1–6、8 节；指定 scientific-tools 方法。实际 planning.py、study.py、belief.py 均按执行来源 45a1f534539032c021f5d44a7d78f4b503b0ba51 读取，并补读了同来源 C01 的随机世界生成及控制函数依赖。
+
+hmasd-pro-question-c07-near-com…
+
+结果核对覆盖摘要中的状态、配置、成本、选择和最终读数，以及完整 selection.json。这不是原始制品的独立全量审计。 episodes.jsonl 的文件读取接口返回了空正文；改用 raw 内容接口又返回“文件可能过大或不支持”的读取错误，因此未取得可用于完整归约的正文。不能把这一工具行为解释为仓库文件为空或实验结果缺失。本次也没有读取并重算 48 个最终 NPZ、64 个根 NPZ，或重新核验全部原生进程退出证据；这些核验仍来自 NOTES 中作者的完整读数。
+
+补充查阅的 NumPy 与 NIST 文档只用于随机流和区间解释，不作为 HMASD 经验结果。上面的有限样本上界、反例概率和成本比例是明确列出的数学推导与整数计算，没有运行宿主、模型前向、规划采样、训练或结果性仿真。也没有审阅并接受尚待完成的 C07 新执行器，或声称已经验证其当前启动条件。
+
+最终建议：保留这一固定确认批次；主规则和程序参数不变，将稀疏 LONG−NEAR 的收益界改为预先固定的有限样本上界，并补齐“主结果通过、简化证据仍不确定”的分支。随后按一次完整结果作保留或停止判断，不因符号或区间不理想而追加搜索。
+
+
+## 2026-09-21 — C07 full Pro reading, finite-bound adoption and final scope
+
+Saved the complete fallback above from the single accepted Jev operation
+`hmasd:75e2dda9853ad145c995c67f58dbe01a087db9a166675089aff965570ab2ffc1`.
+No answer commit exists; `9d2197e1253551294814a2f47273af5750eb200d` is the fetched
+NOTES blob, not a commit. Complete answer SHA-256 excluding transport final newline:
+`820ec25cde0a93307475fe58fbb3684ed953281ef6ba0cceacd6327c07caaf34`.
+Transport reconciled empty target, saved full text and closed its tab; DM independently
+verified the unchanged remote/local target before taking back the subsection. No resend.
+
+DM read the full answer. Adopt its material dissent on the sparse secondary upper bound
+and the missing inconclusive-simplification branch. C06's LONG-NEAR point difference
+comes from just one world. A zero empirical variance cannot establish a reliable tail
+bound, and more worlds alone do not make a normal interval finite-sample-valid. Preserve
+the original normal interval only as a description. No experimental parameter, seed,
+particle count, threshold, tie, world panel, horizon, continuation or primary criterion
+changes. In particular, the primary remains a explicitly approximate normal95% mean
+interval and all-five-positive rule, not a distribution-free guarantee.
+
+The expectation includes both independent world randomness W and finite P32 planning
+randomness U: E[R_NEAR(W,U)-R_AF(W)] and E[R_LONG(W,U)-R_NEAR(W,U)]. Common planner
+streams couple the two modeled arms; there is no world-shared estimated parameter or
+online adaptation. In the ordinary independently addressed pseudorandom-stream model,
+1,280 complete paired worlds are the units. Root MC SE is not added again to world SE.
+The five block reports are a consistency check, not five training histories. Exact RNG
+independence is a simulation assumption, not a cryptographic/mathematical guarantee.
+
+For the secondary define Z_r=R_LONG,r-R_NEAR,r, B=14, alpha=.025 and n=1280.
+Use the single predeclared finite-sample upper bound
+
+    U_F = B - exp((sum_r log(B-Z_r) + log(alpha)) / n).
+
+If any Z_r=B, set U_F=B. This uses the global task-count bound, never the observed max.
+Only U_F<.05 supports a one-sided below-task-scale conclusion; equality does not pass.
+The original paired normal interval remains printed but does not decide this bound.
+DM independently checked the proof: for any m<B with true mean mu>=m, the nonnegative
+T(m)=product_r[(B-Z_r)/(B-m)] has expectation [(B-mu)/(B-m)]^n<=1 under independence
+and a common mean. Markov gives P(T(m)>=1/alpha)<=alpha. Inverting this test yields U_F;
+thus P(U_F<mu)<=alpha. This does not rely on normality or sample variance. Alpha=.025
+matches the original upper endpoint's nominal one-sided tail. No combined main/secondary
+coverage guarantee is claimed because the primary remains approximate.
+
+Adopt the full result branches: primary pass plus U_F<.05 supports NEAR for this host
+and ends this LONG increment pursuit; primary pass plus U_F>=.05 retains the main
+result but leaves meaningful LONG increment unresolved, with no automatic extension;
+primary failure gives no stated confirmation claim; technical failure/missing pairs
+cannot substitute partial evidence for the full frozen batch. No extra model arm,
+exact-belief study, new tuning or profiling run is added. NEAR is itself multi-step;
+its observed34/36 completion difference is not an identified component contribution.
+Known-model and compute resources remain part of the package and its limits.
+
+Sources/gaps: Pro independently read current methods, complete C06 question/advice/
+adoption/reading and C07 claim, executed planning/filter/evaluator and summary/selection.
+Its episode file tools failed and it did not recalculate the NPZ arrays or native exits;
+those remain the DM's complete readback, not Pro independent empirical validation.
+Advice and its algebra are not another experiment. The C06 arithmetic decomposition
+also follows from frozen host collision semantics: ACTIVE_FIRST has214 uncompleted jobs,
+94 collision-failed and120 other expired; NEAR180=68+112; LONG178=66+112. The observed
+near gain34 comprises26 fewer collision failures and8 fewer other failures, alongside
+19 additional bypass jobs. This is native outcome accounting, not causal attribution to
+one information feature. Native C06 acceptance-to-exit was92.8160s; function wall92.7046s,
+full process CPU93.7963s and peak64.8477MiB, so import/native overhead is not called zero.
+
+C07 engineering base91e519467 reuses C06 unchanged. Independent Reviewer found no
+material evaluator/admission issue; seven C07 checks passed after explicit lifetime CPU
+and function-wall scoping. L0 for final correction, owned by DM: add the exact finite
+upper-bound reader, retain normal descriptive fields, change only the secondary predicate
+and scope, make its global bound depend on fixed jobs per episode, and add exact-algebra
+edge fixtures (allzero, observed upper endpoint, strict boundary, invalid data). No policy,
+environment, world generation or sample changes. Independent review will cover this
+statistical delta; final claim and source are then frozen/published before one launch.
+
+
+DM also checked the primary-source NumPy random-stream documentation
+(https://numpy.org/doc/stable/reference/random/parallel.html): deterministic unique IDs
+combined as an integer sequence with a master seed are supported, with pseudorandom
+independence described probabilistically. The existing fixed-length namespaces do not
+mix spawning. NIST's mean-confidence discussion
+(https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm) clarifies coverage as
+a property of the interval method rather than a posterior probability for this realized
+interval. Neither document certifies this simulator or supplies the product bound;
+the latter is the explicit DM-checked argument above. No seeds or normal critical value
+were changed. Final statistical code has eight focused tests passing; its all-zero
+fixture retains a positive .04029-scale upper bound instead of a degenerate zero bound.
+
+
+### C07 final acceptance and frozen execution
+
+DM accepts the final evaluator and finite-bound correction. Independent Reviewer found
+no material issue in the full evaluator and confirmed the product-test direction,
+global bound, numerical implementation and strict secondary predicate; three targeted
+algebra/boundary/integrated-output checks passed after the prior full eight-test pass.
+The program under test remains the byte-identical C06 code at45a1f5345. The final claim
+note is frozen before any C07 results, with all five pairs/three arms and the original
+primary unchanged. No unresolved scientific or engineering decision remains for this
+batch. The fixed fresh output is
+`runs/skill_information_refresh/c07_fixed_s73180_73184_20260921/`.
+Launch exactly once on local_linux through hmasd_launch.py, expected lead
+`Codex DM (independent session)`, using the source commit containing this entry and
+`scripts/run_sir_c07.py --out <same-output> --launch-sha <that-full-source>`.
+The manifest will retain the native identity; the DM will read all3,840episodes and240
+final trace files and apply the prewritten rule, with no score-dependent extension.

@@ -2,6 +2,7 @@
 
 from dataclasses import asdict, dataclass
 import json
+import math
 from pathlib import Path
 import resource
 import time
@@ -27,6 +28,7 @@ NATIVE_CONTROL_FILES = {
 }
 NORMAL_95_Z = 1.96
 TASK_MARGIN_JOBS = 0.05
+SECONDARY_ALPHA = 0.025
 
 
 @dataclass(frozen=True)
@@ -140,7 +142,25 @@ def _paired_contrast(left, right):
     return contrast
 
 
-def _fixed_reading(block_contrasts, pooled_contrasts):
+def _finite_mean_upper(differences, bound):
+    """Invert the nonnegative product test using the global task-count bound.
+
+    For mu >= m, E[prod((B-Z)/(B-m))] <= 1 under independent equal-mean
+    draws. Markov's inequality gives one-sided coverage >= 1-alpha.
+    This does not use the observed maximum or a sample-variance approximation.
+    """
+    values = np.asarray(differences, dtype=np.float64)
+    if (values.ndim != 1 or not len(values) or not np.isfinite(values).all()
+            or not math.isfinite(bound) or bound <= 0
+            or np.any(np.abs(values) > bound)):
+        raise ValueError("finite upper bound requires nonempty finite differences within global bounds")
+    if np.any(values == bound):
+        return float(bound)
+    log_ratio = math.fsum(np.log1p(-values / bound)) + math.log(SECONDARY_ALPHA)
+    return -bound * math.expm1(log_ratio / len(values))
+
+
+def _fixed_reading(block_contrasts, pooled_contrasts, task_bound=14):
     primary_blocks = [
         block["NEAR_COMMIT-ACTIVE_FIRST"]["completed_jobs"]
         for block in block_contrasts
@@ -150,8 +170,9 @@ def _fixed_reading(block_contrasts, pooled_contrasts):
     all_block_means_positive = all(metric["mean"] > 0.0 for metric in primary_blocks)
     pooled_lower_exceeds_margin = (
         primary_pooled["normal_95"]["lower"] > TASK_MARGIN_JOBS)
-    secondary_upper_below_margin = (
-        secondary_pooled["normal_95"]["upper"] < TASK_MARGIN_JOBS)
+    finite_upper = _finite_mean_upper(
+        secondary_pooled["per_world_difference"], task_bound)
+    secondary_upper_below_margin = finite_upper < TASK_MARGIN_JOBS
     return dict(
         primary=dict(
             comparison="NEAR_COMMIT-ACTIVE_FIRST",
@@ -167,9 +188,15 @@ def _fixed_reading(block_contrasts, pooled_contrasts):
             comparison="LONG-NEAR_COMMIT",
             margin_jobs_per_episode=TASK_MARGIN_JOBS,
             pooled_normal_95_upper=secondary_pooled["normal_95"]["upper"],
+            finite_sample_upper=finite_upper,
+            global_difference_upper_bound=task_bound,
+            alpha=SECONDARY_ALPHA,
+            one_sided_coverage_at_least=1-SECONDARY_ALPHA,
+            finite_bound_formula="B - exp((sum(log(B-Z)) + log(alpha))/n); B if any Z=B",
             extra_gain_bounded_below_margin=secondary_upper_below_margin,
-            rule="pooled normal 95% upper bound < 0.05 jobs per 96-tick episode",
-            scope="descriptive bound only; no identity, equivalence, or joint-coverage claim",
+            rule="finite-sample upper bound < 0.05 jobs per 96-tick episode",
+            scope=("independent equal-mean worlds with the global task bound; normal interval "
+                "is descriptive; no identity, equivalence, or joint-coverage claim"),
         ),
         interval_units="independently addressed paired worlds pooled across fixed seed blocks",
         multiplicity="no multiplicity-adjusted joint-coverage assertion",
@@ -437,7 +464,7 @@ def run_confirmation(out, launch_sha, config=Config()):
             block_contrast_values = [item["contrasts"]
                 for item in summary["contrasts_by_block"]]
             summary["fixed_reading"] = _fixed_reading(
-                block_contrast_values, summary["pooled_contrasts"])
+                block_contrast_values, summary["pooled_contrasts"], expected["jobs_per_world"])
             summary["phases_seconds"]["confirmation"] = time.monotonic() - phase_started
             summary["status"] = "COMPLETE"
         except Exception as error:

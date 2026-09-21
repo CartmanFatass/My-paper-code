@@ -1,6 +1,7 @@
 """Engineering fixtures for C07 confirmation; no confirmation score is claimed."""
 
 import json
+import math
 from pathlib import Path
 import subprocess
 import sys
@@ -11,6 +12,7 @@ import pytest
 from experiments.candidates.skill_information_refresh.c07 import confirm
 from experiments.candidates.skill_information_refresh.c07.confirm import (
     Config,
+    _finite_mean_upper,
     _fixed_reading,
     _paired_contrast,
     run_confirmation,
@@ -139,10 +141,11 @@ def test_complete_fixture_preserves_fixed_program_pairing_counts_and_traces(tmp_
 
 
 def _metric(mean, lower=0.0, upper=0.0):
-    return dict(mean=mean, normal_95=dict(lower=lower, upper=upper))
+    return dict(mean=mean, normal_95=dict(lower=lower, upper=upper),
+        per_world_difference=[0.] * 1280)
 
 
-def test_fixed_reading_uses_strict_predeclared_boundaries():
+def test_fixed_reading_uses_strict_predeclared_boundaries(monkeypatch):
     blocks = [{
         "NEAR_COMMIT-ACTIVE_FIRST": {"completed_jobs": _metric(.01)},
     } for _ in range(5)]
@@ -153,15 +156,38 @@ def test_fixed_reading_uses_strict_predeclared_boundaries():
     reading = _fixed_reading(blocks, pooled)
     assert reading["primary"]["retained"] is True
     assert reading["secondary"]["extra_gain_bounded_below_margin"] is True
+    # The normal interval is descriptive, so it cannot veto or grant the sparse bound.
+    pooled["LONG-NEAR_COMMIT"]["completed_jobs"]["normal_95"]["upper"] = 14.
+    assert _fixed_reading(blocks, pooled)["secondary"]["extra_gain_bounded_below_margin"] is True
 
     blocks[2]["NEAR_COMMIT-ACTIVE_FIRST"]["completed_jobs"]["mean"] = 0.0
     pooled["NEAR_COMMIT-ACTIVE_FIRST"]["completed_jobs"]["normal_95"]["lower"] = .05
     pooled["LONG-NEAR_COMMIT"]["completed_jobs"]["normal_95"]["upper"] = .05
+    monkeypatch.setattr(confirm, "_finite_mean_upper", lambda differences, bound: .05)
     reading = _fixed_reading(blocks, pooled)
     assert reading["primary"]["all_block_means_positive"] is False
     assert reading["primary"]["pooled_lower_exceeds_margin"] is False
     assert reading["primary"]["retained"] is False
     assert reading["secondary"]["extra_gain_bounded_below_margin"] is False
+
+
+def test_finite_bound_retains_unobserved_tail_and_uses_global_task_bound():
+    zero = np.zeros(1280)
+    expected = 14 * (1 - .025 ** (1 / 1280))
+    assert _finite_mean_upper(zero, 14) == pytest.approx(expected, abs=1e-12)
+    assert 0.04 < expected < .05
+    sparse = zero.copy()
+    sparse[:5] = 2
+    direct = 14 - math.exp((5*math.log(12) + 1275*math.log(14) + math.log(.025))/1280)
+    assert _finite_mean_upper(sparse, 14) == pytest.approx(direct, abs=1e-12)
+    assert _finite_mean_upper(sparse, 14) < .05
+    sparse[5] = 2
+    assert _finite_mean_upper(sparse, 14) > .05
+    sparse[0] = 14
+    assert _finite_mean_upper(sparse, 14) == 14
+    for invalid in ([], [15], [-15], [float('nan')], [[0, 0]]):
+        with pytest.raises(ValueError, match="global bounds"):
+            _finite_mean_upper(invalid, 14)
 
 
 def test_paired_contrast_requires_ordered_block_seed_and_world_identity():
