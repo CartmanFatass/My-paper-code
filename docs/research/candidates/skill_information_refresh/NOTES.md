@@ -2850,3 +2850,14 @@ which timing program is useful. A rare favorable world, a nonzero local tail, ch
 the declared margin after observing it, or simply adding a learned model is insufficient.
 The next useful observation must separate such a material new explanation from the
 retained NEAR/ACTIVE_FIRST references before committing to another result batch.
+
+### C06-C07 evidence publication
+
+Complete C07 evidence is published at
+[`a97233da59fdbd6349803b8b157901cd50286bdf`](https://github.com/CartmanFatass/My-paper-code/tree/a97233da59fdbd6349803b8b157901cd50286bdf/runs/skill_information_refresh/c07_fixed_s73180_73184_20260921):
+250 runner/native files, 13,292,438 bytes, including all 240 NPZs, every episode and both
+process logs. Complete C06 evidence remains at
+[`8a651c9a0a299fa6f5e90dca5f3c5ecc72655c5b`](https://github.com/CartmanFatass/My-paper-code/tree/8a651c9a0a299fa6f5e90dca5f3c5ecc72655c5b/runs/skill_information_refresh/c06_multistep_s73170_20260921).
+These pinned links also resolve from the main-line notebook publication, where raw
+experimental history is kept on the independent research branch. The C07 claim and
+C01-C06 program bytes remain unchanged from their accepted execution inputs.
