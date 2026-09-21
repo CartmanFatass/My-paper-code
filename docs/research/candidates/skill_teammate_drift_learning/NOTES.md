@@ -3611,3 +3611,52 @@ and zero-update source-state round-trip checks need no extra learning fixture. I
 returns a diff and exact costs; DM accepts after independent Reviewer. If complete source
 restoration is not feasible, return the precise missing state rather than silently repeat
 source training or change this declared cost.
+
+## 2026-09-21 05:25 PDT — B08 implementation accepted before the declared continuation
+
+DM accepts the bounded implementation from `/root/b05_implementer` after reading the
+new study, runner and tests. Independent Reviewer `/root/b10_credit_review` reports no
+remaining material finding against the exact files below. Complete source restoration,
+prediction before feedback, immutable donor features and reused B07 diagonals preserve
+the prospective comparison. No change to the learner, source data, seeds or scientific
+readings was required. Six zero-update validation round-trips and six subsequent fit
+restorations are counted separately; only the latter perform the declared six continuations.
+
+The native runner now accepts the launcher's precreated bookkeeping directory and the
+author checkout's absolute output path while its source runs in a linked frozen worktree.
+The Git evidence-ancestry check remains valid in that linked snapshot. Scientific manifests
+exclude mutable launch/status files. Attempt accounting starts one fit at a time, retains
+returned costs even when a completed fit has not yet been saved, and records save status.
+An interrupted continuation's partial row/update cost would remain unknown, not zero.
+The full admitted six-fit invocation has not yet been exercised; correctness tests do
+not masquerade as a production pilot.
+
+Reviewed SHA256: study `7ed1558363e308e867304b334fcaf9f5f67c026638843c5c1f31ac036b955576`,
+runner `2ba5351acb879ec413553d39aee73c170041835857faedde42efd7ac19fb19e4`,
+tests `9cfbd96c032fb575a8e89c20bcb29a14e9543cd455938095c65560b3da9d09bf`,
+package init `3e5d43491c1d5bcbb835c8ad4e26e5a09320a96eb49b9af895209d9606542d44`.
+Reviewer reused reported checks and added no predictions, learning or edits. The asymmetric
+2x2 arithmetic check now has distinct off-diagonal values, so swapping contrast orientation
+cannot pass unnoticed. DM independently verified these four hashes before acceptance.
+
+**Actual correctness cost, including fixture construction.** The first bare `pytest`
+invocation failed during collection before any fixture. Scientific-interpreter `python -m
+pytest` then passed all seven distinct checks. After the native-output/accounting/reducer
+repairs, selected checks passed in groups of four, one, one and two; the shared learning
+fixture was not repeated. In total this performed two tiny continuations on two synthetic
+records each: four feedback updates, four new Q predictions and eight policy reductions,
+including one online ridge solve. Separately, `_hand_state(FULL_SPEC)` constructed five
+synthetic source templates, each by one analytical ridge solve over four literal rows
+(three constructions in the full-module invocation, two in the selected restoration test).
+These five source-template constructions /20 literal-row uses are real correctness work,
+additional to the two tiny continuations; calling all selected tests "zero solve" would
+be inaccurate. Conservatively count those as five analytical fixture fits as well: seven
+tiny fitting attempts in total, two of them chronological continuations. Synthetic
+inherited `solve_calls=4` is a test state value, not four actual
+solves per construction. Total actual solves in correctness work are therefore six.
+There were zero law fits, environment ticks, sampled reward draws or B07 source refits.
+Compilation and whitespace checks passed. All prior B05–B07 costs retain their identities.
+
+Publish this reviewed source, then launch the six declared target continuations once via
+native admission. No owner approval, new Pro round, extra pilot or confirmation extension
+is required; the existing matched-history advice and prospective design still apply.
