@@ -2101,3 +2101,34 @@ unread-source limitations, not only a receipt/hash. Private transport conversati
 addresses stay local and must not be written to the repository.
 
 ### Answer
+
+
+## 2026-09-21 03:30 PDT — B06 execution-shell L0 while focused advice is pending
+
+The fixed question at `64e20fc6aa84ae4f844461fad82d4baa0e92ca7e` was sent once through
+the authorized Jev Pro method, effort 6 Pro. Accepted question key:
+`hmasd:2215f6575b27398ffde1c4666c84cb3f220c17f82e9487966bf09cf497ace72a`.
+The original wait observes that same operation; no resend or peer-task message.
+B05's standing was independently published to main at
+`44cd7f5d888e61ef848fc53f4b14296d0081a587`, touching only B's existing RESEARCH row and
+linking the complete pinned notebook/results. Other task rows were preserved.
+
+**Bounded code work independent of the pending science decision.** Prepare
+`scripts/run_skill_drift_unknown_law_b06.py` and a mirrored `test_confirmation.py` under
+the existing B05 package tests. Reuse the reviewed B05 collection/learning engine and
+selection validation. The only permitted change to B05 runner helpers is an optional
+experiment/batch metadata argument preserving all B05 defaults and numerical/RNG
+behavior; no changes to `learning.py`, `study.py` or the frozen selection. The new entry
+requires the five proposed seeds, exact selection digest and native literal admission.
+Produce complete B06 identity and a reduction of primary five paired differences:
+mean, sample SD, two-sided t95 interval (df4), .005 scale flag and proposed support flag;
+keep secondary contrasts without replacing the primary. Save summaries/raw artifacts
+through the existing engine, with no extra model or evaluator calls for reduction.
+
+Checks are synthetic summary arithmetic, exact kernel guard, seed/digest rejection,
+and default-preserving publication identity; no production or new tiny learning fit is
+needed. Implementer owns only those runner/test paths, no notebook/index/claim edits,
+no commit/launch/Pro/children. DM reviews and accepts the diff; an independent Reviewer
+checks the executable delta. This preparation does not adopt the proposed confirmation
+or grant its execution. If the focused advice changes the plan, amend it before use;
+do not run merely because an entry is implemented. No B06 fit is started here.
