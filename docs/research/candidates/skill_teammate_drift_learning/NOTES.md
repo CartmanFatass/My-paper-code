@@ -1894,3 +1894,27 @@ selection alone binds the held-out settings. No scientific adjustment between st
 
 Timestamp correction: the acceptance above was recorded at **03:09:25 PDT**
 (10:09:25 UTC, clock tool), before launch. Its 03:13 heading was a typing error.
+
+## 2026-09-21 03:12 PDT — B05 pre-fit launch refusal and narrow repair
+
+The first native development launch at source
+`9ecc6a82524c10644a81296b6813d65aac4f303e` returned exit 4:
+`runner must contain exactly one require_admission(__file__, direction='skill_teammate_drift_learning') call before it can be spawned`.
+The runtime call used the correct value through `DIRECTION`, but the launcher's AST
+contract only accepts a literal. Inspection of `_validate_guard_contract` and its caller
+establishes this was before operation-claim/output creation or fitting; the intended
+`b05_unknown_law_development` output directory does not exist. **Zero fits, zero scientific
+steps.** Refused-launch wall was not instrumented; it is not zero and is separate from
+the forthcoming process telemetry. The retained source snapshot is not an accepted run.
+
+Repair: spell the same direction string literally at the existing call; no learner,
+environment, seed, horizon or selection change. A new integration regression calls the
+actual kernel inspector: current source passes; replacing the literal with the old
+constant reproduces the exact refusal. The runner suite now passes **11 checks** (.30s),
+with zero new learning; prior 14 package checks remain applicable. This closes a real
+entry-inspection gap left by the prior mocked-admission checks. The narrow executable
+diff is being independently rechecked before publication and the first admitted attempt.
+
+The Reviewer subsequently confirmed this literal satisfies the actual `ast.Constant`
+requirement and the negative regression reproduces the old defect; no material issue
+remains. The DM accepts the narrow repair. Review added zero execution/learning.

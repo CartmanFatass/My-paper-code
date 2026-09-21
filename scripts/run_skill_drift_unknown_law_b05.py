@@ -289,7 +289,7 @@ def main(argv=None):
         parser.error("heldout requires selection bytes and SHA256")
     if args.stage == "development" and (args.selection is not None or args.selection_sha256 is not None):
         parser.error("development cannot consume a selection")
-    admission = require_admission(__file__, direction=DIRECTION)
+    admission = require_admission(__file__, direction="skill_teammate_drift_learning")
     if args.launch_sha != admission["sha"]:
         parser.error("launch-sha must equal admitted source SHA")
     run_stage(args, admission)

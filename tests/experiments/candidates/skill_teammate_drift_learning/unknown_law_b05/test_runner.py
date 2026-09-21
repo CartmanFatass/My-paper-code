@@ -4,12 +4,15 @@ from dataclasses import dataclass
 import hashlib
 import inspect
 import json
+from pathlib import Path
+import subprocess
 from types import SimpleNamespace
 
 import numpy as np
 import pytest
 
 from scripts import run_skill_drift_unknown_law_b05 as runner
+from tools.research_support.interpreters import control_plane_interpreter
 
 
 @dataclass(frozen=True)
@@ -102,6 +105,26 @@ def test_admission_and_source_are_required_before_scientific_stage(monkeypatch, 
         runner.main(arguments)
     assert not stage_calls
     assert not (tmp_path / "out").exists()
+
+
+def test_literal_guard_passes_real_launcher_inspection_and_constant_does_not(tmp_path):
+    source = Path(runner.__file__)
+    program = ("from pathlib import Path; import sys; "
+               "from scripts.hmasd_launch import _validate_guard_contract; "
+               "_validate_guard_contract(Path(sys.argv[1]), 'skill_teammate_drift_learning')")
+    prefix = [control_plane_interpreter(), "-B", "-c", program]
+    accepted = subprocess.run(prefix + [str(source)], cwd=runner.ROOT,
+                              capture_output=True, text=True, timeout=20)
+    assert accepted.returncode == 0, accepted.stderr
+    broken = tmp_path / "constant_guard.py"
+    text = source.read_text()
+    replaced = text.replace('direction="skill_teammate_drift_learning")', 'direction=DIRECTION)')
+    assert replaced != text
+    broken.write_text(replaced)
+    refused = subprocess.run(prefix + [str(broken)], cwd=runner.ROOT,
+                             capture_output=True, text=True, timeout=20)
+    assert refused.returncode != 0
+    assert "must contain exactly one" in refused.stderr
 
 
 def test_selection_tampering_and_digest_fail_before_any_fit(monkeypatch, tmp_path):
