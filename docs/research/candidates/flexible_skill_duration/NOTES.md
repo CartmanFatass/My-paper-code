@@ -3413,3 +3413,50 @@ weights saved. Two arms, three blocks, **six fits planned**, two waves of three 
 - *Limits known now:* three blocks that have carried every setting since B01; no size claim;
   one new learner-side mechanism and one switched-off component at once, which `UNIFORM`
   separates only partly; panels with sampled worlds have ≈ .03 J conditional noise.
+
+## 2026-09-20 21:59 PDT — B13 entry code written, amended, independently reviewed and accepted; no score exists
+
+`scripts/run_fsd_label_bandit_b13.py`, `experiments/.../label_bandit_b13/launch_fit.sh` and
+tests under `tests/.../label_bandit_b13/` (Implementer; one amendment and the review fixes
+are mine). New files only.
+
+**Amendment to the 20:44 specification, made before any score.** One rollout has 16 lane
+clusters against 55 design columns, so its clustered variance has rank at most 16 and can only
+understate; z would be inflated and the law would sharpen on noise. The denominator of z is
+now sqrt(max(var̂, empirical)), where var̂ is the declared .64 / .04 combination and
+`empirical` is the stationary variance of β̂ implied by the rollout-to-rollout innovations
+d_r = β_r − β̂_{r−1}: innovation ← .8 · innovation + .2 · mean_c d_r[c]² (first innovation: its
+own value), g = .2 / 1.8, empirical = innovation · g / (1 + g), one number pooled over the six
+labels. It can only lower |z|. Nothing else of the specification changes. The published
+`estimate` carries `standard_error`, `innovation` and `empirical_variance`, and the summary
+carries this text, so z is reproducible from the record.
+
+**What the code established (file:line in the summary's source notes).**
+`disable_high_level_training` switches off the coordinator's update, its value normaliser's
+update and the rollout-end flush — the last harmless here because every lane is terminal at
+every rollout end, and the fit refuses a rollout without its 800 closed team rows; D2 storage
+is not gated by it. `rows_M*` in `d2_metrics` are flush-only counters and read 0 on this
+object. The estimator runs inside a wrapper on the learner's `update`, after the frozen update
+and before `clear_buffers`; the law in force during rollout r is the estimate at the end of
+r − 1. The raw per-step team reward comes from an environment-side tape whose discounted sums
+must reproduce the buffer's segment rewards (1e-5) every rollout. Each boundary's panels are
+genuine frozen `evaluate_panel` calls; they run inside the frozen RNG-preserving context, and
+a test shows the extra panels leave every training row unchanged.
+
+**Independent review (hmasd-reviewer, read-only): ACCEPT WITH FIXES, no blocker.** Ten
+invariants checked against `hmasd/agent.py`; all hold, with the note that `bind()` leaves
+B01's identity globals rebound, as B07 and B08 do. Fixed before acceptance: the amendment is
+now in this notebook and in the published record (was only in a docstring); a frozen fit that
+returns complete with no summary or learner seen is a failure, not a silent success; weights
+are written under a pending name, digested, renamed, then given their sidecar; `reduce`
+refuses a missing launch sha; the `rows_M*` note; a docstring that claimed a comparison
+`reduce` does not make. Review limits: nothing at production geometry has run; the
+800-commitment, 55-column regime is first exercised by the fits themselves.
+
+**Kept as declared, to be stated with the reading:** the two arms draw labels from different
+dedicated streams (seeded by training seed and arm), so they differ by trajectory noise from
+the first step as well as by the law. A B13 checkpoint carries `disable_high_level_training`
+and coordinator rows with mismatched labels and log-probs: nothing may train a coordinator
+from it. Checks: 39 B13 tests passed (81 with B08), mine, after the fixes; the Implementer's
+run with B07, B08, B09 and B12 gave 190 passed before them. Projected ≈ 8,000 s and ≈ 3.0 GB
+per fit; two waves of three.
