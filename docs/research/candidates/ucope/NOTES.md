@@ -6615,3 +6615,19 @@ read the finished results directly here. An admission refusal is not permission 
 kernel; uncertain acceptance is reconciled at the same handle. This acceptance adds no seeds,
 arms, endpoints or follow-on batch, and does not imply that native prefix fidelity has already
 been observed. Its first observation belongs to the declared training itself.
+
+### 2026-09-21 05:16 UTC — All three declared B10 operations accepted
+
+The kernel accepted the three original block invocations from fixed source
+`07605eecde6bba632b86ac2e92862057ea6d9fe2`; their native manifests are the authoritative
+identities: [8971](../../../../runs/ucope/paired_branch_credit_b10_8971/launch-manifest.json),
+[8972](../../../../runs/ucope/paired_branch_credit_b10_8972/launch-manifest.json), and
+[8973](../../../../runs/ucope/paired_branch_credit_b10_8973/launch-manifest.json).
+They run from retained source snapshots, so later notebook/analysis edits do not alter the
+accepted code. No previous native handle was relaunched, and no extra seed or arm was added.
+
+The first cost-only observation finds all three RUNNING, no reported failure, 192/96/32
+completed R_CF pairs and 48/24/8 gate updates, with each foundation digest unchanged.
+Thus real-prefix identity has passed for those declared training pairs; this is narrower
+than scientific success and is not a free preliminary probe. No final panels have been read.
+The direct DM retains observation, collection, interpretation and independent publication.
