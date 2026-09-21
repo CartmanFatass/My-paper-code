@@ -1,0 +1,38 @@
+{
+  "formula": "torch FP32 sum((tanh(raw_mean)-previous)^2)/12; all64 worlds,ticks1..255,all5 agents; numpy linear quantiles",
+  "masters": {
+    "8961": {
+      "foundation_master": 8941,
+      "source_master": 8951,
+      "source_npz": "runs/ucope/frozen_mean_gate_b08_8951/ordinary_evaluation.npz",
+      "source_npz_sha256": "ce5f4e392eae6ede4c5e310b00721368633bb9b52334cbdb5c838bddde45771f",
+      "rows": 81600,
+      "median": 9.94232323137112e-08,
+      "q10": 1.0031816621847156e-08,
+      "q90": 1.6814243281260173e-05,
+      "scale": 1.6804211464638325e-05
+    },
+    "8962": {
+      "foundation_master": 8942,
+      "source_master": 8952,
+      "source_npz": "runs/ucope/frozen_mean_gate_b08_8952/ordinary_evaluation.npz",
+      "source_npz_sha256": "010aa6d2958b83acb981fd6faecbed7fe56a826cca864f8ed57fc10cf6f307cc",
+      "rows": 81600,
+      "median": 9.660496047558809e-08,
+      "q10": 2.9043207838697075e-08,
+      "q90": 1.4529350755765342e-05,
+      "scale": 1.4500307547926645e-05
+    },
+    "8963": {
+      "foundation_master": 8943,
+      "source_master": 8953,
+      "source_npz": "runs/ucope/frozen_mean_gate_b08_8953/ordinary_evaluation.npz",
+      "source_npz_sha256": "8555a2399344944d63d17c61f26a18dccbf3d9764dbbbdd18fc4b9543333ad59",
+      "rows": 81600,
+      "median": 7.56842588600648e-08,
+      "q10": 7.233132270911824e-09,
+      "q90": 1.8341485338169162e-05,
+      "scale": 1.833425220589825e-05
+    }
+  }
+}

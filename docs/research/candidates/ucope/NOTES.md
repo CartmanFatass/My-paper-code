@@ -5254,3 +5254,114 @@ a reason to run one. The future FSD label-termination work remains separate and 
 Claude's paths, operations and shared index were not changed. All B08 raw results and
 weights are retained in Git at `de81d2850`; the author's current notebook supplies the
 updated standing until shared-index integration by its owner.
+
+
+## 2026-09-21 03:19 UTC — B09 prospective: normalized distance versus a fresh scalar gate
+
+The owner has reopened original UCOPE through the acting Root, who supplied the complete
+external review and authorized implementation, independent review, six gate fits and reading.
+This changes my earlier decision to leave the frozen-controller package idle. B08 remains a
+valid negative result for its tested learners. Its raw-distance S barely expressed distance
+conditioning (eligible probability SD about 1e-6), while the richer R changed behavior without
+beating G. The new reason for one bounded comparison is finite optimization of an affine
+logistic distance gate: failure of one rich finite learner is not an upper bound on a
+well-conditioned two-parameter gate. Scaling is not new information, a new policy class, or
+proof that scale caused R's failure. We preserve B02–B07 evidence, including the selected
+foundation exposure and contrary/favorable blocks, and add no switching reward or penalty.
+This is original velocity-command KEEP/END, separate from Claude's FSD skill-object work.
+
+**Fixed input-only scale.** For each foundation use its complete B08 ordinary evaluation:
+64 worlds, ticks 1..255 (exclude reset), all five agents, 81,600 rows. Compute FP32
+`d = sum((tanh(saved raw means) - saved previous actual command)^2)/12`, matching B08.
+Fix `m = median(d)` and `s = q90(d)-q10(d)` with NumPy linear quantiles. No reward value
+is read for scale selection. No alternate quantiles, clipping, scale sweep, adaptation,
+raw-S refit or richer architecture. A zero scale is degeneracy to report, not a reason to
+drop a foundation. These exact numbers/input digests are fixed before any B09 score:
+
+| B09 master / foundation / B08 source | m | q10 | q90 | s | ordinary NPZ SHA256 |
+| --- | ---: | ---: | ---: | ---: | --- |
+| 8961 / 8941 / 8951 | 9.9423232313711196e-08 | 1.0031816621847156e-08 | 1.6814243281260173e-05 | 1.6804211464638325e-05 | `ce5f4e392eae6ede4c5e310b00721368633bb9b52334cbdb5c838bddde45771f` |
+| 8962 / 8942 / 8952 | 9.6604960475588086e-08 | 2.9043207838697075e-08 | 1.4529350755765342e-05 | 1.4500307547926645e-05 | `010aa6d2958b83acb981fd6faecbed7fe56a826cca864f8ed57fc10cf6f307cc` |
+| 8963 / 8943 / 8953 | 7.5684258860064801e-08 | 7.2331322709118241e-09 | 1.8341485338169162e-05 | 1.833425220589825e-05 | `8555a2399344944d63d17c61f26a18dccbf3d9764dbbbdd18fc4b9543333ad59` |
+
+The source paths and formulas are also fixed in
+`experiments/candidates/ucope/normalized_distance_gate_b09/scales.json`. Each invocation
+verifies its NPZ hash, shape, complete arithmetic and scale before any environment/fit.
+Scale extraction is saved-array arithmetic only: zero model forwards, native steps or fits.
+The FP32 scale/median buffers and their source provenance are retained with each gate.
+
+**Single comparison and exact scope.** S_N (`normalized`) learns
+`p(KEEP)=sigmoid(a+b*((d-m)/s))`; B_0 (`scalar`) learns `sigmoid(c)`. Both start at zero
+logits, with two/one trainable gate parameters respectively. The normalized gate retains
+a free intercept and slope; in raw coordinates they are `a-b*m/s` and `b/s`.
+G (`ordinary`) uses the same frozen fresh-mean Actor without a gate or new fit.
+Use all B06 Ghalf bases 8941/8942/8943 and new masters 8961/8962/8963 respectively.
+Each learned arm trains 2048 complete episodes of 256 team ticks. Evaluate only final
+weights stochastically on the same 64 new worlds per block; G is deterministic. Arm order
+is S_N then B_0 then G evaluation; no intermediate-score model choice. For base=100000*master:
+critic seed=base+12; both zero gate initializations identify seed=base+11; train worlds
+base+10000+episode, final worlds base+30000+episode; full pre-generated [tick,agent] gate
+coins use base+50000+episode for training and base+70000+episode for evaluation. Update
+shuffle generators use base+41 for S_N and base+51 for B_0. The critics receive identical
+information/initialization and exposure, with subsequent trajectories allowed to diverge.
+
+The B08 collector and update implementation are reused without modification: fresh command
+is tanh(mu), no Gaussian draw; frozen Actor/GRU advances with phase zero on every tick.
+Reset forces fresh; eligible KEEP copies the actual prior command and forces next-tick
+fresh; END executes fresh and remains eligible next tick. Lifetime is at most two ticks,
+without GRU reset. Reward remains 0.7 connected-user fraction + 0.3 mean normalized
+connected-user SINR, with no new switching/altitude term. Same centralized critic,
+undiscounted finite episode return divided by horizon, no terminal bootstrap, two episodes
+per rollout, full-rollout advantage normalization; per-eligible-bit PPO ratio clip .2,
+masked bit sum over five agents divided by all team rows, four epochs, minibatches <=256,
+critic .5 MSE, separate Adam3e-4 and norm clipping .5, no entropy bonus. Updates use the
+existing B08 implementation, not a parallel reimplementation of these semantics.
+
+**Cost and execution.** Plan six new gate fits, zero foundation fits and zero Pro calls.
+Training costs 6*2048*256=3,145,728 team ticks; final evaluation costs 3*3*64*256=147,456;
+total 3,293,184. Planned gate/critic Adam calls are 49,152/49,152 (98,304 total). Foundations
+remain byte-bound B06-selected developmental instances. Run three admitted paired-block
+invocations on local_linux with one Torch/BLAS thread each, source snapshots, fresh control,
+publication, duplicate and memory checks. Prior equal-cost B08 batch took 25.56 minutes of
+parallel wall time; this is an estimate, not a promise. Original hard deadline remains
+2026-09-21 04:06:07 UTC. Do not shorten horizon, drop seeds, silently extend the deadline,
+expand after scores or retry an uncertain accepted invocation. Retain partial costs and
+technical failures if the deadline or another failure prevents completion. Fit allowances
+are abolished; six is this question's declared scope and cost, not a remaining budget.
+
+**Prospective reading and next action.** Retain S_N for further investment only if its
+mean J exceeds both B_0 and G separately in every one of the three blocks, AND the arithmetic
+mean of the three block contrasts is >=0.01 against each comparator. This is a bounded
+exploratory investment rule, not an equivalence, significance, MEI-confirmation or population
+claim. Preserve all block/world scores and conditional world uncertainty; worlds are nested
+inside fits and foundations were selected in B06. Distance-dependent probability variation,
+parameter movement, KEEP rate and copy rate are mechanism checks, not success endpoints.
+Only beating G but not B_0 would not support distance conditioning; at most it motivates a
+separately reasoned scalar question, not an automatic new batch. Mixed/tiny effects or no
+net gain over G stop this frozen-controller route, with no further scale rescue. Any next
+scientific question must have a new recorded reason; a favorable result still needs fresh
+foundation evidence before a broader UCOPE claim.
+
+**Implementation scope.** New files live in `normalized_distance_gate_b09/` and its runner
+and focused tests. The B08 engine, original foundation/environment, Claude's FSD paths,
+runs and shared index are untouched. DM authors and accepts implementation; an independent
+Reviewer checks scale provenance, actual one/two-parameter distinction and production binding.
+Focused synthetic checks may exercise the new gate through existing collection/update, with
+synthetic transitions and updates reported separately from native scientific cost.
+
+
+### B09 readiness, 2026-09-21 03:20 UTC
+
+Independent Reviewer reviewed the prospective plan, all three scale reconstructions, new
+source diff, and focused tests with no blocking findings. All 11 new-package checks passed:
+four study checks (2.54 s) and seven gate/scale cases (0.96 s). Engineering cost was one
+complete synthetic pair/reference (136 synthetic team ticks, 32 synthetic Adam calls),
+plus a deliberate transition-failure test that returned two synthetic ticks and zero
+updates. No native transition, checkpoint forward, new scientific fit or Pro call was
+added. The unchanged B08 test suite and previous tiny native fits were not repeated.
+
+Fresh published and canonical control both register UCOPE as exploring with exact lead
+`Codex session (direct DM; resumed original UCOPE task)`. This descriptive lead string
+identifies the same direct DM; launch uses the actual current string. Shared canonical
+checkout and index remain Root/Claude-owned. Resource snapshot before publication showed
+about 11.3 GiB available; each actual launch performs its own fresh memory check.
