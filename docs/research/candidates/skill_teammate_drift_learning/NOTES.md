@@ -2803,6 +2803,498 @@ Private transport addresses remain local. B07 execution has not started.
 
 ### Answer
 
+GitHub 材料读取成功，但本次未完成写回，没有生成新 commit。 我读取了目标分支的最新文件，指定 Answer 当时仍为空。当前接口提供整文件替换，但本次未建立能核验其余内容逐字节不变的写回路径，因此没有执行可能误改历史内容的替换。以下给出完整 Answer。
+
+Answer
+一、判断：保留实际提出的四分支 B07；MATERIAL_DISSENT no
+
+我建议保留这次原定 B07：R_U、F_U、R_E、F_E，固定 ε=.20、三个新块、source 2,048／target 256，不先换 law estimator、主比较器或任务奖励。 在本题限定的选择中，它比再做一轮不变的被动采集重复更直接地回答一个尚未观测、且可能改变投资判断的问题：同一学习包的建议开始控制自身信息来源之后，原先的收益和错误会怎样演化。B07 已明确更换采集干预与 estimand，并保留 B06 的 inconclusive 结论；这不是给 B06 换终点再争取一次通过。
+
+我没有发现一个已经成立、要求在 B07 之前另做科学观察的实质 estimand、comparator 或 information 缺陷。不过，其辨别力必须精确定义：
+
+B07 能检验“采集制度改变，对两个冻结学习包的后续决策价值产生了怎样不同的影响”；不能仅凭交互项把差异全部归因于 law posterior 修复，更不能把正交互项直接解释成 R 的自采集提高了自身绝对收益。
+
+后两点需要分别看完整学习路径，以及 R、F 各自的 E−U 差。它们都可以从原计划保存的读数计算，不需要增加分支、拟合、环境轨迹或新的批准条件。
+
+二、材料依据与独立复核边界
+
+本次用于判断的实际读取包括：9b2d740cca6ee65b9703c32fde26a24685fc03f7 下的 B07 提案、当前问题、宪章第 2–5、8 节和指定科学方法；a12d78ac73dbf5c03b1dd58e7f7f8fd8cb0f1cfc 下完整 B06 summary.json、覆盖五个块的完整 readback.json、03:59 的完整 B06 结果条目；以及 afe4f8ec74d48b2485db3d935de7871c86cc0e6c 下 B05 learning.py 和 study.py 中与公开观察、采集、先验激活、预测及更新有关的路径。移动分支只用于检查写入位置，没有替代这些科学输入。
+
+本次没有获取和解码原始 NPZ 数组，没有独立重算 55 项 artifact digests，也没有执行学习器、环境、策略前向或评价器。 readback.json 的 digest 验证是已读取的作者检查记录，不是我的第二次验证。因而，下文对已发生结果的判断依据是 JSON 读回和笔记；对逐宏反馈轨迹的论述是代码支持的预测，而不是声称已经观察到了尚未运行的 B07。
+
+读取中发现一处小的来源不一致：B06 笔记把 95202／95203 的 .85-context 合作次数合写成 R 为 15/16、F 为 9/7；但 readback.json 对 95203 明确记录 R=16、F=7。其避免的损失 1.935 正好对应 9×.215，与 readback 一致。以下使用这一明确记录，不静默把两份材料说成完全一致。这不改变 B06 的主终点判定，也不是 B07 需要先做新实验的理由。
+
+三、B06 加强、削弱和留下了什么
+
+B06 的五个 primary 差仍是：
+
+−.0125,+.031484375,+.023828125,−.00515625,+.00328125.
+
+均值 .0081875，样本 SD .0188246723，预写 t95 区间为 [−.0151864178, .0315614178]。尺度条件通过、排零条件失败，所以原确认规则未通过。Full256 对 F 的均值为 .0028125，且同样包含两个负块；不能用它替换 first64，也不能把这些结果读成等价或无价值。
+
+加强的是一种有边界的学习机会判断。 在当前未知律宿主上，稳定 outcome-conditioned response 确实能在部分块避免价值较高的漏合作。95202 的 .85-context 中，R 合作 15 次、F 合作 9 次，避免 1.29 累计损失；95203 的相应记录是 16 次对 7 次，避免 1.935。95205 也有较小的正差，并非只有两个大正块的故事。
+
+削弱的是“更准确的 response 映射自然会普遍胜过直接模型的保守性”。 95201 的 R 在全部 64 个早期选择上与 known-response diagnostic 一致，仍输给 F：额外 .55-context 合作造成 .33 损失，额外 .35-context 合作造成 .47，合计 .80／64=.0125。95204 中，R 与 F 都在 .35-context 合作 14 次；R 的额外劣势来自 .55-context 的六次额外合作。因此不能把 F 的保守性一概称为需要修复的缺陷。
+
+留下的关键空白正是 B07 的问题。 B06 的采样不受建议控制：悲观不会减少获得纠错样本的机会，乐观也不会改变以后收到哪些样本。因此，B06 的 greedy readout 不能回答“这些建议投入实际采集之后是否改善在线任务收益”。较大的 law error 和较小的 response error 也不能代替这个观察，更不能给出 law 对 regret 的归因百分比。
+
+所以，继续投资的理由应从“再试一次被动采集排名”转为“测量此前被切断的信息反馈路径”，而不是把 B06 的确认失败解释为需要增加种子直到成功。
+
+四、匹配 ε 读数确实构成有效控制，但必须保留其准确含义
+
+令 i∈{R,F}，k∈{U,E}。在 target 第 t 个宏决策前，分支根据自身合法历史产生 greedy bit g
+ik,t
+	​
+
+，沿用 B05 的预测处理和 SAFE tie-breaking。匹配 ε 策略的合作概率是
+
+π
+ik,t
+	​
+
+(C)=.10+.80g
+ik,t
+	​
+
+.
+
+由宿主定义，
+
+Q
+t
+	​
+
+(S)=.60,Q
+t
+	​
+
+(C)=.05+.90p
+11,t
+	​
+
+.
+
+记真实合作优势为 δ
+t
+	​
+
+=Q
+t
+	​
+
+(C)−Q
+t
+	​
+
+(S)，则该步匹配策略的精确价值为
+
+V
+ik,t
+ϵ
+	​
+
+=.60+(.10+.80g
+ik,t
+	​
+
+)δ
+t
+	​
+
+.
+
+这些是奖励定义与已声明策略的直接代数，不是新增评价运行。
+
+E 的 primary 是实际执行策略的价值，不是 greedy 或已抽中动作的价值
+
+对 E，上式的概率就是实际 collector 使用的概率。应先固定本步合法预测及概率，再采样动作和结果，并由评价器作混合策略的精确归约。
+
+不要用 Q
+t
+	​
+
+(g
+t
+	​
+
+) 替换它，那是 greedy value；也不要把本步抽中动作的 Q
+t
+	​
+
+(A
+t
+	​
+
+) 当作已声明的精确混合策略读数，后者仍保留动作抽样噪声。实际 sampled reward 则单独报告。
+
+这里“exact”的范围是：给定每一步决策前已经形成的学习历史，该步策略收益可以精确积分。 它没有积分掉先前采集造成的全部学习历史不确定性。因此，完整轨迹的这些精确读数仍会跨块变化，不能把 256 个宏决策当作 256 个独立训练重复。
+
+U 的匹配读数是合法的 off-collector readout，但不是一条未执行的在线学习轨迹
+
+对 U，同样的 .20-epsilon 规则只用于评价其当时估计所建议的策略；U 的训练数据仍由 uniform collector 产生。这个读数回答的是：
+
+均匀采集形成的估计，在同一个 ε 决策规则下值多少？
+
+它不回答：
+
+这个学习器如果从 target 开始就按 ε 策略采集，最终会形成怎样的学习历史？
+
+后一个问题由实际 E 分支回答，不能从 U 轨迹静态重加权或重读 greedy 值来替代。当前宿主允许直接使用评价器真值作这些一步价值归约，因此这里不需要再添加重要性加权估计器。
+
+为什么不能使用 U 的实际 uniform 收益来构成交互项
+
+U 的实际 collector 价值是
+
+V
+t
+uniform
+	​
+
+=.60+.50δ
+t
+	​
+
+,
+
+它不依赖 R 或 F 的建议。在共享世界、相同 context 日程下，R_U 与 F_U 的这个精确值逐步相同。四种 context 等量出现时，整段 uniform 平均值是 .595；这是宿主常数的直接计算。
+
+所以，用实际 uniform 收益组成 R
+U
+	​
+
+−F
+U
+	​
+
+，该项本来就是零，无法提供所需的学习控制。提案明确使用 U 的匹配 ε 读数，而不是其实际 uniform 收益，这正是设计成立的关键。
+
+对每块令
+
+D
+E
+	​
+
+=
+V
+ˉ
+RE
+ϵ
+	​
+
+−
+V
+ˉ
+FE
+ϵ
+	​
+
+,D
+U
+	​
+
+=
+V
+ˉ
+RU
+ϵ
+	​
+
+−
+V
+ˉ
+FU
+ϵ
+	​
+
+,
+I=D
+E
+	​
+
+−D
+U
+	​
+
+.
+
+因为四个分支面对相同、行动无关的 context 与真实价值，
+
+I=.80
+δ
+t
+	​
+
+[(g
+RE,t
+	​
+
+−g
+FE,t
+	​
+
+)−(g
+RU,t
+	​
+
+−g
+FU,t
+	​
+
+)]
+	​
+
+.
+
+这说明，交互项确实排除了 uniform 与 ε 行为规则本身的即时奖励差；它测量的是采集历史改变后，两个学习包的相对建议质量怎样变化。但这也是一个提醒：匹配 ε 交互与同历史 greedy 交互之间有确定的比例关系，不是两项相互独立的机制证据。
+
+五、信息路径合法；识别对象是完整自采集反馈，而不是仅有 law 的中介效应
+
+B05 代码支持所需的基本隔离。Law learner 只接收公开 (version, context) 和实际合作 outcome；SAFE 不更新合作律。新 target version 的 prior center 是各 source-context posterior 的算术平均，随后冻结，而不是使用真实 target law。R 学习 outcome-conditioned reward means；F 的 hybrid 回归永久保存当时的 pre-outcome estimated-law feature；两者的 SAFE estimator 都只从实际 SAFE reward 更新。
+
+由此得到三个重要判断。
+
+第一，自适应采集本身不使现有 law 更新失去合法性。 在本宿主中，动作由过去历史和当前公开 context 决定，当前 outcome 随机量与这些决策随机量分离。因而在合作被选中时，给定过去历史和当前 context，观察到的 outcome 仍来自该 context 的合作律。政策依赖的是过去，不是尚未发生的当前 outcome。无需仅因为采集变得自适应，就先改成带倾向权重的 law estimator。这个结论不等于有限样本估计无偏、一定快速收敛或一定改善决策。
+
+第二，信息权利相同不意味着 E 的实际历史应当相同。 R_E 与 F_E 采到不同数据恰是干预结果，不是不公平。需要保持相同的是可观察字段、奖励、公开信息、探索规则和更新方法；不能在分支分歧后把另一分支的合作 outcome 补给它。Source 数据虽然在四分支中实际重复执行，却不是四份独立 source 样本。
+
+第三，改变采集不只改变 law counts。 它还改变 R 的 response-cell 更新、F 的回归样本和特征分布，以及各分支的 SAFE 样本。因此：
+
+collection→{law,response/ridge,SAFE estimates}→later decisions.
+
+即使 B06 中 response error 较小，也不能未经 B07 观察就假定其它通路完全不动。正交互项可以支持完整信息反馈包的解释，但不能识别“其中多少收益由 law 修复造成”。提案保存 p11／response／SAFE errors 是合适的解释性检查；不需要为此先增加 oracle 或 frozen-mediator 分支。
+
+实现上，尤其不能只改旧 run_block 的动作选择，却保留其单个共享 law learner、共享观察和向所有 learner 广播同一反馈的结构。旧结构是 B05/B06 的正确共同采集实现，不是 B07 四分支的实现。B07 应复用不可变 learner 类和纯 host／schedule／RNG helpers，但按提案独立组合每个分支的学习状态。
+
+原计划的小 fixture 足以覆盖几个关键不变量：四分支 source 观察相同，同一方法的 U/E 在 target 激活时状态相同，两个 U 的观察历史相同；E 动作概率先于 outcome 冻结，law 只接收本分支合作 outcome。沿用 B05 的随机数方向时，可用 A
+C
+	​
+
+=1[u≥1−π(C)]，使 ε=1 恢复原来的 1[u≥.5]。这属于既有纯映射与身份检查，不要求新的学习测试。
+
+六、把竞争预测落到有限时间和有权重的任务损失上
+
+R 更容易维持高价值合作、缩短 false-SAFE streak，是值得检验的方向预测，但不是 B06 已经支持到可以单向外推的结论。
+
+由奖励定义，四种 context 的代价不同：
+
+真实 p
+11
+	​
+
+	合作价值	合作相对 SAFE 的优势	错误 greedy 推荐在匹配 ε 策略下的单次额外损失
+.35	.365	−.235	.188
+.55	.545	−.055	.044
+.65	.635	+.035	.028
+.85	.815	+.215	.172
+
+最后一列是 .80∣δ∣：错误推荐将选最优动作的概率由 .90 降为 .10。这些仅是代码常数的代数归约。
+
+因此，一个 .35-context 的额外错误推荐，代价大于修复一个 .85-context 错误推荐所获得的收益，更相当于多个 .65-context 错误。合作样本更多、law L1 更低或错误次数更少，都不足以判定 native task return 更高。
+
+对每个分支定义按真实动作间隔加权的 greedy 错误
+
+M
+ik
+	​
+
+=
+256
+1
+	​
+
+t
+∑
+	​
+
+∣δ
+t
+	​
+
+∣1[g
+ik,t
+	​
+
+
+=g
+t
+⋆
+	​
+
+].
+
+在此等量四-context 宿主上，采用正确 greedy 推荐的 .20-epsilon 策略平均值为 .649，因此
+
+V
+ˉ
+ik
+ϵ
+	​
+
+=.649−.80M
+ik
+	​
+
+.
+
+这里 .649 是评价器真值下的解析参照，不是新增训练臂、可获得 headroom 或一般探索最优性结论。这个恒等式使计划中的 weighted mistake costs 与主收益读数可以直接对账。
+
+反馈预测至少应区分以下几种路径。
+
+有价值合作的维持。 R_E 在 .85-context 较早给出合作推荐，使合作概率保持 .90；相对于长期 SAFE 的 F_E，它可能得到更多该 context 的观察，缩短有代价的悲观期。支持这个解释，需要看到建议差先出现，随后采集概率、实际合作计数及学习状态改变，再体现为后续加权损失下降，而不只是最后一个 posterior 更接近真值。
+
+悲观造成的有限期样本稀缺。 R 自己也可能因 noisy law 进入 SAFE 推荐。探索下限 .10 消除了零采样的永久封锁，却不保证 256 macros 内修复。完整 target 每个 context 只有 64 次访问，first64 每个 context 只有 16 次。作为固定 SAFE 推荐的尺度例，16 次访问的合作样本期望仅 1.6，完全没有合作样本的概率是 .9
+16
+≈18.5%；完整 64 次访问的期望也只有 6.4。这不是对自适应 B07 实现值的预测，更不是在事后选出的 streak 上套用二项分布。它说明为何 full256 有新的科学理由，也说明为何 .10 floor 不等于修复保证。
+
+乐观的收益成本与纠错机会同时存在。 在 .35-context 的乐观会以 .90 概率花奖励采样；但新增失败观察也可能更快推翻乐观。不能预先把它单向描述成“错误必然自我放大”。要检验的是纠错后的未来收益是否补回前期损失。同样，在低价值 context 减少采样和保持较高 law error，可能是收益较高的行为，而不一定是学习失败。
+
+提案规定的“连续 context-visit greedy-SAFE streak”应按推荐计算：一次 ε 随机合作不应自动把仍然悲观的 greedy streak 断开。实际未获得合作样本的连续访问长度是另一项不同事实。前者测决策停滞，后者测数据空缺，不宜混为一个指标。相关日程、采集规则与保存项已经包含在现有方案中。
+
+七、交互项怎样改变投资判断：必须同时报告各学习器自身的 E−U
+
+建议从原有四个 cell 的均值再明确列出
+
+W
+R
+	​
+
+=
+V
+ˉ
+RE
+ϵ
+	​
+
+−
+V
+ˉ
+RU
+ϵ
+	​
+
+,W
+F
+	​
+
+=
+V
+ˉ
+FE
+ϵ
+	​
+
+−
+V
+ˉ
+FU
+ϵ
+	​
+
+,
+
+于是
+
+I=W
+R
+	​
+
+−W
+F
+	​
+
+.
+
+这只增加每块两次减法，三块共六次；没有额外 fit、forward、Q-table evaluation 或环境成本。
+
+若 D
+E
+	​
+
+>0、I>0，且 R 的收益轨迹与高价值 context 的较短悲观期相对应， 则自采集条件下保留 R 的投资理由加强。但仍要检查 W
+R
+	​
+
+：若它为负，只是 W
+F
+	​
+
+ 更负，准确结论是 R 较能抵抗自采集的不利影响，而不是自采集提高了 R 的绝对价值。
+
+若 D
+E
+	​
+
+>0，但 I 接近零或符号不稳定， 可以保留 R 在实际自采集中的包收益观察，却不能把相对收益新增地归功于反馈。并且，I=0 不等于没有反馈：两种方法可能都改善或都恶化，只是幅度相近。
+
+若 I>0，但 D
+E
+	​
+
+≤0， 反馈可能使 R 相对追近 F，却没有使实际 R_E 更好。一个有趣的机制描述不足以替代主任务收益。
+
+若样本或误差代理改善而实际全程收益下降，或者 D
+E
+	​
+
+ 与 I 都不利， 应降低“稳定 response 复用会在自采集下带来净收益”的期待，而不是自动要求更长 horizon、另一个 ε 或更好的 seed 来挽救解释。反之，若实际行动和历史几乎未分岔，零交互更接近本批次没有激活足够分歧，不能当作一项强机制否定。
+
+这些是解释分支，不是新增通过阈值。三块应各自报告四个匹配值、D
+E
+	​
+
+,D
+U
+	​
+
+,I,W
+R
+	​
+
+,W
+F
+	​
+
+，以及 E 实际 sampled returns、原定 first64／late64 和完整曲线。独立单位仍是三个 fresh blocks；四个 context、多个读数和多个时间点不会增加训练重复数。正结果可以改变下一步投入优先级，但不能自动确认总体排名；负或混合结果也不自动关闭整个方向。
+
+八、为什么不先换比较、缩成两分支，或增加新参照
+
+仅运行 R_E、F_E 可以回答实际自采集收益差，却不能辨别该差是否已经存在于 uniform-history 的匹配决策中。用旧 B06 当 U 控制又失去同一新块世界、随机槽和 source 实现的配对。因此，保留四个逻辑 cell 是此处信息价值的核心。
+
+四个分支重新初始化并完整执行，确实重复了 source 工作；但提案公开计入这种重复，换取简单明确的历史、状态与成本身份。我没有发现一个能提供同样反馈辨别力、同时明显降低当前实现风险的更简单科学设计，足以要求在这里改成 checkpoint forks 或新的共享状态方案。
+
+冻结 full-history hybrid prior2 也有意义：B07 问的是 B05 选出的这两个学习包在改变采集制度后如何表现，而不是重新寻找每种采集制度各自最优的算法。F 在被动开发条件下被选中，不保证它在 E 下也最优；这是结论范围，而不是已经证明的无效比较。现在换成事后开发赢家、给另一种算法额外调参，或加入与 R 实质相同的 renamed conditional-response baseline，都会改变问题，不能称为免费加强。
+
+成本核算与实际计划一致：
+
+3×4×(2048+256)=27,648 collected macros,
+27,648×3=82,944 primitive ticks.
+
+每块四个 decision fits 加四个 law fits，总计 24 fits；27,648 个 sampled reward labels、27,648 个 Q-truth table evaluations、82,944 个 scalar policy reductions，零新增评价环境 ticks／reward draws，零 gradient calls。重复 source 不是独立数据增量，无梯度也不等于无学习；posterior 更新、ridge 求解、进程 wall 和 RSS 仍按实际记录。既有 B06 wall 不提供 B07 时间保证。
+
+原定 seed 95971 的共享 tiny fixture，每次 invocation 的八个 tiny fits、128 macros／384 ticks 应另计，重复调用不能隐去。本答复没有执行该 fixture 或任何生产实验，也不提出额外 launch-boundary 学习测试。
+
+九、最终工作解释与选择
+
+我建议采用的工作解释是：
+
+B06 表明，稳定条件响应复用在未知律下具有可观察但不稳定的决策价值；直接模型的保守性既可能保护收益，也可能错失高价值合作。被动共同采集尚未检验这些建议对自身学习机会的影响。B07 用匹配 ε 的 uniform-history 控制，能够观察采集反馈是否改变两个冻结学习包的相对任务价值；它识别的是完整自采集学习包的差异，不是单独 law 中介的因果贡献。
+
+因此，在当前问题、宿主和冻结比较对象下，我选择原定 B07，而不是要求先做另一项观察。 最需要补强的是读法：明确 W
+R
+	​
+
+,W
+F
+	​
+
+，使用有任务代价权重的错误轨迹，不把正交互、更多样本或更低 law error 分别等同于 R 的绝对改善、机制已识别或净收益成立。
+
+这个观察可以改变继续投入该学习包和该失败解释的理由；不能建立 endogenous teammate learning、state-occupancy feedback、native UAV benefit，或者一种新的独有算法贡献。这里 native launch 仍只是被 admission 接受的本地进程。
+
+选择、执行和结果后的判断仍由 DM 承担；本答复不授予预算，不增加 owner／Root 批准、阳性 pilot 或新的治理环节，也不改写任何 B06 冻结结论。
+
+MATERIAL_DISSENT: no。
+
 ## 2026-09-21 04:25 PDT — B07 implementation accepted; scientific advice still pending
 
 **Executable acceptance.** Implementer prepared the isolated B07 package, runner and ten
@@ -2867,3 +3359,63 @@ evaluation panel, new policy intervention or attribution to a particular coeffic
 B07 may amplify finite representation/prior geometry differences; even a favorable
 feedback interaction would not isolate a unique experience-reuse mechanism or establish
 endogenous teammate drift.
+
+## 2026-09-21 04:50 PDT — Full focused advice adopted; B07 fixed for execution
+
+**Delivery and reading.** The first read-only observation window ended IN_PROGRESS while
+Pro was still thinking, with zero partial answer and no browser recovery. Continuing the
+same accepted key returned COMPLETE: 9,745 characters, text SHA256
+`4b28d4ed147e042cf6b2e07db83a6de3014c2111dd93ae6bc5796bc2aac6713f` (driver text,
+excluding the file's terminal newline). Actual repository delivery was NOT_DELIVERED,
+with no answer commit. Pro reported that GitHub reads worked but it had not established a
+whole-file write path that verified all unrelated bytes; it provided the full answer instead.
+DM therefore saved the complete browser-rendered answer from chat above, preserving its
+flattened equation formatting and the existing question/implementation entry. No private
+transport address was copied. DM read it in full; receipt alone was not treated as advice.
+Pro did not decode the NPZ files or independently check artifact digests and executed no
+learning, policy forward or evaluator; its source-reading limits remain in its answer.
+
+**Small B06 erratum verified against raw arrays.** In seed 95203, first64, the .85 context
+is context0: R recommends cooperation **16/16**, F **7/16**. The earlier prose grouped R's
+95202/95203 counts as 15/16; 95202 is 15, but 95203 is 16. Existing readback and the cumulative
+1.935 avoided loss were correct (nine additional useful recommendations times .215).
+DM checked `common.npz` and both saved `curves.npz` directly. This is a transcription
+correction, not a changed endpoint, rerun or alteration of the B06 inconclusive verdict.
+
+**DM scientific adoption.** MATERIAL_DISSENT is no. Adopt the original four branches,
+source2048/target256, epsilon .20 and fresh seeds **95301, 95302, 95303**, using the exact
+reviewed B07 code from `f1c85dfd2`. Do not replace the law estimator, hybrid baseline,
+reward, horizons or exploration rate. B06 leaves this collection feedback unobserved;
+the new comparison remains a finite frozen-package exploration, not another attempt to
+pass the B06 claim. No new owner/Root step or extra learning test is needed.
+
+Adopt these interpretation refinements before scores, using only the already-declared
+readouts: report each learner's matched-policy E-minus-U value (W_R and W_F), in addition
+to D_E, D_U and I=W_R-W_F. A positive interaction can mean R was harmed less, not improved.
+A zero interaction can hide equal feedback changes in both packages. E's full-target
+exact mixed-policy return remains primary; U's actual uniform return is identically
+matched between R/F and cannot substitute for its off-collector epsilon readout. Exact
+one-step integration removes current reward/action noise, not history uncertainty; three
+blocks remain three independent units. Greedy and matched-epsilon contrasts are related
+by the fixed .80 factor, so they are not independent mechanism evidence.
+
+The error pathways include law, conditional-response or ridge estimates, and SAFE reward
+estimates. Law-posterior accuracy alone cannot mediate/identify the package's net gain.
+Use the declared context-visit recommendation streaks and weighted mistakes to interpret
+full trajectories; random epsilon cooperation does not end a greedy-SAFE streak. The
+reward-defined check `matched_value = .649 - .80 * mean_greedy_mistake_cost` is an algebraic
+identity for equal exposure to these four contexts, not a new oracle arm or usable
+headroom claim. Uniform actual mean .595 is another check on saved readouts. W_R/W_F and
+these identities require scalar reductions only: no extra policy forward, fitting,
+Q-truth table, sampled reward or environment rollout. No extra threshold or confirmation.
+
+**Execution declaration retained.** Native `local_linux`, four independently executed
+histories per seed, 12 decision +12 law fits, 27,648 actual collected macros /82,944
+primitive ticks, including 24,576 repeated source macro executions. 27,648 sampled labels,
+27,648 Q-truth tables with 82,944 scalar policy values; zero evaluation environment ticks,
+zero additional reward draws or gradient calls. The 16 tiny correctness fits /768 ticks
+remain separate. Capture actual update/solve counts, process wall/CPU/RSS, all source/final
+states, raw arrays, metadata and admission/exit facts. Output root is
+`runs/skill_teammate_drift_learning/b07_own_collection_exploration`. Publish this adoption
+and reviewed source before the single declared native launch. Any failure keeps its
+operation identity and partial-exposure limits. No score-dependent expansion.
