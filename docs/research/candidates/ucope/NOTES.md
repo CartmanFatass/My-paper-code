@@ -5019,3 +5019,38 @@ report actual synthetic updates. Independent engineering review and DM acceptanc
 published-input launch. A technical failure remains a failure, not a negative scientific
 score or automatic retry. Read the complete batch together, then update the research
 explanation; finishing this batch does not by itself finish UCOPE.
+
+### 2026-09-21 00:11 UTC — B08 implementation acceptance, before native launch
+
+Accepted source `5c76145bbfd86f24e2c7c7ad4b15f245e1c5ccbe`, implementing the preceding
+prospective contract. I read the Implementer's engine and the complete collector/update/
+study/publication path. Independent Reviewer read `425746713..5c76145bb` and found no
+material reachable defect. Review traced phase-zero recurrent feedback, KEEP/END state,
+private paired coin slots, eligible-bit PPO/critic credit, fixed inherited hashes, admission
+before effects, native-J reduction, and partial-failure accounting. Review used existing
+evidence and performed no new execution. I accept the code as DM; this is engineering
+acceptance, not evidence for the scientific prediction.
+
+Fourteen distinct focused checks pass (10 engine + 4 study). Implementer development used
+three synthetic invocations: 9/9/10 passed, 85 synthetic transitions and 99 optimizer calls
+in total, pytest 5.70 s, measured process wall 8.15 s, largest process RSS 307252 KiB.
+DM integration used one combined invocation and two study invocations: 13 passed/1 failed,
+3 passed/1 failed, then 4 passed; pytest 1.96/1.85/1.80 s. The two failures were test-writing
+errors: the counter is `max_minibatch`, and independent NumPy/Torch float64 summations need
+not have identical last bits (observed difference 5.55e-17). Corrected assertions use the
+actual counter and atol 1e-14 for the double reduction, while counts/signs stay exact.
+The synthetic study itself completed on all three invocations; no scientific source was
+changed to repair those assertions. DM executions added 445 synthetic transitions and
+129 optimizer calls. Total development: 530 synthetic transitions / 228 optimizer calls;
+zero native worlds, saved-foundation forwards, scientific fits, Gaussian command draws,
+or Pro calls. DM full-process wall/RSS were not separately measured. Test scratch was
+owned and cleaned by pytest. Existing FSD tests and old UCOPE fits were not repeated.
+
+Production exposure remains exactly the preceding six-gate-fit declaration. The current
+canonical table still lists `ucope` as exploring with lead `Codex session (direct DM)` and
+owner pause lifted. Its old scalar-standing/fit-cap prose is historical and is superseded
+for this new work by the owner's explicit reopening and constitution section 3. Claude
+has active uncommitted FSD work in the canonical checkout; it is left untouched. Source
+snapshots and this direction's author index isolate the forthcoming runs. Native runtime
+cost and scientific outcomes are not yet measured. The original 04:06:07 UTC deadline
+and 7200 s per-invocation watchdog remain enforced.
