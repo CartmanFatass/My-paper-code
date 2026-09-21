@@ -284,6 +284,26 @@ rule choice. Seek Pro criticism of the actual claim/plan before this confirmatio
 its bounded implementation and publication while advice is pending. This is not closing
 VSP-03 or an automatic request for more seeds in B08.
 
+### L0 B09 implementation — prepared while scientific criticism is pending
+
+Owned changes: `experiments/candidates/vsp_03/opportunity_b09/study.py`,
+`scripts/run_vsp03_opportunity_b09.py` and mirrored tests. Reuse B08's published
+`train_and_evaluate` without changing any fit, observation, planner or panel code.
+Only the five fixed fresh seeds, confirmation object identity and across-block df4
+O−G reading change. Root output must preserve every block/technical failure and actual
+fit counts. Tests use mocked blocks and literal statistics, not scientific fits; guard
+tests verify direct CLI refuses before creating output. Reviewer checks the new entry
+and aggregation. DM owns implementation and acceptance. Do not launch B09 until the
+complete Pro answer is read and the DM has recorded its scientific choice; implementation
+is independent preparation and creates no confirmation outcome.
+
+Engineering acceptance: DM implemented the small B09 entry/aggregation and confirmed the
+B08 scientific files are byte-unchanged. Independent Reviewer found no material finding:
+five-block identity/order/completion, O−G sign, df4 interval and .02 context match the claim;
+failure paths retain actual fits and do not retry. Five focused checks passed in1.57 s
+(independent run1.25 s). Root failure accounting was source-inspected rather than exercised
+by a new injected-failure test; inherited per-block partial publication was already tested.
+
 ## Pro question 2026-09-21 fitted-opportunity-confirmation
 
 Conversation: new Jev direction consultation; private account/conversation details stay
