@@ -5070,3 +5070,24 @@ Monitor owns observation of these exact handles; DM retains scientific reading a
 decision. Only process/count/resource facts are read while the batch is incomplete;
 the three final score panels will be interpreted together. Accepted operations remain
 our responsibility through native exit, artifact collection and the resulting judgment.
+
+### 2026-09-21 00:16 UTC — Source-level clarification while scores remain unread
+
+Direct reading of `envs/pettingzoo/uav_env.py` and `env_adapter.py` corrects one phrase in
+the prospective explanation: the unchanged non-paper reward is **0.7 connected-user
+fraction + 0.3 mean normalized SINR of connected users**, with zero extra altitude term.
+The preceding phrase "coverage/quality/altitude reward" was inaccurate. Height affects
+geometry/channels and is clipped at the existing bounds; it is not separately rewarded.
+No reward or running input is changed by this correction. The collector already sums the
+native `rewards_dict` exactly as intended and does not use the adapter's mean scalar.
+
+The legal local observation contains own normalized position, up to 20 user relative
+positions/SINR values and up to 10 other-UAV relative positions/SINR values, thresholded
+and sorted by SINR, plus episode time. Those sorted slots do not promise stable entity
+identities. A contextual-gate gain could therefore arise from clock dependence, nonlinear
+command-distance response or local geometry/history. It would not alone establish a
+service-event or teammate-coupling mechanism. After all panels finish, use the already
+declared primitive/context arrays to describe probability variation, the affine term's
+actual range over observed d, and clock dependence. These are artifact reductions, not
+extra policy panels, predictor fits or a causal counterfactual analysis. They keep a
+successful complex gate from being mistaken for proof that every provided input mattered.
