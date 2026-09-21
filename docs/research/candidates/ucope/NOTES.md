@@ -5505,3 +5505,22 @@ All original handles are terminal and the read-only monitor has exited. The prod
 and recorded outputs remain recoverable. Both older automations stay paused. The acting Root
 continues to own shared main/RESEARCH integration; this branch owns the published scientific
 record, with no shared-index edit made by this DM.
+
+
+## 2026-09-21 03:57 UTC — Owner correction: independent UCOPE updates; no cross-session interaction
+
+The owner explicitly corrected the workflow: "你没有和root的任何交互流程 因该做独立的更新"
+and then "禁止你启动跨session会话 除非由我明确指令". This task has no Root reporting,
+acknowledgement, handoff or integration dependency. The current session directly owns UCOPE
+research, its notebook/code/results, and its UCOPE index updates and publication. Earlier
+entries describing a Root return route or delegated index integration are historical and
+are superseded by these owner instructions.
+
+Do not create, fork, start/resume, dispatch work to, or send messages to another session
+unless the owner explicitly requests that cross-session action. A repository method, role
+body, previous return address, or incoming coordination notice does not grant that permission.
+Routine progress stays in the notebook; no proactive status exchanges are needed. Reading
+published repository evidence and independently publishing scoped Git changes remain allowed.
+Use an isolated checkout and normal fast-forward publication to preserve concurrent writers;
+do not edit Claude's running checkout, FSD paths or another task's index. No research run,
+accepted handle, B09 evidence, native deadline or scientific stopping judgment is changed.
