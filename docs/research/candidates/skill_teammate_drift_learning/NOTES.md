@@ -6045,3 +6045,138 @@ notebook prefix is unchanged and the full20301-byte answer appears exactly once 
 new adoption. The assertion error altered no answer, input or experiment. Pro operation is
 complete; no retry or pending write remains. Publish these accepted code bytes and execute
 the single declared B11 batch via fresh local_linux snapshot admission.
+
+## 2026-09-21 08:52 PDT — B11 read: immediate matching helps; useful two-way table switching remains unestablished
+
+**Completed identity and verification.** The single accepted local_linux operation is
+`71d4f87c994b269b155bed8b136cdead7dca00590fd61471d030468fd3815f1a`, accepted
+2026-09-21T15:41:43.100755Z, scientific source
+`6adcfcd4bd9912f68b29d3664ea6ded935eecc60`, prospective source
+`548ae30195031322d38804b3ac90bd37cb4d2b44`. The existing launch observer was reconciled;
+no retry was sent. Supervisor/runner PIDs4041465/4041466 are gone, process-exit is0,
+and all three blocks/root are COMPLETE. The launcher status remains its historical accepted
+receipt; completion is established by process-exit and the scientific outputs, not by rewriting
+that receipt. All192 trajectories/48 paired worlds were retained.
+
+[Raw outputs](../../../../runs/skill_teammate_drift_learning/b11_law_table_crossing/summary.json),
+[stored-array readback](../../../../runs/skill_teammate_drift_learning/b11_law_table_crossing/readback.json),
+and [all-world plot](../../../../runs/skill_teammate_drift_learning/b11_law_table_crossing/recorded_primary_returns.png)
+are the evidence. The readback passed on its first complete invocation:18 stable science
+digests,12 unique B09 input digests,7 executing source digests,12288 actual rows,12288 planner
+rows and all98304 saved branches. Audit script SHA256
+`218534002e4c5f867788663011abd1ecf7f3529edbfcb073741585e0c41416cd`.
+It independently recomputes command-induced motion, connections/SINR-based original reward
+and division by3, cloned-state identity, selected-branch/actual identity, empirical/true-law
+Q reductions and post-choice regrets, four-cell pairing, fresh RNG namespace, per-world
+paths, contrasts, sample deviations and conditional MCSE. No environment/model was called.
+Independent Reviewer `/root/b09_native_review` checked hashes, frozen arrays, raw reductions
+and scope, found no blocking issue, and ran no native calls, training or tests. DM also
+read all base/world contrasts and visually checked the shared-axis figure. No adverse
+world was deleted and no threshold, CI, p-value or new success rule was introduced.
+
+**Primary deployment reading.** Values below are cumulative64-tick adapter return, team
+reward divided by3, not normalized success fractions. Each base uses all16 worlds.
+
+| Old base | source law/source table | source law/target table | target law/source table | target law/target table |
+| --- | ---: | ---: | ---: | ---: |
+| 95401 | 15.589925118 | 14.712453103 | 12.900460995 | 13.523638039 |
+| 95402 | 14.876297268 | 13.682937611 | 13.078047886 | 12.753431136 |
+| 95403 | 15.418919093 | 15.199191098 | 12.712147506 | 12.815206267 |
+
+| Contrast | 95401 mean (world SD) | 95402 mean (world SD) | 95403 mean (world SD) | Equal-base mean | Conditional MCSE |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| D_source | +.877472015 (1.011759926) | +1.193359657 (1.669312496) | +.219727994 (1.441967462) | +.763519889 | .202236326 |
+| D_target | +.623177044 (4.109072163) | −.324616750 (2.180415432) | +.103058761 (2.418534746) | +.133873018 | .436908297 |
+| I = D_source + D_target | +1.500649059 (3.787053363) | +.868742907 (2.586554824) | +.322786755 (2.468561030) | +.897392907 | .434020550 |
+
+D_source has14/16,13/16,10/16 positive worlds (37/48 overall). D_target has4/16,7/16,5/16
+(16/48 overall). These counts describe the full panel; they are not a replacement endpoint
+or an independent Bernoulli test. Target gains include+13.435890131 at95401/world11 and
++7.462868760 at95401/world4; target losses include−4.278967409 at95402/world1 and
+−3.181308526 at95403/world2. The largest gain exceeds the sum of all48 D_target values
+(+6.425904878). This establishes concentration of the observed mean, not permission to
+remove that gain or substitute a trimmed result. All values remain in the primary mean.
+MCSE is conditional on these three previously exposed learned bases and their six tables;
+it does not measure training uncertainty or convert192 trajectories into192 independent
+replications. B11 is a new fixed comparison, not an expansion or pooled repair of B09/B10.
+
+The positive interaction does not establish useful two-way selection. Source matching has
+a clear positive conditional reading; the target matching mean is small relative to its
+deployment variability and has opposing base signs. The prospective algebra still applies:
+for a source prevalence w, matching beats always-target by w*D_source and always-source by
+(1−w)*D_target. Both matter; no prevalence or per-world best-table oracle is selected here.
+No equality, impossibility or learning-superiority claim follows from this uncertainty.
+
+**Behavior and intermediate prediction.** On each of its own actual trajectories, J_source
+chooses OUT at every tick under both laws:6144 recorded ticks across the full panel. Hence
+its *realized behavior on this panel* equals the fixed OUT rule from B10; no fifth rollout
+was run or needed to read these bits. This is not a theorem that J_source is OUT in every
+state: on states visited by J_target, the recorded source candidate also sometimes chooses
+IN (65/107/228 ticks under source law and240/214/219 under target law by base). The distinction
+between a controller's own occupancy and a different controller's counterfactual candidate
+is essential. J_target itself chooses IN111/171/278 ticks under source law and282/254/262
+under target law, with72/76/82 and77/64/58 within-episode direction switches respectively.
+This is active state feedback, not an empty table or an unexecuted intervention.
+
+The prewritten immediate prediction is supported at the level of all12 occupancy-group
+means. Below each entry is the mean same-state mismatched-minus-matched regret (positive
+favors matching); each cell/base has1024 states. Both candidates use exactly the same saved
+eight-response table, and true-law diagnosis occurs after choices.
+
+| Actual occupancy | 95401 | 95402 | 95403 | Candidate disagreements; matched better/equal/worse |
+| --- | ---: | ---: | ---: | --- |
+| source law/source table | .002773626 | .002939172 | .003098109 | 54;54/0/0 |
+| source law/target table | .004563094 | .006466508 | .003721075 | 202;179/0/23 |
+| target law/source table | .001021626 | .001155259 | .000929238 | 67;67/0/0 |
+| target law/target table | .002305371 | .002473158 | .001769590 | 147;140/0/7 |
+
+Matching is therefore not perfect statewise. In particular, B09's zero target-J immediate
+regret on its saved states cannot be promoted to all fresh states; B11 records7 adverse
+matched choices on target-J occupancies. Nor may the two actual-occupancy means be subtracted
+to infer a same-state effect. The result supports a limited immediate-selection role for
+the tables while leaving their long-path usefulness much less convincing.
+
+Actual service/quality paths explain the return accounting, without identifying delayed
+causal credit. Source matching serves47/71/1 more ticks per1024, contributing
+.685416667/1.035416667/.014583333 coverage return per episode; quality adds
+.192055348/.157942990/.205144661. Target matching changes served ticks by+24/−29/−4;
+coverage contributes+.350000000/−.422916667/−.058333333, while quality adds
++.273177044/+.098299917/+.161392094. All height penalties are0. Thus the target table's
+better immediate choices do not provide a consistent coverage benefit along its induced
+paths. This is a measured probability/one-step-use/full-path gap; it is not a measured
+continuation value or evidence that a particular deeper planner would fix that gap.
+
+**Investment judgment.** Adopt the already consulted mixed/immediate-only branch: end
+further investment in this particular *frozen empirical law + radial one-step version-table
+selection* route at B11. Do not extend its worlds, relabel its tables, train a version gate,
+search a radial threshold or automatically append deeper planning. This is a scientific
+choice about the marginal value of that package, not a technical failure and not a claim
+that table switching has zero value. B10's conditional gains over IN/OUT and B09's joint-law
+learnability/immediate use remain positive evidence; B09's inconsistent complete-return
+gain and B11's weak target matching remain contrary evidence. Whole-table replacement still
+changes finite-sample marginals and dependence together, so no correlation-only attribution
+is available. The external shared-innovation contract still does not establish a missing
+policy query in central HMASD, endogenous teammate learning, cross-version replay benefit
+or usefulness of Claude's present skills.
+
+This closes a specific evaluated route, **not the B research question**. The next work is a
+bounded inspection of the actual central learner/collector's parameter-update and data-use
+interfaces, to decide whether a distinct finite-learning comparison is warranted under its
+real information rights. Unknown physical laws or hidden teammate policy access will not
+be invented just to keep a learning method alive. Prior B01–B08 negatives remain constraints;
+a new core comparison must have a concrete event, competent same-information control and
+discriminating prediction, and receive focused advice if selected. No new scientific launch
+is implied by this inspection. B remains independently owned here and exploring; no Root,
+Claude or App conversation is started.
+
+**Actual cost.** B11 started/completed0new fits,0training observations/count updates,
+0gradients and0actor/value-network forwards. It used12288 actual native steps and98304
+planning native steps/deep copies, totaling110592,192 constructors/implicit resets/logical
+initializations/channel refreshes,3 frozen states and6 probability views, plus3 unused loader
+marginal products.12288 response tables,12288 Q vectors/choices per empirical table,
+12288 true-law Q vectors after choices,24576 candidate values/regrets each,12288 actual
+choices/values/regrets,12288 external draws at3072 unique addresses. Runner wall139.143390525s,
+CPU138.952985985s, peak RSS445492KiB, single sequential local_linux process/numeric thread.
+Historical input cost remains3B09 fits/384 collection observations. The earlier144 correctness
+native calls remain separate. Hash/array audit, Reviewer and plotting added0scientific native
+calls or fits; plot rendering and readback are recorded-data arithmetic, not new evaluation.

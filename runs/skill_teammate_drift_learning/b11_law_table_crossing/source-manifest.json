@@ -1,0 +1,34 @@
+{
+  "b09_evidence_commit": "69a55e71d9f1bca4e8cdd204adce256cd05a7676",
+  "files": {
+    "array_adapter": {
+      "path": "envs/pettingzoo/env_adapter.py",
+      "sha256": "8b42c1c3e7ef44cb814f79225b4af944b1018ad764dfeb17e9e1cc294df79d40"
+    },
+    "b09_study": {
+      "path": "experiments/candidates/skill_teammate_drift_learning/native_joint_b09/study.py",
+      "sha256": "e9f830b2bfaa95187476d0ebdd882b1b454c0ed5c1b42cda541add547a6ffbb4"
+    },
+    "b10_study": {
+      "path": "experiments/candidates/skill_teammate_drift_learning/fixed_radial_b10/study.py",
+      "sha256": "8d66fbc2b144bebfe2871c20cbdda51626ed4ae701b0411d48c1d4c88ab45b6f"
+    },
+    "native_environment": {
+      "path": "envs/pettingzoo/uav_env.py",
+      "sha256": "f50d74cdba92d5ef976c8ba53d2697fc72742683fcb746b404b8c8807f463803"
+    },
+    "runner": {
+      "path": "scripts/run_skill_drift_law_table_b11.py",
+      "sha256": "5ccd41c36632382bc11e2bdfa397d2fd452c8055ce897d0566d6055ee8717812"
+    },
+    "scenario1": {
+      "path": "envs/pettingzoo/scenario1.py",
+      "sha256": "e5b3eb7d755a7d7866cc7cd01531383bee821f0c6d72a81a3d4fa9cb5954939e"
+    },
+    "study": {
+      "path": "experiments/candidates/skill_teammate_drift_learning/law_table_b11/study.py",
+      "sha256": "ccaff39896945b4c7ffd2cc62c365c759342eed7af1a4255a6d9942f60123a1b"
+    }
+  },
+  "plan_source": "548ae30195031322d38804b3ac90bd37cb4d2b44"
+}
