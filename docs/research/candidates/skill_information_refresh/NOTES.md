@@ -2082,3 +2082,14 @@ same near samples inside LONG, native admission refusal, exact tie behavior and 
 partial outputs. No open material review item remains. The declared full protocol has
 not yet executed; runtime, belief approximation and scientific usefulness remain to be
 measured. Publish this exact source and launch once through native admission.
+
+
+### C06 accepted native operation
+
+The first launch was accepted at 2026-09-21 10:17:21 UTC on local_linux from published
+source `45a1f534539032c021f5d44a7d78f4b503b0ba51`. Complete native identity, immutable
+snapshot, child/supervisor handles, current canonical-control observation and actual-node
+memory evidence are in [launch-manifest.json](../../../../runs/skill_information_refresh/c06_multistep_s73170_20260921/launch-manifest.json)
+and its referenced admission preflight. The same manifest is the read-only status handle;
+no second launch is planned. A bounded Monitor returns native facts while the DM prepares
+the complete reading. Acceptance is not scientific completion or a result claim.
