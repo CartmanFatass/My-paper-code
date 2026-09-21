@@ -3522,3 +3522,92 @@ The environment applies capacity-constrained shared user assignment and coverage
 reward; it does not itself expose the toy's four-cell terminal outcome as a skill event.
 Those source facts do not establish a legal actor feature or stable conditional response
 on UAV. No native rollout, Claude path edit or new skill-object construction occurred.
+
+## 2026-09-21 05:00 PDT — B08 fixed-history crossing: prospective diagnostic and L0
+
+**Question and reason.** B07's self-collection interaction is adverse in all three blocks,
+but the histories changed law, reward samples, response/ridge and SAFE estimates together.
+In 95303 the between-method .55 loss differs from R's own .65 feedback loss. We cannot
+choose a useful acquisition/uncertainty investigation from those diagonal comparisons
+alone. One bounded crossing asks whether the predictor ordering persists on *identical
+already-acquired histories*. This is a diagnostic of the fixed realized data, not a new
+algorithm, a confirmation attempt, additional seeds for B07 or an online policy claim.
+The current full Pro answer covers the package/matched-readout interpretation; Critic
+explicitly supports this next observation. Reuse that advice, without a per-batch Pro
+round or an owner permission step.
+
+**Frozen inputs and methods.** Evidence source is
+`6ab8db786a2dc2397d883e8476ccb0303b059f0e`, containing the complete B07 output from
+scientific source `03d3633bd55b4095d7b195ad5ecd3f44eb3c864a`. Use **all three existing
+blocks 95301, 95302, 95303**, target256, source state after2048 source observations.
+No new world draw, seed, epsilon, horizon, baseline or setting. R remains
+`response_all__response__prior2`; F remains `fingerprint_full__hybrid__prior2`.
+The two new continuations per block are **R_on_F_E_history** and
+**F_on_R_E_history**. Load each recipient method's complete saved source decision state;
+B07 verified source equality between that method's U/E branches. Reuse the donor's
+immutable target context/version, pre-outcome estimated law, collected action, outcome
+and reward, in chronological order. Predict before revealing that row's outcome/reward.
+The donor law features are the same law estimator's legal outputs from the same past
+records; there is no new law learner, source retraining or true-law input to the model.
+The recipient's own recommendation is evaluated but never changes which record comes
+next. Its later learning state reflects only its source state and the supplied past
+history, never the other stream or a future row.
+
+Keep existing R_E-on-R-history and F_E-on-F-history diagonals verbatim from B07; do not
+refit them. Together with the new off-diagonals, report each block's 2x2 table of full256
+matched .20-epsilon recommendation values, and the per-history R-minus-F and per-method
+R-history-minus-F-history differences. All off-diagonal values are explicitly
+**off-collector fixed-history readouts**. They are not actual epsilon-policy execution,
+importance-weighted reconstructions of a missing online trajectory, a law-only mediated
+effect, or fresh population replication. Reusing old world histories is intentional.
+Report first64/late64 and the four reward-weighted context contributions descriptively;
+no threshold, seed selection or pooling with B06/B07 for confirmation.
+
+**Predictions and investment decision.** Working prediction, low confidence: in 95303's
+.55 context R on F's history may retain more optimistic cooperation recommendations than
+F_E, because they share an optimistic law feature but integrate reward evidence differently.
+Conversely F on R's much denser .55 history may also become more optimistic. If both occur,
+the failure depends on the mapping-history interaction, not solely on insufficient samples.
+Across all blocks, an advantage for R on both same-history comparisons combined with its
+bad live diagonal would motivate acquisition research; R losing on both histories would
+weaken an acquisition-only repair story and raise the value of predictor-calibration or
+native-assumption evidence. Mixed effects support a conditional explanation and need not
+trigger another repair experiment. No new method is preselected to rescue the outcome.
+
+**Planned cost.** Six real target training continuations, one per recipient/seed,
+**1,536 previously collected macro records read**, with six saved source states reused.
+No source fitting, law fit, new environment tick, sampled reward or gradient optimizer.
+There are1,536 new pre-update decision Q predictions against reused truth tables and
+3,072 scalar policy reductions (greedy and matched epsilon). Source/first-target fidelity
+uses stored state vectors and the same first prediction already included in those counts;
+do not add a separate evaluation rollout. SAFE/response/ridge updates and solves, wall,
+CPU and peak RSS are measured; input-read/hash/restore costs belong in actual process wall.
+These are additional learning fits despite zero new environment data. Previously recorded
+scientific and tiny costs retain their identities. Native launch follows published reviewed
+source, exact input manifests and the current control entry; no direct production bypass.
+
+**Implementation L0.** Only add
+`experiments/candidates/skill_teammate_drift_learning/history_replay_b08/`,
+`scripts/run_skill_drift_history_replay_b08.py`, and matching tests. Do not modify any
+existing learner, B05–B07 engine/data, other direction, shared launcher or index. A narrow
+source-state restore helper must round-trip every relevant exported field: SAFE counts/
+reward, response counts/reward, cell fields, ridge statistics/coefficients, update/solve
+counters and empty full-history window; use the frozen constructor's settings/prior.
+No silently missing momentum/window/counter state. Input loader binds the three B07
+artifact-manifest hashes and checks needed raw/source/summary bytes before fitting;
+production input location/identities and exact seeds are fixed, not user-replaceable data.
+Store donor identity/digests, recipient source/final states, all target predictions and
+record provenance, fit counters, costs and reductions. Fail honestly and retain the
+operation; do not regenerate or edit B07 inputs when validation fails.
+
+Checks should cover source round-trip/fidelity, prediction-before-feedback, donor's
+frozen pre-outcome features, same-history contrast arithmetic, input tampering/seed/source
+rejection and the real literal native AST guard. A single shared synthetic fixture may
+perform **two tiny decision continuations of two rows each** (four recorded-feedback
+updates, zero law/environment/reward draws) from hand-specified synthetic source states;
+reuse it across tests and count any rerun. No B07 target continuation is a test/pilot,
+and no production seed is newly trained before the declared native batch. Pure checks
+and zero-update source-state round-trip checks need no extra learning fixture. Implementer
+returns a diff and exact costs; DM accepts after independent Reviewer. If complete source
+restoration is not feasible, return the precise missing state rather than silently repeat
+source training or change this declared cost.
