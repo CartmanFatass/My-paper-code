@@ -72,3 +72,12 @@ not rewrite this prospective text. Preserve the claim and append results.
 ## Result
 
 Not run. Pro criticism of this actual plan is pending.
+
+## Pre-execution adoption — 2026-09-21
+
+Pro answer `1473a1ebe0c1b81535adb2a9aabf4a18821051ca` was read in full; the DM response
+is appended in NOTES.md. No scientific plan change. Proceed with the original five blocks,
+ten fits, endpoints and reading rule. The implemented B09 wrapper at `815040cf4` fixes
+five-block completeness, O−G sign and df4 aggregation and passed independent engineering
+review. Expiry/blocking remain diagnostic events; only success, attempts and waiting
+enter J. Pro's optional O_guard was not added. No confirmation outcome exists at adoption.

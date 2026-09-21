@@ -499,3 +499,56 @@ MLE 的 iterations/function evaluations、端点计数、规划表计算、文�
 [B09配对21802]: https://github.com/CartmanFatass/My-paper-code/blob/a5a87aa223727b2673781009c90810e7a4842584/runs/vsp_03/opportunity_b08_21801_21803/21802/paired_differences.json
 [B09分歧21803]: https://github.com/CartmanFatass/My-paper-code/blob/a5a87aa223727b2673781009c90810e7a4842584/runs/vsp_03/opportunity_b08_21801_21803/21803/first_coupling_disagreements.json
 [B09配对21803]: https://github.com/CartmanFatass/My-paper-code/blob/a5a87aa223727b2673781009c90810e7a4842584/runs/vsp_03/opportunity_b08_21801_21803/21803/paired_differences.json
+
+## 2026-09-21 DM response and B09 execution decision — before confirmation outcomes
+
+Read the complete preceding Pro answer at `1473a1ebe0c1b81535adb2a9aabf4a18821051ca`.
+Transport key `hmasd:ec093ba547d5f13ee583084bcd15c31f27b610f3d34e6f6fead5bcf3924f1f26`
+was accepted once at 09:50:27 UTC; no resend. The transport reported CONFLICT because
+the target's non-answer prefix gained the DM's already published B09 preparation entry
+after the pinned question. DM byte checks establish that the question is unchanged from
+`a5a87aa`, the answer commit's parent is `815040cf4`, its sole changed file is this notebook,
+and the entire parent blob is preserved as a prefix with only the empty Answer filled.
+Therefore accept the actual answer commit by fast-forward. The chat receipt is not used as
+the answer. The writer loan is reconciled and returned; private conversation coordinates
+remain only in local transport state.
+
+**Adopt.** Run the unchanged five-block B09 claim. Pro's no material dissent applies to
+the narrow conditional package comparison, not complete independent artifact certification.
+Its inability to fetch all large raw files is explicit. DM's earlier complete local reading
+already verified all 86,016 native rows and 66 digests; separately checked its two cited
+adverse first-divergence examples (21802/world2 at t6, 21803/world1 at t12), both -.47 J.
+The read code supports the likelihood argument: next observation times depend on recorded
+past decisions and fixed slot occupancy, not an unseen future service outcome. This does
+not establish robustness to state-dependent future observation selection or model error.
+
+**Clarification of the earlier cost language.** Only success, attempts and waiting enter
+`J=(200S-10A-W)/400`. Expiry and blocking are diagnostic events, not extra reward penalties;
+failed attempts equal A-S and are not charged a second time. Earlier references to greater
+"waiting/expiry costs" mean greater waiting cost accompanied by more expiry events, not
+an additional expiry deduction. The failed prediction is retained. Earlier commitment is
+relative to O_self; O waits more than G. Same public raw data rights do not imply equal
+structural knowledge or compute, and O's small MLE wall excludes G's data-generation cost.
+
+**Remaining alternative and existing-data detail.** The independent local Critic agrees
+that state-dependent first-submission timing is a defensible description, but a simpler
+quantitative peer-age/deadline rule might suffice. Read-only B08 decisions show 17 own
+time/presence/age groups in every block with both actions as the peer state changes.
+At t16/own present age3, peer age0 gives SUBMIT while peer age1 gives WAIT (e.g. block21801
+worlds808/210), so relative age order alone does not reproduce O. At t22, all60/63/66
+first O/O_self divergences leave O_self with one unsubmitted job and O with two attempts.
+At t6, O_self still attempts both jobs in885/858/873 of929/903/916 divergent worlds;
+the paired J sums there are +26.885/+30.725/−4.120, preserving the adverse third block.
+These are post-hoc development descriptions, not extra confirmation units or evidence
+that a simpler rule must lose complete J. Pro's one fixed t22 O_guard is a useful recorded
+mechanism discriminator, not an added B09 panel, a prerequisite or an execution here.
+
+**Execution acceptance.** B09's already reviewed wrapper explicitly fixes21901–21905,
+requires five complete blocks, reverses each inherited G−O to O−G, and computes df4 t95.
+It does not call B08's n3 aggregate. Its root identity/reading is B09 O−G; nested blocks
+retain the unchanged reusable G−O field and preserve both directions without relabeling
+history. The five focused tests and independent Reviewer acceptance cover these changed
+boundaries. No new scientific code change or repeated Pro call is warranted by the advice.
+Publish this response and launch exactly the claim: ten fits,18,841,600 team ticks,
+2,560 G Adam calls, seven panels, no selection or same-batch extension. No B09 result
+exists at this decision. The cost/reading and all adverse branches in the claim stand.
