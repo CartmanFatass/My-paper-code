@@ -4824,3 +4824,381 @@ hash or summary. A successful write must name its actual commit. Advice is not a
 new permission layer; DM owns the decision.
 
 ### Answer
+
+
+Saved from chat, complete and verbatim. Question key
+`hmasd:11c472db187e2ca1f669e44c7a6337f4c6de905f99832440f287fd3c268a6c3f`:
+one accepted Send at 2026-09-21T14:05:47Z, observed6 Pro and attachment; collection complete
+with zero recoveries. Delivery inspection returned NOT_DELIVERED with no answer commit.
+Pro reported no available writing tool/CLI and expressly did not claim a verified repository
+permission denial. Complete response length8,548 characters after trailing-newline normalization;
+transport text SHA256 `7b0af0e126614c3456c78d8ac4d3ce1b84644397cfe39ca2e7d5aca6d8f37434`.
+DM inspected the full response; mathematical rendering breaks and source-label artifacts are
+preserved as received rather than silently repaired.
+
+GitHub 读取成功，但本次未完成写回，没有修改仓库，也没有产生新 commit。 当前暴露的 GitHub 接口中未找到文件写入／提交动作，运行环境也没有可用的 GitHub CLI 写入路径；这不是已验证的仓库权限拒绝。最新目标文件中，本题的 Answer 仍为空。以下为完整答复。
+
+Answer
+一、选择：保留四政策、零新增 fit 的固定规则比较
+
+我选择 DM 当前偏好的下一步：冻结三个 B09 final64 模型，使用新的配对评价随机流，比较 J_emp、M_proj、始终向内和始终向外四个闭环政策。现在不改变学习目标，不增加 continuation learner，也不立即结束这条径向控制路线。
+
+理由不是“所有学习方法都必须先通过固定规则这一关”，而是 B09 的具体结果已经使一个简单且决策相关的替代解释变得可信，但尚未检验完整：模型所表现出的部署收益，可能主要来自某种固定径向行为，而不是根据学得联合律逐步选择动作的额外价值。原计划恰好能以不重新拟合、不改变奖励和初始分布的方式检验这一点。
+
+hmasd-pro-question-b09-closed-l…
+
+这次评价的目标应明确为：
+
+对已经学得的这三个模型，在原定 target 控制器与初始分布下，使用联合／边际模型作一步动作选择，相对于无需概率模型的两个固定闭环规则，是否显示了值得保留的部署价值？
+
+它不是新一轮联合律可学习性检验，不是 B09 主终点的扩批，也不确认整套训练程序在重新采集数据后通常优于固定规则。对实际提出的这一有限比较，我没有发现必须先更换比较器、增加训练或另做科学观察的实质缺陷。
+
+二、证据范围与复核限制
+
+本判断使用附件指定的固定版本：问题、B09 完成条目、结果 JSON 和当前方法／宪章位于 69a55e71d9f1bca4e8cdd204adce256cd05a7676；上次完整建议、DM adoption 和 B09 prospective 位于 ee2d70c69abc0c5a45881da6e74937a7ac166689；native_joint_b09/study.py 与 runner 的执行语义位于 efe9ce4f39cdb9147d28bbb5c00e7be91dbfca55。我读取了 summary.json 的配置、结果归约和成本等相关字段，完整 readback.json，以及学习、随机地址、原生分支、评价和结果归约代码。最新分支只用于检查写入位置，没有替代固定科学输入。
+
+hmasd-pro-question-b09-closed-l…
+
+本次没有解码原始 NPZ，没有独立重算 artifact digests，没有运行环境、策略、学习器或测试。 JSON 所记载的 17 项科学文件校验、原始分支一致性和物理记录复核，是作者及独立 Reviewer 的已读检查记录，不是我的第二次原始数组审计。以下经验判断来自这些结果记录；从代码推出的政策语义和比较设计，会明确作为推理，而不称为新测量。
+
+目前没有阻止这项投资建议的关键文本来源缺口。真正尚未观察的是：固定向内／向外规则在新的、未经选择的完整评价轨迹上的表现。这是拟议实验要取得的新证据，不能用已有单步分支或某个有利 episode 补成已知结果。
+
+三、B09 应怎样更新工作解释
+1. 有限学习和即时决策这两环得到支持
+
+B09 不是没有激活机制的空试验。三个 target 训练流中，联合预测的 prequential log loss 都低于其边际投影；学习、版本分离和冻结评价在代码中是明确分开的。final64 的三个联合对比量 p
+00
+	​
+
+−p
+01
+	​
+
+−p
+10
+	​
+
+ 均为正，而对应投影为负。更重要的是，在两种政策于 final64 实际访问的合计 1,536 个状态上，J 的 true-q 一步 regret 都为零；36 个同状态 J/M 选择分歧全部有利于 J 的即时期望。
+
+因此，当前结果削弱了“这里主要是联合律没有学会，或者联合信息根本没有改变有用选择”的解释。它没有证明概率估计已完全准确，也没有证明 J 在未访问状态上同样一步最优；但再以更大概率模型或更多同类计数来修复已观察到的即时选择错误，已经缺乏直接依据，因为 final64 的这些错误并未出现。
+
+2. 可靠的完整轨迹收益没有得到支持
+
+原定 final64 主终点必须保留全部配对 episode：
+
+冻结模型所属训练种子	四个配对 episode 的 J−M 累计适配器回报差	块均值
+95401	−1.742469212，+0.495114578，+0.149408962，+0.613309475	−0.121159049
+95402	−0.479727536，−1.005092292，−1.635241415，−0.675637954	−0.948924799
+95403	−1.415706693，+0.148222680，−0.526910108，+7.170892535	+1.344124603
+
+三块均值是 +0.091346918。这些是 64-tick 累计适配器回报差，不是每步差，也不是默认 HMASD 的另一种 J 指标。两个块不利，一条很大的有利 episode 主导了小幅正总均值；那条 episode 应完整保留，既不能删除为“异常值”，也不能单独代替批次结果。
+
+所以，得到支持的是“普通联合计数加完整物理能够改善某些即时选择”，而不是“这套 myopic 包已有稳定的闭环净收益”。这正是上次 prospective 分开的中间预测与任务预测，现在不能因为前者实现，就把后者也算作实现。
+
+3. 稀疏分歧不能被读成影响很小
+
+36／1,536 是同一个已访问状态上两个动作选择器的分歧频率，不是“两个实际政策只在 36 个时间点有不同物理经历”。所有 final64 的 J/M episode 对都从 tick0 开始分岔；95403 的特殊 episode 中，J 在全部 64 ticks 都向内，而 M 始终向外。
+
+同样，95402 从 snapshot16 到 snapshot64 只改变两个配对时刻的焦点 bit，却有 61 个 reward 值随后变化。这提示少量决策变化可以通过位置历史产生长期后果。它不识别其中某一动作的延迟因果收益，也不意味着增加样本必然提高回报。
+
+据此，我会把当前解释写成：
+
+联合律的有限学习和其即时控制用途已经在规定的外部控制器信息契约下得到观测支持；完整闭环收益则取决于随后访问的几何与服务路径，当前并不稳定。尚未证明这些部署后果需要模型驱动的动作选择，而不能由固定径向规则取得。
+
+B06／B07／B08 的 R 包仍保留原有不利或未决结论。B09 的普通联合模型不是把旧 R 方法换名以后得到的成功；跨版本数据复用、内生 co-learning 和当前中央 HMASD 的缺失政策查询问题也没有因此被建立。 
+
+hmasd-pro-question-b09-closed-l…
+
+四、最强的替代解释，以及为什么它指向固定规则而非立即学习 continuation
+
+最强的使用价值替代解释是：在这个单用户、径向命令、固定高度的任务中，收益主要来自形成和保持某种服务几何；估计联合律后逐步作 myopic 选择，未必比一个固定径向规则更有用。
+
+这个解释有直接的结果动机。final64 的 M 在所有 12 条部署轨迹上都发出向外命令；最有利的 95403／episode3 中，J 则一直向内，最终进入约 13.56–16.44 米的径向往复，焦点 UAV 服务全部 64 ticks。M 到达区域角落，22 ticks 无服务。+7.170893 的回报差由覆盖和质量两项构成，而不只是某个概率评分更好。
+
+在相同初态、相同外部随机实现和原命令语义下，若一个固定规则逐步发出的命令与已有政策相同，确定性的原生物理会给出相同路径。这是代码契约下的条件推理。因此，上述特殊 episode 没有展示超出“始终向内”动作内容的额外适应性；已有 M 路径也没有展示超出“始终向外”的动作内容。它们足以使固定规则成为有力比较器，但不能推出这些路径关系在所有新世界中成立。
+
+另一个竞争解释是 myopia：即时收益最优不代表 64-step 回报最优。不过，“myopia 可能重要”还不是“应该立即训练 continuation value”的完整投资理由。
+
+令已知 target 律下的一步期望奖励为
+
+r
+ˉ
+q
+	​
+
+(x,a)=
+z
+∑
+	​
+
+q(z)r
+native
+	​
+
+(x,a,z).
+
+J 的即时读数回答的是当前状态上的 
+r
+ˉ
+q
+	​
+
+ 排序；完整政策价值还包含当前动作对后续状态分布的影响。B09 保存的一步分支没有给出“换掉某个早期动作后、以同一明确续接政策继续执行”的多步反事实。直接增加 continuation learner，会同时引入新目标、新近似、额外训练和规划成本，而固定规则已经可能解释现有主要收益路径。
+
+也不能把不稳定性完全归为“即时奖励抽样噪声”。记录中的各自路径条件期望和之差，三个块的均值约为 −.195761、−.816965、+1.380691，仍保留两个不利块；特殊有利 episode 的对应值约为 +7.004202。可是这些和依赖各政策已经访问的历史，外部随机创新也影响了那些历史。它们不是已对所有轨迹积分的 episode 期望，更不是某个单一动作的 continuation effect。
+
+由此，最合理的下一笔投入不是再证明“一步不等于多步”，而是回答更实际的缺口：已有部署价值是否根本不需要这个一步模型选择器。
+
+对“任务仍是人为构造、并非已证明的 HMASD 缺陷”的反对意见，我接受其结论边界；但它并不使这一次比较没有信息价值。它要求我们只评价这条受控路线的使用价值，不要求在尚有一个直接、便宜且可能结束复杂方案的比较未做时，就把它包装成通用不足或自动关闭整个方向。
+
+五、建议原样保留的比较，以及必须固定的语义
+冻结对象与四个政策
+
+使用三个 B09 final64 count states，不重新采集 source／target，不重训计数模型，不把 source 计数合并进 target，也不恢复 snapshot16 作为另一个可选 checkpoint。study.py 已将快照与评价分开，并保留 snapshot_counts、snapshot_probabilities 和更新数；后继应读取这些固定状态，而不是重新调用会执行训练和两个快照评价的 run_block。
+
+J_emp 和 M_proj 保持原有八分支一步选择及精确平局选 bit0。固定向内政策恒选 bit1，固定向外政策恒选 bit0；但四者都按当前动作前几何重新计算径向命令。固定规则忽略概率信息，是政策选择，不是剥夺它们的信息权利。
+
+这里最容易改变科学问题的实现细节是：
+
+“始终向内”不等于靠近后悬停，也不等于截断移动量以恰好停在用户处；“始终向外”也不等于固定一个世界坐标速度。 原 commands_from_bits 使用单位水平径向向量，半径接近零时采用既有的 agent-specific 方向约定。向内可能越过用户后折返；向外受原环境位置边界限制。这些现象应保留，不能为了使控制规则“更合理”而另加停止距离、速度衰减或新的边界行为。
+
+评价时保持 B09 的 target 联合创新过程、几何生成分布、64-tick 长度、固定高度与原生奖励。全部四政策都没有 evaluation learning updates；真实联合律用于外部控制器生成和必要的事后诊断，不作为本步政策输入。这个评价也不会测量 source-to-target 在线切换时的适应收益——它测量的是 final64 已学模型的条件部署价值。
+
+新随机流必须真新，四政策内部必须真配对
+
+B09 的 _geometry 和 _slot 把 master seed、stream、phase、episode、tick 编入地址，原评价没有把 view 或 snapshot 编进去。因此，仅更换输出目录、然后仍用原地址执行 episode0–3，会重复旧世界，不是这次声明的新评价。后继需要一个预先固定、与 B09 训练和评价地址不重叠的评价命名空间，同时在四政策之间共享地址。
+
+每个冻结基底下，四政策应面对相同的四组初态和按 tick 寻址的外部随机创新。政策可造成不同焦点位置与后续物理状态，但假设规划分支不能消耗真实控制器随机流；否则计算较多的政策会面对不同世界。
+
+不筛选接近旧有利 episode 的几何，不重复旧特殊 episode 来估计泛化收益，也不根据新分数选择某个 frozen base。三个 final64 基底全部保留。
+
+返回量与比较对象
+
+令 G
+b,e
+	​
+
+(P) 是冻结基底 b 下，新评价 episode e 中政策 P 的实际 64-tick 累计适配器回报。保留
+
+V
+b
+	​
+
+(P)=
+4
+1
+	​
+
+e=1
+∑
+4
+	​
+
+G
+b,e
+	​
+
+(P),
+Δ
+(P,Q)=
+3
+1
+	​
+
+b=1
+∑
+3
+	​
+
+4
+1
+	​
+
+e=1
+∑
+4
+	​
+
+[G
+b,e
+	​
+
+(P)−G
+b,e
+	​
+
+(Q)].
+
+应完整展示四政策的逐 episode 回报和逐基底均值。对这次决策，J−向内、J−向外是关键增量比较；J−M 保留原组件参照，M−向外检验此前观察到的行为替代关系能否延续。其它成对差可由同一结果表直接得到，无须增加轨迹。
+
+不要把每个 episode 上向内／向外中较好的那个，拼成主比较器。 那会构造一个事后知道随机实现的政策。两个规则应在所有世界中分别完整执行、分别报告；也不能每个 frozen base 选一个最有利规则后，声称这个选择未经结果暴露。
+
+这 48 条政策轨迹来自 12 组配对评价世界，嵌套在三个已经训练过、也已经结果暴露的模型基底下。它们不是 48 次独立学习重复，更不是三个新的训练种子。新的环境随机流增加的是条件部署信息，不会自动恢复训练程序层面的新鲜确认。
+
+hmasd-pro-question-b09-closed-l…
+
+六、判别预测与结果怎样改变投资判断
+
+我的低置信度工作预测是：固定规则会吸收相当一部分现有模型政策的部署行为，J 相对简单规则的额外价值会比“联合预测优于边际预测”的中间证据更弱。 这来自 M 的已有全向外路径，以及最大有利 J episode 的全向内路径，不是已测得的固定规则排名。
+
+中间读数应围绕实际政策内容：M 在新轨迹上是否仍与向外规则逐步一致；J 何时偏离两个固定规则；这些偏离是否伴随服务 UAV、未服务 ticks、覆盖和质量组成、径向位置及后续回报的改变。它们可主要从实际轨迹记录归约，不应为固定控制额外填充八分支规划，也不需要新设一个“行为变化量通过门槛”。
+
+其任务后果存在以下几种不同解释，必须分别保留。
+
+若一个固定规则以明显更低的计算成本，在新批次中没有留下值得保留的 J 增量收益， 我会建议结束这套径向 myopic 模型控制包的继续投入，保留普通计数学得联合律及其即时用途的有限结果，并将简单规则作为当前受控部署的选择。这里的结束是使用／机会成本判断，不是证明 J 与规则总体等价、真实效应为零，或所有 continuation 方法都无用。
+
+若 J 在新的世界中显示了超出两个固定规则的可重复任务价值，而且不是再次只靠一个极端 episode 支撑， 则“固定方向已经足够”的替代解释被削弱，这套现成包的保留理由增强。仍不能由此证明所有收益必须依赖联合律学习，或证明它优于其它透明的状态反馈规则；但本次选定的固定规则假说得到了有意义的反证。也不应因为结果为正，就立即再扩大到 continuation learning 或一般 HMASD 结论。
+
+若向内和向外在不同随机世界中交叉领先，而 J 不能利用这种差异取得净收益， 这并不自动证明需要学习一个选择器或更长规划器。事后胜负可能部分取决于决策时不可见的未来创新。只有“每个 episode 都存在一个事后更好的规则”，不足以证明可学习的决策信号存在，更不是可实现的 headroom。
+
+若四个新 episodes／基底仍不足以形成有用区分，准确结论就是条件部署价值仍不确定。这不使按原计划再加四个 episodes 成为自动动作。 批次结束可以伴随路线结束或暂不投入，而不必把宽泛的不确定性转换成无限评价义务。当前方法明确允许无有用区分和基于信息价值的停止。
+
+这也说明为什么我不现在就选择 continuation 比较：固定规则仍可能提供一个无需新增学习目标的答案；而当前材料既没有测得它们的完整新路径价值，也没有一个已经明确优于此观察的信息量／成本比的 continuation 方案。选择固定规则不是建立诊断阶梯，而是针对本次实际证据选出的一个直接比较。
+
+七、成本：零新增 fit 不等于零研究或零模拟成本
+
+DM 提出的主体核算是自洽的：
+
+政策	新评价 episodes	实际原生 ticks	规划分支调用	包含规划的原生 step 调用
+J_emp	12	768	6,144	6,912
+M_proj	12	768	6,144	6,912
+始终向内	12	768	0	768
+始终向外	12	768	0	768
+合计	48	3,072	12,288	15,360
+
+这些数值由四政策×四 episode×三个冻结基底和每个学习政策八分支／tick 直接得到，与附件的拟议成本一致。
+
+hmasd-pro-question-b09-closed-l…
+
+按原构造方式，还应记录 48 次原生构造／隐式 reset、48 次逻辑初始化及相应的自定义几何信道刷新。若复用原 response_table 的实现，12,288 个规划分支也对应 12,288 次 deep copy。状态读取、哈希核验、冻结概率／投影构造、动作与价值归约、序列化及读回仍是实际工作。
+
+新增 fits、训练观察、count updates、梯度调用和 actor/value-network forwards 均应为零；但 J/M 仍有实际政策选择和物理模型计算，不能笼统写成“零前向／零评价工作”。三个旧 fits 及其 source 成本保持历史身份，既不重复收费，也不从完整方法构造成本中抹去。两个固定控制不需要这些历史计数，应如实体现它们更低的构造和部署需求，而不是给它们补无用规划以“匹配算力”。
+
+B09 记录的过程 wall 为 34.291371239 秒、CPU 为 33.952026842 秒，但那是 B09 自己的完整过程测量，不能按分支数简单换算成本批次的时间保证。新过程的 wall、CPU、RSS 和准备／审阅开销仍待实际测量；未知不是零。
+
+工程上，这应是读取固定 B09 状态的独立评价入口，而不是运行原 runner 后再删除训练结果。原 runner 明确调用 run_block，后者会新建 learner、执行 source／target 学习并评价两个快照；照搬调用不满足“零新增 fit”。本答复没有执行任何这些操作，也不要求为选择本比较再做生产 pilot。
+
+八、最终判断与范围
+
+B09 已经使工作解释从“联合分布也许有用”推进到一个更精确的位置：在规定的信息契约和已访问状态上，它确实被普通计数学习出来，并改善即时选择；但让这些选择在完整路径上稳定产生净收益，仍未成立。
+
+下一项最有价值的未知不是如何把同一个概率表拟合得更复杂，也不是抽象地证明多步目标不同，而是：现有径向任务是否已经有一个不依赖概率模型的简单闭环答案。
+
+我支持原定的四政策、48-episode、零新增 fit 比较，保留所有 frozen bases、新随机世界、双方固定规则和实际成本；不加阈值，不改变奖励、命令字典或初始分布，不把评价变成重新训练，也不把结果接成自动 continuation 项目。
+
+它能够改变这条具体径向控制路线的使用与投资判断，但无论结果如何，都不会证明当前中央 HMASD 存在未解决的政策查询缺口，也不会把外生共享随机创新变成内生队友学习。路线结束与方向级否定、探索判断与确认结论，应继续分开。
+
+这是一项建议，不是新增批准层或执行授权；DM 保留选择、实施和结果后解释的责任。
+
+MATERIAL_DISSENT no
+
+## 2026-09-21 07:24 PDT — Pro adopted; B10 fixed-rule deployment comparison and L0
+
+Adopt the specific four-policy comparison and its scope, not a general requirement that
+learning must first beat every short rule. The advice reads the pinned JSON/source and
+acknowledges that it did not decode NPZ or independently verify digests; raw verification
+continues to rest on B09's DM/Reviewer work. Its consequential claims match the stored data.
+In particular,36 same-state disagreements must not be called36 differing ticks between actual
+trajectories. Both occupancies can differ after a single early choice. I also adopt the
+distinction between a post-hoc best direction in each world and a policy selectable with
+available information. No new Pro round or owner approval is needed for implementation,
+this declared execution, its reading or the route-choice branches covered by this advice.
+
+**Question and prediction.** Does the final64 joint-law controller have useful conditional
+deployment value over either of two much cheaper fixed radial rules? The low-confidence
+prediction is that fixed rules absorb much of the deployed behavior: M may again coincide with
+outward, and J's benefit beyond both fixed rules will be weaker than its immediate prediction
+advantage. The opposite result—J showing gains against both rules across the paired worlds,
+rather than only one extreme episode—would weaken that explanation. No claim threshold is
+introduced; this is one fixed exploratory evaluation with complete per-world results.
+
+**Frozen objects and arms.** Reuse all three B09 final64 states at evidence commit
+`69a55e71d9f1bca4e8cdd204adce256cd05a7676`, input root
+`runs/skill_teammate_drift_learning/b09_native_joint`, bases95401/95402/95403. Validate state,
+summary and manifest digests; each final state has64 source plus64 target observations,
+with separate tables. Take only its target probabilities and their exact marginal product;
+never refit, pool versions, select a base/checkpoint or invoke B09 `run_block`/`_training`.
+Readback/state validation is not a new probability-model fit. Four policies:
+
+- `J_emp`: eight native branches and joint-law expected one-step adapter reward, original
+  strict greater-than choice, tie bit0;
+- `M_proj`: the same branches and exact marginal-product probabilities, same tie;
+- `IN`: bit1 on every tick;
+- `OUT`: bit0 on every tick.
+
+All four use the unchanged B09 radial command function from the same pre-action snapshot.
+IN overshoots/reverses when appropriate; it does not hover, damp speed or stop at the user.
+OUT recomputes the radial direction and encounters original square boundaries; it is not a
+fixed Cartesian command. Preserve the radius<=1e-12 agent-specific convention. Full information
+rights, native physics/reward, target innovation law [.4,.1,.1,.4], geometry distribution,
+height50, N3/U1 and64-tick episodes are unchanged. Fixed rules are allowed to ignore inputs
+and do less computation; they get no wasted planning calls for artificial compute matching.
+True q generates teammates and may support explicitly post-choice diagnostics, never J/M input.
+
+**Fresh pairing.** Production uses base seeds95401/95402/95403 as RNG masters, but the
+predeclared namespace is **stream2, phase2, episodes0–3, ticks0–63**. B09 collection used
+stream0 and evaluation used stream1, so these addresses do not repeat its worlds. Within each
+base and episode, all four policies use exactly the same geometry and tick-addressed external
+innovation. Geometry category1, external category2 and environment-seed category4 retain the
+existing seed-sequence convention; no view, planner branch or outcome enters the address.
+There are12 fresh paired worlds and48 actual policy trajectories. Three bases are old,
+already-exposed learned objects, not three new training replications. No source evaluation,
+online version transition, early16 snapshot or new collection is included.
+
+**Readout.** For every policy retain each64-tick cumulative adapter return and physical
+team return (=3 times adapter), then average four episodes within each base. Main increment
+readings are J−IN and J−OUT, with J−M retaining the component contrast and M−OUT testing
+the behavior-substitution prediction; show every episode, each base and equal-weight
+three-base means. No test-world best-of(IN,OUT), per-base selected rule, checkpoint selection,
+removal of extreme worlds, pooled B09 endpoint or confidence claim from48 nominal trials.
+Also retain issued commands/bits, copied pre/after positions/observations/connections/SINR,
+reward components, terminal identities and pairing addresses. Record the J/M response tables
+and selected-branch identity; fixed arms need no such table. Read service ownership, unserved
+ticks, coverage/quality and radial paths from actual traces. These describe policy consequences,
+not individually identified delayed credit or a learned continuation value.
+
+**Investment consequences.** If a fixed rule leaves no convincing incremental deployment
+value from J at substantially lower cost, select that rule for this controlled task and end
+continued investment in this radial myopic-model package. This is a use/opportunity-cost
+decision, not equivalence, zero-effect proof or a verdict against all teammate-drift learning.
+If J outperforms both across fresh worlds without another single-episode dependence, retain
+this package's conditional-use explanation; no automatic general-HMASD or continuation claim.
+Crossing rule rankings can reflect hidden future innovations and do not by themselves identify
+a learnable selector. Inconclusive results do not automatically authorize more episodes or
+architecture changes. This batch answers the comparison actually proposed; the research
+judgment after it uses the full advice above rather than merely treating run completion as closure.
+
+**Cost and execution.** **Zero new fits, collection observations/count updates, gradients or
+actor/value-network forwards**.48 evaluation episodes×64 =3,072 actual native ticks;
+J/M each768 ticks×8 =6,144 planning calls, total12,288 planning branches/deep copies and
+**15,360 native step calls**.48 constructors/implicit resets/logical setups/custom geometry
+refreshes,3 loaded fixed states,3 target probability views and3 frozen projections. Preserve
+actual policy/value arithmetic, external innovation draw counts, digest/serialization work,
+wall/CPU/RSS and partial failures. Old B09 fits remain historical method-construction costs,
+not new fits nor free inputs. Sequential local_linux, one numeric thread; time is unmeasured.
+Exact output `runs/skill_teammate_drift_learning/b10_fixed_radial_controls`. Use the native
+snapshot launcher at a published accepted source, fresh actual-node admission and the existing
+lead literal. No altered arm, hidden pilot, extra seed or score-dependent batch expansion.
+
+**Engineering L0.** New owned package
+`experiments/candidates/skill_teammate_drift_learning/fixed_radial_b10/`, runner
+`scripts/run_skill_drift_fixed_radial_b10.py`, mirrored tests and B10 outputs. Reuse unchanged
+B09 helper physics, commands, response tables, RNG and physical record copying; do not edit
+B09/FSD/HMASD/shared environment or launcher code. Make one independent evaluation entry;
+never call a fitting entry and delete its training afterwards. Record/validate input hashes
+and execution sources; use fixed seeds/namespace/horizon/output suffix and a literal admission
+guard. Refuse existing scientific output but allow launch bookkeeping. Guard incomplete
+attempts/exposure honestly; zero fits does not make unfinished evaluation successful.
+
+Focused checks may use one shared **zero-fit tiny fixture**: a readonly B09 final64 state,
+geometry RNG master95992, stream2/phase2, one2-tick episode per four policies. That is8 actual
+ticks,32 J/M planning branches,40 native step calls and4 constructors/initializations/refreshes,
+no new training. Read the fixed input state without calling a learner. Production-state/hash
+validation, tamper/output refusal, no-training and admission AST checks can remain pure.
+Check fresh-vs-B09 addresses, across-view pairing, fixed-bit/radial/overshoot semantics,
+frozen state, selected native branches vs actual traces, terminal/reset/reward scaling and
+raw episode-to-base-to-root contrasts (pure synthetic three-base reduction is sufficient).
+Reuse the same tiny arrays rather than rerunning a fixture per assertion. Additional repairs
+retain all actual test exposure. Independent Reviewer checks the executable semantics, DM
+accepts the diff and publishes before production. Implementer adds no method or run, edits
+neither this notebook nor shared index, and returns actual checks and limits.
