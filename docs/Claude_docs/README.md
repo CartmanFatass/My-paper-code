@@ -129,6 +129,22 @@ whose corrections are incorporated. No experiment was run and no scientific obje
   (later on 2026-09-02) records the non-stationarity / semantic-drift / credit chain, the
   action-space cost of a duration menu and the interruption rule that replaces it, unpatterned
   event durations, and asynchronous switching against the autoregressive coordinator.
+- `TEMPORAL_ABSTRACTION_PARADIGMS_AND_HMASD_DIRECTIONS_20260921.md` — owner-requested advisory
+  note on the choice of research paradigm, written after reading HMASD (all 18 pages) and twelve
+  other primary sources first-hand; every claim is labelled READ / SCOUT / HYP and every idea
+  TRIED / RECORDED / NEW against the programme's record. Revised before publication against the
+  acting Root's review of the same owner question (owner correction "这本质是一个marl算法"; no
+  invented switching fee) and an independent critic pass (`MATERIAL_DISSENT: yes`, findings
+  verified and applied; the draft's price-on-re-assignment recommendation is withdrawn). Compares
+  HMASD as published with HMASD as run here; names three functions a high level can have in
+  cooperative MARL (information, complementarity, commitment) and reads FSD's B12 additive label
+  map as the measurement that the second is zero on scenario 1; argues that the exploration price
+  of an unfixed duration is endogenous to learning (joint dwell time) and that the open cell in
+  the literature — learned cooperative skills, sub-team scope, asynchronous lifetimes, online — is
+  the one July's HA-CTSE/R30 line already aimed at; nine idea seeds; five paradigm options with
+  one recommendation (joint skills in two stages: make them matter at fixed k on a
+  dense-and-coupled host, then untie time; a mechanism study as the harvest); four decisions left
+  to the owner. Chinese summary at the top. Advice only: nothing launched, FSD stays rested.
 
 ### plans/
 
