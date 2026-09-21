@@ -8,6 +8,7 @@ from experiments.candidates.ucope.frozen_mean_gate_b08.engine import Gate, freez
 from experiments.candidates.ucope.paired_branch_credit_b10.collection import (
     FocalCase, collect_pair, schedule,
 )
+from experiments.candidates.ucope.paired_branch_credit_b10.storage import inspect_pair, save_pair
 from experiments.candidates.ucope.uav_motion_prefix_b01.environment import SyntheticAdapter
 
 
@@ -144,3 +145,41 @@ def test_paired_collector_needs_no_unused_critic_but_factual_reference_does():
     with pytest.raises(ValueError, match="pre-outcome critic"):
         collect_pair(mode="factual", **arguments)
     assert before == arguments["counts"]
+
+
+@pytest.fixture(scope="module")
+def saved_pair(tmp_path_factory):
+    pair, counts = _collect()
+    path = tmp_path_factory.mktemp("pair-storage") / "pair.npz"
+    identity = save_pair(path, pair)
+    assert counts["team_steps"] == 10
+    return path, pair, identity
+
+
+def test_raw_pair_roundtrip_retains_every_context_and_reconstructs_credit(saved_pair):
+    path, pair, identity = saved_pair
+    read = inspect_pair(path)
+    assert read["team_steps"] == 10 and read["eligible"]
+    np.testing.assert_allclose(read["suffix_returns"], pair["suffix_returns"].numpy(), rtol=0, atol=1e-15)
+    assert read["delta"] == pytest.approx(float(pair["suffix_returns"].diff().neg()), abs=1e-15)
+    assert identity["bytes"] == path.stat().st_size
+    with np.load(path, allow_pickle=False) as arrays:
+        for name in pair["episodes"][0]:
+            for branch in (0, 1):
+                np.testing.assert_array_equal(arrays[name][branch], pair["episodes"][branch][name])
+        np.testing.assert_array_equal(arrays["common_uniforms"], pair["common_uniforms"])
+    with pytest.raises(FileExistsError):
+        save_pair(path, pair)
+
+
+def test_raw_credit_and_prefix_corruption_are_detected_without_new_rollouts(saved_pair, tmp_path):
+    path, _pair, _identity = saved_pair
+    with np.load(path, allow_pickle=False) as stored:
+        original = {key: stored[key] for key in stored.files}
+    for name, message in (("suffix_returns", "suffix credit"), ("context", "prefix mismatch")):
+        arrays = {key: value.copy() for key, value in original.items()}
+        arrays[name].flat[0] += 0.1
+        corrupt = tmp_path / (name + ".npz")
+        np.savez_compressed(corrupt, **arrays)
+        with pytest.raises(ValueError, match=message):
+            inspect_pair(corrupt)
