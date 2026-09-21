@@ -91,7 +91,7 @@ def test_complete_fixture_outputs_counts_selection_and_raw_arithmetic(tmp_path):
     assert len(result["trace_files"]) == 3
     selection = json.loads((out / "selection.json").read_text())
     assert len(selection["candidates"]) == 4
-    assert set(selection["selected"]) == {"SHORT", "LONG"}
+    assert set(selection["selected"]) == {"NEAR_COMMIT", "LONG"}
     assert selection["final_selection"] == "none"
     assert result["final_selection"] == "none"
 
@@ -102,7 +102,7 @@ def test_complete_fixture_outputs_counts_selection_and_raw_arithmetic(tmp_path):
     final_rows = {arm: sorted(
         [row for row in rows if row["phase"] == "eval" and row["arm"] == arm],
         key=lambda row: row["world_id"])
-        for arm in ("SHORT", "LONG", "ACTIVE_FIRST")}
+        for arm in ("NEAR_COMMIT", "LONG", "ACTIVE_FIRST")}
 
     for arm in final_rows:
         trace_names = result["final"][arm]["traces"]
@@ -130,9 +130,9 @@ def test_complete_fixture_outputs_counts_selection_and_raw_arithmetic(tmp_path):
                 np.testing.assert_allclose(trace["belief_weights"].sum(axis=2), 1.)
 
     for name, (left, right) in {
-            "LONG-SHORT": ("LONG", "SHORT"),
+            "LONG-NEAR_COMMIT": ("LONG", "NEAR_COMMIT"),
             "LONG-ACTIVE_FIRST": ("LONG", "ACTIVE_FIRST"),
-            "SHORT-ACTIVE_FIRST": ("SHORT", "ACTIVE_FIRST")}.items():
+            "NEAR_COMMIT-ACTIVE_FIRST": ("NEAR_COMMIT", "ACTIVE_FIRST")}.items():
         expected = [a["completed_jobs"] - b["completed_jobs"]
             for a, b in zip(final_rows[left], final_rows[right])]
         comparison = result["contrasts"][name]["completed_jobs"]
@@ -152,7 +152,13 @@ def test_exact_value_ties_match_active_first_on_all_optional_slots(tmp_path, mon
         return dict(hold=np.zeros(size), send=np.zeros(size), delta=np.zeros(size),
             se=np.zeros(size), particles=2, model_branch_transitions=0,
             model_initialization_worlds=0, synthetic_advance_draws=0,
-            synthetic_job_draws=0, end=record.t + 1)
+            synthetic_job_draws=0, end=record.t + 1,
+            near_end=np.full((size, 2), record.t + 1),
+            opportunity_tick=np.full((size, 2), record.t + 1),
+            opportunity_kind=np.full((size, 2), 2),
+            near_hold_samples=np.zeros((size, 2)), near_send_samples=np.zeros((size, 2)),
+            long_hold_samples=np.zeros((size, 2)), long_send_samples=np.zeros((size, 2)),
+            diagnostics={})
 
     monkeypatch.setattr(study, "paired_values", tied_values)
     out = tmp_path / "ties"
@@ -161,7 +167,7 @@ def test_exact_value_ties_match_active_first_on_all_optional_slots(tmp_path, mon
     with np.load(out / active_name) as active_trace:
         active_requests = active_trace["requests"].copy()
         active_sent = active_trace["sent"].copy()
-    for arm in ("SHORT", "LONG"):
+    for arm in ("NEAR_COMMIT", "LONG"):
         with np.load(out / result["final"][arm]["traces"][0]) as trace:
             for tick in range(48):
                 sender = tick % 2
@@ -204,12 +210,25 @@ def test_late_model_failure_preserves_completed_rows_and_partial_work(tmp_path, 
     assert summary["counts"]["actual_transitions"] == (
         summary["counts"]["selection_transitions"] + summary["counts"]["eval_transitions"])
     assert len(read_rows(out / "episodes.jsonl")) == 6
-    assert any(item["arm"] == "SHORT" and item["complete"]
+    assert any(item["arm"] == "NEAR_COMMIT" and item["complete"]
         for item in summary["trace_files"])
     assert any(item["arm"] == "LONG" and not item["complete"]
         for item in summary["trace_files"])
     for item in summary["trace_files"]:
         assert (out / item["file"]).is_file()
+    diagnostics = summary["root_diagnostics"]
+    assert 0 < diagnostics["retained"] <= 64
+    assert diagnostics["retained"] <= diagnostics["eligible_roots"]
+    for item in diagnostics["records"]:
+        with np.load(out / item["file"]) as root:
+            near = root["near_send_samples"] - root["near_hold_samples"]
+            long = root["long_send_samples"] - root["long_hold_samples"]
+            assert item["delta_near"] == near.mean()
+            assert item["delta_tail"] == (long - near).mean()
+            assert root["model_sent"].shape[:2] == (2, 2)
+            assert root["model_payloads"].shape[-2:] == (2, 5)
+            assert not root["model_sent"][0, :, 0].any()
+            assert root["model_sent"][1, :, 0].all()
     assert (out / "updates.jsonl").read_text() == ""
 
 
@@ -247,3 +266,32 @@ def test_contrast_requires_the_same_ordered_world_panel():
         dict(world_id=1, completed_jobs=2, service=1.)]
     with pytest.raises(ValueError, match="ordered world IDs"):
         _contrast(left, list(reversed(left)))
+
+
+def test_root_diagnostics_are_order_and_outcome_blind(tmp_path):
+    from experiments.candidates.skill_information_refresh.c01.host import CrossingHost, Worlds
+    from experiments.candidates.skill_information_refresh.c06.belief import take_local
+    host = CrossingHost(Worlds.make(19, 20, (0,), 48))
+    record = take_local(host, 0)
+
+    def collect(order, sign):
+        roots = study.RootDiagnostics(limit=3)
+        for world_id in order:
+            samples = np.full((1, 2), sign * world_id)
+            values = dict(near_hold_samples=np.zeros((1, 2)), near_send_samples=samples,
+                long_hold_samples=np.zeros((1, 2)), long_send_samples=2 * samples,
+                near_end=np.full((1, 2), 16), opportunity_tick=np.full((1, 2), 1),
+                opportunity_kind=np.full((1, 2), 2), diagnostics={})
+            roots.offer(record, (world_id,), values, np.array([True]), np.ones((1, 22)) / 22)
+        return roots
+
+    left, right = collect(range(20), 1), collect(reversed(range(20)), -1)
+    expected = sorted(study.RootDiagnostics.key(world_id, 0) for world_id in range(20))[:3]
+    assert sorted(left.records) == sorted(right.records) == expected
+    index = left.save(tmp_path)
+    assert index["eligible_roots"] == 20 and index["retained"] == 3
+    for row in index["records"]:
+        with np.load(tmp_path / row["file"]) as data:
+            assert row["delta_tail"] == row["world_id"]
+            assert data["root_world_id"] == row["world_id"]
+            assert row["half_sample_deltas"]["long"] == [2 * row["world_id"]] * 2

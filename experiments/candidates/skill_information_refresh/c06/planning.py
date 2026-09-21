@@ -8,22 +8,13 @@ from dataclasses import replace
 
 import numpy as np
 
-from ..c01.host import CrossingHost, DONE, FRAME, PERIODS, Worlds
+from ..c01.host import APPROACH, SHARED, CrossingHost, DONE, FRAME, PERIODS, Worlds
 
 
 def select_record(record, indices):
     """Keep the observation type without retaining a reference to the host."""
     return replace(record, **{name: getattr(record, name)[indices].copy() for name in (
         "own", "last_sent", "last_sent_time", "peer_packet", "peer_packet_time", "available")})
-
-
-def commitment_end(t, receiver, horizon):
-    """End of the receiver commitment containing delivery at t+1.
-
-    Delivery on a boundary belongs to the new commitment. A delivery just before
-    that boundary belongs to the old one; this is deliberately a short target.
-    """
-    return min(((t + 1) // PERIODS[receiver] + 1) * PERIODS[receiver], horizon)
 
 
 def independent_model_worlds(record, ids, seed, phase, particles):
@@ -89,13 +80,14 @@ def model_host(record, peer_payloads, advances, jobs):
     return host
 
 
-def paired_values(record, weights, states, ids, *, seed, phase, particles, mode, counters=None):
+def paired_values(record, weights, states, ids, *, seed, phase, particles, mode,
+                  counters=None, diagnostics=False):
     """Return native completion differences, with fixed future continuation.
 
     All root observations must be available and unforced. The only varying root
     intervention is HOLD versus SEND; future policies, model and RNG agree.
     """
-    if mode not in ("SHORT", "LONG"):
+    if mode not in ("NEAR_COMMIT", "LONG"):
         raise ValueError("unknown value horizon")
     if record.agent != record.t % 2 or not np.all(record.available) or record.t % FRAME >= FRAME - 2:
         raise ValueError("rollout requested outside an optional sender opportunity")
@@ -121,21 +113,127 @@ def paired_values(record, weights, states, ids, *, seed, phase, particles, mode,
     peer_payloads[..., 4] = selected[..., 3]
     host = model_host(record, peer_payloads, advances, jobs)
     count("model_initialization_worlds", 2 * len(ids) * particles)
-    end = min(record.t + 32, record.horizon) if mode == "LONG" else commitment_end(
-        record.t, 1 - record.agent, record.horizon)
     n = len(ids) * particles
-    total = np.zeros(2 * n, dtype=np.float64)
-    for tick in range(record.t, end):
+    receiver = 1 - record.agent
+    receiver_period = PERIODS[receiver]
+    long_end = min(record.t + 32, record.horizon)
+    opportunity_tick = np.full(n, -1, dtype=np.int16)
+    opportunity_kind = np.zeros(n, dtype=np.int8)
+    near_end = np.full(n, record.horizon, dtype=np.int16)
+    unresolved = np.ones(n, dtype=bool)
+    rewards = []
+    diagnostic_sent = []
+    diagnostic_payloads = []
+    diagnostic_wait = []
+    diagnostic_bypass = []
+    previous_wait = np.zeros(2 * n, dtype=np.int64)
+    previous_bypass = np.zeros(2 * n, dtype=np.int64)
+
+    for tick in range(record.t, long_end):
+        physical = host.payloads()
+        if tick >= record.t + 1 and unresolved.any():
+            # _prepare_tick has already selected a boundary route at this pre-step
+            # phase, so a boundary must be recognized before physical equality.
+            at_boundary = unresolved & (tick % receiver_period == 0)
+            if at_boundary.any():
+                opportunity_tick[at_boundary] = tick
+                opportunity_kind[at_boundary] = 1
+                near_end[at_boundary] = min(
+                    receiver_period * (tick // receiver_period + 1), record.horizon)
+                unresolved[at_boundary] = False
+
+            comparable = unresolved.copy()
+            if comparable.any():
+                hold_physical = physical[:n]
+                send_physical = physical[n:]
+                equal = np.all(hold_physical == send_physical, axis=(1, 2))
+                if np.any(comparable & ~equal):
+                    first = int(np.flatnonzero(comparable & ~equal)[0])
+                    raise RuntimeError(
+                        f"paired physical prefixes diverged before opportunity for sample {first}")
+                receiver_state = hold_physical[:, receiver]
+                at_gate = comparable & (
+                    (receiver_state[:, 0] == APPROACH)
+                    & (receiver_state[:, 1] == 0)
+                    & (receiver_state[:, 4] == SHARED)
+                    & (receiver_state[:, 3] >= 2)
+                )
+                if at_gate.any():
+                    opportunity_tick[at_gate] = tick
+                    opportunity_kind[at_gate] = 2
+                    ends = receiver_period * (tick // receiver_period + 1)
+                    near_end[at_gate] = np.minimum(ends, record.horizon)
+                    unresolved[at_gate] = False
+
+        if mode == "NEAR_COMMIT" and not unresolved.any() and tick >= int(near_end.max()):
+            break
+
+        view = host.view()
         if tick == record.t:
             requested = np.concatenate((np.zeros(n, dtype=bool), np.ones(n, dtype=bool)))
         else:
-            requested = host.view().own[:, 0] != DONE
-        total += host.step(requested)
+            requested = view.own[:, 0] != DONE
+        if diagnostics:
+            diagnostic_payloads.append(physical.copy())
+            diagnostic_sent.append(view.available & (requested | view.forced))
+        reward = host.step(requested)
+        rewards.append(reward)
         count("model_branch_transitions", 2 * n)
-    hold, send = total[:n].reshape(-1, particles), total[n:].reshape(-1, particles)
-    difference = send - hold
-    return dict(hold=hold.mean(axis=1), send=send.mean(axis=1),
-        delta=difference.mean(axis=1), se=difference.std(axis=1, ddof=1) / np.sqrt(particles),
-        particles=particles, model_branch_transitions=2 * n * (end - record.t),
+        if diagnostics:
+            diagnostic_wait.append(host.metrics["wait_ticks"] - previous_wait)
+            diagnostic_bypass.append(host.metrics["bypass_jobs"] - previous_bypass)
+            previous_wait = host.metrics["wait_ticks"].copy()
+            previous_bypass = host.metrics["bypass_jobs"].copy()
+
+    if unresolved.any() and long_end < record.horizon:
+        raise RuntimeError("no receiver opportunity found within the lawful 32-tick bound")
+    if np.any(near_end > long_end):
+        raise RuntimeError("receiver opportunity commitment extends beyond LONG32")
+    reward_steps = np.stack(rewards, axis=1)
+    simulated_steps = reward_steps.shape[1]
+    hold_steps = reward_steps[:n].reshape(len(ids), particles, simulated_steps)
+    send_steps = reward_steps[n:].reshape(len(ids), particles, simulated_steps)
+    absolute_ticks = record.t + np.arange(simulated_steps)
+    near_mask = absolute_ticks[None, None, :] < near_end.reshape(len(ids), particles, 1)
+    near_hold = (hold_steps * near_mask).sum(axis=2)
+    near_send = (send_steps * near_mask).sum(axis=2)
+    if mode == "LONG":
+        hold_samples = hold_steps.sum(axis=2)
+        send_samples = send_steps.sum(axis=2)
+        end = long_end
+    else:
+        hold_samples = near_hold
+        send_samples = near_send
+        end = int(near_end.max())
+    difference = send_samples - hold_samples
+    result = dict(
+        hold=hold_samples.mean(axis=1),
+        send=send_samples.mean(axis=1),
+        delta=difference.mean(axis=1),
+        se=difference.std(axis=1, ddof=1) / np.sqrt(particles),
+        near_hold_samples=near_hold,
+        near_send_samples=near_send,
+        near_end=near_end.reshape(len(ids), particles),
+        opportunity_tick=opportunity_tick.reshape(len(ids), particles),
+        opportunity_kind=opportunity_kind.reshape(len(ids), particles),
+        particles=particles,
+        model_branch_transitions=2 * n * simulated_steps,
         model_initialization_worlds=2 * n, synthetic_advance_draws=n * record.horizon * 2,
         synthetic_job_draws=n * record.horizon * 2, end=end)
+    if mode == "LONG":
+        result["long_hold_samples"] = hold_samples
+        result["long_send_samples"] = send_samples
+    if diagnostics:
+        def branch_shape(values, tail=()):
+            stacked = np.stack(values, axis=1)
+            shaped = stacked.reshape(2, len(ids), particles, simulated_steps, *tail)
+            axes = (1, 0, 2, 3, *range(4, shaped.ndim))
+            return shaped.transpose(axes)
+
+        result["diagnostics"] = dict(
+            sent=branch_shape(diagnostic_sent),
+            payloads=branch_shape(diagnostic_payloads, (2, 5)),
+            wait_ticks=branch_shape(diagnostic_wait),
+            bypass_jobs=branch_shape(diagnostic_bypass),
+        )
+    return result

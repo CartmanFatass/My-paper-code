@@ -1984,3 +1984,101 @@ from LONG samples. DM independently owns study.py and mirrored study tests, incl
 blind reservoir retention and naming. No host/model law change, no result execution,
 no git-index operations by helper. Independent reviewer checks this delta before DM
 acceptance, prospective freeze/publication and native launch.
+
+
+## 2026-09-21 — Prospective C06 exploration declaration
+
+This fixes the first result batch before any new scientific execution. It is an
+exploration of known-model transparent planning, not confirmation or a learned method.
+Inputs are this declared source commit and its immutable native-launch snapshot. Use
+local_linux and the configured Python/supervisor; canonical pause/lead, publication,
+actual-node free memory and duplicate claims must pass native admission. Planned fresh
+output: `runs/skill_information_refresh/c06_multistep_s73170_20260921/`.
+Expected lead is exactly `Codex DM (independent session)`.
+
+Object: byte-identical original C01 CrossingHost. Horizon 96 team ticks, periods 12/16,
+frame 8, alternating sender, delay 1, one eight-byte packet per sender/frame with forced
+last slot. Fourteen started jobs, 24 packets and 192 bytes per episode. Dynamics,
+receiver decoder, gate/route policy and native completion reward do not change. Both
+planning arms use the same copied lawful each-tick local history, full 22-state
+approximate physical belief and known law. No hidden actual peer state or future-world
+randomness enters the policy. Raw actual hidden state saved after request fixation is
+for offline diagnosis only. State-dependent silence likelihood is deliberately omitted;
+zero compatible physical support is a technical failure, not a true-state fallback.
+
+Arms: NEAR_COMMIT as corrected/adopted above, LONG with min(t+32,96), and untuned
+ACTIVE_FIRST. Both root interventions use HOLD/SEND, 32 common latent/noise samples and
+ACTIVE_FIRST continuation on both agents, with identical quota/delivery rules and zero
+terminal value. Deploy receding planning on each arm's resulting local histories.
+At each optional slot request SEND iff sampled delta > threshold, HOLD iff less, and
+ACTIVE_FIRST on equality. Forced and spent slots use the frozen host. Threshold offsets
+are not fitted physical communication prices. Equal model access/sampling/selection
+rights make a fair package comparison, not isolated identification of horizon.
+
+True-world master seed 73170; independent planner master 973170. Development phase 20,
+world IDs 0..63, for each of two planning arms at four thresholds in declared order
+(-0.05,0,0.05,0.10). Choose each arm's threshold by largest mean completed jobs, ties by
+smallest absolute threshold then numeric threshold. Final phase 21, fresh world IDs
+0..255, evaluates only those two selected rules and ACTIVE_FIRST. Development and final
+world/advance/job streams use the original SeedSequence addressing; synthetic streams
+use (model_seed, phase, world_id, root_tick, 606), shared between planning arms and
+thresholds but independent of actual world arrays. Batch size 16. No result-driven
+change of seeds, particles, horizon, thresholds, continuation, sample size or arms.
+
+Primary contrast: LONG minus NEAR_COMMIT completed jobs per final world. Both contrasts
+against ACTIVE_FIRST are required for practical interpretation. Also read all conflicts,
+waits, gate opportunities, bypass/jobs started and completion/service accounting. Save
+all final world/tick local observations, beliefs, values/paired SE, requests/sends,
+near endpoint statistics, native rewards and diagnostic actual state. Read all 256
+paired world differences, positive/negative/tied counts and conditional-world SE;
+any reported normal mean interval is descriptive for this fixed selected program and
+world law. It is not re-development uncertainty, training replication, global
+optimality, equivalence or UAV/MARL evidence. No optimizer updates occur during selection
+or evaluation. Parameter-learning seed confirmation requirements are not invoked.
+
+Read the predeclared at-most-64 hashed development LONG threshold-zero roots using
+already-computed paired trajectories: near/long/tail values, paired sampling SE,
+first-16 versus last-16 stability, opportunity kinds/endpoints, quota and future packets,
+physical states, waits and bypasses. Retain only the fixed hash sample, never preferred
+stories. No added rollouts. Long/near endpoint equality and absent/unstable ranking
+separation are substantive possible observations. Do not attribute model-tail value
+causally to quota or substitute it for actual deployment gain.
+
+Cost: zero new fits, zero training episodes/ticks, zero optimizer updates. Eight
+64-world development panels (512 episodes) plus three 256-world final panels (768)
+give 1,280 outer episodes and 122,880 actual team ticks. Both planning arms together
+are 1,024 episodes, at most 72 optional roots per episode, 32 particles, two branches
+and at most 32 model ticks each: upper bound 150,994,944 branch transitions. Actual
+padding to the largest near endpoint counts as work. Record exact initializations,
+synthetic draws, belief calls/rows/packet constraints/contradictions, per-panel work and
+wall time, total wall/CPU and the scientific child Linux peak RSS. Historical C cost
+remains four fits; zero new fits does not mean zero computational cost.
+
+Predictions and decisions: a useful longer-horizon package should beat both competent
+NEAR_COMMIT and ACTIVE_FIRST on completed jobs while showing readable tradeoffs beyond
+the near opportunity. A capable NEAR_COMMIT that absorbs LONG supports adopting the
+simpler target. A win only over NEAR_COMMIT does not displace ACTIVE_FIRST. Close or
+adverse results require separating lack of action separation, finite-MC instability,
+belief mismatch and local-to-deployed value failure using the retained evidence before
+choosing the next useful observation. A finite negative result does not disprove lawful
+refresh value or reopen solved C05. Technical exceptions retain all accepted handles,
+partial work and evidence; reconcile the same request, never blindly relaunch. Scientific
+continuation must answer a new explicit question, not expand this panel after its scores.
+
+
+### C06 implementation acceptance before first launch
+
+DM accepted the lawful filter/model hydration and complete evaluator/output work from
+93684c673, df10a0baf and 2dad09256, then read and accepted the corrected planner and
+bounded diagnostic delta above. Frozen C01 host remains byte-identical to 089e21f36.
+The independent Reviewer reported no material finding on the physical-belief/planning
+base, evaluator (after repairing native atomic-manifest temporary-file coexistence),
+blind diagnostic retention, or corrected opportunity-based planner. Latest integration
+checks: 29 C06 tests pass; planner plus original C01 contract 32 pass; independent
+planner/study pass 21. These are engineering fixtures, not experiment outcomes. Meaningful
+checks cover packet t-1 alignment, original host hydration, root RNG independence,
+first gate/boundary and terminal absence, per-particle common endpoints, padded compute,
+same near samples inside LONG, native admission refusal, exact tie behavior and retained
+partial outputs. No open material review item remains. The declared full protocol has
+not yet executed; runtime, belief approximation and scientific usefulness remain to be
+measured. Publish this exact source and launch once through native admission.

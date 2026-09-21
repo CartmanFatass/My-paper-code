@@ -1,6 +1,7 @@
 """Zero-training C06 comparison of short and long finite send-value rules."""
 
 from dataclasses import asdict, dataclass
+import hashlib
 import json
 from pathlib import Path
 import resource
@@ -52,6 +53,65 @@ class Config:
 
 def _write_json(path, value):
     path.write_text(json.dumps(value, indent=2, allow_nan=False) + "\n", encoding="utf-8")
+
+
+class RootDiagnostics:
+    """Retain the smallest fixed hashes among eligible roots, without scoring them."""
+
+    def __init__(self, limit=64):
+        self.limit = limit
+        self.records = {}
+        self.eligible_roots = 0
+
+    @staticmethod
+    def key(world_id, tick):
+        rank = hashlib.sha256(f"C06-root-v1:{int(world_id)}:{int(tick)}".encode()).hexdigest()
+        return rank, int(world_id), int(tick)
+
+    def wants(self, world_id, tick):
+        key = self.key(world_id, tick)
+        return len(self.records) < self.limit or key < max(self.records)
+
+    def offer(self, record, world_ids, values, requests, weights):
+        self.eligible_roots += len(world_ids)
+        for i, world_id in enumerate(world_ids):
+            if not self.wants(world_id, record.t):
+                continue
+            arrays = {name: np.asarray(values[name][i]).copy() for name in (
+                "near_hold_samples", "near_send_samples", "long_hold_samples",
+                "long_send_samples", "near_end", "opportunity_tick", "opportunity_kind")}
+            arrays.update({"model_" + name: values["diagnostics"][name][i].copy()
+                for name in values["diagnostics"]})
+            arrays.update({"root_" + name: getattr(record, name)[i].copy() for name in (
+                "own", "last_sent", "last_sent_time", "peer_packet", "peer_packet_time", "available")})
+            arrays.update(root_world_id=np.asarray(world_id), root_tick=np.asarray(record.t),
+                root_agent=np.asarray(record.agent), root_requested=np.asarray(requests[i]),
+                root_belief_weights=weights[i].copy())
+            self.records[self.key(world_id, record.t)] = arrays
+            if len(self.records) > self.limit:
+                del self.records[max(self.records)]
+
+    def save(self, out):
+        rows = []
+        for (rank, world_id, tick), arrays in sorted(self.records.items()):
+            name = f"root_diagnostic_world{world_id}_tick{tick}.npz"
+            np.savez_compressed(out / name, **arrays)
+            near = arrays["near_send_samples"] - arrays["near_hold_samples"]
+            long = arrays["long_send_samples"] - arrays["long_hold_samples"]
+            split = len(near) // 2
+            rows.append(dict(file=name, hash=rank, world_id=world_id, tick=tick,
+                delta_near=float(near.mean()), delta_long=float(long.mean()),
+                delta_tail=float((long - near).mean()),
+                near_se=float(near.std(ddof=1) / np.sqrt(len(near))),
+                long_se=float(long.std(ddof=1) / np.sqrt(len(long))),
+                half_sample_deltas=dict(near=[float(near[:split].mean()), float(near[split:].mean())],
+                    long=[float(long[:split].mean()), float(long[split:].mean())])))
+        index = dict(phase="selection", arm="LONG", threshold=0., eligible_roots=self.eligible_roots,
+            limit=self.limit, retained=len(rows), records=rows,
+            selection="smallest SHA-256 of C06-root-v1:<world_id>:<tick> among optional roots",
+            scope="same LONG synthetic trajectories; local model predictions, not policy effects")
+        _write_json(out / "root_diagnostics.json", index)
+        return index
 
 
 def _threshold_requests(delta, threshold, active):
@@ -130,6 +190,10 @@ def _trace_arrays(batch, horizon, support):
         predicted_se=np.zeros((batch, horizon), dtype=np.float64),
         predicted_hold=np.zeros((batch, horizon), dtype=np.float64),
         predicted_send=np.zeros((batch, horizon), dtype=np.float64),
+        near_end_mean=np.zeros((batch, horizon), dtype=np.float64),
+        near_end_min=np.zeros((batch, horizon), dtype=np.int16),
+        near_end_max=np.zeros((batch, horizon), dtype=np.int16),
+        near_equals_long_fraction=np.zeros((batch, horizon), dtype=np.float64),
         belief_weights=np.zeros((batch, horizon, support), dtype=np.float64),
         reward=np.zeros((batch, horizon), dtype=np.float32),
         completed_jobs=np.zeros((batch, horizon), dtype=np.int16),
@@ -155,8 +219,8 @@ def _save_trace(out, phase, arm, start, stop, world_ids, trace, steps):
 
 
 def _run_batch(host, arm, threshold, world_ids, model_seed, phase, particles, counts,
-               stage, retain_trace, out, start, trace_records):
-    modeled = arm in ("SHORT", "LONG")
+               stage, retain_trace, out, start, trace_records, root_diagnostics):
+    modeled = arm in ("NEAR_COMMIT", "LONG")
     initial = [take_local(host, agent) for agent in (0, 1)]
     beliefs = [PhysicalBelief(item) for item in initial] if modeled else None
     if modeled:
@@ -217,18 +281,23 @@ def _run_batch(host, arm, threshold, world_ids, model_seed, phase, particles, co
                 indices = np.flatnonzero(evaluated)
                 if len(indices):
                     selected_record = select_record(current, indices)
+                    selected_ids = np.asarray(world_ids, dtype=np.int64)[indices]
+                    collect_roots = stage == "selection" and arm == "LONG" and threshold == 0.
+                    retain_model_trace = collect_roots and any(
+                        root_diagnostics.wants(world_id, tick) for world_id in selected_ids)
                     before = {key: counts[key] for key in MODEL_COUNT_KEYS}
                     try:
                         values = paired_values(
                             selected_record,
                             beliefs[sender].weights[indices].copy(),
                             beliefs[sender].states,
-                            np.asarray(world_ids, dtype=np.int64)[indices],
+                            selected_ids,
                             seed=model_seed,
                             phase=phase,
                             particles=particles,
                             mode=arm,
                             counters=counts,
+                            diagnostics=retain_model_trace,
                         )
                     finally:
                         for key in MODEL_COUNT_KEYS:
@@ -237,8 +306,17 @@ def _run_batch(host, arm, threshold, world_ids, model_seed, phase, particles, co
                     trace["predicted_se"][indices, tick] = values["se"]
                     trace["predicted_hold"][indices, tick] = values["hold"]
                     trace["predicted_send"][indices, tick] = values["send"]
+                    endpoints = values["near_end"]
+                    trace["near_end_mean"][indices, tick] = endpoints.mean(axis=1)
+                    trace["near_end_min"][indices, tick] = endpoints.min(axis=1)
+                    trace["near_end_max"][indices, tick] = endpoints.max(axis=1)
+                    trace["near_equals_long_fraction"][indices, tick] = (
+                        endpoints == min(tick + 32, host.horizon)).mean(axis=1)
                     requested[indices] = _threshold_requests(
                         values["delta"], threshold, active[indices])
+                    if collect_roots:
+                        root_diagnostics.offer(selected_record, selected_ids, values,
+                            requested[indices], beliefs[sender].weights[indices])
 
             sent = current.available & (requested | forced)
             trace["requests"][:, tick] = requested
@@ -338,6 +416,7 @@ def run_study(out, launch_sha, config=Config()):
         config=asdict(config),
         counts=counts,
         phases_seconds={},
+        panels=[],
         resources_unmeasured=False,
         selection=[],
         selected={},
@@ -346,7 +425,7 @@ def run_study(out, launch_sha, config=Config()):
         trace_files=[],
         final_selection="none",
         expected_accounting=expected,
-        model="known finite physical law shared by SHORT and LONG",
+        model="known finite physical law shared by NEAR_COMMIT and LONG",
         belief="approximate physical belief; peer silence likelihood intentionally ignored",
         belief_stats_semantics=("observations count batched LocalRecord calls; observation_rows "
             "multiply each successful call by its batch size; packet updates and contradictions count rows"),
@@ -374,17 +453,20 @@ def run_study(out, launch_sha, config=Config()):
     summary["phases_seconds"]["setup"] = time.monotonic() - started
     flush_summary()
     final_rows = {}
+    root_diagnostics = RootDiagnostics()
 
     with (out / "episodes.jsonl").open("x", encoding="utf-8") as episodes:
         def evaluate(stage, phase, arm, threshold, episodes_count, retain_trace=False):
             rows, traces = [], []
+            panel_started = time.monotonic()
+            panel_before = counts.copy()
             for start in range(0, episodes_count, config.batch):
                 stop = min(start + config.batch, episodes_count)
                 ids = tuple(range(start, stop))
                 host = CrossingHost(Worlds.make(config.seed, phase, ids, config.horizon))
                 batch_rows, trace_name = _run_batch(
                     host, arm, threshold, ids, config.model_seed, phase, config.particles,
-                    counts, stage, retain_trace, out, start, summary["trace_files"])
+                    counts, stage, retain_trace, out, start, summary["trace_files"], root_diagnostics)
                 if not all(row["jobs_started"] == expected["jobs_per_world"]
                         and row["packets"] == expected["packets_per_world"]
                         and row["bytes"] == expected["bytes_per_world"] for row in batch_rows):
@@ -407,13 +489,16 @@ def run_study(out, launch_sha, config=Config()):
                 print(json.dumps(dict(status="PROGRESS", phase=stage, arm=arm,
                     threshold=threshold, completed_native_episodes=counts[f"{stage}_native_episodes"])),
                     flush=True)
+            summary["panels"].append(dict(phase=stage, arm=arm, threshold=threshold,
+                wall_seconds=time.monotonic() - panel_started,
+                counts={key: value - panel_before[key] for key, value in counts.items()}))
             return rows, traces
 
         active_phase = "selection"
         phase_started = time.monotonic()
         try:
-            grouped = {mode: [] for mode in ("SHORT", "LONG")}
-            for mode in ("SHORT", "LONG"):
+            grouped = {mode: [] for mode in ("NEAR_COMMIT", "LONG")}
+            for mode in ("NEAR_COMMIT", "LONG"):
                 for threshold in config.thresholds:
                     rows, _ = evaluate("selection", 20, mode, threshold,
                         config.selection_episodes)
@@ -426,7 +511,7 @@ def run_study(out, launch_sha, config=Config()):
                     summary["selection"].append(candidate)
                     flush_summary()
             selected_records = {mode: _select_threshold(grouped[mode])
-                for mode in ("SHORT", "LONG")}
+                for mode in ("NEAR_COMMIT", "LONG")}
             summary["selected"] = {mode: record["threshold"]
                 for mode, record in selected_records.items()}
             _write_json(out / "selection.json", dict(
@@ -441,7 +526,7 @@ def run_study(out, launch_sha, config=Config()):
             active_phase = "eval"
             phase_started = time.monotonic()
             final_traces = {}
-            for arm in ("SHORT", "LONG", "ACTIVE_FIRST"):
+            for arm in ("NEAR_COMMIT", "LONG", "ACTIVE_FIRST"):
                 threshold = summary["selected"].get(arm)
                 rows, traces = evaluate("eval", 21, arm, threshold,
                     config.eval_episodes, retain_trace=True)
@@ -454,9 +539,9 @@ def run_study(out, launch_sha, config=Config()):
                 )
                 flush_summary()
             summary["contrasts"] = {
-                "LONG-SHORT": _contrast(final_rows["LONG"], final_rows["SHORT"]),
+                "LONG-NEAR_COMMIT": _contrast(final_rows["LONG"], final_rows["NEAR_COMMIT"]),
                 "LONG-ACTIVE_FIRST": _contrast(final_rows["LONG"], final_rows["ACTIVE_FIRST"]),
-                "SHORT-ACTIVE_FIRST": _contrast(final_rows["SHORT"], final_rows["ACTIVE_FIRST"]),
+                "NEAR_COMMIT-ACTIVE_FIRST": _contrast(final_rows["NEAR_COMMIT"], final_rows["ACTIVE_FIRST"]),
             }
             summary["phases_seconds"]["eval"] = time.monotonic() - phase_started
 
@@ -473,6 +558,7 @@ def run_study(out, launch_sha, config=Config()):
             summary["phases_seconds"][active_phase] = time.monotonic() - phase_started
             raise
         finally:
+            summary["root_diagnostics"] = root_diagnostics.save(out)
             summary["phases_seconds"]["total"] = time.monotonic() - started
             flush_summary()
 
