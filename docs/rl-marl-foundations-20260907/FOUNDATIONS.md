@@ -52,7 +52,11 @@ HMASD 的算法对象还包括团队技能、个体技能以及它们的共同�
 
 原论文也将技能用途、技能数敏感性和子队协作灵活性列为限制。附录 F 在三个 SMAC 场景、各五次运行的 50 个个体技能中报告 12 个对任务有用；同文还报告表现好的 Overcooked 运行中各技能均有用。因此 24% 不是 HMASD 的普遍常数，更不是当前 UAV 的测量。全队一个 team skill 缺少显式的子队层次，也不等于联合个体技能不能表达任何分组行为。上述限制提供研究动机，仍需检验当前任务的实际学习瓶颈。[HMASD，附录 D、F、G](https://proceedings.neurips.cc/paper_files/paper/2023/file/c276c3303c0723c83a43b95a44a1fcbf-Paper-Conference.pdf)
 
+原论文主要验证稀疏奖励下的技能发现与协调，不能直接将这套作用解释移到稠密奖励 UAV，也不能由奖励稠密推断探索问题消失。配置的量级差异是真实的：论文所用任务最大联合标签笛卡尔积为 3m 的 `3 * 3^3 = 81`，当前六成员 S1 配置为 `6 * 6^6 = 279936`，相差 3456 倍。正文的 `2s_vs_1sc` 有两名受控成员，不应把敌方单位计入；其组合数为 `2 * 5^2 = 50`。这些是配置计数，非学习样本量比例。较小技能集合可以作为普通实现候选；奖励尺度、熵项和共同更新不同，不能由原始系数或组合数直接诊断停滞原因。[HMASD，§4、附录 E 表 3](https://proceedings.neurips.cc/paper_files/paper/2023/file/c276c3303c0723c83a43b95a44a1fcbf-Paper-Conference.pdf)；[配置与计数核对](../research/RESEARCH.md#claude-advisory-reconciliation-2026-09-21)
+
 技能的任务用途也可能依赖搭档组合。预测已执行组合的结果准确，不能直接证明更换伙伴技能后的用途；后者需要实际执行证据，同时不能要求每个技能与所有搭档都同样有效。搭档多样化和减少共同适应已有成熟先例：Other-Play 利用已知任务对称性，Fictitious Co-Play 训练对一组固定伙伴及其历史检查点的响应。它们研究陌生伙伴协作，不能直接当作同一 HMASD 团队内部技能重组的已验证方法；通用的伙伴随机化本身也不是新的机制。[Other-Play，§§3–5](https://proceedings.mlr.press/v119/hu20a/hu20a.pdf)；[Fictitious Co-Play，§2.1](https://proceedings.neurips.cc/paper/2021/file/797134c3e42371bb4979a462eb2f042a-Paper.pdf)
+
+FSD B12 的标签计数回归不是“任务没有协作需求”的测量：收集来自三个固定 checkpoint 的状态依赖策略，模型含位置效应，只用一个同质性项检查特定非加性。其后 Pro 和 DM 已限定为原分布中的标签回报关联，不能排除成员身份、标签对或状态条件的交互；负的重复标签效应还可能对应去重协调。常量标签地图也不能限定时变选择的收益。用途探针可以帮助选题，但旧固定技能下缺乏正证据，不是新技能共同学习的性能上界。[B12、解释咨询及随后采用](https://github.com/CartmanFatass/My-paper-code/blob/00eac27c535ccffb66354f8bfac62acb504874ca/docs/research/candidates/flexible_skill_duration/NOTES.md)；[本次建议对照](../research/RESEARCH.md#claude-advisory-reconciliation-2026-09-21)
 
 比较的信息条件需要沿实际 actor 输入核对。普通 own-observation MAPPO 可以回答一个有用的实际基线问题；如果另一方法在执行时还能访问团队摘要，这个比较就同时改变了信息和方法，不能独自归因为分层的收益。FSD 的当前 B01 已明确将 D1280−CF 定义为完整方法包的差异，而非 hierarchy headroom；后来的 CF_S 缩放修复也不能被忽略。应分别说明实用比较、匹配信息的比较和组件归因各回答什么。[FSD 的固定 B01 问题](https://github.com/CartmanFatass/My-paper-code/blob/267d1bcaebafa5f8f9049098d645e2f548b7c678/docs/research/candidates/flexible_skill_duration/FSD_MATCHED_INFORMATION_BASELINE_B01_PROSPECTIVE_CARD_20260916.md)；[B05 修复及后续解释](https://github.com/CartmanFatass/My-paper-code/blob/267d1bcaebafa5f8f9049098d645e2f548b7c678/docs/research/candidates/flexible_skill_duration/NOTES.md)
 
@@ -89,6 +93,8 @@ Option 由启动条件、内部行为和终止机制定义，这些部分可以�
 在适当的 Markov 条件下，option 边界可用 Semi-MDP 描述。持续 \(\tau\) 个 primitive steps 的片段累积 reward，并以 \(\gamma^\tau\) 折扣后续价值。异步多智能体中，不同 agent 的边界可以不同；学习方法需要表达谁正在继续、谁重新选择以及哪些 reward 属于哪些时间段。某篇论文采用的 padding、轨迹组织或 advantage 方法不是所有异步算法的必选项。[层次与异步专题](topic-notes/03_HIERARCHY_ASYNC.md)；[宏动作原始论文](https://proceedings.mlr.press/v100/xiao20a.html)
 
 时间抽象可以组织较长时域的探索和行为，也可能使响应迟缓或承诺于不合适的技能。更少切换本身不是收益；它必须通过任务后果体现价值。
+
+个体驻留、全队重选事件间隔和有效合作的持续时间需要区分。若各成员在共同离散检查点以独立概率 \(p\) 重选，首次有人重选的平均检查数为 \(1/[1-(1-p)^n]\)，而不是无条件等于个体均值除以成员数。\(p=.4,n=6\) 时个体均值 2.5、首次有人重选均值约 1.049。即使发生重选，也可能仍选同一标签或通过局部接替保持合作；连续时间合流的 \(k/n\) 事件率推理不自动描述这些任务后果。承诺上下文可帮助学习，但不自行延长合作或保证异步收益。[假设、计算与采用边界](../research/RESEARCH.md#claude-advisory-reconciliation-2026-09-21)
 
 在多智能体中，个体持续时间还决定哪些成员能在此刻重新选择，哪些成员继续执行已有承诺；联合探索与信用学习需要面对这种不同步的行动机会。一个全队共享的可变时钟可以研究时间抽象，但不能单独证明解决了个体异步协调。联合动作组合数也不能直接当作学习样本复杂度定理。已有宏动作 MARL 和异步 actor-critic 方法是相关参照；新方法需要说明相对它们以及现有 HMASD 已有机制改进了什么。[宏动作 MARL](https://proceedings.mlr.press/v100/xiao20a.html)；[异步 actor-critic](https://arxiv.org/abs/2209.10113)；[ACAC](https://proceedings.mlr.press/v267/jung25a.html)
 

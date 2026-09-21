@@ -68,8 +68,9 @@ current scientific responsibility moves to B. Claude's FSD ownership is unchange
 
 **Current project review:** [2026-09-21 whole-project reassessment](#portfolio-review-2026-09-21-project-research-management)
 records the completed assessment of both owner-supplied third-party reports, Pro's advice
-and current published results. B remains active; C, VSP-03, UCOPE and FOLR current routes are
-archived; FSD and the other reserves retain their existing owners and status. Research priority
+and published results. B subsequently entered reserve under its independent DM's
+`99f745b3a` standing; C, VSP-03, UCOPE and FOLR current routes are archived. FSD and the other
+reserves retain their existing owners and status. Research priority
 is evaluated by the next useful observation and its route to the UAV question, with no obligation
 to keep three directions busy or to manufacture a successor for an answered route. The review
 adds no fits or rollouts and does not resume FSD or frozen G33.
@@ -79,6 +80,9 @@ selects a finite-resource comparison of ordinary joint duration parameterization
 research question, with fixed-clock partner-skill recombination as the sole alternative.
 It records complete advice, concrete method scope and limits, without a new algorithm claim,
 direction activation or accepted experiment batch.
+The [Claude advice reconciliation](#claude-advisory-reconciliation-2026-09-21) incorporates
+the later owner-supplied note, retaining useful regime/dwell insights and correcting the
+inferences that would make fixed-clock success a prerequisite.
 
 ## Active
 
@@ -5298,3 +5302,109 @@ FSD/UCOPE/A/FOLR/MGTAP/ACVC 的有界反证继续保留。
 本轮成本：**0 新 fits、0 新 rollouts、0 新科学评估**；完成源码/文献阅读、解析推导、
 咨询和文档形成。没有新实验生产者、运行批次或方向状态变化。本次形成的具体下一
 投资选项是上述普通学习比较；它不是等待外部条件的重启清单，也不是自动开跑指令。
+
+#### Claude advisory reconciliation 2026-09-21
+
+Owner follow-up: "claude docs中的research notes也更新了一份建议". Root read all 850 lines
+of Claude's [advisory note](../Claude_docs/research_notes/TEMPORAL_ABSTRACTION_PARADIGMS_AND_HMASD_DIRECTIONS_20260921.md)
+at `68c78bcae564448c7a5859d706272062e86e9b61`, including its revision and limitations.
+That commit initially existed only on the local main branch. Root merged its two document
+paths unchanged into the owned publication branch, preserving the original author and text.
+The note responds to the earlier temporal-learning review, before this section's complete
+Pro answer and final duration-parameterization decision. Advice remains distinct from adoption.
+
+**采用的增量。** 这份材料把三个值得保留的问题放得更具体：原论文与 UAV 的学习配置
+差异；真正有任务用途的合作关系能维持多久；七月的异步技能研究已经试过哪些方法。
+这些内容补充当前主线，但不构成“当前方法必然为零”的诊断。
+
+1. **原论文与 UAV 的配置差异值得正视。** Root 核读 HMASD §§3–4、附录 D–G、
+   表 1–3，并查看表 3 的页面。论文主证据来自稀疏奖励任务，技能数与 k 的选择敏感；
+   当前 S1 配置为六成员、六团队标签、六个体标签。按声明的标签笛卡尔积，原论文
+   所用任务最大为 3m 的 `3 * 3^3 = 81`，S1 为 `6 * 6^6 = 279936`，比值 3456。
+   这个计数支持把技能数作为普通实现选择认真对待，不是样本复杂度比值，也没有证明
+   当前分布近均匀由空间大小造成。原论文奖励稀疏度、外在权重及学习条件不同；仅由
+   内在奖励系数较小，不能宣布发现机制完全失效，或要求“全开／全关”。
+2. **把有效配合的持续时间作为解释对象。** 当前 Pro 已用服务/回传支撑和接替完成
+   描述有用协作。Claude 的联合驻留思路进一步提醒：个体保持很久，不保证所需的
+   合作关系也保持很久。后续若采用它解释结果，应区分重选事件、标签组合变化与
+   实际合作中断；不能仅把全队标签一直不变当作任务成功的代理量。
+3. **继承七月的实际尝试与来源。** Root 补读 R30 的
+   [结果及解释边界](../external-review/gpt5_6_pro/20260714_r30_sparse_exploration_review/RESULT_SUMMARY.md)：
+   每臂 64000 transitions 的 shaped Alice–Bob 屏幕中，KEEP/SET 确实使用了时间自由度，
+   两臂均未完成任务。它约束这一具体配方和暴露，不把未接触奖励当作异步技能普遍
+   无效。旧 [ACAC](literature/n_k_many_agent_deep_dive/analysis/P02_ACAC.md) 与
+   [IARO](literature/n_k_many_agent_deep_dive/analysis/P08_IARO.md) 阅读索引也是可复用资产，
+   其中历史 gate 或阶段顺序不因被引用而成为当前治理。
+
+**需要修正的推论。** ResearchCritic 独立审阅返回 MATERIAL_DISSENT: yes；Root
+对决定是否改动主线的来源作了以下核对。
+
+- **B12 没有测出“场景 1 没有协调需求”。** 它在三个固定训练基座上、按原 coordinator
+  的状态依赖采样律收集，拟合标签计数与 episode 位置效应；非加性检查只有 cap 500
+  的一个 homogeneity 项及 all-equal 预测对照，不是状态条件下的完整技能交互实验。
+  原生标签也未被精确随机化。FSD 笔记中的完整 Pro 答复和 DM 后续采用已经修正：
+  R² 包含位置效应，置换未保留状态条件，绝对地图未被完整复现，且不能排除身份、
+  标签对或状态相关的效应。略负的重复标签项也可能对应需要去重的竞争，而非没有
+  协调。常量标签地图的跨度不限定时变选择的收益。
+  [B12、Pro 修正与 DM 采用，固定来源](https://github.com/CartmanFatass/My-paper-code/blob/00eac27c535ccffb66354f8bfac62acb504874ca/docs/research/candidates/flexible_skill_duration/NOTES.md)
+- **η² 不是实际策略梯度的信噪比或可学习性上界。** 同一既有咨询已纠正 pooled
+  `η² * rows` 的单位、六成员熵项的尺度，以及十步决策间隔不等于十步信用截断。
+  B12 的正面信息是原收集分布中存在可提取的标签回报关联；“高层完全没有可学对象”
+  与“信用机制已经被证明是唯一瓶颈”均不由它推出。读其最初条目时必须继承后续修正。
+- **无切换费不推出有限学习无收益。** Nachum 等 §1 明确同时陈述：充分表达的
+  primitive policy 在 Markov 设定可实现最优，而所研究任务中层次方法的经验优势
+  主要来自探索。这不是对 FSD/UCOPE/A 具体负结果的预测定理。稠密奖励也不自动
+  消除探索困难；信息、互补、承诺可作分析线索，未证明穷尽所有算法作用。
+  [Nachum 等，§§1、3](https://arxiv.org/html/1909.10618v2)
+- **联合驻留的公式需要更新过程假设。** 连续、无同刻事件的合流更新过程可有
+  `k/n` 的平均事件间隔；它不是任意时刻剩余寿命的通式，也不能直接套在共同离散
+  检查点上。若每次检查各成员独立以概率 `p` 重选，首次有人重选前的检查数满足：
+
+  \[
+  \mathbb E[L_{\rm any}]=\frac{1}{1-(1-p)^n}.
+  \]
+
+  在笔记举出的 `p=.4,n=6` 说明性模型中，个体均值为 2.5 次检查，无人重选概率
+  `.6^6=.046656`，首次有人重选均值约 1.049 次，而不是 `2.5/6`。这是条件模型的
+  解析计算，未运行新模拟。实际重选可以再次选同一标签，局部接替也可能保持任务
+  作用。给 policy/critic 增加合法承诺上下文，可能改善 continuation 学习，但不会
+  自动延长合作、消除联合依赖或保证收益。“可加必平局、互补时独立必输”并非通则。
+- **四篇方法的边界不等于整个交叉领域为空。** Root 新取回并阅读 IARO 原文
+  §§3.2–3.3、4：其表示和 joint-option 发现先于后续通用学习，joint option 的启动
+  要求全队投票，实验中终止也要求所有成员选择终止动作，并设 50 步硬停止；任意
+  子集留作未来工作。这支持该方法的比较边界，不证明“没有人成功过在线异步技能”。
+  ACAC 全文在本轮之前已经取回并核读，前述 Decision 保留了准确的 λ/γ 区分；
+  Claude 关于 Root 尚缺全文的描述对应较早状态。
+  [IARO 作者终稿](https://homepages.inf.ed.ac.uk/msridhar/Papers/iclr26_multiagentOptionsDiscovery.pdf)
+
+**投资顺序保持当前选择。** 固定 k 的技能用途研究是有理由的替代顺序；在已有相容
+checkpoint 上做用途检查也可降低不确定性。但技能会随时长、轨迹分布及共同更新而
+改变，旧固定技能的诊断不能给新共同学习设性能上界。因此不采用“先测到非零交互、
+先胜过 flat，再允许研究时长”的前提。检验交互也不必穷举所有标签；若被实际选中，
+需说明具体的状态、成员、技能替换、续接规则和新增评估成本，不能因零 fits 便视为
+免费或已经执行。
+
+本次保留普通条件分解／自回归时长的主比较及共同的合格价值学习上下文；未把主要
+干预改成 critic context，未选定新宿主，也未将固定周期阶段插为前置批次。固定 k
+伙伴重组曝光仍是唯一保留的后备；缩小技能数、调整普通探索设置与脚本参照是可选
+实施工具，需按实际信息价值选择，未追加训练矩阵。面向 UAV 的解释仍应落到真实
+接入/回传/接替后果，而不是要求所有成员一直保持同一标签组合。S7 的物理耦合提供
+动机，尚未证明当前技能在其上具备可利用的时序增益；既有 G33 冻结范围不因建议改变。
+
+这次复用上方完整 Pro 答复及 FSD 原有 B12 解释咨询：它们已经覆盖共同学习、充分
+知情的普通参照、旧负结果的边界及无需阳性前置条件。此次是证据纠偏和补充解释，
+没有实质更换问题、主要干预或关键比较，故不重复发送同题。若未来实际选择固定 k
+发现先行、critic 主干预或改变机制解释的新宿主，则须针对那个具体变化咨询；这不是
+新审批层。Claude 文中的 DECIDE 项是建议，不自行成为当前流程要求。
+
+Root 的数字自纠正也保留：本轮 commentary 曾由表 3 的 `2s_and_1sc` 名称误算为
+三名受控成员，得到错误的 250。随后核对正文 `2s_vs_1sc` 与
+[SMAC 官方 map registry](https://github.com/oxwhirl/smac/blob/master/smac/env/starcraft2/maps/smac_maps.py)
+确认该场景为两名成员、一个敌人，当即向用户撤回。Claude 的最大 81 计数成立；
+250 和约 1120 倍不进入共识。其余未在此核对的报告数据仍为有来源的建议，不能
+因全文阅读就声称全部独立复验。
+
+发布前保留独立 B 在 `99f745b3a` 的最新 standing，未编辑其结果判断或联系该任务。
+本次追加 **0 fits、0 rollouts、0 新科学评估**；FSD 所有权和休息状态未变，未激活
+新方向。进入 FOUNDATIONS 的是已核对的配置差异、B12 估计对象边界与驻留概念区分；
+并未把缩小标签空间、补 critic 或异步共同学习的候选收益写成既有结果。
