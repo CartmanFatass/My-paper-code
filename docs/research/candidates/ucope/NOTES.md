@@ -5524,3 +5524,10 @@ published repository evidence and independently publishing scoped Git changes re
 Use an isolated checkout and normal fast-forward publication to preserve concurrent writers;
 do not edit Claude's running checkout, FSD paths or another task's index. No research run,
 accepted handle, B09 evidence, native deadline or scientific stopping judgment is changed.
+
+Independent publication is complete: `main@f3b79ffba85833e13b06f1c29b52a9b65df203d9`
+updates only the shared RESEARCH index, from a fresh isolated checkout owned by this task.
+The UCOPE B09 standing and owner correction are published; every other direction row and
+the parsed pause/state/lead remain unchanged. The remote main SHA was verified after a normal
+fast-forward push. No cross-session creation, dispatch or messaging was used for this update,
+and no other session's checkout was modified.
