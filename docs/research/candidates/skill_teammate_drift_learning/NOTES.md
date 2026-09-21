@@ -1944,3 +1944,82 @@ verified all 186 per-block artifact hashes, exact seed/config/setting coverage a
 and failed-launch context are retained; no dev truth value is used to override this
 selection. Continue the existing batch with 95101/95102/95103, 9 decision + 3 law fits,
 without changing any scientific input or expanding the setting bank.
+
+## 2026-09-21 03:20 PDT — B05 held-out reading: useful signal, heterogeneous early loss
+
+**Execution and evidence.** The [held-out native manifest](../../../../runs/skill_teammate_drift_learning/b05_unknown_law_heldout/launch-manifest.json)
+at source `1d311f8d5ef03b02886ebfedda881091d16b5526` has a consistent exit-0 witness.
+All nine selected decision fits and three law fits completed. The saved selection input
+is byte-identical to development's fixed selection. DM readback verified every held-out
+artifact digest, all 2,304 pre-outcome observation counts, positive parameter movement,
+and independently reconstructed exact rewards/regrets from the saved law and actions
+without invoking a model, optimizer or environment. Detailed [readback](../../../../runs/skill_teammate_drift_learning/b05_unknown_law_heldout/readback.json)
+preserves all endpoints, context slices and decomposition; source arrays remain alongside it.
+
+Held-out stage: 20,736 unique ticks, 20,736 decision observations, 9,696 ridge solves,
+10,662 SAFE posterior updates, 3,358 cooperative conditional-response posterior updates,
+6,716 direct-regression statistic updates and 3,358 shared-law updates. Process wall
+1.095065 s, CPU .987089 s, peak RSS 42,312 KiB. B05 totals: **75 completed fits**,
+41,472 unique ticks / 13,824 macros; 158,976 decision-reading macros / 476,928 tick
+exposure; process walls sum 5.298857 s and CPU sum 5.100277 s. Maximum of the two separate
+process peaks is 48,516 KiB, not a simultaneous or end-to-end project peak. Gradient
+optimizer calls and extra evaluation environment ticks/reward draws are zero. Source
+publication, launch, review and subsequent reading time are outside these process walls.
+Retain the one pre-fit AST refusal and all tiny correctness exposure separately.
+
+**Observed task-value differences (response minus reference; positive favors response).**
+
+| Endpoint/reference | 95101 | 95102 | 95103 | Three-block mean |
+| --- | ---: | ---: | ---: | ---: |
+| first64 / full | -.001796875 | +.025781250 | +.006718750 | +.010234375 |
+| first64 / recent | -.003671875 | +.036015625 | +.004140625 | +.012161458 |
+| full256 / full | +.002558594 | +.006191406 | +.010371094 | +.006373698 |
+| full256 / recent | +.003183594 | +.010664063 | +.003144531 | +.005664063 |
+| late64 / full | +.001640625 | +.002187500 | 0 | +.001276042 |
+| late64 / recent | +.001640625 | +.006562500 | +.007343750 | +.005182292 |
+
+Primary regret for response is .021484375 / .006953125 / .076875; full reference
+.019687500 / .032734375 / .083593750; recent .017812500 / .042968750 / .081015625.
+All three methods struggle on block 95103. Primary paired sample SDs are .014121188
+against full and .021024384 against recent: three blocks do not establish a stable
+population ranking. Full256 is a retained secondary reading, not a replacement primary.
+
+**What changes scientifically.** The known-law positive evidence is no longer the only
+reason to continue: a fully learned, causal law supply still gives a positive average
+early signal and positive whole-target differences in these three new blocks. The
+simple direct learners actually moved and used the same observations and estimated law.
+The strong current-cell, law-only and hybrid alternatives all had development rights;
+the selected comparisons are finite packages, not universal superiority over every
+ordinary direct estimator. The response method itself is ordinary model-based learning.
+
+The intermediate prediction is qualified rather than simply passed: in 95101 response
+makes **13** first64 sign errors against **16** for both references, yet loses value.
+Its wrong cooperative choices in the .35 context cost .94 total, and mistake severities
+differ across contexts. In 95103 it has one more error than recent (32 vs31), yet higher
+value. Thus error counts, MAE and regret cannot be substituted for each other.
+
+For response's first64 cooperative-value decomposition, mean absolute response errors
+are .008119 / .002588 / .013021 versus law errors .089914 / .087514 / .167694. The
+shared SAFE estimate also has absolute errors .016877 / .015652 / .023555. On 95103,
+the .35 context is estimated at mean 11 probability .672260 and response chooses
+COOPERATIVE on 14/16 appearances, costing 3.29 regret. Known-response/estimated-law
+diagnostic first64 regret remains .0753125 there, versus response .076875; on 95102
+its choices exactly match response. This locates a serious remaining law-estimation
+limitation in the recorded reference calculation. It is not an achievable upper bound
+for arbitrary learners and does not identify a general causal mediator of the package.
+
+Do not interpret smaller numbers than B03 as a measured causal attenuation from hiding
+law alone: B05 also changed the declared law family/support and primitive completion
+construction. It supplies new unknown-law evidence on its own host. Endogenous teammate
+learning, policy-induced collection and native UAV trajectories remain unanswered.
+
+**Next investment judgment.** Keep B exploring. This is neither a confirmation nor a
+reason to idle the direction after an adverse block. My next proposed decision is a
+fixed five-new-block check of the selected finite package's **original first64** benefit,
+with the full-history hybrid as primary reference and recent hybrid retained as a
+secondary reference; no retuning, reward change or endpoint promotion. Before entering
+confirmation, obtain Pro's focused criticism of that actual claim/plan, especially
+whether noisy development selection or the remaining estimated-law problem makes a
+different next observation more informative. The prior Portfolio consultation did not
+cover this completed result or a confirmation plan. No further scientific fits are
+launched while that decision is being prepared; independent reading/publication continues.

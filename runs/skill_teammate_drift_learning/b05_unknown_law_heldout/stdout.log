@@ -1,0 +1,6 @@
+{"event": "block_started", "stage": "heldout", "seed": 95101, "decision_fits": 3}
+{"event": "block_complete", "stage": "heldout", "seed": 95101}
+{"event": "block_started", "stage": "heldout", "seed": 95102, "decision_fits": 3}
+{"event": "block_complete", "stage": "heldout", "seed": 95102}
+{"event": "block_started", "stage": "heldout", "seed": 95103, "decision_fits": 3}
+{"event": "block_complete", "stage": "heldout", "seed": 95103}
