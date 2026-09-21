@@ -3348,3 +3348,68 @@ options as later alternatives. This entry is that record; it declares no run for
   constant label (B08, B09).
 - A fixed-weight panel is exact only on the training host; node fast-forwards delete tracked
   run records from the node's sparse checkout (restore before a probe).
+
+## 2026-09-20 20:45 PDT — prospective: additive label credit as an external label bandit, B13 (six fits)
+
+**Idea I1, first form.** Test the claim "if label selection is learned from additive
+per-agent credit, D's score rises" in the most direct way, without editing the shared
+learner: the coordinator's agent labels are replaced, in training, by draws from a
+context-free law driven by the count regression B12 validated, and deployment executes the
+estimated best label. B09 found state-dependent selection worth ≤ .025 at these checkpoints,
+so a context-free law loses little. If this works, the in-learner form (additive credit
+inside the coordinator's advantage) is the follow-up; if not, it is not worth building.
+
+**Code facts this rests on (read-only map, file:line in the scout's return; I checked the
+call order).** With an instance wrapper on the learner's `_batched_assign_skills` that
+rewrites the returned labels and writes them back (B08's pattern), the low-level actor and
+critic, the intrinsic reward and both discriminators all train on the *executed* labels
+(`agent.py:3266-3294, 4042-4127, 6353-6455`). The coordinator's D2 rows would mix executed
+labels with the sampled labels' log-probs (`agent.py:2321-2343`) — an invalid PPO ratio that
+nothing asserts against — so the coordinator's update is switched off with the existing
+`disable_high_level_training` (`agent.py:7182-7190`); its network then never reaches the
+environment except through the team label, which never reaches the actor. Infinite
+interruption costs are required, as in B08.
+
+**Object `FSD_LABEL_BANDIT_B13`.** D1280 construction; declared config difference
+`disable_high_level_training = True` only. Training seeds = block seeds 772803, 772903,
+773003 (the D1280 fits' own initial weights and worlds), 45 rollouts, panels at 5…45, final
+weights saved. Two arms, three blocks, **six fits planned**, two waves of three on
+`wsl_4070` (≈ 2.9 GB and ≈ 2.3 h per fit). The batch is not extended after scores.
+- *Estimator (both arms).* After each rollout: least squares of each ten-step commitment's
+  undiscounted mean team reward on the six agent-label counts with position fixed effects
+  (B12's estimator, 800 commitments), centred coefficients β_r with lane-clustered variances;
+  β̂ ← .8 β̂ + .2 β_r (first rollout: β̂ = β_1), variances combined with the same weights;
+  z_c = β̂_c / ŝe_c.
+- *Arm `BANDIT`.* At every agent decision the label is drawn from
+  q = .7 · softmax(z) + .3 · uniform (rollout 1: uniform), by a dedicated generator
+  seeded from (training seed, arm). The .3 floor keeps every label's policy and the
+  discriminators trained. Constants are declared here and not tuned.
+- *Arm `UNIFORM`.* q uniform throughout; the estimator runs passively. This separates
+  learning the ranking from concentrating exposure on it, and is the coordinator-off control.
+- *Evaluation at every panel boundary, same 32 worlds:* `best_estimate` (every agent executes
+  argmax β̂, B09's constant rule) and `uniform_every_10` (B08's rule) as the selection-free
+  reference on the same weights; at rollout 45 also the six constant-label panels (the arm's
+  own label → J map). Recorded per rollout: β̂, z, q, label shares, discriminator accuracy,
+  action std.
+- *References (published, not rerun):* D1280 as trained, J45 .456 / .355 / .499, late window
+  (30–45) .432 / .395 / .452; B09's best constant label on D1280's weights .454 / .521 / .519.
+
+**Predictions (held loosely).**
+- P1 `BANDIT`'s law leaves uniform: largest label share above .4 by rollout 15 on 3/3.
+- P2 at rollout 45 argmax β̂ is among the top two labels of the arm's own map, 3/3, both arms.
+- P3 `BANDIT` `best_estimate` J45 exceeds D1280 as trained by ≥ .03 on at least 2/3, mean
+  over blocks ≥ +.05; late window likewise ≥ +.03 in the mean.
+- P4 `BANDIT` minus `UNIFORM` on `best_estimate` J45 within ±.03 on at least 2/3 — I do not
+  know whether concentrated exposure helps the deployed policy or starves the others.
+- *Strongest alternative:* the ranking drifts faster than a five-rollout average follows, or
+  the ten-step response ranks labels myopically (B12: label 3 over label 2 on 772803 at cap
+  10): the most-favoured label changes three or more times after rollout 15 and
+  `best_estimate` is no better than `uniform_every_10`.
+- *What each outcome changes.* P2 and P3 hold in both arms, arms equal → the gain is learnable
+  selection itself; the in-learner credit is justified and cheap to specify. `BANDIT` above
+  `UNIFORM` → exposure is a second lever. P2 fails → the ten-step response is the wrong
+  credit and I2 (longer commitment) moves ahead of the in-learner form. P3 fails with P2
+  holding → selection was not what limited D, and the explanation returns to the low level.
+- *Limits known now:* three blocks that have carried every setting since B01; no size claim;
+  one new learner-side mechanism and one switched-off component at once, which `UNIFORM`
+  separates only partly; panels with sampled worlds have ≈ .03 J conditional noise.
