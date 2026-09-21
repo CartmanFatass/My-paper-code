@@ -6329,7 +6329,7 @@ experiments retain their original contracts. Read only the sources needed for th
 - This notebook's preceding complete Pro answer and B11 prospective at
   `548ae30195031322d38804b3ac90bd37cb4d2b44`, for the already covered radial decision.
 - `hmasd/agent.py` at source_sha: `_normalize_observations`, `clear_buffers`,
-  `select_action_batch`, `update_discoverer_from_rollout`, `update`; `hmasd/utils.py`:
+  `_batched_select_action`, `update_discoverer_from_rollout`, `update`; `hmasd/utils.py`:
   RolloutBuffer initialization/add/get_discoverer_sampler. Use these for the actual stored
   inputs, update order, normalization and fixed chunk states, not as performance evidence.
 - B08 native bridge and complete six-continuation reading in this notebook at
@@ -6355,5 +6355,10 @@ writeback return the *complete answer in chat*. Cite sources actually read and i
 decision-critical inaccessible source; do not invent verification. Return your concrete
 scientific selection, why, inherited constraints and the minimal useful observation if any;
 include MATERIAL_DISSENT yes/no. This is advisory research synthesis, not approval.
+
+Pre-Send source check: the batch action method is `_batched_select_action` (line3007), as
+corrected above before submission. The preceding source-inspection entry was already written
+by09:00PDT (clock16:00:27UTC); its09:04 heading is a clerical timestamp error, not a scientific
+execution time. No experiment or observation order depends on that heading.
 
 ### Answer
