@@ -4177,3 +4177,23 @@ recommendation stands with its last named doubt removed. Either way nothing is a
 the scores: no extra laws, floors, temperatures or checkpoints.
 **Limits.** Three reused blocks; mean actions only; the estimate is each fit's own final
 one; panel conditional noise ≈ .03 J is why the comparison is paired by world.
+
+## 2026-09-21 03:34 PDT — B14 entry code written and accepted; no score exists
+
+`scripts/run_fsd_label_law_deployment_b14.py` and tests under
+`tests/experiments/candidates/flexible_skill_duration/label_law_deployment_b14/`, written by
+the Implementer from my scope note, new files only. I read the law draw, the estimate
+reading, the pairing and the prediction arithmetic, and ran the 35 tests (passed; the
+Implementer's run with B13, B08, B09, B10 and B12 also passed). A real tiny fit → probe test
+reproduces the fit's own recorded `uniform_every_10` panel exactly on one host, and a
+perturbed reference exercises the failure path. Choices made where my entry was silent, all
+accepted: the team label is redrawn uniformly under both rules, so the agent-label law is
+the only difference; panel streams are `default_rng([evaluation_seed, replicate, sha256(panel
+name)[:8]])`, distinct from the fit's own panel stream, which is used only for the
+faithful-load rerun; the four panels must share identical decision steps or the probe
+refuses; the construction guard reads the fit's own recorded configuration (the node's sparse
+checkout has no `runs/`); z is exactly the fit's recorded z, and on a `BANDIT` checkpoint the
+resulting q must equal the fit's recorded last law. Known before any score, from published
+records: with z of 4–6 the declared law is close to "best label with a .3 uniform floor"
+(e.g. `UNIFORM` 772803: max q .709). Not verifiable here: exactness of the faithful-load
+rerun on the real checkpoints, which exist only on `wsl_4070`; the probe itself checks it.
