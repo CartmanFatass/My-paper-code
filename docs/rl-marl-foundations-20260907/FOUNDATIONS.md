@@ -30,6 +30,8 @@ a_t\sim\pi_\theta(\cdot\mid o_t,z_t).
 
 用户移动、故障和恢复也可以是固定转移规律下的状态变化。只有相关转移规律、任务分布或其他机制发生未被当前状态解释的漂移时，才需要另外讨论环境非平稳性。这与训练时队友持续更新策略造成的学习问题不同。
 
+可识别性取决于具体未知量及可用反馈。C05 中当前周期独立重抽且未被观测的风险量，不能由过去周期识别；这不排除从合法本地历史估计共享转移参数。C 的后续源码核查发现，符合条件的相邻自身距离记录能给出一次 0/1 前进观测，形成共享前进概率的估计路径。该路径尚未拟合，也未验证有限数据能否保留决策收益。模型已知、参数可识别与有限数据足以支持有效决策，是三个不同判断。[C 的模型知识与反馈边界](https://github.com/CartmanFatass/My-paper-code/blob/a76339b5f13244daed94cabb06809fa8923f7f27/docs/research/candidates/skill_information_refresh/NOTES.md#L3181-L3204)
+
 ## 3. MARL 增加的是联合行为和信息结构
 
 完全合作意味着 agent 共享团队目标。Dec-POMDP 还明确每个 agent 的观测历史与分散决策结构；仅有共享 reward 不足以完成这个模型判断。多架 UAV 的算法是否能使用团队摘要，应由实际可用的信息接口判断。
@@ -54,6 +56,8 @@ Option 由启动条件、内部行为和终止机制定义，这些部分可以�
 
 时间抽象可以组织较长时域的探索和行为，也可能使响应迟缓或承诺于不合适的技能。更少切换本身不是收益；它必须通过任务后果体现价值。
 
+通信的信息价值也需要沿发送、到达、接收者行动与任务后果来解释。包到达时，接收者可能尚无受缓存影响的行动机会；只估到到达时刻或当前技能结束，可能漏掉消息第一次有用的后果。C06–C07 的 NEAR_COMMIT 将估值覆盖到第一个缓存敏感行动机会所在的完整承诺结束，或更早的整局终点，包括等待下一次任务边界的情形。它本身已经是多步方法；延长日历时域是否增加价值，需要相对这个有能力的近端参照检验。这里的终点来自固定 CrossingHost 的行动和奖励结构，不能直接成为所有任务的统一截断规则。[C06 终点修正及其适用条件](https://github.com/CartmanFatass/My-paper-code/blob/a76339b5f13244daed94cabb06809fa8923f7f27/docs/research/candidates/skill_information_refresh/NOTES.md#L1926-L1943)
+
 当承诺持续、排他地占用共享资源时，它可能改变队友下一次**合法行动的时刻**。资源释放时刻与队友的决策时钟不一定重合；失败的服务也可能继续占用资源。因此，协调可能表现为提前承诺、为后续任务保留机会，而不只是等待让位。在 VSP-03 的公开双任务模型中，一条末次可行时刻的提交规则，恢复了三个开发块中联合规划器相对孤立规划器平均增益的约 56.5%；剩余差值有正有负。这说明一个可行性修正能恢复部分观测增益，未隔离唯一因果机制，也未证明简单规则与完整规划等价，也未建立一般 MARL 或 UAV 的机制结论。[VSP-03 B10 的完整读法](https://github.com/CartmanFatass/My-paper-code/blob/16762710035b007287a72dc9c0f6f4c498ff339a/docs/research/candidates/vsp_03/NOTES.md)
 
 ## 6. 实证研究是在具体条件下缩小解释空间
@@ -68,8 +72,16 @@ Option 由启动条件、内部行为和终止机制定义，这些部分可以�
 
 这项数据依赖随后得到了实际检验：B11 每个模型仅从固定 R0 采集 512 局，三个新校准模型在新世界里相对 R0 的收益都为正，平均 +0.02813 J；相对三个预选的大数据规划器，平均差为 −0.000271 J。这支持该正确模型族内的独立构造办法，未证明等价、最小样本量或一般未知系统的低数据学习能力。采集局数减少 128 倍，也不是端到端速度提高 128 倍。[VSP-03 B11 原始结果](https://github.com/CartmanFatass/My-paper-code/tree/4780940a613c595a49fd19d94ad6d3f7ffb0dd9d/runs/vsp_03/opportunity_calibration_b11_22001_22003)
 
+C07 的固定双智能体 CrossingHost 确认中，已知模型规划 NEAR_COMMIT 相对透明规则 ACTIVE_FIRST，在 1,280 个配对世界中平均多完成 0.07969 个任务，近似正态 95% 区间为 [0.05606, 0.10331]，通过预先声明的保留规则。各程序的包数和字节数相同，这一比较衡量等通信量下完整发送时机程序的收益。已知模型、更细的合法自身历史处理及额外计算都是获胜程序的资源，尚未隔离各组件的贡献，也未建立神经学习或 UAV 泛化收益。普通规划取得的这种有边界的正面结果，可以作为研究产出保留。[C07 完整结果与解释](https://github.com/CartmanFatass/My-paper-code/blob/a76339b5f13244daed94cabb06809fa8923f7f27/docs/research/candidates/skill_information_refresh/NOTES.md#L2748-L2840)
+
+稀疏的配对收益中，大量平局和很小的样本方差仍可能遗漏罕见尾部。C07 的 LONG 相对 NEAR 总共多完成 3 个任务；在声明的独立、等均值抽样条件下，使用预先固定的全局差值上界 14，得到单侧至少 97.5% 覆盖的期望增益上界 0.04345 个任务/世界，低于预设尺度 0.05。这个有限样本结论约束固定 LONG 程序，不能外推成零效应、NEAR 全局最优或所有长时域方法等价。用观察到的最大差值替代全局上界，会把未观察的尾部排除在保证之外；上述近似正态主结果与此次有限样本保证也分别解释，不构成联合覆盖保证。[C07 预先固定的统计读法](https://github.com/CartmanFatass/My-paper-code/blob/a76339b5f13244daed94cabb06809fa8923f7f27/docs/research/candidates/skill_information_refresh/CLAIM_near_commit_c07.md#L37-L66)；[对应读数](https://github.com/CartmanFatass/My-paper-code/blob/a76339b5f13244daed94cabb06809fa8923f7f27/docs/research/candidates/skill_information_refresh/NOTES.md#L2759-L2773)
+
+计算成本需要联系任务目标解释。C07 中 NEAR 的批量面板用时约为 ACTIVE_FIRST 的 26.1 倍，这没有测得在线决策超时或能耗导致的任务损失，也不能直接推出不可部署。实际期限、能耗后果或明确选择的成本—回报目标，都能使计算开销成为可检验的问题；研究成本—回报关系并不必须先有外部硬期限。相对用时本身尚未给出这种目标，也不自动产生下一轮优化实验。[C 的资源条件评估](https://github.com/CartmanFatass/My-paper-code/blob/a76339b5f13244daed94cabb06809fa8923f7f27/docs/research/candidates/skill_information_refresh/NOTES.md#L3206-L3215)
+
 ## 7. 当前研究选择放在这套认识的什么位置
 
 原讨论已表达的选择、可否定的机制假设和未冻结实现分别保存在 [会话选择记录](SESSION_CHOICES.md)。该记录仅在当前任务明确采用其范围时适用，不是全局基线、排序或方向要求。
+
+2026-09-21 的 C07 后续评估建议结束当前 C 投入并保留 NEAR，依据是当前选定的问题已得到有边界的答案，且尚未选定值得续投的新比较；没有测得所有后续方案成功概率低。可复用的区别是：技术可达、已有价值证据与当前投入选择各需理由。一次投入可以带着正面成果结束；新的具体假设、有限模型数据问题或成本—回报目标也可能支持后续研究，无须事先证明会成功。笼统的重新进入条件本身不构成持续投入的证据。这是一次有来源的研究判断，不是共享知识文档替各方向作投入决定。[C 的可达性与结束投入建议](https://github.com/CartmanFatass/My-paper-code/blob/a76339b5f13244daed94cabb06809fa8923f7f27/docs/research/candidates/skill_information_refresh/NOTES.md#L3130-L3278)
 
 阅读入口：[四个专题与来源索引](README.md)。本次访问范围、书籍版本差异及初稿纠错分别保存在 [检索记录](working/RETRIEVAL_COVERAGE.md) 和 [核查记录](working/REVIEW_NOTES.md)。
