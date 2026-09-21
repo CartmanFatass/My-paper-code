@@ -196,3 +196,90 @@ panels, publication and admission. Its one metadata wording correction for O_sel
 applied. DM focused suite: 14 passed in 1.26 s; independent suite: 14 passed in 1.42 s.
 These are synthetic correctness/orchestration checks, not fresh scientific scores or
 an empirical 512-update identity replay. No result was read before this declaration.
+
+### B08 complete read — transparent coupled scheduling retains more team value
+
+The single accepted operation at source `4fb5a62363f863811d453facf8a14b21df2eff09`
+finished exit0. Recoverable native identity, exact command, cwd, preflight and process exit:
+[`launch-manifest.json`](../../../../runs/vsp_03/opportunity_b08_21801_21803/launch-manifest.json).
+Full [summary](../../../../runs/vsp_03/opportunity_b08_21801_21803/summary.json), block curves,
+G512 weights, fitted endpoint counts, planner tables, per-world/per-job results, decisions,
+exogenous tapes and first disagreements are retained under that run root. No retries or
+same-batch extension. Native work exactly matches the declaration: six completed fits,
+282,624 complete episodes, 11,304,960 team ticks, 22,609,920 target transitions, 1,536
+G optimizer calls, 1,178,356 gradient rows and 650,527 evaluation decision rows. Each G
+actor moved (L2 displacement 5.42 or more on the first block; full per-block values saved).
+Training mean J rises from about .268–.271 in updates1–32 to .364–.370 in updates481–512.
+These curves describe training, without checkpoint selection or a monotonicity claim.
+
+| Contrast, fixed final512 | 21801 | 21802 | 21803 | Mean |
+| --- | ---: | ---: | ---: | ---: |
+| G−O (primary) | -.023081055 | -.022924805 | -.020360107 | -.022121989 |
+| O−R0 | +.035040283 | +.034486084 | +.031058350 | +.033528239 |
+| G−R0 | +.011959229 | +.011561279 | +.010698242 | +.011406250 |
+| G−R | +.011120605 | +.011693115 | +.010699463 | +.011171061 |
+| O−O_self | +.020233154 | +.018049316 | +.008978271 | +.015753581 |
+| O_known−O | -.000651855 | 0 | 0 | -.000217285 |
+| G stochastic−greedy | -.001739502 | +.000192871 | -.002719727 | -.001422119 |
+
+The descriptive n3 t95 interval for O−G is `[.018326642,.025917336]`; for O−O_self it
+is `[.000927441,.030579721]`. These are development readings with three independent
+training/data blocks, not confirmation, equivalence or a universal rank. Fitted (c,p) are
+`(4.001403,.497072) / (3.987742,.501447) / (4.011515,.498266)`. All MLEs converged in
+8–9 iterations (33–45 function evaluations), without using evaluation rows. O_known has
+extra true-law knowledge; its finite-panel non-positive difference is not evidence that
+the fitted model beats the known-law expected optimum. Known-law initial expected J is
+.3863777695; the three observed known-law means .39704/.39421/.39436 lie 1.40–1.92
+conditional world SE above it, which is preserved rather than substituted for expectation.
+
+**Native tradeoffs and the failed strong intermediate prediction.** O−G increases successful
+jobs by `.0724284/team`, attempts by `.0488281`, waiting by `5.1486003 ticks`, and
+expiry-at-clock events by `.4608561`; failed attempts decrease `.0236003` on average
+(the third block increases). Final-clock blocking goes from G's
+`.0185547/.0107422/.0212402` to zero under O. Thus the initial idea of less missed
+opportunity **without greater waiting/expiry cost** fails; full J nevertheless increases
+because the task trades these components. Versus R0, O also has more failed attempts
+(`+.0724284/team`) and waiting (`+3.9243164`), offset by more success (`+.0950521`).
+No proxy improvement is substituted for team utility.
+
+O−O_self has `.0113932` more success, `.0713704` more attempts, `.0599772` more failed
+attempts, `4.7364909` fewer waiting ticks and `.3070475` fewer expiry events per team.
+O_self leaves `.0778809/.0683594/.0678711` jobs unsubmitted, exactly its last-clock
+blocking rate; O submits both jobs in every observed world and has no last-clock blocking.
+The native gain is not a claim that all cost components improve.
+
+First O/O_self action disagreements occur in **1893/1872/1848 of4096 worlds**, all at
+t6–22 and all **O SUBMIT / O_self WAIT**; none are the reverse. About half of these
+disagreements occur at t6 with the actor still present at age6 while the partner has
+left/reentered or is younger. This strengthens a more specific explanation: coupled
+planning sometimes commits a good current service *earlier* than isolated own timing,
+leaving room for the other job later. It is not simply waiting to let the partner go
+first, and it does not identify what G's network learned. The primary observation is
+still whole-world J over all worlds, not the favorable divergent subset.
+
+**Working update.** Ordinary G's gain over readiness is strengthened by three fresh blocks.
+A stronger fitted transparent scheduler absorbs that gain and adds about .022 J in this
+development batch. The value of coupled scheduling relative to the declared isolated-job
+rule is strengthened, with remaining small-sample uncertainty. The stronger no-cost-trade
+story is weakened. Model-family misspecification, decentralized information, adapting
+teammates, changed clocks/horizons, and UAV deployment are untouched. Do not repair G merely
+to preserve a neural advantage; keep O as the current development choice.
+
+Scientific-process wall was **35.276 s**, CPU **34.829 s**, peak process RSS
+**425,426,944 bytes**. G fit walls including endpoint collection were 8.509/8.660/8.462 s;
+MLE walls .0071/.0053/.0067 s; planner-pair walls .0020/.0014/.0016 s. These small
+compute costs exclude implementation, tests, launch preparation, collection and reasoning.
+Fresh available physical/effective memory was 11,592,208,384 bytes; cgroup telemetry was
+unavailable, not zero. Post-result readback verified **66 artifact digests and all86,016
+native evaluation rows**, recomputed contrasts with math.fsum, and reconciled every curve
+update/gradient count and endpoint-count total. An inefficient initial read-only checker
+was interrupted and replaced by one that decompresses each array once; no learner/evaluator
+was restarted and no scientific output changed. The completed readback took .794 s.
+
+**Next decision.** A fixed fresh confirmation of O versus G can determine whether this
+specific public-host package comparison is reproducible after development, while keeping
+O_self secondary and retaining the tradeoff explanation. Proposed five new blocks,
+unchanged 512-update G and O estimator, ten fits, no new architecture or score-dependent
+rule choice. Seek Pro criticism of the actual claim/plan before this confirmation; continue
+its bounded implementation and publication while advice is pending. This is not closing
+VSP-03 or an automatic request for more seeds in B08.
