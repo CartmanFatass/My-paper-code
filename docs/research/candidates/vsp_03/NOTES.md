@@ -283,3 +283,81 @@ unchanged 512-update G and O estimator, ten fits, no new architecture or score-d
 rule choice. Seek Pro criticism of the actual claim/plan before this confirmation; continue
 its bounded implementation and publication while advice is pending. This is not closing
 VSP-03 or an automatic request for more seeds in B08.
+
+## Pro question 2026-09-21 fitted-opportunity-confirmation
+
+Conversation: new Jev direction consultation; private account/conversation details stay
+only in the local transport operation. No App cross-task message is involved.
+
+Question: Does the concrete B09 claim/confirmation plan below make a useful, defensible
+next observation after B08, and what is the strongest material objection to its estimator,
+comparison or explanation? Criticize the **actual plan**, not an unspecified future batch.
+The decision is whether to run this fixed confirmation unchanged, amend it before any
+outcome, or use a smaller materially discriminating alternative. Pro advises; the DM owns
+the choice. No positive neural increment is owed, and an ordinary useful rule is a result.
+
+Owner explicitly selected and reopened VSP-03 with independent direct ownership and no
+time/fit allowance; current pause is lifted and registration is active. The task is the
+real shared WAIT/SUBMIT eight-tick-slot H40 object, not Claude's label END. No FSD/B/C work
+or cross-task communication is requested. Existing complete Portfolio advice was reused
+for B08; this new call is specifically constitution5's pre-confirmation decision point.
+
+Standing: the preceding complete B08 reading retains all positive and adverse evidence.
+G−R0 remained positive on all three fresh blocks (mean+.01140625), while O−G was
++.023081055/+.022924805/+.020360107 (mean+.022121989). Coupled O−isolated O_self was
++.020233154/+.018049316/+.008978271. O estimated transition parameters from the same
+eligible public history that G generated, without latent transitions/evaluation feedback.
+The assumed reciprocal-age Markov family and independent targets are a structural resource;
+true parameters appear only in extra-knowledge O_known. Tests and independent review found
+no material executable defect. This is not a general proof of a fair optimal policy.
+
+The naive explanatory prediction did not fully survive: O waits more than G and has more
+expiry events, although team success and J increase. First O/O_self differences are all
+earlier O submissions, not yielding. O_self omits reciprocal interference as well as partner
+utility, so its gap is the value of coupled planning within this model, not a pure externality
+mediator or what G learned. Strongest alternative is ordinary own survival/deadline timing;
+the coupled increment is positive here but has only three development blocks.
+
+Actual proposed claim and fixed reading: `docs/research/candidates/vsp_03/CLAIM_fitted_opportunity_b09.md`.
+Five fresh blocks21901–21905; unchanged G512/O estimator; primary O−G; df4 t95 lower>0
+for narrow superiority, old .02 scale reported without redefining it; secondary O_self
+and other retained panels remain descriptive. Ten fits,18,841,600 team ticks,2,560 G Adam
+calls plus five MLEs/planning and publication. No score-dependent expansion. If the simpler
+rule is reproducibly useful, preserve it and its conditions instead of rescuing G. Please
+assess whether this claim is worth confirming or whether the sharper remaining scientific
+observation is different; no compulsory new architecture, host or candidate count.
+
+Context (all unqualified paths resolve at source_sha supplied in the send):
+- Governance: `docs/project/OPERATING_CONSTITUTION.md`, sections1–5,7–8; current owner
+  authorization above supersedes historical pauses, allowances and old window language.
+- Methods: `.agents/skills/hmasd-scientific-tools/SKILL.md`, Update the working explanation,
+  Confirm a claim, Comparators, Statistics, Cost and exposure; engineering skill Checks and
+  review/Execution for the code and proposed reuse.
+- Evidence: this notebook's adoption, pre-result L0/critic correction, full declaration and
+  B08 read; `runs/vsp_03/opportunity_b08_21801_21803/summary.json` and each block's raw
+  per-world G/O/O_self rows, paired differences and first-disagreement records. Source input
+  SHA was `4fb5a62363f863811d453facf8a14b21df2eff09`; results first published at
+  `294982aa1302ab3f4eff5d6c471d2e91145eb3c7`. Complete relevant code is
+  `experiments/candidates/vsp_03/opportunity_b08/opportunity.py` and `study.py`, inherited
+  `vsp03_b02/b02.py` physics and `vsp03_b01/b01.py` objective. The B09 execution wrapper
+  will reuse these frozen fit/evaluation functions with only new fixed seeds/aggregation.
+- Prior advice: complete Answer/Decision of the Portfolio review at
+  `b6093d211fa33a81d05d490ffa5bc920f43605eb:docs/research/RESEARCH.md`, VSP-03 sections;
+  historical B06/B07 retain their original results and are not pooled with B08/B09.
+
+Return: assess the actual claim, units, pairing, model/data rights, prewritten rule and
+cost. State what B08 strengthens/weakens/leaves untouched, especially whether earlier
+commitment is a more defensible explanation than late yielding. Give the strongest
+alternative and smallest useful discriminator; if revising, predict intermediate and
+complete native effects and cost. No new empirical result or new idea is required.
+Include MATERIAL_DISSENT yes/no and cite sources actually read; disclose consequential
+unread sources. Do not turn Pro into an approval or new proof gate.
+
+Write only into this question's initially empty `### Answer` subsection on branch
+`codex/vsp03-opportunity-rule`, target `docs/research/candidates/vsp_03/NOTES.md`.
+Read pinned source inputs; fetch the latest target blob before writing and use its actual
+SHA. Preserve the question and every other byte. Stop on overlapping edits. No experiments,
+other file changes or extra messages. Report the actual answer commit; if GitHub writeback
+fails, give the complete answer in chat, not just a receipt or link.
+
+### Answer
