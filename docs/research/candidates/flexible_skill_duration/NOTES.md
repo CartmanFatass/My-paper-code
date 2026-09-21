@@ -4197,3 +4197,89 @@ resulting q must equal the fit's recorded last law. Known before any score, from
 records: with z of 4–6 the declared law is close to "best label with a .3 uniform floor"
 (e.g. `UNIFORM` 772803: max q .709). Not verifiable here: exactness of the faithful-load
 rerun on the real checkpoints, which exist only on `wsl_4070`; the probe itself checks it.
+
+## 2026-09-21 03:43 PDT — B14 read: no reversal; the ten-step credit carries a real but small gain in its own regime, and points the wrong way on one block
+
+**Technical.** Six probes of six complete on `wsl_4070` at launch sha `cc544037f`; every
+faithful-load rerun reproduces the fit's recorded rollout-45 `uniform_every_10` panel with
+maximum absolute difference 0.0; zero optimizer steps, weights digests unchanged; the four
+panels of each checkpoint share their decision steps; executed shares follow q on all twelve
+law panels (intermediate check holds 6/6). Collected summaries verified by sha256. Reduce
+`runs/flexible_skill_duration/b14_reduce/summary.json`, sha256 `f1fc77965be7a867…`. Probe
+roots `b14_law_{uniform,bandit}_<block>_n01`.
+
+| checkpoint | max q (label) | J uniform a / b | J law a / b | G | paired G a (se) | paired G b (se) | label-draw noise, uniform / law |
+| --- | --- | --- | --- | ---: | --- | --- | --- |
+| UNIFORM 772803 | .709 (3) | .448 / .449 | .471 / .465 | +.019 | +.022 (.002) | +.017 (.003) | .001 / .005 |
+| UNIFORM 772903 | .624 (5) | .463 / .463 | .483 / .475 | +.016 | +.020 (.003) | +.012 (.004) | .000 / .008 |
+| UNIFORM 773003 | .741 (0) | .449 / .448 | .429 / .430 | −.019 | −.020 (.005) | −.018 (.006) | .001 / .001 |
+| BANDIT 772803 | .367 (2) | .443 / .440 | .442 / .444 | +.001 | −.001 (.003) | +.004 (.003) | .003 / .002 |
+| BANDIT 772903 | .582 (3) | .448 / .448 | .462 / .460 | +.014 | +.014 (.004) | +.013 (.003) | .000 / .001 |
+| BANDIT 773003 | .309 (2) | .391 / .394 | .447 / .432 | +.047 | +.055 (.008) | +.038 (.009) | .003 / .015 |
+
+**Declared outcomes (primary, `UNIFORM` checkpoints).** Mean G = +.005; no block at or above
+.03. My prediction (`DM_G_falls_short`) holds; the reversal outcome does not (mean below .03;
+two blocks positive, of which one exceeds twice its replicate difference). Secondary
+(`BANDIT` checkpoints, law matched to training), reported separately: G = +.001 / +.014 /
++.047, mean +.020, 3/3 non-negative, one block above .03; I had expected |G| < .03, which
+fails on 773003.
+
+**Reading.**
+- Paired by world, the measurement is sharp (paired se .002–.009, label-draw noise ≤ .015),
+  so these are real differences at these weights, not panel noise: deploying the law where
+  it was estimated is worth about +.02 on two `UNIFORM` checkpoints and about −.02 on the
+  third. The −.02 is 773003, the checkpoint whose estimate credited label 0 at z ≈ 6: that
+  credit is wrong not only for whole-episode constant use (B13) but also in ten-step mixed
+  use. The "credit and deployment are misaligned" account therefore does not rescue that
+  block; under mean actions the ten-step estimate itself misranks there. (Sampled-action
+  deployment, the estimate's exact regime, was not run and is not added.)
+- The size agrees with what B12 implied: the whole label effect at commitment ten is a few
+  hundredths of J, and a law with a .3 floor realises part of it. It is a fraction of the
+  seed SD on this host (≈ .08) and below the margin I declared useful.
+- Secondary: where the law was also the training law, the gain is non-negative on all three
+  and reaches +.047 on one block. This is three reused blocks, one above the margin, and the
+  same fits whose whole-scheme comparison (B13 P3, P4) failed; I read it as "the law does no
+  harm and sometimes helps on its own weights", not as a scheme-level gain.
+
+**Judgment.** The one observation named as able to reverse the recommendation did not
+reverse it. The 02:51 recommendation stands with its last named doubt answered: rest
+`flexible_skill_duration` in reserve; no further fits on this learner's high-level label
+credit. The rest record of 02:51 stands; add to it: B14 probe roots and reduce above; a
+reopening now needs something other than this test — a competent matched-information
+baseline on this host, or a mechanism with a native prediction for an unfixed duration.
+Nothing is appended to B14.
+
+## 2026-09-21 03:52 PDT — owner decision: the direction rests in reserve; closing entry
+
+Owner, on the B14 reading and the standing recommendation: "可以 那么做好收尾吧". The
+`flexible_skill_duration` row moves from Active to Reserve in `docs/research/RESEARCH.md`
+with its standing, the open question, what was and was not tested, and the reopening
+condition. Rested, not closed and not disproved.
+
+**State at rest.**
+- Nothing running: no FSD process on `wsl_4070` or on this host, no admitted operation
+  outstanding, no declared successor batch, no open Pro question (both 2026-09-20/21
+  questions are answered, saved from chat, and responded to above). The claim keys of B13's
+  six fits are in the 2026-09-20 22:10 and 23:54 entries; all six exited 0.
+- Published on `main`: every entry script and test (B01–B14), all run records and reduces
+  under `runs/flexible_skill_duration/`, this notebook. No claim note was ever written; none
+  is owed.
+- On the node only (gitignored weights, digests in each `weights.json`):
+  `b08_save_{772803,772903,773003}_a01/final_weights.pt` (D1280, panels exact on that host)
+  and the six `b13_*_a01/final_weights.pt` (coordinator off; never a coordinator warm
+  start). Nine files, ≈ 36 MB each. I delete nothing; removal is the owner's word.
+- The node checkout is at `cc544037f`. A later fast-forward there removes the node-side
+  copies of tracked run records; restore them from Git and verify sha256 before any probe.
+- Left in place, not part of the direction's evidence: Pro's answer branch
+  `claude/fsd-pro-critic` (Pro never wrote on it; it equals a past `main`), my scratch
+  worktrees and local `claude/cross-interp-*` branches from the 2026-09-19 cross-reading.
+
+**What a successor should read first.** The 2026-09-21 02:51 response (rest record and the
+narrowed statements), the B13 and B14 readings, the 2026-09-20 22:41 response (the four
+corrected quantities, the entropy normalisation, the argmax amplification), and the
+2026-09-20 20:36 entry for the reserve ideas I2 and I3. Corrections made along the way stand
+as written in their own entries; earlier entries are not edited.
+
+**Cost of the direction's last stretch (B13, B14).** Six fits, 38,292 s of fit wall, about
+3.6 h of node occupancy; B14 about 20 min of node time and one Implementer task; two Pro
+questions.
