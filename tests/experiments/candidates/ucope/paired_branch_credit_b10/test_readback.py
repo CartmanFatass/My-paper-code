@@ -1,8 +1,10 @@
 """Offline reading rules on handwritten arrays; no training or environment."""
 import hashlib
+import copy
 
 import numpy as np
 import pytest
+import torch
 
 from experiments.candidates.ucope.paired_branch_credit_b10 import readback
 
@@ -29,6 +31,7 @@ def _arrays(ordinary=False):
         context[:, tick, :, 107:110] = fresh
         commands[:, tick] = np.where(keep[:, tick, :, None], previous[:, tick], fresh)
     return dict(reward=np.asarray([[.1, .2, .3, .4], [.4, .3, .2, .1]], np.float64),
+                means=np.arctanh(context[..., 107:110]).astype(np.float32),
                 commands=commands, previous=previous, context=context, eligible=eligible, keep=keep,
                 keep_probability=probability, gate_uniforms=coins)
 
@@ -79,3 +82,66 @@ def test_recorded_size_does_not_substitute_for_artifact_digest(tmp_path):
     path.write_bytes(b"abd")
     with pytest.raises(ValueError, match="artifact identity mismatch"):
         readback.verify_file(path, identity)
+
+
+def test_commands_and_context_cannot_jointly_override_recorded_mean(tmp_path):
+    path = tmp_path / "panel.npz"
+    arrays = _arrays(ordinary=True)
+    arrays["means"][0, 2, 0, 1] += .1
+    np.savez_compressed(path, **arrays)
+    with pytest.raises(ValueError, match="tanh of recorded means"):
+        readback.panel_reading(path, horizon=4, worlds=2, ordinary=True)
+    arrays = _arrays()
+    arrays["gate_uniforms"][0, 0, 0] = 1  # Reset hides the wrong coin from the action law.
+    np.savez_compressed(path, **arrays)
+    with pytest.raises(ValueError, match="invalid gate uniforms"):
+        readback.panel_reading(path, horizon=4, worlds=2, ordinary=False)
+
+
+def test_uniform_addresses_replay_private_draws_without_global_rng_mutation():
+    state = torch.get_rng_state().clone()
+    for shape in ((256, 5), (2,)):
+        stored = torch.rand(shape, generator=torch.Generator().manual_seed(897150000)).numpy()
+        readback.verify_uniforms(stored, seed=897150000, shape=shape)
+        with pytest.raises(ValueError, match="seed address"):
+            readback.verify_uniforms(stored, seed=897150001, shape=shape)
+        stored.flat[0] = -0.01
+        with pytest.raises(ValueError, match="invalid stored uniform"):
+            readback.verify_uniforms(stored, seed=897150000, shape=shape)
+    assert torch.equal(state, torch.get_rng_state())
+
+
+@pytest.mark.parametrize("raw", [{"horizon": 257, "team_steps": 514},
+                                 {"horizon": 256, "team_steps": 514}])
+def test_raw_pair_exposure_is_bound_before_accepting_its_metadata(tmp_path, monkeypatch, raw):
+    monkeypatch.setattr(readback, "inspect_pair", lambda path: raw)
+    with pytest.raises(ValueError, match="raw pair exposure"):
+        readback.read_scheduled_pair(tmp_path / "pair.npz", common_seed=1, focal_seed=2)
+
+
+def test_terminal_witness_cannot_be_transplanted_between_same_source_blocks():
+    def records(master):
+        runner = {"pid": master, "start_ticks": 123, "boot_id": "fixture", "session_id": master + 1}
+        supervisor = {"pid": master + 1, "start_ticks": 122, "boot_id": "fixture", "session_id": master + 1}
+        output = f"/fixture/runs/ucope/paired_branch_credit_b10_{master}"
+        command = ["/fixture/python", "/fixture/source/scripts/run_ucope_paired_branch_credit_b10.py",
+                   "--master", str(master), "--out", output, "--launch-sha", readback.SOURCE]
+        digest = readback.command_digest(command[0], command[1], command[2:])
+        manifest = {"command": command, "source_root": "/fixture/source", "output_root": output,
+                    "sha": readback.SOURCE, "direction": "ucope", "command_sha256": digest,
+                    "runner_process": {"identity": runner, "pid": master, "supervisor_pid": master + 1},
+                    "process": {"identity": supervisor, "pid": master + 1}}
+        terminal = {"process_identity": runner, "supervisor_identity": supervisor, "pid": master}
+        admission = {"sha": readback.SOURCE, "direction": "ucope", "command_sha256": digest,
+                     "child_pid": master, "parent_pid": master + 1}
+        return manifest, terminal, admission
+    first, second = records(8971), records(8972)
+    readback.verify_native_identity(*first, 8971)
+    with pytest.raises(ValueError, match="another block"):
+        readback.verify_native_identity(second[0], second[1], first[2], 8971)
+    with pytest.raises(ValueError, match="admission command"):
+        readback.verify_native_identity(second[0], second[1], first[2], 8972)
+    terminal = copy.deepcopy(first[1])
+    terminal["supervisor_identity"]["start_ticks"] += 1
+    with pytest.raises(ValueError, match="terminal process"):
+        readback.verify_native_identity(first[0], terminal, first[2], 8971)

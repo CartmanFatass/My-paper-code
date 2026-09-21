@@ -6650,3 +6650,26 @@ signs are descriptive targets under old behavior, not an oracle bound or deploym
 Four handwritten-array / artifact / rule checks passed in 1.30 s, with zero environments,
 checkpoint forwards and optimizer updates. Independent read-only review remains before using
 this new consumer for the scientific reading. It does not change any active source snapshot.
+
+### 2026-09-21 05:45 UTC — Offline review repairs accepted before reading outcomes
+
+Independent review found four material integrity gaps in the first offline reader: a terminal
+witness was not joined to this result's admission, fresh commands were checked only against
+the context's asserted fresh vector, coin seeds were checked as labels rather than actual
+draws, and raw pair lengths were not bound to the declared exposure. All four are repaired.
+The reader now checks admission command/child/parent against the exact native terminal and
+master; compares saved FP32 means through independent NumPy FP64 tanh with an absolute tolerance
+of four FP32 eps on the normalized [-1, 1] command scale; reconstructs common, focal and final
+coins using private CPU generators; and requires each raw pair to contain 256 ticks per branch,
+512 team steps total. The action/eligibility identities remain exact. The tanh check is not a
+cross-library bitwise assertion, and RNG reconstruction is not a checkpoint forward probe.
+
+The focused reader suite passed **9/9 in 1.11 s**, including transplanted same-source process
+witnesses, inconsistent means, misaddressed/out-of-range coins and wrong raw exposure. It used
+handwritten arrays and private random draws, zero environments, model constructions, checkpoint
+forwards or optimizer updates. The Reviewer closed all four findings with no remaining material
+issue, reusing that check output and reading no live results. I accept the repaired consumer.
+All three original native operations remain active at the last cost-only observation, with
+R_CF and R_FULL complete and S_FULL training. No final outcome has been read or used to change
+the batch. Publish this consumer, then reduce the completed original records once they have
+successful terminal witnesses; any discovered integrity failure is reported on its actual scope.

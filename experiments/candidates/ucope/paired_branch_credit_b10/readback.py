@@ -9,6 +9,9 @@ from pathlib import Path
 import statistics
 
 import numpy as np
+import torch
+
+from scripts.hmasd_admission import command_digest
 
 from .storage import inspect_pair
 
@@ -44,12 +47,51 @@ def verify_file(path, identity):
              f"artifact identity mismatch: {path}")
 
 
+def verify_native_identity(manifest, terminal, admission, master):
+    """Bind this result's admission to its command and exact terminal witness."""
+    command = manifest["command"]
+    expected = [command[0], str(Path(manifest["source_root"]) / "scripts/run_ucope_paired_branch_credit_b10.py"),
+                "--master", str(master), "--out", manifest["output_root"], "--launch-sha", SOURCE]
+    _require(command == expected and Path(manifest["output_root"]).name == f"paired_branch_credit_b10_{master}",
+             "native command belongs to another block or source")
+    digest = command_digest(command[0], command[1], command[2:])
+    _require(manifest["sha"] == admission["sha"] == SOURCE
+             and manifest["direction"] == admission["direction"] == "ucope"
+             and manifest["command_sha256"] == admission["command_sha256"] == digest,
+             "native admission command/source identity mismatch")
+    runner, supervisor = manifest["runner_process"], manifest["process"]
+    _require(terminal["process_identity"] == runner["identity"]
+             and terminal["supervisor_identity"] == supervisor["identity"]
+             and terminal["pid"] == runner["pid"] == runner["identity"]["pid"] == admission["child_pid"]
+             and runner["supervisor_pid"] == supervisor["pid"] == supervisor["identity"]["pid"]
+             == admission["parent_pid"], "terminal process identity mismatch with result admission")
+
+
+def verify_uniforms(stored, *, seed, shape):
+    """Replay only private CPU random draws; no model or global RNG mutation."""
+    _require(stored.shape == shape and stored.dtype == np.float32
+             and np.isfinite(stored).all() and ((stored >= 0) & (stored < 1)).all(),
+             "invalid stored uniform array")
+    expected = torch.rand(shape, dtype=torch.float32,
+                          generator=torch.Generator(device="cpu").manual_seed(seed)).numpy()
+    _require(np.array_equal(stored, expected), "stored uniforms disagree with their seed address")
+
+
+def read_scheduled_pair(path, *, common_seed, focal_seed):
+    raw = inspect_pair(path)
+    _require(raw["horizon"] == 256 and raw["team_steps"] == 512, "raw pair exposure changed")
+    with np.load(path, allow_pickle=False) as arrays:
+        verify_uniforms(arrays["common_uniforms"], seed=common_seed, shape=(256, 5))
+        verify_uniforms(arrays["focal_uniforms"], seed=focal_seed, shape=(2,))
+    return raw
+
+
 def panel_reading(path, *, horizon, worlds, ordinary):
     """Independent NumPy reward reduction and exact recorded-action-law checks."""
     with np.load(path, allow_pickle=False) as arrays:
         reward = arrays["reward"]
         eligible, keep = arrays["eligible"], arrays["keep"]
-        commands, previous = arrays["commands"], arrays["previous"]
+        commands, previous, means = arrays["commands"], arrays["previous"], arrays["means"]
         context, probability = arrays["context"], arrays["keep_probability"]
         coins = arrays["gate_uniforms"].copy()
         _require(reward.shape == (worlds, horizon) and reward.dtype == np.float64,
@@ -58,9 +100,15 @@ def panel_reading(path, *, horizon, worlds, ordinary):
                  and keep.shape == eligible.shape and keep.dtype == bool, "final mask shape/dtype mismatch")
         _require(context.shape == (worlds, horizon, 5, 175), "final legal-context shape mismatch")
         _require(commands.shape == previous.shape == (worlds, horizon, 5, 3), "final command shape mismatch")
+        _require(means.shape == commands.shape and means.dtype == np.float32, "final mean shape/dtype mismatch")
         _require(probability.shape == coins.shape == eligible.shape, "final probability/coin shape mismatch")
         _require(all(np.isfinite(value).all() for value in
-                     (reward, commands, previous, context, probability, coins)), "nonfinite evaluation data")
+                     (reward, commands, previous, means, context, probability, coins)), "nonfinite evaluation data")
+        # Independent FP64 tanh versus stored FP32 CPU tanh in [-1, 1]. Four
+        # FP32 eps absorb libm/rounding error; this is not a bitwise replay claim.
+        _require(np.allclose(context[..., 107:110], np.tanh(means.astype(np.float64)),
+                             rtol=0, atol=4 * np.finfo(np.float32).eps),
+                 "fresh commands disagree with tanh of recorded means")
         _require(not eligible[:, 0].any() and not previous[:, 0].any() and not (keep & ~eligible).any(),
                  "reset or eligibility law changed")
         _require(np.array_equal(previous[:, 1:], commands[:, :-1]), "previous command lost its actual history")
@@ -68,6 +116,7 @@ def panel_reading(path, *, horizon, worlds, ordinary):
         _require(np.array_equal(commands, np.where(keep[..., None], previous, context[..., 107:110])),
                  "final commands do not implement recorded KEEP/END")
         _require(((probability >= 0) & (probability <= 1)).all(), "invalid gate probability")
+        _require(coins.dtype == np.float32 and ((coins >= 0) & (coins < 1)).all(), "invalid gate uniforms")
         if ordinary:
             _require(not keep.any() and not eligible.any() and not coins.any(), "G acquired a gate intervention")
         else:
@@ -119,7 +168,7 @@ def read_block(root, master):
              "native result lacks a complete summary and successful terminal witness")
     _require(summary["object"] == OBJECT and summary["master"] == master and summary["launch_sha"] == SOURCE
              and manifest["sha"] == SOURCE, "producing object/master/source mismatch")
-    _require(terminal["process_identity"] == manifest["runner_process"]["identity"], "terminal process identity mismatch")
+    verify_native_identity(manifest, terminal, _json(root / "admission.json"), master)
     config = summary["configuration"]
     _require(config == {"master": master, "horizon": 256, "train_episodes": 2048,
                         "eval_episodes": 64, "pairs_per_round": 16, "fixture": False}, "declared exposure changed")
@@ -168,7 +217,8 @@ def read_block(root, master):
         _require(row["raw_path"] == f"pairs/R_CF/{index:04d}.npz"
                  and row["raw"] == summary["artifacts"][row["raw_path"]], "paired archive identity changed")
         _require(row["behavior_digest"] == pairs[16 * (index // 16)]["behavior_digest"], "policy changed within a pair round")
-        raw = inspect_pair(root / row["raw_path"])
+        raw = read_scheduled_pair(root / row["raw_path"], common_seed=base + 50000 + index,
+                                  focal_seed=base + 60000 + index)
         _require(raw["eligible"] == row["eligible"] and raw["tick"] == row["tick"] and raw["agent"] == row["agent"],
                  "raw and indexed pair disagree")
         _require(np.allclose(raw["suffix_returns"], row["suffix_returns"], rtol=0, atol=1e-13), "raw credit reconstruction failed")
@@ -202,6 +252,8 @@ def read_block(root, master):
         _require(np.allclose(reading["J"], summary["final_panel"]["world_scores"][arm], rtol=0, atol=1e-13),
                  "raw final rewards disagree with reported J")
         if arm != "G":
+            for episode in range(64):
+                verify_uniforms(coins[episode], seed=base + 70000 + episode, shape=(256, 5))
             _require(shared_coins is None or np.array_equal(coins, shared_coins), "final arms used different coin slots")
             shared_coins = coins
         panels[arm] = reading
