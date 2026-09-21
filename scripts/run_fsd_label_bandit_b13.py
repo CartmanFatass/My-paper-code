@@ -1944,7 +1944,7 @@ def main(argv=None):
         # Refuse an out-of-plan arm or block before the single-use admission is spent.
         plan_guard(args.arm, args.seed)
         # Nothing scientific has happened yet: no output, environment, learner or evaluator.
-        admission = require_admission(__file__, direction=DIRECTION)
+        admission = require_admission(__file__, direction="flexible_skill_duration")
         if args.launch_sha is not None and args.launch_sha != admission["sha"]:
             parser.error("--launch-sha must equal the admitted source SHA")
         head = shared.e0._git("rev-parse", "HEAD")

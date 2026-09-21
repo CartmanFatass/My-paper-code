@@ -3460,3 +3460,17 @@ and coordinator rows with mismatched labels and log-probs: nothing may train a c
 from it. Checks: 39 B13 tests passed (81 with B08), mine, after the fixes; the Implementer's
 run with B07, B08, B09 and B12 gave 190 passed before them. Projected ≈ 8,000 s and ≈ 3.0 GB
 per fit; two waves of three.
+
+## 2026-09-20 22:01 PDT — B13 first launch refused by the admission kernel before any spawn; one-line fix
+
+At `c3a4966c3` the three `BANDIT` launches were refused: "runner must contain exactly one
+require_admission(__file__, direction='flexible_skill_duration') call". The runner passed the
+direction through a module constant; the kernel's static check wants the literal. No process,
+output root or admission record was created. Fixed by writing the literal (no behaviour
+change); the fits launch from the next published sha. Control revision adopted at this
+boundary: main's constitution amendment of 2026-09-20 (DMs publish their own RESEARCH entry
+to main; proactive Pro consultation at four decision points). The working explanation of this
+direction changed materially between B08 and B12, so a Pro consultation on that explanation
+and on what B13 can and cannot show is due; I send it while the fits run, because the fits are
+the owner's decision and the advice can change their reading and the follow-up, not whether
+this evidence is worth collecting.
