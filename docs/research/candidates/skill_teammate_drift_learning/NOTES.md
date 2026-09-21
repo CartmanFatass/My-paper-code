@@ -3660,3 +3660,104 @@ Compilation and whitespace checks passed. All prior B05–B07 costs retain their
 Publish this reviewed source, then launch the six declared target continuations once via
 native admission. No owner approval, new Pro round, extra pilot or confirmation extension
 is required; the existing matched-history advice and prospective design still apply.
+
+## 2026-09-21 05:31 PDT — B08 read: changing the acquired history does not remove this R package's loss
+
+**Identity and completion.** B08 ran once at published source
+`52cc7b71a0fd9433a1f7c093e8c77076f8732abc`, from the declared B07 evidence and source states.
+Native operation `1441076c6e958e1e8ab3ef7d2d90fa702f1b0d76b92d76debab173019ad12a17`
+was accepted at2026-09-21T12:26:18.534647Z under the existing lead. At12:26:43.105236Z
+native status found a valid exit0, both processes absent and consistent records. All six
+started continuations completed and were saved. No repair, retry or extra target fit.
+Outputs are `runs/skill_teammate_drift_learning/b08_fixed_history_crossing/`.
+
+**Declared full256 comparison.** Values below use the same .20-epsilon readout in every
+cell. R is the frozen conditional-response package; F is the frozen full-history hybrid
+fingerprint reference. Each column pair uses exactly the same recorded history.
+
+| Existing block | R on R history | F on R history | R on F history | F on F history | R−F on R history | R−F on F history |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+|95301|.635156250|.637375000|.626140625|.635140625|−.002218750|−.009000000|
+|95302|.639234375|.639750000|.639406250|.639750000|−.000515625|−.000343750|
+|95303|.631250000|.637218750|.633218750|.639515625|−.005968750|−.006296875|
+
+R loses on both realized histories in each block. Three-block mean differences are
+−.002901042 on R histories and−.005213542 on F histories. These are six *dependent
+comparisons on three reused worlds*, not six independent replications. They have no
+confirmation threshold and do not amend B06's inconclusive result. Off-diagonal cells
+are off-collector recommendation readouts; the learner did not execute those recommendations
+to produce a new trajectory. B07's live diagonal and actual sampled returns keep their
+original meanings. No online counterfactual performance or law-only mediation is established.
+
+Contrary early evidence remains: first64 R−F on F histories is+.008562500 /−.001375000 /
+−.000375000 (mean+.002270833), versus−.002312500 /−.001375000 /−.003312500 on R histories
+(mean−.002333333). Late64 gaps are zero in95301/95302, adverse in95303:−.006562500 on R
+history and−.013375000 on F history. Changing from F to R history improves full256 R by
+.009015625 /−.000171875 /−.001968750, and F by+.002234375 /0 /−.002296875. Neither history
+is uniformly better; the effect cannot be summarized as sample abundance alone.
+
+**Which predictions survived.** Both prospective95303 .55 predictions occurred. On F's
+history, R recommends harmful cooperation49/64 times versus F13/64. On R's history, F's
+cooperation increases to55/64, nearly R's56/64. Thus the same optimistic outcome law can
+lead to different decisions, while the method also changes behavior with the acquired
+reward history. The source of the same-history gap switches: on F history the .55 cost
+contributes−.006187500 out of−.006296875; on R history .65 contributes−.005796875 out of
+−.005968750, because F recognizes useful cooperation55 times and R only2. This is evidence
+for a mapping-by-history interaction on these records, not one isolated missing-sample fault.
+
+An important competing explanation prevents a generic "F is better calibrated" claim.
+The95303 .55 R history contains35 outcome11 cases among49 cooperative records, with31/35
+positive rewards on11 and one positive among14 other outcomes (32/49 overall). F history
+has10/14 outcome11, with8/10 positives there and0/4 elsewhere (8/14 overall). Both empirical
+11 frequencies are optimistic relative to true .55, while the F-history reward realization
+partly cancels this optimism. A direct value predictor can benefit from that realization;
+stable-response reuse need not react in the same way. Crossing does not separate this
+finite-history cancellation from general representation/regularization benefits.
+
+95301 also resists a one-context story: on F history, R makes14 more harmful .35 choices
+and16 more .55 choices than F, costing−.010281250 and−.002750000; six additional useful .85
+choices recover+.004031250. On R history the analogous net loss is much smaller. In95302
+the two histories nearly coincide; two or three additional harmful .55 recommendations
+explain the small R loss. Both methods still almost never select the valuable .65 option.
+
+**Verification and actual cost.** DM's saved arithmetic reader verifies32 scientific-file
+digests and25 required input digests, complete source-state equality, all1,536 donor rows,
+first-target fidelity, pre-feedback counters, SAFE/response predictions, final counts,
+ridge sufficient statistics/normal equations without solving, unchanged diagonals and all
+readout/2x2/context reductions. It does not reconstruct every intermediate ridge coefficient;
+that would require additional solves. It imports no learner and runs no fitting, simulator,
+new policy input or rollout. `readback.py` and `readback.json` preserve this exact check.
+Independent ResearchCritic `/root/portfolio_closed_control_evidence` examined the prospective
+entry, all six summaries and95303 raw predictions/outcomes, independently checked the above
+conditional-reward alternative and reviewed the source bridge. MATERIAL_DISSENT no; it did
+not repeat the full digest/state audit or execute any new learning/evaluation.
+
+Actual B08 production cost: **six decision continuations**,1,536 recorded-feedback updates,
+1,536 pre-update Q predictions,3,072 scalar reductions; SAFE updates936, response updates278,
+ridge statistic updates/solves322. Six validation and six fit restorations, zero source/law
+fits, new environment ticks, new sampled rewards or gradient calls. Scientific process wall
+**0.476419511 s**, CPU0.293283702 s, peak RSS39,988KiB, including its input/hash/restore work;
+preparation, advice, publication and arithmetic reading are separate. B05–B08 production now
+totals125 started/completed fits and158,976 collected ticks, with10.227937 s summed scientific
+process wall. Earlier B work and all correctness work remain separate, including B08's two
+tiny continuations plus five analytical fixture fits as corrected before production.
+
+**Belief update and next observation.** This weakens the claim that repairing acquisition
+alone would recover this frozen R package's advantage: moving it to either already-observed
+history does not do so. It does not prove all acquisition designs futile, reject stable-response
+reuse in general, or establish a native UAV effect. B remains exploring. Do not automatically
+append an epsilon sweep, stronger prior, calibration head, longer horizon or new name.
+
+The next investment is a source-only native-assumption check, with zero fits or rollouts:
+follow one real record from legal pre-decision observation/action through post-step joint
+service outcome, reward, next state and continuation. Ask which conditional response could
+remain stable under teammate changes, whether that immediate response is already available
+from the known reward formula, and what actually needs learning. Scenario1's reward uses
+coverage, SINR quality and height, so service-success/count alone is insufficient. Full
+physical outcome information permits direct reward calculation; an ordinary outcome model
+plus that formula is then a necessary simple reference. Immediate physical invariance does
+not imply invariant long-run return under changing teammate policies. Inspect the actual
+collector's saved fields and actor/central training boundary before proposing any next fit.
+This source reading can reject an invalid mapping, not prove statistical stability or learning
+value. A materially new learning comparison will receive focused Pro criticism before launch;
+there is no Claude, Root or external producer dependency for this independent work.
