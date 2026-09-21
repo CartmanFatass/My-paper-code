@@ -2132,3 +2132,48 @@ no commit/launch/Pro/children. DM reviews and accepts the diff; an independent R
 checks the executable delta. This preparation does not adopt the proposed confirmation
 or grant its execution. If the focused advice changes the plan, amend it before use;
 do not run merely because an entry is implemented. No B06 fit is started here.
+
+## 2026-09-21 03:45 PDT — B06 shell accepted; development selection readback
+
+**Implementation and independent review.** DM read the three-file B06 delta and
+accepts it as a provisional execution shell, without adopting or launching the
+confirmation. B05's learner/host bytes and numerical path remain frozen; runner
+changes only parameterize result identity/metadata while retaining B05 defaults.
+B06 binds the exact selection digest, seeds 95201–95205, its own literal admission
+and source SHA, and reduces the five primary paired values by the proposed rule.
+
+A direct `--help` check exposed a missing repository-root import path before any
+admission, fit or output. DM repaired it and added an unrelated-working-directory,
+no-PYTHONPATH subprocess regression. All 11 synthetic confirmation checks then passed
+in 0.27 seconds. These checks perform zero learning fits/macros or evaluator panels;
+the failed help call also cost zero fits. They cover the actual kernel AST inspector,
+direct-script import, fixed seed/digest rejection, metadata defaults, arithmetic and
+reduction-failure evidence. No old learning check or production B05 run was repeated.
+
+Independent Reviewer `/root/b10_credit_review` found no material issue and verified
+unchanged reviewed hashes, the actual absolute-script/native guard boundary and
+frozen learner/host bytes. It reused the reported checks rather than adding tests.
+The review does not validate an unlaunched admitted batch: acceptance of any B06 result
+must require both terminal kernel evidence and the completed primary reduction;
+an intermediate root COMPLETE alone is insufficient. Any interrupted-block exposure
+will be reconciled instead of inferred as zero.
+
+**Read-only selection audit.** Recomputed the declared first64 DR score directly from
+all 60 development raw curve/common pairs, with independent scalar sums. Maximum
+disagreement with published selection scores was 1.1102230246251565e-16. The selected
+full-history hybrid2 also has the highest exact development task value in its finite
+family (.6352864583333333); response2 similarly leads its family (.6378385416666666).
+For recent, the selected hybrid16/window256 has exact value .62875, while the
+unselected hybrid2/window64 has .6330208333333333, despite a lower legal DR score
+(.5939907969201549 versus .6131872256630548). These post-selection truth rankings
+are descriptive checks of existing data, not a new selection rule or a proof of
+population comparator optimality. No setting, endpoint or proposed confirmation seed
+changes. The full reference's selection was not demonstrably weakened by DR noise on
+these development blocks; the recent reference's selection noise remains a limitation.
+
+**Advice observation.** The original accepted Pro request remains live under the
+03:30 question key. Its first local wait lost browser readability after two recoveries;
+repository delivery was not yet present. A second read-only wait on the same accepted
+conversation recovered and observed generation. There was no new Send or replacement
+question. No B06 fit begins before reading the complete advice and recording the DM's
+scientific decision.

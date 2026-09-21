@@ -138,14 +138,16 @@ def resource_fields():
     return result
 
 
-def save_block(out, result, seed, stage, launch_sha):
+def save_block(out, result, seed, stage, launch_sha, result_object=OBJECT):
     import numpy as np
 
     block_root = out / f"seed_{seed}"
     block_root.mkdir(exist_ok=False)
     np.savez_compressed(block_root / "common.npz", **result["common"])
     block_summary = dict(result["summary"])
-    block_summary.update(seed=seed, stage=stage, launch_sha=launch_sha, object=OBJECT)
+    block_summary.update(
+        seed=seed, stage=stage, launch_sha=launch_sha, object=result_object
+    )
     write_json(block_root / "summary.json", block_summary)
     for setting, fit in result["fits"].items():
         fit_root = block_root / setting
@@ -153,7 +155,13 @@ def save_block(out, result, seed, stage, launch_sha):
         np.savez_compressed(fit_root / "curves.npz", **fit["curves"])
         np.savez_compressed(fit_root / "state.npz", **fit["state"])
         fit_summary = dict(fit["summary"])
-        fit_summary.update(seed=seed, stage=stage, setting_id=setting, launch_sha=launch_sha, object=OBJECT)
+        fit_summary.update(
+            seed=seed,
+            stage=stage,
+            setting_id=setting,
+            launch_sha=launch_sha,
+            object=result_object,
+        )
         write_json(fit_root / "summary.json", fit_summary)
     digests = {}
     for path in sorted(block_root.rglob("*")):
@@ -163,7 +171,14 @@ def save_block(out, result, seed, stage, launch_sha):
     return block_summary
 
 
-def run_stage(args, admission):
+def run_stage(
+    args,
+    admission,
+    *,
+    result_object=OBJECT,
+    result_stage=None,
+    batch_metadata=None,
+):
     # Set numerical thread policy before importing NumPy in this process.
     for variable in ("OPENBLAS_NUM_THREADS", "OMP_NUM_THREADS", "MKL_NUM_THREADS", "BLIS_NUM_THREADS"):
         os.environ[variable] = "1"
@@ -187,8 +202,9 @@ def run_stage(args, admission):
         raise FileExistsError("refusing to overwrite an existing scientific summary")
     if selection_bytes is not None:
         (args.out / "selection-input.json").write_bytes(selection_bytes)
+    published_stage = args.stage if result_stage is None else result_stage
     metadata = {
-        "object": OBJECT, "status": "RUNNING", "stage": args.stage,
+        "object": result_object, "status": "RUNNING", "stage": published_stage,
         "launch_sha": args.launch_sha, "config": asdict(config), "seeds": args.seeds,
         "settings": [{"setting_id": spec.id, "spec": asdict(spec)} for spec in specs],
         "selection_sha256": args.selection_sha256,
@@ -202,6 +218,8 @@ def run_stage(args, admission):
         "independent_unit": "fresh block, all decision settings share the collected stream",
         "scope": "exogenous correlated three-tick terminal host; exact expected greedy value under passive collection",
     }
+    if batch_metadata is not None:
+        metadata["batch_metadata"] = dict(batch_metadata)
     write_json(args.out / "summary.json", {**metadata, **resource_fields()})
     score_rows = []
     try:
@@ -210,14 +228,21 @@ def run_stage(args, admission):
             metadata["started_shared_law_fits"] += 1
             metadata["current_seed"] = seed
             write_json(args.out / "summary.json", {**metadata, **resource_fields()})
-            print(json.dumps({"event": "block_started", "stage": args.stage, "seed": seed, "decision_fits": len(specs)}), flush=True)
+            print(json.dumps({"event": "block_started", "stage": published_stage, "seed": seed, "decision_fits": len(specs)}), flush=True)
             block_started = time.monotonic()
             result = run_block(config, seed=seed, specs=specs)
             result["summary"]["scientific_block_wall_seconds"] = time.monotonic() - block_started
             result["summary"]["scientific_block_wall_scope"] = "common collection, all learners and exact evaluator; excludes serialization and import"
             if set(result["fits"]) != {spec.id for spec in specs}:
                 raise ValueError("scientific block omitted or added a setting")
-            block = save_block(args.out, result, seed, args.stage, args.launch_sha)
+            block = save_block(
+                args.out,
+                result,
+                seed,
+                published_stage,
+                args.launch_sha,
+                result_object=result_object,
+            )
             metadata["completed_blocks"].append(block)
             metadata["completed_decision_fits"] += len(specs)
             metadata["completed_shared_law_fits"] += 1
@@ -243,7 +268,7 @@ def run_stage(args, admission):
                         }
                 metadata["comparisons_by_seed"].append({"seed": seed, "by_endpoint": compared})
             write_json(args.out / "summary.json", {**metadata, **resource_fields()})
-            print(json.dumps({"event": "block_complete", "stage": args.stage, "seed": seed}), flush=True)
+            print(json.dumps({"event": "block_complete", "stage": published_stage, "seed": seed}), flush=True)
         if args.stage == "development":
             selected, ranking = choose_settings(score_rows, specs, args.seeds)
             selection = {
