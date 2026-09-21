@@ -5365,3 +5365,25 @@ Fresh published and canonical control both register UCOPE as exploring with exac
 identifies the same direct DM; launch uses the actual current string. Shared canonical
 checkout and index remain Root/Claude-owned. Resource snapshot before publication showed
 about 11.3 GiB available; each actual launch performs its own fresh memory check.
+
+
+### B09 accepted operation identities, 2026-09-21 03:23 UTC
+
+All three original paired-block invocations were accepted on local_linux from fixed,
+reviewed source `a20583ee128bb04e2e638804a0b5493322a3edf6`. Each has its own retained
+source snapshot and fresh memory/control/publication checks. No launch refusal or retry.
+These are three accepted invocations containing the declared six gate fits; acceptance
+alone does not assert that both fits or any final panel have completed. The original
+04:06:07 UTC deadline remains enforced. Result collection belongs to this same DM.
+
+| Master | Accepted UTC | Claim key | Runner PID / Linux start ticks |
+| --- | --- | --- | --- |
+| 8961 | 2026-09-21T03:21:23.908237Z | `b23ff2acc5449784c0f82818ccce3ab3c82473145757ee53bb1307358b5da69b` | 2981825 / 22331414 |
+| 8962 | 2026-09-21T03:22:02.843456Z | `1983609a790a4dbe319b84ad178b9b36c18095ed487b02fc43780b64728a3e52` | 2982554 / 22335307 |
+| 8963 | 2026-09-21T03:22:31.095333Z | `391b876183d5651ca591b5e61a795f5bb9882ee6be84a7aba6bf9533f93a2d02` | 2983138 / 22338131 |
+
+The authoritative handles and source-snapshot paths are in each output's
+`launch-manifest.json`; claims remain in the common Git directory's `hmasd-admission/`.
+The owner requested autonomous work without further routine reports; ongoing progress and
+scientific decisions are recorded here. No unrelated automation, FSD runner or Root control
+path was changed or reactivated.
