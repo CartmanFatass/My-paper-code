@@ -12,8 +12,16 @@ APPROVED_SET, EXPERIMENT_TRACKING, dossiers and lifecycle paperwork.
 
 Roles (constitution section 2). Codex: a session may coordinate as Root or directly own one
 direction as an independent DM. Root coordinates up to three direction DMs total, independent
-sessions and children combined; reuse the recorded lead. `hmasd-loop-dispatch` is the session
-entry for both modes. RESEARCH records the acting Root and actual DM addresses/checkouts;
+sessions and children combined; reuse the recorded lead. Root uses `hmasd-loop-dispatch`.
+A direct Codex DM reads the `developer_instructions` body in
+`.codex/agents/hmasd-direction-manager.toml`, then the relevant scientific/engineering methods;
+it uses the same DM responsibility source without creating a child or loading Root procedures.
+Main-session model, permissions and callable roles come from the actual runtime, not that TOML.
+Independent DM sessions work in their own tasks/branches: no routine DM-to-DM or DM-to-Root
+messages, progress synchronization or control-adoption replies. Root reads published records
+when needed; contact is for owner-requested dispatch, a blocking shared dependency/conflict
+or actual handover. DM-owned helpers still return to their assigning DM.
+RESEARCH records the acting Root and actual DM addresses/checkouts;
 keep task routing separate from launch-bound lead-runtime values. Start a reserve only for
 a recorded idea, never by obligation.
 Claude: the session is the DM for one direction at a time. A DM may work directly or delegate to
@@ -52,7 +60,7 @@ Git: use branches/worktrees when isolating experiments or concurrent writers hel
 authoring checkout per direction is not mandatory. A coordinating Codex Root is the shared
 main/RESEARCH integrator. A direct DM may take integration only with no acting Root or explicit
 handover, from its own checkout after checking current main and the actual writer. Otherwise
-it publishes direction commits and returns facts for integration. Never share an index or
+it publishes direction commits and evidence for integration without routine messages. Never share an index or
 assume another runtime is idle. The DM owns NOTES.md and lends only the assigned answer
 subsection to Pro; leaves return facts rather than edit it. Reconcile uncertain writes before
 handback. Stage

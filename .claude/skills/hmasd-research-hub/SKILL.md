@@ -11,10 +11,16 @@ The Claude session is the DM for one direction at a time under `docs/project/OPE
 You own one direction end to end under docs/project/OPERATING_CONSTITUTION.md: ideas, code,
 runs, reading, and the three records (NOTES.md, runs/<direction>/<tag>/, CLAIM_<slug>.md).
 These duties apply equally to an independent DM session and a delegated DM child. Follow
-the current direction ownership and native return route in RESEARCH.md; do not replace an
+the current direction ownership in RESEARCH.md; do not replace an
 existing lead or inherit its handles merely by reading this role. A direct Codex session
-enters through hmasd-loop-dispatch; Claude remains a single-direction DM via research-hub.
+reads this instruction body through AGENTS.md; use hmasd-loop-dispatch only for Root work
+or a real mode/ownership handover. Claude remains a single-direction DM via research-hub.
 The acting integrator coordinates shared main/RESEARCH writes; it does not ACK your steps.
+Independent DM sessions work autonomously in their own tasks and direction branches. Do not
+message other DMs or Root for progress, completed-batch reports, status checks or control
+adoption. Report to the owner in your own task as requested and publish the existing records.
+Cross-session contact is only for owner-requested dispatch, a blocking shared dependency or
+writer conflict, or actual responsibility handover. Your bounded helpers still return to you.
 Implement directly or delegate a bounded task when that saves context or permits useful parallel
 work. Delegation is optional; you accept the result either way. Keep a local, well-understood
 change in this session when delegation would only repeat the same reading. When delegation helps,
@@ -45,9 +51,12 @@ automatic Reviewer round. Scout, Critic,
 Verifier and Operator are existing bounded methods under your responsibility, not additional
 scientific decision owners. They return facts and spawn no children. You own the notebook;
 Implementer and Monitor do not acquire shared-file write permission by being assigned a task.
-For a changed control revision, reread affected methods at a safe boundary and report actual
-adoption or conflict through the existing return/NOTES entry. Disk publication is not proof of
-loaded instructions. Do not rebind, relaunch or resend accepted or uncertain work to migrate it.
+Use the configured named helper role when available and appropriate; giving a generic child
+a role-like task title does not load that role's instructions or settings. Pass the relevant
+scope and evidence, without creating an extra DM or copying unrelated direction history.
+Read affected control methods when needed at a safe boundary, without a routine broadcast,
+adoption reply or per-batch reread. Disk publication is not proof of loaded instructions.
+Do not rebind, relaunch or resend accepted or uncertain work to migrate it.
 
 Own the working explanation, not just the next candidate. Read the latest relevant notebook
 interpretation and contrary evidence; append what the result strengthens, weakens or leaves
@@ -75,16 +84,16 @@ Operator/Monitor assistance. On observer transfer, keep responsibility until the
 actually adopted the same handle. Terminal facts return to you; collect into
 runs/, then read. Never launch a duplicate on lost observation.
 
-At a boundary (batch done, idea killed, claim read, conflict, idle), return one paragraph:
+When reporting to the owner, or returning as a child at an assigned boundary, give one paragraph:
 direction/state, evidence/commit, what the evidence does and does not establish, the main
 judgment changed (or not resolved), and the next step or actual dependency with its owner.
 Distinguish technical completion from a read result:
 if collection or interpretation remains, say so instead of presenting a completed scientific
 conclusion. Point to the keep/kill/revision, interpretation change or uncertainty in the existing
-NOTES entry; do not add a completion or handoff report. An independent Codex DM uses the
-recorded Root task's native message tool when available; a child uses its native parent
-return. If no Root is assigned, report to the owner. Status inspection is not a reason to
-send a new research prompt. Reconcile an uncertain message before repeating it. A Root's
+NOTES entry; do not add a completion or handoff report. An independent DM does not send an
+extra copy to Root or another DM. A child uses its native parent return. A recorded Root
+address is a recovery locator, not a reporting obligation. For necessary cross-session
+contact, reconcile an uncertain message before repeating it. A Root's
 idle state or pending index update does not block authorized work whose actual admission
 conditions already hold. Update RESEARCH yourself only when acting as that integrator.
 Idle with no producer is idle, not a fabricated dependency. Name a concrete re-entry condition

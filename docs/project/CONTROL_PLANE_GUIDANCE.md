@@ -54,8 +54,13 @@
 
 skills 的描述用于发现，正文在任务使用时读取，references 只在相关时读取。
 Codex 子角色获得自身角色配置，不意味着主会话已经加载同一正文。
-Codex 的 Root 与独立 DM 都从 loop-dispatch 进入；直接 DM 明确读取 direction-manager 的职责正文，
-但继续使用主会话实际模型与权限，角色选择不等于原生配置发生变化。
+Codex Root 使用 loop-dispatch；独立 DM 由 AGENTS 直接指向 direction-manager 的
+`developer_instructions`，读取与 child DM 同一份职责正文，再按任务读取科学／工程方法。
+独立 DM 无需为了进入角色加载 Root 调度流程；模式变更或实际交接时才选读相关方法。
+主会话仍使用实际模型与权限，角色选择不等于原生配置发生变化。
+可调用的子角色以本会话实际工具为准，`.codex/config.toml` 的注册只证明配置来源。
+有合适的具名子角色时使用其原生 role 参数；把通用 child 的任务标题写成 Reviewer，并不会
+加载 Reviewer 的职责或模型配置。历史 spec 按当前任务或冻结对象选读，不作为另一套治理 preload。
 Claude 导入 AGENTS，研究 session 使用生成的 research-hub；它不是又一名 Root。
 Pro 是外部会话，不继承本地 skills：问题作者在现有问题段内提供适用方法摘录或固定版本的具体节。
 具体选读见 [Pro reading context](../../.agents/skills/hmasd-pro-research-prompt-author/references/pro-reading-context.md)：
@@ -69,19 +74,27 @@ Portfolio、假设批次、确认前 review、owner 明确要求的控制面 rev
 Owner 可直接说“本任务作为 Root 协调 A、B”或“本任务直接作为 UCOPE 的 DM”。
 会话按当前指示与已记录归属选择职责；已有明确归属时不要求重新确认模式。
 独立 DM 自己推进一个方向，可以使用 Implementer、Reviewer、Monitor；无需先创建一个 DM child
-再把工作转交一次。Root 既可联系已有独立 DM 任务，也可使用 children，两种形式合计遵守三方向
+再把工作转交一次。Root 可按 owner 指示向已有独立 DM 分派工作，也可使用 children，两种形式合计遵守三方向
 soft ceiling。Claude 仍是单方向 DM，本次没有扩大 Claude 的角色。
 
-当前地址放在 RESEARCH：协调段说明 acting Root/integrator、范围、返回地址和工作区，方向 standing
+当前地址放在 RESEARCH：协调段说明 acting Root/integrator、范围、原生地址和工作区，方向 standing
 给出独立 DM 的 task id/host 或 child 的 parent/agent 地址、作者 checkout/branch。不要为新地址改写
 启动器逐字匹配的 Lead runtime 字段。地址须来自真实原生返回；老标题或临时聊天指向不是所有权证明。
 缺失时先恢复已有会话，不凭“没看到 agent”创建第二位 DM，也不为历史闲置方向补一套联系台账。
 
-独立任务使用当前可用的 Codex task 读取、发送、等待工具；children 使用原生 agent 工具。
-`send_message_to_thread` 会启动或排队工作，查状态用 `read_thread`/`wait_threads`。
+独立 DM 在自己的任务、分支和 NOTES 中工作，并按 owner 的要求在本任务报告；默认不向其他 DM
+或 Root 发进度、完成通知、采用版本的确认，也不轮询彼此。Root 在需要集成或回答 owner 时读取
+已发布记录，无需唤醒 DM 重述笔记；地址只用于定位和必要交接，不构成汇报关系。
+只有 owner 要求的分派、具体阻塞的共享依赖／writer 冲突或真实职责交接需要跨会话联系。
+`send_message_to_thread` 会启动或排队工作；必要的只读状态查询使用 `read_thread`/`wait_threads`，
+不另设常规进度监听。children 与 DM 内部的助手仍使用原生 agent 工具向分派者返回。
 只有 owner 明确请求新独立任务时才调用 `create_thread`；一般子任务仍可用 child。
-独立 DM 在有意义的边界返回已记录的 Root；没有 Root 时直接向 owner 报告。Root 暂时 idle 不会
+Root 暂时 idle 不会
 暂停已经获准、真实依赖已满足的研究。工具不可用时报告具体联系限制，不虚构跨 runtime 工具。
+
+发布职责或 skill 不会热加载已有会话；各会话按工作需要在安全边界读取相关变化，不广播版本，
+不要求采用回执或为确认采用单独写笔记。被问及实际加载情况时，用读取记录或原生运行事实回答；
+源码中存在文件不等于它已经进入会话上下文。
 
 换 DM、换 Root 或改变本会话职责时，在安全边界核对在途进程、未收集结果、未确定的 Send 和写入；
 由接任者实际接回同一 handle，再更新现有索引里的地址。方向结论、冻结输入、原截止时间继续有效，

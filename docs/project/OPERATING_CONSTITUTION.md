@@ -34,6 +34,11 @@ independent DM sessions as well as DM children. The owner explicitly keeps Claud
 single-direction DM. This formalizes session routing and ownership; it does not resume
 research, change model settings or restart accepted work.
 
+2026-09-20 (owner, independent-session autonomy): direction DM sessions work independently.
+They do not routinely message one another or Root, synchronize progress, or acknowledge
+control publication. Root coordinates assignments and shared integration when needed;
+the existing direction records carry evidence without an inter-session reporting loop.
+
 ## 1. What this project is
 
 A personal exploratory research project on unfixed skill duration k and unfixed agent count N,
@@ -105,8 +110,15 @@ Session ownership is recoverable from RESEARCH.md: identify the acting Root/inte
 its coordination scope, and the current DM's native address and authoring checkout in the
 direction's standing. Use actual task ids/hosts for independent sessions and actual parent
 and agent addresses for children; a title or old assignment alone does not establish a live
-lead. An absent or idle Root does not stop already authorized direction work. A DM reports
-meaningful boundaries to its recorded Root, or directly to the owner when no Root is assigned.
+lead. These addresses support recovery and necessary handover, not routine contact.
+Independent DMs work in their own tasks and publish their direction records/commits, reporting
+to the owner there according to the owner's reporting preference. They do not routinely
+message other DMs or Root, synchronize progress, poll other sessions, or require acknowledgments.
+Root reads published evidence when integration or an owner request needs it; it does not wake
+DMs for status, completed-batch reports or control-adoption replies. Cross-session contact is
+reserved for an explicit owner-requested dispatch, a concrete blocking shared dependency or
+writer conflict, or an actual responsibility handover. Children and bounded helpers still
+return to their assigning parent. An absent or idle Root does not stop authorized direction work.
 Changing session, mode or lead preserves accepted handles, frozen inputs, the notebook and
 scientific standing. The outgoing owner reconciles in-flight work; the incoming owner
 actually adopts it before responsibility is relinquished. No new handoff record is required.
@@ -115,7 +127,7 @@ Shared writing: one acting integrator at a time coordinates main and RESEARCH.md
 coordinating Codex Root holds that function. A direct Codex DM or Claude session
 may take it only when no Root is acting or on explicit handover, from its own
 checkout after checking current main and the actual writer; otherwise it publishes direction
-commits and returns facts. The direction lead owns NOTES.md, handing only the target answer
+commits and evidence for integration without a mandatory notification. The direction lead owns NOTES.md, handing only the target answer
 subsection to Pro and reconciling uncertain writes before taking it back. Leaves return facts;
 an assignment does not implicitly grant shared-file or another checkout's index ownership.
 
@@ -162,7 +174,7 @@ resource-safety checks are unchanged.
 (`exploring / confirming / reserve / archived`), lead runtime, and one-line standing/next step with evidence links.
 Session contact and checkout information belong in this existing index, not a separate
 registry. Keep the lead-runtime value used by an accepted launch contract stable; task
-addresses and return routes belong in standing/coordination prose. Unknown contact details
+addresses and any actual handover route belong in standing/coordination prose. Unknown contact details
 are reconciled through the native runtime, not replaced with invented ids or a duplicate DM.
 Record any owner pause there; a state label does not cancel a pause. It replaces PORTFOLIO,
 APPROVED_SET, tracking, dossiers and lifecycle-decision paperwork. No pilot cards, intake,
