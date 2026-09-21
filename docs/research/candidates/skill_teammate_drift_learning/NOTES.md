@@ -2023,3 +2023,81 @@ whether noisy development selection or the remaining estimated-law problem makes
 different next observation more informative. The prior Portfolio consultation did not
 cover this completed result or a confirmation plan. No further scientific fits are
 launched while that decision is being prepared; independent reading/publication continues.
+
+## Pro question 2026-09-21 b05-unknown-law-b06-claim
+
+**Question.** Does B05 justify the concrete, unchanged five-new-block B06 confirmation
+proposed in [CLAIM_unknown_law_b06.md](CLAIM_unknown_law_b06.md), or is there a material
+comparator/inference problem that makes one different next observation more informative?
+Please criticize the actual claim and finite selection protocol, not whether an unknown
+law can ever be useful in principle. In particular, distinguish noisy DR model selection,
+hybrid regularization/representation, and current-law estimation as explanations. The
+first64 point means are positive but one of three blocks is adverse; full256 is positive
+on all three but cannot replace the primary. We do not propose another reward threshold,
+private-law feature, or an unchanged post-score expansion of B05.
+
+**Standing and choice.** The owner reopened B and asked this independent DM to begin
+research; other active directions are independent and outside this question. The owner
+removed fit allowances and the old time window. No new owner permission is needed for
+ordinary B work. B05 completed 69 decision +6 law fits in two stages. It supplies genuine
+unknown-law evidence but not endogenous MARL or native UAV evidence. The DM favors the
+fixed confirmation below because recurrence can decide whether the early benefit is a
+reusable finite-learning result. Advice may change that investment judgment; agreement
+is not a permission gate. Keep the original B01/B02 negatives and B03/B04 scoped positives.
+
+**Proposed next experiment.** At seeds 95201–95205, keep source 2,048/target 256 and the
+three selected B05 settings, with full hybrid as primary reference and recent hybrid
+secondary. Twenty fits (15 decisions+5 law learners), 34,560 unique ticks and 103,680
+decision-reading tick exposure; 34,560 exact decision panels +11,520 shared diagnostics,
+zero new evaluation ticks, no retuning. Primary first64 value difference, one independent
+paired value per block. Proposed rule: mean >=.005 and two-sided paired t95 interval
+above zero; raw signs, SD, normal-approximation caveat and secondary full/late/context
+effects retained. Criticize whether that .005 scale/rule and n5 inference are appropriate
+for this declared local claim. Failure does not become equivalence or direction closure.
+Exact contract and all selection exposure are in the claim. No B06 fit has started.
+
+**Context, all at source_sha unless explicitly pinned otherwise.** Read these actual
+sections rather than reconstructing governance from old closure/chat instructions:
+
+- `docs/project/OPERATING_CONSTITUTION.md` sections 1–5 and 7–8: independent DM authority,
+  no allowance or default Root messaging, Pro as adviser, scope/confirmation minimums.
+- `.agents/skills/hmasd-scientific-tools/SKILL.md`: Update the working explanation,
+  Confirm a claim, Comparators and MARL information, Statistics, Cost and exposure.
+- `.agents/skills/hmasd-research-engineering/SKILL.md`: Checks and review and Execution
+  and admission only if the executable/evidence binding is disputed.
+- This NOTE's 2026-09-21 02:30, 02:48, 02:58 and 03:20 entries: inherited premise,
+  precise B05 host/selection, causal prior correction and complete result interpretation.
+- `CLAIM_unknown_law_b06.md`: the actual proposed claim, selection exposure and rule.
+- B05 evidence fixed at `43b262fbb66f978abcc0ff767c6be8937352042a`: both
+  `runs/skill_teammate_drift_learning/b05_unknown_law_development/` and
+  `.../b05_unknown_law_heldout/`. Read stage summaries, development `selection.json`,
+  held-out `readback.json` and all nine selected held-out fit summaries. The readback is
+  a checked reduction; raw common/curves/state NPZ arrays remain in the same run folders.
+  Clearly state if binary arrays cannot be read; do not claim to have re-executed them.
+- B05 code fixed at `afe4f8ec74d48b2485db3d935de7871c86cc0e6c`:
+  `experiments/candidates/skill_teammate_drift_learning/unknown_law_b05/learning.py`,
+  `study.py`, and `scripts/run_skill_drift_unknown_law_b05.py`. Follow only relevant
+  information/selection/update/evaluator paths; no mandatory broad historical audit.
+- Prior complete Portfolio Pro advice and synthesis: `docs/research/RESEARCH.md`,
+  Portfolio review 2026-09-21, subsection four (B unknown joint law), at
+  `b6093d211fa33a81d05d490ffa5bc920f43605eb`. It motivated B05; it did not see B05 results
+  or review this confirmation. B03/B04 history in this NOTE is inherited evidence, not
+  a protocol-matched estimate of B05's unknown-law treatment effect.
+
+**Return.** A source-grounded judgment on this specific next investment and its strongest
+alternative explanation. If you recommend a material change, give the smallest useful
+comparison, changed intermediate and task-value prediction, information rights and fit/
+non-fit cost; do not generate an idea list or require a positive pilot. Preserve adverse
+blocks and the distinction between prediction error, mistake count and task regret.
+State MATERIAL_DISSENT yes/no on the proposed claim/plan. No experiment, new task, budget
+grant, new approval requirement or changes outside the empty Answer subsection.
+
+**Writing.** Read the question at the full pinned source_sha supplied in the message.
+For writing only, fetch the latest blob of this target on branch
+`codex/b-unknown-joint-law`; write the complete response into the following `### Answer`
+and preserve every other byte. Stop on overlapping edits. Report the actual commit on
+success; if GitHub writeback is unavailable, give the complete answer in chat, with
+unread-source limitations, not only a receipt/hash. Private transport conversation
+addresses stay local and must not be written to the repository.
+
+### Answer
