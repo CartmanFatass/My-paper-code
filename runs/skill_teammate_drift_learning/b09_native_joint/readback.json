@@ -1,0 +1,1015 @@
+{
+  "audit_script_sha256": "1c42805f9e288ec85b5aedcef924a0f8feab889e60e983f0337baff511adc730",
+  "blocks": [
+    {
+      "16_versus_64_actual_trace": {
+        "0": {
+          "different_reward_ticks": 0,
+          "focal_bit_differences_at_paired_ticks": 0
+        },
+        "1": {
+          "different_reward_ticks": 0,
+          "focal_bit_differences_at_paired_ticks": 0
+        }
+      },
+      "by_snapshot": {
+        "16": {
+          "episodes": [
+            {
+              "J_final_focal_radius": 707.1067811865476,
+              "J_focal_inward_commands": 11,
+              "J_minus_M_by_16tick_quarters": [
+                -0.08841278498891467,
+                -1.6535632911199816,
+                -0.0004931361321929562,
+                0.0
+              ],
+              "J_minus_M_return": -1.7424692122410903,
+              "J_served_ticks": 40,
+              "J_serving_agent_counts": [
+                6,
+                30,
+                4
+              ],
+              "M_final_focal_radius": 707.1067811865476,
+              "M_focal_inward_commands": 0,
+              "M_served_ticks": 47,
+              "M_serving_agent_counts": [
+                0,
+                35,
+                12
+              ],
+              "conditional_immediate_value_difference_along_own_recorded_paths": -1.229552779186079,
+              "coverage_return_difference": -1.633333333333333,
+              "episode": 0,
+              "first_focal_bit_divergence_tick": 0,
+              "focal_bit_differences_at_paired_ticks": 11,
+              "quality_return_difference": -0.10913587890775583,
+              "realization_residual_difference": -0.5129164330550102
+            },
+            {
+              "J_final_focal_radius": 528.4225907638316,
+              "J_focal_inward_commands": 11,
+              "J_minus_M_by_16tick_quarters": [
+                0.7389419992708086,
+                -0.0040141546177804854,
+                -0.0009375227659780827,
+                -0.2388757443339717
+              ],
+              "J_minus_M_return": 0.4951145775530783,
+              "J_served_ticks": 59,
+              "J_serving_agent_counts": [
+                10,
+                36,
+                13
+              ],
+              "M_final_focal_radius": 605.1459055103535,
+              "M_focal_inward_commands": 0,
+              "M_served_ticks": 57,
+              "M_serving_agent_counts": [
+                0,
+                36,
+                21
+              ],
+              "conditional_immediate_value_difference_along_own_recorded_paths": 0.020286261396327207,
+              "coverage_return_difference": 0.4666666666666666,
+              "episode": 1,
+              "first_focal_bit_divergence_tick": 0,
+              "focal_bit_differences_at_paired_ticks": 11,
+              "quality_return_difference": 0.028447910886411826,
+              "realization_residual_difference": 0.47482831615675114
+            },
+            {
+              "J_final_focal_radius": 707.1067811865476,
+              "J_focal_inward_commands": 5,
+              "J_minus_M_by_16tick_quarters": [
+                0.15327568651439719,
+                -0.0030169754065121623,
+                -0.0008497489655981127,
+                0.0
+              ],
+              "J_minus_M_return": 0.14940896214228694,
+              "J_served_ticks": 61,
+              "J_serving_agent_counts": [
+                3,
+                40,
+                18
+              ],
+              "M_final_focal_radius": 707.1067811865476,
+              "M_focal_inward_commands": 0,
+              "M_served_ticks": 60,
+              "M_serving_agent_counts": [
+                0,
+                42,
+                18
+              ],
+              "conditional_immediate_value_difference_along_own_recorded_paths": -0.17811832319201193,
+              "coverage_return_difference": 0.2333333333333333,
+              "episode": 2,
+              "first_focal_bit_divergence_tick": 0,
+              "focal_bit_differences_at_paired_ticks": 5,
+              "quality_return_difference": -0.08392437119104643,
+              "realization_residual_difference": 0.3275272853342988
+            },
+            {
+              "J_final_focal_radius": 707.1067811865476,
+              "J_focal_inward_commands": 15,
+              "J_minus_M_by_16tick_quarters": [
+                0.7610331966403369,
+                -0.114817252415707,
+                -0.02014598561065198,
+                -0.012760483533494932
+              ],
+              "J_minus_M_return": 0.6133094750804826,
+              "J_served_ticks": 63,
+              "J_serving_agent_counts": [
+                14,
+                0,
+                49
+              ],
+              "M_final_focal_radius": 707.1067811865476,
+              "M_focal_inward_commands": 0,
+              "M_served_ticks": 60,
+              "M_serving_agent_counts": [
+                0,
+                0,
+                60
+              ],
+              "conditional_immediate_value_difference_along_own_recorded_paths": 0.604340868852965,
+              "coverage_return_difference": 0.6999999999999998,
+              "episode": 3,
+              "first_focal_bit_divergence_tick": 0,
+              "focal_bit_differences_at_paired_ticks": 15,
+              "quality_return_difference": -0.08669052491951677,
+              "realization_residual_difference": 0.008968606227517884
+            }
+          ],
+          "mean": -0.12115904936631061,
+          "paired_episode_returns": [
+            -1.7424692122410903,
+            0.4951145775530783,
+            0.14940896214228694,
+            0.6133094750804826
+          ],
+          "same_state_diagnostics_by_occupancy_view": {
+            "0": {
+              "J_better_ticks": 8,
+              "J_true_one_step_regret_mean_on_these_states": 0.0,
+              "J_worse_ticks": 0,
+              "M_true_one_step_regret_mean_on_these_states": 0.0015007255545493245,
+              "choice_disagreement_ticks": 8,
+              "visited_ticks": 256
+            },
+            "1": {
+              "J_better_ticks": 4,
+              "J_true_one_step_regret_mean_on_these_states": 0.0,
+              "J_worse_ticks": 0,
+              "M_true_one_step_regret_mean_on_these_states": 0.0007498937755831519,
+              "choice_disagreement_ticks": 4,
+              "visited_ticks": 256
+            }
+          }
+        },
+        "64": {
+          "episodes": [
+            {
+              "J_final_focal_radius": 707.1067811865476,
+              "J_focal_inward_commands": 11,
+              "J_minus_M_by_16tick_quarters": [
+                -0.08841278498891467,
+                -1.6535632911199816,
+                -0.0004931361321929562,
+                0.0
+              ],
+              "J_minus_M_return": -1.7424692122410903,
+              "J_served_ticks": 40,
+              "J_serving_agent_counts": [
+                6,
+                30,
+                4
+              ],
+              "M_final_focal_radius": 707.1067811865476,
+              "M_focal_inward_commands": 0,
+              "M_served_ticks": 47,
+              "M_serving_agent_counts": [
+                0,
+                35,
+                12
+              ],
+              "conditional_immediate_value_difference_along_own_recorded_paths": -1.229552779186079,
+              "coverage_return_difference": -1.633333333333333,
+              "episode": 0,
+              "first_focal_bit_divergence_tick": 0,
+              "focal_bit_differences_at_paired_ticks": 11,
+              "quality_return_difference": -0.10913587890775583,
+              "realization_residual_difference": -0.5129164330550102
+            },
+            {
+              "J_final_focal_radius": 528.4225907638316,
+              "J_focal_inward_commands": 11,
+              "J_minus_M_by_16tick_quarters": [
+                0.7389419992708086,
+                -0.0040141546177804854,
+                -0.0009375227659780827,
+                -0.2388757443339717
+              ],
+              "J_minus_M_return": 0.4951145775530783,
+              "J_served_ticks": 59,
+              "J_serving_agent_counts": [
+                10,
+                36,
+                13
+              ],
+              "M_final_focal_radius": 605.1459055103535,
+              "M_focal_inward_commands": 0,
+              "M_served_ticks": 57,
+              "M_serving_agent_counts": [
+                0,
+                36,
+                21
+              ],
+              "conditional_immediate_value_difference_along_own_recorded_paths": 0.020286261396327207,
+              "coverage_return_difference": 0.4666666666666666,
+              "episode": 1,
+              "first_focal_bit_divergence_tick": 0,
+              "focal_bit_differences_at_paired_ticks": 11,
+              "quality_return_difference": 0.028447910886411826,
+              "realization_residual_difference": 0.47482831615675114
+            },
+            {
+              "J_final_focal_radius": 707.1067811865476,
+              "J_focal_inward_commands": 5,
+              "J_minus_M_by_16tick_quarters": [
+                0.15327568651439719,
+                -0.0030169754065121623,
+                -0.0008497489655981127,
+                0.0
+              ],
+              "J_minus_M_return": 0.14940896214228694,
+              "J_served_ticks": 61,
+              "J_serving_agent_counts": [
+                3,
+                40,
+                18
+              ],
+              "M_final_focal_radius": 707.1067811865476,
+              "M_focal_inward_commands": 0,
+              "M_served_ticks": 60,
+              "M_serving_agent_counts": [
+                0,
+                42,
+                18
+              ],
+              "conditional_immediate_value_difference_along_own_recorded_paths": -0.17811832319201193,
+              "coverage_return_difference": 0.2333333333333333,
+              "episode": 2,
+              "first_focal_bit_divergence_tick": 0,
+              "focal_bit_differences_at_paired_ticks": 5,
+              "quality_return_difference": -0.08392437119104643,
+              "realization_residual_difference": 0.3275272853342988
+            },
+            {
+              "J_final_focal_radius": 707.1067811865476,
+              "J_focal_inward_commands": 15,
+              "J_minus_M_by_16tick_quarters": [
+                0.7610331966403369,
+                -0.114817252415707,
+                -0.02014598561065198,
+                -0.012760483533494932
+              ],
+              "J_minus_M_return": 0.6133094750804826,
+              "J_served_ticks": 63,
+              "J_serving_agent_counts": [
+                14,
+                0,
+                49
+              ],
+              "M_final_focal_radius": 707.1067811865476,
+              "M_focal_inward_commands": 0,
+              "M_served_ticks": 60,
+              "M_serving_agent_counts": [
+                0,
+                0,
+                60
+              ],
+              "conditional_immediate_value_difference_along_own_recorded_paths": 0.604340868852965,
+              "coverage_return_difference": 0.6999999999999998,
+              "episode": 3,
+              "first_focal_bit_divergence_tick": 0,
+              "focal_bit_differences_at_paired_ticks": 15,
+              "quality_return_difference": -0.08669052491951677,
+              "realization_residual_difference": 0.008968606227517884
+            }
+          ],
+          "mean": -0.12115904936631061,
+          "paired_episode_returns": [
+            -1.7424692122410903,
+            0.4951145775530783,
+            0.14940896214228694,
+            0.6133094750804826
+          ],
+          "same_state_diagnostics_by_occupancy_view": {
+            "0": {
+              "J_better_ticks": 8,
+              "J_true_one_step_regret_mean_on_these_states": 0.0,
+              "J_worse_ticks": 0,
+              "M_true_one_step_regret_mean_on_these_states": 0.0015007255545493245,
+              "choice_disagreement_ticks": 8,
+              "visited_ticks": 256
+            },
+            "1": {
+              "J_better_ticks": 4,
+              "J_true_one_step_regret_mean_on_these_states": 0.0,
+              "J_worse_ticks": 0,
+              "M_true_one_step_regret_mean_on_these_states": 0.0007498937755831519,
+              "choice_disagreement_ticks": 4,
+              "visited_ticks": 256
+            }
+          }
+        }
+      },
+      "seed": 95401,
+      "target_prequential_joint_log_loss": 1.21415259743411,
+      "target_prequential_projected_log_loss": 1.4436217556762503
+    },
+    {
+      "16_versus_64_actual_trace": {
+        "0": {
+          "different_reward_ticks": 61,
+          "focal_bit_differences_at_paired_ticks": 2
+        },
+        "1": {
+          "different_reward_ticks": 0,
+          "focal_bit_differences_at_paired_ticks": 0
+        }
+      },
+      "by_snapshot": {
+        "16": {
+          "episodes": [
+            {
+              "J_final_focal_radius": 707.1067811865476,
+              "J_focal_inward_commands": 2,
+              "J_minus_M_by_16tick_quarters": [
+                -0.4778357617367483,
+                -0.0018917741282521716,
+                0.0,
+                0.0
+              ],
+              "J_minus_M_return": -0.47972753586500083,
+              "J_served_ticks": 40,
+              "J_serving_agent_counts": [
+                0,
+                3,
+                37
+              ],
+              "M_final_focal_radius": 707.1067811865476,
+              "M_focal_inward_commands": 0,
+              "M_served_ticks": 42,
+              "M_serving_agent_counts": [
+                0,
+                3,
+                39
+              ],
+              "conditional_immediate_value_difference_along_own_recorded_paths": -0.5485209354729018,
+              "coverage_return_difference": -0.4666666666666666,
+              "episode": 0,
+              "first_focal_bit_divergence_tick": 0,
+              "focal_bit_differences_at_paired_ticks": 2,
+              "quality_return_difference": -0.013060869198333878,
+              "realization_residual_difference": 0.0687933996079012
+            },
+            {
+              "J_final_focal_radius": 707.1067811865476,
+              "J_focal_inward_commands": 1,
+              "J_minus_M_by_16tick_quarters": [
+                -0.25979946881830884,
+                -0.00011254364082513568,
+                -0.00021202256797717145,
+                -0.00012874681095265128
+              ],
+              "J_minus_M_return": -0.260252781838064,
+              "J_served_ticks": 61,
+              "J_serving_agent_counts": [
+                0,
+                33,
+                28
+              ],
+              "M_final_focal_radius": 707.1067811865476,
+              "M_focal_inward_commands": 0,
+              "M_served_ticks": 62,
+              "M_serving_agent_counts": [
+                0,
+                33,
+                29
+              ],
+              "conditional_immediate_value_difference_along_own_recorded_paths": -0.08709204309089853,
+              "coverage_return_difference": -0.2333333333333333,
+              "episode": 1,
+              "first_focal_bit_divergence_tick": 0,
+              "focal_bit_differences_at_paired_ticks": 1,
+              "quality_return_difference": -0.026919448504730333,
+              "realization_residual_difference": -0.17316073874716525
+            },
+            {
+              "J_final_focal_radius": 707.1067811865476,
+              "J_focal_inward_commands": 4,
+              "J_minus_M_by_16tick_quarters": [
+                -1.6308634167817995,
+                -0.002528028251999187,
+                -0.0018499700203765679,
+                0.0
+              ],
+              "J_minus_M_return": -1.6352414150541748,
+              "J_served_ticks": 47,
+              "J_serving_agent_counts": [
+                1,
+                33,
+                13
+              ],
+              "M_final_focal_radius": 707.1067811865476,
+              "M_focal_inward_commands": 0,
+              "M_served_ticks": 54,
+              "M_serving_agent_counts": [
+                0,
+                41,
+                13
+              ],
+              "conditional_immediate_value_difference_along_own_recorded_paths": -1.1735170192292015,
+              "coverage_return_difference": -1.633333333333333,
+              "episode": 2,
+              "first_focal_bit_divergence_tick": 0,
+              "focal_bit_differences_at_paired_ticks": 4,
+              "quality_return_difference": -0.0019080817208421514,
+              "realization_residual_difference": -0.4617243958249738
+            },
+            {
+              "J_final_focal_radius": 707.1067811865476,
+              "J_focal_inward_commands": 12,
+              "J_minus_M_by_16tick_quarters": [
+                1.2040649735199545,
+                -1.4126680200044457,
+                -0.4670349075114043,
+                0.0
+              ],
+              "J_minus_M_return": -0.6756379539958957,
+              "J_served_ticks": 46,
+              "J_serving_agent_counts": [
+                10,
+                9,
+                27
+              ],
+              "M_final_focal_radius": 707.1067811865476,
+              "M_focal_inward_commands": 0,
+              "M_served_ticks": 49,
+              "M_serving_agent_counts": [
+                0,
+                12,
+                37
+              ],
+              "conditional_immediate_value_difference_along_own_recorded_paths": -0.8412992044783156,
+              "coverage_return_difference": -0.6999999999999998,
+              "episode": 3,
+              "first_focal_bit_divergence_tick": 0,
+              "focal_bit_differences_at_paired_ticks": 12,
+              "quality_return_difference": 0.024362046004104486,
+              "realization_residual_difference": 0.16566125048242014
+            }
+          ],
+          "mean": -0.7627149216882838,
+          "paired_episode_returns": [
+            -0.47972753586500083,
+            -0.260252781838064,
+            -1.6352414150541748,
+            -0.6756379539958957
+          ],
+          "same_state_diagnostics_by_occupancy_view": {
+            "0": {
+              "J_better_ticks": 7,
+              "J_true_one_step_regret_mean_on_these_states": 9.276625645177766e-06,
+              "J_worse_ticks": 0,
+              "M_true_one_step_regret_mean_on_these_states": 0.0014140247327907962,
+              "choice_disagreement_ticks": 7,
+              "visited_ticks": 256
+            },
+            "1": {
+              "J_better_ticks": 6,
+              "J_true_one_step_regret_mean_on_these_states": 0.0,
+              "J_worse_ticks": 0,
+              "M_true_one_step_regret_mean_on_these_states": 0.0011123882775748283,
+              "choice_disagreement_ticks": 6,
+              "visited_ticks": 256
+            }
+          }
+        },
+        "64": {
+          "episodes": [
+            {
+              "J_final_focal_radius": 707.1067811865476,
+              "J_focal_inward_commands": 2,
+              "J_minus_M_by_16tick_quarters": [
+                -0.4778357617367483,
+                -0.0018917741282521716,
+                0.0,
+                0.0
+              ],
+              "J_minus_M_return": -0.47972753586500083,
+              "J_served_ticks": 40,
+              "J_serving_agent_counts": [
+                0,
+                3,
+                37
+              ],
+              "M_final_focal_radius": 707.1067811865476,
+              "M_focal_inward_commands": 0,
+              "M_served_ticks": 42,
+              "M_serving_agent_counts": [
+                0,
+                3,
+                39
+              ],
+              "conditional_immediate_value_difference_along_own_recorded_paths": -0.5485209354729018,
+              "coverage_return_difference": -0.4666666666666666,
+              "episode": 0,
+              "first_focal_bit_divergence_tick": 0,
+              "focal_bit_differences_at_paired_ticks": 2,
+              "quality_return_difference": -0.013060869198333878,
+              "realization_residual_difference": 0.0687933996079012
+            },
+            {
+              "J_final_focal_radius": 679.5879682895292,
+              "J_focal_inward_commands": 3,
+              "J_minus_M_by_16tick_quarters": [
+                -1.0038727452596368,
+                -0.0003762205535656482,
+                -0.0004677335856709264,
+                -0.00037559266075798403
+              ],
+              "J_minus_M_return": -1.005092292059631,
+              "J_served_ticks": 58,
+              "J_serving_agent_counts": [
+                1,
+                33,
+                24
+              ],
+              "M_final_focal_radius": 707.1067811865476,
+              "M_focal_inward_commands": 0,
+              "M_served_ticks": 62,
+              "M_serving_agent_counts": [
+                0,
+                33,
+                29
+              ],
+              "conditional_immediate_value_difference_along_own_recorded_paths": -0.7045247294647103,
+              "coverage_return_difference": -0.9333333333333332,
+              "episode": 1,
+              "first_focal_bit_divergence_tick": 0,
+              "focal_bit_differences_at_paired_ticks": 3,
+              "quality_return_difference": -0.07175895872629783,
+              "realization_residual_difference": -0.30056756259492107
+            },
+            {
+              "J_final_focal_radius": 707.1067811865476,
+              "J_focal_inward_commands": 4,
+              "J_minus_M_by_16tick_quarters": [
+                -1.6308634167817995,
+                -0.002528028251999187,
+                -0.0018499700203765679,
+                0.0
+              ],
+              "J_minus_M_return": -1.6352414150541748,
+              "J_served_ticks": 47,
+              "J_serving_agent_counts": [
+                1,
+                33,
+                13
+              ],
+              "M_final_focal_radius": 707.1067811865476,
+              "M_focal_inward_commands": 0,
+              "M_served_ticks": 54,
+              "M_serving_agent_counts": [
+                0,
+                41,
+                13
+              ],
+              "conditional_immediate_value_difference_along_own_recorded_paths": -1.1735170192292015,
+              "coverage_return_difference": -1.633333333333333,
+              "episode": 2,
+              "first_focal_bit_divergence_tick": 0,
+              "focal_bit_differences_at_paired_ticks": 4,
+              "quality_return_difference": -0.0019080817208421514,
+              "realization_residual_difference": -0.4617243958249738
+            },
+            {
+              "J_final_focal_radius": 707.1067811865476,
+              "J_focal_inward_commands": 12,
+              "J_minus_M_by_16tick_quarters": [
+                1.2040649735199545,
+                -1.4126680200044457,
+                -0.4670349075114043,
+                0.0
+              ],
+              "J_minus_M_return": -0.6756379539958957,
+              "J_served_ticks": 46,
+              "J_serving_agent_counts": [
+                10,
+                9,
+                27
+              ],
+              "M_final_focal_radius": 707.1067811865476,
+              "M_focal_inward_commands": 0,
+              "M_served_ticks": 49,
+              "M_serving_agent_counts": [
+                0,
+                12,
+                37
+              ],
+              "conditional_immediate_value_difference_along_own_recorded_paths": -0.8412992044783156,
+              "coverage_return_difference": -0.6999999999999998,
+              "episode": 3,
+              "first_focal_bit_divergence_tick": 0,
+              "focal_bit_differences_at_paired_ticks": 12,
+              "quality_return_difference": 0.024362046004104486,
+              "realization_residual_difference": 0.16566125048242014
+            }
+          ],
+          "mean": -0.9489247992436756,
+          "paired_episode_returns": [
+            -0.47972753586500083,
+            -1.005092292059631,
+            -1.6352414150541748,
+            -0.6756379539958957
+          ],
+          "same_state_diagnostics_by_occupancy_view": {
+            "0": {
+              "J_better_ticks": 6,
+              "J_true_one_step_regret_mean_on_these_states": 0.0,
+              "J_worse_ticks": 0,
+              "M_true_one_step_regret_mean_on_these_states": 0.0011213529774611577,
+              "choice_disagreement_ticks": 6,
+              "visited_ticks": 256
+            },
+            "1": {
+              "J_better_ticks": 6,
+              "J_true_one_step_regret_mean_on_these_states": 0.0,
+              "J_worse_ticks": 0,
+              "M_true_one_step_regret_mean_on_these_states": 0.0011123882775748283,
+              "choice_disagreement_ticks": 6,
+              "visited_ticks": 256
+            }
+          }
+        }
+      },
+      "seed": 95402,
+      "target_prequential_joint_log_loss": 1.3062793216409985,
+      "target_prequential_projected_log_loss": 1.4426592297158711
+    },
+    {
+      "16_versus_64_actual_trace": {
+        "0": {
+          "different_reward_ticks": 5,
+          "focal_bit_differences_at_paired_ticks": 1
+        },
+        "1": {
+          "different_reward_ticks": 0,
+          "focal_bit_differences_at_paired_ticks": 0
+        }
+      },
+      "by_snapshot": {
+        "16": {
+          "episodes": [
+            {
+              "J_final_focal_radius": 707.1067811865476,
+              "J_focal_inward_commands": 3,
+              "J_minus_M_by_16tick_quarters": [
+                -1.4100144892672568,
+                -0.0037680633876234493,
+                -0.0015325933418469662,
+                -0.00039154704320590317
+              ],
+              "J_minus_M_return": -1.4157066930399314,
+              "J_served_ticks": 51,
+              "J_serving_agent_counts": [
+                0,
+                44,
+                7
+              ],
+              "M_final_focal_radius": 707.1067811865476,
+              "M_focal_inward_commands": 0,
+              "M_served_ticks": 57,
+              "M_serving_agent_counts": [
+                0,
+                50,
+                7
+              ],
+              "conditional_immediate_value_difference_along_own_recorded_paths": -1.1607566134493594,
+              "coverage_return_difference": -1.3999999999999997,
+              "episode": 0,
+              "first_focal_bit_divergence_tick": 0,
+              "focal_bit_differences_at_paired_ticks": 3,
+              "quality_return_difference": -0.01570669303993345,
+              "realization_residual_difference": -0.2549500795905735
+            },
+            {
+              "J_final_focal_radius": 707.1067811865476,
+              "J_focal_inward_commands": 3,
+              "J_minus_M_by_16tick_quarters": [
+                0.15199190142905905,
+                -0.0023578508129396547,
+                -0.0013186195738419948,
+                -9.275151727336506e-05
+              ],
+              "J_minus_M_return": 0.1482226795250039,
+              "J_served_ticks": 62,
+              "J_serving_agent_counts": [
+                2,
+                10,
+                50
+              ],
+              "M_final_focal_radius": 707.1067811865476,
+              "M_focal_inward_commands": 0,
+              "M_served_ticks": 61,
+              "M_serving_agent_counts": [
+                0,
+                10,
+                51
+              ],
+              "conditional_immediate_value_difference_along_own_recorded_paths": 0.02724429693111148,
+              "coverage_return_difference": 0.2333333333333333,
+              "episode": 1,
+              "first_focal_bit_divergence_tick": 0,
+              "focal_bit_differences_at_paired_ticks": 3,
+              "quality_return_difference": -0.08511065380832937,
+              "realization_residual_difference": 0.12097838259389254
+            },
+            {
+              "J_final_focal_radius": 707.1067811865476,
+              "J_focal_inward_commands": 3,
+              "J_minus_M_by_16tick_quarters": [
+                -0.5174870353432767,
+                -0.009423072628611806,
+                0.0,
+                0.0
+              ],
+              "J_minus_M_return": -0.5269101079718901,
+              "J_served_ticks": 62,
+              "J_serving_agent_counts": [
+                2,
+                60,
+                0
+              ],
+              "M_final_focal_radius": 707.1067811865476,
+              "M_focal_inward_commands": 0,
+              "M_served_ticks": 64,
+              "M_serving_agent_counts": [
+                0,
+                64,
+                0
+              ],
+              "conditional_immediate_value_difference_along_own_recorded_paths": -0.3479252223760608,
+              "coverage_return_difference": -0.4666666666666666,
+              "episode": 2,
+              "first_focal_bit_divergence_tick": 0,
+              "focal_bit_differences_at_paired_ticks": 3,
+              "quality_return_difference": -0.06024344130522178,
+              "realization_residual_difference": -0.1789848855958276
+            },
+            {
+              "J_final_focal_radius": 16.438062081246194,
+              "J_focal_inward_commands": 63,
+              "J_minus_M_by_16tick_quarters": [
+                0.7499665439076204,
+                1.7309389740559356,
+                2.1272311090694433,
+                2.556065666893308
+              ],
+              "J_minus_M_return": 7.164202293926307,
+              "J_served_ticks": 64,
+              "J_serving_agent_counts": [
+                64,
+                0,
+                0
+              ],
+              "M_final_focal_radius": 707.1067811865476,
+              "M_focal_inward_commands": 0,
+              "M_served_ticks": 42,
+              "M_serving_agent_counts": [
+                0,
+                34,
+                8
+              ],
+              "conditional_immediate_value_difference_along_own_recorded_paths": 7.001204757384059,
+              "coverage_return_difference": 5.133333333333333,
+              "episode": 3,
+              "first_focal_bit_divergence_tick": 0,
+              "focal_bit_differences_at_paired_ticks": 63,
+              "quality_return_difference": 2.0308689605929744,
+              "realization_residual_difference": 0.16299753654224855
+            }
+          ],
+          "mean": 1.3424520431098723,
+          "paired_episode_returns": [
+            -1.4157066930399314,
+            0.1482226795250039,
+            -0.5269101079718901,
+            7.164202293926307
+          ],
+          "same_state_diagnostics_by_occupancy_view": {
+            "0": {
+              "J_better_ticks": 8,
+              "J_true_one_step_regret_mean_on_these_states": 1.1707102322715691e-05,
+              "J_worse_ticks": 0,
+              "M_true_one_step_regret_mean_on_these_states": 0.001329556384108553,
+              "choice_disagreement_ticks": 8,
+              "visited_ticks": 256
+            },
+            "1": {
+              "J_better_ticks": 5,
+              "J_true_one_step_regret_mean_on_these_states": 0.0,
+              "J_worse_ticks": 0,
+              "M_true_one_step_regret_mean_on_these_states": 0.0009350324728554443,
+              "choice_disagreement_ticks": 5,
+              "visited_ticks": 256
+            }
+          }
+        },
+        "64": {
+          "episodes": [
+            {
+              "J_final_focal_radius": 707.1067811865476,
+              "J_focal_inward_commands": 3,
+              "J_minus_M_by_16tick_quarters": [
+                -1.4100144892672568,
+                -0.0037680633876234493,
+                -0.0015325933418469662,
+                -0.00039154704320590317
+              ],
+              "J_minus_M_return": -1.4157066930399314,
+              "J_served_ticks": 51,
+              "J_serving_agent_counts": [
+                0,
+                44,
+                7
+              ],
+              "M_final_focal_radius": 707.1067811865476,
+              "M_focal_inward_commands": 0,
+              "M_served_ticks": 57,
+              "M_serving_agent_counts": [
+                0,
+                50,
+                7
+              ],
+              "conditional_immediate_value_difference_along_own_recorded_paths": -1.1607566134493594,
+              "coverage_return_difference": -1.3999999999999997,
+              "episode": 0,
+              "first_focal_bit_divergence_tick": 0,
+              "focal_bit_differences_at_paired_ticks": 3,
+              "quality_return_difference": -0.01570669303993345,
+              "realization_residual_difference": -0.2549500795905735
+            },
+            {
+              "J_final_focal_radius": 707.1067811865476,
+              "J_focal_inward_commands": 3,
+              "J_minus_M_by_16tick_quarters": [
+                0.15199190142905905,
+                -0.0023578508129396547,
+                -0.0013186195738419948,
+                -9.275151727336506e-05
+              ],
+              "J_minus_M_return": 0.1482226795250039,
+              "J_served_ticks": 62,
+              "J_serving_agent_counts": [
+                2,
+                10,
+                50
+              ],
+              "M_final_focal_radius": 707.1067811865476,
+              "M_focal_inward_commands": 0,
+              "M_served_ticks": 61,
+              "M_serving_agent_counts": [
+                0,
+                10,
+                51
+              ],
+              "conditional_immediate_value_difference_along_own_recorded_paths": 0.02724429693111148,
+              "coverage_return_difference": 0.2333333333333333,
+              "episode": 1,
+              "first_focal_bit_divergence_tick": 0,
+              "focal_bit_differences_at_paired_ticks": 3,
+              "quality_return_difference": -0.08511065380832937,
+              "realization_residual_difference": 0.12097838259389254
+            },
+            {
+              "J_final_focal_radius": 707.1067811865476,
+              "J_focal_inward_commands": 3,
+              "J_minus_M_by_16tick_quarters": [
+                -0.5174870353432767,
+                -0.009423072628611806,
+                0.0,
+                0.0
+              ],
+              "J_minus_M_return": -0.5269101079718901,
+              "J_served_ticks": 62,
+              "J_serving_agent_counts": [
+                2,
+                60,
+                0
+              ],
+              "M_final_focal_radius": 707.1067811865476,
+              "M_focal_inward_commands": 0,
+              "M_served_ticks": 64,
+              "M_serving_agent_counts": [
+                0,
+                64,
+                0
+              ],
+              "conditional_immediate_value_difference_along_own_recorded_paths": -0.3479252223760608,
+              "coverage_return_difference": -0.4666666666666666,
+              "episode": 2,
+              "first_focal_bit_divergence_tick": 0,
+              "focal_bit_differences_at_paired_ticks": 3,
+              "quality_return_difference": -0.06024344130522178,
+              "realization_residual_difference": -0.1789848855958276
+            },
+            {
+              "J_final_focal_radius": 16.43806208124623,
+              "J_focal_inward_commands": 64,
+              "J_minus_M_by_16tick_quarters": [
+                0.756656785222838,
+                1.7309389740559356,
+                2.1272311090694433,
+                2.556065666893308
+              ],
+              "J_minus_M_return": 7.170892535241526,
+              "J_served_ticks": 64,
+              "J_serving_agent_counts": [
+                64,
+                0,
+                0
+              ],
+              "M_final_focal_radius": 707.1067811865476,
+              "M_focal_inward_commands": 0,
+              "M_served_ticks": 42,
+              "M_serving_agent_counts": [
+                0,
+                34,
+                8
+              ],
+              "conditional_immediate_value_difference_along_own_recorded_paths": 7.0042017754023655,
+              "coverage_return_difference": 5.133333333333333,
+              "episode": 3,
+              "first_focal_bit_divergence_tick": 0,
+              "focal_bit_differences_at_paired_ticks": 64,
+              "quality_return_difference": 2.037559201908192,
+              "realization_residual_difference": 0.1666907598391589
+            }
+          ],
+          "mean": 1.3441246034386771,
+          "paired_episode_returns": [
+            -1.4157066930399314,
+            0.1482226795250039,
+            -0.5269101079718901,
+            7.170892535241526
+          ],
+          "same_state_diagnostics_by_occupancy_view": {
+            "0": {
+              "J_better_ticks": 7,
+              "J_true_one_step_regret_mean_on_these_states": 0.0,
+              "J_worse_ticks": 0,
+              "M_true_one_step_regret_mean_on_these_states": 0.0013143150196944955,
+              "choice_disagreement_ticks": 7,
+              "visited_ticks": 256
+            },
+            "1": {
+              "J_better_ticks": 5,
+              "J_true_one_step_regret_mean_on_these_states": 0.0,
+              "J_worse_ticks": 0,
+              "M_true_one_step_regret_mean_on_these_states": 0.0009350324728554443,
+              "choice_disagreement_ticks": 5,
+              "visited_ticks": 256
+            }
+          }
+        }
+      },
+      "seed": 95403,
+      "target_prequential_joint_log_loss": 1.1601640880132909,
+      "target_prequential_projected_log_loss": 1.4436217556762503
+    }
+  ],
+  "evaluation_rows_checked": 3072,
+  "limits": "Arithmetic readback of stored evidence, not independent channel or observation reconstruction; same-state regret diagnostics do not estimate continuation values or fresh replication.",
+  "new_fits": 0,
+  "new_native_step_calls": 0,
+  "new_probability_or_network_queries": 0,
+  "primary_mean": 0.09134691827623032,
+  "primary_seed_values": [
+    -0.12115904936631061,
+    -0.9489247992436756,
+    1.3441246034386771
+  ],
+  "saved_planner_branches_checked": 24576,
+  "science_digests_checked": 17,
+  "scientific_source": "efe9ce4f39cdb9147d28bbb5c00e7be91dbfca55",
+  "source_files_at_frozen_commit_checked": 5,
+  "status": "PASS",
+  "training_rows_checked": 384
+}

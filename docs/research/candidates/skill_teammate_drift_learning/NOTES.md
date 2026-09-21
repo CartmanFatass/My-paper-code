@@ -4635,3 +4635,192 @@ Publish these exact files and this acceptance, then execute the declared three p
 fits once through local_linux snapshot admission. No altered scientific arm, extra pilot,
 production nominal panel or new Pro question is needed. Preserve the accepted operation and
 read all three complete outputs before deciding the next investment.
+
+## 2026-09-21 07:04 PDT — B09 complete: immediate choice improves, closed-loop value is heterogeneous
+
+The one accepted native operation is
+`55299d283092402b2b07d6b218beea0401eb4aca9345407a65bc023c570625cd`, accepted
+2026-09-21T13:48:17.349802Z. Execution source is
+`efe9ce4f39cdb9147d28bbb5c00e7be91dbfca55`, prospective source remains
+`ee2d70c69abc0c5a45881da6e74937a7ac166689`. All three declared fits completed;
+supervisor/runner3850489/3850490 are absent, exit0 is valid, and native status reconciles
+without mismatches or an available retry. There was no technical failure or replacement.
+Outputs are `runs/skill_teammate_drift_learning/b09_native_joint/`.
+
+**Unchanged primary.** At the64-observation snapshot, each entry below is the mean of four
+actual64-tick episode cumulative adapter-return differences, J_emp minus M_proj:
+
+| Seed | Mean J−M | Four paired episode differences |
+| --- | ---: | --- |
+|95401|−0.121159049366311|−1.742469212241089, +0.495114577553077, +0.149408962142282, +0.613309475080486|
+|95402|−0.948924799243677|−0.479727535865001, −1.005092292059636, −1.635241415054175, −0.675637953995897|
+|95403|+1.344124603438679|−1.415706693039933, +0.148222679525006, −0.526910107971885, +7.170892535241530|
+
+The three-block mean is **+0.091346918276230**. It is not a stable gain: two blocks are
+adverse, and one very favorable episode dominates the small positive aggregate. That episode
+belongs in the declared primary; neither remove it as an outlier nor report only its favorable
+sign. Three training histories remain the independent units. This was exploration without a
+pass threshold; no confirmation claim or population interval is being invented after scores.
+The adapter scalar is physical team reward divided by3; these values are cumulative adapter
+returns, not the default HMASD J measure or per-step rewards.
+
+The early16 means are −0.121159049366311, −0.762714921688284 and +1.342452043109875.
+Actual M traces are unchanged between16 and64 in all blocks. J changes zero paired focal
+bits for95401, two for95402 (61 reward values change along the consequent trajectory), and
+one for95403 (five reward values change). Thus additional counts rarely change decisions here;
+the small64-sample table is not failing to move or merely reproducing its prior.
+
+**Learnability and intermediate prediction.** Target prequential joint log loss is
+1.214152597 /1.306279322 /1.160164088, versus its projection's
+1.443621756 /1.442659230 /1.443621756. Counts and recorded commands establish actual learning,
+with no evaluation updates. At64, learned contrast p00−p01−p10 is +.250000000 /+.174242424
+/+.310606061; the projections remain negative. More consequentially, from the already stored
+native tables and true q evaluated only after choice, J has **zero true-q one-step regret on
+all1,536 states visited by both views at64**. There are36 J/M choice disagreements across
+these states, all favoring J in immediate expectation. On J occupancy, mean M regret per block
+is .001500726 /.001121353 /.001314315; on M occupancy it is
+.000749894 /.001112388 /.000935032. This supports the finite-learning/immediate-choice link
+on the observed states. It does not give36 independent discoveries, unvisited-state optimality
+or a continuation-value comparison. Most visited choices coincide, so the opportunity is sparse.
+
+**Physical path reading, including the adverse side.** At64 M issues outward on every tick
+of all12 episodes. Every J/M pair first differs at tick0. In95403/episode3 J keeps moving
+inward, ending in the approximately13.56–16.44m radial oscillation; the focal UAV serves all64
+ticks. M moves outward to the corner (radius707.11m), and22 ticks are unserved. The +7.170893
+adapter difference splits into +5.133333 coverage and +2.037559 quality. Summing the recorded
+true-q immediate expectations along each policy's own realized path gives +7.004202; the
+realization-residual difference is +.166691. Teammate positions and innovation slots are
+identical across the two paths.
+
+This does not establish that inward is generally better. In95402, J serves2/4/7/3 fewer
+ticks than M in the four episodes; all four are adverse. The block means of the path-conditioned
+expected-immediate differences are −.195760993 /−.816965472 /+1.380691059, preserving the
+two adverse block signs. Thus a claim that the primary pattern is simply immediate reward
+realization noise is inadequate. But these sums condition on visited histories: they are not
+fresh estimates of expected episode returns, and the saved one-step branches do not contain
+multi-step counterfactuals. We have not identified the delayed causal value of any single action,
+nor measured a benefit from longer planning. "Myopia matters" remains a plausible explanation
+for the disconnect, not a proven repair prescription. Initial geometry, feedback and subsequent
+private innovations all contribute to which path is visited.
+
+**Verification and costs.** The DM's `readback.py`/`readback.json` verify all17 stable
+artifact digests, five source-file digests against the execution commit, all384 training rows
+(command labels, update causality, version separation and snapshots), all3,072 evaluation
+rows and24,576 saved branches. Selected branches equal the actual movement, observation,
+connection, SINR, rewards/components and terminal fields. Recorded movement, connection
+selection from saved SINR, reward components and /3 scaling reconcile. Episode continuity,
+paired initial geometry/innovations, frozen counts, choice/value arithmetic and raw-to-root
+primary reductions pass. This is arithmetic reconstruction, not an independent channel solve
+or observation implementation. The first readback attempt reached the root reduction and used
+the wrong JSON key (`primary_reduction` instead of `reduction`); the audit was corrected and
+completed without any fit or native call. No scientific output was changed. Independent
+Reviewer `/root/b09_native_review` separately verified all17 digests, every selected actual
+branch, the primary, same-state regret and the favorable/adverse path reading; no inconsistency
+found and no new run performed.
+
+Production actual cost: **3started/3completed fits**,384 collection ticks/labels/count updates,
+48 actual evaluation episodes/3,072 evaluation ticks,24,576 planning branches/deep copies:
+**3,456 real team ticks and28,032 native step calls including planning**. There were54 native
+constructors/implicit resets/logical setups/custom geometry refreshes,408 learner probability
+queries (384 pre-update plus24 exports),384 collection projections,6 frozen evaluation
+projections and9 summary diagnostics. Each of3,072 evaluation ticks has two learned Q/choice
+arithmetic views plus the post-choice true-Q/regret reading. Zero gradients, actor/value-network
+forwards or evaluation count updates. Runner wall34.291371239s, CPU33.952026842s, peak
+RSS129992KiB. These are this process's measurements, not a general speed claim. Nine compressed
+raw NPZ files total2,835,924bytes. Earlier correctness cost remains in the preceding entry;
+audit/review add zero fits, native steps and policy queries, but have real engineering work.
+
+**Working judgment.** The imposed unknown correlated-controller contract can be learned cheaply
+with ordinary joint counts, and this information changes useful immediate choices through the
+unchanged native physics. The hypothesis of a dependable closed-loop return advantage from this
+myopic package is weakened. Neither this finding nor the earlier R failures rejects all drift
+learning. The new contract still has no measured counterpart in the current central HMASD
+controller, which can query its own policies; it has not demonstrated cross-version data reuse,
+endogenous co-learning or a novel architecture. I will not repeat B09 or automatically add a
+continuation learner to rescue its primary. The next investment question is whether ordinary
+transparent closed-loop rules already absorb the task benefit, before paying for a different
+learning target. That comparator change is the focused Pro question below; B remains owned here,
+without a Root/Claude dependency or inter-task messages.
+
+## Pro question 2026-09-21 b09-closed-loop-investment
+
+Conversation: existing Jev direction conversation, resolved from private local state only.
+
+**Question and decision.** B09 now supplies the finite-learning/native evidence missing from
+your previous answer. What is the smallest worthwhile next investment in B's drift-learning
+question given successful same-state immediate choices, mixed actual returns, and sparse action
+differences? Decide whether to test transparent fixed closed-loop rules before changing the
+learning target, to pursue a specifically justified continuation comparison, or to end this
+particular radial-controller route. Ending this package would not mean all teammate-drift
+research lacks value. Give one selected next action; no list of new architectures is requested.
+
+**Standing and evidence.** Read the immediately preceding B09 completion entry and its
+`runs/skill_teammate_drift_learning/b09_native_joint/{summary,readback}.json` at source_sha.
+The3×4 primary values, unusual favorable episode, physical traces, same-state regret and
+costs are all retained. The last complete Pro answer/adoption and B09 prospective declaration
+are at `ee2d70c69abc0c5a45881da6e74937a7ac166689` in this notebook; executable semantics are
+fixed at `efe9ce4f39cdb9147d28bbb5c00e7be91dbfca55` in
+`experiments/candidates/skill_teammate_drift_learning/native_joint_b09/study.py` and
+`scripts/run_skill_drift_native_joint_b09.py`. No changed arm or extra production run has occurred.
+Read the result as finite learning plus full physics in the deliberately imposed unknown,
+shared-private-innovation contract. Actual central HMASD has no demonstrated missing-policy
+query problem. Physical reward coupling alone does not imply action dependence. Existing
+B06/B07/B08 R-package evidence remains adverse/inconclusive as summarized in the prior answer;
+do not use this new ordinary joint model to relabel those results positive.
+
+**DM's current preference and strongest objection.** I lean toward one zero-new-fit native
+evaluation comparing J_emp and M_proj to two transparent rules: always issue the inward radial
+command, or always issue the outward radial command. Both remain closed-loop in physical
+position, use the same command dictionary/info rights and native reward, and ignore learned
+teammate probabilities. This asks whether the method's observed use can be absorbed by a
+simple rule before investing in continuation learning. In B09 M happened to equal outward
+on all saved deployment trajectories; inward's value is unmeasured except where J happened
+to follow it. Neither rule would be chosen separately for each evaluation seed or by an
+oracle outcome. Report both, all paired episodes and costs. This is a fresh comparison with
+new random evaluation streams, not adding seeds to B09's unchanged primary. No new parameter
+fit, training history, threshold, confirmation, initial-geometry search or reward change.
+
+The best objection is that this still studies an artificially simple external-controller
+task rather than a demonstrated HMASD deficit, and a fixed-rule evaluation alone does not
+establish a new learning result. Another objection is that failure of a one-step objective to
+optimize a64-step return is unsurprising. Against abandoning it merely for that reason, we
+now have an actually learned law, a competent exact-marginal component control, and both
+positive and adverse native paths; the result is not an empty activation test. Clarify which
+unknown would justify the proposed extra observation and which result would actually change
+our use/investment judgment. Do not assume a longer planner helps or require a diagnostic
+ladder if a direct, concrete learning comparison has greater information value.
+
+**Prospective cost under the preferred option (proposal, not an accepted batch).** Reuse the
+three B09 final64 count states, fixed. Four policies×four fresh64-tick episodes×three frozen
+bases =48 episodes/3,072 actual native ticks. J and M still each enumerate eight branches
+per tick:12,288 planning branches,15,360 total native step calls,48 constructors/setups,
+zero new fits/updates or network forwards. The two fixed controls need no planning calls;
+report their lower cost rather than padding them with wasted computation. Fresh evaluation
+addresses and exact output binding would be preregistered after this choice; no old geometry
+or unusually favorable episode is selected. This estimates conditional deployment value of
+already learned models, not three new independent learning replications. If you prefer another
+single experiment, specify its changed scientific target and smallest sufficient cost rather
+than merely advising "more seeds" or "learn continuation".
+
+**Context / authority.** At source_sha read `docs/project/OPERATING_CONSTITUTION.md` §§1–5,
+7–8 and `.agents/skills/hmasd-scientific-tools/SKILL.md` sections Explore, Update the working
+explanation, Simple-model and literature bridges, Comparators, Statistics and Cost. Owner
+has authorized independent B research with no fit cap or runtime window; retain preregistration,
+no score-dependent same-batch extension and fresh3–5 seed confirmation requirements. Current
+governance replaces contrary old conversation rules; the frozen B06–B09 contracts keep their
+original meaning. No automatic App messages, Root relay or Claude collaboration. No mandatory
+toy-first, novelty, positive-signal or deep-planning stage; ordinary learning/simple rules may
+be the answer. This is a direction-level scientific decision, not a portfolio reallocation.
+
+**Return and writing.** Give an evidence-grounded revision of the explanation, strongest
+alternative, one selected next action and its discriminating predictions. Cite consequential
+sources actually read, say what was unavailable, and return MATERIAL_DISSENT yes/no to the
+preferred option with reasons. No experiment, policy forward, fit or parameter search.
+Write only the empty `### Answer` subsection below on branch `codex/b-unknown-joint-law` in
+this file. Read the immutable question source supplied in the cover message, then fetch the
+latest target blob for writing with its actual SHA; preserve the question and every other byte.
+Stop on overlapping edits. If writing fails, give the **complete answer in chat**, not a receipt,
+hash or summary. A successful write must name its actual commit. Advice is not approval or a
+new permission layer; DM owns the decision.
+
+### Answer
