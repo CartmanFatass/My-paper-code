@@ -96,3 +96,103 @@ implementation is reviewable, before any result. Development interpretation only
 confirmation would need its own claim note, fresh seeds and Pro criticism of the actual plan.
 First concrete next step: implement the model likelihood and two-job recursion while the
 DM builds the admitted runner around the unchanged G learner and reads shared registration.
+
+### Independent scientific criticism and DM response (before outcomes)
+
+Internal ResearchCritic `comparison_critic` returned material dissent on attribution, not on
+the comparison or the endpoint likelihood. I accept it. B07's positive G−R0 accompanies
+identical final-clock blocking `.0185546875`, more attempts `.12890625/team`, more failed
+attempts `.1123046875/team`, and less waiting `2.595703125 ticks`; B06 block10801 also
+improves while last-clock blocking increases. These published component facts keep own
+deadline/readiness relaxation as a strong alternative to partner protection.
+
+Clarification to the initial L0: `O_self` is **coupled versus isolated-job planning**, not
+an intervention that deletes only partner utility. Its WAIT assumes the next own clock
+in four ticks remains free; joint planning includes the possibility that the partner
+submits two ticks later and delays one's own opportunity. O−O_self therefore measures
+the value of including reciprocal scheduling interaction within this model, not a pure
+partner-loss mediator and not an explanation of G's learned representation.
+
+Add a pre-result intermediate prediction without extra rollouts: in every paired O/O_self
+evaluation world, record the first action disagreement while histories and public inputs
+are still identical; retain time, both target states and both possible disagreement
+directions. Predict activation only while both jobs are pending, with positive complete-world
+O−O_self as the native counterpart. Zero activation or activation without J gain weakens
+the usefulness of coupling here. A strong O_self with little O increment is a useful simple
+own-timing answer. No post-treatment selection of saved opportunities; retain all worlds.
+
+The critic found no inherent adaptive-sampling defect: the next eligible observation time
+is determined by the preceding observed state/action and slot schedule, not future target
+draws. Each add_batch handles its own episode IDs (which restart at zero); absent-at-submit
+success is explicitly `p*(c−1)/(c+6)` because the first service transition can be a return.
+O's known model family remains a declared structural resource, not equal computation or
+a model-free comparison. This internal critique supplements the reused Pro advice.
+
+### B08 prospective declaration — fixed before the first result
+
+Shared registration is now published at `main@d07c96f049282c3b2a7114268e7fd112a8b82f9b`;
+the live canonical checkout agrees that vsp_03 is exploring and its lead is
+`Codex DM (independent session)`. Its actual task, checkout and branch match this task.
+The author branch merged that publication without editing other directions. This removes
+the initial control dependency; execution still uses fresh native admission.
+
+This is one development batch, **not confirmation**. Three new independent paired blocks
+are seeds **21801, 21802, 21803**. Per block: one ordinary G fit at exactly 512 updates,
+128 complete H40 episodes/update, unchanged B06 architecture, FP32 actor/critic, Adam
+lr .001/betas(.9,.999)/eps1e-8, one backward/update, inherited entropy law. No restart,
+early stopping, checkpoint selection or historical fit replay. G uses the same train100
+world and action-address laws at fresh seeds. One O model fit then uses every consecutive
+eligible public observation endpoint from that G fit, pooling the two identical target
+laws after restoring identity; no extra environment collection. The declared MLE starts
+at c6/p.4, L-BFGS-B bounds c[1.01,30], p[.01,.99], maxiter200, ftol1e-12, gtol1e-7.
+The fixed age-Markov family is a stated structural resource. No candidate-family or
+hyperparameter selection. Nonconvergence is a technical failure, not an O score.
+
+**Six planned fits**: three G training attempts and three O transition-model fits.
+The O_self rule reuses its block's fit. O_known uses true c4/p.5 and has zero new fits,
+explicitly with additional model knowledge; it is not the primary comparator. R0/R also
+have zero fits. On each block's fresh split200 4,096 paired complete worlds, evaluate
+seven fixed panels: G greedy, G stochastic (secondary mode), O, R0, R, O_self and O_known.
+No parameter updates from evaluation. All final panels share exogenous worlds and phase;
+no old evaluation seed or score selected the new blocks. Three blocks, not episodes or
+seven panels, are the independent inference units.
+
+Work: **196,608 unique training episodes /7,864,320 team ticks**, **86,016 evaluation
+episodes /3,440,640 team ticks**, total **282,624 episodes /11,304,960 team ticks /
+22,609,920 target transitions**. G performs 1,536 Adam/backward calls. O likelihood
+iterations/function calls, eligible rows, planner time and total actual wall are measured
+separately. Reusing G observations is not additional native collection. Each planner solves
+17 two-job 42×42 state tables and 17 single-job 42-state tables; fitted and known models
+are both costed, with no rollout search. There are no development selection fits hidden
+outside these six. Code checks used deterministic synthetic cases and mocked orchestration.
+
+Primary contrast is fixed-final **G−O** in complete team J. Also retain O−R0, G−R0,
+G−R, O−O_self, O_known−O and stochastic−greedy G, absolute J, successes, attempts,
+failed attempts, non-submissions, waiting, expiry-at-own-clock events, and next/final-clock
+blocking. First O/O_self divergences and both directions are reported without filtering
+worlds. Conditional episode uncertainty remains separate from across-block variation.
+Report all three block contrasts, their mean/SD and a descriptive t95 interval with df2;
+normal independent block contrasts are an assumption, and n3 limits precision.
+
+Interpretation: O absorbing the observed G−R0 gain favors the transparent rule; it does
+not identify what G learned. Positive O−O_self with activation supports coupled planning
+in this host; weak coupling with a strong O_self supports simpler own timing. Positive
+G−O would motivate a specific residual analysis, not moving to update128 or adding seeds.
+Mixed/small effects remain uncertain. The old .02 J scale is context, not a post-hoc gate
+or equivalence region. No same-batch expansion after scores. A further question needs a
+new prospective rationale; confirmation needs a fresh claim and Pro pass.
+
+Node: configured `local_linux`, scientific Python, CPU one thread (also BLAS/OpenMP1),
+one detached process with sequential blocks. No universal fit-rate or wall promise;
+historical nine-second G alone excludes new collection/fitting/planning/publication costs.
+Native admission will verify actual memory, published SHA, current lead/pause and duplicate
+identity. Source SHA and operation manifest will be linked after exact-input publication.
+All failed or incomplete outputs remain. The scientific endpoint has no wall-time stop.
+
+Prelaunch engineering acceptance: Implementer returned only the assigned model/planner
+and tests; DM read and accepted them. Independent `b08_reviewer` found no material executable
+defect after tracing physical service, t+10 continuation, likelihood, identities, learner,
+panels, publication and admission. Its one metadata wording correction for O_self was
+applied. DM focused suite: 14 passed in 1.26 s; independent suite: 14 passed in 1.42 s.
+These are synthetic correctness/orchestration checks, not fresh scientific scores or
+an empirical 512-update identity replay. No result was read before this declaration.
