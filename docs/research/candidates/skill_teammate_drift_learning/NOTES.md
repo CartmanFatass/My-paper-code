@@ -3761,3 +3761,175 @@ collector's saved fields and actor/central training boundary before proposing an
 This source reading can reject an invalid mapping, not prove statistical stability or learning
 value. A materially new learning comparison will receive focused Pro criticism before launch;
 there is no Claude, Root or external producer dependency for this independent work.
+
+## 2026-09-21 05:39 PDT — native bridge: the reusable physical response and the missing learned object
+
+This is source reading at `fe0e5719836f16cc5a44f02d80f53c95592250bd`, with zero fits,
+policy forwards, environment steps or reconstruction probes. It is not a new native result.
+
+The actual Scenario1 chain is `UAVBaseStationEnv` -> `ParallelToArrayAdapter` -> the
+HMASDAgent batch-storage interface used by the pinned E0 construction. I read only the
+construction/collection call sites of E0, not Claude's current experiment notebook, runs,
+weights or new method. The separate `ha_ctse_process.env_factory` does **not** select
+Scenario1; reading its generic segment container alone would not establish this host's
+actual data retention. No files on either runtime path were changed.
+
+* Before the decision, `uav_env.py::_get_observation_vectorized` gives own position, ordered
+  and capped local user/UAV relative positions with SINR, and time. `_get_state` separately
+  exposes all UAV/user positions and time. These are different information sets; a proposed
+  central learner must not quietly turn post-step info into actor input. The actual HMASD
+  coordinator also supplies skill context; I make no claim that its full actor package is
+  identical to a bare local-observation policy.
+* `MultiUAVEnv.step` applies all velocity commands, clips **positions** to the area/height
+  bounds, recalculates channels/connections and only then computes reward. Scenario1's
+  default `use_fdma=False` retains cross-UAV interference. With the free-space channel
+  used by the inspected construction, propagation is deterministic given geometry and
+  configuration. Policy changes alter the distribution of joint next positions; they do
+  not rewrite the movement or physical reward functions.
+* `_compute_reward` is coverage*.7 + mean connected-link SINR quality*.3 − normalized
+  mean height*.1 under the defaults. Equal service counts need not have equal SINR quality
+  or height, so a binary outcome or number served is not reward sufficient. Given the
+  complete post-step connections/SINR/heights, the reward is already a known calculation.
+  Learning that response head is therefore not intrinsically required. This also is not
+  a statement that full post-step geometry is available before choosing the action.
+* `step` puts per-agent/global connections and SINR plus entity positions into info. The
+  adapter preserves original `infos_dict`, adds a copied `state_info` and `next_state` and
+  exposes reward components. `state_info` itself copies connections/positions but does
+  not include the full SINR matrix; that matrix remains in original info. Any future raw
+  recorder must copy the needed arrays at collection time instead of retaining aliases.
+* Reward scale matters: raw per-agent reward is physical team reward divided by N. The
+  adapter's scalar is the mean of those already-divided rewards, hence team reward/N,
+  not a restored team sum. A native comparison must explicitly fix its reported scale.
+* The inspected E0 loop passes current/next states and observations, joint actions, scalar
+  reward and done, with `infos_batch=None`. `store_transition_batch` does not preserve the
+  global service-info stream on this path. `_store_discoverer_experience` writes current
+  state/observation, actions, reward components, values/log-probabilities, skills and input
+  GRU states into `RolloutBuffer`; it is cleared at updates. Next state is used transiently
+  for intrinsic calculations. This is not an existing permanent macro-transition dataset
+  with joint service outcomes that can simply be reopened for B. Adjacent rows are not a
+  license to reconstruct missing terminal/reset or physical info.
+
+**Scientific consequence.** The B03–B08 outcome-conditioned terminal-reward construction
+does not transfer unchanged. The same action-conditioned physics is reusable, but the
+pre-decision distribution of joint teammate motion and the value of subsequent policies
+can change. Conditioning on a short service outcome neither guarantees a stationary
+long-run response nor supplies missing policy/hidden state. Conversely, conditioning on
+the entire physical outcome makes immediate reward known, so a learned response-head
+advantage would need a computational/data justification against ordinary model methods.
+
+I favor examining the *joint behavior distribution* needed to use that known physical
+response, rather than appending a calibration repair to the existing R package. This is
+a changed research premise and comparator, so the next entry asks Pro to challenge its
+scientific value before any successor training is selected. B remains independently
+exploring; no new skill object, intervention on Claude's learner or sharing workflow follows.
+
+## Pro question 2026-09-21 b08-native-joint-law-choice
+
+Conversation: reuse the current B Jev conversation; private locator remains in local
+transport state. Shared records use the question key, never the account or conversation URL.
+
+**Question.** After B08 and the actual native-interface reading above, is the most useful
+next B comparison about learning the *joint* teammate-motion/outcome distribution for a
+known physical response under policy drift, rather than learning a reusable scalar reward
+response? Criticize the concrete small native comparison below: select or materially revise
+one scientifically worthwhile learning comparison, or explain precisely what observation
+is missing before such a fit would be informative. Do not give a portfolio list or infer
+that negative B08 results make drift research valueless.
+
+**Changed evidence and tentative judgment.** B06 first64 confirmation remains inconclusive.
+B07 self-collection removed the mean R advantage; B08 puts R and F on identical acquired
+histories and R loses full256 on both histories in all three reused blocks. Its two95303
+mapping/history predictions nonetheless occurred. Reward-noise cancellation is a live
+alternative to generally better F calibration. Current full Pro advice covered B07 and
+matched-history interpretation; it did not establish a native learning object or support
+this successor. Do not rescue R by pooling seeds, promoting early endpoints or scanning
+epsilon/priors. Separate an ended batch from a rejected question, and an investment judgment
+from falsification. All evidence and contrary readings are retained above.
+
+**Proposed successor, deliberately subject to your criticism.** Use the unmodified native
+Scenario1 physical reward and dynamics, a fixed primitive/macro clock, and B-owned fixed
+closed-loop teammate controllers with a declared version change. No learned termination,
+new skill discovery, Claude checkpoint dependence or altered switching penalty. The focal
+learner receives the same declared pre-action information in every arm; explicit central
+information could be allowed for this first bounded study, but would be a central-control
+claim, not decentralized execution. Post-action joint motion/outcome labels are learning
+targets, never current-action inputs. Historical joint actions are available only under the
+declared collector interface. No oracle current policy law or invisible teammate intent.
+
+The prospective mechanism would be that preserving *joint* dependence in the learned
+current teammate outcome distribution changes useful focal choices at interference/shared
+assignment events, beyond merely predicting each teammate's marginal behavior. Both
+models then use exactly the same known physical reward calculation. This removes an
+unnecessary learned immediate-response head and tests a MARL coupling the bandit surrogate
+does not establish. Policy drift and state distribution may make a simple empirical joint
+reference preferable to a learned factorization; that is a legitimate final choice.
+
+A minimal three-arm comparison would be a joint outcome predictor with explicit reuse of
+lawful past outcomes, a factorized predictor with the same marginal information and fixed
+prediction/control budget, and the strongest transparent *joint* empirical/ordinary model
+reference using the same history and known physics. The latter must not be weakened to make
+joint dependence look novel. Please say whether this is really an identifiable learning
+comparison or merely a textbook joint-model demonstration that leaves the drift question
+untouched. Which proposed object would actually be learned, which data may transfer between
+versions, and what support/covariate or continuation change defeats the claimed reuse?
+If a conventional joint model already supplies the whole method, say so and prefer that
+over an invented architecture. Do not quietly infer joint outcome sufficiency from the
+observed reward formula, or use a mean future geometry where nonlinear reward needs its law.
+
+Before choosing a next fit, I particularly need the smallest discriminating native event
+and lawful conditioning set, a competent same-information reference, one intermediate
+prediction plus its task-return consequence, and a concrete way the ordinary/simple method
+could win. An exogenous scripted controller change remains exogenous; no endogenous
+co-learning or learned-skill claim is obtained just by moving to the UAV simulator. If this
+scope is not worth investing in, distinguish why from the materially different unresolved
+question of current-policy continuation values. Do not demand a proof, exhaustive headroom
+census, toy pass, or complete framework before an informative small learning study.
+
+**Cost and current action.** This consultation and the completed source audit start zero
+new fits, policy evaluations or simulations. If the above three-arm exploration is retained,
+the initial candidate cost is three independent seeds per arm (nine small predictor fits),
+one fixed shared collection schedule per world and separately costed online evaluation.
+No seed, horizon, latent-controller law, window or physics-sampling count has yet been
+selected, and this paragraph is **not** a launch declaration. Help choose their smallest
+scientifically informative scope, explicitly counting collection, model/physics calls,
+any teammate/foundation construction and fitting. Unknown runtime is unknown. No fixed fit
+allowance or time window exists; cost reasons matter. I will write the concrete plan, implement
+and obtain appropriate independent review before native admission. Advice is not approval.
+
+**Context (paths resolve at source_sha unless given another revision).**
+
+* Current owner: independent B DM, research enabled, no App peer/Root communication after
+  initialization. Constitution `docs/project/OPERATING_CONSTITUTION.md` §§1–5,7–8 governs;
+  fit caps were canceled. Our B row at published main `b0dd6b5cc` describes current standing;
+  the direction branch's older index text is not the current scientific update.
+* Methods: `.agents/skills/hmasd-scientific-tools/SKILL.md`, sections Update the working
+  explanation, Simple-model and literature bridges, Comparators, and Cost; they guide
+  judgment without adding prerequisites. Historical experiments keep their frozen meanings.
+* This notebook: B06 result, complete B07 Pro answer/adoption, B07 reading, B08 prospective
+  entry and implementation/cost correction, B08 read and immediately preceding native bridge.
+  Focus on the changed choice rather than reread the entire direction history.
+* B08 evidence `fe0e5719836f16cc5a44f02d80f53c95592250bd`:
+  `runs/skill_teammate_drift_learning/b08_fixed_history_crossing/{summary,readback}.json`,
+  per-seed reduction/summary and preserved NPZ arrays. B07 evidence and complete raw
+  histories are at `6ab8db786a2dc2397d883e8476ccb0303b059f0e` under its declared output
+  root. If binary arrays are unreadable, use the auditable JSON and state that limitation.
+* Native definitions: `envs/pettingzoo/scenario1.py::_compute_reward/_update_channel_state`,
+  `envs/pettingzoo/uav_env.py::step/_get_state/_get_observation_vectorized`, and channel/
+  interference methods; `envs/pettingzoo/env_adapter.py::step/get_current_state`.
+  For retention only: `hmasd/agent.py::store_transition_batch/_store_discoverer_experience`,
+  `hmasd/utils.py::RolloutBuffer`; E0 construction/collection call sites in
+  `scripts/run_flexible_skill_duration_e0.py` are a read-only interface reference, **not**
+  authorization to change FSD's study or establish its current experimental results.
+
+**Answer-only scope.** Give source-grounded synthesis and a concrete research choice,
+including strongest contrary explanation, intermediate/task predictions and fit/non-fit
+cost. Cite sources actually read and any consequential gap; distinguish source inference
+from measured native evidence. No experiments, new tasks, approvals or new report files.
+Write only the following empty `### Answer` subsection of this uniquely titled question
+on branch `codex/b-unknown-joint-law`, fetching the latest target blob and preserving every
+other byte. Stop on overlapping changes. On verified writeback return the actual commit;
+otherwise return the complete answer in chat, not only a receipt/hash. Do not expose private
+account/conversation facts in repository text. End with MATERIAL_DISSENT yes/no about the
+proposed successor and name the decision-changing objection if yes.
+
+### Answer
