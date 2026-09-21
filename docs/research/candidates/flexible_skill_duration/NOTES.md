@@ -3893,3 +3893,16 @@ not a finding against the team-decision question and not an entry condition on i
 
 Not adopted as action: Pro's second zero-fit check (native-continuation against whole-episode
 ranking under a common prefix) is kept as a candidate, behind the gradient decomposition.
+
+## 2026-09-20 23:55 PDT — B13 wave 1 exited clean; wave 2 (three `UNIFORM` fits) admitted at the same sha
+
+Wave 1: the three `BANDIT` fits report `complete`, exit code 0, final weights and sidecars
+present on the node; no score or summary content read. Wave 2 admitted on `wsl_4070` about
+23:53 PDT at launch sha `91e344eecc9603f64f2e8c0504b92117fc35d5df` (the node checkout was not
+moved between waves): `b13_uniform_772803_a01`
+`c943698308c5ff903b1b7a1a07bfff5949b135eb2b2dcedf0fca3b2be7b449ac`; `b13_uniform_772903_a01`
+`b7b65e97ef90d95a5ddce2276dda31b422f9c9f2c86c0ea7b5c33e25f4e56442`; `b13_uniform_773003_a01`
+`e159a8654811f7b273837ce06c95287dfe7561cf495b886c08d67b33c4717cde`. Two earlier attempts of
+mine were refused before any admission or output root (the kernel was started from the wrong
+host, then without the node's control-plane interpreter variable); neither created an
+operation. All six declared fits are now started; the batch is closed to additions.
