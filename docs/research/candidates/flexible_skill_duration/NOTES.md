@@ -3001,3 +3001,60 @@ panels' own replicate noise on every block.
   fit-level idea, my object). E2b → the lever is the structure of the signal: per-agent
   counterfactual credit or label-conditioned value baselines; that is where the skill object
   and Codex's team-conditioned question genuinely meet, and the interface to agree on.
+
+## 2026-09-20 16:50 PDT — how the coordinator's signal is built (code map, read-only), and what B11 will measure
+
+Read-only map of the D2 route on this construction (scout, file:line; I spot-checked the
+quoted lines). These are code facts, not results.
+- **Reward.** A coordinator segment's reward is the gamma-discounted sum of the *raw team
+  environment reward* over the segment (`agent.py:2348-2355`); no discriminator or entropy
+  term enters it. Correction to my 05:35 entry: the effective intrinsic weights .025 / .01
+  (`legacy_mi_reward_coef` .5 × `lambda_D` .05, × `lambda_d` .02) weight the **low level's**
+  reward (`agent.py:4444-4446`), not the coordinator's.
+- **Credit.** Separate GAE per (lane, team) and per (lane, agent) over closed segments,
+  discount gamma^elapsed, lambda .95 (`utils.py:1018-1142`). But every agent's segment reward
+  is the same team reward, and the critic is label-free: `V(s)` for the team and one linear
+  head per agent slot on that agent's encoded observation (`networks.py:734-735, 1210-1213`).
+  So an agent's advantage for its label is the team's segment return minus a label-free
+  baseline: the other five agents' labels are pure noise in it. All six agents renew together
+  every ten steps (causes: reset and team cap only), 800 team rows and 4,800 agent rows per
+  rollout.
+- **Update.** PPO clip .2, 15 epochs of one 800-row minibatch, lr 1e-4, advantages
+  standardised per minibatch with one shared mean/std over team and agent terms
+  (`agent.py:6153-6164`), entropy bonus `lambda_h` = .07 constant (`config_1.py:165`; no
+  annealing on this construction). Only sampled positions enter the loss.
+- **Latent code facts, inert here:** the GAE call does not pass `config.gae_lambda` (function
+  default equals the config value, `agent.py:6046-6050`); the unused bootstrap fallback does
+  not denormalise (`agent.py:4526`).
+
+**B11 (`FSD_COORDINATOR_SIGNAL_B11`), declared at 16:40, now specified.** Per block at the
+saved weights on the node: `as_trained` faithful load; four training-law rollouts through the
+frozen collector's own step/store calls with no update (dedicated seeds; parameters and the
+coordinator's value normaliser hashed before and after); flush, bootstrap and
+`compute_high_level_advantages` exactly as the update calls them. Measures: mean raw and
+standardised advantage by chosen agent label with lane-clustered standard errors; the team
+label as a placebo row (it never reaches the actor); and a *perfect-credit reference* — the
+regression of each team segment's reward on the six label counts, with and without `V(s)` —
+which says whether a label effect is detectable at the ten-step level at all. E2a / E2b as
+written at 16:40; they are read on the advantage table, the regression is labelled reference.
+One limit known now: this is the end-of-training law; it says nothing about the signal early
+in training, when the low level's six policies were still forming.
+
+## 2026-09-20 17:26 PDT — B11 entry code written and accepted; no score exists
+
+`scripts/run_fsd_coordinator_signal_b11.py` and tests under
+`tests/.../coordinator_signal_b11/` (Implementer, accepted by me); new files only. The frozen
+`collect_training` also calls `agent.update`, so its per-step body is transcribed call for call
+(`b01.py:95-151`, sha256 of the frozen function text published in the summary) with the credit
+arithmetic where the update would be. On the tiny stack the probe's advantages and returns
+are bit-equal to those the real `update_coordinator_d2` path computes for the same buffer.
+Refusals: any optimizer step; any change in the hashed coordinator, discoverer or value
+normaliser; a rollout whose geometry is not the fit's (800 team rows, 4,800 agent rows, causes
+reset + team cap only, segment length 10); normalised inputs; label widths other than six.
+Corrections to my 16:50 map: the bootstrap is computed before the flush (immaterial), and on
+this construction every rollout ends with all lanes terminal, so the flush closes nothing and
+the bootstrap multiplies zero — it enters no measured number. Only the chosen label's old
+log-prob is stored, so the gradient-versus-entropy block uses label shares and is marked
+approximate. Power, known now: 4 rollouts × 16 lanes = 64 lane clusters per block; rank
+agreement over six labels is a count, not a test. Checks: 37 passed, mine; the Implementer's
+run with B08–B10 gave 129 passed.
