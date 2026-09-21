@@ -5704,3 +5704,142 @@ and review before execution. This is a concrete costed proposal with tested lear
 primitives, not a launched or fully reviewed experiment. Writing it does not extend the original
 deadline. UCOPE owns the remaining preparation directly; no Claude result or Root action is
 required, and the stopped B09 route remains stopped.
+
+
+## 2026-09-21 — Owner removes the running window; updated Pro method adopted
+
+After the time-extension question the owner answered **"不设窗口限制 允许自由研究"**.
+This removes the inherited 04:06:07 UTC deadline and does not install the proposed 90-minute
+window. Original completed operations retain their identities. Further UCOPE research,
+implementation and prospectively justified runs are authorized without per-batch approval;
+fit cost, fixed declared exposure and resource admission still apply. The earlier window's
+two-Pro-question limit is no longer used as a standing restriction on this newly authorized
+research. No fit allowance or new entitlement is created. No autonomous App cross-session
+creation, dispatch or messaging is authorized, and no Claude paths are taken over.
+
+At the owner's request I read the published control update
+`d5f9775a0806f590b0ed8aa435948642107bfc13`, including constitution section 5, the direction-DM
+body and the shared scientific-tools, Pro-question, reading-context and engineering methods.
+The amendment calls for proactive Pro consultation at consequential scientific decisions,
+with reuse where prior complete advice still covers the current evidence and choice. It
+applies prospectively; completed B09 is not reopened for another obligatory review. The
+updated source expressly permits the authorized Jev workflow without Root relay or a new
+owner approval, and distinguishes it from App cross-task messaging.
+
+B10 changes the learning premise and reference after B08/B09. I read the complete prior
+post-B04 Pro answer: it rightly distinguishes lawful opportunity from privileged branch
+differences and permits concrete direct learner tests without a mandatory diagnostic. It
+does not cover the newer frozen-foundation negatives, B09's expressed distance dependence,
+actual paired simulation or the proposed sparse-credit/full-data comparison. Those changes
+justify the single focused follow-up below. Await that advice only for the consequential
+choice to proceed/revise/decline B10; continue independent correctness and publication work.
+
+
+## Pro question 2026-09-21 ucope-paired-credit-after-b09
+
+Conversation: reuse the existing Jev UCOPE conversation from the local operation identified
+by `hmasd:f97583aa427f639c2e13af7542091198b50ce8f3e022ed14fa1652841ff87ffd`.
+Private conversation/account details remain solely in local transport state.
+
+Question: Does actual paired KEEP/END suffix credit supply a worthwhile new native learning
+comparison after B08/B09, against a rich full-data PPO reference and ordinary G? Assess the
+specific B10 preparation immediately above, including whether its loss of state coverage
+and sparse update design make nine fits poor value. Recommend proceeding unchanged, one
+concretely justified revision, or declining this method. The DM owns the decision; a new
+idea or positive recommendation is not owed. This is one direction's route/comparator
+judgment, not a Portfolio request or another review of completed B09.
+
+Standing: Original velocity-command commitment only. B06-selected ordinary mean controllers
+8941/8942/8943 remain the bases. Earlier jointly learned rich/scalar and sampled-reuse results
+are negative/mixed with favorable exceptions retained. B08's rich gate changed behavior but
+did not improve G (three-block mean R-G +.00001461); raw distance barely conditioned. B09
+normalized distance expressed a finite, mostly tail response yet failed both its practical
+contrasts: S_N-G +.00040473/-.00111368/+.00084387, S_N-B_0
++.00003130/-.00007726/+.00045533. It failed the fixed all-positive/mean>=.01 rule. G remains
+the practical choice; finite failures are neither class upper bounds nor proof of no lawful
+opportunity. There is no diagnosed omission of team reward, no newly identified score signal,
+and no demonstration that current branch preferences are useful or locally predictable.
+
+The new candidate changes sampling: both complete suffixes are actually executed under a
+fixed behavior gate on their own changed histories. No model-based counterfactual prediction
+or replay of the other branch's commands. One outcome-independent random agent/tick per pair,
+inactive coordinates retained, full-prefix replay charged. It analytically averages the
+current Bernoulli score; two full episodes buy one direct branch difference. R_FULL instead
+keeps all factual credit rows and distinct training worlds at the same native-step allocation.
+Scalar S_CF asks whether any net gain requires context; G asks whether any gate is worth using.
+The native comparison is a package comparison, not a pure component attribution.
+
+Context (read only what directly supports this judgment):
+
+- Current owner instruction is the preceding "不设窗口限制 允许自由研究"; no owner pause,
+  native deadline, fit allowance or new per-question approval applies to this direction work.
+  Governance is `docs/project/OPERATING_CONSTITUTION.md` sections 1–6 and 8 at
+  **d5f9775a0806f590b0ed8aa435948642107bfc13**. The UCOPE row at that revision predates this
+  preparation; the newer notebook is its scientific update. No App cross-task sends.
+- Methods at that same **d5f9775a0806f590b0ed8aa435948642107bfc13**:
+  `.agents/skills/hmasd-scientific-tools/SKILL.md`, sections Update the working explanation,
+  Simple-model and literature bridges, Comparators and MARL information, Statistics,
+  Cost and exposure, Pro; `.agents/skills/hmasd-research-engineering/SKILL.md`, sections
+  Checks and review, Execution and admission. These guide evidence/cost interpretation,
+  not an approval process or obligation to manufacture another experiment.
+- Science/code at **source_sha** (the full published question commit supplied in the message):
+  this notebook's B08 reading, "2026-09-21 03:50 UTC — B09 read", the B10 preparation and
+  owner correction directly above; `experiments/candidates/ucope/paired_branch_credit_b10/`
+  (`collection.py`, `credit.py`, `learning.py`), and unchanged B08 `engine.py` for the full-data
+  reference. The preparation still lacks a production runner/raw-output/reducer binding.
+- Raw B09 evidence at **b7aa5f31f4db26d1905fbcb95b68904f8fdf500b**:
+  `runs/ucope/normalized_distance_gate_b09_reduce/summary.json` and each
+  `runs/ucope/normalized_distance_gate_b09_896{1,2,3}/summary.json`. B08 raw summaries and
+  contrasts are under `runs/ucope/frozen_mean_gate_b08_895{1,2,3}/summary.json` at source_sha.
+  These are finished native results, distinct from the new synthetic checks.
+- Reuse the full "Pro question 2026-09-19 post-b04-next-discrimination / Answer" in this
+  notebook at source_sha for its conditional-opportunity argument; it is advice on older
+  evidence, not current governance or a native finding. The September 20 predictive-target
+  and randomization entries prevent treating the score identity as a new discovery.
+- Source for task grounding at source_sha: `envs/pettingzoo/uav_env.py`, local observations,
+  selected free-space/no-shadow transition, connection assignment and non-paper reward;
+  `experiments/candidates/ucope/uav_motion_prefix_b01/environment.py` for the selected host
+  and actor/critic inputs. No other FSD candidate/history review is requested.
+- Primary analogy only: Foerster et al., COMA,
+  https://www.cs.ox.ac.uk/people/shimon.whiteson/pubs/foersteraaai18.pdf, section 4. Its learned
+  Q marginalization is not evidence of native paired-branch utility or current critic failure.
+
+Prospective cost: 9 gate fits, 2048 full 256-step training episodes each, 64 final worlds
+for each of four arms per block; **4,915,200 total native team ticks**, including duplicated
+prefixes; **50,688 Adam calls**, no foundation updates, additional diagnostics or Pro calls
+inside the experiment. The preceding preparation fixes all masters, stream addresses,
+updates and comparisons. Owner removed the time limit; this does not make analyst/compute
+cost free. Production binding and independent engineering review remain work to complete
+only as justified by the scientific choice. The 16 tests are synthetic (zero actual fits,
+native steps, checkpoint forwards or optimizer updates); they establish no native signal.
+
+Please focus on these decision-bearing points:
+
+1. Is the paired estimator and its 1275 sampling factor correct for shared local gates,
+   endogenous eligibility and genuine joint continuation? Separate first-update expectation,
+   conditional current-coin cancellation, multi-epoch PPO and changed-trajectory benefit.
+2. Does the native task/evidence supply a sufficient reason to try this learning package,
+   or is it another unsupported credit rescue? Consider nearly constant fresh means and
+   hidden team conditions, not just the availability of a variance identity. No obligation
+   to prove headroom or run a diagnostic before every learner comparison.
+3. Is R_FULL plus S_CF and G a strong and economical comparison? R_CF uses only 1024 focal
+   targets and 256 Adam calls per fit versus R_FULL's full-data 8192 gate updates. Would a
+   specific different allocation make the test substantially more interpretable? Any revision
+   must state changed fit/native/forward/update cost and predictions, not a generic sweep.
+4. State the strongest reason against your recommendation and what outcome would change it.
+   A paired-gradient improvement without gain over G is not a useful UCOPE result; a constant
+   rule may be the final choice. Do not turn three selected foundations or 64 nested worlds
+   into population confirmation. Do not infer global impossibility from rejecting this route.
+
+Constraints: no training, no new native evaluation or checkpoint forwards, no Pro subrequest,
+no App task messages, no new approval requirements and no edits outside the empty `### Answer`
+subsection under this unique question heading, on branch `codex/ucope-frozen-feedback` in
+`CartmanFatass/My-paper-code`, target `docs/research/candidates/ucope/NOTES.md`. Reason from
+the pinned source; before writing fetch the latest target blob and use its actual blob SHA.
+Preserve the question and every other byte; stop on overlapping edits. Return the actual
+write commit. If writeback is unavailable, return the complete answer in chat, not a receipt,
+SHA, status message or link. Cite consequential sources actually read and state material
+unread inputs. Return **MATERIAL_DISSENT: yes/no**, the scientific reasoning, and the smallest
+useful next action. Pro advises; the direct DM decides and writes the response here.
+
+### Answer
