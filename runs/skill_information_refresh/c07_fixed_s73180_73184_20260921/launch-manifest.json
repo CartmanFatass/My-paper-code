@@ -1,0 +1,84 @@
+{
+  "acceptance": "accepted",
+  "accepted_at": "2026-09-21T10:57:32.800293Z",
+  "bootstrap_command": [
+    "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/d9264b7a0fcd4c05a11a7be11a7f3b00/scripts/hmasd_admission.py",
+    "_run-admitted",
+    "--runner",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/d9264b7a0fcd4c05a11a7be11a7f3b00/scripts/run_sir_c07.py",
+    "--output",
+    "/home/fires/.codex/worktrees/f987/hmasd-wsl/runs/skill_information_refresh/c07_fixed_s73180_73184_20260921",
+    "--",
+    "--out",
+    "/home/fires/.codex/worktrees/f987/hmasd-wsl/runs/skill_information_refresh/c07_fixed_s73180_73184_20260921",
+    "--launch-sha",
+    "71055f9907059fdd334ebba0e4d414d44f9ad656"
+  ],
+  "claim_key": "dad2b6de22356d7b4170c78846b83a9f22dd410e5e5d2e72bb3cb4602d72a34e",
+  "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/dad2b6de22356d7b4170c78846b83a9f22dd410e5e5d2e72bb3cb4602d72a34e.json",
+  "command": [
+    "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/d9264b7a0fcd4c05a11a7be11a7f3b00/scripts/run_sir_c07.py",
+    "--out",
+    "/home/fires/.codex/worktrees/f987/hmasd-wsl/runs/skill_information_refresh/c07_fixed_s73180_73184_20260921",
+    "--launch-sha",
+    "71055f9907059fdd334ebba0e4d414d44f9ad656"
+  ],
+  "command_sha256": "b836893d541156efde56a42ce888e2a2ab2aac8ad3452a80bdaf86bc2d5f16dd",
+  "control_observation": {
+    "observed_at": "2026-09-21T10:57:32.624550Z",
+    "ref": "refs/heads/main",
+    "remote": "origin",
+    "sha": "00eac27c535ccffb66354f8bfac62acb504874ca"
+  },
+  "control_root": "/home/fires/hmasd-wsl",
+  "created_at": "2026-09-21T10:57:32.649349Z",
+  "cwd": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/d9264b7a0fcd4c05a11a7be11a7f3b00",
+  "direction": "skill_information_refresh",
+  "host_identity": "Jacob",
+  "identity_command": [
+    "/home/fires/.local/share/uv/python/cpython-3.10.20-linux-x86_64-gnu/bin/python3.10",
+    "scripts/run_sir_c07.py",
+    "--launch-sha",
+    "71055f9907059fdd334ebba0e4d414d44f9ad656"
+  ],
+  "lead": "Codex DM (independent session)",
+  "manifest_ref": "/home/fires/.codex/worktrees/f987/hmasd-wsl/runs/skill_information_refresh/c07_fixed_s73180_73184_20260921/launch-manifest.json",
+  "node": "local_linux",
+  "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/dad2b6de22356d7b4170c78846b83a9f22dd410e5e5d2e72bb3cb4602d72a34e.json",
+  "output_root": "/home/fires/.codex/worktrees/f987/hmasd-wsl/runs/skill_information_refresh/c07_fixed_s73180_73184_20260921",
+  "preflight": "/home/fires/.codex/worktrees/f987/hmasd-wsl/runs/skill_information_refresh/c07_fixed_s73180_73184_20260921/admission-preflight.json",
+  "process": {
+    "detached": true,
+    "identity": {
+      "boot_id": "0c48e432-2a4b-4bcc-9576-32954aa2c6b8",
+      "kind": "linux_pid_start_ticks",
+      "pid": 3522940,
+      "session_id": 3522940,
+      "start_ticks": 25068300
+    },
+    "native_handle_kind": "posix_session",
+    "pid": 3522940,
+    "process_group_id": 3522940
+  },
+  "process_exit": "/home/fires/.codex/worktrees/f987/hmasd-wsl/runs/skill_information_refresh/c07_fixed_s73180_73184_20260921/process-exit.json",
+  "published_remote": "origin",
+  "runner_process": {
+    "identity": {
+      "boot_id": "0c48e432-2a4b-4bcc-9576-32954aa2c6b8",
+      "kind": "linux_pid_start_ticks",
+      "pid": 3522941,
+      "session_id": 3522940,
+      "start_ticks": 25068303
+    },
+    "pid": 3522941,
+    "process_group_id": 3522940,
+    "supervisor_pid": 3522940
+  },
+  "schema_version": 1,
+  "sha": "71055f9907059fdd334ebba0e4d414d44f9ad656",
+  "source_root": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/d9264b7a0fcd4c05a11a7be11a7f3b00",
+  "stderr": "/home/fires/.codex/worktrees/f987/hmasd-wsl/runs/skill_information_refresh/c07_fixed_s73180_73184_20260921/stderr.log",
+  "stdout": "/home/fires/.codex/worktrees/f987/hmasd-wsl/runs/skill_information_refresh/c07_fixed_s73180_73184_20260921/stdout.log"
+}

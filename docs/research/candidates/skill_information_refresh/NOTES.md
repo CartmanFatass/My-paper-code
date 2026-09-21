@@ -2711,3 +2711,142 @@ preflight and read-only status handle are in
 Keep that handle; do not repeat the launch. All3,840episodes are one fixed confirmation
 batch. A Monitor returns only native status and cost until terminal; no partial score
 changes its scope or the prewritten rule. Acceptance is not a confirmation outcome.
+
+
+## 2026-09-21 — C07 complete fixed confirmation and direction judgment
+
+The original accepted operation from source
+`71055f9907059fdd334ebba0e4d414d44f9ad656` exited normally with code 0 at
+2026-09-21 11:00:58 UTC. Summary is COMPLETE, stderr is empty, and the original runner
+and supervisor have terminated. All five blocks and all three unchanged programs are
+present. No replacement, retry, extra worlds, retuning or result-dependent extension.
+Native identity and exit witness remain in the original
+[C07 run](../../../../runs/skill_information_refresh/c07_fixed_s73180_73184_20260921/).
+
+DM read all 3,840 episode rows and all 240 final NPZ traces, as well as config, summary,
+updates and the native operation records. World/block/master IDs and all 1,280 pairs per
+contrast agree. Every world's trace reward, completed jobs, conflicts, waits, gate and
+bypass counts, started jobs and packets match its episode row. Each episode starts 14
+jobs and transmits 24 packets / 192 bytes. Modeled requests follow the fixed zero
+threshold and ACTIVE_FIRST exact-tie rule; logged belief weights normalize. All paired
+difference vectors match the runner's summary. A separate read-only math.fsum reduction
+reproduces means, sample variances, intervals and the finite bound without invoking a
+host, planner, fit or new simulation. Empty updates.jsonl and native counters retain
+zero training, selection, optimizer or parameter updates. This is DM raw-data readback;
+Pro's earlier empirical-read limitations remain as stated above.
+
+Frozen block results (256 common worlds each; mean and SE in completed jobs per world):
+
+| World/model master | NEAR jobs | LONG jobs | ACTIVE_FIRST jobs | NEAR-AF mean | NEAR-AF SE | LONG-NEAR mean | LONG-NEAR SE |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 73180 / 973180 | 3429 | 3429 | 3400 | .11328125 | .0275964340 | 0 | 0 |
+| 73181 / 973181 | 3389 | 3389 | 3383 | .02343750 | .0240822271 | 0 | 0 |
+| 73182 / 973182 | 3414 | 3416 | 3397 | .06640625 | .0253260278 | .00781250 | .0078125000 |
+| 73183 / 973183 | 3391 | 3392 | 3366 | .09765625 | .0249259300 | .00390625 | .0117391571 |
+| 73184 / 973184 | 3407 | 3407 | 3382 | .09765625 | .0319309615 | 0 | .0156556073 |
+
+**Primary retained under the frozen rule.** NEAR_COMMIT minus ACTIVE_FIRST is +102
+completed jobs across 1,280 fresh worlds, mean **+.0796875**, paired-world SE .0120540029,
+approximate normal 95% interval **[.0560616544, .1033133456]**. All five block means are
+positive and the pooled lower endpoint exceeds the predeclared .05 scale. Positive /
+negative / tied worlds are 79 / 13 / 1,188. Complete difference histogram:
+-2:7, -1:6, 0:1188, +1:38, +2:39, +3:2. The weakest block's interval crosses zero;
+the rule did not require each block's interval or mean to clear .05. The new mean is
+smaller than C06's exploratory .1328125 and the pooled lower endpoint clears .05 by
+only .0060616544. Retain that limited strength rather than describing an overwhelming
+or universally positive effect. C06 is not pooled into this confirmation.
+
+**Secondary bound passes.** LONG minus NEAR is +3 jobs, mean **+.00234375**, SE
+.0042082941, descriptive normal 95% interval [-.0059045065, .0105920065]. There are
+5 positive, 3 negative and 1,272 tied worlds; histogram -2:3, 0:1272, +1:1, +2:4.
+The predeclared B=14, alpha=.025 finite-sample upper bound is
+**U_F=.043452695085522186 < .05**. Independent direct-log arithmetic gives
+.04345269508552896, agreeing within floating-point rounding. Thus, under the stated
+independent equal-mean world/model sampling assumptions, the extra expected return is
+bounded below the chosen task scale at the declared one-sided coverage. This is not
+a zero-effect, policy-identity or universal-equivalence result. Block 73184's zero mean
+contains two +2 and two -2 worlds; equal aggregate return does not mean identical
+trajectories. LONG minus ACTIVE_FIRST is descriptively +105 jobs / +.08203125 per world,
+SE .0120670405, normal interval [.0583798506, .1056826494], 79 positive / 12 negative /
+1,189 tied. It is not promoted to a second confirmatory superiority claim. Primary
+normal approximation and secondary finite coverage remain separate, with no joint
+coverage guarantee.
+
+Native outcome accounting (17,920 started jobs per arm):
+
+| Arm | Completed | Conflicts | Wait ticks | Gate opportunities | Bypass jobs |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| ACTIVE_FIRST | 16928 | 209 | 10454 | 27800 | 3582 |
+| NEAR_COMMIT | 17030 | 181 | 10151 | 27543 | 3656 |
+| LONG | 17033 | 180 | 10067 | 27460 | 3692 |
+
+AF has 992 uncompleted jobs: 418 collision-failed and 574 other expired. NEAR has
+890 = 362 + 528; LONG has 887 = 360 + 527. NEAR's gain of 102 comprises 56 fewer
+collision failures and 46 fewer other failures, with 74 more bypass jobs and 303 fewer
+wait ticks. LONG adds 36 bypass jobs and removes 84 waits relative to NEAR, for three
+additional completions. These are complete native outcome differences, not attribution
+to a particular root action or identification of a belief/history/horizon component.
+Every arm sends 30,720 packets / 245,760 bytes: the result concerns timing, not volume.
+
+Actual C07 cost: **0 new fits and 0 updates**; 3,840 episodes / 368,640 actual team
+ticks; 92,017 model root decisions; **138,555,584 model branch transitions**;
+5,889,088 initialized model worlds; 565,352,448 synthetic advance draws AND
+565,352,448 synthetic job draws. Belief work is 30,720 batched observation calls /
+491,520 rows and 59,480 packet constraints, with zero contradiction rows. These counts
+include the declared padding/init/draw work, rather than reporting outer episodes alone.
+Function wall is 205.1154s; native acceptance-to-exit 205.3137s; full child lifetime CPU
+204.164768 user + 1.983813 system = 206.148581s, including imports. Function-only CPU
+is 203.985035 user + 1.105571 system. Peak child RSS is 57,192 KiB / 55.8515625 MiB.
+Preparation, advice, publication and analysis are outside this scientific-process time.
+
+| Arm, summed five panels | Panel wall seconds | Model branch transitions | Model roots |
+| --- | ---: | ---: | ---: |
+| ACTIVE_FIRST | 3.529101 | 0 | 0 |
+| NEAR_COMMIT | 92.160862 | 58312256 | 45931 |
+| LONG | 109.322762 | 80243328 | 46086 |
+
+NEAR takes about 26.1 times AF's panel wall in this implementation. LONG adds about
+18.6% panel wall and 37.6% model branch work over NEAR. These observed panel times
+are scoped implementation measurements, not hardware-independent complexity or a net
+deployment-utility calculation. Across C06 and C07 there were 5,120 outer episodes,
+491,520 actual ticks and 203,534,144 model branch transitions, with no new fits.
+C's historical cumulative training count remains four. Complete C07 records, including
+all 240 NPZs and both process logs, are retained together for publication; no selected
+subset substitutes for the raw result.
+
+**Cumulative judgment and present action.** Strengthen the claim that this particular
+lawful, known-model consequence planner can improve complete native outcomes over the
+competent ACTIVE_FIRST rule on the fixed CrossingHost law. NEAR already looks across
+multiple steps through the commitment containing the next cache-sensitive receiver
+opportunity. C06's corrected short target and C07's fresh confirmation support retaining
+that ordinary planner here. The new observation does not establish that multistep
+reasoning in general is unnecessary.
+
+Weaken the specific case for paying for the fixed LONG extension beyond NEAR: C07 now
+bounds its extra expected return below the prespecified .05 scale, while measuring
+additional work. Adopt NEAR as the confirmed reference for this host and these declared
+model/information resources; keep ACTIVE_FIRST as the inexpensive reference. End this
+LONG increment pursuit under the branch written before execution. Do not enlarge its
+horizon, change particles or continuation, or add a neural arm merely to preserve an
+innovation narrative. Ordinary planning is an acceptable research outcome.
+
+Untouched: C03/C04's adverse learned-package evidence; C05's exact lawful-value result
+and its failure to make hidden iid quantities history-identifiable; neural learning,
+model learning, exact-belief benefits, deployment net utility and general HMASD/UAV
+performance. The known physical law and richer lawful own-history/filter processing
+are declared resources of the winning package. Omitted sending/silence likelihood
+remains an approximation. C07 identifies complete-program value, not which component
+caused it, and does not establish global optimality among legal timing rules.
+
+C stays **exploring, currently idle** after this completed C06-C07 question. This is a
+scientific stopping decision on the specific incremental-horizon pursuit, not an owner
+pause, a declaration that all refresh research is complete, or a waiting-for-coordination
+boundary. No native execution, Pro answer, implementation/review or Root/peer action is
+pending. No automatic next batch is selected. Re-entry requires a concrete target-grounded
+reason and a discriminating comparison beyond this result: for example, an actual legal
+information/transition structure where a later receiver commitment changes task return
+in a way NEAR misses, or a specified unavailable-model/resource constraint that changes
+which timing program is useful. A rare favorable world, a nonzero local tail, changing
+the declared margin after observing it, or simply adding a learned model is insufficient.
+The next useful observation must separate such a material new explanation from the
+retained NEAR/ACTIVE_FIRST references before committing to another result batch.

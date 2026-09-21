@@ -1,0 +1,29 @@
+{
+  "source_sha": "71055f9907059fdd334ebba0e4d414d44f9ad656",
+  "fixed_program": true,
+  "threshold": 0.0,
+  "arms": [
+    "NEAR_COMMIT",
+    "LONG",
+    "ACTIVE_FIRST"
+  ],
+  "world_seeds": [
+    73180,
+    73181,
+    73182,
+    73183,
+    73184
+  ],
+  "model_seeds": [
+    973180,
+    973181,
+    973182,
+    973183,
+    973184
+  ],
+  "phase": 30,
+  "worlds_per_block": 256,
+  "horizon": 96,
+  "batch": 16,
+  "particles": 32
+}
