@@ -1,0 +1,3308 @@
+{
+  "actual_native_step_calls": 3072,
+  "admission": {
+    "accepted_at_epoch": 1790001662.4390123,
+    "child_pid": 3931974,
+    "command_sha256": "832a492e1e6d5b2f93662384268a7616812772ee6b89ad4f203234b83fa67f1a",
+    "direction": "skill_teammate_drift_learning",
+    "parent_pid": 3931973,
+    "schema_version": 1,
+    "sha": "3072f05072ec7628f2463bc7ae3b621343d7ca58"
+  },
+  "b09_evidence_commit": "69a55e71d9f1bca4e8cdd204adce256cd05a7676",
+  "completed_blocks": [
+    {
+      "b09_evidence_commit": "69a55e71d9f1bca4e8cdd204adce256cd05a7676",
+      "compute_wall_scope": "four fixed deployment policies, J/M cloned one-step planning, actual native trajectories, and reductions",
+      "compute_wall_seconds": 5.837055894022342,
+      "config": {
+        "area_size": 1000.0,
+        "episodes": 4,
+        "height_range": [
+          50.0,
+          150.0
+        ],
+        "max_connections": 10,
+        "max_speed": 30.0,
+        "min_sinr": 0.0,
+        "n_uavs": 3,
+        "n_users": 1,
+        "phase": 2,
+        "steps": 64,
+        "stream": 2,
+        "time_step": 1.0
+      },
+      "counts": {
+        "J_emp_deployment_choices": 256,
+        "M_proj_deployment_choices": 256,
+        "actor_value_network_forwards": 0,
+        "actual_focal_policy_choices": 1024,
+        "actual_native_step_calls": 1024,
+        "count_updates": 0,
+        "custom_geometry_channel_refreshes": 16,
+        "deep_copies": 4096,
+        "evaluation_episodes": 16,
+        "evaluation_team_steps": 1024,
+        "external_innovation_draw_calls": 1024,
+        "fixed_IN_choice_assignments": 256,
+        "fixed_OUT_choice_assignments": 256,
+        "frozen_projection_constructions": 1,
+        "gradient_calls": 0,
+        "implicit_constructor_resets": 16,
+        "joint_choices": 512,
+        "joint_q_vectors": 512,
+        "learner_probability_queries": 0,
+        "loaded_fixed_states": 1,
+        "loaded_target_probability_views": 1,
+        "logical_episode_initializations": 16,
+        "native_constructors": 16,
+        "new_fits": 0,
+        "planning_native_step_calls": 4096,
+        "projected_choices": 512,
+        "projected_q_vectors": 512,
+        "projection_equivalence_calculations": 1,
+        "response_tables": 512,
+        "total_marginal_projection_calculations": 2,
+        "total_native_step_calls": 5120,
+        "training_observations": 0,
+        "true_chosen_values_after_choice": 512,
+        "true_q_vectors_after_choice": 512,
+        "true_regrets_after_choice": 512,
+        "unique_external_innovation_addresses": 256
+      },
+      "episode_initializations": [
+        {
+          "environment_seed": 1941000335,
+          "episode": 0,
+          "geometry_slots": [
+            0.8513089435795488,
+            0.12138384223472465,
+            0.4454096832059803,
+            0.7595136887708671,
+            0.10587991505252703,
+            0.034835313865561046,
+            0.9775106487364892
+          ],
+          "initial_positions": [
+            [
+              540.9833369821704,
+              435.743364102425,
+              50.0
+            ],
+            [
+              537.5221714050042,
+              570.0359918645536,
+              50.0
+            ],
+            [
+              418.99087247055996,
+              483.8916824460699,
+              50.0
+            ]
+          ],
+          "policy": "J_emp"
+        },
+        {
+          "environment_seed": 366016829,
+          "episode": 1,
+          "geometry_slots": [
+            0.9262410190540205,
+            0.10609822487021026,
+            0.18302644246716349,
+            0.37260354198297496,
+            0.7112289375700481,
+            0.7141183994774322,
+            0.8374953448960185
+          ],
+          "initial_positions": [
+            [
+              569.2450224259702,
+              468.52938052938487,
+              50.0
+            ],
+            [
+              492.51876025656276,
+              576.465159278368,
+              50.0
+            ],
+            [
+              436.97947571206885,
+              452.81735306917847,
+              50.0
+            ]
+          ],
+          "policy": "J_emp"
+        },
+        {
+          "environment_seed": 25823393,
+          "episode": 2,
+          "geometry_slots": [
+            0.3956442567950851,
+            0.8488170087586572,
+            0.4497974616693359,
+            0.7674825951230759,
+            0.7607935894561249,
+            0.3690256655715205,
+            0.43043431579016045
+          ],
+          "initial_positions": [
+            [
+              431.57719007062303,
+              547.839247756859,
+              50.0
+            ],
+            [
+              487.7312552841726,
+              421.4544344265427,
+              50.0
+            ],
+            [
+              576.7965042894776,
+              530.6173770101644,
+              50.0
+            ]
+          ],
+          "policy": "J_emp"
+        },
+        {
+          "environment_seed": 55201167,
+          "episode": 3,
+          "geometry_slots": [
+            0.604510603016607,
+            0.834273383412055,
+            0.41856741344284787,
+            0.7840276846389355,
+            0.6928158052361492,
+            0.11726752292543852,
+            0.4124572935714784
+          ],
+          "initial_positions": [
+            [
+              435.7388137940262,
+              446.92918664325725,
+              50.0
+            ],
+            [
+              571.0478684109489,
+              465.0347117503032,
+              50.0
+            ],
+            [
+              490.26548108756214,
+              582.2663394683988,
+              50.0
+            ]
+          ],
+          "policy": "J_emp"
+        },
+        {
+          "environment_seed": 1941000335,
+          "episode": 0,
+          "geometry_slots": [
+            0.8513089435795488,
+            0.12138384223472465,
+            0.4454096832059803,
+            0.7595136887708671,
+            0.10587991505252703,
+            0.034835313865561046,
+            0.9775106487364892
+          ],
+          "initial_positions": [
+            [
+              540.9833369821704,
+              435.743364102425,
+              50.0
+            ],
+            [
+              537.5221714050042,
+              570.0359918645536,
+              50.0
+            ],
+            [
+              418.99087247055996,
+              483.8916824460699,
+              50.0
+            ]
+          ],
+          "policy": "M_proj"
+        },
+        {
+          "environment_seed": 366016829,
+          "episode": 1,
+          "geometry_slots": [
+            0.9262410190540205,
+            0.10609822487021026,
+            0.18302644246716349,
+            0.37260354198297496,
+            0.7112289375700481,
+            0.7141183994774322,
+            0.8374953448960185
+          ],
+          "initial_positions": [
+            [
+              569.2450224259702,
+              468.52938052938487,
+              50.0
+            ],
+            [
+              492.51876025656276,
+              576.465159278368,
+              50.0
+            ],
+            [
+              436.97947571206885,
+              452.81735306917847,
+              50.0
+            ]
+          ],
+          "policy": "M_proj"
+        },
+        {
+          "environment_seed": 25823393,
+          "episode": 2,
+          "geometry_slots": [
+            0.3956442567950851,
+            0.8488170087586572,
+            0.4497974616693359,
+            0.7674825951230759,
+            0.7607935894561249,
+            0.3690256655715205,
+            0.43043431579016045
+          ],
+          "initial_positions": [
+            [
+              431.57719007062303,
+              547.839247756859,
+              50.0
+            ],
+            [
+              487.7312552841726,
+              421.4544344265427,
+              50.0
+            ],
+            [
+              576.7965042894776,
+              530.6173770101644,
+              50.0
+            ]
+          ],
+          "policy": "M_proj"
+        },
+        {
+          "environment_seed": 55201167,
+          "episode": 3,
+          "geometry_slots": [
+            0.604510603016607,
+            0.834273383412055,
+            0.41856741344284787,
+            0.7840276846389355,
+            0.6928158052361492,
+            0.11726752292543852,
+            0.4124572935714784
+          ],
+          "initial_positions": [
+            [
+              435.7388137940262,
+              446.92918664325725,
+              50.0
+            ],
+            [
+              571.0478684109489,
+              465.0347117503032,
+              50.0
+            ],
+            [
+              490.26548108756214,
+              582.2663394683988,
+              50.0
+            ]
+          ],
+          "policy": "M_proj"
+        },
+        {
+          "environment_seed": 1941000335,
+          "episode": 0,
+          "geometry_slots": [
+            0.8513089435795488,
+            0.12138384223472465,
+            0.4454096832059803,
+            0.7595136887708671,
+            0.10587991505252703,
+            0.034835313865561046,
+            0.9775106487364892
+          ],
+          "initial_positions": [
+            [
+              540.9833369821704,
+              435.743364102425,
+              50.0
+            ],
+            [
+              537.5221714050042,
+              570.0359918645536,
+              50.0
+            ],
+            [
+              418.99087247055996,
+              483.8916824460699,
+              50.0
+            ]
+          ],
+          "policy": "IN"
+        },
+        {
+          "environment_seed": 366016829,
+          "episode": 1,
+          "geometry_slots": [
+            0.9262410190540205,
+            0.10609822487021026,
+            0.18302644246716349,
+            0.37260354198297496,
+            0.7112289375700481,
+            0.7141183994774322,
+            0.8374953448960185
+          ],
+          "initial_positions": [
+            [
+              569.2450224259702,
+              468.52938052938487,
+              50.0
+            ],
+            [
+              492.51876025656276,
+              576.465159278368,
+              50.0
+            ],
+            [
+              436.97947571206885,
+              452.81735306917847,
+              50.0
+            ]
+          ],
+          "policy": "IN"
+        },
+        {
+          "environment_seed": 25823393,
+          "episode": 2,
+          "geometry_slots": [
+            0.3956442567950851,
+            0.8488170087586572,
+            0.4497974616693359,
+            0.7674825951230759,
+            0.7607935894561249,
+            0.3690256655715205,
+            0.43043431579016045
+          ],
+          "initial_positions": [
+            [
+              431.57719007062303,
+              547.839247756859,
+              50.0
+            ],
+            [
+              487.7312552841726,
+              421.4544344265427,
+              50.0
+            ],
+            [
+              576.7965042894776,
+              530.6173770101644,
+              50.0
+            ]
+          ],
+          "policy": "IN"
+        },
+        {
+          "environment_seed": 55201167,
+          "episode": 3,
+          "geometry_slots": [
+            0.604510603016607,
+            0.834273383412055,
+            0.41856741344284787,
+            0.7840276846389355,
+            0.6928158052361492,
+            0.11726752292543852,
+            0.4124572935714784
+          ],
+          "initial_positions": [
+            [
+              435.7388137940262,
+              446.92918664325725,
+              50.0
+            ],
+            [
+              571.0478684109489,
+              465.0347117503032,
+              50.0
+            ],
+            [
+              490.26548108756214,
+              582.2663394683988,
+              50.0
+            ]
+          ],
+          "policy": "IN"
+        },
+        {
+          "environment_seed": 1941000335,
+          "episode": 0,
+          "geometry_slots": [
+            0.8513089435795488,
+            0.12138384223472465,
+            0.4454096832059803,
+            0.7595136887708671,
+            0.10587991505252703,
+            0.034835313865561046,
+            0.9775106487364892
+          ],
+          "initial_positions": [
+            [
+              540.9833369821704,
+              435.743364102425,
+              50.0
+            ],
+            [
+              537.5221714050042,
+              570.0359918645536,
+              50.0
+            ],
+            [
+              418.99087247055996,
+              483.8916824460699,
+              50.0
+            ]
+          ],
+          "policy": "OUT"
+        },
+        {
+          "environment_seed": 366016829,
+          "episode": 1,
+          "geometry_slots": [
+            0.9262410190540205,
+            0.10609822487021026,
+            0.18302644246716349,
+            0.37260354198297496,
+            0.7112289375700481,
+            0.7141183994774322,
+            0.8374953448960185
+          ],
+          "initial_positions": [
+            [
+              569.2450224259702,
+              468.52938052938487,
+              50.0
+            ],
+            [
+              492.51876025656276,
+              576.465159278368,
+              50.0
+            ],
+            [
+              436.97947571206885,
+              452.81735306917847,
+              50.0
+            ]
+          ],
+          "policy": "OUT"
+        },
+        {
+          "environment_seed": 25823393,
+          "episode": 2,
+          "geometry_slots": [
+            0.3956442567950851,
+            0.8488170087586572,
+            0.4497974616693359,
+            0.7674825951230759,
+            0.7607935894561249,
+            0.3690256655715205,
+            0.43043431579016045
+          ],
+          "initial_positions": [
+            [
+              431.57719007062303,
+              547.839247756859,
+              50.0
+            ],
+            [
+              487.7312552841726,
+              421.4544344265427,
+              50.0
+            ],
+            [
+              576.7965042894776,
+              530.6173770101644,
+              50.0
+            ]
+          ],
+          "policy": "OUT"
+        },
+        {
+          "environment_seed": 55201167,
+          "episode": 3,
+          "geometry_slots": [
+            0.604510603016607,
+            0.834273383412055,
+            0.41856741344284787,
+            0.7840276846389355,
+            0.6928158052361492,
+            0.11726752292543852,
+            0.4124572935714784
+          ],
+          "initial_positions": [
+            [
+              435.7388137940262,
+              446.92918664325725,
+              50.0
+            ],
+            [
+              571.0478684109489,
+              465.0347117503032,
+              50.0
+            ],
+            [
+              490.26548108756214,
+              582.2663394683988,
+              50.0
+            ]
+          ],
+          "policy": "OUT"
+        }
+      ],
+      "frozen_base_seed": 95401,
+      "frozen_marginal_product": [
+        0.2497704315886134,
+        0.26538108356290174,
+        0.23507805325987147,
+        0.2497704315886134
+      ],
+      "frozen_state_digests": {
+        "artifacts.json": "c40f10915a5d7698218fdd3a4e3d54b2c904a429684f3e94db0292174d7b811e",
+        "state.npz": "82a6d36c567e429bd0ca8217fc98cccc93a9a11d560ddc73796b8f3bdca8b873",
+        "summary.json": "ddd37561d82348d9f2139eec221e6523a9800d276ac1261051e77d9b59689898"
+      },
+      "frozen_target_probabilities": [
+        0.4166666666666667,
+        0.09848484848484848,
+        0.06818181818181818,
+        0.4166666666666667
+      ],
+      "historical_input_cost": {
+        "fits": 1,
+        "recorded_counts": {
+          "actor_value_network_forwards": 0,
+          "count_updates": 128,
+          "custom_geometry_channel_refreshes": 18,
+          "deep_copies": 8192,
+          "evaluation_count_updates": 0,
+          "evaluation_episodes": 16,
+          "evaluation_frozen_projection_constructions": 2,
+          "evaluation_joint_choices": 1024,
+          "evaluation_joint_q_vectors": 1024,
+          "evaluation_projected_choices": 1024,
+          "evaluation_projected_q_vectors": 1024,
+          "evaluation_response_tables": 1024,
+          "evaluation_team_steps": 1024,
+          "evaluation_true_chosen_values_after_choice": 1024,
+          "evaluation_true_q_vectors_after_choice": 1024,
+          "evaluation_true_regrets_after_choice": 1024,
+          "external_innovation_draws": 1152,
+          "final_probability_export_queries": 2,
+          "focal_uniform_collection_draws": 128,
+          "gradient_calls": 0,
+          "implicit_constructor_resets": 18,
+          "initial_probability_export_queries": 2,
+          "joint_log_loss_terms": 128,
+          "logical_episode_initializations": 18,
+          "native_constructors": 18,
+          "native_step_calls": 9344,
+          "observed_joint_labels": 128,
+          "planner_native_step_calls": 8192,
+          "preupdate_probability_queries": 128,
+          "projected_log_loss_terms": 128,
+          "real_team_ticks": 1152,
+          "snapshot_probability_export_queries": 4,
+          "state_export_probability_queries": 8,
+          "summary_projection_diagnostics": 3,
+          "total_learner_probability_queries": 136,
+          "training_marginal_projection_constructions": 128,
+          "training_team_steps": 128
+        },
+        "role": "already incurred sealed input cost; excluded from B10 new exposure",
+        "source_object": "B09 final64",
+        "source_observations": 64,
+        "target_observations": 64
+      },
+      "information_contract": "read-only B09 final64 target probability view; true q is external generation and post-choice diagnosis only",
+      "launch_sha": "3072f05072ec7628f2463bc7ae3b621343d7ca58",
+      "object": "skill_drift_fixed_radial_b10",
+      "per_policy_cost": {
+        "IN": {
+          "actual_native_step_calls": 256,
+          "focal_policy_choices": 256,
+          "joint_q_vectors": 0,
+          "planner_native_step_calls": 0,
+          "projected_q_vectors": 0,
+          "response_tables": 0
+        },
+        "J_emp": {
+          "actual_native_step_calls": 256,
+          "focal_policy_choices": 256,
+          "joint_q_vectors": 256,
+          "planner_native_step_calls": 2048,
+          "projected_q_vectors": 256,
+          "response_tables": 256
+        },
+        "M_proj": {
+          "actual_native_step_calls": 256,
+          "focal_policy_choices": 256,
+          "joint_q_vectors": 256,
+          "planner_native_step_calls": 2048,
+          "projected_q_vectors": 256,
+          "response_tables": 256
+        },
+        "OUT": {
+          "actual_native_step_calls": 256,
+          "focal_policy_choices": 256,
+          "joint_q_vectors": 0,
+          "planner_native_step_calls": 0,
+          "projected_q_vectors": 0,
+          "response_tables": 0
+        }
+      },
+      "plan_source": "75ef4a931de474ab27e6903c6f16929eab932d85",
+      "policies": [
+        "J_emp",
+        "M_proj",
+        "IN",
+        "OUT"
+      ],
+      "policy_diagnostics": {
+        "IN": {
+          "actual_ticks": 256,
+          "coverage_component_sum": 199.0,
+          "energy_component_sum": 0.0,
+          "final_radius_by_episode_and_agent": [
+            [
+              16.21383823162964,
+              139.45409851925302,
+              37.40486125771679
+            ],
+            [
+              16.060980578519573,
+              256.8302653460981,
+              221.27395808927213
+            ],
+            [
+              23.48817030310405,
+              280.5020193941105,
+              421.683909954815
+            ],
+            [
+              23.34273393085428,
+              139.18567493072035,
+              37.15972185635592
+            ]
+          ],
+          "maximum_radius_by_agent": [
+            53.4881699602219,
+            496.83026657466667,
+            541.6839053163275
+          ],
+          "minimum_radius_by_agent": [
+            6.51182920158471,
+            10.502023775623782,
+            7.159722033583218
+          ],
+          "quality_component_sum": 38.67622262571649,
+          "served_ticks": 199,
+          "service_owner_tick_counts": [
+            198,
+            0,
+            1
+          ],
+          "unserved_ticks": 57
+        },
+        "J_emp": {
+          "actual_ticks": 256,
+          "coverage_component_sum": 238.0,
+          "energy_component_sum": 0.0,
+          "final_radius_by_episode_and_agent": [
+            [
+              707.1067811865476,
+              139.45409851925302,
+              37.40486125771679
+            ],
+            [
+              590.2998204090346,
+              256.8302653460981,
+              221.27395808927213
+            ],
+            [
+              23.48817030310405,
+              280.5020193941105,
+              421.683909954815
+            ],
+            [
+              707.1067811865476,
+              139.18567493072035,
+              37.15972185635592
+            ]
+          ],
+          "maximum_radius_by_agent": [
+            707.1067811865476,
+            496.83026657466667,
+            541.6839053163275
+          ],
+          "minimum_radius_by_agent": [
+            6.51182920158471,
+            10.502023775623782,
+            7.159722033583218
+          ],
+          "quality_component_sum": 47.38817897490944,
+          "served_ticks": 238,
+          "service_owner_tick_counts": [
+            138,
+            5,
+            95
+          ],
+          "unserved_ticks": 18
+        },
+        "M_proj": {
+          "actual_ticks": 256,
+          "coverage_component_sum": 221.0,
+          "energy_component_sum": 0.0,
+          "final_radius_by_episode_and_agent": [
+            [
+              707.1067811865476,
+              139.45409851925302,
+              37.40486125771679
+            ],
+            [
+              707.1067811865476,
+              256.8302653460981,
+              221.27395808927213
+            ],
+            [
+              707.1067811865476,
+              280.5020193941105,
+              421.683909954815
+            ],
+            [
+              707.1067811865476,
+              139.18567493072035,
+              37.15972185635592
+            ]
+          ],
+          "maximum_radius_by_agent": [
+            707.1067811865476,
+            496.83026657466667,
+            541.6839053163275
+          ],
+          "minimum_radius_by_agent": [
+            106.06098288649957,
+            10.502023775623782,
+            7.159722033583218
+          ],
+          "quality_component_sum": 38.21597803097029,
+          "served_ticks": 221,
+          "service_owner_tick_counts": [
+            0,
+            67,
+            154
+          ],
+          "unserved_ticks": 35
+        },
+        "OUT": {
+          "actual_ticks": 256,
+          "coverage_component_sum": 221.0,
+          "energy_component_sum": 0.0,
+          "final_radius_by_episode_and_agent": [
+            [
+              707.1067811865476,
+              139.45409851925302,
+              37.40486125771679
+            ],
+            [
+              707.1067811865476,
+              256.8302653460981,
+              221.27395808927213
+            ],
+            [
+              707.1067811865476,
+              280.5020193941105,
+              421.683909954815
+            ],
+            [
+              707.1067811865476,
+              139.18567493072035,
+              37.15972185635592
+            ]
+          ],
+          "maximum_radius_by_agent": [
+            707.1067811865476,
+            496.83026657466667,
+            541.6839053163275
+          ],
+          "minimum_radius_by_agent": [
+            106.06098288649957,
+            10.502023775623782,
+            7.159722033583218
+          ],
+          "quality_component_sum": 38.21597803097029,
+          "served_ticks": 221,
+          "service_owner_tick_counts": [
+            0,
+            67,
+            154
+          ],
+          "unserved_ticks": 35
+        }
+      },
+      "reduction": {
+        "base_mean_adapter_returns": {
+          "IN": 12.575238898976245,
+          "J_emp": 15.06803780770607,
+          "M_proj": 13.847066117440924,
+          "OUT": 13.847066117440924
+        },
+        "contrasts": {
+          "J_minus_IN": {
+            "base_mean_adapter_return": 2.492798908729824,
+            "base_mean_team_return": 7.478396726189471,
+            "paired_episode_adapter_returns": [
+              3.5538756353535117,
+              2.7492745372666185,
+              -0.021599999114947366,
+              3.6896454614141128
+            ],
+            "paired_episode_team_returns": [
+              10.661626906060535,
+              8.247823611799856,
+              -0.0647999973448421,
+              11.068936384242338
+            ]
+          },
+          "J_minus_M": {
+            "base_mean_adapter_return": 1.2209716902651455,
+            "base_mean_team_return": 3.6629150707954365,
+            "paired_episode_adapter_returns": [
+              0.7205857547125767,
+              -0.013225120402173829,
+              2.966952258958898,
+              1.2095738677912813
+            ],
+            "paired_episode_team_returns": [
+              2.16175726413773,
+              -0.03967536120652149,
+              8.900856776876694,
+              3.628721603373844
+            ]
+          },
+          "J_minus_OUT": {
+            "base_mean_adapter_return": 1.2209716902651455,
+            "base_mean_team_return": 3.6629150707954365,
+            "paired_episode_adapter_returns": [
+              0.7205857547125767,
+              -0.013225120402173829,
+              2.966952258958898,
+              1.2095738677912813
+            ],
+            "paired_episode_team_returns": [
+              2.16175726413773,
+              -0.03967536120652149,
+              8.900856776876694,
+              3.628721603373844
+            ]
+          },
+          "M_minus_OUT": {
+            "base_mean_adapter_return": 0.0,
+            "base_mean_team_return": 0.0,
+            "paired_episode_adapter_returns": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "paired_episode_team_returns": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        },
+        "episode_adapter_returns": {
+          "IN": [
+            9.13220512838216,
+            12.626148894426443,
+            16.118109609052347,
+            12.42449196404403
+          ],
+          "J_emp": [
+            12.686080763735673,
+            15.375423431693061,
+            16.0965096099374,
+            16.114137425458143
+          ],
+          "M_proj": [
+            11.965495009023096,
+            15.388648552095235,
+            13.129557350978502,
+            14.904563557666862
+          ],
+          "OUT": [
+            11.965495009023096,
+            15.388648552095235,
+            13.129557350978502,
+            14.904563557666862
+          ]
+        },
+        "episode_team_returns": {
+          "IN": [
+            27.396615385146482,
+            37.878446683279336,
+            48.35432882715703,
+            37.27347589213209
+          ],
+          "J_emp": [
+            38.05824229120702,
+            46.12627029507918,
+            48.28952882981219,
+            48.34241227637442
+          ],
+          "M_proj": [
+            35.89648502706929,
+            46.1659456562857,
+            39.388672052935505,
+            44.713690673000585
+          ],
+          "OUT": [
+            35.89648502706929,
+            46.1659456562857,
+            39.388672052935505,
+            44.713690673000585
+          ]
+        }
+      },
+      "seed": 95401,
+      "stage": "prospective_diagnostic",
+      "status": "COMPLETE"
+    },
+    {
+      "b09_evidence_commit": "69a55e71d9f1bca4e8cdd204adce256cd05a7676",
+      "compute_wall_scope": "four fixed deployment policies, J/M cloned one-step planning, actual native trajectories, and reductions",
+      "compute_wall_seconds": 5.70468854898354,
+      "config": {
+        "area_size": 1000.0,
+        "episodes": 4,
+        "height_range": [
+          50.0,
+          150.0
+        ],
+        "max_connections": 10,
+        "max_speed": 30.0,
+        "min_sinr": 0.0,
+        "n_uavs": 3,
+        "n_users": 1,
+        "phase": 2,
+        "steps": 64,
+        "stream": 2,
+        "time_step": 1.0
+      },
+      "counts": {
+        "J_emp_deployment_choices": 256,
+        "M_proj_deployment_choices": 256,
+        "actor_value_network_forwards": 0,
+        "actual_focal_policy_choices": 1024,
+        "actual_native_step_calls": 1024,
+        "count_updates": 0,
+        "custom_geometry_channel_refreshes": 16,
+        "deep_copies": 4096,
+        "evaluation_episodes": 16,
+        "evaluation_team_steps": 1024,
+        "external_innovation_draw_calls": 1024,
+        "fixed_IN_choice_assignments": 256,
+        "fixed_OUT_choice_assignments": 256,
+        "frozen_projection_constructions": 1,
+        "gradient_calls": 0,
+        "implicit_constructor_resets": 16,
+        "joint_choices": 512,
+        "joint_q_vectors": 512,
+        "learner_probability_queries": 0,
+        "loaded_fixed_states": 1,
+        "loaded_target_probability_views": 1,
+        "logical_episode_initializations": 16,
+        "native_constructors": 16,
+        "new_fits": 0,
+        "planning_native_step_calls": 4096,
+        "projected_choices": 512,
+        "projected_q_vectors": 512,
+        "projection_equivalence_calculations": 1,
+        "response_tables": 512,
+        "total_marginal_projection_calculations": 2,
+        "total_native_step_calls": 5120,
+        "training_observations": 0,
+        "true_chosen_values_after_choice": 512,
+        "true_q_vectors_after_choice": 512,
+        "true_regrets_after_choice": 512,
+        "unique_external_innovation_addresses": 256
+      },
+      "episode_initializations": [
+        {
+          "environment_seed": 1068325696,
+          "episode": 0,
+          "geometry_slots": [
+            0.8228845949330044,
+            0.25393894577203724,
+            0.9038339372268214,
+            0.9868339366150674,
+            0.3378598508431704,
+            0.08944224757299513,
+            0.2833931326043604
+          ],
+          "initial_positions": [
+            [
+              532.2991401217979,
+              429.50799715663834,
+              50.0
+            ],
+            [
+              551.5854486541903,
+              566.3429270653205,
+              50.0
+            ],
+            [
+              415.58543812521054,
+              508.7645176852733,
+              50.0
+            ]
+          ],
+          "policy": "J_emp"
+        },
+        {
+          "environment_seed": 1498215585,
+          "episode": 1,
+          "geometry_slots": [
+            0.19871732279214283,
+            0.34418056609506764,
+            0.9925763138259706,
+            0.8950773147694253,
+            0.06053343884816831,
+            0.28166494844638934,
+            0.4218045304396896
+          ],
+          "initial_positions": [
+            [
+              530.4686267355625,
+              572.2826373356654,
+              50.0
+            ],
+            [
+              416.20371065596237,
+              486.1953943632525,
+              50.0
+            ],
+            [
+              554.8066580288727,
+              436.4078420888092,
+              50.0
+            ]
+          ],
+          "policy": "J_emp"
+        },
+        {
+          "environment_seed": 1598970492,
+          "episode": 2,
+          "geometry_slots": [
+            0.2741728210248836,
+            0.9906562689274405,
+            0.7864826841957981,
+            0.774708047218256,
+            0.8840664885126639,
+            0.5376222461362365,
+            0.7433004876239904
+          ],
+          "initial_positions": [
+            [
+              481.5608232563622,
+              582.8801613700442,
+              50.0
+            ],
+            [
+              435.67338622646264,
+              447.7633625892915,
+              50.0
+            ],
+            [
+              578.3022628094471,
+              473.2449076699382,
+              50.0
+            ]
+          ],
+          "policy": "J_emp"
+        },
+        {
+          "environment_seed": 1355547614,
+          "episode": 3,
+          "geometry_slots": [
+            0.8591444357952387,
+            0.2207192690424714,
+            0.9311690709924771,
+            0.39230412371939916,
+            0.12157575935234166,
+            0.27205346702922806,
+            0.057222460136873377
+          ],
+          "initial_positions": [
+            [
+              544.8429515358769,
+              437.1504948254374,
+              50.0
+            ],
+            [
+              532.9262267963574,
+              577.6165238806844,
+              50.0
+            ],
+            [
+              421.36120477045483,
+              493.30774156405386,
+              50.0
+            ]
+          ],
+          "policy": "J_emp"
+        },
+        {
+          "environment_seed": 1068325696,
+          "episode": 0,
+          "geometry_slots": [
+            0.8228845949330044,
+            0.25393894577203724,
+            0.9038339372268214,
+            0.9868339366150674,
+            0.3378598508431704,
+            0.08944224757299513,
+            0.2833931326043604
+          ],
+          "initial_positions": [
+            [
+              532.2991401217979,
+              429.50799715663834,
+              50.0
+            ],
+            [
+              551.5854486541903,
+              566.3429270653205,
+              50.0
+            ],
+            [
+              415.58543812521054,
+              508.7645176852733,
+              50.0
+            ]
+          ],
+          "policy": "M_proj"
+        },
+        {
+          "environment_seed": 1498215585,
+          "episode": 1,
+          "geometry_slots": [
+            0.19871732279214283,
+            0.34418056609506764,
+            0.9925763138259706,
+            0.8950773147694253,
+            0.06053343884816831,
+            0.28166494844638934,
+            0.4218045304396896
+          ],
+          "initial_positions": [
+            [
+              530.4686267355625,
+              572.2826373356654,
+              50.0
+            ],
+            [
+              416.20371065596237,
+              486.1953943632525,
+              50.0
+            ],
+            [
+              554.8066580288727,
+              436.4078420888092,
+              50.0
+            ]
+          ],
+          "policy": "M_proj"
+        },
+        {
+          "environment_seed": 1598970492,
+          "episode": 2,
+          "geometry_slots": [
+            0.2741728210248836,
+            0.9906562689274405,
+            0.7864826841957981,
+            0.774708047218256,
+            0.8840664885126639,
+            0.5376222461362365,
+            0.7433004876239904
+          ],
+          "initial_positions": [
+            [
+              481.5608232563622,
+              582.8801613700442,
+              50.0
+            ],
+            [
+              435.67338622646264,
+              447.7633625892915,
+              50.0
+            ],
+            [
+              578.3022628094471,
+              473.2449076699382,
+              50.0
+            ]
+          ],
+          "policy": "M_proj"
+        },
+        {
+          "environment_seed": 1355547614,
+          "episode": 3,
+          "geometry_slots": [
+            0.8591444357952387,
+            0.2207192690424714,
+            0.9311690709924771,
+            0.39230412371939916,
+            0.12157575935234166,
+            0.27205346702922806,
+            0.057222460136873377
+          ],
+          "initial_positions": [
+            [
+              544.8429515358769,
+              437.1504948254374,
+              50.0
+            ],
+            [
+              532.9262267963574,
+              577.6165238806844,
+              50.0
+            ],
+            [
+              421.36120477045483,
+              493.30774156405386,
+              50.0
+            ]
+          ],
+          "policy": "M_proj"
+        },
+        {
+          "environment_seed": 1068325696,
+          "episode": 0,
+          "geometry_slots": [
+            0.8228845949330044,
+            0.25393894577203724,
+            0.9038339372268214,
+            0.9868339366150674,
+            0.3378598508431704,
+            0.08944224757299513,
+            0.2833931326043604
+          ],
+          "initial_positions": [
+            [
+              532.2991401217979,
+              429.50799715663834,
+              50.0
+            ],
+            [
+              551.5854486541903,
+              566.3429270653205,
+              50.0
+            ],
+            [
+              415.58543812521054,
+              508.7645176852733,
+              50.0
+            ]
+          ],
+          "policy": "IN"
+        },
+        {
+          "environment_seed": 1498215585,
+          "episode": 1,
+          "geometry_slots": [
+            0.19871732279214283,
+            0.34418056609506764,
+            0.9925763138259706,
+            0.8950773147694253,
+            0.06053343884816831,
+            0.28166494844638934,
+            0.4218045304396896
+          ],
+          "initial_positions": [
+            [
+              530.4686267355625,
+              572.2826373356654,
+              50.0
+            ],
+            [
+              416.20371065596237,
+              486.1953943632525,
+              50.0
+            ],
+            [
+              554.8066580288727,
+              436.4078420888092,
+              50.0
+            ]
+          ],
+          "policy": "IN"
+        },
+        {
+          "environment_seed": 1598970492,
+          "episode": 2,
+          "geometry_slots": [
+            0.2741728210248836,
+            0.9906562689274405,
+            0.7864826841957981,
+            0.774708047218256,
+            0.8840664885126639,
+            0.5376222461362365,
+            0.7433004876239904
+          ],
+          "initial_positions": [
+            [
+              481.5608232563622,
+              582.8801613700442,
+              50.0
+            ],
+            [
+              435.67338622646264,
+              447.7633625892915,
+              50.0
+            ],
+            [
+              578.3022628094471,
+              473.2449076699382,
+              50.0
+            ]
+          ],
+          "policy": "IN"
+        },
+        {
+          "environment_seed": 1355547614,
+          "episode": 3,
+          "geometry_slots": [
+            0.8591444357952387,
+            0.2207192690424714,
+            0.9311690709924771,
+            0.39230412371939916,
+            0.12157575935234166,
+            0.27205346702922806,
+            0.057222460136873377
+          ],
+          "initial_positions": [
+            [
+              544.8429515358769,
+              437.1504948254374,
+              50.0
+            ],
+            [
+              532.9262267963574,
+              577.6165238806844,
+              50.0
+            ],
+            [
+              421.36120477045483,
+              493.30774156405386,
+              50.0
+            ]
+          ],
+          "policy": "IN"
+        },
+        {
+          "environment_seed": 1068325696,
+          "episode": 0,
+          "geometry_slots": [
+            0.8228845949330044,
+            0.25393894577203724,
+            0.9038339372268214,
+            0.9868339366150674,
+            0.3378598508431704,
+            0.08944224757299513,
+            0.2833931326043604
+          ],
+          "initial_positions": [
+            [
+              532.2991401217979,
+              429.50799715663834,
+              50.0
+            ],
+            [
+              551.5854486541903,
+              566.3429270653205,
+              50.0
+            ],
+            [
+              415.58543812521054,
+              508.7645176852733,
+              50.0
+            ]
+          ],
+          "policy": "OUT"
+        },
+        {
+          "environment_seed": 1498215585,
+          "episode": 1,
+          "geometry_slots": [
+            0.19871732279214283,
+            0.34418056609506764,
+            0.9925763138259706,
+            0.8950773147694253,
+            0.06053343884816831,
+            0.28166494844638934,
+            0.4218045304396896
+          ],
+          "initial_positions": [
+            [
+              530.4686267355625,
+              572.2826373356654,
+              50.0
+            ],
+            [
+              416.20371065596237,
+              486.1953943632525,
+              50.0
+            ],
+            [
+              554.8066580288727,
+              436.4078420888092,
+              50.0
+            ]
+          ],
+          "policy": "OUT"
+        },
+        {
+          "environment_seed": 1598970492,
+          "episode": 2,
+          "geometry_slots": [
+            0.2741728210248836,
+            0.9906562689274405,
+            0.7864826841957981,
+            0.774708047218256,
+            0.8840664885126639,
+            0.5376222461362365,
+            0.7433004876239904
+          ],
+          "initial_positions": [
+            [
+              481.5608232563622,
+              582.8801613700442,
+              50.0
+            ],
+            [
+              435.67338622646264,
+              447.7633625892915,
+              50.0
+            ],
+            [
+              578.3022628094471,
+              473.2449076699382,
+              50.0
+            ]
+          ],
+          "policy": "OUT"
+        },
+        {
+          "environment_seed": 1355547614,
+          "episode": 3,
+          "geometry_slots": [
+            0.8591444357952387,
+            0.2207192690424714,
+            0.9311690709924771,
+            0.39230412371939916,
+            0.12157575935234166,
+            0.27205346702922806,
+            0.057222460136873377
+          ],
+          "initial_positions": [
+            [
+              544.8429515358769,
+              437.1504948254374,
+              50.0
+            ],
+            [
+              532.9262267963574,
+              577.6165238806844,
+              50.0
+            ],
+            [
+              421.36120477045483,
+              493.30774156405386,
+              50.0
+            ]
+          ],
+          "policy": "OUT"
+        }
+      ],
+      "frozen_base_seed": 95402,
+      "frozen_marginal_product": [
+        0.26515151515151514,
+        0.23484848484848486,
+        0.26515151515151514,
+        0.23484848484848486
+      ],
+      "frozen_state_digests": {
+        "artifacts.json": "6a633f4b5604d839ad2541e13f9e09bbd222c4b06ffe18093afa2afe47cb343a",
+        "state.npz": "a90128d783251f1425b2a93204a1a50ebe3c586f44f8a8e94d80be14ed1ef641",
+        "summary.json": "b40bf4f3dd71fb97369f98e74a7ef505b67e570467f8a70ce87710a76294b198"
+      },
+      "frozen_target_probabilities": [
+        0.4015151515151515,
+        0.09848484848484848,
+        0.12878787878787878,
+        0.3712121212121212
+      ],
+      "historical_input_cost": {
+        "fits": 1,
+        "recorded_counts": {
+          "actor_value_network_forwards": 0,
+          "count_updates": 128,
+          "custom_geometry_channel_refreshes": 18,
+          "deep_copies": 8192,
+          "evaluation_count_updates": 0,
+          "evaluation_episodes": 16,
+          "evaluation_frozen_projection_constructions": 2,
+          "evaluation_joint_choices": 1024,
+          "evaluation_joint_q_vectors": 1024,
+          "evaluation_projected_choices": 1024,
+          "evaluation_projected_q_vectors": 1024,
+          "evaluation_response_tables": 1024,
+          "evaluation_team_steps": 1024,
+          "evaluation_true_chosen_values_after_choice": 1024,
+          "evaluation_true_q_vectors_after_choice": 1024,
+          "evaluation_true_regrets_after_choice": 1024,
+          "external_innovation_draws": 1152,
+          "final_probability_export_queries": 2,
+          "focal_uniform_collection_draws": 128,
+          "gradient_calls": 0,
+          "implicit_constructor_resets": 18,
+          "initial_probability_export_queries": 2,
+          "joint_log_loss_terms": 128,
+          "logical_episode_initializations": 18,
+          "native_constructors": 18,
+          "native_step_calls": 9344,
+          "observed_joint_labels": 128,
+          "planner_native_step_calls": 8192,
+          "preupdate_probability_queries": 128,
+          "projected_log_loss_terms": 128,
+          "real_team_ticks": 1152,
+          "snapshot_probability_export_queries": 4,
+          "state_export_probability_queries": 8,
+          "summary_projection_diagnostics": 3,
+          "total_learner_probability_queries": 136,
+          "training_marginal_projection_constructions": 128,
+          "training_team_steps": 128
+        },
+        "role": "already incurred sealed input cost; excluded from B10 new exposure",
+        "source_object": "B09 final64",
+        "source_observations": 64,
+        "target_observations": 64
+      },
+      "information_contract": "read-only B09 final64 target probability view; true q is external generation and post-choice diagnosis only",
+      "launch_sha": "3072f05072ec7628f2463bc7ae3b621343d7ca58",
+      "object": "skill_drift_fixed_radial_b10",
+      "per_policy_cost": {
+        "IN": {
+          "actual_native_step_calls": 256,
+          "focal_policy_choices": 256,
+          "joint_q_vectors": 0,
+          "planner_native_step_calls": 0,
+          "projected_q_vectors": 0,
+          "response_tables": 0
+        },
+        "J_emp": {
+          "actual_native_step_calls": 256,
+          "focal_policy_choices": 256,
+          "joint_q_vectors": 256,
+          "planner_native_step_calls": 2048,
+          "projected_q_vectors": 256,
+          "response_tables": 256
+        },
+        "M_proj": {
+          "actual_native_step_calls": 256,
+          "focal_policy_choices": 256,
+          "joint_q_vectors": 256,
+          "planner_native_step_calls": 2048,
+          "projected_q_vectors": 256,
+          "response_tables": 256
+        },
+        "OUT": {
+          "actual_native_step_calls": 256,
+          "focal_policy_choices": 256,
+          "joint_q_vectors": 0,
+          "planner_native_step_calls": 0,
+          "projected_q_vectors": 0,
+          "response_tables": 0
+        }
+      },
+      "plan_source": "75ef4a931de474ab27e6903c6f16929eab932d85",
+      "policies": [
+        "J_emp",
+        "M_proj",
+        "IN",
+        "OUT"
+      ],
+      "policy_diagnostics": {
+        "IN": {
+          "actual_ticks": 256,
+          "coverage_component_sum": 186.0,
+          "energy_component_sum": 0.0,
+          "final_radius_by_episode_and_agent": [
+            [
+              17.539391160503776,
+              24.03833896993808,
+              24.868337211936264
+            ],
+            [
+              18.44180468410419,
+              444.9257797074797,
+              336.0492386483577
+            ],
+            [
+              24.906559112767013,
+              442.8648383957492,
+              202.74707516764272
+            ],
+            [
+              17.207195057045283,
+              24.31169134993971,
+              78.92304119676075
+            ]
+          ],
+          "maximum_radius_by_agent": [
+            54.90656141879467,
+            592.8648432098289,
+            336.0492386483577
+          ],
+          "minimum_radius_by_agent": [
+            5.093441018610055,
+            5.6883079308527424,
+            5.131663680506385
+          ],
+          "quality_component_sum": 36.468060135121945,
+          "served_ticks": 186,
+          "service_owner_tick_counts": [
+            180,
+            0,
+            6
+          ],
+          "unserved_ticks": 70
+        },
+        "J_emp": {
+          "actual_ticks": 256,
+          "coverage_component_sum": 241.0,
+          "energy_component_sum": 0.0,
+          "final_radius_by_episode_and_agent": [
+            [
+              582.3080631179105,
+              24.03833896993808,
+              24.868337211936264
+            ],
+            [
+              707.1067811865476,
+              444.9257797074797,
+              336.0492386483577
+            ],
+            [
+              707.1067811865476,
+              442.8648383957492,
+              202.74707516764272
+            ],
+            [
+              707.1067811865476,
+              24.31169134993971,
+              78.92304119676075
+            ]
+          ],
+          "maximum_radius_by_agent": [
+            707.1067811865476,
+            592.8648432098289,
+            336.0492386483577
+          ],
+          "minimum_radius_by_agent": [
+            5.093441018610055,
+            5.6883079308527424,
+            5.131663680506385
+          ],
+          "quality_component_sum": 41.098248217495716,
+          "served_ticks": 241,
+          "service_owner_tick_counts": [
+            80,
+            48,
+            113
+          ],
+          "unserved_ticks": 15
+        },
+        "M_proj": {
+          "actual_ticks": 256,
+          "coverage_component_sum": 223.0,
+          "energy_component_sum": 0.0,
+          "final_radius_by_episode_and_agent": [
+            [
+              707.1067811865476,
+              24.03833896993808,
+              24.868337211936264
+            ],
+            [
+              707.1067811865476,
+              444.9257797074797,
+              336.0492386483577
+            ],
+            [
+              707.1067811865476,
+              442.8648383957492,
+              202.74707516764272
+            ],
+            [
+              707.1067811865476,
+              24.31169134993971,
+              78.92304119676075
+            ]
+          ],
+          "maximum_radius_by_agent": [
+            707.1067811865476,
+            592.8648432098289,
+            336.0492386483577
+          ],
+          "minimum_radius_by_agent": [
+            107.20719095320786,
+            5.6883079308527424,
+            5.131663680506385
+          ],
+          "quality_component_sum": 37.54342113122704,
+          "served_ticks": 223,
+          "service_owner_tick_counts": [
+            0,
+            62,
+            161
+          ],
+          "unserved_ticks": 33
+        },
+        "OUT": {
+          "actual_ticks": 256,
+          "coverage_component_sum": 223.0,
+          "energy_component_sum": 0.0,
+          "final_radius_by_episode_and_agent": [
+            [
+              707.1067811865476,
+              24.03833896993808,
+              24.868337211936264
+            ],
+            [
+              707.1067811865476,
+              444.9257797074797,
+              336.0492386483577
+            ],
+            [
+              707.1067811865476,
+              442.8648383957492,
+              202.74707516764272
+            ],
+            [
+              707.1067811865476,
+              24.31169134993971,
+              78.92304119676075
+            ]
+          ],
+          "maximum_radius_by_agent": [
+            707.1067811865476,
+            592.8648432098289,
+            336.0492386483577
+          ],
+          "minimum_radius_by_agent": [
+            107.20719095320786,
+            5.6883079308527424,
+            5.131663680506385
+          ],
+          "quality_component_sum": 37.54342113122704,
+          "served_ticks": 223,
+          "service_owner_tick_counts": [
+            0,
+            62,
+            161
+          ],
+          "unserved_ticks": 33
+        }
+      },
+      "reduction": {
+        "base_mean_adapter_returns": {
+          "IN": 11.761701503378049,
+          "J_emp": 15.085789538770724,
+          "M_proj": 13.946918861614009,
+          "OUT": 13.946918861614009
+        },
+        "contrasts": {
+          "J_minus_IN": {
+            "base_mean_adapter_return": 3.3240880353926774,
+            "base_mean_team_return": 9.972264106178033,
+            "paired_episode_adapter_returns": [
+              1.37486127364906,
+              0.5415168418792202,
+              1.9628294334802803,
+              9.417144592562149
+            ],
+            "paired_episode_team_returns": [
+              4.12458382094718,
+              1.6245505256376607,
+              5.888488300440841,
+              28.251433777686447
+            ]
+          },
+          "J_minus_M": {
+            "base_mean_adapter_return": 1.1388706771567159,
+            "base_mean_team_return": 3.4166120314701476,
+            "paired_episode_adapter_returns": [
+              3.4755913575403152,
+              2.168423106235867,
+              -0.8077009907166719,
+              -0.2808307644326469
+            ],
+            "paired_episode_team_returns": [
+              10.426774072620946,
+              6.505269318707601,
+              -2.4231029721500157,
+              -0.8424922932979406
+            ]
+          },
+          "J_minus_OUT": {
+            "base_mean_adapter_return": 1.1388706771567159,
+            "base_mean_team_return": 3.4166120314701476,
+            "paired_episode_adapter_returns": [
+              3.4755913575403152,
+              2.168423106235867,
+              -0.8077009907166719,
+              -0.2808307644326469
+            ],
+            "paired_episode_team_returns": [
+              10.426774072620946,
+              6.505269318707601,
+              -2.4231029721500157,
+              -0.8424922932979406
+            ]
+          },
+          "M_minus_OUT": {
+            "base_mean_adapter_return": 0.0,
+            "base_mean_team_return": 0.0,
+            "paired_episode_adapter_returns": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "paired_episode_team_returns": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        },
+        "episode_adapter_returns": {
+          "IN": [
+            14.617335351359742,
+            14.638999416535105,
+            12.642587641957867,
+            5.147883603659476
+          ],
+          "J_emp": [
+            15.992196625008802,
+            15.180516258414325,
+            14.605417075438147,
+            14.565028196221625
+          ],
+          "M_proj": [
+            12.516605267468487,
+            13.012093152178458,
+            15.41311806615482,
+            14.845858960654272
+          ],
+          "OUT": [
+            12.516605267468487,
+            13.012093152178458,
+            15.41311806615482,
+            14.845858960654272
+          ]
+        },
+        "episode_team_returns": {
+          "IN": [
+            43.852006054079226,
+            43.91699824960532,
+            37.9277629258736,
+            15.443650810978431
+          ],
+          "J_emp": [
+            47.976589875026406,
+            45.54154877524298,
+            43.81625122631444,
+            43.695084588664876
+          ],
+          "M_proj": [
+            37.54981580240546,
+            39.036279456535375,
+            46.239354198464454,
+            44.53757688196281
+          ],
+          "OUT": [
+            37.54981580240546,
+            39.036279456535375,
+            46.239354198464454,
+            44.53757688196281
+          ]
+        }
+      },
+      "seed": 95402,
+      "stage": "prospective_diagnostic",
+      "status": "COMPLETE"
+    },
+    {
+      "b09_evidence_commit": "69a55e71d9f1bca4e8cdd204adce256cd05a7676",
+      "compute_wall_scope": "four fixed deployment policies, J/M cloned one-step planning, actual native trajectories, and reductions",
+      "compute_wall_seconds": 5.573058484005742,
+      "config": {
+        "area_size": 1000.0,
+        "episodes": 4,
+        "height_range": [
+          50.0,
+          150.0
+        ],
+        "max_connections": 10,
+        "max_speed": 30.0,
+        "min_sinr": 0.0,
+        "n_uavs": 3,
+        "n_users": 1,
+        "phase": 2,
+        "steps": 64,
+        "stream": 2,
+        "time_step": 1.0
+      },
+      "counts": {
+        "J_emp_deployment_choices": 256,
+        "M_proj_deployment_choices": 256,
+        "actor_value_network_forwards": 0,
+        "actual_focal_policy_choices": 1024,
+        "actual_native_step_calls": 1024,
+        "count_updates": 0,
+        "custom_geometry_channel_refreshes": 16,
+        "deep_copies": 4096,
+        "evaluation_episodes": 16,
+        "evaluation_team_steps": 1024,
+        "external_innovation_draw_calls": 1024,
+        "fixed_IN_choice_assignments": 256,
+        "fixed_OUT_choice_assignments": 256,
+        "frozen_projection_constructions": 1,
+        "gradient_calls": 0,
+        "implicit_constructor_resets": 16,
+        "joint_choices": 512,
+        "joint_q_vectors": 512,
+        "learner_probability_queries": 0,
+        "loaded_fixed_states": 1,
+        "loaded_target_probability_views": 1,
+        "logical_episode_initializations": 16,
+        "native_constructors": 16,
+        "new_fits": 0,
+        "planning_native_step_calls": 4096,
+        "projected_choices": 512,
+        "projected_q_vectors": 512,
+        "projection_equivalence_calculations": 1,
+        "response_tables": 512,
+        "total_marginal_projection_calculations": 2,
+        "total_native_step_calls": 5120,
+        "training_observations": 0,
+        "true_chosen_values_after_choice": 512,
+        "true_q_vectors_after_choice": 512,
+        "true_regrets_after_choice": 512,
+        "unique_external_innovation_addresses": 256
+      },
+      "episode_initializations": [
+        {
+          "environment_seed": 1005525753,
+          "episode": 0,
+          "geometry_slots": [
+            0.9272295372953817,
+            0.2235157146143535,
+            0.40828322440664044,
+            0.5865818810234198,
+            0.708779014491504,
+            0.3853712972003325,
+            0.399140549305394
+          ],
+          "initial_positions": [
+            [
+              570.4976189632366,
+              468.4507492972689,
+              50.0
+            ],
+            [
+              496.3348757849062,
+              578.9978557951486,
+              50.0
+            ],
+            [
+              432.02233614775554,
+              456.2013942112208,
+              50.0
+            ]
+          ],
+          "policy": "J_emp"
+        },
+        {
+          "environment_seed": 1841690873,
+          "episode": 1,
+          "geometry_slots": [
+            0.1084677885698474,
+            0.45399907944066387,
+            0.8741831778530107,
+            0.055129719984630565,
+            0.4223688137071233,
+            0.28392234711846154,
+            0.6552076203529054
+          ],
+          "initial_positions": [
+            [
+              562.4451098720137,
+              549.2668081840748,
+              50.0
+            ],
+            [
+              422.9795595265276,
+              532.8716616388027,
+              50.0
+            ],
+            [
+              513.8983854111161,
+              425.7380757619116,
+              50.0
+            ]
+          ],
+          "policy": "J_emp"
+        },
+        {
+          "environment_seed": 103161114,
+          "episode": 2,
+          "geometry_slots": [
+            0.4479574076280727,
+            0.719560957777413,
+            0.672725257893485,
+            0.5102411718213329,
+            0.4315113292395444,
+            0.7970611722650852,
+            0.04984414869149334
+          ],
+          "initial_positions": [
+            [
+              422.4808785655646,
+              527.3295452925058,
+              50.0
+            ],
+            [
+              520.0970788726182,
+              420.782254293064,
+              50.0
+            ],
+            [
+              564.1713962331244,
+              547.9419259997502,
+              50.0
+            ]
+          ],
+          "policy": "J_emp"
+        },
+        {
+          "environment_seed": 1225043808,
+          "episode": 3,
+          "geometry_slots": [
+            0.6425020197829047,
+            0.3232534822338764,
+            0.4140028910705965,
+            0.21746282330731626,
+            0.5453417319362709,
+            0.3068478025939142,
+            0.5484512571618521
+          ],
+          "initial_positions": [
+            [
+              451.5711551960427,
+              438.559162638497,
+              50.0
+            ],
+            [
+              577.781696248224,
+              485.40027723768713,
+              50.0
+            ],
+            [
+              471.3582859165495,
+              571.6629294494367,
+              50.0
+            ]
+          ],
+          "policy": "J_emp"
+        },
+        {
+          "environment_seed": 1005525753,
+          "episode": 0,
+          "geometry_slots": [
+            0.9272295372953817,
+            0.2235157146143535,
+            0.40828322440664044,
+            0.5865818810234198,
+            0.708779014491504,
+            0.3853712972003325,
+            0.399140549305394
+          ],
+          "initial_positions": [
+            [
+              570.4976189632366,
+              468.4507492972689,
+              50.0
+            ],
+            [
+              496.3348757849062,
+              578.9978557951486,
+              50.0
+            ],
+            [
+              432.02233614775554,
+              456.2013942112208,
+              50.0
+            ]
+          ],
+          "policy": "M_proj"
+        },
+        {
+          "environment_seed": 1841690873,
+          "episode": 1,
+          "geometry_slots": [
+            0.1084677885698474,
+            0.45399907944066387,
+            0.8741831778530107,
+            0.055129719984630565,
+            0.4223688137071233,
+            0.28392234711846154,
+            0.6552076203529054
+          ],
+          "initial_positions": [
+            [
+              562.4451098720137,
+              549.2668081840748,
+              50.0
+            ],
+            [
+              422.9795595265276,
+              532.8716616388027,
+              50.0
+            ],
+            [
+              513.8983854111161,
+              425.7380757619116,
+              50.0
+            ]
+          ],
+          "policy": "M_proj"
+        },
+        {
+          "environment_seed": 103161114,
+          "episode": 2,
+          "geometry_slots": [
+            0.4479574076280727,
+            0.719560957777413,
+            0.672725257893485,
+            0.5102411718213329,
+            0.4315113292395444,
+            0.7970611722650852,
+            0.04984414869149334
+          ],
+          "initial_positions": [
+            [
+              422.4808785655646,
+              527.3295452925058,
+              50.0
+            ],
+            [
+              520.0970788726182,
+              420.782254293064,
+              50.0
+            ],
+            [
+              564.1713962331244,
+              547.9419259997502,
+              50.0
+            ]
+          ],
+          "policy": "M_proj"
+        },
+        {
+          "environment_seed": 1225043808,
+          "episode": 3,
+          "geometry_slots": [
+            0.6425020197829047,
+            0.3232534822338764,
+            0.4140028910705965,
+            0.21746282330731626,
+            0.5453417319362709,
+            0.3068478025939142,
+            0.5484512571618521
+          ],
+          "initial_positions": [
+            [
+              451.5711551960427,
+              438.559162638497,
+              50.0
+            ],
+            [
+              577.781696248224,
+              485.40027723768713,
+              50.0
+            ],
+            [
+              471.3582859165495,
+              571.6629294494367,
+              50.0
+            ]
+          ],
+          "policy": "M_proj"
+        },
+        {
+          "environment_seed": 1005525753,
+          "episode": 0,
+          "geometry_slots": [
+            0.9272295372953817,
+            0.2235157146143535,
+            0.40828322440664044,
+            0.5865818810234198,
+            0.708779014491504,
+            0.3853712972003325,
+            0.399140549305394
+          ],
+          "initial_positions": [
+            [
+              570.4976189632366,
+              468.4507492972689,
+              50.0
+            ],
+            [
+              496.3348757849062,
+              578.9978557951486,
+              50.0
+            ],
+            [
+              432.02233614775554,
+              456.2013942112208,
+              50.0
+            ]
+          ],
+          "policy": "IN"
+        },
+        {
+          "environment_seed": 1841690873,
+          "episode": 1,
+          "geometry_slots": [
+            0.1084677885698474,
+            0.45399907944066387,
+            0.8741831778530107,
+            0.055129719984630565,
+            0.4223688137071233,
+            0.28392234711846154,
+            0.6552076203529054
+          ],
+          "initial_positions": [
+            [
+              562.4451098720137,
+              549.2668081840748,
+              50.0
+            ],
+            [
+              422.9795595265276,
+              532.8716616388027,
+              50.0
+            ],
+            [
+              513.8983854111161,
+              425.7380757619116,
+              50.0
+            ]
+          ],
+          "policy": "IN"
+        },
+        {
+          "environment_seed": 103161114,
+          "episode": 2,
+          "geometry_slots": [
+            0.4479574076280727,
+            0.719560957777413,
+            0.672725257893485,
+            0.5102411718213329,
+            0.4315113292395444,
+            0.7970611722650852,
+            0.04984414869149334
+          ],
+          "initial_positions": [
+            [
+              422.4808785655646,
+              527.3295452925058,
+              50.0
+            ],
+            [
+              520.0970788726182,
+              420.782254293064,
+              50.0
+            ],
+            [
+              564.1713962331244,
+              547.9419259997502,
+              50.0
+            ]
+          ],
+          "policy": "IN"
+        },
+        {
+          "environment_seed": 1225043808,
+          "episode": 3,
+          "geometry_slots": [
+            0.6425020197829047,
+            0.3232534822338764,
+            0.4140028910705965,
+            0.21746282330731626,
+            0.5453417319362709,
+            0.3068478025939142,
+            0.5484512571618521
+          ],
+          "initial_positions": [
+            [
+              451.5711551960427,
+              438.559162638497,
+              50.0
+            ],
+            [
+              577.781696248224,
+              485.40027723768713,
+              50.0
+            ],
+            [
+              471.3582859165495,
+              571.6629294494367,
+              50.0
+            ]
+          ],
+          "policy": "IN"
+        },
+        {
+          "environment_seed": 1005525753,
+          "episode": 0,
+          "geometry_slots": [
+            0.9272295372953817,
+            0.2235157146143535,
+            0.40828322440664044,
+            0.5865818810234198,
+            0.708779014491504,
+            0.3853712972003325,
+            0.399140549305394
+          ],
+          "initial_positions": [
+            [
+              570.4976189632366,
+              468.4507492972689,
+              50.0
+            ],
+            [
+              496.3348757849062,
+              578.9978557951486,
+              50.0
+            ],
+            [
+              432.02233614775554,
+              456.2013942112208,
+              50.0
+            ]
+          ],
+          "policy": "OUT"
+        },
+        {
+          "environment_seed": 1841690873,
+          "episode": 1,
+          "geometry_slots": [
+            0.1084677885698474,
+            0.45399907944066387,
+            0.8741831778530107,
+            0.055129719984630565,
+            0.4223688137071233,
+            0.28392234711846154,
+            0.6552076203529054
+          ],
+          "initial_positions": [
+            [
+              562.4451098720137,
+              549.2668081840748,
+              50.0
+            ],
+            [
+              422.9795595265276,
+              532.8716616388027,
+              50.0
+            ],
+            [
+              513.8983854111161,
+              425.7380757619116,
+              50.0
+            ]
+          ],
+          "policy": "OUT"
+        },
+        {
+          "environment_seed": 103161114,
+          "episode": 2,
+          "geometry_slots": [
+            0.4479574076280727,
+            0.719560957777413,
+            0.672725257893485,
+            0.5102411718213329,
+            0.4315113292395444,
+            0.7970611722650852,
+            0.04984414869149334
+          ],
+          "initial_positions": [
+            [
+              422.4808785655646,
+              527.3295452925058,
+              50.0
+            ],
+            [
+              520.0970788726182,
+              420.782254293064,
+              50.0
+            ],
+            [
+              564.1713962331244,
+              547.9419259997502,
+              50.0
+            ]
+          ],
+          "policy": "OUT"
+        },
+        {
+          "environment_seed": 1225043808,
+          "episode": 3,
+          "geometry_slots": [
+            0.6425020197829047,
+            0.3232534822338764,
+            0.4140028910705965,
+            0.21746282330731626,
+            0.5453417319362709,
+            0.3068478025939142,
+            0.5484512571618521
+          ],
+          "initial_positions": [
+            [
+              451.5711551960427,
+              438.559162638497,
+              50.0
+            ],
+            [
+              577.781696248224,
+              485.40027723768713,
+              50.0
+            ],
+            [
+              471.3582859165495,
+              571.6629294494367,
+              50.0
+            ]
+          ],
+          "policy": "OUT"
+        }
+      ],
+      "frozen_base_seed": 95403,
+      "frozen_marginal_product": [
+        0.26538108356290174,
+        0.2497704315886134,
+        0.2497704315886134,
+        0.23507805325987147
+      ],
+      "frozen_state_digests": {
+        "artifacts.json": "40dbd735b87e05cd8f1476ffee5b5eb59c792d8a76f1b43b5e7229b0313972cf",
+        "state.npz": "ae685fc63bfb9f726fcab665494c86350d766d2279490fb564de339f82800feb",
+        "summary.json": "3604f4b70ac02008879e03ea1f9235dc618d10f75dc4e264ffdceba4d1953819"
+      },
+      "frozen_target_probabilities": [
+        0.44696969696969696,
+        0.06818181818181818,
+        0.06818181818181818,
+        0.4166666666666667
+      ],
+      "historical_input_cost": {
+        "fits": 1,
+        "recorded_counts": {
+          "actor_value_network_forwards": 0,
+          "count_updates": 128,
+          "custom_geometry_channel_refreshes": 18,
+          "deep_copies": 8192,
+          "evaluation_count_updates": 0,
+          "evaluation_episodes": 16,
+          "evaluation_frozen_projection_constructions": 2,
+          "evaluation_joint_choices": 1024,
+          "evaluation_joint_q_vectors": 1024,
+          "evaluation_projected_choices": 1024,
+          "evaluation_projected_q_vectors": 1024,
+          "evaluation_response_tables": 1024,
+          "evaluation_team_steps": 1024,
+          "evaluation_true_chosen_values_after_choice": 1024,
+          "evaluation_true_q_vectors_after_choice": 1024,
+          "evaluation_true_regrets_after_choice": 1024,
+          "external_innovation_draws": 1152,
+          "final_probability_export_queries": 2,
+          "focal_uniform_collection_draws": 128,
+          "gradient_calls": 0,
+          "implicit_constructor_resets": 18,
+          "initial_probability_export_queries": 2,
+          "joint_log_loss_terms": 128,
+          "logical_episode_initializations": 18,
+          "native_constructors": 18,
+          "native_step_calls": 9344,
+          "observed_joint_labels": 128,
+          "planner_native_step_calls": 8192,
+          "preupdate_probability_queries": 128,
+          "projected_log_loss_terms": 128,
+          "real_team_ticks": 1152,
+          "snapshot_probability_export_queries": 4,
+          "state_export_probability_queries": 8,
+          "summary_projection_diagnostics": 3,
+          "total_learner_probability_queries": 136,
+          "training_marginal_projection_constructions": 128,
+          "training_team_steps": 128
+        },
+        "role": "already incurred sealed input cost; excluded from B10 new exposure",
+        "source_object": "B09 final64",
+        "source_observations": 64,
+        "target_observations": 64
+      },
+      "information_contract": "read-only B09 final64 target probability view; true q is external generation and post-choice diagnosis only",
+      "launch_sha": "3072f05072ec7628f2463bc7ae3b621343d7ca58",
+      "object": "skill_drift_fixed_radial_b10",
+      "per_policy_cost": {
+        "IN": {
+          "actual_native_step_calls": 256,
+          "focal_policy_choices": 256,
+          "joint_q_vectors": 0,
+          "planner_native_step_calls": 0,
+          "projected_q_vectors": 0,
+          "response_tables": 0
+        },
+        "J_emp": {
+          "actual_native_step_calls": 256,
+          "focal_policy_choices": 256,
+          "joint_q_vectors": 256,
+          "planner_native_step_calls": 2048,
+          "projected_q_vectors": 256,
+          "response_tables": 256
+        },
+        "M_proj": {
+          "actual_native_step_calls": 256,
+          "focal_policy_choices": 256,
+          "joint_q_vectors": 256,
+          "planner_native_step_calls": 2048,
+          "projected_q_vectors": 256,
+          "response_tables": 256
+        },
+        "OUT": {
+          "actual_native_step_calls": 256,
+          "focal_policy_choices": 256,
+          "joint_q_vectors": 0,
+          "planner_native_step_calls": 0,
+          "projected_q_vectors": 0,
+          "response_tables": 0
+        }
+      },
+      "plan_source": "75ef4a931de474ab27e6903c6f16929eab932d85",
+      "policies": [
+        "J_emp",
+        "M_proj",
+        "IN",
+        "OUT"
+      ],
+      "policy_diagnostics": {
+        "IN": {
+          "actual_ticks": 256,
+          "coverage_component_sum": 208.0,
+          "energy_component_sum": 0.0,
+          "final_radius_by_episode_and_agent": [
+            [
+              17.235154947938906,
+              100.91716559482757,
+              80.86581881023417
+            ],
+            [
+              19.53998968710674,
+              503.7418212997303,
+              195.55129629138628
+            ],
+            [
+              22.195608119158745,
+              21.727254110628355,
+              320.1024043845651
+            ],
+            [
+              18.23253483295335,
+              259.1400293031796,
+              162.8253792919686
+            ]
+          ],
+          "maximum_radius_by_agent": [
+            52.19560927224532,
+            533.741820577984,
+            560.1023970509168
+          ],
+          "minimum_radius_by_agent": [
+            7.8043907046303636,
+            8.272745416665666,
+            9.134182143079972
+          ],
+          "quality_component_sum": 55.19250295084928,
+          "served_ticks": 208,
+          "service_owner_tick_counts": [
+            207,
+            0,
+            1
+          ],
+          "unserved_ticks": 48
+        },
+        "J_emp": {
+          "actual_ticks": 256,
+          "coverage_component_sum": 226.0,
+          "energy_component_sum": 0.0,
+          "final_radius_by_episode_and_agent": [
+            [
+              707.1067811865476,
+              100.91716559482757,
+              80.86581881023417
+            ],
+            [
+              19.53998968710674,
+              503.7418212997303,
+              195.55129629138628
+            ],
+            [
+              217.80438247115407,
+              21.727254110628355,
+              320.1024043845651
+            ],
+            [
+              707.1067811865476,
+              259.1400293031796,
+              162.8253792919686
+            ]
+          ],
+          "maximum_radius_by_agent": [
+            707.1067811865476,
+            533.741820577984,
+            560.1023970509168
+          ],
+          "minimum_radius_by_agent": [
+            7.8043907046303636,
+            8.272745416665666,
+            9.134182143079972
+          ],
+          "quality_component_sum": 40.855100932314684,
+          "served_ticks": 226,
+          "service_owner_tick_counts": [
+            110,
+            40,
+            76
+          ],
+          "unserved_ticks": 30
+        },
+        "M_proj": {
+          "actual_ticks": 256,
+          "coverage_component_sum": 222.0,
+          "energy_component_sum": 0.0,
+          "final_radius_by_episode_and_agent": [
+            [
+              707.1067811865476,
+              100.91716559482757,
+              80.86581881023417
+            ],
+            [
+              707.1067811865476,
+              503.7418212997303,
+              195.55129629138628
+            ],
+            [
+              707.1067811865476,
+              21.727254110628355,
+              320.1024043845651
+            ],
+            [
+              707.1067811865476,
+              259.1400293031796,
+              162.8253792919686
+            ]
+          ],
+          "maximum_radius_by_agent": [
+            707.1067811865476,
+            533.741820577984,
+            560.1023970509168
+          ],
+          "minimum_radius_by_agent": [
+            107.23515805046588,
+            8.272745416665666,
+            9.134182143079972
+          ],
+          "quality_component_sum": 29.802316877142808,
+          "served_ticks": 222,
+          "service_owner_tick_counts": [
+            0,
+            90,
+            132
+          ],
+          "unserved_ticks": 34
+        },
+        "OUT": {
+          "actual_ticks": 256,
+          "coverage_component_sum": 222.0,
+          "energy_component_sum": 0.0,
+          "final_radius_by_episode_and_agent": [
+            [
+              707.1067811865476,
+              100.91716559482757,
+              80.86581881023417
+            ],
+            [
+              707.1067811865476,
+              503.7418212997303,
+              195.55129629138628
+            ],
+            [
+              707.1067811865476,
+              21.727254110628355,
+              320.1024043845651
+            ],
+            [
+              707.1067811865476,
+              259.1400293031796,
+              162.8253792919686
+            ]
+          ],
+          "maximum_radius_by_agent": [
+            707.1067811865476,
+            533.741820577984,
+            560.1023970509168
+          ],
+          "minimum_radius_by_agent": [
+            107.23515805046588,
+            8.272745416665666,
+            9.134182143079972
+          ],
+          "quality_component_sum": 29.802316877142808,
+          "served_ticks": 222,
+          "service_owner_tick_counts": [
+            0,
+            90,
+            132
+          ],
+          "unserved_ticks": 34
+        }
+      },
+      "reduction": {
+        "base_mean_adapter_returns": {
+          "IN": 13.513145907104564,
+          "J_emp": 14.2047108566412,
+          "M_proj": 13.69505792192857,
+          "OUT": 13.69505792192857
+        },
+        "contrasts": {
+          "J_minus_IN": {
+            "base_mean_adapter_return": 0.6915649495366352,
+            "base_mean_team_return": 2.0746948486099055,
+            "paired_episode_adapter_returns": [
+              5.488628304522397,
+              -0.025449378438842984,
+              1.555050076110465,
+              -4.251969204047478
+            ],
+            "paired_episode_team_returns": [
+              16.46588491356719,
+              -0.07634813531652895,
+              4.665150228331395,
+              -12.755907612142435
+            ]
+          },
+          "J_minus_M": {
+            "base_mean_adapter_return": 0.5096529347126295,
+            "base_mean_team_return": 1.5289588041378885,
+            "paired_episode_adapter_returns": [
+              -0.01011760727478972,
+              -0.32200356588112733,
+              4.080596694218826,
+              -1.7098637822123912
+            ],
+            "paired_episode_team_returns": [
+              -0.03035282182436916,
+              -0.966010697643382,
+              12.241790082656479,
+              -5.129591346637174
+            ]
+          },
+          "J_minus_OUT": {
+            "base_mean_adapter_return": 0.5096529347126295,
+            "base_mean_team_return": 1.5289588041378885,
+            "paired_episode_adapter_returns": [
+              -0.01011760727478972,
+              -0.32200356588112733,
+              4.080596694218826,
+              -1.7098637822123912
+            ],
+            "paired_episode_team_returns": [
+              -0.03035282182436916,
+              -0.966010697643382,
+              12.241790082656479,
+              -5.129591346637174
+            ]
+          },
+          "M_minus_OUT": {
+            "base_mean_adapter_return": 0.0,
+            "base_mean_team_return": 0.0,
+            "paired_episode_adapter_returns": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "paired_episode_team_returns": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        },
+        "episode_adapter_returns": {
+          "IN": [
+            8.504114816160342,
+            14.670683661419712,
+            15.178942157165984,
+            15.698842993672217
+          ],
+          "J_emp": [
+            13.99274312068274,
+            14.64523428298087,
+            16.73399223327645,
+            11.446873789624739
+          ],
+          "M_proj": [
+            14.002860727957529,
+            14.967237848861997,
+            12.653395539057623,
+            13.15673757183713
+          ],
+          "OUT": [
+            14.002860727957529,
+            14.967237848861997,
+            12.653395539057623,
+            13.15673757183713
+          ]
+        },
+        "episode_team_returns": {
+          "IN": [
+            25.51234444848103,
+            44.01205098425914,
+            45.53682647149797,
+            47.09652898101665
+          ],
+          "J_emp": [
+            41.97822936204821,
+            43.93570284894261,
+            50.20197669982936,
+            34.34062136887422
+          ],
+          "M_proj": [
+            42.00858218387259,
+            44.901713546585995,
+            37.960186617172866,
+            39.47021271551139
+          ],
+          "OUT": [
+            42.00858218387259,
+            44.901713546585995,
+            37.960186617172866,
+            39.47021271551139
+          ]
+        }
+      },
+      "seed": 95403,
+      "stage": "prospective_diagnostic",
+      "status": "COMPLETE"
+    }
+  ],
+  "completed_evaluation_blocks": 3,
+  "completed_new_fits": 0,
+  "config": {
+    "area_size": 1000.0,
+    "episodes": 4,
+    "height_range": [
+      50.0,
+      150.0
+    ],
+    "max_connections": 10,
+    "max_speed": 30.0,
+    "min_sinr": 0.0,
+    "n_uavs": 3,
+    "n_users": 1,
+    "phase": 2,
+    "steps": 64,
+    "stream": 2,
+    "time_step": 1.0
+  },
+  "cpu_scope": "single sequential native process, user plus system",
+  "evaluation_attempts": [
+    {
+      "compute_wall_seconds": 5.837055894022342,
+      "counts": {
+        "J_emp_deployment_choices": 256,
+        "M_proj_deployment_choices": 256,
+        "actor_value_network_forwards": 0,
+        "actual_focal_policy_choices": 1024,
+        "actual_native_step_calls": 1024,
+        "count_updates": 0,
+        "custom_geometry_channel_refreshes": 16,
+        "deep_copies": 4096,
+        "evaluation_episodes": 16,
+        "evaluation_team_steps": 1024,
+        "external_innovation_draw_calls": 1024,
+        "fixed_IN_choice_assignments": 256,
+        "fixed_OUT_choice_assignments": 256,
+        "frozen_projection_constructions": 1,
+        "gradient_calls": 0,
+        "implicit_constructor_resets": 16,
+        "joint_choices": 512,
+        "joint_q_vectors": 512,
+        "learner_probability_queries": 0,
+        "loaded_fixed_states": 1,
+        "loaded_target_probability_views": 1,
+        "logical_episode_initializations": 16,
+        "native_constructors": 16,
+        "new_fits": 0,
+        "planning_native_step_calls": 4096,
+        "projected_choices": 512,
+        "projected_q_vectors": 512,
+        "projection_equivalence_calculations": 1,
+        "response_tables": 512,
+        "total_marginal_projection_calculations": 2,
+        "total_native_step_calls": 5120,
+        "training_observations": 0,
+        "true_chosen_values_after_choice": 512,
+        "true_q_vectors_after_choice": 512,
+        "true_regrets_after_choice": 512,
+        "unique_external_innovation_addresses": 256
+      },
+      "exposure_complete": true,
+      "partial_exposure": {
+        "custom_geometry_channel_refreshes": 16,
+        "deep_copies": 4096,
+        "evaluation_native_step_calls": 1024,
+        "implicit_constructor_resets": 16,
+        "logical_episode_initializations": 16,
+        "native_constructors": 16,
+        "planner_native_step_calls": 4096,
+        "training_native_step_calls": 0
+      },
+      "partial_exposure_scope": "completed native calls in this process; an interrupted native call is not reported as zero",
+      "saved": true,
+      "seed": 95401,
+      "status": "COMPLETE"
+    },
+    {
+      "compute_wall_seconds": 5.70468854898354,
+      "counts": {
+        "J_emp_deployment_choices": 256,
+        "M_proj_deployment_choices": 256,
+        "actor_value_network_forwards": 0,
+        "actual_focal_policy_choices": 1024,
+        "actual_native_step_calls": 1024,
+        "count_updates": 0,
+        "custom_geometry_channel_refreshes": 16,
+        "deep_copies": 4096,
+        "evaluation_episodes": 16,
+        "evaluation_team_steps": 1024,
+        "external_innovation_draw_calls": 1024,
+        "fixed_IN_choice_assignments": 256,
+        "fixed_OUT_choice_assignments": 256,
+        "frozen_projection_constructions": 1,
+        "gradient_calls": 0,
+        "implicit_constructor_resets": 16,
+        "joint_choices": 512,
+        "joint_q_vectors": 512,
+        "learner_probability_queries": 0,
+        "loaded_fixed_states": 1,
+        "loaded_target_probability_views": 1,
+        "logical_episode_initializations": 16,
+        "native_constructors": 16,
+        "new_fits": 0,
+        "planning_native_step_calls": 4096,
+        "projected_choices": 512,
+        "projected_q_vectors": 512,
+        "projection_equivalence_calculations": 1,
+        "response_tables": 512,
+        "total_marginal_projection_calculations": 2,
+        "total_native_step_calls": 5120,
+        "training_observations": 0,
+        "true_chosen_values_after_choice": 512,
+        "true_q_vectors_after_choice": 512,
+        "true_regrets_after_choice": 512,
+        "unique_external_innovation_addresses": 256
+      },
+      "exposure_complete": true,
+      "partial_exposure": {
+        "custom_geometry_channel_refreshes": 16,
+        "deep_copies": 4096,
+        "evaluation_native_step_calls": 1024,
+        "implicit_constructor_resets": 16,
+        "logical_episode_initializations": 16,
+        "native_constructors": 16,
+        "planner_native_step_calls": 4096,
+        "training_native_step_calls": 0
+      },
+      "partial_exposure_scope": "completed native calls in this process; an interrupted native call is not reported as zero",
+      "saved": true,
+      "seed": 95402,
+      "status": "COMPLETE"
+    },
+    {
+      "compute_wall_seconds": 5.573058484005742,
+      "counts": {
+        "J_emp_deployment_choices": 256,
+        "M_proj_deployment_choices": 256,
+        "actor_value_network_forwards": 0,
+        "actual_focal_policy_choices": 1024,
+        "actual_native_step_calls": 1024,
+        "count_updates": 0,
+        "custom_geometry_channel_refreshes": 16,
+        "deep_copies": 4096,
+        "evaluation_episodes": 16,
+        "evaluation_team_steps": 1024,
+        "external_innovation_draw_calls": 1024,
+        "fixed_IN_choice_assignments": 256,
+        "fixed_OUT_choice_assignments": 256,
+        "frozen_projection_constructions": 1,
+        "gradient_calls": 0,
+        "implicit_constructor_resets": 16,
+        "joint_choices": 512,
+        "joint_q_vectors": 512,
+        "learner_probability_queries": 0,
+        "loaded_fixed_states": 1,
+        "loaded_target_probability_views": 1,
+        "logical_episode_initializations": 16,
+        "native_constructors": 16,
+        "new_fits": 0,
+        "planning_native_step_calls": 4096,
+        "projected_choices": 512,
+        "projected_q_vectors": 512,
+        "projection_equivalence_calculations": 1,
+        "response_tables": 512,
+        "total_marginal_projection_calculations": 2,
+        "total_native_step_calls": 5120,
+        "training_observations": 0,
+        "true_chosen_values_after_choice": 512,
+        "true_q_vectors_after_choice": 512,
+        "true_regrets_after_choice": 512,
+        "unique_external_innovation_addresses": 256
+      },
+      "exposure_complete": true,
+      "partial_exposure": {
+        "custom_geometry_channel_refreshes": 16,
+        "deep_copies": 4096,
+        "evaluation_native_step_calls": 1024,
+        "implicit_constructor_resets": 16,
+        "logical_episode_initializations": 16,
+        "native_constructors": 16,
+        "planner_native_step_calls": 4096,
+        "training_native_step_calls": 0
+      },
+      "partial_exposure_scope": "completed native calls in this process; an interrupted native call is not reported as zero",
+      "saved": true,
+      "seed": 95403,
+      "status": "COMPLETE"
+    }
+  ],
+  "frozen_projection_constructions": 3,
+  "historical_input_cost": {
+    "historical_fits": 3,
+    "role": "already incurred method-construction cost; excluded from B10 new exposure",
+    "source_object": "three sealed B09 final64 states",
+    "source_observations": 192,
+    "target_observations": 192
+  },
+  "input_root": "runs/skill_teammate_drift_learning/b09_native_joint",
+  "launch_sha": "3072f05072ec7628f2463bc7ae3b621343d7ca58",
+  "loaded_fixed_states": 3,
+  "loaded_target_probability_views": 3,
+  "numeric_threads": 1,
+  "object": "skill_drift_fixed_radial_b10",
+  "observed_exposure": {
+    "custom_geometry_channel_refreshes": 48,
+    "deep_copies": 12288,
+    "evaluation_native_step_calls": 3072,
+    "implicit_constructor_resets": 48,
+    "logical_episode_initializations": 48,
+    "native_constructors": 48,
+    "planner_native_step_calls": 12288,
+    "training_native_step_calls": 0
+  },
+  "output_root": "/home/fires/.codex/worktrees/b-unknown-joint-law/hmasd-wsl/runs/skill_teammate_drift_learning/b10_fixed_radial_controls",
+  "peak_rss_kib": 126884,
+  "plan_source": "75ef4a931de474ab27e6903c6f16929eab932d85",
+  "planned_new_fits": 0,
+  "planning_native_step_calls": 12288,
+  "projection_equivalence_calculations": 3,
+  "reduction": {
+    "base_means": {
+      "J_minus_IN": [
+        2.492798908729824,
+        3.3240880353926774,
+        0.6915649495366352
+      ],
+      "J_minus_M": [
+        1.2209716902651455,
+        1.1388706771567159,
+        0.5096529347126295
+      ],
+      "J_minus_OUT": [
+        1.2209716902651455,
+        1.1388706771567159,
+        0.5096529347126295
+      ],
+      "M_minus_OUT": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "equal_weight_three_base_means": {
+      "J_minus_IN": 2.1694839645530455,
+      "J_minus_M": 0.9564984340448303,
+      "J_minus_OUT": 0.9564984340448303,
+      "M_minus_OUT": 0.0
+    },
+    "no_threshold_selection_or_confidence_claim": true,
+    "paired_episode_values_by_base": {
+      "J_minus_IN": [
+        [
+          3.5538756353535117,
+          2.7492745372666185,
+          -0.021599999114947366,
+          3.6896454614141128
+        ],
+        [
+          1.37486127364906,
+          0.5415168418792202,
+          1.9628294334802803,
+          9.417144592562149
+        ],
+        [
+          5.488628304522397,
+          -0.025449378438842984,
+          1.555050076110465,
+          -4.251969204047478
+        ]
+      ],
+      "J_minus_M": [
+        [
+          0.7205857547125767,
+          -0.013225120402173829,
+          2.966952258958898,
+          1.2095738677912813
+        ],
+        [
+          3.4755913575403152,
+          2.168423106235867,
+          -0.8077009907166719,
+          -0.2808307644326469
+        ],
+        [
+          -0.01011760727478972,
+          -0.32200356588112733,
+          4.080596694218826,
+          -1.7098637822123912
+        ]
+      ],
+      "J_minus_OUT": [
+        [
+          0.7205857547125767,
+          -0.013225120402173829,
+          2.966952258958898,
+          1.2095738677912813
+        ],
+        [
+          3.4755913575403152,
+          2.168423106235867,
+          -0.8077009907166719,
+          -0.2808307644326469
+        ],
+        [
+          -0.01011760727478972,
+          -0.32200356588112733,
+          4.080596694218826,
+          -1.7098637822123912
+        ]
+      ],
+      "M_minus_OUT": [
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      ]
+    },
+    "primary": [
+      "J_minus_IN",
+      "J_minus_OUT"
+    ],
+    "secondary": [
+      "J_minus_M",
+      "M_minus_OUT"
+    ]
+  },
+  "rss_scope": "single process high-water mark on local_linux",
+  "runner_cpu_seconds": 17.74484808,
+  "runner_wall_seconds": 18.06944657000713,
+  "seeds": [
+    95401,
+    95402,
+    95403
+  ],
+  "stage": "prospective_diagnostic",
+  "started_evaluation_blocks": 3,
+  "started_new_fits": 0,
+  "status": "COMPLETE",
+  "total_marginal_projection_calculations": 6,
+  "total_native_step_calls": 15360,
+  "zero_learning_semantics": {
+    "actor_value_network_forwards": 0,
+    "count_updates": 0,
+    "gradients": 0,
+    "new_fits": 0,
+    "training_observations": 0
+  }
+}

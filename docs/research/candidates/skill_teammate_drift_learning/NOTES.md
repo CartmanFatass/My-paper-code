@@ -5245,3 +5245,111 @@ also counted. This clarifies cost, not the scientific protocol. The prospective 
 `75ef4a931de474ab27e6903c6f16929eab932d85`, three old bases, four arms, new namespace,
 48×64 evaluation and zero-fit contract are unchanged. Publish these bytes and run once via
 local_linux snapshot admission; retain the accepted operation until all results are read.
+
+## 2026-09-21 07:55 PDT — B10 complete: fixed-direction sufficiency weakened, conditional use retained
+
+The only B10 production operation is
+`e633bd872ad7da1ac37efd6dcf555b5981faa68bf0117c975b1abd67a318add2`, accepted
+`2026-09-21T14:41:02.439745Z` at published scientific source
+`3072f05072ec7628f2463bc7ae3b621343d7ca58`. All three evaluation blocks finished with exit0;
+the terminal launcher status is valid/consistent, with no mismatches or available retry.
+Supervisor3931973 and runner3931974 are absent. No repeat, added world, selected checkpoint
+or scientific repair occurred. Outputs are
+`runs/skill_teammate_drift_learning/b10_fixed_radial_controls/`, including all raw arrays,
+frozen states, inputs/source manifests, process facts, stdout and empty stderr.
+
+**Primary reading, all planned worlds retained.** The values below are cumulative64-tick
+adapter-return differences (native team reward divided by3), averaged over four fresh
+paired worlds in each already-exposed B09 final64 base. They are not per-tick effects.
+
+| Frozen base | J−IN | J−OUT | J−M | M−OUT |
+| --- | ---: | ---: | ---: | ---: |
+|95401|+2.492798909|+1.220971690|+1.220971690|0|
+|95402|+3.324088035|+1.138870677|+1.138870677|0|
+|95403|+0.691564950|+0.509652935|+0.509652935|0|
+|Equal-weight three-base mean|**+2.169483965**|**+0.956498434**|+0.956498434|0|
+
+All per-world primary contrasts are shown, in episode order0–3:
+
+|Base|J−IN, four paired worlds|J−OUT, four paired worlds|
+|---|---|---|
+|95401|+3.553875635, +2.749274537, −0.021599999, +3.689645461|+0.720585755, −0.013225120, +2.966952259, +1.209573868|
+|95402|+1.374861274, +0.541516842, +1.962829433, +9.417144593|+3.475591358, +2.168423106, −0.807700991, −0.280830764|
+|95403|+5.488628305, −0.025449378, +1.555050076, −4.251969204|−0.010117607, −0.322003566, +4.080596694, −1.709863782|
+
+J exceeds IN in9/12 worlds and OUT in6/12. Positive base means must not be described as
+uniform world-wise improvement. Retain the large +9.417145 versus IN and the95403/episode3
+losses versus both rules. Several favorable worlds support the aggregate, unlike B09's
+single large favorable path; nevertheless the positive95403 J−OUT mean depends on its
++4.080597 episode. No outlier removal, trimmed endpoint or unregistered confidence claim.
+The raw/readback summaries retain all four policies' returns; the rendered PNG/PDF shows
+both primary cumulative contrasts on shared axes in all12 worlds. The plot uses saved rewards
+only and was visually checked; plotting and arithmetic introduced no new scientific exposure.
+
+**Behavior and task consequences.** M and OUT are exactly equal on every saved physical and
+action trace in every world, not merely close in mean reward. OUT therefore substitutes for
+M on this panel without its model construction or planning. J changes its radial bit within
+every episode: switch counts by base are[3,5,4,9], [3,3,7,1], [1,8,1,3]. It is neither of
+the two fixed directions here. All policies retain the original overshoot and boundary rules.
+J/IN/OUT served-tick totals per256ticks are238/199/221,241/186/223,226/208/222.
+Mean return differences decompose as follows under the unchanged original reward:
+
+|Base|J−IN coverage / quality contribution|J−OUT coverage / quality contribution|
+|---|---|---|
+|95401|+2.275000000 / +0.217798909|+0.991666667 / +0.229305024|
+|95402|+3.208333333 / +0.115754702|+1.050000000 / +0.088870677|
+|95403|+1.050000000 / −0.358435050|+0.233333333 / +0.276319601|
+
+Height/energy penalties remain zero. These describe actual policy paths and reward composition;
+they do not isolate delayed causal credit of an individual switch, prove an inferable episode
+selector or identify the value of an unexecuted continuation. Future innovations remain hidden.
+
+**Research update and limits.** Adopt the already-consulted Pro positive branch. The
+low-confidence prediction splits: M's absorption by OUT is supported exactly, whereas
+absorption of J's conditional deployment value by either fixed direction is weakened.
+Retain the ordinary joint-law/myopic controller as a useful conditional package on this
+specified external-controller task. The observation gives a reason to continue scientific
+assessment, not an automatic deeper planner, architecture or additional-world batch.
+
+B09's primary means−0.121159049/−0.948924799/+1.344124603 and all its adverse worlds remain
+evidence of world sensitivity. B10 is12 new evaluation worlds over the **same three exposed
+learned states**, not fresh training replications, a confirmation result or a pooled replacement
+for B09. It does not establish superiority to transparent state-feedback rules, necessity of
+learning, value of version handling/source reuse, endogenous teammate learning, or a default
+central HMASD deficit. The imposed unknown external policy/shared innovation contract remains
+essential; a central learner able to query its own policies is a different problem. Ordinary
+joint counts, not a newly invented response architecture, are the method in this package.
+The next investment decision must address a remaining substantive learning/use question;
+simply producing another positive comparison or calling the broad direction finished is not
+that decision. No successor experiment is selected by this entry.
+
+**Verification.** DM arithmetic readback at
+`readback.py` SHA256`90d1d8b514d2673c45ee035798d21930c56ce2d313b4c825387448bf945749cd`
+passed on its first complete invocation:18 science artifacts,12 unique input digests,
+6 source digests against3072f050; all frozen arrays match B09 final64. It checked3072 actual
+rows,1536 planning rows and12288 stored branches; fresh addresses disjoint from B09;
+four-policy geometry/innovation and teammate-path pairing; command-induced displacement,
+saved SINR/connection and reward arithmetic; chosen planning branch versus actual transition;
+frozen J/M probability/Q/choice arithmetic and post-choice true-q diagnostics; fixed bits;
+continuity/terminal identity; and raw episode→base→root reductions. All28 comparable
+trajectory fields of M and OUT are bitwise equal. The small `math.fsum` versus NumPy reduction
+differences are within2e−12. Independent read-only Reviewer`/root/b09_native_review` separately
+checked the18 digests, input states, pairing, branch identity and every primary contrast,
+found no inconsistency, and concurred with the bounded reading above. Neither audit is an
+independent channel solve or new training/policy replication. Later ad-hoc metadata display
+commands used two wrong JSON/NPZ keys, were corrected from the actual schema, and changed no
+artifact or scientific result; these were read-only command errors, not new experiment attempts.
+
+**Actual cost.** Zero new fits, observations/count updates, gradients or actor/value-network
+forwards.48 completed episodes:3072 actual native ticks+12288 planning calls/deep copies
+=**15360 native step calls**,48 constructors/implicit resets/logical initializations/custom
+geometry refreshes. Three loaded states/target-law views;3 retained marginal projections plus
+3 equivalence calculations.1536 response tables, each with both J/M Q/choice calculations
+and post-choice true-q diagnostic arithmetic.3072 actual focal choices;768 fixed IN and768
+fixed OUT assignments.3072 external draw calls at768 unique paired addresses. Runner wall
+**18.069446570s**, CPU**17.744848080s**, peakRSS**126884KiB**, one numeric thread. Launch,
+preparation, advice, review, hashing, serialization and plotting are not included in runner wall.
+The earlier two tiny fixtures retain their separate80 native calls/0fits, and the three old
+B09 fits and384 collection observations retain historical construction cost. Readback/review/
+plots used0 new native calls, probability queries, network forwards or fits. All outcomes and
+costs are retained; the direction remains in exploration while the next investment is judged.

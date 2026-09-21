@@ -1,0 +1,30 @@
+{
+  "b09_evidence_commit": "69a55e71d9f1bca4e8cdd204adce256cd05a7676",
+  "files": {
+    "array_adapter": {
+      "path": "envs/pettingzoo/env_adapter.py",
+      "sha256": "8b42c1c3e7ef44cb814f79225b4af944b1018ad764dfeb17e9e1cc294df79d40"
+    },
+    "b09_study": {
+      "path": "experiments/candidates/skill_teammate_drift_learning/native_joint_b09/study.py",
+      "sha256": "e9f830b2bfaa95187476d0ebdd882b1b454c0ed5c1b42cda541add547a6ffbb4"
+    },
+    "native_environment": {
+      "path": "envs/pettingzoo/uav_env.py",
+      "sha256": "f50d74cdba92d5ef976c8ba53d2697fc72742683fcb746b404b8c8807f463803"
+    },
+    "runner": {
+      "path": "scripts/run_skill_drift_fixed_radial_b10.py",
+      "sha256": "ba61f2cbb69b18067a37e74e96ac3a184accc6e1e0203afb6cc2e9a060f01756"
+    },
+    "scenario1": {
+      "path": "envs/pettingzoo/scenario1.py",
+      "sha256": "e5b3eb7d755a7d7866cc7cd01531383bee821f0c6d72a81a3d4fa9cb5954939e"
+    },
+    "study": {
+      "path": "experiments/candidates/skill_teammate_drift_learning/fixed_radial_b10/study.py",
+      "sha256": "8d66fbc2b144bebfe2871c20cbdda51626ed4ae701b0411d48c1d4c88ab45b6f"
+    }
+  },
+  "plan_source": "75ef4a931de474ab27e6903c6f16929eab932d85"
+}
