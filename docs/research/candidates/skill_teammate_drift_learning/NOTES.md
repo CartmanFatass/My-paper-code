@@ -2802,3 +2802,68 @@ if writing succeeds; otherwise provide the complete answer in chat, not just a r
 Private transport addresses remain local. B07 execution has not started.
 
 ### Answer
+
+## 2026-09-21 04:25 PDT — B07 implementation accepted; scientific advice still pending
+
+**Executable acceptance.** Implementer prepared the isolated B07 package, runner and ten
+checks within the preceding L0. DM read the complete diff and accepted it after independent
+Reviewer `/root/b10_credit_review` closed its read-only review. Four separate law/decision
+instances use their own action/outcome/reward histories; source copies and U histories match
+under addressed potentials. Predictions and collection propensities precede outcomes; SAFE
+does not update the law. The runner fixes the declared three seeds, four branches, horizons,
+settings and epsilon, sets thread policy before NumPy, and passes the actual native AST
+contract with literal direction binding. No B05/B06 engine or other direction was modified.
+The native scientific process has not yet been invoked; its end-to-end execution is not
+claimed as tested. As in B05/B06, a mid-block failure retains started-fit and seed identity
+but not durable macro-level partial counts; such exposure remains unknown, not zero.
+
+DM made one pre-fit coupling repair: use `u >= 1-p` for the cooperative action so the uniform
+source/control exactly preserves B05's `u >= .5` convention. The original lower-tail mapping
+had correct probabilities and within-B07 matching, but needlessly changed addressed draws.
+This changes neither the scientific branches nor their declared action distributions.
+Reviewer also found that the synthetic reduction fixture could not expose accidental use
+of U's actual return or of the wrong endpoint: its contrasts had coincided. The fixture now
+has U actual gap zero versus matched-policy gap .01, and E first/full/late gaps .03/.04/.05.
+These are arithmetic assertions, not additional data or claimed scientific effects.
+
+Final full module: **10 passed in .36 s**. The first full invocation was 10 passed in .35 s;
+two intervening focused pure checks added no learning. Repeating the shared tiny fixture
+was necessary after the addressed-draw repair. Total B07 correctness exposure is therefore
+**16 tiny fits, 256 collected macros / 768 primitive ticks**, with 256 sampled labels,
+256 Q-truth tables and 768 scalar policy reductions. No production seed, parameter search,
+extra evaluation rollout or gradient call was used. Reviewer performed no learning run.
+Test durations are invocation wall, not a resource benchmark; no tiny process RSS claim.
+
+Final SHA256: package init `8c9c4ef18f7ba5a1ffccc3b0f37d984a37fe2403ef344f222564af90617f9fbf`;
+study `60f735ac4924acff33f178bea3ee9a3bd519fdbf58bb84dcd9a89825cc32c058`;
+runner `284e2501252c46108a3cb8a45948a1839a31157dff5301646fa5daba8821d416`;
+tests `a7e6fbd49923ae64a6f15634d70a19e4e3b3cc220b6e4d8035efdd5d9439ed81`.
+This is implementation acceptance, not yet DM adoption of the scientific launch.
+
+**Focused advice operation retained.** The question at source
+`9b2d740cca6ee65b9703c32fde26a24685fc03f7` has key
+`hmasd:9fce2a955579c01cfdd9b0511e793cd523008d8ac737796f728e6345787eb399`.
+Jev accepted one Send at 04:14 PDT with the complete attachment and effort label `6 Pro`;
+`send_attempted=true`, `send_effect=sent`, attachment observed. Before that, two genuine
+pre-send composer timeouts left `send_attempted=false`, without upload or click: first
+on the previous completed question's conversation and then on a new conversation. Read-only
+recovery showed the old route blank while the root composer was available; the third attempt
+with the same key and exact text succeeded on a fresh conversation. These are two transport
+pre-send failures and one accepted question, not three Pro requests. Private account and
+conversation facts remain only in local driver state. Wait is observing this accepted key;
+no resend or substitute question. Document digest
+`abd81414c5e9c122f962211b8a0ccd19d765d483c260656cea1723f33518667b`;
+short prompt digest `d0d92b5ff7d218e3454a9d0ef8d8b84349a4a1c61a8bce37489e84c4372d6873`.
+The full answer and actual delivery still need to be read before DM adopts or changes B07.
+
+**Additional B06 read-only caveat.** Reconstructing the first target predictions from saved
+source states reproduces all ten already-recorded first target cooperative predictions
+within 2e-16. R/F respectively by seed 95201–5: .566869/.530030, .575130/.572168,
+.608883/.526582, .583608/.565935, .585954/.542588. The shared SAFE means are .605760,
+.578896, .590734, .589641, .606352. Only 95203 starts with R choosing cooperation and F
+choosing SAFE; both choose SAFE in the other four blocks. New-version key residuals in F
+start at zero. This is arithmetic readback of existing states/curves, not another fit,
+evaluation panel, new policy intervention or attribution to a particular coefficient.
+B07 may amplify finite representation/prior geometry differences; even a favorable
+feedback interaction would not isolate a unique experience-reuse mechanism or establish
+endogenous teammate drift.
