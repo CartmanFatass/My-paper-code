@@ -64,7 +64,7 @@ def test_paired_rollouts_preserve_prefix_then_follow_each_own_reactions():
     assert not torch.equal(left["context"][2:, 4], right["context"][2:, 4])
     expected = torch.stack([ep["reward"][1:].sum() / 5 for ep in result["episodes"]])
     torch.testing.assert_close(result["suffix_returns"], expected, rtol=0, atol=0)
-    assert result["baseline"].item() == pytest.approx(2 / 5)
+    assert result["baseline"].item() == pytest.approx(2.0)
     assert counts == {
         "common_uniform_values": 25, "focal_uniform_values": 2,
         "reset_calls": 2, "foundation_forward_calls": 10, "gate_forward_calls": 10,

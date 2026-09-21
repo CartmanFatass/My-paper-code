@@ -181,9 +181,9 @@ def collect_pair(
         "eligible": active,
         "old_logits": left["logits"][case.tick].clone(),
         "context": left["context"][case.tick].clone(),
-        # The inherited critic is trained on unnormalized returns-to-go; the
-        # gate's native-J target divides both the return and baseline by H.
-        "baseline": left["value"][case.tick].clone() / horizon,
+        # B08 already trains its critic on suffix / H. Preserve that unit;
+        # dividing again would distort the factual reference's variance.
+        "baseline": left["value"][case.tick].clone(),
         "suffix_returns": suffix,
         "sampled_keep": torch.stack([episode["keep"][case.tick, case.agent] for episode in episodes]),
         "common_uniforms": common,
