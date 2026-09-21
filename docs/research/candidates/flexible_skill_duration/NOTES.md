@@ -4197,3 +4197,54 @@ resulting q must equal the fit's recorded last law. Known before any score, from
 records: with z of 4–6 the declared law is close to "best label with a .3 uniform floor"
 (e.g. `UNIFORM` 772803: max q .709). Not verifiable here: exactness of the faithful-load
 rerun on the real checkpoints, which exist only on `wsl_4070`; the probe itself checks it.
+
+## 2026-09-21 03:43 PDT — B14 read: no reversal; the ten-step credit carries a real but small gain in its own regime, and points the wrong way on one block
+
+**Technical.** Six probes of six complete on `wsl_4070` at launch sha `cc544037f`; every
+faithful-load rerun reproduces the fit's recorded rollout-45 `uniform_every_10` panel with
+maximum absolute difference 0.0; zero optimizer steps, weights digests unchanged; the four
+panels of each checkpoint share their decision steps; executed shares follow q on all twelve
+law panels (intermediate check holds 6/6). Collected summaries verified by sha256. Reduce
+`runs/flexible_skill_duration/b14_reduce/summary.json`, sha256 `f1fc77965be7a867…`. Probe
+roots `b14_law_{uniform,bandit}_<block>_n01`.
+
+| checkpoint | max q (label) | J uniform a / b | J law a / b | G | paired G a (se) | paired G b (se) | label-draw noise, uniform / law |
+| --- | --- | --- | --- | ---: | --- | --- | --- |
+| UNIFORM 772803 | .709 (3) | .448 / .449 | .471 / .465 | +.019 | +.022 (.002) | +.017 (.003) | .001 / .005 |
+| UNIFORM 772903 | .624 (5) | .463 / .463 | .483 / .475 | +.016 | +.020 (.003) | +.012 (.004) | .000 / .008 |
+| UNIFORM 773003 | .741 (0) | .449 / .448 | .429 / .430 | −.019 | −.020 (.005) | −.018 (.006) | .001 / .001 |
+| BANDIT 772803 | .367 (2) | .443 / .440 | .442 / .444 | +.001 | −.001 (.003) | +.004 (.003) | .003 / .002 |
+| BANDIT 772903 | .582 (3) | .448 / .448 | .462 / .460 | +.014 | +.014 (.004) | +.013 (.003) | .000 / .001 |
+| BANDIT 773003 | .309 (2) | .391 / .394 | .447 / .432 | +.047 | +.055 (.008) | +.038 (.009) | .003 / .015 |
+
+**Declared outcomes (primary, `UNIFORM` checkpoints).** Mean G = +.005; no block at or above
+.03. My prediction (`DM_G_falls_short`) holds; the reversal outcome does not (mean below .03;
+two blocks positive, of which one exceeds twice its replicate difference). Secondary
+(`BANDIT` checkpoints, law matched to training), reported separately: G = +.001 / +.014 /
++.047, mean +.020, 3/3 non-negative, one block above .03; I had expected |G| < .03, which
+fails on 773003.
+
+**Reading.**
+- Paired by world, the measurement is sharp (paired se .002–.009, label-draw noise ≤ .015),
+  so these are real differences at these weights, not panel noise: deploying the law where
+  it was estimated is worth about +.02 on two `UNIFORM` checkpoints and about −.02 on the
+  third. The −.02 is 773003, the checkpoint whose estimate credited label 0 at z ≈ 6: that
+  credit is wrong not only for whole-episode constant use (B13) but also in ten-step mixed
+  use. The "credit and deployment are misaligned" account therefore does not rescue that
+  block; under mean actions the ten-step estimate itself misranks there. (Sampled-action
+  deployment, the estimate's exact regime, was not run and is not added.)
+- The size agrees with what B12 implied: the whole label effect at commitment ten is a few
+  hundredths of J, and a law with a .3 floor realises part of it. It is a fraction of the
+  seed SD on this host (≈ .08) and below the margin I declared useful.
+- Secondary: where the law was also the training law, the gain is non-negative on all three
+  and reaches +.047 on one block. This is three reused blocks, one above the margin, and the
+  same fits whose whole-scheme comparison (B13 P3, P4) failed; I read it as "the law does no
+  harm and sometimes helps on its own weights", not as a scheme-level gain.
+
+**Judgment.** The one observation named as able to reverse the recommendation did not
+reverse it. The 02:51 recommendation stands with its last named doubt answered: rest
+`flexible_skill_duration` in reserve; no further fits on this learner's high-level label
+credit. The rest record of 02:51 stands; add to it: B14 probe roots and reduce above; a
+reopening now needs something other than this test — a competent matched-information
+baseline on this host, or a mechanism with a native prediction for an unfixed duration.
+Nothing is appended to B14.
