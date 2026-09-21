@@ -84,6 +84,12 @@ The [Claude advice reconciliation](#claude-advisory-reconciliation-2026-09-21) i
 the later owner-supplied note, retaining useful regime/dwell insights and correcting the
 inferences that would make fixed-clock success a prerequisite.
 
+**Potential research questions:** the [2026-09-21 consolidated inventory](#potential-research-directions-2026-09-21)
+organizes the existing programme, both third-party reports, Claude's advice and the owner's
+predictive proposal into 20 distinguishable questions, with ordinary methods, source aliases
+and evidence limits. It preserves the main/alternative concept choice and current standing;
+an entry in that inventory is not a direction activation or a selected experiment.
+
 ## Active
 
 | Direction | Question | State | Lead runtime | Standing and next step |
@@ -5408,3 +5414,188 @@ Root 的数字自纠正也保留：本轮 commentary 曾由表 3 的 `2s_and_1sc
 本次追加 **0 fits、0 rollouts、0 新科学评估**；FSD 所有权和休息状态未变，未激活
 新方向。进入 FOUNDATIONS 的是已核对的配置差异、B12 估计对象边界与驻留概念区分；
 并未把缩小标签空间、补 critic 或异步共同学习的候选收益写成既有结果。
+
+## Potential research directions 2026-09-21
+
+Owner request: "整理所有潜在方向". 这里整理截至本次阅读已出现的研究问题，覆盖现有
+reserve/archive、两份第三方建议、Claude 新笔记及业主的预测增强提案。它不是对世界上
+所有 MARL 方法的穷尽检索，也不把每个旧缩写或网络模块登记成独立方向。问题之间可以
+相互服务，但需要不同的比较；以下 20 项是本节的阅读分组，不是新的方向编号或状态表。
+
+**研究中心保持为 HMASD 的联合技能学习。** 可变周期要回答“增加时间选择以后，有限
+数据和计算能否学到更好的协作”；固定周期则研究“技能是否有任务用途，价值是否学得好，
+成员变化后能否继续合作”。UAV 的作用是给出真实的容量竞争、覆盖、接入—回传和接替
+后果，并据此评价算法。物理模型、脚本和图表示可以帮助这一问题，也可以成为强参照；
+仅换表示、修好普通实现或击败弱脚本，不自动构成一种新 MARL 算法。
+
+本次底本是 main `187b02bc893f3732f3f6031d8c226ac6b42b380a`。状态读取本文件上方的
+当前 standing；旧 DIRECTION 中的 ACTIVE/PARK、旧审批流程和历史再进入条款只是来源
+记录。特别是 **B 已 reserve，FOLR/C/CADC/VSP-03 等按当前 index 归档**，不能采用旧
+文件的状态。当前没有 exploring/confirming 行；概念主选也尚未变成接受的训练批次。
+
+### 一、可变周期：怎样使用增加的时间选择
+
+| 研究问题 | 可检验的做法与普通参照 | 已有依据、反证与未解之处 | 当前定位 |
+| --- | --- | --- | --- |
+| **联合时长的有限资源学习**：其他成员继续执行时，一次共同选择怎样安排彼此的持续时间？ | 在现有自回归技能分配后，对比固定 k、充分知情的条件分解时长、普通自回归联合时长。高低层共同训练；共享合法历史、held commitments、team latent、critic 和成本口径。主干预是时长分布的参数化。 | FSD、UCOPE 的旧负结果约束具体配方，未回答这一共同学习比较。独立头也能表达确定性的协调，共享 latent 也能相关；只有一个成员重选时没有同次跨成员的时长采样差别。已有 D2/片段接口可复用，具体 duration head、宿主和批次未冻结。 | **当前概念主选**，沿用上方 Decision；FSD 仍 reserve、Claude 所有。 |
+| **事件驱动的终止与更新**：什么任务变化值得结束当前技能？ | 保留闭环技能体，对比普通固定/年龄/状态规则、可学习 KEEP/END、hazard 或有限时长菜单。第三方的 outcome-surprise、团队证据汇集和 Claude 的局部 mismatch/判别器置信度，都是候选信号。 | UCOPE 已训练 KEEP/END 和 paired suffix credit，没有保留最终策略增益；CRTO 的 B08 三种信号产生相同行动。简单 change-detector 原型的收益依赖信号强度，未成为 UAV 学习证据。置信度下降、重选次数增加均不等于服务改善。 | 未选择的不同切入；旧 gate 不能换信号名称便原样续投。 |
+| **时钟课程与跨周期稳健性**：怎样逐步开放时间自由度，并使已学技能适应未训练的周期？ | 候选包括从固定 k 的可释放偏置、逐渐加密决策点、扰动周期、团队慢时钟加局部快更新。比较直接训练于同一最终策略类，并计入预训练；训练 k 与测试 k 分开。跨周期保持能力和同周期最终收益是不同读数。 | 两份建议和旧 untied-k 笔记提供方法线索；尚无当前 HMASD 对这一完整比较的结果。暖启动可能困住策略；随机寿命可能改变任务分布。外层 bandit 选 k 可作普通参照，但不是状态条件的联合时长学习。 | 未选择的训练/泛化问题；不是主选的强制前置课程。 |
+| **跨时长模型与价值共享**：一次执行的数据能否帮助其他持续时间上的估计？ | 比较 horizon-conditioned 普通预测器、按时长分别估计、满足适用假设的组合模型；在训练内和未见时长上同时看预测及控制回报。SCDMP/VSP-C1 是相关资产。 | SCDMP 的两个小正点值没有证明 semigroup 机制，VSP-C1 后续 gate 结果不利。Markov、时间齐次等条件必须对应实际技能；非线性随机系统不能用均值预测的复合冒充分布核的复合。末段行为依赖剩余时长时，强加一致性会引入偏差。 | 旧配方归档；一般跨时长有限数据问题仍可提出，未选 successor。 |
+
+主问题的实际成功读数是 **有用协作被访问、被保留，并提高完整 native team return**，
+例如真实服务中断减少或接替完成；duration entropy、标签相关性、更新频率仅解释行为。
+名义时长、team cap 截断后的实际时长、标签重选与有效合作持续时间须分开。低层仍逐步
+读取观测并反馈行动；“保持技能”不能写成“重复速度向量”。不为时间自由度另造切换费。
+
+### 二、固定周期：让联合技能更有用途
+
+| 研究问题 | 可检验的做法与普通参照 | 已有依据、反证与未解之处 | 当前定位 |
+| --- | --- | --- | --- |
+| **伙伴技能重组**：某个技能离开共同适应的搭配后，还能否与其他合法伙伴技能配合？ | 固定周期和现有 discovery objective，改变训练中真实执行的伙伴搭配曝光；与相同曝光、同信息的普通联合采样/自回归 HMASD 比较。保留原搭配收益及新搭配收益。 | 当前没有证明 native skills 存在 partner brittleness。FSD 的标签有不同闭环行为，不等于已经学到可重组用途。未执行组合没有事实标签；强制重标技能后不能仍把旧数据当成对应新策略的 on-policy PPO 数据。 | **当前唯一固定 k 后备**，沿用完整 Pro 采用；尚未激活。 |
+| **互补性与局部子队技能发现**：discovery 能否形成对任务有用的角色配合，而不仅是可辨认行为？ | 候选包括任务结果条件化的 discovery、关系/子队目标、team latent 与局部组合。必须面对现有 team/individual discovery、普通辅助预测和关系编码；使训练目标与单纯重组曝光的作用可区分。 | Claude S3 和当前 fixed-k 概念有共同问题。已有代表文献包含相关的子组/联合探索方法，不能宣称这一整类为空白。FSD B12 没有排除状态条件交互，也没有证明收益为零。新目标、分组、时间变化不能一次全部叠加。 | 假说候选；没有取代已选的普通重组曝光后备。 |
+
+同一团队训练中的 **技能重组** 与多个独立训练团队之间的 **cross-play** 不同。前者
+研究技能搭配的训练分布；后者研究不同训练结果之间的兼容性。仅在一个共同适应团队里
+交换标签，不能称为独立人口 cross-play 证据。
+
+### 三、价值与共同学习：把已有数据变成有效更新
+
+| 研究问题 | 可检验的做法与普通参照 | 已有依据、反证与未解之处 | 当前定位 |
+| --- | --- | --- | --- |
+| **异步上下文与服务区间信用**：已有承诺和不同事件边界下，如何估计 continuation value？ | 使用合法 roster、held skills、age/剩余承诺及历史的普通 critic；在同一执行策略类下比较价值上下文或区间目标。正确 SMDP 折扣、截断及 mask 是共同实现条件。VNFC 的 INTERVAL/TERMINAL 属于具体服务信用比较。 | 当前主选已要求普通合格 critic，不能故意删信息做弱参照。UCOPE suffix targets 没带来最终增益；VNFC 的 primary 因技术失败仍未回答。更密反馈不保证更好信用，也没有证据说所有旧失败都是 critic 输入错误。 | 主选中的共同实现/参照；若把它改成主干预，是另一项未选择的问题。 |
+| **团队反事实信用**：如何把联合结果分配给技能或成员的选择，降低学习噪声？ | 候选为同 objective 下的普通多步 advantage、合法反事实 baseline 或 learned outcome/credit；需要明确替换的行动、续接策略、数据来源和成本。 | LCAC 的多批结果混合/不利，A/UCOPE 的增量信用也有限。真实后缀不能当未执行反事实的标签；自回归分配中固定由当前行动影响的后续行动再做 COMA 式替换，可能破坏 baseline 条件。EOCIV/RECCT 的旧接收者信用结果也不能省略。 | 旧配方归档；问题保留，不是已有新算法或已选批次。 |
+| **高低层与成员共同更新的稳定性**：技能体、协调器及队友一起变时，是否出现普通保守更新仍难解决的训练干扰？ | 在共享参数的真实所有权下，比较普通学习率/clip/epoch、更新节奏及一个具体联合约束；冻结一层只回答窄归因问题。主要结果仍是有限训练的团队收益。 | 源码已有明确对象：共享低层 actor/critic、高层 optimizer、依次更新及普通 PPO。未发现显式 joint-policy trust region，但没有据此诊断出不稳定或证明新约束更好。loss/KL 平稳不是性能结论。 | 已记录的固定 k 假说；尚无 selected intervention。 |
+| **实际队友/技能行为漂移后的学习与复用**：行为变化后，哪部分旧经验仍能帮助预测未来回报和做决策？ | 先明确实际行为变化、被改变的条件未来量及普通同信息 learner；比较保留/重估/复用旧数据如何影响后续学习，而非仅修复自身网络编码的变化。 | B 保留早期条件收益及 B09/B10 的用途；B11 对完整路径的双向表匹配收益不稳定，且有限表更换也改了边缘频率。六-fit recurrent refresh/burn-in successor 已被其 DM 和 Pro 否决；没有排队的新运行。 | **B reserve**。未决问题仍在，原径向一步表选择投入已结束。 |
+| **终止规则变化下的经验复用**：同一技能的结束规则不同，已有轨迹如何参与新价值学习？ | 对比普通多步/off-policy 更新及一项有明确适用条件的额外复用。必须区分正概率但有限样本缺失与真正零支持；也区分固定技能体下改终止和技能体本身改变。 | A01 已支持普通多步相对一步，额外 trace correction 没有稳定增益；A02 长承诺 collector 的主终点未改善。普通方法有用可直接保留，不能据此宣布其有限样本最优。 | **A 归档**；作为可复用方法资产，不持续追索重开条件。 |
+
+### 四、成员与团队变化：四个不同问题
+
+| 研究问题 | 可检验的做法与普通参照 | 已有依据、反证与未解之处 | 当前定位 |
+| --- | --- | --- | --- |
+| **跨成员数量/关系分布泛化**：训练在一些 N 上，换成未见 N 或关系结构后是否仍能有效服务？ | 同 native 契约的 specialist/generalist、普通共享策略/attention/set 与一个具体关系归纳偏置比较；区分训练内 N、两侧未见 N、关系变化，并计各自训练量。COPA 是第三方提出的相关参照线索，需在实际选中时核对其适用契约。 | FRRIE 是 fixed-roster-per-episode 的关系/规模泛化问题，不是 episode 内 churn。既有 G 系列 toy 是资产，不是当前 UAV generalist 结果。兼容可变 roster 接口和受控训练群体仍需明确。 | 未选择的 N 轴候选；FRRIE 当前归档，非已有性能收益。 |
+| **运行中成员变化后的服务与状态连续性**：成员退出、加入或槽位复用后，怎样恢复服务并保留有用状态？ | 具体问题可选服务区间信用、合法历史组织、隐状态保留/重建或共同潜变量恢复；面对 competent generic recurrent learner、合法初始化和脚本服务参考。每次只选择一个可辨别干预。 | VNFC 的 INTERVAL/TERMINAL 无最终 primary；FOLR 三个 cache 对比均不利；DISH 的 retention/bypass 配方未胜，普通来源价值未测；RCLE 有相对初始化/nearest 的学习收益及对 greedy 的不足。它们不共同证明历史冗余。 | **VNFC reserve**；FOLR/DISH/RCLE 旧配方归档。保留子问题，不能合并结果符号。 |
+| **独立团队的 cross-play 兼容性**：独立训练得到的伙伴能否直接混编，混合训练是否值得？ | 已有 CPCP 候选为 mixing-trained 与曝光匹配的普通 self-play，评价预声明的跨 population 搭配和 own-team 代价。独立训练 population 是关键单位。 | 当前零历史实现、零实验，不是负结果。尚未验证存在可直接使用的兼容独立 flat population checkpoint 库。旧三-bundle 方案只是未启动候选，不能把它当免费冻结评估。 | **CPCP reserve**；与固定 k 的同团队技能重组及 N 泛化分别记录。 |
+| **异质能力下的参数共享与角色分配**：不同动力/执行能力的 UAV，何处共享、何处专门化？ | 比较能力条件化的完整共享策略、partial sharing/adapter 和必要的独立策略参照，保持合法能力输入和训练资源。能力差异要确实影响任务中的行动后果。 | ACPS B01 不利，B02 在实用尺度内不利，没有保留聚合增益。不能把相同模型扩大、加身份或语义标签当作新机制；也不能从两次结果推所有异质共享均无效。 | ACPS 归档；一般问题未被穷尽，尚无新干预。 |
+
+### 五、UAV 任务结构：在固定周期也能研究的改进
+
+| 研究问题 | 可检验的做法与普通参照 | 已有依据、反证与未解之处 | 当前定位 |
+| --- | --- | --- | --- |
+| **任务预测辅助学习**：预测未来服务后果，能否使合法历史更适合学习控制？ | 业主提案包括未来 W 步平均团队奖励的辅助头，W=3 只是候选；比较相同主干/历史下零与非零辅助损失。若研究预训练表示，再与同架构随机初始化及容量匹配普通表示比较。 | 现有 rollouts 可提供事实结果；窗口标签、训练/测试切分尚未冻结。小型实体、变化点、关系原型不是 UAV 证据。B09 的预测/一步选择改善未变成稳定完整回报，FOLR cache 结果不利。 | 业主提案保留的 MARL 学习候选；预测 MSE 本身不足以支持采用。 |
+| **短物理模型与学习修正**：已知物理加有限学习，能否改善联合技能候选的后果估计？ | 在相同候选、反馈 navigator 和合法信息下，比物理/脚本排序、普通 learned ranker、物理特征加直接学习、物理加残差。短 lookahead 或蒸馏都是组件；完整 return 与计算费用一起读。 | 已知 reward 公式不等于已知行动的未来结果分布。C/VSP 的普通模型结果是有界资产，未证明 native HMASD 学习收益；ACVC/MGTAP 反证限制弱 proposer 修补。尚无冻结的 candidate/continuation 数据集；模型分支和 policy queries 有成本。 | 未选择的 model-based MARL 候选/强参照，不能以一个 UAV planner 替代算法问题。 |
+| **实体目标、空间关系与任务级技能接口**：高层用用户簇、服务区或协作角色作行动单位，能否更易学到有效分工？ | Claude 的 pointer-style assignment、容量/唯一角色约束、几何候选与 learned ranking 都可放在这里。对比能力合格的现有 AR coordinator、普通 attention/任务分配和相同反馈执行器；分清换表示与改变行动集合。 | MGTAP 已试需求/伙伴几何条件化，late-512 差为 −.005375 J；ACVC 抬高弱 cluster proposer，却无稳定 MAPPO 优势。只有 native 任务真有稀缺性才使用相应约束；“服务目标保持”与速度复制不同。 | 未选择的任务接口问题；若替换可学习技能体，应明确已变成另一种层次 MARL 设定。 |
+| **有约束通信的信息价值**：何时发送何种消息，才能通过接收者后续行动提高服务？ | 使用真实存在的 cache/delay/quota/receiver 接口，比较 age/change、普通 value-of-information/短模型、学习 send/skip；固定 sender/motion/receiver 中相应条件来分清作用。不能为给通信机制空间而人为删掉合法当前信息。 | C07 的 NEAR 有完整有界正结果，LONG 增量很小；C 当前路线完成。CADC 存在可恢复 native 通信路径，但 B01 send+motion 对无碰撞 RR 的 net/physical service 均负；固定 sender 的匹配比较尚未运行。共享 G0 层无该消息接口不等于全仓库都没有。 | **C/CADC 归档**；可提出新的明确比较，无持续重开搜索或自动重跑。 |
+| **尾部服务与分布价值学习**：对糟糕世界/低服务群体的回报分布建模，是否有实际学习价值？ | 对比 distributional critic 与强 scalar/eta-conditioned scalar；明确维持既有 objective，还是选择新的风险偏好。平均回报、尾部指标和偏好泛化分别评价。 | TRDL B01 有利，B02 在 MEI 内，未建立稳定分布方法优势。尾回报不是用户公平、最差用户服务或可靠性保证的同义词；若改目标，不能把新偏好的得失当作同目标算法提升。 | **TRDL reserve**；没有选新 fit，原 B02 未开始的 Pro 审阅也不由本次自动补跑。 |
+
+上述五组分别有 4、2、5、4、5 个问题，共 **20** 个。细分用于防止把“改变学习对象”
+与“换个技术实现”混同，不表示 20 项都值得投资，更不表示它们同等新颖或已经可执行。
+
+### 六、可复用工具与研究解释，不另开方向
+
+| 想法/建议 | 应挂到哪里 | 保留的用法与限制 |
+| --- | --- | --- |
+| 缩小 team/individual 标签数，调整熵、外在/内在权重，修复 coordinator 选择 | 技能用途、时长学习的普通实现与参照 | 原论文与当前 S1 配置差异值得检查；279936/81 的标签计数不是样本复杂度比值。FSD 的熵尺度、argmax 放大、B13/B14 信用尝试已有记录，不应当作从未试过。调参收益可以采用，但不自动成为新算法。 |
+| 共享随机性、持久探索 latent、区分训练时与执行时的承诺 | 联合时长、时钟课程、技能发现 | HMASD 已有 team latent 和 AR skill assignment；应比较普通方法已有能力。区分探索分布、技能语义与执行约束，不能断言“独立头不会协调”。 |
+| 图、集合、实体表示；小型开放模型/预训练表示 | 预测辅助、N 泛化、技能用途 | 表示是手段；同信息不意味着有限学习无收益，也不意味着一定有收益。比较普通容量/训练量，报告完整控制表现。原提案没有要求下载大模型或采用语言规划。 |
+| process/segment MI、决策点与占用分布的区分 | discovery 目标解释、跨时长共享 | IC-SPL 的 process reward 和现有占用公式是线索；需要适用的平稳/时长假设。真实有用的长驻留不应一律平衡掉；“改成 trajectory MI”没有自动成为第三条已选路线。 |
+| 固定脚本、constant-label、单成员/伙伴替换、完整组合探针 | 用途诊断、强基线、解释学习结果 | 可以用已存在的兼容 checkpoint 回答部署问题；不要求穷举，也不以冻结旧技能的阴性给新共同学习设上界。状态、替换对象和 continuation 应可解释；零 fits 仍可能有昂贵 rollout。 |
+| “为什么层次 MARL 有时有效”的机制研究 | 贯穿以上问题的解释性研究 | 分开高层信息作用、技能互补、时间探索/承诺和共同学习；在合格同信息 flat/HMASD 上做有界比较。不能把“先有 fixed-k 阳性”设为所有时间研究的通行证，也不能从少数方法的文献交集声称领域空白。 |
+| 脚本 timing sweep、简单模型、k-bandit、强机会规则/COPA 等参照 | 具体时长、N 或服务问题的比较工具 | 已有原型及普通控制可减少不确定性；toy 正结果不是 UAV 结果。只选择能改变当前判断的比较，不追加固定的全配置基线矩阵或五-seed 调参义务。 |
+| recurrent mask、optimizer state、normalization、chunk length、运行速度 | 正确性、成本解释和工程维护 | VSP-02/B 的旧修复是资产；当前 B 的 entry-mask 修复未用于旧结果或 FSD。`config.k` 与低层 chunk length、决策子集与 normalizer 的耦合须按实际分支说明；修复不能被包装为已验证的科学瓶颈。 |
+
+`IC_SPL_HAZARD_SMDP_ALTERNATIVE.md` 是旧的整套替代架构提案，包含全局压缩器、共享
+潜变量、hazard、process reward 和可选模型。这里已按对应问题拆开保留；没有选择整套
+替换 HMASD，也没有采用其中新增成本项。Claude 的 S1–S9 都已覆盖：用途诊断、标签
+规模、互补 discovery、语义行动、规划参照、异步条件化、终止信号、时钟课程、机制研究。
+其撤回的人工通信预算方案不重新放回待做清单。
+
+### 七、全部既有方向的归属与停止边界
+
+下表把历史缩写映射到上面的研究问题或纯资产。**同一行只表示有关联，不合并各自
+结果、不把旧归档自动重开。** 近期独立 B 的 notebook 以
+[`74fe267aa`](https://github.com/CartmanFatass/My-paper-code/blob/74fe267aa166299d93a03566e5f0ab149ff2b12d/docs/research/candidates/skill_teammate_drift_learning/NOTES.md)
+为准；A/C/UCOPE/FOLR 使用上方 standing 的固定来源，不能用更早 checkout 的摘要替代。
+
+| 方向/别名与原始来源 | 在总图中的位置 | 本次保留的边界 |
+| --- | --- | --- |
+| [FSD — `flexible_skill_duration`](candidates/flexible_skill_duration/NOTES.md) | 联合时长、时钟课程、技能用途 | reserve；B01–B14、三复用开发块和不合格 matched flat 的限制保留。未证明 native 可变时长无效。 |
+| [UCOPE — `ucope`](https://github.com/CartmanFatass/My-paper-code/blob/0d6f299c007840596405b8a359952a082a6ba567/docs/research/candidates/ucope/NOTES.md)、[CRTO — `commitment_residual_triggered_options`](candidates/commitment_residual_triggered_options/DIRECTION.md) | 事件终止、承诺与信用 | 旧速度复制/残差信号配方停止；局部收益或非零标签不自动说明闭环策略有收益。 |
+| [VSP-03 — `vsp_03`](candidates/vsp_03/NOTES.md) | 时机/机会模型与普通参照 | B09/B11 正结果和正确模型族内的数据获取答案保留；当前路线归档。Scenario1 不存在其所需的持久独占预约，不能直接迁移结论。 |
+| [SCDMP — `semigroup_consistent_duration_model_policy`](candidates/semigroup_consistent_duration_model_policy/DIRECTION.md)、[VSP-C1 — `vsp_c1`](candidates/vsp_c1/DIRECTION.md) | 跨时长估计、模型共享 | 已测 opening-hold residual/gate 的结果有限；不证明一般时长共享无用。 |
+| [A — `termination_rule_experience_reuse`](https://github.com/CartmanFatass/My-paper-code/blob/6c1a38833a85a55574a0fba8714b51b38a4b988a/docs/research/candidates/termination_rule_experience_reuse/NOTES.md) | 终止规则经验复用 | 普通多步方法有用；额外 trace/collector 配方停止。 |
+| [B — `skill_teammate_drift_learning`](https://github.com/CartmanFatass/My-paper-code/blob/74fe267aa166299d93a03566e5f0ab149ff2b12d/docs/research/candidates/skill_teammate_drift_learning/NOTES.md) | 实际行为漂移与旧数据 | reserve；最新拒绝的 burn-in successor 不再列为下一实验。 |
+| [LCAC — `learned_counterfactual_agent_credit`](candidates/learned_counterfactual_agent_credit/DIRECTION.md) | 团队信用 | B01–B03 混合/不利，未保留稳定性能优势；其信用定义/实现仍可参考。 |
+| [ACPS — `actuator_conditioned_partial_sharing`](candidates/actuator_conditioned_partial_sharing/DIRECTION.md) | 异质参数共享 | 已测部分共享包停止，完整能力条件共享参照保留。 |
+| [C — `skill_information_refresh`](https://github.com/CartmanFatass/My-paper-code/blob/3ca4cb1f83ea869e1efca852a099db31c52b0e2c/docs/research/candidates/skill_information_refresh/NOTES.md)、[CADC — `contention_aware_decentralized_communication`](candidates/contention_aware_decentralized_communication/CADC_B01_RESULT.md) | 有约束通信/信息价值 | C 的有界正结果与 CADC 的负 native 对比并存；现成代码路径不是学习增益证据。 |
+| [TRDL — `tail_return_distributional_learning`](candidates/tail_return_distributional_learning/DIRECTION.md) | 分布价值与尾部表现 | reserve；一次正结果和后续 MEI 内结果均保留。 |
+| [CPCP — `cross_play_compatible_population_learning`](candidates/cross_play_compatible_population_learning/DIRECTION.md) | 独立 population 混编 | reserve；未实现未实验，不能写成失败。 |
+| [VNFC — `variable_n_fleet_churn`](candidates/variable_n_fleet_churn/DIRECTION.md)、[RCLE — `roster_consistent_latent_exploration`](candidates/roster_consistent_latent_exploration/DIRECTION.md) | churn 服务信用、共同潜变量恢复 | VNFC reserve、RCLE 归档；SIG11 无 primary 与 RCLE 的正/负比较不能混成统一负结果。 |
+| [FOLR — `vap_folr_core`](https://github.com/CartmanFatass/My-paper-code/blob/cd3b97ab7982ac5efec86eace09d33328be841fa/docs/research/candidates/vap_folr_core/NOTES.md)、[DISH — `degraded_incumbent_shadow_handover`](candidates/degraded_incumbent_shadow_handover/DIRECTION.md) | churn 后合法历史、状态接替 | cache/retention/bypass 配方停止；DISH 的普通来源价值未测，不是信息等价定理。 |
+| [FRRIE — `finite_resource_relational_inductive_efficiency`](candidates/finite_resource_relational_inductive_efficiency/DIRECTION.md) | 训练/测试 N 与关系泛化 | 尚无 native 性能结果；narrow/wide 比较是历史候选，不是已执行答案。 |
+| [MGTAP — `metric_ground_transport_allocation`](candidates/metric_ground_transport_allocation/MGTAP_RESUME_CLOSEOUT_HANDOFF_20260914.md)、[ACVC — `acvc`](candidates/acvc/ACVC_CLOSING_MEMO_20260916.md) | 任务行动接口、几何/物理先验 | 条件几何和弱 proposer 修补已有反证；不以 attention/semantic/residual 名称续接同包。 |
+| [EGRCR — `expressibility_gated_renewal_credit_relay`](candidates/expressibility_gated_renewal_credit_relay/DIRECTION.md) | 信用方法的反例资产 | 固定 token 对象中与普通 GAE 的逐 root 相等有范围；新 consequence-distinct waiter 是历史可能性，不是必须寻找的新任务。 |
+| [CBSC — `capability_bound_semantic_currentness`](candidates/capability_bound_semantic_currentness/DIRECTION.md)、[EC4G — `ec4g_r1`](candidates/ec4g_r1/DIRECTION.md) | 来源/语义信息的识别与通信资产 | 当前 public-stream 等价、简单规则及 content/physical/selectivity 反证保留；没有证据支持将额外认证层作为普遍 MARL 改进。 |
+| [EOCIV — `eociv_lite`](candidates/eociv_lite/DIRECTION.md)、[RECCT — `recct_lite`](candidates/recct_lite/DIRECTION.md) | 接收者/定向信用的反例资产 | EOCIV 固定 score 曝光未挽救绝对收益，RECCT 目标效果为零只约束所测对象；均不证明所有团队信用失败。 |
+| [ORBIT — `orbit_shadow_read`](candidates/orbit_shadow_read/DIRECTION.md)、[SCOPE-1S — `scope_1s`](candidates/scope_1s/DIRECTION.md) | 身份/真实作用对象的诊断资产 | owner-role kernel 敏感性及 synthetic carrier 分离不是完整 return 证据；未识别的 native variable-axis 对象不列为待兑现成果。 |
+| [APCFI — `active_post_churn_population_flow_identification`](candidates/active_post_churn_population_flow_identification/DIRECTION.md) | 审查删失/顺序信息是否真改变后续行动 | 两个 witness 被普通规则吸收，CCF R01 仍为定义层候选；不是 VNFC 的 fleet-churn 结果，也不启动新的 witness 搜索。 |
+| [VSP-02 — `vsp_02`](candidates/vsp_02/DIRECTION.md) | optimizer/状态连续性的工程与反例资产 | 两个队友策略配对的收益异号；不支持普遍 reset benefit，不另设一个维护方向。 |
+
+G33 保持原 owner 冻结，toy 迁移资产、旧 relay corridor、hazard-SMDP 和 team-termination
+分支也只按已有来源保留。本图不把“有源码但零 fits”当成已验证可用，更不自动续接
+老的冻结接口、旧 reward 版本或不存在的 prepared dataset。
+
+### 八、可达性、投入次序与共识
+
+**当前采用的次序没有改动。** 主选是普通联合时长参数化的共同学习比较；固定 k 的
+真实伙伴重组曝光是唯一后备。B、CPCP、VNFC、TRDL 与 FSD 的既有 reserve 状态保留，
+彼此不因这张图新增排队关系。其余项是问题/方法储备，归档配方继续停止。整理全部想法
+不等于将它们全部变成方向，也没有因为空闲而补满三个 DM。
+
+可达性目前能支持的是以下具体判断，不能给出校准的“成功概率”：
+
+- **有既有学习接口，但还需明确实现比较：** 联合 duration head、实际技能重组、辅助
+  预测、普通 critic 和共同更新问题已有 HMASD 代码对象。可实施不代表已有干预已冻结、
+  已诊断瓶颈或会有收益；最终还需一个解释明确的宿主与成本。固定旧 checkpoint 探针
+  不能代替完整共同学习，但也不必先取得阳性探针才允许作有价值的比较。
+- **概念具体，资产/契约尚不齐：** CPCP 需要兼容独立 populations；跨 N 需要相容
+  variable-roster 训练与评估；VNFC 未完 primary 需要稳定的新实现。它们不是“不可能”，
+  也不是修到能跑就值得继续。修复或独立重复应能改变一个明确判断，并按实际代价选择。
+- **UAV 宿主有区别：** Scenario1 支持容量/覆盖竞争，但没有移动用户、回传、电池或
+  traffic queue。Scenario7 有注册入口，其当前 interface v3/reward v2/arm C 与旧
+  arm-A 不同，S4 才启用相关故障；service-restoration 有 telemetry/outage 和反馈
+  控制路径，但已检查位置的 Milan prepared cache 缺失，也未完成所需 HMASD 接入。
+  这些限制影响任务选择，不授权伪造数据、改变原生目标或同时铺开两个新宿主。
+- **当前没有值得承担的具体下一步：** 来源/认证/影子状态等旧系统路线、已回答的
+  C/VSP-03 配方、UCOPE/FOLR 旧包继续关闭投资。技术上可以新造场景或扩大模型，不构成
+  继续投入的理由；也不必证明整个研究类别永远无效才可以停止。
+
+将来实际选择时，值得投入的应是一个**能区分候选解释、与强普通方法比较、对 native
+团队收益有意义且成本相称的观察**。可能是新的干预，也可能是能改变决定的独立重复；
+不要求创新名称、阳性前测或外部“客户”。若普通方法吸收了改进，保留可用实现并结束
+多余机制；若测的是局部预测而完整学习/服务仍不改善，就停止该配方，不自动追加复杂度。
+没有实验评估出的数值成功概率，就不把“低概率”写成科学结论。
+
+**共享共识与候选清单分开。** 已核实的事实和边界已经进入
+[FOUNDATIONS](../rl-marl-foundations-20260907/FOUNDATIONS.md)：更大策略类与有限学习不同，
+同信息与同学习效率不同，可辨认技能与有用互补不同，事件更新与合作驻留不同，以及
+反事实、版本和 native 机制的适用范围。本次只把散落想法连接到这些认识，没有将任何
+候选效果、预测信号或“文献空白”升级为共识，因此不重复改写 FOUNDATIONS。
+
+本图使用的主要材料：
+
+- 本文件的[全项目审阅](#portfolio-review-2026-09-21-project-research-management)，
+  含两份 owner-supplied 第三方报告及追加原型的完整留存、Pro 答复、采用与纠正。
+- [MARL 概念形成及完整 Pro 答复](#portfolio-review-2026-09-21-marl-concept-formation)，
+  以及其后的 [Claude 建议核对](#claude-advisory-reconciliation-2026-09-21)。
+- Claude [2026-09-21 建议](../Claude_docs/research_notes/TEMPORAL_ABSTRACTION_PARADIGMS_AND_HMASD_DIRECTIONS_20260921.md)，
+  原文 `68c78bcae564448c7a5859d706272062e86e9b61`；未将其中已纠正的 B12、驻留或文献
+  推论重新采用。[旧 K/N tradeoff 笔记](../Claude_docs/research_notes/UNTIED_K_N_TRADEOFF_LEDGER_20260901.md)
+  只供识别问题/假设，代码缺陷与流程以之后实际核查为准。
+- 业主的[预测交互增强提案](designs/PREDICTIVE_INTERACTION_AUGMENTATION_PROPOSAL_20260919.md)、
+  [旧 hazard-SMDP 替代提案](designs/IC_SPL_HAZARD_SMDP_ALTERNATIVE.md)，及上表全部方向的
+  原始记录/固定 notebook。没有以这些提案中的旧状态或流程作为执行指令。
+
+本次 Root 复用有边界的只读 helper 核查和前述已完成咨询；helper 的历史状态文字已经
+与当前 standing 对齐。没有实质改变研究主问、关键比较或投入次序，因此不重复发送
+同题 Pro。发布内容仅是这份综合索引：**0 新 fits、0 rollouts、0 新科学评估**，无方向
+激活、无新实验生产者、无 App 跨任务消息，也没有待补的自动重开或全基线扫描任务。
