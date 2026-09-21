@@ -36,6 +36,8 @@ a_t\sim\pi_\theta(\cdot\mid o_t,z_t).
 
 联合物理后果相互耦合，也不自动意味着给定完整策略输入后的动作采样相关。中心方法能够直接查询自身当前策略时，比较必须保留这些查询权。B09 因此将未知混合概率明确放在外部控制者的信息契约中，比较普通联合计数与相同边缘分布的乘积。随后完成的三块原生结果中，联合模型的预测及已访问状态上的一步选择更好，但实际闭环回报差两负一正，正的总均值受一个大收益 episode 主导，未建立稳定闭环优势。它没有测量当前 HMASD 的内生共同学习，也没有证明更长规划能修复问题；不能把这个受控外部未知量写成现有 HMASD 的缺陷。[B09 完整结果与范围](https://github.com/CartmanFatass/My-paper-code/blob/69a55e71d9f1bca4e8cdd204adce256cd05a7676/docs/research/candidates/skill_teammate_drift_learning/NOTES.md)
 
+B10 随后在同三个已曝光的学习结果上，用 12 个新评价世界比较始终向内、始终向外两条规则。联合模型相对两者的三个 base 均值都为正，但逐世界仍有负值；边缘乘积模型则与向外规则的完整轨迹相同。这削弱了两条固定方向规则能吸收联合模型部署价值的解释，保留了该受控任务的条件使用价值。它不是新的训练复制，也没有确立所有状态反馈规则都不足、学习的必要性或 HMASD 内生共同学习的收益；B09 的反面世界仍需保留。[B10 完整结果与范围](https://github.com/CartmanFatass/My-paper-code/blob/8f7a8ba197f9a9cf9ba60068b55b10febbcf3dd0/docs/research/candidates/skill_teammate_drift_learning/NOTES.md)
+
 可识别性取决于具体未知量及可用反馈。C05 中当前周期独立重抽且未被观测的风险量，不能由过去周期识别；这不排除从合法本地历史估计共享转移参数。C 的后续源码核查发现，符合条件的相邻自身距离记录能给出一次 0/1 前进观测，形成共享前进概率的估计路径。该路径尚未拟合，也未验证有限数据能否保留决策收益。模型已知、参数可识别与有限数据足以支持有效决策，是三个不同判断。[C 的模型知识与反馈边界](https://github.com/CartmanFatass/My-paper-code/blob/a76339b5f13244daed94cabb06809fa8923f7f27/docs/research/candidates/skill_information_refresh/NOTES.md#L3181-L3204)
 
 ## 3. MARL 增加的是联合行为和信息结构
@@ -92,7 +94,7 @@ Option 由启动条件、内部行为和终止机制定义，这些部分可以�
 
 同一实现中，held skills 与采样 mask 进入部分技能解码，但高层 value heads 只使用当前 state/joint observations；age 的可选特征进入判别器，不进入这些 value heads。这给出了异步 continuation context 是否影响有限学习的具体问题，没有直接证明当前 baseline 错误、价值误差大或加入输入就有收益。固定 primitive 步数和相同更新安排下，每步仍写入低层与判别器 buffer，改变 k 不必然改变原始样本行数；它主要改变技能驻留、标签分布和高层片段数。高层 D2 片段累积环境 reward，低层另有技能发现的 intrinsic reward，二者不能混作同一个目标。[value 与 partial assignment](https://github.com/CartmanFatass/My-paper-code/blob/e9f77d1e03ee9d3bdb86187ecd90224a1822f74b/hmasd/networks.py#L756)；[逐步 buffer 写入](https://github.com/CartmanFatass/My-paper-code/blob/e9f77d1e03ee9d3bdb86187ecd90224a1822f74b/hmasd/agent.py#L3886)
 
-上述相同更新安排是实质条件：当前低层循环序列采样将 `chunk_length` 设为 `config.k`。因此改变全局固定 k 还可能改变训练序列长度；相同 primitive 样本行数不等于相同优化过程。应按实际生效的 sampler 区分执行周期、训练序列和更新量，而非把它们都称作探索成本。[低层序列采样](https://github.com/CartmanFatass/My-paper-code/blob/e9f77d1e03ee9d3bdb86187ecd90224a1822f74b/hmasd/agent.py#L6300)
+上述相同更新安排是实质条件：当前低层循环序列采样将 `chunk_length` 设为 `config.k`。因此改变全局固定 k 还可能改变训练序列长度；相同 primitive 样本行数不等于相同优化过程。D2 的部分分配还会在决策子集上调用归一化：若启用且处于训练模式，该路径更新 running statistics，边界变化可能改变其采样权重；这不是统计量唯一的更新路径。应按实际生效的 sampler 和 normalizer 区分执行周期、训练序列、统计更新和优化量，而非把它们都称作探索成本。这里没有测得新增效应或诊断出现有失败。[低层序列采样](https://github.com/CartmanFatass/My-paper-code/blob/e9f77d1e03ee9d3bdb86187ecd90224a1822f74b/hmasd/agent.py#L6300)；[D2 决策子集](https://github.com/CartmanFatass/My-paper-code/blob/e9f77d1e03ee9d3bdb86187ecd90224a1822f74b/hmasd/agent.py#L2639)
 
 不同持续时间也不必作为互不相关的选项从头学习。TempoRL 利用相同动作的已执行中间转移学习多个保持长度；Timing-as-an-Action 利用共同的一步转移模型联系不同延迟。后者假设中间状态与奖励不可见并有交互成本，与当前 FSD 的逐步观测不同。把共同模型迁移到闭环技能时，还要处理隐藏状态、策略版本和队友行为；持续学习的技能不能无条件视作固定 Markov 转移矩阵。合法的已执行前缀提供反馈，但没有提供提前换技能后的未执行后续轨迹。共享结构是候选学习办法，既不是本项目已实现的增益，也不是新颖性证明。[TempoRL，§3.2](https://proceedings.mlr.press/v139/biedenkapp21a/biedenkapp21a.pdf)；[Timing-as-an-Action，§§2、4](https://proceedings.mlr.press/v238/zhou24c/zhou24c.pdf)
 

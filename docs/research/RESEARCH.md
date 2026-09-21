@@ -4346,6 +4346,221 @@ for pinned reasoning sources. Never put this Jev account's private conversation 
 
 ### Answer
 
+Collected 2026-09-21 at 14:59 UTC after one accepted Send. Transport verified
+`NOT_DELIVERED`: the remote Answer was still empty; the reported source commit
+`87596d3a5207c5aedc4400f2d39a7e2423c83637` was not an answer-delivery commit.
+Root rechecked the remote subsection before inserting the complete chat fallback below.
+Raw answer SHA-256 excluding its final newline: `26e58b0ed1c07b783879663120aedb86fb1344b54d1374108ce19d42f0bdc62b`.
+Only ASCII spaces/tabs at line ends were removed; normalized body SHA-256:
+`ac57fb030ef68be66525b9802997f60e6918e42f684823a41b9fa516f14b025d`. Rendered formula line breaks and source chips are preserved;
+no missing links or mathematical characters have been reconstructed. The frozen question
+predates the owner's MARL clarification and B09/B10's newer publication; the Decision below
+states the applicable scope. Private conversation data stays local.
+
+```text
+GitHub 读取成功；本次未写回，实际 Answer commit：无。 可用的文件写入动作要求替换整份 RESEARCH.md，本次未完成能逐字节保留其余内容的完整更新载荷，因此没有发出覆盖写入。最后核对时，指定 Answer 仍为空，仓库未被本次操作修改。以下是完整答复，另附
+完整 Markdown 副本。
+
+HMASD：时长学习与固定周期 UAV 改进
+
+一、总判断：值得尝试一种新的学习组织方式，不值得把旧 gate 换名再试。MATERIAL_DISSENT: no。 我支持新问题的基本框架，建议把时长主线收敛为“少量、以技能和合法状态为条件的周期选择，加上预先固定、最终撤除的固定周期偏置”，直接对比同一可变周期策略类的无偏置训练。研究理由不是“选择更多所以一定更好”，而是能区分新增表达能力和学习过程的代价。忽略可变周期时，我最优先考虑的是已知物理约束下的短服务窗口价值学习与候选重排序：保留强基线行为，用真实数据学习普通短模型尚未解释的服务后果，不再从零学习已经知道的运动与奖励公式。两条路线不必绑成一个大系统；新增时长学习不需要先等这套模型完成，固定周期路线也不依赖时长先成功。既有 B09 继续由原 DM 独立推进，不另开其复制品。
+
+hmasd-pro-question-temporal-lea… +1
+
+二、策略类包含必须落到完整行为上，学习权衡才有意义。 设固定任务原生目标为 J，方法 m 在资源 B 下的期望达到值为
+J
+ˉ
+m
+	​
+
+(B)，其类内最优值为 J
+m
+∗
+	​
+
+，差距为 ε
+m
+	​
+
+(B)=J
+m
+∗
+	​
+
+−
+J
+ˉ
+m
+	​
+
+(B)。在固定行为确实属于可变类时，J
+var
+∗
+	​
+
+≥J
+fixed
+∗
+	​
+
+，而且
+
+J
+ˉ
+var
+	​
+
+(B)−
+J
+ˉ
+fixed
+	​
+
+(B)=(J
+var
+∗
+	​
+
+−J
+fixed
+∗
+	​
+
+)−[ε
+var
+	​
+
+(B)−ε
+fixed
+	​
+
+(B)].
+
+这里没有严格改进保证；差距也包括估计、优化、正则化和上下层／队友共同学习，不只是探索。把 k
+0
+	​
+
+ 放进 softmax 菜单，并不自动保证精确包含：若部署始终强制其他时长具有正概率，就不能精确复现确定的固定周期。应保留能确定选择 k
+0
+	​
+
+、复现其边界和记忆语义的成员，训练时的软探索则是另一件事。相反，同一可变类内“结构化训练减直接训练”的差异没有新增类容量这一解释，但仍不能仅凭回报把原因唯一归于探索。Metelli 等确实分析了控制频率与学习的权衡，不过其对象是单智能体 batch RL 中重复原始动作，不能把该理论直接套到多智能体闭环技能。
+
+hmasd-pro-question-temporal-lea…
+
+
+Proceedings of Machine Learning Research
+
+三、代码暴露的主要风险是混合了时钟、信息处理和信用，而不是已经发现一个 duration bug。 已读的原生低层路径每 tick 输入当前 observation 并推进 GRU；episode/done 的隐藏状态处理与高层重采样不同。sampled_mask 即使重选旧标签也结束／开始高层片段，switched 才记录标签变化；团队重决策又会采样所有成员。因此必须分别记录重决策、真实标签变化、团队／个体片段和低层行为。新时长头须记录真实联合选择的 logπ(z∣h)+logq(k∣h,z)，不能把一次时长选择当成 τ 个独立高层动作。折扣目标按实际持续 τ 累积原始步奖励并用 γ
+τ
+ 接续，真实终止与截断按宿主契约处理；这是新实现的一致性要求，不是宣布旧代码漏了折扣修复。另一个容易漏掉的混杂是：partial assignment 输入当前中心 state/observations，相应 running normalization 若启用，会在决策子集更新；改变边界频率可能改变统计量的采样分布。新比较应统一 normalizer 的更新规则，并说明实际样本分布差异，不能给一个臂额外的高频中心信息再称纯时长收益。现有 CF held-snapshot 路径明确不支持 D2，不能直接拼接。所有臂保持同一合法信息源、真实可用的遥测频率、低层记忆和终止语义；模型调用与通信成本另报，不给原生 reward 加一个并不存在的“重新决策罚款”。
+arXiv
+
+四、推荐的时长策略是“边界条件菜单＋可释放先验”，第一版先不引入每个 agent 独立的自由时钟。 在共同高层边界先选团队及个体技能组合 z，再选一个团队共享的周期 k，策略写成
+
+π(z,k∣h)=π(z∣h)q(k∣h,z).
+
+菜单只含一个较短周期、k
+0
+	​
+
+ 和一个较长周期，具体值按选定宿主确定，不在本答复虚构冻结参数。条件化于 z，避免把“该技能适合维持多久”假设成与技能无关；保留原有闭环低层，不把 k 变成速度复制。共享周期把第一次研究限制为同步可变时长，明确不涵盖全部异步终止。结构化臂采用
+
+q
+b
+	​
+
+(k∣h,z)∝exp[f(h,z,k)+b(B)1{k=k
+0
+	​
+
+}].
+
+b 的释放时间在结果前按训练曝光固定，末段 b=0；训练中其他菜单项保有非零支持，但不宣称因此就有充分覆盖。直接臂使用相同网络和菜单、从开始 b=0。首试不另购固定周期预训练，也不同时改变信用损失、低层奖励或增加规划器；这样偏置是可识别的训练设计，不是未计费 warm start。代价是放弃段内随时中断；突然且无法预知的变化可能使长承诺吃亏，这个限制应接受，而不是实验后补一个自由 gate。这是对题目选项一的具体化，而非现有代码已经实现的功能。
+
+hmasd-pro-question-temporal-lea…
+
+五、最小有用比较仍是三臂，但要明确两个对比回答不同问题。 固定臂也正常训练高低层；它采用事先说明的、有能力的 k
+0
+	​
+
+ 配方，而不是已经退化的 CF。可变两臂共享所有非偏置设置，低层更新按相同 primitive-rollout 日程组织；高层有效片段数随周期改变，这是方法实际成本与数据分布的一部分，不强行把每种更新计数做成相等。选主资源轴为真实团队交互 ticks T，主终点为 T 时完整原生回报；少量预写曝光点的学习曲线及固定权重面积作为次读数，不挑最好 checkpoint，也不改用每段平均回报悄悄重加权任务。独立重训实例是学习推断单位，评估 worlds 不是额外 seed。k
+0
+	​
+
+ 的选择、预训练、诊断、调参与所有模拟／评估都记成本；若后来确需共同 warm start，固定臂也须得到相称的训练日程，而且共同前缀不能制造独立复制。三臂各三个独立实例是九 fits 的设计示例，不是已选批次；尚未声明实际 horizon、节点和种子。
+
+臂	执行与训练	主要解释用途
+F：固定周期	同一闭环技能架构，始终 k
+0
+	​
+
+，正常训练	当前有限资源下应否保留固定周期
+D：直接可变周期	相同小菜单和条件时长头，始终 b=0	扩大选择后直接训练的完整结果
+S：结构化可变周期	与 D 同类、同架构，仅增加预写且最终撤除的偏置	S−D 检验训练组织；S−F 检验这套可变周期学习包的使用价值
+
+六、最强竞争解释是“偏置只是正则化或找到更好的常量周期”，不是已经学会按状态配置时间。 我愿意检验的中间预测是：偏置释放后，非 k
+0
+	​
+
+ 选择有真实学习曝光，在合法可见的服务变化、约束余量或技能阶段中形成有区别的周期选择；原生预测是改善累计服务与恢复，同时不以更多失联、能量代价或其他既有任务损失抵消收益。仅有时长熵变化、更多短周期或更少调用都不算完成这条预测。若 S 优于 D 却不优于 F，就不保留新增时长复杂度；若 D 与 S 都有用而偏置没有额外价值，保留更简单的直接训练；若 S 改善回报却几乎只选 k
+0
+	​
+
+，应记为训练组织收益，而非自适应部署证据。 若要把正结果进一步归因为状态条件 timing，可另声明同 checkpoint 的固定周期／不依赖状态的时长规则部署对照，但该对照有评估成本，也可能改变访问分布，不能替代重训结论。三臂比较本身不证明胜过“所有最佳 fixed k”，也不分离所有共同学习机制。没有有用增量就结束这套菜单／偏置方案，不自动拉长训练、增加菜单、换种子或复活 suffix-credit。按预写任务尺度和不确定性作投资判断；精度不足时记为未决，不把不显著当等价。
+
+hmasd-pro-question-temporal-lea…
+
+七、时长主线现在值得的是直接学习比较，不是再做一轮未校准触发器筛选。 E3 的 c=.25 由 runner 明确固定；其大行负结果和不同优化曝光约束这个包，而不是全部可训练终止。另一方面，UCOPE 已经有学得的二元 KEEP/END 和真实后缀比较，因此“这次终于训练 gate”并不是新理由。上述新理由必须同时成立：研究闭环技能而非两 tick 速度复制；限制时长分支；在相同可变类中直接检验训练组织。固定 k 的信用改造只有在指出具体目标构造如何改变学习时才值得单独测试，不能说有更多 primitive feedback 就等于更多独立决策样本，更不能从真实旧后缀生成未执行新技能的标签。宿主优先考虑已注册训练路径的版本明确 Scenario7 S4，但不把旧 S3 arm-A 结果当当前 interface-v3/reward-v2/arm-C 的基线。Root 已核对 restoration 的数据和入口缺口，无需再宽泛审计，也不以 synthetic 替换缺失 Milan cache。两宿主不同时展开；脚本时钟探针是可选证据，不是这次学习探索必须先赢的关卡。
+
+hmasd-pro-question-temporal-lea… +1
+
+八、固定 k 的第一选择：让学习器判断“短窗口里真正能兑现多少服务”，而不是只给几何或瞬时信号打分。 我建议先保留现有合法技能／行动候选和同一反馈执行器，对包含强基线原选择的有限候选集合做短窗口估值，再只学习其剩余误差；不要同时引入新导航器、无限 joint-action 搜索和新 duration。一个研究表达是
+
+Q
+	​
+
+(h,z)=
+Q
+	​
+
+phys,L
+π
+0
+	​
+
+	​
+
+(h,z)+
+ΔQ
+	​
+
+ϕ
+	​
+
+(h,z).
+
+普通预测器用已知运动、信道、容量／服务结算和明确的未知量估计，评估候选及共同 continuation；残差学习真实数据尚未被这个参照解释的价值，而不修改原生奖励。训练标签须对应实际执行的候选和所声明的后续策略；不同后续策略的数据不能未经说明就当作同一价值目标。L 在结果前按该宿主的行动后果确定，不把 C 的 NEAR 终点移作通用规则。具体可区分的问题是：向信号较强位置移动，究竟带来新增可服务需求，还是挤占队友服务、损害现有连接或遭遇该任务已存在的回传／能量约束？其中后两类只用于实际包含这些机制的宿主。中间预测应是对有分歧候选的服务价值排序更可靠，任务预测必须是完整原生服务提高，而非位置更漂亮、prediction MSE 更低或移动更少。这个方案是本文提出的设计，尚无新实验支持；其依据是已有共识中的已知物理、未知联合后果和有限学习区别。
+
+hmasd-pro-question-temporal-lea…
+
+九、这个 fixed-k 方案先要胜过普通模型，而不是先胜过一个弱 proposer。 最有用的参照是：有能力的原固定 k 学习包、同候选／同导航的普通短模型排序、以及该排序加学习修正。普通模型必须获得合理且明确的数据、模型先验和选择权；它已经吸收收益时，就采用普通模型，停止追逐神经增量。初次相对原学习包的结果仍是包含模型先验和计算的包比较，不是“完全同先验、同算力”的结论。若声称残差参数化本身提高有限学习效率，还要与获得同样物理预测特征的直接价值学习器区分；若只是相同预测器的代数重写，不能当独立机制。MGTAP resumed late-512 的 COND−DENSE 为 −0.005375 J，且曾有正例，说明不能靠重新命名需求／几何加权来制造新证据；ACVC 对较弱 proposer 的提升也没有建立对 MAPPO 的稳定优势。这里可能新的问题是实际服务后果先验能否改变有限资源下的行动排序和原生回报，不是“又加了 attention、残差或语义”。
+
+十、合法信息和真实反馈是这条路线最重要的限制，也限定其他 fixed-k 选项的排序。 已知 g(Y) 不给出未知 Y；应对允许的联合后果分布先算 g 再求期望，不能用 g(E[Y]) 替代。中心控制者能够查询自己的当前策略时，应保留这项权利，不能人为把自己的采样律变成未知量。B09 正在研究外部队友共享私有创新的受控问题，不能把它重新包装为当前 HMASD 的已证实缺陷。短模型也不能直接克隆带未观测真值的 simulator，或把模型预测的未执行候选后果当事实标签；残差训练需声明行为覆盖和 continuation，蒸馏还需计教师数据与计算。M 个候选、L 步、P 个模型样本的朴素评估约有 M×L×P 次模型推进，另计低层策略查询等工作；零新 policy fits 并非零成本。相较之下，我把**“强基线保留的服务目标／几何动作残差”放第二，固定 k 的预测辅助／区间信用放第三**：前者需具体的行动缺陷，后者需真实目标到策略收益的判别；VNFC 无终点不能充作正或负证据。通信时机只作真实 cache／delay 宿主的条件备选：CADC 的单配对 net −0.0133549、physical −0.0120992 仍是反面证据，不能由碰撞数独自解释，更不能把消息调度安装到没有该接口的任务。
+
+hmasd-pro-question-temporal-lea…
+
+十一、值得构建的方法与可辩护的新研究结论必须分开。 FiGAR 已学习动作及重复时长，Option-Critic 已学习 termination；Residual RL 已把传统反馈和学习残差结合。它们支持设计类比，不给这次方案新颖性、UAV 收益或安全保证。尤其本文的闭环技能时长与 FiGAR 的原始动作重复不同，服务价值残差与 Residual RL 的动作叠加也不同。可以争取的结论是“在声明的 UAV 任务、信息、训练资源和参照下，某种时长训练组织或物理先验使用方式提高了达到的原生价值”，而不是发现了一个新门控概念。当前被加强的是对完整原生语义及强普通参照的重视；被削弱的是靠增加门控自由度、局部非零 delta 或通用几何模块自然获益的期待；仍未解决的是闭环技能可变时长能否在有限资源下获益，以及 fixed-k 的剩余价值是否真值得学习。 若普通参照足够、增量只在代理指标上、收益抵不过明确计入的资源，或新解释不再给出不同的可行预测，就停在当前范围；不要求先证明整个方法类失败。
+arXiv
++2
+arXiv
++2
+
+十二、来源与执行缺口。 本文依据固定提交 87596d3a5207c5aedc4400f2d39a7e2423c83637 的问题、前一轮 Question／已保存答复／Root Decision、该版本宪章和两项方法、FOUNDATIONS §2–6、agent.py 指定关键路径、E2/E3 绑定与 E3 结果，以及 MGTAP、CADC、ACVC 原记录。论文核对范围为 Metelli 的引言／方法概述、FiGAR 2017 原稿相关方法、Option-Critic 摘要、Residual RL 摘要及方法段；FiGAR 的 OpenReview 页面未能直接取回，已通过作者 arXiv v1 原稿核对，不以记忆补全。没有重读所有旧 raw arrays、运行模型、训练、仿真或独立复验历史 hash；B09 和宿主本地可用性采用当前题目及 Root 的有来源核查，不声称本次 SSH 验证。尚缺的是新时长头的实际实现、选定宿主的最终训练契约和成本，以及合法短模型／残差数据的具体构造。 它们限制“现在已经可直接运行”及“已有收益”的断言，不妨碍选择上述可检验研究问题。FSD 的 reserve／Claude 所有权及 B09 的独立责任不因本建议改变；本次没有启动批次，也没有修改代码、方向表或 Decision。
+
+hmasd-pro-question-temporal-lea…
+```
+
 ### Decision
 
 #### Owner correction and current adoption scope
@@ -4357,7 +4572,8 @@ During the accepted Pro request, the owner clarified:
 Root adopts this correction. The pinned Question stays unchanged, and Pro retains only
 its Answer subsection. The earlier draft priority of a common team-clock curriculum plus
 a UAV-specific lookahead controller is not adopted as the main algorithm route. The old
-request is being collected on the same accepted key; its advice will be reconciled below.
+request was collected in full on the same accepted key; its applicable advice is reconciled
+below. The reply addresses the frozen pre-clarification question, not a new MARL design.
 No second Send, fit, rollout, direction activation or transfer of FSD's Claude ownership
 follows. This is research reframing, not a new algorithm claim or an accepted experiment.
 
@@ -4470,8 +4686,15 @@ HMASD 学习算法进步。FSD/UCOPE 旧配方不重启；它们削弱有局部�
 随后 main `5653f8fa151f030be079596396e864843a91f2ac` 发布了该 DM 自己接受的
 [B10 固定规则比较](https://github.com/CartmanFatass/My-paper-code/blob/75ef4a931de474ab27e6903c6f16929eab932d85/docs/research/candidates/skill_teammate_drift_learning/NOTES.md)：
 冻结 B09 三个 final64 学习结果，在新随机世界中与始终向内/向外两条规则分别比较，
-零新 fit。Root 已读其完整声明；这是该径向部署配方的投入判断，不是所有 MARL 学习
-必须先胜过任意规则的通用门槛。本次全项目重定位不改变这项已接受的独立工作。
+零新 fit。发布前该比较已完成，并由 DM 更新 main 到
+`c8310b3ea0542d8853ac3a0c72066ec147ba2763`。Root 阅读了其
+[完整结果与判断](https://github.com/CartmanFatass/My-paper-code/blob/8f7a8ba197f9a9cf9ba60068b55b10febbcf3dd0/docs/research/candidates/skill_teammate_drift_learning/NOTES.md)：
+J 对 IN/OUT 的三个 base 均值均为正，分别在 9/12 和 6/12 个世界胜出；M 与 OUT
+完整轨迹相同。这削弱 J 被这两条固定规则吸收的解释，应保留其条件部署价值，不能
+让 B09 的负面读法遮蔽新证据。它仍是同三个旧学习结果的新评价，不是新训练确认，
+也没有测 HMASD 的内生共同学习或证明学习对所有状态反馈规则都必要。该径向配方
+的投入判断不构成所有 MARL 学习必须先胜过任意规则的通用门槛；最新 B row 原样
+保留，本次重定位不接管其独立研究。
 
 UAV 应暴露真实团队耦合：容量竞争、共同覆盖，以及 Scenario 7 的接入—回传与返航
 接替。比较保持同一版本、信息和 native objective。Scenario 1 没有用户移动、回传、
@@ -4481,5 +4704,43 @@ UAV 应暴露真实团队耦合：容量竞争、共同覆盖，以及 Scenario 
 
 当前收敛的是研究问题和证据位置：可变 k 聚焦联合技能的协作探索与价值学习；固定 k
 聚焦技能用途、信用和共同学习。共享认识只收录经过源码或文献核对的区分与边界，新
-候选没有被写成已证实共识。收到完整咨询后，只采用仍适用的部分，不将旧问题的咨询
+候选没有被写成已证实共识。完整咨询已读，只采用仍适用的部分，不将旧问题的咨询
 当作新架构认证。
+
+#### Consultation reconciliation — 2026-09-21
+
+The complete advisory answer above was read before publication. Its `MATERIAL_DISSENT: no`
+refers to the frozen Question. Root's later priority differs because the owner's correction
+changes the organizing research question; this is not an unreported adoption of the proposed
+three-arm design.
+
+- Adopt the conditional, non-strict policy-class comparison and the distinction between
+  attained value and its unmeasured exploration/estimation/optimization/co-learning causes.
+  A duration menu alone does not prove that complete fixed-clock behavior is reproducible.
+- Adopt complete cost accounting, training-instance versus evaluation-world distinctions,
+  competent ordinary references and fixed outcome interpretation. The answer's nine-fit
+  example is not a registered batch, allowance or required matrix. Its S7-S4 preference does
+  not select a host or restart FSD.
+- Retain the execution/credit consistency advice for any future implementation: true joint
+  action probabilities, actual elapsed time, declared continuation and the host's terminal
+  semantics. These are not newly diagnosed bugs in the current code.
+- Root additionally checked the normalizer observation against
+  [the D2 decision-subset path](../../hmasd/agent.py#L2639) and
+  [normalizer definitions](../../hmasd/agent.py#L1491): when enabled and training, that path
+  contributes running-statistic updates. Boundary changes can change its sampling weights;
+  other paths can also update the same statistics. No effect size or existing failure has
+  been established. This complements the separately verified `chunk_length=config.k`
+  coupling, rather than attributing every difference to exploration.
+- Keep the shared-clock released prior as a possible training technique/comparison, not the
+  selected answer to individual asynchronous coordination. Shared-clock MARL is legitimate;
+  it simply answers a different temporal question. No prior schedule or duration menu has
+  been frozen here.
+- Keep short physical models, residual value and candidate ranking as possible model-based
+  MARL components or strong references. Do not adopt them as the programme's fixed-k first
+  priority merely because they improve a controller. Skill usefulness/composition, credit
+  and co-learning remain the main questions after the owner's correction; the reply does
+  not establish their bottlenecks or certify a new architecture.
+
+Publication includes the full advice, Root's scope correction and the verified consensus
+updates. This review used zero new training fits, rollouts or scientific evaluations. Existing
+independent direction work and the current direction rows retain their published meaning.
