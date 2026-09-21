@@ -1706,3 +1706,173 @@ continues its own research. Published evidence may be read for a concrete scient
 dependency; ordinary Git concurrency is resolved locally. Necessary Jev Pro and bounded
 internal helpers remain available under the current method. Initializing or finishing
 one experiment does not itself end the direction's research responsibility.
+
+
+## 2026-09-21 02:48 PDT — B05 unknown joint law: prospective comparison and L0
+
+**Decision and prior reasoning.** Begin the unknown-law comparison selected in the
+02:30 entry. Reuse the complete Portfolio Pro advice at `3007808f6` and DM synthesis
+`b6093d211`: this implements their public recurring context/version, persistent unknown
+joint outcome law, stable conditional response, common passive collection and competent
+direct-value controls. There is no new question or confirmation claim needing a duplicate
+consultation. B03's early benefit and B04's unstable support-to-decision explanation remain
+evidence; neither is a result for this new interface. No production score has been read.
+
+**Host and legal information.** Four opaque public contexts cycle 0,1,2,3. Version 0
+lasts 2,048 macros; the announced version change starts 256 target macros of version 1.
+Each (context,version) has one fixed, initially unknown categorical law for cooperative
+outcomes (00,01,10,11). In each version the four probabilities of 11 are a fresh random
+permutation of (.35,.55,.65,.85); remaining mass is split among 00/01/10 by fresh
+Dirichlet(1,1,1) draws. Versions are generated independently per block. This balances
+safe/cooperative opportunities and two near-boundary contexts before data; it is a
+declared task family, not a post-score threshold search. Reward remains SAFE
+Bernoulli(.60), COOPERATIVE Bernoulli(.95) for 11 and Bernoulli(.05) otherwise.
+The optimal decision threshold stays 11 probability 11/18, inherited from B03.
+
+The three-tick terminal skill interface is retained, but the old independent per-agent
+hazards are explicitly replaced by the above possibly correlated joint completion law.
+The environment privately samples the terminal pair; each successful agent completes
+at an independently drawn tick 1..3 and holds, while an unsuccessful agent stays at 0.
+SAFE holds both positions at 0. Only the public key/age is available before the macro;
+collected action, final pair and reward arrive afterward. Private law, completion
+schedule, random slots and true means never enter learner or selection APIs. This is
+a controlled exogenous teammate-law experiment, not endogenous MARL, native UAV or a
+duration-learning claim. No change to Claude's FSD object or any shared runner.
+
+One common collector chooses SAFE/COOPERATIVE with probability 1/2. All methods receive
+the same complete history, current public key/age and same pre-outcome estimated law.
+The shared probability learner is an action-conditional Dirichlet table per public key,
+total prior mass 2 uniformly spread over four outcomes. It updates only after an
+observed COOPERATIVE outcome. SAFE's deterministic 00 is never evidence for that law.
+A new version gets a new table. No old feature is recomputed using later outcomes.
+
+**Learning comparison and finite development rights.** Three final decision families:
+
+- `response_all`: all-history conditional reward means for four cooperative outcome
+  cells, integrated under the current estimated law; Beta prior mean .5.
+- `fingerprint_full`: ordinary direct cooperative-reward estimation from all history.
+  Its finite bank includes `law` (four estimated probabilities), `cell` (tabular public
+  context/version), and `hybrid` (probabilities plus a context/version residual).
+- `fingerprint_recent`: the same direct bank with FIFO window 64 or 256 macros for
+  cooperative training. Whole raw history remains available; forgetting is a training
+  rule, not restricted information access.
+
+SAFE has the same all-history scalar Beta(.5 mean, total mass 2) estimate in every fit.
+This competent common choice removes irrelevant SAFE-window variance. Cooperative
+prior/regularization strength is selected from {2,16} for every family. `law`
+coefficient prior is (.5,.5,.5,.5); `hybrid` uses those coefficients plus zero cell
+residuals; `cell` uses independent .5 means. Isotropic ridge precision applies to
+regression coefficients; Beta mass applies to cells. These are different priors, not
+claims that an equal number makes representations equivalent. Each family selects
+independently. Bank: 2 response + 6 full + 12 recent settings, including the strong simple
+current-cell estimator as well as law-based transfer.
+
+Development blocks: **95001,95002,95003**. Collect once per block; train all 20 settings
+prequentially for 2,048+256 macros. Select one setting per family by mean first-64 target
+doubly robust reward score using lawful pre-outcome predictions and observed feedback:
+`q(greedy) + 2 I[collector=greedy] (reward-q(collector))`, with clipped q. Conditional
+on the past its expectation equals the greedy action's value under the common random
+collector. Ties within 1e-12 use lower whole-target observed reward Brier score, then
+lexical setting id. This is finite, noisy development selection, not oracle tuning or
+proof of globally optimal comparators. Save all settings and scores.
+
+Held-out exploration blocks: **95101,95102,95103**. Train only the three selected settings
+fresh, same family/horizon. Bind saved selection bytes by SHA256 in the invocation before
+any final fit. No final result selects a setting, seed, endpoint, schedule or additional
+batch member. All six block identities are fixed now. This is exploration after
+development, not the separate confirmation stage.
+
+**Predictions and readings.** Shared-law estimation is expected to attenuate the old
+known-law advantage: response reuse may still reduce early sign errors, but current-cell
+or simple direct learning may catch up or win. Primary: first-64 target mean exact
+decision regret (max true action value minus chosen value), paired through common
+collection within each independent block. Retain signed response-minus-reference task
+values, full-256 mean/cumulative regret and late-64, action counts, sign mistakes and
+value errors. Evaluator-only diagnostics separate cooperative response error
+`p_hat dot (m_hat-m)` from law error `(p_hat-p) dot m`, keep law L1 error by age/context,
+and evaluate known-response/estimated-law choices as a privileged diagnostic, not a
+fourth learned arm or an achievable upper bound for every learner. Predictive improvement
+without better choices is not task benefit. Adverse results do not become universal
+judgments about drift or reasons to change rewards.
+
+**Prospective cost and execution.** CPU `local_linux`, float64, one BLAS thread, no GPU,
+one idea and two sequential stages. Development: 60 decision fits + 3 shared-law fits.
+Held-out: 9 decision fits + 3 shared-law fits. **75 planned fits total** (69 decisions,
+6 probability learners); posterior updates/ridge solves are learning, zero gradient
+optimizer calls. All horizons 2,304 macros. Per block: 6,912 unique primitive ticks;
+total unique collection **41,472 ticks / 13,824 macros**. Decision reading exposure:
+**476,928 ticks / 158,976 macros**. Probability updates depend on collector draws and
+will be reported. Exact greedy evaluator: 158,976 two-action panels, plus 13,824 shared
+known-response/estimated-law diagnostic panels; zero new environment ticks and zero
+evaluation reward draws. Selection adds arithmetic, not fits. The finite bank buys
+prior/window/representation competence rather than extra final seeds. Wall/RSS unknown
+until measured; ordinary CPU estimate minutes, not a scientific time endpoint. No
+post-score batch extension. Technical failures retain their identities.
+
+**L0 implementation.** Own only new
+`experiments/candidates/skill_teammate_drift_learning/unknown_law_b05/`, mirrored tests,
+`scripts/run_skill_drift_unknown_law_b05.py`, this notebook/runs. Implementer owns
+`learning.py`, `study.py`, package marker and mirrored tests; DM owns runner, publication,
+selection binding and final acceptance. No shared/core/FSD edits, no launch or Pro from
+Implementer, no new App tasks or inter-session messages. Preserve rewards, common
+collector, prequential order, causal probability features, action-conditional support,
+fixed seeds/horizons and separate exact evaluator. Small deterministic tests cover
+SAFE exclusion, public-key resets, temporal leakage, common-data identity,
+regret/decomposition identities, real estimate movement, FIFO subtraction and result
+contracts. Runner/source binding is tested by DM. Correctness fixtures are not pilots.
+Independent Reviewer checks scientific executable paths before native launch. Repair
+reachable semantic defects before the dependent run.
+
+## 2026-09-21 02:58 PDT — B05 outcome-blind prior correction after independent critique
+
+The internal ResearchCritic identified a material issue in the initial declaration:
+uniform four-cell reset puts prior 11 mass at .25, despite lawful source observations
+of a context-balanced family whose average 11 mass is .60. For the .65 context with
+eight cooperative observations, the mean mass-2 uniform posterior is only .57. Even
+perfect conditional responses would then choose SAFE at the true 11/18 threshold.
+That is a discard-of-history effect, not clean evidence of the cost of estimating law.
+These numbers are algebra under the declared family, not a production pilot.
+
+**Accepted amendment, before any production result or fit.** Version 0 starts from the
+uniform mass-2 prior. At the announced version-1 boundary, freeze a new shared prior
+center equal to the arithmetic mean of the four version-0 context posteriors. Each of
+those distributions depends only on earlier cooperative outcomes and the stated prior;
+SAFE remains excluded. Every version-1 table uses mass 2 with that same frozen center.
+Use equal context weights because the context schedule is balanced. Do not copy the
+individual source context's law into its same-named target context: version laws are
+independently generated. Current-version feedback cannot change the frozen prior center.
+All decision methods still receive the identical pre-outcome estimate. This single
+shared probability-learning procedure adds no seed, arm, fit or tuning exposure.
+The original declaration stays visible above; this paragraph supersedes its uniform
+reset sentence. Exact seeds, reward, horizons, bank, selection and endpoints remain.
+
+Critique otherwise found the causal doubly robust selector and 75-fit/41,472-unique-tick
+cost arithmetic coherent. The DM accepts the correction and retains the narrow host
+and finite-development limitations; no claim of globally optimal law estimation follows.
+
+## 2026-09-21 03:06 PDT — B05 implementation and bounded checks, before launch
+
+The DM read the Implementer's learner/study diff and authored the admitted two-stage
+runner, legal-feedback-only selection and byte-bound held-out input. The corrected
+public-boundary prior is implemented and traced; every direct regression row permanently
+keeps its pre-outcome estimated-law feature. Candidate truth decomposition and exact
+task values are evaluator outputs, not learner/selection inputs. Scoped learner and
+shared-law timing is separate from complete process/collection/serialization wall.
+
+The focused package and runner suite passed **24 checks** (latest full invocation .17s),
+including SAFE exclusion, boundary-prior history, explicit FIFO expiry/reconstruction,
+pre-outcome feature immutability, true-law isolation, regret/decomposition identities,
+DR expectation, mechanical choice, missing/wrong admission, source mismatch, selection
+digest/tampering refusal and artifact readback. An all-20-setting tiny finite/count check
+also passed. `git diff --check` is clean. No production-sized or held-out fit ran.
+
+Implementation checks cumulatively instantiated **41 tiny decision learners and 10
+tiny law blocks**, collecting 228 macros / 684 primitive ticks, with 948 decision-reading
+macros / 2,844 tick exposure. These correctness fixtures are separate from the declared
+75 production fits; they produced no investment/ranking observation. Two early tiny
+16+8 checks used development seed 95001 (48 collected macros, six decision learners)
+before the fixture was changed to seed 31; retain this exposure rather than describing
+all development identities as entirely unseen. All final identities remain untouched.
+DM-only runner checks added no learner updates. No throughput claim follows from tiny
+fixtures. Independent executable review is in progress; launch waits for its findings
+and DM acceptance, not an additional owner approval.
