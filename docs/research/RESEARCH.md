@@ -4744,3 +4744,225 @@ three-arm design.
 Publication includes the full advice, Root's scope correction and the verified consensus
 updates. This review used zero new training fits, rollouts or scientific evaluations. Existing
 independent direction work and the current direction rows retain their published meaning.
+
+## Portfolio review 2026-09-21 marl-concept-formation
+
+Conversation: reuse the current Portfolio Jev conversation through local transport state;
+private account/conversation details are not repository content.
+
+Owner request: "进一步做一下研究概念 角度的成型", following the correction
+"我发现当前切入点有问题 这本质是一个marl算法". Root owns this project-level concept
+review. It is reasoning and literature work, not a direction activation, implementation
+assignment or execution plan. FSD remains reserve and Claude-owned; B's independent work
+and all existing direction states remain unchanged.
+
+### Question
+
+**Decision sought.** Form one main research concept and, only if useful, one fixed-k alternative
+for improving HMASD as a MARL learner. Identify the scientific question, actual learning
+intervention, strongest ordinary explanation and a feasible discriminating comparison.
+Decide whether there is enough substance for a bounded next implementation, whether the
+current proposal is only an ordinary performance improvement, or whether no distinct method
+concept is yet justified. A new architecture/name or a positive result is not owed.
+
+**What changed since the previous consultation.** The prior question prioritized a shared
+clock with a released fixed-k bias and a UAV service-value planner. Its full answer is saved
+above at `9793fe22bbb8ea1115f14ef3e6b7a1904c6c1ec2`; Root retained its finite-resource,
+accounting and execution-semantic advice, but the owner's MARL correction changed the main
+research object. This follow-up asks about that materially different conceptual decision,
+not a resend or a request to approve the previous three-arm example.
+
+**Current basis and limits.** HMASD already learns team and individual skills, has a team
+latent and an autoregressive individual-skill coordinator, and trains skill discriminators.
+The low-level actor receives fresh local input every primitive tick and uses shared recurrent
+parameters. Variable skill duration is not primitive-action repetition. D2 partial assignment
+retains continuing skills; team renewal forces all members to renew. A global team cap can
+truncate a nominal longer individual duration. This must be explicit and common across
+comparators, not hidden as extra duration capacity.
+
+At the current source, the high-level value path does not explicitly receive held skills or
+their clocks; this is an input/estimation hypothesis, not proof of a bug. Normalizers can be
+updated on a decision subset, and low-level recurrent chunks use `config.k`. Raw primitive
+sample counts do not by themselves establish equal optimization exposure. These are reasons
+to construct competent common baselines, not proposed paper contributions.
+
+#### Main working concept: learn useful joint temporal structure of skills
+
+Working question: **When learned skills can last for different amounts of time, which
+organization of joint exploration and learning lets a team acquire useful temporal
+coordination within a fixed resource envelope?** Examples include maintaining one member's
+service while another moves into a complementary position, or changing roles at different
+times. These are desired learned behaviors, not existing positive UAV results.
+
+Let the legitimate pre-decision context contain observations/history and the currently
+executing skill commitments. For a declared-duration policy, a continuing member's remaining
+duration is its previously selected duration minus its elapsed age. It is not the true future
+termination time of a learned stochastic termination rule. Let S_t be the members eligible to
+choose at time t. Only these members choose new `(skill, duration)` pairs; other members
+continue their closed-loop low-level policies. A team-strategy clock is a distinct choice
+and must not silently replace individual asynchronous decisions.
+
+The intended mechanism is more effective exploration/learning of compatible joint temporal
+behavior, not a theorem that the number of combinations determines sample complexity.
+In particular, fully informed independent output heads can implement a deterministic joint
+mapping; waiting, staggering and role exchange do not logically require correlated random
+draws. Shared state or HMASD's existing team latent also induces marginal correlations.
+The open question is finite learning, not an automatic optimal-value separation.
+
+An ordinary, fully informed autoregressive `(skill, duration)` policy plus a competent
+history/commitment-aware critic is the strong comparator, not the claimed innovation.
+A factorized duration policy must retain the existing joint skill assignment and see the
+same legitimate context; calling it "independent" must not strip its information or shared
+latent. At events with one eligible member, a within-event autoregressive duration sampler
+has no cross-member sampling advantage; conditioning on already-held commitments matters
+in both policies. A new relation-based exploration or credit method would have to improve
+on that ordinary autoregressive reference, rather than merely on a weak duration head.
+
+One useful first comparison can distinguish fixed-k HMASD, ordinary factorized variable
+durations and ordinary autoregressive joint durations under a common native objective and
+resource axis. It measures complete finite-learning packages; a favorable difference does
+not uniquely identify correlated exploration. Actual duration marginals, decision counts,
+information cadence, normalization, recurrent sequence lengths and optimizer work need to
+be understood when attributing an effect. Equalizing every count can also remove part of
+the legitimate benefit of temporal abstraction, so attribution controls need a reason.
+
+Root asks Pro to make a specific judgment: is this already a worthwhile empirical research
+concept, or does a further explicit learning mechanism need to be selected now? If the latter,
+propose at most one coherent mechanism, with the strongest ordinary absorber and the actual
+intermediate/native prediction. Do not combine new exploration rewards, a new critic, a new
+discovery objective, a curriculum and a planner in one initial package. A generic new
+context input or correct asynchronous bookkeeping alone is not a novelty claim.
+
+#### Fixed-k alternative: learn useful complementary skills
+
+Working question: **Can the discovery process organize behavior around task-relevant joint
+consequences so that the coordinator learns useful skill combinations more reliably?** This
+separates distinguishable behaviors from useful combinations and from successful selection.
+HMASD already includes extrinsic team reward, so this is not a claim that task reward is absent.
+The original paper's own task-dependent usefulness and subgroup-flexibility limitations are
+motivation, not measurements of the current UAV learner.
+
+A sharper version asks whether a learned skill retains a useful task effect under different
+legitimate partner-skill combinations, rather than being useful only in the combination in
+which it co-adapted. Recombination value must be assessed by actual execution, not inferred
+from accurate factual predictions. This is a possible question, not evidence that native
+skills are currently brittle or that all tasks admit useful subgroup factorization.
+
+A candidate learning intervention is to retain the native objective and fixed clock, but
+use observed task/interaction outcomes to help learn the skill representation/discovery
+signal. An ordinary auxiliary outcome predictor, reward-weight retuning and the existing
+autoregressive coordinator are strong simple references. Outcomes must come from actual
+execution; unexecuted skill combinations do not acquire factual labels. If proposing an
+outcome-conditioned discriminator, explain what distinguishes it from ordinary auxiliary
+prediction and how it still preserves useful behavioral coverage instead of collapsing all
+skills into one successful behavior. Merely replacing positions with task feature names,
+adding attention or explicitly naming subteams is not an established contribution.
+
+Local subgroup coordination is one possible task structure, not a separate N-axis project.
+VO-MASD already learns subgroup skill structures from offline multi-task data. A new online
+HMASD proposal must not assume an available offline population or ignore that related method.
+S7 access/backhaul complementarity and return replacement can motivate a test; S1 has no
+backhaul/battery/user traffic queue and cannot support those claims.
+
+#### A subordinate objective-semantics warning, not a third direction
+
+In a simplified stationary renewal process with finite mean duration and a specified
+decision distribution, primitive-time occupancy satisfies
+`p_step(z) = p_dec(z) E[tau | z] / E[tau]`. With a perfect discriminator, the quantity
+`E_step[log p_step(z|x) - log p_dec(z)]` equals
+`I_step(Z;X) + KL(p_step || p_dec)`. Thus a mismatched decision prior can produce a positive
+score even when X contains no skill information. This is a derived warning, not a native
+experiment, and the current HMASD low-level reward is not literally that expression: it has
+log-discriminator rewards and separate high-level entropy terms. We have not diagnosed its
+objective as wrong. Asynchronous joint decisions also require a carefully defined event
+distribution, rather than multiplying per-agent renewal formulas.
+
+Occupancy/prior correction is an obvious ordinary explanation; class balancing alone need
+not correct the policy objective. Longer useful exposure can legitimately improve native
+return, so making all occupancy distributions identical is not a universal prerequisite.
+Keep this issue as a diagnostic/interpretation boundary unless evidence makes it material.
+
+#### Prior art and inherited contrary evidence
+
+- Han et al., Dynamic Termination, §4, already condition values on teammates' last broadcast
+  options and learn a termination action with an explicit termination price. Root read the
+  method. This blocks a broad novelty claim for teammate-aware termination; do not import
+  its delayed communication or termination fee into a host that does not have them.
+  https://arxiv.org/pdf/1910.09508
+- Mac-IAICC and ACAC study asynchronous macro-action learning; a Scout read their actual
+  method/setting passages and reports supplied macro-actions/durations, individualized
+  histories/critics or decision alignment. ACAC is stronger than merely concatenating age
+  into a feed-forward value head. Verify the relevant passages before using their boundary
+  as a novelty argument; absence from these two methods is not an exhaustive novelty search.
+  https://arxiv.org/abs/2209.10113
+  https://proceedings.mlr.press/v267/jung25a.html
+- MAVEN already uses a shared latent for temporally committed joint exploration; the Scout
+  read §4 and Algorithm 1. HMASD also already has a team latent, so generic shared randomness
+  is not a new mechanism here.
+  https://proceedings.neurips.cc/paper/2019/file/f816dc0acface7498e10496222e9db10-Paper.pdf
+- Root read VO-MASD §3 and its fixed-H definition: offline subgroup skill discovery already
+  exists, with different data and execution assumptions.
+  https://arxiv.org/html/2405.16386v2
+- FSD's fixed E3 trigger/exposure results and UCOPE's learned KEEP/END suffix-credit route
+  remain adverse evidence against their specific recipes. UCOPE already learned a gate;
+  "learn termination this time" is not a new reason. A's extra reuse corrections and
+  FOLR/MGTAP/ACVC's representation/proposer results also prevent treating cleaner proxy
+  metrics as evidence of final team benefit. These bounds are summarized with pinned sources
+  in the immediately preceding Root Decision; do not reinterpret them as universal failure
+  of skill duration, joint learning or all representations.
+- B10's conditional deployed gain is retained alongside adverse B09 worlds. It involves
+  ordinary count learning under an external-controller contract, not HMASD's endogenous
+  skill co-learning. It does not settle either concept above.
+
+#### Scope, cost and requested answer
+
+Current work: **zero new fits, rollouts or scientific evaluations**. It is a conceptual
+comparison and primary-source review. No horizon, seed set or batch is accepted here; any
+later learner comparison must declare its actual fits and dominant interaction/update cost.
+Do not demand exhaustive headroom measurement, a positive toy, every baseline trained first
+or a new administrative gate before a useful direct comparison. Do not select a new N-axis
+project, add native reward penalties or assume missing information interfaces.
+
+Please return a concise concept formation answer: one recommended main question; its most
+defensible mechanism and the ordinary baseline that might absorb it; the intermediate and
+native outcomes that separate explanations; one fixed-k alternative if it adds something;
+what is presently just good engineering and what could become a research contribution;
+which new observation would justify continuation or stopping. Explicitly challenge weak
+premises, including the independent-head/correlation distinction. `MATERIAL_DISSENT yes/no`.
+No invented success probabilities or claim that the method is already novel or effective.
+
+An independent ResearchCritic gives MATERIAL_DISSENT: yes against describing the present
+component combination as a new algorithm. It prioritizes the temporal learning question but
+finds no selected single learning intervention yet; it treats fixed-k partner recombination
+as the sharper alternative. It does not require an optimal-headroom proof, a positive toy or
+a full baseline matrix before a useful comparison. Please address that substantive dissent.
+
+Context (all repository paths use source_sha supplied in the send, unless pinned otherwise):
+- `docs/project/OPERATING_CONSTITUTION.md` §§1–5, 7–8: current authority, advisory role,
+  evidence minimums and no additional gates.
+- `.agents/skills/hmasd-scientific-tools/SKILL.md`: Update the working explanation,
+  Simple-model and literature bridges, Comparators, Cost and exposure; apply these methods
+  to the actual scientific question, not as a checklist or requirement for many experiments.
+- `.agents/skills/hmasd-portfolio-task/SKILL.md`: Steps and Boundaries; constitution overrides
+  stale allowance/shared-writer language in the skill.
+- `docs/research/RESEARCH.md`: current rows and the preceding
+  `temporal-learning-and-uav-design` Decision at `9793fe22bbb8ea1115f14ef3e6b7a1904c6c1ec2`.
+- `docs/rl-marl-foundations-20260907/FOUNDATIONS.md` §§3–5 at that revision: verified
+  distinctions; hypotheses remain hypotheses, not positive results.
+- `hmasd/networks.py` lines 756–857 and 968–1208; `hmasd/agent.py` lines 2286–2355,
+  2639–2665, 6300–6311 and 7177–7206 at that revision, only where the conceptual claim
+  depends on actual held-skill, duration, optimizer or low-level semantics.
+
+Write only this section's empty `### Answer` on branch
+`codex/project-research-coordination-20260921`, target `docs/research/RESEARCH.md`.
+Read the pinned question, but fetch the current target and blob before writing. Preserve
+every other byte, including this Question, direction rows and Decision. Stop on overlapping
+edits. If writeback is unavailable, return the complete answer in chat, not a receipt or
+source SHA; provide readable Markdown equations. Do not launch work or send another message.
+
+### Answer
+
+### Decision
+
+Pending the complete focused advice and Root's concept selection. Existing direction
+states, ownership and accepted operations are unchanged.
