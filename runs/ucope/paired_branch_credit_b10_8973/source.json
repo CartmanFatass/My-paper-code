@@ -1,0 +1,76 @@
+{
+  "object": "UCOPE_PAIRED_BRANCH_CREDIT_B10",
+  "launch_sha": "07605eecde6bba632b86ac2e92862057ea6d9fe2",
+  "files": {
+    "experiments/candidates/ucope/uav_motion_prefix_b01/policy.py": {
+      "path": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/ce49565047da42ec8ebed740321f845e/experiments/candidates/ucope/uav_motion_prefix_b01/policy.py",
+      "bytes": 6887,
+      "sha256": "e324640251d0d025549705ff7541b765e7b96733f422c48ee9c2f5bd07709614"
+    },
+    "experiments/candidates/ucope/uav_motion_prefix_b01/environment.py": {
+      "path": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/ce49565047da42ec8ebed740321f845e/experiments/candidates/ucope/uav_motion_prefix_b01/environment.py",
+      "bytes": 4819,
+      "sha256": "fb25e48857cc8531ac9b80f13243ccd6ca88fa5bf2b194a43dffed21c80690e6"
+    },
+    "experiments/candidates/ucope/uav_motion_prefix_b01/learner.py": {
+      "path": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/ce49565047da42ec8ebed740321f845e/experiments/candidates/ucope/uav_motion_prefix_b01/learner.py",
+      "bytes": 14150,
+      "sha256": "466ec7b0efabdf474f838b662e781a2b7a3b5e1c1a41096b6ccf0f00eb0471f1"
+    },
+    "experiments/candidates/ucope/lower_scale_reuse_b07/study.py": {
+      "path": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/ce49565047da42ec8ebed740321f845e/experiments/candidates/ucope/lower_scale_reuse_b07/study.py",
+      "bytes": 49401,
+      "sha256": "9564709a8ec48375116df9500ef7aa924bb429005753951ef7a289da8eaa968b"
+    },
+    "experiments/candidates/ucope/frozen_mean_gate_b08/engine.py": {
+      "path": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/ce49565047da42ec8ebed740321f845e/experiments/candidates/ucope/frozen_mean_gate_b08/engine.py",
+      "bytes": 21063,
+      "sha256": "a2401bccecd1fb9ebad772188c69a1bf9fca55af3e12a99dbb748af0ed961e40"
+    },
+    "experiments/candidates/ucope/frozen_mean_gate_b08/study.py": {
+      "path": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/ce49565047da42ec8ebed740321f845e/experiments/candidates/ucope/frozen_mean_gate_b08/study.py",
+      "bytes": 20695,
+      "sha256": "7d10bfee01921e648c9acdf581fe660cbb39613044f3e8a0e9a2d58ff6bfff50"
+    },
+    "experiments/candidates/ucope/normalized_distance_gate_b09/gate.py": {
+      "path": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/ce49565047da42ec8ebed740321f845e/experiments/candidates/ucope/normalized_distance_gate_b09/gate.py",
+      "bytes": 2072,
+      "sha256": "fa1ff3234b422e09134593bbb0d13b65b8ebccbe94e8af22280efb100d04d9b0"
+    },
+    "experiments/candidates/ucope/paired_branch_credit_b10/__init__.py": {
+      "path": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/ce49565047da42ec8ebed740321f845e/experiments/candidates/ucope/paired_branch_credit_b10/__init__.py",
+      "bytes": 82,
+      "sha256": "67e49210eb51ab3726b8d22a139379edc07eb62549ddc6d8bc08949be34c3b51"
+    },
+    "experiments/candidates/ucope/paired_branch_credit_b10/collection.py": {
+      "path": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/ce49565047da42ec8ebed740321f845e/experiments/candidates/ucope/paired_branch_credit_b10/collection.py",
+      "bytes": 9148,
+      "sha256": "7ca7a0a943887e61640ebcb5f96da7b50f5b7b4b00c62dc0a636006c9b7fe209"
+    },
+    "experiments/candidates/ucope/paired_branch_credit_b10/credit.py": {
+      "path": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/ce49565047da42ec8ebed740321f845e/experiments/candidates/ucope/paired_branch_credit_b10/credit.py",
+      "bytes": 5393,
+      "sha256": "db4f259f7630028f6b1a37be5974e6428b297276443704a3818d951fbf5081dc"
+    },
+    "experiments/candidates/ucope/paired_branch_credit_b10/learning.py": {
+      "path": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/ce49565047da42ec8ebed740321f845e/experiments/candidates/ucope/paired_branch_credit_b10/learning.py",
+      "bytes": 3254,
+      "sha256": "ffdbcb53e4ca94cd7ba48e6031e19fb0825bdf2388bb969d8f1f3327640c16ae"
+    },
+    "experiments/candidates/ucope/paired_branch_credit_b10/storage.py": {
+      "path": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/ce49565047da42ec8ebed740321f845e/experiments/candidates/ucope/paired_branch_credit_b10/storage.py",
+      "bytes": 5190,
+      "sha256": "1a6f53883c65f36f2311508265bc62b225735a5304c3ce743ae5b42f7d3a1f9b"
+    },
+    "experiments/candidates/ucope/paired_branch_credit_b10/study.py": {
+      "path": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/ce49565047da42ec8ebed740321f845e/experiments/candidates/ucope/paired_branch_credit_b10/study.py",
+      "bytes": 19282,
+      "sha256": "fbbdeba03ec7dc5699fcef9f5d6e895176b1f809d65388a7a51288e51703a7bc"
+    },
+    "scripts/run_ucope_paired_branch_credit_b10.py": {
+      "path": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/ce49565047da42ec8ebed740321f845e/scripts/run_ucope_paired_branch_credit_b10.py",
+      "bytes": 1425,
+      "sha256": "3affd66b7a81297a16ed4c8694f50c2053c9bac2afe60a1074cf8c36c067361b"
+    }
+  }
+}

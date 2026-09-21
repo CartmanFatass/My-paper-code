@@ -1,0 +1,11 @@
+{
+  "claim_key": "8a5ed59904846f39db9950490ea0650afec444926f068f4c7b3d2ec3e2fcdac8",
+  "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/8a5ed59904846f39db9950490ea0650afec444926f068f4c7b3d2ec3e2fcdac8.json",
+  "manifest_ref": "/home/fires/.codex/worktrees/1275/hmasd-wsl/runs/ucope/paired_branch_credit_b10_8971/launch-manifest.json",
+  "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/8a5ed59904846f39db9950490ea0650afec444926f068f4c7b3d2ec3e2fcdac8.json",
+  "pid": 3118809,
+  "runner_pid": 3118810,
+  "schema_version": 1,
+  "status": "accepted",
+  "updated_at": "2026-09-21T05:14:16.436513Z"
+}

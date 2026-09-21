@@ -6673,3 +6673,150 @@ All three original native operations remain active at the last cost-only observa
 R_CF and R_FULL complete and S_FULL training. No final outcome has been read or used to change
 the batch. Publish this consumer, then reduce the completed original records once they have
 successful terminal witnesses; any discovered integrity failure is reported on its actual scope.
+
+### 2026-09-21 05:54 UTC — B10 complete: real paired credit does not earn a retained policy gain
+
+**Execution and independent reading.** All three original operations for masters
+8971/8972/8973 exited zero with COMPLETE summaries, unchanged producing source
+`07605eecde6bba632b86ac2e92862057ea6d9fe2`, and consistent original runner/supervisor identities.
+All nine declared fits completed; none was retried, relabeled or extended. The last operation
+ended at 2026-09-21 05:49:54 UTC. The reviewed offline consumer at `e7344183621bd6c4d7f3d2f12a087ec95a8873a4`
+then verified all **3,120 promised artifact hashes**, reconstructed every scheduled pair's
+prefix/credit/exposure and RNG addresses, checked final command/eligibility laws and actual
+optimizer counts, and reduced all twelve final panels from raw FP64 rewards. It passed.
+An independent Reviewer used its own `math.fsum` reduction of the raw reward arrays without
+calling that consumer; all arm means and decisions agree, with maximum per-world arithmetic
+difference `5.551115123125783e-17`. Neither reading constructed a model/environment, forwarded
+a checkpoint, optimized parameters or added a native tick.
+
+The full reading is [B10 reduction](../../../../runs/ucope/paired_branch_credit_b10_reduce/summary.json).
+Raw pairs, final panels, all fitted weights/optimizer states, inherited foundations, source
+bindings and the original operation witnesses remain in the three declared run directories.
+
+| Master / frozen basis | R_CF J | R_FULL J | S_FULL J | G J |
+| --- | ---: | ---: | ---: | ---: |
+| 8971 / 8941 | 0.2754621158 | 0.2754561930 | 0.2754492291 | 0.2757134809 |
+| 8972 / 8942 | 0.2567722052 | 0.2566353889 | 0.2567723707 | 0.2563991987 |
+| 8973 / 8943 | 0.2549299191 | 0.2552971681 | 0.2549877625 | 0.2552710801 |
+
+| Contrast | 8971 | 8972 | 8973 | Mean of development blocks |
+| --- | ---: | ---: | ---: | ---: |
+| R_CF - R_FULL | +0.0000059228 | +0.0001368163 | -0.0003672491 | -0.0000748366 |
+| R_CF - G | -0.0002513650 | +0.0003730065 | -0.0003411611 | -0.0000731732 |
+| R_CF - S_FULL | +0.0000128868 | -0.0000001655 | -0.0000578435 | -0.0000150407 |
+| S_FULL - G | -0.0002642518 | +0.0003731720 | -0.0002833176 | -0.0000581325 |
+| R_FULL - G | -0.0002572878 | +0.0002361902 | +0.0000260880 | +0.0000016634 |
+
+Every contrast fails the prospectively stated all-three-positive and mean-at-least-.01 rule.
+R_CF earns neither retention over R_FULL/G nor preference over the stronger simple reference.
+Neither full-data learner offers the required useful advantage over G. This is an investment
+decision on selected developmental foundations, not a population equivalence or optimality claim.
+The 64 evaluation worlds per fitted policy are nested observations; one stochastic gate draw
+per world does not create additional independent fits.
+
+**What actually learned.** All gates and six full-data critics moved. R_CF gate L2 changes
+are .368659/.494244/.441692, versus R_FULL 4.085273/4.251997/3.266848. Thus this is not a
+non-started learner or a detached gradient. R_CF nevertheless ends close to a half-probability
+rule: eligible KEEP means .510721/.503331/.504272, conditional SDs
+.001297/.000393/.000446, and 33.73/33.32/33.61 percent of all agent ticks copied.
+The rich paired gate's observed context modulation is weak. Parameter movement alone cannot
+be promoted to a successfully expressed contextual credit mechanism.
+
+R_FULL expresses a substantially different intervention: mean KEEP probabilities
+.200188/.454424/.385721, SDs .018791/.070726/.006303, and copied fractions
+16.80/31.15/27.79 percent. Its stronger behavior changes still do not meet the native criterion.
+S_FULL has constant probabilities .476198/.503816/.484102 after 8,192 gate and 8,192 critic
+updates per fit. It is the declared full-data reference, not the rejected 256-update S_CF.
+Its limited realized movement therefore cannot be attributed to that old S_CF update bound;
+nor does full-data training demonstrate convergence or prove that no constant rate can help.
+
+The 3,072 actual branch pairs contain **681/685/687 eligible focal targets**. Their
+KEEP-minus-END normalized suffix deltas include positive/negative/zero counts
+284/282/115, 291/322/72, and 269/400/18. Means are
+0.000002943/0.000007038/0.000007505 and SDs .000092864/.000419978/.000251938.
+There are nonzero effects of both signs, including a +.009996 target in block 8972. These
+are actual targets under the successive old behavior policies, not an oracle upper bound,
+an estimate of predictable local opportunity, or a deployment gain. The positive mean target
+does not imply that a learned KEEP policy improves its changed visitation distribution.
+
+Positive deployment exceptions also remain visible: R_CF-G is positive on 18/27/24 of the
+64 worlds, with per-block ranges [-.008079, +.001935], [-.004965, +.020056], and
+[-.012020, +.008680]. The positive block-8972 mean and R_FULL's positive means in blocks
+8972/8973 are preserved. They do not establish a stable exploitable rule; they prevent the
+stronger, false conclusion that copying is behaviorally or causally inert everywhere.
+
+**Cumulative judgment and decision.** B08 did not establish that all rich gates were incapable;
+B09 expressed the previously weak distance feature but obtained no retained gain. B10 supplies
+the previously missing *real alternative suffixes* and verifies their native prefix identity.
+It still fails the direct finite learning comparison. This weakens the specific investment
+hypothesis that cleaner paired focal targets, at this fixed total exposure, will rescue the
+frozen max-two-tick velocity-copy package. It does not isolate estimator variance, identify
+which of sparse coverage/hidden team conditions/finite optimization dominates, or show that
+factual policy gradients lacked team reward or the right expected objective.
+
+Pro's complete prior answer explicitly predicted this outcome branch and advised retaining G
+if no new gate usefully exceeded it. Its task prediction is strengthened; my contrary decision
+to buy one direct paired test did not produce the proposed gain. Reuse that applicable advice
+and the prewritten negative branch rather than asking the same question again. The stronger
+S_FULL comparison removes the specific weak-simple-reference objection, while leaving the
+package-level claim restriction intact. No adviser endorsement is retroactively inferred.
+
+**Retain ordinary deterministic G and stop this B10 paired package on these foundations.**
+No higher learning rate, denser pair selection, longer training, additional architecture,
+copy-rate/noise sweep, local-slope probe, logger reconstruction or artificial switching penalty
+is selected. The technical assets remain usable: admitted deterministic branching, exact
+prefix and RNG reconstruction, FP64 credit, full-data controls and complete retained raw data.
+They are infrastructure, not a scientific reason to spend another batch.
+
+Original UCOPE remains **exploring, currently idle**, with no accepted operation or adviser
+answer left pending. Re-entry requires a new task-grounded reason why retaining the actual
+velocity command should improve on ordinary feedback, together with a feasible comparison
+that distinguishes that reason from the failed scale/credit repairs. A merely nonzero local
+delta, another favorable isolated world, or the fact that adaptive termination has not been
+disproved is insufficient. No such comparison is currently selected, and no dependency on
+Claude or Root is invented. This closes the tested package's scientific loop; it neither
+ends the broader research question nor transfers these command-copy negatives to persistent
+closed-loop skills or the separate team-conditioned termination design.
+
+**Actual cost.** The batch used **9 started/completed gate fits**, zero new foundation fits,
+4,718,592 training plus 196,608 evaluation team ticks = **4,915,200**, the same number of
+foundation calls, 24,576,000 recurrent agent observations, **49,920 gate + 49,152 critic =
+99,072 Adam calls**, and zero foundation/evaluation optimizer calls. Per-fit training walls
+(R_CF/R_FULL/S_FULL seconds) are 611.85/703.15/656.53,
+600.26/687.70/638.05, and 608.91/699.27/654.64. Full invocation walls are
+2054.90/2007.94/2040.33 s; summed invocation wall is 6103.17 s and process CPU 6102.18 s.
+First acceptance to last exit is **2137.83 s (35.63 minutes)** on local_linux, at most three
+single-thread invocations. Per-process peak RSS is 489748/491220/480924 KiB, not simultaneous
+aggregate memory. The promised artifacts occupy 2,965,155,099 bytes; all 3,072 full raw branch
+archives are retained, with publication split into bounded Git transfers rather than omitting
+data. Offline reading separately took 25.96 s wall / 25.86 s CPU and 314704 KiB peak RSS;
+engineering checks, independent review and Git publication are additional work, not hidden
+inside a claimed native speedup. No new scientific run or quota/window was created for closure.
+
+### 2026-09-21 06:09 UTC — Publication placement; full native arrays remain recoverable
+
+The complete scientific record, including all 3,072 paired NPZs, twelve full evaluation
+panels and all checkpoints, is committed in the local repository at
+`956fdc5ff7456700182f639e464f184b49182e1a` and remains at the original author checkout
+`/home/fires/.codex/worktrees/1275/hmasd-wsl/runs/ucope/paired_branch_credit_b10_{8971,8972,8973}`.
+The first block's paired archives also reached GitHub at `085874e656a8ee26b53f0380c0a3eef6358d94d7`.
+Two attempts to transfer the second raw-data commit remained very slow; each was stopped only
+after checking its own Git process identity and the remote ref. The remote still held the
+first raw-data commit. Neither interruption touched a native operation, source snapshot,
+artifact or local commit. A read-only direct-connect check also timed out; no global network
+configuration, Git history or stored data was changed.
+
+Revise the distribution plan, not the experiment: publish this same notebook plus all native
+JSON/JSONL records, source/admission/terminal bindings, complete artifact hash inventories and
+the full per-world offline reduction on `codex/ucope-b10-results`, from the already published
+reviewed source. Keep the full arrays/checkpoints in their original locations and committed
+local history rather than require another multi-gigabyte mirror transfer for the scientific
+update. This is a publication branch using the existing notebook and run directories, not a
+new research object or reporting system. The remote text records do not by themselves permit
+repeating the full raw-array audit; that audit requires the preserved native arrays. The actual
+audit above did read them. No completeness claim about a remote binary mirror is made.
+
+The complete-data author branch stays recoverable locally; its unpushed data commits are
+intentional. No native run, adviser response or data transfer remains pending. Independently
+publish UCOPE's scoped index update against the actual accessible result commit after this
+text publication is verified. There is no automatic background retry or new monitoring task.
