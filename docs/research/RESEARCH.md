@@ -4136,3 +4136,217 @@ if __name__ == "__main__":
 ````
 
 </details>
+
+
+## Portfolio review 2026-09-21 temporal-learning-and-uav-design
+
+Conversation: follow-up to the existing Jev Portfolio conversation; its private address
+remains only in local transport state. The previous question key is
+`hmasd:d9c7698cc28c96b97752091e931fdc5af1ef93da1b6b37e9f057eb1adcd39543`.
+The current question is identified by this unique heading and the published source_sha.
+
+### Question
+
+Owner request (verbatim):
+
+> 我们重新梳理一下项目的既有研究方向 当前陷入了长久的停滞 是否要考虑寻找新的解法或者新的方向 我希望从可变技能周期这个基本点开始 需要申明的是 扩大动作空间理论上会有更优秀的选择 但是探索压力更大了 我们如何做好这个权衡是关键;假如忽略这个可变技能周期 我们又能在当前research的共识中 挖掘出多少对于HMASD的改进 以增加性能 或者让其更贴合UAV基站服务用户的这一特定场景
+
+Decision asked: recommend a research approach that addresses attainable learning under
+finite resources, beginning with skill duration, and the strongest useful fixed-k UAV
+improvement. The owner has delegated project-wide management. This is a new substantive
+hypothesis/route question under constitution section 5, not another closure administration
+round. Prior Portfolio advice covered current investment closure, baseline interpretation
+and native clock-probe feasibility, but did not decide how to trade temporal policy capacity
+against learning difficulty or rank task-specific fixed-k learning mechanisms.
+
+Current standing: B is active with its independently declared B09 code preparation; FSD
+remains owner-reserved and Claude-owned; CPCP, VNFC and tail-return remain reserve. C,
+VSP-03, UCOPE and FOLR investments were archived in the previous project decision. This
+question launches no result-bearing operation, reopens no direction and changes no lead.
+New ideas are proposals, not reported gains. Retain the existing native B work rather than
+creating a duplicate direction. The requested answer should help the owner and Root select
+work, not require the owner to repeat permission for ordinary reasoning or preparation.
+
+Working explanation and new code facts:
+
+- Enlarging the temporal policy class may improve its optimum if the old fixed-k behavior
+  is still reproducible under the same information, low-level feedback/memory and boundary
+  semantics. Inclusion gives a non-strict optimum inequality, not an improvement guarantee.
+  Under a fixed task objective and resource budget B, define each method's expected attained
+  policy value and its gap to its own class optimum. Then
+  `attained_var - attained_fixed = (optimal_var - optimal_fixed) - (gap_var(B) - gap_fixed(B))`.
+  This is a conceptual identity; the unknown optima are not measured or prerequisites for
+  experimentation. The gap includes exploration, estimation, optimization and co-learning
+  effects. More choices do not universally make learning harder: useful temporal structure
+  can also organize exploration. We need evidence about the attained-value/resource curve.
+- Native FSD does not hold a raw velocity open-loop when k increases. `hmasd/agent.py`
+  `select_actions` around lines 3045-3123 supplies current low-level observations and
+  recurrence each primitive tick. Hidden state resets on episode/done masks, not every
+  high-level renewal. In `_e2_start_segments` and the coordinator selection path (around
+  2286-2346, 2707-2719), `sampled_mask` closes/opens a high-level segment even when the
+  newly sampled skill label is the old label; `switched` separately records label change.
+  Segment reward and credit statistics restart, while the low-level memory continues.
+  Thus execution commitment, actual skill switching and credit segmentation need separate
+  accounting. A follow-up source trace found that current coordinator state/observations are
+  encoded at evaluation and partial assignment; only masked team/agent tokens are resampled.
+  A team renewal samples all agents, while an agent-only renewal can be partial. Central-input
+  snapshots are explicitly incompatible with D2 (`agent.py:492-502`); same-label renewal does
+  not secretly reset observation or low-level memory. A nested variable class must be able to
+  reproduce all fixed-k boundaries and these semantics; the fixed class need not reproduce
+  every extra variable boundary. `scripts/run_flexible_skill_duration_e2.py:143-162` binds fixed D0 k and
+  adaptive D2 gap/cap choices; D2 tests coordinator gaps each primitive step. These are
+  implementation facts, not a finding that duration accounting is buggy.
+- FSD E3 was a fixed c=.25 heuristic, not a trained termination policy. Its native learning
+  packages and update counts differed. The negative comparisons constrain that package,
+  not all learned duration. Do not turn update-count equality into a universal requirement:
+  choose an interpretable primary resource axis, and account other material resources.
+- UCOPE B09/B10 already tried learned binary KEEP/END variants including the expensive
+  suffix-credit B10 path (nine fits), without a prospective policy gain. Local timing targets
+  were nonzero. A fresh binary gate or suffix-credit label is not itself a new rationale.
+- A's temporal reuse benefit was largely ordinary multi-step/off-policy learning; extra
+  correction was unstable. Observed future suffixes do not identify outcomes after an
+  unobserved alternative skill/termination. FSD's CF_S scale repair already exists; an
+  untuned own-observation MAPPO gap is not same-information hierarchy headroom. Its fixed
+  label probes used three reused checkpoints and remain mixed, not an opportunity bound.
+
+Options for the temporal question (all conjectures, please revise rather than rubber-stamp):
+
+1. Keep the existing closed-loop skill body and select a small conditional duration menu
+   at a high-level boundary, including an effective fixed k0. Factor choice of skill and
+   duration without assuming duration independent of skill. Start from a fixed-k behavior
+   with a soft, releasable bias toward k0 or structured exploration, and compare with direct
+   learning in the very same variable-duration class. This avoids an unconstrained per-tick
+   binary gate, but gives up some mid-segment reactivity. It may merely regularize learning,
+   and warm starts may trap the policy or unfairly provide uncounted training. No artificial
+   penalty for redeciding belongs in native reward unless the task actually charges it.
+2. Separate execution timing from high-level credit construction, initially at fixed k.
+   More primitive feedback or better service-interval targets may help without more execution
+   choices; this is a potential explanation/control, not evidence of a missing gamma^tau fix
+   or a renamed independent direction. Does it provide a distinct test after A/UCOPE/VNFC?
+3. Use task-service consequences to choose when more decisions are useful, through an ordinary
+   short model-based comparison or a distilled policy. Preserve C/VSP evidence that simple
+   estimators/planners can absorb a neural mechanism. Do not add an unknown state, exclusive
+   resource or switching fee absent from the actual UAV task just to make this option win.
+
+A candidate direct learning comparison would be competent fixed k, direct variable-duration
+learning, and structured/baseline-biased learning in the same variable-duration class, with
+same execution information, reward and low-level architecture. Count pretraining, fixed-k
+selection, environment interaction and planning/gradient work. Learning-curve checkpoints
+must be specified without picking the best evaluated point. A matched fixed-k training
+control must receive a comparable training schedule if the comparison is meant to attribute
+benefit specifically to duration flexibility. We have not selected a native batch or horizon;
+a three-arm exploratory comparison at three independent seeds would mean nine fits before
+any separately started warm-start fits, with all costs prospectively declared by its lead.
+A frozen-body evaluation may answer a narrower deployment question but cannot replace this
+learning question. Do not require a toy win, a full headroom census or all baseline training
+before an ordinary justified learning exploration. The previous scripted clock diagnostic
+is an available option, not a mandatory gate for this new question.
+
+Fixed-k UAV opportunities and the contrary evidence they inherit:
+
+- Known service/channel/motion physics plus learning only uncertain joint consequences,
+  user evolution or residual value, then short lookahead or policy distillation. Known g(Y)
+  does not give E[g(Y)] from g(E[Y]); preserve legal current own-policy queries. B09's new
+  controlled three-UAV/one-user problem explicitly puts a shared private innovation in
+  external teammates and compares ordinary joint counts with their exact marginal-product
+  view. It is not proof of a present central-HMASD defect; do not silently repurpose it.
+  A fixed-k planner/residual route needs actual native task consequences and execution cost,
+  not just improved prediction loss or a correct analytical immediate reward.
+- Task-grounded service/geometry proposals with the same feedback navigator and a learned
+  residual or ranking. ACVC improved a weak cluster proposer but did not establish a stable
+  gain over MAPPO. MGTAP's conditional demand/partner-geometry weighting was actually run:
+  the resumed late-512 COND-DENSE pair was -0.005375 J, inside the declared practical scale,
+  and a further independent pair was declined. Generic attention, semantic labels or a
+  different name are not a new reason for investment. Is a stronger baseline-anchored,
+  task-grounded action interface worth a distinct question, and what would discriminate it?
+- Service-window/first-actionable-opportunity value rather than only an instantaneous proxy.
+  C07's known-model NEAR had +0.07969 completed tasks/world over ACTIVE_FIRST on its fixed
+  CrossingHost; longer LONG added only 3 tasks in 1,280 worlds and a bounded upper result
+  was below .05. This is a useful local planning result, not a UAV neural claim. CADC B01
+  learned send+motion lost -0.0133549 net service and -0.0120992 physical service against
+  collision-free RR on one training pair. The fixed-sender/matched-receiver successor is
+  specified but unrun. Deploy such timing only where a real cache/delay changes a receiver's
+  future action; not all native tasks expose that mechanism.
+- Task-predictive auxiliary learning or interval-aware service credit at fixed k. VNFC's
+  INTERVAL/TERMINAL primary ended in SIG11 without a final scientific result; old relabeling
+  findings do not settle that question. Factual future prediction is not counterfactual
+  credit. FOLR's explicit cache intervention had three negative blocks; LCAC's package
+  results were mixed/adverse, not a proof that every credit estimator is useless.
+
+Native host feasibility already checked, so please do not repeat a broad source audit:
+Scenario7 has a registered native training factory but current interface v3/reward v2/arm C
+is not the old S3 arm-A checkpoint result; S4 enables failures. Service-restoration has an
+actual legal-telemetry scripted evaluation path and velocity actions, but no exercised legacy
+HMASD training integration and its configured Milan prepared cache is absent in the checked
+local/actual-node locations. Holding a service goal under common feedback navigation differs
+from repeating a velocity vector. Current four presets use motion_weight=0; optional squared
+speed is not a replanning fee. An artificial repeated-outage law or synthetic data replacement
+would change the task. A native learned comparison should choose one real implementation
+contract rather than expand into two hosts and many k/N/regime sweeps.
+
+Context (all repository paths resolve at source_sha unless a full separate sha is supplied):
+
+- Current governance: `docs/project/OPERATING_CONSTITUTION.md` sections 1-5, 7-8; advisory Pro,
+  evidence-bounded rapid exploration, no fit allowance and no extra approval or toy-pass gate.
+- Current methods: `.agents/skills/hmasd-scientific-tools/SKILL.md` sections Explore an idea,
+  Update the working explanation, Simple-model and literature bridges, Comparators and MARL
+  information, Statistics, Cost and exposure; `.agents/skills/hmasd-portfolio-task/SKILL.md`
+  Steps/Boundaries under the constitution (its stale shared-integrator wording is superseded).
+- Shared understanding: `docs/rl-marl-foundations-20260907/FOUNDATIONS.md` sections 2-6.
+- Existing project evidence: the previous `Portfolio review 2026-09-21 project-research-management`
+  Question/Answer/Decision in this file; its Decision subsections Project selection and scope,
+  Next investment order, What the added k proposal would actually test. These summarize sources;
+  use the named native files above for any conclusion depending on exact implementation.
+- New temporal interface: `hmasd/agent.py` sections/lines identified above;
+  `scripts/run_flexible_skill_duration_e2.py`, `scripts/run_flexible_skill_duration_e3.py`;
+  `docs/research/candidates/flexible_skill_duration/FSD_E3_HETEROGENEOUS_HAZARD_RESULT_EVIDENCE_20260905.md`.
+- Opposing native results: `docs/research/candidates/metric_ground_transport_allocation/MGTAP_RESUME_CLOSEOUT_HANDOFF_20260914.md`;
+  `docs/research/candidates/contention_aware_decentralized_communication/CADC_B01_RESULT.md`;
+  `docs/research/candidates/acvc/ACVC_CLOSING_MEMO_20260916.md`.
+  Do not infer a positive result from a proposal.
+
+Primary-source bridges, already opened by Root (analogy, not UAV performance evidence):
+
+- Metelli et al., ICML 2020, Control Frequency Adaptation via Action Persistence in Batch RL:
+  https://proceedings.mlr.press/v119/metelli20a/metelli20a.pdf (intro and method overview).
+  Formalizes action-persistence tradeoffs in single-agent batch RL; it is not a multi-agent
+  closed-loop skill theorem or evidence that our proposed training strategy works.
+- FiGAR, ICLR 2017: https://openreview.net/pdf?id=B1GOWV5eg (primary search extract/abstract;
+  Root's later PDF open failed). Action/repetition factorization is prior art, not our novelty.
+- Option-Critic: https://arxiv.org/abs/1609.05140 (abstract/first-page claims only).
+  Learning termination is established prior art; do not sell a new gate as the contribution.
+- Residual RL for Robot Control: https://arxiv.org/pdf/1812.03201 (abstract).
+  Conventional feedback plus learned residual is a useful analogy, not native UAV validation.
+
+Prospective cost: this consultation and source/algebra synthesis use 0 fits and no scientific
+rollouts. The nine-fit illustration is not an accepted batch; no horizon, seeds or node are
+frozen here. Any selected actual experiment must declare all of these before execution.
+
+Return a focused Chinese research judgment, roughly 8-12 substantial paragraphs plus at most
+one comparison table, rather than another source-receipt or governance report. Address:
+(1) correct the policy-class/finite-learning framing and hidden native confounds;
+(2) recommend one temporal learning strategy, with strongest competing explanation and a
+practical comparison that changes investment; say if none is currently worth attempting;
+(3) rank the strongest fixed-k UAV improvement with inherited failures and specify what can
+actually be new, rather than offering a list of generic modules;
+(4) distinguish useful methods worth building for performance from a defensible new research
+claim, and state when to stop or redirect without demanding proof that an entire class fails.
+State strengthened/weakened/unresolved judgments and MATERIAL_DISSENT yes/no. No numerical
+success probability or promised gain is supported. Advice can reject every suggested option.
+Cite the sources actually used and disclose decision-critical unread sources in normal prose.
+
+Constraints: do not train, run prototypes or modify any code or shared-control table. Read this
+question at the supplied immutable source_sha, then fetch the latest target file on branch
+`codex/project-research-coordination-20260921` and its actual blob SHA before writing. Write only
+the empty `### Answer` immediately below this question heading in `docs/research/RESEARCH.md`.
+Preserve the question, other answers, tables and `### Decision` byte-for-byte; stop on overlap.
+Report the actual answer commit on success. If GitHub writing fails, return the complete answer
+in chat, not a status message, SHA or link alone. The latest writable blob is not a replacement
+for pinned reasoning sources. Never put this Jev account's private conversation URL in Git.
+
+### Answer
+
+### Decision
+
+Pending the complete advisory answer and Root's written adoption or revision. This is a
+research-design decision; no experiment or direction status has changed in this section.
