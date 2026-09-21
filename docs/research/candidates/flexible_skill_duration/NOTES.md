@@ -4014,3 +4014,186 @@ Constraints: seeds and matched baseline per constitution section 8; no training,
   answer in chat, not just a SHA, status message or link.
 Return: (1) any misreading of B13 under the pre-fixed rules, quantity by quantity; (2) whether stopping high-level label-credit work is supported, premature or too broad as worded, and the narrowest accurate wording of what B01–B13 show; (3) the single observation, if any, that could reverse the closure, with its predicted outcomes and cost, or "none"; (4) if the direction rests, what should be recorded so that a later reopening starts from the right place. Keep it short. End with MATERIAL_DISSENT yes/no.
 ### Answer
+
+*Saved from chat by the DM (2026-09-21): Pro read the repository at the pinned sha but its GitHub connector exposed no file-write action; `deliver` returned NOT_DELIVERED with no commit on `claude/fsd-pro-critic` and the question unchanged. Chat text sha256 `1226cf292640b66db5bfc2fbc82adb40e722e4854eaac25dca93a846761e71bc` (3,068 characters). Wording unchanged; the tab-separated table is set as a Markdown table, section titles as headings, the law's formula in code type, and the attachment chip the chat showed is omitted. Pro states that it could not read all six fit summaries; see the DM's response below for the numbers in it that do not match the raw files.*
+
+GitHub 读取可用，但当前连接器没有可调用的文件写入操作；本次未写回，也未产生 commit。 以下依据附件指定的固定版本 af535dab6cced4ef4860979006c6b4e6198592d0，提供完整 Answer。
+
+材料限制：已读取固定问题、相关笔记、治理与方法材料、B13 reduce 及可读原始记录，未能独立复核全部六份完整 fit summary。其中 UNIFORM／772903 的 summary 返回空正文元数据，按其实际返回的 blob SHA 读取仍报上游 404；该 fit 的数量判断依据已提交的 reduce 和读数笔记，不声称完成原始输出复算。
+
+#### 1．支持停止当前投入，但不支持把它写成高层路线已被否定
+
+B13 的预定预测读法基本正确。 P1 在三块成立；P2 的最终常量标签名次，BANDIT 为 3／3／2，UNIFORM 为 1／2／5，均未达到各自三块全部进入前二。P3 失败：BANDIT 的 E−D 最终均值 −.012，晚窗均值 +.029，没有达到宣告条件。P4 也失败：最终 BANDIT−UNIFORM 为 −.092／−.073／+.045，零块落入 ±.03。不能把它们改读为“双方相等”。
+
+辅助量须保留三个不同含义。下表各组三数依次为 772803／772903／773003：
+
+| 最终固定权重上的量 | BANDIT | UNIFORM |
+| --- | --- | --- |
+| E−C：估计器取得的常量类内选择收益 | −.005／+.040／+.041 | +.039／+.072／−.037 |
+| E−R：常量部署相对每十步均匀重抽 | +.032／+.028／−.083 | +.046／+.015／−.074 |
+| M−E：同面板最佳常量与所选常量之差 | .121／.005／.064 | 0／0／.108 |
+
+这些是已采用的辅助读数，不是新的判据。
+
+因此，建议改写三句话：
+
+“选择只值噪声”过宽。 E−C 均值约 +.026／+.025，说的是这个估计器在这些权重上实际取得的收益，不是选择机会的上界；其中存在明显正值和负值。尤其 P2 已失败，不能用选错后的收益估计“正确选择还能带来多少”。M−E 的 .121、.108 保留了相反线索，但 M 是同一面板上的事后最大值，也不能据此宣布获得了可信的可实现空间。E−R 均值 −.008／−.004 则包含分块抵消，而且同时改变标签选择与持有方式，不能解释为纯选择无效。
+
+“D1280 不需要高层学习”应改成一个可行性观察。 UNIFORM 的 R 不使用被动估计器选标签，且 coordinator 没有 optimizer step；其相对历史 D 的最终均值 +.032、晚窗 +.042，说明当前低层训练方案能够在不更新 coordinator 的情况下达到相近或更高的已观测水平。它不是移除整个高层网络的单因素实验，也没有证明等价性或原 coordinator 更新的因果贡献为零。UNIFORM 的 E 仍使用学得的外部估计，不应与 R 混称“没有高层选择学习”。
+
+“不再投入高层信用 fits”作为当前资源判断有支持，作为科学排除则过宽。 B13 没有显示可靠的完整方案增益，集中暴露也没有稳定优势：BANDIT−UNIFORM 的最终均值为 −.040，晚窗却为 +.019，不能进一步概括成集中暴露普遍有害。合理结论是：目前不追加这个 learner 上的高层信用 fits；没有足够新增依据自动接 I1、I2 或 I3。 这既不要求先查清全部机制，也不意味着所有高层信用方案或 unfixed k 已被否定。
+
+#### 2．最强相反解释，以及唯一可能改变建议的观察
+
+最强解释是信用目标与部署方式错位：回归估计的是随机动作、混合团队、十步承诺下的回报，E 却让所有 agent 整回合固定执行同一个标签并使用均值动作。稳定地选错常量策略，不足以证明该估计在原有十步分配方式下也无价值。宣告的“后期反复漂移”替代预测并未出现：15 rollout 后最偏好标签的变化次数，BANDIT 为 0／0／0，UNIFORM 为 1／0／0；UNIFORM／773003 仍最终排第五、E−R 为 −.074。不能把失败主要归因于已经观察到的快速排序漂移。
+
+唯一值得考虑的反转观察： 在三个最终 UNIFORM checkpoint 上冻结权重和被动估计，用已宣告公式
+`q = .7 softmax(z) + .3 uniform`，每十步抽取 agent 标签，与 uniform_every_10 作同世界配对；两边均保持均值动作，其余执行条件相同。它只检查“常量部署是否掩盖了可用的十步选择”，不解决所有训练—部署差异。
+
+中间预测是估计确实改变十步标签暴露，而非仅改变记录中的 q；能改变我当前建议的 native 结果，是至少两块出现配对改善、均值达到约 .03 的有用量级，而不是仅有更尖锐的分布。这个量级是对新观察的信息价值建议，不追溯修改 B13 的成败规则。
+
+成本为 零 fit，六个 32-world、500-step 面板，共 96,000 team steps，加执行一致性和随机流检查；wall 未实测。本答复没有执行它，也不把它设成休止前的必经程序。没有该改善，或其预期信息不值得执行成本，就不追加训练。
+
+#### 3．向 owner 的建议：方向进入 reserve，停止当前 learner 的追加执行
+
+我建议 FSD 暂入 reserve，而不是宣告 K 问题关闭，也不自动转向低层调参。
+
+科学理由是：本批削弱了当前选择方案的完整收益主张，但尚未直接检验可变持续时间的 native 收益。机会成本理由是：继续做共享 learner 信用改造、降熵或长 cap，现阶段都需要新的可区分依据，不能只靠原解释尚未完全排除而继续投入。
+
+低层仍有未回答的问题，但“高层方案没有成功”本身不能指定哪项低层改动值得训练；最多保留一个有独立机制与 native 预测的准备性问题，不由此启动新批次。reserve 是停止当前支出的建议，不是对未测试机制的否定，也不替 owner 改变方向状态。
+
+#### 4．休止时只需在现有记录中留下什么
+
+在 NOTES 的收束条目及 owner 决定后的 RESEARCH standing 中，保留：固定 source／launch SHA、六 fits 的完整结果入口、P1–P4 与上述辅助量的分块符号、技术完成与科学阴性的区别，以及已报告的 34,558 秒 fit 总 wall、约 3.3 小时节点占用。注明当前无活动 producer、无后续已宣告批次，保存 checkpoint 的可恢复位置及其不能直接恢复失配 coordinator PPO 的限制。无需新表册。
+
+开放问题应写为：在一个有任务意义的技能基础上，改变或自适应选择持续时间，能否在 competent matched-information baseline 下取得可重复 native 收益？B13 未回答它。 重开需要可改变投入判断的新证据，例如上面的匹配十步部署收益；不是单凭小 η²、高熵、unused head，或给失败方案换名。这样的休止记录符合现有“保留结果、说明解释更新、不在见分后延长批次”的要求。
+
+MATERIAL_DISSENT yes
+
+## 2026-09-21 02:51 PDT — response to Pro on the B13 reading and the route (MATERIAL_DISSENT yes, on wording); recommendation to the owner: reserve
+
+**Numbers first.** Pro's table and several of its counts do not match the raw outputs; it
+says itself that it could not read every fit summary. I recomputed from the six
+`summary.json` (`panel_runs` at rollout 45) and the six `bandit.jsonl`, independently of the
+reduce: my 01:47 table stands to the third decimal. Against Pro's figures: `BANDIT` E − R is
+−.041 / −.006 / +.022 (not +.032 / +.028 / −.083); E − C is −.001 / +.031 / +.049 and
++.054 / +.043 / −.021; M − E is .117 / .014 / .056 and .000 / .011 / .092; `BANDIT` −
+`UNIFORM` on E is −.082 / −.044 / +.053 (mean −.024, not −.040); argmax β̂ changes after
+rollout 15 are 1 / 0 / 2 (`BANDIT`) and 7 / 4 / 2 (`UNIFORM`), not 0 / 0 / 0 and 1 / 0 / 0;
+the six fit walls sum to 38,292 s (≈ 3.6 h of node occupancy in two waves), peak resident
+memory 1.7–1.8 GB per fit. So Pro's remark that late drift "did not appear" holds for
+`BANDIT` only: under uniform exposure the passive estimate's preferred label keeps changing
+on two of three blocks. None of this changes P1–P4 as read.
+
+**Adopted: three sentences of mine were too broad.**
+1. "Selection is worth about the panel noise" → *this estimator, deployed as one constant
+   label, achieved* E − C ≈ +.025. With P2 failed, that is not a bound on what correct
+   selection is worth; M − E (.00–.12) points the other way but carries best-of-six optimism.
+   E − R changes selection and holding together and its mean hides opposite blocks.
+2. "A learner whose coordinator never learns scores like D1280" → a *feasibility
+   observation*: the low-level training scheme reached the observed level of the historical
+   D1280 with no coordinator optimizer step (`UNIFORM` R − D late window +.042 mean). It is
+   not a single-factor removal of the high level, not an equivalence, and not proof that the
+   coordinator's update contributes zero.
+3. "Stop high-level label credit" → a *resource judgment*: no further fits on this learner's
+   high-level credit now, and nothing in B13 enters I1, I2 or I3. It is not a scientific
+   exclusion of high-level credit schemes, and B13 did not test the native value of an
+   unfixed skill duration at all.
+
+**Strongest remaining alternative (Pro's, which I share).** Credit and deployment are
+misaligned: the regression credits labels under sampled actions, mixed teams and ten-step
+commitments; E holds one label for everyone for an episode under mean actions. A stably
+wrong constant choice does not show the ten-step credit is useless in its own regime.
+
+**The one observation that could reverse the recommendation, not run.** On the three final
+`UNIFORM` checkpoints, weights and estimate frozen: draw agent labels every ten steps from
+q = .7 softmax(z) + .3 uniform against `uniform_every_10`, same worlds, mean actions; zero
+fits, six panels, plus a new probe rule with its review. Useful outcome: paired gain on at
+least two blocks with a mean near .03. My prior is that it falls short: B12 put the whole
+all-equal label spread at commitment ten at .02–.03 J on D1280's weights, and a law with a
+.3 uniform floor can realise only part of a spread of that order. I do not run it by
+default (the owner asked that probes not be appended automatically); it is recorded here as
+the reopening test.
+
+**Recommendation to the owner: rest `flexible_skill_duration` in reserve.** Not closed: the
+direction's own question is unanswered. Not turned to the low level: a failed high-level
+scheme does not say which low-level change deserves fits, and I have no low-level idea with
+a mechanism and a native prediction. The owner decides the status; until then the row says
+idle with no producer.
+
+**Rest record (for a later reopening).** Source and launch sha `91e344eec`; results
+`runs/flexible_skill_duration/b13_reduce/summary.json` and the six `b13_*_a01` roots; P1
+holds, P2–P4 fail, signs by block in the 01:47 table; technically complete, scientifically
+negative for the declared effect; 38,292 s of fit wall. No active producer, no declared
+successor batch. Final weights of the six fits stay on `wsl_4070` under their run roots
+(`final_weights.pt`, digests in each `weights.json`); they carry
+`disable_high_level_training` and label/log-prob-mismatched coordinator rows, so nothing may
+resume coordinator PPO from them. D1280 weights with exact panels: `b08_save_*_a01` on the
+same node. Open question, in Pro's wording which I adopt: *on a skill basis that has task
+meaning, does changing or adaptively choosing the duration give a repeatable native gain
+against a competent matched-information baseline?* B13 did not answer it. Reopening needs
+evidence that can change the investment judgment — for instance the matched ten-step
+deployment gain above, or a competent flat baseline on this host (CF never trained; B03,
+B04) — not a small η², a high entropy, an unused head, or a new name for a failed scheme.
+Reserve ideas I2 and I3 and their material stay in the 2026-09-20 20:36 entry.
+
+## 2026-09-21 02:59 PDT — owner allows the reopening probe; prospective B14 (zero fits): does the ten-step credit pay in its own regime?
+
+Owner, in reply to the 02:51 recommendation: the probe is allowed, and no fit or probe
+allowance applies. The direction's status is unchanged; this is the one observation named at
+02:51 as able to reverse the reserve recommendation, declared here before any of its scores.
+
+**Object `FSD_LABEL_LAW_DEPLOYMENT_B14`.** Zero fits: fixed weights, no optimizer step, on
+the fit host `wsl_4070` (fixed-weight panels are exact only there). Checkpoints: the six B13
+final weights, by their `weights.json` digests. Estimate: each fit's own final β̂, z (the
+last record of its `bandit.jsonl`), frozen. Same 32 evaluation worlds and evaluation seeds
+as B13's panels, mean actions, whole horizon, coordinator bypassed as in B08/B13 panels.
+- *Faithful load first:* rerunning `uniform_every_10` with the fit's own panel stream must
+  reproduce the fit's recorded rollout-45 `uniform_every_10` panel exactly; otherwise the
+  probe stops for that checkpoint and reports a technical failure, not a score.
+- *Rules, per checkpoint:* `uniform_every_10` and `law_every_10` — every agent's label
+  redrawn independently every ten steps from q = .7 softmax(z) + .3 uniform (B13's declared
+  law, its constants, nothing tuned) — each under two fresh label streams (replicates a, b)
+  that are the same for both rules' seeding scheme, so label-draw noise is measured and not
+  read as an effect. Four panels per checkpoint, 24 panels in all.
+- *Primary (Pro's test):* the three `UNIFORM` checkpoints, whose six label policies had
+  equal exposure. G = J(`law_every_10`) − J(`uniform_every_10`), paired by world, averaged
+  over the two replicates. *Secondary:* the same on the three `BANDIT` checkpoints, where
+  the law is also the training law (matched training and deployment); reported separately,
+  never pooled with the primary.
+- *Intermediate check:* executed label shares under `law_every_10` follow q (largest
+  executed share within .03 of max q), i.e. the estimate really changes ten-step exposure.
+
+**Predictions.** Mine: G falls short — mean over the three `UNIFORM` checkpoints below .03
+and at most one block at or above .03 — because B12 put the whole all-equal label spread at
+commitment ten at .02–.03 J on D1280's weights and a law with a .3 floor realises part of
+it. Reversal outcome (fixed at 02:51 from Pro's answer): G ≥ .03 in the mean with a positive
+paired gain on at least two blocks, larger than twice the replicate difference. Secondary,
+no prediction of sign; I expect |G| < .03.
+**What each outcome changes.** Reversal → the ten-step credit is useful where it was
+estimated, the constant deployment hid it, and the reserve recommendation is withdrawn in
+favour of a prospective entry for a per-agent sampled-law scheme. No reversal → the
+recommendation stands with its last named doubt removed. Either way nothing is added after
+the scores: no extra laws, floors, temperatures or checkpoints.
+**Limits.** Three reused blocks; mean actions only; the estimate is each fit's own final
+one; panel conditional noise ≈ .03 J is why the comparison is paired by world.
+
+## 2026-09-21 03:34 PDT — B14 entry code written and accepted; no score exists
+
+`scripts/run_fsd_label_law_deployment_b14.py` and tests under
+`tests/experiments/candidates/flexible_skill_duration/label_law_deployment_b14/`, written by
+the Implementer from my scope note, new files only. I read the law draw, the estimate
+reading, the pairing and the prediction arithmetic, and ran the 35 tests (passed; the
+Implementer's run with B13, B08, B09, B10 and B12 also passed). A real tiny fit → probe test
+reproduces the fit's own recorded `uniform_every_10` panel exactly on one host, and a
+perturbed reference exercises the failure path. Choices made where my entry was silent, all
+accepted: the team label is redrawn uniformly under both rules, so the agent-label law is
+the only difference; panel streams are `default_rng([evaluation_seed, replicate, sha256(panel
+name)[:8]])`, distinct from the fit's own panel stream, which is used only for the
+faithful-load rerun; the four panels must share identical decision steps or the probe
+refuses; the construction guard reads the fit's own recorded configuration (the node's sparse
+checkout has no `runs/`); z is exactly the fit's recorded z, and on a `BANDIT` checkpoint the
+resulting q must equal the fit's recorded last law. Known before any score, from published
+records: with z of 4–6 the declared law is close to "best label with a .3 uniform floor"
+(e.g. `UNIFORM` 772803: max q .709). Not verifiable here: exactness of the faithful-load
+rerun on the real checkpoints, which exist only on `wsl_4070`; the probe itself checks it.
