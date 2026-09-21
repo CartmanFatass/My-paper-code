@@ -5599,3 +5599,236 @@ G33 保持原 owner 冻结，toy 迁移资产、旧 relay corridor、hazard-SMDP
 与当前 standing 对齐。没有实质改变研究主问、关键比较或投入次序，因此不重复发送
 同题 Pro。发布内容仅是这份综合索引：**0 新 fits、0 rollouts、0 新科学评估**，无方向
 激活、无新实验生产者、无 App 跨任务消息，也没有待补的自动重开或全基线扫描任务。
+
+## Portfolio review 2026-09-21 information-first-three-dm-plan
+
+### Question
+
+Owner request: "你来做Portfolio 给我们的研究项目列一个计划 我们暂时考虑并发3个独立DM sessions 我建议从较相关的开始".
+The immediately preceding owner observation was that OPT-like work can improve information use
+with new modules/local networks while retaining mature MARL learning machinery. Root is preparing
+a concrete three-session research plan. This turn is planning and consultation, with 0 scientific
+fits/rollouts; it does not create sessions, activate rows or override an existing direction owner.
+The phrase "暂时考虑" is treated as a planning constraint, not a demand to keep three slots filled.
+
+Conversation: reuse the completed Portfolio/concept consultation through Jev; the actual private
+address stays only in its local operation state. The new question key is supplied by Transport.
+Repository: `CartmanFatass/My-paper-code`; publication branch:
+`codex/project-research-coordination-20260921`; target: this file, only the empty Answer below.
+
+**Decision requested of the adviser:** assess a coherent slate of three independent research
+questions, with the first useful comparison, inherited evidence and costs for each. Root's
+tentative slate is **local interaction representation + task-predictive representation learning
++ joint duration learning**. Consider replacing one of the first two by fixed-clock partner-skill
+recombination or native churn/service credit if that gives a better programme. This is a change
+from one main question/one alternative to a proposed concurrent portfolio, and elevates information
+processing to a legitimate algorithm research object. Existing advice did not select this slate;
+therefore this is a focused new consultation, not a repeated request to approve the old question.
+
+#### Scope, standing and what changed
+
+Reasoning base: main `11b038b779db7f5160196d72168dba12b5bfc854`. No later main result was found
+when this question was prepared. Current governance/method/code paths below resolve at the new
+published `source_sha`; explicitly pinned historical evidence keeps its own source.
+
+- FSD is reserve, rested and owned by Claude; its old B01–B14 package results remain. The selected
+  concept compares ordinary duration distributions during full skill co-learning, not deployment
+  probes of frozen old skills. A timing slot should reuse the existing FSD lead; creating another
+  concurrent DM for that direction is not part of this plan.
+- B is reserve after its own `99f745b3a` standing. The latest
+  [notebook](https://github.com/CartmanFatass/My-paper-code/blob/74fe267aa166299d93a03566e5f0ab149ff2b12d/docs/research/candidates/skill_teammate_drift_learning/NOTES.md)
+  closes investment in the radial one-step table route and rejects the six-fit recurrent
+  refresh/burn-in successor. Actual teammate/skill behavior drift and useful old data remain the
+  untreated question; no experiment or Pro operation is pending.
+- CPCP, VNFC and TRDL remain reserves. C, VSP-03, UCOPE and FOLR current routes are archived;
+  other old archives remain. G33 is owner-frozen. There is currently no exploring/confirming row.
+  Current rows and the [20-question inventory](#potential-research-directions-2026-09-21) give the
+  full mapping; this consultation need not reread every old appendix or transcript.
+- The earlier interpretation that network modules are merely tools was too narrow: an explicitly
+  motivated representation/auxiliary mechanism can be the scientific intervention. Same legal
+  information need not yield equal finite-resource learning. A universal approximation argument,
+  a local regression reduction or absence of a privileged information gap does not veto the study.
+  Conversely, adding parameters or renaming an archived geometry/cache package is not evidence.
+- The owner observation does **not** establish that MARL is saturated or that PPO/QMIX are at an
+  optimal frontier. OPT is a primary-source precedent, not a performance prior for current UAV.
+  Root read its §§IV–V: the method combines sparse/diverse interaction prototypes, aggregation and
+  a history-related auxiliary objective; QMIX and, in GRF, MAPPO are backbones. Local utility and
+  global mixing paths have different information rights. Its interaction prototype is not an
+  executable HMASD skill. [OPT primary text](https://arxiv.org/html/2207.03902v4).
+
+The programme should remain about learned joint policies/skills with native UAV consequences.
+There is no obligation to invent a new PPO formula, replace learned skills by a planner, prove
+that only multi-agent problems can benefit, or make fixed-k success a prerequisite for timing.
+
+#### Tentative three-slot slate, for criticism
+
+The labels below are discussion labels, not registered direction IDs. The first two are separate
+new questions only if their comparison and explanation really differ; they do not inherit an
+archived package's name, reset its history or reuse its training outcomes as fresh replication.
+
+| Proposed slot | Scientific question and single principal intervention | First useful ordinary comparison | What would change the investment |
+| --- | --- | --- | --- |
+| **DM 1 — local task-interaction representation, fixed k** | Can a task-motivated organization/selection of the currently legal local observation make the shared low-level HMASD policy learn better coverage/capacity cooperation? Keep primitive actions, skill IDs, skill discovery objective, clock and PPO updates. Re-express only information already in the observation, without silently inventing user identity or giving the actor global fields. This is not a pointer action redesign or geometry planner. | Intact competent fixed-k HMASD; an ordinary dense representation of the same legal entity/spatial fields; one selective interaction module. Retain comparable capacity/tuning and account compute, rather than require exact parameter equality to hide work. Use the dense representation as the strongest ordinary explanation for a claimed selection mechanism. | Native return/service improves and the task-relevant selection explanation survives the ordinary representation comparison. If dense reorganization captures the gain, retain that useful simpler method and end the extra mechanism. Attention pictures or fewer attended tokens alone are insufficient. |
+| **DM 2 — task-predictive representation training, fixed k** | Can factual future service supervision improve the local actor's existing recurrent representation? Preserve the architecture/history/action interface and change the training signal into that representation. This is not B's own-weight recurrent-state refresh, FOLR's old cache package, a new world-model planner or a pretrained LLM requirement. | A local auxiliary predictor trained on a detached representation versus the same predictor whose auxiliary loss can update that representation; both actors retain the same native PPO objective and legal inputs. A direct zero/nonzero auxiliary-loss comparison is another simpler option: advise which answers the intended question cleanly. Target/window must match native task dynamics; the old proposal's W=3 on an H20 host is not automatically a UAV choice. | Beyond learning to fit an auxiliary label, the full policy improves native service/return at proportionate cost. Improving forecast error without useful control weakens the current target-to-policy story. A larger history encoder is not automatically the next rescue. |
+| **DM 3 — joint duration learning, existing FSD question** | In full high/low-level co-learning, does an ordinary joint duration distribution improve useful asynchronous cooperation compared with a conditionally factorized distribution? Duration parameterization is the intervention, after the same existing AR skill assignment. Use the same ordinary legal history/commitment-aware critic in all applicable arms. | Competent fixed k, fully informed conditionally factorized variable duration, ordinary AR joint duration, with the same legal duration set, team cap and native objective. Independent heads already support deterministic coordinated choices and shared latent correlation; single-eligible events have no within-event cross-member sampling distinction. | Useful cooperation is learned and preserved and full native return improves; entropy/correlation or more decisions do not suffice. If fixed k remains preferable at the tested cost, keep it and stop this duration package. No prerequisite fixed-skill positive probe or compulsory clock curriculum. |
+
+The intended separation is **how currently available information is organized**, **how task
+supervision trains an unchanged representation**, and **how the policy uses extra temporal choices**.
+No DM waits for another's new module, checkpoints, positive result or permission. Do not combine
+all three modifications in a first experiment; such a package would not answer these three questions.
+If DM 1 and DM 2 are too correlated or one lacks a convincing native prediction, choose a different
+slot or recommend fewer than three worthwhile starts instead of inventing a distinction.
+
+#### Alternatives and inherited contrary evidence
+
+- **Fixed-k partner recombination** is the previously selected sole fixed-k alternative. The
+  intervention is actual training exposure to lawful partner-skill combinations under the existing
+  discovery objective, compared with exposure-matched ordinary joint/AR sampling, including the
+  own-combination tradeoff. No native brittleness has yet been demonstrated. Forced relabeling of
+  old PPO trajectories is not lawful new on-policy data. This may diversify a portfolio better
+  than a second information module; it also has more training-distribution engineering.
+- **Native churn/service credit** has a genuinely unanswered INTERVAL/TERMINAL comparison after
+  two SIG11s; old MAPR/DIRECT results below scripted BCRH do not answer it. Stable isolated
+  implementation is a real preparation cost, not a reason to recover sunk cost. Distinguish
+  within-episode membership changes from train/test N and independent cross-play. CPCP and TRDL
+  are less directly tied to the owner's latest information-use/UAV focus, but their untested or
+  mixed evidence should not be converted into new negatives.
+- **MGTAP** really ran conditional demand/partner geometry; resumed late-512 COND−DENSE was
+  −.005375 J. **ACVC** improved a weak cluster proposer but did not establish stable MAPPO
+  superiority. These constrain those allocation/wrapper packages. They do not directly test a
+  fixed-action local actor representation, and cannot impose a requirement that information be
+  unavailable to a competent generic network. Sources:
+  `candidates/metric_ground_transport_allocation/MGTAP_RESUME_CLOSEOUT_HANDOFF_20260914.md` and
+  `candidates/acvc/ACVC_CLOSING_MEMO_20260916.md` under `docs/research/`.
+- **FOLR** cache A01 contrasts were all adverse (mean −2.087265625), without identifying history
+  redundancy; latest accepted
+  [notebook](https://github.com/CartmanFatass/My-paper-code/blob/cd3b97ab7982ac5efec86eace09d33328be841fa/docs/research/candidates/vap_folr_core/NOTES.md).
+  B09 improved prediction/visited-state immediate choices without stable full-path return; B10
+  retained conditional deployment gains against two fixed rules; B11 did not show stable two-way
+  table-matching gains. Those results did not train this native HMASD actor representation.
+- **FSD/UCOPE/A** retain the already reconciled limits. FSD's B12 does not prove additive joint
+  value or zero timing value; its competent same-information flat comparison was unresolved.
+  UCOPE already trained KEEP/END with paired suffix credit and failed its retained policy endpoint.
+  A's extra corrections were largely absorbed by ordinary multistep learning. Do not revive the
+  exact failed gates, credit rescues or frozen probes by changing a name.
+
+#### Host, scope and cost
+
+The preferred low-integration starting point to assess is the existing Scenario1 HMASD learner:
+it has coverage/capacity coupling and an exercised full-learning path. It does not have moving
+users, backhaul, battery or traffic queues. A result there must use its actual service question;
+we do not claim handover/battery benefit from it. Scenario7 has a registered training entry and
+real access/backhaul/energy mechanisms, but its current interface v3/reward v2/arm C is distinct
+from old arm-A evidence; S4 adds failures. Service-restoration lacks the verified prepared Milan
+cache and exercised HMASD integration in the checked paths. Do not start two host migrations
+or alter physics/reward to obtain a favorable result. Advise whether one slot should directly
+use current Scenario7 rather than all three use Scenario1, accounting for that real difference.
+
+There is already an optional OPT implementation in `hmasd/networks.py::OPT` and `StateEncoder`.
+The latter currently embeds one global-state token plus one whole-observation token per member;
+an OPT class or flag is not proof of entity-level local deployment or of faithful paper replication.
+The source check attached to this question below identifies actual observation fields/entry paths;
+do not treat an old design document as a report that OPT was never run or that a new module works.
+
+**Bounded native source check (at 11b038b77, read-only).** These facts delimit the candidate;
+they are not a diagnosis of a performance bottleneck:
+
+- `envs/pettingzoo/uav_env.py` local observation construction (around lines 382–433, 575–589)
+  exposes own position, ordered user slots `(relative x,y,SINR)`, ordered neighbor slots
+  `(relative x,y,z,SINR)`, and time. User/neighbor slots are sorted by SINR, neighbors exclude
+  self, and unfilled slots are zero-padded. There is no explicit persistent entity ID or
+  validity bit in that actor observation; the action mask is all ones. DM 1 can encode these
+  numeric slots without changing information. It cannot obtain true padding validity, stable
+  cross-step user identity or served-user flags from centralized state or environment `info`
+  and call that the same-information actor. A zero-pattern feature is only a deterministic
+  feature of the observed numbers, not newly verified validity. DM 2 can use the existing
+  ordered-observation history without claiming persistent entity tracking.
+- `hmasd/networks.py::R_Actor` (around lines 1401–1500) places an observation encoder before
+  skill conditioning and the recurrent layer. That gives DM 1 an actual bounded representation
+  site and DM 2 an existing recurrent representation; both need to trace the source used by
+  their chosen runner rather than change the global actor contract silently.
+- The currently defined `SkillCoordinator` (around lines 703–754) has its own standard
+  Transformer over global and member-observation tokens; the optional `StateEncoder` class
+  is not evidence that this coordinator already runs local entity-level OPT. Its value path
+  uses state/joint observations. Compact/OPT bypass configuration defaults are off in
+  `configs/config_1.py` around lines 230–241. We make no repository-wide never-run claim.
+- Current Scenario7 inherits the relay local view: distance-sorted user slots include
+  relative position, SINR and connection/service indicators; additional routing/overload
+  and energy fields differ from Scenario1. The energy extension appends fixed-index UAV
+  and station slots. See `envs/pettingzoo/relay/routed_core.py` around lines 3965–4178,
+  `local_view.py` and `energy_aware.py` around lines 2215–2298. This is a different legal
+  observation schema, not free extra features for a Scenario1 actor. A host change needs
+  a source-bound new comparison, not labels copied from a different scenario.
+
+An independent local ResearchCritic favors retaining the tentative three questions: representation
+structure and representation supervision are distinguishable, and each can start from its own
+complete ordinary HMASD baseline. It notes that an untrained lambda-zero prediction head is not
+a meaningful mechanism control for forecast-error improvement. The detached-readout alternative
+in DM 2 addresses that issue, but its role/cost and comparison should be judged explicitly here.
+This bounded internal criticism is input to the Portfolio question, not a substitute for Pro.
+
+For a concrete cost reference, FSD B01 used **360,000 training team steps per fit**:
+45 rollouts × 16 lanes × 500 steps, with 144,000 evaluation steps under its old nine-panel law.
+Its notebook entry `2026-09-19 05:05 PDT — stage 1 complete` records measured native wall:
+D1280 41,241 s/5 fits (mean 8,248 s; one partly alone 5,814 s), peak RSS 2.75–2.79 GiB;
+CF 33,882 s/5 fits. The ten-fit makespan with at most four concurrent was 22:42–04:59 PDT.
+This CPU FP32 native result is an anchor, not a new-arm wall forecast or a GPU speed claim.
+Source: `docs/research/candidates/flexible_skill_duration/NOTES.md`, cost paragraph of that entry;
+the older prospective 10,300/12,000-second estimates do not replace these measurements.
+
+A possible first exploratory tranche for the tentative slate is **3 + 2 + 3 = 8 fits**,
+one fresh training instance per arm, at a justified common native horizon. If the 360,000-step
+reference were chosen unchanged, that is 2.88 million training team steps; evaluation can be
+chosen for this question and need not inherit the old nine-panel confirmation schedule. Single
+instances are exploratory; they do not support a population claim. This is a planning illustration,
+not an accepted batch, an allowance, a cap or an instruction to shorten training until cheap.
+Each DM must fix its actual horizon, arms, seeds and reading rule before launch; fresh 3–5-seed
+confirmation applies only to a selected final claim and primary baseline, not every option here.
+New representation/auxiliary/duration wall, RSS, setup and tuning remain unmeasured. Prior toy
+MGTAP/ACVC times are not prices for native HMASD. CPU/GPU use follows the actual compute route;
+three concurrent scientific sessions do not promise three heavy training fits at once.
+
+#### Independent-session plan and requested answer
+
+Three slots mean three end-to-end owners of question, implementation, execution and interpretation,
+not separate engineer/runner/reviewer departments. Use separate authoring checkouts and source-pinned
+inputs; each publishes its own notebook and RESEARCH standing normally. Shared core changes receive
+the existing independent review; no routine Root approval or cross-task message loop is introduced.
+Unmerged experimental code can remain on its published branch with fixed evidence links. Each slot
+starts from a self-contained competent ordinary baseline, not another DM's unmerged result. A useful
+generic repair may be reused later by explicit source, without changing an already running contract.
+FSD ownership remains Claude unless the owner explicitly changes it. This plan contains no task IDs
+or model settings invented for future sessions and does not create or message an App task.
+
+Return a focused Chinese Portfolio recommendation, with one table for the proposed three DMs and
+substantive reasoning. Address: which slate to choose and why; whether two information questions
+overlap too much; one concrete primary question/intervention/ordinary control and native prediction
+per slot; actual first deliverable and a sensible continue/stop/replace judgment; host choice and
+dominant costs; what remains reserve or archived. If fewer than three are worth starting, say so.
+Treat known controls as research assets, not universal pass gates. Do not promise a numerical success
+probability, a paper, a wall deadline, or an unmeasured gain. State strengthened/weakened/unresolved
+judgments and MATERIAL_DISSENT yes/no. Avoid a new committee, per-batch approval or standing scorecard.
+
+Context at source_sha: `docs/project/OPERATING_CONSTITUTION.md` §§1–5, 7–8; this file's current
+standing, `Potential research directions 2026-09-21`, the complete `marl-concept-formation` Answer/
+Decision and `Claude advisory reconciliation`; `.agents/skills/hmasd-scientific-tools/SKILL.md`
+sections Update the working explanation, Comparators and MARL information, Statistics, Cost and
+exposure, Pro; `.agents/skills/hmasd-portfolio-task/SKILL.md` Steps/Boundaries, under the constitution
+(its old sole-integrator/allowance language is superseded). The owner's
+`docs/research/designs/PREDICTIVE_INTERACTION_AUGMENTATION_PROPOSAL_20260919.md` §§2–6 motivates
+factual auxiliary learning, not a required N-first/LLM implementation or frozen W=3. Read native
+code only for a decision-critical premise; no broad re-audit of all archived directions is requested.
+
+Read the pinned question and relevant Context before answering. Current owner instructions and
+constitution replace conflicting old chat rules; skills are methods, and frozen/historical records
+retain only their named evidence meaning. Disclose any decision-critical source you cannot read;
+do not certify an unread source. No training, prototypes, code changes or state-table changes.
+Fetch the latest target file/blob on the named branch when writing, but reason from source_sha.
+Write only this question's empty `### Answer`, preserving the question, all other sections and
+`### Decision`. Stop on overlapping edits. Return the actual answer commit, or the complete answer
+in chat on GitHub write failure; a receipt or SHA alone is not an answer. Never publish the private
+Jev account's conversation address or identity.
+
+### Answer
+
+### Decision
