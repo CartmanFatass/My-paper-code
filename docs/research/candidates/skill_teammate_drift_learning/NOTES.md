@@ -5485,3 +5485,516 @@ commit; if writeback fails, return the **complete answer in chat**, not a receip
 Advice is not approval; the DM owns this decision and subsequent execution.
 
 ### Answer
+
+Saved from chat; complete answer below, preserved verbatim. Question key
+`hmasd:297bbe0e5aec4082f558b2b2e6e7372e9f2f6c5b5891567aefb555a2ca805411`.
+
+GitHub 读取成功，但本次未完成写回，没有修改仓库，也没有产生新 commit。 最新目标文件的 blob SHA 为 9e34e0c9c434dd58d04bfeee539938e8fbfe2cee，本题 Answer 仍为空。当前可用接口中未找到文件写入或提交动作，运行环境也没有可用的 GitHub CLI；这是写入工具不可用，不是已验证的仓库权限拒绝。以下为完整答复。
+
+Answer
+一、判断：保留这一次两律×两表交叉，不进入新的学习或确认批次
+
+我支持原定的两种外部律×两份已学表、三个冻结基底、每基底 16 个新世界的部署交叉。MATERIAL_DISSENT no。
+
+这项比较值得做的理由，不是 B10 已经“通过”了某个关卡，也不是每个鼓舞性结果之后都应增加归因实验，而是目前有两个会导致不同投资判断的解释尚未分开：
+
+一种解释是，控制收益确实依赖学得的行为分布与当前队友版本相匹配；另一种解释是，目标表只是构成了一个较好的几何反馈政策，即使队友服从另一种律，它仍然更好，因而并不需要按版本选表。
+
+B10 只评价了目标律下的目标表及其投影、固定方向，不能区分这两个解释。拟议交叉直接改变“使用哪份已学表”和“外部队友实际服从哪种律”，不改变物理、动作字典或优化目标，因而能回答一个与 drift 更直接相关、而且可能收窄继续投入理由的问题。
+
+hmasd-pro-question-b10-version-…
+
+我不要求改变四格、16 世界、冻结状态或物理调用预算。需要补清的是解释：它识别的是两份实际学得的整表所诱导政策的版本相关使用价值，不单独识别联合相关性的贡献，也不建立在线漂移适应或跨版本样本复用的收益。 这些限制不要求先加一个新模型、重做边际匹配或进行另一轮拟合。
+
+二、B10 的更新应保留，但不能提前读成版本匹配已经有用
+
+本判断读取了附件指定固定版本的 B10 完成条目、完整 summary.json 和 readback.json，上一轮完整 Pro 答复及 adoption，B09 的冻结表、物理响应与随机地址代码，B10 的冻结状态加载及独立评价代码，以及当前宪章、科学方法和指定 main 提交中的 B 行。移动分支只用于检查写入位置，没有替代固定科学输入。
+
+hmasd-pro-question-b10-version-… +1
+
+原始数据复核范围与前几次不同，但仍有限。 本次额外解码了三份 B09 state.npz 中的 final_counts.npy 条目，并核对了各条目的 CRC；随后只按已固定的后验公式进行算术核对。没有解码完整的 B10 trajectory/planning NPZ，没有独立复核全部 18 项科学文件摘要，也没有重算原生信道、执行政策、运行拟合或模拟。B10 的完整轨迹一致性检查仍是已读取的 DM／Reviewer 检查记录，不是我的第二次完整原始审计。
+
+B10 的主读数确实支持保留该条件部署包：
+
+冻结基底	J−IN	J−OUT＝J−M	M−OUT
+95401	+2.492798909	+1.220971690	0
+95402	+3.324088035	+1.138870677	0
+95403	+0.691564950	+0.509652935	0
+等权三基底均值	+2.169483965	+0.956498434	0
+
+以上是完整 64-tick 累计适配器回报差，不是每 tick 差；适配器尺度是物理全队奖励除以 3。
+
+这不是均匀的世界级优势。J 对 IN 赢了 9/12 个世界，对 OUT 只赢了 6/12。95402／episode3 的 J−IN 为 +9.417144593，必须保留；95403 的 J−OUT 四个值为
+
+−.010117607,−.322003566,+4.080596694,−1.709863782.
+
+该基底的正均值依赖第三个世界的大正值，而其 episode3 同时以 −4.251969204 输给 IN。不能删除这些世界，也不能把“三个基底均值均为正”写成每个世界均受益。
+
+工作解释确实应有所更新：M 在这次全部已保存动作和物理轨迹上被 OUT 精确替代；J 则在每个 episode 中切换径向 bit，并且其三基底平均回报都高于两个固定方向。因此，“任一固定方向已经足以吸收 J 的使用价值”受到削弱，而不是继续作为同等可信的默认解释。 这符合上一轮已明确提出的正向结果分支，无需重新审批该读法。
+
+但 B09 的三个主均值 −.121159049、−.948924799、+1.344124603 仍然成立，不能被 B10 覆盖或合并成替代终点。B10 增加的是相同已学状态上的新部署世界，不是新的训练重复；它也没有比较源表与目标表。B06／B07／B08 对旧 R 包的约束继续保留，普通联合计数不是那个包改名后的恢复。
+
+三、最强的实质反对意见：整表匹配的收益不等于相关性归因，更不等于漂移学习收益
+
+这项设计最容易被过度解释的地方，是把三种不同结论连在一起：
+
+“真实律改变时，较好的冻结表改变了”；
+
+“这种改变完全由联合依赖而非边际估计差造成”；
+
+“某个学习程序因此能更好地适应队友漂移”。
+
+拟议交叉能直接研究第一句，不能仅凭自身结果推出后两句。
+
+真实边际相同，不代表两份已学表的边际相同
+
+这一点现在可以用实际保存的计数说明，而不只是泛泛提醒。95402 的源／目标联合计数，按 00、01、10、11 排列，分别是
+
+n
+S
+	​
+
+=(5,32,21,6),n
+T
+	​
+
+=(26,6,8,24).
+
+沿用固定的每格 .5 先验，概率为 (n+.5)/66。由这些已存计数作算术计算，两个队友取 bit1 的边际为：
+
+p
+^
+	​
+
+S
+	​
+
+p
+^
+	​
+
+T
+	​
+
+	​
+
+:(.424242424, .590909091),
+:(.500000000, .469696970).
+	​
+
+
+两种生成律的真实边际虽都为 .5，实际源表与目标表的边际却有明显有限样本差异。上述计算没有更新计数或重新训练概率模型。
+
+B09 的 J 对 M 投影比较，恰好固定了同一估计表的边际；本次 J_source 对 J_target 则没有这个性质。它同时改变有限样本边际、依赖结构及整体概率分配。这不破坏整表干预的可识别性，却限制了组件归因的精度。
+
+因此，正结果应表述为“在这些冻结表和任务分布下，选择与当前律对应的已学表具有部署价值”，而不是“已隔离出相关性匹配的因果贡献”。我不建议为本次临时调整两表边际或增加新的分解臂：那会把当前整表使用问题改成另一项归因问题。保留六份原表、记录其实际边际和差异即可。
+
+两份冻结政策的比较不是一个完整学习程序的比较
+
+这里没有在线收集新律、识别未知版本、更新模型，也没有在同一条未重置轨迹中经历切换。表的身份和公开版本的对应关系来自现有构造；对不同律分别从同一初始分布部署，得到的是已知表选择的条件价值。题目已经明确这一范围，因此我不把它当作否决理由。
+
+更根本的外部效度限制也没有消失：这是规定的外部共享私有创新契约，不是已经证明中央 HMASD 无法查询自身政策。即使交叉结果非常清晰，它仍然不是一种新联合建模架构，也不是默认 N5/U50、内生 co-learning 或现有 HMASD 信息缺陷的证据。
+
+我的支持建立在实际声明的第一层问题上。 若意图是用这一批直接确认“学习适应漂移优于强基线”，我会反对；但当前方案明确将其限定为版本选择归因，并未提出那个更强命题。
+
+四、为什么四格能改变投资：分别检验两个匹配差，而不是只看交互项
+
+令 V
+ℓ,j
+	​
+
+ 表示在真实外部律 ℓ∈{S,T} 下，始终使用冻结表 j∈{S,T} 所诱导政策的期望完整 episode 回报。这里还条件于既有冻结基底，并按计划对基底等权；四格是：
+
+真实外部律	始终用源表	始终用目标表
+source	V
+S,S
+	​
+
+	V
+S,T
+	​
+
+
+target	V
+T,S
+	​
+
+	V
+T,T
+	​
+
+
+题目所要求的两个匹配差正是
+
+D
+S
+	​
+
+=V
+S,S
+	​
+
+−V
+S,T
+	​
+
+,D
+T
+	​
+
+=V
+T,T
+	​
+
+−V
+T,S
+	​
+
+,
+
+交互差为
+
+I=D
+S
+	​
+
++D
+T
+	​
+
+.
+
+I>0 并不意味着两个方向的匹配都值得采用。 一个很大的 target 匹配收益，可以掩盖 source 下使用匹配表反而更差。这也是为何题目把交互项列为 secondary、不得覆盖某个失败方向，是正确的。
+
+hmasd-pro-question-b10-version-…
+
+可以把这个问题进一步写成直接的使用价值。设部署 episode 中 source 律占比为 w，且 0<w<1。这只是解释用权重，不是在本次数据之外假定一种真实部署频率。则按公开版本选对应表，相对于两个不换表政策的收益分别是
+
+V
+match
+	​
+
+−V
+always target
+	​
+
+V
+match
+	​
+
+−V
+always source
+	​
+
+	​
+
+=wD
+S
+	​
+
+,
+=(1−w)D
+T
+	​
+
+.
+	​
+
+
+于是，相对于这两个不换表政策中较好的一个，匹配的增量为
+
+min{wD
+S
+	​
+
+, (1−w)D
+T
+	​
+
+}.
+
+这给出了清楚的判别意义：真正支持按版本选表超越任一个不换表选择的，是两个匹配方向都得到正向支持，而不只是匹配组合平均胜过故意错配组合。 以上是对四格的代数解释，不是新增第五个政策的评价，也不是事后按每个世界选择最好表的 oracle。
+
+统计记号还应保持一致：沿用题目定义的 I；若用常见二水平因子效应记法，“对角格均值减非对角格均值”是 I/2，不能把软件输出的不同归一化结果直接写成题目的交互差。NIST 对二水平效应的均值差定义可作这一记号核对，但不提供本实验的经验依据。
+NIST
+
+这也是我认为交叉优于再加一个目标律下 pooled/stale 臂的原因。目标律单侧比较只能告诉我们某个表在 target 是否较好；不能判断它是否在两律下都较好。两个真实律的等权混合是均匀分布，因而 pooled 方案还可能接近已经研究过的投影／OUT 行为；有限样本下是否精确相同则未测得，不能预先合并它们。
+
+hmasd-pro-question-b10-version-…
+
+五、实现上应保留的干预，以及不能从 B10 原样照搬的部分
+
+表身份、外部律身份和随机地址 phase 必须是三个不同概念。 B10 的加载器保留完整的两版本状态，但便捷返回值只提取 target 概率；其评价器也将外部生成律和 true-q 诊断硬编码为 TARGET_Q。因此，仅更换 stream/phase 或给政策换名称，不会形成所需四格。
+
+新的小型评价封装应直接读取每个最终状态中的两行 final_probabilities。选择表 j 只控制一步期望使用哪份已学概率；选择真实律 ℓ 只控制外部命令生成和明确的事后诊断。不能让政策自动按当前律切换到“正确”表，否则两个错配格消失；也不能让诊断在 source 格仍使用 target 真值。
+
+不需要构造 JointLawLearner、恢复训练循环或重新查询一个会改变学习计数的实例。B10 已提供只读状态加载路径，且 final64 的身份包含两表各 64 个观察；新封装可以利用这一数据契约，而不调用 B09 的训练入口。
+
+随机配对应保留题目的 stream3, phase3, episodes0–15。B09 使用的训练／评价 stream 和 B10 的 stream2 与此区分；不把 table、law 或 view 塞进几何和逐 tick uniform 地址。每个世界的四格从相同初态出发，但 source 和 target 律分别把同一个 uniform 映射为自己的联合命令。跨律路径不同是干预的结果，不是配对失败。 相反，强行让两个律生成同一套联合命令，会取消真实律干预。
+
+在同一真实律内，两个表政策面对相同初态及外部创新。现有队友命令只由其自身位置、固定用户位置与外部 bit 决定，因此该律内的队友路径应保持配对；焦点轨迹可以因选表而分岔。不能在分岔后强制焦点访问相同状态，那会把完整部署比较改成固定历史读数。
+
+同样，保留原单位径向命令、越过用户后的折返、方形边界、固定高度、严格大于才选 bit1 的 tie 规则，以及累计适配器奖励尺度。没有理由在这项归因评价里顺带加入停止半径、速度衰减或新的 continuation 目标。
+
+这些是保证拟议干预确实被执行的局部要求，不是新增科学前置实验或治理步骤。
+
+六、中间预测要落在动作价值上，完整回报仍可能不随之改善
+
+在一个已访问状态 x，设八分支给出的物理奖励表为 R
+x
+	​
+
+(a,z)。两份已学表分别产生
+
+a
+j
+	​
+
+(x)=arg
+a
+max
+	​
+
+z
+∑
+	​
+
+p
+^
+	​
+
+j
+	​
+
+(z)R
+x
+	​
+
+(a,z),
+
+而真实律下的一步 regret 为
+
+L
+ℓ,j
+	​
+
+(x)=
+a
+max
+	​
+
+z
+∑
+	​
+
+q
+ℓ
+	​
+
+(z)R
+x
+	​
+
+(a,z)−
+z
+∑
+	​
+
+q
+ℓ
+	​
+
+(z)R
+x
+	​
+
+(a
+j
+	​
+
+(x),z).
+
+候选动作必须先由已学表固定，之后才能用 q
+ℓ
+	​
+
+ 进行诊断。这沿用现有原生响应表和事后真值归约的语义，不需要新的物理分支。
+
+我接受题目的低置信度中间预测：source 律下源表、target 律下目标表，在发生候选动作分歧的状态上，应较多地减少对应真实律的一步损失。但“匹配概率更准确”本身不算任务收益，p00−p01−p10 的符号也不能替代所有移动几何上的动作判断。
+
+每个真实律都应分别保留两种表政策访问的状态集合，并在各自集合上读两个候选动作的一步 regret。这样能够区分：表确实改变了有价值的即时选择；两表虽不同却基本不改变选择；或有限样本误差使某些匹配选择反而更差。把不同政策各自访问状态上的实际 regret 直接相减，不能单独解释为同状态的选择改进。
+
+完整 64-tick 回报则是另一层读数。表改变初期动作之后，会改变焦点几何、服务分工和之后的干扰机会；真实律也会改变队友路径分布。因此，不能把跨律或跨政策的状态占用变化当作需要“控制掉”的杂项：它是本次完整部署效应的一部分。 但覆盖／质量组成、服务者变化和逐段累计回报仍只是解释实际路径的记录，不是某次切换的独立延迟因果信用，也不是已经估计出的 continuation value。
+
+这给出明确的相反预测：一张目标表可能因为诱导了较好的反馈行为而在两律下都胜出；也可能匹配表在即时判断上较好，却在完整回报上没有优势。两种结果都能削弱继续为版本敏感使用投入的理由，同时不否定 B10 已观察到的目标律部署价值。
+
+七、结果如何改变投资，以及 16 个世界能与不能解决什么
+
+若两个匹配方向都在完整回报上得到支持， 并且各基底、逐世界结果没有被单一极端轨迹掩盖，那么“目标表只是普遍较好的固定反馈政策”的解释受到削弱。可保留的结论是：这些已学表的有用排名随真实外部律变化，公开版本下的表选择具有进一步研究价值。这里不要求每个世界都为正，也不新增三基底全正的通过规则。
+
+这个结果仍不应直接进入一个以错配表为主基线的“学习优越性确认”。错配表是当前组件干预，不是面对同样信息会合理适应的强学习基线。以后若真的选择确认或新的学习比较，需要确认的是一个明确的学习／选择程序及其合格参照，而不是把本次四格归因改称学习方法排名。当前方案也已经作了这个区分。
+
+hmasd-pro-question-b10-version-…
+
+若一张表在两种律下都较好，或在一种律下较好、另一种律下无可分辨的损失， 则当前证据更接近“不换表已经足够”。这会削弱按公开版本选择这两份表的新增理由；它不使 B10 失效，也不证明所有版本处理无用。尤其不能只凭一个正交互项，把另一方向的不利效果隐藏掉。
+
+若同状态匹配改善，但完整回报不改善， 本次就把“概率／即时选择”与“版本敏感净使用”之间的缺口进一步落实了。不应自动追加更长 planner、continuation learner 或更长 horizon 来修复它。现有几何、控制字典和一步目标所诱导的完整路径本身，就是被比较的对象。
+
+若两个匹配方向都反转，或结果仍混合、宽泛不确定， 也不要事后交换表的标签、删除世界或把某个反向映射称为原计划成功。负结果不自动等于技术错误；未决结果不产生追加一轮世界的义务。结束或暂不继续这条径向路线，可以是信息价值与机会成本判断，而不是关于所有 teammate-drift learning 的否定。
+
+关于样本规模，我支持一次固定的 16 世界／基底面板。B09/B10 已经显示明显的世界敏感性，扩大新比较的世界覆盖有具体理由；但没有证据说 16 是统计上的最小充分数，也没有精度保证。不能先读其中四个世界，再决定是否跑完其余部分。
+
+hmasd-pro-question-b10-version-…
+
+这里有两层不同的不确定性。48 个新世界可以改善条件于六份固定表的部署估计；它们不能覆盖重新抽取训练数据、重新估计概率表所产生的变异。192 条轨迹也不是 192 个独立世界，更不是新的训练重复。若展示评价误差，应保留每个世界的完整四格配对和基底分层；不能把四格当作独立样本，也不能用世界数把三个已暴露基底包装成更大的学习样本量。
+
+八、成本与最终选择
+
+拟议成本是自洽的，而且确实主要来自部署规划而不是拟合：
+
+工作	本次计划
+新拟合、训练观察、计数更新、网络前向	0
+读取既有概率表	6 份，来自 3 个 B09 最终状态
+配对世界	3×16=48
+实际轨迹	48×4=192
+实际原生 steps	192×64=12,288
+八分支规划调用／deep copies	12,288×8=98,304
+包含规划的原生调用总数	110,592
+构造／隐式 reset／自定义几何初始化	各 192 次，按实际执行记录
+
+这些数值由原计划直接得到，不包含本答复执行的任何实验——本答复没有执行实验。历史三个 fits 和 384 个采集观察继续作为已有构造成本保留，不重复算新 fit，也不当作免费输入。
+
+hmasd-pro-question-b10-version-…
+
+每个实际 tick 的响应表可以归约两个已学表的候选 Q 和动作，再归约当前真实律的事后 Q／regret。建议把这类算术、实际焦点选择与物理分支分开计数，避免把“零网络前向”写成“零政策计算”。沿用逐格寻址调用时，外部 uniform 会有 12,288 次调用但只有 3,072 个唯一地址；若缓存公共随机槽，则分别报告实际生成次数和使用次数，不改变配对含义。
+
+这批总原生调用量是 B10 的 7.2 倍，不能仅以“零 fit”形容为几乎免费。B10 过程 wall 约 18.069 秒、CPU 约 17.745 秒是已有过程测量，不是新批次的时间保证。新的 wall、CPU、RSS、状态读取、哈希、序列化、审阅和读回工作仍须按实际范围记录。
+
+我仍认为这笔成本值得：四个逻辑格恰好能够检验两个相反的表排名方向；继续目标律单侧重复、换一个 pooled 标签或搜索新固定阈值，都不直接回答这个问题。另一方面，我没有发现一个已经明确提出、在相近成本下更能回答版本匹配是否值得保留的直接学习比较，足以优先替换本次交叉。增加新学习程序会把未知量重新混在一起，而当前六份表已经存在，所缺的是它们的交叉使用后果。
+
+因此，我选择这一批原定交叉评价，保留原规模与干预，只补清整表归因、两个匹配方向和条件部署不确定性的解释。 不同时选择新 learner、确认批次或下一轮规则搜索；也不把这次评价变成所有后续研究的固定前置阶段。
+
+若结果支持双向的有用排名反转，它会为一个狭义的公开版本／既有表选择问题提供继续投入的依据；若一表通吃、即时改善不能转化为完整回报，或剩余区分不值得继续购买，它会削弱该具体投资理由。两种分支都保留既有正负证据，不强迫产生新架构，不改变中央 HMASD 与规定外部控制器任务之间的边界。
+
+当前宪章下，这仍是 DM 的科学选择；本答复不增加预算、批准层、Root／App 协调或执行授权。
+
+MATERIAL_DISSENT no
+## 2026-09-21 08:23 PDT — Pro adopted; B11 whole-table/law crossing prospective and L0
+
+The complete answer above was collected from the one accepted Send at08:03PDT, key
+`hmasd:297bbe0e5aec4082f558b2b2e6e7372e9f2f6c5b5891567aefb555a2ca805411`, observed6 Pro,
+attachment seen. Completion had0 recoveries and8505 normalized characters; saved text SHA256
+`31ef239a65e49e58e5fb65a214c97c532a1683da018e436f15114d1fa49164a8` (20301-byte local
+verbatim file). Delivery returned NOT_DELIVERED/no commits; remote and local question remained
+exactly at`e96d1cdc6836574d60be580afd60d3180d526953`. Pro reports a missing write tool/CLI,
+not a verified permission denial. The full fallback, including that limitation and rendered
+math/source-label artifacts, is preserved above; no resend or partial summary substituted it.
+
+**Adoption.** Adopt the proposed four-cell,16-world crossing and its bounded decision branches;
+MATERIAL_DISSENT is no. This is a new key comparator and hence received focused advice,
+whereas B10's completed reading was already covered by the preceding consultation. Pro's
+additional source/count claim was checked locally:95402 source/target counts are
+[5,32,21,6]/[26,6,8,24], giving posterior bit1 marginals
+[.424242424,.590909091]/[.5,.469696970] at prior.5/cell. No updates or simulations were
+performed for this arithmetic. Accept the consequent limitation: B11 changes the **entire
+empirical table**, including finite-sample marginals and dependence. It does not isolate
+correlation as B09's within-table marginal projection did. Do not normalize these differences
+away or add a new attribution arm after advice. Pro did not independently audit complete B10
+NPZ trajectories or all digests; our recorded raw checks retain that role. Its four-cell
+algebra follows directly; its external NIST mention is not empirical support for our task.
+
+For any hypothetical source prevalence0<w<1, the matched-table policy would improve over
+always-target by w×D_source and over always-source by(1−w)×D_target. Thus both matching
+directions matter; a positive interaction alone can hide a bad matching direction. This is
+an algebraic interpretation of the four cells, not a fifth policy rollout, a chosen deployment
+frequency or a per-world best-table oracle. No extra permission, Pro round or Root contact
+is needed for this declared implementation, execution, reading and the covered route decisions.
+
+**Fixed B11 question and protocol.** Can the useful ranking of the two actually learned tables
+reverse with the external teammate law, or does one frozen feedback controller suffice across
+both? Follow the immediately preceding fixed proposal, with no new learning. All3 B09 final64
+states at evidence`69a55e71d9f1bca4e8cdd204adce256cd05a7676`, bases95401/95402/95403;
+root manifest SHA256`236734838b59a4609f71bf305c806cc205eecec97cc379c28b5483701eadbc45`.
+Each state's two untouched final probability rows were learned separately from64 source and
+64 target observations. `J_source` always integrates row0; `J_target` always row1. Both use
+the original eight native branches and exact greater-than/tie-bit0 rule. Actual law separately
+selects SOURCE_Q or TARGET_Q for external generation and post-choice diagnosis. **Table id,
+external law id and RNG phase are distinct variables.** No policy chooses its table from the
+true law, and no mismatch cell is silently corrected. No B09 learner/training entry is called.
+
+Preserve the complete B09 native physics/reward/radial contract. RNG masters are95401/2/3,
+stream3/phase3, episodes0–15, ticks0–63. Geometry/category1, external uniform/category2 and
+environment seed/category4 omit law/table/view indices. Four cells share geometry and uniform
+slots; each law maps the uniform to its own joint row. Within each law, both policies have
+identical exogenous teammate commands/paths. Across laws, paths may differ as the intended
+intervention. Focused policy selection receives only reward tables and the frozen empirical
+probabilities; current true-q diagnostics are calculated after the actual bit is fixed.
+No selected geometries, reset-policy changes, learned continuation or reward modification.
+Every cell runs all16 worlds, even after earlier outputs become visible.
+
+**Prewritten reading.** Primary D_source = source-table minus target-table under source law;
+D_target = target-table minus source-table under target law, each an actual64-tick cumulative
+adapter-return difference. Secondary I = D_source+D_target, **not half that sum**. Show all
+four cells, every paired world, each base mean, and equal-weight three-base means. No threshold,
+claim decision, result-dependent expansion, outlier removal or post-hoc table relabeling.
+Report per-base paired-world sample standard deviations. A descriptive conditional Monte Carlo
+standard error of the equal-weight fixed-base mean is sqrt(sum(s_b²/16)/9), separately for
+D_source/D_target and the paired per-world sum I. This conditions on the three exposed bases;
+it is not uncertainty over learning, a192-sample standard error, a confirmation test or a
+precision guarantee. No p-value/CI-based success rule is introduced.
+
+On each law×actual-policy occupancy, retain both candidate bits and their same-state true-q
+regrets after choosing. Read the difference (mismatched regret minus matched regret) on those
+same states, disagreements and matched-better/equal/worse counts separately by occupancy.
+Do not compare regrets on two different visited-state collections as if that identified
+same-state choice improvement. Low-confidence intermediate prediction: matching reduces
+immediate loss when candidates differ. Full-path matching benefit may fail. Coverage, quality,
+service owners and cumulative return describe resulting paths, not delayed credit or a measured
+continuation value. Existing B09/B10 adverse and positive worlds remain unchanged evidence.
+
+If both matching directions gain meaningfully across the full retained panel, the one-table
+feedback explanation weakens and a narrow public-version/previously learned-table question
+deserves further investment. No three-base-all-positive rule is imposed. If one table is useful
+under both laws, or matching helps immediate choices without useful full returns, that reason
+for further version-sensitive investment weakens. Mixed/uncertain results do not oblige another
+panel or a more complex planner. These are judgments about this radial route, not all drift
+research. No fresh-learning confirmation, unseen-version adaptation, uninterrupted online
+switch, source-data-reuse or general central-HMASD claim follows. A wrong-table intervention
+will not be promoted to the competent primary baseline of a future learning claim.
+
+**Cost and binding.** Zero new fits, collection observations, count updates, gradients or
+actor/value-network forwards.192 trajectories,12288 actual native ticks+98304 planner steps/
+deep copies=110592 native calls;192 constructors/implicit resets/logical initializations/
+custom geometry refreshes. Six frozen probability views from3 states,12288 response tables,
+both empirical Q vectors/choices per table, current-law post-choice Q/regrets,12288 actual
+choices.12288 external draw calls at3072 unique addresses under the existing uncached RNG.
+Reuse of B10's loader also constructs3 unused marginal-product views; record these inherited
+arithmetic operations rather than call them fits or alter the frozen loader just to remove them.
+Record per-cell work, hashes/validation, serialization and actual wall/CPU/RSS. History retains
+3 B09 fits/384 collection observations; preparation, review and earlier tiny work remain separate.
+One sequential local_linux process, one numeric thread, fresh native memory admission.
+Output`runs/skill_teammate_drift_learning/b11_law_table_crossing`; snapshot launch only at
+accepted published source, stable lead`Codex DM (independent session)`. No production pilot.
+
+**Engineering L0.** Owned new package
+`experiments/candidates/skill_teammate_drift_learning/law_table_b11/`, runner
+`scripts/run_skill_drift_law_table_b11.py`, mirrored focused tests, and its B11 outputs. Reuse
+unchanged B09 physical/RNG/command helpers and B10's sealed loader/branch equality helper
+where useful; new source manifest includes reused B10 dependency. Never edit B09/B10, native
+environment, shared learner/launcher, FSD, another notebook or RESEARCH as part of code work.
+New evaluation loops and reductions must actually implement both independent ids, not just
+rename B10 policies or RNG phases. Keep source/input digest binding, admission guard, existing
+output refusal, truthful partial exposure and separate table/true-law diagnostics.
+
+One shared zero-fit tiny native fixture is permitted: readonly base95401, RNG master95993,
+stream3/phase3,1world×2ticks×4cells =8 actual+64 planned=72 native calls,4 constructors/setups,
+no fitting. Tests share its arrays rather than rerun per assertion. Check all four cells,
+law/table decoupling and first-state policy equality across laws, correct external mapping,
+within-law pairing and cross-law uniform pairing, frozen arrays, selected branch/actual identity,
+terminal/reward scaling and exact counts. Pure unequal synthetic four-cell/multibase data
+checks contrast signs, sum-not-half interaction and paired conditional Monte Carlo arithmetic.
+Loader tamper/output/admission/source checks remain pure; existing tests cover unchanged
+radial/overshoot physics and need no repeated fixture. Record any additional repair exposure.
+DM accepts the diff after independent Reviewer. Implementer may edit only these new code/test
+paths, run the focused checks, and return facts; no scientific choices, production, Pro, index/
+notebook edits, commits or children. Publish this prospective source before execution.
