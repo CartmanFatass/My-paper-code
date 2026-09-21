@@ -20,11 +20,20 @@ skills or an independent host and do not wait for Claude's label-content study; 
 not establish that the current HMASD learned skills are effective. Cross-duration/clock-perturbation
 generalisation is retained only as an unstarted candidate from the owner's supplied proposal.
 
-**Other Codex coordination:** Root is task
-`01a0c1e3-7dfb-79d3-a7fd-fd3010b54c2b`, host `local`, for its separately assigned
-owner-requested shared-control work and directions. Its authoring checkout is
-`/home/fires/.codex/worktrees/abc-closure-review/hmasd-wsl`, branch
-`codex/dm-result-self-publication`. Each DM publishes its own direction results and
+**Acting project Root (owner reassignment, 2026-09-21):** task
+`01a0c348-428c-7f01-bd8b-121d69543032`, host `local`, now coordinates the whole research
+programme. The owner explicitly instructed: "你不能只处理和你相关的 你现在来管理一下整个项目的研究",
+after supplying a third-party portfolio review and asking whether re-entry is achievable,
+whether low-value directions should close, and whether usable insights enter shared consensus.
+Root's isolated authoring checkout is
+`/home/fires/.codex/worktrees/project-research-coordination/hmasd-wsl`, branch
+`codex/project-research-coordination-20260921`. Its former C work has no live native or Pro
+operation; C's source-bound lead and evidence below remain historical execution facts.
+The prior Root task `01a0c1e3-7dfb-79d3-a7fd-fd3010b54c2b` and checkout
+`/home/fires/.codex/worktrees/abc-closure-review/hmasd-wsl` are historical recovery locators,
+not another current project coordinator. This new assignment supersedes the earlier
+initialization-only absence of Root responsibility; it does not authorize App cross-task sends.
+Each DM publishes its own direction results and
 RESEARCH standing/evidence entry to main, without Root approval or integration. DMs
 handle ordinary concurrent Git changes themselves. Messages between independent Codex App
 tasks require an explicit user request; no autonomous sends, replies, acknowledgments or
@@ -56,6 +65,12 @@ results, failed attempts and costs survive reopening; no fit allowance or old ru
 is reinstated. The earlier A/B/C closure remains historical evidence, superseded for B/C by
 this explicit selection. UCOPE's completed two-tick-copy route stays idle, and its task's
 current scientific responsibility moves to B. Claude's FSD ownership is unchanged.
+
+**Current project review:** [2026-09-21 whole-project reassessment](#portfolio-review-2026-09-21-project-research-management)
+reconciles the owner's third-party report with subsequently published results. Existing native
+operations retain their accepted inputs and owners while this review is prepared. Research
+priority is evaluated by the next useful observation and its route to the UAV question, with
+no obligation to keep three directions busy or to manufacture a successor for an answered route.
 
 ## Active
 
@@ -644,3 +659,1516 @@ CPCP and VNFC move to reserve; the previous tail-return reserve and other stoppe
 keep their status. New science follows each DM's prospective design and admission, not an
 automatic bulk launch of the planning counts. This initialization adds zero fits or result
 evaluations and preserves all previous costs and failed attempts.
+
+## Portfolio review 2026-09-21 project-research-management
+
+### Question
+
+**Owner trigger and decision.** The owner supplied a third-party review of all directions,
+asked "重新进入的条件是否真的可以达成 如何达成 如果不能达成或者概率较低是否要关闭本方向" and
+"是否将可用insight更新至共识", then explicitly reassigned this task from C to project Root:
+"你不能只处理和你相关的 你现在来管理一下整个项目的研究". This is a new project-level investment
+decision after B08, VSP B11, C07 and FSD B14; the earlier Portfolio answer is relevant history,
+not advice already covering these new results. Please critically assess the supplied review,
+our corrections below, and a concrete next-investment sequence for the whole programme.
+
+**Conversation:** a new Jev Portfolio conversation because this is a changed, whole-project
+question. The operation key will be retained with the decision; the private conversation URL
+stays only in local transport state. Target: this section's empty `### Answer`; leave its
+`### Decision`, all earlier reviews and all direction rows unchanged.
+
+**Current execution facts.** Pause remains lifted. During preparation B independently
+published its completed six-fit B08 diagnostic at `b0dd6b5cc43d964f303b0c2b842a412629883e64`.
+Root refreshed the index and read its complete interpretation at
+`fe0e5719836f16cc5a44f02d80f53c95592250bd`; B's next selected action is a source-only native
+assumption check. Do not duplicate this work or reinterpret an already accepted operation.
+C and VSP have completed their selected work, no live producer or outstanding Pro answer.
+FSD's owner placed it in reserve on 2026-09-21 03:52 PDT; Claude retains its ownership.
+G33 remains owner-frozen. The owner did not ask for an App cross-task message. This review
+does not send one, create a second FSD DM, or silently resume a reserved or frozen experiment.
+
+**Context (paths marked source_sha inherit the full published question SHA in the send).**
+
+- Governance, source_sha: `docs/project/OPERATING_CONSTITUTION.md` §§1–5, 7–8. Apply the
+  current owner instruction above, the programme's separate k/N questions, matched-information
+  UAV aim, exploratory role of small models, DM independence, no fit allowance, and advisory Pro.
+- Methods, source_sha: `.agents/skills/hmasd-portfolio-task/SKILL.md` Steps/Boundaries;
+  `.agents/skills/hmasd-scientific-tools/SKILL.md` Explore an idea, Update the working explanation,
+  Comparators and MARL information, Statistics, Cost and exposure, Pro. Engineering only for
+  the feasibility disputes below: `.agents/skills/hmasd-research-engineering/SKILL.md`.
+  These are methods under the constitution. In particular a skill's stale shared-integrator or
+  allowance wording does not displace current DM self-publication or the removed allowance.
+- Standing: the source_sha active/reserve/archive tables above; scientific snapshot
+  `267d1bcaebafa5f8f9049098d645e2f548b7c678`, supplemented by the B08 publication
+  `b0dd6b5cc43d964f303b0c2b842a412629883e64` and explicit B evidence revisions below.
+  Read affected notebooks' working explanations and named contrary results, not only score signs.
+- Frozen results retain their original arms, independent units, endpoints and selection rights.
+  A new recommendation cannot retroactively change a primary, certify an unread raw artifact,
+  or use a newer writable branch as a replacement reasoning source.
+
+#### Evidence and changes that matter for this choice
+
+All unqualified source paths in this subsection resolve at
+`267d1bcaebafa5f8f9049098d645e2f548b7c678`. The read-only audit used bounded internal Scouts;
+Root checked consequential discrepancies against the cited code and records. It did not
+rerun policies, fit models, reproduce every archive, or independently certify the third party's
+entire raw-array audit. The supplied report and its recompute table are reproduced below with
+their original file hashes; their assertions are evidence to evaluate, not instructions.
+
+| Direction / asset | Current evidence and bounded judgment | Smallest observation that could change investment |
+| --- | --- | --- |
+| FSD, owner-reserved; native baseline | The resumed **20260916 matched-information B01**, not the older four-block 20260915 interruption B01, used five independent pairs, bases 772803 through 773203, frozen source `887563f4713177d76999ef5832ce2dfa946d8505`. D1280−CF at rollout45 is +.289511024, df4 t95 [.161417,.417605], a declared package contrast with headroom explicitly not established. CF final is below its best observed old panel in all five; replacing the final primary by that selected best is invalid. B05 already diagnosed saturation and implemented scaled CF_S (source `52400ff4d3ebe284cbc12dc8b8c510022b850d98`); three reused blocks gave CF_S late J about .321 versus D .426. This is learning evidence, not a tuned competent-reference verdict. The plain own-observation MAPPO arm exists, but an accepted current Scenario1 performance result was not found. | Establish the actual competent comparator and its training/selection rights. Own-observation MAPPO is a useful practical reference, but if HMASD receives a held central summary it alone cannot attribute hierarchy value under matched information. Retain a competent equally informed flat comparison such as properly assessed CF_S. No blanket retraining of all old directions. |
+| FSD skill selection | B09 labels differ; its best-label-on-the-same-panel comparison is optimistic. B13's never-updated coordinator reaching old D levels is a feasibility observation, not equivalence. B14 frozen UNIFORM−D means +.019428119 / +.015728215 / −.019251057 (mean +.005301759); BANDIT mean +.020454788 on three reused checkpoint units and 32 nested worlds. It does not supply a reliable selection upper bound. | Select a constant label on development worlds, freeze the rule, score on fresh worlds against the same checkpoint's as-trained coordinator. This is a conditional frozen-deployment question, with zero training fits but nonzero evaluations. State-aware lookahead needs an audited simulator/snapshot and legal-information contract; feasibility is not yet established. |
+| B: `skill_teammate_drift_learning` | B06 first64 +.008187500, t95 [−.015186418,+.031561418] remains inconclusive. B07 live own-collection full256 R_E−F_E mean −.002921875 versus uniform-history +.002932292. **B08 is now complete:** R−F on R history is −.002218750 / −.000515625 / −.005968750; on F history −.009000000 / −.000343750 / −.006296875. These six dependent contrasts on three reused blocks weaken an acquisition-only repair story. Both prospective95303 mapping/history predictions occurred; realized reward noise cancelling optimistic outcome estimates remains an alternative to general calibration. Early favorable evidence survives. B05–B08:125 production fits,158976 collected ticks,10.228 s scientific-process wall, excluding preparation/advice and separate historical/tiny work. Complete B08 notebook/raw reading `fe0e5719836f16cc5a44f02d80f53c95592250bd`; B07 `6ab8db786a2dc2397d883e8476ccb0303b059f0e`; B08 prospective `9d7f9a4d9624bec3a5ea69e88f04e1d9912ade78`. | Preserve its DM's next **source-only native assumption check**: legal observation/action → joint physical service outcome → known reward → next-state/continuation. Determine what really needs learning versus the known reward formula and ordinary outcome modelling. Zero new fits or rollouts are selected. Off-collector B08 readouts do not reconstruct online counterfactuals; no automatic epsilon, prior, horizon or calibration rescue. This bounded native bridge has concrete portfolio value and does not wait for a Root message. |
+| VSP-03 | B09 O−G +.017577881, df4 t95 [.010699359,.024456403]; bounded fitted-planner benefit. B10 56.4831% is a ratio of three means, not uniform capture (block ratios .396/.460/1.155), nor mediation/equivalence. B11 now exists:3 MLE fits from512 R0 episodes each, fresh4096-world blocks; O_R0−R0 +.028125407, O_R0−O_full −.000270996. It resolves the selected from-scratch acquisition question within the correct family. B08–B11 total19 fits,32,174,080 ticks,102.174 s scientific wall. Current fixed-host route is answered; no selected successor. | Stop present investment and retain O_full plus the tested O_R0 construction. Scenario1 lacks the persistent exclusive reservation required by the proposed direct mapping; this mapping failure is not a veto on all UAV timing work. No invented acquisition dependency remains. |
+| C: `skill_information_refresh` | C07 is complete, rather than merely proposed: NEAR−AF +102/1280 worlds, mean +.0796875, approximate normal95 [.0560616544,.1033133456], five positive block means. LONG−NEAR +3; the prospective finite upper .0434526951 is below .05 only for the fixed program/law. C06+C07 zero new fits;491520 actual and203534144 model ticks. NEAR's26.1x panel runtime is not a missed deployment deadline. Current route ended; final feasibility/third-party response `3ca4cb1f83ea869e1efca852a099db31c52b0e2c`. | Archive current investment, retain NEAR and ACTIVE_FIRST. Future lawful model-estimation or cost/benefit questions are technically possible, not unpaid C07 obligations. CADC has a recoverable message/cache/receiver/service path; a new fixed-receiver native comparison is possible but unselected. No calibrated low success probability or global timing optimality is established. |
+| A / UCOPE / FOLR | A retains useful ordinary multistep reuse, without stable extra trace value; A02 primary failed. UCOPE B10's nine learned gate fits and actual paired suffix targets did not beat ordinary G under its prospective continuation rule; occasional positive local deltas remain. FOLR cache A01 has three adverse contrasts, mean −2.087265625. Each selected recipe is finished and idle with no selected producer. | Keep stopped. Reopening would need a task-grounded comparison that changes the respective reuse, commitment or history judgment; a larger architecture, nonzero local target, favorable world or generic statement of possibility does not justify renewed investment by itself. These are not class-wide impossibility results. |
+| CPCP, reserve | A real unimplemented, untested cross-play question; no compatible population of independently trained flat checkpoints has been verified. Original five-agent complete three-bundle design costs2,162,688 team ticks and24,576 Adam calls plus implementation; it is not an automatic first launch. | Conditional on actual interface-compatible independent teams, frozen own-team/cross-play evaluation is zero additional fits. Count team/training population as the unit; include same-team tradeoffs and all declared compositions. It is not currently free, and absence of a deficit in one homogeneous host would not answer all coordination settings or N generalisation. |
+| VNFC, reserve | The old N7 attribution panel failed relabelling on277/1024 states. The later N7 INTERVAL/TERMINAL comparison has no final primary after SIG11; learning updates are not a result. Existing MAPR/DIRECT both trail scripted BCRH by about .04–.065. | An isolated stable implementation plus a discriminating service-credit or population question may warrant reopening. Technical failure is not a negative effect or sunk-cost reason to rerun. No universal node memory-test prerequisite is inferred. |
+| Tail-return distributional learning, reserve | B01 favorable native own-tail contrast then B02 within the MEI; a general practical advantage remains unresolved. | Keep lower priority than a competent comparator / useful k or N question. A scalar eta-conditioned comparison can be informative; an unchanged replication is also legitimate if it actually changes the decision at proportionate cost. No mandatory new architecture. |
+
+Primary paths for the preceding rows: `docs/research/candidates/flexible_skill_duration/NOTES.md`
+(B05 scaling, B09, B13, B14 and final owner reserve sections), its
+`FSD_MATCHED_INFORMATION_BASELINE_B01_PROSPECTIVE_CARD_20260916.md`;
+`docs/research/candidates/skill_teammate_drift_learning/NOTES.md` at the separately pinned
+B07/B08 SHAs (including the completed B08 revision); `docs/research/candidates/vsp_03/NOTES.md` and
+`CLAIM_fitted_opportunity_b09.md`; `docs/research/candidates/skill_information_refresh/NOTES.md`
+and `CLAIM_near_commit_c07.md`. Complete result links and original lead contracts are retained
+in their standing rows. Relevant predecessor readings: A at
+`6c1a38833a85a55574a0fba8714b51b38a4b988a`, UCOPE at
+`0d6f299c007840596405b8a359952a082a6ba567`, FOLR at
+`cd3b97ab7982ac5efec86eace09d33328be841fa`, each under its own candidate `NOTES.md`.
+
+**Archive audit: stopping investment is not an assertion of zero benefit.** MGTAP,
+`vsp_c1`, SCDMP, actuator-conditioned partial sharing (ACPS), LCAC, CADC, TRDL and ACVC
+have sparse, mixed and/or package-level native observations. Preserve those adverse
+observations without relabelling them as precise population-negative estimates. MGTAP's ten
+paired observations span variants, not ten interchangeable repeats. ACPS here means
+`actuator_conditioned_partial_sharing`, not the differently named active-post-churn archive.
+ACVC's wrapper gain over a weak proposer does not establish advantage over competent MAPPO.
+CADC's negative one-pair net-service contrast also changes learned motion and cannot isolate
+receiver/timing value. These remain lower-priority archives or the already selected TRDL reserve.
+
+The report's exact-equality grouping is too broad. CBSC RAW/STRUCT ties are exact on its
+tested outputs; CRTO's matching action/readout sets and EGRCR's same-consequence units have
+specific domains. Later `vsp_02` native RESET/CARRY pairs are mixed (+.0185547, −.0087891).
+DISH had zero eligible legal transfers, so the transfer benefit was unestimated; its package
+outcomes were adverse. RCLE learners not beating a reference is not an impossibility proof.
+UCOPE and FOLR also are not equality theorems. Keep their recipes stopped without enlarging
+these claims. Other archived rows (`ec4g_r1`, `eociv_lite`, `orbit_shadow_read`, `recct_lite`,
+`scope_1s`, active-post-churn and others listed above) have no newly selected motivating evidence
+in this review; their status stays, with no claim that every artifact was re-audited.
+
+Archive sources include the candidates' `DIRECTION.md` and closing/result records;
+specifically `vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B13_RESULT_EVIDENCE_20260909.md`,
+`semigroup_consistent_duration_model_policy/pro_packets/20260910_post_b01_convergence/SCIENCE_BRIEF.md`,
+`actuator_conditioned_partial_sharing` closing evidence at
+`266861b02cbd4839be60abddc2ba013139cec06f`,
+`acvc/ACVC_CLOSING_MEMO_20260916.md`, and VNFC's
+`VNFC_N7_NATIVE_SERVICE_CREDIT_B03_RESULT_INTAKE_20260912.md` at
+`51965a896a4e3b9288fccb6abe277c2547dc07b8`.
+
+#### Corrected feasibility and measurement premises
+
+1. **Static users/fixed N do not prove zero timing value.** Policy state, geometry,
+   commitment, energy or opportunity can change without an exogenous event. The report's
+   event-rate × waiting-time heuristic is useful only for its assumed event-reaction mechanism.
+   It is not an upper bound on all endogenous state-dependent timing, nor a novelty result.
+   Constant N cannot establish variable-N transfer, but does not invalidate every other
+   useful observation on that host. Short transparent rules often won the tested packages;
+   their existence is not a theorem that learning has no approximation/adaptation value.
+
+2. **Native hosts exist, but readiness and history differ.**
+   `envs/uav_service_restoration/README.md`, `adapter.py`, `events.py` and
+   `configs/uav_service_restoration/milan_site_outage.json` describe a self-contained,
+   forward-only package and array adapter, not a registered current learner entry point.
+   Its preset has one presampled outage at300–600 seconds in an1800-second episode with
+   10-second steps, not a periodic outage every180 steps. `ha_ctse_process/env_factory.py`
+   registers Scenario7's energy host, not this package. Continuing-task external truncation
+   requires the real bootstrap path, not just a compatible array shape.
+   Scenario7 has a tracked historical artifact
+   `baselines/scenario7_arm_a_2400000_metrics.json` reporting2,400,000 training steps and8
+   CSV-reconstructed evaluation episodes (2026-06-19, rewardv1,200Wh).
+   It contradicts categorical "never trained", while not by itself re-certifying training
+   or a current k comparison. `configs/config_1.py` now defaults to interfacev3, rewardv2,
+   armC/160Wh; its explicit armA and
+   `experiments/launchers/train_multiproc_config_1.py` preserve an older contract. Versions
+   cannot be silently mixed. The local source audit does not yet select either host.
+
+3. **E3's recall is already reported.**
+   `docs/research/candidates/flexible_skill_duration/FSD_E3_HETEROGENEOUS_HAZARD_RESULT_EVIDENCE_20260905.md`
+   reports18/18 valid cells and event precision/recall (§§ around lines104–125). Recall is
+   .439400/.366197/.473502 (small), .495223/.393589/.256063 (medium),
+   .357227/.406911/.245300 (large). Exact adaptive-minus-best-fixed margins are .0570374464,
+   .1443577875 and .2712189840 across its three corridor settings. Those exact references are
+   opportunity evidence, not learned or native UAV gains. `scripts/run_flexible_skill_duration_e3.py`
+   hard-codes c=.25 without trigger gradients. E3 weakens that uncalibrated package, not all
+   trained KEEP/END. Reading a supposedly missing recall is already completed work; a c sweep
+   is new evaluation/training work, not a free read. The current audit read the published
+   evidence document; absent raw summaries were not represented as freshly reverified.
+
+4. **N assets and prerequisites are specific.** G-series does contain fixed-interface
+   active-roster/mask models and toy transfer through N80, with deployment capacities128/192/224
+   (`ha_ctse_process/open_roster_direct_mvp.py`,
+   `ha_ctse_process/continuous_roster_policy.py`; see recorded G7/G8/G12–G16 evidence).
+   This is a useful engineering/toy asset, not a native specialists-versus-generalist table.
+   A constructor accepting N alone does not establish compatible tensors, identity handling,
+   recurrent resets, legal metadata or checkpoint transfer. Verify the actual selected path.
+   A frozen loss-recovery probe estimates the fixed-controller contrast, not the effect of
+   learning a recovery-capable population. The conjectured native <.05 effect is unverified.
+
+5. **Separate measurement levels and effect scales.** From the supplied recompute T6,
+   independent paired-training SDs are .07428 (B02) and .103163385 (B01 package); they are not
+   .125–.175. For a paired normal model with plug-in fixed SD, two-sided alpha=.05 and80%
+   power, solving the noncentral-t power equation gives the following design calculations.
+   These are Root's arithmetic checks, not new empirical findings or calibrated forecasts:
+
+   | Historical SD used | n=5 minimum detectable mean | Pairs for .02 | Pairs for .05 |
+   | --- | ---: | ---: | ---: |
+   | B02 .07428 | .1249387 | 111 | 20 |
+   | B01 package .103163385 | .1735205 | 211 | 36 |
+   | B14 UNIFORM checkpoint contrast .021343685 | .0359000 | 12 | 4 |
+
+   The reported .125–.175 scale is a design MDE under those assumptions, not a universal UAV
+   noise floor. Small historical samples make the plug-in SD uncertain. More independent
+   worlds reduce within-checkpoint world variation, not variation between independently
+   trained policies. Selection of checkpoints/labels needs development and fresh test worlds.
+   Repeated D_SAVE copies do not add independent training units. B14's smaller conditional
+   variance cannot be substituted for a retraining experiment. Do not prescribe5 seeds,
+   256 worlds or109 pairs by habit, or use these SDs for every archived algorithm/host.
+
+6. **Implementation findings need the actual scientific contract.** CF scaling already has
+   a B05 repair. Central entropy summed over agents changes the effective coefficient relative
+   to a mean convention; it is not a bug without an intended objective. A finite-horizon task
+   can legitimately terminate; continuing truncation requires correct time-limit bootstrapping.
+   Inspect the actual intended runner path before a shared patch. Do not rewrite frozen
+   experiments, infer that all results are corrupt, or demand a universal hardware test from
+   two localized historical SIG11 failures. G33 stays untouched.
+
+#### Options and current Root recommendation
+
+**First investment: resolve the native comparison that the k/N programme actually needs.**
+Prepare a bounded native baseline/measurement question: scripted placement as a transparent
+reference, competent plain own-observation MAPPO as a practical reference, and a competent
+flat learner with the actual HMASD information rights for hierarchy attribution. Use the
+already implemented scaling correction where applicable; define training/selection and final
+evaluation before scores. Do not automatically refit plateau HMASD and every baseline five times.
+The third party's "5–10 fits/about a day" is an unverified planning estimate, not a declared
+batch or allowance; the selected DM must expose real complete cost. A small diagnostic can
+precede confirmation when it resolves competence or the relevant effect scale.
+
+The first conditional probe can be the development-selected constant-label policy versus the
+as-trained coordinator on fresh matched worlds using recovered FSD checkpoints. No new fits
+does not mean zero simulator or artifact-recovery cost. It measures a fixed-checkpoint
+deployment choice; do not oversell it as the causal hierarchy premise or learned adaptation.
+This investment is motivated by known comparator/selection uncertainties, not a mandatory
+headroom gate for all exploration. FSD remains owner-reserved and has its own Claude DM:
+please distinguish a Root-owned shared measurement preparation from actually selecting new
+FSD research or a new direction. A replacement FSD DM is not an option in this review.
+
+**Next native k option:** service restoration or the versioned Scenario7 host, with a concrete
+within-episode recovery/commitment question. First establish the real entry point, information,
+termination and comparator contract. Existing corridor exact references support an economical
+positive-control explanation when needed; repeating its already reported E3 metrics or launching
+9–12 c-sweep cells without a new discriminator is lower value. A fixed-k curve can test a
+specific mechanism but a flat curve is not all-adaptive-timing impossibility. No k fit is selected
+by this question, and G33 is excluded.
+
+**Next native N option:** use a truly compatible baseline population for own-team/cross-play
+and, separately, native specialists-versus-generalist transfer. CPCP remains the selected
+reserve that can use the first observation when compatible teams exist; it cannot inherit
+5-agent toy identities or pretend six-agent central-input FSD is already a matched flat
+population. Cross-play and variable N answer different questions. VNFC's unstable older
+comparison is lower priority unless a new stable implementation is the cheapest discriminator.
+
+**Existing investments:** B08 has completed; its results weaken an acquisition-only repair
+and its DM has selected the concrete native source bridge above. Preserve that independent
+work rather than prescribe another toy iteration or assign a duplicate audit. Close current
+C and VSP investment and maintenance with their positive results retained; do not buy a
+successor merely because they are idle. Keep A/UCOPE/FOLR and the stopped archive recipes
+stopped. Low precision alone does not oblige replication or prove a class ineffective.
+
+This proposed sequence changes resource priority, not the meaning of frozen results or the
+permission model. No action needs another blanket allowance. Fits, source publication,
+proportional code review and native admission apply when an actual scientific batch is selected.
+Preparation here has added zero fits, environment-policy evaluations or model simulations.
+
+#### Advice requested
+
+Please give one usable project-level decision, with your strongest disagreement first if
+material. Which corrected conclusions should enter shared foundations, and which should be
+rejected or retained only as conjectures? Choose the next two or three bounded observations,
+their order/dependencies, the actual judgment each would change and when to stop investing.
+Explain whether native baseline/selection measurement is the best first use of effort versus
+the two native-host options, CPCP, B's native bridge, or remaining idle; include small-model value
+and its unmeasured transfer cost rather than either a blanket toy veto or zero transfer cost.
+Separate already achievable technical prerequisites from unsupported success probabilities.
+Do not require a more expensive architecture, exhaustive falsification, a positive headroom
+census, a fixed seed count, repeated review or owner approval for ordinary within-direction work.
+Point out any actual authority conflict in the concrete implementation sequence, without
+inventing an approval layer. Do not launch experiments or edit direction states yourself.
+
+The owner report follows for a complete critical reading, including its overclaims and stale
+details. Root's corrections above and the pinned current evidence must remain distinguishable
+from the third party's own words. Reply in Chinese; cite consequential sources actually read
+and identify any critical source you could not access.
+
+### Supplied third-party report and recompute table
+
+<details>
+<summary>Owner-supplied report</summary>
+
+Original file SHA-256: `03961deaabe1daacfb833c4f8790ea9e276e391542bf04a65b0f15e959b79681`.
+Quoted text below preserves the supplied content, with line endings normalized.
+
+> # HMASD 研究方向第三方审阅
+> **只读，2026-09-21**
+>
+> ## 我做了什么，以及这份结论应该被信任到什么程度
+>
+> - 工作已完成。我没有向仓库写入任何内容。11 个 research scout、2 个 code scout、1 个 Implementer 重算任务和 1 个独立 critic 完成了检索和算术核验。我本人阅读了所有承载判断的文件，并负责最终综合。
+> - **已验证。** 所有我要求 Implementer 重算的核心数字，都能从原始 per-world 文件中逐位复现。这涵盖：
+>   - VSP-03 B09/B10
+>   - drift B05
+>   - C06
+>   - UCOPE B10
+>   - FSD B01/B02/B14
+> - **Critic 的异议。** 我专门让 critic 尝试推翻我关于 `k-axis` 的论证。它确实提出了异议，我采纳了其中两项修正，并在下文标出。
+> - **未验证。** 我没有亲自检查 legacy R-/G-series；这些内容只来自 scout 的摘要。文献方面的结论是“没有找到”，而不是“不存在”。我也没有读取 Codex worktree 中尚未发布 commit 之外的内容。
+>
+> ## 术语
+>
+> - `J` 是每步平均 team reward。在 scenario 1 中：
+>
+>   `J = 0.7 × coverage + 0.3 × signal quality`
+>
+> - `A fit`：一次训练运行。
+> - `k`：一个 skill 被持续保持多少个 step。
+> - `N`：fleet size。
+>
+> ---
+>
+> # 核心结论
+>
+> ## 1. 两个研究轴大部分时间都被研究在了“它们根本不可能起作用”的地方
+>
+> - Scenario 1 和 5-UAV host 都具有：
+>   - static users
+>   - fixed fleet
+>   - no events
+>
+>   其余实验则都运行在专门构造的 toy 环境上。
+>
+> - 仓库里实际上已经有两个拥有正确结构的 UAV-native host，并且已有 HMASD adapter，但**一次训练都没有跑过**：
+>
+>   - `uav_service_restoration`
+>     - 有 site-outage events。
+>     - 它自己的文档明确说明其独立于 frozen G33 demand-burst lineage。
+>
+>   - Scenario 7
+>     - episode 中途存在 UAV failure 和 recovery。
+>     - 并带有 public flag。
+>
+> ---
+>
+> ## 2. 当前 UAV host 只能检测大约 `0.125–0.175 J` 量级的效应
+>
+> 但整个研究计划一直在追逐：
+>
+> `0.0001–0.03 J`
+>
+> 量级的变化。
+>
+> | 设计 | unit 间噪声 | 5 个 unit、80% power 时可检测效应 |
+> |---|---:|---:|
+> | 两个 arm 都重新训练，再比较最终 `J` | 约 `0.125–0.175 J` | 原文表格该处排版损坏 |
+> | 使用相同 frozen checkpoints 和 worlds，只改变 deployment（B14 风格） | ≈ `0.02 J` | ≈ `0.035 J` |
+>
+> - 一个 `0.02 J` 的 retraining effect，大约需要 **109 对 seed pairs**，每个 fit 约 2 小时。
+> - 一个 `0.05 J` 的 effect，大约需要 **20 对**。
+>
+> 因此，大多数 archive 中只有一对 seed、效果量在 `±0.01–0.03 J` 的结果，应该被视为：
+>
+> > **未决（undecided），而不是负面结果。**
+>
+> 而且简单地再多跑几个 pair 也解决不了它们。
+>
+> 例如：
+>
+> - MGTAP 的 10 对：
+>   - 4 个上升
+>   - 4 个下降
+>   - 2 个落在区间内
+>
+> - `vsp_c1`：
+>   - `+0.029`
+>   - `+0.116`
+>   - 然后 `−0.032`
+>
+> - TRDL：
+>   - `+0.035`
+>   - 然后 `−0.002`
+>
+> - ACPS、LCAC、SCDMP 也是同类结果。
+>
+> ---
+>
+> ## 3. 最关键的 measurement 仍然缺失
+>
+> 在 Scenario 1 上，所有 flat fit 都是 central-input variant，即 `CF`。
+>
+> 但：
+>
+> - 普通 MAPPO layout：
+>   - own-observation actor
+>   - centralised critic
+>
+>   已经作为 runner arm 存在，却**没有任何已记录结果**。
+>
+> - 我也没有在现有记录中找到 scripted static-placement reference。
+>
+> 与此同时，FSD 报告的：
+>
+> `+0.29 J`
+>
+> HMASD vs. flat 差距实际上是一个 **package contrast**：
+>
+> - 两个 arm 使用了不同 learning rate；
+> - 有 13 个 config field 不同；
+> - 在全部 5 个 seed 中，flat arm 的最终 checkpoint 都比它自己保存过的最佳 panel 低 `0.10–0.24 J`。
+>
+> 如果拿 HMASD 对比 flat arm 自己的最佳 panel，那么 gap 只有：
+>
+> `+0.11 J`
+>
+> ---
+>
+> ## 4. 当前最值得利用、但尚未真正利用的发现，其实已经在 FSD 记录里
+>
+> 如果把一个 skill 固定整整一个 episode：
+>
+> - 6 个 skill 之间的表现差异达到：
+>
+>   `0.13–0.22 J`
+>
+> - 在最弱的 seed 上：
+>   - 最佳 skill 比训练后的 coordinator 高出大约 `+0.1...`
+>   - 但 coordinator 只在 `0.09%` 的决策中选到这个 skill。
+>
+>   > 注：这里原文在 `+0.1` 后出现截断。
+>
+> - 在 B13 中：
+>   - coordinator 从未更新的 learner
+>   - 达到了与标准 learner 相同的水平。
+>
+>   DM 把这个结果称为一个 **feasibility observation**。
+>
+> 因此，在这个 host 上，一阶问题更像是：
+>
+> > **该选择哪个 skill？**
+>
+> 而不是：
+>
+> > **什么时候切换 skill？**
+>
+> 有两个基于保存 checkpoint 的 probe，可以直接估计 skill selection 到底有多少潜在价值。
+>
+> 两者都不需要新 fit：
+>
+> 1. 在 validation worlds 上选出最佳 constant label，然后在 fresh worlds 上评分。
+> 2. 运行 lookahead label oracle。
+>
+>    我还没有检查 env 是否支持 snapshot，因此第二个 probe 的可行性尚未确认。
+>
+> ---
+>
+> # 跨方向模式
+>
+> ## 1. 在足够小、足够容易求解的 host 上，透明规则往往打平甚至超过 learner
+>
+> - VSP-03：
+>   - fitted planner 比 actor-critic 高：
+>
+>     `+0.0176 J`
+>
+>   - CI：
+>
+>     `[0.0107, 0.0245]`
+>
+>   - 来自 5 个 independent blocks。
+>
+> - C05：
+>   - exact VoI rule 与 learner 持平。
+>
+> - CBSC：
+>   - `REQUEST_ONLY` rule 超过所有 trained arm。
+>
+> - VNFC：
+>   - 两个 learner 都比 scripted BCRH 低：
+>
+>     `0.04–0.065`
+>
+> - RCLE：
+>   - 从未超过 greedy。
+>
+> 因此：
+>
+> > 只有在不存在简短规则的时候，learning 才表现出明显 headroom。
+>
+> ---
+>
+> ## 2. 只是重新表达同样的信息，会得到严格为零的收益
+>
+> 例子：
+>
+> - CBSC `RAW vs. STRUCT`
+> - CRTO 的 3 个 identical decision sets
+> - EGRCR
+> - FRRIE 的 box，而这个 box 从不真正 bind
+> - `vsp_02`
+>
+> ---
+>
+> ## 3. 机制确实被观察到，但 benefit 不存在
+>
+> 例子：
+>
+> - A02
+> - FOLR 的 predictive auxiliary
+>   - prediction 改善
+>   - return 反而下降 `6.56`
+> - `vsp_c1` 的 gate
+> - R-series 的 “transport gap”
+>
+> ---
+>
+> ## 4. 基础 learner 中存在一些已经发现、但仍留着没修的缺陷
+>
+> - Coordinator entropy 是对 6 个 agent 求和，因此 temperature 实际上是预期值的约 6 倍。
+> - CF 的 central input 没有 scaling。
+> - Scenario 1 把 time limit 编码成了 true termination。
+>
+>   09-18 的 truncation fix 只修改了：
+>
+>   `ha_ctse_process/standalone_*`
+>
+>   并没有修改 HMASD stack。
+>
+> ---
+>
+> # `k-axis`
+>
+> ## 一个 scaling heuristic
+> **这是我的 heuristic，不是 theorem。**
+>
+> adaptive timing 的价值大致可以表示为：
+>
+> `事件数/episode × 下一次决策前平均等待时间（约 (k−1)/2 steps） × 切换后的每步收益 ÷ episode length`
+>
+> 因此：
+>
+> ### Static hosts
+> 价值为：
+>
+> `0`
+>
+> ### UCOPE
+> 它使用 two-tick commitments：
+>
+> `k − 1 = 1`
+>
+> 同时没有 events。
+>
+> 所以它得到的 `0.0001 J` 级 null result，正是这个 scaling 所预测的结果。
+>
+> ### Relay corridor
+> 这里可以精确计算。
+>
+> 相对于最佳 fixed `k`，adaptive timing 的提升分别是：
+>
+> - `0.057 J`
+> - `0.144 J`
+> - `0.271 J`
+>
+> ### Service-restoration preset
+> 每 180 step 有一次 outage。
+>
+> 如果：
+>
+> `k = 10`
+>
+> 那么大约影响相关 share 的：
+>
+> `2.5%`
+>
+> ---
+>
+> ## E3 实际测试的是什么
+>
+> E3 测的只是一个 heuristic trigger：
+>
+> > 当 log-probability gap 超过 `c` 时重新决策。
+>
+> 它使用：
+>
+> `c = 0.25`
+>
+> 而且这个值是单个 hand-set 值。
+>
+> 更重要的是：
+>
+> > 没有任何 gradient 能传播到 trigger。
+>
+> ---
+>
+> ### Critic 修正
+>
+> 我原先的写法是 trigger “看不见” event。
+>
+> Critic 指出这不准确，我接受了修正。
+>
+> 实际情况是：
+>
+> - trigger 在两个 region 中大约都对 `36%` 的 agent-steps 触发；
+> - 在 quiet region，这个 firing rate 大约是 event rate 的 **18 倍**；
+> - 在 event 附近，它的触发频率约是远离 event 时的 **2 倍**。
+>
+> 因此，正确的描述应该是：
+>
+> > **它不是 blind，而是 uncalibrated。**
+>
+> ---
+>
+> 此外：
+>
+> - 在相同 update 数下，D2 的 low level 移动幅度只有 D0 的一半。
+> - 因此 timing 和 low-level learning 被 confounded。
+>
+> 所以 E3 真正说明的是：
+>
+> > 一个未校准的 heuristic trigger 输给了最佳 fixed clock。
+>
+> 它并没有测试：
+>
+> > **trained termination**
+>
+> ---
+>
+> ### 一个免费的下一步读取
+>
+> E3 runner 已经计算了：
+>
+> `event_recall`
+>
+> 但这个值从未被报告出来。
+>
+> ---
+>
+> ### 从我的 draft 中撤回的一项结论
+>
+> 我原先声称：
+>
+> > FSD 的 `+0.025 J` 可以作为 selection value 的 upper bound。
+>
+> 这个判断撤回。
+>
+> FSD DM 早已在正式记录中撤回了这种解读。
+>
+> ---
+>
+> ## 值得保留的资产
+>
+> - corridor 的 exact references；
+> - 从未实现的 hazard / KEEP-END termination design：
+>   - `IC_SPL_HAZARD_SM...`
+> - team-conditioned termination code：
+>   - 已在某个 branch 上完成；
+>   - 但目前 fit 数为 0。
+>
+> ---
+>
+> ## 一个想法
+> **这是我的 conjecture；novelty 尚未验证。**
+>
+> 可以把 termination 看作：
+>
+> > **quickest change detection**
+>
+> 并把 team-level termination 看作：
+>
+> > **跨 agent 的 evidence pooling**
+>
+> 这样有可能得到一种类似 suboptimality-bound 的 prediction。
+>
+> 这也比较符合你所偏好的 **inspiration-first** 研究方式。
+>
+> ---
+>
+> # `N-axis`
+>
+> ## 1. 整个研究计划里，目前不存在任何有效的 held-out-N 数字
+>
+> ### VNFC
+> 它的 `N=7` panel 已被判定无效，因为：
+>
+> 在 1,024 个 state 中，有 277 个 state 在 agent relabelling 后，command 发生改变。
+>
+> ### FRRIE
+> held-out N 从未真正运行。
+>
+> ### G-series
+> 报告过 zero-shot transfer 到：
+>
+> `N = 80`
+>
+> 但它只是在 toy 环境中，对比一个 absolute floor。
+>
+> 从来没有和 trained baselines 比较过。
+>
+> ---
+>
+> ## 2. 第一个真正有价值的 observation
+>
+> 建立一张：
+>
+> > **per-N specialists vs. generalist**
+>
+> transfer table。
+>
+> 对 flat learner 和 HMASD learner 都做。
+>
+> 这样可以直接测量 headroom。
+>
+> 目前：
+>
+> - `N` 已经是 constructor argument；
+> - 所以现在就可以训练 per-N specialists。
+>
+> 但 zero-shot transfer 需要 fixed-size state input 支持 masking。
+>
+> 我没有检查这一点。
+>
+> ---
+>
+> ## 3. 一个关于单 UAV loss recovery 的估计
+>
+> 在 6-UAV uniform-coverage task 上，丢失 1 个 UAV 后的 recovery gain 很可能低于：
+>
+> `0.05 J`
+>
+> 这是我的估计。
+>
+> 如果这个估计正确，这类问题就不应该通过 retraining 来问。
+>
+> 而应该用：
+>
+> > frozen checkpoint 上的 paired probes
+>
+> ---
+>
+> ## 4. CPCP
+>
+> 它最便宜的第一个 observation 是：
+>
+> > 对 independently trained flat teams 做 cross-play matrix。
+>
+> 一旦已有 5 个 flat baseline seeds：
+>
+> > 不需要新增任何 fit。
+>
+> 如果 homogeneous coverage task 中 mixed teams 没有出现 deficit，那么这个方向基本就回答完了。
+>
+> ---
+>
+> # 各方向的当前判断
+>
+> ## 已经干净完成：记录答案，不要再启动 successor
+>
+> - VSP-03
+>   - `O_SUPERIOR`
+>   - 这正是 Pro 所定义的 success branch。
+>
+> - C05
+>
+> - A01
+>   - ordinary multistep reuse works
+>
+> ---
+>
+> ## 仍然 active，但对于 constitution 的目标来说 yield 很低
+>
+> Constitution 的目标是：
+>
+> > “在 UAV host 上，每个问题得到一个 defensible、paper-grade 的答案。”
+>
+> ### B06
+>
+> - 按 B05 自己的 effect 和 SD 计算：
+>   - `n = 5 blocks`
+>   - power 约 `24%`
+>
+> - 每个 fit 只需要：
+>   - `0.02 s`
+>
+> 所以 block count 实际上不是成本问题，只是习惯问题。
+>
+> - known-response oracle 在前 64 个 target decisions 上，只比 response arm 高：
+>
+>   `+0.003`
+>
+> ---
+>
+> ### C06 / C07
+>
+> - C06 根本没有 learning。
+> - 大约 3,400 jobs 中的 `+34 jobs`：
+>   - 来自 256 个 world 中的 23 个；
+>   - 并且全部来自同一个 master seed。
+> - proposed C07 只是再增加 5 对 master seed。
+>
+> ---
+>
+> ## 应该继续保持停止状态
+> 这些属于 exact equality 或者已经没有 room 的方向：
+>
+> - UCOPE K-branch
+> - CRTO
+> - EGRCR
+> - CBSC
+> - `vsp_02`
+> - FRRIE
+> - FOLR cache
+>   - `3/3 adverse`
+> - DISH
+> - RCLE
+>
+> ---
+>
+> ## 在 UAV host 的分辨率下仍然未决
+> **但不要按原来的方式重新跑。**
+>
+> - MGTAP
+> - `vsp_c1`
+> - SCDMP
+> - ACPS
+> - LCAC
+> - CADC
+> - TRDL
+>   - 便宜；
+>   - 确实填补一个 literature gap；
+>   - 但它不在两个主研究轴上。
+> - ACVC
+>   - wrapper 对一个弱 proposer 有帮助；
+>   - 但一个没有调参的 MAPPO 比这个 proposer 高：
+>
+>     `0.06–0.09 J`
+>
+> ---
+>
+> ## Owner-frozen，未触碰
+>
+> - G33
+>
+> ---
+>
+> # 可选方案
+>
+> | Option | 能获得什么 | 成本 |
+> |---|---|---|
+> | **1. Instrument first** | 在 scenario 1 上建立 scripted placement reference、own-observation MAPPO baseline，以及达到 plateau 的 HMASD。每个 5 seeds。evaluation 从 32 worlds 提升到 256+ worlds。同时执行前面核心结论第 4 点的两个 zero-fit rider。 | 按当前训练长度约 5–10 fits，大约一天。如果 plateau 需要更长训练则更多。现有 HMASD reference 已达到 coverage `0.96`（`J ≳ 0.67`），而 FSD 是 `0.43`。 |
+> | **2. Corridor positive control** | 不写新代码先做 `c-sweep`，然后训练 KEEP/END head，对比 exact references。 | 约 9–12 cells，每个约 1 小时。 |
+> | **3. Native-host k-sweep** | 在 service-restoration 上跑 fixed `k ∈ {small, 10, large}`。原文该行后半句存在截断/错位，大意涉及如果效应不随 k 增长，则该轴在这里也可能没有 room。 | 约 9 fits，加上 host 的数据验证。 |
+> | **4. Continue the three toys** | 在无法通向 UAV host 的环境中得到 1–2% level 的干净答案。 | 几秒钟 compute。 |
+>
+> ---
+>
+> # 推荐
+>
+> ## Option 1：Instrument first
+>
+> 理由：
+>
+> - 它是 FSD 自己定义的两个 reopening conditions 之一。
+> - 所有 paper-grade 结论都依赖它。
+> - 它可以直接回答 hierarchy premise。
+> - 它还能在不新增 fit 的情况下提供 CPCP 的第一个 observation。
+> - 它是一个 sequencing input，不是 gate。
+>
+> 因此：
+>
+> > Option 2 的 zero-fit reads 可以与它并行运行。
+>
+> 至于 toys：
+>
+> > 让 B06 和 C07 完成它们已经声明的 batch，然后停止。
+>
+> ---
+>
+> # 我与 Portfolio review 的不同之处
+>
+> ## 1. 关于 “not the UAV host”
+>
+> Portfolio review 拒绝把：
+>
+> > “不是 UAV host”
+>
+> 作为否决某方向的理由。
+>
+> 我同意：
+>
+> > 它不应该是 veto。
+>
+> 但问题在于，Portfolio review 对这个事实赋予了**零成本**。
+>
+> 结果就是：
+>
+> > 它最终采纳的三个方向全部没有通向 constitution 目标的路线。
+>
+> ---
+>
+> ## 2. 我同意的地方
+>
+> - stop 应该针对 recipe，而不是整个 class；
+> - “simple method suffices” 本身就是一个合法科研答案；
+> - UCOPE、FOLR、CRTO 和 ACPS 应保持停止。
+>
+> ---
+>
+> ## 3. CPCP
+>
+> 我同意：
+>
+> > 这是一个真实且尚未测试的问题。
+>
+> 但我不会一上来做一个：
+>
+> `2.1M-tick`
+>
+> 的 purpose-built bundle。
+>
+> 我会先做：
+>
+> > N-axis 中描述的 zero-fit cross-play matrix。
+>
+> ---
+>
+> # Integrity flags
+>
+> ## 1. B08 “save” runs
+>
+> B08 的 “save” runs 实际上与：
+>
+> `B01 D1280`
+>
+> 是 bitwise copies。
+>
+> 因此：
+>
+> - seed-noise estimate 实际只基于 **5 个 seed**，不是 8 个；
+> - pipeline 是 deterministic 的。
+>
+> ---
+>
+> ## 2. B10 的 “56% capture”
+>
+> 这是：
+>
+> > ratio of means
+>
+> 而不是每个 block 的统一效果。
+>
+> 逐 block ratio 实际为：
+>
+> - `0.40`
+> - `0.46`
+> - `1.16`
+>
+> ---
+>
+> ## 3. `wsl_4070` 上存在无法解释的 native crash
+>
+> VNFC 和 FRRIE 都出现了这种 crash。
+>
+> 即使把 torch 去掉仍然存在。
+>
+> 因此：
+>
+> > 在继续从这个 node 产出 paper-grade 数字之前，应该先做 memory test。
+>
+> ---
+>
+> ## 4. 今天的 VSP-03、C06 和 B05 结果
+>
+> 相关代码目前只存在于：
+>
+> > Codex branch
+>
+> 原文此处在 branch 名之后截断。
+>
+> ---
+>
+> ## 5. E2 result document
+>
+> 其 §6 和 §7 中仍然存在字面值：
+>
+> `PLACEHOLDER`
+>
+> ---
+>
+> ## 6. 30 vs. 50 user count mismatch
+>
+> 已经解决。
+>
+> 实际运行使用的是：
+>
+> `50`
+>
+> ---
+>
+> # Filing
+>
+> 重算表格和脚本目前位于一个临时目录中，该目录不会永久保留：
+>
+> `/tmp/claude-1000/-home-fires-hmasd-wsl/e0d58a38-27a2-4488-bd24-ae7a3be6e300/scratchpad/recompute/RESULTS.md`
+>
+> 如果你希望保留这份 review，请告诉我。
+>
+> 我可以把它以及这些表格归档到：
+>
+> `docs/Claude_docs/reviews/`
+>
+> 也可以把它制作成一个可分享页面。
+>
+> 按照你自己的规则：
+>
+> > 对这份建议做 decision-critical critic pass 时，应该交给 Pro。
+>
+> 我没有发送这个 pass，因为发送需要产生 commit。
+
+</details>
+
+<details>
+<summary>Third-party recompute RESULTS.md</summary>
+
+Original file SHA-256: `5254cdbe7498f150d725be17d6c038c4156127fe904bb822afa0e05621ff7f8a`.
+Quoted text below preserves the supplied content, with line endings normalized.
+
+> # Independent recomputation of six RESEARCH.md headline contrasts
+>
+> Read-only advisory recomputation. No repository write, no git state change, no training,
+> evaluation, environment or runner execution. All artifacts were extracted with
+> `git -C /home/fires/hmasd-wsl archive <rev> <path> | tar -x` into this scratch directory,
+> except T6, which reads `/home/fires/hmasd-wsl/runs/flexible_skill_duration` in place.
+> Interpreter: `/home/fires/.venvs/hmasd-linux-cpu/bin/python` (numpy 1.26.3, scipy 1.15.2;
+> scipy used only to read, not required by the scripts).
+>
+> Scripts: `t1_recompute.py`, `t2_recompute.py`, `t3_recompute.py`, `t4_recompute.py`,
+> `t5_recompute.py`, `t6_recompute.py`, `t6_extras.py`.
+> Machine-readable output: `t1_result.json` … `t6_result.json`, `t6_extras.json`.
+> Runner sources read for seeding semantics are copied under `src/`.
+>
+> Every stated value reproduced. No mismatch was found in any target, so no "DM reduce path
+> differs" reconciliation was needed; the estimand notes below are structural observations,
+> not disagreements about arithmetic.
+>
+> ---
+>
+> ## T1 — VSP-03 B09, `f877dbda7d2e8d1a199e6936ebed0ae0168d7f12`
+>
+> `runs/vsp_03/opportunity_b09_21901_21905`. Recomputed from the per-arm world-level JSON
+> (`<block>/<arm>.json`, 4096 `{"world", "return", ...}` records each), independently of
+> `summary.json`, then compared.
+>
+> **Agreement.** Exact (bit-identical float means): max |delta| vs each block's own
+> `summary.json` arm return = 0.0; vs each block's `comparisons[*].mean` = 0.0; vs
+> `paired_differences.json` = 0.0; vs the study `comparisons[*].conditional_world_sd` = 0.0.
+>
+> Stated vs recomputed (all to full printed precision):
+>
+> | quantity | stated | recomputed |
+> |---|---|---|
+> | O−G mean | +.017577881 | +0.017577880859374985 |
+> | O−G df4 t95 | [.010699359, .024456403] | [0.010699359120210878, 0.024456402598539092] |
+> | G−R0 mean | +.012848145 | +0.012848144531250000 |
+> | O−O_self mean | +.012602783 | +0.012602783203125006 |
+>
+> **Per block** (n = 4096 evaluation worlds per arm, identical world ids across all 7 arms):
+>
+> | block | G | O | O_self | R0 | R | O_known | G_stoch |
+> |---|---|---|---|---|---|---|---|
+> | 21901 | .361396484 | .386059570 | .373094482 | .352911377 | .352862549 | .386147461 | .359993896 |
+> | 21902 | .366656494 | .376232910 | .362453613 | .354473877 | .353050537 | .376232910 | .363460693 |
+> | 21903 | .365474854 | .381318359 | .369476318 | .349157715 | .349692383 | .381318359 | .364141846 |
+> | 21904 | .366614990 | .386520996 | .373087158 | .353980713 | .352885742 | .386520996 | .363608398 |
+> | 21905 | .367851563 | .385751953 | .374758301 | .353229980 | .353988037 | .385751953 | .365567627 |
+>
+> Paired O−G per block, with within-block SD/SE over the 4096 worlds and world-level sign
+> counts (G>O / G<O / tie):
+>
+> | block | O−G | world SD | within SE | signs |
+> |---|---|---|---|---|
+> | 21901 | +.024663086 | .274746 | .004293 | 2285/760/1051 |
+> | 21902 | +.009576416 | .272118 | .004252 | 2299/715/1082 |
+> | 21903 | +.015843506 | .268697 | .004198 | 2224/719/1153 |
+> | 21904 | +.019906006 | .266496 | .004164 | 2135/735/1226 |
+> | 21905 | +.017900391 | .260973 | .004078 | 2126/737/1233 |
+>
+> Across 5 blocks: mean +.017577881, between-block SD .005539761, between-block SE
+> .002477456, df 4, t95 [.010699359, .024456403], 5 positive / 0 negative.
+> Other contrasts recomputed identically: O−R0 +.030426025 (SD .004857956),
+> G−R0 +.012848145 (SD .002945495), G−R +.013103027 (SD .002705525),
+> O−O_self +.012602783 (SD .001159109), O_known−O +.000017578 (SD .0000393059),
+> G_stochastic−G −.002244385 (SD .000869906).
+>
+> **Unit of replication: the block (seed), n = 5; worlds are nested.** Evidence:
+>
+> - `experiments/candidates/vsp_03/opportunity_b09/study.py` (at launch sha
+>   `5510e015b99c6cbaa50543480a1b81fec1db45c1`) `aggregate()` takes only the five per-block
+>   means, `values.std(ddof=1)`, `student_t.ppf(.975, 4)`, `"independent_blocks": 5`.
+> - `opportunity_b08/study.py` `train_and_evaluate(seed, ...)`: fresh `Model(seed, "G")`,
+>   512 Adam updates on `worlds(seed, 100, first, TRAIN_BATCH)`.
+> - `vsp03_b02/b02.py` `worlds(seed, split, first, count)` =
+>   `rng([302, seed, split, episode, target])`. Training uses split 100, **evaluation uses
+>   split 200**, so each block draws its own 4096 evaluation worlds. Verified: the five
+>   `evaluation_worlds.npz` `draws` arrays have five distinct sha256 prefixes
+>   (81ce20e5…, 62e81882…, dde5db43…, 1b143fc5…, 3b7f65d6…).
+>
+> **Is G trained independently per block?** Yes. `fits_completed.G = 1` and
+> `optimizer_steps = 512` in every block; 65,536 training episodes each; the five saved
+> `G_512.pt` files have five distinct sha256 prefixes (4baf802b…, e3991f00…, 37508fdd…,
+> 1f0704ce…, 09f39b75…). G fit wall per block 8.21–8.86 s.
+>
+> **Is O fitted per block, and on what data?** Yes, once per block
+> (`fits_completed.O = 1`), by L-BFGS-B on the endpoint likelihood of that block's own
+> G-training observation stream — `counts.add_batch({k: batch[k] for k in ("x",
+> "episode_ids", "times")})` inside the training loop, so the fit consumes the public packed
+> observation stream of the same block's 512 training rollouts. Per-block fitted (c, p) and
+> fit inputs:
+>
+> | block | c | p | transitions | rows | batches | O fit wall s |
+> |---|---|---|---|---|---|---|
+> | 21901 | 4.018093108 | .496377101 | 592,822 | 361,947 | 512 | .00707 |
+> | 21902 | 4.004075150 | .499422656 | 621,676 | 376,374 | 512 | .00523 |
+> | 21903 | 4.007218909 | .500102466 | 646,160 | 388,616 | 512 | .00673 |
+> | 21904 | 4.012473281 | .500754811 | 618,726 | 374,899 | 512 | .00481 |
+> | 21905 | 3.994599340 | .500326787 | 613,288 | 372,180 | 512 | .00502 |
+>
+> The run's own `model_rights` records O as "estimated c,p; public G training endpoints only;
+> declared age-Markov family" and O_known as "EXTRA_MODEL_KNOWLEDGE: true c=4,p=.5;
+> diagnostic only" — O_known−O is +.0000176 J, i.e. the fit is effectively at the truth.
+>
+> **Noise statistic the row does not report.** Under an additive block-mean model
+> (between-block variance = world-sampling variance + training/fit variance), mean within-block
+> variance = 1.762e-5 and total between-block variance = 3.069e-5, leaving a residual
+> training/fit component of 1.307e-5, i.e. SD ≈ .00362 J — about the same size as the
+> world-sampling noise of a single block mean (.0042). Both are well below the +.0176 effect.
+>
+> **Label note (not an error).** The block-level `primary_name` is `final512:G-O` with
+> `primary.mean = −.024663086` for block 21901, while the study-level `primary` is
+> `final512:O-G`. The study `aggregate()` flips the sign explicitly
+> (`sign = -1 if key == "O-G"`). The two are consistent.
+>
+> ---
+>
+> ## T2 — VSP-03 B10 guard, `4310e203b20c9b38332dd2b431e67048f781ac4c`
+>
+> `runs/vsp_03/opportunity_guard_b10_21801_21803`. This run publishes only the guard arm's
+> per-world returns (`<block>/guard.json`). The reference arms O, O_self, G are **replayed
+> frozen B08 development panels**; their per-world returns were read from
+> `runs/vsp_03/opportunity_b08_21801_21803` at the source revision
+> `a5a87aa223727b2673781009c90810e7a4842584` recorded in `input_digests.json`. All 18
+> recorded sha256 digests of those source artifacts were recomputed and match.
+>
+> **Agreement.** Exact. O−guard per block = +.012221679687500007 / +.009738769531250005 /
+> −.0013940429687499937, identical to the stated +.012221680 / +.009738770 / −.001394043 and
+> to the run's own values; max |delta| vs `paired_differences.json` = 0.0.
+> Capture fraction recomputed .5648310775906599 → stated "56.4831%". Exact.
+>
+> Per block (n = 4096 worlds, all arms on the same worlds):
+>
+> | block | guard | O | O_self | G | O−guard | world SD | SE | signs (+/−/=) |
+> |---|---|---|---|---|---|---|---|---|
+> | 21801 | .385468750 | .397690430 | .377457275 | .374609375 | +.012221680 | .201101 | .003142 | 1543/284/2269 |
+> | 21802 | .384470215 | .394208984 | .376159668 | .371284180 | +.009738770 | .200372 | .003131 | 1503/298/2295 |
+> | 21803 | .395751953 | .394357910 | .385379639 | .373997803 | −.001394043 | .197962 | .003093 | 1436/339/2321 |
+>
+> Across 3 blocks: O−guard mean +.006855469, between-block SD .007251348, df2 t95
+> [−.011158, +.024869], 2 positive / 1 negative. guard−O_self +.008898112 (SD .001285424,
+> 3/3 positive); guard−G +.015266520 (SD .005737625); the B08 reference O−O_self
+> +.015753581 (SD .005968325).
+>
+> **The capture fraction is a ratio of two three-block means, not a per-block statistic.**
+> `.008898112 / .015753581 = .564831`. The three per-block ratios are **.396, .460, 1.155**
+> (mean of ratios .671). The run's own summary calls this
+> `"descriptive old-development-panel reading; no causal mediation, equivalence, or
+> confirmation claim"`.
+>
+> **Unit of replication: the block, n = 3, and they are the same three seeds 21801–21803 as
+> the B08 development blocks, re-used.** File evidence: `config.json` records
+> `"planned_fits": 0`, `"new_worlds": 0`, `"reference_panels_replayed": 0`,
+> `"source_run": .../opportunity_b08_21801_21803`, and every block records
+> `fits_started = fits_completed = optimizer_steps = gradient_steps = 0`. There is no fresh
+> training and no fresh evaluation world here; only the guard arm is newly rolled out, on the
+> frozen B08 evaluation worlds. `guard_activation` shows the guard fires in 319 / 280 / 278
+> worlds out of 4096, all `guard_SUBMIT_self_WAIT`, all at t22 with two pending.
+>
+> **Noise statistic the row does not report.** Between-block variance of O−guard 5.258e-5
+> versus mean within-block world-sampling variance 9.75e-6, so the block-to-block component
+> dominates: residual SD ≈ .00654 J against a mean of +.00686 J. With n = 3 the df2 interval
+> straddles zero.
+>
+> ---
+>
+> ## T3 — teammate-drift B05, `43b262fbb66f978abcc0ff767c6be8937352042a`
+>
+> `runs/skill_teammate_drift_learning/b05_unknown_law_heldout` (seeds 95101–95103) and
+> `…/b05_unknown_law_development` (seeds 95001–95003). Recomputed from
+> `seed_<s>/<setting>/curves.npz['expected_return']`, one row per evaluated macro panel
+> (2304 rows = 2048 source-version + 256 target-version), sliced by
+> `common.npz['phase'] == 1`; endpoints first64 = target panels 0–63, late64 = 192–255,
+> full = all 256.
+>
+> Arms, identified from the notebook entry "2026-09-21 03:14 PDT — B05 development complete"
+> at that revision and confirmed against `summary.json['settings']`:
+> response = `response_all__response__prior2`; full = `fingerprint_full__hybrid__prior2`;
+> recent = `fingerprint_recent__hybrid__prior16__window256`.
+>
+> **Agreement.** Exact. The stated numbers are the summary's `task_value_difference`
+> (= −`regret_difference`).
+>
+> | endpoint / reference | 95101 | 95102 | 95103 | mean | between-seed SD | df2 t95 | signs |
+> |---|---|---|---|---|---|---|---|
+> | first64 / full | −.001796875 | +.025781250 | +.006718750 | **+.010234375** | .014121188 | [−.024845, +.045313] | 2+/1− |
+> | first64 / recent | −.003671875 | +.036015625 | +.004140625 | **+.012161458** | .021024384 | [−.040066, +.064389] | 2+/1− |
+> | full / full | +.002558594 | +.006191406 | +.010371094 | +.006373698 | .003909439 | [−.003338, +.016085] | 3+/0− |
+> | full / recent | +.003183594 | +.010664063 | +.003144531 | +.005664063 | .004330171 | [−.005093, +.016421] | 3+/0− |
+> | late64 / full | +.001640625 | +.002187500 | 0.000000000 | +.001276042 | .001138411 | [−.001552, +.004104] | 2+/0−/1 zero |
+> | late64 / recent | +.001640625 | +.006562500 | +.007343750 | +.005182292 | .003091948 | [−.002499, +.012863] | 3+/0− |
+>
+> Stated "+.010234375" and "+.012161458" reproduce exactly; "full-256 differences positive on
+> all three against both references" is confirmed (6/6 positive).
+>
+> **Absolute first-64 level of each arm** (mean expected greedy return, so the differences can
+> be read against the level):
+>
+> | seed | response | full | recent | known-response oracle |
+> |---|---|---|---|---|
+> | 95101 | .641015625 | .642812500 | .644687500 | .649062500 |
+> | 95102 | .655546875 | .629765625 | .619531250 | .658593750 |
+> | 95103 | .585625000 | .578906250 | .581484375 | .584140625 |
+> | mean | **.627395833** | **.617161458** | **.615234375** | **.630598958** |
+>
+> So the headline +.010234 sits on a level of ≈.62 (≈1.7% relative), and the
+> known-response oracle — the same decision rule given the true response means — is only
+> +.003203 above the response arm on first64. Full-256 levels: response .649753,
+> full .643379, recent .644089, oracle .649941.
+>
+> **Within-block structure (not in the row).** The first-64 contrast is almost entirely ties:
+> per seed, response−full differs from zero on only 7 / 10 / 10 of the 64 panels
+> (signs +/−/tie = 5/2/57, 8/2/54, 6/4/54). Panel SDs .031915 / .072343 / .059809.
+> Between-seed variance 1.994e-4 against mean within-seed naive variance 5.12e-5, so the
+> seed-to-seed component dominates (residual SD ≈ .0122 against a mean of +.0102).
+>
+> **Unit of replication.** The run states it: `summary.json["independent_unit"] =
+> "fresh block, all decision settings share the collected stream"`. n = 3 held-out seeds.
+> Within a block the 256 target panels are one sequential online-learning trajectory under a
+> single common passive collector — paired across arms but serially dependent, not 256
+> independent draws. `"selection_uses": "pre-outcome predictions and observed collector
+> feedback only"` and the held-out `selection-input.json` is the development stage's fixed
+> selection (sha256 `ca32b212…`).
+>
+> **Selection context.** Development ran 20 settings × 3 seeds = 60 decision fits
+> (`planned_decision_fits = completed_decision_fits = 60`). On development the same three
+> selected arms gave first64 response−full = +.003750 / +.006719 / −.002813
+> (mean +.002552) and response−recent mean +.009089 — i.e. development's own first-64 signal
+> was about a quarter of the held-out one, on 3 blocks, with one negative seed as well.
+>
+> **What one "fit" is.** A closed-form counting/posterior learner, not a gradient fit.
+> Study level: `gradient_optimizer_calls = 0`, `evaluation_environment_ticks = 0`,
+> `evaluation_reward_draws = 0`, `dtype = float64`, `blas_threads = 1`.
+> Per decision fit (response arm, held-out): `compute_wall_seconds` ≈ **.0193–.0200 s**,
+> scope "learner expiry, prediction, and observation only"; 2304 posterior updates,
+> 2304 learner observations, `regression_solves = 0`,
+> `regression_statistic_updates = 0`. Per block: `scientific_block_wall_seconds` ≈ .2775 s
+> ("common collection, all learners and exact evaluator; excludes serialization and import").
+> Whole held-out study: 3 blocks × (3 decision fits + 1 law fit) in
+> `runner_wall_seconds = 1.095`, `runner_cpu_seconds = .987`, `peak_rss_kib = 42,312`.
+> Development study: 60 + 3 fits in `runner_wall_seconds = 4.204`.
+>
+> ---
+>
+> ## T4 — information-refresh C06, `8a651c9a0a299fa6f5e90dca5f3c5ecc72655c5b`
+>
+> `runs/skill_information_refresh/c06_multistep_s73170_20260921`, recomputed from
+> `episodes.jsonl` (1280 rows: 512 selection + 768 eval; eval = 3 arms × 256 worlds).
+>
+> **Agreement.** Exact. Max |delta| against the summary's own
+> `contrasts[*].completed_jobs.per_world_difference` = 0.0.
+>
+> | arm | threshold | total completed jobs | per world | per-world SD | jobs started/world |
+> |---|---|---|---|---|---|
+> | NEAR_COMMIT | 0.0 | **3404** | 13.296875 | .960877 | 14 (all worlds) |
+> | LONG | 0.0 | **3406** | 13.304688 | .958419 | 14 (all worlds) |
+> | ACTIVE_FIRST | none | **3370** | 13.164063 | 1.064783 | 14 (all worlds) |
+>
+> | contrast | mean/world | n | + | − | tie | conditional world SE | exact two-sided sign-test p | paired bootstrap 95% |
+> |---|---|---|---|---|---|---|---|---|
+> | near − AF | **+.1328125** | 256 | 21 | 2 | 233 | .033091 | **6.60419e-05** | [+.074219, +.199219] |
+> | long − near | **+.0078125** | 256 | 1 | 0 | 255 | .0078125 | **1.0** | [0.0, +.023438] |
+> | long − AF | +.140625 | 256 | 22 | 2 | 232 | .033881 | 3.5882e-05 | [+.078125, +.210938] |
+>
+> Bootstrap: 20,000 paired resamples of the 256 worlds, percentile method,
+> `numpy.random.default_rng(20260921)`. Sign test: ties discarded, exact binomial,
+> n = 23 (near−AF), n = 1 (long−near).
+>
+> The near−AF difference lives on very few worlds: the nonzero per-world differences are
+> {−1: 2, +1: 9, +2: 10, +3: 1, +4: 1}. Long−near rests on exactly **one** world
+> (+1 job, 255 ties), so its sign test is uninformative by construction.
+>
+> Secondary row claims also reproduce exactly: conflicts 34 / 33 / 47 (near/long/AF),
+> wait ticks 2153 / 2139 / 2160, 24 packets and 192 bytes per world for every arm,
+> mean service .949777 / .950335 / .940290.
+>
+> **How many master seeds do the 256 worlds derive from? One (plus one model seed).**
+> `config.json` = `{"seed": 73170, "model_seed": 973170, ...}`. In
+> `experiments/candidates/skill_information_refresh/c06/study.py` the evaluation panel is
+> `Worlds.make(config.seed, 21, ids, config.horizon)` per batch of 16, and in
+> `c01/host.py`:
+>
+> ```
+> move_rng = np.random.default_rng(np.random.SeedSequence([master, phase, world, 1]))
+> job_rng  = np.random.default_rng(np.random.SeedSequence([master, phase, world, 2]))
+> ```
+>
+> so the 256 evaluation worlds are 256 `SeedSequence` children of the single master
+> `73170` at phase constant 21, and the planner's synthetic draws come from the single
+> `model_seed = 973170`. All three arms call `Worlds.make` with the same master and phase,
+> so the comparison is exactly paired (common random numbers across arms) — the summary's
+> `_contrast` asserts identical ordered world ids.
+>
+> **Unit of replication: the world, n = 256, nested inside one master seed pair.** There is no
+> block/seed replication at all in C06. The only variance statistic available is the
+> conditional within-panel world SE; no training-seed or world-generator variance is
+> estimated anywhere in this run. (The direction's own next step in the row is "fixed C07
+> confirmation, 5 fresh world/model master pairs" — i.e. the DM records the same gap.)
+>
+> **Selection.** Thresholds were chosen on a disjoint 64-world panel at phase constant 20
+> (4 thresholds × 2 arms × 64 worlds = 512 selection episodes), rule "largest mean
+> completed_jobs; ties smallest abs(threshold), then numeric threshold". Both NEAR_COMMIT and
+> LONG selected 0.0, and both had exactly 858 completed jobs at threshold 0.0 on the selection
+> panel (vs 850 / 854 / 848 at −.05 / .05 / .10 for NEAR_COMMIT). ACTIVE_FIRST has no
+> threshold and was not in the selection.
+>
+> ---
+>
+> ## T5 — UCOPE B10, `0d6f299c007840596405b8a359952a082a6ba567`
+>
+> `runs/ucope/paired_branch_credit_b10_reduce/summary.json` is the only published artifact
+> (plus `readback-resources.txt`), but it carries the per-world J vectors of every panel, so
+> the block means and the paired per-world SDs were recomputed from them.
+>
+> **Agreement.** Exact. R_CF − G per block = −.0002513650383663981 / +.0003730065233625866 /
+> −.0003411610877837865, matching the stated −.000251365 / +.000373007 / −.000341161;
+> three-block mean −7.317320092919933e-05, identical to
+> `investment.R_CF_minus_G.three_block_mean`. Max |delta| between the summary's stored
+> `differences` list and the direct panel subtraction = 0.0.
+>
+> **G's absolute return level and per-world SDs** (each panel is 64 worlds):
+>
+> | master | G level | R_CF level | R_FULL level | S_FULL level | G world SD |
+> |---|---|---|---|---|---|
+> | 8971 | .275713481 | .275462116 | .275456193 | .275449229 | .060426 |
+> | 8972 | .256399199 | .256772205 | .256635389 | .256772371 | .079202 |
+> | 8973 | .255271080 | .254929919 | .255297168 | .254987763 | .056827 |
+> | mean | **.262461253** | .262388080 | .262462916 | .262403121 | — |
+>
+> Between-block SD of G's level .011490619.
+>
+> **Per-world SD of the paired differences** (the summary does hold them):
+>
+> | master | R_CF−G mean | paired world SD | paired world SE | + | − | zero |
+> |---|---|---|---|---|---|---|
+> | 8971 | −.000251365 | .001105299 | .000138162 | 18 | 46 | 0 |
+> | 8972 | +.000373007 | .003087109 | .000385889 | 27 | 37 | 0 |
+> | 8973 | −.000341161 | .003083221 | .000385403 | 24 | 40 | 0 |
+>
+> Across 3 blocks: mean −.0000731732, between-block SD .000389003, df2 t95
+> [−.001039509, +.000893163], 1 positive / 2 negative.
+> Other contrasts recomputed identically: R_CF−R_FULL mean −7.483664974326794e-05,
+> R_CF−S_FULL mean −1.5040728318488979e-05, S_FULL−G mean −5.813247261071035e-05,
+> R_FULL−G mean +1.663448814068611e-06 — all matching the RESEARCH.md row digits.
+>
+> **Scale.** The paired effect is ~.00025 J on a level of ~.262 J, i.e. about 0.1% of the
+> level and about 1/230 of the within-panel world SD (.060). The summary's own
+> `interpretation` reads "Investment criteria on selected foundations; worlds are nested, not
+> independent fits."
+>
+> **Unit of replication: the block (master), n = 3; worlds nested (64 per panel).** The reduce
+> is a pure readback: `new_fits = 0`, `new_native_ticks = 0`, `new_optimizer_steps = 0`,
+> `checkpoint_forward_calls = 0`; the three masters 8971/8972/8973 carried 3 gate fits each
+> (9 total, `completed_new_gate_fits = 3` per block) on frozen foundations at source
+> `07605eecde6bba632b86ac2e92862057ea6d9fe2`.
+>
+> ---
+>
+> ## T6 — FSD, working tree `/home/fires/hmasd-wsl/runs/flexible_skill_duration`
+>
+> Final J of one fit = mean of `summary['evaluation']['native_scores_J']` over the 32
+> evaluation lanes; this is the reduce files' own definition
+> ("J45 = mean of the 32 final world scores"). Panel J at rollout r = mean of that panel's
+> `native_scores_J`. Max |delta| against `b01_s1_reduce`'s `levels[*].per_block_J45` and
+> `sign_counts.listed` = **0.0**.
+>
+> `evaluation_logs/` and `learner_logs/` are present but empty in these run directories, so
+> the curve was read from the nine saved panels (rollouts 5, 10, …, 45) in `summary.json`.
+>
+> ### (a) B01 stage 1
+>
+> | seed | D1280 | CF | G_45 |
+> |---|---|---|---|
+> | 772803 | .455874699 | .074681993 | +.381192705 |
+> | 772903 | .354696774 | .158733410 | +.195963364 |
+> | 773003 | .499352110 | .080152866 | +.419199244 |
+> | 773103 | .400399882 | .189390112 | +.211009770 |
+> | 773203 | .428194112 | .188004074 | +.240190038 |
+>
+> - D1280: mean **.427703516**, SD .054778760 (n = 5).
+> - CF: mean **.138192491**, SD .056847385.
+> - Paired G_45: mean **+.289511024**, SD .103163385, SE .046136068, df4 t95
+>   [+.161417, +.417605], 5 positive / 0 negative. Stated "+.29 J" reproduces.
+>
+> **Was CF still rising at the end of training? No — in none of the five seeds.**
+>
+> | seed | CF J@5 | CF J@25 | CF J@45 | CF best panel | CF final − best |
+> |---|---|---|---|---|---|
+> | 772803 | .283977 | .266879 | .074682 | .318315 @10 | −.243633 |
+> | 772903 | .233762 | .137514 | .158733 | .340194 @20 | −.181461 |
+> | 773003 | .212525 | .184416 | .080153 | .279184 @30 | −.199031 |
+> | 773103 | .121979 | .247695 | .189390 | .290532 @30 | −.101142 |
+> | 773203 | .231862 | .357354 | .188004 | .357354 @25 | −.169350 |
+>
+> CF's final panel is the maximum in 0/5 seeds; it is on average −.178923 below the seed's own
+> best panel. For comparison D1280's final is the maximum in 1/5 seeds and on average −.040042
+> below its own best. Descriptive re-readings of the same five blocks (**not** the object's
+> declared primary, which is the final-panel difference):
+>
+> - D1280 final − CF **best panel**: +.137560 / +.014503 / +.220168 / +.109867 / +.070840,
+>   mean **+.110588**, SD .076727, 5/5 positive.
+> - best panel − best panel: mean **+.150629**, SD .065818, 5/5 positive.
+>
+> **The two arms were not run at the same learning rate.** `b01_s1_d1280_*` carry
+> `lr_multiplier = 1.0`; `b01_s1_cf_*` carry `lr_multiplier = 0.5`. The stage-0 tuning that
+> produced 0.5 was run on **CF only** (all six stage-0 candidates are CF arms:
+> `b01_s0_cf_l05/l1/l2` × 2 seeds), with `means_J45` 0.5 → .157072, 1.0 → .095227,
+> 2.0 → .100165 on tuning blocks 772603/772703; the reduce's `working_model` says the interval
+> is "conditional on the stage-0 multiplier and excluding the variation of rerunning the
+> tuning". In `learner_config` terms D1280 differs from CF in 13 fields, including
+> `lr_discoverer_actor`/`lr_discoverer_critic` 1e-4 vs 5e-5, `policy_interruption_mode`
+> d2 vs off, `n_Z`/`n_z` 6 vs 1, `coordinator_batch_size` 1280 vs None, and the four
+> lambda terms — i.e. this is a package contrast.
+>
+> **B03 and B04 final J per seed** (three seeds, same 772803/772903/773003):
+>
+> | object | arm | 772803 | 772903 | 773003 | mean | SD |
+> |---|---|---|---|---|---|---|
+> | B03 | CF_E0005 (`lambda_l` .0005) | .328672 | .307494 | .234673 | **.290280** | .049307 |
+> | B03 | CF_E005 (`lambda_l` .005) | .266759 | .289997 | .290053 | **.282270** | .013433 |
+> | B04 | CF_M1 (lr×1.0, `lambda_l` .0005) | .281683 | .183428 | .180657 | **.215256** | .057544 |
+> | B04 | CF_M5 (lr×5.0, `lambda_l` .0005) | .352556 | .162856 | .229298 | **.248237** | .096258 |
+>
+> (B01 CF on the same three seeds: .074682 / .158733 / .080153, mean .104523. B01 D1280 on the
+> same three: .455875 / .354697 / .499352, mean .436641.) Config deltas vs B01 CF: B03 changes
+> only `lambda_l`; B04 changes `lambda_l` and the discoverer learning rates. None of the four
+> variants' final panels is systematically the maximum either (final − best panel means
+> −.0366 / −.0441 / −.0598 / −.0750).
+>
+> ### (b) B02
+>
+> | seed | D128 | D1280 (B01 reference) | M_45 |
+> |---|---|---|---|
+> | 772803 | .436205690 | .455874699 | +.019669008 |
+> | 772903 | .454015620 | .354696774 | −.099318846 |
+> | 773003 | .421601833 | .499352110 | +.077750277 |
+> | 773103 | .487555807 | .400399882 | −.087155925 |
+> | 773203 | .464619098 | .428194112 | −.036424986 |
+>
+> M_45 mean **−.025096094**, SD .074280000, SE .033219026, df4 t95
+> [−.117327, +.067135], 2 positive / 3 negative. D128 level mean .452800 (SD .025484) is
+> *above* D1280's .427704 (SD .054779). The one contemporaneous D1280 rerun
+> (`b02_d1280_772803_a01` vs `b01_s1_d1280_772803_a01`) reproduces bit-exactly:
+> max per-lane |difference| = 0.0 across two different launch shas. The reduce's own
+> `interpretation_limit` records "the reference arm is not contemporaneous".
+>
+> ### (c) B14
+>
+> `b14_reduce`. Stated "G +.019 / +.016 / −.019" is the **UNIFORM** (primary) group:
+>
+> | group | 772803 | 772903 | 773003 | mean | SD | df2 t95 |
+> |---|---|---|---|---|---|---|
+> | UNIFORM (primary) | **+.019428119** | **+.015728215** | **−.019251057** | +.005301759 | .021343685 | [−.037, +.048] |
+> | BANDIT (secondary) | +.001238322 | +.013523647 | +.046602396 | +.020454788 | .023462851 | [−.038, +.079] |
+>
+> Reproduced exactly from the reduce's own `groups[*].G_by_block`; the per-replicate paired
+> per-world means were re-derived from the stored 32-world `per_world` lists with
+> max |delta| = 0.0. This is a fixed-weight forward measurement: the reduce records
+> "zero fits, zero optimizer steps, four panels per checkpoint on the same 32 worlds",
+> and G averages two label-stream replicates a and b, whose difference is the label-draw
+> noise of the same pairing.
+>
+> ### (d) Noise floor — across-seed SD of final J for repeated same-configuration fits
+>
+> Runs were grouped automatically by a sha256 of `learner_config` (seed removed) plus
+> `lr_multiplier`, `factorial_arm`, `rollouts` and `native_score_factor`. Groups with more
+> than one distinct training seed:
+>
+> | configuration | object(s) | n seeds | mean final J | **across-seed SD** |
+> |---|---|---|---|---|
+> | D1280 (lr×1.0, cbs 1280) | B01 | 5 | .427704 | **.054779** |
+> | D128 (cbs 128) | B02 | 5 | .452800 | .025484 |
+> | CF lr×0.5, `lambda_l` .05 | B01 (s0+s1) | 7 | .143587 | .060847 |
+> | CF lr×1.0, `lambda_l` .05 | B01 s0 | 2 | .095227 | .029664 |
+> | CF lr×2.0, `lambda_l` .05 | B01 s0 | 2 | .100165 | .045121 |
+> | CF lr×0.5, `lambda_l` .0005 | B03 `e0005` | 3 | .290280 | .049307 |
+> | CF lr×0.5, `lambda_l` .005 | B03 | 3 | .282270 | .013433 |
+> | CF lr×1.0, `lambda_l` .0005 | B04 | 3 | .215256 | .057544 |
+> | CF lr×5.0, `lambda_l` .0005 | B04 | 3 | .248237 | .096258 |
+> | D_SAVE (cbs 1280) | B08 | 3 | .436641 | .074221 |
+> | BANDIT (cbs 1280) | B13 | 3 | .424514 | .019377 |
+> | UNIFORM (cbs 1280) | B13 | 3 | .448844 | .063619 |
+>
+> Two caveats on this grouping, both checked:
+>
+> - `b05_s_*` (`FSD_FLAT_INPUT_SCALE_B05`) has a byte-identical `learner_config` to
+>   `b03_e0005_*` but is a **different treatment** — it appends physical coordinates on the
+>   observations' own scale through `central_snapshot_state_affine`, recorded only in
+>   top-level summary fields (`input_scale_arm = "CF_S"`). It was therefore excluded from the
+>   B03 row rather than treated as a rerun. For the record, at equal seeds
+>   B05 − B03(e0005) is −.130244 / +.050378 / +.091213.
+> - The 7-seed CF row pools the two stage-0 tuning seeds (772603, 772703) with the five
+>   stage-1 seeds; the stage-1 five alone give mean .138192, SD .056847.
+>
+> **The B08 `D_SAVE` runs are not independent replicates of the D1280 configuration.** For all
+> three shared seeds (772803/772903/773003) the 32 per-lane `native_scores_J` of
+> `b08_save_<s>_a01` are **bitwise identical** to `b01_s1_d1280_<s>_a01`, despite different
+> launch shas (`fbae667d…` vs `887563f4…`). So the D1280-recipe across-seed SD rests on the
+> five B01 seeds only: **SD .054779 J on a mean of .427704 J** (n = 5, df 4).
+>
+> For scale: the FSD noise floor for one D1280 fit at this horizon (across-seed SD .0548 J)
+> is about 2.7× the whole B14 UNIFORM per-block spread (SD .0213) and about 10× the B14
+> mean G (+.0053). The B14 reduce itself records "A panel's conditional evaluation noise on
+> this direction is about 0.03 J, which is why every comparison here is paired by world",
+> so B14's unit (one checkpoint, 32 shared worlds, two label-stream replicates) is a
+> different and much tighter unit than the training-seed unit of B01/B02.
+>
+> **Unit of replication across the FSD objects.** The training seed/block, n = 5 for
+> B01/B02 and n = 3 for B03/B04/B13/B14; 32 evaluation lanes are nested inside each fit
+> (`b01_s1_reduce.interpretation_limit`: "five independent confirmation blocks, conditional
+> on the stage-0 multiplier; panel worlds are nested endpoint conditions"). The same three
+> block seeds 772803/772903/773003 recur from B03 onward; RESEARCH.md's own FSD row records
+> "three development blocks reused throughout".
+
+</details>
+
+### Answer
+
+### Decision
