@@ -5091,3 +5091,28 @@ declared primitive/context arrays to describe probability variation, the affine 
 actual range over observed d, and clock dependence. These are artifact reductions, not
 extra policy panels, predictor fits or a causal counterfactual analysis. They keep a
 successful complex gate from being mistaken for proof that every provided input mattered.
+
+### 2026-09-21 00:19 UTC — Command equality does not erase the continuation decision
+
+Reasoning-only check, with independent ResearchCritic agreement and no new execution:
+even at exactly d=0, current KEEP and END need not have equal value under a fixed learned
+gate continuation. With equal actually executed commands and coupled teammate/environment
+choices, the immediate reward, next physical state and foundation inputs/hidden state are
+equal. Gate-action history and eligibility differ: KEEP removes the next tick's optional
+decision, END preserves it. Thus END-minus-KEEP can equal a difference of next-state values
+at eligibility 1 versus 0, and can have either sign for a fixed nonoptimal continuation.
+
+For a purely logical two-step example, current old/fresh commands are both 0; final-tick
+fresh is 1 and final reward equals the command. Current KEEP forces final fresh and return
+1. Current END lets a continuation with KEEP probability q obtain expected return 1-q.
+Current d=0 yet END-minus-KEEP=-q. This is a counterexample to an inference, not a UAV
+measurement or evidence that useful native opportunity actually exists.
+
+Under ALWAYS_END continuation, exact command equality does yield equal physical outcomes:
+both next actions are fresh and thereafter coincide. Exact equality on the final tick also
+has no future eligibility value. Near-zero d alone cannot provide a vanishing value bound
+for the learned continuation; service thresholds, observation reordering and future feedback
+would require additional assumptions even without the eligibility difference. B08 may learn
+to schedule its own future decisions or avoid a poor continuation choice. Small d is not
+proof of an ineffective gate, and gate activity is not proof of net benefit; the actual
+whole-trajectory comparison with ordinary feedback remains decisive for practical retention.
