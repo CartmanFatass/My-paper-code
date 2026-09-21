@@ -6180,3 +6180,180 @@ CPU138.952985985s, peak RSS445492KiB, single sequential local_linux process/nume
 Historical input cost remains3B09 fits/384 collection observations. The earlier144 correctness
 native calls remain separate. Hash/array audit, Reviewer and plotting added0scientific native
 calls or fits; plot rendering and readback are recorded-data arithmetic, not new evaluation.
+
+## 2026-09-21 09:04 PDT — source inspection: a real update boundary, but no established teammate-specific deficit
+
+Read-only inspection after B11 used the unchanged `hmasd/agent.py` and `hmasd/utils.py` at
+`fa62c636cf2f6b87480c63f10cf35ecbad55fcf8`. No native call, policy forward, optimizer update
+or test was run. Internal ResearchCritic `/root/b10_investment_critique` independently read
+these interfaces; its recommendation is advice, not empirical evidence or a new assignment.
+
+The shared discoverer acts for all agents while central training holds the parameters and
+recorded observations, skills and per-agent actor/critic hidden states. The unified RolloutBuffer
+stores these inputs plus actions, behavior log-probabilities, rewards and masks (`utils.py:232`
+onward). `HMASDAgent.update` trains coordinator first, discoverer second and discriminators
+last (`agent.py:7188–7205`), on rewards already computed with the old discriminator. The
+normal `clear_buffers` resets the rollout and discriminator buffers (`agent.py:1590–1609`).
+This does not establish a persistent cross-version replay dataset or a stale-discriminator
+reward bug. A proposed future collection path must verify its actual caller, resets and
+unfinished-segment semantics; reading a method alone does not certify every historical runner.
+
+Within a discoverer update, however, actor and critic weights change at every minibatch
+(`agent.py:6556–6557`). The sampler takes chunk initial actor/critic hidden states from the
+behavior trajectory before its epoch loop (`utils.py:1297–1338`), and reuses them after those
+parameter changes. Chunk length is config.k (`agent.py:6305–6312`). This is an actual
+parameter/history mismatch, not evidence that its magnitude or return cost is material.
+GAE/returns are computed once before these updates. Observation/state normalizers can also
+change between collection and replay (`agent.py:1513` and `6331–6372`), and the buffer may
+begin mid-episode. Both facts constrain any purported full-history recomputation reference.
+
+The one concrete candidate suggested by this inspection is **epoch-level full-prefix hidden
+state refresh versus ordinary per-minibatch finite burn-in**, under equal recorded history,
+model access and a declared history-forward budget. Refresh would recompute/cache each chunk's
+starting actor/critic state using current epoch parameters; burn-in instead recomputes a
+shorter preceding prefix at the more recent minibatch parameters. Both retain behavior
+log-probabilities, stored reward, fixed GAE/returns and the same PPO objective. Historical
+representation error predicts one ordering; rapid within-epoch parameter drift predicts the
+opposite. A full-current-history forward at fixed diagnostic checkpoints could measure
+log-probability/value discrepancy on identical inputs; only a separate native-return reading
+could show useful learning. Such diagnostic computation is not free and would be declared.
+
+**DM's reservation before selection:** this is currently a generic recurrent-policy data-use
+question, not an identified teammate-specific or skill-content mechanism. Shared parameters
+do not by themselves make it a multi-agent discovery. It must not quietly replace B's
+question or become a rescue of B11. Conversely, being a competent ordinary training method
+does not make a real finite-learning comparison scientifically worthless. I have not selected
+six fits or a native host/horizon merely because code can be changed. The focused question
+below asks whether this is a worthwhile, honestly bounded continuation of B, whether a more
+direct native drift comparison is actually supported, or whether no successor is currently
+worth selecting. Existing direction closure and future research value remain different judgments.
+
+## Pro question 2026-09-21 b11-actual-learning-successor
+
+Conversation: reuse the B Jev conversation; private locator stays in local transport state.
+
+**Question.** With the radial table route scientifically read and ended above, should B's
+next investment be the concrete recurrent-history refresh/burn-in learning comparison just
+described, or is that a scope drift unsupported by the remaining teammate/skill-learning
+question? Give a decision-grounded answer, and if you reject it, recommend a different
+*single* native learning comparison only if the actual interface and prior evidence support
+one worth doing now. It is legitimate to select none. Do not generate a list of renamed
+ideas, invent a hidden policy/dynamics deficit, require unknown physics before RL is useful,
+or use a negative package result to declare all teammate-drift research valueless.
+
+The live B question is: when teammates or low-level behavior change, what has to be learned
+or reused to improve decisions beyond competent same-information simple controls? The owner
+reopened this research because earlier closures had sometimes confused an adverse recipe or
+failed explanation with the whole question. Sustained autonomous work and independent
+publication are authorized, with no fit cap/runtime window, no routine owner approval and no
+App inter-task communication. This is a B decision, not a Portfolio reassignment or a request
+to modify Claude's FSD object. B11 closure uses your already adopted decision branches and
+does not need a new approval. The present consultation concerns a materially new learning
+premise/key comparator, not a mandatory review of a finished run.
+
+**Standing and evidence.** B01/B02 global joint trajectory weighting did not beat competent
+version-aware/recent references in their fully observed fixed-clock scripted host. B03/B04
+kept some early conditional-response transfer gains but not a stable explanation/confirmation.
+B05–B08 explicitly learned an unknown behavior law, retained competent hybrid regression and
+tested acquisition: B06 first64 confirmation was inconclusive; B07 own-collection changed
+the relative advantage adversely; B08 R minus F full256 was negative on both recorded
+histories at all three reused blocks. Those are constraints on the particular response/prior/
+acquisition package, not a theorem about reusable physics or MARL.
+
+The native response reading found that complete physical post-step outcomes already determine
+Scenario1 reward, while pre-decision teammate behavior and future occupancy need not be
+known. B09 therefore deliberately imposed external shared private innovation, learned two
+ordinary four-cell joint count tables, and used known native response branches. Actual central
+HMASD has policy-query rights; the external contract was never a demonstrated central deficit.
+Probability and same-state immediate choices improved, but B09 target J−M means were
+−.121159049/−.948924799/+1.344124603. B10's new twelve worlds gave positive per-base J−IN
+and J−OUT means and M=OUT; those positive conditional results remain.
+
+B11 now crosses the six frozen empirical tables with both external laws on48 new paired
+worlds. Source matching mean+.763519889, conditional MCSE.202236326; target matching
++.133873018, MCSE.436908297, with base signs+/−/+ and16/48 wins. Its+13.435890131 largest
+target world exceeds the entire48-world net sum+6.425904878; all worlds remain. The source
+table is OUT throughout its own6144 actual ticks, but not on every alternative occupancy.
+All12 occupancy-group means of same-state mismatch-minus-match regret are positive, with
+statewise exceptions; thus local use exists without convincing two-way full-path switching.
+The declared result, complete cost110592 native calls/0new fits/139.143s and independent raw
+checks are in the preceding reading. This is whole-table use, not isolated dependence or new
+training replication. No extension, gate or automatic deeper planner is selected.
+
+**Concrete candidate and strongest alternative.** The source inspection supplies an actual
+event rather than a hypothetical unavailable teammate model: in an existing multi-epoch
+low-level PPO update, shared actor/critic weights change but saved chunk-start representations
+still come from collection parameters. Candidate C refreshes a full *available, honest*
+episode prefix at each epoch and caches chunk starts; baseline B is standard per-minibatch
+burn-in given the same history and a matched number of history-forward steps. Both retain
+the same actual rollout, PPO target/loss, optimizer-update count, policy/value architecture,
+action/skill semantics and evaluation. No stale-only baseline is sufficient. Neither method
+is claimed as novel; finite-computation usefulness can be a valid result.
+
+This candidate has unresolved design facts, not assumed repairs: a buffer boundary is not
+an episode reset; incomplete prehistory cannot be silently zeroed; normalizer changes need
+a common controlled convention; actor and critic state should be considered separately if
+the only observed effect is value fitting. A diagnostic current-history recomputation must
+use the same legal past under the *current* parameter snapshot and input convention. Lower
+representation error need not improve returns. The cache goes stale within the epoch while
+burn-in is more current but shorter, so this comparison can favor either ordinary method.
+The simplest contrary explanation is that current staleness is immaterial or that ordinary
+burn-in uses the finite compute better. The strongest scope objection is that this answers
+generic RNN PPO reuse rather than changing teammates. Please address that directly; shared
+weights or execution by multiple UAVs alone cannot identify a MARL-specific effect.
+
+**What can change the decision.** Is this a substantive and permitted learning question within
+B, with a clean minimal comparison and useful native consequence, or should we reject this
+successor despite its implementability? If proposing a more direct B comparison, identify
+the actual event, legal information, actor/critic target or data changed, competent ordinary
+baseline, falsifiable intermediate and task predictions, host/collection source and dominant
+work. Explain how it differs materially from B01–B11 and from Claude's owned skill-construction
+work. Do not presume poor performance of an untested ordinary controller, demand a preliminary
+proof/toy/hardness census, or silently change reward/physical task to make the idea work.
+If no immediate successor is worth choosing, separate this investment judgment from broad
+scientific impossibility and say which still-unanswered B mechanism is left untouched. The DM
+will choose; no new owner permission, Root handoff, gating checklist or report system follows.
+
+**Context and source precedence.** Paths marked source_sha resolve at the full immutable
+question commit supplied in the send message. Current governance is
+`docs/project/OPERATING_CONSTITUTION.md` §§1–5,7–8 at source_sha. Current method is
+`.agents/skills/hmasd-scientific-tools/SKILL.md`, sections Update the working explanation,
+Simple-model and literature bridges, Comparators, Statistics, Cost and exposure. These
+current rules replace conflicting older conversation/allowance instructions; completed
+experiments retain their original contracts. Read only the sources needed for this choice:
+
+- This notebook's2026-09-21 08:52 and09:04 entries, actual B11 summaries/readback under
+  `runs/skill_teammate_drift_learning/b11_law_table_crossing/` at evidence
+  `fa62c636cf2f6b87480c63f10cf35ecbad55fcf8`. All48 worlds and four cells are saved; a summary
+  is not an independent training replication.
+- This notebook's preceding complete Pro answer and B11 prospective at
+  `548ae30195031322d38804b3ac90bd37cb4d2b44`, for the already covered radial decision.
+- `hmasd/agent.py` at source_sha: `_normalize_observations`, `clear_buffers`,
+  `select_action_batch`, `update_discoverer_from_rollout`, `update`; `hmasd/utils.py`:
+  RolloutBuffer initialization/add/get_discoverer_sampler. Use these for the actual stored
+  inputs, update order, normalization and fixed chunk states, not as performance evidence.
+- B08 native bridge and complete six-continuation reading in this notebook at
+  `fe0e5719836f16cc5a44f02d80f53c95592250bd`; B09 raw/notebook at
+  `69a55e71d9f1bca4e8cdd204adce256cd05a7676`; B10 at
+  `8f7a8ba197f9a9cf9ba60068b55b10febbcf3dd0`, only for inherited positive/contrary constraints.
+  Older B01–B04 entries are historical bounded evidence, not current governance.
+
+**Prospective cost.** This decision preparation is0fits/0native steps/0network forwards.
+The recurrent candidate would tentatively be two methods×three fresh training seeds=6fits,
+but no horizon, production host, diagnostic forward budget or fit is selected yet: the
+scientific scope must first justify that investment, and the chosen actual learner determines
+those counts. Unknown wall cost is unknown. Advice may reject the comparison or specify the
+smallest defensible exploration, but does not launch anything. Keep any proposed diagnostic
+history passes, rollout/optimizer/evaluation work, foundation construction and engineering
+checks separate; do not describe a zero-fit diagnostic as zero compute.
+
+**Write constraints and return.** No training, evaluation or code edits. Write only the empty
+`### Answer` subsection below on `codex/b-unknown-joint-law` in this file. Read at the pinned
+question source, but fetch the latest target blob/actual SHA before writing; preserve all
+other bytes and stop on overlapping edits. Return the actual write commit, or on unavailable
+writeback return the *complete answer in chat*. Cite sources actually read and identify any
+decision-critical inaccessible source; do not invent verification. Return your concrete
+scientific selection, why, inherited constraints and the minimal useful observation if any;
+include MATERIAL_DISSENT yes/no. This is advisory research synthesis, not approval.
+
+### Answer
