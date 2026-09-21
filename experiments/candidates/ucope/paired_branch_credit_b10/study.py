@@ -24,7 +24,7 @@ from .storage import save_pair
 OBJECT = "UCOPE_PAIRED_BRANCH_CREDIT_B10"
 REPO = Path(__file__).resolve().parents[4]
 MASTERS = (8971, 8972, 8973)
-ARMS = ("R_CF", "R_FULL", "S_CF")
+ARMS = ("R_CF", "R_FULL", "S_FULL")
 MODES = ARMS + ("G",)
 file_identity = inherited.file_identity
 write_json = inherited.write_json
@@ -64,8 +64,8 @@ def reduce_panels(panels, expected):
     result = {"complete": complete, "primary": "R_CF_minus_R_FULL", "world_scores": panels,
               "means": {arm: statistics.mean(values) if values else None for arm, values in panels.items()}}
     if complete:
-        for left, right in (("R_CF", "R_FULL"), ("R_CF", "G"), ("R_CF", "S_CF"),
-                            ("S_CF", "G"), ("R_FULL", "G")):
+        for left, right in (("R_CF", "R_FULL"), ("R_CF", "G"), ("R_CF", "S_FULL"),
+                            ("S_FULL", "G"), ("R_FULL", "G")):
             result[left + "_minus_" + right] = inherited.difference_stats(panels[left], panels[right])
     return result
 
@@ -181,11 +181,11 @@ def run(config, out, admission, *, fixture_inputs=None):
                           "train_counts": {}, "eval_counts": {}}
                 summary["arms"][arm] = record
                 arm_start = time.monotonic()
-                gate = (ScalarGate("scalar", base + 11, 0.0, 1.0) if arm == "S_CF"
+                gate = (ScalarGate("scalar", base + 11, 0.0, 1.0) if arm == "S_FULL"
                         else engine.Gate("contextual", base + 11))
                 initial_gate = inherited.snapshot(gate)
                 record["initial_gate_digest"] = tensor_digest(gate.state_dict())
-                critic = engine.make_critic(base + 12) if arm == "R_FULL" else None
+                critic = engine.make_critic(base + 12) if arm != "R_CF" else None
                 initial_critic = inherited.snapshot(critic) if critic is not None else None
                 optimizer = torch.optim.Adam(gate.parameters(), lr=3e-4)
                 critic_optimizer = torch.optim.Adam(critic.parameters(), lr=3e-4) if critic is not None else None
@@ -194,7 +194,7 @@ def run(config, out, admission, *, fixture_inputs=None):
                 env, pending = env_for(base + 10000), []
                 counts = record["train_counts"]
                 try:
-                    if arm == "R_FULL":
+                    if arm in ("R_FULL", "S_FULL"):
                         for episode in range(config.train_episodes):
                             roll = engine.collect_episode(env, foundation, gate, critic,
                                 horizon=config.horizon, reset_seed=base + 10000 + episode,

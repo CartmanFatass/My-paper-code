@@ -6461,3 +6461,140 @@ hmasd-pro-question-ucope-paired…
 
 我没有重做全部 NPZ/原始行/checkpoint/hash 审计，没有运行这些 synthetic tests，也没有执行任何 checkpoint forward、原生评估或优化器。B08/B09 的记录核验不应被表述成我重新完成了其全部独立重建。决策关键的未知项仍是 native 配对差分分布、其局部可预测性、同成本实际学习收益，以及尚未绑定的生产优化器和采集发布路径。 这些缺口限制积极机制结论，也限制全局否定结论；它们不妨碍对当前九拟合稀疏方案作出上述、范围明确的否定建议。
 
+
+## 2026-09-21 05:09 UTC — DM response to Pro: strengthen the simple reference, retain one paired-credit test
+
+**Read and decision.** I read the complete answer above, including its **MATERIAL_DISSENT:
+yes** and recommendation to decline the current sparse package. Pro supplied a full chat
+answer and explicitly could not write GitHub; the delivery check confirmed no write. The
+unchanged captured answer is saved at `85a9be980`, after verifying that the assigned subsection
+was still empty and the question/prior notebook bytes had not changed. This is a completed
+consultation, not a receipt or an unresolved adviser dependency.
+
+I **accept** the raw-gradient/Adam distinction, the loss of credit coverage, the weak scalar
+exposure criticism, and the restriction on interpreting R_CF-S_CF. I **modify** the comparison
+by replacing S_CF with a fresh **S_FULL** learner: the single-logit B09 gate trained with the
+same complete-data PPO/central critic and 2,048 distinct worlds as R_FULL. **No S_CF scientific
+fit will be run.** I **do not adopt** the recommendation to decline every sparse paired test.
+That is my investment judgment, not Pro's endorsement or an owner approval question.
+
+The reason to spend one batch is specific. Actual alternative suffixes can cancel a world-
+and history-dependent team outcome component before a critic must predict it; no completed
+UCOPE native learner has obtained those two outcomes. That distinction survives B08/B09 and
+the earlier factual-baseline negative. Hundreds of direct focal targets could suffice if the
+useful relation is simple; they could also fail through hidden team conditions, small motion,
+changing eligibility, or inadequate coverage. The revised full-data rich and scalar references
+retain exactly the evidence and optimization opportunities that the candidate sacrifices.
+This is a direct, falsifiable test of whether that sacrifice buys useful learning on these
+foundations. It is not a diagnosis that old learning failed through noisy credit, and no
+headroom proof or extra diagnostic panel is required before a bounded learning comparison.
+Existing preparation effort is not a reason to execute. A negative result ends this particular
+paired package on these foundations; cleaner gradients alone do not justify another iteration.
+
+**Independent check of the scalar objection.** Using the ordinary Adam update in the
+[PyTorch 2.7 primary documentation](https://docs.pytorch.org/docs/2.7/generated/torch.optim.Adam.html),
+I independently summed the Cauchy-Schwarz bound over its bias-corrected moment weights in
+plain Python arithmetic. With beta1=.9, beta2=.999, lr=.0003 and 256 updates, the bound is
+`|c| <= .18444972542761606`, hence `p in [.4540178606655591,.5459821393344408]`.
+This is a conditional real-arithmetic bound, not an FP32 machine proof or a native observation.
+It cost zero environments, checkpoint forwards and optimizer updates. The current prepared
+optimizer does use these defaults, so the objection applies. S_FULL does not receive extra
+epochs on the same few pair targets: it receives the complete factual trajectory data, critic
+training, behavior refresh and update schedule already used by the strongest available simple
+learning reference. Neither this change nor a future win over S_FULL establishes that context
+itself is necessary; the arms remain different finite learning packages.
+
+**Final prospective revision, before any native exposure.** This paragraph supersedes the
+S_CF arm, scalar comparison claim and optimizer counts in the original B10 proposal. The
+original proposal remains historical; no attempted operation, score or fit is relabeled.
+The object is still `UCOPE_PAIRED_BRANCH_CREDIT_B10`, masters **8971/8972/8973**, frozen B06
+Ghalf **8941/8942/8943**, CPU FP32 on local_linux, horizon 256, and the same native task,
+legal information, reward, max-two-tick command semantics and recurrent feedback.
+
+| Arm | Training allocation and optimizer exposure per fit |
+| --- | --- |
+| R_CF | Rich B08 gate, 1,024 actual pairs, 16 pairs per fixed-policy round, four full-batch Adam epochs per round; 256 gate calls, no critic |
+| R_FULL | Same rich architecture and initialization; 2,048 distinct factual worlds, all B08 PPO rows, two episodes per update, four epochs, batch 256; planned 8,192 gate and 8,192 critic calls |
+| S_FULL | One state-independent B09 logit; the same full-data collection, separate central critic, worlds and update schedule as R_FULL; planned 8,192 gate and 8,192 critic calls |
+| G | The same frozen ordinary mean controller; zero fitting |
+
+All Adam optimizers use lr .0003, beta1 .9, beta2 .999, epsilon 1e-8, no weight decay,
+no AMSGrad and norm clip .5. Models and optimizer states remain private to each arm. R_CF's
+raw loss gradient has the derived first-order identity at the old policy, before norm clipping
+or Adam; no unbiased parameter-step claim is made. R_FULL/S_FULL retain the old empirical
+advantage normalization and unchanged B08 update. If a minibatch has no eligible gate row,
+that existing update skips its gate call; planned calls above are the ordinary complete-data
+count and actual skipped calls must be reported, not fabricated or replaced.
+
+For b=100000*master, R_CF retains its schedule b+81, worlds b+10000+j (j=0..1023),
+coins b+50000+j and auxiliary focal slots b+60000+j. R_FULL and S_FULL each use all worlds
+b+10000+e (e=0..2047), private coins b+50000+e and their own advancing shuffle generator
+at b+91. Rich initialization is b+11; both full-data critics initialize independently at
+b+12. All arms retain all final 64 worlds b+30000+e and, for learned gates, coins b+70000+e.
+All three fits finish before any final evaluation in their block. There is no interim panel,
+selected epoch, exploration sweep or outcome-dependent expansion. All three blocks are
+declared now, not selected after the first one.
+
+Planned cost remains **9 new gate fits, 4,718,592 training + 196,608 evaluation = 4,915,200
+native team ticks**, including every repeated prefix. Foundation forward calls equal native
+ticks; agent recurrent rows total **24,576,000**; foundation optimizer calls remain zero.
+The revised planned optimizer cost is **49,920 gate + 49,152 critic = 99,072 Adam calls**.
+The full-data scalar is worth the increased optimizer cost because it removes an avoidably
+weak practical learning reference without weakening R_FULL or increasing native exposure.
+Only R_CF produces raw paired archives; S_FULL retains its final checkpoint and evaluation
+primitives. All evaluation contexts are retained, rather than only the old every-eighth-world
+subset; this changes recording, not observations or exposure. The earlier 35-70 minute wall
+estimate is unmeasured for B10 and may increase with the extra updates and raw writes. Use
+fresh >=4 GiB admission, one Torch/BLAS thread per invocation, at most three parallel blocks
+and sequential arms. There is **no owner running-window limit**, no replacement 90-minute
+deadline and no hidden automatic retry. Technical failures retain identity and partial costs.
+
+**Prediction and investment rule.** The candidate prediction is useful changed-trajectory
+return from direct branch credit, despite sparse targets, not merely correct paired algebra.
+Retain R_CF for further investment only if R_CF-R_FULL and R_CF-G are each positive in all
+three blocks with mean >=.01 J. Also require that criterion against S_FULL before preferring
+the rich paired package over the simpler learned rule. A useful S_FULL-G result instead
+supports the simple learner; a useful R_FULL-G result supports ordinary full-data gate PPO.
+If none improves G usefully, retain G and stop this paired package here. No next learning
+rate, pair density, architecture, noise/copy-rate or local-value batch follows automatically.
+These are investment criteria on selected developmental bases, not significance/equivalence
+tests, confirmation over new foundations, or a bound on adaptive termination. Interventional
+training Js, true pair deltas and probability dispersion explain the observed implementation;
+they do not replace the final four policy panels. This narrows the original context claim.
+
+The current complete Pro answer covers the estimator, coverage tradeoff, finite optimization
+and strongest-reference concern used in this revision; another question would repeat this
+decision rather than resolve a new premise. Its dissent is preserved for comparison with the
+eventual result. No Root, other App task or Claude dependency is introduced.
+
+**Engineering work and L0 revision.** Owned paths remain the B10 package, mirrored tests,
+`scripts/run_ucope_paired_branch_credit_b10.py`, UCOPE runs and this notebook. No shared B08/B09
+or Claude executable source is changed. At `9b6b2fabc` the already reported factual-reference
+baseline was corrected: B08 critic values already have suffix/H units. That fix affects the
+optional algebraic reference, not R_CF, R_FULL or completed B08/B09. Its repeated focused
+16-check suite passed in 1.10 s with 58 handwritten synthetic ticks and zero actual Adam calls.
+Four learning checks then passed in 1.01 s (two new precision/focal-index checks); they used
+12 mock step calls and no actual optimizer state change. The new raw-storage checks passed
+2/2 in 1.06 s using one 10-tick handwritten pair. Their first invocation stopped at a test-
+import error before any fixture executed; moving the checks alongside their fixture fixed it.
+Four production-binding checks passed in 2.54 s without transitions or optimizer updates.
+The original R_CF/R_FULL/S_CF complete tiny pipeline and interruption checks passed 2/2 in
+2.00 s: **80 complete synthetic ticks + 2 returned failure ticks, 24 actual Adam calls**,
+zero native environments or native checkpoint forwards. This is engineering work, not a
+scientific fit/result, and it was completed while Pro was thinking.
+
+Independent read-only Reviewer found no further material executable defect at `9a4dd76cb`;
+it specifically required that complete/interrupted integration coverage, which is now present.
+That review does not cover the new S_FULL binding until its small delta is inspected. Complete
+that revision and run the changed tiny full path once (prospectively **80 synthetic ticks,
+36 Adam calls**); do not repeat unchanged native/smoke experiments. Reconstruct its pair and
+four evaluation panels from raw arrays, verify immutable foundation/evaluation and parameter
+ownership, then obtain the bounded delta review and accept the exact published source before
+native launch. A binding/count/fidelity failure is a technical failure, not negative science.
+
+The changed full synthetic path and renamed reducer passed **2/2 in 2.01 s** with the
+prospective 80 synthetic ticks and 36 Adam calls. Raw rewards reconstructed the two stored
+R_CF pairs and all four policy panels; foundation and evaluation checks remained unchanged.
+Across distinct cases, 26 focused checks now have passing evidence; that is not a claim that
+all 26 were rerun in one invocation. The revised executable delta still awaits independent
+review before DM launch acceptance. No B10 native effect has occurred.
