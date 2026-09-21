@@ -2976,3 +2976,310 @@ target blob and preserving all other bytes. Stop on overlap. Report the actual a
 commit, or return the complete text in chat if writeback fails; no receipt-only response.
 
 ### Answer
+
+
+Saved from chat after Transport and DM verified no Answer commit and an unchanged empty
+subsection. The receipt is a file blob, not a commit. Complete fallback follows verbatim.
+
+GitHub 文本读取部分可用，但本次未能写回：当前接口没有可调用的仓库文件更新或提交动作，未获得可用的替代写入路径。没有产生 Answer commit，也没有修改仓库。 已重新读取指定分支的目标小节，本次检查时仍为空；最新文件 blob SHA 为 09c41d8c56fbe4ca21f5389ca77f31c56f903cc0。这不是答复提交。以下给出完整答复。
+
+Answer
+一、结论：建议结束当前范围的投入，以保留正面成果的方式归档
+
+建议 DM 结束当前 C 的新增实验投入及为寻找后继而进行的持续维护，不再仅凭两条泛化的重入建议维持 exploring/idle。应保留并采用 C07 已确认的 NEAR_COMMIT 结果，而不是把此次结束写成“刷新研究不可行”或“当前研究失败”。
+
+MATERIAL_DISSENT: no。 我赞同 DM 的核心判断：未来条件不必被证明不可能，当前投资也可以结束；没有映射好的目标，不是经过校准的低成功概率。需要进一步说清的是：这两条条件既不是已经准备好的下一项研究，也不是无法达到的条件。它们处在不同的完成层次，不能用一个“可行／不可行”标签概括。 本建议只涉及本次已提交材料所界定的研究范围，不替 owner 作新的方向选择，也不新增审批程序。
+
+hmasd-pro-question-c-post-c07-r… +1
+
+重入条件	目前实际达到的程度	尚未达到的部分
+NEAR 未计入的较晚接收者后果	原 CrossingHost 已有传递后效的物理与通信通路；较长估值程序也已实现、测量	尚无一个区别于已测 LONG 的具体解释，说明为什么某种合法、可识别的后效值得再进行一项比较
+模型不可用	现有局部记录包含某些可用于估计模型参数的反馈，不是原则上不可学习	当前对象的模型本来就是声明可用的资源；尚未落实一个实际模型缺口，或选定一个不同的有限模型知识问题
+资源约束改变方法选择	已测得 NEAR 的计算代价明显高于 ACTIVE_FIRST	没有已测的决策期限、能源限制或其他资源条件，把该代价转换成当前任务中的不可接受后果
+
+这个区分来自实际代码和冻结读数，而不是对未来成功率的估计。“能实现一个变体”不等于“已有一个值得保持方向活跃的问题”；反过来，“尚未选定值得做的问题”也不等于“这些变体不可能有用”。
+
+二、关闭判断必须从 C07 的正面答案出发
+
+根据本次读取的固定版本结果条目，C07 的两个预写分支均通过：
+
+NEAR 相对 ACTIVE_FIRST 的主结果保留。 在 1,280 个新世界中多完成 102 个任务，均值为每 episode 0.0796875，近似正态 95% 区间为 [0.0560616544, 0.1033133456]，五个块的均值均为正。下端超过预写的 0.05，但只超过约 0.00606；最弱块均值为 0.0234375，其区间跨零。确认均值也低于 C06 的探索均值 0.1328125。这是有范围、有强度限制的正面结果，不是压倒性或每个世界都为正的收益。
+
+固定 LONG 的额外收益低于声明尺度的次结果也保留。 LONG−NEAR 为多完成 3 个任务，均值 0.00234375，5 个正世界、3 个负世界、1,272 个平局；前瞻修正后的有限样本上界为 0.043452695085522186 < 0.05。这个界约束的是固定 LONG32、P32、ACTIVE_FIRST continuation 和声明世界律下的程序收益，不是所有更远期规划、所有信念估计器或所有合法调度器的上界。不能把它写成零效应、策略相同或 NEAR 全局最优。
+
+原生结果也不是仅在 freshness 指标上变好。作者的完整归约记录显示，NEAR 相对 ACTIVE_FIRST 的 102 个额外完成任务，对应少了 56 个碰撞失败和 46 个其他未完成任务，同时有更多 BYPASS、较少等待；所有臂的包量相同。它支持完整程序的任务收益，但不能把这些差值分别解释为某个根动作、信念更新或 horizon 的独立因果贡献。这里采用的是已读作者归约，本次未重新审计全部原始数组。
+
+因此，历史证据现在应这样组合，而不是彼此抹去：
+
+C03 的 freshness 修复减少了陈旧等待，却少完成 9／5 个任务；C04 的 ACTIVE_FIRST 击败了当时三个冻结学习策略；C05 展示了合法信息价值和一个学习历史对透明 VOI 的实现，但没有额外学习增益。C06–C07 则补上了一个不同的正面答案：在原 CrossingHost 中，透明、已知模型的任务后果规划，可以超过那个强阶段规则。 旧的负结果限制旧程序，不否定这次正结果；这次正结果也不追认旧学习程序或产生 UAV 结论。
+
+这意味着当前最合适的结束理由是：
+
+已选定的多步比较取得了可保留的普通方法结果，并按预写尺度完成了 LONG 增量判断；目前没有另一个具体、值得购买的新比较。
+
+不是“普通规则赢了，所以方向失败”，也不是沿用 C05 之后、已被 owner 新任务和 C06–C07 取代的旧关闭判决。
+
+三、第一条条件：较晚接收者效应可以出现，但出现本身不足以构成重入理由
+现有宿主确实提供了后效通路
+
+这条条件不需要先制造新的模拟器特征。实际代码中，发送会消耗本帧 token；包延迟一 tick 到达，影响接收者固定的 gate 或边界 choose_route；通行、让行、绕行又改变后续物理状态，进而可能改变该 agent 稍后发送的快照及另一方之后的选择。任务重置是异步的，一个接收者承诺结束，不等于所有此前影响都已消失。这说明后效通路存在，但不证明任何具体后效在合法信息下可预测，更不证明净收益为正。
+
+还必须避免把已经修正的问题重新当作缺口：NEAR 不是“包到达后只看当前任务”，而是找到第一次缓存敏感的 gate／route 机会，再计到包含该机会的承诺期结束。接收者已经 DONE、需要等下一边界选路的情形，已经进入当前 NEAR 的定义。不能再用这一情形作为扩大 horizon 的新理由。
+
+弱意义上的条件已经有迹象，强意义上的研究理由尚未建立
+
+C06 的盲选开发根中，六个根有非零的长减近模型尾项，但没有严格的非零均值符号翻转；C07 中 LONG 与 NEAR 也有少量不同的原生完成结果。因此，“是否存在任何尾项或不同世界”不是尚待突破的门槛。已经观察到这些现象，固定 LONG 的额外总体收益仍被限制在声明尺度以下。
+
+值得重入的区别应是：有一个具体的、尚未被当前比较回答的原因，使合法发送者信息能够区分某类后效，并使一个前瞻指定的方法与保留的 NEAR 作出可检验的不同预测。 例如，争议究竟是截断丢失了某次后续任务后果，还是 ACTIVE_FIRST continuation 不适合估计双方实际重规划后的后果？这两个问题不是同一个问题；“把 horizon 再加长”不能自动回答后者。当前代码明确使用固定 continuation，而部署时双方重新规划，故这种差异是现有程序的真实限制，但材料中尚未把它落实为一个新的、有辨别力的比较。
+
+同样，找到一个事后亏损世界不够。亏损可能依赖当时发送者不知道的 peer 状态，也可能来自有限 Monte Carlo 抽样。后验看到“本来应该晚发”，不说明合法历史足以支持那个选择。
+
+真正获得这条条件，最小路径是什么
+
+最小的材料性推进不是立刻买一个更长 horizon 批次，而是从已经保存的同根记录与轨迹中，给出一条可检查的链：
+
+发送者当时合法知道什么；SEND/HOLD 如何改变后续哪一个已收费快照；快照在何时到达；它可能改变哪次接收者 gate／route；该后果位于哪个估值终点之外；为什么这个解释不同于已测 LONG 的一般尾项。
+
+这样的只读检查可以形成一个具体假设，不必先证明候选整体胜出。但必须保留区分：现有同根合成轨迹是模型内比较，两个已经分叉的完整策略轨迹不是额外观察到的同根反事实；一个示例也不是总体频率估计。若所需反事实未保存，就应把它标为未知，而不是用叙述补出来。科学方法允许具体假设先于正收益证明，并不要求预先证明 headroom。
+
+若未来据此选择新的实证问题，主参照必须继承当前固定 NEAR，而不能退回只击败 POLL、age/change 或 ACTIVE_FIRST 就声称有远期增量；双方要有相同合法历史、模型资源和计费条件。ACTIVE_FIRST 仍应作为低成本参照保留。
+
+本次没有取得支持这种新解释的原始轨迹见证，也不声称它不存在。我不建议把寻找见证变成常驻任务，更不把“还有可能找到”当作继续保持活跃的充分理由。
+
+四、第二条条件中的模型问题：有合法估计路径，但当前没有实际模型缺口
+“可学习”与“当前确实需要学习”要分开
+
+当前模型不是一个未知却被忽略的问题。C06–C07 明确向两个规划程序提供固定的前进概率 0.75、均匀任务距离律、物理转移、缓存投影与接收控制规律；共享已知模型是测试对象的资源条件。把模型从程序中拿走，是改变资源条件，而不是修复 C07 的技术缺陷。
+
+不过，不能因此说模型估计无法实现。实际局部观察已经提供了一个明确例子。 当 agent 在 tick t 处于 APPROACH、距离大于零，且 t+1 不是自身任务重置边界时，它可以由自己的相邻距离观察，知道这一 tick 是否前进。根据冻结代码，此时自己的 gate 不会让它进入 crossing；有效距离变化可用于统计前进事件。对这些合法可观察转移，可以形成
+
+p
+	​
+
+=
+可判读的 approach 转移次数
+观察到的前进次数
+	​
+
+.
+
+自身边界产生的新任务距离也直接可见。这说明当前接口中确实有部分参数的估计数据，不需要新增请求位、偷读当前 peer 状态或得到未来随机数。这个例子是代码推导，不是本次已经完成的参数估计；它也只涉及该已知模型结构中的部分参数，不证明任意未知动力学都可由相同记录识别。
+
+这一点与 C05 的隐藏 iid q 不同。后者的过去周期不能识别当前独立重抽的风险值；不能把那个不可识别性结论扩展为“所有本地历史都不能估计模型”。同样，早先 q(z) 建议缺少真实接口和反馈映射，是那个建议的缺口，不是模型学习的一般不可能性。
+
+最接近可实现的变体，为什么还不是我建议的下一批
+
+材料内最接近可实现的后继，是：用共同的合法历史估计模型，再代入透明 NEAR。它不需要发明新环境特征，技术与统计对象也可以写清。但目前研究已允许使用真实模型，没有一个已落实的目标要求撤销这项资源，也没有选定一个有限模型知识的科学问题及其数据暴露。
+
+故我不会把“先隐藏 0.75，再看能否学回来”直接作为当前方向的默认续期。这不是说受控的模型知识消融无效，也不是说没有外部客户就不配研究。 若明确研究的是“有限模型数据是否足以保留已观察收益”，它可以成为合法的新问题；只是不能仅因 C07 尚未回答所有资源消融，就认为当前范围仍欠着这一批实验。
+
+真正使模型条件成为重入理由，需要落实的是：哪个量在所选目标中未知；哪些已到达的本地观察能估计它；估计能否在相关接收者行动前生效；误差如何改变发送排序和原生任务后果。最强简单参照应是同数据、同先验／模型结构权限的估计器加透明价值规则，而不是不给规则校准数据，却给学习臂更多反馈。真实模型 NEAR 可以另作额外资源参照，但不能混称为同资源主比较，也不是自动的性能上界。
+
+题目提及的本地共享宿主只读映射，目前没有把具体结果作为本题固定来源提供。我没有读到那份映射结果，不能断言共享宿主存在或不存在所需链条。 但“有人可能发现一条映射”也不是当前必须维持活跃的生产者依赖。当前判断可以在已提交材料边界内结束；未来一条具体映射可以成为新的投资理由。
+
+hmasd-pro-question-c-post-c07-r…
+
+五、资源条件：26.1 倍是实测代价，不是已识别的任务瓶颈
+
+C07 记录的 NEAR 五面板总 wall 为 92.160862 秒，ACTIVE_FIRST 为 3.529101 秒，约 26.1 倍。这一差异真实且应该保留，但它是当前实现、批处理、过滤、规划和记录路径的面板时间。材料没有给出每次发送决策必须在多少物理时间内完成，也没有把仿真 tick 映射为部署期限，或测得能源、内存压力导致的任务损失。不能用相对比值直接推导“不可部署”。
+
+实现中也有明确可优化的工作：每个根生成完整 H96 的合成随机数组、创建模型世界；NEAR 的批执行还可能包含到批内最长端点的额外转移。它们使普通复用、减少不必要构造或保持语义的实现优化具有工程可能性；但没有实测就不能承诺收益，更不能把理论上的端点缩短直接当成 wall 等比例下降。
+
+获得真实资源重入条件，应从实际工作负载和要求出发：决策何时必须完成，哪些计算占用关键路径，超限后是错过发送机会、阻塞控制，还是仅增加可接受的离线时间。随后才有可读的原生比较——例如同一要求下保留多少完成任务，而不是仅追一个更小的耗时数字。没有这条链时，调低粒子数或换实现虽然可做，却还不能声称在解决已存在的部署问题。
+
+也要保留另一面：成本—回报关系本身可以是一个研究问题，不必等待外部部署期限。 但那需要把所关心的资源量、程序族和选择目标说清，作为新的前瞻比较；不能同时一面否认存在资源要求，一面以“26 倍必然不可接受”为理由延长方向。相关参照至少要包括合理实现的同对象 NEAR 和廉价 ACTIVE_FIRST，不能靠一个不必要地低效的实现制造优势。
+
+我的选择仍是：不据当前比值启动资源研究或新的粒子扫描。 现有正面方法可作为资产保留；将来确有使用需要时，可以作有界工程优化，而无需先维持一个常驻的研究方向。
+
+六、反对关闭的最强理由，以及为什么我仍建议现在结束
+
+最强反对理由不是“尚未证明普遍失败”，而是 C07 刚刚给出了一个真实的正面方法结果。 它说明合法历史和任务后果规划确实能超过强简单规则；近似信念、有限粒子和固定 continuation 仍留下具体未研究的空间。C06–C07 本身还展示了：早先“尚无选定后继”的状态，可以被一个直接来自原宿主的普通方法问题改变。若此次又把“透明规则已经够用”误写成“整个方向不值得研究”，就会重复之前过强收窄的风险。
+
+此外，本次确认不是昂贵的神经训练项目。作者记录为零新 fits、零更新，科学函数 wall 约 205 秒；因此不能借“已经投入很多”或一项不存在的 fit 额度来关闭。但成本也不是零：C07 执行了 138,555,584 个模型分支转移，而实现、审阅、解释和维护的工作不包含在这个函数时间内。
+
+我仍建议结束，是因为当前材料支持的是一项已完成且有成功产出的研究，而不是一个尚缺最后必要对照的半成品。固定 NEAR 的主比较已经读完，固定 LONG 的保留与停止分支也已经读完；现在没有一个被选出的新目标，使更精确的信念、更长 continuation、重新估计已知常数或更低计算量会改变某个尚未回答的具体判断。
+
+这不是说那些问题没有价值，而是说每个方法留下未测假设，并不自动产生继续测试这些假设的义务。本次没有必要先完成所有后效搜索、模型消融和资源曲线，才能允许当前范围归档。科学方法明确区分“下一项信息不值得当前成本”的停止判断与假说被证伪，也不要求靠新架构维持推进。
+
+关于 owner 问的“概率较低”：本材料没有给出同类重入尝试的总体、成功定义和可用于校准概率的数据。我不会给重入成功率数字，也不把“未找到具体目标”改称为“成功概率很低”。 可以有根据地说的是：已测固定 LONG 的增量不值得按原尺度继续追逐；其余后继目前缺少具体研究理由。两者足以支持当前投资结束，不需要再添加一个未经证实的概率结论。
+
+七、建议的结束范围与未来变化条件
+
+建议采用这样的范围说明：
+
+当前范围研究完成，结束新增实验投入并按既有归档方式保留。C07 确认的已知模型 NEAR_COMMIT 是正面成果；ACTIVE_FIRST 保留为廉价参照；固定 LONG 的增量追逐按冻结结果结束。保留全部代码、声明、正负结果及原始制品，不建立常驻重入搜索、周期性顾问请求或等待协调的任务。
+
+这不是重新使用旧的 NOT_VIABLE_CLOSE 科学理由。NEAR 的有效性与使用条件应在归档记录中清楚可见；以后复用它，不需要假装方向仍在做实验。归档也不包括删除运行证据或改变冻结合同。当前索引确实仍是 exploring/idle，本答复是对该状态的投资建议，没有修改索引或其他仓库内容。
+
+未来能够改变判断的，不必是一份提前证明收益的材料。一条具体的合法信息—接收者行动—任务后果映射，加上一个与保留参照预测不同的、有界比较，就可能足够。 对资源问题，也可以是一个明确选择的成本—回报研究目标，而不必伪造部署期限。它们是未来新投资的理由，不是本次归档后仍须持续履行的任务。
+
+本次不选择新的实证批次，所以不新增拟合、世界、规划调用、参数扫描或校准数据收集。前文说明的最小推进是既有材料的针对性只读检查：零新增 fits、零环境评估、零模型仿真，但仍有文件读取和分析成本，不能称为全部免费。若以后选择实证后继，应按其实际设计重新核算主导非拟合工作，不能直接借用 C07 的时间作为完整报价。
+
+八、来源范围与缺口
+
+本答复使用附件指定的 23b4d9b155b12e6a3ff14a78db68fb4a02c8ff1f 作为推理来源，读取了当前问题、完整 C07 结果／成本／方向判断、冻结 claim、C06 完整读数、C07 先前完整答复与 adoption，以及指定的 C01 映射、C03／C04／C05 和 q(z) 历史限制。治理采用该来源的 constitution 指定部分及 scientific-tools；当前状态仅核对 43c93e4cfeac65f383c4ef6f4a49997fc1c89352 的首段和 C 行，没有递归审查其他方向。代码依据是 45a1f534539032c021f5d44a7d78f4b503b0ba51 的 C01 host 与 C06 belief／planning，不以聊天记忆补全。
+
+hmasd-pro-question-c-post-c07-r…
+
+原始审计存在明确缺口。 已尝试读取 a97233da59fdbd6349803b8b157901cd50286bdf 的 C07 summary.json 和 episodes.jsonl，文件接口未返回可读正文；摘要 blob 获取失败，raw 接口也返回可能过大或不支持的读取错误。未重新读取、归约 240 个 NPZ。因此，本文的 C07 数值和全量一致性结论采用的是已读取的固定 NOTES 中作者归约，不是本次新增的独立原始数据审计。这些工具结果不证明仓库文件为空，也不把作者已完成的实验变成技术失败。
+
+本次也没有取得题目所说的本地共享宿主映射结果，故不对未提交的目标接口作可达或不可达判决。这个缺口限制的是具体目标可行性的断言，不妨碍对当前已完成对象、现有重入建议与当前投资范围作上述有界判断。
+
+最终建议：结束当前 C 范围的新增投资，保留并明确记录 NEAR 的正面结果；不要用“条件不可达”或“成功概率低”作为没有证据的关闭理由，也不要让两条尚未落实的重入建议成为方向永久活跃的理由。
+
+## 2026-09-21 — Re-entry attainability, full Pro adoption and closure recommendation
+
+The owner's question challenges the previous exploring/idle wording. DM's answer is:
+**the conditions are attainable in a technical or weak observational sense, but that does
+not presently select another worthwhile comparison. Recommend archiving the current C
+scope with its positive NEAR result, and end current experimental investment.** This
+replaces the recommendation to keep an open-ended re-entry search implicit in idle.
+It is not the old NOT_VIABLE_CLOSE rationale, a universal failure finding, or a claim
+that future success has a measured low probability. The owner asked for an assessment;
+the recommendation does not itself change the owner's direction selection. No next
+experiment, standing search or recurring adviser request is selected.
+
+Read the complete Pro answer above. The single accepted Jev key is
+`hmasd:d83bcb4843c42eeca80548caf28a8e43d416ac7d5f607792d2dcfde37b41c921`;
+send was accepted at 6 Pro with attachment observed, completion COMPLETE, no resend.
+The tool had no available GitHub write action, and Transport plus DM independently
+verified the latest remote/local subsection was still empty at source
+`23b4d9b155b12e6a3ff14a78db68fb4a02c8ff1f`. Receipt
+`09c41d8c56fbe4ca21f5389ca77f31c56f903cc0` is a file blob, not an Answer commit.
+The complete saved-from-chat text is 20,415 bytes / 8,065 characters including its final
+newline; SHA-256 excluding that newline is
+`f828b3982ff4ca79bfc4d1b6b61f2ee8cbb7ed0c7ed3b4a7bf327eae714947a2`.
+Its tab is closed and its write lease reconciled. Pro reports MATERIAL_DISSENT: no;
+agreement is advice, not a new empirical replicate.
+
+DM adopts the investment recommendation and the important qualifications below. Pro
+read the pinned question, C06/C07 readings and earlier full advice, frozen claim and
+relevant C01/C06 source. It could not retrieve usable raw C07 summary/episode bodies
+or audit the 240 NPZs, and had not received the local shared-UAV/CADC map developed
+while it was answering. Its numerical conclusions use the already verified DM reading.
+DM retains those gaps explicitly and checks the consequential source claims directly.
+
+### What can actually be reached, and how
+
+**Later receiver effects already have a physical path.** Current C01 step/delivery,
+asynchronous job boundaries and sender quota can propagate an initial send choice into
+later snapshots, routes and gates. C06's six nonzero sampled tails and C07's distinct
+outcomes already establish the weak fact that tails or program differences occur.
+The .04345 upper bound concerns the fixed LONG32/P32/ACTIVE_FIRST-continuation program;
+it is not a bound on every possible later-effect method. A new relevant explanation
+would have to identify which lawful pre-decision feature distinguishes a particular
+later consequence, and why an alternative differs usefully from retained NEAR and the
+already tested LONG. One possible unresolved issue is the fixed rollout continuation
+versus the actual two-agent replanning, but its existence alone does not select a study.
+
+The concrete way to develop such a reason is a targeted reading of existing same-root
+records: lawful sender information -> changed paid snapshot -> delivery time -> receiver
+gate/route -> native consequence beyond the NEAR endpoint. Model branches remain model
+comparisons; two diverged policy trajectories are not observed same-root counterfactuals.
+A coherent witness can motivate an ordinary exploratory comparison without first proving
+population benefit. Neither an isolated adverse world nor hunting indefinitely for one
+is the next task. No new trace claim or frequency estimate was made in this review.
+
+**Some unknown-model quantities are estimable from existing legal feedback.** DM checked
+`c01/host.py` at step's approaching/moves update and `_prepare_tick`, together with
+`c06/belief.py:take_local`. If agent i is APPROACH with d_t>0 and t+1 is an observed tick
+that is not its own job boundary, its gate cannot start crossing on that tick, and
+d_t-d_(t+1) records a 0/1 advance. Eligible own-history pairs therefore support the
+code-derived estimator
+
+    p_hat = sum_{eligible pairs}(d_t - d_(t+1)) / number_of_eligible_pairs.
+
+This states an available estimation path, not a fitted model or a finite-sample accuracy
+claim. Own newly drawn distances are also observed at its boundaries. It does not use
+peer truth, future world arrays or added communication. This differs from hiding C05's
+independently redrawn q: that negative identification result does not rule out learning
+shared transition parameters from local histories.
+
+Currently .75 and the distance law are deliberately supplied resources. Hiding them and
+learning them back would be a new model-knowledge question, not a missing C07 obligation.
+To choose it, specify the unknown quantity, common lawful data/feedback, exposure and
+how finite estimation changes send ordering and native outcomes. An ordinary estimator
+plus transparent NEAR/VoI is a required serious alternative. An explicitly motivated
+finite-data question is legitimate even without an outside deployment client; do not
+turn target relevance into a requirement to prove a gain in advance. None is selected now.
+
+**A resource tradeoff is technically testable but has no selected use objective here.**
+The observed 26.1x ratio is batched panel wall, not measured online deadline failure or
+energy loss. Dividing existing totals by 1,280 gives .0720007s/episode for NEAR and
+.0027571s for AF; these are throughput-derived averages, not serial action latency.
+There is no present inference cap whose violation causes a demonstrated task loss.
+Ordinary implementation optimization can be done later for a use need. A clearly
+specified cost-return frontier can also be a legitimate new research question without
+an external hard deadline. The earlier generic resource trigger did not define either
+objective; it does not justify an automatic particle sweep or keep C permanently active.
+
+### Target feasibility: retain the strongest concrete alternative
+
+A bounded Scout read and DM source checks examined the shared `ha_ctse_process` G0
+path: `uav_g0_controllers.py:G0CurrentInformation/target_map` and
+`uav_source_identifiability_g0.py`'s current_rows -> current information -> targets ->
+dense actions. This inspected path supplies current lifecycle/service/channel state
+directly to control. Its physical channel/backhaul guards are not the C-style delayed
+teammate packet/cache interface. No inference deadline was identified there. This is
+an interface-scoped finding, not a repository-wide absence or UAV impossibility claim;
+the inherited environments and other independent tasks were not broadly audited.
+
+There is an important existing counterexample to any repository-wide absence claim:
+archived CADC already has a usable communication path. DM read its unchanged bound
+`cadc_b01/channel.py`, `model.py`, `learner.py` and recorded result. Local raw observation
+produces a seven-number payload; accepted packets take one or five ticks to arrive;
+receiver records include content, timestamp and age; those features feed the frozen
+motion actor's GRU; executed motion produces native service, with .001 per attempted
+transmission charged separately. Concurrent attempts collide. This is an existing
+lawful message -> receiver-action -> native-reward interface, rather than a hypothetical
+new simulator feature. The source remains byte-identical to
+`22e009c9387f2507aab6ebab4555d92e27f5070e` in the inspected CADC module.
+
+The retained archive is recoverable, not just promised in prose. DM verified its
+1,117,622-byte size and SHA-256
+`f3804156ab239fa177b5773743e2508bd7f3c6453f7c52c005185ce1f529c41a`, and read the eight
+member headers, including LEARNED/final.pt and RR/final.pt. No model was loaded or run.
+Thus a future fixed-receiver, prospectively matched-access/timing comparison is technically
+possible without first creating a communication interface. Its design must separate
+receiver action sensitivity from native benefit and preserve information, channel,
+charge and exposure rights. A sensitivity check alone would not establish an achievable
+useful timing policy; a privileged branch is not a lawful online decision rule.
+
+This is the strongest concrete reason not to call the future infeasible. It does not
+currently change the investment choice: CADC's recorded learned-send/motion package was
+adverse by -.013354921301 net service on one training pair, with no identified timing
+mechanism; fixing its receiver, changing access or building a legal value predictor
+would be a distinct forward-declared question, not a rerun justified by C07. The C07
+CrossingHost result supplies no measured transfer or accurate local CADC model. No such
+successor comparison is selected by this assessment. These extra source findings were
+checked by DM after the question was pinned; they are not described as Pro-reviewed.
+
+### What closes, what remains, and what would change the decision
+
+Strengthen the conclusion that the current selected multistep question has produced a
+bounded, positive ordinary-method answer. Retain NEAR's confirmation, ACTIVE_FIRST's
+low-cost role and the exact LONG bound. Weaken the justification for keeping the whole
+scope exploring/idle solely through unspecified future conditions. Leave general refresh
+value, future learned-model methods and UAV usefulness unresolved; do not turn that
+uncertainty into either a low probability or a reason for indefinite investment.
+
+DM recommends **archive current C investment and maintenance**, retaining code, frozen
+contracts and all positive/adverse raw evidence. This is an investment judgment about a
+completed question, not proof that no further question could be useful. In particular,
+NEAR's positive result and the feasible CADC entry point are the strongest reasons for
+reconsidering later; neither creates a current obligation to do another experiment.
+The owner's direction-selection field is preserved while this requested recommendation
+is recorded; no new permission procedure or waiting-for-owner research task is created.
+
+A future concrete legal information/action/consequence hypothesis, a justified finite
+model-knowledge problem, or an explicitly selected cost-return objective could support
+a new investment decision against the retained strong references. It need not have
+already won an experiment. These are examples of future reasons, not outstanding work
+assigned to an idle producer, and no routine search or monitoring is scheduled.
+
+This review adds zero fits, optimizer updates, policy evaluations or model simulations.
+It consists of existing-source/record reading, archive hashing and advice; no new model
+parameter estimate was computed. C's historical four fits and all C06-C07 cost remain
+unchanged. All prior native runs and the Pro operation are terminal, with no unresolved
+write, launch, review or peer/Root dependency. Final recommendation and evidence are
+published by this independent DM through its own C standing.
