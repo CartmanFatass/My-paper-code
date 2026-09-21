@@ -4580,3 +4580,58 @@ checks executable semantics; DM accepts the diff and publishes the exact source 
 production. Implementer may choose routine implementation details, but no new arm, seed,
 endpoint, trial or scientific interpretation, and no launch. This entry is the prospective
 scientific declaration; an implementation failure does not authorize an automatic retry.
+
+## 2026-09-21 — B09 implementation accepted before native execution
+
+The fixed output binding is `runs/skill_teammate_drift_learning/b09_native_joint`.
+The prospective scientific choices at `ee2d70c69abc0c5a45881da6e74937a7ac166689` are
+unchanged. Native commands/observations use float32, native positions/physical evidence
+and probability arithmetic float64, and frequency counts int64. The runner enforces the
+three seeds, default production horizon/config, output suffix, source SHA and actual
+literal native admission. It uses the unmodified Scenario1 and adapter.
+
+DM inspected the implementation and accepted the bounded Implementer's diff. Independent
+Reviewer `/root/b09_native_review` found no material remaining finding at these SHA256s:
+
+- package init: `fcc3ea55c5bc37781e8722ac9d9761b26e91fd15c7076a4b1530701c217761aa`;
+- study: `e9f830b2bfaa95187476d0ebdd882b1b454c0ed5c1b42cda541add547a6ffbb4`;
+- runner: `306335029f40e4f389af1db7e2f69ebf45d1758a7fc8eb7e0acaccd8a5680b35`;
+- mirrored tests: `5876eefe07c8bc1a0c155628dbed6d6da20b4c8ad2b8fa11df3d2394a10bbb86`.
+
+The reviewer independently rechecked all hashes and read the complete state/label/learning,
+clone/RNG, reward, raw-reduction and launcher paths. It did not execute tests, fits or native
+calls. Before release its reachable tuple-to-JSON readback finding was fixed by comparing
+canonical JSON values; this caused no production failure. Requested arithmetic/exposure
+instrumentation is present. Actual completed native counters are reconciled with retained
+trace sizes, and evaluation has explicitly zero learning updates.
+
+Final pytest module: **8 passed**,14 third-party Matplotlib/Pyparsing deprecation warnings.
+Checks include separate version learning, causal command-derived labels, exact marginals,
+frozen snapshots, paired addresses, source-state/RNG isolation, selected hypothetical branch
+versus actual positions/observations/connections/SINR/rewards/terminal flags, raw-to-primary
+return reductions, output protection, source digest rejection and the literal admission AST.
+Root aggregation remains additionally checked in source; the pure synthetic aggregation test
+concerns exposure totals. Production end-to-end execution has not yet occurred.
+
+Keep all correctness work: four pytest invocations were the initial analytic/binding checks
+(2 passed,0.95s), first full module (6 passed/1 test-expected-shape failure,0.65s), post-repair
+analytic/binding checks (2 passed,0.85s), and final full module with the new raw/branch checks
+(8 passed,0.59s). These are pytest elapsed times, not process-resource benchmarks. The first
+full run executed its complete native fixture; its failure was a wrong expected array shape,
+not an adverse physical result. The final rerun was justified by that correction and added
+checks, not a launch ritual.
+
+Actual correctness exposure: **two tiny native fits**,8 count updates,24 real native ticks
+(8 collection+16 evaluation),128 planner branches,16 nominal branches; **168 native step
+calls**,14 constructors/implicit resets,14 logical setups,16 custom geometry channel
+refreshes,144 deep copies. Each nominal helper performs two custom refreshes, so these must
+not be conflated with its one constructor. Separately, each of the four invocations executed
+one analytic single-observation learner attempt: **four additional fitting attempts/updates**,
+zero native ticks. Thus six small correctness fitting attempts are preserved; the analytic
+updates are not described as pure no-learning arithmetic. No production fit, gradient or
+actor/value-network forward was hidden in these checks. No tests ran after the final hashes.
+
+Publish these exact files and this acceptance, then execute the declared three production
+fits once through local_linux snapshot admission. No altered scientific arm, extra pilot,
+production nominal panel or new Pro question is needed. Preserve the accepted operation and
+read all three complete outputs before deciding the next investment.
