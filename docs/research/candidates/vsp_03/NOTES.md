@@ -552,3 +552,122 @@ boundaries. No new scientific code change or repeated Pro call is warranted by t
 Publish this response and launch exactly the claim: ten fits,18,841,600 team ticks,
 2,560 G Adam calls, seven panels, no selection or same-batch extension. No B09 result
 exists at this decision. The cost/reading and all adverse branches in the claim stand.
+
+## 2026-09-21 B09 complete reading — fixed confirmation
+
+Native acceptance at10:20:59 UTC on `local_linux`, source
+`5510e015b99c6cbaa50543480a1b81fec1db45c1`; runner exited0 at10:21:55 UTC.
+Exact identity, detached process and fresh preflight are retained in
+[`launch-manifest.json`](../../../../runs/vsp_03/opportunity_b09_21901_21905/launch-manifest.json).
+Ten fits started and completed (five G512, five O MLE), no failure/retry/replacement.
+All five signed primary differences and the original df4 reading follow:
+
+| Final512 comparison | 21901 | 21902 | 21903 | 21904 | 21905 | Mean |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| O−G, primary | +.024663086 | +.009576416 | +.015843506 | +.019906006 | +.017900391 | +.017577881 |
+| G−R0, secondary | +.008485107 | +.012182617 | +.016317139 | +.012634277 | +.014621582 | +.012848145 |
+| G−R, secondary | +.008533936 | +.013605957 | +.015782471 | +.013729248 | +.013863525 | +.013103027 |
+| O−R0, secondary | +.033148193 | +.021759033 | +.032160645 | +.032540283 | +.032521973 | +.030426025 |
+| O−O_self, secondary | +.012965088 | +.013779297 | +.011842041 | +.013433838 | +.010993652 | +.012602783 |
+
+Primary between-block SD `.005539761`, t95 **[.010699359,.024456403]**:
+**O_SUPERIOR** by the prospective rule. The interval lower bound is below .02; superiority
+exceeding that old practical scale is **not established**. This estimates the disclosed
+correct-family fitted-planner versus G512 package under this fixed public H40 host.
+It does not prove planning necessity, G's internal mechanism, equivalent model resources,
+decentralized MARL, model-error robustness or UAV performance. Development blocks are not
+pooled. The weakest block's +.009576416 is retained without explaining it away.
+
+Absolute O J is `.386060/.376233/.381318/.386521/.385752`; G is
+`.361396/.366656/.365475/.366615/.367852`. Primary conditional-world SEs are
+`.004293/.004252/.004198/.004164/.004078`, distinct from uncertainty across five blocks.
+G training means rise from .269–.278 in the first32 updates to .364–.376 in the last32;
+actor displacement is5.117–5.781 L2. No alternate checkpoint is selected. O MLEs converge
+in8–9 iterations/30–45 function calls: c=4.018093/4.004075/4.007219/4.012473/3.994599,
+p=.496377/.499423/.500102/.500755/.500327. O_known−O is +.000087891 in21901 and zero
+in the other four panels; no optimality/equivalence inference. Stochastic−greedy G is
+negative in all five, mean−.002244385; the primary greedy endpoint remains unchanged.
+
+**Native effects.** O−G mean: success+.070214844/team, attempts+.042285156,
+failures−.027929688, waiting+6.588964844 ticks, expiry events+.579492188,
+non-submission−.042285156 and final-clock blocking−.014013672. O still trades greater
+waiting for success. O−R0 also has more failed attempts (+.082958984) and waiting
+(+3.912597656), with success+.089013672. These are neither all-component improvements
+nor extra expiry reward charges.
+
+O−O_self remains positive on five new blocks (descriptive t95[.011163560,.014042007]).
+Its success increment is only+.004931641, attempts+.071875, failures+.066943359,
+waiting−4.773535156 and expiry−.309423828 per team. O submits both jobs and has no final
+blocking in every observed world; O_self non-submissions/final blocking are
+.070068/.076172/.072021/.067627/.073486. Thus much of this coupled-versus-isolated
+contrast is a waiting/opportunity trade, not merely more success. First disagreements
+are1905/1881/1885/1873/1831 worlds, all O SUBMIT versus O_self WAIT, preserving the
+working earlier-commitment explanation and its limited causal interpretation.
+
+**Complete work and readback.** 471,040 executed episodes,18,841,600 team ticks,
+37,683,200 target transitions,2,560 Adam calls,1,874,016 gradient rows and1,071,180
+evaluation decision rows. The143,360 panel episodes reuse20,480 distinct evaluation
+world addresses. Scientific process wall55.610939 s, CPU55.477193 s, peak RSS446,210,048
+bytes. Fresh effective available memory11,908,460,544 bytes passed4 GiB; cgroup telemetry
+was unavailable. G fits8.205–8.863 s each, MLEs.00481–.00707 s, planner pairs.00103–.00249 s;
+these exclude preparation and analysis. Local complete readback took1.873 s and checked
+all110 artifact digests,143,360 native rows and arrays, every curve/count, paired differences
+and all block statistics. Full [runner summary](../../../../runs/vsp_03/opportunity_b09_21901_21905/summary.json)
+and underlying files are retained.
+
+**Judgment.** The owner-selected strong ordinary comparator has a reproducible advantage
+over fixed G512; ordinary G's positive readiness comparison survives. Keep O as the
+measured reference, without rescuing G or extending B09. Coupled planning versus the
+declared isolated model remains useful, but its necessary complexity is unresolved.
+The next useful observation is Pro's one coarse deadline guard, recorded below as a
+separate zero-fit development batch on the old B08 panels, not extra confirmation.
+
+## 2026-09-21 L0 B10 — one deadline guard, separate development observation
+
+Scientific question: can an own-job timing rule with one final-feasibility guard absorb
+most of the O−O_self development difference, or does it repair missed attempts while
+leaving substantial complete J behind? This follows Pro's exact O_guard proposal in the
+preceding answer; reuse that consultation. B09 is complete and stays frozen.
+
+**Fixed intervention and inputs.** O_guard equals the published fitted O_self everywhere,
+except force SUBMIT at t22 when both jobs are pending. Use only x0/time, x11/peer pending
+and the existing public self rule. No ready mask, parameter refit, threshold search or
+model family change. The guard is derived from the fixed `t+10<=32` feasibility boundary,
+not fitted to rewards. Freeze the B08 fitted models and exogenous panels for seeds
+21801,21802,21803, exactly4,096 worlds each from the published run
+`runs/vsp_03/opportunity_b08_21801_21803/` (complete artifacts at `a5a87aa223727b2673781009c90810e7a4842584`).
+Read their fitted_model/evaluation_worlds/G/O/O_self rows and O_self decisions only as
+needed; verify saved hashes against the frozen B08 block summaries before evaluation.
+No new worlds, neural forward, G evaluation, fitting or optimizer call. Reconstruct the
+old fitted planner only to apply its solo rule; count this planning wall even though the
+constructor also reconstructs unused joint tables.
+
+**Predictions and fixed reading.** First new O_guard/O_self disagreement must be at t22,
+both pending, guard SUBMIT/self WAIT; report every world and both directions. Predict
+fewer final blocks/non-submissions, but no guarantee of fewer failures or higher success.
+Evaluate complete J for all worlds. Report per-block O_guard−O_self, O−O_guard and
+O_guard−G, all signed native components and the signed fraction
+`mean(O_guard−O_self)/mean(O−O_self)` (denominator is the fixed B08 contrast).
+For this finite development observation only, call the guard a majority explanation if
+it improves J in all three blocks and the fraction exceeds one half. This is a descriptive
+operational reading, not causal mediation, equivalence or a population confirmation.
+Positive activation with little/no full J gain weakens the coarse-feasibility explanation;
+substantial remaining O−O_guard retains value in earlier state-dependent timing. No further
+guard choices or same-batch extension after scores. These old development panels remain
+selection-exposed; B09 is not reused to tune or confirm this guard.
+
+**Work.** Zero fits/Adam/gradient steps; three guard panels,12,288 H40 episodes,
+491,520 team ticks,983,040 target transitions. Record actual wall, planning and memory.
+One admitted local_linux CPU/thread1 process at published exact SHA. Store native guard
+rows, decisions, all paired differences and all first disagreements in its own runner-written
+run root, preserving technical failures without automatic retry. Reuse unchanged physics
+and B08 reporting functions. This one bounded observation buys an explanation of the
+surviving coupled-rule effect; no new architecture or G repair.
+
+**Engineering scope.** Implementer owns only
+`experiments/candidates/vsp_03/opportunity_guard_b10/study.py`,
+`scripts/run_vsp03_opportunity_guard_b10.py` and mirrored tests. It must not edit the frozen
+B08/B09 implementation, data, notebook, control or other tasks. Tests use synthetic
+fixtures/mock panels, covering guard boundaries, input corruption rejection and no-fit
+accounting/failure retention. Independent Reviewer checks changed evaluator/entry paths;
+DM accepts the diff and launches. Source/launch binding precedes scientific imports.

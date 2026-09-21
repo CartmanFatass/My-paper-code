@@ -1,0 +1,21 @@
+{"seed": 21901, "stage": "G", "update": 1, "wall_s": 0.7713908620062284}
+{"seed": 21901, "stage": "G", "update": 128, "wall_s": 2.7444969450007193}
+{"seed": 21901, "stage": "G", "update": 512, "wall_s": 9.042702020000434}
+{"seed": 21901, "status": "complete", "O-G": 0.02466308593749999}
+{"seed": 21902, "stage": "G", "update": 1, "wall_s": 0.016287050006212667}
+{"seed": 21902, "stage": "G", "update": 128, "wall_s": 1.9375407730112784}
+{"seed": 21902, "stage": "G", "update": 512, "wall_s": 8.206633269001031}
+{"seed": 21902, "status": "complete", "O-G": 0.009576416015624985}
+{"seed": 21903, "stage": "G", "update": 1, "wall_s": 0.015725385979749262}
+{"seed": 21903, "stage": "G", "update": 128, "wall_s": 2.115247953974176}
+{"seed": 21903, "stage": "G", "update": 512, "wall_s": 8.863844029983738}
+{"seed": 21903, "status": "complete", "O-G": 0.01584350585937499}
+{"seed": 21904, "stage": "G", "update": 1, "wall_s": 0.01660148098017089}
+{"seed": 21904, "stage": "G", "update": 128, "wall_s": 1.9920833299984224}
+{"seed": 21904, "stage": "G", "update": 512, "wall_s": 8.28201109400834}
+{"seed": 21904, "status": "complete", "O-G": 0.01990600585937499}
+{"seed": 21905, "stage": "G", "update": 1, "wall_s": 0.016289121005684137}
+{"seed": 21905, "stage": "G", "update": 128, "wall_s": 2.0028826929919887}
+{"seed": 21905, "stage": "G", "update": 512, "wall_s": 8.328143377002561}
+{"seed": 21905, "status": "complete", "O-G": 0.017900390624999984}
+{"status": "complete", "reading": {"label": "O_SUPERIOR", "primary": "O-G", "practical_reference_J": 0.02, "lower_bound_above_practical_reference": false, "no_equivalence_claim": true, "assumption": "independent approximately normal block contrasts; five fresh blocks"}, "primary": {"per_block": [0.02466308593749999, 0.009576416015624985, 0.01584350585937499, 0.01990600585937499, 0.017900390624999984], "mean": 0.017577880859374985, "between_block_sd": 0.005539760957162978, "independent_blocks": 5, "t95": [0.010699359120210878, 0.024456402598539092], "df": 4, "scope": "primary"}}

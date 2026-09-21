@@ -81,3 +81,26 @@ ten fits, endpoints and reading rule. The implemented B09 wrapper at `815040cf4`
 five-block completeness, O−G sign and df4 aggregation and passed independent engineering
 review. Expiry/blocking remain diagnostic events; only success, attempts and waiting
 enter J. Pro's optional O_guard was not added. No confirmation outcome exists at adoption.
+
+## Appended result — 2026-09-21
+
+Complete at source `5510e015b99c6cbaa50543480a1b81fec1db45c1`, ten of ten fits successful,
+no retries or batch extension. Five O−G means in declared order:
+`+.02466308594, +.00957641602, +.01584350586, +.01990600586, +.01790039062`.
+Mean **+.01757788086**, between-block SD.00553976096, df4 t95
+**[+.01069935912,+.02445640260]**. Prospective reading **O_SUPERIOR**.
+The lower bound is below .02, so a gain exceeding the old practical scale is not established.
+No equivalence, neural-mechanism or broader-domain claim.
+
+Secondary descriptive means: G−R0+.012848145, G−R+.013103027, O−R0+.030426025,
+O−O_self+.012602783. O−G trades +.070214844 success/team against +.042285156
+attempts and +6.588964844 waiting ticks; failed attempts decrease .027929688,
+expiry diagnostic events increase .579492188. Full costs and contrary evidence are in
+NOTES.md. B08 development blocks were not pooled; the separate later B10 development
+guard probe does not alter this confirmation's sample or reading.
+
+Actual cost471,040 episodes/18,841,600 team ticks/37,683,200 target transitions,
+2,560 Adam calls; scientific-process wall55.610939 s, CPU55.477193 s, peak RSS446,210,048
+bytes on local_linux. All110 artifact hashes and143,360 native evaluation rows/arrays,
+curves and paired statistics were read back successfully. Results:
+[`runs/vsp_03/opportunity_b09_21901_21905/summary.json`](../../../../runs/vsp_03/opportunity_b09_21901_21905/summary.json).

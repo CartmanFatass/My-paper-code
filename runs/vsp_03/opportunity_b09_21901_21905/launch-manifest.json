@@ -1,0 +1,102 @@
+{
+  "acceptance": "accepted",
+  "accepted_at": "2026-09-21T10:20:59.639312Z",
+  "bootstrap_command": [
+    "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/c891fbdcbe164ec19c606c815a120261/scripts/hmasd_admission.py",
+    "_run-admitted",
+    "--runner",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/c891fbdcbe164ec19c606c815a120261/scripts/run_vsp03_opportunity_b09.py",
+    "--output",
+    "/home/fires/.codex/worktrees/e481/hmasd-wsl/runs/vsp_03/opportunity_b09_21901_21905",
+    "--",
+    "--seeds",
+    "21901",
+    "21902",
+    "21903",
+    "21904",
+    "21905",
+    "--launch-sha",
+    "5510e015b99c6cbaa50543480a1b81fec1db45c1",
+    "--out",
+    "/home/fires/.codex/worktrees/e481/hmasd-wsl/runs/vsp_03/opportunity_b09_21901_21905"
+  ],
+  "claim_key": "a7475003d75a2b6ee31a3e4476f5a42ca6ccbd2a87c240ffaaf3bf036b216b6a",
+  "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/a7475003d75a2b6ee31a3e4476f5a42ca6ccbd2a87c240ffaaf3bf036b216b6a.json",
+  "command": [
+    "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/c891fbdcbe164ec19c606c815a120261/scripts/run_vsp03_opportunity_b09.py",
+    "--seeds",
+    "21901",
+    "21902",
+    "21903",
+    "21904",
+    "21905",
+    "--launch-sha",
+    "5510e015b99c6cbaa50543480a1b81fec1db45c1",
+    "--out",
+    "/home/fires/.codex/worktrees/e481/hmasd-wsl/runs/vsp_03/opportunity_b09_21901_21905"
+  ],
+  "command_sha256": "8051eb04e263022d24f2ee9ad8c49a87b62b48a1116252ba3b05c76e5891ce06",
+  "control_observation": {
+    "observed_at": "2026-09-21T10:20:59.459245Z",
+    "ref": "refs/heads/main",
+    "remote": "origin",
+    "sha": "fc604cc7c1fd7a28169d34e76ffc916fdf44fb30"
+  },
+  "control_root": "/home/fires/hmasd-wsl",
+  "created_at": "2026-09-21T10:20:59.479799Z",
+  "cwd": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/c891fbdcbe164ec19c606c815a120261",
+  "direction": "vsp_03",
+  "host_identity": "Jacob",
+  "identity_command": [
+    "/home/fires/.local/share/uv/python/cpython-3.10.20-linux-x86_64-gnu/bin/python3.10",
+    "scripts/run_vsp03_opportunity_b09.py",
+    "--seeds",
+    "21901",
+    "21902",
+    "21903",
+    "21904",
+    "21905",
+    "--launch-sha",
+    "5510e015b99c6cbaa50543480a1b81fec1db45c1"
+  ],
+  "lead": "Codex DM (independent session)",
+  "manifest_ref": "/home/fires/.codex/worktrees/e481/hmasd-wsl/runs/vsp_03/opportunity_b09_21901_21905/launch-manifest.json",
+  "node": "local_linux",
+  "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/a7475003d75a2b6ee31a3e4476f5a42ca6ccbd2a87c240ffaaf3bf036b216b6a.json",
+  "output_root": "/home/fires/.codex/worktrees/e481/hmasd-wsl/runs/vsp_03/opportunity_b09_21901_21905",
+  "preflight": "/home/fires/.codex/worktrees/e481/hmasd-wsl/runs/vsp_03/opportunity_b09_21901_21905/admission-preflight.json",
+  "process": {
+    "detached": true,
+    "identity": {
+      "boot_id": "0c48e432-2a4b-4bcc-9576-32954aa2c6b8",
+      "kind": "linux_pid_start_ticks",
+      "pid": 3451977,
+      "session_id": 3451977,
+      "start_ticks": 24848983
+    },
+    "native_handle_kind": "posix_session",
+    "pid": 3451977,
+    "process_group_id": 3451977
+  },
+  "process_exit": "/home/fires/.codex/worktrees/e481/hmasd-wsl/runs/vsp_03/opportunity_b09_21901_21905/process-exit.json",
+  "published_remote": "origin",
+  "runner_process": {
+    "identity": {
+      "boot_id": "0c48e432-2a4b-4bcc-9576-32954aa2c6b8",
+      "kind": "linux_pid_start_ticks",
+      "pid": 3451978,
+      "session_id": 3451977,
+      "start_ticks": 24848986
+    },
+    "pid": 3451978,
+    "process_group_id": 3451977,
+    "supervisor_pid": 3451977
+  },
+  "schema_version": 1,
+  "sha": "5510e015b99c6cbaa50543480a1b81fec1db45c1",
+  "source_root": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/c891fbdcbe164ec19c606c815a120261",
+  "stderr": "/home/fires/.codex/worktrees/e481/hmasd-wsl/runs/vsp_03/opportunity_b09_21901_21905/stderr.log",
+  "stdout": "/home/fires/.codex/worktrees/e481/hmasd-wsl/runs/vsp_03/opportunity_b09_21901_21905/stdout.log"
+}
