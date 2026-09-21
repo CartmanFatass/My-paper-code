@@ -52,6 +52,12 @@ such a send; completion, dependency, conflict, handover or publication is not an
 The owner explicitly limits this rule to the App: Jev Pro and internal bounded helpers retain
 their existing workflows. Independent sessions finish their own work and handle concurrent Git changes.
 
+2026-09-20 (owner, Pro's scientific role): adopt proactive Pro consultation at the four
+scientific decision points in section 5, with reuse of advice that still covers the decision.
+The DM retains scientific responsibility; this adds no approval layer or per-batch round.
+The amendment applies to subsequent decisions, without reopening completed work, changing
+frozen contracts or resuming paused research.
+
 ## 1. What this project is
 
 A personal exploratory research project on unfixed skill duration k and unfixed agent count N,
@@ -204,13 +210,36 @@ audit ledger, owner inbox, handoffs, packets, registries or receipts for new wor
 
 ## 5. Pro is an adviser
 
-Use Pro when useful for a focused scientific question: evidence synthesis, competing failure
-explanations, a simple-model/literature bridge, a targeted revision, or candidate generation;
-retain one critic pass before confirmation. None is a mandatory post-result round or approval.
-Ask for the kind of reasoning the unresolved question needs, not a fixed number of new ideas.
-The DM owns the choice and records its response to material criticism and resulting belief
-changes. Scientific reflection belongs in the existing notebook, not a new agent, registry,
-score, checklist service or permanent document type.
+The DM proactively brings Pro into consequential scientific decisions, without waiting for
+an owner reminder. Initiate a focused consultation before:
+
+1. Establishing or materially changing the research question, core hypothesis or key comparator.
+2. Changing the failure explanation or continuing investment when intermediate predictions
+   keep failing; use the scientific meaning of those failures, not a fixed failure count.
+3. Closing or reopening a research route, or broadening the scope of a claim.
+4. Entering confirmation: retain one critic pass on the actual claim, comparison and fixed plan.
+
+Reuse a complete prior Pro consultation when it already addresses the same question and
+decision and its evidence and premises remain materially applicable. For confirmation, that
+advice must cover the actual claim and confirmation plan; a generic earlier discussion does
+not suffice. Routine implementation, planned verification, execution and collection within
+that reasoning need no repeat consultation. A materially changed question, premise or evidence
+at one of the decision points calls for a focused follow-up. Existing frozen review exceptions
+remain bound to their original objects. There is no per-batch round or fixed consultation frequency.
+
+Ask for the reasoning the decision needs: evidence synthesis, competing failure explanations,
+a simple-model/literature bridge, targeted revision, hypothesis generation or criticism, with
+no fixed idea count. Pro is an adviser, not an approval stage or veto. The DM reads the full
+answer, verifies consequential claims and records its response to material criticism and the
+resulting belief changes in NOTES.md, then owns the choice. A local ResearchCritic or engineering
+Reviewer can assist, but does not by itself satisfy a Pro consultation. Scientific reflection
+uses the existing notebook, not a new agent, registry, score, checklist service or record type.
+
+Within authorized direction work, the DM initiates and completes Pro consultation directly
+or through its Transport, without Root forwarding or a new per-question owner approval.
+The App-only cross-task messaging restriction does not apply to Jev Pro. Await advice only
+for the decision it can change and continue independent work. Portfolio review remains
+owner-triggered; advice does not select directions for the owner or lift a pause.
 
 **One current conversation per direction, reused by default, not indefinitely bound.** Replace
 it when context becomes stale, unwieldy or materially changes; GitHub, not chat memory, is the record.

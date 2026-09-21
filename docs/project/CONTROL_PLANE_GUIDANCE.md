@@ -63,9 +63,14 @@ Codex Root 使用 loop-dispatch；独立 DM 由 AGENTS 直接指向 direction-ma
 有合适的具名子角色时使用其原生 role 参数；把通用 child 的任务标题写成 Reviewer，并不会
 加载 Reviewer 的职责或模型配置。历史 spec 按当前任务或冻结对象选读，不作为另一套治理 preload。
 Claude 导入 AGENTS，研究 session 使用生成的 research-hub；它不是又一名 Root。
+Pro 的主动介入点由宪法 §5 指定：确立或实质修改研究问题、核心假设或关键对照；
+中间预测持续落空后更换解释或继续投入；关闭／重开路线或扩大主张；确认性实验之前。
+DM 自行发起，已有完整咨询仍覆盖当前判断、证据和前提时复用；确认前须覆盖实际主张与固定方案。
+既定实现、验证和收集无需重复咨询。本地 Critic／Reviewer 的检查不替代 Pro 科学咨询；
+Pro 不审批，DM 阅读、核验并在 NOTES 中回应。Jev 路径无需 Root 转发或逐问题向 owner 请示。
 Pro 是外部会话，不继承本地 skills：问题作者在现有问题段内提供适用方法摘录或固定版本的具体节。
 具体选读见 [Pro reading context](../../.agents/skills/hmasd-pro-research-prompt-author/references/pro-reading-context.md)：
-Portfolio、假设批次、确认前 review、owner 明确要求的控制面 review 分别选择材料。
+科学判断、失败诊断、路线关闭／重开、确认前 review，以及 owner 触发的 Portfolio／控制面 review 分别选择材料。
 作者把具体文件/节/版本和用途展开到原问题的 Context 中，并在实际发送消息中说明先读这些来源、
 现行治理替代冲突的旧聊天规则、冻结输入保持原义。Pro 在回答中引用实际采用的依据，说明关键未读材料；
 缺失材料只限制依赖它的结论，不产生新审批或自动补发。Transport 原样发送，作者负责判断来源是否适用。
@@ -120,8 +125,10 @@ flowchart TD
     G --> H[runs 输出与终态事实]
     H --> I[DM 判读并更新 NOTES]
     I --> J[DM 自行发布本方向 RESEARCH 条目]
-    C --> K[需要时：Pro 问题与方法上下文]
-    K --> L[Transport 单次发送、观察、完整取回]
+    C --> K[宪法第 5 节科学决策点：检查已有 Pro 意见]
+    I --> K
+    K -->|已有适用的完整意见| C
+    K -->|需要新咨询| L[问题与方法上下文；Transport 单次发送、观察、完整取回]
     L --> C
 ```
 
