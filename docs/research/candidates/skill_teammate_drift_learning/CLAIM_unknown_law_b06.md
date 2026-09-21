@@ -1,8 +1,9 @@
-# Proposed B06: early adaptation with a learned joint law
+# B06: early adaptation with a learned joint law
 
-Prospective proposal for Pro criticism, 2026-09-21. No B06 fit has started. The DM will
-record adoption or amendment before execution. This is a finite-package claim, not
-novelty, universal model-based superiority, endogenous MARL or UAV deployment.
+Adopted without experimental changes on 2026-09-21 after reading the complete Pro
+criticism preserved in NOTES.md. No B06 fit had started at adoption. This is a
+finite-package claim, not novelty, universal model-based superiority, endogenous MARL
+or UAV deployment.
 
 ## Hypothesis and comparison
 
@@ -54,7 +55,7 @@ and all parameter values remain B05's. No private true law or true response ente
 learning or selection. No checkpoint choice; evaluate every pre-update decision by the
 same exact-value evaluator, and retain all raw data and final states.
 
-## Endpoint, uncertainty and proposed decision rule
+## Endpoint, uncertainty and decision rule
 
 Primary block value is mean exact expected greedy reward over the first 64 target
 decisions. The paired difference is response minus full direct, one value per fresh
@@ -63,10 +64,14 @@ interval for the mean (df4). This small-sample interval assumes an approximately
 distribution of independent block differences; it is not distribution-free. Never use
 the 64 nested decisions as 64 independent fits.
 
-Proposed operational support rule: mean difference at least **.005** and the primary
+Operational support rule: mean difference at least **.005** and the primary
 95% interval wholly above zero. The .005 scale is approximately one ninth of the full
 reference's B05 early regret; it is selected before B06, not a global project threshold.
-Report practical importance separately from uncertainty. If the rule fails, call the
+Passing means the point estimate reaches .005 and the parametric interval excludes
+zero; it does not establish a true mean of at least .005. The expected reward scale
+is .32 over 64 target decisions. Five blocks may leave a wide interval; no precision
+guarantee follows from the seed count. Do not pool the outcome-exposed B05 blocks into
+this confirmation. Report practical importance separately from uncertainty. If the rule fails, call the
 planned confirmation inconclusive or adverse according to its actual signs/interval;
 do not infer equivalence or no research value. Do not add seeds to this batch.
 
@@ -88,7 +93,8 @@ reported. B05's scientific-process time was 5.299 seconds for 75 settings/law fi
 this is context, not a promised B06 duration or project-end-to-end speed. Measure the
 new complete process wall/RSS. One fixed batch, no score-dependent extension.
 
-The specific decision for Pro: is confirming this bounded unknown-law transfer useful
-now, or does a material comparator/inference defect make one different next observation
-more informative? No extra direction, current-law oracle, reward edit or generic rescue
-is proposed. Pro advice is advisory; the DM records its own choice before running.
+The full Pro answer supports this fixed recurrence observation with MATERIAL_DISSENT no.
+The DM adopts it in NOTES, retaining selection sensitivity, finite representation and
+shared-law estimation limits. No extra direction, current-law oracle, reward edit or
+score-dependent rescue is part of this batch. All numerical rules and settings remain
+the original pre-Pro proposal; these clarifications narrow interpretation only.

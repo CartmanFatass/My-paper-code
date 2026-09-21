@@ -2102,6 +2102,321 @@ addresses stay local and must not be written to the repository.
 
 ### Answer
 
+**Saved from chat by the DM.** Jev returned the complete 10,035-character reply; actual repository delivery was NOT_DELIVERED. Pro reported read access but no write/commit interface. This is its complete browser-rendered text, including its explicit unread-NPZ limits and flattened mathematical/citation rendering. Transport content SHA256 (excluding the saved trailing newline): `e8e17d1b328497751f7bc0a06edda21b01ad7b23653d870abc4631d980ad1d2c`. References to source commits below are not delivery receipts.
+
+GitHub 读取成功，但写回未完成。 当前会话可用的 GitHub 接口没有文件写入或提交动作，也没有可用的已认证 CLI 写入路径。因此，我没有修改仓库，没有产生可报告的 commit。以下是目标 NOTES.md 中该问题的完整 Answer。附件指定的写回位置与失败时完整聊天答复要求已经明确。
+
+hmasd-pro-question-b05-unknown-… +1
+
+Answer
+一、判断：支持保留这次固定 B06，但只确认实际声明的有限学习包
+
+我建议保留已提出的、未经改动的五个新块 B06：固定三项 B05 设置，以 full-history hybrid 为唯一 primary reference，recent hybrid 为 secondary reference，继续使用 first64 主终点和现有预写规则。 B05 足以使“这一早期收益能否在新独立块复现”成为值得购买的下一项观察；它尚不足以确认收益已经稳定存在，也没有把收益的机制解释识别出来。就实际 claim 的有限范围而言，我没有发现一个已经成立、足以要求先替换主比较或先改联合律学习器的实质缺陷。
+
+这个支持有明确边界：B06 检验的是给定 B05 已选设置、共同联合律学习程序、任务生成族和被动采集制度时，response 包相对选定 full hybrid 的早期平均价值差。它不检验“重新抽取开发集并重新选模型的整套程序通常优于另一套程序”，不证明 response 胜过所有合理直接估计器，也不识别一种独有的 drift-learning 机制。实际 claim 已经把比较限制为有限选择后的学习包，而没有提出这些更强命题。
+
+最强的替代解释是：response 在这个稳定条件奖励宿主上，利用实际联合 outcome 分组学习，具有比所选 hybrid 更合适的有限样本表示与正则化；噪声较大的开发选择又可能没有选中直接模型族中真实最好的设置。 当前联合律估计则是剩余绝对任务损失的重要限制，尤其在 95103；但所有臂共享同一估计，因此不能把 response 的相对收益解释成“它把当前联合律学得更好”。这三个问题需要分别处理，不能合并成一句“未知律有用”或“基线不够强”。
+
+二、证据范围及未完成的独立复核
+
+本判断使用的推理输入是附件指定的固定版本：问题、claim、现行宪章与科学方法位于 64e20fc6aa84ae4f844461fad82d4baa0e92ca7e；B05 运行证据位于 43b262fbb66f978abcc0ff767c6be8937352042a；三份相关代码位于 afe4f8ec74d48b2485db3d935de7871c86cc0e6c；先前 Portfolio 的 B 段及 DM 综合位于 b6093d211fa33a81d05d490ffa5bc920f43605eb。相关读取覆盖了指定的四个 NOTES 条目、实际 claim、两个 stage summary、完整开发 selection.json、完整 held-out readback.json、九份所选 held-out fit summary，以及信息、预测、更新、选择和评价器路径。先前 Portfolio 建议是 B05 的动机，不是见过 B05 结果之后对 B06 的评价。
+
+原始 NPZ 数组本次未能读取。 对 held-out seed_95101/common.npz 的连接器读取返回 UnicodeDecodeError；本次也没有解码各 fit 的 curves.npz、state.npz，没有独立重算底层 artifact digests，更没有重执行学习器、环境或评价器。readback.json 所记载的 33 项 held-out digest 验证，是已读到的作者检查记录，不是我的第二次独立验证。以下数值判断由原始 fit 摘要、stage summary 与已检查的 readback 相互支持；对具体系数分配、逐步误差抵消等机制，只作代码支持的解释或推测，不声称已由数组轨迹验证。
+
+下文新增的计算仅是对公布数值的均值、删块敏感性、任务量纲及 t 区间公式作算术分析，不构成新 fit、新环境数据或独立复现。区间公式及小样本假设另核对了 NIST 的统计说明；它不替代仓库中的实验依据。
+NIST
+
+三、B05 改变了什么，哪些不利事实必须保留
+
+以下均为 response 减 reference 的任务价值差，正值有利于 response：
+
+终点／参照	95101	95102	95103	三块均值
+first64／full	−.001796875	+.025781250	+.006718750	+.010234375
+first64／recent	−.003671875	+.036015625	+.004140625	+.012161458
+full256／full	+.002558594	+.006191406	+.010371094	+.006373698
+full256／recent	+.003183594	+.010664063	+.003144531	+.005664063
+late64／full	+.001640625	+.002187500	.000000000	+.001276042
+late64／recent	+.001640625	+.006562500	+.007343750	+.005182292
+
+这些数值与 held-out stage summary、readback 一致。primary 对 full 的样本 SD 是 .014121188，对 recent 是 .021024384。所以现在有真实的新块未知律学习信号，但没有稳定总体排名；full256 的三个正号也不能替代 first64 的混合结果。
+
+95101 是解释上重要的反例，不是应被均值掩盖的小异常。 Response 的 first64 错误次数为 13，full 与 recent 都是 16；response 的价值 MAE 也低于两者，但它的任务价值反而更低。其在真实 p
+11
+	​
+
+=.35 的 context 做了四次错误 COOPERATIVE 选择，累计 regret 为 .94。相反，95103 的 response 比 recent 多犯一次错误——32 对 31——却有更高任务价值。
+
+这并不矛盾。由宿主奖励定义，
+
+Q
+C
+	​
+
+=.05+.90p
+11
+	​
+
+,Q
+S
+	​
+
+=.60.
+
+因此 p
+11
+	​
+
+=.35,.55,.65,.85 四种 context 的一次错误，分别损失 .235、.055、.035、.215。一个 .35-context 的错误，代价超过六个 .65-context 的错误。预测误差、错误次数与 regret 是三个不同读数；应按行动价值间隔加权，而不是把“错误更少”当作任务收益已经得到解释。 这些代价是代码奖励定义的直接算术，不是新增观测。
+
+还必须保留绝对损失：response 在 95103 的 first64 平均任务价值为 .585625，低于恒选 SAFE 的真实期望值 .60；full 和 recent 在该块也低于 .60。这不否定它的相对包收益，但说明“略好于另一学习器”与“该块已良好适应”不是同一判断。
+
+据此，工作解释应更新为：免费已知联合律不再是支持早期收益的唯一经验前提；在当前可学习的未知律宿主上，有限学习包仍出现早期平均正信号。但 B01/B02 的 global joint-IS 负面结论不撤回，B03/B04 的早期条件响应收益与晚期追平不扩大，B04 的支持修复到任务收益解释仍未稳定成立。B05 还改变了联合律族、支持与原始完成过程，所以不能把它与 B03 的数值差称为“仅隐藏当前律所造成的因果衰减”。
+
+四、开发 DR 选择确实不稳定，但尚不构成取消该有限比较的理由
+
+选择路径是合法的，选择结果却不因此可靠或最优。 代码先冻结所有臂的 pre-outcome 预测，再产生 collector 行动、outcome 与 reward，最后更新学习器。真实联合概率与真实条件收益只进入评价器；直接回归永久保存当时的估计律特征，而不是用后来结果回填旧行。开发 selector 接收的是 clipped 预测、贪心动作和实际采集反馈。
+
+对固定设置，单步分数为
+
+V
+DR
+	​
+
+=q(g)+21{A=g}[r−q(A)].
+
+在该步预测与贪心动作已固定、collector 以 1/2 概率采集每个动作的条件下，校正项的期望补回 Q(g)−q(g)。这是每个设置的合法价值评分依据。但“各设置的评分条件无偏”不意味着对多个噪声评分取最大值之后，赢家的评分仍无偏，更不意味着赢家是真实最优设置。 三个开发块中的 192 个 first64 行共享块内学习历史，不能当成 192 个独立训练重复。
+
+实际选择并非有意挑了一个开发表现较弱的参照。开发 mean DR 为：response prior2 .603446247；所选 full hybrid prior2 .609558866；所选 recent hybrid prior16/window256 .613187226。全历史直接族中的 cell prior2 为 .596531426。Full hybrid 是依声明规则胜出的，而不是在看过 held-out 后从六个设置里挑出一个输给 response 的设置。
+
+不过，已公布 score_rows 的简单删块算术显示了真实敏感性：
+
+仅从开发均值计算中去掉	full 家族 DR 首选	剩余两块 mean DR
+95001	cell prior2	.661179007
+95002	hybrid prior16	.628520409
+95003	hybrid prior2	.547116735
+
+这是对既有分数的敏感性分析，不是重新选择设置、重新训练或新的验证结果。它说明“开发已可靠识别最强直接模型”站不住；它也不能证明 cell prior2 或 hybrid prior16 的真实 first64 价值更高。特别是，我们不能因为某个删块结果看起来更顺眼，就用它覆盖原来的机械选择。
+
+选择暴露也不能被压缩成“每臂公平调了一次参数”：response 有两个设置，full 有六个，recent 有十二个，合计 60 个开发决策 fits 加三个共享 law fits；这些是有声明的、但并不相等的选择搜索范围。窗口、表示和先验的选择不确定性仍在。早期正确性检查还曾使用开发 seed 95001 的 48 宏数据，这一暴露已经记录；不能称所有开发身份从未使用过，但它没有使用 B06 的五个新身份。
+
+为什么这些问题没有迫使我建议改 B06？因为 B06 的待估量是冻结选择之后的包差。在五个新块与这些开发、探索结果独立，而且没有再选择 primary、设置或规则的条件下，新批次可以直接检验这个包差。它不会覆盖“反复重抽开发集时的模型选择不确定性”；也不应把 B05 三块与 B06 五块直接合并成对当前 claim 的八块独立确认，因为 B05 已参与下一步投资、primary 地位和尺度选择。Claim 对这些选择历史已有披露。
+
+五、hybrid 表示与正则化是可信替代解释，但未被实证识别为缺陷
+
+两个主要估计器实际上在解不同的有限学习问题：
+
+Q
+	​
+
+C
+R
+	​
+
+=
+p
+	​
+
+⊤
+m
+,
+
+其中 
+m
+ 由实际 cooperative outcome 分组的全历史奖励均值估计；而 full hybrid 使用
+
+Q
+	​
+
+C
+F
+	​
+
+=
+p
+	​
+
+⊤
+β
+	​
+
++
+b
+v,c
+	​
+
+,
+
+通过四个估计概率特征加八个 context/version 指示特征，联合进行 ridge 拟合。Response 的四个条件均值与 hybrid 的十二个回归系数，不具有相同的先验几何；Beta pseudo-count 2 与 ridge precision 2 也不是等效正则化。
+
+因此，hybrid 在函数形式上容纳某些有用的 law-based 预测，并不保证有限样本联合拟合会把信息分配到适合迁移的系数上。一个具体、可由代码提出的解释是：源版本中，每个 key 的估计律逐渐接近该 key 的固定分布，key residual 与共享概率系数都能解释部分奖励水平；ridge 会决定这种解释如何分配。到新版本时，新 key 的残差从零开始，共享部分是否学成合适的迁移关系便很重要。这是一条结构性解释，不是本次已经通过系数轨迹或干预证实的机制。 我没有据此宣布发生了确切秩缺陷、某个系数错误或已知可修复的优化故障。
+
+Response 还更直接地利用了 outcome 对稳定奖励响应的监督信息；直接模型主要把奖励回归到 pre-outcome 概率与公开 key。它们拥有相同原始信息权利，但使用信息的方式不同。对此，合理结论是表示和估计方式的有限包收益，而不是“同信息已经排除了表示差异”。宪章与科学方法明确区分同信息比较和组件因果归因；claim 本身也没有把这两者混同。
+
+同时，law-only 与 current-cell 已获得开发选择权；九份 held-out 摘要记录了真实观测、统计更新、ridge solves 与参数移动。当前材料没有显示“只让一个明显不学习的基线陪跑”。不能仅凭另一个普通模型可能更强，就把有限参照比较判作无效；也不能据此把它升级成对整个普通直接学习类别的胜利。条件响应模型自己就是普通 model-based 方法，再添加一个统计量和更新完全相同的改名臂，不会补上归因缺口。
+
+六、当前联合律估计限制了绝对表现，但不能独自解释包之间的差距
+
+B05 的目标版先验修订是重要的正当性修复：它在版本边界冻结源版四个 context 后验的等权平均作为新版本 prior center，只使用先前已观察到的 cooperative outcomes；没有把同名源 context 的私有律复制到目标，也没有用目标反馈反向修改冻结中心。所有方法仍共享同一 pre-outcome 联合律估计。这保留了未知律问题，同时避免把“丢弃可用历史导致的坏先验”误当作未知律的必然代价。
+
+在这个宿主上，response 的合作价值误差可写为
+
+Q
+	​
+
+C
+	​
+
+−Q
+C
+	​
+
+=
+响应估计项
+p
+	​
+
+⊤
+(
+m
+−m)
+	​
+
+	​
+
++
+联合律估计项
+(
+p
+	​
+
+−p)
+⊤
+m
+	​
+
+	​
+
+.
+
+Readback 中，三个块 first64 的平均绝对响应项约为 .008119／.002588／.013021，联合律项约为 .089914／.087514／.167694。这支持“继续把条件奖励均值估得更精细，未必是当前绝对损失的主要解决方向”。尤其 95103 的真实 .35-context，平均估计 p
+11
+	​
+
+ 达到 .672260，response 在 16 次出现中选择合作 14 次，产生 3.29 累计 regret。
+
+但这里有三项不能跨越的推断边界。
+
+首先，已知响应诊断不只是替换合作响应均值。代码同时使用真实 SAFE 均值 .60。因此，它同时移除了 cooperative response 与 SAFE 估计误差，不能被叫作仅隔离一项误差的因果控制。95103 的诊断 regret 为 .0753125，response 为 .076875；二者数值接近，却仍有十次 first64 动作不同，不能把这个比值解释为“约 98% regret 已被证明由 law 造成”。
+
+其次，该诊断不是任意学习器的可实现上界。95102 的 full256 中，response 的平均 regret 为 .003769531，反而低于已知响应／估计律诊断的 .006230469。估计误差可以部分抵消，并通过非线性的动作选择改变 regret。绝对误差项的大小不能直接相加成“任务损失归因百分比”。
+
+最后，当前奖励对前三个非 11 outcomes 使用同一条件均值，因此真实合作价值中的 law 误差正好是
+
+(
+p
+	​
+
+−p)
+⊤
+m=.90(
+p
+	​
+
+11
+	​
+
+−p
+11
+	​
+
+).
+
+总体联合分布 L1 下降，可能只是改善三个非 11 outcomes 之间的质量分配，并不自动改善动作价值间隔。反过来，共享同一 
+p
+	​
+
+ 也不保证 law 误差会在两臂的价值差中抵消：response 与 hybrid 对它的映射、残差校正和跨越决策边界的方式不同。
+
+因此，B05 已指出一个值得认识的限制，但没有给出一个已经被证据支持、对任务价值有明确改善预测的替代 law-learning 比较，使其明显优先于本次复现。这里不需要阳性 pilot 才能研究新估计器；只是不能从“这项误差较大”直接推出“改这项就是当前信息价值最高的下一步”。
+
+七、.005 尺度与 n=5 规则：可以使用，但不得扩大其含义
+
+独立单位与配对方式是正确的。 每块重新生成源／目标联合律和采集随机性，块内所有臂共享实际数据流；每块先汇总出一个 first64 差值，再对五个差值推断。这里的 n 是 5，不是 15 个决策 fits、20 个总 fits、20 个 context，或 320 个 early panels。块内 64 个预测共享学习历史，不能拿来消除跨块不确定性。
+
+.005 有清楚的任务量纲，但不是已经验证的通用实用阈值。 它对应每块前 64 次决策累计 .32 的期望奖励增量。B05 full reference 的平均 first64 regret 为 .045338542，所以 .005 约为这个已观察损失的 11.0%，与 claim 所述“约九分之一”的局部尺度一致。但这是依据开发后探索结果制定的 B06 投资尺度，不是 B05 之前独立确立的最小效应，也不是 UAV 或部署成本收益阈值。
+
+更重要的是，规则
+
+d
+ˉ
+≥.005且
+d
+ˉ
+−t
+.975,4
+	​
+
+5
+	​
+
+s
+d
+	​
+
+	​
+
+>0
+
+不等于以 95% 置信度证明总体效应至少为 .005。 它结合了“点估计达到局部实用尺度”和“按 t 工作模型排除零均值”两个不同条件。即使通过，区间下界也可能远低于 .005。现有局部 claim 可以使用这个规则，但结果文字必须保持这种区分。 
+NIST
+
+五块的主要问题是分辨力。由 t
+.975,4
+	​
+
+=2.776445，使用 B05 已观察到的 primary SD .014121188 作纯尺度示例，五块区间半宽为
+
+2.776445
+5
+	​
+
+.014121188
+	​
+
+=.017533771.
+
+若新五块恰好具有 B05 的均值和 SD，区间将约为
+
+[−.007299396, +.027768146],
+
+仍跨零。在同一 SD 下，需要新均值超过约 .017534 才能让下界为正；若新均值恰为 .005，则 SD 需低于约 .004027。这不是 B06 结果预测或可靠功效估计——三个旧块的 SD 本身也很不稳定——而是说明：即使早期收益再次出现，B06 仍完全可能按原规则得到 inconclusive。 
+NIST
+
+t 区间在这里应被称为依赖块差近似正态假设的区间。贪心动作切换、不同严重度的错误和 context 组合使块差可能离散、偏斜；五块不足以可靠验证其分布形状。NIST 也明确提示，小样本时对非正态性的稳健性有限。宪章要求的 3–5 个新种子是研究最低条件，不是精度或覆盖率保证。
+NIST
+
+一个有用的分辨力提醒是：在独立、无零差且零假设正负等概率的符号检验中，即使五块全部为正，双侧精确概率仍为 2/2
+5
+=.0625。这不是建议增加另一个通过门槛，也不是用符号检验替代均值检验；二者目标不同。它只是表明，五个正号不能自动把参数化 t 结论升级成无分布假设的强证据，bootstrap 也不会创造新的独立训练块。
+NIST
+
+所以，我支持的是一个固定、有限、允许不确定结束的局部确认尝试，不是“五块一定能决定是否存在 .005 效应”的保证。若投资判断必须获得窄到能区分 .005 与零的区间，这个预期不应寄托于当前五块设计；但当前 claim 并未承诺那种分辨力。
+
+八、为什么仍选原 B06，以及成本和结果应如何读取
+
+在当前三个竞争解释中，开发选择敏感性已由既有分数显示，hybrid 的表示／正则化解释有结构依据但尚未识别，联合律估计限制也已经在 readback 中显现。继续观察这三个已冻结学习包在新块上的 first64 差，直接回答一个尚未回答、且会改变投资判断的问题：B05 的平均收益是否只是这三个 held-out 块的实现，还是在同一明确条件下有进一步复现支持。 它不能解决全部归因，但这不使它失去信息价值。科学方法也明确允许在“复现本身会改变判断”时进行原样独立重复，而不要求先发明新架构。
+
+我因此不建议在这个确认批次里临时加入重新调参、替换 primary、强化 law prior、改变奖励或增加新的表示控制。那会把问题改成另一个学习比较，而不是补上已经证实必须修复的执行错误。保留的是 response prior2、full hybrid prior2，以及 secondary 的 recent hybrid prior16/window256，种子 95201–95205，source 2,048、target 256，共同采集和信息权利不变。
+
+原成本核算是自洽的：15 个决策 fits＋5 个共享 law fits＝20 fits；五块共 11,520 个唯一 macros／34,560 unique primitive ticks；三个决策臂累计 103,680 decision-reading tick exposure；34,560 exact decision panels＋11,520 shared diagnostic panels；零新增评价环境 ticks、零评价奖励抽样。共享 law learner 不能遗漏，也不应重复按三个决策臂收费；无梯度优化不等于没有学习，后验更新和 ridge 求解仍是实际训练工作。
+
+B05 两个科学进程的实测 wall 合计约 5.298857 秒，但这不是完整研究耗时，更不是 B06 的时间保证。源代码发布、启动支持、审阅、后续读回等工作不在这个进程和数里；B06 的实际 wall、RSS 和依采集结果变化的更新／求解次数仍待实测。已发生的 pre-fit AST 拒绝与 tiny correctness 暴露也应继续单独保留，不能为了得到漂亮总数而抹去。
+
+结果读取不应改变。达到原规则，只支持该任务族、共同采集制度和冻结设置下的 first64 包收益；不得写成机制已识别、真实效应至少 .005、普遍优于直接学习或内生 MARL／UAV 结论。均值为正但区间跨零，或区间为正但均值不到 .005，都不能改称原规则通过。Primary 未通过而 full256 为正，保留后者为 secondary；primary 通过而 full256 不利，也必须把结论限定为早期收益。出现可信负差会削弱这套固定包的投资理由；宽区间则是未决，二者都不自动成为等价结论或整个 B 方向的关闭理由。
+
+最终判断：B05 足以支持购买原 B06 的一次新块复现，但不足以支持它已经确认，或把将来的正结果归因于一种已被隔离的未知联合律机制。 我保留对 noisy selection、hybrid 先验／表示和当前律估计限制的实质批评；在实际 claim 已声明的局部范围内，这些批评目前要求的是准确解释和保留不确定性，而不是优先替换这次比较。本判断不增加任何 owner／Root 许可、阳性 pilot 或后续自动扩批要求。
+
+MATERIAL_DISSENT no
 
 ## 2026-09-21 03:30 PDT — B06 execution-shell L0 while focused advice is pending
 
@@ -2177,3 +2492,48 @@ repository delivery was not yet present. A second read-only wait on the same acc
 conversation recovered and observed generation. There was no new Send or replacement
 question. No B06 fit begins before reading the complete advice and recording the DM's
 scientific decision.
+
+## 2026-09-21 03:53 PDT — Pro read in full; unchanged B06 adopted before execution
+
+**Consultation and decision.** Read the complete reply above, not a receipt or partial
+answer. One accepted question, no resend; the second read window ended with partial
+text, and the next same-key wait collected the stable complete answer. Repository
+writeback was absent, so DM preserved the full chat text in the assigned Answer.
+Pro's MATERIAL_DISSENT is no. Its raw-NPZ/digest inability remains an adviser limitation;
+DM's already published independent raw readback is separate evidence, not Pro validation.
+
+Adopt the unchanged five-block B06 in CLAIM_unknown_law_b06.md. Accept the distinctions
+between (a) a frozen finite-package recurrence test, (b) uncertainty of repeating the
+entire development-selection procedure, (c) hybrid representation/regularization, and
+(d) shared-law estimation limiting absolute task value. Only (a) is confirmed here.
+The post-selection DR audit in the preceding entry modestly weakens a claim that DR
+selected a worse full model on those exact development realizations; it does not refute
+Pro's cross-block selection sensitivity or establish population-optimal tuning.
+
+Accept the statistical caution: .005 is a local point-estimate scale (expected .32
+reward over 64 target decisions), while a t95 lower bound above zero supplies only the
+stated parametric evidence for positive mean. Passing does not establish that the true
+mean is at least .005. Five blocks may remain inconclusive; the .014121188 B05 sample SD
+would imply about .017534 half-width at n5, not a promised B06 precision. Do not pool
+B05's three outcome-exposed blocks into an eight-block confirmation or replace first64
+with full256. The code's earlier `proposed_support` field now implements this adopted
+operational rule; its spelling does not change the rule.
+
+Accept the explanation limits: known-response diagnostics replace both cooperative
+response and SAFE truth, can be beaten through error cancellation, and are neither an
+attainable upper bound nor a regret-attribution percentage. At current reward values,
+only the p11 component determines exact cooperative value; improving total law L1 alone
+is not a task-value prediction. Stable outcome-conditioned responses remain a useful
+finite-sample representation hypothesis, without an identified unique mechanism.
+
+**Execution declaration, unchanged.** Five fresh seeds 95201–95205; source 2,048 and
+target 256 macros, three ticks each. Fixed response prior2, primary full hybrid prior2,
+secondary recent hybrid prior16/window256; frozen B05 selection bytes. Planned 20 fits
+(15 decision +5 law), 34,560 unique ticks /103,680 decision-reading tick exposure,
+34,560 exact decision +11,520 shared diagnostic panels, no new evaluation environment
+steps or reward draws, no gradient optimizer. local_linux CPU, one BLAS thread, exact
+published snapshot/native admission. Reviewed executable at
+`4203a3affca685c3c481ccd599d4133a466ac8b6`; only this advice/claim prose is subsequently
+changed before launch. Read all five blocks and terminal evidence, do not extend the
+batch after scores, retain actual update/solve and process-resource counts. This step
+needs no owner/Root message or new permission under the current authorization.
