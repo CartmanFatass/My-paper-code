@@ -1,0 +1,69 @@
+{
+  "branches": [
+    "R_U",
+    "F_U",
+    "R_E",
+    "F_E"
+  ],
+  "config": {
+    "contexts": 4,
+    "epsilon": 0.2,
+    "skill_ticks": 3,
+    "source_macros": 2048,
+    "target_macros": 256
+  },
+  "counts": {
+    "actual_macros": 9216,
+    "decision_fits": 4,
+    "duplicated_source_macros": 8192,
+    "evaluation_environment_ticks": 0,
+    "evaluation_reward_draws": 0,
+    "gradient_optimizer_calls": 0,
+    "law_fits": 4,
+    "primitive_ticks": 27648,
+    "q_truth_panels": 9216,
+    "sampled_reward_labels": 9216,
+    "scalar_policy_values": 27648
+  },
+  "launch_sha": "03d3633bd55b4095d7b195ad5ecd3f44eb3c864a",
+  "object": "skill_drift_collection_b07",
+  "reductions": {
+    "by_endpoint": {
+      "first64": {
+        "matched_e_response_minus_full": -0.004375000000000018,
+        "matched_feedback_interaction": -0.013500000000000179,
+        "matched_u_response_minus_full": 0.00912500000000016,
+        "primary_executed_e_response_minus_full": -0.004375000000000018,
+        "sampled_e_response_minus_full": 0.015625,
+        "u_matched_readout_is_executed_return": false,
+        "uniform_actual_response_minus_full": 0.0
+      },
+      "full": {
+        "matched_e_response_minus_full": -0.008265625000000054,
+        "matched_feedback_interaction": -0.010874999999999968,
+        "matched_u_response_minus_full": 0.002609374999999914,
+        "primary_executed_e_response_minus_full": -0.008265625000000054,
+        "sampled_e_response_minus_full": 0.015625,
+        "u_matched_readout_is_executed_return": false,
+        "uniform_actual_response_minus_full": 0.0
+      },
+      "late64": {
+        "matched_e_response_minus_full": -0.013812500000000116,
+        "matched_feedback_interaction": -0.013812500000000116,
+        "matched_u_response_minus_full": 0.0,
+        "primary_executed_e_response_minus_full": -0.013812500000000116,
+        "sampled_e_response_minus_full": 0.015625,
+        "u_matched_readout_is_executed_return": false,
+        "uniform_actual_response_minus_full": 0.0
+      }
+    },
+    "interaction_definition": "(R_E-F_E)-(R_U-F_U) on matched-epsilon exact values",
+    "primary_endpoint": "full"
+  },
+  "scientific_block_wall_scope": "four actual branch trajectories, learning, and exact readouts; excludes serialization and import",
+  "scientific_block_wall_seconds": 0.751601744996151,
+  "seed": 95303,
+  "source_identity": "03d3633bd55b4095d7b195ad5ecd3f44eb3c864a",
+  "stage": "exploration",
+  "status": "COMPLETE"
+}

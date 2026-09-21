@@ -1,0 +1,16 @@
+{
+  "F_E/state.npz": "550339bbd6f55393e7b0cd5abe15f6dc01d73f9232a04587c2f12f42b5d435c7",
+  "F_E/summary.json": "5f70b0aba5a85403068509ae95fde58a126d0b32f67b82550e55cce03e7764e6",
+  "F_E/trajectory.npz": "e9cc509e34295a740fe630cc15190c257813d1e084a5a92f48a03d21011a4ca9",
+  "F_U/state.npz": "397ca9432ca5d19eeff3feb67c16c9d601d98ab0ab2737ea1d4f5afa9cf1995b",
+  "F_U/summary.json": "cd19c5d29138eeb074f3307c295a628480295382e122b1c81c9104dc8ef6fd03",
+  "F_U/trajectory.npz": "3dcb197c6bab0e2949b820269a4bce0a1fb4b26972d13b78c6d9173ccdda341b",
+  "R_E/state.npz": "53000c9cdf89766efe5e2bf04032fb952b1510600075c47895823a365ff1d67d",
+  "R_E/summary.json": "ce7864c3146522f6cd63ea679da991a7b668b87165818bfa9f500d27d11c9ba3",
+  "R_E/trajectory.npz": "b8599913ff83a2ef3e6eba77d572f3f8cdaab58e324f4fd94a5509d1a846ae7e",
+  "R_U/state.npz": "5d512376d023f97f31bfdc297116ca747da7c1d7a97864d2f29ef927d7c20fcb",
+  "R_U/summary.json": "4b081f5e2fdfd47078636bd5b96f3dec40b85489838f9bde2fcb5cd8bb93088b",
+  "R_U/trajectory.npz": "6e77528eb2ac7e7771d01c887845a50551d62abfbcbde4458943cc3e1832eb23",
+  "common.npz": "91d3c5c9fe08c3202f9220365d1fb24bee4d87332e7838607cecdc3e665b0772",
+  "summary.json": "9c7a203eb45610c4e1fd495dc72de3c7ab303130904d61b7ab03932d0cf19e44"
+}

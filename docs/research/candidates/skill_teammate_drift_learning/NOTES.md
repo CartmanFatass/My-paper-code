@@ -3419,3 +3419,106 @@ states, raw arrays, metadata and admission/exit facts. Output root is
 `runs/skill_teammate_drift_learning/b07_own_collection_exploration`. Publish this adoption
 and reviewed source before the single declared native launch. Any failure keeps its
 operation identity and partial-exposure limits. No score-dependent expansion.
+
+## 2026-09-21 04:56 PDT — B07 complete: self-collection erodes the relative advantage
+
+**Identity and execution.** One native launch at source
+`03d3633bd55b4095d7b195ad5ecd3f44eb3c864a` was accepted at
+2026-09-21T11:50:43.887067Z. Operation
+`ad24e69335ccf2b7ee8375fed1a6d950f3d0a3709447046b6c11ea5597da992b`, stored in the
+canonical `.git/hmasd-admission/` directory, is retained. The native status reader found
+valid exit0, absent completed runner/supervisor identities, consistent records and no
+retry available. Summary is COMPLETE for all 12 decision and 12 law fits; no failure,
+replacement seed or extra launch. Raw evidence, states, readback and its read-only script
+are under `runs/skill_teammate_drift_learning/b07_own_collection_exploration/`.
+
+**Full-target primary and feedback.** These are exact epsilon-policy means over each
+realized history, not integration over all possible histories. E values are executed
+policy readings; U values below are matched off-collector epsilon readings. Three fresh
+blocks are the independent units; there was no confirmation threshold.
+
+| seed | R_E | F_E | R_U | F_U | D_E | D_U | I | W_R | W_F |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| 95301 | .635156250 | .635140625 | .642171875 | .638281250 | +.000015625 | +.003890625 | -.003875000 | -.007015625 | -.003140625 |
+| 95302 | .639234375 | .639750000 | .636484375 | .634187500 | -.000515625 | +.002296875 | -.002812500 | +.002750000 | +.005562500 |
+| 95303 | .631250000 | .639515625 | .638265625 | .635656250 | -.008265625 | +.002609375 | -.010875000 | -.007015625 | +.003859375 |
+
+Mean D_E is **-.002921875**, versus matched-U mean D_U **+.002932292**; mean interaction
+**-.005854167**, negative in all three blocks. W_R averages -.003760417, W_F +.002093750.
+The prediction that self-collection would increase R's relative advantage is weakened.
+This is not evidence that self-collection is uniformly bad: both methods improve on 95302,
+F more; both decline on 95301; on 95303 R declines while F improves.
+
+Keep contrary temporal and sampled evidence visible. First64 D_E values are
++.015437500 / -.001375000 / -.004375000 (mean +.003229167); late64 are 0 / 0 /
+-.013812500 (mean -.004604167). Actual sampled full-target R_E-minus-F_E returns are
++.011718750 / 0 / +.015625000, mean +.009114583. They do not replace the predeclared exact
+mixed-policy primary merely because their sign is favorable. U actual uniform values
+are .595 in every block and identical between methods, as required.
+
+**What the histories show.** The arithmetic reasons for a between-method gap and for a
+within-method feedback change differ. On 95303, R_E loses to F_E mainly through the .55
+context: 56 versus13 greedy cooperative recommendations, 43 extra costly mistakes,
+weighted cost2.365. Eight additional missed .65 recommendations add .280. After the .80
+policy factor and /256, these exactly form the -.008265625 gap. The .55 term accounts for
+about89.4% of this *context arithmetic*, not a mediated causal percentage. At .85 both
+methods recommend cooperation62/64 and contribute no difference.
+
+By contrast, R_E versus R_U on that same block loses mostly at .65: greedy cooperation
+falls63 to2, actual cooperative samples33 to8, adding2.135 weighted loss
+(-.006671875 in full policy value). The .55 change adds only .110 weighted loss
+(-.000343750). This is a clear acquired-data/decision-stagnation association, but does
+not identify a law-only intervention. R_E's longest .65 greedy-SAFE streak is49 context
+visits, versus1 under R_U. At .55, R_E obtains49 cooperative samples versus F_E's14 and
+still fares worse; sample abundance is not task success.
+
+On 95301 R_E's .85 advantage over F_E contributes +.004031250, but five extra costly .35
+mistakes contribute -.003671875 and two extra .55 mistakes -.000343750, leaving almost
+zero net primary gap. A shorter valuable-context SAFE streak alone would miss that cost.
+On 95302 both E methods remain pessimistic at .65 (one cooperative recommendation /64,
+9 actual samples); R's three additional .55 mistakes account for the small adverse gap.
+No single monotone story about more samples, lower law error or a more accurate stable
+response maps all these paths to higher task reward.
+
+**Verification and cost.** DM's independent arithmetic reader verified all42 artifact
+digests, all27,648 pre-update observations/propensities, own-history law counts and priors,
+addressed action/outcome/reward draws, source/final state counts, regression normal
+equations without re-solving, and all three saved policy readings. Same-method source
+states and first-target predictions match between U/E; all four source streams and both
+U streams match. Full-target .595 uniform and .649-minus-.80-weighted-error identities
+also hold. The reader invoked no learner, simulator, optimizer, new policy input or
+rollout; it saved `readback.json` and is preserved as `readback.py`.
+
+Actual cost: **24 completed fits**, 27,648 collected macros /82,944 primitive ticks,
+including24,576 repeated source macro executions; 27,648 sampled labels and Q-truth
+tables, 82,944 scalar policy reductions. Law updates13,834; SAFE updates13,814;
+conditional-response updates6,939; ridge statistic updates/solves6,895; all27,648 decision
+observations retained. Zero additional evaluator environment ticks/reward draws or
+gradient calls. Scientific process wall **2.786924918 s**, CPU2.577341015 s, peak RSS44,824
+KiB. Those exclude advice, preparation, admission, publication and readback time.
+B05–B07 together now have119 production fits and158,976 actually collected ticks (including
+B07's explicit source repetition); scientific-process walls sum9.751517 s. Older B
+history, B05 correctness work and B07's16 tiny fits /768 ticks remain separate, not reset.
+
+Independent ResearchCritic `/root/portfolio_closed_control_evidence` read the adoption,
+all12 branch diagnostics and selected raw histories, reproduced the key context costs
+and challenged the interpretation; MATERIAL_DISSENT no. It did not independently repeat
+the full42-digest/normal-equation audit or execute learning/forward/environment code.
+
+**Working explanation and next investment.** Keep B exploring. B06 remains inconclusive;
+B07 weakens the expectation of net self-collection superiority for this frozen R package.
+It does not disprove stable-response reuse, all drift learning, or endogenous MARL. The
+next useful distinction is now predictor behavior *on the same acquired data* versus
+sensitivity to which stream was acquired. DM and Critic favor one bounded cross-history
+replay diagnostic using all three existing blocks, with methods frozen; this will be a
+new explicitly declared learning continuation, not an extension of B07 or an online
+counterfactual execution. Do not scan epsilon, lengthen the horizon, isolate only95303,
+add a renamed baseline or retune to recover the original ranking.
+
+A limited source-only bridge check read Scenario1 reward/connection logic and the actual
+observation/step interface. Current actor observations expose local relative positions,
+SINR and time, while step infos separately contain service connections and global fields.
+The environment applies capacity-constrained shared user assignment and coverage/quality
+reward; it does not itself expose the toy's four-cell terminal outcome as a skill event.
+Those source facts do not establish a legal actor feature or stable conditional response
+on UAV. No native rollout, Claude path edit or new skill-object construction occurred.

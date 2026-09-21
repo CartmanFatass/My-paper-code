@@ -1,0 +1,169 @@
+{
+  "branch": "R_E",
+  "collector": "epsilon_greedy",
+  "compute_wall_scope": "branch law/decision prediction, collection, evaluator reductions, and updates",
+  "compute_wall_seconds": 0.18357477884273976,
+  "counts": {
+    "actual_macros": 2304,
+    "cooperative_observations": 1188,
+    "decision_observations": 2304,
+    "evaluation_environment_ticks": 0,
+    "evaluation_reward_draws": 0,
+    "law_posterior_updates": 1188,
+    "primitive_ticks": 6912,
+    "q_truth_panels": 2304,
+    "regression_solves": 0,
+    "safe_posterior_updates": 1116,
+    "sampled_reward_labels": 2304,
+    "scalar_policy_values": 6912
+  },
+  "decision_initial_to_source_l2_movement": 0.909972971752634,
+  "decision_source_to_final_l2_movement": 0.009971327737529956,
+  "launch_sha": "03d3633bd55b4095d7b195ad5ecd3f44eb3c864a",
+  "law_initial_to_source_l2_movement": 0.9755165424195533,
+  "law_source_to_final_l2_movement": 0.9803987388743419,
+  "learner": "response",
+  "matched_epsilon_readout_role": "executed_policy",
+  "object": "skill_drift_collection_b07",
+  "seed": 95303,
+  "source_identity": "03d3633bd55b4095d7b195ad5ecd3f44eb3c864a",
+  "spec": {
+    "family": "response_all",
+    "prior_strength": 2.0,
+    "recent_window": null,
+    "representation": "response"
+  },
+  "stage": "exploration",
+  "target_by_endpoint": {
+    "first64": {
+      "collection_action_counts": [
+        40,
+        24
+      ],
+      "cooperative_collection_count": 24,
+      "cumulative_actual_collector_expected_return": 40.42,
+      "cumulative_greedy_expected_return": 41.004999999999995,
+      "cumulative_matched_epsilon_expected_return": 40.42,
+      "greedy_action_counts": [
+        41,
+        23
+      ],
+      "greedy_cooperative_count": 23,
+      "mean_actual_collector_expected_return": 0.6315625,
+      "mean_actual_collector_regret": 0.03093749999999999,
+      "mean_greedy_expected_return": 0.6407031249999999,
+      "mean_greedy_regret": 0.021796875,
+      "mean_matched_epsilon_expected_return": 0.6315625,
+      "mean_matched_epsilon_regret": 0.03093749999999999,
+      "mean_sampled_return": 0.609375,
+      "panel_count": 64,
+      "sampled_return_sum": 39
+    },
+    "full": {
+      "collection_action_counts": [
+        135,
+        121
+      ],
+      "cooperative_collection_count": 121,
+      "cumulative_actual_collector_expected_return": 161.6,
+      "cumulative_greedy_expected_return": 163.91999999999996,
+      "cumulative_matched_epsilon_expected_return": 161.6,
+      "greedy_action_counts": [
+        136,
+        120
+      ],
+      "greedy_cooperative_count": 120,
+      "mean_actual_collector_expected_return": 0.63125,
+      "mean_actual_collector_regret": 0.031249999999999993,
+      "mean_greedy_expected_return": 0.6403124999999998,
+      "mean_greedy_regret": 0.022187499999999992,
+      "mean_matched_epsilon_expected_return": 0.63125,
+      "mean_matched_epsilon_regret": 0.031249999999999993,
+      "mean_sampled_return": 0.64453125,
+      "panel_count": 256,
+      "sampled_return_sum": 165
+    },
+    "late64": {
+      "collection_action_counts": [
+        28,
+        36
+      ],
+      "cooperative_collection_count": 36,
+      "cumulative_actual_collector_expected_return": 40.412,
+      "cumulative_greedy_expected_return": 40.99499999999999,
+      "cumulative_matched_epsilon_expected_return": 40.412,
+      "greedy_action_counts": [
+        31,
+        33
+      ],
+      "greedy_cooperative_count": 33,
+      "mean_actual_collector_expected_return": 0.6314375,
+      "mean_actual_collector_regret": 0.0310625,
+      "mean_greedy_expected_return": 0.6405468749999998,
+      "mean_greedy_regret": 0.02195312499999999,
+      "mean_matched_epsilon_expected_return": 0.6314375,
+      "mean_matched_epsilon_regret": 0.0310625,
+      "mean_sampled_return": 0.59375,
+      "panel_count": 64,
+      "sampled_return_sum": 38
+    }
+  },
+  "target_context_diagnostics": {
+    "0": {
+      "actual_policy_regret_sum": 1.9599999999999984,
+      "cooperative_collection_count": 8,
+      "greedy_cooperative_count": 2,
+      "greedy_mistake_cost_sum": 2.1700000000000017,
+      "law_count_after_last_target_visit": 8,
+      "law_count_before_first_target_visit": 0,
+      "longest_context_visit_greedy_safe_streak": 49,
+      "mean_absolute_law_value_error": 0.18962426817862132,
+      "mean_absolute_p11_error": 0.21069363130957924,
+      "mean_absolute_response_error": 0.001368425867995674,
+      "mean_absolute_safe_error": 0.002407516451548304,
+      "visits": 64
+    },
+    "1": {
+      "actual_policy_regret_sum": 1.5039999999999978,
+      "cooperative_collection_count": 7,
+      "greedy_cooperative_count": 0,
+      "greedy_mistake_cost_sum": 0.0,
+      "law_count_after_last_target_visit": 7,
+      "law_count_before_first_target_visit": 0,
+      "longest_context_visit_greedy_safe_streak": 64,
+      "mean_absolute_law_value_error": 0.07058839624405398,
+      "mean_absolute_p11_error": 0.0784315513822822,
+      "mean_absolute_response_error": 0.00217917478557441,
+      "mean_absolute_safe_error": 0.002396287249096086,
+      "visits": 64
+    },
+    "2": {
+      "actual_policy_regret_sum": 2.815999999999999,
+      "cooperative_collection_count": 49,
+      "greedy_cooperative_count": 56,
+      "greedy_mistake_cost_sum": 3.0799999999999965,
+      "law_count_after_last_target_visit": 49,
+      "law_count_before_first_target_visit": 0,
+      "longest_context_visit_greedy_safe_streak": 8,
+      "mean_absolute_law_value_error": 0.17049863058450024,
+      "mean_absolute_p11_error": 0.18944292287166692,
+      "mean_absolute_response_error": 0.002344224596794297,
+      "mean_absolute_safe_error": 0.002478444693898515,
+      "visits": 64
+    },
+    "3": {
+      "actual_policy_regret_sum": 1.7200000000000044,
+      "cooperative_collection_count": 57,
+      "greedy_cooperative_count": 62,
+      "greedy_mistake_cost_sum": 0.42999999999999994,
+      "law_count_after_last_target_visit": 57,
+      "law_count_before_first_target_visit": 0,
+      "longest_context_visit_greedy_safe_streak": 2,
+      "mean_absolute_law_value_error": 0.02883050768416622,
+      "mean_absolute_p11_error": 0.03203389742685136,
+      "mean_absolute_response_error": 0.00269789534063953,
+      "mean_absolute_safe_error": 0.0024542250670957257,
+      "visits": 64
+    }
+  }
+}

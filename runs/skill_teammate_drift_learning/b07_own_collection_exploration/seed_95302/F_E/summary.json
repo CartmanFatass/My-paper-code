@@ -1,0 +1,161 @@
+{
+  "branch": "F_E",
+  "collector": "epsilon_greedy",
+  "compute_wall_scope": "branch law/decision prediction, collection, evaluator reductions, and updates",
+  "compute_wall_seconds": 0.1849849705467932,
+  "counts": {
+    "actual_macros": 2304,
+    "cooperative_observations": 1092,
+    "decision_observations": 2304,
+    "evaluation_environment_ticks": 0,
+    "evaluation_reward_draws": 0,
+    "law_posterior_updates": 1092,
+    "primitive_ticks": 6912,
+    "q_truth_panels": 2304,
+    "regression_solves": 1092,
+    "safe_posterior_updates": 1212,
+    "sampled_reward_labels": 2304,
+    "scalar_policy_values": 6912
+  },
+  "decision_initial_to_source_l2_movement": 0.3994059183106768,
+  "decision_source_to_final_l2_movement": 0.3896598183791512,
+  "launch_sha": "03d3633bd55b4095d7b195ad5ecd3f44eb3c864a",
+  "law_initial_to_source_l2_movement": 0.9853458724067139,
+  "law_source_to_final_l2_movement": 0.9845967000717982,
+  "learner": "full_hybrid",
+  "matched_epsilon_readout_role": "executed_policy",
+  "object": "skill_drift_collection_b07",
+  "seed": 95302,
+  "source_identity": "03d3633bd55b4095d7b195ad5ecd3f44eb3c864a",
+  "spec": {
+    "family": "fingerprint_full",
+    "prior_strength": 2.0,
+    "recent_window": null,
+    "representation": "hybrid"
+  },
+  "stage": "exploration",
+  "target_by_endpoint": {
+    "first64": {
+      "collection_action_counts": [
+        43,
+        21
+      ],
+      "cooperative_collection_count": 21,
+      "cumulative_actual_collector_expected_return": 40.512,
+      "cumulative_greedy_expected_return": 41.12,
+      "cumulative_matched_epsilon_expected_return": 40.512,
+      "greedy_action_counts": [
+        48,
+        16
+      ],
+      "greedy_cooperative_count": 16,
+      "mean_actual_collector_expected_return": 0.633,
+      "mean_actual_collector_regret": 0.029499999999999985,
+      "mean_greedy_expected_return": 0.6425,
+      "mean_greedy_regret": 0.020000000000000004,
+      "mean_matched_epsilon_expected_return": 0.633,
+      "mean_matched_epsilon_regret": 0.029499999999999985,
+      "mean_sampled_return": 0.59375,
+      "panel_count": 64,
+      "sampled_return_sum": 38
+    },
+    "full": {
+      "collection_action_counts": [
+        178,
+        78
+      ],
+      "cooperative_collection_count": 78,
+      "cumulative_actual_collector_expected_return": 163.776,
+      "cumulative_greedy_expected_return": 166.63999999999996,
+      "cumulative_matched_epsilon_expected_return": 163.776,
+      "greedy_action_counts": [
+        192,
+        64
+      ],
+      "greedy_cooperative_count": 64,
+      "mean_actual_collector_expected_return": 0.63975,
+      "mean_actual_collector_regret": 0.02274999999999999,
+      "mean_greedy_expected_return": 0.6509374999999998,
+      "mean_greedy_regret": 0.011562500000000007,
+      "mean_matched_epsilon_expected_return": 0.63975,
+      "mean_matched_epsilon_regret": 0.02274999999999999,
+      "mean_sampled_return": 0.625,
+      "panel_count": 256,
+      "sampled_return_sum": 160
+    },
+    "late64": {
+      "collection_action_counts": [
+        48,
+        16
+      ],
+      "cooperative_collection_count": 16,
+      "cumulative_actual_collector_expected_return": 41.088,
+      "cumulative_greedy_expected_return": 41.83999999999999,
+      "cumulative_matched_epsilon_expected_return": 41.088,
+      "greedy_action_counts": [
+        48,
+        16
+      ],
+      "greedy_cooperative_count": 16,
+      "mean_actual_collector_expected_return": 0.642,
+      "mean_actual_collector_regret": 0.02049999999999999,
+      "mean_greedy_expected_return": 0.6537499999999998,
+      "mean_greedy_regret": 0.008750000000000008,
+      "mean_matched_epsilon_expected_return": 0.642,
+      "mean_matched_epsilon_regret": 0.02049999999999999,
+      "mean_sampled_return": 0.65625,
+      "panel_count": 64,
+      "sampled_return_sum": 42
+    }
+  },
+  "target_context_diagnostics": {
+    "0": {
+      "actual_policy_regret_sum": 1.8920000000000043,
+      "cooperative_collection_count": 52,
+      "greedy_cooperative_count": 61,
+      "greedy_mistake_cost_sum": 0.6449999999999999,
+      "law_count_after_last_target_visit": 52,
+      "law_count_before_first_target_visit": 0,
+      "longest_context_visit_greedy_safe_streak": 3,
+      "mean_absolute_p11_error": 0.05063003422989316,
+      "mean_absolute_safe_error": 0.0038044318774116993,
+      "visits": 64
+    },
+    "1": {
+      "actual_policy_regret_sum": 0.43999999999999684,
+      "cooperative_collection_count": 9,
+      "greedy_cooperative_count": 2,
+      "greedy_mistake_cost_sum": 0.10999999999999988,
+      "law_count_after_last_target_visit": 9,
+      "law_count_before_first_target_visit": 0,
+      "longest_context_visit_greedy_safe_streak": 61,
+      "mean_absolute_p11_error": 0.05558041020658265,
+      "mean_absolute_safe_error": 0.0037934268139204735,
+      "visits": 64
+    },
+    "2": {
+      "actual_policy_regret_sum": 1.5039999999999978,
+      "cooperative_collection_count": 8,
+      "greedy_cooperative_count": 0,
+      "greedy_mistake_cost_sum": 0.0,
+      "law_count_after_last_target_visit": 8,
+      "law_count_before_first_target_visit": 0,
+      "longest_context_visit_greedy_safe_streak": 64,
+      "mean_absolute_p11_error": 0.10338172135187326,
+      "mean_absolute_safe_error": 0.0038470132593052906,
+      "visits": 64
+    },
+    "3": {
+      "actual_policy_regret_sum": 1.9879999999999982,
+      "cooperative_collection_count": 9,
+      "greedy_cooperative_count": 1,
+      "greedy_mistake_cost_sum": 2.205000000000002,
+      "law_count_after_last_target_visit": 9,
+      "law_count_before_first_target_visit": 0,
+      "longest_context_visit_greedy_safe_streak": 61,
+      "mean_absolute_p11_error": 0.28823001772199397,
+      "mean_absolute_safe_error": 0.003848215611204143,
+      "visits": 64
+    }
+  }
+}
