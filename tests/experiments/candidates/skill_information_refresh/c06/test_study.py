@@ -56,6 +56,7 @@ def test_complete_fixture_outputs_counts_selection_and_raw_arithmetic(tmp_path):
         "launch-status.json": "status\n",
         "stdout.log": "native stdout\n",
         "stderr.log": "native stderr\n",
+        ".hmasd-launch-fixture.tmp": "in-flight native atomic publication\n",
     }
     for name, content in native.items():
         (out / name).write_text(content, encoding="utf-8")

@@ -285,8 +285,11 @@ def run_study(out, launch_sha, config=Config()):
     if out.exists():
         if not out.is_dir():
             raise FileExistsError("C06 output path already exists and is not a directory")
+        # The detached launcher can still be atomically publishing its manifest
+        # after child admission. Its own transient files are not scientific data.
         unexpected = [path.name for path in out.iterdir()
-            if path.name not in native_control_files]
+            if path.name not in native_control_files
+            and not (path.name.startswith(".hmasd-launch-") and path.name.endswith(".tmp"))]
         if unexpected:
             raise FileExistsError(
                 "C06 never overwrites or resumes scientific output: " + ", ".join(sorted(unexpected)))
