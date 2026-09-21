@@ -5353,3 +5353,135 @@ The earlier two tiny fixtures retain their separate80 native calls/0fits, and th
 B09 fits and384 collection observations retain historical construction cost. Readback/review/
 plots used0 new native calls, probability queries, network forwards or fits. All outcomes and
 costs are retained; the direction remains in exploration while the next investment is judged.
+
+## Pro question 2026-09-21 b10-version-dependent-use
+
+Conversation: existing Jev direction conversation, resolved from private local state only.
+
+**Decision and question.** B10's completed reading above follows your previously described
+positive branch: J exceeds both fixed directions in all three frozen-base means, while OUT
+exactly substitutes M. No new Pro round is needed to accept that reading. The new consequential
+decision is whether the next useful investment is a **two-law × two-learned-table deployment
+crossing**, before fresh-learning confirmation. Does useful control depend on matching the
+learned law to the current teammate version, or is the target-trained controller simply a
+favorable geometry-feedback policy even when the teammates have another law? Critique this
+single preferred comparison and its investment consequence. Do not supply an idea catalogue
+or automatically turn an encouraging deployment result into a new learner.
+
+**New evidence and inherited limits.** Read the B10 completion entry and complete summaries/
+readback at evidence `8f7a8ba197f9a9cf9ba60068b55b10febbcf3dd0`,
+`runs/skill_teammate_drift_learning/b10_fixed_radial_controls/{summary,readback}.json`.
+Primary base means J−IN +2.492798909/+3.324088035/+.691564950; J−OUT +1.220971690/
++1.138870677/+.509652935. J−OUT wins only6/12 worlds. Preserve negative worlds, the large
+J−IN gain and95403's influence pattern; this is not uniform or population-confirmed benefit.
+DM/Reviewer checked raw arrays,18 artifact digests, frozen inputs and native branch identity.
+If you cannot decode the NPZ, state that and reason from the supplied verified summaries;
+do not claim an independent raw audit. B09 evidence at
+`69a55e71d9f1bca4e8cdd204adce256cd05a7676`, same direction's `b09_native_joint/`, keeps
+its primary −.121159049/−.948924799/+1.344124603. No result is superseded or pooled away.
+The immediately preceding complete Pro answer/adoption at
+`75ef4a931de474ab27e6903c6f16929eab932d85` retains its scope and advice against automatic
+continuation learning and endless evaluation. B06/B07/B08 still constrain the adverse R
+package; B09/B10 are ordinary joint counts through known physics, not its renamed recovery.
+
+**Why this comparison rather than more fixed rules.** The current target-only success need
+not rely on version-sensitive use: one frozen, state-dependent policy may happen to be useful.
+This gap is more directly tied to drift than inventing an additional radius/service threshold
+and testing it until one wins. A target-only pooled/stale-table arm could largely recreate
+M/OUT: the two true laws have identical marginals, and their equal population mixture is
+uniform. Finite pooled tables need not coincide exactly; this is a design concern, not a
+measured result. The proposed crossing asks whether the preferred *learned table* reverses
+when the external law changes, without changing the physical response model or objectives.
+The internal read-only ResearchCritic supports this discriminator, but that is advice, not
+an experiment or replacement for your source-grounded critique. If a direct learning
+comparison is scientifically stronger at similar cost, explain precisely why this crossing
+would fail to change an investment decision and identify that one comparison.
+
+**Concrete proposal, not an accepted batch.** Reuse all three B09 final64 frozen states,
+bases95401/95402/95403, retaining both original version-specific tables learned from64 source
+and64 target observations each. No source/target recollection, optimizer, probability refit,
+pooling or checkpoint choice. `J_source` always integrates its saved source probabilities;
+`J_target` always integrates its saved target probabilities. Both perform the same eight
+native one-step branches, original exact tie-bit0 rule and radial command dictionary.
+Evaluate both under each external law, source(.1,.4,.4,.1) and target(.4,.1,.1,.4), for four
+fully crossed cells. Both policies retain all legitimate state, issued-action history and
+public-version information rights; the chosen table is the controlled intervention. True q
+and future innovations are hidden from policy input. The true law is used only in the external
+controller generator and explicitly post-choice diagnostic arithmetic.
+
+Preserve Scenario1 N3/U1, user(500,500), height50, initial radial distribution, original
+coverage/quality reward, square boundaries, ±30m/tick radial commands and64-tick horizon.
+Declare one fresh namespace **stream3, phase3, episodes0–15**, under the same three RNG
+master seeds; no table/law/view index in initial geometry or tick-uniform RNG addresses.
+Within each world use the same initial geometry and underlying uniform innovations for all
+four cells; each external law maps that uniform to its own joint command, and the two table
+policies within a law therefore face identical exogenous commands. Cross-law teammate paths
+need not coincide. Planning never consumes the live external stream. New worlds are not
+selected to resemble favorable B10 paths.
+
+Sixteen worlds per base is one prospective panel for this new comparator, motivated by the
+large observed world sensitivity in B09/B10; it is not a precision guarantee, a confirmation
+design or an extension of either earlier batch. There are48 paired worlds nested in the same
+three exposed learner states, and192 physical trajectories. No threshold search, per-world
+best-table oracle, dropping negative worlds, novel fit or new training replication claim.
+
+**Prediction and readout.** Low-confidence working prediction: law matching will improve
+same-state immediate decisions in both regimes, but complete64-tick benefits may fail to
+follow. Read separately for every episode and base:
+
+- under source: `J_source − J_target`;
+- under target: `J_target − J_source`;
+- their sum, the law×table interaction, as a secondary contrast that cannot hide one failing
+  matching direction.
+
+The informative stronger result is reversal of useful table ranking with the law, including
+complete native return, rather than better probability fit alone. Record all actual commands,
+service/coverage/quality paths, same-state candidate choices and post-choice true-law regrets
+from the existing eight-branch tables. These are not delayed action credits or counterfactual
+policy returns. This experiment is a component/version-selection attribution comparison,
+**not a competent primary learning baseline**. It neither deploys an uninterrupted version
+switch nor learns an unseen law online. Positive results could support retaining a narrow
+public-version/known-table selection question before choosing an actual learning comparison.
+If one table wins under both laws, or immediate matching is useful but full returns are not,
+the specific reason for further version-sensitive investment weakens. Uncertainty does not
+oblige another panel or a hand-designed selector. No route conclusion about all drift learning
+follows, and a fixed controller or no further investment in this radial route remains legitimate.
+
+**Cost.** Zero new fits/count updates/training rows/network forwards; historical three fits
+and384 native collection observations remain construction cost. Four cells×16worlds×3bases
+×64ticks =12,288 actual native steps; eight branches each =98,304 planning calls/deep copies,
+**110,592 total native calls**,192 constructors/implicit resets/custom geometry setups.
+Six existing probability tables read, no new learned response/value model. Paired draw calls,
+query/arithmetic work, hashes/serialization, wall/CPU/RSS and engineering review still count;
+wall time is not yet measured and zero fits is not zero work. The original commands/physics/
+learner files would remain unchanged; a small owned evaluation wrapper would bind this new
+crossing. No production pilot, extra training, new architecture, default N5/U50 deployment
+or source-replay method is proposed.
+
+**Context / authority.** At source_sha read `docs/project/OPERATING_CONSTITUTION.md` §§1–5,
+7–8 and `.agents/skills/hmasd-scientific-tools/SKILL.md` sections Update the working
+explanation, Comparators and MARL information, Statistics, Cost and exposure, and Pro.
+For exact source, B09's `native_joint_b09/study.py` at
+`efe9ce4f39cdb9147d28bbb5c00e7be91dbfca55` defines both saved tables, native response and
+RNG; B10's `fixed_radial_b10/study.py` at
+`3072f05072ec7628f2463bc7ae3b621343d7ca58` shows independent frozen-state evaluation and
+its cost. The main B standing at `c8310b3ea` records completed B10; main's other directions
+are outside this decision. Owner authorizes independent B research, no fit cap/runtime window;
+preregistration, no score-dependent expansion and3–5 fresh training seeds for confirmation
+remain. This is not confirmation. The old completed contracts keep their meaning. Central
+HMASD can query its own policies; this imposed unknown external/shared-innovation task still
+does not demonstrate a central-HMASD information deficit or endogenous teammate co-learning.
+No App cross-session coordination, Root relay or approval layer is part of this question.
+
+**Return and writing.** Give the strongest material objection, whether this specific
+crossing is worth its cost, what result changes the explanation/investment, and one chosen
+next action with any necessary revision. Cite sources actually read and identify unavailable
+decision-critical evidence. Return `MATERIAL_DISSENT yes/no` with reasons. No experiment,
+fit, policy forward or parameter search. Write only the empty `### Answer` subsection below
+on branch `codex/b-unknown-joint-law`, in this file. Read the immutable question at the source
+commit supplied in the message; fetch the latest target blob and actual SHA before writing,
+preserve every other byte, and stop on overlapping edits. On successful write name its actual
+commit; if writeback fails, return the **complete answer in chat**, not a receipt or summary.
+Advice is not approval; the DM owns this decision and subsequent execution.
+
+### Answer
