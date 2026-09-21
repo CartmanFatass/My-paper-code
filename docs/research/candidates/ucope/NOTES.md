@@ -5387,3 +5387,17 @@ The authoritative handles and source-snapshot paths are in each output's
 The owner requested autonomous work without further routine reports; ongoing progress and
 scientific decisions are recorded here. No unrelated automation, FSD runner or Root control
 path was changed or reactivated.
+
+
+### Session-workflow adoption, 2026-09-21 03:34 UTC
+
+Read constitution section 2, `hmasd-loop-dispatch/SKILL.md`, the actual
+`hmasd-direction-manager.toml` instruction body, and its scientific/engineering methods
+at published `0b4acaa29`. Adopt the direct-DM responsibilities and existing Root return
+route. This formalizes current ownership; it changes no native model/effort/permission,
+launch-bound lead string, accepted source/handle, experiment, exposure or deadline.
+Stale allowance/up-to-six wording in the scientific method is superseded by constitution
+section 3; the owner's withdrawal of prior AGENTS instructions remains respected. No
+new Root child, direction owner, shared-index write or notebook system is introduced.
+The three B09 invocations continue under their original accepted identities; collection
+and scientific reading remain this DM's responsibility.
