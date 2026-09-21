@@ -3058,3 +3058,86 @@ log-prob is stored, so the gradient-versus-entropy block uses label shares and i
 approximate. Power, known now: 4 rollouts × 16 lanes = 64 lane clusters per block; rank
 agreement over six labels is a count, not a test. Checks: 37 passed, mine; the Implementer's
 run with B08–B10 gave 129 passed.
+
+## 2026-09-20 17:31 PDT — B11 read: the coordinator's own signal does not carry the label ranking; my E2a criterion was badly built and the placebo row shows it
+
+**Technical record.** Node probes at launch sha `f274cfa6f`, tags `b11_signal_<block>_n01`:
+complete 3/3 on the first attempt, faithful load 3/3, zero optimizer steps, parameter and
+value-normaliser hashes unchanged, every rollout at the fit's geometry (800 / 4,800 rows,
+reset + team cap only, length 10), about 145 s per block. Four training-law rollouts per
+block: 19,200 agent rows, 3,200 team segments, 64 lane clusters. Reduce
+`runs/flexible_skill_duration/b11_reduce/summary.json`, sha256 `68231a0c47032a3f…`.
+
+**Mean raw advantage by chosen agent label (± lane-clustered SE), and the references.**
+
+| block | c0 | c1 | c2 | c3 | c4 | c5 | agent spread | team-label (placebo) spread | η² |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| 772803 | +.089 | +.087 | +.094 | **+.101** | +.080 | +.077 | .024 | .068 | .0004 |
+| 772903 | +.014 | **+.018** | +.014 | −.000 | +.010 | +.004 | .019 | .058 | .0003 |
+| 773003 | +.144 | +.153 | +.147 | +.163 | **+.165** | +.150 | .021 | .067 | .0004 |
+
+Each mean has a clustered SE of .025–.030 (the block-level offset is common to all labels;
+the spread's bootstrap SE is .008). The best label per single rollout: [1, 2, 1, 3],
+[5, 4, 4, 2], [3, 1, 4, 2]. Executed label law: shares .14–.19 each, entropy 1.779–1.784 of
+1.792.
+
+Perfect-credit reference (segment reward regressed on the six label counts; reward per
+agent-segment ≈ .09): coefficient spread .0067 ± .0022, .0037 ± .0019, .0113 ± .0017;
+R² .006, .002, .013; residual sd .078 per segment. Its best label: 3 (then 2, 1), **1**, **0**
+— B09's best labels are 2, 1, 0.
+
+**Declared predictions, by the letter.** E2a clause one (spread > 2 × its clustered SE): 3/3
+(2.8, 2.2, 2.5). E2a clause two (772903: label 1 first and label 0 in the bottom half): 0/1 —
+label 1 is first, label 0 is second. E2b (spread within 2 SE on 3/3): 0/3.
+
+**Why the letter misleads, and what I read instead.** The criterion compares a max − min of
+six noisy means with the SE of that same statistic; a range of six is positive under no
+effect at all (the bootstrap mean of the spread is larger than the point value on 3/3). The
+placebo row is the calibration I should have declared as the criterion: the team label
+cannot touch behaviour, has a sixth of the rows (so about 2.4 times the noise), and shows a
+spread of .058–.068 — what .019–.024 scales to. The agent-label spread is what no effect
+looks like. With that, η² of .0003–.0004 and a different winner in almost every rollout:
+- *At the end of training the coordinator's advantage contains no usable ranking of its
+  labels* (E2b in substance). This is three blocks, four rollouts each, one checkpoint; it does
+  not say what the signal was at rollout 5.
+- *Even perfect per-agent credit would see little at this horizon.* The count regression does
+  find label 1 on 772903 and label 0 on 773003, but the effect is 4–12 % of a ten-step reward
+  with R² ≤ .013, while the same labels held by everyone for an episode differ by 25–40 % of J
+  (B10). The value of a label is mostly *not* in the ten steps it is held for; it is in where
+  the team ends up after holding it for hundreds of steps.
+
+**What this changes in the direction's working explanation.** This is the first result that
+bears on skill *duration* from the learning side rather than the behaviour side. The labels
+are distinct long-horizon policies; the high level is asked to value them through ten-step
+commitments, redrawn independently for six agents from a near-uniform law, credited with a
+shared team reward against a label-free baseline. Under that regime a label's consequence is
+averaged away before it can appear in the return that credits it, so selection cannot be
+learned, the law stays flat (entropy bonus .07 against a gradient of nothing), and the deployed
+argmax of a flat law is arbitrary — good on two blocks, bad on one. B07's "cadence 1 trains
+the same as cadence 10" fits: neither commitment is long enough for a label to matter to its
+own credit. Weakened: "the coordinator's optimiser is the defect" (E2a). Strengthened: the
+defect is the match between commitment length, credit and the horizon on which a skill pays.
+Untouched: whether a longer commitment actually makes the ranking learnable, and what it
+costs the low level.
+
+**Next research judgment.** Measure, at fixed weights and with no fit, how the label's
+visibility in its own credit grows with the commitment length.
+- *B12 (zero optimizer steps, node):* training-law collection as in B11 with the caps set to
+  10, 50, 100 and 500 on the learner instance (labels still sampled from the coordinator's
+  law, per agent, all renewing together), enough rollouts that every cap has at least 256
+  lane-episodes; per cap the count regression's coefficient spread against its **placebo
+  calibration** (the same regression on the team-label indicator, and on permuted agent
+  labels), its rank agreement with B10's map, and the agent-advantage table. The criterion is
+  declared now: a cap "shows the ranking" if its agent-label coefficient spread exceeds the
+  95th percentile of its own permutation spread *and* B09's best label is ranked first or
+  second.
+- *Predictions, held loosely:* cap 10 fails the criterion on 3/3 (B11 again); cap 500 passes on
+  3/3; the smallest passing cap is 50 or 100 on at least 2/3.
+- *Strongest alternative:* the joint map is not additive — a label pays only when all six
+  agents hold it (coordination), so per-agent counts stay uninformative at every cap and only
+  the all-equal configuration scores. Then cap 500 also fails, and the object is joint (team)
+  assignment rather than commitment length: Codex's team-conditioned question, with this map
+  as its foundation.
+- *This is not a k sweep for performance:* no training, no J claim; it measures signal
+  visibility as a function of commitment. A fit-level idea (longer or adaptive commitment for
+  the high level, or label-conditioned credit) is only worth declaring after it.

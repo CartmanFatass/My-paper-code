@@ -1,0 +1,1550 @@
+{
+  "object_id": "FSD_COORDINATOR_SIGNAL_B11",
+  "card": "docs/research/candidates/flexible_skill_duration/NOTES.md (2026-09-20 16:40 PDT, next research judgment, B11)",
+  "command": "reduce",
+  "launch_sha": "f274cfa6f747a60c7ba9d6d0dc0b51a928202711",
+  "probe_launch_sha": "f274cfa6f747a60c7ba9d6d0dc0b51a928202711",
+  "b09_probe_launch_sha": "fd8402f592ac310cdccc4619137c041796df29b6",
+  "b10_probe_launch_sha": "63328ec7bc2b21ec9785331aca10f30b3f223b42",
+  "reference_object_ids": [
+    "FSD_LABEL_MAP_SAMPLED_B10",
+    "FSD_LABEL_MAP_B09",
+    "FSD_LABEL_CONTENT_B08"
+  ],
+  "status": "complete",
+  "arm": {
+    "name": "D_SAVE",
+    "overrides": {},
+    "coordinator_batch_size": 1280,
+    "caps": {
+      "skill_cap_k_max": 10,
+      "team_cap_k_Z": 10
+    }
+  },
+  "labels": 6,
+  "rollouts_per_block": {
+    "772803": 4,
+    "772903": 4,
+    "773003": 4
+  },
+  "quantity": "an advantage is the coordinator's own per-segment GAE at the saved weights, computed by the same three calls its update makes; a label's value in the table is the mean raw advantage of the valid agent rows that executed it. B09's mean-action J and B10's sampled J are those objects' own fixed-weight panels of the same checkpoint, so every comparison is within one block, one checkpoint and one set of weights - but the advantage table is collected on this object's own sixteen worlds and the panels on the block's 32 evaluation worlds, so the pairing is the checkpoint, not the world",
+  "blocks": [
+    {
+      "training_seed": 772803,
+      "evaluation_seed": 782803,
+      "status": "complete",
+      "missing_or_invalid": {},
+      "weights_match": true,
+      "as_trained_identical_to_b09_and_b10": true,
+      "J_as_trained": 0.45587469857693386,
+      "rollouts": 4,
+      "agent_rows": 19200,
+      "team_rows": 3200,
+      "clusters": 64,
+      "agent_label_mean_advantage": {
+        "0": 0.08927512990514805,
+        "1": 0.08696571993548556,
+        "2": 0.09443814736992948,
+        "3": 0.10060741034240941,
+        "4": 0.07984739499797654,
+        "5": 0.07679587181356998
+      },
+      "agent_label_ranking": [
+        3,
+        2,
+        0,
+        1,
+        4,
+        5
+      ],
+      "agent_label_spread": 0.023811538528839438,
+      "agent_label_spread_clustered_se": 0.008578456158196718,
+      "agent_label_spread_over_clustered_se": 2.7757370428579393,
+      "agent_label_spread_percentile_interval": [
+        0.013536464264454639,
+        0.04805846647461303
+      ],
+      "agent_label_spread_exceeds_twice_its_clustered_se": true,
+      "agent_advantage_eta_squared": 0.0004013431337551335,
+      "agent_label_clustered_se": {
+        "0": 0.027206612523360974,
+        "1": 0.026054539419719424,
+        "2": 0.026246436172232986,
+        "3": 0.02524339009982848,
+        "4": 0.026203447976450668,
+        "5": 0.025708824728031095
+      },
+      "team_label_spread": 0.06766028883979693,
+      "team_label_ranking": [
+        2,
+        3,
+        5,
+        1,
+        4,
+        0
+      ],
+      "team_label_placebo_note": "the team label never reaches the low-level actor: `SkillDiscoverer.forward` (hmasd/networks.py:1801-1809) passes only the observation, the *agent* label and the hidden state. It reaches the low-level critic (hmasd/networks.py:1557-1560) and the coordinator's own decoder. At fixed weights it therefore cannot move an executed action, so the team-label table is a placebo row: any structure in it is the state's, not the label's",
+      "additive_coefficients": {
+        "0": 0.09030434479103336,
+        "1": 0.09386593805471097,
+        "2": 0.09528353797189813,
+        "3": 0.09608638819022365,
+        "4": 0.0916703173295951,
+        "5": 0.08937905147466048
+      },
+      "additive_clustered_se": {
+        "0": 0.0016647824644184157,
+        "1": 0.0013680733159326303,
+        "2": 0.0013005725635632168,
+        "3": 0.0013875007812767732,
+        "4": 0.0015450734169348847,
+        "5": 0.0015714360151243437
+      },
+      "additive_ranking": [
+        3,
+        2,
+        1,
+        4,
+        0,
+        5
+      ],
+      "additive_max_minus_min": 0.0067073367155631725,
+      "additive_max_minus_min_clustered_se": 0.002176476617481545,
+      "additive_exceeds_twice_its_clustered_se": true,
+      "additive_with_state_control": {
+        "segments": 3200,
+        "columns": 7,
+        "rank": 7,
+        "clusters": 64,
+        "small_sample_correction": 1.0177819535790096,
+        "state_control": true,
+        "coefficients": {
+          "0": 0.0900578264531254,
+          "1": 0.09357035926504305,
+          "2": 0.09504434375710169,
+          "3": 0.09586498823987645,
+          "4": 0.0914053198238685,
+          "5": 0.08911798181705315
+        },
+        "clustered_se": {
+          "0": 0.0020150728431505387,
+          "1": 0.00184721798048636,
+          "2": 0.0014545281520923917,
+          "3": 0.0017023005160874884,
+          "4": 0.0021114157528041816,
+          "5": 0.002087633255260554
+        },
+        "value_coefficient": 0.0003287265097800529,
+        "value_clustered_se": 0.0014457806737093078,
+        "ranking": [
+          3,
+          2,
+          1,
+          4,
+          0,
+          5
+        ],
+        "best_label": 3,
+        "worst_label": 5,
+        "max_minus_min": 0.006747006422823304,
+        "max_minus_min_clustered_se": 0.0022017698525412027,
+        "residual_sd": 0.07759072504584934,
+        "r_squared": 0.006070479565761122,
+        "definition": "ordinary least squares (numpy.linalg.lstsq) of each team segment's own discounted reward on the six counts of agents holding each label in that segment; the counts sum to six, so the model carries no intercept and a coefficient is the reward per agent-segment of holding that label, identified up to one common additive shift . The segment's stored team value V(s) is added as a state control, so the coefficients are read at a fixed state value. Standard errors are the cluster-robust sandwich with the (rollout, lane) cluster and the usual G/(G-1) (M-1)/(M-K) correction; the gap's standard error is sqrt(V_bb + V_ww - 2 V_bw) of the best and worst coefficients. the segment-level additive model is a *perfect-credit reference*, not the coordinator's signal: it regresses each team segment's own discounted reward on the six counts of agents holding each label in that segment (the counts sum to six, so the model carries no intercept and the coefficients are read as the reward per agent-segment of holding that label, up to one common additive shift). A second fit adds the segment's stored team value `V(s)` as a state control. It asks whether a label effect is detectable at the ten-step decision level at all when credit is perfect; the coordinator's own signal is the advantage table, which carries the label-free baseline and the GAE"
+      },
+      "additive_reference_note": "the segment-level additive model is a *perfect-credit reference*, not the coordinator's signal: it regresses each team segment's own discounted reward on the six counts of agents holding each label in that segment (the counts sum to six, so the model carries no intercept and the coefficients are read as the reward per agent-segment of holding that label, up to one common additive shift). A second fit adds the segment's stored team value `V(s)` as a state control. It asks whether a label effect is detectable at the ten-step decision level at all when credit is perfect; the coordinator's own signal is the advantage table, which carries the label-free baseline and the GAE",
+      "mean_action_J_by_label": {
+        "0": 0.34900398680386885,
+        "1": 0.43896236008144474,
+        "2": 0.4542809793576539,
+        "3": 0.4009353833957562,
+        "4": 0.4228362867215988,
+        "5": 0.3256863019712888
+      },
+      "sampled_J_by_label": {
+        "0": 0.2987757435759687,
+        "1": 0.34503874352441216,
+        "2": 0.36041692157470473,
+        "3": 0.3348727219028823,
+        "4": 0.3245014706630319,
+        "5": 0.28063929331347814
+      },
+      "mean_action_ranking": [
+        2,
+        1,
+        4,
+        3,
+        0,
+        5
+      ],
+      "sampled_ranking": [
+        2,
+        1,
+        3,
+        4,
+        0,
+        5
+      ],
+      "rank_correlation_advantage_vs_mean_action": 0.37142857142857144,
+      "rank_correlation_advantage_vs_sampled": 0.6,
+      "rank_correlation_additive_vs_mean_action": 0.6571428571428571,
+      "rank_correlation_additive_vs_sampled": 0.8285714285714286,
+      "rank_correlation_definition": "Spearman's rank correlation, ties sharing their average rank (B10's own function), between the six labels' mean raw advantage in this probe's collection and their fixed-weight panel J - B09's mean-action map and B10's sampled map of the same checkpoint. Six paired points: a description of the order, not a test. The same correlation is reported for the additive-model coefficients, which are the perfect-credit reference and not the coordinator's signal",
+      "best_mean_action_label": 2,
+      "best_mean_action_label_advantage_rank": 2,
+      "best_mean_action_label_is_first_by_advantage": false,
+      "best_mean_action_label_additive_rank": 2,
+      "best_mean_action_label_is_first_by_additive": false,
+      "coordinator_most_used_label": 1,
+      "coordinator_most_used_label_advantage_rank": 4,
+      "coordinator_most_used_label_additive_rank": 3,
+      "coordinator_most_used_label_definition": "the agent label the coordinator executed most often during the unmodified `as_trained` panel of this block (B09's own histogram), and where the same label sits in this probe's advantage ranking and in the perfect-credit reference",
+      "label_law": {
+        "agent_label_shares": [
+          0.14645833333333333,
+          0.18255208333333334,
+          0.18875,
+          0.16770833333333332,
+          0.15588541666666667,
+          0.15864583333333335
+        ],
+        "agent_label_counts": [
+          2812,
+          3505,
+          3624,
+          3220,
+          2993,
+          3046
+        ],
+        "team_label_shares": [
+          0.0953125,
+          0.13,
+          0.1809375,
+          0.15625,
+          0.2103125,
+          0.2271875
+        ],
+        "agent_label_entropy_estimate": 1.7835389878228307,
+        "agent_label_entropy_se": 0.0009115869875679815,
+        "team_label_entropy_estimate": 1.6793322671949864,
+        "mean_chosen_agent_label_probability": 0.1693994543604139,
+        "uniform_entropy": 1.791759469228055,
+        "agent_entropy_gap_to_uniform": 0.008220481405224245,
+        "team_entropy_gap_to_uniform": 0.11242720203306855,
+        "definition": "the shares are the executed (decision, agent) label counts of the collection. The entropy estimate is the mean of -log q of the *chosen* label over the same rows, which is an unbiased estimate of the law's conditional entropy; `uniform_entropy` is ln 6, the entropy of a flat law over the six labels. The log-probabilities are the ones the decision stored (hmasd/utils.py:551-553), so this is the law that actually ran, not a recomputation"
+      },
+      "policy_gradient": {
+        "estimator": "score_function_with_shares_as_q",
+        "per_label": {
+          "0": {
+            "share": 0.14645833333333333,
+            "mean_standardised_advantage_indicator": 0.001970471158062234,
+            "policy_gradient_pull": 0.000606765912748137
+          },
+          "1": {
+            "share": 0.18255208333333334,
+            "mean_standardised_advantage_indicator": 0.001412120153208889,
+            "policy_gradient_pull": -0.0002876618115229424
+          },
+          "2": {
+            "share": 0.18875,
+            "mean_standardised_advantage_indicator": 0.004148653635908583,
+            "policy_gradient_pull": 0.0023911615274383527
+          },
+          "3": {
+            "share": 0.16770833333333332,
+            "mean_standardised_advantage_indicator": 0.00679434347575068,
+            "policy_gradient_pull": 0.005232774880476358
+          },
+          "4": {
+            "share": 0.15588541666666667,
+            "mean_standardised_advantage_indicator": -0.0020273526621633663,
+            "policy_gradient_pull": -0.003478835521062759
+          },
+          "5": {
+            "share": 0.15864583333333335,
+            "mean_standardised_advantage_indicator": -0.0029870192920505665,
+            "policy_gradient_pull": -0.0044642049880771455
+          }
+        },
+        "mean_standardised_advantage": 0.009311216468716452,
+        "max_minus_min": 0.009696979868553505,
+        "entropy_coefficient_lambda_h": 0.07,
+        "label_law_entropy_estimate": 1.7835389878228307,
+        "label_law_entropy_gap_to_ln6": 0.008220481405224245,
+        "reading_note": "descriptive, approximate. This is not a measured gradient: it is `mean(A_std * 1[label = c]) - share_c * mean(A_std)`, the per-logit pull one PPO step at ratio 1 would apply if the law's own `q_c` were the executed share. It is put beside `lambda_h` and the entropy gap to ln 6 only so the two pulls on a nearly flat law can be compared in the reading. the per-label old probabilities are not stored: `d2_agent_old_log_probs` carries the log-probability of the *chosen* label alone (hmasd/utils.py:551-553). Recovering `q_c` for every label would mean re-running the coordinator's decoder in the stored decode order, which is new machinery and a second forward pass over every decision, so this block reports the shares-based score-function estimate instead: `mean(A_std * 1[label = c]) - share_c * mean(A_std)`, which is the exact per-logit pull of one PPO step at ratio 1 with `q_c` replaced by the executed share. It is descriptive and approximate, and it is labelled so"
+      },
+      "weights_sha256": "7cb214151d4e954af541391013686fd712a66655e050d27d2f0f2903134b08f7"
+    },
+    {
+      "training_seed": 772903,
+      "evaluation_seed": 782903,
+      "status": "complete",
+      "missing_or_invalid": {},
+      "weights_match": true,
+      "as_trained_identical_to_b09_and_b10": true,
+      "J_as_trained": 0.35469677422138435,
+      "rollouts": 4,
+      "agent_rows": 19200,
+      "team_rows": 3200,
+      "clusters": 64,
+      "agent_label_mean_advantage": {
+        "0": 0.014237438850200963,
+        "1": 0.018435323416920342,
+        "2": 0.013936925585166767,
+        "3": -9.814293808168858e-05,
+        "4": 0.009567984714214562,
+        "5": 0.003953846186790952
+      },
+      "agent_label_ranking": [
+        1,
+        0,
+        2,
+        4,
+        5,
+        3
+      ],
+      "agent_label_spread": 0.01853346635500203,
+      "agent_label_spread_clustered_se": 0.00838860138631405,
+      "agent_label_spread_over_clustered_se": 2.2093630989832542,
+      "agent_label_spread_percentile_interval": [
+        0.010870420842565695,
+        0.042852673818524034
+      ],
+      "agent_label_spread_exceeds_twice_its_clustered_se": true,
+      "agent_advantage_eta_squared": 0.0002666019382485964,
+      "agent_label_clustered_se": {
+        "0": 0.030190521100355815,
+        "1": 0.03003055839477491,
+        "2": 0.03022264137007872,
+        "3": 0.029500525479208277,
+        "4": 0.02928830056182586,
+        "5": 0.028806309179734944
+      },
+      "team_label_spread": 0.058320302023250996,
+      "team_label_ranking": [
+        0,
+        5,
+        4,
+        3,
+        1,
+        2
+      ],
+      "team_label_placebo_note": "the team label never reaches the low-level actor: `SkillDiscoverer.forward` (hmasd/networks.py:1801-1809) passes only the observation, the *agent* label and the hidden state. It reaches the low-level critic (hmasd/networks.py:1557-1560) and the coordinator's own decoder. At fixed weights it therefore cannot move an executed action, so the team-label table is a placebo row: any structure in it is the state's, not the label's",
+      "additive_coefficients": {
+        "0": 0.08972101971107656,
+        "1": 0.09257717810097729,
+        "2": 0.08937043123109129,
+        "3": 0.09216931267413278,
+        "4": 0.09153054082942541,
+        "5": 0.08888143615718963
+      },
+      "additive_clustered_se": {
+        "0": 0.0013320024882116923,
+        "1": 0.0016367027750660303,
+        "2": 0.0014506599904115212,
+        "3": 0.001152183841416546,
+        "4": 0.001637114056519169,
+        "5": 0.0015401028207832324
+      },
+      "additive_ranking": [
+        1,
+        3,
+        4,
+        0,
+        2,
+        5
+      ],
+      "additive_max_minus_min": 0.0036957419437876615,
+      "additive_max_minus_min_clustered_se": 0.0018786901089356243,
+      "additive_exceeds_twice_its_clustered_se": false,
+      "additive_with_state_control": {
+        "segments": 3200,
+        "columns": 7,
+        "rank": 7,
+        "clusters": 64,
+        "small_sample_correction": 1.0177819535790096,
+        "state_control": true,
+        "coefficients": {
+          "0": 0.08412653648413347,
+          "1": 0.08712373442594443,
+          "2": 0.0844150518064046,
+          "3": 0.08866075515132635,
+          "4": 0.08712847899380123,
+          "5": 0.08420443856600743
+        },
+        "clustered_se": {
+          "0": 0.001891512749553893,
+          "1": 0.001985457965243386,
+          "2": 0.0018457754533256223,
+          "3": 0.0013321773340556741,
+          "4": 0.0019259768542611258,
+          "5": 0.0018365911036698707
+        },
+        "value_coefficient": 0.006162304811434122,
+        "value_clustered_se": 0.0012535736403037122,
+        "ranking": [
+          3,
+          4,
+          1,
+          2,
+          5,
+          0
+        ],
+        "best_label": 3,
+        "worst_label": 0,
+        "max_minus_min": 0.004534218667192877,
+        "max_minus_min_clustered_se": 0.0018565336179471,
+        "residual_sd": 0.07767853143782642,
+        "r_squared": 0.012193280966029674,
+        "definition": "ordinary least squares (numpy.linalg.lstsq) of each team segment's own discounted reward on the six counts of agents holding each label in that segment; the counts sum to six, so the model carries no intercept and a coefficient is the reward per agent-segment of holding that label, identified up to one common additive shift . The segment's stored team value V(s) is added as a state control, so the coefficients are read at a fixed state value. Standard errors are the cluster-robust sandwich with the (rollout, lane) cluster and the usual G/(G-1) (M-1)/(M-K) correction; the gap's standard error is sqrt(V_bb + V_ww - 2 V_bw) of the best and worst coefficients. the segment-level additive model is a *perfect-credit reference*, not the coordinator's signal: it regresses each team segment's own discounted reward on the six counts of agents holding each label in that segment (the counts sum to six, so the model carries no intercept and the coefficients are read as the reward per agent-segment of holding that label, up to one common additive shift). A second fit adds the segment's stored team value `V(s)` as a state control. It asks whether a label effect is detectable at the ten-step decision level at all when credit is perfect; the coordinator's own signal is the advantage table, which carries the label-free baseline and the GAE"
+      },
+      "additive_reference_note": "the segment-level additive model is a *perfect-credit reference*, not the coordinator's signal: it regresses each team segment's own discounted reward on the six counts of agents holding each label in that segment (the counts sum to six, so the model carries no intercept and the coefficients are read as the reward per agent-segment of holding that label, up to one common additive shift). A second fit adds the segment's stored team value `V(s)` as a state control. It asks whether a label effect is detectable at the ten-step decision level at all when credit is perfect; the coordinator's own signal is the advantage table, which carries the label-free baseline and the GAE",
+      "mean_action_J_by_label": {
+        "0": 0.34303296930634497,
+        "1": 0.5212269708739312,
+        "2": 0.4005968459859748,
+        "3": 0.30523984174957075,
+        "4": 0.39923519399947327,
+        "5": 0.3602225797542209
+      },
+      "sampled_J_by_label": {
+        "0": 0.2359608374569557,
+        "1": 0.3684885436733852,
+        "2": 0.3146647535575825,
+        "3": 0.23980559673129992,
+        "4": 0.3343804367303461,
+        "5": 0.30229057182755115
+      },
+      "mean_action_ranking": [
+        1,
+        2,
+        4,
+        5,
+        0,
+        3
+      ],
+      "sampled_ranking": [
+        1,
+        4,
+        2,
+        5,
+        3,
+        0
+      ],
+      "rank_correlation_advantage_vs_mean_action": 0.6571428571428571,
+      "rank_correlation_advantage_vs_sampled": 0.37142857142857144,
+      "rank_correlation_additive_vs_mean_action": 0.14285714285714285,
+      "rank_correlation_additive_vs_sampled": 0.37142857142857144,
+      "rank_correlation_definition": "Spearman's rank correlation, ties sharing their average rank (B10's own function), between the six labels' mean raw advantage in this probe's collection and their fixed-weight panel J - B09's mean-action map and B10's sampled map of the same checkpoint. Six paired points: a description of the order, not a test. The same correlation is reported for the additive-model coefficients, which are the perfect-credit reference and not the coordinator's signal",
+      "best_mean_action_label": 1,
+      "best_mean_action_label_advantage_rank": 1,
+      "best_mean_action_label_is_first_by_advantage": true,
+      "best_mean_action_label_additive_rank": 1,
+      "best_mean_action_label_is_first_by_additive": true,
+      "coordinator_most_used_label": 0,
+      "coordinator_most_used_label_advantage_rank": 2,
+      "coordinator_most_used_label_additive_rank": 4,
+      "coordinator_most_used_label_definition": "the agent label the coordinator executed most often during the unmodified `as_trained` panel of this block (B09's own histogram), and where the same label sits in this probe's advantage ranking and in the perfect-credit reference",
+      "label_law": {
+        "agent_label_shares": [
+          0.1765625,
+          0.13765625,
+          0.16927083333333334,
+          0.17796875,
+          0.17994791666666668,
+          0.15859375
+        ],
+        "agent_label_counts": [
+          3390,
+          2643,
+          3250,
+          3417,
+          3455,
+          3045
+        ],
+        "team_label_shares": [
+          0.16375,
+          0.174375,
+          0.1034375,
+          0.2890625,
+          0.0928125,
+          0.1765625
+        ],
+        "agent_label_entropy_estimate": 1.7790314756830534,
+        "agent_label_entropy_se": 0.0011222399120097584,
+        "team_label_entropy_estimate": 1.6787418066710234,
+        "mean_chosen_agent_label_probability": 0.1708707198164596,
+        "uniform_entropy": 1.791759469228055,
+        "agent_entropy_gap_to_uniform": 0.012727993545001537,
+        "team_entropy_gap_to_uniform": 0.1130176625570316,
+        "definition": "the shares are the executed (decision, agent) label counts of the collection. The entropy estimate is the mean of -log q of the *chosen* label over the same rows, which is an unbiased estimate of the law's conditional entropy; `uniform_entropy` is ln 6, the entropy of a flat law over the six labels. The log-probabilities are the ones the decision stored (hmasd/utils.py:551-553), so this is the law that actually ran, not a recomputation"
+      },
+      "policy_gradient": {
+        "estimator": "score_function_with_shares_as_q",
+        "per_label": {
+          "0": {
+            "share": 0.1765625,
+            "mean_standardised_advantage_indicator": 0.0017984060159930474,
+            "policy_gradient_pull": 0.0014088347819448176
+          },
+          "1": {
+            "share": 0.13765625,
+            "mean_standardised_advantage_indicator": 0.0031440679275002974,
+            "policy_gradient_pull": 0.002840340266264465
+          },
+          "2": {
+            "share": 0.16927083333333334,
+            "mean_standardised_advantage_indicator": 0.0027846562567719955,
+            "policy_gradient_pull": 0.0024111735102655806
+          },
+          "3": {
+            "share": 0.17796875,
+            "mean_standardised_advantage_indicator": -0.0034672167474506447,
+            "policy_gradient_pull": -0.0038598907612390817
+          },
+          "4": {
+            "share": 0.17994791666666668,
+            "mean_standardised_advantage_indicator": 8.467718998872442e-06,
+            "policy_gradient_pull": -0.0003885731699794857
+          },
+          "5": {
+            "share": 0.15859375,
+            "mean_standardised_advantage_indicator": -0.002061960023221824,
+            "policy_gradient_pull": -0.002411884627256296
+          }
+        },
+        "mean_standardised_advantage": 0.002206421148591744,
+        "max_minus_min": 0.006700231027503547,
+        "entropy_coefficient_lambda_h": 0.07,
+        "label_law_entropy_estimate": 1.7790314756830534,
+        "label_law_entropy_gap_to_ln6": 0.012727993545001537,
+        "reading_note": "descriptive, approximate. This is not a measured gradient: it is `mean(A_std * 1[label = c]) - share_c * mean(A_std)`, the per-logit pull one PPO step at ratio 1 would apply if the law's own `q_c` were the executed share. It is put beside `lambda_h` and the entropy gap to ln 6 only so the two pulls on a nearly flat law can be compared in the reading. the per-label old probabilities are not stored: `d2_agent_old_log_probs` carries the log-probability of the *chosen* label alone (hmasd/utils.py:551-553). Recovering `q_c` for every label would mean re-running the coordinator's decoder in the stored decode order, which is new machinery and a second forward pass over every decision, so this block reports the shares-based score-function estimate instead: `mean(A_std * 1[label = c]) - share_c * mean(A_std)`, which is the exact per-logit pull of one PPO step at ratio 1 with `q_c` replaced by the executed share. It is descriptive and approximate, and it is labelled so"
+      },
+      "weights_sha256": "87a703fc18120738c25f7812a0248f5aab0e66a4959de8711aef76a6f1c85eca"
+    },
+    {
+      "training_seed": 773003,
+      "evaluation_seed": 783003,
+      "status": "complete",
+      "missing_or_invalid": {},
+      "weights_match": true,
+      "as_trained_identical_to_b09_and_b10": true,
+      "J_as_trained": 0.49935211030661386,
+      "rollouts": 4,
+      "agent_rows": 19200,
+      "team_rows": 3200,
+      "clusters": 64,
+      "agent_label_mean_advantage": {
+        "0": 0.14381539224111903,
+        "1": 0.15258343256831705,
+        "2": 0.1474306921445944,
+        "3": 0.16250587012857656,
+        "4": 0.1652083493630851,
+        "5": 0.14992440460435513
+      },
+      "agent_label_ranking": [
+        4,
+        3,
+        1,
+        5,
+        2,
+        0
+      ],
+      "agent_label_spread": 0.021392957121966066,
+      "agent_label_spread_clustered_se": 0.00850324500496625,
+      "agent_label_spread_over_clustered_se": 2.5158580176710994,
+      "agent_label_spread_percentile_interval": [
+        0.01332864984335813,
+        0.04544163965630345
+      ],
+      "agent_label_spread_exceeds_twice_its_clustered_se": true,
+      "agent_advantage_eta_squared": 0.0003468601303643665,
+      "agent_label_clustered_se": {
+        "0": 0.030306874404191168,
+        "1": 0.030486783714522517,
+        "2": 0.03045082376014403,
+        "3": 0.030123659545371224,
+        "4": 0.028057475036772413,
+        "5": 0.029444370019088475
+      },
+      "team_label_spread": 0.0665029718378901,
+      "team_label_ranking": [
+        1,
+        0,
+        5,
+        3,
+        4,
+        2
+      ],
+      "team_label_placebo_note": "the team label never reaches the low-level actor: `SkillDiscoverer.forward` (hmasd/networks.py:1801-1809) passes only the observation, the *agent* label and the hidden state. It reaches the low-level critic (hmasd/networks.py:1557-1560) and the coordinator's own decoder. At fixed weights it therefore cannot move an executed action, so the team-label table is a placebo row: any structure in it is the state's, not the label's",
+      "additive_coefficients": {
+        "0": 0.10011336230500362,
+        "1": 0.09511668764666412,
+        "2": 0.0901798370796332,
+        "3": 0.09533673310075609,
+        "4": 0.09491009812974209,
+        "5": 0.08883284784997983
+      },
+      "additive_clustered_se": {
+        "0": 0.001421660809876578,
+        "1": 0.0016375534333944175,
+        "2": 0.0015515517882238124,
+        "3": 0.0013466079423014282,
+        "4": 0.0014111024617068924,
+        "5": 0.001400072247065886
+      },
+      "additive_ranking": [
+        0,
+        3,
+        1,
+        4,
+        2,
+        5
+      ],
+      "additive_max_minus_min": 0.011280514455023788,
+      "additive_max_minus_min_clustered_se": 0.0016902024607567375,
+      "additive_exceeds_twice_its_clustered_se": true,
+      "additive_with_state_control": {
+        "segments": 3200,
+        "columns": 7,
+        "rank": 7,
+        "clusters": 64,
+        "small_sample_correction": 1.0177819535790096,
+        "state_control": true,
+        "coefficients": {
+          "0": 0.09966624772547099,
+          "1": 0.09472867389284287,
+          "2": 0.08975241647799927,
+          "3": 0.09499288047201736,
+          "4": 0.09456747141955636,
+          "5": 0.08836611223720504
+        },
+        "clustered_se": {
+          "0": 0.001725595014866844,
+          "1": 0.001778350742517715,
+          "2": 0.0019073546116162002,
+          "3": 0.0016270847294165983,
+          "4": 0.0015620815948058924,
+          "5": 0.001971445244628291
+        },
+        "value_coefficient": 0.0005267135906041331,
+        "value_clustered_se": 0.00122054533162137,
+        "ranking": [
+          0,
+          3,
+          1,
+          4,
+          2,
+          5
+        ],
+        "best_label": 0,
+        "worst_label": 5,
+        "max_minus_min": 0.011300135488265944,
+        "max_minus_min_clustered_se": 0.0017063090265042001,
+        "residual_sd": 0.07769364595471094,
+        "r_squared": 0.013018780349376313,
+        "definition": "ordinary least squares (numpy.linalg.lstsq) of each team segment's own discounted reward on the six counts of agents holding each label in that segment; the counts sum to six, so the model carries no intercept and a coefficient is the reward per agent-segment of holding that label, identified up to one common additive shift . The segment's stored team value V(s) is added as a state control, so the coefficients are read at a fixed state value. Standard errors are the cluster-robust sandwich with the (rollout, lane) cluster and the usual G/(G-1) (M-1)/(M-K) correction; the gap's standard error is sqrt(V_bb + V_ww - 2 V_bw) of the best and worst coefficients. the segment-level additive model is a *perfect-credit reference*, not the coordinator's signal: it regresses each team segment's own discounted reward on the six counts of agents holding each label in that segment (the counts sum to six, so the model carries no intercept and the coefficients are read as the reward per agent-segment of holding that label, up to one common additive shift). A second fit adds the segment's stored team value `V(s)` as a state control. It asks whether a label effect is detectable at the ten-step decision level at all when credit is perfect; the coordinator's own signal is the advantage table, which carries the label-free baseline and the GAE"
+      },
+      "additive_reference_note": "the segment-level additive model is a *perfect-credit reference*, not the coordinator's signal: it regresses each team segment's own discounted reward on the six counts of agents holding each label in that segment (the counts sum to six, so the model carries no intercept and the coefficients are read as the reward per agent-segment of holding that label, up to one common additive shift). A second fit adds the segment's stored team value `V(s)` as a state control. It asks whether a label effect is detectable at the ten-step decision level at all when credit is perfect; the coordinator's own signal is the advantage table, which carries the label-free baseline and the GAE",
+      "mean_action_J_by_label": {
+        "0": 0.5190327462006576,
+        "1": 0.48546744663145813,
+        "2": 0.3925557846310054,
+        "3": 0.42177516857170333,
+        "4": 0.48664084946135155,
+        "5": 0.5173522443832025
+      },
+      "sampled_J_by_label": {
+        "0": 0.35600631028900964,
+        "1": 0.3677748521165586,
+        "2": 0.31965995968076716,
+        "3": 0.29814070799734604,
+        "4": 0.35930541152628315,
+        "5": 0.3708279348406409
+      },
+      "mean_action_ranking": [
+        0,
+        5,
+        4,
+        1,
+        3,
+        2
+      ],
+      "sampled_ranking": [
+        5,
+        1,
+        4,
+        0,
+        2,
+        3
+      ],
+      "rank_correlation_advantage_vs_mean_action": -0.2571428571428571,
+      "rank_correlation_advantage_vs_sampled": 0.02857142857142857,
+      "rank_correlation_additive_vs_mean_action": 0.2,
+      "rank_correlation_additive_vs_sampled": -0.4857142857142857,
+      "rank_correlation_definition": "Spearman's rank correlation, ties sharing their average rank (B10's own function), between the six labels' mean raw advantage in this probe's collection and their fixed-weight panel J - B09's mean-action map and B10's sampled map of the same checkpoint. Six paired points: a description of the order, not a test. The same correlation is reported for the additive-model coefficients, which are the perfect-credit reference and not the coordinator's signal",
+      "best_mean_action_label": 0,
+      "best_mean_action_label_advantage_rank": 6,
+      "best_mean_action_label_is_first_by_advantage": false,
+      "best_mean_action_label_additive_rank": 1,
+      "best_mean_action_label_is_first_by_additive": true,
+      "coordinator_most_used_label": 4,
+      "coordinator_most_used_label_advantage_rank": 1,
+      "coordinator_most_used_label_additive_rank": 4,
+      "coordinator_most_used_label_definition": "the agent label the coordinator executed most often during the unmodified `as_trained` panel of this block (B09's own histogram), and where the same label sits in this probe's advantage ranking and in the perfect-credit reference",
+      "label_law": {
+        "agent_label_shares": [
+          0.16489583333333332,
+          0.17005208333333333,
+          0.14708333333333334,
+          0.16651041666666666,
+          0.18796875,
+          0.16348958333333333
+        ],
+        "agent_label_counts": [
+          3166,
+          3265,
+          2824,
+          3197,
+          3609,
+          3139
+        ],
+        "team_label_shares": [
+          0.1415625,
+          0.19125,
+          0.07125,
+          0.334375,
+          0.1353125,
+          0.12625
+        ],
+        "agent_label_entropy_estimate": 1.784122411608696,
+        "agent_label_entropy_se": 0.0008887913874684912,
+        "team_label_entropy_estimate": 1.663517975844443,
+        "mean_chosen_agent_label_probability": 0.16922510096472332,
+        "uniform_entropy": 1.791759469228055,
+        "agent_entropy_gap_to_uniform": 0.007637057619358956,
+        "team_entropy_gap_to_uniform": 0.12824149338361202,
+        "definition": "the shares are the executed (decision, agent) label counts of the collection. The entropy estimate is the mean of -log q of the *chosen* label over the same rows, which is an unbiased estimate of the law's conditional entropy; `uniform_entropy` is ln 6, the entropy of a flat law over the six labels. The log-probabilities are the ones the decision stored (hmasd/utils.py:551-553), so this is the law that actually ran, not a recomputation"
+      },
+      "policy_gradient": {
+        "estimator": "score_function_with_shares_as_q",
+        "per_label": {
+          "0": {
+            "share": 0.16489583333333332,
+            "mean_standardised_advantage_indicator": -0.004455153862901777,
+            "policy_gradient_pull": -0.003783372796105881
+          },
+          "1": {
+            "share": 0.17005208333333333,
+            "mean_standardised_advantage_indicator": -0.0010422792844538738,
+            "policy_gradient_pull": -0.0003494917976918394
+          },
+          "2": {
+            "share": 0.14708333333333334,
+            "mean_standardised_advantage_indicator": -0.002794318185604728,
+            "policy_gradient_pull": -0.0021951047514191272
+          },
+          "3": {
+            "share": 0.16651041666666666,
+            "mean_standardised_advantage_indicator": 0.002276371004932874,
+            "policy_gradient_pull": 0.002954729839596955
+          },
+          "4": {
+            "share": 0.18796875,
+            "mean_standardised_advantage_indicator": 0.0041334470744343816,
+            "policy_gradient_pull": 0.0048992265659272395
+          },
+          "5": {
+            "share": 0.16348958333333333,
+            "mean_standardised_advantage_indicator": -0.0021920391034761146,
+            "policy_gradient_pull": -0.0015259870603073471
+          }
+        },
+        "mean_standardised_advantage": -0.004073972357069237,
+        "max_minus_min": 0.008682599362033121,
+        "entropy_coefficient_lambda_h": 0.07,
+        "label_law_entropy_estimate": 1.784122411608696,
+        "label_law_entropy_gap_to_ln6": 0.007637057619358956,
+        "reading_note": "descriptive, approximate. This is not a measured gradient: it is `mean(A_std * 1[label = c]) - share_c * mean(A_std)`, the per-logit pull one PPO step at ratio 1 would apply if the law's own `q_c` were the executed share. It is put beside `lambda_h` and the entropy gap to ln 6 only so the two pulls on a nearly flat law can be compared in the reading. the per-label old probabilities are not stored: `d2_agent_old_log_probs` carries the log-probability of the *chosen* label alone (hmasd/utils.py:551-553). Recovering `q_c` for every label would mean re-running the coordinator's decoder in the stored decode order, which is new machinery and a second forward pass over every decision, so this block reports the shares-based score-function estimate instead: `mean(A_std * 1[label = c]) - share_c * mean(A_std)`, which is the exact per-logit pull of one PPO step at ratio 1 with `q_c` replaced by the executed share. It is descriptive and approximate, and it is labelled so"
+      },
+      "weights_sha256": "9a8ebe9057455b1b8fd6fe9bcfa41f4530ced9b84820f364985de13c61c1a14d"
+    }
+  ],
+  "blocks_read": 3,
+  "invalid_probes": {},
+  "invalid_b09_probes": {},
+  "invalid_b10_probes": {},
+  "refusals": "a batch of this object's probes at more than one launch sha, a duplicate block among any of the three sets, a summary that is not this object's probe, an incomplete probe, a probe that took an optimizer step or does not record unchanged parameters and value normalisers, a probe without a six-label advantage table or without the perfect-credit reference, a probe that did not establish a faithful load, a block whose B09 or B10 probe was not supplied or is not readable by that object's own reader, a block whose weights sha256 is not B09's and B10's, and a block whose `as_trained` world scores are not exactly theirs",
+  "interpretation_limit": "a fixed-weight measurement, not a fit: zero optimizer steps, and nothing here is trained. Exploration; three blocks; one checkpoint per block, and that checkpoint is the end of training, when the label law is what 45 rollouts made it - this says nothing about the coordinator's signal earlier in training, when the low level's six policies were still forming. Four rollouts per block. The collection worlds are the block's own sixteen lanes seeded 500 above the training seed and are not the fit's worlds, and the collection's random streams are this object's, not the fit's long-gone training stream: the tables are a sample of the trained law's signal, not a replay of any rollout the fit actually took. The advantage table is the coordinator's own signal; the additive regression beside it is a perfect-credit reference and is not that signal. A fixed-weight panel is bit-reproducible only on the host that trained the checkpoint - B08's own local probe attempts failed the faithful load off that host - so this command runs on wsl_4070.",
+  "source_notes": {
+    "collector_transcription": "the collection is the frozen collector's own per-step calls, in its own order, with its own arguments: `scripts/run_fsd_baseline_interruption_b01.py:95-151` (`collect_training`). That function both collects *and* calls `agent.update` at line 158, so it is not called here; its per-step body is reproduced call for call - `shared.e0._reset_all(envs)` once (line 98), `agent.train(True)` (line 101), and per step `agent.step(states, observations, env_steps, dones, deterministic=False, return_step_data=True, build_infos=False)` (lines 112-113), `env.step(actions[lane])` per lane (line 120), `agent.store_transition_batch(...)` with the identical keyword arguments (lines 134-136), the terminal-lane reset with `agent.reset_env_state(lane)` (lines 141-148), and the same `require_finite` guards and the same terminal-episode refusal (lines 152-153). Where the frozen loop calls `agent.update` this object computes the coordinator's credit arithmetic instead and takes no optimizer step; everything the loop does after the update - `shared.renewal_metrics(agent)` (line 167) and `agent.clear_buffers()` (line 172) - is called unchanged. The sha256 of the frozen `collect_training` source text is published as `frozen_collector_source_sha256` so a reader can see which text this transcription mirrors",
+    "no_update": "`agent.update` and `update_coordinator_d2` are never called. `update_coordinator_d2` takes 15 optimizer steps per rollout (hmasd/agent.py:6207-6218) and updates `value_norm_coordinator` before the first of them (hmasd/agent.py:6075-6078), and `agent.update` additionally increments `global_step`, updates the discoverer and the discriminators and steps the schedulers. This probe calls only the three read-only pieces of the credit path: the bootstrap block, `_d2_flush_open_segments` and `compute_high_level_advantages`, which write nothing but the rollout-scoped advantage and return tables that `clear_buffers` resets at the same boundary a fit resets them",
+    "bootstrap": "the bootstrap values are the inline block of `HMASDAgent.update` (hmasd/agent.py:7029-7097), reproduced with its own arguments: under `torch.no_grad()`, `_normalize_states(last_state)` and `_normalize_observations(last_observations)` (both the identity on this construction, `use_obsnorm` and `use_statenorm` are False and the probe refuses to run if they are not), `skill_coordinator.get_value(state, obs)`, then `_denormalize_values(..., value_norm_coordinator)` (hmasd/agent.py:1475-1489), which only reads the running statistics, and the `{'state': [envs], 'agents': [envs, agents]}` dictionary the update builds. `last_state`/`last_observations` are the collector's own post-reset arrays, exactly as `collect_training` passes them (line 159). The update computes this block *before* `update_coordinator` flushes the open segments (line 7188 against hmasd/agent.py:5646-5650); neither reads the other's state, and this probe keeps the update's order. The frozen block swallows an exception and continues with `coord_bootstrap_values = None`; here it raises, because a probe that measures the credit arithmetic may not silently measure the fallback",
+    "advantages": "`rollout_buffer.compute_high_level_advantages(bootstrap, gamma=config.gamma, value_normalizer=None)` with the arguments of hmasd/agent.py:6046-6050, which dispatches to `_compute_d2_high_level_advantages` (hmasd/utils.py:894, 1018): one discounted-GAE sequence per (env, team) over the valid team rows and one per (env, agent) over that agent's valid rows, `discounts = gamma ** elapsed`, `gae_lambda` at the function default .95, which equals `config.gae_lambda` on this construction (the call does not pass it). The stored segment values and the bootstrap values are already denormalised at collection (hmasd/agent.py:2664-2674), which is why `value_normalizer` must be None",
+    "segment_reward": "a segment's reward is the gamma-discounted sum of the raw scalar environment (team) reward over the segment (hmasd/agent.py:2348-2355, accumulating `current_reward`, which is the collector's own scalar `rewards[lane]`, hmasd/agent.py:3873-3875). No discriminator, entropy or process term enters a coordinator segment's reward",
+    "standardisation": "hmasd/agent.py:6153-6164: per minibatch, one shared mean and standard deviation over the masked team *and* agent advantages of that minibatch, then `(advantage - mean) / (std + 1e-8)` for both heads. On this construction one minibatch is the whole rollout: `coordinator_batch_size` is 1280 and a rollout has 800 valid rows (hmasd/utils.py:1460-1465 yields one batch per epoch), so the standardisation constants are a property of the rollout and not of the shuffle. The probe refuses to publish a standardised column if the rollout carries more valid rows than the batch size",
+    "row_geometry": "a valid row is a closed segment written at its start index (hmasd/utils.py:567-599). `valid` implies `sampled` (ADR 01 invariant 6) and a team decision samples every agent (invariant 7), which on this construction makes every team row carry six valid agent rows: the recorded D1280 fits log `rows_M` 800, `rows_M_agent` 4800 and `rows_M_team` 800 for all 45 rollouts, with causes `reset` and `team_cap` only and mean segment length 10. The probe checks all of that at runtime and refuses the collection if the geometry it produced is not the recorded fit's",
+    "agent_label_of_a_row": "the label a row is grouped by is the label the segment executed: `d2_agent_skills[t, e, i]` is written at the decision step from `self.env_agent_skills` after the assignment (hmasd/agent.py:2322-2333, 2714-2716) and the segment row sits at that decision step. The team row's label is `d2_team_skill[t, e]` the same way",
+    "team_label_is_a_placebo": "the team label never reaches the low-level actor: `SkillDiscoverer.forward` (hmasd/networks.py:1801-1809) passes only the observation, the *agent* label and the hidden state. It reaches the low-level critic (hmasd/networks.py:1557-1560) and the coordinator's own decoder. At fixed weights it therefore cannot move an executed action, so the team-label table is a placebo row: any structure in it is the state's, not the label's",
+    "label_free_baseline": "an agent's advantage is the team's segment return minus a label-free baseline: the coordinator's critic reads the state and the agent's encoded observation, not the label (hmasd/networks.py:734-735, 1210-1213), and every agent's segment reward is the same team reward. The other five agents' labels are noise in one agent's advantage, which is the dilution E2b names",
+    "lane_cluster": "segments within one lane-episode share a world, a state trajectory and five other agents' labels, so rows are not independent. The cluster is the (rollout, lane) pair - one episode of one lane, since HORIZON equals `rollout_length` and every lane terminates at the end of every rollout - giving `rollouts * 16` clusters. A clustered standard error is the spread of the per-cluster means; the iid standard error beside it treats the rows as independent and is reported only because the notebook asked for both",
+    "additive_reference": "the segment-level additive model is a *perfect-credit reference*, not the coordinator's signal: it regresses each team segment's own discounted reward on the six counts of agents holding each label in that segment (the counts sum to six, so the model carries no intercept and the coefficients are read as the reward per agent-segment of holding that label, up to one common additive shift). A second fit adds the segment's stored team value `V(s)` as a state control. It asks whether a label effect is detectable at the ten-step decision level at all when credit is perfect; the coordinator's own signal is the advantage table, which carries the label-free baseline and the GAE",
+    "score_function_estimate": "the per-label old probabilities are not stored: `d2_agent_old_log_probs` carries the log-probability of the *chosen* label alone (hmasd/utils.py:551-553). Recovering `q_c` for every label would mean re-running the coordinator's decoder in the stored decode order, which is new machinery and a second forward pass over every decision, so this block reports the shares-based score-function estimate instead: `mean(A_std * 1[label = c]) - share_c * mean(A_std)`, which is the exact per-logit pull of one PPO step at ratio 1 with `q_c` replaced by the executed share. It is descriptive and approximate, and it is labelled so",
+    "weights_and_route": "scripts/run_flexible_skill_duration_e0.py:319-335 `Evaluator._sync`, called by the frozen `run_fsd_baseline_interruption_b01.evaluate_panel` at line 207 of that file, before every panel: `skill_coordinator` and `skill_discoverer` are moved by `load_state_dict` of the learner's own `state_dict`, the team and individual discriminators likewise where both exist, and `obs_norm`, `state_norm`, `value_norm_coordinator` and `value_norm_discoverer` are `copy.deepcopy`d; then `agent.train(False)` and `reset_env_state(lane)` for every lane, so the evaluator starts each panel in eval mode with no held skill, zero timers and zero recurrent state. This probe loads the checkpoint into the learner and lets that same route carry it to the evaluator, so nothing about the transfer differs from a fit's panel",
+    "evaluation_route": "the panel calls `agent.step(..., deterministic=True)` (run_fsd_baseline_interruption_b01.py:224-225), so the coordinator's team and agent labels are argmax choices, not samples, and the low-level action is the Gaussian's mean",
+    "lane_to_world": "an evaluation panel gives every lane exactly one episode of the whole horizon and scores that lane as its own world: `run_fsd_baseline_interruption_b01.py:211-254` sets `episode_ids` to `range(lanes)` and fills `return_sums_U`, `returns_U` and `native_scores_J` per lane, so entry `lane` of a per-lane record is index `lane` of `J_world_scores`. The drawn assignments are recorded in lane order with their own lane index and their episode index, and `episodes_per_lane` records how many episodes each lane actually ran: a lane with more than one would make the record a lane record and not a world record, which is why the count is published rather than assumed"
+  },
+  "agent_label_spread": {
+    "available_blocks": 3,
+    "planned_blocks": 3,
+    "mean": 0.021245987335269178,
+    "min": 0.01853346635500203,
+    "max": 0.023811538528839438,
+    "sample_sd": 0.0026421036233861992,
+    "t_multiplier": 4.3027,
+    "working_model_95pct_interval": [
+      0.014682565979113764,
+      0.027809408691424592
+    ],
+    "positive_blocks": 3,
+    "negative_blocks": 0,
+    "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+  },
+  "agent_label_spread_clustered_se": {
+    "available_blocks": 3,
+    "planned_blocks": 3,
+    "mean": 0.008490100849825672,
+    "min": 0.00838860138631405,
+    "max": 0.008578456158196718,
+    "sample_sd": 9.560745374930086e-05,
+    "t_multiplier": 4.3027,
+    "working_model_95pct_interval": [
+      0.008252596159172561,
+      0.008727605540478783
+    ],
+    "positive_blocks": 3,
+    "negative_blocks": 0,
+    "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+  },
+  "agent_label_spread_over_clustered_se": {
+    "available_blocks": 3,
+    "planned_blocks": 3,
+    "mean": 2.500319386504098,
+    "min": 2.2093630989832542,
+    "max": 2.7757370428579393,
+    "sample_sd": 0.2835065217397112,
+    "t_multiplier": 4.3027,
+    "working_model_95pct_interval": [
+      1.7960424070073826,
+      3.204596366000813
+    ],
+    "positive_blocks": 3,
+    "negative_blocks": 0,
+    "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+  },
+  "agent_advantage_eta_squared": {
+    "available_blocks": 3,
+    "planned_blocks": 3,
+    "mean": 0.0003382684007893655,
+    "min": 0.0002666019382485964,
+    "max": 0.0004013431337551335,
+    "sample_sd": 6.778023904096368e-05,
+    "t_multiplier": 4.3027,
+    "working_model_95pct_interval": [
+      0.00016989110305241266,
+      0.0005066456985263183
+    ],
+    "positive_blocks": 3,
+    "negative_blocks": 0,
+    "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+  },
+  "team_label_spread": {
+    "available_blocks": 3,
+    "planned_blocks": 3,
+    "mean": 0.06416118756697935,
+    "min": 0.058320302023250996,
+    "max": 0.06766028883979693,
+    "sample_sd": 0.005091345952881882,
+    "t_multiplier": 4.3027,
+    "working_model_95pct_interval": [
+      0.05151344413143135,
+      0.07680893100252734
+    ],
+    "positive_blocks": 3,
+    "negative_blocks": 0,
+    "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+  },
+  "additive_max_minus_min": {
+    "available_blocks": 3,
+    "planned_blocks": 3,
+    "mean": 0.007227864371458208,
+    "min": 0.0036957419437876615,
+    "max": 0.011280514455023788,
+    "sample_sd": 0.0038190843525921863,
+    "t_multiplier": 4.3027,
+    "working_model_95pct_interval": [
+      -0.0022593713216812064,
+      0.016715100064597622
+    ],
+    "positive_blocks": 3,
+    "negative_blocks": 0,
+    "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+  },
+  "additive_max_minus_min_clustered_se": {
+    "available_blocks": 3,
+    "planned_blocks": 3,
+    "mean": 0.0019151230623913023,
+    "min": 0.0016902024607567375,
+    "max": 0.002176476617481545,
+    "sample_sd": 0.00024517577153489986,
+    "t_multiplier": 4.3027,
+    "working_model_95pct_interval": [
+      0.0013060659911013984,
+      0.0025241801336812063
+    ],
+    "positive_blocks": 3,
+    "negative_blocks": 0,
+    "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+  },
+  "rank_correlation_advantage_vs_mean_action": {
+    "available_blocks": 3,
+    "planned_blocks": 3,
+    "mean": 0.2571428571428571,
+    "min": -0.2571428571428571,
+    "max": 0.6571428571428571,
+    "sample_sd": 0.46773444410699716,
+    "t_multiplier": 4.3027,
+    "working_model_95pct_interval": [
+      -0.9047866797186914,
+      1.4190723940044057
+    ],
+    "positive_blocks": 2,
+    "negative_blocks": 1,
+    "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+  },
+  "rank_correlation_advantage_vs_sampled": {
+    "available_blocks": 3,
+    "planned_blocks": 3,
+    "mean": 0.3333333333333333,
+    "min": 0.02857142857142857,
+    "max": 0.6,
+    "sample_sd": 0.28761274039126666,
+    "t_multiplier": 4.3027,
+    "working_model_95pct_interval": [
+      -0.38114417083323654,
+      1.0478108374999031
+    ],
+    "positive_blocks": 3,
+    "negative_blocks": 0,
+    "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+  },
+  "rank_correlation_additive_vs_mean_action": {
+    "available_blocks": 3,
+    "planned_blocks": 3,
+    "mean": 0.3333333333333333,
+    "min": 0.14285714285714285,
+    "max": 0.6571428571428571,
+    "sample_sd": 0.28187902070378557,
+    "t_multiplier": 4.3027,
+    "working_model_95pct_interval": [
+      -0.36690066504719504,
+      1.0335673317138616
+    ],
+    "positive_blocks": 3,
+    "negative_blocks": 0,
+    "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+  },
+  "rank_correlation_additive_vs_sampled": {
+    "available_blocks": 3,
+    "planned_blocks": 3,
+    "mean": 0.23809523809523814,
+    "min": -0.4857142857142857,
+    "max": 0.8285714285714286,
+    "sample_sd": 0.6672106624052189,
+    "t_multiplier": 4.3027,
+    "working_model_95pct_interval": [
+      -1.4193661392418546,
+      1.895556615432331
+    ],
+    "positive_blocks": 2,
+    "negative_blocks": 1,
+    "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+  },
+  "agent_label_mean_advantage": {
+    "0": {
+      "available_blocks": 3,
+      "planned_blocks": 3,
+      "mean": 0.08244265366548935,
+      "min": 0.014237438850200963,
+      "max": 0.14381539224111903,
+      "sample_sd": 0.0650586162619438,
+      "t_multiplier": 4.3027,
+      "working_model_95pct_interval": [
+        -0.07917368401179549,
+        0.2440589913427742
+      ],
+      "positive_blocks": 3,
+      "negative_blocks": 0,
+      "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+    },
+    "1": {
+      "available_blocks": 3,
+      "planned_blocks": 3,
+      "mean": 0.08599482530690765,
+      "min": 0.018435323416920342,
+      "max": 0.15258343256831705,
+      "sample_sd": 0.06707932449353238,
+      "t_multiplier": 4.3027,
+      "working_model_95pct_interval": [
+        -0.08064128504105299,
+        0.25263093565486827
+      ],
+      "positive_blocks": 3,
+      "negative_blocks": 0,
+      "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+    },
+    "2": {
+      "available_blocks": 3,
+      "planned_blocks": 3,
+      "mean": 0.08526858836656355,
+      "min": 0.013936925585166767,
+      "max": 0.1474306921445944,
+      "sample_sd": 0.06721760957362956,
+      "t_multiplier": 4.3027,
+      "working_model_95pct_interval": [
+        -0.08171104493784505,
+        0.25224822167097216
+      ],
+      "positive_blocks": 3,
+      "negative_blocks": 0,
+      "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+    },
+    "3": {
+      "available_blocks": 3,
+      "planned_blocks": 3,
+      "mean": 0.0876717125109681,
+      "min": -9.814293808168858e-05,
+      "max": 0.16250587012857656,
+      "sample_sd": 0.08207018627452517,
+      "t_multiplier": 4.3027,
+      "working_model_95pct_interval": [
+        -0.1162041720417759,
+        0.2915475970637121
+      ],
+      "positive_blocks": 2,
+      "negative_blocks": 1,
+      "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+    },
+    "4": {
+      "available_blocks": 3,
+      "planned_blocks": 3,
+      "mean": 0.0848745763584254,
+      "min": 0.009567984714214562,
+      "max": 0.1652083493630851,
+      "sample_sd": 0.07794187059168826,
+      "t_multiplier": 4.3027,
+      "working_model_95pct_interval": [
+        -0.10874589085267923,
+        0.27849504356953003
+      ],
+      "positive_blocks": 3,
+      "negative_blocks": 0,
+      "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+    },
+    "5": {
+      "available_blocks": 3,
+      "planned_blocks": 3,
+      "mean": 0.07689137420157202,
+      "min": 0.003953846186790952,
+      "max": 0.14992440460435513,
+      "sample_sd": 0.07298532607115943,
+      "t_multiplier": 4.3027,
+      "working_model_95pct_interval": [
+        -0.10441621857462297,
+        0.258198966977767
+      ],
+      "positive_blocks": 3,
+      "negative_blocks": 0,
+      "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+    }
+  },
+  "additive_coefficients": {
+    "0": {
+      "available_blocks": 3,
+      "planned_blocks": 3,
+      "mean": 0.09337957560237119,
+      "min": 0.08972101971107656,
+      "max": 0.10011336230500362,
+      "sample_sd": 0.005838919382440449,
+      "t_multiplier": 4.3027,
+      "working_model_95pct_interval": [
+        0.07887473641576005,
+        0.10788441478898232
+      ],
+      "positive_blocks": 3,
+      "negative_blocks": 0,
+      "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+    },
+    "1": {
+      "available_blocks": 3,
+      "planned_blocks": 3,
+      "mean": 0.09385326793411745,
+      "min": 0.09257717810097729,
+      "max": 0.09511668764666412,
+      "sample_sd": 0.001269802182280971,
+      "t_multiplier": 4.3027,
+      "working_model_95pct_interval": [
+        0.09069886979185449,
+        0.09700766607638042
+      ],
+      "positive_blocks": 3,
+      "negative_blocks": 0,
+      "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+    },
+    "2": {
+      "available_blocks": 3,
+      "planned_blocks": 3,
+      "mean": 0.09161126876087422,
+      "min": 0.08937043123109129,
+      "max": 0.09528353797189813,
+      "sample_sd": 0.0032059250343058837,
+      "t_multiplier": 4.3027,
+      "working_model_95pct_interval": [
+        0.08364722198763348,
+        0.09957531553411496
+      ],
+      "positive_blocks": 3,
+      "negative_blocks": 0,
+      "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+    },
+    "3": {
+      "available_blocks": 3,
+      "planned_blocks": 3,
+      "mean": 0.09453081132170417,
+      "min": 0.09216931267413278,
+      "max": 0.09608638819022365,
+      "sample_sd": 0.002079183153344672,
+      "t_multiplier": 4.3027,
+      "working_model_95pct_interval": [
+        0.08936577729683456,
+        0.09969584534657377
+      ],
+      "positive_blocks": 3,
+      "negative_blocks": 0,
+      "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+    },
+    "4": {
+      "available_blocks": 3,
+      "planned_blocks": 3,
+      "mean": 0.0927036520962542,
+      "min": 0.09153054082942541,
+      "max": 0.09491009812974209,
+      "sample_sd": 0.0019121159592244271,
+      "t_multiplier": 4.3027,
+      "working_model_95pct_interval": [
+        0.08795364054820798,
+        0.09745366364430041
+      ],
+      "positive_blocks": 3,
+      "negative_blocks": 0,
+      "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+    },
+    "5": {
+      "available_blocks": 3,
+      "planned_blocks": 3,
+      "mean": 0.08903111182727663,
+      "min": 0.08883284784997983,
+      "max": 0.08937905147466048,
+      "sample_sd": 0.00030230233966274195,
+      "t_multiplier": 4.3027,
+      "working_model_95pct_interval": [
+        0.08828014293468821,
+        0.08978208071986506
+      ],
+      "positive_blocks": 3,
+      "negative_blocks": 0,
+      "working_model": "iid-normal paired block differences; Student-t on the available blocks; references not contemporaneous; coverage not validated"
+    }
+  },
+  "ranking_by_block": {
+    "772803": {
+      "advantage": [
+        3,
+        2,
+        0,
+        1,
+        4,
+        5
+      ],
+      "additive_reference": [
+        3,
+        2,
+        1,
+        4,
+        0,
+        5
+      ],
+      "mean_action_b09": [
+        2,
+        1,
+        4,
+        3,
+        0,
+        5
+      ],
+      "sampled_b10": [
+        2,
+        1,
+        3,
+        4,
+        0,
+        5
+      ],
+      "team_label_placebo": [
+        2,
+        3,
+        5,
+        1,
+        4,
+        0
+      ]
+    },
+    "772903": {
+      "advantage": [
+        1,
+        0,
+        2,
+        4,
+        5,
+        3
+      ],
+      "additive_reference": [
+        1,
+        3,
+        4,
+        0,
+        2,
+        5
+      ],
+      "mean_action_b09": [
+        1,
+        2,
+        4,
+        5,
+        0,
+        3
+      ],
+      "sampled_b10": [
+        1,
+        4,
+        2,
+        5,
+        3,
+        0
+      ],
+      "team_label_placebo": [
+        0,
+        5,
+        4,
+        3,
+        1,
+        2
+      ]
+    },
+    "773003": {
+      "advantage": [
+        4,
+        3,
+        1,
+        5,
+        2,
+        0
+      ],
+      "additive_reference": [
+        0,
+        3,
+        1,
+        4,
+        2,
+        5
+      ],
+      "mean_action_b09": [
+        0,
+        5,
+        4,
+        1,
+        3,
+        2
+      ],
+      "sampled_b10": [
+        5,
+        1,
+        4,
+        0,
+        2,
+        3
+      ],
+      "team_label_placebo": [
+        1,
+        0,
+        5,
+        3,
+        4,
+        2
+      ]
+    }
+  },
+  "best_label_by_block": {
+    "772803": {
+      "advantage": 3,
+      "additive_reference": 3,
+      "mean_action_b09": 2,
+      "coordinator_most_used": 1
+    },
+    "772903": {
+      "advantage": 1,
+      "additive_reference": 1,
+      "mean_action_b09": 1,
+      "coordinator_most_used": 0
+    },
+    "773003": {
+      "advantage": 4,
+      "additive_reference": 0,
+      "mean_action_b09": 0,
+      "coordinator_most_used": 4
+    }
+  },
+  "best_mean_action_label_rank_by_block": {
+    "772803": {
+      "by_advantage": 2,
+      "by_additive_reference": 2
+    },
+    "772903": {
+      "by_advantage": 1,
+      "by_additive_reference": 1
+    },
+    "773003": {
+      "by_advantage": 6,
+      "by_additive_reference": 1
+    }
+  },
+  "coordinator_most_used_label_rank_by_block": {
+    "772803": {
+      "label": 1,
+      "by_advantage": 4,
+      "by_additive_reference": 3
+    },
+    "772903": {
+      "label": 0,
+      "by_advantage": 2,
+      "by_additive_reference": 4
+    },
+    "773003": {
+      "label": 4,
+      "by_advantage": 1,
+      "by_additive_reference": 4
+    }
+  },
+  "blocks_where_b09s_best_label_is_first_by_advantage": [
+    772903
+  ],
+  "blocks_where_b09s_best_label_is_first_by_additive_reference": [
+    772903,
+    773003
+  ],
+  "label_law_by_block": {
+    "772803": {
+      "entropy_estimate": 1.7835389878228307,
+      "entropy_gap_to_ln6": 0.008220481405224245,
+      "shares": [
+        0.14645833333333333,
+        0.18255208333333334,
+        0.18875,
+        0.16770833333333332,
+        0.15588541666666667,
+        0.15864583333333335
+      ]
+    },
+    "772903": {
+      "entropy_estimate": 1.7790314756830534,
+      "entropy_gap_to_ln6": 0.012727993545001537,
+      "shares": [
+        0.1765625,
+        0.13765625,
+        0.16927083333333334,
+        0.17796875,
+        0.17994791666666668,
+        0.15859375
+      ]
+    },
+    "773003": {
+      "entropy_estimate": 1.784122411608696,
+      "entropy_gap_to_ln6": 0.007637057619358956,
+      "shares": [
+        0.16489583333333332,
+        0.17005208333333333,
+        0.14708333333333334,
+        0.16651041666666666,
+        0.18796875,
+        0.16348958333333333
+      ]
+    }
+  },
+  "predictions": {
+    "E2a_the_advantage_spread_exceeds_twice_its_clustered_standard_error": {
+      "statement": "the signal is present and the update does not use it: the between-label spread of the mean raw advantage exceeds twice its lane-clustered standard error",
+      "value_definition": "max minus min over the six labels of the mean raw advantage of the valid agent rows, against twice the lane-cluster bootstrap standard error of that spread",
+      "blocks_considered": [
+        772803,
+        772903,
+        773003
+      ],
+      "blocks_read": 3,
+      "blocks_holding": 3,
+      "per_block": {
+        "772803": {
+          "read": true,
+          "value": true,
+          "holds": true
+        },
+        "772903": {
+          "read": true,
+          "value": true,
+          "holds": true
+        },
+        "773003": {
+          "read": true,
+          "value": true,
+          "holds": true
+        }
+      }
+    },
+    "E2a_on_772903_label_1_is_first_and_label_0_is_in_the_bottom_half": {
+      "statement": "the signal is present: on block 772903 - where B09 measured label 1 as the best constant and the coordinator deploys label 0 - the advantage ranking puts label 1 first and label 0 in the bottom half",
+      "value_definition": "the labels ordered by their mean raw advantage, highest first, the lowest label breaking an exact tie; the bottom half of six is ranks 4 to 6",
+      "blocks_considered": [
+        772903
+      ],
+      "blocks_read": 1,
+      "blocks_holding": 0,
+      "per_block": {
+        "772903": {
+          "read": true,
+          "value": {
+            "ranking": [
+              1,
+              0,
+              2,
+              4,
+              5,
+              3
+            ],
+            "label_1_rank": 1,
+            "label_0_rank": 2
+          },
+          "holds": false
+        }
+      }
+    },
+    "E2b_the_advantage_spread_is_within_twice_its_clustered_standard_error": {
+      "statement": "the signal is absent at the decision level: the between-label spread of the mean raw advantage is within twice its lane-clustered standard error on all three blocks",
+      "value_definition": "the negation of the E2a spread statement on the same numbers; the two are exhaustive on a block that was read",
+      "blocks_considered": [
+        772803,
+        772903,
+        773003
+      ],
+      "blocks_read": 3,
+      "blocks_holding": 0,
+      "per_block": {
+        "772803": {
+          "read": true,
+          "value": false,
+          "holds": false
+        },
+        "772903": {
+          "read": true,
+          "value": false,
+          "holds": false
+        },
+        "773003": {
+          "read": true,
+          "value": false,
+          "holds": false
+        }
+      }
+    },
+    "REFERENCE_the_additive_coefficient_spread_exceeds_twice_its_clustered_standard_error": {
+      "statement": "perfect-credit reference, not the coordinator's signal: the between-label spread of the additive-model coefficients exceeds twice its lane-clustered standard error",
+      "value_definition": "max minus min over the six coefficients of the segment-level additive model, against twice the cluster-robust standard error of that difference",
+      "blocks_considered": [
+        772803,
+        772903,
+        773003
+      ],
+      "blocks_read": 3,
+      "blocks_holding": 2,
+      "per_block": {
+        "772803": {
+          "read": true,
+          "value": true,
+          "holds": true
+        },
+        "772903": {
+          "read": true,
+          "value": false,
+          "holds": false
+        },
+        "773003": {
+          "read": true,
+          "value": true,
+          "holds": true
+        }
+      }
+    },
+    "REFERENCE_on_772903_label_1_is_first_and_label_0_is_in_the_bottom_half": {
+      "statement": "perfect-credit reference, not the coordinator's signal: on block 772903 the additive-model coefficients put label 1 first and label 0 in the bottom half",
+      "value_definition": "the labels ordered by their additive-model coefficient, highest first, the lowest label breaking an exact tie",
+      "blocks_considered": [
+        772903
+      ],
+      "blocks_read": 1,
+      "blocks_holding": 1,
+      "per_block": {
+        "772903": {
+          "read": true,
+          "value": {
+            "ranking": [
+              1,
+              3,
+              4,
+              0,
+              2,
+              5
+            ],
+            "label_1_rank": 1,
+            "label_0_rank": 4
+          },
+          "holds": true
+        }
+      }
+    },
+    "counting_note": "the counts are the arithmetic of statements declared before the run, on the blocks that were read. E2a and E2b are read on the advantage table, which is the coordinator's own signal; the two REFERENCE rows repeat the same arithmetic on the perfect-credit regression and are not that signal. A count of three blocks is not an interval and not a weight of evidence, and `twice its standard error` is the notebook's declared reading rule, not a test"
+  },
+  "input_probes": [
+    "runs/flexible_skill_duration/b11_signal_772803_n01/summary.json",
+    "runs/flexible_skill_duration/b11_signal_772903_n01/summary.json",
+    "runs/flexible_skill_duration/b11_signal_773003_n01/summary.json"
+  ],
+  "input_b09_probes": [
+    "runs/flexible_skill_duration/b09_map_772803_n02/summary.json",
+    "runs/flexible_skill_duration/b09_map_772903_n02/summary.json",
+    "runs/flexible_skill_duration/b09_map_773003_n02/summary.json"
+  ],
+  "input_b10_probes": [
+    "runs/flexible_skill_duration/b10_sampled_772803_n02/summary.json",
+    "runs/flexible_skill_duration/b10_sampled_772903_n02/summary.json",
+    "runs/flexible_skill_duration/b10_sampled_773003_n02/summary.json"
+  ]
+}
