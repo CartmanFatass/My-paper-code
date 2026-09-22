@@ -2586,3 +2586,22 @@ the four-cell interaction remains unresolved. Continue the already declared seco
 **SET/clip/943201**, on the same immutable reviewed source and original 360k horizon. The
 remaining H6/clip/942201 and SET/raw/943201 follow in that order. No recipe, final endpoint,
 training seed, world panel, fit count or Pro question changes from this cell's scores.
+
+### B03 second cell admitted
+
+The predeclared **SET/clip/943201** cell was admitted at **2026-09-22 16:38:12 UTC**;
+its [runner-written manifest](../../../../runs/agent_count_generalization/s1_action_law_b03_set_clip_s943201/launch-manifest.json)
+binds the same immutable reviewed source and the new native operation handle. The actual-node
+preflight passed with 13,356,814,336 available physical/effective bytes. The first fit is
+terminal, so the direction still has only one scientific process running.
+
+The [initial training snapshot](../../../../runs/agent_count_generalization/s1_action_law_b03_set_clip_s943201/summary.json)
+reports `fit_started=true`, no failure, 8,000 collected/stored training steps, 16 episodes/resets,
+24,000 initial evaluation steps, and zero completed updates at the `rollout 1 collected`
+boundary (43.562 command seconds). Executed training actions remain in [-1,1]; the first
+over-range witness retains the original raw action and log-probability in storage while
+executing its clipped copy. Initial parameter/normalizer digest is
+`8f19743fe8fd5a09aa998bf90ab73bdbc3de599a8f58b791610fbb628d2f97c2`, to be required by the
+fourth SET/raw cell after validation. These are progress and execution facts, not a service
+comparison. Actual B03 cost is now **two started fits: one complete and one running**, with
+H6/clip and SET/raw still unlaunched. Observation is armed against this same accepted handle.
