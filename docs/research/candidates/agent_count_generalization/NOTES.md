@@ -2822,3 +2822,307 @@ as allowed by this predeclared raw-training cell; all four cells retain clipped 
 Stdout/stderr are empty. Actual B03 cost is **four started fits: three complete, one running**.
 The detached observer is armed against this same accepted fourth handle. Complete its original
 45 rollouts and full panels, then read B_SET and I; there is no queued fifth fit or Pro resend.
+
+
+## 2026-09-22 — B03 complete: training clipping fails selective SET recovery
+
+The fourth **SET/raw/943201** fit completed normally at **20:38:13 UTC**, from the
+unchanged reviewed source `89486d32ea569728f39d6e21b53f8a7c8854e74c`. Its accepted
+native operation is terminal (runner/supervisor absent, exit witness zero); no restart or
+additional fit followed the observation. Process completion was followed by reading all
+45 training rows, all 12 per-world panels, and independent loading of all four checkpoints.
+[Fourth summary](../../../../runs/agent_count_generalization/s1_action_law_b03_set_raw_s943201/summary.json),
+[training](../../../../runs/agent_count_generalization/s1_action_law_b03_set_raw_s943201/training.jsonl),
+[manifest](../../../../runs/agent_count_generalization/s1_action_law_b03_set_raw_s943201/launch-manifest.json).
+
+### Fourth-cell integrity, dynamics and cost
+
+All 25 native files were inventoried by SHA-256; the 21 small JSON/JSONL/log files were
+collected byte-for-byte. Four 20,968,771-byte checkpoints remain recoverable at
+`/home/wu/hmasd-worktrees/agent-count-action-law-20260922-b03/runs/agent_count_generalization/s1_action_law_b03_set_raw_s943201/`.
+Their hashes for rollouts 0/15/30/45 are respectively:
+`a76aff5a5c25038b54db86befb7a0be2b98ec28081b204cda7d3788cb53eaa9a`,
+`440b753af0340ef6f9f5e46cc04920361fbb5593be114e00707fc2db5c0531ec`,
+`1970e673cfe55c5e869a78073202ab840092543af353ea5a08857497141a8f00`,
+`bf430137307c5e967dd47b8b0463e0a6cf320a56ec574605755f8709eb00f4c3`.
+All 130 tensors in each checkpoint are finite. Source/configuration, tensor digests and
+checkpoint sigmas match the runner outputs; the final model digest is
+`f3f9c68f1c47f0dfb9a94033f4f5fe407522b5657ed37cd20f1a74da1224fd31`.
+Final summary SHA-256 is
+`a8085bb9ef3e32dc03c320a45ab9cb122e4d32f46d2f80b8f8332e7afe880671`.
+
+Initial digest `8f19743fe8fd5a09aa998bf90ab73bdbc3de599a8f58b791610fbb628d2f97c2`
+and every initial evaluation world exactly match SET/clip. Complete earlier checkpoint
+observations are unchanged prefixes of the final record. Actual totals are 360,000 collected
+and stored training team steps, 720 episodes/resets, 45 updates, 101,250 actor and 101,250
+critic optimizer calls, zero coordinator/discriminator optimizer calls, and 96,000 evaluation
+steps in 192 episodes. Actor/critic parameter maximum movement is 1.192140322/.942897309;
+the unused coordinator is unchanged. Evaluations use the actual N, native J components,
+clipped deterministic actions, frozen parameters/normalizers, restored training RNG and zero
+updates. Raw Gaussian samples and their original old log-probabilities remain in storage;
+only the declared execution copy differs between the within-package training-law pair.
+
+SET/raw final sigma is [4.334782124, 4.532979965, 4.305547714]. It executed
+4,043,576 out-of-range coordinates / 6,480,000; 1,985,257 / 2,160,000 UAV steps and
+359,981 / 360,000 team steps had at least one such coordinate. First/final rollout coordinate
+violation fractions are .317458/.829743. Boundary truncation and boundary visitation both
+count 1,901,081 coordinates in this raw cell; that equality is not assumed for clip cells.
+Raw/executed attempted L2 sums are both 252,091,531.454; realized L2 sum is 190,583,861.738,
+and raw-excess sum 7,378,799.746. Actual successor positions satisfy the raw training law.
+These are measured training exposures, not a decomposition of service causation.
+
+Fourth scientific-command wall is **3,729.519531 seconds (62.158659 minutes)**;
+admission-to-exit is 62.164405 minutes. Self user/system CPU is
+14,376.292522/33.546782 seconds and scientific-process RUSAGE_SELF peak RSS 1,187,324 KiB.
+Stdout/stderr are empty. Peak scratch is unmeasured; shared node contention precludes an
+algorithmic speed claim from between-fit wall differences.
+
+### Complete fixed-endpoint comparison
+
+Every cell trains N6, k10 for 360k steps and deploys clipped deterministic actions. Within
+H6 and within SET, initialization and exogenous design are paired; H6 seed 942201 and SET
+seed 943201 are distinct training instances. Final rollout 45 is the primary endpoint.
+Let B_a = J(a, clip-training) − J(a, raw-training), I = B_SET − B_H6, and
+G_law = J(H6, law) − J(SET, law). The original selective-recovery prediction requires
+**B_SET > 0 and I > 0**, with native-component coherence. All values below are native J.
+
+| Test N | H6/raw | H6/clip | SET/raw | SET/clip | B_H6 | B_SET | I | G_raw | G_clip |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 4 unseen | .524578632 | .552901526 | .524938703 | .488043635 | +.028322894 | −.036895067 | −.065217961 | −.000360070 | +.064857891 |
+| 6 trained | .448947725 | .525913235 | .438648592 | .430089598 | +.076965510 | −.008558995 | −.085524505 | +.010299132 | +.095823637 |
+| 8 unseen | .416596732 | .452143781 | .328916932 | .291076584 | +.035547049 | −.037840348 | −.073387397 | +.087679800 | +.161067197 |
+| Equal-weight unseen mean | .470587682 | .502522654 | .426927817 | .389560109 | +.031934971 | −.037367708 | **−.069302679** | +.043659865 | +.112962544 |
+
+The algebraic identity I = G_raw − G_clip holds. Selective SET recovery fails at each N
+and on the prespecified unseen aggregate. This is an adverse result for **execution clipping
+alone as a selective SET repair**, not a failed execution. The two clip-trained policies
+show an H6 advantage in this training block on all three N, retaining a bounded-training
+package signal. That is not a population ranking, a skill mechanism or certification that
+this SET recipe is a competent tuned bounded-action baseline.
+
+All four final panels are retained under their named runs. SET clip-minus-raw native
+component differences show why action validity is not sufficient:
+
+| N | coverage | connected quality | height penalty | native J |
+| --- | ---: | ---: | ---: | ---: |
+| 4 | −.041112500 | −.016999784 | +.003016382 | −.036895067 |
+| 6 | −.024890000 | +.008467717 | −.006323690 | −.008558995 |
+| 8 | −.051695000 | +.006319313 | +.003549642 | −.037840348 |
+
+SET loses coverage at every N. N6 quality and penalty improve but do not offset coverage;
+N8 quality improves while coverage and penalty worsen. H6's coverage gain instead outweighs
+its quality loss and increased height penalty, as recorded in the preceding entry. World-wise
+B_SET is negative in 15/8/12 of the 16 worlds at N4/6/8; B_H6 is negative in 3/0/4;
+I is negative in 14/14/13. Those worlds are nested evaluation observations and do not create
+additional independent training replicates or an inferential confidence interval.
+
+### Contrary stages and complete exposure
+
+| Rollout | Unseen H6/raw | H6/clip | SET/raw | SET/clip | B_H6 | B_SET | I |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 0 | .217545984 | .217545984 | .267101414 | .267101414 | .000000000 | .000000000 | .000000000 |
+| 15 | .462255258 | .499045736 | .519908594 | .429421502 | +.036790478 | −.090487092 | −.127277570 |
+| 30 | .507289437 | .475377070 | .478298549 | .477147403 | −.031912367 | −.001151145 | +.030761222 |
+| 45 primary | .470587682 | .502522654 | .426927817 | .389560109 | +.031934971 | −.037367708 | −.069302679 |
+
+At rollout 30 the positive unseen interaction occurs while SET itself is slightly worse:
+this is exactly why the predeclared own-benefit condition must accompany the interaction.
+At that stage I is −.006106211/+.075645967/+.067628655 at N4/6/8, including the contrary
+N6/8 result. No intermediate checkpoint replaces final 45. World seeds are
+1200000 + 1000*rollout + 100*N + i (i=0..15): within-stage contrasts are on common worlds,
+but different stages use fresh worlds. Curve movements mix changing policies and worlds;
+SET's lower final values do not by themselves identify temporal deterioration.
+
+Actual B03 total: **4 complete fits; 1,440,000 training/stored team steps; 2,880 training
+episodes/resets; 180 updates; 384,000 evaluation steps; 768 evaluation episodes; 16 checkpoints;
+48 panels; 180 training rows; no failed scientific fit.** Sum of scientific-command walls is
+**16,680.798596 seconds = 278.013310 minutes**. First admission to last exit is
+310.046860 minutes, including between-fit collection/admission gaps; these are different
+scopes. All four results and all adverse stages count as development exposure.
+
+### Working explanation and next decision
+
+Strengthened: in this one matched training block, H6 retains a native-service advantage
+under the common bounded training/deployment task; the B02 inference that direct over-range
+deployment is not necessary now has a training-side companion with narrow scope.
+Weakened: merely changing the executed training copy to clip(raw) selectively recovers SET.
+That intervention actually occurred, and its final native prediction failed. Untouched:
+training-population recurrence, isolated skill causation, and the broader question whether a
+competent ordinary bounded-action learner erases the package advantage. B03 does not identify
+which representation, reward, credit, optimization or exploration difference explains it.
+
+The complete prior Pro answer under
+[the action-law question](#pro-question-2026-09-22-action-law-and-next-count-study), especially
+its failure branches and bounded-comparator limits, already covers this outcome. Apply that
+advice to **end automatic extension of the clip-only rescue**. It does not authorize declaring
+all exploration/entropy explanations false or closing the N direction. No fifth B03 fit,
+endpoint extension, confirmation batch or broad entropy/initialization sweep is selected.
+
+A new concrete candidate explanation concerns the **unchanged positive raw Gaussian entropy
+bonus during clipped training**. H6/clip final sigma is [3.194160461, 3.256045818, 3.054547548]
+and SET/clip [5.029912949, 4.943644524, 4.557725906], each higher than its raw-trained pair,
+although the two package training-law effects have opposite signs. Thus large sigma alone
+neither identifies the cause nor predicts native service. The next possible test must change
+the entropy incentive while leaving reward-driven scale learning available, and predict both
+an intermediate exposure change and a native outcome. Freezing sigma at 1 would also remove
+reward gradients for scale and guarantee the scale observation by construction; removing
+only lambda_l is a more falsifiable first discriminator, subject to the focused question below.
+
+Current shared background at main `44b9817ca7082a790b8699ec802d6b3cb1fe31d4`, topic
+[数量迁移的任务和动作法则](https://github.com/CartmanFatass/My-paper-code/blob/44b9817ca7082a790b8699ec802d6b3cb1fe31d4/docs/research/RESEARCH.md),
+separates raw-task evidence, direct deployment and training exposure. This leads us to preserve
+clipped training and deployment in the proposed test, reuse only the two clip controls, and
+judge actual native components rather than a sigma ordering. Its partial B03 paragraph is
+superseded by this complete reading in the current publication; the adjacent load/capacity
+research is a separate direction and is not taken over. Owner has explicitly resumed this
+DM's research. No process remains running for this direction at this result boundary.
+
+## Pro question 2026-09-22 entropy-incentive-after-b03
+
+Conversation: reuse this direction's current Jev conversation through its private local
+operation state. No account-identifying URL is published.
+
+Question: **Given the complete adverse B03 interaction, is a two-new-fit removal of the
+low-level raw Gaussian entropy bonus a worthwhile next discriminator of SET's finite-training
+weakness, or does it leave the central ambiguity essentially unchanged?** Test the proposed
+explanation and counterfactual below. Recommend proceeding, a smaller material revision, or
+no investment on this explanation; do not supply a list of unrelated candidates. This is
+advice about a new exploration after a failed prediction, not confirmation or approval.
+
+Standing: B01 was six raw-training/raw-deployment fits (three per package); final unseen-N
+H6−SET native J mean was +.033472, with adverse intermediate observations. B02 evaluated
+six fixed final policies under raw versus clipped deployment (0 fits, 288k evaluation steps);
+all 288 paired trajectories diverged after the first action, but the clipped-deployment
+H6−SET gap remained +.029915/+.041645/+.054739 at N4/6/8. Historical training was unchanged.
+B03 has now actually trained four cells, one instance per package and training law, paired
+within package only, all deploying clipped deterministic means. Read the complete result
+entry immediately above, including per-N native components and adverse stages. Final unseen
+B_H6=+.031934971, B_SET=−.037367708 and I=−.069302679; selective SET recovery fails at every N.
+At rollout 30 unseen I=+.030761222 even though B_SET=−.001151145; final45 remains primary.
+This lowers the clip-only rescue expectation and preserves a single-block bounded H6 package
+signal. Prior Pro explicitly warned clip-only is not a fully competent bounded SET baseline
+and that its failure would not end all entropy/distribution explanations. That prior advice
+covers clip-only termination, but not the present new investment decision.
+
+Observation and conjecture: raw Gaussian sigma starts at 1 and remains learned. SET/clip
+ends around 4.56–5.03 and H6/clip around 3.05–3.26. Execution clipping constrains actual
+actions, while the entropy term continues rewarding latent dispersion. For each Gaussian
+coordinate H=log(sigma)+constant, so its entropy gradient with respect to log(sigma) is 1;
+this says nothing by itself about the net PPO gradient, realized exploration or native J.
+The hypothesis is that this incentive produces a materially harmful exploration/credit
+regime for this SET recipe at the fixed horizon, beyond its effect on H6. A competing account
+is representation/credit/optimization difficulty for which entropy removal either fails to
+reduce harmful exposure, reduces it without improving service, or suppresses useful exploration.
+The apparent SET stage decline is not independent causal evidence because stage worlds differ.
+No claim is made that sigma is the sole mediator.
+
+Proposed discriminator, **not yet launched or a frozen acceptance decision**:
+
+- Exactly two new fits: H6/clip/lambda_l=0 seed942201 and SET/clip/lambda_l=0 seed943201.
+  Reuse the completed B03 H6/clip and SET/clip lambda_l=.05 controls at their exact source
+  and artifact hashes. Same package initialization digests, random addressing, N6, k10,
+  16 training lanes, horizon500, 45rollouts=360k steps. Same eval stages0/15/30/45,
+  N4/6/8, 16worlds×500 per stage/N and world seeds1200000+1000*rollout+100*N+i.
+  Final45 is primary; unseen is equal-weight N4/N8, with N6 retention separately reported.
+- Change only the low-level raw entropy reward coefficient .05→0. Keep Gaussian logstd
+  trainable and initialized at0, original raw-action PPO scoring/storage, clip execution
+  during training/deployment, all actor/critic information and ten-step refresh, other
+  rewards/entropy terms, normalization, optimizer/update exposure and architecture unchanged.
+  Require unchanged code/config paths apart from this effective setting and observational
+  telemetry, initial tensor digests and initial per-world outputs matching the reused controls.
+  New implementation would not modify B03's frozen runner or its completed records.
+- Intermediate prediction: removal should reduce the late learned log-sigma/analytic raw
+  entropy growth and materially change recorded raw-coordinate saturation/executed-versus-
+  realized motion in the expected less-dispersive direction, especially SET. Record each
+  coordinate, rollout, saturation fraction and boundary truncation/visitation, including
+  full and final15-rollout exposure. Boundary visits do not have a universally predicted sign.
+  Native prediction: SET's final unseen J and coverage improve, with a larger J benefit
+  than H6, not merely an H6 loss; retain all native quality/height and N6 tradeoffs.
+- Define E_a = J(a,lambda0) − J(a,lambda.05) and Q=E_SET−E_H6. Proposed directional support
+  requires E_SET>0 and Q>0 on final unseen J with coherent native components and the
+  predicted intermediate change. Tiny signs alone do not justify a competence or mechanism
+  claim. If sigma/exposure changes without SET service recovery, lower this explanation;
+  if service improves without predicted exposure, retain only a recipe observation.
+  If both improve similarly, that favors a generic entropy effect, not selective rescue.
+  If the intermediate change fails, report failure to engage the proposed link, not a
+  universal claim that exploration cannot matter. Ask whether these branches are informative
+  enough and whether N6 retention needs a more concrete prospective criterion here.
+- These seeds/worlds and lambda0 were selected after reading B03: explicitly further
+  **development**, not independent replication or fresh held-out confirmation. Reusing
+  controls saves two fits but cannot supply more training units. No population CI from
+  world bootstrap; no best checkpoint, horizon extension, sweep, tanh change, sigma freeze
+  or bundled schedule. Advice does not start any fit. A future confirmation would need
+  its own actual claim and fresh independent seeds after comparator competence is addressed.
+
+Prospective cost: two new360k fits, 720k total training steps, 90updates, 24evaluation
+panels=192k evaluation steps; existing two controls add zero new training. No nested policy
+search. Dominant work is recurrent PPO and native evaluation; existing two clip fits took
+158.195 scientific-command minutes in aggregate under different shared-node load, a historical
+anchor rather than a forecast. Additional work: small isolated runner setting/telemetry,
+focused storage-to-update checks, independent engineering review for the scientific semantics,
+node admission, complete artifact reading and publication. No preliminary profiling fit.
+
+Strongest alternative to criticize: bounded H6 may genuinely outperform this SET package;
+entropy removal can under-explore or change optimization through global actor gradient
+clipping, and an n=1 counterfactual can still be seed-specific. A fixed-sigma1 test would
+remove reward adaptation as well as the incentive and force a variance change by construction.
+A fresh ≥3-seed-per-arm confirmation costs at least6 fits while freezing a possibly weak
+comparator. The choice is which observation is worth the next investment, not whether H6
+or SET deserves to win. Offer a smaller distinct test only if it changes this judgment more
+clearly; do not prescribe a tuning campaign simply because a rescue is possible.
+
+Context (paths inherit the full source_sha supplied in the actual send message unless another
+full revision is explicitly named):
+
+- Current governance: `docs/project/OPERATING_CONSTITUTION.md` §§1–5,7–8 at source_sha.
+  The owner explicitly said “你可以继续研究了 作为DM不该简单的停下 impress me！”;
+  our direction is active; Claude's separate FSD pause and G33 freeze do not resume.
+  Pro advises, DM decides, fits are cost rather than allowance; no new owner approval gate.
+- Current methods: `.agents/skills/hmasd-scientific-tools/SKILL.md`, “Update the working
+  explanation”, “Simple-model and literature bridges”, “Comparators and MARL information”,
+  “Statistics”, “Cost and exposure”, “Pro”; and
+  `.agents/skills/hmasd-research-engineering/SKILL.md`, “Checks and review”, for reuse identity
+  and entropy telemetry semantics. These are methods under the constitution.
+- Shared background: `docs/research/RESEARCH.md` at main
+  `44b9817ca7082a790b8699ec802d6b3cb1fe31d4`, the quantity-transfer/action-law paragraphs
+  and our row. Its three-complete/one-running B03 state is an explicitly older snapshot;
+  the complete source_sha notebook/results above supersede it, not a moving branch.
+- Evidence at source_sha: this complete B03 entry; prior question
+  `## Pro question 2026-09-22 action-law-and-next-count-study` and its complete Answer,
+  plus `## 2026-09-22 — Full Pro reading, B02 execution probe and B03 investment decision`.
+  Read `runs/agent_count_generalization/s1_action_law_b03_{h6_raw_s942201,h6_clip_s942201,set_raw_s943201,set_clip_s943201}/summary.json`,
+  their `training.jsonl` and `panel_45_n{4,6,8}.json`; braces enumerate actual paths.
+  Summaries include all stage/world results. Controls are exactly the two clip runs.
+- Frozen B03 contract/code: `experiments/candidates/agent_count_generalization/action_law_b03/runner.py`,
+  `experiments/candidates/agent_count_generalization/configuration.py`, `models.py`,
+  `scripts/run_agent_count_action_law_training_b03.py` at
+  `89486d32ea569728f39d6e21b53f8a7c8854e74c`. Configuration inherits
+  `configs/config_1.py` (use_entropy_targets=false, use_entropy_annealing=false) and
+  `hmasd/baselines.py`; both H6 and MAPPO retain lambda_l=.05. B03 asserts .05 at setup
+  and each update; no adaptive entropy target or annealing is used.
+- Exact explanatory implementation at that same frozen revision:
+  `hmasd/r_mappo_utils.py` DiagGaussian and FixedNormal; `hmasd/agent.py` low-level
+  entropy construction/update (around6520–6608), separate actor/critic optimizers and
+  global actor gradient clipping. **Telemetry caveat:** reported action_entropy is defined
+  as zero when lambda_l=0 (around6601), even with nonzero dispersion. A new discriminator
+  must independently compute raw Gaussian entropy from actual sigma; that zero log value
+  cannot serve as the intermediate result. No code or derivative identity is evidence of
+  a beneficial native effect. Cite only sources actually read; say what is unavailable.
+
+Constraints: no training, no code changes, no edits outside this question's currently empty
+`### Answer` on branch `codex/agent-count-generalization`, target
+`docs/research/candidates/agent_count_generalization/NOTES.md`. Read the pinned question
+at source_sha, fetch the latest target blob before editing and use its actual blob SHA.
+Preserve every other byte; stop on overlapping edits. On successful write report the actual
+commit. If GitHub writeback is unavailable, return the **complete answer in chat**, not a
+receipt/SHA/link. Account-identifying facts remain private.
+
+Return: distinguish what B03 strengthens, weakens and leaves unresolved; assess whether
+this specific two-fit prediction can change the working judgment, whether its reused controls
+and measurements suffice, and the strongest material reason against spending the fits.
+Give a source-grounded adoption/revision/no-investment recommendation and its outcome branches,
+with intermediate and native predictions and any omitted MARL coupling. Return
+**MATERIAL_DISSENT yes/no** for the proposed design with reasons. No mandatory new idea,
+extra consultation round, broad claim, experiment authorization or approval requirement.
+
+### Answer
