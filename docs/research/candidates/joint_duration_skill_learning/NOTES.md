@@ -838,3 +838,87 @@ unstarted. Hold the executing source checkout unchanged while this accepted proc
 The deterministic waiter observes its original operation reference; a checkpoint or missing
 observation does not authorize a restart. Full outputs, resource costs and scientific
 measurements remain to be collected and read before any comparison or subsequent arm launch.
+
+### B01 corrected fixed result accepted; factored continuation — 2026-09-21
+
+The corrected fixed instance exited 0 at 2026-09-22 05:44:24 UTC with a valid native exit
+witness and consistent process identities. All **12 files**, including all four binary
+checkpoints, were collected without changing the remote output and SHA-256 matched to the
+executing node. The checkpoints also match the hashes/bytes in the runner's
+[complete summary](../../../../runs/joint_duration_skill_learning/b01_fixed_r1_s2026092201/summary.json).
+The full 45-row training JSONL equals the embedded training rows; all recorded numeric
+measurements are finite. The DM accepts the declared fixed instance as a completed result.
+
+Exposure matches the plan: **360,000** training/stored team transitions, 720 episodes,
+45 updates; **64,000** evaluation transitions and 128 episodes across exactly the four
+declared panels, each using worlds 740000..740031 for 500 steps. All evaluation optimizers
+remain at zero; one cold training start and zero checkpoint loads. Optimizer calls:
+coordinator 675; low actor/critic 101,250 each; team/individual discriminator 675/2,700.
+Every parameter group moved: relative initialization displacement high .065122, low actor
+1.157766, low critic .499444, team discriminator .079253, individual discriminator .131905.
+All per-world scores satisfy native J = 6 * episode team return / 500.
+
+| Training team transitions | Mean native J | Coverage component | SINR-quality component | Native height penalty |
+| --- | --- | --- | --- | --- |
+| 0 | .21165105 | .31567500 | .08710144 | .03545188 |
+| 120,000 | .48310947 | .61143375 | .19353737 | .00295537 |
+| 240,000 | .50583558 | .64317250 | .20303362 | .00529526 |
+| 360,000 (declared primary) | **.49670730** | .65604500 | .18252755 | .01728247 |
+
+These are the same 32 evaluation worlds for one learned instance, not 32 independent
+training runs. Keep the declared final checkpoint: the 240k score is not substituted for
+it. S1's `energy_penalty` is .1 times normalized average height, not measured joules or
+physical battery consumption. From 240k to 360k, coverage rises while quality falls and
+this penalty grows; the complete native objective falls by .00912828. Neither coverage
+alone nor the best observed checkpoint replaces the primary endpoint.
+
+Fixed execution matches its intended clock: all 216,000 training member durations declared
+and executed at 10; 36,000 common events; 40,214 same-label renewals; 35,280 cap and 720
+terminal boundaries; zero nondegenerate joint duration events. Across all 45 updates the
+original-group replay maximum remains **0**, while merged relative factor-probability drift
+peaks at .000188928869, below the prospective .001 bound. This supports the repaired audit
+on this actual learning trajectory; it does not prove the exact lost original failure or
+general numerical equivalence. Stderr contains 45 inherited missing-raw-state bootstrap
+warnings. The direction override deliberately omits that raw-state path, requires all lanes
+terminal and all events closed, and computes terminal event returns itself; the inherited
+fallback bootstrap is not used by the override. No executable change follows from this log.
+
+Scientific-process wall time **4,340.447 s (72.341 min)**; user/system CPU
+3,938.399/434.102 s; process peak RSS 1,935,400 KiB (1.846 GiB), with reaped-child peak
+414,684 KiB reported separately. Continuous node/GPU occupancy was not measured; the
+admission and prelaunch resource observations are not reservations or peak occupancy.
+Including the original failed instance, actual result cost so far is **2 attempts**, with
+384,000 consumed training transitions and 80,000 evaluation transitions. Preserve both.
+
+Working update: evidence now strengthens that this complete fixed-clock HMASD recipe can
+learn native S1 service and provide the declared comparison instance, rather than only
+passing short implementation fixtures. It does not establish a tuned optimum or remaining
+achievable headroom. The variable-duration opportunity, extra exploration burden and any AR
+increment remain untouched; prior FSD adverse evidence is unchanged. The late fixed decline
+also leaves finite-learning variability relevant and reinforces using the full native endpoint.
+No new cross-direction scientific conclusion is forced from this single baseline trajectory.
+
+Next action is the already declared **factored** instance, seed **2026092202**, tag
+`b01_factored_s2026092202`, followed by the original AR instance. Retain source
+`472af353ed44d9da8529179c4f32b2ce030d7b56` and all bound settings except the declared arm/seed;
+no code, reward, exposure, evaluation, optimizer, horizon or checkpoint-selection change.
+Use fresh native admission on preferred WSL, with no warm start or replacement seed.
+This completes the original discriminating comparison, adds no new planned fit, and reuses
+the accepted Pro advice. Planned total remains **4 attempts including the technical failure**;
+actual starts remain 2 until the next arm is natively accepted.
+
+### B01 factored instance natively accepted — 2026-09-21
+
+The original factored arm was accepted at 2026-09-22 05:53:38 UTC. Its
+[native manifest](../../../../runs/joint_duration_skill_learning/b01_factored_s2026092202/launch-manifest.json)
+binds the unchanged published execution source and original operation reference. Native
+status subsequently found the runner and supervisor running with consistent identities.
+The [fresh actual-node preflight](../../../../runs/joint_duration_skill_learning/b01_factored_s2026092202/admission-preflight.json)
+measured 10,483,630,080 available host bytes against the 4 GiB floor, with published pause
+and lead checks passed. Both admission files were copied and SHA-256 matched to the node.
+
+Actual started result attempts are now **3 of the 4 planned attempts**: the retained
+technical failure, the completed fixed instance and this running factored instance. AR is
+unstarted. The deterministic waiter observes the accepted factored handle, preserving the
+live source checkout and the declared 360k endpoint. No cross-arm or duration-benefit
+conclusion is available until the remaining predeclared evidence is read.
