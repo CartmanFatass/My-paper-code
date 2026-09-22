@@ -1551,3 +1551,694 @@ the two maps isolate all training effects. Cite sources actually used and state 
 unread gaps. End with `MATERIAL_DISSENT: yes/no` and the substance if yes.
 
 ### Answer
+
+Saved from chat after verified `NOT_DELIVERED`: the adviser reported GitHub read access
+but no write tool. The complete collected answer follows unchanged; its text SHA-256 is
+`adb4e8a9f948c14344277635f27cba638750504e2264d63602a9aa0847c8101c`.
+
+GitHub 读取正常，但本轮可用的 GitHub 工具不包含文件写入操作，未执行写入，也没有产生新的 Answer 提交。我回读的最新目标仍是空的 ### Answer，没有修改旧 Answer、问题或其他内容。下面是本次问题的完整答复。
+
+Answer
+一、明确选择：修订后运行零 fit 面板；下一笔学习投入选择四格训练执行映射比较
+
+我建议保留这次零 fit 比较，并把随后唯一选中的学习投入具体绑定为：H6／SET × 原始执行／逐坐标裁剪执行，四个新 fits，所有策略统一在裁剪部署法下评价。 训练两种执行法都保留原始高斯、原始样本的 PPO 概率评分、原始高斯熵及其系数，暂不同时更换 tanh 分布、标准差初始化／限制或熵系数。
+
+理由不是“发现错误就必须重跑”，而是现在已有一个可直接检验的区别：相同学习配方在不同训练动作执行法下，是否产生不同的最终有界部署服务，以及这种变化是否对 SET 更有利。 冻结策略的零 fit 面板回答测试时的执行依赖，四格比较回答训练执行法的影响；前者不需要阳性才允许研究后者，也不是通向十二 fits 的必经阶梯。
+
+我不建议现在优先购买 count-coordinate clamp、原配方的新种子确认，或一套同时改变分布、熵与初始化的“有界修复包”。前两者不解决新发现的动作法前提，后一种可以是后续实用配方开发，但不是当前最清楚的训练执行法判别。
+
+最强异议是：不要把“包在未见 N 上有用”和“其优势部分来自动作法／有限优化”当成互斥解释。 一个包完全可能通过更有利的有限学习过程获得真实服务优势；真正需要区分的是，这个优势在哪一种训练与部署动作法下存在，是否在有界执行下仍值得保留，以及现有证据有没有识别其原因。
+
+二、新证据改变什么，没有改变什么
+保留实际执行法下的 B01 结果，而不是保留错误的接口解释
+
+B01 已报告的最终 H6−SET 原生 J 差为 N4 的 +.021721、N6 的 +.044000、N8 的 +.045222；未见数量等权汇总为 +.033472。六份结果保留了实际训练、优化器更新与固定终点评估，不能因为后来发现接口描述错误，就把它们改写成“没有学习”“技术失败”或零结果。它们的正确适用范围是：在 B01 实际采用的原始动作执行法及确定性评估规则下，这六个训练实例的完整包比较。
+
+这些结果显示优势出现在两个未训练数量，但没有证明优势专属于数量迁移。报告的 unseen-minus-N6 差为 −.010528；这不能否定未见 N 的用途，却不支持把现有优势专门归因于 count 泛化机制。背景中“完整包结果不同于表示／技能解释”的区分，仍应保留。
+
+加强的是动作接口不匹配的判断
+
+冻结代码确实声明了 [-1,1]^3，但实际 step 把输入直接乘以 max_speed，之后裁剪的是位置。数组适配器、S1 子类、当前方向的 collector，以及 HMASDAgent 的动作输出链没有在这里补上动作限幅。因此，“动作已经是 clipped normalized velocities”的旧前提必须撤回；我上一轮审阅也没有识别出这项问题。
+
+这不是“两臂都有，所以自动抵消”的问题。共同执行法可以与不同的策略、技能条件化、动作均值和探索分布产生不同后果；是否改变相对收益需要干预，而不能由共享代码推出。
+
+标准差证据使训练解释值得检验，但没有完成归因
+
+DM 的检查点读取记录表明，最终 H6 的各坐标标准差约为 2.65–2.90，SET 约为 3.69–4.66；对应的越界概率下界很高。这个二进制读取结果是 DM 的已发表证据，不是我独立读取检查点所得。六份训练日志末段也分别记录了高且继续增大的原始动作熵，但日志熵与最终检查点的解析熵不是同一个测量时刻，不应要求数值完全相同。
+
+这里还须保留一个重要限制：SET 的越界概率下界更大，不等于已经测得 SET 的实际越界率高于 H6。 实际概率还取决于均值；最终分布也不是整个训练过程的经验动作频率，更不等于使用确定性均值的测试违规率。
+
+最强的替代解释是：H6 的技能条件化、内在目标和高低层学习结构，改善了最终闭环动作均值所实现的位置／高度控制；SET 较大的标准差是不同学习过程的伴随结果，而非相对服务损失的主要可修复原因。这个解释的可失败预测是：即使训练中的超范围执行被取消，H6 的原生服务优势仍保留，SET 不出现选择性的服务恢复。它与动作法解释可以部分同时成立。
+
+三、零 fit 面板值得运行，但应明确它测量的总效应与“无效应”的不同含义
+保留原来的对象、世界和成本
+
+保留六个 rollout-45 检查点、N4／6／8、每 N 十六个新世界、500 步，以及预写地址：
+
+w
+n,i
+	​
+
+=982000+100n+i,i=0,…,15.
+
+每个固定策略在每个世界分别运行
+
+g
+R
+	​
+
+(u)=u,g
+C
+	​
+
+(u)=clip(u,−1,1).
+
+raw 一侧也必须在这批新世界重新评价，不能拿旧 B01 的最终面板分数与新 clipped 面板相减。所需成本仍是 0 fits、288,000 evaluation team steps、576 个完整 episodes；零 fit 不意味着没有推理、模拟、加载、审阅或节点成本。
+
+hmasd-pro-question-agent-count-… +1
+
+估计量应分成“各包怎么变”与“包间差距怎么变”
+
+令 
+J
+ˉ
+a,s,n
+m
+	​
+
+ 为包 a、旧训练实例 s、测试数量 n、部署映射 m 下十六个世界的平均原生 J。先报告
+
+d
+a,s,n
+	​
+
+=
+J
+ˉ
+a,s,n
+C
+	​
+
+−
+J
+ˉ
+a,s,n
+R
+	​
+
+,
+
+然后报告两种部署法下的 H6−SET 差：
+
+Δ
+n
+m
+	​
+
+=mean
+s
+	​
+
+J
+ˉ
+H6,s,n
+m
+	​
+
+−mean
+s
+	​
+
+J
+ˉ
+SET,s,n
+m
+	​
+
+.
+
+差距变化是
+
+K
+n
+	​
+
+=Δ
+n
+C
+	​
+
+−Δ
+n
+R
+	​
+
+=mean
+s
+	​
+
+d
+H6,s,n
+	​
+
+−mean
+s
+	​
+
+d
+SET,s,n
+	​
+
+.
+
+K
+n
+	​
+
+<0 只表示裁剪后 H6 相对优势缩小。 它可能来自 SET 改善、H6 受损，或两者同时变化。必须并列读取两臂绝对服务变化、coverage／quality／height penalty，而不是把“差距缩小”直接写成“SET 的问题被修好了”。
+
+原生 J 的单位继续保持：
+
+J=
+500
+n
+	​
+
+t
+∑
+	​
+
+r
+t
+	​
+
+=.7
+C
+ˉ
++.3
+Q
+ˉ
+	​
+
+−
+P
+ˉ
+,
+
+其中 P 已包含高度惩罚系数。现有 runner 的 evaluator 和结果面板已经按实际测试 N 做了这一换算，不应在新 probe 中退回旧的单位混淆。
+
+冻结参数，不冻结策略的闭环运行状态
+
+每个映射应从相同环境初值及完整重置的 GRU、技能、timer、held snapshot 开始，随后各自在自己的轨迹上正常更新运行状态。裁剪改变位置后，后续观测、技能选择与动作均值可能全部改变；这正是部署映射的完整闭环后果。
+
+因此，本面板不是“在同一轨迹上把记录动作裁剪一下”，也不是每一步都可称为同状态反事实。不得用 raw 轨迹的后续观测喂给 clipped 控制器，或者只修改位置却沿用另一条轨迹的隐状态。现有 strict_sync、独立 evaluator、冻结 normalizer 和 reset 路径是可复用基础。
+
+把三种不同的“零结果”分开
+
+第一种是路径恒等。 若整个面板上所有确定性原始动作都在盒内，且初值、运行状态及外生随机性一致，那么两种映射逐步相同。这支持“该面板没有激活直接越界执行通路”，但仍不涉及历史训练通路。
+
+第二种是动作不同、物理后果相同。 超范围动作可能被位置边界吸收，例如 raw 与 clip 最终都落到同一个高度下界。这说明有动作越界，但没有对应的状态变化；仅计动作违规次数会夸大其服务意义。
+
+第三种是轨迹不同、平均 J 接近零。 世界间或策略间可能有正负抵消，coverage 与质量也可能互相抵消。它不是路径恒等，也不是等价性证据，更不能仅凭“不显著”排除直接部署效应。现行统计方法明确区分未决与等价。
+
+所以，我建议把原文中“null 排除直接路径”的表述收窄为：平均效应未见改变，只削弱指定面板上的平均部署收益解释；只有更强的路径证据才能说明该路径未被激活。
+
+诊断保留原提案，再补充清楚的分母和首次分歧位置即可：分别记录逐坐标、逐 UAV、逐 team-step 的违规率；记录超界幅度；区分映射前位移、映射后尝试位移、实际位置变化与位置边界截断。不要因 N 增大使“全队至少一次违规”的机会自然增加，就把它解释为策略更加不稳定。上述统计只读取已经生成的动作，不另抽随机数改变 evaluator。
+
+统计单位仍是每臂三个旧训练实例；世界是其嵌套评价。映射间可以在同一策略、同一世界内配对，不能把十六个世界变成十六次独立训练，也不能把 H6 与 SET 的种子按列表位置配成三个训练对。
+
+四、最小有界训练合同：裁剪执行，保留原始潜变量的 PPO 评分
+这是一种有效合同，但必须存对对象
+
+令策略抽样的潜变量为
+
+u
+t
+	​
+
+∼p
+θ
+	​
+
+(⋅∣h
+t
+	​
+
+),a
+t
+	​
+
+=g
+C
+	​
+
+(u
+t
+	​
+
+).
+
+把固定、与参数无关的 g
+C
+	​
+
+ 并入环境转移，学习器仍可以把 u
+t
+	​
+
+ 作为自己的动作变量。PPO 的概率比应为
+
+ρ
+t
+	​
+
+(θ)=exp[logp
+θ
+	​
+
+(u
+t
+	​
+
+∣h
+t
+	​
+
+)−logp
+θ
+old
+	​
+
+	​
+
+(u
+t
+	​
+
+∣h
+t
+	​
+
+)].
+
+因此，建议的实现是：向环境传 clip(u.copy())，向 rollout storage 传原始 u 及其原始 old log-probability。 reward 和 successor 则必须来自实际经过裁剪执行后的环境。这与当前 runner“取动作→执行→储存动作与 step_data”的结构直接对应，最危险的错误是原地修改 actions，使 buffer 里的动作变成 clipped 值、但 old log-probability 仍属于原始样本。
+
+不能把 Normal.log_prob(clip(u)) 当成自动正确的替代。裁剪分布在 −1 和 1 有概率质量：
+
+P(a=−1)=P(u≤−1),P(a=1)=P(u≥1),
+
+盒内才保留连续密度。边界上的原始高斯密度既不是原样本的似然，也不是该边界质量。裁剪是多对一映射，也不能套用 tanh 的可逆变换 Jacobian。
+
+这里说明的是动作参数化与概率评分的一致性，不是宣称 PPO 的有限更新无偏、收敛或最优。利用裁剪结构进一步改进梯度估计已有 CAPG 工作，但本次没有必要同时引入新估计器。
+Proceedings of Machine Learning Research
+
+定点检查应覆盖：冻结旧参数时动作／old log-probability 回放一致；过界样本仍按原始值储存；执行边界只有一处；新统计不消耗策略 RNG；模型、normalizer 与评价状态隔离。沿用既有独立审阅方法即可，不增加新的科学审批。
+
+裁剪没有修复原始高斯熵激励
+
+当前记录的是
+
+H(u)=
+j=1
+∑
+3
+	​
+
+[logσ
+j
+	​
+
++
+2
+1
+	​
+
+log(2πe)].
+
+对每个 logσ
+j
+	​
+
+，其导数是 1。保留正的原始熵奖励，就保留了增大潜变量扩散的激励，即使大量执行动作已经压到盒边界。有界执行不等于有界潜变量，不等于减少 raw entropy，更不等于已经得到合格的有界 SET 配方。 冻结代码确实采用原始 Gaussian，当前系数为 .05，没有选用 tanh 路径。
+
+这也是我对四格结果范围的限制：clip-only 判别的是超范围执行及其反馈造成的训练差异，不是全部探索／熵／有限优化解释。若裁剪后标准差仍增长，并不意味着执行干预没有生效；若服务没有恢复，也不能据此否定所有更合适的有界分布。
+
+为什么本轮不同时换 tanh
+
+理想的 tanh 变换具有
+
+a=tanhu,logp
+a
+	​
+
+(a)=logp
+u
+	​
+
+(u)−
+j
+∑
+	​
+
+log(1−a
+j
+2
+	​
+
+).
+
+它在盒内也改变动作，而 clip 对盒内动作保持恒等；变换后熵又与原始 Normal 熵不同。现有实现还涉及反变换、数值夹紧和熵采样。因而换 tanh，再改变 logstd 初始化／限制及熵系数，得到的是一个新的学习配方包，不能声称只修复了执行限幅。源码中存在 tanh 实现，也不替代对饱和区域 forward／replay 一致性的实际检查。
+
+本轮先不购买这组混合改动，不代表它没有实用价值。它只是回答另一个问题：“哪种共同有界学习配方更好用？”
+
+五、下一笔学习投入：一个四 fit、单区组的训练映射判别
+具体绑定
+
+我选择如下比较，而不是默认十二 fits：
+
+包	训练执行法	建议训练 seed	统一部署法
+H6	原始 u	942201	clip(μ,−1,1)
+H6	clip(u,−1,1)	942201	clip(μ,−1,1)
+SET	原始 u	943201	clip(μ,−1,1)
+SET	clip(u,−1,1)	943201	clip(μ,−1,1)
+
+每 fit 保留 N6、k10、360k training team steps、B01 的实际表示与信息刷新、奖励单位、PPO／回放规则及各包原有目标；保留原始高斯初始化和 .05 原始熵系数，不在看见结果后按包分别调参。H6 的额外高层／判别器工作照实计入，不能因共同 360k steps 就称计算量完全匹配。
+
+hmasd-pro-question-agent-count-…
+
+同包两格应核对相同初始化参数摘要，而不是只相信 seed 字样。它们可以拥有前瞻设计的共同随机来源，但轨迹分叉后状态曝光当然不同；后者正是待测作用通路。H6 与 SET 仍不是因为种子接近就成为训练配对。
+
+保留 rollout 0／15／30／45 四个评价位置，最终 45 为主终点，不选最佳 checkpoint。新评价地址可在前瞻记录中固定为
+
+w
+r,n,i
+	​
+
+=1,200,000+1000r+100n+i,
+
+其中 r∈{0,15,30,45}、n∈{4,6,8}、i=0,…,15；四格共用各面板内地址，且与本研究旧训练、B01 面板及零 fit 面板分开。这是建议的前瞻绑定，不是已接受或已执行批次。
+
+四个面板用于查看干预效应如何随训练发展，不同面板使用不同世界，所以相邻均值变化同时含评价抽样波动；不能把每次回落都直接解释成优化退化。
+
+估计量与符号
+
+令 V
+a,L,n
+	​
+
+ 表示包 a 在训练法 L∈{R,C} 下获得的最终策略，统一使用 clipped deployment 的平均 J。先看每包训练法效应：
+
+B
+a,n
+	​
+
+=V
+a,C,n
+	​
+
+−V
+a,R,n
+	​
+
+.
+
+再看提案中的交互：
+
+I
+n
+	​
+
+=B
+SET,n
+	​
+
+−B
+H6,n
+	​
+
+.
+
+因此
+
+I
+n
+	​
+
+=
+原始训练后的包差
+(V
+H6,R,n
+	​
+
+−V
+SET,R,n
+	​
+
+)
+	​
+
+	​
+
+−
+裁剪训练后的包差
+(V
+H6,C,n
+	​
+
+−V
+SET,C,n
+	​
+
+)
+	​
+
+	​
+
+.
+
+I
+n
+	​
+
+>0 表示裁剪训练对 SET 相对更有利。 它的符号方向与前述冻结部署面板的 K
+n
+	​
+
+ 不同，报告时应避免混淆。
+
+保留 I
+4
+	​
+
+,I
+6
+	​
+
+,I
+8
+	​
+
+ 和未见数量等权汇总；另列所有四格的绝对 J 与分量。如果还报告 unseen interaction minus N6 interaction，它只是数量对干预效应的描述性调节，不是自动识别 count 机制。
+
+这仍是一个新训练区组。世界数、三个 N、四个 checkpoints 都不能补成总体交互的独立训练复现。尤其不能把新 I 除以旧 B01 的 +.033472，宣称“解释了旧优势的多少百分比”：训练实例与世界已经不同，而且这里并没有做机制中介识别。现行方法允许单种子探索，但不允许把它升级为总体效应或确认。
+
+为什么值得四 fits，而不是直接两 fits 开发新配方
+
+两次新 bounded fits 可以更便宜地观察“新配方能否学”，也可以与旧 raw 结果做明确标注的探索性比较；它们不是无效数据。但它们没有提供同一新设计下的两个 raw controls，且不能补出旧训练中未记录的动作曝光诊断。
+
+这里多付两个 raw fits，购买的是：同包初始化配对、共同的新训练／记录条件，以及对“选择性 SET 恢复”这一具体预测的直接判别。鉴于接口差异已经落实到实际执行链，而非仅有抽象怀疑，这笔投入有科学理由。反之，直接买十二 fits 是在还未观察这个判别是否有用之前，先购买训练变异精度，当前没有必要。
+
+成本保持为 4 fits、1,440,000 training team steps、384,000 evaluation team steps；加上零 fit 面板，总计新增 2,112,000 team steps，但只有四次新训练尝试。旧 B01 的 471.556 scientific-command minutes 是已经付出的成本，不是新任务 wall time 的精确预测。
+
+hmasd-pro-question-agent-count-…
+
+六、预写预测与 retain／revise／stop 的含义
+
+动作曝光解释应承担的预测不是“裁剪代码让动作合规”——那只是合同正确性，而是：消除训练时的超范围执行后，SET 的完整有界部署 J 改善，且改善超过 H6，即 B
+SET
+	​
+
+>0 与 I>0 同时出现；coverage／quality／height 分量能说明改善发生在哪里。中间可看有害位置边界驻留、过大位移及后期服务回落是否减轻，但不预言 raw sigma 必须下降，也不把较少撞边界本身当收益。
+
+替代解释的预测是：训练映射确实改变了运动曝光，但 SET 没有选择性服务恢复；H6 在共同有界训练／部署下仍保留更有利的闭环服务。它支持继续保留具体包的用途，不识别技能、AR 或内在奖励是哪一个起作用。
+
+建议按下表解释，而不是从任何单一统计量自动转向确认：
+
+观察	支持的判断与下一步含义
+零 fit 中裁剪改变完整 J 或包差	旧策略的直接部署用途依赖执行法；保存两种读数。它不回答训练原因，不能替代四格学习判别。
+零 fit 路径相同，或只见很小平均效应	前者限定该面板直接路径未激活；后者只是平均证据较弱。训练曝光解释仍未被检验。
+四格中 SET 的 J 提高且 I>0，伴随相符的运动／服务变化	支持训练执行法对相对学习差距有贡献。保留有益的有界执行选择；不宣称已解释全部 B01 优势或隔离熵机制。
+两包都改善，而交互没有清楚方向	支持有界训练具有共同服务价值，不支持它特别解释 H6−SET 差距。
+I>0 主要因为 H6 变差，SET 没改善	不支持“SET 曝光问题获救”的原预测。它是包对训练法的不同脆弱性，不能包装成成功恢复。
+运动合同正确改变，但完整服务预测不成立	降低对“仅消除超范围执行即可恢复 SET”的期待，结束这项 clip-only 解释的自动追加；不能据此否定所有有界分布或整个 N 方向。
+共同有界训练／部署下 H6 仍有优势	保留该新区组的探索性包结果；是否购买独立重复，由这个优势、成本和下一条真正未决的问题决定，不自动扩成十二 fits。
+
+任何储存／likelihood／checkpoint／reset 错误只限制其依赖结果，按技术问题处理，不记成科学负效应。反过来，仅仅通过合规检查，也不构成正学习结果。这个区分正是既有研究方法要求的“执行事实—观察—解释”分层，而不是新的门槛。
+
+七、最终可以支持的有界动作主张，以及本次阅读的缺口
+
+仅完成零 fit 面板时，最多支持：“这些在原始执行法下训练的既有策略，经过预写的逐坐标裁剪部署后，在指定 N4／6／8 世界上表现如何。”若保留了收益，那是已有策略的有界部署用途；不是“已经在有界任务上训练出了同样的泛化优势”。
+
+完成上述四格时，可以得到：“在这一个前瞻训练区组、指定有限曝光及共同 clipped deployment 下，改变训练执行映射产生了这些原生服务差异。”其中 bounded-train／bounded-deploy 两格可以提供真正有界训练与部署的学习实例，但每格一个训练实例不足以声称总体交互、稳定排序或确认性数量迁移优势。clip-only 也不会自动使 SET 成为充分验证过的强有界基线。
+
+两种研究都保持 k 固定、回合内 roster 固定，不回答 churn、cross-play 或异质能力。逐坐标限制意味着各速度坐标受限，不意味着速度向量的范数不超过 max_speed；更不构成物理 UAV 部署安全证明。
+
+hmasd-pro-question-agent-count-…
+
+本次依据是 b541bbd477aa7325d364fcb1ea557f4207be1a0e 的问题、旧完整 Answer、B01 完整比较、修正记录、治理与相关方法；执行判断依据 5a250d97e3ea12d33067e9c00c250cefa12b5e25；共享背景依据指定的 3362e0c9b5d5d49472ad14a3747059e47fa66a31，没有用作者分支的旧索引替代。直接结果阅读包括六份 summary 的相关配置／计数／摘要／检查点记录、十八个最终服务面板，以及六份训练日志的相关末段。
+
+仍未独立读取的，是节点上的二进制检查点；单步技术 probe 与标准差表依赖 DM 已发布的检查记录。没有获得 B01 实际动作历史，也没有运行新的 raw／clipped 面板或任何训练。 因而历史实际违规率、确定性测试违规率、位置边界访问变化和裁剪后的服务结果，均保持未知，不由 sigma、熵或代码形状补全。附件本身也明确限定了这些证据的性质。
+
+hmasd-pro-question-agent-count-… +1
+
+MATERIAL_DISSENT: yes。 实质异议有两点：冻结面板的平均零效应不能升级成“直接路径已被排除”；后续付费格子的“bounded training”必须绑定成明确的动作映射／潜变量评分／熵合同，不能把 tanh、初始化和熵调节混合后仍称为单一执行法判别。我支持新发现引发的优先级调整，也支持继续这一 N 方向；建议购买的是上述有范围的判别，不是为错误前提补偿性重跑、自动确认或新架构搜索。
+
+## 2026-09-22 — Full Pro reading, B02 execution probe and B03 investment decision
+
+The new operation `hmasd:b000005c5767384044ebd9f8e4ab2154d71b936a0043e543edb8a0e8a6828b0e`
+completed with a 9,590-character full chat answer. `deliver` fetched the named branch and
+returned `NOT_DELIVERED`, with no answer commit. The branch/target still equalled the pinned
+question bytes and the target Answer was empty. The full answer is saved above unchanged,
+not reconstructed from its receipt. The observer hashes answer text before appending one
+newline to its file: text hash `adb4e8a9f948c14344277635f27cba638750504e2264d63602a9aa0847c8101c`,
+file hash `3f5ad152d7dd8b2f3668a85b4e580b2968d9765bd8cb7ea4514dd7acce0465bb`.
+The driver closes its own observation tab on exit. There is no unresolved Send or answer
+write, and no reason to resend this question.
+
+### Advice adopted and revised explanation
+
+The DM read the entire answer, including its two material objections, alternative predictions,
+PPO action-map semantics, cost and unread-source limits. Adopt the action-law priority and
+keep B01 as actual-as-implemented package evidence. Pro reports reading the six summaries,
+eighteen final panels, relevant training tails and frozen execution path, but not binary
+checkpoints; the checkpoint/technical-probe facts remain the DM's separately checked evidence.
+No recommendation depends on pretending the Pro reader independently verified those binaries.
+The optional CAPG literature reference is not an implemented ingredient or evidence for a
+measured mechanism here. The fixed latent-action likelihood argument can be checked directly
+against the proposed code and does not establish PPO convergence.
+
+**Modify the earlier null reading:** a small or zero average `J_clip-J_raw` does not exclude
+a direct deployment effect. Distinguish (i) no changed action/path, (ii) changed action but the
+same state successor because position clipping absorbs it, and (iii) diverging trajectories
+with small/cancelling mean service change. Only (i) supports nonactivation on this panel;
+neither an insignificant contrast nor a small estimate establishes equivalence. Report the
+per-policy/world outcomes and all components. Also, higher lower bounds for SET's raw Normal
+violation probability do not order the actual probabilities when means differ.
+
+**Adopt the stronger alternative:** H6's conditional mean control may improve finite learning
+through skills, objectives, representation or optimization while dispersion is a concomitant
+rather than the main adverse cause. Useful package performance and an action-law contribution
+are compatible. The question is which training/deployment law supports the use and which
+intervention changes the observed learning gap, not a binary choice between "real benefit"
+and "optimization".
+
+The [current published background at 46a1f3097](https://github.com/CartmanFatass/My-paper-code/blob/46a1f3097eb7cf33202bd6cfa9d80374047fa560/docs/research/RESEARCH.md)
+retains topics 3/4 and now the B01 action-law qualification. This changes the next comparison
+concretely: common actual execution constraints, explicit training versus deployment effects,
+and old training instances versus genuinely new fits. The owner continuation remains active;
+no new owner approval, Root contact, or Portfolio action is needed.
+
+### B02 selected zero-fit execution probe
+
+Run exactly the proposed six frozen rollout-45 policies, each under raw and coordinatewise
+clipped deterministic execution, at N4/6/8, 16 worlds per N, 500 steps. World seeds are
+`982000 + 100*N + i`, i=0..15. Both maps use these fresh worlds; no subtraction of the old
+B01 world panel. Each map starts a newly built/restored runtime with all GRU, skill, timer,
+held-snapshot and environment state reset, then advances on its own closed-loop trajectory.
+Weights and normalizers stay frozen; runtime hidden/skill state evolves normally. No extra
+random draws for diagnostics. Equal world/N/map initialization must be checked from the actual
+states and model digests. Use CPU FP32, four Torch threads, one OMP/MKL/OpenBLAS/NumExpr
+thread as in B01. Prefer configured wsl_4070. Output tag: `s1_action_law_b02_probe`.
+
+Bind each external checkpoint by the rollout-45 SHA-256/size in its tracked B01 summary,
+its payload launch SHA `5a250d97e3ea12d33067e9c00c250cefa12b5e25`, arm/seed/rollout and strict
+module/normalizer restoration. The retained node checkpoint root is
+`/home/wu/hmasd-worktrees/agent-count-generalization-20260921-b01/runs/agent_count_generalization`.
+The six source tags are exactly H6 914201/914307/914413 and SET 915201/915307/915413, as in
+B01. No best-checkpoint choice, replacement policy, skipped failed cell, or post-score world
+extension. Inputs are read-only. Missing/mismatched input or scientific-contract failure stops
+this attempt; retain completed narrower observations and report the failure separately.
+
+Endpoints are per-policy/world native J and coverage/quality/height penalty under both maps,
+with `J=N*scalar_return/500`. Report each policy/N `d=J_clip-J_raw`; for each N report H6−SET
+under each map and `K=gap_clip-gap_raw`, plus equal-weight N4/N8 summaries. H6 and SET are
+not paired by list position. `K<0` can come from SET improvement or H6 loss: always show
+absolute service changes. There are three old training units per arm, no new training unit,
+no population ranking/confirmation or automatic equivalence conclusion.
+
+Diagnostics, with denominators retained per lane: raw coordinate/UAV/team-step violations;
+excess magnitude; pre-map and post-map attempted displacement; realized displacement;
+position-boundary truncation and occupancy; first raw-versus-clip action/position/state
+trajectory divergence and maximum discrepancies. Preserve enough paired per-step arrays or
+fingerprints to distinguish inactive mapping, absorbed physical differences and cancellation.
+The native environment has float32 position storage; compare predictions with dtype/scale-
+appropriate tolerance and separately report exact identity. Do not call high boundary occupancy
+harmful without service evidence. Validate movement telemetry against actual native before/after
+positions and retain all worlds, including adverse ones.
+
+Cost is fixed at **0 fits, 288,000 evaluation team steps, 576 episodes**, zero optimizer
+calls and parameter/normalizer change, plus separately counted technical checks and actual
+implementation/review/loading/node wall/RSS. Zero fits is not zero cost. B02 changes no old
+training distribution and cannot settle its exposure mechanism, regardless of B02's sign.
+
+### B03 selected next learning investment, not yet launched
+
+The DM judges one new four-fit block worthwhile because it directly tests selective SET
+service recovery after removing out-of-range training execution. B02 is not a required
+positive screen; its result is not a reason to tune the B03 recipe. Select H6 × raw/clip
+training execution with shared within-package seed 942201 and SET × raw/clip with seed
+943201. Each is N6, k10, 360k training team steps; all four use clipped deterministic deployment
+at N4/6/8. Keep B01 raw Gaussian initialization, original latent sample log-probability,
+raw Gaussian entropy coefficient .05, other per-package objectives, information/cadence,
+replay/reset and optimizer exposure. The env receives a separate clipped copy; storage and
+old log-probability retain the original raw draw. Reward/successor come from the actual
+executed law. No tanh, logstd limits, entropy tuning, renamed comparator or additional fits.
+
+Keep evaluation after rollouts 0/15/30/45, final 45 primary; common worlds
+`1200000 + 1000*rollout + 100*N + i`, i=0..15, 500 steps, across all four cells. Verify the
+same initialization digest within each package. Preserve full learning/variance/action-law
+telemetry and actual costs; paired seeds do not preserve state exposure after divergence.
+The scientific training cost is **4 fits, 1,440,000 training team steps and 384,000 evaluation
+team steps**, plus engineering and measured runtime. The sequence will be fixed before
+admission; no fit or native process has yet been accepted for B03.
+
+Read each package's training-map effect `B_a=J_a,clip_train-J_a,raw_train` under common clipped
+deployment, then `I=B_SET-B_H6`, each N and unseen equal-weight mean. A selective recovery
+requires both `B_SET>0` and `I>0`, with native components explaining the improvement;
+`I>0` caused by H6 loss alone fails that prediction. Raw sigma need not shrink. Motion changes
+without predicted service recovery weaken the clip-only exposure explanation and end its
+automatic extension. Preserved H6 advantage under bounded training/deployment remains a
+one-block exploratory package result, not skill attribution or population interaction. No
+percentage of old B01's advantage is identified; no automatic twelve-fit expansion or
+confirmation follows. B03 implementation/admission will be recorded as its own execution
+entry after the B02 evaluator is accepted; these declared scientific choices already fix
+the learning question and prevent outcome-guided recipe changes.
+
+### L0 — B02 evaluator implementation
+
+Deliver one admission-guarded frozen-checkpoint evaluation command and focused tests, without
+editing the old runner, learner, native environment or B01 records. Owned new paths:
+`experiments/candidates/agent_count_generalization/action_law_b02/` (probe and small helpers),
+`scripts/run_agent_count_action_law_probe_b02.py` (entry), and matching tests under
+`tests/experiments/candidates/agent_count_generalization/action_law_b02/`. Reuse existing
+configuration, model construction, digest/reward/serialization helpers where semantics match.
+The Implementer receives only this bounded code task; DM owns science, NOTES, admission and
+publication. No helper launches result-bearing runs, starts training or edits other paths.
+
+The CLI accepts out, launch SHA, fixed panel seed base 982000 and checkpoint root, calls
+`require_admission` on the actual entry before scientific effects and checks the admitted SHA.
+Runner-written summary/panels/traces preserve every cell and failure, input identity, actual
+counts, zero-learning evidence, movement diagnostics, native outcomes and process resources.
+No custom scheduler or per-run shell wrapper. A short fixture may override horizon/width/lanes
+only through an internal test interface; the real entry binds the full scientific design.
+
+Checks: action mapping leaves raw arrays/log-probability data intact; within-range identity;
+known interior over-range and wall-absorbed movement; checkpoint byte/module/normalizer
+mismatch rejection; exact model restoration and frozen evaluation across actual N4/6/8 with
+both H6/SET in a small native fixture; identical starting states, independent runtime reset,
+no diagnostic RNG consumption, proper rate denominators and counts; same-state and divergent
+trajectory reporting; native J/component identity; admission before output/environment/load;
+failed-cell preservation/no silent completion. Tests own scratch under pytest lifecycle. A
+read-only independent Reviewer checks the high-risk evaluator/checkpoint/RNG/result meaning
+before scientific launch. Stop on a material mismatch; technical checks are not scientific
+fits and cannot select a checkpoint or modify the fixed panel.
