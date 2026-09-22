@@ -152,3 +152,33 @@ admission native smoke checks learning counts/output, not performance screening;
 regression. Independent Reviewer checks executable scientific semantics before result launch.
 No helper edits this notebook, chooses arms/seeds or launches result work. Stop implementation
 for a genuine incompatible native contract rather than silently simplify full learning.
+
+### Implementation acceptance and launch preparation
+
+The direct DM inspected the actual encoder and integration diff, preserving the frozen FSD
+runner files. Internal Implementer supplied bounded new candidate/entry/tests and the exact
+shared mask port. Independent Reviewer found no material scientific or execution defect in
+the final paths. Its telemetry observation was applied: fit-body wall/CPU includes final
+checkpoint serialization but excludes imports, admission and final publication; inherited
+RSS is sampled before checkpoint serialization. Full invocation wall will be read from the
+native supervisor witness, not inferred from these narrower timers.
+
+Verified: the active encoder precedes FiLM/GRU and is installed before theta0/optimizer use;
+new Adam owns its parameters with original options; common non-encoder initialization and
+CPU RNG are preserved; separate evaluator installs the same arm, synchronizes state and
+normalizers, preserves training RNG and performs no updates. Checkpoint reconstruction
+installs the recorded arm before loading. Native J equals the global total-reward component;
+connected-user counts derive from native coverage. Explicit ordinary HMASD switches leave
+high/low/discovery learning active. The common configuration now records all 45 rollouts.
+
+Checks: exact cached/uncached storage-to-actor/critic mask regression 2 passed (DM, 1.36 s);
+encoder/optimizer/evaluator integration 4 passed (2.39 s); two mocked-admission short native
+smokes 2 passed (13.25 s), including actual five-group updates, evaluation and checkpoint
+reload. These short engineering checks were not used for performance selection; their
+scratch was owned and cleaned by pytest. Entry's actual launcher AST guard passed; compile
+and diff whitespace checks passed. No result fit or Pro Send has yet been accepted.
+
+B01 will execute sequentially, ORIGINAL then DENSE, under the same published inputs.
+The 10,800-second ordinary per-fit wall plan is a scheduling estimate, not a cutoff or
+scientific endpoint; dense cost is still unmeasured. Accepted workers keep their original
+handles, with deterministic observation and checkpoint rearming rather than resubmission.
