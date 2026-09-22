@@ -2395,3 +2395,47 @@ separate zero-step pre-training failure. Four later fixed cells remain unstarted
 technical matched-start and active-gradient judgments are strengthened; no endpoint
 service advantage is established. Continue this accepted S operation at the fixed horizon
 and rearm its observation without a restart, new fit, recipe change or new Pro question.
+
+## 2026-09-22 — B03 S second training checkpoint
+
+The 20:59 UTC native observation retains the same matching S processes running, consistent
+records and no exit witness. Refreshed published control still permits this direction under
+the same lead; no newer owner pause applies. The copied summary SHA256 is
+`8fff77d889e60d5863fb9d1dbdf3b1aa3ce9b1e454ed572bbfd089f65ddfe2d7`.
+It records 102,800 training transitions including part of collection 18, 17 completed
+updates, 68 training episodes, and two development panels / 16 episodes / 24,000 evaluation
+transitions. Physical facts remain zero with the same two D episodes / 3,000 transitions
+reused; initial-fact diagnostic replay totals 47,712 valid agent rows. All 36,127 floating
+values are finite, prior completed rows and input bindings are unchanged, and progress is
+an exact append-only extension. Failure is null and stderr is empty.
+
+The prescribed rollout-10 development panel has mean raw J **99.099574**, QoS **.295123097**,
+return cost **.110023676**, and mean episode-minimum fleet battery **.365480650**. All eight
+worlds run 1,500 steps and truncate, with zero new optimizer updates during evaluation.
+Recomputing every aggregate from the world rows reproduces the saved values. Against D at
+the same rollout and on the same world seeds, S-minus-D is **+517.974430 J**, **+.099162156
+QoS**, **-.123314326 return cost**, and +.005902641 episode-minimum battery. Seven world J
+contrasts are positive; world 920006 is adverse at -682.344841. This is favorable intermediate
+development evidence for the S package in this training block, with retained contrary-world
+evidence. It is not the prespecified final-world contrast, an independent-seed replication,
+or a reason to select an early checkpoint.
+
+On the same initial facts, the runner reports service MSE **.021099299**, versus D
+.019353231 (S/D **1.090221**) and the fixed training-mean reference .010116768. Observation
+MSE is .015224734 versus D .014923470, fixed mean .008585614 and persistence .000001035146.
+The two-episode weighting was independently checked. Thus this favorable early control
+contrast is not accompanied by lower initial-fact predictive error; it weakens a simple
+explanation that requires improved error on that panel. It does not identify causation or
+address trained G and the common endpoint mixture. Fixed-row feature variance/effective
+rank are 12.007839 / 7.836655, with no zero-variance flag.
+
+All new completed auxiliary passes retain 30 representation steps with nonzero base/GRU
+movement and both head updates; every native learner moves. Training collections remain
+heterogeneous, including all-zero QoS in collections 10, 13 and 14. The new training and
+development records still have zero charging, cutoff, depletion and charger-input exposure.
+The last completed-update resource row records cumulative wall 3,231.93 s and peak RSS
+3,057,372 KiB, not final fit cost. Cost remains two started B03 fits (D complete, S running),
+four later cells unstarted and the separate zero-step D failure. Preserve both the favorable
+development contrast and adverse prediction diagnostics, continue the fixed S horizon and
+rearm the same operation. No additional fit, recipe change, early selection or Pro Send is
+selected from this intermediate reading.
