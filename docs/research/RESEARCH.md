@@ -176,7 +176,6 @@ B/UCOPE 的局部预测、一步优势或真实后缀信用没有自动转成稳
 | Direction | Question | State | Lead runtime | Standing and next step |
 | --- | --- | --- | --- | --- |
 | `joint_duration_skill_learning` | 在完整高低层共同学习中，新增时长选择及普通联合时长参数化能否改善有限资源下的原生服务？ | exploring | Codex DM (independent session) | 直接 DM task `01a0c348-428c-7f01-bd8b-121d69543032`，host `local`；checkout `/home/fires/.codex/worktrees/joint-duration-learning/hmasd-wsl`，branch `codex/joint-duration-learning-20260921`。B01 固定／分解均完成 360k 步，预定终点 J=.49670730／.46107574；分解高层更新 5 倍、实测耗时 1.76 倍，各一训练实例。原计划 AR 已在 WSL 4070 原生运行，三臂判断待完整结果。已启动全部 4 次计划尝试（含原 24k 步技术失败），无新增 fit。[分解结果与比较边界](candidates/joint_duration_skill_learning/NOTES.md#b01-factored-result-accepted-original-ar-comparison-remains--2026-09-22)；[AR 启动证据](../../runs/joint_duration_skill_learning/b01_ar_s2026092203/launch-manifest.json)。 |
-| `local_observation_encoding` | 同一合法局部观测下，普通稠密槽位/关系编码能否改善完整 HMASD 的有限学习？ | exploring | Codex DM (independent session) | 直接 DM task `01a0c6ef-7c4b-7f02-b96d-ab115d467af8`，host `local`；checkout `/home/fires/.codex/worktrees/d683/hmasd-wsl`，branch `codex/local-observation-encoding`。B01 两个 fits 均完整完成（输入 `efe7d61e8`，每臂 360k 团队步）：ORIGINAL/DENSE J45 为 0.458426/0.202254，平均连接 31.939/13.416；DENSE fit wall 约 1.95 倍。三个预写面板均不利；每臂仅一个训练 seed，不作总体排名。暂拟结束此配方投入，聚焦 Pro 咨询后定案；无新 fit 计划。[完整结果与判断](candidates/local_observation_encoding/NOTES.md#2026-09-22--b01-complete-adverse-package-observation)；[已提交咨询](https://github.com/CartmanFatass/My-paper-code/blob/03eea08a6b3f3fa714b1cdc90d9339f86ed56e94/docs/research/candidates/local_observation_encoding/NOTES.md#pro-question-2026-09-22-dense-recipe-stop)。 |
 | `agent_count_generalization` | 固定 k、回合内固定 roster 时，HMASD 对未见团队数量 N 的服务能力和泛化代价是什么？ | exploring | Codex DM (independent session) | 直接 DM：task `01a0c6ef-cdd4-7113-b2d9-20487e35171b`，host `local`；checkout `/home/fires/.codex/worktrees/7fef/hmasd-wsl`，branch `codex/agent-count-generalization`。S1 N=6→4/6/8；H6 对普通共享 SET，预写 6 个探索 fits、每 fit 360k 团队步，输入 `5a250d97e`。已有 3 项完整核验（H6×2、SET×1）：第二 H6 最终 N4/N6/N8 J=0.551539/0.505424/0.427711，command wall 94.68 min；N6/N8 比首个 H6 低 0.037817/0.038186。两个 H6 的未见 N 均值为 0.511905/0.489625，首 SET 为 0.470057；SET 训练差异尚未测得，比较未完成，无稳定排名。第二 SET（915307）已在 `wsl_4070` 准入运行，同句柄观察。当前 4 项启动：3 完成、1 运行；其余 2 项未启动。[逐 fit 结果与后续句柄](https://github.com/CartmanFatass/My-paper-code/blob/fc5885b9581f06c8062b7509329697e0dfedd930/docs/research/candidates/agent_count_generalization/NOTES.md)。 |
 | `uav_service_auxiliary` | 未来事实端到端服务监督能否帮助 HMASD 学会接入、回传与能源约束下的协作？ | exploring | Codex DM (independent session) | 直接 DM task `01a0c6f0-31e1-7510-bee7-4f0f8b62d821`，host `local`；checkout `/home/fires/.codex/worktrees/a335/hmasd-wsl`，branch `codex/uav-service-auxiliary`。S7-S2 v3/reward v2/arm C，固定 k=10/N=8；W10 事实 QoS 辅助两臂均完整核验，各 180k transitions，输入 `382643ca9`。固定终点 detach/joint J=-644.966810/-485.429355，差 +159.537455；QoS 差 +0.038796，返航约束代价差 -0.034002，共同事实 MSE=0.0108465/0.00332855。2 fits 合计 297.90 runner min，另有 15 秒训练前拒绝。一个训练种子对的探索性正观察；后段回落、狭窄事实分布及无评估充电事件限制机制和外推。暂拟保留作一次不改配方的独立复现，追加投入待聚焦 Pro 咨询；无新 fit 接受，G33 冻结。[完整比较与工作解释](candidates/uav_service_auxiliary/NOTES.md#b01-joint-complete-and-paired-reading--2026-09-22-0109-pdt)；[咨询问题](candidates/uav_service_auxiliary/NOTES.md#pro-question-2026-09-22-b01-native-gain-next-investment)。 |
 | `skill_teammate_drift_learning` | When teammates change, what must be learned or reused to improve decisions beyond competent simple controls? | reserve | Codex DM (independent session) | DM task `01a0bdb4-cd2c-71a3-af95-a196aeed70cd`，host `local`；checkout `/home/fires/.codex/worktrees/b-unknown-joint-law/hmasd-wsl`，branch `codex/b-unknown-joint-law`。旧径向一步表路线结束；B09/B10 局部正用途保留，B11 完整轨迹增量不一致；自身网络 refresh/burn-in 未识别真实队友行为漂移，后继方案已否决。没有排队实验、诊断或 Pro；需具体行为变化、受影响的未来估计和有区别的比较，才能选择下一步。reserve 不是无价值判决或外部等待。[最新判断及 B 分支 entry-mask 修复](https://github.com/CartmanFatass/My-paper-code/blob/74fe267aa166299d93a03566e5f0ab149ff2b12d/docs/research/candidates/skill_teammate_drift_learning/NOTES.md)；修复没有追溯应用于历史/FSD 结果。 |
@@ -197,6 +196,7 @@ B/UCOPE 的局部预测、一步优势或真实后缀信用没有自动转成稳
 
 | Direction | Question | State | Lead runtime | Standing and next step |
 | --- | --- | --- | --- | --- |
+| `local_observation_encoding` | 同一合法局部观测下，普通稠密槽位/关系编码能否改善完整 HMASD 的有限学习？ | archived | Codex DM (independent session) | 直接 DM task `01a0c6ef-7c4b-7f02-b96d-ab115d467af8`，host `local`；checkout `/home/fires/.codex/worktrees/d683/hmasd-wsl`，branch `codex/local-observation-encoding`。B01 两个 fits 完整完成，2026-09-22 结束已测试 dense 配方投入：ORIGINAL/DENSE 固定 J45 为 0.458426/0.202254，连接人数 31.939/13.416，DENSE fit wall 约 1.95 倍。已读完并核验完整 Pro 答复；0 追加 fit，无后继排队。每臂一个训练实例，停止是有范围的投资判断，不是表示类总体否定。[最终决定](candidates/local_observation_encoding/NOTES.md#2026-09-22--dm-decision-archive-the-tested-dense-recipe)；[完整结果](candidates/local_observation_encoding/NOTES.md#2026-09-22--b01-complete-adverse-package-observation)。 |
 | `skill_information_refresh` | Can lawful estimates of multistep message value improve send-now versus retain-quota decisions through later receiver actions and communication opportunities? | archived | Codex DM (independent session) | C07 已完成。保留普通方法的 NEAR 正结果与 LONG 有限范围结论；当前宿主的继续投入结束，没有选中后继，不外推为神经方法或 UAV 增益。[停止判断](https://github.com/CartmanFatass/My-paper-code/blob/3ca4cb1f83ea869e1efca852a099db31c52b0e2c/docs/research/candidates/skill_information_refresh/NOTES.md)、[C07 claim/result](candidates/skill_information_refresh/CLAIM_near_commit_c07.md)。 |
 | `vsp_03` | Can learned submission timing exploit shared service opportunities beyond a strong transparent same-information opportunity rule? | archived | Codex DM (independent session) | 普通后果/机会模型的有界正用途保留，B11 数据获取比较已完成；没有继续维护同一固定宿主的选中问题。[停止审计](candidates/vsp_03/NOTES.md)、[B09 claim/result](candidates/vsp_03/CLAIM_fitted_opportunity_b09.md)。 |
 | `ucope` | Can feedback-conditioned KEEP/END of a UAV velocity commitment improve native return over ordinary feedback and fixed renewal? | archived | Codex session (direct DM; resumed original UCOPE task) | 当前 KEEP/END/copy 与 paired-suffix 配方停止；局部非零作用保留，未得到可保留的完整原生收益。原 task 的当前科学责任已转至 B，无 UCOPE 后继排队。[最终证据和判断](https://github.com/CartmanFatass/My-paper-code/blob/0d6f299c007840596405b8a359952a082a6ba567/docs/research/candidates/ucope/NOTES.md)。 |
@@ -217,14 +217,15 @@ B/UCOPE 的局部预测、一步优势或真实后缀信用没有自动转成稳
 目标是有限数据与计算下有用的联合技能和完整 UAV 服务收益。可变周期 k、可变成员 N 分别研究；
 固定 k 的普通表示和学习改进也有独立价值。此处保留当前选择及依据，完整论证和其他候选按需查档。
 
-**当前四项投入。** 已选择表中的普通局部信息组织、技能周期与有限学习、N 数量泛化、UAV 端到端服务预测。
+**本轮四项投入的范围。** 已选择表中的普通局部信息组织、技能周期与有限学习、N 数量泛化、UAV 端到端服务预测。
 它们分别改变表示、时间选择、训练/测试团队数量、服务监督，首问互不依赖新模块或阳性结果。
 周期比较是现有计划中尚未执行的共同学习问题，此次由 owner 授权选题后单独分配；不重启旧 FSD 信用救援，
 不接管 Claude notebook。技能规模、实际重组、churn、cross-play 等保留候选地位，不自动排队。
+普通局部信息组织的 B01 已完成并归档当前配方；其余三项按各自 standing 独立推进，不自动补位。
 
 | 研究问题 | 当前优先次序与第一个比较 | 证据如何约束投入 |
 | --- | --- | --- |
-| **普通局部信息组织** | 首选：S1、固定 k，完整 HMASD 的现有 encoder 对普通稠密槽位/关系 encoder。 | 同一合法数值、类型/排序；保留 FiLM、GRU、高低层共同学习、discovery、PPO 和物理动作。无持久实体 ID/真值有效位，不从 simulator state 偷加 mask；不同时叠加稀疏选择、预测损失、技能规模或新 critic。B05 支持认真比较输入组织，未证明关系瓶颈。 |
+| **普通局部信息组织** | B01 已完成并归档当前 dense 配方，0 追加 fit。 | S1 固定 k/N、同信息完整共同学习的两个 fits 中，dense 在三个预写面板的平均 J 均较低，且实测成本更高；每臂一个训练实例，不建立表示类总体排名。没有选中修补或后继比较。[最终判断](candidates/local_observation_encoding/NOTES.md#2026-09-22--dm-decision-archive-the-tested-dense-recipe)；[退役的初始计划](archive/2026-09-22/RESEARCH.md)。 |
 | **技能周期与有限学习** | 下一项优先核心问题：固定 k 对充分知情的分解时长、普通自回归联合时长，高低层共同训练。 | 两种可变时长共享合法历史、现存承诺、team latent、当前联合技能、时长菜单/cap、critic 及更新原则；单成员重选事件没有额外跨成员采样差别。比较完整学习/服务与实际成本，不以编码阳性为前提，不延长旧 FSD 信用救援。 |
 | 事实预测辅助 | 独立近邻：同一个实际训练的事实 readout，detach 对辅助梯度进入 actor/GRU。 | 两臂都有预测头；最终看完整回报，不能用更低 MSE 代替用途。先选一个后果/窗口，不叠加规划、通信、duration。 |
 | 技能规模与实际重组 | 分别选择有依据的较小标签集合，或固定 k 下真实 partner-skill 重组曝光，对普通匹配训练。 | 标签组合数不是样本复杂度；保留正常搭配收益。技能可辨认不等于有任务互补性，冻结标签探针不是新共同学习的阳性门槛。 |
@@ -233,8 +234,9 @@ B/UCOPE 的局部预测、一步优势或真实后缀信用没有自动转成稳
 | **UAV 端到端服务预测** | S7 独立入口的首对已完成：固定 k/N，W10 事实 QoS 头 detach 对进入 actor/GRU 的梯度。下一步只判断不改配方的训练复现是否值得。 | interface v3 / reward v2 / arm C 的原生接入已核验；单种子对的 J/服务上升、共同事实 MSE 下降，仍无训练总体或充电竞争结论。保留后段回落与成本，不自动改变目标/窗口；保持 G33 冻结，无需等待 S1 阳性。 |
 | 支持方法与条件候选 | 真实行为漂移下的经验复用/critic，任务相关 discovery，普通物理模型及学习修正，通信、尾部服务、实体/角色动作，事件终止/时钟课程。 | 只为具体待估未来量或真实服务后果选择。普通方法已解决就保留；行动接口、目标和信息权限改变单独解释，不列为前一个配方失败后的自动续集。[候选全集](archive/2026-09-21/RESEARCH.md#potential-research-directions-2026-09-21)。 |
 
-**第一笔投入的产物与选择规则。** 普通编码比较应读完整原生 J、预定学习曲线位置、已有服务分量和实际训练/推理成本。
-有用则保留普通改进；不明则按未决问题的价值选择独立重复或停止；只有代理改善且没有值得付费的新区别时结束该配方。
+**普通编码比较的当前结论。** 已读完冻结 J45、15/30/45 面板、原生服务分量及实际成本。
+已测试 dense 包没有兑现原生收益/成本预测；完整 Pro 咨询后结束此配方投入。训练种子差异和其他表示机会仍未解决，
+当前没有值得付费的已选新区别，不为穷尽可能解释自动追加实验。
 完整 HMASD 表示比较不能承担“层次结构胜过 flat MARL”的结论，后者另需能学好的同信息 flat 参照。
 实际 horizon、种子和 fits 由选中后的 prospective note 声明，本页没有接受批次。
 
@@ -255,7 +257,7 @@ S1 只能检验自身覆盖/连接后果；S7 研究需要其真实服务机制�
 日期是退役定位，不是有效期；仍有效的决定、暂停、lead、冻结绑定与未完成操作留在当前页。
 归档不改变方向状态或恢复研究；方向 NOTES 保持原职责，共享认识在本页按主题修订。
 
-最近归档：[2026-09-21 完整退役快照](archive/2026-09-21/RESEARCH.md)，包括六次已完成 Portfolio、旧计划、
+全项目历史快照：[2026-09-21 完整退役快照](archive/2026-09-21/RESEARCH.md)，包括六次已完成 Portfolio、旧计划、
 第三方材料和历史路由，来源提交 `49029b96e02f6a8d08717849a366e4dca4a5477c`。更早快照按需从[日期目录](archive/)查找；
 本页只保留仍需引用的入口，不追加每次维护的日志或完整归档目录。
 
