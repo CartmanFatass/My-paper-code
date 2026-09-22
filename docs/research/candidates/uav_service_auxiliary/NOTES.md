@@ -325,3 +325,20 @@ The staged 5,450,529 bytes have the same SHA256; the original facts/output remai
 Only the physical `--facts` location changes. Keep the same source, digest, arm, seed,
 horizon, evaluation and unused joint output tag. This corrects a known pre-training
 invocation failure; it is not a restarted accepted operation or another started fit.
+
+### B01 joint accepted — 2026-09-21 22:29 PDT
+
+The corrected external-input invocation was accepted at `2026-09-22T05:29:38.367056Z`
+on `wsl_4070`; see its retained [native manifest](../../../../runs/uav_service_auxiliary/b01_joint_910021_a01/launch-manifest.json)
+and actual-node [preflight](../../../../runs/uav_service_auxiliary/b01_joint_910021_a01/admission-preflight.json).
+The source remains `382643ca91cf764336f3311bc166275a5d2bbe97`. Same-handle status at
+`2026-09-22T05:30:35.022361Z` is running with consistent supervisor/runner identities.
+The runner has independently verified and copied the common facts: both the full file
+SHA256 and initialized-model fingerprint exactly match detach. No facts were regenerated.
+
+The fixed pair now has **1 completed fit and 1 accepted/running fit**, plus the separately
+recorded 15-second pre-training refusal. Detached observation for job
+`launch-b01-joint-910021-a01` is armed in the existing current-task wait state; the completed
+detach terminal event was consumed. Continue this same joint operation through completion
+or a bounded checkpoint, without restart, extension or task messaging. No auxiliary package
+comparison or population claim is available before the joint endpoint is read.
