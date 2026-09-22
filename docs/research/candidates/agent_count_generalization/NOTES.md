@@ -55,3 +55,25 @@ fits and their reason before execution; no grid or specialist suite is preauthor
 Initialization starts **0 fits**, accepts no experiment/Send and yields no empirical result.
 Continue independently through the smallest useful native comparison and a supported
 keep/revise/stop judgment, updating reusable research background at normal result boundaries.
+
+## 2026-09-21 — Direct DM initialization and native-contract inspection
+
+The actual task is `01a0c6ef-cdd4-7113-b2d9-20487e35171b`, host `local`,
+checkout `/home/fires/.codex/worktrees/7fef/hmasd-wsl`, branch
+`codex/agent-count-generalization`. Refreshed published main at initialization
+(`69d7d2a3d86805155ea991cf443be259602bc17e` is the assigned source). No accepted
+experiment or Pro operation; 0 fits. The DM read constitution, current RESEARCH,
+the direct-DM responsibility body and scientific/engineering methods.
+
+The complete programme Answer/Decision in the dated RESEARCH archive is reused for
+the N-axis choice, not treated as validation of a particular implementation. Current
+RESEARCH topics 2/3/4/6 change the first design concretely: no identity inferred from
+a sorted local observation slot, same lawful actor information in both arms,
+no comparison of raw scores across N as the treatment effect, and no weak flat
+baseline or specialist training hidden in a generalist budget. All learning and
+evaluation must retain native task service, not substitute a toy transfer score.
+The initially useful inspection is the actual variable-N end-to-end contract;
+a bounded read-only Scout maps the existing native path while the DM examines
+reusable N assets and the concrete comparator. No scientific run is authorized
+by this inspection entry. A material concrete comparator decision will reuse
+applicable advice or receive a focused Pro question before execution.
