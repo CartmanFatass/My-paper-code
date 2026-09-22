@@ -2100,3 +2100,55 @@ depends on publication and canonical adoption of the reviewed configuration, fre
 resource admission, and a new output root. At this decision there remain 0 B03 started
 training fits and one failed pre-training attempt; no native scientific result is inferred
 from the repair checks.
+
+## 2026-09-22 — B03 repaired D attempt admitted
+
+The reviewed configuration and retained failure evidence were published to main at
+`df79a252025402da65ca8bf7759750d070aabd0e`; canonical control was fast-forwarded with its
+tracked files clean and unrelated untracked evidence preserved. The partial clone needed
+a missing blob during this update: the first plain-shell merge stalled in its network
+helper. After verifying its exact parent chain, only that owned helper was terminated;
+the merge returned code 128 with the canonical tracked state still clean. The same update
+then completed through the configured network shell. No experiment process was involved.
+
+The selected D / 912211 / a02 attempt is now natively admitted. Its
+[manifest](../../../../runs/uav_service_auxiliary/b03_d_912211_a02/launch-manifest.json)
+preserves the exact source, command, operation reference and process identities. The native
+status at 2026-09-22 17:12:08 UTC reports accepted admission, both matching processes running,
+no exit witness and consistent records. Fresh node evidence before admission showed
+12.52 GB available host memory and 7948 MiB free GPU memory; the kernel's own immediate
+[preflight](../../../../runs/uav_service_auxiliary/b03_d_912211_a02/admission-preflight.json)
+remains the admission evidence.
+
+The first copied runner summary is still its initial INCOMPLETE snapshot: failure null,
+all persisted counters zero, no updates and empty stderr. It does not certify completion
+of initial facts or commencement of training. Preserve that distinction from the earlier
+terminal pre-training failure. Subsequent observations use the returned operation reference;
+no other cell has started, and no scientific conclusion or additional fit is selected.
+
+## 2026-09-22 — B03 D first training checkpoint
+
+The bounded observer checkpoint at 17:38 UTC retains the same admitted a02 operation:
+both native identities are running, the records agree, and no exit witness is present.
+The copied runner summary has SHA256
+`87d0dde9d49844c2f6ecdc3a07e4d38d6ef2f6e274ea6858bd16831072ec4b39`.
+Its config digest matches the retained config and all 10,800 floating-point values are
+finite. Failure is null and stderr remains empty. This is an in-progress observation,
+not endpoint or artifact acceptance.
+
+The summary records 35,600 training team transitions, including part of the sixth
+collection, and 5 completed native/auxiliary updates out of the fixed 30. Initial
+development evaluation accounts for 8 worlds / 12,000 transitions and initial facts for
+2 episodes / 3,000 transitions. The last completed-rollout resource row records cumulative
+wall 1515.47 s and RSS 3,047,892 KiB. Actual cost is now **1 started B03 training fit**;
+the separate a01 pre-training failure remains recorded. The other five cells have not begun.
+
+All five completed updates move the native learners; D's auxiliary representation optimizer
+steps and base/GRU movement remain exactly zero, while both detached heads update. Service
+varies strongly across training collections: rollouts 1, 2 and 4 have nonzero delivery,
+rollout 3 has only a small amount, and rollout 5 has zero QoS in all four lanes. The earlier
+task commentary incorrectly generalized rollout 5's zero to all five and was corrected
+after reading every rollout. These changing training worlds are not the final-world panel
+and do not establish a final trend or any D/S/G comparison. Technical execution is supported;
+the bounded service-use hypothesis remains untested by the incomplete comparison. Continue
+the accepted operation and the fixed horizon without a restart, new fit or score-based change.
