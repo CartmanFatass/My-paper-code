@@ -2780,3 +2780,65 @@ have started (D/S complete, G running), with three later fixed cells unstarted a
 separate zero-step D failure retained. The checkpoint was consumed using its exact
 generation/wake/event and observation rearmed at generation 21. Continue the same fixed
 G operation; no extra fit, early selection, recipe change or new Pro question is selected.
+
+## 2026-09-22 — B03 G third training checkpoint
+
+The 23:33 UTC observer retains matching G / 912211 / a01 identities running, consistent
+records and no exit witness. Refreshed main `0f692f8cfff0dbd25b6ffae70683366fa89e9c8c`
+preserves this direction/lead and the lifted pause. Copied summary SHA256 is
+`6cc76f321250c41c96b3b5e5afc6cd72048d6c2330a5ee61f785945f26e4c517`.
+It records 143,600 training transitions, including part of collection 24, 23 complete
+updates and 92 completed training episodes. Three development panels total 24 episodes /
+36,000 evaluation transitions. The exact two D initial episodes / 3,000 transitions are
+reused, with zero new physical facts and 71,568 valid agent rows replayed across three
+diagnostics. All 48,954 floating values are finite; failure is null and stderr empty.
+Prior completed records and input bindings are unchanged. All 144 new progress events
+were read, with monotonic timing, consistent collection counts and append-only extension.
+
+At rollout 20, G's prescribed development mean raw J is **-75.744959**, QoS **.249717513**,
+return cost **.145632532**, throughput 7.491525390 and true episode-minimum fleet battery
+**.366664266**. All eight worlds truncate at 1,500 steps with zero evaluation updates;
+all reported aggregates were independently recomputed. Each world has nonzero service,
+but charging, cutoff, depletion and charger-input exposure remains zero.
+
+At this same rollout/world panel, **G-minus-D J is +34.912861**, QoS **+.044979672**, return
+cost **+.010459611** (worse), and true episode-minimum battery -.004720220. Three world J
+differences are positive and five negative; median is -190.534761, range -1353.909090 on
+920006 to +1385.786795 on 920008. The mean gap has narrowed sharply from +486.103922 at
+rollout 10, with both G's own decline and D's improvement contributing. G's own J drops
+142.974025 on the same development worlds: two improve and six worsen. Its QoS rises
+.014207322, while return cost rises .054851353 and true episode-minimum battery falls
+.017639620. Thus more delivered service does not prevent a worse complete return here;
+the earlier favorable generic-package reading is weakened by this later comparison.
+
+**S-minus-G J is +22.392161** at rollout 20, with QoS -.001506067, return cost -.008290337
+and true episode-minimum battery +.012089944. Six world J differences favor S and two
+favor G; median is +54.794257, and 920007 is notably adverse to S at -679.723691. Preserve
+this modest mean advantage and differing service/risk components without treating the
+worlds as training replications. Neither this development result nor the earlier one
+replaces G's unobserved final 32-world endpoint or the second training block. There is
+still no completed three-arm package comparison or basis for early-checkpoint selection.
+
+On unchanged initial facts, G observation MSE improves from .013599499 to **.009703034**,
+below D .010253014 and S .009836454 at rollout 20, but still above fixed mean .008585614
+and persistence .000001035146. Meanwhile its detached service-readout MSE worsens from
+.004631897 to **.197741939**, above D .110198947, S .035502055 and service-mean .010116768.
+Both fact episodes are now adverse to their service-mean references (.223737172 versus
+.007212412, and .171746706 versus .013021124). Episode-equal scoring was checked and the
+saved array digest matches the node. Fixed-row feature variance/effective rank are
+15.935531 / 8.395262, with nonzero agent/segment variation and no degeneration flag.
+The declining observation error alongside declining native J is contrary evidence to
+using that proxy as a control-benefit criterion; the earlier low service-readout error
+also fails to persist. These observations do not identify a mediator or establish that
+the generic package is technically degenerate. The common endpoint mixture remains absent.
+
+All nine new complete passes retain active observation-driven representation steps and
+positive movement in base/GRU and every native learner, with both heads updating.
+Training remains heterogeneous; collection 22 has zero QoS in every lane. Newly read
+training records retain zero charging/cutoff/depletion/charger-input exposure. The last
+completed-update resource row records cumulative wall 4,795.805478 s and peak RSS
+3,079,224 KiB, not total fit cost. Cost remains three started B03 fits (D/S complete,
+G running), three later fixed cells unstarted and the separate zero-step D failure.
+Consume this checkpoint and rearm the same operation at generation 22. Continue the
+fixed G horizon and retain the adverse trajectory; no restart, additional fit, retuning,
+early checkpoint or Pro Send is selected.
