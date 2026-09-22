@@ -1,0 +1,46 @@
+{
+  "object_id": "UAV-SERVICE-AUXILIARY-B03",
+  "status": "INCOMPLETE",
+  "failure": {
+    "type": "UAVCppBackendUnavailable",
+    "message": "failed to build/load the UAV C++ backend; provision the registered CPU compiler toolchain and inspect the chained build error"
+  },
+  "arm": "D",
+  "seed": 912211,
+  "launch_sha": "2524168eacab801590a4eb43f63865220b8a609e",
+  "device": "cuda",
+  "torch_threads": 4,
+  "counts": {
+    "transitions": 0,
+    "rollouts": 0,
+    "episodes": 0,
+    "evaluations": 0,
+    "evaluation_transitions": 0,
+    "fact_episodes": 0,
+    "fact_transitions": 0,
+    "reused_fact_episodes": 0,
+    "reused_fact_transitions": 0,
+    "replay_agent_rows": 0
+  },
+  "stage_wall_seconds": {
+    "preparation": 1.0375845879898407,
+    "collection": 0.0,
+    "native_update": 0.0,
+    "auxiliary": 0.0,
+    "evaluation": 0.0,
+    "facts": 0.0,
+    "replay": 0.0,
+    "checkpoint": 0.0
+  },
+  "evaluations": {},
+  "updates": [],
+  "training_rollouts": [],
+  "rss_curve": [],
+  "config_sha256": "bfadc4e451c27fb7a867f71d747cf23948f3c9842f4d6d478ea37ac12687b827",
+  "initialization_sha256": "d7f954831e2fc3ccc2c1c20cdb3e42c9f36b66b2bb55b2dd9927e78e3fd84a70",
+  "wall_seconds": 1.5121655464172363,
+  "cpu_user_seconds": 2.182045,
+  "cpu_system_seconds": 0.26138799999999995,
+  "peak_rss_kib": 849104,
+  "rss_scope": "runner process high-water mark"
+}

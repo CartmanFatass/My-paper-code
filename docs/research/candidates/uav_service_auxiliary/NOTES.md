@@ -2005,3 +2005,98 @@ uses pytest-owned scratch and shortened synthetic/checking exposure, never resul
 Independent high-risk engineering review covers the actual integrated diff and checks before
 publication/admitted execution. Stop dependent work on a real target/RNG/leakage/input
 identity/resource conflict, preserve evidence and resolve locally; no repeated owner approval.
+
+## 2026-09-22 — B03 implementation acceptance and node verification
+
+The DM accepted the Implementer's bounded auxiliary diff and the integrated native/factual
+paths. D/S service replay is checked against the frozen B01 path; both head initializations
+preserve the native RNG. Three-arm real-S7 engineering checks verify identical first
+collection, first native update and calibration, then separate native/auxiliary movement,
+checkpoint readback and common endpoint replay with zero new updates. Initial G predictions
+are saved before training; D's first-training-rollout scale is later applied to those saved
+predictions, without rerunning an updated actor as if it were the initial one.
+
+Independent Reviewer identified one concrete replay-boundary defect: hash-valid shortened
+engineering endpoints could be accepted as production endpoints. It is repaired by binding
+the production specification, training SHA, device/threads, actual evaluation panels/counts
+and source policy identity; the production CLI exposes no short-spec override. A regression
+now refuses the very engineering roots used by the positive integration test. No material
+review finding remains. The review independently ran 15 auxiliary/facts checks; frozen B01
+reference files remain byte-identical to `30401722b`.
+
+Local CPU verification passes 24 B03 checks with the CUDA case skipped. The separate frozen
+B01 auxiliary check passed five tests with one CUDA skip. Earlier engineering-only failures
+were a legitimate inactive configuration infinity sentinel rejected by strict JSON, the
+test command missing the documented Ninja PATH, and a regression expecting the old ordering
+of two rejection checks. These were reproduced and corrected before result execution;
+runtime scientific configuration did not change. This is 0 result fits, not a learning result.
+The selected production-shape, four-lane CUDA integration check will run on the configured
+node from committed source before the first fit. Its short horizon remains engineering-only.
+
+The configured `wsl_4070` CUDA check at source
+`2524168eacab801590a4eb43f63865220b8a609e` passed (1 selected integration test, 20.62 s).
+It exercised all three arms with native 256-wide hidden state, 365 observations, four
+collection lanes, first-update identity, both checkpoint loaders, fixed-source rejection
+and common endpoint replay. It used a 12-step checking horizon and one Torch thread;
+the selected result fits remain 1500-step rollouts, 30 rollouts and four Torch threads.
+No claim is inferred from its scores. Remote source staging initially stalled outside
+the node's configured network shell; only those two owned Git staging process groups were
+terminated after PID/command verification, then staging completed through the configured
+`zsh -lic` route. There was no accepted result worker or Pro request restart.
+
+The DM accepts the implementation and selects the first fixed cell, D / 912211, at source
+`2524168eacab801590a4eb43f63865220b8a609e`. Source is published and the retained node checkout
+is `/home/wu/hmasd-worktrees/usa-b03-2524168ea`. Native admission still precedes the actual
+start. The later S/G cells will import the first D run's hash-verified initial facts and
+training-only calibration after its completed artifact has been read; no score changes
+the remaining cells or creates an extra fit.
+
+## 2026-09-22 — B03 D pre-training failure and bounded environment repair
+
+The first D / 912211 attempt was admitted at source `2524168ea`; its native
+[manifest](../../../../runs/uav_service_auxiliary/b03_d_912211_a01/launch-manifest.json),
+[summary](../../../../runs/uav_service_auxiliary/b03_d_912211_a01/summary.json) and
+[exit witness](../../../../runs/uav_service_auxiliary/b03_d_912211_a01/process-exit.json)
+are preserved. Both native processes are absent and the valid exit witness is code 1.
+The failure occurred on the first fact-environment reset, before any environment step or
+optimizer update: all scientific counters are zero; runner wall 1.5122 s, CPU user/system
+2.1820/0.2614 s, process peak RSS 849104 KiB. This is one accepted **pre-training attempt**,
+0 B03 started training fits, not a scientific negative or a completed D cell. All remote
+logs remain at the manifest's paths; nothing is overwritten or relaunched under this handle.
+
+The complete traceback ends in `RuntimeError: Ninja is required to load C++ extensions`.
+The CUDA test had explicitly included the scientific venv's bin in PATH; the configured
+remote runner prefix omitted it. This explains a difference between test and admitted
+execution, rather than a CUDA or scientific-target failure. Verify the diagnosis using the
+actual node's kernel-created child environment, with both the old and repaired prefix.
+
+L0 for this bounded shared correctness repair: add the existing configured remote scientific
+interpreter's bin directory to `nodes.wsl_4070.path_prefix` in `.codex/hmasd-compute.toml`,
+retaining the other entries. Add a focused launcher regression for configured venv tools
+and an actual-node Ninja-visibility reproduction; obtain independent executable-config
+review. No installation, compiler/source/backend, device, dtype, seeds, loss, horizon or
+existing process changes. Publish this shared repair normally and fast-forward the clean
+tracked canonical control files so new admission actually reads it. Preserve all unrelated
+untracked evidence and other processes. The original stopped attempt stays stopped.
+
+If the reproduction confirms the repair, the DM selects a fresh D / 912211 attempt a02
+at the corrected published source and a new output root, with the same scientific exposure.
+This is an explicit response to the recorded pre-training defect, not an automatic retry
+or new scientific batch. The six-cell design and all reading branches remain fixed.
+
+Independent review found no remaining material defect in the bounded PATH repair. The
+reviewer's focused local run passed 7 checks with the actual-node case skipped. On the
+configured node, committed source `73be55261b9f5e8f8fe26fdec6558b87ad088fcb` passed all
+8 selected launcher checks in 3.60 s. The actual child-environment reproduction finds no
+Ninja under the prior prefix, reproduces the recorded PyTorch error, and resolves
+`/home/wu/.venvs/hmasd/bin/ninja` with the repaired prefix. This confirms the dependency
+visibility diagnosis. No packages or compiler settings were changed.
+
+The scientific implementation and both B03 entrypoints are byte-identical to `2524168ea`.
+The DM accepts the repair and selects D / 912211 / a02 at full source
+`73be55261b9f5e8f8fe26fdec6558b87ad088fcb`; all six fixed cells will use that same source.
+The retained source checkout is `/home/wu/hmasd-worktrees/usa-b03-73be55261`. New execution
+depends on publication and canonical adoption of the reviewed configuration, fresh native
+resource admission, and a new output root. At this decision there remain 0 B03 started
+training fits and one failed pre-training attempt; no native scientific result is inferred
+from the repair checks.
