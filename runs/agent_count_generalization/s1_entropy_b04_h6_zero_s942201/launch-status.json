@@ -1,0 +1,11 @@
+{
+  "claim_key": "a2d7aa147ecd90d2d4e6974e620a216bf4011660b26879099d41a776bedcab16",
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/a2d7aa147ecd90d2d4e6974e620a216bf4011660b26879099d41a776bedcab16.json",
+  "manifest_ref": "/home/wu/hmasd-worktrees/agent-count-entropy-20260922-b04/runs/agent_count_generalization/s1_entropy_b04_h6_zero_s942201/launch-manifest.json",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/a2d7aa147ecd90d2d4e6974e620a216bf4011660b26879099d41a776bedcab16.json",
+  "pid": 263538,
+  "runner_pid": 263539,
+  "schema_version": 1,
+  "status": "accepted",
+  "updated_at": "2026-09-22T22:12:00.011158Z"
+}

@@ -3658,3 +3658,72 @@ fixed45 rollouts; SET/943201 remains unstarted and follows collection of H6 unde
 accepted source/contract. No third fit or endpoint change. Observer generation55 is adopted
 and reports the native operation running; no pending event required rearming. Initial binaries
 remain recoverable at the manifest's native output path, with identities in the summary.
+
+## 2026-09-22 — B04 H6 stage15: lower latent exposure without native service benefit
+
+The scheduled checkpoint returned the same accepted native process running with consistent
+identities, no exit witness and no observation errors. No newer owner pause or direction/lead
+change was present on fresh published main. No new fit or Pro operation was created. Collected
+the runner's current small artifacts and read all17 rollout rows, all six completed evaluation
+panels and their per-world native components. The summary at this reading has SHA-256
+`12c97b582a0d0aaa42060031368b92674301e01fdfcd258d020249dd71b99108`:
+136000 training/stored team steps,272 episodes/resets,17 complete updates,48000 evaluation
+steps and96 evaluation episodes, no failure. Counts, finite losses, parameter movement,
+raw storage/scoring, clipped execution, movement witnesses, terminal cadence and frozen
+zero-update evaluator checks pass. Actor/critic have38250 optimizer calls each; coordinator
+and team-discriminator255 each, individual-discriminator1020. Command wall at the copied
+snapshot is26.3973 minutes, not the complete fit cost; peak RSS is not yet reported.
+
+Both checkpoint00 and checkpoint15 were independently loaded on the native node:179 tensors
+each, all finite, bytes/hashes agreeing with the runner records. Checkpoint15 SHA-256 is
+`fbfbd6f10149805b93741f6ab0b6b1d2a5249dd2642fafcfa5e88be0e988ceb3`;
+both binaries remain at the native output location in the original manifest. Small outputs
+are preserved under the existing run directory; process exit is not inferred from these files.
+
+### Predicted intermediate change and contrary native outcome
+
+Use the matched1–15 window here only as an interim diagnostic, retaining the fixed final
+all1–45/late31–45 readings. Each window contains120000 team/720000 UAV steps. Pool counts
+before computing rates; analytic H below is the mean before-update entropy reconstructed
+from sigma for both arms, and is algebraically linked to scale rather than independent evidence.
+
+| H6/clip recipe | Sigma after15 | Raw-coordinate saturation | Boundary truncation | Executed attempted L2/UAV-step | Realized L2/UAV-step | Mean H_before,1–15 |
+| --- | --- | ---: | ---: | ---: | ---: | ---: |
+| lambda0 | [.893732,.913205,.884694] | .305469907 | .146230556 | 35.743408553 | 32.525238479 | 4.107570008 |
+| reused lambda.05 | [1.519660,1.563997,1.484891] | .421487963 | .160225463 | 39.152714580 | 35.397521764 | 4.848286820 |
+
+The first-row match remains exact; thereafter treatment trajectories diverge as expected.
+The zero coefficient and learned logstd remain valid; at update17 sigma is
+[.884219,.896238,.871758] and analytic H_after=3.886973. Lower scale and coordinate saturation
+are observed in the aligned treatment comparison. Boundary visits are .149412963 versus
+.167645370, a descriptive observation without a universal sign prediction.
+
+Read the predeclared stage15 deployment panels against the corresponding original control
+worlds, not against other checkpoints' different worlds. E_H6 is lambda0 minus lambda.05:
+
+| N | J,lambda0 | J,lambda.05 | E_H6,J | Coverage change | Quality change | Penalty change |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| 4 | .541133156 | .546815203 | −.005682047 | −.002185000 | −.005875848 | +.002389792 |
+| 6 | .475687064 | .491794819 | −.016107755 | −.011515000 | −.020638461 | +.001855716 |
+| 8 | .356593326 | .451276270 | −.094682944 | −.103150000 | −.014580191 | +.018103887 |
+
+Equal-weight unseen E_H6 is **−.050182495** at this interim panel. Fifteen of sixteen N8
+world differences are negative; these worlds share one trained policy and are not independent
+training replications. The larger N8 loss includes lower coverage/quality and a higher penalty;
+N6 also loses J and coverage, so this panel does not support “no observed trained-N service
+cost.” The world vectors and native decomposition remain in the panel files. No confidence
+interval, population ranking or final endpoint judgment is inferred.
+
+This strengthens the predicted scale/exposure response while weakening the broad explanation
+that reducing this noise necessarily improves H6 service in the present development setting.
+An effective intervention with an adverse native panel is not technical nonactivation. The
+selective SET hypothesis and final45 result remain unresolved: SET is unstarted and Q cannot
+yet be formed. A future positive Q caused only by H6 loss would still fail the prewritten
+joint requirement E_SET>0 and Q>0. No coefficient, horizon, endpoint or selection rule changes;
+no switch to an early checkpoint. Continue this H6 fit, then the already fixed SET fit. The
+complete Pro advice already covers this diagnostic-versus-use distinction and unchanged plan.
+
+Actual B04 cost remains **1/2 fits started,0 complete** at this reading. Rearmed the checkpoint's
+exact generation/wake/event identities against the same accepted operation; the observer alone
+continues waiting. This notebook reading is a material interim observation, not scientific
+acceptance of a completed fit or an authorization for any additional fit.
