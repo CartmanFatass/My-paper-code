@@ -2671,3 +2671,52 @@ fully accepted, G is admitted and active, three later fixed cells remain unstart
 separate zero-step D failure is retained. Continue this accepted G operation without a
 recipe change; its complete final panel and the block's common endpoint replay remain the
 next useful observations under the existing six-fit design.
+
+## 2026-09-22 — B03 G first training checkpoint
+
+The 22:38 UTC observer checkpoint retains the same admitted G / 912211 / a01 operation,
+with matching native identities running, consistent records and no exit witness. Refreshed
+published main `d4ab3a15bb66adb1b1ef2882a6c2ac4485560b7b` preserves this direction/lead and
+the lifted pause. Copied summary SHA256 is
+`e25e087b9684b2c6923822afe2928bb1bf8d946dcbcac6dc1b7ea577bc91a9ba`.
+It contains 46,000 training transitions, including part of collection 8, seven complete
+native/auxiliary updates and 28 completed training episodes. Evaluation remains the initial
+eight-world panel / 12,000 transitions. Two exact D initial-fact episodes / 3,000 transitions
+are reused, with zero new physical facts and 23,856 valid agent rows in the initial replay.
+All 14,928 floating values are finite; failure is null, stderr is empty and config/input
+hashes agree. Progress and stdout were read and preserved; no final artifact is expected yet.
+
+The matched-start requirement is now observed for G as well as S. The entire initial
+development panel and common-fact diagnostic, first training collection, first native loss
+record and native parameter displacement are exactly equal to D. Initialization and first-
+native optimizer counts match; collection digest
+`8d78cbcc8f830680e01ce0d3ff889144971ac6c72e8b6f87e2d5bd2826068915` and native-update digest
+`a194c21bf4bc51e954f7d5b015d35220f3ecb208d49f9fce82745f3362ac4043` are unchanged. Calibration
+is byte-identical to D. Remote facts and initial saved prediction-array hashes also match
+the already verified D artifacts. Thus all three arms share the observed pre-intervention
+start; subsequent trajectory differences follow the prescribed auxiliary intervention.
+
+Each of the seven G auxiliary passes records 30 representation steps, positive movement in
+both base and GRU, and 30 updates with positive movement for each head. Every native learner
+also moves. All passes have 5,964 valid team starts / 47,712 agent samples. Representation
+gradients are finite and below the clip threshold; feature variance remains nonzero in
+all 256 coordinates. Collection-feature RMS falls from .917629 to .632778, while total
+variance varies from 9.680287 to 7.466999 across changing trajectories. These are training
+diagnostics, not a common-fact comparison or evidence of either useful or degenerate G.
+
+Training service remains heterogeneous: collections 3 and 5 have zero QoS in every lane,
+and collection 6 includes two zero-service lanes with return costs above .80. All completed
+collections truncate at 1,500 steps and have zero charging, cutoff, depletion and charger-
+input exposure. Preserve these adverse observations; sampled training histories do not
+replace the fixed-panel G-minus-D and S-minus-G contrasts. No trained G development panel,
+final-world result or endpoint mixture is yet available. The technical matched-start and
+active-generic-gradient judgments strengthen, while the scientific package judgment and
+the preceding weak/mixed S-minus-D reading remain unchanged.
+
+The last completed-update resource row records cumulative wall 1,506.666418 s and peak RSS
+3,039,560 KiB, not final fit cost. Actual B03 cost now includes three started training fits:
+D/S complete and G running; three later fixed cells remain unstarted, with the separate
+zero-step D failure retained. The exact checkpoint wake/event was consumed and observation
+rearmed at generation 20 for this same operation. Continue the fixed horizon and await the
+prespecified trained panels; no restart, extra fit, retuning, early selection or Pro Send
+is selected from this intermediate evidence.
