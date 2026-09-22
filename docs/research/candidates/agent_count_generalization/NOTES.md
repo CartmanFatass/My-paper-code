@@ -665,3 +665,18 @@ and fixed four-panel protocol. It supplies the missing ordinary-control observat
 existing Pro advice covers completing this six-fit comparison; no premise, horizon, seed,
 endpoint or comparator is changed, and no additional fit is purchased after these scores.
 Current cost is 1 started/1 completed fit, 0 technical failures; five declared cells remain.
+
+### 2026-09-21 second accepted operation — SET seed 915201
+
+After reconciling and collecting the first completed H6 operation, the first SET invocation
+was admitted on the same immutable published inputs. Its native runner and supervisor were
+observed running with consistent identities and no exit witness. The
+[SET native manifest](../../../../runs/agent_count_generalization/s1_count_b01_set_s915201/launch-manifest.json)
+and [fresh admission preflight](../../../../runs/agent_count_generalization/s1_count_b01_set_s915201/admission-preflight.json)
+bind the accepted operation and its actual-node state. This cell is part of the original
+six-fit purchase; it is not a retry or a new score-selected study. No same-request resend or
+other-task message was used. Four further cells remain unlaunched.
+
+The first operation's terminal event has been consumed. Register the same deterministic
+observer for this SET handle, with a 1500-second checkpoint and terminal/error wakeups.
+Do not alter its source, optimizer exposure or final checkpoint based on partial scores.
