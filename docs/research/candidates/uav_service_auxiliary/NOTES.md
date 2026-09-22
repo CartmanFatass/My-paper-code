@@ -308,3 +308,20 @@ detach `facts.npz` above and `--facts-sha256` is its verified digest; regenerate
 Fresh preparation currently shows 10 GiB available RAM and 5706 MiB free GPU memory; native
 admission will recheck actual resources and current policy. No new Pro question is needed:
 the programme advice already covers this unchanged, predeclared comparison.
+
+### B01 joint input staging correction before acceptance
+
+The first joint supervisor command at `2026-09-22T05:26:42Z` was refused before training,
+exit code 4 after 15 seconds: `absolute author input is absent from published snapshot`.
+It named the generated detach facts inside the author checkout, where the snapshot
+argument mapper requires a published source file. The refusal occurs in path preparation
+before claim/output creation or child release; same-output `status` reports that the
+reference does not exist. No joint fit or accepted process was created. Its unchanged
+failure log remains at `hmasd-wsl-node:/home/wu/.agent-tasks/uav-service-b01-joint-910021-a01/task.log`.
+
+DM correction: copy the exact verified facts to the configured external input staging root,
+`/home/wu/hmasd-inputs/uav_service_auxiliary/b01/facts_eed668d62a5ae3151463b93ee24ca292fc330ce51ca489d1fdb82a826d344a3e.npz`.
+The staged 5,450,529 bytes have the same SHA256; the original facts/output remain intact.
+Only the physical `--facts` location changes. Keep the same source, digest, arm, seed,
+horizon, evaluation and unused joint output tag. This corrects a known pre-training
+invocation failure; it is not a restarted accepted operation or another started fit.
