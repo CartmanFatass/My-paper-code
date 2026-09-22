@@ -394,3 +394,96 @@ mixed-N 训练会改成“训练数量分布曝光是否有用”的后续问题
 [ac-b01]: https://github.com/CartmanFatass/My-paper-code/blob/c86d5e65c05efa748c899d34e19fcc0eda948b00/scripts/run_fsd_baseline_interruption_b01.py
 [ac-sci]: https://github.com/CartmanFatass/My-paper-code/blob/c86d5e65c05efa748c899d34e19fcc0eda948b00/.agents/skills/hmasd-scientific-tools/SKILL.md
 [ac-eng]: https://github.com/CartmanFatass/My-paper-code/blob/c86d5e65c05efa748c899d34e19fcc0eda948b00/.agents/skills/hmasd-research-engineering/SKILL.md
+
+## 2026-09-21 — Pro reading, decision and L0 for the native adapter
+
+The same Pro request key `hmasd:210c1c75ffb1a46c53504a500c75f96b66db921fe9b241445558e0ca38418880`
+completed. The first browser navigation timed out before any typing/Send; persisted
+`send_attempted=false` justified recovery with the same key and unchanged text. The sole
+accepted Send reported `sent`, attachment observed, effort `6 Pro`. The wait controller
+collected a chat receipt; the actual full 13,768-character Answer is commit
+`a48c813109c00a660f21ad7ebb9f3d5e519ca7f6`. Delivery verification found exactly this one
+commit, empty Answer before, unchanged question and all other bytes, target file only.
+The read-only delivery command initially lacked the literal `##` heading prefix and
+refused parsing; correcting that read argument verified delivery without another Send.
+The browser send/wait procedure closes its own tabs. No experiment has started.
+
+I read the full Answer and adopt its main correction. Source `MultiUAVEnv.step` actually
+writes per-member `R/N`; the adapter's mean remains `r=R/N`. This corrects the earlier
+notebook's inaccurate description. Train both arms with the inherited N=6 scalar R/6,
+retain H6's declared intrinsic coefficients, and report native J = N_test*sum(r)/500.
+Check J against `.7*mean(coverage)+.3*mean(quality)-mean(height_penalty)` per episode.
+Do not change training reward scaling or use train N to convert an unseen-N score.
+
+Keep the proposed six-fit, 360k/fit exploration and N=6 -> 4/6/8 design. It purchases
+independent-training dispersion in the first table, not confirmation or a universal
+N property. SET's ordinary nonlinear mean/max encoding is an adequate prospective
+competent comparator; no evidence yet justifies an attention scan. Preserve its held
+ego-row identity explicitly. Inference will retain each side's N contrast as well as
+within-fit unseen averages. At fixed N, worlds are shared across arms; the same seed
+integer across different N need not generate identical users because reset RNG order
+changes with roster size. The current published background has no changed scientific
+premise beyond the initialized entries; adviser agreement supplies no performance evidence.
+
+The Scout's suggestion to pad the full actor/runtime is rejected as unnecessary for
+single-N training. Every runtime has one real N; only global-state storage is padded.
+This avoids nonexistent action/loss/hidden rows and retains the existing fixed-N buffer.
+Implementer work below is bounded to this interface, while the DM owns the run/reading.
+
+### L0 — candidate-owned adapter and network construction
+
+Deliver `experiments/candidates/agent_count_generalization/adapter.py` and `models.py`,
+package `__init__.py`, plus matching focused tests under
+`tests/experiments/candidates/agent_count_generalization/`. No shared-core edits, no new
+scientific arms/horizons, no launch, no notebook/index edits by the Implementer.
+
+`adapter.py`: `CountAdapter` wraps the unchanged `ParallelToArrayAdapter`/S1 instance.
+Expose actual N observation/action rows and fixed state width 133, layout eight scaled
+UAV xyz slots (24), eight explicit valid bits, all fifty scaled user xy (100), time (1).
+Scale using actual environment area/height bounds, never generic Config defaults.
+Both `state` and `next_state` in reset/step info use this layout; native observations,
+reward, termination and info components are unchanged. Public `make_envs(count, seed,
+n_agents, horizon)` creates the same uniform/free-space S1 population with 50 users.
+No synthetic performance host, no local visibility truth supplied to policies.
+
+`models.py`: preserve `HMASDAgent` collection/storage/update. Construct it, replace
+candidate-owned modules before any optimizer step, rebuild only affected optimizers
+from actual registered parameters at original learning rates/weight decay, and assert
+ordinary fixed-clock mode and no LR schedule. Expose `build_agent(config, log_dir)`.
+Use a `StateSetEncoder(output_dim)` in each state-consuming role: shared UAV MLP
+3->64->64 with Tanh, masked mean/max over actual members, N/8, full scaled 100 user
+coordinates and time; concatenate and MLP 230->256->output_dim with Tanh. Mask before
+statistics; exclude pad from max, support genuine all-zero real coordinates. Never
+flatten pad or mask into learned per-slot weights. Each role has its own encoder weights.
+Apply it as coordinator.state_embedding, critic.base, and preprocessor in H6's team
+discriminator (which retains its original classifier after the state feature output).
+Replace coordinator.value_heads_obs with one registered shared Linear head exposed
+through index lookup, whose state_dict is independent of N; do not retain ModuleList[N]
+alias keys. Existing positional encoding and AR order remain unchanged.
+
+For SET only, keep the existing raw central-snapshot capture/replay contract and replace
+actor.base by `SetActorBase`: parse current local obs, held state, N held observation rows,
+and N ego one-hot; use that one-hot to select the exact held ego row. Row MLP is
+114->128->128 with Tanh, pooled mean/max, plus count N/8, held ego obs, current local obs
+and an independent StateSetEncoder(256); concatenate (741 features) then Linear->256,
+Tanh, Linear->hidden_size, Tanh. Widths for small technical tests may be reduced via
+hidden_size/output settings without changing actual experiment widths. Raw snapshot
+storage lets PPO recompute features and train encoders; no detached learned cache.
+The ordinary SkillDiscoverer actor parameter list already includes actor.base; critic
+list includes critic.base. H6's local actor and individual discriminator stay intact.
+No parameter is shared across roles or arms except the intentional per-agent head.
+
+Expose strict weight synchronization for evaluation (all coordinator/discoverer and
+present discriminator keys/shapes; copy value/input normalizers, freeze training, reset
+all env lanes). Runtime N and raw snapshot width may differ, learned parameter keys and
+shapes must not. Do not use the core permissive load_model(strict=False) path.
+
+Checks: real S1 reset/step at N4/6/8 and reward identity; invalid state-pad perturbation
+and UAV-set permutation invariance; strict cross-N checkpoint keys/shapes/action output;
+shared head independence of N; all newly learnable encoders included exactly once in
+correct optimizer; real tiny collection/storage/update causes nonzero per-module
+movement for H6 and SET; central raw held snapshot/ego mapping consistent through replay;
+recurrent episode reset and done-entry shift preserve existing semantics. Tests use
+pytest-owned scratch. These are technical checks, not fits or scientific results.
+Stop only dependent implementation if it requires a material semantic/shared-core rewrite;
+return facts and the diff for DM acceptance and independent engineering review.
