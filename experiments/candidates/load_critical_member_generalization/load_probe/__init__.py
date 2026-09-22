@@ -12,6 +12,9 @@ from .scenes import (
     service_diagnostics,
 )
 
+# The evaluator is intentionally not imported here.  Its Torch/model import is
+# deferred until after native admission by the production entry point.
+
 __all__ = [
     "MAX_UAVS",
     "N_USERS",
@@ -23,4 +26,3 @@ __all__ = [
     "refresh_native_scene",
     "service_diagnostics",
 ]
-

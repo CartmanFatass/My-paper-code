@@ -614,3 +614,57 @@ output/decomposition correctness and fixture/production separation. These are te
 not policy-performance evidence. Reuse accepted scene tests; independent Reviewer examines the
 new checkpoint/runtime/evaluation/entry code before DM acceptance. The production plan remains
 0 fits / 80k eval; no operation is accepted by this implementation task.
+
+## 2026-09-22 — Frozen evaluator accepted; production assets remain unavailable
+
+The DM accepts `load_probe/probe.py`, `scripts/run_load_critical_member_probe_b01.py`, its
+focused tests and the minimal package initializer change after reading the implementation,
+check outputs and independent `matched_world_review` re-review. The seven recovered producer
+dependency files remain byte-identical to source `89486d32ea569728f39d6e21b53f8a7c8854e74c`.
+No shared learner/environment/launcher was changed. The production entry has no fixture or
+arbitrary-policy option and refuses missing, incomplete or mismatched committed source evidence.
+
+The initial review found two material defects before any result launch: the multi-world loop
+would have reset the first bound physical world under different runtime seeds, and failure
+accounting would have omitted earlier completed worlds or misreported a completed native
+episode. Both were repaired and independently re-reviewed. Each world now gets its own bound
+native scene; user and UAV float64 geometry is retained in traces. Completion counters follow
+actual world/terminal boundaries, independently of diagnostic success, and the failed active
+cell retains its failure state. The DM also required comparison with the producer's final
+model/normalizer digest, source-compatible pre-import BLAS/OpenMP settings of 1 with four
+Torch threads, and untruncated domain-failure reasons. These are correctness repairs, not
+scientific observations or evidence against the capacity conjecture.
+
+Current focused suite: **23 passed**, implementer 6.19 s, independent reviewer 5.52 s. The DM
+then narrowed temporary-fixture Git operations to explicit paths and reran the suite:
+**23 passed in 5.90 s**. Compilation and whitespace checks passed; pytest scratch was cleaned.
+Per full suite invocation, evaluator fixtures execute **167 native evaluation transitions**:
+120 through actual H6/SET paths over all ten package/cell episodes at horizon 12; 40 over a
+second, two-world/all-cell geometry check; and 7 in three injected-failure cases. Source/config,
+module/digest, admission-order, overwrite and reduction checks are included. These are small
+synthetic untrained checkpoints, not B03 policy results. The tests cover k10, distinct/matched
+worlds, same-N capacity trajectory/runtime equality, zero optimizer/model/normalizer movement,
+native service differences and partial outputs. Existing singleton `torch.std()` warnings are
+debug-log statistics only; their values do not enter logits, actions or recurrent state.
+
+Limits remain explicit: production B03 binaries, the full 500-step horizon, full-size network
+execution and destination-node performance have not been validated by these fixtures. Keeping
+source num_envs=16 with one active inference row preserves the tested policy path and clocks;
+it does not claim bitwise equivalence to the producer's sixteen-row batched numerical execution.
+No result has been generated, no training fit or optimizer update has been spent here, and the
+proposed **0-fit / 80,000-step / 160-episode** panel has not been admitted.
+
+At the publication refresh, main `9a1c88298` contains the producer's complete H6/raw reading
+and the start of SET/clip. The published completed raw summary confirms the expected final
+schema/counts and producer SHA; it is not an eligible policy for our clip-only panel. SET/clip
+is still an incomplete published training snapshot and H6/clip is not yet published as started.
+This is a reading of committed dependency evidence, not inspection of another DM's live process.
+It supplies no completed pair or four-cell B03 conclusion and changes no scientific prediction.
+
+**Re-entry condition:** consume the original DM's published completed B03 reading and fixed
+next-action contract, then bind both clip/final45 summaries and binary identities into this
+direction's committed source, verify available checkpoint bytes, and admit the already specified
+full panel on a suitable configured node. Do not substitute the completed raw checkpoint, an
+intermediate endpoint, a duplicate training producer or an extra capacity-training batch.
+There is no accepted result handle or open Pro question for this direction to observe now.
+No App message, new monitoring loop or new fit is created to bridge the external asset wait.
