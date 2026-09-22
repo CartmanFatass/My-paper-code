@@ -680,3 +680,83 @@ other-task message was used. Four further cells remain unlaunched.
 The first operation's terminal event has been consumed. Register the same deterministic
 observer for this SET handle, with a 1500-second checkpoint and terminal/error wakeups.
 Do not alter its source, optimizer exposure or final checkpoint based on partial scores.
+
+
+### 2026-09-21 second completed fit — SET seed 915201
+
+The terminal event records a valid zero exit and absent original runner/supervisor identities.
+Fresh published main still has the lifted owner pause and this direction's recorded lead.
+DM collected all 25 native output files, compared every local SHA-256 to the finished remote
+file, and read the full summary, all twelve panel records and all 45 training rows. All hashes
+match. Panel JSON equals the corresponding summary entry; actual-N reward conversion, native
+component identity, declared world seeds and per-N configuration all pass. All four checkpoint
+hashes and byte sizes pass. The config file wraps `launch_sha`, `spec` and `config`; its nested
+configuration exactly equals the summary configuration. Stderr is empty.
+
+Accept this as the second complete exploratory fit in the original six-fit study. Counts are
+360,000 training/stored team steps, 720 training episodes, 45 updates, 96,000 evaluation team
+steps and 192 evaluation episodes. Actor and critic each made exactly 101,250 optimizer steps;
+coordinator and both discriminators made zero. Every training row is finite and has the declared
+2,250 actor/critic steps. Actor, critic, held-snapshot fusion and its new state encoders moved;
+the unused coordinator and its encoder stayed unchanged, as required for SET. All twelve
+panels preserve parameters/normalizers and have zero optimizer calls. The four weight files
+remain in both local and remote output directories; the summary preserves their digests/sizes.
+Publish all text, configuration, panel, log and exit artifacts; delete no remote result.
+
+Measured cost is command wall 5,342.489 s (89.041 min), user/system CPU 20,825.875/51.912 s,
+and scientific-process peak RSS 1,189,236 KiB (1.134 GiB; Linux RUSAGE_SELF). Run-fit wall is
+5,340.645 s. Peak scratch remains explicitly unmeasured. H6's first command took 98.768 min
+and 2.439 GiB peak RSS; the observed wall ratio is 1.109. These serial observations share a
+node with other work and are not an isolated throughput benchmark. Preparation, publication
+and readback are outside scientific command wall; total support time is not inferred.
+
+The final preselected rollout-45 SET readings are means of 16 worlds for one trained policy:
+
+| Test N | SET native J | Coverage | Quality | Height penalty | First H6 minus first SET J |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| 4 | 0.536673 | 0.670520 | 0.246219 | 0.006557 | +0.021241 |
+| 6 | 0.492464 | 0.636990 | 0.192237 | 0.011100 | +0.050777 |
+| 8 | 0.403440 | 0.527232 | 0.162010 | 0.014225 | +0.062457 |
+
+SET's within-fit equal-weight unseen-N mean is 0.470057; H6's is 0.511905, giving the
+first-instance contrast +0.041849. Each within-N contrast uses the same declared evaluation
+worlds across arms. The two training seeds are independent; their numeric labels do not form
+a paired training block. Sixteen worlds are not sixteen trained-policy replicates.
+
+| After rollout | SET N4 | SET N6 | SET N8 |
+| --- | ---: | ---: | ---: |
+| 0 | 0.245715 | 0.154258 | 0.087481 |
+| 15 | 0.553017 | 0.522280 | 0.400347 |
+| 30 | 0.536080 | 0.530638 | 0.403388 |
+| 45 | 0.536673 | 0.492464 | 0.403440 |
+
+Working update, applying current RESEARCH topic 4 (same information can have different finite
+learning difficulty) and the existing Pro answer: strengthened is the empirical feasibility
+of a meaningful ordinary SET control, with real full-horizon learning and strict transfer.
+Both packages improve over their own initialization on fresh panels, and the first complete
+H6 checkpoint has a positive within-N contrast at both unseen Ns and retained N6. This is an
+observation about these two trained policies, not a hierarchy component effect, stable ranking,
+or population gain. The common recurrent entry-mask repair is present in both arms and is
+not a candidate benefit.
+
+Contrary evidence remains visible: SET N6 falls from 0.530638 at rollout 30 to 0.492464 at 45;
+its mean native stochastic training return is 0.386784 over rollouts 26-30 and 0.346148 over
+41-45, while recorded action entropy rises to 8.426563. H6 did not lead SET in every earlier
+panel; all three rollout-30 H6-minus-SET contrasts were negative. Panels use fresh worlds,
+so these are not paired-world temporal changes. Neither curve identifies a failure mechanism
+or proves convergence. Do not select an earlier checkpoint or alter the declared objective,
+entropy term, horizon or reward scaling in response to these scores.
+
+Still unresolved are training-seed dispersion, whether the positive final contrast persists,
+N6 retention across fits, and whether the complete H6 package earns its measured cost. There
+is no retain/revise/stop decision from one fit per arm. Current shared-background limits stay
+applicable; this partial comparison does not justify a new general background claim.
+
+Next is the already declared H6 seed 914307 at immutable input
+`5a250d97e3ea12d33067e9c00c250cefa12b5e25`, followed serially by SET 915307, H6 914413 and
+SET 915413. These are the four remaining cells of the six-fit prospective design, not an
+extension selected from the first contrast. Their differing useful observation is whether
+the within-N service contrast survives independent training rather than being dominated by
+the first H6 or SET trajectory. The existing Pro advice covers this unchanged comparison;
+no new question or Send is needed. Current cost is 2 started/2 completed fits, 0 technical
+failures, with four declared cells unlaunched.
