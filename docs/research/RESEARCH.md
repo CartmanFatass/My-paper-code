@@ -152,11 +152,13 @@ Markov 模型假设需要核对。已执行前缀没有提供提前换技能后�
 反事实轨迹。最小可检测效应取决于独立单位、方差、检验和 power，不是环境固定的“分辨率”。
 
 完整方法比较回答实用效果，组件因果解释需要针对性控制；统计范围随实际选择曝光与抽样契约而定。
-原生 S7-S2 的 W10 事实 QoS 辅助在一个训练种子对上同时改善固定终点 J、QoS、返航约束代价和
-共同事实 MSE，但中途 MSE 与 J 的臂间排序并不始终一致，且两臂后期 J 都回落。这支持保留一个
-有限学习包的探索性正观察，未识别预测改善导致控制收益的唯一机制，也未建立训练总体优势。
-共同事实仅来自两个初始策略世界，评估没有充电、切断或耗尽事件；场景具有相应机制不等于比较实际
-检验了充电竞争或故障恢复。[完整比较、成本与范围](candidates/uav_service_auxiliary/NOTES.md#b01-joint-complete-and-paired-reading--2026-09-22-0109-pdt)。
+原生 S7-S2 的 W10 事实 QoS 辅助在两个训练实例对上均改善固定终点 J、QoS 和返航约束代价，
+但第二对在共同事实 MSE 更高时仍有原生收益；中间面板也有 MSE 更低而 J 更差的观察。这个有限实例
+支持保留辅助训练包，并削弱“该验证误差改善是控制收益必要条件”的解释；它未区分服务预测语义
+与额外表征优化／稳定化，也未建立训练总体优势。两对均有晚期 J 回落，joint 的绝对服务仍低。
+每对共同事实仅来自两个初始策略世界，跨对轨迹不同；重叠窗口、同一训练对的八个评估世界都不能扩充
+训练样本数。评估没有充电、切断或耗尽事件，场景具有相应机制不等于比较实际检验了充电竞争或故障恢复。
+[两对完整比较、反面证据与成本](candidates/uav_service_auxiliary/NOTES.md#b02-complete-comparison-and-bounded-keep-decision--2026-09-22)。
 
 稀疏配对收益中的大量平局/小样本方差可能漏掉尾部，观察最大值不能替代预先有效的全局界。C07 LONG 的
 有限上界约束该固定程序，不等于零效应、NEAR 全局最优或全部长时域方法等价。基础认识本身不推出固定 seed
@@ -186,7 +188,7 @@ B/UCOPE 的局部预测、一步优势或真实后缀信用没有自动转成稳
 | Direction | Question | State | Lead runtime | Standing and next step |
 | --- | --- | --- | --- | --- |
 | `agent_count_generalization` | 固定 k、回合内固定 roster 时，HMASD 对未见团队数量 N 的服务能力和泛化代价是什么？ | exploring | Codex DM (independent session) | 直接 DM：task `01a0c6ef-cdd4-7113-b2d9-20487e35171b`，host `local`；checkout `/home/fires/.codex/worktrees/7fef/hmasd-wsl`，branch `codex/agent-count-generalization`。S1 N=6→4/6/8，H6 对普通共享 SET，输入 `5a250d97e`；六个预写 360k fits 全部完整核验（每臂 3、0 失败）。固定终点 H6−SET J 均值差为 +0.021721/+0.044000/+0.045222，unseen 等权差 +0.033472；各 H6 训练实例在每个 N 的最终均值均高于三个 SET，N6 未见相对代价。保留当前有界包与完整成本，仍为探索结果，无总体排名或组件归因。科学 command wall 合计 471.56 min（H6 263.12、SET 208.43），共享节点耗时不等于方法固有速度。本轮比较与保留判断完成；当前空闲，0 运行/0 排队，未进入确认。未来有用观察是相同固定配方在新训练种子和新最终世界上的复现，尚未选中或接受新批次。[完整比较与判断](candidates/agent_count_generalization/NOTES.md#2026-09-22--b01-complete-comparison-and-bounded-retain-decision)。 |
-| `uav_service_auxiliary` | 未来事实端到端服务监督能否帮助 HMASD 学会接入、回传与能源约束下的协作？ | exploring | Codex DM (independent session) | 直接 DM task `01a0c6f0-31e1-7510-bee7-4f0f8b62d821`，host `local`；checkout `/home/fires/.codex/worktrees/a335/hmasd-wsl`，branch `codex/uav-service-auxiliary`。S7-S2 v3/reward v2/arm C，固定 k=10/N=8；B01 单训练对完整核验，固定终点 joint−detach J 差 +159.537455、QoS 差 +0.038796、返航约束代价差 -0.034002；2 fits 合计 297.90 runner min，仍为探索观察。完整 Pro 阅读后选择恰好一对科学配方不变的 B02，seed 910137，种子入口修正经独立审查，输入 `30401722b`。B02 detach 已完整核验 180k transitions，终点 J=-670.393733、QoS=0.140231、共同事实 MSE=0.00415098；第 20 次更新后 J 明显回落。训练仅 1 个充电 UAV 时间步，评估无充电／切断／耗尽事件。joint 已在 `wsl_4070` 准入运行，事实哈希与初始模型指纹和 detach 一致，配对判断待完整终点。4 计划 fits 全已启动：3 完成、1 运行；已完成 runner wall 合计 414.28 min，另有 15/16 秒训练前拒绝。无自动第三对或已选确认，G33 冻结。[B02 核验与解释](candidates/uav_service_auxiliary/NOTES.md#b02-detach-complete-and-original-joint-remains--2026-09-22-0359-pdt)；[joint 启动证据](../../runs/uav_service_auxiliary/b02_joint_910137_a01/launch-manifest.json)。 |
+| `uav_service_auxiliary` | 未来事实端到端服务监督能否帮助 HMASD 学会接入、回传与能源约束下的协作？ | exploring | Codex DM (independent session) | 直接 DM task `01a0c6f0-31e1-7510-bee7-4f0f8b62d821`，host `local`；checkout `/home/fires/.codex/worktrees/a335/hmasd-wsl`，branch `codex/uav-service-auxiliary`。S7-S2 v3/reward v2/arm C，k=10/N=8；B01/B02 两个训练实例对的 4 fits 全部完整核验。固定终点 joint−detach J 为 +159.537455/+403.511306，QoS 为 +0.038796/+0.080033，返航约束代价为 -0.034002/-0.094605；第二对共同事实 MSE 反而为 detach 的 2.248 倍。按已读 Pro 的对应分支保留有界辅助训练包、修订代理量解释，仍为探索结果，无总体排名或预测机制归因。两对后期 J 均回落，评估无充电／切断／耗尽事件。4 fits 合计 509.11 runner min，另有 15/16 秒训练前拒绝；共享节点 wall 不识别固有速度。本轮比较与 keep/revise 判断完成，0 运行/0 排队，无开放 Pro 或未收读操作。未来有用区别是固定包在新训练实例及新最终世界上的收益能否保留，尚未选中确认或其他新批次，G33 冻结。[完整结果与判断](candidates/uav_service_auxiliary/NOTES.md#b02-complete-comparison-and-bounded-keep-decision--2026-09-22)。 |
 | `skill_teammate_drift_learning` | When teammates change, what must be learned or reused to improve decisions beyond competent simple controls? | reserve | Codex DM (independent session) | DM task `01a0bdb4-cd2c-71a3-af95-a196aeed70cd`，host `local`；checkout `/home/fires/.codex/worktrees/b-unknown-joint-law/hmasd-wsl`，branch `codex/b-unknown-joint-law`。旧径向一步表路线结束；B09/B10 局部正用途保留，B11 完整轨迹增量不一致；自身网络 refresh/burn-in 未识别真实队友行为漂移，后继方案已否决。没有排队实验、诊断或 Pro；需具体行为变化、受影响的未来估计和有区别的比较，才能选择下一步。reserve 不是无价值判决或外部等待。[最新判断及 B 分支 entry-mask 修复](https://github.com/CartmanFatass/My-paper-code/blob/74fe267aa166299d93a03566e5f0ab149ff2b12d/docs/research/candidates/skill_teammate_drift_learning/NOTES.md)；修复没有追溯应用于历史/FSD 结果。 |
 
 ## Reserve
@@ -241,7 +243,7 @@ B/UCOPE 的局部预测、一步优势或真实后缀信用没有自动转成稳
 | 技能规模与实际重组 | 分别选择有依据的较小标签集合，或固定 k 下真实 partner-skill 重组曝光，对普通匹配训练。 | 标签组合数不是样本复杂度；保留正常搭配收益。技能可辨认不等于有任务互补性，冻结标签探针不是新共同学习的阳性门槛。 |
 | **N 数量泛化** | 原生 S1 固定 k、N=6→4/6/8 的 B01 六 fits 已完成，保留有界 H6 包；当前 0 运行/0 排队。 | 两个未见 N 的固定终点原生 J/覆盖均改善，训练 N6 无相对损失；每臂 3 次训练仍是探索比较，成本和组件差异保留。下一有用区别是新训练种子／新最终世界能否复现该固定包优势，需另写实际前瞻计划；无自动确认、改架构或追加 fit。[完整结果](candidates/agent_count_generalization/NOTES.md#2026-09-22--b01-complete-comparison-and-bounded-retain-decision)；[退役的初始计划](archive/2026-09-22/RESEARCH_03.md)。 |
 | 运行中成员变化、cross-play、异质能力 | 三个独立备选问题：服务连续性/区间信用，独立 population 混编，能力条件化共享。 | 分别继承 VNFC、CPCP、FOLR/ACPS 等证据；先明确真实任务和合法接口。技术失败、未执行和科学不利分别处理，不合成笼统“适应性”。 |
-| **UAV 端到端服务预测** | S7 首对已完成；Pro 后选择的唯一 B02 复现对（seed 910137）中，detach 已完整核验，joint 正在运行。 | 固定 k/N、W10 事实 QoS 头 detach 对进入 actor/GRU 的梯度；B02 detach 后段 J 回落且 MSE 降低，继续按预定 rollout-30 原生终点读完整两臂，单独报告两对，不能按 MSE 或早期 checkpoint 选结果。复现失败或不足以改变投资默认结束当前配方支出，无自动第三对或立即确认；保留成本与事件曝光边界，G33 冻结。[固定判读与核验](candidates/uav_service_auxiliary/NOTES.md#b02-detach-complete-and-original-joint-remains--2026-09-22-0359-pdt)。 |
+| **UAV 端到端服务预测** | S7-S2 的 W10 factual-head detach/joint 两对已完成；保留有界包，修订“预测 MSE 改善必需”的解释，0 运行/0 排队。 | 两对固定 rollout-30 原生 J、交付服务与返航成本均有利，第二对共同事实 MSE 反向；晚期退化、低绝对服务和实际事件曝光边界保留。未来区别是相同包在新训练实例／新最终世界能否复现有用收益，需另立实际确认计划；两个探索实例不改记确认，无自动第三对、调权重或提前选 checkpoint。[完整比较](candidates/uav_service_auxiliary/NOTES.md#b02-complete-comparison-and-bounded-keep-decision--2026-09-22)；[退役的运行计划](archive/2026-09-22/RESEARCH_04.md)。 |
 | 支持方法与条件候选 | 真实行为漂移下的经验复用/critic，任务相关 discovery，普通物理模型及学习修正，通信、尾部服务、实体/角色动作，事件终止/时钟课程。 | 只为具体待估未来量或真实服务后果选择。普通方法已解决就保留；行动接口、目标和信息权限改变单独解释，不列为前一个配方失败后的自动续集。[候选全集](archive/2026-09-21/RESEARCH.md#potential-research-directions-2026-09-21)。 |
 
 **普通编码比较的当前结论。** 已读完冻结 J45、15/30/45 面板、原生服务分量及实际成本。
