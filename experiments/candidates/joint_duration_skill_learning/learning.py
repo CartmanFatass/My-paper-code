@@ -8,7 +8,8 @@ duration factors.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+from copy import deepcopy
+from dataclasses import asdict, dataclass
 from typing import Iterable, Mapping, Sequence
 
 import numpy as np
@@ -23,6 +24,17 @@ from hmasd.agent import HMASDAgent
 
 DURATION_CAP = 10
 DURATION_MODES = ("fixed", "factored", "ar")
+GROUPED_REPLAY_ABS_TOLERANCE = 2e-5
+MERGED_REPLAY_RELATIVE_TOLERANCE = 0.001
+
+
+class ReplayAuditError(RuntimeError):
+    """Replay identity or merged numerical-drift audit failure."""
+
+    def __init__(self, message: str, *, reason: str | None = None, facts: dict | None = None):
+        super().__init__(message)
+        self.reason = reason
+        self.facts = facts
 
 
 def mask_duration_logits(logits: torch.Tensor, remaining: torch.Tensor | int) -> torch.Tensor:
@@ -156,6 +168,7 @@ class DurationAgent(HMASDAgent):
         self._duration_episode_position: dict[int, int] = {}
         self._duration_last_step = None
         self._duration_metrics = self._new_duration_metrics()
+        self._replay_failure_snapshot = None
         self._duration_theta0 = [p.detach().clone() for p in self.skill_coordinator.parameters()]
         self._duration_theta0_norm = float(torch.sqrt(sum(
             (p.double() ** 2).sum() for p in self._duration_theta0
@@ -258,12 +271,17 @@ class DurationAgent(HMASDAgent):
             "team_skill_occupancy": {},
             "agent_skill_occupancy": {},
             "replay_pre_max_abs_error": 0.0,
+            "replay_grouped_threshold": GROUPED_REPLAY_ABS_TOLERANCE,
+            "replay_merged_max_abs_error": 0.0,
+            "replay_merged_max_relative_probability_drift": 0.0,
+            "replay_merged_relative_probability_threshold": MERGED_REPLAY_RELATIVE_TOLERANCE,
             "replay_post_mean_abs_change": 0.0,
             "approx_kl": 0.0,
             "clip_fraction": 0.0,
             "duration_entropy": 0.0,
             "event_elapsed_total": 0,
             "last_update": {},
+            "last_replay_audit": {},
         }
 
     def _pre_event_context(
@@ -852,6 +870,326 @@ class DurationAgent(HMASDAgent):
             evaluation["duration_entropies"],
         ], dim=1)
 
+    def _replay_backend_facts(self) -> dict:
+        parameter = next(self.skill_coordinator.parameters())
+        facts = {
+            "torch_version": torch.__version__,
+            "device": str(self.device),
+            "coordinator_dtype": str(parameter.dtype),
+            "coordinator_training": bool(self.skill_coordinator.training),
+            "grad_enabled_at_capture": bool(torch.is_grad_enabled()),
+            "float32_matmul_precision": torch.get_float32_matmul_precision(),
+        }
+        if torch.device(self.device).type == "cuda":
+            facts.update({
+                "cuda_version": torch.version.cuda,
+                "cuda_device_name": torch.cuda.get_device_name(self.device),
+                "matmul_allow_tf32": bool(torch.backends.cuda.matmul.allow_tf32),
+                "cudnn_allow_tf32": bool(torch.backends.cudnn.allow_tf32),
+                "flash_sdp_enabled": bool(torch.backends.cuda.flash_sdp_enabled()),
+                "mem_efficient_sdp_enabled": bool(torch.backends.cuda.mem_efficient_sdp_enabled()),
+                "math_sdp_enabled": bool(torch.backends.cuda.math_sdp_enabled()),
+            })
+        return facts
+
+    def _freeze_config(self) -> dict:
+        values = {}
+        for name in dir(self.config):
+            if name.startswith("_"):
+                continue
+            try:
+                value = getattr(self.config, name)
+            except Exception:
+                continue
+            if callable(value):
+                continue
+            try:
+                values[name] = deepcopy(value)
+            except Exception:
+                values[name] = repr(value)
+        return {
+            "class_module": self.config.__class__.__module__,
+            "class_name": self.config.__class__.__qualname__,
+            "values": values,
+        }
+
+    @staticmethod
+    def _audit_offending_indices(condition: torch.Tensor, limit: int = 64) -> list[list[int]]:
+        indices = torch.nonzero(condition, as_tuple=False).detach().cpu().tolist()
+        return [[int(value) for value in row] for row in indices[:limit]]
+
+    def _record_replay_audit(self, facts: dict) -> None:
+        grouped = float(facts.get("grouped_max_abs_logprob_error", 0.0))
+        merged_abs = float(facts.get("merged_max_abs_logprob_error", 0.0))
+        merged_relative = float(facts.get("merged_max_relative_probability_drift", 0.0))
+        self._duration_metrics["replay_pre_max_abs_error"] = max(
+            float(self._duration_metrics["replay_pre_max_abs_error"]), grouped
+        )
+        self._duration_metrics["replay_merged_max_abs_error"] = max(
+            float(self._duration_metrics["replay_merged_max_abs_error"]), merged_abs
+        )
+        self._duration_metrics["replay_merged_max_relative_probability_drift"] = max(
+            float(self._duration_metrics["replay_merged_max_relative_probability_drift"]),
+            merged_relative,
+        )
+        self._duration_metrics["last_replay_audit"] = deepcopy(facts)
+
+    def _raise_replay_audit(
+        self,
+        message: str,
+        reason: str,
+        facts: dict,
+        events: Sequence[EventRecord],
+        old_factors: torch.Tensor,
+        factor_mask: torch.Tensor,
+        group_ids: Sequence[int],
+        offending_indices: Sequence[Sequence[int]],
+        cause: BaseException | None = None,
+    ) -> None:
+        failure_facts = deepcopy(facts)
+        failure_facts.update({
+            "status": "failed",
+            "reason": reason,
+            "message": message,
+            "offending_indices": [list(map(int, row)) for row in offending_indices],
+        })
+        self._record_replay_audit(failure_facts)
+        try:
+            self._replay_failure_snapshot = {
+                "schema": "joint_duration_replay_failure_v1",
+                "failure": deepcopy(failure_facts),
+                "backend": self._replay_backend_facts(),
+                "duration_mode": self.duration_mode,
+                "config": self._freeze_config(),
+                "coordinator_state_dict": {
+                    name: tensor.detach().cpu().clone()
+                    for name, tensor in self.skill_coordinator.state_dict().items()
+                },
+                "event_records": [asdict(event) for event in events],
+                "factor_old_log_probabilities": old_factors.detach().cpu().clone(),
+                "factor_masks": factor_mask.detach().cpu().clone(),
+                "collection_group_start_steps": torch.as_tensor(
+                    list(group_ids), dtype=torch.int64
+                ),
+                "collection_group_env_ids": torch.as_tensor(
+                    [int(event.env_id) for event in events], dtype=torch.int64
+                ),
+                "collection_group_identities": torch.as_tensor(
+                    [(int(event.start_step), int(event.env_id)) for event in events],
+                    dtype=torch.int64,
+                ),
+                "collection_replay_record_indices": torch.as_tensor(
+                    sorted(
+                        range(len(events)),
+                        key=lambda index: (
+                            int(events[index].start_step), int(events[index].env_id)
+                        ),
+                    ),
+                    dtype=torch.int64,
+                ),
+            }
+        except Exception as capture_error:
+            # Diagnostic persistence must never replace the primary audit failure.
+            self._replay_failure_snapshot = {
+                "schema": "joint_duration_replay_failure_v1",
+                "failure": deepcopy(failure_facts),
+                "duration_mode": self.duration_mode,
+                "snapshot_capture_error": repr(capture_error),
+            }
+        error = ReplayAuditError(message, reason=reason, facts=failure_facts)
+        if cause is not None:
+            raise error from cause
+        raise error
+
+    def replay_failure_payload(self):
+        """Return the frozen diagnostic snapshot only after a replay audit failure."""
+        return self._replay_failure_snapshot
+
+    def audit_event_replay(self, events: Sequence[EventRecord] | None = None) -> dict:
+        """Audit collection-group identity and merged-batch probability drift.
+
+        Collection groups are reconstructed by ``start_step`` and evaluated in
+        ascending environment order, then scattered back to the original
+        closure-time record order.  The merged diagnostic retains the actual
+        coordinator batch size but does not sample, permute, or change model
+        mode, precision, parameters, optimizer state, or RNG state.
+        """
+        records = list(self._duration_events if events is None else events)
+        if not records:
+            facts = {
+                "status": "passed",
+                "event_count": 0,
+                "factor_count": 0,
+                "collection_group_count": 0,
+                "merged_batch_size": int(self.config.coordinator_batch_size),
+                "grouped_max_abs_logprob_error": 0.0,
+                "grouped_abs_logprob_threshold": GROUPED_REPLAY_ABS_TOLERANCE,
+                "merged_max_abs_logprob_error": 0.0,
+                "merged_max_relative_probability_drift": 0.0,
+                "merged_relative_probability_threshold": MERGED_REPLAY_RELATIVE_TOLERANCE,
+            }
+            self._record_replay_audit(facts)
+            return facts
+
+        old_factors, factor_mask = self._factor_tensors(records, self.device)
+        group_ids = [int(event.start_step) for event in records]
+        base_facts = {
+            "event_count": len(records),
+            "factor_count": int(factor_mask.sum().item()),
+            "merged_batch_size": int(self.config.coordinator_batch_size),
+            "grouped_abs_logprob_threshold": GROUPED_REPLAY_ABS_TOLERANCE,
+            "merged_relative_probability_threshold": MERGED_REPLAY_RELATIVE_TOLERANCE,
+            "grouped_max_abs_logprob_error": 0.0,
+            "merged_max_abs_logprob_error": 0.0,
+            "merged_max_relative_probability_drift": 0.0,
+        }
+
+        groups: dict[int, list[tuple[int, EventRecord]]] = {}
+        seen = set()
+        for original_index, event in enumerate(records):
+            identity = (int(event.start_step), int(event.env_id))
+            if identity in seen:
+                self._raise_replay_audit(
+                    f"duplicate replay collection identity start_step={identity[0]} env_id={identity[1]}",
+                    "duplicate_collection_identity", base_facts, records, old_factors,
+                    factor_mask, group_ids, [[original_index]],
+                )
+            seen.add(identity)
+            groups.setdefault(identity[0], []).append((original_index, event))
+        base_facts["collection_group_count"] = len(groups)
+
+        grouped_new = torch.empty_like(old_factors)
+        with torch.no_grad():
+            for start_step in sorted(groups):
+                group = sorted(groups[start_step], key=lambda row: row[1].env_id)
+                group_events = [event for _index, event in group]
+                try:
+                    evaluated = self._flatten_new_factors(self._evaluate_events(group_events))
+                except Exception as scoring_error:
+                    scoring_facts = deepcopy(base_facts)
+                    scoring_facts.update({
+                        "scoring_phase": "collection_group",
+                        "scoring_group_start_step": int(start_step),
+                        "scoring_exception_type": type(scoring_error).__name__,
+                        "scoring_exception_message": str(scoring_error),
+                    })
+                    self._raise_replay_audit(
+                        "collection-group replay scoring failed: "
+                        f"{type(scoring_error).__name__}: {scoring_error}",
+                        "grouped_scoring_exception", scoring_facts, records, old_factors,
+                        factor_mask, group_ids,
+                        [[original_index, -1] for original_index, _event in group],
+                        cause=scoring_error,
+                    )
+                for row, (original_index, _event) in enumerate(group):
+                    grouped_new[original_index] = evaluated[row]
+
+        active_old = old_factors[factor_mask]
+        active_grouped = grouped_new[factor_mask]
+        finite_old = torch.isfinite(active_old)
+        finite_grouped = torch.isfinite(active_grouped)
+        if not bool(finite_old.all()) or not bool(finite_grouped.all()):
+            bad_full = (~torch.isfinite(old_factors) | ~torch.isfinite(grouped_new)) & factor_mask
+            self._raise_replay_audit(
+                "nonfinite active factor score in collection-group replay",
+                "nonfinite_grouped_factor", base_facts, records, old_factors, factor_mask,
+                group_ids, self._audit_offending_indices(bad_full),
+            )
+        grouped_error = torch.abs(active_grouped - active_old)
+        grouped_max = float(grouped_error.max().item()) if grouped_error.numel() else 0.0
+        base_facts["grouped_max_abs_logprob_error"] = grouped_max
+        if grouped_max > GROUPED_REPLAY_ABS_TOLERANCE:
+            full_error = torch.zeros_like(old_factors)
+            full_error[factor_mask] = torch.abs(grouped_new[factor_mask] - old_factors[factor_mask])
+            self._raise_replay_audit(
+                f"collection-group replay mismatch {grouped_max:.9g} > "
+                f"{GROUPED_REPLAY_ABS_TOLERANCE:.9g}",
+                "grouped_identity_mismatch", base_facts, records, old_factors, factor_mask,
+                group_ids,
+                self._audit_offending_indices(
+                    (full_error > GROUPED_REPLAY_ABS_TOLERANCE) & factor_mask
+                ),
+            )
+
+        merged_abs_max = 0.0
+        merged_relative_max = 0.0
+        audit_batch = int(self.config.coordinator_batch_size)
+        with torch.no_grad():
+            for start in range(0, len(records), audit_batch):
+                stop = min(len(records), start + audit_batch)
+                try:
+                    merged_new = self._flatten_new_factors(
+                        self._evaluate_events(records[start:stop])
+                    )
+                except Exception as scoring_error:
+                    scoring_facts = deepcopy(base_facts)
+                    scoring_facts.update({
+                        "scoring_phase": "merged_batch",
+                        "scoring_batch_start": int(start),
+                        "scoring_batch_stop": int(stop),
+                        "scoring_exception_type": type(scoring_error).__name__,
+                        "scoring_exception_message": str(scoring_error),
+                    })
+                    self._raise_replay_audit(
+                        "merged replay scoring failed: "
+                        f"{type(scoring_error).__name__}: {scoring_error}",
+                        "merged_scoring_exception", scoring_facts, records, old_factors,
+                        factor_mask, group_ids,
+                        [[record_index, -1] for record_index in range(start, stop)],
+                        cause=scoring_error,
+                    )
+                merged_old = old_factors[start:stop]
+                merged_mask = factor_mask[start:stop]
+                active_merged_old = merged_old[merged_mask]
+                active_merged_new = merged_new[merged_mask]
+                if not bool(torch.isfinite(active_merged_old).all()) or not bool(
+                    torch.isfinite(active_merged_new).all()
+                ):
+                    bad_local = (
+                        ~torch.isfinite(merged_old) | ~torch.isfinite(merged_new)
+                    ) & merged_mask
+                    bad = self._audit_offending_indices(bad_local)
+                    shifted = [[row + start, factor] for row, factor in bad]
+                    self._raise_replay_audit(
+                        "nonfinite active factor score in merged replay",
+                        "nonfinite_merged_factor", base_facts, records, old_factors,
+                        factor_mask, group_ids, shifted,
+                    )
+                difference = active_merged_new - active_merged_old
+                relative = torch.abs(torch.expm1(difference))
+                if not bool(torch.isfinite(relative).all()):
+                    self._raise_replay_audit(
+                        "nonfinite relative factor probability drift in merged replay",
+                        "nonfinite_merged_probability_drift", base_facts, records,
+                        old_factors, factor_mask, group_ids, [[start]],
+                    )
+                if difference.numel():
+                    merged_abs_max = max(merged_abs_max, float(torch.abs(difference).max().item()))
+                    merged_relative_max = max(merged_relative_max, float(relative.max().item()))
+                if bool((relative > MERGED_REPLAY_RELATIVE_TOLERANCE).any()):
+                    full_relative = torch.zeros_like(merged_old)
+                    full_relative[merged_mask] = relative
+                    bad = self._audit_offending_indices(
+                        (full_relative > MERGED_REPLAY_RELATIVE_TOLERANCE) & merged_mask
+                    )
+                    shifted = [[row + start, factor] for row, factor in bad]
+                    base_facts["merged_max_abs_logprob_error"] = merged_abs_max
+                    base_facts["merged_max_relative_probability_drift"] = merged_relative_max
+                    self._raise_replay_audit(
+                        f"merged replay relative probability drift {merged_relative_max:.9g} > "
+                        f"{MERGED_REPLAY_RELATIVE_TOLERANCE:.9g}",
+                        "merged_probability_drift", base_facts, records, old_factors,
+                        factor_mask, group_ids, shifted,
+                    )
+
+        base_facts.update({
+            "status": "passed",
+            "merged_max_abs_logprob_error": merged_abs_max,
+            "merged_max_relative_probability_drift": merged_relative_max,
+        })
+        self._record_replay_audit(base_facts)
+        return deepcopy(base_facts)
+
     def update_coordinator(self, num_steps, bootstrap_values=None):
         if bootstrap_values is not None:
             raise ValueError("terminal-aligned duration updates do not accept high-level bootstrap values")
@@ -865,6 +1203,9 @@ class DurationAgent(HMASDAgent):
             last_by_env[event.env_id] = event
         if not all(event.terminal for event in last_by_env.values()):
             raise ValueError("every lane must end at a native terminal boundary")
+
+        # This audit must precede ValueNorm mutation and every optimizer step.
+        audit_facts = self.audit_event_replay(events)
 
         advantages_np, returns_np = compute_event_gae(
             [e.reward for e in events], [e.old_value for e in events], [e.elapsed for e in events],
@@ -881,20 +1222,7 @@ class DurationAgent(HMASDAgent):
 
         event_count = len(events)
         audit_batch = int(self.config.coordinator_batch_size)
-        replay_max = 0.0
-        with torch.no_grad():
-            for start in range(0, event_count, audit_batch):
-                stop = min(event_count, start + audit_batch)
-                pre_eval = self._evaluate_events(events[start:stop])
-                pre_new = self._flatten_new_factors(pre_eval)
-                replay_error = torch.abs(pre_new - old_factors[start:stop])[factor_mask[start:stop]]
-                if replay_error.numel():
-                    replay_max = max(replay_max, float(replay_error.max().item()))
-        self._duration_metrics["replay_pre_max_abs_error"] = max(
-            float(self._duration_metrics["replay_pre_max_abs_error"]), replay_max
-        )
-        if replay_max > 2e-5:
-            raise RuntimeError(f"duration teacher-forced replay mismatch {replay_max:.9g}")
+        replay_max = float(audit_facts["grouped_max_abs_logprob_error"])
 
         primitive_count = int(num_steps) * int(self.config.num_envs)
         if sum(e.elapsed for e in events) != primitive_count:
@@ -992,6 +1320,14 @@ class DurationAgent(HMASDAgent):
             "primitive_transitions": primitive_count,
             "optimizer_steps": updates,
             "replay_pre_max_abs_error": replay_max,
+            "replay_grouped_abs_logprob_threshold": GROUPED_REPLAY_ABS_TOLERANCE,
+            "replay_merged_max_abs_logprob_error": float(
+                audit_facts["merged_max_abs_logprob_error"]
+            ),
+            "replay_merged_max_relative_probability_drift": float(
+                audit_facts["merged_max_relative_probability_drift"]
+            ),
+            "replay_merged_relative_probability_threshold": MERGED_REPLAY_RELATIVE_TOLERANCE,
             "replay_post_mean_abs_change": post_mean,
             "approx_kl": approx_kl,
             "clip_fraction": clip_fraction,
@@ -1108,6 +1444,16 @@ class DurationAgent(HMASDAgent):
             "team_skill_occupancy": dict(metrics["team_skill_occupancy"]),
             "agent_skill_occupancy": dict(metrics["agent_skill_occupancy"]),
             "replay_pre_max_abs_error": float(metrics["replay_pre_max_abs_error"]),
+            "replay_grouped_abs_logprob_threshold": float(metrics["replay_grouped_threshold"]),
+            "replay_merged_max_abs_logprob_error": float(
+                metrics["replay_merged_max_abs_error"]
+            ),
+            "replay_merged_max_relative_probability_drift": float(
+                metrics["replay_merged_max_relative_probability_drift"]
+            ),
+            "replay_merged_relative_probability_threshold": float(
+                metrics["replay_merged_relative_probability_threshold"]
+            ),
             "replay_post_mean_abs_change": float(metrics["replay_post_mean_abs_change"]),
             "approx_kl": float(metrics["approx_kl"]),
             "clip_fraction": float(metrics["clip_fraction"]),
@@ -1119,4 +1465,5 @@ class DurationAgent(HMASDAgent):
                 if self._duration_theta0_norm > 0.0 else 0.0
             ),
             "last_update": dict(metrics["last_update"]),
+            "last_replay_audit": dict(metrics["last_replay_audit"]),
         }

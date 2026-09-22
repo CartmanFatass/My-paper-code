@@ -91,6 +91,8 @@ def test_short_complete_native_learning_and_evaluation(arm, device_name, tmp_pat
         np.testing.assert_allclose(np.asarray(row["native_scores_J"]),
                                    spec.n_agents * np.asarray(row["returns_U"]) / spec.horizon)
         assert all(value == 0 for value in row["optimizer_calls"].values())
+        if row["after_rollout"] == 0:
+            assert row["duration"]["coordinator_relative_initialization_displacement"] == 0.0
     for checkpoint in summary["checkpoints"]:
         assert (out / checkpoint["path"]).is_file()
         assert checkpoint["bytes"] > 0
@@ -107,7 +109,7 @@ def test_nonfinite_measurements_cannot_be_published(tmp_path):
     assert not target.exists()
 
 
-@pytest.mark.parametrize("failure", ["evaluation", "update", "displacement"])
+@pytest.mark.parametrize("failure", ["evaluation", "update", "displacement", "replay", "replay_capture"])
 def test_failed_attempt_retains_consumed_exposure(failure, monkeypatch, tmp_path):
     spec = replace(runner.StudySpec("fixed", 456), lanes=1, horizon=10, rollouts=1,
                    eval_lanes=1, eval_rollouts=(0, 1), epochs=1, threads=1)
@@ -132,10 +134,16 @@ def test_failed_attempt_retains_consumed_exposure(failure, monkeypatch, tmp_path
             return envs
 
         monkeypatch.setattr(runner.native, "_make_envs", make_with_failure)
-    elif failure == "update":
+    elif failure in ("update", "replay", "replay_capture"):
         def interrupted_update(*args, **kwargs):
-            raise RuntimeError("injected update failure")
+            error_class = RuntimeError if failure == "update" else runner.ReplayAuditError
+            raise error_class("injected update failure")
         monkeypatch.setattr(runner.DurationAgent, "update", interrupted_update)
+        def payload(self):
+            if failure == "replay_capture":
+                raise OSError("injected capture failure")
+            return {"coordinator": {"weight": torch.ones(3)}, "events": [{"env_id": 0}]}
+        monkeypatch.setattr(runner.DurationAgent, "replay_failure_payload", payload)
     else:
         monkeypatch.setattr(runner.native, "_exposure_line", lambda *args: {"coordinator": float("nan")})
     with pytest.raises((RuntimeError, ValueError)):
@@ -153,3 +161,14 @@ def test_failed_attempt_retains_consumed_exposure(failure, monkeypatch, tmp_path
         assert saved["counts"]["training_episodes"] == 1
         assert saved["counts"]["update_stages"] == int(failure == "displacement")
     assert (out / "error.txt").is_file()
+    if failure == "replay":
+        artifact = saved["replay_failure"]
+        loaded = torch.load(out / artifact["path"], weights_only=False)
+        torch.testing.assert_close(loaded["coordinator"]["weight"], torch.ones(3))
+        assert loaded["events"] == [{"env_id": 0}]
+        assert loaded["launch_sha"] == "test-source"
+        assert loaded["runner_spec"]["arm"] == "fixed"
+        assert runner.artifact_facts(out / artifact["path"])["sha256"] == artifact["sha256"]
+    elif failure == "replay_capture":
+        assert "injected capture failure" in saved["replay_failure_capture_error"]
+        assert "injected update failure" in saved["error"]

@@ -23,8 +23,11 @@ def _intermediates(agent, events, *, double=False):
     return entities.detach().cpu(), encoded.detach().cpu(), logits.detach().cpu()
 
 
-@pytest.mark.parametrize("arm", ["fixed", "factored", "ar"])
-def test_frozen_native_replay_grouping(arm, tmp_path):
+@pytest.mark.parametrize("arm,asynchronous", [
+    ("fixed", False), ("factored", False), ("ar", False),
+    ("factored", True), ("ar", True),
+])
+def test_frozen_native_replay_grouping(arm, asynchronous, tmp_path):
     if not torch.cuda.is_available():
         pytest.skip("native CUDA grouping check")
     torch.set_num_threads(4)
@@ -40,10 +43,13 @@ def test_frozen_native_replay_grouping(arm, tmp_path):
         groups = []
         for time_step in range(50):
             states, observations = runner.native._reset_all(envs)
-            agent._batched_assign_skills_d2(states, observations, np.zeros(16, dtype=int),
+            steps = np.full(16, time_step if asynchronous else 0, dtype=int)
+            agent._batched_assign_skills_d2(states, observations, steps,
                                            np.zeros(16, dtype=bool), deterministic=False)
-            groups.append([agent._new_event_record(i, time_step, agent.env_d2_last_decision[i])
-                           for i in range(16)])
+            active = np.flatnonzero(agent._d2_last_step["decision"])
+            if len(active):
+                groups.append([agent._new_event_record(i, time_step, agent.env_d2_last_decision[i])
+                               for i in active])
         events = [event for group in groups for event in group]
         old, mask = agent._factor_tensors(events, agent.device)
         with torch.no_grad():
@@ -58,8 +64,22 @@ def test_frozen_native_replay_grouping(arm, tmp_path):
         with torch.no_grad():
             double_small = [_intermediates(agent, groups[i], double=True) for i in range(2)]
             double_merged = _intermediates(agent, groups[0] + groups[1], double=True)
+        cpu_rng = torch.get_rng_state().clone()
+        cuda_rng = [state.clone() for state in torch.cuda.get_rng_state_all()]
+        # Closure-time order can differ from collection order. The production
+        # auditor must reconstruct original groups, not treat adjacent rows as one.
+        audit = agent.audit_event_replay(list(reversed(events)))
+        assert audit["status"] == "passed"
+        assert audit["grouped_max_abs_logprob_error"] <= 2e-5
+        assert audit["merged_max_relative_probability_drift"] <= .001
+        assert torch.equal(cpu_rng, torch.get_rng_state())
+        assert all(torch.equal(a, b) for a, b in zip(cuda_rng, torch.cuda.get_rng_state_all()))
         details = {
             "arm": arm, "device": str(agent.device), "torch": torch.__version__,
+            "production_audit": audit,
+            "asynchronous": asynchronous, "events": len(events),
+            "group_sizes": sorted(set(len(group) for group in groups)),
+            "partial_eligibility_events": sum(not event.sampled_mask.all() for event in events),
             "matmul_precision": torch.get_float32_matmul_precision(),
             "tf32_matmul": torch.backends.cuda.matmul.allow_tf32,
             "tf32_cudnn": torch.backends.cudnn.allow_tf32,
@@ -86,5 +106,8 @@ def test_frozen_native_replay_grouping(arm, tmp_path):
         assert all(torch.equal(parameters[k], v) for k, v in agent.skill_coordinator.state_dict().items())
         assert all(value == 0 for value in runner.optimizer_counts(counters).values())
         assert agent.skill_coordinator.training
+        if asynchronous:
+            assert len(details["group_sizes"]) > 1
+            assert details["partial_eligibility_events"] > 0
     finally:
         runner.close_envs(envs)

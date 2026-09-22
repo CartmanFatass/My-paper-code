@@ -12,6 +12,7 @@ from experiments.candidates.joint_duration_skill_learning.learning import (
     DURATION_CAP,
     DurationAgent,
     EventRecord,
+    ReplayAuditError,
     compute_event_gae,
     mask_duration_logits,
 )
@@ -351,3 +352,145 @@ def test_evaluation_finalization_records_terminal_execution_without_training_eve
     assert metrics["stored_events"] == 0
     assert metrics["terminal_boundaries"] == 1
     assert metrics["executed_duration"]["histogram"] == {"10": 2}
+
+
+def _freeze_old_scores(agent: DurationAgent, groups: list[list[EventRecord]]) -> None:
+    """Populate old scores exactly as the supplied collection groups produced them."""
+    with torch.no_grad():
+        for group in groups:
+            ordered = sorted(group, key=lambda event: event.env_id)
+            replay = agent._evaluate_events(ordered)
+            for row, event in enumerate(ordered):
+                event.old_team_log_prob = float(replay["team_log_probs"][row])
+                event.old_agent_log_probs = replay["agent_log_probs"][row].cpu().numpy().copy()
+                event.old_duration_log_probs = (
+                    replay["duration_log_probs"][row].cpu().numpy().copy()
+                )
+
+
+def _audit_fixture_events(agent: DurationAgent) -> list[EventRecord]:
+    states, observations = blank_inputs()
+    agent.step(
+        states, observations, np.zeros(2, dtype=np.int64), np.zeros(2, dtype=bool),
+        return_step_data=True, build_infos=False,
+    )
+    first = event_from_log(agent, agent.env_log_probs[0])
+    first.env_id = 0
+    first.start_step = 0
+    second = event_from_log(agent, agent.env_log_probs[1])
+    second.env_id = 1
+    second.start_step = 0
+    partial = deepcopy(first)
+    partial.env_id = 0
+    partial.start_step = 3
+    partial.sample_Z = False
+    partial.sampled_mask = np.asarray([True, False], dtype=np.bool_)
+    partial.duration_tokens[1] = 0
+    partial.duration_support[1] = 0
+    _freeze_old_scores(agent, [[first, second], [partial]])
+    # Closure order can differ from collection order for asynchronous durations.
+    return [partial, second, first]
+
+
+def test_replay_audit_reconstructs_variable_collection_groups_without_rng_change(tmp_path):
+    agent = make_agent(tmp_path, "ar")
+    events = _audit_fixture_events(agent)
+    torch_before = torch.get_rng_state().clone()
+    numpy_before = np.random.get_state()
+    facts = agent.audit_event_replay(events)
+    assert facts["status"] == "passed"
+    assert facts["collection_group_count"] == 2
+    assert facts["grouped_max_abs_logprob_error"] <= 2e-5
+    assert facts["merged_max_relative_probability_drift"] <= 0.001
+    assert torch.equal(torch_before, torch.get_rng_state())
+    numpy_after = np.random.get_state()
+    assert numpy_before[0] == numpy_after[0]
+    np.testing.assert_array_equal(numpy_before[1], numpy_after[1])
+    assert numpy_before[2:] == numpy_after[2:]
+
+    duplicate = deepcopy(events[0])
+    with pytest.raises(ReplayAuditError, match="duplicate replay collection identity"):
+        agent.audit_event_replay(events + [duplicate])
+
+
+@pytest.mark.parametrize("corruption", ["old_log_prob", "token", "nonfinite_old"])
+def test_replay_audit_rejects_corrupted_stored_factors_and_preserves_payload(
+    tmp_path, corruption
+):
+    agent = make_agent(tmp_path, "ar")
+    events = _audit_fixture_events(agent)
+    target = events[-1]
+    if corruption == "old_log_prob":
+        target.old_team_log_prob += 0.1
+    elif corruption == "token":
+        target.team_skill = int(agent.config.n_Z)
+    else:
+        target.old_team_log_prob = float("nan")
+    with pytest.raises(ReplayAuditError) as error:
+        agent.audit_event_replay(events)
+    payload = agent.replay_failure_payload()
+    assert payload["schema"] == "joint_duration_replay_failure_v1"
+    assert payload["duration_mode"] == "ar"
+    assert len(payload["event_records"]) == len(events)
+    assert payload["coordinator_state_dict"]
+    assert payload["factor_masks"].dtype == torch.bool
+    assert payload["failure"]["offending_indices"]
+    assert payload["collection_group_identities"].shape == (len(events), 2)
+    if corruption == "token":
+        assert error.value.reason == "grouped_scoring_exception"
+        assert payload["failure"]["scoring_exception_type"]
+        assert payload["failure"]["scoring_exception_message"]
+
+
+def test_replay_audit_rejects_nonfinite_new_factor_before_arithmetic(tmp_path, monkeypatch):
+    agent = make_agent(tmp_path, "ar")
+    events = _audit_fixture_events(agent)
+    original = agent._evaluate_events
+
+    def nonfinite(records):
+        output = original(records)
+        output["team_log_probs"] = output["team_log_probs"].clone()
+        output["team_log_probs"][0] = torch.nan
+        return output
+
+    monkeypatch.setattr(agent, "_evaluate_events", nonfinite)
+    with pytest.raises(ReplayAuditError, match="nonfinite active factor score"):
+        agent.audit_event_replay(events)
+    assert agent.replay_failure_payload()["failure"]["reason"].startswith("nonfinite_")
+
+
+def test_merged_probability_drift_has_separate_scale_bound(tmp_path, monkeypatch):
+    agent = make_agent(tmp_path, "fixed")
+    events = _audit_fixture_events(agent)
+    # Use singleton collection groups so only the merged path receives the injected
+    # numerical regrouping perturbation.
+    for index, event in enumerate(events):
+        event.start_step = index
+        event.env_id = 0
+    _freeze_old_scores(agent, [[event] for event in events])
+    original = agent._evaluate_events
+
+    def observed_scale(records):
+        output = original(records)
+        if len(records) > 1:
+            output["team_log_probs"] = output["team_log_probs"] + 2.1e-5
+        return output
+
+    monkeypatch.setattr(agent, "_evaluate_events", observed_scale)
+    facts = agent.audit_event_replay(events)
+    assert facts["grouped_max_abs_logprob_error"] <= 2e-5
+    assert 2e-5 < facts["merged_max_abs_logprob_error"] < 0.001
+    assert facts["merged_max_relative_probability_drift"] < 0.001
+
+    def oversized(records):
+        output = original(records)
+        if len(records) > 1:
+            output["team_log_probs"] = output["team_log_probs"] + 0.002
+        return output
+
+    monkeypatch.setattr(agent, "_evaluate_events", oversized)
+    with pytest.raises(ReplayAuditError, match="relative probability drift"):
+        agent.audit_event_replay(events)
+    failure = agent.replay_failure_payload()["failure"]
+    assert failure["reason"] == "merged_probability_drift"
+    assert failure["merged_max_relative_probability_drift"] > 0.001

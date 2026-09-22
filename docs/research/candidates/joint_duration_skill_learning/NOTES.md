@@ -779,3 +779,9 @@ and numerical/backend facts when either check fails, for reproducible diagnosis 
 checkpoint resume. Tests must reject wrong tokens/old scores/nonfinite values and an oversized
 regrouping perturbation, while accepting the observed pure regrouping case. Keep all native
 CPU/CUDA integration checks. Independent numerical review precedes any new result attempt.
+
+One additional output-only repair is included: a freshly constructed evaluator previously
+reported coordinator displacement against its own random initialization, rather than the
+training instance's initialization. Copy the learner's frozen reference into the evaluator;
+the initialization panel must report zero displacement. Historical learner displacement
+and training/evaluation actions are unaffected. Preserve the old output as written.

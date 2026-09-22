@@ -29,7 +29,7 @@ import torch
 
 from scripts import run_flexible_skill_duration_e0 as native
 from scripts.hmasd_admission import require_admission
-from experiments.candidates.joint_duration_skill_learning.learning import DurationAgent
+from experiments.candidates.joint_duration_skill_learning.learning import DurationAgent, ReplayAuditError
 
 DIRECTION = "joint_duration_skill_learning"
 SEEDS = {"fixed": 2026092201, "factored": 2026092202, "ar": 2026092203}
@@ -182,6 +182,8 @@ def evaluate(learner, spec, out, device, after_rollout, summary):
                     target.load_state_dict(source.state_dict())
             for name in ("obs_norm", "state_norm", "value_norm_coordinator", "value_norm_discoverer"):
                 setattr(evaluator, name, copy.deepcopy(getattr(learner, name)))
+            evaluator._duration_theta0 = [p.detach().clone() for p in learner._duration_theta0]
+            evaluator._duration_theta0_norm = learner._duration_theta0_norm
             evaluator.train(False)
             counters = count_optimizers(evaluator)
             states, observations = native._reset_all(envs)
@@ -286,14 +288,18 @@ def train_rollout(agent, envs, spec, states, observations, dones, counters, roll
     return states, observations, dones, finite_json(row)
 
 
-def save_checkpoint(agent, out, transitions):
-    path = out / f"checkpoint_{transitions}.pt"
-    agent.save_model(str(path))
+def artifact_facts(path):
     digest = hashlib.sha256()
     with path.open("rb") as stream:
         for block in iter(lambda: stream.read(1024 * 1024), b""):
             digest.update(block)
     return {"path": path.name, "sha256": digest.hexdigest(), "bytes": path.stat().st_size}
+
+
+def save_checkpoint(agent, out, transitions):
+    path = out / f"checkpoint_{transitions}.pt"
+    agent.save_model(str(path))
+    return artifact_facts(path)
 
 
 def execute(spec, out, launch_sha, device, *, started=PROCESS_START):
@@ -319,6 +325,7 @@ def execute(spec, out, launch_sha, device, *, started=PROCESS_START):
         "scientific_scope": "one fresh training instance per arm, exploratory package comparison",
     }
     envs = []
+    agent = None
 
     def publish(stage):
         summary["stage"] = stage
@@ -378,6 +385,19 @@ def execute(spec, out, launch_sha, device, *, started=PROCESS_START):
         summary["status"] = "incomplete"
         summary["error"] = f"{type(error).__name__}: {error}"
         (out / "error.txt").write_text(traceback.format_exc())
+        if isinstance(error, ReplayAuditError) and agent is not None:
+            try:
+                failure_path = out / "replay_failure.pt"
+                payload = agent.replay_failure_payload()
+                payload["launch_sha"] = launch_sha
+                payload["runner_spec"] = asdict(spec)
+                torch.save(payload, failure_path)
+                summary["replay_failure"] = {
+                    **artifact_facts(failure_path),
+                    "purpose": "frozen numerical diagnosis only; not a resumable checkpoint",
+                }
+            except Exception as capture_error:
+                summary["replay_failure_capture_error"] = f"{type(capture_error).__name__}: {capture_error}"
         publish("technical_failure")
         raise
     finally:
