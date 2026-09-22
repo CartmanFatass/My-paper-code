@@ -630,3 +630,11 @@ as `tests/hmasd/test_discoverer_entry_masks.py`. This is the same known repair, 
 discovered performance intervention. It applies to every B01 arm, is reviewed with the full
 adapter, and is not retroactively applied to historical FSD measurements or another task's
 accepted run. No other low-level loss, recurrence or reset semantics change.
+
+The independent engineering Reviewer found no material issue in this same common repair.
+On preferred `wsl_4070`, committed source `d34eb73f7` passed the reused storage-to-update
+regression and existing recurrent sequence tests: **9 passed in 2.31 s**. This is correctness
+evidence, 0 new fits. Remote Git needs its configured login network shell; the stalled owned
+nonlogin Git fetch/checkout was reconciled and cancelled before preparing the isolated sparse
+checkout. No scientific process was started, stopped or retried, and no local compute fallback
+was used. Full duration-adapter integration and its independent review remain pending.
