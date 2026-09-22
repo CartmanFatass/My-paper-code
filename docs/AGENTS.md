@@ -1,7 +1,9 @@
 # docs/
 
 Operating authority is project/OPERATING_CONSTITUTION.md. research/RESEARCH.md is the
-current programme index, including owner pause and lead runtime. For new direction work use
+current programme index, including shared research background, owner pause and lead runtime.
+Update shared understanding by topic there; the former FOUNDATIONS entry is navigation only.
+For new direction work use
 research/candidates/<direction>/NOTES.md, CLAIM_<slug>.md when confirming, and repository-root
 runs/<direction>/<tag>/ for recoverable run artifacts. Do not create pilot cards, intakes,
 DIRECTION updates, dossiers or handoffs merely to satisfy an older record convention.

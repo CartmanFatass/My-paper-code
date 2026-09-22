@@ -1,6 +1,6 @@
 # Documentation
 
-Start with [current research](research/RESEARCH.md) for direction status and the owner pause,
+Start with [current research](research/RESEARCH.md) for shared research background, direction status and the owner pause,
 or the [project map](project/PROJECT_MAP.md) for code and tooling. The
 [constitution](project/OPERATING_CONSTITUTION.md) is the sole governance text;
 the [control map](project/CONTROL_PLANE_MAP.md) and
@@ -13,7 +13,7 @@ Moving between the Windows and WSL hosts, or between Claude and Codex, follows t
 | Location | Purpose |
 | --- | --- |
 | `project/` | Current governance, control-plane navigation, code map and existing problem reference |
-| `research/RESEARCH.md` | Current directions, lead runtime, pause, research plan and evidence links |
+| `research/RESEARCH.md` | Shared research background, current directions, lead runtime, pause, research plan and evidence links |
 | `research/candidates/<direction>/` | Direction notebooks and claims; older files remain original evidence |
 | `.agents/skills/` at repository root | Current scientific and engineering methods, coordination and Pro use |
 
@@ -22,7 +22,7 @@ Moving between the Windows and WSL hosts, or between Claude and Codex, follows t
 | Location | Contents and status |
 | --- | --- |
 | [archive/](archive/README.md) | Retired project specifications, operating records, migration plans and old control implementations |
-| [research/archive/](research/archive/) | Dated retired research-index material, including completed reviews and superseded plans; read on demand, never current standing |
+| [research/archive/](research/archive/) | Dated retired index/background material, including completed reviews and superseded plans; read on demand, never current standing |
 | `research/portfolio/`, `research/legacy/`, `research/workflow-runs/`, `research/review_packets/` | Historical decisions and delivery evidence; not current workflow requirements |
 | `research/designs/`, `research/cdc/`, `research/literature/` | Scientific designs, derivations and references; applicability depends on the named object |
 | `external-review/` | Original Pro/external answers and source captures; retain their paths and bytes |

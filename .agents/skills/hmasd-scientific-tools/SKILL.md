@@ -176,7 +176,8 @@ Existing frozen review exceptions remain tied to their original object, not expa
 ## Tools, only as needed
 
 For an unresolved concept read the relevant section of
-`docs/rl-marl-foundations-20260907/FOUNDATIONS.md` ([scientific-reading.md](references/scientific-reading.md)).
+the shared research background in `docs/research/RESEARCH.md`
+([scientific-reading.md](references/scientific-reading.md)).
 For a literature gap use [local-literature.md](references/local-literature.md) and verify primary
 passages. For baseline or environment integration use [adapters.md](references/adapters.md).
 For an endpoint CSV `task,seed,arm,score` run `scripts/summarize_runs.py` (one score per training

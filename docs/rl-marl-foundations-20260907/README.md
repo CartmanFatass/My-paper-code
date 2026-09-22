@@ -2,7 +2,7 @@
 
 ## 目标
 
-提供共享的 RL/MARL 知识入口与来源目录，按当前科学问题查阅相关概念。FOUNDATIONS 和专题不是新规范；原讨论的局部选择单独保存在 SESSION_CHOICES.md，不外推到所有研究方向。
+提供 RL/MARL 专题与来源目录，按当前科学问题查阅。共享共识统一维护在 [RESEARCH 的研究背景](../research/RESEARCH.md#研究背景与共享认识)；本目录保存参考资料，FOUNDATIONS 保留旧引用入口。原讨论的局部选择单独保存在 SESSION_CHOICES.md，不外推到所有研究方向。
 
 ## 当前状态
 
@@ -13,12 +13,13 @@
 - `sources/`：书籍、原始文献及本地资料的来源清单、链接、版本和可访问性记录。
 - `topic-notes/`：按专题整理的阅读笔记与术语对齐材料。
 - `working/`：核查中的摘录、比对表和其他可复核中间产物。
-- `FOUNDATIONS.md`：综合稿，明确证据边界与未决问题。
+- `FOUNDATIONS.md`：指向 RESEARCH 研究背景及迁移前全文的兼容入口。
 - [`SESSION_CHOICES.md`](SESSION_CHOICES.md)：原讨论的局部选择、机制假设与未冻结实现，不是全局规则。
 
 阅读入口与中间记录：
 
-- [`FOUNDATIONS.md`](FOUNDATIONS.md)：RL/MARL 基础认识综合稿。
+- [当前研究背景与共享认识](../research/RESEARCH.md#研究背景与共享认识)：项目统一维护的共识。
+- [迁移前完整共识](../research/archive/2026-09-21/FOUNDATIONS.md)：历史论证、推导和证据范围。
 - [`topic-notes/01_RL.md`](topic-notes/01_RL.md)：RL 专题。
 - [`topic-notes/02_MARL.md`](topic-notes/02_MARL.md)：MARL 专题。
 - [`topic-notes/03_HIERARCHY_ASYNC.md`](topic-notes/03_HIERARCHY_ASYNC.md)：层次/异步技能专题。

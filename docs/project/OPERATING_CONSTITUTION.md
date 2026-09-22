@@ -227,9 +227,16 @@ decisions and source revision; keep existing citations usable. Date alone does n
 still-current decision. Keep pause, direction state, lead, frozen bindings and unresolved work
 recoverable in the current index. Do not move an in-flight Pro answer target or retire unresolved
 accepted operations; reconcile them first. Archiving text does not archive a direction or resume
-research. Direction NOTES, claims, runs and shared scientific understanding keep their existing
-roles; this amendment does not retire or rewrite them. Archives are read on demand, not a required
+research. Direction NOTES, claims and runs keep their existing roles; index retirement does not
+retire or rewrite them. Archives are read on demand, not a required
 preload. Keep only useful history links in RESEARCH, not an accumulating archive ledger.
+
+Owner follow-up 2026-09-21 (shared research background): maintain the programme's shared
+understanding inside RESEARCH, before the direction tables and current plan. Revise the relevant
+topic when evidence changes the judgment; retain assumptions, scope, contrary evidence and source
+links rather than append experiment histories. This is research background, not another governance
+text or direction authorization. The former FOUNDATIONS entry redirects here; its prior full text
+is preserved in the dated research archive and topic/source notes remain reference material.
 
 ## 5. Pro is an adviser
 

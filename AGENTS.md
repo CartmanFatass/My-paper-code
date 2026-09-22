@@ -7,7 +7,9 @@ instructions. The owner's pause takes priority over everything; a status questio
 edit, migration or restart never resumes research.
 
 Current state: `docs/research/RESEARCH.md` lists active, reserve and archived directions, the
-lead runtime and the owner pause. It replaces PORTFOLIO,
+lead runtime and the owner pause, alongside shared research background and the current plan.
+Shared understanding is maintained by topic in RESEARCH; the former FOUNDATIONS entry redirects there.
+It replaces PORTFOLIO,
 APPROVED_SET, EXPERIMENT_TRACKING, dossiers and lifecycle paperwork.
 Keep it current rather than append-only: superseded project reviews and plans retire by date
 under `docs/research/archive/` per constitution section 4; direction NOTES remain unchanged.

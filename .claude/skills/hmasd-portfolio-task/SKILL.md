@@ -13,7 +13,7 @@ as `NOTES.md` entries.
 
 ## Steps
 
-1. **Gather.** The `RESEARCH.md` tables, each active and reserve direction's last notebook
+1. **Gather.** The relevant shared background and current tables in `RESEARCH.md`, each active and reserve direction's last notebook
    entries and claim notes, and the queued recommendations. Verify a standing line against the
    runs folder when it conflicts with the notebook. Read the latest working explanation and
    the relevant predecessor: what has been learned, which reasons for hope were weakened,
@@ -69,6 +69,8 @@ as `NOTES.md` entries.
    its date under `### Decision`.
 5. **Apply and retire.** Update the affected direction rows and replace the current plan with
    the decision's still-effective priorities, reasons, limits and next useful comparisons.
+   If the evidence changes a shared judgment, revise that background topic in RESEARCH with its
+   scope and supporting/contrary sources; do not add a chronological result account or a second consensus file.
    Keep outcome details in their direction evidence; the index links to them. After the complete
    answer has been read, its write reconciled and the decision recorded, retire the complete
    review and superseded project narrative under `docs/research/archive/<YYYY-MM-DD>/RESEARCH.md`
@@ -80,8 +82,8 @@ as `NOTES.md` entries.
    Pending decisions, accepted-operation recovery and an in-flight answer target remain current
    until resolved; never relocate the target to make a review look complete. Keep current pause,
    states, lead-runtime values, actual routing and frozen obligations recoverable. Retirement
-   does not change these facts or restart research. Leave direction NOTES/claims/runs and shared
-   understanding in their existing roles. Keep a date-directory link and only relevant archive
+   does not change these facts or restart research. Leave direction NOTES/claims/runs in their
+   existing roles and maintain shared background in RESEARCH. Keep a date-directory link and only relevant archive
    references in RESEARCH; no chronological maintenance log, archive registry or new decision file.
 
 ## Boundaries
