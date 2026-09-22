@@ -1,0 +1,96 @@
+{
+  "acceptance": "accepted",
+  "accepted_at": "2026-09-22T17:53:56.542406Z",
+  "bootstrap_command": [
+    "/home/wu/.venvs/hmasd/bin/python",
+    "/home/wu/hmasd-worktrees/agent-count-action-law-20260922-b03/scripts/hmasd_admission.py",
+    "_run-admitted",
+    "--runner",
+    "/home/wu/hmasd-worktrees/agent-count-action-law-20260922-b03/scripts/run_agent_count_action_law_training_b03.py",
+    "--output",
+    "/home/wu/hmasd-worktrees/agent-count-action-law-20260922-b03/runs/agent_count_generalization/s1_action_law_b03_h6_clip_s942201",
+    "--",
+    "--cell",
+    "h6_clip",
+    "--out",
+    "runs/agent_count_generalization/s1_action_law_b03_h6_clip_s942201",
+    "--launch-sha",
+    "89486d32ea569728f39d6e21b53f8a7c8854e74c",
+    "--expected-initial-digest",
+    "50f3d5305a2d6a94a1543d7b5111654c7b154f4a9c1b71b59474c4deb36038ac"
+  ],
+  "claim_key": "9baf6c69b01e655d1ed29319bd180b7b8d36e51ad2e8b20f58648049e8fa51d3",
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/9baf6c69b01e655d1ed29319bd180b7b8d36e51ad2e8b20f58648049e8fa51d3.json",
+  "command": [
+    "/home/wu/.venvs/hmasd/bin/python",
+    "/home/wu/hmasd-worktrees/agent-count-action-law-20260922-b03/scripts/run_agent_count_action_law_training_b03.py",
+    "--cell",
+    "h6_clip",
+    "--out",
+    "runs/agent_count_generalization/s1_action_law_b03_h6_clip_s942201",
+    "--launch-sha",
+    "89486d32ea569728f39d6e21b53f8a7c8854e74c",
+    "--expected-initial-digest",
+    "50f3d5305a2d6a94a1543d7b5111654c7b154f4a9c1b71b59474c4deb36038ac"
+  ],
+  "command_sha256": "0033d9ab4a9af1772e6f831fbb444a43870a320d6e46c2739defe9175dbd6347",
+  "control_observation": {
+    "observed_at": "2026-09-22T17:53:56.398929Z",
+    "ref": "refs/heads/main",
+    "remote": "origin",
+    "sha": "ae85c20874c9a070cc0f61c25e0ad89ff5437732"
+  },
+  "control_root": "/home/wu/projects/HMASD",
+  "created_at": "2026-09-22T17:53:56.410742Z",
+  "cwd": "/home/wu/hmasd-worktrees/agent-count-action-law-20260922-b03",
+  "direction": "agent_count_generalization",
+  "host_identity": "LAPTOP-U9TDKC8A",
+  "identity_command": [
+    "/home/wu/.local/share/uv/python/cpython-3.10.21-linux-x86_64-gnu/bin/python3.10",
+    "scripts/run_agent_count_action_law_training_b03.py",
+    "--cell",
+    "h6_clip",
+    "--launch-sha",
+    "89486d32ea569728f39d6e21b53f8a7c8854e74c",
+    "--expected-initial-digest",
+    "50f3d5305a2d6a94a1543d7b5111654c7b154f4a9c1b71b59474c4deb36038ac"
+  ],
+  "lead": "Codex DM (independent session)",
+  "manifest_ref": "/home/wu/hmasd-worktrees/agent-count-action-law-20260922-b03/runs/agent_count_generalization/s1_action_law_b03_h6_clip_s942201/launch-manifest.json",
+  "node": "wsl_4070",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/9baf6c69b01e655d1ed29319bd180b7b8d36e51ad2e8b20f58648049e8fa51d3.json",
+  "output_root": "/home/wu/hmasd-worktrees/agent-count-action-law-20260922-b03/runs/agent_count_generalization/s1_action_law_b03_h6_clip_s942201",
+  "preflight": "/home/wu/hmasd-worktrees/agent-count-action-law-20260922-b03/runs/agent_count_generalization/s1_action_law_b03_h6_clip_s942201/admission-preflight.json",
+  "process": {
+    "detached": true,
+    "identity": {
+      "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+      "kind": "linux_pid_start_ticks",
+      "pid": 226513,
+      "session_id": 226513,
+      "start_ticks": 46208270
+    },
+    "native_handle_kind": "posix_session",
+    "pid": 226513,
+    "process_group_id": 226513
+  },
+  "process_exit": "/home/wu/hmasd-worktrees/agent-count-action-law-20260922-b03/runs/agent_count_generalization/s1_action_law_b03_h6_clip_s942201/process-exit.json",
+  "published_remote": "origin",
+  "runner_process": {
+    "identity": {
+      "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+      "kind": "linux_pid_start_ticks",
+      "pid": 226514,
+      "session_id": 226513,
+      "start_ticks": 46208273
+    },
+    "pid": 226514,
+    "process_group_id": 226513,
+    "supervisor_pid": 226513
+  },
+  "schema_version": 1,
+  "sha": "89486d32ea569728f39d6e21b53f8a7c8854e74c",
+  "source_root": "/home/wu/hmasd-worktrees/agent-count-action-law-20260922-b03",
+  "stderr": "/home/wu/hmasd-worktrees/agent-count-action-law-20260922-b03/runs/agent_count_generalization/s1_action_law_b03_h6_clip_s942201/stderr.log",
+  "stdout": "/home/wu/hmasd-worktrees/agent-count-action-law-20260922-b03/runs/agent_count_generalization/s1_action_law_b03_h6_clip_s942201/stdout.log"
+}
