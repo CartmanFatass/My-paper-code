@@ -523,3 +523,58 @@ do not broaden a single-seed package observation into a stable ranking or univer
 [loe-de]: https://github.com/CartmanFatass/My-paper-code/blob/03eea08a6b3f3fa714b1cdc90d9339f86ed56e94/runs/local_observation_encoding/b01_dense_s92101/process-exit.json
 [loe-encoder]: https://github.com/CartmanFatass/My-paper-code/blob/efe7d61e82b2c0aed7a634bbb2e22d7cc47430a3/experiments/candidates/local_observation_encoding/encoder.py
 [loe-run]: https://github.com/CartmanFatass/My-paper-code/blob/efe7d61e82b2c0aed7a634bbb2e22d7cc47430a3/experiments/candidates/local_observation_encoding/b01.py
+
+## 2026-09-22 — DM decision: archive the tested dense recipe
+
+The focused consultation is complete. The accepted question key is
+`hmasd:1067e4ad2b3007ca4c1c71f7d605fd601c2a16171b8b510ba50a04289c63242f`;
+send effect was `sent`, observation returned `COMPLETE`, and the repository delivery check
+returned `DELIVERED` for actual commit `001d358d7e37469cdbda6533acce3088fb0f4655`, whose parent
+is the assigned source `03eea08a6b3f3fa714b1cdc90d9339f86ed56e94`. The commit fills only this
+question's formerly empty Answer, preserving the question and every other byte. I read its
+complete 10,681-character Answer from the actual commit, matched it to the delivered text,
+and took notebook ownership back. The short chat receipt was not substituted for the advice.
+There was one accepted Send and no resend.
+
+**Response to the advice.** Adopt the scoped stop recommendation and its distinction between
+an investment decision and a training-population claim. `MATERIAL_DISSENT: no` is the
+adviser's report, not another empirical replicate or an approval. The consequential claims
+agree with the two already verified native endpoints, curves, complete learning counts,
+configuration and code. Arithmetic re-reading confirms DENSE-minus-ORIGINAL J of
+-0.291105 / -0.193853 / -0.256172 at panels 15/30/45 and the 1.9468 fit-body wall ratio.
+Preserve the explicit contrary detail: world 93125 at panel 15 has +0.030586, so only 31/32
+worlds there are adverse; panels 30 and 45 each have 32/32 adverse worlds. These nested
+observations do not supply independent training replication. The lower `energy_penalty`
+means the recorded altitude proxy, not measured battery savings. Pro did not independently
+retrieve or deserialize the Git-external checkpoints or replay evaluation; those remain the
+DM's previously recorded engineering checks. No new runtime test or fit was performed here.
+
+The strongest surviving alternative remains a seed-specific initialization/joint-learning
+trajectory. It limits claims about the recipe population, but does not by itself make
+another full training attempt worth choosing. There is no observed late recovery within
+the declared horizon and no measured bottleneck selecting a particular normalization,
+pooling, attention or auxiliary-loss revision. The source-consistency inspection has not
+identified a reason to withdraw the adverse package reading. I do not select another seed,
+extra reset worlds, a short training screen or an architecture search simply to exhaust
+possible explanations. Pro's discussion of one-fit or two-fit repetition describes costs
+and inference limits; it is not an accepted next batch.
+
+Current published shared background §§4 and 6 was refreshed at
+[`9029b4847bc42dacfd9671742f454b14f3014a90`](https://github.com/CartmanFatass/My-paper-code/blob/9029b4847bc42dacfd9671742f454b14f3014a90/docs/research/RESEARCH.md).
+Its separation of representation opportunity, finite learning and independent training units
+continues to determine this decision. The scoped LOE counterexample already published there
+remains accurate; concurrent duration and S7 observations are not additional LOE evidence.
+B05 still motivates taking information construction seriously, without predicting success
+for this particular dense package. No further shared theory or mechanism claim follows.
+
+**Final choice.** Archive `local_observation_encoding` as an active investment in the tested
+B01 recipe. The recipe's expected native service/cost benefit was not observed: fixed J45
+is 0.458426 versus 0.202254 and connected users/step are 31.939438 versus 13.415938
+(ORIGINAL, DENSE), with higher measured DENSE cost. Completed cost remains 2 fits,
+720,000 training and 96,000 evaluation team transitions on `wsl_4070`; sum of fit-body
+walls is 281.46 minutes. **0 additional fits and no further observation are selected.**
+This is an exploratory, one-training-seed-per-arm package decision, not confirmation of
+stable inferiority, identification of a harmful component, proof of convergence or closure
+of all same-information representation research. All original/adverse outcomes and recovery
+artifacts remain preserved. A later reopening would need a recorded new reason that could
+change the practical decision; no successor search or replacement direction is queued.
