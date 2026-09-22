@@ -2100,3 +2100,28 @@ depends on publication and canonical adoption of the reviewed configuration, fre
 resource admission, and a new output root. At this decision there remain 0 B03 started
 training fits and one failed pre-training attempt; no native scientific result is inferred
 from the repair checks.
+
+## 2026-09-22 — B03 repaired D attempt admitted
+
+The reviewed configuration and retained failure evidence were published to main at
+`df79a252025402da65ca8bf7759750d070aabd0e`; canonical control was fast-forwarded with its
+tracked files clean and unrelated untracked evidence preserved. The partial clone needed
+a missing blob during this update: the first plain-shell merge stalled in its network
+helper. After verifying its exact parent chain, only that owned helper was terminated;
+the merge returned code 128 with the canonical tracked state still clean. The same update
+then completed through the configured network shell. No experiment process was involved.
+
+The selected D / 912211 / a02 attempt is now natively admitted. Its
+[manifest](../../../../runs/uav_service_auxiliary/b03_d_912211_a02/launch-manifest.json)
+preserves the exact source, command, operation reference and process identities. The native
+status at 2026-09-22 17:12:08 UTC reports accepted admission, both matching processes running,
+no exit witness and consistent records. Fresh node evidence before admission showed
+12.52 GB available host memory and 7948 MiB free GPU memory; the kernel's own immediate
+[preflight](../../../../runs/uav_service_auxiliary/b03_d_912211_a02/admission-preflight.json)
+remains the admission evidence.
+
+The first copied runner summary is still its initial INCOMPLETE snapshot: failure null,
+all persisted counters zero, no updates and empty stderr. It does not certify completion
+of initial facts or commencement of training. Preserve that distinction from the earlier
+terminal pre-training failure. Subsequent observations use the returned operation reference;
+no other cell has started, and no scientific conclusion or additional fit is selected.
