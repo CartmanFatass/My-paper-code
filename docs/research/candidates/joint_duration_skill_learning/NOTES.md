@@ -683,3 +683,28 @@ focused remote guard/admission/SHA tests passed in 1.75 s. The independent Revie
 the tiny change and the pre-claim refusal boundary; the DM accepts the fix. No learner,
 seed, exposure or fit-plan change. Use normal admission of the corrected published source,
 with a distinct supervisor submission name to preserve the refused submission's evidence.
+
+### B01 fixed fit accepted — 2026-09-21
+
+Native admission accepted the first `fixed` fit at **2026-09-22 03:58:11 UTC** on
+`wsl_4070`, source `d6719caad42a469f881bdff1d7049af15be7a380`, seed 2026092201, CUDA,
+360,000 planned training transitions. Supervisor submission:
+`duration-b01-fixed-s2026092201-guardfix`. The runner and detached supervisor identities
+were both observed running, with consistent records, at 03:59:17 UTC. Acceptance is not
+scientific completion; no primary result has been read.
+
+Runner-written records, copied without modification from the executing node:
+[native manifest](../../../../runs/joint_duration_skill_learning/b01_fixed_s2026092201/launch-manifest.json)
+and [actual-node preflight](../../../../runs/joint_duration_skill_learning/b01_fixed_s2026092201/admission-preflight.json).
+Use the manifest's original `operation_ref`, source and output paths for read-only observation
+and reconciliation; local copies do not establish local process identity. Preflight measured
+9,080,238,080 available host bytes against the 4 GiB floor. Published control was main
+`3f28120bfebc2a73cca3a1442d1eefc23c5fcba1`; expected lead and lifted pause matched.
+
+Actual accepted result attempts are now **1 of the 3 predeclared fits**. Factored and AR
+remain unstarted and will follow sequentially, preserving their seeds and exposure. The
+deterministic waiter observes this exact operation; never restart it on missing observation.
+The full output, exit witness and all scientific measurements must still be collected and
+read at completion. The portable distinction between a member's selected duration and the
+actual common event interval is being incorporated into the shared Research background;
+it is correctness/design knowledge, not a performance claim.
