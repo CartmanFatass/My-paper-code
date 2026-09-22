@@ -195,3 +195,60 @@ Started result fits: 1 of the 2 declared; DENSE is not yet submitted. No scores 
 The detached observer is armed against this same operation for completion/error or a bounded
 checkpoint. Next continuation reconciles that handle; it does not repeat the launch. Complete
 and collect ORIGINAL, then admit DENSE independently at the same input SHA and frozen plan.
+
+### ORIGINAL complete and read — 2026-09-21 21:27 PDT terminal event
+
+The original accepted operation exited with code 0 and a valid, identity-consistent native
+exit witness. This was followed by scientific artifact validation, not treated as acceptance
+by itself. All ten remote output files were collected and their SHA256 values matched the
+remote bytes. The runner's `fit_endpoint` validation passed. All 45 training rows match the
+summary, contain finite numeric readings, have 8,000 stored/team transitions and 16 completed
+episodes each, and show positive updates and initialization displacement in all five groups.
+Both segment lengths stay exactly 10. Total: 360,000 training team transitions, 45 updates,
+and 48,000 separate evaluation team transitions; all three panels contain exactly the
+declared 32 worlds, 500 steps each, with zero evaluator updates.
+
+| Panel after rollout | Native J | Coverage fraction | Connected users / step | Quality component | Altitude penalty |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| 15 | 0.483578 | 0.612466 | 30.623313 | 0.195287 | 0.003735 |
+| 30 | 0.405594 | 0.584773 | 29.238625 | 0.162675 | 0.052550 |
+| 45, fixed primary | 0.458426 | 0.638789 | 31.939438 | 0.165906 | 0.038498 |
+
+These are means over evaluation worlds nested under one training fit. The earlier J15 is
+higher than J45; it does not replace the prewritten final endpoint. Coverage alone does not
+reproduce the J ordering because quality and altitude also changed. The altitude component
+is the native height penalty, not battery energy. Per-world values, all training readings
+and exact configurations remain in the runner-written
+[summary](../../../../runs/local_observation_encoding/b01_original_s92101/summary.json) and
+[training curve](../../../../runs/local_observation_encoding/b01_original_s92101/training.jsonl).
+
+Optimizer calls: coordinator 675, actor 101,250, critic 101,250, team discriminator 675,
+individual discriminator 2,700. Final relative initialization displacements, respectively,
+are 0.049398, 1.157214, 0.500760, 0.075803 and 0.128872. Original encoder/actor sizes are
+92,672 / 492,294 parameters. Fit-body wall through checkpoint is 5,730.76 s (95.51 min),
+CPU 22,623.28 s; collection 1,026.36 s, updates 4,578.68 s, evaluation 124.37 s. Actual actor
+calls: learner forward 22,500 / 27.79 s, learner evaluate_actions 101,250 / 413.90 s,
+evaluator forward 1,500 / 3.01 s. Peak RSS sampled before checkpoint serialization is
+2,971,889,664 bytes. Manifest creation to witnessed OS exit spans 5,733.43 s, including
+admission/bootstrap after manifest creation; accepted-to-exit spans 5,731.44 s. Neither
+interval is an exact timestamp of the scientific child's first instruction.
+
+The 66,033,471-byte final checkpoint is preserved in the same relative run directory in
+this author checkout and at
+`/home/wu/hmasd-worktrees/loe-b01-efe7d61e8/runs/local_observation_encoding/b01_original_s92101/final_checkpoint.pt`.
+SHA256: `b11589ac002019baa9e62031ef5b5a43da2c5efb71c963105cdd19e29ba04527`.
+Local deserialization using the runner's scripts import path succeeds; all 678 saved tensors
+are finite. Reconstruction uses the recorded E0Config/native modules, constructs ORIGINAL
+and then loads the checkpoint as specified by the runner. The checkpoint and native stdout/
+stderr are retained outside Git; stderr is empty. The tracked exit witness, preflight,
+launch manifest, runner manifest, summary and training curve preserve the exact source and
+operation. Summary SHA256: `9b430be3bf3830a7a6691548170c86ecc17c68badf19930254546ff3e6f71057`.
+
+**Judgment and next observation.** This establishes a complete native reference fit under
+the common correctness repair, with non-monotonic evaluation readings. It does not yet
+update whether dense local encoding offers a representation or net-use benefit. Complete
+the already declared DENSE cell at the same published inputs, seed, exposure and endpoint;
+no tuning, new arm, horizon extension or new batch is inferred from this baseline. Started
+fits remain 1 of the 2 planned. Fresh preferred-node reading before that cell shows about
+9.47 GiB available RAM; the canonical main checkout was fast-forwarded without changing
+other tasks' untracked files, and native admission will perform its own current check.
