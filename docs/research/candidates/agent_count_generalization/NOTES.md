@@ -2700,3 +2700,125 @@ seconds). Executed training coordinates are within [-1,1]. These are progress an
 checks, not a new endpoint. Actual B03 cost is **three started fits: two complete, one running**;
 the fourth SET/raw/943201 remains unlaunched. The detached observer is armed on the same
 accepted third-cell handle; frozen final45 and the remaining sequence are unchanged.
+
+## 2026-09-22 — B03 H6 training-law pair complete, SET counterfactual pending
+
+**H6/clip/942201 is complete and read.** The accepted third process exited normally at
+2026-09-22 19:27:45 UTC. Separate scientific reading of the
+[final summary](../../../../runs/agent_count_generalization/s1_action_law_b03_h6_clip_s942201/summary.json),
+all 45 [training rows](../../../../runs/agent_count_generalization/s1_action_law_b03_h6_clip_s942201/training.jsonl)
+and all 12 panels confirms **one fit, 360,000 training/stored team steps, 720 training
+episodes/resets, 45 updates, 96,000 evaluation steps and 192 evaluation episodes**. Successful
+optimizer calls are coordinator 675, actor/critic 101,250 each, team discriminator 675 and
+individual discriminator 2,700. Every measured model group moved; actor/critic relative L2
+changes are 1.158956/1.186260.
+
+All 25 native files were inventoried and independently hashed; 21 JSON/log/JSONL files were
+collected byte-for-byte. Four 23,073,626-byte checkpoints remain at the manifest's native
+output root. Loading all four checked 179 tensors each for finiteness, source/config identity,
+file hashes/sizes and sigma against the corresponding training row. The initial digest again
+equals the H6/raw digest; final parameter/normalizer digest is
+`6f773c16a0b33f8c59cf035cfbf51cc970a958730df9193a614fc472a296e57c`.
+Final checkpoint SHA-256 is
+`98d908e4c9d1c33e59707b7da288b0c019f293eced1a99a461f020d1ae069343`.
+JSONL and panel files equal their summary records. Every world's native-component/scalar
+reward identity, per-rollout optimizer increments, raw sample/log-probability storage,
+clipped physical successor and k10 decision indices pass. All executed training coordinates
+stay within [-1,1]. Evaluation uses declared common worlds, clipped deterministic actions,
+zero updates and frozen weights/normalizers. Stdout/stderr are empty; no failed cell is hidden.
+
+**The first within-package training-law comparison is now identified for this paired block.**
+H6/clip J at the four evaluation stages is:
+
+| After rollout | N4 | N6 | N8 |
+| --- | ---: | ---: | ---: |
+| 0 | .321971273 | .244108310 | .113120695 |
+| 15 | .546815203 | .491794819 | .451276270 |
+| 30 | .546244371 | .487040214 | .404509768 |
+| **45 (primary)** | **.552901526** | **.525913234** | **.452143781** |
+
+Final unseen-N equal-weight J is **.502522654**, versus .470587682 for H6/raw. Comparing
+the two training laws on exactly the same evaluation worlds gives:
+
+| After rollout | B_H6 at N4 | B_H6 at N6 | B_H6 at N8 |
+| --- | ---: | ---: | ---: |
+| 15 | +.031649629 | +.000063274 | +.041931328 |
+| 30 | −.003736120 | −.048827396 | −.060088615 |
+| **45 (primary)** | **+.028322894** | **+.076965510** | **+.035547049** |
+
+The primary unseen-N B_H6 is **+.031934971**. Retain the adverse rollout-30 comparison:
+clip training is lower in 7/16, 16/16 and 15/16 worlds at N4/6/8 at that stage. Even at the
+positive final endpoint, 3/16 N4 and 4/16 N8 worlds are worse (none at N6). The signs across
+stages are not uniformly favorable. Stages use different worlds, so changes across stages
+do not by themselves identify training deterioration or recovery. Final45 remains primary.
+
+Final clip-minus-raw native-component changes (coverage / quality / height penalty) are
+N4 +.051917500/−.001562383/+.007550641; N6 +.120650000/−.013398721/+.003469874;
+N8 +.060435000/−.011468016/+.003317046. Coverage gains outweigh lower quality and larger
+height penalties under J=.7 coverage+.3 quality−height penalty. Final H6/clip components are
+N4 .714750000/.232339183/.017125229; N6 .687235000/.188417526/.011676523; N8
+.593567500/.172884432/.015218799. This is an accounting of outcomes, not a separate
+intervention on coverage, variance or skills.
+
+Raw stochastic coordinate violations total **3,845,301/6,480,000 (59.3411%)**, UAV-step
+violations 1,960,039/2,160,000 and team-step violations 359,980/360,000. Coordinate rates
+move from .316236 to .787319. Sigma grows from [1,1,1] to [3.194160,3.256046,3.054548],
+higher than H6/raw's final [2.719939,2.569132,2.672738], while executed actions remain bounded.
+Boundary-truncated coordinates are 1,113,697/6,480,000 and boundary-visited coordinates
+1,225,928/6,480,000. Thus this final service improvement coexists with increased latent
+dispersion; sigma reduction is not necessary for the observed H6 benefit. This does not
+identify variance as beneficial or generalize beyond this paired training instance.
+
+Scientific command wall is **5,425.070 s (90.418 min)**, CPU user/system
+21,514.146/198.805 s and peak scientific-process RSS **2,646,976 KiB (2.524 GiB)**.
+Admission-to-exit elapsed is 93.820 min; peak scratch is unmeasured. The three completed
+B03 fits total **1,080,000 training + 288,000 evaluation steps and 215.855 runner min**.
+Different shared-node load prevents an intrinsic speed claim from these wall times.
+
+**Working update and next discriminating observation.** Relative to the current RESEARCH
+background, B02 still identifies deployment changes only. B03 now strengthens a positive
+final training-map effect for H6 within this block, while the intermediate losses weaken
+any claim of a uniformly favorable learning path. The two clip-trained packages now also
+permit a same-law exploratory comparison: final H6 minus SET J is
+.064857891/.095823637/.161067197 at N4/6/8 (unseen mean .112962544). This is one seed per
+package, not a population ranking or skill attribution. SET/raw remains absent, so B_SET
+and the preregistered interaction I remain unresolved; an H6 benefit is not selective SET
+recovery.
+
+Continue the already fixed fourth cell **SET/raw/943201**, requiring the independently
+validated SET/clip initial digest
+`8f19743fe8fd5a09aa998bf90ab73bdbc3de599a8f58b791610fbb628d2f97c2`.
+The predeclared unseen-N selective-recovery inequality now has a concrete implication:
+SET/raw final unseen J must be below **.357625138** for B_SET to exceed B_H6. A value
+between .357625138 and .389560109 would give SET a positive clipping effect but not the
+predicted selective recovery. These are algebraic consequences of the original rule, not
+new thresholds selected to admit a result. Complete the same fourth fit and read every N
+and component; no extra fit, altered recipe, checkpoint selection or new Pro question follows
+from this partial comparison. At this boundary three fits are complete and the fourth is
+unlaunched; the accepted third operation is terminal and is never restarted.
+
+### B03 fourth cell admitted with matched initialization
+
+The predeclared **SET/raw/943201** cell was admitted at **2026-09-22 19:36:03 UTC** from
+the same immutable reviewed source. The
+[runner-written manifest](../../../../runs/agent_count_generalization/s1_action_law_b03_set_raw_s943201/launch-manifest.json)
+binds the native operation and required SET/clip initialization digest. Actual-node preflight
+passed with 11,841,433,600 available physical/effective bytes; all earlier cells are terminal.
+Only this fourth scientific process is running for the direction.
+
+Required and observed initial digests both equal
+`8f19743fe8fd5a09aa998bf90ab73bdbc3de599a8f58b791610fbb628d2f97c2`.
+The three complete initial clipped-evaluation panels exactly equal SET/clip's, including
+every world. Its first over-range training witness shares SET/clip's raw draw, old
+log-probability and native starting position, but executes the raw copy; the actual successor
+matches that law and differs from the clipped successor. Original raw actions/log-probabilities
+remain in storage. This verifies the declared intervention and initialization pairing.
+
+The [initial training snapshot](../../../../runs/agent_count_generalization/s1_action_law_b03_set_raw_s943201/summary.json)
+reports `fit_started=true`, no failure, 8,000 collected/stored training steps, 16 episodes/resets,
+24,000 initial evaluation steps and zero completed updates at `rollout 1 collected`
+(51.058 command seconds). The recorded executed training bounds are −4.767218 to 4.106798,
+as allowed by this predeclared raw-training cell; all four cells retain clipped deployment.
+Stdout/stderr are empty. Actual B03 cost is **four started fits: three complete, one running**.
+The detached observer is armed against this same accepted fourth handle. Complete its original
+45 rollouts and full panels, then read B_SET and I; there is no queued fifth fit or Pro resend.
