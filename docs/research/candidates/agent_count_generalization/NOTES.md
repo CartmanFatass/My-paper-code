@@ -3560,3 +3560,53 @@ executed attempted L2 per UAV step47.810069903/48.885685237, and boundary trunca
 .177729167/.161881944. Analytic entropy before/after update45 is
 7.659595387/7.715284886 for H6 and8.891486836/8.987144889 for SET. This verifies
 Pro's approximate observations and the before/after distinction, not a mediation claim.
+
+### B04 reused-control exposure reference before new fits
+
+Read-time arithmetic over the unchanged controls, zero new environment steps/fits. Each
+all-window contains360k team/2.16M UAV steps, each late-window120k/720k. Mean H uses
+pre-update sigma aligned with that rollout; it is not a separate independent observation.
+
+| Control | Rollouts | Raw-coordinate saturation | Boundary truncation | Attempted executed L2/UAV-step | Realized L2/UAV-step | Mean H_before |
+| --- | --- | ---: | ---: | ---: | ---: | ---: |
+| H6/clip/.05 | 1–45 | 0.593410648 | 0.171866821 | 43.369882330 | 39.094464138 | 6.038993136 |
+| H6/clip/.05 | 31–45 | 0.743533333 | 0.171750463 | 46.892058999 | 42.471467801 | 7.186892284 |
+| SET/clip/.05 | 1–45 | 0.637829167 | 0.167267438 | 44.360717233 | 40.170178327 | 6.666592814 |
+| SET/clip/.05 | 31–45 | 0.801719444 | 0.168403241 | 48.104121593 | 43.676141754 | 8.252339095 |
+
+These are selected-development reference values, not favorable thresholds or an upper bound.
+The unchanged imported learner, configuration, adapter, models and B03 runner bytes match
+the frozen89486d32 source; B04 adds an isolated entry and observational/control checks.
+
+### B04 engineering acceptance before execution — 2026-09-22 22:03 UTC
+
+DM accepts the bounded Implementer return after reading the final diff, checks and independent
+Reviewer report. The fixed contract above is unchanged. Production resolves each control from
+its fixed repository run path and verifies the declared bytes/source/cell, initial digest,
+initial per-world panels and first pre-update collection before any optimizer call. Tiny-spec
+and binding overrides are internal test hooks, absent from the production CLI. The common
+collector, replay, learner and evaluator semantics remain those of the frozen B03 source.
+
+Two review findings were repaired within B04: failed collection in a later rollout now keeps
+the prior optimizer baseline instead of charging earlier work to that rollout; a real actor
+step followed by nonfinite logstd now preserves a valid failed JSON summary with explicit null
+diagnostics/reason and observed optimizer counts. These failure-only changes do not modify the
+successful learning path. Within-package control comparisons are read-only final arithmetic;
+cross-package Q/G and scientific interpretation remain DM work after both fits are read.
+
+Implementer reports nine B04 checks and twelve frozen B03 checks passing, compilation and
+diff whitespace checks passing. Independent Reviewer reran the final nine B04 tests:
+**9 passed in 6.01 seconds**, only fourteen existing dependency deprecation warnings. Tests
+exercise native small H6/SET learning and raw-action replay, lambda0 with learned logstd,
+analytic entropy, evaluator/RNG isolation, deliberate control mismatches, admission and the
+two real-path failure regressions. These are technical fixtures, not production research fits.
+
+Final reviewed SHA-256 identities: runner
+`4af9b4f1a0ae8e432414f206c9dbdb2effcc00c567c1201766114875d23a8c1a`;
+entry `5dcd60012988149e4926ee7a0339653b0a90567b30229bedbb5171ca97e6b54f`;
+tests `8cbeb4c1e36e9e5a6d72dce3e8ccad5e56e39100d47792c5fe521570e7669e91`;
+package initializer `9ed021d5b4d6985b65f368364e78edaada354f1ab034d272f95c302720d75f67`.
+The Reviewer found no material remaining issue. This accepts engineering, not a scientific
+result. **0/2 B04 fits started**. Publish these exact inputs, expose the two existing control
+directories in a new isolated native worktree, check that node's existing interpreter, then
+admit H6/zero first with fresh native memory and live policy checks. No old fit is restarted.
