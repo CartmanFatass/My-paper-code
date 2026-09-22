@@ -342,3 +342,206 @@ recorded 15-second pre-training refusal. Detached observation for job
 detach terminal event was consumed. Continue this same joint operation through completion
 or a bounded checkpoint, without restart, extension or task messaging. No auxiliary package
 comparison or population claim is available before the joint endpoint is read.
+
+### B01 joint complete and paired reading — 2026-09-22 01:09 PDT
+
+The joint operation exited with a valid code-0 witness; the terminal observation at
+`2026-09-22T08:09:01.450027Z` reports consistent records. The complete
+[joint summary](../../../../runs/uav_service_auxiliary/b01_joint_910021_a01/summary.json),
+configuration, progress, native/auxiliary update rows, all evaluation panels, prediction
+arrays and checkpoints have been read. All **13** copied files match remote SHA256 values.
+Both final checkpoints load; every floating tensor is finite (agent: 694 tensors,
+17,493,733 elements; auxiliary: 46 tensors, 1,159,057 elements, including optimizer state).
+All summary numbers are finite and `failure` is null. This is **2 completed fits** total;
+the 15-second pre-training path refusal remains separate. No fit was restarted or extended.
+
+Both fits have exactly 180,000 training transitions, 30 native/auxiliary update stages,
+120 complete training episodes, and 32 complete 1500-step evaluation episodes (48,000
+evaluation transitions). Every training and evaluation episode ended by the time limit;
+both have zero straddling rollout boundaries. Each auxiliary update used 5964 valid team
+rows / 47,712 agent samples and 30 optimizer steps. All 30 joint representation gradient
+norms are positive (range 0.122664–1.817539 before clipping), while detach is zero throughout.
+All five native modules moved, with the same optimizer-step counts reported for detach.
+
+The frozen source, facts digest and full initialization fingerprint match. The entire
+initial evaluation panel, first training rollout and first native update agree exactly
+between arms. Configurations differ only in the snapshot-root prefix of the unused historical
+arm-A metrics path. The shared facts were collected once by detach (2 episodes / 3000
+transitions); joint loaded their exact bytes, rather than creating another fact rollout.
+The joint final checkpoint SHA256 values are agent
+`bbab70aa8206d2fdb6ccefa6cd037ff57c3d34d9d1578b36c3c0251a9fcd4626` and auxiliary
+`56332ac9b26821b0b14aab9d28f44a51e6b649535fefa9aa41614520e07105ff`.
+Binary arrays/checkpoints and logs are retained remotely and in the identical local run
+directory under the existing ignore policy; runner JSON/JSONL evidence is published.
+
+| Rollout | Detach native J | Joint native J | Joint − detach J | Detach QoS | Joint QoS | Detach common-fact MSE | Joint common-fact MSE |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 0 | -521.691683 | -521.691683 | 0 | 0.114334 | 0.114334 | 0.002800299 | 0.002800299 |
+| 10 | -283.523015 | -232.520565 | +51.002450 | 0.228059 | 0.189085 | 0.007282700 | 0.001309411 |
+| 20 | -555.766203 | -259.656648 | +296.109555 | 0.153292 | 0.256022 | 0.001460180 | 0.003928697 |
+| **30 (fixed primary)** | **-644.966810** | **-485.429355** | **+159.537455** | **0.152040** | **0.190837** | **0.010846485** | **0.003328549** |
+
+At the fixed endpoint, joint minus detach is +0.106358 raw J per step, +0.038796
+QoS ratio, +1.163887 Mbps delivered throughput (4.561212 → 5.725099), and -0.034002
+mean return constraint cost (0.286961 → 0.252960). The primary is the complete summed
+native J above, not its per-step scale or a selected intermediate panel. Endpoint native
+J is higher in 7/8 evaluation worlds, QoS in 5/8, and return constraint cost is lower in
+all eight. These are within-pair world contrasts, not eight independent training effects.
+
+| Evaluation world | Detach native J | Joint native J | Difference |
+| --- | ---: | ---: | ---: |
+| 920001 | -206.369922 | -92.466751 | +113.903171 |
+| 920002 | -321.181965 | -329.685840 | -8.503875 |
+| 920003 | -403.833723 | -265.944135 | +137.889587 |
+| 920004 | -153.209866 | -64.658938 | +88.550928 |
+| 920005 | -1083.444584 | -809.707165 | +273.737418 |
+| 920006 | -631.022376 | -520.089850 | +110.932526 |
+| 920007 | -1685.831796 | -1269.152421 | +416.679374 |
+| 920008 | -674.840248 | -531.729741 | +143.110507 |
+
+Final common-fact MSE is 69.31% lower for joint. An independent float64 direct W10
+convolution of the stored factual QoS reproduces detach/joint MSE as
+0.010846486932 / 0.003328549872 on 23,856 valid agent predictions each; the small
+rounding difference from the runner is within numerical tolerance. Both fact episodes
+favor joint (0.011182898 → 0.003452623; 0.010510076 → 0.003204477). This fixed validation
+distribution is narrow: the two W10 target means are 0.171591/0.170355, standard deviations
+0.008294/0.006091, and ranges [0.166667, 0.200000]/[0.166667, 0.191667]. These descriptive
+statistics were read after results. They are not a new fitted comparator or a replacement
+forecast endpoint. Both trained endpoints have worse common-fact MSE than initialization;
+relative improvement does not establish broadly accurate service prediction.
+
+Risk scope is limited. Neither arm has a cutoff or depletion event in training or evaluation.
+Detach has no charging; joint has only five occupied UAV charging steps and 1.388889 Wh
+charger input, all in training rollout 24, lane 4. All evaluation charging quantities are
+zero. Thus this comparison measures active return-risk penalties and delivered service,
+but supplies no convincing charging-competition or failure-recovery result. The presence
+of those mechanisms in S2 is not evidence that they were materially exercised here.
+
+Joint runner wall is 9555.825 seconds (159.26 minutes), peak RSS 3,025,168 KiB. The
+pair totals 17,874.132 seconds (297.90 minutes) of runner wall, 360,000 training and
+96,000 evaluation transitions, plus the single shared 3000-transition fact collection.
+Observed joint/detach wall ratio is 1.149. Different concurrent node workloads mean that
+ratio does not isolate the auxiliary backward-pass overhead. No extra tuning fits occurred.
+
+### B01 working explanation and next decision — 2026-09-22
+
+Current published background was checked at `34ee0f2544de305c28598bc140d660910f5c5090`.
+Owner pause remains lifted for this direction; Claude FSD remains paused and G33 frozen.
+Background sections 1, 4, 6 and 7 constrain the update: keep native outcomes separate from
+prediction, retain the fixed endpoint and costs, and distinguish evaluation worlds from
+training replication. The new S1 dense-encoding adverse result concerns a different
+intervention/host and neither validates nor vetoes this factual S7 pair.
+
+**Strengthened:** this exact joint auxiliary package is technically active and can coincide
+with a useful native improvement under the declared S7-S2 exposure. Its J contrast is
+positive at every nonzero prewritten panel; endpoint service and return-risk components
+both improve. The result is more than an own-rollout MSE improvement. It gives a concrete
+reason to consider retaining the package for an independent training replication.
+
+**Weakened or bounded:** the simple account that increasingly accurate factual predictions
+track better control is inadequate. At rollout 20, joint has substantially higher J but
+worse common-fact MSE; at rollout 10 it has higher J but lower QoS. Both J curves deteriorate
+after their early best panel, and joint's endpoint improves only +36.262328 over the common
+untrained J, while detach falls -123.275127. The validation facts are low-variation initial-
+policy trajectories. We have not identified preservation of backhaul support, learned
+charging coordination, a unique representation mechanism, or absolute controller competence.
+The currently supported positive is a finite-training package observation in one seed pair.
+
+**Unresolved:** whether the fixed-endpoint J/service benefit recurs under a fresh training
+initialization, or primarily reflects this pair's particular trajectory of learning and
+degradation. More worlds for these same policies cannot resolve that training uncertainty.
+Changing targets/weights/architecture or extending the horizon now would mix this question
+with a new intervention. No such modification is selected.
+
+The DM's tentative choice is **keep for one unchanged exploratory replication pair**,
+rather than adopt the package as a standard or enter confirmation immediately. Recurrence
+can change the investment decision: a fresh pair with a compatible native benefit would
+strengthen paying for a properly fixed confirmation; an adverse/mixed pair would weaken
+the reason to continue this unchanged recipe without a concrete new discriminator.
+This is not an instruction to train until a favorable result. The strongest alternative
+is to retain B01 as a bounded observation and end current spending, because the comparator
+degrades, the absolute service level is low and the next pair costs about five runner-hours.
+Direct confirmation is another option only if the evidence justifies its larger fixed cost.
+
+The reused programme Pro advice covers the original comparison and its proxy-only stopping
+branch. It does not assess this now-observed positive-but-nonmonotonic package, narrow fact
+distribution, or a concrete follow-on/confirmation choice. Seek one focused consultation
+under constitution section 5 before selecting that next investment. No new fit is accepted.
+
+## Pro question 2026-09-22 b01-native-gain-next-investment
+
+Conversation: new (Jev account; its private URL remains only in local transport state).
+
+Question: Does the complete B01 evidence warrant one unchanged exploratory replication pair,
+direct fixed confirmation, or stopping current recipe spending, and what would the smallest
+worthwhile next observation actually discriminate? Critique the tentative keep decision
+above; no new architecture or target is required.
+
+Standing: Read the complete paired result and working explanation immediately above and
+both runner summaries. Joint has higher fixed-endpoint native J (+159.537455), QoS
+(+0.038796) and lower return constraint cost (-0.034002), with lower common-fact MSE
+(0.010846485 → 0.003328549). J favors joint at all three trained panels, but both curves
+decline late; rollout-20 forecast ranking opposes the return ranking. There is one training
+seed pair, eight shared evaluation worlds, two narrow initial-policy factual worlds, no
+evaluation charging and no cutoff/depletion events. Do not turn those worlds into training
+replicates or attribute every gain to service-prediction causality. Two fits cost 297.90
+runner minutes. The initial panel/first collection/first native update agree exactly, and
+the final checkpoints/counts/gradient paths were verified. No candidate was tuned after B01.
+
+Prospective option, not an accepted launch: a B02 exploratory pair of exactly **2 fits**,
+new training seed **910137**, the same scientific source `382643ca91cf764336f3311bc166275a5d2bbe97`,
+180k transitions per arm and fixed rollout-30 primary on worlds 920001–920008. Detach would
+create the new initialization's common facts on worlds 930001–930002, joint would load those
+exact bytes, and no implementation/target/horizon change would occur. Budget scale is about
+five runner-hours, 360k training / 96k evaluation transitions and one 3000-transition fact
+collection, plus collection/reading. This would test recurrence on the declared evaluation
+panel, not establish a training-population claim. No automatic third pair is proposed.
+Direct confirmation would instead require its own actual claim, fixed plan and **3–5 fresh
+seeds per arm** (6–10 fits, roughly 15–25 runner-hours at B01 cost), not relabeling B01/B02.
+Stopping adds zero fits. Advice may reject all new spending or recommend a more discriminating
+bounded action if justified; distinguish its fit and non-fit costs.
+
+Context (all paths marked source_sha resolve at the full question commit supplied in the
+send message; the following explicit revisions retain their separate meaning):
+
+- Governance at source_sha: `docs/project/OPERATING_CONSTITUTION.md` sections 1–5, 7–8.
+  The owner authorized this independent direction to reach a supported keep/revise/stop;
+  owner pause is lifted here, G33 frozen, no cross-task messages. Advice is not approval.
+- Methods at source_sha: `.agents/skills/hmasd-scientific-tools/SKILL.md`, sections
+  Update the working explanation, Confirm a claim, Comparators and MARL information,
+  Statistics, Cost and exposure, and Pro. Exploration can be informative without a
+  population claim; confirmation uses its actual prospective claim/plan and fresh seeds.
+- Shared background at explicit current-main revision `34ee0f2544de305c28598bc140d660910f5c5090`:
+  `docs/research/RESEARCH.md` sections 1, 4, 6 and 7. These constrain proxy/control,
+  finite-learning and independent-unit interpretation; they are revisable evidence.
+- Prior advice at source_sha: `docs/research/archive/2026-09-21/RESEARCH.md`, whole-project
+  evidence-led plan Answer sections “分支 A”, “每次观察如何改变路线”, and Decision sections
+  “固定周期的后续问题” and “UAV 场景化”. Reuse its matched-head/gradient-isolation logic;
+  the material new evidence is the completed native pair and the decision above.
+- Evidence at source_sha: this NOTES B01 prospective binding, both completion entries and
+  the working explanation; `runs/uav_service_auxiliary/b01_detach_910021_a01/summary.json`
+  and `runs/uav_service_auxiliary/b01_joint_910021_a01/summary.json`, their configurations,
+  manifests and progress. Binary facts/checkpoints are retained outside Git; their verified
+  identities and direct-array readings are reported above, not remotely reverified by you.
+- Frozen implementation/contract at `382643ca91cf764336f3311bc166275a5d2bbe97`:
+  this NOTES through preflight, `experiments/candidates/uav_service_auxiliary/b01/native.py`
+  and `auxiliary.py`, and `scripts/run_uav_service_auxiliary_b01.py`. Inspect exact paths
+  only where needed to assess a disputed explanation; current methods do not rewrite B01.
+
+Constraints: no training, no experiment launch, no edits outside this question's initially
+empty `### Answer` subsection in `docs/research/candidates/uav_service_auxiliary/NOTES.md`
+on branch `codex/uav-service-auxiliary`. Read immutable reasoning inputs, then fetch the
+latest target file/blob SHA before writing; preserve every other byte and stop on overlapping
+edits. Report the actual commit on success. If GitHub writeback fails, return the **complete
+answer in chat**, not only a receipt, SHA or link. This is a direction-level decision, not
+an owner-triggered Portfolio selection or permission to manage other tasks.
+
+Return: what is strengthened, weakened and still unresolved; the strongest competing
+interpretation and the smallest observation that can change the choice; whether the proposed
+two-fit recurrence check is worth its cost relative to stopping or confirmation; any material
+change needed to its scientific reading, with a differing prediction rather than a generic
+rescue. For a confirmation recommendation explain the actual claim/precision/selection issue
+still needing a fixed plan. Cite sources actually read, state decision-critical gaps, and
+return `MATERIAL_DISSENT: yes/no` against the tentative keep-for-one-replication choice.
+
+### Answer
