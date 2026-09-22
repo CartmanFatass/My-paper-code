@@ -998,3 +998,20 @@ justify AR complexity under the prewritten reading. This is completion of the de
 comparison, not a new rescue, renewed fit allocation, replacement seed or score-conditioned
 extension. Prior accepted Pro advice applies unchanged. Planned total remains **4 attempts**
 including the original technical failure; actual starts remain 3 before AR admission.
+
+### B01 original AR instance natively accepted — 2026-09-22
+
+The original AR arm was accepted at 2026-09-22 08:13:42 UTC. Its
+[native manifest](../../../../runs/joint_duration_skill_learning/b01_ar_s2026092203/launch-manifest.json)
+binds the same published execution source and the original operation reference. A subsequent
+native status found the runner and supervisor running with consistent identities.
+The [fresh node preflight](../../../../runs/joint_duration_skill_learning/b01_ar_s2026092203/admission-preflight.json)
+measured 13,159,993,344 available host bytes against the 4 GiB floor; canonical pause/lead
+checks passed. Both admission files were collected and SHA-256 matched to the node.
+
+Actual started result attempts are now **4 of the 4 planned attempts**: one preserved
+technical failure, completed fixed and factored instances, and this running AR instance.
+The original 360k endpoint, four evaluation panels and all other bound settings remain.
+Hold the live source unchanged and observe the original accepted handle. The full AR result
+must be collected, verified and read before the three-arm judgment; this entry authorizes
+no additional fit or automatic technical replacement.
