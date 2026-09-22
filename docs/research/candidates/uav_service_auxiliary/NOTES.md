@@ -2152,3 +2152,32 @@ after reading every rollout. These changing training worlds are not the final-wo
 and do not establish a final trend or any D/S/G comparison. Technical execution is supported;
 the bounded service-use hypothesis remains untested by the incomplete comparison. Continue
 the accepted operation and the fixed horizon without a restart, new fit or score-based change.
+
+## 2026-09-22 — B03 D second training checkpoint
+
+The 18:07 UTC observer checkpoint reports the same two matching native processes running,
+consistent records and no exit witness. No newer owner pause or change to this direction's
+assignment is present in refreshed main. The copied summary SHA256 is
+`909a343d3ec17acc64d0ec9dcbddce2f60e94811a6ef0fb3214727c789fe940b`:
+76,000 training transitions including partial collection 13, 12 completed updates, 16
+development episodes / 24,000 evaluation transitions, and the same 2 initial fact episodes /
+3,000 physical fact transitions. Config digest still matches, all 25,720 floating values
+are finite, failure is null and stderr is empty. The last resource row records cumulative
+wall 3357.41 s and RSS 3,085,844 KiB. Cost remains one started B03 fit plus the separate
+pre-training failure; there is no new launch.
+
+The prescribed rollout-10 development panel has mean raw J -418.874856, QoS .195961 and
+return cost .233338, versus initialization -508.082488 / .132604 / .231689 on the same
+eight world seeds. This is a within-instance intermediate observation with low absolute
+service and mixed per-world changes, not a D/S/G comparison, final panel or checkpoint
+selection. Training collections 6–12 also vary substantially. D's auxiliary representation
+steps and base/GRU movement remain zero in every new completed update.
+
+On the same two initial-policy fact episodes, the rollout-10 service MSE is .0193532
+against its training-mean reference .0101168. Observation MSE is .0149235, training-mean
+MSE .00858561 and persistence MSE .00000103515. These adverse predictive diagnostics are
+retained: they concern D's detached heads on initial facts, not a trained G arm or common
+endpoint mixture. Feature variance is 13.1790 and effective rank 7.4114 on the fixed 512 rows,
+with nonzero per-agent and episode-segment variation; this alone establishes no control use.
+No final worlds or final checkpoint are available. Continue the same accepted run and fixed
+reading without revising the recipe, choosing an early model or adding a fit.
