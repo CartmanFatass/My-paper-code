@@ -3610,3 +3610,51 @@ The Reviewer found no material remaining issue. This accepts engineering, not a 
 result. **0/2 B04 fits started**. Publish these exact inputs, expose the two existing control
 directories in a new isolated native worktree, check that node's existing interpreter, then
 admit H6/zero first with fresh native memory and live policy checks. No old fit is restarted.
+
+## 2026-09-22 — B04 H6 zero admitted; first update and control match read
+
+The accepted input is `f4762ac67f04675136367fcc566327f0bf78a086`. A new isolated native
+worktree carries that published source and explicitly includes both unchanged B03 clip-control
+run directories in its sparse checkout; both summary hashes match the fixed contract. Native
+Python3.10.21 / Torch2.7.0+cu118 / NumPy1.26.3 passed the final nine B04 technical tests in
+5.63 seconds (6.662 seconds subprocess wall), with fourteen existing dependency warnings and
+no source changes. Initial non-login Git preparation stalled before any scientific invocation;
+the configured `zsh -lic` network shell fetched successfully. Only the owned stalled Git
+transport was stopped. This was source preparation, not a failed or restarted research fit.
+
+H6/clip/lambda0 was accepted at22:12:00 UTC. The
+[runner-written manifest](../../../../runs/agent_count_generalization/s1_entropy_b04_h6_zero_s942201/launch-manifest.json)
+retains its exact source, command, node, native process identities, output and stable operation
+reference; the detached observation is bound to that same reference. The
+[native admission measurement](../../../../runs/agent_count_generalization/s1_entropy_b04_h6_zero_s942201/admission-preflight.json)
+passed at14.5479 GiB effective/physical available against the4 GiB floor. Fresh published main
+`6f82e921fec608556008982066e99ded85f7b8aa` and canonical direction/lead/pause agreed.
+Supervisor-command exit0 is only dispatch success; native runner and supervisor were separately
+observed running with consistent identities and no terminal witness.
+
+Read and hash-verified the ten copied small runner artifacts. The
+[first training summary](../../../../runs/agent_count_generalization/s1_entropy_b04_h6_zero_s942201/summary.json)
+has SHA-256 `2ce4dcc36db96f242158798f831dd69f935a74ca7339ea161dad3fbd9f1a2783` at this
+snapshot:8000 training/stored team steps,16 episodes/resets,one completed rollout update,
+24000 initial evaluation steps and48 evaluation episodes; no failure. Its three initial
+N4/6/8 panels (16 worlds each) independently match the old H6/clip control's per-world native
+outputs, seeds, bounds and zero-update/frozen-state evidence exactly. Initial parameter and
+normalizer digest match. The first pre-update return vectors and complete common motion/
+storage witness also match the control exactly, independently rechecked from the copied files.
+This binds the observed pre-treatment path, without reconstructing unlogged old trajectories.
+
+The first actual update used lambda_l=0 with targets/annealing off and logstd trainable exactly
+once in the actor optimizer. Observed optimizer calls: actor2250,critic2250,coordinator15,
+team-discriminator15,individual-discriminator60; required parameters moved and losses were
+finite. Raw actions and original old log-probabilities remain stored/scored while execution
+is clipped. Initial sigma[1,1,1] became[.991460919,.996879160,.997087419], versus the reused
+control's first-update[1.030816197,1.035641789,1.036482573]. Analytic raw entropy changed
+4.256815600→4.242197316. Legacy `action_entropy=0` is the reporting convention, not zero
+distribution entropy. This is early treatment/learning evidence, not final noise response,
+service recovery or selective SET recovery; first-rollout exposure precedes the intervention.
+
+**1/2 B04 fits started,0 completed** at this reading. The same H6 process continues to its
+fixed45 rollouts; SET/943201 remains unstarted and follows collection of H6 under the same
+accepted source/contract. No third fit or endpoint change. Observer generation55 is adopted
+and reports the native operation running; no pending event required rearming. Initial binaries
+remain recoverable at the manifest's native output path, with identities in the summary.
