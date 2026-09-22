@@ -760,3 +760,20 @@ the within-N service contrast survives independent training rather than being do
 the first H6 or SET trajectory. The existing Pro advice covers this unchanged comparison;
 no new question or Send is needed. Current cost is 2 started/2 completed fits, 0 technical
 failures, with four declared cells unlaunched.
+
+
+### 2026-09-21 third accepted operation — H6 seed 914307
+
+After the complete SET result was read and published, H6 seed 914307 was admitted on
+`wsl_4070` at the same immutable source SHA and unchanged 360k/four-panel contract. Fresh
+actual-node admission passed with 9,512,333,312 available bytes against its 4 GiB floor.
+The [native manifest](../../../../runs/agent_count_generalization/s1_count_b01_h6_s914307/launch-manifest.json)
+and [admission preflight](../../../../runs/agent_count_generalization/s1_count_b01_h6_s914307/admission-preflight.json)
+preserve its command, source, operation reference and process identities. Native status
+observed the original runner and supervisor running, consistent records and no exit witness;
+the launcher wrapper's exit zero is not scientific completion.
+
+Current cost is 3 started fits: 2 complete and read, 1 running, 0 technical failures.
+SET 915307, H6 914413 and SET 915413 remain unlaunched. The prior SET terminal event is
+consumed. Observe this new accepted handle with the repository waiter, 1500-second checkpoints
+and terminal/error wakeups; drain and read on return without restarting the operation.
