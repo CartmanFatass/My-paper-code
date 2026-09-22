@@ -2535,3 +2535,106 @@ S's accepted operation continues and four later cells remain unstarted. Retain t
 zero-step D failure. Continue this same operation through the remaining final evaluation
 and collection, and rearm observation. No new cell, extra fit, early checkpoint, recipe
 change or Pro Send is selected at this incomplete-result boundary.
+
+## 2026-09-22 — B03 S complete acceptance and fixed G continuation
+
+S / 912211 / a01 has a valid exit-0 witness. At 22:02:15 UTC both retained native process
+identities are absent and the operation records are consistent. The DM has read the complete
+[runner summary](../../../../runs/uav_service_auxiliary/b03_s_912211_a01/summary.json), all
+32 final-world rows, development and training records, endpoint facts and saved diagnostics.
+Summary SHA256 is `2c4e71ff76110a2d002645ecf7e1896c0a34ac210df7807afc2882dd05420265`.
+All 18 files, totaling 241,916,276 bytes, were copied from the original node and verified
+against its per-file sizes and SHA256 digests. NPZ/PT artifacts remain in the local run
+directory and `/home/wu/hmasd-worktrees/usa-b03-73be55261/runs/uav_service_auxiliary/b03_s_912211_a01`;
+they are retained rather than added against the repository ignore rules. Endpoint-fact,
+agent-checkpoint and auxiliary-checkpoint digests are, respectively,
+`414bc314340034d46eff5784870d4ba8f5cf141543980431365d9d9e2f34f4fc`,
+`6008ac0a50cc383108ccf5fc3ec97c93c4f0f48eaf9b674c6ea90bfa57cd0024` and
+`bd652a6ea1d373bee2bbf9948913f271ce5e5a5e024b3a1455718b22b35fe5aa`.
+
+Artifact acceptance is separate from the successful process exit. Production-contract
+verification passed the exact source/spec, CUDA/four-thread binding, all panel seeds and
+lengths, input/output hashes, fact metadata/shapes/masks and fixed calibration. All reported
+evaluation aggregates were independently recomputed from world rows. The four saved initial-
+fact arrays independently reproduce episode-equal service, observation, persistence and
+training-mean errors in float64 within the declared float32 rounding tolerance; their
+features are finite and reproduce reported total variance. CPU checkpoint readback matches
+final policy fingerprint `4b68c84f26df1f0add0af57a9e3836ff3529ed8eb6c7281d4a055f6f7ff7d33e`,
+native optimizer counts, 30 auxiliary passes and 900 updates each for the representation,
+service-head and generic-head optimizers. Calibration is exactly D's. Readback used zero
+environment steps and optimizer updates. The loader's empty discriminator-buffer warning
+is the expected checkpoint contract and does not change the saved learner weights/counts.
+
+The completed fit contains 180,000 training team transitions / 30 updates / 120 episodes,
+96,000 evaluation transitions / 64 episodes and 6,000 new physical fact transitions / four
+endpoint episodes. It reuses D's two initial episodes / 3,000 transitions without collecting
+them again; four initial diagnostics total 95,424 valid agent rows. Native high-level/actor/
+critic/team-discriminator/individual-discriminator optimizer counts are 2,250 / 67,500 /
+67,500 / 450 / 1,800, with positive displacement for every native learner. Each auxiliary
+pass records service-driven base/GRU movement and both heads updating; there are no
+straddling rows. Initialization, first collection and first native update remain exactly
+matched to D before auxiliary divergence. Failure is null and stderr is empty.
+
+The prescribed final 32-world panel has mean raw J **-72.063548**, QoS **.275530183**,
+throughput **8.265905489**, return cost **.157240885**, and mean true episode-minimum fleet
+battery **.375991055**. The legacy time-average fleet minimum is .577749999 and remains
+separate. All worlds truncate at 1,500 steps with zero evaluation updates. Two worlds,
+936017 and 936029, have zero service; charging, cutoff, depletion and charger-input exposure
+are zero throughout this final panel and the newly read endpoint-fact panel.
+
+At the same fixed endpoint/worlds, **S-minus-D J is +24.585407**, QoS **+.055721967**, return
+cost **+.019440479** (worse), and true episode-minimum battery +.008872027. Sixteen paired
+world J differences are positive and sixteen negative; median is +16.277653, with range
+-1401.438827 on 936017 to +2025.595496 on 936011. This retains a small positive descriptive
+mean control contrast accompanied by higher service and higher return cost, with substantial
+opposing worlds. It weakens the large/robust benefit suggested by the final development
+contrast (+397.123937), while preserving that observed development result and its adverse
+worlds. The development and final panels use different world seeds; this is not a measured
+post-training decline. Absolute raw J remains negative and service remains limited. Thirty-
+two worlds are one training-block comparison, not 32 training replications, and balanced
+world signs do not establish equivalence or a zero effect.
+
+The unchanged initial facts give final service MSE **.016626176** versus D .011681222
+(S/D **1.423325035**) and fixed training-mean .010116768; observation MSE is .010383823
+versus D .009720327, fixed mean .008585614 and persistence .000001035146. Fixed-row feature
+variance/effective rank are 33.779040 / 8.153838 with no zero-variance flag. These adverse
+prediction comparisons and the changing error/control ranking across development remain
+contrary evidence to a simple initial-fact-error explanation. They do not measure the
+common endpoint mixture or identify prediction semantics. The four separate endpoint-fact
+worlds have mean J 149.129266, QoS .323020472, return cost .106778749 and true episode-minimum
+battery .428230636. They are inputs to the planned common mixture, not additional final
+worlds. That zero-update mixture comparison still awaits G's endpoint facts/checkpoints.
+
+Actual S runner cost is **6,876.480299 s / 114.608005 min**, CPU user/system
+6,573.656131 / 319.944001 s and peak RSS 3,057,972 KiB. Stage wall seconds are collection
+2,997.277638, native update 1,554.107031, auxiliary update 30.986586, evaluation 2,137.988860,
+physical facts 143.584298, fact replay 10.133203, preparation .954058 and checkpoint .144171.
+D plus S cost **16,705.278592 s / 278.421310 runner min**, apart from the retained zero-step
+D pre-training failure (1.512166 s). These scoped shared-node measurements do not establish
+an intrinsic method speed difference. Two of the six planned B03 fits are now fully accepted;
+four fixed cells remain unstarted at this entry, and the old four development fits remain
+separate historical cost.
+
+Refreshed published main `6f82e921fec608556008982066e99ded85f7b8aa` preserves this direction,
+lead and lifted pause. RESEARCH background section 6 requires retaining the distinction
+between fixed world panels and training units, full service/risk components and prediction
+proxies. It therefore supports the bounded reading above; the directly affected shared
+paragraph will retain this weaker new contrast alongside the old two pairs. Technical
+completeness and matched-start/active-gradient execution are strengthened. A large or
+robust S benefit is weakened; the generic-package comparison and second-block behavior are
+still unresolved. There is no current claim that S is worth retaining after the batch.
+
+The next useful observation remains the already selected **G / 912211 / a01**, with the
+same source `73be55261b9f5e8f8fe26fdec6558b87ad088fcb`, 180k training horizon, device, four
+threads, development/final panels and endpoint-fact protocol. G activates next-legal-
+observation gradients into base/GRU while its service head stays detached. It imports D's
+exact initial facts (`8d049f00c9f16367f481e9dabe47c21068d84c8125ba2653e51795cd7ca2f5e5`)
+and calibration (`b5b7e03fdc253592f673fc9a0b4d640305a9bd1d7a8ccbca35904d1105012523`), with
+initialization, first collection and first native update required to match D before the
+auxiliary intervention. A useful G-minus-D with no actionable S increment weakens the
+reason to pay for this service-specific package; a functioning G below S preserves only
+the specified package difference, subject to its small S-minus-D magnitude, components
+and second-block evidence. An adverse/degenerate G cannot rescue S or establish service
+semantics. The unchanged batch has two training blocks; no third block, new module, horizon
+extension, retuning, early-checkpoint rescue or Pro Send is selected. Prospective output is
+`runs/uav_service_auxiliary/b03_g_912211_a01`; launch remains subject to native admission.
