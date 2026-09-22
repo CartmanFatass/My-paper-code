@@ -2200,3 +2200,30 @@ panel or final result is yet available. The last resource row records cumulative
 4933.74 s and RSS 3,085,844 KiB. Cost remains one started B03 fit and the separately retained
 pre-training failure. Continue observing this accepted operation at the fixed exposure;
 the incomplete comparison supports no new package or predictive-mechanism conclusion.
+
+## 2026-09-22 — B03 D fourth training checkpoint
+
+At the 19:02 UTC observer checkpoint the same a02 native identities remain running, with
+consistent records and no exit witness. Current published control still authorizes this
+direction and introduces no new pause. Snapshot SHA256
+`78c81d4a9a782b4a3f6ac79331524c00bcddf065478dfcbdd6fa248be1b036ec`
+records 150,400 training transitions including partial collection 26, 25 completed updates,
+24 development episodes / 36,000 evaluation transitions, and the same 3,000 initial-fact
+transitions. All 53,198 floating values are finite; config, initialization, facts, calibration
+and first-rollout bindings remain unchanged. Failure is null and stderr is empty. The last
+resource row records cumulative wall 6686.17 s and RSS 3,092,180 KiB. There is still one
+started B03 fit, separate from the recorded a01 pre-training failure.
+
+The prescribed rollout-20 development panel has mean raw J -110.657820, QoS .204738,
+return cost .135173 and mean episode-minimum battery .371384. Its eight worlds remain
+mixed, with one zero-service world; no charging, cutoff or depletion events are observed.
+The new completed training collections 20–25 also have no such events, and D's auxiliary
+representation steps and base/GRU movement remain zero.
+
+On the unchanged initial facts, service MSE is .110199, while observation MSE is .0102530;
+their training-mean references remain .0101168 and .00858561, and observation persistence
+MSE remains .00000103515. These predictive diagnostics remain adverse despite the higher
+mean development return than at rollout 10; they are not final-world or S/G evidence.
+Fixed-row feature variance is 25.8736 and effective rank 7.6482, without a zero-variance
+degeneration flag. Retain all observations and continue the accepted operation through its
+fixed training and final evaluation. No early checkpoint is selected and no new fit is added.
