@@ -2466,3 +2466,29 @@ policy×N means, 86 adverse worlds, opposing component changes, N4/N6 attenuatio
 distinction between deterministic violations and historical stochastic exposure. Adopt those
 qualifications. B02's deployment K and B03's training I answer different interventions; do
 not replace the latter with the former or change the committed B03 recipe from its sign.
+
+### B03 engineering acceptance before first admission
+
+The DM read and accepts the new candidate runner, entry and tests. Independent Reviewer
+`action_law_probe_review` returned no remaining material finding; its final focused check was
+**12 passed in 4.65 s**, versus Implementer's 12 passed in 4.86 s. Python compilation and
+diff whitespace checks pass. Final reviewed runner SHA-256:
+`d9ed78a5dd6faeb1017747d46a428dc61d40929133dd17478348841bb1a03ddb`.
+
+Two observed engineering defects were corrected before science: successful environment and
+storage work is counted before later integrity/diagnostic rejection; complete collected
+service/motion/sigma evidence is retained if optimizer update fails. Failure injections cover
+post-step train/eval rejection, post-store rejection, partial collection and failed update.
+Real H6/SET fixtures verify paired initialization, raw sample/old-log-probability storage,
+numerical frozen recurrent likelihood replay, actual mapped motion/reward, terminal successor
+before reset, k10 renewal, optimizer movement and fresh clipped evaluation preserving learner
+weights, normalizers, runtime and RNG. The 12-step fixture crosses renewal/terminal boundaries;
+the existing sampler drops incomplete chunks, so numerical replay checks its complete first
+ten-step chunk. Production's unchanged 500-step horizon divides evenly by ten. These checks
+are technical evidence, not full-horizon learning or measured service results.
+
+No shared/B01/B02 code was changed. Keep the fixed four-cell sequence, initialization pairing,
+seeds and final45 endpoint above. Prepare a separate immutable native B03 source worktree,
+run the focused destination checks, and admit H6/raw/942201 first. No new Pro consultation or
+owner approval is needed for this already covered implementation. Full production behavior
+and actual resource cost remain to be observed; no fit is claimed at this acceptance entry.
