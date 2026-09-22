@@ -708,3 +708,40 @@ The full output, exit witness and all scientific measurements must still be coll
 read at completion. The portable distinction between a member's selected duration and the
 actual common event interval is being incorporated into the shared Research background;
 it is correctness/design knowledge, not a performance claim.
+
+### B01 fixed technical failure and bounded numerical diagnosis — 2026-09-21
+
+The accepted fixed attempt exited 1 at 2026-09-22 04:02:08 UTC. Its original operation has a
+valid exit witness and consistent identities. All ten output files were collected and their
+SHA-256 values matched the executing node, including the 22,814,948-byte initial checkpoint.
+The runner recorded 24,000 collected/stored training transitions, 48 training episodes,
+16,000 initialization-evaluation transitions, and two completed updates. Optimizer calls:
+coordinator 30; low actor/critic 4,500 each; team/individual discriminator 30/120.
+Scientific-process wall time was 238.612 s; user/system CPU 217.170/22.299 s; process peak RSS
+1,906,964 KiB. This remains one started fit and a **technical failure**, not a scientific
+negative. Only initialization was evaluated; no declared learned-policy endpoint exists.
+
+The third pre-update audit rejected max absolute log-probability difference **2.86698341e-5**
+against its 2e-5 threshold, before any third optimizer update. Prior audit maxima were
+1.40667e-5 and 1.19209e-5. The independent Reviewer found no static sampling/replay semantic
+mismatch: fixed uses no duration factors or held-member choices; ValueNorm affects values,
+not audited logits. A concrete numerical hypothesis is regrouping: collection uses 16 lanes,
+whereas audit evaluates 800 events together, with float32 unnormalized native embeddings.
+This is not yet proof of harmless rounding. Failing events and weights were not persisted;
+the initial checkpoint cannot establish the exact third-rollout cause retrospectively.
+
+The failure weakens confidence in the original audit's production calibration and leaves the
+scientific comparison unresolved. Factored/AR are not started into the same unresolved path.
+Consume the completed waiter event without resuming that failed operation. No scientific
+retry is selected at this entry.
+
+L0 continuation: a zero-update numerical fixture on preferred WSL, using frozen native-sized
+coordinator weights and native reset states. Compare identical recorded inputs/tokens in
+their original 16-lane groups and merged 800-event batches, including grad-enabled replay;
+measure actual backend settings, first intermediate divergence and probability consequences.
+Do not fit a policy, alter reward, consult endpoint scores, overwrite old log-probabilities,
+change policy train/eval mode, or relax a threshold merely to exceed the observed failure.
+An evidence-supported repair may distinguish collection-group identity from finite-precision
+regrouping, preserve failure inputs for future diagnosis, and receive independent numerical
+review. Any later replacement fit requires a separate prospective DM decision and retains
+this failed attempt in total cost, under constitution section 3.

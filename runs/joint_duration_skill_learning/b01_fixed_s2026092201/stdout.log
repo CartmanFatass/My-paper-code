@@ -1,0 +1,5 @@
+{"stage": "constructed", "training_transitions": 0, "wall_seconds": 3.5546842589974403}
+{"stage": "evaluated_0", "training_transitions": 0, "wall_seconds": 25.137147017987445}
+{"stage": "updated_1", "training_transitions": 8000, "wall_seconds": 116.09830759500619}
+{"stage": "updated_2", "training_transitions": 16000, "wall_seconds": 217.45784052298404}
+{"stage": "technical_failure", "training_transitions": 24000, "wall_seconds": 238.61244795500534}
