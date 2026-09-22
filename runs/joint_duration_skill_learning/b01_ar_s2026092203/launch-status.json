@@ -1,0 +1,11 @@
+{
+  "claim_key": "5c5ab52f8b6671c9dda80de45073b467dc5bac16e0e9a711346177e9dd915fca",
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/5c5ab52f8b6671c9dda80de45073b467dc5bac16e0e9a711346177e9dd915fca.json",
+  "manifest_ref": "/home/wu/hmasd-worktrees/joint-duration-learning/runs/joint_duration_skill_learning/b01_ar_s2026092203/launch-manifest.json",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/5c5ab52f8b6671c9dda80de45073b467dc5bac16e0e9a711346177e9dd915fca.json",
+  "pid": 167339,
+  "runner_pid": 167340,
+  "schema_version": 1,
+  "status": "accepted",
+  "updated_at": "2026-09-22T08:13:42.587987Z"
+}

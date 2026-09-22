@@ -1,6 +1,6 @@
 # HMASD research index
 
-当前研究背景、共享认识、项目状态与研究计划，更新于 2026-09-21。治理依据为
+当前研究背景、共享认识、项目状态与研究计划，更新于 2026-09-22。治理依据为
 [constitution](../project/OPERATING_CONSTITUTION.md)；本页维护现状，历史过程见[日期归档](archive/)。
 
 阅读入口：[研究背景与共享认识](#研究背景与共享认识) · [方向状态](#active) · [现行计划](#current-research-plan)。
@@ -91,10 +91,11 @@ Bellman/策略梯度关系或表示能力不保证有限神经网络训练的效
 包括预训练及固定周期选择成本，不能从动作数量直接推出结论。
 
 匹配环境步数和 PPO epochs 时，时长调度仍可能改变事件和小批更新数，实际计算量需单独报告。
-S1 完整共同学习的每臂单训练实例比较中，分解时长的事件数与高层更新数分别为固定周期的 7.22 倍和
-5 倍，实测耗时 1.76 倍，终点 J 低 .03563。这削弱该配方在已测曝光下的回报／成本理由，
-没有识别探索压力的因果作用，也未建立周期策略类的总体排名。
-[比较、实际成本与解释边界](candidates/joint_duration_skill_learning/NOTES.md#b01-factored-result-accepted-original-ar-comparison-remains--2026-09-22)。
+S1/cap=10 完整共同学习的每臂单训练实例比较中，分解和 AR 的事件数均约为固定周期的 7.22 倍，
+高层更新均为 5 倍；实测耗时分别为 1.76/1.34 倍，终点 J 分别低 .03563/.01649。
+AR 后段改善并胜过分解，仍未兑现相对固定周期的预写收益条件。这个观察削弱当前配方的回报／成本理由，
+没有识别探索压力或相关性的因果作用，也未建立策略类总体排名；共享节点耗时不是方法固有速度的对照实验。
+[三臂完整比较、成本与解释边界](candidates/joint_duration_skill_learning/NOTES.md#b01-complete-three-arm-result-and-closure-of-the-cap-10-recipe--2026-09-22)。
 
 同样，固定策略的正比例 reward 缩放保留排序，有限优化过程仍可能改变；裁剪或一般 shaping 还可能改变目标。
 FSD B05 的 CF_S 修复说明输入构造影响有限学习：三个开发块的晚窗臂间均值差约 +.059，最终 J45 仅约 +.004
@@ -111,7 +112,8 @@ FSD B05 的 CF_S 修复说明输入构造影响有限学习：三个开发块的
 技能的内部反馈、持续时间、终止与重选语义需要明确。合适条件下，持续 \(\tau\) 步的 option 用片段累计
 reward 和 \(\gamma^\tau\) 接续价值。异步团队的共同事件链中，实际事件间隔可能短于某成员选定的驻留时间；
 片段累计与折扣应按真实经过步数计算，队友先重选不表示早期时长选择的后果已结束。联合周期的跨事件回报
-和采样前承诺条件价值已通过实现检查，仍未建立原生性能增益；详见[设计与检查边界](candidates/joint_duration_skill_learning/NOTES.md#b01-implementation-accepted-for-execution--2026-09-21)。
+和采样前承诺条件价值已通过实现检查并用于完整共同学习；两种可变臂在预定终点均未高于固定周期，
+每臂一个训练实例，检查通过不保证有限学习收益。[完整执行与解释边界](candidates/joint_duration_skill_learning/NOTES.md#b01-complete-three-arm-result-and-closure-of-the-cap-10-recipe--2026-09-22)。
 当前 FSD/D2 的低层逐步反馈并保留循环记忆，高层重选相同标签仍可新开
 credit segment；执行周期、标签变化、训练 chunk length、normalizer 更新和有效优化量不能混同。
 held skills/age 未进入某些 value 输入提供了待检验问题，没有直接证明现有 critic 错误。
@@ -160,8 +162,8 @@ Markov 模型假设需要核对。已执行前缀没有提供提前换技能后�
 
 A 的普通多步复用、C 的普通信息价值和 VSP 的后果模型是可复用资产；正面产出可以与结束该路线投入并存。
 B/UCOPE 的局部预测、一步优势或真实后缀信用没有自动转成稳定完整收益；FOLR/MGTAP/ACVC 的不利结果限制
-各自旧包，不能改名重试或外推为所有表示无用。FSD B13/B14 没有翻转旧停止判断；新 duration 比较是建议，
-没有新的正实验推翻它。相关历史的支持和反面证据见后面的方向索引。
+各自旧包，不能改名重试或外推为所有表示无用。FSD B13/B14 没有翻转旧停止判断；独立周期三臂已完成，
+当前 S1/cap=10 配方结束投入，仍未建立相对固定周期的性能增益。相关支持和反面证据见后面的方向索引。
 
 技术可达、已有价值证据、当前是否值得投入各需理由。技术失败与未执行不等于科学阴性；一个类别仍未决，
 不要求维持没有选中比较的旧配方，也无需捏造“成功概率很低”。小模型可提供机制、反例或普通参照，其信息、
@@ -175,7 +177,6 @@ B/UCOPE 的局部预测、一步优势或真实后缀信用没有自动转成稳
 
 | Direction | Question | State | Lead runtime | Standing and next step |
 | --- | --- | --- | --- | --- |
-| `joint_duration_skill_learning` | 在完整高低层共同学习中，新增时长选择及普通联合时长参数化能否改善有限资源下的原生服务？ | exploring | Codex DM (independent session) | 直接 DM task `01a0c348-428c-7f01-bd8b-121d69543032`，host `local`；checkout `/home/fires/.codex/worktrees/joint-duration-learning/hmasd-wsl`，branch `codex/joint-duration-learning-20260921`。B01 固定／分解均完成 360k 步，预定终点 J=.49670730／.46107574；分解高层更新 5 倍、实测耗时 1.76 倍，各一训练实例。原计划 AR 已在 WSL 4070 原生运行，三臂判断待完整结果。已启动全部 4 次计划尝试（含原 24k 步技术失败），无新增 fit。[分解结果与比较边界](candidates/joint_duration_skill_learning/NOTES.md#b01-factored-result-accepted-original-ar-comparison-remains--2026-09-22)；[AR 启动证据](../../runs/joint_duration_skill_learning/b01_ar_s2026092203/launch-manifest.json)。 |
 | `agent_count_generalization` | 固定 k、回合内固定 roster 时，HMASD 对未见团队数量 N 的服务能力和泛化代价是什么？ | exploring | Codex DM (independent session) | 直接 DM：task `01a0c6ef-cdd4-7113-b2d9-20487e35171b`，host `local`；checkout `/home/fires/.codex/worktrees/7fef/hmasd-wsl`，branch `codex/agent-count-generalization`。S1 N=6→4/6/8；H6 对普通共享 SET，预写 6 个探索 fits、每 fit 360k 团队步，输入 `5a250d97e`。已有 4 项完整核验（各臂 2 项）：第二 SET 最终 N4/N6/N8 J=0.530210/0.450364/0.378274，command wall 65.77 min；N6 高度惩罚增至 0.043718。当前 H6−SET 臂均值差为 +0.021285/+0.052918/+0.055947，未见 N 均值差 +0.038616；固定终点呈探索性正观察，比较尚未完成，无稳定总体排名。第三 H6（914413）已在 `wsl_4070` 准入运行，同句柄观察。当前 5 项启动：4 完成、1 运行；最后 SET（915413）未启动。[完整结果与解释](candidates/agent_count_generalization/NOTES.md#2026-09-22-fourth-completed-fit--set-seed-915307)；[当前运行](../../runs/agent_count_generalization/s1_count_b01_h6_s914413/launch-manifest.json)。 |
 | `uav_service_auxiliary` | 未来事实端到端服务监督能否帮助 HMASD 学会接入、回传与能源约束下的协作？ | exploring | Codex DM (independent session) | 直接 DM task `01a0c6f0-31e1-7510-bee7-4f0f8b62d821`，host `local`；checkout `/home/fires/.codex/worktrees/a335/hmasd-wsl`，branch `codex/uav-service-auxiliary`。S7-S2 v3/reward v2/arm C，固定 k=10/N=8；B01 两臂各 180k transitions 完整核验，固定终点 detach/joint J=-644.966810/-485.429355，差 +159.537455；QoS 差 +0.038796、返航约束代价差 -0.034002，共同事实 MSE=0.0108465/0.00332855。2 fits 合计 297.90 runner min；单训练对的探索性正观察，后段回落、狭窄事实分布及无评估充电事件限制机制和外推。Pro 答复已核验交付并全文读完，选择恰好 2 个 B02 复现 fits，seed 910137，科学配方不变；种子入口修正经独立审查，输入 `30401722b`。detach 已在 `wsl_4070` 准入运行，joint 未启动；合计 4 计划、3 启动（2 完成、1 运行）、1 未启动，另记 15/16 秒两次训练前拒绝。无自动第三对或已选确认，G33 冻结。[B01 比较](candidates/uav_service_auxiliary/NOTES.md#b01-joint-complete-and-paired-reading--2026-09-22-0109-pdt)；[Pro 阅读与 B02 选择](candidates/uav_service_auxiliary/NOTES.md#2026-09-22--pro-reading-adoption-and-b02-selection)；[B02 启动证据](../../runs/uav_service_auxiliary/b02_detach_910137_a01/launch-manifest.json)。 |
 | `skill_teammate_drift_learning` | When teammates change, what must be learned or reused to improve decisions beyond competent simple controls? | reserve | Codex DM (independent session) | DM task `01a0bdb4-cd2c-71a3-af95-a196aeed70cd`，host `local`；checkout `/home/fires/.codex/worktrees/b-unknown-joint-law/hmasd-wsl`，branch `codex/b-unknown-joint-law`。旧径向一步表路线结束；B09/B10 局部正用途保留，B11 完整轨迹增量不一致；自身网络 refresh/burn-in 未识别真实队友行为漂移，后继方案已否决。没有排队实验、诊断或 Pro；需具体行为变化、受影响的未来估计和有区别的比较，才能选择下一步。reserve 不是无价值判决或外部等待。[最新判断及 B 分支 entry-mask 修复](https://github.com/CartmanFatass/My-paper-code/blob/74fe267aa166299d93a03566e5f0ab149ff2b12d/docs/research/candidates/skill_teammate_drift_learning/NOTES.md)；修复没有追溯应用于历史/FSD 结果。 |
@@ -196,6 +197,7 @@ B/UCOPE 的局部预测、一步优势或真实后缀信用没有自动转成稳
 
 | Direction | Question | State | Lead runtime | Standing and next step |
 | --- | --- | --- | --- | --- |
+| `joint_duration_skill_learning` | 在完整高低层共同学习中，新增时长选择及普通联合时长参数化能否改善有限资源下的原生服务？ | archived | Codex DM (independent session) | 直接 DM task `01a0c348-428c-7f01-bd8b-121d69543032`，host `local`；checkout `/home/fires/.codex/worktrees/joint-duration-learning/hmasd-wsl`，branch `codex/joint-duration-learning-20260921`。B01 三臂均完成 360k 步，2026-09-22 结束 S1/cap=10 配方投入：固定／分解／AR 终点 J=.49670730/.46107574/.48021814，耗时 72.34/127.22/96.59 min。每臂一个训练实例；AR 胜分解但低于固定，按既有 Pro 建议和预写规则停止，非周期策略类总体否定。全部 4 次尝试结束（含原 24k 技术失败），0 后继 fit，无运行、未收集结果或开放 Pro。[完整结果与停止判断](candidates/joint_duration_skill_learning/NOTES.md#b01-complete-three-arm-result-and-closure-of-the-cap-10-recipe--2026-09-22)。 |
 | `local_observation_encoding` | 同一合法局部观测下，普通稠密槽位/关系编码能否改善完整 HMASD 的有限学习？ | archived | Codex DM (independent session) | 直接 DM task `01a0c6ef-7c4b-7f02-b96d-ab115d467af8`，host `local`；checkout `/home/fires/.codex/worktrees/d683/hmasd-wsl`，branch `codex/local-observation-encoding`。B01 两个 fits 完整完成，2026-09-22 结束已测试 dense 配方投入：ORIGINAL/DENSE 固定 J45 为 0.458426/0.202254，连接人数 31.939/13.416，DENSE fit wall 约 1.95 倍。已读完并核验完整 Pro 答复；0 追加 fit，无后继排队。每臂一个训练实例，停止是有范围的投资判断，不是表示类总体否定。[最终决定](candidates/local_observation_encoding/NOTES.md#2026-09-22--dm-decision-archive-the-tested-dense-recipe)；[完整结果](candidates/local_observation_encoding/NOTES.md#2026-09-22--b01-complete-adverse-package-observation)。 |
 | `skill_information_refresh` | Can lawful estimates of multistep message value improve send-now versus retain-quota decisions through later receiver actions and communication opportunities? | archived | Codex DM (independent session) | C07 已完成。保留普通方法的 NEAR 正结果与 LONG 有限范围结论；当前宿主的继续投入结束，没有选中后继，不外推为神经方法或 UAV 增益。[停止判断](https://github.com/CartmanFatass/My-paper-code/blob/3ca4cb1f83ea869e1efca852a099db31c52b0e2c/docs/research/candidates/skill_information_refresh/NOTES.md)、[C07 claim/result](candidates/skill_information_refresh/CLAIM_near_commit_c07.md)。 |
 | `vsp_03` | Can learned submission timing exploit shared service opportunities beyond a strong transparent same-information opportunity rule? | archived | Codex DM (independent session) | 普通后果/机会模型的有界正用途保留，B11 数据获取比较已完成；没有继续维护同一固定宿主的选中问题。[停止审计](candidates/vsp_03/NOTES.md)、[B09 claim/result](candidates/vsp_03/CLAIM_fitted_opportunity_b09.md)。 |
@@ -219,14 +221,14 @@ B/UCOPE 的局部预测、一步优势或真实后缀信用没有自动转成稳
 
 **本轮四项投入的范围。** 已选择表中的普通局部信息组织、技能周期与有限学习、N 数量泛化、UAV 端到端服务预测。
 它们分别改变表示、时间选择、训练/测试团队数量、服务监督，首问互不依赖新模块或阳性结果。
-周期比较是现有计划中尚未执行的共同学习问题，此次由 owner 授权选题后单独分配；不重启旧 FSD 信用救援，
+周期三臂比较已完成，并结束本次 S1/cap=10 配方投入；不重启旧 FSD 信用救援，
 不接管 Claude notebook。技能规模、实际重组、churn、cross-play 等保留候选地位，不自动排队。
-普通局部信息组织的 B01 已完成并归档当前配方；其余三项按各自 standing 独立推进，不自动补位。
+普通局部信息组织与本次周期配方均已完成并归档；其余选中研究按各自 standing 独立推进，不自动补位。
 
 | 研究问题 | 当前优先次序与第一个比较 | 证据如何约束投入 |
 | --- | --- | --- |
 | **普通局部信息组织** | B01 已完成并归档当前 dense 配方，0 追加 fit。 | S1 固定 k/N、同信息完整共同学习的两个 fits 中，dense 在三个预写面板的平均 J 均较低，且实测成本更高；每臂一个训练实例，不建立表示类总体排名。没有选中修补或后继比较。[最终判断](candidates/local_observation_encoding/NOTES.md#2026-09-22--dm-decision-archive-the-tested-dense-recipe)；[退役的初始计划](archive/2026-09-22/RESEARCH.md)。 |
-| **技能周期与有限学习** | 下一项优先核心问题：固定 k 对充分知情的分解时长、普通自回归联合时长，高低层共同训练。 | 两种可变时长共享合法历史、现存承诺、team latent、当前联合技能、时长菜单/cap、critic 及更新原则；单成员重选事件没有额外跨成员采样差别。比较完整学习/服务与实际成本，不以编码阳性为前提，不延长旧 FSD 信用救援。 |
+| **技能周期与有限学习** | B01 三臂完成，关闭本次 S1/cap=10 普通分解／AR 配方，0 追加 fit。 | 新时长选择确实执行，事件与高层优化量增加；两种可变臂终点均低于固定，AR 后段胜分解不足以满足既定保留条件。每臂一个训练实例，不否定更广周期问题；长于十步的承诺另需实际团队时钟、支持与相应固定参照，尚未选中该比较。[结果与判断](candidates/joint_duration_skill_learning/NOTES.md#b01-complete-three-arm-result-and-closure-of-the-cap-10-recipe--2026-09-22)；[退役的初始计划](archive/2026-09-22/RESEARCH_02.md)。 |
 | 事实预测辅助 | 独立近邻：同一个实际训练的事实 readout，detach 对辅助梯度进入 actor/GRU。 | 两臂都有预测头；最终看完整回报，不能用更低 MSE 代替用途。先选一个后果/窗口，不叠加规划、通信、duration。 |
 | 技能规模与实际重组 | 分别选择有依据的较小标签集合，或固定 k 下真实 partner-skill 重组曝光，对普通匹配训练。 | 标签组合数不是样本复杂度；保留正常搭配收益。技能可辨认不等于有任务互补性，冻结标签探针不是新共同学习的阳性门槛。 |
 | **N 数量泛化** | N 轴默认入口：固定 k、每回合固定 roster 的 train-N→test-N，普通共享/set generalist 对明确干预。 | 同一测试 N 内比较；specialist 成本另计。无需同时实现 churn、独立混编与异质能力，也不依赖 S1 编码或 duration 阳性。 |
