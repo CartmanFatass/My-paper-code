@@ -3126,3 +3126,437 @@ with intermediate and native predictions and any omitted MARL coupling. Return
 extra consultation round, broad claim, experiment authorization or approval requirement.
 
 ### Answer
+
+Saved from chat after verified NOT_DELIVERED; full answer preserved verbatim.
+
+GitHub 读取正常，但当前连接没有文件写入操作，因此未写入仓库，也没有产生新的 Answer 提交。最新回读的目标仍是本次问题的空 ### Answer，blob 为 ee02f6cd1496c0731fb44349311f1b75dfd07feb。以下是完整答复。
+
+Answer
+一、建议：采纳两次新训练，限定为“熵系数的有限学习效应”，不把它许诺成中介机制识别
+
+我建议进行提议的两个新 fits：H6/clip/λ_l=0、SET/clip/λ_l=0，复用对应的 B03/clip/λ_l=.05 控制，保持每 fit 360k、原种子、原评价世界和 final45 主终点。 不增加 raw-training 格、不先冻结 sigma、不更换 tanh 分布，也不把这个问题扩成熵系数扫描。
+
+这项比较能改变一个具体判断：
+
+在已经实行训练和部署裁剪的条件下，保留 .05 的低层原始高斯熵奖励，是否对这个 SET 配方造成了有实际服务意义的有限训练损失，而且该损失大于它对 H6 的影响？
+
+它不能单独回答“sigma 是否是唯一原因”“是否通过某一种信用分配机制起作用”，也不能凭一个初始化区组证明普通有界动作方法整体不如 H6。应把系数干预的整体效果、与曝光变化一致的解释、最终配方的使用价值分开读取。
+
+这个建议不是因为“还可能救回来”就继续投入。B03 保持熵系数不变，只改变执行映射；现在改变的是尚未直接干预的 actor 优化项，并且保留奖励驱动的尺度学习。因此，新预测不同于已经失败的 clip-only 预测，也可能明确失败。既有方法允许这样的有区别修订，同时要求失败后降低相应解释的期待，而不是自动接着购买下一种修复。
+
+最强的不投入理由是：这两个新结果仍将来自同一个、在看过 B03 后选定的开发区组；即使出现 sigma 下降和服务改善，也无法排除整体优化改变及种子特异性。假如本次投资目标必须是“识别纯粹的探索中介”或“确认训练总体排名”，这两个 fits 不够。我的判断是，当前更有用且成本较小的目标，是决定这个明确熵激励是否值得继续保留，以及选择性 SET 恢复解释是否应进一步降权；为此，两次训练值得购买。
+
+二、B03 的更新应保留，而且不能被新解释冲淡
+
+B03 的预写预测要求 B_SET > 0 且 I > 0。固定终点结果不是模糊的小幅正负，而是在每个 N 上都与选择性 SET 恢复预测相反：
+
+测试条件	B_H6：训练裁剪效应	B_SET：训练裁剪效应	I = B_SET − B_H6
+N4，未见数量	+0.028323	−0.036895	−0.065218
+N6，训练数量	+0.076966	−0.008559	−0.085525
+N8，未见数量	+0.035547	−0.037840	−0.073387
+N4/N8 等权平均	+0.031935	−0.037368	−0.069303
+
+这些是完整结果条目的固定终点读数；最终原始面板也保留了共同裁剪部署、零评价更新及逐世界原生分量。应结束“仅改变训练执行副本就选择性恢复 SET”的自动延伸，不能把本次熵实验描述为该预测已经部分成功。
+
+hmasd-pro-question-count-entrop…
+
+B03 加强了一个有范围的判断：这个训练区组中，H6 的优势可以在共同有界训练和部署条件下存在。它削弱了超范围训练执行是 SET 弱点的充分修复解释。它没有解决普通有界 SET 是否已经训练得足够好、哪个包组件产生优势、训练总体是否复现，以及其他熵／优化解释是否成立。这里必须遵守指定背景的版本关系：44b9817... 仍写着 SET/raw 尚未完成，其部分判断被完整 B03 条目取代，而不是继续把第四格当作缺失。
+
+hmasd-pro-question-count-entrop…
+
+反面阶段同样重要：rollout30 的 unseen I=+.030761222，但 B_SET=−.001151145。这恰好说明交互变正不等于 SET 获益。不同阶段使用新世界，不能把 SET 的阶段均值变化独立当作“熵不断增长导致时间退化”的因果证据。
+
+hmasd-pro-question-count-entrop…
+
+最后，两个 clip-trained 配方的最终 sigma 都比其 raw-trained 对照更高，服务变化却相反。这已经反对“sigma 更大就必然服务更差”的单调解释。新假说应承担的是干预后的联合预测，而不是重新引用同一个 sigma 排序。
+
+hmasd-pro-question-count-entrop…
+
+三、这次究竟改什么：有明确的直接作用，也有不能省略的优化和 MARL 耦合
+1. λ_l 是 actor 损失中的熵系数，不是要重写环境奖励
+
+冻结实现的低层更新是：
+
+entropy_loss = -lambda_l * entropy
+actor_loss   = policy_loss + entropy_loss
+critic_loss  = value_loss_coef * value_loss
+
+actor、critic 分别进行梯度裁剪和优化。关闭 lambda_l 不应改变环境的 R/6、H6 的内在奖励、GAE/return 构造、高层熵系数或判别器目标；那些不是这次处理。配置也明确关闭了 entropy targets 和 entropy annealing，MAPPO 开关没有把 lambda_l=.05 去掉。
+
+DiagGaussian 的 logstd 是一个与状态无关的三坐标可学习参数向量，并不是每个 UAV、每个技能分别拥有一套 sigma。令其为 α
+j
+	​
+
+=logσ
+j
+	​
+
+，则原始高斯熵为
+
+H=
+j=1
+∑
+3
+	​
+
+[α
+j
+	​
+
++
+2
+1
+	​
+
+log(2πe)].
+
+在同一批数据和同一参数点，熵项对每个 α
+j
+	​
+
+ 的损失梯度贡献是 −λ
+l
+	​
+
+。但 PPO 对尺度的梯度仍存在；例如单个 Normal 对数密度满足
+
+∂α
+∂logp(u)
+	​
+
+=
+σ
+2
+(u−μ)
+2
+	​
+
+−1.
+
+因此，λ_l=0 移除一个明确的增大扩散激励，却没有规定 sigma 必须下降或等于 1。保留 logstd 在原 optimizer 中，并保留其奖励/PPO 梯度，正是这个试验比固定 sigma 更可失败的地方。
+
+可以用一个简单模型说明动机，但不能用它冒充结果。设单步原生收益 f 有界，考虑
+
+F
+λ
+	​
+
+(μ,σ)=E[f(clip(μ+σϵ,−1,1))]+λlogσ.
+
+收益部分有界，而 λ>0 的潜变量熵项可以继续增长。这说明执行已饱和与潜变量熵仍获奖励之间存在真实的不匹配可能。这个单步模型不是 B03 的 PPO 更新等价式，也没有包含有限优化、循环记忆或队友共同学习，不能推出当前 sigma 必然发散，更不能推出 λ=0 的原生收益一定更高。
+
+2. 全 actor 梯度裁剪使它不只是“改变采样噪声”
+
+冻结代码把低层 actor 的全部相关参数一起交给 clip_grad_norm_。在同一参数点，将其他 actor 参数记作 w，其裁剪前梯度可概括为
+
+g
+λ
+	​
+
+=(g
+w
+PPO
+	​
+
+,g
+α
+PPO
+	​
+
+−λ1).
+
+修改熵系数改变总梯度范数，因而可能改变所有 actor 参数共同受到的缩放，然后再进入 Adam。由于梯度可能相互抵消，不能预先断言关闭熵项一定使均值网络更新更大或更小。critic 有独立的裁剪和 optimizer，不应被说成直接接受这个熵梯度；但后续轨迹和 return 数据会间接改变它。
+
+这不是使比较无效的额外外生干预，而是所选系数干预的真实作用通路。其含义是：
+
+若 λ=0 改善了 J，能够保留“移除这个系数改善了该有限学习结果”的解释；即使 sigma 同时下降，也尚未隔离“仅通过较小噪声改善”的解释。
+
+本次无需为排除这一通路而同时修改梯度裁剪规则；那会改变问题。也不需要为了机制完整性另加 fits。明确保留这个解释边界即可。
+
+3. 不能把它当作单个智能体面对固定环境的修复
+
+共享 actor 的改变作用于全队，进而改变其他成员面对的联合行为和训练分布。H6 还继续共同学习技能协调器、低层策略与判别器；低层动作变化会影响技能的实际后果和后续训练数据。保持高层系数和更新规则不变，不等于保持学得的技能行为不变。 SET 也会通过共同轨迹、中心 critic 和循环状态发生联动。现有配置与模块构造保留了这些差别。
+
+因此，简单模型省略的联合信用、伙伴共同适应和技能内容变化，在原生实验里仍然存在。Q>0 可以表示两个完整包对低层熵激励的敏感性不同，不自动识别是哪一项 MARL 耦合造成它。
+
+四、复用两个旧控制是合理的，但有三项具体边界
+对照只用 B03 的两个 clip 格，并从相同初始化重新训练
+
+我支持复用：
+
+s1_action_law_b03_h6_clip_s942201
+s1_action_law_b03_set_clip_s943201
+
+它们的 summary 标明相同冻结输入 89486d32...、各自种子、clip 训练法和完整状态；本次不是从其最终检查点继续训练，而是从与它们匹配的初始化开始两个新 fits。旧 raw 格保留为历史证据，不混进本次 λ 对照。
+
+初始参数／normalizer 摘要和初始逐世界结果匹配是有用条件，但不是全部。还须保持实际模型构造顺序、随机流、采样和 minibatch 组织、数值路径以及评价隔离一致。第一个优化更新之前的已有采集摘要，是一个便宜的复用核对点；更新后轨迹分叉则是处理的预期后果，不应被当作配对失效。
+
+“相同随机地址”不是“相同状态曝光”，更不是更多训练复现。这里购买的是选定开发区组的反事实比较；既然种子、世界与 λ=0 都在看过 B03 后选择，就应完整保留这一选择历史。方法文件允许在匹配配置、信息和曝光时复用旧制品，但不把复用变成新的独立训练单位。
+
+不应为了 λ=0 解除冻结 B03 的合同断言
+
+B03 runner 在 setup、evaluation 和更新后检查 .05。因此，不能仅用一个运行时改值绕过断言，再把它说成“原 B03 的继续执行”。应在本次独立入口中绑定预期的 λ=0，保留 B03 文件和已完成结果；核对 setup、每次 update 和评价构造的有效设置一致。原始样本与 old log-probability 的存储、执行副本裁剪和 terminal successor 语义继续沿用。
+
+这属于已有科学语义检查与独立工程审阅的范围，不需要新的批准程序，也不需要先购买一个 profiling fit。
+
+不要求新增控制训练来补齐本来没有的历史测量
+
+我核对到，B03 的 raw_sigma_before_update、raw_sigma_after_update 保存了三个坐标；但 raw_coordinate_violations、boundary truncation/visitation 等计数是跨坐标汇总，不是逐轴时间序列。单个 first_overrange_witness 也不能重建整段训练的逐轴频率。
+
+最小修订是：对照检验采用两边共同已有的逐轴 sigma 与总体饱和／运动指标；新 fits 可增加逐轴计数，但旧控制相应栏标为未测量，不能填补。 除非确有另存的原始轨迹，否则不声称完成旧控制的逐轴比较。没有必要为一张更细的图再跑两个 .05 控制。
+
+五、中间测量要修正时点，并避免把“熵下降”重复算成多份证据
+原有 action_entropy=0 不能用作结果
+
+源码将报告值定义为：
+
+action_entropy_val =
+    -avg_entropy_loss / low_level_entropy_coef
+    if low_level_entropy_coef > 0 else 0
+
+所以 λ=0 时显示零，是报告逻辑，不是分布熵为零。独立记录实际 α、σ 和解析原始熵是本次必要的测量修正。sigma 与解析熵具有确定关系，它们不是两项独立验证；解析原始熵也不是裁剪后、含边界概率质量的执行动作分布熵。
+
+第 r 轮运动数据应对齐更新前的 sigma
+
+B03 是先读取 sigma_before，再采集完整 rollout，然后进行 PPO 更新，最后记录 sigma_after。因此，该轮实际动作曝光对应 before-update sigma；不能用更新后的 sigma 解释刚结束的动作频率。final45 的 after-update sigma 则描述最终策略的分布参数。
+
+建议在原有记录里明确区分：
+
+H_before[r] = sum(log(sigma_before[r])) + 1.5*log(2*pi*e)
+H_after[r]  = sum(log(sigma_after[r]))  + 1.5*log(2*pi*e)
+
+全程曝光用 1–45 轮，晚期曝光用 31–45 轮。频率用对应分子、分母累计后求比值，运动量用对应 UAV-step 数归一化；不把评价步骤混入训练曝光，也不把更新过程平均的旧 action_entropy 与端点解析熵直接视为同一量。
+
+“更少扩散”不等于“更少边界访问”，更不等于“更高服务”
+
+第45轮采集期，H6/clip 与 SET/clip 的原始坐标饱和率分别约 78.73% 和 84.00%；但执行后的平均尝试位移范数约 47.81 和 48.89，边界截断率反而分别约 17.77% 和 16.19%。SET 更大的扩散没有简单对应更高的边界截断率。两者的 team-step 至少一次越界比例都已到 100%，该指标尤其不适合继续充当灵敏的主中间读数。
+
+对单个坐标，
+
+P(∣u∣>1)=Φ(
+σ
+−1−μ
+	​
+
+)+1−Φ(
+σ
+1−μ
+	​
+
+).
+
+均值也在学习；特别是均值已在盒外时，降低 sigma 并不普遍保证降低饱和概率。因此，要把以下两个预测分开承担：潜变量扩散是否降低；实际记录的饱和和运动曝光是否向所预期的方向改变。
+
+保留原提案“不预定 boundary visits 的普遍符号”是正确的。边界访问、较小位移或饱和减少，只有结合原生服务后果才可被称为有益，不能因其看起来更平稳就判胜。
+
+六、保留 E/Q 主读法，并把 N6 保留条件说具体
+
+对每个包 a 和测试 N，令 J
+a,λ,n
+	​
+
+ 为 final45 在原十六个共同世界上的平均原生 J：
+
+E[a,n] = J[a,0,n] - J[a,.05,n]
+Q[n]   = E[SET,n] - E[H6,n]
+
+E[a,U] = (E[a,4] + E[a,8]) / 2
+Q[U]   = E[SET,U] - E[H6,U]
+
+并列报告两个系数下的完整包差 G[λ,n]=J[H6,λ,n]−J[SET,λ,n]，核对 Q[n]=G[.05,n]−G[0,n]。这样可以看到差距缩小究竟来自 SET 改善、H6 受损，还是两者兼有。
+
+保留 E[SET,U]>0 与 Q[U]>0 的联合要求，同时保留 SET coverage 改善和原生分量一致性。 SET 不必超过 H6，才算获得了有用修正；反过来，Q 变正也不意味着原 H6 优势是假的。B03 的 rollout30 已经展示了省略自身收益条件会发生什么。
+
+hmasd-pro-question-count-entrop…
+
+未见数量的等权汇总仍作主读数，但不能掩盖 N4、N8 相反的结果。如果只有一侧改善，应报告“未见数量平均取舍”，而不是“两种数量均恢复”。评价不更新参数，且继续用实际 N 将 scalar 换回原生 J；这个换算和奖励分量关系在冻结 runner 中已有明确实现。
+
+N6 的建议读法是一个描述性保留条件，而不是新统计检验：
+
+在没有声明可接受服务损失的情况下，只有 E[SET,6]≥0 且 N6 coverage 差非负，才使用“当前面板未观察到训练数量服务代价”的措辞。若两包都要采用 λ=0，H6 也分别接受同样检查。若 unseen 改善伴随 N6 损失，保留为有明确代价的结果，不自动抹除，也不默认全条件采用。微小正负不能建立总体非劣性或等价性；本次不从一个区组的世界方差推导所谓可接受损失界。
+
+实用量级应按任务单位解释。例如，配置固定 50 个用户，覆盖率增加 .02 相当于每步平均多服务 1 个用户；仅该覆盖变化、其他项不变时对应 J 增加 .014。这是单位解释，不是为探索追加一个强制 MEI 阈值。仅有极小的 E/Q 正号，不足以兑现“有害曝光是实质瓶颈”或“SET 已成为合格强基线”的说法。
+
+结果分支
+观察	应更新的判断
+有效 λ=0；晚期 sigma/解析熵增长下降；共同可比的曝光指标改变；SET 的 J/coverage 有实质改善且 Q>0	加强“该熵激励对这次 SET 有较大有限学习代价”的解释。保留配方及与曝光解释相容的证据，但不认领唯一中介；分别检查 N6 和两侧 unseen。
+sigma/曝光按预测改变，SET 的完整服务却没有恢复或更差	削弱本次固定预算下的有害曝光修复解释。不能用更漂亮的 sigma 曲线代替失败的 native 预测，也不自动转入另一个 λ。
+系数确实关闭、logstd 梯度保留，但 sigma/曝光没有按预测响应	干预已实施，预期中介预测失败，不是技术性“没有执行处理”。降低对该系数是主要扩散来源的判断；仍不能外推为所有探索机制无关。
+SET 服务改善，但预写曝光预测不成立	保留系数／配方的整体效果；曝光机制解释未获支持，梯度裁剪、数据和其他优化通路仍待区分。
+两包都有相近的有用改善，没有清楚的差异响应	支持较一般的熵系数配方改进，而非选择性 SET 恢复。“相近”是描述，不是等价性结论。
+Q>0 仅由 H6 损失造成，而 SET 无自身改善	选择性恢复预测失败。若 SET 改善但 H6 同时受损，则分别量化，不将其称为两包共同改进。
+
+其中第三行是对提案措辞最重要的收紧：实现没有生效与实现生效但中间预测失败必须分开。否则，一旦 sigma 没有下降，就说“尚未触及真正机制”，会使这个假说难以被任何结果削弱。
+
+任何结果都不自动触发确认、扫描或另一个修复包。单方出现有益设置可以作为后续配方候选保存，但不能在本轮看完分数后，拼接各包表现最好的系数，再冒充原先固定的主比较。
+
+七、为什么两 fits 是合适的最小投入，以及它们不买到什么
+
+只做一个 SET/λ=0 fit 可以回答自身变化，却缺少本次选择性假说所需的 H6 响应；重新跑两次 .05 则没有必要，前提是上述复用身份和执行条件匹配。冻结策略上切换熵系数也不能替代学习试验：该系数作用于训练损失，现有确定性 evaluator 使用动作均值，不采样 sigma。固定 sigma 会同时取消奖励对尺度的适应，tanh 则改变整个动作映射与分布。本轮没有比提议的两次新训练更小、又保留同一个 E/Q 问题的完整比较。
+
+预算保留为 720,000 training team steps + 192,000 evaluation team steps，共 912,000 新 team steps、两个新 fits。90 次 rollout updates 不是 90 次 optimizer steps；按继承的完整曝光，每个新 fit 的 actor、critic 各有 101,250 次 optimizer calls，H6 另有协调器和判别器更新。实际执行仍应报告这些工作和失败，而不是仅写“两个 fits”。旧两个 clip 控制的 158.195 scientific-command minutes 是历史成本锚点，不是本次耗时预测。
+
+hmasd-pro-question-count-entrop…
+
+这次购买不增加该初始化区组的独立训练复现数。四个策略结果来自每包一对系数条件；十六个世界、三个 N、四个 checkpoints 不能补成独立训练样本。可以展示逐世界配对差异、异常世界和曲线，但不从世界 bootstrap 得出训练总体置信区间，更不把 Q 除以历史包差宣称“解释了多少比例的 H6 优势”。方法要求保留开发选择曝光，正适用于本次。
+
+八、阅读范围、未验证对象与最终判断
+
+本答复以固定 aab8f066d25c2254aed461157fa0b222f5fec529 的问题、完整 B03 结果条目、此前 action-law Answer 及其采纳记录为依据；执行分析采用 89486d32ea569728f39d6e21b53f8a7c8854e74c 的 runner、configuration、models、入口、默认配置、baseline 开关及低层 Gaussian/更新代码。指定 44b9817... 的背景与方向行按其明确的历史范围使用，没有把较旧的“第四格运行中”当作现状。
+
+直接结果读取包含四个 B03 summary 的身份／状态及相关内容、十二个最终逐世界面板，以及四份 training.jsonl 的相关末轮记录；没有独立重审全部 180 条训练记录，也没有读取节点上的二进制检查点。完整文件哈希和检查点加载结论仍属于 DM 已发表的检查证据，不冒称本次独立复验。已读源码和日志还没有提供旧控制的逐轴完整饱和历史、均值轨迹或梯度裁剪过程记录，因此不能据此补出精细中介归因。它们不阻止上述有范围的设计判断，但限制未来可以声称解释了什么。
+
+hmasd-pro-question-count-entrop…
+
+新的 λ=0 实现、实际中间响应和原生结果均未验证，本次没有运行训练、环境评价或修改代码。我的最终选择是保留这个两-fit 开发比较：它能检验并削弱一个具体激励解释，也可能产出有用的普通配方修正；它不保证 SET 获胜，不确认 H6 总体优势，更不要求为了公平性一直修复 SET 直到优势消失。
+
+MATERIAL_DISSENT: no。 我接受提议的两-fit 主比较、旧 clip 控制复用、固定曝光与 E/Q 联合判读。必要补充是：独立解析熵及采集时点对齐、旧控制逐轴遥测的真实缺口、全 actor 梯度裁剪与共同学习通路，以及“处理已实施但中间预测失败”的明确分支。这些收紧不改变主问题或增加 fits，也不把建议变成实验许可；最终投入与采纳仍由 DM 决定。
+
+## 2026-09-22 — Complete entropy advice adopted; fixed B04 two-fit exploration
+
+One exact-attachment Send of question key
+`hmasd:908478e427f4862aaee2465a611db388cab703bbe194cf7013ef80bb98e8d8e4`
+was accepted at 6 Pro effort. Passive observation collected the complete 9,419-character
+answer (SHA-256 `905690cd70df89259ca1cb141e429558b4295bd56c16485871a18da714337bf5`).
+Delivery verification returned **NOT_DELIVERED**, and the latest repository target retained
+the unchanged question and empty Answer. The complete text above is saved from chat; its
+local text file adds one terminal newline (file SHA-256
+`95bdb920ac54e218d6811199a33a21f3dd67767a5e3b7d2f767e47b0134095dd`).
+The response's apparent write reference was a blob, not a new Answer commit. No resend.
+The DM read the entire answer, including its source-use limitations and MATERIAL_DISSENT=no.
+
+### Decision and working explanation
+
+Adopt **B04: two new clip-training fits with low-level lambda_l=0**, against the two
+completed B03 clip controls. The specific judgment is whether the retained .05 latent
+Gaussian entropy incentive imposes a material finite-learning cost on this SET recipe,
+greater than on H6. This changes a previously untouched actor optimization term and has a
+failable prediction; it does not reopen the failed clip-only prediction under a new name.
+Current background at main `f815a0aaa71d154ca92459339c744c35ded621b4` preserves that failure,
+the narrow bounded H6 signal and unresolved comparator competence. It leads us to keep the
+bounded task, raw-sample PPO contract and native-service comparison while changing this term.
+No new architecture, general baseline certification or pure sigma-mediation claim is adopted.
+
+Adopt Pro's material refinements:
+
+- If the effective entropy term is zero and logstd keeps its PPO gradient, absent sigma/exposure
+  response **weakens the proposed explanation**. The treatment occurred and the intermediate
+  prediction failed; do not relabel this as technical nonactivation. Wrong coefficients,
+  missing gradients, invalid storage or incomplete execution are separately technical failures.
+- The coefficient can change the whole-actor gradient clipping/Adam update, joint trajectories,
+  critic data and H6's co-learning skills. These are real pathways of the selected intervention.
+  Do not change clipping to remove them or claim smaller noise is the unique mediator.
+  The bounded-reward/unbounded-latent-entropy simple model motivates a possible incentive
+  mismatch; it is not the PPO objective or proof of inevitable divergence/native gain.
+- Compute analytic raw entropy from actual sigma, before and after updates. Legacy
+  `action_entropy=0` at lambda0 is a reporting definition. Sigma and analytic entropy are
+  algebraically linked, not independent evidence, and neither measures clipped-distribution
+  entropy. Rollout r exposure aligns with sigma_before[r]; after45 describes the final policy.
+  Use all1–45 and late31–45, summing numerators/denominators before rates; motion per UAV step.
+- Compare only jointly measured telemetry: per-axis sigma, overall coordinate saturation,
+  motion and boundary counts. Old controls lack per-axis saturation, action-mean histories
+  and gradient histories. Do not impute them or buy two replacement control fits. Team-step
+  saturation near100% is secondary. Lower sigma need not lower saturation if means change;
+  no universal sign is predicted for boundary visits. Read native consequences separately.
+- Retain final unseen E_SET>0 and Q>0 plus meaningful J/coverage benefit and the predicted
+  intermediate change. Q from H6 loss alone fails selective recovery. Exposure change without
+  native recovery weakens the repair; native benefit without exposure response supports only
+  the coefficient/recipe effect. Similar responses are descriptive, not equivalence. Preserve
+  N4/N8 tradeoffs rather than treating an average gain as recovery at both quantities.
+- Use “no observed trained-N service cost in this panel” only if E[a,6]>=0 AND N6 coverage
+  change>=0 for each package proposed for use. Otherwise quantify the tradeoff; no hidden
+  tolerance or population noninferiority claim. With50 users, coverage+.02 corresponds to
+  one more served user/step and contributes J+.014 with other components fixed: a unit
+  interpretation, not an added victory threshold. Tiny directional signs cannot certify
+  a material exploration bottleneck or a competent tuned comparator.
+
+Pro read the final panels, source and selected training rows; it did not independently load
+native checkpoints or re-audit all180 rows. Our earlier complete verification remains the
+source for those facts. Its advice is not empirical replication. Its approximate final-rollout
+exposure figures are checked against the actual rows at this decision boundary. No external
+primary literature claim or unverified historical contract is needed for the choice. The DM
+selects this bounded investment under the owner's research continuation, without new approval.
+
+### Fixed prospective B04 contract
+
+Order: **H6/clip/lambda0/942201**, then **SET/clip/lambda0/943201**, sequential on configured
+`wsl_4070`, CPU float32, torch_threads4 and inherited native thread settings. New tags:
+`s1_entropy_b04_h6_zero_s942201`, `s1_entropy_b04_set_zero_s943201`.
+N6, k10, fixed roster,16 training lanes ×500 horizon ×45 rollouts =360k team steps/fit;
+PPO15 epochs, sequence batch32, coordinator batch1280. Keep all actor/critic information,
+refresh, architecture, normalization, terminal/reset, optimizer and batching/RNG paths.
+Only low-level entropy coefficient .05→0. Gaussian logstd remains trainable, initialized0,
+and in the actor optimizer; entropy targets/annealing off. H6 high-level entropy, intrinsic
+rewards and skill/discriminator learning stay unchanged. Environmental reward and critic
+loss are not modified. SET retains its ordinary disabled skill paths.
+
+Train executes clip(raw,-1,1), while PPO stores/scores the original Gaussian sample and
+original old log-probability. Deployment is deterministic mean plus clip. Evaluate0/15/30/45,
+N4/6/8,16worlds×500 per stage/N, seeds1200000+1000*rollout+100*N+i, frozen weights/normalizers,
+zero updates and preserved training RNG. Final45 primary; equal-weight N4/N8 unseen mean.
+Report each N's E[a,n]=J[a,0,n]−J[a,.05,n], Q=E_SET−E_H6 and G[lambda]=J_H6−J_SET;
+verify Q=G[.05]−G[0]. No best checkpoint or causal interpretation of fresh-world stage curves.
+Reuse and lambda0 were chosen after B03: this is development, not independent confirmation.
+No world-based training CI, explained-gap percentage or post-result best-coefficient mixing.
+
+Controls: completed B03 H6/clip and SET/clip at source
+`89486d32ea569728f39d6e21b53f8a7c8854e74c`. Respective initial parameter/normalizer digests:
+`50f3d5305a2d6a94a1543d7b5111654c7b154f4a9c1b71b59474c4deb36038ac`,
+`8f19743fe8fd5a09aa998bf90ab73bdbc3de599a8f58b791610fbb628d2f97c2`.
+Match effective source/config paths except treatment and observational output, exact initial
+digests and initial per-world outputs. Match common first pre-update rollout return/motion/
+witness evidence before treatment updates. This does not reconstruct unlogged complete old
+trajectories. Post-update trajectory divergence is expected; no attempt to re-pair states.
+Old controls and native binaries stay unchanged and recoverable.
+
+Cost: **2 new fits,720k train+192k eval team steps**,90 rollout updates,1440 training episodes,
+384 evaluation episodes,eight checkpoints,24 panels. Each fit:101250 actor and101250 critic
+optimizer calls; H6 additionally coordinator675,team-discriminator675,individual-discriminator2700;
+SET0. Reused controls add no new training. Historical clip-control command sum158.195 minutes
+is a cost anchor, not a forecast under shared load. Technical checks/review, collection and
+publication are additional support work. No profiling fit, additional control, automatic retry,
+horizon extension, parameter sweep or automatic confirmation. **0/2 B04 fits started** at
+this decision. Technical failures after training starts count and need a recorded retry choice;
+owner pause/admission refusal prevents new launches without changing accepted operations.
+
+### B04 L0 implementation scope
+
+Deliver an independent admission-guarded two-cell runner under
+`experiments/candidates/agent_count_generalization/entropy_b04/`, entry
+`scripts/run_agent_count_entropy_b04.py`, and focused tests under
+`tests/experiments/candidates/agent_count_generalization/entropy_b04/`.
+Reuse unchanged helpers or copy the frozen B03 path where .05 assertions need a separate .0
+contract. Do not monkeypatch or modify frozen B03, old controls, common learner/model/adapter,
+other direction code or shared launcher. No framework refactor. Nearest experiments/scripts/
+tests AGENTS apply. The Implementer owns only these new code/test paths: no NOTES/RESEARCH,
+Git index/commit, launch, Pro Send or scientific choice. It is not alone in this checkout;
+DM records/publication edits proceed concurrently. Return diff, checks, deviations and risks.
+
+Enforce lambda0 during setup, actual learner updates and evaluator construction, targets/
+annealing off and logstd included in the actor optimizer. Preserve sampler, module build
+order, dtype, recurrent masks, raw storage/log-probabilities, clip execution and terminal
+successors. Produce actual counts, optimizer/parameter movement, failure partials, recoverable
+checkpoint identities, control comparison and per-rollout sigma/log-sigma/analytic entropy
+before/after. H=sum(log(sigma))+1.5*log(2*pi*e). Optional per-axis motion is unnecessary.
+Bind known control summary bytes, complete status/source/tag, initial digest and compare
+common initial per-world outputs plus first pre-update collection before allowing updates;
+preserve partial counts on mismatch. No diagnostics may consume RNG or mutate tensors.
+The CLI exposes fixed cell, launch source and output, with single-use admission before
+scientific effects; no coefficient/horizon tuning knobs. Tiny-spec hooks are test-only.
+
+Checks cover native small H6/SET learning through storage and actual update; zero effective
+coefficient in train/eval with trainable scale and genuine PPO gradient; nonzero analytic
+entropy despite zero legacy report; eval/RNG isolation and raw storage versus clip execution;
+control matching and deliberate mismatch failure before updates; unchanged frozen source.
+Test the changed scientific semantics, reuse applicable old checks. Independent engineering
+Reviewer checks executable change and reuse before DM acceptance. Commit/push exact accepted
+inputs, then fresh actual-node admission; no result run before acceptance.
+
+Frozen reused control summary SHA-256: H6/clip `55a994c81f49a9b97b52efa4ddaea82579e1068ea3a7ddbd11c8b7645bf88921`; SET/clip `2621fc884d2d6a9ea909ee4f483b4df1c2d9d6f8767826ef730b952a360422e3`.
+
+The reported final-rollout motion numbers were independently recomputed from the stored
+B03 rows: H6/clip and SET/clip raw-coordinate saturation .787319444/.839993056,
+executed attempted L2 per UAV step47.810069903/48.885685237, and boundary truncation
+.177729167/.161881944. Analytic entropy before/after update45 is
+7.659595387/7.715284886 for H6 and8.891486836/8.987144889 for SET. This verifies
+Pro's approximate observations and the before/after distinction, not a mediation claim.
