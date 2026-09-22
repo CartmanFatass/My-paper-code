@@ -2330,3 +2330,23 @@ Use small internal technical fixtures only; no CLI bypass or production training
 Independent Reviewer checks the new training/evaluation boundary; DM accepts its final diff.
 The scientific rescue prediction, one-block limits and fixed final45 endpoint remain exactly
 those recorded above; no additional Pro question is needed for this covered implementation.
+
+### B02 accepted operation
+
+Published B02 source is `dd25f34a09ba8d0f8a62c5aacb36d9aaa56dcf0c`. The same focused suite
+passed on the configured destination interpreter: **16 passed in 2.75 s**, with existing
+matplotlib/pyparsing deprecations only. The isolated native worktree is frozen at that SHA.
+Native admission accepted at **2026-09-22 14:58:49 UTC**; its
+[manifest](../../../../runs/agent_count_generalization/s1_action_law_b02_probe/launch-manifest.json)
+and [fresh memory preflight](../../../../runs/agent_count_generalization/s1_action_law_b02_probe/admission-preflight.json)
+retain the exact operation, command, source, supervisor/runner identities and output location.
+Preflight observed 15,653,269,504 available physical bytes, above the 4 GiB floor. This is
+resource admission, not a measured peak or a scientific result.
+
+At 14:59:05 UTC the native status was consistent/running with no exit witness; the scientific
+summary had verified all six production checkpoint inputs and completed 16,000 evaluation team
+steps / 32 episodes. Fits, training steps, updates and optimizer calls were all zero. This is
+an intermediate observation, not acceptance of the full 288k-step comparison. The repository
+waiter now observes this exact operation at generation 33, with terminal/error wakes and a
+1500-second checkpoint; it grants no restart. B03 implementation is underway in its separate
+candidate paths; no B03 training has been accepted.
