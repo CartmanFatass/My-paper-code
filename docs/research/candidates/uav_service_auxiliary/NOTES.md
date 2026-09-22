@@ -766,3 +766,44 @@ fingerprints, counts and final outcomes will still be read from the admitted run
 Checks created zero scientific fits. Initial preparation reports 13,179,844 KiB available
 RAM and 4864 MiB free GPU on `wsl_4070`; the actual native admission will recheck resources
 and current owner/lead immediately before starting the first B02 fit.
+
+### B02 pre-training control-reference correction
+
+Supervisor `uav-service-b02-detach-910137-a01` was refused before training at
+`2026-09-22T09:01:21Z`, code 4 after 16 seconds: `canonical control checkout has not fetched
+the published control head; sync it before launch`. Native same-output status reports that
+the reference does not exist. This policy check precedes snapshot/claim/output creation
+and child release; no B02 fit or worker was accepted. Preserve the supervisor log.
+Refresh only the canonical repository's published main reference, without moving its
+checkout or any live process. Then use the same published scientific inputs
+`30401722b14c208bf5330ab66e967c94b3df8a36`, seed, arm, horizon and unused output tag.
+This is a resolved pre-training control-data refusal, not a restarted training attempt.
+
+### B02 detach accepted — 2026-09-22 02:02 PDT
+
+After fetching the canonical control reference to `1bca4f7cd69d91146c9a220213927dfddf46b34a`,
+supervisor `uav-service-b02-detach-910137-synced-a01` completed native admission at
+`2026-09-22T09:02:54.446158Z`. This is the first accepted B02 fit. It uses the published,
+reviewed source `30401722b14c208bf5330ab66e967c94b3df8a36` in the retained source snapshot
+`/home/wu/projects/HMASD/.git/hmasd-launch-sources/7ff125f86a384427b106b03b822686a5`.
+The author checkout and all B01 outputs remain intact. The real runner config records
+`spec.seed=active.seed=910137`, with the prewritten 30 × 4 × 1500 training exposure,
+evaluation/fact worlds and native S7 settings. No additional scientific setting changed.
+
+The accepted output is `runs/uav_service_auxiliary/b02_detach_910137_a01` under the remote
+owned root `/home/wu/hmasd-worktrees/uav-service-auxiliary-a335`. Its operation reference is
+`/home/wu/projects/HMASD/.git/hmasd-admission/18814e12d341f265ea6f61e01c1d76caacf84bdb123dec64d2ba2ef736f30c95.json`.
+Supervisor PID/session 173846 has start ticks 43144873; runner PID 173847 in that session
+has start ticks 43144876; both belong to boot `bb732fcb-1a33-4659-a786-331110ae41d3`.
+The `09:08:13.563580Z` native observation found both identities running, consistent records,
+and no exit witness. Actual-node admission measured 13,626,494,976 available physical bytes,
+passed the 4 GiB floor, and observed current main/lead before release. Local copies retain
+the launcher manifest, preflight, status and runner config. Acceptance is not completion
+or scientific acceptance; collect the full outputs before reading an effect.
+
+Cost is now **4 planned fits: 3 accepted, of which 2 complete and 1 running; 1 unstarted**.
+The earlier 15-second B01 path refusal and 16-second B02 control-reference refusal are
+separate pre-training support costs, not additional fits. B02 joint remains unstarted and
+must use this same source plus the new detach fact bytes/digest and initialized-model
+fingerprint, after detach completion and fresh native admission. Observe the retained
+operation through `hmasd_wait`; a checkpoint neither repeats launch nor expands the plan.
