@@ -2005,3 +2005,30 @@ uses pytest-owned scratch and shortened synthetic/checking exposure, never resul
 Independent high-risk engineering review covers the actual integrated diff and checks before
 publication/admitted execution. Stop dependent work on a real target/RNG/leakage/input
 identity/resource conflict, preserve evidence and resolve locally; no repeated owner approval.
+
+## 2026-09-22 — B03 implementation acceptance and node verification
+
+The DM accepted the Implementer's bounded auxiliary diff and the integrated native/factual
+paths. D/S service replay is checked against the frozen B01 path; both head initializations
+preserve the native RNG. Three-arm real-S7 engineering checks verify identical first
+collection, first native update and calibration, then separate native/auxiliary movement,
+checkpoint readback and common endpoint replay with zero new updates. Initial G predictions
+are saved before training; D's first-training-rollout scale is later applied to those saved
+predictions, without rerunning an updated actor as if it were the initial one.
+
+Independent Reviewer identified one concrete replay-boundary defect: hash-valid shortened
+engineering endpoints could be accepted as production endpoints. It is repaired by binding
+the production specification, training SHA, device/threads, actual evaluation panels/counts
+and source policy identity; the production CLI exposes no short-spec override. A regression
+now refuses the very engineering roots used by the positive integration test. No material
+review finding remains. The review independently ran 15 auxiliary/facts checks; frozen B01
+reference files remain byte-identical to `30401722b`.
+
+Local CPU verification passes 24 B03 checks with the CUDA case skipped. The separate frozen
+B01 auxiliary check passed five tests with one CUDA skip. Earlier engineering-only failures
+were a legitimate inactive configuration infinity sentinel rejected by strict JSON, the
+test command missing the documented Ninja PATH, and a regression expecting the old ordering
+of two rejection checks. These were reproduced and corrected before result execution;
+runtime scientific configuration did not change. This is 0 result fits, not a learning result.
+The selected production-shape, four-lane CUDA integration check will run on the configured
+node from committed source before the first fit. Its short horizon remains engineering-only.
