@@ -427,3 +427,59 @@
 {"event": "collection", "rollout": 27, "step": 700, "transitions": 158800, "wall_seconds": 4855.622633457184}
 {"event": "collection", "rollout": 27, "step": 800, "transitions": 159200, "wall_seconds": 4861.940464019775}
 {"event": "collection", "rollout": 27, "step": 900, "transitions": 159600, "wall_seconds": 4868.048996925354}
+{"event": "collection", "rollout": 27, "step": 1000, "transitions": 160000, "wall_seconds": 4874.222131490707}
+{"event": "collection", "rollout": 27, "step": 1100, "transitions": 160400, "wall_seconds": 4880.078252792358}
+{"event": "collection", "rollout": 27, "step": 1200, "transitions": 160800, "wall_seconds": 4885.962909698486}
+{"event": "collection", "rollout": 27, "step": 1300, "transitions": 161200, "wall_seconds": 4891.706355333328}
+{"event": "collection", "rollout": 27, "step": 1400, "transitions": 161600, "wall_seconds": 4897.345970392227}
+{"event": "collection", "rollout": 27, "step": 1500, "transitions": 162000, "wall_seconds": 4902.988975763321}
+{"event": "rollout_complete", "rollout": 27, "transitions": 162000, "wall_seconds": 4949.680188417435}
+{"event": "collection", "rollout": 28, "step": 100, "transitions": 162400, "wall_seconds": 4955.330045700073}
+{"event": "collection", "rollout": 28, "step": 200, "transitions": 162800, "wall_seconds": 4961.380451440811}
+{"event": "collection", "rollout": 28, "step": 300, "transitions": 163200, "wall_seconds": 4967.677816390991}
+{"event": "collection", "rollout": 28, "step": 400, "transitions": 163600, "wall_seconds": 4974.23215675354}
+{"event": "collection", "rollout": 28, "step": 500, "transitions": 164000, "wall_seconds": 4980.8201467990875}
+{"event": "collection", "rollout": 28, "step": 600, "transitions": 164400, "wall_seconds": 4987.516953468323}
+{"event": "collection", "rollout": 28, "step": 700, "transitions": 164800, "wall_seconds": 4994.248792171478}
+{"event": "collection", "rollout": 28, "step": 800, "transitions": 165200, "wall_seconds": 5000.916198968887}
+{"event": "collection", "rollout": 28, "step": 900, "transitions": 165600, "wall_seconds": 5007.6301901340485}
+{"event": "collection", "rollout": 28, "step": 1000, "transitions": 166000, "wall_seconds": 5014.20615029335}
+{"event": "collection", "rollout": 28, "step": 1100, "transitions": 166400, "wall_seconds": 5020.864618778229}
+{"event": "collection", "rollout": 28, "step": 1200, "transitions": 166800, "wall_seconds": 5027.857760190964}
+{"event": "collection", "rollout": 28, "step": 1300, "transitions": 167200, "wall_seconds": 5034.73611497879}
+{"event": "collection", "rollout": 28, "step": 1400, "transitions": 167600, "wall_seconds": 5041.5018146038055}
+{"event": "collection", "rollout": 28, "step": 1500, "transitions": 168000, "wall_seconds": 5048.609579324722}
+{"event": "rollout_complete", "rollout": 28, "transitions": 168000, "wall_seconds": 5093.792948961258}
+{"event": "collection", "rollout": 29, "step": 100, "transitions": 168400, "wall_seconds": 5099.951429367065}
+{"event": "collection", "rollout": 29, "step": 200, "transitions": 168800, "wall_seconds": 5106.206798315048}
+{"event": "collection", "rollout": 29, "step": 300, "transitions": 169200, "wall_seconds": 5112.537809848785}
+{"event": "collection", "rollout": 29, "step": 400, "transitions": 169600, "wall_seconds": 5118.698741197586}
+{"event": "collection", "rollout": 29, "step": 500, "transitions": 170000, "wall_seconds": 5124.921152591705}
+{"event": "collection", "rollout": 29, "step": 600, "transitions": 170400, "wall_seconds": 5131.318683385849}
+{"event": "collection", "rollout": 29, "step": 700, "transitions": 170800, "wall_seconds": 5137.731495380402}
+{"event": "collection", "rollout": 29, "step": 800, "transitions": 171200, "wall_seconds": 5144.181019067764}
+{"event": "collection", "rollout": 29, "step": 900, "transitions": 171600, "wall_seconds": 5151.6276931762695}
+{"event": "collection", "rollout": 29, "step": 1000, "transitions": 172000, "wall_seconds": 5159.153269529343}
+{"event": "collection", "rollout": 29, "step": 1100, "transitions": 172400, "wall_seconds": 5166.490725278854}
+{"event": "collection", "rollout": 29, "step": 1200, "transitions": 172800, "wall_seconds": 5173.863285064697}
+{"event": "collection", "rollout": 29, "step": 1300, "transitions": 173200, "wall_seconds": 5180.799185037613}
+{"event": "collection", "rollout": 29, "step": 1400, "transitions": 173600, "wall_seconds": 5187.995462656021}
+{"event": "collection", "rollout": 29, "step": 1500, "transitions": 174000, "wall_seconds": 5195.077382326126}
+{"event": "rollout_complete", "rollout": 29, "transitions": 174000, "wall_seconds": 5239.82452249527}
+{"event": "collection", "rollout": 30, "step": 100, "transitions": 174400, "wall_seconds": 5246.060791492462}
+{"event": "collection", "rollout": 30, "step": 200, "transitions": 174800, "wall_seconds": 5252.694016933441}
+{"event": "collection", "rollout": 30, "step": 300, "transitions": 175200, "wall_seconds": 5259.289935588837}
+{"event": "collection", "rollout": 30, "step": 400, "transitions": 175600, "wall_seconds": 5266.153570175171}
+{"event": "collection", "rollout": 30, "step": 500, "transitions": 176000, "wall_seconds": 5273.228618860245}
+{"event": "collection", "rollout": 30, "step": 600, "transitions": 176400, "wall_seconds": 5280.323078870773}
+{"event": "collection", "rollout": 30, "step": 700, "transitions": 176800, "wall_seconds": 5287.138246297836}
+{"event": "collection", "rollout": 30, "step": 800, "transitions": 177200, "wall_seconds": 5293.927674770355}
+{"event": "collection", "rollout": 30, "step": 900, "transitions": 177600, "wall_seconds": 5300.381294250488}
+{"event": "collection", "rollout": 30, "step": 1000, "transitions": 178000, "wall_seconds": 5307.1223039627075}
+{"event": "collection", "rollout": 30, "step": 1100, "transitions": 178400, "wall_seconds": 5313.86282992363}
+{"event": "collection", "rollout": 30, "step": 1200, "transitions": 178800, "wall_seconds": 5320.568829774857}
+{"event": "collection", "rollout": 30, "step": 1300, "transitions": 179200, "wall_seconds": 5327.483117341995}
+{"event": "collection", "rollout": 30, "step": 1400, "transitions": 179600, "wall_seconds": 5334.809856176376}
+{"event": "collection", "rollout": 30, "step": 1500, "transitions": 180000, "wall_seconds": 5342.161929607391}
+{"event": "development_evaluation", "rollout": 30}
+{"event": "rollout_complete", "rollout": 30, "transitions": 180000, "wall_seconds": 5683.456382513046}

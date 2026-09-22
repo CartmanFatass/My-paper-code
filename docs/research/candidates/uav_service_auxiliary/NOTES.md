@@ -2486,3 +2486,52 @@ S running), four later cells unstarted and the separate zero-step D failure. Con
 same fixed S operation through its remaining training and final evaluation, preserving the
 weaker intermediate contrast and contrary worlds. Rearm observation; no extra fit, early
 checkpoint selection, recipe adjustment or Pro Send is selected.
+
+## 2026-09-22 — B03 S training horizon reached, final evaluation pending
+
+The 21:54 UTC observation still reports both matching S / 912211 / a01 native identities
+running, consistent records and no exit witness. Refreshed main preserves this direction's
+assignment and contains no newer owner pause. Snapshot SHA256
+`bcba7510241a87132da247283daee7a835cab42454bee80eba48a55ada2a81d0`
+records the complete 180,000 training transitions / 30 updates / 120 episodes. All four
+development panels are complete, totaling 32 episodes / 48,000 evaluation transitions.
+The same two D initial-fact episodes / 3,000 transitions were reused, with zero new physical
+facts and 95,424 valid agent rows replayed over four diagnostic checkpoints. Final-world
+evaluation, endpoint facts, saved final checkpoints and artifact acceptance remain pending.
+The runner summary is INCOMPLETE, failure is null and stderr is empty. All 63,874 floating
+values are finite; prior completed records, config and input bindings are unchanged, and
+progress extends the previous file exactly.
+
+The fixed rollout-30 development panel has mean J **192.471241**, QoS **.362226250**,
+return cost **.112110638** and mean episode-minimum fleet battery **.402181969**. Its eight
+worlds truncate at 1,500 steps with no evaluation updates; all aggregates were recomputed.
+At this same rollout/world panel, S-minus-D is **+397.123937 J**, **+.175064046 QoS**,
+**-.045586275 return cost**, and +.039967295 episode-minimum battery. Six world J contrasts
+are positive; worlds 920006 and 920007 remain adverse at -1038.728208 and -177.777920.
+S's mean J recovers by 245.824038 from rollout 20, with four worlds improving and four
+worsening. The full trained development J curve at 10/20/30 is 99.099574 / -53.352798 /
+192.471241. This strengthens the favorable development reading relative to the preceding
+checkpoint while retaining its nonmonotonic trajectory and adverse worlds. It does not
+replace the prespecified, different final-world panel or establish a replicated effect.
+
+On the unchanged initial facts, final service MSE is **.016626176**, versus D .011681222
+(S/D **1.423325035**) and the fixed training-mean reference .010116768. Observation MSE
+is .010383823 versus D .009720327, fixed mean .008585614 and persistence .000001035146.
+Episode-equal weighting and common fact identity were checked. Thus the favorable final
+development contrast again occurs with worse predictive error than D on these initial
+facts. Preserve this disagreement and the change of relative error ranking across training;
+neither error ranking identifies the control mechanism. Fixed-row feature variance/effective
+rank are 33.779040 / 8.153838, with nonzero agent/segment variation and no degeneration flag.
+Trained G and the common endpoint mixture remain unobserved.
+
+All 30 auxiliary passes retain service representation updates; the four newly read passes
+have nonzero base/GRU and native learner movement with both heads updating. New training
+and development records still contain zero charging, cutoff, depletion or charger-input
+exposure; collection 27 has zero QoS in all lanes. The final training resource row records
+wall 5,399.38 s and peak RSS 3,057,972 KiB; the subsequent rollout-30 completion event after
+development evaluation is at 5,683.46 s. Neither is total fit cost. Two B03 training fits
+have started and reached their training horizon, but only D has complete artifact acceptance;
+S's accepted operation continues and four later cells remain unstarted. Retain the separate
+zero-step D failure. Continue this same operation through the remaining final evaluation
+and collection, and rearm observation. No new cell, extra fit, early checkpoint, recipe
+change or Pro Send is selected at this incomplete-result boundary.
