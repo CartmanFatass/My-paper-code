@@ -394,7 +394,7 @@ def main(argv=None):
     args = parser.parse_args(argv)
     if args.seed != SEEDS[args.arm]:
         parser.error("seed must match the predeclared B01 arm")
-    admission = require_admission(__file__, direction=DIRECTION)
+    admission = require_admission(__file__, direction="joint_duration_skill_learning")
     if admission["sha"] != args.launch_sha:
         raise ValueError("CLI launch SHA differs from native admission")
     execute(StudySpec(args.arm, args.seed), args.out, args.launch_sha, torch.device(args.device))

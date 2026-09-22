@@ -1,6 +1,7 @@
 """Actual S1 collection/update/evaluation and result-entry boundaries."""
 from dataclasses import replace
 import json
+from pathlib import Path
 import random
 
 import numpy as np
@@ -8,6 +9,11 @@ import pytest
 import torch
 
 from experiments.candidates.joint_duration_skill_learning import runner
+
+
+def test_runner_satisfies_native_static_guard_contract():
+    from scripts.hmasd_launch import _validate_guard_contract
+    _validate_guard_contract(Path(runner.__file__), runner.DIRECTION)
 
 
 def test_production_exposure_and_seed_bindings():
