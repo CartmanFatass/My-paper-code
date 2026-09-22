@@ -604,3 +604,64 @@ read RSS 2,280,068 KiB (not peak RSS), CPU about 390%, and node available memory
 These facts establish continuing real learning and healthy progress, not service superiority.
 Full endpoint/comparison remains pending; no fit, seed, horizon or selection rule changes.
 Rearm the same operation for its next checkpoint/terminal event and retain serial own fits.
+
+### 2026-09-21 first completed fit — H6 seed 914201
+
+The terminal observation reports a valid OS exit witness with exit code zero and both
+recorded processes absent. DM collected all 25 output files from the native run and compared
+every local SHA-256 against the finished remote copy; all match. Read the complete summary,
+all four evaluation panels at each N, and all 45 training rows. Each checkpoint's recorded
+digest/size matches its file. The four weight files remain in both the local and remote run
+directories at the native manifest's paths; Git preserves their digests in the summary,
+while text/config/panel/log/exit artifacts are published. No remote artifact is deleted.
+
+Execution is accepted as one complete exploratory fit: exactly 360,000 training/stored team
+steps, 720 training episodes, 45 updates, 96,000 evaluation team steps and 192 evaluation
+episodes. Actor and critic each made 101,250 optimizer steps, coordinator/team discriminator
+675 each, individual discriminator 2,700. All five learner modules and all three new state
+encoders moved relative to initialization. All twelve panel files match the summary, have
+16 complete worlds, preserve the native reward component identity using actual test N,
+and show zero optimizer calls with unchanged parameters/normalizers. Stderr is empty.
+
+Cost: scientific command wall 5,926.064 s (98.768 min), user/system CPU 22,900.062/226.543 s,
+peak RSS 2,557,116 KiB (2.439 GiB; Linux scientific-process RUSAGE_SELF). This includes runner
+import/init, training and evaluation, not preparation/publication/readback. Peak scratch is
+explicitly `resources_unmeasured`. Total project elapsed and support time are not inferred
+from this command wall. Source and exact invocation remain bound by the native manifest.
+
+Final preselected rollout-45 readings (mean of 16 worlds; one trained agent):
+
+| Test N | Native J | Coverage | Quality | Height penalty |
+| --- | ---: | ---: | ---: | ---: |
+| 4 | 0.557913 | 0.692883 | 0.256445 | 0.004038 |
+| 6 | 0.543241 | 0.696620 | 0.198120 | 0.003829 |
+| 8 | 0.465897 | 0.591728 | 0.189151 | 0.005058 |
+
+This fit's equal-weight unseen-N mean is 0.511905. The retained four-panel J curves are:
+
+| After rollout | N4 | N6 | N8 |
+| --- | ---: | ---: | ---: |
+| 0 | 0.372113 | 0.303765 | 0.229729 |
+| 15 | 0.526956 | 0.506443 | 0.436050 |
+| 30 | 0.531341 | 0.524379 | 0.368971 |
+| 45 | 0.557913 | 0.543241 | 0.465897 |
+
+Working update: strengthened is the narrower implementation/learnability judgment that this
+native H6 adapter can complete real full-horizon learning and strict zero-update N transfer;
+final fresh-panel service exceeds initialization in this one trajectory. Different panels
+use fresh worlds, so these are not paired-world improvements. Preserve contrary evidence:
+N8 is nonmonotonic across panels, and native stochastic training return averaged about
+0.425 over rollouts 26-30 versus 0.393 over 41-45; terminal action entropy is higher. These
+observations do not yet identify a failure mechanism or a stable learned-policy gain.
+
+Untouched/unresolved: H6-versus-SET benefit, training-seed dispersion, N6 retention relative
+to SET, and whether the complete package warrants its cost. Raw N8-minus-N6 is not the
+within-N treatment contrast, and 16 worlds do not create more training replicates. There is
+no retain/stop verdict from this single cell. No reusable shared-background judgment changes
+yet beyond the already stated comparator/metric limits.
+
+Next run is the already declared SET seed 915201, at the same published source, 360k training
+and fixed four-panel protocol. It supplies the missing ordinary-control observation. The
+existing Pro advice covers completing this six-fit comparison; no premise, horizon, seed,
+endpoint or comparator is changed, and no additional fit is purchased after these scores.
+Current cost is 1 started/1 completed fit, 0 technical failures; five declared cells remain.
