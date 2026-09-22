@@ -6153,3 +6153,235 @@ DM 判断、预声明与运行要求，不新增 Root 逐批审批。若没有�
 
 本次仅补齐计划的证据与建议层次：三项研究题目及其顺序不变，现行 reserve、Claude
 手动恢复边界和执行身份不变；0 新 fits、0 rollouts、0 科学评估、0 App 会话操作。
+
+
+## Portfolio review 2026-09-21 whole-project-evidence-led-research-plan
+
+### Question
+
+Owner correction and request:
+“这些以前的insight 或者说结果 你在设计研究计划时有采用吗 以及澄清:我提到3个DM时
+是指我推进时的一个并行度 不是要求你设计3个方向供我推进 我希望你总览整个研究项目
+看看我们失败的历史 我们insight的积累 来给我一份详尽的研究计划 这3个DM本身不是你要
+考虑的范畴 后面随着进度和需求不同也随时会发生变化”.
+
+This is a new owner-triggered whole-project Portfolio decision, not task dispatch. Root previously
+confused a concurrency suggestion with a three-question research portfolio. The decision now is:
+**What coherent programme, research branches, concrete next investments and stopping choices follow
+from the accumulated HMASD evidence, when the number of DMs is not a scientific constraint?**
+Do not design three directions, fill slots, assign sessions, or rank by which runtime is idle.
+Give a detailed Chinese research plan, not another unprioritized idea catalogue or instruction manual.
+
+This planning turn has 0 scientific fits/rollouts/evaluations. The Claude session remains stopped,
+with manual reopening solely by the owner; FSD as a scientific question is not excluded. No new
+positive finding has overturned Claude's FSD stopping judgment. Current RESEARCH states and lead
+identities remain unchanged. The constitution's current runtime rules remain execution details;
+this request is not an amendment of all concurrency controls or permission to create App tasks.
+
+Repository: `CartmanFatass/My-paper-code`; branch `codex/project-research-coordination-20260921`;
+write target `docs/research/RESEARCH.md`, only the empty `### Answer` within this unique heading.
+The transport message supplies the full source_sha of the committed question. Reuse the existing
+Portfolio conversation; its private address remains in local operation state, never in Git.
+
+#### Why prior advice is useful but does not settle this decision
+
+The complete `project-research-management`, `temporal-learning-and-uav-design`,
+`marl-concept-formation`, and `information-first-three-dm-plan` answers and Root responses are in
+this file. They supply bounded conclusions and concrete comparisons, not a permanent ranking.
+The owner now explicitly rejects the fixed-three-slot framing. This changes the Portfolio scope
+and investment ordering; it does not resurrect closed recipes or require resending an old question.
+The detailed 20-question inventory already maps every historical candidate slug. We need an
+integrated route through those possibilities, with evidence actually changing choices, rather than
+forcing the old three suggestions into a longer list. The number of research branches is yours to
+justify. They need not all become maintained directions or a universal ordered experimental matrix.
+
+#### What the evidence should make us do differently
+
+Source base before this question: `ae7be6bfb541b2859697b878beee4cc3411ef39c`. The current index,
+FOUNDATIONS and original direction records distinguish evidence, inference and conjecture. Root
+and bounded read-only helpers reviewed the following; this is not a new raw-array replication.
+Numbers from different hosts/metrics must not be pooled or ranked by magnitude.
+
+| History and strongest retained facts | Design consequence to assess, not merely a caveat |
+| --- | --- |
+| **FSD B05 is a real ordinary-construction clue.** With the same actor input rights/width/clock, scaling appended physical coordinates changed learning. Three reused blocks: within-fit scaled rise +.086/+ .102/+ .101; CF_S−CF_E0005 late −.046/+ .150/+ .072 (mean +.059), J45 −.130/+ .050/+ .091 (mean +.004). Trained-policy sensitivity was not measured. CF_S replaced the defective CF construction; it remains untuned, not a certified competent final flat baseline. See FSD NOTES B05 prospective/read, about lines 1710–2020. | Reuse the actual scale repair and keep an ordinary information-construction hypothesis credible. Do not claim a stable +.10 treatment gain, repeat the original defective CF comparison, or infer a sparse/aux bottleneck. Integrate necessary correctness fixes into concrete comparisons rather than creating an unlimited baseline-repair project. |
+| **FSD recent stop:** B13 P1 held, P2–P4 failed. B14 primary +.019/+ .016/−.019, mean about +.005, did not meet its prospective reversal. Owner adopted reserve at 2026-09-21 03:52; all recorded in NOTES at `00eac27c535ccffb66354f8bfac62acb504874ca`. Earlier D2/E2/E3 and native renewal already tested variable-duration/interruption recipes: E2 duration moves did not establish event value; E3 competent large-row contrasts were all adverse; native early gains and later mixed/attenuated endpoints coexist. | Stop the old high-level credit, threshold/renewal rescue and frozen-probe continuation. A new full-co-learning duration comparison is a new hypothesis, not new positive evidence or a statement that duration was never tested. FSD has no obligation to occupy a seat. |
+| **Skills and task regime:** B08–B10 show distinct closed-loop label behaviours, not a guarantee of useful complementary composition; B12's state-dependent sample/count regression is not a full conditional-interaction test. The original HMASD paper discusses useful-skill fraction and skill-count sensitivity. Its tested maximum label product 81 versus S1 279936 is a configuration count, not a 3456x sample-complexity theorem. | Treat skill usefulness, repertoire size, joint exposure and coordination separately. Consider a modest ordinary configuration change or actual partner-skill recombination, but do not declare all skills useless, force a skill-count grid, or require a positive frozen-skill probe before all new co-learning. |
+| **A, ordinary methods:** A01 supports ordinary multistep reuse over one-step; extra trace correction adds no stable gain. A02's long-commit collector did not improve its primary endpoint; early positive panel retained. Final NOTES `6c1a38833a85a55574a0fba8714b51b38a4b988a`. | Ordinary multistep/off-policy methods are assets. Future credit/reuse proposals compare against them; do not start with artificially weak one-step learning or rename the same extra correction. Fixed-body termination reuse and changing skill/teammate behaviour are different problems. |
+| **B, prediction to control:** B06–B08 weaken the old complete-return package; B09 improves prediction/visited-state one-step decisions but does not give stable own-trajectory gain. B10 retains conditional deployment usefulness against two fixed rules. B11's radial one-step table matching is inconsistent and matches beat the source controller in only 16/48 fresh worlds. The subsequent six-fit refresh/burn-in idea was rejected because it only re-encoded the same history under own network changes. Latest NOTES `74fe267aa166299d93a03566e5f0ab149ff2b12d`. | Require a concrete changed behaviour, affected future quantity and decision for a new drift/reuse question. For auxiliary learning, predictions are training signals and diagnostics, not the endpoint. A generic history encoder is not automatically teammate-drift research. The corrected recurrent entry mask is reusable correctness work, not measured algorithmic gain. |
+| **C and VSP-03 are useful positive completed work.** C07 NEAR−AF = +102/1280 worlds (mean +.0796875 tasks), all five block means positive; LONG−NEAR = +3, finite bound retained for that program. VSP B09 fitted planner exceeds learned G (mean +.01758 J); B11 from 512 R0 episodes gives O_R0−R0 mean +.02813 and conditional O_R0−O_full mean −.000271, not equivalence. See current standing/claims and complete NOTES. | Retain ordinary value-of-information, short consequence models and independent model acquisition as research assets. Estimate through the first action opportunity that can use the information, rather than merely message arrival. Model prior, collection and planning cost remain visible. These results do not supply learned HMASD/UAV gains; neither fixed host requires another learning rescue. |
+| **UCOPE and FOLR:** UCOPE B09/B10 fail retained complete-policy endpoints even with nonzero local effects and actual paired suffix credit; B10 nine fits. FOLR current cache A01 three contrasts adverse (mean −2.087265625); earlier favourable cases retained. Current pinned notebooks are in the index. | A real local target or richer history does not guarantee useful closed-loop learning. Stop those tested packages. Ordinary recurrent learning, task-predictive representation and legal history are still options with their own comparisons, not presumed refutations or continuations of the old cache. |
+| **MGTAP/ACVC:** conditional demand/partner geometry was actually tried (late-512 COND−DENSE −.005375 J); ACVC improves a weak proposer without establishing stable superiority over competent MAPPO. The current OPT/StateEncoder class and `opt_mappo_k` configuration exist, but that does not prove the proposed local actor path is active or tested. | Separate local numeric representation, action-interface redesign and model-based ranking. Local representation needs the same legal features and serious ordinary dense controls, not a mandatory new candidate/action space. Action-ranking studies must match candidate sets, physical priors and execution. Do not protect a wrapper against a weak proposer or claim first addition of OPT. |
+| **N, roster and compatibility:** VNFC INTERVAL/TERMINAL has no final primary after two SIG11s; CPCP has no executed population-mixing study. FRRIE's fixed-roster-per-episode N/relations question differs from within-episode churn. RCLE has bounded positives but not superiority to the strongest rule; DISH transfer value was not estimated when no legal transfer occurred. ACPS partial-sharing package did not retain aggregate gain. | Do not classify technical failure or no activation as mechanism failure. Distinguish train/test N, join/leave/slot reuse, independent-population cross-play and heterogeneous abilities. Each needs the actual action/history/identity contract and normal-service tradeoff, not a single N headline or automatic sunk-cost rerun. |
+| **Tail value and other credit/source archives:** TRDL B01 favourable, B02 within the old practical region; no stable distributional advantage. LCAC mixed/adverse; EGRCR/CRTO/RECCT exact or action equality is object-specific. EOCIV/CBSC/EC4G/APCFI/ORBIT/SCOPE results constrain their tested consequence/stream/kernel, not all MARL. | A scalar/eta-conditioned scalar is a serious risk-value control; tail return is not user fairness. Preserve simple reductions and diagnostic assets without reopening synthetic source/authentication/witness hunts. If no distinct native consequence is selected, leave those recipes stopped. |
+
+Sources for the remaining names, fixed notebook revisions, full positive/negative history and
+asset mapping: `Potential research directions 2026-09-21` in this file, especially its section VII,
+and current standing above it. Do not require every historical raw array to be re-audited before
+planning, but disclose which conclusions rely on recorded summaries.
+
+#### Current native assets and costs, corrected by Root
+
+- `hmasd/baselines.py:85–101` plain hmasd/hmasd_original disables extension flags; it does NOT
+  switch off high-level/discriminator training or set skill counts to 1. Those are different
+  mappo/opt_mappo_k branches. Local MAPPO, central-input flat and intact hierarchical HMASD have
+  different information/learning contracts. Configuration existence is not competent performance.
+- `hmasd/networks.py::R_Actor` uses observation encoder → skill FiLM → GRU → action head.
+  `SkillCoordinator` has ordinary global/member tokens; optional OPT classes are not automatically
+  its live entity-level path. The `opt_mappo_k` compact-to-actor ablation is not full original OPT.
+- S1 (`envs/pettingzoo/uav_env.py`, `scenario1.py`) supports movement, coverage, SINR/capacity and
+  height tradeoffs. Local user/peer slots are SINR sorted, zero padded, without persistent IDs or
+  explicit validity bits; do not silently import identity, served flags or visibility from state/info.
+  Native FSD runners exist, e.g. `scripts/run_fsd_uav_individual_renewal_b01.py`. E2 is instead the
+  RelayCorridor host, not S1. The full native path is exercised, while selected new arms are unbuilt.
+- Current S7 uses interface v3/reward v2/arm C, with relay/backhaul, energy, charging contention;
+  failure activation depends on stage. `energy_aware.py`, `routed_core.py`, local_view.py and
+  `train_multiproc_config_1.py` define different observations/action/episode lengths from S1.
+  Old arm-A results and checkpoints are not current-version evidence. G33 remains owner-frozen.
+  A registered factory does not establish this study's end-to-end duration/N learner integration.
+- Service restoration is a separate ParallelEnv/adapter with delayed telemetry, LP service,
+  continuing-task truncation and forward-only ordinary controls. A prepared Milan cache was absent
+  in checked locations and the required HMASD integration is unverified. Do not pay for S7 and a
+  second new host just to make a more realistic-looking programme; choose by a concrete question.
+- S1 has no moving-user, backhaul, battery or traffic-queue mechanism. S7's richer mechanism is a
+  task choice, not automatic proof that a candidate has value. Results on S1 cannot be marketed as
+  energy/handover/backhaul improvement. Likewise a constructor N is not a validated variable-roster
+  training and evaluator contract. CPCP needs compatible independently trained populations.
+- Actual old CPU FP32 S1 D1280 cost: 5 fits sum 41,241 s, mean 8,248 s; one partly solo fit 5,814 s,
+  peak RSS 2.75–2.79 GiB. Native 45 rollouts ×16 lanes ×500 =360,000 training team steps/fit.
+  These are historical anchors, not new-arm prices or required horizons. Evaluation, setup, tuning,
+  planning calls, prediction-head training and confirmation cost separately. Toy seconds do not
+  price native HMASD; zero new policy fits does not mean zero work. There is no fit allowance.
+
+#### Proposed programme structure for criticism
+
+Root's current working explanation is that stalled progress cannot be attributed to a saturated
+MARL field or one proven universal bottleneck. Repeated local-proxy successes, ordinary-method
+absorptions, construction confounds and weak transfer from toy/held-policy tasks should change
+how experiments are chosen. We want actual HMASD improvement and an explainable MARL answer on
+UAV tasks; ordinary useful improvements count, but do not by themselves establish a new algorithm.
+
+A possible programme has a reusable implementation foundation and the following scientific
+branches. These are conceptual groupings, not a required number of maintained directions:
+
+1. **Finite learning with existing information.** Start with ordinary scaling/encoding/recurrent
+   correctness actually supported by evidence. Ordinary entity/relationship organization,
+   selective aggregation and factual task-predictive supervision are separate interventions in
+   this branch, not permanently separate DMs. Pretrained local networks are a later distinct prior
+   comparison if justified; no LLM, semantics conversion or large-model download is required.
+2. **Useful skills and composition.** Current repertoire size versus one defensible smaller
+   ordinary configuration; behaviour/usefulness distinction; actual partner-skill recombination;
+   only then a specifically justified complementary/subteam discovery objective. Not a rigid
+   ordered ladder: any independent question can be chosen for its own information value.
+3. **Temporal freedom.** The prior fixed/fully informed factorized/ordinary AR duration comparison
+   remains a candidate. Event/hazard termination, clock curricula and cross-duration sharing are
+   different alternatives with inherited UCOPE/D2/A/SCDMP evidence, not automatic extra modules.
+   History/commitment-aware ordinary critic is a competent comparator; novel credit must beat it.
+4. **Changing teams and distributions.** Separate fixed-roster train/test N, native service
+   continuity after join/leave, independent-policy cross-play, heterogeneity and actual teammate
+   behavioural drift. Match each with relevant VNFC/FRRIE/CPCP/ACPS/B evidence and real interfaces.
+5. **UAV service structure and decision models.** Actual access/backhaul/energy substitution,
+   physical consequence models, service-interval prediction, and task-level action interfaces.
+   Communication only with a real delayed-cache/receiver consequence. Tail/risk learning uses a
+   defined native objective; user fairness is a different objective, not a synonym. Decide which
+   deserves a new S7 task and which remains a model/control asset. Do not replace all MARL science
+   with a geometry planner or change reward simply to make a mechanism win.
+
+Learning stability, value estimation and data reuse may be supporting methods or independent
+questions when an actual causal/learning intervention is specified; do not invent one new branch
+for each loss/optimizer/baseline. The complete old 20-question inventory must have a home or an
+explicit reason to stay stopped, not a promise to execute everything.
+
+**Concrete first scientific investment tentatively favoured by Root and the local Critic:**
+S1, fixed k, full intact HMASD: existing local observation encoder versus a competent ordinary dense
+slot/relationship encoder. Keep the same legal numeric inputs, original skill FiLM, GRU, discovery,
+action space and PPO; compare complete learning, native return/service and compute. It is a
+representation package comparison, not proof of sparse interaction recovery. The dense arm has
+reasonable capacity/optimization rights, and deterministic relative features derive only from
+observed values. No new persistent IDs or true padding mask is imported. Do not simultaneously
+change skill count, add sparsemax, predictive loss or a new critic. Two new training instances,
+one per arm, at a justified native horizon are an exploratory example (not an accepted batch or
+fixed rule); using the old 360k reference gives 720k training team steps, evaluation separately.
+
+Why tentatively first: B05 supports treating information-preserving construction seriously;
+this comparison keeps the whole original learning path and directly tests service outcome, with
+less additional target/async-contract uncertainty than prediction loss or joint duration. It does
+not presume ordinary dense encoding will work. Alternative first choices are a compact skill
+repertoire, the detached-versus-joint factual prediction head, actual partner recombination, or a
+specific S7 service question; explain if one is better. Do not turn dense success into an obligatory
+admission gate for those alternatives. Dense failure does not automatically authorize softmax/
+sparsemax/attention-depth tuning; a next intervention must have a distinct reason. If an ordinary
+method supplies the useful result, retain it without demanding another novelty component.
+
+The prior auxiliary first comparison remains useful when selected: both readout heads train on
+factual future external team outcomes, while only one propagates its auxiliary gradient into the
+existing actor encoder/GRU. Separate head optimizer/clipping/RNG, no future inputs, explicit
+window/termination semantics, and evaluation on common factual held-out fragments for forecast
+mechanism claims. Better own-rollout MSE alone is not native control success.
+
+For later comparison design, absorb supported ordinary improvements into the relevant baseline
+at a new version boundary; do not move an ongoing frozen batch. A useful common encoder/adapter
+can be reused by multiple branches without every branch waiting for one positive research result.
+A required input/termination repair is an implementation dependency; a full headroom proof,
+positive frozen-skill probe or successful prior candidate is not a universal scientific prerequisite.
+
+#### What the finished plan must decide
+
+Please return a substantial Chinese plan whose structure follows the research reasoning:
+
+- A candid diagnosis of what we learned from failure and what remains merely possible. Explicitly
+  distinguish useful positive assets, methodological bounds, technical repairs, untested ideas
+  and contradictory results. Map each main insight to a changed design/priority, not just a warning.
+- A coherent objective and a prioritized research route with phases/decision branches, concrete
+  candidate/control/native prediction/first deliverable per promising question. State which
+  questions should be pursued early, which become worthwhile under a particular observation/task,
+  and which recipes should receive no new investment. Do not require all branches or a fixed
+  direction count; no 3-session allocation, no global eight-fit tranche.
+- The first actual proposed scientific comparison, strongest alternative and why the choice wins
+  on information value and cost. Integrate baseline adequacy into it, rather than adding an
+  unbounded programme of tuning all baselines or rerunning known fixes.
+- How to develop k, fixed-k MARL improvement and N/UAV specialization without collapsing them into
+  one question or ignoring the owner's core interest. State whether S7 needs its own direct new
+  question and when its integration is worth the cost; S1 failure alone is not a migration reason.
+- Decision-useful continue/revise/simplify/stop branches, fresh confirmation and transfer plans,
+  actual vs unknown costs, and what each stage delivers. Performance, algorithm novelty and
+  physical deployment are different claims. A small model or mechanism probe is optional when
+  it resolves a particular dispute, not a universal prerequisite.
+- Whether the accumulated shared knowledge needs a specific update versus merely being applied
+  better in the plan. Do not move hypotheses or candidates into FOUNDATIONS as established gains.
+- Strengthened/weakened/unresolved judgments, main material dissent and critical unread sources.
+  Pro advice is not a new result or permission. Do not invent success probabilities or a deadline.
+
+Primary-source refresh for this decision: Root reread the original HMASD paper's skill-usefulness/
+configuration limitations, OPT's local/global representation paths and method, and UNREAL's
+auxiliary representation premise. Use them as bounded precedents, not evidence that MARL is
+saturated, that current S1 has an identified bottleneck, or that a transferred module will win:
+https://proceedings.neurips.cc/paper_files/paper/2023/file/c276c3303c0723c83a43b95a44a1fcbf-Paper-Conference.pdf
+https://arxiv.org/html/2207.03902v4
+https://arxiv.org/abs/1611.05397
+
+Context at source_sha: `docs/project/OPERATING_CONSTITUTION.md` §§1–5,7–8;
+`.agents/skills/hmasd-portfolio-task/SKILL.md` Steps/Boundaries under that constitution (its old
+sole-integrator/allowance language is superseded); `.agents/skills/hmasd-scientific-tools/SKILL.md`
+Explore/Update the working explanation/Comparators/Statistics/Cost/Pro;
+`docs/rl-marl-foundations-20260907/FOUNDATIONS.md` §§1–7;
+this file's current standing, whole-project review Decisions, the complete concept and three-DM
+Answers/Decisions, Claude advisory reconciliation, 20-question inventory and new FSD rationale;
+`docs/research/designs/PREDICTIVE_INTERACTION_AUGMENTATION_PROPOSAL_20260919.md` §§2–6 as hypothesis
+source (not mandatory N-first, W=3, LLM, old quota or old pause); FSD NOTES B05, B13/B14 and 03:52
+closing entry. Other fixed notebooks above retain their explicit evidence revisions. The two
+owner-supplied external reports and recovered prototypes are preserved earlier in this file;
+use the recorded corrections, not their retracted zero-value/novelty/compute claims. No broad
+raw-array rerun or new literature-exhaustiveness claim is requested.
+
+Read the pinned Question and relevant Context before answering. Current owner instructions and
+constitution replace conflicting old chat rules; skills are methods and historical/frozen records
+retain their named evidence meaning. Cite actually read sources and disclose decision-critical gaps.
+Fetch the latest target file/blob when writing, reason from source_sha, write only this unique
+question's empty `### Answer`, preserve the question, all other sections and `### Decision`, and
+stop on overlap. Return an actual answer commit, or the complete answer in chat on GitHub write
+failure. A source SHA/receipt alone is not delivery. No private conversation address in Git.
+
+### Answer
+
+### Decision
