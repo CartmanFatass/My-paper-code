@@ -785,3 +785,39 @@ reported coordinator displacement against its own random initialization, rather 
 training instance's initialization. Copy the learner's frozen reference into the evaluator;
 the initialization panel must report zero displacement. Historical learner displacement
 and training/evaluation actions are unaffected. Preserve the old output as written.
+
+### Replay repair accepted and corrected fixed attempt selected — 2026-09-21
+
+Source `20121b2ba13c739854fbe94aebbe9303e4332490` passed the complete direction suite
+on preferred `wsl_4070`: **37 passed**, no skips, 14 existing dependency-deprecation warnings,
+76.02 s. This includes native fixed/factored/AR learning and evaluation on CPU and CUDA,
+corruption rejection, failure artifact round-trip/hash/source checks, and preserving the
+primary error when diagnostic capture fails. Local compilation and diff checks passed.
+The independent numerical Reviewer found no material reachable defect in this exact diff;
+that review was static, while the remote runtime evidence was read directly by the DM.
+
+Five zero-update native-sized CUDA probes passed. Original collection-group replay error
+was zero in every case, including reversed record order. Each asynchronous factored/AR case
+contained 568 events in 50 groups, with 488 partial-eligibility events and group sizes from
+4 to 16 (not every intermediate size occurred). Maximum merged relative factor-probability
+drift was 2.074263102e-5 for fixed, 1.442422035e-5 for all-reset factored/AR, and
+1.168257859e-5 for asynchronous factored/AR. The frozen probes changed no parameters,
+optimizer counts or RNG state. These checks establish implementation behavior on the tested
+inputs, not gradient equivalence, a universal numerical bound or policy performance.
+
+DM decision under constitution section 3: accept this bounded diagnostic repair and select
+**one fresh corrected fixed attempt**, tag `b01_fixed_r1_s2026092201`, before the original
+unstarted factored and AR arms. Its seed remains 2026092201; use the original 16 lanes,
+500-step episodes, 45 rollouts, 360,000 training transitions, four fixed evaluation panels
+and 32 evaluation worlds per panel, native reward, model/optimizer settings and CUDA node.
+Cold initialization only; do not load or resume the failed attempt. The original output,
+native claim and 24,000 consumed training transitions remain preserved as a technical failure.
+
+Prospective total cost is now **4 result attempts**: 1 failed original fixed, this corrected
+fixed, and the original factored/AR instances at seeds 2026092202/2026092203. Until native
+admission, actual started attempts remain 1. This explicit engineering-based decision is not
+an automatic worker restart, a seed replacement, a score-conditioned extension or evidence
+of a scientific negative. No further technical repeat is pre-authorized by this entry; any
+new failure is collected with its diagnostic snapshot and receives a fresh DM judgment.
+The question, comparator and scientific premises are unchanged, so prior accepted Pro advice
+is reused. The next useful observation remains the predeclared learned-policy comparison.
