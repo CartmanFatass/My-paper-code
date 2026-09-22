@@ -1,0 +1,11 @@
+{
+  "claim_key": "00f1d684938c4061d800ce3cee7b7829608d9bee25700bc657f2c58860fdfb29",
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/00f1d684938c4061d800ce3cee7b7829608d9bee25700bc657f2c58860fdfb29.json",
+  "manifest_ref": "/home/wu/hmasd-worktrees/loe-b01-efe7d61e8/runs/local_observation_encoding/b01_dense_s92101/launch-manifest.json",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/00f1d684938c4061d800ce3cee7b7829608d9bee25700bc657f2c58860fdfb29.json",
+  "pid": 114128,
+  "runner_pid": 114129,
+  "schema_version": 1,
+  "status": "accepted",
+  "updated_at": "2026-09-22T04:36:14.767312Z"
+}

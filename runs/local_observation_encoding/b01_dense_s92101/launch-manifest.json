@@ -1,0 +1,96 @@
+{
+  "acceptance": "accepted",
+  "accepted_at": "2026-09-22T04:36:14.753944Z",
+  "bootstrap_command": [
+    "/home/wu/.venvs/hmasd/bin/python",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/a47ca0712af1499c824ff514ea40264b/scripts/hmasd_admission.py",
+    "_run-admitted",
+    "--runner",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/a47ca0712af1499c824ff514ea40264b/scripts/run_local_observation_encoding_b01.py",
+    "--output",
+    "/home/wu/hmasd-worktrees/loe-b01-efe7d61e8/runs/local_observation_encoding/b01_dense_s92101",
+    "--",
+    "--arm",
+    "DENSE",
+    "--seed",
+    "92101",
+    "--launch-sha",
+    "efe7d61e82b2c0aed7a634bbb2e22d7cc47430a3",
+    "--output-root",
+    "/home/wu/hmasd-worktrees/loe-b01-efe7d61e8/runs/local_observation_encoding/b01_dense_s92101"
+  ],
+  "claim_key": "00f1d684938c4061d800ce3cee7b7829608d9bee25700bc657f2c58860fdfb29",
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/00f1d684938c4061d800ce3cee7b7829608d9bee25700bc657f2c58860fdfb29.json",
+  "command": [
+    "/home/wu/.venvs/hmasd/bin/python",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/a47ca0712af1499c824ff514ea40264b/scripts/run_local_observation_encoding_b01.py",
+    "--arm",
+    "DENSE",
+    "--seed",
+    "92101",
+    "--launch-sha",
+    "efe7d61e82b2c0aed7a634bbb2e22d7cc47430a3",
+    "--output-root",
+    "/home/wu/hmasd-worktrees/loe-b01-efe7d61e8/runs/local_observation_encoding/b01_dense_s92101"
+  ],
+  "command_sha256": "bf6f0ff122194fd8837ac619a67b4253c99bb51a8340dd72aee17c92254f3bfa",
+  "control_observation": {
+    "observed_at": "2026-09-22T04:36:12.798131Z",
+    "ref": "refs/heads/main",
+    "remote": "origin",
+    "sha": "a99ba7d62d83c333b33adb58c465b6eda56af2ad"
+  },
+  "control_root": "/home/wu/projects/HMASD",
+  "created_at": "2026-09-22T04:36:12.813255Z",
+  "cwd": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/a47ca0712af1499c824ff514ea40264b",
+  "direction": "local_observation_encoding",
+  "host_identity": "LAPTOP-U9TDKC8A",
+  "identity_command": [
+    "/home/wu/.local/share/uv/python/cpython-3.10.21-linux-x86_64-gnu/bin/python3.10",
+    "scripts/run_local_observation_encoding_b01.py",
+    "--arm",
+    "DENSE",
+    "--seed",
+    "92101",
+    "--launch-sha",
+    "efe7d61e82b2c0aed7a634bbb2e22d7cc47430a3"
+  ],
+  "lead": "Codex DM (independent session)",
+  "manifest_ref": "/home/wu/hmasd-worktrees/loe-b01-efe7d61e8/runs/local_observation_encoding/b01_dense_s92101/launch-manifest.json",
+  "node": "wsl_4070",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/00f1d684938c4061d800ce3cee7b7829608d9bee25700bc657f2c58860fdfb29.json",
+  "output_root": "/home/wu/hmasd-worktrees/loe-b01-efe7d61e8/runs/local_observation_encoding/b01_dense_s92101",
+  "preflight": "/home/wu/hmasd-worktrees/loe-b01-efe7d61e8/runs/local_observation_encoding/b01_dense_s92101/admission-preflight.json",
+  "process": {
+    "detached": true,
+    "identity": {
+      "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+      "kind": "linux_pid_start_ticks",
+      "pid": 114128,
+      "session_id": 114128,
+      "start_ticks": 41575340
+    },
+    "native_handle_kind": "posix_session",
+    "pid": 114128,
+    "process_group_id": 114128
+  },
+  "process_exit": "/home/wu/hmasd-worktrees/loe-b01-efe7d61e8/runs/local_observation_encoding/b01_dense_s92101/process-exit.json",
+  "published_remote": "origin",
+  "runner_process": {
+    "identity": {
+      "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+      "kind": "linux_pid_start_ticks",
+      "pid": 114129,
+      "session_id": 114128,
+      "start_ticks": 41575344
+    },
+    "pid": 114129,
+    "process_group_id": 114128,
+    "supervisor_pid": 114128
+  },
+  "schema_version": 1,
+  "sha": "efe7d61e82b2c0aed7a634bbb2e22d7cc47430a3",
+  "source_root": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/a47ca0712af1499c824ff514ea40264b",
+  "stderr": "/home/wu/hmasd-worktrees/loe-b01-efe7d61e8/runs/local_observation_encoding/b01_dense_s92101/stderr.log",
+  "stdout": "/home/wu/hmasd-worktrees/loe-b01-efe7d61e8/runs/local_observation_encoding/b01_dense_s92101/stdout.log"
+}
