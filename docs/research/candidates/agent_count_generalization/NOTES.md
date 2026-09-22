@@ -2260,3 +2260,93 @@ clean detached worktree at `f60799d702ede2ebc980ac410cb1f75667ba7b46` under
 accepted, published evaluator input before launch. Existing B01 source/artifacts and unrelated
 canonical untracked files were preserved. Preparation time is separate from scientific wall.
 The completed Pro operation has no remaining matching browser tab (checked read-only).
+
+## 2026-09-22 — B02 engineering acceptance and B03 implementation scope
+
+The DM accepts the new B02 evaluator after reading the implementation and its revisions.
+Independent Reviewer `action_law_probe_review` found no remaining material issue and independently
+ran the final focused suite: **16 passed in 3.60 s** (Implementer: 16 passed in 3.86 s).
+The earlier combined B02/B01 candidate check had 25 passing tests before the final added cases.
+The final reviewed probe SHA-256 is
+`9ed9bc4bac4a292420a49e6fbd8f243bbb914423f76066c1266c11aaf8808e65`.
+Real native H6/SET fixtures now cross k=10 with 12 steps and two lanes under both execution
+maps at N4/6/8. Checks cover frozen modules/normalizers, identical starts and runtime seed,
+native motion/reward identities, wall absorption, absolute effects and signed K reduction,
+mid-cell failure counts, and admission before scientific effects. These are technical checks,
+not production-checkpoint service evidence. Full scientific execution/resources remain unmeasured.
+
+The DM required immutable identities from this evaluator source's committed B01 summary blobs,
+with identical working bytes; external checkpoint storage cannot supply its own expected digest.
+Exact tracked final-N evaluator configurations are preserved, including training horizon fields.
+Additional corrections preserve partial work counts on failure and measure command wall from
+before candidate/Torch imports. Trace indices explicitly distinguish action[t] from the resulting
+position/state[t+1]. Old B01 learner, environment, configuration, adapter and model bytes remain
+unchanged. Remote sparse preparation now includes all six tracked summaries (468,041 bytes),
+with no tracked dirt. Scientific B02 scope remains 0 fits and 288k evaluation team steps.
+
+### L0 — B03 bounded training-action execution discriminator
+
+Implement the already selected four-cell comparison in candidate-owned new paths:
+`experiments/candidates/agent_count_generalization/action_law_b03/`,
+`scripts/run_agent_count_action_law_training_b03.py`, and the matching tests subtree.
+Reuse B01 configuration/model construction and suitable pure runner helpers. Keep B01/B02
+and shared learners/environments unchanged; a small variant loop may preserve frozen semantics
+without adding a general runner framework or monkeypatching shared globals. No new architecture,
+action distribution, likelihood, entropy, optimizer, reward, count input, or information clock.
+The Implementer owns only those paths; DM owns NOTES, science, publication and launches.
+
+Fix the sequential execution order before any B03 admission:
+1. H6 raw training, seed 942201, tag `s1_action_law_b03_h6_raw_s942201`;
+2. SET clip training, seed 943201, tag `s1_action_law_b03_set_clip_s943201`;
+3. H6 clip training, seed 942201, tag `s1_action_law_b03_h6_clip_s942201`;
+4. SET raw training, seed 943201, tag `s1_action_law_b03_set_raw_s943201`.
+This reverses the order of the two laws across packages, without making wall time an outcome
+claim. One own scientific process at a time on wsl_4070, after B02 reconciliation. The fixed
+cost stays four fits, 1.44M train + 384k eval team steps; no score-dependent extension or retry.
+No B03 scientific process is accepted at this entry. Implementation may proceed during B02.
+
+Each production entry binds its arm/law/seed, full B01 FitSpec (N6, k10, 16 lanes, horizon500,
+45 rollouts), and clipped deterministic evaluation at rollouts 0/15/30/45 on the previously
+fixed 1,200,000-based worlds. Require admission on the actual entry before scientific effects.
+The second cell within each package requires the first cell's recorded initial parameter/
+normalizer digest and must match it before evaluation/training; record expected and observed
+values. Initial construction and training-world addresses follow the shared within-package seed.
+
+Pass a separate mapped action copy to the environment. Store the original raw sampled action
+and original old log-probability, with reward/terminal successor from the executed transition.
+Keep raw Gaussian entropy coefficient .05. Validate no mutation/RNG draw from diagnostics.
+Preserve training/evaluation counters, failures, checkpoints, optimizer calls and parameter motion,
+per-world native components, and per-rollout actual raw sigma plus coordinate/UAV/team-step
+violations with denominators, executed action bounds, attempted/realized motion and boundary
+visits. Evaluation remains a fresh reset runtime and preserves the learner's RNG, parameters,
+normalizers and runtime state. Resource wall includes imports; unmeasured costs remain explicit.
+
+Focused checks must follow an intentionally over-range sample through execution, storage and
+recurrent action-likelihood replay, retaining the raw sample/log-probability while validating the
+clipped physical successor and reward. Cover both packages, the k=10 boundary and terminal
+reset, same within-package initialization, untouched latent entropy/configuration, evaluation
+isolation, fixed production CLI, partial failure counts and real tiny optimizer movement.
+Use small internal technical fixtures only; no CLI bypass or production training before review.
+Independent Reviewer checks the new training/evaluation boundary; DM accepts its final diff.
+The scientific rescue prediction, one-block limits and fixed final45 endpoint remain exactly
+those recorded above; no additional Pro question is needed for this covered implementation.
+
+### B02 accepted operation
+
+Published B02 source is `dd25f34a09ba8d0f8a62c5aacb36d9aaa56dcf0c`. The same focused suite
+passed on the configured destination interpreter: **16 passed in 2.75 s**, with existing
+matplotlib/pyparsing deprecations only. The isolated native worktree is frozen at that SHA.
+Native admission accepted at **2026-09-22 14:58:49 UTC**; its
+[manifest](../../../../runs/agent_count_generalization/s1_action_law_b02_probe/launch-manifest.json)
+and [fresh memory preflight](../../../../runs/agent_count_generalization/s1_action_law_b02_probe/admission-preflight.json)
+retain the exact operation, command, source, supervisor/runner identities and output location.
+Preflight observed 15,653,269,504 available physical bytes, above the 4 GiB floor. This is
+resource admission, not a measured peak or a scientific result.
+
+At 14:59:05 UTC the native status was consistent/running with no exit witness; the scientific
+summary had verified all six production checkpoint inputs and completed 16,000 evaluation team
+steps / 32 episodes. Fits, training steps, updates and optimizer calls were all zero. This is
+an intermediate observation, not acceptance of the full 288k-step comparison. The repository
+waiter now observes this exact operation at generation 33, with terminal/error wakes and a
+1500-second checkpoint; it grants no restart. B03 implementation is underway in its separate
+candidate paths; no B03 training has been accepted.
