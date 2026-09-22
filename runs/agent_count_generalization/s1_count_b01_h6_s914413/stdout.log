@@ -1,0 +1,117 @@
+{"boundary": "admitted", "wall_seconds": 1.4}
+{"boundary": "evaluation 0 N=4 starting", "wall_seconds": 2.31}
+{"boundary": "evaluation 0 N=4 complete", "wall_seconds": 9.9}
+{"boundary": "evaluation 0 N=6 starting", "wall_seconds": 9.93}
+{"boundary": "evaluation 0 N=6 complete", "wall_seconds": 19.1}
+{"boundary": "evaluation 0 N=8 starting", "wall_seconds": 19.13}
+{"boundary": "evaluation 0 N=8 complete", "wall_seconds": 29.76}
+{"boundary": "training starts", "wall_seconds": 29.78}
+{"boundary": "rollout 1 collected", "wall_seconds": 41.04}
+{"boundary": "rollout 1 updated", "wall_seconds": 143.82}
+{"boundary": "rollout 2 collected", "wall_seconds": 155.58}
+{"boundary": "rollout 2 updated", "wall_seconds": 255.72}
+{"boundary": "rollout 3 collected", "wall_seconds": 266.71}
+{"boundary": "rollout 3 updated", "wall_seconds": 367.71}
+{"boundary": "rollout 4 collected", "wall_seconds": 380.22}
+{"boundary": "rollout 4 updated", "wall_seconds": 482.23}
+{"boundary": "rollout 5 collected", "wall_seconds": 493.96}
+{"boundary": "rollout 5 updated", "wall_seconds": 573.9}
+{"boundary": "rollout 6 collected", "wall_seconds": 584.54}
+{"boundary": "rollout 6 updated", "wall_seconds": 664.81}
+{"boundary": "rollout 7 collected", "wall_seconds": 674.26}
+{"boundary": "rollout 7 updated", "wall_seconds": 748.23}
+{"boundary": "rollout 8 collected", "wall_seconds": 759.43}
+{"boundary": "rollout 8 updated", "wall_seconds": 848.43}
+{"boundary": "rollout 9 collected", "wall_seconds": 857.32}
+{"boundary": "rollout 9 updated", "wall_seconds": 932.22}
+{"boundary": "rollout 10 collected", "wall_seconds": 943.26}
+{"boundary": "rollout 10 updated", "wall_seconds": 1024.65}
+{"boundary": "rollout 11 collected", "wall_seconds": 1033.81}
+{"boundary": "rollout 11 updated", "wall_seconds": 1108.09}
+{"boundary": "rollout 12 collected", "wall_seconds": 1119.36}
+{"boundary": "rollout 12 updated", "wall_seconds": 1204.42}
+{"boundary": "rollout 13 collected", "wall_seconds": 1213.61}
+{"boundary": "rollout 13 updated", "wall_seconds": 1290.47}
+{"boundary": "rollout 14 collected", "wall_seconds": 1300.52}
+{"boundary": "rollout 14 updated", "wall_seconds": 1379.61}
+{"boundary": "rollout 15 collected", "wall_seconds": 1388.72}
+{"boundary": "rollout 15 updated", "wall_seconds": 1469.5}
+{"boundary": "evaluation 15 N=4 starting", "wall_seconds": 1469.57}
+{"boundary": "evaluation 15 N=4 complete", "wall_seconds": 1476.33}
+{"boundary": "evaluation 15 N=6 starting", "wall_seconds": 1476.35}
+{"boundary": "evaluation 15 N=6 complete", "wall_seconds": 1485.08}
+{"boundary": "evaluation 15 N=8 starting", "wall_seconds": 1485.1}
+{"boundary": "evaluation 15 N=8 complete", "wall_seconds": 1494.87}
+{"boundary": "rollout 16 collected", "wall_seconds": 1503.93}
+{"boundary": "rollout 16 updated", "wall_seconds": 1578.24}
+{"boundary": "rollout 17 collected", "wall_seconds": 1587.43}
+{"boundary": "rollout 17 updated", "wall_seconds": 1672.49}
+{"boundary": "rollout 18 collected", "wall_seconds": 1681.68}
+{"boundary": "rollout 18 updated", "wall_seconds": 1755.69}
+{"boundary": "rollout 19 collected", "wall_seconds": 1765.0}
+{"boundary": "rollout 19 updated", "wall_seconds": 1846.78}
+{"boundary": "rollout 20 collected", "wall_seconds": 1855.92}
+{"boundary": "rollout 20 updated", "wall_seconds": 1930.56}
+{"boundary": "rollout 21 collected", "wall_seconds": 1940.91}
+{"boundary": "rollout 21 updated", "wall_seconds": 2022.96}
+{"boundary": "rollout 22 collected", "wall_seconds": 2032.24}
+{"boundary": "rollout 22 updated", "wall_seconds": 2106.54}
+{"boundary": "rollout 23 collected", "wall_seconds": 2116.84}
+{"boundary": "rollout 23 updated", "wall_seconds": 2200.32}
+{"boundary": "rollout 24 collected", "wall_seconds": 2209.86}
+{"boundary": "rollout 24 updated", "wall_seconds": 2286.06}
+{"boundary": "rollout 25 collected", "wall_seconds": 2295.56}
+{"boundary": "rollout 25 updated", "wall_seconds": 2371.32}
+{"boundary": "rollout 26 collected", "wall_seconds": 2380.6}
+{"boundary": "rollout 26 updated", "wall_seconds": 2456.48}
+{"boundary": "rollout 27 collected", "wall_seconds": 2465.77}
+{"boundary": "rollout 27 updated", "wall_seconds": 2539.76}
+{"boundary": "rollout 28 collected", "wall_seconds": 2548.73}
+{"boundary": "rollout 28 updated", "wall_seconds": 2633.01}
+{"boundary": "rollout 29 collected", "wall_seconds": 2642.18}
+{"boundary": "rollout 29 updated", "wall_seconds": 2716.05}
+{"boundary": "rollout 30 collected", "wall_seconds": 2726.58}
+{"boundary": "rollout 30 updated", "wall_seconds": 2809.07}
+{"boundary": "evaluation 30 N=4 starting", "wall_seconds": 2809.14}
+{"boundary": "evaluation 30 N=4 complete", "wall_seconds": 2815.31}
+{"boundary": "evaluation 30 N=6 starting", "wall_seconds": 2815.33}
+{"boundary": "evaluation 30 N=6 complete", "wall_seconds": 2823.4}
+{"boundary": "evaluation 30 N=8 starting", "wall_seconds": 2823.42}
+{"boundary": "evaluation 30 N=8 complete", "wall_seconds": 2832.29}
+{"boundary": "rollout 31 collected", "wall_seconds": 2841.83}
+{"boundary": "rollout 31 updated", "wall_seconds": 2923.59}
+{"boundary": "rollout 32 collected", "wall_seconds": 2933.63}
+{"boundary": "rollout 32 updated", "wall_seconds": 3008.15}
+{"boundary": "rollout 33 collected", "wall_seconds": 3017.29}
+{"boundary": "rollout 33 updated", "wall_seconds": 3100.44}
+{"boundary": "rollout 34 collected", "wall_seconds": 3109.99}
+{"boundary": "rollout 34 updated", "wall_seconds": 3183.61}
+{"boundary": "rollout 35 collected", "wall_seconds": 3192.63}
+{"boundary": "rollout 35 updated", "wall_seconds": 3279.53}
+{"boundary": "rollout 36 collected", "wall_seconds": 3289.39}
+{"boundary": "rollout 36 updated", "wall_seconds": 3363.48}
+{"boundary": "rollout 37 collected", "wall_seconds": 3373.39}
+{"boundary": "rollout 37 updated", "wall_seconds": 3453.84}
+{"boundary": "rollout 38 collected", "wall_seconds": 3463.38}
+{"boundary": "rollout 38 updated", "wall_seconds": 3538.48}
+{"boundary": "rollout 39 collected", "wall_seconds": 3548.93}
+{"boundary": "rollout 39 updated", "wall_seconds": 3630.71}
+{"boundary": "rollout 40 collected", "wall_seconds": 3640.0}
+{"boundary": "rollout 40 updated", "wall_seconds": 3715.21}
+{"boundary": "rollout 41 collected", "wall_seconds": 3725.72}
+{"boundary": "rollout 41 updated", "wall_seconds": 3805.65}
+{"boundary": "rollout 42 collected", "wall_seconds": 3814.9}
+{"boundary": "rollout 42 updated", "wall_seconds": 3888.92}
+{"boundary": "rollout 43 collected", "wall_seconds": 3900.02}
+{"boundary": "rollout 43 updated", "wall_seconds": 3983.14}
+{"boundary": "rollout 44 collected", "wall_seconds": 3992.13}
+{"boundary": "rollout 44 updated", "wall_seconds": 4067.74}
+{"boundary": "rollout 45 collected", "wall_seconds": 4078.01}
+{"boundary": "rollout 45 updated", "wall_seconds": 4157.68}
+{"boundary": "evaluation 45 N=4 starting", "wall_seconds": 4157.74}
+{"boundary": "evaluation 45 N=4 complete", "wall_seconds": 4163.97}
+{"boundary": "evaluation 45 N=6 starting", "wall_seconds": 4164.0}
+{"boundary": "evaluation 45 N=6 complete", "wall_seconds": 4171.57}
+{"boundary": "evaluation 45 N=8 starting", "wall_seconds": 4171.6}
+{"boundary": "evaluation 45 N=8 complete", "wall_seconds": 4180.65}
+{"boundary": "complete", "wall_seconds": 4180.68}
