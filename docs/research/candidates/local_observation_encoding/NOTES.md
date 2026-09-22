@@ -55,3 +55,32 @@ Own this notebook, `experiments/candidates/local_observation_encoding/`, its tes
 `runs/local_observation_encoding/`; keep others' experimental code out of your scientific
 comparison. Initialization starts **0 fits**, accepts no experiment/Send, and claims no gain.
 Continue independently to a meaningful evidence-based keep/revise/stop judgment.
+
+## 2026-09-21 — Direct DM initialization and advice reuse
+
+Actual task `01a0c6ef-7c4b-7f02-b96d-ab115d467af8`, host `local`, checkout
+`/home/fires/.codex/worktrees/d683/hmasd-wsl`, branch `codex/local-observation-encoding`.
+Clean detached starting tree was safely advanced to published main
+`69d7d2a3d86805155ea991cf443be259602bc17e`; no other checkout/index was edited.
+The published RESEARCH background sections 1–4 and current first-investment plan are
+applicable: complete S1 return and its actual coverage/SINR/height consequences, not
+representation proxies, decide practical usefulness. B05 motivates a direct construction
+comparison but its mixed final differences prevent presupposing a positive effect.
+The old FOLR/MGTAP/ACVC package stops remain untouched.
+
+I read the complete programme Answer and Decision at the linked archive entry above,
+including its two-fit exploratory option and adverse/uncertain outcome branches; the earlier
+information-design Answer remains an input-rights reference. Adopt the final original-versus-
+dense choice, unchanged joint high/low/discovery training, no hidden identity or validity,
+and full native return/service/cost readings. Supersede the early sparse third arm suggestion.
+This is reuse under constitution section 5: no new scientific premise or comparator beyond
+that advice is being established. Implementation activation remains to be checked; advice
+is not evidence that an encoder works. A materially new decision will require a focused
+follow-up, and this programme advice is not confirmation review.
+
+Read-only remote suitability check: configured `hmasd-wsl-node` reports host
+`LAPTOP-U9TDKC8A`, about 14 GiB available RAM and RTX 4070 with 7948 MiB free,
+0 percent utilization. Prefer that node; this is not launch admission, which must be fresh
+on the actual node. No result process or Pro Send has been accepted; started fits remain 0.
+A bounded internal Scout maps the existing S1 path while I bind the study; no cross-task
+communication or intermediate DM is used.
