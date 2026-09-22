@@ -74,9 +74,14 @@ FSD B12 的特定标签计数回归不能排除身份、标签对或状态条件
 S1 的学习器 scalar 为原生团队 reward 除以 N，跨 N 服务须用实际测试 N 恢复原生单位，
 并在同一测试 N 内比较；改变 N 同时改变容量与联合物理条件。N=6 训练、N=4/6/8 测试的
 每臂三个完整训练实例中，H6 相对普通共享 SET 在两个未见 N 的最终原生 J/覆盖均值更高，
-N6 也无相对损失，支持保留这个有界学习包。该探索结果不建立一般数量不变性、训练总体排名，
-也未分离技能、表示、内在奖励、带宽和额外计算的作用；不同时刻仍有不利比较和后期回落。
-[完整数量比较、反面曲线与成本](candidates/agent_count_generalization/NOTES.md#2026-09-22--b01-complete-comparison-and-bounded-retain-decision)。
+N6 也无相对损失。但本次 B01 路径虽声明 `[-1,1]^3`，却把原始高斯动作直接乘速度执行，
+只限制位置；单步检查已证实越界动作可产生超出声明分量范围的位移。保留实测包差异，
+其范围须限定于这个实际动作法则，不能据此声称已在声明的有界动作任务上验证。
+两臂最终高斯标准差不同，提出训练曝光的替代解释；确定性评估不采样该噪声，方差差异尚未
+识别收益来源。固定策略的执行裁剪可检验直接部署路径，但不能排除既往训练曝光影响。
+该探索结果也不建立一般数量不变性、训练总体排名，未分离技能、表示、内在奖励、带宽和
+额外计算；保留不利中间比较与后期回落。[完整比较与成本](candidates/agent_count_generalization/NOTES.md#2026-09-22--b01-complete-comparison-and-bounded-retain-decision)；
+[动作法则修正与下一实验](candidates/agent_count_generalization/NOTES.md#2026-09-22--owner-continuation-and-action-law-premise-correction)。
 
 ### 4. 学习理论、表示能力和有限训练结果处在不同层面
 
@@ -187,7 +192,7 @@ B/UCOPE 的局部预测、一步优势或真实后缀信用没有自动转成稳
 
 | Direction | Question | State | Lead runtime | Standing and next step |
 | --- | --- | --- | --- | --- |
-| `agent_count_generalization` | 固定 k、回合内固定 roster 时，HMASD 对未见团队数量 N 的服务能力和泛化代价是什么？ | exploring | Codex DM (independent session) | 直接 DM：task `01a0c6ef-cdd4-7113-b2d9-20487e35171b`，host `local`；checkout `/home/fires/.codex/worktrees/7fef/hmasd-wsl`，branch `codex/agent-count-generalization`。S1 N=6→4/6/8，H6 对普通共享 SET，输入 `5a250d97e`；六个预写 360k fits 全部完整核验（每臂 3、0 失败）。固定终点 H6−SET J 均值差为 +0.021721/+0.044000/+0.045222，unseen 等权差 +0.033472；各 H6 训练实例在每个 N 的最终均值均高于三个 SET，N6 未见相对代价。保留当前有界包与完整成本，仍为探索结果，无总体排名或组件归因。科学 command wall 合计 471.56 min（H6 263.12、SET 208.43），共享节点耗时不等于方法固有速度。本轮比较与保留判断完成；当前空闲，0 运行/0 排队，未进入确认。未来有用观察是相同固定配方在新训练种子和新最终世界上的复现，尚未选中或接受新批次。[完整比较与判断](candidates/agent_count_generalization/NOTES.md#2026-09-22--b01-complete-comparison-and-bounded-retain-decision)。 |
+| `agent_count_generalization` | 固定 k、回合内固定 roster 时，HMASD 对未见团队数量 N 的服务能力和泛化代价是什么？ | exploring | Codex DM (independent session) | 直接 DM：task `01a0c6ef-cdd4-7113-b2d9-20487e35171b`，host `local`；checkout `/home/fires/.codex/worktrees/7fef/hmasd-wsl`，branch `codex/agent-count-generalization`。B01 六个 360k fits 全部核验，每臂 3、0 失败；N4/6/8 的 H6−SET J 为 +.021721/+.044000/+.045222，command wall 共 471.56 min。保留实际实现下的探索包收益。owner 已明确继续研究；新检查纠正旧动作契约描述：原始高斯动作未经声明范围限制而直接执行，且两臂训练方差不同；未证明它造成收益。已转入动作法则诊断，准备新的针对性 Pro 咨询，优先提案为六个冻结终点策略的 raw/clip 共同世界比较（0 fits、288k eval steps）；是否追加训练由此问题与咨询决定。0 新训练/0 已接受新批次，未进入确认，不再以旧 idle 决策停留。[事实、推理与提案](candidates/agent_count_generalization/NOTES.md#2026-09-22--owner-continuation-and-action-law-premise-correction)。 |
 | `uav_service_auxiliary` | 未来事实端到端服务监督能否帮助 HMASD 学会接入、回传与能源约束下的协作？ | exploring | Codex DM (independent session) | 直接 DM task `01a0c6f0-31e1-7510-bee7-4f0f8b62d821`，host `local`；checkout `/home/fires/.codex/worktrees/a335/hmasd-wsl`，branch `codex/uav-service-auxiliary`。S7-S2 v3/reward v2/arm C，k=10/N=8；B01/B02 两个训练实例对的 4 fits 全部完整核验。固定终点 joint−detach J 为 +159.537455/+403.511306，QoS 为 +0.038796/+0.080033，返航约束代价为 -0.034002/-0.094605；第二对共同事实 MSE 反而为 detach 的 2.248 倍。按已读 Pro 的对应分支保留有界辅助训练包、修订代理量解释，仍为探索结果，无总体排名或预测机制归因。两对后期 J 均回落，评估无充电／切断／耗尽事件。4 fits 合计 509.11 runner min，另有 15/16 秒训练前拒绝；共享节点 wall 不识别固有速度。本轮比较与 keep/revise 判断完成，0 运行/0 排队，无开放 Pro 或未收读操作。未来有用区别是固定包在新训练实例及新最终世界上的收益能否保留，尚未选中确认或其他新批次，G33 冻结。[完整结果与判断](candidates/uav_service_auxiliary/NOTES.md#b02-complete-comparison-and-bounded-keep-decision--2026-09-22)。 |
 | `skill_teammate_drift_learning` | When teammates change, what must be learned or reused to improve decisions beyond competent simple controls? | reserve | Codex DM (independent session) | DM task `01a0bdb4-cd2c-71a3-af95-a196aeed70cd`，host `local`；checkout `/home/fires/.codex/worktrees/b-unknown-joint-law/hmasd-wsl`，branch `codex/b-unknown-joint-law`。旧径向一步表路线结束；B09/B10 局部正用途保留，B11 完整轨迹增量不一致；自身网络 refresh/burn-in 未识别真实队友行为漂移，后继方案已否决。没有排队实验、诊断或 Pro；需具体行为变化、受影响的未来估计和有区别的比较，才能选择下一步。reserve 不是无价值判决或外部等待。[最新判断及 B 分支 entry-mask 修复](https://github.com/CartmanFatass/My-paper-code/blob/74fe267aa166299d93a03566e5f0ab149ff2b12d/docs/research/candidates/skill_teammate_drift_learning/NOTES.md)；修复没有追溯应用于历史/FSD 结果。 |
 
@@ -241,7 +246,7 @@ B/UCOPE 的局部预测、一步优势或真实后缀信用没有自动转成稳
 | **技能周期与有限学习** | B01 三臂完成，关闭本次 S1/cap=10 普通分解／AR 配方，0 追加 fit。 | 新时长选择确实执行，事件与高层优化量增加；两种可变臂终点均低于固定，AR 后段胜分解不足以满足既定保留条件。每臂一个训练实例，不否定更广周期问题；长于十步的承诺另需实际团队时钟、支持与相应固定参照，尚未选中该比较。[结果与判断](candidates/joint_duration_skill_learning/NOTES.md#b01-complete-three-arm-result-and-closure-of-the-cap-10-recipe--2026-09-22)；[退役的初始计划](archive/2026-09-22/RESEARCH_02.md)。 |
 | 事实预测辅助 | 独立近邻：同一个实际训练的事实 readout，detach 对辅助梯度进入 actor/GRU。 | 两臂都有预测头；最终看完整回报，不能用更低 MSE 代替用途。先选一个后果/窗口，不叠加规划、通信、duration。 |
 | 技能规模与实际重组 | 分别选择有依据的较小标签集合，或固定 k 下真实 partner-skill 重组曝光，对普通匹配训练。 | 标签组合数不是样本复杂度；保留正常搭配收益。技能可辨认不等于有任务互补性，冻结标签探针不是新共同学习的阳性门槛。 |
-| **N 数量泛化** | 原生 S1 固定 k、N=6→4/6/8 的 B01 六 fits 已完成，保留有界 H6 包；当前 0 运行/0 排队。 | 两个未见 N 的固定终点原生 J/覆盖均改善，训练 N6 无相对损失；每臂 3 次训练仍是探索比较，成本和组件差异保留。下一有用区别是新训练种子／新最终世界能否复现该固定包优势，需另写实际前瞻计划；无自动确认、改架构或追加 fit。[完整结果](candidates/agent_count_generalization/NOTES.md#2026-09-22--b01-complete-comparison-and-bounded-retain-decision)；[退役的初始计划](archive/2026-09-22/RESEARCH_03.md)。 |
+| **N 数量泛化** | B01 六 fits 完整保留；owner 继续指示后转入动作执行契约与学习曝光诊断。 | 实际 raw-action 路径不执行声明的动作边界，原有 H6 优势暂限于该实现。新 Pro 问题评议六个冻结策略的 raw/clip 比较（0 fits、288k eval steps），明确部署干预不能清除训练曝光解释；不直接进入原配方确认或按结果调熵。后续训练若值得，另定固定契约、种子与成本。[新证据与问题](candidates/agent_count_generalization/NOTES.md#pro-question-2026-09-22-action-law-and-next-count-study)；[退役的已完成批次后计划](archive/2026-09-22/RESEARCH_05.md)。 |
 | 运行中成员变化、cross-play、异质能力 | 三个独立备选问题：服务连续性/区间信用，独立 population 混编，能力条件化共享。 | 分别继承 VNFC、CPCP、FOLR/ACPS 等证据；先明确真实任务和合法接口。技术失败、未执行和科学不利分别处理，不合成笼统“适应性”。 |
 | **UAV 端到端服务预测** | S7-S2 的 W10 factual-head detach/joint 两对已完成；保留有界包，修订“预测 MSE 改善必需”的解释，0 运行/0 排队。 | 两对固定 rollout-30 原生 J、交付服务与返航成本均有利，第二对共同事实 MSE 反向；晚期退化、低绝对服务和实际事件曝光边界保留。未来区别是相同包在新训练实例／新最终世界能否复现有用收益，需另立实际确认计划；两个探索实例不改记确认，无自动第三对、调权重或提前选 checkpoint。[完整比较](candidates/uav_service_auxiliary/NOTES.md#b02-complete-comparison-and-bounded-keep-decision--2026-09-22)；[退役的运行计划](archive/2026-09-22/RESEARCH_04.md)。 |
 | 支持方法与条件候选 | 真实行为漂移下的经验复用/critic，任务相关 discovery，普通物理模型及学习修正，通信、尾部服务、实体/角色动作，事件终止/时钟课程。 | 只为具体待估未来量或真实服务后果选择。普通方法已解决就保留；行动接口、目标和信息权限改变单独解释，不列为前一个配方失败后的自动续集。[候选全集](archive/2026-09-21/RESEARCH.md#potential-research-directions-2026-09-21)。 |
