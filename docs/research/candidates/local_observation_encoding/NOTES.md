@@ -270,3 +270,172 @@ for completion/error or a bounded checkpoint. Completion requires the full endpo
 activation, service and cost reading before a representation/net-use judgment; a successful
 process exit alone is insufficient. No additional fit, Pro Send or cross-task message is
 authorized by an observation event.
+
+## 2026-09-22 — B01 complete: adverse package observation
+
+DENSE finished at 00:45 PDT with a valid code-0 native exit witness and consistent identities.
+All ten remote artifacts were collected byte-for-byte and SHA256-verified. Both summaries pass
+the runner's frozen `fit_endpoint` checks. Their exact learner/evaluator configurations,
+plain-HMASD flags, observation contract, training/evaluation seeds, exposure counts, optimizer
+calls and source SHA agree. Initial non-actor parameter norms agree. Each arm actually learned
+for 45 updates / 360,000 stored team transitions and evaluated 96 episodes / 48,000 team
+transitions across the fixed 15/30/45 panels. Every training row matches its JSONL counterpart,
+has finite numeric readings, positive five-group updates/displacements and exact length-10
+segments. Evaluator updates remain zero in all panels. This is a complete adverse result,
+not a failed attempt or an untrained-model comparison.
+
+| Fixed panel | ORIGINAL J | DENSE J | DENSE minus ORIGINAL | ORIGINAL connected users | DENSE connected users |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| 15 | 0.483578 | 0.192473 | -0.291105 | 30.623313 | 13.887188 |
+| 30 | 0.405594 | 0.211740 | -0.193853 | 29.238625 | 15.767313 |
+| 45, primary | 0.458426 | 0.202254 | -0.256172 | 31.939438 | 13.415938 |
+
+Final coverage is 0.638789 versus 0.268319; quality component 0.165906 versus 0.125334;
+altitude penalty 0.038498 versus 0.023169 (ORIGINAL, DENSE). The lower altitude penalty did
+not compensate for lower coverage/quality. DENSE's final J is lower in all 32 common worlds,
+with conditional per-world differences ranging from -0.353983 to -0.138738. These are two
+trained policy instances, one training seed per arm: neither the 32 worlds nor the three
+panels are independent training repetitions. No seed-population effect, equivalence claim,
+checkpoint selection or newly chosen endpoint is inferred. DENSE J15/J30/J45 remains near
+0.19–0.21; these readings supply no observed late recovery under the declared horizon.
+
+The prediction of useful native benefit from this particular ordinary dense encoding package
+was not borne out in this exploration. The adverse result weakens investment in this recipe
+at this exposure. It leaves the possible value of other same-information representations and
+the policy-class opportunity unresolved. Successful activation and finite checkpoint tensors
+weaken simple nonactivation/numerical-failure explanations; they do not prove every design
+choice optimal or identify a causal component. Typed projections, rank embeddings, pooling,
+attention, initialization and capacity changed together. We have no measured bottleneck that
+currently selects a normalization, pooling, sparse-attention or auxiliary-loss rescue. A seed
+exception remains possible, but that possibility alone does not oblige another fit.
+
+This reading uses current shared background §§4 and 6 at main
+`be38b4842d3c495ace68bf1890de5e4453c333c2`: representation opportunity and finite learning
+are distinct, and evaluation worlds do not provide training replication. B05's input repair
+motivated measuring construction, not presupposing positive benefit. The present counterexample
+adds a limited adverse observation to that conditional understanding; it does not reverse B05,
+establish a general dense-versus-MLP ranking, or diagnose all local representation approaches.
+
+### Measured cost and recovery evidence
+
+| Measured quantity | ORIGINAL | DENSE |
+| --- | ---: | ---: |
+| Encoder parameters | 92,672 | 102,144 |
+| Whole actor parameters | 492,294 | 501,766 |
+| Fit-body wall through checkpoint, seconds | 5,730.76 | 11,156.62 |
+| Process CPU through checkpoint, seconds | 22,623.28 | 44,850.79 |
+| Collection wall, seconds | 1,026.36 | 1,449.48 |
+| Update wall, seconds | 4,578.68 | 9,573.88 |
+| Evaluation wall, seconds | 124.37 | 131.76 |
+| Actor learner forward, seconds / 22,500 calls | 27.79 | 112.89 |
+| Actor evaluate_actions, seconds / 101,250 calls | 413.90 | 1,488.25 |
+| Actor evaluator forward, seconds / 1,500 calls | 3.01 | 10.91 |
+| Pre-checkpoint sampled process peak RSS, bytes | 2,971,889,664 | 2,934,947,840 |
+| Manifest creation to witnessed exit, seconds | 5,733.43 | 11,346.68 |
+| Accepted-to-exit interval, seconds | 5,731.44 | 11,344.74 |
+
+Cost is 2 started and completed fits, both remote CPU FP32 / four torch threads, totaling
+720,000 training and 96,000 evaluation team transitions. Sum of fit-body walls: 16,887.38 s
+(281.46 min). DENSE's observed fit-body wall/CPU ratios are 1.947 / 1.983. Node load was not
+experimentally held constant, so timings describe these invocations, not portable hardware
+speed ratios or isolated attention overhead. The native intervals include work outside the
+fit-body timer; the roughly 190-second DENSE excess over fit-body wall is not attributed to
+an unmeasured cause. The 10,800-second plan was a scheduling estimate, not a runtime cutoff;
+both arms stopped at exactly the predeclared training/evaluation horizon.
+
+DENSE's final relative initialization displacements are coordinator 0.058036, actor 0.736882,
+critic 0.488968, team discriminator 0.079088 and individual discriminator 0.138629. Its
+optimizer totals exactly equal ORIGINAL: 675 / 101,250 / 101,250 / 675 / 2,700. The complete
+[DENSE summary](../../../../runs/local_observation_encoding/b01_dense_s92101/summary.json),
+[training curve](../../../../runs/local_observation_encoding/b01_dense_s92101/training.jsonl),
+manifests and exit witness preserve underlying observations, configuration and exact code
+`efe7d61e82b2c0aed7a634bbb2e22d7cc47430a3`.
+Summary SHA256: `f3052bc4523a6a7cce465d7a3b2eb3b9038fafc6532ed4c41f9b54ed98993a4f`.
+The 66,170,671-byte final checkpoint is retained in this author checkout's DENSE run directory
+and at `/home/wu/hmasd-worktrees/loe-b01-efe7d61e8/runs/local_observation_encoding/b01_dense_s92101/final_checkpoint.pt`;
+SHA256 `3dbeed6f0663aef6866e37868b852f954b867f647bcd9db6149a556371563538`.
+Native deserialization succeeds and all 758 saved tensors are finite. Reconstruct DENSE,
+install its encoder, then load; checkpoints and stdout/stderr remain outside Git. Stderr is empty.
+
+**Provisional next choice.** End investment in this tested recipe and archive this active
+study if the focused section-5 consultation finds no concrete decision-changing reason for a
+bounded next observation. This is an opportunity-cost judgment under exploratory uncertainty,
+not a general falsification. No new fit is planned. Earlier programme advice covered the
+two-arm exploration and adverse branches, but did not inspect these material new results;
+the impending closure gets the focused question below. No other task is contacted.
+
+## Pro question 2026-09-22 dense-recipe-stop
+
+Conversation: new (WSL/Jev; the address remains only in local transport state).
+
+Question: Does the complete B01 evidence justify ending investment in this specific dense
+actor-encoding recipe and archiving the active study now, or is there a concrete, inexpensive
+observation whose outcome could rationally change that choice? Critique the provisional
+decision and its scope; do not manufacture an architecture search or a requirement to prove
+all representations ineffective.
+
+Standing: The prospective comparison, exact information/learning contract, all original and
+adverse readings, activation checks, costs and provisional interpretation are above. One
+training seed per arm, same seed 92101, same 32 nested evaluation worlds, fixed 360k team
+transitions and final J45. DENSE loses at all three prewritten panels, including a final
+-0.256172 J difference and -18.5235 connected users/step, with about 1.95 times measured fit
+wall. All five groups learned; both endpoints and checkpoints are complete. The package,
+including capacity and initialization, changed together. Original-vs-dense opportunity has
+not been generally ruled out. Seed-specific failure is the strongest simple alternative to
+generalizing the adverse observation; no current telemetry selects a particular rescue.
+
+Context (repository-relative paths inherit the actual full source_sha supplied in the message
+unless an explicit revision is given):
+
+- Governance: `docs/project/OPERATING_CONSTITUTION.md` §§1–5, 7–8 at source_sha. Owner pause
+  remains lifted; this independent DM owns only local_observation_encoding and does not
+  communicate with other App tasks. Costs are recorded in fits; no fit allowance or new
+  owner-approval layer. Pro advises on this closure decision and does not authorize execution.
+- Method: `.agents/skills/hmasd-scientific-tools/SKILL.md`, "Update the working explanation",
+  "Comparators and MARL information", "Statistics", "Cost and exposure" and "Pro" at source_sha.
+  Separate package evidence from causal explanation, conditional worlds from training seeds,
+  technical failure from an adverse completed fit, and stopping investment from falsification.
+- Shared background: `docs/research/RESEARCH.md` §§4 and 6 at
+  `be38b4842d3c495ace68bf1890de5e4453c333c2`, for finite-learning and independent-unit reasoning.
+  It is revisable evidence context, not governance. The relevant effects on this reading are
+  stated above; do not read the entire historical programme.
+- Standing/frozen contract: this notebook's "LOE B01 prospective comparison and L0",
+  "Implementation acceptance and launch preparation", and the complete B01 result entry at
+  source_sha. Prior complete programme advice/decision is
+  `docs/research/archive/2026-09-21/RESEARCH.md`, section
+  "Portfolio review 2026-09-21 whole-project-evidence-led-research-plan" at source_sha;
+  it selected the two-arm exploration,
+  not confirmation or a measured dense benefit. Read that selected advice if its scope matters.
+- Primary run evidence: `runs/local_observation_encoding/b01_original_s92101/` and
+  `runs/local_observation_encoding/b01_dense_s92101/`, each `summary.json`, `training.jsonl`,
+  `manifest.json`, `launch-manifest.json` and `process-exit.json` at source_sha. Read exact
+  configurations, per-world panel values and actual updates rather than only the table above.
+- Exact implementation, only where relevant to a material objection:
+  `experiments/candidates/local_observation_encoding/encoder.py`, `b01.py`,
+  `scripts/run_local_observation_encoding_b01.py`, their focused tests, and the shared recurrent
+  entry-mask repair at `efe7d61e82b2c0aed7a634bbb2e22d7cc47430a3`. The dense actor gets the
+  same 104 floats and all zero slots participate; no hidden identity, validity flag or central
+  actor input. The frozen FSD runners were reused, not edited. Both arms contain the same
+  recurrent correctness repair; do not assign that repair's benefit to encoding.
+
+Prospective cost: 0 additional fits selected. This consultation and source/evidence inspection
+are the remaining non-fit work. If an alternative is worth considering, name the smallest
+decision-changing observation, its opposing predictions, fit/non-fit cost and what would
+cause a stop; a suggestion does not start it. Repetition is legitimate only if recurrence
+would change this practical decision, not to turn one seed into a formal negative claim.
+
+Constraints: No training or experimental launch. No edits outside the empty `### Answer`
+subsection under this unique heading in
+`docs/research/candidates/local_observation_encoding/NOTES.md`, branch
+`codex/local-observation-encoding`. Read reasoning inputs at source_sha, but fetch the latest
+target file and actual blob SHA before writing. Preserve every other byte, including this
+question. Stop on overlapping edits. On success report the actual answer commit; on write
+failure return the complete answer in chat, not only a receipt, SHA or link.
+
+Return: Your best supported route decision, what this evidence strengthens/weakens/leaves
+unresolved, the strongest material alternative, and whether any bounded next observation is
+worth its cost. Give source-grounded reasons and MATERIAL_DISSENT yes/no. No new idea or
+diagnostic is owed. Cite sources actually read and mark any decision-critical unread source;
+do not broaden a single-seed package observation into a stable ranking or universal claim.
+
+### Answer
