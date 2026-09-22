@@ -1,0 +1,90 @@
+{
+  "acceptance": "accepted",
+  "accepted_at": "2026-09-22T23:36:13.116973Z",
+  "bootstrap_command": [
+    "/home/wu/.venvs/hmasd/bin/python",
+    "/home/wu/hmasd-worktrees/agent-count-entropy-20260922-b04/scripts/hmasd_admission.py",
+    "_run-admitted",
+    "--runner",
+    "/home/wu/hmasd-worktrees/agent-count-entropy-20260922-b04/scripts/run_agent_count_entropy_b04.py",
+    "--output",
+    "/home/wu/hmasd-worktrees/agent-count-entropy-20260922-b04/runs/agent_count_generalization/s1_entropy_b04_set_zero_s943201",
+    "--",
+    "--cell",
+    "set_zero",
+    "--out",
+    "runs/agent_count_generalization/s1_entropy_b04_set_zero_s943201",
+    "--launch-sha",
+    "f4762ac67f04675136367fcc566327f0bf78a086"
+  ],
+  "claim_key": "6e923452638180df2810a9649041a3f1deb280cc3f3f2984376bdf12e36066d2",
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/6e923452638180df2810a9649041a3f1deb280cc3f3f2984376bdf12e36066d2.json",
+  "command": [
+    "/home/wu/.venvs/hmasd/bin/python",
+    "/home/wu/hmasd-worktrees/agent-count-entropy-20260922-b04/scripts/run_agent_count_entropy_b04.py",
+    "--cell",
+    "set_zero",
+    "--out",
+    "runs/agent_count_generalization/s1_entropy_b04_set_zero_s943201",
+    "--launch-sha",
+    "f4762ac67f04675136367fcc566327f0bf78a086"
+  ],
+  "command_sha256": "c506a29047ff44f52d379e368d956779f24d808eee7061341d182058c2a84d0d",
+  "control_observation": {
+    "observed_at": "2026-09-22T23:36:13.007283Z",
+    "ref": "refs/heads/main",
+    "remote": "origin",
+    "sha": "e2ef87bb2cde32827fb6f54e2977047e515056b8"
+  },
+  "control_root": "/home/wu/projects/HMASD",
+  "created_at": "2026-09-22T23:36:13.020698Z",
+  "cwd": "/home/wu/hmasd-worktrees/agent-count-entropy-20260922-b04",
+  "direction": "agent_count_generalization",
+  "host_identity": "LAPTOP-U9TDKC8A",
+  "identity_command": [
+    "/home/wu/.local/share/uv/python/cpython-3.10.21-linux-x86_64-gnu/bin/python3.10",
+    "scripts/run_agent_count_entropy_b04.py",
+    "--cell",
+    "set_zero",
+    "--launch-sha",
+    "f4762ac67f04675136367fcc566327f0bf78a086"
+  ],
+  "lead": "Codex DM (independent session)",
+  "manifest_ref": "/home/wu/hmasd-worktrees/agent-count-entropy-20260922-b04/runs/agent_count_generalization/s1_entropy_b04_set_zero_s943201/launch-manifest.json",
+  "node": "wsl_4070",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/6e923452638180df2810a9649041a3f1deb280cc3f3f2984376bdf12e36066d2.json",
+  "output_root": "/home/wu/hmasd-worktrees/agent-count-entropy-20260922-b04/runs/agent_count_generalization/s1_entropy_b04_set_zero_s943201",
+  "preflight": "/home/wu/hmasd-worktrees/agent-count-entropy-20260922-b04/runs/agent_count_generalization/s1_entropy_b04_set_zero_s943201/admission-preflight.json",
+  "process": {
+    "detached": true,
+    "identity": {
+      "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+      "kind": "linux_pid_start_ticks",
+      "pid": 276066,
+      "session_id": 276066,
+      "start_ticks": 48241531
+    },
+    "native_handle_kind": "posix_session",
+    "pid": 276066,
+    "process_group_id": 276066
+  },
+  "process_exit": "/home/wu/hmasd-worktrees/agent-count-entropy-20260922-b04/runs/agent_count_generalization/s1_entropy_b04_set_zero_s943201/process-exit.json",
+  "published_remote": "origin",
+  "runner_process": {
+    "identity": {
+      "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+      "kind": "linux_pid_start_ticks",
+      "pid": 276067,
+      "session_id": 276066,
+      "start_ticks": 48241534
+    },
+    "pid": 276067,
+    "process_group_id": 276066,
+    "supervisor_pid": 276066
+  },
+  "schema_version": 1,
+  "sha": "f4762ac67f04675136367fcc566327f0bf78a086",
+  "source_root": "/home/wu/hmasd-worktrees/agent-count-entropy-20260922-b04",
+  "stderr": "/home/wu/hmasd-worktrees/agent-count-entropy-20260922-b04/runs/agent_count_generalization/s1_entropy_b04_set_zero_s943201/stderr.log",
+  "stdout": "/home/wu/hmasd-worktrees/agent-count-entropy-20260922-b04/runs/agent_count_generalization/s1_entropy_b04_set_zero_s943201/stdout.log"
+}

@@ -3890,3 +3890,65 @@ Fresh main still permits the direction/lead and contains no newer owner pause. C
 generation57 READY event `055dc5b474a3c1a08ab04ef6` under wake
 `b4818368-ed1d-4d15-ad36-39cd9ec48efd` and rearmed generation58, with no live fit remaining
 until the fixed SET admission. No worker restart, repeat Pro Send or cross-task message.
+
+## 2026-09-22 — B04 fixed SET admitted; exact control binding and first updates read
+
+The second and final fixed B04 fit, `s1_entropy_b04_set_zero_s943201`, was accepted on
+`wsl_4070` at23:36:13.116973 UTC from unchanged source
+`f4762ac67f04675136367fcc566327f0bf78a086`. Before dispatch, verified the source inputs,
+the old SET/clip control's exact summary hash and the unused new output/supervisor name.
+The only untracked native files were the completed H6 result directory, which the launcher
+explicitly permits as output; no source was modified or removed. The configured `zsh -lic`
+network shell refreshed published refs. Admission observed main
+`e2ef87bb2cde32827fb6f54e2977047e515056b8`, current direction/lead and no owner pause.
+Its fresh [resource measurement](../../../../runs/agent_count_generalization/s1_entropy_b04_set_zero_s943201/admission-preflight.json)
+passed with13.080085754 GiB available against the4 GiB floor.
+
+The [manifest](../../../../runs/agent_count_generalization/s1_entropy_b04_set_zero_s943201/launch-manifest.json)
+binds the exact command, source, runtime, output and native supervisor276066/runner276067
+identities. Stable operation reference ends
+`6e923452638180df2810a9649041a3f1deb280cc3f3f2984376bdf12e36066d2.json` in the native
+canonical admission store. Both processes were independently observed running with matching
+identities and no exit witness; supervisor-command exit0 was only dispatch acceptance.
+Detached observer generation59 has adopted this same operation, with no pending event or
+observation error. No other fit, Pro request or cross-task message was created.
+
+Initial checkpoint00 was independently loaded on the native node:20968771 bytes,130 finite
+tensors, SHA-256 `7a1b8a7d23305639fe806dd20815c2df7aee02d8d7f5e49af9700298cdfd2b2d`.
+Recomputing its parameter/normalizer digest gives
+`8f19743fe8fd5a09aa998bf90ab73bdbc3de599a8f58b791610fbb628d2f97c2`, exactly the original
+SET/clip initialization and required control binding. The common checkpoint config serializer
+retains lambda_l=0 but omits the four additional target/annealing/endpoint fields; these are
+explicitly present in the runner config/summary and effective contract. This metadata subset
+does not establish those fields independently from the checkpoint, and does not change the
+runtime treatment. The binary remains recoverable at the manifest's native output path.
+
+Independently compared the three initial panels, including all per-world native values,
+seeds, execution bounds and frozen zero-update evidence, with the old SET/clip control;
+they match exactly outside the declared entropy config fields. The complete first pre-update
+16-return vector and common action/motion/storage witness match as well. All configuration
+fields outside the entropy treatment match. Control summary hash remains
+`2621fc884d2d6a9ea909ee4f483b4df1c2d9d6f8767826ef730b952a360422e3`.
+
+Read the eleven hash-verified small artifacts at the durable snapshot. The
+[summary](../../../../runs/agent_count_generalization/s1_entropy_b04_set_zero_s943201/summary.json)
+SHA-256 is `2ab794dea30634d4f517bae34ed19a4364e0e1b569db566677541189c6d286c5`:
+24000 training/stored team steps,48 episodes/resets,**two completed updates** with rollout3
+collected,24000 evaluation steps and48 evaluation episodes; failure null. The two complete
+JSONL rows equal the summary's rows. Actor/critic have4500 optimizer calls each; coordinator
+and both discriminator paths have0. Actor/critic and their required representation modules
+move while the coordinator remains unchanged. Losses, raw storage/original old log-probabilities,
+clipped execution and motion identities pass. Effective lambda_l=0, targets/annealing off and
+logstd remains trainable exactly once in the actor optimizer.
+
+After the first actual update, sigma[1,1,1] becomes[.994113147,.992406726,.993219376],
+versus[1.033914328,1.035973549,1.033954740] for the reused .05 control's first update.
+Analytic raw entropy is4.256815600→4.236485387, then4.238786870 after update2; it is not
+zero despite the legacy zero entropy-loss report and need not decrease at every PPO update.
+This verifies active learning/treatment, not a final saturation, boundary or service response.
+The snapshot's command wall184.063840049 seconds is partial cost, not the completed fit wall.
+
+**2/2 B04 fits started: H6 complete, SET running.** Continue this accepted SET process to
+its unchanged45-update endpoint and collect all panels/checkpoints before the E/Q and native
+service reading. H6's complete adverse exposure/service tradeoffs and all intermediate results
+remain part of that reading. No automatic third fit, coefficient change or confirmation.
