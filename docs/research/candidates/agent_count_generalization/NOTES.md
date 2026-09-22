@@ -2675,3 +2675,28 @@ comparison. Keep B_SET, B_H6 and I unresolved until their fixed partners arrive;
 selective-rescue or ranking verdict from these two different-law cells. Continue the already
 declared third cell **H6/clip/942201**, requiring the validated H6/raw initial digest, then
 SET/raw/943201. No new seed, endpoint, intervention, fit, Pro question or retry is introduced.
+
+### B03 third cell admitted with matched initialization
+
+The predeclared **H6/clip/942201** cell was admitted at **2026-09-22 17:53:56 UTC** from the
+same immutable reviewed source. Its [runner-written manifest](../../../../runs/agent_count_generalization/s1_action_law_b03_h6_clip_s942201/launch-manifest.json)
+binds the new native handle and the required H6/raw initial digest. Actual-node memory
+preflight passed with 10,996,314,112 available physical/effective bytes. The prior two cells
+are terminal; this is the direction's only running scientific process.
+
+The required and observed parameter/normalizer digests both equal
+`50f3d5305a2d6a94a1543d7b5111654c7b154f4a9c1b71b59474c4deb36038ac`.
+All three complete initial clipped-evaluation panels exactly equal those in the H6/raw cell,
+including every world's result. The first training witness independently verifies the same
+native starting position, raw draw and old log-probability as H6/raw, with that original
+draw/log-probability retained in storage; clipping changes the executed action and native
+successor. Paired initialization is established, while subsequent state exposure is allowed
+to diverge as the intervention intends.
+
+The collected [training snapshot](../../../../runs/agent_count_generalization/s1_action_law_b03_h6_clip_s942201/summary.json)
+has `fit_started=true`, no failure, 8,000 training/stored steps, 16 episodes/resets, 24,000
+initial evaluation steps and zero completed updates at `rollout 1 collected` (47.740 command
+seconds). Executed training coordinates are within [-1,1]. These are progress and pairing
+checks, not a new endpoint. Actual B03 cost is **three started fits: two complete, one running**;
+the fourth SET/raw/943201 remains unlaunched. The detached observer is armed on the same
+accepted third-cell handle; frozen final45 and the remaining sequence are unchanged.
