@@ -230,3 +230,23 @@ preparation evidence; the native kernel must still perform fresh admission. Proc
 the fixed pair sequentially, first output `runs/uav_service_auxiliary/b01_detach_910021_a01`.
 No training fit has started at this entry. Bind its actual source/operation through the
 runner-written manifest, then arm deterministic observation of that same handle.
+
+### B01 detach accepted — 2026-09-21 20:01 PDT
+
+The first planned attempt was accepted at `2026-09-22T03:01:41.983024Z` on `wsl_4070`
+from published source `382643ca91cf764336f3311bc166275a5d2bbe97`, retaining the exact
+snapshot. Its authoritative manifest is on `hmasd-wsl-node` at
+`/home/wu/hmasd-worktrees/uav-service-auxiliary-a335/runs/uav_service_auxiliary/b01_detach_910021_a01/launch-manifest.json`;
+that manifest binds the stable operation reference, output, process identities, preflight
+and logs. Same-handle status at `2026-09-22T03:02:41.673817Z` reports accepted, running and
+consistent identities. The supervisor command finishing successfully is not fit completion.
+No scientific result has been read or accepted. The joint attempt remains unstarted.
+
+Detached `tools/hmasd_wait.py` observation is armed for this current task, probing the
+original remote output via native `status`; its private state is
+`/home/fires/.local/state/hmasd-wait/01a0c6f0-31e1-7510-bee7-4f0f8b62d821`.
+At completion, error or the bounded checkpoint, drain that state and reconcile this same
+operation. Never launch a replacement or repeat the accepted request. After a complete
+detach reading, run only the already fixed joint arm with the retained facts digest and
+fresh actual-node admission. No cross-task notification or additional fit is authorized
+by the observation event.
