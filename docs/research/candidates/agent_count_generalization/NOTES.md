@@ -2242,3 +2242,21 @@ failed-cell preservation/no silent completion. Tests own scratch under pytest li
 read-only independent Reviewer checks the high-risk evaluator/checkpoint/RNG/result meaning
 before scientific launch. Stop on a material mismatch; technical checks are not scientific
 fits and cannot select a checkpoint or modify the fixed panel.
+
+L0 clarification before implementation: the sentence above assuming float32 native position
+storage is incorrect. `uav_env.py:reset` creates `np.zeros((N,3))` without a dtype, hence
+float64 on the declared host. Keep actual native position dtype and source arithmetic order;
+network/actions remain FP32. The movement check must not force position arrays to FP32.
+The one trailing-whitespace line in the saved Pro Answer is preserved verbatim from the
+verified fallback, rather than silently changing the recovered text.
+
+Native preparation: the first new-worktree population call timed out at 90 s while Git's
+partial-clone implicit fetch ran outside the configured network shell. Its remaining Git
+process and then its exit/path cleanup were reconciled read-only; no scientific command,
+fit or evaluation had started. The same intended B02 source location was subsequently
+prepared through `zsh -lic`, with explicit sparse paths and index population. It is now a
+clean detached worktree at `f60799d702ede2ebc980ac410cb1f75667ba7b46` under
+`/home/wu/hmasd-worktrees/agent-count-action-law-20260922-b02`; it will advance only to the
+accepted, published evaluator input before launch. Existing B01 source/artifacts and unrelated
+canonical untracked files were preserved. Preparation time is separate from scientific wall.
+The completed Pro operation has no remaining matching browser tab (checked read-only).
