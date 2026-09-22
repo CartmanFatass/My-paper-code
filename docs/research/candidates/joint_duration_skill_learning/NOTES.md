@@ -906,3 +906,19 @@ Use fresh native admission on preferred WSL, with no warm start or replacement s
 This completes the original discriminating comparison, adds no new planned fit, and reuses
 the accepted Pro advice. Planned total remains **4 attempts including the technical failure**;
 actual starts remain 2 until the next arm is natively accepted.
+
+### B01 factored instance natively accepted — 2026-09-21
+
+The original factored arm was accepted at 2026-09-22 05:53:38 UTC. Its
+[native manifest](../../../../runs/joint_duration_skill_learning/b01_factored_s2026092202/launch-manifest.json)
+binds the unchanged published execution source and original operation reference. Native
+status subsequently found the runner and supervisor running with consistent identities.
+The [fresh actual-node preflight](../../../../runs/joint_duration_skill_learning/b01_factored_s2026092202/admission-preflight.json)
+measured 10,483,630,080 available host bytes against the 4 GiB floor, with published pause
+and lead checks passed. Both admission files were copied and SHA-256 matched to the node.
+
+Actual started result attempts are now **3 of the 4 planned attempts**: the retained
+technical failure, the completed fixed instance and this running factored instance. AR is
+unstarted. The deterministic waiter observes the accepted factored handle, preserving the
+live source checkout and the declared 360k endpoint. No cross-arm or duration-benefit
+conclusion is available until the remaining predeclared evidence is read.
