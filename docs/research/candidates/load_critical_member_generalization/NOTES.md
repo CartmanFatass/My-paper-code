@@ -310,3 +310,184 @@ on successful write. If GitHub writing is unavailable, return the complete answe
 not a status, link or SHA alone. Keep private account/conversation facts out of Git.
 
 ### Answer
+
+#### 结论：保留五格，但把它读成固定策略的服务转换，而非负载适应或纯人数识别
+
+我的建议是采用题内**已经修正的五格零新训练设计**，保留 N6/c10 锚点及全部不利结果。它能回答一个有用的窄问题：对于最终复用的两条 B03 clip-train 策略，各自既定的几何轨迹在不同每机连接上限下，产生多少额外服务，以及这种服务转换是否改变 H6−SET 的原生收益差。它不能识别“技能学会了负载适应”，也不能在“容量机制”和“人数机制”之间作排他性裁决。**现在不选择可选的两 fits。** 本答复是科学建议，不是运行接受、预算授予或新的审批要求。[题内修正与范围][S0]、[治理 §§3、5、8][S1]
+
+最强的简单解释不是“SET 没有表示容量”，而是：**两种完整学习包形成了不同的冻结几何与 SINR 资格分布；相同的原生分配器按每机上限截断这些分布，再通过已连接用户的质量组成产生不同 J。** 这个解释足以兼容正、零、负的容量交互；即使预写的正向预测命中，它也仍然成立。五格的价值是定量定位这条服务转换链，而不是把它从几何中分离成一个新学得的机制。
+
+#### 1. 本次证据基点及其边界
+
+我读取了指定 `a37eed21e69adf3c6e159a7c255fd8603c1a95db` 下的本题与前文、RESEARCH 的当前授权/本方向行和主题 1–4、6、constitution 指定章节、科学方法指定章节、工程方法的 Checks and review、plan-6，以及原人数方向的 B02 完成记录和 B02/B03 投入决定。原生环境读取同一 revision；策略接口、配置、模型和评估/恢复路径另按指定的 `dd25f34a09ba8d0f8a62c5aacb36d9aaa56dcf0c` 读取，没有拿移动分支替换推理输入。[共享背景][S2]、[科学方法][S3]、[工程方法][S4]、[起始提案][S5]
+
+B02 的大文件通过 contents 接口最初返回空内容，随后通过其 Git blob `baef10dba20bf5fe99441471be0253ccfddaa3ef` 成功读取；我读了相关 aggregate、component 记录及 counts，不把空返回或完成收据当成科学结果。summary 中的 clipped-deployment H6−SET J 为 N4 **+.029915413**、N6 **+.041645180**、N8 **+.054739264**；计数为 0 fits、288,000 evaluation team steps、576 episodes、0 training steps/updates/optimizer calls。完成记录保留 4/18 个不利 policy×N 均值和 86/288 个不利配对世界，并报告全部 288 对位置轨迹在第一动作后分叉。[B02 summary][S7]、[完整 B02 读数][S6]
+
+因此，B02 削弱的是“这些旧策略的优势必须依赖越界确定性部署”，并未消除既往训练曝光、熵激励和有限优化的解释。这里的分量核对也不能移用：B02 改变动作和轨迹，高度项可以变化；本题同 N 改 c 的恒等轨迹对照中，高度不应变化。两种干预不能混为一谈。[S6]
+
+B03 在指定材料中仍是**外部待交付资产和待完成的科学阅读**，不是已知的 bounded-training 结果。后文条件于其既定的 H6/SET × raw/clip 训练、共同 clipped deterministic 部署合同；原始 Gaussian 样本、样本 log-probability 和原始 entropy 合同保持不变。最后复用的两个 clip-train/final45 检查点各是一份训练实例，不因新增世界变成重复学习证据。[B03 前瞻合同][S6]、[本题资产依赖][S0]
+
+#### 2. 隐藏容量为什么不产生同 N 的在线适应
+
+已读原生代码把 c 用于连接分配，而非位置转移、SINR 或用户运动。局部观测是自己的位置、按 SINR 排序的最多 20 个用户和 10 个 peer 槽、时间；CountAdapter 的 133 维 state 是位置、roster 位、用户位置与时间。c、实际连接和服务 reward 均不在这些输入中。冻结评估的 `target.step` 接收 state、observation、时钟和结束标记，没有把上一步 reward 或服务 info 送回策略。[原生观测/转移][S9]、[CountAdapter][S10]、[冻结评估][S13]、[B02 评估入口][S14]
+
+固定同 N、物理初态、检查点、normalizer、runtime RNG 和全部记忆状态后，可逐步归纳：相同策略输入产生相同动作；相同动作产生相同下一几何；几何决定相同 SINR、观测和 state；固定时长终止也相同。因此下一步仍相同。这包括 H6 的技能/计时器及 SET 的 held snapshot 在 k=10 边界的刷新。GRU 能记住合法历史，但这里的合法历史没有提供辨认 c 的通道。两包可以响应几何，却不能在这组对照中响应实际隐藏 c。[S9][S11][S12][S14]
+
+这也不等于“人数不可观测”：roster/count 和合法团队快照仍携带 N 信息，不能为追求某种不变性而删掉。相同源信息和刷新时钟也不意味着表示、压缩、带宽、辅助目标或计算相同；H6−SET 仍是完整包比较。[S2][S11][S12]
+
+实际面板仍应直接检查上述恒等性，而非只引用推导。出现首次分叉，应先定位 reset、缓存、dtype、隐藏状态、配置、RNG 或意外反馈的合同差异；不能将它命名为“发现了在线负载适应”。工程验证与科学收益是两件事，当前咨询没有运行任何生产策略评估或原生 fixture。[S0][S4]
+
+#### 3. 唯一资格化简成立，但容量不能跨 UAV 自由调拨
+
+对一个用户，令 UAV i 的接收线性功率为 p_i，噪声为 η。代码在 `use_fdma=False` 时采用
+
+\[
+\mathrm{SINR}_i=\frac{p_i}{\eta+\sum_{j\ne i}p_j},\qquad \eta>0.
+\]
+
+S1 将资格门槛设为 0 dB，即线性 SINR ≥1；父类的 −80 dBm 噪声对应严格正的线性值。干扰项包含其他所有 UAV 的信号，不随其是否满载或是否连接用户关闭。假设 i、j 同时合格，记其余信号之和为 r≥0，则
+
+\[
+p_i\ge p_j+r+\eta,\qquad p_j\ge p_i+r+\eta,
+\]
+
+相加要求 0≥2(r+η)>0，矛盾。因此是**每用户至多一个合格 UAV**，并非每用户必有合格 UAV。该结论来自本机用户链路公式，不是平均场近似。[S8][S9]
+
+令某一步 e_i 为 UAV i 在完整 50 个用户中达到原生门槛的人数。两条分配路径都按 SINR 稳定降序处理合格链路，并检查每机上限及用户唯一连接。在资格集合互不相交时，用户争抢消失；各机服务自己的最高 SINR 前 min(e_i,c) 人，故
+
+\[
+E=\sum_i e_i\le50,\quad
+S(c)=\sum_i\min(e_i,c),\quad
+T(c)=\sum_i(e_i-c)_+,\quad S(c)=E-T(c).
+\]
+
+其中 50−E 是 SINR 不合格人数，T 是合格但未服务人数。于是
+
+\[
+S(c)\le\min(E,Nc)\le\min(50,Nc).
+\]
+
+上界不保证取到：一机排满、另一机闲置时，闲置名额并不能服务只有前一机合格的用户。可报告 `min(E,K)−S(c)` 描述“假想可汇集名额”与实际局部分配的差，但它不是合法改派能收回的服务、可达策略 headroom 或原生最优值。既定几何/资格下，换一个更聪明的派单器也不能凭空创造另一条合格链路；同时不能据此声称原生贪婪规则最大化了含平均质量项的完整 J。[S8][S9]
+
+这个化简要以实际运行域为条件：记录 FDMA 开关、门槛、噪声和数值有效性，使用原生 `>=` 判定，核对每用户合格数、实际连接数以及 S(c) 恒等式；边界案例不能用另加 epsilon 静默改写资格。若发生多重资格、非有限值或分配不一致，保留原生结果并撤回依赖化简的诊断，先查原因。不能把公式用于 FDMA、负门槛或另有按活动链路改变干扰的后继宿主，也不能假定两个数值后端普遍逐位相等。[S4][S9]
+
+e_i 必须在全体用户上计算，不能用 20 个可见槽的长度代替。满载率也应与溢出量分开：e_i=c 可以满载但没有未服务用户，e_i>c 才有截断。占用率、发生截断的 UAV-step 比例、遗漏用户量分别保留分母；roster 位和全 1 动作掩码都不是真实局部有效位。[S9][S10]
+
+#### 4. 修正后的交互代数正确；正号并不表示更能处理过载
+
+记 a∈{H6,SET}，同 N 的低/高每机上限为 c_l、c_h。逐步新增服务数为
+
+\[
+m_a=\sum_i\bigl[\min(e_{a,i},c_h)-\min(e_{a,i},c_l)\bigr]\ge0.
+\]
+
+它也等于 `Σ_{r=c_l}^{c_h−1} #{i:e_{a,i}>r}`：容量响应取决于资格人数分布在这些局部门槛上的尾部，不由 K 或 U/K 单独决定。令 b_a 为对步骤和配对世界平均的 m_a；Q、P 分别为原生质量和高度惩罚的对应平均，则
+
+\[
+\Delta J_a=\frac{0.7}{50}b_a+0.3\Delta Q_a,\qquad
+D_N=\frac{0.7}{50}(b_{H6}-b_{SET})+0.3(\Delta Q_{H6}-\Delta Q_{SET}).
+\]
+
+这里每臂的 ΔP_a=0，所以高度在 D_N 中严格消去；它仍进入包水平差、跨 N 比较和新策略之间的比较。J 应按 `N×scalar_return/500` 恢复，并与逐步原生分量的平均核对，不把 connected-user 加权的汇总比值冒充原生逐步质量平均。[S8][S13]
+
+质量组成使覆盖与 J 不必同向。某步旧连接数为 s>0，新增 m 人的平均归一化质量为 q_new，则
+
+\[
+\Delta Q=\frac{m}{s+m}(q_{new}-Q_{old}).
+\]
+
+s=0 时另按原生零连接约定 Q_old=0 计算。新增者在各自 UAV 内排得更后，不保证其质量低于**全队**原已连接用户的平均；故全队 ΔQ 的符号也不预定。不能将“容量放松”直接写成 J 必增，更不能写成 H6 的相对增益必增。
+
+题内两个逻辑反例的计数正确：U8/N2、等质量等高度时，H=(4,4) 与 SET=(8,0)，c2→4 的服务差为 2→4；改 H=(2,2)，差为 2→0。它们只否定必然相对正号，不充当满足真实无线几何的实证。[S0]
+
+因此窄 conjecture 要分别读：两臂 T 是否下降、H6 是否多恢复用户，以及 H6 的 J 增量是否也更大，而且 N4、N8 均保留符号。只有中间量成功而 D_N≤0，不能称原生预测命中。即使两处 D_N>0，也可能说明 H6 的现有几何**更依赖额外名额**；判断过载条件下哪个包更好用，仍要读低容量水平上的绝对 J、覆盖和 G，而不是用斜率代替水平。
+
+#### 5. 局部容量分区与剩余 N 差异：用记账分解，不制造纯效应
+
+把 E、T 按相同步骤/世界权重平均，定义
+
+\[
+A_N=E_{H6,N}-E_{SET,N},\qquad
+B_{N,K}=T_{H6,N}(K/N)-T_{SET,N}(K/N).
+\]
+
+则覆盖部分的包差为 `(A_N−B_{N,K})/50`，完整分解为
+
+\[
+G(N,K)=\frac{0.7}{50}(A_N-B_{N,K})
++0.3(Q_{H6,N,K}-Q_{SET,N,K})
+-(P_{H6,N}-P_{SET,N}).
+\]
+
+所以 `G(8,K)−G(4,K)` 可准确拆成资格总量差的变化、局部截断差的变化、质量组成差及高度差。这能说明剩余差异记在哪个原生后果上，却不是统计控制了中介之后的“纯 N 因果效应”。e_i 和几何本来就随 N、策略及干扰共同变化；配对初始用户并未冻结这些内生量。
+
+现有五格可作三种互补读取，无须加格：同 N 改 c 是主容量干预；同 K 比 N4/N8 显示仍混有每机 c、分区、密度、干扰和几何的残差；已有的 **c10 下 N4/N6/N8** 则固定每机名额，但不固定总容量或联合物理条件。三者均不单独识别抽象人数不变性。N4 的 c10→20 与 N8 的 c5→10 虽同为 ΔK=40，也不是同一个局部门槛区间的响应；不能将 D8−D4 当成普适的容量导数。N6 只有 c10，五格本身没有 D6。[S0][S5]
+
+普通 SET 应继续作主参照。题内 Deep Sets/MIPI/M3FC/均值场摘录提供的是有范围的方法桥梁，不提供本 UAV 的数量迁移保证、删除人数信息的理由或新增 attention 的证据。这里沿用题内所给段落的边界；官方 M3FC、Set Transformer 摘要也不替代全文、表格或附录的独立核验。[题内文献桥][S0]
+
+#### 6. 最小有用观察与结果分支
+
+保留预定的 `2 policies × 5 cells × 16 worlds × 500 steps = 80,000 evaluation team steps`、160 episodes、0 fits/训练转移/updates/optimizer calls。采用已经给出的独立用户/UAV SeedSequence 流及八机前缀；实际用户位置跨 N 相同、同 N 各容量和两包起点相同，不能只比较 seed 号码。物理位置保持 float64，网络/动作按冻结 FP32 合同；episode 重置全部记忆、技能、timer、held snapshot，冻结参数和 normalizer。[S0][S10][S14]
+
+在这些已经计划的轨迹上，最有用的小增量是把**每步实际连接与由完整 SINR/资格得到的 S(c)、T(c)、质量选择相互核对**，并将两臂的容量响应及 D_N 展开成前述分量；不需要先购买新训练、能力输入或一个架构搜索。保留首次/最大 action、observation、state、geometry 差异和 k=10 边界证据。不要为省调用而未经核验便用一条容量轨迹替代整个已声明面板；解析重计是辅助读取，不自动减少所承诺的恒等性检查或改变 80k 计数。
+
+| 实际观察 | 加强、削弱或仍未解决的判断 |
+| --- | --- |
+| 两种 N 都是 H6 多恢复用户且 D_N>0 | 加强这些固定实例的边际服务预测；仍完全兼容不同几何/资格集中及 H6 更依赖 slack，不证明学得的负载机制。 |
+| 两臂都明显恢复用户，G 基本稳定 | 容量影响绝对服务，但未解释相对差距如何变化；不能说“容量没有作用”。 |
+| H6 多恢复用户，J 增量却不更大 | 中间预测成功、原生相对预测失败，检查质量组成；不能用高度抵消来救同 N 的解释。 |
+| 两个 N 符号相反，或同 K 残差明显 | 保留门槛尾部、局部分区、干扰与几何交互；没有集合编码失败或纯人数机制的归因。 |
+| 两臂在低容量下也几乎没有 T | 削弱这些已观察轨迹上的容量截断瓶颈；不排除其他学习几何下出现截断，也不把平坦结果称为策略等价。 |
+
+统计先构造每个配对世界的 ΔJ_a、D_N 和分量，再报告全部有符号结果及均值。16 个世界是固定策略条件下的外生布局单位；同世界的两包、容量、N 共享设计，500 个步骤和 UAV 不是独立样本。需要世界不确定性时，应按完整 world block 保留这些关联，并说明对世界抽样的假设；任何区间都不覆盖只有每包一个训练实例的学习随机性。不能按 seed 接近配对训练，也不能将 160 episodes 或窄世界区间升级为学习总体优势。混合、负面及技术失败保留，不按结果追加世界或挑 checkpoint。[S3]
+
+80k 是 team steps，不是单 UAV 决策数；0 fits 不代表零计算。CPU FP32/四 Torch 线程及优先节点沿现有合同，实际 import/加载、推理、模拟、诊断、资源占用和未测项如实记录；B02 的约 316.584 秒不是新面板的耗时承诺。[S0][S3][S7]
+
+#### 7. 什么观察值得进一步学习，而不是只读完冻结服务转换
+
+**值得买的新增判断是有限学习下的折中是否有用，不是 c 能否被当前 actor 察觉。** 例如，目标使用条件确实含有多种容量；冻结面板显示有实质原生后果的资格集中—截断—质量权衡，旧策略在某些目标条件下损失明显；一个新的共同训练目标有理由改变几何，使目标服务权衡更好。包排序跨容量改变是直观线索，但不是必要门槛；没有正 D_N 也可能有可修改的几何问题。反过来，仅有很大的 D_N、漂亮的 occupancy 图或“均衡训练听起来更稳健”，不足以说明两 fits 会改变任何使用或科学判断。[S2][S3]
+
+对一个冻结且无容量反馈的策略 π，令 X 为其几何历史。在独立抽取、对策略不可见的容量分布 w(c) 下，X 的规律不依赖当回合 c，故
+
+\[
+\mathbb E_c[J(\pi,c)]
+=\mathbb E_{X\sim P_\pi}\left[\frac1{500}\sum_t\sum_c w(c)R_c(X_t)\right].
+\]
+
+这只是期望的交换：混合容量对应沿同一几何规律使用容量平均后的 reward。它不等于把平均 c 代入 reward，因为 min 截断和连接质量比值非线性；也不等于分别对每个 c 找到最优策略后取平均。训练 reward 改变可以使参数更新和最终几何不同，故“隐藏容量”不使新训练无意义；但训练后仍不能在同一可观测历史上因真实 c 不同而条件化行动。均值目标也不会自动产生最坏情形保证。[S8][S9][S14]
+
+若 DM 后来选择原提案的两 fits，能新增的比较是：**H6 与普通 SET 各自在共同 balanced-c 配方下完成 360k 训练后，哪个完整包在预写测试用途上提供更好的原生服务/代价折中。** 它不是 balanced 相对 fixed-c 的因果效应。每臂 N6、720 episodes，c∈{5,10,20} 各 240 个并事先打乱；训练动作映射和潜变量评分保持最终绑定的共同合同，不能顺便加入 capacity cue、tanh、熵调参或新表示。[S0][S5]
+
+这个后继必须写清两个层次的预测。中间预测应是新训练改变了目标条件下的几何与资格尾部，使局部截断/质量取舍朝预写方向移动；仅 T 变小不够，因为让 E 一起塌缩也会减少 T。原生预测应是声明权重下的完整 J 有实用改善，且分别展示低容量、未见 N 和 N6 锚点的损失。若提出 H6 的额外复杂度值得付费，就预写 H6 相对 SET 的目标 J/代价预测；H6 胜出的叙事不是结果义务。中间量改善但完整 J 不改善、SET 吸收收益、只有开发峰值或目标条件损失不值得成本，均削弱继续这一配方的理由，而不是自动加训。[S3][S5]
+
+**必须区分训练容量混合与五格测试目标。** 现有五格不是每个 N 都有 c5/c10/c20；特别是 N6 只有 c10。因此，它能够测 balanced-c 训练后的五格包价值，却不能直接声称测得 N6 上三种 c 的均衡混合回报或其最坏容量表现。可在后继选择时将目的限定为实际五格及其事先权重；若目的确为每个 N 的完整容量混合，则需明说相应评估覆盖/代价，不能给缺失格补成绩或暗中扩充当前面板。若完整 SINR 历史已保留、路径恒等与分配合同已验证，也可对同一冻结几何做缺失 c 的解析服务重计；这不增加训练/环境转移，却仍有计算成本，且必须标为条件反事实重计，不是新增独立世界或新学习证据。
+
+原可选方案的已知成本应完整保留：**2 fits、720k training team steps，另 400k evaluation team steps**。其中开发 0/120k/240k 的五格×16 世界、两包共 240k eval；final360k 的五格×32 个独立新世界、两包共 160k eval。实际训练/世界 seed 尚未绑定，wall 也未知；这些都不是现在的已接受工作。每臂一个新训练实例只能作探索性包判断。要因果比较 fixed 与 balanced 训练，须另行前瞻匹配 H6/SET × fixed/balanced 四格；不能拿旧 B03 的跨 seed 结果补格，该四格也未被选择。[S0][S5]
+
+如果冻结服务转换已足够支持目标条件下的部署选择，或者剩余解释没有一个能改变判断的可执行预测，就没有理由为维持路线而训练。B03 资产未就绪是实际依赖，不是失败结果；读完五格后因信息价值/机会成本而 reserve 或收束，也是有范围的投入判断，不是否定所有隐藏容量学习。反之，不需要证明可达最优、先跑阳性 toy 或先获得一般理论保证才能考虑一个真正有区别的有限学习问题。[S1][S3]
+
+#### 8. 工程与关键成员后继仍保持原边界
+
+当前 L0 的独立场景/诊断工作合理。S1 构造中父类先 reset、子类后设置 min_sinr/c，最终参数后的显式 reset 及共享物理位置安装后的 cache/channel/observation/state 刷新必须准确。旧 `make_envs` 未显式传 c，不能因改了一个外层配置字段就假定真实上限已变。另一方面，B02 的生产 loader 写死旧 B01 launch identity、六个旧 source policies 及其 summaries；只能复用严格恢复/冻结检查的方法，不能原样冒充 B03 资产装载器。后来依生产者不可变 summary 绑定 clip-train/final45 身份，是原合同的落实，不是要求重复生产或新增审批。[S8][S10][S14]
+
+五格没有测试能力异质性。`[20,8,8,8,8,8]` 与 `[10,10,10,10,10,10]` 的同 K60 后继会引入容量向量和新的合法信息接口；若被选中，要同时处理两条分配路径、随机高能力成员的位置/槽位、匹配自身/可见 peer/中央快照能力信息，并以普通能力拼接或 FiLM SET 为主参照。固定槽位不是能力，某机在当前几何上影响大也不证明已学得关键成员泛化。本答复不选择该后继。[S0][S5]
+
+最后明确未读/未测范围：未直接读取节点上的 B02 二进制 checkpoints/NPZ traces，未独立重做 DM 的全部逐轨迹审计；没有 B03 完成结果和两个最终检查点的可用身份可供核验；没有访问本地 MyLib 全文或重审其经验附录/证明；未运行本方向新代码。B02 的相关结构化字段、完成记录和指定代码足以支持以上有条件的设计与代数判断，但不支持宣布 B03 成功、面板已经通过轨迹恒等检查，或新学习已获收益。
+
+[S0]: https://github.com/CartmanFatass/My-paper-code/blob/a37eed21e69adf3c6e159a7c255fd8603c1a95db/docs/research/candidates/load_critical_member_generalization/NOTES.md#pro-question-2026-09-22-five-cell-identifiability-and-next-learning
+[S1]: https://github.com/CartmanFatass/My-paper-code/blob/a37eed21e69adf3c6e159a7c255fd8603c1a95db/docs/project/OPERATING_CONSTITUTION.md
+[S2]: https://github.com/CartmanFatass/My-paper-code/blob/a37eed21e69adf3c6e159a7c255fd8603c1a95db/docs/research/RESEARCH.md
+[S3]: https://github.com/CartmanFatass/My-paper-code/blob/a37eed21e69adf3c6e159a7c255fd8603c1a95db/.agents/skills/hmasd-scientific-tools/SKILL.md
+[S4]: https://github.com/CartmanFatass/My-paper-code/blob/a37eed21e69adf3c6e159a7c255fd8603c1a95db/.agents/skills/hmasd-research-engineering/SKILL.md
+[S5]: https://github.com/CartmanFatass/My-paper-code/blob/a37eed21e69adf3c6e159a7c255fd8603c1a95db/docs/research/designs/LITERATURE_RESEARCH_PLAN_20260922.md#plan-6
+[S6]: https://github.com/CartmanFatass/My-paper-code/blob/a37eed21e69adf3c6e159a7c255fd8603c1a95db/docs/research/candidates/agent_count_generalization/NOTES.md
+[S7]: https://github.com/CartmanFatass/My-paper-code/blob/a37eed21e69adf3c6e159a7c255fd8603c1a95db/runs/agent_count_generalization/s1_action_law_b02_probe/summary.json
+[S8]: https://github.com/CartmanFatass/My-paper-code/blob/a37eed21e69adf3c6e159a7c255fd8603c1a95db/envs/pettingzoo/scenario1.py
+[S9]: https://github.com/CartmanFatass/My-paper-code/blob/a37eed21e69adf3c6e159a7c255fd8603c1a95db/envs/pettingzoo/uav_env.py
+[S10]: https://github.com/CartmanFatass/My-paper-code/blob/dd25f34a09ba8d0f8a62c5aacb36d9aaa56dcf0c/experiments/candidates/agent_count_generalization/adapter.py
+[S11]: https://github.com/CartmanFatass/My-paper-code/blob/dd25f34a09ba8d0f8a62c5aacb36d9aaa56dcf0c/experiments/candidates/agent_count_generalization/configuration.py
+[S12]: https://github.com/CartmanFatass/My-paper-code/blob/dd25f34a09ba8d0f8a62c5aacb36d9aaa56dcf0c/experiments/candidates/agent_count_generalization/models.py
+[S13]: https://github.com/CartmanFatass/My-paper-code/blob/dd25f34a09ba8d0f8a62c5aacb36d9aaa56dcf0c/experiments/candidates/agent_count_generalization/runner.py
+[S14]: https://github.com/CartmanFatass/My-paper-code/blob/dd25f34a09ba8d0f8a62c5aacb36d9aaa56dcf0c/experiments/candidates/agent_count_generalization/action_law_b02/probe.py
+
+MATERIAL_DISSENT: no — 以题内已采纳的唯一资格、相对符号和高度抵消修正为前提，我支持保留五格作为固定策略的服务转换研究；它不承担纯 N、在线容量适应或技能机制归因。后继五格测试用途须与完整 balanced-c 混合目标分开，B03 身份仍待真实发布；这些限制不推翻当前零 fit 设计，也不构成选择任何新增 fits。
