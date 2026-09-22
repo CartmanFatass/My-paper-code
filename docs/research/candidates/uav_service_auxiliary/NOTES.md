@@ -878,3 +878,29 @@ remote canonical reference refreshed: owner pause remains lifted for this lead, 
 and Claude FSD paused. Preparation reports 14,503,952 KiB available RAM and 7948 MiB free GPU;
 native admission rechecks actual-node resources and policy before release. The completed
 Pro advice still applies to this unchanged pair; no new question or automatic extra fit.
+
+### B02 joint accepted — 2026-09-22 04:07 PDT
+
+Supervisor `uav-service-b02-joint-910137-a01` completed native admission at
+`2026-09-22T11:07:32.438157Z` on `wsl_4070`, without a new refusal or retry. The retained
+[manifest](../../../../runs/uav_service_auxiliary/b02_joint_910137_a01/launch-manifest.json)
+binds the original source `30401722b14c208bf5330ab66e967c94b3df8a36`, seed 910137 and exact
+staged facts. Its operation reference is
+`/home/wu/projects/HMASD/.git/hmasd-admission/6f9d9d249716c8bfc644954d3b3990c8b064d62646b209b451bbb2f7a0025e65.json`;
+the snapshot is `/home/wu/projects/HMASD/.git/hmasd-launch-sources/fda709fc31804eea99a8c60ba7f19cc7`.
+The `11:08:11.463672Z` status reports consistent, running supervisor/runner identities
+(PIDs 192886/192887, start ticks 43869112/43869115, boot
+`bb732fcb-1a33-4659-a786-331110ae41d3`) and no exit witness. The actual admission passed
+with 14,821,879,808 available physical bytes and current control head `2f7aac82e`.
+
+The runner has independently verified the exact common-fact digest
+`7d3120283c569b45290621f0c3a4934ad885e98c3859da004242c6f06ac6d359` and initialized-model
+fingerprint `dec0015986e35ff11d21bbf0d56558d1c0605f61597479576418ba2f070c6b3f` against detach.
+The two actual configs match apart from their inactive baseline file's snapshot prefix;
+both actual seed fields are 910137. Joint loads the two factual episodes, with no extra
+fact collection. Summary is still INCOMPLETE with no failure; no pair effect is read yet.
+
+All **4 planned fits are now accepted: 3 complete and 1 running**, with no unstarted fit
+or further batch selected. Observe this same joint operation through completion or the next
+bounded checkpoint; the completed detach event is consumed. Then verify the full joint
+outputs and read the fixed pair under the already recorded Pro-informed stopping rule.
