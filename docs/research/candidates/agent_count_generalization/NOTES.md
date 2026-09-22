@@ -1316,3 +1316,238 @@ prospective cost and actual claim/plan, and a Pro pass covering that plan before
 B01 remains development exposure. It is a candidate next use of the retained result, not an
 accepted seventh fit or an automatic queue. There is no reason from these data to replace
 this first question with a new architecture merely to keep a process active.
+
+## 2026-09-22 — Owner continuation and action-law premise correction
+
+The owner explicitly resumed this DM's scientific work: "你可以继续研究了 作为DM不该简单的停下
+impress me！" This supersedes the idle next-step decision above, not the six frozen B01 fits
+or their readings. The current same DM continues independently. No seventh fit has started.
+The old Pro question is complete and will not be resent; the material new premise below
+warrants one focused follow-up under constitution section 5.
+
+### Evidence discovered while choosing the next experiment
+
+The completed-study differences remain +.021721/+.044000/+.045222 at N4/6/8, with unseen
+mean difference +.033472 and unseen-minus-N6 difference -.010528. They support an implemented
+package benefit at two untrained counts but do not establish a benefit specific to count
+transfer. Both packages have late declines and increasing continuous-action entropy. A
+count-feature clamp was considered because the explicit count inputs are constant during
+N6-only training; it would test those coordinates, not all count-dependent computation.
+The following action-law finding takes priority over that proposed ablation or unchanged
+confirmation.
+
+**Correction to the 2026-09-21 native-contract entry:** its statement that actions "are
+clipped normalized velocities" is false for the actual B01 path. At scientific input
+`5a250d97e3ea12d33067e9c00c250cefa12b5e25`:
+
+- `envs/pettingzoo/uav_env.py` declares `Box(low=-1, high=1, shape=(3,))`, but `step`
+  uses `velocity = actions[agent] * self.max_speed` directly. It clips the resulting xyz
+  positions to the area/height bounds, not the action or velocity.
+- `experiments/candidates/agent_count_generalization/adapter.py:CountAdapter.step`,
+  `envs/pettingzoo/env_adapter.py:ParallelToArrayAdapter.step/_array_to_dict`, and
+  `envs/pettingzoo/scenario1.py:UAVBaseStationEnv.step` forward those values without clipping.
+  `hmasd/agent.py:HMASDAgent.step` converts/reshapes the actor samples without clipping.
+- The native node was checked read-only in the frozen B01 checkout with a **one-transition
+  technical contract probe**, 0 fits. With seed 941001, N6, all UAVs placed in the interior
+  at `[400+20*i,500,100]`, all actions zero except the first UAV's x action of 2, its
+  action-space membership test was false. At `max_speed=30`, `time_step=1`, its position
+  changed from `[400,500,100]` to `[460,500,100]`. Other coordinates/UAVs did not move.
+  The observed 60 m displacement exceeds the 30 m single-coordinate bound that would
+  follow from the declared action box. This is not a return measurement or evidence about
+  the realized B01 action frequencies. Per-coordinate clipping would still allow a
+  diagonal velocity norm up to `sqrt(3)*max_speed`; no Euclidean speed bound is inferred.
+
+Both configurations instantiate `Config()` without the S7 preset. They use the default
+raw diagonal Gaussian (`hmasd/r_mappo_utils.py:DiagGaussian/ACTLayer`), unbounded learned
+log standard deviation, and the same entropy coefficient `lambda_l=.05`, without entropy
+annealing/targets. The pre-action-map Normal entropy is what is recorded. Training samples
+from the Normal; the fixed evaluator uses deterministic means. The existing tanh-Gaussian
+implementation is not selected by B01. Replacing the distribution, its entropy, initialization
+or optimizer would be a new learning intervention, not a silent correction to past results.
+
+Read-only checkpoint inspection verified all 24 checkpoint file digests against the six
+runner summaries and loaded weights on CPU with `weights_only=True`. The actor parameter
+`skill_discoverer/actor.act.action_out.logstd._bias` gives the following final standard
+deviations; initial values were `[1,1,1]` for every fit, and each coordinate increased at
+rollouts 15, 30 and 45. Entropy below is the analytic raw three-coordinate Normal entropy.
+
+| Arm / seed | Final std x | Final std y | Final std z | Raw entropy |
+| --- | ---: | ---: | ---: | ---: |
+| H6 914201 | 2.676420 | 2.775910 | 2.776646 | 7.283518 |
+| H6 914307 | 2.652925 | 2.735441 | 2.902561 | 7.304365 |
+| H6 914413 | 2.670145 | 2.664772 | 2.707614 | 7.215135 |
+| SET 915201 | 3.946523 | 4.149686 | 3.975859 | 8.432924 |
+| SET 915307 | 3.890878 | 3.974514 | 3.685133 | 8.299660 |
+| SET 915413 | 4.656398 | 4.420943 | 4.213913 | 8.719803 |
+
+For one raw Normal coordinate of standard deviation sigma, the minimum over its mean of
+`P(abs(a)>1)` is `1-erf(1/(sqrt(2)*sigma))`. Thus the final checkpoint distributions have
+per-coordinate lower bounds of .706216-.730453 for H6 and .786114-.829956 for SET; the
+initial lower bound is .317311. These are distributional calculations, **not measured
+trajectory violation rates**, position-clipping rates, or evidence that deterministic test
+actions violate the box. Saved weights/normalizers remain unchanged; no optimizer ran.
+
+### Revised working explanation and selected decision
+
+The [current shared background at 3362e0c9b](https://github.com/CartmanFatass/My-paper-code/blob/3362e0c9b5d5d49472ad14a3747059e47fa66a31/docs/research/RESEARCH.md)
+topics 3 and 4 require the actual actor/execution information path and distinguish package
+learning from a representation or skill explanation. They change this next investment:
+before seeking stronger replication of the package ranking, establish which action law
+the useful claim refers to. Topic 3's own B01 statement needs this implementation-scope
+qualification. Other directions' studies are not reinterpreted from this local finding.
+
+**Preserved:** six complete B01 outcomes and their measured native reward/component/cost
+differences under the actual raw-action execution law. **Weakened:** the earlier assertion
+that no interface premise needs correction, and any inference that B01 already measures
+the declared bounded-action task. **New conjecture:** unequal learned action dispersion
+can produce different over-range motion and boundary visitation during training, changing
+the finite learning gap. This could contribute to SET's lower final deterministic service.
+It is not established by the standard deviations; final deterministic evaluation does not
+sample the larger SET noise. Intrinsic objectives, skill/AR structure, representation,
+optimization and extra computation remain alternatives.
+
+A bounded independent ResearchCritic read the prior Pro answer and all six summaries.
+Its material dissent agrees on this premise correction and distinguishes deployment-time
+mean-action dependence from training-time exposure. Its advice is not another experiment.
+The DM adopts the priority change, preserves the actual-as-implemented B01 evidence, and
+defers unchanged confirmation and the count-coordinate probe while consulting Pro about
+the smallest discriminating action-law study. The leading immediate proposal is a frozen
+raw-versus-clipped execution comparison of all six final policies (0 fits). A null result
+would rule out only that direct execution pathway on its panel, not the training pathway.
+No performance outcome from this proposed comparison has been seen or run.
+
+## Pro question 2026-09-22 action-law-and-next-count-study
+
+Conversation: reuse the completed Jev adviser conversation; its address remains only in
+local transport state. The previous question key was
+`hmasd:210c1c75ffb1a46c53504a500c75f96b66db921fe9b241445558e0ca38418880`.
+This is a new scientific follow-up, not a resend or recovery of that completed request.
+
+Question: With B01's repeated H6 package gains now known to come from an implementation
+that executes unbounded raw Gaussian actions despite a declared `[-1,1]^3` action space,
+what is the smallest worthwhile next study that distinguishes a useful count-generalizing
+package from an action-law/finite-optimization explanation, and what bounded-action claim
+could that study legitimately support? Critique or revise the proposed zero-fit probe below
+and choose whether any subsequent paid training comparison is scientifically worth doing.
+Do not default to more seeds, a new architecture, or closing the direction merely because
+the earlier contract description was wrong.
+
+Standing: The preceding continuation/correction entry and the complete B01 comparison are
+the current interpretation. Your prior complete Answer covered the original six-fit recipe,
+ordinary matched-information SET comparator and retain/revise/stop reading, but not this
+action-law observation or a new confirmation plan. The owner has expressly told this DM
+to continue research. General research pause is lifted; the separate FSD Claude pause and
+G33 freeze do not authorize touching those objects. Pro advises; this DM makes the scientific
+choice and continues authorized work without a new owner approval layer.
+
+### Proposed immediate discriminator and alternatives
+
+Freeze each of the six B01 rollout-45 checkpoints. Compare two execution maps, raw `a`
+and coordinatewise `clip(a,-1,1)`, under the same deterministic policy and otherwise exact
+native S1 dynamics. Training history/weights/normalizers/actual N/information/reward units
+stay fixed. At each N4/6/8 use 16 common fresh world seeds `982000 + 100*N + i`, i=0..15,
+500 steps, reset identically for both maps. All arms and training instances share each
+within-N world address. Do not choose a better checkpoint, world subset or clipping limit.
+The unit remains one old trained policy, n=3 per arm, not 16 or 48 independent training fits.
+
+Read `J_clip-J_raw` per policy/N, the raw and clipped H6-minus-SET gaps, their change, and
+all native coverage/quality/height-penalty components. Log pre-map action violations and
+magnitudes, attempted coordinate displacement and realized displacement/position-boundary
+events; changing trajectories mean later actions are not a same-state counterfactual.
+Verify exact checkpoint digests, no parameter/normalizer motion and no optimizer calls.
+A technical in-range action identity check is separate from scientific outcomes.
+
+If the advantage uses deterministic over-range execution, the map intervention should
+change the relevant native returns or ranking. If it leaves them unchanged, that weakens
+only the direct deployment pathway. It cannot establish that raw training exposure was
+harmless: the learning distributions were different and remain so in the frozen policies.
+We have not measured the six policies' deterministic violation rates or the B01 realized
+training action histories; do not infer either from sigma.
+
+If a paid discriminator is warranted, one candidate is package H6/SET crossed with raw
+versus one prospectively fixed bounded training execution contract, all four cells tested
+under a common bounded deployment law. A minimal exploratory block could use H6 seed
+942201 in both training-law cells and SET seed 943201 in both cells, each 360k training
+team steps, N6, k10, other B01 ingredients fixed. The interaction of interest is
+`(J_SET,bounded_train - J_SET,raw_train) - (J_H6,bounded_train - J_H6,raw_train)` at each N.
+The exploration-exposure explanation predicts positive interaction and improved native
+SET service, not merely lower action variance or fewer boundary hits. One matched block
+per package cannot establish a population interaction; reusing a seed does not preserve
+identical state exposure after trajectories diverge. These are proposed seeds, not accepted
+fits. Is this investment more informative than simply developing a competent bounded
+common recipe, or should neither be bought yet?
+
+Clipping only execution while storing/log-probability-scoring the original Gaussian sample
+keeps a fixed action map but retains its unbounded latent entropy incentive. Conversely,
+switching to tanh-Gaussian, its transformed entropy, logstd initialization/clamp and possibly
+entropy coefficient changes several learning ingredients together. Please distinguish a
+valid executable bounded contract from a claim that an isolated mechanism was identified;
+recommend one concrete choice if the training comparison is worthwhile. Do not tune entropy
+or action bounds separately after seeing each package's result. The lower-priority count
+coordinate clamp and unchanged fresh-seed confirmation remain alternatives, not queued work.
+
+Prospective cost: The frozen two-map panel costs **0 fits, 288,000 evaluation team steps,
+576 full episodes**, plus bounded technical identity checks, checkpoint loading, evaluator
+implementation/review and actual node wall time (not yet measured). The optional single-block
+training-law factorial would cost **4 fits, 1,440,000 training team steps**, plus 384,000
+evaluation steps if retaining B01's four 16-world panels per N and one common evaluation law;
+paired training reuse is not a discount in fits. A three-block factorial would cost 12 fits
+and is not selected by default. Any revised training plan needs its final prospective seeds,
+world addresses and reading before execution. B01 itself already cost 6 fits and 471.556
+scientific-command minutes on shared wsl_4070; this does not predict future wall time exactly.
+
+### Context and source precedence
+
+All paths here inherit the full `source_sha` supplied in the send message unless a different
+full revision is explicitly stated. Read only the relevant named sections, not historical
+links recursively. Current governance/methods do not retroactively change frozen B01 inputs.
+
+- Governance: `docs/project/OPERATING_CONSTITUTION.md`, sections 1-5, 7-8. The current owner
+  continuation instruction is quoted above. This is a research-premise and next-investment
+  consultation, not Portfolio selection or a request for experiment/fit permission.
+- Methods: `.agents/skills/hmasd-scientific-tools/SKILL.md`, "Update the working explanation",
+  "Comparators and MARL information", "Statistics", "Cost and exposure", and "Pro";
+  `.agents/skills/hmasd-research-engineering/SKILL.md`, "Checks and review" and "Execution
+  and admission", for scoped execution/likelihood/frozen-evaluation correctness.
+- Shared background: `docs/research/RESEARCH.md` topics 3/4 and the agent-count row at
+  **3362e0c9b5d5d49472ad14a3747059e47fa66a31**. The author branch's older index is not current.
+- Standing: this notebook's "B01 complete comparison and bounded retain decision", the
+  preceding action-law correction, and your full "s1-count-transfer-package" Answer.
+  The newest correction supersedes older clipped-action and no-interface-failure prose.
+- Direct evidence: the six directories under `runs/agent_count_generalization/` named
+  `s1_count_b01_h6_s914201`, `s1_count_b01_h6_s914307`, `s1_count_b01_h6_s914413`,
+  `s1_count_b01_set_s915201`, `s1_count_b01_set_s915307`, `s1_count_b01_set_s915413`:
+  their `summary.json` contains all panels/counts/checkpoint digests; their
+  `panel_45_n4.json`, `panel_45_n6.json`, `panel_45_n8.json` hold final per-world native
+  outcomes, and `training.jsonl` holds entropy/learning traces. Checkpoints are
+  retained at the manifest-bound node paths, not assumed accessible through GitHub; the
+  read-only parameter table above is DM evidence from their verified digests, not a claim
+  that you independently read binary artifacts.
+- Frozen executable inputs, all at **5a250d97e3ea12d33067e9c00c250cefa12b5e25**:
+  `experiments/candidates/agent_count_generalization/adapter.py` (actual-N state/reward and
+  step forwarding), `configuration.py` (`make_config`), `models.py` (`StateSetEncoder`,
+  `SetActorBase`, build/sync), `runner.py` (`evaluate_panel` and training step/storage);
+  `envs/pettingzoo/uav_env.py` (action spaces and `step`), `env_adapter.py`
+  (`ParallelToArrayAdapter.step/_array_to_dict`), `scenario1.py` (`step`);
+  `hmasd/r_mappo_utils.py` (`DiagGaussian`, `TanhDiagGaussian`, `ACTLayer`),
+  `hmasd/agent.py` (`HMASDAgent.step` action forwarding), and `configs/config_1.py`
+  (default coefficient and the unused S7 preset). These establish the disputed law;
+  their old comments do not override executable behavior.
+
+Constraints: No training, environment runs, other task contact or edits outside this empty
+`### Answer` subsection. Write only here on branch `codex/agent-count-generalization`.
+Read the question at the pinned source; fetch the latest target file before editing and
+use its actual blob SHA. Preserve all other bytes and stop on overlapping edits. Report the
+actual answer commit on successful write; on write failure return the complete answer in
+chat, not a status/commit/link alone. Private Jev account/conversation facts must not enter
+the repository or answer. Do not change the completed evidence or author a CLAIM.
+
+Return: State what the new evidence strengthens, weakens and leaves unresolved, the strongest
+alternative to the current action-law explanation, whether to run/revise/skip the proposed
+zero-fit panel, and one worthwhile next learning investment only if justified. Give concrete
+intermediate and native predictions, scope limits and the smallest useful cost. Criticize the
+action-map/log-probability/entropy semantics and the proposed estimand rather than assuming
+the two maps isolate all training effects. Cite sources actually used and state material
+unread gaps. End with `MATERIAL_DISSENT: yes/no` and the substance if yes.
+
+### Answer
