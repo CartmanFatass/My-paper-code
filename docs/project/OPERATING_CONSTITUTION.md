@@ -216,6 +216,21 @@ Record any owner pause there; a state label does not cancel a pause. It replaces
 APPROVED_SET, tracking, dossiers and lifecycle-decision paperwork. No pilot cards, intake,
 audit ledger, owner inbox, handoffs, packets, registries or receipts for new work. Historical files stay unmaintained.
 
+Owner amendment 2026-09-21 (research-index retirement): maintain RESEARCH as a current view,
+not an append-only project log. Replace superseded standing and retain the current plan,
+useful conclusions and direct evidence links. When a project review completes or a plan or
+coordination account is superseded, retire the obsolete material in the same publication to
+`docs/research/archive/<YYYY-MM-DD>/RESEARCH.md`, dated by retirement; use a new suffix for
+another retirement that day, never overwrite a snapshot. These are unmaintained historical
+copies of the index, not additional standing records. Preserve full retired questions, answers,
+decisions and source revision; keep existing citations usable. Date alone does not expire a
+still-current decision. Keep pause, direction state, lead, frozen bindings and unresolved work
+recoverable in the current index. Do not move an in-flight Pro answer target or retire unresolved
+accepted operations; reconcile them first. Archiving text does not archive a direction or resume
+research. Direction NOTES, claims, runs and shared scientific understanding keep their existing
+roles; this amendment does not retire or rewrite them. Archives are read on demand, not a required
+preload. Keep only useful history links in RESEARCH, not an accumulating archive ledger.
+
 ## 5. Pro is an adviser
 
 The DM proactively brings Pro into consequential scientific decisions, without waiting for

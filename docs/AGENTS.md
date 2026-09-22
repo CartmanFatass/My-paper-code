@@ -6,6 +6,11 @@ research/candidates/<direction>/NOTES.md, CLAIM_<slug>.md when confirming, and r
 runs/<direction>/<tag>/ for recoverable run artifacts. Do not create pilot cards, intakes,
 DIRECTION updates, dossiers or handoffs merely to satisfy an older record convention.
 
+Keep RESEARCH current under constitution section 4: replace obsolete standing and retire
+completed/superseded project review material by date under research/archive/. Preserve source
+revisions and citations; historical snapshots are read on demand. Direction NOTES remain the
+append-only notebooks. Index retirement changes neither direction status nor research permission.
+
 For a frozen object named by RESEARCH.md, read its original card and directly required inputs
 at their recorded revisions; that card stands in for a new claim note. Preserve its output
 contract and interpretation. Historical DIRECTION, TASK/HANDOFF, cards, intakes and Portfolio
