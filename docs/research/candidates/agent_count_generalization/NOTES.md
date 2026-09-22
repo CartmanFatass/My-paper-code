@@ -1078,3 +1078,241 @@ All 6 planned fits have now started: 5 complete and read, 1 running, 0 technical
 observer for this exact SET handle with 1500-second checkpoints and terminal/error wakeups.
 After full collection and reading, interpret the complete three-per-arm comparison using the
 fixed final endpoint, original decision scope and existing Pro advice; no extra fit is queued.
+
+
+### 2026-09-22 sixth completed fit — SET seed 915413
+
+The original runner 192056 and supervisor 192055 have exited with matching recorded process
+identities and a valid zero exit witness. DM collected all 25 native files, compared every
+local SHA-256 to the finished remote file, and read the complete summary/configuration,
+all twelve evaluation panels, all 45 training rows and the 117-entry boundary log. The six
+previously unread rollout-30/45 panels were read world by world. Panel files equal summary
+records; all four checkpoint sizes and digests match. Configuration/spec/source are identical
+to prior SET fits except the declared seed. All counts, finite losses, optimizer increments,
+encoder movements, actual-N reward identities and evaluation world addresses pass. Evaluation
+weights/normalizers are frozen with zero optimizer calls; stderr is empty.
+
+Accept the sixth complete exploratory fit at input `5a250d97e3ea12d33067e9c00c250cefa12b5e25`:
+360,000 training/stored team steps, 720 training episodes, 45 updates, 96,000 evaluation team
+steps and 192 evaluation episodes. Actor and critic each performed 101,250 optimizer steps;
+coordinator and both discriminators performed zero. All used SET actor/critic encoders moved;
+the allocated but unused coordinator stayed unchanged, as intended. Initial/final parameter
+digests differ. The four weight files remain in both native and local run directories, bound
+by the published summary digests; they are evaluation artifacts, not a promised training-resume
+interface. Text, panels, configuration, launch and exit evidence are published with this reading.
+
+Final preselected rollout-45 means for this one trained policy:
+
+| Test N | Native J | Coverage | Quality | Height penalty |
+| --- | ---: | ---: | ---: | ---: |
+| 4 | 0.539112 | 0.683118 | 0.248586 | 0.013646 |
+| 6 | 0.491298 | 0.631310 | 0.196779 | 0.009653 |
+| 8 | 0.417544 | 0.534670 | 0.177633 | 0.010015 |
+
+The within-fit unseen mean is 0.478328. This is the highest final SET outcome at N4/N8;
+N6 is close to seed 915201 and above 915307. It reduces, but does not reverse, the incomplete
+five-fit arm contrast. Its full curve is retained:
+
+| After rollout | SET 915413 N4 J | N6 J | N8 J |
+| --- | ---: | ---: | ---: |
+| 0 | 0.364117 | 0.294807 | 0.245811 |
+| 15 | 0.439010 | 0.463339 | 0.432109 |
+| 30 | 0.490114 | 0.485373 | 0.417829 |
+| 45 | 0.539112 | 0.491298 | 0.417544 |
+
+N4 recovers from its rollout-30 height penalty of 0.049570 to 0.013646 at the final panel;
+N8 ends below its rollout-15 panel. Mean native stochastic training return decreases from
+0.352128 over rollouts 26-30 to 0.333374 over 41-45; final action entropy is 8.711776.
+These facts do not establish a cause, convergence or monotonic learning, and the fresh panel
+worlds prevent paired-world claims about temporal changes.
+
+Measured command wall is 3,216.935 s (53.616 min), run-fit wall 3,215.791 s, user/system CPU
+13,060.038/28.872 s, peak RSS 1,191,628 KiB (1.136 GiB, Linux scientific process RUSAGE_SELF).
+Peak scratch remains unmeasured. All six planned fits are now complete and read, with zero
+technical failures, missing cells, replacements, live experiments or additional queued fits.
+
+## 2026-09-22 — B01 complete comparison and bounded retain decision
+
+This completes the owner's first native comparison and keep/revise/stop deliverable. It is
+one predeclared exploratory study, three independent training instances per arm, each trained
+only at N=6 for 360k team steps with fixed k=10 and a fixed within-episode roster. The primary
+comparison uses the final rollout-45 policies at N=4/6/8 with no evaluation updates. Native
+J is actual test N times scalar return / 500, checked against .7 coverage + .3 quality minus
+height penalty. The learning reward remains the inherited R/6 at training N=6. There was no
+horizon extension, best-checkpoint selection, architecture scan, discarded fit or added
+specialist/mixed-N exposure. The common recurrent-entry correctness repair is shared by both
+arms and is not credited as an H6 gain. All source/selection exposure remains in this notebook.
+
+The first five full readings remain above. Direct runner-written summaries for the six fits:
+
+- [H6 914201](../../../../runs/agent_count_generalization/s1_count_b01_h6_s914201/summary.json)
+- [H6 914307](../../../../runs/agent_count_generalization/s1_count_b01_h6_s914307/summary.json)
+- [H6 914413](../../../../runs/agent_count_generalization/s1_count_b01_h6_s914413/summary.json)
+- [SET 915201](../../../../runs/agent_count_generalization/s1_count_b01_set_s915201/summary.json)
+- [SET 915307](../../../../runs/agent_count_generalization/s1_count_b01_set_s915307/summary.json)
+- [SET 915413](../../../../runs/agent_count_generalization/s1_count_b01_set_s915413/summary.json)
+
+The complete final service table has one trained policy per arm/seed, evaluated in the same
+16 worlds within each test N. Every cell is technically complete; units are native reward
+components, not scalar R/N. Height penalty already contains its native .1 multiplier.
+
+| Arm | Training seed | Test N | J | Coverage | Quality | Height penalty |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| H6 | 914201 | 4 | 0.557913 | 0.692883 | 0.256445 | 0.004038 |
+| H6 | 914201 | 6 | 0.543241 | 0.696620 | 0.198120 | 0.003829 |
+| H6 | 914201 | 8 | 0.465897 | 0.591728 | 0.189151 | 0.005058 |
+| H6 | 914307 | 4 | 0.551539 | 0.689715 | 0.255504 | 0.007913 |
+| H6 | 914307 | 6 | 0.505424 | 0.651910 | 0.195274 | 0.009496 |
+| H6 | 914307 | 8 | 0.427711 | 0.549765 | 0.181498 | 0.011574 |
+| H6 | 914413 | 4 | 0.561704 | 0.702830 | 0.249688 | 0.005184 |
+| H6 | 914413 | 6 | 0.517460 | 0.661470 | 0.197409 | 0.004791 |
+| H6 | 914413 | 8 | 0.441317 | 0.559620 | 0.183393 | 0.005435 |
+| SET | 915201 | 4 | 0.536673 | 0.670520 | 0.246219 | 0.006557 |
+| SET | 915201 | 6 | 0.492464 | 0.636990 | 0.192237 | 0.011100 |
+| SET | 915201 | 8 | 0.403440 | 0.527232 | 0.162010 | 0.014225 |
+| SET | 915307 | 4 | 0.530210 | 0.674413 | 0.240979 | 0.014173 |
+| SET | 915307 | 6 | 0.450364 | 0.633198 | 0.169479 | 0.043718 |
+| SET | 915307 | 8 | 0.378274 | 0.508632 | 0.163229 | 0.026738 |
+| SET | 915413 | 4 | 0.539112 | 0.683118 | 0.248586 | 0.013646 |
+| SET | 915413 | 6 | 0.491298 | 0.631310 | 0.196779 | 0.009653 |
+| SET | 915413 | 8 | 0.417544 | 0.534670 | 0.177633 | 0.010015 |
+
+The within-fit unseen means `(J4+J8)/2`, before any cross-fit aggregation, are H6
+0.511905/0.489625/0.501510 and SET 0.470057/0.454242/0.478328 in the seed order above.
+Training seeds are independent across arms, not paired by their labels. There are three
+training units per arm, not 16, 48, 192, or nine cross-arm seed combinations.
+
+| Endpoint | H6 mean | H6 sample SD | SET mean | SET sample SD | H6 minus SET | Estimated fit-mean SE |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| N4 | 0.557052 | 0.005137 | 0.535331 | 0.004600 | 0.021721 | 0.003981 |
+| N6 | 0.522042 | 0.019320 | 0.478042 | 0.023977 | 0.044000 | 0.017778 |
+| N8 | 0.444975 | 0.019354 | 0.399753 | 0.019893 | 0.045222 | 0.016024 |
+| Unseen mean | 0.501014 | 0.011148 | 0.467542 | 0.012238 | 0.033472 | 0.009558 |
+
+SD describes the three observed training outcomes, not estimator uncertainty. The SE is
+`sqrt(s_H6^2/3 + s_SET^2/3)`, conditional on the fixed world panels, assuming independent
+training instances and finite between-training variance. With n=3 its variance estimate is
+fragile; it does not capture world-population uncertainty, tails, or selection of a future
+claim. No confidence level, significance, equivalence or confirmed population ranking is
+asserted. The contrast for unseen counts minus the N6 contrast is -0.010528; the package
+advantage is not shown to be specific to unseen counts or larger there than at training N.
+
+Every observed H6 final policy mean exceeds every observed SET final policy mean at each N.
+The lowest H6 minus highest SET is +0.012427/+0.012959/+0.010167 at N4/N6/N8, so deleting a
+single training instance cannot create this ordering. For each fixed world, averaging the
+three policies within each arm gives positive contrasts in 15/16, 16/16 and 15/16 worlds.
+The adverse contrasts remain: N4 world 975406 is -0.013236 and N8 world 975811 is -0.000885.
+Deleting any one world leaves arm-mean differences within [0.018903,0.024051],
+[0.041437,0.046710] and [0.043421,0.048296]. Even deleting the three largest positive world
+contrasts leaves +0.015070/+0.037596/+0.039378. These are explicitly post-result descriptive
+concentration checks on the six fixed policies, not additional training replication, a new
+endpoint, an uncertainty interval, or evidence of universal per-world dominance.
+
+The aggregate component contrasts explain the native accounting:
+
+| Test N | Coverage difference | Quality difference | Height-penalty difference |
+| --- | ---: | ---: | ---: |
+| 4 | +0.019126 | +0.008618 | -0.005747 |
+| 6 | +0.036168 | +0.010769 | -0.015452 |
+| 8 | +0.043526 | +0.017057 | -0.009637 |
+
+Thus the unseen differences include about 1.91 and 4.35 percentage points of coverage,
+alongside better quality and lower height penalty. They are not merely reward-unit artifacts
+or proxy improvements. This decomposition is arithmetic, not identification of why training
+produced the policies. N changes capacity and joint physical conditions; raw J8-J6 is not a
+transfer treatment effect and this study has no specialist transfer-gap reference.
+
+All learned-panel arm means favor H6, while initialization favors SET. The differences are:
+
+| After rollout | H6 minus SET N4 J | N6 J | N8 J |
+| --- | ---: | ---: | ---: |
+| 0 | -0.010296 | -0.032978 | -0.024830 |
+| 15 | +0.033738 | +0.029030 | +0.031031 |
+| 30 | +0.038421 | +0.026021 | +0.022101 |
+| 45 | +0.021721 | +0.044000 | +0.045222 |
+
+This does not imply every fit or every intermediate comparison favors H6: the first H6/SET
+rollout-30 comparison is negative at all N, H6 914413 falls at every N from rollout 30 to 45,
+and both arms contain late declines. SET's N6 arm mean falls from 0.503969 at rollout 15 to
+0.478042 at the fixed end; H6's falls from 0.532999 to 0.522042. Both algorithms actually
+update their used modules and produce learned service, but the curves and entropy growth
+leave finite optimization and endpoint sensitivity unresolved. They do not diagnose a
+particular SET defect or justify changing the comparator after seeing the result.
+
+### Complete cost and exposure
+
+| Arm | Seed | Command wall, min | User CPU, s | System CPU, s | Peak RSS, GiB |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| H6 | 914201 | 98.768 | 22900.062 | 226.543 | 2.439 |
+| H6 | 914307 | 94.678 | 22535.186 | 227.447 | 2.496 |
+| H6 | 914413 | 69.678 | 16992.157 | 119.802 | 2.540 |
+| SET | 915201 | 89.041 | 20825.875 | 51.912 | 1.134 |
+| SET | 915307 | 65.775 | 15953.375 | 40.960 | 1.138 |
+| SET | 915413 | 53.616 | 13060.038 | 28.872 | 1.136 |
+
+Six started/completed fits cost 2,160,000 training team steps (4,320 episodes), 270 rollout
+updates, and 576,000 evaluation team steps (1,152 episodes), including initialization panels.
+The scientific-command wall sum is 471.556 min: H6 263.124 and SET 208.432 min. The interval
+from the first admission at 2026-09-22 03:25:25.684 UTC to the final exit at 11:56:37.432 UTC
+is 511.196 min; this includes between-fit collection/publication/admission gaps and launcher
+startup, but is not the whole project duration. Design, Pro, implementation, reviews and
+preparation before first admission, and final publication/readback are outside these totals
+and unmeasured. Peak scratch is unmeasured. The fits ran serially within this direction on
+shared `wsl_4070`, CPU FP32, four Torch threads and one each for OMP/MKL/OpenBLAS/NumExpr.
+CPU accounting is scientific-process RUSAGE_SELF; CPU seconds are not added to wall time.
+
+Actor/critic each take 101,250 optimizer steps per fit (607,500 each across six fits).
+Each H6 also takes 675 coordinator, 675 team-discriminator and 2,700 individual-discriminator
+steps; across three H6 fits those are 2,025/2,025/8,100. SET has zero such updates. H6 has
+5,699,904 registered parameters across its four modules. SET has 1,332,871 discoverer
+parameters and an allocated, unused 3,845,188-parameter coordinator; the latter does not
+supply trained control capacity. Equal team steps and nominal hidden width are not equal
+learning work, bandwidth or compute. Observed H6 wall sums are 1.2624 times SET and its
+peak RSS is 2.439-2.540 versus 1.134-1.138 GiB. Shared-node load and fixed run order prevent
+an intrinsic speed/efficiency claim. The evidence supports a service/cost tradeoff, not free
+performance or a compute-matched hierarchy effect.
+
+### Working update and DM decision
+
+The relevant [published background at 99f9757bc](https://github.com/CartmanFatass/My-paper-code/blob/99f9757bc22b0f91f55c5046af316508ca9b56b3/docs/research/RESEARCH.md)
+topics 3/4/6 remains applicable: match lawful source information and cadence, distinguish
+finite package learning from representation/component claims, and preserve training units,
+fixed endpoints and actual costs. The newer duration and local-encoding adverse comparisons
+reinforce these distinctions; their different interventions do not decide this fixed-k N
+question. The shared update belongs in topic 3: single-count training can yield a measured
+zero-update package advantage at two unseen counts, without establishing count invariance,
+a skill mechanism, or within-episode membership adaptation.
+
+**Strengthened:** the implemented shared-state/shared-head adapter supports actual native
+learning and strict frozen-weight N transfer, and this H6 package's final native benefit over
+the declared competent ordinary SET recurs across all three observed training instances and
+both unseen Ns without a relative N6 loss. Coverage, quality and penalty improvements, along
+with the concentration checks, make it worth retaining as a bounded exploratory result.
+**Weakened:** the possibility that the earlier final positive ordering was solely one favorable
+H6 instance, one poor SET instance, or a few evaluation worlds in this panel. The simple SET
+recipe did not absorb the full package benefit under the tested 360k conditions.
+**Unresolved:** training/world population precision, convergence and a stable effect magnitude;
+the roles of intrinsic objectives, skill coordination, ordered/AR representation, bandwidth
+and unequal compute; untuned alternatives within either family. The study does not measure
+adapter damage versus unadapted H6, a specialist gap, arbitrary N, mixed-N training, churn,
+cross-play, heterogeneous capabilities, other hosts or deployment performance.
+
+**DM decision: retain the bounded H6 package and its cost as an exploratory N-transfer result.**
+The complete prior Pro Answer was reread, including its retain/revise/stop branches. Adopt its
+retain branch: both unseen Ns have same-sign native gains with no observed N6 cost, and the
+pattern is not confined to one fit or a few worlds. Retain its limits on finite training,
+ordinary-comparator competence and package attribution. There is no new observed interface
+failure requiring a repair, and no basis for an automatic attention/AR baseline scan. The
+initial native-comparison assignment is complete; this is not confirmation or a broadening
+of the research claim, so that applicable consultation is reused without another Send.
+
+The direction remains `exploring` at a completed-study boundary, **idle with no live producer
+and no new batch selected**. No Root, other DM or owner approval is being awaited. A concrete
+useful future discrimination is recurrence of both unseen gains and N6 retention when the
+same fixed packages are trained on fresh independent seeds and evaluated on fresh final
+world addresses: persistent package benefit predicts recurrence, whereas dependence on this
+small training/world sample allows it to disappear or reverse. That would require its own
+prospective cost and actual claim/plan, and a Pro pass covering that plan before confirmation;
+B01 remains development exposure. It is a candidate next use of the retained result, not an
+accepted seventh fit or an automatic queue. There is no reason from these data to replace
+this first question with a new architecture merely to keep a process active.
