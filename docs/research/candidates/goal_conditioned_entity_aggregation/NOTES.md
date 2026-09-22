@@ -392,3 +392,160 @@ mean+max 会增加汇合后的宽度，故 P 不保证参数更少或墙时更�
 [TINY]: https://aclanthology.org/2022.emnlp-main.444.pdf
 [SET]: https://proceedings.mlr.press/v97/lee19d/lee19d.pdf
 [DEEP]: https://papers.neurips.cc/paper_files/paper/2017/file/f22e4747da1aa27e363d86d40ff442fe-Paper.pdf
+
+## 2026-09-22 — Complete Pro reading and B01 decision
+
+The single accepted question key is
+`hmasd:8985ae1115b3c7a0d2b112a9fef02f672715ba6970d109a5b16d5bdabf839a02`.
+Observation returned COMPLETE, but its 1,172-character chat text was a receipt/summary rather
+than the full answer. `deliver` independently found commit
+`cf6a4d4e68a7d13a5310a686c750dde22f18cb53`, parent
+`5a18df415698c3603a5781c7deda09bb578397e2`: exactly the assigned NOTE changed, its formerly
+empty Answer was filled, and the question and every other byte were unchanged. I read the
+complete 13,025-character delivered Answer, including source limits, and integrated that commit.
+There was no resend. The observer's own tab is closed by its completion cleanup; other tabs
+and the shared headless browser are outside this operation's ownership.
+
+**Adopt the substantive dissent on first investment.** The first comparison will be E/P/O
+package value, not E/L position attribution. At present the extra L fit and query-off do not
+change the more immediate choice between keeping O, using ordinary P, or retaining E for
+further work. Drop L, the unaccepted rollout-15/30 deployment panels and query-off before any
+run. This narrows the new question; it does not establish or answer an E-versus-L claim. The
+original proposal and its cost remain above as selection history, not the execution contract.
+All three selected fits will run in the fixed order O, P, E, independent of favorable scores
+in earlier arms; P is not a prerequisite learnability gate for E. Technical failure is treated
+separately and any repair/retry is a new recorded decision, never an automatic duplicate.
+
+**Adopt the semantic corrections.** A 104-to-256 MLP is not known dimension reduction; the
+hypothesis concerns finite optimization and organization. Current skill labels are not verified
+service goals, and same-numbered labels are not aligned across jointly trained arms. E/L's
+old formula also changed a direct z bypass, so parameter matching would not have isolated
+entity selection. With L absent, the new first comparison makes only package claims. E will
+use explicitly bare attention without a query residual or hidden MAB block. P will condition
+the entity transform before its nonlinearity rather than add a common z term that factors
+out of pooling. The ordinary alternative must be competent.
+
+The Deep Sets correction was checked in local primary text, physical p3, structured elements
+`/kids/44/list items/2` and `/kids/45`: the paper explicitly permits conditioning the element
+map on additional metadata. Thus ordinary conditional set encoding is already a direct
+literature precedent, not solely our analogy. This strengthens P as a necessary competitor,
+not a prediction of HMASD performance. Pro did not inspect local MyLib, deserialize external
+checkpoints or rerun tests/trajectories; I do not treat its reading as empirical replication.
+Its source limitations do not affect the bounded comparison choice. There is no need for
+another consultation on the same accepted advice before routine implementation/checks.
+
+Current published main was refreshed after the response. Its relevant shared-background
+premises are unchanged; concurrent count-direction execution and the sixth direction's
+registration are separate evidence/ownership, not additional replications for this comparison.
+Their current rows and processes remain owned by their DMs.
+
+## 2026-09-22 — B01 prospective comparison and L0
+
+### Fixed scientific inputs and reading
+
+Direction `goal_conditioned_entity_aggregation`; object `GCEA_B01`; selected arms O, P, E in
+that sequential order. New training block seed **922611** for each arm, training lane seeds
+922611..922626. Independent evaluation reset base **923611**, 32 lanes 923611..923642.
+These are new addresses, not reuse of old LOE 92101/93101 or count-direction assets.
+Matching seed labels/common evaluation worlds do not make independent paired training units.
+
+Each fit: S1, N=6, 50 static uniform users, free-space channel, horizon 500, fixed k=10,
+six team and individual skills, ordinary complete HMASD/D1280 configuration. All five learner
+groups update, with unchanged reward/intrinsic objectives, PPO 15 epochs and high-level batch
+1280. Train 45 rollouts x 16 lanes x 500 = **360,000 team transitions**, 720 episodes.
+The batch is **3 fits / 1,080,000 training transitions / 135 rollout-update stages**.
+Evaluate only the final rollout-45 policy in the 32 common held-out worlds, 16,000 steps per
+arm, **48,000 total evaluation transitions**, with zero evaluator optimizer updates.
+Save training returns and updates throughout, but do not call them a deterministic deployment
+learning curve. There is no checkpoint selection, query-off, fourth arm, width/rate sweep,
+extra seed, frozen-policy prerequisite or confirmation in this batch.
+
+Main endpoint is final per-world `J45 = 6 * scalar episode return / 500`. Report original
+coverage and connected users, quality and altitude penalty; altitude is not measured battery
+energy. Compare E-O, P-O and E-P together with actual complete cost and adverse components.
+E materially improving both O/P may justify retaining the E package, not a position/semantic
+mechanism claim. P improving O without useful E increment favors ordinary P. Neither improving
+O may end this recipe investment without proving equivalence or class-wide failure. Small or
+conflicting differences remain uncertain; no fabricated practical threshold or population
+significance is introduced. One training instance per arm is exploratory. A final confirmation,
+if worthwhile, needs a new fixed claim and 3-5 fresh independent seeds per selected arm.
+
+### Exact candidate specification
+
+All inputs are the same 104 floats: self xyz, 20 user slots (relative xy, SINR), 10 peer slots
+(relative xyz, SINR), time. Same current held z in acting and sequence reevaluation, no global
+state or extra masks. Current SINR rank is represented by one fixed scalar `slot/(slots-1)`
+per type, shared by E/P; it is not an identity. Every slot, including transformed all-zero
+padding, participates. No inferred validity masking or dynamic denominator is added.
+
+O is the current R_Actor/MLPBase with its original FiLM/GRU/action head. E/P retain that
+actor's existing FiLM/GRU/action-head parameters and behavior, replace only the base and the
+explicit `(observation, held_skill)` base call in both actor entry points, and assert output
+256 instead of relying on truncation. No input feature normalization is added: the standing
+SkillDiscoverer Args has `use_feature_normalization=False`, and config observation/state
+normalizers remain disabled as in the baseline.
+
+E and P each use an ego/time MLP `Linear(4,64), ReLU, Linear(64,64), ReLU`.
+E uses separate user/peer MLPs of the same two-layer form, inputs 4/5 including rank,
+output width 64. Query is ego embedding plus `Linear(6,64,bias=False)(one_hot(z))`.
+Each type has one `MultiheadAttention(64,4,dropout=0,batch_first=True)` read with this query
+and that type's tokens as keys/values. It has ordinary Q/K/V/output projections and biases,
+**no query residual, extra LayerNorm, FFN or all-token attention**. Concatenate user pool,
+peer pool and ego embedding, then `Linear(192,256), ReLU` before original FiLM/GRU.
+P's separate type MLPs receive concatenated entity+rank, raw ego/time and one-hot z before
+their first nonlinearity: input widths 14/15, two 64-wide layers with ReLU. Concatenate
+user mean/max, peer mean/max (fixed denominators 20/10), and the ego embedding; use
+`Linear(320,256), ReLU` before original FiLM/GRU. No learned rank lookup, mask or type mixing.
+Candidate modules use their documented PyTorch default Linear/MHA initialization; no search.
+Report actual counts, not an assertion of exact capacity/optimization matching. Candidate
+construction preserves the caller's RNG state so instrumentation/evaluator construction does
+not consume training randomness; checkpoints reconstruct the recorded arm before loading.
+
+### Shared action contract and measurements
+
+All arms sample raw Gaussian u exactly as before. At one experimental environment-execution
+boundary pass `clip(u.copy(),-1,1)` while leaving raw u and old log-prob intact in the buffer.
+PPO reevaluates raw u. Deterministic deployment applies the same map to mu. No tanh, logstd
+cap, initialization or entropy change. The map bounds coordinates, not Euclidean speed.
+Do not edit frozen collector/environment semantics globally. Track coordinate/UAV/team-step
+denominators for raw excursions, raw maximum magnitude and executed saturation, by training
+and evaluation; observe position-boundary absorption where accessible without extra policy
+information or random draws. Missing telemetry is labeled missing rather than zero.
+Record learner movement and actual optimizer counts for all five groups, evaluator isolation,
+effective encoder/actor parameter counts, actual actor forward/reevaluation timing, phase/full
+wall and CPU time, peak RSS with scope, and checkpoint path/size. Full invocation time comes
+from the native supervisor; preparation/check/publication costs are separate. Shared-node wall
+does not by itself identify intrinsic method speed. New-arm wall is unknown, not zero.
+
+### L0 implementation, checks and stopping scope
+
+Deliverable: a disposable admitted B01 runner for exactly this comparison, without modifying
+shared hmasd/env/old runner defaults. Owned code:
+`experiments/candidates/goal_conditioned_entity_aggregation/b01/encoder.py` (candidate bases,
+explicit actor integration, optimizer ownership and actor timing), `b01/runner.py` (bounded
+execution wrapper, frozen run/evaluation/science counters and CLI), and
+`scripts/run_gcea_b01.py` (require_admission before scientific effects).
+Focused tests mirror the attempt under
+`tests/experiments/candidates/goal_conditioned_entity_aggregation/b01/`.
+Reuse the small LOE installation/runner ideas from scientific input
+`efe7d61e82b2c0aed7a634bbb2e22d7cc47430a3`, adapting them to explicit z and the selected
+one-panel three-arm contract; do not import its unmerged experimental path or alter old results.
+
+The Implementer may own only encoder.py, package initializers needed for it and test_encoder.py;
+the DM owns runner/entry/tests for execution, NOTES, RESEARCH and the Git index. The independent
+Reviewer reads the final combined executable change. Checks must cover rank/zero-slot and
+sequence shape contracts, explicit z gradients and replay alignment including a skill boundary,
+exact common actor-module retention, optimizer ownership, checkpoint roundtrip/evaluator sync,
+and off-path O identity. Execution checks must show over-bound raw samples remain unchanged
+in storage/log-prob while a separate copy reaches env, terminal reset and evaluator isolation,
+correct fixed counts/panel filtering, native result identity and admission. Existing recurrent
+entry-mask regression is reused. Engineering fixtures are not scientific fits; count and report
+their actual work. No service outcome selects parameters during checks.
+
+Use configured wsl_4070 first, CPU FP32/four torch/BLAS threads. Each new fit has fresh actual-node
+admission against published exact inputs and the registered current lead. Launch sequentially,
+preserve accepted handles and use the deterministic owned-session observer; no cross-DM messages.
+A 4-hour per-fit wall plan is an engineering observation estimate, not a scientific endpoint or
+permission to terminate a healthy fit. No result launch until self-check and independent review
+have resolved consequential issues. Any real technical conflict stops only its dependent action;
+keep all failed attempts and costs. No extras are implicitly authorized by a shortfall or failure.
