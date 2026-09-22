@@ -922,3 +922,96 @@ technical failure, the completed fixed instance and this running factored instan
 unstarted. The deterministic waiter observes the accepted factored handle, preserving the
 live source checkout and the declared 360k endpoint. No cross-arm or duration-benefit
 conclusion is available until the remaining predeclared evidence is read.
+
+### B01 factored result accepted; original AR comparison remains — 2026-09-22
+
+The factored instance exited 0 at 2026-09-22 08:03:43 UTC with a valid native exit witness
+and consistent identities. All **12 output files**, including four checkpoints, were copied
+and byte/SHA-256 matched to the node; checkpoint hashes also match the
+[complete summary](../../../../runs/joint_duration_skill_learning/b01_factored_s2026092202/summary.json).
+The full 45-row training JSONL matches the embedded rows; all recorded numeric measurements
+are finite. Configuration differs from the accepted fixed instance only in the declared
+duration mode and training seed. The DM accepts the factored instance as a completed result.
+
+The original exposure was fulfilled: 360,000 training/stored transitions, 720 episodes,
+45 updates, 64,000 evaluation transitions and 128 evaluation episodes. Every declared panel
+uses the same 32 worlds 740000..740031 for 500 steps, with zero evaluator optimizer calls.
+One cold training start, zero checkpoint loads, and all learner parameter groups moved.
+Low actor/critic and team/individual discriminator calls are the same as fixed:
+101,250/101,250 and 675/2,700. Coordinator calls are **3,375 versus fixed's 675**: the same
+15 epochs and batch size 1280 process 5,561–6,008 events per rollout rather than 800.
+The summary and each row match this actual event/minibatch cadence; no update budget was
+silently held equal or retuned. Original-group replay error is zero throughout, with merged
+relative factor-probability drift at most .000567955081, below the declared .001 limit.
+Stderr is byte-identical to the fixed run's 45 inherited bootstrap warnings; its already
+verified terminal-override interpretation is unchanged.
+
+| Training team transitions | Fixed mean J | Factored mean J | Factored minus fixed |
+| --- | --- | --- | --- |
+| 0 | .21165105 | .31067571 | +.09902466 |
+| 120,000 | .48310947 | .48363505 | +.00052558 |
+| 240,000 | .50583558 | .42644395 | -.07939163 |
+| 360,000 (declared primary) | **.49670730** | **.46107574** | **-.03563156** |
+
+These are one independently initialized training instance per arm with distinct predeclared
+seeds, evaluated on common worlds. The initial difference is substantial: neither within-run
+learning gains nor 32 nested evaluation worlds identify a duration treatment effect or
+training-population ranking. Keep the final checkpoint and complete curves. At that endpoint,
+factored coverage is .63813375 versus .65604500, quality .16001597 versus .18252755, and
+the native height penalty .03362268 versus .01728247. All three terms contribute to the
+observed J deficit (weighted contributions -.01253788, -.00675347 and -.01634022).
+The height penalty retains its S1 proxy meaning, not physical energy consumption.
+
+The additional choices were active. Training produced **259,855** common events (7.218x
+fixed), 629,078 member duration selections (2.912x), 119,755 joint nondegenerate events,
+116,105 same-label renewals and unchanged 35,280 cap/720 terminal boundaries. Mean declared
+and executed member duration is 3.433596, while mean common-event elapsed time is 1.385388;
+these are different quantities. All selected durations 1..10 appeared. At the final
+deterministic panel mean member duration is 2.989537, with 7,433 common events and 5,610
+joint nondegenerate events. Counts include forced cap-edge choices where applicable; the
+duration-1 histogram alone is not evidence of a learned short-duration collapse.
+
+Scientific-process wall time is **7,633.369 s (127.223 min)**, 1.75866x the observed fixed
+wall time, with user/system CPU 6,946.937/861.786 s and peak RSS 1,951,028 KiB (1.861 GiB).
+Reaped-child peak 414,868 KiB is separate. Shared-node occupancy was not continuously
+measured, so the wall ratio is an actual package cost observation, not an isolated hardware
+benchmark. With the retained technical failure, actual total is **3 attempts**, 744,000
+training transitions and 144,000 evaluation transitions. No fit or failed cost is dropped.
+
+Working update: this result strengthens actual activation and added event/optimization cost,
+and weakens the return/cost promise of this ordinary factored recipe at the declared exposure.
+It does not identify exploration pressure as the cause, falsify expressivity inclusion,
+establish a stable population ranking, or decide the remaining AR comparison. In particular,
+substantial joint nondegenerate exposure leaves the original AR-versus-informed-factored
+sampling question testable; event frequency alone is not evidence of attainable service gain.
+The inherited shared-background distinction between finite learning and representation now
+also has an executed cost example: equal primitive steps and PPO epochs need not mean equal
+event counts, coordinator updates or computation. Publish that bounded lesson with these
+sources; preserve the adverse return observation and its one-instance limit.
+
+Continue the original **AR** arm, seed **2026092203**, tag `b01_ar_s2026092203`, with the same
+published execution source `472af353ed44d9da8529179c4f32b2ce030d7b56`, unchanged 360k exposure,
+four fixed panels, optimizer settings and preferred WSL CUDA execution. Its role remains to
+test whether ordinary within-event joint duration sampling yields a useful package against
+both fixed and informed factored. Beating only factored while losing to fixed does not
+justify AR complexity under the prewritten reading. This is completion of the declared
+comparison, not a new rescue, renewed fit allocation, replacement seed or score-conditioned
+extension. Prior accepted Pro advice applies unchanged. Planned total remains **4 attempts**
+including the original technical failure; actual starts remain 3 before AR admission.
+
+### B01 original AR instance natively accepted — 2026-09-22
+
+The original AR arm was accepted at 2026-09-22 08:13:42 UTC. Its
+[native manifest](../../../../runs/joint_duration_skill_learning/b01_ar_s2026092203/launch-manifest.json)
+binds the same published execution source and the original operation reference. A subsequent
+native status found the runner and supervisor running with consistent identities.
+The [fresh node preflight](../../../../runs/joint_duration_skill_learning/b01_ar_s2026092203/admission-preflight.json)
+measured 13,159,993,344 available host bytes against the 4 GiB floor; canonical pause/lead
+checks passed. Both admission files were collected and SHA-256 matched to the node.
+
+Actual started result attempts are now **4 of the 4 planned attempts**: one preserved
+technical failure, completed fixed and factored instances, and this running AR instance.
+The original 360k endpoint, four evaluation panels and all other bound settings remain.
+Hold the live source unchanged and observe the original accepted handle. The full AR result
+must be collected, verified and read before the three-arm judgment; this entry authorizes
+no additional fit or automatic technical replacement.
