@@ -255,7 +255,7 @@ relevant sections; no recursive archive preload is requested.
   `hmasd/agent.py::_batched_assign_skills_d2`, `_d2_store_transition`,
   `_d2_flush_open_segments`, `update_coordinator_d2`, `update_discoverer_from_rollout`;
   `hmasd/networks.py::SkillCoordinator.assign_partial_batch`, `evaluate_training_batch_ordered`;
-  `hmasd/utils.py::RolloutBuffer.compute_high_level_advantages_d2` and D2 storage/sampler;
+  `hmasd/utils.py::RolloutBuffer._compute_d2_high_level_advantages` and D2 storage/sampler;
   `hmasd/ha_ctse.py::HorizonSkillEditor` only for the identified existing-head mismatch.
   Function names are locators, not a claim that each implementation is correct.
 
