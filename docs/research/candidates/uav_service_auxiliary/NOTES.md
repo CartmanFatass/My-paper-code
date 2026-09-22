@@ -807,3 +807,100 @@ separate pre-training support costs, not additional fits. B02 joint remains unst
 must use this same source plus the new detach fact bytes/digest and initialized-model
 fingerprint, after detach completion and fresh native admission. Observe the retained
 operation through `hmasd_wait`; a checkpoint neither repeats launch nor expands the plan.
+
+### B02 detach complete and original joint remains — 2026-09-22 03:59 PDT
+
+The retained detach operation exited with a valid code-0 witness at
+`2026-09-22T10:59:19.735903Z`; native observation at `10:59:31.749705Z` reported consistent
+records and absent completed processes. The DM read the complete result fields, all four
+evaluation panels/worlds, all 30 training/update rows and resource curve, and retained all
+13 original output files locally. Every copied file matches its remote SHA256. The runner
+summary is COMPLETE with no failure: 180,000 training transitions, 30 updates, 120 complete
+1500-step training episodes, 32 complete evaluation episodes / 48,000 transitions, and one
+3000-transition factual collection. All episodes end at the time limit; there are zero
+straddling collector boundaries. Source remains `30401722b14c208bf5330ab66e967c94b3df8a36`,
+seed 910137, CUDA FP32, four Torch threads and the prewritten scientific configuration.
+
+All native update scalars are finite and every learner module moved. Optimizer steps are
+high 2250, low actor/critic 67500 each, team discriminator 450 and individual discriminator
+1800. Each auxiliary pass has 5964 valid team rows / 47,712 agent samples and 30 optimizer
+steps. The auxiliary representation gradient is exactly zero in all 30 detach passes;
+head gradient norms range from 0.1086981371 to 3.0616805553 before clipping. Both final
+checkpoints load, and all stored floating tensors are finite. Every native evaluation
+aggregate was independently recomputed from the eight complete world rows.
+
+| Rollout | Mean complete raw native J | QoS / step | Throughput Mbps | Return constraint cost / step | Common-fact MSE |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| 0 | -570.8365503404 | 0.1087515285 | 3.2625458559 | 0.2407932113 | 0.02035683773 |
+| 10 | -342.0843405034 | 0.1789423854 | 5.3682715616 | 0.1991881923 | 0.00868157874 |
+| 20 | -27.3218782269 | 0.1812576436 | 5.4377293077 | 0.0955760265 | 0.07037506257 |
+| **30 (fixed endpoint)** | **-670.3937326855** | **0.1402308206** | **4.2069246167** | **0.2894672194** | **0.00415097860** |
+
+The fixed endpoint is 99.557182345 worse than initialization in J, despite higher QoS and
+lower initial-policy factual MSE. From rollout 20 to 30, J falls by 643.071854459 as return
+constraint cost rises. This strengthens the working concern about late finite-training
+degradation and keeps forecast error separate from policy utility. It does not identify
+an auxiliary effect: this is only B02's detach arm. Do not select the earlier endpoint,
+change the horizon or compare B02 MSE directly with B01's different factual trajectories.
+The already declared joint fit is still needed for this pair's discriminating observation.
+
+There are zero cutoff or depletion events in all training and evaluation. Training rollout
+12, lane 4 has exactly one occupied-UAV charging time step and 0.2777777778 Wh charger input;
+all other training charging quantities and every evaluation charging quantity are zero.
+Record this small exposure rather than inheriting B01 detach's all-zero training statement.
+It does not establish charging competition or a recovery benefit. No shared background
+revision beyond the existing non-monotonicity/exposure caveat is supported by this single arm.
+
+The new facts are 4,572,909 bytes with SHA256
+`7d3120283c569b45290621f0c3a4934ad885e98c3859da004242c6f06ac6d359` and initial-model fingerprint
+`dec0015986e35ff11d21bbf0d56558d1c0605f61597479576418ba2f070c6b3f`.
+An independent float64 direct W10 calculation from the saved QoS/done arrays gives final
+MSE **0.00415097850735455**, matching the runner, with 23,856 valid agent predictions.
+The two episodes' target means are 0.169971687 and 0.167087670, standard deviations
+0.008518633 and 0.001445556; this remains a narrow initial-policy factual distribution.
+Overlapping windows and repeated team labels are not independent experimental units.
+Final checkpoint SHA256 values are agent
+`0931183e971aeaf0c2406e4969b5fb30d469174b0ffbc7efc2cb2578de49ae24` and auxiliary
+`4bc51a9ae8d42503242bd8a8d12fadf3f2a9a09b1bef6b839ac5ecbe9927370e`.
+
+Actual runner wall is **6982.896684170 seconds / 116.381611403 minutes**, peak RSS
+3,024,640 KiB. Direction cost is now **3 complete fits, 1 declared unstarted fit**,
+414.28 runner minutes for the completed fits, plus the separately recorded 15/16-second
+pre-training refusals. Verification/staging creates no scientific fits.
+
+Continue only the original B02 joint fit, seed 910137, source
+`30401722b14c208bf5330ab66e967c94b3df8a36`, output `runs/uav_service_auxiliary/b02_joint_910137_a01`.
+The exact new fact bytes have been staged and rehashed at
+`/home/wu/hmasd-inputs/uav_service_auxiliary/b02/facts_7d3120283c569b45290621f0c3a4934ad885e98c3859da004242c6f06ac6d359.npz`.
+The joint runner must match this digest and initial-model fingerprint; generate no replacement
+facts. Current published main was read at `2f7aac82eb8371c527b50a5e8fecb0134ee19486` and the
+remote canonical reference refreshed: owner pause remains lifted for this lead, G33 frozen,
+and Claude FSD paused. Preparation reports 14,503,952 KiB available RAM and 7948 MiB free GPU;
+native admission rechecks actual-node resources and policy before release. The completed
+Pro advice still applies to this unchanged pair; no new question or automatic extra fit.
+
+### B02 joint accepted — 2026-09-22 04:07 PDT
+
+Supervisor `uav-service-b02-joint-910137-a01` completed native admission at
+`2026-09-22T11:07:32.438157Z` on `wsl_4070`, without a new refusal or retry. The retained
+[manifest](../../../../runs/uav_service_auxiliary/b02_joint_910137_a01/launch-manifest.json)
+binds the original source `30401722b14c208bf5330ab66e967c94b3df8a36`, seed 910137 and exact
+staged facts. Its operation reference is
+`/home/wu/projects/HMASD/.git/hmasd-admission/6f9d9d249716c8bfc644954d3b3990c8b064d62646b209b451bbb2f7a0025e65.json`;
+the snapshot is `/home/wu/projects/HMASD/.git/hmasd-launch-sources/fda709fc31804eea99a8c60ba7f19cc7`.
+The `11:08:11.463672Z` status reports consistent, running supervisor/runner identities
+(PIDs 192886/192887, start ticks 43869112/43869115, boot
+`bb732fcb-1a33-4659-a786-331110ae41d3`) and no exit witness. The actual admission passed
+with 14,821,879,808 available physical bytes and current control head `2f7aac82e`.
+
+The runner has independently verified the exact common-fact digest
+`7d3120283c569b45290621f0c3a4934ad885e98c3859da004242c6f06ac6d359` and initialized-model
+fingerprint `dec0015986e35ff11d21bbf0d56558d1c0605f61597479576418ba2f070c6b3f` against detach.
+The two actual configs match apart from their inactive baseline file's snapshot prefix;
+both actual seed fields are 910137. Joint loads the two factual episodes, with no extra
+fact collection. Summary is still INCOMPLETE with no failure; no pair effect is read yet.
+
+All **4 planned fits are now accepted: 3 complete and 1 running**, with no unstarted fit
+or further batch selected. Observe this same joint operation through completion or the next
+bounded checkpoint; the completed detach event is consumed. Then verify the full joint
+outputs and read the fixed pair under the already recorded Pro-informed stopping rule.
