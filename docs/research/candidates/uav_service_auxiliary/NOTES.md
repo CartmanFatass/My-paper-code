@@ -78,3 +78,89 @@ The configured remote `wsl_4070` responded as `LAPTOP-U9TDKC8A`; initial inspect
 not result admission; a fresh actual-node check is required at launch. Local source reading
 and correctness tests do not consume scientific fits. Bounded read-only Scout maps S7 data
 and update interfaces while the DM binds the experiment. No inter-DM messages are sent.
+
+### B01 prospective comparison and L0
+
+Select native preset **S7-S2**, interface 3 / constrained_qos_safety_pbrs_v2 / arm C,
+N=8, 30 users, fixed k=10, 1500-step episodes. S2 includes battery/charging and moving
+users, without S4 faults; no fault-rate, reward, physics or observation changes. The
+label is the mean of the next W=10 realized `reward_info.qos_satisfaction_ratio` values,
+starting with the transition taken from the represented current observation. This is
+capped actual delivered end-to-end demand, not access capacity or a synthetic label.
+Only complete windows contained within an episode are supervised: true termination,
+time-limit truncation and collection cutoff all censor incomplete windows; no padding,
+bootstrap or cross-reset label. RL retains the native finite-episode treatment.
+
+Two arms, `detach` and `joint`, training seed 910021, **2 planned fits**. Each fit has
+4 synchronous lanes ×1500 steps ×30 rollouts =180,000 team training transitions, with
+native HMASD high/low/discriminator updates after each rollout. Keep Config S7-S2 native
+architecture/skills/PPO settings, no extension algorithm. Final endpoint after rollout 30;
+intermediate evaluations at 0/10/20/30, 8 deterministic complete episodes each using
+world seeds 920001–920008. Read raw summed and mean-per-step native reward J, delivered
+QoS/throughput, return constraint, cutoff/depletion and charging. No best-checkpoint selection.
+One seed is exploratory: these readings cannot establish training-population superiority.
+The horizon buys 120 full energy episodes per arm and 30 native joint update stages;
+it is a bounded first complete-learning comparison, not a convergence claim.
+
+Both arms train the same hidden→64→1 factual head. After each native RL update, one
+chronological auxiliary pass replays the just-collected legal observations and actual
+held skill sequence from zero at episode start, with 50-step truncated BPTT chunks.
+Head Adam lr=3e-4; separate representation Adam lr=3e-5 for the joint arm only, on
+existing actor base encoder and GRU (FiLM constants preserved in this auxiliary pass).
+MSE on complete windows, same sample exposure. Clip head and representation separately
+at norm .5; head parameters never enter RL optimizer/global clipping. Detach arm blocks
+only auxiliary gradients, leaving all native RL updates active. Head initialization uses
+a saved/restored RNG context; auxiliary pass has no random sampling/dropout. Auxiliary
+observations use the actor's legal normalization, without updating running statistics.
+
+For prediction comparison, both endpoints replay identical initial-policy factual episodes
+on held-out seeds 930001–930002, collected before learning with the shared initialized
+policy, saved with arrays and digest. Observations and realized skills are conditioned
+on the same factual trajectory; labels are never actor inputs. Each trained representation
+is replayed from zero under its own current weights. These data are evaluation-only.
+Own-rollout training MSE is only a diagnostic. Prediction: joint supervision may reduce
+common-fact MSE and improve delivered service/native J; native benefit without MSE gain
+retains only a package explanation. Better MSE without native benefit weakens this target's
+control usefulness, with no automatic target/model sweep (programme Pro stopping advice).
+
+Implementation L0: own `experiments/candidates/uav_service_auxiliary/b01/`, mirrored tests,
+and `scripts/run_uav_service_auxiliary_b01.py`. Reuse native environment/adapter, HMASDAgent
+step/store/update, and existing evaluator weight/normalizer synchronization. Add a small
+standalone auxiliary replay component and native collector/evaluator; no shared core edits
+are intended. Check target censoring/shift, detached actor identity, nonzero joint base/GRU
+gradients, head/RNG/clipping isolation, real S7 label extraction, optimizer movement and
+admission-before-effects. Independent Reviewer checks numerical/recurrent/runner semantics.
+Remote WSL runs sequential fits; fresh admission before each. No scientific launch before
+checks/review and committed, published exact inputs. Stop implementation expansion at a
+concrete integration conflict; do not substitute a synthetic task or silently shrink exposure.
+
+### B01 interface refinement before implementation/results
+
+The current shared native PPO replay still uses transition `done[t]` to mask entry to row t.
+The already published B-direction correctness repair `1da535e557bb1eaac30779d4596e3b2efa6426ee`
+changes this to row 0=1 (stored input hidden state), later row t=`1-done[t-1]`.
+Adopt that exact minimal repair and its storage→sampler→actor/critic regression for both arms;
+include it in independent review. This is shared correctness work, not an auxiliary gain,
+and does not change any historical frozen experiment. L0 expands only to that existing
+`hmasd/agent.py` change and `tests/hmasd/test_discoverer_entry_masks.py`.
+
+Native S2 can truly end early if all batteries exhaust. The collector must preserve terminal
+next inputs before reset and allow an episode to straddle a rollout. The 120 episodes stated
+above is the no-early-terminal nominal count; actual transitions remain exactly 180,000 and
+actual episode count is recorded. For a straddling auxiliary rollout the stored input actor
+hidden state anchors row 0, otherwise it is zero at a real reset. All subsequent resets use
+the shifted done mask. This ordinary truncated replay anchor is explicit; it is not a full
+current-parameter history reconstruction. Validation episodes always replay from zero.
+Both termination and native finite-horizon truncation zero RL continuation as in the S7
+collector; an unfinished collection boundary bootstraps the native value. This amendment
+precedes every score and fit.
+
+B01 execution binding: use remote `wsl_4070`, CUDA float32 for the learner and 4 Torch CPU
+threads; keep CUDA/CPU/Python/NumPy evaluation RNG isolated and disable TF32 for this pair.
+The actual remote environment reports Python 3.10.21, Torch 2.7.0+cu118, NumPy 1.26.3 and
+available CUDA. The two fits use separate native admissions and run sequentially. The first
+(detach) fit creates common initial-policy facts; the joint fit must read that exact retained
+file with a declared SHA256, copying it into its output. No independent regeneration is
+substituted. Auxiliary initialization seed is training seed +200000 for both arms. Evaluation
+worlds and forecast worlds are disjoint from training seeds. The existing arm-A comparison
+gate is unused; no inherited arm-A target enters this experiment's decision.
