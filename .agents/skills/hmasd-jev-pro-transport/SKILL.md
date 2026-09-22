@@ -1,16 +1,16 @@
 ---
 name: hmasd-jev-pro-transport
-description: On the WSL host, send one committed HMASD Pro question through Jev Ultrafast and a local headless Chrome on the owner's second ChatGPT account, wait read-only for completion, read the complete answer at the assigned repository target (or preserve the chat text), and return facts. Never science, never a resend.
+description: On the WSL host, directly send one committed HMASD Pro question through Jev Ultrafast and local Chrome, then use deterministic detached observation to collect completion and read the assigned repository target or preserve chat text. Never science, never a resend.
 ---
 
-# Pro transport (Jev Ultrafast, WSL host)
+# Pro browser procedure (Jev send, deterministic observation, WSL host)
 
 Authority: `docs/project/OPERATING_CONSTITUTION.md` section 5. The assignment, the target
 check before sending, the delivery reading (step 5) and the return facts are those of
 `hmasd-chatgpt-pro-transport`; this skill replaces only the browser route. Use it on the WSL
 host. The Windows host keeps Agentify.
 
-Jev does the browser work itself: it observes the page as an indexed element table and chooses
+Jev performs the interactive browser send: it observes the page as an indexed element table and chooses
 each operation and target. The driver `tools/pro_transport/jev_send.py` hands Jev the committed
 text verbatim (no model writes or paraphrases it), keeps the books, and guards one click: the
 send click is refused unless the effort pill shows the configured label and the box equals the
@@ -63,16 +63,47 @@ never prints the conversation address unless `--show-url` is given.
    - `send_attempted: true`: from here on observe only. `send_effect` is `sent` when the exact
      message was seen in the conversation, otherwise `uncertain` with `unresolved`.
    - Running `send` again under an attempted key never sends; it returns the stored operation.
-4. **Wait and collect from the existing conversation.**
-   `$JEV $D wait --key <key> --prompt-file <short> --answer-file <path>` runs in the background
-   (default 3600 s). Once Send is accepted, Pro continues server-side; reopening Chrome does
-   not restart the research request. The driver checks Chrome while waiting and, if it closes
-   or its connection fails, restarts it as needed and reopens the recorded conversation.
-   Browser calls and retries are bounded. The flow is: thinking → wait; stable final reply →
-   save the full text; login, human verification or an unrecoverable error → return it promptly.
-   `IN_PROGRESS` ends only this observation window: call `wait` again on the same key.
-   Transport returns acceptance and material errors to the DM instead of leaving them behind
-   an idle agent wait. Completion saves the chat text even when GitHub could not write;
+4. **Wait and collect from the existing conversation without a waiting subagent.** Once Send is
+   accepted, Pro continues server-side; reopening Chrome does not restart the request. In Codex,
+   save this JSON in task-local private scratch as `/absolute/path/to/request.json`, substituting
+   real absolute paths, then arm the repository controller and end the turn:
+
+   ```json
+   {
+     "jobs": [{
+       "id": "pro-<key>",
+       "protocol": "pro",
+       "argv": ["/absolute/path/to/jev-python", "/absolute/repository/tools/pro_transport/jev_send.py", "wait", "--key", "<key>", "--answer-file", "/absolute/path/to/answer.txt", "--timeout", "{window_seconds}"],
+       "cwd": "/absolute/repository",
+       "interval": 30,
+       "timeout": 20
+     }]
+   }
+   ```
+
+   ```bash
+   python tools/hmasd_wait.py arm --request /absolute/path/to/request.json --window 1500
+   ```
+
+   The controller is standard-library only. The passive browser observer uses CDP/WebSocket
+   state and does not import Jev, use Jev credentials or ask a model to judge completion. The
+   existing driver invokes Jev lazily only if an authorized connector-consent interaction is
+   actually required. The generic wait controller does not depend on the probe interpreter or
+   browser implementation named in a job. On Claude, run the underlying deterministic observer
+   outside the model turn and return by the native runtime or a manual continuation; do not run
+   the Codex-only controller or assume Codex queue can wake Claude.
+
+   On wake, `python tools/hmasd_wait.py drain` returns the generation, wake id, stable event ids
+   and jobs. `COMPLETE` means the answer was collected, not that repository delivery succeeded.
+   Run step 5. If a bounded checkpoint reports the job still active, rearm the same generation
+   and event ids with
+   `python tools/hmasd_wait.py rearm --generation <N> --wake-id <ID> --event-ids <ID>...`;
+   pass `--resume-jobs <job-id>...` only for explicitly resolved blocked jobs. Never restart the
+   request or run `send` again. `stop` records `observation_stop_requested` and cancels only the
+   waiter's owned probe; cancellation begins on the next short supervisor tick and allows a brief
+   TERM grace period. The Pro request and other observed work remain unchanged. The default 1500-second window
+   reserves delivery time so the queue event can arrive within the requested bound. Completion
+   saves chat text even when GitHub could not write;
    a hash mentioned in a reply is not evidence of delivery. Step 5 checks actual writeback.
    **Connector consent (owner, 2026-09-19).** When the page shows "Allow GitHub for this
    conversation", Jev answers it with "始终允许" (Always allow); the owner authorised this for the
@@ -93,13 +124,13 @@ never prints the conversation address unless `--show-url` is given.
    noted "saved from chat"; with only a receipt it is `answer unavailable`.
 6. **Return.** Question key (the conversation address stays in the local operation file), send
    effect, completion state, delivery state with the answer commit or the saved text path and
-   hash, target and headings, unresolved facts. Jev closes its own tab. Leave the headless
+   hash, target and headings, unresolved facts. Close only the operation's tab. Leave the headless
    Chrome running between questions; `chrome stop` ends it.
 
 ## Recovery
 
-After an accepted Send, recovery means reopening the same conversation and checking whether
-Pro is still thinking or has finished. Run `wait` with the existing key; do not resend the
+After an accepted Send, recovery means observing the same conversation and checking whether
+Pro is still thinking or has finished. Rearm the same wait job with the existing key; do not resend the
 question because Chrome closed or a local wait timed out. Authentication or an error that
 prevents reading is reported with its concrete cause. Leave normal recovery to the driver.
 

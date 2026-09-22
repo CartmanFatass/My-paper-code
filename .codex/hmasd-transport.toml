@@ -1,10 +1,8 @@
 schema_version = 1
-mode = "dm_native"
+mode = "browser_procedure"
 status = "active"
-backend = "agentify"
+backend = "host_specific"
 environment = "local"
-model = "gpt-5.6-luna"
-reasoning_effort = "high"
 
 # Native task identities are request-bound, never global endpoints.
 [provider]

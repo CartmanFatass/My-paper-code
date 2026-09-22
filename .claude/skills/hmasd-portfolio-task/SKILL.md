@@ -50,7 +50,7 @@ as `NOTES.md` entries.
 
 3. **Publish through the shared integrator.** Root owns main/RESEARCH.md while it is
    coordinating Codex; otherwise the explicitly acting Claude integrator may publish from its
-   own checkout. Coordinate the shared writer, commit by pathspec and push. Supply Transport
+   own checkout. Coordinate the shared writer, commit by pathspec and push. Supply the browser procedure
    repository, branch, source_sha, target_path=`docs/research/RESEARCH.md`, question_heading,
    answer_heading=`### Answer`, subject key=`portfolio`, message and conversation URL.
    Instruct Pro to read the pinned question, fetch the current target version and write only

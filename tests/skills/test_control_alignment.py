@@ -16,15 +16,14 @@ def native_fixture(root, monkeypatch):
     # fixture; preservation does not prove any user's effective model/effort/permissions.
     paths = [
         '.codex/agents/hmasd-direction-manager.toml',
-        '.codex/agents/hmasd-experiment-monitor.toml',
-        '.codex/agents/hmasd-transport.toml',
+        '.codex/agents/hmasd-reviewer.toml',
         '.agents/skills/hmasd-chatgpt-pro-transport/SKILL.md',
     ]
     for path in paths:
         dst = root/path
         dst.parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(ROOT/path, dst)
-    roles = {'hmasd-experiment-tracker':'hmasd-experiment-monitor', 'hmasd-pro-transport':'hmasd-transport'}
+    roles = {'hmasd-reviewer':'hmasd-reviewer'}
     monkeypatch.setattr(publisher, 'ROLE_MAP', roles)
     header = '\nname: fixture\nmodel: fixture-model\ntools: Read, Bash\ndescription: preserve the whole native header\n'
     for role in roles:
@@ -78,19 +77,18 @@ def test_claude_shared_writer_and_native_header(tmp_path, monkeypatch):
     assert 'no Root acknowledgment is required' in hub
     assert 'You also integrate your own commits into main' not in hub
     assert 'HMASDTransport' not in hub and 'HMASDExperimentMonitor' not in hub
-    assert 'hmasd-experiment-tracker' in hub
+    assert 'hmasd-experiment-tracker' not in hub
+    assert 'hmasd-pro-transport' not in publisher.ROLE_MAP
     for role in publisher.ROLE_MAP:
         assert (tmp_path/'.claude/agents'/f'{role}.md').read_text().split('---',2)[1]==header
 
 
-def test_monitor_keeps_identity_transfer_and_no_shared_writer(tmp_path, monkeypatch):
+def test_retired_wait_roles_are_not_generated(tmp_path, monkeypatch):
     native_fixture(tmp_path, monkeypatch)
     out = publisher.generated(tmp_path)
-    tracker=out[tmp_path/'.claude/agents/hmasd-experiment-tracker.md'].decode()
-    for text in ['stable identity', 'terminal witness', 'same-handle reconciliation',
-                 'Do not edit NOTES.md/RESEARCH.md', 'return MONITOR_ADOPTED to the assigning lead']:
-        assert text in " ".join(tracker.split())
-    assert 'followup_task' not in tracker
+    assert tmp_path/'.claude/agents/hmasd-experiment-tracker.md' not in out
+    assert tmp_path/'.claude/agents/hmasd-pro-transport.md' not in out
+    assert tmp_path/'.claude/skills/hmasd-pro-transport/SKILL.md' not in out
 
 
 @pytest.mark.parametrize('change', ['reword', 'repeat'])
@@ -121,7 +119,6 @@ def test_crlf_shared_method_does_not_change_generated_semantics(tmp_path, monkey
     '.agents/skills/hmasd-pro-research-prompt-author/SKILL.md',
     '.agents/skills/hmasd-portfolio-task/SKILL.md',
     '.agents/skills/hmasd-chatgpt-pro-transport/SKILL.md',
-    '.codex/agents/hmasd-transport.toml',
 ])
 def test_callers_and_consumer_share_target_fields(path):
     text=(ROOT/path).read_text()
@@ -145,9 +142,24 @@ def test_frozen_source_and_control_adoption_not_automatic():
         assert term in dm
 
 
-def test_native_transport_can_wait_without_another_send():
-    header = (ROOT/'.claude/agents/hmasd-pro-transport.md').read_text(encoding='utf-8').split('---', 2)[1]
-    tools = next(line for line in header.splitlines() if line.startswith('tools:'))
-    allowed = {tool.strip() for tool in tools.removeprefix('tools:').split(',')}
-    assert 'mcp__agentify-desktop__agentify_wait_response' in allowed
-    assert 'mcp__agentify-desktop__agentify_read_page' in allowed
+def test_retired_wait_roles_are_unregistered_and_absent():
+    config = (ROOT/'.codex/config.toml').read_text()
+    for name in ['HMASDTransport', 'HMASDExperimentMonitor']:
+        assert f'[agents.{name}]' not in config
+    for path in [
+        '.codex/agents/hmasd-transport.toml',
+        '.codex/agents/hmasd-experiment-monitor.toml',
+        '.claude/agents/hmasd-pro-transport.md',
+        '.claude/agents/hmasd-experiment-tracker.md',
+        '.claude/skills/hmasd-pro-transport/SKILL.md',
+    ]:
+        assert not (ROOT/path).exists()
+
+
+def test_browser_config_has_no_retired_subagent_model():
+    config = tomllib.loads((ROOT/'.codex/hmasd-transport.toml').read_text())
+    assert config['mode'] == 'browser_procedure'
+    assert config['backend'] == 'host_specific'
+    assert 'model' not in config
+    assert 'reasoning_effort' not in config
+    assert config['provider']['model']

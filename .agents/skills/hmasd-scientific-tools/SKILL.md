@@ -169,7 +169,7 @@ simple-model/source bridge, targeted revision, hypothesis search or criticism as
 Read the whole answer; in `NOTES.md` record what you adopt, modify or reject, which judgment
 changes and why. A local Critic or engineering Reviewer can assist but does not replace Pro's
 consultation. The DM chooses; adviser agreement, a fixed idea count and a separate approval
-are not required. The DM can complete the authorized Jev Pro workflow without Root forwarding
+are not required. The DM can complete the authorized Pro browser workflow without Root forwarding
 or a per-question owner approval. Continue work independent of the pending scientific decision.
 Existing frozen review exceptions remain tied to their original object, not expanded by this method.
 

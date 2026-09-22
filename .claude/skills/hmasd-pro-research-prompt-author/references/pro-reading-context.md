@@ -77,7 +77,7 @@ questions; context updates never justify rewriting or resending an accepted/unce
 ## Include in the actual send message
 
 The author includes the following with the normal repository/branch/source_sha/target/headings
-and fixed question URL. Transport sends the completed message unchanged:
+and fixed question URL. The applicable browser procedure sends the completed message unchanged:
 
 > Read the pinned question and its Context sources before answering. Paths marked source_sha
 > resolve at the full source_sha supplied here; other sources keep their explicitly named revisions.

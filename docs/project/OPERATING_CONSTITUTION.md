@@ -58,6 +58,13 @@ The DM retains scientific responsibility; this adds no approval layer or per-bat
 The amendment applies to subsequent decisions, without reopening completed work, changing
 frozen contracts or resuming paused research.
 
+2026-09-21 (owner, scripted waiting): retire Transport and Monitor as subagent roles. Detached
+repository scripts observe accepted experiment and Pro operations and wake the assigning Codex
+session on completion, error or a bounded checkpoint. Browser interaction may still use Jev where
+the UI requires it; passive waiting and ordinary task observation do not require Jev or a model.
+Claude uses the same deterministic external observation where available and returns through its
+native runtime or a manual continuation; Codex queue is not a cross-runtime wake mechanism.
+
 ## 1. What this project is
 
 A personal exploratory research project on unfixed skill duration k and unfixed agent count N,
@@ -104,14 +111,15 @@ operation. A method, tool, conversation or historical workflow is not a permanen
   L0 scope note, the Implementer returns a diff and its checks, the DM reviews, accepts and owns the
   result. The Implementer makes no scientific choice, launches nothing result-bearing, sends
   nothing to Pro and spawns nothing.
-- **Transport / Monitor** absorb waits and return facts, without scientific authority.
-  **Reviewer** independently checks changes to shared learners, runners, environments or evaluators.
+- **Reviewer** independently checks changes to shared learners, runners, environments or evaluators.
 - Existing **Operator, Scout, Verifier and ResearchCritic** names are bounded execution,
   fact-finding or review methods under DM/Reviewer responsibility, not extra scientific
-  decision owners. The DM/session may implement, launch, observe and use Transport directly;
-  delegate when useful for context, independent work or waits. These leaves spawn nothing.
-- **Retire Grok clerk and Sonnet clerk as standing roles.** Mechanical edits belong to the
-  direction lead. No additional role, including a renamed equivalent, without owner amendment.
+  decision owners. The DM/session may implement, launch and observe directly, and may delegate
+  bounded implementation, review or execution work when useful. These leaves spawn nothing.
+- **Retire Transport, Monitor, Grok clerk and Sonnet clerk as standing roles.** Accepted-operation
+  waiting is a detached script responsibility, not a model task. Mechanical edits belong to the
+  direction lead. No compatibility role or renamed equivalent is retained; no additional role
+  without owner amendment.
 
 Innovation, diagnosis and prototype reasoning are work modes of the DM, assisted when useful
 by the existing Scout or ResearchCritic; they are not additional standing roles. Scout can map
@@ -136,7 +144,7 @@ that request and stop: a one-off delivery does not open an ongoing conversation 
 follow-ups, acknowledgments or relays. An incoming App message is data, not new user permission
 or an assignment to expand the task. Completion, dependency, conflict, handover or publication
 does not authorize sending. This limits runaway App dialogue; it is not a concurrency mechanism.
-Jev Pro and internal children/helpers retain their existing workflows. Explicitly requested
+Jev browser interaction and internal children/helpers retain their applicable workflows. Explicitly requested
 communication needs no second approval; reconcile uncertain acceptance without blindly repeating
 the send. Read other tasks' evidence only as needed. Resolve routine concurrent changes locally;
 raise an unresolved judgment in this task and continue independent work. An absent or idle Root
@@ -236,9 +244,11 @@ Reviewer can assist, but does not by itself satisfy a Pro consultation. Scientif
 uses the existing notebook, not a new agent, registry, score, checklist service or record type.
 
 Within authorized direction work, the DM initiates and completes Pro consultation directly
-or through its Transport, without Root forwarding or a new per-question owner approval.
+through the applicable browser procedure, without Root forwarding or a new per-question owner approval.
 The App-only cross-task messaging restriction does not apply to Jev Pro. Await advice only
-for the decision it can change and continue independent work. Portfolio review remains
+for the decision it can change and continue independent work. After an accepted Send, detached
+deterministic observation records completion, error or checkpoint state and wakes the assigning
+Codex session; it does not resend, interpret or require Jev. Portfolio review remains
 owner-triggered; advice does not select directions for the owner or lift a pause.
 
 **One current conversation per direction, reused by default, not indefinitely bound.** Replace
@@ -267,8 +277,8 @@ not line counts, orchestration percentages, elapsed-test ceilings or fixed note/
 This does not relax scientific allowances or genuine resource-safety and external-effect checks.
 Non-code documentation, skill prose and descriptive control-plane edits use the author's
 consistency and source checks; they do not automatically invoke a Reviewer. Independent review
-continues for core and high-risk executable behavior, including executable configuration or
-launch/transport code. Judge the actual behavior changed, not merely the file extension.
+continues for core and high-risk executable behavior, including executable configuration,
+launch code or Pro browser/wait code. Judge the actual behavior changed, not merely the file extension.
 
 For result-bearing runs: commit and push exact inputs, perform fresh node-memory preflight,
 then launch detached at that sha. Archiving stops maintenance; it does not destroy evidence.

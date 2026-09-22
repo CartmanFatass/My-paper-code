@@ -157,7 +157,7 @@ def install_wait(tmp_path, monkeypatch, agents, *, alive=True, attachment=None,
     environment = {'alive': alive, 'starts': 0}
     queue = list(agents)
 
-    monkeypatch.setattr(driver, 'load_jev', lambda _cfg: None)
+    monkeypatch.setattr(driver, 'load_jev', lambda _cfg: pytest.fail('passive wait loaded Jev credentials'))
     monkeypatch.setattr(driver, 'cdp_version', lambda _cfg: {'Browser': 'Headless'} if environment['alive'] else None)
 
     def start(_cfg, _mode):
@@ -166,7 +166,7 @@ def install_wait(tmp_path, monkeypatch, agents, *, alive=True, attachment=None,
         return {'chrome': 'started', 'mode': _mode}
 
     monkeypatch.setattr(driver, 'chrome_start', start)
-    monkeypatch.setattr(driver, 'make_wait_agent', lambda _url: queue.pop(0))
+    monkeypatch.setattr(driver, 'make_wait_observer', lambda _url, _cfg: queue.pop(0))
     monkeypatch.setattr(driver, 'facts', lambda browser: browser.read())
     args = argparse.Namespace(
         key=key,
@@ -254,7 +254,7 @@ def test_recovery_limit_and_total_observation_deadline_are_finite(tmp_path, monk
     cfg, args, _state, operation = install_wait(
         tmp_path, monkeypatch, [], recovery_attempts=1
     )
-    monkeypatch.setattr(driver, 'make_wait_agent', lambda _url: (_ for _ in ()).throw(RuntimeError('gone')))
+    monkeypatch.setattr(driver, 'make_wait_observer', lambda _url, _cfg: (_ for _ in ()).throw(RuntimeError('gone')))
     result = driver.command_wait(args, cfg)
     assert result['state'] == 'ERROR'
     assert result['reason'] == 'browser recovery budget exhausted before the conversation was readable'
@@ -444,3 +444,29 @@ def test_deliver_reports_a_changed_question_or_another_file_as_conflict(delivery
     result = driver.command_deliver(args, {})
     assert result['state'] == 'CONFLICT' and 'answer_out' not in result
     assert json.dumps(result)  # facts only, serialisable
+
+
+def test_wait_allows_cdp_tab_navigation_without_jev(tmp_path, monkeypatch):
+    loading = wait_page([], url='about:blank')
+    final = wait_page([user_turn(), assistant_turn('passive CDP answer')])
+    observer = FakeWaitAgent(FakeWaitBrowser([loading, final, final, final, final]))
+    cfg, args, state, _operation = install_wait(tmp_path, monkeypatch, [observer])
+    result = driver.command_wait(args, cfg)
+    assert result['state'] == 'COMPLETE'
+    assert observer.commands == []
+    assert state['starts'] == 0
+
+
+def test_authorised_browser_interaction_is_the_only_jev_handoff(tmp_path, monkeypatch):
+    approval = wait_page([user_turn()], approval=['Always allow'])
+    approval['approval_text'] = 'Allow GitHub for this conversation'
+    first = FakeWaitAgent(FakeWaitBrowser([approval]))
+    last = FakeWaitAgent(FakeWaitBrowser(stable_answer_pages('answer after consent')))
+    cfg, args, _state, _operation = install_wait(tmp_path, monkeypatch, [first, last])
+    cfg.update(approval_policy='always_allow', approval_connectors=['GitHub'])
+    interactions = []
+    monkeypatch.setattr(driver, 'interact_with_connector', lambda url, op, settings: interactions.append(url) or True)
+    result = driver.command_wait(args, cfg)
+    assert result['state'] == 'COMPLETE'
+    assert interactions == [CONVERSATION]
+    assert first.browser.closed and last.browser.closed

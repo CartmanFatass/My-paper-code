@@ -481,10 +481,24 @@ def bounded_wait_call(call, seconds, label):
             signal.setitimer(signal.ITIMER_REAL, remaining, previous_timer[1])
 
 
-def make_wait_agent(url):
-    import jev_ultrafast.agent as jev_agent
+def make_wait_observer(url, cfg):
+    # A browser dependency is not a model dependency. Ordinary reads load no Jev credentials.
+    try:
+        from tools.pro_transport.cdp_observer import ConversationObserver
+    except ModuleNotFoundError:
+        from cdp_observer import ConversationObserver
+    return ConversationObserver(url, cfg["cdp_url"])
 
-    return jev_agent.Agent(url, "Observe this conversation without sending anything.")
+
+def interact_with_connector(url, operation, cfg):
+    """Only an already authorised browser interaction invokes Jev; never sends a question."""
+    load_jev(cfg)
+    import jev_ultrafast.agent as jev_agent
+    agent = jev_agent.Agent(url, "Handle only the authorised connector permission prompt.")
+    try:
+        return approve_connector(agent, operation, cfg)
+    finally:
+        agent.close()
 
 
 def _conversation_id(url):
@@ -661,7 +675,6 @@ def command_wait(args, cfg):
             value["reason"] = reason
         return value
 
-    load_jev(cfg)
     try:
         while time.monotonic() < deadline:
             if agent is None:
@@ -694,7 +707,7 @@ def command_wait(args, cfg):
                             "Chrome recovery",
                         )
                     agent = bounded_wait_call(
-                        lambda: make_wait_agent(url),
+                        lambda: make_wait_observer(url, cfg),
                         remaining(WAIT_OPEN_SECONDS),
                         "conversation open",
                     )
@@ -739,10 +752,11 @@ def command_wait(args, cfg):
                 status("error")
                 return finish("ERROR", "browser moved to a different settled conversation")
             if current is None:
-                last_error_type = "ConversationPageUnavailable"
-                close_agent()
-                needs_recovery = True
+                # A newly created CDP tab may still be about:blank during navigation.
+                # Give it this bounded window instead of repeatedly destroying loading tabs.
+                status("loading")
                 previous, stable = None, 0
+                time.sleep(min(WAIT_SAMPLE_SECONDS, max(0.0, deadline - time.monotonic())))
                 continue
             if not page["turns"]:
                 status("loading")
@@ -768,9 +782,18 @@ def command_wait(args, cfg):
                 status("accepted")
 
             if page.get("approval"):
+                words = page.get("approval_text", "")
+                permitted = cfg.get("approval_policy") == "always_allow" and any(
+                    connector.lower() in words.lower() for connector in cfg.get("approval_connectors", [])
+                )
+                if not permitted:
+                    return finish("NEEDS_HUMAN", "an authorization prompt requires human review",
+                                  approval_prompt=page["approval"])
+                # Release the read-only tab before the narrowly authorised Jev interaction.
+                close_agent()
                 try:
                     approved = bounded_wait_call(
-                        lambda: approve_connector(agent, operation, cfg),
+                        lambda: interact_with_connector(url, operation, cfg),
                         remaining(WAIT_OPEN_SECONDS),
                         "connector approval",
                     )
@@ -935,7 +958,7 @@ def main():
     wait = sub.add_parser("wait")
     wait.add_argument("--key", required=True)
     wait.add_argument("--answer-file", required=True)
-    wait.add_argument("--timeout", type=float, default=3600, help="seconds; one long call, run it in the background")
+    wait.add_argument("--timeout", type=float, default=1470, help="bounded observation seconds; queue wait windows supply the remaining time")
     wait.add_argument("--prompt-file", default=None, help="the committed text, to verify the conversation holds it")
     wait.add_argument("--conversation-url", default=None, help="reconcile a URL the send could not observe")
     wait.add_argument("--mode", choices=("headless", "headed"), default=None)
@@ -980,7 +1003,16 @@ def main():
         elif args.command == "deliver":
             result = command_deliver(args, cfg)
         else:
-            result = command_wait(args, cfg)
+            # A stopped script window cancels observation only. Unwind the wait's finally
+            # block so the CDP tab owned by this process is closed before exit.
+            previous_term = signal.getsignal(signal.SIGTERM)
+            def cancel_observation(_signum, _frame):
+                raise KeyboardInterrupt("observation cancelled")
+            signal.signal(signal.SIGTERM, cancel_observation)
+            try:
+                result = command_wait(args, cfg)
+            finally:
+                signal.signal(signal.SIGTERM, previous_term)
     except PreSendFailure as error:
         print(json.dumps({"error": str(error), "pre_send": args.command == "send"}, ensure_ascii=False))
         return 2

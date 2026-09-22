@@ -60,18 +60,21 @@ review exception within its original object. Portfolio remains owner-triggered.
    version of this file on the named branch. Use a unique question heading, not a reused slot.
    Include the reading/source-precedence instruction from the context reference in the actual
    message; do not send only a bare question URL or assume existing chat memory is current.
-4. **Send or delegate.** Use the host's Transport method directly when its tools are available,
-   or pass those same fields, subject key (direction id), message and conversation URL to
-   Transport. On WSL use `hmasd-jev-pro-transport`; use `hmasd-chatgpt-pro-transport` for the
-   Agentify Desktop route. This applies to independent DMs as well as child DMs. Authorized
+4. **Send directly.** Use the host's browser procedure in the authoring session. On WSL use
+   `hmasd-jev-pro-transport`; use `hmasd-chatgpt-pro-transport` for the Agentify Desktop route.
+   These names identify procedural skills, not subagent roles. After Send is accepted, a POSIX
+   Codex session hands passive observation to `tools/hmasd_wait.py` using its verified task UUID.
+   Other runtimes use a verified deterministic observer with native/manual continuation;
+   they do not inherit Codex queue support. Do not delegate waiting to a model. Authorized
    direction consultation needs no Root relay or new per-question owner approval, and the
    App-only cross-task messaging restriction does not apply to Jev Pro.
-5. **On return**, fetch and inspect before integrating. Apply the Transport complete-answer
+5. **On return**, fetch and inspect before integrating. Apply the browser procedure's complete-answer
    checks to the specified target and immutable answer commit; a short receipt is not an
    answer. While Pro owns the subsection, the DM and its leaves do not edit it. Reconcile an
    uncertain write before taking back that subsection. Paste a complete recovered fallback
    only after verifying no answer already landed and the question is unchanged; commit and
-   note "saved from chat". For a new conversation, put its actual URL in the notebook header.
+   note "saved from chat". For a new Agentify-account conversation, put its URL in the notebook
+   header. Jev-account URLs remain only in the local operation file; shared records use the key.
    Use the current branch/file version; never overwrite concurrent changes with the pinned copy.
 6. **Respond in writing.** In the next notebook entry record what you adopt, modify or reject,
    which prior judgment changes (or remains unresolved), and why the selected next action follows.
@@ -95,5 +98,5 @@ On return, assess the answer's source use and unread material gaps before adopti
 ## Never
 
 No packet, TASK or HANDOFF files, request ids, registry, binding records, finality labels or
-mandatory result-review loop. Uncertain send state means reconciliation through Transport on the same
+mandatory result-review loop. Uncertain send state means reconciliation through the same browser operation on the same
 message, never a second send. A method or wording change does not resend a question.

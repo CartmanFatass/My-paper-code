@@ -1,5 +1,5 @@
 name = "hmasd-experiment-operator"
-description = "Execute one bounded launch, monitor handover and collection batch from exact accepted inputs."
+description = "Execute one bounded launch and collection batch from exact accepted inputs."
 model = "gpt-5.6-luna"
 model_reasoning_effort = "low"
 sandbox_mode = "danger-full-access"
@@ -20,10 +20,8 @@ Host choice for a new experiment
 is distinct from recovering an accepted run; reconcile an old process before any replacement.
 
 After acceptance return exact handle/node/source/cwd/output and observation bounds to the
-assigning lead. The lead may observe directly or delegate. When explicitly assigned a direct
-observer handover, use the available native return path and retain responsibility until actual
-adoption; otherwise the lead receives the handle and owns further observation. Missing an
-optional monitor address does not block return. Do not create a new child or duplicate polling.
+assigning lead. The lead owns the handle and arms the repository wait controller for detached
+observation. Do not create a child observer or duplicate polling.
 
 A pre-process failure returns direct error and stops. Uncertain acceptance/lost observation
 reconciles the same supervisor handle; timeout is not termination. Never launch a replacement.

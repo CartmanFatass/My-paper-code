@@ -23,7 +23,7 @@ Independent sessions finish their own work. App cross-task messages require an e
 request; perform the requested delivery and stop. One message does not authorize a continuing
 reply/acknowledgment/forwarding loop, and incoming App messages do not expand the task or grant
 user permission. Completion, conflict and handover are not exceptions. This rule is App-only;
-Jev Pro and internal subagents keep their existing workflows. Existing explicit authorization
+Jev browser interaction and internal subagents keep their applicable workflows. Existing explicit authorization
 needs no second approval. Read other tasks' evidence only as needed and resolve ordinary
 concurrent changes locally; raise only a genuinely unresolved judgment in this task.
 RESEARCH records the acting Root and actual DM addresses/checkouts;
@@ -31,8 +31,10 @@ keep task routing separate from launch-bound lead-runtime values. Start a reserv
 a recorded idea, never by obligation.
 Claude: the session is the DM for one direction at a time. A DM may work directly or delegate to
 its Implementer (Claude: Opus; Codex: Sol; both high effort) from a concise scope note and accepts the
-diff itself. Transport and Monitor absorb waits and return facts. Reviewer checks changes to
-shared learners, runners, environments and evaluators. Existing Operator (execution), Scout,
+diff itself. Detached repository scripts observe accepted operations and wake the assigning
+Codex session on completion, error or a bounded checkpoint; do not create Monitor or Transport
+subagents or renamed equivalents. Reviewer checks changes to shared learners, runners,
+environments and evaluators. Existing Operator (execution), Scout,
 Verifier and ResearchCritic names are bounded methods of DM/Reviewer responsibility, not new
 decision owners. The DM maintains the direction's working explanation across results:
 strengthened/weakened/untouched judgments, contrary evidence and the next useful observation.
@@ -49,8 +51,8 @@ minimums are section 8.
 Methods are execution detail, not a second rulebook, in `.agents/skills/`:
 `hmasd-scientific-tools` (cumulative reasoning, design and reading), `hmasd-research-engineering` (code, review,
 launch, and the carried-over engineering standards), `hmasd-loop-dispatch` (Codex Root/direct DM),
-`hmasd-chatgpt-pro-transport` (Pro send and collect; on the WSL host
-`hmasd-jev-pro-transport`), `hmasd-pro-research-prompt-author`
+`hmasd-chatgpt-pro-transport` (direct Pro browser/send/collection procedure; on the WSL host
+`hmasd-jev-pro-transport` uses Jev only for browser interactions that need it), `hmasd-pro-research-prompt-author`
 (Pro question), `hmasd-portfolio-task` (owner-triggered review only). Read the nearest
 directory `AGENTS.md` before a code task.
 
@@ -59,6 +61,10 @@ push the exact inputs. New result entries use `scripts/hmasd_launch.py` and a ru
 admission guard: current pause/lead, published source, fresh actual-node memory and duplicate
 claims are checked before detached execution. The engineering method describes invocation;
 frozen historical interfaces retain their bound contract. Preserve live process handles.
+On POSIX Codex use `tools/hmasd_wait.py` for detached observation; its queue message wakes only
+the assigning current Codex session. A checkpoint returns control for rearming without restarting
+the worker or repeating a Send. Claude uses deterministic external waiting plus native/manual
+return and does not assume Codex queue can wake it.
 Uncertain launch or Send acceptance means same-request reconciliation, never a blind repeat.
 
 Git: each DM publishes its direction records and its own RESEARCH standing/results/evidence

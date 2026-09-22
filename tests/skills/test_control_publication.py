@@ -38,7 +38,7 @@ def test_generated_tree_carries_references_helpers_and_hub_adaptation():
     assert outputs[ROOT/'.claude/skills'/script] == (ROOT/'.agents/skills'/script).read_bytes().replace(b'\r\n', b'\n')
     hub = outputs[ROOT/'.claude/skills/hmasd-research-hub/SKILL.md'].decode()
     assert 'HMASDTransport' not in hub and 'send Root one paragraph' not in hub
-    assert 'hmasd-experiment-tracker' in hub and publisher.CONSTITUTION in hub
+    assert 'hmasd-experiment-tracker' not in hub and publisher.CONSTITUTION in hub
 
 
 def test_publication_is_independent_of_checkout_line_endings(tmp_path):

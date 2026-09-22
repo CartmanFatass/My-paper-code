@@ -149,9 +149,40 @@ At a meaningful result boundary:
    source snapshot when necessary to keep active inputs unchanged while authoring continues.
    Link the manifest/operation reference from `NOTES.md` and explain the scientific context;
    do not manually duplicate its command, node, native identities, SHA, cwd and output fields.
-4. Observe directly or delegate to a monitor/tracker when useful. On transfer, retain observation
-   responsibility until the recipient adopts the accepted handle. Timeout or a lost connection is
-   unknown, not terminal. Never launch a duplicate; reconcile the same handle.
+4. Arm `tools/hmasd_wait.py` against the accepted launch status handle and end the Codex turn.
+   The detached standard-library controller observes the existing process and queues the assigning
+   session only on completion, error or a bounded checkpoint. A checkpoint is rearmed against the
+   same handle; it never restarts the worker. Timeout or a lost connection is unknown, not terminal.
+   Never launch a duplicate; reconcile the same handle. Claude uses deterministic external waiting
+   plus native/manual return because Codex queue does not wake a Claude session.
+
+   Save this request in task-local private scratch as `/absolute/path/to/request.json`:
+
+   ```json
+   {
+     "jobs": [{
+       "id": "launch-<tag>",
+       "protocol": "launch",
+       "argv": ["/absolute/path/to/python", "/absolute/repository/scripts/hmasd_launch.py", "status", "<native-status-ref>"],
+       "cwd": "/absolute/repository",
+       "interval": 30,
+       "timeout": 20
+     }]
+   }
+   ```
+
+   ```bash
+   python tools/hmasd_wait.py arm --request /absolute/path/to/request.json --window 1500
+   python tools/hmasd_wait.py drain
+   python tools/hmasd_wait.py rearm --generation <N> --wake-id <ID> --event-ids <ID>...
+   ```
+
+   `argv` may explicitly invoke SSH when that is how the real node's status command is reached.
+   The default state is per current Codex thread under `~/.local/state/hmasd-wait/`; multiple jobs
+   share and coalesce one session wake. The queue notice contains no private URL. `stop` records
+   `observation_stop_requested` and cancels only the waiter's owned probe on its next short
+   supervisor tick, with a brief TERM grace period; the observed experiment remains unchanged.
+   Use `--resume-jobs` only after explicitly resolving a blocked job.
 5. On terminal notice collect outputs into `runs/<direction>/<tag>/` and verify the local
    artifact before any remote cleanup. Exit zero is not a result; the DM reads it.
 

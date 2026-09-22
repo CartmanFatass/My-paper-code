@@ -1,4 +1,4 @@
 interface:
-  display_name: "HMASD ChatGPT Pro Transport"
+  display_name: "HMASD ChatGPT Pro Browser Procedure"
   short_description: "Send one committed Pro question and collect the answer"
-  default_prompt: "Use $hmasd-chatgpt-pro-transport to send one committed question in the assigned conversation, wait for completion, read the complete answer at its assigned NOTES.md or RESEARCH.md target and return facts."
+  default_prompt: "Use $hmasd-chatgpt-pro-transport to send one committed question in the assigned conversation, arm detached observation, and read the complete answer at its assigned NOTES.md or RESEARCH.md target."
