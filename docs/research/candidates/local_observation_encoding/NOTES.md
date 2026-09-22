@@ -182,3 +182,16 @@ B01 will execute sequentially, ORIGINAL then DENSE, under the same published inp
 The 10,800-second ordinary per-fit wall plan is a scheduling estimate, not a cutoff or
 scientific endpoint; dense cost is still unmeasured. Accepted workers keep their original
 handles, with deterministic observation and checkpoint rearming rather than resubmission.
+
+### ORIGINAL accepted — 2026-09-21 19:52 PDT
+
+Exact reviewed inputs `efe7d61e82b2c0aed7a634bbb2e22d7cc47430a3` were published and
+staged byte-for-byte on the preferred remote node. The fresh suitability check showed
+about 14.6 GiB available RAM and low load; the native kernel then performed its own
+actual-node admission. ORIGINAL is accepted and running, with consistent runner/supervisor
+identity. Authoritative operation and preflight/source fields are in the runner-written
+[launch manifest](../../../../runs/local_observation_encoding/b01_original_s92101/launch-manifest.json).
+Started result fits: 1 of the 2 declared; DENSE is not yet submitted. No scores have been read.
+The detached observer is armed against this same operation for completion/error or a bounded
+checkpoint. Next continuation reconciles that handle; it does not repeat the launch. Complete
+and collect ORIGINAL, then admit DENSE independently at the same input SHA and frozen plan.
