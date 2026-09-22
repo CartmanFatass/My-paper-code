@@ -614,3 +614,19 @@ convincing AR increment favor the simpler method. A one-instance ranking is not 
 superiority or equivalence. If no useful native increment and no concrete differentiating
 follow-up remain, stop this bounded recipe; do not automatically enlarge the menu, change
 host/reward, add modules or purchase more seeds. Started fits remain **0** at this entry.
+
+### Common recurrent correctness repair — before B01
+
+The inherited shared-background B11 warning applies to the actual low-level update hot path:
+`update_discoverer_from_rollout` uses `1-done[t]` for actor/critic entry masks, although storage
+and GAE correctly interpret done[t] as ending the transition out of row t. At our terminal
+row 499 this resets the RNN before evaluating the last action/value. The already correct
+`SkillDiscoverer.evaluate_sequence` helper is bypassed by this optimized path.
+
+Expand the DM's L0 only for the known shared repair in `hmasd/agent.py`: row-0 entry mask is
+one, later entry mask is `1-done[t-1]`, for both actor and critic. Reuse the storage→sampler→
+actual-update-dispatch regression from B's published `74fe267aa166299d93a03566e5f0ab149ff2b12d`
+as `tests/hmasd/test_discoverer_entry_masks.py`. This is the same known repair, not a newly
+discovered performance intervention. It applies to every B01 arm, is reviewed with the full
+adapter, and is not retroactively applied to historical FSD measurements or another task's
+accepted run. No other low-level loss, recurrence or reset semantics change.
