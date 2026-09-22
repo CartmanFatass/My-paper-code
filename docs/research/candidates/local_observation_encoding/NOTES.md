@@ -252,3 +252,21 @@ no tuning, new arm, horizon extension or new batch is inferred from this baselin
 fits remain 1 of the 2 planned. Fresh preferred-node reading before that cell shows about
 9.47 GiB available RAM; the canonical main checkout was fast-forwarded without changing
 other tasks' untracked files, and native admission will perform its own current check.
+
+### DENSE accepted — 2026-09-21 21:36 PDT
+
+The second frozen B01 cell is accepted and running on `wsl_4070` at the same input SHA
+`efe7d61e82b2c0aed7a634bbb2e22d7cc47430a3`, training seed 92101 and 360,000-team-transition
+horizon. Native admission read current main `a99ba7d62`, confirmed the unchanged active
+lead/pause, and measured 10,208,628,736 available bytes against the 4 GiB floor. Runner and
+supervisor identities agree with their recorded handles. The original operation remains
+terminal and was not restarted. See the runner-written
+[DENSE launch manifest](../../../../runs/local_observation_encoding/b01_dense_s92101/launch-manifest.json)
+and [preflight](../../../../runs/local_observation_encoding/b01_dense_s92101/admission-preflight.json).
+
+Started result fits: 2 of 2 planned; ORIGINAL is complete and DENSE is running. No DENSE
+scores have been read. Deterministic observation is bound to the manifest's same operation
+for completion/error or a bounded checkpoint. Completion requires the full endpoint,
+activation, service and cost reading before a representation/net-use judgment; a successful
+process exit alone is insufficient. No additional fit, Pro Send or cross-task message is
+authorized by an observation event.
