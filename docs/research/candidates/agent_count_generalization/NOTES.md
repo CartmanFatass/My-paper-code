@@ -858,3 +858,19 @@ control trajectory; then H6 914413 and SET 915413. This tests whether the observ
 survives SET as well as H6 training variation. It is completion of the original six-fit design,
 not a score-dependent extension, and existing Pro advice remains applicable without a resend.
 Current cost is 3 started/3 completed fits, 0 technical failures, three cells unlaunched.
+
+
+### 2026-09-22 fourth accepted operation — SET seed 915307
+
+After the second H6 result was fully collected, verified, read and published, SET seed 915307
+was admitted on `wsl_4070` at the same immutable source and unchanged 360k/four-panel
+contract. Fresh actual-node admission passed with 14,033,330,176 available bytes against
+its 4 GiB floor. The [native manifest](../../../../runs/agent_count_generalization/s1_count_b01_set_s915307/launch-manifest.json)
+and [admission preflight](../../../../runs/agent_count_generalization/s1_count_b01_set_s915307/admission-preflight.json)
+bind the accepted command, source, operation and process identities. Native status observes
+both original runner and supervisor running, consistent records and no exit witness.
+
+Current cost is 4 started fits: 3 complete and read, 1 running, 0 technical failures. H6 914413
+and SET 915413 remain unlaunched. The preceding H6 terminal event has been consumed. Register
+the repository observer for this exact SET handle with 1500-second checkpoints and terminal/
+error wakeups, without changing source or selecting a checkpoint from partial scores.
