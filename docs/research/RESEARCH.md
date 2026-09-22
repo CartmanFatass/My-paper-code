@@ -10,10 +10,10 @@ Owner 于 2026-09-21 明确选择四方向并行、由本任务选题并创建�
 方向授权覆盖各 DM 的独立研究；具体训练批次仍由其在 NOTES 中事先声明。
 **Claude 的 FSD session 仍暂时停止，仅由 owner 手动开启；G33 保持冻结。**
 
-**本次初始化负责人，随后直接担任周期方向 DM：** task `01a0c348-428c-7f01-bd8b-121d69543032`，host `local`。
-Checkout `/home/fires/.codex/worktrees/project-research-coordination/hmasd-wsl`，
-branch `codex/project-research-coordination-20260921`。
-初始化完成后四个 DM 禁止互相通信，不设持续 Root 汇报、转发或进度监视；各自在本任务向 owner 报告并独立发布。
+**初始化已完成；本任务现直接担任周期方向 DM：** task `01a0c348-428c-7f01-bd8b-121d69543032`，host `local`。
+Checkout `/home/fires/.codex/worktrees/joint-duration-learning/hmasd-wsl`，
+branch `codex/joint-duration-learning-20260921`。当前四个 DM 均已核对实际轮次为 `gpt-6-astra` / `max`。
+四个 DM 禁止互相通信，不设持续 Root 汇报、转发或进度监视；各自在本任务向 owner 报告并独立发布。
 共享 Git 证据和研究背景继续按既有方法读写，Pro 咨询和本任务内有界 helpers 继续适用。
 四方向并行是当前工作强度，不等于四份重训练同时占用节点，也不要求自动递补停止的方向。
 **计算优先级（owner，2026-09-21）：先使用配置中的 WSL 远端 `wsl_4070`，再考虑本地资源。**
@@ -155,7 +155,7 @@ B/UCOPE 的局部预测、一步优势或真实后缀信用没有自动转成稳
 
 | Direction | Question | State | Lead runtime | Standing and next step |
 | --- | --- | --- | --- | --- |
-| `joint_duration_skill_learning` | 在完整高低层共同学习中，新增时长选择及普通联合时长参数化能否改善有限资源下的原生服务？ | exploring | Codex DM (independent session) | 本任务直接 DM：`01a0c348-428c-7f01-bd8b-121d69543032`，host `local`；当前 checkout/branch 同上，随后登记独立研究工作区。S1 固定 k／充分知情的条件分解时长／普通 AR 联合时长；继承 FSD/UCOPE 反证，旧 Claude/FSD 路线保持停止。本次尚未接受 fits。[问题与边界](candidates/joint_duration_skill_learning/NOTES.md)。 |
+| `joint_duration_skill_learning` | 在完整高低层共同学习中，新增时长选择及普通联合时长参数化能否改善有限资源下的原生服务？ | exploring | Codex DM (independent session) | 直接 DM task `01a0c348-428c-7f01-bd8b-121d69543032`，host `local`；checkout `/home/fires/.codex/worktrees/joint-duration-learning/hmasd-wsl`，branch `codex/joint-duration-learning-20260921`。S1 固定 k／充分知情的条件分解时长／普通 AR 联合时长；已开始现有完整 HMASD 与 duration 路径核对，不直接以 HA-CTSE 开关替代原技能学习。本次尚未接受 fits。[问题与边界](candidates/joint_duration_skill_learning/NOTES.md)。 |
 | `local_observation_encoding` | 同一合法局部观测下，普通稠密槽位/关系编码能否改善完整 HMASD 的有限学习？ | exploring | Codex DM (independent session) | 直接 DM task `01a0c6ef-7c4b-7f02-b96d-ab115d467af8`，host `local`；checkout `/home/fires/.codex/worktrees/d683/hmasd-wsl`，branch `codex/local-observation-encoding`。S1 固定 k/N，原 encoder 对普通稠密编码；保持共同学习和原目标，不叠加预测、稀疏或时长模块。本次尚未接受 fits。[问题与边界](candidates/local_observation_encoding/NOTES.md)。 |
 | `agent_count_generalization` | 固定 k、回合内固定 roster 时，HMASD 对未见团队数量 N 的服务能力和泛化代价是什么？ | exploring | Codex DM (independent session) | 直接 DM：task `01a0c6ef-cdd4-7113-b2d9-20487e35171b`，host `local`；checkout `/home/fires/.codex/worktrees/7fef/hmasd-wsl`，branch `codex/agent-count-generalization`。原生 train-N→test-N；普通共享/set generalist 是强参照，明确 HMASD 配置及同信息/曝光契约，独立核对可变 N 接口。本次尚未接受 fits。[问题与边界](candidates/agent_count_generalization/NOTES.md)。 |
 | `uav_service_auxiliary` | 未来事实端到端服务监督能否帮助 HMASD 学会接入、回传与能源约束下的协作？ | exploring | Codex DM (independent session) | 直接 DM task `01a0c6f0-31e1-7510-bee7-4f0f8b62d821`，host `local`；checkout `/home/fires/.codex/worktrees/a335/hmasd-wsl`，branch `codex/uav-service-auxiliary`。S7 v3/reward v2/arm C，固定 k/N；相同已训练预测头 detach 对辅助梯度进入 actor/GRU。绑定真实服务标签及窗口，G33 冻结。本次尚未接受 fits。[问题与边界](candidates/uav_service_auxiliary/NOTES.md)。 |
