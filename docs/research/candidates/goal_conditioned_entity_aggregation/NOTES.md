@@ -592,3 +592,28 @@ The existing fully read Pro advice still covers the selected question and compar
 Proceed with the declared O -> P -> E sequence, each at its own fresh native admission on
 wsl_4070, CPU FP32 with four torch/BLAS threads. This source and the fixed inputs are published
 before the first launch. At this acceptance entry, no new scientific fit has started.
+
+## 2026-09-22 — B01 O accepted and learning
+
+The first declared O fit passed native admission and is running. Its recoverable operation,
+exact published source, invocation, remote output, supervisor and runner identities are in the
+runner-written [launch manifest](../../../../runs/goal_conditioned_entity_aggregation/b01_o_s922611/launch-manifest.json),
+with [fresh actual-node preflight](../../../../runs/goal_conditioned_entity_aggregation/b01_o_s922611/admission-preflight.json)
+and [accepted launch status](../../../../runs/goal_conditioned_entity_aggregation/b01_o_s922611/launch-status.json).
+These three collected files were parsed and SHA-256 matched to their remote originals.
+Native status independently reported accepted, both recorded processes running and consistent
+records; the outer task supervisor's successful exit only completed launch, not the experiment.
+
+The initial runtime observation had 16,000 collected/stored training transitions, one completed
+rollout-update stage, zero evaluation transitions and no recorded failure. The running summary's
+`incomplete` label is its unfinished state, not a failure claim. Two models exist, exactly one
+training start; O has 92,672 base and 492,294 actor parameters. The actual runner environment
+reports four OMP, OpenBLAS and MKL threads. These are setup/progress facts, not final outputs
+or service comparisons. Cost now stands at **one started scientific fit of the three declared**;
+P and E have not started, and no score has selected or excluded either arm.
+
+The assigning session observes this same native handle with `tools/hmasd_wait.py`; a bounded
+checkpoint rearms observation without restarting the worker. On terminal evidence, collect
+and read the complete O outputs, then continue the fixed P -> E sequence after fresh admission.
+No browser or other DM/task participates in observation. Keep the source checkout and remote
+outputs intact until complete collection and verification.
