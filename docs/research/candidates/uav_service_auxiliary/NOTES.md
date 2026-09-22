@@ -1329,3 +1329,34 @@ consequence, without turning missing optional material into an approval process.
 `MATERIAL_DISSENT: yes/no`. The DM owns the final choice and will record adoption or dissent.
 
 ### Answer
+
+## 2026-09-22 — Same-operation observation correction and bounded L0
+
+The question above was sent once under key
+`hmasd:89adf42eea46a3380a9f9bac76cf9fec1c4fda626d6a8da2205de6d41cf61f75`,
+source `bf065e83a29880773168b111e0c66349f4359855`, effort `6 Pro`; the exact attachment was
+seen. The first deterministic observation incorrectly classified the 58-character opening
+acknowledgment as COMPLETE. Delivery inspection returned NOT_DELIVERED, with no answer
+commit. Reopening the same conversation read-only showed active source-retrieval/search
+progress after that acknowledgment, despite the absence of the composer's stop button.
+Thus the recorded short text is not the requested answer; scientific consultation remains
+pending. The original request is accepted and will not be repeated or replaced.
+
+L0 for the necessary observation repair: change only `tools/pro_transport/jev_send.py`
+completion recognition and its focused `tests/skills/test_jev_transport.py` regressions.
+Require completion controls in the bound assistant turn, rather than infer completion
+from stable text plus absence of a global stop control. Preserve exact prompt/attachment
+matching, operation key, single-send guard, conversation binding, connector authorization,
+bounded observation, private URL policy and owned-tab closure. Test a stable opening
+acknowledgment during tool work, a later true final answer, and isolation from earlier or
+later turns' final controls; run the existing transport checks and obtain independent
+engineering review. This is 0 fits and no new Pro Send. A new observation may target the
+same accepted operation after the erroneous event is consumed; it cannot restart Pro.
+The Pro-owned Answer subsection remains empty and untouched by this entry.
+
+The DM's focused suite passed 30 tests in 0.78 seconds; independent Reviewer reran it,
+30 passed in 0.72 seconds, with no material finding. A live read-only DOM check identified
+the prior completed assistant's feedback control while the current operation had no
+collectable final answer and continued reporting research progress. The DM accepts this
+bounded repair; raw page/operation details remain private. There is still no scientific
+answer or adopted six-fit batch at this boundary.
