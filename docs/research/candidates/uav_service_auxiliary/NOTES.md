@@ -1093,3 +1093,239 @@ Terminal observation `c616b9a44bca892fba642f98` was consumed using generation 28
 events or active observations. All four launches are terminal, and the only Pro operation
 was already delivered, read and its owned tab closed. No worker restart, repeat Send,
 cross-task message or new operation follows from this completion event.
+
+## 2026-09-22 — Direct DM continuation and plan-1 source reading
+
+Owner has now started literature-plan item 1 and assigned this same direction to direct DM
+task `01a0c9af-d5cd-7d70-b5e8-9db2c598ad4e`, checkout
+`/home/fires/.codex/worktrees/d319/hmasd-wsl`, branch
+`codex/uav-service-predictive-control`. The published registration is
+`e46deae6aae14dd54180bfabd982fd00840a14de`; this checkout was fast-forwarded to it.
+The prior DM's notebook, four fits, frozen sources and conclusions remain intact. The
+launch-bound lead is still `Codex DM (independent session)`. Claude FSD remains paused and
+G33 remains frozen. Initialization is complete; no continuing Root permission or App
+communication is involved.
+
+Read-only native status checks at `2026-09-22T15:18:46Z` reconciled all four original
+operation references: consistent records, valid exit-code-0 witnesses and absent finished
+runner/supervisor identities. The old checkout is clean and was not written. Its one Pro
+operation remains `COMPLETE` with `send_effect=sent`, and its full delivered answer at
+`c1f7fdeef4813af4ffd023d75ef7bcf39326351e` was reread. No old launch or Send was repeated.
+
+The new DM also independently recomputed all four saved endpoint prediction errors from
+the retained local arrays using direct float64 W10 sums. Episode-equal MSE is
+0.010846486932 / 0.003328549872 for B01 detach/joint, and
+0.004150978507 / 0.009332327272 for B02 detach/joint. Every episode has 1491 valid windows;
+validity matches saved masks exactly and the largest target difference is 2.981e-8.
+The within-pair factual SHA256 values match the original records. These are verification
+of existing observations, **0 new fits**, not additional replication. B02 initial-policy
+fact target standard deviations are only 0.008519 and 0.001446; this narrow diagnostic
+distribution does not support treating its MSE as controller quality.
+
+The working explanation remains the [complete B02 reading](#b02-complete-comparison-and-bounded-keep-decision--2026-09-22):
+two useful native package contrasts, an explicitly contrary proxy ordering, late decline,
+low absolute service and no evaluation charging/cutoff/depletion exposure. What is new is
+the selected question: does the service package retain useful control value against a
+specified ordinary auxiliary representation-learning package, on fresh training instances
+and fresh final worlds? The earlier Pro answer covered unchanged recurrence and proxy
+reversal, but did not assess this new comparator. Constitution section 5 therefore calls
+for one focused consultation before adopting the successor design.
+
+Current main's [shared background topics 2, 4 and 6](https://github.com/CartmanFatass/My-paper-code/blob/e46deae6aae14dd54180bfabd982fd00840a14de/docs/research/RESEARCH.md)
+changes the design concretely: future facts remain training labels; primary readings stay
+native J/service/risk; a common endpoint-policy factual panel supplements the narrow
+initial-policy panel; training blocks remain the repetition unit; S/G differences cannot
+identify service semantics alone. The new S1 raw/clip deployment observation in topic 3
+does not transfer as an S7 correction: S7's energy wrapper already transforms actions.
+
+Relevant primary passages were checked against the local source JSON, with official
+bibliographic pages verified: [Ni et al., ICLR 2024](https://proceedings.iclr.cc/paper_files/paper/2024/hash/666c1861d709bd84e20b6e0e02a2c223-Abstract-Conference.html),
+Algorithm 1 / section 4.3 and section 5.3, supports an ordinary one-step action-conditioned
+self-prediction comparator. Its clean MiniGrid results favor observation prediction over
+self-prediction, and its detached-target rank degrades in deep recurrent experiments;
+stop-gradient is not a general anti-collapse guarantee. [SPR, ICLR 2021 v4](https://arxiv.org/abs/2007.05929v4),
+section 2.2, Table 2 and Appendix D, supports normalization/target stop-gradient as concrete
+design choices and retaining full auxiliary compute cost, not a UAV benefit prediction.
+[MA2CL, IJCAI 2023](https://www.ijcai.org/proceedings/2023/470), sections 4.2–4.3 and conclusion,
+already uses auxiliary gradients on the actor encoder; moving a loss there is not itself
+a new mechanism. Local evidence records are `DMOD-C517F96832` E4/E7,
+`DMOD-F328FA237A` E1/E4/E6 and `MARL-0502` E2/E3/E7 under
+`/mnt/c/Projects/Inst-sci/papers/MyLib/llm-index/readings/`; primary JSON files are under
+the same library's `json/`. The three synthesis revisions from DMX-C02 to MFX-C03 are
+design context, not new empirical evidence or support for a compulsory fixed readout.
+These analogies omit endogenous teammate learning, shared team labels and policy-induced
+changes in trajectories; the native comparison is needed for those effects.
+
+A bounded source Scout and direct DM inspection identified an action distinction relevant
+to the proposed G arm. At frozen source `30401722b14c208bf5330ab66e967c94b3df8a36`, the runner
+stores the raw four-dimensional actor command and submits it to `env.step`. The S7 energy
+wrapper clips it, interprets docking and may override movement before sending a derived
+three-dimensional action to the base environment. Proposed G should therefore condition
+on the **actual submitted actor command**, not claim to observe the final physical action.
+This keeps the policy's action variable and avoids adding hidden execution-state inputs or
+changing the environment. The prediction head's inputs remain training-only.
+
+W10 uses the consequences of rows t through t+9, with terminal/truncated transitions
+allowed only at the last member of a full window. The shared W10-valid starts already
+exclude `done[t]` and guarantee that observation t+1 exists, so G can use that same subset
+without crossing a reset. Chronological auxiliary replay uses the stored sequence-entry
+hidden state, masks `1-done[t-1]`, held skills through detached FiLM and chunk length 50.
+The actual old runs have no straddling collector boundaries. No new full-episode recurrent
+algorithm or new physical action mapping is selected by this continuation.
+
+## Pro question 2026-09-22 b03-service-versus-generic-control
+
+Conversation: reuse the direction's completed Jev conversation from local operation
+`hmasd:9bb9395a71f2a673ecf1e24524eba4fa6b20b6bac2c77efcd307021b692d362c`.
+Its private address stays only in local transport state.
+
+Question: Under the complete B01/B02 evidence, is the following six-fit D/S/G comparison
+the smallest worthwhile next investment to distinguish a useful W10 service-training
+package from an ordinary auxiliary-learning explanation? Recommend a concrete first
+comparison and reading rule, especially whether the proposed generic target is a competent
+reference, which scale/collapse diagnostics actually protect that reading, and which
+outcomes should end this recipe's spending. This is a package/use decision, not a request
+to prove service-semantic mediation or invent another module.
+
+Standing: the preceding continuation entry and B02 complete comparison are the current
+explanation. B01/B02 final joint-minus-detach J is +159.537455/+403.511306, QoS is
++0.038796/+0.080033, return cost is -0.034002/-0.094605; B02 common-fact MSE ratio is 2.248223.
+Both pairs decline late, both use the same eight evaluation worlds, and risk mechanisms
+have no charging/cutoff/depletion evaluation exposure. No prediction is an actor input.
+The strongest simpler account is extra representation optimization/stabilization; another
+is development-instance/world dependence. Two positive training pairs do not resolve them.
+
+Proposed comparison, subject to this advice and the DM's subsequent explicit adoption:
+
+- D: both service and generic heads train on detached actor features; native learning stays.
+- S: only W10 service loss updates actor base/GRU; the generic head is a detached shadow.
+- G: only one-step normalized latent-prediction loss updates base/GRU; the service head is
+  a detached shadow. All arms contain both heads and have the same training data rights.
+- Service head: hidden -> 64 -> 1, unchanged W10 team QoS target. Generic head:
+  `(h_t, submitted raw actor command a_t)` -> 64 -> hidden, predicting stop-gradient
+  `h_(t+1)` with squared distance between unit-normalized vectors, epsilon 1e-8. Target
+  features are computed without gradients once at the start of each auxiliary pass and
+  held fixed for that pass; they are refreshed next pass, not permanently frozen. No EMA,
+  projection, teacher, prediction input, communication or planning is added by default.
+- Both heads update each chunk; only the designated loss reaches the representation.
+  Preserve S's existing head initialization with RNG-isolated generic initialization;
+  test D/S native behavior against the old recipe when the added head is shadow-only.
+  Keep native update then one auxiliary pass, chunk50, separate head/representation Adam
+  rates 3e-4/3e-5 and separate norm clips .5. Same rates are not the same gradient effect.
+  No evaluation-dependent loss tuning or hidden generic warm-start is proposed.
+- Preserve S7-S2 interface v3/reward v2/arm C, N8/k10, local actor information, critic,
+  Gaussian/PPO likelihood and existing S7 action execution. Proposed command conditioning
+  explicitly differs from conditioning on the post-energy-wrapper physical motion.
+  Auxiliary replay uses original observation normalization with no statistic updates,
+  sequence-entry hidden state, shifted done masks and held skill conditioning. G uses
+  exactly S's complete W10 start rows, so its next row never crosses an episode boundary.
+
+The S/G contrast changes time span, scalar versus latent target and loss geometry as well
+as service semantics. Even a favorable S/G result establishes only this specified package
+contrast. A collapsed G cannot establish service-specific necessity or defeat all generic
+auxiliary learning. Ni et al.'s clean-observation OP results and detached-target rank decline
+are adverse context for casually labeling this G a strong comparator. Please choose whether
+to retain this bounded G or substitute one clearly specified ordinary target **before** any
+fit, with the information/cost reason; do not suggest an automatic target sweep.
+
+Prospective cost and units: D/S/G × two fresh training blocks = **6 fits**, each
+4 lanes × 1500 steps × 30 rollouts = 180k, total **1.08M training transitions** on
+configured `wsl_4070`, CUDA FP32, four Torch threads. Existing four fits remain development
+evidence. Candidate training seeds are 912211 and 912347 (each also binds its lane seeds
+and model RNG). A bounded search of published direction notes, designs, scripts, candidate
+code and runner configs found no use of these or the proposed factual/final-world seeds;
+final implementation will bind actual values through config and launch. There are no new
+fits started or queued, and this question does not grant an automatic confirmation.
+
+Preserve rollout 0/10/20/30 development curves on worlds 920001–920008. At rollout30 only,
+evaluate all six fits on fresh final worlds 936001–936032, shared across arms and blocks.
+That is nominal **576k native evaluation steps**, with actual termination counts reported.
+Each block samples two common initial-policy factual episodes (932201/932202 and
+932211/932212 respectively), then each endpoint policy supplies four episodes on the block's
+common factual worlds (933201–933204 and 933211–933214). After the three fits in a block,
+all three heads replay the same union of endpoint trajectories from reset; factual data
+never updates any learner. Physical factual collection totals **42k steps**, plus replay.
+Native training/evaluation/factual worlds are disjoint; endpoint facts are diagnostic data,
+not the final native world panel. Episodes are weighted equally for the primary W10 MSE,
+and neither overlapping windows nor agents inflate the training repetition count.
+
+Primary readings: per training block, final-world mean raw episode-return differences
+S-D, G-D and S-G at rollout30; retain every world, curve and absolute level. Report QoS,
+delivered throughput, return-constraint cost, minimum battery and actual charging/cutoff/
+depletion exposure beside J. Primary intermediate reading is endpoint-common-fact W10 QoS
+MSE, with the initial-policy panel separately named. It is not a necessary-benefit gate.
+Two blocks are exploratory; no population ranking, equivalence or confirmation claim.
+
+Record per-pass target/feature/prediction norms, per-dimension variance and effective rank,
+actual auxiliary head/representation gradients and parameter displacement, loss/counts and
+full costs. The plan also proposes same-parameter-point RL/auxiliary gradient cosine and
+post-auxiliary policy KL. These require additional loss replay/instrumentation: advise
+whether they alter this first package decision or should be deferred until a separately
+chosen gradient-location question. No scalar diagnostic may become an outcome-selected
+replacement endpoint. Numerical failure is technical failure; target collapse is an adverse
+comparator observation, not service-semantic evidence or a license to replace fits mid-batch.
+
+Proposed investment reading: two fresh blocks with useful positive S-D native contrasts,
+service support and compatible observed risk retain the bounded S package. Consistent S-G
+increment would retain only a contrast to that exact G. If both useful packages are hard
+to distinguish, prefer actual simpler/cheaper use without an equivalence claim. Proxy-only
+improvement, final-world reversal or continued poor absolute service should weaken further
+investment, not trigger an early-checkpoint rescue or extra fit. G failure cannot rescue S
+when S-D has no useful native increment. Please challenge these branches and state what
+observation would change your recommendation. Four-fit GRU-only follow-up and eight-fit
+confirmation are unselected options, not part of this batch or an entitlement.
+
+The historical 509.11 runner minutes for four fits gives only a rough original-recipe
+scale (~127 minutes/fit); expanded final evaluation, generic forward/backward, endpoint
+facts and replay add work of unknown duration. No exclusive-node speed claim is available.
+Implementation/verification are non-fit work; fitting any additional probe would count and
+require a separate prospective choice. No mandatory toy pass or exhaustive search is proposed.
+
+Context (paths marked source_sha use the full question commit supplied in the message):
+
+- Current owner instruction: activate literature-plan item 1 as this direction's independent
+  direct DM, continue through meaningful execution/readout/publication; initialization is
+  complete. No App cross-task communication. Research is authorized here; Claude/G33 remain
+  restricted. `docs/project/OPERATING_CONSTITUTION.md` sections 1–5, 7–8 at source_sha gives
+  governance, fit-cost and bounded inference; Pro advises and adds no approval gate.
+- Method at source_sha: `.agents/skills/hmasd-scientific-tools/SKILL.md`, Update the working
+  explanation / Simple-model and literature bridges / Comparators and MARL information /
+  Statistics / Cost and exposure / Pro. Engineering's Checks and review applies only to
+  actual successor implementation, not a new science prerequisite.
+- Shared evidence: `docs/research/RESEARCH.md` topics 2/3/4/6 and the owned Active row at
+  `e46deae6aae14dd54180bfabd982fd00840a14de`; original proposed design is
+  `docs/research/designs/LITERATURE_RESEARCH_PLAN_20260922.md#plan-1` at
+  `fe6e990cb161af5483d12da624e0184e75db3ffd`. The draft is a starting point, not a frozen run.
+- Direction evidence at source_sha: this notebook's B01 paired reading, B02 complete
+  comparison and continuation above; complete `summary.json` and `config.json` under
+  `runs/uav_service_auxiliary/b01_detach_910021_a01/`, `b01_joint_910021_a01/`,
+  `b02_detach_910137_a01/`, `b02_joint_910137_a01/`. The earlier full Pro answer is this
+  notebook's `Pro question 2026-09-22 b01-native-gain-next-investment / Answer` at
+  `c1f7fdeef4813af4ffd023d75ef7bcf39326351e`; its B02 branches retain their original scope.
+- Frozen code is separately at `30401722b14c208bf5330ab66e967c94b3df8a36`:
+  `experiments/candidates/uav_service_auxiliary/b01/auxiliary.py` (`future_window_targets`,
+  `recurrent_entry_masks`, `_representations`, `update`), `native.py` (`NativeSpec`,
+  `_episode`, `write_facts`, `prediction_replay`, `run_native`), and
+  `scripts/run_uav_service_auxiliary_b01.py`; action mapping is
+  `envs/pettingzoo/relay/energy_aware.py` (`step`, `_prepare_energy_actions`,
+  `_movement_velocity_from_action`). These files need not exist on the new main-based
+  question branch; inspect the named frozen revision. Old B01/B02 entrypoints stay intact.
+- Primary passages and official links are in the preceding source-reading entry. The
+  local library files are not accessible through GitHub; do not claim to have read them.
+  Use the linked primary publications where needed and distinguish their actual results
+  from our native adaptation. No novelty claim or whole-library review is requested.
+
+Constraints: no training, no edits outside the empty `### Answer` subsection of this
+question on branch `codex/uav-service-predictive-control`. Read the pinned question for
+reasoning; fetch the latest target file for writing and use its actual blob SHA. Preserve
+all other bytes; stop on overlapping edits. On successful write report the actual commit;
+on write failure return the complete answer in chat, not merely a SHA, status or link.
+
+Return: a focused Chinese answer separating observed facts, changed/unchanged judgments
+and new conjectures; the strongest reason to decline or materially simplify this batch;
+the smallest executable informative comparison you favor, its fit/non-fit costs, comparator
+limits and result branches. State which requested source could not be read and the actual
+consequence, without turning missing optional material into an approval process. Include
+`MATERIAL_DISSENT: yes/no`. The DM owns the final choice and will record adoption or dissent.
+
+### Answer
