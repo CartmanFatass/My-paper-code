@@ -2492,3 +2492,34 @@ seeds and final45 endpoint above. Prepare a separate immutable native B03 source
 run the focused destination checks, and admit H6/raw/942201 first. No new Pro consultation or
 owner approval is needed for this already covered implementation. Full production behavior
 and actual resource cost remain to be observed; no fit is claimed at this acceptance entry.
+
+### B03 first fit admitted and learning
+
+The focused destination checks passed **12 tests in 5.06 s**, with only the existing
+matplotlib/pyparsing deprecation warnings; tracked native inputs remained clean. The first
+fixed cell, **H6/raw/942201**, was admitted at **2026-09-22 15:28:10 UTC** from the reviewed,
+published immutable source. Its [runner-written manifest](../../../../runs/agent_count_generalization/s1_action_law_b03_h6_raw_s942201/launch-manifest.json)
+binds the exact source, native operation reference, output root and live process identities.
+The [actual-node preflight](../../../../runs/agent_count_generalization/s1_action_law_b03_h6_raw_s942201/admission-preflight.json)
+passed the physical/effective memory check (15,651,602,432 physical bytes available at admission).
+
+The collected [intermediate summary](../../../../runs/agent_count_generalization/s1_action_law_b03_h6_raw_s942201/summary.json)
+reports `fit_started=true`, `status=training`, no failure, and boundary **rollout 5 collected**:
+40,000 training team steps and 40,000 stored steps, 80 training episodes/resets, four successful
+updates, and 24,000 initial evaluation steps across 48 episodes. Successful optimizer calls
+at that boundary are coordinator 60, discoverer actor/critic 9,000 each, team discriminator 60,
+individual discriminator 240. The snapshot's command wall is 327.761 s; these are partial
+cost/progress facts, not a completed endpoint or evidence of service improvement.
+
+Observed initial parameter/normalizer digest is
+`50f3d5305a2d6a94a1543d7b5111654c7b154f4a9c1b71b59474c4deb36038ac`.
+The third cell must receive this digest from the validated first-cell record and verify it
+before training. The initial checkpoint and later outputs remain at the manifest's native
+output root until collection; no binary checkpoint has been discarded.
+
+Actual B03 cost is now **one started fit out of the fixed four**, with the other three
+unlaunched. Retain the sequence SET/clip/943201, H6/clip/942201, SET/raw/943201 after this
+first cell; one direction-owned scientific process runs at a time. The detached observer is
+armed on this same accepted operation (generation 35), and a checkpoint or wake never grants
+a restart. Main's newer owner-selected directions explicitly preserve this B03 ownership and
+operation. No B03 outcome, training-law interaction or confirmation is accepted at this point.
