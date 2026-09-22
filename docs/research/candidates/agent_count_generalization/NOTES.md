@@ -2796,3 +2796,29 @@ new thresholds selected to admit a result. Complete the same fourth fit and read
 and component; no extra fit, altered recipe, checkpoint selection or new Pro question follows
 from this partial comparison. At this boundary three fits are complete and the fourth is
 unlaunched; the accepted third operation is terminal and is never restarted.
+
+### B03 fourth cell admitted with matched initialization
+
+The predeclared **SET/raw/943201** cell was admitted at **2026-09-22 19:36:03 UTC** from
+the same immutable reviewed source. The
+[runner-written manifest](../../../../runs/agent_count_generalization/s1_action_law_b03_set_raw_s943201/launch-manifest.json)
+binds the native operation and required SET/clip initialization digest. Actual-node preflight
+passed with 11,841,433,600 available physical/effective bytes; all earlier cells are terminal.
+Only this fourth scientific process is running for the direction.
+
+Required and observed initial digests both equal
+`8f19743fe8fd5a09aa998bf90ab73bdbc3de599a8f58b791610fbb628d2f97c2`.
+The three complete initial clipped-evaluation panels exactly equal SET/clip's, including
+every world. Its first over-range training witness shares SET/clip's raw draw, old
+log-probability and native starting position, but executes the raw copy; the actual successor
+matches that law and differs from the clipped successor. Original raw actions/log-probabilities
+remain in storage. This verifies the declared intervention and initialization pairing.
+
+The [initial training snapshot](../../../../runs/agent_count_generalization/s1_action_law_b03_set_raw_s943201/summary.json)
+reports `fit_started=true`, no failure, 8,000 collected/stored training steps, 16 episodes/resets,
+24,000 initial evaluation steps and zero completed updates at `rollout 1 collected`
+(51.058 command seconds). The recorded executed training bounds are −4.767218 to 4.106798,
+as allowed by this predeclared raw-training cell; all four cells retain clipped deployment.
+Stdout/stderr are empty. Actual B03 cost is **four started fits: three complete, one running**.
+The detached observer is armed against this same accepted fourth handle. Complete its original
+45 rollouts and full panels, then read B_SET and I; there is no queued fifth fit or Pro resend.
