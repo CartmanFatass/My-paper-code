@@ -439,3 +439,87 @@ diagnostic is owed. Cite sources actually read and mark any decision-critical un
 do not broaden a single-seed package observation into a stable ranking or universal claim.
 
 ### Answer
+
+**路线建议：停止对 B01 所测试的这一 dense actor-encoding 配方继续投资，支持 DM 现在归档该 active study；本次选择 0 additional fits，也不选择额外的性能实验或架构搜索。MATERIAL_DISSENT: no。** 这是在探索性不确定性下作出的机会成本判断，不是训练种子总体上的劣势确认，更不是对同信息表示、dense 编码类别或整个 local observation encoding 方向的普遍否定。本 Answer 是科学建议，不授予执行预算、不新增 owner 审批条件，也不代替 DM 实施归档。[治理][loe-gov]、[方法][loe-method]与[本次冻结问题及合同][loe-notebook]支持这种边界。
+
+#### 1. 证据足以支持停止投资，而不是把一次失败运行误当成负结果
+
+我读取了两臂在指定 source_sha 下的 `summary.json`、完整的各 45 条 `training.jsonl`、`manifest.json`、`launch-manifest.json` 和 `process-exit.json`，核对配置、三个面板的逐世界 J、终点服务分量、实际更新以及运行身份；另在实际实验代码 SHA 下静态读取了 `encoder.py` 和 `b01.py`。本判断不只依据 notebook 的汇总表。[ORIGINAL summary][loe-os]、[DENSE summary][loe-ds]、[ORIGINAL training][loe-ot]、[DENSE training][loe-dt]是主要结果来源。
+
+两臂的科学输入均为 `efe7d61e82b2c0aed7a634bbb2e22d7cc47430a3`；共同训练种子为 92101，配置均保留 S1、N=6、50 个用户、k=10、六个 team/individual skills、D1280 固定段长配置和完整 high/low/discovery 学习。每臂确有 45 个 rollout 更新阶段、360,000 个训练/stored team transitions；逐轮均为 8,000 transitions、16 个完成 episode，agent/team 段长均为 10。这里的“45 次更新阶段”不是“只有 45 个 optimizer steps”：两臂五组优化器累计调用均为 **675 / 101,250 / 101,250 / 675 / 2,700**，顺序为 coordinator、actor、critic、team discriminator、individual discriminator。各组都有相对于初始化的实际位移；三个评价面板各用 93101–93132 的 32 个世界，评价不更新模型。共同种子和相同计数不意味着两臂学习了完全相同的动作轨迹，也不构成独立训练重复。[两份 summary][loe-os]、[训练逐轮记录][loe-ot]与[DENSE 对应记录][loe-dt]支持这些读法。
+
+启动和退出记录的操作身份分别匹配，均正常完成；这一点与科学端点、配置及更新记录合起来才支持“完整的 adverse fit”，不能仅凭 code 0 下结论。初始 manifest 中共同出现的 `arm: D0` 不构成错标证据：`b01.py` 明确将 ORIGINAL 和 DENSE 都映射到相同的 `("D0", 1280)` 基础配置，而 `encoder_arm`、启动参数、active base 类型和参数量区分实际编码器。运行治理/bootstrap 的 main revision 也不能替代 manifest 中记录的科学输入 SHA。[ORIGINAL manifest][loe-om]、[launch][loe-ol]、[exit][loe-oe]；[DENSE manifest][loe-dm]、[launch][loe-dl]、[exit][loe-de]；[接入代码][loe-run]。
+
+静态代码核对进一步削弱了“编码器没有真正接入”这一简单解释：DENSE 只接收同一 104-float 输入；rank embedding 不提供持久身份；零槽仍参与 attention 和均值聚合；替换 `actor.base` 后重建其 optimizer，且发生在 theta0 捕获之前；独立 evaluator 也安装对应编码器。共同的 recurrent entry-mask 修复是冻结合同的一部分，不能将其效果归给编码器。**这些证据支持比较确实发生了，不证明所有实现环节无误，也不证明该配方已经优化充分。**[编码器][loe-encoder]、[接入代码][loe-run]、[冻结实现验收记录][loe-notebook]。
+
+#### 2. 实际不利程度：原生目标、服务和成本指向同一个投资选择
+
+按共同世界逐项相减并复算均值，得到以下固定面板结果；差值均为 DENSE−ORIGINAL。J45 仍是唯一预写 primary，其他两行只用于解释学习曲线。
+
+| 固定面板 | ORIGINAL J | DENSE J | J 差值 | DENSE J 较低的共同世界数 |
+| --- | ---: | ---: | ---: | ---: |
+| 15 | 0.483578 | 0.192473 | -0.291105 | 31/32 |
+| 30 | 0.405594 | 0.211740 | -0.193853 | 32/32 |
+| 45，primary | 0.458426 | 0.202254 | -0.256172 | 32/32 |
+
+数据来源是[ORIGINAL 逐世界面板][loe-os]和[DENSE 逐世界面板][loe-ds]，差值和符号数是本次对已读数值的算术复核，不是新实验。终点逐世界差值范围为 **[-0.353983, -0.138738]**，不是少数异常世界把均值拉低。第 15 面板的世界 93125 则是一个正差值例外，约 +0.030586；所以准确表述是“三个面板均值均不利，终点 32 个共同世界全部不利”，而不是“全部 96 个世界—面板配对都不利”。这项表述收窄不改变路线判断。
+
+终点 coverage 从 0.638789 降为 0.268319，即降低 **37.047 个百分点**；连接用户数从 31.939438 降为 13.415938，差 **-18.5235 人/step**。quality component 从 0.165906 降为 0.125334；altitude penalty 虽从 0.038498 降为 0.023169，但没有补偿覆盖和质量的损失。原始字段名 `energy_penalty` 在这里表示 native 高度惩罚代理，不能解释为实测电池节能。这些不是只在 representation proxy 上的退步，而是声明的原生 J 和服务结果同时不利。[ORIGINAL 服务分量][loe-os]、[DENSE 服务分量][loe-ds]、[字段语义代码][loe-run]。
+
+成本也不提供保留该配方的当前理由：ORIGINAL/DENSE 的 fit-body wall（至 checkpoint 序列化）为 **5,730.76 / 11,156.62 秒**，复算比值约 **1.947**；两次调用合计 16,887.38 秒，即约 281.46 分钟。实际 learner actor forward 为 27.79 / 112.89 秒，`evaluate_actions` 为 413.90 / 1,488.25 秒，调用数分别相同；evaluator actor forward 为 3.01 / 10.91 秒，各 1,500 次。总实验成本是已启动且已完成的 **2 fits，720,000 training 与 96,000 evaluation team transitions**。参数量增加不能代替这些实测成本：encoder 为 92,672 / 102,144，whole actor 为 492,294 / 501,766。[ORIGINAL 成本记录][loe-os]、[DENSE 成本记录][loe-ds]。
+
+这些计时描述的是本次 CPU FP32、四线程调用，不是受控节点负载下的通用硬件倍率、纯 attention 开销或单 UAV 的部署时限损失。也不应把 J 除以训练秒数另造 primary。DENSE 的 supervisor 区间与 fit-body 相差约 190 秒，不能归因给未测量的机制；10,800 秒是调度估计，不是科学截断线。即使不依赖精确的 1.947 倍数，当前仍没有看到该配方以原生收益补偿额外成本。[计时范围定义][loe-run]、[两臂完成及成本记录][loe-notebook]。
+
+#### 3. 应更新什么解释，不能更新成什么结论
+
+**增强的判断**是：在这个合法信息、完整 HMASD 联合学习、固定训练暴露量和声明终点下，B01 的特定 dense package 没有兑现“以有用成本改善 J/服务”的预测。继续投资需要一条有证据支撑、会改变实际选择的理由；“更结构化所以理应更好”已经不够。DENSE 的三个评价均值停留在约 0.19–0.21，没有出现本合同内可观察到的晚期追平信号。但这不等于证明已经收敛或证明更长训练也不会改善。[结果][loe-os]、[结果][loe-ds]、[有限学习背景 §4][loe-bg4]。
+
+**削弱的解释**包括没有激活、完全没训练、只因某一个不利终点或少数评价世界而输，以及当前就值得增加表示复杂度的投资主张。ORIGINAL 的 J15 高于 J45 必须保留，不能拿较好的早期 checkpoint 替换主终点；它也提醒我们，这个 reference fit 的存在并不证明最终 flat baseline 已经充分胜任。[冻结合同和验收][loe-notebook]、[实际曲线][loe-os]。
+
+**仍未解决的内容**是训练种子总体效应、哪一臂更可靠、其他同信息表示的价值、不同训练暴露量下的机会，以及失败的具体机制。typed projections、rank embeddings、pooling、attention、初始化和容量是一起改变的，不能从包级差值识别其中某个部件的因果作用。参数位移、优化器调用和 checkpoint 有限值也不是“学到了有用关系”或“优化配置正确”的证明。当前没有测得能优先选择 normalization、pooling、稀疏化或辅助损失修补的瓶颈；列出这些可能性并不能让它们成为有价值的下一项实验。[编码器实际构成][loe-encoder]、[方法][loe-method]。
+
+尤其不能把 32 个世界或三个时间面板当作 32 次或 96 次训练重复。它们是给定两个训练实例后的条件性评价：终点 32/32 同号增强了“这两个实例在所评世界上确实存在广泛差距”的读法，**没有消除训练种子不确定性**。不应由此计算一个关于训练配方总体优劣的符号检验结论，也不能宣布等效、稳定排名或 MARL 饱和。B05 对输入构造比较的动机不被这次结果推翻；同样，它原本就没有承诺本配方会获益。[独立单位背景 §6][loe-bg6]、[有限学习背景 §4][loe-bg4]。
+
+#### 4. 最强的实质替代解释，以及它为什么不强迫复测
+
+最强替代解释是：**seed 92101 下，DENSE 的特定初始化及后续联合学习轨迹进入了较差结果，而换一个独立训练种子可能得到不同的实用结论。** 这不需要假设非激活或数值崩溃，因此与现有完整性证据相容；同一坏策略在 32 个评价世界上持续较差也与它相容。现有材料不能估计这种种子例外的频率，不能量化下次翻转的概率，更不能证明种子例外不存在。[本次独立训练数和合同][loe-notebook]、[统计方法][loe-method]。
+
+承认这个替代解释，和选择为它继续付费，是两个不同问题。现在有明显的原生服务缺口、三个固定面板的同向均值、额外实测成本，却没有一个当前可观察到的救援机制或迟发获益信号。我的判断是：**它足以限制发表措辞，但尚不足以成为本研究继续保持 active 的具体理由。** 停止不要求先把“可能有好种子”排除干净；也不应只为使负结论显得正式而购买训练重复。这一判断不是精确的预期信息价值计算，因为材料没有提供跨种子分布、翻转概率或其他投资的可比收益。[成本/重复的方法边界][loe-method]。
+
+“ORIGINAL 也没有证明充分胜任”“原始量纲可能不适合这套编码”“pooling 可能不理想”同样不能自动推迟归档：前者限制对整个表示机会的概括，后两者目前只是未辨识的包内机制。它们没有把这次合法、完整、固定终点的配方比较变成无效实验，也没有自行选择一个具有相反可检验预测的低成本修复。[冻结比较范围][loe-notebook]、[代码][loe-encoder]。
+
+#### 5. 有界的下一项观察：本次非 fit 核查已足够，不再追加一项
+
+本次值得做的最小非 fit 工作，就是问题要求的**已存来源/结果一致性核查**，而不是新建诊断流水线。其相反预测很明确：若不利差值来自错臂、错科学版本、暴露不匹配、端点缺失或 J/coverage 解释错误，运行身份、active base、更新计数、面板世界和原始数值应出现相关不一致；若是有效的 adverse package observation，这些记录应相互支持。成本是 **0 fits、只读材料与已存数值的算术复核**。重大不一致会让我先撤回相应比较解释，而不是直接归档为有效负结果；本次没有发现这样的改变决策理由，所以这项核查在此停止。它不是对未读代码或未取得的二进制 checkpoint 的全覆盖认证。[启动与退出证据][loe-ol]、[DENSE 对应证据][loe-dl]、[原始结果][loe-os]、[DENSE 原始结果][loe-ds]、[接入代码][loe-run]。
+
+不建议再评价更多 reset worlds、观察 attention 图或追加一个很短的训练 screen，来回答“换独立训练种子会不会翻转”这个问题：前两者仍主要条件于现有训练实例，短 screen 则没有直接回答预写的完整学习终点。它们可能提供描述，但当前材料没有指出哪一种结果会使这次实际投资选择翻转，因此不应自动变成关闭前的手续。[统计与成本方法][loe-method]、[固定终点合同][loe-notebook]。
+
+独立重复并非不合法，只是**本次不选择它**。单个 fresh-seed DENSE fit 是观察“另一次 DENSE 训练能否避免本次差结果”的较小直接训练单元，代价仍是 1 fit、360,000 training 和 48,000 evaluation team transitions；与保留的 ORIGINAL 比较仍条件于那个 reference instance，不能冒充新的双臂训练重复。两臂都在一个新种子上重做则是 2 fits、720,000 training 和 96,000 evaluation transitions，也不是“便宜的非 fit 诊断”，更不是强制最低样本数。重复的不利或混合原生结果会维持停止；只有出现足以改变实际用途判断的固定终点 J/服务结果、且成本可接受，才有理由重新考虑投资，不能只凭某个 proxy、早期峰值或 DENSE 的自身改善。即使出现这样的反例，也只是改变机会判断，不立即建立稳定优势。上述是说明信息与成本边界，**没有选择新种子、申请预算或启动下一批实验**。[本次每 fit 合同][loe-notebook]、[独立单位和重复原则][loe-bg6]。
+
+因此，没有额外的 decision-changing observation 被本次选择。将来若真的出现影响有效性的具体错误证据，或可比的独立原生收益/成本证据，可以修订解释；不需要为这种逻辑上的可修订性让本研究无限期保持 active，也不把它变成新的 owner 审批门槛。
+
+#### 6. 归档措辞与本次读取边界
+
+建议采用的结论措辞是：**“B01 是完成的单训练种子/臂探索性包级比较；在冻结 S1、同信息与完整 HMASD 学习合同下，该 dense recipe 在固定 J45 和服务上明显不利，并增加本次训练与 actor 调用成本；因此停止对此配方继续投资并归档本项 active study。跨训练种子的稳定排名、其他表示和机制归因未解决。”** 保留两臂、所有预写面板、原始曲线、负结果和恢复材料，不选择性删除不利实例、不改写旧 FSD 合同，也不把 notebook 的 provisional conclusion 当作额外的独立证据。这里的“支持归档”是对 DM 下一路线的建议；本次写入本身不修改其他文件或归档状态。
+
+读取边界如下：治理使用题目指定 source_sha 的 constitution §§1–5、7–8；方法使用同 SHA 的 scientific-tools skill；共享背景只使用明确固定在 `be38b4842d3c495ace68bf1890de5e4453c333c2` 的相关 §§4、6；B01 冻结合同和运行证据使用 `03eea08a6b3f3fa714b1cdc90d9339f86ed56e94`；本次读取的两份实现文件使用实际实验 SHA `efe7d61e82b2c0aed7a634bbb2e22d7cc47430a3`。最新可写 notebook 只用于保护写入边界，不替代上述推理输入。
+
+**信息缺口必须区分“未独立复验”和“无法支持停止”。** 本次未取得 Git 外的 `final_checkpoint.pt` 和原始 stdout/stderr，未自行复核其 SHA256、反序列化或重演评价；notebook 中的 checkpoint 有限值、恢复成功及远端字节校验是 DM 已报告的工程证据，不能写成 Pro 本次亲自重验。也没有重跑测试或全面审计底层 recurrent repair；所读取的实现用于核对具体接入疑问，不是新一轮 executable confirmation review。未重读旧 programme Answer/Decision，因本结论不以旧建议已确认新结果为依据。对本题这种有限范围的停止投资判断，要求的关键 tracked 结果和治理/方法来源已可读，没有发现必须以新增实验补齐才能判断的关键来源缺口；**跨种子分布仍未知**，这是对结论范围的真实限制，不是可以由聊天记忆补上的事实。
+
+[loe-gov]: https://github.com/CartmanFatass/My-paper-code/blob/03eea08a6b3f3fa714b1cdc90d9339f86ed56e94/docs/project/OPERATING_CONSTITUTION.md
+[loe-method]: https://github.com/CartmanFatass/My-paper-code/blob/03eea08a6b3f3fa714b1cdc90d9339f86ed56e94/.agents/skills/hmasd-scientific-tools/SKILL.md
+[loe-notebook]: https://github.com/CartmanFatass/My-paper-code/blob/03eea08a6b3f3fa714b1cdc90d9339f86ed56e94/docs/research/candidates/local_observation_encoding/NOTES.md
+[loe-bg4]: https://github.com/CartmanFatass/My-paper-code/blob/be38b4842d3c495ace68bf1890de5e4453c333c2/docs/research/RESEARCH.md
+[loe-bg6]: https://github.com/CartmanFatass/My-paper-code/blob/be38b4842d3c495ace68bf1890de5e4453c333c2/docs/research/RESEARCH.md
+[loe-os]: https://github.com/CartmanFatass/My-paper-code/blob/03eea08a6b3f3fa714b1cdc90d9339f86ed56e94/runs/local_observation_encoding/b01_original_s92101/summary.json
+[loe-ds]: https://github.com/CartmanFatass/My-paper-code/blob/03eea08a6b3f3fa714b1cdc90d9339f86ed56e94/runs/local_observation_encoding/b01_dense_s92101/summary.json
+[loe-ot]: https://github.com/CartmanFatass/My-paper-code/blob/03eea08a6b3f3fa714b1cdc90d9339f86ed56e94/runs/local_observation_encoding/b01_original_s92101/training.jsonl
+[loe-dt]: https://github.com/CartmanFatass/My-paper-code/blob/03eea08a6b3f3fa714b1cdc90d9339f86ed56e94/runs/local_observation_encoding/b01_dense_s92101/training.jsonl
+[loe-om]: https://github.com/CartmanFatass/My-paper-code/blob/03eea08a6b3f3fa714b1cdc90d9339f86ed56e94/runs/local_observation_encoding/b01_original_s92101/manifest.json
+[loe-dm]: https://github.com/CartmanFatass/My-paper-code/blob/03eea08a6b3f3fa714b1cdc90d9339f86ed56e94/runs/local_observation_encoding/b01_dense_s92101/manifest.json
+[loe-ol]: https://github.com/CartmanFatass/My-paper-code/blob/03eea08a6b3f3fa714b1cdc90d9339f86ed56e94/runs/local_observation_encoding/b01_original_s92101/launch-manifest.json
+[loe-dl]: https://github.com/CartmanFatass/My-paper-code/blob/03eea08a6b3f3fa714b1cdc90d9339f86ed56e94/runs/local_observation_encoding/b01_dense_s92101/launch-manifest.json
+[loe-oe]: https://github.com/CartmanFatass/My-paper-code/blob/03eea08a6b3f3fa714b1cdc90d9339f86ed56e94/runs/local_observation_encoding/b01_original_s92101/process-exit.json
+[loe-de]: https://github.com/CartmanFatass/My-paper-code/blob/03eea08a6b3f3fa714b1cdc90d9339f86ed56e94/runs/local_observation_encoding/b01_dense_s92101/process-exit.json
+[loe-encoder]: https://github.com/CartmanFatass/My-paper-code/blob/efe7d61e82b2c0aed7a634bbb2e22d7cc47430a3/experiments/candidates/local_observation_encoding/encoder.py
+[loe-run]: https://github.com/CartmanFatass/My-paper-code/blob/efe7d61e82b2c0aed7a634bbb2e22d7cc47430a3/experiments/candidates/local_observation_encoding/b01.py
