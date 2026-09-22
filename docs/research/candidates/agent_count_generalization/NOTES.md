@@ -584,3 +584,23 @@ terminal/error wakeups. On return, drain all saved events and read actual scient
 rearm the same running handle, never restart it. Keep the remaining five planned cells
 unlaunched until this own process is reconciled. Full-horizon learning, costs and service
 contrasts remain unmeasured at this acceptance boundary.
+
+### 2026-09-21 first running checkpoint — one started fit
+
+The scheduled observation returned CHECKPOINT for the same accepted operation, with runner
+and supervisor identities still consistent and running, no exit witness and no observation
+errors. Fresh published main retains the lifted owner pause and this direction's lead.
+The collected [in-progress summary](../../../../runs/agent_count_generalization/s1_count_b01_h6_s914201/summary.json)
+and [training rows](../../../../runs/agent_count_generalization/s1_count_b01_h6_s914201/training.jsonl)
+now establish one started fit, zero completed fits and five not yet launched. At the copied
+boundary, 13/45 rollouts had updated: 104,000 training/stored team steps and 208 completed
+training episodes, with command wall 1,651.60 s. The initial N4/N6/N8 panel consumed 24,000
+evaluation team steps, with zero optimizer steps and unchanged weights/normalizers.
+
+All five H6 learner modules and all three new state encoders had nonzero parameter movement;
+the first 12 completed updates had 27,000 actor and 27,000 critic steps, exactly the declared
+2,250 each per rollout. The captured stderr was empty. A separate current-process sample
+read RSS 2,280,068 KiB (not peak RSS), CPU about 390%, and node available memory about 8.7 GiB.
+These facts establish continuing real learning and healthy progress, not service superiority.
+Full endpoint/comparison remains pending; no fit, seed, horizon or selection rule changes.
+Rearm the same operation for its next checkpoint/terminal event and retain serial own fits.
