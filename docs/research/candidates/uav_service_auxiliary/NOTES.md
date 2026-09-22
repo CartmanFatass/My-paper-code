@@ -2638,3 +2638,36 @@ and second-block evidence. An adverse/degenerate G cannot rescue S or establish 
 semantics. The unchanged batch has two training blocks; no third block, new module, horizon
 extension, retuning, early-checkpoint rescue or Pro Send is selected. Prospective output is
 `runs/uav_service_auxiliary/b03_g_912211_a01`; launch remains subject to native admission.
+
+## 2026-09-22 — B03 fixed G cell admitted
+
+The preceding complete S reading and prospective G continuation were committed and pushed
+as `37b268d6a` before launch. G / 912211 / a01 was natively accepted at 22:13:44 UTC from
+the unchanged source `73be55261b9f5e8f8fe26fdec6558b87ad088fcb`. Its
+[manifest](../../../../runs/uav_service_auxiliary/b03_g_912211_a01/launch-manifest.json)
+binds the exact D initial facts and calibration, with operation claim
+`6bc2067e6dab42e3168f02aa8f31314d211c06fed0b2dfdf40eaef3b2753a8f5`.
+Fresh published control was `6f82e921fec608556008982066e99ded85f7b8aa`; canonical pause,
+state and lead agreed. Native memory preflight passed with 13,699,764,224 available physical
+bytes. The preceding GPU probe reported 7,948 MiB free. Supervisor/runner identities
+263986/263987, session 263986, are retained in the manifest. Native status and the subsequent
+22:14:56 UTC observer both report matching processes running, consistent records and no
+exit witness.
+
+The first copied [summary](../../../../runs/uav_service_auxiliary/b03_g_912211_a01/summary.json),
+SHA256 `b7d369799532a905c10a3d0c8d59e971099e6b26d428949aee1e7acd5ead772a`, is INCOMPLETE
+with failure null and empty stderr. Full native config/spec and initialization match D;
+the exact two initial episodes / 3,000 transitions are reused and config binds D's fixed
+calibration digest. This snapshot contains zero training transitions, updates, completed
+evaluation panels or new physical facts. First collection/native-update equality and active
+generic-gradient execution remain to be observed. Admission and a running process alone
+do not establish a third started training fit or any generic-package result.
+
+The completed S wake was consumed with generation 17 and its exact wake/event IDs. The G
+operation is now adopted by the read-only detached observer at generation 19, with zero
+probe errors and no pending event; it will return on completion, error or a bounded
+checkpoint. No worker restart, Pro Send or cross-task message was made. Two B03 fits are
+fully accepted, G is admitted and active, three later fixed cells remain unstarted, and the
+separate zero-step D failure is retained. Continue this accepted G operation without a
+recipe change; its complete final panel and the block's common endpoint replay remain the
+next useful observations under the existing six-fit design.
