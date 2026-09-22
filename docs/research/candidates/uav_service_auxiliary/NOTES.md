@@ -164,3 +164,23 @@ file with a declared SHA256, copying it into its output. No independent regenera
 substituted. Auxiliary initialization seed is training seed +200000 for both arms. Evaluation
 worlds and forecast worlds are disjoint from training seeds. The existing arm-A comparison
 gate is unused; no inherited arm-A target enters this experiment's decision.
+
+B01 endpoint clarification: primary native J is the arithmetic mean of complete per-world
+**summed unmodified S7 rewards** on the eight endpoint worlds, joint minus detach. Mean
+reward per executed step is a secondary scale description; no S1 reporting multiplier is
+applied. Delivered QoS/throughput and risk retain their own units. No single-seed ranking
+is generalized to a population. Remote preparation required the configured `zsh -lic`
+network environment: an initial plain-shell fetch stalled and was terminated before any
+worktree/launch effect; the configured path then fetched and created the owned isolated
+`/home/wu/hmasd-worktrees/uav-service-auxiliary-a335` successfully. No scientific operation
+was accepted. The canonical remote checkout/index was not edited.
+
+### B01 component checks before native admission
+
+The DM accepted the auxiliary component after reading its diff and independent Reviewer
+review of the real actor feature path, complete-window targets, masked resets, optimizer
+parameter ownership and recurrent core fix. No material first-stage finding remained.
+Local focused auxiliary checks passed 5 cases; the CUDA-only case was skipped locally.
+The shared storage/sampler/update entry-mask checks passed 2 cases. Tests are correctness
+fixtures, not scientific fits or UAV performance evidence. The remaining review concerns
+the native collector/evaluator, common-fact identity and final checkpoint/output path.
