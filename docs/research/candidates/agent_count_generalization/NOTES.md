@@ -495,3 +495,68 @@ Use `config.obs_dim` obtained from the real adapter everywhere: row MLP 104->128
 and SET concatenation width `2*obs_dim+256+1+256 = 721` at current defaults. Assert the
 real shape rather than hardcode the erroneous 114/741. This changes no information
 fields, architecture choice, experimental exposure or Pro scientific decision.
+
+### L0 — DM-owned runner and exact remaining optimizer choices
+
+The DM owns `configuration.py`, `runner.py` and `test_runner.py` in the same direction.
+Use one admitted fit per invocation, fixed planned arm/seed choices, checkpoint/summary/
+training JSONL and raw per-world panel outputs. CLI admits before environments, output or
+learners. No reduced-horizon or admission-bypass CLI. Technical tests call the scientific
+function with an explicit fixture spec and mocked admission, never a result launch.
+
+Freeze PPO epochs=15, low-level sequence batch=32, ten-step BPTT, high-level joint batch=1280
+(one batch for 800 scheduled joint rows per ordinary 16x500 rollout), Config's four
+nominal minibatches for discriminator batch sizing (12,000), existing discriminator epochs
+and loss coefficients, no learning-rate schedule, no input running normalization, CPU FP32,
+four Torch threads and one BLAS/OpenMP environment team. No optimizer-volume equivalence
+is asserted. At default counts there are 4,800 low-level sequences per rollout and 150
+minibatches per epoch: 101,250 actor and critic steps over 45 rollouts each, if all rows
+are valid; actual counts will be retained. This substantial work is explicitly part of
+the six-fit purchase, not concealed behind team-step equality. No fit has yet started.
+
+### 2026-09-21 implementation review — common recurrent correctness repair
+
+The independent Reviewer and Implementer both traced a shared-core defect in the actual
+`HMASDAgent.update_discoverer_from_rollout` route: collector `done[t]` ends transition t,
+but the hot path supplied `1-done[t]` before evaluating input row t. The correct convenience
+wrapper was bypassed, so its passing regression did not establish update correctness.
+The existing published repair `1da535e557bb1eaac30779d4596e3b2efa6426ee` changes only this
+entry-mask construction and adds a storage -> GAE -> cached/uncached sequence sampler ->
+real actor/critic update-entry regression. Row zero keeps its collector input hidden state
+with mask one; later rows use `1-done[t-1]`.
+
+L0 extension: adopt those exact two paths (`hmasd/agent.py` and
+`tests/hmasd/test_discoverer_entry_masks.py`) as a common correctness baseline for H6 and
+SET before any scientific launch. No candidate gain is attributed to this repair and no
+historical result is reinterpreted. Reviewer inspected the exact repair; DM will run its
+regression alongside both real short candidate collection/update tests. No new scientific
+question or Pro resend follows from this implementation repair. Existing core snapshot
+coverage checks cadence, reset, storage/replay and evaluator input; candidate tests also
+separate current local observation from held ego observation. Resource reporting marks
+unmeasured peak scratch explicitly, preserving measured command wall and process RSS.
+
+### 2026-09-21 DM implementation acceptance and first launch choice
+
+Accepted the Implementer's four owned files after reading the complete adapter/model diff
+and final tests; DM owns configuration/runner/evaluator and the shared repair. Independent
+Reviewer `count_engineering_review` returned no remaining material finding. The exact combined
+candidate adapter/model + runner + hot-path entry-mask + recurrent sequence suite reports
+25 passed in 3.65 s after the repair, with existing matplotlib and singleton diagnostic-std
+warnings. Reviewer independently observed 7 repaired runner/mask tests and 5 unchanged
+core snapshot-contract tests pass. A new snapshot test initially compared shapes (2,133)
+and (133,) without explicitly repeating its expected row; that test expectation was repaired,
+and the final capture/storage/sampler check passed. No scientific run used those fixtures.
+
+Checks cover actual N rows, reward identity and actual-N reporting, masked pooling and
+optimizer membership, full-width SET forward, distinct current/held ego features, real raw
+snapshot replay, strict cross-N module loading, frozen evaluation and real short optimizer
+movement in both arms. Shared repair is now local commit `2de4ed8cc`. These are technical
+facts, not evidence of S1 service gain or full-horizon resource cost.
+
+Keep the already declared six fits and exact horizons/configuration. Launch H6 seed 914201
+first on the configured remote node, one own scientific process at a time. Fresh preparatory
+inspection found about 11 GiB available with two other Python workers using about 2.5/2.4 GB
+RSS; leave those handles untouched and rely on actual-node launch admission again immediately
+before execution. No wall cutoff changes the scientific endpoint. Observe the first accepted
+operation with the repository waiter at a 1500-second checkpoint; further fits remain under
+the same prospective six-fit design rather than a score-dependent extension.
