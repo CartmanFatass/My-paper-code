@@ -1,0 +1,11 @@
+{
+  "claim_key": "7d8ffdb2df456b9f115f6565998165e12681fe3785c222e5f093c8fa185ad4b1",
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/7d8ffdb2df456b9f115f6565998165e12681fe3785c222e5f093c8fa185ad4b1.json",
+  "manifest_ref": "/home/wu/hmasd-worktrees/gcea-b01-9316b175f/runs/goal_conditioned_entity_aggregation/b01_p_s922611/launch-manifest.json",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/7d8ffdb2df456b9f115f6565998165e12681fe3785c222e5f093c8fa185ad4b1.json",
+  "pid": 229877,
+  "runner_pid": 229878,
+  "schema_version": 1,
+  "status": "accepted",
+  "updated_at": "2026-09-22T18:10:25.043444Z"
+}

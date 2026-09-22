@@ -684,3 +684,24 @@ Current main `bf86fd94c` leaves our direction, owner pause and comparison unchan
 PATH repair exposes the configured interpreter's tools; it changes neither this CPU FP32
 algorithm nor its four-thread contract. Shared topic 3 and finite-learning scope still apply;
 one baseline alone adds no useful new cross-direction scientific conclusion to that background.
+
+## 2026-09-22 — B01 P accepted
+
+P passed fresh native admission against current published control and the unchanged scientific
+source used by O. The [native manifest](../../../../runs/goal_conditioned_entity_aggregation/b01_p_s922611/launch-manifest.json)
+owns the exact command/source/output and process identities; the
+[memory preflight](../../../../runs/goal_conditioned_entity_aggregation/b01_p_s922611/admission-preflight.json)
+passed, and [launch status](../../../../runs/goal_conditioned_entity_aggregation/b01_p_s922611/launch-status.json)
+records accepted. These three collected files match their remote SHA-256 values. Independent
+native status reported the same admitted child running with consistent records. No O process
+was restarted and no existing output was repurposed.
+
+The first P snapshot contains 8,000 collected/stored training transitions and 16 completed
+episodes, one training start and two model constructions, zero completed updates/evaluation
+at that snapshot, and no failure. This is training exposure while the first update is pending,
+not evidence of completed P parameter learning. The installed base is ConditionalDeepSetsEncoder,
+96,960 encoder and 496,582 actor parameters. O is fully read; P is active and E remains unstarted.
+Actual batch cost is now **two started fits of three declared**, one complete and one in progress.
+The same-session deterministic observer follows P's existing native handle. Continue to read
+its complete terminal outputs and then execute E under the fixed contract, without score-based
+selection, a retry, another panel or a new seed.
