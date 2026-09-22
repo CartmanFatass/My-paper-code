@@ -63,3 +63,36 @@ review. Declare exact arms, seeds, horizon, evaluation and planned fits before a
 Initialization starts **0 fits**, accepts no experiment or Pro Send, and is not an empirical
 result. Continue through design, implementation, evidence reading and a supported next
 investment/stop judgment using the existing methods; no automatic rescue sequence.
+
+## 2026-09-21 — Direct DM initialization and the first implementation distinction
+
+This task `01a0c348-428c-7f01-bd8b-121d69543032`, host `local`, now owns only this direction.
+Its isolated authoring checkout is `/home/fires/.codex/worktrees/joint-duration-learning/hmasd-wsl`,
+branch `codex/joint-duration-learning-20260921`. The three other independent DM tasks have
+their own recorded addresses and workspaces; initialization is complete and no further
+cross-DM communication or monitoring is planned. Current runtime context for all four DMs
+was read and verified as `gpt-6-astra` / `max` after correcting the three new tasks' initial
+default medium setting. No experiment or Pro operation was restarted to change effort.
+
+Refreshed published main `c91af2e5a` and read the unchanged relevant shared background and
+the complete programme Pro Answer. The full-joint-learning question, fixed/factored/AR
+comparison, strong-information requirement and outcome branches remain applicable; this
+advice is reused for the question, not treated as a validated executable design. FSD's
+03:43/03:52 B14 interpretation and rest entry were read directly: the proposed reversal
+did not occur, the old label-credit route stopped, and no accepted FSD operation is inherited.
+
+Read-only source inspection found a substantive implementation distinction. The existing
+duration head is in `hmasd/ha_ctse.py` and requires the horizon/process/discrete-lifetime
+path. The original full-HMASD S1 recipes use `SkillCoordinator` with those switches off;
+`hmasd/baselines.py::_enable_ha_ctse` also changes the discovery/process objective. Therefore
+turning on that family is not the promised single duration-parameterization intervention.
+The HA-CTSE AR skill/editor path also emits duration logits in parallel, so its AR name
+does not implement conditional duration sampling. The next binding must preserve the full
+HMASD actor/discovery path and explicitly add the missing duration context/sampling and
+matching reevaluation. A bounded Scout is checking the separate non-HA D2 scheduling path
+before selecting the smallest implementation. This is a code fact, not a performance result.
+
+The configured remote responded as `LAPTOP-U9TDKC8A`; the read-only observation showed
+about 14 GiB available RAM and current canonical research control at `c91af2e5a`.
+Use `wsl_4070` first for result computation and acquire fresh actual-node admission at launch.
+No scientific run, new Pro Send or fit has yet been accepted; started fits remain 0.
