@@ -202,3 +202,31 @@ The repository-wide new-runner admission source check currently fails on the exi
 runner. No historical FSD source was changed. The owned B01 entry independently passed
 the same admission-call AST condition and a real no-admission CLI invocation: it refused
 with `missing HMASD admission` before importing scientific code or creating output.
+
+### B01 native acceptance and preflight
+
+The DM accepted the bounded native runner at `3e3fb068c9b20f2c263b01f2c83c51092e9172c0`
+after reading the implementation and independent second-stage Reviewer review. No material
+finding remains against the frozen contract. Review covered terminal next-state storage,
+native bootstrap, complete-episode raw J, evaluation/normalizer isolation, common-fact
+digest/initialization/seed identity, paired final checkpoints, progress/failure retention
+and admission before scientific imports. The Reviewer explicitly reconciled the already
+declared `clear_buffers` boundary behavior as a common baseline limitation. Focused native
+checks passed 5 cases locally with 1 CUDA skip in 4.97 seconds after correcting the reviewer's
+Ninja PATH. An earlier local dependency-path failure did not start a scientific fit.
+
+The exact published native source passed all **6** focused native checks on `wsl_4070`
+in 13.57 seconds. This includes the complete short collect/native-update/auxiliary/evaluate/
+checkpoint path for both arms on CPU and actual CUDA; the CUDA case uses the native
+256-wide architecture. Both heads update, all five native optimizers update and their
+modules move; only the joint auxiliary path has representation gradients. The earlier
+8 component/core checks remain unchanged. The checks do not establish 30-rollout stability;
+multi-rollout straddling and injected mid-run failure persistence are not separately exercised.
+
+The final preparation probe reports 12 GiB available host RAM, 7948 MiB free GPU memory,
+0% GPU utilization and no CUDA compute process. The remote canonical tracked checkout is
+clean and its current pause/state/lead for this direction matches the assignment. This is
+preparation evidence; the native kernel must still perform fresh admission. Proceed with
+the fixed pair sequentially, first output `runs/uav_service_auxiliary/b01_detach_910021_a01`.
+No training fit has started at this entry. Bind its actual source/operation through the
+runner-written manifest, then arm deterministic observation of that same handle.
