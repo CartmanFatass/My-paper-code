@@ -491,3 +491,126 @@ G(N,K)=\frac{0.7}{50}(A_N-B_{N,K})
 [S14]: https://github.com/CartmanFatass/My-paper-code/blob/dd25f34a09ba8d0f8a62c5aacb36d9aaa56dcf0c/experiments/candidates/agent_count_generalization/action_law_b02/probe.py
 
 MATERIAL_DISSENT: no — 以题内已采纳的唯一资格、相对符号和高度抵消修正为前提，我支持保留五格作为固定策略的服务转换研究；它不承担纯 N、在线容量适应或技能机制归因。后继五格测试用途须与完整 balanced-c 混合目标分开，B03 身份仍待真实发布；这些限制不推翻当前零 fit 设计，也不构成选择任何新增 fits。
+
+## 2026-09-22 — Complete Pro reading, adoption and scene acceptance
+
+Question key: `hmasd:b41fa3c38e2ef995c6c7ab013e401d103ba1f76d2efa6337333b8e9381f5ec7a`.
+One Send was accepted after a confirmed pre-send composer timeout; the same key and unchanged
+text were used, with no duplicate accepted Send. The deterministic observer collected COMPLETE.
+The chat text was a receipt, not the answer. `deliver` verified answer commit
+`04f402b8174dd1ea2e0d63f538ecfed1c099ac50`: only this file changed, only the previously empty
+Answer was filled, and the question and all other bytes were preserved. The DM read the full
+12,349-character answer above. The owned observation tab was closed; no operation tab remained.
+The terminal wake was consumed/rearmed with its returned identifiers; no worker or question was
+restarted. Private conversation/account facts remain outside Git.
+
+The DM adopts the corrected **five-cell, zero-new-fit** study. The advice strengthens the
+interpretation as conversion of fixed learned geometry/eligibility into service. It leaves the
+directional H6 marginal-service conjecture testable but unsupported by any new result. The
+strongest alternative remains ordinary per-UAV capacity truncation plus connected-user quality
+composition; even positive D does not isolate a skill or online load-adaptation mechanism.
+No optional two-fit balanced-capacity batch, heterogeneous-capability interface, extra cell,
+checkpoint choice or confirmation is selected.
+
+Additional reading commitments from Pro are adopted:
+
+- The five cells do not span c5/10/20 at every N: N6 has c10 only. A later mixture-learning
+  objective would need its own declared test distribution and weights; these are not the same
+  endpoint. Missing-cell recounts from frozen SINR traces are possible only as a separately
+  stated analysis; none is selected here.
+- Read full-50-user eligibility E and per-UAV truncation T separately from the 20 visible user
+  slots. A full UAV with e_i=c has no capacity truncation. Report both overflowing UAV-steps
+  and missed eligible users with their own denominators.
+- Read time-averaged native connected-user quality, including its native zero-service value;
+  do not replace it by a connected-user-weighted pooled average. Newly served users can lower
+  an individual UAV's quality while raising the team's current mean. For s>0, the composition
+  change is m/(s+m) times (q_new-Q_old), with the s=0 case read directly.
+- Retain all 80,000 steps, including repeated-capacity trajectory checks. Report per-world
+  paired components and adverse outcomes, not worlds as independent training replications.
+  Decompose matched-K residuals into eligibility, truncation, quality and height without a
+  causal mediation or pure-N claim. D8-D4 compares different local-capacity intervals.
+
+The Pro explicitly did not audit unavailable B03 binaries, our new implementation or all local
+paper appendices. Its source-based algebra/design advice is sufficient for this narrow choice;
+production identities, engineering review and the original DM's completed B03 reading remain
+real prerequisites for evaluation, not inferred Pro approvals.
+
+The DM accepts the four-file scene implementation from `matched_worlds` after reading its diff
+and the independent `matched_world_review` report. The focused 9 tests passed (implementer
+1.87 s; reviewer 1.04 s); compilation and whitespace checks passed. Native reward, allocation,
+observation and motion code were unchanged. Coverage includes exact streams/N-prefix, repeated
+reset, fixed-action capacity invariance, caps/diagnostics, reward decomposition, read-only
+diagnostics and domain refusal. The checks do not yet establish actor/GRU/held-snapshot or
+checkpoint/evaluator invariance. Synthetic zero-noise/threshold-tie cases were inspected rather
+than separately tested. No result-bearing operation, fit or training update occurred.
+
+### L0 — Source-bound frozen-policy evaluator, before production asset binding
+
+The published first-fit B03 manifest now supplies its exact producer source,
+`89486d32ea569728f39d6e21b53f8a7c8854e74c`, and the checkpoint/completed-summary schema is
+readable. This prospectively extends the earlier primitives-only L0: implement and test the
+source-complete evaluator now, while **final policy identity binding and execution remain
+deferred** until the original DM publishes and reads B03. No final checkpoint digest is
+available or invented. A missing/incomplete committed summary must refuse before evaluation.
+
+The DM may restore the seven unchanged upstream source files needed for reuse:
+`experiments/candidates/agent_count_generalization/{__init__,adapter,configuration,models,runner}.py`
+and `action_law_b02/{__init__,probe}.py`, byte-for-byte from that B03 source. This recovers
+dependencies in this isolated checkout, not the producer's training runner or unmerged history.
+The shared `hmasd/agent.py` difference from B03 is only equivalent recurrent training-mask
+spelling/comments (`dones_for_masks.size(0)` versus `masks_for_eval.shape[0]`); the mask shape and
+values are the same and the frozen inference path is unaffected. No shared core edit is needed.
+
+One bounded Implementer owns new `load_probe/probe.py`, the explicit entry
+`scripts/run_load_critical_member_probe_b01.py`, and matching `load_probe/test_probe.py`.
+It may minimally extend the new package initializers; scenes changes require a concrete defect.
+DM owns this notebook, upstream dependency recovery, acceptance and RESEARCH. Preserve others'
+work, edit no shared learner/environment/launcher or producer record, launch nothing and spawn
+no children. Read experiments/scripts/tests AGENTS. Stop on a needed core semantic change.
+
+Deliver the fixed five-cell comparison and summary/trace contract already declared above:
+
+1. Strictly load only H6/clip/942201 and SET/clip/943201 B03 final45. Bind the two completed
+   source summaries to this evaluator's committed Git inputs and identical working bytes;
+   external checkpoint storage cannot attest its own digest. Check exact producer SHA, tag,
+   arm, seed, clip training/deployment, completion, 360k train/stored transitions, 45 updates,
+   96k evaluation steps and complete published final N4/6/8 configs. Verify exactly one
+   checkpoint45 entry, size/digest, payload schema/keys/rollout/config and strict module plus
+   normalizer restoration. Reconstruct each N-specific source config without behavioral
+   drift. Production CLI has no fixture or arbitrary-policy bypass.
+2. Native-admission guard before scientific effects; fixed CPU FP32/four Torch threads,
+   16 worlds, 500 steps, both policies/all five cells. Fresh or fully reset episode runtimes
+   preserve source configuration and k10 information clocks. Use stream 3 addressed
+   `[260922,6,world_id,3,N]` for runtime randomness, shared across capacities and arms.
+   Preserve source num_envs=16 in configuration; sequential single-world inference may use
+   one active row if tested through the actual agent path. Count only actual environment
+   transitions. Do not silently exchange the full repeated-capacity evaluation for recounting.
+3. Execute a separately owned coordinate-clipped deterministic action. Preserve raw actions
+   and log probabilities; retain observations, encoded state, float64 geometry, runtime-state
+   fingerprints and native service/SINR traces with documented pre/post-transition indexing.
+   Assert same-policy/same-N paired capacities have exactly equal actions, observations,
+   state, geometry and relevant recurrent/skill/snapshot state through k10 boundaries.
+   Hash tensor/array values canonically, not storage addresses. Height must cancel.
+4. Record model/normalizer digests before/after, zero optimizer/training/update counts,
+   checkpoint digest stability, and diagnostic RNG noninterference. Full-50-user e_i,
+   occupancy/full/overflow, unserved eligible/ineligible, visibility truncation, connected
+   quality sums/means and native coverage/height/J stay analyst outputs, never actor inputs.
+   Record the conditional unique-eligibility/S(c) domain and actual equality; a violation
+   quarantines its dependent interpretation. Do not adjust SINR thresholds or tolerances.
+5. Summary retains each arm/cell/world, all component means, G, D_N, each arm's absolute
+   capacity effect, matched-K cross-N residual and same-c10 secondary contrast. Pair by world;
+   show all world differences and descriptive spread/adverse counts, without a training-level
+   significance claim or automatic selection. Assert component decompositions on paired data.
+   Atomic summary plus checksummed traces retain partial exact counts after technical failure.
+   Count each successful environment step immediately, before fallible diagnostics; retain
+   completed episodes and partial current work. Never overwrite an existing attempt root.
+   Report elapsed time and process peak RSS with scope and honest missing telemetry.
+
+Tests use small synthetic source fixtures only under pytest-owned scratch. Cover actual H6
+and SET inference across k10 (at least 12 steps), N4/6/8, same-world/capacity equality and
+capacity-dependent service, strict source/payload/digest/config rejection, no learning or
+normalizer movement, native-admission-first refusal, complete and injected-failure counts,
+output/decomposition correctness and fixture/production separation. These are technical checks,
+not policy-performance evidence. Reuse accepted scene tests; independent Reviewer examines the
+new checkpoint/runtime/evaluation/entry code before DM acceptance. The production plan remains
+0 fits / 80k eval; no operation is accepted by this implementation task.
