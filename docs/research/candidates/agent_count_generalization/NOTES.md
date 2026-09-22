@@ -487,3 +487,11 @@ recurrent episode reset and done-entry shift preserve existing semantics. Tests 
 pytest-owned scratch. These are technical checks, not fits or scientific results.
 Stop only dependent implementation if it requires a material semantic/shared-core rewrite;
 return facts and the diff for DM acceptance and independent engineering review.
+
+L0 arithmetic correction before delegation: the inspected observation formula is
+`3 + 20*3 + 10*4 + 1 = 104`, not 114. The preceding Scout-derived prose and proposed
+MLP dimensions repeated the arithmetic error; the actual S1 constructor is authoritative.
+Use `config.obs_dim` obtained from the real adapter everywhere: row MLP 104->128->128
+and SET concatenation width `2*obs_dim+256+1+256 = 721` at current defaults. Assert the
+real shape rather than hardcode the erroneous 114/741. This changes no information
+fields, architecture choice, experimental exposure or Pro scientific decision.
