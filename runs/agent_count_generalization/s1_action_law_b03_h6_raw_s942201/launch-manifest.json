@@ -1,0 +1,90 @@
+{
+  "acceptance": "accepted",
+  "accepted_at": "2026-09-22T15:28:10.721959Z",
+  "bootstrap_command": [
+    "/home/wu/.venvs/hmasd/bin/python",
+    "/home/wu/hmasd-worktrees/agent-count-action-law-20260922-b03/scripts/hmasd_admission.py",
+    "_run-admitted",
+    "--runner",
+    "/home/wu/hmasd-worktrees/agent-count-action-law-20260922-b03/scripts/run_agent_count_action_law_training_b03.py",
+    "--output",
+    "/home/wu/hmasd-worktrees/agent-count-action-law-20260922-b03/runs/agent_count_generalization/s1_action_law_b03_h6_raw_s942201",
+    "--",
+    "--cell",
+    "h6_raw",
+    "--out",
+    "runs/agent_count_generalization/s1_action_law_b03_h6_raw_s942201",
+    "--launch-sha",
+    "89486d32ea569728f39d6e21b53f8a7c8854e74c"
+  ],
+  "claim_key": "58d743f8a73ac03165dd682d41ecb655796788d4a8dcefdaae0e5bdf9662eaf3",
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/58d743f8a73ac03165dd682d41ecb655796788d4a8dcefdaae0e5bdf9662eaf3.json",
+  "command": [
+    "/home/wu/.venvs/hmasd/bin/python",
+    "/home/wu/hmasd-worktrees/agent-count-action-law-20260922-b03/scripts/run_agent_count_action_law_training_b03.py",
+    "--cell",
+    "h6_raw",
+    "--out",
+    "runs/agent_count_generalization/s1_action_law_b03_h6_raw_s942201",
+    "--launch-sha",
+    "89486d32ea569728f39d6e21b53f8a7c8854e74c"
+  ],
+  "command_sha256": "87311e617b2951981e9874092e058d4d19a56d8bbafcf87c72cd9c0a92c70066",
+  "control_observation": {
+    "observed_at": "2026-09-22T15:28:10.629926Z",
+    "ref": "refs/heads/main",
+    "remote": "origin",
+    "sha": "e46deae6aae14dd54180bfabd982fd00840a14de"
+  },
+  "control_root": "/home/wu/projects/HMASD",
+  "created_at": "2026-09-22T15:28:10.638865Z",
+  "cwd": "/home/wu/hmasd-worktrees/agent-count-action-law-20260922-b03",
+  "direction": "agent_count_generalization",
+  "host_identity": "LAPTOP-U9TDKC8A",
+  "identity_command": [
+    "/home/wu/.local/share/uv/python/cpython-3.10.21-linux-x86_64-gnu/bin/python3.10",
+    "scripts/run_agent_count_action_law_training_b03.py",
+    "--cell",
+    "h6_raw",
+    "--launch-sha",
+    "89486d32ea569728f39d6e21b53f8a7c8854e74c"
+  ],
+  "lead": "Codex DM (independent session)",
+  "manifest_ref": "/home/wu/hmasd-worktrees/agent-count-action-law-20260922-b03/runs/agent_count_generalization/s1_action_law_b03_h6_raw_s942201/launch-manifest.json",
+  "node": "wsl_4070",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/58d743f8a73ac03165dd682d41ecb655796788d4a8dcefdaae0e5bdf9662eaf3.json",
+  "output_root": "/home/wu/hmasd-worktrees/agent-count-action-law-20260922-b03/runs/agent_count_generalization/s1_action_law_b03_h6_raw_s942201",
+  "preflight": "/home/wu/hmasd-worktrees/agent-count-action-law-20260922-b03/runs/agent_count_generalization/s1_action_law_b03_h6_raw_s942201/admission-preflight.json",
+  "process": {
+    "detached": true,
+    "identity": {
+      "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+      "kind": "linux_pid_start_ticks",
+      "pid": 205222,
+      "session_id": 205222,
+      "start_ticks": 45372477
+    },
+    "native_handle_kind": "posix_session",
+    "pid": 205222,
+    "process_group_id": 205222
+  },
+  "process_exit": "/home/wu/hmasd-worktrees/agent-count-action-law-20260922-b03/runs/agent_count_generalization/s1_action_law_b03_h6_raw_s942201/process-exit.json",
+  "published_remote": "origin",
+  "runner_process": {
+    "identity": {
+      "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+      "kind": "linux_pid_start_ticks",
+      "pid": 205223,
+      "session_id": 205222,
+      "start_ticks": 45372479
+    },
+    "pid": 205223,
+    "process_group_id": 205222,
+    "supervisor_pid": 205222
+  },
+  "schema_version": 1,
+  "sha": "89486d32ea569728f39d6e21b53f8a7c8854e74c",
+  "source_root": "/home/wu/hmasd-worktrees/agent-count-action-law-20260922-b03",
+  "stderr": "/home/wu/hmasd-worktrees/agent-count-action-law-20260922-b03/runs/agent_count_generalization/s1_action_law_b03_h6_raw_s942201/stderr.log",
+  "stdout": "/home/wu/hmasd-worktrees/agent-count-action-law-20260922-b03/runs/agent_count_generalization/s1_action_law_b03_h6_raw_s942201/stdout.log"
+}

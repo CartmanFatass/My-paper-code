@@ -93,8 +93,8 @@ def user_turn(text=WAIT_PROMPT, attachment=None, *, message_body=MISSING):
     return turn
 
 
-def assistant_turn(text):
-    return {'role': 'assistant', 'text': text, 'turn_text': text}
+def assistant_turn(text, *, final=True):
+    return {'role': 'assistant', 'text': text, 'turn_text': text, 'final_controls': final}
 
 
 class FakeWaitBrowser:
@@ -200,6 +200,54 @@ def test_wait_starts_missing_chrome_and_collects_the_bound_answer(tmp_path, monk
     assert result['kind'] == 'chat answer'
     assert operation.data['send_attempted'] is True and agent.commands == []
     assert CONVERSATION not in capsys.readouterr().err
+
+
+@pytest.mark.parametrize('missing_controls', [False, True])
+def test_wait_does_not_complete_stable_opening_during_tool_work(
+    tmp_path, monkeypatch, missing_controls
+):
+    opening = assistant_turn('I will read the sources and write the answer.', final=False)
+    if missing_controls:
+        opening.pop('final_controls')
+    page = wait_page([
+        user_turn('previous question'), assistant_turn('previous final answer'),
+        user_turn(), opening,
+        user_turn('later question'), assistant_turn('later final answer'),
+    ])
+    agent = FakeWaitAgent(FakeWaitBrowser([page]))
+    cfg, args, _state, operation = install_wait(tmp_path, monkeypatch, [agent])
+    args.timeout = .03
+    result = driver.command_wait(args, cfg)
+    assert result['state'] == 'IN_PROGRESS'
+    assert not Path(args.answer_file).exists()
+    assert operation.data['send_attempted'] is True and agent.commands == []
+    assert agent.browser.closed
+
+
+def test_wait_collects_final_answer_after_stable_opening_without_stop_button(tmp_path, monkeypatch):
+    opening = assistant_turn('I will read the sources and write the answer.', final=False)
+    pending = wait_page([user_turn(), opening])
+    final = wait_page([user_turn(), opening, assistant_turn('The complete scientific answer.')])
+    agent = FakeWaitAgent(FakeWaitBrowser([pending] * 6 + [final] * 4))
+    cfg, args, _state, operation = install_wait(tmp_path, monkeypatch, [agent])
+    result = driver.command_wait(args, cfg)
+    assert result['state'] == 'COMPLETE'
+    assert agent.browser.reads >= 10
+    assert Path(args.answer_file).read_text() == 'The complete scientific answer.\n'
+    assert operation.data['send_attempted'] is True and agent.commands == []
+
+
+def test_wait_does_not_use_earlier_final_controls_for_last_partial_message(tmp_path, monkeypatch):
+    page = wait_page([
+        user_turn(), assistant_turn('Earlier finished fragment'),
+        assistant_turn('The latest response is still running.', final=False),
+    ])
+    agent = FakeWaitAgent(FakeWaitBrowser([page]))
+    cfg, args, _state, _operation = install_wait(tmp_path, monkeypatch, [agent])
+    args.timeout = .03
+    result = driver.command_wait(args, cfg)
+    assert result['state'] == 'IN_PROGRESS'
+    assert not Path(args.answer_file).exists()
 
 
 def test_wait_recovers_dead_chrome_without_restarting_the_pro_task(tmp_path, monkeypatch):

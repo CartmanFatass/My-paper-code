@@ -40,7 +40,11 @@ PAGE_FACTS = """(() => {
     const messageBody = message.getAttribute('data-message-author-role') === 'user'
       ? message.querySelector('.whitespace-pre-wrap') : null;
     return {role: message.getAttribute('data-message-author-role'), text: text(message),
-      message_body: messageBody ? text(messageBody) : null, turn_text: text(container)};
+      message_body: messageBody ? text(messageBody) : null, turn_text: text(container),
+      // Tool work can continue after an opening assistant message with no Stop
+      // button. The completed response's feedback control belongs to this turn.
+      final_controls: message.getAttribute('data-message-author-role') === 'assistant'
+        && !!container.querySelector('[data-testid="feedback-turn-action-button"]')};
   });
   const pageText = text(document.body).slice(0, 800);
   return {
@@ -553,14 +557,16 @@ def _bind_operation_turn(page, operation, committed):
 
 
 def _answer_after_turn(page, user_index):
-    """Return only assistant text belonging to the bound user turn."""
+    """Return the last assistant text only after its own final controls appear."""
     answers = []
     for turn in page["turns"][user_index + 1:]:
         if turn.get("role") == "user":
             break
         if turn.get("role") == "assistant" and (turn.get("text") or "").strip():
-            answers.append(turn["text"].strip())
-    return answers[-1] if answers else ""
+            answers.append(turn)
+    if not answers or answers[-1].get("final_controls") is not True:
+        return ""
+    return answers[-1]["text"].strip()
 
 
 def _receipt_commits(answer):
@@ -814,7 +820,7 @@ def command_wait(args, cfg):
             answer = _answer_after_turn(page, bound_turn)
             status("generating" if page.get("stop_button") else "accepted")
             stable = stable + 1 if answer and not page.get("stop_button") and answer == previous else 0
-            if stable >= 3:  # four equal samples over nine seconds, no Stop control
+            if stable >= 3:  # four equal final-response samples, no Stop control
                 break
             previous = answer
             time.sleep(min(WAIT_SAMPLE_SECONDS, max(0.0, deadline - time.monotonic())))
