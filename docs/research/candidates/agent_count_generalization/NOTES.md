@@ -2523,3 +2523,85 @@ first cell; one direction-owned scientific process runs at a time. The detached 
 armed on this same accepted operation (generation 35), and a checkpoint or wake never grants
 a restart. Main's newer owner-selected directions explicitly preserve this B03 ownership and
 operation. No B03 outcome, training-law interaction or confirmation is accepted at this point.
+
+## 2026-09-22 — B03 first cell complete, fixed comparison continues
+
+**H6/raw/942201 is complete and read.** The same admitted process exited normally with a
+valid zero-exit witness; the DM separately checked the scientific outputs. The final
+[summary](../../../../runs/agent_count_generalization/s1_action_law_b03_h6_raw_s942201/summary.json)
+and [training rows](../../../../runs/agent_count_generalization/s1_action_law_b03_h6_raw_s942201/training.jsonl)
+agree on all 45 rollouts. Actual exposure is **one fit, 360,000 training/stored team steps,
+720 training episodes/resets, 45 updates, 96,000 evaluation steps and 192 evaluation episodes**.
+Successful optimizer calls are coordinator 675, actor/critic 101,250 each, team discriminator
+675 and individual discriminator 2,700. All measured model groups moved from initialization;
+actor/critic relative parameter L2 changes are 1.191327/1.278636.
+
+All 25 native artifacts were inventoried and hashed; 21 JSON/log/JSONL files were collected
+byte-for-byte. Four 23,073,626-byte checkpoints remain at the manifest's native output root.
+Their actual file hashes equal the runner records. Read-only loading checked every tensor
+for finiteness, source/config identity, initial/final parameter-normalizer digests and sigma.
+The initial digest independently reproduces the value required by the third H6/clip cell.
+Final checkpoint SHA-256 is
+`903a270d2ac0550e9b1170230c841e5ebafb83d080cd4f70f6ae737e2b2780b6`.
+All 12 panel files equal the summary, use the declared worlds and clipped execution, and
+report zero evaluation optimizer calls with unchanged weights/normalizers. The DM recomputed
+every world's J from its native components and scalar return, checked per-rollout exposure,
+optimizer increments, raw sample/log-probability storage witnesses, executed motion and k10
+decision indices. All finite-value and identity checks passed; stdout/stderr are empty.
+
+**Read the fixed endpoint, including the lower later panel.** J by evaluation stage:
+
+| After rollout | N4 | N6 | N8 |
+| --- | ---: | ---: | ---: |
+| 0 | .321971273 | .244108310 | .113120695 |
+| 15 | .515165574 | .491731545 | .409344942 |
+| 30 | .549980491 | .535867609 | .464598383 |
+| **45 (primary)** | **.524578632** | **.448947724** | **.416596732** |
+
+Final unseen-N equal-weight J is **.470587682**. The final panel is lower than the rollout-30
+panel by .025401859/.086919885/.048001651 at N4/6/8. Each stage uses fresh worlds, so this
+is an observed panel change, not a paired-world estimate of deterioration over training.
+Do not substitute the better intermediate checkpoint for the fixed final45 result. Final
+native components (coverage / quality / height penalty) are N4
+.662832500/.233901566/.009574588; N6 .566585000/.201816246/.008206649; N8
+.533132500/.184352448/.011901752, with J=.7 coverage+.3 quality−height penalty.
+
+**Actual stochastic training exposure is now observed for this fit.** Raw coordinate
+violations total **3,751,408/6,480,000** (57.8921%); UAV-step violations
+1,948,785/2,160,000 and team-step violations 359,978/360,000. Coordinate violations increase
+from .316208 in rollout 1 to .759826 in rollout 45. Raw sigma moves from [1,1,1] to
+[2.719939,2.569132,2.672738]. Boundary-truncated coordinates total 1,634,874/6,480,000.
+These are training samples for the new H6/raw fit, distinct from B02's deterministic
+deployment means. They make the exposure question concrete but do not establish its service
+cost, sigma causality or a relative package mechanism. The clipped H6 pair and both SET
+cells are still needed for the declared B_a and I readings.
+
+Scientific command wall is **3,459.561 s (57.659 min)**, CPU user/system
+14,166.036/73.584 s; scientific-process peak RSS is **2,596,732 KiB (2.476 GiB)**.
+Admission-to-exit elapsed is 60.325 min, a different scope including launcher/startup overhead.
+Peak scratch is unmeasured. The shared node does not identify intrinsic package speed.
+
+**Decision:** accept this cell's bounded measurements and retain every adverse observation;
+the four-cell interaction remains unresolved. Continue the already declared second cell,
+**SET/clip/943201**, on the same immutable reviewed source and original 360k horizon. The
+remaining H6/clip/942201 and SET/raw/943201 follow in that order. No recipe, final endpoint,
+training seed, world panel, fit count or Pro question changes from this cell's scores.
+
+### B03 second cell admitted
+
+The predeclared **SET/clip/943201** cell was admitted at **2026-09-22 16:38:12 UTC**;
+its [runner-written manifest](../../../../runs/agent_count_generalization/s1_action_law_b03_set_clip_s943201/launch-manifest.json)
+binds the same immutable reviewed source and the new native operation handle. The actual-node
+preflight passed with 13,356,814,336 available physical/effective bytes. The first fit is
+terminal, so the direction still has only one scientific process running.
+
+The [initial training snapshot](../../../../runs/agent_count_generalization/s1_action_law_b03_set_clip_s943201/summary.json)
+reports `fit_started=true`, no failure, 8,000 collected/stored training steps, 16 episodes/resets,
+24,000 initial evaluation steps, and zero completed updates at the `rollout 1 collected`
+boundary (43.562 command seconds). Executed training actions remain in [-1,1]; the first
+over-range witness retains the original raw action and log-probability in storage while
+executing its clipped copy. Initial parameter/normalizer digest is
+`8f19743fe8fd5a09aa998bf90ab73bdbc3de599a8f58b791610fbb628d2f97c2`, to be required by the
+fourth SET/raw cell after validation. These are progress and execution facts, not a service
+comparison. Actual B03 cost is now **two started fits: one complete and one running**, with
+H6/clip and SET/raw still unlaunched. Observation is armed against this same accepted handle.
