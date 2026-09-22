@@ -2050,3 +2050,53 @@ is `/home/wu/hmasd-worktrees/usa-b03-2524168ea`. Native admission still precedes
 start. The later S/G cells will import the first D run's hash-verified initial facts and
 training-only calibration after its completed artifact has been read; no score changes
 the remaining cells or creates an extra fit.
+
+## 2026-09-22 — B03 D pre-training failure and bounded environment repair
+
+The first D / 912211 attempt was admitted at source `2524168ea`; its native
+[manifest](../../../../runs/uav_service_auxiliary/b03_d_912211_a01/launch-manifest.json),
+[summary](../../../../runs/uav_service_auxiliary/b03_d_912211_a01/summary.json) and
+[exit witness](../../../../runs/uav_service_auxiliary/b03_d_912211_a01/process-exit.json)
+are preserved. Both native processes are absent and the valid exit witness is code 1.
+The failure occurred on the first fact-environment reset, before any environment step or
+optimizer update: all scientific counters are zero; runner wall 1.5122 s, CPU user/system
+2.1820/0.2614 s, process peak RSS 849104 KiB. This is one accepted **pre-training attempt**,
+0 B03 started training fits, not a scientific negative or a completed D cell. All remote
+logs remain at the manifest's paths; nothing is overwritten or relaunched under this handle.
+
+The complete traceback ends in `RuntimeError: Ninja is required to load C++ extensions`.
+The CUDA test had explicitly included the scientific venv's bin in PATH; the configured
+remote runner prefix omitted it. This explains a difference between test and admitted
+execution, rather than a CUDA or scientific-target failure. Verify the diagnosis using the
+actual node's kernel-created child environment, with both the old and repaired prefix.
+
+L0 for this bounded shared correctness repair: add the existing configured remote scientific
+interpreter's bin directory to `nodes.wsl_4070.path_prefix` in `.codex/hmasd-compute.toml`,
+retaining the other entries. Add a focused launcher regression for configured venv tools
+and an actual-node Ninja-visibility reproduction; obtain independent executable-config
+review. No installation, compiler/source/backend, device, dtype, seeds, loss, horizon or
+existing process changes. Publish this shared repair normally and fast-forward the clean
+tracked canonical control files so new admission actually reads it. Preserve all unrelated
+untracked evidence and other processes. The original stopped attempt stays stopped.
+
+If the reproduction confirms the repair, the DM selects a fresh D / 912211 attempt a02
+at the corrected published source and a new output root, with the same scientific exposure.
+This is an explicit response to the recorded pre-training defect, not an automatic retry
+or new scientific batch. The six-cell design and all reading branches remain fixed.
+
+Independent review found no remaining material defect in the bounded PATH repair. The
+reviewer's focused local run passed 7 checks with the actual-node case skipped. On the
+configured node, committed source `73be55261b9f5e8f8fe26fdec6558b87ad088fcb` passed all
+8 selected launcher checks in 3.60 s. The actual child-environment reproduction finds no
+Ninja under the prior prefix, reproduces the recorded PyTorch error, and resolves
+`/home/wu/.venvs/hmasd/bin/ninja` with the repaired prefix. This confirms the dependency
+visibility diagnosis. No packages or compiler settings were changed.
+
+The scientific implementation and both B03 entrypoints are byte-identical to `2524168ea`.
+The DM accepts the repair and selects D / 912211 / a02 at full source
+`73be55261b9f5e8f8fe26fdec6558b87ad088fcb`; all six fixed cells will use that same source.
+The retained source checkout is `/home/wu/hmasd-worktrees/usa-b03-73be55261`. New execution
+depends on publication and canonical adoption of the reviewed configuration, fresh native
+resource admission, and a new output root. At this decision there remain 0 B03 started
+training fits and one failed pre-training attempt; no native scientific result is inferred
+from the repair checks.
