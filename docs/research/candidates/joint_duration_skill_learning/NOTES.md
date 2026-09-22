@@ -275,3 +275,225 @@ all other bytes and stop on overlapping edits. Return the actual answer commit i
 if writeback is unavailable, return the complete answer in chat, not only a receipt or link.
 
 ### Answer
+
+#### 一、建议：保留三臂，选择共同事件回报，不把旧 D2 损失直接接上时长头
+
+**建议采用题面的第 2 种构造：复用 D2 的部分重选、持有状态和顺序技能解码，三臂共同使用事件级团队回报、采样前的承诺条件价值函数，以及只作用于真实采样因子的普通 PPO surrogate。** 原有团队/个体技能、闭环 primitive actor、低层 PPO 和判别器继续共同学习；不启用 HA-CTSE，不增加前缀 Q 网络、反事实信用、预测目标或课程。固定臂也使用这一共同高层学习实现，而不是拿历史 D1280 checkpoint 充当对照。[代码调度与更新][agent] [顺序采样与重放][networks] [现行研究背景][background]
+
+这不是说“各成员自己的片段天然错误”。第 1 种构造在**累计真实团队奖励、使用适当续接状态、只减合法 baseline**时可以成立；但它不是“已有 gamma^elapsed，所以直接给 duration 复制 agent advantage”这么简单。对于本次先生成全部技能、再生成时长的联合动作，共同事件构造更容易明确每个因子究竟在优化哪个未来量，也减少了不同结束时刻、不同 value head 和不同分母叠加的歧义。代价是改变共同高层 target/sampler，增加事件级价值学习工作；它不保证更低方差或更好成绩。
+
+**MATERIAL_DISSENT: no。** 对题面已经限定的固定/充分知情分解/普通 AR 三臂、cap=10 和一次有成本边界的探索，没有实质异议。上述选择是在题面明确开放的两个方案中选择第 2 个，不是对未实现代码的认证。对“HA-CTSE 的 AR 开关就是本比较”“旧 D2 的片段与损失完全不改即可保证正确”这两种更强表述，我明确不认可。
+
+我保留 cap=10 的第一问：**同一团队十步更新制度内，允许成员提前重选是否值得，以及 AR 是否比充分知情分解输出多带来有限学习价值。** 它不是长于十步的时间抽象研究，也不是联合策略普遍优越性的检验。题面已经承认这个范围，因此现在不扩菜单、改团队时钟或增加第四臂。[固定问题][question] [既有完整概念答复与 Decision][concept]
+
+#### 二、源码真正支持什么，以及哪些不是现成能力
+
+配置核对支持所述起点：E0 的 D0 设置 `k=10`、D2 两项 logit-gap cost 为无穷、个体/team cap 均为 10、`age_feature="off"`；renewal runner 的 `make_config` 接在这个配置上，允许显式设置 coordinator batch size，并使用六团队/六个体标签。不能把另一个 arm 的成本、开关或旧运行的配置标签自动搬来。[E0 `_make_config`][e0] [renewal `make_config`][renewal]
+
+D2 已经保存采样 mask 和解码顺序，保持成员在前、待重选成员在后；teacher-forced replay 可以复用。其 agent/team 表分别累计**同一真实团队 reward**，在相应边界结算；低层仍逐 primitive step 训练。需要区分三件事：[D2 实现][agent] [buffer 与 GAE][utils]
+
+* 当前 value 输入是 state/joint observations 的编码，没有显式 held skills、承诺剩余时间和 cap 相位。这并不使它作为当前动作无关 baseline 自动有偏；它使“该 value 已经充分表示新持续策略的续接条件”没有依据。
+* 当前 GAE 的 gamma 按实际 elapsed 指数折扣，但 lambda 每个相应片段乘一次。`update_coordinator_d2` 调用高层优势函数时没有显式传 `gae_lambda`，后者默认值为 .95。新实现应绑定实际使用值，而不是仅抄配置名。[GAE 调用与实现][agent] [GAE helper][utils]
+* 当前团队 policy loss 与成员 policy loss 分别除以各自有效行数；entropy 又按事件行累计成员项。增加一个“duration 平均 loss”会继续引入相对缩放。它不是自动等于联合 log-prob 梯度。原 `config.k` 同时控制低层 recurrent chunk，执行 deadline 必须独立存储。[高低层更新][agent]
+
+`HorizonSkillEditor` 的 `_duration_outputs` 对整个 hidden 张量一次生成各成员 duration 分布；AR 循环更新的是技能/edit context，没有把已经采到的时长传给下一时长因子。其 `_features` 也不是这里要求的完整承诺与时长前缀接口。因此这里只能复用普通 categorical/mask 的写法，不能把那个完整编辑器切换进来，声称保持了原 HMASD。[HA-CTSE 相关方法][ha]
+
+#### 三、把采样前状态、技能后状态和事件时间分开保存
+
+以 primitive 时间计，令 \(t_j\) 是 episode 开始或至少一个成员/团队有权重选的事件，\(S_j\) 是本次待重选成员集合。\(H_j^-\) 表示**本次任何随机选择之前**的合法历史与已知承诺；它包含现有高层有权取得的 state/joint observations、原 held team/individual skills、年龄或绝对 deadline、到团队 cap 的时间，以及 eligibility/团队到期标志。有限 episode 所需的时间位置也必须来自既有合法计时。不要把未来实际终止时刻、未来 observation 或 simulator 隐藏变量放进来。
+
+具体首实现可用原高层编码，加技能/承诺特征的普通投影形成 \(c_j^-\)，训练一个团队 value；不额外造关系模型或前缀 critic。**\(c_j^-\) 是 \(H_j^-\) 的表示，不因为加了 age 就获得充分状态证明。** 低层 GRU 的历史可能影响后续行为；已有合法历史摘要可以共同使用，但没有保存、没有重放的历史不能被声称已经输入。使用有限状态摘要作 bootstrap，是下面近似 actor–critic 的剩余误差来源。
+
+团队到期时先按共同规则重开十步团队窗口，采样团队 latent，再重选所有成员技能；仅个体到期时保持团队 latent 和其他成员的技能/承诺，按 D2 顺序重选 eligible 技能。**全部当前技能确定后**，记
+
+\[
+C_j=(c_j^-,Z_j,\mathbf z_j,\text{本次合法时长支持集}),
+\]
+
+再采样新时长。这里 \(Z_j,\mathbf z_j\) 是本次生成或继续持有的实际值，不是旧值的别名。两种可变策略为
+
+\[
+\begin{aligned}
+\pi_{\mathrm{fact}}(A_j\mid H_j^-)
+ &=p_{\mathrm{skill}}(Z_j,\mathbf z_{S_j}\mid H_j^-)
+   \prod_{i\in S_j}q_i(d_i\mid C_j),\\
+\pi_{\mathrm{AR}}(A_j\mid H_j^-)
+ &=p_{\mathrm{skill}}(Z_j,\mathbf z_{S_j}\mid H_j^-)
+   \prod_{\ell=1}^{|S_j|}q_{i_\ell}(d_{i_\ell}\mid C_j,d_{i_{<\ell}}).
+\end{aligned}
+\]
+
+\(p_{\mathrm{skill}}\) 中未重选的 team/skill 项是确定的持有操作，不是需要学习的随机因子；两臂的“相同技能机制”指方法、信息和更新规则相同，不指训练后参数相同。顺序 \((i_1,\ldots)\) 使用 canonical eligible order，重放原样保留，不在 epoch 中重新排列或重新采样前缀。分解臂可以通过共同条件和原团队 latent 形成**边缘相关与确定性协调**；它只是给定 \(C_j\) 后不再依赖本事件其他新时长。[既有概念范围][concept]
+
+设本次生效的团队 deadline 为 \(D_j^Z\)，则 \(R_j^{\mathrm{cap}}=D_j^Z-t_j\)，合法时长是 \(1,\ldots,R_j^{\mathrm{cap}}\)。团队刷新事件的这个剩余量为 10，而不是刷新前的 0。先 mask 后采样，选择 \(d_i\) 就设置 deadline 为 \(t_j+d_i\)；不把十个名义类别采完再 clip 成若干同一动作。\(d_i=1\) 意味着执行一个 primitive transition 后才到期，不能形成零时间重选循环。剩余量为 1 时 duration 因子退化，log-prob/entropy 为零。
+
+固定臂总在团队窗口起点持有十步，duration 是确定规则，无 duration policy loss。强制所有可变臂选十步时应退化到同一固定执行制度；这是执行语义检查，不是说有限 softmax 参数必然实现精确点质量，也不是要求新 critic 与历史 checkpoint 数值相同。未重选成员只保留旧 deadline，不产生新的 duration score。相同标签再次选中仍可开始新的承诺，不能用“标签没有变”删掉这次真实动作。
+
+#### 四、推荐的共同事件目标：下一事件不是任何一个人的名义时长
+
+下一事件 \(t_{j+1}\) 是当前执行中的最早合法重选时刻，或任务结束边界。令 \(\Delta_j=t_{j+1}-t_j\)，实际团队段回报为
+
+\[
+\mathcal R_j=\sum_{u=0}^{\Delta_j-1}\gamma^u r_{t_j+u}^{\mathrm{native}}.
+\]
+
+**\(\Delta_j\) 通常不等于正在训练的某个 \(d_i\)。** 例如一名成员新选 8 步，另一名保留的承诺还剩 2 步，下一事件就是 2 步以后；前者仍持有 6 步。此时的续接价值必须看见这个承诺，不能假装全队都可重新行动。底层在这两步内仍每步读取 observation 并行动，duration 不等于开环 primitive action。
+
+共同 TD residual 与 GAE 可写为
+
+\[
+\delta_j=\mathcal R_j+\gamma^{\Delta_j}b_j V_{\bar\phi}(c_{j+1}^-)
+                        -V_{\bar\phi}(c_j^-),
+\qquad
+\widehat A_j=\delta_j+\gamma^{\Delta_j}\Lambda(\Delta_j)m_j\widehat A_{j+1}.
+\]
+
+这里 \(b_j\) 表示任务是否真的还会继续，\(m_j\) 表示是否存在同一 episode 内可接上的已采集后继事件；二者不是一个含混的 `done`。actor 使用冻结、停止求导的优势；value 拟合停止求导的 \(\widehat A_j+V_{\bar\phi}(c_j^-)\)。不要在 PPO epoch 中用已经更新的参数重新决定旧动作的结束时间或重算旧行为概率。
+
+**建议把 trace 的时间单位也共同固定。** 以固定十步参考的实际高层 lambda 值 \(\lambda_{10}\) 为锚，采用
+
+\[
+\Lambda(\Delta)=\lambda_{10}^{\Delta/10}.
+\]
+
+这样固定十步时恢复 \(\lambda_{10}\)，把一个十步区间分成若干事件不会仅因事件变多而额外缩短 trace 的物理时间尺度。这是本答复建议的普通估计设置，不是已有 D2 事实，也不保证有限 lambda 下估计与事件切分完全无关。保留固定“每事件 lambda”同样是合法的近似选择，但那会使短时长改变实际 trace 衰减，应明确作为学习包的一部分；不要把它误称为相同物理信用窗口。GAE 的一般价值是偏差/方差折中，而非无条件无偏。[源码 lambda 语义][utils] [GAE 作者摘要][gae]
+
+**结尾处理必须具体。** 原生有限 episode 的目标结束时 bootstrap 为零，即使环境 API 把该结束标成 `truncated`；人工 rollout 截断、但任务本应继续时，应在真实 final observation 和仍在执行的承诺上 bootstrap，不接 reset 后的新 episode。不能机械地把所有 truncation 都当成终局，也不能机械地全部 bootstrap。已有 runner 把 terminated/truncated 合并，实际新绑定必须按所选任务目标解释，而不是只看字段名。[现有 runner][renewal]
+
+若 rollout 在非决策时刻结束，该点只是结算边界：用“继续当前承诺”的状态价值，eligibility 可为空，不虚构一次技能/时长采样。对齐原有 episode/rollout 与 cap 可以减少这类情况，但不能以方便为由改变声明训练量；若保留中段截断，就必须训练/验证这个继续状态的 value 语义。用下一次尚未发生的重选 value 替它，或跨参数更新拼接旧行为概率，均不是合法替代。
+
+同一 \(\widehat A_j\) 作用于该事件**实际采到的**团队、技能与时长因子。团队 latent 虽只在 team event 采样，它仍通过 \(V\) 和后续 GAE 获得跨成员事件的后果；没有必要到下一个 team event 才让它拥有长远信用。共享团队 return 不等于宣称所有成员贡献相等：各 score 对各自条件概率的导数不同。
+
+#### 五、为什么各自闭合的 D2 方案也能成立，以及我为什么不首先选它
+
+令 \(\tau_i\) 是从本次动作开始到成员 \(i\) 下次真实重选/任务结束的间隔。一个合格的成员因子回报可以是
+
+\[
+Y_{j,i}=\sum_{u=0}^{\tau_i-1}\gamma^u r_{t_j+u}^{\mathrm{native}}
+       +\gamma^{\tau_i}b_{j,i}V^\pi(H_{t_j+\tau_i}^-).
+\]
+
+这段期间其他成员可以多次更新；奖励仍是团队奖励，续接仍是**完整未来**。在条件充分、续接 value 正确的理想情形，停止时刻分解并不会丢掉当前动作对后续的影响，成员/团队不同边界都可以估计同一个 reward-to-go。原 D2 已经跨自己的片段做 GAE，不能把它描述成“信用硬截断在十步内”。[D2 结算与递推][agent] [buffer 递推][utils] [FSD 更正与收束][fsd]
+
+危险在于错误的 \(V\) 语义。例如 AR 先采 \(d_1\)，再依赖它采 \(d_2\)；成员 1 在 2 步后重选时，成员 2 可能还持有此前受 \(d_1\) 影响的长承诺。只累计成员 1 两步内奖励、把未来置零，或者用忽略成员 2 承诺的头当作已正确的续接，都会遗漏或近似掉这条后果。**未来 state 中包含当前动作留下的承诺是必要且合法的；在当前因子的 baseline 中减掉自身选择则是另一回事。**
+
+各自闭合的优点是复用现有表、较少短事件 bootstrap、不同成员可获得不同长短的经验回报，可能减轻某些估计负担。其代价是要同时绑定 team/agent/duration 的边界价值、尾部状态、mask、trace 时间单位和因子权重；一次事件的各 loss 可能使用不同近似噪声。理论上可正确，不等于现有每个 head 已实现这一点。
+
+共同事件则统一一套团队 Bellman 语义，适合本次的完整联合动作，也使 held commitments 在每次事件都显式进入续接。损失是更多短间隔价值估计、同一优势带来的共同噪声、以及丢掉潜在的成员专用 baseline 方差收益。**没有一般方差优劣定理。** 在同一个完整 return 上取不同合法 baseline，或用精确 value 在不同停止时刻分解，和有限网络/有限 lambda 下的实际训练，是不同问题。首轮选择共同事件，是减少必须解释的接口与估计对象，不是预先判断它会赢；不另加一臂比较这两个 critic。
+
+#### 六、每个因子可以减什么 baseline：按真实采样次序判断
+
+把本事件随机因子顺次记作 \(a_\ell\)，其采样前信息为 \(\mathcal F_{\ell-1}\)。在通常的可微、固定条件支持下，
+
+\[
+\mathbb E[\nabla_\theta\log p_\theta(a_\ell\mid\mathcal F_{\ell-1})
+                 \mid\mathcal F_{\ell-1}]=0.
+\]
+
+因此任何可积的 \(b_\ell(\mathcal F_{\ell-1})\) 都能在**未裁剪的当前策略 score 项**中消去期望；共享网络参数不破坏这个条件恒等式，actor loss 必须停止通过 baseline/advantage 求导。下面是本题的具体允许范围；它是概率条件判断，不是给每一项再建一个 head 的建议。[既有概念 Decision 的解析核对][concept]
+
+| 被训练的因子 | 可以用于本因子 baseline 的已知量 | 不能不加论证直接放入的量 |
+| --- | --- | --- |
+| 新 team latent | 事件前合法历史、旧承诺、已知 eligibility/cap | 本次新 team latent、新技能、新时长 |
+| 第几个新 skill | 上述量；已经确定的 team latent；所有 kept skills；前面已采的新 skills | 自身新 skill、后采的新 skills，以及随后采的任何新 durations |
+| 分解 duration \(d_i\) | 完整当前 team/joint skills、旧 held commitments、合法时钟与历史 | 自身新 duration、由新 durations 决定的下一事件间隔 |
+| AR duration \(d_{i_\ell}\) | 分解臂允许量，加本次前面的新 duration prefix | 自身与后面的新 durations、包含其后果的下一事件间隔 |
+
+分解时长给定完整共同条件后独立，因此在严格满足该独立条件时，其他成员的新 duration 还可以构成该 duration 因子的动作无关 baseline 信息；不能把这个特例搬到 AR，也不能搬回其上游 skill 因子。首实现**不利用这个额外技巧**：统一减 \(V(c_j^-)\)，它对所有因子合法、最容易核对。技能后、时长前的条件 value 可能更好，但不值得在本次先变成额外信用模块。
+
+为何不能照搬“固定其他动作”的 COMA 写法？沿用概念 Decision 已核对的两因子反例：\(a_1\sim\mathrm{Bernoulli}(p)\)，\(p=\sigma(\theta)\)，\(P(a_2=1\mid a_1)=1/4+a_1/2\)，回报 \(Q=a_2\)。于是
+
+\[
+J=\tfrac14+\tfrac p2,\qquad \nabla_\theta J=\tfrac12p(1-p)>0.
+\]
+
+若固定已经采到的 \(a_2\)，对 \(a_1\) 求边际作 baseline，则该 baseline 就是 \(a_2\)，优势恒零，恰好抹掉 \(a_1\) 对后采动作的全部价值。完整支持、baseline stop-gradient 都救不了这个统计依赖错误。正确的条件 Q 必须对**依当前选择生成的后缀分布**取期望；本次直接用真实完整回报及其普通 bootstrap，不建这个反事实模型。这个解析例子是正确性参照，不是 S1 有时长收益的证据。[反例与适用边界][concept]
+
+#### 七、PPO 具体怎么接，以及三层“正确”不能混称
+
+**采样/重放层。** 对每次真实采样保存 pre-event context、完整技能后 context、合法 duration mask、团队/成员采样 mask、两种解码顺序、实际 tokens 和每因子 old log-prob；后继结算再保存 actual elapsed、reward、结束/截断类型及续接承诺。重放必须使用旧动作形成的前缀，不重采样后缀。保持操作的 log-prob/entropy/actor 梯度为零；不能给每个 primitive step 重复写入同一次 duration 的 policy 项。[现有可复用重放][networks] [D2 sampler][utils]
+
+还应注意“输入相同”也包括归一化与循环状态。若开启 running normalization，在一个行为数据批次内冻结相应变换、保存实际变换后的输入，或用等价可重放方案；相同网络参数及相同 train/eval、随机层语义应能复现 old log-prob。若选定配置关闭归一化，identity 即可，不必新增修复。源码的 D2 决策子集统计更新和 update 时再应用统计的路径需要据实际配置核对，**这里未运行数值检查，不能宣布已发现新失败**。若未来高层 value/actor 使用 recurrent history，随机打散事件不能替代合法序列重放。[相关采集与更新路径][agent]
+
+**首选优化层。** 为尽量复用原 D2，我建议每因子 clipped ratio、同一事件优势，对实际因子求和，而不是再堆一个各自平均的 duration loss。对一个含 \(T\) 个 primitive team transitions 的 rollout，可把高层 actor surrogate 明确写为
+
+\[
+L_{\rm actor}=\frac1T\sum_j\sum_{\ell\in\mathcal A_j}
+ \min\left(\rho_{j\ell}\widehat A_j,
+  \operatorname{clip}(\rho_{j\ell},1-\epsilon,1+\epsilon)\widehat A_j\right),
+\qquad
+\rho_{j\ell}=\exp(\log p_\theta(a_{j\ell}\mid\mathcal F_{j\ell-1})
+                       -\log p_{\rm old}(a_{j\ell}\mid\mathcal F_{j\ell-1})).
+\]
+
+\(\mathcal A_j\) 只含本事件真实随机因子。用共同固定交互分母，是为了不让“团队平均 + 成员平均 + 时长平均”暗中改变相对 credit 权重；不是要额外按 \(d_i\) 或 \(\Delta_j\) 乘奖励。均匀抽事件 minibatch 时，要用该 rollout 的事件数与 \(T\) 转换为同一目标的估计，不在每个可变长度 batch 中另定义目标。全局数值尺度、value/entropy 系数、优化器和优势处理三臂共同绑定；若做优势标准化，按同一事件总体估计，不因某事件有更多 duration factors 就重复计入其统计量。
+
+这是建议的**普通近似 PPO**，不宣称它就是联合动作的 clipped PPO。事件联合 ratio 是所有实际因子 ratio 的乘积；逐因子 clip 不等于对该乘积 clip，也不保证联合 KL/trust region。选择联合 ratio 是一个不同的普通优化选择，但本轮不需要再加比较臂；当前选择以复用原更新形态为理由，须报告实际 KL/clip 饱和和优化暴露，而不是借 PPO 名称取得单调改进保证。[当前分项 PPO][agent] [PPO 作者摘要][ppo]
+
+entropy 也只统计本次真实采样项，按共同规则缩放；它是优化正则，不是偷偷加入任务切换费。AR 在旧前缀上计算条件 entropy 的常用 surrogate，不应被宣称为精确的新策略联合熵梯度。原低层/判别器目标及更新安排保留，duration 改变了它们实际见到的技能驻留分布；不额外做占用平衡或新内在奖励。[低层路径][agent] [占用解释边界][concept]
+
+**无偏策略梯度层。** 对固定行为参数下的完整回报，令 \(G_j\) 是从 \(t_j\) 起折扣的真实 reward-to-go。对从 episode 起点定义的 \(J_\gamma=\mathbb E\sum_t\gamma^t r_t\)，其高层参数 score 形式包含
+
+\[
+\mathbb E\sum_j\gamma^{t_j}\sum_{\ell\in\mathcal A_j}
+ \nabla_\theta\log p_\theta(a_{j\ell}\mid\mathcal F_{j\ell-1})
+ \bigl(G_j-b_{j\ell}\bigr).
+\]
+
+这要求正确采样测度、合法 baseline 和完整回报或满足相应条件的估计。上面推荐的首实现保留常用 PPO 的未额外乘 episode 起点 \(\gamma^{t_j}\) 的 surrogate；**gamma^elapsed 正确，并不使它自动成为上述目标的无偏梯度**。近似 value、有限 lambda、多 epoch 旧数据、clipping、样本优势标准化又分别带来近似。若后来选择显式起点折扣权重，那是应共同绑定的优化语义变化，不能只加给 AR。
+
+此外，这个公式只描述高层 native-reward 部分；完整 HMASD 还共同更新低层与 discovery，并非一个已经证明对单一 native J 精确求梯度的算法。native evaluator 仍报告原来的完整 J，不改成“每次高层决策的平均奖励”。**我建议的是一套可忠实实现、可评价的近似学习包，不是一个新的无偏信用定理。**
+
+#### 八、最强异议与最小可区分观察
+
+**最强科学异议不是 AR 能否写出来，而是这个 cap=10 的实际任务是否值得新增时长自由度。** 每十步团队刷新可能截短有用配合，充分知情的分解头和原 latent 已能学确定性的错峰；AR 还增加串行条件化、优化和估计负担。它可能只是更短的边缘 duration、更多高层更新、不同容量或技能占用在起作用，而不是所谓相关探索。这些替代解释在方法包获益时仍然存在。[背景与原概念范围][background] [concept]
+
+不过共同 cap 也意味着完整非终止窗口起点会有全员重选，并非新臂必然没有联合事件。应记录 **\(|S_j|\ge2\) 且至少两个成员各有多个合法 duration 的事件**，与所有 eligible 计数分开；\(R^{\mathrm{cap}}=1\) 时人数多也没有 duration 关系可学。记录声明/实际驻留、同标签重选、cap/终局结束、技能占用和真正服务变化，不靠总相关系数判断条件依赖被利用。增加事件数不是增加独立训练重复。
+
+最小正确性检查可以与本次实现一起完成，不形成一套新的科学准入程序：
+
+| 检查 | 它真正区分什么 |
+| --- | --- |
+| 很小的可枚举两成员时长分布，检查 mask、概率和为 1、teacher-forced old/new log-prob 一致、held 项无梯度 | “写了 AR 代码”与“实际采样/训练同一个分布” |
+| 固定回报序列上检查 \(d=1\)、\(d=R^{\mathrm{cap}}\)、别人先到期、episode 结束与人工 cutoff；lambda=1 时事件分段回报应与 primitive reward-to-go telescoping 一致 | deadline/off-by-one、遗漏/重复奖励、错误 bootstrap，而不是性能 |
+| 上述有后缀依赖的两因子解析例子，比较完整期望的导数与未裁剪 score；同时检查强制十步时的固定执行退化 | 当前因子的后缀影响是否被 target/baseline 错误抹掉；不是要求 toy 产生正收益 |
+
+共同事件方案最值得防范的实现异议，是“长时长动作的效果发生在别人的第一次到期以后，却被 next-event target 丢掉”。第二、三项检查必须覆盖这一情况：早期事件的 reward 可以为零，后果通过真实后续回报或正确 continuation 到达早期 score。检查通过仍不证明有限网络在 S1 上能学好 continuation。
+
+**区分科学异议的最小原生观察就是已提出的三臂完整学习，而不是再购买一个 frozen-label 阳性前置实验。** 在相同声明交互量、固定终点与少量预写曲线位置，读取完整 native J 及实际 S1 coverage/quality/原生代价分量；沿用真实字段含义，不能把名为 energy 的旧代价项升级成 S7 电池/返航结论。训练采样与评价的 greedy/stochastic 规则事先固定，各臂一致，不能见分后换规则来解释“探索有用”。[实际 runner 的评价口径][renewal]
+
+AR 优于分解且优于固定，才支持在该范围继续保留联合学习包；一条曲线或一个 seed 只提供探索理由。两种可变方式均胜固定、没有值得保留的 AR 增量时，优先简单分解，不从低精度小差值宣称等价。AR 只胜分解却输固定，不推广复杂度。只有相关性、entropy、critic loss 或局部服务代理变化而完整 J 不改善，削弱当前转化解释；没有有用增量且没有新的可区分理由，就结束这套配方，不自动扩菜单或加种子。
+
+cap=10 的阴性不能排除更长时间抽象。若以后所问确实是长于十步的配合，必须另行声明共同团队更新规则、能够实际执行长承诺的支持集及相应固定参照；仅把菜单改为 1..20 后仍在十步 cap 截断，不会回答它。那是重新购买不同问题，不是本次为保护 AR 添加的救援或当前必做成本。
+
+#### 九、历史判断、成本和未解决部分
+
+**历史负证据保留，而且采用更正后的版本。** B13 的预声明 P1 成立、P2–P4 失败；02:51 对早先过宽的“选择价值上界”“coordinator 没贡献”表述作了收窄。B14 主比较三块约 +.019、+.016、−.019，记录均值 +.005，未达到当时预先规定的反转条件；第二组旧 BANDIT 权重上有 +.047 的条件收益，不能抹去，但也没有挽救先前完整方案。03:52 的休止决定仍成立。这不是“所有高层信用无效”，更不是对重新共同学习的 duration 系统的实验结果。[B13/02:51 与 B14/03:52 原始笔记][fsd]
+
+因此，加强的是：真实联合学习、充分知情的普通参照、完整团队后果和实际成本需要一起比较；削弱的是：标签计数、局部信用或更大动作空间能直接推导收益，和“现成 head 名称等于可用实现”；仍未解决的是：S1 十步制度内有没有值得利用的时序机会、分解参照是否已吸收它、共同 critic 的实际误差及各臂的计算代价。B12 不给新策略类的价值上界；UCOPE 的局部后果按本题与共享背景的原边界继承，本轮未重放其原始数据。[background] [concept]
+
+本次为阅读、解析与写答复，**0 新 fits、0 rollouts、0 科学评估**。题面首探索仍是每臂一个新训练实例，每个 360,000 primitive team transitions，共 **3 fits / 1,080,000 training team transitions**；评价另计。它不是已经接受的批次，更不构成训练总体优势、等价或论文级确认。新种子、面板、曲线位置、精确配置、共同损失尺度与停止条件由 DM 在运行前绑定；现行宪章的后续确认要求不被一个单种子结果替代，也不因此现在自动追加确认。[question] [constitution] [methods] [engineering]
+
+相同 primitive 交互量不等于相同代价。短时长会增加有效高层事件、可训练因子、minibatch 和优化调用；AR 多出顺序 duration 条件化，而判别器/低层仍有逐步学习成本。应记录实际训练/评价交互、coordinator 与低层更新、参数及推理工作、运行时间和内存，并保持低层 chunk=10 与新 duration deadline 解耦；不强行配平所有决策数来删除时间自由度本身，也不把额外计算藏成免费探索。使用 `wsl_4070` 优先的 owner 顺序；本轮没有检查节点当前可用性，不提供新实现墙钟报价或完成期限。[question] [agent] [methods]
+
+**阅读范围与信息缺口。** 推理输入固定为 `012b2ade2e2c836d272979516d6c89cd4c49a121`：已读题目全文、指定宪章/两项 skill 的相关部分、共享背景 3–6 与 duration 当前计划行、完整 MARL-concept Answer/Decision、whole-project Answer/Decision 的 duration 部分、直接 FSD B13/02:51 与 B14/03:43、03:52，以及题列配置、D2 调度/结算/更新、ordered replay、D2 buffer/sampler/GAE、低层更新和 HA duration 不匹配方法。没有仍未读取、却被本答复当作已核实的关键 Context 来源。
+
+没有重算历史 raw arrays、重放二进制 checkpoint、运行新正确性测试或验证新 duration implementation。外部补充只核对 PPO/GAE 作者摘要，用于 surrogate 与偏差/方差定位；没有据此声称完成全文优先权审查。文中的事件目标、baseline 条件、lambda 时间单位和 loss 选择是本答复的推导/设计建议，不是已有代码或已发生效果。普通状态摘要的充分性、有限训练方差、三臂真正跑通后的效果与成本仍待实际实现观察。当前资料足以选择这个有界比较，不足以保证它有原生收益。
+
+最终落点是：**保留 cap=10 的三臂完整学习；共同采用承诺条件的事件团队回报；明确因子采样次序与 PPO 近似边界；用原生结果决定保留、简化或停止。** 这不重启旧 FSD/Claude，不改 G33，不产生新审批要求，也不把普通自回归命名为新信用算法。
+
+[question]: https://github.com/CartmanFatass/My-paper-code/blob/012b2ade2e2c836d272979516d6c89cd4c49a121/docs/research/candidates/joint_duration_skill_learning/NOTES.md#pro-question-2026-09-21-duration-sampling-and-credit
+[constitution]: https://github.com/CartmanFatass/My-paper-code/blob/012b2ade2e2c836d272979516d6c89cd4c49a121/docs/project/OPERATING_CONSTITUTION.md
+[methods]: https://github.com/CartmanFatass/My-paper-code/blob/012b2ade2e2c836d272979516d6c89cd4c49a121/.agents/skills/hmasd-scientific-tools/SKILL.md
+[engineering]: https://github.com/CartmanFatass/My-paper-code/blob/012b2ade2e2c836d272979516d6c89cd4c49a121/.agents/skills/hmasd-research-engineering/SKILL.md
+[background]: https://github.com/CartmanFatass/My-paper-code/blob/012b2ade2e2c836d272979516d6c89cd4c49a121/docs/research/RESEARCH.md
+[concept]: https://github.com/CartmanFatass/My-paper-code/blob/012b2ade2e2c836d272979516d6c89cd4c49a121/docs/research/archive/2026-09-21/RESEARCH.md#portfolio-review-2026-09-21-marl-concept-formation
+[fsd]: https://github.com/CartmanFatass/My-paper-code/blob/012b2ade2e2c836d272979516d6c89cd4c49a121/docs/research/candidates/flexible_skill_duration/NOTES.md
+[e0]: https://github.com/CartmanFatass/My-paper-code/blob/012b2ade2e2c836d272979516d6c89cd4c49a121/scripts/run_flexible_skill_duration_e0.py#L239-L263
+[renewal]: https://github.com/CartmanFatass/My-paper-code/blob/012b2ade2e2c836d272979516d6c89cd4c49a121/scripts/run_fsd_uav_individual_renewal_b01.py
+[agent]: https://github.com/CartmanFatass/My-paper-code/blob/012b2ade2e2c836d272979516d6c89cd4c49a121/hmasd/agent.py
+[networks]: https://github.com/CartmanFatass/My-paper-code/blob/012b2ade2e2c836d272979516d6c89cd4c49a121/hmasd/networks.py#L1029-L1229
+[utils]: https://github.com/CartmanFatass/My-paper-code/blob/012b2ade2e2c836d272979516d6c89cd4c49a121/hmasd/utils.py
+[ha]: https://github.com/CartmanFatass/My-paper-code/blob/012b2ade2e2c836d272979516d6c89cd4c49a121/hmasd/ha_ctse.py
+[ppo]: https://arxiv.org/abs/1707.06347v2
+[gae]: https://arxiv.org/abs/1506.02438v6
