@@ -99,7 +99,10 @@ be restarted manually by the owner; it is excluded from these three planned sess
 The owner explicitly retains FSD as a research question. The earlier proposal to reuse Claude
 for the third seat is superseded; this is not a transfer or restart of that session.
 All three first comparisons use full HMASD on Scenario1 and are independent;
-partner-skill recombination remains the first backup.
+partner-skill recombination remains the first backup. FSD is a new-hypothesis planning
+candidate supported by a concrete advisory comparison, not by new favorable results or a
+reversal of Claude's stopping judgment; the evidence distinction is recorded in the
+[FSD rationale audit](#fsd-planning-rationale-2026-09-21-new-advice-without-new-results).
 The complete Pro reply and Root Decision give interventions, controls, costs and stopping
 judgments. This is a concrete planning result: no session creation, direction activation,
 owner reassignment or scientific execution occurred; existing standing remains as recorded below.
@@ -6093,3 +6096,60 @@ Root 明确了阶段性交付、奖励索引需绑定实际 runner、对照训�
 Claude／任何 DM session，没有改动运行中的输入、实验或方向状态。Claude 的手动恢复
 由业主掌握，未来实际新 DM 绑定在初始化时记录；研究主题相同不构成共享会话或
 复用已有执行身份的授权。
+
+
+#### FSD planning rationale 2026-09-21 new advice without new results
+
+Owner asks: “这里有个问题 FSD似乎Claude DM给出的意见是关闭 你重新启用是有新的发现或者建议了吗”.
+Root 核对当前 main 中 FSD 的最后收尾、B13／B14 读数、旧中断路线以及两次已完成的
+概念／Portfolio 咨询。**有后来形成的新研究建议，没有新增正面实验发现推翻 Claude 的
+停止判断；也没有实际重新启用。** 此处澄清既有计划的依据，不启动科学工作或重复咨询。
+
+**Claude 的原决定保留。** 最新正式 notebook 的 2026-09-21 02:51、03:43 和 03:52
+条目（发布于 `00eac27c535ccffb66354f8bfac62acb504874ca`）明确建议并由 owner 采纳
+reserve：停止当前 learner 的高层标签信用追加投入，K 的开放问题未被宣告不可能。
+在投入含义上，owner 所说“关闭”抓住了关键：旧路线已经收尾，应停止支出。
+B13 的 P1 成立而 P2–P4 失败；B14 是当时唯一明确能翻转这次建议的检查，三个主基座
+G 为 +.019／+.016／−.019，均值约 +.005，未达到预写的翻转条件。两个正基座和
+BANDIT 次要结果仍保留，不能把它们改读为完整方案成功。
+[最终收尾、B13／B14 及其解释](candidates/flexible_skill_duration/NOTES.md)。
+
+**也不能把整个 FSD 历史说成“从未试过可变时长”。** 旧 D2 基于 held-skill policy gap
+触发中断；E2、E3 和 UAV renewal 系列已检验过相关方案，存在不利结果及有边界的
+早期正例。E2 的阈值确实改变时长，未建立预期事件收益；E3 的 competent large-row
+三个对比均不利。旧 UAV 中断／batch 方案的早期收益也未稳定保留到后来完整比较的
+终点。这些材料提高了新投入的机会成本，不能因为改写主问便抹去。
+这里按[历史方向记录](candidates/flexible_skill_duration/DIRECTION.md)的命名范围继承
+结果，旧文中的 ACTIVE、配额或下一步流程不是当前状态；本次没有重新审计全部原始数组。
+
+**后来新增的是一个不同、已具体化的学习比较。**
+
+| 与旧投入的区别 | 新建议及其证据级别 |
+| --- | --- |
+| 干预 | 在原有联合技能分配之后直接学习持续时间分布，并让高层、低层和原技能发现共同更新。主干预是同事件时长的条件依赖结构，区别于旧 policy-gap 阈值中断或原技能基座上的标签信用救援。 |
+| 主要对照 | 有能力的固定周期 HMASD、充分知情的条件分解时长、普通自回归联合时长；保持合法承诺信息、团队 latent、团队 cap 和共同合格 critic。分解头本身已能确定性协调，不能把它削弱为不知队友的对手。 |
+| 原生预测 | 在 Scenario1 已有的覆盖／容量任务中，合适的时长组合若能更早被探索并学会，就可能在部分 UAV 调整位置时保留有效服务，并改善完整回报。这是待检验预测，尚未观察到当前 learner 的这个瓶颈或其被解除。 |
+| 已获得的支持 | 完整 `marl-concept-formation` Pro 建议把这一比较作为有界首问；后来的 `information-first-three-dm-plan` Pro 也支持它作为第三席。这是具体方法建议及投入判断，不是新的实验、定理或收益保证。 |
+| 尚未解决 | 新臂未实现、未训练；收益和成本未知。单成员重选时没有同事件跨成员时长采样区别；已有 latent、确定性协调或普通分解头可能吸收收益，cap 也可能消除长时长的实际作用。 |
+
+相关的新建议完整保存在本文件的
+[概念形成 Answer 与 Decision](#portfolio-review-2026-09-21-marl-concept-formation)和
+[三 DM 计划 Answer 与 Decision](#portfolio-review-2026-09-21-information-first-three-dm-plan)。
+B12 不能推出所有联合技能价值可加、也不能给共同学习设零收益上界；这只是纠正过强的
+否定理由，**不是支持新时长方法获益的正证据**。同样，新的 Pro 推荐不能替代结果。
+
+**Root 的投入判断。** 我保留联合时长作为优先级低于两项信息研究的第三个计划候选，
+理由是它现在有与停止配方不同的干预、认真的普通参照和可以失败的原生预测，而不是
+“还没证伪，所以继续 FSD”。这足以解释为什么值得考虑一次新学习比较；不足以宣称
+Claude 的停止结论已被新发现推翻，或 FSD 已重新成为被验证的高价值方向。
+原计划没有授权执行，owner 的“FSD 并不需要移出”也只纠正保留题目与会话安排，
+不被 Root 读作开启原 Claude session 的指令。
+
+如果这项新比较被采用，固定周期仍应在同一比较内，最终读完整回报／服务和实际成本；
+联合只胜分解但不及固定，或仅有时长统计变化，都不支持推广额外复杂度。旧路线仍停止，
+新问题不继承旧成功结论，也不要求先购买一个阳性探针才允许研究。实际启动沿用正常
+DM 判断、预声明与运行要求，不新增 Root 逐批审批。若没有进一步值得购买的观察，
+停止该新配方，不再次用“FSD 尚有可能”延长投入。
+
+本次仅补齐计划的证据与建议层次：三项研究题目及其顺序不变，现行 reserve、Claude
+手动恢复边界和执行身份不变；0 新 fits、0 rollouts、0 科学评估、0 App 会话操作。
