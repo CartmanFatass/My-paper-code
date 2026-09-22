@@ -497,3 +497,120 @@ cap=10 的阴性不能排除更长时间抽象。若以后所问确实是长于�
 [ha]: https://github.com/CartmanFatass/My-paper-code/blob/012b2ade2e2c836d272979516d6c89cd4c49a121/hmasd/ha_ctse.py
 [ppo]: https://arxiv.org/abs/1707.06347v2
 [gae]: https://arxiv.org/abs/1506.02438v6
+
+### DM reading and decision — 2026-09-21
+
+The same accepted Pro operation completed. `deliver` verified commit
+`2876bf029b441b2d6ce1d3beaeb091e12e44107e`: one target file, previously empty Answer filled,
+question and all other bytes unchanged. Read the entire 16,799-character Answer, not just the
+chat receipt. The driver closed its owned observation tab; no resend or new conversation.
+The completed wait event was consumed with its original generation/wake/event identities.
+
+Adopt option 2: a common pre-sampling commitment-conditioned team value and event-level
+native team return, reused for all actually sampled high-level factors. Preserve original
+low-level/discriminator learning. This narrows the unimplemented credit choice; it does not
+strengthen any empirical duration claim. The Answer's distinction between legal baselines,
+faithful replay and approximate factorwise PPO is adopted. No action-dependent COMA baseline,
+new prefix value head, predictor, HA-CTSE or occupation reward is added. Conditional AR gains
+would still be package effects, not identified correlated-exploration effects.
+
+Fresh published main `63e87d81b87caa4bad0332fa0dbfdc633e939f63` retains the relevant background
+3–6, owner authorization and our lead. Its changes since initialization affect another
+direction's own standing only. The shared background therefore continues to require the
+informed factored reference, actual service/cost reading and the old FSD stopping boundary.
+No other DM's unpublished module or result is a dependency.
+
+Binding choices within the advice: terminal-aligned native S1 episodes and rollouts, 500
+primitive steps each, 16 training lanes, 45 rollouts = 360,000 team transitions per arm.
+This retains the existing native episode length and lane count. The first implementation
+rejects a nonterminal rollout cutoff instead of pretending an unsupported continuation
+value is valid. Unit-level return checks can still exercise a supplied cutoff bootstrap;
+the result runner only uses complete episodes. Low-level recurrent chunks remain 10.
+
+The common high-level policy sees original lawful state/joint observations plus pre-event
+held team/member labels (with explicit invalid-at-reset representation), commitment age and
+remaining primitive steps, eligibility, team cap phase and episode position. The common
+critic uses only this pre-event representation, not newly sampled labels or durations.
+There is no new learned history summary or claim of state sufficiency. After all skills
+are known, both duration heads additionally see actual current joint labels; AR alone gets
+the earlier eligible durations of this event in canonical order. Factored prefix inputs
+are zero, with otherwise the same head shape; fixed has no duration score.
+
+Bind gamma to the native config, lambda_10=.95 and event trace multiplier
+lambda_10**(elapsed/10). Sum per-factor clipped surrogates and entropy over true sampled
+factors, with event-minibatch scaling to the rollout primitive transition count. Normalize
+advantages once over the event population, not over duplicated factors. Use common native
+optimizer/loss coefficients, 15 PPO epochs and coordinator batch size 1280. Preserve native
+value normalization with correctly frozen collection values and explicitly verified replay;
+native observation/state normalization is disabled. Neither per-factor clipping nor this
+common scaling is claimed to implement exact joint PPO or an unbiased discounted gradient.
+
+### L0 — event-duration learning adapter and first native runner
+
+Deliver one direction-local implementation of the above joint-duration family. No shared
+learner/runner/environment edits are initially necessary. Owned source paths are
+`experiments/candidates/joint_duration_skill_learning/` and matching tests under
+`tests/experiments/candidates/joint_duration_skill_learning/`. Reuse `HMASDAgent` primitive
+collection, discoverer, discriminator, `SkillCoordinator` ordered skill decoder and native S1
+environment. Override the necessary duration scheduling, high-level event storage and PPO
+update in a local subclass; do not fork the whole training framework or toggle HA-CTSE.
+
+The bounded Implementer owns `learning.py` and `test_learning.py`: common coordinator/context,
+deadline sampler/replay, event returns and agent adapter. Expose `DurationAgent(config,
+log_dir=..., device=...)` with `config.duration_mode` in `fixed/factored/ar`, ordinary
+`step/store_transition_batch/update/clear_buffers/reset_env_state` APIs, and
+`get_duration_metrics()` for JSON-compatible cumulative/last-update facts. All duration
+parameters belong under `skill_coordinator` so existing parameter, optimizer and evaluation
+sync helpers include them. The DM owns `runner.py`, runner tests, NOTES, Git index and
+publication. The Implementer makes no scientific changes, result launches or Pro sends.
+Parallel writers must preserve each other's paths and not stage or commit the other's work.
+
+Invariants: duration support is masked before sampling to 1..remaining team window; team
+refresh resets that support to 10; d=1 executes one physical step; held members keep their
+deadline; same-label renewal is a real event; stored skill/duration tokens and orders are
+teacher-forced; forced factors have zero score/entropy; pre-event value excludes new actions;
+all primitive rewards appear exactly once in each event chain; terminal means the native
+finite task ended; no reset state supplies terminal bootstrap. Align complete rollouts and
+reject unsupported mid-episode clearing/cutoffs. Preserve original low-level/discriminator
+parameter updates and objectives. Any necessary common correctness repair is disclosed and
+tested separately from a scientific improvement.
+
+Checks: enumerable two-member masked duration law/replay and held gradients; duration-prefix
+dependence versus factored invariance; deadline edges/kept commitments/fixed-10 degeneration;
+event reward and lambda=1 telescoping, including delayed consequences after someone else's
+earlier event; analytical score-gradient suffix-dependence example; actual collector-storage-
+update traversal and native short complete-episode smoke for all arms. Check CPU/CUDA on the
+preferred remote when available. Small local syntax checks are development work; no local
+result computation is selected. Obtain independent executable review before a result launch.
+Stop dependent work for a real semantics mismatch, preserve any accepted handles, and repair
+within this design; no speculative scientific additions or automatic retry are authorized.
+
+### B01 prospective exploration — declared before implementation/results
+
+Arms, in execution order: `fixed`, `factored`, `ar`. Training seeds respectively
+2026092201, 2026092202, 2026092203; each is one fresh jointly learned instance, no checkpoint
+warm start or seed matching claim. Planned cost **3 fits**, 360,000 training team transitions
+each, 1,080,000 total. Primary reading is deterministic native S1 J at the fixed final
+360,000-transition checkpoint, with curves at initialization, 120,000 and 240,000.
+All four evaluations use the same predeclared 32 environment seeds 740000..740031, 500 steps
+each (64,000 evaluation team transitions per arm, separately counted). No best-checkpoint
+selection, score-dependent extension or replacement seed. Evaluation preserves all learner
+RNG streams, including CUDA; evaluator parameters and normalizers are synchronized only at
+these four points and do not train.
+
+J retains the native runner definition 6 * mean episode team return / 500. Retain per-world
+native coverage/quality/energy fields with their S1 meanings, all curves, actual low/high/
+discriminator optimizer counts and parameter movement. Also save eligible/joint nondegenerate
+event counts, nominal/executed durations, same-label renewals, cap/terminal boundaries, skill
+occupancy, replay error, clip/KL and parameter counts; no proxy replaces J. Report actual
+training/evaluation interactions, wall/CPU/RSS and remote occupancy, with unmeasured resource
+facts labeled honestly. Remote `wsl_4070` is preferred; fresh actual-node admission and a
+published exact source are required for each accepted result attempt. Initially run one fit
+at a time; independent research tasks do not reserve the whole GPU or bypass memory checks.
+
+This is an exploratory package comparison. AR must be useful against fixed and informed
+factored to justify retaining its added complexity; useful variable methods without a
+convincing AR increment favor the simpler method. A one-instance ranking is not stable
+superiority or equivalence. If no useful native increment and no concrete differentiating
+follow-up remain, stop this bounded recipe; do not automatically enlarge the menu, change
+host/reward, add modules or purchase more seeds. Started fits remain **0** at this entry.
