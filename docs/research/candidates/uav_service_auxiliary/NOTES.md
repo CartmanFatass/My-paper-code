@@ -1824,3 +1824,184 @@ the prior completed assistant's feedback control while the current operation had
 collectable final answer and continued reporting research progress. The DM accepts this
 bounded repair; raw page/operation details remain private. There is still no scientific
 answer or adopted six-fit batch at this boundary.
+
+## 2026-09-22 — Complete Pro reading and B03 decision
+
+The same accepted Pro request completed with 11,355 characters; the whole answer above
+has been read. The connector reported no write capability, and independent delivery
+inspection found no Answer commit. The DM saved the complete chat text in the assigned
+subsection, preserving the question and all surrounding bytes, in `7ee03d86a`.
+The first 58-character acknowledgment remains an observation error, not a consultation.
+No question was resent and no other App task was contacted.
+
+**Adopt the material dissent.** Replace the proposed normalized latent G with one-step
+action-conditioned prediction of the next legal actor observation, with a fixed training-only
+coordinate transform. A constant nonzero representation and the same constant prediction
+give zero normalized latent loss; stop-gradient does not remove that solution. This is an
+analytical counterexample, not evidence that joint RL necessarily collapses. The previously
+verified Ni et al. Algorithm 1 / sections 4.3 and 5.3 support ordinary predictive comparators
+and caution against a universal detached-target rank claim; the clean-observation result is
+an analogy, not UAV evidence. SPR and MA2CL retain their actual method conditions and do not
+make actor-encoder auxiliary gradients new. No new literature-derived performance claim is
+made. OP instead has a fixed observed target on a given trajectory, but sorted entity slots,
+teammate actions, irrelevant coordinates and partial observability remain real limitations.
+
+The source audit and direct source reading verified submitted raw four-dimensional commands,
+the existing wrapper's separate physical action mapping, W10 censoring, shifted entry masks,
+detached FiLM and the lack of commands in old fact files. Direct inspection also verified
+that the historical battery metric is a time average of fleet minima, and delivered traffic
+is 30 times QoS under the current 30-user, constant 1-Mbps demand. Add an episode minimum
+statistic without changing the historical field; do not count throughput as independent
+support. The current learner/environment/config diff from frozen `30401722b` changes only
+wording and an equivalent first-dimension shape check in the existing recurrent mask code.
+The successor uses the current shared path consistently for all arms; old entries stay frozen.
+
+The DM chooses the six-fit package comparison below. B01/B02 strengthen the case for one
+new-world comparison of a potentially useful training package; B02 weakens the proposed
+MSE-mediated explanation. Neither establishes service-label necessity. The strongest
+alternative is to stop now because of low absolute service and late decline. I choose to
+pay for contemporaneous D/S/G and new final worlds because they distinguish renewed package
+value, an ordinary auxiliary alternative, and failure to retain the historical increment.
+Removing D would lose the distinction between two useful packages and two harmful ones.
+Two blocks are exploratory recurrence, not a new general seed minimum or confirmation.
+
+Current published background was checked at `5da954a9de1a0f11a2c4f8a689c076abf8fd91b8`
+([RESEARCH](https://github.com/CartmanFatass/My-paper-code/blob/5da954a9de1a0f11a2c4f8a689c076abf8fd91b8/docs/research/RESEARCH.md)).
+Topics 2, 4 and 6 concretely keep future facts out of actor inputs, require a real ordinary
+package comparison, separate proxy error from native consequences and keep the training
+instance as the replication unit. The newer S1 action-law/capacity results do not justify
+changing S7's existing wrapper. Pause remains lifted for this direction; Claude FSD and G33
+retain their separate restrictions. No new general shared-background conclusion is owed
+before these new observations exist.
+
+Adopt low-cost gradient/parameter-movement, variance and fixed-fact rank diagnostics, along
+with persistence and first-training-rollout mean references. Defer RL/auxiliary gradient
+cosine and post-auxiliary KL: no prespecified value would change this package choice, and
+they require extra replay. This is a scope decision, not a promise to add them later.
+No four-fit GRU-only experiment, eight-fit confirmation, extra probe training or target sweep
+is selected. This consultation covers the choice and its stated result branches; routine
+implementation, review, execution and collection need no second consultation.
+
+## 2026-09-22 — B03 prospective comparison and L0
+
+**Question and fixed arms.** In S7-S2 interface v3 / reward v2 / arm C, N8/k10, does the
+W10 service-supervised representation package retain useful native benefit against D and
+one specified ordinary observation-prediction package? D trains two detached heads; S
+updates actor base/GRU only from service MSE with a detached generic shadow; G updates
+base/GRU only from observation MSE with a detached service shadow. High/low learners and
+discriminator continue their unchanged native updates. Heads are never actor inputs.
+S versus G changes target semantics, horizon, dimension, command conditioning and loss
+geometry together; even a favorable outcome supports only these packages.
+
+Service head is the frozen hidden→64/ReLU→1 with its original isolated seed offset
+200000. Generic head is (hidden+4)→64/ReLU→obs_dim, with isolated seed offset 300000.
+Native dimensions remain hidden=256, obs=365, action=4. Stored raw commands are constant
+head inputs; no action-head gradient or resampling is allowed. No privileged physical
+motion, entity identity or padding-truth input is added. At the first common training
+rollout only, take next observations at W10-valid starts from the existing actor observation
+normalization path with `update=False`. Compute in float64, over valid time/lane/agent rows,
+`mu[j] = mean(x_next[j])`, `scale[j] = max(1, sqrt(mean(x_next[j]**2)))`, and thereafter use
+`u_next=(x_next-mu)/scale`. This explicit RMS definition fixes the rendered equation in
+the chat extraction. Save exact values and their source fingerprint. S/G import D's
+values and verify their own first rollout produces the same inputs and statistics before
+the first auxiliary update; do not derive statistics from any evaluation/fact worlds.
+The first-rollout mean W10 target also supplies the optional constant service reference.
+
+G uses exactly the W10-valid starts and next input at t+1, including cross-chunk pairs.
+The target loss averages all 365 coordinates and valid agent rows; coefficient is 1.
+Keep native update then one chronological auxiliary pass, 50-step TBPTT, collector entry
+hidden, mask row 0=1 and later rows=1-done[t-1], and held-skill FiLM with its output detached.
+Each head has independent Adam 3e-4 / clip .5; the one active representation optimizer is
+Adam 3e-5 / combined base+GRU clip .5. Step the service head first, then generic head;
+use detached pre-update features for the inactive head. S's service/representation update
+must reproduce the original joint path on the same inputs. D has no auxiliary representation
+optimizer. Identical rates/clips are not a claim of equal effective gradients or compute.
+The transform, losses, horizon and target are not retuned after scores.
+
+**Fixed exposure.** D/S/G × training seeds 912211 and 912347 = **6 planned fits**, each
+4 lanes × 1500 steps × 30 rollouts = 180,000 team transitions; **1,080,000 training** total.
+Lane seeds are block seed+[0,1,2,3]. Execute D/S/G for the first block, then D/S/G for the
+second; serialize fits unless actual node evidence supports a safe equivalent schedule.
+Use configured `wsl_4070` first, CUDA FP32, TF32 off, four Torch threads. Native admission
+must verify fresh actual-node memory and the stable lead `Codex DM (independent session)`.
+No new fit has started at this entry. The old four fits remain development exposure;
+G has no equivalent tuning history, and this asymmetry remains disclosed.
+
+Development worlds 920001–920008 run at rollouts 0/10/20/30. New final worlds
+936001–936032 run only at rollout 30, in every arm/block: **576,000 nominal evaluation
+transitions** total. D collects each block's two common initial-policy fact episodes:
+932201/932202 or 932211/932212; S/G reuse those exact files. Each final policy collects four
+fact episodes on 933201–933204 or 933211–933214. Thus **42,000 physical fact transitions**,
+and **1,698,000 nominal native interactions** overall, with actual early terminations counted.
+Facts now include the submitted raw commands. After a block finishes, all three checkpoint
+pairs replay its same 12 endpoint episodes; initial-policy facts stay separate. These are
+zero-update diagnostics, with no new environment interaction or probe fits. Episode-weighted
+MSE averages valid time/agent/coordinate error within each episode before averaging episodes;
+missing W10 windows stay explicitly missing, not zero. Preserve source-arm strata and all
+per-world values. A common endpoint mixture is not the complete task distribution.
+
+**Readings and investment branches.** Primary contrasts are each block's rollout-30
+final-world means S−D, G−D and S−G in complete raw native episode J; also retain absolute J,
+QoS, return cost, delivered traffic, episode minimum and time-mean fleet-minimum battery,
+charging/cutoff/depletion exposure and all development curves. S−G=(S−D)−(G−D), not a third
+independent experiment. The two training blocks are the units; 32 shared worlds do not
+become 64 training replications. No population ranking, equivalence or safety claim.
+Endpoint-common-fact service/OP MSE is explanatory, never a gate substituting for J.
+
+- Useful S−D in both blocks, supported by service without offsetting observed risk, may
+  retain this S package. A consistent increment against a functioning G retains only that
+  bounded comparison, not a service-semantic mediator or automatic confirmation.
+- If G is useful and the data give no actionable S/G difference, choose by actual cost/use;
+  stop paying to establish service labels as necessary. Unresolved is not equivalent.
+- A numerically valid but degenerate G is adverse evidence about this specified G; it
+  cannot rescue S, prove all generic methods weak or authorize replacing a cell mid-batch.
+- Proxy-only improvement, loss of S−D on new final worlds, conflicting blocks or still
+  inadequate absolute service weakens further investment and defaults to no third block,
+  early-checkpoint rescue, longer horizon or new module. Stop the present recipe when its
+  next information is not worth its cost; that is not proof of a zero effect.
+
+There is no validated deployment threshold or minimum useful return in the supplied task,
+so no post-hoc threshold is inferred from old effects. Read magnitudes, components and full
+cost together; two positive signs alone are insufficient. Technical defects retain their
+failed attempt and cost and quarantine only dependent claims. No automatic retry is selected.
+Old 509.11 runner minutes is a historical anchor, not a completion-time promise. Measure
+preparation, native collection/update, auxiliary work, evaluation, facts/replay, publication,
+fit/batch wall, CPU and process-scoped peak RSS; shared-node timing is not an intrinsic
+speed comparison. Non-fit implementation/checks and zero-update replay are reported separately.
+
+**L0 deliverable and ownership.** Restore exact B01 auxiliary/native/entry/tests from frozen
+`30401722b14c208bf5330ab66e967c94b3df8a36` as unchanged reusable dependencies and off-path
+references. Add `experiments/candidates/uav_service_auxiliary/b03/auxiliary.py`, `native.py`,
+`facts.py` as needed, `scripts/run_uav_service_auxiliary_b03.py`, a bounded endpoint replay
+entry if needed, and focused mirrored B03 tests. No shared learner/environment/reward edits.
+The new production entry binds the fixed seeds/panels and calls `require_admission` before
+scientific effects. Results go to runner-written `runs/uav_service_auxiliary/<b03-tag>/`,
+including both heads/optimizers/scale in checkpoints and measured counts/movement.
+
+One bounded Implementer owns only B03 auxiliary replay and its focused auxiliary tests;
+the DM owns restored references, native collection/evaluation/facts, entrypoints, integration
+tests, this notebook, Git index/publication and acceptance. The helper chooses no science,
+launches no results and does not write shared files. API: `B03AuxiliaryReplay(actor, arm,
+initialization_seed=..., generic_initialization_seed=..., observation_dim=..., action_dim=4)`;
+`calibrate(..., normalized_observations=...)` / exact load/export of fixed scale;
+`update(actor, observations, skills, dones, qos, *, actions, initial_hidden,
+normalized_observations)`; deterministic `predict_all` returning service, observation and
+feature tensors; complete checkpoint save/load. Reuse the frozen input/mask/FiLM machinery.
+
+Per pass record weighted loss and counts, head/representation step counts, pre-clip norms,
+clip fractions, actual auxiliary movement separately for base/GRU and heads, and target/
+prediction/feature norm/variance summaries. The DM records native movement separately.
+Fixed initial facts at 0/10/20/30 provide at most 512 deterministic cross-episode/time/agent
+valid rows for centered covariance effective rank plus total variance; zero variance is
+explicit degeneration. Preserve per-agent/episode-segment variation so pooled rank is not
+mistaken for within-history information. Use same transformed rows for OP persistence and
+training-mean references. Diagnostics preserve RNG, modes, normalizers and learner state.
+
+Checks trace real storage→W10/next-row pairing→recurrent input→loss→designated parameter
+update, cross-chunk and reset cases, D/S off-path identity against frozen replay, isolated
+head RNG, shared first collection/native update/scale, no gradients to FiLM/action head,
+checkpoint round trip and deterministic no-update replay. A small native integration test
+uses pytest-owned scratch and shortened synthetic/checking exposure, never result evidence.
+Independent high-risk engineering review covers the actual integrated diff and checks before
+publication/admitted execution. Stop dependent work on a real target/RNG/leakage/input
+identity/resource conflict, preserve evidence and resolve locally; no repeated owner approval.
