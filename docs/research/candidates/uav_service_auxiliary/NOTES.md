@@ -2227,3 +2227,27 @@ mean development return than at rollout 10; they are not final-world or S/G evid
 Fixed-row feature variance is 25.8736 and effective rank 7.6482, without a zero-variance
 degeneration flag. Retain all observations and continue the accepted operation through its
 fixed training and final evaluation. No early checkpoint is selected and no new fit is added.
+
+## 2026-09-22 — B03 D training horizon reached, final evaluation pending
+
+The 19:29 UTC checkpoint still reports both matching a02 processes running, consistent
+records and no exit witness. No newer owner pause or assignment change applies. Snapshot
+SHA256 `3edf3edfd0f048a4060ae50ebd339f51c7f3071535c16fd42f00872bcf909094`
+records the full 180,000 training transitions and 30 completed updates. All four development
+panels are complete: 32 episodes / 48,000 evaluation transitions; physical facts remain
+the two initial episodes / 3,000 transitions. Final-world evaluation, endpoint facts and
+final checkpoint acceptance are still pending. The summary remains INCOMPLETE with failure
+null and empty stderr. All 63,932 floating values are finite; earlier completed records and
+fixed initialization/config/facts/calibration bindings remain unchanged. The final training
+resource row records cumulative wall 7852.55 s and RSS 3,092,180 KiB; it is not total fit cost.
+
+Rollout-30 development mean J is -204.652697, QoS .187162 and return cost .157697.
+The mean is below rollout 20 on the same eight seeds, with four worlds improving and four
+worsening. This late development decrease is retained; rollout 20 is not substituted for
+the fixed endpoint. On initial facts, service MSE is .0116812 and observation MSE .00972033,
+still above their fixed training-mean references. Thus the service readout improved since
+rollout 20 while mean development return fell; these different-panel measurements are not
+a causal mechanism analysis. Fixed-row variance/rank are 28.9133 / 8.8947. D's auxiliary
+representation updates remain zero across all 30 passes, and the newly read training and
+development records contain no charging, cutoff or depletion events. Continue the same
+operation through the pending final-world/fact collection; no later cell is launched yet.
