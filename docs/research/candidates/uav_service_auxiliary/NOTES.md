@@ -2327,3 +2327,31 @@ before auxiliary divergence. A higher final S-minus-D raw J would support this b
 service-use package contrast, subject to the fixed G contrast and second training block;
 an adverse or mixed contrast weakens that reading. No extra fit, horizon change, early
 checkpoint, retuning or new Pro Send is selected. Launch remains subject to native admission.
+
+## 2026-09-22 — B03 fixed S cell admitted
+
+The preceding complete D reading and prospective S continuation were committed and pushed
+as `792c764e8` before launch. S / 912211 / a01 was natively accepted at 20:07:06 UTC from
+the unchanged frozen source `73be55261b9f5e8f8fe26fdec6558b87ad088fcb`. Its
+[manifest](../../../../runs/uav_service_auxiliary/b03_s_912211_a01/launch-manifest.json)
+binds the exact D facts/calibration hashes and retains the new operation and process handles.
+Fresh published control was `9ba1b112316aed0b5ea7323cd5a44de2386650ec`; canonical pause/state/
+lead agreed. Native memory preflight passed with 14,762,332,160 available physical bytes.
+The preceding GPU probe reported 7,948 MiB free. The native status at 20:07:22 UTC reports
+both matching identities running, consistent records and no exit witness.
+
+The first copied [summary](../../../../runs/uav_service_auxiliary/b03_s_912211_a01/summary.json),
+SHA256 `8c26595fd00cabac5b23fa9de55c54731b5f59af71421972130db0ec2ecad8ac`, is INCOMPLETE
+with failure null and empty stderr. It records the same initialization fingerprint as D,
+the exact initial-fact digest, two reused episodes / 3,000 reused transitions, and zero
+physical fact generation, training transitions, updates or completed evaluation panels.
+Config binds the fixed calibration digest. This early snapshot supports correct initial
+input reuse; first-collection and first-native-update equality remain to be observed.
+It does not yet establish commencement of a second training fit or any S result.
+
+The completed D observation was consumed with its exact generation, wake and event IDs;
+the new native S operation is registered with the deterministic detached observer for
+completion, error or a bounded checkpoint. No accepted worker or Pro question was repeated.
+One B03 fit is complete, S is admitted and active, four later cells remain unstarted, and
+the separate zero-step a01 D failure remains retained. Continue the fixed S operation;
+the incomplete package comparison still selects no additional fit or altered recipe.
