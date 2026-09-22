@@ -3784,3 +3784,109 @@ rule. **1/2 B04 fits started,0 complete**, SET unstarted. Continue the same H6 h
 the already fixed SET fit, with no new investment or revised endpoint. Existing complete Pro
 advice covers this unchanged reading rule. Consumed the exact generation56 checkpoint event
 and rearmed the same operation as generation57; no worker restart, new Send or cross-task message.
+
+## 2026-09-22 — B04 H6 complete: lower saturation with adverse boundary and service tradeoffs
+
+The native operation accepted at22:12:00.005835 UTC exited at23:21:53.916023 UTC with a
+valid exit0 witness and both recorded processes absent. Its source remains
+`f4762ac67f04675136367fcc566327f0bf78a086`. This is accepted as a complete data-bearing fit
+after reading all45 training rows, all12 per-world panels, the four saved checkpoints and
+the final native resources, rather than from process exit alone. The final
+[summary](../../../../runs/agent_count_generalization/s1_entropy_b04_h6_zero_s942201/summary.json)
+SHA-256 is `6843416b981036be9bd44da9d75346fb4684fd335c134fc2616ff91a2672dce3`, and
+[training rows](../../../../runs/agent_count_generalization/s1_entropy_b04_h6_zero_s942201/training.jsonl)
+SHA-256 is `7fb1112d261c707e3f8e5d7713d4ffbe4729684db9d775d32dbca779e9bfbbe4`.
+Status is complete, failure null, last boundary complete; stdout/stderr are empty. All21
+small native artifacts were hash-verified on collection; the four binary checkpoints remain
+recoverable at the native output directory in the original manifest.
+
+Actual exposure is360000 training/stored team steps,720 training episodes/resets,45 updates,
+96000 evaluation steps and192 evaluation episodes. Actor/critic each made101250 optimizer
+calls, coordinator/team-discriminator675 each and individual-discriminator2700. Finite losses,
+required parameter movement, raw Gaussian storage/original old log-probabilities, clipped
+execution, resets, native reward identities, frozen zero-update evaluation and preserved
+training RNG pass. The copied JSONL equals the summary's complete rollout sequence. Control
+summary bytes, effective configuration except treatment, initial digest/outputs and common
+first pre-update trajectory witnesses still match the fixed B03 H6/clip control. The treatment
+was active with learned logstd, not a technical nonactivation.
+
+All four checkpoints independently load179 finite tensors and agree with their saved source,
+rollout and byte identities. Checkpoint45 is23073626 bytes, SHA-256
+`57de0e74bc71175ff8bae44f62c624d8ae1a31f920fbd8179470de71e38e9672`.
+Parameter/normalizer digests recomputed from checkpoint tensors are respectively
+`50f3d5305a2d6a94a1543d7b5111654c7b154f4a9c1b71b59474c4deb36038ac`,
+`01b2542b869159a84a602da6fd816d5ec0f7bed086f5b0e3fbb44f1518836226`,
+`af80cf95870f3ba6e4da1f80c31acb0e65d8956f41e73a8e8480a6bb6d808319`,
+`26c267a7acae102d6c94765ac4bd9800dfa9034b32921bccaa2ca69807c5dd0e` for0/15/30/45;
+initial and final agree with the runner's recorded digests.
+
+### Fixed final45 comparison and full/late exposure
+
+Independently recomputed all per-world contrasts from the frozen control and new panel files;
+these agree with the runner's comparisons. J is native team service and penalty is subtracted
+in J=.7*coverage+.3*quality−penalty, so a negative penalty change is favorable.
+
+| Final45 N | J,lambda0 | J,lambda.05 | E_H6,J | Coverage change | Quality change | Penalty change |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| 4 | .561750023 | .552901526 | +.008848497 | −.013765000 | +.012070235 | −.014862926 |
+| 6 | .525135857 | .525913234 | −.000777378 | −.020142500 | +.009127298 | −.010584183 |
+| 8 | .423922056 | .452143781 | −.028221725 | −.053825000 | +.000819590 | −.009209898 |
+
+Equal-weight unseen J is.492836039 versus.502522654, **E_H6,U=−.009686614**. Negative
+world differences number7/9/11 of16 at N4/6/8. These worlds are nested in one training block,
+not independent training replications. The N4 gain comes with lower coverage, compensated
+by quality and penalty; it does not support coverage recovery. N8 loses J and coverage.
+Trained N6 also loses J and coverage, so this H6 treatment fails the prewritten conjunction
+for no observed trained-N service cost. The less negative unseen differences across stages
+15/30/45 (−.050182495/−.029612611/−.009686614) are not a causal recovery curve: stages
+use fresh worlds. Final45 remains primary; no favorable checkpoint or N is selected afterward.
+
+Pool counts before computing rates. Full1–45 has6480000 coordinate exposures; late31–45
+has2160000. L2 values below are per UAV step; H_before is reconstructed from actual sigma
+before each rollout's update, using the same formula in both treatments.
+
+| H6/clip recipe and window | Raw-coordinate saturation | Boundary truncation | Boundary visits | Raw attempted L2 | Executed attempted L2 | Realized L2 | Mean H_before |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| lambda0,full1–45 | .308643827 | .189367438 | .192350000 | 47.003917925 | 35.852459789 | 31.299170178 | 3.785675461 |
+| lambda.05,full1–45 | .593410648 | .171866821 | .189186420 | 101.675944081 | 43.369882330 | 39.094464138 | 6.038993136 |
+| lambda0,late31–45 | .312590278 | .224988889 | .227599537 | 47.395794586 | 35.984243990 | 30.323304504 | 3.440002853 |
+| lambda.05,late31–45 | .743533333 | .171750463 | .198838426 | 148.016766268 | 46.892058999 | 42.471467801 | 7.186892284 |
+
+Full lambda0/control saturation counts are2000012/3845301 and truncation1227101/1113697;
+late counts are675195/1606032 and485976/370981. Final sigma is
+[.702664733,.691700459,.681191206] from initial[1,1,1]; final analytic raw entropy3.151425617.
+Sigma and analytic entropy are algebraically related, not two independent mediators or
+entropy of the clipped law. Final sigma describes the saved policy, not all rollout45 exposure.
+Despite the intended latent-scale/saturation response, physical truncation is **higher** in
+both declared windows. Together with lower coverage at every N and adverse unseen J, this
+weakens a simple saturation→boundary→service repair account for H6. It does not identify
+action-mean drift, a unique sigma-mediated mechanism or a general exploration law: historical
+controls lack action-mean histories and co-learning changed complete trajectories.
+
+### Cost, cumulative judgment and unchanged next fit
+
+This fit cost69.891259611 command minutes (4193.475576666 seconds); fit-body wall is
+4191.570522502 seconds. CPU user/system time is16334.565439/111.698271 seconds;
+peak scientific-process RSS2658012 KiB=2.534877777 GiB. Peak scratch was not measured.
+These are this run's realized costs on a shared node, not method-intrinsic speed estimates.
+**1/2 fixed B04 fits started and complete**,360k train+96k eval consumed; SET is still
+unstarted at this decision. No technical failure or retry occurred.
+
+Strengthened: removing the raw entropy incentive changes the trained scale and raw saturation;
+raw saturation and physical boundary consequences must be read separately. Weakened: a
+no-cost H6 service benefit or unconditional boundary repair from that scale response. Untouched:
+selective SET recovery and the final cross-package interaction, because SET/lambda0 has not
+run. No unique skill/noise mechanism, competent ordinary baseline or population ranking is
+established by this selected development block.
+
+Continue the already fixed **SET/clip/lambda0/943201**, same source,360k train+96k eval,
+45 updates and original control/initialization/world bindings. Its differing prediction remains
+E_SET,U>0 together with Q_U=E_SET,U−E_H6,U>0 and meaningful native service/components plus
+the declared intermediate response; H6's loss alone cannot count as SET recovery. Read each
+N and the N6 J/coverage cost condition without changing thresholds. Existing fully read Pro
+advice covers completing this two-fit comparison despite the H6 counterevidence; no new
+question, third fit, coefficient choice, horizon extension or confirmation is introduced.
+Fresh main still permits the direction/lead and contains no newer owner pause. Consumed the
+generation57 READY event `055dc5b474a3c1a08ab04ef6` under wake
+`b4818368-ed1d-4d15-ad36-39cd9ec48efd` and rearmed generation58, with no live fit remaining
+until the fixed SET admission. No worker restart, repeat Pro Send or cross-task message.
