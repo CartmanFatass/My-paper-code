@@ -904,3 +904,192 @@ All **4 planned fits are now accepted: 3 complete and 1 running**, with no unsta
 or further batch selected. Observe this same joint operation through completion or the next
 bounded checkpoint; the completed detach event is consumed. Then verify the full joint
 outputs and read the fixed pair under the already recorded Pro-informed stopping rule.
+
+## B02 complete comparison and bounded keep decision — 2026-09-22
+
+### Completion and paired technical reading
+
+The original joint operation exited with a valid code-0 witness at
+`2026-09-22T12:42:24.670614Z`; native observation at `12:42:43.556488Z` found consistent
+records and absent completed supervisor/runner identities. This is the same accepted source
+`30401722b14c208bf5330ab66e967c94b3df8a36`, seed 910137, output
+`runs/uav_service_auxiliary/b02_joint_910137_a01`. No worker was restarted or replaced.
+The DM collected and read all result fields, all four evaluation panels and their world rows,
+all 30 training/update rows and the resource curve, and checked the complete progress stream.
+All 13 copied files match their remote sizes and SHA256 values. The original binary arrays,
+checkpoints and logs remain locally and under the owned remote output root
+`/home/wu/hmasd-worktrees/uav-service-auxiliary-a335/runs/uav_service_auxiliary/`;
+the runner-written text evidence is published with this notebook.
+
+Joint is COMPLETE with no failure: 180,000 training transitions, 30 rollouts, 120 complete
+training episodes, 32 evaluation episodes / 48,000 transitions, and two loaded factual
+episodes / 3000 transitions. All training and evaluation episodes reach the 1500-step time
+limit, with no straddling collector boundary. Progress contains one facts-ready event, four
+evaluations, 450 collection checkpoints and 30 rollout completions. Actual config remains
+CUDA FP32, four Torch threads and the prewritten scientific recipe. Native optimizer steps
+are 2250 high, 67500 low actor and critic each, 450 team discriminator and 1800 individual
+discriminator; every native learner module moved and every recorded update scalar is finite.
+Each auxiliary pass uses 5964 valid team rows / 47,712 agent samples and 30 optimizer steps.
+Joint representation gradient norms are positive in all 30 passes, ranging from
+0.063767396 to 1.410942435 before clipping; head norms range from 0.090973467 to 1.478754044.
+Detach's auxiliary representation gradient remains exactly zero in every pass.
+
+Rechecking the completed pair confirms identical factual bytes/digest and initialized-model
+fingerprint, identical full initial evaluation, first training rollout and first native
+update. Both actual seed fields are 910137. Configs match except the inactive baseline
+file's source-snapshot prefix. The facts digest is
+`7d3120283c569b45290621f0c3a4934ad885e98c3859da004242c6f06ac6d359`; the initial-model digest is
+`dec0015986e35ff11d21bbf0d56558d1c0605f61597479576418ba2f070c6b3f`.
+All native aggregates were independently recomputed from the eight complete world rows.
+
+The final agent checkpoint SHA256 is
+`3c00b9ca8218f6f97718800e0f2f2885f4b66ba9c6076e9712aa267f9c4aa052`;
+the auxiliary checkpoint SHA256 is
+`9ad6134ec05189ba12a56bf3518040f79ca30d2f25eba88c3d518f1dcad3c336`.
+Both load on CPU; all floating tensors are finite (agent: 694 tensors / 17,493,733 floating
+elements; auxiliary: 46 tensors / 1,159,057 floating elements). Auxiliary state binds joint,
+head seed 1110137, W10, chunk 50, head/representation rates 3e-4/3e-5, clipping 0.5 and 30
+updates. All saved numeric fact/prediction arrays are finite. An independent float64 direct
+window calculation from QoS/done reproduces the validity masks and gives final joint MSE
+**0.009332327272**, agreeing with the runner's **0.009332324897** within float32 rounding.
+There are 1491 complete windows per factual episode, 23,856 valid agent predictions total;
+the largest saved-target error is 2.84e-8. These overlapping windows and broadcast labels
+remain dependent observations, not additional training instances.
+
+### Fixed endpoint, curves and adverse evidence
+
+Each J is the mean of eight complete episodes' raw native reward sums. The endpoint remains
+rollout 30; neither the earlier detach peak nor a more favorable MSE checkpoint is selected.
+
+| Rollout | Detach J | Joint J | Joint minus detach J | Detach QoS / step | Joint QoS / step | Detach common-fact MSE | Joint common-fact MSE |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 0 | -570.8365503404 | -570.8365503404 | 0 | 0.1087515285 | 0.1087515285 | 0.02035683773 | 0.02035683773 |
+| 10 | -342.0843405034 | -277.0730725246 | +65.0112679788 | 0.1789423854 | 0.2029723136 | 0.00868157874 | 0.00820370019 |
+| 20 | -27.3218782269 | -104.7549392818 | -77.4330610550 | 0.1812576436 | 0.2830555427 | 0.07037506257 | 0.00979407692 |
+| **30** | **-670.3937326855** | **-266.8824267825** | **+403.5113059030** | **0.1402308206** | **0.2202640597** | **0.00415097860** | **0.00933232490** |
+
+Final delivered throughput is 4.206924617 versus 6.607921790 Mbps, a joint gain of
+**2.400997174 Mbps**. Return constraint cost per step is 0.2894672194 versus 0.1948619397,
+a joint reduction of **0.0946052796**; mean minimum-battery ratio is 0.5728576350 versus
+0.5780243491. Thus the endpoint J difference accompanies higher delivered service and lower
+observed return constraint cost, rather than a favorable prediction proxy alone.
+
+| Evaluation world | Joint minus detach J | QoS / step difference | Return constraint cost / step difference |
+| --- | ---: | ---: | ---: |
+| 920001 | +46.146236719 | -0.092282601 | -0.060960267 |
+| 920002 | +39.916691856 | -0.032470975 | -0.029181480 |
+| 920003 | +849.218326021 | +0.219417977 | -0.174079406 |
+| 920004 | +596.044348317 | +0.118705188 | -0.139566701 |
+| 920005 | +391.838223506 | +0.193322941 | -0.034530289 |
+| 920006 | +1058.367460196 | +0.147924395 | -0.279473022 |
+| 920007 | +310.823522984 | +0.139632211 | -0.033554494 |
+| 920008 | -64.264362376 | -0.053983224 | -0.005496578 |
+
+Seven of eight worlds improve in J, five in QoS and all eight in return constraint cost.
+World 920008 is adverse in J and three worlds lose QoS; these remain in the result. The
+worlds describe this pair's evaluation distribution and are not eight training replicates.
+At rollout 20 joint has **worse J and higher return cost despite better QoS and much lower
+factual MSE**. At rollout 30 it has better J but **2.248223 times detach's factual MSE**
+(124.8223% higher). These opposing orderings directly limit this proxy's use for selecting
+the better controller. They do not prove that all useful predictive information is irrelevant.
+
+Both policies again deteriorate late: rollout 20 to 30 J changes are -643.071854459 for
+detach and -162.127487501 for joint. Relative to initialization, joint improves by
+303.954123558 whereas detach declines by 99.557182345. The latter decomposition is descriptive,
+not a causal allocation of the gain to control degradation versus candidate learning. Joint's
+final QoS remains only 0.220264 and its return constraint cost is nonzero; this is no
+convergence or satisfactory-controller claim. All B02 joint training and evaluation charging,
+cutoff and depletion quantities are zero. Detach retains its one occupied-UAV charging time
+step in training; every B01/B02 evaluation has zero charging, cutoff and depletion events.
+The retained comparison therefore does not test a charging-competition or failure-recovery
+benefit merely because the host implements those mechanisms.
+
+### Cumulative explanation, Pro reuse and DM choice
+
+The prior explanation is the [B01 paired reading](#b01-joint-complete-and-paired-reading--2026-09-22-0109-pdt)
+and [Pro-informed B02 selection](#2026-09-22--pro-reading-adoption-and-b02-selection).
+The two training-pair outcomes are retained separately:
+
+| Training instance | Detach final J | Joint final J | J difference | QoS / step difference | Return cost / step difference | Within-pair joint / detach factual MSE |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| B01, 910021 | -644.966810001 | -485.429355351 | +159.537454650 | +0.038796228 | -0.034001587 | 0.306878 (lower) |
+| B02, 910137 | -670.393732685 | -266.882426783 | +403.511305903 | +0.080033239 | -0.094605280 | 2.248223 (higher) |
+
+**Strengthened:** the fixed auxiliary representation-update package's native benefit is
+observed in a second training instance, with service and return cost supporting both final
+J contrasts. This weakens an explanation confined to B01's particular instance. The positive
+second result changes the disposition from a one-pair provisional candidate to a retained
+two-pair exploratory package; an adverse or unhelpful recurrence would have ended this recipe
+under the recorded rule. It does not establish a population mean or a stable ranking.
+
+**Weakened:** improvement of this common initial-policy factual MSE is necessary for the
+observed fixed-endpoint native gain. B02 is an explicit contrary observation. Revise the
+mechanism language accordingly; do not reject a useful native contrast because this proxy
+went the other way. The facts differ across B01/B02 and are narrow within both pairs, so
+their absolute errors cannot be pooled as if evaluated on a shared validation distribution.
+
+**Still unresolved:** task-specific predictive supervision versus more generic auxiliary
+representation optimization/stabilization. Both interpretations could predict positive B02
+native recurrence; this comparison does not identify their relative contribution. Extra
+representation Adam work remains part of the package. Late degradation, the low absolute
+service levels, fixed reused evaluation worlds, two training instances and absent evaluation
+charging/fault exposure continue to restrict the use. No time-series correlation or MSE
+ordering is presented as a mediation test.
+
+The complete delivered Pro answer at `c1f7fdeef4813af4ffd023d75ef7bcf39326351e` already
+specified both of the realized branches: useful J/service recurrence with compatible risk,
+and recurrence with **worse** common-fact MSE. Its conditional advice is still materially
+applicable to this unchanged scientific comparison: retain package evidence, weaken the
+proxy explanation, and decide confirmation separately. Adopt that reading; no material
+dissent, new question, broadened claim or resend is needed. This reuses the full repository
+answer previously read and verified, not the short chat receipt. Its general confirmation
+discussion is not an approval or criticism of a concrete future confirmation plan.
+
+**Decision: keep the bounded package result; revise the mechanism interpretation.** The
+owner-selected assignment to reach an informative native result and a supported
+keep/revise/stop decision is complete. Preserve `exploring` scope, with **0 running and
+0 queued fits**, and no open Pro or uncollected accepted operation. This is a retained
+research candidate, not adoption as the default algorithm or entry into confirmation.
+The original B02 recurrence question has been answered; an automatic third pair would add
+another selected exploration without supplying a fixed population decision. No change to
+target, weight, horizon or checkpoint rule is selected from these outcomes.
+
+The useful future distinction is whether the same fixed package retains a practically useful
+native benefit across fresh training instances and fresh final evaluation worlds, versus a
+gain concentrated in the development instances/panel. That could justify a separate fixed
+confirmation if a population claim becomes the intended use. It is **not selected now**:
+the current request can retain a finite-learning package without making that larger claim,
+and low absolute service plus late decline still limit immediate adoption. Confirmation would
+cost 6–10 fresh fits for 3–5 paired training instances, with actual seeds, task/evaluation
+population, practical use, fixed endpoint, uncertainty and reading rule written in a CLAIM
+and critiqued by Pro before execution. Neither the number nor a wall-time extrapolation is
+a power guarantee. B01/B02 would remain development evidence, not relabeled confirmation.
+This is a bounded investment choice, not a proof that confirmation or other supervision
+methods have no value, and no further fit is owed by the unused possibilities.
+
+Current published main was checked at `a48ef628a40ed1200c42140dd2d6e42c8979faa9`.
+Its native-outcome, finite-learning and independent-unit background determines this reading:
+keep the native/service contrast despite the adverse proxy and preserve the training unit.
+Update shared topic 6 from its one-pair observation to recurrence with reversed MSE ordering,
+keeping late decline and actual exposure limits. Other directions' findings and controls are
+unchanged; owner pause remains lifted for this lead, Claude FSD remains paused and G33 frozen.
+
+### Final cost and observation state
+
+B02 joint runner wall is **5689.557749510 seconds / 94.825962492 minutes**, peak RSS
+3,034,952 KiB. B02's two fits total **12,672.454433680 seconds / 211.207573895 minutes**.
+All **4 planned fits are complete**, with no failed training attempt: **30,546.586701393
+runner seconds / 509.109778357 minutes (8.485163 hours)** on `wsl_4070`, 720,000 training
+transitions and 192,000 evaluation transitions. Physical factual collection totals 6000
+transitions, once per pair; each joint arm merely loads its pair's bytes. B01's 15-second
+and B02's 16-second pre-training refusals remain separate support costs. Preparation,
+collection, verification and publication time is additional and was not comprehensively
+metered; runner-wall sum is neither end-to-end task time nor measured exclusive node occupancy.
+Observed joint/detach wall ordering reverses between pairs under different concurrent load,
+so it does not identify intrinsic auxiliary compute overhead or a speed advantage.
+
+Terminal observation `c616b9a44bca892fba642f98` was consumed using generation 28 and wake
+`442aab7d-8284-44da-9c18-3b6b70935125`. Rearm returned generation 29; readback has no pending
+events or active observations. All four launches are terminal, and the only Pro operation
+was already delivered, read and its owned tab closed. No worker restart, repeat Send,
+cross-task message or new operation follows from this completion event.
