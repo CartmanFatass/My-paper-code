@@ -2350,3 +2350,119 @@ an intermediate observation, not acceptance of the full 288k-step comparison. Th
 waiter now observes this exact operation at generation 33, with terminal/error wakes and a
 1500-second checkpoint; it grants no restart. B03 implementation is underway in its separate
 candidate paths; no B03 training has been accepted.
+
+## 2026-09-22 — B02 complete: bounded deployment preserves the package advantage
+
+**Observed completion.** The native exit witness is valid (code 0, consistent original process
+identities). The DM read the complete [summary](../../../../runs/agent_count_generalization/s1_action_law_b02_probe/summary.json),
+all 36 cells, 18 paired comparisons, stdout/stderr (both empty), input checks and resource record.
+All **97 collected files, 73,258,106 bytes**, matched independently read native SHA-256/size.
+The 36 compressed numerical traces and every array shape/dtype/digest were independently
+verified; raw/clip mapping, every actual native position transition, per-lane violation counts,
+paired differences, aggregation and native reward identity were recomputed. All 36 cells
+match the source-order movement prediction exactly. All six source checkpoints are unchanged;
+all evaluator parameter/normalizer digests are frozen, with zero optimizer calls.
+
+Full cost: **0 new fits, 288,000 evaluation team steps, 576 episodes**, no failures or missing
+cells. Scientific command wall is **316.584 s (5.276 min)** including entry imports; CPU user/system
+1106.825/2.276 s, peak scientific-process RSS **880,628 KiB**. Peak scratch remains unmeasured.
+This wall is actual cost, not an intrinsic speed comparison with B01's differently loaded host.
+The deterministic observer's terminal event was drained/read and consumed at generation 34;
+no worker was restarted. B03 remains the four prospectively selected fits, not an extension
+chosen from this score. No B03 fit has started at this reading.
+
+The JSON/log/exit artifacts live in the linked run directory. The 36 NPZ traces are retained
+at the native output root recorded in its manifest:
+`hmasd-wsl-node:/home/wu/hmasd-worktrees/agent-count-action-law-20260922-b02/runs/agent_count_generalization/s1_action_law_b02_probe/`.
+Each cell's `trace` record supplies its exact filename, size, SHA-256 and array metadata.
+Verified local reading copies are under `temp/agent_count_generalization/b02_traces/`; large
+binary traces are not duplicated into Git. The accepted source remains
+`dd25f34a09ba8d0f8a62c5aacb36d9aaa56dcf0c`.
+
+**Native service on the same fresh worlds.** Means weight the three old policies and sixteen
+worlds equally within each package/N; raw and clip are paired within each old policy/world.
+This is not a comparison with B01's different world panel.
+
+| N | H6 raw J | H6 clip J | SET raw J | SET clip J | raw H6−SET | clip H6−SET | K=clip gap−raw gap |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 4 | .566392727 | .567871772 | .532725184 | .537956359 | .033667543 | .029915413 | −.003752130 |
+| 6 | .525727365 | .530746629 | .479415729 | .489101449 | .046311635 | .041645180 | −.004666455 |
+| 8 | .431681604 | .460050326 | .390648832 | .405311062 | .041032772 | .054739264 | +.013706491 |
+
+Unseen-N equal-weight gap: raw **+.037350158**, clip **+.042327338**, change **+.004977180**.
+Both package means improve under clipping at every N. The absolute clip−raw changes are
+H6 **+.001479045 / +.005019265 / +.028368721** and SET
+**+.005231175 / +.009685720 / +.014662230** at N4/6/8. Thus the smaller N4/N6 gaps come from
+larger SET improvement, while the larger N8 gap comes from larger H6 improvement. It is
+incorrect to label all three changes selective SET recovery or H6 harm. At every N, each
+of the three observed H6 clipped policy means exceeds each observed SET clipped policy mean;
+these are still the same old training instances, not independent replications from B02.
+
+Keep the contrary per-policy effects (clip−raw J):
+
+| Old policy | N4 | N6 | N8 |
+| --- | ---: | ---: | ---: |
+| H6 914201 | −.001525670 | −.004742153 | +.025642982 |
+| H6 914307 | −.003123184 | +.010466105 | +.019653974 |
+| H6 914413 | +.009085989 | +.009333842 | +.039809208 |
+| SET 915201 | +.014172663 | +.009391090 | +.002613585 |
+| SET 915307 | −.003249713 | +.007520109 | +.012002537 |
+| SET 915413 | +.004770577 | +.012145961 | +.029370569 |
+
+There are 14 positive and four negative policy×N means, with 202 positive and **86 negative**
+paired-world J changes (zero exact ties). Worlds are nested measurements, not 288 independent
+training units. All worlds and adverse cells remain in the outputs. No equivalence interval,
+population ranking, confirmatory test or percentage of the old B01 gap is identified.
+
+**Physical effect is active, not an average hiding identical paths.** All 288 policy/world
+native position trajectories diverge at position index **1**, after action index **0**.
+There are 288 same-start changed-action team steps and zero same-start changed-action steps
+with an identical full successor, out of 144,000 paired team steps. Subsequent trajectories
+remain separate; this does not imply no individual coordinate ever has boundary absorption.
+The raw deployments' pooled coordinate violations are H6 **827,522/1,296,000 (63.852%)** and
+SET **640,706/1,296,000 (49.437%)**. Their team-step rates are 72,000/72,000 and 71,931/72,000.
+These are deterministic policy-mean actions on B02 paths, not historical training-sample
+frequencies. SET's larger saved sigma does not order these violations. The largest pre-map
+coordinate excesses on raw paths are H6 7.081112 and SET 12.455833; bounded execution changes
+both paths and actual service, rather than merely making an action-space check pass.
+
+Native component changes explain why a single action-range statistic is insufficient:
+
+| N / package | Δcoverage | Δquality | Δheight penalty |
+| --- | ---: | ---: | ---: |
+| 4 / H6 | −.000622500 | +.003642136 | −.000822154 |
+| 4 / SET | +.001890833 | +.004964057 | −.002418375 |
+| 6 / H6 | +.003114167 | +.006666945 | −.000839264 |
+| 6 / SET | +.011339167 | +.000140803 | −.001706062 |
+| 8 / H6 | +.037855000 | +.000294707 | −.001781809 |
+| 8 / SET | +.024076667 | −.000659954 | +.001993450 |
+
+Here ΔJ=.7Δcoverage+.3Δquality−Δheight penalty. N8's larger H6 gain is mainly coverage;
+SET's N8 coverage gain coexists with worse quality and height penalty. Boundary truncation
+also remains common after execution clipping; its frequency alone is not a harm endpoint.
+
+**Working explanation and next observation.** Strengthen the bounded claim that these learned
+H6 packages retain useful relative service on unseen N under declared coordinate-bounded
+deployment. Weaken the specific explanation that their observed advantage requires executing
+out-of-range deterministic means: clipping did not erase the ranking and increased the
+unseen-N mean gap on this panel. Keep the N4/N6 attenuation as contrary evidence against a
+claim that the deployment law never contributes to relative performance. The size/sign of
+that contribution depends on N and policy; no N-specific mechanism is established.
+
+Historical training exposure, latent entropy incentives and finite optimization remain
+unresolved: B02 changes none of them. The next useful observation is exactly the already
+fixed B03 interaction under common clipped deployment, not more worlds or a new B02 seed batch.
+Selective training-law rescue still requires SET's own J improvement and I=B_SET−B_H6>0;
+H6 degradation alone does not pass. Even a positive B03 interaction would identify a bounded
+training-map intervention, not sigma alone, skills alone or population-level N invariance.
+Continue the committed four-cell implementation and independent engineering review without
+changing seeds, law, horizon, evaluation worlds, final45 endpoint or fit count.
+
+Independent ResearchCritic `count_successor_critique` read all 36 cells, 18 pairs and native
+components and returned **no material dissent** to this update. It emphasized that the
+retained advantage is conditional on these raw-trained old policies and the current new-world
+panel; B02 has not produced a bounded-training result. It also retained all four adverse
+policy×N means, 86 adverse worlds, opposing component changes, N4/N6 attenuation, and the
+distinction between deterministic violations and historical stochastic exposure. Adopt those
+qualifications. B02's deployment K and B03's training I answer different interventions; do
+not replace the latter with the former or change the committed B03 recipe from its sign.

@@ -1,0 +1,1413 @@
+{
+  "status": "complete",
+  "arm": "H6",
+  "seed": 914201,
+  "source_tag": "s1_count_b01_h6_s914201",
+  "test_n": 6,
+  "execution_map": "clip",
+  "world_seeds": [
+    982600,
+    982601,
+    982602,
+    982603,
+    982604,
+    982605,
+    982606,
+    982607,
+    982608,
+    982609,
+    982610,
+    982611,
+    982612,
+    982613,
+    982614,
+    982615
+  ],
+  "runtime_seed": 982651,
+  "steps": 8000,
+  "episodes": 16,
+  "J": [
+    0.5003430898698997,
+    0.5527295561953524,
+    0.4975378665231443,
+    0.4496568620870365,
+    0.5547378385022087,
+    0.4475295746711785,
+    0.5491417863646479,
+    0.5856001852462133,
+    0.5159123796299001,
+    0.528607629251905,
+    0.5256326097313956,
+    0.5962661855239993,
+    0.5810575199279653,
+    0.5063589051891226,
+    0.5195295572256825,
+    0.5125948604991085
+  ],
+  "scalar_returns": [
+    41.69525748915831,
+    46.060796349612694,
+    41.46148887692869,
+    37.471405173919706,
+    46.228153208517384,
+    37.2941312225982,
+    45.761815530387324,
+    48.80001543718444,
+    42.992698302491675,
+    44.05063577099208,
+    43.8027174776163,
+    49.68884879366661,
+    48.421459993997104,
+    42.19657543242688,
+    43.294129768806876,
+    42.716238374925716
+  ],
+  "component_means": {
+    "coverage_reward": [
+      0.6391199999999995,
+      0.7058400000000017,
+      0.6301600000000002,
+      0.5392000000000009,
+      0.7151600000000009,
+      0.5661200000000017,
+      0.7025600000000017,
+      0.7374800000000035,
+      0.657200000000001,
+      0.6728799999999986,
+      0.6594400000000027,
+      0.7605200000000014,
+      0.75648,
+      0.6431200000000014,
+      0.6591599999999996,
+      0.6508800000000005
+    ],
+    "quality_reward": [
+      0.18948981585102834,
+      0.2053458933676028,
+      0.19900257490333415,
+      0.2530539361738384,
+      0.195057745506036,
+      0.18441016851771003,
+      0.20352247738043563,
+      0.24577311560816334,
+      0.19751004474930753,
+      0.20436705916847886,
+      0.2290092604466454,
+      0.2241222776567603,
+      0.18206598409953859,
+      0.19950083907855037,
+      0.2099487856134713,
+      0.20429133614008457
+    ],
+    "energy_penalty": [
+      0.003887854885408706,
+      0.002962211814927989,
+      0.003274905947855739,
+      0.003699318765115075,
+      0.004391485149601991,
+      0.0040774758841345534,
+      0.003706956849483114,
+      0.004367749436235371,
+      0.0033806337948923855,
+      0.003718488498638332,
+      0.004678168402598097,
+      0.003334497773028509,
+      0.00309827530189612,
+      0.0036753465344425327,
+      0.004867078458358727,
+      0.004308540342917399
+    ],
+    "total_reward": [
+      0.5003430898699,
+      0.5527295561953527,
+      0.4975378665231444,
+      0.4496568620870365,
+      0.5547378385022086,
+      0.4475295746711784,
+      0.5491417863646478,
+      0.5856001852462136,
+      0.5159123796298994,
+      0.5286076292519051,
+      0.5256326097313957,
+      0.5962661855239997,
+      0.5810575199279655,
+      0.5063589051891226,
+      0.5195295572256824,
+      0.5125948604991077
+    ]
+  },
+  "optimizer_calls": {
+    "coordinator": 0,
+    "discoverer_actor": 0,
+    "discoverer_critic": 0,
+    "team_discriminator": 0,
+    "individual_discriminator": 0
+  },
+  "frozen_weights_and_normalizers": true,
+  "model_digest": "306acd1b1f2ca6fafc0b631dba98f5aa431abc6d535d94ab576bfc0f7e344273",
+  "normalizers": {
+    "obs_norm": null,
+    "state_norm": null,
+    "value_norm_coordinator": {
+      "type": "RunningMeanStd",
+      "fields": {
+        "mean": {
+          "dtype": "float64",
+          "shape": [],
+          "value": 5.614419924309464
+        },
+        "var": {
+          "dtype": "float64",
+          "shape": [],
+          "value": 3.411495794295673
+        },
+        "count": {
+          "dtype": "float64",
+          "shape": [],
+          "value": 252000.0001
+        }
+      }
+    },
+    "value_norm_discoverer": {
+      "type": "RunningMeanStd",
+      "fields": {
+        "mean": {
+          "dtype": "float64",
+          "shape": [],
+          "value": 0.6208882249604308
+        },
+        "var": {
+          "dtype": "float64",
+          "shape": [],
+          "value": 0.31093388781517983
+        },
+        "count": {
+          "dtype": "float64",
+          "shape": [],
+          "value": 2160000.0001
+        }
+      }
+    }
+  },
+  "initial_encoded_states_sha256": "84d6997739b5b7a9213d9e3f1c0239e7ca1325af07a2c01eaff96d6993fb656b",
+  "initial_native_positions_sha256": "556bfbfd7a306dec780463b60ed8f50d9321cb0bd00bd18ea859cc55f7ced291",
+  "initial_observations_sha256": "3a9a563d27a2718631167e3a4a81dba090a148affe07c78d0bbd9e5c591b838b",
+  "native_position_dtype": "float64",
+  "native_environment": {
+    "area_size": 1000.0,
+    "height_range": [
+      50.0,
+      150.0
+    ],
+    "max_speed": 30.0,
+    "time_step": 1.0,
+    "position_dtype": "float64"
+  },
+  "movement_tolerance": {
+    "atol": 1.7763568394002505e-12,
+    "rtol": 1.7763568394002505e-15
+  },
+  "action_bounds": {
+    "low": -1.0,
+    "high": 1.0
+  },
+  "policy_outputs_unchanged_by_mapping": true,
+  "action_logprobs_unchanged_by_mapping": true,
+  "diagnostics_consumed_no_global_rng": true,
+  "lane_diagnostics": [
+    {
+      "world_seed": 982600,
+      "raw_coordinate_violations": {
+        "numerator": 5566,
+        "denominator": 9000,
+        "rate": 0.6184444444444445
+      },
+      "raw_uav_violations": {
+        "numerator": 2826,
+        "denominator": 3000,
+        "rate": 0.942
+      },
+      "raw_team_step_violations": {
+        "numerator": 500,
+        "denominator": 500,
+        "rate": 1.0
+      },
+      "map_changed_coordinates": {
+        "numerator": 5566,
+        "denominator": 9000,
+        "rate": 0.6184444444444445
+      },
+      "map_changed_uavs": {
+        "numerator": 2826,
+        "denominator": 3000,
+        "rate": 0.942
+      },
+      "map_changed_team_steps": {
+        "numerator": 500,
+        "denominator": 500,
+        "rate": 1.0
+      },
+      "boundary_truncated_coordinates": {
+        "numerator": 2884,
+        "denominator": 9000,
+        "rate": 0.3204444444444444
+      },
+      "boundary_truncated_uavs": {
+        "numerator": 2562,
+        "denominator": 3000,
+        "rate": 0.854
+      },
+      "boundary_truncated_team_steps": {
+        "numerator": 498,
+        "denominator": 500,
+        "rate": 0.996
+      },
+      "boundary_occupied_coordinates": {
+        "numerator": 2982,
+        "denominator": 9000,
+        "rate": 0.3313333333333333
+      },
+      "movement_prediction_exact_coordinates": {
+        "numerator": 9000,
+        "denominator": 9000,
+        "rate": 1.0
+      },
+      "raw_excess_mean_per_coordinate": 0.780930810213089,
+      "raw_excess_max": 5.467130184173584,
+      "raw_attempted_displacement_l2_mean_per_uav_step": 94.86824541219076,
+      "raw_attempted_displacement_l2_max": 249.31643676757812,
+      "executed_attempted_displacement_l2_mean_per_uav_step": 44.09738843282064,
+      "executed_attempted_displacement_l2_max": 51.961524963378906,
+      "realized_displacement_l2_mean_per_uav_step": 34.69366760518784,
+      "realized_displacement_l2_max": 51.96152422706632,
+      "movement_prediction_max_abs_error": 0.0
+    },
+    {
+      "world_seed": 982601,
+      "raw_coordinate_violations": {
+        "numerator": 5471,
+        "denominator": 9000,
+        "rate": 0.6078888888888889
+      },
+      "raw_uav_violations": {
+        "numerator": 2807,
+        "denominator": 3000,
+        "rate": 0.9356666666666666
+      },
+      "raw_team_step_violations": {
+        "numerator": 500,
+        "denominator": 500,
+        "rate": 1.0
+      },
+      "map_changed_coordinates": {
+        "numerator": 5471,
+        "denominator": 9000,
+        "rate": 0.6078888888888889
+      },
+      "map_changed_uavs": {
+        "numerator": 2807,
+        "denominator": 3000,
+        "rate": 0.9356666666666666
+      },
+      "map_changed_team_steps": {
+        "numerator": 500,
+        "denominator": 500,
+        "rate": 1.0
+      },
+      "boundary_truncated_coordinates": {
+        "numerator": 2892,
+        "denominator": 9000,
+        "rate": 0.32133333333333336
+      },
+      "boundary_truncated_uavs": {
+        "numerator": 2578,
+        "denominator": 3000,
+        "rate": 0.8593333333333333
+      },
+      "boundary_truncated_team_steps": {
+        "numerator": 498,
+        "denominator": 500,
+        "rate": 0.996
+      },
+      "boundary_occupied_coordinates": {
+        "numerator": 2953,
+        "denominator": 9000,
+        "rate": 0.32811111111111113
+      },
+      "movement_prediction_exact_coordinates": {
+        "numerator": 9000,
+        "denominator": 9000,
+        "rate": 1.0
+      },
+      "raw_excess_mean_per_coordinate": 0.7482606666353013,
+      "raw_excess_max": 5.2927446365356445,
+      "raw_attempted_displacement_l2_mean_per_uav_step": 92.52427048746745,
+      "raw_attempted_displacement_l2_max": 220.88653564453125,
+      "executed_attempted_displacement_l2_mean_per_uav_step": 43.89098887125651,
+      "executed_attempted_displacement_l2_max": 51.961524963378906,
+      "realized_displacement_l2_mean_per_uav_step": 34.450509405359966,
+      "realized_displacement_l2_max": 51.96152422706632,
+      "movement_prediction_max_abs_error": 0.0
+    },
+    {
+      "world_seed": 982602,
+      "raw_coordinate_violations": {
+        "numerator": 5548,
+        "denominator": 9000,
+        "rate": 0.6164444444444445
+      },
+      "raw_uav_violations": {
+        "numerator": 2827,
+        "denominator": 3000,
+        "rate": 0.9423333333333334
+      },
+      "raw_team_step_violations": {
+        "numerator": 500,
+        "denominator": 500,
+        "rate": 1.0
+      },
+      "map_changed_coordinates": {
+        "numerator": 5548,
+        "denominator": 9000,
+        "rate": 0.6164444444444445
+      },
+      "map_changed_uavs": {
+        "numerator": 2827,
+        "denominator": 3000,
+        "rate": 0.9423333333333334
+      },
+      "map_changed_team_steps": {
+        "numerator": 500,
+        "denominator": 500,
+        "rate": 1.0
+      },
+      "boundary_truncated_coordinates": {
+        "numerator": 3326,
+        "denominator": 9000,
+        "rate": 0.3695555555555556
+      },
+      "boundary_truncated_uavs": {
+        "numerator": 2604,
+        "denominator": 3000,
+        "rate": 0.868
+      },
+      "boundary_truncated_team_steps": {
+        "numerator": 500,
+        "denominator": 500,
+        "rate": 1.0
+      },
+      "boundary_occupied_coordinates": {
+        "numerator": 3412,
+        "denominator": 9000,
+        "rate": 0.3791111111111111
+      },
+      "movement_prediction_exact_coordinates": {
+        "numerator": 9000,
+        "denominator": 9000,
+        "rate": 1.0
+      },
+      "raw_excess_mean_per_coordinate": 0.748955456521776,
+      "raw_excess_max": 5.254627704620361,
+      "raw_attempted_displacement_l2_mean_per_uav_step": 92.51110664876302,
+      "raw_attempted_displacement_l2_max": 216.27749633789062,
+      "executed_attempted_displacement_l2_mean_per_uav_step": 44.219176401774085,
+      "executed_attempted_displacement_l2_max": 51.961524963378906,
+      "realized_displacement_l2_mean_per_uav_step": 32.72962513010675,
+      "realized_displacement_l2_max": 51.96152422706632,
+      "movement_prediction_max_abs_error": 0.0
+    },
+    {
+      "world_seed": 982603,
+      "raw_coordinate_violations": {
+        "numerator": 5636,
+        "denominator": 9000,
+        "rate": 0.6262222222222222
+      },
+      "raw_uav_violations": {
+        "numerator": 2828,
+        "denominator": 3000,
+        "rate": 0.9426666666666667
+      },
+      "raw_team_step_violations": {
+        "numerator": 500,
+        "denominator": 500,
+        "rate": 1.0
+      },
+      "map_changed_coordinates": {
+        "numerator": 5636,
+        "denominator": 9000,
+        "rate": 0.6262222222222222
+      },
+      "map_changed_uavs": {
+        "numerator": 2828,
+        "denominator": 3000,
+        "rate": 0.9426666666666667
+      },
+      "map_changed_team_steps": {
+        "numerator": 500,
+        "denominator": 500,
+        "rate": 1.0
+      },
+      "boundary_truncated_coordinates": {
+        "numerator": 3490,
+        "denominator": 9000,
+        "rate": 0.3877777777777778
+      },
+      "boundary_truncated_uavs": {
+        "numerator": 2684,
+        "denominator": 3000,
+        "rate": 0.8946666666666667
+      },
+      "boundary_truncated_team_steps": {
+        "numerator": 499,
+        "denominator": 500,
+        "rate": 0.998
+      },
+      "boundary_occupied_coordinates": {
+        "numerator": 3664,
+        "denominator": 9000,
+        "rate": 0.4071111111111111
+      },
+      "movement_prediction_exact_coordinates": {
+        "numerator": 9000,
+        "denominator": 9000,
+        "rate": 1.0
+      },
+      "raw_excess_mean_per_coordinate": 0.7611625929938423,
+      "raw_excess_max": 5.220144271850586,
+      "raw_attempted_displacement_l2_mean_per_uav_step": 93.40962111409505,
+      "raw_attempted_displacement_l2_max": 228.66920471191406,
+      "executed_attempted_displacement_l2_mean_per_uav_step": 44.26435420227051,
+      "executed_attempted_displacement_l2_max": 51.961524963378906,
+      "realized_displacement_l2_mean_per_uav_step": 32.39627645063656,
+      "realized_displacement_l2_max": 51.96152422706632,
+      "movement_prediction_max_abs_error": 0.0
+    },
+    {
+      "world_seed": 982604,
+      "raw_coordinate_violations": {
+        "numerator": 5597,
+        "denominator": 9000,
+        "rate": 0.6218888888888889
+      },
+      "raw_uav_violations": {
+        "numerator": 2801,
+        "denominator": 3000,
+        "rate": 0.9336666666666666
+      },
+      "raw_team_step_violations": {
+        "numerator": 500,
+        "denominator": 500,
+        "rate": 1.0
+      },
+      "map_changed_coordinates": {
+        "numerator": 5597,
+        "denominator": 9000,
+        "rate": 0.6218888888888889
+      },
+      "map_changed_uavs": {
+        "numerator": 2801,
+        "denominator": 3000,
+        "rate": 0.9336666666666666
+      },
+      "map_changed_team_steps": {
+        "numerator": 500,
+        "denominator": 500,
+        "rate": 1.0
+      },
+      "boundary_truncated_coordinates": {
+        "numerator": 2576,
+        "denominator": 9000,
+        "rate": 0.2862222222222222
+      },
+      "boundary_truncated_uavs": {
+        "numerator": 2471,
+        "denominator": 3000,
+        "rate": 0.8236666666666667
+      },
+      "boundary_truncated_team_steps": {
+        "numerator": 498,
+        "denominator": 500,
+        "rate": 0.996
+      },
+      "boundary_occupied_coordinates": {
+        "numerator": 2640,
+        "denominator": 9000,
+        "rate": 0.29333333333333333
+      },
+      "movement_prediction_exact_coordinates": {
+        "numerator": 9000,
+        "denominator": 9000,
+        "rate": 1.0
+      },
+      "raw_excess_mean_per_coordinate": 0.821515909936693,
+      "raw_excess_max": 5.6770501136779785,
+      "raw_attempted_displacement_l2_mean_per_uav_step": 97.15691905721029,
+      "raw_attempted_displacement_l2_max": 232.70724487304688,
+      "executed_attempted_displacement_l2_mean_per_uav_step": 44.16840937296549,
+      "executed_attempted_displacement_l2_max": 51.961524963378906,
+      "realized_displacement_l2_mean_per_uav_step": 35.83791453511021,
+      "realized_displacement_l2_max": 51.96152422706632,
+      "movement_prediction_max_abs_error": 0.0
+    },
+    {
+      "world_seed": 982605,
+      "raw_coordinate_violations": {
+        "numerator": 5888,
+        "denominator": 9000,
+        "rate": 0.6542222222222223
+      },
+      "raw_uav_violations": {
+        "numerator": 2884,
+        "denominator": 3000,
+        "rate": 0.9613333333333334
+      },
+      "raw_team_step_violations": {
+        "numerator": 500,
+        "denominator": 500,
+        "rate": 1.0
+      },
+      "map_changed_coordinates": {
+        "numerator": 5888,
+        "denominator": 9000,
+        "rate": 0.6542222222222223
+      },
+      "map_changed_uavs": {
+        "numerator": 2884,
+        "denominator": 3000,
+        "rate": 0.9613333333333334
+      },
+      "map_changed_team_steps": {
+        "numerator": 500,
+        "denominator": 500,
+        "rate": 1.0
+      },
+      "boundary_truncated_coordinates": {
+        "numerator": 2657,
+        "denominator": 9000,
+        "rate": 0.2952222222222222
+      },
+      "boundary_truncated_uavs": {
+        "numerator": 2519,
+        "denominator": 3000,
+        "rate": 0.8396666666666667
+      },
+      "boundary_truncated_team_steps": {
+        "numerator": 497,
+        "denominator": 500,
+        "rate": 0.994
+      },
+      "boundary_occupied_coordinates": {
+        "numerator": 2741,
+        "denominator": 9000,
+        "rate": 0.3045555555555556
+      },
+      "movement_prediction_exact_coordinates": {
+        "numerator": 9000,
+        "denominator": 9000,
+        "rate": 1.0
+      },
+      "raw_excess_mean_per_coordinate": 0.9331473398208618,
+      "raw_excess_max": 6.079434871673584,
+      "raw_attempted_displacement_l2_mean_per_uav_step": 105.08891335042318,
+      "raw_attempted_displacement_l2_max": 235.92947387695312,
+      "executed_attempted_displacement_l2_mean_per_uav_step": 44.896806655883786,
+      "executed_attempted_displacement_l2_max": 51.961524963378906,
+      "realized_displacement_l2_mean_per_uav_step": 36.18278396046423,
+      "realized_displacement_l2_max": 51.96152422706632,
+      "movement_prediction_max_abs_error": 0.0
+    },
+    {
+      "world_seed": 982606,
+      "raw_coordinate_violations": {
+        "numerator": 5571,
+        "denominator": 9000,
+        "rate": 0.619
+      },
+      "raw_uav_violations": {
+        "numerator": 2825,
+        "denominator": 3000,
+        "rate": 0.9416666666666667
+      },
+      "raw_team_step_violations": {
+        "numerator": 500,
+        "denominator": 500,
+        "rate": 1.0
+      },
+      "map_changed_coordinates": {
+        "numerator": 5571,
+        "denominator": 9000,
+        "rate": 0.619
+      },
+      "map_changed_uavs": {
+        "numerator": 2825,
+        "denominator": 3000,
+        "rate": 0.9416666666666667
+      },
+      "map_changed_team_steps": {
+        "numerator": 500,
+        "denominator": 500,
+        "rate": 1.0
+      },
+      "boundary_truncated_coordinates": {
+        "numerator": 2570,
+        "denominator": 9000,
+        "rate": 0.28555555555555556
+      },
+      "boundary_truncated_uavs": {
+        "numerator": 2497,
+        "denominator": 3000,
+        "rate": 0.8323333333333334
+      },
+      "boundary_truncated_team_steps": {
+        "numerator": 499,
+        "denominator": 500,
+        "rate": 0.998
+      },
+      "boundary_occupied_coordinates": {
+        "numerator": 2632,
+        "denominator": 9000,
+        "rate": 0.29244444444444445
+      },
+      "movement_prediction_exact_coordinates": {
+        "numerator": 9000,
+        "denominator": 9000,
+        "rate": 1.0
+      },
+      "raw_excess_mean_per_coordinate": 0.8034640667173597,
+      "raw_excess_max": 5.42530632019043,
+      "raw_attempted_displacement_l2_mean_per_uav_step": 96.32098385620117,
+      "raw_attempted_displacement_l2_max": 234.15762329101562,
+      "executed_attempted_displacement_l2_mean_per_uav_step": 44.136441212972,
+      "executed_attempted_displacement_l2_max": 51.961524963378906,
+      "realized_displacement_l2_mean_per_uav_step": 35.874098884785894,
+      "realized_displacement_l2_max": 51.961524227066334,
+      "movement_prediction_max_abs_error": 0.0
+    },
+    {
+      "world_seed": 982607,
+      "raw_coordinate_violations": {
+        "numerator": 5538,
+        "denominator": 9000,
+        "rate": 0.6153333333333333
+      },
+      "raw_uav_violations": {
+        "numerator": 2823,
+        "denominator": 3000,
+        "rate": 0.941
+      },
+      "raw_team_step_violations": {
+        "numerator": 500,
+        "denominator": 500,
+        "rate": 1.0
+      },
+      "map_changed_coordinates": {
+        "numerator": 5538,
+        "denominator": 9000,
+        "rate": 0.6153333333333333
+      },
+      "map_changed_uavs": {
+        "numerator": 2823,
+        "denominator": 3000,
+        "rate": 0.941
+      },
+      "map_changed_team_steps": {
+        "numerator": 500,
+        "denominator": 500,
+        "rate": 1.0
+      },
+      "boundary_truncated_coordinates": {
+        "numerator": 2934,
+        "denominator": 9000,
+        "rate": 0.326
+      },
+      "boundary_truncated_uavs": {
+        "numerator": 2517,
+        "denominator": 3000,
+        "rate": 0.839
+      },
+      "boundary_truncated_team_steps": {
+        "numerator": 500,
+        "denominator": 500,
+        "rate": 1.0
+      },
+      "boundary_occupied_coordinates": {
+        "numerator": 3034,
+        "denominator": 9000,
+        "rate": 0.3371111111111111
+      },
+      "movement_prediction_exact_coordinates": {
+        "numerator": 9000,
+        "denominator": 9000,
+        "rate": 1.0
+      },
+      "raw_excess_mean_per_coordinate": 0.7703263518810273,
+      "raw_excess_max": 5.866885662078857,
+      "raw_attempted_displacement_l2_mean_per_uav_step": 94.47499272664388,
+      "raw_attempted_displacement_l2_max": 230.5369873046875,
+      "executed_attempted_displacement_l2_mean_per_uav_step": 44.089442291259765,
+      "executed_attempted_displacement_l2_max": 51.961524963378906,
+      "realized_displacement_l2_mean_per_uav_step": 34.55905029395247,
+      "realized_displacement_l2_max": 51.96152422706632,
+      "movement_prediction_max_abs_error": 0.0
+    },
+    {
+      "world_seed": 982608,
+      "raw_coordinate_violations": {
+        "numerator": 5603,
+        "denominator": 9000,
+        "rate": 0.6225555555555555
+      },
+      "raw_uav_violations": {
+        "numerator": 2812,
+        "denominator": 3000,
+        "rate": 0.9373333333333334
+      },
+      "raw_team_step_violations": {
+        "numerator": 500,
+        "denominator": 500,
+        "rate": 1.0
+      },
+      "map_changed_coordinates": {
+        "numerator": 5603,
+        "denominator": 9000,
+        "rate": 0.6225555555555555
+      },
+      "map_changed_uavs": {
+        "numerator": 2812,
+        "denominator": 3000,
+        "rate": 0.9373333333333334
+      },
+      "map_changed_team_steps": {
+        "numerator": 500,
+        "denominator": 500,
+        "rate": 1.0
+      },
+      "boundary_truncated_coordinates": {
+        "numerator": 2608,
+        "denominator": 9000,
+        "rate": 0.2897777777777778
+      },
+      "boundary_truncated_uavs": {
+        "numerator": 2505,
+        "denominator": 3000,
+        "rate": 0.835
+      },
+      "boundary_truncated_team_steps": {
+        "numerator": 498,
+        "denominator": 500,
+        "rate": 0.996
+      },
+      "boundary_occupied_coordinates": {
+        "numerator": 2666,
+        "denominator": 9000,
+        "rate": 0.2962222222222222
+      },
+      "movement_prediction_exact_coordinates": {
+        "numerator": 9000,
+        "denominator": 9000,
+        "rate": 1.0
+      },
+      "raw_excess_mean_per_coordinate": 0.8087929727766249,
+      "raw_excess_max": 5.715364933013916,
+      "raw_attempted_displacement_l2_mean_per_uav_step": 96.5394237874349,
+      "raw_attempted_displacement_l2_max": 231.37486267089844,
+      "executed_attempted_displacement_l2_mean_per_uav_step": 44.236850550333656,
+      "executed_attempted_displacement_l2_max": 51.961524963378906,
+      "realized_displacement_l2_mean_per_uav_step": 35.81824337391107,
+      "realized_displacement_l2_max": 51.96152422706632,
+      "movement_prediction_max_abs_error": 0.0
+    },
+    {
+      "world_seed": 982609,
+      "raw_coordinate_violations": {
+        "numerator": 5723,
+        "denominator": 9000,
+        "rate": 0.6358888888888888
+      },
+      "raw_uav_violations": {
+        "numerator": 2849,
+        "denominator": 3000,
+        "rate": 0.9496666666666667
+      },
+      "raw_team_step_violations": {
+        "numerator": 500,
+        "denominator": 500,
+        "rate": 1.0
+      },
+      "map_changed_coordinates": {
+        "numerator": 5723,
+        "denominator": 9000,
+        "rate": 0.6358888888888888
+      },
+      "map_changed_uavs": {
+        "numerator": 2849,
+        "denominator": 3000,
+        "rate": 0.9496666666666667
+      },
+      "map_changed_team_steps": {
+        "numerator": 500,
+        "denominator": 500,
+        "rate": 1.0
+      },
+      "boundary_truncated_coordinates": {
+        "numerator": 2833,
+        "denominator": 9000,
+        "rate": 0.31477777777777777
+      },
+      "boundary_truncated_uavs": {
+        "numerator": 2558,
+        "denominator": 3000,
+        "rate": 0.8526666666666667
+      },
+      "boundary_truncated_team_steps": {
+        "numerator": 499,
+        "denominator": 500,
+        "rate": 0.998
+      },
+      "boundary_occupied_coordinates": {
+        "numerator": 2918,
+        "denominator": 9000,
+        "rate": 0.32422222222222224
+      },
+      "movement_prediction_exact_coordinates": {
+        "numerator": 9000,
+        "denominator": 9000,
+        "rate": 1.0
+      },
+      "raw_excess_mean_per_coordinate": 0.8268029247919718,
+      "raw_excess_max": 5.765921115875244,
+      "raw_attempted_displacement_l2_mean_per_uav_step": 98.06706390380859,
+      "raw_attempted_displacement_l2_max": 234.62184143066406,
+      "executed_attempted_displacement_l2_mean_per_uav_step": 44.63900988260905,
+      "executed_attempted_displacement_l2_max": 51.961524963378906,
+      "realized_displacement_l2_mean_per_uav_step": 35.50187500278733,
+      "realized_displacement_l2_max": 51.96152422706632,
+      "movement_prediction_max_abs_error": 0.0
+    },
+    {
+      "world_seed": 982610,
+      "raw_coordinate_violations": {
+        "numerator": 5654,
+        "denominator": 9000,
+        "rate": 0.6282222222222222
+      },
+      "raw_uav_violations": {
+        "numerator": 2849,
+        "denominator": 3000,
+        "rate": 0.9496666666666667
+      },
+      "raw_team_step_violations": {
+        "numerator": 500,
+        "denominator": 500,
+        "rate": 1.0
+      },
+      "map_changed_coordinates": {
+        "numerator": 5654,
+        "denominator": 9000,
+        "rate": 0.6282222222222222
+      },
+      "map_changed_uavs": {
+        "numerator": 2849,
+        "denominator": 3000,
+        "rate": 0.9496666666666667
+      },
+      "map_changed_team_steps": {
+        "numerator": 500,
+        "denominator": 500,
+        "rate": 1.0
+      },
+      "boundary_truncated_coordinates": {
+        "numerator": 2657,
+        "denominator": 9000,
+        "rate": 0.2952222222222222
+      },
+      "boundary_truncated_uavs": {
+        "numerator": 2481,
+        "denominator": 3000,
+        "rate": 0.827
+      },
+      "boundary_truncated_team_steps": {
+        "numerator": 498,
+        "denominator": 500,
+        "rate": 0.996
+      },
+      "boundary_occupied_coordinates": {
+        "numerator": 2730,
+        "denominator": 9000,
+        "rate": 0.30333333333333334
+      },
+      "movement_prediction_exact_coordinates": {
+        "numerator": 9000,
+        "denominator": 9000,
+        "rate": 1.0
+      },
+      "raw_excess_mean_per_coordinate": 0.8317394328912099,
+      "raw_excess_max": 5.373166084289551,
+      "raw_attempted_displacement_l2_mean_per_uav_step": 98.57004915364584,
+      "raw_attempted_displacement_l2_max": 231.13023376464844,
+      "executed_attempted_displacement_l2_mean_per_uav_step": 44.28580427042643,
+      "executed_attempted_displacement_l2_max": 51.961524963378906,
+      "realized_displacement_l2_mean_per_uav_step": 35.551141926217106,
+      "realized_displacement_l2_max": 51.96152422706632,
+      "movement_prediction_max_abs_error": 0.0
+    },
+    {
+      "world_seed": 982611,
+      "raw_coordinate_violations": {
+        "numerator": 5439,
+        "denominator": 9000,
+        "rate": 0.6043333333333333
+      },
+      "raw_uav_violations": {
+        "numerator": 2810,
+        "denominator": 3000,
+        "rate": 0.9366666666666666
+      },
+      "raw_team_step_violations": {
+        "numerator": 500,
+        "denominator": 500,
+        "rate": 1.0
+      },
+      "map_changed_coordinates": {
+        "numerator": 5439,
+        "denominator": 9000,
+        "rate": 0.6043333333333333
+      },
+      "map_changed_uavs": {
+        "numerator": 2810,
+        "denominator": 3000,
+        "rate": 0.9366666666666666
+      },
+      "map_changed_team_steps": {
+        "numerator": 500,
+        "denominator": 500,
+        "rate": 1.0
+      },
+      "boundary_truncated_coordinates": {
+        "numerator": 2956,
+        "denominator": 9000,
+        "rate": 0.32844444444444443
+      },
+      "boundary_truncated_uavs": {
+        "numerator": 2559,
+        "denominator": 3000,
+        "rate": 0.853
+      },
+      "boundary_truncated_team_steps": {
+        "numerator": 498,
+        "denominator": 500,
+        "rate": 0.996
+      },
+      "boundary_occupied_coordinates": {
+        "numerator": 3018,
+        "denominator": 9000,
+        "rate": 0.3353333333333333
+      },
+      "movement_prediction_exact_coordinates": {
+        "numerator": 9000,
+        "denominator": 9000,
+        "rate": 1.0
+      },
+      "raw_excess_mean_per_coordinate": 0.7414347302648756,
+      "raw_excess_max": 5.070743083953857,
+      "raw_attempted_displacement_l2_mean_per_uav_step": 92.16383638509114,
+      "raw_attempted_displacement_l2_max": 210.26124572753906,
+      "executed_attempted_displacement_l2_mean_per_uav_step": 43.825689071655276,
+      "executed_attempted_displacement_l2_max": 51.961524963378906,
+      "realized_displacement_l2_mean_per_uav_step": 33.79000597497275,
+      "realized_displacement_l2_max": 51.96152422706632,
+      "movement_prediction_max_abs_error": 0.0
+    },
+    {
+      "world_seed": 982612,
+      "raw_coordinate_violations": {
+        "numerator": 5616,
+        "denominator": 9000,
+        "rate": 0.624
+      },
+      "raw_uav_violations": {
+        "numerator": 2831,
+        "denominator": 3000,
+        "rate": 0.9436666666666667
+      },
+      "raw_team_step_violations": {
+        "numerator": 500,
+        "denominator": 500,
+        "rate": 1.0
+      },
+      "map_changed_coordinates": {
+        "numerator": 5616,
+        "denominator": 9000,
+        "rate": 0.624
+      },
+      "map_changed_uavs": {
+        "numerator": 2831,
+        "denominator": 3000,
+        "rate": 0.9436666666666667
+      },
+      "map_changed_team_steps": {
+        "numerator": 500,
+        "denominator": 500,
+        "rate": 1.0
+      },
+      "boundary_truncated_coordinates": {
+        "numerator": 2684,
+        "denominator": 9000,
+        "rate": 0.2982222222222222
+      },
+      "boundary_truncated_uavs": {
+        "numerator": 2519,
+        "denominator": 3000,
+        "rate": 0.8396666666666667
+      },
+      "boundary_truncated_team_steps": {
+        "numerator": 500,
+        "denominator": 500,
+        "rate": 1.0
+      },
+      "boundary_occupied_coordinates": {
+        "numerator": 2750,
+        "denominator": 9000,
+        "rate": 0.3055555555555556
+      },
+      "movement_prediction_exact_coordinates": {
+        "numerator": 9000,
+        "denominator": 9000,
+        "rate": 1.0
+      },
+      "raw_excess_mean_per_coordinate": 0.8160657331148783,
+      "raw_excess_max": 5.543043613433838,
+      "raw_attempted_displacement_l2_mean_per_uav_step": 97.36719863891602,
+      "raw_attempted_displacement_l2_max": 228.6112823486328,
+      "executed_attempted_displacement_l2_mean_per_uav_step": 44.260375971476236,
+      "executed_attempted_displacement_l2_max": 51.961524963378906,
+      "realized_displacement_l2_mean_per_uav_step": 35.3833451429222,
+      "realized_displacement_l2_max": 51.96152422706632,
+      "movement_prediction_max_abs_error": 0.0
+    },
+    {
+      "world_seed": 982613,
+      "raw_coordinate_violations": {
+        "numerator": 5495,
+        "denominator": 9000,
+        "rate": 0.6105555555555555
+      },
+      "raw_uav_violations": {
+        "numerator": 2811,
+        "denominator": 3000,
+        "rate": 0.937
+      },
+      "raw_team_step_violations": {
+        "numerator": 500,
+        "denominator": 500,
+        "rate": 1.0
+      },
+      "map_changed_coordinates": {
+        "numerator": 5495,
+        "denominator": 9000,
+        "rate": 0.6105555555555555
+      },
+      "map_changed_uavs": {
+        "numerator": 2811,
+        "denominator": 3000,
+        "rate": 0.937
+      },
+      "map_changed_team_steps": {
+        "numerator": 500,
+        "denominator": 500,
+        "rate": 1.0
+      },
+      "boundary_truncated_coordinates": {
+        "numerator": 3256,
+        "denominator": 9000,
+        "rate": 0.36177777777777775
+      },
+      "boundary_truncated_uavs": {
+        "numerator": 2530,
+        "denominator": 3000,
+        "rate": 0.8433333333333334
+      },
+      "boundary_truncated_team_steps": {
+        "numerator": 498,
+        "denominator": 500,
+        "rate": 0.996
+      },
+      "boundary_occupied_coordinates": {
+        "numerator": 3326,
+        "denominator": 9000,
+        "rate": 0.3695555555555556
+      },
+      "movement_prediction_exact_coordinates": {
+        "numerator": 9000,
+        "denominator": 9000,
+        "rate": 1.0
+      },
+      "raw_excess_mean_per_coordinate": 0.7792907337877486,
+      "raw_excess_max": 5.5671467781066895,
+      "raw_attempted_displacement_l2_mean_per_uav_step": 94.30796954345703,
+      "raw_attempted_displacement_l2_max": 224.7079315185547,
+      "executed_attempted_displacement_l2_mean_per_uav_step": 43.91539192199707,
+      "executed_attempted_displacement_l2_max": 51.961524963378906,
+      "realized_displacement_l2_mean_per_uav_step": 32.56715491419213,
+      "realized_displacement_l2_max": 51.961524227066334,
+      "movement_prediction_max_abs_error": 0.0
+    },
+    {
+      "world_seed": 982614,
+      "raw_coordinate_violations": {
+        "numerator": 5504,
+        "denominator": 9000,
+        "rate": 0.6115555555555555
+      },
+      "raw_uav_violations": {
+        "numerator": 2824,
+        "denominator": 3000,
+        "rate": 0.9413333333333334
+      },
+      "raw_team_step_violations": {
+        "numerator": 500,
+        "denominator": 500,
+        "rate": 1.0
+      },
+      "map_changed_coordinates": {
+        "numerator": 5504,
+        "denominator": 9000,
+        "rate": 0.6115555555555555
+      },
+      "map_changed_uavs": {
+        "numerator": 2824,
+        "denominator": 3000,
+        "rate": 0.9413333333333334
+      },
+      "map_changed_team_steps": {
+        "numerator": 500,
+        "denominator": 500,
+        "rate": 1.0
+      },
+      "boundary_truncated_coordinates": {
+        "numerator": 2865,
+        "denominator": 9000,
+        "rate": 0.31833333333333336
+      },
+      "boundary_truncated_uavs": {
+        "numerator": 2459,
+        "denominator": 3000,
+        "rate": 0.8196666666666667
+      },
+      "boundary_truncated_team_steps": {
+        "numerator": 500,
+        "denominator": 500,
+        "rate": 1.0
+      },
+      "boundary_occupied_coordinates": {
+        "numerator": 2974,
+        "denominator": 9000,
+        "rate": 0.33044444444444443
+      },
+      "movement_prediction_exact_coordinates": {
+        "numerator": 9000,
+        "denominator": 9000,
+        "rate": 1.0
+      },
+      "raw_excess_mean_per_coordinate": 0.7740658183627659,
+      "raw_excess_max": 6.235623359680176,
+      "raw_attempted_displacement_l2_mean_per_uav_step": 94.42115873209636,
+      "raw_attempted_displacement_l2_max": 226.08119201660156,
+      "executed_attempted_displacement_l2_mean_per_uav_step": 43.894597529093424,
+      "executed_attempted_displacement_l2_max": 51.961524963378906,
+      "realized_displacement_l2_mean_per_uav_step": 34.39483101721655,
+      "realized_displacement_l2_max": 51.96152422706632,
+      "movement_prediction_max_abs_error": 0.0
+    },
+    {
+      "world_seed": 982615,
+      "raw_coordinate_violations": {
+        "numerator": 5687,
+        "denominator": 9000,
+        "rate": 0.6318888888888889
+      },
+      "raw_uav_violations": {
+        "numerator": 2856,
+        "denominator": 3000,
+        "rate": 0.952
+      },
+      "raw_team_step_violations": {
+        "numerator": 500,
+        "denominator": 500,
+        "rate": 1.0
+      },
+      "map_changed_coordinates": {
+        "numerator": 5687,
+        "denominator": 9000,
+        "rate": 0.6318888888888889
+      },
+      "map_changed_uavs": {
+        "numerator": 2856,
+        "denominator": 3000,
+        "rate": 0.952
+      },
+      "map_changed_team_steps": {
+        "numerator": 500,
+        "denominator": 500,
+        "rate": 1.0
+      },
+      "boundary_truncated_coordinates": {
+        "numerator": 2814,
+        "denominator": 9000,
+        "rate": 0.31266666666666665
+      },
+      "boundary_truncated_uavs": {
+        "numerator": 2540,
+        "denominator": 3000,
+        "rate": 0.8466666666666667
+      },
+      "boundary_truncated_team_steps": {
+        "numerator": 498,
+        "denominator": 500,
+        "rate": 0.996
+      },
+      "boundary_occupied_coordinates": {
+        "numerator": 2902,
+        "denominator": 9000,
+        "rate": 0.3224444444444444
+      },
+      "movement_prediction_exact_coordinates": {
+        "numerator": 9000,
+        "denominator": 9000,
+        "rate": 1.0
+      },
+      "raw_excess_mean_per_coordinate": 0.7909689695040385,
+      "raw_excess_max": 5.487870216369629,
+      "raw_attempted_displacement_l2_mean_per_uav_step": 95.64422471110026,
+      "raw_attempted_displacement_l2_max": 216.71145629882812,
+      "executed_attempted_displacement_l2_mean_per_uav_step": 44.467884841918945,
+      "executed_attempted_displacement_l2_max": 51.961524963378906,
+      "realized_displacement_l2_mean_per_uav_step": 35.38897059961172,
+      "realized_displacement_l2_max": 51.96152422706632,
+      "movement_prediction_max_abs_error": 0.0
+    }
+  ],
+  "trace": {
+    "path": "trace_h6_914201_n6_clip.npz",
+    "sha256": "f0bfbe071ecdd0a35595a0121153baccaf0762b90a596a36a3ce2f09e1ac6939",
+    "bytes": 1712206,
+    "index_semantics": {
+      "base": "zero-based",
+      "transition": "pre_map_actions[t] and executed_actions[t] map native_positions[t] and encoded_states[t] to native_positions[t+1] and encoded_states[t+1]"
+    },
+    "arrays": {
+      "pre_map_actions": {
+        "shape": [
+          500,
+          16,
+          6,
+          3
+        ],
+        "dtype": "float32",
+        "sha256": "1c5b640e583838a701b913986a25fedce354a835fe1684804108019b031eea6b"
+      },
+      "executed_actions": {
+        "shape": [
+          500,
+          16,
+          6,
+          3
+        ],
+        "dtype": "float32",
+        "sha256": "ca989be34a68874e50796043f6d0c0bd30758a9770074db92de2aeea1d3b8336"
+      },
+      "action_logprobs": {
+        "shape": [
+          500,
+          16,
+          6
+        ],
+        "dtype": "float32",
+        "sha256": "1af694926b7dcc5ccac92fefed412173475b0632966374d9b78fb08fb2bcaece"
+      },
+      "native_positions": {
+        "shape": [
+          501,
+          16,
+          6,
+          3
+        ],
+        "dtype": "float64",
+        "sha256": "afb895af92874be63f9f240cfa8ad98f0b707ad40a51ff11ca8844417ef9f2cc"
+      },
+      "encoded_states": {
+        "shape": [
+          501,
+          16,
+          133
+        ],
+        "dtype": "float32",
+        "sha256": "485fd135a5b9eb29134293ec8e33cec97db1f07d4fe0686209f3ee6bac12b331"
+      }
+    }
+  },
+  "config": {
+    "count_arm": "H6",
+    "algorithm": "hmasd",
+    "n_agents": 6,
+    "n_uavs": 6,
+    "n_users": 50,
+    "num_envs": 16,
+    "rollout_length": 500,
+    "episode_length": 500,
+    "k": 10,
+    "n_Z": 6,
+    "n_z": 6,
+    "state_dim": 133,
+    "obs_dim": 104,
+    "action_dim": 3,
+    "action_space_type": "continuous",
+    "gamma": 0.99,
+    "gae_lambda": 0.95,
+    "ppo_epochs": 15,
+    "num_mini_batch": 4,
+    "sequence_batch_size": 32,
+    "coordinator_batch_size": 1280,
+    "high_level_batch_size": 128,
+    "high_level_buffer_size": 800,
+    "batch_size": 12000,
+    "discriminator_batch_size": 12000,
+    "lambda_e": 1.0,
+    "lambda_D": 0.05,
+    "lambda_d": 0.02,
+    "lambda_h": 0.07,
+    "lambda_l": 0.05,
+    "lambda_cd": 0.0,
+    "lambda_mi": 0.0,
+    "lr_coordinator": 0.0001,
+    "lr_discoverer_actor": 0.0001,
+    "lr_discoverer_critic": 0.0001,
+    "lr_discriminator": 0.0001,
+    "weight_decay": 0.0,
+    "clip_epsilon": 0.2,
+    "value_loss_coef": 1.0,
+    "max_grad_norm": 0.5,
+    "hidden_size": 256,
+    "embedding_dim": 256,
+    "n_heads": 8,
+    "n_encoder_layers": 2,
+    "n_decoder_layers": 2,
+    "gru_hidden_size": 256,
+    "use_valuenorm": true,
+    "use_obsnorm": false,
+    "use_statenorm": false,
+    "use_lr_decay": false,
+    "total_timesteps": 360000,
+    "seed": 914201,
+    "policy_interruption_mode": "off",
+    "use_central_snapshot_in_flat_actor": false,
+    "disable_high_level_training": null,
+    "disable_discriminator_training": null,
+    "disable_discriminator_rewards": null,
+    "collects_high_level_samples": null,
+    "use_process_exploration": false,
+    "use_horizon_window": false,
+    "use_opt_compact": false
+  }
+}

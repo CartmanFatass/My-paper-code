@@ -1,0 +1,1193 @@
+{
+  "arm": "H6",
+  "seed": 914413,
+  "test_n": 8,
+  "trace_index_semantics": {
+    "base": "zero-based",
+    "transition": "action[t] maps native position/state[t] to native position/state[t+1]; all first-divergence step indices are zero-based"
+  },
+  "identical_starts": {
+    "encoded_state": {
+      "index_base": "zero-based",
+      "exact_identity": true,
+      "first_differing_index": null,
+      "differing_elements": 0,
+      "max_abs_difference": 0.0
+    },
+    "native_position": {
+      "index_base": "zero-based",
+      "exact_identity": true,
+      "first_differing_index": null,
+      "differing_elements": 0,
+      "max_abs_difference": 0.0
+    }
+  },
+  "trajectory_comparison": {
+    "pre_map_actions": {
+      "index_base": "zero-based",
+      "exact_identity": false,
+      "first_differing_index": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "differing_elements": 191616,
+      "max_abs_difference": 11.580565929412842
+    },
+    "executed_actions": {
+      "index_base": "zero-based",
+      "exact_identity": false,
+      "first_differing_index": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "differing_elements": 191847,
+      "max_abs_difference": 8.985870003700256
+    },
+    "native_positions": {
+      "index_base": "zero-based",
+      "exact_identity": false,
+      "first_differing_index": [
+        1,
+        0,
+        0,
+        1
+      ],
+      "differing_elements": 139580,
+      "max_abs_difference": 1000.0
+    },
+    "encoded_states": {
+      "index_base": "zero-based",
+      "exact_identity": false,
+      "first_differing_index": [
+        1,
+        0,
+        1
+      ],
+      "differing_elements": 139580,
+      "max_abs_difference": 1.0
+    },
+    "action_logprobs": {
+      "index_base": "zero-based",
+      "exact_identity": true,
+      "first_differing_index": null,
+      "differing_elements": 0,
+      "max_abs_difference": 0.0
+    }
+  },
+  "worlds": [
+    {
+      "world_seed": 982800,
+      "J_raw": 0.4467139406651257,
+      "J_clip": 0.4638139767490765,
+      "d": 0.017100036083950776,
+      "components": {
+        "coverage_reward": {
+          "raw": 0.5742800000000001,
+          "clip": 0.5915599999999994,
+          "clip_minus_raw": 0.017279999999999296
+        },
+        "quality_reward": {
+          "raw": 0.16658934311305673,
+          "clip": 0.17974552539582853,
+          "clip_minus_raw": 0.013156182282771794
+        },
+        "energy_penalty": {
+          "raw": 0.005258862268791504,
+          "clip": 0.004201680869671928,
+          "clip_minus_raw": -0.0010571813991195759
+        },
+        "total_reward": {
+          "raw": 0.4467139406651257,
+          "clip": 0.4638139767490765,
+          "clip_minus_raw": 0.017100036083950776
+        }
+      },
+      "first_divergence_step": {
+        "pre_map_action": {
+          "trace_index_zero_based": 1,
+          "index_kind": "action_t",
+          "max_abs_difference": 10.428895473480225,
+          "exact_identity": false
+        },
+        "executed_action": {
+          "trace_index_zero_based": 0,
+          "index_kind": "action_t",
+          "max_abs_difference": 7.947845458984375,
+          "exact_identity": false
+        },
+        "native_position": {
+          "trace_index_zero_based": 1,
+          "index_kind": "position_t",
+          "max_abs_difference": 975.0236267447472,
+          "exact_identity": false
+        },
+        "encoded_state": {
+          "trace_index_zero_based": 1,
+          "index_kind": "state_t",
+          "max_abs_difference": 1.0,
+          "exact_identity": false
+        }
+      },
+      "changed_action_steps": {
+        "numerator": 500,
+        "denominator": 500,
+        "rate": 1.0
+      },
+      "same_start_mapping_changed_steps": {
+        "numerator": 1,
+        "denominator": 500,
+        "rate": 0.002
+      },
+      "same_start_mapping_changed_same_exact_successor_steps": {
+        "numerator": 0,
+        "denominator": 500,
+        "rate": 0.0
+      }
+    },
+    {
+      "world_seed": 982801,
+      "J_raw": 0.42237639122210785,
+      "J_clip": 0.44294991148628376,
+      "d": 0.020573520264175915,
+      "components": {
+        "coverage_reward": {
+          "raw": 0.5444400000000001,
+          "clip": 0.5666799999999999,
+          "clip_minus_raw": 0.022239999999999704
+        },
+        "quality_reward": {
+          "raw": 0.15212282777670513,
+          "clip": 0.1657423820214354,
+          "clip_minus_raw": 0.01361955424473027
+        },
+        "energy_penalty": {
+          "raw": 0.004368457110904107,
+          "clip": 0.0034488031201466646,
+          "clip_minus_raw": -0.0009196539907574425
+        },
+        "total_reward": {
+          "raw": 0.42237639122210785,
+          "clip": 0.44294991148628376,
+          "clip_minus_raw": 0.020573520264175915
+        }
+      },
+      "first_divergence_step": {
+        "pre_map_action": {
+          "trace_index_zero_based": 1,
+          "index_kind": "action_t",
+          "max_abs_difference": 10.422552108764648,
+          "exact_identity": false
+        },
+        "executed_action": {
+          "trace_index_zero_based": 0,
+          "index_kind": "action_t",
+          "max_abs_difference": 8.071523666381836,
+          "exact_identity": false
+        },
+        "native_position": {
+          "trace_index_zero_based": 1,
+          "index_kind": "position_t",
+          "max_abs_difference": 1000.0,
+          "exact_identity": false
+        },
+        "encoded_state": {
+          "trace_index_zero_based": 1,
+          "index_kind": "state_t",
+          "max_abs_difference": 1.0,
+          "exact_identity": false
+        }
+      },
+      "changed_action_steps": {
+        "numerator": 500,
+        "denominator": 500,
+        "rate": 1.0
+      },
+      "same_start_mapping_changed_steps": {
+        "numerator": 1,
+        "denominator": 500,
+        "rate": 0.002
+      },
+      "same_start_mapping_changed_same_exact_successor_steps": {
+        "numerator": 0,
+        "denominator": 500,
+        "rate": 0.0
+      }
+    },
+    {
+      "world_seed": 982802,
+      "J_raw": 0.4264220273305918,
+      "J_clip": 0.512384311149821,
+      "d": 0.08596228381922916,
+      "components": {
+        "coverage_reward": {
+          "raw": 0.5277200000000005,
+          "clip": 0.6655200000000006,
+          "clip_minus_raw": 0.13780000000000003
+        },
+        "quality_reward": {
+          "raw": 0.20657874385440586,
+          "clip": 0.164939376408628,
+          "clip_minus_raw": -0.04163936744577787
+        },
+        "energy_penalty": {
+          "raw": 0.004955595825729612,
+          "clip": 0.0029615017727675583,
+          "clip_minus_raw": -0.001994094052962054
+        },
+        "total_reward": {
+          "raw": 0.4264220273305918,
+          "clip": 0.512384311149821,
+          "clip_minus_raw": 0.08596228381922916
+        }
+      },
+      "first_divergence_step": {
+        "pre_map_action": {
+          "trace_index_zero_based": 1,
+          "index_kind": "action_t",
+          "max_abs_difference": 11.438697814941406,
+          "exact_identity": false
+        },
+        "executed_action": {
+          "trace_index_zero_based": 0,
+          "index_kind": "action_t",
+          "max_abs_difference": 8.06113862991333,
+          "exact_identity": false
+        },
+        "native_position": {
+          "trace_index_zero_based": 1,
+          "index_kind": "position_t",
+          "max_abs_difference": 991.0712790265679,
+          "exact_identity": false
+        },
+        "encoded_state": {
+          "trace_index_zero_based": 1,
+          "index_kind": "state_t",
+          "max_abs_difference": 1.0,
+          "exact_identity": false
+        }
+      },
+      "changed_action_steps": {
+        "numerator": 500,
+        "denominator": 500,
+        "rate": 1.0
+      },
+      "same_start_mapping_changed_steps": {
+        "numerator": 1,
+        "denominator": 500,
+        "rate": 0.002
+      },
+      "same_start_mapping_changed_same_exact_successor_steps": {
+        "numerator": 0,
+        "denominator": 500,
+        "rate": 0.0
+      }
+    },
+    {
+      "world_seed": 982803,
+      "J_raw": 0.3662627126442861,
+      "J_clip": 0.4507289284336935,
+      "d": 0.08446621578940738,
+      "components": {
+        "coverage_reward": {
+          "raw": 0.45923999999999965,
+          "clip": 0.5819200000000001,
+          "clip_minus_raw": 0.12268000000000046
+        },
+        "quality_reward": {
+          "raw": 0.16764031611408034,
+          "clip": 0.1576899364623811,
+          "clip_minus_raw": -0.009950379651699232
+        },
+        "energy_penalty": {
+          "raw": 0.005497382189938244,
+          "clip": 0.003922052505021007,
+          "clip_minus_raw": -0.001575329684917237
+        },
+        "total_reward": {
+          "raw": 0.3662627126442861,
+          "clip": 0.4507289284336935,
+          "clip_minus_raw": 0.08446621578940738
+        }
+      },
+      "first_divergence_step": {
+        "pre_map_action": {
+          "trace_index_zero_based": 1,
+          "index_kind": "action_t",
+          "max_abs_difference": 10.418046951293945,
+          "exact_identity": false
+        },
+        "executed_action": {
+          "trace_index_zero_based": 0,
+          "index_kind": "action_t",
+          "max_abs_difference": 7.786712646484375,
+          "exact_identity": false
+        },
+        "native_position": {
+          "trace_index_zero_based": 1,
+          "index_kind": "position_t",
+          "max_abs_difference": 1000.0,
+          "exact_identity": false
+        },
+        "encoded_state": {
+          "trace_index_zero_based": 1,
+          "index_kind": "state_t",
+          "max_abs_difference": 1.0,
+          "exact_identity": false
+        }
+      },
+      "changed_action_steps": {
+        "numerator": 500,
+        "denominator": 500,
+        "rate": 1.0
+      },
+      "same_start_mapping_changed_steps": {
+        "numerator": 1,
+        "denominator": 500,
+        "rate": 0.002
+      },
+      "same_start_mapping_changed_same_exact_successor_steps": {
+        "numerator": 0,
+        "denominator": 500,
+        "rate": 0.0
+      }
+    },
+    {
+      "world_seed": 982804,
+      "J_raw": 0.4462760942769616,
+      "J_clip": 0.49031209628046957,
+      "d": 0.04403600200350799,
+      "components": {
+        "coverage_reward": {
+          "raw": 0.5695200000000005,
+          "clip": 0.6299599999999996,
+          "clip_minus_raw": 0.06043999999999916
+        },
+        "quality_reward": {
+          "raw": 0.17843673234031665,
+          "clip": 0.18065431066076199,
+          "clip_minus_raw": 0.0022175783204453348
+        },
+        "energy_penalty": {
+          "raw": 0.005918925425133325,
+          "clip": 0.004856196917758847,
+          "clip_minus_raw": -0.0010627285073744773
+        },
+        "total_reward": {
+          "raw": 0.4462760942769616,
+          "clip": 0.49031209628046957,
+          "clip_minus_raw": 0.04403600200350799
+        }
+      },
+      "first_divergence_step": {
+        "pre_map_action": {
+          "trace_index_zero_based": 1,
+          "index_kind": "action_t",
+          "max_abs_difference": 10.245211601257324,
+          "exact_identity": false
+        },
+        "executed_action": {
+          "trace_index_zero_based": 0,
+          "index_kind": "action_t",
+          "max_abs_difference": 7.476374626159668,
+          "exact_identity": false
+        },
+        "native_position": {
+          "trace_index_zero_based": 1,
+          "index_kind": "position_t",
+          "max_abs_difference": 1000.0,
+          "exact_identity": false
+        },
+        "encoded_state": {
+          "trace_index_zero_based": 1,
+          "index_kind": "state_t",
+          "max_abs_difference": 1.0,
+          "exact_identity": false
+        }
+      },
+      "changed_action_steps": {
+        "numerator": 500,
+        "denominator": 500,
+        "rate": 1.0
+      },
+      "same_start_mapping_changed_steps": {
+        "numerator": 1,
+        "denominator": 500,
+        "rate": 0.002
+      },
+      "same_start_mapping_changed_same_exact_successor_steps": {
+        "numerator": 0,
+        "denominator": 500,
+        "rate": 0.0
+      }
+    },
+    {
+      "world_seed": 982805,
+      "J_raw": 0.42413463591441974,
+      "J_clip": 0.4916556761434209,
+      "d": 0.06752104022900118,
+      "components": {
+        "coverage_reward": {
+          "raw": 0.5245199999999994,
+          "clip": 0.6145600000000001,
+          "clip_minus_raw": 0.09004000000000068
+        },
+        "quality_reward": {
+          "raw": 0.20705479617520076,
+          "clip": 0.21528545224147305,
+          "clip_minus_raw": 0.008230656066272296
+        },
+        "energy_penalty": {
+          "raw": 0.005145802938140388,
+          "clip": 0.003121959529020791,
+          "clip_minus_raw": -0.002023843409119597
+        },
+        "total_reward": {
+          "raw": 0.42413463591441974,
+          "clip": 0.4916556761434209,
+          "clip_minus_raw": 0.06752104022900118
+        }
+      },
+      "first_divergence_step": {
+        "pre_map_action": {
+          "trace_index_zero_based": 1,
+          "index_kind": "action_t",
+          "max_abs_difference": 10.175029754638672,
+          "exact_identity": false
+        },
+        "executed_action": {
+          "trace_index_zero_based": 0,
+          "index_kind": "action_t",
+          "max_abs_difference": 7.005458354949951,
+          "exact_identity": false
+        },
+        "native_position": {
+          "trace_index_zero_based": 1,
+          "index_kind": "position_t",
+          "max_abs_difference": 898.2715498805627,
+          "exact_identity": false
+        },
+        "encoded_state": {
+          "trace_index_zero_based": 1,
+          "index_kind": "state_t",
+          "max_abs_difference": 1.0,
+          "exact_identity": false
+        }
+      },
+      "changed_action_steps": {
+        "numerator": 500,
+        "denominator": 500,
+        "rate": 1.0
+      },
+      "same_start_mapping_changed_steps": {
+        "numerator": 1,
+        "denominator": 500,
+        "rate": 0.002
+      },
+      "same_start_mapping_changed_same_exact_successor_steps": {
+        "numerator": 0,
+        "denominator": 500,
+        "rate": 0.0
+      }
+    },
+    {
+      "world_seed": 982806,
+      "J_raw": 0.40600866348800724,
+      "J_clip": 0.38596477250332745,
+      "d": -0.02004389098467979,
+      "components": {
+        "coverage_reward": {
+          "raw": 0.505,
+          "clip": 0.49231999999999937,
+          "clip_minus_raw": -0.012680000000000635
+        },
+        "quality_reward": {
+          "raw": 0.19393805976387665,
+          "clip": 0.15148818766070787,
+          "clip_minus_raw": -0.04244987210316878
+        },
+        "energy_penalty": {
+          "raw": 0.0056727544411556575,
+          "clip": 0.004105683794884879,
+          "clip_minus_raw": -0.0015670706462707785
+        },
+        "total_reward": {
+          "raw": 0.40600866348800724,
+          "clip": 0.38596477250332745,
+          "clip_minus_raw": -0.02004389098467979
+        }
+      },
+      "first_divergence_step": {
+        "pre_map_action": {
+          "trace_index_zero_based": 1,
+          "index_kind": "action_t",
+          "max_abs_difference": 11.0912504196167,
+          "exact_identity": false
+        },
+        "executed_action": {
+          "trace_index_zero_based": 0,
+          "index_kind": "action_t",
+          "max_abs_difference": 8.985870003700256,
+          "exact_identity": false
+        },
+        "native_position": {
+          "trace_index_zero_based": 1,
+          "index_kind": "position_t",
+          "max_abs_difference": 1000.0,
+          "exact_identity": false
+        },
+        "encoded_state": {
+          "trace_index_zero_based": 1,
+          "index_kind": "state_t",
+          "max_abs_difference": 1.0,
+          "exact_identity": false
+        }
+      },
+      "changed_action_steps": {
+        "numerator": 500,
+        "denominator": 500,
+        "rate": 1.0
+      },
+      "same_start_mapping_changed_steps": {
+        "numerator": 1,
+        "denominator": 500,
+        "rate": 0.002
+      },
+      "same_start_mapping_changed_same_exact_successor_steps": {
+        "numerator": 0,
+        "denominator": 500,
+        "rate": 0.0
+      }
+    },
+    {
+      "world_seed": 982807,
+      "J_raw": 0.40445610757727823,
+      "J_clip": 0.38573172673431455,
+      "d": -0.018724380842963684,
+      "components": {
+        "coverage_reward": {
+          "raw": 0.5151600000000006,
+          "clip": 0.48332,
+          "clip_minus_raw": -0.03184000000000059
+        },
+        "quality_reward": {
+          "raw": 0.1651076160280233,
+          "clip": 0.17509461765183038,
+          "clip_minus_raw": 0.009987001623807085
+        },
+        "energy_penalty": {
+          "raw": 0.005688177231128186,
+          "clip": 0.005120658561234959,
+          "clip_minus_raw": -0.0005675186698932272
+        },
+        "total_reward": {
+          "raw": 0.40445610757727823,
+          "clip": 0.38573172673431455,
+          "clip_minus_raw": -0.018724380842963684
+        }
+      },
+      "first_divergence_step": {
+        "pre_map_action": {
+          "trace_index_zero_based": 1,
+          "index_kind": "action_t",
+          "max_abs_difference": 10.062347412109375,
+          "exact_identity": false
+        },
+        "executed_action": {
+          "trace_index_zero_based": 0,
+          "index_kind": "action_t",
+          "max_abs_difference": 7.285103797912598,
+          "exact_identity": false
+        },
+        "native_position": {
+          "trace_index_zero_based": 1,
+          "index_kind": "position_t",
+          "max_abs_difference": 1000.0,
+          "exact_identity": false
+        },
+        "encoded_state": {
+          "trace_index_zero_based": 1,
+          "index_kind": "state_t",
+          "max_abs_difference": 1.0,
+          "exact_identity": false
+        }
+      },
+      "changed_action_steps": {
+        "numerator": 500,
+        "denominator": 500,
+        "rate": 1.0
+      },
+      "same_start_mapping_changed_steps": {
+        "numerator": 1,
+        "denominator": 500,
+        "rate": 0.002
+      },
+      "same_start_mapping_changed_same_exact_successor_steps": {
+        "numerator": 0,
+        "denominator": 500,
+        "rate": 0.0
+      }
+    },
+    {
+      "world_seed": 982808,
+      "J_raw": 0.4386264687990418,
+      "J_clip": 0.5294879492310892,
+      "d": 0.09086148043204739,
+      "components": {
+        "coverage_reward": {
+          "raw": 0.5650000000000005,
+          "clip": 0.6894000000000009,
+          "clip_minus_raw": 0.1244000000000004
+        },
+        "quality_reward": {
+          "raw": 0.16767728099620802,
+          "clip": 0.16687360943848065,
+          "clip_minus_raw": -0.0008036715577273701
+        },
+        "energy_penalty": {
+          "raw": 0.0071767154998208,
+          "clip": 0.003154133600455038,
+          "clip_minus_raw": -0.004022581899365762
+        },
+        "total_reward": {
+          "raw": 0.4386264687990418,
+          "clip": 0.5294879492310892,
+          "clip_minus_raw": 0.09086148043204739
+        }
+      },
+      "first_divergence_step": {
+        "pre_map_action": {
+          "trace_index_zero_based": 1,
+          "index_kind": "action_t",
+          "max_abs_difference": 10.101835489273071,
+          "exact_identity": false
+        },
+        "executed_action": {
+          "trace_index_zero_based": 0,
+          "index_kind": "action_t",
+          "max_abs_difference": 7.809667110443115,
+          "exact_identity": false
+        },
+        "native_position": {
+          "trace_index_zero_based": 1,
+          "index_kind": "position_t",
+          "max_abs_difference": 996.4425339698792,
+          "exact_identity": false
+        },
+        "encoded_state": {
+          "trace_index_zero_based": 1,
+          "index_kind": "state_t",
+          "max_abs_difference": 1.0,
+          "exact_identity": false
+        }
+      },
+      "changed_action_steps": {
+        "numerator": 500,
+        "denominator": 500,
+        "rate": 1.0
+      },
+      "same_start_mapping_changed_steps": {
+        "numerator": 1,
+        "denominator": 500,
+        "rate": 0.002
+      },
+      "same_start_mapping_changed_same_exact_successor_steps": {
+        "numerator": 0,
+        "denominator": 500,
+        "rate": 0.0
+      }
+    },
+    {
+      "world_seed": 982809,
+      "J_raw": 0.40745895878650934,
+      "J_clip": 0.4495038663530838,
+      "d": 0.042044907566574474,
+      "components": {
+        "coverage_reward": {
+          "raw": 0.5162000000000005,
+          "clip": 0.5764800000000005,
+          "clip_minus_raw": 0.06028
+        },
+        "quality_reward": {
+          "raw": 0.1679144786587089,
+          "clip": 0.16541223024034568,
+          "clip_minus_raw": -0.0025022484183632177
+        },
+        "energy_penalty": {
+          "raw": 0.004255384811102926,
+          "clip": 0.0036558027190197392,
+          "clip_minus_raw": -0.000599582092083187
+        },
+        "total_reward": {
+          "raw": 0.40745895878650934,
+          "clip": 0.4495038663530838,
+          "clip_minus_raw": 0.042044907566574474
+        }
+      },
+      "first_divergence_step": {
+        "pre_map_action": {
+          "trace_index_zero_based": 1,
+          "index_kind": "action_t",
+          "max_abs_difference": 10.529900074005127,
+          "exact_identity": false
+        },
+        "executed_action": {
+          "trace_index_zero_based": 0,
+          "index_kind": "action_t",
+          "max_abs_difference": 7.674925804138184,
+          "exact_identity": false
+        },
+        "native_position": {
+          "trace_index_zero_based": 1,
+          "index_kind": "position_t",
+          "max_abs_difference": 934.9528856873512,
+          "exact_identity": false
+        },
+        "encoded_state": {
+          "trace_index_zero_based": 1,
+          "index_kind": "state_t",
+          "max_abs_difference": 1.0,
+          "exact_identity": false
+        }
+      },
+      "changed_action_steps": {
+        "numerator": 500,
+        "denominator": 500,
+        "rate": 1.0
+      },
+      "same_start_mapping_changed_steps": {
+        "numerator": 1,
+        "denominator": 500,
+        "rate": 0.002
+      },
+      "same_start_mapping_changed_same_exact_successor_steps": {
+        "numerator": 0,
+        "denominator": 500,
+        "rate": 0.0
+      }
+    },
+    {
+      "world_seed": 982810,
+      "J_raw": 0.41124828633561716,
+      "J_clip": 0.4296734680939756,
+      "d": 0.018425181758358444,
+      "components": {
+        "coverage_reward": {
+          "raw": 0.5300800000000006,
+          "clip": 0.5462799999999999,
+          "clip_minus_raw": 0.016199999999999326
+        },
+        "quality_reward": {
+          "raw": 0.15917229419489776,
+          "clip": 0.17541047693216844,
+          "clip_minus_raw": 0.01623818273727068
+        },
+        "energy_penalty": {
+          "raw": 0.007559401922852033,
+          "clip": 0.005345674985675426,
+          "clip_minus_raw": -0.002213726937176607
+        },
+        "total_reward": {
+          "raw": 0.41124828633561716,
+          "clip": 0.4296734680939756,
+          "clip_minus_raw": 0.018425181758358444
+        }
+      },
+      "first_divergence_step": {
+        "pre_map_action": {
+          "trace_index_zero_based": 1,
+          "index_kind": "action_t",
+          "max_abs_difference": 10.234162330627441,
+          "exact_identity": false
+        },
+        "executed_action": {
+          "trace_index_zero_based": 0,
+          "index_kind": "action_t",
+          "max_abs_difference": 7.552282392978668,
+          "exact_identity": false
+        },
+        "native_position": {
+          "trace_index_zero_based": 1,
+          "index_kind": "position_t",
+          "max_abs_difference": 1000.0,
+          "exact_identity": false
+        },
+        "encoded_state": {
+          "trace_index_zero_based": 1,
+          "index_kind": "state_t",
+          "max_abs_difference": 1.0,
+          "exact_identity": false
+        }
+      },
+      "changed_action_steps": {
+        "numerator": 500,
+        "denominator": 500,
+        "rate": 1.0
+      },
+      "same_start_mapping_changed_steps": {
+        "numerator": 1,
+        "denominator": 500,
+        "rate": 0.002
+      },
+      "same_start_mapping_changed_same_exact_successor_steps": {
+        "numerator": 0,
+        "denominator": 500,
+        "rate": 0.0
+      }
+    },
+    {
+      "world_seed": 982811,
+      "J_raw": 0.3741530151284457,
+      "J_clip": 0.45630685656311853,
+      "d": 0.08215384143467286,
+      "components": {
+        "coverage_reward": {
+          "raw": 0.4646399999999997,
+          "clip": 0.5750400000000006,
+          "clip_minus_raw": 0.11040000000000083
+        },
+        "quality_reward": {
+          "raw": 0.17916714765879657,
+          "clip": 0.19140019939078431,
+          "clip_minus_raw": 0.012233051731987743
+        },
+        "energy_penalty": {
+          "raw": 0.004845129169193411,
+          "clip": 0.003641203254117129,
+          "clip_minus_raw": -0.0012039259150762823
+        },
+        "total_reward": {
+          "raw": 0.3741530151284457,
+          "clip": 0.45630685656311853,
+          "clip_minus_raw": 0.08215384143467286
+        }
+      },
+      "first_divergence_step": {
+        "pre_map_action": {
+          "trace_index_zero_based": 1,
+          "index_kind": "action_t",
+          "max_abs_difference": 10.928865909576416,
+          "exact_identity": false
+        },
+        "executed_action": {
+          "trace_index_zero_based": 0,
+          "index_kind": "action_t",
+          "max_abs_difference": 7.916163921356201,
+          "exact_identity": false
+        },
+        "native_position": {
+          "trace_index_zero_based": 1,
+          "index_kind": "position_t",
+          "max_abs_difference": 1000.0,
+          "exact_identity": false
+        },
+        "encoded_state": {
+          "trace_index_zero_based": 1,
+          "index_kind": "state_t",
+          "max_abs_difference": 1.0,
+          "exact_identity": false
+        }
+      },
+      "changed_action_steps": {
+        "numerator": 500,
+        "denominator": 500,
+        "rate": 1.0
+      },
+      "same_start_mapping_changed_steps": {
+        "numerator": 1,
+        "denominator": 500,
+        "rate": 0.002
+      },
+      "same_start_mapping_changed_same_exact_successor_steps": {
+        "numerator": 0,
+        "denominator": 500,
+        "rate": 0.0
+      }
+    },
+    {
+      "world_seed": 982812,
+      "J_raw": 0.4249644471917811,
+      "J_clip": 0.4944687560365398,
+      "d": 0.06950430884475867,
+      "components": {
+        "coverage_reward": {
+          "raw": 0.5441999999999994,
+          "clip": 0.6379199999999993,
+          "clip_minus_raw": 0.09371999999999991
+        },
+        "quality_reward": {
+          "raw": 0.17404499650402952,
+          "clip": 0.1762911438407843,
+          "clip_minus_raw": 0.002246147336754767
+        },
+        "energy_penalty": {
+          "raw": 0.008189051759428063,
+          "clip": 0.0049625871156956805,
+          "clip_minus_raw": -0.0032264646437323826
+        },
+        "total_reward": {
+          "raw": 0.4249644471917811,
+          "clip": 0.4944687560365398,
+          "clip_minus_raw": 0.06950430884475867
+        }
+      },
+      "first_divergence_step": {
+        "pre_map_action": {
+          "trace_index_zero_based": 1,
+          "index_kind": "action_t",
+          "max_abs_difference": 9.660735607147217,
+          "exact_identity": false
+        },
+        "executed_action": {
+          "trace_index_zero_based": 0,
+          "index_kind": "action_t",
+          "max_abs_difference": 7.297186374664307,
+          "exact_identity": false
+        },
+        "native_position": {
+          "trace_index_zero_based": 1,
+          "index_kind": "position_t",
+          "max_abs_difference": 1000.0,
+          "exact_identity": false
+        },
+        "encoded_state": {
+          "trace_index_zero_based": 1,
+          "index_kind": "state_t",
+          "max_abs_difference": 1.0,
+          "exact_identity": false
+        }
+      },
+      "changed_action_steps": {
+        "numerator": 500,
+        "denominator": 500,
+        "rate": 1.0
+      },
+      "same_start_mapping_changed_steps": {
+        "numerator": 1,
+        "denominator": 500,
+        "rate": 0.002
+      },
+      "same_start_mapping_changed_same_exact_successor_steps": {
+        "numerator": 0,
+        "denominator": 500,
+        "rate": 0.0
+      }
+    },
+    {
+      "world_seed": 982813,
+      "J_raw": 0.412304288476442,
+      "J_clip": 0.43570438093708524,
+      "d": 0.02340009246064323,
+      "components": {
+        "coverage_reward": {
+          "raw": 0.5300000000000001,
+          "clip": 0.5551600000000005,
+          "clip_minus_raw": 0.025160000000000404
+        },
+        "quality_reward": {
+          "raw": 0.1648866822605904,
+          "clip": 0.17709240810082,
+          "clip_minus_raw": 0.012205725840229609
+        },
+        "energy_penalty": {
+          "raw": 0.008161716201735099,
+          "clip": 0.006035341493160485,
+          "clip_minus_raw": -0.0021263747085746134
+        },
+        "total_reward": {
+          "raw": 0.412304288476442,
+          "clip": 0.43570438093708524,
+          "clip_minus_raw": 0.02340009246064323
+        }
+      },
+      "first_divergence_step": {
+        "pre_map_action": {
+          "trace_index_zero_based": 1,
+          "index_kind": "action_t",
+          "max_abs_difference": 10.61938762664795,
+          "exact_identity": false
+        },
+        "executed_action": {
+          "trace_index_zero_based": 0,
+          "index_kind": "action_t",
+          "max_abs_difference": 7.6218180656433105,
+          "exact_identity": false
+        },
+        "native_position": {
+          "trace_index_zero_based": 1,
+          "index_kind": "position_t",
+          "max_abs_difference": 981.2605556948314,
+          "exact_identity": false
+        },
+        "encoded_state": {
+          "trace_index_zero_based": 1,
+          "index_kind": "state_t",
+          "max_abs_difference": 1.0,
+          "exact_identity": false
+        }
+      },
+      "changed_action_steps": {
+        "numerator": 500,
+        "denominator": 500,
+        "rate": 1.0
+      },
+      "same_start_mapping_changed_steps": {
+        "numerator": 1,
+        "denominator": 500,
+        "rate": 0.002
+      },
+      "same_start_mapping_changed_same_exact_successor_steps": {
+        "numerator": 0,
+        "denominator": 500,
+        "rate": 0.0
+      }
+    },
+    {
+      "world_seed": 982814,
+      "J_raw": 0.4112730046769127,
+      "J_clip": 0.43164806417517604,
+      "d": 0.020375059498263348,
+      "components": {
+        "coverage_reward": {
+          "raw": 0.5192399999999998,
+          "clip": 0.5414000000000008,
+          "clip_minus_raw": 0.022160000000000957
+        },
+        "quality_reward": {
+          "raw": 0.17666305051537154,
+          "clip": 0.19172844837772882,
+          "clip_minus_raw": 0.015065397862357277
+        },
+        "energy_penalty": {
+          "raw": 0.005193910477699015,
+          "clip": 0.004850470338142753,
+          "clip_minus_raw": -0.0003434401395562619
+        },
+        "total_reward": {
+          "raw": 0.4112730046769127,
+          "clip": 0.43164806417517604,
+          "clip_minus_raw": 0.020375059498263348
+        }
+      },
+      "first_divergence_step": {
+        "pre_map_action": {
+          "trace_index_zero_based": 1,
+          "index_kind": "action_t",
+          "max_abs_difference": 10.804872512817383,
+          "exact_identity": false
+        },
+        "executed_action": {
+          "trace_index_zero_based": 0,
+          "index_kind": "action_t",
+          "max_abs_difference": 6.781940460205078,
+          "exact_identity": false
+        },
+        "native_position": {
+          "trace_index_zero_based": 1,
+          "index_kind": "position_t",
+          "max_abs_difference": 687.9566012620926,
+          "exact_identity": false
+        },
+        "encoded_state": {
+          "trace_index_zero_based": 1,
+          "index_kind": "state_t",
+          "max_abs_difference": 1.0,
+          "exact_identity": false
+        }
+      },
+      "changed_action_steps": {
+        "numerator": 500,
+        "denominator": 500,
+        "rate": 1.0
+      },
+      "same_start_mapping_changed_steps": {
+        "numerator": 1,
+        "denominator": 500,
+        "rate": 0.002
+      },
+      "same_start_mapping_changed_same_exact_successor_steps": {
+        "numerator": 0,
+        "denominator": 500,
+        "rate": 0.0
+      }
+    },
+    {
+      "world_seed": 982815,
+      "J_raw": 0.46992923002759446,
+      "J_clip": 0.4792208591705399,
+      "d": 0.009291629142945457,
+      "components": {
+        "coverage_reward": {
+          "raw": 0.6039600000000002,
+          "clip": 0.6169600000000004,
+          "clip_minus_raw": 0.013000000000000234
+        },
+        "quality_reward": {
+          "raw": 0.1722722216448821,
+          "clip": 0.1693475263751622,
+          "clip_minus_raw": -0.0029246952697198902
+        },
+        "energy_penalty": {
+          "raw": 0.004524436465870578,
+          "clip": 0.0034553987420082137,
+          "clip_minus_raw": -0.0010690377238623643
+        },
+        "total_reward": {
+          "raw": 0.46992923002759446,
+          "clip": 0.4792208591705399,
+          "clip_minus_raw": 0.009291629142945457
+        }
+      },
+      "first_divergence_step": {
+        "pre_map_action": {
+          "trace_index_zero_based": 1,
+          "index_kind": "action_t",
+          "max_abs_difference": 11.580565929412842,
+          "exact_identity": false
+        },
+        "executed_action": {
+          "trace_index_zero_based": 0,
+          "index_kind": "action_t",
+          "max_abs_difference": 7.962327480316162,
+          "exact_identity": false
+        },
+        "native_position": {
+          "trace_index_zero_based": 1,
+          "index_kind": "position_t",
+          "max_abs_difference": 1000.0,
+          "exact_identity": false
+        },
+        "encoded_state": {
+          "trace_index_zero_based": 1,
+          "index_kind": "state_t",
+          "max_abs_difference": 1.0,
+          "exact_identity": false
+        }
+      },
+      "changed_action_steps": {
+        "numerator": 500,
+        "denominator": 500,
+        "rate": 1.0
+      },
+      "same_start_mapping_changed_steps": {
+        "numerator": 1,
+        "denominator": 500,
+        "rate": 0.002
+      },
+      "same_start_mapping_changed_same_exact_successor_steps": {
+        "numerator": 0,
+        "denominator": 500,
+        "rate": 0.0
+      }
+    }
+  ],
+  "J_raw_mean": 0.4182880170338201,
+  "J_clip_mean": 0.45809722500256345,
+  "d_mean": 0.0398092079687433,
+  "inactive_mapping_all_worlds": false,
+  "exact_same_position_trajectory": false,
+  "exact_same_encoded_state_trajectory": false
+}
