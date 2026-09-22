@@ -549,3 +549,71 @@ A 4-hour per-fit wall plan is an engineering observation estimate, not a scienti
 permission to terminate a healthy fit. No result launch until self-check and independent review
 have resolved consequential issues. Any real technical conflict stops only its dependent action;
 keep all failed attempts and costs. No extras are implicitly authorized by a shortfall or failure.
+
+## 2026-09-22 — B01 implementation accepted for the fixed comparison
+
+The DM read and accepts the combined five-file implementation. The bounded Sol/high Implementer
+owned the two candidate bases, explicit actor integration and its tests; the DM owned the
+execution wrapper, inherited native-runner bindings, admitted entry and complete-flow tests.
+No shared learner, environment, old runner or existing experiment was edited. E/P installation
+replaces the base and actor entry methods in place, preserving the existing FiLM/GRU/action
+modules and state-dict paths; reconstruction must install the recorded arm before loading.
+The ordinary actor's forward path is unchanged. The standing empty single-group actor optimizer
+is rebuilt for all three arms with its existing options and exact active parameter ownership.
+
+Focused verification passed: **11 encoder checks**, then **8 runner checks plus both existing
+storage-to-recurrent-entry-mask regressions**. The three real short-flow fixtures each performed
+80 training and 40 evaluation team transitions, two rollout updates, real five-group optimizer
+work and checkpoint restoration, with explicit mocked admission. Total fixture exposure is
+**240 train + 120 eval transitions / 6 update stages**, not three scientific fits. They verify
+the raw samples, old log-probabilities and held skills actually saved in storage; independent
+evaluator updates remain zero. Real missing admission refuses before output creation. Shape,
+rank/padding, skill-boundary replay, module retention, optimizer ownership and O numerical
+identity checks passed. No fixture service score selected an architecture or parameter.
+
+The encoder check invocation used 3.86 s wall / 323,368 KiB peak RSS; the combined runner and
+mask invocation used 18.37 s wall / 897,372 KiB peak RSS (whole pytest processes, local CPU).
+The latter reported only 14 existing matplotlib/pyparsing deprecation warnings. AST/compile
+and staged whitespace checks passed. These measurements do not estimate full-fit cost.
+
+Independent registered Reviewer `/root/gcea_b01_review` inspected the complete five-file change,
+its L0, collector/storage/PPO/reset path, checkpoint/evaluator sync and admission boundary.
+It reported **no material finding and no requested repair**, including the final removal of an
+identical duplicate binding key. It independently checked staged whitespace and read the supplied
+test evidence without repeating the training fixtures. I accept the implementation for the
+specified CPU experiment. Full-horizon stability, actual resource cost and any scientific
+advantage remain unmeasured; the review grants none of those claims.
+
+The updated shared topic 3 at main `5da954a9d` adds frozen-geometry capacity/service identities
+from the independent load direction. All three B01 arms hold N, capacity, reward and execution
+map fixed; this does not alter this package comparison or create a capacity/semantic attribution.
+The existing fully read Pro advice still covers the selected question and comparator.
+
+Proceed with the declared O -> P -> E sequence, each at its own fresh native admission on
+wsl_4070, CPU FP32 with four torch/BLAS threads. This source and the fixed inputs are published
+before the first launch. At this acceptance entry, no new scientific fit has started.
+
+## 2026-09-22 — B01 O accepted and learning
+
+The first declared O fit passed native admission and is running. Its recoverable operation,
+exact published source, invocation, remote output, supervisor and runner identities are in the
+runner-written [launch manifest](../../../../runs/goal_conditioned_entity_aggregation/b01_o_s922611/launch-manifest.json),
+with [fresh actual-node preflight](../../../../runs/goal_conditioned_entity_aggregation/b01_o_s922611/admission-preflight.json)
+and [accepted launch status](../../../../runs/goal_conditioned_entity_aggregation/b01_o_s922611/launch-status.json).
+These three collected files were parsed and SHA-256 matched to their remote originals.
+Native status independently reported accepted, both recorded processes running and consistent
+records; the outer task supervisor's successful exit only completed launch, not the experiment.
+
+The initial runtime observation had 16,000 collected/stored training transitions, one completed
+rollout-update stage, zero evaluation transitions and no recorded failure. The running summary's
+`incomplete` label is its unfinished state, not a failure claim. Two models exist, exactly one
+training start; O has 92,672 base and 492,294 actor parameters. The actual runner environment
+reports four OMP, OpenBLAS and MKL threads. These are setup/progress facts, not final outputs
+or service comparisons. Cost now stands at **one started scientific fit of the three declared**;
+P and E have not started, and no score has selected or excluded either arm.
+
+The assigning session observes this same native handle with `tools/hmasd_wait.py`; a bounded
+checkpoint rearms observation without restarting the worker. On terminal evidence, collect
+and read the complete O outputs, then continue the fixed P -> E sequence after fresh admission.
+No browser or other DM/task participates in observation. Keep the source checkout and remote
+outputs intact until complete collection and verification.
