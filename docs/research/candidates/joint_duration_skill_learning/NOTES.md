@@ -638,3 +638,32 @@ evidence, 0 new fits. Remote Git needs its configured login network shell; the s
 nonlogin Git fetch/checkout was reconciled and cancelled before preparing the isolated sparse
 checkout. No scientific process was started, stopped or retried, and no local compute fallback
 was used. Full duration-adapter integration and its independent review remain pending.
+
+### B01 implementation accepted for execution — 2026-09-21
+
+Implementation `c40441c1cc3a4336b03e21509de06e9ebdbe4fca` passed all **23** direction tests
+on preferred `wsl_4070` in 29.50 s, with no skips. This includes actual S1 collection,
+high/low/discriminator updates, fresh deterministic evaluation and checkpoint writing for
+fixed, factored and AR on both CPU and CUDA; these are short correctness fixtures, not
+performance evidence or result fits. The earlier 9 shared recurrent tests also passed.
+All warnings were 14 existing Matplotlib/Pyparsing deprecations.
+
+The independent Reviewer inspected the full path and the repaired failure-exposure logging:
+consumed evaluation interactions and completed training episodes survive later failures;
+nonfinite displacement cannot poison the failure summary. Their final diagnostic finding was
+that fixed duration had been counted as a nondegenerate duration choice. Code
+`cc8d87eef5fb9994f386713453923da93dc64b18` now counts only actual eligible variable factors
+with support greater than one. The two changed assertions each passed remotely (fixed
+evaluation: 2.95 s; AR collector/update: 4.52 s). The Reviewer found no remaining material
+issue, and the DM accepts this terminal-aligned implementation for the declared B01.
+Checkpoint resume, nonterminal production cutoffs and scientific benefit are not established.
+
+Execution binding: preferred remote `wsl_4070`, isolated source checkout
+`/home/wu/hmasd-worktrees/joint-duration-learning`, configured Python, device **CUDA**,
+Torch/OMP/MKL/OpenBLAS threads **4**. The native sequence batch size **32** is explicit and
+unchanged; 15 epochs and coordinator batch 1280 remain fixed. No device fallback, optimizer
+retuning or added fit is selected. During correctness work the remote node reported
+6,448 MiB free GPU memory and 9,320,000 kB available host memory; these are observations,
+not reservations. Native admission rechecks actual-node memory and published pause/lead
+before the first fresh `fixed` fit (seed 2026092201). Keep the remote source unchanged while
+an admitted process uses it. Started result fits remain **0** at this prelaunch entry.
