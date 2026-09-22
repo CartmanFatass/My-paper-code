@@ -1060,3 +1060,21 @@ Next is SET seed 915413, the last already declared cell, at the same immutable s
 current final ordering and completes the original balanced design. No extra fit, tuning,
 early checkpoint selection or new Pro question is added; existing advice covers this step.
 Current cost is 5 started/5 completed fits, 0 technical failures, one cell unlaunched.
+
+
+### 2026-09-22 sixth accepted operation — SET seed 915413
+
+After the third H6 was fully collected, verified, read and published, SET seed 915413 was
+admitted on `wsl_4070` at the same immutable source and unchanged 360k/four-panel contract.
+Fresh actual-node admission passed with 15,412,289,536 available bytes against its 4 GiB
+floor. The [native manifest](../../../../runs/agent_count_generalization/s1_count_b01_set_s915413/launch-manifest.json)
+and [admission preflight](../../../../runs/agent_count_generalization/s1_count_b01_set_s915413/admission-preflight.json)
+bind the accepted command, source, operation and process identities. Native status observes
+the original runner and supervisor running, consistent records and no exit witness. Both
+local binding files match their remote SHA-256 values.
+
+All 6 planned fits have now started: 5 complete and read, 1 running, 0 technical failures,
+0 unlaunched cells. The preceding H6 terminal event has been consumed. Register the repository
+observer for this exact SET handle with 1500-second checkpoints and terminal/error wakeups.
+After full collection and reading, interpret the complete three-per-arm comparison using the
+fixed final endpoint, original decision scope and existing Pro advice; no extra fit is queued.
