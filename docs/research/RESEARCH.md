@@ -98,7 +98,10 @@ FSD B05 的 CF_S 修复说明输入构造影响有限学习：三个开发块的
 ### 5. 技能和异步性是组织决策的方式，其收益需要证据
 
 技能的内部反馈、持续时间、终止与重选语义需要明确。合适条件下，持续 \(\tau\) 步的 option 用片段累计
-reward 和 \(\gamma^\tau\) 接续价值。当前 FSD/D2 的低层逐步反馈并保留循环记忆，高层重选相同标签仍可新开
+reward 和 \(\gamma^\tau\) 接续价值。异步团队的共同事件链中，实际事件间隔可能短于某成员选定的驻留时间；
+片段累计与折扣应按真实经过步数计算，队友先重选不表示早期时长选择的后果已结束。联合周期的跨事件回报
+和采样前承诺条件价值已通过实现检查，仍未建立原生性能增益；详见[设计与检查边界](candidates/joint_duration_skill_learning/NOTES.md#b01-implementation-accepted-for-execution--2026-09-21)。
+当前 FSD/D2 的低层逐步反馈并保留循环记忆，高层重选相同标签仍可新开
 credit segment；执行周期、标签变化、训练 chunk length、normalizer 更新和有效优化量不能混同。
 held skills/age 未进入某些 value 输入提供了待检验问题，没有直接证明现有 critic 错误。
 
@@ -155,7 +158,7 @@ B/UCOPE 的局部预测、一步优势或真实后缀信用没有自动转成稳
 
 | Direction | Question | State | Lead runtime | Standing and next step |
 | --- | --- | --- | --- | --- |
-| `joint_duration_skill_learning` | 在完整高低层共同学习中，新增时长选择及普通联合时长参数化能否改善有限资源下的原生服务？ | exploring | Codex DM (independent session) | 直接 DM task `01a0c348-428c-7f01-bd8b-121d69543032`，host `local`；checkout `/home/fires/.codex/worktrees/joint-duration-learning/hmasd-wsl`，branch `codex/joint-duration-learning-20260921`。已完整核验 Pro 答复，采用共同事件团队回报及采样前承诺条件价值。B01 已声明固定／分解／AR 三臂各 360k transitions，共 3 fits，尚未接受训练。方向模块实现与独立审查中；共同低层 RNN entry-mask 修复已在远端通过 9 项检查，非 duration 性能证据。[设计、答复与 scope](candidates/joint_duration_skill_learning/NOTES.md#dm-reading-and-decision--2026-09-21)。 |
+| `joint_duration_skill_learning` | 在完整高低层共同学习中，新增时长选择及普通联合时长参数化能否改善有限资源下的原生服务？ | exploring | Codex DM (independent session) | 直接 DM task `01a0c348-428c-7f01-bd8b-121d69543032`，host `local`；checkout `/home/fires/.codex/worktrees/joint-duration-learning/hmasd-wsl`，branch `codex/joint-duration-learning-20260921`。B01 固定／分解／AR 三臂各 360k transitions，共 3 fits；实现、远端 CPU/CUDA 检查及独立审阅完成。首个固定周期 fit 已在远端 `wsl_4070` CUDA 正式接受，1/3 已启动；其余按计划顺序执行。尚无性能结论；共同事件间隔与成员驻留时间的区别已回写共享背景。[设计、检查与原生运行记录](candidates/joint_duration_skill_learning/NOTES.md#b01-fixed-fit-accepted--2026-09-21)。 |
 | `local_observation_encoding` | 同一合法局部观测下，普通稠密槽位/关系编码能否改善完整 HMASD 的有限学习？ | exploring | Codex DM (independent session) | 直接 DM task `01a0c6ef-7c4b-7f02-b96d-ab115d467af8`，host `local`；checkout `/home/fires/.codex/worktrees/d683/hmasd-wsl`，branch `codex/local-observation-encoding`。S1 固定 k/N，原 encoder 对普通稠密编码；保持共同学习和原目标，不叠加预测、稀疏或时长模块。B01 已声明两臂各 360,000 团队步；ORIGINAL 已在 `wsl_4070` 接受运行，DENSE 按同一预写方案顺序启动。精确输入 `efe7d61e8`；自动观察已绑定原句柄，尚无完整比较结论。[问题与边界](candidates/local_observation_encoding/NOTES.md)。 |
 | `agent_count_generalization` | 固定 k、回合内固定 roster 时，HMASD 对未见团队数量 N 的服务能力和泛化代价是什么？ | exploring | Codex DM (independent session) | 直接 DM：task `01a0c6ef-cdd4-7113-b2d9-20487e35171b`，host `local`；checkout `/home/fires/.codex/worktrees/7fef/hmasd-wsl`，branch `codex/agent-count-generalization`。S1 N=6→4/6/8；H6 对普通共享 SET，已声明 6 个探索 fits、每 fit 360k 团队步。Pro 答复已核验采纳，奖励按实际测试 N 换算；两臂共同修复 RNN entry mask。输入 `5a250d97e` 已通过独立审查和本地/远端针对性检查。首项 H6 已在 `wsl_4070` 开始真实学习，同句柄自动观察；其余 5 项按预写方案顺序运行，尚无完整比较结论。[设计、答复与运行证据](https://github.com/CartmanFatass/My-paper-code/blob/93d2cb74f1fc4e17a9ad965976ebd0ef0012a8d8/docs/research/candidates/agent_count_generalization/NOTES.md)。 |
 | `uav_service_auxiliary` | 未来事实端到端服务监督能否帮助 HMASD 学会接入、回传与能源约束下的协作？ | exploring | Codex DM (independent session) | 直接 DM task `01a0c6f0-31e1-7510-bee7-4f0f8b62d821`，host `local`；checkout `/home/fires/.codex/worktrees/a335/hmasd-wsl`，branch `codex/uav-service-auxiliary`。S7-S2 v3/reward v2/arm C，固定 k=10/N=8；真实未来 W10 QoS 头 detach 对 joint。B01 已声明 2 fits，每臂 180k transitions；独立审查及远端 CPU/CUDA 检查完成，detach 已由 `wsl_4070` 原生准入并运行，joint 尚未启动，将使用同一公共事实文件。尚无科学结果；G33 冻结。[设计、检查和接受句柄](candidates/uav_service_auxiliary/NOTES.md#b01-detach-accepted--2026-09-21-2001-pdt)。 |
