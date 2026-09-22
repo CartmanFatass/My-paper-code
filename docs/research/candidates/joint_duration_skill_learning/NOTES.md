@@ -708,3 +708,74 @@ The full output, exit witness and all scientific measurements must still be coll
 read at completion. The portable distinction between a member's selected duration and the
 actual common event interval is being incorporated into the shared Research background;
 it is correctness/design knowledge, not a performance claim.
+
+### B01 fixed technical failure and bounded numerical diagnosis — 2026-09-21
+
+The accepted fixed attempt exited 1 at 2026-09-22 04:02:08 UTC. Its original operation has a
+valid exit witness and consistent identities. All ten output files were collected and their
+SHA-256 values matched the executing node, including the 22,814,948-byte initial checkpoint.
+The runner recorded 24,000 collected/stored training transitions, 48 training episodes,
+16,000 initialization-evaluation transitions, and two completed updates. Optimizer calls:
+coordinator 30; low actor/critic 4,500 each; team/individual discriminator 30/120.
+Scientific-process wall time was 238.612 s; user/system CPU 217.170/22.299 s; process peak RSS
+1,906,964 KiB. This remains one started fit and a **technical failure**, not a scientific
+negative. Only initialization was evaluated; no declared learned-policy endpoint exists.
+
+The third pre-update audit rejected max absolute log-probability difference **2.86698341e-5**
+against its 2e-5 threshold, before any third optimizer update. Prior audit maxima were
+1.40667e-5 and 1.19209e-5. The independent Reviewer found no static sampling/replay semantic
+mismatch: fixed uses no duration factors or held-member choices; ValueNorm affects values,
+not audited logits. A concrete numerical hypothesis is regrouping: collection uses 16 lanes,
+whereas audit evaluates 800 events together, with float32 unnormalized native embeddings.
+This is not yet proof of harmless rounding. Failing events and weights were not persisted;
+the initial checkpoint cannot establish the exact third-rollout cause retrospectively.
+
+The failure weakens confidence in the original audit's production calibration and leaves the
+scientific comparison unresolved. Factored/AR are not started into the same unresolved path.
+Consume the completed waiter event without resuming that failed operation. No scientific
+retry is selected at this entry.
+
+L0 continuation: a zero-update numerical fixture on preferred WSL, using frozen native-sized
+coordinator weights and native reset states. Compare identical recorded inputs/tokens in
+their original 16-lane groups and merged 800-event batches, including grad-enabled replay;
+measure actual backend settings, first intermediate divergence and probability consequences.
+Do not fit a policy, alter reward, consult endpoint scores, overwrite old log-probabilities,
+change policy train/eval mode, or relax a threshold merely to exceed the observed failure.
+An evidence-supported repair may distinguish collection-group identity from finite-precision
+regrouping, preserve failure inputs for future diagnosis, and receive independent numerical
+review. Any later replacement fit requires a separate prospective DM decision and retains
+this failed attempt in total cost, under constitution section 3.
+
+### Frozen replay result and numerical repair scope — 2026-09-21
+
+Committed zero-update fixture `e027de225` passed 3 remote CUDA cases in 24.91 s: each arm
+used 50 native reset batches of 16 (800 events), with unchanged weights, zero optimizer
+calls and zero physical transitions. Original 16-row replay error was **0** for all arms.
+Regrouped 800-row max absolute log-probability error was **2.074241638e-5** for fixed and
+**1.442432404e-5** for factored/AR; relative probability errors were 2.074263102e-5 and
+1.442422035e-5. Thus a frozen fixed policy can exceed the original 2e-5 check solely when
+regrouped. Grad-enabled and no-grad merged replay were identical in this fixture. The
+first measured difference was in float32 entity embedding (max .000732421875), then encoder
+(fixed .000117778778) and team logits (9.11951e-6). Independent float64 16-vs-32 traversal
+gave identical entity embeddings, encoder differences at most 8.18e-14 and team logits at
+most 2.39e-15. Actual runtime: torch 2.7.0+cu118, float32 matmul precision highest, matmul
+TF32 false, cuDNN TF32 true, flash/memory-efficient/math attention enabled.
+
+This establishes a numerical false-positive mechanism for the original audit. It supports,
+but does not prove, the diagnosis of the unrecoverable third-rollout event. The scientific
+question and prior Pro advice remain applicable; routine numerical repair does not require
+a new scientific consultation or turn this run into a performance observation.
+
+Repair L0: retain the **2e-5** absolute factor-log-probability check when replaying the exact
+collection grouping, reconstructed from stored rollout start_step and environment order.
+Separately measure merged training-batch drift and refuse nonfinite factors or maximum
+relative factor-probability change above **0.001** before the first update. This explicit
+probability-scale diagnostic bound is 0.5% of the fixed PPO clip radius .2, not a universal
+float32 bound or a claim of identical gradients. Record both errors and their thresholds.
+Keep old probabilities, sampling law, actual optimizer batch 1280, epochs, precision,
+train/eval modes, seeds, objective and exposure unchanged. Never replace stored old scores
+with freshly computed ones. Persist event records, frozen coordinator weights, configuration
+and numerical/backend facts when either check fails, for reproducible diagnosis rather than
+checkpoint resume. Tests must reject wrong tokens/old scores/nonfinite values and an oversized
+regrouping perturbation, while accepting the observed pure regrouping case. Keep all native
+CPU/CUDA integration checks. Independent numerical review precedes any new result attempt.

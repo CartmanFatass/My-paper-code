@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "/home/wu/hmasd-worktrees/joint-duration-learning/experiments/candidates/joint_duration_skill_learning/runner.py", line 358, in execute
+    states, observations, dones, row = train_rollout(
+  File "/home/wu/hmasd-worktrees/joint-duration-learning/experiments/candidates/joint_duration_skill_learning/runner.py", line 267, in train_rollout
+    losses = agent.update(last_values=np.zeros((spec.lanes, spec.n_agents), dtype=np.float32),
+  File "/home/wu/hmasd-worktrees/joint-duration-learning/experiments/candidates/joint_duration_skill_learning/learning.py", line 1022, in update
+    return super().update(
+  File "/home/wu/hmasd-worktrees/joint-duration-learning/hmasd/agent.py", line 7192, in update
+    mean_coord_state_val, mean_coord_agent_val, mean_high_level_reward, cd_loss_val = self.update_coordinator(
+  File "/home/wu/hmasd-worktrees/joint-duration-learning/experiments/candidates/joint_duration_skill_learning/learning.py", line 897, in update_coordinator
+    raise RuntimeError(f"duration teacher-forced replay mismatch {replay_max:.9g}")
+RuntimeError: duration teacher-forced replay mismatch 2.86698341e-05
