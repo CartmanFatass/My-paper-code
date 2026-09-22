@@ -617,3 +617,91 @@ checkpoint rearms observation without restarting the worker. On terminal evidenc
 and read the complete O outputs, then continue the fixed P -> E sequence after fresh admission.
 No browser or other DM/task participates in observation. Keep the source checkout and remote
 outputs intact until complete collection and verification.
+
+## 2026-09-22 — B01 O complete and read; fixed P continuation
+
+**Technical acceptance.** The existing O operation exited 0 with a valid native exit witness
+and consistent recorded identities. I collected all ten remote files and verified their sizes
+and SHA-256 values locally, then read the complete summary, all 45 training rows, final panel,
+action statistics, timings and logs. The source-matched `fit_endpoint` validator passed.
+The JSONL rows exactly equal the summary rows: 360,000 collected/stored training transitions,
+720 complete episodes and 45 update stages; exactly one final panel, 16,000 evaluation steps
+and 32 complete 500-step worlds. No failure or stderr text was recorded. There was one training
+start and no checkpoint load during training/evaluation.
+
+All five groups updated and moved from initialization. Optimizer calls were coordinator 675,
+actor 101,250, critic 101,250, team discriminator 675 and individual discriminator 2,700;
+their final relative displacements were respectively .053376, 1.141069, .446470, .074146 and
+.156773. Every evaluator optimizer count is zero. The final checkpoint deserializes, with
+678 finite tensors including optimizer state. It is 66,033,471 bytes, SHA-256
+`ebb2241ed1b69705f12ee0decb4cdc2562af65c0acb9baae82cdf7ddafad0080`.
+This ignored binary is retained at the manifest's remote output location and at
+`/home/fires/.codex/worktrees/query-aggregation-sept22/hmasd-wsl/runs/goal_conditioned_entity_aggregation/b01_o_s922611/final_checkpoint.pt`;
+neither copy is removed. The text evidence is published, including the empty stderr log.
+
+**Observed endpoint.** O's final 32-world mean native J is **0.5091369609922052**; across these
+worlds the sample SD is .029157817832501286 and range .44805472063153445 to .5623481460634012.
+These are fixed-policy world statistics, not independent-training uncertainty. Mean coverage
+is .6716787500000003 (33.5839375 connected users per step), quality component
+.17631486439216798 and altitude penalty .013932623325445148. The last penalty is not battery
+energy. Full per-world results and all native components are in the
+[summary](../../../../runs/goal_conditioned_entity_aggregation/b01_o_s922611/summary.json).
+The [stochastic training returns](../../../../runs/goal_conditioned_entity_aggregation/b01_o_s922611/training.jsonl)
+were nonmonotone: reported J rose from .246890 at rollout 1 to .423289 at rollout 45 after
+an early low of .102911 at rollout 8. This is not a deterministic deployment learning curve
+or a counterfactual claim that training improved the initial deployed policy.
+
+Raw coordinates outside [-1,1] were 59.006867% during training and 52.281250% in deterministic
+evaluation; executed saturation counts equal those excursions. Raw maxima were 16.467739 and
+9.656590. The position-boundary observer recorded differences from the requested displacement
+on 17.309213% / 23.179167% of coordinates. Thus clipping/boundary effects are materially present
+in this actual O run, without identifying their effect against an unrun execution law. The
+stored/scored raw action contract remains the one tested before launch.
+
+**Measured cost and limits.** One complete 360k fit plus 16k evaluation. Fit-body perf-counter
+wall through checkpoint is 5,395.224306 s (89.9204 min): collection 995.343046 s, update
+4,360.624215 s and final evaluation 38.424267 s, with setup/serialization accounting for the
+remainder. Process CPU is 22,330.008514 s; four torch/BLAS threads are the declared topology.
+Peak process RSS sampled before serialization is 2,828,779,520 bytes (2.63451 GiB). Actor calls
+used 26.278101 s in acting and 390.943923 s in PPO reevaluation; evaluator acting .889210 s.
+The native manifest creation-to-exit epoch timestamps span **5,653.580508 s (94.2263 min)**.
+This wall-clock span and the perf-counter body measurement have different scopes/clocks; their
+258.36 s difference is not assigned to a measured import/build phase or method overhead.
+No full-invocation monotonic duration or user/system CPU split was recorded. Preserve both
+measurements and that resource-claim limit rather than reporting the shorter scope as all cost.
+Preparation, checks and collection/publication are outside the fit measurement.
+
+**Belief update and next observation.** This establishes a complete, recoverable O reference
+under the selected bounded execution contract. E/P benefit, position/semantic mechanism and
+cross-seed ranking remain untouched. The old dense adverse result is unchanged; this new O
+does not reopen it or compare fairly with a differently seeded historical run. The first
+investment decision remains the fully read Pro's fixed three-arm package comparison. P and E
+were selected before scores, and this baseline score neither adds nor removes an arm, seed,
+panel or optimization setting. Continue P, then E, at the same published scientific source,
+each after fresh native admission. No new Pro round or confirmation is selected.
+
+Current main `bf86fd94c` leaves our direction, owner pause and comparison unchanged. Its remote
+PATH repair exposes the configured interpreter's tools; it changes neither this CPU FP32
+algorithm nor its four-thread contract. Shared topic 3 and finite-learning scope still apply;
+one baseline alone adds no useful new cross-direction scientific conclusion to that background.
+
+## 2026-09-22 — B01 P accepted
+
+P passed fresh native admission against current published control and the unchanged scientific
+source used by O. The [native manifest](../../../../runs/goal_conditioned_entity_aggregation/b01_p_s922611/launch-manifest.json)
+owns the exact command/source/output and process identities; the
+[memory preflight](../../../../runs/goal_conditioned_entity_aggregation/b01_p_s922611/admission-preflight.json)
+passed, and [launch status](../../../../runs/goal_conditioned_entity_aggregation/b01_p_s922611/launch-status.json)
+records accepted. These three collected files match their remote SHA-256 values. Independent
+native status reported the same admitted child running with consistent records. No O process
+was restarted and no existing output was repurposed.
+
+The first P snapshot contains 8,000 collected/stored training transitions and 16 completed
+episodes, one training start and two model constructions, zero completed updates/evaluation
+at that snapshot, and no failure. This is training exposure while the first update is pending,
+not evidence of completed P parameter learning. The installed base is ConditionalDeepSetsEncoder,
+96,960 encoder and 496,582 actor parameters. O is fully read; P is active and E remains unstarted.
+Actual batch cost is now **two started fits of three declared**, one complete and one in progress.
+The same-session deterministic observer follows P's existing native handle. Continue to read
+its complete terminal outputs and then execute E under the fixed contract, without score-based
+selection, a retry, another panel or a new seed.

@@ -1,0 +1,96 @@
+{
+  "acceptance": "accepted",
+  "accepted_at": "2026-09-22T18:10:25.036040Z",
+  "bootstrap_command": [
+    "/home/wu/.venvs/hmasd/bin/python",
+    "/home/wu/hmasd-worktrees/gcea-b01-9316b175f/scripts/hmasd_admission.py",
+    "_run-admitted",
+    "--runner",
+    "/home/wu/hmasd-worktrees/gcea-b01-9316b175f/scripts/run_gcea_b01.py",
+    "--output",
+    "/home/wu/hmasd-worktrees/gcea-b01-9316b175f/runs/goal_conditioned_entity_aggregation/b01_p_s922611",
+    "--",
+    "--arm",
+    "P",
+    "--seed",
+    "922611",
+    "--launch-sha",
+    "9316b175fdbcdcff826ddffe979f342547b74343",
+    "--output-root",
+    "runs/goal_conditioned_entity_aggregation/b01_p_s922611"
+  ],
+  "claim_key": "7d8ffdb2df456b9f115f6565998165e12681fe3785c222e5f093c8fa185ad4b1",
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/7d8ffdb2df456b9f115f6565998165e12681fe3785c222e5f093c8fa185ad4b1.json",
+  "command": [
+    "/home/wu/.venvs/hmasd/bin/python",
+    "/home/wu/hmasd-worktrees/gcea-b01-9316b175f/scripts/run_gcea_b01.py",
+    "--arm",
+    "P",
+    "--seed",
+    "922611",
+    "--launch-sha",
+    "9316b175fdbcdcff826ddffe979f342547b74343",
+    "--output-root",
+    "runs/goal_conditioned_entity_aggregation/b01_p_s922611"
+  ],
+  "command_sha256": "0eb27db2175b3ddb1e3125c9313dcf33885d2cba7eb09a385a59377277a1cdb5",
+  "control_observation": {
+    "observed_at": "2026-09-22T18:10:23.629872Z",
+    "ref": "refs/heads/main",
+    "remote": "origin",
+    "sha": "bf86fd94c7d159bf8e97ea8bd5f1213744e6a8d6"
+  },
+  "control_root": "/home/wu/projects/HMASD",
+  "created_at": "2026-09-22T18:10:23.642908Z",
+  "cwd": "/home/wu/hmasd-worktrees/gcea-b01-9316b175f",
+  "direction": "goal_conditioned_entity_aggregation",
+  "host_identity": "LAPTOP-U9TDKC8A",
+  "identity_command": [
+    "/home/wu/.local/share/uv/python/cpython-3.10.21-linux-x86_64-gnu/bin/python3.10",
+    "scripts/run_gcea_b01.py",
+    "--arm",
+    "P",
+    "--seed",
+    "922611",
+    "--launch-sha",
+    "9316b175fdbcdcff826ddffe979f342547b74343"
+  ],
+  "lead": "Codex DM (independent session)",
+  "manifest_ref": "/home/wu/hmasd-worktrees/gcea-b01-9316b175f/runs/goal_conditioned_entity_aggregation/b01_p_s922611/launch-manifest.json",
+  "node": "wsl_4070",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/7d8ffdb2df456b9f115f6565998165e12681fe3785c222e5f093c8fa185ad4b1.json",
+  "output_root": "/home/wu/hmasd-worktrees/gcea-b01-9316b175f/runs/goal_conditioned_entity_aggregation/b01_p_s922611",
+  "preflight": "/home/wu/hmasd-worktrees/gcea-b01-9316b175f/runs/goal_conditioned_entity_aggregation/b01_p_s922611/admission-preflight.json",
+  "process": {
+    "detached": true,
+    "identity": {
+      "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+      "kind": "linux_pid_start_ticks",
+      "pid": 229877,
+      "session_id": 229877,
+      "start_ticks": 46302001
+    },
+    "native_handle_kind": "posix_session",
+    "pid": 229877,
+    "process_group_id": 229877
+  },
+  "process_exit": "/home/wu/hmasd-worktrees/gcea-b01-9316b175f/runs/goal_conditioned_entity_aggregation/b01_p_s922611/process-exit.json",
+  "published_remote": "origin",
+  "runner_process": {
+    "identity": {
+      "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+      "kind": "linux_pid_start_ticks",
+      "pid": 229878,
+      "session_id": 229877,
+      "start_ticks": 46302004
+    },
+    "pid": 229878,
+    "process_group_id": 229877,
+    "supervisor_pid": 229877
+  },
+  "schema_version": 1,
+  "sha": "9316b175fdbcdcff826ddffe979f342547b74343",
+  "source_root": "/home/wu/hmasd-worktrees/gcea-b01-9316b175f",
+  "stderr": "/home/wu/hmasd-worktrees/gcea-b01-9316b175f/runs/goal_conditioned_entity_aggregation/b01_p_s922611/stderr.log",
+  "stdout": "/home/wu/hmasd-worktrees/gcea-b01-9316b175f/runs/goal_conditioned_entity_aggregation/b01_p_s922611/stdout.log"
+}
