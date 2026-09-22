@@ -59,3 +59,22 @@ arms, seeds, horizon, evaluation and fits with a reason before execution. Initia
 starts **0 fits**, accepts no experiment/Send and supplies no performance claim. Continue
 independently to an informative native result and a supported keep/revise/stop decision;
 publish reusable conclusions in the existing shared background.
+
+## 2026-09-21 — Direct DM initialization and bounded interface work
+
+Task `01a0c6f0-31e1-7510-bee7-4f0f8b62d821`, local host, owns this direction in
+`/home/fires/.codex/worktrees/a335/hmasd-wsl`, branch `codex/uav-service-auxiliary`.
+Published main `69d7d2a3d86805155ea991cf443be259602bc17e` was refreshed before registration.
+No accepted operations or fits were inherited. The full programme Answer/Decision has been
+read and reused for this unchanged factual-head comparison: direct S7 is warranted by its
+actual service constraints, not conditional on S1 success. Background sections 1–3 and 6–7
+therefore change the design concretely: choose delivered QoS rather than local SINR; retain
+native J and risk alongside prediction; train both heads and evaluate on common factual
+fragments. B/UCOPE forbid interpreting forecast improvement as control gain; C/VSP make
+ordinary consequences a serious reference without introducing a planner into this question.
+
+The configured remote `wsl_4070` responded as `LAPTOP-U9TDKC8A`; initial inspection showed
+14 GiB available RAM, 7948 MiB free GPU and 0% GPU utilization. This is suitability evidence,
+not result admission; a fresh actual-node check is required at launch. Local source reading
+and correctness tests do not consume scientific fits. Bounded read-only Scout maps S7 data
+and update interfaces while the DM binds the experiment. No inter-DM messages are sent.
