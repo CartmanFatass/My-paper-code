@@ -19,6 +19,10 @@ as `NOTES.md` entries.
    the relevant predecessor: what has been learned, which reasons for hope were weakened,
    what remains untested and what next observation would matter. Do not rank by the latest
    sign or count reviewed experiments as accumulated mechanism understanding.
+   In the existing review, check whether relevant shared knowledge actually shaped a comparator,
+   prediction or investment choice in the direction's NOTES, and whether reusable changes reached
+   RESEARCH. Judge those consequences, not citation counts; absent evidence is unverified use.
+   This check belongs to the owner-triggered review, not a new watch or adoption-report cycle.
 2. **Write the working section.** Add the current review to `RESEARCH.md`. It stays here
    while its question, answer or decision is unresolved; completed reviews are retired in step 5,
    not retained as an accumulating project log. Use:

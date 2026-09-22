@@ -18,6 +18,10 @@ this reference selects the reading for that consultation.
   used by the question. State any applicable newer owner instruction explicitly and accurately.
 - **Current methods:** named sections of `.agents/skills/*/SKILL.md` selected below. These are
   reasoning and execution methods under the constitution, not another source of permission.
+- **Shared research background:** the applicable RESEARCH topic at its actual published revision,
+  with its effect on the proposed comparison/prediction or the assumption being challenged.
+  Supply the relevant passage, not the entire index. Treat it as revisable scientific understanding,
+  not governance or a consensus the adviser must agree with; include contrary evidence.
 - **Standing and evidence:** relevant `RESEARCH.md` rows and pause, selected NOTES entries,
   claim note and actual run outputs. Include supporting outputs needed to assess the comparison
   and contrary results, not the entire direction history. A summary is not raw evidence.

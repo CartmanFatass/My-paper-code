@@ -9,10 +9,12 @@ edit, migration or restart never resumes research.
 Current state: `docs/research/RESEARCH.md` lists active, reserve and archived directions, the
 lead runtime and the owner pause, alongside shared research background and the current plan.
 Shared understanding is maintained by topic in RESEARCH; the former FOUNDATIONS entry redirects there.
+At material research decisions, DMs use current relevant background in their NOTES reasoning and
+publish evidence-supported shared-topic revisions with their results under constitution section 4.
 It replaces PORTFOLIO,
 APPROVED_SET, EXPERIMENT_TRACKING, dossiers and lifecycle paperwork.
 Keep it current rather than append-only: superseded project reviews and plans retire by date
-under `docs/research/archive/` per constitution section 4; direction NOTES remain unchanged.
+under `docs/research/archive/` per constitution section 4; direction NOTES keep their append-only role.
 
 Roles (constitution section 2). Codex: a session may coordinate as Root or directly own one
 direction as an independent DM. Root coordinates up to three direction DMs total, independent
@@ -72,7 +74,8 @@ return and does not assume Codex queue can wake it.
 Uncertain launch or Send acceptance means same-request reconciliation, never a blind repeat.
 
 Git: each DM publishes its direction records and its own RESEARCH standing/results/evidence
-entry to main, without Root approval, integration or notification, even while a Root is active.
+entry and directly affected shared-background revisions to main, without Root approval,
+integration or notification, even while a Root is active.
 Root owns assigned cross-direction coordination and shared-control maintenance, not routine
 DM result publication. Before editing and publishing, refresh main and inspect the relevant
 diff; update only the owned entry, preserve other rows and push normally. If main advances,

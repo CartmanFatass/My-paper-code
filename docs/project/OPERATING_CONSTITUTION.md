@@ -155,7 +155,8 @@ actually adopts it before responsibility is relinquished. No new handoff record 
 
 Shared writing is scoped by content. Each DM owns its direction records and its own RESEARCH
 standing, result summary and evidence links, and may publish that entry to main without Root
-integration or acknowledgment. An acting Root does not remove this authority. Before editing
+integration or acknowledgment. This also covers evidence-supported revisions to directly affected
+shared-background topics under section 4. An acting Root does not remove this authority. Before editing
 and publishing, refresh main and inspect changes affecting the intended entry. Update only the
 owned content in an owned checkout/index, preserve other directions, and push normally. If main
 advances again, refresh and reconcile the affected changes; no standing synchronization or
@@ -237,6 +238,20 @@ topic when evidence changes the judgment; retain assumptions, scope, contrary ev
 links rather than append experiment histories. This is research background, not another governance
 text or direction authorization. The former FOUNDATIONS entry redirects here; its prior full text
 is preserved in the dated research archive and topic/source notes remain reference material.
+
+Shared understanding is part of every DM's research responsibility. When starting a question or
+materially revising a hypothesis, comparator or next investment, consult the relevant background
+from current published main. In the existing prospective NOTES reasoning, link the topic/revision
+and explain its concrete effect on the comparison, prediction or investment choice, or why its
+scope does not apply. Reuse unchanged applicable reading within the same study; no per-fit reread
+or reading receipt. When interpreting results, assess the inherited judgment and publish useful
+shared changes at the normal result boundary, without waiting for Root or Portfolio. Revise only
+the affected topic with its scope and supporting/contrary evidence. A local result or a conjecture
+does not become general consensus by being published; leave one-off details in NOTES and keep
+unresolved disagreements conditional. No insight or shared edit is owed by every batch. These
+links between reasoning, decisions and evidence make use inspectable; they guarantee neither
+performance gain nor adoption by an already-running session. Section 5 still governs material
+scientific decisions; a background edit adds no consultation or approval round.
 
 ## 5. Pro is an adviser
 

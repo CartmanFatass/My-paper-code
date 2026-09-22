@@ -124,9 +124,13 @@ At a meaningful result boundary:
 1. Publish the direction evidence. Before editing the shared entry, fetch `origin/main`, check
    the owned checkout/index and inspect upstream changes to the affected content. Use a
    main-based publication checkout if needed to keep experimental branch history out of main.
-2. Update only the owned direction's standing, evidence links and next step. Preserve other
-   rows, owner controls and launch-bound lead values; link to the published evidence rather
-   than copying an old whole index. Check the diff and commit explicit paths.
+2. Update the owned direction's standing, evidence links and next step, and any directly affected
+   shared-background topic whose reusable judgment or scope changed in the scientific reading.
+   Constitution section 4 grants the DM this shared-topic publication; no Root or Portfolio wait.
+   Keep the topic concise and conditional, reconcile concurrent evidence, and retain contrary sources;
+   if there is no useful shared change, leave it alone. Preserve other direction rows, owner controls
+   and launch-bound lead values; link to evidence rather than copying an old whole index.
+   Check the diff and commit explicit paths.
 3. Refresh main before pushing and reconcile any new relevant changes locally. Push normally
    and verify publication. A last-moment advance may reject the push; fetch, merge the relevant
    update and retry without force-pushing. An ordinary Git conflict needs no Root acknowledgment

@@ -19,6 +19,9 @@ branch `codex/project-research-coordination-20260921`。
 
 这里维护项目共同采用的概念、已有证据及其适用边界，作为选题和解释结果的研究背景。
 按主题就地修订：新证据改变哪条认识，就修订该条并保留支持/相反证据入口；不逐次追加实验经过。
+各 DM 在新问题或核心假说/比较/投入选择实质改变时，从已发布 main 读取相关主题，在现有 NOTES 中说明
+它怎样影响对照、预测或下一步，或为什么不适用；读完结果后，在正常结果发布中直接回写可复用的认识变化。
+不以引用次数衡量使用，也不要求每批产生共识更新；具体职责与边界见 [constitution §4](../project/OPERATING_CONSTITUTION.md#4-three-record-types-and-one-repository-table)。
 尚未解决的假说保留其未决性质。背景提供科学依据，具体方向状态和执行安排见后面的索引与计划。
 原共识的完整论证与引用保存在 [2026-09-21 迁移前快照](archive/2026-09-21/FOUNDATIONS.md)，
 专题笔记和一手来源继续在[资料目录](../rl-marl-foundations-20260907/README.md)中按需查阅。

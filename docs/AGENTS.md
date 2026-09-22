@@ -3,6 +3,8 @@
 Operating authority is project/OPERATING_CONSTITUTION.md. research/RESEARCH.md is the
 current programme index, including shared research background, owner pause and lead runtime.
 Update shared understanding by topic there; the former FOUNDATIONS entry is navigation only.
+DMs connect relevant background to prospective NOTES decisions and publish reusable judgment
+changes with their normal result update, under constitution section 4; no per-batch shared edit is owed.
 For new direction work use
 research/candidates/<direction>/NOTES.md, CLAIM_<slug>.md when confirming, and repository-root
 runs/<direction>/<tag>/ for recoverable run artifacts. Do not create pilot cards, intakes,

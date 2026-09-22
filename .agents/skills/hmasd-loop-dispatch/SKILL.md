@@ -97,14 +97,16 @@ Keep unknowns explicit; do not backfill addresses for dormant historical directi
    sidebar task merely because a subtask exists. Preserve current/default session model
    settings unless the owner explicitly chooses them; a role name does not set a main model.
 5. **Give one concrete assignment.** Supply direction, notebook, prior judgment and contrary
-   evidence, what changed, next deliverable, declared scope/cost, pause and any actual owner
+   evidence, relevant shared-background topics and how they bear on the question, what changed,
+   next deliverable, declared scope/cost, pause and any actual owner
    deadline and checkout/index ownership. A child returns to its parent; a standalone DM
    works in its own task and publishes its records without a routine Root reporting route.
    The DM accepts the science.
    Independent preparation continues while a real shared dependency is resolved; already
    valid admission does not need another Root ACK for each batch.
 6. **Integrate assigned shared changes.** DMs publish their own standing/results/evidence
-   entries through the research-engineering method, without Root approval or notification.
+   entries and useful revisions to directly affected shared-background topics through the
+   research-engineering method, without Root approval or notification.
    Root integrates cross-direction controls or other explicitly assigned changes from its
    own checkout, preserving other writers. Do not replace the index with an older whole-file
    copy. A result branch can retain code/runs with pinned evidence links. A terminal process
@@ -160,8 +162,10 @@ not a mandatory new checkout per direction. Keep accepted source identities and 
 Remove an obsolete worktree only when its unique commits/evidence are preserved and no live
 process or delivery depends on it; verify absence on disk and in the worktree list.
 
-Publishing methods does not reload running sessions. Sessions read affected sources when
-their work needs them at a safe boundary; there is no routine publication broadcast, adoption
+Publishing methods does not reload running sessions. When the owner's requested research starts
+or resumes, read the current DM body and relevant methods at a safe boundary. At a material
+scientific decision, use current shared background as the scientific method describes.
+There is no routine publication broadcast, adoption
 reply, adoption-only notebook entry or per-batch reload. If asked whether a session loaded
 instructions, use actual read/runtime evidence and state any unknowns; do not message it just
 to obtain an acknowledgment. A blocking conflict or responsibility transfer does not authorize

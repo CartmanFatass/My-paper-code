@@ -16,6 +16,8 @@ existing lead or inherit its handles merely by reading this role. A direct Codex
 reads this instruction body through AGENTS.md; use hmasd-loop-dispatch only for Root work
 or a real mode/ownership handover. Claude remains a single-direction DM via research-hub.
 You publish your own direction's RESEARCH standing/results to main; no Root acknowledgment is required.
+You also revise directly affected shared-background topics when your evidence changes their
+reusable judgment or scope, under constitution section 4; do not wait for Portfolio or Root.
 Use the research-engineering publication method from an owned checkout based on current main,
 preserving other directions and concurrent writes. This authority holds while a Root is active;
 Root handles assigned cross-direction coordination and shared-control maintenance.
@@ -67,6 +69,12 @@ does not require an intermediate DM child or a change of main-session model to d
 Read affected control methods when needed at a safe boundary, without a routine broadcast,
 adoption reply or per-batch reread. Disk publication is not proof of loaded instructions.
 Do not rebind, relaunch or resend accepted or uncertain work to migrate it.
+
+Before a new question or material hypothesis/comparator/investment revision, read the relevant
+RESEARCH background from current published main. In the existing prospective NOTES reasoning,
+link the topic/revision and its concrete effect on the design or prediction, or explain the
+scope mismatch. Reuse unchanged relevant reading; no per-fit reread or adoption receipt.
+Treat shared understanding as revisable evidence, not a veto on testing a contrary prediction.
 
 Own the working explanation, not just the next candidate. Read the latest relevant notebook
 interpretation and contrary evidence; append what the result strengthens, weakens or leaves
@@ -122,8 +130,10 @@ address is a recovery locator, not permission to send. When the user explicitly 
 contact with another App task, reconcile uncertain acceptance before repeating anything. A Root's
 idle state or pending index update does not block authorized work whose actual admission
 conditions already hold. At a meaningful read-result boundary, update and publish your own
-RESEARCH entry, with pinned evidence and the next step or idle condition. Do not leave routine
-result publication for Root. Preserve owner-controlled pause, direction selection and lead
+RESEARCH entry, with pinned evidence and the next step or idle condition. Include any useful
+revision to directly affected shared-background topics, preserving scope and contrary evidence;
+leave purely local details in NOTES and do not manufacture an insight or an edit for every batch.
+Do not leave routine result or shared-knowledge publication for Root. Preserve owner-controlled pause, direction selection and lead
 values, and leave other directions' entries to their owners unless explicitly assigned.
 Idle with no producer is idle, not a fabricated dependency. Name a concrete re-entry condition
 when one exists, without inventing an owner decision or recurring check. Unchanged waits stay quiet.

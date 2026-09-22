@@ -11,7 +11,10 @@ method; it adds no rule. Records are the notebook, the runs folder and the claim
 ## Explore an idea
 
 1. Start from the direction's current explanation and the observation or gap motivating this
-   work. In `NOTES.md`, link the relevant prior interpretation and contrary evidence. State the
+   work. For a new question or material hypothesis/comparator/investment change, consult the
+   relevant shared background from current published main, not just the direction branch's copy.
+   In `NOTES.md`, link the topic/revision and how it changes the comparison, prediction or choice,
+   or explain why the scope differs. Link the relevant prior interpretation and contrary evidence. State the
    question, MARL structure, strongest simpler explanation and discriminating observation.
    For a targeted change predict both an intermediate effect and its native consequence;
    a package screen can instead explicitly forgo mechanism attribution. Declare the arms,
@@ -20,7 +23,8 @@ method; it adds no rule. Records are the notebook, the runs folder and the claim
    launch detached at that sha (engineering skill). The runner writes `runs/<direction>/<tag>/`.
 3. Read curves and `summary.json` directly. Separate technical execution facts, observations
    and interpretation. Update what is strengthened, weakened, untouched or unresolved before
-   choosing the next action. Exploratory conclusions stay exploratory: no effect claim from
+   choosing the next action, including the shared judgment used in the design. Publish a useful
+   shared change through the normal result-publication method. Exploratory conclusions stay exploratory: no effect claim from
    one seed, no MEI verdict. Do not force a new insight from an uninformative result.
 4. Choose inspection, diagnosis, replication, targeted revision, a different hypothesis or idle
    for the judgment/use it can change, not a quota of new candidates. A new prospective study
@@ -64,6 +68,26 @@ make no different feasible prediction. These are research judgments, not automat
 gates. Stopping because the next information is not worth its cost is distinct from falsification.
 An unchanged replication is useful when recurrence itself changes a decision; a new architecture
 is not a prerequisite. A cheap direct learner test may beat an elaborate diagnostic.
+
+## Use and revise shared understanding
+
+Make the relevant knowledge do work in the existing NOTES reasoning: a competent ordinary
+comparator, a corrected information/credit contract, a different prediction, reuse of an asset
+or declining a redundant experiment. A citation or "read RESEARCH" alone does not show use.
+Check current published main at the material decision boundary; reuse applicable reading within
+an unchanged study. Read changed relevant passages, not the whole archive or a per-batch syllabus.
+If current sources are unavailable, state the known revision and decision-relevant gap rather than
+claim freshness or force unrelated work to stop. Shared knowledge is revisable: a scope mismatch
+or contrary prediction can justify a new question under the existing scientific decision rules.
+
+After reading a result, revise the affected shared topic if another direction could use the
+updated conclusion, limitation, counterexample or competent method. Publish with the direction
+result, linking the underlying NOTES/claim/run evidence and keeping support and adverse evidence.
+Use scope-qualified language; an exploratory pattern stays exploratory and one host is not UAV
+generalisation. Merge with the existing explanation, not a dated result paragraph. Purely local
+details and duplicate observations stay in NOTES; no new insight or shared edit is compulsory.
+If evidence conflicts, retain the differing conditions and unresolved issue rather than force
+agreement or erase another direction's evidence. No new ledger, citation quota or approval step.
 
 ## Simple-model and literature bridges
 
@@ -175,9 +199,8 @@ Existing frozen review exceptions remain tied to their original object, not expa
 
 ## Tools, only as needed
 
-For an unresolved concept read the relevant section of
-the shared research background in `docs/research/RESEARCH.md`
-([scientific-reading.md](references/scientific-reading.md)).
+Shared-background use follows the decision steps above. For unresolved conceptual detail use
+[scientific-reading.md](references/scientific-reading.md) for the relevant topic and further sources.
 For a literature gap use [local-literature.md](references/local-literature.md) and verify primary
 passages. For baseline or environment integration use [adapters.md](references/adapters.md).
 For an endpoint CSV `task,seed,arm,score` run `scripts/summarize_runs.py` (one score per training
