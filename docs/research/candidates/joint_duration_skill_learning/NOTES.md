@@ -667,3 +667,19 @@ retuning or added fit is selected. During correctness work the remote node repor
 not reservations. Native admission rechecks actual-node memory and published pause/lead
 before the first fresh `fixed` fit (seed 2026092201). Keep the remote source unchanged while
 an admitted process uses it. Started result fits remain **0** at this prelaunch entry.
+
+### Pre-training admission refusal and integration repair — 2026-09-21
+
+The first supervisor submission `duration-b01-fixed-s2026092201` ended with exit 4 at
+2026-09-22 03:54:22 UTC: the kernel's static contract requires a literal direction string,
+whereas the runner passed the same string through `DIRECTION`. This was before claim
+persistence, output-directory creation and scientific spawn; the declared output path was
+confirmed absent. **0 result fits started**. Preserve the supervisor log at
+`/home/wu/.agent-tasks/duration-b01-fixed-s2026092201/task.log`; no accepted worker was retried.
+
+`e05566f9f4e2517632b31bca29f710c4e60ef2c8` uses the required literal and adds a test against
+the actual kernel guard, extending the earlier mocked runtime-boundary tests. All three
+focused remote guard/admission/SHA tests passed in 1.75 s. The independent Reviewer verified
+the tiny change and the pre-claim refusal boundary; the DM accepts the fix. No learner,
+seed, exposure or fit-plan change. Use normal admission of the corrected published source,
+with a distinct supervisor submission name to preserve the refused submission's evidence.
