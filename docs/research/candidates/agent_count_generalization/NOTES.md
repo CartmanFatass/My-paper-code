@@ -560,3 +560,27 @@ RSS; leave those handles untouched and rely on actual-node launch admission agai
 before execution. No wall cutoff changes the scientific endpoint. Observe the first accepted
 operation with the repository waiter at a 1500-second checkpoint; further fits remain under
 the same prospective six-fit design rather than a score-dependent extension.
+
+### 2026-09-21 first accepted operation
+
+Remote technical runner and hot-path regressions passed 7 tests in 3.95 s using the configured
+scientific interpreter. The first scientific invocation, H6 seed 914201, was accepted and its
+native runner/supervisor identities were both observed running, with no exit witness. The
+[native manifest](../../../../runs/agent_count_generalization/s1_count_b01_h6_s914201/launch-manifest.json)
+and [actual-node admission preflight](../../../../runs/agent_count_generalization/s1_count_b01_h6_s914201/admission-preflight.json)
+bind its source, command, output, operation handle and resources. This is one accepted
+invocation in the declared six-fit batch, not a completed fit or scientific acceptance.
+
+The dedicated linked remote checkout is frozen at the published input SHA for the batch;
+there is no second launcher snapshot and no authoring in that checkout. Its sparse paths
+follow the compute configuration. Input preparation initially omitted the configured login
+network shell: Git fetch and promisor-blob checkout hung. Only those owned preparation
+processes were terminated, the failed new worktree creation cleaned up itself, and preparation
+completed using `zsh -lic`; no scientific operation existed during that correction. The
+admitted launch also uses that configured network environment. Other workers were untouched.
+
+Arm the repository waiter against this exact operation, with a 1500-second checkpoint and
+terminal/error wakeups. On return, drain all saved events and read actual scientific output;
+rearm the same running handle, never restart it. Keep the remaining five planned cells
+unlaunched until this own process is reconciled. Full-horizon learning, costs and service
+contrasts remain unmeasured at this acceptance boundary.
