@@ -16,7 +16,7 @@ if str(ROOT) not in sys.path:
 def parse_args(argv=None):
     parser = argparse.ArgumentParser()
     parser.add_argument("--arm", required=True, choices=("detach", "joint"))
-    parser.add_argument("--seed", type=int, required=True, choices=(910021,))
+    parser.add_argument("--seed", type=int, required=True, choices=(910021, 910137))
     parser.add_argument("--device", choices=("cpu", "cuda"), default="cuda")
     parser.add_argument("--threads", type=int, default=4, choices=(4,))
     parser.add_argument("--launch-sha", required=True)
@@ -40,11 +40,12 @@ def main(argv=None):
         raise RuntimeError(
             f"--launch-sha {args.launch_sha} does not match admitted {admission['sha']}"
         )
-    from experiments.candidates.uav_service_auxiliary.b01.native import run_native
+    from experiments.candidates.uav_service_auxiliary.b01.native import NativeSpec, run_native
     return run_native(
         arm=args.arm, out=args.out, launch_sha=args.launch_sha,
         device_name=args.device, threads=args.threads,
         facts=args.facts, facts_sha256=args.facts_sha256,
+        spec=NativeSpec(seed=args.seed),
     )
 
 

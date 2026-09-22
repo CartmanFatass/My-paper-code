@@ -178,7 +178,9 @@ def test_evaluation_preserves_global_rng_and_training_normalizers(tmp_path):
     assert (None if agent.state_norm is None else float(agent.state_norm.count)) == state_count
 
 
-def test_launcher_admits_before_importing_scientific_runner(monkeypatch, tmp_path):
+@pytest.mark.parametrize("seed", [910021, 910137])
+@pytest.mark.parametrize("arm", ["detach", "joint"])
+def test_launcher_admits_before_importing_scientific_runner(monkeypatch, tmp_path, seed, arm):
     module = importlib.import_module("scripts.run_uav_service_auxiliary_b01")
     candidate_name = "experiments.candidates.uav_service_auxiliary.b01.native"
     monkeypatch.delitem(sys.modules, candidate_name, raising=False)
@@ -193,15 +195,21 @@ def test_launcher_admits_before_importing_scientific_runner(monkeypatch, tmp_pat
     monkeypatch.setitem(sys.modules, "scripts.hmasd_admission", admission_module)
 
     candidate_module = types.ModuleType(candidate_name)
+    candidate_module.NativeSpec = NativeSpec
     def fake_run(**kwargs):
         events.append("run")
         return kwargs
     candidate_module.run_native = fake_run
     monkeypatch.setitem(sys.modules, candidate_name, candidate_module)
 
-    result = module.main([
-        "--arm", "detach", "--seed", "910021", "--device", "cpu",
+    argv = [
+        "--arm", arm, "--seed", str(seed), "--device", "cpu",
         "--threads", "4", "--launch-sha", "abc", "--out", str(tmp_path / "out"),
-    ])
+    ]
+    if arm == "joint":
+        argv += ["--facts", str(tmp_path / "facts.npz"), "--facts-sha256", "def"]
+    result = module.main(argv)
     assert events == ["admission", "run"]
     assert result["launch_sha"] == "abc"
+    assert result["arm"] == arm
+    assert result["spec"] == NativeSpec(seed=seed)

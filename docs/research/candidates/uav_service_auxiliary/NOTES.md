@@ -666,3 +666,103 @@ B01 与用于选路的 B02 继续作为探索证据，不能改名成为 fresh c
 [^native]: 冻结 [native.py](https://github.com/CartmanFatass/My-paper-code/blob/382643ca91cf764336f3311bc166275a5d2bbe97/experiments/candidates/uav_service_auxiliary/b01/native.py)：NativeSpec、make_config、evaluation_panel、write_facts、verify_and_copy_facts、prediction_replay、run_native。
 
 [^runner]: 冻结 [scripts/run_uav_service_auxiliary_b01.py](https://github.com/CartmanFatass/My-paper-code/blob/382643ca91cf764336f3311bc166275a5d2bbe97/scripts/run_uav_service_auxiliary_b01.py)：parse_args 的 seed choices 与 main 的 run_native 调用。对新 seed 的可行性结论来自源码阅读，未执行脚本。
+
+## 2026-09-22 — Pro reading, adoption and B02 selection
+
+The single consultation key is
+`hmasd:9bb9395a71f2a673ecf1e24524eba4fa6b20b6bac2c77efcd307021b692d362c`.
+`deliver` verified the actual answer commit `c1f7fdeef4813af4ffd023d75ef7bcf39326351e`:
+only this file changed, only the previously empty Answer was filled, and the question and
+all other bytes are unchanged. The DM read all 12,697 answer characters, rather than
+accepting the 828-character chat receipt as the answer. The browser observer closed its
+owned tab; no tab for this private conversation remains. No question was resent.
+
+Adopt the recommendation for exactly one unchanged scientific replication pair, and its
+limits. B01's positive complete native contrast gives this observation a concrete use:
+it tests dependence on the particular training instance/late degradation, without claiming
+to identify prediction semantics versus a more generic stabilization effect. Stronger MSE
+alone would not justify continued spending. A compatible, useful J/service result can justify
+considering a separately specified confirmation; a reversal, adverse service/risk tradeoff,
+or a gain too small to change the investment judgment defaults to ending this recipe's
+current spending. There is no automatic third exploratory pair and no confirmation selected.
+Report the two seed-pair outcomes separately, including absolute levels and the fixed curves;
+do not average away a reversal or select an early checkpoint. A technically invalid attempt
+is separate from scientific adversity and does not automatically authorize a replacement.
+
+The answer's consequential source claim was checked against the production entry: `--seed`
+only accepts 910021 and is not passed to `run_native`, whose default NativeSpec also uses
+910021. This is a real B02 execution mismatch, not a flaw in the completed B01. Amend the
+earlier proposed *exact source* statement: B02 preserves all scientific modules/configuration,
+but needs a newly published entrypoint revision that actually binds the selected seed.
+Both B02 arms will use that same new revision. B01 remains at its original source and outputs.
+
+The answer did not independently recheck ignored binary arrays/checkpoints; its provenance
+qualification is correct. Its native contrasts, counts and code interpretation agree with
+the DM's readings. The overlapping W10 windows and broadcast team labels do not constitute
+23,856 independent forecast observations. Fresh `seed` changes initialization, RNG streams,
+head initialization and training worlds together: B02 is a new **training instance**, not
+an isolated intervention on network initialization. B02's initial-policy factual trajectories
+will differ from B01 even though the held-out world numbers stay the same; forecast contrasts
+remain within each pair. No scientific rejection of the advice is needed; the old exact-CLI
+claim and any broader forecast/charging interpretation are explicitly bounded above.
+
+Current published main was checked at `1bca4f7cd69d91146c9a220213927dfddf46b34a`.
+The relevant native-outcome, finite-training, cost and independent-unit background remains
+applicable. Other directions' new results do not change this fixed intervention. Owner pause
+is lifted for this lead; G33 and Claude FSD restrictions remain. The new observation is worth
+its approximately five runner-hours because both recurrence and failure to recur can change
+whether a larger confirmation is worth paying for; B01's sunk cost is not the justification.
+
+### B02 prospective binding and seed-entry L0
+
+Choose **2 new exploratory fits**, detach then joint, training seed **910137**, outputs
+`runs/uav_service_auxiliary/b02_detach_910137_a01` and
+`runs/uav_service_auxiliary/b02_joint_910137_a01`. All other scientific settings remain B01:
+S7-S2 v3/reward v2/arm C, N8/k10, four lanes ×1500 steps ×30 rollouts =180,000 transitions
+per arm; W10 factual QoS, the same actor/head/representation optimizer and replay semantics,
+CUDA FP32, four Torch CPU threads, TF32 off, and native update/exposure unchanged.
+Use the same prewritten 0/10/20/30 panels on worlds 920001–920008. Primary is the paired
+rollout-30 mean of complete summed raw native J, joint minus detach, with QoS/throughput,
+return constraint cost, event/charging exposure and cost retained. No best checkpoint,
+extension, tuning or new target is selected. These are exploration data, not confirmation.
+
+New detach collects one new initial-policy fact file on worlds 930001–930002 before training;
+new joint must load those exact bytes and match the new initialized-model fingerprint.
+Do not reuse B01 facts or regenerate them for joint. Stage the accepted facts outside the
+author checkout under the configured `/home/wu/hmasd-inputs` root, retaining their digest.
+The comparison consumes 360k training / 96k evaluation transitions plus one 3000-transition
+fact collection, estimated from B01 at about five runner-hours, with actual costs recorded.
+Total planned direction cost is now **4 fits**, of which 2 are complete and these 2 unstarted.
+Fresh native actual-node admission remains required on `wsl_4070` before each sequential fit.
+
+L0 deliverable: update only `scripts/run_uav_service_auxiliary_b01.py` so its existing
+admission-guarded production call can execute declared seed 910137 as well as 910021, and
+actually constructs/passes `NativeSpec(seed=args.seed)`. Keep the historical seed's behavior,
+all other arguments, source identity checking and admission-before-scientific-effects order.
+Keep `native.py`, `auxiliary.py`, the learner/environment/evaluator, and all B01 artifacts
+unchanged. Own the corresponding narrow regression in
+`tests/experiments/candidates/uav_service_auxiliary/b01/test_native.py`.
+Check actual spec forwarding for both allowed seeds/arms, the unchanged default scientific
+fields, and the admission guard. Reuse prior unchanged native/CUDA integration evidence.
+Independent Reviewer reviews this seed/result-identity change. This is zero scientific fits
+of correctness work; stop for any need to change scientific semantics rather than expanding
+the patch. The actual launch source will be the committed, pushed, reviewed new revision.
+
+### B02 seed-entry accepted for execution — 2026-09-22
+
+The DM accepted the two-file entry/test diff after independent Reviewer review. Production
+now accepts only the declared seeds 910021 and 910137 and passes the selected value through
+`NativeSpec(seed=args.seed)` after admission and source-SHA verification. The default spec
+is unchanged for 910021. No scientific module changed from B01's frozen source. Source
+inspection confirms the spec reaches RNG/model initialization, sampler, config/training
+worlds, auxiliary initialization and summary identity; existing fact digest/fingerprint
+checks remain intact. The final launch must record the new source revision truthfully.
+
+Four focused launcher cases (both seeds × both arms) passed locally in 3.08 seconds;
+the independent Reviewer reproduced all four in 1.82 seconds and found no material issue.
+These tests stub the scientific loop and do not constitute a training/CUDA run. The
+unchanged full native/CUDA integration evidence from B01 is reused; real B02 config/seed,
+fingerprints, counts and final outcomes will still be read from the admitted runs.
+Checks created zero scientific fits. Initial preparation reports 13,179,844 KiB available
+RAM and 4864 MiB free GPU on `wsl_4070`; the actual native admission will recheck resources
+and current owner/lead immediately before starting the first B02 fit.
