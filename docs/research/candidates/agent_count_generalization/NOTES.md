@@ -777,3 +777,84 @@ Current cost is 3 started fits: 2 complete and read, 1 running, 0 technical fail
 SET 915307, H6 914413 and SET 915413 remain unlaunched. The prior SET terminal event is
 consumed. Observe this new accepted handle with the repository waiter, 1500-second checkpoints
 and terminal/error wakeups; drain and read on return without restarting the operation.
+
+
+### 2026-09-22 third completed fit — H6 seed 914307
+
+The original operation has a valid zero exit witness and absent runner/supervisor identities.
+DM collected all 25 native files and compared every local SHA-256 to the finished remote
+copy; all match. The complete summary, all twelve panels and all 45 training rows have been
+read. All panel files exactly equal their summary records, and all four checkpoints match
+recorded digests and sizes. Config/spec/source agree across the config wrapper and summary;
+per-N configuration and the declared fresh world-seed panels match the prospective contract.
+Actual-N J conversion and native reward-component identities pass in all 192 worlds. Every
+evaluation panel has zero optimizer calls and unchanged parameters/normalizers. Stderr is empty.
+The four weight files stay in both local and remote run directories; publish the complete
+text/configuration/panel/log/exit evidence with their recorded checkpoint digests.
+
+Accept this as the third complete exploratory fit: 360,000 training/stored team steps,
+720 training episodes, 45 updates, 96,000 evaluation team steps and 192 evaluation episodes.
+Each training row is finite, has the exact expected optimizer increments, and shows movement
+in all five learners and the three new encoders. Total optimizer steps are actor/critic
+101,250 each, coordinator/team discriminator 675 each and individual discriminator 2,700.
+No source, reward, information interface, update budget or evaluator was changed.
+
+Measured scientific command wall is 5,680.698 s (94.678 min), run-fit wall 5,678.680 s,
+user/system CPU 22,535.186/227.447 s, and peak RSS 2,617,440 KiB (2.496 GiB; Linux scientific
+process RUSAGE_SELF). Peak scratch remains explicitly unmeasured. Preparation/publication/
+readback are outside command wall. The two observed H6 command times are 98.768 and
+94.678 min; changing shared-node conditions preclude treating their difference as a method
+speed effect. Neither total support cost nor project elapsed is inferred from these values.
+
+Final preselected rollout-45 readings for H6 seed 914307 (16 worlds, one trained policy):
+
+| Test N | Native J | Coverage | Quality | Height penalty |
+| --- | ---: | ---: | ---: | ---: |
+| 4 | 0.551539 | 0.689715 | 0.255504 | 0.007913 |
+| 6 | 0.505424 | 0.651910 | 0.195274 | 0.009496 |
+| 8 | 0.427711 | 0.549765 | 0.181498 | 0.011574 |
+
+Its equal-weight unseen-N mean is 0.489625. Keep all final per-fit observations visible:
+
+| Arm | Training seed | N4 J | N6 J | N8 J | Within-fit unseen mean |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| H6 | 914201 | 0.557913 | 0.543241 | 0.465897 | 0.511905 |
+| H6 | 914307 | 0.551539 | 0.505424 | 0.427711 | 0.489625 |
+| SET | 915201 | 0.536673 | 0.492464 | 0.403440 | 0.470057 |
+
+This second H6 is below the first H6 by 0.006374/0.037817/0.038186 at N4/N6/N8; measured
+seed dependence is appreciably larger at N6/N8 than at N4 in these two fits. It remains above
+the existing SET checkpoint by 0.014866/0.012959/0.024271, an unseen mean contrast of
++0.019568. These are checkpoint-to-checkpoint descriptions, not two independent treatment
+replications against a single SET fit. Training labels are not paired and common evaluation
+worlds do not supply missing training replicates. The six-fit comparison is still incomplete.
+
+| After rollout | H6 914307 N4 | N6 | N8 |
+| --- | ---: | ---: | ---: |
+| 0 | 0.322675 | 0.217527 | 0.201736 |
+| 15 | 0.552048 | 0.544775 | 0.436910 |
+| 30 | 0.557946 | 0.508865 | 0.426431 |
+| 45 | 0.551539 | 0.505424 | 0.427711 |
+
+Working update uses current RESEARCH topics 4 and 6: finite learning results and actual
+optimizer/computation exposure govern the package comparison, while complete package
+contrasts do not identify a unique component mechanism. Strengthened is full-horizon native
+H6 learning and strict count transfer across a second independent training initialization.
+The positive final direction relative to the one observed ordinary control remains visible,
+but its magnitude is smaller; stable arm ordering and useful population margins remain
+unresolved, especially because SET training variation is still unmeasured.
+
+Preserve contrary evidence: this H6's N6 falls from 0.544775 at rollout 15 to 0.505424 at 45,
+and N8 ends slightly below its rollout-15 reading. Mean native stochastic training return
+falls from 0.408224 over rollouts 26-30 to 0.390874 over 41-45, with terminal action entropy
+7.302861. Different panels use fresh worlds, so these are not paired-world temporal changes.
+Parameter motion and finite losses do not establish convergence or a beneficial discovery
+mechanism. Keep the fixed final endpoint, all curves and the common source unchanged.
+
+There is no retain/revise/stop judgment before the declared comparison is complete. No new
+shared-background claim follows from this partial 2-H6/1-SET result. Next is the already
+recorded SET seed 915307, same immutable source and full horizon, to measure a second ordinary
+control trajectory; then H6 914413 and SET 915413. This tests whether the observed contrast
+survives SET as well as H6 training variation. It is completion of the original six-fit design,
+not a score-dependent extension, and existing Pro advice remains applicable without a resend.
+Current cost is 3 started/3 completed fits, 0 technical failures, three cells unlaunched.
