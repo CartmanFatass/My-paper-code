@@ -2439,3 +2439,50 @@ four later cells unstarted and the separate zero-step D failure. Preserve both t
 development contrast and adverse prediction diagnostics, continue the fixed S horizon and
 rearm the same operation. No additional fit, recipe change, early selection or Pro Send is
 selected from this intermediate reading.
+
+## 2026-09-22 — B03 S third training checkpoint
+
+The 21:27 UTC observation retains the same admitted S / 912211 / a01 processes running,
+matching native identities, consistent records and no exit witness. Refreshed main retains
+the direction, lead and lifted pause. Summary SHA256
+`a644c212df9b88f64367d972bf9d3fd1654bceb8e48bb4b556b2067df9fa9686`
+records 159,600 training transitions including part of collection 27, 26 completed updates
+and 104 completed training episodes. Three development panels account for 24 episodes /
+36,000 evaluation transitions. Physical fact generation remains zero; two initial D
+episodes / 3,000 transitions are reused, with 71,568 valid agent rows replayed across the
+three diagnostics. All 55,233 floating values are finite, prior completed records and
+input bindings are unchanged, progress extends the previous file exactly, failure is null
+and stderr is empty. This remains an incomplete fit.
+
+At the prescribed rollout-20 development panel, mean J is **-53.352798**, QoS **.248211446**,
+return cost **.137342195**, and mean episode-minimum fleet battery **.378754210**. All
+eight worlds truncate at 1,500 steps with zero evaluation updates; all aggregates were
+recomputed from their world rows. S-minus-D at the same rollout/worlds is **+57.305022 J**,
+**+.043473605 QoS**, **+.002169274 return cost** and +.007369723 episode-minimum battery.
+Only three of eight world J contrasts are positive, with the other five adverse; the range
+is -1331.644750 to +1666.680142. One S world has zero service. The average J advantage has
+therefore narrowed considerably from +517.974430 at rollout 10, and its per-world pattern
+is less favorable. S's own mean J falls by 152.452372 from rollout 10, with four worlds
+improving and four worsening. This weakens an interpretation of a stable early S advantage;
+it neither establishes a final effect nor permits substituting rollout 10 for the endpoint.
+
+The same initial-fact diagnostic now reports service MSE **.035502055**, compared with
+D .110198947 (S/D .322163287), and observation MSE **.009836454**, compared with D
+.010253014. Both remain above their fixed training-mean references .010116768 and
+.008585614; observation persistence remains .000001035146. Episode-equal scoring and
+the common fact identity were checked. Although S's relative service error is now lower
+than D's, S's own error has increased since rollout 10 while its development return fell.
+The changing relative error ranking does not establish a predictive mechanism. Fixed-row
+feature variance/effective rank are 22.040431 / 7.462769, without a zero-variance flag.
+Trained G, the final-world panel and the common endpoint mixture are still absent.
+
+All new completed passes retain active service representation updates and movement in
+both base and GRU, both head updates, and nonzero native learner movement. Training service
+is still heterogeneous, including zero QoS in every lane of collection 24. Newly read
+training and development records retain zero charging, cutoff, depletion and charger-input
+exposure. The last completed-update resource row records cumulative wall 4,814.23 s and
+peak RSS 3,057,972 KiB, not final fit cost. Cost remains two started B03 fits (D complete,
+S running), four later cells unstarted and the separate zero-step D failure. Continue the
+same fixed S operation through its remaining training and final evaluation, preserving the
+weaker intermediate contrast and contrary worlds. Rearm observation; no extra fit, early
+checkpoint selection, recipe adjustment or Pro Send is selected.
