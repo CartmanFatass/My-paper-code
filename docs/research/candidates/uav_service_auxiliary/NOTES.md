@@ -2181,3 +2181,22 @@ endpoint mixture. Feature variance is 13.1790 and effective rank 7.4114 on the f
 with nonzero per-agent and episode-segment variation; this alone establishes no control use.
 No final worlds or final checkpoint are available. Continue the same accepted run and fixed
 reading without revising the recipe, choosing an early model or adding a fit.
+
+## 2026-09-22 — B03 D third training checkpoint
+
+The 18:35 UTC checkpoint retains the same running a02 identities, consistent records and
+no exit witness. Refreshed main leaves this direction active with the same lead and no
+new owner pause. Snapshot SHA256
+`a7ff7aa2850b339791754b91db7a6b1c93b192df906fe01c0bec60654d09949c`
+records 119,600 training transitions, including partial collection 20, and 19 completed
+updates. Evaluation remains the two completed development panels at 0 and 10: 24,000
+transitions, plus the unchanged 3,000 physical initial-fact transitions. All 40,371 floating
+values are finite; the config digest, initialization, initial-fact digest, calibration and
+first-rollout bindings match the prior snapshot. Failure is null and stderr is empty.
+
+Completed training collections 13–19 retain varying raw return and service, with D's
+auxiliary representation steps and base/GRU movement still zero. No additional evaluation
+panel or final result is yet available. The last resource row records cumulative wall
+4933.74 s and RSS 3,085,844 KiB. Cost remains one started B03 fit and the separately retained
+pre-training failure. Continue observing this accepted operation at the fixed exposure;
+the incomplete comparison supports no new package or predictive-mechanism conclusion.
