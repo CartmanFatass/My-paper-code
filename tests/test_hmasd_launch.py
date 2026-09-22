@@ -1048,6 +1048,35 @@ def test_configured_path_prefix_reaches_the_child_environment(monkeypatch) -> No
     assert hmasd_launch._child_environment({"path_prefix": prefix}, snapshot=False)["PATH"] == prefix
 
 
+@pytest.mark.skipif(os.name != "posix", reason="POSIX compute-node PATH contract")
+def test_configured_wsl_scientific_tools_reach_child_path(monkeypatch) -> None:
+    entry = hmasd_launch._load_config(ROOT / ".codex/hmasd-compute.toml")["nodes"]["wsl_4070"]
+    monkeypatch.setenv("PATH", "/usr/bin:/bin")
+    environment = hmasd_launch._child_environment(entry, snapshot=False)
+    assert environment["PATH"].split(os.pathsep)[0] == str(Path(entry["python"]).parent)
+
+
+@pytest.mark.skipif(os.name != "posix", reason="actual WSL node reproduction")
+def test_actual_wsl_ninja_visibility_in_kernel_child(tmp_path, monkeypatch) -> None:
+    entry = hmasd_launch._load_config(ROOT / ".codex/hmasd-compute.toml")["nodes"]["wsl_4070"]
+    python = Path(entry["python"])
+    if not python.is_file():
+        pytest.skip("requires the configured wsl_4070 scientific interpreter")
+    monkeypatch.setenv("PATH", "/usr/bin:/bin")
+    probe = "import shutil; from torch.utils.cpp_extension import verify_ninja_availability; verify_ninja_availability(); print(shutil.which('ninja'))"
+    repaired = hmasd_launch._child_environment(entry, snapshot=False)
+    success = _run(str(python), "-c", probe, cwd=tmp_path, env=repaired)
+    assert Path(success.stdout.strip()) == python.parent / "ninja"
+    old = dict(entry)
+    old["path_prefix"] = os.pathsep.join(part for part in entry["path_prefix"].split(os.pathsep)
+                                          if part != str(python.parent))
+    broken = hmasd_launch._child_environment(old, snapshot=False)
+    if shutil.which("ninja", path=broken["PATH"]) is None:
+        failure = _run(str(python), "-c", probe, cwd=tmp_path, env=broken, check=False)
+        assert failure.returncode != 0
+        assert "Ninja is required to load C++ extensions" in failure.stderr
+
+
 @pytest.mark.parametrize("value", ["", "   ", 7, ["/node/venv/bin"]])
 def test_malformed_path_prefix_is_refused(value) -> None:
     with pytest.raises(hmasd_launch.LaunchRefusal, match="path_prefix"):
