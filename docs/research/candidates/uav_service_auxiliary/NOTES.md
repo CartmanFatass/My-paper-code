@@ -2032,3 +2032,21 @@ of two rejection checks. These were reproduced and corrected before result execu
 runtime scientific configuration did not change. This is 0 result fits, not a learning result.
 The selected production-shape, four-lane CUDA integration check will run on the configured
 node from committed source before the first fit. Its short horizon remains engineering-only.
+
+The configured `wsl_4070` CUDA check at source
+`2524168eacab801590a4eb43f63865220b8a609e` passed (1 selected integration test, 20.62 s).
+It exercised all three arms with native 256-wide hidden state, 365 observations, four
+collection lanes, first-update identity, both checkpoint loaders, fixed-source rejection
+and common endpoint replay. It used a 12-step checking horizon and one Torch thread;
+the selected result fits remain 1500-step rollouts, 30 rollouts and four Torch threads.
+No claim is inferred from its scores. Remote source staging initially stalled outside
+the node's configured network shell; only those two owned Git staging process groups were
+terminated after PID/command verification, then staging completed through the configured
+`zsh -lic` route. There was no accepted result worker or Pro request restart.
+
+The DM accepts the implementation and selects the first fixed cell, D / 912211, at source
+`2524168eacab801590a4eb43f63865220b8a609e`. Source is published and the retained node checkout
+is `/home/wu/hmasd-worktrees/usa-b03-2524168ea`. Native admission still precedes the actual
+start. The later S/G cells will import the first D run's hash-verified initial facts and
+training-only calibration after its completed artifact has been read; no score changes
+the remaining cells or creates an extra fit.
