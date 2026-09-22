@@ -2251,3 +2251,79 @@ a causal mechanism analysis. Fixed-row variance/rank are 28.9133 / 8.8947. D's a
 representation updates remain zero across all 30 passes, and the newly read training and
 development records contain no charging, cutoff or depletion events. Continue the same
 operation through the pending final-world/fact collection; no later cell is launched yet.
+
+## 2026-09-22 — B03 D complete acceptance and fixed S continuation
+
+The D / 912211 / a02 operation has a valid exit-0 witness; at 19:55:55 UTC both recorded
+native identities are absent and the operation records are consistent. The DM has now read
+the complete [runner summary](../../../../runs/uav_service_auxiliary/b03_d_912211_a02/summary.json),
+all 32 final-world rows, development panels, training/progress records, facts and saved
+checkpoints. Summary SHA256 is
+`824e706fddd4d9b1f53a80463d8033db9135449c7154a2cec10ded54156ac672`.
+All 18 files, totaling 237,191,695 bytes, were copied from the original node and matched
+its per-file sizes and SHA256 digests. The large NPZ/PT files remain recoverable in both
+the local run directory and `/home/wu/hmasd-worktrees/usa-b03-73be55261/runs/uav_service_auxiliary/b03_d_912211_a02`;
+they are not replaced by this prose or added to Git against the repository ignore rules.
+
+Artifact acceptance is separate from process exit. The production-contract readback passed
+the frozen source, full production spec, CUDA/four-thread binding, panel identities and
+lengths, artifact hashes, fixed calibration, fact metadata/shapes/masks and final policy
+fingerprint. Every reported evaluation aggregate was independently recomputed from its
+world rows. Saved arrays at 0/10/20/30 independently reproduced the episode-equal service,
+observation, persistence and training-mean losses in float64 within the declared float32
+rounding tolerance. Both final checkpoints loaded and matched the native optimizer counts,
+30 auxiliary passes, 900 updates for each detached head and zero auxiliary representation
+updates. This readback performed zero environment steps or optimizer updates.
+
+The completed fit contains exactly 180,000 training team transitions / 30 rollouts / 120
+episodes, 96,000 evaluation transitions / 64 episodes, and 9,000 physical fact transitions /
+6 episodes (two initial and four endpoint). Initial-fact diagnostics replayed 95,424 valid
+agent rows across four checkpoints. Native high-level/actor/critic/team-discriminator/
+individual-discriminator optimizer counts are 2,250 / 67,500 / 67,500 / 450 / 1,800, with
+nonzero displacement for all native learners. D's auxiliary base/GRU movement is zero on
+every pass. No missing final artifacts, runner failure or stderr was found.
+
+The prescribed final 32-world panel at rollout 30 has mean raw J **-96.648955**, QoS
+**.219808215**, throughput **6.594246465**, return cost **.137800407**, and mean true
+episode-minimum fleet battery **.367119027**. The legacy time-average minimum battery is
+.568477819 and is not substituted for the episode minimum. All worlds last 1,500 steps
+and truncate. One has zero service; raw J ranges from -1570.825 to 488.390. Charging,
+cutoff, depletion and charger-input exposure remain zero. These observations retain the
+low-absolute-service, heterogeneity and event-exposure limitations.
+
+The fixed development J curve at 0/10/20/30 is -508.082488 / -418.874856 / -110.657820 /
+-204.652697. Its late decrease remains part of the reading; no rollout-20 selection is
+made. The final and development panels have different world seeds, so their difference
+does not measure a learning improvement. The separate four endpoint-fact worlds have
+mean J 48.311094 and QoS .149470470; their facts await the prespecified common D/S/G
+mixture after this block completes. They are not extra final-world observations.
+
+On the unchanged initial facts, final service MSE is .0116812224 versus training-mean
+.0101167676; observation MSE is .00972032691 versus training-mean .00858561420 and
+persistence .00000103514643. Fixed-row feature variance/effective rank are 28.9133 / 8.8947.
+The adverse reference comparisons and the earlier disagreement between service MSE and
+development J remain contrary evidence. They do not yet evaluate a trained G package or
+the common endpoint mixture and cannot identify a predictive mechanism.
+
+Actual D runner cost is **9,828.798293 s / 163.813305 min**, CPU user/system
+9,405.779616 / 443.096927 s, and peak RSS 3,092,180 KiB. Stage wall seconds are collection
+4,094.20379, native update 2,266.60051, auxiliary update 20.53472, evaluation 2,835.34253,
+physical facts 274.13449, fact replay 11.59253, preparation 1.36821 and checkpoint .20688.
+This is scoped runner cost under the observed node conditions, not an intrinsic speed claim.
+Actual B03 cost at this decision is one completed fit plus the separately retained zero-step
+pre-training failure; five fixed fits remain unstarted.
+
+Refreshed published control still lists the same active direction and lead with owner pause
+lifted. The technical completeness judgment strengthens; the service-versus-generic package
+hypothesis remains untouched by a D-only result, while low absolute service and late
+variation remain adverse context. The next discriminating observation is the already
+selected S / 912211 / a01 cell at the same 180k horizon, source
+`73be55261b9f5e8f8fe26fdec6558b87ad088fcb`, device and panels. S activates service gradients
+into the base/GRU while its generic head stays detached. It imports the exact D initial
+facts (`8d049f00c9f16367f481e9dabe47c21068d84c8125ba2653e51795cd7ca2f5e5`)
+and calibration (`b5b7e03fdc253592f673fc9a0b4d640305a9bd1d7a8ccbca35904d1105012523`)
+from that retained run. Initialization, first collection and first native update must match
+before auxiliary divergence. A higher final S-minus-D raw J would support this bounded
+service-use package contrast, subject to the fixed G contrast and second training block;
+an adverse or mixed contrast weakens that reading. No extra fit, horizon change, early
+checkpoint, retuning or new Pro Send is selected. Launch remains subject to native admission.
