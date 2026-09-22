@@ -1,0 +1,96 @@
+{
+  "acceptance": "accepted",
+  "accepted_at": "2026-09-22T03:25:25.684638Z",
+  "bootstrap_command": [
+    "/home/wu/.venvs/hmasd/bin/python",
+    "/home/wu/hmasd-worktrees/agent-count-generalization-20260921-b01/scripts/hmasd_admission.py",
+    "_run-admitted",
+    "--runner",
+    "/home/wu/hmasd-worktrees/agent-count-generalization-20260921-b01/experiments/candidates/agent_count_generalization/runner.py",
+    "--output",
+    "/home/wu/hmasd-worktrees/agent-count-generalization-20260921-b01/runs/agent_count_generalization/s1_count_b01_h6_s914201",
+    "--",
+    "--arm",
+    "H6",
+    "--seed",
+    "914201",
+    "--launch-sha",
+    "5a250d97e3ea12d33067e9c00c250cefa12b5e25",
+    "--out",
+    "runs/agent_count_generalization/s1_count_b01_h6_s914201"
+  ],
+  "claim_key": "d56692842d134f408113164896e7d30a340d0e7182d2d02a32c341052e43740a",
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/d56692842d134f408113164896e7d30a340d0e7182d2d02a32c341052e43740a.json",
+  "command": [
+    "/home/wu/.venvs/hmasd/bin/python",
+    "/home/wu/hmasd-worktrees/agent-count-generalization-20260921-b01/experiments/candidates/agent_count_generalization/runner.py",
+    "--arm",
+    "H6",
+    "--seed",
+    "914201",
+    "--launch-sha",
+    "5a250d97e3ea12d33067e9c00c250cefa12b5e25",
+    "--out",
+    "runs/agent_count_generalization/s1_count_b01_h6_s914201"
+  ],
+  "command_sha256": "85542037b23371e7510cf7ad344776f7ef9737a6cfbf7b101ffcf32439608fed",
+  "control_observation": {
+    "observed_at": "2026-09-22T03:25:24.165642Z",
+    "ref": "refs/heads/main",
+    "remote": "origin",
+    "sha": "11e2e6d981853194a61cf52b134b80ffee982924"
+  },
+  "control_root": "/home/wu/projects/HMASD",
+  "created_at": "2026-09-22T03:25:24.184118Z",
+  "cwd": "/home/wu/hmasd-worktrees/agent-count-generalization-20260921-b01",
+  "direction": "agent_count_generalization",
+  "host_identity": "LAPTOP-U9TDKC8A",
+  "identity_command": [
+    "/home/wu/.local/share/uv/python/cpython-3.10.21-linux-x86_64-gnu/bin/python3.10",
+    "experiments/candidates/agent_count_generalization/runner.py",
+    "--arm",
+    "H6",
+    "--seed",
+    "914201",
+    "--launch-sha",
+    "5a250d97e3ea12d33067e9c00c250cefa12b5e25"
+  ],
+  "lead": "Codex DM (independent session)",
+  "manifest_ref": "/home/wu/hmasd-worktrees/agent-count-generalization-20260921-b01/runs/agent_count_generalization/s1_count_b01_h6_s914201/launch-manifest.json",
+  "node": "wsl_4070",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/d56692842d134f408113164896e7d30a340d0e7182d2d02a32c341052e43740a.json",
+  "output_root": "/home/wu/hmasd-worktrees/agent-count-generalization-20260921-b01/runs/agent_count_generalization/s1_count_b01_h6_s914201",
+  "preflight": "/home/wu/hmasd-worktrees/agent-count-generalization-20260921-b01/runs/agent_count_generalization/s1_count_b01_h6_s914201/admission-preflight.json",
+  "process": {
+    "detached": true,
+    "identity": {
+      "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+      "kind": "linux_pid_start_ticks",
+      "pid": 97536,
+      "session_id": 97536,
+      "start_ticks": 41150477
+    },
+    "native_handle_kind": "posix_session",
+    "pid": 97536,
+    "process_group_id": 97536
+  },
+  "process_exit": "/home/wu/hmasd-worktrees/agent-count-generalization-20260921-b01/runs/agent_count_generalization/s1_count_b01_h6_s914201/process-exit.json",
+  "published_remote": "origin",
+  "runner_process": {
+    "identity": {
+      "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+      "kind": "linux_pid_start_ticks",
+      "pid": 97537,
+      "session_id": 97536,
+      "start_ticks": 41150480
+    },
+    "pid": 97537,
+    "process_group_id": 97536,
+    "supervisor_pid": 97536
+  },
+  "schema_version": 1,
+  "sha": "5a250d97e3ea12d33067e9c00c250cefa12b5e25",
+  "source_root": "/home/wu/hmasd-worktrees/agent-count-generalization-20260921-b01",
+  "stderr": "/home/wu/hmasd-worktrees/agent-count-generalization-20260921-b01/runs/agent_count_generalization/s1_count_b01_h6_s914201/stderr.log",
+  "stdout": "/home/wu/hmasd-worktrees/agent-count-generalization-20260921-b01/runs/agent_count_generalization/s1_count_b01_h6_s914201/stdout.log"
+}
