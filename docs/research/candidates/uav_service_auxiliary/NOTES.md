@@ -2355,3 +2355,43 @@ completion, error or a bounded checkpoint. No accepted worker or Pro question wa
 One B03 fit is complete, S is admitted and active, four later cells remain unstarted, and
 the separate zero-step a01 D failure remains retained. Continue the fixed S operation;
 the incomplete package comparison still selects no additional fit or altered recipe.
+
+## 2026-09-22 — B03 S first training checkpoint
+
+The 20:32 UTC observer checkpoint retains the same admitted S / 912211 / a01 operation:
+both native identities match and are running, the records agree, and no exit witness is
+present. Refreshed published control retains this direction and lead with no new pause.
+The copied summary SHA256 is
+`e5aa531c7bc0a650f04fcb6e11bab3249b81eeb7187933a5eff43924a4dab183`.
+Its 14,928 floating values are finite; config and calibration digests match, failure is
+null and stderr is empty. It records 48,000 training transitions / 32 completed collection
+episodes, including the eighth collection, with seven completed native/auxiliary updates
+of the fixed 30. Evaluation still consists only of the initialization panel: eight worlds /
+12,000 transitions. Two D fact episodes / 3,000 transitions are reused with zero new physical
+fact generation, and the initial diagnostic replay covers 23,856 valid agent rows.
+
+The matched-start check is now observed, not merely required. Initialization, first-rollout
+collection digest `8d78cbcc8f830680e01ce0d3ff889144971ac6c72e8b6f87e2d5bd2826068915`,
+first-native-update digest `a194c21bf4bc51e954f7d5b015d35220f3ecb208d49f9fce82745f3362ac4043`
+and all first native optimizer counts exactly match D. The complete initial development
+panel, first training collection, first native loss record and native parameter displacement
+record also match D exactly. Calibration is byte-identical to D, and the initial prediction
+array digest is the same. Thus the observed separation begins with the prescribed auxiliary
+intervention, without an earlier sampled-history or native-update mismatch.
+
+Every completed S auxiliary pass records 30 representation optimizer steps and nonzero
+base/GRU movement, alongside 30 steps for each head; every native learner also moves.
+Training service remains heterogeneous: collection 3 has almost no service, collection 5
+has zero service in all four lanes, and collection 6 combines poor service with high return
+cost in several lanes. All seven completed collections have zero charging, cutoff,
+depletion and charger-input exposure. These changing training trajectories are not a
+fixed-panel efficacy comparison. No trained development panel, final worlds or endpoint
+facts are yet available; the scientific package judgment remains open.
+
+The last completed-update resource row records cumulative wall 1,472.56 s and peak RSS
+3,052,116 KiB; this is an intermediate observation, not total fit cost. Actual B03 cost is
+now two started training fits, of which D is complete and S remains running, plus the
+separate zero-step pre-training failure. Four later fixed cells remain unstarted. The
+technical matched-start and active-gradient judgments are strengthened; no endpoint
+service advantage is established. Continue this accepted S operation at the fixed horizon
+and rearm its observation without a restart, new fit, recipe change or new Pro question.
