@@ -3727,3 +3727,60 @@ Actual B04 cost remains **1/2 fits started,0 complete** at this reading. Rearmed
 exact generation/wake/event identities against the same accepted operation; the observer alone
 continues waiting. This notebook reading is a material interim observation, not scientific
 acceptance of a completed fit or an authorization for any additional fit.
+
+## 2026-09-22 — B04 H6 stage30: saturation and physical-boundary outcomes separate
+
+The next checkpoint again observed the same accepted native runner/supervisor, consistent
+identities and no exit witness/error. Current published owner pause/direction/lead still permit
+the fixed work. Read all newly available rollout18–35 rows, the complete collected-but-not-yet-
+updated rollout36 evidence, and all three stage30 panels. The copied summary SHA-256 is
+`cde354a1717a480b631038d41b046419aa7d62efed5339a1f7fef6fa4fe07a6d`, last boundary
+`rollout 36 collected`:288000 training/stored steps,576 episodes/resets,**35 completed updates**,
+72000 evaluation steps and144 evaluation episodes. These distinguish completed collection from
+completed optimization at the durable snapshot. Actor/critic78750 calls each, coordinator and
+team-discriminator525 each, individual-discriminator2100; no failure and all new recorded
+losses/tensors/metrics finite. Raw action/log-probability storage, clipped execution, native
+motion/component identities, resets, parameter movement and analytic-entropy identities pass.
+
+Stage30's checkpoint was independently loaded at the original native output location:
+179 finite tensors, correct source and rollout, SHA-256
+`5344f864c98f6acd2962a99393b934eca0b7d8a88f839aeb722a2fdb804468cb`,23073626 bytes,
+matching the runner record. Earlier checkpoint identities remain unchanged. All nine completed
+evaluation panels have frozen parameters/normalizers and zero optimizer calls. Command wall
+at this snapshot is54.3009 minutes; complete fit wall and peak RSS are still unavailable.
+
+| Stage30 N | J,lambda0 | J,lambda.05 | E_H6,J | Coverage change | Quality change | Penalty change |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| 4 | .526267120 | .546244371 | −.019977251 | −.014047500 | −.012238667 | +.006472401 |
+| 6 | .460681324 | .487040214 | −.026358890 | −.021915000 | +.003857682 | +.012175694 |
+| 8 | .365261797 | .404509768 | −.039247971 | −.013650000 | −.019159681 | +.023945067 |
+
+Equal-weight unseen E_H6 is **−.029612611**. Respectively10/11/12 of16 paired world
+differences are negative for N4/6/8; worlds and the two interim panels are not independent
+training replications. The candidate again loses J and coverage at trained N6. A less negative
+unseen difference than stage15 is not a causal recovery curve: these stages use different worlds.
+Within each stage the comparison uses the same fixed world seeds as its old control.
+
+Aligned interim training window1–30 (240000 team/1440000 UAV steps), summed counts before rates:
+
+| H6/clip recipe | Raw-coordinate saturation | Boundary-truncated coordinates | Boundary-visited coordinates | Executed attempted L2/UAV-step | Realized L2/UAV-step | Mean H_before |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| lambda0 | .306670602 | .171556713 | .174725231 | 35.786567689 | 31.787103015 | 3.958511764 |
+| reused lambda.05 | .518349306 | .171925000 | .184360417 | 41.608793995 | 37.405962307 | 5.465043561 |
+
+Sigma after30 is[.826841,.821789,.803282], versus[2.272274,2.326259,2.199778] in the
+control; H_before is reconstructed consistently from sigma and is not independent evidence.
+The reduced latent scale and raw-coordinate saturation persist. Yet cumulative physical-boundary
+truncation rates are numerically close, and service remains worse in this H6 interim panel.
+This constrains the simple account that lowering raw-action saturation by itself repairs
+boundary exposure and service. It is not an equivalence claim for boundary behavior, an
+identified action-mean mediator, or a general conclusion about exploration: joint trajectories
+and co-learning also differ. Prior controls did not record the action-mean histories needed for
+that attribution. Keep that limitation instead of inventing a mediator from aggregate counts.
+
+The final45 endpoint, full/late-window exposure comparison and selective SET question remain
+unresolved. Q is still unavailable; a future Q from H6 loss alone still fails the fixed joint
+rule. **1/2 B04 fits started,0 complete**, SET unstarted. Continue the same H6 handle and then
+the already fixed SET fit, with no new investment or revised endpoint. Existing complete Pro
+advice covers this unchanged reading rule. Consumed the exact generation56 checkpoint event
+and rearmed the same operation as generation57; no worker restart, new Send or cross-task message.
