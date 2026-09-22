@@ -2152,3 +2152,206 @@ after reading every rollout. These changing training worlds are not the final-wo
 and do not establish a final trend or any D/S/G comparison. Technical execution is supported;
 the bounded service-use hypothesis remains untested by the incomplete comparison. Continue
 the accepted operation and the fixed horizon without a restart, new fit or score-based change.
+
+## 2026-09-22 — B03 D second training checkpoint
+
+The 18:07 UTC observer checkpoint reports the same two matching native processes running,
+consistent records and no exit witness. No newer owner pause or change to this direction's
+assignment is present in refreshed main. The copied summary SHA256 is
+`909a343d3ec17acc64d0ec9dcbddce2f60e94811a6ef0fb3214727c789fe940b`:
+76,000 training transitions including partial collection 13, 12 completed updates, 16
+development episodes / 24,000 evaluation transitions, and the same 2 initial fact episodes /
+3,000 physical fact transitions. Config digest still matches, all 25,720 floating values
+are finite, failure is null and stderr is empty. The last resource row records cumulative
+wall 3357.41 s and RSS 3,085,844 KiB. Cost remains one started B03 fit plus the separate
+pre-training failure; there is no new launch.
+
+The prescribed rollout-10 development panel has mean raw J -418.874856, QoS .195961 and
+return cost .233338, versus initialization -508.082488 / .132604 / .231689 on the same
+eight world seeds. This is a within-instance intermediate observation with low absolute
+service and mixed per-world changes, not a D/S/G comparison, final panel or checkpoint
+selection. Training collections 6–12 also vary substantially. D's auxiliary representation
+steps and base/GRU movement remain zero in every new completed update.
+
+On the same two initial-policy fact episodes, the rollout-10 service MSE is .0193532
+against its training-mean reference .0101168. Observation MSE is .0149235, training-mean
+MSE .00858561 and persistence MSE .00000103515. These adverse predictive diagnostics are
+retained: they concern D's detached heads on initial facts, not a trained G arm or common
+endpoint mixture. Feature variance is 13.1790 and effective rank 7.4114 on the fixed 512 rows,
+with nonzero per-agent and episode-segment variation; this alone establishes no control use.
+No final worlds or final checkpoint are available. Continue the same accepted run and fixed
+reading without revising the recipe, choosing an early model or adding a fit.
+
+## 2026-09-22 — B03 D third training checkpoint
+
+The 18:35 UTC checkpoint retains the same running a02 identities, consistent records and
+no exit witness. Refreshed main leaves this direction active with the same lead and no
+new owner pause. Snapshot SHA256
+`a7ff7aa2850b339791754b91db7a6b1c93b192df906fe01c0bec60654d09949c`
+records 119,600 training transitions, including partial collection 20, and 19 completed
+updates. Evaluation remains the two completed development panels at 0 and 10: 24,000
+transitions, plus the unchanged 3,000 physical initial-fact transitions. All 40,371 floating
+values are finite; the config digest, initialization, initial-fact digest, calibration and
+first-rollout bindings match the prior snapshot. Failure is null and stderr is empty.
+
+Completed training collections 13–19 retain varying raw return and service, with D's
+auxiliary representation steps and base/GRU movement still zero. No additional evaluation
+panel or final result is yet available. The last resource row records cumulative wall
+4933.74 s and RSS 3,085,844 KiB. Cost remains one started B03 fit and the separately retained
+pre-training failure. Continue observing this accepted operation at the fixed exposure;
+the incomplete comparison supports no new package or predictive-mechanism conclusion.
+
+## 2026-09-22 — B03 D fourth training checkpoint
+
+At the 19:02 UTC observer checkpoint the same a02 native identities remain running, with
+consistent records and no exit witness. Current published control still authorizes this
+direction and introduces no new pause. Snapshot SHA256
+`78c81d4a9a782b4a3f6ac79331524c00bcddf065478dfcbdd6fa248be1b036ec`
+records 150,400 training transitions including partial collection 26, 25 completed updates,
+24 development episodes / 36,000 evaluation transitions, and the same 3,000 initial-fact
+transitions. All 53,198 floating values are finite; config, initialization, facts, calibration
+and first-rollout bindings remain unchanged. Failure is null and stderr is empty. The last
+resource row records cumulative wall 6686.17 s and RSS 3,092,180 KiB. There is still one
+started B03 fit, separate from the recorded a01 pre-training failure.
+
+The prescribed rollout-20 development panel has mean raw J -110.657820, QoS .204738,
+return cost .135173 and mean episode-minimum battery .371384. Its eight worlds remain
+mixed, with one zero-service world; no charging, cutoff or depletion events are observed.
+The new completed training collections 20–25 also have no such events, and D's auxiliary
+representation steps and base/GRU movement remain zero.
+
+On the unchanged initial facts, service MSE is .110199, while observation MSE is .0102530;
+their training-mean references remain .0101168 and .00858561, and observation persistence
+MSE remains .00000103515. These predictive diagnostics remain adverse despite the higher
+mean development return than at rollout 10; they are not final-world or S/G evidence.
+Fixed-row feature variance is 25.8736 and effective rank 7.6482, without a zero-variance
+degeneration flag. Retain all observations and continue the accepted operation through its
+fixed training and final evaluation. No early checkpoint is selected and no new fit is added.
+
+## 2026-09-22 — B03 D training horizon reached, final evaluation pending
+
+The 19:29 UTC checkpoint still reports both matching a02 processes running, consistent
+records and no exit witness. No newer owner pause or assignment change applies. Snapshot
+SHA256 `3edf3edfd0f048a4060ae50ebd339f51c7f3071535c16fd42f00872bcf909094`
+records the full 180,000 training transitions and 30 completed updates. All four development
+panels are complete: 32 episodes / 48,000 evaluation transitions; physical facts remain
+the two initial episodes / 3,000 transitions. Final-world evaluation, endpoint facts and
+final checkpoint acceptance are still pending. The summary remains INCOMPLETE with failure
+null and empty stderr. All 63,932 floating values are finite; earlier completed records and
+fixed initialization/config/facts/calibration bindings remain unchanged. The final training
+resource row records cumulative wall 7852.55 s and RSS 3,092,180 KiB; it is not total fit cost.
+
+Rollout-30 development mean J is -204.652697, QoS .187162 and return cost .157697.
+The mean is below rollout 20 on the same eight seeds, with four worlds improving and four
+worsening. This late development decrease is retained; rollout 20 is not substituted for
+the fixed endpoint. On initial facts, service MSE is .0116812 and observation MSE .00972033,
+still above their fixed training-mean references. Thus the service readout improved since
+rollout 20 while mean development return fell; these different-panel measurements are not
+a causal mechanism analysis. Fixed-row variance/rank are 28.9133 / 8.8947. D's auxiliary
+representation updates remain zero across all 30 passes, and the newly read training and
+development records contain no charging, cutoff or depletion events. Continue the same
+operation through the pending final-world/fact collection; no later cell is launched yet.
+
+## 2026-09-22 — B03 D complete acceptance and fixed S continuation
+
+The D / 912211 / a02 operation has a valid exit-0 witness; at 19:55:55 UTC both recorded
+native identities are absent and the operation records are consistent. The DM has now read
+the complete [runner summary](../../../../runs/uav_service_auxiliary/b03_d_912211_a02/summary.json),
+all 32 final-world rows, development panels, training/progress records, facts and saved
+checkpoints. Summary SHA256 is
+`824e706fddd4d9b1f53a80463d8033db9135449c7154a2cec10ded54156ac672`.
+All 18 files, totaling 237,191,695 bytes, were copied from the original node and matched
+its per-file sizes and SHA256 digests. The large NPZ/PT files remain recoverable in both
+the local run directory and `/home/wu/hmasd-worktrees/usa-b03-73be55261/runs/uav_service_auxiliary/b03_d_912211_a02`;
+they are not replaced by this prose or added to Git against the repository ignore rules.
+
+Artifact acceptance is separate from process exit. The production-contract readback passed
+the frozen source, full production spec, CUDA/four-thread binding, panel identities and
+lengths, artifact hashes, fixed calibration, fact metadata/shapes/masks and final policy
+fingerprint. Every reported evaluation aggregate was independently recomputed from its
+world rows. Saved arrays at 0/10/20/30 independently reproduced the episode-equal service,
+observation, persistence and training-mean losses in float64 within the declared float32
+rounding tolerance. Both final checkpoints loaded and matched the native optimizer counts,
+30 auxiliary passes, 900 updates for each detached head and zero auxiliary representation
+updates. This readback performed zero environment steps or optimizer updates.
+
+The completed fit contains exactly 180,000 training team transitions / 30 rollouts / 120
+episodes, 96,000 evaluation transitions / 64 episodes, and 9,000 physical fact transitions /
+6 episodes (two initial and four endpoint). Initial-fact diagnostics replayed 95,424 valid
+agent rows across four checkpoints. Native high-level/actor/critic/team-discriminator/
+individual-discriminator optimizer counts are 2,250 / 67,500 / 67,500 / 450 / 1,800, with
+nonzero displacement for all native learners. D's auxiliary base/GRU movement is zero on
+every pass. No missing final artifacts, runner failure or stderr was found.
+
+The prescribed final 32-world panel at rollout 30 has mean raw J **-96.648955**, QoS
+**.219808215**, throughput **6.594246465**, return cost **.137800407**, and mean true
+episode-minimum fleet battery **.367119027**. The legacy time-average minimum battery is
+.568477819 and is not substituted for the episode minimum. All worlds last 1,500 steps
+and truncate. One has zero service; raw J ranges from -1570.825 to 488.390. Charging,
+cutoff, depletion and charger-input exposure remain zero. These observations retain the
+low-absolute-service, heterogeneity and event-exposure limitations.
+
+The fixed development J curve at 0/10/20/30 is -508.082488 / -418.874856 / -110.657820 /
+-204.652697. Its late decrease remains part of the reading; no rollout-20 selection is
+made. The final and development panels have different world seeds, so their difference
+does not measure a learning improvement. The separate four endpoint-fact worlds have
+mean J 48.311094 and QoS .149470470; their facts await the prespecified common D/S/G
+mixture after this block completes. They are not extra final-world observations.
+
+On the unchanged initial facts, final service MSE is .0116812224 versus training-mean
+.0101167676; observation MSE is .00972032691 versus training-mean .00858561420 and
+persistence .00000103514643. Fixed-row feature variance/effective rank are 28.9133 / 8.8947.
+The adverse reference comparisons and the earlier disagreement between service MSE and
+development J remain contrary evidence. They do not yet evaluate a trained G package or
+the common endpoint mixture and cannot identify a predictive mechanism.
+
+Actual D runner cost is **9,828.798293 s / 163.813305 min**, CPU user/system
+9,405.779616 / 443.096927 s, and peak RSS 3,092,180 KiB. Stage wall seconds are collection
+4,094.20379, native update 2,266.60051, auxiliary update 20.53472, evaluation 2,835.34253,
+physical facts 274.13449, fact replay 11.59253, preparation 1.36821 and checkpoint .20688.
+This is scoped runner cost under the observed node conditions, not an intrinsic speed claim.
+Actual B03 cost at this decision is one completed fit plus the separately retained zero-step
+pre-training failure; five fixed fits remain unstarted.
+
+Refreshed published control still lists the same active direction and lead with owner pause
+lifted. The technical completeness judgment strengthens; the service-versus-generic package
+hypothesis remains untouched by a D-only result, while low absolute service and late
+variation remain adverse context. The next discriminating observation is the already
+selected S / 912211 / a01 cell at the same 180k horizon, source
+`73be55261b9f5e8f8fe26fdec6558b87ad088fcb`, device and panels. S activates service gradients
+into the base/GRU while its generic head stays detached. It imports the exact D initial
+facts (`8d049f00c9f16367f481e9dabe47c21068d84c8125ba2653e51795cd7ca2f5e5`)
+and calibration (`b5b7e03fdc253592f673fc9a0b4d640305a9bd1d7a8ccbca35904d1105012523`)
+from that retained run. Initialization, first collection and first native update must match
+before auxiliary divergence. A higher final S-minus-D raw J would support this bounded
+service-use package contrast, subject to the fixed G contrast and second training block;
+an adverse or mixed contrast weakens that reading. No extra fit, horizon change, early
+checkpoint, retuning or new Pro Send is selected. Launch remains subject to native admission.
+
+## 2026-09-22 — B03 fixed S cell admitted
+
+The preceding complete D reading and prospective S continuation were committed and pushed
+as `792c764e8` before launch. S / 912211 / a01 was natively accepted at 20:07:06 UTC from
+the unchanged frozen source `73be55261b9f5e8f8fe26fdec6558b87ad088fcb`. Its
+[manifest](../../../../runs/uav_service_auxiliary/b03_s_912211_a01/launch-manifest.json)
+binds the exact D facts/calibration hashes and retains the new operation and process handles.
+Fresh published control was `9ba1b112316aed0b5ea7323cd5a44de2386650ec`; canonical pause/state/
+lead agreed. Native memory preflight passed with 14,762,332,160 available physical bytes.
+The preceding GPU probe reported 7,948 MiB free. The native status at 20:07:22 UTC reports
+both matching identities running, consistent records and no exit witness.
+
+The first copied [summary](../../../../runs/uav_service_auxiliary/b03_s_912211_a01/summary.json),
+SHA256 `8c26595fd00cabac5b23fa9de55c54731b5f59af71421972130db0ec2ecad8ac`, is INCOMPLETE
+with failure null and empty stderr. It records the same initialization fingerprint as D,
+the exact initial-fact digest, two reused episodes / 3,000 reused transitions, and zero
+physical fact generation, training transitions, updates or completed evaluation panels.
+Config binds the fixed calibration digest. This early snapshot supports correct initial
+input reuse; first-collection and first-native-update equality remain to be observed.
+It does not yet establish commencement of a second training fit or any S result.
+
+The completed D observation was consumed with its exact generation, wake and event IDs;
+the new native S operation is registered with the deterministic detached observer for
+completion, error or a bounded checkpoint. No accepted worker or Pro question was repeated.
+One B03 fit is complete, S is admitted and active, four later cells remain unstarted, and
+the separate zero-step a01 D failure remains retained. Continue the fixed S operation;
+the incomplete package comparison still selects no additional fit or altered recipe.
