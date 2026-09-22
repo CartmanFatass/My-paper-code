@@ -250,3 +250,61 @@ operation. Never launch a replacement or repeat the accepted request. After a co
 detach reading, run only the already fixed joint arm with the retained facts digest and
 fresh actual-node admission. No cross-task notification or additional fit is authorized
 by the observation event.
+
+### B01 detach complete and read — 2026-09-21 22:20 PDT
+
+The native exit witness is valid with code 0; the saved terminal observation at
+`2026-09-22T05:20:32.719796Z` reports consistent records. The DM read the complete
+[runner summary](../../../../runs/uav_service_auxiliary/b01_detach_910021_a01/summary.json),
+configuration, learning/evaluation records and final prediction arrays. All 13 copied files
+match the remote SHA256 values. Both final checkpoints load and every floating tensor is
+finite. This accepts **1 completed fit**, not a comparative auxiliary result.
+
+Actual exposure is exactly 180,000 team training transitions, 30 native/auxiliary update
+stages and 120 complete training episodes. All 32 evaluation episodes are complete 1500-step
+truncations on the frozen eight worlds; actual evaluation exposure is 48,000 transitions.
+The two common-fact episodes contribute 3000 transitions and 23,856 valid per-agent
+predictions per endpoint. There were **0** straddling rollout boundaries. All five native
+modules moved from initialization; recorded optimizer steps are high=2250, low actor=67500,
+low critic=67500, team discriminator=450 and individual discriminator=1800. Each auxiliary
+stage has 5964 supervised team rows / 47,712 agent samples and 30 head steps; all detach
+representation gradient norms are exactly zero. Runner wall time is 8318.307 seconds
+(138.64 minutes), peak RSS 3,026,388 KiB, on `wsl_4070` CUDA FP32. No extra fit was started.
+
+| Rollout | Mean complete native J | Mean QoS ratio | Mean return constraint cost | Common-fact MSE |
+| --- | ---: | ---: | ---: | ---: |
+| 0 | -521.691683 | 0.114334 | 0.227204 | 0.002800299 |
+| 10 | -283.523015 | 0.228059 | 0.204274 | 0.007282700 |
+| 20 | -555.766203 | 0.153292 | 0.257773 | 0.001460180 |
+| 30 | -644.966810 | 0.152040 | 0.286961 | 0.010846485 |
+
+Endpoint delivered throughput is 4.561212 Mbps and raw reward per step is -0.429978.
+The fixed endpoint remains rollout 30; rollout 10 is not substituted as a best checkpoint.
+An independent NumPy window calculation on the saved factual labels/predictions reproduces
+the final MSE as 0.010846484902 (23,856 samples). The common fact identity is
+`eed668d62a5ae3151463b93ee24ca292fc330ce51ca489d1fdb82a826d344a3e`;
+initial full-model fingerprint is `d934e4fff0b02cb3a5987ad630793d63c43ac8ef51ae0c3b6329676b0194c851`.
+Final checkpoint SHA256 values are agent
+`fb83a18ce1845d2db3eb6b8837186ba2fc2ff1aefbd571eb1b827dfd934c3ba3` and auxiliary
+`275f5330c86aa2afec253491d258f1acc5c55c55c6735ebfc9ea449740bb153e`.
+The facts, prediction NPZ and checkpoints are retained in the original remote output and
+the identical local `runs/uav_service_auxiliary/b01_detach_910021_a01/` copy; binary files
+and ignored logs stay outside Git under its existing ignore policy. Runner JSON/JSONL
+evidence is published.
+
+Observed scope: charging occupancy/energy, cutoff events and depletion events are zero
+throughout collected training and evaluation. The return constraint cost is active, but
+this fit supplies no observed charging competition or failure-recovery evidence. Complete
+J and factual forecast error are non-monotonic despite real optimizer movement. Technical
+integration is established; native competence, auxiliary package advantage and training-seed
+generalization remain unestablished. No horizon extension or target change follows these
+scores. Current main background still supports reading complete native outcomes separately
+from forecasts; the latest duration-interface clarification changes none of this fixed pair.
+
+Proceed with the already declared second fit, joint seed 910021, the same 180k horizon and
+source `382643ca91cf764336f3311bc166275a5d2bbe97`. Output is
+`runs/uav_service_auxiliary/b01_joint_910021_a01`. The `--facts` input is the original remote
+detach `facts.npz` above and `--facts-sha256` is its verified digest; regenerate nothing.
+Fresh preparation currently shows 10 GiB available RAM and 5706 MiB free GPU memory; native
+admission will recheck actual resources and current policy. No new Pro question is needed:
+the programme advice already covers this unchanged, predeclared comparison.
