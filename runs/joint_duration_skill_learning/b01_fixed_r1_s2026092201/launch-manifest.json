@@ -1,0 +1,102 @@
+{
+  "acceptance": "accepted",
+  "accepted_at": "2026-09-22T04:31:33.958650Z",
+  "bootstrap_command": [
+    "/home/wu/.venvs/hmasd/bin/python",
+    "/home/wu/hmasd-worktrees/joint-duration-learning/scripts/hmasd_admission.py",
+    "_run-admitted",
+    "--runner",
+    "/home/wu/hmasd-worktrees/joint-duration-learning/experiments/candidates/joint_duration_skill_learning/runner.py",
+    "--output",
+    "/home/wu/hmasd-worktrees/joint-duration-learning/runs/joint_duration_skill_learning/b01_fixed_r1_s2026092201",
+    "--",
+    "--arm",
+    "fixed",
+    "--seed",
+    "2026092201",
+    "--launch-sha",
+    "472af353ed44d9da8529179c4f32b2ce030d7b56",
+    "--device",
+    "cuda",
+    "--out",
+    "runs/joint_duration_skill_learning/b01_fixed_r1_s2026092201"
+  ],
+  "claim_key": "12f21b0efb6257dd3bfd9639384de04400644d9ec8b366ae6b0e236287f450ea",
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/12f21b0efb6257dd3bfd9639384de04400644d9ec8b366ae6b0e236287f450ea.json",
+  "command": [
+    "/home/wu/.venvs/hmasd/bin/python",
+    "/home/wu/hmasd-worktrees/joint-duration-learning/experiments/candidates/joint_duration_skill_learning/runner.py",
+    "--arm",
+    "fixed",
+    "--seed",
+    "2026092201",
+    "--launch-sha",
+    "472af353ed44d9da8529179c4f32b2ce030d7b56",
+    "--device",
+    "cuda",
+    "--out",
+    "runs/joint_duration_skill_learning/b01_fixed_r1_s2026092201"
+  ],
+  "command_sha256": "23ddfb9d2e84ec855924fe742fe39d9bbeb5cbd0751422d37bb68273f2fc93d9",
+  "control_observation": {
+    "observed_at": "2026-09-22T04:31:32.444150Z",
+    "ref": "refs/heads/main",
+    "remote": "origin",
+    "sha": "9b7b88659359b2420a37af0311ab94cc13ce2551"
+  },
+  "control_root": "/home/wu/projects/HMASD",
+  "created_at": "2026-09-22T04:31:32.454318Z",
+  "cwd": "/home/wu/hmasd-worktrees/joint-duration-learning",
+  "direction": "joint_duration_skill_learning",
+  "host_identity": "LAPTOP-U9TDKC8A",
+  "identity_command": [
+    "/home/wu/.local/share/uv/python/cpython-3.10.21-linux-x86_64-gnu/bin/python3.10",
+    "experiments/candidates/joint_duration_skill_learning/runner.py",
+    "--arm",
+    "fixed",
+    "--seed",
+    "2026092201",
+    "--launch-sha",
+    "472af353ed44d9da8529179c4f32b2ce030d7b56",
+    "--device",
+    "cuda"
+  ],
+  "lead": "Codex DM (independent session)",
+  "manifest_ref": "/home/wu/hmasd-worktrees/joint-duration-learning/runs/joint_duration_skill_learning/b01_fixed_r1_s2026092201/launch-manifest.json",
+  "node": "wsl_4070",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/12f21b0efb6257dd3bfd9639384de04400644d9ec8b366ae6b0e236287f450ea.json",
+  "output_root": "/home/wu/hmasd-worktrees/joint-duration-learning/runs/joint_duration_skill_learning/b01_fixed_r1_s2026092201",
+  "preflight": "/home/wu/hmasd-worktrees/joint-duration-learning/runs/joint_duration_skill_learning/b01_fixed_r1_s2026092201/admission-preflight.json",
+  "process": {
+    "detached": true,
+    "identity": {
+      "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+      "kind": "linux_pid_start_ticks",
+      "pid": 112773,
+      "session_id": 112773,
+      "start_ticks": 41547304
+    },
+    "native_handle_kind": "posix_session",
+    "pid": 112773,
+    "process_group_id": 112773
+  },
+  "process_exit": "/home/wu/hmasd-worktrees/joint-duration-learning/runs/joint_duration_skill_learning/b01_fixed_r1_s2026092201/process-exit.json",
+  "published_remote": "origin",
+  "runner_process": {
+    "identity": {
+      "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+      "kind": "linux_pid_start_ticks",
+      "pid": 112774,
+      "session_id": 112773,
+      "start_ticks": 41547307
+    },
+    "pid": 112774,
+    "process_group_id": 112773,
+    "supervisor_pid": 112773
+  },
+  "schema_version": 1,
+  "sha": "472af353ed44d9da8529179c4f32b2ce030d7b56",
+  "source_root": "/home/wu/hmasd-worktrees/joint-duration-learning",
+  "stderr": "/home/wu/hmasd-worktrees/joint-duration-learning/runs/joint_duration_skill_learning/b01_fixed_r1_s2026092201/stderr.log",
+  "stdout": "/home/wu/hmasd-worktrees/joint-duration-learning/runs/joint_duration_skill_learning/b01_fixed_r1_s2026092201/stdout.log"
+}

@@ -821,3 +821,20 @@ of a scientific negative. No further technical repeat is pre-authorized by this 
 new failure is collected with its diagnostic snapshot and receives a fresh DM judgment.
 The question, comparator and scientific premises are unchanged, so prior accepted Pro advice
 is reused. The next useful observation remains the predeclared learned-policy comparison.
+
+### Corrected fixed attempt natively accepted — 2026-09-21
+
+The prospectively selected corrected attempt was accepted at 2026-09-22 04:31:33 UTC.
+Its [native manifest](../../../../runs/joint_duration_skill_learning/b01_fixed_r1_s2026092201/launch-manifest.json)
+binds the exact published inputs, invocation, executing checkout, output and original
+operation reference. A subsequent read-only native status found both recorded process
+identities running and consistent. The [fresh node preflight](../../../../runs/joint_duration_skill_learning/b01_fixed_r1_s2026092201/admission-preflight.json)
+measured 11,539,693,568 available host bytes against the 4 GiB floor. Both collected admission
+files were SHA-256 matched to the node. The canonical pause and lead checks passed.
+
+Actual started result attempts are now **2 of the 4 prospectively declared attempts**:
+one retained technical failure and the running corrected fixed instance. Factored/AR remain
+unstarted. Hold the executing source checkout unchanged while this accepted process is live.
+The deterministic waiter observes its original operation reference; a checkpoint or missing
+observation does not authorize a restart. Full outputs, resource costs and scientific
+measurements remain to be collected and read before any comparison or subsequent arm launch.
