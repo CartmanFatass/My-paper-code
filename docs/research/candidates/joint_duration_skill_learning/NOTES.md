@@ -1015,3 +1015,116 @@ The original 360k endpoint, four evaluation panels and all other bound settings 
 Hold the live source unchanged and observe the original accepted handle. The full AR result
 must be collected, verified and read before the three-arm judgment; this entry authorizes
 no additional fit or automatic technical replacement.
+
+### B01 complete three-arm result and closure of the cap-10 recipe — 2026-09-22
+
+AR exited 0 at **2026-09-22 09:53:05 UTC**, with a valid native exit witness and consistent
+runner/supervisor identities. All **12 files / 227,466,080 bytes**, including four checkpoints,
+were copied to the owned local run directory and byte/SHA-256 matched to the node. Checkpoint
+metadata also matches the files. The DM read the [complete summary](../../../../runs/joint_duration_skill_learning/b01_ar_s2026092203/summary.json),
+all 45 training rows and four evaluation panels; the JSONL exactly matches the embedded rows,
+and all recorded numeric measurements are finite. Accept AR as a completed scientific result.
+The small native outputs are published; checkpoints remain recoverable in the local and
+remote `runs/joint_duration_skill_learning/b01_ar_s2026092203/` directories bound by the
+[original manifest](../../../../runs/joint_duration_skill_learning/b01_ar_s2026092203/launch-manifest.json).
+
+The same execution source `472af353ed44d9da8529179c4f32b2ce030d7b56` fulfilled 360,000
+training/stored transitions, 720 episodes, 45 updates and 64,000 evaluation transitions in
+128 episodes. Each panel uses the declared 32 worlds 740000..740031, 500 steps each, with
+zero evaluator optimizer calls. One cold training start, zero checkpoint loads; all five
+learner groups moved. Configuration differs from each other completed arm only in the
+declared duration mode and seed; parameter counts match. Coordinator calls are 3,375,
+low actor/critic calls 101,250 each, and team/individual discriminator calls 675/2,700.
+Every rollout has 5,600–5,971 common events, hence 5 minibatches x 15 epochs = 75 coordinator
+calls. Original-group replay error is zero throughout; maximum merged relative probability
+drift is .0000864304675, below .001. Stderr is byte-identical to the fixed arm's 45 already
+interpreted terminal-bootstrap warnings. No new execution discrepancy was found.
+
+| Training team transitions | Fixed J | Factored J | AR J | AR minus fixed |
+| --- | --- | --- | --- | --- |
+| 0 | .21165105 | .31067571 | .31214618 | +.10049513 |
+| 120,000 | .48310947 | .48363505 | .39716022 | -.08594925 |
+| 240,000 | .50583558 | .42644395 | .46497655 | -.04085902 |
+| 360,000 (declared primary) | **.49670730** | **.46107574** | **.48021814** | **-.01648916** |
+
+AR minus factored is -.08647483, +.03853260 and +.01914241 at the three learned panels.
+AR improves across its deterministic panels and exceeds factored at the final two, but
+remains below fixed at every learned panel. Preserve both observations and the much higher
+initial variable-arm scores. These are **one independent training instance per arm with
+different seeds**: common evaluation worlds and four checkpoints add no independent training
+replication. No confidence interval over worlds, within-run gain or curve extrapolation is
+used to claim a population ranking, equality or a duration treatment effect. In AR's stochastic
+training observations, mean J moves from about .42680 at rollout 17 to .37732 at rollout 45;
+this differs from the rising deterministic panels, but policies/worlds differ and the gap does
+not identify an exploration mechanism. The endpoint and evaluation rule remain unchanged.
+
+Final AR coverage/quality/height penalty are .65139000/.17346959/.02779573, compared with
+fixed's .65604500/.18252755/.01728247. Their weighted contributions to AR minus fixed are
+-.00325850, -.00271739 and -.01051327. The cost field retains its S1 normalized-height meaning;
+it does not measure S7 battery, recharge or return-to-base performance.
+
+AR exercised 259,886 common events, 632,892 member-duration choices and 121,021 joint
+nondegenerate events (46.57% of common events). Same-label renewals total 121,696, with
+35,280 cap and 720 terminal boundaries. All durations 1..10 occurred. Mean declared/executed
+member duration is 3.412905; mean common-event elapsed time is 1.385223. The final deterministic
+panel has mean member duration 3.170305, 6,217 common events and 4,958 joint nondegenerate
+events. Forced cap-edge choices remain in applicable counts. This establishes active duration
+choices and joint sampling opportunities, not identified useful correlation or a causal
+explanation for the return differences.
+
+| Completed arm | Scientific-process wall (min) | Coordinator updates | Common training events |
+| --- | --- | --- | --- |
+| Fixed | 72.3408 | 675 | 36,000 |
+| Factored | 127.2228 | 3,375 | 259,855 |
+| AR | 96.5875 | 3,375 | 259,886 |
+
+AR wall is 5,795.249 s, 1.33517x fixed and .75920x factored; user/system CPU are
+5,299.860/665.039 s. Peak process RSS is 1,939,284 KiB (1.849 GiB), with reaped-child peak
+414,844 KiB separate. CUDA and Torch/OMP/MKL/OpenBLAS thread count 4 remain bound. Shared-node
+occupancy was not continuously measured: the lower observed AR wall than factored is not an
+intrinsic speed finding. Equal transitions and PPO epochs produced about 7.22x events and
+5x high-level optimizer calls in both variable arms; the low-level/discriminator counts match.
+
+All **4 declared attempts are finished**: three complete arms and the preserved original
+fixed technical failure. Total actual training/evaluation transitions are **1,104,000 / 208,000**.
+Summed scientific-process wall is **18,007.677 s (300.128 min)**, including that failed fit.
+This is not total project elapsed time or dedicated node occupancy; prior engineering checks,
+numerical diagnosis, pre-training refusal and transport/collection remain separate work in
+their existing entries, with unmeasured overhead not treated as zero. No new fit is selected.
+
+Working update and investment decision: the active, fully learned ordinary duration packages
+did not deliver the prewritten useful increment over fixed at this exposure. This weakens
+their current return/cost case; it does not weaken the conditional policy-class inclusion
+argument or establish that all variable durations are harmful. AR's later gain over factored
+and improving deterministic curve are contrary to a blanket failure claim. They do not meet
+the declared retain criterion against fixed or identify a specific repair whose predicted
+service consequence is worth a new comparison. An unchanged replication could test recurrence
+of the ranking, but is not selected merely to resolve all remaining uncertainty; a longer run
+is not justified by extending the observed tail after seeing scores.
+
+The complete, previously verified Pro Answer at `2876bf029b441b2d6ce1d3beaeb091e12e44107e`
+already addresses this exact decision in its section eight: AR beating factored while losing
+to fixed does not justify its complexity, and absent a useful increment or new discriminating
+reason this recipe should end. The [prewritten B01 reading](#b01-prospective-exploration--declared-before-implementationresults)
+adopted that branch. Reuse that consultation under constitution section 5; no premise, failure
+mechanism, scope or stopping criterion is changed to obtain this decision, and no new Pro Send
+is needed for applying it. The original numerical repair remains a technical correction,
+not an empirical rescue or a reason to discard the adverse completed outcomes.
+
+At this decision, published main `5c8e341fb404586109dded9deeca61d32a55ad33` retains shared
+background sections 4–6. They determine the reading here: distinguish expressivity from finite
+learning, member duration from event time, package value from correlation/credit attribution,
+and training seeds from evaluation worlds. Update the existing cost paragraph with both
+variable arms and the fixed comparator; update the event-semantics evidence link to this
+completed comparison. The shared lesson stays conditional and does not become a universal
+failure claim through publication.
+
+**Archive this direction for current investment and close the tested S1/cap=10 recipe.**
+There is no remaining accepted process, uncollected answer, queued fit, selected diagnosis or
+scheduled re-entry task. Preserve the implementation, checks, complete curves and checkpoints.
+This does not reopen Claude FSD or change G33. Longer-than-ten-step commitments remain a
+different untested question: they would require an actually changed common team clock and
+executable duration support, a corresponding ordinary fixed reference, and a recorded reason
+why their service consequences merit the new comparison. A larger menu still truncated at ten
+steps would not test that question. No such comparison is selected by this result, and no
+unmeasured positive result, automatic seed extension or speculative module is a pending dependency.
