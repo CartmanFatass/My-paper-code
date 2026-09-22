@@ -568,7 +568,9 @@ class DurationAgent(HMASDAgent):
                 self._duration_metrics["declared_durations"].extend(
                     durations_i[local][sampled_mask[env_id]].astype(int).tolist()
                 )
-                if sampled_mask[env_id].sum() >= 2 and np.sum(support[env_id] > 1) >= 2:
+                if self.duration_mode != "fixed" and np.sum(
+                    sampled_mask[env_id] & (support[env_id] > 1)
+                ) >= 2:
                     self._duration_metrics["joint_nondegenerate_events"] += 1
                 self._duration_metrics["eligible_factors"] += int(sampled_mask[env_id].sum())
                 self._duration_metrics["events"] += 1

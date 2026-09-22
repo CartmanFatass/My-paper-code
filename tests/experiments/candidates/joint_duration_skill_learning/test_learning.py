@@ -311,6 +311,7 @@ def test_collector_storage_and_update_reach_high_low_and_discriminator(tmp_path)
     assert _moved(discriminator_before, agent.team_discriminator)
     metrics = agent.get_duration_metrics()
     assert metrics["events"] > 0
+    assert metrics["joint_nondegenerate_events"] > 0
     assert metrics["stored_event_elapsed_total"] == 20
     assert metrics["last_update"]["optimizer_steps"] == 15
     assert metrics["replay_pre_max_abs_error"] < 2e-5
@@ -346,6 +347,7 @@ def test_evaluation_finalization_records_terminal_execution_without_training_eve
     agent.finish_evaluation_episode(np.ones(1, dtype=bool))
     metrics = agent.get_duration_metrics()
     assert metrics["events"] == 1
+    assert metrics["joint_nondegenerate_events"] == 0
     assert metrics["stored_events"] == 0
     assert metrics["terminal_boundaries"] == 1
     assert metrics["executed_duration"]["histogram"] == {"10": 2}
