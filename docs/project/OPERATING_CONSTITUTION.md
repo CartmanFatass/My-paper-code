@@ -97,12 +97,19 @@ operation. A method, tool, conversation or historical workflow is not a permanen
 - **Codex side (owner amendment 2026-09-20):** a session may act as **Root**, coordinating
   a named set of directions, or as the **direct DM** for one direction. A DM may be an
   independent session or a Root child; its scientific responsibility is the same. Reuse the
-  current lead rather than creating a second DM. Root's soft ceiling is three concurrent
-  direction DMs across both forms, not three of each; there is no obligation to fill it.
-  When fewer than three are active, Root may start a DM for a direction already chosen by
+  current lead rather than creating a second DM. The current owner-selected working level is
+  four concurrent direction DMs in total (owner, 2026-09-21), including a coordinating session
+  that finishes initialization and becomes one direct DM; this is not four of each form.
+  There is no obligation to replace a stopped direction without a worthwhile chosen question.
+  When fewer than four are active, Root may start a DM for a direction already chosen by
   an owner-triggered Portfolio review (the reserve list in RESEARCH.md). Independent sessions
   do not create an additional allowance, approval layer or automatic authority for new tasks.
   Native task creation still follows the owner's task-creation request and available tools.
+  For the owner's four-direction assignment, create three independent sessions and let the
+  assigning session own the fourth. After initialization, these DMs do not communicate with
+  one another, including Root reports, acknowledgments or relays through other routes. They
+  complete and publish independently; ordinary shared Git evidence and current background
+  remain available. Internal bounded helpers and Pro consultation retain their existing roles.
 - **Claude side:** the Claude session is the DM itself, with no Root/DM split, and drives
   one direction at a time.
 - **Implementer** (owner amendment 2026-09-16 18:32 PDT): each DM may hand one bounded code
@@ -363,7 +370,7 @@ or retranscribing old records. This is a small activation change, not a reposito
 
 Two directions are active at adoption; all others become archived for investment purposes,
 not scientifically disproved. `tail_return_distributional_learning` (TRDL) is the one reserve
-direction: Codex Root may start a DM for it under the three-DM soft ceiling when a worthwhile
+direction: Codex Root may start a DM for it under the current concurrency setting when a worthwhile
 discriminating idea exists, and is under no obligation to do so. The reserve list is
 amended only by an owner-triggered Portfolio review.
 

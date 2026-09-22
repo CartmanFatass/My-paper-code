@@ -80,8 +80,9 @@ Pro 是外部会话，不继承本地 skills：问题作者在现有问题段内
 Owner 可直接说“本任务作为 Root 协调 A、B”或“本任务直接作为 UCOPE 的 DM”。
 会话按当前指示与已记录归属选择职责；已有明确归属时不要求重新确认模式。
 独立 DM 自己推进一个方向，可以使用 Implementer、Reviewer；无需先创建一个 DM child
-再把工作转交一次。Root 可按 owner 指示向已有独立 DM 分派工作，也可使用 children，两种形式合计遵守三方向
-soft ceiling。Claude 仍是单方向 DM，本次没有扩大 Claude 的角色。
+再把工作转交一次。当前 owner 选择四方向并行：分派 session 初始化三个独立 DM 后直接负责第四项，
+全部方向 DM 合计计数。初始化后禁止这些 DM 互相通信，各自完成与发布；共享 Git 证据仍可按需读取。
+Claude 仍是单方向 DM，其暂停与手动恢复安排保持不变。
 
 当前地址放在 RESEARCH：协调段说明 acting Root、范围、原生地址和工作区，方向 standing
 给出独立 DM 的 task id/host 或 child 的 parent/agent 地址、作者 checkout/branch。不要为新地址改写

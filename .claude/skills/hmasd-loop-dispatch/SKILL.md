@@ -31,7 +31,8 @@ owner to repeat an already clear choice.
 - **Root:** coordinate a named set of directions, resolve shared dependencies, and maintain
   assigned cross-direction controls. DMs publish their own result entries; Root is not a
   routine result-publication gate. Count independent DMs and children
-  together toward the soft ceiling of three concurrent direction DMs. Do not fill slots
+  together with any assigning session that becomes a direct DM toward the current
+  owner-selected level of four concurrent direction DMs. Do not fill slots
   without a worthwhile authorized task or duplicate a direct DM's scientific work.
 - **Direct DM:** the session itself owns one direction. Explicitly read the
   `developer_instructions` body in `.codex/agents/hmasd-direction-manager.toml`, then the
@@ -126,6 +127,13 @@ remain in the existing notebook/index for the owner-triggered review; this metho
 send them to Pro automatically.
 
 ## Independent work and actual handover
+
+The owner's current four-direction assignment ends cross-DM communication after initialization.
+Create the three requested independent sessions with complete initial assignments; the assigning
+session then directly owns the fourth direction. Verify initial routing read-only and finish
+coordination. Do not add a progress watch, completion relay or later initialization ACK.
+Shared Git publication and background use continue through the normal methods; internal bounded
+helpers and Pro advice remain available within each DM's own task.
 
 Independent DMs finish work in their own tasks/branches and report there to the owner according
 to the owner's preference. Sending to another App task always needs an explicit user request;

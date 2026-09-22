@@ -6,14 +6,19 @@
 阅读入口：[研究背景与共享认识](#研究背景与共享认识) · [方向状态](#active) · [现行计划](#current-research-plan)。
 
 **Owner pause: lifted** 2026-09-18 about 17:55 PDT，owner 在 Claude WSL session 中解除项目暂停。
-当前索引没有 `exploring` / `confirming` 方向；下方计划是研究建议，不自动激活方向或接受实验。
+Owner 于 2026-09-21 明确选择四方向并行、由本任务选题并创建三个独立 DM；下表四个新问题进入 `exploring`。
+方向授权覆盖各 DM 的独立研究；具体训练批次仍由其在 NOTES 中事先声明。
 **Claude 的 FSD session 仍暂时停止，仅由 owner 手动开启；G33 保持冻结。**
 
-**Acting project Root:** task `01a0c348-428c-7f01-bd8b-121d69543032`，host `local`，负责全项目研究协调。
+**本次初始化负责人，随后直接担任周期方向 DM：** task `01a0c348-428c-7f01-bd8b-121d69543032`，host `local`。
 Checkout `/home/fires/.codex/worktrees/project-research-coordination/hmasd-wsl`，
 branch `codex/project-research-coordination-20260921`。
-各 DM 独立完成并发布自己的结果；Codex App 跨任务创建、恢复和通信遵循 owner 的明确请求，
-地址只用于恢复与指定联系。并发数量是执行安排，不限制科学问题数量，也不要求填满空位。
+初始化完成后四个 DM 禁止互相通信，不设持续 Root 汇报、转发或进度监视；各自在本任务向 owner 报告并独立发布。
+共享 Git 证据和研究背景继续按既有方法读写，Pro 咨询和本任务内有界 helpers 继续适用。
+四方向并行是当前工作强度，不等于四份重训练同时占用节点，也不要求自动递补停止的方向。
+**计算优先级（owner，2026-09-21）：先使用配置中的 WSL 远端 `wsl_4070`，再考虑本地资源。**
+远端不可用、实际资源不足或不适合所选计算时，DM 记录具体原因后使用本地；所有结果计算仍遵循实际节点准入，
+不迁移已接受进程、不因观察丢失重复启动。四个 DM 的并行研究不绕过节点资源检查。
 
 ## 研究背景与共享认识
 
@@ -150,6 +155,10 @@ B/UCOPE 的局部预测、一步优势或真实后缀信用没有自动转成稳
 
 | Direction | Question | State | Lead runtime | Standing and next step |
 | --- | --- | --- | --- | --- |
+| `joint_duration_skill_learning` | 在完整高低层共同学习中，新增时长选择及普通联合时长参数化能否改善有限资源下的原生服务？ | exploring | Codex DM (independent session) | 本任务直接 DM：`01a0c348-428c-7f01-bd8b-121d69543032`，host `local`；当前 checkout/branch 同上，随后登记独立研究工作区。S1 固定 k／充分知情的条件分解时长／普通 AR 联合时长；继承 FSD/UCOPE 反证，旧 Claude/FSD 路线保持停止。本次尚未接受 fits。[问题与边界](candidates/joint_duration_skill_learning/NOTES.md)。 |
+| `local_observation_encoding` | 同一合法局部观测下，普通稠密槽位/关系编码能否改善完整 HMASD 的有限学习？ | exploring | Codex DM (independent session) | 新独立 DM 正在初始化，实际任务地址与工作区由该 DM 登记。S1 固定 k/N，原 encoder 对普通稠密编码；保持共同学习和原目标，不叠加预测、稀疏或时长模块。本次尚未接受 fits。[问题与边界](candidates/local_observation_encoding/NOTES.md)。 |
+| `agent_count_generalization` | 固定 k、回合内固定 roster 时，HMASD 对未见团队数量 N 的服务能力和泛化代价是什么？ | exploring | Codex DM (independent session) | 新独立 DM 正在初始化，实际任务地址与工作区由该 DM 登记。原生 train-N→test-N；普通共享/set generalist 是强参照，明确 HMASD 配置及同信息/曝光契约，独立核对可变 N 接口。本次尚未接受 fits。[问题与边界](candidates/agent_count_generalization/NOTES.md)。 |
+| `uav_service_auxiliary` | 未来事实端到端服务监督能否帮助 HMASD 学会接入、回传与能源约束下的协作？ | exploring | Codex DM (independent session) | 新独立 DM 正在初始化，实际任务地址与工作区由该 DM 登记。S7 v3/reward v2/arm C，固定 k/N；相同已训练预测头 detach 对辅助梯度进入 actor/GRU。绑定真实服务标签及窗口，G33 冻结。本次尚未接受 fits。[问题与边界](candidates/uav_service_auxiliary/NOTES.md)。 |
 | `skill_teammate_drift_learning` | When teammates change, what must be learned or reused to improve decisions beyond competent simple controls? | reserve | Codex DM (independent session) | DM task `01a0bdb4-cd2c-71a3-af95-a196aeed70cd`，host `local`；checkout `/home/fires/.codex/worktrees/b-unknown-joint-law/hmasd-wsl`，branch `codex/b-unknown-joint-law`。旧径向一步表路线结束；B09/B10 局部正用途保留，B11 完整轨迹增量不一致；自身网络 refresh/burn-in 未识别真实队友行为漂移，后继方案已否决。没有排队实验、诊断或 Pro；需具体行为变化、受影响的未来估计和有区别的比较，才能选择下一步。reserve 不是无价值判决或外部等待。[最新判断及 B 分支 entry-mask 修复](https://github.com/CartmanFatass/My-paper-code/blob/74fe267aa166299d93a03566e5f0ab149ff2b12d/docs/research/candidates/skill_teammate_drift_learning/NOTES.md)；修复没有追溯应用于历史/FSD 结果。 |
 
 ## Reserve
@@ -188,6 +197,11 @@ B/UCOPE 的局部预测、一步优势或真实后缀信用没有自动转成稳
 目标是有限数据与计算下有用的联合技能和完整 UAV 服务收益。可变周期 k、可变成员 N 分别研究；
 固定 k 的普通表示和学习改进也有独立价值。此处保留当前选择及依据，完整论证和其他候选按需查档。
 
+**当前四项投入。** 已选择表中的普通局部信息组织、技能周期与有限学习、N 数量泛化、UAV 端到端服务预测。
+它们分别改变表示、时间选择、训练/测试团队数量、服务监督，首问互不依赖新模块或阳性结果。
+周期比较是现有计划中尚未执行的共同学习问题，此次由 owner 授权选题后单独分配；不重启旧 FSD 信用救援，
+不接管 Claude notebook。技能规模、实际重组、churn、cross-play 等保留候选地位，不自动排队。
+
 | 研究问题 | 当前优先次序与第一个比较 | 证据如何约束投入 |
 | --- | --- | --- |
 | **普通局部信息组织** | 首选：S1、固定 k，完整 HMASD 的现有 encoder 对普通稠密槽位/关系 encoder。 | 同一合法数值、类型/排序；保留 FiLM、GRU、高低层共同学习、discovery、PPO 和物理动作。无持久实体 ID/真值有效位，不从 simulator state 偷加 mask；不同时叠加稀疏选择、预测损失、技能规模或新 critic。B05 支持认真比较输入组织，未证明关系瓶颈。 |
@@ -211,7 +225,7 @@ S1 只能检验自身覆盖/连接后果；S7 研究需要其真实服务机制�
 
 研究依据在本页的[背景与共享认识](#研究背景与共享认识)中统一维护；必要正确性修复在相关新比较中共享。
 完整答复、推导和原始结果留在方向 notebook / claim / runs 与日期归档。每次有新结果，重新选择下一笔有信息价值的投入，
-不承诺遍历整个候选清单，也不让三个并行 session 变成三个科学方向的配额。
+不承诺遍历整个候选清单；并行强度不构成科学方向配额或自动补位规则。
 
 ## Retirement and history
 

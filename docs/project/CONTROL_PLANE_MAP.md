@@ -39,7 +39,7 @@ HMASD 生成文件；不自动删除孤儿文件，不检查真实会话是否�
 
 | 工作 | Codex | Claude | 方法／记录归属 |
 | --- | --- | --- | --- |
-| 方向推进 | session 可做 Root 或直接做单方向 DM；Root 协调独立 DM tasks 与 children，合计 soft ceiling 为三方向 | session 本身是单方向 DM | Root 用 loop-dispatch；独立 Codex DM 由 AGENTS 直接读取共享 DM 正文；Claude 用 research-hub；direction lead 拥有 NOTES |
+| 方向推进 | 当前 owner 选择四方向并行；分派 session 初始化三个独立 DM 后直接负责第四项，初始化后各 DM 不互相通信 | session 本身是单方向 DM | Root 用 loop-dispatch；独立 Codex DM 由 AGENTS 直接读取共享 DM 正文；Claude 用 research-hub；direction lead 拥有 NOTES |
 | 实现 | DM 直接实现，或按需 Sol/high Implementer | session 直接实现，或按需 Opus/high Implementer | research-engineering；原生 Claude effort 未实测，不能从描述证明 |
 | Review／事实 | Reviewer，既有 Scout／Verifier／ResearchCritic | 对应原生 leaves | engineering／scientific-tools；是受限方法，不是额外决策者 |
 | 启动 | DM 直接启动或按需 Operator | session 直接启动或按需 Operator | engineering execution；精确来源、fresh preflight、accepted handle |

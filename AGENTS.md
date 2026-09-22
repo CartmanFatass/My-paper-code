@@ -17,8 +17,10 @@ Keep it current rather than append-only: superseded project reviews and plans re
 under `docs/research/archive/` per constitution section 4; direction NOTES keep their append-only role.
 
 Roles (constitution section 2). Codex: a session may coordinate as Root or directly own one
-direction as an independent DM. Root coordinates up to three direction DMs total, independent
-sessions and children combined; reuse the recorded lead. Root uses `hmasd-loop-dispatch`.
+direction as an independent DM. The current owner-selected working level is four direction DMs
+total, counting the assigning session when it becomes a direct DM; reuse the recorded lead.
+For the current four-direction assignment, initialization ends cross-DM communication;
+each session completes and publishes independently. Root uses `hmasd-loop-dispatch`.
 A direct Codex DM reads the `developer_instructions` body in
 `.codex/agents/hmasd-direction-manager.toml`, then the relevant scientific/engineering methods;
 it uses the same DM responsibility source without creating a child or loading Root procedures.
