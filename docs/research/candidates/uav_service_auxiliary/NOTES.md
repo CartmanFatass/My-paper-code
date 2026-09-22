@@ -184,3 +184,21 @@ Local focused auxiliary checks passed 5 cases; the CUDA-only case was skipped lo
 The shared storage/sampler/update entry-mask checks passed 2 cases. Tests are correctness
 fixtures, not scientific fits or UAV performance evidence. The remaining review concerns
 the native collector/evaluator, common-fact identity and final checkpoint/output path.
+
+Remote checks at published component commit `7e79fc632` passed all 8 auxiliary and
+storage/sampler/update tests in 3.44 seconds on `wsl_4070`, including the actual CUDA FP32
+gradient/RNG isolation case. Fourteen dependency deprecation warnings did not affect the
+checks. This used the owned remote worktree and configured interpreter; it accepted no
+scientific fit. The native collector retains the existing post-update `clear_buffers`
+behavior: the next native step reinitializes skills and recurrent state, including a lane
+whose physical episode straddles that collection boundary. Auxiliary replay follows the
+actual stored row-0 hidden input; it does not silently repair this shared behavior. At an
+unfinished boundary, RL bootstrap uses the next state and current critic hidden state with
+the held current skill. The default full-episode alignment usually avoids that boundary;
+the runner records actual straddling lanes for interpretation.
+
+The repository-wide new-runner admission source check currently fails on the existing
+`scripts/run_fsd_commitment_visibility_b12.py` entry, before reaching this direction's
+runner. No historical FSD source was changed. The owned B01 entry independently passed
+the same admission-call AST condition and a real no-admission CLI invocation: it refused
+with `missing HMASD admission` before importing scientific code or creating output.
