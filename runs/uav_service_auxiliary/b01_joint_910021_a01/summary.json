@@ -1,0 +1,4558 @@
+{
+  "object_id": "UAV-SERVICE-AUXILIARY-B01",
+  "status": "COMPLETE",
+  "failure": null,
+  "arm": "joint",
+  "seed": 910021,
+  "launch_sha": "382643ca91cf764336f3311bc166275a5d2bbe97",
+  "device": "cuda",
+  "torch_threads": 4,
+  "counts": {
+    "transitions": 180000,
+    "rollouts": 30,
+    "evaluations": 32,
+    "episodes": 120,
+    "evaluation_transitions": 48000,
+    "fact_episodes": 2,
+    "fact_transitions": 3000
+  },
+  "facts_sha256": "eed668d62a5ae3151463b93ee24ca292fc330ce51ca489d1fdb82a826d344a3e",
+  "initialization_sha256": "d934e4fff0b02cb3a5987ad630793d63c43ac8ef51ae0c3b6329676b0194c851",
+  "evaluations": {
+    "0": {
+      "native": {
+        "worlds": [
+          {
+            "seed": 920001,
+            "raw_native_J": -399.01384683716157,
+            "native_J_per_step": -0.2660092312247744,
+            "actual_length": 1500,
+            "terminal_type": "truncated",
+            "qos_satisfaction_ratio_sum": 165.24780844155327,
+            "qos_satisfaction_ratio_per_step": 0.11016520562770218,
+            "delivered_end_to_end_throughput_mbps_sum": 4957.434253246754,
+            "delivered_end_to_end_throughput_mbps_per_step": 3.3049561688311697,
+            "return_constraint_cost_sum": 276.4236340423725,
+            "return_constraint_cost_per_step": 0.184282422694915,
+            "cutoff_event_count_sum": 0.0,
+            "cutoff_event_count_per_step": 0.0,
+            "depletion_event_count_sum": 0.0,
+            "depletion_event_count_per_step": 0.0,
+            "charging_uav_count_sum": 0.0,
+            "charging_uav_count_per_step": 0.0,
+            "step_charger_input_wh_sum": 0.0,
+            "step_charger_input_wh_per_step": 0.0,
+            "battery_min_ratio_sum": 807.4142505745306,
+            "battery_min_ratio_per_step": 0.5382761670496871
+          },
+          {
+            "seed": 920002,
+            "raw_native_J": -884.4637287186343,
+            "native_J_per_step": -0.5896424858124228,
+            "actual_length": 1500,
+            "terminal_type": "truncated",
+            "qos_satisfaction_ratio_sum": 0.0,
+            "qos_satisfaction_ratio_per_step": 0.0,
+            "delivered_end_to_end_throughput_mbps_sum": 0.0,
+            "delivered_end_to_end_throughput_mbps_per_step": 0.0,
+            "return_constraint_cost_sum": 437.5525816329311,
+            "return_constraint_cost_per_step": 0.29170172108862075,
+            "cutoff_event_count_sum": 0.0,
+            "cutoff_event_count_per_step": 0.0,
+            "depletion_event_count_sum": 0.0,
+            "depletion_event_count_per_step": 0.0,
+            "charging_uav_count_sum": 0.0,
+            "charging_uav_count_per_step": 0.0,
+            "step_charger_input_wh_sum": 0.0,
+            "step_charger_input_wh_per_step": 0.0,
+            "battery_min_ratio_sum": 887.6977767201954,
+            "battery_min_ratio_per_step": 0.5917985178134636
+          },
+          {
+            "seed": 920003,
+            "raw_native_J": 76.11740736298361,
+            "native_J_per_step": 0.05074493824198908,
+            "actual_length": 1500,
+            "terminal_type": "truncated",
+            "qos_satisfaction_ratio_sum": 246.66666666666137,
+            "qos_satisfaction_ratio_per_step": 0.16444444444444092,
+            "delivered_end_to_end_throughput_mbps_sum": 7400.0,
+            "delivered_end_to_end_throughput_mbps_per_step": 4.933333333333334,
+            "return_constraint_cost_sum": 79.53584235697718,
+            "return_constraint_cost_per_step": 0.05302389490465145,
+            "cutoff_event_count_sum": 0.0,
+            "cutoff_event_count_per_step": 0.0,
+            "depletion_event_count_sum": 0.0,
+            "depletion_event_count_per_step": 0.0,
+            "charging_uav_count_sum": 0.0,
+            "charging_uav_count_per_step": 0.0,
+            "step_charger_input_wh_sum": 0.0,
+            "step_charger_input_wh_per_step": 0.0,
+            "battery_min_ratio_sum": 878.0038107375041,
+            "battery_min_ratio_per_step": 0.5853358738250027
+          },
+          {
+            "seed": 920004,
+            "raw_native_J": 194.4576289399399,
+            "native_J_per_step": 0.12963841929329326,
+            "actual_length": 1500,
+            "terminal_type": "truncated",
+            "qos_satisfaction_ratio_sum": 252.86333333332797,
+            "qos_satisfaction_ratio_per_step": 0.16857555555555198,
+            "delivered_end_to_end_throughput_mbps_sum": 7585.899999999972,
+            "delivered_end_to_end_throughput_mbps_per_step": 5.057266666666648,
+            "return_constraint_cost_sum": 22.26793102431296,
+            "return_constraint_cost_per_step": 0.014845287349541974,
+            "cutoff_event_count_sum": 0.0,
+            "cutoff_event_count_per_step": 0.0,
+            "depletion_event_count_sum": 0.0,
+            "depletion_event_count_per_step": 0.0,
+            "charging_uav_count_sum": 0.0,
+            "charging_uav_count_per_step": 0.0,
+            "step_charger_input_wh_sum": 0.0,
+            "step_charger_input_wh_per_step": 0.0,
+            "battery_min_ratio_sum": 974.8662437217745,
+            "battery_min_ratio_per_step": 0.6499108291478497
+          },
+          {
+            "seed": 920005,
+            "raw_native_J": -522.6219392019285,
+            "native_J_per_step": -0.348414626134619,
+            "actual_length": 1500,
+            "terminal_type": "truncated",
+            "qos_satisfaction_ratio_sum": 249.99999999999451,
+            "qos_satisfaction_ratio_per_step": 0.16666666666666302,
+            "delivered_end_to_end_throughput_mbps_sum": 7500.0,
+            "delivered_end_to_end_throughput_mbps_per_step": 5.0,
+            "return_constraint_cost_sum": 380.34090019178893,
+            "return_constraint_cost_per_step": 0.2535606001278593,
+            "cutoff_event_count_sum": 0.0,
+            "cutoff_event_count_per_step": 0.0,
+            "depletion_event_count_sum": 0.0,
+            "depletion_event_count_per_step": 0.0,
+            "charging_uav_count_sum": 0.0,
+            "charging_uav_count_per_step": 0.0,
+            "step_charger_input_wh_sum": 0.0,
+            "step_charger_input_wh_per_step": 0.0,
+            "battery_min_ratio_sum": 812.1484419859056,
+            "battery_min_ratio_per_step": 0.5414322946572704
+          },
+          {
+            "seed": 920006,
+            "raw_native_J": -361.3000407118399,
+            "native_J_per_step": -0.24086669380789327,
+            "actual_length": 1500,
+            "terminal_type": "truncated",
+            "qos_satisfaction_ratio_sum": 159.53333333333057,
+            "qos_satisfaction_ratio_per_step": 0.10635555555555372,
+            "delivered_end_to_end_throughput_mbps_sum": 4786.0,
+            "delivered_end_to_end_throughput_mbps_per_step": 3.1906666666666665,
+            "return_constraint_cost_sum": 255.0529848834282,
+            "return_constraint_cost_per_step": 0.1700353232556188,
+            "cutoff_event_count_sum": 0.0,
+            "cutoff_event_count_per_step": 0.0,
+            "depletion_event_count_sum": 0.0,
+            "depletion_event_count_per_step": 0.0,
+            "charging_uav_count_sum": 0.0,
+            "charging_uav_count_per_step": 0.0,
+            "step_charger_input_wh_sum": 0.0,
+            "step_charger_input_wh_per_step": 0.0,
+            "battery_min_ratio_sum": 806.1123693185351,
+            "battery_min_ratio_per_step": 0.5374082462123567
+          },
+          {
+            "seed": 920007,
+            "raw_native_J": -1344.0666646925263,
+            "native_J_per_step": -0.8960444431283509,
+            "actual_length": 1500,
+            "terminal_type": "truncated",
+            "qos_satisfaction_ratio_sum": 73.7666666666666,
+            "qos_satisfaction_ratio_per_step": 0.04917777777777773,
+            "delivered_end_to_end_throughput_mbps_sum": 2213.0,
+            "delivered_end_to_end_throughput_mbps_per_step": 1.4753333333333334,
+            "return_constraint_cost_sum": 702.6035127253281,
+            "return_constraint_cost_per_step": 0.4684023418168854,
+            "cutoff_event_count_sum": 0.0,
+            "cutoff_event_count_per_step": 0.0,
+            "depletion_event_count_sum": 0.0,
+            "depletion_event_count_per_step": 0.0,
+            "charging_uav_count_sum": 0.0,
+            "charging_uav_count_per_step": 0.0,
+            "step_charger_input_wh_sum": 0.0,
+            "step_charger_input_wh_per_step": 0.0,
+            "battery_min_ratio_sum": 812.3233512769193,
+            "battery_min_ratio_per_step": 0.5415489008512795
+          },
+          {
+            "seed": 920008,
+            "raw_native_J": -932.6422835765752,
+            "native_J_per_step": -0.6217615223843834,
+            "actual_length": 1500,
+            "terminal_type": "truncated",
+            "qos_satisfaction_ratio_sum": 223.93333333332973,
+            "qos_satisfaction_ratio_per_step": 0.14928888888888647,
+            "delivered_end_to_end_throughput_mbps_sum": 6718.0,
+            "delivered_end_to_end_throughput_mbps_per_step": 4.478666666666666,
+            "return_constraint_cost_sum": 572.6732505798732,
+            "return_constraint_cost_per_step": 0.3817821670532488,
+            "cutoff_event_count_sum": 0.0,
+            "cutoff_event_count_per_step": 0.0,
+            "depletion_event_count_sum": 0.0,
+            "depletion_event_count_per_step": 0.0,
+            "charging_uav_count_sum": 0.0,
+            "charging_uav_count_per_step": 0.0,
+            "step_charger_input_wh_sum": 0.0,
+            "step_charger_input_wh_per_step": 0.0,
+            "battery_min_ratio_sum": 799.9779272537306,
+            "battery_min_ratio_per_step": 0.5333186181691537
+          }
+        ],
+        "aggregate": {
+          "mean_raw_native_J": -521.6916834294677,
+          "mean_native_J_per_step": -0.34779445561964517,
+          "mean_qos_satisfaction_ratio_sum": 171.501392721858,
+          "mean_qos_satisfaction_ratio_per_step": 0.114334261814572,
+          "mean_delivered_end_to_end_throughput_mbps_sum": 5145.041781655841,
+          "mean_delivered_end_to_end_throughput_mbps_per_step": 3.4300278544372276,
+          "mean_return_constraint_cost_sum": 340.8063296796265,
+          "mean_return_constraint_cost_per_step": 0.2272042197864177,
+          "mean_cutoff_event_count_sum": 0.0,
+          "mean_cutoff_event_count_per_step": 0.0,
+          "mean_depletion_event_count_sum": 0.0,
+          "mean_depletion_event_count_per_step": 0.0,
+          "mean_charging_uav_count_sum": 0.0,
+          "mean_charging_uav_count_per_step": 0.0,
+          "mean_step_charger_input_wh_sum": 0.0,
+          "mean_step_charger_input_wh_per_step": 0.0,
+          "mean_battery_min_ratio_sum": 847.318021448637,
+          "mean_battery_min_ratio_per_step": 0.5648786809657579,
+          "worlds": 8,
+          "primary_native_J_mean": -521.6916834294677
+        }
+      },
+      "common_fact": {
+        "mse": 0.0028002990483438146,
+        "valid_predictions": 23856,
+        "episodes": [
+          {
+            "index": 0,
+            "valid": 11928,
+            "mse": 0.004909722600132227
+          },
+          {
+            "index": 1,
+            "valid": 11928,
+            "mse": 0.0006908754585310817
+          }
+        ]
+      }
+    },
+    "10": {
+      "native": {
+        "worlds": [
+          {
+            "seed": 920001,
+            "raw_native_J": 427.46058970227176,
+            "native_J_per_step": 0.2849737264681812,
+            "actual_length": 1500,
+            "terminal_type": "truncated",
+            "qos_satisfaction_ratio_sum": 440.73897005772045,
+            "qos_satisfaction_ratio_per_step": 0.2938259800384803,
+            "delivered_end_to_end_throughput_mbps_sum": 13222.169101731464,
+            "delivered_end_to_end_throughput_mbps_per_step": 8.81477940115431,
+            "return_constraint_cost_sum": 0.0,
+            "return_constraint_cost_per_step": 0.0,
+            "cutoff_event_count_sum": 0.0,
+            "cutoff_event_count_per_step": 0.0,
+            "depletion_event_count_sum": 0.0,
+            "depletion_event_count_per_step": 0.0,
+            "charging_uav_count_sum": 0.0,
+            "charging_uav_count_per_step": 0.0,
+            "step_charger_input_wh_sum": 0.0,
+            "step_charger_input_wh_per_step": 0.0,
+            "battery_min_ratio_sum": 815.0267929604528,
+            "battery_min_ratio_per_step": 0.5433511953069685
+          },
+          {
+            "seed": 920002,
+            "raw_native_J": 80.63967854385326,
+            "native_J_per_step": 0.053759785695902174,
+            "actual_length": 1500,
+            "terminal_type": "truncated",
+            "qos_satisfaction_ratio_sum": 140.12088744588758,
+            "qos_satisfaction_ratio_per_step": 0.09341392496392505,
+            "delivered_end_to_end_throughput_mbps_sum": 4203.626623376631,
+            "delivered_end_to_end_throughput_mbps_per_step": 2.802417748917754,
+            "return_constraint_cost_sum": 24.158254064791496,
+            "return_constraint_cost_per_step": 0.016105502709860997,
+            "cutoff_event_count_sum": 0.0,
+            "cutoff_event_count_per_step": 0.0,
+            "depletion_event_count_sum": 0.0,
+            "depletion_event_count_per_step": 0.0,
+            "charging_uav_count_sum": 0.0,
+            "charging_uav_count_per_step": 0.0,
+            "step_charger_input_wh_sum": 0.0,
+            "step_charger_input_wh_per_step": 0.0,
+            "battery_min_ratio_sum": 893.4521906171315,
+            "battery_min_ratio_per_step": 0.5956347937447543
+          },
+          {
+            "seed": 920003,
+            "raw_native_J": -71.08695125274421,
+            "native_J_per_step": -0.04739130083516281,
+            "actual_length": 1500,
+            "terminal_type": "truncated",
+            "qos_satisfaction_ratio_sum": 287.6565145502637,
+            "qos_satisfaction_ratio_per_step": 0.1917710097001758,
+            "delivered_end_to_end_throughput_mbps_sum": 8629.695436507925,
+            "delivered_end_to_end_throughput_mbps_per_step": 5.7531302910052835,
+            "return_constraint_cost_sum": 173.48720212068625,
+            "return_constraint_cost_per_step": 0.11565813474712416,
+            "cutoff_event_count_sum": 0.0,
+            "cutoff_event_count_per_step": 0.0,
+            "depletion_event_count_sum": 0.0,
+            "depletion_event_count_per_step": 0.0,
+            "charging_uav_count_sum": 0.0,
+            "charging_uav_count_per_step": 0.0,
+            "step_charger_input_wh_sum": 0.0,
+            "step_charger_input_wh_per_step": 0.0,
+            "battery_min_ratio_sum": 881.7825486333348,
+            "battery_min_ratio_per_step": 0.5878550324222233
+          },
+          {
+            "seed": 920004,
+            "raw_native_J": -73.84563531164319,
+            "native_J_per_step": -0.04923042354109546,
+            "actual_length": 1500,
+            "terminal_type": "truncated",
+            "qos_satisfaction_ratio_sum": 293.8246323926165,
+            "qos_satisfaction_ratio_per_step": 0.19588308826174433,
+            "delivered_end_to_end_throughput_mbps_sum": 8814.738971778486,
+            "delivered_end_to_end_throughput_mbps_per_step": 5.8764926478523245,
+            "return_constraint_cost_sum": 176.93958889428623,
+            "return_constraint_cost_per_step": 0.11795972592952415,
+            "cutoff_event_count_sum": 0.0,
+            "cutoff_event_count_per_step": 0.0,
+            "depletion_event_count_sum": 0.0,
+            "depletion_event_count_per_step": 0.0,
+            "charging_uav_count_sum": 0.0,
+            "charging_uav_count_per_step": 0.0,
+            "step_charger_input_wh_sum": 0.0,
+            "step_charger_input_wh_per_step": 0.0,
+            "battery_min_ratio_sum": 981.1088705891544,
+            "battery_min_ratio_per_step": 0.6540725803927696
+          },
+          {
+            "seed": 920005,
+            "raw_native_J": -778.0702427860605,
+            "native_J_per_step": -0.518713495190707,
+            "actual_length": 1500,
+            "terminal_type": "truncated",
+            "qos_satisfaction_ratio_sum": 281.3081289081277,
+            "qos_satisfaction_ratio_per_step": 0.18753875260541847,
+            "delivered_end_to_end_throughput_mbps_sum": 8439.243867243933,
+            "delivered_end_to_end_throughput_mbps_per_step": 5.626162578162622,
+            "return_constraint_cost_sum": 523.6311205888121,
+            "return_constraint_cost_per_step": 0.34908741372587476,
+            "cutoff_event_count_sum": 0.0,
+            "cutoff_event_count_per_step": 0.0,
+            "depletion_event_count_sum": 0.0,
+            "depletion_event_count_per_step": 0.0,
+            "charging_uav_count_sum": 0.0,
+            "charging_uav_count_per_step": 0.0,
+            "step_charger_input_wh_sum": 0.0,
+            "step_charger_input_wh_per_step": 0.0,
+            "battery_min_ratio_sum": 816.3074259944125,
+            "battery_min_ratio_per_step": 0.5442049506629416
+          },
+          {
+            "seed": 920006,
+            "raw_native_J": 247.51354641027035,
+            "native_J_per_step": 0.16500903094018024,
+            "actual_length": 1500,
+            "terminal_type": "truncated",
+            "qos_satisfaction_ratio_sum": 323.2962808767035,
+            "qos_satisfaction_ratio_per_step": 0.21553085391780236,
+            "delivered_end_to_end_throughput_mbps_sum": 9698.888426301113,
+            "delivered_end_to_end_throughput_mbps_per_step": 6.465925617534076,
+            "return_constraint_cost_sum": 31.934361736287382,
+            "return_constraint_cost_per_step": 0.021289574490858255,
+            "cutoff_event_count_sum": 0.0,
+            "cutoff_event_count_per_step": 0.0,
+            "depletion_event_count_sum": 0.0,
+            "depletion_event_count_per_step": 0.0,
+            "charging_uav_count_sum": 0.0,
+            "charging_uav_count_per_step": 0.0,
+            "step_charger_input_wh_sum": 0.0,
+            "step_charger_input_wh_per_step": 0.0,
+            "battery_min_ratio_sum": 816.4635507841032,
+            "battery_min_ratio_per_step": 0.5443090338560688
+          },
+          {
+            "seed": 920007,
+            "raw_native_J": -1380.5339289091855,
+            "native_J_per_step": -0.9203559526061237,
+            "actual_length": 1500,
+            "terminal_type": "truncated",
+            "qos_satisfaction_ratio_sum": 129.24858304364608,
+            "qos_satisfaction_ratio_per_step": 0.08616572202909739,
+            "delivered_end_to_end_throughput_mbps_sum": 3877.457491309382,
+            "delivered_end_to_end_throughput_mbps_per_step": 2.584971660872921,
+            "return_constraint_cost_sum": 748.1075734167789,
+            "return_constraint_cost_per_step": 0.4987383822778526,
+            "cutoff_event_count_sum": 0.0,
+            "cutoff_event_count_per_step": 0.0,
+            "depletion_event_count_sum": 0.0,
+            "depletion_event_count_per_step": 0.0,
+            "charging_uav_count_sum": 0.0,
+            "charging_uav_count_per_step": 0.0,
+            "step_charger_input_wh_sum": 0.0,
+            "step_charger_input_wh_per_step": 0.0,
+            "battery_min_ratio_sum": 820.5005054490778,
+            "battery_min_ratio_per_step": 0.5470003369660519
+          },
+          {
+            "seed": 920008,
+            "raw_native_J": -312.241577853049,
+            "native_J_per_step": -0.20816105190203268,
+            "actual_length": 1500,
+            "terminal_type": "truncated",
+            "qos_satisfaction_ratio_sum": 372.826523569027,
+            "qos_satisfaction_ratio_per_step": 0.24855101571268468,
+            "delivered_end_to_end_throughput_mbps_sum": 11184.795707070612,
+            "delivered_end_to_end_throughput_mbps_per_step": 7.456530471380408,
+            "return_constraint_cost_sum": 336.2648606617167,
+            "return_constraint_cost_per_step": 0.22417657377447778,
+            "cutoff_event_count_sum": 0.0,
+            "cutoff_event_count_per_step": 0.0,
+            "depletion_event_count_sum": 0.0,
+            "depletion_event_count_per_step": 0.0,
+            "charging_uav_count_sum": 0.0,
+            "charging_uav_count_per_step": 0.0,
+            "step_charger_input_wh_sum": 0.0,
+            "step_charger_input_wh_per_step": 0.0,
+            "battery_min_ratio_sum": 810.3264343880605,
+            "battery_min_ratio_per_step": 0.5402176229253737
+          }
+        ],
+        "aggregate": {
+          "mean_raw_native_J": -232.5205651820359,
+          "mean_native_J_per_step": -0.15501371012135723,
+          "mean_qos_satisfaction_ratio_sum": 283.62756510549906,
+          "mean_qos_satisfaction_ratio_per_step": 0.18908504340366605,
+          "mean_delivered_end_to_end_throughput_mbps_sum": 8508.826953164942,
+          "mean_delivered_end_to_end_throughput_mbps_per_step": 5.672551302109962,
+          "mean_return_constraint_cost_sum": 251.8153701854199,
+          "mean_return_constraint_cost_per_step": 0.16787691345694658,
+          "mean_cutoff_event_count_sum": 0.0,
+          "mean_cutoff_event_count_per_step": 0.0,
+          "mean_depletion_event_count_sum": 0.0,
+          "mean_depletion_event_count_per_step": 0.0,
+          "mean_charging_uav_count_sum": 0.0,
+          "mean_charging_uav_count_per_step": 0.0,
+          "mean_step_charger_input_wh_sum": 0.0,
+          "mean_step_charger_input_wh_per_step": 0.0,
+          "mean_battery_min_ratio_sum": 854.371039926966,
+          "mean_battery_min_ratio_per_step": 0.5695806932846439,
+          "worlds": 8,
+          "primary_native_J_mean": -232.5205651820359
+        }
+      },
+      "common_fact": {
+        "mse": 0.0013094105770890142,
+        "valid_predictions": 23856,
+        "episodes": [
+          {
+            "index": 0,
+            "valid": 11928,
+            "mse": 0.002441655145958066
+          },
+          {
+            "index": 1,
+            "valid": 11928,
+            "mse": 0.00017716592992655933
+          }
+        ]
+      }
+    },
+    "20": {
+      "native": {
+        "worlds": [
+          {
+            "seed": 920001,
+            "raw_native_J": 163.75971814901837,
+            "native_J_per_step": 0.1091731454326789,
+            "actual_length": 1500,
+            "terminal_type": "truncated",
+            "qos_satisfaction_ratio_sum": 371.3393260851336,
+            "qos_satisfaction_ratio_per_step": 0.24755955072342242,
+            "delivered_end_to_end_throughput_mbps_sum": 11140.17978255415,
+            "delivered_end_to_end_throughput_mbps_per_step": 7.426786521702767,
+            "return_constraint_cost_sum": 97.33039112010528,
+            "return_constraint_cost_per_step": 0.06488692741340352,
+            "cutoff_event_count_sum": 0.0,
+            "cutoff_event_count_per_step": 0.0,
+            "depletion_event_count_sum": 0.0,
+            "depletion_event_count_per_step": 0.0,
+            "charging_uav_count_sum": 0.0,
+            "charging_uav_count_per_step": 0.0,
+            "step_charger_input_wh_sum": 0.0,
+            "step_charger_input_wh_per_step": 0.0,
+            "battery_min_ratio_sum": 819.5481891585729,
+            "battery_min_ratio_per_step": 0.5463654594390486
+          },
+          {
+            "seed": 920002,
+            "raw_native_J": -676.0932677157729,
+            "native_J_per_step": -0.4507288451438486,
+            "actual_length": 1500,
+            "terminal_type": "truncated",
+            "qos_satisfaction_ratio_sum": 3.3333333333333313,
+            "qos_satisfaction_ratio_per_step": 0.002222222222222221,
+            "delivered_end_to_end_throughput_mbps_sum": 100.0,
+            "delivered_end_to_end_throughput_mbps_per_step": 0.06666666666666667,
+            "return_constraint_cost_sum": 334.4249309102913,
+            "return_constraint_cost_per_step": 0.2229499539401942,
+            "cutoff_event_count_sum": 0.0,
+            "cutoff_event_count_per_step": 0.0,
+            "depletion_event_count_sum": 0.0,
+            "depletion_event_count_per_step": 0.0,
+            "charging_uav_count_sum": 0.0,
+            "charging_uav_count_per_step": 0.0,
+            "step_charger_input_wh_sum": 0.0,
+            "step_charger_input_wh_per_step": 0.0,
+            "battery_min_ratio_sum": 903.4520555924163,
+            "battery_min_ratio_per_step": 0.6023013703949441
+          },
+          {
+            "seed": 920003,
+            "raw_native_J": 470.9209047869767,
+            "native_J_per_step": 0.31394726985798443,
+            "actual_length": 1500,
+            "terminal_type": "truncated",
+            "qos_satisfaction_ratio_sum": 485.86838799895185,
+            "qos_satisfaction_ratio_per_step": 0.3239122586659679,
+            "delivered_end_to_end_throughput_mbps_sum": 14576.051639968266,
+            "delivered_end_to_end_throughput_mbps_per_step": 9.717367759978844,
+            "return_constraint_cost_sum": 0.49531235357831993,
+            "return_constraint_cost_per_step": 0.00033020823571887993,
+            "cutoff_event_count_sum": 0.0,
+            "cutoff_event_count_per_step": 0.0,
+            "depletion_event_count_sum": 0.0,
+            "depletion_event_count_per_step": 0.0,
+            "charging_uav_count_sum": 0.0,
+            "charging_uav_count_per_step": 0.0,
+            "step_charger_input_wh_sum": 0.0,
+            "step_charger_input_wh_per_step": 0.0,
+            "battery_min_ratio_sum": 901.7734078947345,
+            "battery_min_ratio_per_step": 0.601182271929823
+          },
+          {
+            "seed": 920004,
+            "raw_native_J": 300.1782323831833,
+            "native_J_per_step": 0.20011882158878885,
+            "actual_length": 1500,
+            "terminal_type": "truncated",
+            "qos_satisfaction_ratio_sum": 563.317717927241,
+            "qos_satisfaction_ratio_per_step": 0.37554514528482735,
+            "delivered_end_to_end_throughput_mbps_sum": 16899.531537817205,
+            "delivered_end_to_end_throughput_mbps_per_step": 11.266354358544804,
+            "return_constraint_cost_sum": 124.11570637952707,
+            "return_constraint_cost_per_step": 0.08274380425301804,
+            "cutoff_event_count_sum": 0.0,
+            "cutoff_event_count_per_step": 0.0,
+            "depletion_event_count_sum": 0.0,
+            "depletion_event_count_per_step": 0.0,
+            "charging_uav_count_sum": 0.0,
+            "charging_uav_count_per_step": 0.0,
+            "step_charger_input_wh_sum": 0.0,
+            "step_charger_input_wh_per_step": 0.0,
+            "battery_min_ratio_sum": 992.8111749154295,
+            "battery_min_ratio_per_step": 0.6618741166102864
+          },
+          {
+            "seed": 920005,
+            "raw_native_J": 72.549739694076,
+            "native_J_per_step": 0.048366493129384,
+            "actual_length": 1500,
+            "terminal_type": "truncated",
+            "qos_satisfaction_ratio_sum": 505.542226419091,
+            "qos_satisfaction_ratio_per_step": 0.33702815094606065,
+            "delivered_end_to_end_throughput_mbps_sum": 15166.266792572816,
+            "delivered_end_to_end_throughput_mbps_per_step": 10.110844528381877,
+            "return_constraint_cost_sum": 209.5937209559205,
+            "return_constraint_cost_per_step": 0.139729147303947,
+            "cutoff_event_count_sum": 0.0,
+            "cutoff_event_count_per_step": 0.0,
+            "depletion_event_count_sum": 0.0,
+            "depletion_event_count_per_step": 0.0,
+            "charging_uav_count_sum": 0.0,
+            "charging_uav_count_per_step": 0.0,
+            "step_charger_input_wh_sum": 0.0,
+            "step_charger_input_wh_per_step": 0.0,
+            "battery_min_ratio_sum": 835.9712427873293,
+            "battery_min_ratio_per_step": 0.5573141618582195
+          },
+          {
+            "seed": 920006,
+            "raw_native_J": -428.9979888129312,
+            "native_J_per_step": -0.28599865920862083,
+            "actual_length": 1500,
+            "terminal_type": "truncated",
+            "qos_satisfaction_ratio_sum": 466.31329641737057,
+            "qos_satisfaction_ratio_per_step": 0.3108755309449137,
+            "delivered_end_to_end_throughput_mbps_sum": 13989.398892521127,
+            "delivered_end_to_end_throughput_mbps_per_step": 9.326265928347418,
+            "return_constraint_cost_sum": 440.77858337375017,
+            "return_constraint_cost_per_step": 0.29385238891583343,
+            "cutoff_event_count_sum": 0.0,
+            "cutoff_event_count_per_step": 0.0,
+            "depletion_event_count_sum": 0.0,
+            "depletion_event_count_per_step": 0.0,
+            "charging_uav_count_sum": 0.0,
+            "charging_uav_count_per_step": 0.0,
+            "step_charger_input_wh_sum": 0.0,
+            "step_charger_input_wh_per_step": 0.0,
+            "battery_min_ratio_sum": 840.9982438068046,
+            "battery_min_ratio_per_step": 0.5606654958712031
+          },
+          {
+            "seed": 920007,
+            "raw_native_J": -1546.7006936041598,
+            "native_J_per_step": -1.0311337957361066,
+            "actual_length": 1500,
+            "terminal_type": "truncated",
+            "qos_satisfaction_ratio_sum": 282.85782707657654,
+            "qos_satisfaction_ratio_per_step": 0.18857188471771769,
+            "delivered_end_to_end_throughput_mbps_sum": 8485.734812297214,
+            "delivered_end_to_end_throughput_mbps_per_step": 5.657156541531476,
+            "return_constraint_cost_sum": 907.4802299480853,
+            "return_constraint_cost_per_step": 0.6049868199653902,
+            "cutoff_event_count_sum": 0.0,
+            "cutoff_event_count_per_step": 0.0,
+            "depletion_event_count_sum": 0.0,
+            "depletion_event_count_per_step": 0.0,
+            "charging_uav_count_sum": 0.0,
+            "charging_uav_count_per_step": 0.0,
+            "step_charger_input_wh_sum": 0.0,
+            "step_charger_input_wh_per_step": 0.0,
+            "battery_min_ratio_sum": 819.4402396515222,
+            "battery_min_ratio_per_step": 0.5462934931010148
+          },
+          {
+            "seed": 920008,
+            "raw_native_J": -432.86982873385506,
+            "native_J_per_step": -0.28857988582257005,
+            "actual_length": 1500,
+            "terminal_type": "truncated",
+            "qos_satisfaction_ratio_sum": 393.6947159866311,
+            "qos_satisfaction_ratio_per_step": 0.2624631439910874,
+            "delivered_end_to_end_throughput_mbps_sum": 11810.841479598814,
+            "delivered_end_to_end_throughput_mbps_per_step": 7.873894319732543,
+            "return_constraint_cost_sum": 406.8907189754958,
+            "return_constraint_cost_per_step": 0.2712604793169972,
+            "cutoff_event_count_sum": 0.0,
+            "cutoff_event_count_per_step": 0.0,
+            "depletion_event_count_sum": 0.0,
+            "depletion_event_count_per_step": 0.0,
+            "charging_uav_count_sum": 0.0,
+            "charging_uav_count_per_step": 0.0,
+            "step_charger_input_wh_sum": 0.0,
+            "step_charger_input_wh_per_step": 0.0,
+            "battery_min_ratio_sum": 817.2265627020536,
+            "battery_min_ratio_per_step": 0.5448177084680357
+          }
+        ],
+        "aggregate": {
+          "mean_raw_native_J": -259.6566479816831,
+          "mean_native_J_per_step": -0.17310443198778874,
+          "mean_qos_satisfaction_ratio_sum": 384.0333539055411,
+          "mean_qos_satisfaction_ratio_per_step": 0.25602223593702744,
+          "mean_delivered_end_to_end_throughput_mbps_sum": 11521.000617166199,
+          "mean_delivered_end_to_end_throughput_mbps_per_step": 7.680667078110799,
+          "mean_return_constraint_cost_sum": 315.1386992520942,
+          "mean_return_constraint_cost_per_step": 0.21009246616806282,
+          "mean_cutoff_event_count_sum": 0.0,
+          "mean_cutoff_event_count_per_step": 0.0,
+          "mean_depletion_event_count_sum": 0.0,
+          "mean_depletion_event_count_per_step": 0.0,
+          "mean_charging_uav_count_sum": 0.0,
+          "mean_charging_uav_count_per_step": 0.0,
+          "mean_step_charger_input_wh_sum": 0.0,
+          "mean_step_charger_input_wh_per_step": 0.0,
+          "mean_battery_min_ratio_sum": 866.4026395636079,
+          "mean_battery_min_ratio_per_step": 0.5776017597090719,
+          "worlds": 8,
+          "primary_native_J_mean": -259.6566479816831
+        }
+      },
+      "common_fact": {
+        "mse": 0.003928697165189215,
+        "valid_predictions": 23856,
+        "episodes": [
+          {
+            "index": 0,
+            "valid": 11928,
+            "mse": 0.00386910792440176
+          },
+          {
+            "index": 1,
+            "valid": 11928,
+            "mse": 0.003988286480307579
+          }
+        ]
+      }
+    },
+    "30": {
+      "native": {
+        "worlds": [
+          {
+            "seed": 920001,
+            "raw_native_J": -92.46675146325187,
+            "native_J_per_step": -0.06164450097550125,
+            "actual_length": 1500,
+            "terminal_type": "truncated",
+            "qos_satisfaction_ratio_sum": 382.91347524779013,
+            "qos_satisfaction_ratio_per_step": 0.25527565016519344,
+            "delivered_end_to_end_throughput_mbps_sum": 11487.404257433724,
+            "delivered_end_to_end_throughput_mbps_per_step": 7.658269504955816,
+            "return_constraint_cost_sum": 230.9927561397983,
+            "return_constraint_cost_per_step": 0.15399517075986555,
+            "cutoff_event_count_sum": 0.0,
+            "cutoff_event_count_per_step": 0.0,
+            "depletion_event_count_sum": 0.0,
+            "depletion_event_count_per_step": 0.0,
+            "charging_uav_count_sum": 0.0,
+            "charging_uav_count_per_step": 0.0,
+            "step_charger_input_wh_sum": 0.0,
+            "step_charger_input_wh_per_step": 0.0,
+            "battery_min_ratio_sum": 849.2066089532258,
+            "battery_min_ratio_per_step": 0.5661377393021505
+          },
+          {
+            "seed": 920002,
+            "raw_native_J": -329.68584040687426,
+            "native_J_per_step": -0.21979056027124952,
+            "actual_length": 1500,
+            "terminal_type": "truncated",
+            "qos_satisfaction_ratio_sum": 173.4422881066733,
+            "qos_satisfaction_ratio_per_step": 0.11562819207111552,
+            "delivered_end_to_end_throughput_mbps_sum": 5203.268643200275,
+            "delivered_end_to_end_throughput_mbps_per_step": 3.4688457621335163,
+            "return_constraint_cost_sum": 245.86536813448345,
+            "return_constraint_cost_per_step": 0.16391024542298896,
+            "cutoff_event_count_sum": 0.0,
+            "cutoff_event_count_per_step": 0.0,
+            "depletion_event_count_sum": 0.0,
+            "depletion_event_count_per_step": 0.0,
+            "charging_uav_count_sum": 0.0,
+            "charging_uav_count_per_step": 0.0,
+            "step_charger_input_wh_sum": 0.0,
+            "step_charger_input_wh_per_step": 0.0,
+            "battery_min_ratio_sum": 908.2897963356045,
+            "battery_min_ratio_per_step": 0.605526530890403
+          },
+          {
+            "seed": 920003,
+            "raw_native_J": -265.9441350452693,
+            "native_J_per_step": -0.17729609003017954,
+            "actual_length": 1500,
+            "terminal_type": "truncated",
+            "qos_satisfaction_ratio_sum": 261.5775252525192,
+            "qos_satisfaction_ratio_per_step": 0.17438501683501278,
+            "delivered_end_to_end_throughput_mbps_sum": 7847.32575757576,
+            "delivered_end_to_end_throughput_mbps_per_step": 5.231550505050507,
+            "return_constraint_cost_sum": 257.98833111544025,
+            "return_constraint_cost_per_step": 0.17199222074362683,
+            "cutoff_event_count_sum": 0.0,
+            "cutoff_event_count_per_step": 0.0,
+            "depletion_event_count_sum": 0.0,
+            "depletion_event_count_per_step": 0.0,
+            "charging_uav_count_sum": 0.0,
+            "charging_uav_count_per_step": 0.0,
+            "step_charger_input_wh_sum": 0.0,
+            "step_charger_input_wh_per_step": 0.0,
+            "battery_min_ratio_sum": 884.7768359674619,
+            "battery_min_ratio_per_step": 0.5898512239783079
+          },
+          {
+            "seed": 920004,
+            "raw_native_J": -64.65893815679485,
+            "native_J_per_step": -0.043105958771196565,
+            "actual_length": 1500,
+            "terminal_type": "truncated",
+            "qos_satisfaction_ratio_sum": 344.8431200257513,
+            "qos_satisfaction_ratio_per_step": 0.22989541335050087,
+            "delivered_end_to_end_throughput_mbps_sum": 10345.293600772791,
+            "delivered_end_to_end_throughput_mbps_per_step": 6.896862400515194,
+            "return_constraint_cost_sum": 197.8244489211818,
+            "return_constraint_cost_per_step": 0.13188296594745455,
+            "cutoff_event_count_sum": 0.0,
+            "cutoff_event_count_per_step": 0.0,
+            "depletion_event_count_sum": 0.0,
+            "depletion_event_count_per_step": 0.0,
+            "charging_uav_count_sum": 0.0,
+            "charging_uav_count_per_step": 0.0,
+            "step_charger_input_wh_sum": 0.0,
+            "step_charger_input_wh_per_step": 0.0,
+            "battery_min_ratio_sum": 982.8609208181447,
+            "battery_min_ratio_per_step": 0.6552406138787631
+          },
+          {
+            "seed": 920005,
+            "raw_native_J": -809.7071653279369,
+            "native_J_per_step": -0.5398047768852913,
+            "actual_length": 1500,
+            "terminal_type": "truncated",
+            "qos_satisfaction_ratio_sum": 269.80241494616104,
+            "qos_satisfaction_ratio_per_step": 0.17986827663077404,
+            "delivered_end_to_end_throughput_mbps_sum": 8094.072448384955,
+            "delivered_end_to_end_throughput_mbps_per_step": 5.396048298923303,
+            "return_constraint_cost_sum": 533.5956476860116,
+            "return_constraint_cost_per_step": 0.35573043179067443,
+            "cutoff_event_count_sum": 0.0,
+            "cutoff_event_count_per_step": 0.0,
+            "depletion_event_count_sum": 0.0,
+            "depletion_event_count_per_step": 0.0,
+            "charging_uav_count_sum": 0.0,
+            "charging_uav_count_per_step": 0.0,
+            "step_charger_input_wh_sum": 0.0,
+            "step_charger_input_wh_per_step": 0.0,
+            "battery_min_ratio_sum": 818.6791122683035,
+            "battery_min_ratio_per_step": 0.5457860748455357
+          },
+          {
+            "seed": 920006,
+            "raw_native_J": -520.0898503811806,
+            "native_J_per_step": -0.346726566920787,
+            "actual_length": 1500,
+            "terminal_type": "truncated",
+            "qos_satisfaction_ratio_sum": 272.92891791801907,
+            "qos_satisfaction_ratio_per_step": 0.18195261194534604,
+            "delivered_end_to_end_throughput_mbps_sum": 8187.867537540718,
+            "delivered_end_to_end_throughput_mbps_per_step": 5.458578358360479,
+            "return_constraint_cost_sum": 389.12550049568307,
+            "return_constraint_cost_per_step": 0.2594170003304554,
+            "cutoff_event_count_sum": 0.0,
+            "cutoff_event_count_per_step": 0.0,
+            "depletion_event_count_sum": 0.0,
+            "depletion_event_count_per_step": 0.0,
+            "charging_uav_count_sum": 0.0,
+            "charging_uav_count_per_step": 0.0,
+            "step_charger_input_wh_sum": 0.0,
+            "step_charger_input_wh_per_step": 0.0,
+            "battery_min_ratio_sum": 869.3105983127649,
+            "battery_min_ratio_per_step": 0.5795403988751766
+          },
+          {
+            "seed": 920007,
+            "raw_native_J": -1269.152421380841,
+            "native_J_per_step": -0.846101614253894,
+            "actual_length": 1500,
+            "terminal_type": "truncated",
+            "qos_satisfaction_ratio_sum": 310.23426365864884,
+            "qos_satisfaction_ratio_per_step": 0.20682284243909924,
+            "delivered_end_to_end_throughput_mbps_sum": 9307.02790975959,
+            "delivered_end_to_end_throughput_mbps_per_step": 6.204685273173061,
+            "return_constraint_cost_sum": 782.9537677815683,
+            "return_constraint_cost_per_step": 0.5219691785210455,
+            "cutoff_event_count_sum": 0.0,
+            "cutoff_event_count_per_step": 0.0,
+            "depletion_event_count_sum": 0.0,
+            "depletion_event_count_per_step": 0.0,
+            "charging_uav_count_sum": 0.0,
+            "charging_uav_count_per_step": 0.0,
+            "step_charger_input_wh_sum": 0.0,
+            "step_charger_input_wh_per_step": 0.0,
+            "battery_min_ratio_sum": 838.1834405188243,
+            "battery_min_ratio_per_step": 0.5587889603458829
+          },
+          {
+            "seed": 920008,
+            "raw_native_J": -531.7297406466283,
+            "native_J_per_step": -0.3544864937644189,
+            "actual_length": 1500,
+            "terminal_type": "truncated",
+            "qos_satisfaction_ratio_sum": 274.29751984126966,
+            "qos_satisfaction_ratio_per_step": 0.1828650132275131,
+            "delivered_end_to_end_throughput_mbps_sum": 8228.925595238099,
+            "delivered_end_to_end_throughput_mbps_per_step": 5.485950396825399,
+            "return_constraint_cost_sum": 397.1728613329607,
+            "return_constraint_cost_per_step": 0.2647819075553071,
+            "cutoff_event_count_sum": 0.0,
+            "cutoff_event_count_per_step": 0.0,
+            "depletion_event_count_sum": 0.0,
+            "depletion_event_count_per_step": 0.0,
+            "charging_uav_count_sum": 0.0,
+            "charging_uav_count_per_step": 0.0,
+            "step_charger_input_wh_sum": 0.0,
+            "step_charger_input_wh_per_step": 0.0,
+            "battery_min_ratio_sum": 819.2262800388468,
+            "battery_min_ratio_per_step": 0.5461508533592312
+          }
+        ],
+        "aggregate": {
+          "mean_raw_native_J": -485.4293553510972,
+          "mean_native_J_per_step": -0.32361957023406474,
+          "mean_qos_satisfaction_ratio_sum": 286.25494062460405,
+          "mean_qos_satisfaction_ratio_per_step": 0.19083662708306937,
+          "mean_delivered_end_to_end_throughput_mbps_sum": 8587.648218738239,
+          "mean_delivered_end_to_end_throughput_mbps_per_step": 5.72509881249216,
+          "mean_return_constraint_cost_sum": 379.4398352008909,
+          "mean_return_constraint_cost_per_step": 0.2529598901339273,
+          "mean_cutoff_event_count_sum": 0.0,
+          "mean_cutoff_event_count_per_step": 0.0,
+          "mean_depletion_event_count_sum": 0.0,
+          "mean_depletion_event_count_per_step": 0.0,
+          "mean_charging_uav_count_sum": 0.0,
+          "mean_charging_uav_count_per_step": 0.0,
+          "mean_step_charger_input_wh_sum": 0.0,
+          "mean_step_charger_input_wh_per_step": 0.0,
+          "mean_battery_min_ratio_sum": 871.3166991516471,
+          "mean_battery_min_ratio_per_step": 0.5808777994344314,
+          "worlds": 8,
+          "primary_native_J_mean": -485.4293553510972
+        }
+      },
+      "common_fact": {
+        "mse": 0.0033285493102351905,
+        "valid_predictions": 23856,
+        "episodes": [
+          {
+            "index": 0,
+            "valid": 11928,
+            "mse": 0.0034526227973401546
+          },
+          {
+            "index": 1,
+            "valid": 11928,
+            "mse": 0.0032044758554548025
+          }
+        ]
+      }
+    }
+  },
+  "updates": [
+    {
+      "rollout": 1,
+      "native": {
+        "discriminator_loss": 3.5052550117174786,
+        "discriminator_team_loss": 1.8561103661855063,
+        "discriminator_individual_loss": 1.6491446455319723,
+        "discriminator_team_accuracy": 0.2906666696071625,
+        "discriminator_individual_accuracy": 0.37727081775665283,
+        "coordinator_loss": 0.12845006585121155,
+        "coordinator_policy_loss": -0.0029446787666529417,
+        "coordinator_value_loss": 1.2155219316482544,
+        "discoverer_loss": 0.03040335141122341,
+        "discoverer_policy_loss": -0.0007983933901414275,
+        "discoverer_value_loss": 0.036990173161029816,
+        "team_skill_entropy": 1.7480404376983643,
+        "agent_skill_entropy": 1.7174367904663086,
+        "action_entropy": 1.1576887220144272,
+        "avg_intrinsic_reward": -0.4044595956802368,
+        "avg_env_comp": -0.34306079149246216,
+        "avg_team_disc_comp": -0.044214822351932526,
+        "avg_ind_disc_comp": -0.017184019088745117,
+        "mean_coord_state_val": 0.6915098428726196,
+        "mean_coord_agent_val": 0.8601874113082886,
+        "avg_discoverer_val": 0.0587814599275589,
+        "mean_high_level_reward": -3.430607795715332,
+        "cd_loss": 0.0,
+        "coordinator_lr": 0.0001,
+        "discoverer_actor_lr": 0.0001,
+        "discoverer_critic_lr": 0.0001,
+        "discriminator_lr": 0.0001,
+        "team_discriminator_lr": 0.0001,
+        "individual_discriminator_lr": 0.0001,
+        "process_encoder_lr": 0.0,
+        "process_encoder_loss": 0.0,
+        "process_outcome_loss": 0.0,
+        "process_contrastive_loss": 0.0,
+        "process_contrastive_accuracy": 0.0,
+        "process_duration_only_accuracy": 0.0,
+        "process_reward_mean": 0.0,
+        "process_reward_abs_mean": 0.0,
+        "process_reward_applied_steps": 0.0,
+        "process_segments_trained": 0.0
+      },
+      "auxiliary": {
+        "loss": 0.006354849933291205,
+        "supervised_team_rows": 5964,
+        "supervised_agent_samples": 47712,
+        "optimizer_steps": 30,
+        "head_gradient_norm": 0.6503877639770508,
+        "representation_gradient_norm": 0.4264875650405884
+      }
+    },
+    {
+      "rollout": 2,
+      "native": {
+        "discriminator_loss": 3.517268524567286,
+        "discriminator_team_loss": 1.8014344930648805,
+        "discriminator_individual_loss": 1.7158340315024059,
+        "discriminator_team_accuracy": 0.26633334159851074,
+        "discriminator_individual_accuracy": 0.2980625033378601,
+        "coordinator_loss": -0.7021239995956421,
+        "coordinator_policy_loss": 0.03274650499224663,
+        "coordinator_value_loss": 0.36830225586891174,
+        "discoverer_loss": 0.010236803442239761,
+        "discoverer_policy_loss": -0.0030598905868828297,
+        "discoverer_value_loss": 0.01909625343978405,
+        "team_skill_entropy": 1.7482244968414307,
+        "agent_skill_entropy": 1.7514230012893677,
+        "action_entropy": 1.159900240600109,
+        "avg_intrinsic_reward": -0.7000553607940674,
+        "avg_env_comp": -0.6405877470970154,
+        "avg_team_disc_comp": -0.04297216981649399,
+        "avg_ind_disc_comp": -0.016495417803525925,
+        "mean_coord_state_val": 0.5359780788421631,
+        "mean_coord_agent_val": 0.5713884234428406,
+        "avg_discoverer_val": -4.821474075317383,
+        "mean_high_level_reward": -6.405878067016602,
+        "cd_loss": 0.0,
+        "coordinator_lr": 0.0001,
+        "discoverer_actor_lr": 0.0001,
+        "discoverer_critic_lr": 0.0001,
+        "discriminator_lr": 0.0001,
+        "team_discriminator_lr": 0.0001,
+        "individual_discriminator_lr": 0.0001,
+        "process_encoder_lr": 0.0,
+        "process_encoder_loss": 0.0,
+        "process_outcome_loss": 0.0,
+        "process_contrastive_loss": 0.0,
+        "process_contrastive_accuracy": 0.0,
+        "process_duration_only_accuracy": 0.0,
+        "process_reward_mean": 0.0,
+        "process_reward_abs_mean": 0.0,
+        "process_reward_applied_steps": 0.0,
+        "process_segments_trained": 0.0
+      },
+      "auxiliary": {
+        "loss": 0.006942342122061657,
+        "supervised_team_rows": 5964,
+        "supervised_agent_samples": 47712,
+        "optimizer_steps": 30,
+        "head_gradient_norm": 0.8846576809883118,
+        "representation_gradient_norm": 0.5473348498344421
+      }
+    },
+    {
+      "rollout": 3,
+      "native": {
+        "discriminator_loss": 3.5394101103146873,
+        "discriminator_team_loss": 1.8039639790852864,
+        "discriminator_individual_loss": 1.7354461312294007,
+        "discriminator_team_accuracy": 0.2601666748523712,
+        "discriminator_individual_accuracy": 0.28295832872390747,
+        "coordinator_loss": -0.8326624631881714,
+        "coordinator_policy_loss": 0.04763954132795334,
+        "coordinator_value_loss": 0.23031410574913025,
+        "discoverer_loss": 0.006773629691451788,
+        "discoverer_policy_loss": -0.0038260980509221554,
+        "discoverer_value_loss": 0.016428237780928612,
+        "team_skill_entropy": 1.7541134357452393,
+        "agent_skill_entropy": 1.7639784812927246,
+        "action_entropy": 1.1656981892883778,
+        "avg_intrinsic_reward": -0.458876371383667,
+        "avg_env_comp": -0.3985292911529541,
+        "avg_team_disc_comp": -0.043395813554525375,
+        "avg_ind_disc_comp": -0.01695130579173565,
+        "mean_coord_state_val": 0.6611210703849792,
+        "mean_coord_agent_val": 0.6976475119590759,
+        "avg_discoverer_val": -12.111872673034668,
+        "mean_high_level_reward": -3.985292911529541,
+        "cd_loss": 0.0,
+        "coordinator_lr": 0.0001,
+        "discoverer_actor_lr": 0.0001,
+        "discoverer_critic_lr": 0.0001,
+        "discriminator_lr": 0.0001,
+        "team_discriminator_lr": 0.0001,
+        "individual_discriminator_lr": 0.0001,
+        "process_encoder_lr": 0.0,
+        "process_encoder_loss": 0.0,
+        "process_outcome_loss": 0.0,
+        "process_contrastive_loss": 0.0,
+        "process_contrastive_accuracy": 0.0,
+        "process_duration_only_accuracy": 0.0,
+        "process_reward_mean": 0.0,
+        "process_reward_abs_mean": 0.0,
+        "process_reward_applied_steps": 0.0,
+        "process_segments_trained": 0.0
+      },
+      "auxiliary": {
+        "loss": 0.006992838788954984,
+        "supervised_team_rows": 5964,
+        "supervised_agent_samples": 47712,
+        "optimizer_steps": 30,
+        "head_gradient_norm": 1.8561228513717651,
+        "representation_gradient_norm": 1.4031956195831299
+      }
+    },
+    {
+      "rollout": 4,
+      "native": {
+        "discriminator_loss": 3.559693622589111,
+        "discriminator_team_loss": 1.8134587446848551,
+        "discriminator_individual_loss": 1.7462348779042562,
+        "discriminator_team_accuracy": 0.25099998712539673,
+        "discriminator_individual_accuracy": 0.2952916622161865,
+        "coordinator_loss": -0.8581279516220093,
+        "coordinator_policy_loss": 0.009898796677589417,
+        "coordinator_value_loss": 0.24543564021587372,
+        "discoverer_loss": 0.011524626985192299,
+        "discoverer_policy_loss": -0.0075033120810985565,
+        "discoverer_value_loss": 0.02482348121702671,
+        "team_skill_entropy": 1.7364286184310913,
+        "agent_skill_entropy": 1.7712726593017578,
+        "action_entropy": 1.1591059155762196,
+        "avg_intrinsic_reward": -0.8368730545043945,
+        "avg_env_comp": -0.775333821773529,
+        "avg_team_disc_comp": -0.0440841019153595,
+        "avg_ind_disc_comp": -0.017455173656344414,
+        "mean_coord_state_val": 0.6766193509101868,
+        "mean_coord_agent_val": 0.7212494015693665,
+        "avg_discoverer_val": -13.81906795501709,
+        "mean_high_level_reward": -7.75333833694458,
+        "cd_loss": 0.0,
+        "coordinator_lr": 0.0001,
+        "discoverer_actor_lr": 0.0001,
+        "discoverer_critic_lr": 0.0001,
+        "discriminator_lr": 0.0001,
+        "team_discriminator_lr": 0.0001,
+        "individual_discriminator_lr": 0.0001,
+        "process_encoder_lr": 0.0,
+        "process_encoder_loss": 0.0,
+        "process_outcome_loss": 0.0,
+        "process_contrastive_loss": 0.0,
+        "process_contrastive_accuracy": 0.0,
+        "process_duration_only_accuracy": 0.0,
+        "process_reward_mean": 0.0,
+        "process_reward_abs_mean": 0.0,
+        "process_reward_applied_steps": 0.0,
+        "process_segments_trained": 0.0
+      },
+      "auxiliary": {
+        "loss": 0.009124225516922867,
+        "supervised_team_rows": 5964,
+        "supervised_agent_samples": 47712,
+        "optimizer_steps": 30,
+        "head_gradient_norm": 2.2808895111083984,
+        "representation_gradient_norm": 1.8175389766693115
+      }
+    },
+    {
+      "rollout": 5,
+      "native": {
+        "discriminator_loss": 3.505444399515788,
+        "discriminator_team_loss": 1.7672910610834758,
+        "discriminator_individual_loss": 1.738153338432312,
+        "discriminator_team_accuracy": 0.2719999849796295,
+        "discriminator_individual_accuracy": 0.29877084493637085,
+        "coordinator_loss": -0.936008632183075,
+        "coordinator_policy_loss": -0.05749904736876488,
+        "coordinator_value_loss": 0.23312576115131378,
+        "discoverer_loss": 0.0015567280352115631,
+        "discoverer_policy_loss": -0.0096071632578969,
+        "discoverer_value_loss": 0.01702141761779785,
+        "team_skill_entropy": 1.7423584461212158,
+        "agent_skill_entropy": 1.7672680616378784,
+        "action_entropy": 1.1715086176991463,
+        "avg_intrinsic_reward": -0.506669819355011,
+        "avg_env_comp": -0.4450722634792328,
+        "avg_team_disc_comp": -0.044178273528814316,
+        "avg_ind_disc_comp": -0.017419323325157166,
+        "mean_coord_state_val": 0.7055623531341553,
+        "mean_coord_agent_val": 0.7126075625419617,
+        "avg_discoverer_val": -13.98660945892334,
+        "mean_high_level_reward": -4.450723171234131,
+        "cd_loss": 0.0,
+        "coordinator_lr": 0.0001,
+        "discoverer_actor_lr": 0.0001,
+        "discoverer_critic_lr": 0.0001,
+        "discriminator_lr": 0.0001,
+        "team_discriminator_lr": 0.0001,
+        "individual_discriminator_lr": 0.0001,
+        "process_encoder_lr": 0.0,
+        "process_encoder_loss": 0.0,
+        "process_outcome_loss": 0.0,
+        "process_contrastive_loss": 0.0,
+        "process_contrastive_accuracy": 0.0,
+        "process_duration_only_accuracy": 0.0,
+        "process_reward_mean": 0.0,
+        "process_reward_abs_mean": 0.0,
+        "process_reward_applied_steps": 0.0,
+        "process_segments_trained": 0.0
+      },
+      "auxiliary": {
+        "loss": 0.005096259134875312,
+        "supervised_team_rows": 5964,
+        "supervised_agent_samples": 47712,
+        "optimizer_steps": 30,
+        "head_gradient_norm": 1.4310996532440186,
+        "representation_gradient_norm": 1.1092971563339233
+      }
+    },
+    {
+      "rollout": 6,
+      "native": {
+        "discriminator_loss": 3.545148579279582,
+        "discriminator_team_loss": 1.793362267812093,
+        "discriminator_individual_loss": 1.7517863114674885,
+        "discriminator_team_accuracy": 0.2955000102519989,
+        "discriminator_individual_accuracy": 0.28820833563804626,
+        "coordinator_loss": -0.742189347743988,
+        "coordinator_policy_loss": 0.2254195660352707,
+        "coordinator_value_loss": 0.14053229987621307,
+        "discoverer_loss": 0.0049217259511351585,
+        "discoverer_policy_loss": -0.013328525237739086,
+        "discoverer_value_loss": 0.024065755307674408,
+        "team_skill_entropy": 1.6915127038955688,
+        "agent_skill_entropy": 1.7673842906951904,
+        "action_entropy": 1.1630922555923462,
+        "avg_intrinsic_reward": -0.5967426896095276,
+        "avg_env_comp": -0.5355795621871948,
+        "avg_team_disc_comp": -0.04365471377968788,
+        "avg_ind_disc_comp": -0.017508404329419136,
+        "mean_coord_state_val": 0.7458396553993225,
+        "mean_coord_agent_val": 0.7553106546401978,
+        "avg_discoverer_val": -19.96216583251953,
+        "mean_high_level_reward": -5.3557963371276855,
+        "cd_loss": 0.0,
+        "coordinator_lr": 0.0001,
+        "discoverer_actor_lr": 0.0001,
+        "discoverer_critic_lr": 0.0001,
+        "discriminator_lr": 0.0001,
+        "team_discriminator_lr": 0.0001,
+        "individual_discriminator_lr": 0.0001,
+        "process_encoder_lr": 0.0,
+        "process_encoder_loss": 0.0,
+        "process_outcome_loss": 0.0,
+        "process_contrastive_loss": 0.0,
+        "process_contrastive_accuracy": 0.0,
+        "process_duration_only_accuracy": 0.0,
+        "process_reward_mean": 0.0,
+        "process_reward_abs_mean": 0.0,
+        "process_reward_applied_steps": 0.0,
+        "process_segments_trained": 0.0
+      },
+      "auxiliary": {
+        "loss": 0.009615776501658437,
+        "supervised_team_rows": 5964,
+        "supervised_agent_samples": 47712,
+        "optimizer_steps": 30,
+        "head_gradient_norm": 0.6791672706604004,
+        "representation_gradient_norm": 0.48109689354896545
+      }
+    },
+    {
+      "rollout": 7,
+      "native": {
+        "discriminator_loss": 3.5098228136698406,
+        "discriminator_team_loss": 1.7610989014307659,
+        "discriminator_individual_loss": 1.7487239122390748,
+        "discriminator_team_accuracy": 0.2590000033378601,
+        "discriminator_individual_accuracy": 0.2887708246707916,
+        "coordinator_loss": -0.9282278418540955,
+        "coordinator_policy_loss": 0.014214341528713703,
+        "coordinator_value_loss": 0.16933345794677734,
+        "discoverer_loss": -0.006076313089579344,
+        "discoverer_policy_loss": -0.014339301735162735,
+        "discoverer_value_loss": 0.014138169586658478,
+        "team_skill_entropy": 1.7022645473480225,
+        "agent_skill_entropy": 1.7725303173065186,
+        "action_entropy": 1.1750329285860062,
+        "avg_intrinsic_reward": -0.6009365320205688,
+        "avg_env_comp": -0.541334331035614,
+        "avg_team_disc_comp": -0.04205869138240814,
+        "avg_ind_disc_comp": -0.017543509602546692,
+        "mean_coord_state_val": 0.8151543140411377,
+        "mean_coord_agent_val": 0.8127308487892151,
+        "avg_discoverer_val": -18.015905380249023,
+        "mean_high_level_reward": -5.4133429527282715,
+        "cd_loss": 0.0,
+        "coordinator_lr": 0.0001,
+        "discoverer_actor_lr": 0.0001,
+        "discoverer_critic_lr": 0.0001,
+        "discriminator_lr": 0.0001,
+        "team_discriminator_lr": 0.0001,
+        "individual_discriminator_lr": 0.0001,
+        "process_encoder_lr": 0.0,
+        "process_encoder_loss": 0.0,
+        "process_outcome_loss": 0.0,
+        "process_contrastive_loss": 0.0,
+        "process_contrastive_accuracy": 0.0,
+        "process_duration_only_accuracy": 0.0,
+        "process_reward_mean": 0.0,
+        "process_reward_abs_mean": 0.0,
+        "process_reward_applied_steps": 0.0,
+        "process_segments_trained": 0.0
+      },
+      "auxiliary": {
+        "loss": 0.005981925484867383,
+        "supervised_team_rows": 5964,
+        "supervised_agent_samples": 47712,
+        "optimizer_steps": 30,
+        "head_gradient_norm": 0.5491935014724731,
+        "representation_gradient_norm": 0.48893725872039795
+      }
+    },
+    {
+      "rollout": 8,
+      "native": {
+        "discriminator_loss": 3.4900203227996824,
+        "discriminator_team_loss": 1.7437840143839518,
+        "discriminator_individual_loss": 1.7462363084157309,
+        "discriminator_team_accuracy": 0.265500009059906,
+        "discriminator_individual_accuracy": 0.3049583435058594,
+        "coordinator_loss": -0.9723111987113953,
+        "coordinator_policy_loss": 0.03950124979019165,
+        "coordinator_value_loss": 0.10055016726255417,
+        "discoverer_loss": -0.006042649038136005,
+        "discoverer_policy_loss": -0.019552940502762794,
+        "discoverer_value_loss": 0.01942206174135208,
+        "team_skill_entropy": 1.693002700805664,
+        "agent_skill_entropy": 1.7747364044189453,
+        "action_entropy": 1.1823637410998344,
+        "avg_intrinsic_reward": -0.4618775248527527,
+        "avg_env_comp": -0.4021337628364563,
+        "avg_team_disc_comp": -0.042258672416210175,
+        "avg_ind_disc_comp": -0.01748507469892502,
+        "mean_coord_state_val": 0.8443682193756104,
+        "mean_coord_agent_val": 0.826117217540741,
+        "avg_discoverer_val": -22.469642639160156,
+        "mean_high_level_reward": -4.021337985992432,
+        "cd_loss": 0.0,
+        "coordinator_lr": 0.0001,
+        "discoverer_actor_lr": 0.0001,
+        "discoverer_critic_lr": 0.0001,
+        "discriminator_lr": 0.0001,
+        "team_discriminator_lr": 0.0001,
+        "individual_discriminator_lr": 0.0001,
+        "process_encoder_lr": 0.0,
+        "process_encoder_loss": 0.0,
+        "process_outcome_loss": 0.0,
+        "process_contrastive_loss": 0.0,
+        "process_contrastive_accuracy": 0.0,
+        "process_duration_only_accuracy": 0.0,
+        "process_reward_mean": 0.0,
+        "process_reward_abs_mean": 0.0,
+        "process_reward_applied_steps": 0.0,
+        "process_segments_trained": 0.0
+      },
+      "auxiliary": {
+        "loss": 0.004696271669601811,
+        "supervised_team_rows": 5964,
+        "supervised_agent_samples": 47712,
+        "optimizer_steps": 30,
+        "head_gradient_norm": 0.4964244067668915,
+        "representation_gradient_norm": 0.4381178617477417
+      }
+    },
+    {
+      "rollout": 9,
+      "native": {
+        "discriminator_loss": 3.5102166195710502,
+        "discriminator_team_loss": 1.752216378847758,
+        "discriminator_individual_loss": 1.758000240723292,
+        "discriminator_team_accuracy": 0.2770000100135803,
+        "discriminator_individual_accuracy": 0.2750416696071625,
+        "coordinator_loss": -0.9434873461723328,
+        "coordinator_policy_loss": 0.02529159188270569,
+        "coordinator_value_loss": 0.14370161294937134,
+        "discoverer_loss": -0.008663957007229328,
+        "discoverer_policy_loss": -0.018324272707104683,
+        "discoverer_value_loss": 0.01559656485915184,
+        "team_skill_entropy": 1.6973956823349,
+        "agent_skill_entropy": 1.774397850036621,
+        "action_entropy": 1.187241729348898,
+        "avg_intrinsic_reward": -0.7071425914764404,
+        "avg_env_comp": -0.6464600563049316,
+        "avg_team_disc_comp": -0.04304192587733269,
+        "avg_ind_disc_comp": -0.017640620470046997,
+        "mean_coord_state_val": 0.7842334508895874,
+        "mean_coord_agent_val": 0.7806195020675659,
+        "avg_discoverer_val": -23.495161056518555,
+        "mean_high_level_reward": -6.464600563049316,
+        "cd_loss": 0.0,
+        "coordinator_lr": 0.0001,
+        "discoverer_actor_lr": 0.0001,
+        "discoverer_critic_lr": 0.0001,
+        "discriminator_lr": 0.0001,
+        "team_discriminator_lr": 0.0001,
+        "individual_discriminator_lr": 0.0001,
+        "process_encoder_lr": 0.0,
+        "process_encoder_loss": 0.0,
+        "process_outcome_loss": 0.0,
+        "process_contrastive_loss": 0.0,
+        "process_contrastive_accuracy": 0.0,
+        "process_duration_only_accuracy": 0.0,
+        "process_reward_mean": 0.0,
+        "process_reward_abs_mean": 0.0,
+        "process_reward_applied_steps": 0.0,
+        "process_segments_trained": 0.0
+      },
+      "auxiliary": {
+        "loss": 0.006962179766916673,
+        "supervised_team_rows": 5964,
+        "supervised_agent_samples": 47712,
+        "optimizer_steps": 30,
+        "head_gradient_norm": 0.8951644897460938,
+        "representation_gradient_norm": 0.8327247500419617
+      }
+    },
+    {
+      "rollout": 10,
+      "native": {
+        "discriminator_loss": 3.533431533972422,
+        "discriminator_team_loss": 1.782359258333842,
+        "discriminator_individual_loss": 1.7510722756385804,
+        "discriminator_team_accuracy": 0.2574999928474426,
+        "discriminator_individual_accuracy": 0.29485416412353516,
+        "coordinator_loss": -1.1362162828445435,
+        "coordinator_policy_loss": -0.05021623522043228,
+        "coordinator_value_loss": 0.028745565563440323,
+        "discoverer_loss": -0.024837985634803772,
+        "discoverer_policy_loss": -0.022477831691503525,
+        "discoverer_value_loss": 0.00352195231243968,
+        "team_skill_entropy": 1.7099573612213135,
+        "agent_skill_entropy": 1.7768726348876953,
+        "action_entropy": 1.176418922841549,
+        "avg_intrinsic_reward": 0.002132853725925088,
+        "avg_env_comp": 0.06261967122554779,
+        "avg_team_disc_comp": -0.0428592823445797,
+        "avg_ind_disc_comp": -0.0176275335252285,
+        "mean_coord_state_val": 0.7781050205230713,
+        "mean_coord_agent_val": 0.7612150311470032,
+        "avg_discoverer_val": -12.417078018188477,
+        "mean_high_level_reward": 0.6261966824531555,
+        "cd_loss": 0.0,
+        "coordinator_lr": 0.0001,
+        "discoverer_actor_lr": 0.0001,
+        "discoverer_critic_lr": 0.0001,
+        "discriminator_lr": 0.0001,
+        "team_discriminator_lr": 0.0001,
+        "individual_discriminator_lr": 0.0001,
+        "process_encoder_lr": 0.0,
+        "process_encoder_loss": 0.0,
+        "process_outcome_loss": 0.0,
+        "process_contrastive_loss": 0.0,
+        "process_contrastive_accuracy": 0.0,
+        "process_duration_only_accuracy": 0.0,
+        "process_reward_mean": 0.0,
+        "process_reward_abs_mean": 0.0,
+        "process_reward_applied_steps": 0.0,
+        "process_segments_trained": 0.0
+      },
+      "auxiliary": {
+        "loss": 0.005830308750689049,
+        "supervised_team_rows": 5964,
+        "supervised_agent_samples": 47712,
+        "optimizer_steps": 30,
+        "head_gradient_norm": 0.45368683338165283,
+        "representation_gradient_norm": 0.3496871888637543
+      }
+    },
+    {
+      "rollout": 11,
+      "native": {
+        "discriminator_loss": 3.507617123921712,
+        "discriminator_team_loss": 1.7603871822357178,
+        "discriminator_individual_loss": 1.7472299416859944,
+        "discriminator_team_accuracy": 0.2863333225250244,
+        "discriminator_individual_accuracy": 0.2852708399295807,
+        "coordinator_loss": -1.0116207599639893,
+        "coordinator_policy_loss": -0.05369817093014717,
+        "coordinator_value_loss": 0.14891193807125092,
+        "discoverer_loss": -0.019199347123503685,
+        "discoverer_policy_loss": -0.021859711036086082,
+        "discoverer_value_loss": 0.008546702563762665,
+        "team_skill_entropy": 1.671162724494934,
+        "agent_skill_entropy": 1.7675946950912476,
+        "action_entropy": 1.1772729456424713,
+        "avg_intrinsic_reward": -0.5638566613197327,
+        "avg_env_comp": -0.5027509927749634,
+        "avg_team_disc_comp": -0.04340222105383873,
+        "avg_ind_disc_comp": -0.017703507095575333,
+        "mean_coord_state_val": 0.6019943952560425,
+        "mean_coord_agent_val": 0.5684806108474731,
+        "avg_discoverer_val": -5.546182155609131,
+        "mean_high_level_reward": -5.027509689331055,
+        "cd_loss": 0.0,
+        "coordinator_lr": 0.0001,
+        "discoverer_actor_lr": 0.0001,
+        "discoverer_critic_lr": 0.0001,
+        "discriminator_lr": 0.0001,
+        "team_discriminator_lr": 0.0001,
+        "individual_discriminator_lr": 0.0001,
+        "process_encoder_lr": 0.0,
+        "process_encoder_loss": 0.0,
+        "process_outcome_loss": 0.0,
+        "process_contrastive_loss": 0.0,
+        "process_contrastive_accuracy": 0.0,
+        "process_duration_only_accuracy": 0.0,
+        "process_reward_mean": 0.0,
+        "process_reward_abs_mean": 0.0,
+        "process_reward_applied_steps": 0.0,
+        "process_segments_trained": 0.0
+      },
+      "auxiliary": {
+        "loss": 0.011889086452223446,
+        "supervised_team_rows": 5964,
+        "supervised_agent_samples": 47712,
+        "optimizer_steps": 30,
+        "head_gradient_norm": 0.7874751687049866,
+        "representation_gradient_norm": 0.6086580753326416
+      }
+    },
+    {
+      "rollout": 12,
+      "native": {
+        "discriminator_loss": 3.4926467935244245,
+        "discriminator_team_loss": 1.7364200433095296,
+        "discriminator_individual_loss": 1.7562267502148947,
+        "discriminator_team_accuracy": 0.289166659116745,
+        "discriminator_individual_accuracy": 0.2693125009536743,
+        "coordinator_loss": -1.079465627670288,
+        "coordinator_policy_loss": -0.016722174361348152,
+        "coordinator_value_loss": 0.04933922737836838,
+        "discoverer_loss": -0.021477380767464638,
+        "discoverer_policy_loss": -0.018712615594267845,
+        "discoverer_value_loss": 0.003224834566935897,
+        "team_skill_entropy": 1.682204008102417,
+        "agent_skill_entropy": 1.7755872011184692,
+        "action_entropy": 1.1979252099990845,
+        "avg_intrinsic_reward": -0.13790014386177063,
+        "avg_env_comp": -0.07688545435667038,
+        "avg_team_disc_comp": -0.043355800211429596,
+        "avg_ind_disc_comp": -0.017658893018960953,
+        "mean_coord_state_val": 0.7729616165161133,
+        "mean_coord_agent_val": 0.7581542730331421,
+        "avg_discoverer_val": -5.736270904541016,
+        "mean_high_level_reward": -0.7688544988632202,
+        "cd_loss": 0.0,
+        "coordinator_lr": 0.0001,
+        "discoverer_actor_lr": 0.0001,
+        "discoverer_critic_lr": 0.0001,
+        "discriminator_lr": 0.0001,
+        "team_discriminator_lr": 0.0001,
+        "individual_discriminator_lr": 0.0001,
+        "process_encoder_lr": 0.0,
+        "process_encoder_loss": 0.0,
+        "process_outcome_loss": 0.0,
+        "process_contrastive_loss": 0.0,
+        "process_contrastive_accuracy": 0.0,
+        "process_duration_only_accuracy": 0.0,
+        "process_reward_mean": 0.0,
+        "process_reward_abs_mean": 0.0,
+        "process_reward_applied_steps": 0.0,
+        "process_segments_trained": 0.0
+      },
+      "auxiliary": {
+        "loss": 0.005762008321424665,
+        "supervised_team_rows": 5964,
+        "supervised_agent_samples": 47712,
+        "optimizer_steps": 30,
+        "head_gradient_norm": 0.26499202847480774,
+        "representation_gradient_norm": 0.25769099593162537
+      }
+    },
+    {
+      "rollout": 13,
+      "native": {
+        "discriminator_loss": 3.5400842944780986,
+        "discriminator_team_loss": 1.7819584131240844,
+        "discriminator_individual_loss": 1.7581258813540142,
+        "discriminator_team_accuracy": 0.26866665482521057,
+        "discriminator_individual_accuracy": 0.27656251192092896,
+        "coordinator_loss": -1.1354838609695435,
+        "coordinator_policy_loss": -0.13971716165542603,
+        "coordinator_value_loss": 0.10735686123371124,
+        "discoverer_loss": -0.023616142570972443,
+        "discoverer_policy_loss": -0.02648741379380226,
+        "discoverer_value_loss": 0.008854493498802185,
+        "team_skill_entropy": 1.610393762588501,
+        "agent_skill_entropy": 1.7685638666152954,
+        "action_entropy": 1.1966506019234657,
+        "avg_intrinsic_reward": -0.8224698305130005,
+        "avg_env_comp": -0.7607758641242981,
+        "avg_team_disc_comp": -0.044120676815509796,
+        "avg_ind_disc_comp": -0.01757325418293476,
+        "mean_coord_state_val": 0.7353653311729431,
+        "mean_coord_agent_val": 0.716122567653656,
+        "avg_discoverer_val": -13.496882438659668,
+        "mean_high_level_reward": -7.607759475708008,
+        "cd_loss": 0.0,
+        "coordinator_lr": 0.0001,
+        "discoverer_actor_lr": 0.0001,
+        "discoverer_critic_lr": 0.0001,
+        "discriminator_lr": 0.0001,
+        "team_discriminator_lr": 0.0001,
+        "individual_discriminator_lr": 0.0001,
+        "process_encoder_lr": 0.0,
+        "process_encoder_loss": 0.0,
+        "process_outcome_loss": 0.0,
+        "process_contrastive_loss": 0.0,
+        "process_contrastive_accuracy": 0.0,
+        "process_duration_only_accuracy": 0.0,
+        "process_reward_mean": 0.0,
+        "process_reward_abs_mean": 0.0,
+        "process_reward_applied_steps": 0.0,
+        "process_segments_trained": 0.0
+      },
+      "auxiliary": {
+        "loss": 0.00587832768517031,
+        "supervised_team_rows": 5964,
+        "supervised_agent_samples": 47712,
+        "optimizer_steps": 30,
+        "head_gradient_norm": 0.5435512065887451,
+        "representation_gradient_norm": 0.5701349973678589
+      }
+    },
+    {
+      "rollout": 14,
+      "native": {
+        "discriminator_loss": 3.4583428959051767,
+        "discriminator_team_loss": 1.7182756265004475,
+        "discriminator_individual_loss": 1.7400672694047292,
+        "discriminator_team_accuracy": 0.29999998211860657,
+        "discriminator_individual_accuracy": 0.30266666412353516,
+        "coordinator_loss": -1.0767556428909302,
+        "coordinator_policy_loss": -0.03611399978399277,
+        "coordinator_value_loss": 0.06453319638967514,
+        "discoverer_loss": -0.030228979885578156,
+        "discoverer_policy_loss": -0.030029796063899994,
+        "discoverer_value_loss": 0.0057494449429214,
+        "team_skill_entropy": 1.6107041835784912,
+        "agent_skill_entropy": 1.7721881866455078,
+        "action_entropy": 1.1897294782102108,
+        "avg_intrinsic_reward": -0.27275916934013367,
+        "avg_env_comp": -0.2130412459373474,
+        "avg_team_disc_comp": -0.042146194726228714,
+        "avg_ind_disc_comp": -0.017571724951267242,
+        "mean_coord_state_val": 0.7513450384140015,
+        "mean_coord_agent_val": 0.7383213043212891,
+        "avg_discoverer_val": -6.503881931304932,
+        "mean_high_level_reward": -2.1304121017456055,
+        "cd_loss": 0.0,
+        "coordinator_lr": 0.0001,
+        "discoverer_actor_lr": 0.0001,
+        "discoverer_critic_lr": 0.0001,
+        "discriminator_lr": 0.0001,
+        "team_discriminator_lr": 0.0001,
+        "individual_discriminator_lr": 0.0001,
+        "process_encoder_lr": 0.0,
+        "process_encoder_loss": 0.0,
+        "process_outcome_loss": 0.0,
+        "process_contrastive_loss": 0.0,
+        "process_contrastive_accuracy": 0.0,
+        "process_duration_only_accuracy": 0.0,
+        "process_reward_mean": 0.0,
+        "process_reward_abs_mean": 0.0,
+        "process_reward_applied_steps": 0.0,
+        "process_segments_trained": 0.0
+      },
+      "auxiliary": {
+        "loss": 0.017765902641768385,
+        "supervised_team_rows": 5964,
+        "supervised_agent_samples": 47712,
+        "optimizer_steps": 30,
+        "head_gradient_norm": 0.8880257606506348,
+        "representation_gradient_norm": 1.3171172142028809
+      }
+    },
+    {
+      "rollout": 15,
+      "native": {
+        "discriminator_loss": 3.4512609938780465,
+        "discriminator_team_loss": 1.6855439106623331,
+        "discriminator_individual_loss": 1.7657170832157134,
+        "discriminator_team_accuracy": 0.3375000059604645,
+        "discriminator_individual_accuracy": 0.2602083384990692,
+        "coordinator_loss": -1.0849041938781738,
+        "coordinator_policy_loss": -0.057826101779937744,
+        "coordinator_value_loss": 0.0733705535531044,
+        "discoverer_loss": -0.025424018502235413,
+        "discoverer_policy_loss": -0.029332851991057396,
+        "discoverer_value_loss": 0.009411469101905823,
+        "team_skill_entropy": 1.5815997123718262,
+        "agent_skill_entropy": 1.7673866748809814,
+        "action_entropy": 1.1005263775587082,
+        "avg_intrinsic_reward": -0.7673250436782837,
+        "avg_env_comp": -0.7090335488319397,
+        "avg_team_disc_comp": -0.040684185922145844,
+        "avg_ind_disc_comp": -0.017607318237423897,
+        "mean_coord_state_val": 0.6520159840583801,
+        "mean_coord_agent_val": 0.6671973466873169,
+        "avg_discoverer_val": -11.71796989440918,
+        "mean_high_level_reward": -7.090335369110107,
+        "cd_loss": 0.0,
+        "coordinator_lr": 0.0001,
+        "discoverer_actor_lr": 0.0001,
+        "discoverer_critic_lr": 0.0001,
+        "discriminator_lr": 0.0001,
+        "team_discriminator_lr": 0.0001,
+        "individual_discriminator_lr": 0.0001,
+        "process_encoder_lr": 0.0,
+        "process_encoder_loss": 0.0,
+        "process_outcome_loss": 0.0,
+        "process_contrastive_loss": 0.0,
+        "process_contrastive_accuracy": 0.0,
+        "process_duration_only_accuracy": 0.0,
+        "process_reward_mean": 0.0,
+        "process_reward_abs_mean": 0.0,
+        "process_reward_applied_steps": 0.0,
+        "process_segments_trained": 0.0
+      },
+      "auxiliary": {
+        "loss": 0.012629860090460356,
+        "supervised_team_rows": 5964,
+        "supervised_agent_samples": 47712,
+        "optimizer_steps": 30,
+        "head_gradient_norm": 1.0755915641784668,
+        "representation_gradient_norm": 1.310276746749878
+      }
+    },
+    {
+      "rollout": 16,
+      "native": {
+        "discriminator_loss": 3.4911711792151134,
+        "discriminator_team_loss": 1.7311279773712158,
+        "discriminator_individual_loss": 1.7600432018438974,
+        "discriminator_team_accuracy": 0.3323333263397217,
+        "discriminator_individual_accuracy": 0.26899999380111694,
+        "coordinator_loss": -1.0814849138259888,
+        "coordinator_policy_loss": -0.005298582371324301,
+        "coordinator_value_loss": 0.031539808958768845,
+        "discoverer_loss": -0.026660652831196785,
+        "discoverer_policy_loss": -0.02677469700574875,
+        "discoverer_value_loss": 0.0061354124918580055,
+        "team_skill_entropy": 1.6284786462783813,
+        "agent_skill_entropy": 1.774523138999939,
+        "action_entropy": 1.204276829957962,
+        "avg_intrinsic_reward": -0.2346108853816986,
+        "avg_env_comp": -0.1759050041437149,
+        "avg_team_disc_comp": -0.041020482778549194,
+        "avg_ind_disc_comp": -0.01768537424504757,
+        "mean_coord_state_val": 0.7880184054374695,
+        "mean_coord_agent_val": 0.7854847311973572,
+        "avg_discoverer_val": -2.709125280380249,
+        "mean_high_level_reward": -1.7590501308441162,
+        "cd_loss": 0.0,
+        "coordinator_lr": 0.0001,
+        "discoverer_actor_lr": 0.0001,
+        "discoverer_critic_lr": 0.0001,
+        "discriminator_lr": 0.0001,
+        "team_discriminator_lr": 0.0001,
+        "individual_discriminator_lr": 0.0001,
+        "process_encoder_lr": 0.0,
+        "process_encoder_loss": 0.0,
+        "process_outcome_loss": 0.0,
+        "process_contrastive_loss": 0.0,
+        "process_contrastive_accuracy": 0.0,
+        "process_duration_only_accuracy": 0.0,
+        "process_reward_mean": 0.0,
+        "process_reward_abs_mean": 0.0,
+        "process_reward_applied_steps": 0.0,
+        "process_segments_trained": 0.0
+      },
+      "auxiliary": {
+        "loss": 0.0058921036825188644,
+        "supervised_team_rows": 5964,
+        "supervised_agent_samples": 47712,
+        "optimizer_steps": 30,
+        "head_gradient_norm": 0.8264868259429932,
+        "representation_gradient_norm": 0.7919926643371582
+      }
+    },
+    {
+      "rollout": 17,
+      "native": {
+        "discriminator_loss": 3.438723949591319,
+        "discriminator_team_loss": 1.684084375699361,
+        "discriminator_individual_loss": 1.7546395738919576,
+        "discriminator_team_accuracy": 0.3310000002384186,
+        "discriminator_individual_accuracy": 0.2759791612625122,
+        "coordinator_loss": -1.0865272283554077,
+        "coordinator_policy_loss": -0.06296597421169281,
+        "coordinator_value_loss": 0.07702340930700302,
+        "discoverer_loss": -0.029906461015343666,
+        "discoverer_policy_loss": -0.03212566673755646,
+        "discoverer_value_loss": 0.00797337293624878,
+        "team_skill_entropy": 1.5757373571395874,
+        "agent_skill_entropy": 1.7683625221252441,
+        "action_entropy": 1.1508340947329998,
+        "avg_intrinsic_reward": -0.5141034722328186,
+        "avg_env_comp": -0.4557839035987854,
+        "avg_team_disc_comp": -0.0408037006855011,
+        "avg_ind_disc_comp": -0.017515871673822403,
+        "mean_coord_state_val": 0.6451690793037415,
+        "mean_coord_agent_val": 0.6456138491630554,
+        "avg_discoverer_val": -20.776077270507812,
+        "mean_high_level_reward": -4.5578389167785645,
+        "cd_loss": 0.0,
+        "coordinator_lr": 0.0001,
+        "discoverer_actor_lr": 0.0001,
+        "discoverer_critic_lr": 0.0001,
+        "discriminator_lr": 0.0001,
+        "team_discriminator_lr": 0.0001,
+        "individual_discriminator_lr": 0.0001,
+        "process_encoder_lr": 0.0,
+        "process_encoder_loss": 0.0,
+        "process_outcome_loss": 0.0,
+        "process_contrastive_loss": 0.0,
+        "process_contrastive_accuracy": 0.0,
+        "process_duration_only_accuracy": 0.0,
+        "process_reward_mean": 0.0,
+        "process_reward_abs_mean": 0.0,
+        "process_reward_applied_steps": 0.0,
+        "process_segments_trained": 0.0
+      },
+      "auxiliary": {
+        "loss": 0.004654519084408769,
+        "supervised_team_rows": 5964,
+        "supervised_agent_samples": 47712,
+        "optimizer_steps": 30,
+        "head_gradient_norm": 0.37966495752334595,
+        "representation_gradient_norm": 0.3810873031616211
+      }
+    },
+    {
+      "rollout": 18,
+      "native": {
+        "discriminator_loss": 3.423744078477224,
+        "discriminator_team_loss": 1.660854943593343,
+        "discriminator_individual_loss": 1.7628891348838807,
+        "discriminator_team_accuracy": 0.36033332347869873,
+        "discriminator_individual_accuracy": 0.257854163646698,
+        "coordinator_loss": -1.0058070421218872,
+        "coordinator_policy_loss": -0.009790145792067051,
+        "coordinator_value_loss": 0.10295956581830978,
+        "discoverer_loss": -0.0305054672062397,
+        "discoverer_policy_loss": -0.03139165788888931,
+        "discoverer_value_loss": 0.006630305666476488,
+        "team_skill_entropy": 1.558929443359375,
+        "agent_skill_entropy": 1.7675918340682983,
+        "action_entropy": 1.1488208547234535,
+        "avg_intrinsic_reward": -0.9985218048095703,
+        "avg_env_comp": -0.9399120807647705,
+        "avg_team_disc_comp": -0.04100299999117851,
+        "avg_ind_disc_comp": -0.01760677434504032,
+        "mean_coord_state_val": 0.5499600172042847,
+        "mean_coord_agent_val": 0.47557029128074646,
+        "avg_discoverer_val": -30.233320236206055,
+        "mean_high_level_reward": -9.399121284484863,
+        "cd_loss": 0.0,
+        "coordinator_lr": 0.0001,
+        "discoverer_actor_lr": 0.0001,
+        "discoverer_critic_lr": 0.0001,
+        "discriminator_lr": 0.0001,
+        "team_discriminator_lr": 0.0001,
+        "individual_discriminator_lr": 0.0001,
+        "process_encoder_lr": 0.0,
+        "process_encoder_loss": 0.0,
+        "process_outcome_loss": 0.0,
+        "process_contrastive_loss": 0.0,
+        "process_contrastive_accuracy": 0.0,
+        "process_duration_only_accuracy": 0.0,
+        "process_reward_mean": 0.0,
+        "process_reward_abs_mean": 0.0,
+        "process_reward_applied_steps": 0.0,
+        "process_segments_trained": 0.0
+      },
+      "auxiliary": {
+        "loss": 0.010065829387280683,
+        "supervised_team_rows": 5964,
+        "supervised_agent_samples": 47712,
+        "optimizer_steps": 30,
+        "head_gradient_norm": 0.26361480355262756,
+        "representation_gradient_norm": 0.2018212080001831
+      }
+    },
+    {
+      "rollout": 19,
+      "native": {
+        "discriminator_loss": 3.411630082130432,
+        "discriminator_team_loss": 1.6652607997258504,
+        "discriminator_individual_loss": 1.7463692824045818,
+        "discriminator_team_accuracy": 0.33016666769981384,
+        "discriminator_individual_accuracy": 0.2836875021457672,
+        "coordinator_loss": -1.1544772386550903,
+        "coordinator_policy_loss": -0.1294601857662201,
+        "coordinator_value_loss": 0.07771915197372437,
+        "discoverer_loss": -0.02288377471268177,
+        "discoverer_policy_loss": -0.025241635739803314,
+        "discoverer_value_loss": 0.008405806496739388,
+        "team_skill_entropy": 1.6019076108932495,
+        "agent_skill_entropy": 1.7689332962036133,
+        "action_entropy": 1.2095903977751732,
+        "avg_intrinsic_reward": -0.45261621475219727,
+        "avg_env_comp": -0.39512938261032104,
+        "avg_team_disc_comp": -0.039854198694229126,
+        "avg_ind_disc_comp": -0.017632650211453438,
+        "mean_coord_state_val": 0.663368284702301,
+        "mean_coord_agent_val": 0.6222522258758545,
+        "avg_discoverer_val": -19.580793380737305,
+        "mean_high_level_reward": -3.951293468475342,
+        "cd_loss": 0.0,
+        "coordinator_lr": 0.0001,
+        "discoverer_actor_lr": 0.0001,
+        "discoverer_critic_lr": 0.0001,
+        "discriminator_lr": 0.0001,
+        "team_discriminator_lr": 0.0001,
+        "individual_discriminator_lr": 0.0001,
+        "process_encoder_lr": 0.0,
+        "process_encoder_loss": 0.0,
+        "process_outcome_loss": 0.0,
+        "process_contrastive_loss": 0.0,
+        "process_contrastive_accuracy": 0.0,
+        "process_duration_only_accuracy": 0.0,
+        "process_reward_mean": 0.0,
+        "process_reward_abs_mean": 0.0,
+        "process_reward_applied_steps": 0.0,
+        "process_segments_trained": 0.0
+      },
+      "auxiliary": {
+        "loss": 0.0052684242751244465,
+        "supervised_team_rows": 5964,
+        "supervised_agent_samples": 47712,
+        "optimizer_steps": 30,
+        "head_gradient_norm": 0.32582995295524597,
+        "representation_gradient_norm": 0.3757481575012207
+      }
+    },
+    {
+      "rollout": 20,
+      "native": {
+        "discriminator_loss": 3.4616914331913,
+        "discriminator_team_loss": 1.7062827189763388,
+        "discriminator_individual_loss": 1.7554087142149608,
+        "discriminator_team_accuracy": 0.3101666569709778,
+        "discriminator_individual_accuracy": 0.27277082204818726,
+        "coordinator_loss": -1.1582484245300293,
+        "coordinator_policy_loss": -0.11064228415489197,
+        "coordinator_value_loss": 0.05450287461280823,
+        "discoverer_loss": -0.031276311725378036,
+        "discoverer_policy_loss": -0.03161755949258804,
+        "discoverer_value_loss": 0.006468076258897781,
+        "team_skill_entropy": 1.5827192068099976,
+        "agent_skill_entropy": 1.7702118158340454,
+        "action_entropy": 1.225372962653637,
+        "avg_intrinsic_reward": -0.6144387125968933,
+        "avg_env_comp": -0.555298924446106,
+        "avg_team_disc_comp": -0.04158113896846771,
+        "avg_ind_disc_comp": -0.017558708786964417,
+        "mean_coord_state_val": 0.7476981282234192,
+        "mean_coord_agent_val": 0.7137296199798584,
+        "avg_discoverer_val": -18.61347198486328,
+        "mean_high_level_reward": -5.552988529205322,
+        "cd_loss": 0.0,
+        "coordinator_lr": 0.0001,
+        "discoverer_actor_lr": 0.0001,
+        "discoverer_critic_lr": 0.0001,
+        "discriminator_lr": 0.0001,
+        "team_discriminator_lr": 0.0001,
+        "individual_discriminator_lr": 0.0001,
+        "process_encoder_lr": 0.0,
+        "process_encoder_loss": 0.0,
+        "process_outcome_loss": 0.0,
+        "process_contrastive_loss": 0.0,
+        "process_contrastive_accuracy": 0.0,
+        "process_duration_only_accuracy": 0.0,
+        "process_reward_mean": 0.0,
+        "process_reward_abs_mean": 0.0,
+        "process_reward_applied_steps": 0.0,
+        "process_segments_trained": 0.0
+      },
+      "auxiliary": {
+        "loss": 0.005830560912522422,
+        "supervised_team_rows": 5964,
+        "supervised_agent_samples": 47712,
+        "optimizer_steps": 30,
+        "head_gradient_norm": 0.39151859283447266,
+        "representation_gradient_norm": 0.32141369581222534
+      }
+    },
+    {
+      "rollout": 21,
+      "native": {
+        "discriminator_loss": 3.4408727685610456,
+        "discriminator_team_loss": 1.688988216718038,
+        "discriminator_individual_loss": 1.7518845518430075,
+        "discriminator_team_accuracy": 0.31849998235702515,
+        "discriminator_individual_accuracy": 0.2759374976158142,
+        "coordinator_loss": -1.2275407314300537,
+        "coordinator_policy_loss": -0.1604125052690506,
+        "coordinator_value_loss": 0.03714746981859207,
+        "discoverer_loss": -0.033718787133693695,
+        "discoverer_policy_loss": -0.032390300184488297,
+        "discoverer_value_loss": 0.004575375467538834,
+        "team_skill_entropy": 1.6004301309585571,
+        "agent_skill_entropy": 1.771867275238037,
+        "action_entropy": 1.180780678987503,
+        "avg_intrinsic_reward": -0.36376672983169556,
+        "avg_env_comp": -0.3052268326282501,
+        "avg_team_disc_comp": -0.04100639745593071,
+        "avg_ind_disc_comp": -0.01753349043428898,
+        "mean_coord_state_val": 0.6913539171218872,
+        "mean_coord_agent_val": 0.6614775061607361,
+        "avg_discoverer_val": -25.871822357177734,
+        "mean_high_level_reward": -3.0522682666778564,
+        "cd_loss": 0.0,
+        "coordinator_lr": 0.0001,
+        "discoverer_actor_lr": 0.0001,
+        "discoverer_critic_lr": 0.0001,
+        "discriminator_lr": 0.0001,
+        "team_discriminator_lr": 0.0001,
+        "individual_discriminator_lr": 0.0001,
+        "process_encoder_lr": 0.0,
+        "process_encoder_loss": 0.0,
+        "process_outcome_loss": 0.0,
+        "process_contrastive_loss": 0.0,
+        "process_contrastive_accuracy": 0.0,
+        "process_duration_only_accuracy": 0.0,
+        "process_reward_mean": 0.0,
+        "process_reward_abs_mean": 0.0,
+        "process_reward_applied_steps": 0.0,
+        "process_segments_trained": 0.0
+      },
+      "auxiliary": {
+        "loss": 0.008394696949628237,
+        "supervised_team_rows": 5964,
+        "supervised_agent_samples": 47712,
+        "optimizer_steps": 30,
+        "head_gradient_norm": 0.11769402772188187,
+        "representation_gradient_norm": 0.12266382575035095
+      }
+    },
+    {
+      "rollout": 22,
+      "native": {
+        "discriminator_loss": 3.49915567835172,
+        "discriminator_team_loss": 1.7414008061091104,
+        "discriminator_individual_loss": 1.7577548722426097,
+        "discriminator_team_accuracy": 0.2633333206176758,
+        "discriminator_individual_accuracy": 0.2681874930858612,
+        "coordinator_loss": -1.060224175453186,
+        "coordinator_policy_loss": 0.011568746529519558,
+        "coordinator_value_loss": 0.032555099576711655,
+        "discoverer_loss": -0.03192273899912834,
+        "discoverer_policy_loss": -0.03309115394949913,
+        "discoverer_value_loss": 0.007019145879894495,
+        "team_skill_entropy": 1.6080254316329956,
+        "agent_skill_entropy": 1.7710458040237427,
+        "action_entropy": 1.1701504699885845,
+        "avg_intrinsic_reward": -0.4526767134666443,
+        "avg_env_comp": -0.394809365272522,
+        "avg_team_disc_comp": -0.040347807109355927,
+        "avg_ind_disc_comp": -0.017519548535346985,
+        "mean_coord_state_val": 0.6250433921813965,
+        "mean_coord_agent_val": 0.6231776475906372,
+        "avg_discoverer_val": -22.418596267700195,
+        "mean_high_level_reward": -3.9480931758880615,
+        "cd_loss": 0.0,
+        "coordinator_lr": 0.0001,
+        "discoverer_actor_lr": 0.0001,
+        "discoverer_critic_lr": 0.0001,
+        "discriminator_lr": 0.0001,
+        "team_discriminator_lr": 0.0001,
+        "individual_discriminator_lr": 0.0001,
+        "process_encoder_lr": 0.0,
+        "process_encoder_loss": 0.0,
+        "process_outcome_loss": 0.0,
+        "process_contrastive_loss": 0.0,
+        "process_contrastive_accuracy": 0.0,
+        "process_duration_only_accuracy": 0.0,
+        "process_reward_mean": 0.0,
+        "process_reward_abs_mean": 0.0,
+        "process_reward_applied_steps": 0.0,
+        "process_segments_trained": 0.0
+      },
+      "auxiliary": {
+        "loss": 0.006915050396029878,
+        "supervised_team_rows": 5964,
+        "supervised_agent_samples": 47712,
+        "optimizer_steps": 30,
+        "head_gradient_norm": 0.7257606387138367,
+        "representation_gradient_norm": 0.5904401540756226
+      }
+    },
+    {
+      "rollout": 23,
+      "native": {
+        "discriminator_loss": 3.484974177678426,
+        "discriminator_team_loss": 1.740651512145996,
+        "discriminator_individual_loss": 1.74432266553243,
+        "discriminator_team_accuracy": 0.2706666588783264,
+        "discriminator_individual_accuracy": 0.2906041741371155,
+        "coordinator_loss": -1.037858486175537,
+        "coordinator_policy_loss": -0.024656563997268677,
+        "coordinator_value_loss": 0.08430324494838715,
+        "discoverer_loss": -0.03106975369155407,
+        "discoverer_policy_loss": -0.03572307527065277,
+        "discoverer_value_loss": 0.010406222194433212,
+        "team_skill_entropy": 1.5758479833602905,
+        "agent_skill_entropy": 1.7628495693206787,
+        "action_entropy": 1.1505813337862492,
+        "avg_intrinsic_reward": -0.7184202671051025,
+        "avg_env_comp": -0.658827006816864,
+        "avg_team_disc_comp": -0.042153529822826385,
+        "avg_ind_disc_comp": -0.017439723014831543,
+        "mean_coord_state_val": 0.619661271572113,
+        "mean_coord_agent_val": 0.5903501510620117,
+        "avg_discoverer_val": -36.78826141357422,
+        "mean_high_level_reward": -6.5882697105407715,
+        "cd_loss": 0.0,
+        "coordinator_lr": 0.0001,
+        "discoverer_actor_lr": 0.0001,
+        "discoverer_critic_lr": 0.0001,
+        "discriminator_lr": 0.0001,
+        "team_discriminator_lr": 0.0001,
+        "individual_discriminator_lr": 0.0001,
+        "process_encoder_lr": 0.0,
+        "process_encoder_loss": 0.0,
+        "process_outcome_loss": 0.0,
+        "process_contrastive_loss": 0.0,
+        "process_contrastive_accuracy": 0.0,
+        "process_duration_only_accuracy": 0.0,
+        "process_reward_mean": 0.0,
+        "process_reward_abs_mean": 0.0,
+        "process_reward_applied_steps": 0.0,
+        "process_segments_trained": 0.0
+      },
+      "auxiliary": {
+        "loss": 0.003735113312445936,
+        "supervised_team_rows": 5964,
+        "supervised_agent_samples": 47712,
+        "optimizer_steps": 30,
+        "head_gradient_norm": 0.24285723268985748,
+        "representation_gradient_norm": 0.26948869228363037
+      }
+    },
+    {
+      "rollout": 24,
+      "native": {
+        "discriminator_loss": 3.5984467228253685,
+        "discriminator_team_loss": 1.849921981493632,
+        "discriminator_individual_loss": 1.7485247413317362,
+        "discriminator_team_accuracy": 0.20816665887832642,
+        "discriminator_individual_accuracy": 0.2945416569709778,
+        "coordinator_loss": -1.193048357963562,
+        "coordinator_policy_loss": -0.10462187230587006,
+        "coordinator_value_loss": 0.024212323129177094,
+        "discoverer_loss": -0.02882475219666958,
+        "discoverer_policy_loss": -0.024914739653468132,
+        "discoverer_value_loss": 0.0021451441571116447,
+        "team_skill_entropy": 1.6689531803131104,
+        "agent_skill_entropy": 1.7782355546951294,
+        "action_entropy": 1.2110358104109764,
+        "avg_intrinsic_reward": 0.21899180114269257,
+        "avg_env_comp": 0.2800575792789459,
+        "avg_team_disc_comp": -0.043628279119729996,
+        "avg_ind_disc_comp": -0.01743750087916851,
+        "mean_coord_state_val": 0.7881184220314026,
+        "mean_coord_agent_val": 0.7408892512321472,
+        "avg_discoverer_val": -4.761569976806641,
+        "mean_high_level_reward": 2.8005757331848145,
+        "cd_loss": 0.0,
+        "coordinator_lr": 0.0001,
+        "discoverer_actor_lr": 0.0001,
+        "discoverer_critic_lr": 0.0001,
+        "discriminator_lr": 0.0001,
+        "team_discriminator_lr": 0.0001,
+        "individual_discriminator_lr": 0.0001,
+        "process_encoder_lr": 0.0,
+        "process_encoder_loss": 0.0,
+        "process_outcome_loss": 0.0,
+        "process_contrastive_loss": 0.0,
+        "process_contrastive_accuracy": 0.0,
+        "process_duration_only_accuracy": 0.0,
+        "process_reward_mean": 0.0,
+        "process_reward_abs_mean": 0.0,
+        "process_reward_applied_steps": 0.0,
+        "process_segments_trained": 0.0
+      },
+      "auxiliary": {
+        "loss": 0.021461576355794865,
+        "supervised_team_rows": 5964,
+        "supervised_agent_samples": 47712,
+        "optimizer_steps": 30,
+        "head_gradient_norm": 0.68507319688797,
+        "representation_gradient_norm": 0.4964652359485626
+      }
+    },
+    {
+      "rollout": 25,
+      "native": {
+        "discriminator_loss": 3.458036744594574,
+        "discriminator_team_loss": 1.7331885735193888,
+        "discriminator_individual_loss": 1.724848171075185,
+        "discriminator_team_accuracy": 0.2776666581630707,
+        "discriminator_individual_accuracy": 0.33035415410995483,
+        "coordinator_loss": -0.9793217182159424,
+        "coordinator_policy_loss": 0.028349928557872772,
+        "coordinator_value_loss": 0.09260457009077072,
+        "discoverer_loss": -0.03887280821800232,
+        "discoverer_policy_loss": -0.04160818085074425,
+        "discoverer_value_loss": 0.008620375767350197,
+        "team_skill_entropy": 1.6143708229064941,
+        "agent_skill_entropy": 1.7629828453063965,
+        "action_entropy": 1.1770032346248627,
+        "avg_intrinsic_reward": -0.4070952236652374,
+        "avg_env_comp": -0.347245454788208,
+        "avg_team_disc_comp": -0.042466726154088974,
+        "avg_ind_disc_comp": -0.017383048310875893,
+        "mean_coord_state_val": 0.6419053673744202,
+        "mean_coord_agent_val": 0.5933550000190735,
+        "avg_discoverer_val": -17.354969024658203,
+        "mean_high_level_reward": -3.472454309463501,
+        "cd_loss": 0.0,
+        "coordinator_lr": 0.0001,
+        "discoverer_actor_lr": 0.0001,
+        "discoverer_critic_lr": 0.0001,
+        "discriminator_lr": 0.0001,
+        "team_discriminator_lr": 0.0001,
+        "individual_discriminator_lr": 0.0001,
+        "process_encoder_lr": 0.0,
+        "process_encoder_loss": 0.0,
+        "process_outcome_loss": 0.0,
+        "process_contrastive_loss": 0.0,
+        "process_contrastive_accuracy": 0.0,
+        "process_duration_only_accuracy": 0.0,
+        "process_reward_mean": 0.0,
+        "process_reward_abs_mean": 0.0,
+        "process_reward_applied_steps": 0.0,
+        "process_segments_trained": 0.0
+      },
+      "auxiliary": {
+        "loss": 0.024503377131620544,
+        "supervised_team_rows": 5964,
+        "supervised_agent_samples": 47712,
+        "optimizer_steps": 30,
+        "head_gradient_norm": 1.489583134651184,
+        "representation_gradient_norm": 1.0342739820480347
+      }
+    },
+    {
+      "rollout": 26,
+      "native": {
+        "discriminator_loss": 3.4660933295885723,
+        "discriminator_team_loss": 1.7325127204259236,
+        "discriminator_individual_loss": 1.7335806091626484,
+        "discriminator_team_accuracy": 0.2750000059604645,
+        "discriminator_individual_accuracy": 0.3096874952316284,
+        "coordinator_loss": -0.9558587670326233,
+        "coordinator_policy_loss": -0.002650200156494975,
+        "coordinator_value_loss": 0.14992456138134003,
+        "discoverer_loss": -0.035948578268289566,
+        "discoverer_policy_loss": -0.03428715094923973,
+        "discoverer_value_loss": 0.004326562397181988,
+        "team_skill_entropy": 1.6336404085159302,
+        "agent_skill_entropy": 1.7656755447387695,
+        "action_entropy": 1.1975978501141071,
+        "avg_intrinsic_reward": -0.592413067817688,
+        "avg_env_comp": -0.5321152210235596,
+        "avg_team_disc_comp": -0.04285597801208496,
+        "avg_ind_disc_comp": -0.01744186505675316,
+        "mean_coord_state_val": 0.6679092049598694,
+        "mean_coord_agent_val": 0.6405814290046692,
+        "avg_discoverer_val": -21.344762802124023,
+        "mean_high_level_reward": -5.321152210235596,
+        "cd_loss": 0.0,
+        "coordinator_lr": 0.0001,
+        "discoverer_actor_lr": 0.0001,
+        "discoverer_critic_lr": 0.0001,
+        "discriminator_lr": 0.0001,
+        "team_discriminator_lr": 0.0001,
+        "individual_discriminator_lr": 0.0001,
+        "process_encoder_lr": 0.0,
+        "process_encoder_loss": 0.0,
+        "process_outcome_loss": 0.0,
+        "process_contrastive_loss": 0.0,
+        "process_contrastive_accuracy": 0.0,
+        "process_duration_only_accuracy": 0.0,
+        "process_reward_mean": 0.0,
+        "process_reward_abs_mean": 0.0,
+        "process_reward_applied_steps": 0.0,
+        "process_segments_trained": 0.0
+      },
+      "auxiliary": {
+        "loss": 0.00753345970803963,
+        "supervised_team_rows": 5964,
+        "supervised_agent_samples": 47712,
+        "optimizer_steps": 30,
+        "head_gradient_norm": 0.6094170212745667,
+        "representation_gradient_norm": 0.3749244809150696
+      }
+    },
+    {
+      "rollout": 27,
+      "native": {
+        "discriminator_loss": 3.4536448756853737,
+        "discriminator_team_loss": 1.723399019241333,
+        "discriminator_individual_loss": 1.7302458564440408,
+        "discriminator_team_accuracy": 0.2775000035762787,
+        "discriminator_individual_accuracy": 0.31154167652130127,
+        "coordinator_loss": -1.0970247983932495,
+        "coordinator_policy_loss": -0.06608198583126068,
+        "coordinator_value_loss": 0.072030209004879,
+        "discoverer_loss": -0.04396722465753555,
+        "discoverer_policy_loss": -0.04305477812886238,
+        "discoverer_value_loss": 0.004463504068553448,
+        "team_skill_entropy": 1.6071574687957764,
+        "agent_skill_entropy": 1.7686997652053833,
+        "action_entropy": 1.0751818306744099,
+        "avg_intrinsic_reward": -0.5619865655899048,
+        "avg_env_comp": -0.5021879076957703,
+        "avg_team_disc_comp": -0.04232880473136902,
+        "avg_ind_disc_comp": -0.01746992953121662,
+        "mean_coord_state_val": 0.6082451939582825,
+        "mean_coord_agent_val": 0.5886029005050659,
+        "avg_discoverer_val": -20.22975730895996,
+        "mean_high_level_reward": -5.021879196166992,
+        "cd_loss": 0.0,
+        "coordinator_lr": 0.0001,
+        "discoverer_actor_lr": 0.0001,
+        "discoverer_critic_lr": 0.0001,
+        "discriminator_lr": 0.0001,
+        "team_discriminator_lr": 0.0001,
+        "individual_discriminator_lr": 0.0001,
+        "process_encoder_lr": 0.0,
+        "process_encoder_loss": 0.0,
+        "process_outcome_loss": 0.0,
+        "process_contrastive_loss": 0.0,
+        "process_contrastive_accuracy": 0.0,
+        "process_duration_only_accuracy": 0.0,
+        "process_reward_mean": 0.0,
+        "process_reward_abs_mean": 0.0,
+        "process_reward_applied_steps": 0.0,
+        "process_segments_trained": 0.0
+      },
+      "auxiliary": {
+        "loss": 0.006538811044974876,
+        "supervised_team_rows": 5964,
+        "supervised_agent_samples": 47712,
+        "optimizer_steps": 30,
+        "head_gradient_norm": 0.2826956808567047,
+        "representation_gradient_norm": 0.24901701509952545
+      }
+    },
+    {
+      "rollout": 28,
+      "native": {
+        "discriminator_loss": 3.4994856119155884,
+        "discriminator_team_loss": 1.774742857615153,
+        "discriminator_individual_loss": 1.7247427543004354,
+        "discriminator_team_accuracy": 0.24433332681655884,
+        "discriminator_individual_accuracy": 0.32833331823349,
+        "coordinator_loss": -1.0820109844207764,
+        "coordinator_policy_loss": -0.059169963002204895,
+        "coordinator_value_loss": 0.082652248442173,
+        "discoverer_loss": -0.04801851511001587,
+        "discoverer_policy_loss": -0.04722534120082855,
+        "discoverer_value_loss": 0.004606266971677542,
+        "team_skill_entropy": 1.6490148305892944,
+        "agent_skill_entropy": 1.767968773841858,
+        "action_entropy": 1.079894881695509,
+        "avg_intrinsic_reward": -0.9346016645431519,
+        "avg_env_comp": -0.8752453327178955,
+        "avg_team_disc_comp": -0.04197848588228226,
+        "avg_ind_disc_comp": -0.017377782613039017,
+        "mean_coord_state_val": 0.4152594208717346,
+        "mean_coord_agent_val": 0.4273732602596283,
+        "avg_discoverer_val": -20.30345344543457,
+        "mean_high_level_reward": -8.752453804016113,
+        "cd_loss": 0.0,
+        "coordinator_lr": 0.0001,
+        "discoverer_actor_lr": 0.0001,
+        "discoverer_critic_lr": 0.0001,
+        "discriminator_lr": 0.0001,
+        "team_discriminator_lr": 0.0001,
+        "individual_discriminator_lr": 0.0001,
+        "process_encoder_lr": 0.0,
+        "process_encoder_loss": 0.0,
+        "process_outcome_loss": 0.0,
+        "process_contrastive_loss": 0.0,
+        "process_contrastive_accuracy": 0.0,
+        "process_duration_only_accuracy": 0.0,
+        "process_reward_mean": 0.0,
+        "process_reward_abs_mean": 0.0,
+        "process_reward_applied_steps": 0.0,
+        "process_segments_trained": 0.0
+      },
+      "auxiliary": {
+        "loss": 0.006698736676878822,
+        "supervised_team_rows": 5964,
+        "supervised_agent_samples": 47712,
+        "optimizer_steps": 30,
+        "head_gradient_norm": 0.38493967056274414,
+        "representation_gradient_norm": 0.3851485252380371
+      }
+    },
+    {
+      "rollout": 29,
+      "native": {
+        "discriminator_loss": 3.538503746191661,
+        "discriminator_team_loss": 1.8055562257766724,
+        "discriminator_individual_loss": 1.7329475204149882,
+        "discriminator_team_accuracy": 0.2148333340883255,
+        "discriminator_individual_accuracy": 0.3321041762828827,
+        "coordinator_loss": -1.1233434677124023,
+        "coordinator_policy_loss": -0.06163515895605087,
+        "coordinator_value_loss": 0.04763299599289894,
+        "discoverer_loss": -0.046047162264585495,
+        "discoverer_policy_loss": -0.04493560642004013,
+        "discoverer_value_loss": 0.0042721861973404884,
+        "team_skill_entropy": 1.6562387943267822,
+        "agent_skill_entropy": 1.7739368677139282,
+        "action_entropy": 1.0767537169158459,
+        "avg_intrinsic_reward": -0.7361050844192505,
+        "avg_env_comp": -0.6745403409004211,
+        "avg_team_disc_comp": -0.04418165236711502,
+        "avg_ind_disc_comp": -0.017383066937327385,
+        "mean_coord_state_val": 0.5777591466903687,
+        "mean_coord_agent_val": 0.5935966372489929,
+        "avg_discoverer_val": -27.167827606201172,
+        "mean_high_level_reward": -6.74540376663208,
+        "cd_loss": 0.0,
+        "coordinator_lr": 0.0001,
+        "discoverer_actor_lr": 0.0001,
+        "discoverer_critic_lr": 0.0001,
+        "discriminator_lr": 0.0001,
+        "team_discriminator_lr": 0.0001,
+        "individual_discriminator_lr": 0.0001,
+        "process_encoder_lr": 0.0,
+        "process_encoder_loss": 0.0,
+        "process_outcome_loss": 0.0,
+        "process_contrastive_loss": 0.0,
+        "process_contrastive_accuracy": 0.0,
+        "process_duration_only_accuracy": 0.0,
+        "process_reward_mean": 0.0,
+        "process_reward_abs_mean": 0.0,
+        "process_reward_applied_steps": 0.0,
+        "process_segments_trained": 0.0
+      },
+      "auxiliary": {
+        "loss": 0.0029771687510710067,
+        "supervised_team_rows": 5964,
+        "supervised_agent_samples": 47712,
+        "optimizer_steps": 30,
+        "head_gradient_norm": 0.29260164499282837,
+        "representation_gradient_norm": 0.30335837602615356
+      }
+    },
+    {
+      "rollout": 30,
+      "native": {
+        "discriminator_loss": 3.536523356040319,
+        "discriminator_team_loss": 1.7841734409332275,
+        "discriminator_individual_loss": 1.7523499151070914,
+        "discriminator_team_accuracy": 0.25566667318344116,
+        "discriminator_individual_accuracy": 0.28691667318344116,
+        "coordinator_loss": -1.1014145612716675,
+        "coordinator_policy_loss": -0.04755578935146332,
+        "coordinator_value_loss": 0.05324476957321167,
+        "discoverer_loss": -0.04959219694137573,
+        "discoverer_policy_loss": -0.04843395575881004,
+        "discoverer_value_loss": 0.0040264492854475975,
+        "team_skill_entropy": 1.6435331106185913,
+        "agent_skill_entropy": 1.771529197692871,
+        "action_entropy": 1.0369481518864632,
+        "avg_intrinsic_reward": -0.5886479616165161,
+        "avg_env_comp": -0.5276235342025757,
+        "avg_team_disc_comp": -0.04342636466026306,
+        "avg_ind_disc_comp": -0.017598096281290054,
+        "mean_coord_state_val": 0.6156430840492249,
+        "mean_coord_agent_val": 0.6281504034996033,
+        "avg_discoverer_val": -33.54633331298828,
+        "mean_high_level_reward": -5.276235580444336,
+        "cd_loss": 0.0,
+        "coordinator_lr": 0.0001,
+        "discoverer_actor_lr": 0.0001,
+        "discoverer_critic_lr": 0.0001,
+        "discriminator_lr": 0.0001,
+        "team_discriminator_lr": 0.0001,
+        "individual_discriminator_lr": 0.0001,
+        "process_encoder_lr": 0.0,
+        "process_encoder_loss": 0.0,
+        "process_outcome_loss": 0.0,
+        "process_contrastive_loss": 0.0,
+        "process_contrastive_accuracy": 0.0,
+        "process_duration_only_accuracy": 0.0,
+        "process_reward_mean": 0.0,
+        "process_reward_abs_mean": 0.0,
+        "process_reward_applied_steps": 0.0,
+        "process_segments_trained": 0.0
+      },
+      "auxiliary": {
+        "loss": 0.0027460394795555533,
+        "supervised_team_rows": 5964,
+        "supervised_agent_samples": 47712,
+        "optimizer_steps": 30,
+        "head_gradient_norm": 0.23208560049533844,
+        "representation_gradient_norm": 0.15802250802516937
+      }
+    }
+  ],
+  "training_rollouts": [
+    {
+      "rollout": 1,
+      "raw_native_J_by_lane": [
+        -1078.452155055711,
+        -991.0073704685783,
+        -160.43255612067878,
+        171.52745340391994
+      ],
+      "metric_sums_by_lane": {
+        "qos_satisfaction_ratio": [
+          195.42744190645615,
+          295.278828578825,
+          295.6394340955485,
+          181.32222222221725
+        ],
+        "delivered_end_to_end_throughput_mbps": [
+          5862.823257193708,
+          8858.36485736484,
+          8869.183022866468,
+          5439.666666666679
+        ],
+        "return_constraint_cost": [
+          630.3952523845078,
+          636.4270947897509,
+          221.30606461870175,
+          0.0
+        ],
+        "cutoff_event_count": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "depletion_event_count": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "charging_uav_count": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "step_charger_input_wh": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "battery_min_ratio": [
+          802.3637845614229,
+          810.9724532852106,
+          799.0318191541712,
+          807.3886579713926
+        ]
+      },
+      "terminal_types": {
+        "terminated": 0,
+        "truncated": 4
+      }
+    },
+    {
+      "rollout": 2,
+      "raw_native_J_by_lane": [
+        -377.3473160378635,
+        -1092.1785402242094,
+        -2699.9375950489193,
+        325.9367832839489
+      ],
+      "metric_sums_by_lane": {
+        "qos_satisfaction_ratio": [
+          364.03278540903773,
+          0.0,
+          0.0,
+          338.2860409497923
+        ],
+        "delivered_end_to_end_throughput_mbps": [
+          10920.983562270962,
+          0.0,
+          0.0,
+          10148.581228493584
+        ],
+        "return_constraint_cost": [
+          364.4448464889429,
+          539.3091578011374,
+          1344.9380673357534,
+          0.0
+        ],
+        "cutoff_event_count": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "depletion_event_count": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "charging_uav_count": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "step_charger_input_wh": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "battery_min_ratio": [
+          806.6109099997235,
+          882.5437177000329,
+          813.7032448442687,
+          803.1908889041744
+        ]
+      },
+      "terminal_types": {
+        "terminated": 0,
+        "truncated": 4
+      }
+    },
+    {
+      "rollout": 3,
+      "raw_native_J_by_lane": [
+        -1086.419960411964,
+        207.4766459011007,
+        304.6260937601328,
+        -1816.8585316557437
+      ],
+      "metric_sums_by_lane": {
+        "qos_satisfaction_ratio": [
+          0.0,
+          304.7048594169451,
+          317.94697723572665,
+          0.0
+        ],
+        "delivered_end_to_end_throughput_mbps": [
+          0.0,
+          9141.145782508209,
+          9538.409317071775,
+          0.0
+        ],
+        "return_constraint_cost": [
+          537.7309618636712,
+          42.52054343979133,
+          0.0,
+          902.3520086944498
+        ],
+        "cutoff_event_count": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "depletion_event_count": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "charging_uav_count": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "step_charger_input_wh": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "battery_min_ratio": [
+          805.9372433066256,
+          833.4870329969418,
+          929.9357843162322,
+          822.581441391053
+        ]
+      },
+      "terminal_types": {
+        "terminated": 0,
+        "truncated": 4
+      }
+    },
+    {
+      "rollout": 4,
+      "raw_native_J_by_lane": [
+        -1227.0703661246225,
+        -1627.810977097135,
+        -561.4250369896181,
+        -1235.6964752152562
+      ],
+      "metric_sums_by_lane": {
+        "qos_satisfaction_ratio": [
+          0.0,
+          0.0,
+          243.44291666666675,
+          0.0
+        ],
+        "delivered_end_to_end_throughput_mbps": [
+          0.0,
+          0.0,
+          7303.287500000033,
+          0.0
+        ],
+        "return_constraint_cost": [
+          606.3339419721195,
+          807.6119346003253,
+          396.02661056885313,
+          612.2669609802762
+        ],
+        "cutoff_event_count": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "depletion_event_count": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "charging_uav_count": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "step_charger_input_wh": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "battery_min_ratio": [
+          806.531922627869,
+          871.9910899326844,
+          840.5344005219324,
+          860.0795664948677
+        ]
+      },
+      "terminal_types": {
+        "terminated": 0,
+        "truncated": 4
+      }
+    },
+    {
+      "rollout": 5,
+      "raw_native_J_by_lane": [
+        79.3616327540949,
+        -1202.3337370012887,
+        -15.26458275038749,
+        -1532.1970424228348
+      ],
+      "metric_sums_by_lane": {
+        "qos_satisfaction_ratio": [
+          90.04603174603109,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "delivered_end_to_end_throughput_mbps": [
+          2701.380952380945,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "return_constraint_cost": [
+          0.0,
+          593.767799343558,
+          0.0,
+          759.8255668965871
+        ],
+        "cutoff_event_count": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "depletion_event_count": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "charging_uav_count": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "step_charger_input_wh": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "battery_min_ratio": [
+          807.3035022169919,
+          855.8495136519163,
+          810.7875540420879,
+          887.1676336909686
+        ]
+      },
+      "terminal_types": {
+        "terminated": 0,
+        "truncated": 4
+      }
+    },
+    {
+      "rollout": 6,
+      "raw_native_J_by_lane": [
+        -1112.597926708404,
+        298.7873411742039,
+        -1223.4369236649945,
+        -1176.2299003782682
+      ],
+      "metric_sums_by_lane": {
+        "qos_satisfaction_ratio": [
+          0.0,
+          476.3673811706329,
+          0.0,
+          0.0
+        ],
+        "delivered_end_to_end_throughput_mbps": [
+          0.0,
+          14291.021435118968,
+          0.0,
+          0.0
+        ],
+        "return_constraint_cost": [
+          549.0296611024215,
+          81.2526039303611,
+          605.4592270446228,
+          581.3817197631955
+        ],
+        "cutoff_event_count": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "depletion_event_count": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "charging_uav_count": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "step_charger_input_wh": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "battery_min_ratio": [
+          797.7460230140504,
+          839.1380270251061,
+          843.3236567036585,
+          826.4066026194017
+        ]
+      },
+      "terminal_types": {
+        "terminated": 0,
+        "truncated": 4
+      }
+    },
+    {
+      "rollout": 7,
+      "raw_native_J_by_lane": [
+        -1528.802457922604,
+        -602.2267798501998,
+        -409.6789020074066,
+        -707.2978053898551
+      ],
+      "metric_sums_by_lane": {
+        "qos_satisfaction_ratio": [
+          0.0,
+          358.90131065106993,
+          217.2230468605447,
+          0.0
+        ],
+        "delivered_end_to_end_throughput_mbps": [
+          0.0,
+          10767.039319532132,
+          6516.691405816397,
+          0.0
+        ],
+        "return_constraint_cost": [
+          757.8391871786691,
+          473.416468989573,
+          306.7430147279428,
+          346.20236393828486
+        ],
+        "cutoff_event_count": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "depletion_event_count": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "charging_uav_count": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "step_charger_input_wh": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "battery_min_ratio": [
+          801.2513654067143,
+          811.198577274331,
+          895.64663393603,
+          806.7485875497249
+        ]
+      },
+      "terminal_types": {
+        "terminated": 0,
+        "truncated": 4
+      }
+    },
+    {
+      "rollout": 8,
+      "raw_native_J_by_lane": [
+        -955.8255772008561,
+        -171.17689498775871,
+        -677.6233978457749,
+        -608.1766207402106
+      ],
+      "metric_sums_by_lane": {
+        "qos_satisfaction_ratio": [
+          0.0,
+          431.0028202566556,
+          0.0,
+          0.0
+        ],
+        "delivered_end_to_end_throughput_mbps": [
+          0.0,
+          12930.084607699815,
+          0.0,
+          0.0
+        ],
+        "return_constraint_cost": [
+          470.9510711299352,
+          293.8186141558236,
+          331.3300629504896,
+          297.239214494214
+        ],
+        "cutoff_event_count": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "depletion_event_count": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "charging_uav_count": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "step_charger_input_wh": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "battery_min_ratio": [
+          849.7207312378561,
+          828.4318043900499,
+          864.0558382346106,
+          797.7992912329712
+        ]
+      },
+      "terminal_types": {
+        "terminated": 0,
+        "truncated": 4
+      }
+    },
+    {
+      "rollout": 9,
+      "raw_native_J_by_lane": [
+        298.50743821263313,
+        -753.1356004804838,
+        -1965.752512388397,
+        -1458.3796905530617
+      ],
+      "metric_sums_by_lane": {
+        "qos_satisfaction_ratio": [
+          310.8589362489321,
+          53.99999999999973,
+          0.0,
+          0.0
+        ],
+        "delivered_end_to_end_throughput_mbps": [
+          9325.768087468183,
+          1620.0,
+          0.0,
+          0.0
+        ],
+        "return_constraint_cost": [
+          0.0,
+          398.0533512155409,
+          977.3903731026384,
+          722.8568404387272
+        ],
+        "cutoff_event_count": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "depletion_event_count": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "charging_uav_count": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "step_charger_input_wh": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "battery_min_ratio": [
+          920.4771397103781,
+          795.5452946730188,
+          810.1350375779172,
+          794.6899631118523
+        ]
+      },
+      "terminal_types": {
+        "terminated": 0,
+        "truncated": 4
+      }
+    },
+    {
+      "rollout": 10,
+      "raw_native_J_by_lane": [
+        168.78246203251183,
+        -14.784708682447672,
+        -103.26327671902254,
+        324.9835283756256
+      ],
+      "metric_sums_by_lane": {
+        "qos_satisfaction_ratio": [
+          179.51111111110632,
+          0.0,
+          0.0,
+          336.8357774170277
+        ],
+        "delivered_end_to_end_throughput_mbps": [
+          5385.333333333335,
+          0.0,
+          0.0,
+          10105.07332251078
+        ],
+        "return_constraint_cost": [
+          0.0,
+          0.0,
+          43.817760213937966,
+          0.0
+        ],
+        "cutoff_event_count": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "depletion_event_count": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "charging_uav_count": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "step_charger_input_wh": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "battery_min_ratio": [
+          902.6751063340902,
+          884.3087156427741,
+          823.363530227038,
+          885.8907288489828
+        ]
+      },
+      "terminal_types": {
+        "terminated": 0,
+        "truncated": 4
+      }
+    },
+    {
+      "rollout": 11,
+      "raw_native_J_by_lane": [
+        -260.1003894840833,
+        -196.0392890186049,
+        88.0078149640467,
+        -2648.3739383383654
+      ],
+      "metric_sums_by_lane": {
+        "qos_satisfaction_ratio": [
+          0.0,
+          0.0,
+          453.4952424316628,
+          0.0
+        ],
+        "delivered_end_to_end_throughput_mbps": [
+          0.0,
+          0.0,
+          13604.857272949946,
+          0.0
+        ],
+        "return_constraint_cost": [
+          125.807748917038,
+          90.59015340227504,
+          175.51371667341311,
+          1319.5528287242737
+        ],
+        "cutoff_event_count": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "depletion_event_count": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "charging_uav_count": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "step_charger_input_wh": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "battery_min_ratio": [
+          835.7566557307512,
+          825.0287524609358,
+          799.5955115629945,
+          813.5136885741522
+        ]
+      },
+      "terminal_types": {
+        "terminated": 0,
+        "truncated": 4
+      }
+    },
+    {
+      "rollout": 12,
+      "raw_native_J_by_lane": [
+        -1142.8899158297572,
+        410.8271937519312,
+        385.26550693809986,
+        -114.51549826958217
+      ],
+      "metric_sums_by_lane": {
+        "qos_satisfaction_ratio": [
+          50.536350551778845,
+          424.16940577768867,
+          398.9736625942138,
+          0.0
+        ],
+        "delivered_end_to_end_throughput_mbps": [
+          1516.0905165533622,
+          12725.082173330607,
+          11969.209877826426,
+          0.0
+        ],
+        "return_constraint_cost": [
+          590.1518314287889,
+          0.0,
+          0.0,
+          49.95170804290436
+        ],
+        "cutoff_event_count": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "depletion_event_count": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "charging_uav_count": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "step_charger_input_wh": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "battery_min_ratio": [
+          888.7119219897144,
+          829.2075132162429,
+          820.4214672358539,
+          809.9583747223741
+        ]
+      },
+      "terminal_types": {
+        "terminated": 0,
+        "truncated": 4
+      }
+    },
+    {
+      "rollout": 13,
+      "raw_native_J_by_lane": [
+        -443.8739712918177,
+        -965.3474958213046,
+        -1100.1620736476034,
+        -2055.271969444584
+      ],
+      "metric_sums_by_lane": {
+        "qos_satisfaction_ratio": [
+          0.0,
+          317.0426532123196,
+          275.59728990676797,
+          0.0
+        ],
+        "delivered_end_to_end_throughput_mbps": [
+          0.0,
+          9511.279596369459,
+          8267.918697202995,
+          0.0
+        ],
+        "return_constraint_cost": [
+          214.2697852797289,
+          634.5066332570884,
+          682.4028456291903,
+          1021.49619515432
+        ],
+        "cutoff_event_count": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "depletion_event_count": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "charging_uav_count": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "step_charger_input_wh": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "battery_min_ratio": [
+          800.0829627754808,
+          821.1317771362351,
+          797.9756962363635,
+          810.1970739268035
+        ]
+      },
+      "terminal_types": {
+        "terminated": 0,
+        "truncated": 4
+      }
+    },
+    {
+      "rollout": 14,
+      "raw_native_J_by_lane": [
+        -1629.8903551995754,
+        -303.2979974653572,
+        -104.78135645622388,
+        759.7223101705313
+      ],
+      "metric_sums_by_lane": {
+        "qos_satisfaction_ratio": [
+          0.0,
+          0.0,
+          30.594831387808288,
+          774.6588828911179
+        ],
+        "delivered_end_to_end_throughput_mbps": [
+          0.0,
+          0.0,
+          917.8449416342488,
+          23239.766486733653
+        ],
+        "return_constraint_cost": [
+          808.1975274844415,
+          144.37646208949602,
+          59.74982575094368,
+          0.0
+        ],
+        "cutoff_event_count": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "depletion_event_count": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "charging_uav_count": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "step_charger_input_wh": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "battery_min_ratio": [
+          798.4983718332863,
+          807.014306632927,
+          822.5725586598232,
+          806.7404479669326
+        ]
+      },
+      "terminal_types": {
+        "terminated": 0,
+        "truncated": 4
+      }
+    },
+    {
+      "rollout": 15,
+      "raw_native_J_by_lane": [
+        -2100.3036944861524,
+        -818.8197293125559,
+        -1774.337790542515,
+        439.26010793447495
+      ],
+      "metric_sums_by_lane": {
+        "qos_satisfaction_ratio": [
+          0.0,
+          2.476628352490422,
+          0.0,
+          452.33997756872964
+        ],
+        "delivered_end_to_end_throughput_mbps": [
+          0.0,
+          74.29885057471266,
+          0.0,
+          13570.199327061755
+        ],
+        "return_constraint_cost": [
+          1044.7838006568086,
+          404.14728075136253,
+          880.6731852665426,
+          0.0
+        ],
+        "cutoff_event_count": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "depletion_event_count": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "charging_uav_count": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "step_charger_input_wh": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "battery_min_ratio": [
+          876.5220876975459,
+          903.501241991198,
+          800.0292307625648,
+          811.5515930915644
+        ]
+      },
+      "terminal_types": {
+        "terminated": 0,
+        "truncated": 4
+      }
+    },
+    {
+      "rollout": 16,
+      "raw_native_J_by_lane": [
+        -2170.2122663373593,
+        389.78711998462677,
+        386.2559974491596,
+        338.73902188427746
+      ],
+      "metric_sums_by_lane": {
+        "qos_satisfaction_ratio": [
+          0.0,
+          404.0770854595479,
+          400.71786381132245,
+          465.5003826814715
+        ],
+        "delivered_end_to_end_throughput_mbps": [
+          0.0,
+          12122.312563786503,
+          12021.535914339609,
+          13965.011480444173
+        ],
+        "return_constraint_cost": [
+          1079.4417685296212,
+          0.0,
+          0.0,
+          56.20596177811973
+        ],
+        "cutoff_event_count": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "depletion_event_count": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "charging_uav_count": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "step_charger_input_wh": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "battery_min_ratio": [
+          872.0862032325014,
+          798.4143210537712,
+          820.862753552117,
+          900.1033983100417
+        ]
+      },
+      "terminal_types": {
+        "terminated": 0,
+        "truncated": 4
+      }
+    },
+    {
+      "rollout": 17,
+      "raw_native_J_by_lane": [
+        -2217.4614276529755,
+        -690.1477142006624,
+        430.198536230484,
+        -257.2926851203665
+      ],
+      "metric_sums_by_lane": {
+        "qos_satisfaction_ratio": [
+          0.0,
+          355.91131991539544,
+          444.1349734606333,
+          0.0
+        ],
+        "delivered_end_to_end_throughput_mbps": [
+          0.0,
+          10677.339597461745,
+          13324.04920381902,
+          0.0
+        ],
+        "return_constraint_cost": [
+          1103.002354815084,
+          516.228723688782,
+          0.0,
+          121.59392616937194
+        ],
+        "cutoff_event_count": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "depletion_event_count": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "charging_uav_count": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "step_charger_input_wh": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "battery_min_ratio": [
+          808.9117002478623,
+          840.1879778429485,
+          799.6405021679693,
+          789.3976828571889
+        ]
+      },
+      "terminal_types": {
+        "terminated": 0,
+        "truncated": 4
+      }
+    },
+    {
+      "rollout": 18,
+      "raw_native_J_by_lane": [
+        -1241.5190366245806,
+        76.31799931591377,
+        -2433.652863439638,
+        -2040.618613277562
+      ],
+      "metric_sums_by_lane": {
+        "qos_satisfaction_ratio": [
+          0.0,
+          88.86666666666795,
+          0.0,
+          240.65455926829273
+        ],
+        "delivered_end_to_end_throughput_mbps": [
+          0.0,
+          2666.0,
+          0.0,
+          7219.636778048808
+        ],
+        "return_constraint_cost": [
+          613.4224715580201,
+          0.299093529728523,
+          1211.5721821722523,
+          1133.5068702848068
+        ],
+        "cutoff_event_count": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "depletion_event_count": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "charging_uav_count": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "step_charger_input_wh": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "battery_min_ratio": [
+          837.4572168954368,
+          949.2561225668202,
+          797.6358107161966,
+          809.9123160354678
+        ]
+      },
+      "terminal_types": {
+        "terminated": 0,
+        "truncated": 4
+      }
+    },
+    {
+      "rollout": 19,
+      "raw_native_J_by_lane": [
+        -1287.689524475485,
+        -204.82934172591195,
+        272.6436302603688,
+        -1150.9009935199283
+      ],
+      "metric_sums_by_lane": {
+        "qos_satisfaction_ratio": [
+          154.64124878758457,
+          0.0,
+          285.9609451196942,
+          160.04931905478847
+        ],
+        "delivered_end_to_end_throughput_mbps": [
+          4639.237463627535,
+          0.0,
+          8578.828353590874,
+          4801.479571643626
+        ],
+        "return_constraint_cost": [
+          714.4994603859963,
+          95.09032225197295,
+          0.0,
+          648.4002231588718
+        ],
+        "cutoff_event_count": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "depletion_event_count": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "charging_uav_count": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "step_charger_input_wh": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "battery_min_ratio": [
+          804.45680341653,
+          800.8147512071099,
+          798.0483817249295,
+          833.6863835131272
+        ]
+      },
+      "terminal_types": {
+        "terminated": 0,
+        "truncated": 4
+      }
+    },
+    {
+      "rollout": 20,
+      "raw_native_J_by_lane": [
+        -108.98317131958902,
+        -446.0426374624949,
+        -704.7631728127599,
+        -2072.004309135955
+      ],
+      "metric_sums_by_lane": {
+        "qos_satisfaction_ratio": [
+          283.3458333333327,
+          169.49658478776203,
+          386.84171483567025,
+          82.78346186482983
+        ],
+        "delivered_end_to_end_throughput_mbps": [
+          8500.374999999995,
+          5084.8975436327755,
+          11605.25144507027,
+          2483.5038559448903
+        ],
+        "return_constraint_cost": [
+          190.5841596218202,
+          301.26309268502155,
+          539.7067448738944,
+          1071.4096111645354
+        ],
+        "cutoff_event_count": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "depletion_event_count": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "charging_uav_count": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "step_charger_input_wh": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "battery_min_ratio": [
+          790.5063135250283,
+          804.1036147583703,
+          829.9297914152845,
+          868.4349941519662
+        ]
+      },
+      "terminal_types": {
+        "terminated": 0,
+        "truncated": 4
+      }
+    },
+    {
+      "rollout": 21,
+      "raw_native_J_by_lane": [
+        -941.9282546401955,
+        -99.36912266351283,
+        487.50567661225796,
+        -1277.56935549248
+      ],
+      "metric_sums_by_lane": {
+        "qos_satisfaction_ratio": [
+          0.0,
+          0.0,
+          501.9975192761053,
+          0.0
+        ],
+        "delivered_end_to_end_throughput_mbps": [
+          0.0,
+          0.0,
+          15059.925578283206,
+          0.0
+        ],
+        "return_constraint_cost": [
+          464.0804460375454,
+          41.99343992484037,
+          0.0,
+          632.4658974865763
+        ],
+        "cutoff_event_count": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "depletion_event_count": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "charging_uav_count": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "step_charger_input_wh": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "battery_min_ratio": [
+          860.828024333652,
+          858.1630314490006,
+          841.5743370406989,
+          891.9146512726991
+        ]
+      },
+      "terminal_types": {
+        "terminated": 0,
+        "truncated": 4
+      }
+    },
+    {
+      "rollout": 22,
+      "raw_native_J_by_lane": [
+        -1183.2875074446201,
+        -15.31683128606528,
+        271.01335797132924,
+        -1441.2651964356191
+      ],
+      "metric_sums_by_lane": {
+        "qos_satisfaction_ratio": [
+          146.50236320139192,
+          0.0,
+          283.47162698412814,
+          63.70073072227433
+        ],
+        "delivered_end_to_end_throughput_mbps": [
+          4395.070896041758,
+          0.0,
+          8504.148809523826,
+          1911.021921668225
+        ],
+        "return_constraint_cost": [
+          658.5194069072841,
+          0.0,
+          0.0,
+          745.9207976891109
+        ],
+        "cutoff_event_count": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "depletion_event_count": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "charging_uav_count": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "step_charger_input_wh": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "battery_min_ratio": [
+          816.2677602487319,
+          1003.7453263577618,
+          848.3794804223714,
+          786.9530418837553
+        ]
+      },
+      "terminal_types": {
+        "terminated": 0,
+        "truncated": 4
+      }
+    },
+    {
+      "rollout": 23,
+      "raw_native_J_by_lane": [
+        -483.0375599828549,
+        -488.42207266623154,
+        -1889.4369085771032,
+        -1092.0653878981248
+      ],
+      "metric_sums_by_lane": {
+        "qos_satisfaction_ratio": [
+          196.9980504206029,
+          0.0,
+          0.0,
+          7.885502861431658
+        ],
+        "delivered_end_to_end_throughput_mbps": [
+          5909.941512618085,
+          0.0,
+          0.0,
+          236.56508584294977
+        ],
+        "return_constraint_cost": [
+          333.2806618308473,
+          236.6397078730898,
+          938.2002411533539,
+          543.4997514270501
+        ],
+        "cutoff_event_count": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "depletion_event_count": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "charging_uav_count": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "step_charger_input_wh": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "battery_min_ratio": [
+          870.8297809036925,
+          822.2323505088564,
+          802.6369255446166,
+          859.2155287124352
+        ]
+      },
+      "terminal_types": {
+        "terminated": 0,
+        "truncated": 4
+      }
+    },
+    {
+      "rollout": 24,
+      "raw_native_J_by_lane": [
+        44.283627354190685,
+        478.4387005120516,
+        523.8667839765549,
+        633.756322324276
+      ],
+      "metric_sums_by_lane": {
+        "qos_satisfaction_ratio": [
+          55.833333333334025,
+          493.7978768335088,
+          537.0522485589007,
+          648.1418266003787
+        ],
+        "delivered_end_to_end_throughput_mbps": [
+          1675.0,
+          14813.936305005247,
+          16111.56745676708,
+          19444.25479801137
+        ],
+        "return_constraint_cost": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "cutoff_event_count": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "depletion_event_count": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "charging_uav_count": [
+          0.0,
+          0.0,
+          0.0,
+          5.0
+        ],
+        "step_charger_input_wh": [
+          0.0,
+          0.0,
+          0.0,
+          1.3888888888888888
+        ],
+        "battery_min_ratio": [
+          894.1117255205899,
+          841.8859909254397,
+          883.7909158935857,
+          793.2375282796403
+        ]
+      },
+      "terminal_types": {
+        "terminated": 0,
+        "truncated": 4
+      }
+    },
+    {
+      "rollout": 25,
+      "raw_native_J_by_lane": [
+        -120.32974291476421,
+        -1018.578076438047,
+        -1218.5909214599524,
+        274.0261228578165
+      ],
+      "metric_sums_by_lane": {
+        "qos_satisfaction_ratio": [
+          0.0,
+          0.0,
+          0.0,
+          376.13291198508654
+        ],
+        "delivered_end_to_end_throughput_mbps": [
+          0.0,
+          0.0,
+          0.0,
+          11283.987359552562
+        ],
+        "return_constraint_cost": [
+          52.596098307384594,
+          502.0333691019473,
+          602.3257819167638,
+          44.38560294807447
+        ],
+        "cutoff_event_count": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "depletion_event_count": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "charging_uav_count": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "step_charger_input_wh": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "battery_min_ratio": [
+          819.4721590561956,
+          810.733216548165,
+          864.7347181274313,
+          855.1809037149877
+        ]
+      },
+      "terminal_types": {
+        "terminated": 0,
+        "truncated": 4
+      }
+    },
+    {
+      "rollout": 26,
+      "raw_native_J_by_lane": [
+        -1238.902137979865,
+        -5.607993245124817,
+        -148.81234871177003,
+        -1799.368987578433
+      ],
+      "metric_sums_by_lane": {
+        "qos_satisfaction_ratio": [
+          0.0,
+          424.55945463316823,
+          0.0,
+          0.0
+        ],
+        "delivered_end_to_end_throughput_mbps": [
+          0.0,
+          12736.783638995079,
+          0.0,
+          0.0
+        ],
+        "return_constraint_cost": [
+          612.3432855246476,
+          207.59108776753615,
+          67.05554986285257,
+          892.6910876019396
+        ],
+        "cutoff_event_count": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "depletion_event_count": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "charging_uav_count": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "step_charger_input_wh": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "battery_min_ratio": [
+          871.4487787901012,
+          801.0396950063902,
+          846.0066371209308,
+          835.7616921222509
+        ]
+      },
+      "terminal_types": {
+        "terminated": 0,
+        "truncated": 4
+      }
+    },
+    {
+      "rollout": 27,
+      "raw_native_J_by_lane": [
+        -1541.2584362872876,
+        -1168.3593106241897,
+        -176.1562443897128,
+        -127.35334328468889
+      ],
+      "metric_sums_by_lane": {
+        "qos_satisfaction_ratio": [
+          146.10068471665508,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "delivered_end_to_end_throughput_mbps": [
+          4383.020541499666,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "return_constraint_cost": [
+          836.9269078913233,
+          576.6649917624557,
+          80.65206117670296,
+          55.88658477367499
+        ],
+        "cutoff_event_count": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "depletion_event_count": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "charging_uav_count": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "step_charger_input_wh": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "battery_min_ratio": [
+          806.611544664393,
+          814.4790816845123,
+          825.2283681522453,
+          853.2826529133407
+        ]
+      },
+      "terminal_types": {
+        "terminated": 0,
+        "truncated": 4
+      }
+    },
+    {
+      "rollout": 28,
+      "raw_native_J_by_lane": [
+        -2563.4203546438366,
+        -1630.4320693383925,
+        -1550.1330918734893,
+        492.5134332869202
+      ],
+      "metric_sums_by_lane": {
+        "qos_satisfaction_ratio": [
+          0.0,
+          0.0,
+          0.0,
+          506.54695325148026
+        ],
+        "delivered_end_to_end_throughput_mbps": [
+          0.0,
+          0.0,
+          0.0,
+          15196.408597544387
+        ],
+        "return_constraint_cost": [
+          1276.7546450346565,
+          807.9064945051871,
+          767.8342286412153,
+          0.0
+        ],
+        "cutoff_event_count": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "depletion_event_count": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "charging_uav_count": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "step_charger_input_wh": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "battery_min_ratio": [
+          776.8102673067752,
+          764.6074713568412,
+          783.9693008374702,
+          806.9990204668021
+        ]
+      },
+      "terminal_types": {
+        "terminated": 0,
+        "truncated": 4
+      }
+    },
+    {
+      "rollout": 29,
+      "raw_native_J_by_lane": [
+        -619.696586149279,
+        -1796.7404658547603,
+        -15.239036206621677,
+        -1615.5660017402843
+      ],
+      "metric_sums_by_lane": {
+        "qos_satisfaction_ratio": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "delivered_end_to_end_throughput_mbps": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "return_constraint_cost": [
+          302.5196868332121,
+          891.1289960213921,
+          0.0,
+          800.9810844720448
+        ],
+        "cutoff_event_count": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "depletion_event_count": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "charging_uav_count": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "step_charger_input_wh": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "battery_min_ratio": [
+          786.2448208135198,
+          823.2982488854828,
+          786.0180188675217,
+          786.6099198549667
+        ]
+      },
+      "terminal_types": {
+        "terminated": 0,
+        "truncated": 4
+      }
+    },
+    {
+      "rollout": 30,
+      "raw_native_J_by_lane": [
+        149.21661822521128,
+        -1547.989385485649,
+        -1051.904454517411,
+        -715.0639564869925
+      ],
+      "metric_sums_by_lane": {
+        "qos_satisfaction_ratio": [
+          160.84850526351255,
+          13.302583103989736,
+          0.0,
+          0.0
+        ],
+        "delivered_end_to_end_throughput_mbps": [
+          4825.455157905375,
+          399.0774931196919,
+          0.0,
+          0.0
+        ],
+        "return_constraint_cost": [
+          0.0,
+          773.5008553203766,
+          519.6460627302284,
+          350.07113372668334
+        ],
+        "cutoff_event_count": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "depletion_event_count": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "charging_uav_count": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "step_charger_input_wh": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "battery_min_ratio": [
+          788.9708037089504,
+          855.7605358170281,
+          800.5100481305795,
+          807.3141203292815
+        ]
+      },
+      "terminal_types": {
+        "terminated": 0,
+        "truncated": 4
+      }
+    }
+  ],
+  "rss_curve": [
+    {
+      "rollout": 1,
+      "rss_kib": 2878588,
+      "wall_seconds": 656.400337934494
+    },
+    {
+      "rollout": 2,
+      "rss_kib": 2969288,
+      "wall_seconds": 918.0178186893463
+    },
+    {
+      "rollout": 3,
+      "rss_kib": 2988200,
+      "wall_seconds": 1140.9723687171936
+    },
+    {
+      "rollout": 4,
+      "rss_kib": 2988896,
+      "wall_seconds": 1359.816953420639
+    },
+    {
+      "rollout": 5,
+      "rss_kib": 2989104,
+      "wall_seconds": 1616.7837362289429
+    },
+    {
+      "rollout": 6,
+      "rss_kib": 2989468,
+      "wall_seconds": 1878.7936067581177
+    },
+    {
+      "rollout": 7,
+      "rss_kib": 2989468,
+      "wall_seconds": 2166.2829043865204
+    },
+    {
+      "rollout": 8,
+      "rss_kib": 2989468,
+      "wall_seconds": 2421.3492107391357
+    },
+    {
+      "rollout": 9,
+      "rss_kib": 2989544,
+      "wall_seconds": 2693.670188188553
+    },
+    {
+      "rollout": 10,
+      "rss_kib": 2989544,
+      "wall_seconds": 2968.1741619110107
+    },
+    {
+      "rollout": 11,
+      "rss_kib": 3024392,
+      "wall_seconds": 3694.4420409202576
+    },
+    {
+      "rollout": 12,
+      "rss_kib": 3024436,
+      "wall_seconds": 3975.3587551116943
+    },
+    {
+      "rollout": 13,
+      "rss_kib": 3024544,
+      "wall_seconds": 4260.802274465561
+    },
+    {
+      "rollout": 14,
+      "rss_kib": 3024704,
+      "wall_seconds": 4487.010504484177
+    },
+    {
+      "rollout": 15,
+      "rss_kib": 3024704,
+      "wall_seconds": 4727.611413002014
+    },
+    {
+      "rollout": 16,
+      "rss_kib": 3024704,
+      "wall_seconds": 5042.506640672684
+    },
+    {
+      "rollout": 17,
+      "rss_kib": 3024704,
+      "wall_seconds": 5331.815647125244
+    },
+    {
+      "rollout": 18,
+      "rss_kib": 3024704,
+      "wall_seconds": 5621.26926779747
+    },
+    {
+      "rollout": 19,
+      "rss_kib": 3024704,
+      "wall_seconds": 5900.432772636414
+    },
+    {
+      "rollout": 20,
+      "rss_kib": 3024704,
+      "wall_seconds": 6202.698039293289
+    },
+    {
+      "rollout": 21,
+      "rss_kib": 3024704,
+      "wall_seconds": 6970.944005489349
+    },
+    {
+      "rollout": 22,
+      "rss_kib": 3024840,
+      "wall_seconds": 7258.828187704086
+    },
+    {
+      "rollout": 23,
+      "rss_kib": 3024840,
+      "wall_seconds": 7528.422266483307
+    },
+    {
+      "rollout": 24,
+      "rss_kib": 3024840,
+      "wall_seconds": 7832.488839864731
+    },
+    {
+      "rollout": 25,
+      "rss_kib": 3024852,
+      "wall_seconds": 8123.19731760025
+    },
+    {
+      "rollout": 26,
+      "rss_kib": 3025048,
+      "wall_seconds": 8347.536467790604
+    },
+    {
+      "rollout": 27,
+      "rss_kib": 3025076,
+      "wall_seconds": 8584.12706565857
+    },
+    {
+      "rollout": 28,
+      "rss_kib": 3025076,
+      "wall_seconds": 8810.397042036057
+    },
+    {
+      "rollout": 29,
+      "rss_kib": 3025112,
+      "wall_seconds": 9047.054525136948
+    },
+    {
+      "rollout": 30,
+      "rss_kib": 3025168,
+      "wall_seconds": 9258.820444107056
+    }
+  ],
+  "optimizer_steps": {
+    "high": 2250,
+    "low_actor": 67500,
+    "low_critic": 67500,
+    "team_discriminator": 450,
+    "individual_discriminator": 1800
+  },
+  "initialization_displacement_l2": {
+    "high": 12.754624110685132,
+    "low_actor": 37.33020737999829,
+    "low_critic": 31.82850669058844,
+    "team_discriminator": 3.076676225082937,
+    "individual_discriminator": 7.49269476759926
+  },
+  "wall_seconds": 9555.824949264526,
+  "peak_rss_kib": 3025168,
+  "straddling_rollout_boundaries": 0
+}
