@@ -84,3 +84,71 @@ Read-only remote suitability check: configured `hmasd-wsl-node` reports host
 on the actual node. No result process or Pro Send has been accepted; started fits remain 0.
 A bounded internal Scout maps the existing S1 path while I bind the study; no cross-task
 communication or intermediate DM is used.
+
+## 2026-09-21 — LOE B01 prospective comparison and L0
+
+**Question/prediction.** At the same complete native learning exposure, ordinary typed-slot
+interaction encoding may improve final S1 J and coverage/quality by making observed local
+structure easier to use. This is a representation-package comparison, including capacity;
+no relation-specific causal attribution is claimed. Opposing prediction: existing MLP/GRU
+already uses these values adequately, so dense encoding adds cost without native benefit.
+
+**Frozen first exploration.** Two arms, `ORIGINAL` and `DENSE`, one fresh training seed
+92101 per arm; common evaluation-world seeds 93101–93132. The common seed identifies
+initialization/exogenous setup, not independent paired training replication. Two planned
+fits, each 45 rollouts × 16 lanes × 500 steps = 360,000 training team transitions;
+720,000 total. This informative horizon follows the existing D1280 exposure rather than
+buying a preliminary toy or five-rollout screen. Fixed N=6, 50 uniform static users,
+free-space S1, k=10, six team/six individual skills. Use the recoverable D1280 complete
+HMASD fixed-cap configuration (D2 infinite interruption costs, both caps 10, coordinator
+batch 1280), explicit plain HMASD extension switches and all five parameter groups learning.
+D2 here implements the fixed schedule, not learned duration. Preserve FiLM, GRU, discovery,
+PPO, action and native reward. CPU FP32, four torch threads on remote wsl_4070 preserves
+this reference numerical/device recipe; remote GPU availability does not require CUDA.
+
+Evaluate deterministic separate agents on the same 32 reset worlds after rollouts 15, 30,
+45, with training RNG preserved and zero evaluator updates. Primary: final J45, defined
+as N times scalar episode return / 500, averaged over the 32 worlds. J15 and J30 are
+prewritten learning-curve readings, not alternative primaries. Report every world's J and
+native coverage, quality, altitude penalty, total reward; coverage × 50 gives connected
+users. Evaluation totals 48,000 team transitions/fit. Retain all failed/adverse outcomes.
+No hyperparameter search, checkpoint selection or horizon extension. One fit/arm can guide
+investment but cannot establish a seed-population advantage or equivalence. A positive
+useful package merits considering independent repetition; mixed/adverse native readings
+without a concrete differing prediction end this recipe rather than automatically add sparse
+attention, another loss or capacity. A material result decision uses applicable section 5 advice.
+
+**Bounded L0.** Add candidate encoder/runner under
+`experiments/candidates/local_observation_encoding/`, thin admitted entry
+`scripts/run_local_observation_encoding_b01.py` and mirrored focused tests. Reuse the existing
+B01 collector/evaluator with narrowly scoped hooks, never edit frozen FSD entries. Original
+actor.base remains MLPBase. Dense replacement takes only the same 104 floats: self xyz,
+20 user triples (relative xy/SINR), 10 neighbor quadruples (relative xyz/SINR), time.
+Use typed linear projections, learned within-type rank embeddings, one ordinary dense
+self-attention/residual feed-forward block (width 64, four heads, dropout zero), concatenate
+self/time tokens and mean user/neighbor tokens, then project to existing 256-wide FiLM input.
+Rank is not identity; every zero slot participates; no truth mask or extra simulator input.
+No observation normalization changes between arms. Replace actor.base before theta0 capture
+and optimizer use; rebuild actor optimizer with identical hyperparameters, preserving all
+non-encoder initialization and RNG state. Evaluator uses the same replacement and sync.
+
+Record actual optimizer calls and initialization movement for all five groups; assert
+activation. Record total wall, collection/update/evaluation wall, actual actor forward time
+and counts, parameter counts, process CPU/RSS and final recoverable checkpoint/config/sha.
+Instrumentation changes no sampling or optimizer exposure. Sequential two-fit execution
+avoids assuming four directions imply simultaneous heavy jobs; each fit gets actual-node
+admission and an accepted handle, observed with tools/hmasd_wait.py.
+
+**Shared correctness prerequisite.** Current main's discoverer hot path at
+hmasd/agent.py builds masks as 1-done[t], although storage owns outgoing-transition dones.
+Port the exact existing 1da535e55 repair (row 0=1, later 1-done[t-1]) and its storage/sampler/
+actor+critic dispatch test. Both arms receive it; old results stay at their original sha.
+This is correctness, not encoder science. Do not expand into recurrent refresh/burn-in.
+
+Checks: lawful slot parsing/order and zero-slot treatment; flat/batched/sequential encoder
+shapes and gradients; only actor encoder differs at construction, optimizer owns new weights;
+collector/evaluator use active encoder and isolate RNG/normalizers; actual short mocked-
+admission native smoke checks learning counts/output, not performance screening; recurrent
+regression. Independent Reviewer checks executable scientific semantics before result launch.
+No helper edits this notebook, chooses arms/seeds or launches result work. Stop implementation
+for a genuine incompatible native contract rather than silently simplify full learning.
