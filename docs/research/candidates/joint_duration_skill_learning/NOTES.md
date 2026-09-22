@@ -745,3 +745,37 @@ An evidence-supported repair may distinguish collection-group identity from fini
 regrouping, preserve failure inputs for future diagnosis, and receive independent numerical
 review. Any later replacement fit requires a separate prospective DM decision and retains
 this failed attempt in total cost, under constitution section 3.
+
+### Frozen replay result and numerical repair scope — 2026-09-21
+
+Committed zero-update fixture `e027de225` passed 3 remote CUDA cases in 24.91 s: each arm
+used 50 native reset batches of 16 (800 events), with unchanged weights, zero optimizer
+calls and zero physical transitions. Original 16-row replay error was **0** for all arms.
+Regrouped 800-row max absolute log-probability error was **2.074241638e-5** for fixed and
+**1.442432404e-5** for factored/AR; relative probability errors were 2.074263102e-5 and
+1.442422035e-5. Thus a frozen fixed policy can exceed the original 2e-5 check solely when
+regrouped. Grad-enabled and no-grad merged replay were identical in this fixture. The
+first measured difference was in float32 entity embedding (max .000732421875), then encoder
+(fixed .000117778778) and team logits (9.11951e-6). Independent float64 16-vs-32 traversal
+gave identical entity embeddings, encoder differences at most 8.18e-14 and team logits at
+most 2.39e-15. Actual runtime: torch 2.7.0+cu118, float32 matmul precision highest, matmul
+TF32 false, cuDNN TF32 true, flash/memory-efficient/math attention enabled.
+
+This establishes a numerical false-positive mechanism for the original audit. It supports,
+but does not prove, the diagnosis of the unrecoverable third-rollout event. The scientific
+question and prior Pro advice remain applicable; routine numerical repair does not require
+a new scientific consultation or turn this run into a performance observation.
+
+Repair L0: retain the **2e-5** absolute factor-log-probability check when replaying the exact
+collection grouping, reconstructed from stored rollout start_step and environment order.
+Separately measure merged training-batch drift and refuse nonfinite factors or maximum
+relative factor-probability change above **0.001** before the first update. This explicit
+probability-scale diagnostic bound is 0.5% of the fixed PPO clip radius .2, not a universal
+float32 bound or a claim of identical gradients. Record both errors and their thresholds.
+Keep old probabilities, sampling law, actual optimizer batch 1280, epochs, precision,
+train/eval modes, seeds, objective and exposure unchanged. Never replace stored old scores
+with freshly computed ones. Persist event records, frozen coordinator weights, configuration
+and numerical/backend facts when either check fails, for reproducible diagnosis rather than
+checkpoint resume. Tests must reject wrong tokens/old scores/nonfinite values and an oversized
+regrouping perturbation, while accepting the observed pure regrouping case. Keep all native
+CPU/CUDA integration checks. Independent numerical review precedes any new result attempt.
