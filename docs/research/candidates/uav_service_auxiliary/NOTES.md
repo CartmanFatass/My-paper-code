@@ -2720,3 +2720,63 @@ zero-step D failure retained. The exact checkpoint wake/event was consumed and o
 rearmed at generation 20 for this same operation. Continue the fixed horizon and await the
 prespecified trained panels; no restart, extra fit, retuning, early selection or Pro Send
 is selected from this intermediate evidence.
+
+## 2026-09-22 — B03 G second training checkpoint
+
+The 23:05 UTC observer retains the same matching G / 912211 / a01 processes running,
+consistent operation records and no exit witness. Refreshed main
+`345e9d94e3795b7f63d4a5dd202f731144eed8c2` retains this direction/lead and no newer pause.
+Copied summary SHA256 is
+`5b207f468a2f236ddb193b359541c6be89ad503556cb8159af758ad5d56c9c0e`.
+It records 90,000 training transitions / 60 collected episodes, including completed
+collection 15, with 14 fully recorded native/auxiliary updates. Two development panels
+contain 16 episodes / 24,000 evaluation transitions. The same two D fact episodes / 3,000
+transitions are reused, with zero new physical facts and 47,712 valid agent rows replayed
+across the two diagnostics. All 29,848 floating values are finite; failure is null and
+stderr empty. Prior completed records and input bindings are unchanged; all 118 new
+progress events were read, and collection counts/timing and append-only extension agree.
+
+The rollout-10 development panel has mean raw J **67.229066**, QoS **.235510191**, return
+cost **.090781179**, throughput 7.065305719 and mean true episode-minimum fleet battery
+**.384303886**. All eight worlds truncate at 1,500 steps with zero evaluation updates;
+all aggregates were independently recomputed. World 920007 has zero service, and all
+charging, cutoff, depletion and charger-input exposure remains zero.
+
+Against D on these same rollout/world seeds, **G-minus-D J is +486.103922**, QoS
+**+.039549249**, return cost **-.142556823**, and true episode-minimum battery +.024725877.
+Seven world J differences are positive; 920006 is adverse at -705.490339. This is favorable
+intermediate control evidence for the specified observation-prediction package, with
+substantial return-cost improvement and a smaller service increase. At the same panel,
+**S-minus-G J is +31.870508**, QoS **+.059612907**, return cost **+.019242497** (worse), and
+true episode-minimum battery -.018823235. Four world contrasts favor S and four favor G;
+their median is -33.522659, ranging from -689.297023 on 920007 to +936.028851 on 920005.
+Thus both auxiliary packages show development benefit over D at this checkpoint, while
+S/G have mixed world outcomes and a service/cost tradeoff. This strengthens G as a useful
+observed comparator and weakens a preference for S based only on its large early S-minus-D
+development mean. It establishes neither equivalence nor a semantic mechanism. This
+eight-world development comparison cannot replace the unobserved fixed final G panel,
+second training block or the already weaker/mixed final S-minus-D result.
+
+On the unchanged initial facts, G's rollout-10 service MSE is **.004631897**, versus D
+.019353231 and S .021099299; its service head is a detached shadow. It is also below the
+fixed service-mean reference .010116768 in aggregate, but episode 932201 is adverse to its
+own mean reference (.008181163 versus .007212412), whereas 932202 improves (.001082631
+versus .013021124). G observation MSE is **.013599499**, below D .014923470 and S
+.015224734 but above fixed mean .008585614 and persistence .000001035146. Episode-equal
+scoring was checked from both episode rows; the saved array digest matches the original
+node. Fixed-row feature variance/effective rank are 13.084203 / 6.878838, with nonzero
+agent/segment variation and no degeneration flag. Lower common-initial-fact error is
+compatible with a useful G package here, but the actor histories and trained heads differ;
+these diagnostics do not identify the source of its control gain or yet cover the common
+endpoint mixture. Lower service-readout error alone is not a reason to select G either.
+
+All seven new completed passes retain 30 representation steps, positive base/GRU movement,
+both head updates and positive movement of every native learner. Training remains
+heterogeneous, with zero QoS in all four lanes of collection 10 and several other
+zero-service lanes. Newly read training records still have no charging/cutoff/depletion/
+charger-input exposure. The last completed-update resource row records cumulative wall
+3,041.095180 s and peak RSS 3,078,076 KiB; these are intermediate costs. Three B03 fits
+have started (D/S complete, G running), with three later fixed cells unstarted and the
+separate zero-step D failure retained. The checkpoint was consumed using its exact
+generation/wake/event and observation rearmed at generation 21. Continue the same fixed
+G operation; no extra fit, early selection, recipe change or new Pro question is selected.
