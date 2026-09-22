@@ -961,3 +961,20 @@ third H6 or high third SET can weaken the apparent benefit; aligned observations
 this tested package without identifying a component. This completes the original six-fit
 design rather than extending it after scores. Existing Pro advice remains applicable.
 Current cost is 4 started/4 completed fits, 0 technical failures, two cells unlaunched.
+
+
+### 2026-09-22 fifth accepted operation — H6 seed 914413
+
+After the second SET was fully collected, verified, read and published, the already declared
+third H6 training seed was admitted on `wsl_4070` at the same immutable source and unchanged
+360k/four-panel contract. Fresh actual-node admission passed with 12,304,375,808 available
+bytes against its 4 GiB floor. The [native manifest](../../../../runs/agent_count_generalization/s1_count_b01_h6_s914413/launch-manifest.json)
+and [admission preflight](../../../../runs/agent_count_generalization/s1_count_b01_h6_s914413/admission-preflight.json)
+bind the command, source, accepted operation and process identities. Native status observes
+the original runner and supervisor running, consistent records and no exit witness; the two
+local binding files match the remote SHA-256 values.
+
+Current cost is 5 started fits: 4 complete and read, 1 running, 0 technical failures.
+SET 915413 is the sole unlaunched cell. The preceding SET terminal event has been consumed.
+Register the repository observer for this exact H6 handle with 1500-second checkpoints and
+terminal/error wakeups. No source, scientific exposure or endpoint choice changes.
