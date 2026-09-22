@@ -60,6 +60,8 @@ FSD B12 的标签计数回归不是“任务没有协作需求”的测量：收
 
 比较的信息条件需要沿实际 actor 输入核对。普通 own-observation MAPPO 可以回答一个有用的实际基线问题；如果另一方法在执行时还能访问团队摘要，这个比较就同时改变了信息和方法，不能独自归因为分层的收益。FSD 的当前 B01 已明确将 D1280−CF 定义为完整方法包的差异，而非 hierarchy headroom；后来的 CF_S 缩放修复也不能被忽略。应分别说明实用比较、匹配信息的比较和组件归因各回答什么。[FSD 的固定 B01 问题](https://github.com/CartmanFatass/My-paper-code/blob/267d1bcaebafa5f8f9049098d645e2f548b7c678/docs/research/candidates/flexible_skill_duration/FSD_MATCHED_INFORMATION_BASELINE_B01_PROSPECTIVE_CARD_20260916.md)；[B05 修复及后续解释](https://github.com/CartmanFatass/My-paper-code/blob/267d1bcaebafa5f8f9049098d645e2f548b7c678/docs/research/candidates/flexible_skill_duration/NOTES.md)
 
+同一结果中的训练内上升、处理与对照之差、最终终点也不能互换。B05 的 CF_S 从初始化到晚窗上升为 +.086／+.102／+.101；CF_S−CF_E0005 的晚窗差却是 −.046／+.150／+.072（均值 +.059），J45 差为 −.130／+.050／+.091（均值约 +.004）。这些来自三个已用于选择的开发块，且训练后策略敏感性未测。它支持输入构造影响有限学习的具体解释，不是稳定约 +.10 的处理效应，也没有证明当前局部表示或辅助监督是瓶颈；已修复但未调优的 CF_S 也尚未由此验证为合格的最终 flat 参照。[B05 原始读数与相反证据，2026-09-19 22:55](https://github.com/CartmanFatass/My-paper-code/blob/00eac27c535ccffb66354f8bfac62acb504874ca/docs/research/candidates/flexible_skill_duration/NOTES.md#L1946-L2023)
+
 全局 coach 是否被允许取决于任务的信息条件，不能仅凭组件名称纳入或排除比较。COPA 的 coach 为部分观测的成员提供策略，论文也包含回合内成员加入；它是相关的队伍变化参照，但原来的离散动作、AQMIX 结构与当前 UAV 连续动作接口仍需匹配。其通信阈值是在计算新策略后决定是否发送，因此减少策略广播不能直接记作减少 coach 推理。[COPA 原文，§§3.2–3.4、4.1](https://proceedings.mlr.press/v139/liu21m/liu21m.pdf)
 
 把两个学习方法放在同一份已采集历史上，可以检验其学习映射对数据的敏感性，却不会产生它们在原环境中各自行动后的反事实轨迹。B08 的六个续学比较复用三个块；R 在两套相同历史上都落后于 F，削弱了“仅修复采集就能恢复当前 R 优势”的解释。早期有利结果、奖励噪声与估计误差相互抵消的替代解释仍然保留。六个相关比较不是六个独立复现，也没有证明所有条件响应复用无效。[B08 同历史比较与反例](https://github.com/CartmanFatass/My-paper-code/blob/fe0e5719836f16cc5a44f02d80f53c95592250bd/docs/research/candidates/skill_teammate_drift_learning/NOTES.md)

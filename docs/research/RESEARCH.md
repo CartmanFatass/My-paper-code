@@ -90,22 +90,22 @@ predictive proposal into 20 distinguishable questions, with ordinary methods, so
 and evidence limits. It retains the earlier main/alternative concept record and direction standing;
 an entry in that inventory is not a direction activation or a selected experiment.
 
-**Current Portfolio plan (owner-requested, 2026-09-21):** the
-[information-first three-DM plan](#portfolio-review-2026-09-21-information-first-three-dm-plan)
-recommends three independent DM sessions for two fixed-clock questions — local interaction
-representation and task-predictive auxiliary training — and FSD joint-duration learning.
-Owner clarification after the initial plan: the existing Claude session is stopped and will
-be restarted manually by the owner; it is excluded from these three planned sessions.
-The owner explicitly retains FSD as a research question. The earlier proposal to reuse Claude
-for the third seat is superseded; this is not a transfer or restart of that session.
-All three first comparisons use full HMASD on Scenario1 and are independent;
-partner-skill recombination remains the first backup. FSD is a new-hypothesis planning
-candidate supported by a concrete advisory comparison, not by new favorable results or a
-reversal of Claude's stopping judgment; the evidence distinction is recorded in the
-[FSD rationale audit](#fsd-planning-rationale-2026-09-21-new-advice-without-new-results).
-The complete Pro reply and Root Decision give interventions, controls, costs and stopping
-judgments. This is a concrete planning result: no session creation, direction activation,
-owner reassignment or scientific execution occurred; existing standing remains as recorded below.
+**Current Portfolio plan (owner-corrected, 2026-09-21):** the
+[whole-project evidence-led research plan](#portfolio-review-2026-09-21-whole-project-evidence-led-research-plan)
+replaces the earlier three-slot research framing. The owner clarified that three DMs described
+adjustable execution concurrency, not the number of research questions to select. The new plan
+connects historical results and reusable insights to research priorities, concrete comparisons,
+conditional next investments and stopping choices across fixed-k learning, useful skills, duration,
+changing teams and UAV service mechanisms. It recommends ordinary local encoding as the first
+comparison and joint-duration co-learning as the next priority core question, with fixed-roster N generalisation and S7 service prediction as
+specific independent entries. These preferences do not make an earlier positive result a
+prerequisite or promise execution of the full inventory.
+The earlier [three-DM review](#portfolio-review-2026-09-21-information-first-three-dm-plan) and
+[FSD rationale audit](#fsd-planning-rationale-2026-09-21-new-advice-without-new-results) remain
+historical evidence. FSD has new comparison advice, not new favorable findings overturning its
+old stopping judgment. The existing Claude session stays stopped and is resumed only manually by
+the owner. This planning result does not activate directions, accept runs, create App tasks or
+change current scientific standing and ownership.
 
 ## Active
 
@@ -120,7 +120,7 @@ owner reassignment or scientific execution occurred; existing standing remains a
 | `tail_return_distributional_learning` | reserve | B01 positive retained, B02 inside the MEI, Pro review of B02 never started ([DIRECTION.md](candidates/tail_return_distributional_learning/DIRECTION.md)). Codex Root may start a DM for it under the three-DM soft ceiling when a discriminating idea exists; no obligation. The reserve list changes only by an owner-triggered Portfolio review. |
 | `cross_play_compatible_population_learning` | reserve | Owner-selected next reserve on 2026-09-21. Zero historical implementation/experiment is an investment park, not a negative result. The concrete candidate is mixing-trained versus exposure-matched ordinary self-play in independently trained five-agent populations; include all predeclared cross-population compositions and own-team tradeoffs. Three proposed complete bundles including the stated own-team panel cost 2,162,688 team ticks and 24,576 Adam calls, plus unmeasured implementation/wall. No DM task or fit is started by this reserve entry. [Portfolio rationale](#portfolio-review-2026-09-21-closed-direction-research-value); [original scope](https://github.com/CartmanFatass/My-paper-code/blob/b793cf69b4935306708ad744b355acc4d5b33712/docs/research/portfolio/pro_packets/20260912_new_direction_discovery/archive/RESPONSE.md). |
 | `variable_n_fleet_churn` | reserve | Owner-selected following reserve on 2026-09-21. Preserve the old MAPR/DIRECT/BCRH evidence; the later INTERVAL/TERMINAL service-credit comparison has no final primary after two SIG11 failures and remains unanswered. Revisit through a stable isolated implementation and a new declared comparison only for its information value, not to recover sunk cost. No repair, replay or fit is automatically started. [Portfolio rationale](#portfolio-review-2026-09-21-closed-direction-research-value); [B03 technical failure](https://github.com/CartmanFatass/My-paper-code/blob/51965a896a4e3b9288fccb6abe277c2547dc07b8/docs/research/candidates/variable_n_fleet_churn/VNFC_N7_NATIVE_SERVICE_CREDIT_B03_RESULT_INTAKE_20260912.md). |
-| `flexible_skill_duration` | reserve | Owner clarification 2026-09-21 in the Root task: the existing Claude session is temporarily stopped and only the owner will restart it manually. That session is outside the current three-DM plan; FSD joint-duration research remains a proposed question for an independent DM. This planning clarification does not change the historical execution identity or resume/reassign the Claude session; actual new lead and record scope are not initialized here. Owner decision 2026-09-21 in the Claude session ("可以 那么做好收尾吧"), on the DM's recommendation after two Pro passes: rested, not closed and not disproved. Question kept open: on a skill basis that has task meaning, does changing or adaptively choosing the duration give a repeatable native gain against a competent matched-information baseline? Standing after B01–B14 (UAV host, three development blocks reused throughout, no claim note, no positive performance result): D1280 above the matched-information flat comparator by +.29 J, but that comparator never trained competently (B01, B03, B04), so no size is claimed; no high-level lever moved D's score — coordinator batch (B02), label persistence in training or execution (B07 one block, B08), the coordinator's own selection (B08, B09), an external additive label credit with or without concentrated exposure (B13: P1 holds, P2–P4 fail; a learner with no coordinator optimizer step reached historical D1280's level, a feasibility observation and not an equivalence), and that credit deployed in its own ten-step regime (B14, zero fits: G +.019 / +.016 / −.019, no reversal). Descriptive results retained: the six labels are distinct closed-loop behaviours produced by the low level's objectives (B08–B10), their consequences are long-horizon and roughly per-agent (B12), the coordinator's loss sums entropy over agents so its per-agent temperature is 6·`lambda_h` (code fact, 2026-09-20 22:41 entry), and deployment's argmax amplifies a near-uniform law. Not tested: the native value of an unfixed duration; state-dependent, per-agent or team-conditioned reassignment (nothing here speaks for or against the Codex team-decision directions). Reopening needs evidence that can change the investment judgment — a competent matched-information baseline on this host, or a mechanism with a native prediction for an unfixed duration — not a small η², a high entropy, an unused head, or a renamed scheme. Reserve ideas I2 (longer high-level commitment) and I3 (lower coordinator entropy) and their material: notebook entry 2026-09-20 20:36. No active producer, no declared successor batch, no open Pro question. Checkpoints stay on `wsl_4070` under their run roots (`b08_save_*_a01` D1280 with exact panels; `b13_*_a01`, which must never seed coordinator PPO). Notebook with the rest record (entries 2026-09-21 02:51, B14 read, closing entry): [NOTES.md](candidates/flexible_skill_duration/NOTES.md); code map in [HANDOFF_2026-09-16_matched_information_baseline](candidates/flexible_skill_duration/HANDOFF_2026-09-16_matched_information_baseline.md); the last active row is in Git at `6e10702c6`. |
+| `flexible_skill_duration` | reserve | Owner clarification 2026-09-21 in the Root task: the existing Claude session is temporarily stopped and only the owner will restart it manually. FSD joint-duration co-learning remains a proposed scientific question in the whole-project plan; the owner clarified that DM concurrency is not a limit on the number of research questions. This planning clarification does not change the historical execution identity or resume/reassign the Claude session; no new lead or record scope is initialized here. Owner decision 2026-09-21 in the Claude session ("可以 那么做好收尾吧"), on the DM's recommendation after two Pro passes: rested, not closed and not disproved. Question kept open: on a skill basis that has task meaning, does changing or adaptively choosing the duration give a repeatable native gain against a competent matched-information baseline? Standing after B01–B14 (UAV host, three development blocks reused throughout, no claim note, no positive performance result): D1280 above the matched-information flat comparator by +.29 J, but that comparator never trained competently (B01, B03, B04), so no size is claimed; no high-level lever moved D's score — coordinator batch (B02), label persistence in training or execution (B07 one block, B08), the coordinator's own selection (B08, B09), an external additive label credit with or without concentrated exposure (B13: P1 holds, P2–P4 fail; a learner with no coordinator optimizer step reached historical D1280's level, a feasibility observation and not an equivalence), and that credit deployed in its own ten-step regime (B14, zero fits: G +.019 / +.016 / −.019, no reversal). Descriptive results retained: the six labels are distinct closed-loop behaviours produced by the low level's objectives (B08–B10), their consequences are long-horizon and roughly per-agent (B12), the coordinator's loss sums entropy over agents so its per-agent temperature is 6·`lambda_h` (code fact, 2026-09-20 22:41 entry), and deployment's argmax amplifies a near-uniform law. Not tested: the native value of an unfixed duration; state-dependent, per-agent or team-conditioned reassignment (nothing here speaks for or against the Codex team-decision directions). Reopening needs evidence that can change the investment judgment — a competent matched-information baseline on this host, or a mechanism with a native prediction for an unfixed duration — not a small η², a high entropy, an unused head, or a renamed scheme. Reserve ideas I2 (longer high-level commitment) and I3 (lower coordinator entropy) and their material: notebook entry 2026-09-20 20:36. No active producer, no declared successor batch, no open Pro question. Checkpoints stay on `wsl_4070` under their run roots (`b08_save_*_a01` D1280 with exact panels; `b13_*_a01`, which must never seed coordinator PPO). Notebook with the rest record (entries 2026-09-21 02:51, B14 read, closing entry): [NOTES.md](candidates/flexible_skill_duration/NOTES.md); code map in [HANDOFF_2026-09-16_matched_information_baseline](candidates/flexible_skill_duration/HANDOFF_2026-09-16_matched_information_baseline.md); the last active row is in Git at `6e10702c6`. |
 
 ## Archived (investment only, not scientifically disproved)
 
@@ -6560,3 +6560,287 @@ S1 的排序槽没有持久身份或显式有效位。不能从全局 state／in
 多数 A／B／C／VSP／N 及其他档案判断依照本轮固定证据表、当前索引与已保存综述，没有在本轮逐一重读全部原 notebook、重验原始数组或重新计算效果。材料足以支持上述投资取舍；它不认证新臂已经接通、已有合格性能或可按历史时间完成。新 encoder／辅助／duration 的真实行为，变量 roster 和 S7 的本次端到端集成、恢复数据与资源成本仍有执行缺口。本轮没有训练、原型、rollout、科学评估、状态修改或会话操作。
 
 ### Decision
+
+#### 本次计划的范围与纠正
+
+Owner 本轮要求的是总览失败历史和 insight 积累之后的详尽研究计划。Root 先前确实使用了
+旧结果，但主要把它们放在候选的限制说明里，没有让它们充分决定整个研究项目的结构；
+又错误地把“推进时可能并行三个 DM”当成了“三题主选加替补”的科学约束。本节撤回
+这一框架，替代前一份 three-DM Decision 的当前计划地位。旧 Question、完整 Answer、
+结果、咨询和 FSD 理由审计保留，仍可作为有范围的历史来源。更早概念记录与 20 问
+清单中的“当前主选/唯一后备”是当时的选择，不再承担当前排序；清单继续用于覆盖
+历史问题，表示学习也按本节作为可独立提出问题的研究分支。
+
+以下给出研究问题、投资先后和结果分支，不分配会话、不限定方向数量。Owner 停止的
+Claude session 仍由 owner 手动开启；FSD 科学问题保留，但旧停止判断没有被新的正面
+实验推翻。这是本次受托规划的研究建议，不是批次接受、方向激活或所有权变更。
+
+#### 研究目标与对停滞的解释
+
+项目要回答：在有限数据和计算下，怎样使 HMASD 学到并使用有价值的联合技能，以改善
+UAV 团队服务？可变周期 k 与可变成员 N 分别研究；固定 k 的表示、技能与学习改进同样
+可以有价值。每个结果分别说明性能用途、学习机制和算法新意，不能把其中一项的证据
+转成其余两项。
+
+当前没有证据把停滞归结为 MARL 已经饱和、技能一定无用、critic 一定错误或普通模型
+一定不够。已有证据反复指出三种较具体的问题：输入和训练构造会影响有限学习；局部
+预测或一步优势经常没有转成自身轨迹上的完整收益；有些问题被普通方法吸收，却仍有
+为了维持方向而继续寻找复杂增量的风险。因此下一阶段应缩短从可解释干预到完整学习
+结果的距离，同时保留已经有用的普通解法。
+
+[OPT](https://arxiv.org/html/2207.03902v4) 提供的是信息组织和联合训练的先例，不是整个 MARL 已饱和或一个稀疏模块适用于
+本项目的证据；[UNREAL](https://arxiv.org/abs/1611.05397) 支持把辅助任务当表示学习方法，但不证明所选 UAV 预测量有效。
+[原 HMASD](https://proceedings.neurips.cc/paper_files/paper/2023/file/c276c3303c0723c83a43b95a44a1fcbf-Paper-Conference.pdf) 对技能用途和配置敏感性的讨论提供研究问题，也不证明当前所有技能浪费。
+本轮只复核了这些相关一手材料，不声称完成全领域新颖性检索。
+
+#### 历史积累必须怎样改变设计
+
+| 已有结果或 insight | 此后具体怎么做 | 不再购买什么 |
+| --- | --- | --- |
+| FSD B05：同信息的输入缩放改变学习，原 CF 构造有问题；晚期臂间均值 +.059，但 J45 仅约 +.004，且有负块。 | 涉及该 CF 对照时使用已有 CF_S 修复；认真比较完整 HMASD 中普通信息组织的有限学习效果。新比较中的必要修复双方共享。 | 重做已知有缺陷的 CF，或把该结果写成稀疏/预测模块的稳定 +.10 收益。 |
+| FSD B13/B14 未翻转停止；更早的事件/续接结果也有明显反证，早期正点仍保留。 | 结束旧高层标签信用救援；新时长共同学习单列假说，并带固定周期参照。 | 通过更多旧标签读出、阈值或种子延长同一配方。 |
+| A：普通多步复用有效，额外修正无稳定增量；C/VSP：普通信息价值和后果模型已有正面、有界答案。 | 按实际数据/更新契约使用普通多步、短后果模型和信息可被后续行动利用的时点，作为相关问题的可复用方法与强参照。 | 为了保住学习模块而削弱普通参照，或继续救援已回答的固定宿主。 |
+| B/UCOPE：更准预测、一步作用或真实后缀信用不保证完整收益。 | 预测辅助、信用、漂移研究尽早读完整学习与执行回报；诊断用于解释，不替代终点。 | 一轮轮只优化 MSE、局部价值或标签信号，再假定最终会有用。 |
+| FOLR/MGTAP/ACVC：历史、几何或包装器有实际反证，但各自比较范围有限。 | 保留普通强表示/控制；严格区分换局部表示、换行动接口和加入规划。 | 换成“关系/语义/残差”名称续接旧包，或将其负结果扩大为所有表示无用。 |
+| 行为可辨认不等于技能有互补用途；联合标签计数不是样本复杂度。 | 技能规模、真实重组曝光、任务互补性分别比较，保留正常搭配收益。 | 先验宣布所有技能无用，强制穷举，或要求正的冻结技能探针才能研究新共同学习。 |
+| VNFC 无最终 primary；CPCP 未执行；N 泛化、churn、cross-play、异质能力是不同问题。 | 分别选择任务契约和训练单位，区分技术失败、无机制启动和科学负结果。 | 将四种问题合成“适应性”，按沉没成本自动重跑或按无结果自动关闭科学问题。 |
+| TRDL、source/credit 等档案给出范围明确的普通吸收和反例。 | 用强 scalar/普通规则作参照，保存实现与适用边界。 | 无具体 native 后果时继续造 witness、认证层或重新寻找同一等价对象。 |
+
+这些判断承接当前 standing、上方 Question 的精确数值/来源与
+[完整历史归属表](#七全部既有方向的归属与停止边界)。本轮复核关键 notebook 与源码，
+其余历史数值采用固定来源中的已有读数；没有重新运行全部 raw arrays。
+
+#### 第一笔投入：完整 HMASD 的普通信息组织比较
+
+首选在 S1、固定 k 上比较现有局部 observation encoder 与普通稠密槽位/关系编码。
+两臂保留完整 HMASD：同一合法数值观测、技能 FiLM、GRU、高低层共同学习、原 discovery、
+PPO 和物理动作。先不叠加稀疏选择、预测损失、技能数量变化或新 critic。plain hmasd
+分支保留高层与判别器；不能误用关闭它们的 mappo/opt_mappo_k 分支代替完整 HMASD。
+这次首问估计的是完整 HMASD 内的表示增量；若后续主张层次结构优于平坦 MARL，
+另需能学好的同信息 flat 参照，不能借旧不合格 CF 的差距承担这一结论。
+
+这个首问直接检验“相同数字的组织是否影响有限学习”，不是证明本任务存在一个已识别
+的关系瓶颈。S1 槽位按 SINR 排序且零填充，没有持久实体 ID 或真值有效位；编码只使用
+原本合法的值、槽位类型/排序及由它们可确定的特征，不从 simulator state/info 偷渡
+实体追踪与 mask。
+稠密参照应有合理容量和优化机会，参数与训练/推理工作透明报告。两臂比较首先识别的是
+表示包的实际用途；若要进一步声称关系归纳偏置独立于容量，则在有价值时另做针对性
+归因，不把全面容量扫描设为开始研究的义务。
+
+首份产物应包括同训练交互量下的完整原生回报、少量预定学习曲线位置、覆盖/连接质量
+等已有服务分量及实际计算成本。注意力图、技能熵、预测分数只能解释机制。一次每臂
+一个新训练实例可作为有界探索示例，不能给出跨训练种子的稳定结论；最终 horizon、
+种子和 fits 由实际选中的 prospective note 说明。本规划没有接受该批次。
+
+首选理由是：它保持当前已跑通的学习路径，改动集中，能直接得到完整任务读数，新增
+目标和异步训练契约的不确定性较少。最强的低成本替代是当前技能集合与一个有依据的
+较小集合的完整学习比较；配置规模是真实动机，但尚无证据表明它就是瓶颈，且此前
+围绕标签选择/信用已投入较多而结果不利。辅助预测有更清楚的任务监督假说，但多一层
+“目标是否保留控制相关特征”的不确定性；联合时长有更直接的 k 意义，但接入成本较高。
+这是当前投资偏好，不是其他问题必须等它成功的因果依赖。
+
+预期的近期成果是一个可信的完整学习比较及其解释，而不是先承诺算法名称。若改善
+来自普通表示或配置，就将它作为项目可用版本；若没有改善，留下具体范围的负结果。
+是否值得发展为论文，由可重复的主张、重要的边界或机制解释决定，不由模块数量决定。
+
+结果有益就保留普通编码，不强求再加创新组件；若效果不明，可在未决与有理由的独立
+重复之间选择；若仅代理指标改善、或没有值得保留的收益，结束该编码配方。失败不会
+自动排出 sparsemax、更多层或新的预测头作为续集。
+
+#### 固定周期的后续问题：信息、技能与学习反馈
+
+**事实预测辅助。** 在相同完整 actor/GRU 上，比较两个都实际训练的事实 readout：
+一臂将表示 detach，另一臂允许辅助梯度进入原表示。预测未来一段已发生的外在团队
+服务/奖励，窗口和真实结束/截断语义在所选问题中说明；W=3 不是全项目要求。两臂
+保持主策略能力，处理共享优化、clipping、RNG 和标签泄漏。它回答监督是否改善控制
+表示，不能用“未训练的零损失头”作预测基线。共同事实留出片段上的预测读数支持
+机制解释，自己的更容易轨迹上 MSE 降低不够。只有完整收益值得，才选择是否增加
+选择性汇聚、不同后果目标或预训练；这些都是另外的有成本干预。
+
+**技能用途与规模。** 先挑一个问题：减少标签集合是否改善有限训练的实用性，或实际
+伙伴搭配曝光是否提高有意义重组的用途。前者是普通配置研究，保持发现目标与主体结构，记录输出头随标签数变化的参数；
+数量变化同时影响类别曝光、熵上限与内在奖励解释，收益不能全部归为探索空间缩小。
+后者保持时钟/架构，改变真实执行的合法伙伴搭配，并尽量匹配个体曝光和
+普通联合探索。更新要对应真实行为概率；仅补记新 log-prob 不会自动解决多步离策略问题。不给
+未执行组合制造事实标签；不同 seed
+中的同一整数不是同一个技能。正常部署收益和预定重组收益共同决定用途。若仅特殊
+重组面板得益却明显损害正常服务，不能宣布解决可组合性。
+
+**更有任务用途的 discovery。** 互补/子队目标、任务条件化判别器可以研究，但当前
+没有独立的新目标被选中。它们需要说明相对原 discovery、普通辅助预测和已有团队
+潜变量多改变了什么；不将分组、奖励、时间和网络同时改掉。不是“稠密编码失败后
+自然进入子队发现”，也不是必须所有技能先通过冻结测试。
+
+**价值、共同更新与经验复用。** 若出现一个明确的待估未来量或真实行为变化，可以
+比较普通承诺/历史条件化 critic、服务区间目标、保守更新或多步复用与一个具体改动。
+当前 value 未显式看 held skills/clock 是设计线索，不是已证明的错误；加入它若是
+主干预就单独解释。B 被拒绝的刷新/burn-in 只改变同一历史在自身网络下的编码，不能
+改名为队友漂移接着跑。没有具体对象时，这组方法保留为支持资产，不单设长期项目。
+
+#### 可变技能周期：直接研究自由度与有限学习的权衡
+
+在目标和其他条件一致、可变策略类确实包含固定策略类时，理论最优值不会降低；
+实际有限训练的结果同时取决于探索、表示、信用与优化。动作空间更大并不自动意味着实际更好，也不能由组合数量推出一个通用样本
+复杂度倍率。新比较要直接观察这种权衡，而不是把理论上的额外选择当作经验增益。
+
+保留此前形成的完整问题：在原有联合技能选择之后，对比固定 k、充分知情的分解式
+时长，以及普通自回归联合时长；三个版本高低层共同训练。分解式同样看到合法历史、
+现存承诺、团队潜变量和本次联合技能，能够学习确定性的协调；联合式额外条件化于
+本次已经采样的其他时长。只有一个成员重选时不存在这一同事件跨成员差别。两种
+可变时长共享菜单、cap、critic 和更新原则，不通过削弱分解参照制造结果。
+
+首个问题是有用配合是否更早被访问、随后保留并改善完整服务，而不是时长相关或
+重选次数本身。S1 只能检验其实际存在的覆盖/连接后果；接入—回传与返航接替应在
+确有机制的 S7 中定义。保留执行时长与训练 chunk length 的区分、片段收益折扣、
+真实截断/终止和有效更新量的解释；不为次数完全相等而抹掉时间抽象本身的作用。
+
+- 联合优于分解且优于固定：支持保留该联合学习包，再判断独立确认与机制归因的价值。
+- 两种可变方式都优于固定，但彼此没有可靠增量：保留较简单的方式，不宣称联合依赖
+  已被证明必要。
+- 联合只优于分解、仍不及固定：这是窄比较结果，不支持推广新增复杂度。
+- 仅时长统计、局部信用或熵改变：削弱它们能转成服务改善的解释。若多数事件只有一人
+  或 cap 消除了大部分差别，承认该机制在本任务机会少，不改宿主制造机会。
+- 没有有用增量，也无值得付费的新区别：停止这套新配方。当前旧 FSD、UCOPE 的停止
+  结论不因它“理论上仍有可能”而解除。
+
+事件/hazard 终止、时钟课程、跨时长模型共享仍属于不同问题。只在具体新解释值得时
+选择：例如课程必须与直接训练同一最终策略类比较并计入预训练；跨时长模型不能把
+非线性随机系统的均值复合当作分布转移的复合。它们不组成 duration 失败后的固定救援链。
+
+#### N 与变化团队：保留独立研究地位
+
+| 具体问题 | 第一个有解释力的比较 | 何时值得投入及首个产物 |
+| --- | --- | --- |
+| 训练/测试成员数量和关系泛化 | 在选定 N 分布上，对普通共享/set 或 attention generalist 比较一个明确关系干预；specialist 只在需要判断专门训练代价时加入，记录各自训练量。 | 若要回答未见 N 的服务能力，直接选这个问题；先使可变 roster 的行动/观测/evaluator 契约成立。产物是训练内外 N 的完整服务和泛化代价，不借用 toy 结果。 |
+| 运行中加入/退出与服务连续性 | 在真实 churn 下选择一项：区间对终点信用，或隐状态保留/重建；面对正常 recurrent 与合法初始化。 | VNFC 的原 primary 未回答，可以因为这个问题本身值得而完成有界比较；SIG11 只说明技术失败。产物包括恢复服务和正常服务的得失。 |
+| 独立训练团队之间 cross-play | 混合训练与曝光匹配的普通 self-play，测试真实独立 population 的预定混编与 own-team。 | 需要兼容的独立训练策略群体，不能把旧技能换标签当免费人口库。CPCP 未执行，不能列入科学失败。训练群体成本与评估世界分开。 |
+| 异质能力与参数共享 | 能力条件化的充分共享参照，对一个 partial-sharing/adapter 改动。 | 只有实际能力差异改变服务后果时研究；ACPS 旧包不利保留。产物是完整任务得失和共享的适用范围。 |
+
+若从 N 轴本身而非指定故障问题进入，默认先研究每回合固定 roster 的 train-N→test-N，
+保持 k 固定。每个测试 N 内与相应参照比较，不把不同 N 的绝对回报直接当作方法增量。
+它先回答数量泛化，不要求同时支持退出、独立混编和异质性；若实际问题
+就是退出后的服务，VNFC 则可因这个独立理由先行，不为补偿旧崩溃而重跑。
+
+这些问题不依赖编码、预测或 duration 的阳性结果；没有可用输入/训练接口才是实际
+实现依赖。FRRIE、VNFC、CPCP、FOLR、DISH、RCLE 和 ACPS 的证据分别继承，不能用一个
+“适应性分数”合并。当前优先在有明确任务与可执行比较时启动其中一个问题，而不是
+因为它们在旧三席位表中是后备就长期排后。
+
+#### UAV 场景化：只为一个真实服务问题购买新宿主
+
+S1 已有完整 HMASD 学习路径，适合第一笔有限学习比较；其场景限制是不能回答回传、
+能量、移动用户或队列问题。S7 当前 interface v3/reward v2/arm C 具备更丰富的接入—
+回传、能源与充电竞争，故更贴近 UAV 基站持续服务，但它不是所有方法的必经下一站。
+G33 的 owner 冻结保留。service-restoration 有延迟遥测和反馈控制的资产，却存在本次
+所需数据/学习接入缺口；不同时建设它与 S7 只为了扩展场景数量。
+
+S7 的优先独立入口具体化为：**固定 k、固定 N，预测一个未来服务窗口内的真实端到端
+服务后果，能否帮助完整 HMASD 学好接入—回传配合和能源约束下的接替？** 首个比较是
+相同、都训练的预测头，detach 对允许辅助梯度进入原 actor/GRU；保持原生目标与合法
+输入，不同时加规划、通信或 duration。这与 S1 预测头属于相同方法家族，但所问的是
+新的实际服务后果，不能仅凭头的名称宣称已经迁移。所选标签字段、窗口、真实结束/
+截断与 evaluator 尚未绑定；集成成本应由这个问题的价值承担。
+
+待检验的中间预测是“局部接入看似良好、端到端服务却无法兑现”的情况减少，以及
+成员调整时实际支撑关系更能保留；最终读完整 J 和服务、风险分量。普通 critic 已足够、
+目标容易预测却不帮助决策、辅助梯度干扰，都是可能的反面解释，不是已确诊的现象。
+该问题可以直接选择，不要求先让 S1 的同名辅助目标阳性；更不能改变事件率或 reward
+为它制造优势。
+
+物理模型与学习修正是另一个可选问题。若普通解析/短后果模型已解决它，保留该答案；
+若研究学习修正，则在同候选、同反馈执行器和同物理先验下面对强普通模型，最终看
+端到端服务与模型获取/规划/训练成本。已知奖励公式并不意味着已知行动后的随机后果；
+不为学习器人为藏起其原本有权访问的信息。
+
+实体指针、用户簇或角色行动会改变高层行动空间，属于任务接口研究，不能算仅换局部
+编码。新先验和动作约束只在 native 场景确有稀缺性时引入。MGTAP/ACVC 的不利结果
+要求面对完整合格 learner，不继续用弱 proposer 做主要参照。
+
+通信仅在真实 delay/cache/receiver 链条下研究。C 的 NEAR 正结果提供普通参照和
+“信息必须作用到下一次能用它的行动”的认识；不直接在没有预约机制的 S1 搬用 VSP。
+尾部服务则区分原目标下的 value 学习、明确的新风险偏好、最差用户服务三件事。
+TRDL 要面对强 scalar，改善世界级尾回报不等于改善用户公平；改变目标后的得失应
+公开报告，不包装为同目标性能提高。
+
+迁往 S7 的理由是该处存在选定问题需要的后果；S1 阴性本身不是理由。反过来，直接
+选择 S7 问题也不必先购买一个 S1 阳性结果。首次产物应为一个真实问题的跑通比较及
+服务读数，而不是又一个大而全的环境框架。
+
+#### 推进方法：每一笔观察结束后重新选择
+
+当前的默认次序是：先做完整 HMASD 普通信息组织比较；**下一项优先的核心科学比较
+是新 duration 的完整共学习**，不把它排在所有表示、稀疏和辅助目标尝试之后。技能规模、
+预测辅助或真实重组仍可因更有区分力的具体观察先行，但不机械安排第二个信息模块。
+必要的时长接口准备可以独立推进；首问的阳性不是时长研究的准入条件。
+
+N 的默认入口是固定 k、每回合固定 roster 的数量泛化；S7 的默认独立入口是上述固定
+k/N 的端到端服务预测辅助。它们在具体问题值得接入成本时进入，不作为默认扩场景或
+永远排后的替补。第三层工作是对已经保留的主张确认，并只选择一种当前主张需要的
+外推，不为全部候选铺开泛化矩阵。
+
+这是受新证据调整的投资次序，没有承诺所有分支依次执行，也没有全项目固定八 fits
+或相同实验矩阵。结果支持充分且实际决定采用的普通方法，在后续新比较的版本边界
+被吸收；正在进行的冻结批次不因新结果改变参照。两个单独有利模块也不自动可叠加，
+实际需要组合时才另问其相互作用。
+
+每个被选问题经历的是以下实质步骤，而不是全项目共用的关卡：
+
+1. **把比较做得可解释。** 在实际用到的路径内核实并复用已确认修复，说明目标、信息、行动、历史/
+   截断、成本和最强普通替代。B 的 entry-mask 修复尚未进入旧结果或 FSD，不能以
+   文档已发布冒充代码已采用。必要验证与首个科学比较衔接，不无限扫描基线。
+2. **取得首次完整观察。** 原生任务回报是主要依据；机制读数回答改变是否真的发生。
+   小模型或冻结 checkpoint 仅在能改变当前决定时使用，不能替代共学习结果。
+3. **决定继续、修正、简化或停止。** 机制改善而回报无益，削弱转化解释；回报有益而
+   机制未成立，保留方法结果并改解释。是否确认或归因取决于所保留的主张与新观察
+   的价值，不要求方法包收益先证明唯一机制。精度不足可以留下未决，追加种子需有
+   价值理由。技术失败不记科学负结果，重跑也不是自动。
+4. **只确认保留的主张。** 选定实现和主要参照后，依宪章用每臂 3–5 个全新独立训练
+   种子作固定确认批次，提前写 CLAIM、终点、选择暴露与不确定性方法。更多评估世界
+   不能替代新训练实例；小均值差不能当等价。跨任务/N/种子迁移分别支持各自范围，
+   不把一个 S1 正结果推广成所有 UAV/MARL 的答案。
+
+按原 D1280 记录，360,000 training team steps/fit 的五次训练合计 41,241 秒，平均
+约 8,248 秒，峰值 RSS 2.75–2.79 GiB；这只是历史 CPU FP32 量级。若首问暂沿用该训练量，
+一臂一实例的两臂探索合计 720,000 training team steps，评估另计。新网络、AR、模型
+采集、S7 接入和确认的成本未知，不能用 toy 秒数定价，也不能把原历史速度作新运行
+承诺。实际 horizon/训练工作/调参与 started fits 都在选中后预声明、按实测记录。
+
+关闭的是没有下一项值得购买观察的配方，不要求证明整个方法类永远无效。归档后保留
+数据、普通实现与边界；新建议只在形成具体不同预测与可执行比较时构成重开理由。
+“理论上尚未证伪”“可以再换个模块”“还有空闲机器”都不是投资理由。没有实验给出
+可校准的成功概率，就不编造百分比；根据证据强弱、成本与替代选择判断值得程度。
+
+#### 本次采用、共识与结果边界
+
+本轮没有新的科学收益需要升级为共识。[FOUNDATIONS](../rl-marl-foundations-20260907/FOUNDATIONS.md)
+已包含同信息与有限学习、技能可辨认与有用、时间自由度与训练负担、事实与反事实、
+普通方法吸收及原生任务边界等认识。本次采用 Pro 的一项具体补注建议：在已有 B05
+引用旁写清自身训练上升、相对对照的晚窗差与最终 J45 差，保留混合结果和训练后敏感性
+未测。这是对已有结果的精确澄清，不是新发现或新方法收益。其余缺口在于将已有认识
+真正用于选题，而非重复写共识。可用普通资产与已确认正确性修复在相关新比较中复用；
+稀疏交互瓶颈、MARL 饱和、新 duration 优越性与所有 N 泛化仍是未证问题。
+
+加强的判断是普通构造/学习方式值得直接比较，完整闭环读数应尽早出现；削弱的是
+从局部代理、标签数量或模块名称推性能的期待；未解决的是当前 S1 的主瓶颈、技能
+重组脆弱性、联合时长的有限学习增量以及不同 N/UAV 后果中的迁移价值。
+
+Root 已阅读本节完整 Pro Answer。采用其对首个两臂编码比较的支持，以及三项实质
+具体化：duration 是下一项优先的核心比较，不再自然排在第二个信息模块之后；N 默认
+先问固定 roster 下的数量泛化；S7 以固定 k/N 的真实端到端服务预测辅助作独立入口。
+这些选择仍是研究建议，不是已证瓶颈或已接通代码。也采用 B05 的共识补注建议。
+
+本地 Critic 和 Pro 的 MATERIAL_DISSENT 均针对旧固定三席位框架；Root 接受并撤回
+该框架。两者对首笔普通编码比较没有实质异议。Pro 对更多 cost 项的提醒按实际重要性
+记录，不将所有保存/队列/支持工作扩成新的成本台账或必做面板。后续确认仍需针对实际
+主张及固定比较的审阅，本次 Portfolio 建议不能预先认证未发生的结果。
+
+Pro 本轮重点核读了 FSD B05/B13/B14、当前 baselines、共识、已保存综述和选定原论文；
+其余档案多沿用题目固定证据表和现有读数。Root 的先前原始记录核查、两位只读 helper
+的证据/宿主映射及本地 Critic 为本计划提供补充，但不构成对全部 raw arrays 的新复验。
+Root 纠正了 helper 关于 plain hmasd 开关、E2 宿主和 OPT 代码存在性的错误，Question
+与本 Decision 使用纠正后的事实。新臂实现、N 与 S7 的本次端到端接入和实际成本仍未
+验证；这些缺口限制可执行性与效果断言，不被包装为启动前必须先买到的阳性证据。
+
+本次交付是上面的全项目计划及更新后的当前索引指针：0 新科学 fits、0 rollouts、
+0 新科学评估；现行状态、lead、Claude 手动开启边界及冻结对象不变。没有创建或联系
+独立 App 任务，没有接受后续自动执行或固定并行会话安排。
