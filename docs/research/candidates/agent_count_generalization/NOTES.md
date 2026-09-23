@@ -4858,3 +4858,28 @@ native control input. Its exact SHA-256 is
 This is the fixed first control, not a favorable score/source selection. The source, initializer,
 first pre-update data and world/panel checks remain enforced; no extra fit, new Pro round or
 changed endpoint. B05 effect reading waits for the complete paired zero cell.
+
+## 2026-09-23 — B05 fixed zero cell admitted with matched pre-update state
+
+After first-cell acceptance and publication, dispatched the selected zero cell once through
+the configured supervisor. Fresh native admission accepted the unchanged executable and the
+exact completed first summary. The [zero-cell launch manifest](../../../../runs/agent_count_generalization/s1_entropy_b05_set_l0_s953201/launch-manifest.json)
+and [memory preflight](../../../../runs/agent_count_generalization/s1_entropy_b05_set_l0_s953201/admission-preflight.json)
+preserve its native source, invocation, process and control identities. Supervisor dispatch
+exit0 is not the training endpoint. No worker restart or extra fit.
+
+The collected [live summary](../../../../runs/agent_count_generalization/s1_entropy_b05_set_l0_s953201/summary.json)
+is `training`, with8000 training/stored steps,16 training episodes and0 completed updates;
+initial evaluation used24000 steps/48 episodes. Actual coefficient/endpoints0, targets and
+annealing off. Runner verified complete first-control payload/counts/source/hash, compatible
+config, exact initialization, initial per-world outputs and first pre-update collection
+before the affected optimizer update. Independently compared both serialized configs apart
+from the three declared coefficient fields, initial digest, spec/worlds and every initial
+panel field apart from config: exact equality. The control bytes are unchanged at the declared
+`136d090b32a8c5fec1eefad5dbaaefa9155d44ce4335c7fb0f07585d36cff4c4` digest.
+
+Armed generation69 for this new accepted operation and read its first observation: scientific
+child and detached supervisor both running with consistent recorded/native identities, no
+exit witness, error or pending event. The completed first operation remains terminal. Cost is
+**2/2 fits started,1 complete/1 running**. Full paired effect, component/N6 costs and training
+exposure comparison remain the dependency; no early endpoint or effect claim from activation.
