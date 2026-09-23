@@ -13,6 +13,7 @@ Owner 于 2026-09-23 进一步要求本任务作为科学项目管理者，给�
 **当前科学项目管理：** Root task `01a0cd93-9107-7701-a7e5-84fb071ea8f7`，host `local`；
 checkout `/home/fires/.codex/worktrees/project-management-sept23/hmasd-wsl`，branch `codex/project-management-sept23`。
 Root 负责跨方向的科学判断、下一笔投入与实际停滞的处理；各 DM 继续自主实施、判读和发布。
+Owner 随后明确按 **三个 DM 并行** 规划，另由本任务管理项目；具体责任域与下一步见[现行计划](#current-research-plan)。
 原负载 B01 已完整核验，无遗留运行或 Pro；原 checkout `/home/fires/.codex/worktrees/load-capacity-sept23/hmasd-wsl`
 保留实验代码及完整轨迹，旧配方停止记录不重写。人数与技能 DM 保持原责任和已固定比较。
 聚合 E 的原生运行已完成，Root 本次从原节点收回了遗留证据，详见下方项目复盘；没有重启训练或替换原 lead。
@@ -20,7 +21,7 @@ Root 负责跨方向的科学判断、下一笔投入与实际停滞的处理；
 
 **计算优先级（owner，2026-09-21）：先使用配置中的 WSL 远端 `wsl_4070`，再考虑本地资源。**
 远端不可用、实际资源不足或不适合所选计算时，DM 记录具体原因后使用本地；所有结果计算仍遵循实际节点准入，
-不迁移已接受进程、不因观察丢失重复启动。四个 DM 的并行研究不绕过节点资源检查。
+不迁移已接受进程、不因观察丢失重复启动。三个 DM 的并行研究不绕过节点资源检查。
 
 ## 研究背景与共享认识
 
@@ -380,49 +381,58 @@ B/UCOPE 的局部预测、一步优势或真实后缀信用没有自动转成稳
 
 ## Current research plan
 
-**当前科学安排（owner，2026-09-23 新授权）。** 本任务持续担任项目管理者。研究重点是有限数据和计算下有用的联合技能与完整 UAV 服务；可变 k、可变 N 分别研究，普通学习改进也有独立价值。
-负结果进入下一次判断：先问它约束了哪个假说，哪些问题仍有可改变决策的实验，再自主推进选中的工作。
-不要求坚持旧网络、旧方向名，也不要求先做完所有便宜诊断才准许训练。
+**Owner，2026-09-23：按三个 DM 并行规划，另由本任务持续担任科学项目管理者。**
+三个名额按可持续的科学问题组织；一个 DM 每次推进一个明确比较，可以随证据修订或转向。
+Root 管理科学优先次序、跨方向证据与真实停滞；本任务不再另占第四条持续研究线。
+目标是有限学习资源下有用的技能、泛化和完整 UAV 服务，不以完成某个旧配方或获得正数为终点。
 
-| 项目优先事项 | 当前动作与依据 |
-| --- | --- |
-| 保留可重复的策略包优势，检验有用技能的学习 | 人数 B10 已完成：保留开局标签的均值更高，但存在明显局部服务损失；这削弱持续重分配是均值收益必要条件的解释，不证明技能学习无用。技能 DM 的 D/G/P 共同学习继续原合同，避免再并行复制一个交互预测辅助配方。 |
-| 从容量诊断转向实际学习 | Root 正在复盘一个具体候选：普通 SET 在 N6 与 N8 下各训练 360k，在共同 N8/N6 面板比较服务与专门化代价；预计 2 fits / 64k final eval。容量 B01 给出真实资格缺口而非可达最优界；该比较检验直接训练是否改变服务，尚未批准为固定实验。完整建议返回后由 Root 在当前授权内选择、登记并推进，无须再次等待 owner 选题。 |
-| 收回已产生的科学信息 | 聚合 E 原进程已完成；Root 已收回并核验原生输出。既有观察失败及缺失 checkout 与科学阴性分开；不增加一次训练来替代丢失的观察。 |
-| 以机会成本管理其他方向 | 旧 dense、duration、S7 辅助预测、固定容量配方的结论继续约束各自做法；DM 可以结合全项目证据转向有区别的学习问题，不默认让所有归档方向重新运行。 |
+### 三条主线和近期动作
 
-[下方当前复盘](#portfolio-review-2026-09-23-scientific-management-and-next-learning-investment)列出下一笔训练的理由、最强替代解释与成本。
-已完成的旧计划见 [本次变更前快照](archive/2026-09-23/RESEARCH-before-scientific-management.md)。
-[文献提案](designs/LITERATURE_RESEARCH_PLAN_20260922.md)作为科学参考，不能替代冻结合同、真实比较或 DM 判断。
-
-| 研究问题 | 当前优先次序与第一个比较 | 证据如何约束投入 |
+| DM 主线 | 科学问题与已有依据 | 近期工作、成本与有用的下一观察 |
 | --- | --- | --- |
-| **普通局部信息组织** | B01 已完成并归档当前 dense 配方，0 追加 fit。 | S1 固定 k/N、同信息完整共同学习的两个 fits 中，dense 在三个预写面板的平均 J 均较低，且实测成本更高；每臂一个训练实例，不建立表示类总体排名。没有选中修补或后继比较。[最终判断](candidates/local_observation_encoding/NOTES.md#2026-09-22--dm-decision-archive-the-tested-dense-recipe)；[退役的初始计划](archive/2026-09-22/RESEARCH.md)。 |
-| **技能周期与有限学习** | B01 三臂完成，关闭本次 S1/cap=10 普通分解／AR 配方，0 追加 fit。 | 新时长选择确实执行，事件与高层优化量增加；两种可变臂终点均低于固定，AR 后段胜分解不足以满足既定保留条件。每臂一个训练实例，不否定更广周期问题；长于十步的承诺另需实际团队时钟、支持与相应固定参照，尚未选中该比较。[结果与判断](candidates/joint_duration_skill_learning/NOTES.md#b01-complete-three-arm-result-and-closure-of-the-cap-10-recipe--2026-09-22)；[退役的初始计划](archive/2026-09-22/RESEARCH_02.md)。 |
-| 事实预测辅助 | 独立近邻：同一个实际训练的事实 readout，detach 对辅助梯度进入 actor/GRU。 | 两臂都有预测头；最终看完整回报，不能用更低 MSE 代替用途。先选一个后果/窗口，不叠加规划、通信、duration。 |
-| 技能规模与实际重组 | 分别选择有依据的较小标签集合，或固定 k 下真实 partner-skill 重组曝光，对普通匹配训练。 | 标签组合数不是样本复杂度；保留正常搭配收益。技能可辨认不等于有任务互补性，冻结标签探针不是新共同学习的阳性门槛。 |
-| **N 数量泛化** | B10完整验收，结束本次开局技能复用诊断；保留原包和明确局部代价的部署替代，0追加fit、无已选后继。 | 平均J与覆盖在N4/6/8均提高，但有13个覆盖损失世界与N4质量代价，不能由正合并均值推广统一替换。干预改变全部48世界执行；削弱持续采用新标签是本批均值优势必要条件的解释，保留具体世界中在线重选的服务价值。训练重复仍为1；不认证flat、不推导技能训练无用或省算力，后继须有区别明确的事前预测。[完整证据与决定](candidates/agent_count_generalization/NOTES.md#2026-09-23--b10-complete-opening-assignment-replay-improves-means-with-consequential-local-losses)；[退役实现计划](archive/2026-09-23/RESEARCH-agent-count-b10-complete.md)。 |
-| 运行中成员变化、cross-play、异质能力 | 三个独立备选问题：服务连续性/区间信用，独立 population 混编，能力条件化共享。 | 分别继承 VNFC、CPCP、FOLR/ACPS 等证据；先明确真实任务和合法接口。技术失败、未执行和科学不利分别处理，不合成笼统“适应性”。 |
-| **UAV 端到端服务预测 / 文献第 1 项** | B03六格和两次固定共同端点回放均已完整验收，关闭当前配方；无下一批、运行中操作或待收Pro。 | 1.08M train/576k eval/42k physical facts，6 fits共769.038846 runner min；两次回放零新fits/更新/环境步，另1.693106 min。S−D、G−D两块均反号；G服务提升重现而成本下降不重现，MSE优势也不能挽回原生结果。按既定分支不追加第三块、重调、较早终点、长训练或确认；未来重开须有新的科学理由，不能从两块推总体无效或稳定排名。[完整解释和成本](candidates/uav_service_auxiliary/NOTES.md#2026-09-23--b03-second-common-replay-accepted-and-current-recipe-closed)；[退役的运行中计划](archive/2026-09-23/RESEARCH-uav-service-b03-complete.md)。 |
-| **技能条件化的信息聚合 / 文献第 3 项** | B01 三臂原生进程均完成；Root 已收回遗留 E 输出，原 DM 最终方向记录尚待完成。 | P 的 J45=.159861，低于 O 的 .509137，服务分量与实测成本均不利，削弱当前池化配方的投入理由。收齐 E 后比较 E−O、P−O、E−P 与成本，再作三臂判断；不把 32 个世界当训练重复，不识别实体筛选机制或技能语义对齐。[P 结果与固定接续](candidates/goal_conditioned_entity_aggregation/NOTES.md#2026-09-22--b01-p-complete-and-read-e-remains-the-fixed-third-arm)；[E 启动](candidates/goal_conditioned_entity_aggregation/NOTES.md#2026-09-22--b01-e-accepted)。 |
-| **负载与关键成员泛化 / 文献第 6 项** | B01 已完整核验并结束当前诊断路线，0 新 fits / 80k eval / 160 episodes，5.911021 command min；无后继或待收操作。 | 五格平均 H6 原生 J/覆盖优势保留；容量放宽时 SET 在 N4 恢复更多用户与 J、H6 在 N8 更多，D4=−.020377、D8=+.023481，原两-N统一预测失败。资格、截断及质量组成解释这些固定路径的转换；同 N 高度抵消，同 K 残差不识别纯 N。按既有 Pro 混合结果/信息价值分支停止，不追加没有明确学习用途的 balanced-c fits 或异质接口。[完整证据与决定](candidates/load_critical_member_generalization/NOTES.md#2026-09-23--b01-complete-useful-package-levels-mixed-capacity-response-route-closure)；[退役的运行中计划](archive/2026-09-23/RESEARCH-load-capacity-b01-complete.md)。 |
-| 支持方法与条件候选 | 真实行为漂移下的经验复用/critic，任务相关 discovery，普通物理模型及学习修正，通信、尾部服务、实体/角色动作，事件终止/时钟课程。 | 只为具体待估未来量或真实服务后果选择。普通方法已解决就保留；行动接口、目标和信息权限改变单独解释，不列为前一个配方失败后的自动续集。[候选全集](archive/2026-09-21/RESEARCH.md#potential-research-directions-2026-09-21)。 |
+| **DM1：泛化与训练条件** | 不同人数和服务负载下，普通训练能做到什么，HMASD 的剩余优势何时成立？合并考虑人数 B01–B10 与负载 B01 的证据，不为同一 H6/SET 差距再拆出一个容量 DM。已有有界包优势，但去熵、固定人数通道、持续重选等解释各受反证约束。 | 首选候选为普通 SET 在 N6/c10 与 N8/c10 各训练 360k，最终共同测试 N8 与 N6，约 **2 新 fits / 720k train / 64k eval**。目标是观察实际 N8 资格、服务和 J 能否改善，以及 N6 专门化代价。N8 更多 agent rows、reward/N 尺度和联合物理条件需明示，不能称纯人数因果。混合人数训练是可替代设计，由完整项目建议和 prospective note 定稿。 |
+| **DM2：有用技能与协作学习** | 如何在完整共同学习中得到真正对团队服务有用的技能组合？技能可辨认、组合预测准确与有用互补不同；人数 B10 不证明技能训练无用。 | 继续已固定的 **D/G/P 三臂比较**：每臂 360k，整批 3 fits；最新发布 D 已完成 360k 和评价，G 已原生准入并训练，P 未启动；尚待完成 **2 个既有计划 fits**。先读完整 J、服务、真实组合用途及成本，区分普通辅助效果和组合结构增量。结果不利时可改变真实重组曝光、学习目标或简化方法，保留原三臂结果，不自动停工或改终点。 |
+| **DM3：服务收益与风险控制** | 怎样把学习到的信息变成稳定的端到端服务，同时处理返航与能源代价？S7 B03 中 G 的服务增益重现、成本改善却反号，说明只提高预测精度没有回答这个控制问题。 | 先把旧服务/成本证据和真实 reward、critic 路径连起来，选择一个直接学习比较。当前可批评的具体候选：同一任务、actor 信息、reward 系数和训练曝光下，普通总价值 critic 对按原系数组合的服务/成本分项价值估计；这是一种待测试的学习解释，不是已诊断的故障。初步规模 **2 fits、每臂 180k**，最终 horizon/评价/归一化在新 NOTES 中定稿。看完整 J、QoS、返航约束成本、真实电量低尾及各世界损失，不以 critic 或辅助 MSE 决定保留。 |
 
-**普通编码比较的当前结论。** 已读完冻结 J45、15/30/45 面板、原生服务分量及实际成本。
-已测试 dense 包没有兑现原生收益/成本预测；完整 Pro 咨询后结束此配方投入。训练种子差异和其他表示机会仍未解决，
-旧 dense 配方没有追加比较。owner 现已选择第 3 项的技能聚合位置问题，按新 NOTES/Pro 判断其区别与成本；
-这不是旧 dense 配方的阳性翻案，也不为穷尽可能解释自动追加实验。
-完整 HMASD 表示比较不能承担“层次结构胜过 flat MARL”的结论，后者另需能学好的同信息 flat 参照。
-实际 horizon、种子和 fits 由选中后的 prospective note 声明，本页没有接受批次。
+**责任路由与实际状态。** DM1 计划由现有“智能体数量泛化 DM”继续承担
+（task `01a0c6ef-cdd4-7113-b2d9-20487e35171b`，host `local`）；B10 已完成，没有在途运行或选定后继。
+DM2 保留“实际互补技能学习 DM”（task `01a0cdb8-10c9-7743-a05a-6dcfc42621c5`，host `local`）
+及其原合同。DM3 计划复用“控制用途预测小模块 DM”（task `01a0c9af-d5cd-7d70-b5e8-9db2c598ad4e`，host `local`）；
+它已完成 B03、当前未加载，旧 checkout 缺失，新研究尚未接续。该路由是规划，不声称已投递任务或被会话采纳。
+Root 负责恢复可工作的原责任路径，保留原证据；不因路径缺失创建第二名同方向 DM。
 
-**周期比较的判读。** 策略类确实包含固定方案时，最优值不降低；有限训练仍受探索、估计和优化影响。
-联合式只赢分解式但输固定 k，不支持增加实际复杂度；两种可变方式都有效而无可靠彼此增量，则保留简单方式。
-只改变时长统计、熵或局部信用不构成服务增益。没有有用增量和具体新区别，就停止所测配方。
-S1 只能检验自身覆盖/连接后果；S7 研究需要其真实服务机制，不能因 S1 阴性就自动换宿主制造机会。
+旧聚合 O/P/E 的运行已经结束，Root 已收回 E；原方向的最终 notebook 补录责任保持可恢复。
+这项收尾不成为第四条持续新训练线。表示/聚合、可变周期、churn、cross-play、异质能力等是
+这三名 DM 可按证据采用的后继问题，当前不另开常驻名额；Claude FSD 的手动恢复约束与 G33 冻结保持原义。
+方向表保留各自历史合同、负责人和未结记录，不能把表中尚有收尾记录的行数当作并行训练数。
 
-研究依据在本页的[背景与共享认识](#研究背景与共享认识)中统一维护；必要正确性修复在相关新比较中共享。
-完整答复、推导和原始结果留在方向 notebook / claim / runs 与日期归档。每次有新结果，重新选择下一笔有信息价值的投入，
-不承诺遍历整个候选清单；并行强度不构成科学方向配额或自动补位规则。
+### 推进顺序和失败后的行动
+
+1. **当前窗口：** DM2 完成已固定批次；DM1 定稿实际训练条件比较；DM3 定稿服务/成本学习假说。
+   实现、文献/代码核对和已保存结果分析可以并行。正在生成的项目级 Pro 建议覆盖下一笔训练选择，
+   回来后按三个 DM 的最新约束采纳，不重发同一个问题，也不等待 owner 再次选题。
+2. **下一次结果边界：** 每名 DM 说明哪个判断被加强/削弱、最有价值的下一观察是什么，并自主推进。
+   可以继续、复现、简化或换问题；不得只以“本配方失败、等待重新授权”结束。新解释要承担可区别的预测，
+   但不要求穷尽所有诊断或每次提出新架构。记录失败后沿用的开发曝光，不能换名字清零。
+3. **形成论文结论时：** 由最有信息价值且已有可重复用途的路线先进入固定确认；按实际 claim 定义总体、
+   普通主对照和 3–5 个新独立训练种子。其余 DM 继续探索或检验关键替代解释，不让三条线同时铺开昂贵确认。
+   探索中合理的零结果和无法区分也更新计划，不被包装成等效或总体无效。
+
+**计算安排。** 三个 DM 的并行是研究责任并行，训练并发取决于当时节点负载和内存准入。
+优先保存并完成已经接受的工作；新训练优先使用 `wsl_4070`，不打断、迁移或重复已接受进程。
+当前概念性增量为 DM1 的 2 fits 与 DM3 的 2 fits，另有技能原批次尚待完成的约 2 fits；
+它们的 horizon 不同，不能把 fit 个数当统一耗时，也不是额度、硬上限或六次都必须启动的承诺。
+若 Pro/代码事实改变设计，由负责 DM 说明信息价值与成本后调整。全局没有每个实验再向 Root 申请的步骤。
+
+**证据入口：** [人数 B10](candidates/agent_count_generalization/NOTES.md#2026-09-23--b10-complete-opening-assignment-replay-improves-means-with-consequential-local-losses)、
+[负载 B01](candidates/load_critical_member_generalization/NOTES.md#2026-09-23--b01-complete-useful-package-levels-mixed-capacity-response-route-closure)、
+[技能学习](candidates/complementary_skill_learning/NOTES.md)、
+[S7 B03](candidates/uav_service_auxiliary/NOTES.md#2026-09-23--b03-second-common-replay-accepted-and-current-recipe-closed)、
+[聚合 E 原始输出](../../runs/goal_conditioned_entity_aggregation/b01_e_s922611/summary.json)。
+服务/成本分项候选的接口依据为 `envs/pettingzoo/relay/energy_aware.py` 的
+`_calculate_constrained_safety_reward` 及 `tests/scenario7_reward_safety_test.py`；已有分量接口不是改善学习的实证。
+[前一版项目计划](archive/2026-09-23/RESEARCH-before-three-dm-plan.md)仅供追溯；
+[当前待答项目问题](#portfolio-review-2026-09-23-scientific-management-and-next-learning-investment)的已发送原文与 Answer 位置保持不变。
 
 ## Portfolio review 2026-09-23 scientific-management-and-next-learning-investment
 

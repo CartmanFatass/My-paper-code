@@ -35,7 +35,8 @@ owner to repeat an already clear choice.
   the current scientific plan and assigned controls. DMs publish their own result entries; Root is not a
   routine result-publication gate. Count independent DMs and children
   together with any assigning session that becomes a direct DM toward the current
-  owner-selected level of four concurrent direction DMs. Do not fill slots
+  owner-selected level of three concurrent direction DMs (2026-09-23). A Root doing only
+  project management is additional coordination capacity, not a fourth direction. Do not fill slots
   without a worthwhile authorized task or duplicate a direct DM's scientific work.
 - **Direct DM:** the session itself owns one direction. Explicitly read the
   `developer_instructions` body in `.codex/agents/hmasd-direction-manager.toml`, then the

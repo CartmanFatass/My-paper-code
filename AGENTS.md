@@ -17,8 +17,9 @@ Keep it current rather than append-only: superseded project reviews and plans re
 under `docs/research/archive/` per constitution section 4; direction NOTES keep their append-only role.
 
 Roles (constitution section 2). Codex: a session may coordinate as Root or directly own one
-direction as an independent DM. The current owner-selected working level is four direction DMs
-total, counting the assigning session when it becomes a direct DM; reuse the recorded lead.
+direction as an independent DM. The current owner-selected working level is three direction DMs
+total (2026-09-23), plus the scientific project manager; a Root directly owning a direction
+counts among those three. Reuse the recorded lead.
 Under the owner's 2026-09-23 delegation, Root acts as scientific project manager and DMs may
 reframe or change their research direction using project-wide evidence without renewed approval;
 see constitution section 2. Ending a recipe does not end the DM's research responsibility.
