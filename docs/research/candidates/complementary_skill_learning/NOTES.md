@@ -1357,3 +1357,280 @@ commit after a successful write. If writeback is unavailable or fails, return th
 answer in chat, not only a receipt, SHA or link. The DM retains the scientific decision.
 
 ### Answer
+
+**MATERIAL_DISSENT: yes。** 我支持下一项做两臂完整学习的目标比较，但反对把实际 `legacy_mi_reward_coef=1` 称为“保留 B01 原生混合奖励”：核到的冻结 B01 和本次 source_sha 配置均为 **0.5**。建议比较 **0.5 对 0**；若题面的“1/0”只是保留／删除的开关，就明确写成 `effective_coef = 0.5 * keep_discovery_reward`。这项纠正不增加第三臂、系数搜索或新的批准要求。以下是供 DM 选择的科学建议，不是运行授权。[^csl2-config][^csl2-construction][^csl2-governance]
+
+#### 一、首选下一步，以及最强的反对理由
+
+**我首选两个新冷启动实例，以 B01 D 的完整学习路径为共同底座，只比较低层是否保留现有强度的两项判别奖励；保留同世界 own/uniform 与 initial/final 评价，不再购买四格分支。** 每臂 360k、一个新共同初始化／外生随机块，仍是探索。主要问题应写为：“在这套固定 S1 学习配方和有限训练量下，删除低层判别奖励，是否改善完整策略的原生服务，并保留共同选择器下的服务？”它不是“技能是否必要”，也不是解释 B01 P 为什么失败。[^csl2-question][^csl2-prior]
+
+这项投入值得考虑，是因为它直接改变当前技能条件策略的训练目标，得到可以实际采用或放弃的简化；不需要先相信一个尚未诊断出的梯度冲突。与再加一个辅助结构相比，新增科学因素更少；与只重复 G/D 相比，它更直接回答当前提出的目标用途问题。但这不是由 B01 的负结果逻辑推出的必然下一步，更不是保证 task-only 会赢。
+
+**这个选择最可能错在：B01 根本没有改变判别奖励，所以它不能提供“判别奖励有害”的处理证据。** D 自身的 own 终点高于两个辅助臂，原生奖励项可能仍在帮助形成有用行为或改善探索。P 的额外梯度、访问分布和联合学习轨迹都可能解释其损失；删除判别奖励可能反而降低两种部署规则下的服务。若结果如此，应放弃这次删除配方的用途预期，而不是自动把系数移到另一个小数继续试。真正值得买的是这一不确定选择的直接比较，不是为旧失败寻找一个听起来统一的归因。
+
+#### 二、B01 实际改变了什么判断
+
+我核对了三个原始 summary 的终点、服务分量与更新字段，并查看了训练记录中的相关字段，以及三个 combination 文件的定义、实际格子和聚合读数；以下不是对所有二进制和每个原始数组的重新审计。[^csl2-D][^csl2-G][^csl2-P]
+
+| 固定终点读数 | D | G | P |
+| --- | ---: | ---: | ---: |
+| Own 原生 J | .487211696 | .455360850 | .463577705 |
+| Uniform 原生 J | .485044529 | .504742224 | .426480616 |
+| Own 覆盖人数／步 | 32.3246250 | 30.6157500 | 32.2527500 |
+| Uniform 覆盖人数／步 | 32.2950625 | 33.4208750 | 30.2084375 |
+| 主 G-readout 的十步 scalar T | −.000008639782 | −.000366352659 | +.000293732024 |
+
+**削弱的是当前 pair-factual 辅助包的用途理由。** P−G own 为 +.008216855，却只是相对一个 own 已低于 D 的 G 改善；P−D own 仍为 −.023633992。Uniform 下 P 相对 G/D 分别为 −.078261608/−.058563913，两个比较的全部 32 世界 J 都更低。P 的 own 覆盖接近 D，仍有更低质量及更高高度罚；uniform 的三个服务分量均不利。不能只保留 P−G 的正号，也不能把高度罚重新解释成电池安全。[^csl2-question][^csl2-D][^csl2-G][^csl2-P]
+
+**保留两条相反信息。** 一是 G 在 uniform 面板相对 D 的 +.019697695 J 和每步 +1.1258125 个用户，而 own 为 −.031850847；这是有用的部署候选线索，不是稳定 G 优势。二是 P 的主 T 为正，16 世界中 10 正、6 负，说明预先指定的 G 读出在这个冻结 bank／prefix 样本上实现了正的平均匹配价值。它不是没有价值的“纯预测分数”，但也没有修复 P 的整体用途。[^csl2-question][^csl2-G][^csl2-P]
+
+这里 T 使用真实四格结果，满足 `matched − independent = s*Delta/4`，且 s 在看到真实支路前确定；保留该正面事实是必要的。但各 bank 的 prefix 和学习后 readout 不同，十步分支使用随机动作，完整 J 使用均值动作；没有初始四格面板，也没有条件均值可加性的检验。不能从 P 的正 T 推出新互补性的形成、P 独有机制、跨 bank 的内在质量排序，或对 P−G 的中介份额。更不能把十步折扣和换成 500 步 J 来抵消损失。[^csl2-diagnostic]
+
+**尚未被识别的是失败机制。** P 有 12 个辅助 minibatch 被裁剪、平均 trunk 梯度约为 G 的 2.67 倍，证明“相同系数／相近参数量”没有带来相同有效干预；它没有证明范数导致服务损失。所有标签的访问和接近 log6 的行为熵削弱粗糙的边际标签饥饿解释，但不证明状态条件联合支持充分。因此现在没有充分理由把“匹配 G 的梯度范数”或“提高同一个 uniform floor”指定为修复。[^csl2-question]
+
+第一份完整建议的 `local T without net use` 分支仍适用：结束固定 B01 辅助配方，不追加该批次。变化在于下一项可操作问题从辅助参数化改成低层奖励选择；旧回答没有替这项新处理提供经验依据。RESEARCH 中 B08 的实际学习、B10 的开局标签复用，以及 S7 B03 的反号，分别约束“未经学习也一样”“重选依赖等于技能必要性”“辅助误差等于服务”等解释；它们不是本次奖励处理的同期对照，也不使当前原生 MI 系数自动成为错误。[^csl2-prior][^csl2-shared]
+
+#### 三、先修正对照：原生系数是 0.5，不是 1
+
+冻结 `957a65c0155f88e5287c744f0f667192174f16df` 与本次 `24801c8facea0b06473f2005e7d0267e25afd972` 的 `configs/config_1.py` 都写着 `legacy_mi_reward_coef = 0.5`，配置 blob 相同。B01 `runner.make_config` 调用 E0 的 `_make_config("D0", ...)`；E0 的配置继承该 Config，无 preset 初始化，已读的构造与入口没有把它改成 1。`lambda_e/lambda_D/lambda_d` 分别是 1/.05/.02。不能把 agent 内部 `getattr(..., 1.0)` 的缺省值误当已有配置对象的实值。[^csl2-config][^csl2-construction]
+
+用 c 表示传入实际字段的数值，当前非 HA/process 路径可写为
+
+$$
+r^{\rm low}_{i,t}(c)=r_t+c\left(.05\ell_{D,t}+.02\ell_{d,i,t}\right),
+\qquad r_t=R_t/6,
+$$
+
+其中 R 是 S1 原生团队奖励，`R=.7C+.3Q−height`。在所绑定的 `use_prior_corrected_intrinsic=False`、`normalize_intrinsic_mi=False`、`intrinsic_mi_clip=2` 条件下，两个 ell 是对应真实技能的判别对数概率经过现有裁剪的结果；团队项读下一状态，个体项读下一观测及相应技能条件。原生 c=.5 的有效权重是 **.025 和 .01**。[^csl2-agent][^csl2-config]
+
+因此，建议两个臂明确命名为 **M：native mixed，c=.5** 和 **T：task-only low reward，c=0**。若用 g∈{1,0} 表示保留开关，则 `c=.5g`；这与直接把字段设为1完全不同。后者会把两项贡献加倍，回答的是“更强判别奖励与零奖励怎样比较”，不能称原生 D 的保留／删除。无需增加 c=1 的第三臂来解决命名问题。
+
+`task-only` 只限定低层 reward。T 仍有技能输入、FiLM、GRU、团队条件 critic、协调器、两个判别器的学习，以及原有熵正则。它不是 flat、无技能、无正则、无高层学习或 no-MI-network。这里不把两个判别奖励的共同删除拆成 team/individual 两个因果贡献，也不把这个受裁剪的实际配方称为理想互信息目标的完整消融。
+
+#### 四、这个开关要穿过的真实学习路径
+
+所读 current agent 的批量计算先完成判别器前向，再将 `legacy_mi_reward_coef` 乘进 team/individual 分量；`store_transition_batch` 将预计算分量传给 `_store_discoverer_experience`，实际写入 `store_rollout_step` 的是混合 `intrinsic_rewards_array`。低层 `compute_advantages`、returns、ValueNorm、critic 与 PPO 随后都消费这条低奖励路径。标量路径也读取同一系数。**所以 c=0 必须改变真实存储奖励及低层价值／优势目标，不能只让报告字段变零。**[^csl2-agent]
+
+与此不同，`store_transition` 向 `_d2_store_transition` 传入的是原始 `current_reward`；D2 高层片段累积的不是刚构造的低层混合奖励。保留这一路径，高层目标公式便不因该系数直接变化。但低层策略变了以后，世界轨迹、技能分布和未来高层回报都会随共同学习改变；“不直接改高层奖励”不等于“高层永远一样”。这类下游共同适应属于本次完整学习后果，而非需要事后强行消去的偏差。[^csl2-agent]
+
+为了保留明确比较，继续计算两个判别器输出，按原日程训练它们；不要改用 `disable_discriminator_training` 或跳过奖励计算的其他开关。T 可以记录未乘零之前的两个分量作诊断，但它们不进入低层 target。现有 reward baseline 的更新也不能被误写成已经把分量均值从实际 reward 中减掉。对异常／非有限分数及 fallback 要保留记录，不能让 mixed 实际因故退回 env-only 后仍被当作正常 M。这里要求的是现有语义的针对性核对，不是额外的研究准入试验。
+
+**匹配点需要随处理位置改变。** 两臂应有相同原生参数、初始 normalizer、头初始化和第一轮采集的外生随机输入；由于整轮采集后才更新，第一轮真实轨迹、原生奖励和实际技能应一致。第一轮 D2 高层原始目标也应一致。可是低层存储奖励从 c 开始就不同，首次低层 critic／PPO 更新不应被要求完全相同；照搬 B01“第一次完整原生更新一致”断言会把本次预期处理错判为故障。此后只匹配算法规则、机会和更新预算，不人为匹配状态访问或网络参数。[^csl2-construction][^csl2-agent]
+
+保留 `.99/.95` 的低层折扣／GAE、原有 ValueNorm 更新规则、critic 和 actor 更新次数。T 的 returns、critic 参数和 ValueNorm 实值可随其目标改变，不能用 M 的统计量替换以制造数值一致。因而结果包括目标尺度、价值拟合、有限优化与相对正则化的变化，不能再声称单独识别了“判别语义”或“梯度冲突”。第一轮记录一次原生 reward、两个未门控分量、最终 stored reward 及相应 GAE/returns 的直接一致性关系，比新建一套梯度余弦／中介解释器更切合这个问题。[^csl2-method]
+
+#### 五、负的判别奖励均值为什么不构成诊断
+
+题面最后一轮的环境／team／individual 均值确实显示两项判别贡献为负，相关日志也能读到这种结构。但对数概率本来可以是负数，均值不能说明优势方向，更不能说明 actor 的有用动作受到惩罚。这个原因不随其绝对值接近原生奖励而消失。[^csl2-question][^csl2-D][^csl2-G]
+
+一个足够小的分析反例是：在固定终止时刻 H 的任务中，给每步 reward 加一个与状态、动作无关的常数 b。若使用准确且含时间的价值，Q 和 V 在时刻 t 都增加同一个 `b*sum(l=0..H−t−1) gamma^l`，所以优势不变。b 可以很大、很负，仍不改变这个理想策略梯度的动作偏好。这是数学反例，不是声称当前判别项为常数。
+
+真实判别器会随学习变化，其分数可能依赖状态、技能和后果；当前 critic、GAE、归一化和有限训练也不是理想条件。因此删除项确实可能改变策略，但仅凭已报告均值，无法区分信息性奖励、近似常数、价值拟合负担或优化尺度等解释。**本次我选择不作机制归因的目标包比较**，不把缺少这个分解当成必须先加常数偏移第三臂或正面 toy 的理由。
+
+#### 六、最小完整比较与评价的解释
+
+建议保留题面主体：native S1、N6、每机 c10 容量、50 用户、k10、500 步、16 lanes×45 rollouts，M/T 各一个新的360k fit。容量 c10 与上文奖励系数 c 是不同变量；实现记录应使用完整字段名避免混淆。保留六个 team/individual 标签、实际 AR `mu=.9pi+.1/6`、team 原法则及真实前缀评分。沿 B01 已冻结的共同条件，个体高层熵仍为 H(mu)、团队熵 H(pi_Z)，低层 Gaussian 熵及原系数不变；不要在新批次悄悄恢复旧题面 H(pi_i) 或删低层熵。原始 Gaussian 动作仍存储并评分，只在物理入口裁剪。[^csl2-prior][^csl2-config][^csl2-construction]
+
+两项现有 factual head 可以在两臂都保持 detached、同日程训练，以复用 D 的已检查路径；没有 auxiliary actor optimizer，也没有新 predictor fit、planner 或实际四格评价。诊断头本身不是本次科学处理，预测误差也不承担选择任务。继续花这点头训练是管线复用的成本选择，不证明其必要；因为它们和两个判别器仍运行，不能把 T 的潜在胜出宣传为已测得训练计算节省。
+
+旧 B01 入口固定了自己的对象、种子和臂；现成字段的存在不等于新比较已被完整实现。新前瞻记录应绑定两臂实际解析后的 `legacy_mi_reward_coef`、lambda、prior/normalization/clip、process/HA 关闭状态及新随机地址；仅保存 `vars(config)` 可能遗漏类属性，不能据此声称已保存有效配置。所选新入口／局部适配应保留冻结 B01 的含义，不通过改旧输出、复用旧 D 终点或覆盖旧运行来缩成一个 fit。必要的实际路径检查和独立 review 沿现有工程方法即可。[^csl2-config][^csl2-entry][^csl2-method]
+
+评价上我保留 **同一套预先封存的新32世界**，初始／最终、own／uniform、M/T 都用它；uniform 采用每个世界预定、跨臂对应的标签随机流，两种选择器下低层均为裁剪后的均值动作。评价不更新参数／normalizer，不消费训练 RNG，不用初始读数调参或挑种子。主要结果定义为
+
+$$
+d_w^{\rm own}=J^{\rm own}_{T,45,w}-J^{\rm own}_{M,45,w},
+\qquad d_w^{\rm uniform}=J^{\rm uniform}_{T,45,w}-J^{\rm uniform}_{M,45,w}.
+$$
+
+固定读取 final45 own 均值及全部逐世界有符号差异；uniform 是预写的配套用途读数，不能等 own 失败后升格替换它。同时保留绝对 J、C、Q、高度罚与 `50C` 的人数单位。没有经过验证的部署阈值，不把旧 `.03`、某个胜率或新 p 值发明成通过线。
+
+同世界设计增加的是有意义的**固定策略部署选择器比较**：对每个最终 bank，`J_own−J_uniform` 不再混有 B01 那种不同世界面板。它仍是整个选择规则的干预后果，包括新的访问分布，不是协调器“训练贡献”的单因素估计。`d_own−d_uniform` 可读作这一次实例的目标×部署规则交互，不是低层／高层各自解释了多少收益；跨臂标签语义和隐状态仍不能直接交换。
+
+同世界 initial/final 还允许读取每臂、每个选择器下自己的实际学习增量。共同初始化时，两个学习增量之差等于最终臂差，这是恒等式，不是另一份独立证据。one block 仍是每臂 n=1；32 世界、重复面板、窗口和读取两个选择器都不增加训练 n。任何世界误差条只反映这几个实例在所采评价条件下的测量不确定性，不能拿来宣布训练总体优势、等价或普遍有害。[^csl2-method]
+
+#### 七、预写结果分支与竞争投入
+
+**新的有利预测**是：T 的 final own 原生 J 有实际用途的改善，uniform 保留或改善，服务分量与不利世界的代价没有把增益变成不可取的取舍。即使标签较不易辨认，这也可支持保留 task-only 低奖励作为当前配方简化；不必先通过 MI 或 T 诊断。它仍是这个探索块的目标选择证据，不证明技能冗余，也不自动进入确认。
+
+若 own 改善而 uniform 明显受损，保留 own 包用途与选择器依赖的取舍，不称得到更可复用的 bank。若 own 下降、uniform 上升，主要预测没有兑现；这可以提出另一个 uniform 部署问题，但不能事后改主终点把本次计作成功。两种服务都没有有用改善，或只剩判别准确率／预测误差变化，就结束这次 task-only 删除配方的追加投入，保留原生 mixed 作为工作参照；不自动扫中间系数、熵、训练尾部或另一批种子。负结果也不能扩大成 MI 必要、所有 task-only 无用或整个技能问题关闭。技术失败保留成本，并隔离其依赖的结论，不当科学阴性。[^csl2-governance][^csl2-method]
+
+**G/D 复制并非没有理由，但不是我当前首选。** 如果真正要决定的是“采用 G 加 uniform 的部署包是否值得”，一个新 G/D 块就直接检验其重现性，值得取代本次目标比较，而不是叠加在后面。当前 G 同时有 own 损失，且这种 uniform 用途尚未成为已选部署目标；新目标比较能更直接改变正在讨论的低层训练配方。不能仅因为 G 曾有一个正均值就把复制义务化。
+
+更便宜的、回答不同问题的替代是：在 B01 原 own-final 世界 `1700100..1700131` 上，给已冻结 D/G 各增加一个 uniform 面板，复用已保存的 own 结果。名义成本 **0 fits、32,000 评价步**，可补齐这两个旧 bank 的同世界选择器对照。它只能改变旧固定策略的部署判断，不能回答删除判别奖励后的学习，也不是 G 收益的独立训练复制；采用时须作为结果后提出的新零更新探索记录，不追加或改写 B01 原主结果。**我不把它列为两-fit 学习前的必经门槛，也不同时默认购买两项。**
+
+提高 uniform floor 仍缺少一个指定状态／组合的缺曝光预测；近 log6 的边际熵不能证明一切覆盖充分，却使单纯“再均匀一点”成为较弱投入。P 的范数／rank／target sweep 更需要区别于已失败故事的新预测，现在不选择。没有哪一项反面结果要求一定再造一个模块。
+
+#### 八、成本与本次阅读的边界
+
+按题面的直接管线复用方案：**2 fits，720,000 训练＋128,000 评价＝848,000 team transitions**。评价为 `2 arms×2 checkpoints×2 selectors×32 worlds×500`。不含四格分支、额外事实世界或新 readout 拟合批次。每 fit 沿原日程预期45次 native update stages，高层675、低 actor/critic各101,250、team/individual discriminator675/2,700；须以新运行实际计数为准。保留 detached 两头时每头315步，两臂共1,260头优化步，辅助 actor 步为0；720个训练 episode／臂不是720次独立训练。[^csl2-D][^csl2-construction]
+
+若 DM 为减少纯重复评价而复用经过核实、执行图完全相同的共同初始策略，则初始 own/uniform 只实际各跑一次：32,000初始＋64,000最终＝**96,000评价步，总816,000**，不丢初始估计量。复用必须明确记作同一份初始结果，不能同时声称128k物理步骤或两份独立面板。对当前已有按臂运行的管线，我接受128k以换取简单的端到端匹配检查；是否采用这个32k节省属于可在结果前选定的等信息实现选择，不值得另开咨询。
+
+B01 三 fit 的129.505699 runner-body分钟是已测历史量级，不能直接承诺新批次耗时。新评价面板、初始化、采集、原生更新、保留的头训练、检查/review、传输、读取和发布都应按实际发生报告；未完整计时的支持成本不等于零，共享节点进程 wall 不等于独占GPU时间。优先既定 wsl_4070、串行和真实节点准入，不因此预约或恢复任何其他方向的运行。[^csl2-question][^csl2-governance]
+
+**来源范围。** 本次科学推理使用固定 `24801c8facea0b06473f2005e7d0267e25afd972` 的问题、完整结果／重新考虑条目和第一份完整 Answer，指定 `fa7e75d2d5d52c63ce5d07cbf11ba96634583343` 的背景／三-DM计划，以及 `957a65c0155f88e5287c744f0f667192174f16df` 的冻结构造和 B01 实现。已读指定治理／方法的相关段落、三个 summary 的关键字段、相关训练记录和组合诊断，沿 current agent 的批量／标量奖励、低层存储／优势更新和高层 D2 原生信用追踪，并额外核对必要的 Config/E0 配置依赖。大文件曾在一种读取接口返回空正文，已通过 GitHub REST 内容读取取得需要的材料；没有仍阻断本建议的关键来源缺口。
+
+这不等于重新验收全部历史 `.pt`、全部训练数组、每条支路哈希或完整原始轨迹；我没有进行那种逐字节／数值重算审计，也没有执行新学习或评价。c=.5的纠正是固定源码和实际构造链所支持的判断，新 c=0 对照的有效配置、奖励恒等关系和运行后果仍待其自己的实现／执行记录验证。其他方向的结论按指定共享背景与链接段落使用，不声称重新审计其所有原始实验。本次没有依靠未读论文全文或本地文献库填补证据。既有方法要求已经足够，DM 读完并记录采纳／修改后自行选择，不需要把这份意见再送入一个批准循环。
+
+**MATERIAL_DISSENT: yes——将“原生 mixed=1”修正为实际字段0.5；支持0.5对0的两臂目标用途探索，不支持用该比较回溯诊断B01，亦不增加第三臂或自动后继。**
+
+[^csl2-question]: [本次固定问题、B01完整结果与重新考虑](https://github.com/CartmanFatass/My-paper-code/blob/24801c8facea0b06473f2005e7d0267e25afd972/docs/research/candidates/complementary_skill_learning/NOTES.md#pro-question-2026-09-23-task-objective-after-pair-auxiliary)，尤其其前两节完整结果／重新考虑；本文历史反面世界、梯度聚合和总成本按这些已提交记录引用，不冒称本次重算。
+[^csl2-config]: [冻结 B01 Config](https://github.com/CartmanFatass/My-paper-code/blob/957a65c0155f88e5287c744f0f667192174f16df/configs/config_1.py)；[本次 source_sha Config](https://github.com/CartmanFatass/My-paper-code/blob/24801c8facea0b06473f2005e7d0267e25afd972/configs/config_1.py)。`legacy_mi_reward_coef=.5`、lambda权重、prior/normalize/clip及process开关；同一blob `4f904bf96b4f56c4dcc85680687ddc34336ea9c5`。
+[^csl2-construction]: [冻结 runner.py](https://github.com/CartmanFatass/My-paper-code/blob/957a65c0155f88e5287c744f0f667192174f16df/experiments/candidates/complementary_skill_learning/b01/runner.py)，make_config、physical_step、run_fit、evaluate_panel；[冻结 learning.py](https://github.com/CartmanFatass/My-paper-code/blob/957a65c0155f88e5287c744f0f667192174f16df/experiments/candidates/complementary_skill_learning/b01/learning.py)，MixtureCoordinator、ComplementaryAgent、detached头／辅助更新；[E0构造](https://github.com/CartmanFatass/My-paper-code/blob/957a65c0155f88e5287c744f0f667192174f16df/scripts/run_flexible_skill_duration_e0.py)，Config导入、E0Config和_make_config。
+[^csl2-entry]: [冻结 B01入口](https://github.com/CartmanFatass/My-paper-code/blob/957a65c0155f88e5287c744f0f667192174f16df/scripts/run_complementary_skill_learning_b01.py)。旧对象／种子／臂绑定不自动成为新目标比较入口。
+[^csl2-agent]: [current hmasd/agent.py](https://github.com/CartmanFatass/My-paper-code/blob/24801c8facea0b06473f2005e7d0267e25afd972/hmasd/agent.py)，_discriminator_mi_reward、_compute_intrinsic_rewards_batch、标量compute_intrinsic_reward、store_transition_batch、_store_discoverer_experience、store_transition、_d2_store_transition、update_discoverer_from_rollout和update。以实际调用／数据流而非注释名称判断作用范围。
+[^csl2-prior]: [第一份完整Answer及B01前瞻合同](https://github.com/CartmanFatass/My-paper-code/blob/24801c8facea0b06473f2005e7d0267e25afd972/docs/research/candidates/complementary_skill_learning/NOTES.md#answer)，比较边界、signed-T解释、local-T-without-net-use分支，以及后续B01对H(mu)的明确共同绑定。
+[^csl2-D]: [D summary](https://github.com/CartmanFatass/My-paper-code/blob/24801c8facea0b06473f2005e7d0267e25afd972/runs/complementary_skill_learning/b01_d_260923901_957a65c01/summary.json)；[D training](https://github.com/CartmanFatass/My-paper-code/blob/24801c8facea0b06473f2005e7d0267e25afd972/runs/complementary_skill_learning/b01_d_260923901_957a65c01/training.jsonl)；[D combination](https://github.com/CartmanFatass/My-paper-code/blob/24801c8facea0b06473f2005e7d0267e25afd972/runs/complementary_skill_learning/b01_d_260923901_957a65c01/combination_diagnostic.json)。
+[^csl2-G]: [G summary](https://github.com/CartmanFatass/My-paper-code/blob/24801c8facea0b06473f2005e7d0267e25afd972/runs/complementary_skill_learning/b01_g_260923901_957a65c01/summary.json)；[G training](https://github.com/CartmanFatass/My-paper-code/blob/24801c8facea0b06473f2005e7d0267e25afd972/runs/complementary_skill_learning/b01_g_260923901_957a65c01/training.jsonl)；[G combination](https://github.com/CartmanFatass/My-paper-code/blob/24801c8facea0b06473f2005e7d0267e25afd972/runs/complementary_skill_learning/b01_g_260923901_957a65c01/combination_diagnostic.json)。
+[^csl2-P]: [P summary](https://github.com/CartmanFatass/My-paper-code/blob/24801c8facea0b06473f2005e7d0267e25afd972/runs/complementary_skill_learning/b01_p_260923901_957a65c01/summary.json)；[P training](https://github.com/CartmanFatass/My-paper-code/blob/24801c8facea0b06473f2005e7d0267e25afd972/runs/complementary_skill_learning/b01_p_260923901_957a65c01/training.jsonl)；[P combination](https://github.com/CartmanFatass/My-paper-code/blob/24801c8facea0b06473f2005e7d0267e25afd972/runs/complementary_skill_learning/b01_p_260923901_957a65c01/combination_diagnostic.json)。
+[^csl2-diagnostic]: [冻结runner的实际分支与T](https://github.com/CartmanFatass/My-paper-code/blob/957a65c0155f88e5287c744f0f667192174f16df/experiments/candidates/complementary_skill_learning/b01/runner.py#L291-L409)，signed_pairing、execute_branch、combination_diagnostic；对应D/G/P实际格子与聚合见以上三个combination文件。
+[^csl2-shared]: [指定RESEARCH版本](https://github.com/CartmanFatass/My-paper-code/blob/fa7e75d2d5d52c63ce5d07cbf11ba96634583343/docs/research/RESEARCH.md)，主题3–6及三-DM计划；[人数B08/B10记录](https://github.com/CartmanFatass/My-paper-code/blob/fa7e75d2d5d52c63ce5d07cbf11ba96634583343/docs/research/candidates/agent_count_generalization/NOTES.md)；[S7 B03关闭记录](https://github.com/CartmanFatass/My-paper-code/blob/fa7e75d2d5d52c63ce5d07cbf11ba96634583343/docs/research/candidates/uav_service_auxiliary/NOTES.md#2026-09-23--b03-second-common-replay-accepted-and-current-recipe-closed)。用途是限定相邻解释，不作本次matched baseline。
+[^csl2-governance]: [本次宪章](https://github.com/CartmanFatass/My-paper-code/blob/24801c8facea0b06473f2005e7d0267e25afd972/docs/project/OPERATING_CONSTITUTION.md)，§§1–5、7–8；独立DM责任、前瞻成本、探索限制、Pro建议及不自动扩批。
+[^csl2-method]: [本次科学方法](https://github.com/CartmanFatass/My-paper-code/blob/24801c8facea0b06473f2005e7d0267e25afd972/.agents/skills/hmasd-scientific-tools/SKILL.md)，Update the working explanation、Comparators、Statistics、Cost and exposure、Pro；[工程Checks and review](https://github.com/CartmanFatass/My-paper-code/blob/24801c8facea0b06473f2005e7d0267e25afd972/.agents/skills/hmasd-research-engineering/SKILL.md#checks-and-review)。
+
+## 2026-09-23 — Second Pro read, native coefficient correction and B02 decision
+
+The accepted follow-up key is
+`hmasd:f7f21d940b0912e333283ea03d1f86f5294b793810b74b2f301284d5b141650a`.
+Generation14 collected a complete 9,253-character chat answer, SHA256
+`a6bfd579506c443960522cabdefaf5f701d03214dd76d1d3feb0cddfaf2b7243`.
+The chat says no writeback and names `0173b116bf98f07482ba8619a691b0ee7aaac327`;
+that object is a Git blob, not an answer commit. Actual branch inspection instead found
+`3baf0bf61b01282609a02209000a9348fcd67fba`, directly parented by the pinned source,
+with a complete 15,731-character Answer. Both full bodies were read, including source-use
+limits. The repository answer is the one preserved verbatim above; the different chat body
+remains in local transport scratch, not overwritten or counted as another consultation.
+
+The first deliver call omitted the literal `## ` heading prefix and correctly failed to
+locate the section. The corrected read-only call returned **CONFLICT**, not DELIVERED:
+the new commit also changed two old notebook phrases, `difference is` to `difference was`
+and `no exit witness present` to `no exit witness`. No question text or scientific value
+changed. The DM fast-forwarded, preserved the complete answer and original commit, and
+restored those two historical phrases byte-for-byte from the pinned source. A direct
+before/Answer/after comparison verifies the recovered file equals the source outside the
+new Answer. Its stripped body plus LF has SHA256
+`ebae3c40c08378d4ed0cde8fcbe1464915ef8a6f33ffd5f80593eb9359547613`.
+This is explicitly reconciled delivery, not a claim that the automatic check passed or
+that the chat receipt described the repository correctly. No repeat Send occurred.
+
+**Adopt the material dissent.** A local construction through the actual B01
+`make_envs`/`make_config` path confirms `legacy_mi_reward_coef=.5`, lambda_e/D/d=1/.05/.02,
+prior correction and MI normalization false, clip2, enhanced_state false, gamma/GAE=.99/.95.
+The field is a Config class attribute; `getattr(...,1)` was only a fallback. My proposed
+raw coefficient1 would have doubled the existing discovery contribution. Correct the new
+comparison to **M=.5 versus T=0**, with effective discovery weights .025/.01 versus0/0.
+Old B01 used the same actual .5 in all arms and keeps its original result meaning.
+
+Adopt the objective-use question, native full learning, common-world own/uniform reading,
+and the limit that the treatment changes the low actor AND critic/ValueNorm targets.
+The D2 high reward formula remains the original scalar, but subsequent high learning and
+trajectories may differ. Both discriminators and entropy terms remain. This is not no-skill
+learning, a component-wise MI causal decomposition, or a diagnosed explanation of P failure.
+Negative discriminator means do not establish gradient conflict: the fixed-terminal,
+exact-value constant-reward-offset counterexample in the answer is valid under its stated
+assumptions, which omit our finite critic and jointly learning teammates.
+
+Current published main remains `efaff004b2759cc975ede680524dcd5896a450c8`, with owner pause
+lifted and this DM's lead unchanged. Read its relevant topics3–6 and owned standing: the
+B01 counterevidence, B08 real learning, B10 deployment/training distinction and S7 adverse
+auxiliary evidence continue to support a direct objective comparison over another auxiliary
+repair. They do not predict task-only victory. Fresh G/D replication remains the strongest
+alternative if uniform deployment becomes the chosen decision; that is not our present
+decision. Neither of Pro's optional zero-fit selector panels is selected. No other DM's
+question or Claude's paused FSD/G33 is taken over. Pro did not independently re-audit all
+historical raw arrays/checkpoints; its historical tables are not new empirical replication.
+
+Choose **B02**, two fresh complete native fits, M then T, each360k. Its conjecture is that
+removing the two discovery reward contributions improves final own native service while
+preserving or improving uniform service. The strongest contrary possibility is that the
+native reward helps exploration/skill formation and removal harms either or both. Buy the
+comparison because it changes the current low-layer objective choice, not because B01
+identified its failure cause. No new architecture, coefficient sweep or confirmation follows
+automatically. Favorable service with useful absolute learning, components and negative tails
+supports further consideration of T; both worse favors retaining M in this recipe. Opposite
+own/uniform signs retain the tradeoff and a failed own prediction; tiny/unstable differences
+remain unresolved, not equivalent. Continue investment only for a newly stated useful reason.
+
+## 2026-09-23 — B02 prospective contract and implementation L0
+
+**Question and exposure.** Full native S1 N6/capacity10/k10/50 users, six team and individual
+labels, 16 lanes x500 x45=360,000 training transitions/fit. M and T are two new cold starts,
+one common initialization/exogenous block, one fit per arm. Preserve B01 D's local
+skill-conditioned base/FiLM/GRU actor, global/team-conditioned critic, coordinator information,
+actual individual AR mixture mu=.9pi+.1/6 and probability replay, ordinary team factor,
+H(mu)/H(pi_Z)/Gaussian entropy coefficients .07/.05 as applicable, raw-Gaussian PPO with
+physical clipping[-1,1], entry recurrent masks, terminal-inclusive rewards, gamma/GAE=.99/.95,
+normalization rules and native schedules. Observation/state normalization stays off; each
+arm learns its own native value-normalizer statistics. No actor auxiliary optimizer.
+Both existing G/P factual heads train detached in both arms on the original ten-step factual
+windows/calibration/minibatches, preserving the checked common pipeline. Their errors do not
+select an arm. Each head expects45xceil(800/128)=315 updates, both arms1,260 in total.
+Native per-fit expected optimizer counts remain675/101250/101250/675/2700 in
+coordinator/low-actor/low-critic/team/individual order; actual counts must be reported.
+
+**Only treatment.** Explicit actual `legacy_mi_reward_coef` is .5 for M and0 for T,
+lambda_e/D/d=1/.05/.02 in both. Keep the original clipped, uncorrected discriminator-score
+definition and both discriminator forward/training paths. Process/HA/uncertainty reward
+paths remain off. The stored low reward is scalar native R/6 plus the two weighted discovery
+terms for M; it is R/6 for T. No multiplying the task term by6 and no change to D2 raw reward.
+Reward fallback/error is a technical failure, never a valid mixed arm silently becoming T.
+Effective inherited class attributes are explicitly serialized, not inferred from vars(config).
+
+**Fresh addresses.** Initialization260923911, heads260923912, train RNG260923913,
+private auxiliary shuffle260923914, evaluation RNG260923915. Training worlds1800000..1800015;
+all evaluation panels use the same new worlds1900000..1900031. These addresses do not reuse
+B01. Reset each fit from its own construction and these same seeds. The initial native state,
+normalizers, factual-head initialization and first raw rollout facts must agree; low stored
+rewards and first low update are expected to differ. Do not copy B01's first-native-update
+equality requirement. The first D2 raw segment targets remain paired. Later trajectories,
+head targets, normalizers and parameters are post-treatment outcomes, not forced matches.
+
+**Evaluation and cost.** For EACH fit actually execute initial own and initial uniform,
+then final45 own and final45 uniform: 4x32x500=64,000 zero-update evaluation transitions/fit,
+128,000 total; batch training+evaluation **848,000** physical team transitions, **2 fits**.
+This deliberately retains the existing standalone per-arm run structure and an independently
+executed initialization match. It costs32,000 duplicate initial steps over Pro's valid shared
+initialization option; it adds no training n or distinct initial evidence. The engineering
+simplicity avoids an inter-run evidence dependency, and no cost saving is claimed. No old
+rectangle/prefix/branch diagnostic, extra checkpoint, readout fit or additional outcome panel.
+For own, use deterministic native AR labels everyk10; for uniform, iid team/individual labels
+everyk10 from a fixed private evaluation stream indexed by the fixed world ordering, decision
+step and member. Both use mean low actions clipped[-1,1]. Each call resets that stream and
+its native worlds, preserves training RNG and verifies zero model/normalizer updates.
+
+Primary estimand is final45 **T minus M own native J** on all32 common worlds; retain each
+arm's absolute initial/final own/uniform J,C,Q,height penalty, users/step, action saturation
+and all signed differences/negative worlds. J=6*mean(sum scalar reward)/500. Same-world
+initial/final measures actual learning; own-uniform within a fixed bank measures this
+deployment-rule change. Difference-of-selector contrasts is an interaction description,
+not a high/low mediation share or skill necessity test. Do not swap drifted labels across
+arms. No invented .03/p-value/deployment threshold; no best-checkpoint choice or automatic
+extra seed. Thirty-two worlds do not increase one independent training instance/arm.
+Historical B01 D43.32min and G42.99min runner bodies are rough cost context only. Prefer
+wsl_4070, separate serial native admissions M then T at published inputs. Record actual wall,
+CPU/RSS/CUDA peaks with scope, training/eval counts and timing; unmeasured support stays unknown.
+
+**L0 deliverable and ownership.** Add local B02 implementation under
+`experiments/candidates/complementary_skill_learning/b02/`, explicit admitted entry
+`scripts/run_complementary_skill_learning_b02.py`, and meaningful tests under
+`tests/experiments/candidates/complementary_skill_learning/b02/`. Reuse B01 helpers/D learner
+without changing frozen B01, shared hmasd/config/environment code or old run artifacts. DM
+owns NOTES, RESEARCH, git index, commits, publication and launches. A bounded Implementer may
+edit only those new B02 paths; no science, fit launch, Pro, other writer's changes or children.
+
+**Checks and retained evidence.** Trace actual collector -> computed components -> stored
+low reward -> GAE/returns -> ValueNorm/critic/PPO, and separate D2 native segments. Add a
+small real-storage/update test with independent numeric reward/GAE checks, nonzero low learner
+movement and retained discriminator/high updates. M/T first raw facts/initial states match;
+actual first low rewards/targets differ by the declared component and can diverge after update.
+Verify scalar/batch coefficient semantics where relevant, evaluation order/RNG/no-update
+isolation, parameter/checkpoint identity, counts and no diagnostic execution. Persist a first
+rollout reward/GAE audit sufficient for DM recomputation and compact per-rollout finite/identity/
+fallback counters, alongside original curves, native counters, effective config and initial/final
+checkpoints. Audit must observe the real reward path, not replace it with a duplicate learner.
+Fault injection must show a computation fallback cannot silently pass the treatment check.
+Small internal test specs may shorten geometry/networks but are absent from the result CLI;
+CPU tests and relevant actual CUDA path checks precede acceptance. Independent Reviewer checks
+the high-risk semantic delta; DM accepts. Stop only the dependent action on real semantic,
+resource, pause or uncertain-acceptance conflict; retain failures. Inputs commit/push and fresh
+native admission precede each fit. Result-bearing runs never start from this prose alone.
