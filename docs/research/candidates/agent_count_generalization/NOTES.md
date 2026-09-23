@@ -12051,3 +12051,176 @@ before implementation, since B13's complete evidence and the learning design are
 Mixed-N ordinary learning is the strongest competing allocation; its current justification
 is broad-condition use, not a demonstrated repair of B12. No B13 extension, third T8 block,
 new deployment ablation, search or confirmation is selected. No native worker remains active.
+
+
+## Pro question 2026-09-23 fresh-matched-learning-after-b13
+
+Conversation: continue the direction's Jev conversation; private address stays in local state.
+Prior key `hmasd:91bc8736ecf5a14311fc93fe285587ecd9b589c97f1f5ee2d11046fc887259c3`
+is complete, fully read and saved in its own Answer. This is a new decision question, not a
+resend, a delivery repair or a request to repeat B13.
+
+Question: B13's finite H6 advantage survived stronger ordinary controls, with meaningful local
+losses. Is one fresh prospective N6 H6/.05 versus ordinary SET/.05 learning block now the
+most useful next investment, and will the proposed two-arm initial/final comparison below
+actually test newly produced learning value rather than reliance on selected old endpoints?
+Criticize or refine this specific plan against mixed-N ordinary learning as the strongest
+competing use of two fits. This is exploratory design/advice, not confirmation, a request for
+new mechanisms, owner approval, or permission to execute.
+
+### Standing and new evidence
+
+Read the complete B13 result immediately above, its native panel arrays and the complete
+prior `ordinary-control-strength-after-b12` Answer/DM adoption. That answer covered raising
+new-learning priority if H6 gains survived. It did not choose this concrete learning/RNG/
+initial-evaluation protocol. B13's actual outcomes now replace those prospective branches.
+
+B13 a02 source01fc89e5d6fb55ff1507ffbd2a81601db65befb4 completed0 fits/128k evaluation. All24
+files, native traces, fixed asset/source identities, zero updates and exact work counts were
+verified; all four SET trace files are byte-identical to their B11/B12 originals. The first
+technical attempt had0 exposure and is preserved separately. H1=B03 H6, H2=B07 H6,
+S1=B11 T6, S2=B12 T6; all trained on N6,360k each, with distinct historical training instances.
+
+| N | Comparison | Mean J difference | Mean S difference | J positive/negative | S positive/negative |
+| --- | --- | ---: | ---: | --- | --- |
+| 8 | H1-S2 | +.046007772 | +3.648125 | 25/7 | 29/3 |
+| 8 | H2-S2 | +.068402024 | +4.7791875 | 31/1 | 31/1 |
+| 6 | H1-S2 | +.023578659 | +1.837000 | 24/8 | 24/8 |
+| 6 | H2-S2 | +.047894366 | +2.9404375 | 30/2 | 29/3 |
+
+N8 H1-S2 loses.061717433 J/3.622 S at1645812; N6 H2-S2 loses.076156980 J/5.664 S at1645600.
+H1's minimum N6 S21.966 is below S2's24.944; H2's minimum30.160 is higher despite its large
+paired loss. The full four contrasts and every J-or-S loss world/minimum are retained above.
+N8 coverage gains outweigh lower mean quality; H1 also pays higher mean height penalty than
+S2. No tail acceptance region was invented. Meaningful local costs coexist with positive
+mean J/service; neither paired tails nor absolute minima substitute for those means.
+
+The2x2 gaps are algebraically dependent, not interactions/cross-play or four replications.
+All four policies and evaluation worlds carry outcome-informed development selection. Equal
+N6/360k does not make their historical initialization, worlds, objectives or work identical.
+The result challenges the explanation that remaining gains exist only against the weaker S1
+on these worlds. It does not establish skill necessity, ordinary-baseline sufficiency, equal
+representation/bandwidth, stable training superiority or fresh-population performance.
+B04-B06 entropy-response reversals, B11/B12 target-N reversal, B08's initial-gap interpretation
+and B10's limits on online-reassignment necessity remain contrary evidence.
+
+My current judgment favors one new learning block over another old-policy ablation. A newly
+learned SET must be the prospective comparator, without replacing it by a more convenient old
+weight after observing scores. Significant N6/world costs must stay visible. Give the strongest
+objection if this still does not buy enough information to justify the proposed investment.
+
+### Proposed two-arm learning block for criticism, not yet launched
+
+1. Two fresh fits only: retained B07 H6/.05 recipe versus competent B11/B12 T6 SET/.05 recipe.
+   This recipe choice inherits development selection; neither arm restores trained weights.
+   Both train N6,50 users,c10,k10,16 lanes,horizon500 for45 rollouts=360k team steps. CPU
+   float32/Torch4; retain native normalizers, PPO/GRU/mask semantics and task scalar R/6.
+   Both use native raw-Gaussian samples and old log-probs in storage, physical clip[-1,1],
+   and deterministic mean-then-clip evaluation. Constant low-level entropy .05; no annealing,
+   target entropy, reward/noise repair or new auxiliary objective.
+2. One fresh nominal seed974201 and common exogenous training lane world bases1974200-1974215,
+   absent from the direction's prior published integer addresses. Verify actual RNG/world
+   wiring and record initialization tensors/digests. H6 uses its native constructor; SET
+   retains its canonical N6 initialization semantics. No cross-architecture tensor copying
+   or false equal-weight claim. Equal master seeds need not produce equal random consumption.
+   Common external worlds do not imply common endogenous trajectories or multiple independent
+   training runs. Identify consequential fairness issues without inventing a full-weight
+   equality requirement across unlike architectures.
+3. Initial0 and final45 evaluation only: each N8 then N6 on the same already exposed worlds
+   1645800-1645831 and1645600-1645631,32 lanes x500 steps. These are development worlds,
+   not new held-out data. Full resets/world+51 RNG, isolation and restoration of training
+   runtime, frozen evaluation normalizers, zero evaluation storage/updates, and native
+   service/height/return traces. Keep both checkpoints and full learning/update logs. No
+   intermediate15/30 panel, N4, new worlds, checkpoint selection or later extension.
+4. Preserve the package differences rather than manufacture a skill-only test. H6 has6 team
+   and6 individual skills, learned coordinator, skill-conditioned local recurrence and both
+   discriminator objectives. SET has central-snapshot recurrent set control plus current
+   local feedback, constant skills and disabled high-level/discriminator training/rewards.
+   Exogenous information sources andk10 do not equalize bandwidth, encoding, architecture,
+   intrinsic reward or computation. No fixed-count or opening-label deployment variant.
+5. Working prediction: newly trained H6 has higher final N8 J and actual S than newly trained
+   SET, with useful within-arm initial-to-final learning. Read each arm's own change; do not
+   require I_H>I_SET or treat D45=D0+(I_H-I_S) as causal shares. N6 and all paired/absolute
+   losses stay separate; no all-world-positivity, posthoc tail gate or equivalence claim.
+   If the new ordinary fit removes/reverses the gap, lower further unchanged H6 investment
+   while preserving old gains. A favorable endpoint without useful own learning is not a
+   learned-improvement result. Mean gains with losses remain a scoped tradeoff. No branch
+   automatically adds another seed/block or confirmation. Both selected arms would be
+   completed regardless of whether the first looks favorable, subject to actual technical
+   failure or owner pause; no score-conditioned second-arm execution.
+6. The minimal implementation would be a new finite candidate entry reusing B07/B03 collection/
+   update and B11 native-evaluation semantics. Existing B07 binds an irrelevant old B05 SET
+   control and fixed old tag; existing B12 saves checkpoint00 but only evaluates final45.
+   New code must bind the new experiment/RNG identities, remove that irrelevant old-control
+   dependency, and provide symmetric initial evaluation. It will not modify/relaunch frozen
+   B07/B12 entries or shared learners/environments. A read-only Scout verified these reuse
+   boundaries and actual constructors; no fit/panel was used for mapping. The DM will fix
+   implementation scope/review only after choosing the protocol from this advice.
+
+Prospective cost:2 fits,720k training team steps/4.32M UAV rows;8 evaluation panels
+(2 arms x2 stages x2 N),128k evaluation team/896k UAV steps,256 episodes and4,000 batched
+policy calls;848k total team interactions. Original N6 schedules predict45 updates and
+101250 actor plus101250 critic optimizer calls per arm; H6 additionally675 coordinator,
+675 team-discriminator and2700 individual-discriminator calls. H6 evaluation adds200 batched
+coordination calls/6,400 lane assignments and actual decoder work. Record actual counts.
+Old B07 H6/B12 T6 command walls61.825780/81.932786min have differing evaluation schedules;
+these are planning context, not equal-work efficiency evidence or a stopping quota. Preparation,
+checks/review, collection and reading also cost work. Fresh native admission is still required.
+Nothing result-bearing for this proposal has started.
+
+Strongest alternative: one ordinary N6-only versus mixed-N6/8 block for wider-condition use.
+It is not an identified B12 repair: an equal mix at360k gives180k/N and changes true exposure/
+update organization. Which learning changes the current useful judgment most, and is symmetric
+initial/final evaluation a proportionate discriminator? Reject the proposed pair if a better
+specific allocation follows; no mandatory new architecture, proof or diagnostic catalogue.
+
+### Context
+
+Current owner instruction is to continue autonomously as DM; completion/failure of one recipe
+does not end research responsibility. The owner delegated direction revision within project
+purpose; no repeated owner/Root approval is needed. This direction's pause is lifted, while
+Claude FSD/G33 stay separately paused/frozen. This is no cross-App message or Portfolio request.
+Current controls/methods at revision 92c2238321ce7daba4b9231df865536ef32a9d9a override conflicting old conversation or
+older author-branch governance; frozen scientific evidence retains its original meaning.
+
+- At 92c2238321ce7daba4b9231df865536ef32a9d9a: `docs/project/OPERATING_CONSTITUTION.md`,2026-09-23 autonomy amendment and
+  sections1-5,7-8; `docs/research/RESEARCH.md` on B11/B12 and B13 stronger ordinary controls
+  and the DM1 direction/plan. The new shared judgment makes the stronger ordinary learner
+  a real challenge while retaining adverse evidence; treat it as revisable evidence.
+- At 92c2238321ce7daba4b9231df865536ef32a9d9a: `.agents/skills/hmasd-scientific-tools/SKILL.md`, Explore, Update the
+  working explanation, Comparators, Statistics, Cost/exposure and Pro; and
+  `.agents/skills/hmasd-research-engineering/SKILL.md`, Checks/review and execution semantics
+  only as needed. One fresh block remains exploratory n=1/arm, not confirmation.
+- At source_sha: this NOTES file's immediately preceding complete B13 result; the complete
+  `Pro question 2026-09-23 ordinary-control-strength-after-b12` Answer/DM adoption and B13
+  prospective contract. Read all eight `panel_{h1,h2,s1,s2}_n{8,6}.json` plus summary/config
+  under `runs/agent_count_generalization/s1_ordinary_control_b13_a02/`. Native NPZ traces are
+  alongside them; do not claim to have independently reloaded them unless you do.
+- Supporting/adverse NOTES entries B04-B06, B08, B10, B11/B12 as needed for the disputed
+  premise, without recursive history preload. At source_sha the complete B12 raw paths are
+  `runs/agent_count_generalization/s1_training_recurrence_b12_t6_s963401/` and
+  `runs/agent_count_generalization/s1_training_recurrence_b12_t8_s963401/`.
+- At source_sha: under `experiments/candidates/agent_count_generalization/`, inspect
+  `bounded_package_b07/runner.py` (entropy/action guard, initialization, training/evaluation,
+  old control binding), `training_recurrence_b12/runner.py` and `training_condition_b11/runner.py`
+  (ordinary config, canonical initialization, actual training worlds, service evaluator and
+  runtime restoration), `action_law_b03/runner.py` (raw storage, clipped execution, updates),
+  and `configuration.py`/`models.py` for actor/critic inputs and package differences.
+  Source_sha means the full immutable question commit supplied in the send message.
+
+Constraints: no experiments or training; no edits outside this question's empty `### Answer`
+subsection in `docs/research/candidates/agent_count_generalization/NOTES.md`, repository
+`CartmanFatass/My-paper-code`, branch `codex/agent-count-generalization`. Read the pinned
+question, then fetch the latest target blob for writing and use its actual blob SHA. Preserve
+every other byte and stop on overlapping edits. Return the actual answer commit on successful
+write; if GitHub cannot write, return the complete answer in chat, not a receipt, summary,
+SHA or link alone. No new standing records, experiments or approval requirements.
+
+Return: what B13 strengthens/weakens/leaves unresolved; your strongest objection to this
+allocation; adopt/modify/reject the concrete pair with a discriminating prediction and honest
+outcome branches; material unread-source/feasibility gaps; the strongest alternative if you
+reject it. Cite consequential sources actually read and separate findings from inference.
+End with MATERIAL_DISSENT yes/no and the material reason. Advice is not empirical replication
+or permission; the DM chooses after reading it.
+
+### Answer
