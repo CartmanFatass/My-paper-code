@@ -4749,3 +4749,31 @@ wakeup of this DM only. First fit's full terminal collection and scientific read
 current dependency. Then bind its exact summary bytes to the already-selected zero cell at
 the same executable source; first score does not select continuation. Neither admission,
 initial evaluation nor tests are recurrence evidence. No further fit or Pro request selected.
+
+## 2026-09-23 — B05 first observation checkpoint; first cell still running
+
+Read generation65 CHECKPOINT `971c34102c9b6e265d5711a1`, wake
+`a45f8757-fe40-4afe-a64e-e3fc6e579480`. The same native runner/supervisor identities remain
+running and consistent, with no exit witness or stderr. Refreshed published main; no change
+to owner pause/lead/this direction since `aecf372347b6779d75d63f1c0e36bc279d3e6e14`.
+Rearmed the same observation as generation66; no worker restart, new fit or Pro Send.
+
+Collected a byte-stable summary/training/panel snapshot at26.146190 command minutes:
+19/45 updates complete, rollout20 collected,160000 training/stored team steps,320 training
+episodes;48000 evaluation steps/96 episodes. All19 complete training rows equal training.jsonl.
+Independently verified raw action/old-logprob storage, clipped execution, native component and
+return identities, finite loss/scale histories, analytic raw entropy and pre-update alignment.
+Actor and critic each42750 optimizer calls, skill paths0. All six completed stage0/15 panels
+match their individual files, new world addresses, native J identities and frozen zero-update
+contract. Checkpoint00/15 paths and recorded hashes remain recoverable natively; full model
+loading remains part of terminal collection, not claimed from this snapshot.
+
+Stage15 .05-cell J for N4/6/8 is `.523017276209 / .496732112142 / .375559933241`;
+coverage is `.6471775 / .6250925 / .4838225`. These are one-cell descriptive values, not
+B05 treatment effects or comparable-world changes from stage0. After update19 sigma is
+`[1.9153083562850952,2.009573459625244,1.9602535963058472]`, analytic raw entropy6.277690577;
+rollout19 raw-coordinate saturation is.609597222 and boundary truncation.178284722.
+Growing raw scale/exposure reappears in this first fresh cell, but cannot establish the
+usefulness or mechanism of removing entropy without its fixed paired zero cell. Continue
+the declared45-update endpoint; no score-dependent change, old-H6 combination or added fit.
+Cost remains1/2 started,0 complete. This interim record changes no shared scientific standing.
