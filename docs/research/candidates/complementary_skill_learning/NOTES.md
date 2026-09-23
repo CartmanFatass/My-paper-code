@@ -1812,3 +1812,296 @@ are verified with both discriminator forwards retained and zero reward/storage e
 The inspection initially requested the final-only auxiliary_history field from the live
 summary; reading the actual training_rows auxiliary field completed this check. This was
 an inspection-schema correction, with no worker, source or scientific exposure change.
+
+
+## 2026-09-23 — B02 complete; removing low discriminator rewards loses native service
+
+**Acceptance and actual treatment.** T exited0 with a valid native exit witness and absent
+runner/supervisor. All13 files,59,798,459 bytes were collected unchanged and each local size
+and SHA256 matches the terminal executing-node copy. Read the full
+[T summary](../../../../runs/complementary_skill_learning/b02_t_260923911_e232332a0/summary.json),
+[45 training rows](../../../../runs/complementary_skill_learning/b02_t_260923911_e232332a0/training.jsonl),
+[factual predictions](../../../../runs/complementary_skill_learning/b02_t_260923911_e232332a0/auxiliary_predictions.jsonl),
+[first-rollout audit](../../../../runs/complementary_skill_learning/b02_t_260923911_e232332a0/first_rollout_reward_gae_audit.npz),
+both checkpoints, effective config and native execution records. Exit alone was not acceptance.
+T completes exactly1 fit/360,000 train and verified stored transitions/720 episodes/45 updates,
+plus64,000 zero-update evaluation transitions/128 episodes. All45 JSONL rows equal their
+summary rows; native optimizer calls are675/101250/101250/675/2700 in coordinator/actor/critic/
+team/individual order. Each detached factual head takes315 steps; auxiliary trunk steps,
+gradients and movement are zero. All native groups and both heads move; the entire parsed
+summary and prediction arrays are finite. Every reward/storage identity passes, with22,500
+batch calls and both discriminator forwards,360,000 verified rows and zero errors/fallbacks.
+
+M/T effective configs differ only in legacy coefficient.5/0 and derived team/individual
+weights.025/.01 versus0/0. Actual initial native/head tensors and normalizer fields match,
+as do both initial panels, the first raw-fact digest, first factual targets, unweighted
+scores and every saved first-rollout D2 array. T's stored low reward equals its environment
+component, with both discriminator contributions exactly zero; its low GAE/returns differ
+from M. Independent float64 recomputation gives reward discrepancy3.723543e-9, low GAE
+8.953976e-7, returns9.572699e-7 and raw D2 discounted-sum discrepancy2.976889e-8. All masks
+and terminal rows agree with the500-step horizon;800/4800 D2 team/agent rows retain16/96
+terminal rows. Across45 retained native-mu replays the largest sampled log-probability
+discrepancy is7.987022e-6. All45 prediction-line and factual-target hashes match800-row batches.
+
+Checkpoint native digests and file hashes match the runner records. Final T ValueNorm
+mean/variance/count are3.848361967/2.054179345/252000.0001 for coordinator and
+4.107563138/1.494487786/2160000.0001 for low critic; observation/state normalization is off.
+G/P head L2 movements are2.541636331/2.632975387. In every panel, native J=6*U/500,
+J=.7*C+.3*Q-height and users=50*C agree per world within3.552714e-15; optimizer and
+normalizer updates are zero. These are checks of retained artifacts, with no new simulation.
+Ignored initial.pt/final.pt remain in the local run and original output root linked by the
+[native manifest](../../../../runs/complementary_skill_learning/b02_t_260923911_e232332a0/launch-manifest.json).
+Their SHA256 values are `d4caf745cdca6588cad3b15558e5e8bade497890604e2d00cc25037a24c309a5`
+and `50e43c81afd71953c7ae0bb1ff57f9861a7096a1c3c617e927768c198906f8b4`.
+
+**Fixed result.** Both arms actually ran the four declared32-world panels. Each arm has one
+training instance; worlds and initial/final or selector readings add no independent training n.
+
+| panel | native J | coverage C | quality Q | height penalty | users/step | action saturation |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| common initial own | .3223081813 | .4370837500 | .1082786536 | .0161340398 | 21.8541875 | 0 |
+| common initial uniform | .3125646004 | .4342937500 | .1047281289 | .0228594633 | 21.7146875 | 0 |
+| M final own | .4684158033 | .6154187500 | .1738756567 | .0145400186 | 30.7709375 | .6316527778 |
+| T final own | .3715417709 | .5541875000 | .1336442410 | .0564827514 | 27.7093750 | .7130590278 |
+| M final uniform | .4979026203 | .6647775000 | .1696162194 | .0183264955 | 33.2388750 | .6181597222 |
+| T final uniform | .3731195544 | .5337575000 | .1454129486 | .0441345802 | 26.6878750 | .6898368056 |
+
+Primary final own T−M is**−.0968740325 J**,31 negative/1 positive worlds, median−.1065904995;
+users−3.0615625,27 negative/5 positive. Uniform T−M is**−.1247830659 J** and−6.551 users/step,
+32/32 worlds adverse for both. Own coverage/quality/height differences are−.0612312500/
+−.0402314157/+.0419427328; uniform−.1310200000/−.0242032708/+.0258080847. Quality is lower
+and height penalty higher in every world under both selectors. Own's lone positive J world
+1900029 (+.0330038173, +5.328 users/step) remains; coverage also improves in1900001/8/26/31
+while J falls. Worst own world1900028 loses.1933176771 J and9.56 users/step; worst uniform
+world1900026 loses.2148800298 J and13.112 users/step. These are height consequences, not a
+measured battery-safety or return-risk effect. All signed paired readings follow.
+
+| world | T−M own J | own users/step | T−M uniform J | uniform users/step |
+| ---: | ---: | ---: | ---: | ---: |
+| 1900000 | -0.0637639976 | -0.972000 | -0.1536642007 | -8.634000 |
+| 1900001 | -0.0160681091 | +2.310000 | -0.1344670510 | -6.980000 |
+| 1900002 | -0.1160408981 | -4.746000 | -0.0886695991 | -4.282000 |
+| 1900003 | -0.0597088893 | -0.822000 | -0.0371367443 | -0.294000 |
+| 1900004 | -0.1478158498 | -6.250000 | -0.1739020249 | -9.846000 |
+| 1900005 | -0.0944307071 | -3.428000 | -0.1017752176 | -4.730000 |
+| 1900006 | -0.1178520300 | -4.792000 | -0.1288812528 | -7.016000 |
+| 1900007 | -0.1323754174 | -5.290000 | -0.1404176126 | -7.428000 |
+| 1900008 | -0.0238673137 | +1.702000 | -0.1032740151 | -5.300000 |
+| 1900009 | -0.1273514559 | -4.562000 | -0.1395197536 | -7.770000 |
+| 1900010 | -0.1074398864 | -3.196000 | -0.1501413796 | -8.138000 |
+| 1900011 | -0.1052111794 | -3.426000 | -0.0824542671 | -3.336000 |
+| 1900012 | -0.1159832552 | -4.424000 | -0.1023439485 | -5.336000 |
+| 1900013 | -0.0733369449 | -0.916000 | -0.1084426379 | -5.398000 |
+| 1900014 | -0.1138738951 | -4.424000 | -0.0954124822 | -4.264000 |
+| 1900015 | -0.0868021016 | -2.756000 | -0.1255343353 | -6.682000 |
+| 1900016 | -0.1251994548 | -4.594000 | -0.1281527674 | -6.584000 |
+| 1900017 | -0.1290538774 | -5.264000 | -0.1408643881 | -7.754000 |
+| 1900018 | -0.1710544348 | -7.932000 | -0.1275200188 | -6.714000 |
+| 1900019 | -0.1632472323 | -7.314000 | -0.1048410715 | -4.548000 |
+| 1900020 | -0.1178681501 | -4.932000 | -0.0984680091 | -5.410000 |
+| 1900021 | -0.1448225281 | -6.424000 | -0.1018021914 | -4.590000 |
+| 1900022 | -0.0843308666 | -2.126000 | -0.0916450929 | -4.442000 |
+| 1900023 | -0.0568199444 | -0.656000 | -0.1220151954 | -6.500000 |
+| 1900024 | -0.1057411126 | -3.304000 | -0.2015920358 | -11.818000 |
+| 1900025 | -0.1056256776 | -3.062000 | -0.1537549617 | -9.066000 |
+| 1900026 | -0.0076262473 | +2.494000 | -0.2148800298 | -13.112000 |
+| 1900027 | -0.1235248696 | -4.626000 | -0.0911466989 | -4.476000 |
+| 1900028 | -0.1933176771 | -9.560000 | -0.1592732781 | -8.430000 |
+| 1900029 | +0.0330038173 | +5.328000 | -0.0890107531 | -4.160000 |
+| 1900030 | -0.0711349793 | -1.402000 | -0.1618520443 | -9.090000 |
+| 1900031 | -0.0316838734 | +1.396000 | -0.1402030497 | -7.504000 |
+
+T still learns positive mean service: initial-to-final own/uniform J+.0492335896/+.0605549540,
+each23 positive/9 negative worlds; users+5.8551875/+4.9731875,28/25 positive worlds.
+Own's worst learning J world1900011 loses.093206078 and4.396 users/step; uniform's worst
+J world1900009 loses.082466537, and worst coverage world1900027 loses4.96 users/step.
+M's larger actual gains+.1461076221/+.1853380199 and its adverse worlds remain in the prior
+entry. For fixed final banks, own−uniform is−.0294868170 J in M (11 positive/21 negative)
+and−.0015777835 in T (15 positive/17 negative). T own serves1.0215 more users/step on average
+than T uniform but has worse quality/height. The resulting objective×selector interaction
++.0279090334 is descriptive; it is not a high/low causal share, equivalence of T's selectors,
+or recovery of its primary prediction. The difference in learning gains equals the endpoint
+contrast because initialization matches; it is not a second independent experiment.
+
+Read every training row: T's mean native J starts.245066, fluctuates down to.184937 at14,
+and ends.317969 at the fixed45th; M ends.439353. The nonmonotone curves are retained; no
+intermediate row selects a checkpoint or changes the horizon. T raw G/P prediction losses
+fall from.016463949/.016871004 to.007205329/.007506806; these do not rescue the service loss
+or identify its cause. Higher T saturation is a post-treatment observation, not a diagnosed
+mechanism or a reason to change entropy after seeing scores.
+
+**Cost and closure of the accepted operations.** T runner body is77.932464185 min;
+native manifest acceptance-to-exit82.849918783 min. M+T runner bodies total125.633624592 min;
+M acceptance-to-T-exit is142.795139718 min including the serial collection/admission gap.
+T initial/final evaluation takes32.548875/29.190157s, collection1466.918166s and updates
+3138.746476s. User/system CPU4473.620426/493.619352s; process-lifetime RSS peak1,900,840 KiB;
+CUDA allocated/reserved1,527,112,704/2,107,637,760 bytes. Four Torch/native threads on the
+shared4070 node do not measure exclusive GPU occupancy. Different wall times are not an
+algorithm-speed contrast; total support time is unmeasured. B02 totals**2 fits/720k train/
+128k actual eval/848k team transitions**, with no extra panels or fits. B01's3 fits remain
+separate prior selection exposure; this direction has now started5 fits, with both adverse
+recipes and all native output retained.
+
+After byte verification, the native collector previewed and then removed only T's disposable
+source snapshot `aa031988b2da488d9549376deeec963a`, checking terminal identities, process
+references, clean source and durable reachability. Claims, manifest, original outputs, local
+checkpoints and author checkout remain. Generation22's T-ready event was consumed into23;
+all B01/B02 and prior Pro operations are terminal, with no training still running for this DM.
+
+**Belief update and decision.** The prewritten favorable own-plus-uniform prediction fails.
+This active, correctly stored objective intervention weakens the usefulness of deleting these
+two low reward contributions in the tested finite-learning recipe. It supports keeping native
+mixed as the current working reference. It does not establish MI necessity, universal task-only
+failure, a discriminator-semantic mechanism or a causal explanation of B01 P. Task-only's own
+positive learning and lone favorable endpoint world remain evidence against those stronger claims.
+Both actor and critic/ValueNorm targets, later visitation and joint learning changed as declared.
+Negative reward means, saturation, predictor errors and discriminator accuracy do not resolve
+which path caused the result. No constant-offset, coefficient, entropy or tail sweep is implied.
+
+Reuse the full second Pro Answer's section7, which explicitly covers both deployment rules
+worsening: close this task-only deletion recipe's additional investment, keep mixed and do
+not automatically repeat seeds. No new consultation is needed to accept or close this fixed
+comparison. B01 P's local positive T without net use and G's uniform gain with own loss retain
+their meanings. Project responsibility continues under constitution2; recipe closure is not
+exhaustion of the useful-skill question.
+
+## 2026-09-23 — Reconsider useful learning after the objective comparison
+
+Current published main is `3fac8a9467534ed56ba7babd0417cf1f3c917d15`; owner pause remains
+lifted, this lead is unchanged, and Claude FSD/G33 retain their separate controls. Its
+RESEARCH topics3–6 do real work here: B01's active auxiliary failure prevents assuming that
+richer pair structure helps; the new B02 result prevents assuming native discovery reward
+should be removed; agent-count B04/B05/B06 show matching reduced-noise diagnostics with
+opposite service signs, lowering the value of a saturation-driven entropy rescue. B08's
+actual learning and B10's distinction between selector deployment and training contribution
+prevent interpreting useful M+uniform as no high-level training need. S7 auxiliary reversals
+further favor testing recurrence of a service lead over equating factual accuracy with value.
+No other direction's fit is a matched comparator or is taken over.
+
+The remaining concrete positive lead is B01 G's uniform-vs-D gain+.019697695 J/+1.1258125
+users per step, despite its own loss−.031850847. It was one selected development block.
+B02 M's same-world own−uniform gap−.029486817 strengthens the practical reason to specify a
+deployment rule, but does not replicate G or identify a broken coordinator. I tentatively
+prefer asking whether a new, unchanged G/D training block under a prospectively primary
+uniform deployment is worth buying. That would test actual learned-bank package recurrence,
+not resurrect P, rename a failed prediction, or establish complementary interactions. Its
+strongest objection is the small selected G lead and uncertain relevance to distinctive skill
+combinations; another expensive pair could only leave two incomparable exploratory positives.
+A concrete cheaper alternative is the old Pro's0-fit32k panel completion for frozen B01 D/G,
+which answers a different deployment question and buys no new training replication. A material
+revision to training-time selection is another possible question but needs a concrete comparator
+and distinct prediction; current near-uniform marginal label entropy does not diagnose missing
+joint support. These are choices for criticism, not a three-item batch or a mandatory new module.
+The changed investment question and new adverse evidence need a focused consultation; existing
+advice covers B02 closure but did not select this next use question. No successor fit is frozen.
+
+## Pro question 2026-09-23 useful-learning-after-objective-failure
+
+Conversation: new Jev-account conversation; its address stays in private operation state.
+This is a new scientific question after the two completed earlier consultations.
+
+**Question.** After the fully accepted B02 M/T result and B01 D/G/P history above, what is the
+single most useful next investment for learning useful skill-conditioned UAV behavior and
+combinations? Criticize my tentative preference for one new G/D training block with uniform
+as the prospectively primary deployment rule. Choose that, the concrete zero-fit deployment
+comparison, a better specified learning question, or no worthwhile feasible continuation,
+with an evidence-based reason. I need a choice whose result can change the working explanation,
+not a quota of candidates, a new approval gate, or a third fit appended to B02.
+
+**What changed and what is already decided.** B02's correctly implemented .5-to0 low reward
+intervention gives final own T−M−.0968740325 (31/32 adverse), uniform−.1247830659 (32/32
+adverse), quality lower and height penalty higher in all worlds under both rules. T still
+learns+.049233590/+.060554954 own/uniform from common initialization. Each arm n=1; M own
+still loses to M uniform by.029486817 on the same worlds. We accept the prior answer's
+both-worse branch and close additional investment in this deletion recipe, retaining mixed
+as a reference. We do not infer ideal-MI necessity, skill necessity, high-level redundancy,
+reward-gradient conflict, or B01 P's failure mechanism. Full adverse/signed readings, costs
+and implementation checks are immediately above; read the actual outputs for consequential
+claims. B01 G/D and P's local positive T remain contrary/surviving evidence, not new replications.
+
+**Candidate for criticism, not an accepted run.** Two fresh native S1 N6/c10/k10/50-user cold
+starts, D versus unchanged generic factual auxiliary G, each360k team transitions and45
+updates. Retain native mixed coefficient.5, skills, full native high/low learning, information,
+AR mu=.9pi+.1/6, original entropy, raw Gaussian PPO/execution clip, normalization and native
+schedules. D trains both heads detached; G uses only the original generic full-input MLP head
+for base/FiLM/GRU auxiliary gradients, with the original.05 trunk scale, Adam.0003, norm cap.5,
+800 factual ten-step windows/rollout and315 auxiliary trunk steps. P is detached in both;
+no pair-head rescue, rank/norm/target/entropy search or component mechanism claim.
+
+Use a new common native/head/rollout/shuffle training block and fresh training world addresses,
+to be fixed prospectively if selected. My provisional design retains the original B01 uniform
+worlds1700200..1700231 as already-read development conditions and evaluates initial/final45 ×
+own/uniform in both new arms there. Fix a new common evaluation label stream before running;
+please flag whether changing that stream defeats the particular recurrence question and which
+choice gives the more useful comparison. Uniform G−D is the new primary service estimand;
+own stays a required adverse-consequence reading. Holding development worlds does not make
+this confirmation or held-out generalization. Initial/final reads must show each arm's learning;
+within-bank own/uniform measures deployment-rule change, not learned-coordinator contribution.
+Historical G/D is evidence motivating selection, never a free new baseline fit.
+
+This costs **2 fits/720k train/128k actual evaluation=848k team transitions**,45 native update
+stages per fit, each675 high and101250/101250 low actor/critic steps,675/2700 discriminator
+steps,315 steps per factual head; G adds315 auxiliary trunk steps, D0. No four-cell branches,
+planner, extra endpoint or automatic third training block. Prior native runner bodies span
+about43–78 min per fit on a shared node; this is cost context, not a runtime guarantee.
+The proposed recurrence decision is whether this selected uniform service lead survives a new
+learning trajectory, with component/negative-world costs, enough to keep the package worth
+further study. A positive mean alone does not establish a stable default or complementarity;
+please sharpen what each outcome should change and the best reason not to buy the comparison.
+
+**Strongest concrete alternatives.** The prior Pro suggested two frozen B01 D/G uniform
+panels on their original own-final worlds1700100..1700131:0 new fits,32,000 mean-action
+zero-update evaluation steps, pairing with their retained own panels. That can change the old
+banks' selector/deployment reading, but adds no independent learning evidence. Do not make it
+a compulsory preliminary to the two-fit proposal or silently buy both. A training-selection
+comparison could instead address whether the behavior-generating high-level law helps form a
+usable bank; a uniform-training arm changes high policy gradients/support as well as downstream
+experience, so define what it actually identifies before recommending it. A targeted revision
+or another useful question is welcome only with a distinct prediction, a competent comparator
+and concrete fit/non-fit cost. A negative result does not oblige endless rescue; a completed
+batch alone does not justify idleness. Do not take over active N-generalization/S7 directions
+or reopen paused Claude FSD/frozen G33. You may reject my preferred candidate.
+
+**Context and source precedence.** Unless explicitly named otherwise, these paths resolve
+at the full `source_sha` supplied in the message:
+- Governance: `docs/project/OPERATING_CONSTITUTION.md` §§1–5,7–8. The2026-09-23 owner delegation
+  permits DMs to revise worthwhile work without a new owner approval; current project pause
+  is lifted, with the FSD/G33 exceptions above. Pro advises and the DM decides.
+- Methods: `.agents/skills/hmasd-scientific-tools/SKILL.md`, Update the working explanation,
+  Use and revise shared understanding, Comparators, Statistics, Cost and exposure, Pro.
+  Engineering Checks/Runtime notes only for a disputed feasible implementation, not a whole
+  historical control-plane audit.
+- Shared background: `docs/research/RESEARCH.md` topics3–6 and the three-DM plan at published
+  `3fac8a9467534ed56ba7babd0417cf1f3c917d15`. The reconsideration entry explains why B04–B06's
+  noise/service reversals, B08 learning, B10 selector limits and S7 auxiliary reversals matter;
+  they are bounded other-direction evidence, not concurrent baselines for us.
+- Own standing: this notebook's B01 complete result, second complete Pro Answer (especially
+  §§6–7), B02 prospective contract, M reading, complete B02 result and reconsideration entries.
+  Current new B02 result supersedes the older main row's T-running status.
+- Evidence: full `runs/complementary_skill_learning/b02_m_260923911_e232332a0/summary.json`
+  and `b02_t_260923911_e232332a0/summary.json`, their `training.jsonl`, effective learner configs,
+  prediction/audit metadata and native counts; the B01 D/G/P summaries under tags
+  `b01_d_260923901_957a65c01`, `b01_g_260923901_957a65c01`, `b01_p_260923901_957a65c01`.
+  Read selected native arrays/rows for the proposed contrast; say what you did not re-audit.
+- Frozen meanings: B01 implementation/input `957a65c0155f88e5287c744f0f667192174f16df` and
+  B02 input `e232332a03474189d58046d57d22785f150ae5b4`, their bound prospective entries,
+  `experiments/candidates/complementary_skill_learning/b01/{learning,runner}.py` and
+  `b02/{learning,runner}.py`. New methods do not rewrite old objectives, worlds or endpoints.
+  Read exact functions only where an assumption about G/D or selection requires them. No
+  literature census is requested; a primary-source/simple-model bridge should resolve a
+  specified ambiguity and state the MARL coupling it omits, not stand in for actual learning.
+
+**Return and writing constraints.** Return the strongest objection, strengthened/weakened/
+untouched judgments, one recommended next observation and its strongest alternative, signed
+intermediate/native predictions where applicable, scope limits, actual fit/non-fit work and
+MATERIAL_DISSENT yes/no. No required new mechanism or idea count. Do not train, evaluate,
+change code, grant budget, create extra records or approval requirements. Write only this
+question's initially empty `### Answer` subsection in
+`docs/research/candidates/complementary_skill_learning/NOTES.md` on branch
+`codex/complementary-skill-learning`. Read the pinned question, then fetch the latest target
+blob before editing and use that actual blob SHA. Preserve the entire question and every other
+byte exactly, including historical tense; stop on overlapping edits. Report the actual answer
+commit on success; on write failure give the complete answer in chat, not a receipt, link or
+unverified SHA. Private Jev-account addresses/identity never enter the repository.
+
+### Answer
