@@ -7819,3 +7819,476 @@ Cite sources actually used and identify decision-critical unread inputs. `MATERI
 concerns the proposed reading/comparison, not permission.
 
 ### Answer
+
+GitHub 读取正常，但本轮连接没有可调用的文件写入操作，因此未发起写入，也没有产生新提交。最新回读的本题 ### Answer 仍为空。以下是完整答复。
+
+Answer
+一、建议：保留六个面板，检验明确的部署替换；影子计算缩到真正影响判读的路径
+
+我建议选择这次比较：两个原始 final45 策略、三个既有测试 N、六个 clamped 面板，0 fits、48,000 evaluation team steps；复用原始未干预输出，不增加世界、检查点、训练或计数值扫描。 SET 的两个显式入口作为一个联合干预，H6 的协调器入口作为另一个包内干预，不先拆成入口归因格子。
+
+hmasd-pro-question-count-fixed-…
+
+值得购买的判断是：
+
+这些既有策略在未见 N 上，是否因使用原来的显式 count/8 延拓而承担了一个可由固定到训练值消除的部署代价？若 SET 确有原生服务收益，是否足以把这个部署版本保留为后续普通比较器评估的候选？
+
+这不是证明“人数特征设计错误”，不是从 B08 的负 Delta 推导出的修复，也不是新训练出的更强基线。它比较的是两个可执行的冻结策略版本：原始版本与只替换指定内部特征的版本。正结果能提供具体的部署改进；有效干预后的无益或有害结果，则降低继续追逐这项特定替换的理由。两种结果不必都导向下一次训练。
+
+我选择保留缩减版影子计算，而不是每个包每一步都额外调用完整 agent。 在 N4/N8，SET 检查同一预决策输入与记忆下的动作均值及下一隐藏状态；H6 只在实际 k10 技能重选时检查同一输入下的完整技能选择。N6 不增加影子调用，保留其原生恒等性检查。按现有同步节律，这最多增加 1,000 次 SET actor 前向和100次 H6协调器前向，而非3,000次完整影子策略步。它购买的是“未见行为响应”与“行为改变但没有服务收益”的区别，不代替原生评价。
+
+**最强的反对理由仍然成立：**固定到 .75 只是许多训练点之外的延拓之一，可能偶然改善已知世界，却没有解决普通基线的充分性或识别训练机制。若任何结果都只会得到“再试一个常数”的后续动作，这次实验就不值得做。我的支持以相反的判读为前提：有用则保留这个明确版本，无用则结束这项固定值替换的自动延伸，不把有限否定变成另一轮搜索的理由。现行方法支持这样的有范围诊断，也明确不要求失败后必须创造新架构。
+
+二、B08 已经改变的判断应保留，但不能替这条通道提供因果证据
+
+B08 支持的是两包都有实际、有限的训练增量。共同最终世界上，H6/SET 的 unseen J 自身增量分别为 +.215503／+.244588；两包在每个 N 的平均覆盖、质量都改善，惩罚都降低。最终策略的平均 J 和覆盖也都超过两份初始策略。这削弱了“保留未训练 H0 就足以替代训练终点”的解释，却没有诊断出初始化缺陷。
+
+我用本轮读取的 B08 初始数组与上一轮已直接读取、且版本比较确认未改动的原始 final45 数组，重算了 N8 的关键读数：H6 自身 J 增量为 +.229640442，SET 为 +.238906376，Delta 为 −.009265934。世界1545810中两者分别改善 +.130369248／+.331124364，但最终排序转为 H6 落后；世界1545802中 SET 自身 J 降低 .007000247，覆盖少 6.552人/步。这些反例分别说明“相对落后不等于自身退化”和“平均改善不等于每个世界都改善”。
+
+因此，本次应当：
+
+加强最终包优势、自身学习增量、服务分量必须分别判断的认识；削弱由负 Delta 指定初始化修复、由低 sigma 指定服务机制的解释；保持未决普通比较器充分性、技能因果作用、训练总体排名和具体数量迁移瓶颈。指定 main 已将这些区别写入共享背景，并结束初始／最终诊断，而非选择初始化匹配或自动训练。
+
+新的计数通道理由来自另一项源码事实：训练只见 N6，而特定动作路径上的 count/8 输入部署时变为 .5 或1。B08 没有证明这项变化有害。 B04/B05 相反的熵响应和 B06 的面板例外也没有证明它有害；它们只要求这次继续用实际 J、覆盖和反面世界判读，而不把输入或诊断变化本身当成成功。
+
+三、简单模型桥接正确，但它说明的是延拓歧义，不是“未学习的权重”或正确修复
+1. 这项局部非识别性确实映射到实际代码
+
+对某一入口后的仿射层，写成
+
+z=Wf+vc+b,c
+0
+	​
+
+=.75.
+
+令
+
+v
+′
+=v+d,b
+′
+=b−dc
+0
+	​
+
+,
+
+则
+
+z
+′
+−z=d(c−c
+0
+	​
+
+).
+
+在 c=c
+0
+	​
+
+ 时，对所有其余输入 f，该层预激活完全相同；在其他 c 上可以不同。实际 StateSetEncoder.output 和 SetActorBase.fusion 都以带偏置的线性层接收包含该标量的特征向量，因此这个局部例子不是脱离源码的类比。
+
+但恒定输入不等于对应权重没有被训练。只看经该仿射层传播的数据损失梯度，有
+
+∇
+v
+	​
+
+L=c
+0
+	​
+
+∇
+b
+	​
+
+L,
+
+它可以非零。问题是训练点上的数据没有单独区分这两个方向，而不是梯度不存在。初始化、正则化及实际优化过程会选出某个延拓；本次没有由此证明其选择不好。
+
+冻结后，把这一入口的 vc 换为 vc
+0
+	​
+
+，在精确算术下可理解为将该项折入偏置、取消这一显式坐标的变化。这是解释干预功能的等价关系，不是建议修改检查点权重。 它也不意味着“删除该特征后重新训练”具有相同优化过程。
+
+对单一入口、其余输入固定时，N4 的该层扰动为 +.25v，N8 为 −.25v。这既不推出两个 N 的服务效应必须反号，也不推出二者都受益：其他特征、循环状态与物理条件不同，且后续有非线性、离散选择和闭环反馈。SET 的两个入口联合改变时，嵌套编码器的输出还会改变外层的其他输入，不能把完整干预简化成一项直接线性偏移。
+
+2. 同样正确的训练点，可以支持相反的干预后果
+
+以下仅是代数反例，不是新的实验。
+
+设一个简单策略为 a(c)=c，训练只见 c
+0
+	​
+
+。若收益为 −(a−c)
+2
+，原延拓在每个 c 都正确，固定到 c
+0
+	​
+
+ 会伤害未见 c；若收益为 −(a−c
+0
+	​
+
+)
+2
+，相同策略在训练点同样正确，但固定到 c
+0
+	​
+
+ 会改善未见 c。训练点拟合和仿射歧义本身不能区分两种情况。
+
+实际 UAV 问题还包含几何、干扰、容量、联合动作、技能分配和共同训练；这个例子没有它们。因此，它足以解释为什么存在可检验的延拓选择，不足以提供正确常数、服务符号或机制证明。原附件对这些限制的表述是恰当的。
+
+hmasd-pro-question-count-fixed-…
+
+四、干预位置成立；必须按模块实例替换特征，不能改“人数变量”
+
+本次应固定以下三个位置，保持整个联合干预的含义：
+
+包	实际替换位置	不应随之修改的对象
+SET	skill_discoverer.actor.base 的直接 count/8 融合特征	n_agents、输入宽度、实际观测行数、ego选择及均值分母
+SET	上述 actor 内 state_encoder 的 pooled count/8 特征	有效掩码、真实 UAV 坐标、masked mean/max、用户与时间字段
+H6	skill_coordinator.state_embedding 的 pooled count/8 特征	Transformer真实序列长度、观测行、重选节律及低层局部输入
+
+StateSetEncoder 的 counts 同时用于均值分母和显式特征；只能替换拼接进去的标量，不能把该局部变量整体改成6或 .75。 SetActorBase.n_agents 同时决定 reshape、输入布局和直接count特征，也不能整体改为6。MAX_UAVS 更不能改，因为它参与状态布局和掩码位置。
+
+应按具体模块实例定位，不能对所有 StateSetEncoder 全局替换。独立的低层 critic 和 discriminator 编码器不在这次干预范围内。还有一个需要说清的共享路径：H6协调器的同一编码特征同时供技能解码与高层 value heads 使用，因而它们的输出值可能随动作路径的干预一起改变。这里应保持独立 critic 模块、权重和更新行为不变，而不是额外修改网络来强行维持所有 value 数值相等。
+
+H6 的路径已落实到技能解码：状态编码进入 Transformer，之后确定性选择团队技能，并按顺序选择个体技能；低层 R_Actor 通过个体技能的 FiLM 调制，再进入循环层和动作头。logits 改变不保证技能改变，团队标签改变也不能单独证明实际低层动作改变。 SET 的特征则直接进入 actor base，之后仍经过 FiLM、循环层与动作映射。
+
+所以，“SET两处、H6一处”既不是相同组件干预，也不是敏感度排序的证明。H6 的离散选择可能截断小变化，也可能经自回归分配放大变化。较大的 SET 收益必须是可失败的实测预测，不能由入口数推出。
+
+真实 N、掩码、集合统计、观测内容和序列长度仍然携带数量及几何信息；把一个显式标量放回训练值，也没有把整个联合输入分布放回训练分布。这是内部特征替换，不是纯 N 干预或完整数量信息消除。
+
+五、主估计量应先回答自身收益，再回答包差是否缩小
+
+为避免与 B08 的初末增量混淆，令本次
+
+F
+a,n
+	​
+
+=
+J
+ˉ
+a,n
+fixed c
+0
+	​
+
+	​
+
+−
+J
+ˉ
+a,n
+original
+	​
+
+,a∈{H6,SET}.
+
+同样报告覆盖、质量和已加权惩罚的变化。选择性对比为
+
+Γ
+n
+	​
+
+=F
+SET,n
+	​
+
+−F
+H6,n
+	​
+
+.
+
+若原包差为 G
+n
+original
+	​
+
+，则
+
+G
+n
+fixed c
+0
+	​
+
+	​
+
+=G
+n
+original
+	​
+
+−Γ
+n
+	​
+
+.
+
+这使三项不同判断保持清楚：SET是否获得自己的收益、H6如何变化、差距为何缩小。正的 Γ 不足以证明 SET恢复；它可能主要来自 H6受损。 SET也不必超过H6，才算有一个有用的部署改进。
+
+保留 N4/N8 等权汇总，但“两个未见 N 都恢复”的表述需要分别有有用的 SET J及覆盖改善。只有汇总为正、某一N有损失时，是取舍，不是完整模式。质量或惩罚部分不利时也应照实保留，不必另增“全部分量必须同向”的成功门槛。
+
+N6 的角色不同。原显式特征已经为 .75，指定替换应是无处理操作，因此 F
+H6,6
+	​
+
+、F
+SET,6
+	​
+
+ 应为零。N6行为差异首先是资产恢复、作用范围、运行状态或数值路径问题，不是支持假说的科学结果。N6保持是构造属性，不是新增的学习保留证据；本干预按构造也不能消除N6已有的包差。
+
+hmasd-pro-question-count-fixed-…
+
+这次使用准确匹配的世界、状态恢复和执行法时，可以比较这项明确部署替换在固定资产上的效应。不能据此反推历史训练中“人数特征造成了多少损失”，也不能把 Γ/G 称为解释了多少比例的 H6优势。
+
+六、影子计算为什么值得缩减保留，以及它不能证明什么
+
+估计原生部署效应并不需要影子计算；要将零收益进一步分成“策略未响应”和“响应无益”，仅有特征替换与最终数组则不够。 本次提案明确保留“nonactivation”分支，缩减影子检查因此有判读价值。
+
+H6：只在真正重选技能时比较
+
+在 N4/N8 的实际重选事件，以相同预决策状态、联合观测、模式和随机状态，计算原特征版本的技能选择，与 clamped 版本比较。调用实际行动所用的选择路径，不用 get_value 或训练时的 teacher-forced 似然评价代替。
+
+影子自回归解码必须使用影子自己选择的团队技能和前序个体技能。若把实际 clamped 前缀强行喂给影子，测到的是条件于该前缀的局部差异，不是另一版本会选择的完整联合技能。实际源码明确包含这个顺序依赖。
+
+记录团队／个体选择是否改变即可作为主要离散响应证据；仅看到 logits 或 value 改变，不能升级为执行响应。非重选步骤不需要重复协调器影子。
+
+SET：动作均值之外，还要比较下一隐藏状态
+
+在 N4/N8 的同一 actor 输入、同一前一隐藏状态和mask下比较两个版本，记录原始均值、裁剪后动作，以及返回的下一隐藏状态。R_Actor.forward 本来就返回新循环状态，因此这不需要另建学习模型。
+
+本步均值相同而隐藏状态不同，不能称为完整未激活。 隐藏变化可能影响后续动作；均值改变也可能被执行裁剪吸收。再往后，即使执行动作不同，位置边界或服务汇总也可能吸收其原生影响。应分清这些层次，而不是把其中一项当成收益代理。
+
+影子不进入真实轨迹
+
+只有实际 clamped 前向的返回状态和动作进入下一步。影子不能推进timer、刷新两次snapshot、更新normalizer或留下RNG变化；使用显式复制的输入／记忆和只读前向，或者完整恢复实际受影响状态，而非每一步重新初始化agent。
+
+影子是在当前实际轨迹的预决策状态上做局部比较。轨迹分叉后，它不等于原始策略沿自己历史本来会出现的完整轨迹，也不提供中介份额。原始与clamped的总闭环收益，仍由两种各自完整运行的原生输出比较。
+
+若在所有相关事件上都没有动作相关选择／状态响应，可以给出这些已访问状态上的有限未激活判断；不是所有状态、所有 N或随机部署下都不依赖计数。若工程上无法可靠隔离影子副作用，宁可删除影子并将零结果写为“未见原生收益，行为响应未分辨”，也不要保留一个受污染的机制判读。这里适用已有的状态、数值与隔离检查方法，不新增审批层。
+
+七、正、零、混合与未激活结果，应分别改变什么
+观察	应有的更新与用途
+SET在两个 unseen N 的 J和覆盖有用改善，且 Γ>0	加强这两个入口的联合固定值替换具有可消除部署代价的解释。保留既有SET权重的新部署版本，用于后续另有理由的比较器评估；不称新训练成功、普遍正确延拓或充分基线认证
+SET改善，H6也改善得相近或更多	保留SET自身用途；选择性SET瓶颈解释较弱或未获支持。不能因差距没有缩小就删掉两个包的实际收益，也不能从点效应接近声称等价
+差距缩小主要因为H6变差，SET没有自身收益	不支持SET恢复。若SET有改善而H6也受损，应分别量化两部分，不将全部差距变化归给SET
+确认策略／执行响应，但平均J或覆盖无益、受损	降低“该联合固定值替换是有用修正”的判断，停止自动延伸。它不证明每个SET入口单独都无作用，也不因此自动启动拆入口或常数扫描
+特征已正确替换，但未观察到动作相关选择／状态响应	该部署路径在已访问状态上未表现出可利用的行为影响，削弱其是当前物质性瓶颈的解释；不是技术性“处理没做”，也不排除训练期作用或其他计数路径
+N之间、世界之间或原生分量间混合	保留完整平均及取舍。零均值可能是抵消，不能等同路径恒等；不按已知结果选择只在一个N启用的新规则，并冒充原定统一替换
+
+还有一个不同的分支：若预定位置根本没有替换、误动了分母／真实N、加载错误资产，或 N6无处理检查出现无法解释的偏差，那是实现或可比性问题。它不构成对计数假说的科学否定。
+
+上述分支也约束正结果：有用版本可以保留，但不能由这批多次使用的世界直接提升为通用默认。负结果可以结束这项部署替换，但不证明余下几何／池化路径“主导”了错误，更不关闭整个数量泛化方向。
+
+最强的科学竞争解释仍是附件所述的：显式标量是合法且已被恰当利用的上下文，实际困难在其余联合分布变化；固定到 .75可能没有作用，或破坏正确的条件适应。该竞争解释与有用固定值替换确实产生不同的可观察预测。当前没有更强的证据要求先做混合N训练、换网络或再次调熵。若拒绝这笔有限诊断，合理替代是保持现有包结论、不运行新实验，而不是立刻启动模糊的基线搜索。
+
+hmasd-pro-question-count-fixed-…
+
+八、成本、复用与实施边界
+
+六个面板的48k评价中，16k是两个包的N6无处理／恢复检查，32k是N4/N8的实际特征干预评价。总计仍为96 episodes、288k UAV-steps、3,000次批量策略步调用，0训练和0优化器更新。缩减影子另外至多1,000次SET actor前向与100次H6协调器前向；H6一次协调器调用内部仍包含Transformer和随N变化的自回归解码，不能把这些不同调用当成等成本单位。
+
+hmasd-pro-question-count-fixed-…
+
+只研究SET自身的部署用途，三个面板、24k步就能回答一个更窄问题。我仍选择六个面板，是因为本题还提出了“对SET更有利”的预测，H6响应可以直接反驳它；这不是为了形式对称而宣称组件匹配。无需进一步购买SET两入口各自的效果归因。
+
+复用必须绑定final45，不能沿用B08的初始资产身份。B08摘要明确将final checkpoint列为“仅身份引用、未加载或重评”；其初始策略恢复成功不能被说成已经验证了本次全部final恢复路径。新比较的N6恒等性评价因此也具有实际的兼容检查价值。
+
+保留原CPU float32／线程4、实际N运行时、完整reset、各自normalizer与执行裁剪。核对N6每世界原生J、scalar return和分量，不只核对均值或包差；数组一致不应冒充未记录轨迹的逐步实证检查。N4/N8的干预按实例定位与特征值记录另行核对，N6通过本身不证明其他N的位置都改对。
+
+B08实际command wall为 46.855948秒，只是邻近测量，不是本次带不同资产和影子路径的时间预测。恢复、实现、技术检查／独立审阅、准入、收集与阅读仍有成本；不存在“0 fits所以免费”的结论，也不需要为此再加profiling fit。
+
+本次仍是一份H6与一份SET已训练资产的条件比较。干预版本、16个世界、三个N、重复N6，都不增加独立训练样本数。已知开发证据之后选择此干预及世界，必须保留选择历史；不得从world bootstrap制造训练总体精度，也不以微小点差宣称等价。
+
+九、阅读范围与最终判断
+
+本答复以附件的完整177行请求及固定 a88f87b74ae6712dd026b26585c42df0d19330ee 为输入，读取了B08完整条目、source bridge、前次完整initial-policy Answer及采纳；共享背景使用指定 d153cf777f65ea94c38e20e074b782a925b881da 的相关主题和本方向standing。治理与科学方法的文件身份与此前完整读取版本一致，复用其未变化内容；本轮另读了指定工程检查段落。
+
+本轮直接读取B08六份初始面板的原生数组及摘要的身份、状态、规格和资源部分。B07/B05原始final数组、摘要及既有反面结果，复用上一轮实际读取；本轮版本比较确认这些文件未改变。N8自身增量与两个指定反例做了独立算术复核，未重算全部训练轨迹或DM的全部完整性检查。
+
+动作路径判断依据本轮读取的 StateSetEncoder、SetActorBase、配置、适配器、协调器实际技能选择及 R_Actor；相同blob的build_agent和既有配置路径复用此前读取。没有加载二进制模型，没有运行新策略／环境，也没有实施特征替换或影子检查。 三个入口的实际响应、原生干预收益和新wall仍未知；二进制恢复与运行状态隔离须由选定研究的实际检查提供，不能预称通过。
+
+MATERIAL_DISSENT: no。 我支持原六面板、三入口、固定 .75、原始final45控制的有限部署比较。建议具体收紧为：把恒定输入与权重未学习分开；按模块实例替换而不改真实人数或汇聚；先读各包J／覆盖收益，再读差距变化；将影子缩到未见N的实际决策路径，并在SET中保留下一隐藏状态检查。任何结果都只改变这项明确替换的用途判断，不自动选择新训练、扫描或确认，也不重新表决B07/B08已完成的结论。
+
+## 2026-09-23 — Fixed-count advice adopted; B09 deployment comparison and L0
+
+### Delivery, reading and choice
+
+The full Pro answer to key
+`hmasd:6b408c33b732864043175763a1c32c5a6ec46cb5a3289e2ae72630d874632a38`
+was collected from the one accepted question at
+`a88f87b74ae6712dd026b26585c42df0d19330ee`. The delivery verifier returned
+`NOT_DELIVERED`, with no candidate commits; Pro reported no callable write operation and no
+attempted repository write. Local, pinned and fresh remote question bytes agreed and the
+unique Answer was still empty. The DM saved the entire answer from chat above and read it.
+Its8427-character body SHA-256 is
+`641927dec0a67a910659b0ac59275b7689e512ac1d02b4dee8e5b59e574f4cfc`;
+the private file adds the transport's final newline. No private conversation identifier is
+published, no question is resent, and the collected observation was consumed at generation86.
+
+**Adopt with the explicit refinements below.** Pro reports no material dissent. The DM selects
+one frozen deployment study, `s1_fixed_count_b09`, to determine whether replacing specified
+explicit count scalars by their N6 training value has useful service consequences for these
+retained final policies. The six panels buy both packages' own effects and a falsifiable
+selectivity comparison; they do not buy component-matched causal attribution. A useful SET
+deployment version can be retained without surpassing H6 or certifying baseline sufficiency.
+An unhelpful replacement ends this particular automatic extension; no constant sweep,
+split-site factorial, retraining or confirmation follows from either sign.
+
+The source mapping, affine ambiguity and their limits were checked against the actual code.
+Constant c does not mean its weight is untrained: for the affine data-loss contribution,
+`grad_v L = c0 * grad_b L` can be nonzero. Changing only the feature is not editing/checkpoint
+biases and is not equivalent to deleting the feature before training. H6's coordinator shares
+its state embedding with high-level value outputs; those values may change incidentally even
+though the independent critic/discriminator modules, parameters and all updates stay untouched.
+The analogy omits nonlinear/recurrent closed-loop response, joint credit and co-adaptation.
+
+Current published main `d5b581106e2802593d21359508e6642c38ef90a6` was refreshed; relevant
+topics3–6 retain the B08 update at `d153cf777f65ea94c38e20e074b782a925b881da` and no newer
+owner pause applies to this direction. That background changes this design concretely: read
+each package's own native gain first; a smaller package gap is insufficient if caused by H6
+damage, a proxy response is insufficient without service, and reused worlds are not additional
+training samples. B07 retain, B08 useful self-gains, the N8 adverse worlds, B04/B05 entropy
+counterevidence and B06 panel exceptions remain. Pro's source reading reuses identified earlier
+arrays; its advice and arithmetic are not new experiments or verification of binary loading.
+
+### Fixed scientific scope
+
+Use only the two exact original **final45** assets and independent original final45 arrays:
+
+| Binding | H6 | SET |
+| --- | --- | --- |
+| Original tag | `s1_bounded_package_b07_h6_l05_s952201` | `s1_entropy_b05_set_l05_s953201` |
+| Arm / seed | H6 /952201 | SET /953201 |
+| Original source | `0a9e3fde40659fdcc1d05922c9920c5c04b2ab23` | `e2ea736457e0992fb53cf21aa775fd15da3d8231` |
+| Summary SHA-256 | `9d7f90523b74ea0fb4b9d7720086baefff13c22cdb41547c2b793764273b550a` | `136d090b32a8c5fec1eefad5dbaaefa9155d44ce4335c7fb0f07585d36cff4c4` |
+| Final checkpoint SHA-256 | `6d71f3023e5593a801b4d618f7eece93df1a15575f8a71d769566190ba6498df` | `98062b5b338b684219c43b5c9a3dc13bf176322a948c439294beee1d52ae477e` |
+| Final checkpoint bytes | 23,073,626 | 20,968,771 |
+| Final parameter/normalizer digest | `ea1de5234aba1683f182b6f36a3260ecf8fdd68779df0e313a6bc040b9458c1d` | `9f183501f97c021be1919d6da925a7ca981736dbeb6ec9dc0e1e67583d0a177b` |
+| Native source root | `/home/wu/hmasd-worktrees/agent-count-bounded-package-20260923-b07` | `/home/wu/hmasd-worktrees/agent-count-entropy-20260923-b05` |
+
+Each checkpoint path is `<source root>/runs/agent_count_generalization/<tag>/checkpoint_45.pt`.
+Native file sizes/hashes were rechecked without loading tensors before this scope was handed
+off. Bind the individual original `panel_45_n4/6/8.json` bytes at their already-recorded
+SHA-256 values in the B08 contract/config; never substitute copied control answers. B08's
+successful checkpoint00 evaluation does not establish final45 restoration. Preserve all old
+assets and source bytes. The final policies each have360k prior training team steps/45 updates;
+B09 adds zero training, stored training or optimizer exposure.
+
+Intervene on exactly three module-instance feature sites: SET
+`skill_discoverer.actor.base` direct fusion count and that base's nested `state_encoder`
+pooled count; H6 `skill_coordinator.state_embedding` pooled count. Replace only the concatenated
+scalar by.75. Keep true N, masks, live/held rows, pool denominators/maxima, input layout,
+H6 Transformer length, ego routing, geometry, users/time and all other features unchanged.
+No global encoder substitution, `n_agents` override, `counts` variable override, optimizer
+resume or modification of checkpoint weights. A narrow experimental per-instance hook on
+the receiving affine-layer input is an acceptable implementation if it clones only that input,
+proves the exact index/value, preserves all other columns and cleans up reliably.
+
+Evaluate both clamped final policies at N4/6/8 on the original final45 worlds
+`1545000+100*N+i`, i=0..15,16 synchronous lanes×500 steps. Native S1 uses50 stationary uniform
+users, fixed k10, CPU float32/torch threads4, deterministic policy means and independently
+clipped execution[-1,1]. Strictly restore all saved modules and normalizers at each actual N;
+reset all recurrent/timer/skill/snapshot state and let only the actual policy runtime evolve.
+Keep global RNG isolated. Each clamped policy follows its own closed-loop history from common
+initial world states. Reuse original unclamped final arrays; do not replay an extra control.
+
+N6 is the unchanged-feature control: verify every world's native J, scalar return and service
+components against original arrays, not only means or a package gap. Expect exact agreement
+under these unchanged numerical paths; a discrepancy is a technical comparability issue to
+explain before any dependent scientific claim, never evidence for this conjecture or an
+automatic tolerance relaxation. Array identity does not claim unrecorded trajectory identity.
+At N4/N8 separately verify actual intervention-site values and unchanged other features;
+passing N6 alone cannot prove the other counts were correctly treated.
+
+### Limited shadow observations and native reading
+
+Keep only Pro's reduced shadows, each on the actual clamped trajectory's predecision inputs:
+
+- SET at N4/N8: one original-feature actor forward from the same input, previous hidden
+  state, mask and skill as the actual clamped call. Compare raw deterministic means,
+  clipped actions and returned next hidden states, reporting counts and numerical magnitudes.
+  Only the actual call's output/state advances execution. Equal current actions with a
+  changed next hidden state are not full nonactivation; clipping can absorb raw differences.
+- H6 at N4/N8: one original-feature coordinator selection only at each actual k10 reselection.
+  Invoke the complete same selection route, with its own shadow team and autoregressive
+  individual prefix. Compare full team/individual choices; do not teacher-force the actual
+  prefix, call only value/likelihood code, or infer low-level execution change from logits
+  or a changed team label alone. Record actual/shadow selection counts.
+- No N6 shadows and no non-reselection H6 shadows. Shadows cannot refresh a snapshot,
+  advance timers, update normalizers, mutate supplied inputs, leave RNG/runtime changes or
+  count as environment transitions. Their locally contrasted histories are not the original
+  policy's full counterfactual trajectory. If a safe shadow is infeasible, return the concrete
+  issue to the DM; deleting it requires a recorded narrowed reading before launch, not silent
+  omission or contaminated mechanistic claims.
+
+Compute from original and clamped per-world arrays: each package's absolute J/coverage/quality/
+already-weighted penalty; `F_a=clamped_a-original_a`; `Gamma=F_SET-F_H6`; original and clamped
+H6−SET gaps, checking `G_clamped=G_original-Gamma`. Read F_SET and F_H6 first, then Gamma;
+positive Gamma alone cannot establish SET recovery. Preserve each N, equal-weight N4/N8 U,
+coverage×50 users/step, every world and both named N8 adverse cases. Report component tradeoffs.
+
+A useful J and coverage gain for SET at **both** unseen N supports retaining this precise
+deployment variant; selective recovery additionally requires favorable Gamma, without calling
+the intervention matched. SET benefit with similar/larger H6 benefit retains own usefulness
+but weakens selectivity. A gap reduced mainly through H6 harm is not SET recovery. Activated
+but unhelpful/harmful behavior reduces investment in this joint fixed-value replacement;
+limited nonactivation weakens its materiality on visited states. Mixed N/world/component
+results are tradeoffs, not an outcome-selected per-N switch or equivalence. No outcome
+automatically adds training, another constant/site/world or confirmation. Technical identity,
+scope or N6 failures quarantine dependent comparisons and retain partial exposure.
+
+### Cost and L0 — fixed-count B09 evaluator
+
+Planned actual exposure: **0 fits,0 new training/stored-training steps,0 optimizer calls,
+6 panels,48,000 evaluation team steps,288,000 evaluation UAV steps,96 episodes/resets,
+3,000 actual batched policy step calls**, plus at most**1,000 SET actor shadow forwards and
+100 H6 coordinator shadow forwards** (distinct call types, not equal-cost units). Each shadow
+has zero environment steps. Actual reselection/call counts must be recorded rather than filled
+from the plan.16k evaluation steps are N6 identity controls;32k test the changed feature values.
+No branching search or profile fit. B08's.780932-minute command wall is a reference only;
+measure actual wall, CPU and scientific-process RSS, mark peak scratch unmeasured if absent,
+and retain implementation/test/review/collection/reading as additional non-fit work.
+
+Deliver one admission-guarded object with only these four owned new files:
+
+- `experiments/candidates/agent_count_generalization/fixed_count_b09/__init__.py`
+- `experiments/candidates/agent_count_generalization/fixed_count_b09/runner.py`
+- `scripts/run_agent_count_fixed_count_b09.py`
+- `tests/experiments/candidates/agent_count_generalization/fixed_count_b09/test_runner.py`
+
+CLI: `--launch-sha`, `--out`, `--h6-checkpoint`, `--set-checkpoint`; fixed object/output basename
+`s1_fixed_count_b09`. Guard with `require_admission` and equality of source SHA before science
+imports, asset loads, output creation or environment construction. No scientific sweep or
+production bypass. Write only the declared run root. Reuse narrow unchanged B02/B08/config/
+construction/native-component helpers where their meanings match, but do not change old code
+or conflate stage0 and stage45. Bind both summaries, each final panel and both final binaries;
+validate schema/source/arm/seed/final stage/config/keys/shapes/dtypes/normalizers and restore
+digest before result steps. Record source/input identity before/after and preserve them.
+
+Runner writes config/summary, six actual panels, source bindings, intervention/shadow/N6
+evidence, independent-array readings and truthful actual counts/resources. Partial failures
+retain completed steps/calls/resets and finite outputs; no automatic retry or fabricated score.
+Tests use tiny synthetic/native checkpoints in pytest-owned scratch, never production assets.
+Cover final-stage restoration across actual N; correct scalar-only instance hooks and cleanup;
+N6 unchanged outputs; H6 full autoregressive shadow prefixes; SET next-hidden-only differences
+and clipping absorption; input/runtime/RNG/normalizer isolation; actual reselection/call/step
+accounting and finite partial failure; wrong asset/panel/config rejection; independent arithmetic
+including Gamma>0 from H6 damage without SET recovery. Reuse unchanged loader evidence.
+
+Implementer owns only those paths, no shared code/NOTES/RESEARCH/commits, scientific choices,
+production checkpoint loads, evaluation/launch, Pro, cross-task communication or children. It
+is not alone in the checkout and must preserve others' edits. Return diff, checks, deviations
+and residual risks. DM accepts the implementation; independent Reviewer focuses on the new
+feature intervention, final-asset identities and shadow isolation before native admission.
