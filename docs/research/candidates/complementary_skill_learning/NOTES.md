@@ -1803,3 +1803,12 @@ declared low-target divergence remain for collection. No evaluation or learning 
 for this check. T is observed through its original native operation at30s intervals with a
 1500s checkpoint window. The comparison, seeds,360k train/64k eval per arm and fixed final45
 endpoint remain unchanged. The complete paired scientific reading is still pending T.
+
+At the subsequent first-rollout read, initial own/uniform panels, the raw-facts digest,
+factual targets, unweighted discriminator scores and first D2 reward arrays match M exactly.
+T's stored low rewards equal its environment component, both weighted discriminator
+components are zero, and its low GAE/returns differ from M as declared. The first8000 rows
+are verified with both discriminator forwards retained and zero reward/storage errors.
+The inspection initially requested the final-only auxiliary_history field from the live
+summary; reading the actual training_rows auxiliary field completed this check. This was
+an inspection-schema correction, with no worker, source or scientific exposure change.
