@@ -2611,3 +2611,168 @@ evaluation stream, endpoint, objective or G intervention. No additional fit or r
 added. Detached read-only observation is to use this manifest's same operation reference;
 completion or a bounded checkpoint returns to this task for collection or rearming, without
 restarting the worker. B01/B02 and the completed Pro requests remain consumed.
+
+## 2026-09-23 — B03 D complete and read; fixed G remains the paired second fit
+
+The first fixed B03 fit is complete and accepted after full collection and numerical reading.
+All12 native files (59,206,071 bytes), including both retained checkpoints, match the executing
+node byte-for-byte. I read all45 training/auxiliary rows, all45 raw prediction batches and all
+four32-world panels; checked saved configuration and admission/exit identity. The
+[complete summary](../../../../runs/complementary_skill_learning/b03_d_260923921_8859fc379/summary.json),
+[training rows](../../../../runs/complementary_skill_learning/b03_d_260923921_8859fc379/training.jsonl),
+[raw predictions](../../../../runs/complementary_skill_learning/b03_d_260923921_8859fc379/auxiliary_predictions.jsonl)
+and [exit witness](../../../../runs/complementary_skill_learning/b03_d_260923921_8859fc379/process-exit.json)
+retain the evidence; exit zero alone was not acceptance.
+
+**Execution and integrity.**1 fit/360,000 actual and verified stored transitions/720 episodes/
+45 native updates;64,000 evaluation transitions/128 episodes across exactly the four fixed
+panels. All22,500 storage batches and360,000 stored rows passed. Native optimizer calls were
+675 coordinator,101250 actor,101250 critic,675 team discriminator and2700 individual discriminator.
+Both heads took315 updates; detached D took0 auxiliary trunk steps with exactly zero auxiliary
+trunk movement throughout. Every native learner group moved. Initial/final checkpoint tensor
+and full frozen-state digests were independently reconstructed from the actual saved tensors,
+heads, target calibration and normalizers; all matched their summary identities. Actual new
+initial native modules and both heads differ from old B01, preserving the new training block.
+
+Every saved prediction-line hash and factual-target hash matched; all90 raw head MSEs and
+output variances were independently recomputed. Maximum MSE discrepancy was0. All45 native
+AR mu replay checks were independently recomputed; maximum sampled log-probability discrepancy
+was3.6954879761e-6, no forced-factor discrepancy. The first-rollout target calibration stayed
+fixed. All numeric evidence is finite; stderr is empty. No new environment rollout, fit or
+policy evaluation was performed during readback. The checkpoint stores architecture fields as
+tuples and JSON as lists; normalizing that representation preserves exact history equality.
+
+All four panels repeat physical-start digest `b36474bb458d4c72efb2feed5b6653583cf0cbaf02fa264e097111209827d6d1`.
+Initial/final uniform repeat the fixed old PCG64 stream digest
+`a45d59f80fca20321df3803745068bb841f30e6c25b6b8c01dd7d0d250a67190`,50 renewals,
+worlds1700200–1700231. Each panel has0 optimizer and0 normalizer updates. Per-world J was
+independently checked against6U/500 and0.7coverage+0.3quality−height penalty; users=50coverage.
+
+**Actual learning on the fixed worlds.** Energy penalty below is the native S1 height proxy.
+
+| Panel | Native J | Users/step | Coverage | Quality | Height penalty |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| initial_own | 0.195395299057 | 15.886000000000 | 0.317720000000 | 0.083910796984 | 0.052181940038 |
+| initial_uniform | 0.269843858723 | 18.186562500000 | 0.363731250000 | 0.105435821730 | 0.016398762796 |
+| final_own | 0.444062367241 | 29.234812500000 | 0.584696250000 | 0.174466007214 | 0.017564809924 |
+| final_uniform | 0.455409736727 | 31.240062500000 | 0.624801250000 | 0.164170821870 | 0.031202384834 |
+
+D own learning is+0.248667068183 J/+13.3488125 users per step; uniform learning is
++0.185565878005 J/+13.0535 users. Both J and coverage/users improve in32/32 worlds. Contrary
+component evidence remains: own quality declines at1700203; uniform quality declines at
+1700203 and1700221, and uniform height penalty rises in31/32 worlds (mean+0.014803622038).
+Own height penalty falls inall32. Smallest uniform J gain is+0.003745975118 at1700210,
+despite+1.148 users and a higher height penalty; this is retained, not removed as a tail.
+Final own−uniform is−0.011347369487 J/−2.00525 users; it is a within-bank deployment
+comparison, not a coordinator-training effect.
+
+**Working update and unchanged next observation.** The expected actual learning of the
+mixed detached baseline is supported in this new block, including real native optimizer
+movement and improved service from its own initialization. This makes the pending question
+about G's extra value over a learning baseline concrete. It does not establish G recurrence,
+a stable default, learned complementarity, skill/MI necessity or the cause of B01/B02 failures.
+Those judgments remain unchanged. Each arm has one training instance;32 worlds are not32
+training replications. The selected old block and reused development worlds remain exposed.
+
+G is still the already-fixed second fit, from the same published code/input source
+`8859fc37944dc97ce916a1200dcbd5e78fe8e5b5`, with the prescribed paired seeds/worlds and only
+the original G auxiliary trunk intervention. D's scores change none of G's source, endpoint,
+objective, evaluation world/label stream or cost. After its complete result, compare actual
+initial/factual matching, both arms' learning, primary final uniform G−D, own consequences
+and every signed world. No additional arm, seed, replay or Pro question is selected.
+
+**Cost.** D used1 fit/360k train/64k eval/424k total team transitions. Runner body wall was
+3205.037037663s (53.417283961min); CPU user/system2889.902926/313.060575s; peak process RSS
+1,892,864KiB; peak CUDA allocated/reserved1,527,112,704/2,107,637,760 bytes. These are process
+measurements on a shared node, not exclusive GPU time. Artifact verification adds0 scientific
+interactions. G remains the other fixed424k interactions; no batch expansion.
+
+**Current shared context.** Main `13f5adf00` contains the independently accepted S7 B05 N
+and DM1 B13 a02 operations, not new cross-direction scientific results. I read the changed
+RESEARCH entries; canonical and published owner pause remains lifted and this direction's
+state/lead is unchanged. Existing shared background on deployment-sensitive service remains
+applicable. This single baseline result does not yet change the shared judgment about G's
+extra value; the paired result remains the discriminating observation.
+
+### All fixed-world initial-to-final changes for D
+
+Positive height-penalty change is adverse. J/users learning is positive in every listed world.
+
+**own**
+
+| World | ΔJ | ΔCoverage | ΔQuality | ΔHeight penalty | ΔUsers/step |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| 1700200 | +0.5311724388 | +0.6206400000 | +0.1663782976 | -0.0468109495 | +31.0320000000 |
+| 1700201 | +0.2596764862 | +0.2462800000 | +0.1281178547 | -0.0488451298 | +12.3140000000 |
+| 1700202 | +0.2245530016 | +0.2186000000 | +0.1037851337 | -0.0403974614 | +10.9300000000 |
+| 1700203 | +0.1474950973 | +0.1982800000 | -0.0232662218 | -0.0156789638 | +9.9140000000 |
+| 1700204 | +0.1919520726 | +0.2014400000 | +0.1064281651 | -0.0190156231 | +10.0720000000 |
+| 1700205 | +0.2412188530 | +0.2367600000 | +0.1003252212 | -0.0453892866 | +11.8380000000 |
+| 1700206 | +0.2300504072 | +0.2546400000 | +0.0730553123 | -0.0298858135 | +12.7320000000 |
+| 1700207 | +0.1675782312 | +0.1523200000 | +0.0782104267 | -0.0374911032 | +7.6160000000 |
+| 1700208 | +0.2555209666 | +0.3138000000 | +0.0780278951 | -0.0124525980 | +15.6900000000 |
+| 1700209 | +0.1939060812 | +0.1935600000 | +0.1003387120 | -0.0283124676 | +9.6780000000 |
+| 1700210 | +0.1327498328 | +0.0968800000 | +0.0835140107 | -0.0398796296 | +4.8440000000 |
+| 1700211 | +0.2024672673 | +0.2360400000 | +0.0921837908 | -0.0095841301 | +11.8020000000 |
+| 1700212 | +0.1746167903 | +0.1651200000 | +0.1089415788 | -0.0263503167 | +8.2560000000 |
+| 1700213 | +0.2762031433 | +0.2601200000 | +0.1266061067 | -0.0561373112 | +13.0060000000 |
+| 1700214 | +0.1591010171 | +0.1683600000 | +0.0992944379 | -0.0114606857 | +8.4180000000 |
+| 1700215 | +0.2597411116 | +0.2686000000 | +0.0776343784 | -0.0484307980 | +13.4300000000 |
+| 1700216 | +0.2748839102 | +0.3203200000 | +0.0698749793 | -0.0296974164 | +16.0160000000 |
+| 1700217 | +0.2663935170 | +0.2817200000 | +0.1071970584 | -0.0370303995 | +14.0860000000 |
+| 1700218 | +0.4276179690 | +0.5312800000 | +0.0772864236 | -0.0325360419 | +26.5640000000 |
+| 1700219 | +0.1932942917 | +0.1840000000 | +0.0925035323 | -0.0367432320 | +9.2000000000 |
+| 1700220 | +0.4379409866 | +0.4863200000 | +0.1418781226 | -0.0549535498 | +24.3160000000 |
+| 1700221 | +0.1088967041 | +0.1373200000 | +0.0145663503 | -0.0084027990 | +6.8660000000 |
+| 1700222 | +0.1981615102 | +0.2047600000 | +0.0856093391 | -0.0291467085 | +10.2380000000 |
+| 1700223 | +0.3750801360 | +0.4226400000 | +0.1051257875 | -0.0476943998 | +21.1320000000 |
+| 1700224 | +0.3309772000 | +0.3592800000 | +0.0947211993 | -0.0510648402 | +17.9640000000 |
+| 1700225 | +0.1374165152 | +0.0996000000 | +0.1064352624 | -0.0357659365 | +4.9800000000 |
+| 1700226 | +0.3050182200 | +0.3486400000 | +0.0553539786 | -0.0443640264 | +17.4320000000 |
+| 1700227 | +0.2299317570 | +0.2509200000 | +0.0835800809 | -0.0292137327 | +12.5460000000 |
+| 1700228 | +0.1980128425 | +0.2138800000 | +0.0764052231 | -0.0253752756 | +10.6940000000 |
+| 1700229 | +0.3247960921 | +0.3648000000 | +0.0845825643 | -0.0440613228 | +18.2400000000 |
+| 1700230 | +0.2920393033 | +0.3024800000 | +0.1071151043 | -0.0481687720 | +15.1240000000 |
+| 1700231 | +0.2088824291 | +0.2038400000 | +0.0959566211 | -0.0374074428 | +10.1920000000 |
+
+**uniform**
+
+| World | ΔJ | ΔCoverage | ΔQuality | ΔHeight penalty | ΔUsers/step |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| 1700200 | +0.4650370668 | +0.5947200000 | +0.1465518335 | -0.0047675167 | +29.7360000000 |
+| 1700201 | +0.1565904666 | +0.2128800000 | +0.0636396677 | +0.0115174338 | +10.6440000000 |
+| 1700202 | +0.1865117486 | +0.2591600000 | +0.0660469162 | +0.0147143262 | +12.9580000000 |
+| 1700203 | +0.1120100183 | +0.1862400000 | -0.0098050347 | +0.0154164713 | +9.3120000000 |
+| 1700204 | +0.1371681349 | +0.1924000000 | +0.0788268634 | +0.0211599241 | +9.6200000000 |
+| 1700205 | +0.1771353108 | +0.2416800000 | +0.0689464932 | +0.0127246372 | +12.0840000000 |
+| 1700206 | +0.1046974812 | +0.1724000000 | +0.0284844535 | +0.0245278549 | +8.6200000000 |
+| 1700207 | +0.0401978275 | +0.0492000000 | +0.0483353559 | +0.0087427793 | +2.4600000000 |
+| 1700208 | +0.1908626297 | +0.2662000000 | +0.1045567293 | +0.0268443891 | +13.3100000000 |
+| 1700209 | +0.1387545610 | +0.1950400000 | +0.0599472078 | +0.0157576014 | +9.7520000000 |
+| 1700210 | +0.0037459751 | +0.0229600000 | +0.0262127264 | +0.0201898428 | +1.1480000000 |
+| 1700211 | +0.1390794078 | +0.1988800000 | +0.0464939406 | +0.0140847743 | +9.9440000000 |
+| 1700212 | +0.2150123182 | +0.3043600000 | +0.0649357158 | +0.0175203965 | +15.2180000000 |
+| 1700213 | +0.2299264721 | +0.2972400000 | +0.0870126653 | +0.0042453275 | +14.8620000000 |
+| 1700214 | +0.1450718002 | +0.2222800000 | +0.0542343229 | +0.0267944967 | +11.1140000000 |
+| 1700215 | +0.1879033113 | +0.2598400000 | +0.0575110229 | +0.0112379956 | +12.9920000000 |
+| 1700216 | +0.2027776489 | +0.2932400000 | +0.0648815328 | +0.0219548110 | +14.6620000000 |
+| 1700217 | +0.2263645810 | +0.3176000000 | +0.0673704747 | +0.0161665614 | +15.8800000000 |
+| 1700218 | +0.3739141425 | +0.5313200000 | +0.0249851268 | +0.0055053956 | +26.5660000000 |
+| 1700219 | +0.1104961759 | +0.1642000000 | +0.0483633913 | +0.0189528415 | +8.2100000000 |
+| 1700220 | +0.3774929335 | +0.5074000000 | +0.0859994172 | +0.0034868916 | +25.3700000000 |
+| 1700221 | +0.1351123739 | +0.2301200000 | -0.0152514016 | +0.0213962056 | +11.5060000000 |
+| 1700222 | +0.2130755349 | +0.2966800000 | +0.0856467554 | +0.0202944918 | +14.8340000000 |
+| 1700223 | +0.2741530532 | +0.3741200000 | +0.0748104616 | +0.0101740852 | +18.7060000000 |
+| 1700224 | +0.2616686371 | +0.3563600000 | +0.0530728080 | +0.0037052053 | +17.8180000000 |
+| 1700225 | +0.0654664721 | +0.1005600000 | +0.0547446358 | +0.0213489186 | +5.0280000000 |
+| 1700226 | +0.2235726668 | +0.3229200000 | +0.0454960394 | +0.0161201450 | +16.1460000000 |
+| 1700227 | +0.1729596205 | +0.2434800000 | +0.0661893591 | +0.0173331872 | +12.1740000000 |
+| 1700228 | +0.1040251766 | +0.1716800000 | +0.0368324803 | +0.0272005675 | +8.5840000000 |
+| 1700229 | +0.2282236933 | +0.3085200000 | +0.0576588202 | +0.0050379528 | +15.4260000000 |
+| 1700230 | +0.1618522141 | +0.2148400000 | +0.0602089533 | +0.0065984719 | +10.7420000000 |
+| 1700231 | +0.1772486418 | +0.2457200000 | +0.0765802704 | +0.0177294393 | +12.2860000000 |
+
+After complete local collection and verification, the native snapshot collector previewed
+and removed only D's disposable source snapshot `909777a8adf2474bbdb40186aaa8f918`.
+Original outputs, both checkpoints, admission claim/manifest and exit witness remain retained;
+this cleanup does not authorize any repeat. The completed D observation event was consumed.
