@@ -9772,3 +9772,42 @@ pause lifted and this lead; DM3's new baseline launch is preserved alongside DM2
 Choose independent concurrent B11 fits if the fresh actual-node checks support them;
 otherwise serialize the same fixed cells without changing any scientific input. Kernel
 admission is required for each actual release. No progress or score can add exposure.
+
+
+### B11 native acceptance: both fixed fits running
+
+Both declared cells are now accepted by the native admission kernel, from published source
+`dc1bc1f2718b1e4ff9510030ad26c287c76b03ac`, in independent retained snapshots. They passed
+fresh actual-node memory checks separately and execute concurrently without changing the
+fixed scientific budget. Native records were collected and checked locally:
+
+- T6: [launch manifest](../../../../runs/agent_count_generalization/s1_training_condition_b11_t6_s963201/launch-manifest.json)
+  and [admission preflight](../../../../runs/agent_count_generalization/s1_training_condition_b11_t6_s963201/admission-preflight.json).
+  Stable operation: `/home/wu/projects/HMASD/.git/hmasd-admission/28533224b929d20724e40002e13e299c780ee65fbd8e8e9d091b417f29f79421.json`.
+- T8: [launch manifest](../../../../runs/agent_count_generalization/s1_training_condition_b11_t8_s963201/launch-manifest.json)
+  and [admission preflight](../../../../runs/agent_count_generalization/s1_training_condition_b11_t8_s963201/admission-preflight.json).
+  Stable operation: `/home/wu/projects/HMASD/.git/hmasd-admission/252bd0953c629a8d772075e8398a7c1ed4837e2591921f7eed43b84e6fb536dc.json`.
+
+Joined technical readback confirms actual N6/N8 configs and exact cross-arm equality of
+all recorded initial tensor manifests, normalizers and parameter/normalizer digest
+`0b5f6ecbe4390879ae674ab91f437edb2eefac66f0d83549a1d50de99962b584`.
+The canonical and returned post-initialization RNG digest is identical across both:
+`9dbac243f9e82c2d8d58f56819a896ed560213491a9f7b57824ddcf9db7b5083`.
+Both effective entropy coefficients are .05. At that readback T6 had collected24k team
+steps/completed2 updates, T8 had collected8k/begun its first update; both had0 evaluations
+and no reported failure. These are intermediate execution facts, not a comparison outcome.
+No training score was used to select, extend or cancel either cell.
+
+The native Git fetch emitted an unrelated historical commit-graph/automatic-GC warning.
+The actual admission-kernel publication check and all three inspected B11 source-file
+SHA-256 values passed on the node; both retained snapshot sources then passed admission.
+No accepted handle, historical record or Git history was removed or rewritten to suppress
+that warning. Existing other-direction workers were not modified.
+
+`tools/hmasd_wait.py` is armed for both original operation references with a1500-second
+observation window. First drain confirms **generation94**, both jobs running,0 errors,
+no pending event and no wake id. Earlier B10 observations are fully consumed; no old fit,
+worker or Pro Send was repeated and no App task was messaged. A checkpoint rearm will
+preserve these same operations. Completion still requires full artifact collection,
+independent native-trace reading, both fixed endpoints and the prospective scientific
+interpretation before the result is accepted or the next investment selected.

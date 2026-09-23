@@ -1,0 +1,96 @@
+{
+  "acceptance": "accepted",
+  "accepted_at": "2026-09-23T14:13:36.477088Z",
+  "bootstrap_command": [
+    "/home/wu/.venvs/hmasd/bin/python",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/e97d5410d77a41a3b09edcd7f9941642/scripts/hmasd_admission.py",
+    "_run-admitted",
+    "--runner",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/e97d5410d77a41a3b09edcd7f9941642/scripts/run_agent_count_training_condition_b11.py",
+    "--output",
+    "/home/wu/projects/HMASD/runs/agent_count_generalization/s1_training_condition_b11_t8_s963201",
+    "--",
+    "--cell",
+    "t8",
+    "--seed",
+    "963201",
+    "--launch-sha",
+    "dc1bc1f2718b1e4ff9510030ad26c287c76b03ac",
+    "--out",
+    "/home/wu/projects/HMASD/runs/agent_count_generalization/s1_training_condition_b11_t8_s963201"
+  ],
+  "claim_key": "252bd0953c629a8d772075e8398a7c1ed4837e2591921f7eed43b84e6fb536dc",
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/252bd0953c629a8d772075e8398a7c1ed4837e2591921f7eed43b84e6fb536dc.json",
+  "command": [
+    "/home/wu/.venvs/hmasd/bin/python",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/e97d5410d77a41a3b09edcd7f9941642/scripts/run_agent_count_training_condition_b11.py",
+    "--cell",
+    "t8",
+    "--seed",
+    "963201",
+    "--launch-sha",
+    "dc1bc1f2718b1e4ff9510030ad26c287c76b03ac",
+    "--out",
+    "/home/wu/projects/HMASD/runs/agent_count_generalization/s1_training_condition_b11_t8_s963201"
+  ],
+  "command_sha256": "5a5682475e79823c5985d74891cb3fe6fa73262ee83dc7b5f1c60fdbc7bd24ac",
+  "control_observation": {
+    "observed_at": "2026-09-23T14:13:36.284845Z",
+    "ref": "refs/heads/main",
+    "remote": "origin",
+    "sha": "fa7e75d2d5d52c63ce5d07cbf11ba96634583343"
+  },
+  "control_root": "/home/wu/projects/HMASD",
+  "created_at": "2026-09-23T14:13:36.345088Z",
+  "cwd": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/e97d5410d77a41a3b09edcd7f9941642",
+  "direction": "agent_count_generalization",
+  "host_identity": "LAPTOP-U9TDKC8A",
+  "identity_command": [
+    "/home/wu/.local/share/uv/python/cpython-3.10.21-linux-x86_64-gnu/bin/python3.10",
+    "scripts/run_agent_count_training_condition_b11.py",
+    "--cell",
+    "t8",
+    "--seed",
+    "963201",
+    "--launch-sha",
+    "dc1bc1f2718b1e4ff9510030ad26c287c76b03ac"
+  ],
+  "lead": "Codex DM (independent session)",
+  "manifest_ref": "/home/wu/projects/HMASD/runs/agent_count_generalization/s1_training_condition_b11_t8_s963201/launch-manifest.json",
+  "node": "wsl_4070",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/252bd0953c629a8d772075e8398a7c1ed4837e2591921f7eed43b84e6fb536dc.json",
+  "output_root": "/home/wu/projects/HMASD/runs/agent_count_generalization/s1_training_condition_b11_t8_s963201",
+  "preflight": "/home/wu/projects/HMASD/runs/agent_count_generalization/s1_training_condition_b11_t8_s963201/admission-preflight.json",
+  "process": {
+    "detached": true,
+    "identity": {
+      "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+      "kind": "linux_pid_start_ticks",
+      "pid": 360658,
+      "session_id": 360658,
+      "start_ticks": 53353660
+    },
+    "native_handle_kind": "posix_session",
+    "pid": 360658,
+    "process_group_id": 360658
+  },
+  "process_exit": "/home/wu/projects/HMASD/runs/agent_count_generalization/s1_training_condition_b11_t8_s963201/process-exit.json",
+  "published_remote": "origin",
+  "runner_process": {
+    "identity": {
+      "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+      "kind": "linux_pid_start_ticks",
+      "pid": 360659,
+      "session_id": 360658,
+      "start_ticks": 53353663
+    },
+    "pid": 360659,
+    "process_group_id": 360658,
+    "supervisor_pid": 360658
+  },
+  "schema_version": 1,
+  "sha": "dc1bc1f2718b1e4ff9510030ad26c287c76b03ac",
+  "source_root": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/e97d5410d77a41a3b09edcd7f9941642",
+  "stderr": "/home/wu/projects/HMASD/runs/agent_count_generalization/s1_training_condition_b11_t8_s963201/stderr.log",
+  "stdout": "/home/wu/projects/HMASD/runs/agent_count_generalization/s1_training_condition_b11_t8_s963201/stdout.log"
+}
