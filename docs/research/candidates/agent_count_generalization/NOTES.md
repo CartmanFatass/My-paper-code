@@ -7501,3 +7501,159 @@ an uncertain acknowledgement is reconciled against the same operation, never ret
 renaming the output. The DM will read complete initial panels and original final arrays,
 independently calculate each package's absolute service and self-gain, and only then interpret
 the relative gap. Process exit or a successful technical test is not scientific acceptance.
+
+## 2026-09-23 — B08 complete: both packages learn useful service, and the initial gap is not a causal share
+
+**DM disposition.** Accept the complete fixed initial/final comparison and take the prewritten
+both-gain branch of the preceding full Pro advice. Both retained packages gain useful native
+service over their own initial policies at every tested N in mean. H6 leads before and after
+training, while SET's mean J increment is larger. This ends the initial/final diagnostic;
+it does not select an initialization repair, make H0 an adequate substitute for the trained
+endpoint, or close the count-generalization direction. B07's bounded package retain stands.
+
+### Execution and complete reading
+
+The accepted native operation is preserved in the runner-written
+[manifest](../../../../runs/agent_count_generalization/s1_initial_policy_b08/launch-manifest.json),
+[memory preflight](../../../../runs/agent_count_generalization/s1_initial_policy_b08/admission-preflight.json)
+and [exit witness](../../../../runs/agent_count_generalization/s1_initial_policy_b08/process-exit.json).
+The original supervisor submission failed shell parsing of the lead argument before the
+admission program could execute (exit2, recorded duration0s). Inspection of the supervisor's
+`COMMAND="$*"` / `eval` path, its exact generated line, absent output directory and absent
+matching claim established that no evaluator had started. Passing one shell-serialized command
+through that existing supervisor corrected the transport; source, scientific argv and output
+tag were unchanged. The first failed supervisor record remains retained on the node. There
+was one scientific admission, no restarted worker and no duplicate evaluation.
+
+The study completed during initial collection, before a detached observation was needed.
+Native status has a valid exit0 witness, absent finished processes and consistent records.
+All **14 files /343,609 bytes** were collected and SHA-256 checked against their native bytes,
+including the six complete individual initial panels, config, summary, manifest, preflight,
+status, exit and empty stdout/stderr. The complete
+[summary](../../../../runs/agent_count_generalization/s1_initial_policy_b08/summary.json) is
+264,887 bytes, SHA-256 `c6ac56b101293dfa85280305a712851c0144123dd5e69bae9aa4d73535cf1f94`.
+No error file or partial panel is present. Both original initial checkpoints and the independent
+final panel arrays passed the fixed identity/configuration checks; final checkpoints were
+neither loaded nor evaluated again.
+
+Actual exposure is exactly **0 fits,0 training/stored-training steps,0 optimizer calls,
+6 panels,48,000 evaluation team steps,288,000 evaluation UAV steps,96 episodes/resets and
+3,000 batched policy calls**. Each initial package supplies24,000 steps. All six panels have
+the recorded initial parameter/normalizer digest before and after, frozen normalizers,
+evolving runtime memory, unchanged diagnostic/global RNG and executed actions within[-1,1].
+At each N the two packages start from identical per-world environmental state/observation
+digests. All bound source and input identities agree before/after; DM independently compared
+source hashes against the execution Git blobs and each panel file against the summary.
+
+The DM separately read the original H6 B07 and SET B05 final panel files, rather than B07's
+copied control answers, and computed the four absolutes and all differences from those arrays
+and the new initial panels. Native J/return/component identities hold. Comparing1,872 derived
+scalar values with the runner's readings gives maximum absolute discrepancy
+`1.1102230246251565e-16`. The independent Critic also recomputed the six initial/final pairs
+and found no material dissent. These are arithmetic checks on the same evidence, not new
+experimental replication.
+
+### Absolute usefulness and each package's own gain
+
+The same16 final45 worlds per N are used for each of the four policies. `U` is the equal-weight
+N4/N8 mean; N6 remains separate. Both final packages exceed **both** initial packages in mean
+J and coverage at every N, so the no-update alternatives do not supply comparable final
+usefulness in these panels.
+
+| N | H0 J | H45 J | I_H | S0 J | S45 J | I_S |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| 4 | .376193437 | .577558729 | +.201365293 | .248628387 | .498897910 | +.250269524 |
+| 6 | .307702465 | .571507590 | +.263805125 | .138812738 | .430893237 | +.292080499 |
+| 8 | .224864074 | .454504516 | +.229640442 | .063330813 | .302237189 | +.238906376 |
+| U | .300528755 | .516031623 | +.215502867 | .155979600 | .400567550 | +.244587950 |
+
+Coverage in actual mean users served per step (out of50):
+
+| N | H0 users | H45 users | H6 additional users | S0 users | S45 users | SET additional users |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| 4 | 25.543250 | 36.271125 | +10.727875 | 21.812250 | 33.457375 | +11.645125 |
+| 6 | 21.580000 | 37.029875 | +15.449875 | 14.826500 | 29.296875 | +14.470375 |
+| 8 | 15.708000 | 29.299500 | +13.591500 | 9.547125 | 20.494250 | +10.947125 |
+| U | 20.625625 | 32.785313 | +12.159688 | 15.679688 | 26.975813 | +11.296125 |
+
+Both mean quality and the already-weighted penalty improve at each N. A negative change
+in penalty P is favorable; it must not be interpreted as a separately measured energy-only effect.
+
+| N | H6 quality change | SET quality change | H6 P change | SET P change |
+| --- | ---: | ---: | ---: | ---: |
+| 4 | +.106012962 | +.110240503 | -.019371154 | -.054165623 |
+| 6 | +.085864618 | +.108715427 | -.021747490 | -.056880620 |
+| 8 | +.074352888 | +.088984179 | -.017053576 | -.058951372 |
+| U | +.090182925 | +.099612341 | -.018212365 | -.056558497 |
+
+### Relative gap and contrary worlds
+
+| N | D0 J | D45 J | Delta J |
+| --- | ---: | ---: | ---: |
+| 4 | +.127565050 | +.078660819 | -.048904231 |
+| 6 | +.168889727 | +.140614353 | -.028275373 |
+| 8 | +.161533261 | +.152267327 | -.009265934 |
+| U | +.144549155 | +.115464073 | -.029085082 |
+
+The negative mean Delta at every N means SET improves J more, not that H6 fails to learn
+useful service. Nor does SET improve more on every component: H6 adds more covered users at
+N6/N8. At N8, the relative coverage increment contributes+.037021250 to Delta J, quality
+contributes-.004389387 and penalty contributes-.041897796, summing to-.009265934. At U,
+coverage contributes+.012089875, quality-.002828825 and penalty-.038346132. This is native
+score accounting, not identification of a learning mediator or independent causal shares of
+initialization and training. The initialized package can affect its whole training path.
+
+H6's J and coverage gains are positive in all48 worlds. SET's are positive in47/48; both
+packages improve quality and reduce penalty in all48. Keep the actual contrary cases:
+
+- The already-designated N8 world1545810 has H6 self-gains+.130369248 J and+.150240 coverage,
+  while SET gains+.331124364 and+.369120. H6's ranking changes from D0=+.126359910 to
+  D45=-.074395206 J, and its final coverage is7.162 fewer users/step. H6 improves there;
+  SET improves more. A final relative loss is not an absolute deterioration.
+- In N8 world1545802 SET itself loses.007000247 J and.131040 coverage (6.552 users/step),
+  despite higher quality and lower penalty. H6 gains.181838970 J there. This observed
+  exception limits universal improvement claims; it is retained without selecting a new
+  evaluation panel or generalizing one adverse world into a diagnosed training fault.
+
+### Working explanation, cost and next useful action
+
+**Strengthened:** both actual training processes produced useful finite improvements over
+their initial assets under the fixed bounded deployment law. Initial package differences and
+subsequent useful learning coexist. The recurring final H6 package advantage remains useful
+exploratory evidence, with its adverse world retained.
+
+**Weakened:** reading H6's final J lead as evidence of the larger J training increment; treating
+H0 as an adequate no-training substitute for a trained endpoint; or interpreting negative
+Delta as an initialization defect to repair. B08 directly answers these alternatives without
+new fits. It does not retrospectively erase B07's real updates and final usefulness.
+
+**Untouched/unresolved:** initialization or skill causality, the competence ceiling of a
+stronger ordinary same-information learned comparator, population ranking and count-specific
+learning mechanisms. The initial policies retain their own complete architectures. One H6
+instance and one SET instance at two stages remain one instance each. All prior selection
+and tuning exposure, B04/B05 opposite entropy responses, and B06 finite-panel exceptions
+remain relevant; this comparison does not reinstate zero entropy or claim confirmation.
+
+Actual command wall is46.855948 seconds (**.780932 minutes**), including import/construction;
+run-study wall45.041211 seconds. Scientific-process Linux RUSAGE_SELF peak RSS774,420 KiB,
+user CPU174.948686 seconds and system CPU.762357 seconds are measured. Peak scratch is
+unmeasured. Source preparation, tests, review, collection and interpretation are additional
+non-fit work, not zero-cost execution; no controlled speed comparison follows from these values.
+
+The earlier complete Pro answer already covers this outcome branch and is reused: end this
+initial/final diagnostic without another panel, initialization matching, automatic fit or
+confirmation. A bounded read-only inspection of SET input normalization, held/current fusion
+and PPO gradient routing found no supported defect: the actual configuration disables running
+observation/state normalization; held snapshots follow the intended k10 cadence; the replaced
+actor base is included in PPO gradients and its optimizer. No production model forward,
+environment execution or additional fit was used for that inspection. Missing saturation or
+gradient telemetry is not evidence that either failed, and no extra replay check is selected
+merely to search for a fault.
+
+A different width or a residual score gap alone is not a repair premise. A more count-specific
+source fact is the explicit N/8 feature in the actor/coordinator encodings, constant at .75
+throughout N6 training and changed at N4/N8 deployment. The next useful reasoning question is
+whether a narrowly defined frozen-policy intervention on those explicit scalar channels could
+discriminate harmful extrapolation from the remaining geometry/pooling/roster shift. This is a
+new candidate explanation, not a result of B08 or an established defect. Resolve its source
+mapping and consult Pro before selecting any additional evaluation or comparator change.
