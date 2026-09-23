@@ -12731,3 +12731,47 @@ and model preparation wall is unmeasured. The next authorized action is to publi
 inputs, refresh actual-node controls/resources, admit the fixed H6 cell, and retain its native
 operation for detached observation. SET remains the fixed second arm after complete H6 collection,
 independent of H6's score. The B13 evidence and contrary worlds remain unchanged.
+
+## 2026-09-23 — B14 H6 admitted; SET remains the fixed second arm
+
+The accepted implementation and this block's prospective inputs were published at
+`88b67e5e0110ae05c440588a2b19ab0b6c0f021c` on `codex/agent-count-generalization`.
+Actual-node Git blobs match all four reviewed hashes. Fresh published controls at
+`ca1666f4628e614c2588b29274b5d54b2fe0dcca` and the native canonical pause/state/lead
+projection agree: lifted / exploring / `Codex DM (independent session)`. The owner continuation
+remains applicable; Claude FSD/G33 controls are unchanged. Concurrent DM2 results were preserved
+when refreshing main; their G/D reversal does not change or extend this fixed B14 block.
+
+At `2026-09-23T22:06:38.475472Z`, `wsl_4070` admitted the fixed H6 cell through
+`scripts/hmasd_launch.py launch --snapshot`, with the configured interpreter and supervisor.
+The admission measured 15,563,997,184 available physical bytes against the 4-GiB floor and
+passed. Native handles, without a second submission:
+
+- Operation: `/home/wu/projects/HMASD/.git/hmasd-admission/40c1ccfc713b810aab63e220ac5211c4250ce38da9351006479a8e26d6cb3917.json`.
+- Manifest: `/home/wu/projects/HMASD/runs/agent_count_generalization/s1_fresh_learning_b14_h6_s974201/launch-manifest.json`.
+- Retained source: `/home/wu/projects/HMASD/.git/hmasd-launch-sources/312562bc751049cca2799158d8d2af2f`.
+- Native runner PID434014/start_ticks56100333; detached supervisor PID434013/start_ticks56100331;
+  boot `bb732fcb-1a33-4659-a786-331110ae41d3`. Wrapper task
+  `agent-count-fresh-learning-b14-h6-974201` returned after admission; its exit is not fit completion.
+- Output: `/home/wu/projects/HMASD/runs/agent_count_generalization/s1_fresh_learning_b14_h6_s974201/`.
+
+The local deterministic observer `launch-s1-fresh-learning-b14-h6` is registered and adopted
+under current-task wait generation113, interval30 seconds/window1500 seconds. Its first native
+observation at `22:07:06Z` reports accepted/running, matching runner and supervisor identities,
+consistent records, zero observation errors and no exit witness. No pending prior event remains.
+This transfers observation only, not scientific acceptance or permission to restart a worker.
+
+Initial native evidence reports one started fit, both stage00 panels written (32k evaluation
+team/224k UAV steps, 64 episodes, zero evaluation store/optimizer calls), and training active.
+All recorded stage00 learner/mode/buffer/optimizer/sampler/global-RNG/training-environment
+before/after checks pass. The observed training boundary has 8k team/48k UAV transitions stored
+and zero completed updates while the first optimizer update is in progress; it is not a final
+exposure or result. `stderr.log` is empty at this read. Complete source/count/checkpoint/native
+trace validation and scientific reading still await the full output.
+
+The fixed total remains two fits/720k training team/128k evaluation team steps. H6 is the only
+started B14 fit; SET is not launched yet. After H6 completion or technical failure, reconcile its
+same operation and read the complete evidence. A successful full H6 collection is followed by
+the already fixed SET arm, independent of the initial or final H6 score. A technical failure
+requires an explicit DM reading and decision, not automatic retry. No new seed, world, arm,
+training extension or confirmation is selected here.
