@@ -145,18 +145,9 @@ B07 新 H6/.05/clip 训练实例在固定 B05 SET/.05 对照下，final45 的 N4
 N8 的一个世界仍少服务 7.162 人。它加强保留有界完整包的探索理由，削弱“正端点仅限旧 H6
 实例”的解释；两个探索实例的相近均值不建立稳定效果、技能机制或充分基线。新 fit 实测
 61.825780 command min；控制原成本57.819554 min，调度不同，不构成受控效率比较。
-[完整 B07 结果、反证与成本](candidates/agent_count_generalization/NOTES.md#2026-09-23--b07-complete-bounded-package-benefit-recurs-with-an-initial-policy-rival)。
-
-B08 将原初始策略放到同一最终世界（0 fits、48k eval、.780932 command min），直接区分
-自身学习增益和最终包差。H6/SET 在 N4/6/8 的平均 J、覆盖、质量均提高、惩罚均降低；
-各训练终点的平均 J 和覆盖都超过两份初始策略。未见 N 的 J 自身增量为
-**+.215503 / +.244588**，覆盖每步增加 **12.160 / 11.296** 人；H6 的初始 J 领先
-+.144549、最终领先+.115464。SET 的 J 增量更大，而 H6 在 N6/N8 的覆盖增量更大，
-故最终领先、学习增量和服务分量不可互相替代。N8 世界1545810中两包均改善但排名反转，
-世界1545802中 SET 少服务6.552人/步且J略降；正均值不是所有世界均改善。
-按既定分支结束初始／最终诊断，不推出初始化修复或无训练替代。B04/B05熵反证、普通
-基线充分性和训练总体不确定性仍保留；没有新增训练复现或识别技能机制。
-[完整 B08 读数、反例与判断](candidates/agent_count_generalization/NOTES.md#2026-09-23--b08-complete-both-packages-learn-useful-service-and-the-initial-gap-is-not-a-causal-share)。
+初始化时 H6 已领先三个 N，而阶段世界不同，不能从现有曲线相减得到学习增量；初始策略／
+架构差异仍是重要替代解释。保留 B04/B05 的熵反证，已选 B08 在既有最终世界评价两份
+初始策略（0 fits/48k eval），先看每包绝对服务与自身变化，再看差距变化；尚无新结果。[完整结果、反证与成本](candidates/agent_count_generalization/NOTES.md#2026-09-23--b07-complete-bounded-package-benefit-recurs-with-an-initial-policy-rival)。
 
 同世界的 `D45=D0+(I_H−I_S)` 是端点差分恒等式，不是初始化与学习的独立因果份额。
 正差中之差可能伴随两包都退化，负值也可能伴随两包都改善；应先读取各包自身原生增量、
@@ -308,7 +299,7 @@ B/UCOPE 的局部预测、一步优势或真实后缀信用没有自动转成稳
 
 | Direction | Question | State | Lead runtime | Standing and next step |
 | --- | --- | --- | --- | --- |
-| `agent_count_generalization` | 固定 k、回合内固定 roster 时，HMASD 对未见团队数量 N 的服务能力和泛化代价是什么？ | exploring | Codex DM (independent session) | 直接 DM：task `01a0c6ef-cdd4-7113-b2d9-20487e35171b`，host `local`；checkout `/home/fires/.codex/worktrees/7fef/hmasd-wsl`，branch `codex/agent-count-generalization`。B08完整验收：0 fits/48k eval/96回合/.780932 command min，双方各N平均原生服务均改善；未见N的H6/SET自身J增量+.215503/+.244588，初始/最终H6差+.144549/+.115464。最终优势与有用学习并存，不把Delta当因果份额；保留两个不利世界、B04/B05熵反证及B07包用途。按既定Pro分支结束初始/最终诊断，无运行中实验或待收Pro。源码检查未支持归一化/梯度故障；下一步推敲固定N训练的显式人数通道外推，咨询后才选追加评价，不自动训练或确认。[B08完整结果](candidates/agent_count_generalization/NOTES.md#2026-09-23--b08-complete-both-packages-learn-useful-service-and-the-initial-gap-is-not-a-causal-share)。 |
+| `agent_count_generalization` | 固定 k、回合内固定 roster 时，HMASD 对未见团队数量 N 的服务能力和泛化代价是什么？ | exploring | Codex DM (independent session) | 直接 DM：task `01a0c6ef-cdd4-7113-b2d9-20487e35171b`，host `local`；checkout `/home/fires/.codex/worktrees/7fef/hmasd-wsl`，branch `codex/agent-count-generalization`。B07完整正向模式支持保留有界H6/.05探索候选：final45 N4/6/8的J差+.078661/+.140614/+.152267，每步多服务2.814/7.733/8.805人；1新fit/61.825780 min，保留N8不利世界与熵反证。完整初始策略Pro已核验并保存，采纳其实质异议：先读各包自身服务增量，不能按Delta符号选修复。已选B08，仅恢复两份checkpoint00并评价既有final45世界，0 fits/48k eval/96回合，复用原最终数组；固定输入、L0与四路径实现已发布，11项测试及独立审查通过、DM已接受；待一次原生准入，无运行中训练或待收Pro。结果可改变冻结初始资产的用途及调查重点，不自动追加训练、初始化修复或确认。[B07完整结果](candidates/agent_count_generalization/NOTES.md#2026-09-23--b07-complete-bounded-package-benefit-recurs-with-an-initial-policy-rival)；[实质采纳与固定B08](candidates/agent_count_generalization/NOTES.md#2026-09-23--initial-policy-advice-adopted-with-material-revision-fixed-b08-zero-fit-study)。 |
 | `uav_service_auxiliary` | 面向控制用途的预测小模块：事实预测监督与任务后果监督怎样影响 S7 完整服务收益？ | exploring | Codex DM (independent session) | 文献第 1 项；直接 DM task `01a0c9af-d5cd-7d70-b5e8-9db2c598ad4e`，host `local`，`gpt-6-astra` / `max`；checkout `/home/fires/.codex/worktrees/d319/hmasd-wsl`，branch `codex/uav-service-predictive-control`。固定 B03 D/S/G×两块六 fits、两次共同端点回放全部完整验收，source `73be55261b9f5e8f8fe26fdec6558b87ad088fcb`。两块最终 S−D J **+24.585407 / −16.825601**，G−D **+117.896434 / −24.945921**，S−G **−93.311027 / +8.120320**；收益均未复现，G服务增加但成本取舍转坏，保留负尾部。共同回放中G首块两类MSE最高、第二块最低，均不能代替原生用途。按已覆盖该分支的完整Pro建议关闭当前配方，0追加/确认，无运行中操作或已选下一批；方向与lead不变。6 fits累计769.038846 runner min，零更新共同回放另1.693106 min。[完整结果与判断](candidates/uav_service_auxiliary/NOTES.md#2026-09-23--b03-second-common-replay-accepted-and-current-recipe-closed)；[G2验收](candidates/uav_service_auxiliary/NOTES.md#2026-09-23--b03-second-block-g-accepted-and-fixed-common-replay-bound)。 |
 | `goal_conditioned_entity_aggregation` | 当前技能条件化的实体聚合，能否比原始 MLP 或普通条件化池化提供有用的完整共同学习收益？ | exploring | Codex DM (independent session) | 文献第 3 项，直接 DM task `01a0c7e4-e1aa-7460-a6bb-43db5c1b0898`，host `local`；checkout `/home/fires/.codex/worktrees/query-aggregation-sept22/hmasd-wsl`，branch `codex/goal-conditioned-aggregation-20260922`。固定 B01 O/P/E，每臂 360k、仅最终 32 世界评价，共 3 fits / 1.08M train / 48k eval；代码与 21 项检查及独立审查已验收。O/P 均已完整核验，各 45 次更新、五组参数均移动、评价零更新。J45 O=.509137、P=.159861，P−O=−.349276，32 个共同世界均为负；覆盖用户/步 33.58394→13.53369，另两服务分量也不利。fit-body O/P 为 89.9204/109.7429 min，P/O=1.220445，计时范围及共享节点限制保留。E 已在同一 source 下新准入并训练；首份快照 8k train、0 完成更新、0 eval、无失败。实际 3 fits 已开始，2 完成/1 运行，未添加第四臂或补救训练。P 结果削弱当前配方的投入理由；每臂一个训练实例，不识别机制或稳定排名，三臂判断等待 E 完整结果。[P 完整结果与判断](candidates/goal_conditioned_entity_aggregation/NOTES.md#2026-09-22--b01-p-complete-and-read-e-remains-the-fixed-third-arm)；[E 原生句柄](candidates/goal_conditioned_entity_aggregation/NOTES.md#2026-09-22--b01-e-accepted)；[固定比较](candidates/goal_conditioned_entity_aggregation/NOTES.md#2026-09-22--b01-prospective-comparison-and-l0)。 |
 | `load_critical_member_generalization` | 如何区分团队人数、总容量/负载与关键成员对服务泛化的影响？ | exploring | Codex DM (independent session) | 文献计划第 6 项；直接 DM task `01a0c9b0-bcc3-7643-8058-5e565402f558`，host `local`，`gpt-6-astra` / `max`；checkout `/home/fires/.codex/worktrees/5899/hmasd-wsl`，branch `codex/load-critical-member-generalization`。完整 Pro 已核验并采纳五格冻结策略服务转换比较，0 新 fits / 80k eval / 160 episodes；不选可选两 fits。评估器已通过独立复审及 23 项技术检查，修复多世界绑定与失败计数；实际 H6/SET 小模型覆盖 k10、N4/6/8 和两世界，正式 B03 二进制及全 horizon 尚未验证。尚无接受评估运行：原人数 DM 已发布第一格 H6/raw 完成与 SET/clip 启动，但两份 clip/final45 资产和完整 B03 判读仍未齐备。待该既定依赖就绪才绑定与准入，不改用 raw/中间策略、不重复训练或监控其他 DM。[实现验收与重入条件](candidates/load_critical_member_generalization/NOTES.md#2026-09-22--frozen-evaluator-accepted-production-assets-remain-unavailable)；[评估器源码](https://github.com/CartmanFatass/My-paper-code/tree/7524026cebe8d9af7461f670db3edb3098e979c2/experiments/candidates/load_critical_member_generalization/load_probe)。 |
@@ -370,7 +361,7 @@ B/UCOPE 的局部预测、一步优势或真实后缀信用没有自动转成稳
 | **技能周期与有限学习** | B01 三臂完成，关闭本次 S1/cap=10 普通分解／AR 配方，0 追加 fit。 | 新时长选择确实执行，事件与高层优化量增加；两种可变臂终点均低于固定，AR 后段胜分解不足以满足既定保留条件。每臂一个训练实例，不否定更广周期问题；长于十步的承诺另需实际团队时钟、支持与相应固定参照，尚未选中该比较。[结果与判断](candidates/joint_duration_skill_learning/NOTES.md#b01-complete-three-arm-result-and-closure-of-the-cap-10-recipe--2026-09-22)；[退役的初始计划](archive/2026-09-22/RESEARCH_02.md)。 |
 | 事实预测辅助 | 独立近邻：同一个实际训练的事实 readout，detach 对辅助梯度进入 actor/GRU。 | 两臂都有预测头；最终看完整回报，不能用更低 MSE 代替用途。先选一个后果/窗口，不叠加规划、通信、duration。 |
 | 技能规模与实际重组 | 分别选择有依据的较小标签集合，或固定 k 下真实 partner-skill 重组曝光，对普通匹配训练。 | 标签组合数不是样本复杂度；保留正常搭配收益。技能可辨认不等于有任务互补性，冻结标签探针不是新共同学习的阳性门槛。 |
-| **N 数量泛化** | B08已完成，按双方有用增益分支结束初始／最终诊断；保留B07探索包。 | J增量H6/SET均为正，SET的J增量较大，H6在N6/N8覆盖增量较大；初始差不等于最终差的因果份额。未发现SET归一化或梯度缺陷，当前只推敲固定N6训练中显式N/8通道的外推问题，待Pro判断最小有用对照；尚未选择新实验或确认。[完整结果与下一问题](candidates/agent_count_generalization/NOTES.md#2026-09-23--b08-complete-both-packages-learn-useful-service-and-the-initial-gap-is-not-a-causal-share)。 |
+| **N 数量泛化** | B07用途保留；已选B08共同世界初始／最终诊断，0新fits。 | 仅运行两份初始资产×N4/6/8×16世界×500步，共48k eval/96回合，复用固定最终输出；stage0与world-panel45分离。先读H0/H45/S0/S45绝对用途、各包自身J/覆盖变化，再读Delta；不把正Delta误当有用学习或负Delta误当初始化缺陷。完整Pro实质异议已采纳，四路径实现通过11项测试与独立审查、DM已接受；待一次原生准入；无自动初始化修改、额外种子或确认。[固定对象、成本与L0](candidates/agent_count_generalization/NOTES.md#2026-09-23--initial-policy-advice-adopted-with-material-revision-fixed-b08-zero-fit-study)。 |
 | 运行中成员变化、cross-play、异质能力 | 三个独立备选问题：服务连续性/区间信用，独立 population 混编，能力条件化共享。 | 分别继承 VNFC、CPCP、FOLR/ACPS 等证据；先明确真实任务和合法接口。技术失败、未执行和科学不利分别处理，不合成笼统“适应性”。 |
 | **UAV 端到端服务预测 / 文献第 1 项** | B03六格和两次固定共同端点回放均已完整验收，关闭当前配方；无下一批、运行中操作或待收Pro。 | 1.08M train/576k eval/42k physical facts，6 fits共769.038846 runner min；两次回放零新fits/更新/环境步，另1.693106 min。S−D、G−D两块均反号；G服务提升重现而成本下降不重现，MSE优势也不能挽回原生结果。按既定分支不追加第三块、重调、较早终点、长训练或确认；未来重开须有新的科学理由，不能从两块推总体无效或稳定排名。[完整解释和成本](candidates/uav_service_auxiliary/NOTES.md#2026-09-23--b03-second-common-replay-accepted-and-current-recipe-closed)；[退役的运行中计划](archive/2026-09-23/RESEARCH-uav-service-b03-complete.md)。 |
 | **技能条件化的信息聚合 / 文献第 3 项** | B01 O/P 已完整读完；固定第三臂 E 已开始训练。实际 3/3 fits 已开始，2 完成/1 运行，终点和参数不变。 | P 的 J45=.159861，低于 O 的 .509137，服务分量与实测成本均不利，削弱当前池化配方的投入理由。收齐 E 后比较 E−O、P−O、E−P 与成本，再作三臂判断；不把 32 个世界当训练重复，不识别实体筛选机制或技能语义对齐。[P 结果与固定接续](candidates/goal_conditioned_entity_aggregation/NOTES.md#2026-09-22--b01-p-complete-and-read-e-remains-the-fixed-third-arm)；[E 启动](candidates/goal_conditioned_entity_aggregation/NOTES.md#2026-09-22--b01-e-accepted)。 |
@@ -444,5 +435,3 @@ S1 只能检验自身覆盖/连接后果；S7 研究需要其真实服务机制�
 [全项目证据驱动计划的完整问答与决定](archive/2026-09-21/RESEARCH.md#portfolio-review-2026-09-21-whole-project-evidence-led-research-plan)。
 
 B08 选择前的咨询计划已退役至 [2026-09-23 选择前快照](archive/2026-09-23/RESEARCH-agent-count-b08-selected.md)；当前固定零拟合比较见上方人数方向。
-
-B08 运行计划已退役至 [2026-09-23 完成前快照](archive/2026-09-23/RESEARCH-agent-count-b08-complete.md)；双方有用增益及当前人数通道问题见上方人数方向。
