@@ -5663,3 +5663,72 @@ the code; independent hmasd-reviewer reviews checkpoint identity, restoration, R
 replay acceptance and scientific arithmetic before a result launch. Ordinary engineering
 choices within this contract need no owner reconfirmation. Stop only the dependent action
 for an unresolved technical/semantic problem; no extra cell or fit is authorized by it.
+
+## 2026-09-23 — B06 evaluator accepted for the fixed zero-fit launch
+
+DM accepts the bounded four-path implementation against the preceding L0. The new evaluator
+binds each original summary/checkpoint identity, strictly restores modules and non-default
+normalizers, rebuilds the historical N-specific configuration, and evaluates the fixed
+closed loops. All12 absolute diagonal replays precede all12 preselected off-diagonals;
+the fixed tolerance, initial-world comparisons, freeze/zero-update guards and R/C/T/U reading
+remain unchanged. No production checkpoint has been evaluated during implementation/review.
+
+Self-reading found and repaired lost failed-diagonal evidence and counters placed after output
+validation: rejected replay now preserves the full panel and each absolute difference, and
+returned policy calls/environment steps are counted before their output checks can throw.
+A call that itself throws before returning does not fabricate a completed transition; its
+unfinished internal work is not quantified by these returned-call/step counters. Source and
+checkpoint input identities are recorded before/after. Diagnostic action/RNG checks are read-only.
+
+Independent `hmasd-reviewer` `/root/entropy_b05_review` inspected checkpoint identity,
+restoration, RNG/reset, replay/order and arithmetic; final verdict: no material finding on
+production bytes. It independently ran11 focused checks in5.37s (18 known dependency/tiny-lane
+warnings). After handback, DM strengthened only the failure regression: instead of simulating
+progress callbacks, it raises from component validation after the actual second returned native
+transition. This protects the repaired ordering itself. Final DM suite:11 passed in7.14s,
+20 matplotlib/single-lane diagnostic warnings; no numerical/semantic test failure. Test scratch
+is pytest-owned and cleaned. Compilation and staged whitespace checks pass. No shared/frozen
+source, owner control or original policy was edited; no L0 scientific deviation.
+
+Reviewed production SHA-256 values: package init
+`9df59fe993da6625182f6a6fc9a114083a782f2bc6afe47539730625ea7edd2b`, runner
+`09684ca06910b6f374eff8a8ab9515ad61caf3a8284885ab81f4642d3ebceac6`, entry
+`96553e78b343acf62abe6fb73b7ea8f7cec4633350d46f7df704a2aa0f859e0b`.
+Final strengthened test SHA-256 `cf9539ef4f2a31b3aae30f338c4c35175a624084768623423511581fc55a199e`. The production bytes were
+unchanged by the final test edit. Technical synthetic fixtures do not establish successful
+restoration or historical replay of the four formal assets; those checks remain the first
+phase of the admitted B06 run.
+
+Latest main checked at `54306eeb3472e71b18e4f37760533f6f7767e0ee`: own active lead and
+lifted pause still agree; other directions and Claude FSD pause are preserved. Publish these
+exact inputs and launch the already fixed192k-evaluation object on configured `wsl_4070` under
+fresh native admission. Zero new fits/updates; no extra asset, world panel or attempt selected.
+
+## 2026-09-23 — B06 native admission and historical replay underway
+
+Exact reviewed source `ce18435cedfe2b875482403b6b41778fdb67ee4d` was published before native
+admission. Accepted at2026-09-23T05:10:52.523174Z; see runner-written
+[launch manifest](../../../../runs/agent_count_generalization/s1_entropy_cross_panel_b06/launch-manifest.json),
+[fresh node memory evidence](../../../../runs/agent_count_generalization/s1_entropy_cross_panel_b06/admission-preflight.json)
+and [fixed inputs](../../../../runs/agent_count_generalization/s1_entropy_cross_panel_b06/config.json).
+Read-only native status reconciled accepted admission with consistent live supervisor/runner
+identities; no exit witness at that observation. All three copied fixed files match native
+SHA-256/size. Source worktree stays isolated and unchanged; all four original checkpoints
+remain inputs at their declared native paths.
+
+First collected scientific snapshot has all four assets validated, eight completed historical
+diagonals,64000 evaluation team steps/128 episodes/368000 UAV steps/4000 returned policy calls,
+zero training/updates and no failure. All original J, scalar returns and component outputs in
+those eight panels are exact (maximum absolute difference 0.0). The next diagonal was
+starting; this is partial restoration evidence, not acceptance of all24 panels or an
+observation of either missing cross-cell. The summary status string remains validating_assets
+while last_boundary/counters describe evaluation progress; final completion is a separate state.
+No threshold, cell order or scientific reading changed.
+
+Observer now owns the accepted operation under job `agent-count-entropy-cross-b06`, generation75
+in this task's existing wait state. It will return on termination/error or the bounded window;
+continuation reuses the same native operation. No Pro request or extra fit is pending.
+Remote preparation briefly stalled because this partial Git clone fetched missing blobs outside
+the configured network shell. Only that owned HTTPS fetch was stopped; after confirming its
+parent exited with unchanged HEAD, clean tracked tree and no index lock, the same preparation
+completed inside zsh network environment. No scientific operation existed during that repair.

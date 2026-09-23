@@ -1,0 +1,81 @@
+{
+  "launch_sha": "ce18435cedfe2b875482403b6b41778fdb67ee4d",
+  "object_id": "s1_entropy_cross_panel_b06",
+  "tag": "s1_entropy_cross_panel_b06",
+  "spec": {
+    "test_ns": [
+      4,
+      6,
+      8
+    ],
+    "horizon": 500,
+    "eval_lanes": 16,
+    "torch_threads": 4
+  },
+  "panel_seed_bases": {
+    "A": 1200000,
+    "B": 1500000
+  },
+  "replay_tolerance": {
+    "atol": 1e-10,
+    "rtol": 0.0
+  },
+  "assets": [
+    {
+      "key": "a_l05",
+      "policy_pair": "A",
+      "historical_panel": "A",
+      "seed": 943201,
+      "tag": "s1_action_law_b03_set_clip_s943201",
+      "source_sha": "89486d32ea569728f39d6e21b53f8a7c8854e74c",
+      "summary_sha256": "2621fc884d2d6a9ea909ee4f483b4df1c2d9d6f8767826ef730b952a360422e3",
+      "checkpoint_sha256": "03f4f070e30b34fb61cd45820f1579ebde185c9417468689bd0c2e7ef60c0a3b",
+      "checkpoint_bytes": 20968771,
+      "object_id": "s1_action_law_b03",
+      "cell_key": "set_clip",
+      "lambda_l": 0.05
+    },
+    {
+      "key": "a_l0",
+      "policy_pair": "A",
+      "historical_panel": "A",
+      "seed": 943201,
+      "tag": "s1_entropy_b04_set_zero_s943201",
+      "source_sha": "f4762ac67f04675136367fcc566327f0bf78a086",
+      "summary_sha256": "83a51d84d3c802944be6ef61321aa4a0c83471cabca556e4101bad83a756f293",
+      "checkpoint_sha256": "9a1143798aab2e41a2290987b7fbca9403ef2dfdb0076bc30e3afd945c7f1359",
+      "checkpoint_bytes": 20968771,
+      "object_id": "s1_entropy_b04",
+      "cell_key": "set_zero",
+      "lambda_l": 0.0
+    },
+    {
+      "key": "b_l05",
+      "policy_pair": "B",
+      "historical_panel": "B",
+      "seed": 953201,
+      "tag": "s1_entropy_b05_set_l05_s953201",
+      "source_sha": "e2ea736457e0992fb53cf21aa775fd15da3d8231",
+      "summary_sha256": "136d090b32a8c5fec1eefad5dbaaefa9155d44ce4335c7fb0f07585d36cff4c4",
+      "checkpoint_sha256": "98062b5b338b684219c43b5c9a3dc13bf176322a948c439294beee1d52ae477e",
+      "checkpoint_bytes": 20968771,
+      "object_id": "s1_entropy_b05",
+      "cell_key": "set_l05",
+      "lambda_l": 0.05
+    },
+    {
+      "key": "b_l0",
+      "policy_pair": "B",
+      "historical_panel": "B",
+      "seed": 953201,
+      "tag": "s1_entropy_b05_set_l0_s953201",
+      "source_sha": "e2ea736457e0992fb53cf21aa775fd15da3d8231",
+      "summary_sha256": "1e0ecb08f66d99687d6811aa41332d542d7c46057de2f383326ddf20c51b7c91",
+      "checkpoint_sha256": "bbe00968cc56481fbd74123a1fc92205d6b67f480e8ec0d36fec0a5e564d67d2",
+      "checkpoint_bytes": 20968771,
+      "object_id": "s1_entropy_b05",
+      "cell_key": "set_l0",
+      "lambda_l": 0.0
+    }
+  ]
+}
