@@ -869,3 +869,28 @@ generation5 was consumed using its exact wake/event identities. A new detached l
 will track this accepted G operation at30-second intervals with a25-minute checkpoint, leaving
 the source/worker unchanged. The next observation will read all new evidence and rearm the
 same operation; no duplicate launch or extra Pro question is authorized by an observation.
+
+## 2026-09-23 — B01 G first observation checkpoint
+
+Generation7 returned a bounded checkpoint; the same accepted native runner/supervisor identities
+remain running, without an exit witness or recorded failure. Current published owner controls
+still permit this direction. The newer three-DM concurrency amendment was read and preserves
+already accepted operations; it does not change this fixed comparison or the Claude FSD pause.
+
+Read the complete31-rollout snapshot and all24,800 aligned prediction rows. Summary and
+training log rows agree; each prediction-batch hash, raw-target hash, canonical time-major
+lane/boundary order, raw MSE and output variance were independently checked. Initial native
+weights, the entire initial-own panel and first-rollout facts still agree with D; calibration
+remains fixed. Snapshot counts are248,000 training/stored transitions,496 training episodes,
+31 native updates and16,000 initial evaluation transitions. Native optimizer counts are
+465/69,750/69,750/465/1,860 in coordinator/low actor/low critic/team/individual order. Both
+heads and G auxiliary trunk have217 steps each; base/FiLM/GRU auxiliary movement is nonzero
+on every completed rollout. Maximum sampled old/replayed log-probability difference is
+6.079673767089844e-6, forced scores0, discarded windows0; all retained numbers are finite and
+stdout/stderr are empty. Per-rollout mean trunk gradient norm ranges.006060355–.124099828.
+
+This is integrity/progress evidence, not endpoint acceptance or G−D service evidence. Remaining
+14 training rollouts and all frozen final panels stay unchanged; P has not started. Record the
+checkpoint on this direction branch, leaving main's already-published running standing until
+the complete result boundary. Consume the exact generation7 checkpoint event and rearm the
+same G operation; no worker restart, scientific change, new fit or Pro Send.
