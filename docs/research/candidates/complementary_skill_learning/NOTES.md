@@ -2592,3 +2592,22 @@ using D's scores to alter either arm. No scientific B03 fit has been admitted at
 Publication refresh reached main `36db756f3`, where DM1 fixed B13's four retained-policy
 comparison. I read the affected RESEARCH diff: no new result, owner pause, this direction's
 state or lead change. That independent plan does not change B03's prediction or inputs.
+
+## 2026-09-23 — B03 D admitted under the fixed learning recurrence
+
+The fixed first arm D received native child admission after the fresh canonical and published
+pause/state/lead check and actual-node memory check. The subsequent same-operation status
+read showed both recorded native identities running, consistent records and no exit witness.
+The original [launch manifest](../../../../runs/complementary_skill_learning/b03_d_260923921_8859fc379/launch-manifest.json)
+is the authority for the accepted command, source, node, native identities and stable operation
+reference. Its [admission preflight](../../../../runs/complementary_skill_learning/b03_d_260923921_8859fc379/admission-preflight.json)
+passed the physical/effective memory floor. Both files were collected and byte-verified
+against the executing node before publication.
+
+This admits one result fit; it is not a scientific result or acceptance of the learning
+prediction. The fixed G fit remains second, after complete D collection and DM evidence
+acceptance. D scores cannot change its paired initialization, training worlds, old uniform
+evaluation stream, endpoint, objective or G intervention. No additional fit or replay was
+added. Detached read-only observation is to use this manifest's same operation reference;
+completion or a bounded checkpoint returns to this task for collection or rearming, without
+restarting the worker. B01/B02 and the completed Pro requests remain consumed.
