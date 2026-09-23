@@ -1,0 +1,24 @@
+{
+  "object_id": "complementary_skill_b02",
+  "arm": "M",
+  "spec": {
+    "n_agents": 6,
+    "n_users": 50,
+    "k": 10,
+    "horizon": 500,
+    "lanes": 16,
+    "rollouts": 45,
+    "eval_lanes": 32,
+    "init_seed": 260923911,
+    "head_seed": 260923912,
+    "train_rng_seed": 260923913,
+    "aux_seed": 260923914,
+    "eval_rng_seed": 260923915,
+    "train_world_base": 1800000,
+    "eval_world_base": 1900000,
+    "threads": 4,
+    "small_model": false
+  },
+  "launch_sha": "e232332a03474189d58046d57d22785f150ae5b4",
+  "device": "cuda"
+}

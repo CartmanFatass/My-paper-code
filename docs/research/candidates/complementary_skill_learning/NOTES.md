@@ -1702,3 +1702,113 @@ own/uniform evaluation exposure. T remains the prospectively fixed second fit un
 separate admission, independent of M's scores. Collection, numerical reading and the paired
 scientific judgment remain outstanding. Preserve the live source snapshot and output until
 the complete evidence is collected and verified.
+
+## 2026-09-23 — B02 M complete and read; fixed T comparison remains pending
+
+The M operation exited0 with a valid native exit witness and absent runner/supervisor.
+All13 files,60,530,939 bytes were collected into
+`runs/complementary_skill_learning/b02_m_260923911_e232332a0/`; every local size and SHA256
+matches the terminal executing-node file. Read the full
+[summary](../../../../runs/complementary_skill_learning/b02_m_260923911_e232332a0/summary.json),
+[45 training rows](../../../../runs/complementary_skill_learning/b02_m_260923911_e232332a0/training.jsonl),
+[factual predictions](../../../../runs/complementary_skill_learning/b02_m_260923911_e232332a0/auxiliary_predictions.jsonl)
+and [first-rollout numerical evidence](../../../../runs/complementary_skill_learning/b02_m_260923911_e232332a0/first_rollout_reward_gae_audit.npz),
+plus both checkpoints, effective config and native execution records. Exit alone was not acceptance.
+
+**Implementation reading.** One fit,360,000 actual/verified-stored training transitions,
+720 train episodes,45 native updates;64,000 evaluation transitions/128 episodes across exactly
+initial/final x own/uniform. Final native optimizer calls are675/101250/101250/675/2700 in
+coordinator/actor/critic/team-discriminator/individual-discriminator order. Every rollout's
+counts and reward/storage identities pass;22500 batch calls and360000 verified rows overall,
+with zero fallback, finite, component or storage failures. Both discriminators still forward
+and learn. Each detached factual head receives315 updates; all auxiliary trunk gradients,
+movements and optimizer counts are zero. Native groups and both heads move from initialization;
+ValueNorm states are finite and updated, with final counts252000.0001 and2160000.0001.
+The collector's actual initial native digest is
+`c05a95c90f23533a8722128d9281670cebaca3b26d048aa99aad008e79e77ef6`, and first raw rollout facts
+`70134465738b7c34f8820e64ae493591c2f25d7bbda6ed2be087eecfa4eb0fd0`; T must match them.
+
+An independent float64 recomputation from the saved rewards/values/dones gives maximum
+GAE and return discrepancies9.258410e-7. The stored reward versus native scalar reward
+plus.025*team-score+.01*individual-score discrepancy is5.813316e-9. All first-rollout masks
+are valid and only the last step is terminal; independent discounted raw-reward segment
+sums match800 team/4800 individual D2 rows within2.976889e-8, retaining16/96 terminal rows.
+All45 factual prediction lines are finite, contain800 rows and match their per-row hashes;
+maximum sampled log-mu replay discrepancy across the retained checks is5.006790e-6.
+The initial verification script incorrectly tried state_dict on RunningMeanStd; inspection
+of its actual mean/var/count fields completed that check without changing the run or source.
+Each evaluation panel has zero optimizer/normalizer updates. J=6*U/500, J=.7*C+.3*Q-height,
+and users=50*C independently agree with every saved world's readings to floating roundoff.
+These are artifact/numerical consistency checks; no additional environment evaluation was run.
+
+| M panel | mean native J | coverage C | quality Q | height penalty | connected users/step | raw-action saturation |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| initial own | .3223081813 | .4370837500 | .1082786536 | .0161340398 | 21.8541875 | 0 |
+| initial uniform | .3125646004 | .4342937500 | .1047281289 | .0228594633 | 21.7146875 | 0 |
+| final own | .4684158033 | .6154187500 | .1738756567 | .0145400186 | 30.7709375 | .6316527778 |
+| final uniform | .4979026203 | .6647775000 | .1696162194 | .0183264955 | 33.2388750 | .6181597222 |
+
+Own initial-to-final J change is+.1461076221 (30 positive/2 negative worlds), users+8.91675
+(29 positive/3 negative). Preserve world1900026: J-.0268152211/users-2.308;
+1900029: J-.0232164157/users-1.46;1900011 gains J+.0120051014 but loses.97 users/step.
+Uniform J improves+.1853380199 in32/32 worlds, users+11.5241875, but world1900027 loses.484
+users/step despite J+.0265995819. Final own-minus-uniform J is-.0294868170 (11 positive/21
+negative, median-.0189622773), users-2.4679375 (9 positive/23 negative). World1900026 loses
+.1871930388 J and12.706 users/step under own. Own's higher quality and lower height penalty
+do not offset its lower coverage. All signed worlds remain in the linked output, including
+opposite-sign J/service consequences; the high final action saturation is retained explicitly.
+
+Training mean J runs from.245066 at the first rollout to.439353 at the fixed45th, with
+intermediate reversals. Detached G/P raw losses go from.016504748/.016876470 to
+.005446154/.004867964; they do not select the comparison or explain the service change.
+Runner body cost is**47.701160407 min**, accepted-to-exit50.479240914 min; initial/final
+evaluation22.806697/24.855230s, collection954.566165s and native-plus-head updates1854.706778s.
+Process-lifetime RSS peak1,894,156 KiB; CUDA allocated/reserved peaks1,527,112,704/2,107,637,760
+bytes. These are one process on a shared node, not exclusive GPU occupancy. Total support
+time is unmeasured. The13 copied files include ignored initial.pt/final.pt retained in both
+the local run directory and the original output root named by the native manifest. Their
+SHA256 values are `d141a9ec002ec64790e079bdffab6fcc0be33019a3ba691a18dd20de2f1dcab8` and
+`3673cef165f91e85f6c62a7dd48f180988dd34baf0dd975507d8f3cfc4b12559`; no checkpoint is discarded.
+
+**Judgment.** Accept M as the complete first B02 fit. It strengthens the narrower observation
+that this skill-conditioned native mixed-reward recipe learns useful mean service on this
+fresh block; it retains losses for particular worlds and an own/uniform deployment tradeoff.
+It leaves the .5-versus0 objective-use question untouched until T. This is one training
+instance, not32 training replications, and does not identify skill necessity or a B01 failure
+mechanism. The existing Pro advice and frozen comparison still cover the next action.
+Run the already specified T second arm from the same published source and fresh addresses,
+with no change based on M's scores, then read the paired result. No additional fit or panel
+is added. Current main keeps this lead active and owner pause lifted; Claude FSD/G33 are unchanged.
+
+## 2026-09-23 — B02 fixed T admitted after M collection
+
+After full local collection and verification, the native collector previewed and removed
+only M's disposable source snapshot `d14e5589c2a04aa6941f45e6e8a63b7b`. It verified terminal
+identities, clean source, retained output and durable source reachability; the operation,
+manifest, complete outputs and authoring checkout remain. Generation17's M-ready event was
+consumed into generation18 without restarting M.
+
+The fixed second arm T was natively accepted at10:01:24 PDT under the same tested/published
+inputs and the original two-fit contract. Its
+[native manifest](../../../../runs/complementary_skill_learning/b02_t_260923911_e232332a0/launch-manifest.json)
+and [fresh preflight](../../../../runs/complementary_skill_learning/b02_t_260923911_e232332a0/admission-preflight.json)
+were copied unchanged and match executing-node hashes. The preflight passed with11,933,335,552
+effective available bytes against the4,294,967,296-byte floor. Native runner/supervisor
+identities agree and remain running; supervisor command acceptance was separately checked.
+
+A read-only comparison of actual M/T initial checkpoints verifies identical native tensors,
+both factual-head tensors and normalizer fields; T's effective coefficient is0. The first
+rollout summary was not yet present at that read, so actual first-fact/D2 pairing and the
+declared low-target divergence remain for collection. No evaluation or learning was added
+for this check. T is observed through its original native operation at30s intervals with a
+1500s checkpoint window. The comparison, seeds,360k train/64k eval per arm and fixed final45
+endpoint remain unchanged. The complete paired scientific reading is still pending T.
+
+At the subsequent first-rollout read, initial own/uniform panels, the raw-facts digest,
+factual targets, unweighted discriminator scores and first D2 reward arrays match M exactly.
+T's stored low rewards equal its environment component, both weighted discriminator
+components are zero, and its low GAE/returns differ from M as declared. The first8000 rows
+are verified with both discriminator forwards retained and zero reward/storage errors.
+The inspection initially requested the final-only auxiliary_history field from the live
+summary; reading the actual training_rows auxiliary field completed this check. This was
+an inspection-schema correction, with no worker, source or scientific exposure change.
