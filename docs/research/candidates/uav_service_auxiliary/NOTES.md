@@ -3037,3 +3037,97 @@ these fixed-policy loaders create empty buffers and perform no discriminator lea
 They do not change the restored policy identities or constitute a resumed training fit.
 Automatic observation is registered against this exact native claim. Read and verify the
 whole three-arm result after completion; second-block training remains unstarted.
+
+## 2026-09-22 — B03 common-endpoint replay accepted and second block retained
+
+The same replay operation completed with a valid exit-zero witness at 00:30 UTC September
+23. All 17 files / 668,781,720 bytes were recovered and checked against original-node
+SHA256s. Summary digest is
+`615ab6fffce72457f7784e0fc5574c7f2424e5056b2b1d1e2e23f688aaeef5cc`.
+Read all nine source strata and 36 policy/episode scores. Status is COMPLETE, failure null,
+and all 1,881 reported floating values are finite. The three restored policy fingerprints
+match their accepted training endpoints before/after replay, and all input summary,
+calibration and factual-policy identities match. There are exactly **429,408 valid agent
+rows, zero new fits, zero optimizer updates and zero environment transitions**.
+
+The nine saved prediction archives were independently rescored with direct float64 W10
+windows, legal next-observation coordinates and episode-equal reductions. All 36 scores,
+nine stratum means and three mixture means agree within maximum absolute error 4.014e-9;
+the small discrepancy is consistent with float32 runner labels. Saved seeds/QoS/dones
+match the source facts, and each source's normalized factual inputs match across all
+three readouts. Each episode has 1,491 valid starts / 11,928 agent rows; no episode is
+missing. The 512-row feature samples, selection indices, variance and effective rank
+were independently checked. This readback adds no training or environment interaction.
+The D/S sections are unchanged from the first snapshot. Accept the completed diagnostic;
+its source strata and binary-array identities remain in the runner-written summary.
+
+| Factual source | D service MSE | S service MSE | G service MSE | D observation MSE | S observation MSE | G observation MSE |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| D endpoint, four episodes | .010311016 | .017367963 | .021386320 | .019620017 | .022893773 | .020707128 |
+| S endpoint, four episodes | .039695826 | .028320992 | .081293670 | .034882359 | .029610588 | .033069611 |
+| G endpoint, four episodes | .013669773 | .017019269 | .051454015 | .021906366 | .020292745 | .025529430 |
+| Equal 12-episode mixture | **.021225538** | **.020902741** | **.051378002** | **.025469580** | **.024265702** | **.026435390** |
+
+The common service-mean reference has mixture MSE .047533042; the observation-mean and
+persistence references are .024824760 and .000146870. S is slightly below the observation
+mean in aggregate; D/G are above it, and all three are far above persistence. G's lowest
+initial-fact service error does not generalize to this endpoint mixture: its service
+MSE is now highest in every source stratum, 2.420575 times D in the mixture and above
+the fixed service-mean reference overall. G is worse than that mean on its own source
+stratum and D's, though below it on the S-source stratum. This is a specific failure of
+the earlier initial-fact error ranking, not evidence that G failed to train or collapsed.
+All feature summaries retain nonzero variation: effective ranks span 6.785709–20.296357
+across readout/source pairs, with no degeneration flag.
+
+S's mixture service MSE is only .000322797 below D (ratio .984792), and this average
+conceals worse errors in **11 of 12** common episodes. Its single favorable episode is
+the S-source 933204 trajectory: S MSE .052268160 versus D .109546312, a difference
+-.057278152 that outweighs the other eleven increases. S is worse than D in both D- and
+G-source stratum means. Retain this concentration rather than treating a slightly lower
+mixture average as a broad predictive advantage or equivalence. S has lower observation
+MSE than D in nine episodes and lower service/observation MSE than G in ten/nine episodes,
+respectively, yet the final native panel favors G in aggregate. The package with the
+highest native mean also has the highest mixture error for both readouts. This further
+weakens forecasting accuracy or service-readout accuracy as a selection/mediation rule
+under these fixed conditions. The study does not identify which learning effect produced
+the native benefit; neither the mixed factual distribution nor the readouts are the full
+control task, and no new gradient intervention was made.
+
+Replay runner wall is **54.365640 s / .906094 min**, CPU user/system 51.115133 / 14.982371 s,
+and process peak RSS 1,503,000 KiB (1.433372 GiB). Accepted first-block training plus this
+separate diagnostic totals **406.958806 runner min**; the earlier zero-step failure,
+implementation, transfers/publication and readback remain outside that sum. Three fits
+are complete, with no fourth fit yet started at this decision. The exact generation-25
+READY wake/event was consumed and observation advanced to generation 26.
+
+**Continue the already fixed second block.** Refreshed main
+`1a153dc5d61a094841a6fea05fa56eb0251b6825` retains this lead and lifted pause, and the
+one-training-block and proxy-versus-native limits recorded in the G acceptance entry.
+Its newly published S1 pooling-versus-MLP cost/service loss reinforces measuring ordinary
+packages rather than assuming their benefit; it does not alter this frozen S7 comparator
+or negate the observed G-minus-D result under different conditions.
+The strongest stop argument is S's small mixed final increment, unfavorable S-minus-G,
+low absolute service and unstable proxy ranking. I retain the prespecified second block
+because recurrence now distinguishes a functioning ordinary auxiliary alternative from
+a block-specific favorable ranking, and can change the bounded package-retention judgment.
+The working expectation is positive G-minus-D native J with higher service/lower return
+cost, and no favorable S-minus-G complete-return increment. A favorable S-minus-D and
+S-minus-G with acceptable observed components in block two would instead make the blocks
+conflict; loss of both auxiliary increments would weaken even the ordinary-package
+benefit. Neither outcome authorizes averaging away adverse evidence or adding a third
+block. These are comparisons at the existing fixed endpoint, not new numerical acceptance
+thresholds. The common-fact reading supplies no semantic-mediator claim and changes none
+of the six-fit design's conditions or investment branches. Prior complete Pro advice
+covers this planned recurrence and remains applicable; no repeat Send is selected.
+
+Execute the remaining **D/S/G at training seed 912347**, in that order, three fixed fits
+of 180,000 training transitions each: 540,000 train, 288,000 nominal evaluation and 21,000
+physical fact transitions for this block. Retain source
+`73be55261b9f5e8f8fe26fdec6558b87ad088fcb`, wsl_4070 CUDA FP32/TF32-off/four threads, the
+30-update horizon and all prior losses, optimizers, gradients, panels and no-early-selection
+rules. D first creates initial facts on 932211/932212 and the training-only calibration;
+S/G must reuse those exact block-two inputs. Endpoint-fact seeds are 933211–933214; the
+development and final worlds remain as fixed in the original plan. The next output is
+`runs/uav_service_auxiliary/b03_d_912347_a01`, absent on the node at this reading. Commit
+and push this decision before its single native launch. No new module, tuned target,
+extended horizon, replacement G, additional block or confirmation is selected.
