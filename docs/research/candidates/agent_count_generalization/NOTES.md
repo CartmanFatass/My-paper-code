@@ -10229,3 +10229,15 @@ consequential unread gap. Keep the answer focused; advisory agreement is not emp
 replication, a launch authorization or an additional owner gate.
 
 ### Answer
+
+
+## 2026-09-23 — B11 interpretation clarification before adviser handoff
+
+The prospective wording was "Delta6 may be negative": N6 loss was a possible specialization
+consequence, not a required directional prediction. The completed reading's phrase "N6
+average specialization-loss prediction is not realized" should therefore be read as **no
+mean N6 loss observed in this block**, not a failed prespecified N6 prediction. The primary
+N8 J/service/eligibility prediction is unchanged. Negative N6 median and18/32 J-loss worlds
+still prevent interpreting the small positive mean as equivalence or absence of local cost.
+This corrects interpretation only; no number, endpoint, source input or next-question byte
+was changed, and no adviser Send had occurred when this clarification was written.
