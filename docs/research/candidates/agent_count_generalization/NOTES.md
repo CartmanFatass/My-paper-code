@@ -8715,3 +8715,556 @@ used, identify decision-critical sources you could not read, and return
 agreement as empirical evidence, or turn bounded negative results into universal closure.
 
 ### Answer
+本轮未完成 GitHub 写回。 GitHub 读取正常，整文件更新接口也可见，但不支持局部补丁；我未能完成“其余字节原样保留”的完整替换稿，因此没有发起更新、没有产生新提交。最新回读的本题 ### Answer 仍为空。以下是完整答复。
+
+Answer
+一、建议：保留六面板比较，但只检验“这些权重如何使用后续技能分配”
+
+我支持这次零 fit 部署比较：原始 B07 final45 H6，一种正常使用后续分配，另一种持续使用该策略在每个世界开局时选出的初始标签。保留三个普通控制面板和三个初始标签复用面板，共48,000评价 team steps；不增加训练、SET执行、标签搜索或大型影子系统。 这与附件提出的边际问题一致，不重开B07的保留决定，也不延续B09固定人数值的修复。
+
+hmasd-pro-question-online-skill…
+
+值得改变的判断是：
+
+对这份已训练H6及指定世界，后续技能分配输出是否提供了不能由“开局联合分配＋持续局部反馈和循环记忆”保留的原生服务？
+
+如果抑制后续分配确实改变了执行选择，并损失了有实际意义的服务，那么继续部署原H6时有理由保留这项功能，而不是只凭最终包差推测它有用。反之，如果选择改变但服务保留或提高，就降低“这些世界上的良好服务依赖持续使用新分配”的判断，并保留初始标签复用这一较少依赖后续中央信息的部署版本。两种结果都不直接选择下一次训练。
+
+最强的不投入理由是：这是对共同训练系统施加的部署限制，不会认证一个更强的普通学习器，也不直接分离自适应信息、技能切换和条件分布变化。继续增加消融分数，未必使论文级比较更可信。如果决策者只关心“完整H6现在是否比固定SET好”，B07已经回答了这个有限问题，本次可以不运行。
+
+我仍支持这次比较，因为它针对的是一项明确、可抑制且结果可能改变部署使用判断的功能，而不只是重述剩余差距。它能够限制下一步关于信息刷新需求的说法：有损结果不支持未经检验就去掉该功能；无损或有益结果不支持继续把它当作既有服务的必要解释。 这比由B09的低敏感度直接宣布在线协调冗余更有区分力。现行方法允许这样的有限部署观察，同时要求没有值得付费的后续问题时停止，而不是自动增加新架构。
+
+二、B09已经否定了统一固定值升级，不提供时间上标签恒定的证据
+
+我从附件逐字段提供的12份原生数组——B07、固定SET及B09各自面板——重算了均值、差值与相关世界计数。B09的关键读数与完成记录一致：
+
+原生效果：固定人数特征减原始策略	N4	N6	N8
+H6 J变化	.000000000	.000000000	+.000583958
+SET J变化	−.004522683	.000000000	+.014978441
+SET每步服务用户数变化	−.298500	.000000	+.741625
+
+这些数据支持结束统一固定值替换的自动延伸：SET在N4的执行动作和隐藏状态确已响应，原生用途却受损；N8平均收益也并不意味着多数世界的覆盖改善。世界1545802对unseen平均J贡献约+.004738，而整个unseen净收益约+.005228，集中性需要保留，不能靠剔除该世界重新判胜负。
+
+hmasd-pro-question-online-skill… +1
+
+H6在B09的N4上，原特征与固定特征的技能选择完全一致；N8只有少量分歧。这是同一预决策状态上两种特征处理之间的比较，不是同一策略在相邻时刻之间的比较。 它既不能证明原H6持续更换标签，也不能证明一直保持开局标签。
+
+hmasd-pro-question-online-skill…
+
+这里有一项可复用来源需要指出：B09的H6面板保存了 selection_comparisons，包括事件时刻、环境索引、actual_team、shadow_team和完整个体标签。因此，“B07没有逐步标签历史”不等于“完全没有可读的事件级标签记录”。这些记录可以用于核对已有的时序证据；但它们属于B09的实际轨迹及其局部影子，尤其在N8发生轨迹分叉后，不能直接冒充原始未干预策略的完整历史。我本轮核对了该字段结构，没有逐条累计全部50次事件，因此不从已见的开局标签推断后续恒定。
+
+当前证据应作如下更新：加强完整H6的有限服务用途，以及“标签／隐藏状态响应不等于服务收益”的区分；削弱统一固定人数标量可以修复普通SET的判断；保持未决后续技能重分配的部署价值。B08已经支持两包都获得有用自身增量，本题不应借机重新解释成H6没有学习，或把初始差距当成原因份额。指定main的相关背景正要求这样分开原生水平、自身增量与相对差距；其中B09待收取的旧进度由本次完整记录替代。
+
+三、对照应定义为“初始标签持续使用”，不是无技能、开环或省算力策略
+
+令 θ 是唯一的B07 final45权重，w是固定世界。在每条回合轨迹开局，按正常确定性协调器计算：
+
+ℓ
+0
+	​
+
+(w,N)=(Z
+0
+	​
+
+,z
+0,1
+	​
+
+,…,z
+0,N
+	​
+
+).
+
+普通版本在 t=0,10,…,490 使用正常协调器的新输出；复用版本开局同样正常选择，但之后执行端始终使用 ℓ
+0
+	​
+
+。这个初始选择来自训练后的final45策略在当前回合的初始状态，不是B08的checkpoint00，也不是step初始化时短暂生成的随机占位标签。
+
+低层actor仍然运行
+
+(μ
+t,i
+	​
+
+,h
+t+1,i
+	​
+
+)=f
+θ
+	​
+
+(o
+t,i
+	​
+
+,h
+t,i
+	​
+
+,z
+0,i
+	​
+
+),a
+t,i
+	​
+
+=clip(μ
+t,i
+	​
+
+,−1,1).
+
+因此，固定标签并不固定动作或轨迹：低层继续接收当前局部观测并更新GRU。各成员也仍通过环境、局部观测和共同训练形成的响应发生耦合。它保留开局中央联合分配及学得的技能条件化，不是“没有协调”的普通flat策略。 H6当前确实没有SET那条连续中央快照融合路径。
+
+hmasd-pro-question-online-skill…
+
+按提案继续在每个k10机会计算协调器建议，是本轮较稳妥的实现选择。这样改变的是后续建议是否进入执行标签，不改变协调器调用节律，也不购买省算力、低延迟或少通信的实证结论。后续中央信息仍被采集和计算，只是其新标签输出不再控制行动；不能称两版本的有效信息使用完全相同。
+
+同时必须区分：配置中的决策机会仍是k10，但标签的有效驻留延长到整个剩余回合。不要把这个实现写成“持续时间没有变化”，也不要把它写成学得了新的k。它是固定N回合中的部署输出抑制，不是变时长学习、打断或成员变化研究。静态用户也不意味着重选不可能有用，UAV的联合几何仍在变化。
+
+hmasd-pro-question-online-skill…
+
+最强的简单竞争解释是：开局联合分配已经给了低层足够有用的角色条件，持续局部反馈和记忆保留了大部分服务；后续新标签可能冗余，甚至扰动既有行为。但这只是可失败的解释。相反，复用损失也可能来自把共同训练的actor放入不同的长期标签／状态条件分布，而不只是失去了某一条“正确中央信息”。该限制不使部署比较失效：它仍测量这项实际替换的完整后果；只是不能将其进一步拆成未经控制的原因。
+
+四、执行路径上有三项必须明确的细节
+1. 保存真正执行的开局分配，且在选动作之前覆盖后续标签
+
+附件源码显示，step先做每环境初始化，再调用_batched_assign_skills，最后调用_batched_select_action。初始化可能消耗随机数，之后标签才被正常协调器覆盖。因此，不能跳过初始化、提前缓存随机标签，或在整个step返回后才修改标签。后一种做法已经让本步actor和GRU使用了错误版本的条件。
+
+hmasd-pro-question-online-skill…
+
+建议使用评价专用的窄适配：正常运行赋值路径并记录建议；第一次保存该lane、该回合的有效输出副本；复用模式随后在动作选择之前提供保存标签。执行标签与供下一步读取的内部技能状态必须一致，不能只改返回数组而让env_agent_skills保留另一套标签。保存时应复制数组，避免后续赋值通过共享引用修改“初始”向量。
+
+缓存只在真实回合重置时清除。每个lane的新回合重新正常选择，不能跨世界沿用，也不能在每个k10边界重新定义“初始”。成员顺序保持原生真实行对应关系，不根据位置、收益或标签排序重排。原来的actor／critic隐藏状态、timer及其他reset语义继续保留，不能因为复用标签就反复清空GRU。
+
+hmasd-pro-question-online-skill… +1
+
+在无异常提前重置的500步回合中，两种模式的前十个动作应走同一路径；最早的执行差异只能发生在后续被抑制的有效分配影响行动之后。若在第一次可能干预之前就分叉，应先定位实现差异，而不是解释为在线分配价值。
+
+2. skill_changed不是实际标签变化的证据
+
+正常分配触发条件是k10边界、done或无效标签。可是普通分支中，step_data['skill_changed']按时钟边界或done设置，并没有比较新旧标签。50次重选机会不等于50次标签切换。
+
+hmasd-pro-question-online-skill… +1
+
+记录至少应区分：
+
+原始模式在自己轨迹上的实际标签变化，以及相对开局标签的偏离；
+
+复用模式在自己轨迹上提出的新标签，与实际固定使用的初始标签；
+
+哪些事件真的抑制了不同的个体标签，而不只是运行了协调器。
+
+轨迹分叉后，复用模式上的“未采用建议”不是原始模式在那个时刻本来会采用的标签；两者看到的状态已经不同。原始模式的时序历史应来自本次普通重放，而不是用复用轨迹上的建议替代。
+
+3. 团队标签和个体标签对部署动作的作用不同
+
+当前路径把个体标签传入低层actor，把团队标签传入低层critic；高层团队标签还会参与正常的顺序个体标签生成。因此，团队标签改变本身不能证明低层动作受到改变；只见critic值或critic隐藏状态变化，也不能证明行动通路激活。
+
+hmasd-pro-question-online-skill…
+
+保留团队标签及整个有序个体向量的联合复用是合理的最小方案，不需要在本轮增加“只冻团队／只冻个体”的格子。但结果应称为正常完整重分配输出与初始完整分配持续使用的比较，不能分别归因于团队、个体或自回归组件。
+
+另外，未采用建议的高层log-probability和value应明确归属于建议，不能与复用的执行标签绑定成一个看似真实的训练样本。评价不需要为这些固定标签补做PPO评分；应保留所需观察、标明未计算或不适用，并且不调用任何训练存储或更新路径。实际store_rollout_step会把标签、log-probability、隐藏状态和奖励写入学习缓冲区，随后还有内在奖励相关路径；本次没有理由进入它们。
+
+五、我不建议新增影子策略前向；用真实两条轨迹区分激活层次
+
+与B09不同，本次已经重跑普通模式，因而能取得两种模式各自真实执行的标签和动作。本轮不需要再对每一步增加一次完整agent、协调器或actor影子调用。 这会增加运行状态隔离风险，也不自动提高对原生效果的识别。
+
+在已有前向结果上，保留事件级标签、实际raw／clipped动作，以及首次轨迹分歧的记录即可。首次分歧之前，可以在共同状态历史上核对标签与动作何时开始不同；分歧之后，各自产生的动作差只表示闭环轨迹不同，不称同状态下的局部效应。无须保存全部高维隐藏张量或另建分支轨迹系统。
+
+需要区分以下层次，而不是把它们合成一个“已激活”标志：
+
+有重选机会，但没有不同标签。 此时复用可能并未改变这批回合的有效actor条件；同分数不能当成“删掉了原本有用的在线分配却仍无损”。
+
+标签不同，但实际执行动作未变。 技能条件化、循环响应或动作裁剪可能使标签差异没有转成可见的执行差异。若完整500步的执行序列都一致，可以报告这些回合未见执行后果，但不证明所有标签、状态或更长时域都等价。
+
+执行或轨迹不同，原生平均效果很小。 这可能是无明显收益，也可能是世界间、时间内或服务分量间抵消；不能叫作未激活，更不能仅凭小均值证明不需要后续分配。
+
+执行不同，原生服务明显变化。 这才直接回答所选部署替换的用途。它仍不单独识别变化来自哪一次重选、哪一个成员，或新增中央信息与条件分布变化各占多少。
+
+若某个未来解释确实需要“同一个隐藏状态下换标签会怎样”，那才是额外局部前向的理由；本轮可以明确不作该解释，而不是为完整性预先购买它。这样的范围取舍符合当前工程方法对数值、状态隔离和诊断成本的要求。
+
+六、先读H6自身损益，再读剩余包差；N6不再是恒等性控制
+
+令 O 为普通部署、R 为初始标签复用。对每个N、每个固定世界 w：
+
+L
+n,w
+	​
+
+=J(R,n,w)−J(O,n,w),L
+n
+	​
+
+=
+16
+1
+	​
+
+w
+∑
+	​
+
+L
+n,w
+	​
+
+,
+L
+U
+	​
+
+=
+2
+L
+4
+	​
+
++L
+8
+	​
+
+	​
+
+.
+
+正值表示复用较好，负值表示普通后续分配较好。原生单位仍为
+
+J=
+500
+n
+	​
+
+t=0
+∑
+499
+	​
+
+r
+t
+	​
+
+=.7
+C
+ˉ
++.3
+Q
+ˉ
+	​
+
+−
+P
+ˉ
+.
+
+同时报告两个版本的绝对J、覆盖、质量、已加权惩罚，以及每世界差值。覆盖差乘50转成每步多服务或少服务的人数，惩罚差为正是不利变化。B07原评价确实按实际N恢复单位，并单独核对分量恒等式；新适配器不应改动这层含义。
+
+这里与B09不同：N6上抑制后续标签更新是真实处理，不能期待 L
+6
+	​
+
+=0。 技术恒等性要求是本次普通模式与历史B07一致，而不是复用模式与普通模式一致。
+
+N6应与N4/N8并列报告。若未见N上损失更大，可以描述该有限面板上的差异，例如 (−L
+U
+	​
+
+)−(−L
+6
+	​
+
+)，但这不是已识别的“数量泛化机制”：N同时改变容量、干扰、联合几何和分配序列长度。若各N都有收益或损失，则更像该保留策略的一般部署依赖，仍与N轴中的实际用途有关，不需要强制只在未见N显现。当前背景明确区分固定数量迁移、成员变化、cross-play和k轴研究。
+
+SET原始数组只作描述参照。若
+
+G
+n
+O
+	​
+
+=J(O,n)−J(SET,n),
+
+则
+
+G
+n
+R
+	​
+
+=G
+n
+O
+	​
+
++L
+n
+	​
+
+.
+
+复用损失一部分服务而仍高于SET，不能据“剩余差仍正”判定该损失无关紧要；复用落到SET以下，也不能把原包优势全部归给在线分配。更不能用 −L
+n
+	​
+
+/G
+n
+O
+	​
+
+ 宣称识别了“多少百分比的技能贡献”。这个消融没有重训匹配的普通对照，也没有改变产生当前权重的历史。
+
+七、预写结果分支：能改变部署判断，不自动选择修复
+观察	应更新的判断与后续使用
+后续不同个体标签确被抑制，复用导致有实际意义的J／覆盖损失	支持继续使用正常后续分配来部署这些权重。开局条件＋当前低层反馈不足以保留这批世界的完整服务；不推出所有无重分配策略都更差，也不证明技能训练必要
+选择和执行改变，复用提高J及有用覆盖，且各N代价可接受	保留这个具体冻结权重的部署版本；降低“原来的持续标签更新对当前用途必不可少”的判断。它仍含学得的技能与开局协调，不是合格flat或计算效率证明
+选择／执行改变，但原生损益小、世界或分量混合	报告有限取舍，不称等价或非劣。没有明确的实际用途变化时，本次诊断可以结束，不自动换标签、时钟或世界寻找更清楚的结果
+实际actor条件几乎未改变，或改变只局限于少数事件／世界	限制消融的适用范围。可报告这批部署本来就很少偏离初始条件；不能将它当成强力移除动态功能后的阴性证据，更不能从标签统计单独证明服务机制
+普通重放不一致、缓存跨回合污染、GRU／timer或执行合同被改变	隔离依赖结果，按技术问题处理。它不是科学负效应，也不授予自动补跑或放宽容差的理由
+
+“保留服务”需要有任务意义的量级解释，不能只用零附近的符号或“不显著”。本轮无需凭空制定一个数值MEI，但如果后来希望声称非劣或等价，就需要与其相称的预先定义和不确定性方法；当前有限观察不能自动提供它们。
+
+两个已有N8特殊世界仍照常进入结果：1545810是原H6相对SET的不利世界，1545802曾体现SET的局部训练损失及B09集中修复。新实验不能只报告前者被“修好”，也不能删除后者以得到更平均的图景。所有世界和预定N保留，不按结果改成只在某些N使用复用。
+
+这个比较还有一个重要的非对称性：复用受损只能反驳这一个开局标签规则，不能证明所有不在线重分配的规则都不行；复用有用则确实给出一个有限、可执行的反例，反对“这些用途只能靠原动态标签序列实现”。 这正是它能提供的研究价值，无需夸大为结构必要性或总体最优性。
+
+八、六面板成本合理，但不是“零 fit所以免费”
+
+我保留六面板，而不是只运行三个复用面板，主要购买两件事：新标签执行适配器的普通透传行为能否重现历史结果，以及原始策略在所有N上的真实时序标签／动作记录。仅复用旧最终分数虽能计算一个差值，却不能为新适配器提供同样的验证。B09已有事件记录应当复用，但不能代替本次所有N的未干预执行路径和新复用轨迹。
+
+新执行内容	Team steps	Episodes	批量策略步调用
+普通H6、三个N	24,000	48	1,500
+初始标签复用H6、三个N	24,000	48	1,500
+合计	48,000	96	3,000
+
+合计288,000 UAV steps，新增fit、训练存储和optimizer更新都为0。按500步、k10及完整同步回合计算，每面板50次批量协调器选择，总计300次；其中6次是开局选择，294次是后续机会，仍需记录实际次数而不是用公式冒充执行计数。每次协调器内部还包含随N变化的顺序解码，不能将其与一次低层调用当作等成本单位。附件给出的主成本计数是正确的。
+
+hmasd-pro-question-online-skill…
+
+两种模式都保留协调器推理，所以本轮不测“省掉294次调用能节省多少”。初始化、严格加载、普通重放核对、适配器检查／独立审阅、准入、收集和阅读也有成本。B08/B09的历史command wall只能作邻近规模参照，不能线性换算成此次承诺。H6原有360k训练成本是同一资产的历史成本，不因执行两个版本而变成两个新训练实例。
+
+hmasd-pro-question-online-skill…
+
+绑定原始final45二进制和全部normalizer，移除B09的特征固定及影子逻辑，不保留任何干预残留。B09摘要明确记录了该H6 checkpoint及原始面板身份；B07的历史评价则是从learner严格同步到新N运行时。新恢复路径仍应检查实际恢复后的状态与普通原生结果，不只验证文件可反序列化。
+
+同一世界可以比较两个部署版本，但这仍是一份已训练H6的条件反事实，不增加训练总体样本数。三种N、96个episode、重复历史控制或大量标签事件，都不能提供缺失的独立训练精度。所用世界和候选权重都经过先前开发阅读，本次是新的探索，不是新的盲测确认。
+
+九、来源范围、未验证对象与最终判断
+
+本次完整读取了附件中的问题、B09完成记录、指定agent路径摘录和全部12份原生数组，并对关键均值、B09效应、世界计数及集中贡献做了算术复核。GitHub读取使用问题固定版本 103bbca36b0e212324998ab2dfd11e1eca67a387；共享背景使用指定 da18496d4f01624d7858ee56677ce919a363b272，没有用移动分支替代推理输入。
+
+本轮还直接读取了固定版本的方法／治理相关段落、B09采纳合同、B09摘要身份与规格、N4事件记录结构、学习存储路径、B07评价路径及H6构造／同步。版本比较确认此前实际读取的B07/B08资产和共享执行代码未在后续提交中改变，其完整结果读取按原范围复用。
+
+没有重新审计B07全部训练行，没有逐条重算B09所有H6选择事件，也没有加载节点二进制或运行任何策略／环境。 原始策略究竟多常偏离初始标签、本次复用会改变哪些动作、原生损益和实际运行成本都仍未知。现有记录中的远端哈希、完整运行检查与影子隔离结果属于DM已发表证据，不冒称本轮重复验证。未读的全量事件历史限制我对既有标签动态的判断，但不被替换成“标签恒定”或“已充分激活”的假设。
+
+最终建议：选择这一次六面板、无额外影子前向的部署比较。 它可以约束保留权重对后续标签更新的实际依赖；不能认证普通基线、分离技能学习必要性或产生自动后续实验。若只准备把两种结果都写成“还需更多训练”，则宁可不运行，而不是把零fit消融当作必须完成的流程。
+
+MATERIAL_DISSENT: no。 我接受提议的原始final45、每回合初始标签复用、保留k10推理与六面板控制。必要收紧是：区分重选机会和真实标签变化、团队与个体标签的行动路径、建议和执行元数据；用实际两条轨迹而非大型影子系统观察激活；将结果限定为该复用规则相对正常部署的用途，不把任何损益升级成技能训练或持续协调的一般必要性结论。
+
+
+## 2026-09-23 — Online reassignment advice adopted; fixed B10 comparison and L0
+
+### Delivery, reading and decision
+
+The full8828-character answer to key
+`hmasd:7ede3079cc3f00cd333f4cb066f3c9d3e16bbdb0be1ff860b81babefe94ebc84`
+was collected from the one accepted question at
+`103bbca36b0e212324998ab2dfd11e1eca67a387`. Delivery verification returned
+`NOT_DELIVERED`, commits[]; Pro explicitly reported no attempted write. Local, pinned and
+fresh remote question/file bytes matched and the unique Answer remained empty. The DM saved
+its complete chat answer verbatim above and read every section. Body SHA-256 is
+`5f1a0228f919943b7ddd96803660e2cde88afb27b3cdd82fd704ecdcac8efb89`; the private file's
+extra final newline yields22,138 bytes and SHA-256
+`98978801bf2c80e9d838448140f2124dfd80018c54b275ae48481348a88af7ec`.
+The event was consumed at generation90 and rearm returned91; no Send was repeated.
+
+**Adopt the six-panel, no-shadow comparison as B10.** Pro reports no material dissent.
+The DM accepts its narrower scientific meaning and its implementation corrections. B09's
+small H6 count sensitivity does not show temporal label constancy or redundancy of online
+coordination. B07 did not save original event histories; B09's event traces remain usable only
+for their recorded clamped histories and local shadows, not as substitutes for B10's original
+unclamped histories. The proposed intervention has not yet produced an observation.
+
+The decision changes an actual deployment-use judgment: can the original trained H6's own
+opening assignment, followed by ordinary local feedback and recurrent state, retain the
+useful service provided by repeatedly adopting new assignment outputs? It does not repair
+B09, establish training necessity, remove learned skills, or certify a sufficient ordinary
+baseline. If only the final H6−SET level mattered, B07 would already answer that bounded
+question; the extra evaluation is bought specifically for this online-use distinction.
+No result automatically selects new training or an additional label/clock/world search.
+
+The source excerpts and current `hmasd/agent.py` confirm the critical distinctions: native
+initialization consumes RNG before the real initial assignment; `_batched_assign_skills`
+runs before `_batched_select_action`; `skill_changed` describes scheduled/done opportunities,
+not actual label inequality. Individual labels condition the actor, whereas team labels
+condition the low-level critic and contribute to the coordinator's joint individual selection.
+Thus a team-only change or critic-hidden/value change is not evidence of an executed-action
+change. H6 has no SET central-snapshot actor path. The DM adopts these corrections without
+adding a team-versus-individual factorial. No state/normalizer/training-path change is intended.
+
+Pro reports using the pinned source, selected methods and arrays; its omitted all-event
+recomputation and absent binary loading remain explicit. Adviser agreement is not new evidence.
+Current main `a1832affeefb84ceac469d85ea03764c2d43f12c` was refreshed: relevant topics3–6
+retain B07/B08/B09's scope-qualified native-use and counterevidence, and no new owner pause or
+change to this DM applies. Those judgments determine the present comparison concretely:
+read each deployment's absolute J and service before relative gaps; distinguish actual action
+response from proxy label/value response; preserve all N/worlds and prior training uncertainty.
+A changed shared row for another direction neither assigns us its work nor blocks this one.
+
+### Fixed B10 scientific contract
+
+Object/output tag `s1_initial_assignment_b10`, direction `agent_count_generalization`.
+There is one original trained policy: B07 H6/.05/952201, final45 after360k training team
+steps/45 updates, source `0a9e3fde40659fdcc1d05922c9920c5c04b2ab23` and tag
+`s1_bounded_package_b07_h6_l05_s952201`. Retain the exact original binary
+`/home/wu/hmasd-worktrees/agent-count-bounded-package-20260923-b07/runs/agent_count_generalization/s1_bounded_package_b07_h6_l05_s952201/checkpoint_45.pt`,
+23,073,626 bytes, SHA-256
+`6d71f3023e5593a801b4d618f7eece93df1a15575f8a71d769566190ba6498df`,
+and final parameter/normalizer digest
+`ea1de5234aba1683f182b6f36a3260ecf8fdd68779df0e313a6bc040b9458c1d`.
+Summary SHA-256 is
+`9d7f90523b74ea0fb4b9d7720086baefff13c22cdb41547c2b793764273b550a`.
+The original final45 H6 panel hashes, source configs and module/normalizer identities remain
+those bound in B09 above. Strictly restore them at each actual N before each panel. SET
+B05/.05/953201's three original final45 arrays retain their existing SHA bindings and are
+read only as descriptive references; do not load or execute a SET binary.
+
+Two modes, each at N4/6/8:
+
+- **ordinary:** all native reassignment outputs go to execution, with the same transparent
+  observation adapter as the other mode. Rerun all three ordinary panels first; require exact
+  per-world J, scalar returns and every native component against historical B07 arrays before
+  accepting dependent comparisons. Retain a failed control's measured arrays and discrepancies;
+  no tolerance relaxation, repaired score or automatic repeat.
+- **initial_replay:** run normal initialization and initial deterministic coordinator assignment
+  at each lane's true episode start, copy its actual final45 team label and ordered individual
+  vector, and use these labels for that lane's remaining actions. Subsequent native coordinator
+  inference still runs on the normal k10 opportunities and its own evolving history, but the
+  saved initial labels are supplied **before** low-level action selection, with internal
+  execution-label state consistent. Reset only on actual episode reset, then choose anew.
+  Never cache the temporary initialization's random labels, overwrite after actor execution,
+  share a mutable initial-vector alias, reorder members or import future/outcome information.
+
+Keep S1's50 stationary uniform users, actual physical N/roster/order/geometry, local observations,
+all original weights and normalizers, CPU float32/torch threads4, deterministic raw means and
+independent action clipping[-1,1]. Fixed worlds are1545000+100*N+i, i0..15;16 synchronous
+lanes×500 steps. Both modes start from common per-world state/observation/runtime/RNG conditions
+and each subsequently follows its own closed-loop history. Native k10 opportunities, timers,
+initialization and actual actor/critic GRU evolution and reset semantics remain unchanged.
+The effective label residence in initial_replay is deliberately longer; do not describe its
+skill duration or effective use of central information as unchanged. No B09 count hook, other
+feature replacement, shadow policy call, high-level/low-level update or rollout-storage path.
+Computing unused proposals buys no latency/communication/computation-saving claim.
+
+Separate native coordinator proposals from executed labels and their metadata. Values and
+assignment probabilities for unused proposals must be explicitly proposal-only, never paired
+with replayed labels as a training sample or reported as replay-label likelihoods. No extra
+PPO scoring is required; execution-assignment scoring can be marked not applicable/uncomputed.
+Preserve actual low-level returned actions and its native policy-step semantics. No training
+buffer receives either mode. All observations and method wrappers clean up on success/failure.
+
+### Observations and prewritten reading
+
+Use only already executed forwards from the two real histories; **zero shadow forwards**.
+Retain event-level opportunity indices, normal proposals, execution team and ordered individual
+labels, ordinary mode's temporal changes/deviations from its own initial labels, replay mode's
+suppressed differences, and truthful call counts. Count team and individual changes separately;
+`skill_changed` alone cannot count activation. Record ordinary and replay histories separately,
+since an unused proposal after trajectories diverge is not the original mode's counterfactual.
+
+Retain actual raw/clipped action sequences, state/observation sequence identities and enough
+actual actor-state identity to locate the first label/raw-action/executed-action/history
+separation per world and verify the common prefix. Do not store all high-dimensional hidden
+state tensors or build a branching trajectory system. Compact arrays/digests and a recoverable
+runner-written binary trace with SHA/shape/dtype/native path are acceptable; finite JSON panels
+retain native scores, event records and the derived comparisons. The first10 actions/states/
+observations and actor-state evolution must agree under the ordinary native initialization;
+no intervention can affect execution before a later changed individual condition. Unexpected
+prefix mismatch is technical failure. Distinguish raw changes absorbed by clipping, changed
+actor conditions/state with equal current actions, and later closed-loop action differences.
+Do not describe comparisons after history divergence as same-input local effects.
+
+For q in J, scalar return, coverage, quality and already-weighted penalty, report absolute
+ordinary O and replay R, each world's L=R−O, each N mean and equal-weight N4/N8 U. Coverage×50
+is served users/step. Preserve all16 worlds at all N and especially1545810/1545802. Positive
+penalty change is adverse. Compare N6 as a real treatment too; L6 need not vanish. The technical
+identity is O versus historical O at all N. The descriptive remaining H6−SET gap satisfies
+G_R=G_O+L; it neither certifies a flat comparator nor identifies a percentage of skill causality.
+Native J=N*scalar_return/500 and J=.7*coverage+.3*quality−penalty must remain consistent.
+
+Outcome branches, with no automatic extension:
+
+- Different individual assignments are suppressed and replay loses useful native J/coverage:
+  retain normal online reassignment for these weights/worlds. The opening rule fails to retain
+  full service; no conclusion about all non-reassigning policies or training necessity follows.
+- Decisions/execution differ and replay improves useful service with the observed N/component
+  costs acceptable in this fixed comparison: retain this exact deployment alternative in its
+  measured scope, not an outcome-selected per-N switch or a compute-saving claim.
+- Small, mixed-world/N/component consequences: preserve the actual tradeoff; no equivalence,
+  noninferiority or fixed threshold is fabricated. End this diagnostic without another label,
+  time or world search unless a distinct later scientific reason is recorded and consulted.
+- Actor conditions/execution barely change: limit the result to observed activation. This is
+  not a strong removal of dynamically useful action conditioning or proof of universal redundancy.
+- Restoration, ordinary identity, scope, prefix, runtime/reset or source integrity failure:
+  quarantine dependent readings, preserve actual costs/partial artifacts and diagnose before
+  selecting any further action. Technical failure is not an unfavorable scientific effect.
+
+Independent training remains n=1;96 episodes and the repeated ordinary controls do not add
+training replication. The assets/worlds are development-read, and this is exploratory rather
+than blind confirmation. B07 retain, B08's useful self-gains and noncausal initial gap,
+B04/B05 reversal, B06 panel sensitivity and B09's activated mixed response remain unchanged.
+
+### Cost and L0 — initial-assignment B10 evaluator
+
+Planned new exposure: **0 fits,0 training/stored-training steps,0 optimizer updates;
+6 panels,48,000 evaluation team steps,288,000 UAV steps,96 episodes/resets,3,000 actual batched
+policy calls and300 native coordinator selection forwards** under complete500-step/k10 runs
+(6 opening batch selections and294 later batch opportunities). Record actual successful calls,
+per-lane selections, resets and transitions as they occur, preserving partial work on failure;
+expected numbers are not execution evidence. Count any attempted loading/construction separately
+from scientific transitions. There are no shadows, search branches, SET execution or extra
+control panels. Measure wall, CPU and scientific-process RSS, mark unmeasured resources honestly.
+Original360k training exposure is prior work; B08/B09 walls are reference only. Implementation,
+focused tests, independent review, collection and reading are additional non-fit work.
+
+Owned new paths only:
+
+- `experiments/candidates/agent_count_generalization/initial_assignment_b10/__init__.py`
+- `experiments/candidates/agent_count_generalization/initial_assignment_b10/runner.py`
+- `scripts/run_agent_count_initial_assignment_b10.py`
+- `tests/experiments/candidates/agent_count_generalization/initial_assignment_b10/test_runner.py`
+
+CLI `--launch-sha --out --h6-checkpoint`, fixed output basename above, require_admission before
+scientific imports, model loads, output writes or environment construction and exact source
+identity. Reuse unchanged B02/B07/B08/B09 restoration, config, native-unit and identity helpers
+where semantics match; no old code edits and no B09 intervention/shadow installation. Loading
+H6 through a supported one-asset subset is acceptable. Validate the three SET references from
+committed bytes without loading its model. Bind source and all input hashes before/after.
+
+Use a small evaluation-only per-instance adapter around actual assignment/action boundaries;
+copy initial outputs, restore originals on exit and preserve ordinary mode exactly. Preserve
+actual counters even when later diagnostics fail. A failed ordinary identity/prefix record
+must keep measured evidence after RNG restoration, not overwrite it with an empty failure stub.
+Full action arrays may live in safe numeric binary traces with finite validation and hashes;
+provide enough checked comparisons to recover every claimed first-divergence and action count.
+Keep runner-written artifacts under the one run root only. No general ablation framework.
+
+Focused checks must exercise real native step/assignment/action routing beyond k10 with tiny
+synthetic/native assets in pytest-owned scratch: initial cache after real assignment, pre-action
+replacement, internal/returned labels agree, nonselected-step reuse, per-lane episode reset and
+no alias contamination, actual actor recurrence and clock retention, ordinary off-path/RNG
+identity, metadata separation, all-N final restoration/rejection, ordinary array mismatch
+retention, first-ten common prefix/first-divergence arithmetic, and truthful partial-call/reset/
+transition counts. Reuse unchanged loader tests where appropriate; no production model loads,
+training or result-bearing eval during implementation/review. An independent Reviewer checks
+this altered high-risk evaluation path; DM reads/accepts the diff before source publication
+and the single native admission.
+
+Implementer owns only those four paths and returns diff/checks/deviations/risks. It is not alone
+in the checkout and must preserve concurrent edits. No NOTES/RESEARCH/commits, scientific choices,
+production assets, launch, Pro, App messages or children. DM retains scientific and code acceptance.
