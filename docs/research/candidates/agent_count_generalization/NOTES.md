@@ -8665,7 +8665,7 @@ premises but preserves every completed experiment's contract.
   `.agents/skills/hmasd-research-engineering/SKILL.md` only for relevant source/invariant and
   admission constraints. Same weights with changed deployment outputs are not new learning.
 - Shared background: `docs/research/RESEARCH.md` topics3–6 at current published main
-  `1e5a411630a2a603fcc8659886332ea5c208e437`, particularly the B07/B08 native-use reasoning,
+  `da18496d4f01624d7858ee56677ce919a363b272`, particularly the B07/B08 native-use reasoning,
   separation of absolute/self-gain/relative gap, finite-policy evidence and joint learning.
   That background motivates reading service before relative gaps and limits this proposed
   ablation to deployment. The newer full B09 result in this source notebook/arrays supplies
@@ -8683,7 +8683,7 @@ premises but preserves every completed experiment's contract.
   needed to check contextual arithmetic. B07's original source is
   `0a9e3fde40659fdcc1d05922c9920c5c04b2ab23`; its immutable training meaning is unchanged.
 - Actual path for the comparator's feasibility/meaning: `hmasd/agent.py` methods `step`,
-  `_batched_assign_skills`, `_batched_select_action`, `reset_batched` and the rollout-store
+  `_batched_assign_skills`, `_batched_select_action`, `reset_env_state` and the rollout-store
   path; `experiments/candidates/agent_count_generalization/bounded_package_b07/runner.py`
   evaluation/restoration; the `models.py` H6 state/coordinator wiring. Read these when the
   proposed comparison's semantics depend on them, and name consequential unread gaps.
