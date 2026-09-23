@@ -2776,3 +2776,20 @@ After complete local collection and verification, the native snapshot collector 
 and removed only D's disposable source snapshot `909777a8adf2474bbdb40186aaa8f918`.
 Original outputs, both checkpoints, admission claim/manifest and exit witness remain retained;
 this cleanup does not authorize any repeat. The completed D observation event was consumed.
+
+## 2026-09-23 — B03 G admitted after complete D acceptance
+
+The fixed second fit G received native child admission after D's complete collection,
+verification and scientific reading. The original
+[launch manifest](../../../../runs/complementary_skill_learning/b03_g_260923921_8859fc379/launch-manifest.json)
+retains the accepted source, command, node, process identities and stable operation reference;
+the [fresh preflight](../../../../runs/complementary_skill_learning/b03_g_260923921_8859fc379/admission-preflight.json)
+passed. Both native files were collected and byte-verified. A same-handle status read confirms
+both recorded native identities running with consistent records and no exit witness.
+
+This is the second and final fit of the frozen two-arm block, not an extension chosen from D's
+scores. D is accepted; G has no accepted result yet. The next detached observation uses G's
+existing operation reference and returns to this task for full collection or rearming.
+Do not restart either fit, reuse D as a new run, or infer G's advantage from D's own learning.
+The primary question remains final uniform G-minus-D, with both actual learning increments,
+own deployment consequences and adverse components/worlds retained.
