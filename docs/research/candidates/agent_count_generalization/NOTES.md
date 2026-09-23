@@ -12775,3 +12775,119 @@ same operation and read the complete evidence. A successful full H6 collection i
 the already fixed SET arm, independent of the initial or final H6 score. A technical failure
 requires an explicit DM reading and decision, not automatic retry. No new seed, world, arm,
 training extension or confirmation is selected here.
+
+
+## 2026-09-23 — B14 H6 complete: new own-policy learning; ordinary comparison pending
+
+### Complete collection and technical acceptance
+
+The DM accepts the H6 arm after complete evidence collection and reading, not from process exit
+alone. Source remains `88b67e5e0110ae05c440588a2b19ab0b6c0f021c`, fixed seed974201/N6/45 rollouts.
+The original operation above ended with a valid native exit0 witness at epoch1790205412.701348;
+runner/supervisor are absent with consistent recorded identities. Wait generation115 event
+`276b6498dd6acd97b684915c` was the completion evidence, not a new launch instruction.
+
+All **20 files / 556,155,690 bytes** were collected into
+`runs/agent_count_generalization/s1_fresh_learning_b14_h6_s974201/` and matched to the original
+native inventory by size and SHA256. Collection/check wall was42.191092s. All JSON/JSONL outputs
+and empty stdout/stderr are published unchanged; the seven large binary artifacts below remain
+at both this local run directory and the native prefix
+`/home/wu/projects/HMASD/runs/agent_count_generalization/s1_fresh_learning_b14_h6_s974201/`.
+Their declared hashes, sizes, array schemas and native locations preserve recovery without
+forcing >100-MB numerical traces into Git.
+
+| Binary artifact | Bytes | SHA256 |
+| --- | --- | --- |
+| `checkpoint_00.pt` | 23073626 | `f4f2c41e3d45deeebc9bac47043bd3fd2bf09b6ba2bd4cc35c410eb2fd37b07e` |
+| `checkpoint_45.pt` | 23073626 | `d9ee14d4344a187f144c296bee9ac2af36eaf731e2e02d85c0e19fa975527ada` |
+| `trace_stage00_n6.npz` | 110918716 | `8e3dd8e38db7c601bcb890c2fc14557ec30c334a19614aac2a3de661f26c82a6` |
+| `trace_stage00_n8.npz` | 141921340 | `d0d1097791c1e116027278c7838f8e7eb20cef851650912b3b412b7c2bfd8eeb` |
+| `trace_stage45_n6.npz` | 110918716 | `083edbd033c05e6e8636e11acdb7d5ebe3531356d52e2fc84d510b6828bd0e4a` |
+| `trace_stage45_n8.npz` | 141921340 | `b59fd36884af64a860e96ec46d353d6a830861b64a76e5f64e821bf4928d882f` |
+| `training_reset_scenes.npz` | 2972180 | `ef00dbbd9487f97011924f7d88417257e2446ebdfb1d0c16390d6b2eb82f542c` |
+
+Independent reading used only the collected NumPy arrays and checkpoint tensors; no policy
+forward, environment reset/step, optimizer operation or extra scientific evaluation occurred.
+The scratch reader initially expected an N-only order field; the actual schema records all four
+stage/N pairs. The reader was corrected to assert exactly(0,8),(0,6),(45,8),(45,6); runner outputs
+and source were not changed. All final checks pass:
+
+- Actual1fit/360k train team/2.16M UAV rows,720 training episodes/resets,45 complete updates;
+  64k eval team/448k UAV steps,128 eval episodes and2,000 eval policy calls. No eval storage/update.
+  All45 training rows match the summary and declared per-update counts. Actor/critic each101,250
+  optimizer calls; coordinator675, team discriminator675, individual discriminator2,700.
+- All ten recorded source hashes equal the published Git blobs and match before/after. Native H6
+  initialization, seed/sampler/config bindings, fresh optimizer ownership, four panel stages and
+  true rosters agree. Both actual checkpoints contain179 finite tensors each; independent tensor/
+  normalizer digest reconstruction matches `e33dde67e95a16e57f6bc20482e53ccae1aa7f510f29b28b5bcbf850e0bdebab`
+  initially and `de4a973a0ede4ac5637a8a3e6ea0b9a57e77c3b59c6cfa8bdeccd411cb94a039` finally.
+  Every recorded module/encoder L2 displacement was independently recovered from the checkpoints.
+- Full native link/connection arrays obey eligibility, one assignment per user and c10 constraints.
+  Independently recomputed J=.7C+.3Q-P=N*scalar, S=50C and U=E-S match every saved step/world and
+  stage reading. Quality comes from connected-quality sums; the native P term comes from height.
+  State/observation successors are continuous, initial scenes match between stages, and executed
+  actions equal clipped raw actions. No initial/final evaluation changed learner/mode/buffer,
+  optimizer, sampler/global RNG or training-environment state. All45 training action/logprob and
+  physical-transition witnesses pass. The training reset trace has46 actual resets per lane and
+  the fixed16 lane addresses; comparison to SET remains pending.
+- Collection-only inference:2,250 batched coordinator calls/36k rows,2,250 team-decoder calls,
+  13,500 individual-decoder calls/216k rows. Evaluation totals200 coordinator/team-decoder calls,
+  6,400 assignments and1,400 individual-decoder calls/44,800 rows; the H6 snapshot route is absent.
+  These include inference work and do not substitute for optimizer counts or wall time.
+
+### Actual initial-to-final learning on the fixed development worlds
+
+Each row below is one H6 training instance, with32 worlds nested within it. Service S means actual
+served users per step, not a reward proxy. The initial and final checkpoints use the same worlds,
+N8 thenN6, deterministic mean-then-clip deployment and their own normalizers/closed-loop trajectories.
+
+| N | J initial → final | Mean delta J | Median delta J; range | S initial → final | Mean delta S | Median delta S; range |
+| --- | --- | --- | --- | --- | --- | --- |
+| 8 | .064620604531 → .417914296540 | +.353293692009 | +.355409222874; +.221430010073 to +.443922053702 | 9.551500 → 28.4191875 | +18.8676875 | +19.550; +10.128 to +24.992 |
+| 6 | .142862265451 → .513508479127 | +.370646213676 | +.393037340438; +.180526790468 to +.543335695810 | 14.962625 → 34.528250 | +19.565625 | +21.467; +7.562 to +30.364 |
+
+J, C, Q, E and S improve in32/32 worlds at both N; P decreases in32/32. Thus there are no
+initial-to-final J-or-S loss worlds for this H6 instance. That does not erase costs or compare
+H6 with SET. Native component means:
+
+| N | C initial → final | Q initial → final | P initial → final | E initial → final | U initial → final |
+| --- | --- | --- | --- | --- | --- |
+| 8 | .191030 → .568383750 | .053357922482 → .156310945412 | .085107772214 → .026847612084 | 9.5740625 → 28.645625 | .0225625 → .2264375 |
+| 6 | .299252500 → .690565000 | .062876153815 → .172881346003 | .085477330693 → .021751424674 | 15.2431875 → 35.3210625 | .2805625 → .7928125 |
+
+The contrary component is eligible-but-unserved users: mean U rises+.203875 atN8 and+.51225
+atN6 despite the large served-user gains. N8 has25 increases/1 decrease/6 ties; N6 has28
+increases/4 decreases. The largest are1645829:+2.418 (final2.496) and1645608:+6.086 (final6.086).
+At those same worlds service still improves+16.912/+24.084, respectively. These are residual
+missed-service consequences alongside greater eligibility, not losses in actual served users.
+All U-increase worlds and magnitudes are retained here (users per step):
+
+- N8: 1645801:+0.196, 1645802:+0.002, 1645805:+0.470, 1645806:+0.032, 1645807:+0.002, 1645808:+0.480, 1645809:+0.412, 1645810:+0.058, 1645811:+0.288, 1645813:+0.104, 1645814:+0.018, 1645815:+0.702, 1645817:+0.142, 1645818:+0.032, 1645819:+0.156, 1645821:+0.104, 1645822:+0.486, 1645823:+0.066, 1645824:+0.032, 1645825:+0.328, 1645826:+0.006, 1645827:+0.508, 1645829:+2.418, 1645830:+0.008, 1645831:+0.034.
+- N6: 1645600:+0.178, 1645601:+0.686, 1645602:+0.004, 1645604:+0.236, 1645605:+0.490, 1645606:+0.536, 1645607:+0.524, 1645608:+6.086, 1645609:+1.492, 1645610:+0.020, 1645611:+1.176, 1645612:+0.090, 1645613:+0.444, 1645614:+0.124, 1645615:+0.676, 1645617:+0.020, 1645620:+1.438, 1645621:+0.356, 1645622:+0.304, 1645623:+0.346, 1645624:+0.290, 1645625:+0.066, 1645626:+0.182, 1645627:+0.096, 1645628:+1.206, 1645629:+0.928, 1645630:+0.280, 1645631:+1.220.
+
+Final absolute minima remain separate from paired changes: atN8 minimumJ=.359489093849 and
+minimumS=23.878 both occur at1645808. AtN6 minimumJ=.470473528548 is1645607, while minimumS=31.252
+is1645616. The smallest own gains are N8 deltaJ+.221430010073 at1645801 and deltaS+10.128 at1645815;
+N6 deltaJ+.180526790468/deltaS+7.562 are both1645624. Full per-world values and traces remain in
+the four panel/trace pairs and `summary.json`; no world was dropped and no cross-N aggregate added.
+
+### Judgment and fixed continuation
+
+This strengthens the H6-side prediction of newly learned useful service, including at untrained
+N8, relative to its own actual initialization. It weakens an initialization-only explanation of
+this instance's final service. The observation does not establish that H6 beats a newly trained
+ordinary SET, that its learning increment is larger, that skills caused the gain, or that the old
+retained-package ranking repeats. Those questions cannot be replaced by a favorable own-policy
+improvement or by old selected weights. N8/N6 score differences also combine count and world
+conditions; they do not identify a pure count effect. Prior B11/B12 reversals and B13 losses remain.
+
+Actual cost:1fit; command70.229585min, run-fit70.209900min; scientific-process CPU user16,334.949358s,
+system118.712783s, peak RSS2,728,156KiB (Linux RUSAGE_SELF). Peak scratch and other processes were
+not measured. The new learning result is exploratory n=1, on already exposed development worlds.
+
+The remaining authorized comparison is the already fixed SET cell at the SAME published source
+`88b67e5e0110ae05c440588a2b19ab0b6c0f021c`, seed974201 and training/world/evaluation contract.
+H6 success does not select or extend that second arm. Refresh actual-node pause/lead/resources,
+launch SET once through native admission, retain its handle, and read the complete pair after
+collection. No new Pro question, seed, world, training extension or confirmation is authorized by
+this result entry. The full block remains2fits/720k train/128k eval;1fit is now fully accepted.
