@@ -5703,3 +5703,32 @@ Latest main checked at `54306eeb3472e71b18e4f37760533f6f7767e0ee`: own active le
 lifted pause still agree; other directions and Claude FSD pause are preserved. Publish these
 exact inputs and launch the already fixed192k-evaluation object on configured `wsl_4070` under
 fresh native admission. Zero new fits/updates; no extra asset, world panel or attempt selected.
+
+## 2026-09-23 — B06 native admission and historical replay underway
+
+Exact reviewed source `ce18435cedfe2b875482403b6b41778fdb67ee4d` was published before native
+admission. Accepted at2026-09-23T05:10:52.523174Z; see runner-written
+[launch manifest](../../../../runs/agent_count_generalization/s1_entropy_cross_panel_b06/launch-manifest.json),
+[fresh node memory evidence](../../../../runs/agent_count_generalization/s1_entropy_cross_panel_b06/admission-preflight.json)
+and [fixed inputs](../../../../runs/agent_count_generalization/s1_entropy_cross_panel_b06/config.json).
+Read-only native status reconciled accepted admission with consistent live supervisor/runner
+identities; no exit witness at that observation. All three copied fixed files match native
+SHA-256/size. Source worktree stays isolated and unchanged; all four original checkpoints
+remain inputs at their declared native paths.
+
+First collected scientific snapshot has all four assets validated, eight completed historical
+diagonals,64000 evaluation team steps/128 episodes/368000 UAV steps/4000 returned policy calls,
+zero training/updates and no failure. All original J, scalar returns and component outputs in
+those eight panels are exact (maximum absolute difference 0.0). The next diagonal was
+starting; this is partial restoration evidence, not acceptance of all24 panels or an
+observation of either missing cross-cell. The summary status string remains validating_assets
+while last_boundary/counters describe evaluation progress; final completion is a separate state.
+No threshold, cell order or scientific reading changed.
+
+Observer now owns the accepted operation under job `agent-count-entropy-cross-b06`, generation75
+in this task's existing wait state. It will return on termination/error or the bounded window;
+continuation reuses the same native operation. No Pro request or extra fit is pending.
+Remote preparation briefly stalled because this partial Git clone fetched missing blobs outside
+the configured network shell. Only that owned HTTPS fetch was stopped; after confirming its
+parent exited with unchanged HEAD, clean tracked tree and no index lock, the same preparation
+completed inside zsh network environment. No scientific operation existed during that repair.
