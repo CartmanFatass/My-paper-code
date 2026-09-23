@@ -11849,3 +11849,27 @@ Current published main37d837bfb retains the lifted owner pause, exploring state 
 The DM selects the already recorded a02 corrected-code attempt with unchanged scientific
 inputs, eight panels and0 fits; fresh native admission remains required. No B13 scientific
 result has yet been produced or accepted.
+
+
+### B13 a02 admitted under the unchanged ordinary-control protocol
+
+The corrected attempt was natively admitted at2026-09-23 20:36:05UTC. Its exact source,
+invocation, snapshot, native process identities and stable operation reference are in the
+[runner-written manifest](../../../../runs/agent_count_generalization/s1_ordinary_control_b13_a02/launch-manifest.json).
+The [fresh admission reading](../../../../runs/agent_count_generalization/s1_ordinary_control_b13_a02/admission-preflight.json)
+passed with12,121,624,576 physical/effective available bytes against the4GiB floor. The kernel
+read published main37d837bfb and the unchanged lifted pause/exploring/lead controls. Manifest,
+preflight and [fixed configuration](../../../../runs/agent_count_generalization/s1_ordinary_control_b13_a02/config.json)
+were collected without alteration, read and individually verified by size and SHA-256.
+
+The observer has adopted this same accepted operation at generation109; its first native
+reading at20:37:25UTC reports the recorded runner/supervisor running with consistent identities
+and no exit witness. It will return on completion/error or the bounded checkpoint, without
+restarting the worker. All earlier notices have been reconciled; there is no pending Pro.
+
+Scientific status remains unaccepted. This is the fixed0-fit,128k-evaluation comparison of
+four original policies, with mandatory S1/S2 reproduction before H1/H2 interpretation. The
+first admitted attempt's0-exposure technical failure stays preserved under its original tag.
+Next: collect the complete a02 output, verify fixed reproduction and input/parameter identities,
+independently recompute the native panels and full2x2 gaps, then apply the recorded prediction
+and contrary-world reading. Process exit alone cannot establish that scientific result.
