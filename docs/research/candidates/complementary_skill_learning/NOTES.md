@@ -3296,3 +3296,480 @@ commit if successful. If GitHub writeback is unavailable, return the complete an
 not only a SHA, status or link. Cite actual sources used and state any consequential unread gap.
 
 ### Answer
+
+GitHub 读取可用，但本次未完成写回。 我重新读取了目标分支，本题的 Answer 仍为空。现有写入操作需要替换整文件，我未能构造并验证一个保证其他字节完全不变的替换内容，因此没有提交写请求、没有改动仓库，也没有生成 Answer commit。以下给出完整答复。
+
+Answer
+一、建议：保留 M/U，明确它研究的是“外部标签规则下的技能库形成”
+
+MATERIAL_DISSENT: no。 我支持这次提出的两臂训练制度比较，以及 M 四个、U 两个评价面板的非对称设计。下面的限定和实现提醒不改变其主要比较，也不增加第三臂、诊断面板或批准要求。
+
+我推荐的下一次观察是：
+
+在相同原生任务、低层结构、混合奖励公式和训练交互量下，由可学习高层分配标签所形成的技能库，是否比固定均匀标签训练形成的技能库，在共同的外部均匀标签部署规则下提供更好的原生服务？
+
+这不是再救 G、P 或删除判别奖励的配方。它能改变的是一个仍未被实际比较过的判断：可学习高层所参与的训练制度，是否为这种技能库用途带来额外价值，还是固定均匀标签训练已经保留甚至改善了这种用途。
+
+最强反对理由
+
+共同 uniform 部署与 U 的训练标签规则更一致，却可能放弃 M 在共同适应中形成的特定搭配优势。 因而，即使 M 在主要终点落后，也不能据此说可学习高层没有训练价值；它可能形成了更依赖自身选择器的策略。反过来，M 获胜也不等于高层策略梯度本身有效，更不等于学出了互补性。
+
+这个限制不是用免责声明便可消除的“小混杂”，而是决定本次投资究竟回答什么的问题。若真正要回答的是“完整可学习高层系统通常是否值得采用”，uniform 主终点就不充分。但本题已经把目标收窄到外部标签规则下的 bank 用途；在这个目标下，uniform 不是应被修正的偏袒，而是被明确选择的部署条件。 原始评价代码也确实区分了独立均匀标签规则与读取状态、观测的 own 分配规则，同时保留相同的局部低层 actor。
+
+我建议再利用已有面板，预先声明一个不增加执行成本的配套对比：M-own − U-uniform。它保留完整方案的用途读数，但不能在 uniform 主终点失败后取而代之。这样既不虚构 U 的 own，也不必为解释部署依赖再购买一轮实验。
+
+二、已有证据为何支持问这个问题，而没有预先支持答案
+
+B03 已经削弱了“原样 G 的额外 uniform 服务收益会在另一条学习轨迹中重现”的解释：最终 uniform G−D 从 B01 的 +0.019697695057 变为 −0.010459129257，而 B03 保留了旧评价世界和标签流。另一方面，B03 的 D/G 在 own 和 uniform 下，J 与服务人数相对初始化都在全部 32 个世界改善。这里是额外辅助价值的预测失败，不是两臂没有学会有用行为。
+
+原始 summary 中，B03 的最终 uniform J 为 D 0.455409736727、G 0.444950607470；最终 own 为 D 0.444062367240、G 0.442005981042。这支持保留有用的绝对学习，同时结束原样 G 的当前追加理由，而不是把“G 不值得继续”扩大成“原生技能条件学习无用”。
+
+对这次选题，真正重要的是以下边界：
+
+得到加强的是用途判断必须区分训练制度与部署规则。 B03 的同 bank own−uniform 差，以及共享背景中 B10 的部署干预，都是在已经训练出的参数上更换执行规则；它们没有提供“从一开始就用均匀标签训练”的反事实。
+
+受到削弱的是继续追逐当前辅助或删除配方的理由。 B01 的局部正配对 T 没有恢复 P 的完整服务，B02 的 task-only 自身学习却落后于 mixed，B03 又没有保住原样 G 的额外价值。这些结果约束各自已测配方，不能合起来构造一个未经识别的统一失败机制。
+
+仍未解决的恰好是 M/U 要问的训练制度问题。 B03 两臂都由可学习高层生成训练行为；没有 U，便不能从其部署读数判断固定均匀标签训练能否形成同样有用的 bank。
+
+因此，M/U 的价值不是“已经失败三种方法，所以应该再试一种”。其价值在于：它给一个目前可能被误读为已知、实际上未被比较过的训练选择，提供直接的有限学习观察。此前完整建议已经区分并推迟了这个问题；现在选择它，不需要重做 G 的例行关闭判读。
+
+三、主要估计量、配套读数与六个面板的含义
+
+为避免训练臂 U 与 uniform 规则混淆，以下用 u 表示 uniform 部署，o 表示 M 的 own 部署。令 W 为已暴露的 32 个开发世界，J(a
+c
+	​
+
+,r,w) 表示训练制度 a、checkpoint c、部署规则 r 在世界 w 的原生 J。
+
+主要比较：共同外部规则下的最终 bank 用途
+Δ
+u
+	​
+
+=
+32
+1
+	​
+
+w∈W
+∑
+	​
+
+[J(M
+45
+	​
+
+,u,w)−J(U
+45
+	​
+
+,u,w)].
+
+保留题面以 Δ
+u
+	​
+
+ 为唯一主要服务对比的选择。 不根据结果改成 own，不挑较好 checkpoint，不把旧 B03 D 的终点当作这次免费的 M。
+
+同时读取每臂的实际学习：
+
+L
+a
+u
+	​
+
+=
+32
+1
+	​
+
+w∈W
+∑
+	​
+
+[J(a
+45
+	​
+
+,u,w)−J(a
+0
+	​
+
+,u,w)],a∈{M,U}.
+
+共同初始化、相同 uniform 执行图和评价输入成立时，两臂初始 uniform 读数应一致，于是
+Δ
+u
+	​
+
+=L
+M
+u
+	​
+
+−L
+U
+u
+	​
+
+。这是恒等式，不是另一份独立证据；初始读数的用途是防止把相对少退化误称为有用学习。
+
+配套读数：M 的部署代价，以及完整方案比较
+
+保留：
+
+A
+M
+	​
+
+=
+32
+1
+	​
+
+w∈W
+∑
+	​
+
+[J(M
+45
+	​
+
+,o,w)−J(M
+45
+	​
+
+,u,w)].
+
+它是固定 M bank 后更换部署规则的后果，不是训练期 coordinator 的贡献。
+
+利用已有面板，再预先读取：
+
+Γ=
+32
+1
+	​
+
+w∈W
+∑
+	​
+
+[J(M
+45
+	​
+
+,o,w)−J(U
+45
+	​
+
+,u,w)]=Δ
+u
+	​
+
++A
+M
+	​
+
+.
+
+Γ 比较“可学习高层训练＋自身选择器部署”与“均匀标签训练＋均匀部署”的完整方案。它不是新评价，也不是高低层中介份额。
+
+这个分解能防止两种常见误读：
+
+Δ
+u
+	​
+
+>0、Γ<0：M 形成了在共同外部规则下更有用的 bank，但自身部署规则抵消了这一优势。
+
+Δ
+u
+	​
+
+<0、Γ>0：M 的共同规则 bank 预测失败，却可能保留自身选择器依赖的方案价值。
+
+两者都应如实保留，但第二种不能用来宣布主要预测成功。
+
+非对称面板是适当的
+
+M 有真实的 learned own，U 没有。把 U 的均匀分布取 argmax，只会人为造出一个确定性标签策略；那不是 U 的 own，也不是什么免费的公平性修正。保留 M 的 initial/final × own/uniform，以及 U 的 initial/final uniform，足以支撑上述读数。原评价实现明确使用 mean low actions、独立循环状态、冻结参数与 normalizer；这些语义应沿用。
+
+继续使用原开发世界及冻结 PCG64 标签流，有利于把这次问题限制在已知部署条件下。需要保持的不是一个 seed 数字，而是 generator、world/lane 顺序、team/individual 抽样次序和 k10 更新时点。训练用的均匀流必须独立于评价流，不能把封存的评价标签轨迹用于训练。这些仍是暴露过的开发条件，不构成 held-out generalization 或 confirmation。
+
+四、这两臂真正改变的东西，比“开关高层梯度”更多
+
+我保留题面的 M/U 定义，不增加第三臂。M 使用原生 team 分布和个体 AR 混合分布；U 使用外生、独立的 team/individual 均匀标签，二者都每 10 步重选。低层 actor/critic、两个判别器及 detached factual heads 在两臂中继续真实训练；U 仅没有 coordinator optimizer 更新。
+
+hmasd-pro-question-complementar…
+
+但解释上必须同时保留四件事。
+
+第一，这是完整训练制度干预，不是纯梯度消融。 它同时改变 coordinator 的优化、状态条件标签分配、标签间相关性、实际经验分布，以及随后的低层—判别器共同学习。两臂拥有相同标签全集和重选机会，不意味着实际状态条件曝光相同。
+
+第二，相同输入接口不等于训练期间获得相同的有效标签信息。 冻结 own 分配函数读取全局状态和联合观测，低层 actor 接收局部观测及个体技能。因而 M 的技能标签可以承载高层依据全局信息作出的选择，而 U 的外生标签不携带这种状态条件选择。保留相同传感信息权限和 actor 架构，并没有把这个通道的作用单独控制住；它正属于本次训练制度差异。
+
+第三，相同混合奖励系数不等于相同实际奖励过程。 改变标签及行为分布，会改变判别器面对的任务、分数、后续混合奖励、critic 目标和 normalizer 统计。应保留原公式及 .5 系数，但不能在结果出来后宣称已单独识别了“高层探索”“互信息语义”或某一类梯度。
+
+第四，等环境交互量不等于等计算量。 U 的高层优化为零是明确的处理组成，不应补上没有科学作用的假更新来制造算力相等。本次首先比较等交互量下的 bank 用途，同时记录实际计算；它不是等 wall-time 或等 FLOPs 的效率试验。
+
+这也说明为什么一次 M/U 胜负不能建立技能必要性或互补性：两臂都保留技能条件、循环记忆及判别器，没有无技能对照；也没有专门识别组合非加性、伙伴兼容性或新互补形成的干预。
+
+五、可实施，但不能把 U 当成已由现成开关实现
+
+我认为该比较在现有管线上有可行基础，不过实际代码支持的是“可构造 U”，不是“U 已实现且已检查”。最值得注意的是以下几条真实路径。
+
+1. 不使用注册的 random 基线
+
+已读 hmasd/baselines.py 中的 random 配置不只停高层，也会关闭其他学习，包括低层与判别器相关路径。因此它不能作为题面的 U。MAPPO 配置也回答不同结构的比较，不是本次替代入口。
+
+disable_high_level_training 在初始化中影响 collects_high_level_samples，在 update 中跳过 coordinator 更新，但不会自动把行为标签变成均匀分布。要同时实现独立的标签生成与正确的高层停训语义。
+
+2. 在低层执行之前产生 U 标签，而不是事后覆盖
+
+U 的标签必须在低层 actor 前向之前确定，并一致进入实际动作、进入与离开循环状态、critic 条件、判别奖励、factual window 及技能缓存。不能先调用原 learned 分配得到动作和 GRU 状态，再改 step_data 中的标签；那会把行为、奖励解释和存储记录拆成互相不一致的路径。
+
+在六个标签全合法、全部重选的边界，U 的每个实际因子——一个 team 因子和六个个体因子——条件概率均为 1/6，对应 log probability 为 −log6。需要记录联合概率时，才是 −7log6。不能保留 learned μ 对另一些标签的旧 log probability。低层仍保存并评分真实 raw Gaussian 动作，只在物理入口裁剪；这条 PPO 语义不随高层停训改变。
+
+3. 特别处理 D2 存储，而不是假定高层存储已经全部关闭
+
+冻结 store_transition 的 D2 路径会先进入 _d2_store_transition(...)，随后存储低层与判别器经验并返回；普通高层经验存储的开关在另一条后续路径上。因此，仅设置高层停训标志，并不能据此声称 D2 高层表、相关计算和存储工作都为零。
+
+对于这次最小比较，我倾向先保留复用所需的 D2 时钟和真实标签记录，只跳过没有用到的 coordinator 优化，并诚实计入仍发生的工作。确有必要省略不再消费的高层表时，局部修改必须确认没有同时省略低层、判别器、终止片段或技能边界工作。没有必要为了宣称“纯 U”大范围重写 collector。
+
+4. 原来的 learned-μ replay 诊断不能原封不动套到 U
+
+ComplementaryAgent.update() 在原生更新前进行采样概率回放诊断，随后 native update，再做 auxiliary update。原诊断针对 learned AR 混合分布；U 的实际行为是固定均匀分布，不能一面存均匀概率，一面继续要求 learned decoder 重现它。
+
+应让 U 的标签一致性检查针对其实际固定概率与实际记录；高层 PPO replay 不适用的部分应明确标为不适用，而不是记作通过了一次不存在的 learned-policy 检查。两头继续 detached 拟合的安排可以保留，但它们的误差不选择本次结果。
+
+5. 不再要求 M/U 首轮训练轨迹相同
+
+B03 的处理在共同首批经验之后发生；这次标签生成法则从第一个训练边界就不同。可匹配的是初始参数、头、初始 normalizer、训练世界及预先定义的外生随机输入，不是首轮实际技能、动作、奖励、target 或更新结果。
+
+需要避免一个额外的随机数消费差异：不能因为 U 不再调用 coordinator 抽样，就无意中把后续低层动作的随机输入整体错位。可复用已有 RNG 隔离方式或显式划分随机流，但不需要为了“配对”强行令两臂轨迹一致。两个 arm 的 low ValueNorm 应随各自真实目标更新，也不能用 M 的统计量替换 U。
+
+这些是对本次高风险语义修改的针对性检查：真实标签→动作与 hidden state→存储和混合奖励→低层更新，以及 U 的零高层更新、仍活跃的低层/判别器和冻结评价。沿已有工程方法完成局部检查与独立 review 即可；它们不是新增研究门槛或额外结果 fit。
+
+六、工作预测与反结果应怎样改变判断
+
+我接受 Δ
+u
+	​
+
+>0 作为这次待检验的工作预测，并同时期待两臂都有正的平均 uniform 学习增益。B03 本身并没有证明这个正号更可能发生；值得购买的是这两种解释尚未被直接区分，而不是我们已经拥有支持 M 必胜的证据。
+
+若要把正结果解释成“学到了更有用的 bank”，需要同时读取绝对 J、初始至最终变化、coverage、quality、height penalty、users/step 和全部逐世界差异。原生服务按 J=.7C+.3Q−H、users =50C 读取；不能用判别准确率、预测误差、标签熵或 optimizer 活跃代替它。B03 的不利分量与正负世界已经表明，仅保留某一个汇总方向会丢失有意义的后果。
+
+对 quality 与 height 的差异，我不虚构一个已被机制证据支持的确定方向。M 可以在覆盖上获益而付出高度代价，U 也可能反之；需要将这种取舍与主要 J 一起解释，而不是等看到结果再更换用途定义。
+
+预定结果模式	应改变的判断
+Δ
+u
+	​
+
+>0，两臂均有实际学习，M 的绝对服务及分量取舍具有用途	加强“可学习高层参与的训练制度，对共同外部规则下的 bank 形成有额外价值”。不识别高层梯度的独立贡献，不证明互补性或必要性。
+Δ
+u
+	​
+
+>0，但主要因为 U 退化，M 自己没有有用学习	支持相对避免失败的有限事实，不支持更强的“有用 bank 形成”叙述；不能只用正差遮住绝对结果。
+Δ
+u
+	​
+
+<0，U 与 M 都学习，U 的分量与负世界后果可接受	加强固定均匀训练作为这一外部规则用途的简单参照；削弱 M 在该用途下的额外价值，不推出高层训练普遍无用。
+Δ
+u
+	​
+
+<0、Γ>0	主要 bank 预测失败，但保留 M 的 own 依赖方案价值。这是取舍，不是主要成功。
+Δ
+u
+	​
+
+>0、Γ<0	bank 收益与 own 部署代价并存；不能把二者混成“完整 learned 系统一定更好”。
+差值很小、世界符号混合，或收益伴随重要服务损失	保留未决与用途取舍；不宣称等价，也不因此自动欠一批种子或一项修复。
+两臂都未形成有用服务，或只有中间诊断改善	当前用途理由不足。记录可信结果后停止这次配方追加，而不是改 horizon、reward、熵或主部署规则救援。
+
+参数更新、合法概率和实际标签一致，是实施条件；它们不是上述服务预测兑现的证据。技术失败应保留其成本，并隔离依赖它的结论，不能算作 M 或 U 的科学负结果。
+
+仍然只有一个新的配对训练区组，每臂一个训练实例。32 个世界、多个面板、共享初始策略及 Γ=Δ
+u
+	​
+
++A
+M
+	​
+
+ 都不增加训练重复数。旧 B01/B02/B03 是选择历史和背景，不能被合并成这个 M/U 问题的多次训练复制。当前方法允许据探索观察更新判断，但不允许将其包装为训练总体优势、等价或稳定默认。
+
+七、成本、最强替代与有界结束
+保留题面的实际成本
+工作	M	U	合计
+新 fit	1	1	2
+训练 team transitions	360,000	360,000	720,000
+评价面板	4	2	6
+评价 team transitions	64,000	32,000	96,000
+训练＋评价	424,000	392,000	816,000
+
+每臂仍为 45 个 native update stages；预计 M coordinator optimizer 675 步、U 0 步；每臂 low actor/critic 各 101250 步、team/individual discriminator 675/2700 步；每个 factual head 315 步，两臂合计 1260 个 head optimizer steps；auxiliary trunk steps 均为零。这些是要由新执行核对的计划数，不是 U 已测得的计数。
+
+hmasd-pro-question-complementar…
+
+Γ 只是对现有面板的代数读取，不增加任何物理评价步。这里没有 post-training selector fit、额外部署模式、分支轨迹、参数搜索或 profiling fit。
+
+B03 的两次 runner body 分别约 54.99 和 53.62 分钟，只能作为现有管线的规模参考。U 少了高层优化不等于已证明总 wall time 更短，更不能从共享节点计时推出固定速度比。实现、聚焦检查、独立 review、原生收取与读数都有实际成本；没有完整计时的部分应保持未知，而不是计零。
+
+最强替代仍是零-fit 部署比较，但本次不选它
+
+旧 B01 D/G 在原 own-final 世界上补两个 uniform 面板，仍是合法且具体的 0 fits、32k evaluation steps 选择。它更适合“如何理解或使用这两份旧 bank”的问题，却不提供新训练制度证据；B03 现在又已经提供了新 bank 的同世界部署比较。因此，对当前 bank-formation 问题，它虽便宜，却没有更高的信息针对性。不将它设为 M/U 的前置，也不同时购买两项。
+
+第三个原样 G 区组或 surrogate 重调，目前没有新增的可区分理由。完整 hierarchy-versus-flat 会与 DM1 已选 B14 重叠，不应另开一个冒充高层训练消融的比较。cross-play 则改变了部署问题，需要处理伙伴总体和标签对应；当前材料没有把它识别为此处首先应解决的用途瓶颈。
+
+hmasd-pro-question-complementar…
+
+本次有界结束应是：完成固定两臂与六个面板后，按前写主要量和反结果分支读取，不自动加第三个 fit、系数扫描或确认批次。 有利结果可以保留某种训练制度的进一步研究价值；不利或未决结果也可以结束当前投入。后续工作需要一个结果能够改变的具体问题，而不是为了继续工作而制造修复故事。结束这次投资不等于宣布所有高层训练无用；继续研究责任也不等于无限救援义务。
+
+八、本次阅读范围与未完成的审计
+
+推理使用附件指定的 fad4aa6a8b89ce58fe7aa53287659998df5e4ef7，共享背景使用 f32cd55dc95e11b84b3661ddf00d5d2456a59159，实现含义使用冻结的 8859fc37944dc97ce916a1200dcbd5e78fe8e5b5。最新可写分支只用于核对写入位置，没有替换固定推理输入。
+
+hmasd-pro-question-complementar…
+
+我读取了指定问题、B03 完整结果与 reconsideration、此前完整建议的相关章节、治理与方法、指定共享背景，以及两臂原始 summary、config、launch manifest 和 training JSONL；对大规模原始输出采用了关键面板、计数及相关训练字段选读。冻结代码的读取集中于训练循环、标签分布、存储、高层停训、native-then-aux 顺序和评价语义。
+
+没有重新加载 checkpoint tensors，没有逐条复核全部 prediction arrays，也没有重新执行模型、轨迹或全量数值审计。 DM 记载的独立张量与预测检查属于已读的原有验收记录，不冒充本次新完成的检查。U 的实际实现、运行成本与学习后果尚不存在于这些证据中；本答复给出的是可实施性分析与下一次比较建议，不是对 U 的工程验收。
+
+最终建议：保留 M/U，以共同 uniform 部署下的 bank 形成差为主，利用已有面板预先保留 M-own − U-uniform 的配套用途读数；不把训练制度、部署选择、有效标签信息和高层梯度贡献混为一谈。 这是目前一个值得直接观察、且没有被更便宜替代回答的新问题，但不预定正结果，也不承担互补性或必要性结论。
+
+本次实际新增 0 fit、0 环境评价、0 代码修改、0 仓库写入。
+
+
+## 2026-09-23 — Training-law advice accepted; prospective B04 M/U
+
+**Transport and reading.** The accepted same request key
+`hmasd:8f3d5c889df986ec993023a1da73f9f53187df112b1a011c8ca5f5d2df38dc9e`
+completed without a resend. The complete chat answer above was read (9328 characters before
+its terminal newline). `deliver` returned `NOT_DELIVERED`, with no receipt commits. Before
+saving this verbatim fallback I reconciled the current local and fetched branch target against
+question source `fad4aa6a8b89ce58fe7aa53287659998df5e4ef7`: the unique question was unchanged,
+its Answer was empty and local bytes equalled the published target. The collected file SHA256
+is `918cb19397d97ae983cf0f8dbb1e8d5cc7bf0965a027ebaff5d9cd69777f522a` (21091 bytes).
+This is DM preservation of returned advice, not a Pro repository commit or experimental evidence.
+
+**Decision and material criticism.** MATERIAL_DISSENT=no. Adopt the fixed M/U comparison,
+including its strongest scope objection: uniform training is aligned to the primary uniform
+deployment rule. The comparison asks whether learned high-level assignments form a more useful
+bank under that external rule; it cannot answer whether a learned selector is universally useful.
+Add the algebraic secondary Gamma = M(final,own) - U(final,uniform) = Delta_uniform + A_M,
+where A_M = M(final,own) - M(final,uniform). These are already planned panels and add no
+execution. Gamma never replaces a failed primary. Preserve mean components and all world tails.
+The Pro answer's approximate B03 wall figures are inaccurate: original resources give
+D=53.417283961 min, G=55.189212162 min, total108.606496123 min. Preserve the answer as received
+and use those native measurements for planning. Pro inspected selected supporting files, not
+our complete tensor/prediction audit; it correctly says U had not yet been implemented.
+
+Verified consequential code facts: native `store_transition` enters `_d2_store_transition`
+and returns before the ordinary high-level-storage omission; `disable_high_level_training`
+skips `update_coordinator` but leaves low PPO and discriminator learning. B04 U will retain
+D2 clocks/tables and report actual remaining work, not claim zero high-level collection.
+Its labels must be sampled before low forwarding and travel unchanged through native caches,
+critic conditioning, reward/discriminator storage and factual windows. Registered `random`
+disables additional learning and is not this comparator. The inherited replay diagnostic must
+report U's uniform stored factors, with learned-policy PPO replay explicitly not applicable.
+
+**Prospective protocol.** One exploratory training block, exactly two new cold fits, serial
+M then U. Each uses360000 team transitions (16lanes x500steps x45updates), native S1/N6/c10/k10,
+50users, six team and six individual labels, mixed legacy coefficient.5 (.025/.01 discriminator
+components), recurrent local low actor/global critic, both learned discriminators and both
+factual heads detached from the actor trunk. Native Gaussian action likelihoods and physical
+clip[-1,1], D2 infinite-cost/full-cap10 boundaries, entry masks, existing entropy, own ValueNorm,
+and disabled observation/state normalization remain. No new architecture, auxiliary trunk
+update, horizon/reward/entropy adjustment, replay panel, third arm or seed block is authorized
+by this protocol. The current source will be fixed after implementation and independent review.
+
+M uses the native learned team distribution and autoregressive individual mu=.9pi+.1/6,
+with675 high optimizer calls. U uses fixed exogenous uniform independent team/individual labels
+at the same k10 renewals, factors1/6 and log factors-log(6), with0 high optimizer calls. Both
+retain native low actor/critic101250 calls each, team/individual discriminator675/2700 calls,
+and315 calls per factual head per fit,0 auxiliary trunk calls. This is a training-regime
+intervention changing optimization, assignment information/correlation and endogenous experience;
+it is not an isolated high gradient or equal-experience contrast. Labels can convey global
+information differently despite a common low-input interface. Same coefficients do not imply
+identical realized rewards. Equal team transitions do not imply equal computation.
+
+**New addresses and random-stream contract.** Actual initial native/head tensors must match,
+using init260923931, head260923932 and auxiliary shuffle260923934. New training worlds are
+2100000..2100015. The default training/process RNG starts at260923933. Both arms use independent
+persistent RNG streams for low stochastic action draws260923935, high-level label collection
+260923936 and high optimizer work260923937; each context preserves and restores Python,
+NumPy, torch CPU and active-device CUDA states as applicable. Skip of M-only high updates or
+changes in high draws must not shift the low action or remaining learner streams. These are
+addresses within the two fits, not additional independent runs. A candidate-local wrapper may
+reuse native assignment/acting/update calls; record stream states/digests in checkpoints and
+verify their isolation through the real path. The new contract is shared by M/U and does not
+claim trajectory identity with B03. M/U trajectories may diverge from the first label boundary;
+only actual initialization, exogenous world addresses and initial uniform panels must match.
+U's constant categorical law must be independent of state, earlier labels and network weights;
+never sample a learned action and overwrite returned metadata afterward.
+
+**Evaluation and decisions.** Preserve the exact original exposed development worlds
+1700200..1700231, eval seed260923905 and actual PCG64 seed262624105; at each of50 k10 renewals
+draw32 team labels then32x6 individual labels. Frozen stream SHA256 is
+`a45d59f80fca20321df3803745068bb841f30e6c25b6b8c01dd7d0d250a67190`.
+M has initial/final own and uniform panels; U only initial/final uniform, each32x500 steps.
+No argmax-of-uniform pseudo-own panel. Primary Delta_uniform=mean J(M_final,uniform)-
+mean J(U_final,uniform), with each bank's actual uniform initial-to-final learning. Equal
+initial panels make the difference in learning algebraically redundant with the primary.
+Working prediction Delta_uniform>0 with both banks learning; U's rival is broad label training
+being equally or more useful. There is no justified directional prediction for every quality
+or height component. Read signed J/users/coverage/quality/height for all32 worlds, absolute
+and paired tails, M own learning, A_M and Gamma without a post-result endpoint switch.
+
+If M wins while both learn, strengthen only the conditional bank-formation regime judgment.
+A relative win due to another bank degenerating is not useful learning. U superiority with
+both learning favors this simpler control for the external-law question without proving
+high-level uselessness; opposite Gamma can support a conditional full-system advantage while
+the primary fails. Small, mixed or service/cost tradeoffs remain uncertain, not equivalent.
+If both fail to learn or only intermediate diagnostics improve, stop extension of this recipe;
+do not tune the endpoint, reward, horizon or deployment law to rescue it. A technical defect
+quarantines dependent claims and is not adverse scientific evidence. This fixed pair concludes
+after its six panels and complete acceptance; no automatic third seed, confirmation or extra
+branch diagnostic follows. Further investment requires a new useful observation and a reason.
+
+**Cost.** Two fits,720000 train +96000 eval =816000 team transitions. M eval64000/U eval32000;
+90 total native update stages,675 high calls total,202500 actor and202500 critic calls,
+1350 team and5400 individual discriminator calls,1260 total factual-head calls,0 auxiliary
+trunk calls. D2 collection/critic forwards and discarded high-computation work in U remain
+measured rather than padded away. Prior53–55 runner min per B03 fit is context only; report
+actual wall/CPU/RSS/CUDA/scratch and acceptance, not an unsupported efficiency claim. Prefer
+wsl_4070 under current actual-node admission; no result run has yet started for B04.
+
+**L0 — B04 implementation.** Deliver one candidate-local training-law adapter, a runner and
+admitted CLI with complete output/counter/checkpoint contracts above. Owned code paths:
+`experiments/candidates/complementary_skill_learning/b04/`,
+`scripts/run_complementary_skill_learning_b04.py`, and matching
+`tests/experiments/candidates/complementary_skill_learning/b04/`. Reuse audited B01 learner
+and B03 reward/storage/evaluation helpers; do not modify their frozen files or shared core.
+Keep the full native storage/sampler/update/normalizer/recurrent paths. M/U both use internal
+auxiliary arm D while reporting external training-law arm accurately. Save full run config,
+initial/final checkpoints including RNG stream state, full training and factual-prediction
+JSONL, all required world panels, parameter movement and actual optimizer/storage/transition
+counts. In U require coordinator parameters unchanged and0 high calls while all trained
+components actually move; no fake optimizer steps. Record exact label factor checks, D2
+record counts and retained work; enforce the full k10 label law before low actions and in
+canonical stored records. Learning failure is not repaired by data filtering or extra runs.
+
+Checks: focused actual-path CPU tests, actual4070 CUDA semantics, independent read-only
+Reviewer for sampling/RNG/storage/replay/checkpoint risks, then DM acceptance of the diff and
+checks. Include wrong-U-factor detection, all labels used consistently before forward/storage,
+no high-update leakage into low draws or low/discriminator RNG, matched initial tensors and
+uniform panels, actual low/discriminator/head movement with fixed U coordinator, recurrent
+boundary handling, admission refusal, correct asymmetric panel counts and zero-update eval.
+Small technical fixtures are not scientific fits and remain pytest-owned under temp/tests/.
+The Implementer may choose routine code structure but adds no arm, seed block, endpoint,
+scientific choice, launch, external communication or record edit; it returns diff/checks/risks.
+DM owns this notebook and publication, reviews first, and uses native admission only after
+publishing exact accepted inputs. Stop dependent work on a real semantics or execution conflict;
+do not create a control-plane framework or research rescue while fixing this bounded adapter.
