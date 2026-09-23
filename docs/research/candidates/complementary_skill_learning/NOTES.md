@@ -3773,3 +3773,79 @@ scientific choice, launch, external communication or record edit; it returns dif
 DM owns this notebook and publication, reviews first, and uses native admission only after
 publishing exact accepted inputs. Stop dependent work on a real semantics or execution conflict;
 do not create a control-plane framework or research rescue while fixing this bounded adapter.
+
+
+## 2026-09-23 — B04 implementation review: isolate the actual native sampler
+
+Before any B04 result-bearing launch, independent Reviewer found a material omission in the
+first unpublished adapter. The three process-RNG contexts did not cover the object-private
+`RolloutBuffer._sampler_rng`: native high D2 sampling and low recurrent sampling both shuffle
+with that same PCG64 generator. M's high optimization would advance it before low PPO, whereas
+U skips that work. This would violate the prospectively required separation of high-update
+work from remaining learner random draws. Equal process digests could not establish that
+contract. No scientific fit has used these bytes, and this is not negative learning evidence.
+
+The bounded repair is candidate-local, using native sampler-state getter/setter interfaces.
+Preserve the native remaining-learner sampler and its existing seed derivation from the common
+initialization block; provide a separate persistent high-sampler PCG64 state initialized with
+260923937, the already assigned high-update address. Swap only around the actual coordinator
+update, save its advanced state and restore the remaining learner sampler in finally. Save
+and restore both object-private states in checkpoints and expose their seeds/state digests.
+This completes the already fixed RNG contract; it adds no fit, independent block or treatment.
+The regression uses identical actual stored rollouts, runs the real high update only on one,
+and compares subsequent low sampler ordering and state, including a checkpoint roundtrip.
+Process-stream tests also perturb high work deliberately; zero consumed process draws are
+allowed and must not be padded with meaningless draws to make an assertion pass.
+
+Two initial tiny-test failures were expectations rather than scientific failures: the tiny
+high update did not advance process RNG, and terminal D2 closure produced48 valid rows rather
+than an expected40. The first helped reveal why process state alone was insufficient. U's
+inherited D2 metrics.rows_M fields remain0 because coordinator learner work normally populates
+them; actual retained table counts are the storage evidence and are recorded separately.
+Peak scratch is not measured by the current runner; final output size can be reported with
+its scope and peak scratch marked resources_unmeasured, without invalidating the science.
+Independent focused rereview and actual4070 checks remain pending before implementation
+acceptance. The exploratory comparison remains one training instance per arm on32 exposed
+paired evaluation worlds, not32 independent training replications or a confirmatory test.
+
+
+## 2026-09-23 — B04 executable repair reviewed and CPU checks accepted
+
+DM read the complete new learning adapter, runner, CLI and their affected native call sites.
+The independent Reviewer closed the sampler-sharing P1 after tracing the persistent high
+PCG64 swap/restore, inspecting both checkpointed sampler states, and running the real
+high-update-to-low-order regression. No additional object-private RNG shared between high and
+low was found in this path. Discriminator draws use the isolated remaining process stream;
+factual-head shuffle keeps its own existing PCG64. No material executable finding remains.
+The final whole-first-step RNG assertion was corrected to compare clean versus deliberately
+perturbed high-collection calls: common native placeholder-label initialization before the
+wrapped method legitimately consumes default NumPy draws. It must be equal between paths,
+not falsely reported as zero RNG consumption across the whole step.
+
+DM reran the changed B04 suite plus the native entry-mask regressions with
+`/home/fires/.venvs/hmasd-linux-cpu/bin/python -m pytest -q tests/experiments/candidates/complementary_skill_learning/b04/test_b04.py tests/hmasd/test_discoverer_entry_masks.py`:
+**15 passed,1 CUDA skip in5.52s**. The only warnings are existing matplotlib/pyparsing
+API deprecations. Covered real M/U short learning, initialization and initial uniform matching,
+trained-component/head movement, U coordinator0, detached trunk, all-canonical uniform-factor
+rejection beyond the first32 rows, state/weight/prefix-independent U law, low label-flow
+integrity, injected high-draw isolation, native high-to-low sampler independence and checkpoint
+restoration, two-rollout resets, evaluation/output counts and unadmitted CLI refusal.
+The CUDA-specific test executes both actual CUDA M/U paths for two short rollouts; it skipped
+on this CPU host and remains to be run on4070 before a scientific launch.
+
+Final executable SHA256 values independently read from files are:
+- learning.py `d9013910f3583772352cd9dcf58c12688f420afa1e5d382b46042cd1dcfdcffe`;
+- runner.py `87ab93fc681e5f0d1ad8c1aa4e7a7a2fa000bc71dfc491618ab5635c8a29a142`;
+- CLI `7a4244f3ba9ed6a2a825825ea4a2942f2ee5cec49745799464b2f8b540b95e89`;
+- final test_b04.py `9bd1c05d76cfb50a65993962fa7546399eff036e2d841b4cd934a3b1e4413cef`.
+The source uses internal construction with detached arm D, then reports external arm M/U;
+inherited head routing only enables trunk gradients for G/P, so both remain detached. This
+presentation choice changes no objective or exposure. Frozen B01/B02/B03 and shared core
+bytes are unchanged. DM accepts the CPU implementation and review, with actual-node CUDA
+verification still outstanding;0 B04 scientific fits have started.
+
+The Implementer subsequently added only assertions for the recorded output-byte scope and
+unmeasured peak scratch, rerunning that output test successfully (1 passed). DM inspected the
+test-only delta; executable hashes remain exactly as reviewed. The published final test hash
+is `26d84e08c3080af87f8392bcc23aa0fb65313e0f0d37072ff581cd3e61034abc`, superseding the
+pre-addition test hash above. This adds no scientific execution or changed production behavior.
