@@ -9710,3 +9710,65 @@ registered engineering Reviewer checks high-risk initialization/RNG/evaluator se
 DM accepts the diff and checks, publishes exact inputs and uses fresh actual-node admission
 on wsl_4070, preserving other accepted jobs. Accepted fits get retained native handles and
 this task's deterministic observer; no blind retry after an uncertain launch.
+
+
+### B11 prospective clarification before implementation acceptance
+
+A positive native Delta8 with lower service is read as a native-objective/service tradeoff,
+not as fulfillment of the predicted service improvement; more service with lower J fails
+the primary native-objective prediction. Preserve either mixed consequence explicitly.
+There is no binary proxy gate that discards those facts, and no reweighting of J/C/Q/P.
+Save each final panel's initial states and observations alongside its traces so the two
+policies' shared actual evaluation worlds can be checked directly, beyond matching seed
+numbers. This adds no transition, fit, evaluation panel or policy forward.
+
+
+### B11 engineering acceptance before native launch
+
+The DM read and accepts the four-path implementation. Registered Implementer
+`/root/entropy_b05_implementer` returned exactly the assigned new paths, no shared or
+historical edits, staging, launch or production-policy evaluation. Independent registered
+Reviewer `/root/entropy_b05_review` found one P2: a native transition completed before
+storage was omitted from physical agent-row exposure. Both success and failure accounting
+now use training_team_steps * actual train N; stored_team_steps remains separately reported.
+The injected failure pins one physical transition/N agent rows and zero stored steps.
+Final review reports no remaining material finding on the exact hashes below.
+
+Focused command: `PATH=/home/fires/.venvs/hmasd-linux-cpu/bin:$PATH
+/home/fires/.venvs/hmasd-linux-cpu/bin/python -m pytest -q
+tests/experiments/candidates/agent_count_generalization/training_condition_b11/test_runner.py`.
+Final outcome **8 passed in5.47s**,14 existing third-party deprecation warnings. The DM reuses
+these final-byte checks, with its independent complete source reading and AST/LF/whitespace
+checks; Implementer py_compile also passed. Earlier8-pass/4.90s evidence covered a draft,
+not the final delta. Technical fixtures use reduced width16, two lanes,20 steps and one
+update, exercise both sides of k10, and produce6/8 actor and critic optimizer calls.
+They check actual common tensors/normalizers/sampler and canonical post-init RNG across N,
+fresh target-owned optimizers, real bounded collect/store/update and parameter movement,
+final-only frozen N8/N6 evaluation, trace recomputation, actual shared initial worlds,
+native reward units and partial-collection accounting. Test worlds are fixed addresses
+used for interface checks, with no score-based selection or production-policy forward;
+this remains exploration, not blind confirmation. Failed-evaluation counter retention is
+source-reviewed without a dedicated injected evaluation-failure regression.
+
+The CLI explicitly binds `--cell t6|t8 --seed 963201`; no exposure/treatment tuning switches.
+Effective learner entropy .05 is measured initially and after every update. Each evaluation
+target must match the trained learner's digest immediately after strict synchronization,
+then remain frozen. Native c10/0dB and actual source inputs are asserted. The independent
+saved-data reader is prepared in task-private scratch; no scientific checkpoints were loaded
+or result evaluations run during this engineering step.
+
+| Owned file | Accepted SHA-256 |
+| --- | --- |
+| training_condition_b11/runner.py | `beb7c1dbb9ddb8c78f989c630b0bb66de4703a861d99ac6d5c3a1ea34d940abb` |
+| training_condition_b11/__init__.py | `d74fce80396e25d7ecbf7be340c87e391e7390945ef2b5b9a32d19972137a1cc` |
+| scripts/run_agent_count_training_condition_b11.py | `e3633e126e118f0cb4f06603be396979dd9bc3a3564473c2890fc79dfcb34183` |
+| mirrored test_runner.py | `afed333e945d3bd726a071d04a804bf73ffefdabebe7eac48c699cbdba44c099` |
+
+Current shared-core versus author-branch diff was checked: the recurrent entry-mask change
+is equivalent comment/shape-access syntax, not an unadopted scientific fix. The snapshot
+helper change is a cleanup docstring. No shared learner migration or historical rebinding
+is needed. Latest inspected main `fa7e75d2d5d52c63ce5d07cbf11ba96634583343` retains owner
+pause lifted and this lead; DM3's new baseline launch is preserved alongside DM2 P.
+Choose independent concurrent B11 fits if the fresh actual-node checks support them;
+otherwise serialize the same fixed cells without changing any scientific input. Kernel
+admission is required for each actual release. No progress or score can add exposure.
