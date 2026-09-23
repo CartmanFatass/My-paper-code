@@ -11645,3 +11645,82 @@ and required tests. After acceptance, commit/push exact inputs, admit on configu
 with current pause/lead and fresh memory, stage bound assets without changing native originals,
 launch once, retain handle and arm detached observation. This entry fixes exposure before any
 B13 result. Ordinary technical repair does not authorize extra panels, fits or blind retries.
+
+
+### B13 asset availability and retained training cost
+
+All four exact final45 binaries were rechecked on wsl_4070 before implementation acceptance:
+H1/H2 each23,073,626 bytes, S1/S2 each20,968,771 bytes, all matching the four hashes above.
+The fixed B13 output root did not exist. H1 was also copied locally from its original native
+file and hash-verified; no replacement fit or checkpoint selection occurred. This resolves
+local restore-test availability, not native execution admission or scientific acceptance.
+
+The four selected historical fits each used360k team training steps:1.44M total,8.64M UAV
+training rows, with256k historical evaluation team steps. Original command walls, including
+their own evaluation, are H1=90.417839min, H2=61.825780min, S1=70.329337min and
+S2=81.932786min; summed304.505743min, not elapsed batch/node occupancy or a B13 estimate.
+Each paid101250 actor and101250 critic optimizer calls. Each H6 additionally paid675
+coordinator,675 team-discriminator and2700 individual-discriminator calls; both SETs paid
+zero for those three. Historical intervening evaluations and prior development/selection
+remain recorded in B03/B07/B11/B12; these selected-fit sums are not the whole direction cost.
+B13 adds only its declared128k evaluation and actual implementation/check/review/reading work.
+
+
+### Completed B11/B12 disposable source snapshots reclaimed
+
+The current main engineering method was read, including snapshot reclamation. All four
+B11/B12 outputs were already collected/read; before cleanup their local checkpoint and native
+trace bytes were rechecked against runner identities. The default preview could not inspect
+`/proc/660/cwd`; its refusal was preserved. The documented existing passwordless
+`--sudo-process-scan` performed only the read-only process probe. The explicit second preview
+confirmed terminal native identities, clean sources, external outputs and durable direction
+branch reachability for snapshots `47a0e50e9fff44bda1d1dac103791a84`,
+`e97d5410d77a41a3b09edcd7f9941642`, `1a402ca3a17e4d259bdfe3b46da60ddf` and
+`ab99cc4c0cc94d5cbcb377a1f5888852`; guarded apply rechecked and removed those four copies.
+Run outputs, original checkpoint paths, operation claims and published evidence remain. This
+reclaims disposable source only and grants no retry; B13 uses the existing bound binaries.
+
+
+### B13 implementation and independent review accepted
+
+The DM read the complete new candidate, CLI and tests and accepts their final bytes. No
+shared learner, environment, frozen runner or other direction was changed. The independent
+Reviewer found and the Implementer repaired an N6 constructor-difference guard, exact-zero
+floating cancellation in the four-gap identity, an initial-array reproduction check that
+incorrectly used allclose, and a reported runtime seed that was not installed. The fixed
+initial arrays and integer/boolean traces now require exact equality; continuous output
+comparison remains at the original1e-7/1e-6 tolerances. The algebraic diagnostic retains every
+residual with a16*float64-epsilon*max(1,sum absolute source values) roundoff bound; it does not
+introduce a scientific equivalence threshold or change any score comparison.
+
+All four real bound checkpoints were strictly restored at both N8 and N6 before any result
+panel, verifying exact saved modules, all normalizers and the original final digest. H1 retains
+its original constructor's .05/.01 entropy endpoints; H2/S1/S2 retain .05/.05. Only required
+roster/lane-derived fields change. Construction seed17 is fixed for this invocation; after
+strict restoration, evaluation explicitly installs the per-panel world_base+51 RNG seed.
+The runtime address is recorded truthfully; this does not assert identical post-constructor
+RNG state to the historical evaluator. Deterministic choices, native initial worlds and the
+full fixed SET reproduction check protect the compared behavior.
+
+Final focused suite: Implementer20 passed in6.69s; DM20 passed in6.24s; independent Reviewer20
+passed in5.90s. Existing14 dependency deprecation warnings remain. Coverage includes all eight
+real asset/roster restores, strict payload/config/module/normalizer rejection, focused real
+H6 16-to-32 batch/choice/action and observational counter checks, zero storage/update/freeze,
+all four contrasts including non-dyadic residuals, exact initial-array rejection, a short
+synthetic-runtime execution of the real evaluator with numeric trace/failure preservation,
+and CLI admission ordering. AST, LF and changed-line whitespace checks passed. The reviewer
+reports no material finding remaining on exactly these bytes:
+
+- candidate runner SHA-256 `79728b512de0e1b409ce0d934a57e406edccbd79c429b34aff77c4f18cfed6d8`;
+- CLI `197f843cbf23c88e01f4926e9efe7b229737bb13c57936fabc6a5048602a3050`;
+- tests `5c007454feb91392bf848e8fbd692faa09cf6703b7d5d1d1f7742901b398c045`;
+- package `e8a2a8ef9bafe2979aa383d48a570ac6af352b0f9c89efe82955740b46c07f74`.
+
+No full B13 panel or new fit was used for these checks. Full ordinary-control reproduction
+remains a prospective runtime condition, not something established by fixtures. The DM also
+prepared an independent saved-trace reader without candidate/environment imports. It will
+recompute J/C/Q/P/E/S/U, all four contrasts and loss-world readings after native collection.
+Current published controls were rechecked through main17f02ea4c: this direction remains
+exploring with the same lead and owner pause lifted; FSD/G33 controls are unchanged. Native
+live policy agrees on pause/state/lead, and its compute config equals published main. One
+fixed result launch will follow exact input publication and fresh admission on wsl_4070.
