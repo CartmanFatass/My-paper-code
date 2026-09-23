@@ -5086,3 +5086,580 @@ scope is0 new fits/updates and192k evaluation steps for the complete2 policy-pai
 and96k new off-diagonal evaluation. This is a proposed separate diagnostic, not an extension
 of B05. Pro can change whether it is worth doing, its minimal comparison and interpretation;
 no new result execution is selected or launched from this note alone.
+
+## Pro question 2026-09-23 entropy-sign-reversal-cross-panel-after-b05
+
+Conversation: reuse the direction's existing Jev-account conversation; its address remains
+only in local transport state. Prior question key:
+`hmasd:cf77c8c4c6713ea91b15d485a7bf6621cdef44f2e75cc81f2aaef9fc9d804604`.
+
+Question: **After the fixed B05 SET recurrence pair reverses the B04 service benefit, is a
+zero-new-fit crossing of the two existing final-policy pairs with the two existing world
+panels the next worthwhile discriminator, or should we stop this recipe diagnostic because
+it cannot change a useful research choice?** Assess the concrete proposal below. The decision
+already made under your prior advice is not to promote lambda0 as a default upgrade; do not
+reopen that decision by selecting another endpoint. This consultation is about a new,
+conditional explanation and possible further investment, under constitution section5.2/5.3,
+not another approval of the completed two-fit batch.
+
+### Changed evidence and standing
+
+Owner explicitly resumed this DM: "你可以继续研究了 作为DM不该简单的停下 impress me！".
+Current published main `1ccec7d6407a329b6fe20cfef96d5d80aa784a28` records this direction as
+exploring under the same independent Codex DM. Owner pause is lifted for us; Claude FSD stays
+paused/frozen. No cross-task communication, new direction or other DM's work is requested.
+No experiment or Pro operation is now running. This is a scientific choice, with no per-idea
+owner-approval layer and no fit allowance; costs still must be declared before execution.
+
+Read the preceding complete B05 entry and the full prior recurrence Answer/adoption. Its
+negative-result branch covers our immediate non-adoption decision. New evidence changes the
+unresolved explanation: the originally positive response has now reversed on new training
+and new worlds, rather than merely awaiting replication.
+
+| Native final45 zero-minus.05 | B04 selected development pair | B05 new pair |
+| --- | ---: | ---: |
+| E_4 | +.000936099693 | -.050526506815 |
+| E_6 | +.052325722758 | -.060413388032 |
+| E_8 | +.110144949627 | -.040734308973 |
+| E_U, equal weight N4/N8 | +.055540524660 | -.045630407894 |
+
+B05 loses mean coverage and quality and raises weighted penalties at every N. Positive-world
+counts are0/16,4/16,5/16; N6 coverage changes-.06438. Its stage15/30 unseen effects are
+-.089472098762/-.029924206184. Do not merge the two blocks' means to hide their opposite
+signs, treat worlds as training repeats, or select a favorable stage. Stage worlds differ.
+In both blocks lambda0 lowers raw sigma/saturation but increases physical-boundary truncation.
+B05 full raw saturation .636594→.311477 and boundary truncation .164500→.172796 accompany
+adverse service. B04 had .637829→.338887 and .167267→.236694 alongside its positive endpoint.
+These diagnostic directions cannot identify a sufficient service mechanism.
+
+Both B05 fits completed at the fixed360k horizon with matched initialization, initial panels
+and first pre-update collection; all45 rows,12 panels,4 checkpoints per fit were read and
+checked. Native reward is `J=N*sum(scalar_rewards)/500=.7*C+.3*Q-P`, with P already weighted.
+No technical failure, missing endpoint or inactive entropy setting explains the reversal.
+Actual B05 cost is112.238565619 summed command minutes for2 fits plus192k evaluation steps.
+The latest entry gives component effects, world signs, pooled counts, source hashes and costs.
+
+### Proposed distinct zero-fit experiment, not yet selected
+
+Hold fixed the four final45 SET policies: pair A is training seed943201 (.05 from B03 clip,
+0 from B04); pair B is953201 (both B05). Each final checkpoint includes its trained
+normalizers. Use only deterministic mean actions clipped to[-1,1], fixed roster andk10,
+no optimizer, online normalizer updates, re-fitting, stochastic-policy evaluation or selection.
+
+Cross both policy pairs with both existing final45 world panels. At each N4/6/8, panel A is
+`1200000+45000+100*N+i` and panel B is `1500000+45000+100*N+i`, i=0..15,500 steps each.
+The underlying S1 world generator/task is unchanged; these are two finite sets of random world
+addresses, not distinct task populations. Full crossing is2 pairs×2 lambdas×2 panels×3 N×16
+worlds×500 = **192000 evaluation team steps,384 episodes,24 panels,0 new fits/updates**.
+96k repeats the original diagonal cells in one common frozen evaluator to check restoration
+and compatibility;96k supplies the missing off-diagonal cells. Retain repeated diagonal
+results as replay checks, never as new independent evidence. There is no third world panel,
+new checkpoint, coefficient, training seed, H6 cell, horizon or automatic follow-up.
+
+Let `d[b,p,N]` be the within-pair mean J0−J.05 for fixed policy pair b evaluated on panel p,
+and `d[b,p,U]=(d[b,p,4]+d[b,p,8])/2`. The two observed diagonal values are d[A,A,U]>0 and
+d[B,B,U]<0. Distinguishing predictions for the missing cells are:
+
+- If the sign primarily follows the realized policy pair in these assets, expect d[A,B,U]>0
+  and d[B,A,U]<0. This weakens a panel-alone account of these particular diagonal signs.
+- If it primarily follows the world panel, expect d[A,B,U]<0 and d[B,A,U]>0. This shows that
+  the same fixed policy contrasts reverse across these panels, weakening a pair-alone account.
+- Other or near-zero patterns preserve a mixed/interaction account. Report signed magnitudes,
+  all N and components, not a post-result dominance threshold or a forced binary explanation.
+
+A transparent2×2 descriptive decomposition can report row, column and interaction contrasts,
+but its arithmetic is not a causal percentage or a variance estimate. No training-population
+CI can be inferred from two selected pairs or16 worlds. Even a clean row pattern would not
+prove generic seed sensitivity or separate initialization, trajectories and co-learning; even
+a clean column pattern would not estimate a world-population effect. Keep N6 service/costs.
+Changing N alters capacity, interference and joint geometry; this is not a pure-N intervention.
+
+Why it might matter: if the apparent recipe response follows the fixed policy pairs across
+panels, further world resampling does not repair its training-side unreliability in these assets;
+if it follows the panel, any subsequent comparator evaluation must acknowledge demonstrable
+world sensitivity. Neither outcome promotes lambda0. The strongest no-run case is that our
+practical choice is already clear, the conditional distinction may not select an executable
+next learning change, and further evaluation would just decorate a negative recurrence. Give
+that argument full weight. An automatic third fit, four-cell H6 expansion or entropy sweep
+does not follow from a sign reversal. Another architecture is not owed.
+
+Feasibility evidence: all four final checkpoint files are present at their manifest-bound
+native paths with their recorded hashes. The two older files were rechecked on the node now;
+the B05 files were completely collected/loaded. Python-source diff from B03 source
+`89486d32ea569728f39d6e21b53f8a7c8854e74c` to B05 source
+`e2ea736457e0992fb53cf21aa775fd15da3d8231` changes only the dedicated B04/B05 runners,
+entrypoints and tests, not the shared learner/model/environment or original count factory.
+That supports feasibility, not automatic equivalence of a new evaluator. A chosen implementation
+would bind exact assets, validate restored state and historical diagonal behavior, and use a
+single reviewed evaluation path; unexpected replay disagreement would quarantine the dependent
+comparison rather than be renamed scientific variability. No code or native evaluation is
+requested from Pro.
+
+### Context and source precedence
+
+Use the following concrete sources. `source_sha` means the immutable full commit supplied in
+the transport message; latest branch content is only the writable target, not scientific input.
+
+- Governance at source_sha: `docs/project/OPERATING_CONSTITUTION.md` §§1–5 and8. Owner continuation
+  above is current; this is exploratory continuation, not confirmation or Portfolio review.
+- Methods at source_sha: `.agents/skills/hmasd-scientific-tools/SKILL.md`, "Update the working
+  explanation", "Simple-model and literature bridges", "Comparators and MARL information",
+  "Statistics", and "Cost and exposure"; `.agents/skills/hmasd-research-engineering/SKILL.md`,
+  "Checks and review" only for the proposed restoration/evaluator risks. Advice is not approval.
+- Current shared background: `docs/research/RESEARCH.md` topics3/4 and own standing at
+  `1ccec7d6407a329b6fe20cfef96d5d80aa784a28`. Topic3 now retains both signs and decouples
+  latent diagnostics from service. Topic4 prevents converting finite policy-pair observations
+  into representation or generic learning claims. This proposal tests an unresolved finite
+  panel/pair distinction, not the other active load/capacity direction's question.
+- Notebook at source_sha: "B04 complete: useful SET endpoint response with a contrary boundary
+  pathway"; the complete "Pro question 2026-09-23 entropy-recurrence-after-b04" Answer and its
+  fixed B05 adoption; "B05 complete: reduced raw noise recurs but SET service benefit reverses".
+  Read supporting and adverse evidence together. No recursive entire-history assignment.
+- Raw evidence at source_sha: summary.json and panel_45_n4/n6/n8.json under the following four
+  `runs/agent_count_generalization/` tags. Training JSONL and stage15/30 panels are available
+  there if a consequential explanation depends on the diagnosed exposure or intermediate claims.
+  `s1_action_law_b03_set_clip_s943201` (frozen scientific source `89486d32ea569728f39d6e21b53f8a7c8854e74c`);
+  `s1_entropy_b04_set_zero_s943201` (source `f4762ac67f04675136367fcc566327f0bf78a086`);
+  `s1_entropy_b05_set_l05_s953201` and `s1_entropy_b05_set_l0_s953201` (source
+  `e2ea736457e0992fb53cf21aa775fd15da3d8231`). Source-pinned run records are readable in Git;
+  node-only binary files are not implied readable through the connector.
+- Implementation when needed: `experiments/candidates/agent_count_generalization/runner.py`
+  checkpoint/digest semantics; `action_law_b02/probe.py` restoration precedent;
+  `entropy_b05/runner.py` fixed world addresses/frozen evaluation, all at source_sha. Frozen
+  B03/B04 inputs preserve their own completed meaning; do not silently rewrite them.
+
+Return: give your strongest case for or against the proposed zero-fit discriminator, which
+judgment or next use it would actually change, and the smallest informative comparison if
+worth doing. Audit the sign predictions and limits of the2×2 reasoning, with a simple model
+only if it clarifies rather than adds ceremony. Identify a concrete alternative only if it has
+a better differing prediction and actual next-use value; no required candidate count or new fit.
+Separate verified source facts, conditional inference and conjecture. State any decision-critical
+source not read. Return MATERIAL_DISSENT yes/no and specific changes you recommend; consensus
+is not empirical evidence and I remain the decision owner.
+
+Write only the empty `### Answer` immediately below this unique question on branch
+`codex/agent-count-generalization`, path `docs/research/candidates/agent_count_generalization/NOTES.md`.
+Fetch the latest target blob before editing, use its actual SHA, preserve every other byte,
+and stop on overlapping edits. Do not launch experiments or edit code/other records. Report
+the actual answer commit if written; if writeback is unavailable, return the complete answer
+in chat, not a receipt, hash or link alone. Current governance/methods replace conflicting old
+chat instructions for this question; named historical contracts retain their frozen meaning.
+
+### Answer
+
+GitHub 读取正常，但本轮可用连接没有文件写入操作，因此未写入仓库，也没有产生新的 Answer 提交。最新回读的本题 ### Answer 仍为空，目标 blob 为 85a1ab92063958ca75a51fae12a86cfdca0d5235。以下是完整答复。
+
+Answer
+一、建议：保留一次完整交叉，但它购买的是有限解释的区分，不是重新评选 λ0
+
+我支持所提的四个固定 final45 策略 × 两个既有最终世界面板的完整交叉：0 新 fits、192,000 evaluation team steps。 保留其中96k的对角重放和96k的新非对角评价，不增加第三面板、训练种子、H6、熵系数或检查点。B05 后不把 λ0 提升为默认 SET 改进的决定保持不变。
+
+hmasd-pro-question-count-entrop…
+
+值得购买的判断应明确限定为：
+
+在这四个已经训练出的策略、这两个有限世界面板上，原有相反的系数收益符号，能否在固定世界后仍随策略对保持，还是同一策略对换面板就会反转？
+
+这与先前的复现问题不同。B05 已经回答“原先有用的配方响应是否在新训练、新世界条件下再次出现”：没有出现。现在补足交叉，可以检验把这次失败简单归咎于旧面板有利，或简单归咎于某个训练实例，哪一种说法与现有资产的实际后果不相容。它不会识别可直接修复的训练机制，但能够约束后续资产使用和投入理由。
+
+**最强的不运行理由必须保留：**所有结果都不会改变当前默认配方决定；两个策略对、两个面板也不能估计一般训练方差或世界方差。如果无论交叉得到什么，最后都只写“仍需更多研究”，那么新增评估确实只是给负面复现增加说明，0 fits 并不让它自动值得做。恢复检查点、审阅新评价边界和阅读结果也有成本。
+
+我仍选择这一次交叉，是因为它有两个尚未观察、而且预测不同的固定反事实，已有策略和原始对角结果又可以复用。**这笔投入的用途是减少错误的后续解释与投入，而不是保证产出一个新算法。**若复原工作实际变成与这点信息价值不相称的重写，停止这个诊断是合理的机会成本判断，不需要替代训练或另造候选。现行方法允许为解释变化选择检查或复现，也允许因信息不值成本而停止；二者都不要求产生新架构。
+
+二、首先保留 B05 已经改变的判断
+
+我从本次指定版本的原始 final45 面板重算了 B05 的 J 均值差和世界正负数，结果与完整记录一致。下表继续分别保留两个区组，不将其合并成一个可能掩盖反号的均值。
+
+原生 final45，λ0−λ.05	B04 策略对／面板 A	B05 策略对／面板 B
+N4	+0.000936100	−0.050526507
+N6	+0.052325723	−0.060413388
+N8	+0.110144950	−0.040734309
+N4/N8 等权平均	+0.055540525	−0.045630408
+
+B05 不仅主汇总为负：三个 N 的覆盖、质量均值都下降，已加权惩罚都增加；J 改善世界数为0/16、4/16、5/16。训练数量 N6 的覆盖变化为−.06438，对应每步平均少服务3.219个用户，同时 J 降低约.06041。因此，它不是“只差一点满足无代价条件”，也不是正负分量相互抵消后才出现的主结果。上述世界数仍只描述同一个策略对的条件评价，不是独立训练次数。
+
+与此同时，B04 的正结果不应被删除。它的收益主要集中在 N8，N4 只有很小的惩罚补偿型 J 变化；B04 的阶段15／30又有不利结果。B05 的阶段15／30 unseen 差也为负，阶段30的 N8 单项正效应不能替换最终负效应。固定终点的正负结果都保留，但跨阶段世界不同，不能由这些曲线识别晚期崩溃或恢复过程。
+
+这次反号还加强了一个诊断边界。按已发表的完整训练窗口重算记录，两个区组都出现“λ0降低原始尺度／饱和，但提高物理边界截断”；服务方向却相反：
+
+全训练窗口1–45，.05→0	B04	B05
+原始坐标饱和率	.637829→.338887	.636594→.311477
+物理边界截断率	.167267→.236694	.164500→.172796
+最终 unseen J 效应	正	负
+
+所以，这些相同方向的诊断变化不是足以预测收益的规则。B04 反对“有用收益必须通过更少边界截断实现”；B05 进一步表明“尺度和饱和下降”也不足以保证收益。不能反过来认定增加边界截断有益或有害——两区组的幅度、均值控制、状态访问和学习过程仍不同，而且这些是随机训练曝光，不是最终确定性部署行为的测量。
+
+因此，当前应当：
+
+加强有效熵干预与有用服务必须分开判断的认识；降低λ0是可重复默认改进的判断；保持未决策略对与面板各自对现有反号的作用。不能因为尚未区分后者，就暂缓前者的非采用决定。指定 main 的 topic3和方向 standing 已经体现了这一更新；topic4也没有允许将有限训练结果升级成表示或一般学习性质。
+
+三、2×2 符号预测成立，但应把“符号跟随”“平均对比”和“交互”分开
+1. 两个缺失格确实提供了现在没有的信息
+
+对固定 N——或者分别计算后等权汇总的 unseen 指标——写成：
+
+D=(
+d[A,A]
+d[B,A]
+	​
+
+d[A,B]
+d[B,B]
+	​
+
+)=(
+a
+y
+	​
+
+x
+z
+	​
+
+).
+
+行是固定策略对，列是固定世界面板，每一格已经是该策略对的 J
+0
+	​
+
+−J
+.05
+	​
+
+，不是单个策略的绝对分数。
+
+当前 unseen 对角值为
+
+a=0.055540524660,z=−0.045630407894.
+
+x,y 是未测量的实际后果，不能从两个对角或训练 sigma 补出。问题中的两项预测方向正确：若 x>0,y<0，两个策略对各自在两个面板保持原符号；若 x<0,y>0，两个策略对各自都在换面板后反号，符号与列一致。
+
+hmasd-pro-question-count-entrop…
+
+但结论应停留在相应层面。行符号模式不证明一般的“种子主导”，也不证明面板对幅度无影响；列符号模式不证明两个面板是不同任务总体，更不证明一般的世界方差占优势。“符号与行／列一致”是直接结果，“主要原因来自训练／世界”则是更宽的解释。
+
+此外，列模式检验的是系数对比对世界面板的敏感性，不只是“面板 B 更难”。若换面板给同一策略对的两个策略都增加同一个常数，它会在 J
+0
+	​
+
+−J
+.05
+	​
+
+ 中抵消。必须是两者对面板的响应不同，才会改变 d。因此，最终仍要报告两个系数的绝对 J 及原生分量，不能只保留四个差值。
+
+2. 用明确的对比定义，避免把算术分解当成归因
+
+可以为每个 N 和 unseen 分别报告：
+
+R=
+2
+a+x−y−z
+	​
+
+（两面板平均的策略对差）,
+C=
+2
+a+y−x−z
+	​
+
+（两策略对平均的面板差）,
+T=a−x−y+z（差中之差，即该有限表的交互对比）.
+
+它们满足
+
+R+C=a−z,R−C=x−y,T=(a+z)−(x+y).
+
+现有 unseen 对角已经确定
+
+R+C=0.101170932554,
+
+却不能分别确定 R,C,T。新增两个非对角格分别补上了与 x−y、x+y 有关的信息。这是交叉设计的真实信息增量，不是对已知反号重复计算。
+
+“对角差在上述对称定义下等于 R+C”并不说明交互不存在；它说明只看对角无法求出交互。这个2×2分解可以完全重构四个均值，本身不是经过验证的机制模型，也不提供因果贡献比例或总体方差分解。
+
+还应与旧 Q=E
+SET
+	​
+
+−E
+H6
+	​
+
+ 区分：这里没有新 H6，T 是两个 SET 策略对对两个面板的响应差异，不是旧选择性交互 Q 的复现。从完整绝对分数的因子结构看，它还包含了“系数×策略对×面板”的对比，不能直接解释成两个物理机制相互作用。
+
+3. “其他符号模式”不等于已发现交互，也不一定没有信息
+
+一个纯代数反例足以说明这一点。保留实际两个对角，假设而非测得
+
+x=y=
+2
+a+z
+	​
+
+=0.004955058383.
+
+则两个非对角都为正，既不是上述行模式，也不是列模式；但
+
+T=0,R=C=0.050585466277.
+
+这是一种完全加性的行、列贡献并存，而不是非零交互。这个例子不是补出的实验数据，只说明应将“其他模式”表述为混合贡献、可能的交互或未清楚区分，不能直接贴上交互标签。
+
+其他模式还可以产生明确的局部结论：若 x>0,y>0，策略对 A 的符号在两面板保持，B 则反号；若 x<0,y<0，A 反号、B 保持负号。它们并非自动“没有区分价值”。幅度很小、数值接近零时，则保留实际数值和分量，不临时设一个主导阈值，也不把小点估计称作等价。
+
+四、各分支应改变什么后续使用，而不是自动排队新训练
+
+建议将结果读成下面几种条件性更新。所有分支都保留 B05 的非采用决定。
+
+交叉观察	能支持的更新	对后续使用／投入的具体含义
+x>0,y<0：符号随策略对保持	在两套已测世界上，固定世界后仍有策略对间的反向响应；“只是对角用了不同面板”不足以解释这些符号	不能以“换到另一个既有面板也许就能恢复”为理由继续替该配方寻找正分数。以后若投入训练侧修订，须有独立的具体理由；这张表本身不指出应改哪一项
+x<0,y>0：符号随面板保持	同一固定策略对的系数排序能被面板交换反转；对这些资产已直接观察到评价世界敏感性	不能只把 B05 归因于较差的训练实例，也不能据单个有利面板提高普通对照或包排序的可信度；后续评价解释必须保留面板选择的影响
+两个非对角同号、N间模式不同或幅度不清楚	可能只是一对策略发生反转，或多个有限效应并存	写明实际反转的是哪一对、哪个 N、哪些分量；没有因此得到明确可修改联系时，结束本次有限诊断，不自动购买第三面板或继续扫描
+对角重放出现无法解释的不一致	新评价路径尚未与历史测量建立可比性	隔离依赖该重放的交叉结论，按技术问题定位；不把不一致记成训练随机性、第三个科学结果或配方负效应
+
+对行模式，我建议收窄原提案中“进一步世界重采样不能修复训练侧不可靠性”的措辞为：
+
+交换到另一个已经测量的面板，没有消除这两个策略对的分歧；现有结果不支持仅靠重复抽取世界来恢复该配方的稳定用途。
+
+这既保留其投入含义，也不越界断言第三套世界必然如何。列模式同样不意味着“加大世界数就一定解决问题”，只证明现有有限面板选择确实影响相对结论。
+
+这些分支之所以有用，在于它们分别限制不同的后续理由；它们不要求马上选出一个新的学习变更。如果最终只是想给失败贴上“训练”或“评价”标签，却不会约束任何资产使用、解释或投入，那么我会选择不运行。这里选择一次交叉，是承认有限但具体的解释价值，不是认为任何可做的诊断都值得做。
+
+五、保留完整192k成本；其中只有96k增加新的策略—面板组合
+
+按现有设计：
+
+工作	Evaluation team steps	Episodes	性质
+原有对角组合重放	96,000	192	复原及历史兼容检查
+两个缺失非对角组合	96,000	192	新的固定策略评价
+合计	192,000	384	0 新 fits、0 学习更新
+
+完整24个评价面板对应四个策略、两套世界地址、三个 N；按实际成员数计算，包含 1,152,000 个 UAV-step 的执行／推理曝光。主要工作是循环策略推理、原生环境评价以及复原、检查和结果阅读，不是优化器更新。实际 wall、CPU、RSS和支持工作尚未测量，不能由“0 fits”记成零成本，也不能从旧训练 wall 精确预测。
+
+hmasd-pro-question-count-entrop…
+
+**96k是保留三个 N 时缺失组合的信息量；192k是本次包含完整对角兼容检查的选择，不是所有可能设计的数学下界。**我认为这96k额外重放合理：资产跨越 B03、B04、B05的专用入口，新研究需要从磁盘恢复，而历史训练面板主要从内存 learner 同步到 evaluator。二者不能只因共享模型代码就被当成已经验证相同。已有 serializer 和恢复前例降低了工程风险，却没有替新评价路径完成验证。
+
+只运行一个非对角可能反驳一个最简单预测，但不足以读取完整行、列和交互结构；不能看完第一格再决定是否补第二格。只保留 N8则放弃预写 unseen 汇总和 N6代价条件。此处没有必要为节省这些格子而改变问题。
+
+也不建议照搬 B02 的所有大型数值轨迹记录。新问题的主证据是每世界原生 J／分量、完整计数、资产身份和冻结／重放证据；已有未记录的历史均值或梯度轨迹不能被补造，新增大规模诊断也不会自动识别训练中介。
+
+六、复原与评价的具体风险：可复用逻辑，不可直接复用旧实验绑定
+1. 四个资产必须分别绑定其历史身份
+
+共同 serializer 保存的是 modules、normalizers、配置和 source／rollout 元数据，并明确是评价权重，没有 optimizer-resume 合同。新实验不应继续训练、重置学得的 normalizer，或为方便匹配而把某个策略的 learned state换成另一策略的。
+
+四个资产的正确关系保持为：A/.05来自 B03/clip，A/0来自 B04；B/.05与B/0来自 B05。应由指定的已提交 run记录提供期望的checkpoint大小、SHA-256、seed、final45和对应 source，而不是让可变的外部checkpoint目录为自己提供“期望哈希”。文件存在和可反序列化是必要检查，不是策略身份正确的充分证据。
+
+B02 的 restore_checkpoint 提供了直接可用的先例：检查模块集合、state keys、tensor shape/dtype，恢复 payload["normalizers"]，再进入评价模式。但其 load_source_policy 和生产入口仍硬绑定六个 B01 策略、B01 source及旧面板，不能仅替换标签就用于这四个新资产，也不能靠关闭身份检查来复用。
+
+2. 共同评价路径应保持历史行为，而不是统一改写历史配置
+
+B05 的实际 evaluator 固定裁剪确定性均值，构造实际 N 的 runtime，重置运行状态，并检查零 optimizer calls、冻结参数／normalizer及原生奖励恒等式。这些语义应保留。共同基础 runner 自带的旧评价地址则不是本次 A/B 地址，B02也有自己的两种动作映射设计；因此应复用合适的构造、摘要和恢复函数，而不是直接调用任一旧完整实验入口。
+
+每个策略、面板和 N 都从正确重置的环境、GRU、timer、技能及 held snapshot开始。冻结参数不等于冻结循环状态：随后仍应让策略沿自己的完整闭环轨迹运行，不能喂给另一策略的观测或沿用上一面板的隐藏状态。不同策略行动后轨迹分叉是评价对象的一部分。
+
+保持历史CPU／dtype和线程条件、环境重置次序与随机地址；对同一面板核对实际初值，而不只比较seed字符串。诊断不得额外消耗随机数。.05/0 在此标识过去的训练处理，不是在评价期间重新施加熵损失；也不得临时改成随机策略评价或新的动作变换。
+
+3. 对角检查要读每世界原生输出，不能只比较最终差值
+
+应比较原有每个策略、每个 N 的完整16世界 J及三个原生分量，核对500步、结束条件、实际 N换算和冻结证据。两个策略同时偏移可能让它们的差值看起来一致，所以只验证 d[A,A] 或 d[B,B] 不够。
+
+原生单位继续是
+
+J=
+500
+N
+	​
+
+t
+∑
+	​
+
+r
+t
+	​
+
+=.7
+C
+ˉ
++.3
+Q
+ˉ
+	​
+
+−
+P
+ˉ
+,
+
+其中 P 已加权。跨 N恢复时不固定乘6，也不重复加权 P。源码对此已有明确检查。
+
+数值容差应依据实际数值路径、dtype与累计量预先解释，不能看到非对角符号后再放宽。无法解释的重放分歧只隔离其依赖结论，不能自动抹除原有合格结果；反过来，对角重放成功也不意味着获得了新独立训练证据。这里适用既有的执行语义审阅，不需要新审批层或通用框架。
+
+七、读取与报告边界
+
+主报告应保留四格 d[b,p,N]、各格两个策略的绝对 J与分量、两个非对角的逐世界差异，以及上述 R,C,T。N4/N8的等权汇总不能掩盖不同 N的模式；N6的 J和覆盖代价也应逐策略对、逐面板单独展示。不能用交换后的有利结果改写历史面板的代价判读。
+
+世界内可以使用共同初值计算配对差，但两个不同面板的第 i 个世界不因索引相同而成为天然配对。新研究仍只有原来两个训练策略对，重复对角和新增世界上的执行不增加训练单位。有限表本身可直接报告，无需为它强加训练总体置信区间；世界bootstrap、符号数量或更大的点效应都不能提供缺失的训练总体精度。两个面板来自同一生成器，也不构成两个新任务总体。 
+
+hmasd-pro-question-count-entrop…
+
+本次按固定 6ed7abc59493d8cbede48f71d696faac048e8756 阅读了问题、B04／B05完整结果条目、前次完整 recurrence Answer及B05采纳合同；背景按指定 1ccec7d6407a329b6fe20cfef96d5d80aa784a28 阅读。直接证据包括四个summary的身份／状态／相关配置和十二个final45原始面板；我独立重算了 B05 的 J差、unseen汇总及世界正负数。复原判断依据本次指定版本的共同serializer／digest、B02恢复代码和B05评价路径，不以最新可写分支替代科学输入。
+
+**本次没有重新累计全部训练JSONL、逐个重算中间阶段面板，也没有加载节点上的二进制检查点。**完整训练窗口、阶段结果和远端资产检查引用DM已发表的完整阅读记录；跨版本完整Python diff也没有在本轮独立重做。它们不是我新产生的验证。已读文本和原始最终面板足以支持上述设计判断，但新评价器对四个资产的实际加载及对角重放仍未执行，不能预先宣称兼容检查通过，更不能补出任何非对角结果。
+
+MATERIAL_DISSENT: no。 我赞成这一次0-fit完整交叉，并保留不提升λ0为默认改进的决定。建议的具体收紧是：以“有限表的符号跟随”替代宽泛的原因主导说法；将其他模式与非零交互分开；完整保留绝对服务、N6代价和对角重放；不从任一结果自动追加训练或面板。这次诊断若有价值，价值就在于使下一条解释更可约束，而不是把已经失败的复现重新包装成成功。
+
+## 2026-09-23 — Complete cross-panel advice adopted; fixed B06 zero-fit contract and L0
+
+Saved the complete answer from chat after `deliver=NOT_DELIVERED` and an independent latest
+branch check: the assigned Answer remained empty and the full target bytes equalled our local
+file. The reported `85a1ab92063958ca75a51fae12a86cfdca0d5235` is that file's blob SHA, not
+an answer commit. Pro key `hmasd:33c530cd626af7c562478376f21cd144206bdbbb262c186daed35a0613cfe4d9`;
+all7732 received characters read, content SHA-256
+`5142a29f31847feedd258ba4ed5090addeb53bf54e08a4d528632d1022cd656a`.
+The saved file adds one LF (7733 characters, SHA-256
+`dc7eb4e55c960857cdec926d2286251c45d9c3c2143ed3445087d1ccd77bdbe1`).
+Consumed generation73 READY `f6fa769a4e6894e3fc465724` under wake
+`53534476-1d76-4564-9618-89123654c5a1`, rearmed74 without resuming terminal jobs. No resend.
+
+### Choice, corrections and prospective interpretation
+
+Select **B06, one complete zero-fit crossing of four frozen final45 SET policies and the two
+existing final-world panels**. The value is a bounded discrimination between explanations
+that now make different predictions, not a rescue of lambda0 or a new algorithm. Reusing
+current main `1ccec7d6407a329b6fe20cfef96d5d80aa784a28` topics3/4 after a fresh fetch: both
+remain unchanged, own lead/pause permits this work, and Claude FSD remains paused. The shared
+separation of latent diagnostics, native usefulness and finite-policy evidence determines
+the scope. B05's non-adoption decision is final for its fixed observation, independent of B06.
+
+Adopt the full crossing and the stated opportunity-cost case against running. In these assets,
+row-consistent signs would reject explaining the diagonal reversal solely by using different
+panels; column-consistent signs would directly show ordering sensitivity for the same fixed
+policy pair. Either can rule out a concrete future excuse for another fit or another panel.
+Neither supplies a training repair by itself. Stop this finite diagnostic after its fixed
+cells; any later investment needs a distinct prospective reason rather than a search for a
+positive panel. If engineering reveals disproportionate restoration work, reconsider its
+information value instead of building a general framework. No alternative candidate is owed.
+
+Adopt Pro's important correction: other sign patterns do not establish nonzero interaction.
+With a=d[A,A,U]=+.055540524660, z=d[B,B,U]=-.045630407894 and hypothetical x=y=(a+z)/2,
+both off-diagonals would be positive while T=0. This is algebra, not an observed off-diagonal.
+Use the transparent contrasts below and report which specific pair/N actually changes sign.
+Also replace broad "training/world dominates" language with finite-table descriptions.
+An equal additive panel shift for both coefficient policies cancels in their difference;
+panel sensitivity of d is not the same as calling one panel harder.
+
+Pro independently recomputed B05 final J/signs and inspected serializer, B02 restoration and
+B05 evaluation. It explicitly did not reload binaries or re-sum all training/intermediate
+records; those facts rely on our already completed reading. Inspection confirms its key
+implementation warning: B02 restoration logic is reusable, but its complete loader binds
+B01's six policies and source; B05's full evaluator binds B05 world addresses. Do not relabel
+either frozen entrypoint or disable its guards. MATERIAL_DISSENT:no; this is DM adoption of
+reasoning, not adviser approval or additional empirical evidence.
+
+### Frozen B06 design
+
+Object/tag `s1_entropy_cross_panel_b06`. Zero training, zero optimizer updates, no new fit,
+no checkpoint selection; final45 only. Four assets, each checkpoint20968771 bytes:
+
+| Key | Policy pair/seed | Historical run tag | Source | Final checkpoint SHA-256 |
+| --- | --- | --- | --- | --- |
+| a_l05 | A/943201 | s1_action_law_b03_set_clip_s943201 | 89486d32ea569728f39d6e21b53f8a7c8854e74c | 03f4f070e30b34fb61cd45820f1579ebde185c9417468689bd0c2e7ef60c0a3b |
+| a_l0 | A/943201 | s1_entropy_b04_set_zero_s943201 | f4762ac67f04675136367fcc566327f0bf78a086 | 9a1143798aab2e41a2290987b7fbca9403ef2dfdb0076bc30e3afd945c7f1359 |
+| b_l05 | B/953201 | s1_entropy_b05_set_l05_s953201 | e2ea736457e0992fb53cf21aa775fd15da3d8231 | 98062b5b338b684219c43b5c9a3dc13bf176322a948c439294beee1d52ae477e |
+| b_l0 | B/953201 | s1_entropy_b05_set_l0_s953201 | e2ea736457e0992fb53cf21aa775fd15da3d8231 | bbe00968cc56481fbd74123a1fc92205d6b67f480e8ec0d36fec0a5e564d67d2 |
+
+The corresponding committed summary SHA-256 values in that order are
+`2621fc884d2d6a9ea909ee4f483b4df1c2d9d6f8767826ef730b952a360422e3`,
+`83a51d84d3c802944be6ef61321aa4a0c83471cabca556e4101bad83a756f293`,
+`136d090b32a8c5fec1eefad5dbaaefa9155d44ce4335c7fb0f07585d36cff4c4`,
+`1e0ecb08f66d99687d6811aa41332d542d7c46057de2f383326ddf20c51b7c91`.
+Use these source-committed records as expectations; an external asset directory cannot supply
+its own expected identity. Retain all four historical meanings and learned normalizers.
+
+For each policy evaluate N4/6/8,16 worlds per panel,500 steps. Panel A addresses
+`1200000+45000+100*N+i`, panel B `1500000+45000+100*N+i`,i=0..15. Deterministic means,
+coordinate clip[-1,1], CPU float32/torch_threads4, historical S1 environment/configuration,
+fixed roster and k10, correct N-specific runtime. Each policy/panel/N starts with reset
+environment and GRU/timers/skill/snapshots; its own recurrent state then evolves normally.
+No shared trajectories between policies, online normalization, entropy loss or optimization.
+
+Fixed order: all12 diagonal policy×N panels first (A on A, B on B), then all12 off-diagonal
+panels (A on B, B on A), each in asset order above and N4/6/8 order. Both missing cells are
+selected now; their scores cannot decide whether another cell runs. Diagonal disagreement is
+a technical stop before off-diagonals, preserving partial evidence; no automatic retry.
+Both phases together cost192000 team steps,384 episodes,24 panels and1152000 UAV steps,
+with12000 batched policy-step calls when running one call per primitive step.96k steps replay
+existing combinations;96k are new combinations. Restore/build, tests, review, collection and
+reading are extra work. Measure wall/user/system CPU and scientific-process peak RSS; scratch
+peak may remain unmeasured. Prefer configured wsl_4070 under new native admission.
+
+Report per-world absolute J, scalar returns, C/Q/P/total and paired differences for all four
+cells at each N; within each panel pair only identical world addresses. Different panels'
+i-th worlds are not naturally paired. J uses actual N, and P is already weighted. For each
+N and U=(N4+N8)/2 let a=d[A,A],x=d[A,B],y=d[B,A],z=d[B,B]; report
+`R=(a+x-y-z)/2`, `C=(a+y-x-z)/2`, `T=a-x-y+z`, checking R+C=a-z and R-C=x-y.
+R is A-minus-B policy-pair contrast averaged over panels, C the A-minus-B panel contrast
+averaged over pairs. These are finite descriptive contrasts, not causal shares, training
+variance or the old H6/SET Q. Report per-N signs/magnitudes and each pair/panel's N6 J/coverage
+cost. No manufactured MEI, equivalence band, world-as-training CI or generic ranking.
+
+Diagonal acceptance compares each world's original scalar return, J and all native component
+means separately, not merely d. Expect exact closed-loop replay under the same CPU/float32
+policy path; permit only **absolute1e-10, relative0** in those float64 accumulated/normalized
+outputs, recording exact-equality flags and maximum differences. This tolerance covers tiny
+float64 sum/normalization roundoff across500 bounded terms, not a changed float32 policy path
+or new trajectory. It is fixed before new evaluation and cannot be relaxed after scores.
+Record actual reset-state/observation digests per world and require them equal across all four
+policies at fixed panel/N. Historical runs lack these initial digests, so do not claim a
+historical initial-state comparison; their per-world output replay remains the historical check.
+
+### L0 — bounded cross-panel evaluator
+
+Owned source paths only:
+`experiments/candidates/agent_count_generalization/entropy_cross_b06/{__init__.py,runner.py}`,
+`scripts/run_agent_count_entropy_cross_b06.py`, and
+`tests/experiments/candidates/agent_count_generalization/entropy_cross_b06/test_runner.py`.
+NOTES/RESEARCH and Git index remain DM-owned. Frozen runners, shared learner/model/environment,
+configuration and transport are read-only dependencies. No generic evaluator framework.
+
+Production CLI fixes tag/design, accepts launch SHA/output and four explicit checkpoint paths.
+Call native require_admission before scientific effects. Bind the committed source summaries
+and checkpoint expectations above; validate complete identities/configuration/architecture,
+stage45/source/seed/arm/lambda, exact file hash/size, strict module/tensor shape/dtype/finite
+state and normalizers. Reuse B02 restore_checkpoint or small pure helpers without calling its
+B01-bound loader/entrypoint. Reconstruct each N-specific configuration consistently with the
+historical panel and validate serialized common config fields; keep extra entropy flags' known
+serialization omission separate from actual evaluation behavior. Fixed assets do not become
+new trained policies because their summaries are loaded from a newer input commit.
+
+Reuse safe construction/native component/digest helpers; implement the actual two-panel
+addresses explicitly. Restore before evaluation, reset all runtime lanes, evaluate own closed
+loops under no_grad, check500-step terminal boundaries and finite clipped bounds. Record
+before/after parameter-normalizer digests and actual optimizer hooks (all0). Hash source files
+before and after the study; diagnostics do not consume RNG or change actions. No trajectory
+dump or new motion-mechanism study. Keep target environments/hooks cleaned on success/failure.
+
+Runner writes config, partial/complete summary and24 per-world panel JSONs under the fixed
+run tag, with source/assets, actual counts, replay differences, initial-state matches, fixed
+freeze/zero-update evidence, the four-cell contrasts and resources. Do not mark complete until
+all fixed cells and their guards pass. Technical failures retain partial panels/counts and
+concrete errors and are not scientific negatives. Checkpoint weights are inputs, not rewritten.
+
+Checks under pytest-managed scratch: strict identity/hash/config rejection before evaluation;
+correct N/world/action mapping; an actual small native restore/frozen evaluation with reset
+and normalizer preservation; diagonal absolute outputs checked individually (including a
+component mismatch that cancels in d); no off-diagonal evaluation after failed replay; both
+off-diagonals always selected independent of signs; independent arithmetic of R/C/T and U,
+including Pro's additive same-sign/T=0 counterexample; CLI admission and fixed exposure counts.
+Do not launch a production or exploratory result as a test. Exact historical production
+diagonals belong to the admitted B06 run, not an unregistered compatibility probe.
+
+An Implementer may own these four paths and return diff/checks without staging, committing,
+editing records, choosing science, launching, sending Pro or spawning children. DM accepts
+the code; independent hmasd-reviewer reviews checkpoint identity, restoration, RNG/reset,
+replay acceptance and scientific arithmetic before a result launch. Ordinary engineering
+choices within this contract need no owner reconfirmation. Stop only the dependent action
+for an unresolved technical/semantic problem; no extra cell or fit is authorized by it.
