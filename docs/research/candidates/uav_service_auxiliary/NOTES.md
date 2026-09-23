@@ -3354,3 +3354,52 @@ and common endpoint replay. Four planned fits are launched, three accepted and D
 running; S2/G2 remain unstarted. Consumed the exact generation-29 wake/event and
 rearmed the original accepted process at **generation 30**, without restarting or
 changing any fit, horizon, recipe or Pro operation.
+
+## 2026-09-22 — B03 second-block D collection-horizon checkpoint
+
+The September 23 02:27 UTC observer retains the original D / 912347 / a01 process
+identities running, with consistent records, no exit witness and zero observation
+errors. Refreshed main remains `aecf372347b6779d75d63f1c0e36bc279d3e6e14`, with the
+lifted pause and owned direction/lead/plan unchanged. Copied summary SHA256 is
+`2b4dc38e8bfa61a6fe78ebb7901af4f4c48c14a6bea492eb4516214b92df19c0`.
+The snapshot contains all **180,000 training transitions / 120 completed episodes**,
+but only **29/30 completed updates**; collection 30 is finished and its update is not
+yet recorded. Status remains INCOMPLETE, failure null and stderr empty. There are no
+new evaluation/readout panels: zero/ten/twenty still total 24 episodes / 36,000
+evaluation transitions, with two initial fact episodes / 3,000 physical transitions
+and 71,568 replayed agent rows. Final evaluation, endpoint facts and saved final
+checkpoints are still pending; collected transitions alone do not complete a fit.
+
+All previously read completed records, three panels and frozen input bindings remain
+unchanged. The original-node initial facts and three prediction-array digests still
+match the summary. All 62,301 summary/calibration floating values are finite. Read the
+eight new complete training records and 128 added progress events; the full 483-event
+stream contains 450 ordered collection events, 29 completed updates, three development
+panels and one facts-ready event. Counts and monotonic timing agree. Every native
+learner moves in updates 22–29; both heads take 30 steps per pass with positive movement.
+D auxiliary representation steps, base/GRU gradients and displacement remain zero,
+and supervised rows remain 5,964 team / 47,712 agent. Native loss/entropy diagnostics,
+head losses/gradient clipping, target/prediction moments and feature variance are finite.
+All newly completed training episodes truncate at 1,500 with no charging, cutoff,
+depletion or charger input.
+
+Later training remains adverse and variable despite the favorable development-twenty
+mean. Collections 22–24 have service in all four lanes, but 25–28 each contain one
+zero-service lane, and 29 contains two. The second lane has zero service throughout
+25–29, including J **-1955.770503**, **-1967.363737** and **-2099.788898** at 25, 27 and
+28. Collection 29 has negative J in all four lanes:
+**-1255.078660 / -771.954156 / -266.166816 / -725.877331**. Its two positive-service
+lanes have QoS .110009359 / .139933115 and return cost .138900185 / .307194082.
+These observations preserve the limitation that service alone need not yield useful
+whole return. They are training episodes, not a new final-world panel or evidence for
+choosing an earlier checkpoint. No second-block S/G comparison exists yet; the prior
+package judgments and recurrence question remain unchanged.
+
+Last completed-update resource wall is **6,310.124606 s**, peak RSS **3,089,316 KiB**;
+the final collection event is at wall **6,424.044425 s**. These are partial fit costs.
+Continue the accepted final update, scheduled development/final evaluations, endpoint
+facts and checkpoint writing, then perform full completion verification before S2.
+Four planned fits are launched, three accepted and D2 running; S2/G2 remain unstarted.
+Consumed the exact generation-30 checkpoint wake/event and rearmed the same process
+at **generation 31**. No restart, additional fit, retuning, shortened horizon or Pro
+Send is selected from this checkpoint.
