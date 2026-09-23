@@ -7461,3 +7461,43 @@ production checkpoint loading, launches, Pro, cross-task messages or children. R
 checks, deviations and open risks. It is not alone in the checkout; preserve other edits.
 DM owns acceptance and the fixed scope. A concrete unresolved semantic/asset conflict stops
 the dependent action; ordinary implementation choices inside this scope need no new approval.
+
+## 2026-09-23 — B08 evaluator accepted for the fixed initial-policy comparison
+
+The DM accepts the four-path implementation of the preceding L0 after reading the restoration,
+configuration/identity checks, fixed-world evaluator, native-component joins, actual-exposure
+accounting, admission entry and failure path. The Implementer reported no scope deviation and
+performed no production-asset evaluation or launch. Original learners, environments, saved
+assets and historical runners remain unchanged. The study is still the fixed six-panel,
+48,000-evaluation-step, zero-fit comparison selected above; no scientific result is available yet.
+
+Focused checks under the configured local scientific interpreter passed: **11 tests in
+5.56 seconds**, with 14 existing matplotlib/pyparsing deprecation warnings; compilation and
+diff-whitespace checks also passed. Fixtures exercise strict initial-state restoration,
+stage0/world45 separation, frozen policy/normalizers, clipping and RNG preservation,
+source/config rejection, actual counts, partial failure and independently sourced arithmetic.
+The tests use pytest-owned scratch and do not load the production checkpoints.
+
+Independent Reviewer inspected the final bytes and found no remaining material issue.
+Two findings were repaired: resets are now counted once `reset_all` returns, before any policy
+step, and all four absolute policy means are retained per N and for equal-weight U alongside
+increments, gaps and native components. The partial-step fixture records two resets,
+zero completed episodes and one returned transition. Failure partway through `reset_all`
+itself remains untested and could undercount partial resets; it is a failure-coverage limit,
+not evidence of missing exposure in a successful complete panel. No extra production replay
+is introduced to test that path. Reviewer reused the focused checks rather than repeating them.
+
+Accepted SHA-256 identities:
+
+| Owned file | SHA-256 |
+| --- | --- |
+| `initial_policy_b08/__init__.py` | `fb9bbcc20c1a7642c1a07037f41a5e4500c933b5f922868c1f414938dedf3795` |
+| `initial_policy_b08/runner.py` | `856ae19df50a95f58ae32a4c5d2952238fa47aac7fa8629b43e48733e2081b75` |
+| `scripts/run_agent_count_initial_policy_b08.py` | `abf2e5a744ba8ad4aa55398006d6df20217e4dea37290bb479dab55279ce5d42` |
+| `initial_policy_b08/test_runner.py` | `91bf06a27e5a5edd37596bf23f76690297e81c7d19d1c8f48e96697a432712e3` |
+
+Publish these exact inputs before staging and native admission. Preserve any accepted handle;
+an uncertain acknowledgement is reconciled against the same operation, never retried by
+renaming the output. The DM will read complete initial panels and original final arrays,
+independently calculate each package's absolute service and self-gain, and only then interpret
+the relative gap. Process exit or a successful technical test is not scientific acceptance.
