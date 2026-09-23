@@ -730,3 +730,50 @@ requires a separate documented repair and independent review before use. Stage/p
 inputs, then use the original five-cell entry with native admission on wsl_4070 and arm the
 current session's deterministic observer. Do not duplicate training or consume another DM's
 operation. No result exists at this entry.
+
+
+### 2026-09-23 — Exact production inputs restored and verified
+
+The seven accepted evaluator/entry/test files were restored byte-identically from
+`7524026cebe8d9af7461f670db3edb3098e979c2`; the seven inference dependencies were restored
+byte-identically from producer SHA `89486d32ea569728f39d6e21b53f8a7c8854e74c`.
+No scientific executable byte was changed. The two full final summaries are copied exactly
+from published count-direction commit `e9a106f6841a765d474afb6dc41e5dd508ddcae0` and verified against
+the identical completed summaries already published in current main. Their SHA-256 values are
+H6 `55a994c81f49a9b97b52efa4ddaea82579e1068ea3a7ddbd11c8b7645bf88921` and
+SET `2621fc884d2d6a9ea909ee4f483b4df1c2d9d6f8767826ef730b952a360422e3`.
+
+Read-only inspection on configured host `LAPTOP-U9TDKC8A` independently verified both
+complete summary hashes and the previously declared checkpoint45 sizes/digests at
+`/home/wu/hmasd-worktrees/agent-count-action-law-20260922-b03/runs/agent_count_generalization/`.
+This closes the old binary-availability dependency without creating a new producer.
+The original asset files remain unchanged. Preserve the accepted 23-check engineering
+coverage and its full-size/full-horizon limits; production payload/config verification will run inside
+the admitted evaluator, before any fixed-panel environment or policy effects. No source, summary,
+checkpoint, cell or exposure substitution is selected.
+
+
+### 2026-09-23 — Original B01 admitted; current-session observation adopted
+
+The original five-cell contract is now accepted. The exact restored source is published
+as `c770220d3abc4e32a9e80347dea87bdea88080e8`; source remains fixed on the configured
+executing node. [Native manifest](../../../../runs/load_critical_member_generalization/s1_load_critical_member_b01_20260923/launch-manifest.json) and
+[actual-node admission](../../../../runs/load_critical_member_generalization/s1_load_critical_member_b01_20260923/admission-preflight.json) retain the
+operation identity, interpreter, source, native process identities and invocation.
+No new fit, supplementary panel, source-policy substitution or relaunch was introduced.
+
+Both original completed-summary/binary/payload/config bindings passed inside the admitted
+evaluator before policy/environment effects. The collected [progress summary](../../../../runs/load_critical_member_generalization/s1_load_critical_member_b01_20260923/summary.json)
+is an in-flight snapshot: 16,000 evaluation team steps,
+32 episodes and 2 of 10 policy-by-cell evaluations complete,
+0 fits/train steps/updates/optimizer calls, no reported failure. The fixed target remains
+80,000 steps and 160 episodes. This snapshot is not a complete five-cell result or a new
+scientific conclusion. Full trajectories, capacity-invariance checks and all adverse worlds
+will be collected and read at the original endpoint.
+
+The current task's deterministic observer has adopted this same accepted operation: first
+read reports consistent native records and both runner/supervisor running, generation 1,
+30-second read-only probes and a 1,500-second observation window. It wakes only this assigning
+session on terminal/error/checkpoint. A checkpoint means read/rearm, not new execution.
+The independent complementary-skill DM has its own task and operation; this direction
+requires no cross-task reporting loop or further owner approval.
