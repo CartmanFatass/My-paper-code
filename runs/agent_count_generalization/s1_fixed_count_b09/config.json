@@ -1,0 +1,63 @@
+{
+  "launch_sha": "3f57bd2d99be3121e0fa7d1277f767faab5552db",
+  "object_id": "s1_fixed_count_b09",
+  "tag": "s1_fixed_count_b09",
+  "spec": {
+    "test_ns": [
+      4,
+      6,
+      8
+    ],
+    "horizon": 500,
+    "eval_lanes": 16,
+    "torch_threads": 4
+  },
+  "policy_stage": 45,
+  "world_panel_stage": 45,
+  "prior_training_team_steps": 360000,
+  "fixed_count_scalar": 0.75,
+  "assets": [
+    {
+      "key": "h6",
+      "arm": "H6",
+      "seed": 952201,
+      "tag": "s1_bounded_package_b07_h6_l05_s952201",
+      "source_sha": "0a9e3fde40659fdcc1d05922c9920c5c04b2ab23",
+      "object_id": "s1_bounded_package_b07",
+      "cell_key": "h6_l05",
+      "summary_sha256": "9d7f90523b74ea0fb4b9d7720086baefff13c22cdb41547c2b793764273b550a",
+      "checkpoint00_sha256": "65cfcc9f6afc69bae78712a4dd15bc772e2d3b56c82797504e27555a814ef398",
+      "checkpoint00_bytes": 23073626,
+      "checkpoint_sha256": "6d71f3023e5593a801b4d618f7eece93df1a15575f8a71d769566190ba6498df",
+      "checkpoint_bytes": 23073626,
+      "initial_digest": "1d55b8320256e589e6b88ae4b7873d97d54a536de85d6a33df46fa87a521c733",
+      "final_digest": "ea1de5234aba1683f182b6f36a3260ecf8fdd68779df0e313a6bc040b9458c1d",
+      "final_panel_sha256": [
+        "e5624c9faad75358d86ae7d664f4fabc51d506d397d03981f183915aeff607c7",
+        "263b486c2cf433ebc791e21f09a4768e6031c4734710aadd12b54bf7a94f3a15",
+        "15f578a91a99621668649f2d901441f60158092eba9d9b9d587b9987138e1d11"
+      ]
+    },
+    {
+      "key": "set",
+      "arm": "SET",
+      "seed": 953201,
+      "tag": "s1_entropy_b05_set_l05_s953201",
+      "source_sha": "e2ea736457e0992fb53cf21aa775fd15da3d8231",
+      "object_id": "s1_entropy_b05",
+      "cell_key": "set_l05",
+      "summary_sha256": "136d090b32a8c5fec1eefad5dbaaefa9155d44ce4335c7fb0f07585d36cff4c4",
+      "checkpoint00_sha256": "37b34c34d6bc84bfe43d78e5283668f38db180a16bf99b22d9caf8eb608857ca",
+      "checkpoint00_bytes": 20968771,
+      "checkpoint_sha256": "98062b5b338b684219c43b5c9a3dc13bf176322a948c439294beee1d52ae477e",
+      "checkpoint_bytes": 20968771,
+      "initial_digest": "b6d466c143157fdb052df6f16f27351516e1e6b8f6e77789b1fa75ecf5876854",
+      "final_digest": "9f183501f97c021be1919d6da925a7ca981736dbeb6ec9dc0e1e67583d0a177b",
+      "final_panel_sha256": [
+        "92a1f956fbd99396cb3e9547f962e1c5b9c3a505937e230a07b127bc6bc1f9de",
+        "f2c06e720cbd99a31d3d79d46e58a62218aa0174a485d5ac0f92203703903eea",
+        "dab2278091e7de2406c76b5af1137bc0ebcc1f44479f24c4117c2b198da6e6e5"
+      ]
+    }
+  ]
+}
