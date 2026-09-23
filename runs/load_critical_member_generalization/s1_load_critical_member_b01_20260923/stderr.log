@@ -1,0 +1,4 @@
+/home/wu/hmasd-worktrees/load-capacity-b01-20260923/hmasd/networks.py:600: UserWarning: std(): degrees of freedom is <= 0. Correction should be strictly less than the reduction factor (input numel divided by output numel). (Triggered internally at /pytorch/aten/src/ATen/native/ReduceOps.cpp:1839.)
+  logits_std = team_skill_logits.std().item()
+/home/wu/hmasd-worktrees/load-capacity-b01-20260923/hmasd/networks.py:674: UserWarning: std(): degrees of freedom is <= 0. Correction should be strictly less than the reduction factor (input numel divided by output numel). (Triggered internally at /pytorch/aten/src/ATen/native/ReduceOps.cpp:1839.)
+  logits_std = agent_skill_logits.std().item()
