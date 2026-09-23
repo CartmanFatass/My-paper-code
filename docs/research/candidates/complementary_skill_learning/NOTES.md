@@ -1683,3 +1683,22 @@ fixed second fit; no score-dependent extension, diagnostic panel or coefficient 
 The latest checked main preserves owner pause lifted and this direction/lead; Claude FSD
 and G33 retain their separate pause/frozen controls. Actual-node admission will recheck
 current controls, source publication, duplicate identity and memory before releasing M.
+
+## 2026-09-23 — B02 M admitted under the frozen comparison
+
+The first arm M was natively accepted at09:01:27 PDT. Its
+[native manifest](../../../../runs/complementary_skill_learning/b02_m_260923911_e232332a0/launch-manifest.json)
+and [fresh memory preflight](../../../../runs/complementary_skill_learning/b02_m_260923911_e232332a0/admission-preflight.json)
+are copied unchanged locally and match the executing node's SHA256 bytes. The preflight
+passed with13,644,189,696 effective available bytes against a4,294,967,296-byte floor.
+The status handle reports accepted/running with consistent native supervisor/runner identities;
+there is no exit witness or completed scientific result at this entry. Supervisor command
+acceptance was separately reconciled with this native evidence before adopting the operation.
+
+The current wait controller observes that same operation, with30s probes and a1,500s bounded
+checkpoint window. Old B01 and both Pro observations are terminal and consumed; no old worker
+or question was repeated. The M operation keeps its fixed360k training and64k initial/final
+own/uniform evaluation exposure. T remains the prospectively fixed second fit under a later
+separate admission, independent of M's scores. Collection, numerical reading and the paired
+scientific judgment remain outstanding. Preserve the live source snapshot and output until
+the complete evidence is collected and verified.
