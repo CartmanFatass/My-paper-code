@@ -271,6 +271,164 @@ writeback fails, return the complete answer in chat, not just a SHA, receipt or 
 
 ### Answer
 
+**MATERIAL_DISSENT: yes。** 异议针对首选的 50 步监督窗口，以及真实分支究竟要购买哪一种正面证据；不是反对完整共同学习，不是恢复旧技能探针的准入条件，也不是认为题面已经把预测误差当作收益。题面已正确列出许多识别限制；我的建议是把这些限制落实为更短的目标和一个有方向的实际配对比较，而不只是继续给原方案加免责声明。以下均为供 DM 选择的建议，不构成运行、预算或后续复制的授权。[^csl-q][^csl-gov]
+
+#### 一、建议与能够回答的问题
+
+**首选保留 D/G/P 三臂、每臂一个 360k fit、一个共同初始化块；把两个头的目标一起改为真实十步承诺回报。保留 final45 的自家协调器评价和无头、共同均匀选择器评价。若本轮要对“实际有用的组合”多买一条证据，我优先选择四个预定矩形的十步真实分支，并把主要读数改成“事前预测的配对相对相同边际独立组合的原生收益”，不购买原来的后续四十步。**
+
+这个三臂比较是同时回答“辅助包是否值得用”和“P 是否比一个有能力的普通辅助更值得用”的最小同期比较，**不是证明互补性机制的最小充分实验**。普通优化改善与实际技能互补并非互斥解释：普通 G 也可能学出有用搭配，P 也可能只改善普遍导航、降低高度惩罚。不能把 P−G 的正号直接命名为“互补性效应”。
+
+更具体地说：
+
+| 观察 | 可以加强什么 | 仍不能排除什么 |
+| --- | --- | --- |
+| 自家协调器下 G−D 或 P−D 为正 | 在这一次共同训练块、这个终点和评价分布上的辅助训练包用途 | 额外优化、表示偏置、不同访问分布及高低层共同适应 |
+| 自家协调器下 P−G 为正 | 指定 pair 参数化相对指定全输入 MLP 的有限学习增量 | 梯度方向/大小、条件数、正则化与优化难度差异；不是独立识别出的 pair 信用 |
+| 共同均匀规则下某个银行仍优于 D | 增益在部署时不必依赖该臂自己的学习协调器；是有用低层银行的一条证据 | 与标签无关的普遍控制改善；训练期间发生过的共同适应 |
+| 事前预测的匹配关系在真实分支中优于相同边际的独立组合 | 在这些冻结历史、标签和十步范围内，组合关系有可利用的原生价值 | 全任务适用性、跨银行标签语义对齐、P 的独有机制、收益中有多少由互补性中介 |
+
+最后一行必须来自执行，不来自把预测器的四个输出当作真实潜在结果。这也不是证明 AR 策略类不可替代：在一个已知状态上，条件独立的确定性策略也可以选择一个好的联合格子。这里识别的是**固定成员边际时配对关系的用途**，而非一般性的 AR 表达能力优势。原 HMASD 的顺序技能分配本来就存在，不能当成本提案新加入的机制。[^csl-shared][^csl-net][^csl-lit]
+
+#### 二、最强的普通解释及三臂的边界
+
+最强的竞争解释不是“G 完全不会交互”，而是：全局状态、全部观测和进入隐状态已经使原生回报相当可预测；再对共享的低层表示做一点事实回归，改变了特征尺度、梯度方向和学习轨迹，改善了普通移动与服务。协调器和两个判别器随后在新的轨迹上继续学习，形成一个更好的或不同的整体包。这个解释同时容许 own-team 增益、uniform 增益，以及某些真实交互增大。
+
+因此必须保留题面的**全输入、可表示交互的 G**。不能不给 G 伙伴信息、把它改成可加模型，或者故意缩小它，再用 P 的优势证明“组合才重要”。P 的 `b/u/g` 也不能直接命名为环境中的独立信用：它们共享上下文及表示，分解一般不唯一，`b(x,Z)` 可以吸收大量可预测变化，pair 项也可能只是有效的低秩正则化。其监督损失是“拟合已发生的回报”，不是“最大化回报”，更没有一个数学保证会主动产生互补技能。[^csl-q][^csl-design]
+
+参数量、batch 次数和 λ 相近是必要的对照描述，却不等于相同的有效 actor 干预。尤其 P 对六个 unary、十五个 pair 求平均，而 G 的输入路径和 Jacobian 不同；相同 λ 不意味着相同表示梯度。记录已有辅助 backward 的梯度范数、裁剪比例和 base/FiLM/GRU 的实际位移即可，不必在本轮再加一套代价较高的梯度余弦或训练后解释器。G 的正常拟合与非退化输出是健康诊断，不是它已经代表“所有普通方法”的证明。若 G 实现正确但配方退化，结论应限于这个 G，不能借它宣告普通辅助普遍无效，也不能看分后更换这个对手。[^csl-method]
+
+共同均匀评价是值得保留的，因为它把部署中的选择规则统一了；但应使用同一预定世界、同一标签抽样规则以及独立于训练的随机流，低层动作方式也统一。建议这里仍用均值动作，和 own-team 主评价一致。三臂会到达不同状态，因而“共同规则”不等于“共同访问分布”。uniform 下降可以是分布不匹配，也可以是银行本身不好，单凭此处无法区分；但 own-team 独有的好处只能先称包收益，不能改称已经得到可复用互补银行。不要交换跨臂协调器，也不要假定编号相同的技能已有相同含义。
+
+#### 三、我建议固定的具体学习比较
+
+**宿主和基础学习。** 保留 native S1、N=6、50 用户、六个 team/individual 标签、k=10、500 步 episode、16 lanes、45 rollouts，以及完整高层、低层 actor/critic、两个判别器的真实更新。三个臂均从同一已绑定的原生初始化出发，分别完成自己的训练；没有 warm start，也没有先要求旧固定银行过正面探针。保留 D/G/P 的梯度门控定义，两个预测头在每臂都存在并训练。[^csl-q][^csl-collector]
+
+**十步目标。** 我选择
+
+$$
+Y_t^{(10)}=\sum_{\ell=0}^{9}0.99^\ell r_{t+\ell},
+\qquad t\in\{0,10,\ldots,490\}.
+$$
+
+这里把 $r_t$ 明确定义为采集器收到的、尚未与内在奖励混合的环境标量。S1 的团队报告量是 $6r_t$，主终点仍是 $J=6\,\overline{\sum_t r_t}/500$。采用团队量做辅助也可以，但必须共同固定单位与训练归一化，不能把两种未归一化尺度下的 `.05` 当成相同干预。本建议采用前述采集标量约定。原生团队目标的含义由实际 S1 子类给出：`.7 × coverage + .3 × quality − height_penalty`；`energy_penalty` 字段是归一化平均高度的 `.1` 倍，不是电池消耗或返航安全。[^csl-env]
+
+十步内恰好执行本次承诺，故没有后续四次协调器选择混入标签含义，也没有任意选择 own μ / uniform continuation 的问题。它仍包含这一窗口内的真实环境耦合和伙伴响应，不是单步静态奖励。每条窗口不跨 reset、不 bootstrap，并使用真实边界元数据而非盲目按数组下标猜测。终止转移的奖励属于该窗口；reset 后的观测和奖励不属于它。
+
+**代价是主动改变 estimand。** 十步可能漏掉布站移动、后续覆盖与质量的延迟后果；没有材料证明它普遍优于五十步。我选择它是因为本轮首先要问“这一组技能在它实际被承诺的期间做了什么”，而不是给当前协调器的五十步滚动未来做更宽的预测。完整 500 步主评价保留了对长期原生用途的检查。若 DM 更关心延迟后果，五十步仍是合法的事实包目标，但本轮就不宜用其误差或一个含自家 continuation 的分支声称识别了纯组合用途；也不要两种窗口都试后取优。
+
+**曝光与 PPO。** 保留所有标签可用，删除旧设计的禁用组合；个体因子先合法化支持，再使用
+$$
+\mu_i(z_i\mid I_t,Z,z_{<i})
+=.9\pi_i(z_i\mid I_t,Z,z_{<i})+.1/|A_i|.
+$$
+`I_t` 仅指原协调器的合法 state/joint-observation 输入，不等于含存储隐状态的训练专用 x。团队因子保持原 AR。必须在实际采样时使用 μ，存实际前缀、顺序、掩码和 old log μ，并在同样的支持上 teacher-force 重放 new log μ。所读 D2 热路径是 `assign_partial_batch` / `evaluate_training_batch_ordered`，随后进入 `update_coordinator_d2`；只改普通 `forward` 或采样后覆写标签不会实现这个比较。被保持而非采样的位置不应产生策略项。保留原 PPO 因子化裁剪方式，不把它宣传为精确联合 PPO。PPO 的概率比必须使用 μ；熵正则保留原定义与系数，并把行为熵 H(μ) 与原正则涉及的 H(π) 分开记录。若实现改用 μ 的熵进行正则，须另行声明为三臂共同条件，不能声称没有改变熵目标。低层 Gaussian 熵目标不另改。[^csl-net][^csl-store]
+
+这条 law 只保证逐因子的探索下限，不保证有限预算内充分覆盖所有联合组合；例如各因子的下限之积可以很小，team 因子也没有新增 uniform floor。记录实际标签/组合占用与原生服务，不能把“全部允许”升级成充分支持、未见组合泛化或 cross-play 结论。各臂的实际状态—标签分布随学习内生改变；这是包比较的一部分，不是事后靠重要性权重假装消掉的差异。
+
+**真实 actor 路径与更新。** 保留 `local observation → base → individual-skill FiLM → GRU → Gaussian head`。辅助只在训练时读取全局 x；不能给 actor 或协调器增加伙伴隐状态、未来标签或预测值。`e_i` 应在当前辅助更新权重下，由存下的边界观测、真正执行的技能、进入隐状态和进入 mask 重新计算；进入隐状态 detached，不跨过去历史反传。这是以收集时隐状态为入口的一步表示更新，不是假装重建了当前参数下的完整历史。若观测归一化启用，应使用所声明的同一冻结输入变换，不在辅助或评价中暗中更新它。[^csl-net][^csl-store]
+
+现有 `store_transition_batch` 会计算混合内在奖励；`RolloutBuffer.rewards` 不能直接冒充这里的 native target。所读存储路径保存的是 `prev_actor_hidden`，不是本步 actor 输出；RNN 的 done 是离开当前行的终止标志，进入 mask 不能错移一行。采集器先存 terminal 转移再 reset，这个顺序应保持。辅助安排在原生高层 PPO、低层 PPO、判别器更新之后、清空 rollout 之前，三个臂一致。[^csl-collector][^csl-store]
+
+P/G 两头看到相同、带固定成员身份对应关系的输入；不要因 P 使用共享 `u/g` 和均值池化，无意丢失 G 的固定拼接槽位所保留的信息。保留 rank-32 作为本次参数化选择，不增加 rank sweep。G 的两隐藏层宽度在结果前由实际输入维数和 P 的参数计数决定，并报告实际参数差；参数匹配不是优化匹配。两个头可以在同一组更新前特征上计算各自损失，inactive 头只见 detached 特征，只有指定头给 trunk 反传。D 不应执行会通过 Adam 状态、weight decay 或遗留梯度移动 actor 的“空辅助 step”。这里的辅助直接路径是 base/FiLM/GRU，不应把没有直接接上 e-loss 的 Gaussian 输出层也报告为被辅助直接训练。
+
+保留 MSE、`.05`、每 rollout 一遍和 batch128 短尾。我倾向用三臂第一次共同采集得到的训练目标统计量建立一次共同、冻结的辅助尺度，之后不使用任何评价数据更新；这不改变原生 learner 的 normalizer。该共同首轮只在初始化及外生流确实一致时成立，不能见到不一致后手工修改样本使之“匹配”。
+
+**随机流和动作边界是识别条件，不是新的批准门槛。** 策略与头的初始化流、训练动作流、辅助 minibatch 流、世界流、评价标签流应分离；同名模块在臂间有相同初始化。仅给三个进程同一个 seed 不够。所读旧 `_preserve_rng` 保存 Python、NumPy 全局和 Torch CPU 状态，没有保存 CUDA 状态；在 CUDA 路径上不能直接宣称它已隔离全部评价影响。环境自有 RNG 与其他 generator 也须按实际路径处理。第一轮辅助分叉之前的原生轨迹/更新一致性是有用的工程核对，之后不要求学习轨迹人为保持一致。[^csl-collector][^csl-method]
+
+把 `clip(raw_action, -1, 1)` 放在真实环境入口，不能原地覆盖要入 PPO 的 raw Gaussian 样本；训练、全部评价、前缀与分支都用这一边界。PPO 仍评分 raw 样本，而非把裁剪值冒充原 Gaussian 的采样值。实际 `uav_env.step` 原先直接将动作乘速度后才裁剪位置，故这确实是一个新的共同基线，不能以旧历史 J 充当新的 D，也不追溯“修好”历史结果。裁剪本身不证明物理安全。[^csl-env]
+
+#### 四、值得替代原五十步矩形的真实执行观察
+
+**我的首选是保留 16 个新世界和四个预定矩形，但每格只执行十步，并预先规定如何把预测变成有符号的用途检验。** 保留四个而不是一个矩形，是因为复制状态的主要工程工作已经发生，另外三个在三银行合计只多 5,760 个物理步；它们能减少结论完全依赖一个任意编号矩形的风险，但仍不是标签空间的代表性抽样保证。
+
+每个最终银行先独立在相同世界种子和同一 uniform law 下走 200 步。在第 200 步动作计算之前，复制完整环境状态、缓存/连接状态、时间、actor 进入隐状态、mask、持有标签与相关时钟、全部会被执行消费的 RNG。每个矩形的四格都从同一银行的同一份快照出发，固定 Z 和其余四人的标签，只改变指定两人的标签。十步内六个 actor 均按原来的局部闭环策略行动；不能冻结伙伴动作，或者只改标签却沿用另一个格子产生的 GRU 输出。
+
+这里建议使用原训练方式的随机 Gaussian 低层动作，再经过共同裁剪；四格使用按世界/成员/步对应的共同外生随机创新，以免比较仅由不同噪声主导。它与主评价的均值动作不是同一个 estimand，应分别报告，不把十步收益换算后混进 500 步主 J。环境 RNG 的复制、分支顺序不污染以及进入隐状态的处理需要实际执行检查；目前没有这些新分支已经可可靠恢复的运行证据。
+
+**事前预测使用已经训练的普通 G readout，且三个银行都用这一相同读出形式；P readout 的预测另行保留为次要诊断，不看真实分数后换主读出。** 在四格任何真实结果出现之前，分别从冻结 x/hidden 为四个候选技能组合重新计算 e，记录 G 的四个预测值及其选择方向。这里只是给固定的、全部都会真实执行的四格预报；预测不进入 actor，也不把它接成训练规划器。因为这个读出含有训练专用 x，它也不是证明原有高层信息下已经实现了一套可部署选择器。
+
+对某一银行、世界和矩形，记四个真实十步回报为 $Y_{ab},Y_{ab'},Y_{a'b},Y_{a'b'}$，并定义
+$$
+\Delta=Y_{ab}-Y_{ab'}-Y_{a'b}+Y_{a'b'}.
+$$
+事前固定 $s=\operatorname{sign}(\widehat\Delta_G)$，零值时使用预定 tie rule。若 $s=+1$，预测的匹配分布在 $(a,b),(a',b')$ 各放一半质量；若 $s=-1$，在另一个对角线各放一半。对照是在四格各放四分之一的独立分布。两者对每个成员的两个标签均为 1/2、1/2，因此具有相同成员边际。由四个**真实执行**结果得到
+$$
+T=V_{\text{预报匹配}}-V_{\text{独立}}
+  =s\,\Delta/4.
+$$
+
+这是预报关系的实际价值，而非事后 $|\Delta|/4$。错误预报会得到负值；任何“只有正确预测/有利格子才留下”的筛选都会破坏它。平均四格是真实格子的已知混合价值，不是用预测替代未执行的结果。报告每格 absolute native return、coverage、quality、height penalty，预报匹配值、独立值、每世界 T 和失败世界；矩形在世界内先聚合，不能把四格当四个独立重复。另报预报是否正确捕捉“伙伴技能改变后自己的优选技能反转”；反转是更强的组合线索，但不是互补的一般必要条件。
+
+这个差值的重要性质是：对固定历史下任何纯可加真实响应 $Y_{ab}=c+u(a)+v(b)$，$T=0$。普遍导航收益若只是给四格加同一个常数，也不会增大 T。因此，正的、有实际规模的事前 T 加上有用的银行服务，比 uniform J 增益或 $|\Delta|$ 更能支持“这一银行确有可利用搭配”。
+
+一个仅为说明的收益表是：对角线 `.6/.6`，非对角线 `.2/.2`。预报正确的匹配平均为 `.6`，独立平均为 `.4`，增益 `.2`；整体给四格加减同一个常数不改变这个增益，却会改变是否值得使用。这里略去了真实 MARL 中六个 actor 的响应、共享参数、历史状态、用户竞争、干扰、贪婪连接分配及长期后果；实际四格效应包含这些响应，并不是已隔离出的两个物理模块的因果信用。[^csl-env]
+
+仍有三个重要边界。第一，G 本来也能学到非可加响应；通用优化若改变了技能的实际相互作用，也可以增大 T，所以这个检验不能排除“普通优化促成互补”。第二，common G 的 T 测量的是冻结银行与指定读出组合的可利用性，读出本身也随臂训练；不能把跨臂 T 差全部归为银行内在质量。第三，各银行的 200 步 prefix 会到达不同物理状态和隐状态；快照只实现**同银行内**的真实干预控制，P-bank T−G-bank T 仍含访问分布差异。本轮不再加公共历史回放、跨银行隐状态交换或额外加性 readout 来掩盖这些边界。
+
+因此，若 P 在 full-episode native service 上优于 G/D、在共同 uniform 下仍有用途，又在这些预定矩形上出现有用的事前 T，可以说“本次 P 银行含有在该范围内可利用的技能搭配，且部署收益不只要求自家协调器”。**不能说“P−G 已被证明由互补性中介”“技能分解具有唯一信用”或“只有 P 能学出互补”。** 若要特别声称“非加性是训练后新产生、而非共同随机初始化已有”，还缺初始银行的同类测量；当前默认设计不作该来源归因。
+
+若可靠快照的工程代价明显超过这条有限信息的价值，我会把本轮降为三臂 learning screen，暂不做该诊断。这个选择最好在结果前作出。screen 本身不需要先证明旧技能互补，也不自动购买第二块；只是把本轮机制措辞收窄，而非宣布问题不值得研究。
+
+#### 五、继承证据实际改变什么
+
+**FSD B13/B14：降低对旧加性标签信用配方的期待，不封死新学习。** 应采用 02:51 的纠正，而不是先前 Pro 的错误表格或“常量标签最好，所以高层没有价值”的跨 estimand 推理。B13 的新标签 law 与关闭高层更新同时变化；UNIFORM 也关闭高层，故它不是只删除协调器这一因素的干净消融。B14 把周期部署说清后，主 UNIFORM-bank 三块约 `+.019/+.016/−.019 J`，负块仍在；但 secondary BANDIT-bank 的有利 law 读数也应保留。这削弱所试加性选择/部署方案的稳定包价值，不能作为完整高低层重新学习的匹配控制，更不是新技能学习前必须越过的探针门槛。[^csl-fsd]
+
+**Joint-duration B01：加强“机会/表达能力不等于有限学习净收益”，不测试本辅助。** 已完成的固定、factored、AR 终点为 `.49670730/.46107574/.48021814`；AR 后期优于 factored、曲线改善，同时仍低于 fixed，且变时长付出更多事件和高层更新。这些反向信息不能抹掉。它们是每臂一个不同 seed 的完整共同学习实例，不是总体排名；干预是 duration，不是本题的 factual auxiliary。可复用终止、recurrent、likelihood 和成本记录的经验，不复活 cap-10 方案，也不让其旧 fixed 分数替代新 clipped D。[^csl-duration]
+
+**S7 B03：普通辅助是实质性对手，误差不是用途代理。** 在已接受的两个训练块，S−D 从 `+24.585407` 变为 `−16.825601`，G−D 从 `+117.896434` 变为 `−24.945921`；S−G 也反号。第一块 G 的原生 J 最高而两种共同事实误差最高，第二块 G 的 J 最低而误差最低。这个证据加强对“预测更好就更有用”的反对，削弱原 S/G 配方照抄复制的投资理由，却保留早期正例与通用辅助可能有用的事实。S7 的宿主、目标和约束不同，不能提供本题的匹配 S1 baseline 或把该关闭决定泛化到所有辅助学习。[^csl-s7]
+
+共享背景与 item9 的作用由此很具体：保留真实原生服务、ordinary AR 和有能力的 G；舍弃用组合数量、可辨标签、交互绝对值或训练误差替代用途的论证。旧 item9 的六 fits、禁用组合和额外 additive readout 都是被缩小的设计内容，不是必须一并执行的冻结合同。[^csl-shared][^csl-design]
+
+#### 六、成本、统计单位和结果分支
+
+下表按完整 500 步 episode、零提前终止计算，物理 team transitions 与优化步骤分开：
+
+| 项目 | 首选三臂方案 |
+| --- | ---: |
+| 训练 | 3 × 360,000 = **1,080,000** |
+| 初始化及 final45 own-team 评价 | 3 × 2 × 32 × 500 = **96,000** |
+| final45 common-uniform 评价 | 3 × 32 × 500 = **48,000** |
+| 十步四矩形诊断，含各银行 prefix | 3 × 16 × (200 + 4 × 4 × 10) = **17,280** |
+| 含该诊断的评价合计 | **161,280** |
+| 含该诊断的训练＋评价总交互 | **1,241,280** |
+
+不做矩形时仍是 **144,000** 评价步；原五十步矩形是 **48,000**，原评价总计 **192,000**。替换为十步分支节省 **30,720** 个评价步，不增加 fit，不增加 readout fit，也没有标签搜索 sweep。诊断仍要付完整快照、分支恢复、预报和汇总的工程/计算成本，这些不能记成零。四格/矩形/窗口不是额外训练 n。
+
+十步目标每 fit 有 **36,000** 完整窗口，即每 rollout `16 × 50 = 800`；batch128 保留短尾是 **7** 个 minibatch（末批32），每个头 **315** 次 step。六个头合计 **1,890** 次；G/P 的额外 low-trunk step 各315，共630。原五十步是每 rollout736窗口、6批（末批96）、每头270步。因此十步减少 horizon 混入，却**增加了45次/头的辅助更新**；不应宣称辅助训练计算必然更少。
+
+原生更新应另列高层、低 actor、低 critic、team discriminator、individual discriminator 的计数和实际位移。所读 native D2 是按有效 `(t, env)` 联合行更新，不按六份成员标签复制成六倍样本；旧 runner 的计数律是 `15 × Σ ceil(M_rollout / coordinator_batch_size)`。若继承15 epochs、1280 batch且每 rollout确有800有效联合边界，则高层名义675次。历史 fixed summary 的其余计数为 low actor/critic 各101,250、team/individual discriminator 675/2,700；它们是实现对照参考，不是本题尚未运行就已测得的新结果。[^csl-collector][^csl-store][^csl-duration]
+
+**更小的可选比较是 G/D，而不是 P/G。** 如果 DM 的首问仅是“普通事实辅助能否学出更有用、且含可利用搭配的银行”，删去 P 可保留完整共同学习和上述实际诊断：2 fits、720,000 训练步，96,000基础评价步，加11,520诊断步，合计827,520交互。这比三臂少一个fit，仍能区分“无辅助”与“有用普通辅助”，但主动放弃 pair 参数化增量问题。P/G 两臂则连“两者是否都比新 D 差”都无法回答，不是我愿意用来保留 P 的简化。若保留题面两个科学问题，我仍首选三臂而非直接买六 fits。
+
+保留一个共同初始化块就是每臂 **n=1**，不是三次复制。32个评价世界最多支持对这三个已训练实例的条件比较；十步重叠/非重叠窗口、64个矩形实例以及两种readout都不能增加训练 n。报告全部每世界有符号差异及绝对 C/Q/height；需要误差条时明确只反映所采评价世界/随机流的条件不确定性，不能据此推出跨训练种子的总体优势、等价或有害。三个差也非独立实验：`P−G=(P−D)−(G−D)`。初始化与终点用不同面板，不把它们作同世界的逐点前后差；固定 final45，不以最佳 checkpoint、development 世界或矩形中的最大值救回结论。[^csl-method][^csl-q]
+
+材料没有给出适用于这个新基线的已验证最低可用服务或最小有用效应阈值。我不从旧 `.03 J` 探针噪声或 S7 的效果倒推一个新门槛；十步折扣和、500步 J 也不是同一单位。看原生规模、服务分量、不利世界与全部成本，不能仅凭两个正号或某个 p 值决定复制。
+
+历史72.3408分钟的 fixed 乘三约3.62小时，只是历史量级参照；新裁剪、辅助和诊断的墙钟、CPU、RSS 尚未知。倾向既定 `wsl_4070`、串行和真实节点准入；记录准备/检查、训练采集、原生更新、辅助、评价、分支、传输/发布的实际成本，不把未测共享节点占用或支持成本说成零，也不把进程墙钟总和当独占GPU时间。现有宪章与工程要求已覆盖必要检查，不新增 Pro 或审批层。[^csl-gov][^csl-method][^csl-duration]
+
+结果的投资含义如下。G 有用而 P 无可行动增量时，普通 G 是正当结果，没有必须让 P 获胜的义务；一个块无明显差异不等于等价。P 仅 own-team 有利时保留包/共同适应解释，不冒充可复用组合。uniform 有利但 T 不利或不确定时，保留 generic bank benefit，同时承认这四个矩形没有给出成功的可利用配对预报；失败可以来自读出、标签选取、分布或十步范围，不能据此判所有组合无用。T 有利但完整原生服务无用途时，只得到局部机会，不能靠互动幅度保留一个净用途不好的训练配方。只有误差、判别准确率或 $|\Delta|$ 变好时，不据此续购这套配方。若 D/G/P 都有类似的正 T，这支持普通 HMASD 银行也有搭配机会，不给 P 额外复杂度提供独有证据。任何正面组合都只是有理由讨论下一项信息，不自动授权第二块；任何负面组合也不欠一个普遍关闭结论。
+
+#### 七、来源范围与仍然存在的信息缺口
+
+推理使用的仓库版本是 `8a3c43055095f5958c4074d8b90bb1f45d564cfa`。已读取问题全文、指定治理/方法段落、共享背景及 item9、指定历史 NOTES 结果/纠正/关闭段，以及所用 reduce/summary 的定义、状态、暴露和更新字段；代码读取沿 collector、实际 actor、D2 采样/评分、存储/更新、RolloutBuffer 和环境动作/奖励路径展开。为核清真正 S1 奖励，还读取同一 SHA 的 `envs/pettingzoo/scenario1.py`，没有把基类奖励误当子类奖励。
+
+没有遇到决策关键文件的访问失败。但这不是对全部历史二进制 checkpoint、每条训练行和所有世界数组的重新验算；上面的历史终点与关闭判断按注明的已接受记录引用。归档 duration `runner/learning.py@599dc704...` 未读取，因为本建议不依赖恢复该 adapter。可选原始文献只核对了 NeurIPS 官方 HMASD 摘要中的顺序分配说明，未据此宣称读完论文、补充材料或本地文献库。新配方的实际梯度尺度、运行成本、快照恢复正确性和跨训练块复现性都仍未测；这些未知限制相应结论，不是另造一套研究准入要求。本次咨询未运行训练或评价实验。
+
+[^csl-q]: [锁定问题与初始化](https://github.com/CartmanFatass/My-paper-code/blob/8a3c43055095f5958c4074d8b90bb1f45d564cfa/docs/research/candidates/complementary_skill_learning/NOTES.md)，`Pro question 2026-09-23 first-useful-complementary-skill-comparison`。题面候选与预算是建议对象，不是已发生结果。
+[^csl-gov]: [OPERATING_CONSTITUTION.md](https://github.com/CartmanFatass/My-paper-code/blob/8a3c43055095f5958c4074d8b90bb1f45d564cfa/docs/project/OPERATING_CONSTITUTION.md)，§§1–6、8：owner 方向、探索与确认、实际成本、三个记录、Pro 建议与 DM 决定。
+[^csl-method]: [Scientific tools](https://github.com/CartmanFatass/My-paper-code/blob/8a3c43055095f5958c4074d8b90bb1f45d564cfa/.agents/skills/hmasd-scientific-tools/SKILL.md)，Explore an idea / Comparators / Statistics / Cost and exposure / Pro；[Research engineering](https://github.com/CartmanFatass/My-paper-code/blob/8a3c43055095f5958c4074d8b90bb1f45d564cfa/.agents/skills/hmasd-research-engineering/SKILL.md)，Checks and review。
+[^csl-shared]: [RESEARCH.md](https://github.com/CartmanFatass/My-paper-code/blob/8a3c43055095f5958c4074d8b90bb1f45d564cfa/docs/research/RESEARCH.md)，topics 1、3–6 与 complementary_skill_learning 行。
+[^csl-design]: [LITERATURE_RESEARCH_PLAN_20260922.md](https://github.com/CartmanFatass/My-paper-code/blob/8a3c43055095f5958c4074d8b90bb1f45d564cfa/docs/research/designs/LITERATURE_RESEARCH_PLAN_20260922.md)，item9，作为本题正在缩小的设计而非冻结合同。
+[^csl-fsd]: [FSD NOTES](https://github.com/CartmanFatass/My-paper-code/blob/8a3c43055095f5958c4074d8b90bb1f45d564cfa/docs/research/candidates/flexible_skill_duration/NOTES.md)，2026-09-21 01:47 B13、02:51 纠正、03:43 B14；[B13 reduce](https://github.com/CartmanFatass/My-paper-code/blob/8a3c43055095f5958c4074d8b90bb1f45d564cfa/runs/flexible_skill_duration/b13_reduce/summary.json)；[B14 reduce](https://github.com/CartmanFatass/My-paper-code/blob/8a3c43055095f5958c4074d8b90bb1f45d564cfa/runs/flexible_skill_duration/b14_reduce/summary.json)。
+[^csl-duration]: [Joint-duration NOTES](https://github.com/CartmanFatass/My-paper-code/blob/8a3c43055095f5958c4074d8b90bb1f45d564cfa/docs/research/candidates/joint_duration_skill_learning/NOTES.md)，B01 complete three-arm result and closure；[fixed summary](https://github.com/CartmanFatass/My-paper-code/blob/8a3c43055095f5958c4074d8b90bb1f45d564cfa/runs/joint_duration_skill_learning/b01_fixed_r1_s2026092201/summary.json)；[AR summary](https://github.com/CartmanFatass/My-paper-code/blob/8a3c43055095f5958c4074d8b90bb1f45d564cfa/runs/joint_duration_skill_learning/b01_ar_s2026092203/summary.json)。
+[^csl-s7]: [UAV-service-auxiliary NOTES](https://github.com/CartmanFatass/My-paper-code/blob/8a3c43055095f5958c4074d8b90bb1f45d564cfa/docs/research/candidates/uav_service_auxiliary/NOTES.md)，2026-09-23 “B03 second common replay accepted and current recipe closed”，含两块 final-world 表、共同事实误差与关闭范围。
+[^csl-collector]: [FSD native collector/evaluator](https://github.com/CartmanFatass/My-paper-code/blob/8a3c43055095f5958c4074d8b90bb1f45d564cfa/scripts/run_fsd_baseline_interruption_b01.py)，`collect_training`、实际文件中的 `evaluate_panel`、计数律；[config/environment constructors](https://github.com/CartmanFatass/My-paper-code/blob/8a3c43055095f5958c4074d8b90bb1f45d564cfa/scripts/run_flexible_skill_duration_e0.py)，`_make_config` / `_make_envs` / `_preserve_rng` / evaluator sync。
+[^csl-net]: [hmasd/networks.py](https://github.com/CartmanFatass/My-paper-code/blob/8a3c43055095f5958c4074d8b90bb1f45d564cfa/hmasd/networks.py)，`SkillCoordinator.assign_and_value_batch`、`assign_partial_batch`、`evaluate_training_batch_ordered`、`R_Actor`、`evaluate_sequence`。
+[^csl-store]: [hmasd/agent.py](https://github.com/CartmanFatass/My-paper-code/blob/8a3c43055095f5958c4074d8b90bb1f45d564cfa/hmasd/agent.py)，`store_transition_batch`、`store_transition`、进入隐状态存储、`update`、`update_coordinator_d2`；[hmasd/utils.py](https://github.com/CartmanFatass/My-paper-code/blob/8a3c43055095f5958c4074d8b90bb1f45d564cfa/hmasd/utils.py)，`RolloutBuffer` 转移字段及 D2 记录。
+[^csl-env]: [uav_env.py](https://github.com/CartmanFatass/My-paper-code/blob/8a3c43055095f5958c4074d8b90bb1f45d564cfa/envs/pettingzoo/uav_env.py)，实际动作乘速度/位置裁剪、奖励除 N、信道耦合；[scenario1.py](https://github.com/CartmanFatass/My-paper-code/blob/8a3c43055095f5958c4074d8b90bb1f45d564cfa/envs/pettingzoo/scenario1.py)，实际 S1 reward、height penalty 和连接分配。
+[^csl-lit]: Yang et al., [Hierarchical Multi-Agent Skill Discovery，NeurIPS 2023 官方摘要](https://proceedings.neurips.cc/paper_files/paper/2023/hash/c276c3303c0723c83a43b95a44a1fcbf-Abstract-Conference.html)。这里只用摘要确认原方法已有顺序技能分配，不把摘要作为本土实验或本文新增诊断的证明。
+
 ## 2026-09-23 — First Pro question accepted; deterministic observation armed
 
 Question source: `8a3c43055095f5958c4074d8b90bb1f45d564cfa`, published on the direction branch.
