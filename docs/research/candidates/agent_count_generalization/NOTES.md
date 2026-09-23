@@ -9811,3 +9811,63 @@ worker or Pro Send was repeated and no App task was messaged. A checkpoint rearm
 preserve these same operations. Completion still requires full artifact collection,
 independent native-trace reading, both fixed endpoints and the prospective scientific
 interpretation before the result is accepted or the next investment selected.
+
+
+### B11 T6 collected and checked; T8 pending
+
+The original T6 operation exited normally at 2026-09-23 15:25:21 UTC. The native status
+reports a valid exit witness, absent runner/supervisor and consistent records. All 15 files
+(70,177,262 bytes) were collected into
+`runs/agent_count_generalization/s1_training_condition_b11_t6_s963201/` and individually
+matched against native SHA-256 and byte counts. Summary SHA-256 is
+`7046f2a8341f4dfb6049bf00aa97afafd34150e1840d94a66875a4936d437d63`.
+This completes this cell's collection, not the two-cell scientific comparison.
+
+The DM independently read both complete final panels and every world, loaded the trusted
+own checkpoints for tensor verification, and recomputed J/C/Q/P/E/S/U from the numeric
+native traces without candidate imports, a policy forward or new environment transitions.
+All 45 training rows match the summary; actual counts exactly equal the fixed expected
+counts: 1 fit,360,000 training team steps,2,160,000 agent rows,720 training episodes/resets,
+45 updates,22,500 training policy calls,101,250 actor and critic optimizer calls each;
+32,000 evaluation team steps,224,000 evaluation UAV steps,64 episodes/resets and1000
+batched policy calls. Evaluation has zero updates or storage. Source hashes before/after
+match published execution `dc1bc1f2718b1e4ff9510030ad26c287c76b03ac`.
+
+Initial checkpoint tensors match the recorded complete manifest. Both final evaluation
+copies match the trained learner digest; model/normalizers, learner runtime and global
+RNG remain preserved. The full numeric summary is finite. All 45 updates retain effective
+entropy .05, bounded physical actions, unchanged diagnostic RNG/policy/logprob and exact
+raw-action/logprob storage witnesses. Native connection uniqueness, c10 capacity, actual
+0dB eligibility, per-UAV counts and the identity E-S=U pass independent trace checks.
+
+These are standalone T6 readings, not Delta8 or Delta6:
+
+| Test N | J | Coverage C | Quality Q | Height penalty P | Eligible E | Served S | Eligible-unserved U |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 8 | .340079604889 | .444208750000 | .169379186683 | .021680276116 | 23.296125 | 22.2104375 | 1.0856875 |
+| 6 | .452484895156 | .592258750000 | .178208925899 | .015558907613 | 31.285500 | 29.6129375 | 1.6725625 |
+
+Retain the adverse worlds: N8 world1645815 has J .229516940986 and15.184 served users/step;
+world1645829 has24.122 eligible but17.046 served and7.076 eligible-unserved. N6 world1645608
+has J .323061473768,20.378 served and5.824 eligible-unserved. These describe one trained
+policy on separate N panels; they do not identify a causal N effect or its difference from
+T8. Every world's components remain in the committed panels and native traces.
+
+Measured command wall is4219.760235s (70.329337min), fit-function wall4218.503021s;
+process user/system CPU16826.737209/38.354270s; peak RSS1,166,924 KiB, scoped to Linux
+RUSAGE_SELF. Peak scratch is unmeasured. These are T6 costs only, not total batch costs or
+simultaneous memory. Both checkpoints are20,968,771 bytes, retained outside Git in this
+authoring run directory and the same tag under native `/home/wu/projects/HMASD/runs/agent_count_generalization/`:
+checkpoint00 SHA-256 `d96478ac256080e7a8cbbceb09f472f62fd0b11b7b9ee5c47d49085821c913a0`,
+checkpoint45 `36f6bc8afbc414df1f84c2b414180821bf30e14b90d7f44928db35ce2ab74c0a`.
+Their hashes/sizes are also runner-written in the committed summary. No remote source or
+artifact cleanup occurred.
+
+At this collection, the unchanged T8 operation had completed34 updates, collected280,000
+team steps and reported no failure or nonfinite loss; its final panels were still pending.
+Latest inspected main `fc8c4fe216906d4eaaea2b2c7c7595c1c83e9998` retains the lifted project
+pause and this lead; FSD/G33 controls are unchanged. The T6 ready event was consumed with
+generation96 and its original wake/event IDs; generation97 observes the remaining original
+T8 handle. No restart, replacement fit, new Pro question, outcome-driven change or App
+message was made. Complete and read the fixed paired comparison before updating the
+training-condition prediction or choosing the next investment.
