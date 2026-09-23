@@ -4924,3 +4924,34 @@ This is neither a terminal replication failure nor evidence for eventual recover
 costs and the pending stage30/final45 comparisons remain part of the fixed reading. Continue
 the already-declared horizon with2/2 fits started,1 complete/1 running; no new investment or
 changed scientific standing is selected from this interim observation.
+
+## 2026-09-23 — B05 zero-cell second checkpoint; stage30 tradeoff and final update pending
+
+Read generation70 CHECKPOINT `50d7e65aef0f46288ba1fa68`, wake
+`973b6844-7e57-48b6-aa96-76ed20982219`; native identities remain running and consistent,
+without stderr or exit witness. Current main `46d3560c5ab7ef87345d11c1c5460fd87bfa4888`
+retains this direction's pause/lead/plan. Rearmed the same observation as generation71.
+
+Collected snapshot at52.922444996 command minutes:44/45 updates, final rollout45 collected,
+360000 training/stored steps,720 training episodes,72000 evaluation steps/144 episodes.
+Previous22 rows/six panels are unchanged. Independently checked22 new rows and three stage30
+panels, including raw storage/clipped execution, native identities, finite loss/scale values,
+row-aligned analytic entropy and frozen zero-update evaluation. Actor/critic each99000 actual
+optimizer calls, skill paths0. All44 rows agree with training.jsonl. Final update/evaluation
+is not yet part of this snapshot; checkpoint30 is recorded natively, not yet independently loaded.
+
+Independent same-world stage30 effects, zero minus.05:
+
+| N | zero J | E_J | delta coverage | delta quality | delta weighted penalty | positive worlds |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| 4 | .426431004482 | -.083535158400 | -.075065000000 | -.026177707368 | +.023136346190 | 2/16 |
+| 6 | .393704909018 | -.063093870149 | -.056632500000 | -.006320560300 | +.021554952059 | 2/16 |
+| 8 | .352275142405 | +.023686746033 | +.053270000000 | -.004669115686 | +.012201519261 | 12/16 |
+
+Stage30 unseen-N effect is **-.029924206184**: N8 coverage/J improves, while N4/N6 service
+losses and all-N penalty increases remain. This intermediate tradeoff is retained alongside
+stage15, not read as terminal recurrence or independent training replication. After update44
+zero sigma=`[.8115600347518921,.8401170969009399,.8412649631500244]`, analytic raw entropy
+3.700956034; rollout44 saturation=.312520833 and boundary truncation=.217319444. Reduced
+raw scale is not sufficient for universal service gain. Full paired interpretation still
+awaits the fixed final45 panel;2/2 started,1 complete/1 running, no new fit or changed endpoint.
