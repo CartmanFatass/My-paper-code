@@ -3849,3 +3849,33 @@ unmeasured peak scratch, rerunning that output test successfully (1 passed). DM 
 test-only delta; executable hashes remain exactly as reviewed. The published final test hash
 is `26d84e08c3080af87f8392bcc23aa0fb65313e0f0d37072ff581cd3e61034abc`, superseding the
 pre-addition test hash above. This adds no scientific execution or changed production behavior.
+
+
+## 2026-09-23 — B04 actual4070 CUDA checks accepted; M is the fixed first fit
+
+Exact published source `483819ebaa8286d24641f4947e646a765c761003` was materialized in the
+isolated4070 authoring checkout `/home/wu/hmasd-worktrees/complementary-skill-b04-20260923`.
+The first Git materialization waited in a promisor HTTP fetch without the configured proxy
+environment. Only that owned checkout's verified HTTP child was terminated; the command
+returned128 and removed its incomplete worktree/registration. After checking that terminal
+state, the same directory/source was created under the configured network login shell.
+No test or scientific worker had started in the failed materialization; no accepted fit was
+restarted. Per-command commit-graph/automatic-GC settings avoid an existing unrelated stale
+commit-graph entry; this task did not alter or repair the shared repository metadata.
+
+The remote source was clean and all four B04 executable/test hashes matched the published
+and reviewed files. With configured `/home/wu/.venvs/hmasd/bin/python` and runtime PATH,
+`pytest -q tests/experiments/candidates/complementary_skill_learning/b04/test_b04.py::test_actual_cuda_pair_rng_storage_and_two_rollout_contract`
+passed on the actual4070: **1 passed in6.84s**, with only the same dependency warnings.
+This executes M/U on CUDA for two short rollouts each and verifies initialization/uniform
+identity, low/discriminator/head movement, U coordinator0, label/storage/reset contracts,
+CPU+CUDA private-state presence, unchanged U high sampler and equal remaining/low streams.
+It is a technical fixture, not a result-bearing learning fit or an added seed block.
+
+DM accepts this implementation for the already fixed exploratory pair. Freeze source
+`483819ebaa8286d24641f4947e646a765c761003` for both scientific fits; subsequent documentation
+commits do not change its executable contract. M is first with tag
+`b04_m_260923931_483819eba`; U remains the fixed second arm at the same source and addresses
+after full M collection/acceptance. Native admission must still establish current published
+pause/lead, source identity, duplicate absence and fresh actual-node memory. At this entry
+there are0 started B04 scientific fits; tests and adviser agreement establish no service result.
