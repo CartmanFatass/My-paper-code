@@ -1,77 +1,11 @@
 {
-  "admission": {
-    "claim_state": "accepted",
-    "state": "accepted"
-  },
-  "artifacts": {
-    "stderr": {
-      "path": "/home/wu/hmasd-worktrees/agent-count-bounded-package-20260923-b07/runs/agent_count_generalization/s1_bounded_package_b07_h6_l05_s952201/stderr.log",
-      "state": "present"
-    },
-    "stdout": {
-      "path": "/home/wu/hmasd-worktrees/agent-count-bounded-package-20260923-b07/runs/agent_count_generalization/s1_bounded_package_b07_h6_l05_s952201/stdout.log",
-      "state": "present"
-    },
-    "summary": {
-      "path": "/home/wu/hmasd-worktrees/agent-count-bounded-package-20260923-b07/runs/agent_count_generalization/s1_bounded_package_b07_h6_l05_s952201/summary.json",
-      "state": "present"
-    }
-  },
+  "claim_key": "c106cb65e8ebb7262c25d6a7c82b62a1d6b74c56db9ce425d0779a6149a8d026",
   "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/c106cb65e8ebb7262c25d6a7c82b62a1d6b74c56db9ce425d0779a6149a8d026.json",
-  "direction": "agent_count_generalization",
-  "execution": {
-    "exit_witness": {
-      "path": "/home/wu/hmasd-worktrees/agent-count-bounded-package-20260923-b07/runs/agent_count_generalization/s1_bounded_package_b07_h6_l05_s952201/process-exit.json",
-      "state": "absent"
-    },
-    "runner": {
-      "observed_identity": {
-        "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
-        "kind": "linux_pid_start_ticks",
-        "pid": 330894,
-        "session_id": 330893,
-        "start_ticks": 50739895
-      },
-      "recorded_identity": {
-        "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
-        "kind": "linux_pid_start_ticks",
-        "pid": 330894,
-        "session_id": 330893,
-        "start_ticks": 50739895
-      },
-      "state": "running"
-    },
-    "state": "running",
-    "supervisor": {
-      "observed_identity": {
-        "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
-        "kind": "linux_pid_start_ticks",
-        "pid": 330893,
-        "session_id": 330893,
-        "start_ticks": 50739892
-      },
-      "recorded_identity": {
-        "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
-        "kind": "linux_pid_start_ticks",
-        "pid": 330893,
-        "session_id": 330893,
-        "start_ticks": 50739892
-      },
-      "state": "running"
-    }
-  },
-  "explicit_retry_available": false,
-  "kind": "hmasd_operation_status",
   "manifest_ref": "/home/wu/hmasd-worktrees/agent-count-bounded-package-20260923-b07/runs/agent_count_generalization/s1_bounded_package_b07_h6_l05_s952201/launch-manifest.json",
-  "node": "wsl_4070",
-  "observed_at": "2026-09-23T06:39:46.736265Z",
   "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/c106cb65e8ebb7262c25d6a7c82b62a1d6b74c56db9ce425d0779a6149a8d026.json",
-  "output_root": "/home/wu/hmasd-worktrees/agent-count-bounded-package-20260923-b07/runs/agent_count_generalization/s1_bounded_package_b07_h6_l05_s952201",
-  "record_consistency": {
-    "mismatches": [],
-    "state": "consistent"
-  },
+  "pid": 330893,
+  "runner_pid": 330894,
   "schema_version": 1,
-  "sha": "0a9e3fde40659fdcc1d05922c9920c5c04b2ab23",
-  "source_root": "/home/wu/hmasd-worktrees/agent-count-bounded-package-20260923-b07"
+  "status": "accepted",
+  "updated_at": "2026-09-23T06:39:40.763095Z"
 }

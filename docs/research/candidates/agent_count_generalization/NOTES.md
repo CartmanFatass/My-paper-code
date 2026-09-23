@@ -6591,3 +6591,262 @@ window. No restart, duplicate launch, further Pro Send, SET replay or extra seed
 checkpoint. Continue the fixed 45 updates and 12 evaluation panels, then collect all outputs and
 read final45 against the immutable original SET summary under the recorded outcome branches.
 Source and current publication checkouts remain in use; no live or retained input was reclaimed.
+
+## 2026-09-23 — B07 complete: bounded package benefit recurs, with an initial-policy rival
+
+The fixed B07 comparison is complete. Its final45 reading satisfies the prospective full-pattern
+rule, so I retain bounded H6/.05 as an **exploratory package candidate** under the already-read
+positive branch of the recurrence advice. This is a second useful trained H6 instance, not a
+confirmation result, a sufficiently tuned-baseline certificate, or evidence that skills caused
+the difference. No repeat Pro consultation is needed to apply that previously specified branch.
+
+### Complete evidence and acceptance
+
+Accepted source remains `0a9e3fde40659fdcc1d05922c9920c5c04b2ab23`, object
+`s1_bounded_package_b07`, tag `s1_bounded_package_b07_h6_l05_s952201`. The native operation
+recorded in the preceding entry terminated with a valid exit-0 witness at epoch
+1790149414.9014597; runner/supervisor identities are absent and records are consistent. That
+process fact was followed by full artifact collection and scientific reading. The native
+runner-written `launch-status.json` records acceptance; terminal evidence is separately in
+`process-exit.json`, the complete summary and the reconciled original operation.
+
+All 25 output files, 93,876,938 bytes, were collected from the original native run, with each
+size and SHA-256 checked against the remote file inventory. The complete
+[summary](../../../../runs/agent_count_generalization/s1_bounded_package_b07_h6_l05_s952201/summary.json)
+is 990,787 bytes, SHA-256 `9d7f90523b74ea0fb4b9d7720086baefff13c22cdb41547c2b793764273b550a`.
+All 45 rows of [training.jsonl](../../../../runs/agent_count_generalization/s1_bounded_package_b07_h6_l05_s952201/training.jsonl)
+exactly match the embedded rollout records; all 12 individual panel files match the embedded
+panels. Recursive finite-value checks, actual counters, optimizer deltas and module movement
+agree. There is no recorded failure. Source hashes before/after and all immutable SET inputs
+are unchanged. Collection did not load binary tensors or add an evaluation.
+
+The four checkpoint files are retained both locally at the run path and natively under
+`/home/wu/hmasd-worktrees/agent-count-bounded-package-20260923-b07/runs/agent_count_generalization/s1_bounded_package_b07_h6_l05_s952201/`.
+They remain outside Git; each has 23,073,626 bytes. Recoverable SHA-256 identities:
+
+| Checkpoint | SHA-256 |
+| --- | --- |
+| 00 | `65cfcc9f6afc69bae78712a4dd15bc772e2d3b56c82797504e27555a814ef398` |
+| 15 | `ed984329a5e6d2ba4e1d23d59df6284c4b2d650e59ca0241a1b8fe054c0f674f` |
+| 30 | `d74acf8871958896d496cd7af515fec40b74f49a66a5a48dcd9ab6b510c5e78e` |
+| 45 | `6d71f3023e5593a801b4d618f7eece93df1a15575f8a71d769566190ba6498df` |
+
+Exactly one fit completed: 360,000 training/stored team steps, 2,160,000 training UAV steps,
+720 training episodes/resets, 45 whole rollout updates and 22,500 training policy calls.
+Evaluation completed 96,000 team steps, 576,000 UAV steps, 192 episodes and 6,000 policy calls
+over all 12 prescribed panels. Total exposure is 456,000 team steps / 912 episodes. Optimizer
+calls are coordinator675, discoverer actor101250, critic101250, team discriminator675 and
+individual discriminator2700; every rollout contributes 15/2250/2250/15/60 respectively.
+All five modules move in every update. Final parameter-delta L2 values in that order are
+5.947512 / 48.223627 / 40.285242 / 2.476823 / 8.888302. Evaluation records retain zero updates,
+strict target synchronization and preserved learner parameters, normalizers, runtime and global
+RNG. Collection preserves raw actions/log probabilities while clipping only executed actions.
+Neither clean exit nor these checks count as a scientific positive by themselves.
+
+### Fixed final45 reading in native units
+
+DM independently derived every stage/N/world contrast from the original H6 panel files and
+the separately collected original B05 SET/.05 summary, rather than taking the new runner's
+copied control-comparison values as independent evidence. The fixed control remains
+`s1_entropy_b05_set_l05_s953201`, source `e2ea736457e0992fb53cf21aa775fd15da3d8231`, summary
+SHA-256 `136d090b32a8c5fec1eefad5dbaaefa9155d44ce4335c7fb0f07585d36cff4c4` and checkpoint45
+SHA-256 `98062b5b338b684219c43b5c9a3dc13bf176322a948c439294beee1d52ae477e`.
+
+Native per-world J is actual N times the 500-step scalar return divided by500, and agrees with
+`.7*coverage + .3*quality - weighted_penalty`. The penalty is already weighted. Each row below
+uses the 16 fixed common worlds for its N. Coverage is the fraction of50 users served per step.
+
+| N | H6 J | SET J | D J | H6 coverage | SET coverage | D coverage | Extra users/step |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 4, unseen | .577558729 | .498897910 | +.078660819 | .7254225 | .6691475 | +.0562750 | +2.813750 |
+| 6, trained | .571507590 | .430893237 | +.140614353 | .7405975 | .5859375 | +.1546600 | +7.733000 |
+| 8, unseen | .454504516 | .302237189 | +.152267327 | .5859900 | .4098850 | +.1761050 | +8.805250 |
+
+Primary `D_U=(D4+D8)/2=+.11546407308050341`. Absolute H6/SET served users per step are
+36.271125/33.457375, 37.029875/29.296875 and 29.299500/20.494250 for N4/6/8. Thus the
+positive mean reward is accompanied by material coverage improvement, including at trained N6.
+Mean quality H6/SET is .246233534/.206895075, .195351947/.174829484 and
+.174402843/.144583440. Mean weighted penalty is .004107081/.031573862,
+.005516244/.031711858 and .008009337/.028057343. All three mean contributions are favorable;
+coverage harm is not being hidden by a compensating mean reward component.
+
+Preserve the adverse world, not only the means. Both J and coverage favor H6 on16/16 worlds
+at N4,16/16 at N6 and15/16 at N8. At **N8 world1545810**, D J is **−.074395206**, D coverage
+**−.14324**, or **7.162 fewer users per step**, despite favorable quality and penalty. Across
+N4/6/8, world J min/median/max are .047245/.081645/.113745,
+.049622/.134400/.234436 and −.074395/.148718/.333875. These worlds are nested evaluations
+of one new H6 policy and one reused SET policy; they are not independent training replicates,
+and the mean pattern does not establish worldwise dominance.
+
+### Contrary observations, costs and the working explanation
+
+Retain all stages without selecting an earlier endpoint. Same-stage H6−SET J contrasts are:
+
+| Stage | N4 | N6 | N8 | Unseen-N average |
+| --- | --- | --- | --- | --- |
+| 0 | +.096907008 | +.152553545 | +.195924096 | +.146415552 |
+| 15 | +.032671697 | −.012918946 | +.037020439 | +.034846068 |
+| 30 | +.042258970 | +.058402104 | +.060021942 | +.051140456 |
+| 45 | +.078660819 | +.140614353 | +.152267327 | +.115464073 |
+
+Stage15 N6 also loses .0156 coverage. More consequentially, H6 is already ahead at
+initialization, with larger observed J gaps than final45 at all three N. **The stages use
+different worlds**, so this is a live initial-policy/architecture rival, not a measurement of
+how training changed the gap. Do not subtract these existing stage means to claim that learning
+shrunk the advantage. Deterministic evaluation uses policy means; training raw-Gaussian sigma
+is not itself the evaluated action or an identified explanation for this initial contrast.
+
+H6 final raw sigma is [3.244802237,3.210763216,3.066151857] from initial[1,1,1]. Full/late15
+raw-coordinate saturation is .603613117/.751755556, versus SET .636593981/.802748611;
+physical boundary truncation is .165942438/.157809722, versus SET .164499846/.171164352.
+These diagnostics do not identify a service pathway or erase B04/B05's opposite service
+responses under similar lower-noise/higher-boundary-truncation changes. Zero low-level entropy
+remains an inconsistent repair, not an adopted default or a selectable new control.
+
+New H6 command wall is **61.825780 minutes** on `wsl_4070` (run-fit body3708.257121 seconds),
+CPU user/system14958.765119/85.090917 seconds, peak scientific-process RSS2,589,204 KiB.
+The reused SET's already-paid command wall is57.819554 minutes and peak RSS1,209,952 KiB;
+its actor/critic each performed101250 optimizer calls, with no coordinator/discriminator
+updates. H6 adds675 coordinator,675 team-discriminator and2700 individual-discriminator
+calls. These differently scheduled runs are not a controlled speed or efficiency benchmark.
+Preparation, review, collection and scientific reading are additional work; peak scratch and
+their complete wall cost are unmeasured, not zero. Binary assets remain retained for recovery.
+
+**Strengthened:** the bounded H6 package has another useful fixed endpoint against the
+specified generic SET/.05, with practical coverage benefit at all N. **Weakened:** the reason
+to dismiss its positive bounded endpoint as confined to the old H6 trained instance.
+**Untouched:** population ranking, generic-baseline competence, skill-component causality,
+count-specific learning mechanism and causal attribution to exploration diagnostics. Old B03
+bounded `D_U=+.112962544` and new `+.115464073` are two exploratory comparison instances;
+their numerical similarity does not estimate stability, and seed-address offsets do not make
+the training runs statistically paired. Both comparisons were developed with known results.
+The current source at `origin/main` `7d979b51cc6ad9aa156311b4ea12e2b4245533a4` keeps this
+direction's active lead and owner continuation; Claude FSD pause/G33 remain unchanged.
+Its shared topics3/6 constrain this reading to native outcomes, package scope, selection
+exposure and nested worlds. The evidence-supported topic3 update will add recurrence and
+the unresolved initial-policy rival, preserving the contrary entropy and world evidence.
+
+A bounded read-only ResearchCritic independently recomputed the final rule, component signs,
+initial differences and the adverse N8 world. It agrees with candidate retention and flags that
+neither sign of a subsequent learning-gain diagnostic would automatically reverse that decision
+(`MATERIAL_DISSENT: no`). I adopt that distinction: retention is decided; the next question
+must earn its cost by changing how we pursue a competent ordinary comparison. No third seed,
+entropy sweep, longer horizon, new world panel, checkpoint selection or confirmation follows
+automatically. No production worker or unresolved prior Pro answer remains.
+
+## Pro question 2026-09-23 initial-policy-rival-after-b07
+
+Conversation: current Jev direction conversation; its private address is retained locally.
+
+Question: After the fixed B07 endpoint earns exploratory retention, is a zero-fit common-world
+initial/final comparison the smallest useful next investment toward a credible ordinary
+baseline for count generalization, or should we bypass it? The new decision is what to learn
+before choosing any further training comparison. Do not re-review permission to accept B07's
+already-covered positive branch or treat another fit as owed.
+
+Standing: The preceding complete B07 entry is the DM's result reading. H6/.05 seed952201
+against fixed B05 SET/.05 seed953201 has final J gaps N4/6/8 of
++.078660819/+.140614353/+.152267327 and extra users/step2.81375/7.733/8.80525. All three mean
+components favor H6, with an adverse N8 world losing7.162 users/step. B03 supplies the earlier
+bounded package positive, while B04/B05/B06 retain the inconsistent zero-entropy repair and
+policy-pair versus world-panel evidence. Ordinary-baseline competence remains unresolved.
+The new fact is the initialization gap: +.096907008/+.152553545/+.195924096 on the stage0
+worlds. Both policies are deterministic at evaluation. Current cross-stage worlds differ;
+the larger initial gaps are a rival explanation, not an estimate of differential learning.
+
+The tentative action would evaluate **only the two existing checkpoint00 assets on the
+existing final45 worlds**: N4/6/8,16 worlds each,500 steps. Reuse the already-read final45
+outputs without another final replay. The six missing panels cost **0 new fits,0 optimizer
+updates,48,000 evaluation team steps and96 episodes**. No new worlds, intermediate endpoint
+selection, policy tuning, extra seeds or new fixed world panel are proposed. This has not been
+implemented, selected or admitted; it is a candidate observation whose decision value is at issue.
+
+For each N/world define each policy's change `I_H=J(H45)-J(H0)` and
+`I_S=J(S45)-J(S0)` on that same world, then `Delta_N=I_H-I_S=D45-D0` and the corresponding
+coverage, quality and weighted-penalty changes. The useful potential distinction is whether
+training widened the package difference on these fixed worlds or a useful final difference
+coexists with a comparable/larger pretraining gap. A nonpositive Delta would not establish
+that H6 learned nothing, invalidate its final usefulness, or diagnose an initialization defect;
+a positive Delta would not identify skills, a causal percentage, or a population learning law.
+Mixed N, absolute per-arm gains and native components must remain visible.
+
+My provisional reason to buy this observation is to decide whether further effort should first
+address the ordinary comparator's initial policy/action geometry or instead investigate a
+training-produced package difference. The Critic's strongest objection is that either sign
+leaves the current retention decision unchanged and need not identify an actionable baseline
+revision. Test that objection directly: is this a real next-choice discriminator or merely an
+interesting decomposition? If neither outcome changes a defensible next action, say so and
+recommend the smallest better-grounded action, including no additional experiment. A stronger
+ordinary baseline is a goal, not a license for a vague entropy/architecture sweep. No fixed
+candidate count, new architecture or exhaustive diagnosis is required.
+
+Context (all unspecified revisions inherit the full `source_sha` in the send message):
+
+- Governance: `docs/project/OPERATING_CONSTITUTION.md` §§1–5,7–8. Owner explicitly resumed
+  this direct DM's research ("你可以继续研究了 作为DM不该简单的停下 impress me！"). Project pause
+  is lifted; Claude FSD/G33 remain outside this authority. This question establishes a new
+  scientific discriminator under §5; Pro advises and DM chooses. Cost is recorded, with no
+  fit allowance. Exploration is not confirmation; neither this question nor advice admits a run.
+- Methods: `.agents/skills/hmasd-scientific-tools/SKILL.md`, sections `Update the working
+  explanation`, `Comparators and MARL information`, `Statistics`, `Cost and exposure` and `Pro`; use evidence to
+  separate representation/initial policy, finite learning and final net use, preserving contrary
+  outcomes and matching the inferential unit to actual training replication. Engineering is
+  relevant only to feasibility and evaluation isolation, not a new approval requirement.
+- Shared background and current ownership: `docs/research/RESEARCH.md` at published
+  **`7d979b51cc6ad9aa156311b4ea12e2b4245533a4`**, relevant topics3 and6 and the agent-count
+  row/owner pause. Read topic3's bounded execution and entropy evidence and topic6's distinction
+  between package performance, mechanism and nested samples. That index predates complete
+  B07; the preceding pinned result entry supplies its new evidence. Do not substitute this
+  direction branch's older index or use other directions' outcomes as this direction's data.
+- Prior applicable advice and contract: in this NOTES, `Pro question 2026-09-23
+  bounded-package-recurrence-after-b06` and its complete Answer, then `Complete recurrence
+  advice adopted and fixed B07 single-fit contract`. Those cover B07 retention and its limits;
+  they did not select this initial-policy question. Preserve all frozen endpoints and outcomes.
+- Direct new evidence: the preceding `B07 complete` entry and
+  `runs/agent_count_generalization/s1_bounded_package_b07_h6_l05_s952201/` config,
+  summary, training and panel00/15/30/45 JSONs. Native execution source is
+  `0a9e3fde40659fdcc1d05922c9920c5c04b2ab23`; outputs are published at `source_sha`.
+  The fixed SET evidence is `runs/agent_count_generalization/s1_entropy_b05_set_l05_s953201/`
+  at `source_sha`, with original execution source `e2ea736457e0992fb53cf21aa775fd15da3d8231`.
+  Read the original per-world data for consequential arithmetic, not only the new comparison
+  copies. The large training traces need not be reaudited to answer the next-choice question;
+  distinguish DM verification from your own direct reading.
+- Contrary evidence: this NOTES' complete B03/B04/B05/B06 entries and the complete B06
+  final45 cross-panel table in `runs/agent_count_generalization/s1_entropy_cross_panel_b06/`.
+  B03 H6/SET/.05 under common bounded execution, old/new SET zero-entropy responses,
+  intermediate sign changes and B06's A/N4 exception limit baseline and learning claims.
+- Actual information/learning paths, only as needed for a proposed discriminator:
+  `experiments/candidates/agent_count_generalization/models.py`, `configuration.py`,
+  `bounded_package_b07/runner.py` and `entropy_b05/runner.py` at `source_sha`.
+  H6 keeps coordinator, two discriminators and actual intrinsic losses; SET uses current local
+  observations plus a held lawful central snapshot and no skills. Both train at N6/k10 with
+  bounded execution, raw Gaussian PPO and constant low-level entropy .05. Architecture,
+  initialization, information representation/bandwidth and auxiliary learning are bundled;
+  deterministic evaluation and strict recurrent/normalizer/RNG isolation are already implemented.
+
+Assets and prospective non-fit work: H6 checkpoint00 is retained at the native/local path in
+the preceding result, SHA-256 `65cfcc9f6afc69bae78712a4dd15bc772e2d3b56c82797504e27555a814ef398`.
+SET checkpoint00 is20,968,771 bytes, SHA-256
+`37b34c34d6bc84bfe43d78e5283668f38db180a16bf99b22d9caf8eb608857ca`, retained at the local run
+path and `/home/wu/hmasd-worktrees/agent-count-entropy-20260923-b05/runs/agent_count_generalization/s1_entropy_b05_set_l05_s953201/`.
+DM verified both bytes/identities, without loading them for a new result. Final worlds are
+`1545000 + 100*N + i`, N4/6/8 and i0..15. The final panels and their control identities are
+already fixed. A selected diagnostic would still require bounded evaluator implementation,
+relevant technical checks/independent review, native admission, collection and reading. Its
+actual wall time is unmeasured. The already-paid new H6/SET command times61.825780/57.819554
+minutes are not timing estimates for this diagnostic. No further training cost is accepted.
+
+Return a source-grounded recommendation on the decision value and exact scope of this proposed
+observation, the strongest rival and outcome-dependent next choice. State what current evidence
+strengthens, weakens or leaves untouched; any suggested baseline change needs its concrete
+information/learning rationale and a falsifiable native consequence. Distinguish facts from
+conjectures and identify material unread sources. Return `MATERIAL_DISSENT: yes/no`. Do not
+launch experiments, grant budget, create a new record type or require an extra approval layer.
+
+Write only the empty `### Answer` subsection below, on branch `codex/agent-count-generalization`
+in this NOTES. Read the question at its pinned source but fetch the latest target blob for
+writing and use its actual blob SHA. Preserve every other byte; stop on an overlapping edit.
+Report the actual commit after a successful write. If GitHub writeback is unavailable, return
+the complete answer in chat, not only a status, SHA or link. Private Jev addresses stay local.
+
+### Answer
