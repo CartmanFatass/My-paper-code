@@ -4315,3 +4315,154 @@ separately. Publish this binding before one native submission and observe its
 actual handle. Existing complete Pro advice and the prospective decision branches
 cover conflicting blocks and proxy-only improvement: absent a new reason, no
 third block, retuning, longer horizon, new module or confirmation follows.
+
+## 2026-09-23 — B03 second common replay accepted and current recipe closed
+
+**Execution and acceptance.** The single prospective replay was admitted at
+07:20:07.568 UTC against current main `e6bbd3162`, with fresh actual-node
+available memory **13,613,752,320 bytes** above the 4-GiB floor. Native supervisor
+335562/start 50974790 and runner 335563/start 50974793 share boot
+`bb732fcb-1a33-4659-a786-331110ae41d3`; generation 46 observed both exact
+identities running before their recorded exit. READY event
+`5a574215d31b0139697a18d1`, wake `c58e1f32-6320-4ba5-8d76-917f2d6eaaf6`,
+reports exit 0 at **07:20:57.097 UTC**, valid witness, absent processes, consistent
+records and zero observation errors. The native operation reference is
+`/home/wu/projects/HMASD/.git/hmasd-admission/7fbb38ab067a7dfd849e3c2a5d3547e10f9a72089fb9a5ece6649da21c8afa26.json`.
+
+All **17 files / 667,535,492 bytes** were collected and remote/local SHA-256
+verified. Summary digest
+`759040d88d208bce346a6fc5a39b5007642ac092d1f4c83ea29fc9a728541edc` is COMPLETE,
+failure null; stdout empty. Stderr contains exactly the three expected empty
+discriminator-buffer restoration warnings. The exact three summary, checkpoint,
+fact, policy, calibration and source bindings agree with the prospective entry;
+all input checkpoint bytes remain unchanged. Three native policy fingerprints
+and optimizer counts are preserved by the runner's before/after checks.
+
+Read all **36 episode readings**, nine source strata and three aggregates,
+including service and next-observation errors, references, feature rank/variance
+and per-agent/quarter variation. All **1,881 summary floats** are finite.
+Independently recomputed the nine saved arrays from raw endpoint QoS/observations,
+using float64 W10 convolution and the frozen training-only calibration:
+**240 score comparisons, maximum absolute error 1.1110843967099271e-8**.
+Independent SVD matches all feature variance/rank readings, maximum absolute
+difference **2.842170943040401e-14**. Each episode contributes 1,491 valid team
+rows / 11,928 agent rows; every stratum has four episodes, with no missing windows.
+The complete replay is **429,408 agent rows, zero new fits, optimizer updates or
+environment transitions**. Array finiteness, exact raw/normalized observations,
+QoS/dones/seeds, sample indices, episode equality and source-policy fingerprints
+all pass. No replacement evaluator or checkpoint selection was used.
+
+**Common endpoint mixture.** Lower error is preferable within this fixed table;
+columns are the frozen model/readout pair, with each source arm contributing four
+equally weighted episodes.
+
+| Error / fact source | D endpoint | S endpoint | G endpoint |
+| --- | ---: | ---: | ---: |
+| Service MSE, D facts | .017224449 | .052353028 | .018394062 |
+| Service MSE, S facts | .045119271 | .041393413 | .037777164 |
+| Service MSE, G facts | .046676456 | .038835860 | .049224319 |
+| **Service MSE, 12-episode mixture** | **.036340059** | **.044194100** | **.035131848** |
+| Observation MSE, D facts | .012672498 | .014412639 | .013797628 |
+| Observation MSE, S facts | .014526623 | .014969824 | .014013515 |
+| Observation MSE, G facts | .035319984 | .034589217 | .030984909 |
+| **Observation MSE, 12-episode mixture** | **.020839702** | **.021323893** | **.019598684** |
+
+G has the lowest mixture means for both errors while having the lowest final
+native J. Its service advantage against D is only **.001208210**, with lower
+error on **4/12** episodes and higher error on eight; the source-stratum advantage
+occurs only on S-generated facts. Its observation advantage against D is
+.001241017, with five lower-error episodes and seven higher-error episodes.
+G beats S on observation MSE in all 12 episodes, yet its final J is lower by
+8.120320. S−D mixture errors increase by **.007854042 service / .000484192
+observation**; service improves on five episodes and worsens on seven. The lower
+S service error on its own and G-generated strata coexists with its much higher
+error on D-generated facts. Do not hide this heterogeneity behind aggregate rank.
+
+The shared service constant-reference MSE is **.073205737**; D/S/G beat it on
+9/8/8 of 12 episodes, respectively, although all three means are lower. Shared
+observation training-mean MSE is **.028018791** and persistence MSE **.000370816**.
+Each arm beats the training-mean reference on 11/12 episodes; all 36 model/episode
+readings are worse than persistence. These are factual forecasting references,
+not alternative control policies. Feature total variance spans **27.382411 to
+56.585244** and effective rank **9.887964 to 20.713971**, all nondegenerate;
+the full per-agent and quarter readings remain available. This rules out an
+exact constant-feature explanation on these saved samples, not weak or irrelevant
+features elsewhere. A jointly trained feature/readout pair and its factual
+distribution are measured together; there was no new probe fit to identify
+intrinsic representation quality or causal mediation.
+
+First-block G had the highest native J and the highest two mixture errors;
+second-block G has the lowest native J and the lowest two mixture errors.
+Together with the within-run development reversals and initial-fact readings,
+this strengthens the warning that these measured prediction errors cannot be
+used to select a useful controller. Different blocks have different facts and
+training-derived calibration, so the raw error magnitudes are not a common
+cross-block difficulty scale. Neither mixture represents the full task
+distribution; its 12 episodes are not 12 independent trained policies.
+
+Replay2 wall **47.220724 s / .787012 min**, CPU user/system **45.525196 /
+16.654195 s**, peak RSS **1,373,932 KiB / 1.310284 GiB**. Both common replays
+total **101.586364 s / 1.693106 min**, separate from **769.038846 runner minutes
+for six fits**. The combined runner scopes sum to **770.731952 min**, excluding
+implementation, verification, transfer/publication and the separately retained
+pre-training technical failure. This is accumulated measured process wall, not
+elapsed project time or an intrinsic per-arm speed estimate. Six fits retain
+**1.08M train / 576k evaluation / 42k physical fact interactions**; common replay
+adds no interactions. All arrays remain recoverable under this relative replay
+path on both the local authoring root and `/home/wu/hmasd-worktrees/usa-b03-73be55261`.
+[Full replay summary](../../../../runs/uav_service_auxiliary/b03_endpoint_replay_912347_a01/summary.json),
+[manifest](../../../../runs/uav_service_auxiliary/b03_endpoint_replay_912347_a01/launch-manifest.json),
+[exit](../../../../runs/uav_service_auxiliary/b03_endpoint_replay_912347_a01/process-exit.json).
+
+**Whole-batch interpretation and decision.** All six fixed training cells and
+both fixed common replays are now accepted. Primary final-world readings are:
+
+| Training block | D J | S J | G J | S−D | G−D | S−G |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| 912211 | −96.648955 | −72.063548 | +21.247479 | **+24.585407** | **+117.896434** | **−93.311027** |
+| 912347 | +12.170880 | −4.654721 | −12.775041 | **−16.825601** | **−24.945921** | **+8.120320** |
+
+The two training blocks are the replication units. The 32 common final worlds,
+development worlds, overlapping windows and shared S−G contrast add no training
+replications. No combined mean or formal population interval is used to obscure
+the sign reversals. Low absolute returns, large negative world tails and the
+recorded service/return-cost tradeoffs remain part of the reading; there is no
+validated deployment threshold from which to declare acceptable absolute use.
+The older four-fit B01/B02 development exposure and unequal tuning history of
+the new G comparator remain disclosed in the prospective comparison.
+
+- **Opportunity remains open.** S7's incomplete service and return constraints
+  still permit useful control improvement in principle. Historical B01/B02 and
+  B03 block1 positive observations remain valid bounded evidence. They do not
+  demonstrate that another unmodified batch is worthwhile.
+- **Representation and learning readings are narrower.** Auxiliary gradients
+  reached the declared base/GRU and both readouts learned finite, varying outputs;
+  complete feature collapse is not the explanation in saved facts. Lower factual
+  error was neither necessary for the observed historical gain nor sufficient
+  to secure the new final gain. A service-semantic mediator, a universal target
+  ranking and a generic representation-information claim remain unidentified.
+- **Net-use retention is weakened for both current packages.** S−D benefit does
+  not recur, and G−D benefit also reverses. G's service increase recurs, but its
+  first-block constraint-cost improvement does not; minimum battery is worse
+  in both. S−G is itself sign-unstable. No arm is promoted to a stable winner,
+  and no small mean difference is called equivalence or population harm.
+
+The complete Pro answer and its adopted prospective branches already cover
+conflicting blocks, proxy-only improvement and loss of final benefit. I therefore
+**close the current B03 recipe and choose no further investment in an unchanged
+S/G package**. No third block, coefficient/head/target sweep, longer horizon,
+early-checkpoint rescue, additional panel or confirmation batch is selected.
+The authorized comparison resolved why the earlier positive package reading
+should not be promoted, but did not identify a new actionable repair worth an
+additional batch. A future reopening would require a genuinely new recorded
+reason and prospective discrimination; a new candidate is not owed. This closes
+the recipe, not the broader scientific possibility or the owner's direction
+assignment. Keep the direction/lead routing unchanged, with no selected next batch.
+
+Consumed the exact replay READY event and rearmed at **generation 47**. All
+accepted operations are terminal and read; no remaining observation, worker,
+pending Pro answer, duplicate Send or App message is required. Publish the own
+standing, directly affected shared understanding and the completed plan to main,
+retiring the superseded in-flight index text in the same publication. Retain the
+shared source worktree and all accepted artifacts; only the temporary publication
+checkout is eligible for normal cleanup after publication and dependency checks.
