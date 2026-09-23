@@ -11755,3 +11755,62 @@ were rechecked unchanged. H1/H2 already reside outside that author root and reta
 original bound paths. No source behavior, checkpoint, world, threshold, exposure or output
 identifier changes. This is a diagnosed pre-admission correction, not a repeated accepted
 worker or a scientific negative. The failed source snapshot is retained, not force-removed.
+
+
+### B13 second pre-admission refusal: published source object recovery
+
+The corrected external-input submission `agent-count-ordinary-control-b13-staged-inputs`
+used source `4f0718a2d7ec24b59a4f89facd9efedd622431ca` and stopped before admission after9s
+at2026-09-23 20:12:38UTC. Native `git worktree add` could not lazily fetch the published
+NOTES blob: GnuTLS receive error, early EOF/index-pack failure. Reconciliation again found
+no matching B13 claim, no output directory and a terminal supervisor, with zero experiment
+steps. The original log and failed source preparation are preserved.
+
+The missing Git object `814e9c9bdd629eb8f7b7317c2f310a68b063f82b` is exactly the845,674-byte
+NOTES blob of the published4f0718a2d source; the sole tree change since the already prepared
+ba0a313707 snapshot was this notebook. DM copied the existing local blob through native
+`git hash-object -w --stdin`, obtaining the identical object ID. No ref, index, source text,
+scientific argv or checkpoint changed. After this specific availability repair, the DM
+selects one further admission submission with the same4f0718a2d source, staged inputs and
+output tag. Two pre-admission failures are technical costs, not started fits or evidence
+against the scientific prediction; no accepted worker has been restarted.
+
+
+### B13 admitted attempt failed before exposure; L0 for sparse evidence loading
+
+The first admitted B13 operation is
+`/home/wu/projects/HMASD/.git/hmasd-admission/8a0991b1653e0d7ae1dbc738e9103aaed4750aa745303e9bb6b68c2e2ef0efbf.json`,
+source4f0718a2d, accepted2026-09-23 20:15:01UTC on wsl_4070. Fresh physical/effective available
+memory11,711,082,496 bytes exceeded the4GiB floor. Runner419418 exited1 at20:15:03UTC;
+native runner and supervisor are absent with consistent identities and valid exit witness.
+All9 files (17,992 bytes) were collected and matched byte sizes/SHA-256, and the complete
+config, summary, admission/manifest/status, witness and error were read. Command wall1.598061s,
+peak scientific-process RSS420,968KiB. Assets/panels are empty; every actual fit/training/
+evaluation/update/storage counter is0. This has no scientific outcome.
+
+The concrete error is FileNotFoundError for the first historical S1 summary inside the
+source snapshot. Git's linked worktree inherits the native sparse view, which omits the
+committed runs tree. Local complete-checkout fixtures did not cover this executable topology.
+The old claim, source, output tag and failure evidence remain immutable; there is no same-
+request retry. DM selects one explicitly recorded corrected-code attempt, not an automatic
+repeat or a new scientific candidate. The four frozen policies, worlds, prediction, fixed
+reproduction rules and total128k intended evaluation remain unchanged, with0 additional fits.
+
+Bounded L0 amendment: the existing B13 Implementer owns only its candidate runner/CLI/tests.
+Read committed source evidence directly from HEAD Git blobs even when sparse checkout omits
+physical files; when a physical file exists, require exact equality to the committed bytes.
+Continue verifying the fixed SHA-256 for every summary/panel/trace. Decode NPZ from verified
+bytes with allow_pickle=False, and re-read authoritative committed inputs for before/after
+identity instead of requiring absent working paths. Record the Git locator and optional
+working presence truthfully. External checkpoint hash/strict restore rules are unchanged.
+Keep the scientific object ID; bind corrected execution to `s1_ordinary_control_b13_a02`
+in both candidate and CLI, preserving the failed original tag. This changes executable input
+handling and source SHA; changing only a tag would not justify or permit repetition.
+
+Add a focused actual Git/sparse fixture that lacks working summary/trace files yet reads the
+committed bytes, rejects working-file disagreement and incorrect hashes, and exercises NPZ
+loading and input rechecking. Reuse the other20 checks; no result panels, new worlds, Pro
+question or shared launcher edits. Independent Reviewer rechecks the changed loader/identity
+path. DM will prepare the exact committed data objects on the native node, then admit this
+corrected code once after publication and fresh resources; if technical validation fails,
+retain the failure and reconsider rather than adjust numerical tolerance or delete a claim.
