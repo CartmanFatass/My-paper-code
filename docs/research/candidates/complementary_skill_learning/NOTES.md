@@ -445,3 +445,184 @@ task, PID 2031404, with a 1500-second checkpoint window. Its private request is
 The next wake is to drain the existing controller, reconcile delivery and read the whole
 answer, or rearm the same handle on a checkpoint. Never resend on a wait/read failure.
 The provisional three-fit comparison is not frozen or launched; started fits remain **0**.
+
+
+## 2026-09-23 — Complete advice reconciled and B01 selected
+
+The deterministic observer collected a 981-character chat summary naming final commit
+`182bf7fdd0eabb83e3f684a68efc76fc0b17d7c3`; that summary was not accepted as the answer.
+`deliver` returned CONFLICT because Pro first filled the answer in
+`8e8828b3d3b168ea794adde454aaebca1fee3b52` and then revised that same subsection in
+`182bf7fdd0eabb83e3f684a68efc76fc0b17d7c3`. Both commits touch only this notebook, with the
+question and all outside bytes unchanged. The DM independently compared the final file
+against `2554b71a7`, verified the unchanged prefix/suffix and inspected the full revision:
+terminology becomes skill bank, a false implication that snapshot engineering was already
+done is corrected, and conditional-mean additivity is distinguished from a single noisy
+four-cell observation. No competing writer or outside edit is present. Preserve both Git
+versions and accept Pro's explicitly named final version, **16,978 characters**, after reading
+it in full. The recovered answer text hash (UTF-8 plus final newline) is
+`0881ce195636a172841d105721d9c34fba5317bea39af54b1aec23030350fb15`.
+No Send was repeated. The completed wait event is consumed on the existing controller.
+
+**Response to MATERIAL_DISSENT=yes.** Adopt the real ten-step target, common full-input G,
+common selector and signed four-cell diagnostic. Reject the original 50-step continuation
+for this first comparison: it assigns a mixture of current commitment and subsequent
+coordinator choices to the same label. Ten steps deliberately omits delayed consequences;
+the full 500-step endpoint retains long-horizon service. Generic optimization and useful
+combinations are not mutually exclusive explanations. A common-selector benefit removes
+the need for that arm's learned coordinator at deployment, but not co-adaptation during
+training or generic navigation improvement. T measures the frozen bank plus its readout on
+its own visited histories; no cross-bank label or hidden-state interchangeability is claimed.
+
+At this decision, published main `91639eea4197193d54aa37247830293413a518a4` was refreshed.
+New load B01 and count B09 background reinforce that real local effects and package gains
+need not share a sign or identify a skill mechanism. They do not change N6/k10 or become
+matched controls here. FSD and duration adverse evidence remains scoped as recorded above.
+The scientific task is worth one complete, small learning comparison with an actual signed
+combination observation; no additional block, sweep, longer horizon or confirmation is selected.
+
+### B01 prospective comparison
+
+**Arms and inference unit.** Run D, G, P in that fixed order, one cold initialized fit each;
+no pretrained checkpoint. Each fit has 16 lanes x 500 transitions x 45 complete rollouts,
+N6, 50 users, k10, six team and six individual labels, native S1. All native high/low
+actor/critic and both discriminator groups train. One shared initialization/exogenous block,
+not three independent training replications. Planned cost **3 fits / 1,080,000 training
+team transitions**. Prefer wsl_4070, CUDA float32 and four Torch/OMP/MKL/OpenBLAS threads,
+one result fit at a time. Exact source and node admission follow acceptance of implementation.
+Started fits remain 0. Actual wall/CPU/RSS, evaluation, support costs and occupied-node limits
+will be reported, not inferred from the historical 72.34-minute fit.
+
+Seed addresses, fixed before code/results: native initialization **260923901**, auxiliary
+head initialization **260923902**, training policy/update global RNG **260923903**, private
+auxiliary minibatch shuffle **260923904**; training worlds **1600000..1600015**. All arms use
+the same addresses. Final/initial comparisons are paired only by the declared common
+exogenous design. Evaluation world seeds: initial own **1700000..1700031**, final own
+**1700100..1700131**, final uniform **1700200..1700231**, diagnostic **1700300..1700315**.
+Separate evaluation label/prefix/action RNG streams are keyed from **260923905** and panel/
+world/rectangle identifiers, and never alter training Python/NumPy/Torch CPU/CUDA streams.
+Head initialization and shuffle must not consume native model/action/update RNG streams.
+No seed replacement or fit extension after scores. The first collected rollout's native
+reward/skill/raw-action digest and frozen target statistics must agree across arms; a mismatch
+is a technical discrepancy to resolve before interpreting the dependent contrast.
+
+**Matching and objective.** Preserve native PPO/discriminator losses and low Gaussian entropy,
+normalizers, terminal/reset and recurrent semantics. Common environment execution clips each
+raw Gaussian action to [-1,1], without modifying the raw sample/log-probability stored for PPO.
+All individual AR factors use mu=.9*pi+.1/6 on the full six-label support; the team factor is
+ordinary AR. Apply this law inside the actual decoder distribution so D2 sampling and ordered
+teacher-forced replay share it, including forced-position zero scores. As an explicit common
+implementation choice, the individual high-level entropy regularizer is **H(mu)** with the
+original coefficient; team entropy remains H(pi_Z). This differs from the question's initial
+wish to retain H(pi_i), is one of Pro's explicitly permitted common conditions, and avoids an
+extra entropy-only replay. It does not change low-level entropy. The new D is the concurrent
+ordinary mixed-exposure baseline under these conditions, not the historical FSD D.
+
+**Auxiliary.** At every actual k10 boundary, collect one group of six agents with their
+pre-action state/observations, executed skills, time and entering actor hidden states/masks.
+Use the raw environment scalar r received by the native collector, before intrinsic mixing:
+Y10=sum(l=0..9) .99^l*r[t+l]. Include the terminal transition, never a reset observation or
+reward, no bootstrap or invented counterfactual. Input/target data are training-only.
+Observation/state normalization remains the native config (both disabled here); any future
+change is outside this batch. Actor e is base -> individual FiLM -> GRU under current
+auxiliary-update weights, with detached collected entering hidden state and no Gaussian
+output-head gradient. Train-only x is state, all observations, all entering hidden states,
+time/500 and actual team one-hot; never an actor/coordinator execution input.
+
+Both P and G heads exist in all arms. P has a shared contextual baseline, identity-aware
+unary terms, and rank-32 bilinear pair terms averaged across 6/15 terms; G is a two-hidden-
+layer full-input MLP of prospectively parameter-matched width and may represent interactions.
+Both see the same ordered information. Shared context normalization and concrete widths/counts
+will be recorded from the accepted implementation, without performance-based tuning.
+D detaches both heads; G/P connect only the named head to base/FiLM/GRU. Heads minimize their
+unweighted normalized MSE; scale only the active trunk gradient by .05. Head and auxiliary
+trunk Adam optimizers use lr=.0003, eps=1e-5, weight_decay=0, gradient-norm cap .5. The auxiliary
+trunk optimizer is separate from native PPO Adam and exists/steps only for G/P. D has no
+empty actor step. Native update runs first, auxiliary second, then rollout clear; all arms
+have identical ordering. Freeze target mean and population std from the first training
+rollout, with scale floor 1e-6, and retain raw-unit predictions/losses. Identical first-rollout
+facts give the common calibration; their digest is checked, not hand-matched after a difference.
+
+Each fit: 36,000 ten-step windows, 800 per rollout; one shuffled pass, batch128 and final32,
+315 optimizer steps per head, D/G/P two-head total 1,890. G/P auxiliary trunk steps each315;
+D zero. Log sampled rows, old/replayed mu, occupancy, raw/executed saturation, both losses,
+output variance, gradient norms/clipping, base/FiLM/GRU movement and full native counts.
+No additive diagnostic head, forbidden joint combinations, target/rank sweep or planner.
+
+**Evaluation, fixed before results.** Initial own-team and final45 own-team each32x500, plus
+final45 uniform32x500 per fit. Mean low actions with the common clip; own-team deterministic
+AR, uniform team/individual labels each k10 from fixed independent streams. Heads do not
+enter execution; no optimizer or normalizer updates. Primary contrast P−G final45 own-team
+native J=6*mean(sum r)/500; retain P−D and G−D, absolute J, coverage/connected users, quality,
+height penalty and every world's differences. Initial and final worlds differ; no paired
+within-world initial-to-final claim or best-checkpoint selection. Save initial/final weights,
+normalizers, auxiliary heads/calibration, exact config and training curves.
+
+**Actual combination diagnostic included now.** Each final bank uses 16 diagnostic worlds,
+200 primitive prefix steps under the uniform selector and mean low actions. Snapshot before
+step200. Four rectangles use member pairs (0,1),(2,3),(4,5),(1,4); rectangle r fixes team label r,
+base other-member labels (r+i)%6, and the selected members' alternatives (r,r+1) and (r+2,r+3)
+mod6 respectively. This is a fixed arbitrary table, not representative joint-support coverage.
+At each snapshot predict all four cells before executing any, using common G as primary
+readout and P as secondary. Freeze s=+1 if predicted Delta_G>=0 else −1; retain the tie count.
+Execute each cell ten steps with the original stochastic Gaussian actors and common clipped
+actions, same complete environment/hidden state and matched innovations across all four cells;
+keep other four skills fixed but their closed-loop actions responsive. No reselect within10.
+The reset/restore and branch-order checks must pass on native environments before acceptance.
+
+Read all four real returns and components, predicted matched-diagonal value, independent
+four-cell mean, Delta and **T=s*Delta/4**, failures included. Report raw collector-unit discounted
+T and its x6 team counterpart distinctly from 500-step J; do not optimize s from observed Delta.
+Aggregate four rectangles within world first. Record preference reversals descriptively. A
+single noisy T>0 does not reject conditional additivity. Prefix states and readouts differ
+between banks; cross-arm T differences do not identify a bank-only causal effect. No initial
+four-cell panel, so newly created versus initially existing nonadditivity is not identified.
+Diagnostic cost per fit16*(200+4*4*10)=5,760; full evaluation **161,280** transitions across
+three fits, total training+evaluation **1,241,280**. No extra rollout/search used for selection.
+
+**Reading and stop branches.** Native package benefit is read alongside all adverse worlds,
+service tradeoffs and actual cost. If G helps and P adds no useful observation, retain the
+ordinary explanation rather than invent a requirement that P win. Own-only gains retain
+co-adaptation/visitation alternatives; uniform gains alone retain generic control explanations.
+Useful signed T with useful whole-episode service supports a local actionable pairing in that
+bank/readout/prefix range, not mediation of P−G, P-exclusive complementarity or skill-class
+superiority. Local T without net use, or only MSE/MI/|Delta| improvement, does not justify
+continuing this recipe. A negative or noisy single block is not equivalence or universal
+failure. After the fixed three fits choose the next useful observation or end this bounded
+recipe under the complete advice; no automatic second block or confirmation.
+
+### L0 — B01 learning adapter, native runner and signed combination evaluator
+
+Deliverable: executable D/G/P comparison with the above cost, exact native telemetry and
+zero-update evaluators. Own paths: `experiments/candidates/complementary_skill_learning/b01/`,
+`scripts/run_complementary_skill_learning_b01.py`, matching tests under
+`tests/experiments/candidates/complementary_skill_learning/b01/`, this notebook and owned
+RESEARCH content. Prefer candidate-local adapters; no core import of candidate code.
+
+One bounded Implementer owns `learning.py` and `test_learning.py`: install matching AR
+mixture sampling/replay inside this learner, capture factual native boundary windows,
+implement the two heads/gradient gates/optimizers and expose predictions/checkpoint state.
+Return diff and checks, no scientific choice, launch, Pro, notebook/index write or child.
+The DM owns `runner.py`, the script entry, evaluator and runner/evaluator tests. File/index
+ownership is separate; nobody reverts another writer. Independent Reviewer will inspect the
+integrated high-risk semantics before admission.
+
+Integration interface to preserve: `ComplementaryAgent(config, arm, head_seed, aux_seed,
+log_dir, device)` extends HMASDAgent; native `step/store_transition_batch/update/clear_buffers`
+remain usable, auxiliary update occurs at the end of `update`, and `auxiliary_history`
+contains one structured row per rollout. A `predict_returns(states, observations, entering_hidden,
+entry_masks, steps, team_skills, agent_skills)` no-update method returns G/P raw-unit outputs.
+Expose `auxiliary_state_dict()` / `load_auxiliary_state_dict()` for heads, calibration,
+optimizer/shuffle state; runner separately saves/restores native groups. Expose parameter
+counts and actual G width. Shapes are batched (B,N,obs/H), steps(B), skills(B,N), state(B,S);
+no executing actor input beyond native local observation/skill/hidden is added.
+
+Checks: real collector -> storage -> sampler -> update, ten-step labels including terminal,
+entering masks/hidden identity, sampled/forced mu likelihood replay, D auxiliary no movement,
+G/P gradient destinations, same initial native model/first rollout, action clipping/raw PPO,
+train/eval RNG isolation including CUDA, endpoint counts and native score/component identity,
+complete snapshot restoration/common innovations and signed T independent arithmetic examples.
+Use pytest-owned scratch under temp. Runtime smoke uses small declared technical horizons,
+never reported as research fits; production entry has require_admission before effects and no
+bypass. Numerical/recurrent/probability or failed instrumentation defects stop only the dependent
+launch/read; repair and record actual technical attempts, never relabel them as scientific negatives.
