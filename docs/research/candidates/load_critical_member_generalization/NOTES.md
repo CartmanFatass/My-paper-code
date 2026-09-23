@@ -668,3 +668,65 @@ full panel on a suitable configured node. Do not substitute the completed raw ch
 intermediate endpoint, a duplicate training producer or an extra capacity-training batch.
 There is no accepted result handle or open Pro question for this direction to observe now.
 No App message, new monitoring loop or new fit is created to bridge the external asset wait.
+
+
+## 2026-09-23 — Owner-assigned direct DM continuation and original B03 asset binding
+
+Owner requested this session to advance one direction and create one Astra/max independent
+DM after reclaiming abandoned worktrees. This session directly adopts the existing
+`load_critical_member_generalization` responsibility: task
+`01a0cd93-9107-7701-a7e5-84fb071ea8f7`, host `local`, authoring checkout
+`/home/fires/.codex/worktrees/load-capacity-sept23/hmasd-wsl`, branch
+`codex/load-capacity-sept23`. The former task is archived, not running, and its authoring
+checkout no longer exists. Native task history and the complete published notebook agree:
+its Pro answer was fully collected/adopted, evaluator accepted, and no load-evaluation
+operation was admitted. There is no accepted load worker or uncertain Send to restart.
+Original identities and earlier entries remain historical evidence. Claude FSD/G33 remain
+paused/frozen; the original count DM retains its work and checkout.
+
+Read the complete existing question, Pro answer, adoption and evaluator acceptance. The
+same five cells, world streams, 500-step horizon, 16 worlds, two fixed policies, native
+component interpretation and **0 fits / 80,000 evaluation team steps / 160 episodes** remain
+selected. This is the original fixed-policy service-conversion question, not an online
+capacity-adaptation, pure-N, skill-mechanism or new-training claim. The prior complete Pro
+advice still covers this unchanged choice; no repeat consultation or optional training is
+selected. Same-N capacity trajectories must agree; height cancels in the interaction, and
+coverage/quality composition may give either relative sign.
+
+Current published main at continuation is d2daabdf1689209c87d856a2f97b50115ba57f1c. Relevant shared topics 3 and 6 now
+include the original producer's complete B03 reading and the later entropy/initial-policy
+counterevidence. B03's common clip-trained endpoint H6-minus-SET J is
++.064857891 / +.095823637 / +.161067197 for N4/6/8, unseen mean +.112962544.
+That bounded single-block package advantage does not certify a sufficiently tuned ordinary
+baseline or a skill mechanism. Later B04/B05 opposite entropy responses and B08's initial
+policy rival constrain attribution but do not change the original B03 checkpoint contract.
+We deliberately retain that preselected pair, rather than replace it after seeing B07/B08.
+The next useful observation remains the complete capacity response and its eligibility,
+local truncation and quality decomposition, including adverse/flat results.
+
+The producer has now published both exact completed clip summaries, each with 360k stored
+training steps, 45 updates and 96k evaluation steps. Required checkpoint45 identities are:
+
+- H6 `s1_action_law_b03_h6_clip_s942201`: 23,073,626 bytes,
+  `98d908e4c9d1c33e59707b7da288b0c019f293eced1a99a461f020d1ae069343`.
+- SET `s1_action_law_b03_set_clip_s943201`: 20,968,771 bytes,
+  `03f4f070e30b34fb61cd45820f1579ebde185c9417468689bd0c2e7ef60c0a3b`.
+
+These are declared identities, not yet a statement that this task verified the binary bytes.
+They come from producer source `89486d32ea569728f39d6e21b53f8a7c8854e74c` and remain
+recoverable on the configured wsl_4070 node. Bind the original published summary bytes to
+committed evaluator inputs and verify those two binaries before original-panel admission.
+
+### L0 — Restore accepted evaluator and bind published original assets
+
+Own only the direction evaluator/entry/tests, the seven byte-identical producer inference
+dependencies named in the prior L0, and the two source-summary input paths. Restore accepted
+code from `7524026cebe8d9af7461f670db3edb3098e979c2` / its published direction branch;
+no learner, environment, metric, sampling, horizon or policy change is selected. The shared
+`hmasd`, `envs`, `configs`, launch and admission paths are byte-unchanged between that accepted
+revision and current main. Reuse the existing independent review and 23 technical checks;
+verify restored bytes and production binary/config bindings. Any real executable defect
+requires a separate documented repair and independent review before use. Stage/publish exact
+inputs, then use the original five-cell entry with native admission on wsl_4070 and arm the
+current session's deterministic observer. Do not duplicate training or consume another DM's
+operation. No result exists at this entry.
