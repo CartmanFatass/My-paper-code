@@ -2793,3 +2793,506 @@ existing operation reference and returns to this task for full collection or rea
 Do not restart either fit, reuse D as a new run, or infer G's advantage from D's own learning.
 The primary question remains final uniform G-minus-D, with both actual learning increments,
 own deployment consequences and adverse components/worlds retained.
+
+
+## 2026-09-23 — B03 complete; generic auxiliary advantage reverses under fixed uniform evaluation
+
+**Decision and prior prediction.** Both fixed new fits are now completely collected, checked
+and read. The predicted positive final-uniform G-minus-D does not recur: **J −.010459129257,
+users −.1334375/step**, with11 positive and21 negative J worlds. Both banks genuinely improve
+from their actual shared initialization under both deployment rules. This weakens the extra
+value of the unchanged generic auxiliary package, not the existence of native skill-conditioned
+learning. I end further investment in this unchanged G recipe under the already-read third
+Pro Answer sections5–7 and the [fixed prospective branches](#2026-09-23--pro-advice-adopted-b03-fixes-one-gd-learning-recurrence-block).
+No third block, coefficient/rank/target/entropy rescue or confirmation is appended. This is a
+bounded investment decision, not equivalence, universal auxiliary failure or an explanation
+of the old P failure. The broader useful-skill question continues through the reconsideration below.
+
+**Original evidence and acceptance.** The original [G summary](../../../../runs/complementary_skill_learning/b03_g_260923921_8859fc379/summary.json),
+[all45 training rows](../../../../runs/complementary_skill_learning/b03_g_260923921_8859fc379/training.jsonl),
+[all factual targets/predictions](../../../../runs/complementary_skill_learning/b03_g_260923921_8859fc379/auxiliary_predictions.jsonl),
+[manifest](../../../../runs/complementary_skill_learning/b03_g_260923921_8859fc379/launch-manifest.json)
+and [native exit](../../../../runs/complementary_skill_learning/b03_g_260923921_8859fc379/process-exit.json)
+are retained alongside the already accepted [D evidence](../../../../runs/complementary_skill_learning/b03_d_260923921_8859fc379/summary.json).
+G exited normally at2026-09-23T21:47:45.061278Z; recorded native identities and durable exit
+witness agree. All12 G files,63,166,685 bytes, were collected and SHA256-matched against the
+original remote inventory, including both actual .pt files. stdout/stderr are empty. The
+full source remains `8859fc37944dc97ce916a1200dcbd5e78fe8e5b5`; no rerun or source modification
+was needed. Checkpoints remain outside Git in the same local/remote run directories:
+`/home/fires/.codex/worktrees/5916/hmasd-wsl/runs/complementary_skill_learning/b03_g_260923921_8859fc379/`
+and `/home/wu/hmasd-worktrees/complementary-skill-b03-20260923/runs/complementary_skill_learning/b03_g_260923921_8859fc379/` on `hmasd-wsl-node`.
+
+G initial/final checkpoint SHA256:
+`cecfd28bcebf908f94e54366cfd3ef8f0c58664410f82aa3051c720b407d36cc` /
+`b50aea13a4752bf9a6c1e2fd9af1f9beadf8cda272a99ed62cfe25f64ce29883`.
+Summary/training/predictions SHA256 respectively:
+`0991d27090fdb53d9baf7214b95b99e44935a518bfca4fac382f5243b350737b`,
+`58101d49580f4aefe512c441f7bead6576086f0532352de1dfc26a21e4cc22eb`,
+`813b9a2e912b9adcd1dfe747bababfc650e300d47181da38782277a99d522abf`.
+
+One G construction/fit actually executed360000 team training/stored transitions,720 episodes,
+45 native updates,64000 evaluation transitions and128 episodes. All22500 storage calls/
+360000 rows passed native component/write checks with0 failures. Native updates were675
+coordinator,101250 low actor,101250 low critic,675 team and2700 individual discriminator.
+Both heads made315 optimizer steps; G made315 additional trunk steps. Each actual final
+trunk Adam parameter state has step315 and finite moments; base/FiLM/GRU auxiliary movement
+is positive in every update, versus exactly0 for D. Final G displacement from initialization
+is coordinator.047705619, actor1.155204526, critic.470142799, team-disc.074459184 and
+individual-disc.156772855. These are actual updates, not hidden-state evolution.
+
+The offline audit read all45 original rows, histories and prediction batches, checked each
+line/target digest, independently reconstructed all90 raw head MSEs (maximum discrepancy0),
+checked output variances and every recorded native replay. Maximum sampled log-mu replay
+error is6.556510925292969e-6; forced-factor count and forced log-probability are0. The native
+team law is retained; the individual autoregressive factors use the frozen .9pi+.1/6 mixture.
+All saved numeric evidence is finite. The actual checkpoint tensors independently reproduce
+native and frozen digests; all four native modules and both heads moved from initialization.
+No environment, learner update, new policy evaluation or additional fit was run for this audit.
+
+**Actual pairing, not seed names alone.** D/G initial native tensors, both actual heads,
+head optimizer states, normalizer state, auxiliary shuffle state, calibration and architecture
+are equal. Both complete initial evaluation panels are equal. The actual initial native,
+frozen and RNG digests and first-rollout facts match; first native rewards/returns, losses
+before auxiliary intervention and first factual target/calibration/boundary match exactly.
+The two checkpoint files differ in arm/optimizer metadata, which is not a weight mismatch.
+Both initializations differ in every native module and both heads from old B01's actual tensors.
+The first target SHA is `b6e70cac8db4997e087d4784862be4f57669220ede958836de06d099d1e53539`;
+calibration is mean.3632831615157734, population std.14238495861971273. After the first G
+auxiliary update, visited states, subsequent targets and joint learning are post-treatment.
+They are not required to match and cannot identify a fixed-data gradient mediation effect.
+
+All eight panels use the same physical initial-state digest
+`b36474bb458d4c72efb2feed5b6653583cf0cbaf02fa264e097111209827d6d1`, the fixed32 worlds
+1700200–1700231 and500 steps. All initial/final uniform streams reproduce the old B01
+PCG64 digest `a45d59f80fca20321df3803745068bb841f30e6c25b6b8c01dd7d0d250a67190`,
+seed262624105 and50 renewals. Low actions are mean/clipped; each evaluation has0 optimizer
+and0 normalizer updates with frozen weight guards. Independently recomputed every J as
+6U/500 and .7coverage+.3quality−height, and users as50coverage. Fixed evaluation removes a
+changed external world/label-stream explanation for the old/new uniform sign difference;
+it does not separate initialization, training worlds, endogenous sampling or numerical variation.
+
+### All fixed panel means and actual learning
+
+Height is the native S1 altitude proxy penalty; it is not measured energy consumption.
+Shared initial rows below are actual D/G matches, not averaged independent runs.
+
+| Bank / stage / rule | J | Users/step | Coverage | Quality | Height penalty |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| shared initial own | 0.195395299057 | 15.8860000 | 0.3177200000 | 0.083910796984 | 0.052181940038 |
+| shared initial uniform | 0.269843858723 | 18.1865625 | 0.3637312500 | 0.105435821730 | 0.016398762796 |
+| D final own | 0.444062367241 | 29.2348125 | 0.5846962500 | 0.174466007214 | 0.017564809924 |
+| D final uniform | 0.455409736727 | 31.2400625 | 0.6248012500 | 0.164170821870 | 0.031202384834 |
+| G final own | 0.442005981042 | 29.7969375 | 0.5959387500 | 0.175884264708 | 0.027916423370 |
+| G final uniform | 0.444950607470 | 31.1066250 | 0.6221325000 | 0.150274542539 | 0.035624505291 |
+
+Both arms have positive J and users learning in32/32 worlds under each rule. D own/uniform
+mean J gain is+.248667068183/+.185565878005, G+.246610681985/+.175106748748.
+G users gain is+13.9109375/+12.9200625 per step. This satisfies the actual-learning prediction,
+while the incremental G prediction fails. G own quality falls in1700203 and its height penalty
+rises in1700204; uniform quality falls in1700203 and1700221, and height rises in32/32 worlds.
+D's adverse uniform height31/32 and quality worlds remain in its full prior reading. Larger
+coverage can accompany poorer quality or altitude cost; positive J does not erase these costs.
+G's learning curves are nonmonotone: train meanJ .227963466 atupdate1, .325179429 at7,
+.228804602 at10, .428098497 at42 and .413074109 at45. All45 rows remain; no best checkpoint
+was selected. G-head raw MSE in G drops .019230708→.006478118, but endpoint exceeds D's
+.005378359; P endpoint .005586682 versus D .004556599. Different later data prevent a matched
+prediction-accuracy comparison or assigning the service difference to prediction quality.
+
+### Complete paired final reading
+
+| Rule / metric | Mean G−D | Positive / negative worlds | Minimum (world) | Maximum (world) |
+| --- | ---: | ---: | --- | --- |
+| uniform J | -0.010459129257 | 11 / 21 | -0.0891904300 (1700217) | +0.0676580888 (1700228) |
+| uniform coverage | -0.002668750000 | 14 / 18 | -0.1216800000 (1700217) | +0.0992000000 (1700228) |
+| uniform quality | -0.013896279331 | 4 / 28 | -0.0625889558 (1700203) | +0.0081124940 (1700212) |
+| uniform height | +0.004422120457 | 26 / 6 | -0.0077906456 (1700210) | +0.0122566257 (1700221) |
+| uniform users | -0.133437500000 | 14 / 18 | -6.0840000000 (1700217) | +4.9600000000 (1700228) |
+| own J | -0.002056386198 | 18 / 14 | -0.1414587735 (1700223) | +0.1558032076 (1700212) |
+| own coverage | +0.011242500000 | 19 / 13 | -0.1513200000 (1700223) | +0.2285600000 (1700212) |
+| own quality | +0.001418257495 | 17 / 15 | -0.0255344385 (1700204) | +0.0287709141 (1700217) |
+| own height | +0.010351613447 | 26 / 6 | -0.0248962071 (1700211) | +0.0425080822 (1700223) |
+| own users | +0.562125000000 | 19 / 13 | -7.5660000000 (1700223) | +11.4280000000 (1700212) |
+
+For the primary uniform result, all three mean contributions are adverse:
+.7Δcoverage=−.001868125, .3Δquality=−.004168883799 and −Δheight=−.004422120457.
+Quality falls in28/32 worlds and height penalty rises in26/32. The mean loss is not explained
+only by a height penalty that can be subtracted to assert recoverable service. The worst
+paired J/users world1700217 loses.089190430 J and6.084 users/step; the beneficial world1700228
+gains.067658089 J and4.96 users/step. G's minimum absolute uniform users26.956 is nevertheless
+higher than D's24.99, on different worlds; absolute lower tails and paired losses are distinct.
+
+Own has mixed consequences: mean coverage/users and quality rise, but the higher altitude
+penalty outweighs them, leaving J−.002056386198. World1700223 loses.141458774 J and7.566 users;
+world1700212 gains.155803208 J and11.428 users. G's worst absolute own users21.418 is below
+D's22.206. Eighteen favorable own J worlds do not change the primary uniform sign or establish
+equivalence from the small own mean. This own bank uses different worlds from B01's original
+own panel, so the new negative own mean is not a strict replication of that old panel.
+
+Within final bank, own−uniform is D J−.011347369487/users−2.00525 (11 positive/21 negative J
+worlds) and G J−.002944626428/users−1.3096875 (17/15). Both own rules have better mean quality
+and lower height penalty, but lower coverage. These are deployment-rule effects conditional
+on banks trained with a learned high-level law, not evidence that that training law is useless.
+All32 per-world values for every final comparison are retained below and in the original panels.
+
+### Belief update, inherited evidence and cost
+
+The native mixed, skill-conditioned learner's capacity to improve actual service is strengthened
+in this new block. The unchanged G package's extra service value is weakened: old uniform
+G−D +.019697695057 becomes−.010459129257 under the same old worlds and label stream. I retain
+both signs without pooling them into a default ranking. Two exploratory training blocks,
+one selected from B01, do not establish stable harm, equivalence or learned complementarity.
+Neither32 worlds nor initial/final/selector panels increase training n. P's local positiveT
+without complete usefulness, B02's negative deletion result and actual task-only learning all
+remain. No observed failure identifies a unique representation/MI/high-level cause.
+
+I refreshed published main `f32cd55dc95e11b84b3661ddf00d5d2456a59159` and used shared topic3's
+separation of bank usefulness, partner effects and learned selection, topic4's distinction
+between finite learning and representation, and B10's deployment/training distinction.
+DM1 B12's fixed-world reversal makes our retained sign reversal a useful parallel warning;
+its B13/B14 whole H6-versus-ordinary package comparison is not our matched G/D evidence and
+should not be duplicated. S7's recurring auxiliary/risk tradeoffs reinforce retaining native
+components without treating either result as a control for S1. The useful shared update is a
+conditional training-recurrence counterexample, not a general declaration against surrogates.
+
+G used55.189212162 runner-body min (3311.352729722s), user/system CPU2994.402571/316.228262s,
+peak process RSS1,895,876KiB, peak CUDA allocated1,531,044,864/reserved2,113,929,216 bytes.
+D+G cost **2 fits,720000 train,128000 eval,848000 team transitions and108.606496123 summed
+runner-body min**. First D admission to final G exit spans120.355439min, including collection,
+reading and serial admission gaps; neither time is exclusive GPU occupancy. Preparation,
+checks, review, transport, collection and offline reading are additional work, not measured
+algorithm speed. B01–B03 together are7 started full fits,2.52M train and417280 recorded eval
+team transitions; summed runner bodies363.745819min, with different diagnostic work retained.
+
+After all original files/checkpoints were byte-verified and read, native snapshot GC preview
+and apply reclaimed only G's disposable source snapshot `e733c0a71fea43eaab89ce32730f6273`.
+D's snapshot was already reclaimed. Both output roots/checkpoints, claims, manifests, source
+commits and exit witnesses remain. The G READY event was consumed with generation31/wake
+`1c3ff7b8-c3fb-4795-85ab-6a6a1a4e82e5`/event`0b09ac06c81737692b31e370`; generation32 has
+no remaining experiment or old Pro producer. Nothing was restarted or resent.
+
+### Every G initial-to-final change
+
+| Rule / world | ΔJ | Δcoverage | Δquality | Δheight | Δusers/step |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| own 1700200 | +0.5122176796 | +0.5755200000 | +0.1781002807 | -0.0559235954 | +28.7760000000 |
+| own 1700201 | +0.2760940742 | +0.2795600000 | +0.1190925040 | -0.0446743230 | +13.9780000000 |
+| own 1700202 | +0.2519147939 | +0.2828000000 | +0.1066560220 | -0.0219579873 | +14.1400000000 |
+| own 1700203 | +0.1062165276 | +0.1656400000 | -0.0330121522 | -0.0001721733 | +8.2820000000 |
+| own 1700204 | +0.0754931149 | +0.0813200000 | +0.0808937266 | +0.0056990031 | +4.0660000000 |
+| own 1700205 | +0.2405077936 | +0.2579600000 | +0.0928925280 | -0.0320680352 | +12.8980000000 |
+| own 1700206 | +0.2472113508 | +0.2996000000 | +0.0807439886 | -0.0132681542 | +14.9800000000 |
+| own 1700207 | +0.0969975913 | +0.0639600000 | +0.1041460073 | -0.0209817891 | +3.1980000000 |
+| own 1700208 | +0.2645205830 | +0.3439200000 | +0.0708700932 | -0.0025155551 | +17.1960000000 |
+| own 1700209 | +0.1658315751 | +0.1914800000 | +0.0939173901 | -0.0036203580 | +9.5740000000 |
+| own 1700210 | +0.1723975716 | +0.1612800000 | +0.0738087185 | -0.0373589560 | +8.0640000000 |
+| own 1700211 | +0.2993831409 | +0.3405200000 | +0.0884626793 | -0.0344803371 | +17.0260000000 |
+| own 1700212 | +0.3304199979 | +0.3936800000 | +0.1056457243 | -0.0231502806 | +19.6840000000 |
+| own 1700213 | +0.3188175849 | +0.3322400000 | +0.1377198837 | -0.0449336198 | +16.6120000000 |
+| own 1700214 | +0.1952754758 | +0.2404000000 | +0.0822772854 | -0.0023122901 | +12.0200000000 |
+| own 1700215 | +0.1986771286 | +0.2098800000 | +0.0782675722 | -0.0282808570 | +10.4940000000 |
+| own 1700216 | +0.3395866209 | +0.3979600000 | +0.0798961356 | -0.0370457802 | +19.8980000000 |
+| own 1700217 | +0.1921666946 | +0.1914800000 | +0.1359679725 | -0.0173403029 | +9.5740000000 |
+| own 1700218 | +0.3336848117 | +0.4120400000 | +0.0759683450 | -0.0224663082 | +20.6020000000 |
+| own 1700219 | +0.2181311916 | +0.2330000000 | +0.0979476627 | -0.0256468928 | +11.6500000000 |
+| own 1700220 | +0.4069090725 | +0.4706800000 | +0.1533392913 | -0.0314312851 | +23.5340000000 |
+| own 1700221 | +0.1756224158 | +0.2080400000 | +0.0194660369 | -0.0241546047 | +10.4020000000 |
+| own 1700222 | +0.1114166860 | +0.1177600000 | +0.0745394516 | -0.0066228505 | +5.8880000000 |
+| own 1700223 | +0.2336213625 | +0.2713200000 | +0.1283701498 | -0.0051863175 | +13.5660000000 |
+| own 1700224 | +0.3491269402 | +0.3778800000 | +0.0955606532 | -0.0559427443 | +18.8940000000 |
+| own 1700225 | +0.1492648369 | +0.1452000000 | +0.0990260787 | -0.0179170133 | +7.2600000000 |
+| own 1700226 | +0.2815158645 | +0.3328400000 | +0.0379614408 | -0.0371394322 | +16.6420000000 |
+| own 1700227 | +0.2881340239 | +0.3193600000 | +0.0934344665 | -0.0365516839 | +15.9680000000 |
+| own 1700228 | +0.2374552281 | +0.2816400000 | +0.0759617035 | -0.0175187170 | +14.0820000000 |
+| own 1700229 | +0.3465328428 | +0.4022000000 | +0.0862135030 | -0.0391287919 | +20.1100000000 |
+| own 1700230 | +0.2407202472 | +0.2502800000 | +0.1093915978 | -0.0327067679 | +12.5140000000 |
+| own 1700231 | +0.2356770007 | +0.2715600000 | +0.1196242266 | -0.0096977328 | +13.5780000000 |
+| uniform 1700200 | +0.4316242807 | +0.5682000000 | +0.1306651069 | +0.0053152514 | +28.4100000000 |
+| uniform 1700201 | +0.1339493358 | +0.1918400000 | +0.0422673006 | +0.0130188543 | +9.5920000000 |
+| uniform 1700202 | +0.1811407929 | +0.2640800000 | +0.0564463018 | +0.0206490976 | +13.2040000000 |
+| uniform 1700203 | +0.1268255546 | +0.2460800000 | -0.0723939905 | +0.0237122483 | +12.3040000000 |
+| uniform 1700204 | +0.1188802733 | +0.1882400000 | +0.0570240450 | +0.0299949402 | +9.4120000000 |
+| uniform 1700205 | +0.1648950342 | +0.2382800000 | +0.0405248306 | +0.0140584149 | +11.9140000000 |
+| uniform 1700206 | +0.1478654468 | +0.2298400000 | +0.0363470742 | +0.0239266754 | +11.4920000000 |
+| uniform 1700207 | +0.0509820722 | +0.0720400000 | +0.0445950967 | +0.0128244568 | +3.6020000000 |
+| uniform 1700208 | +0.2093652416 | +0.3162400000 | +0.0759521784 | +0.0347884119 | +15.8120000000 |
+| uniform 1700209 | +0.1404385622 | +0.2083600000 | +0.0524422612 | +0.0211461162 | +10.4180000000 |
+| uniform 1700210 | +0.0233049059 | +0.0462800000 | +0.0110270105 | +0.0123991972 | +2.3140000000 |
+| uniform 1700211 | +0.0955989725 | +0.1650400000 | +0.0141243795 | +0.0241663414 | +8.2520000000 |
+| uniform 1700212 | +0.2547241639 | +0.3582800000 | +0.0730482097 | +0.0179862991 | +17.9140000000 |
+| uniform 1700213 | +0.2017364612 | +0.2694400000 | +0.0836962480 | +0.0119804132 | +13.4720000000 |
+| uniform 1700214 | +0.1619704033 | +0.2464400000 | +0.0501164116 | +0.0255725202 | +12.3220000000 |
+| uniform 1700215 | +0.1847621144 | +0.2588000000 | +0.0565749763 | +0.0133703785 | +12.9400000000 |
+| uniform 1700216 | +0.1990716181 | +0.2965600000 | +0.0479221695 | +0.0228970327 | +14.8280000000 |
+| uniform 1700217 | +0.1371741511 | +0.1959200000 | +0.0679331401 | +0.0203497910 | +9.7960000000 |
+| uniform 1700218 | +0.3291855931 | +0.4834800000 | +0.0091689872 | +0.0120011031 | +24.1740000000 |
+| uniform 1700219 | +0.0963699433 | +0.1598400000 | +0.0311166840 | +0.0248530619 | +7.9920000000 |
+| uniform 1700220 | +0.3539026739 | +0.4850800000 | +0.0820123620 | +0.0102570347 | +24.2540000000 |
+| uniform 1700221 | +0.1029484364 | +0.2113600000 | -0.0378357742 | +0.0336528313 | +10.5680000000 |
+| uniform 1700222 | +0.1723780049 | +0.2567600000 | +0.0581714359 | +0.0248054258 | +12.8380000000 |
+| uniform 1700223 | +0.2057710629 | +0.2968000000 | +0.0670824073 | +0.0221136593 | +14.8400000000 |
+| uniform 1700224 | +0.2113634057 | +0.3090000000 | +0.0367091819 | +0.0159493489 | +15.4500000000 |
+| uniform 1700225 | +0.0568710584 | +0.0873200000 | +0.0493084250 | +0.0190454691 | +4.3660000000 |
+| uniform 1700226 | +0.2198077950 | +0.3280400000 | +0.0196785699 | +0.0157237760 | +16.4020000000 |
+| uniform 1700227 | +0.1929973191 | +0.2697600000 | +0.0646773810 | +0.0152378951 | +13.4880000000 |
+| uniform 1700228 | +0.1716832654 | +0.2708800000 | +0.0377584641 | +0.0292602738 | +13.5440000000 |
+| uniform 1700229 | +0.2026119360 | +0.2880800000 | +0.0467316833 | +0.0130635690 | +14.4040000000 |
+| uniform 1700230 | +0.1323346116 | +0.1883200000 | +0.0407640868 | +0.0117186144 | +9.4160000000 |
+| uniform 1700231 | +0.1908814693 | +0.2741600000 | +0.0611824219 | +0.0193852572 | +13.7080000000 |
+
+### Every final G-minus-D change
+
+| Rule / world | ΔJ | Δcoverage | Δquality | Δheight | Δusers/step |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| uniform 1700200 | -0.0334127861 | -0.0265200000 | -0.0158867266 | +0.0100827681 | -1.3260000000 |
+| uniform 1700201 | -0.0226411307 | -0.0210400000 | -0.0213723672 | +0.0015014206 | -1.0520000000 |
+| uniform 1700202 | -0.0053709558 | +0.0049200000 | -0.0096006144 | +0.0059347714 | +0.2460000000 |
+| uniform 1700203 | +0.0148155363 | +0.0598400000 | -0.0625889558 | +0.0082957770 | +2.9920000000 |
+| uniform 1700204 | -0.0182878616 | -0.0041600000 | -0.0218028184 | +0.0088350160 | -0.2080000000 |
+| uniform 1700205 | -0.0122402766 | -0.0034000000 | -0.0284216627 | +0.0013337778 | -0.1700000000 |
+| uniform 1700206 | +0.0431679656 | +0.0574400000 | +0.0078626207 | -0.0006011794 | +2.8720000000 |
+| uniform 1700207 | +0.0107842447 | +0.0228400000 | -0.0037402593 | +0.0040816775 | +1.1420000000 |
+| uniform 1700208 | +0.0185026119 | +0.0500400000 | -0.0286045509 | +0.0079440228 | +2.5020000000 |
+| uniform 1700209 | +0.0016840012 | +0.0133200000 | -0.0075049465 | +0.0053885148 | +0.6660000000 |
+| uniform 1700210 | +0.0195589308 | +0.0233200000 | -0.0151857159 | -0.0077906456 | +1.1660000000 |
+| uniform 1700211 | -0.0434804353 | -0.0338400000 | -0.0323695610 | +0.0100815670 | -1.6920000000 |
+| uniform 1700212 | +0.0397118456 | +0.0539200000 | +0.0081124940 | +0.0004659025 | +2.6960000000 |
+| uniform 1700213 | -0.0281900109 | -0.0278000000 | -0.0033164173 | +0.0077350857 | -1.3900000000 |
+| uniform 1700214 | +0.0168986031 | +0.0241600000 | -0.0041179113 | -0.0012219765 | +1.2080000000 |
+| uniform 1700215 | -0.0031411969 | -0.0010400000 | -0.0009360466 | +0.0021323829 | -0.0520000000 |
+| uniform 1700216 | -0.0037060307 | +0.0033200000 | -0.0169593633 | +0.0009422217 | +0.1660000000 |
+| uniform 1700217 | -0.0891904300 | -0.1216800000 | +0.0005626654 | +0.0041832296 | -6.0840000000 |
+| uniform 1700218 | -0.0447285494 | -0.0478400000 | -0.0158161396 | +0.0064957075 | -2.3920000000 |
+| uniform 1700219 | -0.0141262325 | -0.0043600000 | -0.0172467073 | +0.0059002203 | -0.2180000000 |
+| uniform 1700220 | -0.0235902596 | -0.0223200000 | -0.0039870552 | +0.0067701430 | -1.1160000000 |
+| uniform 1700221 | -0.0321639375 | -0.0187600000 | -0.0225843727 | +0.0122566257 | -0.9380000000 |
+| uniform 1700222 | -0.0406975299 | -0.0399200000 | -0.0274753195 | +0.0045109341 | -1.9960000000 |
+| uniform 1700223 | -0.0683819903 | -0.0773200000 | -0.0077280543 | +0.0119395740 | -3.8660000000 |
+| uniform 1700224 | -0.0503052315 | -0.0473600000 | -0.0163636262 | +0.0122441436 | -2.3680000000 |
+| uniform 1700225 | -0.0085954137 | -0.0132400000 | -0.0054362108 | -0.0023034496 | -0.6620000000 |
+| uniform 1700226 | -0.0037648719 | +0.0051200000 | -0.0258174695 | -0.0003963690 | +0.2560000000 |
+| uniform 1700227 | +0.0200376987 | +0.0262800000 | -0.0015119781 | -0.0020952921 | +1.3140000000 |
+| uniform 1700228 | +0.0676580888 | +0.0992000000 | +0.0009259837 | +0.0020597063 | +4.9600000000 |
+| uniform 1700229 | -0.0256117573 | -0.0204400000 | -0.0109271369 | +0.0080256162 | -1.0220000000 |
+| uniform 1700230 | -0.0295176025 | -0.0265200000 | -0.0194448665 | +0.0051201425 | -1.3260000000 |
+| uniform 1700231 | +0.0136328276 | +0.0284400000 | -0.0153978485 | +0.0016558179 | +1.4220000000 |
+| own 1700200 | -0.0189547592 | -0.0451200000 | +0.0117219831 | -0.0091126459 | -2.2560000000 |
+| own 1700201 | +0.0164175880 | +0.0332800000 | -0.0090253508 | +0.0041708068 | +1.6640000000 |
+| own 1700202 | +0.0273617924 | +0.0642000000 | +0.0028708883 | +0.0184394741 | +3.2100000000 |
+| own 1700203 | -0.0412785697 | -0.0326400000 | -0.0097459304 | +0.0155067905 | -1.6320000000 |
+| own 1700204 | -0.1164589578 | -0.1201200000 | -0.0255344385 | +0.0247146262 | -6.0060000000 |
+| own 1700205 | -0.0007110594 | +0.0212000000 | -0.0074326931 | +0.0133212515 | +1.0600000000 |
+| own 1700206 | +0.0171609436 | +0.0449600000 | +0.0076886763 | +0.0166176593 | +2.2480000000 |
+| own 1700207 | -0.0705806399 | -0.0883600000 | +0.0259355806 | +0.0165093141 | -4.4180000000 |
+| own 1700208 | +0.0089996165 | +0.0301200000 | -0.0071578020 | +0.0099370429 | +1.5060000000 |
+| own 1700209 | -0.0280745062 | -0.0020800000 | -0.0064213220 | +0.0246921096 | -0.1040000000 |
+| own 1700210 | +0.0396477388 | +0.0644000000 | -0.0097052922 | +0.0025206736 | +3.2200000000 |
+| own 1700211 | +0.0969158736 | +0.1044800000 | -0.0037211115 | -0.0248962071 | +5.2240000000 |
+| own 1700212 | +0.1558032076 | +0.2285600000 | -0.0032958545 | +0.0032000360 | +11.4280000000 |
+| own 1700213 | +0.0426144417 | +0.0721200000 | +0.0111137769 | +0.0112036914 | +3.6060000000 |
+| own 1700214 | +0.0361744587 | +0.0720400000 | -0.0170171525 | +0.0091483955 | +3.6020000000 |
+| own 1700215 | -0.0610639829 | -0.0587200000 | +0.0006331937 | +0.0201499410 | -2.9360000000 |
+| own 1700216 | +0.0647027107 | +0.0776400000 | +0.0100211563 | -0.0073483638 | +3.8820000000 |
+| own 1700217 | -0.0742268224 | -0.0902400000 | +0.0287709141 | +0.0196900966 | -4.5120000000 |
+| own 1700218 | -0.0939331573 | -0.1192400000 | -0.0013180787 | +0.0100697337 | -5.9620000000 |
+| own 1700219 | +0.0248368999 | +0.0490000000 | +0.0054441304 | +0.0110963392 | +2.4500000000 |
+| own 1700220 | -0.0310319140 | -0.0156400000 | +0.0114611687 | +0.0235222647 | -0.7820000000 |
+| own 1700221 | +0.0667257117 | +0.0707200000 | +0.0048996866 | -0.0157518057 | +3.5360000000 |
+| own 1700222 | -0.0867448242 | -0.0870000000 | -0.0110698875 | +0.0225238580 | -4.3500000000 |
+| own 1700223 | -0.1414587735 | -0.1513200000 | +0.0232443623 | +0.0425080822 | -7.5660000000 |
+| own 1700224 | +0.0181497403 | +0.0186000000 | +0.0008394539 | -0.0048779041 | +0.9300000000 |
+| own 1700225 | +0.0118483217 | +0.0456000000 | -0.0074091836 | +0.0178489232 | +2.2800000000 |
+| own 1700226 | -0.0235023556 | -0.0158000000 | -0.0173925378 | +0.0072245942 | -0.7900000000 |
+| own 1700227 | +0.0582022669 | +0.0684400000 | +0.0098543855 | -0.0073379513 | +3.4220000000 |
+| own 1700228 | +0.0394423856 | +0.0677600000 | -0.0004435196 | +0.0078565586 | +3.3880000000 |
+| own 1700229 | +0.0217367507 | +0.0374000000 | +0.0016309388 | +0.0049325309 | +1.8700000000 |
+| own 1700230 | -0.0513190561 | -0.0522000000 | +0.0022764935 | +0.0154620041 | -2.6100000000 |
+| own 1700231 | +0.0267945716 | +0.0677200000 | +0.0236676055 | +0.0277097100 | +3.3860000000 |
+
+## 2026-09-23 — Reconsideration after G recurrence failure: training law before another auxiliary
+
+Closing unchanged G does not resolve whether the learning system produces skills whose usefulness
+requires learned high-level behavior during training. We have learned service with all three D
+instances and under task-only T; removing low discriminator rewards hurt in B02, but does not
+identify which other training ingredients matter. The same-bank own/uniform deployment gap in
+B03 now has correct same-world pairing, so repeating an old bank deployment panel has less value
+for the next learning decision. It still would not answer how the bank was formed.
+
+The concrete next candidate is a new matched two-arm training comparison: learned high-level
+behavior M versus a fixed uniform high-level training law U, with the original mixed low-level
+objective and detached factual heads in both. It asks about the total bank-formation regime,
+not the isolated effect of gradients, optimal skills, coordination necessity or a pure deployment
+selector. U would draw all team and individual labels uniformly every10 steps and make0 high
+optimizer updates; M retains the native team law and .9pi+.1/6 individual conditional factors.
+Both low recurrent actor/critic and discriminators still learn at equal team-transition exposure.
+The frozen code already has `disable_high_level_training` (native agent update skips coordinator
+and high experience), but random baseline config also disables low/discriminator learning and
+is therefore not this comparator. A future implementation must route the actual sampled labels,
+log probabilities, storage and low reward path consistently, not only change the evaluation helper.
+
+Working prediction to challenge is M−U final uniform J>0 with actual learning in both: learned
+training assignments may shape a more useful bank even when greedy own deployment is not better.
+The strong rival is that broad exogenous label training preserves or improves service, making
+learned assignment unnecessary for this particular training recipe's conditional use. The current
+observations do not identify that sign; this is a new hypothesis, not a diagnosis of G's failure.
+A learned-vs-fixed-law comparison changes high policy gradients, experience and work together;
+it cannot separate those causal paths. Actual common initial tensors are feasible, but first
+rollout data need not match when the training laws differ. No performance result is implied.
+
+I considered an automatic third G block or retuned auxiliary, the previously declined0-fit
+old-world deployment completion, a duplicate full-package/flat study, and partner-compatibility
+training. Another unchanged G block or rescue lacks new discriminating value after this reversal;
+old-bank replay addresses deployment rather than learning; DM1 already owns a new full-package
+comparison; partner mixing adds an unmeasured deployment problem, label alignment and training
+population before showing a current bottleneck. The fixed uniform-law control directly answers
+one residual training question with a competent matched skill-conditioned baseline. It is a
+plausible next investment, not yet a fixed or launched B04. I will consult on its comparator,
+interpretation and strongest alternative before selecting and declaring execution. This is new
+scientific work under existing owner delegation; no cross-task contact or new owner decision
+is required, and no current batch is extended.
+
+## Pro question 2026-09-23 training-law-after-g-reversal
+
+Conversation: continue the current Jev-account adviser conversation from the local operation
+for prior question key `hmasd:6ff96ab85e88c1e79ae3ed6a1da6c89059c4770d1d6b5d6719030104cf3ff8b7`;
+the private URL stays out of the repository. This is a new scientific question, not a resend.
+
+**Question.** After the complete B03 reversal, is the useful next learning investment the
+proposed learned-versus-fixed-uniform high-level training-law comparison below, or does a
+stronger alternative now dominate it? Resolve whether this comparator can answer a worthwhile
+bank-formation question and how to keep its estimand honest. The closure of unchanged G is
+already covered by your full prior Answer sections5–7; do not repeat a routine result review.
+The new decision is whether/how to study the training regime, which the earlier Answer section6
+explicitly distinguished and deferred. Challenge the premise instead of treating two fits as
+owed or designing a rescue of G/P/deletion. We need one next useful observation, not an idea quota.
+
+**Current authority and standing.** Owner pause is lifted; this session remains the direct DM
+for complementary_skill_learning. The owner's2026-09-23 delegation permits scientific revision
+and useful continuation without renewed owner/Root approval. Other leads remain owned; Claude
+FSD is paused and G33 frozen. No new fit is active or waiting for collection. This question
+selects science; it does not grant a launch, approve a budget or change any completed contract.
+The notebook sections immediately above contain the complete B03 acceptance, all32 per-world
+signed results, actual learning, costs, inherited adverse evidence and DM reconsideration.
+
+B03 is one new matched training block, same actual D/G initial tensors and first experience,
+with fixed old uniform worlds and PCG64 label stream. D/G final uniform J=.455409736727/
+.444950607470, so G−D=−.010459129257 (11positive/21negative); users−.1334375, quality lower
+28/32, height penalty higher26/32. Old B01 uniform G−D was+.019697695057. Both B03 arms
+improve own and uniform J/users in32/32 worlds; G own−D J−.002056386198 with mean users
++.562125 and higher height cost. The G extra-value prediction failed despite active315 trunk
+updates. B03 used2fits/720k train/128k eval/108.606496 runner min. It does not demonstrate
+stable G harm, MI/skill necessity or a mechanism of the P failure. Preserve all beneficial
+worlds, absolute tail distinctions and sign changes; do not pool them into a stable ranking.
+
+B02's unchanged mixed-vs-task-only objective comparison favored mixed for native service;
+task-only itself learned. B01 P had local positive pairing T without net service use. These
+failures lower auxiliary/deletion recipe investment but leave the training role of high-level
+behavior unresolved. Same-bank B03 final own−uniform J is D−.011347369487/G−.002944626428;
+that is a deployment observation conditional on banks trained with a learned high-level law,
+not a result for random-label training. DM1's B10 likewise changed deployment of an already
+trained bank, and DM1 now owns a fresh H6-versus-ordinary SET package comparison (B14). Do not
+take over that study or count it as our high-level-training comparator.
+
+**Proposed next comparison, for criticism before prospective adoption.** Two new cold starts,
+M and U, each360000 native S1/N6/c10/k10/50-user team transitions,16lanes×500×45 updates.
+Both retain six team/individual labels, the local recurrent low actor/global critic, mixed
+legacy coefficient.5 (.025/.01 discriminator components), both learned discriminators,
+raw Gaussian PPO/execution clip, existing entropy for components still trained, own ValueNorm,
+no obs/state normalization and both factual heads detached. No added architecture or auxiliary
+trunk update. Match actual initial native/head tensors and new exogenous training world list,
+then accept endogenous data divergence caused by the distinct training laws.
+
+M retains the frozen behavior-generating high-level learner: native team distribution and
+individual autoregressive factors mu=.9pi+.1/6, renewing all labels each10 steps, with native
+high optimizer steps. U instead uses fixed exogenous uniform team and individual labels at
+the same renewal times;0 coordinator optimizer steps, with low actor/critic/discriminators
+still genuinely trained. It is not a random-low-action or untrained-policy arm. A sampled
+label and its recorded probability must agree through the real storage/low reward path; do
+not retain learned-policy log probabilities for externally substituted labels or pretend
+that disabling high updates alone makes behavior uniform. The high experience/optimizer
+work will differ by design and must be counted, not padded with fake updates for equality.
+Native `disable_high_level_training` supports the high-update omission, while the registered
+`random` baseline disables other learning too and must not be used as this arm.
+
+Primary candidate estimand is final uniform-deployment J(M)−J(U), on the same original32
+exposed development worlds1700200–1700231 and frozen PCG64 evaluation label stream. Read each
+bank's actual initial→final uniform learning and every J/coverage/quality/height/users loss.
+Working sign to challenge: M−U>0 with both banks learning; learned training assignments may
+form a useful bank even when greedy own deployment does not improve its mean J. The strong
+rival is that fixed broad label training preserves or improves that usefulness. Uniform
+primary deployment favors the question of bank use under an external label law; explicitly
+criticize that scope if the real scientific question requires another estimand. It is not
+an isolated gradient intervention, equal-experience mechanism test or general necessity claim.
+
+For consequences retain M's initial/final own panels; a fixed-uniform U has no learned own
+selector to evaluate, so do not fabricate an argmax-of-uniform comparator. This yields four
+M panels and two U panels, each32×500: **2fits/720k train/96k eval/816k team transitions**.
+Whether the asymmetric own reporting and chosen primary are appropriate is part of the question.
+No U deployment mode, frozen-policy grid, branch diagnostic, post-training selector fit or
+third arm is hidden in this cost. Native low/discriminator exposure matches B03 per fit;
+M would have675 high steps, U0, both315steps/head and0 auxiliary trunk. Exact new RNG/world
+addresses would be committed before execution after the scientific design is chosen; this
+question is not a launchable protocol. Prior53–55 runner min/fit is planning context, not a
+promise for U or an efficiency claim. Include implementation, focused checks, independent
+review and native collection in the decision's cost; no profiling fit is proposed.
+
+**Why this candidate and strongest alternatives.** A third unchanged G block or a retuned
+surrogate has no new discriminating reason after the fixed-world reversal. The0-fit32k old
+D/G own-world uniform replay remains a legitimate deployment question, but adds no new
+learning and no training-law answer; B03 now supplies same-world deployment comparisons for
+the new banks. A new full hierarchy-versus-flat study would overlap DM1's already selected
+B14. Partner compatibility/cross-play is an unowned alternative but adds a deployment problem,
+label matching and population learning before showing that this is a present bottleneck.
+Please assess these opportunity costs and disagree if the proposed training-law study is
+still a weak use of research. No new candidate or positive conclusion is required.
+
+**Context — pinned source meaning.** Paths marked source_sha resolve at the full published
+question commit supplied in the actual message, not a moving branch. Governance/methods are
+current instructions; frozen experimental code/evidence retains the meaning at its own SHA.
+- Current governance at source_sha: `docs/project/OPERATING_CONSTITUTION.md` §§1–5,7–8,
+  especially DM scientific continuity/autonomy, no fit allowance, Pro reuse and exploratory limits.
+- Current methods at source_sha: `.agents/skills/hmasd-scientific-tools/SKILL.md`, sections
+  Update the working explanation, Comparators and MARL information, Statistics, Cost and exposure,
+  Pro; `.agents/skills/hmasd-research-engineering/SKILL.md`, Checks and review/Execution only
+  if needed for feasible semantics. They create no new permission layer or record type.
+- Shared background at **f32cd55dc95e11b84b3661ddf00d5d2456a59159**:
+  `docs/research/RESEARCH.md`, topic3 on conditional bank/selector usefulness and B10's
+  training-versus-deployment boundary, topic4 on finite learning, current DM1/B14 responsibility.
+  These are conditional evidence, not a veto or a matched control. B03's new reading is here.
+- Standing/result at source_sha: this NOTES heading's two immediately preceding dated entries,
+  especially the complete B03 result and reconsideration. Supporting originals:
+  `runs/complementary_skill_learning/b03_{d,g}_260923921_8859fc379/summary.json`,
+  `training.jsonl`, `config.json` and `launch-manifest.json` for each arm (expand d/g paths).
+  Actual checkpoint tensors and all predictions were independently checked by the DM as described;
+  do not call that your own full audit if you read only summaries or selected arrays.
+- Prior complete advice at source_sha: this NOTES `## Pro question 2026-09-23 useful-learning-after-objective-failure`,
+  `### Answer`, especially sections4–7; use its distinction between training law, bank learning and
+  deployment and its covered closure branches. Earlier B01/B02 complete result sections in this
+  file carry the necessary contrary observations, not a request to reread the entire project.
+- Frozen implementation at **8859fc37944dc97ce916a1200dcbd5e78fe8e5b5**:
+  `experiments/candidates/complementary_skill_learning/b03/runner.py` for actual loops/counters,
+  `experiments/candidates/complementary_skill_learning/b01/learning.py` for MixtureSkillDecoder,
+  ComplementaryAgent and native-then-aux update order; B01 `runner.py` select_skills/evaluation_context;
+  `hmasd/agent.py` initialization of collects_high_level_samples, store_transition,
+  `update` coordinator skip under disable_high_level_training; `hmasd/baselines.py` random/MAPPO
+  config semantics. This code supports feasibility analysis, not a claim that U is implemented.
+  No outside literature is needed to establish these path facts. If using an external scientific
+  analogy, cite the primary passage and distinguish its assumptions from endogenous MARL learning.
+
+**Requested answer.** Explain which current judgment the next observation can actually change;
+recommend the proposed comparison, a substantive revision, a stronger feasible alternative or
+stopping this investment with reasons. Address the strongest objection to your choice. If
+retaining a training-law study, specify its estimand, genuinely trained components/information,
+expected signs and interpretation of counter-outcomes, actual cost and bounded stopping;
+separate policy-gradient/exposure/compute changes from claims the comparison cannot identify.
+If changing it, show the new discriminating prediction and why it is worth more than the
+simpler control. Return MATERIAL_DISSENT yes/no with reasons. Adviser agreement is not evidence.
+
+**Answer-only write constraint.** No training, launch, code edits or other records. On branch
+`codex/complementary-skill-learning`, write only in the empty `### Answer` subsection of this
+unique question at `docs/research/candidates/complementary_skill_learning/NOTES.md`. Read the
+pinned question, then fetch the latest target file before writing and use its actual blob SHA;
+preserve the question and every other byte, stop on overlapping edits. Report the actual
+commit if successful. If GitHub writeback is unavailable, return the complete answer in chat,
+not only a SHA, status or link. Cite actual sources used and state any consequential unread gap.
+
+### Answer
