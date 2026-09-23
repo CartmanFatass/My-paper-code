@@ -2533,3 +2533,81 @@ fixed evaluation conditions and all adverse worlds. This is different host/objec
 not a matched G/D control or a reason to change the selected recurrence question. B03's already
 fixed old world/label stream, primary uniform endpoint, own consequences and costs remain as
 above. There is no new mechanism claim or additional arm from this publication.
+
+## 2026-09-23 — B03 implementation checked before native admission
+
+The bounded Implementer returned only the four declared B03 code/test paths; code was first
+published at `88ce399f2`. I read the runner, entry and meaningful tests, preserving B01/B02 and
+all native learner/environment/support bytes from frozen B01 `957a65c01`. The local audited
+subclass adds only finite/fallback refusal; collection checks real returned components and
+buffer writes. A reachable failure-accounting issue was found and repaired before any fit:
+if a later lane failed, earlier verified rows were missing from the outer count. `finally`
+now reconciles to actual verified rows. The runner-level later-lane regression retains the
+partial count and stops before a native update or final checkpoint. Healthy original B01
+actions, reward components and all tested storage arrays match the audited path exactly.
+
+Implementer CPU check:11 passed/1 CUDA skipped,4.77s. Independent registered Reviewer
+`review_b03_recurrence` read the full loop, native/B01 dependencies, checkpoint and admission
+bindings, and independently ran11 passed/1 CUDA skipped in4.03s. No material finding remains.
+The reviewed runner hash was `8d9e7b89ad350b1111de2bf2c2661b76a9b10b639851df2962902d854eac0ce8`;
+only extra blank EOF lines in runner and package init were then removed, with identical Python
+ASTs. Current runner SHA256: `4810b9906306f0484976dcc8574f8ce961c10887c73937b5f3a6c8c4a10125e7`. CLI and tests hashes remain
+`e8367dfbc787fda92e30747b9873cc82a3295d08c5ef73a05e93b7772823c0a9` and
+`566aaeec1b0f7411f80a65e5e6032a7d036695883c5f6cee627f72c2eb6d46d1`.
+
+Actual tiny new native/head tensors differ from old B01 initialization; same-block D/G
+initial tensors, head tensors, RNG digest, first factual data and targets match. Both native
+learners move, with active original G auxiliary trunk movement and zero D auxiliary trunk
+updates. The four panels, zero-update evaluation, RNG restoration, repeated physical starts,
+checkpoint metadata and summary integrity pass. DM separately reconstructed the production
+PCG64 stream without the candidate helper:50 renewals,1600 team and9600 individual labels,
+digest `a45d59f80fca20321df3803745068bb841f30e6c25b6b8c01dd7d0d250a67190`,
+matching the literal runtime assertion. This reconstruction used0 environment interactions.
+
+Actual-node CUDA verification remains to be read before fit admission. The4070 node currently
+reports Python3.10.21/NumPy1.26.3/Torch2.7.0+cu118/CUDA11.8. Its new owned author checkout is
+`/home/wu/hmasd-worktrees/complementary-skill-b03-20260923`. The first checkout materialization
+stalled downloading a promisor object outside the configured network shell. I reconciled its
+exact native process, terminated only its owned HTTPS helper, and verified Git removed the
+failed empty checkout and registration. Materialization under configured `zsh -lic` then
+completed cleanly. This was pre-experiment source setup:0 result fits/0 result evaluation, no
+accepted worker restarted. Shared canonical dirty records and old outputs were preserved.
+
+### Actual-node CUDA verification and DM implementation acceptance
+
+The exact published source `9d50ca279500feb1f921a32f41950190c96d5536` was fast-forwarded
+into the owned B03 checkout on configured `wsl_4070`. The focused B03 suite passed all12
+tests,0 skips in8.06s, including the real tiny native D/G fits on CUDA. Its14 warnings were
+Matplotlib/Pyparsing deprecations, not failed scientific or identity checks. The CUDA path
+checks actual paired initial/factual tensors, native movement, G-only auxiliary trunk
+movement, all four evaluation panels, checkpoints and saved final JSON. These are technical
+scratch runs, not B03 result fits or evidence for the learning prediction.
+
+I accept the bounded implementation with the independent review and actual-node checks above.
+The subsequent input commit changes only this notebook; the tested runner, CLI and tests stay
+byte-identical. The fixed two-fit protocol and D-then-G order remain unchanged. D may now enter
+fresh native admission; G follows only after D is complete and its evidence is accepted, without
+using D's scores to alter either arm. No scientific B03 fit has been admitted at this entry.
+
+Publication refresh reached main `36db756f3`, where DM1 fixed B13's four retained-policy
+comparison. I read the affected RESEARCH diff: no new result, owner pause, this direction's
+state or lead change. That independent plan does not change B03's prediction or inputs.
+
+## 2026-09-23 — B03 D admitted under the fixed learning recurrence
+
+The fixed first arm D received native child admission after the fresh canonical and published
+pause/state/lead check and actual-node memory check. The subsequent same-operation status
+read showed both recorded native identities running, consistent records and no exit witness.
+The original [launch manifest](../../../../runs/complementary_skill_learning/b03_d_260923921_8859fc379/launch-manifest.json)
+is the authority for the accepted command, source, node, native identities and stable operation
+reference. Its [admission preflight](../../../../runs/complementary_skill_learning/b03_d_260923921_8859fc379/admission-preflight.json)
+passed the physical/effective memory floor. Both files were collected and byte-verified
+against the executing node before publication.
+
+This admits one result fit; it is not a scientific result or acceptance of the learning
+prediction. The fixed G fit remains second, after complete D collection and DM evidence
+acceptance. D scores cannot change its paired initialization, training worlds, old uniform
+evaluation stream, endpoint, objective or G intervention. No additional fit or replay was
+added. Detached read-only observation is to use this manifest's same operation reference;
+completion or a bounded checkpoint returns to this task for collection or rearming, without
+restarting the worker. B01/B02 and the completed Pro requests remain consumed.
