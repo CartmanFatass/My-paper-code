@@ -894,3 +894,110 @@ This is integrity/progress evidence, not endpoint acceptance or G−D service ev
 checkpoint on this direction branch, leaving main's already-published running standing until
 the complete result boundary. Consume the exact generation7 checkpoint event and rearm the
 same G operation; no worker restart, scientific change, new fit or Pro Send.
+
+## 2026-09-23 — B01 G complete; own service declines while uniform service improves
+
+The accepted G operation exited0 with a valid native exit witness and both recorded processes
+absent. Read and checked the complete scientific artifacts before accepting the fit. All13
+files (68,181,554 bytes) were copied and individually matched remote sizes/SHA256. Retain the
+[complete summary and every panel/world](../../../../runs/complementary_skill_learning/b01_g_260923901_957a65c01/summary.json),
+[all training rows](../../../../runs/complementary_skill_learning/b01_g_260923901_957a65c01/training.jsonl),
+[all factual targets and predictions](../../../../runs/complementary_skill_learning/b01_g_260923901_957a65c01/auxiliary_predictions.jsonl),
+[all combination cells and trajectories](../../../../runs/complementary_skill_learning/b01_g_260923901_957a65c01/combination_diagnostic.json),
+[terminal status](../../../../runs/complementary_skill_learning/b01_g_260923901_957a65c01/launch-status.json)
+and [exit witness](../../../../runs/complementary_skill_learning/b01_g_260923901_957a65c01/process-exit.json).
+The complete files preserve the previously read31-rollout prefix byte for byte.
+
+**Integrity.** One completed G fit/model construction,360,000 training/stored transitions,
+720 training episodes,45 complete native updates and53,760 evaluation transitions:96 full
+episodes/48,000 steps plus3,200 prefix and2,560 branch steps. Native optimizer counts match D:
+675/101,250/101,250/675/2,700 in coordinator/low actor/low critic/team/individual order. Native
+parameter displacement changed on every rollout. Both auxiliary heads and the G auxiliary
+trunk completed315 steps; each rollout had800 complete windows, nonzero base/FiLM/GRU auxiliary
+movement and no discarded window. All45 batch hashes, raw-target hashes, canonical time-major
+lane order, raw MSE/variance, finite values and occupancy totals passed independent checks.
+Maximum old/replayed sampled log-probability difference was6.079673767089844e-6; forced scores0.
+Initial native digest, all initial-own evaluation arrays, first-rollout facts and target
+calibration equal D; no hand matching or changed seed. Both frozen panels and the diagnostic
+record zero optimizer/normalizer updates. Read both checkpoints without executing a new model
+or trajectory: byte hashes/native tensor digests match the summary and final head/trunk Adam
+states each have315 steps. Final native digest is
+`acf0da5066e26460f7bcac24d5b0fe364cfcd13468e52e8c03705c9a6a51579f`.
+Initial/final `.pt` files remain locally and in the original remote run directory, with their
+hashes and sizes in the summary; empty stdout/stderr are also retained.
+
+**Whole-episode service and the predeclared G−D contrast.** Each difference below pairs the
+same32 worlds across arms within its named panel. Scores and components were independently
+recomputed from every retained return. Height is the native S1 penalty proxy, not measured energy.
+
+| Final panel/readout | D | G | G−D |
+| --- | ---: | ---: | ---: |
+| Own J | .487211696 | .455360850 | **−.031850847** |
+| Own coverage | .646492500 | .612315000 | −.034177500 |
+| Own quality | .169681089 | .166048744 | −.003632345 |
+| Own height penalty | .016237380 | .023074274 | +.006836893 |
+| Own connected users/step | 32.3246250 | 30.6157500 | **−1.7088750** |
+| Uniform J | .485044529 | .504742224 | **+.019697695** |
+| Uniform coverage | .645901250 | .668417500 | +.022516250 |
+| Uniform quality | .164975172 | .177917839 | +.012942666 |
+| Uniform height penalty | .016578898 | .016525378 | −.000053520 |
+| Uniform connected users/step | 32.2950625 | 33.4208750 | **+1.1258125** |
+
+Own J improves in6/32 worlds and declines in26; coverage declines in24, quality in19, and
+height penalty increases in31. World1700116 falls from J.516890426 to.305751960 (−.211138466),
+with13.892 fewer connected users/step, quality−.016513222 and penalty+.011696499. Own's best
+J difference is+.079675461 in1700109, with5.314 more users/step. Uniform J improves in22/32
+worlds, but10 decline and12 lose coverage. Its worst J world1700210 loses.024896221 and1.782
+users/step despite higher quality;1700220 has the largest coverage loss,1.852 users/step.
+Uniform's best J difference is+.079217705 in1700217. Quality improves in27/32 uniform worlds;
+penalty increases in15 and falls in17. Thus even the favorable uniform mean is not uniform
+benefit. G own J ranges.305751960–.508913493; uniform.447318316–.605047542. Raw action
+saturation is.546517361/.546781250 in the two panels; the common clipping rule was unchanged.
+
+The opposed G−D signs are properties of these two fixed panels. Own and uniform use different
+world addresses, so their within-G mean difference is not a paired causal selector comparison.
+It raises a possible dependence on selector/visitation and co-adaptation, without identifying
+which one caused the result. One training instance per arm does not establish a stable ranking.
+
+**Actual signed pairing.** Independently read/recomputed all64 rectangles and256 ten-step
+cells, discounted rewards/components, executed clipping, trajectory hashes, predicted signs,
+matched-minus-independent identities and the four-rectangles-per-world aggregation.
+
+| Readout | Mean scalar T | Mean team-unit T (x6) | Positive/negative worlds | Positive/negative rectangles |
+| --- | ---: | ---: | ---: | ---: |
+| **Primary G** | **−.000366352659** | **−.002198115956** | **5/11** | **31/33** |
+| Secondary P | −.000069084780 | −.000414508680 | 6/10 | 31/33 |
+
+Neither readout has a positive mean here; prediction ties0 and descriptive preference
+reversals18/64. Primary world T ranges−.002267854819 to+.002084130416. Reversals and positive
+individual rectangles do not replace the adverse primary mean or reject conditional additivity.
+The uniform service improvement therefore comes without demonstrated average signed-pairing
+use in this fixed diagnostic. Different bank-dependent prefixes and learned readouts prevent
+the D/G T difference from identifying a bank-only causal change or a general absence of useful
+interaction. Last-rollout training raw MSE is.005322897/.006170212 for G/P heads; its values
+cannot rescue the native own loss or establish mediation, and across-arm targets/visitation
+have diverged after their common first rollout.
+
+**Cost and cumulative reading.** G runner-body wall2579.109818s (42.985164min), user/system
+CPU2443.704801/261.724419s, process-lifetime peak RSS1,888,720KiB; CUDA peak allocated
+1,531,044,864/reserved2,113,929,216 bytes. Runtime/thread settings match D. The scope remains
+runner training/evaluation/writes, excluding preparation/import overhead, transfer and DM
+reading; no exclusive-node occupancy or complete support-phase timing is available. Completed
+D+G exposure is2 fits,720,000 train and107,520 evaluation transitions (827,520 total), with
+86.309637 runner-body minutes. All previous technical checks and collection support remain
+additional incurred work. The three-fit batch and its endpoints have not been extended.
+
+This weakens a useful own-policy benefit from the ordinary auxiliary route in this block,
+while preserving a favorable uniform-panel control consequence and its contrary worlds.
+It does not establish useful mean pairing, nor show that generic auxiliary learning is
+universally harmful. Shared background's distinction between prediction quality, policy
+package service and actionable interaction remains necessary. P−G and P−D are still unknown;
+no general shared-topic revision is warranted before reading that remaining fixed arm.
+Continue the prospectively selected P fit at the same source and seeds. This is completion
+of the accepted comparison, not post-score extra investment or a change to the question.
+
+After verified collection, the maintained canonical checkout's GC preview with the documented
+read-only privileged process scan found the exact G snapshot eligible. Apply rechecked and
+removed only `9a99c1266d334796bc6c41c7cbc3fddf`; published source, original claims/status,
+both output copies and the authoring checkout remain. Current owner pause is lifted; the
+three-DM setting, other ownership and Claude FSD/G33 constraints were read and preserved.
