@@ -6560,3 +6560,34 @@ Accepted SHA-256 identities:
 Next action is publication of these exact inputs and one fresh native B07 admission. Initial
 technical snapshots may verify identities/counts, but interim scores do not select a checkpoint
 or change the fixed final45 reading, horizon, seed, comparator or prospective outcome branches.
+
+## 2026-09-23 — B07 admitted and initial technical evidence read
+
+The fixed B07 fit is now natively admitted and running. Recoverable bindings are in the
+[launch manifest](../../../../runs/agent_count_generalization/s1_bounded_package_b07_h6_l05_s952201/launch-manifest.json)
+and [first native status](../../../../runs/agent_count_generalization/s1_bounded_package_b07_h6_l05_s952201/launch-status.json);
+the original operation reference in those files is the sole observation target. Source
+`0a9e3fde40659fdcc1d05922c9920c5c04b2ab23` was published before execution; canonical main was
+refreshed, existing unrelated untracked files preserved, and the separate source checkout
+verified clean. The kernel's fresh actual-node memory check passed with 13,991,899,136 bytes
+effective availability against the 4 GiB floor. Supervisor command acceptance was followed by
+verified child admission, matching running identities, and consistent launch records.
+
+Collected the runner-written manifest, memory preflight, config, first summary, initialization
+panels and streams without tensor loading or an extra evaluation. The [first summary](../../../../runs/agent_count_generalization/s1_bounded_package_b07_h6_l05_s952201/summary.json)
+is a **partial snapshot**, with `fit_started=true`, `status=training`, no failure and boundary
+`rollout 1 collected`: 8,000 training/stored team steps, 16 training episodes/resets, 0 completed
+rollout updates; initialization evaluation 24,000 team steps/48 episodes across N4/6/8. Raw
+policy construction is fresh, all 12 fixed SET panels validated, the original checkpoint was
+hashed but not loaded, and all declared source hashes match the accepted bytes. Effective
+entropy/endpoints/flags and training world addresses match the prospective contract. All three
+initial evaluation panels retain zero optimizer calls and learner/target parameter-normalizer,
+runtime and global-RNG preservation evidence. This verifies the initial technical path, not
+learning benefit or a completed scientific comparison.
+
+Exactly 1 new fit has begun. Native outputs remain in place for the worker; the detached wait
+controller is armed against that same accepted operation with a bounded 1,500-second observation
+window. No restart, duplicate launch, further Pro Send, SET replay or extra seed follows a
+checkpoint. Continue the fixed 45 updates and 12 evaluation panels, then collect all outputs and
+read final45 against the immutable original SET summary under the recorded outcome branches.
+Source and current publication checkouts remain in use; no live or retained input was reclaimed.
