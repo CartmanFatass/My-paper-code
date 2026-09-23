@@ -742,3 +742,106 @@ Remaining15 training rollouts and frozen final panels stay unchanged; G/P are st
 Rearm the original operation from observation generation4, consuming its checkpoint event;
 no worker restart, extra fit or new Pro question. Main's scientific standing is unchanged;
 the next result boundary will publish completed evidence there.
+
+## 2026-09-23 — B01 D complete; ordinary learned-bank baseline accepted
+
+The existing D operation exited0 with a valid native exit witness, both recorded processes
+absent and consistent claim/manifest records. Acceptance here follows reading the complete
+scientific outputs, not the exit code. All13 files (64,202,868 bytes) were copied from the
+original output directory and their sizes/SHA256 matched remote originals. The complete
+[summary and all native panels](../../../../runs/complementary_skill_learning/b01_d_260923901_957a65c01/summary.json),
+[45 training rows](../../../../runs/complementary_skill_learning/b01_d_260923901_957a65c01/training.jsonl),
+[36,000 aligned target/prediction rows](../../../../runs/complementary_skill_learning/b01_d_260923901_957a65c01/auxiliary_predictions.jsonl),
+[all four-cell trajectories and readings](../../../../runs/complementary_skill_learning/b01_d_260923901_957a65c01/combination_diagnostic.json),
+[terminal status](../../../../runs/complementary_skill_learning/b01_d_260923901_957a65c01/launch-status.json)
+and [exit witness](../../../../runs/complementary_skill_learning/b01_d_260923901_957a65c01/process-exit.json)
+remain recoverable. No rows or adverse worlds were removed.
+
+**Integrity and exposure.** One completed fit/model construction,360,000 training/stored
+transitions,720 training episodes,45 complete native updates and53,760 evaluation transitions.
+The96 full evaluation episodes account for48,000 transitions; diagnostic prefixes/branches
+account for3,200/2,560. Native optimizer counts are coordinator675, low actor101,250, low
+critic101,250, team discriminator675 and individual discriminator2,700; all native parameter
+groups moved on every rollout. Both auxiliary heads completed315 steps; D auxiliary trunk
+steps, gradients and movement stayed0. All45 retained prediction-batch hashes, target hashes,
+lane/time order and raw MSE arithmetic passed. Maximum sampled old/replayed individual
+log-probability difference was4.172325134277344e-6, forced-factor scores0, discarded windows0.
+First-rollout calibration stayed mean.3918142941500476/population-std.14013292460922042.
+
+Native initial digest is `8ab42b99d1210d377be1f3bd34abef21274d345729879726c38a26d52e588877`;
+first-rollout facts digest is `b111b00620bec062767f1e805695740a6fc4cddc894c826578ee5debddb60092`.
+These, the target digest in the summary and calibration are the prewritten cross-arm integrity
+references. Initial/final checkpoint bytes and independently recomputed native tensor digests
+match the summary; final auxiliary optimizer state contains315 steps per head and45 history
+entries, finite head/native weights and no D trunk optimizer. Reading checkpoints executed no
+new trajectory or model construction. The ignored `.pt` files remain in this local run directory
+and the original remote run directory under `/home/wu/hmasd-worktrees/complementary-skill-b01-270122663/`;
+the summary retains their exact byte counts and SHA256. Empty stdout/stderr remain there too.
+
+**Whole-episode service.** J is the500-step team score, not the discounted ten-step diagnostic.
+Read every world's return, coverage, quality and height component and independently verified
+the score/component and connected-users identities.
+
+| Frozen panel | J | Coverage | Quality | Height penalty | Connected users/step | Raw action saturation |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Initial own,32 worlds | .338993259 | .44011875 | .125936691 | .006870874 | 22.0059375 | 0 |
+| Final own,32 worlds | .487211696 | .64649250 | .169681089 | .016237380 | 32.3246250 | .627437500 |
+| Final uniform,32 worlds | .485044529 | .64590125 | .164975172 | .016578898 | 32.2950625 | .624697917 |
+
+Final own J ranges.397687378–.545197924 and uniform.432665890–.543308090. All worlds are
+retained in the summary. Initial/final and own/uniform panels use different world addresses;
+their mean differences are not paired within-world learning or selector effects. G/P will use
+the same respective panels for the declared cross-arm comparisons. High final saturation is
+an observed property of the common clipped native action law, not permission to change it.
+
+**Actual combination diagnostic.** Read all64 rectangles/256 cells, independently recomputed
+each discounted ten-step return from its ten collector rewards, checked team-component
+identities, raw/executed clipping, trajectory hashes and the fixed predicted sign. Recomputed
+matched-diagonal minus independent-four-cell value as T=s*Delta/4, and aggregated four
+rectangles per world before reading means. No predicted sign was fitted to observed returns.
+
+| Readout | Mean scalar T | Mean team-unit T (x6) | Positive/negative worlds | Positive/negative rectangles |
+| --- | ---: | ---: | ---: | ---: |
+| **Primary G** | **-.00000863978235** | **-.0000518386941** | **7/9** | **30/34** |
+| Secondary P | +.0000866673278 | +.000520003967 | 9/7 | 32/32 |
+
+There were no prediction ties;9/64 rectangles had descriptive preference reversals. Primary
+world T ranged−.00101198644 to+.000911528692. This near-zero/slightly negative primary mean
+does not support useful average signed pairing for this D bank/readout/prefix panel. The
+positive secondary P mean cannot replace the prewritten primary. Individual positive cells,
+reversals or absolute interaction magnitude do not establish conditional-mean nonadditivity.
+It remains possible that these skills are useful under other states/readouts or that other
+learned banks differ; this one block neither proves additivity nor rejects all complementarity.
+Last-rollout training raw MSE was.007575706 for G and.007510313 for P; these in-sample losses
+are descriptive auxiliary learning evidence, not task-use or mediation evidence.
+
+**Cost.** Runner-body wall time2599.468373s (43.324473min), user/system CPU2448.693645/266.376147s;
+process-lifetime peak RSS1,888,736KiB; CUDA peak allocated1,527,112,704 bytes and reserved
+2,107,637,760 bytes. This wall includes the runner's training, frozen evaluation and writes;
+it excludes earlier preparation/import overhead, transfer, support checks and DM readback.
+Those support costs were incurred, with earlier measured checks recorded above; no complete
+phase timing or exclusive-node occupancy was instrumented, so no isolated training throughput
+or hardware speedup claim follows. D exposure is1 fit and413,760 physical transitions; the
+fixed complete D/G/P batch remains3 fits,1.08M train plus161,280 evaluation, with no addition.
+
+**Cumulative reading and next observation.** The ordinary D bank now supplies a verified
+native-service reference and a nonpositive primary signed-pairing baseline. Whether generic
+auxiliary trunk learning or the pair-structured head changes service remains untouched until
+G/P; no arm contrast is accepted early. Current shared background includes count B10's mean
+benefit from retaining opening labels together with substantial adverse worlds and quality
+tradeoffs. That different weight package strengthens caution about attributing useful native
+service to ongoing reassignment or label diversity; it does not change this frozen comparison
+or identify the cause of D's service. No new reusable shared-topic claim is warranted from D
+alone, so publish its bounded result in the owned standing entry without replacing that topic.
+The newer owner autonomy amendment has been read; existing ownership, Claude pause/G33 and
+accepted contracts remain. Continue the already-fixed G then P at source `957a65c0155f88e5287c744f0f667192174f16df`;
+this is planned completion, not a score-selected rescue, new Pro question or extra fit.
+
+After full local artifact verification, source-snapshot GC initially refused protected
+same-user `/proc/660/cwd` inspection. The documented read-only `--sudo-process-scan` preview
+then found the exact D snapshot eligible; apply rechecked and removed only
+`49cef1c672cb48b4b65c42ecfca14d16`. Its source remains published on the direction branch;
+claims, native exit records, both retained output copies and the authoring checkout remain.
+The canonical-main refresh printed a promisor transport error after fast-forwarding; a
+separate readback confirmed HEAD=origin/main `c13350a7ce9ddbcf0c55acacae03fa93a9e140fd`, clean
+tracked index/tree and readable current controls. This did not execute or retry a result run.
