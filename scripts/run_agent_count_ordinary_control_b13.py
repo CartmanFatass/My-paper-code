@@ -20,7 +20,7 @@ if str(ROOT) not in sys.path:
 from scripts.hmasd_admission import require_admission
 
 
-TAG = "s1_ordinary_control_b13"
+TAG = "s1_ordinary_control_b13_a02"
 
 
 def main(argv=None, *, run_fn=None):

@@ -11814,3 +11814,38 @@ question or shared launcher edits. Independent Reviewer rechecks the changed loa
 path. DM will prepare the exact committed data objects on the native node, then admit this
 corrected code once after publication and fresh resources; if technical validation fails,
 retain the failure and reconsider rather than adjust numerical tolerance or delete a claim.
+
+
+### B13 a02 sparse evidence correction accepted
+
+The DM inspected and accepts the bounded three-file correction. Historical JSON/NPZ is read
+from the authoritative HEAD Git blob with its original fixed SHA-256; a present working file
+must be byte-identical. Verified NPZ bytes are decoded in memory with allow_pickle=False.
+Before/after identities re-read the committed references and external checkpoint bytes and
+truthfully record Git locators and working-file presence. The failure handler also preserves
+the original traceback/error.txt when a secondary identity recheck fails, reporting that
+secondary failure separately. Original a01 failure files and operation are unchanged.
+
+The real temporary sparse-Git fixture reproduces the missing-working-file topology and verifies
+JSON/NPZ loading, disagreement/hash rejection and identity rechecks. The existing failure test
+now also forces a secondary reread failure and checks that the original error survives. Final
+focused suite: Implementer21 passed in6.68s; independent Reviewer21 passed in6.29s, with14
+existing third-party deprecation warnings. Both checked the same final bytes; the Reviewer
+reports no material finding remaining. The DM read the complete diff and check reports and
+verified those hashes, parsed ASTs, LF and clean changed-line whitespace. No extra full panel
+or fit was used for acceptance. Full SET reproduction remains a runtime condition.
+
+- candidate runner SHA-256 `ba5270a08eb3cab464ab7b0ac169585bc0ba5c9d75edbf6e14539e6eb45235b9`;
+- CLI `94d14050360c47e02797cc1388e13cfffc9d4ac2574e3f6a39a02928822aa711`;
+- tests `d6f010e44513321498c74adb95ff44ff91ca88158b21146abb89eaba86249c58`;
+- unchanged package `97533d39e14fdfd978d0536af13fc10b48837c2c225fbfb96b7236acbb4e8e2a`.
+
+All12 fixed committed historical summary/panel/trace objects were transferred to the native
+Git object database and individually verified by size and SHA-256:57,405,194 uncompressed
+bytes, pack05a4c96ab701453cdec264d9d4e96c589272040e. No native ref, index, working evidence
+or original checkpoint was changed. Exact newly published source blobs will likewise be
+made available before snapshot preparation to avoid the diagnosed partial-clone fetch fault.
+Current published main37d837bfb retains the lifted owner pause, exploring state and same lead.
+The DM selects the already recorded a02 corrected-code attempt with unchanged scientific
+inputs, eight panels and0 fits; fresh native admission remains required. No B13 scientific
+result has yet been produced or accepted.

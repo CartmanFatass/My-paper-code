@@ -5,6 +5,7 @@ import copy
 from dataclasses import replace
 import json
 from pathlib import Path
+import subprocess
 from types import SimpleNamespace
 
 import numpy as np
@@ -84,6 +85,8 @@ def _restored_target(arm: str, lanes: int, n: int, seed: int, payload: dict, roo
 
 
 def test_fixed_assets_worlds_exposure_and_hashes():
+    assert runner.OBJECT_ID == "s1_ordinary_control_b13"
+    assert runner.TAG == entry.TAG == "s1_ordinary_control_b13_a02"
     assert [(asset.key, asset.arm, asset.seed) for asset in runner.ASSETS] == [
         ("s1", "SET", 963201), ("s2", "SET", 963401),
         ("h1", "H6", 942201), ("h2", "H6", 952201),
@@ -103,6 +106,108 @@ def test_fixed_assets_worlds_exposure_and_hashes():
         "evaluation_resets": 256, "batched_policy_step_calls": 4000,
         "h6_coordinator_batched_calls": 200, "h6_lane_assignments": 6400,
     }
+
+
+def test_authoritative_git_blob_loading_in_sparse_checkout_and_identity_recheck(tmp_path):
+    repo = tmp_path / "sparse-repository"
+    repo.mkdir()
+
+    def git(*args):
+        return subprocess.run(
+            ["git", "-C", str(repo), *args], check=True,
+            stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+        )
+
+    git("init", "-b", "main")
+    git("config", "user.name", "B13 Test")
+    git("config", "user.email", "b13@example.invalid")
+    (repo / "keep").mkdir()
+    (repo / "keep" / "marker.txt").write_text("keep\n", encoding="utf-8")
+    relative_root = Path("runs/agent_count_generalization/sparse_asset")
+    source_root = repo / relative_root
+    source_root.mkdir(parents=True)
+    summary_path = source_root / "summary.json"
+    panel_path = source_root / "panel_45_n8.json"
+    trace_path = source_root / "trace_45_n8.npz"
+    summary_bytes = b'{"status":"complete","value":13}\n'
+    panel_bytes = b'{"status":"complete","world_seeds":[1,2]}\n'
+    summary_path.write_bytes(summary_bytes)
+    panel_path.write_bytes(panel_bytes)
+    np.savez(trace_path, initial_states=np.arange(6, dtype=np.float32).reshape(2, 3),
+             connections=np.asarray([[True, False], [False, True]], dtype=bool))
+    trace_bytes = trace_path.read_bytes()
+    git("add", "keep", "runs")
+    git("commit", "-m", "fixture evidence")
+    git("sparse-checkout", "init", "--cone")
+    git("sparse-checkout", "set", "keep")
+    assert not summary_path.exists() and not panel_path.exists() and not trace_path.exists()
+
+    summary_sha = runner.hashlib.sha256(summary_bytes).hexdigest()
+    panel_sha = runner.hashlib.sha256(panel_bytes).hexdigest()
+    trace_sha = runner.hashlib.sha256(trace_bytes).hexdigest()
+    summary, summary_identity = runner._read_bound_json(
+        summary_path, summary_sha, relative=relative_root / summary_path.name,
+        committed=True, repository_root=repo,
+    )
+    panel, panel_identity = runner._read_bound_json(
+        panel_path, panel_sha, relative=relative_root / panel_path.name,
+        committed=True, repository_root=repo,
+    )
+    trace, trace_identity = runner._read_bound_npz(
+        trace_path, trace_sha, relative=relative_root / trace_path.name,
+        committed=True, repository_root=repo,
+    )
+    assert summary == {"status": "complete", "value": 13}
+    assert panel["world_seeds"] == [1, 2]
+    assert np.array_equal(trace["initial_states"], np.arange(6, dtype=np.float32).reshape(2, 3))
+    assert np.array_equal(trace["connections"], [[True, False], [False, True]])
+    for identity in (summary_identity, panel_identity, trace_identity):
+        assert identity["authoritative_source"] == "git_blob"
+        assert identity["git_locator"].startswith("HEAD:runs/")
+        assert identity["working_present"] is False
+
+    checkpoint = tmp_path / "external-checkpoint.pt"
+    checkpoint.write_bytes(b"external checkpoint")
+    record = SimpleNamespace(
+        spec=SimpleNamespace(key="sparse", checkpoint_sha256=runner.file_sha256(checkpoint)),
+        checkpoint=checkpoint, summary_identity=summary_identity,
+        reference_identities={8: {"panel": panel_identity, "trace": trace_identity}},
+    )
+    before = runner._input_identities([record])
+    assert before["sparse"]["summary"]["working_present"] is False
+    assert before == runner._input_identities([record])
+
+    summary_path.parent.mkdir(parents=True, exist_ok=True)
+    summary_path.write_bytes(b"dirty working summary\n")
+    with pytest.raises(ValueError, match="committed/working source bytes differ"):
+        runner._read_bound_json(
+            summary_path, summary_sha, relative=relative_root / summary_path.name,
+            committed=True, repository_root=repo,
+        )
+    with pytest.raises(ValueError, match="committed/working source bytes differ"):
+        runner._input_identities([record])
+    summary_path.unlink()
+
+    with pytest.raises(ValueError, match="source SHA-256 mismatch"):
+        runner._read_bound_json(
+            summary_path, "0" * 64, relative=relative_root / summary_path.name,
+            committed=True, repository_root=repo,
+        )
+
+    trace_path.write_bytes(trace_bytes)
+    _arrays, present_identity = runner._read_bound_npz(
+        trace_path, trace_sha, relative=relative_root / trace_path.name,
+        committed=True, repository_root=repo,
+    )
+    assert present_identity["working_present"] is True
+    trace_path.write_bytes(trace_bytes + b"dirty")
+    with pytest.raises(ValueError, match="committed/working source bytes differ"):
+        runner._read_bound_npz(
+            trace_path, trace_sha, relative=relative_root / trace_path.name,
+            committed=True, repository_root=repo,
+        )
+    trace_path.unlink()
+    assert runner._input_identities([record]) == before
 
 
 def test_bad_checkpoint_hash_is_rejected_before_deserialization(tmp_path):
@@ -548,7 +653,16 @@ def test_reproduction_failure_stops_before_h6_and_preserves_partial_row(monkeypa
         restore_validation={},
     ) for asset in runner.ASSETS]
     monkeypatch.setattr(runner, "load_assets", lambda *_a, **_k: fake_records)
-    monkeypatch.setattr(runner, "_input_identities", lambda _records: {"stable": True})
+    identity_calls = 0
+
+    def fail_identity_recheck(_records):
+        nonlocal identity_calls
+        identity_calls += 1
+        if identity_calls == 1:
+            return {"stable": True}
+        raise ValueError("injected identity reread failure")
+
+    monkeypatch.setattr(runner, "_input_identities", fail_identity_recheck)
 
     calls = []
 
@@ -578,7 +692,14 @@ def test_reproduction_failure_stops_before_h6_and_preserves_partial_row(monkeypa
     assert result["panels"][0]["original_reproduction"] == {"all_match": False}
     assert result["counts"]["evaluation_team_steps"] == 1
     assert result["counts"]["evaluation_uav_steps"] == 8
-    assert (out / "error.txt").is_file()
+    assert result["input_identities_after"] is None
+    assert result["input_identities_unchanged"] is False
+    assert result["input_identity_recheck_failure"] == (
+        "ValueError: injected identity reread failure"
+    )
+    error = (out / "error.txt").read_text(encoding="utf-8")
+    assert "injected SET reproduction mismatch" in error
+    assert "injected identity reread failure" not in error
 
 
 def test_cli_admission_precedes_runner_and_binds_four_paths(monkeypatch, tmp_path):

@@ -3,6 +3,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 import hashlib
+import io
 import json
 from pathlib import Path
 import resource
@@ -53,7 +54,7 @@ from experiments.candidates.agent_count_generalization.training_condition_b11 im
 
 
 OBJECT_ID = "s1_ordinary_control_b13"
-TAG = OBJECT_ID
+TAG = "s1_ordinary_control_b13_a02"
 REPOSITORY_ROOT = Path(__file__).resolve().parents[4]
 POLICY_STAGE = 45
 PRIOR_TRAINING_TEAM_STEPS = 360_000
@@ -186,36 +187,73 @@ def _config_record(config: Any) -> dict[str, Any]:
 
 def _read_bound_bytes(
     path: Path, expected_sha256: str, *, relative: Path, committed: bool,
+    repository_root: Path = REPOSITORY_ROOT,
 ) -> tuple[bytes, dict[str, Any]]:
-    raw = Path(path).read_bytes()
+    path = Path(path)
+    repository_root = Path(repository_root)
     if committed:
-        tracked = subprocess.run(
-            ["git", "-C", str(REPOSITORY_ROOT), "show", f"HEAD:{relative.as_posix()}"],
+        locator = f"HEAD:{relative.as_posix()}"
+        raw = subprocess.run(
+            ["git", "-C", str(repository_root), "show", locator],
             check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
         ).stdout
-        if raw != tracked:
+        working_present = path.is_file()
+        working_raw = path.read_bytes() if working_present else None
+        if working_raw is not None and working_raw != raw:
             raise ValueError(f"B13 committed/working source bytes differ: {relative}")
-        binding = "HEAD git blob plus identical working bytes"
+        binding = (
+            "authoritative HEAD git blob plus identical working bytes"
+            if working_present else "authoritative HEAD git blob; working file absent from sparse checkout"
+        )
+        authoritative_source = "git_blob"
     else:
+        working_raw = path.read_bytes()
+        working_present = True
+        raw = working_raw
+        locator = None
         binding = "pytest fixture bytes"
+        authoritative_source = "working_file"
     digest = hashlib.sha256(raw).hexdigest()
     if digest != expected_sha256:
         raise ValueError(f"B13 source SHA-256 mismatch: {relative}")
     return raw, {
-        "path": str(path), "sha256": digest, "bytes": len(raw), "binding": binding,
+        "path": str(path), "working_path": str(path), "working_present": working_present,
+        "working_bytes": len(working_raw) if working_raw is not None else None,
+        "working_sha256": (
+            hashlib.sha256(working_raw).hexdigest() if working_raw is not None else None
+        ),
+        "repository_root": str(repository_root), "relative_path": relative.as_posix(),
+        "git_locator": locator, "authoritative_source": authoritative_source,
+        "committed": bool(committed), "sha256": digest, "bytes": len(raw),
+        "binding": binding,
     }
 
 
 def _read_bound_json(
     path: Path, expected_sha256: str, *, relative: Path, committed: bool,
+    repository_root: Path = REPOSITORY_ROOT,
 ) -> tuple[dict[str, Any], dict[str, Any]]:
     raw, identity = _read_bound_bytes(
         path, expected_sha256, relative=relative, committed=committed,
+        repository_root=repository_root,
     )
     value = json.loads(raw)
     if not isinstance(value, dict):
         raise ValueError(f"B13 source JSON is not an object: {relative}")
     return value, identity
+
+
+def _read_bound_npz(
+    path: Path, expected_sha256: str, *, relative: Path, committed: bool,
+    repository_root: Path = REPOSITORY_ROOT,
+) -> tuple[dict[str, np.ndarray], dict[str, Any]]:
+    raw, identity = _read_bound_bytes(
+        path, expected_sha256, relative=relative, committed=committed,
+        repository_root=repository_root,
+    )
+    with np.load(io.BytesIO(raw), allow_pickle=False) as source:
+        arrays = {name: source[name].copy() for name in source.files}
+    return arrays, identity
 
 
 def _fit_spec(summary: dict[str, Any]) -> FitSpec:
@@ -336,7 +374,7 @@ def _load_reference(
             or panel.get("training_storage_calls") != 0 or any(panel.get("optimizer_calls", {}).values()):
         raise ValueError(f"B13 source panel evaluation contract mismatch for {asset.key} N={n}")
     trace_path = run_root / f"trace_45_n{n}.npz"
-    _, trace_identity = _read_bound_bytes(
+    trace, trace_identity = _read_bound_npz(
         trace_path, asset.trace_sha256[index], relative=relative_root / trace_path.name,
         committed=committed,
     )
@@ -344,8 +382,6 @@ def _load_reference(
     if trace_record.get("sha256") != trace_identity["sha256"] \
             or trace_record.get("bytes") != trace_identity["bytes"]:
         raise ValueError(f"B13 source trace identity mismatch for {asset.key} N={n}")
-    with np.load(trace_path, allow_pickle=False) as source:
-        trace = {name: source[name].copy() for name in source.files}
     expected_names = set(b11._new_trace(eval_spec, n)) | {"initial_states", "initial_observations"}
     if set(trace) != expected_names:
         raise ValueError(f"B13 source trace schema mismatch for {asset.key} N={n}")
@@ -932,19 +968,34 @@ def _source_hashes() -> dict[str, str]:
 
 
 def _input_identities(records: list[LoadedAsset]) -> dict[str, Any]:
+    def reread(identity: Mapping[str, Any]) -> dict[str, Any]:
+        return _read_bound_bytes(
+            Path(identity["working_path"]), str(identity["sha256"]),
+            relative=Path(identity["relative_path"]),
+            committed=bool(identity["committed"]),
+            repository_root=Path(identity["repository_root"]),
+        )[1]
+
     result = {}
     for record in records:
+        references = {
+            str(n): {
+                name: reread(identity) for name, identity in identities.items()
+            }
+            for n, identities in record.reference_identities.items()
+        }
+        checkpoint_sha256 = file_sha256(record.checkpoint)
+        if checkpoint_sha256 != record.spec.checkpoint_sha256:
+            raise ValueError(f"B13 checkpoint SHA-256 changed for {record.spec.key}")
         result[record.spec.key] = {
-            "summary": {
-                "path": str(record.summary_identity["path"]),
-                "sha256": file_sha256(Path(record.summary_identity["path"])),
-                "bytes": Path(record.summary_identity["path"]).stat().st_size,
-            },
+            "summary": reread(record.summary_identity),
             "checkpoint45": {
-                "path": str(record.checkpoint), "sha256": file_sha256(record.checkpoint),
+                "path": str(record.checkpoint), "sha256": checkpoint_sha256,
                 "bytes": record.checkpoint.stat().st_size,
+                "authoritative_source": "external physical file",
+                "working_present": record.checkpoint.is_file(),
             },
-            "reference": record.reference_identities,
+            "reference": references,
         }
     return result
 
@@ -1116,10 +1167,17 @@ def run_study(
         summary["source_hashes_after"] = _source_hashes()
         summary["source_hashes_unchanged"] = summary["source_hashes_before"] == summary["source_hashes_after"]
         if records:
-            summary["input_identities_after"] = _input_identities(records)
-            summary["input_identities_unchanged"] = (
-                summary.get("input_identities_before") == summary["input_identities_after"]
-            )
+            try:
+                summary["input_identities_after"] = _input_identities(records)
+                summary["input_identities_unchanged"] = (
+                    summary.get("input_identities_before") == summary["input_identities_after"]
+                )
+            except Exception as identity_exc:
+                summary["input_identities_after"] = None
+                summary["input_identities_unchanged"] = False
+                summary["input_identity_recheck_failure"] = (
+                    f"{type(identity_exc).__name__}: {identity_exc}"
+                )
         (out / "error.txt").write_text(traceback.format_exc(), encoding="utf-8")
         return_code = 1
     finally:
