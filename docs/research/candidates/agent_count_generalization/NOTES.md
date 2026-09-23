@@ -10669,3 +10669,46 @@ the native loader can find ninja; interpreter, device and the scientific contrac
 Use the live canonical configuration for the new launches, preserve existing native artifacts,
 and record actual admitted operations before arming their observer. Still **0 production B12
 fits at this acceptance entry**.
+
+## 2026-09-23 — B12 both fixed cells admitted and training; same-handle observation active
+
+Both new cells are now admitted and have actually entered training: **2 started production
+fits**, with the fixed 720k train/64k final-evaluation contract unchanged. This is execution
+acceptance and observed initialization, not scientific acceptance or evidence of recurrence.
+The authoritative native identity, source, command, timestamps and paths are in the copied
+runner-written records:
+
+- T6: [launch manifest](../../../../runs/agent_count_generalization/s1_training_recurrence_b12_t6_s963401/launch-manifest.json),
+  [fresh memory admission](../../../../runs/agent_count_generalization/s1_training_recurrence_b12_t6_s963401/admission-preflight.json).
+- T8: [launch manifest](../../../../runs/agent_count_generalization/s1_training_recurrence_b12_t8_s963401/launch-manifest.json),
+  [fresh memory admission](../../../../runs/agent_count_generalization/s1_training_recurrence_b12_t8_s963401/admission-preflight.json).
+
+All four immutable files were copied from the native outputs and verified by byte length
+and SHA-256. Both native status observations report accepted/running, matching actual
+runner/supervisor identities and consistent records. Each fresh physical/effective memory
+reading exceeded the configured 4GiB floor. The canonical control files were reconciled to
+the latest published main; existing native B11 outputs and other directions' running work
+were preserved. A preliminary control-blob read outside the configured network shell stalled
+on Git's lazy network fetch; only that owned pre-launch reader and its Git children were
+stopped. The same two control files were reconciled and read successfully through the
+configured network shell before any B12 launch. This started no scientific fit and retried
+no accepted operation. Historical Git commit-graph cleanup warnings remain unrelated to
+the successfully verified source blobs and admissions; no repository repair was attempted.
+
+Native full-model summaries already verify seed963401, all16 new training-world addresses,
+true-N configurations, and the same common tensor manifest across arms. Both actual initial
+parameter/normalizer digests are
+`b6d6154362de907879eadf3bd7331c3cdd2ce3522c38bd40cb517cf3a01437d0`,
+and the returned canonical post-construction RNG digests are
+`8adf4b4259ddbf72caa6cc90d014b71883ef22c8e151b991ab6f4061f79ee8fe`.
+The shared actual initialization and sampler state differ from B11's recorded block.
+Each fit has completed native training transitions; no endpoint or best-checkpoint selection
+was made from these startup observations.
+
+The consumed Pro completion event was rearmed using its exact generation99, wake and event
+identities; its observer then had no remaining active job. New deterministic observations
+were separately registered for these two accepted launch operation references. Generation101's
+first drain sees both existing processes running, zero observation errors, no pending event
+and no record mismatch. Its 1500s bounded window returns control for rearming the same
+handles; it neither changes final45 nor restarts a worker. Complete native outputs, all45
+updates/arm, full final panels and independent trace/checkpoint reading remain outstanding.
