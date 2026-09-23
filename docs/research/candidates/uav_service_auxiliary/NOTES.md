@@ -4635,3 +4635,127 @@ on completion, verify the entire output and unchanged evaluation target before
 accepting a scientific result. R is already fixed as the second fit and awaits
 N's collection/resource release, not a positive performance gate. No further
 scientific action is selected in this launch turn.
+
+## 2026-09-23 — B04 N fully accepted; fixed R remains the next fit
+
+**Acceptance.** The original N operation ended with a valid native exit witness,
+exit 0, matching recorded identities and a consistent admission record. This is
+the same accepted operation, not a restarted fit. I collected all **46 files /
+113,794,543 bytes** and verified their SHA256 values against the actual node
+before replacing the local initial status snapshot with the final status.
+The complete checkpoint, first-rollout audit and all raw trajectories remain
+under `runs/uav_service_auxiliary/b04_n_914021_a01/` in this authoring checkout
+and at the manifest's original remote output. They are retained even where Git
+ignores binary/log artifacts. No remote cleanup occurred.
+
+[Full runner summary](../../../../runs/uav_service_auxiliary/b04_n_914021_a01/summary.json),
+[fixed configuration](../../../../runs/uav_service_auxiliary/b04_n_914021_a01/config.json),
+[exit witness](../../../../runs/uav_service_auxiliary/b04_n_914021_a01/process-exit.json),
+[final observed status](../../../../runs/uav_service_auxiliary/b04_n_914021_a01/launch-status.json).
+Summary SHA256 is `ab814a3e1d1861bcc8413c15c828dd39ed25c55106b1a71a6dc76a267f7bff78`.
+
+Independent read-only arithmetic over every stored trajectory reproduced all
+30 training-rollout lane returns/metric sums and every field and aggregate in
+all 64 evaluation worlds. Original reward was rescored from QoS, actual cost,
+event counts and graph PBRS, with maximum per-step discrepancy
+`4.440892098500626e-16`; native cost cap, coefficient 2 and N training-reward
+identity also matched. All **37 runner-recorded artifact hashes**, configuration
+hash, numeric arrays, action bounds, seeds, lengths and terminal flags passed.
+There were **180,000 train / 1,440,000 agent rows / 30 updates / 120 episodes**,
+and **96,000 evaluation transitions / 64 episodes / zero evaluation updates**.
+Every episode truncated at 1500, with no early terminations or rollout-boundary
+straddling; stderr is empty.
+
+The first-rollout audit matches the saved physical trace and the actual stored
+reward, including the unchanged native discriminator components. Independent
+float64 GAE recurrences reproduced the stored FP32 low advantages/returns
+(maximum errors `2.195e-6 / 3.933e-6`) and high team/agent advantages and returns
+(maximum error across these arrays `1.024e-4`, within `atol=5e-5, rtol=3e-6`
+for the accumulated FP32 computation). High interval rewards agree within
+`9.537e-7`; all 600 valid high rows have ten-step intervals and the correct final
+termination masks. This checks the recorded native path, not a new fit.
+
+All five learners moved at every update. Final optimizer steps are high **2250**,
+low actor/critic **67,500 each**, team discriminator **450**, individual
+discriminator **1800**; every initialized optimizer tensor has the corresponding
+step, both in the summary and loaded checkpoint. Parameter L2 movement from
+initialization is respectively **12.590971 / 35.897559 / 31.338790 / 3.048546 /
+7.853115**. The checkpoint's 91/15/14/24/29 parameter tensors independently
+reproduce final policy hash
+`3fee4d9c751aac8dd3c0b5d84839624da63ca22a93f05f744647b1dc8f111408`,
+also shared by development update 30 and the final panel. The two registered
+positional-encoding buffers are included in the whole-checkpoint hash and finite
+checks, but not the parameter-only fingerprint.
+
+**Complete N reading, before its fixed comparator.** QoS and cost below are
+per-step means; battery is each world's actual episode minimum, not its average.
+
+| Panel | Native J | QoS | Return cost | Mean episode battery minimum | P10 episode battery minimum |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Development 0 | -233.327251 | .098629 | .123193 | .353016 | .326800 |
+| Development 10 | +163.285048 | .270542 | .076369 | .371356 | .347821 |
+| Development 20 | -1.408604 | .213444 | .103004 | .381249 | .347300 |
+| Development 30 | +50.842834 | .252992 | .105077 | .366580 | .341325 |
+| Fresh final 32 worlds | **-496.301830** | **.158025** | **.239923** | **.353111** | **.325910** |
+
+Final throughput is **4.740758 Mbps/step**; mean per-episode QoS sum, cost sum and
+PBRS sum are **237.037886 / 359.884904 / -13.569907**, reproducing the original J.
+All 32 world records are preserved in the summary and independently rescored.
+**20/32 J values are negative**, with range **[-1537.378126, +431.154043]** and
+P10 **-1392.587969**. Six worlds have zero QoS (938004/11/17/25/30/32); the worst
+J and lowest battery minimum **.311067401** both occur in 938032. No charging,
+charger input, cutoff or depletion event occurs anywhere in training or any
+evaluation panel. This does not test charging recovery or catastrophe reduction.
+
+On the same eight development worlds, update 30 versus initialization has
+J **+284.170084**, QoS **+.154363** and cost **-.018117**. This is useful ordinary
+learning in that panel, with a non-monotone training trajectory. It does not
+justify replacing the fixed endpoint with update 10. The final 32 worlds are
+a different sample evaluated with the same update-30 policy; their lower mean
+is not additional training deterioration. N alone neither supports nor refutes
+the fixed R risk-weighting hypothesis. The paired final comparison, negative
+tails and service-risk tradeoff remain unresolved. Shared research judgments
+are unchanged at this incomplete-pair boundary.
+
+**Cost and continuation.** One completed fit, **276,000 total team interactions**,
+**134.635283 runner minutes**; user/system CPU **7723.455233 / 364.479707 s**.
+Collection/update/evaluation wall seconds are **3570.328844 / 1932.932596 /
+2201.584883**. Runner-process high-water RSS is **2,986,896 KiB (2.848526 GiB)**;
+this is not a simultaneous machine peak or an intrinsic-speed comparison.
+The full local run occupies **113,796,311 bytes** after adding the final status.
+Read-only verification added zero environment interactions and zero optimizer
+updates. Current published main still lifts the owner pause and preserves this
+direction/lead; FSD and G33 remain untouched.
+
+Proceed with the already-fixed **R**, same scientific source
+`914fc484368cc6c41af211b169c45b02e4a10425`, seed, horizons and evaluation worlds.
+The only intervention remains the extra `2 * actual return_constraint_cost` in
+training; original evaluation coefficient remains 2. N's observations caused no
+coefficient, endpoint, seed or exposure change. R is the second originally
+selected fit, not an extension, confirmation or response to a positive N gate.
+
+## 2026-09-23 — B04 fixed R admitted on the same source
+
+The preselected R fit is **natively accepted and running** on the configured
+4070, with fresh actual-node available memory **13,679,423,488 bytes** against
+the 4 GiB floor. Its supervisor and scientific child identities match and the
+operation record is consistent. [Manifest](../../../../runs/uav_service_auxiliary/b04_r_914021_a01/launch-manifest.json),
+[admission preflight](../../../../runs/uav_service_auxiliary/b04_r_914021_a01/admission-preflight.json),
+[observed state](../../../../runs/uav_service_auxiliary/b04_r_914021_a01/launch-status.json).
+The supervisor's successful launch-command exit is not the scientific child's
+completion; no R outcome has been accepted.
+
+The written active config and complete spec exactly match N; the arm selector
+and extra training coefficient are the intended changes. Training/evaluation
+coefficients are **4/2**. The original N operation was collected and accepted
+before R's single launch. R's initial summary is still the pre-evaluation
+skeleton; the runner publishes initialization/collection fingerprints with its
+first progress write, so those matched-initialization checks remain pending.
+There is no evidence of an initialization mismatch or a runner failure.
+
+Retain this accepted operation and arm the assigning task's deterministic
+observer with the same native status reference. At its next checkpoint read
+the newly written fingerprints and progress; at completion collect and verify
+the entire R output, then read the fixed paired final worlds and contrary
+tails. No restart, new Pro question, new fit or cross-App message is selected
+by this completion/launch boundary.
