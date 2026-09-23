@@ -11154,3 +11154,494 @@ separate newly suggested explanations from observations, and return MATERIAL_DIS
 No fixed number of new ideas and no immediate new fit is required.
 
 ### Answer
+
+Saved from chat after same-key delivery verification returned `NOT_DELIVERED`; the target
+was independently verified unchanged at source SHA `c0ab00465c6a8c4e247ec0d2cb656e585a7de67d`
+and its actual Answer heading was empty. No answer commit was found. The full collected text
+below is preserved verbatim, including its exported formula formatting and citation labels.
+Question key: `hmasd:91bc8736ecf5a14311fc93fe285587ecd9b589c97f1f5ee2d11046fc887259c3`.
+Collected content: 7,952 characters, SHA-256
+`2d12a6a6b28314f03ed3661fa87d325312f0132fbd88a75f163a6e7aaad12cd6`;
+saved text with terminal newline: 7,953 characters, SHA-256
+`84693e6ade6f010d5617f22b577d7edd702dadfa272271f7408d2cd57e3a55ca`.
+The Pro answer is advice, not another empirical observation.
+
+GitHub读取正常，但当前连接没有可调用的文件写入操作，因此未写入仓库，也没有产生新提交。最新回读的本题 ### Answer 仍为空。以下是完整答复。
+
+Answer
+一、建议：保留这次四策略共同重放，检验剩余包优势是否值得新的学习投入
+
+我支持所提的四个固定策略、两个N、128,000评价team steps的零fit比较。 保留B03与B07的原始H6/final45，以及B11、B12两份T6/final45；不加入T8、N4、固定人数值、初始标签复用、新世界或训练。两份SET都通过共同入口重放，而不是只附上历史分数。这个范围与附件指定的资产和比较一致。
+
+hmasd-pro-question-b12-ordinary…
+
+这次值得改变的判断是：
+
+在现有较强普通策略已经可用的情况下，旧H6包是否仍有足够的实际N8服务增量，值得把下一笔学习用于一个新的、前瞻匹配的H6／普通SET比较？还是当前更值得投入的是普通策略的可靠学习与宽条件用途，而不是继续围绕旧包差追究技能解释？
+
+它不是再次检验T8响应能否复现。前次完整Answer及采纳已经覆盖B12的反号分支；降低T8默认升级的优先级、不自动增加第三块的判断保持不变。
+
+hmasd-pro-question-b12-ordinary…
+
+最强的反对理由是：这张表可能只是将几个经过结果选择的旧策略重新排序。 两份H6来自已经保留正面用途的历史，选择T6作为当前挑战又由B12的较好成绩触发，评价世界也已经读过。即使H6再赢，它仍可能只胜过某些普通训练实例；即使不赢，也不能证明H6方法平均无用。若两种结果都不会改变下一笔学习的对象，那么这128k评价及恢复、审阅、阅读成本都不值得付出。
+
+我仍支持本次，是因为这里确有一个尚未观察的比较：两份保留H6在这组共同世界上，相对于两份新T6的实际服务差距。 它能够降低“继续研究的差距其实只相对于较弱普通实例才成立”的风险，也能防止因T8复现失败而忽略已经出现的较强T6。这个有限筛选不需要先认证整个普通方法类别，但必须真正约束后续投入，而不是成为下一次训练的例行前置步骤。
+
+二、B12带来的更新：较强普通实例必须进入比较，但不能由此宣布H6差距已经消失
+
+我从四份B12原始J数组重算了64个配对差、均值、中位数和符号计数，与完整记录一致：N8的T8−T6为 −.042106854，4正／28负；N6为 −.064500572，1正／31负。原生服务均值也分别减少1.1256875和2.41025人／步。这是有效完成的学习比较中的反面结果，不是缺失更新或评价世界变更。
+
+对新问题更重要的是两份T6的绝对水平：
+
+固定普通策略	N8平均J	N8服务人数／步	N6平均J	N6服务人数／步
+B11 T6／963201	.340079605	22.210438	.452484895	29.612938
+B12 T6／963401	.405497333	26.076813	.506411159	32.837313
+B12 T6减B11 T6	+.065417728	+3.866375	+.053926264	+3.224375
+
+B11原始面板在本次版本比较中未改变；上述J差另作了独立复算。B12 T6的J在N8的27/32、N6的29/32个世界高于B11 T6，仍分别有5个和3个反例。因此，“更强”应限定为这些面板上的较高平均水平，不是逐世界占优或训练总体更优。
+
+加强的判断是：普通N6训练能够产生值得保留的N8迁移实例，不能继续把较低的旧SET终点当成普通学习器能力的固定代表。削弱的判断是：目标N8训练本身就是可靠升级，或者提高资格／服务的途径已经被一个简单训练条件修正稳定找到。仍未解决的是新旧训练区组为何不同、普通基线是否充分、H6对这些T6的共同世界差距，以及新世界上的用途。两个T8的N8均值接近，也不能补出T8训练方差小或已经稳定的结论。
+
+hmasd-pro-question-b12-ordinary…
+
+高度代价要保留，但不能被包装成现成修复。B12的C/Q加权小计在两个N都已经为负，即使在记账表里删去P，也不会恢复原来的平均正响应；这不证明改变高度控制无益，只反对“目前只差去掉一项惩罚”的解释。反面的反例也要保留：T8在N6的最低绝对服务为26.410人／步，高于T6的24.944，尽管T8的平均和绝大多数配对差更差。平均、配对损失和最低绝对服务不能互相代称。
+
+hmasd-pro-question-b12-ordinary…
+
+B03、B07在旧世界上的有界正结果不因此失效；但也不能用那些H6均值减去现在的T6均值，声称差距只剩多少。它们使用不同世界地址和样本量，正是本次共同重放要补的缺口。 
+
+hmasd-pro-question-online-skill…
+
+三、2×2表应完整保留，但它不是交互实验，也不是四次独立包比较
+
+令 H
+1
+	​
+
+,H
+2
+	​
+
+ 为B03、B07的H6，S
+1
+	​
+
+,S
+2
+	​
+
+ 为B11、B12的T6。对每个固定N和世界 w，定义
+
+g
+ij,n,w
+	​
+
+=J(H
+i
+	​
+
+,n,w)−J(S
+j
+	​
+
+,n,w),G
+ij,n
+	​
+
+=
+32
+1
+	​
+
+w
+∑
+	​
+
+g
+ij,n,w
+	​
+
+.
+
+每个N都报告四个绝对策略读数及完整矩阵：
+
+G
+n
+	​
+
+=(
+H
+1
+	​
+
+−S
+1
+	​
+
+H
+2
+	​
+
+−S
+1
+	​
+
+	​
+
+H
+1
+	​
+
+−S
+2
+	​
+
+H
+2
+	​
+
+−S
+2
+	​
+
+	​
+
+).
+
+N8是主要数量迁移用途，N6单独报告训练数量上的后果，不形成新的N6/N8总分。四个策略都训练于N6，所以N8对它们都是未训练数量；本次也没有N4数据可供更新原来两侧数量外推的完整主张。
+
+hmasd-pro-question-b12-ordinary…
+
+这里有一项重要的算术限制：
+
+G
+i1,n
+	​
+
+−G
+i2,n
+	​
+
+=
+J
+ˉ
+(S
+2
+	​
+
+,n)−
+J
+ˉ
+(S
+1
+	​
+
+,n),
+G
+11,n
+	​
+
+−G
+12,n
+	​
+
+−G
+21,n
+	​
+
++G
+22,n
+	​
+
+=0.
+
+这些恒等式在每个世界也成立。更换SET控制使某个H6差距改变多少，已经由两份SET的分差决定；它不是新发现的H6×SET交互。 两包并没有在同一回合中搭配执行，这也不是cross-play。若某个H6只胜S1而不胜S2，直接读法是它的水平落在两份普通实例之间，而不是发现它“与S2存在不利相互作用”。
+
+因此，64k新H6评价真正补出的是：两份H6在这些世界上的水平、它们彼此的差异、各自相对于已知普通服务水平的增量和损失。64k SET重放主要购买恢复与共同入口的可比性。完整矩阵仍有价值，因为它防止看过H6结果后选择有利对手，但不能把四个角当成四次训练复现或四份独立支持证据。
+
+同理，本次新差距与原B03／B07历史差距的变化，不能全部归因于普通控制变强：H6的评价面板也换了。只有在本次共同面板内，才能清楚说明“面对S1与S2，固定H6的差距分别是多少”。
+
+四、选择暴露不会使有限比较无效，但会限定它能改变的学习判断
+保留两份普通策略，不能变成选择“每世界最强控制”
+
+我接受明确固定S1、S2两个控制。它避免了在新H6分数出现后，只保留较弱对手或只突出较强对手；也保留了普通训练实例之间的实际差异。但它没有消除结果信息：选择这个问题、这两份H6和这组世界，都发生在既有开发阅读之后。
+
+hmasd-pro-question-b12-ordinary…
+
+特别不能构造
+
+J
+control,w
+	​
+
+=max{J(S
+1
+	​
+
+,w),J(S
+2
+	​
+
+,w)}
+
+然后把它当作一个已实现的普通策略。按每个世界的最终收益选择权重需要结果信息，是未部署的事后上包络。同样不能对H6取每世界最大值、只保留较好H6，或者对J、覆盖、惩罚分别挑最有利实例。
+
+选择后的策略比较仍然有实际信息价值：一个合法普通策略在指定世界上达到什么水平，是应当面对的事实，即使它不是方法总体的无偏代表。 但从“这份普通策略足够强，削弱某项追加投资的理由”跳到“普通基线已经充分合格”，或者从“两个H6都胜过它”跳到“技能机制已证明”，都超出本次证据。
+
+历史学习必须保持原样，而不是事后制造匹配
+
+配置核对表明，两份H6保留六个团队／个体技能、协调器和判别相关目标；SET保留常量技能、中心输入的循环set actor，并关闭相应高层／判别学习。H6与SET的合法信息来源及k10节律可以比较，但进入actor的表示、带宽和学习目标不同。
+
+四个策略同为N6／360k，不等于它们来自新的共同初始化实验、相同训练世界或相等总计算。旧H6还有中间评价与额外优化工作。已有评价隔离证据意味着不能仅因“多做过中间评价”就认定训练污染；但这些历史差别仍应如实报告，不能改写成一个同期、结果盲的两臂试验。
+
+hmasd-pro-question-count-initia…
+
+本次应保留原始H6部署，不因为B10平均改善就换成初始标签复用，也不因为某一B09世界有收益就带入固定人数值。B10的结果限制在线重分配必要性的解释，却没有使它的部署变体自动成为本题的原包。
+
+“保留N6／尾部”应是具体读数，不是含糊的一票否决条件
+
+对每个H6、每个SET，分别报告N6的平均J和实际服务差。两者不负时，可说“在当前面板未见这两项平均代价”，不能称一般非劣或无条件保留。
+
+尾部则保留配对损失的数量、幅度和世界身份，以及每个策略最低绝对J／服务。没有预写的可接受损失区域，就不能把“尾部保留”变成任何结果出来后都能调整的标准。反过来，也没有理由要求32个世界全部同向，才允许这个探索观察有价值。B12自身已经说明，两类尾部读数可能指向不同结论。
+
+五、哪些结果会改变下一笔学习，而不只是产生一张新排名表
+
+本轮不需要额外的sigma、标签稳定性或资格指标“激活门槛”。没有新的通道处理需要验证；学习已经发生，本次观察的是完整冻结策略的原生用途。成功加载、恢复正确、真实k10运行和零更新是技术条件，不是正面科学预测。
+
+主读法是每个H6相对每个SET的J与实际服务；E/U、质量和P说明后果构成，不代替J。若H6只因较低P而J更高、覆盖却更低，应报告原生目标／服务取舍，不能称完整服务优势。
+
+共同重放的观察	应改变的投入判断
+两份H6都在N8相对B12 T6保留有实际意义的J与服务收益，N6及损失世界没有出现足以否定该用途的代价	提高下一笔学习用于新的前瞻匹配H6／普通SET比较的优先级，而不是继续为旧差距寻找部署解释。新学习比较应检验训练过程产生的结果，不以旧最佳权重代替新控制
+两份H6只胜B11 T6，相对B12 T6的用途消失、很小或转负	降低凭旧包差继续投入未修改H6比较的理由；把已经实现的普通水平保留为挑战参照。它支持“旧优势对普通实例的选择敏感”，不证明技能方法整体无用，也没有识别怎样稳定训练出B12 T6
+一份H6保留优势，另一份不保留；或N8有益但N6／服务尾部出现重要代价	保留实例和条件依赖，不选胜者后声称“两份H6支持”。若以后仍投入，应针对包响应的可靠性或明确用途取舍，而不是把最有利角落升格成一般优势
+只有微小差值、分量互相补偿或没有清楚的实际用途变化	不宣布等价，也不为得到清楚符号自动增加世界、种子或检查点。若这些差异不足以改变下一学习对象，本次诊断到此结束
+SET重放不一致、H6恢复路径改变、评价发生参数／normalizer更新等	隔离依赖结果并定位技术问题；不能将其写成科学负效应或额外训练变异
+
+这组分支的中心不是“结果出来后必须启动哪个实验”，而是新的完整包学习比较是否仍有足够的相对用途理由。若H6仍明显超过较强普通实例，直接检验其可重复学习价值比继续累积消融更值得；若优势依赖较弱普通实例，下一项普通学习问题就不应再以该较弱水平作为默认起点。
+
+这里仍有边界：共同重放不能决定一个具体新架构或奖励系数。它是下一笔学习投入的筛选信息，不是实施新机制的证据。 如果DM不准备让这些分支改变投入排序，就应跳过重放，而不是因为便宜而执行。
+
+六、为什么现在不改选混合N或奖励尺度修复
+
+混合N6/8对N6-only，是最强的真实学习替代。 它直接回答一份普通策略能否在更宽条件下保留用途；若这已经是下一项优先用途，就可以现在选择它，不需要先由四策略重放批准。但B12没有证明N8曝光不足，也没有证明混合曝光能保住T6的低高度和较好服务。
+
+该替代至少要固定真实的episode／rollout调度、各N曝光和更新组织。比如在360k团队步中等分，混合臂每个N只得到180k，而非单条件臂的360k；相对于新T6的两fit比较，仍需720k训练和64k最终评价。此时研究的是混合训练的整个有限学习结果，不是从B12已经识别出的修复。当前我更愿意先补出H6对较强普通控制的缺失比较，因为它可能降低再投入复杂包比较的价值，而混合训练不会回答这个问题。
+
+hmasd-pro-question-b12-ordinary…
+
+奖励尺度也不提供现成的“救援”预测。 我核对了B12执行版本的原生除N、数组适配器取均值及CountAdapter透传路径；实际scalar确实为R/N。低层GAE使用既有value，而PPO损失前又对优势作均值／标准差归一化，ValueNorm用当前returns更新并归一化目标，之后才是熵项、梯度裁剪与优化器更新。
+
+因此，既不能由R/8与固定.05直接推导一个已知的相对熵压力倍率，也不能声称奖励缩放在有限训练中必然无效。源码证明存在这些运算，不证明其中某一项造成B12反号，更不预测新缩放会改善原生服务。 本次拟比较的四个策略又都训练于N6；共同重放并不检验R/8对R/6，也不应夹带这一学习改动。
+
+七、最小实现：共同评价入口，不等于用同一构造配置覆盖四份策略
+
+我保留八个面板，而不是只做64k新H6评价。SET的64k重放会检查：新入口恢复的策略和环境，是否与已有原始数组实际一致。它不是独立的科学复现，也不应被记录为新增训练支持。
+
+hmasd-pro-question-b12-ordinary…
+
+实现上最重要的是以下边界。
+
+逐资产恢复完整学习状态。 绑定每份final45的二进制、原配置、模块和normalizer，严格核对key、shape及恢复内容。不得使用B11的“共同初始化”功能重新统一这些已经训练好的策略。那项功能服务于新fit，不是最终策略重放。B12入口本身也是SET专用，直接调用其配置工厂构造H6会改变包；需要一个有限的资产分派入口，复用适当的恢复和原生评价函数，而不是放宽旧断言后混用。
+
+保留各包原来的动作与信息路径。 H6正常重选团队／个体技能，低层持续局部反馈；SET保持自己的k10中央快照及当前局部输入。保持真实N、mask、成员行顺序、GRU和技能／timer的完整reset，确定性均值后独立裁剪到[-1,1]。冻结参数不等于冻结循环状态；每份策略都沿自己的闭环轨迹运行。
+
+控制重现不只比较一个均值。 两份SET分别核对每世界J、scalar return、C/Q/P及E/S/U和实际初始状态／观测；某些偏移可以在均值中抵消。原生单位仍为
+
+J=
+500
+N
+	​
+
+t
+∑
+	​
+
+r
+t
+	​
+
+=.7
+C
+ˉ
++.3
+Q
+ˉ
+	​
+
+−
+P
+ˉ
+,S=50C,U=E−S.
+
+E与S必须由实际全量SINR／连接记录读取，不能从截断局部观测或旧平均比例补出。B11/B12关于资格与连接的已验算事实是可以复用的检查依据，不是跳过新H6实际后果记录的理由。
+
+SET重放成功不自动覆盖H6专属路径。 还需按原冻结源核对H6协调器、技能条件化和重置行为。旧H6评价为16 lanes，新方案是32；批量形状改变后的数值路径及离散选择应在针对性检查中受到关注，不能因张量加载成功便保证所有行为相同，也不能看到不利结果后再放宽恢复标准。没有必要为此自动再加一整套旧H6世界面板；检查应覆盖具体风险，未解决的问题只限制其依赖结论。当前工程方法明确区分数值重放、统计复现和语义等价。
+
+本轮没有需要加入的大型影子、标签搜索、分支轨迹或额外学习过程。对所有策略保持零训练存储、零优化器调用和冻结normalizer，技术失败与科学不利结果分开。
+
+八、成本及证据范围
+新工作	评价team steps	Episodes	批量策略步调用
+两份H6 × N8/N6	64,000	128	2,000
+两份T6共同入口重现	64,000	128	2,000
+合计	128,000	256	4,000
+
+总计896,000 UAV steps、0新fits、0参数更新。H6在四个面板上每回合有50个k10机会，预期约 200次批量协调器选择；记录实际次数及其内部解码工作，不把它与一次普通actor调用当成相同成本。这不是省计算实验。
+
+hmasd-pro-question-b12-ordinary…
+
+四份资产已有各自的360k训练历史，并非“零成本策略”。H6还支付了高层／判别器学习工作；历史B12整对的181.734382分钟也不是本次重放的时长估计，更不是四份所选资产的历史总成本。新wall、峰值内存和完整支持成本仍未知；初始化、恢复、检查／必要审阅、收集和完整阅读都应计入，没有额外profiling fit的必要。
+
+hmasd-pro-question-b12-ordinary…
+
+ 
+
+hmasd-pro-question-count-initia…
+
+本次依据完整附件和固定问题版本 c0ab00465c6a8c4e247ec0d2cb656e585a7de67d。已读取B12完整结果、全部64个世界差、前次完整Answer及采纳；直接读取四份B12原始终点数组、相关summary字段，两份H6配置／摘要及B03原始N6/N8面板。B11与B07等此前已读原始证据，在版本比较确认未改动后按原范围复用。治理及方法在指定 367fa62b8ff196e6aa5f8a934820b1b084c234ea 的blob与此前完整读取版本一致；共享背景则读取了该指定版本的相关更新，不用其B12待收取状态覆盖本次完整结果。
+
+我独立重算了B12的J配对统计及两份T6的跨块J差；没有重新加载节点二进制、逐条重审全部训练日志或从NPZ重建每个原生转移，也没有重复DM的远端字节审计。 二进制仍可恢复及其近期哈希检查采用已发表的DM记录，不冒称本轮验证。两份H6在新共同面板上的J、服务和尾部尚未测量；这正是拟议观察，不是可以从旧均值补出的事实。
+
+MATERIAL_DISSENT: no。 我支持四策略、八面板的有限共同重放，不加入新fit或修复。关键收紧是：将它定位为剩余包用途与下一笔学习价值的筛选，而非普通基线认证；承认双向选择暴露；完整保留所有策略和世界；明确2×2差值矩阵的代数依赖，不制造交互或独立复现数。正、负与混合结果都应改变投入排序，但都不自动产生下一批训练，也不改写已完成实验的结论。
+
+
+## 2026-09-23 — Pro advice adopted; fixed B13 ordinary-control comparison
+
+### Decision and explanation
+
+The DM read the complete 7,952-character Pro answer above, checked same-key delivery, and
+saved the full chat fallback after independently verifying the source/current target and empty
+actual Answer heading. `MATERIAL_DISSENT: no` is advice, not a replication. The event was
+consumed at generation107 with wake `0b8baf96-de3e-4dbe-8884-142ec806e212` and event
+`afa8de5a84acd567878a8ed0`; generation108 has no remaining old experiment or Pro producer.
+No request was resent. Current main/background is `d3032e4c050b1e158ad928b24f3f7324af6063be`:
+owner research continuation and this DM's lead remain active; separate FSD/G33 controls remain.
+Relevant shared topics are the count-training B11/B12 reversal, B04–B06 training-instance
+sensitivity, B07/B08 retained learned-package usefulness and B10 deployment interpretation.
+They require stronger ordinary controls and preserve the difference between package value and
+skill causality; none supplies H6 outcomes on the proposed common worlds.
+
+The DM selects **B13: four frozen final45 policies on one common N8/N6 development panel**.
+This asks whether remaining H6 package usefulness deserves a fresh matched learning comparison,
+before spending two new fits on mixed-N or another training revision. It is not mandatory
+baseline certification. The strongest objection is double outcome-informed selection: retained
+H6 policies and the new T6 challenge were chosen after reading outcomes, and the worlds were
+already read. That limits method-level inference but does not erase the value of comparing
+actual usable policies. This observation will change the next learning investment; no batch
+follows automatically. The present T8-training recipe remains closed to automatic additions.
+
+Pro's consequential new arithmetic was independently checked from the original JSON arrays:
+B12 T6 minus B11 T6 mean J is +.065417728072 at N8 (27positive/5negative) and +.053926263779
+at N6 (29positive/3negative). N8 exceptions are1645803/10/18/21/25; N6 exceptions are
+1645615/17/31. Thus the stronger mean control is not a per-world dominating policy. The
+four gap matrix is algebraically dependent: for each world, G_i1−G_i2=S2−S1 and
+G_11−G_12−G_21+G_22=0. It is neither cross-play, an interaction experiment nor four independent
+replications. No outcome-dependent per-world max over SET or H6 will be treated as a policy.
+
+Working prediction for this finite observation: both retained H6 packages preserve positive
+mean native N8 J and actual service S against the stronger B12 T6. This is a defeasible
+residual-package prediction, not a training or mechanism prediction. E/U, Q and height P
+explain outcome composition without replacing J/S. N6 means and all adverse worlds remain
+explicit; no unwritten tail threshold, equivalence margin or all-world-positive requirement
+is introduced. Matching original SET results and frozen H6 semantics is technical validation,
+not support for this positive scientific prediction.
+
+### Fixed prospective comparison — 0 new fits
+
+Four exact final45 assets, all originally trained at N6/c10 for360k team steps:
+
+| Asset | Original tag | Final45 SHA-256 |
+| --- | --- | --- |
+| H1: B03 H6 clip, seed942201 | `s1_action_law_b03_h6_clip_s942201` | `98d908e4c9d1c33e59707b7da288b0c019f293eced1a99a461f020d1ae069343` |
+| H2: B07 H6/.05 clip, seed952201 | `s1_bounded_package_b07_h6_l05_s952201` | `6d71f3023e5593a801b4d618f7eece93df1a15575f8a71d769566190ba6498df` |
+| S1: B11 T6, seed963201 | `s1_training_condition_b11_t6_s963201` | `36f6bc8afbc414df1f84c2b414180821bf30e14b90d7f44928db35ce2ab74c0a` |
+| S2: B12 T6, seed963401 | `s1_training_recurrence_b12_t6_s963401` | `34987032207299209832a9fcaa6dcd807a3cc00e5b4682725a8b52d0ca89c8d3` |
+
+Original source/config/summary and native locations remain those recorded for each asset.
+H6 files are23,073,626 bytes each; SET files20,968,771 bytes each. Restore all saved modules
+and four normalizer fields, with exact module keys/shapes and parameter/normalizer digests.
+No common initialization, parameter averaging, training-resume loader or rewritten past fit.
+Historical architectures, schedules, information representations, objectives, extra H6 work
+and intermediate evaluations differ; these are four retained policies, not a newly matched
+training batch. Both H6 files were hash-verified on their original native nodes; B03's locally
+absent binary is copied from that exact existing file, never replaced by training.
+
+For each policy, evaluate true N8 first and N6 second, c10, horizon500,32 lanes; world addresses
+1645800..1645831 and1645600..1645631. Preserve the actual common initial states/observations
+within each N. Execution order is S1, S2, H1, H2 so ordinary-control reproduction is checked
+before interpreting new H6 results. CPU float32, Torch4 threads, BLAS/OpenMP1, k10. Each asset
+uses its original constructor/config semantics; only required evaluation batch/roster fields
+change. Actual local feedback, central snapshots, recurrent state, timers and skills reset
+and evolve normally. H6 retains ordinary ongoing coordination; no initial-label reuse,
+fixed-count input or other B09/B10 deployment variant. Use deterministic action means then
+independent clip[-1,1]. Frozen weights/normalizers, zero training storage and optimizer calls.
+
+Eight panels: 4×2×32×500 =128,000 evaluation team steps,896,000 UAV steps,256 episodes/resets,
+4000 batched policy calls, **0 new fits and 0 training steps**. Of this,64k evaluation steps
+are new H6 observations and64k reproduce SET controls. Expect200 batched H6 k10 assignment
+calls across four H6 panels (6400 lane assignments); count actual selections and internal
+team/individual decoder work, and keep SET snapshot work separate. No search, shadow,
+branch rollouts, additional worlds, N4, other checkpoints or new random training blocks.
+Report actual command/run wall and peak RSS with scope; scratch peak is unmeasured unless
+actually captured. Historic fits are sunk, not free, and B12 pair wall is not B13's wall estimate.
+Implementation, checks, review, collection and complete reading are additional costs.
+
+For each N retain all four absolute policy arrays and complete2×2 H6-minus-SET matrix for
+J,C,Q,P,E,S,U, means/medians/signs, all world differences, worst paired J/S losses and minimum
+absolute J/S with world identities. J=N*scalar_return/500=.7C+.3Q−P; S=50C; U=E−S.
+Eligibility and connections come from full native post-transition SINR/connectivity, not
+truncated actor observations. Preserve actual per-UAV eligibility/connections, heights,
+scalar rewards and initial states/observations in runner-written numeric traces. N8 is primary;
+N6 consequences stay separate, with no post-result aggregate across N.
+
+If both H6s retain useful N8 J/S gains against S2, raise priority of a genuinely fresh matched
+package-learning comparison, while reporting N6 and loss-world costs. If advantage depends
+on S1 or disappears, lower investment based on the old H6 gap and retain ordinary-policy
+reliability/broad-condition learning as the stronger next question. One useful H6 or N8/N6
+tradeoffs retain instance/condition dependence; do not choose a winning corner as confirmation.
+Tiny/compensated gaps do not establish equivalence and do not automatically add exposure.
+This may end the current diagnostic without requiring a new fit or new architecture.
+
+### L0 — B13 common evaluator
+
+Deliverable: a bounded four-asset dispatcher and common native evaluator producing the eight
+fixed panels and complete paired readings. Owned new paths:
+`experiments/candidates/agent_count_generalization/ordinary_control_b13/{__init__,runner}.py`,
+`scripts/run_agent_count_ordinary_control_b13.py`, and mirrored tests under
+`tests/experiments/candidates/agent_count_generalization/ordinary_control_b13/`.
+No shared learner/environment, frozen runner, NOTES or RESEARCH edits by the Implementer.
+The DM owns those records and the Git index. Result root/tag is
+`runs/agent_count_generalization/s1_ordinary_control_b13/`; existing summary refuses overwrite.
+CLI binds --launch-sha/--out and four explicit checkpoint paths; any --seed is construction-only,
+not new training exposure. Native admission must precede science; CLI cannot bypass it.
+
+Reuse existing `action_law_b02.probe.restore_checkpoint` for strict evaluation-only payloads,
+B08/B09's relevant config/payload checks, and B11's native trace reading helpers. Do not invoke
+B11/B12 common-initialization code or relax old SET-only assertions to build H6. Preserve each
+saved config's semantics and original H6-vs-SET module set. Any constructor differences must
+be narrowly enumerated by role (test roster/lanes), not silently ignored. Reuse the existing
+strict restore mechanism instead of a new generic framework or training checkpoint loader.
+
+Checks must cover incorrect hash/payload/config/module/normalizer rejection; exact recovery
+of both arm types; resetting all32 runtime lanes; H6 deterministic 16→32 batch shape with
+logit/action closeness and unchanged discrete choices on focused fixtures; actual k10 calls
+and complete lane/decoder counters without changing RNG/actions; freeze/zero-storage/update
+checks; exact8-panel/count contract; native component identities; all four contrasts and
+algebraic dependence; early failure preserving partial outputs. Include admission-before-effect
+CLI coverage. Use pytest-managed scratch and the existing scientific interpreter; no installs.
+Checks use synthetic/focused fixtures, not additional completed old/new-world outcome panels.
+Read existing unchanged tests as evidence; do not retest unchanged training merely for launch.
+
+SET reproduction compares all per-world J, scalar returns, C/Q/P/E/S/U and original numeric
+trace initial states/observations and integer service records, not only means. Exact world
+identities and initial/integer arrays are required. Continuous values use prospectively fixed
+atol1e−7/rtol1e−6 (CPU float32 outputs accumulated in float64), with largest differences saved;
+no tolerance widening after reading outcomes. This is a specified numerical reproduction
+check, not universal bitwise identity. A mismatch quarantines dependent H6 comparisons and
+stops before H6 result execution; retain partial evidence and report technical failure.
+
+The Implementer returns code/checks, launches nothing and chooses no science. The DM inspects
+and accepts the diff; independent hmasd-reviewer checks the new checkpoint/evaluation semantics
+and required tests. After acceptance, commit/push exact inputs, admit on configured wsl_4070
+with current pause/lead and fresh memory, stage bound assets without changing native originals,
+launch once, retain handle and arm detached observation. This entry fixes exposure before any
+B13 result. Ordinary technical repair does not authorize extra panels, fits or blind retries.
