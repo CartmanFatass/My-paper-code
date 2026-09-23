@@ -2105,3 +2105,431 @@ commit on success; on write failure give the complete answer in chat, not a rece
 unverified SHA. Private Jev-account addresses/identity never enter the repository.
 
 ### Answer
+
+Saved from chat, 2026-09-23. Same-key `deliver` returned `NOT_DELIVERED`, no Answer commit;
+Pro explicitly reported no repository write. The complete collected reply follows verbatim,
+including its rendering artifacts and audit limitations. Key
+`hmasd:6ff96ab85e88c1e79ae3ed6a1da6c89059c4770d1d6b5d6719030104cf3ff8b7`;
+9686 characters, collected-text SHA256 (without the transport-added final newline)
+`481fd856172a54610bf3524d1d6625834b187538b3bdc13f06653ca2c1cfa58f`.
+No resend. The observer closed its owned browser tab in its `finally` cleanup.
+
+GitHub 读取可用，但本次写入未完成。 当前写接口要求整文件替换；我未能构造并验证一个满足“除指定 Answer 外，其余字节完全不变”的完整替换内容，因此没有提交写请求、没有改动仓库，也没有生成 Answer commit。以下给出完整答复，而不是写入回执。指定位置及保留约束已按附件核对。
+
+hmasd-pro-question-complementar…
+
+Answer
+1. 选择：买一次收窄后的 G/D 新学习区组，但保留原评价标签流
+
+我推荐一个新的、原样 generic G 对 detached D 的配对训练区组，以 uniform 为前瞻主要部署规则。 不同时购买零-fit 比较，不给 B02 追加第三个 fit，不修改 G 的结构、目标、梯度尺度、熵或训练制度。
+
+我建议修改候选中的一项：对于“只换一次学习轨迹，旧 uniform 服务优势是否重现”这个具体问题，保留 B01 原 uniform 世界及原评价标签流，比另换一条标签流更有用。 新训练初始化、head 初始化、训练世界、rollout 和 shuffle 区组仍应更新，并在两臂间配对。
+
+MATERIAL_DISSENT: yes。 分歧在于评价随机流的选择及其对应的识别问题；不是反对这两个新 fit，也不是把提问已明确排除的“正均值即稳定默认或互补性”归给提问者。
+
+这个投资只回答：
+
+在相同、已经看过的 uniform 部署测试条件下，原样 generic factual auxiliary 的加入，能否在另一条完整学习轨迹中，再次产生比 detached 对照更有用的最终 bank，而且这不是仅仅“比一个没有学好的对照少退化一点”？
+
+这是一个学习方案整体效果的重现问题，不是互补机制实验。它值得购买的理由是：结果能够改变我们是否继续保留“原样 G 是一个有条件地有用的 bank 学习方案”这一工作解释。历史 G/D 只是选择依据，不能充当新 D fit。候选所规定的两臂、主要服务量、必读 own 后果和固定训练成本，正好允许提出这个较窄的问题。
+
+hmasd-pro-question-complementar…
+
+最强反对理由
+
+你可能在花 848k team transitions，追逐一个经过选择、只有一个训练区组、且优势仅约 0.0197 J 的旧结果。 即使新均值为正，也未必改变“能否学到有用技能组合”这个更大的科学解释；它可能只增加一条条件很窄的方案比较。
+
+这个反对不能靠“B02 失败，所以轮到 G”来回答。删除 mixed 贡献失败，并不是 generic auxiliary 有用的正证据。B02 的 M+uniform 表现也没有复制 G。其他方向的服务反转，更说明诊断改善和单次正服务结果都不应自动成为继续投资的理由。
+
+我仍选择它，是因为本题要求的是下一次有信息价值的学习投资。零-fit 方案只能改变旧 bank 的部署解释；它不能区分“G 的服务优势能跨一条新学习轨迹出现”与“这只是原选择区组的局部结果”。但如果真正要求这一次投资直接建立“学到了互补性”，那么这两个 fit 不够，应明确承认其问题较窄，而不是扩大成功含义。
+
+2. 已有证据改变了什么，没有改变什么
+B02：关闭具体删除配方，不能关闭技能学习问题
+
+原始面板及完成条目的核心读数如下。这里所有差值都保留方向；own 和 uniform 不相互替换。
+
+读数	own	uniform
+M 初始至最终的 J 增益	+0.1461076221	+0.1853380199
+T 初始至最终的 J 增益	+0.0492335896	+0.0605549540
+最终 T−M 的 J	−0.0968740325	−0.1247830659
+最终 T−M 的不利世界数	31/32	32/32
+最终 T−M 的 users/step	−3.0615625	−6.5510000
+
+T 在两种规则下确实都有正的平均学习增益，同时最终明显差于 M。两臂初始化相同，所以“学习增益之差”和最终差是同一对比的另一种表达，不是两个独立实验。
+
+这里也不是只有一个汇总标量不利。T−M 的 coverage、quality、height penalty 差，own 为 −0.06123125、−0.0402314157、+0.0419427328，uniform 为 −0.13102、−0.0242032708、+0.0258080847；quality 更低、height penalty 更高发生在两种规则的全部世界。另一方面，own 的 1900029 世界仍保留 +0.0330038173 J 的反例，且有 coverage 上升但 J 下降的世界。这些反例不能因总体结论清楚而删除。height penalty 的后果也不能升级成已测得的电池安全或返航风险。
+
+原生训练行还支持“干预实际发生”，而不只是配置标签改了：首个 rollout 的环境奖励均值同为约 +0.04084436，M 的 stored low reward 均值约 −0.01938209，T 则为 +0.04084436；相应 low advantage 均值由 M 的约 −0.57834029 变为 T 的约 +0.40116960。结合冻结的 reward-composition 实现，这支持低层目标确实发生了声明中的变化。奖励或 advantage 均值变号不等于测得了 reward-gradient conflict，更不能单独诊断最终服务差的路径。
+
+因此，我维持已经接受的结论：关闭这个 .5 → 0 删除配方的追加投资，保留 mixed 作为工作参考，不重开已经完成的 both-worse 分支。
+
+B01：G 的 surviving lead 很具体，P 的局部正 T 也必须留下
+
+B01 中，G−D 的 uniform 差是 +0.019697695 J、+1.1258125 users/step，而 own 差是 −0.031850847 J、−1.708875 users/step。前者是选择 G 作为下一次学习比较对象的具体依据，后者是不能省略 own 后果的理由。可是旧 own 和 uniform 面板用了不同世界，不能把这两组均值直接相减，当成同一旧 bank 的配对部署规则效应。
+
+P 的局部正 T 不应被最终服务失败抹去；但它也不能挽救最终部署结果。它是特定读出、前缀及十步组合对比中的有界证据，不是“从初始化学出了互补性”的证据，更不是 500 步服务优势。此前没有对应的初始 T，不能补写一条未测量的互补性学习曲线。
+
+工作解释的更新
+判断	本次立场
+得到加强	原生 mixed 学习方案在这次有限学习条件下优于该删除配方；评价部署规则必须明确；原样 G 在 uniform 下是否重现，是仍有具体正线索可检验的问题。
+受到削弱	“删掉这些低奖励贡献便更好”“更丰富的 pair 结构或更好 factual prediction 自然转成服务收益”“根据 saturation/noise 诊断即可选择救援方向”。
+未被识别或仍未解决	ideal-MI 必要性、skill 必要性、训练期高层是否有用、梯度冲突、P 的失败机制、互补性是否被学习出来，以及一个稳定的默认部署规则。
+
+共享背景在这里有实际作用，但不充当我们的对照：B04–B06 的诊断与服务符号反转降低了追随噪声诊断救援的吸引力；B08 提醒我们读实际学习；B10 区分部署选择器与训练贡献；S7 的辅助学习反转反对把 surrogate 改善等同于持续服务价值。它们不授权接管相邻方向，也不增加本方向的训练重复数。
+
+3. 把新比较的目标量与评价条件固定到同一个问题上
+
+令 W={1700200,…,1700231}，U 为 uniform，O 为 own，0/45 表示初始与最终 checkpoint。
+
+主要服务量应是：
+
+Δ
+U
+	​
+
+=
+32
+1
+	​
+
+w∈W
+∑
+	​
+
+[J(G
+45
+	​
+
+,U,w)−J(D
+45
+	​
+
+,U,w)].
+
+同时保留每臂的实际学习量：
+
+L
+a,r
+	​
+
+=
+32
+1
+	​
+
+w∈W
+∑
+	​
+
+[J(a
+45
+	​
+
+,r,w)−J(a
+0
+	​
+
+,r,w)],a∈{D,G}, r∈{O,U}.
+
+以及最终 bank 内的部署规则差：
+
+R
+a
+	​
+
+=
+32
+1
+	​
+
+w∈W
+∑
+	​
+
+[J(a
+45
+	​
+
+,O,w)−J(a
+45
+	​
+
+,U,w)].
+
+这些量回答不同问题，不能合并成一个“是否成功”标签。若两臂初始 bank 和同规则评价读数一致，则 Δ
+U
+	​
+
+=L
+G,U
+	​
+
+−L
+D,U
+	​
+
+；若初始读数不一致，应先说明差异，而不是默默将最终领先称为更多学习。R
+a
+	​
+
+ 是冻结 bank 后换部署规则的差，不是训练期 learned coordinator 的贡献。
+
+为什么保留旧评价标签流
+
+冻结 B01 runner 的 eval_rng_seed 是 260923905，uniform 世界基址是 1700200；evaluate_panel 使用二者之和初始化评价和 label RNG，所以旧 uniform 面板的 label generator 起点为 262624105。select_skills 先抽 team labels，再抽各 agent labels，按固定 batch 形状生成；每 k=10 步更新，并用 mean low actions、独立评价 hidden state 及冻结的模型/normalizer 执行。
+
+仅保留一个 seed 数字还不够：要保留 generator、lane/world 顺序、team/agent 抽样次序、更新时点及 horizon，才是同一条外生评价标签流。
+
+另换一条、在新 D/G 间共用的标签流，不会使新 G−D 比较无效。但相对 B01，它同时改变了学习区组和评价随机条件。新结果反转时，就不能把反转干净地归于“另一条学习轨迹下旧优势没有重现”。它更适合一个较宽的问题：“在新训练与新评价随机条件下，整个方案是否仍有优势？”
+
+本次我优先选择较窄的问题，所以保留旧流。这样只排除了一个外生变化来源；它不保证方差下降，也不意味着不同训练实例中的相同整数标签代表相同语义技能。
+
+此外，新 own 面板应按提议放在同一个 W 上，以便读取新 bank 的配对部署差。它不是 B01 原 own 世界 1700100..1700131 上 own 损失的严格复现。保留开发世界与旧标签流，更不能使这次试验变成 held-out confirmation。
+
+hmasd-pro-question-complementar…
+
+4. 原样 G/D 到底比较什么
+
+保留提议的 native S1、N6、c10、k10、50-user 条件、mixed coefficient .5、skills、完整 high/low 学习和信息、训练期 AR μ=.9π+.1/6、原 entropy、raw Gaussian PPO/execution clip、normalization 与 native schedules。
+
+D 的两个 factual heads 都训练，但不向 trunk 传辅助梯度；G 仅通过原 generic full-input MLP 向 base/FiLM/GRU 传原尺度的辅助梯度，P 在两臂都 detached。原 .05 trunk scale、Adam .0003、norm cap .5、每 rollout 800 个 factual 十步窗口及既有 step 数均不搜索、不重调。
+
+hmasd-pro-question-complementar…
+
+这个比较的解释是：
+
+加入原样 generic auxiliary 及其后续学习反馈，是否形成了更有用的最终 bank？
+
+它不是固定数据、固定后续策略下的纯表示梯度效应。第一次辅助更新后，表示、行为、访问分布、后续 factual targets 及 high/low 联合学习都会内生变化。因此，不能在结果为正时分账说多少来自 GRU、FiLM、预测头或 coordinator；结果为负时也不能只凭梯度范数或预测误差指定失败原因。
+
+这里不需要引入一个忽略 MARL 耦合的简单模型来替代实际学习。代数分解能澄清 endpoint、learning 和 deployment 的区别，却不能切断这些内生反馈。
+
+5. 前瞻带符号预测，以及每种结果应改变什么
+
+下面区分实施预期与科学预测。它们不是新增审批条件，也不是新诊断面板。
+
+实施预期。 在第一次辅助 trunk 更新之前，两臂的共同初始化、同规则初始评价及共同首批经验应一致。G 的辅助 trunk 更新应实际作用于声明中的 base/FiLM/GRU；D 的辅助 trunk 更新为零，但 D 的 native 学习不能因此被误说成“trunk 不学习”。这些使用既有原生记录核对即可。
+
+服务预测。 如果保留“原样 generic auxiliary 能形成更有用的 bank”这一工作解释，我愿意承担的主要带符号预测是新 Δ
+U
+	​
+
+>0，同时两臂的 fixed-condition 初始至最终平均服务增益为正。更具体、但较弱的分量预测是 uniform 下 G−D 的 coverage、quality、users 为正，height penalty 不出现抵消主要收益的恶化。
+
+这不是凭空选符号：旧 G−D uniform 的 coverage、quality、height penalty 分别约为 +0.02251625、+0.012942667、−0.000053520，优势主要不是靠增加 height penalty 换来的。可是我不把旧 +0.019697695 当作新效果量承诺，也不预测 32 个世界全部为正。
+
+own 的符号不确定，而且负值是必须认真保留的预测可能。 旧 G own 的损失使“uniform 正、own 负”成为可信的备选结果；但旧 own 世界不同，不能假装这是相同条件上的严格数值预测。
+
+中间量不替代服务。 两臂的 factual heads 都可能拟合得更好；G 的辅助梯度可以活跃而 Δ
+U
+	​
+
+≤0。我不预测 G 必须有更低的所有 head losses，也不把跨训练区组、不同访问分布下的 loss 数值直接当作可比的服务代理。
+
+新观察	应怎样更新解释与投资判断
+Δ
+U
+	​
+
+>0，G 确实从初始化改善，两臂均有实际学习，且分量与负世界后果不过度抵消平均收益	加强“原样 G 的 uniform 条件性收益不只属于旧轨迹”。保留其进一步研究价值；仍不能称为稳定默认或学到互补性。
+uniform 正、own 负	支持一个依赖部署规则的方案，不支持无条件的 G 改善。own 损失保留为真实后果，不能用主要终点名义隐藏。
+uniform 非正、own 正	前瞻主要预测失败。own 是 surviving evidence，不允许事后交换主次规则宣布主要成功。
+G−D 为正，但 G 自己相对初始化没有改善，甚至两臂都恶化	最多是相对少受损，不是本题要购买的“有用学习”证据。
+两臂均学习，但没有 G 的 uniform 优势	原生技能条件学习仍成立；原样 generic auxiliary 的额外价值受到削弱。D 的进步不能被写成 G 的成功。
+预测拟合改善、辅助更新活跃，但服务或重要分量恶化	削弱“该 surrogate 能转成部署收益”的解释；不自动触发 rank、norm、target、entropy 或 pair-head 救援。
+小、混合或近零结果，世界符号不一致	不能宣称等效或不存在任何辅助收益；也不因此欠下一轮种子。可以据有限信息价值停止对该原样配方追加投资。
+
+正均值尤其不能遮住明显的负世界后果。应保留逐世界 signed J、coverage/quality/height/users 差，以及每臂的学习读数；不能只报告最有利的均值或数量。以上要求使用已计划的面板，不增加 endpoint。
+
+统计上，这仍只增加一个新的配对训练区组。旧区组是经选择的开发证据，32 个世界是条件性评价单元，不是 32 次独立学习；初始/最终及 own/uniform 也不增加训练 n。即便再次同号，也只能支持有限的 recurrence，不能据此给出稳定默认的可靠性概率。
+
+资料也没有提供一个可将 J、用户数和 height penalty 折算成实际部署净价值的外部效用标准。因此，我不会在结果出来前虚构一个“值得部署”的经济阈值，也不会把补充这一阈值变成新的运行批准门槛。
+
+6. 最强替代：旧 D/G 的零-fit 部署比较
+
+最强替代仍是此前明确提出的方案：
+
+用冻结的 B01 D/G 最终 bank，在原 own-final 世界 1700100..1700131 上，各做一个 uniform 面板，与已经保留的 own 面板配对。成本为 0 个新 fit、32,000 个 mean-action、zero-update evaluation team transitions。
+
+hmasd-pro-question-complementar…
+
+它能改变的解释是：旧 D/G 在原 own 条件下的部署差，究竟在多大程度上随规则改变；旧 G 的 own 不利，换 uniform 后是否仍保留。它解决的是一个真实缺口，因为旧 own/uniform 均值本来不能直接作为同世界规则差。
+
+它不能增加新的学习证据，也不能识别训练期 learned high-level law 对 bank 形成的作用。我不把它设为两个新 fit 的强制前置，也不暗中把两项一起购买。
+
+如果本题的优先目标只是更准确地使用和解释手里的旧 bank，这个低成本替代更有吸引力。但本题问的是下一次有用学习投资，且希望观察能改变对学习方案的解释，所以我优先选择新 G/D 区组。
+
+至于 uniform-training 对照，它可以回答另一个有意义的问题：行为生成的 high-level 训练制度是否有助于形成可用 bank。但 uniform-training 同时改变 high policy gradients/support 和 downstream experience，识别的是训练制度整体效应，不是纯部署选择器贡献，也不是“删掉高层后其他都一样”。当前证据尚未使它比“检验唯一剩余的具体 G 服务线索”更值得占据这一次投资；我不把它追加成第二项建议或四格设计。
+
+hmasd-pro-question-complementar…
+
+7. 成本、实际工作与终止含义
+
+建议比较的成本保持不变：
+
+项目	工作量
+新训练	2 fits，各 360,000 team transitions、45 native updates
+训练合计	720,000 team transitions
+评价	2 臂 × 初始/最终 × own/uniform × 32 世界 × 500 步
+实际评价合计	128,000 team transitions
+总计	848,000 team transitions
+
+每 fit 为 675 high、101250/101250 low actor/critic、675/2700 team/individual discriminator steps，每 factual head 315 steps；G 另有 315 auxiliary trunk steps，D 为 0。保留原评价流不要求增加面板。历史约 43–78 分钟的 runner body 是共享节点成本背景，不是完成时间保证，更不是排他 GPU 成本或算法速度结论。
+
+hmasd-pro-question-complementar…
+
+非-fit 工作仅是为这一已选择的问题固定新的共同训练区组与训练世界地址，保持评价流的确切含义，并读取既有原生输出和预定面板；不增加 planner、诊断 endpoint、组件搜索、独立救援分支或自动第三次训练。
+
+若该比较不支持原样 G 的额外价值，关闭它不等于声称辅助学习普遍无用；也不意味着必须再买一次才能有资格停止。 同样，B02 已完成不构成闲置理由，但方向责任也不要求对每个负结果持续救援。
+
+8. 来源范围与未重新审计的部分
+
+推理以指定固定版本为准：问题及本方向材料使用 507744d4b2e9a4babdf0d4a0621d00579759ab6c；共享 RESEARCH.md 使用指定的 3fac8a9467534ed56ba7babd0417cf1f3c917d15；涉及 G/D 和评价含义的冻结代码使用 B01 的 957a65c0155f88e5287c744f0f667192174f16df，B02 奖励组合使用 e232332a03474189d58046d57d22785f150ae5b4。治理和方法按本次指定优先级理解，没有用 moving branch 或其他聊天记忆替代科学输入。
+
+hmasd-pro-question-complementar…
+
+本次已读的问题背景包括 B01 完整结果、第二次完整 Pro Answer 的相关章节、B02 前瞻约定、M reading、完整 B02 result 与 reconsideration，以及指定共享背景。原始 M/T 大 summary 的常规文件读取曾遇到大小限制，随后通过 blob 读取取得内容；核对了面板均值、选定原生数组/元数据。两份独立 training.jsonl 也已取得，具体核对了首、末原生行。B01 D/G/P summaries 及与新比较相关的冻结函数用于核对历史结果和比较含义。
+
+**审计边界必须明确：**大数组采用选读，不是逐元素重新验收；我没有重新执行 checkpoint、完整 prediction 文件或 NPZ 的独立回放/重算，也没有逐字段独立复核两份有效 learner config 的全部差异。全部 45 行一致、所有 prediction hashes 和 NPZ 重算通过等，是固定完成条目记载的既有验收结果，不冒充本次新完成的工程认证。关于 B02 正确实施的判断，依据冻结组合函数、实际训练行与已接受完成记录共同支持。
+
+这些边界不妨碍本题在已经接受 B02 的前提下选择下一次科学观察；它们确实限制了把此答复称为一次新的全量实现审计。对尚未产生的新 G/D 结果，也没有任何稳定性或机制证据可以提前补齐。
+
+最终建议保持单一：选择原样 G/D 的一个新配对学习区组，保留原 uniform 开发世界及原评价标签流，以新的 uniform G−D 服务差为主，同时完整读取实际学习、own 后果和负世界代价。它检验的是一个剩余方案是否仍值得研究，不是给互补性、技能必要性或稳定部署默认盖章。
+
+本次实际执行为 0 fit、0 新评价、0 代码修改、0 仓库写入；没有授予预算、增加批准要求或创建其他研究记录。
+
+## 2026-09-23 — Pro advice adopted; B03 fixes one G/D learning recurrence block
+
+The full 9686-character chat answer above has been read after same-key delivery verification.
+`NOT_DELIVERED` was a repository-write outcome, not an unavailable scientific answer. I take
+back the notebook after checking the branch had no Answer commit and preserve the full chat
+text in the designated section. Its adviser judgment is not independent empirical evidence.
+
+**Decision and dissent.** Select exactly one new paired training block of unchanged G versus
+detached D. Adopt Pro's material dissent: keep the original B01 uniform evaluation random
+stream as well as its already-read world panel. A new evaluation stream would still yield a
+valid new within-block comparison, but would change an additional condition relative to the
+specific recurrence question. The frozen B01 `evaluate_panel` seeds both global evaluation RNG
+and `np.random.default_rng` with `260923905 + 1700200 = 262624105`; `select_skills` draws the
+32 team labels before the `(32,6)` individual labels, then renews every ten steps for500 steps.
+I inspected these functions at the unchanged B01 source and will verify the new evaluator
+against that implementation. Same stream also means PCG64, lane/world order, shape, draw order,
+renewal times and horizon, not just an equal integer seed. No extra outcome panel is bought.
+
+The useful question is whether the selected B01 G uniform lead (+.019697695 J and
++1.1258125 users/step) recurs after a new complete learning trajectory, relative to a newly
+trained D, while each bank actually improves from initialization. B01 G own loss−.031850847,
+P's bounded local positive T without net use, and B02's correctly implemented deletion loss
+all remain. This is new exploration of the surviving G learning-package lead; it does not
+reopen the failed P or deletion recipes. The strongest objection remains the small selected
+lead and848k interactions for a narrow answer. I accept that cost because a reversal would
+reduce investment in the unchanged generic recipe, while another useful positive would keep
+a concrete conditional learning route worth studying. I decline the0-fit32k old-bank panel
+completion for this investment: it changes deployment interpretation but cannot add a learning
+trajectory. Uniform training is a different whole-training-regime question, not an extra arm.
+
+**Current shared evidence.** I refreshed published main
+`b512311aff062034799414338bf69f1043a710d6` and read its changed topic3/DM1 passages alongside
+the previously used topics3–6. [Current shared background](https://github.com/CartmanFatass/My-paper-code/blob/b512311aff062034799414338bf69f1043a710d6/docs/research/RESEARCH.md#研究背景与共享认识)
+now includes DM1 B12's reversal of B11 on unchanged actual evaluation worlds: N8 T8−T6 J
+−.042106854 after+.019681931. This strengthens the reason to retain fixed evaluation conditions
+and examine training recurrence without pooling away a sign change. It neither predicts our
+new G/D sign nor adds a matched control. Earlier noise/saturation reversals discourage an
+entropy rescue, B08 requires real learning, B10 separates deployment from high-level training,
+and S7's auxiliary reversals prevent treating prediction accuracy as service value. Owner
+pause remains lifted; this direction's lead is unchanged; FSD/G33 remain separately paused/frozen.
+
+**Fixed prospective comparison.** B03 has2 fresh cold-start fits, D then G, each360000 native
+team transitions:16 lanes ×500 steps ×45 updates,720 episodes/fit. S1 N6/c10/k10/50users;
+six team and six individual labels; native mixed coefficient.5, effective discriminator
+contributions.025/.01; full native coordinator, local recurrent low actor, global critic and
+both discriminators learn. Retain original information, bandwidth/refresh, AR mu=.9pi+.1/6,
+native entropy weights, raw Gaussian PPO with execution clip[-1,1], entry masks, gamma.99/
+GAE.95, own ValueNorm and disabled obs/state normalization. No reward, architecture, optimizer,
+target, head-width, rank, entropy or schedule change is part of B03.
+
+Both arms train both original factual heads on the same information and800 observed ten-step
+windows/rollout, with fixed128 minibatches including the32-row tail and315 head steps/fit.
+D detaches both heads from the actor trunk; G routes only the original generic full-input MLP
+auxiliary gradient into base/FiLM/GRU, original scale.05, Adam lr.0003, norm cap.5,315 trunk
+steps. P remains detached in both. Native learning moves D's trunk too; auxiliary detach is
+not a frozen policy. After the first auxiliary update, visitation/targets/high-low learning
+are endogenous consequences, so this is a whole-learning-package comparison, not component
+mediation or a fixed-data gradient experiment.
+
+New paired block: native initialization260923921, heads260923922, rollout/train RNG260923923,
+auxiliary shuffle260923924, training worlds2000000..2000015. All are fixed before outcomes
+and differ from B01/B02; both arms share the actual initial tensors and initial RNG state.
+Evaluation retains `eval_rng_seed=260923905` and worlds1700200..1700231, in that order, for
+initial/final45 ×own/uniform in each arm. Mean low actions; separate zero initial eval hidden
+state; frozen models/normalizers and restored training RNG. Four32×500 panels/fit =64000,
+128000 actual evaluation transitions total, no optimizer/normalizer updates. Own uses the
+same new-block worlds as uniform, allowing within-bank deployment comparisons; this does
+not strictly replicate old own-world1700100..1700131 losses. These worlds and the old stream
+are development exposure, never held-out confirmation. No combination diagnostic or branching.
+
+**Predictions and reading.** Primary signed endpoint is mean per-world
+`J(G_final,uniform)-J(D_final,uniform)` on the32 retained worlds; predict positive. Read each
+arm's same-world initial→final J/users/components under each rule; predict actual positive
+mean learning, not merely less regression. Weaker uniform G−D predictions are positive
+coverage, quality and users, with no height deterioration that cancels the J gain; old effect
+size is not a promise. Own's sign is uncertain; a uniform gain with own loss is a credible
+conditional outcome and must be retained. Read every world's signed J, coverage, quality,
+height penalty and users, including adverse tails. Report within-bank own−uniform separately.
+Initial/endpoint/selector panels and32 worlds do not multiply the independent training n.
+
+Positive uniform with actual learning strengthens only conditional recurrence across these
+two exploratory training blocks; selected old evidence and n=1 new arm forbid stable-ranking
+or learned-complementarity claims. Uniform nonpositive with own positive fails the primary
+prediction without erasing own evidence. Both arms learning but no uniform G advantage weakens
+G's extra value, not native skill-conditioned learning. Relative G advantage without G learning
+is not the useful-learning result sought. Active auxiliary updates or improved MSE with service
+loss do not trigger rescue. Small/mixed results permit ending unchanged-recipe investment,
+without equivalence or universal auxiliary-failure claims. No automatic third block, added
+selector, diagnostic, seed, horizon, confirmation or endpoint after scores. Pro sections5–7
+cover these prospective result branches and need no routine second consultation.
+
+**Cost and execution.**2 fits/720k train/128k eval/848k team transitions; per fit675 coordinator,
+101250 actor,101250 critic,675 team-discriminator and2700 individual-discriminator steps;
+315 steps/head, plus G315 auxiliary trunk steps. Prior43–78min runner bodies are planning
+context on a shared node, not a runtime promise or exclusive GPU charge. Keep actual wall,
+CPU/RSS/CUDA scope and support costs. Use configured `wsl_4070`, serial fit launches with fresh
+native admission; no fits have started at this entry. Commit/push exact input SHA, retain the
+native manifest/status handle, collect and read all evidence. B02 accepted operations are done.
+
+### L0 — B03 implementation and verification
+
+Deliver a narrow new runner under `experiments/candidates/complementary_skill_learning/b03/`,
+entry `scripts/run_complementary_skill_learning_b03.py`, and focused tests under the matching
+`tests/experiments/candidates/complementary_skill_learning/b03/`. Those are the Implementer's
+only edit paths; the DM owns this notebook and RESEARCH. Reuse the frozen B01 learner/helpers
+without editing B01, B02, native learners/environments or shared admission. A small B03 loop
+derived from B01 may omit its obsolete diagnostic and replace its panels with the four fixed
+panels above. Retain effective config (including class-level MI coefficient), checkpoint hashes,
+actual initialization/first-rollout hashes, native and auxiliary updates/movement, predictions,
+training/evaluation counts and signed native components. Record actual selected evaluation
+label-stream digest/renewal count and physical initial-state digest without RNG draws or
+new endpoints; compare the stream against the frozen B01 convention. Preserve original
+randomness and all train/eval isolation. The CLI fixes D/G and seed260923921, consumes native
+admission before scientific effects, and runs the declared CUDA/thread configuration.
+
+Checks target the change: frozen defaults/cost; real initial tensor matching and different
+old seeds; a tiny full native D/G path with active G versus detached D auxiliary movement;
+old/new evaluation equivalence and RNG restoration; actual stream order/identity and repeated
+initial/final stream; counts, checkpoint identity, final JSON integrity and admission refusal.
+Use pytest-owned scratch. CPU technical checks plus a relevant CUDA check on the actual node
+are implementation verification, not additional scientific fits. Obtain an independent
+Reviewer for scientific/RNG/result-identity risk, then DM accepts. Stop dependent execution
+for a real defect or unknown acceptance; never restart an accepted worker or modify this
+fixed study from partial scores. No Pro send, science choice, fit launch, notebook edit or
+child spawning is delegated to the Implementer.
+
+### Publication-time shared-background refresh
+
+While preparing publication, main advanced to `595399da0` with the S7 B04 complete reading.
+I read the changed shared topic and preserved the other DM's entry: its final32-world risk
+intervention gain and same-policy8-world development loss further support retaining explicitly
+fixed evaluation conditions and all adverse worlds. This is different host/objective evidence,
+not a matched G/D control or a reason to change the selected recurrence question. B03's already
+fixed old world/label stream, primary uniform endpoint, own consequences and costs remain as
+above. There is no new mechanism claim or additional arm from this publication.
