@@ -3287,3 +3287,70 @@ selected as the endpoint. Four planned fits are launched, three accepted and D2
 running; S2/G2 remain unstarted. Consumed the exact generation-28 wake/event and
 rearmed the same accepted process at **generation 29**. Continue the existing fixed
 horizon without a restart, new fit, changed recipe or Pro Send.
+
+## 2026-09-22 — B03 second-block D development-twenty checkpoint
+
+The September 23 02:00 UTC observer reports the original D / 912347 / a01 runner and
+supervisor identities running, no exit witness, consistent records and zero observation
+errors. Refreshed main `aecf372347b6779d75d63f1c0e36bc279d3e6e14` leaves the constitution,
+compute binding, owned notebook, lifted pause and direction/lead/plan unchanged.
+Copied summary SHA256 is
+`4116c17c1fc59940407a4fd26e7436b137d4a1f390eb5ae7de624303bc3e9afb`.
+It has **132,000 training transitions, 21 completed updates and 88 completed episodes**;
+collection 22 is complete, but its update is not recorded in this snapshot. Three
+development panels total 24 episodes / 36,000 evaluation transitions. Initial facts
+remain two episodes / 3,000 physical transitions; three readouts total 71,568 agent
+rows. Status is INCOMPLETE, failure null and stderr empty. All previously read completed
+records and frozen bindings are unchanged. All 45,557 summary/calibration floating
+values are finite. Read all seven new complete training records and the 113 added
+progress events; the 355-event stream has 330 ordered collection events, 21 completed
+updates, three development panels and one facts-ready event. Counter and timing checks
+pass. This is still a partial fit, not completion acceptance.
+
+Development-twenty J is **315.088688**, QoS **.320492508**, return cost **.050470046**,
+throughput **9.614775248**, and true episode-minimum fleet battery **.379834331**;
+legacy time-mean battery is .584219799. Relative to development ten, changes are
+J **+455.550716**, QoS +.047942053, cost -.128181298 and true minimum battery +.003287827.
+Six worlds improve J and two worsen: 920001 changes **-991.304303** to **-270.442162**,
+and 920002 changes **-240.151424** to 328.136951. World 920006 remains negative
+(-156.261562), though it improves; all eight worlds now have nonzero service.
+The largest favorable change is 920007, +1840.439862 to 440.722692. Every episode
+truncates at 1,500 with zero optimizer updates and no charging, cutoff, depletion or
+charger input. All reported aggregate means and per-step conversions were independently
+recomputed. The development learning curve now improves at both scheduled intervals,
+but heterogeneous world outcomes remain adverse evidence; no early endpoint is selected.
+
+On the same initial-policy facts, service MSE is **.008551292**, below development
+ten's .012557119 and the fixed training-mean reference .009677077. This mean hides
+opposite episode results: 932211 has error .005158248 versus reference .017477845,
+while zero-service episode 932212 has error **.011944336** versus reference .001876310
+and has worsened from development ten's .001551084. Observation MSE increases from
+.007977503 to **.010040269**, above both the constant mean .006262023 and persistence
+.000001321245; each episode remains worse than its mean reference. Episode-equal
+reductions, zero-update metadata and exact fact/calibration bindings pass. The original
+node's saved development-twenty array digest
+`8fd687fddc2330213f32ca585273c49b3180a11f459ae5924c8bd6c578e6cb91` matches the report;
+facts and both earlier array digests remain unchanged. Full binary readback/rescoring
+remains a completion check. Reported fixed-row feature variance/effective rank are
+46.058879 / 4.592022, with positive per-agent and quarter-episode variation and no
+degeneration flag. Native development improvement alongside worse observation readout
+retains the proxy/control separation; neither head error identifies an auxiliary effect.
+
+All native parameter groups move in updates 15–21. Both heads receive 30 steps per
+pass, while D's auxiliary representation steps, base/GRU gradients and displacement
+remain exactly zero. Valid rows stay 5,964 team / 47,712 agent; native diagnostics,
+head gradients, target/prediction moments and feature variance are finite. Training
+collections 15/16/18/19 each have one zero-service lane, 17/20 each have two, and 21
+has none. All completed episodes truncate with zero charging/cutoff/depletion/input.
+Earlier all-zero-service collections and negative worlds remain in the cumulative
+record. The last complete resource row is wall **4,823.398056 s**, peak RSS
+**3,089,316 KiB**; collection 22 ends at wall 4,956.633947 s. These are partial costs.
+
+The technical detached-control judgment remains supported, and this block's native
+development learning is clearer. First-block package judgments and the S/G recurrence
+question remain untouched until their fixed trained comparisons exist. Continue D to
+the prescribed final evaluation, then use its fully accepted block-two inputs for S/G
+and common endpoint replay. Four planned fits are launched, three accepted and D2
+running; S2/G2 remain unstarted. Consumed the exact generation-29 wake/event and
+rearmed the original accepted process at **generation 30**, without restarting or
+changing any fit, horizon, recipe or Pro operation.
