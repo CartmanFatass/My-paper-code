@@ -9555,3 +9555,158 @@ Completion event `0a7197d1c26f73a6d35cc6bb` was read and consumed using generati
 `563d45f0-944f-48be-9fc4-b895a2c82b83`; rearm returned generation93. A subsequent drain finds
 no pending event and no nonterminal observation. The worker, original Pro request and other
 tasks were not restarted, resent or messaged.
+
+
+## 2026-09-23 — B11 prospective: ordinary SET training conditions for N8 use
+
+### Decision, evidence and applicable advice
+
+This continues the owner's explicit instruction to keep researching, and the scientific
+responsibility delegated in constitution section 2 (2026-09-23). Current main
+`9f53da649c1a878ddb0e7a67b2c5090b28df6857` keeps this direction active at this DM and selects
+the two-fit comparison in RESEARCH's current plan. The project pause is lifted; the separate
+Claude FSD pause, G33 freeze and other DMs' accepted operations remain intact. No App reply,
+new DM, duplicate old run or new Pro Send is part of this work.
+
+Read relevant current RESEARCH topics 3, 4 and 6 and the complete project advice/adoption in
+`docs/research/archive/2026-09-23/RESEARCH-scientific-management-adopted.md` at
+`9774c1e4a9d8e8db48d652d4ed43802789ac5a60`. The question was committed at
+`c13350a7ce9ddbcf0c55acacae03fa93a9e140fd`, accepted Pro key
+`hmasd:1d02db50b970b1bf7ca4cbc7f445f83366400164d02b8b429c672206821b3ee4`.
+The complete 9550-character answer SHA-256 was independently checked as
+`3831d54162f944c23aacc2c437aca1ea558696661db008cc6b716dd84ebe82ff`.
+The adoption's 2664-character Decision was also read. Reuse that advice for the actual
+T6/T8 comparison, finite budget, new shared-within-N evaluation worlds, common actual initial
+tensors, native outcomes, specialization cost and bounded interpretation. No new advisory
+round is needed for implementing this unchanged choice. The answer's mistyped S7 numerical
+examples are not adopted; the published Decision retains the verified S7 corrections.
+
+B01's raw-training evidence is not bounded-training evidence. B03's clipped-training contrast
+helped H6 but hurt SET; B04's entropy improvement reversed in B05, and B06 tied much of that
+sign change to the trained pair. B07 preserves an exploratory bounded H6 package advantage,
+including at the trained N6; B08 shows both H6 and SET learned useful native outcomes. B09
+count-channel modification was activated but mixed. B10 opening-label replay improved mean
+J and service with substantial individual-world losses; it identifies neither unnecessary
+skill training nor a competent flat comparator. These results do not establish that SET's
+gap is primarily an unseen-N problem or that ordinary SET cannot learn.
+
+The separate native load B01 notebook and complete summary were read. Its saved summary is
+`runs/load_critical_member_generalization/s1_load_critical_member_b01_20260923/summary.json`.
+At N8/c10 that historical pair had mean eligible/eligible-unserved/served users
+29.654/.396875/29.257125 (H6) versus 20.00175/.7235/19.27825 (SET). Along those fixed paths,
+the larger separation is eligibility, not remaining capacity. This motivates measuring
+qualification and actual service together; it establishes neither learnable headroom nor
+that N8 training will recover the gap. No historical policy or read evaluation world is
+used as a new training-condition control.
+
+### Question, prediction and fixed exposure
+
+Question: under equal team-step training budget, is ordinary SET trained at N8/c10 more
+useful at N8 than a fresh ordinary SET trained at N6/c10, and what is its N6 specialization
+cost? Both arms keep ordinary SET, native uniform/free-space S1 with 50 users and c10,
+Gaussian policy samples stored with their original log-probabilities, physical execution
+clipped to [-1,1] during training and deterministic deployment, k10 held information and
+truncated-BPTT cadence, unchanged actor/critic information, representation, normalization,
+reward definition, episode/reset/bootstrap rules and learner hyperparameters. Low-level
+entropy is fixed .05: both endpoints .05, annealing and entropy targets disabled. No H6
+fit or H6 evaluation is included.
+
+- T6: train N6/c10, tag `s1_training_condition_b11_t6_s963201`.
+- T8: train N8/c10, tag `s1_training_condition_b11_t8_s963201`.
+- Both use initialization and learner-sampler seed 963201; training environment lane
+  seed addresses 964201 through 964216. Across N these addresses do not imply identical
+  physical worlds or matched realized training trajectories.
+- Each fit: 16 synchronous lanes x 500 steps x 45 rollouts = 360,000 team steps, 720
+  completed training episodes and terminal resets, 45 learner updates. T6 has 2,160,000
+  training agent rows and T8 2,880,000. Both use 15 PPO epochs and sequence batch 32;
+  native SET actor and critic optimizer calls are each 101,250 (T6) versus 135,000 (T8).
+  Coordinator and discriminator optimizer calls stay zero. Training policy calls are
+  22,500 per fit. Report actual counts, not only these products.
+- Final rollout45 only: test N8 first on worlds 1645800..1645831, then N6 on
+  1645600..1645631, 32 worlds x 500 steps per N. The two trained policies share these
+  world addresses within each N. No initial or intermediate evaluation and no checkpoint
+  selection; save untrained checkpoint00 and final checkpoint45 for verification.
+- Total: **2 fits, 720,000 training team steps, 5,040,000 training agent rows, 64,000
+  final evaluation team steps, 448,000 evaluation UAV steps, 128 evaluation episodes**.
+  Each fit makes 1000 final batched evaluation policy calls. Evaluation makes zero
+  optimizer or training-storage calls. No auxiliary search, shadow trajectories or extra
+  train/evaluation seeds. Build/init, checks, publication and collection are additional
+  non-fit work. Actual fit wall/CPU/RSS will be recorded; current wall and peak scratch
+  estimates are unknown, not zero. BLAS/OpenMP teams one, Torch intra-op four, CPU float32.
+
+Primary reading is Delta8 = J(T8,N8)-J(T6,N8), where each world's J is
+N * sum(native adapter scalar reward)/500 = mean(.7*C+.3*Q-height_penalty).
+Delta6 is the specialization consequence, not another interchangeable primary score.
+Report paired within-N world differences, every loss world and adverse tails alongside
+means. Eligible users E come from the actual post-transition SINR matrix and native
+threshold; served S from actual native connections; eligible-unserved U counts eligible
+users without a connection. Retain per-UAV eligibility/connection counts and native C/Q/P.
+No post-result reweighting across N, redefinition of failure or best-checkpoint selection.
+
+The directional prediction is Delta8 > 0 accompanied by more actual N8 service and a
+useful eligibility change; Delta6 may be negative. Native J and service take priority over
+an eligibility-only gain. This is a training-condition package comparison: reward/N,
+physical joint conditions, agent rows and optimizer work change with training N. Equal
+team steps do not identify pure count causality, equal exposure or isolated reward scaling.
+One initialization block, one trained instance per condition, exploratory; 32 paired worlds
+per N are nested evaluation observations, not independent training replication.
+
+If N8 J and service improve, retain that bounded practical result with its N6 losses and
+costs; it does not establish closure of the H6 gap or a competent fully tuned SET baseline.
+If only eligibility or a proxy improves, the native-use prediction is unsupported. If N8
+fails to improve, lower this particular training-condition revision's priority; do not infer
+that count is irrelevant or SET cannot be improved. Opposite N6/N8 signs may motivate a
+separate mixed-condition hypothesis, not automatically add N4/6/8 training here. Complete
+both declared cells regardless of their relative scores unless actual execution integrity
+fails. After reading the fixed comparison, reconsider project evidence and the next useful
+investment; completion is not itself a reason for the DM to become idle. No automatic seed,
+horizon, label, clock, coefficient or world search extends B11.
+
+### L0: common tensors and narrow native runner
+
+Deliverable: an admission-guarded two-cell B11 runner that implements exactly the above
+comparison. Owned executable paths are
+`experiments/candidates/agent_count_generalization/training_condition_b11/__init__.py`,
+`experiments/candidates/agent_count_generalization/training_condition_b11/runner.py`,
+`scripts/run_agent_count_training_condition_b11.py`, and
+`tests/experiments/candidates/agent_count_generalization/training_condition_b11/test_runner.py`.
+The DM owns this notebook and publication; the Implementer owns only those four paths and
+may not stage/commit, edit shared learners/historical runners, launch, contact Pro or spawn.
+
+A real common initialization needs more than the same seed. Existing agent construction
+consumes N-dependent random tensors before installing its count-stable final modules.
+For each fit, construct a canonical ordinary N6 SET initializer at seed963201 after native
+environment construction. Canonical config uses the same recipe and dimensions, cloned
+from the actual fit config with physical N and buffer sizes corrected to six; no extra
+canonical environment steps or forward/evaluation calls. Construct the actual N6/N8 target
+and `strict_sync(target, canonical)` inside a global-RNG-preserving context. Copy every
+registered module tensor and normalizer; verify exact key/shape/value equality. Target
+keeps actual N, fresh empty optimizers over its own parameters and its own sampler seeded
+by config.seed. Restore target training mode and verify a fresh reset runtime. Returning
+from target construction restores the canonical post-initialization Python/NumPy/Torch
+RNG stream. Save both initial digest and tensor manifest; release canonical state. This
+adds initialization work, not another fit. Do not borrow an old or already-trained SET.
+
+Reuse unchanged base helpers, `strict_sync`, and B03's bounded collector; metadata and
+configuration must reflect actual train N and reward units. Count real optimizer steps,
+parameter movement, actual transitions/agent rows, policy/evaluation/storage calls and
+resets. Each final evaluator constructs an actual-N target, strictly loads current learned
+tensors, uses preserved learner RNG/runtime, and asserts no updates, storage, or weight/
+normalizer drift. No outcome-adaptive branch. Persist summary, training.jsonl, checkpoints,
+final per-world panels and compact post-transition traces (native reward components,
+scalar reward, eligibility/connection masks, connected quality sum and UAV heights) sufficient
+to independently recompute J/C/E/S/U and check the Q/P formula without a full geometry study.
+Check actual matrix/threshold, unique connection and c10 capacity invariants; do not assume
+single-eligible-UAV identity to manufacture service. Record source bytes before and after.
+Partial failures retain counts and logs; an incomplete cell does not silently resume or retry.
+
+Focused checks cover identical final tensors across N6/N8 (including initial buffers and
+normalizers), RNG isolation, real-N configs/sampler/optimizer ownership, fixed entropy,
+actual-N reward scaling, final-only new-world evaluation and exact exposure arithmetic,
+native service/component identities, the real collect/store/update path on tiny technical
+fixtures, frozen evaluation and CLI admission/cell refusal. Technical fixtures use reduced
+networks/horizons and pytest-managed scratch, not selected scientific scores. An independent
+registered engineering Reviewer checks high-risk initialization/RNG/evaluator semantics.
+DM accepts the diff and checks, publishes exact inputs and uses fresh actual-node admission
+on wsl_4070, preserving other accepted jobs. Accepted fits get retained native handles and
+this task's deterministic observer; no blind retry after an uncertain launch.
