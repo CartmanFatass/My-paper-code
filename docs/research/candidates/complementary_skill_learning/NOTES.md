@@ -1199,3 +1199,161 @@ snapshot `c0ba4cc61d324d659996549a87be7152`. Both output copies, original operat
 manifest, exit witness, published source and authoring checkout remain. The original D/G/P
 operations are all terminal; consume the P READY event with its exact generation/wake/event
 identities and leave no experiment waiting job to restart.
+
+## 2026-09-23 — Reconsider the useful-skill question after B01
+
+Read current published shared background and the three-DM plan at
+`fa7e75d2d5d52c63ce5d07cbf11ba96634583343`, including topics3–6, the complete B01 branch
+advice above and the applicable project-review advice. B01's closed auxiliary recipe does
+not settle whether the native skill-discovery objective itself helps finite service learning.
+The independent count direction's B08 shows real learning by both H6 and ordinary SET;
+B10's opening-label reuse gives mixed service consequences and preserves the trained skill
+structure. It does not test the necessity or value of a discovery reward during training.
+The two-block S7 auxiliary reversals and adverse aggregation packages lower the attraction
+of another structure/auxiliary patch. DM1 owns new N6/N8 training, DM3 owns S7 task-risk
+reweighting, and Claude FSD remains paused; this DM does not take over any of those studies.
+
+Three possible next investments are materially different. A fresh G/D comparison could test
+recurrence of the favorable uniform package, but needs its own reason to overcome G's own
+loss and must use common worlds for the selector contrast; it is not a continuation of the
+closed three-arm batch. More uniform-floor exposure is currently weakly motivated: observed
+marginals and final behavior entropies are already broad. That does not prove adequate
+state-conditioned combinations, but no targeted missing-exposure prediction has emerged.
+Rescaling P to match the observed G gradient norm would be an outcome-informed optimizer
+repair without evidence that this norm caused the service loss. None is a queued run.
+
+The preferred question for criticism is simpler: in fresh complete learning, does retaining
+the low-layer label-discrimination reward help native service, or does task-only low-layer
+learning give a more useful skill-conditioned policy under the same information and exposure?
+This tests a training-objective choice, not another factual predictor or an identified cause
+of B01 failure. The current native code has an explicit `legacy_mi_reward_coef` path in the
+batched/scalar reward calculation. At B01's last rollout D/G/P's mean environment components
+are.070809/.065529/.062813; team components−.041838/−.043787/−.042337 and individual components
+−.017516/−.017467/−.017388. These means describe the actual mixed low reward; a nearly constant
+offset need not change an ideal advantage or policy, so their magnitude/sign is not evidence
+of gradient conflict. The proposed experiment must stand as a new objective-use comparison.
+
+No new fit is selected yet. The complete old Pro answer covers B01's bounded end decision,
+but not this newly proposed reward/comparator choice or its actual full result. Seek one
+focused follow-up under constitution5, then select and carry through the useful next action
+within the existing direction authorization. Pro is advice, not approval or an independent
+empirical replication; no Root message or owner reauthorization is needed.
+
+## Pro question 2026-09-23 task-objective-after-pair-auxiliary
+
+Conversation: reuse this direction's existing Jev-account conversation; its address remains
+only in local transport state. This is a new question, not a resend of the completed first one.
+
+**Question and decision.** After the fully read B01 D/G/P result, is the most useful next
+learning investment a fresh two-arm comparison of native mixed low-layer reward versus
+task-only low-layer reward, or is another concrete action better supported? Criticize the
+proposed objective comparison and choose the smallest observation that can change our
+useful-skill judgment. This is a direction-level premise/investment question, not a project
+portfolio review or a request to certify an existing implementation.
+
+**Standing and new evidence.** The immediately preceding complete-result entry contains all
+service, adverse-world, signed-combination, learning and cost readings. Primary P−G own J
+is+.008216855, but P−D is−.023633992; uniform P−G/P−D are−.078261608/−.058563913 with32/32
+negative worlds against each. P primary G-readout signed T is+.000293732024 scalar (10/16
+worlds positive), while complete P service is below D. G−D own/uniform is−.031850847/+.019697695.
+P has12 clipped auxiliary minibatches and2.67 times G's mean auxiliary trunk norm, without
+identified causal attribution. All learning paths activated; first facts and seeds match;
+there is one training instance per arm. Different own/uniform panels preclude a within-arm
+causal selector contrast. No initial combination diagnostic means no emergence attribution.
+All three fits, all worlds and contrary readings are retained. The old advice's local-T-
+without-net-use branch closes this B01 recipe; no extra fit is owed by its completion.
+
+**Preferred candidate, for criticism rather than a frozen B02.** Start two fresh, jointly
+matched native S1 N6/c10/k10,50-user learning instances from one new common initialization
+block,360k team transitions each. Preserve the full high/low recurrent skill-conditioned
+policy, six team/six individual labels, actual AR mu=.9pi+.1/6 individual sampling/replay,
+team law, original entropy coefficients, raw-Gaussian PPO with clipped execution, information
+rights, normalizers, native update cadence and both discriminator training schedules.
+Use the B01 D condition as the common base: both existing factual heads may remain detached
+and identically trained in both arms to preserve the accepted pipeline, with no auxiliary
+actor optimizer. The sole intended treatment is low-layer discovery-reward coefficient
+1 versus0, retaining lambda_e=1 and unchanged high-layer native reward. Keep computing and
+training discriminators for equal exposure/compute; their outputs may be diagnostic even
+when they no longer enter the low-layer target. The proposed switch must be traced through
+the actual batched collector, stored low rewards, GAE/critic and PPO path; an available flag
+is not proof that the complete contrast is already implemented or scientifically sensible.
+
+The intended estimand is the finite complete-policy consequence of that objective choice,
+not the isolated necessity of skills, optimal MI, or proof that B01 was harmed by MI. Both
+arms retain skill inputs and joint training; task-only may reduce behavioral distinction or
+make labels redundant, and better service would still be a useful simplification. A lower
+discriminator loss or more identifiable labels cannot substitute for native service.
+The favorable prediction is higher final native own J with preserved/improved uniform
+service and acceptable native C/Q/height tradeoffs. A negative or mixed pattern changes
+that choice; it does not automatically lead to tuning MI coefficients or removing entropy.
+I do not claim an intermediate mechanism has already been diagnosed. If proposing a targeted
+repair instead, state a nontrivial intermediate prediction and its native consequence.
+
+**Prospective cost and evaluation under this candidate.** Two fits /720,000 train team
+transitions. Initial/final x own/uniform x32 fixed common worlds x500 steps x2 arms gives
+128,000 evaluation steps; total848,000. Initial and final panels use the same reserved world
+set and each selector has the same predeclared RNG law across arms; no training or selection
+uses these observations. This deliberately fixes B01's nonpaired selector-panel limitation.
+Read final own task-only minus mixed as primary, retain uniform and initial/final values,
+all per-world service components and costs. No best-checkpoint choice, rectangular branch
+search, extra predictor fit or confirmation. One training block remains exploratory. Around
+two B01 fit-body times is only a scale reference, not a measured new runtime; update counts,
+evaluation cost and support work must be reported. Exact seeds and executable scope would
+be fixed in a new prospective entry only after the DM's decision.
+
+**Strongest alternatives and constraints.** A fresh G/D block with common own/uniform worlds
+could test whether G's positive uniform service recurs (2 fits/720k train/128k eval under the
+same four-panel design), and may outrank my preferred new objective if recurrence genuinely
+changes the deployment decision. Merely increasing the uniform floor lacks a diagnosed
+missing-exposure link given the observed marginals/entropy; disagree if the actual evidence
+supports a discriminating change. A further P gradient/rank/target sweep is not selected.
+A small zero-fit question or honest stopping after reconsideration is legitimate if it
+changes a real decision; do not erect a mandatory probe or toy-pass gate before learning.
+Do not borrow or resume another DM's direction. Owner pause remains lifted; Claude FSD and
+G33 remain paused/frozen. Three direction DMs plus Root are the current setting.
+
+**Context and source precedence.** Unless explicitly stated otherwise, paths resolve at
+the full `source_sha` supplied in the send message. Read the question and preceding complete
+result/reconsideration entries, then only the decision-relevant sources below:
+
+- Governance: `docs/project/OPERATING_CONSTITUTION.md` §§1–5,7–8, especially delegated
+  scientific continuity, no automatic batch extension and proactive advisory Pro.
+- Method: `.agents/skills/hmasd-scientific-tools/SKILL.md`, Update the working explanation,
+  Comparators, Statistics, Cost and exposure, and Pro. Engineering Checks and review only
+  where needed to assess the proposed actual reward path.
+- Current shared evidence: `docs/research/RESEARCH.md` topics3–6 and the three-DM plan at
+  `fa7e75d2d5d52c63ce5d07cbf11ba96634583343`; the linked B08/B10 distinction between learning,
+  deployment dependence and skill necessity, and S7 B03's adverse auxiliary results. These
+  motivate the new objective question; they are not matched controls for this experiment.
+- First complete Pro `### Answer` above, especially comparisons and result branches; its
+  B01 premises remain frozen while the present question changes the next investment.
+- Direct evidence: `runs/complementary_skill_learning/b01_d_260923901_957a65c01/`,
+  `b01_g_260923901_957a65c01/` and `b01_p_260923901_957a65c01/`: each `summary.json`, relevant
+  `training.jsonl` fields and `combination_diagnostic.json`. Check the actual means,
+  components, counts and the limits of T; complete raw arrays remain available. Do not
+  claim a bytewise audit unless performed. Binary hashes/recovery locations are in summaries.
+- Frozen B01 source is `957a65c0155f88e5287c744f0f667192174f16df`: the B01 prospective section
+  above, `experiments/candidates/complementary_skill_learning/b01/learning.py`, `runner.py`
+  and `scripts/run_complementary_skill_learning_b01.py`. Its completed meaning is unchanged.
+- For reward/comparator feasibility use current `hmasd/agent.py`: batched and scalar intrinsic
+  reward calculation, actual transition storage and low-layer update, high-layer D2 reward
+  path; follow only directly necessary calls/configuration. Verify what turning off
+  `legacy_mi_reward_coef` actually changes rather than inferring from its name.
+
+**Return.** Distinguish the observation, the changed judgment and a new conjecture. Give your
+preferred next action, the strongest reason it could be wrong and the smallest comparison
+that would change it. If choosing learning, specify the exact objective/comparator scope,
+useful prediction, principal failure branch and fit/non-fit cost; reduce or replace my
+candidate when justified. Explain whether prior advice remains applicable and what changed.
+No new architecture, positive result, exhaustive hypothesis list or extra Pro round is owed.
+Return `MATERIAL_DISSENT: yes/no` with the concrete disagreement. Cite sources actually read
+and disclose decision-critical unread material; do not substitute previous chat memory.
+
+**Write constraints.** No training or edits outside this question's empty `### Answer`
+subsection in this NOTES file on `codex/complementary-skill-learning`. Read pinned inputs,
+then fetch the latest target blob and use its actual blob SHA for an answer-only write.
+Preserve the question and every other byte; stop on overlapping edits. Report the actual
+commit after a successful write. If writeback is unavailable or fails, return the complete
+answer in chat, not only a receipt, SHA or link. The DM retains the scientific decision.
+
+### Answer
