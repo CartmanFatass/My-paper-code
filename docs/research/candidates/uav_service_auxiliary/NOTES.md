@@ -3981,3 +3981,68 @@ The latest completed-update sample is **1,484.785164 s / 24.746419 min**, peak R
 Consumed the exact checkpoint and rearmed the same accepted handle at
 **generation 41**, 1,500-second window. Continue the frozen run and panels; no
 restart, extra fit, new Pro Send or App message.
+
+## 2026-09-22 — B03 second-block G nineteen updates and development-10 reading
+
+Read generation-41 checkpoint `9193efb48124ad3412f0a3d8`, wake
+`c59b3591-b9fe-424a-be9a-687aeff5c60e`. Original native identities remain running
+and consistent, with zero observer errors. Main `3d4e4e1d4` preserves this scope,
+pause, launch controls and relevant B03 understanding. Collected and byte-verified
+nine small files. Earlier updates, training rows, RSS, evaluation-0 and all
+first-rollout bindings are unchanged. The new summary digest is
+`2eb73e429886b86a97574de5cdc0113403c703e7f70f7915a0241fa2373640b8`.
+
+The run remains INCOMPLETE, failure null, stderr empty: **19 completed updates /
+114k updated training transitions / 76 completed training episodes**; collection
+20 is at step 1,300, bringing collected transitions to **119,200**. Two development
+panels give 16 episodes / 24k evaluation transitions and 47,712 readout agent rows;
+initial facts remain exactly reused, with zero new factual interaction. All
+**41,044 summary/calibration floats** are finite. Every native group and both
+auxiliary representation components move on updates 10–19; both heads and the
+representation now report **570 optimizer steps each**, retaining the fixed
+5,964 team / 47,712 agent samples per pass. Saved-state verification remains due
+at complete collection.
+
+Read all eight development-10 worlds and independently recomputed their means.
+G has **J −67.602729**, QoS **.227257460**, cost **.131611822** and true minimum
+battery **.382148866**. Four worlds have negative J; 920007 has zero service and
+920006 is worst at −942.792941. All truncate at 1,500, with zero optimizer updates,
+charging, cutoff, depletion and charger input. At this development checkpoint:
+
+| Paired development reading | G−D | G−S |
+| --- | ---: | ---: |
+| Native J mean | **+72.859299** | **−185.254482** |
+| QoS per step | −.045292996 | −.043008406 |
+| Return-constraint cost per step | −.047039522 | +.040109668 |
+| True episode-minimum battery | +.005602362 | +.015196264 |
+| World J wins / losses | 3 / 5 | 4 / 4 |
+| Median world J difference | −143.065153 | −10.893864 |
+
+G−D's positive mean includes the +1,126.424636 difference at 920007 despite that
+world's zero absolute G service. Retain five paired losses and lower mean service
+beside the lower cost. Relative to S, both service and cost are unfavorable at
+this checkpoint. These are development-panel readings, not final comparison or
+independent training replications; they do not establish the prospectively sought
+final G service increase.
+
+Initial-common-fact service MSE is **.007244093**, observation MSE **.006763699**:
+respectively .576891/.847847 times D and .752718/.805102 times S. Both service
+episodes beat their training-mean references; the observation mean remains above
+the .006262023 reference, with one episode on each side. Sampled feature variance /
+effective rank is **6.439162 / 5.870591**, nondegenerate, with per-agent and quarter
+variation retained. The saved array digest is
+`8442e66bfa41cc58bfa864588d56be00855de7f1f4eb318355ec5e33901e7c00`;
+independent raw-array rescoring remains pending complete collection. G has lower
+prediction errors than S but lower development J, preserving the distinction
+between this readout and control use.
+
+New training rollouts 10–19 contain **24/40 zero-service and 32/40 negative-J
+episodes**; cumulative counts are **52/76 and 64/76**. Worst new J is −1,974.254544
+at rollout 10's first lane; all training episodes truncate and all event counts
+remain zero. The latest completed-update resource sample is **3,177.502144 s /
+52.958369 min**, peak RSS **3,092,120 KiB / 2.948875 GiB**; the later partial
+collection event is at **3,258.822754 s / 54.313713 min**, not full-fit cost.
+The mixed early panel and adverse training remain visible while the predeclared
+final comparison is unresolved. Consumed the exact event and rearmed the same
+handle at **generation 42**, 1,500-second window; no restart, added fit, Pro Send
+or App message.
