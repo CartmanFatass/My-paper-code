@@ -3154,3 +3154,72 @@ and endpoint-fact seeds and unchanged development/final panels. Automatic observ
 registered against this accepted native claim. Four of six planned fits are now launched:
 three first-block fits accepted and second-block D running; S/G remain unstarted. Keep
 the fixed horizon and read D's calibration/initialization evidence before binding S/G.
+
+## 2026-09-22 — B03 second-block D first training checkpoint
+
+The 01:03 UTC September 23 observer retains the same matching D / 912347 / a01 identities
+running, consistent records and no exit witness. Refreshed main
+`a7d16ff220231dff37b413ab4b746c6b552d3073` preserves this direction/lead, lifted pause and
+owned shared-background entry. Copied summary SHA256 is
+`01b2248a339e45547351adfca5c82baf4d0a64d903dde8747e3c6152ea75dc79`.
+The snapshot records **43,600 training transitions, seven completed native/auxiliary
+updates and 28 completed training episodes**, including part of collection eight.
+Only the rollout-zero development panel is present: eight episodes / 12,000 evaluation
+transitions. D collected the two prescribed initial-policy fact episodes / 3,000 physical
+transitions, with 23,856 valid agent rows replayed. Status remains INCOMPLETE, failure null
+and stderr empty. All 15,717 floating values in the summary and calibration are finite.
+Read all 118 progress events and seven complete training passes; collection counts,
+update/episode totals and monotonic timing agree. No trained development panel, final
+evaluation or second-block auxiliary comparison is available yet.
+
+Block-two initialization fingerprint is
+`10cdc004027e2ee04c4aa3c5bc7f0e2938df00bb1bc52d346c2886f21a9aa720`.
+The exact new initial-facts digest is
+`163d34ce6dc14e2cf6273c503ec8e086589b39908c19632af30c1b3bb3a727ae`, with seeds 932211/932212
+and the matching initial policy. Calibration digest is
+`0c49d91203e9e6d18a38d5650207873a7eeb91b536f582a35fea9ee312591ebb`.
+Its scientific binding matches the summary's first-rollout record, including collection
+`ee1d01c195f9197226e4b41d360c0a38957c8b4a61af16ff7622b0dfc93e7eb7` and first native update
+`4ee61c8f3ecb466faca8609273f17b007bfd9258b4dac57e43774bbbbe711c8f`.
+The training-only coordinates use 5,964 valid team starts / 47,712 agent rows, 365 finite
+means and scales (all scales equal one here); fixed service-target mean is .043316392.
+First native optimizer steps are high 75, actor/critic 2,250 each, team discriminator 15
+and individual discriminator 60. Future S/G must match these block-two inputs; first-block
+facts or calibration are not interchangeable with them.
+
+The initial development mean raw J is **-431.411727**, QoS **.121938558**, return cost
+**.200757110**, throughput 3.658156747 and true episode-minimum fleet battery **.347762066**.
+Worlds 920002 and 920007 have zero service. The initial factual panel has J **-800.611213**,
+QoS .087434656 and return cost .306928046; episode 932212 has zero service and J
+-1645.974128. All ten evaluation/fact episodes truncate at 1,500 steps, with zero optimizer
+updates and no charging, cutoff, depletion or charger input. Aggregates were independently
+recomputed from the complete world rows. These establish this block's untrained starting
+conditions, not a learned package effect or a comparison with first-block trained policies.
+
+On those two initial facts, the untrained service/observation MSEs are **.141869610 /
+.074281531**, versus fixed service-mean .009677077, observation-mean .006262023 and
+persistence .000001321245. Both episode rows are adverse to their respective mean
+references. Episode-equal reduction and metadata were checked; original-node saved-array
+digest `894ec96a001412e9b0f5b846ac523f9f8f6494d070628ac0bb7bf64e00dee2be` matches the report.
+Reported fixed-row feature variance/effective rank are 80.812081 / 1.970603, with nonzero
+per-agent variation and no degeneration flag. The saved initial heads are untrained;
+these values are a reference for later panels, not evidence of failed trained prediction.
+Full binary readback and independent saved-array rescoring remain part of D completion.
+
+Every native learner moves in all seven complete updates. Each detached head receives
+30 steps per pass with positive parameter movement; auxiliary representation steps and
+base/GRU movement remain exactly zero, as required for D. All passes retain the fixed
+5,964/47,712 valid-row counts. Training service is sparse: collections **2 and 3 have zero
+QoS in all four lanes**, with further zero-service lanes throughout the seven collections.
+All completed training episodes truncate at 1,500; charging/cutoff/depletion/input exposure
+remains zero. These adverse training observations are retained without changing horizon
+or treating them as a final negative package comparison. The technical detached-control
+judgment strengthens; first-block package readings and the planned recurrence question
+are unchanged until trained second-block comparisons exist.
+
+The last completed-update resource row records cumulative wall **1,554.436201 s** and
+peak RSS **3,049,804 KiB**, not final fit cost. Four planned fits are launched, three
+first-block fits accepted and second-block D running; second-block S/G remain unstarted.
+Consumed the exact generation-27 checkpoint wake/event and rearmed the same operation
+at generation 28. Continue its fixed horizon; no restart, new cell, retuning or Pro Send
+is selected from this checkpoint.
