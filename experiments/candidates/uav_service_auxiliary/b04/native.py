@@ -65,7 +65,7 @@ def optimizer_state_steps(agent):
 
 
 def run_native(*, arm: str, out: Path, launch_sha: str, device_name="cuda", threads=4,
-               spec: B04Spec | None = None):
+               spec: B04Spec | None = None, object_id: str = OBJECT_ID):
     spec = spec or B04Spec()
     if arm not in EXTRA_COST:
         raise ValueError("arm must be N or R")
@@ -82,7 +82,7 @@ def run_native(*, arm: str, out: Path, launch_sha: str, device_name="cuda", thre
     out.mkdir(parents=True, exist_ok=True)
     started, cpu_started = time.time(), resource.getrusage(resource.RUSAGE_SELF)
     timings = {key: 0.0 for key in ("preparation", "collection", "native_update", "evaluation", "checkpoint")}
-    summary = {"object_id": OBJECT_ID, "status": "INCOMPLETE", "failure": None,
+    summary = {"object_id": object_id, "status": "INCOMPLETE", "failure": None,
                "arm": arm, "seed": spec.seed, "launch_sha": launch_sha,
                "device": str(device), "torch_threads": torch.get_num_threads(),
                "training_return_coefficient": 2.0 + EXTRA_COST[arm],
