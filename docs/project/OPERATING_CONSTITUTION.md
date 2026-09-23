@@ -73,6 +73,12 @@ project's purpose to Root and DMs; it does not require another owner decision fo
 Closing a tested recipe does not end their research responsibility. The specific Claude FSD
 pause, frozen G33, existing ownership and accepted-operation contracts remain in force.
 
+2026-09-23 (owner follow-up, concurrency): plan research around three concurrent direction
+DMs, with the assigning session continuing as scientific project manager. Root is additional
+coordination capacity, not a fourth research direction; if it directly owns a direction, that
+work counts among the three. Existing accepted operations are reconciled, not cancelled or
+duplicated to change the concurrency setting.
+
 ## 1. What this project is
 
 A personal exploratory research project on unfixed skill duration k and unfixed agent count N,
@@ -119,13 +125,13 @@ operation. A method, tool, conversation or historical workflow is not a permanen
   a named set of directions, or as the **direct DM** for one direction. A DM may be an
   independent session or a Root child; its scientific responsibility is the same. Reuse the
   current lead rather than creating a second DM. The current owner-selected working level is
-  four concurrent direction DMs in total (owner, 2026-09-21), counting any coordinating session
+  three concurrent direction DMs in total (owner follow-up, 2026-09-23), counting any coordinating session
   when it also directly owns a direction; this is not four of each form.
   There is no obligation to replace a stopped direction without a worthwhile chosen question.
   As scientific project manager (owner, 2026-09-23), Root maintains the cumulative project
   explanation, prioritizes the next useful investments across directions, addresses actual
   stagnation and may select worthwhile work under the delegated scope. Root need not become
-  the fourth DM or approve each DM's next experiment. Independent sessions
+  an additional direction DM or approve each DM's next experiment. Independent sessions
   do not create an additional allowance, approval layer or automatic authority for new tasks.
   Native task creation still follows the owner's task-creation request and available tools.
   The earlier four-direction initialization assigned three independent sessions and the
