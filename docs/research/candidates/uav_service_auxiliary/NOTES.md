@@ -4046,3 +4046,69 @@ The mixed early panel and adverse training remain visible while the predeclared
 final comparison is unresolved. Consumed the exact event and rearmed the same
 handle at **generation 42**, 1,500-second window; no restart, added fit, Pro Send
 or App message.
+
+## 2026-09-22 — B03 second-block G twenty-eight updates and adverse development-20
+
+Read generation-42 checkpoint `443b24fda2bb4fd8073b4adc`, wake
+`9d19548a-cc98-4d64-9bee-36f2d15fa904`. The original native runner/supervisor remain
+running with matching identities, consistent records and zero observation errors.
+Main `5e18c6c05` retains this scope, pause, launch controls and relevant B03 shared
+understanding. Nine small files were collected and byte-verified; immutable inputs,
+all earlier update/training/RSS rows, development 0/10 and first-rollout checks are
+unchanged. Current summary digest:
+`90db2cbf544107e6cfa557e30d0a344d52cf18f65bef323ec80ad3d184b06267`.
+
+Snapshot status is INCOMPLETE, failure null, stderr empty. There are **28 completed
+updates / 168k updated training transitions / 112 reported training episodes**;
+collection 29 is complete, making **174k collected transitions / 116 episodes**,
+with its update/training row still pending. Development panels 0/10/20 total 24
+episodes / 36k evaluation transitions and 71,568 readout agent rows; initial facts
+remain reused, new factual interaction zero. All **60,150 summary/calibration
+floats** are finite. All native parameter groups and both auxiliary representation
+components move on updates 20–28; each head and the representation report **840
+optimizer steps**, with the fixed complete-window sample counts. Saved checkpoint
+readback and raw-array rescoring remain part of final acceptance.
+
+Read all eight development-20 worlds and independently recomputed their means.
+G has **J −225.908988**, QoS **.215550640**, cost **.178596503**, true episode-minimum
+battery **.377867383**. Five worlds have negative J; 920007 again has zero service,
+and 920006 is worst at −877.781177. All truncate at 1,500, with zero optimizer
+updates, charging, cutoff, depletion and charger input. Paired readings:
+
+| Development-20 reading | G−D | G−S |
+| --- | ---: | ---: |
+| Native J mean | **−540.997677** | **−319.238841** |
+| QoS per step | −.104941868 | −.143955800 |
+| Return-constraint cost per step | +.128126457 | +.034704910 |
+| True episode-minimum battery | −.001966948 | −.020818281 |
+| World J wins / losses | 1 / 7 | 3 / 5 |
+| Median world J difference | −563.287582 | −382.917958 |
+
+Only 920002 beats D in J; the largest G−D loss is −1,436.848916 at 920005. The
+earlier development-10 G−D +72.859299 has changed sign. Within G, 10→20 J falls
+**158.306260**, QoS falls .011706819 and cost rises .046984680. Service and cost
+are both adverse against D and S at 20. This weakens any reading of the early
+positive development mean as stable progress, while leaving the predeclared
+final 32-world endpoint unobserved and unchanged.
+
+Initial-fact service MSE is **.007639823** and observation MSE **.013191826**;
+both rose from 10. Relative to D the ratios are .893412 / 1.313892; relative to S
+they are .442089 / .961043. Thus lower service error, and both lower errors against
+S, coexist with lower development J. The service mean is below its .009677077
+reference but one episode is worse; both observation episodes exceed their mean
+references. Feature total variance / effective rank is **36.179148 / 4.034095**,
+nondegenerate; all per-agent/quarter variation is retained. Saved readout digest:
+`1f506f6abd776fa28fd3a6321c1b50a5153bb9cbbad49f319359d95f1c104f38`.
+These summary readings neither identify mediation nor replace final raw verification.
+
+New training rollouts 20–28 have **12/36 zero-service and 24/36 negative-J episodes**;
+cumulative counts are **64/112 and 88/112**. The new overall worst J is
+**−2,436.929221** at rollout 26's fourth lane. All reported episodes truncate and
+all event counts remain zero. Retain the lower zero-service fraction in this slice
+alongside the persistent negative returns and large adverse tail. Latest completed
+update wall is **4,760.693076 s / 79.344885 min**, peak RSS **3,092,120 KiB /
+2.948875 GiB**; collection 29 later records **4,847.227897 s / 80.787132 min**.
+These are partial scopes. Continue the same frozen operation through update 30,
+the remaining panels and endpoint artifacts. Consumed the exact checkpoint and
+rearmed at **generation 43**, 1,500-second window; no worker restart, extra fit,
+new Pro Send or App message.
