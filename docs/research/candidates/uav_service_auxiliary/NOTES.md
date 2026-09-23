@@ -5481,3 +5481,34 @@ or pending answer; inspection finds no remaining tab for this completed private
 conversation, and preserves all three unrelated browser targets. No repeat Send
 or App message occurred. The next action is actual-node correctness on the
 published B05 inputs, followed by native admission of the already-fixed N.
+
+## 2026-09-23 — B05 N admitted after fixed-seed CUDA checks
+
+Scientific source **`3de3e3f71c747e2422656126b52ae88beafb562a`** is committed and
+published. Its retained, clean checkout on configured `wsl_4070` passed the
+complete new B05 suite: **7 passed in 22.21 s**, including its actual CUDA
+collection/update/evaluation/checkpoint path. The local combined B04/B05 result
+remains 13 passed / 2 CUDA skips; independent review found no material findings.
+No source change followed actual-node validation.
+
+The fixed **N / seed914173** fit was natively accepted at
+**2026-09-23T19:56:22.822292Z**. The launch kernel rechecked current main
+`cfb058e5974d0f71304631659a6c8a0742f49abf`, the lifted pause, unchanged direction
+and exact lead, published source and actual-node resources. Available physical
+memory was **14,131,367,936 bytes**, above the **4,294,967,296-byte** floor.
+[Native manifest](../../../../runs/uav_service_auxiliary/b05_n_914173_a01/launch-manifest.json),
+[actual-node preflight](../../../../runs/uav_service_auxiliary/b05_n_914173_a01/admission-preflight.json)
+and [observed native state](../../../../runs/uav_service_auxiliary/b05_n_914173_a01/launch-status.json)
+retain the operation, command, source and original output paths. The supervising
+and scientific process identities both match, records are consistent, and the
+runner is **running** with no exit witness. Admission is not scientific acceptance:
+**0 completed/accepted B05 results** at this observation.
+
+Detached observation is registered and has adopted that same native operation,
+generation **64**, 1500-second bounded window. The initial drain has no pending
+events or undelivered Pro answer. Preserve this source and worker; a checkpoint
+rearms observation without restarting it. Complete output collection, native
+accounting, seed/fingerprint binding and the full fixed panels remain required
+before accepting N. **R is already fixed as the second fit**, after N collection
+and resource release, irrespective of N's performance. The pair remains exactly
+2 fits / 360k train / 192k eval upper bound; no additional action is selected.
