@@ -9268,3 +9268,67 @@ and the single native admission.
 Implementer owns only those four paths and returns diff/checks/deviations/risks. It is not alone
 in the checkout and must preserve concurrent edits. No NOTES/RESEARCH/commits, scientific choices,
 production assets, launch, Pro, App messages or children. DM retains scientific and code acceptance.
+
+## 2026-09-23 — B10 evaluator accepted for the fixed initial-assignment comparison
+
+The DM accepts the four-path Implementer diff against the published B10 L0 after reading
+its full implementation and focused tests. The original scientific comparison and exposure
+are unchanged: six panels, ordinary N4/6/8 before initial_replay N4/6/8; one original H6
+final45 binary, SET arrays only, zero new fits/updates/storage/shadows.
+
+The adapter copies the actual first assignment before action selection, keeps native
+initialization and k10 proposal calls, and gives the actor/critic consistent execution-label
+state. Per-lane real reset invalidates the cache; proposal probabilities/values are explicitly
+proposal-only. Numeric traces retain actual raw/clipped actions and per-lane state, observation
+and actor-state identities, plus separate proposal/execution label histories. Ordinary arrays
+must equal the bound B07 arrays exactly. The two real modes must share the first ten steps;
+subsequent comparisons remain separate realized histories. No full hidden tensors or extra
+policy forwards are introduced.
+
+During DM inspection, coordinator accounting was moved to the actual successful
+`assign_and_value_batch` return, before downstream checks/native postprocessing. A second
+callback classifies opening/later selections only after the native lane count matches.
+Construction and deserialization attempts/completions are recorded separately from scientific
+steps. The small B10 loading sequence reuses unchanged payload/config/source validation and
+strict restoration helpers, with explicit boundaries for these counters. No shared source was
+changed. Actor identities handle the native initially unallocated state without changing it.
+
+Focused scientific-interpreter command:
+
+```text
+PATH=/home/fires/.venvs/hmasd-linux-cpu/bin:$PATH /home/fires/.venvs/hmasd-linux-cpu/bin/python -m pytest -q tests/experiments/candidates/agent_count_generalization/initial_assignment_b10/test_runner.py
+```
+
+Result: **11 passed in6.64s**,14 existing third-party deprecation warnings. Technical fixtures
+exercise all-N strict restoration and ordinary exactness, native step/assignment/action beyond
+k10 with deliberately different subsequent proposals, pre-actor replay, one-lane real reset,
+copy isolation, clock/recurrence preservation, actual coordinator-return failure accounting,
+binary trace/prefix/first-divergence reading, byte-bound rejection and admission ordering.
+The Implementer reports py_compile and owned-file whitespace/newline checks passed; the DM
+independently checked AST parsing, exact hashes, scope and `git diff --check`.
+No production checkpoint was loaded and no scientific result evaluation ran in this engineering
+work. The original native H6 file was checked as bytes only:23,073,626 bytes and its declared
+`6d71f302...6498df` SHA-256 matched.
+
+The independent Reviewer inspected the final bytes and reported no material finding, reusing
+the11 passing checks without duplicating execution. Coverage limits remain explicit: failed
+ordinary-row retention is runtime-tested through a stub; the evaluator's measured failure write
+and prefix-failure retention are source-reviewed. Score/component aggregation has no separate
+technical arithmetic regression. The DM will independently recompute production scores and
+first-divergence/activation counts from standalone saved arrays rather than rely on candidate
+aggregates; production restoration, historical identity and scope remain run-time requirements.
+
+Accepted SHA-256s:
+
+- runner.py: `b0f125b6c09a8f2777d0b133b7f4408882ab79c3060ac400acbd04ad0fa676ec`
+- test_runner.py: `6b222581443318eee0c8fc2bddca311c486903ee7b6d8ceeda15e045fff9f6dd`
+- CLI: `3ebfa3abe2bbed9b34b97b3774513f5bb23e4766f148ed1e60bf10b34b69fcfc`
+- __init__.py: `97fa3d91e4cec69dc388fca52137ffd43f8eaf16becadccdf793f580655c8f59`
+
+Main publication `3498b4513be3a1b5d497da3ed6a2ece601165f45` already contains the full Pro
+answer and fixed comparison. Native canonical main advanced to that revision. A promisor
+object download error appeared during the update; subsequent reconciliation found no tracked
+working changes, and native RESEARCH/compute-config byte hashes exactly matched the published
+versions. No experiment had started during that update. The next action is one guarded native
+launch from the exact published accepted evaluator source, retaining the original binary and
+fresh actual-node admission; this is not scientific acceptance of any B10 outcome.
