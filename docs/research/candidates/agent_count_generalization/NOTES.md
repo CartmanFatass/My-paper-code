@@ -11732,3 +11732,26 @@ corrects the scope of the whitespace statement above; no behavior or test expect
 Final execution bytes are runner `d31e3219be7ad4557b8e3250059debe2bace1656f42e4771e91a467c1ac7cf37`,
 tests `319dbf25e925fd9a006529a6f144b421a975be8551ede89fabef3024c951ba22`,
 package `97533d39e14fdfd978d0536af13fc10b48837c2c225fbfb96b7236acbb4e8e2a`; CLI is unchanged.
+
+
+### B13 pre-admission path refusal and corrected input staging
+
+The first supervisor submission `agent-count-ordinary-control-b13` used published source
+`ba0a313707da94b4784e70ff338b256903eff848`. It exited4 after8 seconds at2026-09-23 20:09:41UTC:
+`absolute author input is absent from published snapshot`, naming S1's ignored checkpoint
+under the canonical author checkout. This happened in snapshot argument resolution, before
+claim creation, output-root creation or runner admission. Native reconciliation found no
+claim mentioning the fixed B13 tag, no output root and no active supervisor; zero B13 fits,
+training steps or evaluation panels started. Preserve the original supervisor log/status.
+
+DM decision: correct only the external-input locations and make one new admission submission
+for the same fixed output tag and eight-panel science. The kernel maps absolute paths beneath
+the author checkout into the published source snapshot. Therefore the two existing SET
+binaries were copied byte-for-byte to the configured external staging root:
+`/home/wu/hmasd-inputs/agent-count-ordinary-control-b13/s1_checkpoint_45.pt` and
+`/home/wu/hmasd-inputs/agent-count-ordinary-control-b13/s2_checkpoint_45.pt`.
+Both remain20,968,771 bytes with the prospectively bound SHA-256 values; original native files
+were rechecked unchanged. H1/H2 already reside outside that author root and retain their
+original bound paths. No source behavior, checkpoint, world, threshold, exposure or output
+identifier changes. This is a diagnosed pre-admission correction, not a repeated accepted
+worker or a scientific negative. The failed source snapshot is retained, not force-removed.
