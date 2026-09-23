@@ -12689,3 +12689,45 @@ Reviewer checks exact bytes and state/exposure risks; DM accepts before publishi
 fresh native admission. Implementation cost0 scientific fits/panels/launches; no scientific
 choice, Pro send, helper child, cross-task message, commit or launch by Implementer. Report genuine
 scope/state/interface conflicts with evidence; ordinary bounded implementation choices proceed.
+
+## 2026-09-23 — B14 implementation accepted for the fixed two-arm learning block
+
+The DM accepts the four candidate-local paths in the preceding L0, with no change to its
+scientific comparison, seeds, worlds, package recipes or H6-then-SET sequence. The Implementer
+has returned ownership and stopped editing. No existing core, environment, adapter, model or
+frozen B03/B07/B11/B12/B13 source was changed. The new entry has no old-run input dependency.
+
+The DM read the complete runner, CLI and tests and checked the final bytes against the independent
+Reviewer. The first review identified a P1: collection inference hooks also counted optimizer
+replay/bootstrap forwards, which would falsely fail the production count check after training.
+The accepted repair closes each rollout's hooks before its update and accumulates collection
+counts only. This was caught before any scientific launch. Training-mode and full buffer-content
+checks were added to the learner/environment/RNG isolation evidence, and panel RNG is seeded
+before evaluation environment/target construction.
+
+Focused existing checks on these final bytes: **6 passed in 4.58 seconds**, with 14 dependency
+deprecation warnings. Both real reduced arms use two lanes, horizon20 and one rollout/update;
+they exercise raw Gaussian action and old-log-prob storage, independent physical clipping,
+terminal successor/reset/recurrent handling, actual native H6 versus canonical SET initialization,
+optimizer ownership and movement, both stage/N evaluations, native traces and collection counts.
+The with/without-initial-evaluation comparisons require identical resulting learner digests,
+training logs (except wall time), reset scenes/RNG and training inference/optimizer counts.
+Failure injection preserves one real transition as one team/six UAV steps with no stored rows;
+CLI checks cover admission before scientific construction and wrong seed/tag/SHA refusal.
+
+Independent review reports **no material finding remains** on these exact SHA256 values:
+
+| Owned new path | SHA256 |
+| --- | --- |
+| `experiments/candidates/agent_count_generalization/fresh_learning_b14/__init__.py` | `844e896c85fceb4d89de3c42f633307a76bcf19ddab1156c489df3936cbb2130` |
+| `experiments/candidates/agent_count_generalization/fresh_learning_b14/runner.py` | `14149bd8b2ce7f466fb896c78a2f3397d9859ed3b1b7057baa78e8571d9f9330` |
+| `scripts/run_agent_count_fresh_learning_b14.py` | `1dafe400e4b9ea575fd2aab2ee74d1bb5517d078705d1159e7ce96841aced0b0` |
+| `tests/experiments/candidates/agent_count_generalization/fresh_learning_b14/test_runner.py` | `d8a6fe6634902ac3c4261350a7304c133fa868dc8a3724d7ce02fb2648ba8d4c` |
+
+These technical fixtures establish the exercised paths, not production45 optimizer totals,
+successful native admission, full-horizon stability or any B14 scientific outcome. No production
+pilot was run. Implementation/review cost is zero scientific fits/panels/launches; complete human
+and model preparation wall is unmeasured. The next authorized action is to publish these exact
+inputs, refresh actual-node controls/resources, admit the fixed H6 cell, and retain its native
+operation for detached observation. SET remains the fixed second arm after complete H6 collection,
+independent of H6's score. The B13 evidence and contrary worlds remain unchanged.
