@@ -3403,3 +3403,114 @@ Four planned fits are launched, three accepted and D2 running; S2/G2 remain unst
 Consumed the exact generation-30 checkpoint wake/event and rearmed the same process
 at **generation 31**. No restart, additional fit, retuning, shortened horizon or Pro
 Send is selected from this checkpoint.
+
+## 2026-09-22 — B03 second-block D complete acceptance and fixed S continuation
+
+D / 912347 / a01 completed at September 23 02:55 UTC. Direct native status confirms
+exit zero with a valid witness for the original identities, both processes absent and
+consistent admission/manifest/source records. Refreshed main remains
+`aecf372347b6779d75d63f1c0e36bc279d3e6e14`, with this direction and lifted pause intact.
+Accepted source remains `73be55261b9f5e8f8fe26fdec6558b87ad088fcb`. Collected all
+**18 artifacts / 236,271,241 bytes** and matched original-node SHA256s locally.
+The final summary is
+`729f8f1991a3bdd79fcc46b09083645da46e800f633590ac566328fbd016b99f`, status COMPLETE,
+failure null, stderr empty. Full production-spec verification passes for D / 912347,
+CUDA / four threads and the exact frozen source. This acceptance follows reading the
+complete evidence and checkpoint verification, not the process exit alone.
+
+Exposure is exactly **180,000 train / 30 updates / 120 training episodes**, plus
+**96,000 evaluation transitions / 64 episodes** and **9,000 physical fact transitions /
+six episodes**. The four initial-fact readouts total 95,424 valid agent rows. All
+485 progress events and final counters agree; previously read complete records remain
+unchanged. Every native group moves, with optimizer steps high 2,250, actor/critic
+67,500 each, team discriminator 450 and individual discriminator 1,800. Both heads
+have 900 steps; D has zero auxiliary representation steps, gradients and base/GRU
+movement throughout all 30 passes. Native displacement from initialization is positive
+for all groups. No straddling rollout boundary occurs in this fixed episode-length run.
+
+All 65,395 summary/calibration floating values are finite. Verified raw initial and
+endpoint fact arrays, seeds, shapes, terminal rows, policy/source metadata and QoS
+aggregates. Independently rescored every saved initial-fact prediction array at
+0/10/20/30 in float64, including W10 service labels, observation targets, both mean
+references and persistence; maximum discrepancy is **6.969093e-9**. All four saved
+feature samples reproduce their variance/effective rank. CPU readback restores the
+exact final native policy and auxiliary states; all **726 tensors** are finite and
+every native optimizer parameter state has the prescribed step count. Both head
+optimizer states have 900 steps, representation optimizer is absent, and calibration
+matches. The loader's expected missing discriminator-buffer notice does not resume
+training; verification performs no new environment interaction or optimizer update.
+
+Final **32-world raw J is +12.170880**, QoS **.233777638**, return cost **.108376770**,
+throughput **7.013329151**, and true episode-minimum fleet battery **.385216308**;
+legacy time-mean battery is .578743130. Eighteen worlds have positive J and fourteen
+negative J. Zero-service worlds are **936011, 936013, 936018 and 936029**. The worst
+J is **-1181.533226** at 936024; 936011 is -1151.501629 and 936015 -936.116143. The
+best is +864.618263 at 936032. All 32 episodes truncate at 1,500 with zero optimizer
+updates and no charging, cutoff, depletion or charger input. Recomputed the complete
+world aggregates; these worlds describe this one trained policy, not 32 training
+replications. No second-block S/G effect can yet be inferred from this D baseline.
+
+Development J at 0/10/20/30 is **-431.411727 / -140.462028 / +315.088688 / -41.598834**.
+The final interval loses **356.687523 J** despite QoS increasing .002339640: return
+cost rises **.120143486** to .170613532. True minimum battery rises .013381815, showing
+that these summaries alone do not identify a unique cost mechanism. All final
+development worlds have nonzero service, but four have negative J. The endpoint is
+kept at the prescribed 30 updates; the stronger development-twenty checkpoint is
+not selected retrospectively. Late negative training episodes, including the final
+pass's zero-service second lane, remain part of the adverse record.
+
+On unchanged initial facts, final service/observation MSE is **.007275837 / .007002230**.
+Service error is below its mean reference .009677077 on average, but not in both episodes:
+932211 is .007182121 versus .017477845, while zero-service 932212 is **.007369553**
+versus .001876310. Observation error exceeds its mean reference .006262023 and
+persistence .000001321245; both episodes remain worse than their mean reference.
+Service error improves from development twenty while native development J falls;
+both heads' errors also improve over that last interval. Reported final feature
+variance/effective rank is 46.801954 / 6.958434, nondegenerate. Thus this block adds
+another concrete limit on using prediction error to select control performance; it
+does not identify mediation or the effect of auxiliary representation gradients.
+
+The four prescribed endpoint fact worlds 933211–933214 have mean J **273.823643**,
+QoS .193849117, cost .001346911 and true minimum battery .400286356. All four truncate,
+with zero updates/events. Their different performance from the 32-world panel is
+retained as panel dependence, not extra test replication. Exact accepted bindings are:
+
+- Initial facts: `163d34ce6dc14e2cf6273c503ec8e086589b39908c19632af30c1b3bb3a727ae`.
+- Calibration: `0c49d91203e9e6d18a38d5650207873a7eeb91b536f582a35fea9ee312591ebb`.
+- Endpoint facts: `6b34d62e05d084d9ddab5fd3ba165323d18e8ce92d996e39e81360fe52be11d2`.
+- Final native checkpoint: `ed65f3d70c440c681eba46a46dd2626f94aa451c142e5733c19fb402ba0a6827`.
+- Final auxiliary checkpoint: `2cf95d69509479037f094e02010ecb26fe520c26f30c15f15c7525cff9ef366a`.
+- Final policy fingerprint: `9b95af7625a969e9988a910586cbf0baa4889c79d90cd62a69f89b1a1b3b4122`.
+
+Runner wall is **8,195.780130 s / 136.596335 min**, CPU user/system
+7,851.973719 / 362.907227 s and peak RSS **3,089,316 KiB / 2.946201 GiB**. Stage walls
+are collection 3,464.383987 s, native update 1,906.751907 s, auxiliary 15.749694 s,
+evaluation 2,502.896957 s, facts 197.021879 s, replay 11.023819 s, preparation .977825 s
+and checkpoint .137347 s. Four accepted B03 fits total **542.649048 runner min**;
+the first-block zero-update endpoint replay's .906094 min and the earlier zero-step
+technical failure remain separately scoped. Shared-node wall timing is not intrinsic
+algorithm speed.
+
+The current shared B03 reading remains: first-block G has the larger descriptive
+native gain, S has a service/cost tradeoff, and common-fact errors do not justify a
+semantic or mediation claim. D2 strengthens the validity of the second baseline and
+retains late cost deterioration as contrary evidence. It cannot strengthen or weaken
+the within-block auxiliary comparison before S/G exist. Continue the **already fixed
+fifth fit, S / 912347 / a01**, followed by the fixed G cell; no new fit is added and
+the original recurrence prediction remains unchanged. A higher/lower D baseline is
+not a reason to select or cancel the matching arms.
+
+Prospective S uses the unchanged source, 180k train / 30 updates, four lanes, CUDA FP32
+and four threads; all native learners continue, W10 service gradients enter actor
+base/GRU and the observation head stays detached. Reuse the exact D2 initial facts
+and calibration above from
+`/home/wu/hmasd-worktrees/usa-b03-73be55261/runs/uav_service_auxiliary/b03_d_912347_a01/`.
+First collection/native update/initialization must match the recorded D2 bindings.
+S output is `runs/uav_service_auxiliary/b03_s_912347_a01`, supervisor
+`usa-b03-s-912347-a01`; evaluation panels, endpoint facts, coefficients, seeds and
+learning rates remain frozen. Commit/push this decision and D evidence before its
+single native admission. No extension, retuning, third block, confirmation batch or
+new Pro Send is authorized by this result. Consumed the exact generation-31 checkpoint
+and rearmed observation at generation 32 to reconcile the completed original process.
+The resulting READY event was read against the complete verified result and consumed
+at generation 33; the D2 operation remains finished, with no worker restart.

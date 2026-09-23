@@ -481,3 +481,5 @@
 {"event": "collection", "rollout": 30, "step": 1300, "transitions": 179200, "wall_seconds": 6407.488975286484}
 {"event": "collection", "rollout": 30, "step": 1400, "transitions": 179600, "wall_seconds": 6415.087400436401}
 {"event": "collection", "rollout": 30, "step": 1500, "transitions": 180000, "wall_seconds": 6424.0444252491}
+{"event": "development_evaluation", "rollout": 30}
+{"event": "rollout_complete", "rollout": 30, "transitions": 180000, "wall_seconds": 6822.493251085281}
