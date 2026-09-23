@@ -8292,3 +8292,85 @@ production checkpoint loads, evaluation/launch, Pro, cross-task communication or
 is not alone in the checkout and must preserve others' edits. Return diff, checks, deviations
 and residual risks. DM accepts the implementation; independent Reviewer focuses on the new
 feature intervention, final-asset identities and shadow isolation before native admission.
+
+## 2026-09-23 — B09 evaluator accepted for the fixed six-panel deployment study
+
+The DM accepts the four-path implementation of the published L0 at
+`e9a106f6841a765d474afb6dc41e5dd508ddcae0`. The complete advice and selected scope were
+published to main at `d2daabdf1`; this acceptance changes neither that scientific scope nor
+its zero-fit exposure. No production checkpoint has been loaded or result-bearing evaluation
+started during implementation, tests or review.
+
+The exact experimental hook instances are the SET actor's direct fusion scalar, its nested
+state encoder's pooled scalar, and the H6 coordinator state embedding's pooled scalar. Each
+hook checks the actual N/8 input, clones the receiving affine input and changes only the
+selected column to .75. True roster, masks, pooling and other instances remain native. Final45
+binaries, original source summaries and independent final panel arrays are bound before
+strict restoration at each actual N. B02 restoration retains eval mode; B08 config/source
+validation is reused only where its meaning matches, with explicit final-stage restoration.
+
+The DM read the full evaluator, the CLI and the technical tests, including the core H6
+`step -> _batched_assign_skills -> assign_and_value_batch` and SET actor routes. SET shadows
+use captured pre-forward input, previous hidden state, masks and skill; only actual state
+advances. H6 shadows run the complete selection with their own team and autoregressive
+prefix. The one-off shadow is on each actual clamped history, not a substitute for an
+unclamped closed-loop trajectory. Actual returned calls, environment transitions and resets
+are counted at their successful boundary. Later diagnostic rejection cannot erase completed
+calls. A strict N6 mismatch preserves measured arrays, per-field discrepancies and restored
+RNG evidence while failing/quarantining the dependent study.
+
+During engineering the DM found the missing clipped-coordinate counter and potential loss
+of N6 mismatch arrays; both were repaired. Independent Reviewer also confirmed that aggregate
+reset counting would lose earlier completed lanes on a later reset failure; the final path
+counts each successful lane. The technical fixture was lengthened to12 steps to cross the
+fixed k10 boundary, retaining held snapshots on1–9 and reselecting at10. A differing-choice
+fixture verifies shadow prefixes rather than relying on coincident labels.
+
+Final checks on the frozen bytes: scientific Python
+`/home/fires/.venvs/hmasd-linux-cpu/bin/python -m pytest -q tests/experiments/candidates/agent_count_generalization/fixed_count_b09/test_runner.py --basetemp=temp/tests/pytest-b09-frozen`
+returned **15 passed,14 existing matplotlib/pyparsing deprecation warnings in5.46s**.
+Compilation and staged diff checks passed. Tests used only tiny synthetic/native assets in
+pytest-owned scratch; their checked scores are not scientific observations. Independent
+Reviewer read the final repairs, verified all four fingerprints and returned no material
+finding, reusing those checks without another production evaluation.
+
+| Accepted file | SHA-256 |
+| --- | --- |
+| `experiments/candidates/agent_count_generalization/fixed_count_b09/__init__.py` | `655de491b528fa0d88d63e96108f373309f797d6cf257339ac0f10c932d7bfee` |
+| `experiments/candidates/agent_count_generalization/fixed_count_b09/runner.py` | `8ef08b937395988a89eae07f092f74817a8977f93c8d48e54f6fcf22815ae118` |
+| `scripts/run_agent_count_fixed_count_b09.py` | `97ca45153b05081096183fe227ad101f2da995dc9e1d5efe8716adb4d1d6021b` |
+| `tests/experiments/candidates/agent_count_generalization/fixed_count_b09/test_runner.py` | `908d52475f84c481c133de5f34daea39f56d3d0c274304061285ac6e98ada687` |
+
+Coverage limits remain explicit: the N6 failure write inside `evaluate_policy` is source-read;
+its downstream retention is runtime-tested with a stub. Some partial-call count assertions
+use synthetic progress callbacks, alongside the real later-lane reset helper check. The
+production binary restoration, full500-step paths and actual scientific counters remain to
+be validated by the selected admitted run. These limits are not evidence of a service effect.
+The next action is one native admission on `wsl_4070` at the committed/pushed accepted source,
+using only the two original final45 assets and the fixed `s1_fixed_count_b09` output.
+
+## 2026-09-23 — B09 native operation accepted and observation armed
+
+The selected evaluator was admitted once at accepted source
+`3f57bd2d99be3121e0fa7d1277f767faab5552db`. The current main/control revision
+`2554b71a7ceb44aabb63d38a1a94df8837f0f38b` preserves this DM's direction and authorization;
+the newer assignments change neither our study nor the existing FSD pause/G33 freeze.
+The native retained worktree contains the exact accepted runner bytes and the committed
+original H6 B07/SET B05 final panel sources. No old binary or operation was replaced.
+
+The runner-written [launch manifest](../../../../runs/agent_count_generalization/s1_fixed_count_b09/launch-manifest.json)
+and [fresh admission preflight](../../../../runs/agent_count_generalization/s1_fixed_count_b09/admission-preflight.json)
+are retained locally. Admission passed with15,094,550,528 effective available bytes against
+the configured4,294,967,296-byte floor. Supervisor command acceptance was followed by
+verification of native kernel acceptance and matching live runner/supervisor identities;
+status at10:20:10 UTC was running and record-consistent, without an exit witness. This is
+execution status only, not asset-validation or scientific acceptance.
+
+The original status operation is
+`/home/wu/projects/HMASD/.git/hmasd-admission/26053034831826e891d68286db45bf9becb1619122723afa69cfcbe4be2f8048.json`.
+A single detached observation was armed against this same handle for the assigning task.
+Completion/error/checkpoint returns require draining its pending evidence and reading all
+result arrays; any checkpoint rearms the same observation without restarting the evaluator.
+Planned exposure remains0 fits/48,000 evaluation team steps plus the bounded shadows; actual
+counts and resource cost will come from the collected runner output. No score has selected an
+extension, new constant, split-site study or new fit.
