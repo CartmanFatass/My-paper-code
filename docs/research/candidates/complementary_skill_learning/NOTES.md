@@ -724,3 +724,21 @@ status command,30-second observations and a25-minute bounded return. At a checkp
 all new evidence and rearm that same handle; at exit collect and verify all scientific outputs
 before interpretation or snapshot reclamation. The fixed G/P continuation remains the declared
 batch, contingent on technical integrity and current owner controls, not on D's score.
+
+## 2026-09-23 — B01 D first observation checkpoint
+
+The bounded observation returned while the same accepted native identities remained running;
+current published owner controls still permit this direction. Read the complete persisted
+30-rollout summary and all24,000 corresponding raw-prediction rows. Verified each batch hash,
+lane/time ordering, raw-target hash, raw MSE recomputation, finite recorded values, fixed first
+target calibration and all native-group update/movement counters. The snapshot records1
+started fit,240,000 training/stored transitions,480 training episodes,30 native updates and
+16,000 initial evaluation transitions. Each auxiliary head has210 steps; D auxiliary trunk
+steps, gradients and auxiliary parameter movement are all0. Maximum sampled old/replayed
+log-probability difference is4.172325134277344e-6; discarded windows0, stdout/stderr empty.
+
+This is an integrity/progress observation, not endpoint acceptance or an arm comparison.
+Remaining15 training rollouts and frozen final panels stay unchanged; G/P are still unstarted.
+Rearm the original operation from observation generation4, consuming its checkpoint event;
+no worker restart, extra fit or new Pro question. Main's scientific standing is unchanged;
+the next result boundary will publish completed evidence there.
