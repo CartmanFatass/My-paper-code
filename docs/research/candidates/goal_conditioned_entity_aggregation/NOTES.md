@@ -784,3 +784,22 @@ entropy comparison. Those data further caution that raw-action saturation and ph
 exposure need not predict service together. They do not identify our encoder effect or authorize
 importing an entropy intervention into this already selected batch. Keep the same raw Gaussian
 PPO/entropy and clip execution in E, and defer any three-arm conclusion until its full result.
+
+## 2026-09-22 — B01 E accepted
+
+The prospectively fixed third arm E passed fresh native admission with the same published
+scientific source and CPU/four-thread contract. Its exact source/command/output and process
+identities are in the [native manifest](../../../../runs/goal_conditioned_entity_aggregation/b01_e_s922611/launch-manifest.json),
+with [fresh memory admission](../../../../runs/goal_conditioned_entity_aggregation/b01_e_s922611/admission-preflight.json)
+and [accepted status](../../../../runs/goal_conditioned_entity_aggregation/b01_e_s922611/launch-status.json).
+The three collected records match their remote SHA-256 values; independent native status
+reported the admitted child running and consistent records. O/P stay completed and preserved.
+
+The first E snapshot has one training start, two models, 8,000 collected/stored transitions,
+16 completed episodes, zero completed updates/evaluation at that observation, and no failure.
+Its active base is EarlyAttentionEncoder, with 96,576 encoder and 496,198 actor parameters.
+This is initial training exposure, not yet proof of a completed E optimizer stage. Batch cost
+is now **three started fits of three declared**, two complete and E in progress. The assigning
+session's deterministic observer follows this existing E handle; there is no fourth fit,
+extra diagnostic or confirmation queued. Next read E's complete final output and compare
+E-O, P-O and E-P with service components and measured full costs under the existing decision rule.
