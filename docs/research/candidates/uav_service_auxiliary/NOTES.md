@@ -4466,3 +4466,150 @@ standing, directly affected shared understanding and the completed plan to main,
 retiring the superseded in-flight index text in the same publication. Retain the
 shared source worktree and all accepted artifacts; only the temporary publication
 checkout is eligible for normal cleanup after publication and dependency checks.
+
+## 2026-09-23 — B04 prospective direct service and return-risk learning
+
+**Decision and reason.** The owner's adopted three-DM plan and scientific autonomy
+in current main (`9f53da649`) continue this DM's responsibility for service benefit
+and risk control. I read the current constitution, role, scientific/engineering
+methods, relevant shared background, and the complete project Pro Answer and
+Decision in `archive/2026-09-23/RESEARCH-scientific-management-adopted.md`.
+The 9,550-character answer has SHA256
+`3831d54162f944c23aacc2c437aca1ea558696661db008cc6b716dd84ebe82ff`.
+Its direct risk-learning proposal applies here; its incorrect S7 numbers do not.
+The six original summaries independently reproduce the two B03 sign reversals
+already recorded above. B03 remains closed; its service gains and adverse costs
+are retained. This is a new training-objective comparison, not another auxiliary
+head, a same-objective critic repair, or a third B03 replication block.
+
+The working explanation is that learning can improve service while failing to
+price actions leading to return infeasibility sufficiently under finite PPO
+training. A stronger true risk signal may reduce those trajectories enough to
+improve the original reward. The strongest simple contrary explanation is that
+the existing penalty already expresses the appropriate tradeoff: strengthening
+it sacrifices more service than it saves in cost, or does not change useful
+actions. Prediction error is untouched by this experiment and is no selection
+criterion. Both lower risk with worse original J and no risk reduction are useful
+adverse outcomes; neither justifies automatic coefficient search.
+
+**Fixed comparison (exploratory, one matched training pair).** New ordinary native
+HMASD `N` and risk-reweighted `R`, seed **914021** in both, four native training
+lanes initialized with 914021–914024. S7-S2 / arm C, N=8, 30 users, k=10,
+1500-step rollouts/episodes, 30 complete updates = **180,000 team transitions per
+fit**, **1.44M agent rows per fit**. Native hidden sizes, PPO epochs, learning
+rates, discriminators, entropy and normalizers remain those of `make_config`.
+Both arms have ordinary complete high/low learning and no B01/B03 auxiliary
+heads or extra representation pass. CUDA FP32, TF32 off, four torch CPU threads
+on configured `wsl_4070`, subject to fresh actual-node admission. Run N then R
+without using N's performance to alter R. A technical failure is reconciled and
+repaired, not scored as negative science or blindly repeated.
+
+The environment remains unchanged. Source trace establishes
+`r_native = QoS - 2*c_return - 5*new_cutoffs - 10*new_depletions + graph_PBRS`,
+where `c_return = min(max_i(max(0,-return_margin_i)) / .05, 1)` is the actual
+post-transition return constraint cost. The energy environment broadcasts this
+same reward to eight agents; the adapter averages identical entries, so there
+is **no further division by N**. Select a single fixed doubling of the existing
+coefficient, on its native units, before any new outcome: `r_train(N)=r_native`,
+`r_train(R)=r_native-2*c_return`. Coefficient 4 is a deliberately material test
+of underweighted risk, not an estimate of an optimum or a claim that doubling
+is universally preferable. Cutoff, depletion, PBRS, cost cap and physics stay
+unchanged. Actual native metrics and J are always recorded separately.
+
+Only the scalar reward handed to `store_transition_batch` changes. Its native
+low-level `lambda_e=1` component enters the stored reward, GAE and clipped PPO
+actor loss. The same scalar accumulates in the existing high-level skill
+interval return and high-level GAE. Thus this changes **both hierarchy levels'
+return targets and actor advantages**, with native critics learning the new
+targets; it does not isolate low-actor credit or criticize a single critic.
+No cost number is merely added as a detached constant to the actor loss, no
+future cost is supplied as an actor input, and the real costs are available only
+after their transitions. Reward info and evaluation config keep their original
+meaning. A controlled real storage/sampler/update regression must establish
+that nonconstant cost changes advantages and actor updates, while zero extra
+weight preserves native behavior.
+
+**Readings and exposure fixed now.** Development worlds **937001–937008** at
+updates **0,10,20,30**; fresh final worlds **938001–938032**, once at update 30.
+No checkpoint selection, early success stop, final-world tuning or substitution
+of old D. All panels use deterministic native policy execution, original
+coefficient 2, preserved training RNG and no new optimizer updates. Each fit
+has up to **96,000 evaluation transitions / 64 episodes**; actual shorter native
+terminations are counted. Planned total: **2 fits / 360k train / 192k eval**,
+552k team interactions at full horizons. No fact collection or replay fit.
+Report measured wall, CPU, RSS scope and artifact storage; compare elapsed costs
+under shared-node load without claiming an intrinsic speed difference.
+
+Primary reading is paired final-world **R−N original raw native J**. Also read
+QoS, delivered service, true return cost, cutoff/depletion counts, charging,
+per-world episode minimum battery and its lower tail; preserve every world's
+delta, loss count, negative-tail magnitude and actual episode length. Read the
+development trajectory as context, not a way to replace the final endpoint.
+Positive J with lower cost and no material service collapse strengthens this
+specific finite-training opportunity; lower cost with negative J is a failed
+net-use tradeoff, and positive J with worse cost does not validate the risk
+explanation. Mixed worlds remain mixed. One trained policy per arm cannot
+support a population ranking; 32 worlds are paired environments, not 32 fits.
+After full acceptance update the cumulative explanation and choose the next
+useful action using these outcomes and alternatives. No automatic extension,
+coefficient sweep or confirmation is selected by this entry, and completing it
+does not itself end this DM's scientific responsibility.
+
+**L0 implementation scope.** Own only new
+`experiments/candidates/uav_service_auxiliary/b04/`,
+`scripts/run_uav_service_auxiliary_b04.py`, mirrored candidate tests, and this
+notebook. Reuse unchanged B01 native setup/initialization/optimizer helpers;
+do not change shared learner, environment, B01/B03 frozen code or old outputs.
+Provide a fixed N/R admission-guarded CLI, complete native collector/update loop
+and original-reward evaluator. Keep scalar reward and cost records, first-rollout
+physical collection digest plus stored reward/advantage audit, per-update five
+learner displacement and optimizer counts, full raw metric/command trajectories
+for independent rescoring, final native checkpoint and artifact hashes.
+Preserve terminal next observations before reset, recurrent entry masks and
+native sampler/bootstrap semantics. Tests cover reward units/sign/cap failures,
+real reward→buffer→GAE→actor update sensitivity, matched pre-update collection,
+original-reward zero-update evaluation and RNG isolation, production spec and
+admission-before-science. Test-only short CPU/CUDA paths are engineering checks,
+not result fits. An independent registered Reviewer reads the complete diff and
+checks before DM acceptance. Commit/push exact source before native launch;
+arm the accepted operation and end the turn. Failure to retain required evidence
+quarantines only its dependent claim; do not invent scientific acceptance from
+exit zero. Publish owned standing/plan at the completed preparation/launch
+boundary, preserving current main's other directions and controls.
+
+**Implementation acceptance before any fit.** The new B04 files implement the
+fixed comparison; shared and frozen scientific code is unchanged. Local focused
+CPU suite: **7 passed / 1 CUDA skip, 13.72 s** on the final reviewed reset repair.
+The controlled 40-step correctness fixture independently reproduces the expected
+low GAE difference and four high interval reward differences, and verifies changed
+actual skill-head gradients and low-actor updates. Its synthetic costs are a test
+fixture, not native outcome evidence. The real short S7 path checks zero-cost
+N/R identity, all five learners, raw rescoring, checkpoint digests, true minimum
+battery, zero-update RNG isolation and refusal without admission.
+
+Independent registered Reviewer found and I repaired a terminal-array alias:
+the discriminator retains views while production normalizers are off, so the
+collector must reset into separate arrays. The regression checks actual stored
+terminal state/observation rows after reset and before update. Reviewer re-read
+the repair and reported **no outstanding material findings**, after separately
+running the native recurrent storage/sampler/update mask regressions (**2 passed,
+2.14 s**). Its review is code/engineering acceptance, not scientific acceptance.
+An unchanged native limitation remains: strict high-level storage drops an
+incomplete k-interval at early termination; this comparison retains that common
+behavior and does not claim to repair it. Production 1500-step truncations align
+with k=10; raw terminations and partial-path evidence remain recorded.
+
+An additional repository-wide admission-source check fails on the pre-existing
+`scripts/run_fsd_commitment_visibility_b12.py`, unchanged from HEAD, because its
+AST has no direct `require_admission` call. B04's own guarded entry, SHA mismatch
+and no-admission/no-output tests pass. This unrelated FSD script was not changed
+or resumed. Initial B04 self-check failures (two wrong metric key spellings and
+a 12-step test's unclosed high interval) were fixed before acceptance; fixtures
+now use complete k intervals. No scientific fit has yet run.
+
+Fresh remote resource observation during preparation: 13,522 MiB available host
+memory and 5,764 MiB free GPU memory on configured wsl_4070; this is a feasibility
+observation, not the final launch admission or a resource reservation. The next
+step is the same published-source CUDA correctness path on the actual node,
+then native admission of N. R remains the fixed second fit, selected irrespective
+of N's performance. No repeat Pro Send, task creation or App message is needed.
