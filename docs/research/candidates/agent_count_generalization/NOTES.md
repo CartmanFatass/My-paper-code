@@ -6850,3 +6850,614 @@ Report the actual commit after a successful write. If GitHub writeback is unavai
 the complete answer in chat, not only a status, SHA or link. Private Jev addresses stay local.
 
 ### Answer
+
+本轮未完成 GitHub 写回。 读取正常，写入接口也可见，但只支持整文件替换；我未能构造并核验其余字节完全保留的替换稿，因此没有发起写入、没有产生新提交。最新回读的本题 ### Answer 仍为空。以下是完整答复。
+
+Answer
+一、建议保留六个缺失面板，但改变它承担的决策任务
+
+我建议进行这一次0-fit、48,000 evaluation team steps的共同世界初始／最终比较。 只评价现有 H6/B07 与 SET/B05 的两个 checkpoint00，在已经固定的 final45 世界上运行；复用原始 final45 输出，不默认追加最终重放、新世界、其他检查点或训练。B07 已按原规则获得的探索性保留不重新表决。
+
+hmasd-pro-question-count-initia…
+
+但我不接受把它简化成：
+
+Δ≤0就先修初始化／动作几何；Δ>0就转向训练机制。
+
+这张表能识别固定资产的初末收益变化，却不能凭 Δ 的符号识别哪一种基线修改值得实施。 最小修订不在运行格子，而在主读法和后续选择：把每包自身的 I
+H
+	​
+
+、I
+S
+	​
+
+、绝对服务和原生分量放在 Δ 之前；将“是否存在有用的无训练参照、当前普通训练是否连自身初始化都没有改善”作为实际可改变的判断。
+
+这让该观察不只是解释一个已经保留的优势。它可能表明，下一步首先需要处理的是某个包训练后的实际服务损失；也可能发现，一个未经训练但完整运行的现有策略已经构成训练增量的有力参照；还可能表明两包都获得了有用增量，初始差异与学习收益并存，没有证据支持立即“修正”初始化。这些结果改变的是后续比较应该针对什么不足，不是自动选择一个新系数、网络或训练批次。
+
+最强的不运行理由仍成立：若这里只关心“最终 H6 是否比当前 SET 好”，答案已经由 B07 给出；若要求此次直接产出一个确定有效的普通基线修改，这六个面板也不能保证做到。加载、实现、检查和阅读还会产生非零成本。不过，当前具体出现了训练前优势，而现有数据恰好缺少将它与最终用途放在同一组世界上比较的六格。我认为补齐这一次有限观察值得，其价值不依赖于随后一定再跑训练。现行方法允许用检查或诊断改变工作解释，也允许在没有值得付费的后续问题时结束，而不要求每次生成新架构。
+
+二、当前证据确实提出了初始策略竞争解释，但还没有测量差距的学习变化
+
+我从两个 run 的原始逐世界 J 数组重新计算了初始和 final45 均值。它们与本次记录一致：
+
+测试 N	初始 H6−SET，初始世界	final45 H6−SET，最终世界
+4	+.096907008	+.078660819
+6	+.152553545	+.140614353
+8	+.195924096	+.152267327
+N4/N8 等权平均	+.146415552	+.115464073
+
+两列的世界不同，不能将其差值称为训练缩小了优势。初始面板使用 1500… 地址，最终面板使用 1545… 地址；原始文件明确记录了这一点。 
+
+hmasd-pro-question-count-initia…
+
+这一新事实的力量在于：至少在已经测量的初始世界上，包间原生服务差异可以在第一次学习更新之前存在。 B07 源码先构造新 agent、保存 checkpoint00并进行初始评价，之后才开始训练；初始差异不是由那45次更新产生的。它因此限制了“观察到正的最终包差，就等于观察到 H6 比 SET 获得更多学习收益”的说法。但它尚未说明最终世界上的初始差异多大，更没有证明该初始差异造成了最终差异。
+
+另一方面，B07 的最终用途不能因这个竞争解释而被抹掉。三个 N 的平均 J、覆盖、质量与惩罚贡献均有利；我重算的最终 J 胜负也与16/16、16/16、15/16一致。N8 世界1545810的反例仍然存在：J差为−.074395206，覆盖少.14324，即每步少服务7.162个用户。它不能被均值或后续诊断隐藏。
+
+当前应加强的判断是：原有界 H6 包有第二个有用的固定终点，同时存在一个实际测得的训练前策略差异，值得与学习增量分开。
+
+应降低的判断是：仅靠最终包差、参数移动或更低 sigma，就足以解释优势的学习来源。更新计数与参数移动证明实际学习过程运行了，并不证明该过程相对自身初始策略增加了多少原生用途。B07 的摘要记录了所有五组优化器的实际更新和参数移动；这与尚未测得共同世界 I
+H
+	​
+
+、I
+S
+	​
+
+ 并不矛盾。
+
+仍未解决的是普通基线充分性、训练总体排序、初始化或技能组件的因果作用。B03 的有界正结果、B04/B05相反的零熵响应以及B06的面板例外都继续约束本次解释。尤其是B06已经表明，有限面板替换既可以保留主要符号，也可以使A/N4反号；不能因为某个诊断方向重复，就把它升级成原生收益机制。
+
+三、这六个面板准确测量什么
+
+令 W
+45,n
+	​
+
+ 为测试数量 n 的固定最终世界集合。所有下面的量都必须在该集合上计算：
+
+I
+H,n
+	​
+
+=
+16
+1
+	​
+
+w∈W
+45,n
+	​
+
+∑
+	​
+
+[J(H
+45
+	​
+
+,w)−J(H
+0
+	​
+
+,w)],
+I
+S,n
+	​
+
+=
+16
+1
+	​
+
+w∈W
+45,n
+	​
+
+∑
+	​
+
+[J(S
+45
+	​
+
+,w)−J(S
+0
+	​
+
+,w)],
+D
+0,n
+	​
+
+=
+16
+1
+	​
+
+w
+∑
+	​
+
+[J(H
+0
+	​
+
+,w)−J(S
+0
+	​
+
+,w)],Δ
+n
+	​
+
+=I
+H,n
+	​
+
+−I
+S,n
+	​
+
+=D
+45,n
+	​
+
+−D
+0,n
+	​
+
+.
+
+未见数量汇总继续等权使用N4、N8；N6单独保留。每世界的原生单位仍为
+
+J=
+500
+n
+	​
+
+t
+∑
+	​
+
+r
+t
+	​
+
+=.7
+C
+ˉ
++.3
+Q
+ˉ
+	​
+
+−
+P
+ˉ
+,
+
+其中P已经加权。相同的初末差分应用于覆盖、质量和P；惩罚差为正是不利变化，不应在汇总时再次乘权重。现有评价路径已经实现实际N换算与原生分量恒等式检查。
+
+现有跨阶段相减混入什么，可以直接写成：
+
+D
+45
+	​
+
+(W
+45
+	​
+
+)−D
+0
+	​
+
+(W
+0
+	​
+
+)=
+拟测量的 Δ
+D
+45
+	​
+
+(W
+45
+	​
+
+)−D
+0
+	​
+
+(W
+45
+	​
+
+)
+	​
+
+	​
+
++
+初始策略对的面板变化
+D
+0
+	​
+
+(W
+45
+	​
+
+)−D
+0
+	​
+
+(W
+0
+	​
+
+)
+	​
+
+	​
+
+.
+
+新增面板正是补出右侧缺失的 D
+0
+	​
+
+(W
+45
+	​
+
+)。因此它不是重复读取原表，也不需要更换最终世界才能回答这个有限问题。
+
+报告应让读者看见每个N下四个绝对分数 H
+0
+	​
+
+,H
+45
+	​
+
+,S
+0
+	​
+
+,S
+45
+	​
+
+，然后是两项自身增量和Δ，以及各自的原生分量、逐世界差异。不要只发表Δ，也不要用“初始优势占最终优势的比例”作为主读数。 后一种比例即使在算术上可算，也不是已识别的因果份额，数值超过100%或遇到小分母更不能自动产生机制结论。
+
+“共同世界”也不意味着共同轨迹。初始与最终策略各自从同一环境初值、同样重置的运行状态开始，然后沿自己的闭环轨迹运行。不能把最终策略的后续观测、位置或隐状态喂给初始策略，否则测量的就不再是冻结初始策略的完整服务。
+
+四、最大的解释修订：Δ不是选择初始化修复还是训练修复的开关
+两个反例足以说明为什么要先读每包自身增量
+
+以下是算术示例，不是预测或实验结果。
+
+若 I
+H
+	​
+
+=.10, I
+S
+	​
+
+=.14，则 Δ=−.04。两包都获得有用增量，只是SET的增量更大；这不说明H6没有学会服务，也不说明SET初始化存在需要修复的缺陷。
+
+若 I
+H
+	​
+
+=−.02, I
+S
+	​
+
+=−.06，则 Δ=.04。包差扩大，却是两个包都变差、SET损失更多；将其称为“H6学习优势得到支持”会遗漏最重要的用途问题。
+
+因此，“正Δ”和“非正Δ”都需要与 I
+H
+	​
+
+、I
+S
+	​
+
+ 联合读取。初始点高低还意味着不同的剩余改进空间；这是一种可能解释，不是已经测得了任何包的最优值或可实现上限。
+
+初始策略差异与后续学习差异不是可独立拆开的两个原因
+
+每个最终策略都是从自己的初始化出发、经历自己的数据与更新得到的。初始化既影响训练前动作，也可能影响后续访问状态、梯度和共同学习过程。恒等式
+
+D
+45
+	​
+
+=D
+0
+	​
+
++Δ
+
+可以记账，却不能证明最终优势由“保留下来的初始原因”与“独立新增的学习原因”各贡献多少。
+
+要回答“修改SET初始化是否会改善其最终服务”，需要观察修改初始化后的学习后果；当前六个面板没有这个反事实。反过来，即使Δ为正，也不能排除初始化通过后续学习路径发挥作用。两种解释可以共同成立，不能被这一次端点差分强制二选一。
+
+“初始策略”也不能被擅自替换成另一种普通策略
+
+H6的checkpoint00仍包含其完整网络与协调结构；SET的checkpoint00仍使用其当前局部输入、held central snapshot和循环路径。未训练不等于零动作、悬停、独立随机动作，也不等于没有利用观测。构造代码明确保留了两包不同的表示路径。
+
+因此，H0若表现很好，可以是冻结初始化H6的训练增量参照，但不能被称作已经验证的“无技能普通基线”。S0若表现很好，则提供同一普通表示下不更新参数的参照；它仍不是普通方法类别的充分代表。
+
+我目前不建议据此调整动作头、统一初始分数、把均值强制置零或再次改变熵系数。相同初始分数并不代表相同策略、信息使用或学习难度；“让D0变小”也不是普通基线改进的原生目标。任何未来初始化修改都应说明具体改变的动作／信息路径，并承担最终SET原生J与服务改善的可失败预测，而不只保证初始包差缩小。
+
+五、结果怎样改变下一步，而不自动产生另一项实验
+
+建议采用以下联合判读。所有分支都保留B07的原终点、原控制和已观察到的包差；不事后替换主基线或检查点。
+
+共同最终世界上的观察	应改变的工作判断与下一步重点
+SET的自身初末J或覆盖出现实质损失	当前普通训练在这些条件下没有保住自身已有的用途，是比“比H6弱”更具体的基线问题。保留S0作为训练增量参照，优先解释该实际损失；不能仅凭Δ把原因指向初始化，也不立即选择新熵系数
+H6相对H0没有有用增量，甚至更差，但H45仍胜S45	B07最终比较仍成立；然而，继续以“额外训练带来用途”为理由投入同一H6学习过程的依据变弱。保留H0作为无参数更新的竞争参照，区分完整结构用途与这次训练步骤的增量，不把H0包装成无技能基线
+两包都有有用增量，且Δ≤0	支持两包都改善、SET追赶而最终仍落后这一有限读法。它削弱“最终优势体现H6获得更大训练增量”的解释，但不构成初始化缺陷诊断。结束这次初始／最终诊断，不因该符号自动启动初始化匹配或修复
+两包都有有用增量，且Δ>0	支持这些资产在共同世界上的差距经过训练后扩大，削弱“该最终差距至少同样大地存在于这两个初始策略”这一具体说法。后续若提出普通学习比较，应针对一个有依据的有限学习差异；仍不识别技能机制或认证当前SET充分合格
+
+这些分支不是四种新实验的排队表。它们分别决定当前是否存在“训练损失已有用途”的具体问题、是否需要把冻结初始化政策纳入训练价值比较，或是否应结束初始策略诊断而保留尚未识别的学习问题。
+
+若符号很小、N之间反向，或J由某项惩罚补偿而覆盖损失，应报告实际量级和取舍，不制造等价性或统一机制。N8世界1545810也应照常进入初末配对：可以读出在这个既有反例上各包如何变化，但不得据此另选世界、扩大尾部样本或改写主平均规则。
+
+特别要分开两种N6问题：B07已经测得的 D
+45,6
+	​
+
+ 是相对SET的保留条件；本次 I
+H,6
+	​
+
+ 或 I
+S,6
+	​
+
+ 是相对自身初始化的变化。前者为正而后者为负在逻辑上完全可能，不能互相代称。Δ在训练数量上为负，也不自动否定未见数量的最终用途。
+
+这正是我接受诊断、但反对原有简单分流方式的原因：下一步应由哪一个包的哪一种原生用途不足来约束，而不是由一个差中之差的符号指定修复对象。 如果DM并不准备让这些联合结果改变任何资产使用或调查重点，那么应跳过本次运行，保留现有结论；不能以“也许有趣”作为不断追加诊断的理由。
+
+六、最小执行范围成立，有一个必须分离的源码绑定
+分离“checkpoint阶段”与“世界面板阶段”
+
+现有B07 evaluator用同一个 rollout 参数计算世界地址，同时写入 after_rollout 和 training_team_steps。直接把加载了checkpoint00的agent传给 evaluate_panel(..., rollout=45)，虽然可能得到所需世界地址，却会把初始资产标记成经过360k训练的策略。传0则会回到旧初始世界。这个绑定在源码中是明确可达的。
+
+新诊断应明确区分：策略资产为checkpoint00，评价世界为final45地址。模拟回合内的时间、GRU、timer和技能状态仍从正确初值开始；“final45世界”只是已固定的世界集合，不是把模拟时钟设到45，也不是改变策略训练阶段。B07入口还专用于H6，不能直接用它的完整配置分支构造SET。可以复用适当的构造、恢复和评价逻辑，但不应通过错误标签或关闭旧约束来完成这次比较。
+
+恢复实际保存的两个初始资产，不重新抽一个“相同seed的初始网络”
+
+严格绑定附件给出的两个checkpoint00文件、原执行source、arm、seed、stage、大小与哈希。恢复完整模块与各自保存的normalizer状态，不能给初始策略配上最终normalizer；也不能只设相同seed重新构建后就视作原始checkpoint。现有N-specific构造与严格同步路径，正是为了让实际使用的状态可核验，而不是依赖seed标签。
+
+hmasd-pro-question-count-initia…
+
+每个N的runtime都须正确恢复同一资产的参数，重置所有回合状态，随后让循环状态正常演化。冻结权重不等于冻结记忆或固定动作。评价保持原有确定性动作规则、独立的执行裁剪、零optimizer更新和冻结normalizer；不引入随机策略评价来“公平化”初始分布。
+
+不默认追加最终重放，但要使复用有可检查的依据
+
+使用原始H6/B07和SET/B05的final45逐世界输出，而不是把B07里的复制比较字段当作独立来源。核对世界地址、实际N、500步、原生分量、资产身份，以及新恢复路径与历史同步评价路径的一致性。已有严格同步、digest和隔离检查可复用；新代码只需覆盖本次新增的恢复与阶段分离风险。B07的原路径已经检查了目标与learner状态一致、评价无更新及learner运行状态／RNG不变。
+
+没有必要把B06的整套最终对角重放复制过来，也没有必要增加初始世界的正式重复评价。若具体检查暴露了未解决的恢复或数值路径差异，应隔离依赖它的比较并说明缺口，不能把技术分歧叫作科学变化，也不能静默追加超出本次范围的评价。
+
+七、成本与统计范围保持窄而真实
+
+六个缺失面板的成本准确为
+
+2个初始策略×3N×16世界×500=48,000 evaluation team steps.
+
+这对应96个policy/world episodes、288,000个UAV-step；按每个面板每个时间步一次批量策略调用，为3,000次调用。新增训练fit、训练步数和optimizer更新都为0。 已有final45输出的复用不应再次记成新评价或新的训练复现。
+
+hmasd-pro-question-count-initia…
+
+资产加载、N-specific构造、有限评价器实现、相关技术检查／独立审阅、准入、收集和阅读仍有成本。实际wall尚未测量，不能从原H6的61.825780分钟、SET的57.819554分钟或B06的单位步耗时精确预测；也不需要为这次诊断另加profiling fit。
+
+hmasd-pro-question-count-initia…
+
+对共同世界可做每世界配对，但独立训练单位没有增加。初始与最终是同一训练过程的两个状态，不是两个独立fit；三个N和16个世界也不能提供训练总体精度。B07及本次诊断都在已知开发结果后选择，不能改称新的盲测确认。小点估计、不显著或较高世界胜率都不建立等价、稳定性或普通基线充分性。指定topic6对嵌套评价与训练实例的区分，直接决定了这里的报告边界。
+
+八、阅读与未验证范围
+
+本次以 b33a5d8243e459a9d02f0872e6755e9613a94fc1 的问题、B07记录及相关代码为推理输入；共享背景按指定 7d979b51cc6ad9aa156311b4ea12e2b4245533a4 阅读。该共享索引仍处于B07运行阶段，其旧进度由本次固定完成记录替代，不将其他方向的结果用作本方向的数据。
+
+已重读前次完整包复现Answer及B07采纳合同、B06完整有限表与边界，并核对新版本差异：旧SET/B03–B06原始资产及共享学习代码未因B07而改变，既有实际读取的原始证据可以按其冻结范围复用。对新问题，我直接读取了两包共12个初始／final45原始面板的J数组，最终面板的原生分量，以及摘要身份、规格、B07优化器与参数移动记录；独立重算了初始／最终J均值、最终世界符号和N8反例。
+
+本次没有重新审计全部45行训练记录，也没有逐一重算阶段15／30；这些完整性和中间阶段事实使用DM已发表的阅读记录。没有加载节点上的二进制checkpoint，更没有运行本次六个新面板。 因而 D
+0
+	​
+
+(W
+45
+	​
+
+)、I
+H
+	​
+
+、I
+S
+	​
+
+、Δ 及新诊断wall都仍然未知，不能从已有初始分数、sigma或代码补出。
+
+MATERIAL_DISSENT: yes。 我支持保留原提案的六个缺失面板和48k零fit成本，但对“按Δ符号决定先修初始化还是研究训练差异”的决策解释有实质异议。建议将它改为对固定资产的每包原生训练增量、冻结初始参照价值及普通基线具体不足的判别；不新增运行格子、不重开B07验收，也不自动选择任何基线修复或下一次训练。
+
+## 2026-09-23 — Initial-policy advice adopted with material revision; fixed B08 zero-fit study
+
+The preceding 7,614-character answer is **saved from chat verbatim**. Deterministic collection
+reported COMPLETE; independent `deliver` returned NOT_DELIVERED, with no candidate answer
+commit. Pro reported no attempted write. The current author/remote target exactly matched
+question source `b33a5d8243e459a9d02f0872e6755e9613a94fc1`, including the unique empty Answer,
+before insertion. Collected body SHA-256 is
+`a46460614a268dd20da01c19aca2c2c0ea034987ab4cd55339ee2ad01b27ac75` (the local text has a
+terminal newline). Question key
+`hmasd:d177633b46a5998ea8571f8030ee1e5c0aaa7d6050b5f77c3113e6236e0e605c` retains its private
+conversation address only in local transport state. No repeat Send repaired delivery.
+Generation84 READY was fully read and consumed by its exact wake/event identities; rearm
+returned85 with no remaining active observation.
+
+### Decision and response to material dissent
+
+I select one bounded six-panel diagnostic, object/tag `s1_initial_policy_b08`, with **zero new
+fits**. I adopt Pro's material objection to my provisional difference-sign routing. A negative
+Delta can coexist with useful improvement by both policies; a positive Delta can coexist with
+both policies losing service. It would be wrong to use that sign alone to choose an
+initialization repair or infer a useful training-produced advantage. Initialization can also
+affect the entire later data/learning path, so `D45=D0+Delta` is accounting, not an independent
+causal decomposition or an explained percentage.
+
+The actual decision value is now explicit: determine whether each retained training process
+added useful native service relative to its own frozen initialization, and whether a no-update
+asset deserves retention as a training-value comparator. SET failing to preserve its own
+initial service is a concrete ordinary-learning limitation; H6 failing to improve its own
+initial service weakens further investment justified by that training increment. Both improving
+would end this diagnostic without diagnosing an initialization defect merely from their
+different increments. These outcomes change asset use and the next investigative target even
+if none immediately warrants another fit. B07's useful final package comparison is already
+retained and is not reopened by this study.
+
+Read four absolute scores and native components at each N first, then each package's initial-to-
+final changes, then the difference of those changes. The strongest alternative remains a
+useful initial full-policy behavior plus subsequent improvements by both packages, with no
+identified repair. An untrained H6 still uses its full skill/coordinator architecture; it is
+not a no-skill baseline, zero action, hovering or an independent random-action policy. Neither
+strong S0 nor H0 certifies the ordinary baseline class. No action-head modification, forced
+zero mean, equalized initial score, entropy change, new world, extra training seed or confirmation
+is selected. These remain unknown alternatives, not scheduled branches.
+
+Pro independently recalculated the original initial/final J arrays and final component/world
+signs, matching the DM's full B07 reading, including the N8 adverse world. It distinguishes
+these reads from reuse of the DM's full 45-rollout and stage15/30 verification and from binary
+assets it did not load. Its warning that B07 `evaluate_panel` binds one `rollout` both to world
+addresses and to recorded training exposure is directly verified at the actual source; its
+H6-specific configuration also cannot stand in for SET. The relevant B02 restore helper and
+B06 frozen-asset checks are available but their final45/SET-only contracts are not this study's
+contract. No material unread-source gap blocks the limited choice. `MATERIAL_DISSENT: yes`
+is resolved by the revised joint per-package reading, not by adding runs or asking Pro again.
+
+Current published main `68d05c7c16ecb945d15620d93664f31874ede033` keeps the owner continuation,
+this direct DM/lead and B07 completion. Its relevant shared topics3/6 retain bounded execution,
+initial-policy and entropy rivals, native service, selection exposure and nested-world limits.
+The new observation addresses the missing common-world measurements without claiming another
+training replicate. Claude FSD pause/G33 and all other direction scopes remain unchanged.
+
+### Fixed scientific inputs, exposure and reading
+
+Only these two checkpoint00 policies are evaluated, each on N4/6/8,16 worlds per N,500 steps
+per world. Policy stage is **0** and its prior training exposure **0**; world-panel stage is
+**45**, with world addresses `1545000 + 100*N + i`, i=0..15. Each policy follows its own
+closed-loop trajectory from the common environmental initial state, with normal recurrent,
+skill and held-snapshot evolution from a full reset. No final-policy observations or hidden
+states are supplied to an initial policy. No initial-world or final-checkpoint replay is added.
+
+| Asset | H6 initial | SET initial |
+| --- | --- | --- |
+| Original tag | `s1_bounded_package_b07_h6_l05_s952201` | `s1_entropy_b05_set_l05_s953201` |
+| Arm / seed | H6 / 952201 | SET / 953201 |
+| Original execution source | `0a9e3fde40659fdcc1d05922c9920c5c04b2ab23` | `e2ea736457e0992fb53cf21aa775fd15da3d8231` |
+| Complete summary SHA-256 | `9d7f90523b74ea0fb4b9d7720086baefff13c22cdb41547c2b793764273b550a` | `136d090b32a8c5fec1eefad5dbaaefa9155d44ce4335c7fb0f07585d36cff4c4` |
+| Checkpoint00 SHA-256 | `65cfcc9f6afc69bae78712a4dd15bc772e2d3b56c82797504e27555a814ef398` | `37b34c34d6bc84bfe43d78e5283668f38db180a16bf99b22d9caf8eb608857ca` |
+| Checkpoint00 bytes | 23,073,626 | 20,968,771 |
+| Native source root | `/home/wu/hmasd-worktrees/agent-count-bounded-package-20260923-b07` | `/home/wu/hmasd-worktrees/agent-count-entropy-20260923-b05` |
+
+Each native checkpoint is `<source root>/runs/agent_count_generalization/<tag>/checkpoint_00.pt`;
+identical retained local copies use the corresponding repository run path. Their original
+complete summaries and individual final45 panel files are committed inputs of the new source.
+Reuse only those final45 arrays, never B07's copied control-comparison fields as an independent
+source. Bind the original final checkpoint identities from the preceding B07 result even though
+neither final checkpoint is loaded or newly evaluated. Preserve all source files and binary
+assets unchanged; no optimizer state or training resume is requested.
+
+Use the original native S1/50 stationary uniform users, deterministic policy means, CPU
+float32, torch threads4 and16 synchronous environment lanes, exact saved modules and each
+asset's own saved normalizers. Keep the original H6/SET information rights, N-specific
+construction, k10, snapshot cadence and independent execution clipping to[-1,1]. Reconstructing
+an architecture is allowed only to strictly restore the saved full state; same-seed
+reinitialization is not a substitute for loading checkpoint00. Freeze parameters and
+normalizers while letting runtime memory evolve; call no learn/update method.
+
+Actual planned totals: **0 fits,0 training/stored training steps,0 optimizer calls,48,000 new
+evaluation team steps,288,000 evaluation UAV steps,96 episodes/resets and3,000 batched policy
+calls**, six complete panels. Each asset supplies24,000 team steps,48 episodes and1,500 calls.
+Reused final outputs add no execution exposure. Run on configured native `wsl_4070` through
+fresh admission after publication. Wall, process RSS and other measured resources are recorded;
+implementation, tests/review, collection and reading add non-fit cost. No profiling fit or
+resource claim based on old run times. Actual wall is unknown prospectively.
+
+For each world and N compute the four absolute native scores H0,H45,S0,S45 and the original
+coverage/quality/already-weighted penalty, then `I_H=H45-H0`, `I_S=S45-S0`, `D0=H0-S0`,
+`D45=H45-S45` and `Delta=I_H-I_S=D45-D0`. Native J is N times scalar return /500 and must
+agree with `.7*C+.3*Q-P`; a positive penalty change is unfavorable. Report each N, every
+world and equal-weight N4/N8 aggregates; keep N6 separately. Translate coverage to users/step
+by multiplying by50. Show quantity and component tradeoffs, not only signs or ratios. Retain
+the original N8 world1545810 without selecting additional adverse worlds. Small or mixed effects
+are read as such, not equivalence. Different Ns/worlds and two states of a fitted policy do
+not increase independent training replication; development-informed selection remains explicit.
+
+Outcome-dependent judgment: a material SET loss relative to S0 prioritizes that specific
+training-value deficiency; a missing/use-negative H6 increment prioritizes H0 as a no-update
+full-architecture competitor; useful gains by both end the initial/final diagnostic and preserve
+their finite difference without diagnosing a repair. Mixed N or component changes qualify these
+judgments. None prescribes new fits, an initialization intervention, another evaluation panel,
+or closure of the whole count-generalization question. A technical failure retains partial
+counts/outputs and quarantines only dependent contrasts; it is not a scientific negative or
+automatic rerun.
+
+### L0 — initial-policy B08 evaluator
+
+Deliver one bounded admission-guarded evaluator, with only these owned new paths:
+
+- `experiments/candidates/agent_count_generalization/initial_policy_b08/__init__.py`
+- `experiments/candidates/agent_count_generalization/initial_policy_b08/runner.py`
+- `scripts/run_agent_count_initial_policy_b08.py`
+- `tests/experiments/candidates/agent_count_generalization/initial_policy_b08/test_runner.py`
+
+CLI takes `--launch-sha`, `--out`, `--h6-checkpoint`, `--set-checkpoint`; fixed basename/object
+`s1_initial_policy_b08`. No scientific arm/seed/coefficient/world/stage sweep options or bypass.
+Apply `require_admission` before importing/loading scientific assets, creating outputs or
+environments; require CLI sha equals admitted sha. Only the declared run root is writable.
+Use narrow existing construction, restoration, native-component, state-digest, RNG and
+serialization helpers where suitable; leave old runners, shared learning code and their
+contracts untouched. The current scientific interpreter and pytest scratch rules apply.
+
+Validate the committed source summaries and original final panel bytes against recorded
+identities/configuration/worlds before evaluation. Validate both initial binary sizes/hashes,
+payload schema/source/arm/seed/stage0, exact module keys/shapes and saved normalizers. Reject
+wrong identity before result-bearing environment steps. Explicitly separate asset stage0 and
+world panel45 in every row and all counts; historical final rows remain stage45 evidence,
+not current-run training exposure. Restore both packages at each actual N and verify the
+complete parameter/normalizer digest agrees with the original initial digest and the loader
+state. Preserve source/checkpoint identity before/after. Set correct N and batch dimensions,
+fully reset per-lane recurrent/timer/skills/snapshots, record zero optimizer calls, frozen
+weights/normalizers and global-RNG isolation, and verify exact horizon terminal boundaries.
+
+Write config/summary, six per-policy/N panels and paired absolute/increment/native-component
+readings under the run directory, with actual completed counts, stages, source and asset
+identities and resource/failure evidence. Partial failure must be serializable with truthful
+counts; no nonfinite placeholder silently becomes a scientific score. Comparisons must join
+original independent final arrays by actual N/world, not depend on self-copied candidate
+comparison answers. Do not run final45 or initial-world panels simply to certify the loader.
+
+Focused technical checks use small synthetic/native H6 and SET checkpoints and pytest-owned
+scratch, never production assets or result-bearing evaluation. Exercise strict stage0 restore
+across N with frozen normalizers; asset0/world45 metadata and seed separation; no optimizer
+updates and correct resets/runtime evolution; deterministic clip execution; actual accounting;
+wrong source/hash/stage/config/panel rejection; finite partial failure; independently constructed
+final-array arithmetic, including negative self-gains with positive Delta and two positive
+self-gains with negative Delta. Reuse unchanged restore/evaluation evidence where adequate;
+independent Reviewer focuses on new checkpoint restoration, label/count and source-join risks.
+
+Implementer owns only the four paths, no NOTES/RESEARCH/index/commits, science choices,
+production checkpoint loading, launches, Pro, cross-task messages or children. Return diff,
+checks, deviations and open risks. It is not alone in the checkout; preserve other edits.
+DM owns acceptance and the fixed scope. A concrete unresolved semantic/asset conflict stops
+the dependent action; ordinary implementation choices inside this scope need no new approval.
