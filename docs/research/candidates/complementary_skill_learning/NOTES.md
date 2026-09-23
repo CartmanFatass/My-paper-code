@@ -270,3 +270,20 @@ subsection, and stop on overlapping edits. On success report the actual commit. 
 writeback fails, return the complete answer in chat, not just a SHA, receipt or link.
 
 ### Answer
+
+## 2026-09-23 — First Pro question accepted; deterministic observation armed
+
+Question source: `8a3c43055095f5958c4074d8b90bb1f45d564cfa`, published on the direction branch.
+Operation key: `hmasd:2483ca6fadc922a610e3eb4f601dbd58668f874ddd9cd70f0fe342bff9d382c8`.
+The WSL Jev driver confirmed `send_attempted=true`, `send_effect=sent`, effort `6 Pro`
+and the question attachment seen at 2026-09-23 03:12:49 PDT. This was one Send. The private
+conversation address remains only in local transport state. The uniquely assigned Answer
+subsection above remains Pro-owned; no complete advice or repository delivery is claimed.
+
+`tools/hmasd_wait.py` registered detached observation for this exact operation and this
+task, PID 2031404, with a 1500-second checkpoint window. Its private request is
+`temp/pro_transport/complementary_skill_learning/request.json`; state is under
+`~/.local/state/hmasd-wait/01a0cdb8-10c9-7743-a05a-6dcfc42621c5/`.
+The next wake is to drain the existing controller, reconcile delivery and read the whole
+answer, or rearm the same handle on a checkpoint. Never resend on a wait/read failure.
+The provisional three-fit comparison is not frozen or launched; started fits remain **0**.
