@@ -4036,3 +4036,262 @@ ranking or an intermediate endpoint, extend the horizon or add a new fit from th
 fixed45 updates. Consumed generation59 event `f8a29536aab3c2492f42213b` under wake
 `83a63d17-4778-475b-bdbd-e65a1c8e860f` and rearmed generation60. No worker restart,
 repeated Pro Send, additional fit or cross-task message.
+
+## 2026-09-23 — B04 complete: useful SET endpoint response with a contrary boundary pathway
+
+The generation60 checkpoint observed SET still running; the collected snapshot then held all
+360k training steps but only44 completed updates. Rearmed that same operation as generation61
+and completed reading while its final update/evaluation finished. Native exit at00:32:33.901360
+UTC has a valid exit0 witness and both recorded processes absent. The final45 N8 evaluation
+was collected before scientific acceptance; no result was inferred from dispatch or exit alone.
+
+The final [SET summary](../../../../runs/agent_count_generalization/s1_entropy_b04_set_zero_s943201/summary.json)
+SHA-256 is `83a51d84d3c802944be6ef61321aa4a0c83471cabca556e4101bad83a756f293`; its complete
+[training JSONL](../../../../runs/agent_count_generalization/s1_entropy_b04_set_zero_s943201/training.jsonl)
+SHA-256 is `2990083b6b51e50bf5558da516c217e923e17b0948639b1cd93f6bb9d6b569c7`.
+Status/last boundary are complete, failure null. Read all45 training rows and all12 panels,
+and independently loaded all four checkpoints. All21 small artifacts were hash-verified;
+four binaries remain recoverable under the original native manifest output path. Initial
+control/digest/config binding remains intact; JSONL and summary rows agree. Counts are360000
+training/stored steps,720 episodes/resets,45 updates,96000 eval steps and192 eval episodes.
+Actor/critic each made101250 optimizer calls; coordinator/discriminators0. Required actor/
+critic modules move, coordinator remains unchanged, recorded losses/data are finite, and
+raw Gaussian storage/original log-probabilities, clip execution, native movement/reward
+identities, analytic entropy, reset cadence and frozen zero-update evaluation pass.
+
+Every SET checkpoint has20968771 bytes and130 finite tensors. New checkpoint30/45 SHA-256:
+`2670adba77696113292f234abecf171173f514713cf10faed55dbda1f7cb94be`,
+`9a1143798aab2e41a2290987b7fbca9403ef2dfdb0076bc30e3afd945c7f1359`.
+Independent parameter/normalizer digests for30/45 are
+`68117eeff7c1bfd26631fc1427ff69984204bf02bba5f2c5ef803f9e4628cb5c`,
+`de81c2086d1a13a9b2f73dc523c8bf22d7b47751ffd90cf835d9df065ad0ff82`; the latter agrees
+with the final summary. Earlier00/15 identities remain unchanged. Source is still
+`f4762ac67f04675136367fcc566327f0bf78a086`; no code, horizon or treatment changed mid-fit.
+
+### Final45 primary comparison, including native components
+
+All E values were independently reconstructed from16 paired worlds per N and agree with
+the completed runner comparisons. Q and both package gaps were separately reconstructed
+from the two B04 fits and two frozen B03 clip controls, verifying Q=E_SET−E_H6=G_.05−G_0.
+
+| Final45 N | SET J,lambda0 | SET J,lambda.05 | E_SET,J | SET coverage change | SET quality change | SET penalty change |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| 4 | .488979735 | .488043635 | +.000936100 | −.002365000 | −.005118049 | −.004127014 |
+| 6 | .482415321 | .430089598 | +.052325723 | +.044612500 | +.004768679 | −.019666369 |
+| 8 | .401221533 | .291076584 | +.110144950 | +.105040000 | +.027910333 | −.028243850 |
+
+| Final45 N | E_H6,J | Q | H6−SET at lambda.05 | H6−SET at lambda0 |
+| --- | ---: | ---: | ---: | ---: |
+| 4 | +.008848497 | −.007912397 | +.064857891 | +.072770288 |
+| 6 | −.000777378 | +.053103100 | +.095823637 | +.042720536 |
+| 8 | −.028221725 | +.138366674 | +.161067197 | +.022700523 |
+| unseen N4/N8 equal weight | −.009686614 | +.065227139 | +.112962544 | +.047735405 |
+
+Final unseen SET J rises from.389560109 to.445100634, **E_SET,U=+.055540525**;
+unseen coverage rises.051337500, equivalent to2.566875 additional served users/step with
+50 users. Both prewritten aggregate signs E_SET,U>0 and Q_U>0 now hold, with a material
+native component response. Q includes H6's adverse response but is not supplied by H6 loss
+alone. This strengthens the usefulness of the coefficient intervention for this SET block.
+It does not quantify a causal fraction of the old H6 advantage or establish a stable ranking.
+
+The favorable response is concentrated at N8: coverage+.105040 means5.252 more served
+users/step, with improved quality and lower penalty too; all16 conditional world J differences
+are positive. N6 also improves J and coverage (13/16 J differences positive), meeting the
+prewritten **descriptive** no-observed-trained-N-service-cost condition for SET in this panel.
+N4's J change is tiny, with lower coverage and quality compensated by lower penalty and an
+8:8 world sign split. It is not recovery of coverage at both unseen quantities. H6 still
+fails its own N6 cost condition, and its same-lambda0 package J remains higher at all three
+N. No global adoption of lambda0 or post-hoc mixture of each package's best coefficient is
+made. These worlds are nested under one training initialization per package/treatment pair.
+
+### Intermediate counterevidence and actual exposure
+
+Keep the earlier adverse panels. Stage30 SET J changes at N4/6/8 are
+−.048533932/−.068341695/−.050998936, with coverage changes
+−.017295000/−.072392500/−.040022500. Stage15's favorable coverage had not produced J gain.
+Unseen E_SET at15/30/45 is−.031707819/−.049766434/+.055540525; same-stage Q is
++.018474676/−.020153823/+.065227139. Different stages use fresh world panels, so these are
+stage-specific comparisons, not an identified late-collapse/recovery curve. The prospectively
+fixed final45 endpoint determines the main reading; early negative evidence is retained and
+lowers confidence that the favorable endpoint generalizes beyond this selected block.
+
+| SET/clip recipe and window | Raw-coordinate saturation | Boundary truncation | Boundary visits | Raw attempted L2/UAV-step | Executed attempted L2/UAV-step | Realized L2/UAV-step | Mean H_before |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| lambda0,full1–45 | .338886728 | .236693673 | .240681019 | 50.068899694 | 36.802639811 | 30.548288173 | 4.091948593 |
+| lambda.05,full1–45 | .637829167 | .167267438 | .188799383 | 124.145323590 | 44.360717233 | 40.170178327 | 6.666592814 |
+| lambda0,late31–45 | .354615741 | .253072222 | .256572685 | 51.691275631 | 37.277270540 | 30.337292190 | 4.012857878 |
+| lambda.05,late31–45 | .801719444 | .168403241 | .202512037 | 193.991937582 | 48.104121593 | 43.676141754 | 8.252339095 |
+
+Full coordinate denominators are6480000, late denominators2160000; pool before dividing.
+Full lambda0/control saturation numerators2195986/4133133, truncation1533775/1083893;
+late numerators765970/1731714 and546636/363751. Final sigma is
+[.872687459,.880243540,.909313977], final analytic raw entropy3.898016246. The intended
+scale/saturation response occurred, with logstd still learned. Mean H_before and sigma are
+algebraically linked, not independent mediators or clipped-action entropy.
+
+Physical boundary truncation is **higher**, despite lower raw saturation and higher final
+SET service. This rejects a simple account that the observed benefit required fewer boundary
+truncations. It supports the coefficient/complete-learning intervention with exposure-consistent
+evidence, while leaving scale, whole-actor gradient clipping/Adam, policy means, state visitation
+and co-learning pathways unseparated. Missing old mean/gradient histories remain missing.
+The matched H6 intervention lowers saturation but has adverse unseen J and coverage, so this
+is not a universal entropy-removal prescription or proof that smaller noise is generally better.
+
+### Cost and cumulative decision boundary
+
+SET cost56.327736495 command minutes (3379.664189725 seconds), fit body3378.504483672
+seconds, CPU user13131.095965/system29.392136 seconds; peak scientific-process RSS1210072
+KiB=1.154014587 GiB. Peak scratch is unmeasured. B04 is now **2/2 complete fits**,720k
+train+192k eval,90 updates,1440 training episodes,384 eval episodes,8 checkpoints/24 panels.
+Sum of command walls is126.218996107 minutes; aggregate user/system CPU29465.661404/
+141.090407 seconds. Source preparation, technical tests, reading and publication are additional
+support work; concurrent-node elapsed time is not intrinsic algorithm speed. No failed fit,
+retry or additional control training was incurred.
+
+Strengthened: the .05 raw entropy incentive can have a useful-to-remove finite-learning cost
+for this selected SET initialization, most visibly at N8, and this materially changes the
+matched ordinary comparator reading. Weakened: the implied need for reduced physical-boundary
+truncation, a common beneficial response across packages/N, and treating the old .05 package
+gap as insensitive to a basic learning choice. Untouched: a skills-specific mechanism, competent
+baseline certification, stable H6 ranking, population noninferiority, and recurrence over fresh
+training instances. The residual H6 package signal remains bounded and exploratory.
+
+The previous fully read Pro advice covers this E/Q/component interpretation; no new review is
+needed to accept the completed batch. A next investment is a new decision: my provisional
+preference is an independent SET .05/0 recurrence pair, rather than selecting another coefficient.
+It would test whether the useful ordinary-comparator change recurs, without claiming to repeat
+Q or establish the remaining H6 gap. A fresh four-cell interaction study is the stronger but
+more expensive alternative. I will obtain a focused source-grounded Pro critique of that choice
+under constitution section5 before selecting/implementing it. No new fit or confirmation is
+authorized by this result entry itself; the owner-authorized DM will record any selected new
+study prospectively. Current main's count-transfer background is updated with these qualified
+results rather than treating the incomplete H6-only paragraph as the final B04 conclusion.
+
+Consumed generation61 READY event `22de18a1226d498375295b53` under wake
+`db3b93e0-9c8c-44b4-a917-914abbdbab99` and rearmed generation62. Both B04 scientific
+processes have exited; there is no live fit, unresolved training acceptance or pending old Pro
+answer. No worker restart, repeated Pro Send or cross-task message.
+
+## Pro question 2026-09-23 entropy-recurrence-after-b04
+
+Conversation: reuse this direction's completed Jev adviser conversation through its private
+local operation state. No account URL belongs in this notebook or the answer.
+
+Question: B04 now shows a useful final SET coefficient response, concentrated at N8, alongside
+adverse intermediate panels and increased physical-boundary truncation. Is a **fresh two-fit
+SET .05/0 recurrence pair** the smallest worthwhile next investment in the ordinary comparator,
+or does a specific unresolved issue require a different comparison before spending those fits?
+Critique this choice against a fresh four-cell interaction study and taking no new fit. The DM
+provisionally favors the two-fit pair to test recurrence of SET's own benefit, explicitly leaving
+Q recurrence and the residual H6 gap unresolved. This is a within-direction scientific investment
+choice, not a Portfolio review, request for approval, or automatic extension/confirmation.
+
+Standing: read the immediately preceding complete B04 entry and underlying outputs. Both new
+fits have45 complete updates,360k train+96k eval each, accepted unchanged source and exact
+within-package initialization/first-pre-update control matches. Final E_SET at N4/6/8 is
++.000936100/+.052325723/+.110144950; unseen mean+.055540525 and Q_U+.065227139.
+SET coverage changes are−.002365000/+.044612500/+.105040000. N8 improves all native
+components and all16 conditional world J differences; N4 has an8:8 sign split and a tiny
+penalty-mediated J change despite lower coverage/quality. N6 meets the declared descriptive
+J/coverage cost condition. H6 E_U is−.009686614; same-lambda0 H6−SET gaps remain positive
+at all N, unseen+.047735405 versus+.112962544 under .05. Do not turn that difference into
+an explained-gap percentage or skills mechanism. There is only one paired initialization per
+package, the intervention and world reuse were development choices, and .05/0 worlds are not
+independent training units. H6's zero coefficient is not adopted as a general improvement.
+
+Counterevidence: stage15/30 SET E_U was−.031707819/−.049766434; stage15 Q_U was positive
+only while SET itself lost service. Stages use fresh worlds, preventing an identified late
+collapse/recovery trajectory. The declared full/late windows show SET raw saturation
+.637829→.338887 and.801719→.354616 respectively, but physical truncation
+.167267→.236694 and.168403→.253072. A helpful coefficient effect remains compatible with
+several whole-learning pathways; fewer boundary truncations is contradicted by these data.
+Old controls do not contain action-mean or gradient histories. Advice should not manufacture
+them, demand routine replacement of completed controls, or convert missing mediation into
+technical nonactivation. B03's failed clip-only SET-recovery prediction remains in scope.
+
+Current interpretation and its use: current main at
+`f82f7265b0724c88627cf63d7a4849f3735c6c32` distinguishes bounded action execution from
+latent entropy and comparator competence. Its B04 standing is the earlier interim snapshot;
+the complete B04 evidence in this source supersedes that snapshot, not its frozen contract.
+The response suggests a useful ordinary learning recipe, not a need for a new architecture.
+That changes my next question from another proposed mechanism repair to whether the SET
+benefit recurs. The cheaper pair cannot replicate selective Q; its narrower purpose is explicit.
+Prior complete entropy advice supplies the E/Q, component and failure-branch reading, but did
+not choose an independent replication after these materially new final results.
+
+Proposed comparison, not accepted execution: **two new exploratory fits**, ordinary SET only,
+lambda_l=.05 versus0, shared fresh training seed953201. Keep N6, k10, fixed roster,16 lanes,
+500 steps,45 rollouts, CPU float32/torch_threads4, PPO15 epochs/sequence batch32, all existing
+information, architecture, raw-sample storage/scoring, clipped training/deterministic deployment,
+learned logstd and targets/annealing off. Neither arm warm-starts from an old checkpoint.
+Prespecify both fits together; execute .05 then0 and do not condition continuation on the first
+score. Match initial tensors/normalizers, initial per-world outputs and the first pre-update
+rollout within the new pair; no expectation of matching the old seed's trajectories.
+
+Proposed evaluation addresses are1500000+1000*rollout+100*N+i, i=0..15, stages0/15/30/45,
+N4/6/8; these are disjoint from the old1200000 base. Preserve training RNG and frozen
+zero-update evaluation. Final45 equal-weight unseen E_SET is primary; report each N's J,
+coverage/quality/penalty and the N6 descriptive cost condition. Preserve intermediate adverse
+panels and full1–45/late31–45 scale/exposure counts. A repeat useful native response raises
+the value of later comparator validation; its absence lowers confidence that B04's signal is
+robust enough to use. Neither branch establishes population performance or permits an
+automatic third fit, coefficient scan, horizon extension or confirmation. Proposed reads should
+be criticized if they would not actually change that decision; do not invent a post-result
+tolerance or use world bootstrap to supply training precision.
+
+Prospective cost: two fits,720k train+192k eval team steps,90 rollout updates,1440 training
+episodes and384 eval episodes,8 checkpoints/24 panels. Each actor/critic has202500 optimizer
+calls across the pair; skill paths remain0. Existing SET/lambda0 cost56.3277 command minutes
+on a shared node; future wall is unknown. A four-cell fresh block would double the stated
+fits and dominant work and additionally address Q recurrence, but is not automatically needed
+for a deliberately SET-only question. No new profiling run or nested search is proposed.
+
+Context (read before advising; explicit revisions override source_sha):
+
+- Current governance at source_sha: `docs/project/OPERATING_CONSTITUTION.md` sections1–5,7–8.
+  Owner explicitly resumed this DM's research; no current pause applies here. Ordinary new
+  study choices belong to the DM. Other sessions/Claude remain outside this task. No App
+  cross-task message or automatic broad direction selection is authorized by this question.
+- Methods at source_sha: `.agents/skills/hmasd-scientific-tools/SKILL.md`, sections Explore an
+  idea, Update the working explanation, Comparators, Statistics, Cost and exposure, Pro.
+  `.agents/skills/hmasd-research-engineering/SKILL.md` only for any consequential feasibility
+  concern about a proposed unchanged learner/runner or execution cost.
+- Shared background: `docs/research/RESEARCH.md` at
+  `f82f7265b0724c88627cf63d7a4849f3735c6c32`, count-transfer paragraphs within topic3 and
+  finite-learning topic4. Use its scope/competence reasoning, not its superseded interim status.
+- Notebook at source_sha: the complete B03 result, the full Answer to
+  `## Pro question 2026-09-22 entropy-incentive-after-b03`, its DM adoption/fixed B04 contract,
+  the complete H6 B04 entry, SET stage15, and the immediately preceding complete B04 entry.
+  They give the actual old explanation, supported/contrary predictions and new belief update.
+- Direct evidence at source_sha: the summaries/training JSONL and panel_45_n4/n6/n8.json under
+  `runs/agent_count_generalization/s1_entropy_b04_h6_zero_s942201/`,
+  `s1_entropy_b04_set_zero_s943201/`, `s1_action_law_b03_h6_clip_s942201/` and
+  `s1_action_law_b03_set_clip_s943201/`. Read stage15/30 panels/rows where the contrary
+  comparisons affect advice; do not treat a terminal summary alone as all raw evidence.
+- Frozen executable treatment at `f4762ac67f04675136367fcc566327f0bf78a086`:
+  `experiments/candidates/agent_count_generalization/entropy_b04/runner.py`,
+  `experiments/candidates/agent_count_generalization/configuration.py`, `models.py`, and
+  `runner.py`. B03 controls retain `89486d32ea569728f39d6e21b53f8a7c8854e74c` and their own
+  runner contract. Follow low-level actor/optimizer dependencies only for a disputed claim.
+  Native checkpoint loading has been done by the DM; do not claim to have repeated it remotely.
+
+Constraints: advice only; no training, source edits or edits outside this question's empty
+`### Answer` subsection in `docs/research/candidates/agent_count_generalization/NOTES.md`
+on branch `codex/agent-count-generalization`. Read the pinned question/evidence, then fetch
+the latest target blob and use its actual SHA for an answer-only write. Preserve the question
+and every other byte; stop on overlapping edits. Return the actual commit on successful write.
+If GitHub writing fails, return the **complete answer in chat**, not a receipt, SHA or link.
+Do not expose the private Jev conversation address or account details.
+
+Return: choose/modify/reject the proposed two-fit question, explain the live judgment it can
+change and strongest alternative, and distinguish recipe recurrence from interaction,
+competent-baseline certification and mechanism. Verify consequential premises from the named
+sources; separate source facts, inference and new conjecture. If another action is preferable,
+give its differing prediction and smallest fit/non-fit cost rather than a list of generic
+rescue ideas. State why no additional run is reasonable if none buys useful discrimination.
+Address the adverse panels and boundary counterexample, fresh training versus conditional
+world uncertainty, and whether my proposed result branches are meaningful. No compulsory
+new candidate, proof, framework or approval. Include MATERIAL_DISSENT yes/no and any
+decision-critical unread source. The DM will read the full answer and own the decision.
+
+### Answer
