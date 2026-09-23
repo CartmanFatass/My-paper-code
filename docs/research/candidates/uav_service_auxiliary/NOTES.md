@@ -3131,3 +3131,26 @@ development and final worlds remain as fixed in the original plan. The next outp
 `runs/uav_service_auxiliary/b03_d_912347_a01`, absent on the node at this reading. Commit
 and push this decision before its single native launch. No new module, tuned target,
 extended horizon, replacement G, additional block or confirmation is selected.
+
+## 2026-09-22 — B03 second-block D admitted
+
+The complete common-fact reading and fixed second-block decision were committed/pushed
+in `9395b11c1` before one new D / 912347 / a01 invocation. The first immediate status
+probe preceded manifest creation; the original supervisor log and then native status
+reconciled that same invocation without another launch. Native admission accepted it at
+00:38 UTC September 23 against main `1a153dc5d61a094841a6fea05fa56eb0251b6825`, with fresh
+physical/effective available memory 13,268,672,512 bytes above the configured 4-GiB floor.
+The scientific runner and supervisor have matching live identities, no exit witness and
+consistent records. Exact source, command, identities and operation reference are retained
+in the [native manifest](../../../../runs/uav_service_auxiliary/b03_d_912347_a01/launch-manifest.json).
+
+The copied first summary SHA256 is
+`5a4ab92583550a5af75f188da00a3e97648a53be9385d2e832905ce359cdebfc`.
+It is INCOMPLETE with all reported training/evaluation/fact counters zero, failure null
+and empty stderr; no trained second-block result is inferred. Config SHA256
+`b3d8c34afd6e46173202acbdaf8bd7c9499b56bd7de77e770bb3c5d951090793`
+matches the exact production specification for seed 912347, including the shifted initial
+and endpoint-fact seeds and unchanged development/final panels. Automatic observation is
+registered against this accepted native claim. Four of six planned fits are now launched:
+three first-block fits accepted and second-block D running; S/G remain unstarted. Keep
+the fixed horizon and read D's calibration/initialization evidence before binding S/G.
