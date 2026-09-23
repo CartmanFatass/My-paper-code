@@ -2572,3 +2572,23 @@ exact native process, terminated only its owned HTTPS helper, and verified Git r
 failed empty checkout and registration. Materialization under configured `zsh -lic` then
 completed cleanly. This was pre-experiment source setup:0 result fits/0 result evaluation, no
 accepted worker restarted. Shared canonical dirty records and old outputs were preserved.
+
+### Actual-node CUDA verification and DM implementation acceptance
+
+The exact published source `9d50ca279500feb1f921a32f41950190c96d5536` was fast-forwarded
+into the owned B03 checkout on configured `wsl_4070`. The focused B03 suite passed all12
+tests,0 skips in8.06s, including the real tiny native D/G fits on CUDA. Its14 warnings were
+Matplotlib/Pyparsing deprecations, not failed scientific or identity checks. The CUDA path
+checks actual paired initial/factual tensors, native movement, G-only auxiliary trunk
+movement, all four evaluation panels, checkpoints and saved final JSON. These are technical
+scratch runs, not B03 result fits or evidence for the learning prediction.
+
+I accept the bounded implementation with the independent review and actual-node checks above.
+The subsequent input commit changes only this notebook; the tested runner, CLI and tests stay
+byte-identical. The fixed two-fit protocol and D-then-G order remain unchanged. D may now enter
+fresh native admission; G follows only after D is complete and its evidence is accepted, without
+using D's scores to alter either arm. No scientific B03 fit has been admitted at this entry.
+
+Publication refresh reached main `36db756f3`, where DM1 fixed B13's four retained-policy
+comparison. I read the affected RESEARCH diff: no new result, owner pause, this direction's
+state or lead change. That independent plan does not change B03's prediction or inputs.
