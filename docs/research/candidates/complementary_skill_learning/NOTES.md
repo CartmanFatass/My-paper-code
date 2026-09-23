@@ -3879,3 +3879,34 @@ commits do not change its executable contract. M is first with tag
 after full M collection/acceptance. Native admission must still establish current published
 pause/lead, source identity, duplicate absence and fresh actual-node memory. At this entry
 there are0 started B04 scientific fits; tests and adviser agreement establish no service result.
+
+
+## 2026-09-23 — B04 M natively admitted; U remains the fixed second arm
+
+M was natively admitted at2026-09-23T23:20:02.798827Z against the fixed published B04
+source above. The unchanged prospective comparison has now entered execution:1 admitted and
+running fit,0 complete scientifically accepted B04 results. U remains the fixed second arm
+after full M collection and acceptance; neither M's interim scores nor its runtime can select
+a different source, seed, panel or U recipe.
+
+The runner-written [launch manifest](../../../../runs/complementary_skill_learning/b04_m_260923931_483819eba/launch-manifest.json),
+[admission preflight](../../../../runs/complementary_skill_learning/b04_m_260923931_483819eba/admission-preflight.json)
+and [accepted operation reference](../../../../runs/complementary_skill_learning/b04_m_260923931_483819eba/launch-status.json)
+are collected byte-for-byte from the actual node. They preserve the native command, source,
+control revision, process identities, output and status handles without a second handwritten
+launch record. Their respective SHA256 values are
+`cce4e0b545fe901583a68b1bb586de8733980bfdad4a6d93ac8c11876d965746`,
+`ec30c73d8e7d3021e80148f4e4bf40f38690315e7473359d6afa74b20f85650f`, and
+`1523bdc0350c6a84b793ad1617c1d938a85a46296aeebd7c6fb8c76c42696592`.
+Fresh node preflight passed with14061678592 effective available bytes against4294967296
+required; cgroup headroom was unavailable, not a measured unlimited resource. Native status
+at23:26:06.151699Z reported accepted/running, matching supervisor and runner identities,
+consistent records and no exit witness. The running source snapshot must remain intact.
+
+The earlier saved initial summary had both M initial panels complete,32000 evaluation
+transitions, and no saved completed training update. Its counters were the initial saved
+snapshot and do not prove that the first training rollout had not begun. These partial files
+are progress evidence only. Complete checkpoints, all training/prediction rows, every required
+world panel and native process-exit evidence still require full collection and independent
+reading before any scientific acceptance. The deterministic observer follows this same native
+operation; a checkpoint, read failure or terminal notice cannot authorize another M launch.
