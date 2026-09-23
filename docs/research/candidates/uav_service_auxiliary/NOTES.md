@@ -3021,3 +3021,19 @@ The second block remains useful for distinguishing recurrence of G's descriptive
 and the S/G service-cost tradeoff from a block-specific ranking; the common replay is
 read first and does not authorize an extra fit or a changed recipe. The exact completed-G
 wake/event was consumed at generation 24, with no remaining accepted training process.
+
+## 2026-09-22 — B03 fixed common-endpoint replay admitted
+
+The exact replay inputs and completed-G reading were committed/pushed in `407da2464`
+before the single new invocation. Native admission accepted the fixed replay at 00:29 UTC
+September 23 against main `f82f7265b0724c88627cf63d7a4849f3735c6c32`; source remained clean
+and the output did not previously exist. The runner and supervisor identities match and
+records are consistent. The authoritative handle and exact input digests are in the
+[native manifest](../../../../runs/uav_service_auxiliary/b03_endpoint_replay_912211_a01/launch-manifest.json).
+The first copied snapshot is INCOMPLETE with D/S replay sections recorded, 286,272 agent
+rows, no failure and zero new fits, optimizer updates or environment transitions. The
+three stderr messages report absent discriminator replay buffers on checkpoint loading;
+these fixed-policy loaders create empty buffers and perform no discriminator learning.
+They do not change the restored policy identities or constitute a resumed training fit.
+Automatic observation is registered against this exact native claim. Read and verify the
+whole three-arm result after completion; second-block training remains unstarted.

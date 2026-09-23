@@ -1,0 +1,20 @@
+{
+  "inputs": {
+    "D": {
+      "root": "/home/wu/hmasd-worktrees/usa-b03-73be55261/runs/uav_service_auxiliary/b03_d_912211_a02",
+      "summary_sha256": "824e706fddd4d9b1f53a80463d8033db9135449c7154a2cec10ded54156ac672"
+    },
+    "S": {
+      "root": "/home/wu/hmasd-worktrees/usa-b03-73be55261/runs/uav_service_auxiliary/b03_s_912211_a01",
+      "summary_sha256": "2c4e71ff76110a2d002645ecf7e1896c0a34ac210df7807afc2882dd05420265"
+    },
+    "G": {
+      "root": "/home/wu/hmasd-worktrees/usa-b03-73be55261/runs/uav_service_auxiliary/b03_g_912211_a01",
+      "summary_sha256": "54c16736a8101dab32aa53f66858d6e8e0cb601f9f1c8a812cd681486ceeefde"
+    }
+  },
+  "training_sha": "73be55261b9f5e8f8fe26fdec6558b87ad088fcb",
+  "device": "cuda",
+  "threads": 4,
+  "weighting": "episode equal; source arm strata retained"
+}
