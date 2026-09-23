@@ -10712,3 +10712,67 @@ first drain sees both existing processes running, zero observation errors, no pe
 and no record mismatch. Its 1500s bounded window returns control for rearming the same
 handles; it neither changes final45 nor restarts a worker. Complete native outputs, all45
 updates/arm, full final panels and independent trace/checkpoint reading remain outstanding.
+
+### B12 T6 collected and independently read; fixed T8 remains running
+
+T6 exited normally at 2026-09-23 18:23:03 UTC. The original native status has a valid exit
+witness, absent runner/supervisor and consistent records. All15 native files (70,178,528
+bytes) were copied and individually matched by SHA-256 and byte count; a second native
+inventory was unchanged. The [complete summary](../../../../runs/agent_count_generalization/s1_training_recurrence_b12_t6_s963401/summary.json)
+has SHA-256 `9765f6518fad19e3c3426ae1d181cb329343623cf3628b0fd23dee4714744564`.
+This accepts the T6 cell's complete evidence, not the paired recurrence prediction.
+
+The DM read both final panels and every saved world, verified the actual initial checkpoint
+tensors, and independently recomputed J/C/Q/P/E/S/U from numeric native traces without
+candidate imports, policy forwards or new environment steps. All45 training rows match the
+summary and remain finite. Actual counts equal the fixed expected counts: 1fit,360,000
+training team steps,2,160,000 agent rows,720 training episodes/resets,45 updates,22,500
+training policy calls,101,250 actor and critic optimizer calls each;32,000 evaluation team
+steps,224,000 evaluation UAV steps,64 episodes/resets and1000 batched policy calls.
+Evaluation has zero optimizer or storage calls. Before/after source hashes match published
+execution `762359c024f097827d0ef4f165635848de6bc667`.
+
+All45 updates preserve the effective entropy coefficient .05, raw action/logprob storage,
+bounded physical execution and unchanged diagnostic RNG/policy/logprob witnesses. The
+independent movement check initially promoted recorded float32 actions to float64, producing
+at most9.54e-7m reconstruction error; using the actual float32 displacement arithmetic
+matches all45 saved witnesses exactly. No producer or result was changed. Final evaluation
+copies preserve learned weights/normalizers, and the training learner's model, runtime and
+global RNG remain unchanged. Final raw sigma is5.061697/4.949020/4.633394; this is a training
+diagnostic, not a service effect or deterministic evaluation noise.
+
+The initial tensor manifest and construction/sampler RNG differ from B11. Actual final-panel
+initial states and observations equal B11's corresponding saved N8/N6 worlds, as fixed.
+Native c10 capacity, unique connections, actual0dB eligibility, per-UAV counts and E-S=U
+all pass independent checks. Across both panels there are zero multi-eligible user-steps;
+the per-UAV eligibility overflow equals eligible-unserved at every step. This is observed
+bookkeeping, not identification of a service mechanism.
+
+These are absolute readings for the new T6 policy; T8-minus-T6 is still unavailable:
+
+| Test N | J | Coverage C | Quality Q | Height penalty P | Eligible E | Served S | Eligible-unserved U |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 8 | .405497332961 | .521536250000 | .170882226747 | .010842710063 | 26.446125 | 26.0768125 | .3693125 |
+| 6 | .506411158936 | .656746250000 | .189191765847 | .010068745818 | 33.7205625 | 32.8373125 | .8832500 |
+
+Retain the lower tails: N8 world1645825 has the lowest J .301120142117 and lowest service
+19.186 users/step; world1645829 has26.482 eligible,24.148 served and2.334 unserved.
+For N6, world1645608 has the lowest J .407163630980,26.356 served and5.336 unserved;
+world1645631 has the lowest service24.944. All per-world components and complete native
+traces are retained. These separate test-N panels do not identify a causal N effect;
+height P remains a proxy, not measured energy or return risk.
+
+Measured T6 command wall is4915.967159s (81.932786min), fit-function wall4914.735057s;
+process user/system CPU19869.139196/46.492511s and peak RSS1,158,152KiB, scoped to Linux
+RUSAGE_SELF. Peak scratch remains unmeasured. These are this cell's costs, not the completed
+pair's cost or simultaneous memory. The two20,968,771-byte checkpoints remain outside Git
+in the authoring and native run directories, with digests/sizes in the committed summary;
+all13 non-weight native files are published. No native source or output cleanup occurred.
+
+At 18:28:17 UTC, the same T8 operation had completed36 updates and collected296,000 team
+steps, with finite summary fields, no recorded failure and no final panel yet. Fresh main
+`3fac8a9467534ed56ba7babd0417cf1f3c917d15` retains this lead and the lifted project pause;
+FSD/G33 controls are unchanged. The T6 event was consumed using generation104 and its
+original wake/event IDs; generation105 continues observation of the original T8 handle.
+The fixed comparison, final45 endpoint and two-fit scope are unchanged. Complete and read
+the paired results before updating the recurrence judgment or choosing another investment.
