@@ -1001,3 +1001,25 @@ read-only privileged process scan found the exact G snapshot eligible. Apply rec
 removed only `9a99c1266d334796bc6c41c7cbc3fddf`; published source, original claims/status,
 both output copies and the authoring checkout remain. Current owner pause is lifted; the
 three-DM setting, other ownership and Claude FSD/G33 constraints were read and preserved.
+
+## 2026-09-23 — B01 P admitted as the fixed third arm
+
+P is accepted under current owner controls at the same frozen source and initialization
+block as D/G. Its [native manifest](../../../../runs/complementary_skill_learning/b01_p_260923901_957a65c01/launch-manifest.json)
+and [runner-side memory preflight](../../../../runs/complementary_skill_learning/b01_p_260923901_957a65c01/admission-preflight.json)
+were copied and SHA256-verified against remote originals. Native runner/supervisor identities
+are running, records consistent and no exit witness present. The outer supervisor's exit0
+only means the admission kernel returned. Retain this accepted operation across observations.
+
+The first persisted summary contains one model construction and the complete16,000-step,
+32-world initial-own evaluation. Initial native tensor digest and the entire initial panel
+equal D/G exactly, with no failure. No full training rollout is in that snapshot yet; its
+zero training/start counters are the last completed-stage record, not evidence that the live
+runner is idle. The first-rollout facts/target calibration will be checked when persisted.
+There are3 admitted arm attempts and2 complete fits; this is the planned third arm, with no
+new exposure beyond the original batch. No P service comparison is accepted at startup.
+
+The G READY event from generation8 was consumed with its exact wake/event identities. Register
+the P manifest's existing status handle with30-second observations and a25-minute checkpoint,
+then read new evidence at wake and rearm the same handle. The worker/source remain unchanged;
+no restart, fourth fit, replacement seed or repeated Pro Send follows from a wake event.
