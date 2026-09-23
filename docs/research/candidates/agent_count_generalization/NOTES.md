@@ -11873,3 +11873,819 @@ first admitted attempt's0-exposure technical failure stays preserved under its o
 Next: collect the complete a02 output, verify fixed reproduction and input/parameter identities,
 independently recompute the native panels and full2x2 gaps, then apply the recorded prediction
 and contrary-world reading. Process exit alone cannot establish that scientific result.
+
+
+## 2026-09-23 — B13 complete: remaining package gains survive stronger ordinary controls
+
+### Technical completion and independent reading
+
+The DM accepts the fixed eight-panel a02 result from source01fc89e5d. All24 native files
+(108,830,303 bytes) were collected and matched individual SHA-256 and byte sizes; the three
+previously collected admission files were identical. The recorded runner/supervisor are absent
+with a consistent valid exit0 witness. The complete summary, all eight panel records, native
+traces and exit/admission evidence were read. The original0-exposure a01 failure remains
+preserved, not overwritten or classified as a scientific negative.
+
+The independent NumPy reader imports neither candidate nor environment code. Across every
+saved step it reconstructed eligibility and connections, per-UAV capacities, E/S/U, C/Q/P,
+scalar reward and native J, then all absolute and2x2 per-world differences. Maximum absolute
+J difference from saved panel arrays was1.332268e-15. Initial states and observations are
+exactly common across all four policies within each N. All four SET trace NPZ files are
+byte-for-byte identical to their original B11/B12 files; J, scalar returns, components and
+service arrays are also exactly identical. No tolerance was widened. The full continuous
+and exact checks required by the original reproduction contract pass.
+
+All nine reported source hashes match the published execution revision and are unchanged;
+all four fixed checkpoint/summary identities, eight strict restored final digests and all
+before/after input identities match. Each panel has evolving runtime, unchanged parameters
+and normalizers, preserved external RNG, empty training storage, zero optimizer calls and
+executed actions within[-1,1]. H6 used its original ongoing coordinator/skill path; SET used
+its k10 snapshots and current local feedback. No initial-label reuse or fixed-count variant
+entered the result. The stored eligibility bits come from native full SINR calculations;
+the artifact does not claim to store every raw SINR value.
+
+Actual totals exactly equal the prospectively fixed totals:0 fits,0 training/storage/update
+steps,8 panels,128,000 evaluation team steps,896,000 UAV steps,256 episodes/resets and4,000
+batched policy calls. H6 paid200 batched coordinator calls/6,400 lane assignments,200 team
+and1,400 individual decoder calls, with6,400/44,800 respective decoder rows. SET reproduction
+accounts for64k team steps and the new H6 readings for64k. Command wall184.368279s
+(3.072805min), run body182.821360s; scientific-process user/system CPU466.835340/1.567326s,
+peak RSS942,204KiB. Peak scratch is unmeasured. These are execution measurements, not complete
+support or project wall: preparation, code/review, transport, collection and reading remain
+separate; no comparative efficiency claim follows. Four selected historical fits retain the
+1.44M training-team-step cost and304.505743 summed command minutes already recorded above.
+
+Evidence: [summary](../../../../runs/agent_count_generalization/s1_ordinary_control_b13_a02/summary.json),
+[eight panels and native traces](../../../../runs/agent_count_generalization/s1_ordinary_control_b13_a02/),
+[manifest](../../../../runs/agent_count_generalization/s1_ordinary_control_b13_a02/launch-manifest.json).
+The complete per-world arrays, medians, signs, algebraic residuals and minima remain in the
+runner outputs. The tables below retain all four policies and all four comparisons, by N.
+
+### Absolute levels and complete comparison
+
+J=.7C+.3Q-P; S=50C; U=E-S. S/E/U are users per native step; P is the S1 height proxy,
+not measured energy. H1=B03 H6, H2=B07 H6; S1=B11 T6 and S2=B12 T6. N8 is the primary
+untrained-count use; N6 is reported separately, without a combined score.
+
+| N | Policy | J | C | Q | P | E | S | U |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 8 | S1 | 0.340079605 | 0.444208750 | 0.169379187 | 0.021680276 | 23.296125000 | 22.210437500 | 1.085687500 |
+| 8 | S2 | 0.405497333 | 0.521536250 | 0.170882227 | 0.010842710 | 26.446125000 | 26.076812500 | 0.369312500 |
+| 8 | H1 | 0.451505105 | 0.594498750 | 0.167558413 | 0.014911544 | 30.107437500 | 29.724937500 | 0.382500000 |
+| 8 | H2 | 0.473899357 | 0.617120000 | 0.167113115 | 0.008218577 | 31.135375000 | 30.856000000 | 0.279375000 |
+| 6 | S1 | 0.452484895 | 0.592258750 | 0.178208926 | 0.015558908 | 31.285500000 | 29.612937500 | 1.672562500 |
+| 6 | S2 | 0.506411159 | 0.656746250 | 0.189191766 | 0.010068746 | 33.720562500 | 32.837312500 | 0.883250000 |
+| 6 | H1 | 0.529989817 | 0.693486250 | 0.187082512 | 0.011575311 | 35.517437500 | 34.674312500 | 0.843125000 |
+| 6 | H2 | 0.554305525 | 0.715555000 | 0.196727177 | 0.005601128 | 36.684125000 | 35.777750000 | 0.906375000 |
+
+| N | H6 minus SET | Mean J | Median J | J positive/negative | Mean S | Median S | S positive/negative |
+| --- | --- | ---: | ---: | --- | ---: | ---: | --- |
+| 8 | H1 - S1 | +0.111425500 | +0.106150983 | 32/0 | +7.514500 | +6.891000 | 32/0 |
+| 8 | H1 - S2 | +0.046007772 | +0.046488335 | 25/7 | +3.648125 | +3.855000 | 29/3 |
+| 8 | H2 - S1 | +0.133819753 | +0.128624476 | 32/0 | +8.645562 | +8.412000 | 32/0 |
+| 8 | H2 - S2 | +0.068402024 | +0.066359311 | 31/1 | +4.779187 | +4.656000 | 31/1 |
+| 6 | H1 - S1 | +0.077504922 | +0.074100337 | 30/2 | +5.061375 | +5.144000 | 30/2 |
+| 6 | H1 - S2 | +0.023578659 | +0.022375996 | 24/8 | +1.837000 | +1.964000 | 24/8 |
+| 6 | H2 - S1 | +0.101820630 | +0.102941373 | 31/1 | +6.164813 | +6.560000 | 31/1 |
+| 6 | H2 - S2 | +0.047894366 | +0.042271896 | 30/2 | +2.940438 | +2.732000 | 29/3 |
+
+All J/S comparisons have zero exact ties. The four gaps share the same four policies:
+G11-G12-G21+G22=0 up to recorded floating roundoff in every world. They are neither four
+independent training comparisons, H6-by-SET interactions, nor cross-play. Changing S1 to S2
+subtracts the known SET difference from either H6 gap; it does not identify an interaction.
+
+### Adverse worlds and absolute minima
+
+Every world with negative paired J or S is retained below, including cases where the other
+quantity is positive. This is a descriptive boundary, not a post-result rejection threshold.
+
+| N | Comparison | World | J difference | S difference |
+| --- | --- | --- | ---: | ---: |
+| 8 | H1 - S2 | 1645801 | -0.006516745 | +0.074000 |
+| 8 | H1 - S2 | 1645805 | -0.003942465 | +1.162000 |
+| 8 | H1 - S2 | 1645812 | -0.061717433 | -3.622000 |
+| 8 | H1 - S2 | 1645815 | -0.001096215 | +0.318000 |
+| 8 | H1 - S2 | 1645817 | -0.002367914 | +0.324000 |
+| 8 | H1 - S2 | 1645820 | -0.041800405 | -2.668000 |
+| 8 | H1 - S2 | 1645826 | -0.023961897 | -1.468000 |
+| 8 | H2 - S2 | 1645829 | -0.014705452 | -0.180000 |
+| 6 | H1 - S1 | 1645615 | -0.000397699 | -0.068000 |
+| 6 | H1 - S1 | 1645631 | -0.084181248 | -8.040000 |
+| 6 | H1 - S2 | 1645600 | -0.044603735 | -2.744000 |
+| 6 | H1 - S2 | 1645601 | -0.005768148 | +0.830000 |
+| 6 | H1 - S2 | 1645612 | -0.021840835 | -1.772000 |
+| 6 | H1 - S2 | 1645620 | -0.019609594 | -1.108000 |
+| 6 | H1 - S2 | 1645623 | +0.011592475 | -1.370000 |
+| 6 | H1 - S2 | 1645625 | -0.018205362 | -0.640000 |
+| 6 | H1 - S2 | 1645629 | -0.027766293 | -1.358000 |
+| 6 | H1 - S2 | 1645630 | -0.024523606 | -1.664000 |
+| 6 | H1 - S2 | 1645631 | -0.052484929 | -2.978000 |
+| 6 | H2 - S1 | 1645600 | -0.007900815 | -2.048000 |
+| 6 | H2 - S2 | 1645600 | -0.076156980 | -5.664000 |
+| 6 | H2 - S2 | 1645609 | +0.020212328 | -0.316000 |
+| 6 | H2 - S2 | 1645620 | -0.019238751 | -1.204000 |
+
+| N | Policy | Minimum absolute J (world) | Minimum absolute S (world) |
+| --- | --- | --- | --- |
+| 8 | S1 | 0.229516941 (1645815) | 15.184000 (1645815) |
+| 8 | S2 | 0.301120142 (1645825) | 19.186000 (1645825) |
+| 8 | H1 | 0.385174883 (1645817) | 25.026000 (1645817) |
+| 8 | H2 | 0.371495936 (1645829) | 23.968000 (1645829) |
+| 6 | S1 | 0.323061474 (1645608) | 20.378000 (1645608) |
+| 6 | S2 | 0.407163631 (1645608) | 24.944000 (1645631) |
+| 6 | H1 | 0.355148850 (1645631) | 21.966000 (1645631) |
+| 6 | H2 | 0.474903914 (1645600) | 30.160000 (1645600) |
+
+At N8 both H6s retain higher mean J and S than S2: the recorded primary prediction holds.
+H1 nevertheless loses J in7/32 worlds and S in3/32; H2 loses both in1/32. The worst N8 H1-S2
+world1645812 is-.061717433 J/-3.622 S. N6 mean gains also remain positive, but H2-S2 loses
+-.076156980 J/-5.664 S at1645600; H1-S1 loses-.084181248 J/-8.040 S at1645631. H1's minimum
+absolute N6 service21.966 is below S2's24.944. H2's minimum absolute N6 service30.160 exceeds
+S2's despite the large paired loss at1645600. Mean, paired-tail and minimum-level readings
+therefore cannot substitute for one another. No all-world dominance, noninferiority or risk
+acceptability has been established.
+
+### Working explanation and next useful action
+
+Current relevant shared background was read at main13f5adf00: B11/B12 ordinary training
+responses reverse on common worlds; stronger realized ordinary policies must challenge the
+old package gap. B04-B06 do not support zero entropy as a reliable ordinary upgrade; B08
+separates useful learning from a causal share of the final gap; B10 weakens continuous online
+reassignment necessity for the retained weights. B13 changes none of those contrary facts.
+
+Strengthened: the retained H6 policies have actual finite N8 service/J value even against the
+stronger realized S2 control. The explanation that their remaining advantage exists only
+against S1's weaker mean level is contradicted for these assets/worlds. At N8 H1-S2 gains
++.0729625 C despite lower Q(-.003323814) and higher P(+.004068834); H2-S2 gains+.09558375 C
+with lower Q(-.003769112) and lower P(-.002624133). Thus neither mean J gain is a service-free
+height benefit. E/S changes are+3.6613125/+3.648125 for H1 and+4.689250/+4.7791875 for H2;
+small U changes(+.0131875/-.0899375) accompany those differences. These are closed-loop
+consequences, not a causal identification of geometry, allocation or skill learning.
+
+Weakened: the case for dropping any new complete-package learning comparison merely because
+B12 supplied a stronger ordinary policy. Untouched/unresolved: general training reliability,
+competent-baseline sufficiency, skill/representation/intrinsic-objective mechanism, and new
+world/population performance. These are four outcome-informed selected policies, not new
+independent fits; H1/H2 also have different historical entropy configurations. Thirty-two
+worlds do not raise training n. Historical panel changes prohibit assigning all old-to-new gap
+shrinkage to control strength. No per-world best-policy envelope or winner-only claim is used.
+
+The existing complete Pro answer covers this qualitative investment update: raise the
+priority of fresh prospective H6/ordinary learning when N8 mean J/service gains survive,
+while retaining the significant local costs. The DM judges the observed3.648/4.779 extra
+users per step and+.046008/+.068402 J worth one fresh learning comparison; the adverse worlds
+preclude a blanket deployment conclusion and must remain visible in its reading. This is a
+bounded use/value judgment, not a new effect-size or tail gate.
+
+Next useful action: formulate a focused follow-up on one fresh N6 H6/.05 versus ordinary
+SET/.05 learning block, using the competent current baseline, common exogenous training
+worlds and fixed N8/N6 initial/final evaluation. Proposed cost is2 fits x360k=720k training
+team steps, plus128k evaluation (2 policies x2 stages x2 N x32 worlds x500 steps). Its purpose
+would be to observe newly produced learning outcomes rather than replay selected endpoints.
+Native initializations remain architecture-specific; a common seed does not establish equal
+weights or matched information bandwidth. A bounded read-only Scout mapped reusable B07/B12
+training paths and the candidate-level changes needed for fresh RNG addresses, output identity,
+initial evaluation and removal of B07's irrelevant old-control binding; no fit or panel ran.
+The actual next comparator/protocol and outcome reading will receive focused Pro criticism
+before implementation, since B13's complete evidence and the learning design are now concrete.
+Mixed-N ordinary learning is the strongest competing allocation; its current justification
+is broad-condition use, not a demonstrated repair of B12. No B13 extension, third T8 block,
+new deployment ablation, search or confirmation is selected. No native worker remains active.
+
+
+## Pro question 2026-09-23 fresh-matched-learning-after-b13
+
+Conversation: continue the direction's Jev conversation; private address stays in local state.
+Prior key `hmasd:91bc8736ecf5a14311fc93fe285587ecd9b589c97f1f5ee2d11046fc887259c3`
+is complete, fully read and saved in its own Answer. This is a new decision question, not a
+resend, a delivery repair or a request to repeat B13.
+
+Question: B13's finite H6 advantage survived stronger ordinary controls, with meaningful local
+losses. Is one fresh prospective N6 H6/.05 versus ordinary SET/.05 learning block now the
+most useful next investment, and will the proposed two-arm initial/final comparison below
+actually test newly produced learning value rather than reliance on selected old endpoints?
+Criticize or refine this specific plan against mixed-N ordinary learning as the strongest
+competing use of two fits. This is exploratory design/advice, not confirmation, a request for
+new mechanisms, owner approval, or permission to execute.
+
+### Standing and new evidence
+
+Read the complete B13 result immediately above, its native panel arrays and the complete
+prior `ordinary-control-strength-after-b12` Answer/DM adoption. That answer covered raising
+new-learning priority if H6 gains survived. It did not choose this concrete learning/RNG/
+initial-evaluation protocol. B13's actual outcomes now replace those prospective branches.
+
+B13 a02 source01fc89e5d6fb55ff1507ffbd2a81601db65befb4 completed0 fits/128k evaluation. All24
+files, native traces, fixed asset/source identities, zero updates and exact work counts were
+verified; all four SET trace files are byte-identical to their B11/B12 originals. The first
+technical attempt had0 exposure and is preserved separately. H1=B03 H6, H2=B07 H6,
+S1=B11 T6, S2=B12 T6; all trained on N6,360k each, with distinct historical training instances.
+
+| N | Comparison | Mean J difference | Mean S difference | J positive/negative | S positive/negative |
+| --- | --- | ---: | ---: | --- | --- |
+| 8 | H1-S2 | +.046007772 | +3.648125 | 25/7 | 29/3 |
+| 8 | H2-S2 | +.068402024 | +4.7791875 | 31/1 | 31/1 |
+| 6 | H1-S2 | +.023578659 | +1.837000 | 24/8 | 24/8 |
+| 6 | H2-S2 | +.047894366 | +2.9404375 | 30/2 | 29/3 |
+
+N8 H1-S2 loses.061717433 J/3.622 S at1645812; N6 H2-S2 loses.076156980 J/5.664 S at1645600.
+H1's minimum N6 S21.966 is below S2's24.944; H2's minimum30.160 is higher despite its large
+paired loss. The full four contrasts and every J-or-S loss world/minimum are retained above.
+N8 coverage gains outweigh lower mean quality; H1 also pays higher mean height penalty than
+S2. No tail acceptance region was invented. Meaningful local costs coexist with positive
+mean J/service; neither paired tails nor absolute minima substitute for those means.
+
+The2x2 gaps are algebraically dependent, not interactions/cross-play or four replications.
+All four policies and evaluation worlds carry outcome-informed development selection. Equal
+N6/360k does not make their historical initialization, worlds, objectives or work identical.
+The result challenges the explanation that remaining gains exist only against the weaker S1
+on these worlds. It does not establish skill necessity, ordinary-baseline sufficiency, equal
+representation/bandwidth, stable training superiority or fresh-population performance.
+B04-B06 entropy-response reversals, B11/B12 target-N reversal, B08's initial-gap interpretation
+and B10's limits on online-reassignment necessity remain contrary evidence.
+
+My current judgment favors one new learning block over another old-policy ablation. A newly
+learned SET must be the prospective comparator, without replacing it by a more convenient old
+weight after observing scores. Significant N6/world costs must stay visible. Give the strongest
+objection if this still does not buy enough information to justify the proposed investment.
+
+### Proposed two-arm learning block for criticism, not yet launched
+
+1. Two fresh fits only: retained B07 H6/.05 recipe versus competent B11/B12 T6 SET/.05 recipe.
+   This recipe choice inherits development selection; neither arm restores trained weights.
+   Both train N6,50 users,c10,k10,16 lanes,horizon500 for45 rollouts=360k team steps. CPU
+   float32/Torch4; retain native normalizers, PPO/GRU/mask semantics and task scalar R/6.
+   Both use native raw-Gaussian samples and old log-probs in storage, physical clip[-1,1],
+   and deterministic mean-then-clip evaluation. Constant low-level entropy .05; no annealing,
+   target entropy, reward/noise repair or new auxiliary objective.
+2. One fresh nominal seed974201 and common exogenous training lane world bases1974200-1974215,
+   absent from the direction's prior published integer addresses. Verify actual RNG/world
+   wiring and record initialization tensors/digests. H6 uses its native constructor; SET
+   retains its canonical N6 initialization semantics. No cross-architecture tensor copying
+   or false equal-weight claim. Equal master seeds need not produce equal random consumption.
+   Common external worlds do not imply common endogenous trajectories or multiple independent
+   training runs. Identify consequential fairness issues without inventing a full-weight
+   equality requirement across unlike architectures.
+3. Initial0 and final45 evaluation only: each N8 then N6 on the same already exposed worlds
+   1645800-1645831 and1645600-1645631,32 lanes x500 steps. These are development worlds,
+   not new held-out data. Full resets/world+51 RNG, isolation and restoration of training
+   runtime, frozen evaluation normalizers, zero evaluation storage/updates, and native
+   service/height/return traces. Keep both checkpoints and full learning/update logs. No
+   intermediate15/30 panel, N4, new worlds, checkpoint selection or later extension.
+4. Preserve the package differences rather than manufacture a skill-only test. H6 has6 team
+   and6 individual skills, learned coordinator, skill-conditioned local recurrence and both
+   discriminator objectives. SET has central-snapshot recurrent set control plus current
+   local feedback, constant skills and disabled high-level/discriminator training/rewards.
+   Exogenous information sources andk10 do not equalize bandwidth, encoding, architecture,
+   intrinsic reward or computation. No fixed-count or opening-label deployment variant.
+5. Working prediction: newly trained H6 has higher final N8 J and actual S than newly trained
+   SET, with useful within-arm initial-to-final learning. Read each arm's own change; do not
+   require I_H>I_SET or treat D45=D0+(I_H-I_S) as causal shares. N6 and all paired/absolute
+   losses stay separate; no all-world-positivity, posthoc tail gate or equivalence claim.
+   If the new ordinary fit removes/reverses the gap, lower further unchanged H6 investment
+   while preserving old gains. A favorable endpoint without useful own learning is not a
+   learned-improvement result. Mean gains with losses remain a scoped tradeoff. No branch
+   automatically adds another seed/block or confirmation. Both selected arms would be
+   completed regardless of whether the first looks favorable, subject to actual technical
+   failure or owner pause; no score-conditioned second-arm execution.
+6. The minimal implementation would be a new finite candidate entry reusing B07/B03 collection/
+   update and B11 native-evaluation semantics. Existing B07 binds an irrelevant old B05 SET
+   control and fixed old tag; existing B12 saves checkpoint00 but only evaluates final45.
+   New code must bind the new experiment/RNG identities, remove that irrelevant old-control
+   dependency, and provide symmetric initial evaluation. It will not modify/relaunch frozen
+   B07/B12 entries or shared learners/environments. A read-only Scout verified these reuse
+   boundaries and actual constructors; no fit/panel was used for mapping. The DM will fix
+   implementation scope/review only after choosing the protocol from this advice.
+
+Prospective cost:2 fits,720k training team steps/4.32M UAV rows;8 evaluation panels
+(2 arms x2 stages x2 N),128k evaluation team/896k UAV steps,256 episodes and4,000 batched
+policy calls;848k total team interactions. Original N6 schedules predict45 updates and
+101250 actor plus101250 critic optimizer calls per arm; H6 additionally675 coordinator,
+675 team-discriminator and2700 individual-discriminator calls. H6 evaluation adds200 batched
+coordination calls/6,400 lane assignments and actual decoder work. Record actual counts.
+Old B07 H6/B12 T6 command walls61.825780/81.932786min have differing evaluation schedules;
+these are planning context, not equal-work efficiency evidence or a stopping quota. Preparation,
+checks/review, collection and reading also cost work. Fresh native admission is still required.
+Nothing result-bearing for this proposal has started.
+
+Strongest alternative: one ordinary N6-only versus mixed-N6/8 block for wider-condition use.
+It is not an identified B12 repair: an equal mix at360k gives180k/N and changes true exposure/
+update organization. Which learning changes the current useful judgment most, and is symmetric
+initial/final evaluation a proportionate discriminator? Reject the proposed pair if a better
+specific allocation follows; no mandatory new architecture, proof or diagnostic catalogue.
+
+### Context
+
+Current owner instruction is to continue autonomously as DM; completion/failure of one recipe
+does not end research responsibility. The owner delegated direction revision within project
+purpose; no repeated owner/Root approval is needed. This direction's pause is lifted, while
+Claude FSD/G33 stay separately paused/frozen. This is no cross-App message or Portfolio request.
+Current controls/methods at revision 92c2238321ce7daba4b9231df865536ef32a9d9a override conflicting old conversation or
+older author-branch governance; frozen scientific evidence retains its original meaning.
+
+- At 92c2238321ce7daba4b9231df865536ef32a9d9a: `docs/project/OPERATING_CONSTITUTION.md`,2026-09-23 autonomy amendment and
+  sections1-5,7-8; `docs/research/RESEARCH.md` on B11/B12 and B13 stronger ordinary controls
+  and the DM1 direction/plan. The new shared judgment makes the stronger ordinary learner
+  a real challenge while retaining adverse evidence; treat it as revisable evidence.
+- At 92c2238321ce7daba4b9231df865536ef32a9d9a: `.agents/skills/hmasd-scientific-tools/SKILL.md`, Explore, Update the
+  working explanation, Comparators, Statistics, Cost/exposure and Pro; and
+  `.agents/skills/hmasd-research-engineering/SKILL.md`, Checks/review and execution semantics
+  only as needed. One fresh block remains exploratory n=1/arm, not confirmation.
+- At source_sha: this NOTES file's immediately preceding complete B13 result; the complete
+  `Pro question 2026-09-23 ordinary-control-strength-after-b12` Answer/DM adoption and B13
+  prospective contract. Read all eight `panel_{h1,h2,s1,s2}_n{8,6}.json` plus summary/config
+  under `runs/agent_count_generalization/s1_ordinary_control_b13_a02/`. Native NPZ traces are
+  alongside them; do not claim to have independently reloaded them unless you do.
+- Supporting/adverse NOTES entries B04-B06, B08, B10, B11/B12 as needed for the disputed
+  premise, without recursive history preload. At source_sha the complete B12 raw paths are
+  `runs/agent_count_generalization/s1_training_recurrence_b12_t6_s963401/` and
+  `runs/agent_count_generalization/s1_training_recurrence_b12_t8_s963401/`.
+- At source_sha: under `experiments/candidates/agent_count_generalization/`, inspect
+  `bounded_package_b07/runner.py` (entropy/action guard, initialization, training/evaluation,
+  old control binding), `training_recurrence_b12/runner.py` and `training_condition_b11/runner.py`
+  (ordinary config, canonical initialization, actual training worlds, service evaluator and
+  runtime restoration), `action_law_b03/runner.py` (raw storage, clipped execution, updates),
+  and `configuration.py`/`models.py` for actor/critic inputs and package differences.
+  Source_sha means the full immutable question commit supplied in the send message.
+
+Constraints: no experiments or training; no edits outside this question's empty `### Answer`
+subsection in `docs/research/candidates/agent_count_generalization/NOTES.md`, repository
+`CartmanFatass/My-paper-code`, branch `codex/agent-count-generalization`. Read the pinned
+question, then fetch the latest target blob for writing and use its actual blob SHA. Preserve
+every other byte and stop on overlapping edits. Return the actual answer commit on successful
+write; if GitHub cannot write, return the complete answer in chat, not a receipt, summary,
+SHA or link alone. No new standing records, experiments or approval requirements.
+
+Return: what B13 strengthens/weakens/leaves unresolved; your strongest objection to this
+allocation; adopt/modify/reject the concrete pair with a discriminating prediction and honest
+outcome branches; material unread-source/feasibility gaps; the strongest alternative if you
+reject it. Cite consequential sources actually read and separate findings from inference.
+End with MATERIAL_DISSENT yes/no and the material reason. Advice is not empirical replication
+or permission; the DM chooses after reading it.
+
+### Answer
+
+Saved from chat, verbatim, after delivery verification returned NOT_DELIVERED on 2026-09-23.
+Question key: `hmasd:d35f86be1b114acd988c13d9afba602934416298903daf6db1aed3da1975b288`;
+question source `ff660189f27850ad94e32ec4463bfcc389b39de8`. Complete collected text SHA-256:
+`37438137f8e32294622a1ba87bc8deda545cdc1858a52ff7eefe5d65ee13ec53` (8,723 characters; the saved file additionally has a final LF).
+No repository answer commit exists. The DM read the full answer; the account address stays private.
+
+本轮未完成 GitHub 写回。 GitHub读取正常，整文件更新动作也可见；但我未能在保持其他字节不变的前提下完成安全替换稿，因此没有调用更新接口、没有产生新提交。最新回读的本题 ### Answer 仍为空。以下是完整答复。
+
+Answer
+一、建议：采纳两个新fit及对称初末评价，检验新产生的用途，不把它称为技能因果检验
+
+我支持提议的一个新N6训练区组：B07 H6/.05配方对B11/B12 T6 SET/.05配方，每臂360k团队步；保留两臂在同一N8/N6开发世界上的initial0和final45评价。 不增加中间面板、新世界、旧权重对照执行或额外训练，也不同时改变奖励、熵、人数输入或技能部署规则。附件给定的两个新学习实例及八个评价面板，能回答一个比B13更进一步、且仍有明确范围的问题。
+
+hmasd-pro-question-b13-fresh-ma…
+
+这次值得改变的判断是：
+
+在不复用有利旧终点、共同固定外生训练条件和评价程序之后，H6能否重新产生有用的自身学习增量，并在固定终点相对一份新训练的普通SET保留有实际意义的N8服务优势？
+
+若成立，提高继续保留该完整学习包、进一步研究其可靠用途的理由；若新SET消除或反转差距，降低继续重复未修改H6配方的优先级。若H6最终领先却没有有用的自身增量，则保留终点水平，但不能把它包装成这次训练带来的用途改进。
+
+最强的实质反对理由是：这仍可能只增加一对受训练随机性影响、在已经反复阅读的世界上评价的结果。 配方本身来自开发选择，结构、内在目标、信息表示和额外计算仍然捆绑；一个新正结果既不能认证SET充分调优，也不保证局部服务损失可接受。若当前真正需要的是一份面向N6/N8宽条件的更好普通策略，而不再需要判断完整包的学习价值，那么两次fit直接用于mixed-N普通学习，会更贴近目标。
+
+我仍把当前两包比较排在前面，理由不是“上一轮建议过，所以必须继续”，而是B13确实观察到：面对较强普通实例，剩余服务增量仍有任务意义；同时，现有支持主要来自被保留的旧H6权重。用两份预先固定的新训练结果替代旧资产选择，正好补这个缺口。 初末评价进一步防止把较好的初始化或普通对照的退化误读成H6的学习收益。它不要求同时识别一个新机制，才具有投入价值。
+
+二、B13加强了剩余包用途，但没有解决新学习、尾部或比较器充分性
+
+B13的主要新事实不是“H6仍比某个弱SET高”，而是相对较强的B12 T6，两个保留H6在共同世界上仍有以下结果：
+
+测试N	对较强S2的比较	平均J差	每步多服务用户	J改善／下降世界数
+8	H1−S2	+.046007772	+3.648125	25／7
+8	H2−S2	+.068402024	+4.779188	31／1
+6	H1−S2	+.023578659	+1.837000	24／8
+6	H2−S2	+.047894366	+2.940438	30／2
+
+这些读数由本轮读取的原生面板和完整结果条目支持。它们削弱了“这些世界上的剩余用途只存在于较弱S1对照下”的解释，而不把四个代数相关的差值变成四次训练复现。
+
+局部代价没有被更强的均值结论消除。 N8世界1645812的H1−S2损失约.061717 J及3.622个服务用户／步；N6世界1645600的H2−S2损失约.076157 J及5.664个服务用户／步。H2的最低绝对N6服务又高于S2，说明较高的最低水平与某个共同世界上较大的相对损失可以同时存在。N8的平均覆盖收益还伴随平均质量下降，H1相对S2的平均高度惩罚也更高。因此，不能把B13改称为各分量改善、逐世界占优或尾部已经合格。 
+
+hmasd-pro-question-b13-fresh-ma…
+
+由此应作三类更新：
+
+**加强：**保留完整有界H6包的探索理由，以及让新的普通学习实例成为实际挑战者的必要性。B13不是靠删除较强控制、挑较弱H6对手或挑选有利世界才得到的正均值。
+
+**削弱：**继续仅用“选弱普通实例”解释这组既有资产的全部差距。但它没有排除更广的普通学习改进，也没有保证下一份SET会重现B12 T6的水平。
+
+**保持未决：**新训练是否会重新产生优势、该优势的训练总体分布、未读世界上的用途、内在奖励与技能结构的各自作用、以及普通基线的充分性。B13没有新fit；新计划也不能把B13的零更新重放计作训练支持。当前共享背景正是以这个范围提高新学习比较的优先级。
+
+B04—B06的熵响应反号和B11/B12的目标人数训练反号，要求保留新结果的不确定性，不预测本次必然失败。B08要求区分自身增量与最终差距；B10限制在线重新分配必要性的解释，但不允许据此删除新H6的协调器或换成开局标签复用。它们是本次读法的约束，不是要重新执行的历史清单。
+
+三、对称initial/final确实有判别价值，但要保留三个不同估计量
+
+令 a∈{H,S}，阶段 r∈{0,45}，测试数量 n∈{8,6}。π
+a,r
+	​
+
+ 包含该阶段的实际参数及归一化状态；每次评价重新初始化部署运行状态。对固定32个世界定义
+
+J
+ˉ
+a,r,n
+	​
+
+=
+32
+1
+	​
+
+w
+∑
+	​
+
+J(π
+a,r
+	​
+
+,n,w).
+
+主包差为
+
+D
+45,n
+	​
+
+=
+J
+ˉ
+H,45,n
+	​
+
+−
+J
+ˉ
+S,45,n
+	​
+
+,
+
+每包自身增量为
+
+I
+a,n
+	​
+
+=
+32
+1
+	​
+
+w
+∑
+	​
+
+[J(π
+a,45
+	​
+
+,n,w)−J(π
+a,0
+	​
+
+,n,w)],
+
+初始包差与差距变化为
+
+D
+0,n
+	​
+
+=
+J
+ˉ
+H,0,n
+	​
+
+−
+J
+ˉ
+S,0,n
+	​
+
+,Δ
+n
+	​
+
+=I
+H,n
+	​
+
+−I
+S,n
+	​
+
+=D
+45,n
+	​
+
+−D
+0,n
+	​
+
+.
+
+主终点保持final45的N8 J及实际服务差；I
+H
+	​
+
+、I
+S
+	​
+
+回答新训练的自身用途，Δ只是差距如何变化。 覆盖、质量、已加权高度惩罚及E/S/U都采用相同的逐世界配对读法。原生单位继续使用实际测试N：
+
+J=
+500
+n
+	​
+
+t
+∑
+	​
+
+r
+t
+	​
+
+=.7
+C
+ˉ
++.3
+Q
+ˉ
+	​
+
+−
+P
+ˉ
+,S=50C,U=E−S.
+
+原生评价代码按实际连接、SINR门槛和高度记录这些量，而不是从actor的截断局部观测补算资格。
+
+初始评价不是重复证明旧策略会学习
+
+它为这两份新初始化提供冻结的训练前参照。相对于仅做final45的方案，新增四个initial面板、64k评价团队步，不增加fit；它可以直接区分“最终较好且自身学习有用”与“最终较好但自身没有得到有用改进”。旧B08的初始策略不是本次新初始化，不能替代这四个面板。
+
+hmasd-pro-question-b13-fresh-ma…
+
+但必须限制结论：
+
+H6与SET都改善、且 I
+H
+	​
+
+<I
+S
+	​
+
+，仍可支持两包有用学习及H6较高终点，不需要把负的 Δ 判为H6失败。
+
+H6领先而SET自身退化，不能仅凭正包差称“两个合格学习结果之间的完整优势”；应分别保留H6增量、SET损失及比较器限制。
+
+H6自身没有有用增量，即使 D
+45
+	​
+
+>0，也不能声称本次训练提供了该用途改进；这不抹除冻结终点本身的服务水平。
+
+即使 Δ>0，也不识别技能、内在目标或初始化的因果份额。初始化还影响后续轨迹与优化，不能被恒等式拆成独立原因。
+
+初始策略仍有观测反馈、循环记忆和各包完整结构；不是零动作或开环基线。初始与最终策略各自沿闭环轨迹执行，不能把最终轨迹的后续观测喂给初始策略。两阶段使用相同世界，使端点差分不再混入更换世界的差异，但两个端点仍不足以描述收敛速度、学习曲线单调性或任意停止时间的性能。本次不需要因此追加15／30面板。
+
+四、接受“共同外生条件”，不要求跨架构相同权重；初始评价的隔离是关键实施风险
+1. 种子与训练世界的绑定需要明确到实际对象
+
+我接受名义种子974201和训练lane地址1974200—1974215。更重要的是实际接线：训练环境只使用自己的外生随机状态，模型／学习采样器使用声明的学习随机状态；两个包的环境构造、首次reset及随后同lane、同回合的外生初始场景应当可核对。相同整数地址本身不是这个核对的替代。
+
+hmasd-pro-question-b13-fresh-ma…
+
+建议采用明确的一次性顺序：创建共同地址的原生训练环境，再为学习构造设定名义种子，随后分别走声明的H6原生构造和SET canonical-N6程序。B12已经显式将训练环境地址与学习seed分开；旧B07则把其旧CELL seed同时绑定到多处，新入口不能机械沿用。这里需要固定的是新协议的实际随机来源，不是让旧实验重新符合新顺序。
+
+不要求两个架构的参数摘要、初始分数或首次轨迹一致。共同外部场景之后的动作、干扰、访问状态和学习数据不同，是包比较的实际后果。也不要求人为同步两包的每次随机抽样：构造大小、技能采样和更新路径本来不同；相同master seed不能消除这些差别。
+
+SET的canonical程序是新建一个未训练N6模板，再严格同步到目标运行时，不是使用旧权重或免费预训练。现有实现还核对目标拥有自己的空优化器、自己的buffer／sampler，并在同步后恢复训练模式。应保留这些语义，不向H6复制SET张量，也不把临时构造、尚未同步的目标误存为checkpoint00。
+
+2. 评价不能改变正在研究的学习过程
+
+两臂都应在完成各自构造后保存checkpoint00，然后用独立N-specific评价对象评估0；评价结束后继续原学习器，而不是将评价对象作为训练主体。
+
+已有B07和B11路径采用独立target、严格同步、冻结评价模式以及全局RNG保护。B03的运行状态摘要还包含rollout sampler的私有随机状态。因此，可复用的检查基础已经存在；不是必须重写共享学习器。
+
+新增initial评价应重点证明：学习器参数与normalizer、训练模式、循环／技能／snapshot状态、sampler和全局RNG不变；训练环境的状态与随机序列也没有被评价reset或构造推进。只检查“没有optimizer调用”不足以证明这一点。采用独立评价环境并在已有技术检查中对照“带评价／不带评价”后的训练状态，是有针对性的隔离检查，不是另一个科学fit或阳性pilot。
+
+评价中则要允许target的GRU、技能、timer和held snapshot正常演化。每个阶段从完整reset开始，使用该阶段自己的normalizer状态；不能给initial权重配上final归一化器，也不能为了对称而强行令两臂normalizer相同。
+
+3. 旧入口有三个不能直接继承的绑定
+
+B07的旧SET依赖必须删除。 它在fit开始前验证B05控制、固定旧tag和seed，并按旧N4/N6/N8汇总规则生成比较。本题没有这份旧控制；应移除该研究专用依赖，而不是给新结果继续附上旧对手。
+
+B11/B12的final-only评价需要显式阶段参数。 B11不仅函数名是evaluate_final，其元数据、panel_45_n*.json和trace_45_n*.npz也绑定45。初始评价不能通过修改总rollouts或伪装成final45完成。新输出应区分“policy_stage=0/45”和“同一开发世界集合”，避免覆盖initial文件或错误记录360k已训练步数。
+
+两阶段世界地址不能套用B07的阶段公式。 B07会随rollout改变世界；本题则要求0和45都使用1645800…及1645600…。两阶段分别执行N8后N6，明确采用面板基地址加51的评价随机设置，并让全部评价构造／执行都处于训练RNG隔离范围内。
+
+这些是有限新入口的修改，不要求新框架或对冻结B07/B12的追溯修订。原B03的采集顺序继续保留：原始高斯样本及old log-probability写入buffer，独立裁剪副本进入环境，真实终止转移先储存再reset，之后才进行原有更新。
+
+五、比较器强度应面对新结果，不能靠事后换权重或抬高初始门槛维持结论
+
+新SET应作为唯一预写的主对照。B12 T6的较高水平仍是重要历史参照，但不是本次SET必须达到的分数门槛，也不能在新SET成绩不方便时替换它。否则，这个新学习区组又会退回结果选择的旧权重比较。
+
+同样，H6新结果不利时不能换回B07；初始分数不理想时不能换seed；两臂都必须按已固定安排完成，不能因先完成的一臂看起来有利或不利决定第二臂是否值得执行。技术失败与科学不利结果分别处理，不把缺失臂补零、换成旧资产或自动重跑。
+
+hmasd-pro-question-b13-fresh-ma…
+
+“匹配”应具体指向共同N6任务、共同外生训练场景、360k团队步、相同评价世界／阶段、低层PPO与动作合同，而非所有学习因素相同。H6保留协调器、技能条件化和判别目标；SET保留中心快照set actor及当前局部反馈。R/6是共同的外部任务scalar，不是两包完整低层奖励目标相等的声明。表示、带宽、额外目标与计算仍是包的一部分。
+
+本次有一份真实训练的普通比较器，且当前配方已有实际服务证据，这足以支持这个有范围探索；它不是“普通方法已充分调优”的认证。新SET若表现较差，仍是有效的训练结果，应保留，而不是因不够强被删掉；但较差实例也不能单独承担对普通方法类别的强否定。
+
+六、预测与结果分支：新终点、自身增量、N6及局部代价分别判读
+
+工作预测保留为：新H6在final45的N8 J与实际服务S高于新SET，同时两臂各自取得有用的初末增量。 E/U用于说明服务由哪些实际资格与连接后果构成，不预设必须通过同一中间路径获益。无需新增sigma下降、标签多样性提高或所有质量／高度分量都同向的条件。
+
+新区组的原生观察	应改变的判断
+H6有用自身增量、SET也有用学习，H6在N8仍有实质J／服务优势	支持新训练过程重新产生了有用包结果，而不只是保留旧权重较好。提高继续研究该包可靠用途的理由；不要求 I
+H
+	​
+
+>I
+S
+	​
+
+，不自动进入确认
+两包都学习有用，但新SET消除或反转N8差距	降低进一步重复未修改H6配方的相对用途理由；保留H6自身学习事实与旧正结果。不能据此说H6没有学会服务
+H6最终领先，但自身没有有用改进	保留终点水平，原先“新训练提供有用改进”的预测未获支持。不能用正的相对差掩盖自身无益，更不能自动诊断初始化缺陷
+H6领先且自身改善，但SET出现实质自身损失	分别保留H6增量、SET损失和包差；这不是两包联合学习预测的完整兑现，普通比较器的当前有限学习问题应成为解释重点，而非宣称技能已获验证
+N8均值优势伴随N6、部分世界或服务分量的重要损失	保留限定用途与代价，不用跨N新权重、剔除世界或换checkpoint恢复“成功”。正均值可以成立，整体采用仍可能不值得
+微小、相反或不清楚的结果	保留不确定性，不以不显著作等价，不因符号不清楚自动增加seed、世界或训练时长
+
+N6应同时报告两种不同后果：H6相对SET的final45差，以及每包相对自身初始化的变化。前者为正而某包自身退化，在逻辑上完全可能。N8是两包都未训练过的数量；N6是训练数量，但两者的原始分数差不等于纯人数效应。也不要求 D
+45,8
+	​
+
+>D
+45,6
+	​
+
+ 才允许N8用途成立。
+
+局部结果至少保留每世界的J与服务配对损失、它们的中位数与范围，以及每个策略的最低绝对J／服务。不能把“较高最低服务”用来否认某个世界的大损失，也不能把一个不利世界当作平均收益不存在的证据。B13没有建立尾部接受区域，新实验也不应在看完数据后发明一个。
+
+initial和final在同一开发世界上的逐世界配对有用，但它们不是更多训练样本。本次仍是每臂一个新训练实例；加上旧的两个H6、B13的四角表和大量世界，也不能把这个经过开发选择的新协议重新命名为确认。现行方法明确区分这些证据层次。
+
+七、mixed-N是不同的两fit用途；当前不需要同时购买
+
+若目标改为“让一份普通SET在N6/N8都尽量好用”，我会把新N6-only SET对新mixed-N6/8 SET视为最强替代，而不是要求它先等待本比较成功。它直接承担普通宽条件学习的收益／代价问题，且不需要H6一定获胜。
+
+但当前B12反号没有识别出“缺少N8经验”这一故障，B13又刚观察到面对较强普通实例仍然存在的包用途。mixed-N不会回答该用途能否由新的H6／SET训练重新产生；它增加了条件调度和每条件曝光的变化。等额360k混合只给每个N180k团队步，实际agent rows和优化器组织也应按调度计算，不能沿用全N6的工作计数。
+
+hmasd-pro-question-b13-fresh-ma…
+
+因此，本轮选择新两包学习，不是宣布mixed-N无效或永远次优。它只是当前更直接地约束“剩余完整包用途值得怎样继续投入”。若这已经不是决策者要回答的问题，应直接改选混合训练，而不是为完成研究序列继续运行本题。
+
+原方案的成本核算成立：
+
+项目	新H6	新SET	合计
+Fits	1	1	2
+训练团队步	360,000	360,000	720,000
+训练UAV行	2,160,000	2,160,000	4,320,000
+Initial＋final评价团队步	64,000	64,000	128,000
+评价episodes	128	128	256
+评价批量策略步调用	2,000	2,000	4,000
+
+每臂45次完整rollout更新，actor和critic各101,250次optimizer calls；H6另有675次协调器、675次团队判别器、2,700次个体判别器更新。两臂合计45,000次训练批量策略调用，848k总团队交互。初始评价相比final-only多出的64k是有目的的测量成本；团队步比例不能用作耗时比例。
+
+hmasd-pro-question-b13-fresh-ma…
+
+另有一项应补充的推理成本：SET没有高层学习，不等于其当前执行路径没有协调器前向。 B13的SET面板实际记录每面板50次单类别协调器调用及顺序解码，并有50次snapshot刷新。按同一路径，本次SET四个评价面板也预计有200次这类调用；应与H6的200次、各自内部解码和snapshot工作分别记录，不能只列H6便把SET这一部分视为零。它不改变fit或团队步预算，也不是本轮顺便删掉该路径的理由。
+
+旧H6／SET的61.825780与81.932786分钟包含不同评价安排和运行条件，只作历史规模参照；当前wall、峰值资源和支持成本尚未测量。准备、针对性检查／独立审阅、收集和阅读都是额外工作。检查应覆盖新阶段绑定、真实初始化、评价隔离和两臂完整采集—存储—更新路径，不要求再演练整个历史或增加一个按分数选取的pilot。
+
+八、实际读取范围与结论边界
+
+本次阅读全文使用附件及固定问题SHA ff660189f27850ad94e32ec4463bfcc389b39de8，而不是移动分支的后续内容。已读取B13完整完成条目、前次 ordinary-control-strength-after-b12 的完整Answer、采纳及B13前瞻合同；读取八份B13面板的原生数组、身份／恢复／执行字段，完整config及summary相关资产与恢复记录。治理、方法和共享背景采用指定 92c2238321ce7daba4b9231df865536ef32a9d9a，其中DM1计划与B13结果的范围一致，不把新建议当作已有执行。
+
+实现判断来自指定版本的B07、B11、B12、B03相关构造／采集／评价代码，以及configuration.py、models.py。没有加载二进制检查点或NPZ转移，没有独立重做DM的全部字节／数值审计，也没有运行技术测试、策略前向、环境评价或训练。 B13总体审计和a01零曝光是已发表的DM验证事实，不冒称本轮重新验证。
+
+尚未产生的是新入口、真实新初始化、完整训练后的原生结果和实际运行成本；因此当前支持的是这个有范围的设计与投资判断，不是新协议已经通过运行验证。已有源代码足以确认可复用路径和必须解除的绑定，没有发现要求增加第三臂、强制跨架构张量一致或先做另一个机制实验的关键缺口。
+
+MATERIAL_DISSENT: no。 我接受两个新fit、共同外生训练地址和对称initial/final评价。必要收紧是：将“新产生的终点用途”“各包自身学习增量”和“差距变化”分开；把初始评价的训练环境／RNG隔离落实到实际路径；保留架构特定初始化及完整包差异；不以旧最佳权重、初始分数筛选或SET的退化来制造完整成功。该方案能提高或降低继续投入未修改H6包的理由，但不自动产生下一块训练、确认或技能机制结论。
+
+## 2026-09-23 — B13 advice adopted: fixed B14 fresh H6/SET learning block and L0
+
+### Scientific choice and response
+
+The DM adopts B14, one new two-arm learning block. Pro has MATERIAL_DISSENT: no, with material
+reading/implementation refinements; agreement is advice, not new empirical evidence or permission.
+The B13 claims match the already verified panels. Its additional SET-cost correction is confirmed
+in `panel_s1_n8.json` and `panel_s2_n6.json`: each has 50 single-category batched coordinator calls,
+1,600 lane assignments and 50 snapshot refresh steps. Disabled high-level learning is not zero
+inference work. We will count this for both arms, without altering the old execution path.
+
+Current controls/background were refreshed at `92c2238321ce7daba4b9231df865536ef32a9d9a`:
+this direction is active with this DM; owner pause lifted; Claude FSD/G33 separately paused/frozen.
+The RESEARCH B13 stronger ordinary-control topic and B11/B12 reversal inform this choice. No
+new shared scientific conclusion follows solely from advice. The owner's continuation and
+2026-09-23 autonomy amendment cover the choice; no other task is contacted.
+
+B13 strengthens the reason to test newly produced complete-package learning and weakens the
+weak-S1-only account of the retained assets' mean gains. Training repeatability, ordinary tuning
+sufficiency, new-world usefulness and skill causality remain unresolved. Entropy/target-N reversals
+and all B13 local losses remain contrary evidence. Fixed new fits challenge favorable old endpoint
+selection. Mixed-N ordinary training is a useful competing investment, but changes condition
+exposure and does not resolve this remaining package-learning question; it is not added here.
+
+For J and actual service S, at each N, keep three readings separate:
+D45 = H45 - SET45; I_a = a45 - a0 for each arm; Delta = D45-D0 = I_H-I_SET.
+The identity is not a causal decomposition. Predict positive final N8 J/S gaps and positive own
+N8 J/S increments for both arms; read magnitude and costs in native units, without a posthoc
+success cutoff. I_H need not exceed I_SET. Final H6 leadership without own useful improvement
+fails the learned-improvement prediction. Leadership with SET deterioration does not fulfill the
+joint-learning prediction. Both arms improving while SET erases/reverses the gap lowers priority
+for unchanged H6 fits. Report N6 final gaps AND each arm's own N6 change, all per-world J-or-S
+losses, medians/ranges and absolute minima. Small/mixed effects remain uncertain. No outcome
+automatically adds seeds, worlds, training or confirmation. Pro did not reload binary artifacts
+or run tests; its support is for design, not nonexistent B14 execution.
+
+### Fixed B14 prospective contract
+
+- Object `s1_fresh_learning_b14`. Two fresh fits, sequential H6 then SET, completed regardless
+  of first-arm scores subject to actual technical failure/resource admission/owner pause.
+  Fixed cells/tags: `h6` / `s1_fresh_learning_b14_h6_s974201`,
+  `set` / `s1_fresh_learning_b14_set_s974201`. Both nominal learning seed 974201; no old weights.
+- Native S1 uniform/free-space, 50 users, c10, fixed k10 and roster; actual N6 training,
+  16 lanes x500 steps x45 rollouts =360k team/2.16M physical UAV rows per arm. CPU float32,
+  Torch4, BLAS/OpenMP1 on configured primary `wsl_4070`. Retain B07 H6 and B11/B12 SET
+  architecture widths, PPO/GRU/masks, normalizers and native learning objectives. Constant
+  low-level entropy .05; external scalar R/6 does not equalize total intrinsic objectives.
+- Create training environments at lane bases 1974200..1974215, then seed learning RNG974201.
+  H6 uses native construction. SET uses fresh canonical-N6 synchronization with fresh target
+  optimizer/buffer/sampler ownership and canonical post-init RNG. Record actual tensors,
+  normalizers and RNG identities; no cross-architecture copying or equal-RNG-consumption claim.
+  Record actual per-lane reset scenes/states/observations throughout each fit to verify common
+  exogenous initial scenes after both runs. Read-only instrumentation consumes no extra RNG.
+- Store raw Gaussian actions and original old log-probs; send independent clip[-1,1] copies
+  to the environment. Store true terminal successors before reset, preserve recurrent replay,
+  and perform one original update after each complete rollout. Retain original package
+  differences: H6 skill/coordinator/discriminator paths; SET snapshot/current-local paths.
+- Save actual checkpoint00 and checkpoint45. Each stage evaluates N8 then N6 on the SAME
+  exposed development worlds 1645800..1645831 and1645600..1645631, world-base+51 eval RNG,
+  32 lanes x500, deterministic mean-then-clip. Explicit stage0/45 metadata, exposure and
+  filenames; do not use B07's stage-dependent world formula or B11's hardcoded final45 naming.
+  Each stage follows its own closed-loop path from complete reset using its own normalizers.
+- Evaluation uses independent targets/environments and protects all training RNG/state:
+  parameters/normalizers/mode, hidden state/skills/timers/snapshots, buffer/sampler/optimizers,
+  plus training environment state/RNG/reset sequence. Targets evolve native runtime normally;
+  zero evaluation storage/updates. A reduced actual-path with/without-initial-evaluation check
+  verifies isolation, not merely zero optimizer calls. Do not train an evaluation object.
+- Retain config/source identities, initialization evidence, both checkpoints, complete
+  training/update logs and movement/counts, stage/N summaries and full numerical native
+  traces. Native J=N*scalar_return/500=.7*C+.3*Q-P; S=50*C and U=E-S. Eligibility/connections,
+  height/quality, raw/executed actions and state/observation traces follow B11/B13 semantics.
+  Eight total panels only; no intermediate15/30, N4, new worlds, old-policy comparator
+  execution, replacement seed, added arm or extension. This is exploratory n=1/arm.
+
+Cost: 2 fits; 720k train team/4.32M UAV rows; 128k eval team/896k UAV steps, 256 eval episodes,
+4,000 batched eval policy calls;848k total team interactions. Each arm:45 updates, actor and
+critic101,250 optimizer calls each. H6 additionally675 coordinator,675 team-discriminator,
+2,700 individual-discriminator optimizer calls; SET zero for these modules. Record actual
+training inference work separately. Each arm's four eval panels expect200 batched coordinator
+calls/6,400 lane assignments,200 team decoder calls/6,400 rows,1,400 individual decoder
+calls/44,800 rows. SET also200 snapshot refresh steps/6,400 lane refreshes. These are actual
+one-category calls too. Record command/run wall, CPU time and RSS scope; mark unmeasured
+scratch/other resources honestly. Old61.83/81.93-minute walls are logistical context, neither
+equal-work evidence nor stopping quotas. Technical fixtures select no scientific recipe/seed.
+Preserve failed attempts and actual exposure; no automatic or blind admitted-operation retry.
+
+### L0 — finite B14 two-arm runner
+
+Deliverable: candidate-local two-cell fit entry with symmetric stage-aware native evaluation,
+initialization/RNG isolation and the output contract above. Reuse B03 collection, B07 H6
+semantics and B11/B12 SET/native-trace helpers where applicable; own the changed flow locally.
+Do not mutate imported constants or monkeypatch frozen production modules. Remove B07's
+irrelevant B05 result dependency and old bindings. Do not masquerade stage0 as final45.
+
+Owned NEW paths:
+`experiments/candidates/agent_count_generalization/fresh_learning_b14/{__init__.py,runner.py}`,
+`scripts/run_agent_count_fresh_learning_b14.py`, and
+`tests/experiments/candidates/agent_count_generalization/fresh_learning_b14/test_runner.py`.
+CLI binds cell/seed/exact output tag/launch SHA; admission precedes all scientific effects.
+No production bypass/resume. No changes to core, adapter, models, frozen B03/B07/B11/B12/B13,
+NOTES/RESEARCH, other directions or the Git index by Implementer. Hash actual source dependencies
+before/after; do not acquire old run inputs. DM owns records, decisions and publication.
+
+Focused checks: both real reduced collect-store-update paths (raw/logprob storage, clipped
+execution, terminal successor/reset/masks); seed into actual constructor/config/sampler and
+independent environment worlds; native H6/canonical SET initialization and optimizer ownership;
+exact original optimizer exposure/movement; symmetric stage/N panel scenes/metadata/files;
+learner AND training-environment/global/sampler RNG isolation with/without initial evaluation;
+zero eval storage/updates and actual inference/snapshot counts; required outputs/source identity;
+CLI admission ordering and wrong seed/tag/sha refusal; failure accounting from actual transitions.
+Use existing pytest scratch lifecycle/scientific interpreter; no production-sized pilot. Independent
+Reviewer checks exact bytes and state/exposure risks; DM accepts before publishing inputs and
+fresh native admission. Implementation cost0 scientific fits/panels/launches; no scientific
+choice, Pro send, helper child, cross-task message, commit or launch by Implementer. Report genuine
+scope/state/interface conflicts with evidence; ordinary bounded implementation choices proceed.

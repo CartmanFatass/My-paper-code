@@ -1,0 +1,1022 @@
+{
+  "status": "complete",
+  "asset_key": "s2",
+  "arm": "SET",
+  "seed": 963401,
+  "policy_stage": 45,
+  "prior_training_team_steps": 360000,
+  "test_n": 8,
+  "world_seeds": [
+    1645800,
+    1645801,
+    1645802,
+    1645803,
+    1645804,
+    1645805,
+    1645806,
+    1645807,
+    1645808,
+    1645809,
+    1645810,
+    1645811,
+    1645812,
+    1645813,
+    1645814,
+    1645815,
+    1645816,
+    1645817,
+    1645818,
+    1645819,
+    1645820,
+    1645821,
+    1645822,
+    1645823,
+    1645824,
+    1645825,
+    1645826,
+    1645827,
+    1645828,
+    1645829,
+    1645830,
+    1645831
+  ],
+  "runtime_seed": 1645851,
+  "construction_seed": 17,
+  "steps": 16000,
+  "episodes": 32,
+  "resets": 32,
+  "policy_step_calls": 500,
+  "J": [
+    0.3866375253935981,
+    0.4072301023303958,
+    0.37905809266125406,
+    0.37900035773666335,
+    0.398139173723116,
+    0.4454263791686643,
+    0.442244611527378,
+    0.36443367641303454,
+    0.41752853478923907,
+    0.43832055513160184,
+    0.404834511128666,
+    0.39104026414297294,
+    0.5412704852706877,
+    0.4441049749150012,
+    0.4297453187455305,
+    0.39226677446752933,
+    0.45305496389521954,
+    0.38754279776203865,
+    0.3601743501329032,
+    0.4203293786914899,
+    0.46750973566087795,
+    0.4023173132542099,
+    0.41033873506532226,
+    0.3838168800889109,
+    0.36914206627119533,
+    0.30112014211656307,
+    0.4220979861637573,
+    0.3816237181726258,
+    0.3816959482559533,
+    0.3862013876067908,
+    0.3874050018349932,
+    0.4002629122198146
+  ],
+  "scalar_returns": [
+    24.16484533709988,
+    25.45188139564974,
+    23.69113079132838,
+    23.68752235854146,
+    24.88369835769475,
+    27.83914869804152,
+    27.640288220461123,
+    22.77710477581466,
+    26.095533424327442,
+    27.395034695725116,
+    25.302156945541622,
+    24.44001650893581,
+    33.82940532941798,
+    27.756560932187575,
+    26.85908242159566,
+    24.516673404220583,
+    28.31593524345122,
+    24.221424860127417,
+    22.51089688330645,
+    26.27058616821812,
+    29.21935847880487,
+    25.144832078388117,
+    25.646170941582643,
+    23.988555005556933,
+    23.07137914194971,
+    18.82000888228519,
+    26.38112413523483,
+    23.85148238578911,
+    23.855996765997084,
+    24.137586725424423,
+    24.212812614687074,
+    25.016432013738413
+  ],
+  "component_means": {
+    "coverage_reward": [
+      0.4962799999999998,
+      0.52444,
+      0.4873599999999999,
+      0.4988399999999998,
+      0.5071199999999995,
+      0.5588000000000012,
+      0.5695999999999991,
+      0.48340000000000016,
+      0.5444799999999996,
+      0.5691599999999994,
+      0.5167200000000005,
+      0.5146800000000004,
+      0.692000000000001,
+      0.5700400000000004,
+      0.5411199999999995,
+      0.5115999999999997,
+      0.5856399999999988,
+      0.49404,
+      0.4620000000000004,
+      0.5375599999999998,
+      0.60948,
+      0.5112800000000005,
+      0.5300000000000005,
+      0.5004000000000002,
+      0.47567999999999994,
+      0.38371999999999995,
+      0.54168,
+      0.4978000000000005,
+      0.4664799999999999,
+      0.4829600000000009,
+      0.49756000000000017,
+      0.5272400000000006
+    ],
+    "quality_reward": [
+      0.16540337663248084,
+      0.1627540463020475,
+      0.15444576315894068,
+      0.1579076980388945,
+      0.17669957065020944,
+      0.19404771609358135,
+      0.16603710406632172,
+      0.15365699902983426,
+      0.16084273587098766,
+      0.16884009257846316,
+      0.17256464101550836,
+      0.1602658176047147,
+      0.19512441376342676,
+      0.17976651775385433,
+      0.19580495833876102,
+      0.16124974794189223,
+      0.1729138072843342,
+      0.16756565811700674,
+      0.16034832300565666,
+      0.17478797905148777,
+      0.15474395100040814,
+      0.17121360317116416,
+      0.1743220122828706,
+      0.1570024222413481,
+      0.15876330565979377,
+      0.18189412873386054,
+      0.1733483597403689,
+      0.16334944917612648,
+      0.20174136892309932,
+      0.19498636499997063,
+      0.170917820420495,
+      0.16492150324851232
+    ],
+    "energy_penalty": [
+      0.010379487596146394,
+      0.008704111560218464,
+      0.008427636286428163,
+      0.017559951675005174,
+      0.009854697471946665,
+      0.003947935659410228,
+      0.00628651969251814,
+      0.020043423295915675,
+      0.011860285972057212,
+      0.010743472641937006,
+      0.008638881175986872,
+      0.017315481138441318,
+      0.0016668388583407064,
+      0.008852980411155372,
+      0.00778016875609743,
+      0.014228149915037987,
+      0.008767178290081062,
+      0.008554899673063703,
+      0.011330146768793535,
+      0.00839901502395613,
+      0.005549449639244704,
+      0.006942767697139597,
+      0.012957868619539127,
+      0.013563846583493475,
+      0.011462925426743315,
+      0.022052096503594944,
+      0.009082521758353865,
+      0.015841116580212356,
+      0.0053624624209766625,
+      0.010366521893200545,
+      0.012162344291155086,
+      0.01828153875473842
+    ],
+    "total_reward": [
+      0.3866375253935981,
+      0.4072301023303958,
+      0.37905809266125406,
+      0.37900035773666335,
+      0.398139173723116,
+      0.4454263791686643,
+      0.442244611527378,
+      0.36443367641303454,
+      0.41752853478923907,
+      0.43832055513160184,
+      0.404834511128666,
+      0.39104026414297294,
+      0.5412704852706877,
+      0.4441049749150012,
+      0.4297453187455305,
+      0.39226677446752933,
+      0.45305496389521954,
+      0.38754279776203865,
+      0.3601743501329032,
+      0.4203293786914899,
+      0.46750973566087795,
+      0.4023173132542099,
+      0.41033873506532226,
+      0.3838168800889109,
+      0.36914206627119533,
+      0.30112014211656307,
+      0.4220979861637573,
+      0.3816237181726258,
+      0.3816959482559533,
+      0.3862013876067908,
+      0.3874050018349932,
+      0.4002629122198146
+    ]
+  },
+  "service_arrays": {
+    "E_eligible_users_per_step": [
+      24.954,
+      26.468,
+      24.376,
+      25.154,
+      25.706,
+      28.732,
+      28.658,
+      24.43,
+      27.924,
+      28.566,
+      26.204,
+      25.932,
+      34.636,
+      28.77,
+      27.088,
+      26.272,
+      29.586,
+      24.824,
+      23.364,
+      26.948,
+      30.574,
+      26.01,
+      26.602,
+      25.078,
+      24.654,
+      20.662,
+      27.146,
+      25.23,
+      23.934,
+      26.482,
+      24.918,
+      26.394
+    ],
+    "S_served_users_per_step": [
+      24.814,
+      26.222,
+      24.368,
+      24.942,
+      25.356,
+      27.94,
+      28.48,
+      24.17,
+      27.224,
+      28.458,
+      25.836,
+      25.734,
+      34.6,
+      28.502,
+      27.056,
+      25.58,
+      29.282,
+      24.702,
+      23.1,
+      26.878,
+      30.474,
+      25.564,
+      26.5,
+      25.02,
+      23.784,
+      19.186,
+      27.084,
+      24.89,
+      23.324,
+      24.148,
+      24.878,
+      26.362
+    ],
+    "U_eligible_unserved_users_per_step": [
+      0.14,
+      0.246,
+      0.008,
+      0.212,
+      0.35,
+      0.792,
+      0.178,
+      0.26,
+      0.7,
+      0.108,
+      0.368,
+      0.198,
+      0.036,
+      0.268,
+      0.032,
+      0.692,
+      0.304,
+      0.122,
+      0.264,
+      0.07,
+      0.1,
+      0.446,
+      0.102,
+      0.058,
+      0.87,
+      1.476,
+      0.062,
+      0.34,
+      0.61,
+      2.334,
+      0.04,
+      0.032
+    ]
+  },
+  "optimizer_calls": {
+    "coordinator": 0,
+    "discoverer_actor": 0,
+    "discoverer_critic": 0,
+    "team_discriminator": 0,
+    "individual_discriminator": 0
+  },
+  "training_storage_calls": 0,
+  "rollout_storage_env_lengths": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "frozen_weights_and_normalizers": true,
+  "parameter_normalizer_digest_before": "c1e408b4ae8eb55e02463ab641b16e02aa7ac165a9556a2275333ce1ab4e9ffb",
+  "parameter_normalizer_digest_after": "c1e408b4ae8eb55e02463ab641b16e02aa7ac165a9556a2275333ce1ab4e9ffb",
+  "restored_digest_matches_original_final": true,
+  "normalizers_before": {
+    "obs_norm": null,
+    "state_norm": null,
+    "value_norm_coordinator": {
+      "type": "RunningMeanStd",
+      "fields": {
+        "mean": {
+          "dtype": "float64",
+          "shape": [],
+          "value": 0.0
+        },
+        "var": {
+          "dtype": "float64",
+          "shape": [],
+          "value": 1.0
+        },
+        "count": {
+          "dtype": "float64",
+          "shape": [],
+          "value": 0.0001
+        }
+      }
+    },
+    "value_norm_discoverer": {
+      "type": "RunningMeanStd",
+      "fields": {
+        "mean": {
+          "dtype": "float64",
+          "shape": [],
+          "value": 4.3419216034786405
+        },
+        "var": {
+          "dtype": "float64",
+          "shape": [],
+          "value": 3.8674630644359924
+        },
+        "count": {
+          "dtype": "float64",
+          "shape": [],
+          "value": 2160000.0001
+        }
+      }
+    }
+  },
+  "normalizers_after": {
+    "obs_norm": null,
+    "state_norm": null,
+    "value_norm_coordinator": {
+      "type": "RunningMeanStd",
+      "fields": {
+        "mean": {
+          "dtype": "float64",
+          "shape": [],
+          "value": 0.0
+        },
+        "var": {
+          "dtype": "float64",
+          "shape": [],
+          "value": 1.0
+        },
+        "count": {
+          "dtype": "float64",
+          "shape": [],
+          "value": 0.0001
+        }
+      }
+    },
+    "value_norm_discoverer": {
+      "type": "RunningMeanStd",
+      "fields": {
+        "mean": {
+          "dtype": "float64",
+          "shape": [],
+          "value": 4.3419216034786405
+        },
+        "var": {
+          "dtype": "float64",
+          "shape": [],
+          "value": 3.8674630644359924
+        },
+        "count": {
+          "dtype": "float64",
+          "shape": [],
+          "value": 2160000.0001
+        }
+      }
+    }
+  },
+  "runtime_digest_before": "728113b817f28c38e611a4a6cb104fdfc99899c36080edab9fecced05eb4d2cb",
+  "runtime_digest_after": "9398ed4c2c2c21aad99063dc9c0a7606bb48b5aeed4ab01d1ee5a93e744c4800",
+  "runtime_evolved": true,
+  "executed_action_bounds": {
+    "minimum": -1.0,
+    "maximum": 1.0
+  },
+  "inference_counts": {
+    "coordinator_batched_calls": 50,
+    "coordinator_rows": 1600,
+    "coordinator_batch_sizes": [
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32
+    ],
+    "decoder_team_calls": 50,
+    "decoder_team_rows": 1600,
+    "decoder_individual_calls": 400,
+    "decoder_individual_rows": 12800,
+    "team_selections": 1600,
+    "individual_selections": 12800,
+    "team_choice_counts": [
+      1600
+    ],
+    "individual_choice_counts": [
+      12800
+    ],
+    "set_snapshot_refresh_steps": 50,
+    "set_snapshot_lane_refreshes": 1600
+  },
+  "trace": {
+    "path": "/home/wu/projects/HMASD/runs/agent_count_generalization/s1_ordinary_control_b13_a02/trace_s2_n8.npz",
+    "native_relative_path": "trace_s2_n8.npz",
+    "sha256": "2ed3e0ead1717f1e36dca74f515ffdbb4a36b7d1b7a7d5abf87c88dc43d2b7dd",
+    "bytes": 15327802,
+    "format": "NumPy npz with allow_pickle=False",
+    "arrays": {
+      "scalar_reward": {
+        "shape": [
+          500,
+          32
+        ],
+        "dtype": "float64"
+      },
+      "coverage_reward": {
+        "shape": [
+          500,
+          32
+        ],
+        "dtype": "float64"
+      },
+      "quality_reward": {
+        "shape": [
+          500,
+          32
+        ],
+        "dtype": "float64"
+      },
+      "energy_penalty": {
+        "shape": [
+          500,
+          32
+        ],
+        "dtype": "float64"
+      },
+      "total_reward": {
+        "shape": [
+          500,
+          32
+        ],
+        "dtype": "float64"
+      },
+      "eligible_links": {
+        "shape": [
+          500,
+          32,
+          8,
+          50
+        ],
+        "dtype": "bool"
+      },
+      "connections": {
+        "shape": [
+          500,
+          32,
+          8,
+          50
+        ],
+        "dtype": "bool"
+      },
+      "per_uav_eligible_counts": {
+        "shape": [
+          500,
+          32,
+          8
+        ],
+        "dtype": "int16"
+      },
+      "per_uav_connection_counts": {
+        "shape": [
+          500,
+          32,
+          8
+        ],
+        "dtype": "int16"
+      },
+      "eligible_user_counts": {
+        "shape": [
+          500,
+          32
+        ],
+        "dtype": "int16"
+      },
+      "served_user_counts": {
+        "shape": [
+          500,
+          32
+        ],
+        "dtype": "int16"
+      },
+      "eligible_unserved_user_counts": {
+        "shape": [
+          500,
+          32
+        ],
+        "dtype": "int16"
+      },
+      "connected_quality_sum": {
+        "shape": [
+          500,
+          32
+        ],
+        "dtype": "float64"
+      },
+      "uav_heights": {
+        "shape": [
+          500,
+          32,
+          8
+        ],
+        "dtype": "float64"
+      },
+      "initial_states": {
+        "shape": [
+          32,
+          133
+        ],
+        "dtype": "float32"
+      },
+      "initial_observations": {
+        "shape": [
+          32,
+          8,
+          104
+        ],
+        "dtype": "float32"
+      }
+    }
+  },
+  "config": {
+    "count_arm": "SET",
+    "algorithm": "mappo",
+    "n_agents": 8,
+    "n_uavs": 8,
+    "n_users": 50,
+    "num_envs": 32,
+    "rollout_length": 500,
+    "episode_length": 500,
+    "k": 10,
+    "n_Z": 1,
+    "n_z": 1,
+    "state_dim": 133,
+    "obs_dim": 104,
+    "action_dim": 3,
+    "action_space_type": "continuous",
+    "gamma": 0.99,
+    "gae_lambda": 0.95,
+    "ppo_epochs": 15,
+    "num_mini_batch": 4,
+    "sequence_batch_size": 32,
+    "coordinator_batch_size": 1280,
+    "high_level_batch_size": 128,
+    "high_level_buffer_size": 1600,
+    "batch_size": 32000,
+    "discriminator_batch_size": 32000,
+    "lambda_e": 1.0,
+    "lambda_D": 0.0,
+    "lambda_d": 0.0,
+    "lambda_h": 0.0,
+    "lambda_l": 0.05,
+    "lambda_cd": 0.0,
+    "lambda_mi": 0.0,
+    "lr_coordinator": 0.0001,
+    "lr_discoverer_actor": 0.0001,
+    "lr_discoverer_critic": 0.0001,
+    "lr_discriminator": 0.0001,
+    "weight_decay": 0.0,
+    "clip_epsilon": 0.2,
+    "value_loss_coef": 1.0,
+    "max_grad_norm": 0.5,
+    "hidden_size": 256,
+    "embedding_dim": 256,
+    "n_heads": 8,
+    "n_encoder_layers": 2,
+    "n_decoder_layers": 2,
+    "gru_hidden_size": 256,
+    "use_valuenorm": true,
+    "use_obsnorm": false,
+    "use_statenorm": false,
+    "use_lr_decay": false,
+    "total_timesteps": 360000,
+    "seed": 963401,
+    "policy_interruption_mode": "off",
+    "use_central_snapshot_in_flat_actor": true,
+    "disable_high_level_training": true,
+    "disable_discriminator_training": true,
+    "disable_discriminator_rewards": true,
+    "collects_high_level_samples": false,
+    "use_process_exploration": false,
+    "use_horizon_window": false,
+    "use_opt_compact": false,
+    "lambda_l_initial": 0.05,
+    "lambda_l_final": 0.05,
+    "use_entropy_annealing": false,
+    "use_entropy_targets": false
+  },
+  "post_transition_semantics": true,
+  "actual_sinr_threshold": 0.0,
+  "max_connections_per_uav": 10,
+  "height_range": [
+    50.0,
+    150.0
+  ],
+  "n_users": 50,
+  "original_reproduction": {
+    "atol": 1e-07,
+    "rtol": 1e-06,
+    "continuous_rule": "numpy allclose over CPU float32 outputs accumulated in float64",
+    "exact_rule": "numpy array_equal for initial_states, initial_observations, and every integer/boolean trace",
+    "panel_arrays": {
+      "J": {
+        "match": true,
+        "shape": [
+          32
+        ],
+        "max_abs_difference": 0.0,
+        "rule": "numpy allclose atol=1e-07 rtol=1e-06"
+      },
+      "scalar_returns": {
+        "match": true,
+        "shape": [
+          32
+        ],
+        "max_abs_difference": 0.0,
+        "rule": "numpy allclose atol=1e-07 rtol=1e-06"
+      },
+      "component_means.coverage_reward": {
+        "match": true,
+        "shape": [
+          32
+        ],
+        "max_abs_difference": 0.0,
+        "rule": "numpy allclose atol=1e-07 rtol=1e-06"
+      },
+      "component_means.quality_reward": {
+        "match": true,
+        "shape": [
+          32
+        ],
+        "max_abs_difference": 0.0,
+        "rule": "numpy allclose atol=1e-07 rtol=1e-06"
+      },
+      "component_means.energy_penalty": {
+        "match": true,
+        "shape": [
+          32
+        ],
+        "max_abs_difference": 0.0,
+        "rule": "numpy allclose atol=1e-07 rtol=1e-06"
+      },
+      "component_means.total_reward": {
+        "match": true,
+        "shape": [
+          32
+        ],
+        "max_abs_difference": 0.0,
+        "rule": "numpy allclose atol=1e-07 rtol=1e-06"
+      }
+    },
+    "numeric_trace_arrays": {
+      "scalar_reward": {
+        "match": true,
+        "shape": [
+          500,
+          32
+        ],
+        "max_abs_difference": 0.0,
+        "rule": "numpy allclose atol=1e-07 rtol=1e-06"
+      },
+      "coverage_reward": {
+        "match": true,
+        "shape": [
+          500,
+          32
+        ],
+        "max_abs_difference": 0.0,
+        "rule": "numpy allclose atol=1e-07 rtol=1e-06"
+      },
+      "quality_reward": {
+        "match": true,
+        "shape": [
+          500,
+          32
+        ],
+        "max_abs_difference": 0.0,
+        "rule": "numpy allclose atol=1e-07 rtol=1e-06"
+      },
+      "energy_penalty": {
+        "match": true,
+        "shape": [
+          500,
+          32
+        ],
+        "max_abs_difference": 0.0,
+        "rule": "numpy allclose atol=1e-07 rtol=1e-06"
+      },
+      "total_reward": {
+        "match": true,
+        "shape": [
+          500,
+          32
+        ],
+        "max_abs_difference": 0.0,
+        "rule": "numpy allclose atol=1e-07 rtol=1e-06"
+      },
+      "eligible_links": {
+        "match": true,
+        "shape": [
+          500,
+          32,
+          8,
+          50
+        ],
+        "max_abs_difference": 0.0,
+        "rule": "exact array equality"
+      },
+      "connections": {
+        "match": true,
+        "shape": [
+          500,
+          32,
+          8,
+          50
+        ],
+        "max_abs_difference": 0.0,
+        "rule": "exact array equality"
+      },
+      "per_uav_eligible_counts": {
+        "match": true,
+        "shape": [
+          500,
+          32,
+          8
+        ],
+        "max_abs_difference": 0.0,
+        "rule": "exact array equality"
+      },
+      "per_uav_connection_counts": {
+        "match": true,
+        "shape": [
+          500,
+          32,
+          8
+        ],
+        "max_abs_difference": 0.0,
+        "rule": "exact array equality"
+      },
+      "eligible_user_counts": {
+        "match": true,
+        "shape": [
+          500,
+          32
+        ],
+        "max_abs_difference": 0.0,
+        "rule": "exact array equality"
+      },
+      "served_user_counts": {
+        "match": true,
+        "shape": [
+          500,
+          32
+        ],
+        "max_abs_difference": 0.0,
+        "rule": "exact array equality"
+      },
+      "eligible_unserved_user_counts": {
+        "match": true,
+        "shape": [
+          500,
+          32
+        ],
+        "max_abs_difference": 0.0,
+        "rule": "exact array equality"
+      },
+      "connected_quality_sum": {
+        "match": true,
+        "shape": [
+          500,
+          32
+        ],
+        "max_abs_difference": 0.0,
+        "rule": "numpy allclose atol=1e-07 rtol=1e-06"
+      },
+      "uav_heights": {
+        "match": true,
+        "shape": [
+          500,
+          32,
+          8
+        ],
+        "max_abs_difference": 0.0,
+        "rule": "numpy allclose atol=1e-07 rtol=1e-06"
+      },
+      "initial_states": {
+        "match": true,
+        "shape": [
+          32,
+          133
+        ],
+        "max_abs_difference": 0.0,
+        "rule": "exact array equality"
+      },
+      "initial_observations": {
+        "match": true,
+        "shape": [
+          32,
+          8,
+          104
+        ],
+        "max_abs_difference": 0.0,
+        "rule": "exact array equality"
+      }
+    },
+    "source_identities": {
+      "panel": {
+        "path": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/6d2cdf9eff364333ba1ea08a4feb2191/runs/agent_count_generalization/s1_training_recurrence_b12_t6_s963401/panel_45_n8.json",
+        "working_path": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/6d2cdf9eff364333ba1ea08a4feb2191/runs/agent_count_generalization/s1_training_recurrence_b12_t6_s963401/panel_45_n8.json",
+        "working_present": false,
+        "working_bytes": null,
+        "working_sha256": null,
+        "repository_root": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/6d2cdf9eff364333ba1ea08a4feb2191",
+        "relative_path": "runs/agent_count_generalization/s1_training_recurrence_b12_t6_s963401/panel_45_n8.json",
+        "git_locator": "HEAD:runs/agent_count_generalization/s1_training_recurrence_b12_t6_s963401/panel_45_n8.json",
+        "authoritative_source": "git_blob",
+        "committed": true,
+        "sha256": "4aa6151329f33ebd612843b997110449bc3713057f6a48931e7a25c64a900486",
+        "bytes": 21876,
+        "binding": "authoritative HEAD git blob; working file absent from sparse checkout"
+      },
+      "trace": {
+        "path": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/6d2cdf9eff364333ba1ea08a4feb2191/runs/agent_count_generalization/s1_training_recurrence_b12_t6_s963401/trace_45_n8.npz",
+        "working_path": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/6d2cdf9eff364333ba1ea08a4feb2191/runs/agent_count_generalization/s1_training_recurrence_b12_t6_s963401/trace_45_n8.npz",
+        "working_present": false,
+        "working_bytes": null,
+        "working_sha256": null,
+        "repository_root": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/6d2cdf9eff364333ba1ea08a4feb2191",
+        "relative_path": "runs/agent_count_generalization/s1_training_recurrence_b12_t6_s963401/trace_45_n8.npz",
+        "git_locator": "HEAD:runs/agent_count_generalization/s1_training_recurrence_b12_t6_s963401/trace_45_n8.npz",
+        "authoritative_source": "git_blob",
+        "committed": true,
+        "sha256": "2ed3e0ead1717f1e36dca74f515ffdbb4a36b7d1b7a7d5abf87c88dc43d2b7dd",
+        "bytes": 15327802,
+        "binding": "authoritative HEAD git blob; working file absent from sparse checkout"
+      }
+    },
+    "all_match": true
+  },
+  "global_rng_isolation": {
+    "digest_before": "e5f354056ea5ca34173eb11e19262b3dae11d4407147267361ef00d9955438e6",
+    "digest_after": "e5f354056ea5ca34173eb11e19262b3dae11d4407147267361ef00d9955438e6",
+    "preserved": true
+  }
+}
