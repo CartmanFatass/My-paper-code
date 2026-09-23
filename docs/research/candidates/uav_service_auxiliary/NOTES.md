@@ -5621,3 +5621,28 @@ lead and pause lift. Proceed with the already-fixed **R**, same published source
 Its sole training intervention remains the extra `2 * actual return cost`;
 evaluation remains native coefficient2. No observation above changes the
 coefficient, endpoint, exposure or decision to execute this second fit.
+
+## 2026-09-23 — B05 fixed R admitted on the same source
+
+The preselected R fit is **natively accepted and running** on configured4070
+at **2026-09-23T22:11:13.450180Z**, after N's full collection and independent
+acceptance. Source remains **`3de3e3f71c747e2422656126b52ae88beafb562a`**,
+seed914173, CUDA FP32/TF32-off/four threads, with the original frozen N/R
+contract. The kernel refreshed main
+`3d0b52e2841beb57054aa0aca9ac864a6fa430b0`, preserving this lead and pause lift,
+and measured **13,293,408,256 bytes** available physical memory against the
+**4,294,967,296-byte** floor. [Native manifest](../../../../runs/uav_service_auxiliary/b05_r_914173_a01/launch-manifest.json),
+[actual-node preflight](../../../../runs/uav_service_auxiliary/b05_r_914173_a01/admission-preflight.json)
+and [initial native status](../../../../runs/uav_service_auxiliary/b05_r_914173_a01/launch-status.json)
+retain the exact operation, input command and identities. Both scientific child
+and supervisor match the observed live processes; no exit witness exists.
+
+The N READY event has been fully read and consumed at generation68. Detached
+observation of R has adopted this native handle at **generation70**, with a
+1500-second bounded window and no pending events. Preserve the original worker
+and unchanged source. On completion, collect and hash all artifacts, independently
+rescore the original objective, verify the new pair's matched initialization/
+first collection and actual reward/GAE separation, then read both endpoint panels
+and all loss worlds against N and the prewritten recurrence branches. Admission
+does not establish R's scientific result. Current state: **1 completed/accepted
+B05 fit, 1 fixed fit running**, no extra fit, Pro Send or App message.
