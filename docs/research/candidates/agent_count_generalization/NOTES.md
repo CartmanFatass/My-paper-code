@@ -6510,3 +6510,53 @@ focused check output, deviations and risks. DM accepts the change; independent h
 reads learning paths, comparator binding, action/storage law, evaluation/RNG and failure/count
 semantics before launch. Ordinary implementation choices inside this scope need no new owner
 approval. Preserve other edits; stop only dependent work for a material unresolved semantic issue.
+
+## 2026-09-23 — B07 implementation accepted after independent review
+
+DM accepts the four-path implementation under the preceding fixed single-fit L0. The final
+code builds a fresh H6 instance with explicit constant .05 low-level entropy, reuses B03's
+raw-action collection with separate environment clipping, and owns the B05-address evaluator
+and immutable SET comparison. The control checkpoint is hashed without loading tensors;
+the committed summary's source, complete spec and all stage/world panels are checked before
+agent construction. No frozen/shared source or scientific condition changed. This is code
+acceptance; no new production fit has yet been admitted at this entry.
+
+Independent `entropy_b05_review` identified three reachable issues in the first draft:
+nonfinite failure entropy could block final JSON persistence; a second-rollout collection
+failure could attribute previous optimizer calls to that failed rollout; learner evaluation
+isolation was checked but not serialized. The Implementer repaired these with the existing
+finite-safe entropy helper, a collection-time optimizer baseline, and before/after learner
+parameter-normalizer/runtime/global-RNG evidence. B04/B05 reused helper files are included
+in source identity hashing. Final review verified all three repairs and found no remaining
+material production defect. DM inspected the construction, collection, evaluator, comparator,
+failure paths and final hashes, and checked the staged diff. No additional science consultation
+is needed for these implementation repairs; the complete recurrence advice still applies.
+
+Final technical check on the configured local scientific interpreter: compilation passed;
+the focused B07 suite passed **12 tests in5.77s**, with14 existing matplotlib deprecation
+warnings; staged `git diff --check` passed. Tests use owned pytest scratch and a small native
+H6 with a synthetic immutable SET record, not production result evaluations. They exercise
+active H6 updates, raw storage versus clipped execution, explicit constant entropy,
+cross-N zero-update isolation, exact planned exposures, control rejection before training,
+and both failure regressions. No scratch remains from the successful suite. Review reused
+this check rather than repeating an unchanged historical suite.
+
+Test limit retained: the arithmetic test recalculates differences from values copied into
+comparison rows; correct selection of the original SET stage/world panel is established by
+source inspection, not that arithmetic assertion alone. At result reading the DM will also
+derive native J, per-world differences, components and D_U directly from the separately
+collected H6 panels and the fixed original SET summary. No score has been observed for B07,
+and this adds no evaluation, training replicate or scientific selection.
+
+Accepted SHA-256 identities:
+
+| Owned path | SHA-256 |
+| --- | --- |
+| `bounded_package_b07/__init__.py` | `0adfd50e0b1f7e89aad03597d2b37e1796596c3c926633953c9afddbf6baa55f` |
+| `bounded_package_b07/runner.py` | `f0b8813a728e681bbd7fb466565f4bdfa376e0fff6e65656f4d2d6627949cd72` |
+| `scripts/run_agent_count_bounded_package_b07.py` | `aa6b076d03343816ba03ec7669ccb8eee3a3da70b568b5afb3ecac02ac2a1370` |
+| B07 `test_runner.py` | `3183782b2e4eec2c9953c435b480c4908d1b28149adf3a1019dc81a0e6fdaa82` |
+
+Next action is publication of these exact inputs and one fresh native B07 admission. Initial
+technical snapshots may verify identities/counts, but interim scores do not select a checkpoint
+or change the fixed final45 reading, horizon, seed, comparator or prospective outcome branches.
