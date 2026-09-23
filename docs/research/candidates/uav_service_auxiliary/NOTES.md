@@ -3785,3 +3785,122 @@ full S acceptance and second-block G comparison remain unresolved. Continue only
 the original operation's final evaluation/facts/checkpoint work. Consumed the exact
 event and rearmed the same handle at **generation 38**, 1,500-second window; no
 worker restart, early acceptance, new fit or Pro Send.
+
+## 2026-09-22 — B03 second-block S complete acceptance and fixed G continuation
+
+Read generation-38 READY event `8f6d9a8fd9ff5ad19e46b06f`, wake
+`c90612f7-a7a0-49b6-a0dd-e971166089f4`. The original S/912347/a01 runner exited
+at September 23 **05:03:59 UTC**, exit 0, with a valid native witness and consistent
+manifest/claim. Current published main `54306eeb3` retains this DM's active scope
+and no applicable pause. Collected **18 files / 240,761,037 bytes** from the original
+node and independently matched every local byte digest to the remote inventory.
+The complete summary is
+`a158a6d1a59c87456d1ac3e4b39c97372f039897f9420f36da99411b82a7499e`.
+Original node outputs and local ignored NPZ/PT artifacts remain recoverable under
+the same run path; JSON records and this reading are published on the direction
+branch. The run is COMPLETE, failure null and stderr empty. All previously read
+updates, curves, development panels and first-update bindings are unchanged.
+
+Production `verify_run` passes for S, seed 912347, frozen source
+`73be55261b9f5e8f8fe26fdec6558b87ad088fcb`, CUDA/four threads and the exact planned
+specification. Counts are **180k training / 30 updates / 120 training episodes;
+96k evaluation / 64 episodes; 6k new endpoint-fact transitions / four episodes**,
+plus two exactly reused D2 initial-fact episodes / 3k transitions, and 95,424
+readout agent rows. Initial policy, first collection, first native update, facts
+and calibration all match D2. All 65,337 summary/calibration floats and **756
+checkpoint tensors** are finite. Every native group moves on all 30 updates.
+CPU checkpoint readback restores the exact final policy and all native optimizer
+states: high 2,250; actor/critic 67,500 each; team/individual discriminator
+450/1,800, across 91/15/14/24/29 states respectively. Both heads and the active
+representation restore **900 steps**, across 4/4/10 states, with 30 passes and
+exact calibration. The expected empty discriminator-buffer load notice has no
+learning effect. Verification adds no environment transitions or updates.
+
+Both raw factual archives pass schema, metadata, world/arm/policy, shape, finite
+value and terminal-row checks. Independently recomputed float64 W10 service,
+next-observation, persistence and mean-reference errors match all four saved
+readout arrays and both episodes; maximum absolute difference is
+**6.969092358755091e-9**. Sampled feature variance/rank is also independently
+reproduced at all checkpoints. A first local scoring invocation addressed the
+calibration wrapper as if `mu` were top-level; correcting it to the existing nested
+`calibration` schema allowed the remaining checks to pass, without any runner,
+artifact, fit or recipe change. This is now complete acceptance, beyond exit status.
+
+The fixed 32-world final panel gives **S J −4.654721**, QoS **.218006503**, cost
+**.106157679**, throughput **6.540195077**, true episode-minimum battery **.371236728**
+and legacy time-average minimum-battery .572268619. Against D2:
+
+| Final paired reading | S−D |
+| --- | ---: |
+| Native J | **−16.825601** |
+| QoS per step | **−.015771136** |
+| Return-constraint cost per step | **−.002219091** |
+| Throughput Mbps per step | −.473134073 |
+| True episode-minimum battery | **−.013979580** |
+
+World J differences have **19 wins / 13 losses**, median +82.112249, range
+**−2,286.526742 (936017) to +1,466.156753 (936011)**. Preserve the negative mean
+alongside the positive median/win count; the large adverse tail is part of the
+predeclared reading. S has 12/32 absolute negative-J worlds and zero service at
+**936017, 936018 and 936029**. Worst absolute J is −1,815.514824 at 936017; other
+large negatives include 936023 −1,130.430289 and 936024 −929.453651. All final
+worlds truncate at 1,500 with zero optimizer updates, charging, cutoff, depletion
+and charger input. The 32 worlds are not 32 training replications.
+
+The favorable development-30 **S−D +465.355787** reverses on the fixed final
+world panel to **−16.825601** at the same checkpoint. This is panel dependence,
+separate from the temporal development signs +258.113781 / −221.758835 /
++465.355787 at 10/20/30. Preserve all of them. Final initial-fact service MSE
+**.079407301** is 10.913837 times D2 and rises while development J improves late;
+observation MSE **.009724954** is 1.388837 times D2. The full previous entry's
+per-episode errors, low-service training and feature variation remain contrary
+evidence; MSE does not rescue, mediate or substitute for the native endpoint.
+
+Endpoint-fact worlds 933211–933214 give S mean **J −747.679640**, QoS .171197352,
+cost .330353305 and true minimum battery .370174272. Their J values are
+−345.236409 / −1,851.582688 / +683.747077 / −1,477.646543; the second and fourth
+have zero service. All truncate at 1,500 with zero updates/events. This distinct
+factual panel is retained for the fixed common-endpoint replay, not treated as
+another training replication or a substitute native endpoint. Accepted bindings:
+
+- Endpoint facts: `01f00a24f11d4712073f365775f6e572413f7cde398f8a63c54873bad01e89fa`.
+- Native checkpoint: `17b810f6eac207b72a33c182ead1c608dc242404947921661af8132069a06a22`.
+- Auxiliary checkpoint: `8c19bdb50e308751d441f58bf05653853dc650b382b200fa7f0307e3081157a4`.
+- Final policy: `a84ac106d635eb097c3e3db4c6ca84ce9891e82537bba76910e8d6121b6280f8`.
+
+Full runner wall is **6,823.945966 s / 113.732433 min**, CPU user/system
+6,520.891811 / 319.537209 s, peak RSS **3,092,032 KiB / 2.948792 GiB**. Stage walls
+are collection 2,897.743849 s, native update 1,518.977201 s, auxiliary 29.537788 s,
+evaluation 2,104.180874 s, facts 115.900990 s, replay 10.215752 s, preparation
+.971034 s and checkpoint .163581 s. Five accepted B03 fits total **656.381481
+runner min**, with the first-block zero-update replay .906094 min separately;
+technical pre-admission/pre-training failures retain their separate scopes.
+Shared-node wall time does not establish intrinsic algorithm speed.
+
+This second S−D endpoint **does not reproduce the first block's +24.585407**;
+service and battery differences also change direction. It weakens a stable gain
+claim for the current service-gradient package, without establishing equivalence,
+population harm or a general impossibility for service supervision. Native utility,
+the initial-fact predictor and the generic comparison remain distinct questions.
+Keep the original prediction and complete the **already fixed sixth fit G / 912347 /
+a01**, then the second-block common endpoint replay. Whether G's first-block native
+gain recurs remains a discriminating observation; neither this negative mean nor
+the favorable development score changes that prospective comparison. Existing
+complete Pro advice covers these branches; no new Send, added fit, third block,
+retuning, extended horizon or confirmation is implied.
+
+Prospective G retains the same source, 180k train / 30 updates, native learners,
+CUDA FP32/four threads, panels, seeds and learning rates. One-step next legal
+observation gradients enter base/GRU; the service head remains a trained detached
+shadow. Bind D2 initial facts
+`163d34ce6dc14e2cf6273c503ec8e086589b39908c19632af30c1b3bb3a727ae` and calibration
+`0c49d91203e9e6d18a38d5650207873a7eeb91b536f582a35fea9ee312591ebb` from
+`/home/wu/hmasd-worktrees/usa-b03-73be55261/runs/uav_service_auxiliary/b03_d_912347_a01/`.
+Require matching initialization/first collection/native update. Output is
+`runs/uav_service_auxiliary/b03_g_912347_a01`, submission supervisor
+`usa-b03-g-912347-a01`. The native invocation uses the tracked script first after
+`--`, with the configured interpreter only before `scripts/hmasd_launch.py`.
+Commit/push this accepted evidence and binding before one native submission.
+Consumed the exact S READY event at **generation 39**; no active S producer remains.
+The shared source is an authoring worktree with retained outputs and the planned
+G consumer, not a disposable per-operation snapshot to reclaim.
