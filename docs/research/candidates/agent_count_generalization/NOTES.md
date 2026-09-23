@@ -8348,3 +8348,29 @@ production binary restoration, full500-step paths and actual scientific counters
 be validated by the selected admitted run. These limits are not evidence of a service effect.
 The next action is one native admission on `wsl_4070` at the committed/pushed accepted source,
 using only the two original final45 assets and the fixed `s1_fixed_count_b09` output.
+
+## 2026-09-23 — B09 native operation accepted and observation armed
+
+The selected evaluator was admitted once at accepted source
+`3f57bd2d99be3121e0fa7d1277f767faab5552db`. The current main/control revision
+`2554b71a7ceb44aabb63d38a1a94df8837f0f38b` preserves this DM's direction and authorization;
+the newer assignments change neither our study nor the existing FSD pause/G33 freeze.
+The native retained worktree contains the exact accepted runner bytes and the committed
+original H6 B07/SET B05 final panel sources. No old binary or operation was replaced.
+
+The runner-written [launch manifest](../../../../runs/agent_count_generalization/s1_fixed_count_b09/launch-manifest.json)
+and [fresh admission preflight](../../../../runs/agent_count_generalization/s1_fixed_count_b09/admission-preflight.json)
+are retained locally. Admission passed with15,094,550,528 effective available bytes against
+the configured4,294,967,296-byte floor. Supervisor command acceptance was followed by
+verification of native kernel acceptance and matching live runner/supervisor identities;
+status at10:20:10 UTC was running and record-consistent, without an exit witness. This is
+execution status only, not asset-validation or scientific acceptance.
+
+The original status operation is
+`/home/wu/projects/HMASD/.git/hmasd-admission/26053034831826e891d68286db45bf9becb1619122723afa69cfcbe4be2f8048.json`.
+A single detached observation was armed against this same handle for the assigning task.
+Completion/error/checkpoint returns require draining its pending evidence and reading all
+result arrays; any checkpoint rearms the same observation without restarting the evaluator.
+Planned exposure remains0 fits/48,000 evaluation team steps plus the bounded shadows; actual
+counts and resource cost will come from the collected runner output. No score has selected an
+extension, new constant, split-site study or new fit.
