@@ -5086,3 +5086,163 @@ scope is0 new fits/updates and192k evaluation steps for the complete2 policy-pai
 and96k new off-diagonal evaluation. This is a proposed separate diagnostic, not an extension
 of B05. Pro can change whether it is worth doing, its minimal comparison and interpretation;
 no new result execution is selected or launched from this note alone.
+
+## Pro question 2026-09-23 entropy-sign-reversal-cross-panel-after-b05
+
+Conversation: reuse the direction's existing Jev-account conversation; its address remains
+only in local transport state. Prior question key:
+`hmasd:cf77c8c4c6713ea91b15d485a7bf6621cdef44f2e75cc81f2aaef9fc9d804604`.
+
+Question: **After the fixed B05 SET recurrence pair reverses the B04 service benefit, is a
+zero-new-fit crossing of the two existing final-policy pairs with the two existing world
+panels the next worthwhile discriminator, or should we stop this recipe diagnostic because
+it cannot change a useful research choice?** Assess the concrete proposal below. The decision
+already made under your prior advice is not to promote lambda0 as a default upgrade; do not
+reopen that decision by selecting another endpoint. This consultation is about a new,
+conditional explanation and possible further investment, under constitution section5.2/5.3,
+not another approval of the completed two-fit batch.
+
+### Changed evidence and standing
+
+Owner explicitly resumed this DM: "你可以继续研究了 作为DM不该简单的停下 impress me！".
+Current published main `1ccec7d6407a329b6fe20cfef96d5d80aa784a28` records this direction as
+exploring under the same independent Codex DM. Owner pause is lifted for us; Claude FSD stays
+paused/frozen. No cross-task communication, new direction or other DM's work is requested.
+No experiment or Pro operation is now running. This is a scientific choice, with no per-idea
+owner-approval layer and no fit allowance; costs still must be declared before execution.
+
+Read the preceding complete B05 entry and the full prior recurrence Answer/adoption. Its
+negative-result branch covers our immediate non-adoption decision. New evidence changes the
+unresolved explanation: the originally positive response has now reversed on new training
+and new worlds, rather than merely awaiting replication.
+
+| Native final45 zero-minus.05 | B04 selected development pair | B05 new pair |
+| --- | ---: | ---: |
+| E_4 | +.000936099693 | -.050526506815 |
+| E_6 | +.052325722758 | -.060413388032 |
+| E_8 | +.110144949627 | -.040734308973 |
+| E_U, equal weight N4/N8 | +.055540524660 | -.045630407894 |
+
+B05 loses mean coverage and quality and raises weighted penalties at every N. Positive-world
+counts are0/16,4/16,5/16; N6 coverage changes-.06438. Its stage15/30 unseen effects are
+-.089472098762/-.029924206184. Do not merge the two blocks' means to hide their opposite
+signs, treat worlds as training repeats, or select a favorable stage. Stage worlds differ.
+In both blocks lambda0 lowers raw sigma/saturation but increases physical-boundary truncation.
+B05 full raw saturation .636594→.311477 and boundary truncation .164500→.172796 accompany
+adverse service. B04 had .637829→.338887 and .167267→.236694 alongside its positive endpoint.
+These diagnostic directions cannot identify a sufficient service mechanism.
+
+Both B05 fits completed at the fixed360k horizon with matched initialization, initial panels
+and first pre-update collection; all45 rows,12 panels,4 checkpoints per fit were read and
+checked. Native reward is `J=N*sum(scalar_rewards)/500=.7*C+.3*Q-P`, with P already weighted.
+No technical failure, missing endpoint or inactive entropy setting explains the reversal.
+Actual B05 cost is112.238565619 summed command minutes for2 fits plus192k evaluation steps.
+The latest entry gives component effects, world signs, pooled counts, source hashes and costs.
+
+### Proposed distinct zero-fit experiment, not yet selected
+
+Hold fixed the four final45 SET policies: pair A is training seed943201 (.05 from B03 clip,
+0 from B04); pair B is953201 (both B05). Each final checkpoint includes its trained
+normalizers. Use only deterministic mean actions clipped to[-1,1], fixed roster andk10,
+no optimizer, online normalizer updates, re-fitting, stochastic-policy evaluation or selection.
+
+Cross both policy pairs with both existing final45 world panels. At each N4/6/8, panel A is
+`1200000+45000+100*N+i` and panel B is `1500000+45000+100*N+i`, i=0..15,500 steps each.
+The underlying S1 world generator/task is unchanged; these are two finite sets of random world
+addresses, not distinct task populations. Full crossing is2 pairs×2 lambdas×2 panels×3 N×16
+worlds×500 = **192000 evaluation team steps,384 episodes,24 panels,0 new fits/updates**.
+96k repeats the original diagonal cells in one common frozen evaluator to check restoration
+and compatibility;96k supplies the missing off-diagonal cells. Retain repeated diagonal
+results as replay checks, never as new independent evidence. There is no third world panel,
+new checkpoint, coefficient, training seed, H6 cell, horizon or automatic follow-up.
+
+Let `d[b,p,N]` be the within-pair mean J0−J.05 for fixed policy pair b evaluated on panel p,
+and `d[b,p,U]=(d[b,p,4]+d[b,p,8])/2`. The two observed diagonal values are d[A,A,U]>0 and
+d[B,B,U]<0. Distinguishing predictions for the missing cells are:
+
+- If the sign primarily follows the realized policy pair in these assets, expect d[A,B,U]>0
+  and d[B,A,U]<0. This weakens a panel-alone account of these particular diagonal signs.
+- If it primarily follows the world panel, expect d[A,B,U]<0 and d[B,A,U]>0. This shows that
+  the same fixed policy contrasts reverse across these panels, weakening a pair-alone account.
+- Other or near-zero patterns preserve a mixed/interaction account. Report signed magnitudes,
+  all N and components, not a post-result dominance threshold or a forced binary explanation.
+
+A transparent2×2 descriptive decomposition can report row, column and interaction contrasts,
+but its arithmetic is not a causal percentage or a variance estimate. No training-population
+CI can be inferred from two selected pairs or16 worlds. Even a clean row pattern would not
+prove generic seed sensitivity or separate initialization, trajectories and co-learning; even
+a clean column pattern would not estimate a world-population effect. Keep N6 service/costs.
+Changing N alters capacity, interference and joint geometry; this is not a pure-N intervention.
+
+Why it might matter: if the apparent recipe response follows the fixed policy pairs across
+panels, further world resampling does not repair its training-side unreliability in these assets;
+if it follows the panel, any subsequent comparator evaluation must acknowledge demonstrable
+world sensitivity. Neither outcome promotes lambda0. The strongest no-run case is that our
+practical choice is already clear, the conditional distinction may not select an executable
+next learning change, and further evaluation would just decorate a negative recurrence. Give
+that argument full weight. An automatic third fit, four-cell H6 expansion or entropy sweep
+does not follow from a sign reversal. Another architecture is not owed.
+
+Feasibility evidence: all four final checkpoint files are present at their manifest-bound
+native paths with their recorded hashes. The two older files were rechecked on the node now;
+the B05 files were completely collected/loaded. Python-source diff from B03 source
+`89486d32ea569728f39d6e21b53f8a7c8854e74c` to B05 source
+`e2ea736457e0992fb53cf21aa775fd15da3d8231` changes only the dedicated B04/B05 runners,
+entrypoints and tests, not the shared learner/model/environment or original count factory.
+That supports feasibility, not automatic equivalence of a new evaluator. A chosen implementation
+would bind exact assets, validate restored state and historical diagonal behavior, and use a
+single reviewed evaluation path; unexpected replay disagreement would quarantine the dependent
+comparison rather than be renamed scientific variability. No code or native evaluation is
+requested from Pro.
+
+### Context and source precedence
+
+Use the following concrete sources. `source_sha` means the immutable full commit supplied in
+the transport message; latest branch content is only the writable target, not scientific input.
+
+- Governance at source_sha: `docs/project/OPERATING_CONSTITUTION.md` §§1–5 and8. Owner continuation
+  above is current; this is exploratory continuation, not confirmation or Portfolio review.
+- Methods at source_sha: `.agents/skills/hmasd-scientific-tools/SKILL.md`, "Update the working
+  explanation", "Simple-model and literature bridges", "Comparators and MARL information",
+  "Statistics", and "Cost and exposure"; `.agents/skills/hmasd-research-engineering/SKILL.md`,
+  "Checks and review" only for the proposed restoration/evaluator risks. Advice is not approval.
+- Current shared background: `docs/research/RESEARCH.md` topics3/4 and own standing at
+  `1ccec7d6407a329b6fe20cfef96d5d80aa784a28`. Topic3 now retains both signs and decouples
+  latent diagnostics from service. Topic4 prevents converting finite policy-pair observations
+  into representation or generic learning claims. This proposal tests an unresolved finite
+  panel/pair distinction, not the other active load/capacity direction's question.
+- Notebook at source_sha: "B04 complete: useful SET endpoint response with a contrary boundary
+  pathway"; the complete "Pro question 2026-09-23 entropy-recurrence-after-b04" Answer and its
+  fixed B05 adoption; "B05 complete: reduced raw noise recurs but SET service benefit reverses".
+  Read supporting and adverse evidence together. No recursive entire-history assignment.
+- Raw evidence at source_sha: summary.json and panel_45_n4/n6/n8.json under the following four
+  `runs/agent_count_generalization/` tags. Training JSONL and stage15/30 panels are available
+  there if a consequential explanation depends on the diagnosed exposure or intermediate claims.
+  `s1_action_law_b03_set_clip_s943201` (frozen scientific source `89486d32ea569728f39d6e21b53f8a7c8854e74c`);
+  `s1_entropy_b04_set_zero_s943201` (source `f4762ac67f04675136367fcc566327f0bf78a086`);
+  `s1_entropy_b05_set_l05_s953201` and `s1_entropy_b05_set_l0_s953201` (source
+  `e2ea736457e0992fb53cf21aa775fd15da3d8231`). Source-pinned run records are readable in Git;
+  node-only binary files are not implied readable through the connector.
+- Implementation when needed: `experiments/candidates/agent_count_generalization/runner.py`
+  checkpoint/digest semantics; `action_law_b02/probe.py` restoration precedent;
+  `entropy_b05/runner.py` fixed world addresses/frozen evaluation, all at source_sha. Frozen
+  B03/B04 inputs preserve their own completed meaning; do not silently rewrite them.
+
+Return: give your strongest case for or against the proposed zero-fit discriminator, which
+judgment or next use it would actually change, and the smallest informative comparison if
+worth doing. Audit the sign predictions and limits of the2×2 reasoning, with a simple model
+only if it clarifies rather than adds ceremony. Identify a concrete alternative only if it has
+a better differing prediction and actual next-use value; no required candidate count or new fit.
+Separate verified source facts, conditional inference and conjecture. State any decision-critical
+source not read. Return MATERIAL_DISSENT yes/no and specific changes you recommend; consensus
+is not empirical evidence and I remain the decision owner.
+
+Write only the empty `### Answer` immediately below this unique question on branch
+`codex/agent-count-generalization`, path `docs/research/candidates/agent_count_generalization/NOTES.md`.
+Fetch the latest target blob before editing, use its actual SHA, preserve every other byte,
+and stop on overlapping edits. Do not launch experiments or edit code/other records. Report
+the actual answer commit if written; if writeback is unavailable, return the complete answer
+in chat, not a receipt, hash or link alone. Current governance/methods replace conflicting old
+chat instructions for this question; named historical contracts retain their frozen meaning.
+
+### Answer
