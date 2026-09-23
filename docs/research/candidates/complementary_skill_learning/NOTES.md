@@ -1030,3 +1030,33 @@ digests and frozen calibration; all equal D/G exactly. First native update count
 same15/2250/2250/15/60, both heads have7 steps and P trunk has7 steps, with nonzero movement
 in all three named trunk groups and mean trunk gradient norm.0784359365. This closes the
 startup first-facts check; it does not accept a P endpoint or change the frozen gradient scale.
+
+## 2026-09-23 — B01 P checkpoint at 36 of 45 rollouts
+
+Generation10 checkpoint was drained with its original wake/event identities. Refreshed main
+and read the newer control/current-plan diff: owner pause remains lifted, the fixed DM2 P
+contract is retained, and the other two DMs' continuation introduces no change to this fit.
+At13:53:38 UTC the same admitted P runner/supervisor identities remain running and consistent,
+with no exit witness. No worker restart, replacement fit or Pro Send was issued.
+
+Copied the current summary, training log, raw auxiliary predictions and both process logs
+to private readback scratch at13:52 UTC. All three scientific files contain the same completed
+36-rollout prefix:288,000 training/stored transitions,576 episodes and36 native updates.
+The32-world initial-own panel is complete (16,000 evaluation transitions); final-own,
+final-uniform and the pairing diagnostic are not yet in this snapshot. Model constructions
+and started fits are1. Stdout/stderr are empty; summary remains `incomplete`.
+
+Read and independently checked every persisted training row and all28,800 auxiliary windows:
+finite values, canonical time/lane ordering, raw-target and prediction-line hashes, frozen
+first-target calibration, raw MSE/variance recomputation, actual label/joint occupancy totals,
+native optimizer counts and sampled/forced mu-replay scores. Maximum sampled log-probability
+difference is4.291534423828125e-6; forced scores are0. Initial native tensors, the entire
+initial-own panel and first-rollout facts/calibration still equal D/G. Each head has252
+optimizer steps and P's auxiliary trunk252; base/FiLM/GRU movement is nonzero in every rollout.
+Native cumulative steps are540 coordinator,81,000 actor,81,000 critic,540 team-discriminator
+and2,160 individual-discriminator. All recorded native groups have nonzero displacement.
+
+These checks support continued execution of the original P arm; they do not supply its
+predeclared endpoint or a P−G/P−D scientific result. Preserve all fixed evaluation panels,
+diagnostic signs and adverse outcomes. Rearm the same accepted operation for completion/error
+or the next bounded checkpoint, without adding exposure or changing inputs.
