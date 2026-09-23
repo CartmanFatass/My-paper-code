@@ -5879,3 +5879,186 @@ The fresh native memory floor passed before admission.
 The generation75 READY event was read in full, then consumed by exact wake/event identity;
 rearm returned generation76 with no remaining active scientific jobs. Historical terminal jobs
 are retained as evidence. No worker restart or Pro resend followed the completion event.
+
+
+## 2026-09-23 — Effective recipe audit and the next investment question
+
+The relevant shared reading is RESEARCH topic3 (count transfer, action law, B04-B06) and topic6
+(native usefulness versus proxies) at published main
+`2a23a738eeda0864b0a49628010f29d4de81e39d`. Its concrete consequences here are: keep the
+bounded task law, do not promote lambda0 or explain service by saturation alone, read each test
+N and native components, retain training-N service, and make any new H6 comparison a package
+comparison. B06 resolved the fixed panel alternative; it did not add a second bounded H6 fit.
+The earlier complete cross-panel Pro advice fixed B06 and prohibited automatic follow-on runs;
+it did not evaluate the present one-new-H6/reused-SET investment under the observed cross table.
+This new question can change that investment, not reopen or resend the completed consultation.
+
+A bounded read-only Scout traced the actual B03/B05 initialization and entropy paths. B03
+H6/clip initializes fresh from seed942201 and compares parameter/normalizer digests to the
+H6/raw run; it loads no trained weights, optimizer or normalizer state from that run. Thus a
+fresh H6 initialization in a new block is faithful to the original learning recipe, although
+there is no new raw partner or across-package initial-parameter match. Numeric seed equality
+or an arm offset would not establish statistical pairing.
+
+Both packages use raw Gaussian log probabilities and a separate execution clip to[-1,1].
+B03 H6's effective low entropy coefficient stays .05: annealing and targets are false. Its
+stored default endpoints .05→.01 are dormant. B05/.05 explicitly records equal .05 endpoints
+with both flags false. A new H6 can explicitly hold both endpoints at .05 without changing the
+effective loss; claiming that all historical serialized fields were identical would be wrong.
+No tanh transform, logstd cap, new entropy target or exploration schedule is proposed.
+
+Matched task/exposure is N6 training, k10, horizon500,16 lanes,45 rollouts,360k train steps,
+evaluation at0/15/30/45 and N4/6/8, final45 primary, CPU float32,256-wide recurrent features,
+15 PPO epochs, sequence batch32, coordinator batch1280, value normalization on and observation/
+state normalization off. H6 retains six team/individual skills and its coordinator/discriminator
+paths; SET retains a constant skill, its recurrent set actor and no such high-level learning.
+SET's legal global/joint-observation snapshot refreshes at the same k10 cadence as H6's
+coordinator, plus current local input. Source information rights/cadence match while bandwidth,
+representation, intrinsic loss and compute differ; these differences are the package, not a
+newly isolated mechanism. Existing B05 SET/.05 receives no further tuning or outcome-based
+checkpoint selection in the proposed comparison.
+
+B03 H6/clip used seed942201 and SET used943201. Choosing new H6 seed952201 would preserve
+that numerical arm-offset convention relative to the existing SET953201, with separately
+seeded training worlds952201..952216 versus953201..953216; this is not a population seed law
+or matched initial-state pair. Evaluation would use B05's fixed common world formula
+1500000+1000*rollout+100*N+i (i=0..15), not B03's different1200000 base. Old H6/clip's
+actual command wall was5425.070357537s (90.417839292min), fit wall5423.536504171s,
+peak RSS2646976KiB. This is an observed cost comparator, not a guaranteed runtime forecast.
+
+## Pro question 2026-09-23 bounded-package-recurrence-after-b06
+
+Conversation: reuse the current private Jev adviser conversation; its URL stays only in the
+local transport operation. Shared records identify this question by the unique heading/key.
+
+Question: after the complete B06 finite crossover, is one fresh H6/.05 clip fit, compared at
+the fixed final45 endpoint with the already complete B05 SET/.05, worth doing to test recurrence
+of the original bounded package advantage? Assess this concrete marginal investment against
+ending the current recipe investigation with its finite positive/adverse evidence. If the
+comparison needs a material change, explain the exact validity gap and smallest useful change;
+do not prescribe another fit merely because the direction remains active.
+
+Standing: the owner explicitly asked this DM to continue research; that authorization does not
+require a positive result or a new fit. Current owner pause is lifted for this direction;
+Claude FSD remains stopped and G33 frozen. This is an exploratory research/investment decision,
+not confirmation, a Portfolio request, a reset of failed entropy-removal evidence, or permission
+for Pro to execute. The DM remains responsible for choice and interpretation.
+
+The live reason for hope is a bounded H6−SET/.05 U gap of+.112963 in B03, with N6 retained,
+and earlier raw-trained packages retaining a bounded-deployment gap in B02. But the bounded
+training comparison has only one training block. B04 lambda0 partly improved SET in that block
+(U +.055540525; H6−SET at zero remained+.047735405), and B05 SET's attempted recurrence
+failed (U −.045630408, all N coverage/quality worse and penalty higher). Low sigma/saturation
+recurred while usefulness reversed; a coefficient rescue story is weakened, not refreshed.
+
+B06's preselected zero-fit table is now complete and accepted. d=J(0)−J(.05):
+
+| N | Pair A on panel A (a) | Pair A on panel B (x) | Pair B on panel A (y) | Pair B on panel B (z) |
+| --- | --- | --- | --- | --- |
+| 4 | +.000936100 | −.020625242 | −.029791090 | −.050526507 |
+| 6 | +.052325723 | +.038473731 | −.053921108 | −.060413388 |
+| 8 | +.110144950 | +.102716887 | −.017380329 | −.040734309 |
+| U=(4+8)/2 | +.055540525 | +.041045823 | −.023585710 | −.045630408 |
+
+U R=.082901232,C=.018269700,T=−.007549997 are finite contrasts, not cause shares.
+All12 historical diagonals exactly reproduced J/returns/components; all24 panels completed
+without updates. U/N6/N8 follow policy-pair signs, but panel B lowers every d and A/N4 flips.
+This weakens panel-choice-only explanation of the original U reversal; it does not establish
+generic training variance or an unseen-N-specific failure. The final three training windows
+also do not isolate a modifiable mechanism. Full native components, absolute scores, positive
+world counts, retained-training reading and limitations are in the preceding B06 entry.
+
+Proposed comparison for criticism (not yet an accepted run):
+- One new fresh H6/clip fit, seed952201, N6/k10,360k training team steps/45 updates; retain the
+  original H6 package and effective lambda_l=.05, no entropy targets/annealing. No new raw arm,
+  coefficient or training distribution. Use no pretrained checkpoint and no tuning sweep.
+- Reuse B05 SET/.05 seed953201 final45 and its fixed panels without another SET fit or search.
+  Checkpoint SHA-256 `98062b5b338b684219c43b5c9a3dc13bf176322a948c439294beee1d52ae477e`,
+  20968771 bytes; original summary SHA-256
+  `136d090b32a8c5fec1eefad5dbaaefa9155d44ce4335c7fb0f07585d36cff4c4`.
+  Its final45 was replayed exactly in B06. It is not selected as the weakest observed SET:
+  on the common panel B, its U=.400567550 versus old SET/.05 U=.397273930. Neither establishes
+  baseline competence or a population ordering. Lambda0 results stay contrary evidence; they
+  are not substituted as the primary baseline after seeing the new H6 outcome.
+- Common deterministic, zero-update clip evaluation at N4/6/8,16 worlds/horizon500 per panel,
+  world base1500000 and the exact formula in the audit above. Keep0/15/30/45 for the existing
+  exposure contract (96k eval steps for the new fit); no best-checkpoint selection.
+- The recurrence prediction is positive final45 D_U=mean(D4,D8), where D_N=H6−SET/.05 in
+  native J at the same N, with positive coverage at both unseen N and retained N6 J/coverage.
+  Report D4,D6,D8 and all native components separately. Positive U alone with an adverse N or
+  coverage cost is a partial pattern, not full recurrence. A nonpositive U weakens this recipe's
+  recurrence value; neither outcome establishes a population rank, a skill mechanism or broad
+  count-generalization impossibility. No automatic extra seed, coefficient, panel or confirmation.
+
+Why this may be worth it: one new trained endpoint changes evidence about the original bounded
+package's recurrence, while another fixed-world replay or lambda sweep would not answer that
+question. Reusing an existing unselected fixed SET avoids spending a second fit for the same
+baseline evidence. Why it may not be worth it: a second finite H6 advantage can still be a
+comparison against an inadequately tuned ordinary learner, the chosen loss remains noisy, and
+nothing here isolates why H6 benefits or whether the value is count-specific. If those limits
+make every possible outcome lead to the same next action, the fit has no useful decision value.
+Please test that objection directly instead of accepting a replication by default.
+
+Context (reason from these concrete sources, not old chat memory):
+- Current governance at source_sha: `docs/project/OPERATING_CONSTITUTION.md` §§1–5,7–8;
+  current owner instruction/pause as stated above. No fit allowance or per-idea owner gate.
+- Current methods at source_sha: `.agents/skills/hmasd-scientific-tools/SKILL.md`, sections
+  Explore an idea, Update the working explanation, Comparators and MARL information,
+  Statistics, Cost and exposure, Pro. These separate exploratory recurrence, competent
+  comparators, episode nesting, failed predictions and investment cost. For a disputed runtime
+  issue only: `.agents/skills/hmasd-research-engineering/SKILL.md` sections L0 and the
+  Implementer, Checks and review, Execution and admission at explicit current main
+  `2a23a738eeda0864b0a49628010f29d4de81e39d` (it includes the newer terminal snapshot
+  cleanup method); no wholesale historical engineering preload.
+- Shared background and current standing: `docs/research/RESEARCH.md`, topics3 and6 and the
+  agent_count_generalization row, at explicit published main
+  `2a23a738eeda0864b0a49628010f29d4de81e39d`. The direction branch's older RESEARCH copy is
+  not this current reading. The preceding effective-recipe audit states its effect on this choice.
+- Standing at source_sha: this NOTES B03-complete, B04-complete, B05-complete and preceding
+  B06-complete entries, plus the prior `entropy-sign-reversal-cross-panel-after-b05` complete
+  Pro answer and fixed B06 contract. These preserve the previous predictions and adverse evidence.
+- Actual evidence at source_sha under `runs/agent_count_generalization/`: config/summary for
+  `s1_action_law_b03_h6_clip_s942201`, `s1_action_law_b03_set_clip_s943201`,
+  `s1_entropy_b04_h6_zero_s942201`, `s1_entropy_b04_set_zero_s943201`,
+  `s1_entropy_b05_set_l05_s953201`, `s1_entropy_b05_set_l0_s953201`; plus
+  `s1_entropy_cross_panel_b06/summary.json` and its24 `panel_*` per-world outputs. The B06
+  preceding table is independently calculated from those arrays, not new empirical replication.
+- Code at source_sha, only where needed for comparison validity: experimental
+  `agent_count_generalization/configuration.py`, `models.py`, `action_law_b03/runner.py`,
+  `entropy_b05/runner.py` beneath `experiments/candidates/`; `configs/config_1.py` dormant
+  entropy endpoints/flags, `hmasd/baselines.py` H6/MAPPO settings and `hmasd/agent.py`
+  low-level coefficient/annealing branches. B03's digest-only initialization verification
+  must not be misread as a trained-weight warm start.
+- Original experiment bindings remain intact: B03 source
+  `89486d32ea569728f39d6e21b53f8a7c8854e74c`, B05 source
+  `e2ea736457e0992fb53cf21aa775fd15da3d8231`, B06 source
+  `ce18435cedfe2b875482403b6b41778fdb67ee4d`. Current methods do not retroactively change their
+  seeds, world bases, endpoints, output obligations or interpretations.
+
+Prospective cost: proposed next object is1 new fit,360000 training team steps/720 training
+episodes,96000 evaluation team steps/192 evaluation episodes,45 complete training updates,
+15 PPO epochs per update and the original package's actual separate optimizer counts.
+The historical H6/clip command wall90.417839292min and2646976KiB peak RSS give observed scale,
+not a promised runtime or node reservation. B05 SET/.05 is sunk evidence (command57.819554min),
+not a free original fit. Integration/tests/independent review, fresh admission, collection and
+scientific reading are material additional work, not measured zero. No mandatory profiling run.
+The completed B06 itself cost0 fits/192k eval/3.185165627 command min. A different recommendation
+must state its new fit/exposure and major non-fit cost before it could be considered.
+
+Constraints: advice only; no training, evaluation, new records or edits outside this question's
+empty `### Answer` on branch `codex/agent-count-generalization`. Read the question and Context
+at their pinned revisions. For writing, fetch the latest target
+`docs/research/candidates/agent_count_generalization/NOTES.md` and use its actual current blob
+SHA; preserve the question and all other bytes, stop on overlapping edits. Return the actual
+answer commit after a successful write. If GitHub writeback fails, return your complete answer
+in chat, not only a receipt/hash/link. Do not expose the private conversation URL.
+
+Return: advise for or against this exact marginal comparison, or identify a concrete smaller
+valid alternative. Explain what each outcome would change, what it cannot change, the strongest
+competence/selection objection, and whether using the retained SET and the proposed seed/world
+scheme is scientifically honest. Separate finite endpoint recurrence from confirmation or
+component causality. Challenge the DM's interpretation of B06 if needed, citing actual evidence;
+do not invent a repair mechanism from low sigma or logs. A new idea or toy model is optional,
+not an obligation. State any decision-critical unread source and MATERIAL_DISSENT yes/no.
+
+### Answer
