@@ -885,7 +885,7 @@ remains fixed. Snapshot counts are248,000 training/stored transitions,496 traini
 31 native updates and16,000 initial evaluation transitions. Native optimizer counts are
 465/69,750/69,750/465/1,860 in coordinator/low actor/low critic/team/individual order. Both
 heads and G auxiliary trunk have217 steps each; base/FiLM/GRU auxiliary movement is nonzero
-on every completed rollout. Maximum sampled old/replayed log-probability difference was
+on every completed rollout. Maximum sampled old/replayed log-probability difference is
 6.079673767089844e-6, forced scores0, discarded windows0; all retained numbers are finite and
 stdout/stderr are empty. Per-rollout mean trunk gradient norm ranges.006060355–.124099828.
 
@@ -1008,7 +1008,7 @@ P is accepted under current owner controls at the same frozen source and initial
 block as D/G. Its [native manifest](../../../../runs/complementary_skill_learning/b01_p_260923901_957a65c01/launch-manifest.json)
 and [runner-side memory preflight](../../../../runs/complementary_skill_learning/b01_p_260923901_957a65c01/admission-preflight.json)
 were copied and SHA256-verified against remote originals. Native runner/supervisor identities
-are running, records consistent and no exit witness. The outer supervisor's exit0
+are running, records consistent and no exit witness present. The outer supervisor's exit0
 only means the admission kernel returned. Retain this accepted operation across observations.
 
 The first persisted summary contains one model construction and the complete16,000-step,
@@ -1487,3 +1487,150 @@ B01 三 fit 的129.505699 runner-body分钟是已测历史量级，不能直接�
 [^csl2-shared]: [指定RESEARCH版本](https://github.com/CartmanFatass/My-paper-code/blob/fa7e75d2d5d52c63ce5d07cbf11ba96634583343/docs/research/RESEARCH.md)，主题3–6及三-DM计划；[人数B08/B10记录](https://github.com/CartmanFatass/My-paper-code/blob/fa7e75d2d5d52c63ce5d07cbf11ba96634583343/docs/research/candidates/agent_count_generalization/NOTES.md)；[S7 B03关闭记录](https://github.com/CartmanFatass/My-paper-code/blob/fa7e75d2d5d52c63ce5d07cbf11ba96634583343/docs/research/candidates/uav_service_auxiliary/NOTES.md#2026-09-23--b03-second-common-replay-accepted-and-current-recipe-closed)。用途是限定相邻解释，不作本次matched baseline。
 [^csl2-governance]: [本次宪章](https://github.com/CartmanFatass/My-paper-code/blob/24801c8facea0b06473f2005e7d0267e25afd972/docs/project/OPERATING_CONSTITUTION.md)，§§1–5、7–8；独立DM责任、前瞻成本、探索限制、Pro建议及不自动扩批。
 [^csl2-method]: [本次科学方法](https://github.com/CartmanFatass/My-paper-code/blob/24801c8facea0b06473f2005e7d0267e25afd972/.agents/skills/hmasd-scientific-tools/SKILL.md)，Update the working explanation、Comparators、Statistics、Cost and exposure、Pro；[工程Checks and review](https://github.com/CartmanFatass/My-paper-code/blob/24801c8facea0b06473f2005e7d0267e25afd972/.agents/skills/hmasd-research-engineering/SKILL.md#checks-and-review)。
+
+## 2026-09-23 — Second Pro read, native coefficient correction and B02 decision
+
+The accepted follow-up key is
+`hmasd:f7f21d940b0912e333283ea03d1f86f5294b793810b74b2f301284d5b141650a`.
+Generation14 collected a complete 9,253-character chat answer, SHA256
+`a6bfd579506c443960522cabdefaf5f701d03214dd76d1d3feb0cddfaf2b7243`.
+The chat says no writeback and names `0173b116bf98f07482ba8619a691b0ee7aaac327`;
+that object is a Git blob, not an answer commit. Actual branch inspection instead found
+`3baf0bf61b01282609a02209000a9348fcd67fba`, directly parented by the pinned source,
+with a complete 15,731-character Answer. Both full bodies were read, including source-use
+limits. The repository answer is the one preserved verbatim above; the different chat body
+remains in local transport scratch, not overwritten or counted as another consultation.
+
+The first deliver call omitted the literal `## ` heading prefix and correctly failed to
+locate the section. The corrected read-only call returned **CONFLICT**, not DELIVERED:
+the new commit also changed two old notebook phrases, `difference is` to `difference was`
+and `no exit witness present` to `no exit witness`. No question text or scientific value
+changed. The DM fast-forwarded, preserved the complete answer and original commit, and
+restored those two historical phrases byte-for-byte from the pinned source. A direct
+before/Answer/after comparison verifies the recovered file equals the source outside the
+new Answer. Its stripped body plus LF has SHA256
+`ebae3c40c08378d4ed0cde8fcbe1464915ef8a6f33ffd5f80593eb9359547613`.
+This is explicitly reconciled delivery, not a claim that the automatic check passed or
+that the chat receipt described the repository correctly. No repeat Send occurred.
+
+**Adopt the material dissent.** A local construction through the actual B01
+`make_envs`/`make_config` path confirms `legacy_mi_reward_coef=.5`, lambda_e/D/d=1/.05/.02,
+prior correction and MI normalization false, clip2, enhanced_state false, gamma/GAE=.99/.95.
+The field is a Config class attribute; `getattr(...,1)` was only a fallback. My proposed
+raw coefficient1 would have doubled the existing discovery contribution. Correct the new
+comparison to **M=.5 versus T=0**, with effective discovery weights .025/.01 versus0/0.
+Old B01 used the same actual .5 in all arms and keeps its original result meaning.
+
+Adopt the objective-use question, native full learning, common-world own/uniform reading,
+and the limit that the treatment changes the low actor AND critic/ValueNorm targets.
+The D2 high reward formula remains the original scalar, but subsequent high learning and
+trajectories may differ. Both discriminators and entropy terms remain. This is not no-skill
+learning, a component-wise MI causal decomposition, or a diagnosed explanation of P failure.
+Negative discriminator means do not establish gradient conflict: the fixed-terminal,
+exact-value constant-reward-offset counterexample in the answer is valid under its stated
+assumptions, which omit our finite critic and jointly learning teammates.
+
+Current published main remains `efaff004b2759cc975ede680524dcd5896a450c8`, with owner pause
+lifted and this DM's lead unchanged. Read its relevant topics3–6 and owned standing: the
+B01 counterevidence, B08 real learning, B10 deployment/training distinction and S7 adverse
+auxiliary evidence continue to support a direct objective comparison over another auxiliary
+repair. They do not predict task-only victory. Fresh G/D replication remains the strongest
+alternative if uniform deployment becomes the chosen decision; that is not our present
+decision. Neither of Pro's optional zero-fit selector panels is selected. No other DM's
+question or Claude's paused FSD/G33 is taken over. Pro did not independently re-audit all
+historical raw arrays/checkpoints; its historical tables are not new empirical replication.
+
+Choose **B02**, two fresh complete native fits, M then T, each360k. Its conjecture is that
+removing the two discovery reward contributions improves final own native service while
+preserving or improving uniform service. The strongest contrary possibility is that the
+native reward helps exploration/skill formation and removal harms either or both. Buy the
+comparison because it changes the current low-layer objective choice, not because B01
+identified its failure cause. No new architecture, coefficient sweep or confirmation follows
+automatically. Favorable service with useful absolute learning, components and negative tails
+supports further consideration of T; both worse favors retaining M in this recipe. Opposite
+own/uniform signs retain the tradeoff and a failed own prediction; tiny/unstable differences
+remain unresolved, not equivalent. Continue investment only for a newly stated useful reason.
+
+## 2026-09-23 — B02 prospective contract and implementation L0
+
+**Question and exposure.** Full native S1 N6/capacity10/k10/50 users, six team and individual
+labels, 16 lanes x500 x45=360,000 training transitions/fit. M and T are two new cold starts,
+one common initialization/exogenous block, one fit per arm. Preserve B01 D's local
+skill-conditioned base/FiLM/GRU actor, global/team-conditioned critic, coordinator information,
+actual individual AR mixture mu=.9pi+.1/6 and probability replay, ordinary team factor,
+H(mu)/H(pi_Z)/Gaussian entropy coefficients .07/.05 as applicable, raw-Gaussian PPO with
+physical clipping[-1,1], entry recurrent masks, terminal-inclusive rewards, gamma/GAE=.99/.95,
+normalization rules and native schedules. Observation/state normalization stays off; each
+arm learns its own native value-normalizer statistics. No actor auxiliary optimizer.
+Both existing G/P factual heads train detached in both arms on the original ten-step factual
+windows/calibration/minibatches, preserving the checked common pipeline. Their errors do not
+select an arm. Each head expects45xceil(800/128)=315 updates, both arms1,260 in total.
+Native per-fit expected optimizer counts remain675/101250/101250/675/2700 in
+coordinator/low-actor/low-critic/team/individual order; actual counts must be reported.
+
+**Only treatment.** Explicit actual `legacy_mi_reward_coef` is .5 for M and0 for T,
+lambda_e/D/d=1/.05/.02 in both. Keep the original clipped, uncorrected discriminator-score
+definition and both discriminator forward/training paths. Process/HA/uncertainty reward
+paths remain off. The stored low reward is scalar native R/6 plus the two weighted discovery
+terms for M; it is R/6 for T. No multiplying the task term by6 and no change to D2 raw reward.
+Reward fallback/error is a technical failure, never a valid mixed arm silently becoming T.
+Effective inherited class attributes are explicitly serialized, not inferred from vars(config).
+
+**Fresh addresses.** Initialization260923911, heads260923912, train RNG260923913,
+private auxiliary shuffle260923914, evaluation RNG260923915. Training worlds1800000..1800015;
+all evaluation panels use the same new worlds1900000..1900031. These addresses do not reuse
+B01. Reset each fit from its own construction and these same seeds. The initial native state,
+normalizers, factual-head initialization and first raw rollout facts must agree; low stored
+rewards and first low update are expected to differ. Do not copy B01's first-native-update
+equality requirement. The first D2 raw segment targets remain paired. Later trajectories,
+head targets, normalizers and parameters are post-treatment outcomes, not forced matches.
+
+**Evaluation and cost.** For EACH fit actually execute initial own and initial uniform,
+then final45 own and final45 uniform: 4x32x500=64,000 zero-update evaluation transitions/fit,
+128,000 total; batch training+evaluation **848,000** physical team transitions, **2 fits**.
+This deliberately retains the existing standalone per-arm run structure and an independently
+executed initialization match. It costs32,000 duplicate initial steps over Pro's valid shared
+initialization option; it adds no training n or distinct initial evidence. The engineering
+simplicity avoids an inter-run evidence dependency, and no cost saving is claimed. No old
+rectangle/prefix/branch diagnostic, extra checkpoint, readout fit or additional outcome panel.
+For own, use deterministic native AR labels everyk10; for uniform, iid team/individual labels
+everyk10 from a fixed private evaluation stream indexed by the fixed world ordering, decision
+step and member. Both use mean low actions clipped[-1,1]. Each call resets that stream and
+its native worlds, preserves training RNG and verifies zero model/normalizer updates.
+
+Primary estimand is final45 **T minus M own native J** on all32 common worlds; retain each
+arm's absolute initial/final own/uniform J,C,Q,height penalty, users/step, action saturation
+and all signed differences/negative worlds. J=6*mean(sum scalar reward)/500. Same-world
+initial/final measures actual learning; own-uniform within a fixed bank measures this
+deployment-rule change. Difference-of-selector contrasts is an interaction description,
+not a high/low mediation share or skill necessity test. Do not swap drifted labels across
+arms. No invented .03/p-value/deployment threshold; no best-checkpoint choice or automatic
+extra seed. Thirty-two worlds do not increase one independent training instance/arm.
+Historical B01 D43.32min and G42.99min runner bodies are rough cost context only. Prefer
+wsl_4070, separate serial native admissions M then T at published inputs. Record actual wall,
+CPU/RSS/CUDA peaks with scope, training/eval counts and timing; unmeasured support stays unknown.
+
+**L0 deliverable and ownership.** Add local B02 implementation under
+`experiments/candidates/complementary_skill_learning/b02/`, explicit admitted entry
+`scripts/run_complementary_skill_learning_b02.py`, and meaningful tests under
+`tests/experiments/candidates/complementary_skill_learning/b02/`. Reuse B01 helpers/D learner
+without changing frozen B01, shared hmasd/config/environment code or old run artifacts. DM
+owns NOTES, RESEARCH, git index, commits, publication and launches. A bounded Implementer may
+edit only those new B02 paths; no science, fit launch, Pro, other writer's changes or children.
+
+**Checks and retained evidence.** Trace actual collector -> computed components -> stored
+low reward -> GAE/returns -> ValueNorm/critic/PPO, and separate D2 native segments. Add a
+small real-storage/update test with independent numeric reward/GAE checks, nonzero low learner
+movement and retained discriminator/high updates. M/T first raw facts/initial states match;
+actual first low rewards/targets differ by the declared component and can diverge after update.
+Verify scalar/batch coefficient semantics where relevant, evaluation order/RNG/no-update
+isolation, parameter/checkpoint identity, counts and no diagnostic execution. Persist a first
+rollout reward/GAE audit sufficient for DM recomputation and compact per-rollout finite/identity/
+fallback counters, alongside original curves, native counters, effective config and initial/final
+checkpoints. Audit must observe the real reward path, not replace it with a duplicate learner.
+Fault injection must show a computation fallback cannot silently pass the treatment check.
+Small internal test specs may shorten geometry/networks but are absent from the result CLI;
+CPU tests and relevant actual CUDA path checks precede acceptance. Independent Reviewer checks
+the high-risk semantic delta; DM accepts. Stop only the dependent action on real semantic,
+resource, pause or uncertain-acceptance conflict; retain failures. Inputs commit/push and fresh
+native admission precede each fit. Result-bearing runs never start from this prose alone.
