@@ -1,0 +1,11 @@
+{
+  "claim_key": "92991a67ca46258f1371fd62cf527e1d5dce6c37cf21da784e85320513837293",
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/92991a67ca46258f1371fd62cf527e1d5dce6c37cf21da784e85320513837293.json",
+  "manifest_ref": "/home/wu/hmasd-worktrees/load-capacity-b01-20260923/runs/load_critical_member_generalization/s1_load_critical_member_b01_20260923/launch-manifest.json",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/92991a67ca46258f1371fd62cf527e1d5dce6c37cf21da784e85320513837293.json",
+  "pid": 339615,
+  "runner_pid": 339616,
+  "schema_version": 1,
+  "status": "accepted",
+  "updated_at": "2026-09-23T10:17:57.709249Z"
+}

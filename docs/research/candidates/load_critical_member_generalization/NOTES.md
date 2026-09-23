@@ -751,3 +751,29 @@ The original asset files remain unchanged. Preserve the accepted 23-check engine
 coverage and its full-size/full-horizon limits; production payload/config verification will run inside
 the admitted evaluator, before any fixed-panel environment or policy effects. No source, summary,
 checkpoint, cell or exposure substitution is selected.
+
+
+### 2026-09-23 — Original B01 admitted; current-session observation adopted
+
+The original five-cell contract is now accepted. The exact restored source is published
+as `c770220d3abc4e32a9e80347dea87bdea88080e8`; source remains fixed on the configured
+executing node. [Native manifest](../../../../runs/load_critical_member_generalization/s1_load_critical_member_b01_20260923/launch-manifest.json) and
+[actual-node admission](../../../../runs/load_critical_member_generalization/s1_load_critical_member_b01_20260923/admission-preflight.json) retain the
+operation identity, interpreter, source, native process identities and invocation.
+No new fit, supplementary panel, source-policy substitution or relaunch was introduced.
+
+Both original completed-summary/binary/payload/config bindings passed inside the admitted
+evaluator before policy/environment effects. The collected [progress summary](../../../../runs/load_critical_member_generalization/s1_load_critical_member_b01_20260923/summary.json)
+is an in-flight snapshot: 16,000 evaluation team steps,
+32 episodes and 2 of 10 policy-by-cell evaluations complete,
+0 fits/train steps/updates/optimizer calls, no reported failure. The fixed target remains
+80,000 steps and 160 episodes. This snapshot is not a complete five-cell result or a new
+scientific conclusion. Full trajectories, capacity-invariance checks and all adverse worlds
+will be collected and read at the original endpoint.
+
+The current task's deterministic observer has adopted this same accepted operation: first
+read reports consistent native records and both runner/supervisor running, generation 1,
+30-second read-only probes and a 1,500-second observation window. It wakes only this assigning
+session on terminal/error/checkpoint. A checkpoint means read/rearm, not new execution.
+The independent complementary-skill DM has its own task and operation; this direction
+requires no cross-task reporting loop or further owner approval.

@@ -1,0 +1,90 @@
+{
+  "acceptance": "accepted",
+  "accepted_at": "2026-09-23T10:17:57.705003Z",
+  "bootstrap_command": [
+    "/home/wu/.venvs/hmasd/bin/python",
+    "/home/wu/hmasd-worktrees/load-capacity-b01-20260923/scripts/hmasd_admission.py",
+    "_run-admitted",
+    "--runner",
+    "/home/wu/hmasd-worktrees/load-capacity-b01-20260923/scripts/run_load_critical_member_probe_b01.py",
+    "--output",
+    "/home/wu/hmasd-worktrees/load-capacity-b01-20260923/runs/load_critical_member_generalization/s1_load_critical_member_b01_20260923",
+    "--",
+    "--out",
+    "runs/load_critical_member_generalization/s1_load_critical_member_b01_20260923",
+    "--checkpoint-root",
+    "/home/wu/hmasd-worktrees/agent-count-action-law-20260922-b03/runs/agent_count_generalization",
+    "--launch-sha",
+    "c770220d3abc4e32a9e80347dea87bdea88080e8"
+  ],
+  "claim_key": "92991a67ca46258f1371fd62cf527e1d5dce6c37cf21da784e85320513837293",
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/92991a67ca46258f1371fd62cf527e1d5dce6c37cf21da784e85320513837293.json",
+  "command": [
+    "/home/wu/.venvs/hmasd/bin/python",
+    "/home/wu/hmasd-worktrees/load-capacity-b01-20260923/scripts/run_load_critical_member_probe_b01.py",
+    "--out",
+    "runs/load_critical_member_generalization/s1_load_critical_member_b01_20260923",
+    "--checkpoint-root",
+    "/home/wu/hmasd-worktrees/agent-count-action-law-20260922-b03/runs/agent_count_generalization",
+    "--launch-sha",
+    "c770220d3abc4e32a9e80347dea87bdea88080e8"
+  ],
+  "command_sha256": "72d4b40200dfb160fb2de920abdc45ec970b1303e81d14577af58a4b8bb3a3c0",
+  "control_observation": {
+    "observed_at": "2026-09-23T10:17:57.616224Z",
+    "ref": "refs/heads/main",
+    "remote": "origin",
+    "sha": "2554b71a7ceb44aabb63d38a1a94df8837f0f38b"
+  },
+  "control_root": "/home/wu/projects/HMASD",
+  "created_at": "2026-09-23T10:17:57.622276Z",
+  "cwd": "/home/wu/hmasd-worktrees/load-capacity-b01-20260923",
+  "direction": "load_critical_member_generalization",
+  "host_identity": "LAPTOP-U9TDKC8A",
+  "identity_command": [
+    "/home/wu/.local/share/uv/python/cpython-3.10.21-linux-x86_64-gnu/bin/python3.10",
+    "scripts/run_load_critical_member_probe_b01.py",
+    "--checkpoint-root",
+    "/home/wu/hmasd-worktrees/agent-count-action-law-20260922-b03/runs/agent_count_generalization",
+    "--launch-sha",
+    "c770220d3abc4e32a9e80347dea87bdea88080e8"
+  ],
+  "lead": "Codex DM (independent session)",
+  "manifest_ref": "/home/wu/hmasd-worktrees/load-capacity-b01-20260923/runs/load_critical_member_generalization/s1_load_critical_member_b01_20260923/launch-manifest.json",
+  "node": "wsl_4070",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/92991a67ca46258f1371fd62cf527e1d5dce6c37cf21da784e85320513837293.json",
+  "output_root": "/home/wu/hmasd-worktrees/load-capacity-b01-20260923/runs/load_critical_member_generalization/s1_load_critical_member_b01_20260923",
+  "preflight": "/home/wu/hmasd-worktrees/load-capacity-b01-20260923/runs/load_critical_member_generalization/s1_load_critical_member_b01_20260923/admission-preflight.json",
+  "process": {
+    "detached": true,
+    "identity": {
+      "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+      "kind": "linux_pid_start_ticks",
+      "pid": 339615,
+      "session_id": 339615,
+      "start_ticks": 52003486
+    },
+    "native_handle_kind": "posix_session",
+    "pid": 339615,
+    "process_group_id": 339615
+  },
+  "process_exit": "/home/wu/hmasd-worktrees/load-capacity-b01-20260923/runs/load_critical_member_generalization/s1_load_critical_member_b01_20260923/process-exit.json",
+  "published_remote": "origin",
+  "runner_process": {
+    "identity": {
+      "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+      "kind": "linux_pid_start_ticks",
+      "pid": 339616,
+      "session_id": 339615,
+      "start_ticks": 52003488
+    },
+    "pid": 339616,
+    "process_group_id": 339615,
+    "supervisor_pid": 339615
+  },
+  "schema_version": 1,
+  "sha": "c770220d3abc4e32a9e80347dea87bdea88080e8",
+  "source_root": "/home/wu/hmasd-worktrees/load-capacity-b01-20260923",
+  "stderr": "/home/wu/hmasd-worktrees/load-capacity-b01-20260923/runs/load_critical_member_generalization/s1_load_critical_member_b01_20260923/stderr.log",
+  "stdout": "/home/wu/hmasd-worktrees/load-capacity-b01-20260923/runs/load_critical_member_generalization/s1_load_critical_member_b01_20260923/stdout.log"
+}
