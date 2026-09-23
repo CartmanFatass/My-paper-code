@@ -4176,3 +4176,142 @@ the post-development-30 rollout-complete event is **5,312.082158 s / 88.534703 m
 Neither includes the unfinished final stages. Continue only the original accepted
 operation; consume the exact event and rearm the same handle at **generation 44**,
 1,500-second window. No restart, extra fit, new Pro Send or App message.
+
+## 2026-09-23 — B03 second-block G accepted and fixed common replay bound
+
+Read generation-44 READY event `61a9bead68ddfb9fc2a50087`, wake
+`1b88dc11-8716-4e5c-9db3-1c35d41d69f9`. The original G2 operation exited at
+07:06:12.528 UTC with exit 0 and a valid native exit witness; both original
+processes are absent, records consistent and observation errors zero. This is
+execution evidence; acceptance below follows full reading and independent checks.
+Current main `e6bbd3162` preserves owner authorization, the lifted pause, this
+lead and the fixed B03 inputs. The only new main changes concern another direction.
+
+Collected all **18 files / 242,896,468 bytes** and matched every remote/local
+SHA-256. COMPLETE, no failure, empty stderr. All previously read curves,
+development panels and initial/first-update bindings remain byte-for-byte equal
+to the prior committed record. Production-contract verification passes source
+`73be55261b9f5e8f8fe26fdec6558b87ad088fcb`, CUDA/four threads, full horizon and
+all prescribed seeds/panels/counts. Final summary digest is
+`0b3ac1f4542f70e87c533cc35b23a5746a71969611efad297175180284939771`.
+The runner records **180k training / 30 updates / 120 episodes**, **96k evaluation /
+64 episodes**, **6k new endpoint-fact transitions / four episodes**, 3k reused
+initial facts and 95,424 initial-fact readout agent rows.
+
+Read all 32 final-world and four endpoint-fact rows and independently recomputed
+their means. Raw initial/endpoint facts pass schema, metadata, source policy,
+seed, shape, finite-value and terminal-row checks. All four saved initial-fact
+readouts were independently rescored from raw QoS/observations with float64 W10
+convolution and the frozen calibration: **60 comparisons, maximum absolute error
+6.969092358755091e-9**. Feature variance and effective rank independently agree
+via centered feature SVD, with the exact saved deterministic sample indices.
+Recursive finite checks cover **66,131 floats across summary, calibration and
+checkpoint metadata**, plus **756 checkpoint tensors**.
+
+CPU checkpoint readback restores the exact native policy and all optimizer states:
+high 2,250 (91 states), actor/critic 67,500 (15/14 states), team 450 (24 states)
+and individual 1,800 (29 states). Each state's step count was checked. The paired
+auxiliary checkpoint round trip preserves all tensors/metadata, calibration,
+arm/seeds/options and 30 passes; service/generic/representation optimizers each
+have 900 steps (4/4/10 states). The expected empty discriminator-buffer restoration
+warning changes no endpoint. Readback/rescoring performs no fit, update or
+environment step, and its temporary scratch was cleaned.
+
+Final-world G means are **J −12.775041**, QoS **.288711442**, return-constraint
+cost **.144193623**, throughput **8.661343270**, true episode-minimum battery
+**.364769562** and time-mean fleet-minimum battery **.572557755**. Throughput is
+30 times QoS, not an independent service outcome. There are 13 negative-J worlds;
+936006/936011 have zero service. The worst J is **−2,069.917857 at 936011**,
+followed by −1,826.319457 at 936001 and −1,288.952785 at 936028. All 32 episodes
+truncate at 1,500, with zero optimizer updates and charging/cutoff/depletion/input
+events. Zero observed events does not establish safety.
+
+| Final-world contrast, block 912347 | S−D | G−D | S−G |
+| --- | ---: | ---: | ---: |
+| Native J mean | **−16.825601** | **−24.945921** | **+8.120320** |
+| QoS per step | −.015771136 | +.054933804 | −.070704940 |
+| Return-constraint cost per step | −.002219091 | +.035816853 | −.038035944 |
+| True episode-minimum battery | −.013979580 | −.020446746 | +.006467166 |
+| World J wins / losses | 19 / 13 | 16 / 16 | 13 / 19 |
+| Median world J difference | +82.112249 | +3.542617 | −195.819963 |
+
+G−D ranges from **−1,526.941091 at 936028** to **+1,572.768888 at 936015**.
+G−S has 19 wins and a positive median despite a negative mean: its tail at
+936011 is **−2,384.572980**, while its largest gain is +1,909.853462 at 936017.
+Retain these distributions alongside the small mean differences; they do not
+establish equivalence, population harm or a stable global arm ranking. The full
+rows remain in the runner summary rather than being replaced by aggregate signs.
+
+G−D final J **−24.945921** contrasts with first-block **+117.896434**. Its service
+increase recurs, but the first block's cost decrease changes to a cost increase,
+and true minimum battery is worse in both blocks. S−D likewise changes from
+**+24.585407 to −16.825601**; S−G changes from **−93.311027 to +8.120320**.
+Neither package reproduces positive mean native use across the two training
+blocks. G−D development-30 is −525.092605 and S−G +990.448392: final differences
+have the same signs but very different magnitudes. S−D development/final signs
+remain opposite. Development or earlier-checkpoint selection cannot rescue the
+fixed primary endpoints.
+
+G's final initial-fact service/observation MSE is **.005350291 / .006838820**,
+lower than both other arms while final J is lower. The service/observation ratios
+to D are .735351 / .976663 and to S .067378 / .703224. Both errors improved
+20→30 while G development J deteriorated. Final feature variance/rank
+**34.703107 / 4.903232** is nondegenerate, so this is not explained by complete
+representation collapse. Per-episode reference failures and per-agent/quarter
+variation from the preceding entry remain. These facts weaken use of this
+readout error as a net-use surrogate, without identifying a causal mediator.
+
+G endpoint-fact episode J on 933211–933214 is **+394.471161 / −927.086294 /
+−485.439555 / −816.090327**, mean **−458.536254**, QoS **.321274863**, cost
+**.308682312**, true minimum battery **.381855289**. All four have service and
+three have negative J; all truncate at 1,500 with no updates/events. This
+separate fact panel supplies the fixed replay, not replacement primary endpoints
+or more independent training instances.
+
+G2 wall is **6,759.441941 s / 112.657366 min**; CPU user/system
+**6,471.842483 / 304.703137 s**, peak RSS **3,092,120 KiB / 2.948875 GiB**.
+Measured stages (s): preparation .896366, collection 2,727.864268, native updates
+1,384.104354, auxiliary 28.768075, evaluation 2,234.680189, fact collection
+167.077522, factual replay 10.734324 and checkpoint .189979. All six completed
+fits total **769.038846 runner minutes**, **1.08M train + 576k evaluation + 42k
+physical facts = 1.698M interactions**. First-block zero-update common replay
+adds .906094 min separately; earlier pre-training technical failure/refusal
+remains separately recorded. Shared-node timing is not intrinsic speed.
+
+Accepted artifact bindings: endpoint facts
+`1d144985cd6091e3fdfe601b549a8b657c0b6e4706476dc2b916f47a7268df52`, native
+checkpoint `d1209d366390935dd352afb777f46eae87b26c654ce7de9bb487b1bf177c5bb2`,
+auxiliary checkpoint `452c8eb994f8d3230b6320bf95965622262fd09e7f8de9ee56527ecd500bad3b`,
+final policy `4ac43face8939651e8e1765aa46c4665afbb6358872754f3e203512ce1f76fc3`.
+All underlying files are retained at the same relative run path below local
+authoring root `/home/fires/.codex/worktrees/d319/hmasd-wsl` and node source root
+`/home/wu/hmasd-worktrees/usa-b03-73be55261`; large NPZ/PT remain outside Git.
+[Runner summary](../../../../runs/uav_service_auxiliary/b03_g_912347_a01/summary.json),
+[native manifest](../../../../runs/uav_service_auxiliary/b03_g_912347_a01/launch-manifest.json),
+[exit witness](../../../../runs/uav_service_auxiliary/b03_g_912347_a01/process-exit.json).
+Consumed the exact READY event and rearmed at **generation 45**; no producer is
+running. There is no new fit or Pro Send.
+
+**Fixed second-block common replay.** Complete the already prospective diagnostic
+before the bounded batch decision. Use unchanged source `73be55261b9f5e8f8fe26fdec6558b87ad088fcb`,
+`scripts/replay_uav_service_auxiliary_b03.py`, seed 912347, CUDA/four threads,
+output `runs/uav_service_auxiliary/b03_endpoint_replay_912347_a01` and supervisor
+`usa-b03-replay-912347-a01`. Preflight found no output or existing claim. Bind
+the accepted inputs under that node source root:
+
+| Arm | Run root under runs/uav_service_auxiliary | Full summary SHA-256 |
+| --- | --- | --- |
+| D | b03_d_912347_a01 | `729f8f1991a3bdd79fcc46b09083645da46e800f633590ac566328fbd016b99f` |
+| S | b03_s_912347_a01 | `a158a6d1a59c87456d1ac3e4b39c97372f039897f9420f36da99411b82a7499e` |
+| G | b03_g_912347_a01 | `0b3ac1f4542f70e87c533cc35b23a5746a71969611efad297175180284939771` |
+
+All three local/remote summary hashes match. The production guard verifies full
+run contracts and checkpoint/fact identities again. Three frozen checkpoint pairs
+read the same 12 endpoint episodes (D/S/G × four), retaining source strata and
+episode-weighted errors: **429,408 agent rows, zero new fits, optimizer updates
+or environment transitions**. Initial-fact readouts stay separate. Read and
+independently rescore all nine arrays and 36 episode readings; report replay cost
+separately. Publish this binding before one native submission and observe its
+actual handle. Existing complete Pro advice and the prospective decision branches
+cover conflicting blocks and proxy-only improvement: absent a new reason, no
+third block, retuning, longer horizon, new module or confirmation follows.
