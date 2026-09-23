@@ -3725,3 +3725,63 @@ the predeclared final panel or justify early selection. Continue the same fixed
 30-update endpoint, then complete S acceptance and the fixed G/replay operations.
 No added fit, retuning or Pro Send. Consumed the exact event and rearmed the same
 operation at **generation 37**, 1,500-second window.
+
+## 2026-09-22 — B03 second-block S training horizon reached, final panel pending
+
+Read generation-37 CHECKPOINT `786a030f14e41e804ce67cb6`, wake
+`f90a4b68-7256-4996-9ee2-317a2ab6a01d`. Refreshed main `54306eeb3` changes another
+direction's standing/plan; this direction, its lead, scope and applicable pause are
+unchanged. Native observation at September 23 04:55:34 UTC still identifies the
+original supervisor/runner **301706 / 301707**, with matching process identities,
+consistent records, no exit witness and zero errors. Copied summary SHA256 is
+`b1ff936d9b91ba8da16c421221a8f1fb44ff439c65f54e17898b42d0d09d1b21`.
+Byte hashes match the node, all prior completed evidence remains unchanged, and
+config/calibration/first-update provenance still matches its accepted bindings.
+
+The **30-update / 180,000-transition / 120-episode training horizon is reached**.
+The run remains INCOMPLETE, failure null, stderr empty: only four development
+panels (32 episodes / 48,000 transitions) are in this snapshot, with 95,424
+initial-fact readout agent rows and zero new fact interaction. The distinct final
+32-world panel, endpoint facts and saved final checkpoints have not yet been
+reported. All **64,605 summary/calibration floats** are finite. The final five
+updates move every native parameter group and both auxiliary representation
+components; runner records sum to **900 steps for each head and representation**.
+Checkpoint optimizer-state readback remains part of complete acceptance. The last
+completed rollout event, after development-30, is at **5,696.117708 s / 94.935295
+min**. The RSS sample for rollout 30 was taken earlier, at 5,410.082121 s, and peak
+RSS remains **3,092,032 KiB / 2.948792 GiB**. These do not include the unfinished
+final evaluation/facts stages and are not full-fit cost.
+
+Development panel 30 has mean **J +423.756952**, QoS **.381303084**, cost
+**.044612212**, throughput 11.439092535 and true episode-minimum battery **.399113047**.
+World averages independently recompute. **S−D J is +465.355787**, with seven paired
+wins and one loss (world 920001, −3.323136); QoS is +.058470936, cost −.126001319
+and true minimum battery +.005896901. World 920006 still has absolute **J −276.830662**;
+all eight have nonzero service and truncate at 1,500 with zero optimizer updates,
+charging, cutoff, depletion and charger input. The S−D development means at 10/20/30
+are **+258.113781 / −221.758835 / +465.355787**. Preserve this changing sign and
+the all-world losses at 20 alongside the late gain. Within S, 20→30 J rises
+330.427099, QoS rises .021796644 and cost falls .099279381. The final 32-world
+panel is still required to read the predeclared native endpoint.
+
+Initial-common-fact service MSE instead rises to **.079407301**, +.062126093 from
+20 and **10.913837 times D2** at 30. The two episode errors .068084437 / .090730165
+both exceed their training-mean references .017477845 / .001876310. Observation
+MSE is **.009724954**, down .004001617 from 20 but 1.388837 times D2 and above the
+.006262023 mean reference. Feature total variance / effective rank is **52.672727 /
+4.477290**, nondegenerate; all per-agent/quarter variation and array bindings are
+retained. Raw-array rescoring remains pending complete collection. The larger
+development return alongside worse service prediction is contrary to using this
+initial-fact MSE as a net-use or mediation surrogate.
+
+Final training rollouts 26–30 contain **13/20 zero-service and 17/20 negative-J
+episodes**; whole-training counts are **74/120 and 95/120**. Rollout 29 has zero
+service and negative J on all four lanes. Worst training J is **−2,477.709912** at
+rollout 26's fourth lane. Rollout 30 recovers service on all lanes, yet its fourth
+lane remains −984.011902. All training event counts are zero. These trajectories
+are retained rather than replaced by the favorable development endpoint. The late
+panel supports a bounded development gain, while the fixed final-panel comparison,
+full S acceptance and second-block G comparison remain unresolved. Continue only
+the original operation's final evaluation/facts/checkpoint work. Consumed the exact
+event and rearmed the same handle at **generation 38**, 1,500-second window; no
+worker restart, early acceptance, new fit or Pro Send.

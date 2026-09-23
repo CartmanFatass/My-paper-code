@@ -417,3 +417,69 @@
 {"event": "collection", "rollout": 26, "step": 1300, "transitions": 155200, "wall_seconds": 4776.264909029007}
 {"event": "collection", "rollout": 26, "step": 1400, "transitions": 155600, "wall_seconds": 4782.362735033035}
 {"event": "collection", "rollout": 26, "step": 1500, "transitions": 156000, "wall_seconds": 4788.6097667217255}
+{"event": "rollout_complete", "rollout": 26, "transitions": 156000, "wall_seconds": 4834.239637374878}
+{"event": "collection", "rollout": 27, "step": 100, "transitions": 156400, "wall_seconds": 4839.516067028046}
+{"event": "collection", "rollout": 27, "step": 200, "transitions": 156800, "wall_seconds": 4845.187033414841}
+{"event": "collection", "rollout": 27, "step": 300, "transitions": 157200, "wall_seconds": 4850.909255743027}
+{"event": "collection", "rollout": 27, "step": 400, "transitions": 157600, "wall_seconds": 4856.567821741104}
+{"event": "collection", "rollout": 27, "step": 500, "transitions": 158000, "wall_seconds": 4862.268806934357}
+{"event": "collection", "rollout": 27, "step": 600, "transitions": 158400, "wall_seconds": 4868.586922883987}
+{"event": "collection", "rollout": 27, "step": 700, "transitions": 158800, "wall_seconds": 4874.46857380867}
+{"event": "collection", "rollout": 27, "step": 800, "transitions": 159200, "wall_seconds": 4880.359513998032}
+{"event": "collection", "rollout": 27, "step": 900, "transitions": 159600, "wall_seconds": 4886.642612695694}
+{"event": "collection", "rollout": 27, "step": 1000, "transitions": 160000, "wall_seconds": 4892.629821300507}
+{"event": "collection", "rollout": 27, "step": 1100, "transitions": 160400, "wall_seconds": 4898.532169342041}
+{"event": "collection", "rollout": 27, "step": 1200, "transitions": 160800, "wall_seconds": 4905.626663684845}
+{"event": "collection", "rollout": 27, "step": 1300, "transitions": 161200, "wall_seconds": 4911.9892427921295}
+{"event": "collection", "rollout": 27, "step": 1400, "transitions": 161600, "wall_seconds": 4918.432002067566}
+{"event": "collection", "rollout": 27, "step": 1500, "transitions": 162000, "wall_seconds": 4924.810096740723}
+{"event": "rollout_complete", "rollout": 27, "transitions": 162000, "wall_seconds": 4978.75505065918}
+{"event": "collection", "rollout": 28, "step": 100, "transitions": 162400, "wall_seconds": 4984.288501262665}
+{"event": "collection", "rollout": 28, "step": 200, "transitions": 162800, "wall_seconds": 4989.841187238693}
+{"event": "collection", "rollout": 28, "step": 300, "transitions": 163200, "wall_seconds": 4995.184250593185}
+{"event": "collection", "rollout": 28, "step": 400, "transitions": 163600, "wall_seconds": 5001.125960350037}
+{"event": "collection", "rollout": 28, "step": 500, "transitions": 164000, "wall_seconds": 5006.574668645859}
+{"event": "collection", "rollout": 28, "step": 600, "transitions": 164400, "wall_seconds": 5011.94526052475}
+{"event": "collection", "rollout": 28, "step": 700, "transitions": 164800, "wall_seconds": 5017.554406642914}
+{"event": "collection", "rollout": 28, "step": 800, "transitions": 165200, "wall_seconds": 5023.586545944214}
+{"event": "collection", "rollout": 28, "step": 900, "transitions": 165600, "wall_seconds": 5029.79703950882}
+{"event": "collection", "rollout": 28, "step": 1000, "transitions": 166000, "wall_seconds": 5036.621920108795}
+{"event": "collection", "rollout": 28, "step": 1100, "transitions": 166400, "wall_seconds": 5042.843827962875}
+{"event": "collection", "rollout": 28, "step": 1200, "transitions": 166800, "wall_seconds": 5049.027326107025}
+{"event": "collection", "rollout": 28, "step": 1300, "transitions": 167200, "wall_seconds": 5055.145499944687}
+{"event": "collection", "rollout": 28, "step": 1400, "transitions": 167600, "wall_seconds": 5061.1451897621155}
+{"event": "collection", "rollout": 28, "step": 1500, "transitions": 168000, "wall_seconds": 5067.950073003769}
+{"event": "rollout_complete", "rollout": 28, "transitions": 168000, "wall_seconds": 5112.7735369205475}
+{"event": "collection", "rollout": 29, "step": 100, "transitions": 168400, "wall_seconds": 5118.028228998184}
+{"event": "collection", "rollout": 29, "step": 200, "transitions": 168800, "wall_seconds": 5123.4488871097565}
+{"event": "collection", "rollout": 29, "step": 300, "transitions": 169200, "wall_seconds": 5129.167572259903}
+{"event": "collection", "rollout": 29, "step": 400, "transitions": 169600, "wall_seconds": 5135.337880849838}
+{"event": "collection", "rollout": 29, "step": 500, "transitions": 170000, "wall_seconds": 5141.151689529419}
+{"event": "collection", "rollout": 29, "step": 600, "transitions": 170400, "wall_seconds": 5147.017178535461}
+{"event": "collection", "rollout": 29, "step": 700, "transitions": 170800, "wall_seconds": 5152.917916059494}
+{"event": "collection", "rollout": 29, "step": 800, "transitions": 171200, "wall_seconds": 5158.916990995407}
+{"event": "collection", "rollout": 29, "step": 900, "transitions": 171600, "wall_seconds": 5165.53839468956}
+{"event": "collection", "rollout": 29, "step": 1000, "transitions": 172000, "wall_seconds": 5171.131416797638}
+{"event": "collection", "rollout": 29, "step": 1100, "transitions": 172400, "wall_seconds": 5176.632959604263}
+{"event": "collection", "rollout": 29, "step": 1200, "transitions": 172800, "wall_seconds": 5182.213548183441}
+{"event": "collection", "rollout": 29, "step": 1300, "transitions": 173200, "wall_seconds": 5187.942240715027}
+{"event": "collection", "rollout": 29, "step": 1400, "transitions": 173600, "wall_seconds": 5193.477002620697}
+{"event": "collection", "rollout": 29, "step": 1500, "transitions": 174000, "wall_seconds": 5199.919461488724}
+{"event": "rollout_complete", "rollout": 29, "transitions": 174000, "wall_seconds": 5252.63912320137}
+{"event": "collection", "rollout": 30, "step": 100, "transitions": 174400, "wall_seconds": 5258.546613454819}
+{"event": "collection", "rollout": 30, "step": 200, "transitions": 174800, "wall_seconds": 5265.828032255173}
+{"event": "collection", "rollout": 30, "step": 300, "transitions": 175200, "wall_seconds": 5272.353860616684}
+{"event": "collection", "rollout": 30, "step": 400, "transitions": 175600, "wall_seconds": 5278.781226158142}
+{"event": "collection", "rollout": 30, "step": 500, "transitions": 176000, "wall_seconds": 5285.688352108002}
+{"event": "collection", "rollout": 30, "step": 600, "transitions": 176400, "wall_seconds": 5292.2121052742}
+{"event": "collection", "rollout": 30, "step": 700, "transitions": 176800, "wall_seconds": 5299.758643865585}
+{"event": "collection", "rollout": 30, "step": 800, "transitions": 177200, "wall_seconds": 5307.014090299606}
+{"event": "collection", "rollout": 30, "step": 900, "transitions": 177600, "wall_seconds": 5314.354253053665}
+{"event": "collection", "rollout": 30, "step": 1000, "transitions": 178000, "wall_seconds": 5322.127076864243}
+{"event": "collection", "rollout": 30, "step": 1100, "transitions": 178400, "wall_seconds": 5331.23002076149}
+{"event": "collection", "rollout": 30, "step": 1200, "transitions": 178800, "wall_seconds": 5339.559658288956}
+{"event": "collection", "rollout": 30, "step": 1300, "transitions": 179200, "wall_seconds": 5347.597033500671}
+{"event": "collection", "rollout": 30, "step": 1400, "transitions": 179600, "wall_seconds": 5355.547516345978}
+{"event": "collection", "rollout": 30, "step": 1500, "transitions": 180000, "wall_seconds": 5363.5927147865295}
+{"event": "development_evaluation", "rollout": 30}
+{"event": "rollout_complete", "rollout": 30, "transitions": 180000, "wall_seconds": 5696.11770772934}
