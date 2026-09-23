@@ -1134,4 +1134,3 @@ def run_study(
         }
         publish(summary["status"])
     return return_code
-

@@ -11724,3 +11724,11 @@ Current published controls were rechecked through main17f02ea4c: this direction 
 exploring with the same lead and owner pause lifted; FSD/G33 controls are unchanged. Native
 live policy agrees on pause/state/lead, and its compute config equals published main. One
 fixed result launch will follow exact input publication and fresh admission on wsl_4070.
+
+Final staged-file whitespace audit found three extra blank lines at EOF in the new package,
+runner and tests; the earlier unstaged diff check did not include untracked files. They were
+removed after the semantic review, with identical parsed ASTs for all three files. This
+corrects the scope of the whitespace statement above; no behavior or test expectation changed.
+Final execution bytes are runner `d31e3219be7ad4557b8e3250059debe2bace1656f42e4771e91a467c1ac7cf37`,
+tests `319dbf25e925fd9a006529a6f144b421a975be8551ede89fabef3024c951ba22`,
+package `97533d39e14fdfd978d0536af13fc10b48837c2c225fbfb96b7236acbb4e8e2a`; CLI is unchanged.

@@ -598,4 +598,3 @@ def test_cli_admission_precedes_runner_and_binds_four_paths(monkeypatch, tmp_pat
     assert args[4] == 17
     assert list(args[3]) == ["s1", "s2", "h1", "h2"]
     assert kwargs["command_start"] == entry.COMMAND_START
-
