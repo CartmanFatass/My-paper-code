@@ -4759,3 +4759,368 @@ the newly written fingerprints and progress; at completion collect and verify
 the entire R output, then read the fixed paired final worlds and contrary
 tails. No restart, new Pro question, new fit or cross-App message is selected
 by this completion/launch boundary.
+
+
+## 2026-09-23 — B04 complete: native final gain with contrary development worlds
+
+**Full R acceptance.** The original accepted R operation completed with a valid
+exit-0 witness and consistent native identities. All **46 files / 113,325,077
+bytes** matched the actual node byte for byte before refreshing the local final
+status. The complete raw trajectories, first-rollout audit and checkpoint remain
+in this authoring checkout and the manifest's original remote output; no remote
+cleanup occurred. [R summary](../../../../runs/uav_service_auxiliary/b04_r_914021_a01/summary.json),
+[config](../../../../runs/uav_service_auxiliary/b04_r_914021_a01/config.json),
+[exit witness](../../../../runs/uav_service_auxiliary/b04_r_914021_a01/process-exit.json),
+[final observed status](../../../../runs/uav_service_auxiliary/b04_r_914021_a01/launch-status.json).
+Summary SHA256: `78cf9a11fa5895d305165e1f43d4bfc3eff11bd324c333aedf23ae7ed842654e`.
+Checkpoint SHA256: `d84a99de66b9c65aefde9908545f3956575e53ae94eec9c476adcc8609e26a0d`.
+Binary/log artifacts remain recoverable at those locations even where Git ignores them.
+
+The independent read-only audit reproduced every reported return and metric from
+all **30 raw training rollouts / 64 evaluation worlds**, checked all **37**
+runner artifact hashes plus configuration hash, and reconstructed original reward
+from QoS, true return cost, cutoff/depletion counts and graph PBRS. Maximum reward
+error is `4.441e-16`; R training reward equals original reward minus twice actual
+cost. Training/evaluation cost coefficients remain **4/2**. All numeric arrays,
+action bounds, seeds, terminal flags and checkpoint tensors passed. R performed
+**180,000 training transitions / 1,440,000 agent rows / 30 updates / 120 episodes**,
+and **96,000 evaluation transitions / 64 episodes / zero new evaluation updates**.
+Every episode truncated at 1500; no early terminations or straddling occurred.
+Stderr is empty; all 30 training/update rows and development/final panels were read.
+
+First-rollout independent float64 recurrences reproduce the stored FP32 low
+advantages/returns (maximum errors `4.152e-6 / 7.690e-6`) and both high advantage/
+return paths (largest error `2.029e-4`, within the unchanged combined tolerance
+`atol=5e-5, rtol=3e-6`). High interval rewards agree within `1.908e-6`. Five native
+learners moved at every update; final steps are high **2250**, low actor/critic
+**67,500 each**, team discriminator **450**, individual discriminator **1800**.
+Every initialized optimizer tensor agrees in the summary and checkpoint.
+Initialization-to-final L2 movement is respectively **12.187382 / 35.940557 /
+32.300515 / 3.045758 / 7.996300**. Parameter-only fingerprint
+`f93a494a789a498b9f15cb274587a04b532df64e2cd65e51b45a0acbce5afe2e`
+was independently reconstructed from all 91/15/14/24/29 parameter tensors and
+matches both update-30 development and final evaluation. Registered positional
+buffers are covered separately by the checkpoint digest and finite check.
+
+**Actual matching and activation.** Complete active config and spec are identical
+across N/R; arm and extra coefficient are the intended changes. Initialization
+hash `1dfde4b46e1e7a9006cd4a920e3d23f9fefc9c95fdf6cd1a95d9c3bf6f6cf9d6`,
+first physical-collection hash
+`8e3a0e084544dbc62e400ee964aa7dc4354b06a3937a73cc99a1bd1ce726fdf2`,
+and the entire initial evaluation match. Every first-rollout physical metric,
+action and end flag matches exactly. Only the recorded training reward changes
+in that trace. First-audit low advantages differ by up to **33.613453**, high
+advantages by **141.979340**, while pre-update values and native discriminator
+components match. First updated policy hashes differ (N `d6887856…`, R `313ccfb8…`).
+This resolves the launch-time pending fingerprint check and establishes an active
+training intervention. It does not identify which subsequent learning path caused
+service gains or isolate actor from critic or high from low effects.
+
+**All prespecified panels.** J is original raw native episode return; QoS and
+cost are per-step means. The development eight worlds are reused across updates;
+final 32 worlds are a separate sample with the same update-30 policy. No checkpoint
+or endpoint was changed after observing results.
+
+| Panel | N J | R J | R−N J | R−N QoS | R−N cost | R−N mean episode minimum battery | J wins/losses |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Development 0 | -233.327251 | -233.327251 | +0.000000 | +0.000000000 | +0.000000000 | +0.000000000 | 0/0 |
+| Development 10 | +163.285048 | +49.494269 | -113.790779 | -0.042389671 | +0.016954686 | -0.008140019 | 2/6 |
+| Development 20 | -1.408604 | -290.908498 | -289.499894 | -0.044626136 | +0.074181672 | +0.006197752 | 2/6 |
+| Development 30 | +50.842834 | -167.590619 | -218.433452 | -0.091920514 | +0.027256861 | +0.009926936 | 2/6 |
+| Final 32 | -496.301830 | +53.091698 | +549.393528 | +0.108482684 | -0.129009370 | +0.035802733 | 22/10 |
+
+At the fixed final endpoint, N/R mean QoS is **.158025257 / .266507941**,
+throughput **4.740758 / 7.995238 Mbps per step**, and true capped cost
+**.239923270 / .110913900**. The raw uncapped cost also falls, from **.482361201**
+to **.205172231** per step. The native J difference **+549.393528** decomposes
+arithmetically into **+162.724026 QoS sum**, **+387.028110 from −2×cost sum**,
+and **−.358607 PBRS**. This accounting is not a causal percentage or a separately
+recoverable mechanism. Both service and risk contribute on these final worlds.
+
+There are **22 positive / 10 negative** paired J differences, median **+460.498960**,
+range **[−899.031058, +2074.949527]**. Negative differences sum to **−4581.104563**;
+positive differences sum to **+22161.697451**. QoS rises in 22 worlds, falls in 9,
+and ties in one; cost falls in 21, rises in 9, and ties in two. Actual episode
+minimum battery rises in 31/32 worlds, but this does not guarantee lower return
+constraint cost: distance-to-return and the worst-agent risk also matter.
+
+| Final measure | N | R |
+| --- | ---: | ---: |
+| Negative raw J worlds | 20/32 | 12/32 |
+| P10 raw J | −1392.587969 | −745.607733 |
+| Worst raw J | −1537.378126 | −1246.010918 |
+| Best raw J | +431.154043 | +731.790480 |
+| Mean episode minimum battery | .353111020 | .388913752 |
+| P10 episode minimum battery | .325910225 | .347596453 |
+| Worst episode minimum battery | .311067401 | .319874564 |
+| Zero-QoS worlds | 6/32 | 6/32 |
+
+R still has low absolute mean QoS and substantial adverse tails. Its zero-service
+worlds are **938004/06/07/08/14/21**; only 938004 overlaps N's six zero-service
+worlds. Thus recovering N's bad worlds can coexist with new failures. World
+938021 loses **899.031058 J**, with less QoS and higher cost; 938013 loses
+**797.043242 J** despite slightly more QoS and higher minimum battery, because
+cost rises. R's worst absolute world 938006 has zero QoS and J **−1246.010918**.
+The only lower minimum battery is 938018 (**−.000378834**), even though J improves.
+These exceptions remain beside the favorable mean and lower-tail summaries.
+
+**Every final-world paired reading.** All N/R lengths are **1500, truncated**.
+Delta throughput is exactly 30 times delta QoS on these fixed demands. Both arms
+have zero evaluation charging/charger input/cutoff/depletion in every world.
+PBRS and every other raw component remain in the linked complete summaries and
+were independently recomputed; the displayed J includes them.
+
+| World | N J | R J | R−N J | R−N QoS/step | R−N cost/step | R−N episode minimum battery |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| 938001 | -876.165009 | +274.525449 | +1150.690458 | +0.332404623 | -0.217653536 | +0.071341870 |
+| 938002 | +304.295543 | -400.063028 | -704.358572 | +0.027211124 | +0.247950310 | +0.020721208 |
+| 938003 | -336.553081 | -549.451758 | -212.898677 | -0.181150777 | -0.018600239 | +0.007245420 |
+| 938004 | -1035.744855 | -813.956597 | +221.788258 | +0.000000000 | -0.073778246 | +0.034394596 |
+| 938005 | -1394.507223 | -84.942980 | +1309.564243 | +0.194664174 | -0.339755077 | +0.066704315 |
+| 938006 | -499.094901 | -1246.010918 | -746.916017 | -0.257748759 | +0.119987829 | +0.011130776 |
+| 938007 | +94.403898 | -415.928741 | -510.332639 | -0.302476983 | +0.018782515 | +0.028881709 |
+| 938008 | -1484.760602 | -312.253843 | +1172.506759 | -0.120105395 | -0.451287927 | +0.051837829 |
+| 938009 | -784.334361 | +320.814966 | +1105.149327 | +0.210441876 | -0.263436803 | +0.037979171 |
+| 938010 | +345.871096 | +91.462012 | -254.409084 | -0.171148622 | -0.000085152 | +0.000895267 |
+| 938011 | -624.503496 | +421.948265 | +1046.451761 | +0.294237543 | -0.201693629 | +0.038261794 |
+| 938012 | +76.060876 | +624.150371 | +548.089495 | +0.219715130 | -0.073609544 | +0.071003829 |
+| 938013 | +283.359371 | -513.683871 | -797.043242 | +0.003164532 | +0.267001037 | +0.046760727 |
+| 938014 | -155.605685 | -236.029556 | -80.423871 | -0.107733333 | -0.025982966 | +0.006326100 |
+| 938015 | -1290.896840 | +343.503162 | +1634.400002 | +0.359996418 | -0.365281045 | +0.048208121 |
+| 938016 | -914.169805 | +88.896768 | +1003.066573 | +0.046585258 | -0.311431355 | +0.034390374 |
+| 938017 | -266.916911 | -79.831974 | +187.084937 | +0.261717860 | +0.068864971 | +0.047301113 |
+| 938018 | -603.156456 | +464.708829 | +1067.865285 | +0.298999531 | -0.206214741 | -0.000378834 |
+| 938019 | +101.090234 | +731.790480 | +630.700246 | +0.302625358 | -0.059287460 | +0.050635132 |
+| 938020 | -891.134440 | +595.173738 | +1486.308178 | +0.234732926 | -0.378556573 | +0.060806526 |
+| 938021 | +131.628216 | -767.402841 | -899.031058 | -0.097151555 | +0.251027992 | +0.028107587 |
+| 938022 | +431.154043 | +492.485199 | +61.331156 | +0.074257258 | +0.016204577 | +0.018225158 |
+| 938023 | -1252.867887 | +599.631291 | +1852.499178 | +0.299453158 | -0.468080700 | +0.077772057 |
+| 938024 | -483.329470 | -841.076947 | -357.747477 | -0.073460877 | +0.083028542 | +0.002783265 |
+| 938025 | -1198.684186 | +414.467193 | +1613.151379 | +0.287144697 | -0.393902538 | +0.003290648 |
+| 938026 | +337.549766 | +319.605839 | -17.943927 | -0.069035448 | -0.028675451 | +0.007890095 |
+| 938027 | +185.714621 | +558.623046 | +372.908425 | +0.250069707 | +0.000000000 | +0.061051208 |
+| 938028 | -1375.314685 | +144.834265 | +1520.148950 | +0.237151291 | -0.388531455 | +0.053592060 |
+| 938029 | +316.524526 | +514.356281 | +197.831755 | +0.133129515 | +0.000000000 | +0.069959398 |
+| 938030 | -1506.037629 | +381.857851 | +1887.895480 | +0.263481608 | -0.497305144 | +0.037875348 |
+| 938031 | +21.844910 | +39.160986 | +17.316076 | +0.152781846 | +0.069755094 | +0.026365502 |
+| 938032 | -1537.378126 | +537.571401 | +2074.949527 | +0.367492195 | -0.507753122 | +0.024328071 |
+
+**Contrary development evidence.** The same final policies on development worlds
+instead have **R−N J −218.433452**, QoS **−.091920514** and cost **+.027256861**,
+with **6/8 J losses**. P10 episode minimum battery is also slightly lower for R
+(**.338897015 versus .341325436**) despite its higher mean minimum. World 937003
+loses **951.891591 J** while QoS and minimum battery rise, with cost **+.357820225**.
+World 937007 gains **352.316155 J** by reducing cost but loses **.334601897 QoS**.
+Development updates 10 and 20 also favor N on mean J, QoS and cost; this is not an
+isolated late comparison. R's own same-world J gain from initialization to 30 is
+**+65.736632**, compared with N's **+284.170084**. That is useful learning in this
+panel, without a monotone improvement curve or an R advantage. Initial policies
+were not evaluated on the final panel, so no final-panel own-learning increment
+is asserted. The opposite final/development comparison cannot be called another
+training change: the policy hashes at update 30 are identical across the panels
+within each arm. Nor does this finite sample identify a systematic distribution
+shift, evaluation overfitting or failure mechanism.
+
+**Event exposure.** R training contains one actual charging UAV-step, rollout 25,
+zero-based step 936 / lane 1, with **.277777778 Wh** charger input; N training has
+none. Both have zero cutoff/depletion throughout all training and evaluation,
+and all evaluation has zero charging. Preserve this small training exposure;
+it cannot support charging recovery, competition or catastrophe-reduction claims.
+
+**Working update and next decision.** The frozen prediction of lower cost,
+non-collapsed service and higher original J is realized on the primary final
+panel. This strengthens the bounded possibility that direct weighting of real
+risk can turn finite native learning into net service benefit, without an MSE
+head. It weakens a categorical claim that stronger risk weighting can only buy
+safety by sacrificing service. It does **not** establish that the original risk
+coefficient is generally too small or that coefficient 4 is a better default.
+Development performance contradicts uniform risk reduction and uniform net use;
+world losses and one trained pair prevent a stable training-method ranking.
+Policy/value scaling, both hierarchy levels and subsequent state visitation
+change together. Their independent roles remain unresolved. The old B03 sign
+reversals and failed proxy ordering stay intact; this is not a rescued auxiliary
+result, proof of optimality or a physical UAV safety result.
+
+Current published main `b512311aff062034799414338bf69f1043a710d6`, shared topics
+3 and 6, was read at this decision. Its independent-training-unit warning makes
+recurrence a distinct question from estimating the use of these fixed policies
+on more worlds. Its B11/B12 target-training reversal is another reason not to
+promote a large single-pair endpoint automatically; that S1 evidence does not
+falsify this S7 intervention. Its B02 low-discriminator deletion result keeps
+native mixed RL a competent working reference, not a component-necessity proof.
+These uses favor preserving ordinary N and testing the actual risk intervention
+before proposing another architecture or reviving the old auxiliary head.
+
+The earlier complete project Pro advice supports the direct-risk premise, but
+contains no decision about this newly observed strong final gain plus contrary
+development panel. Before choosing renewed learning investment, ask one focused
+follow-up below: another independent N/R pair on fixed exposed worlds versus a
+zero-fit wider-world evaluation of the existing pair. The answer can reverse my
+provisional preference for a fresh learning pair. No new fit, coefficient sweep,
+confirmation or replay is selected yet; B04 is complete, and the scientific
+responsibility continues through this concrete choice.
+
+**Cost and observation closure.** R is **152.041147 runner min**, user/system CPU
+**8712.419316 / 421.226692 s**, collection/update/evaluation wall
+**3988.163467 / 2303.179677 / 2308.520845 s**, peak runner RSS
+**2,989,520 KiB (2.851028 GiB)**. After final status refresh its local size is
+**113,326,845 bytes**. N/R together are **2 fits / 360k training / 2.88M agent rows /
+192k evaluation / 552k total team interactions**, sum runner **286.676430 min**,
+sum user/system **16435.874549 / 785.706399 s**. Stage evaluation alone totals
+**75.168429 min**; it is material non-fit work. These walls reflect actual shared
+node conditions, not an intrinsic speed comparison; RSS is per-run high-water,
+not a sum or simultaneous machine peak. Admission of N to exit of R spans
+**303.797771 min**, including the between-fit collection interval.
+Independent rescoring and checkpoint verification added zero interactions and
+updates. The READY evidence was consumed with generation 60 and its exact wake/
+event IDs; generation **61** retains no active B04 experiment. There is no old
+Pro delivery awaiting collection and no duplicate launch or cross-App message.
+
+
+## Pro question 2026-09-23 b04-risk-gain-next-discriminator
+
+Conversation: reuse the direction's completed Jev conversation from local
+operation `hmasd:89adf42eea46a3380a9f9bac76cf9fec1c4fda626d6a8da2205de6d41cf61f75`;
+its private URL stays only in local operation state.
+
+**Question and decision.** After an active, fully verified S7 risk-weighting
+intervention yields a large positive original-J difference on its fixed final
+worlds but negative differences on every post-initial development panel, what
+single next observation is worth buying for service-and-risk learning? My
+provisional preference is one new independent matched N/R training pair, with
+unchanged coefficient, budget and both existing evaluation panels. The strongest
+alternative is zero-fit evaluation of the two existing final policies on a
+predeclared wider fresh-world panel. Please choose between these or give a
+concrete stronger alternative/end-investment reason, rather than an automatic
+sequence of all studies. The scientific choice is renewed investment and its
+estimand, not whether the completed run was technically accepted.
+
+**Standing and actual evidence.** The immediately preceding complete B04 entry
+contains independent verification, all final-world differences, adverse cases,
+learning curves and measured costs. Original S7 reward is
+`QoS - 2*c_return - 5*new_cutoffs - 10*new_depletions + graph_PBRS`;
+`c_return=min(max_i(max(0,-return_margin_i))/.05,1)`. Ordinary complete native
+HMASD N uses it directly; R changes only the scalar supplied to native storage to
+`r_native - 2*c_return`, affecting both high/low returns, GAE, actors and critics.
+Native mixed discriminator rewards, entropy, information, physics and action
+bounds stay matched. Both evaluate original coefficient 2. There is no auxiliary
+head. Seed914021, four lanes, 180k team transitions per arm, 30 full updates;
+actual initialization, first physical collection and initial evaluation match.
+The intervention changes both levels' advantages and the first actual update.
+
+Fixed update-30 final worlds938001–938032 give N/R J **−496.301830/+53.091698**,
+R−N **+549.393528**, QoS **+.108482684**, capped cost **−.129009370** per step,
+22 positive/10 negative J differences, median **+460.498960**, worst relative loss
+**−899.031058**. Final mean/P10 episode minimum battery improve; R still has
+12/32 negative-J worlds, six zero-service worlds and worst absolute J−1246.010918.
+Update-30 development worlds937001–937008 instead give **−218.433452 J**,
+**−.091920514 QoS**, **+.027256861 cost**, 6/8 losses and a slightly worse P10
+battery. Development differences at updates10/20 are **−113.790779/−289.499894 J**.
+The final/development panels share the exact final policy within each arm, so
+that reversal is not additional training. There are no evaluation charging,
+cutoff or depletion events; one charging UAV-step occurs in R training only.
+One trained pair is not 32 training replicates; the world samples do not prove
+systematic distribution shift or locate an optimization defect.
+
+Earlier B03 auxiliary S/D and G/D signs reversed over two training blocks, with
+both blocks evaluated on the same final worlds. Their exact raw-J differences
+are **+24.585407/−16.825601** and **+117.896434/−24.945921** respectively. The
+project-level prior Pro answer misquoted their units/numbers; its following
+Decision and our original summaries correct them. Do not reuse those wrong
+numbers. B03 remains closed; lower common MSE did not order control usefulness.
+The complete project advice's direct-risk proposal motivated B04, but it did
+not address this new panel-sensitive positive result or select the next batch.
+No follow-up is needed merely to repeat routine implementation/verification.
+
+**Two feasible candidate investments, not selected or launched.**
+
+- Fresh-learning recurrence: two new native fits at the same 180k horizon and
+  coefficients N=2/R=4, a prospective fresh seed such as914173 with four lanes,
+  identical initialization within pair, identical matched native conditions.
+  Keep B04's two panels fixed to avoid changing both training instance and
+  worlds; call them already exposed development evidence, not new held-out
+  confirmation. Same0/10/20/30 schedule gives **2 fits / 360k train / 192k eval /
+  552k total team interactions**, 2.88M train agent rows. Predeclare which joint
+  J/service/risk pattern would retain or lower investment and preserve each
+  panel and adverse world separately. This tests recurrence conditional on these
+  worlds, not a stable population effect from n=2. B04 cost was286.676430 sum
+  runner min; future shared-node wall is unknown. Small parameter plumbing and
+  a focused check may be needed, not a new model or a coefficient search.
+- Fixed-policy world sensitivity: both frozen B04 final checkpoints, a predeclared
+  fresh64-world panel (e.g.939001–939064), 1500-step native evaluation, original
+  coefficient2, deterministic actions and zero updates: **0 fits / 192k eval**.
+  Report all paired J/QoS/cost/minimum-battery values and adverse tails. This can
+  refine the use judgment for these two policies but cannot add training
+  recurrence or identify why their training diverged. B04's192k evaluation cost
+  alone was75.168429 min; zero fits is not zero cost. A narrow checkpoint evaluator
+  would need identity/RNG/reproduction checks and engineering review if changed.
+
+No extra head, critic decomposition, coefficient sweep, training extension,
+checkpoint selection, automatic third block or confirmation is proposed. A
+same-objective separate-cost critic is an unselected alternative with a weaker
+current activation/bottleneck rationale. There is no obligation to invent a new
+architecture or rescue a positive number. Pro may recommend a better targeted
+choice only with distinct predicted intermediate/native consequences and honest
+implementation, fit and non-fit costs.
+
+**Context and source precedence.** This question and the immediately preceding
+B04 result are at `source_sha` (the immutable commit supplied in the message).
+Read these concrete sources; the small current-main set below has an explicit
+revision because the experimental branch does not overwrite current governance.
+
+- Current governance: `docs/project/OPERATING_CONSTITUTION.md` §§1–5,7–8 at
+  `b512311aff062034799414338bf69f1043a710d6`. Owner pause is lifted; current owner
+  scientific-autonomy/three-DM delegation lets this DM choose and continue useful
+  work. FSD remains owner-paused and G33 frozen. No cross-App messages.
+- Current methods: `.agents/skills/hmasd-scientific-tools/SKILL.md`, “Update the
+  working explanation”, “Comparators and MARL information”, “Statistics”, “Cost
+  and exposure”, “Pro”, at that same current-main revision. No mandatory new
+  architecture, pilot success, exact-head repeat test, or per-fit permission.
+- Shared scientific background: `docs/research/RESEARCH.md`, topics3 and6 and
+  DM3 current plan at that revision. Relevant contrasts are DM1 B11/B12 target
+  training reversal and DM2 B02 removal of low discriminator reward; they constrain
+  inference/default promotion, not the S7 result itself. The owned DM3 row there
+  predates R completion; the `source_sha` result above supplies the newer facts.
+- Prior advice: `docs/research/archive/2026-09-23/RESEARCH-scientific-management-adopted.md`,
+  full Answer and Decision at that current-main revision, especially the direct
+  risk-learning proposal and correction to S7 numbers. Its decision scope is
+  distinguished from this new follow-up; do not require another owner approval.
+- Frozen scientific source: `914fc484368cc6c41af211b169c45b02e4a10425`, this notebook's
+  “B04 prospective direct service and return-risk learning” and
+  `experiments/candidates/uav_service_auxiliary/b04/native.py`, `evaluation.py`,
+  `scripts/run_uav_service_auxiliary_b04.py` only where a disputed contract needs
+  code. Current methods do not revise the original seed, endpoint or outputs.
+- Primary runner evidence at `source_sha`: both
+  `runs/uav_service_auxiliary/b04_n_914021_a01/summary.json` and
+  `runs/uav_service_auxiliary/b04_r_914021_a01/summary.json`, plus config, progress,
+  exit/status. Read their final worlds, all development aggregates, actual counts
+  and intervention fingerprints. The DM's raw NPZ/checkpoint byte audit is reported
+  above; these binaries are retained locally/on the node and are not necessarily
+  available through GitHub. Do not claim to have independently byte-verified them.
+- This notebook's prior “B03 second common replay accepted and current recipe
+  closed” for inherited adverse evidence, at `source_sha`; no recursive archive
+  preload or literature survey is needed. If a new literature premise changes
+  the decision, use a primary passage and separate its result from analogy.
+
+**Return.** Give a direct choice with what it can change, the strongest reason
+against it, and what observations would change your recommendation. Separate
+observed facts, strengthened/weakened/untouched judgments and newly suggested
+explanations; address the large final gain, negative development panels, adverse
+worlds and actual costs together. If selecting a new study, give a narrow fixed
+comparison and prospective outcome branches, with units of inference and
+exposure. A failed intermediate prediction is not a reason to keep varying
+architecture or coefficients. Return `MATERIAL_DISSENT: yes/no` with substantive
+reason and cite consequential sources actually read; name any decision-critical
+unread gap. No fixed candidate count or mandatory extra investigation.
+
+**Write scope.** Do not train or launch anything. Write only into the empty
+`### Answer` immediately below this unique question on branch
+`codex/uav-service-predictive-control`, file
+`docs/research/candidates/uav_service_auxiliary/NOTES.md`. Read the question at
+`source_sha`, fetch the latest target file/blob SHA before writing, preserve every
+other byte and stop on overlapping edits. Report the actual write commit. If
+writeback is unavailable, return the complete answer in chat rather than a
+receipt, link or SHA. Advice is not approval and does not lift a pause. The
+scientific decision remains this DM's under existing owner authorization.
+
+### Answer
