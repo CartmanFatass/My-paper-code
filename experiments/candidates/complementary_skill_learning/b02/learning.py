@@ -16,6 +16,10 @@ from experiments.candidates.complementary_skill_learning.b01.learning import Com
 
 
 ARM_COEFFICIENTS = {"M": 0.5, "T": 0.0}
+# Native reward components and rollout storage are float32 views of the same
+# computed arrays.  These tolerances admit only float32 roundoff, not drift.
+STORAGE_RTOL = 1e-6
+STORAGE_ATOL = 2e-6
 
 
 class ObjectiveComparisonAgent(ComplementaryAgent):
@@ -56,6 +60,11 @@ class ObjectiveComparisonAgent(ComplementaryAgent):
         self._capture_reward_scores = False
         self._current_reward_scores: list[np.ndarray] = []
         self._reward_score_batches: list[tuple[np.ndarray, np.ndarray]] = []
+        self._storage_batch_calls = 0
+        self._storage_expected_rows = 0
+        self._storage_verified_rows = 0
+        self._storage_failures = 0
+        self._last_storage_failure: dict[str, Any] | None = None
         super().__init__(config, "D", head_seed, aux_seed, log_dir, device)
         # B01 uses this label only to decide whether an auxiliary trunk optimizer
         # exists.  M/T are both detached, and checkpoint metadata must retain the
@@ -146,11 +155,84 @@ class ObjectiveComparisonAgent(ComplementaryAgent):
             np.stack([row[1] for row in self._reward_score_batches]),
         )
 
+    def _storage_failure(self, reason: str, step: int, env_id: int) -> None:
+        self._storage_failures += 1
+        self._last_storage_failure = {
+            "reason": str(reason), "rollout_step": int(step), "env_id": int(env_id),
+            "verified_rows_before_failure": int(self._storage_verified_rows),
+        }
+        raise RuntimeError(
+            f"native rollout storage verification failed at t={step}, env={env_id}: {reason}"
+        )
+
+    def _assert_storage_array(self, actual: Any, expected: np.ndarray, name: str,
+                              step: int, env_id: int) -> None:
+        value = np.asarray(actual, dtype=np.float32)
+        expected = np.asarray(expected, dtype=np.float32)
+        if (value.shape != expected.shape or not np.isfinite(value).all()
+                or not np.allclose(value, expected, rtol=STORAGE_RTOL, atol=STORAGE_ATOL)):
+            self._storage_failure(name, step, env_id)
+
+    def store_transition_batch(self, *args, **kwargs):
+        result = super().store_transition_batch(*args, **kwargs)
+        step = kwargs.get("rollout_step_idx")
+        if step is None and len(args) > 8:
+            step = args[8]
+        if step is None:
+            raise ValueError("B02 storage verification requires rollout_step_idx")
+        step = int(step)
+        expected = self._last_reward_batch
+        if expected is None:
+            raise RuntimeError("B02 storage verification has no computed reward batch")
+        rows = int(expected["intrinsic"].shape[0])
+        self._storage_batch_calls += 1
+        self._storage_expected_rows += rows
+        if not isinstance(result, list) or len(result) != rows:
+            self._storage_failure("native batch return row count", step, -1)
+        required = ("env", "team_disc", "ind_disc", "process")
+        zero_process = np.zeros(expected["intrinsic"].shape[1], dtype=np.float32)
+        buffer = self.rollout_buffer
+        row_failures = []
+        for env_id, returned in enumerate(result):
+            try:
+                if not isinstance(returned, dict) or any(key not in returned for key in required):
+                    self._storage_failure("native row refused or incomplete", step, env_id)
+                if not bool(buffer.masks[step, env_id]):
+                    self._storage_failure("rollout buffer mask is false", step, env_id)
+                self._assert_storage_array(returned["env"], expected["env"][env_id],
+                                           "returned env component", step, env_id)
+                self._assert_storage_array(returned["team_disc"], expected["team_disc"][env_id],
+                                           "returned team component", step, env_id)
+                self._assert_storage_array(returned["ind_disc"], expected["ind_disc"][env_id],
+                                           "returned individual component", step, env_id)
+                self._assert_storage_array(returned["process"], zero_process,
+                                           "returned process component", step, env_id)
+                self._assert_storage_array(buffer.rewards[step, env_id],
+                                           expected["intrinsic"][env_id],
+                                           "stored low reward", step, env_id)
+                self._assert_storage_array(buffer.reward_env[step, env_id],
+                                           expected["env"][env_id],
+                                           "stored env component", step, env_id)
+                self._assert_storage_array(buffer.reward_team_disc[step, env_id],
+                                           expected["team_disc"][env_id],
+                                           "stored team component", step, env_id)
+                self._assert_storage_array(buffer.reward_ind_disc[step, env_id],
+                                           expected["ind_disc"][env_id],
+                                           "stored individual component", step, env_id)
+                self._assert_storage_array(buffer.reward_process[step, env_id], zero_process,
+                                           "stored process component", step, env_id)
+                self._storage_verified_rows += 1
+            except RuntimeError as exc:
+                row_failures.append(str(exc))
+        if row_failures:
+            raise RuntimeError("; ".join(row_failures))
+        return result
+
     def clear_buffers(self) -> None:
         super().clear_buffers()
         self._reward_score_batches.clear()
 
-    def reward_telemetry(self) -> dict[str, int | float | str]:
+    def reward_telemetry(self) -> dict[str, Any]:
         return {
             "arm": self.objective_arm,
             "legacy_mi_reward_coef": float(self.config.legacy_mi_reward_coef),
@@ -161,7 +243,12 @@ class ObjectiveComparisonAgent(ComplementaryAgent):
             "finite_failures": self._reward_finite_failures,
             "component_identity_failures": self._reward_identity_failures,
             "fallbacks": self._reward_fallback_total,
+            "storage_batch_calls": self._storage_batch_calls,
+            "storage_expected_rows": self._storage_expected_rows,
+            "storage_verified_rows": self._storage_verified_rows,
+            "storage_failures": self._storage_failures,
+            "last_storage_failure": self._last_storage_failure,
         }
 
 
-__all__ = ["ARM_COEFFICIENTS", "ObjectiveComparisonAgent"]
+__all__ = ["ARM_COEFFICIENTS", "ObjectiveComparisonAgent", "STORAGE_ATOL", "STORAGE_RTOL"]

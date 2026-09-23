@@ -224,6 +224,9 @@ def _telemetry_delta(after: dict, before: dict) -> dict:
                 "individual_discriminator_forwards", "finite_failures",
                 "component_identity_failures", "fallbacks"):
         result[key] = int(after[key]) - int(before[key])
+    for key in ("storage_batch_calls", "storage_expected_rows", "storage_verified_rows",
+                "storage_failures"):
+        result[key] = int(after[key]) - int(before[key])
     return result
 
 
@@ -336,12 +339,17 @@ def run_fit(arm, out, launch_sha, *, spec=DEFAULT_SPEC, device="cuda", admission
                         joint_hist[key] = joint_hist.get(key, 0) + 1
                 saturation += int((np.abs(actions) > 1).sum())
                 action_coordinates += actions.size
-                agent.store_transition_batch(
+                verified_before = int(agent.reward_telemetry()["storage_verified_rows"])
+                stored_rows = agent.store_transition_batch(
                     states=states, next_states=next_states.copy(), observations=observations,
                     next_observations=next_obs.copy(), actions=actions, rewards=rewards,
                     dones=next_dones, infos_batch=None, rollout_step_idx=t, step_data=data,
                 )
-                counts["stored_transitions"] += spec.lanes
+                verified_after = int(agent.reward_telemetry()["storage_verified_rows"])
+                if (not isinstance(stored_rows, list)
+                        or verified_after - verified_before != spec.lanes):
+                    raise RuntimeError("B02 collector did not verify every native storage row")
+                counts["stored_transitions"] += verified_after - verified_before
                 raw_returns += rewards
                 for lane, env in enumerate(envs):
                     if next_dones[lane]:
@@ -374,7 +382,11 @@ def run_fit(arm, out, launch_sha, *, spec=DEFAULT_SPEC, device="cuda", admission
             reward_telemetry = _telemetry_delta(agent.reward_telemetry(), before_reward)
             if (reward_telemetry["fallbacks"] or reward_telemetry["finite_failures"]
                     or reward_telemetry["component_identity_failures"]
+                    or reward_telemetry["storage_failures"]
                     or reward_telemetry["batch_calls"] != spec.horizon
+                    or reward_telemetry["storage_batch_calls"] != spec.horizon
+                    or reward_telemetry["storage_expected_rows"] != spec.horizon * spec.lanes
+                    or reward_telemetry["storage_verified_rows"] != spec.horizon * spec.lanes
                     or reward_telemetry["team_discriminator_forwards"] < spec.horizon
                     or reward_telemetry["individual_discriminator_forwards"] < spec.horizon):
                 raise ValueError("invalid native reward-path telemetry")
@@ -466,6 +478,9 @@ def run_fit(arm, out, launch_sha, *, spec=DEFAULT_SPEC, device="cuda", admission
         if agent is not None:
             summary["auxiliary_history"] = jsonable(agent.auxiliary_history)
             summary["reward_telemetry"] = agent.reward_telemetry()
+            counts["stored_transitions"] = int(
+                summary["reward_telemetry"]["storage_verified_rows"]
+            )
         if counters is not None:
             summary["native_optimizer_calls"] = support.optimizer_counts(counters)
         write_json(out / "summary.json", summary)

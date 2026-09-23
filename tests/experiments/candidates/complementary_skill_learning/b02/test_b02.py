@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import replace
+import json
 import pickle
 import subprocess
 import sys
@@ -26,6 +27,34 @@ def build(tmp_path, spec, arm):
     agent = ObjectiveComparisonAgent(config, arm, spec.head_seed, spec.aux_seed,
                                      str(tmp_path / f"logs-{arm}"), torch.device("cpu"))
     return agent, envs
+
+
+@pytest.fixture(params=("healthy", "refused", "corrupted"))
+def storage_case(request, monkeypatch):
+    mode = request.param
+    if mode == "healthy":
+        return mode
+    original = ObjectiveComparisonAgent.store_rollout_step
+    injected = {"done": False}
+
+    def store_rollout_step(self, *args, **kwargs):
+        second_rollout_first_lane = (
+            not injected["done"]
+            and self._storage_batch_calls == int(self.config.rollout_length)
+            and int(kwargs["t"]) == 0
+            and int(kwargs["env_id"]) == 0
+        )
+        if second_rollout_first_lane and mode == "refused":
+            injected["done"] = True
+            return False
+        result = original(self, *args, **kwargs)
+        if second_rollout_first_lane and mode == "corrupted":
+            injected["done"] = True
+            self.rollout_buffer.rewards[int(kwargs["t"]), int(kwargs["env_id"]), 0] += 1.0
+        return result
+
+    monkeypatch.setattr(ObjectiveComparisonAgent, "store_rollout_step", store_rollout_step)
+    return mode
 
 
 def test_effective_config_includes_inherited_treatment_and_fixed_native_fields(spec):
@@ -125,6 +154,40 @@ def test_evaluation_resets_world_stream_and_preserves_all_state(tmp_path, spec):
     finally:
         for env in envs:
             env.close()
+
+
+def test_two_rollout_storage_verification_stops_before_second_update(
+        tmp_path, spec, storage_case):
+    two_rollouts = replace(spec, rollouts=2)
+    out = tmp_path / storage_case
+    if storage_case == "healthy":
+        summary = r.run_fit("T", out, "technical-check", spec=two_rollouts, device="cpu")
+        assert summary["status"] == "complete"
+        assert summary["counts"]["stored_transitions"] == 80
+        assert summary["counts"]["native_updates"] == 2
+        assert summary["reward_telemetry"]["storage_expected_rows"] == 80
+        assert summary["reward_telemetry"]["storage_verified_rows"] == 80
+        assert summary["reward_telemetry"]["storage_failures"] == 0
+        return
+    with pytest.raises(RuntimeError, match="storage verification failed"):
+        r.run_fit("T", out, "technical-check", spec=two_rollouts, device="cpu")
+    summary = json.loads((out / "summary.json").read_text())
+    assert summary["status"] == "failed"
+    assert summary["counts"]["native_updates"] == 1
+    assert summary["native_optimizer_calls"] == {
+        "coordinator": 1, "discoverer_actor": 1, "discoverer_critic": 1,
+        "team_discriminator": 1, "individual_discriminator": 4,
+    }
+    assert len(summary["training_rows"]) == 1
+    assert not (out / "final.pt").exists()
+    assert summary["reward_telemetry"]["storage_expected_rows"] == 42
+    assert summary["reward_telemetry"]["storage_verified_rows"] == 41
+    assert summary["counts"]["stored_transitions"] == 41
+    assert summary["reward_telemetry"]["storage_failures"] == 1
+    failure = summary["reward_telemetry"]["last_storage_failure"]
+    assert failure["rollout_step"] == 0 and failure["env_id"] == 0
+    expected_reason = "native row refused" if storage_case == "refused" else "stored low reward"
+    assert expected_reason in failure["reason"]
 
 
 @pytest.mark.parametrize("device", ["cpu", pytest.param("cuda", marks=pytest.mark.skipif(
