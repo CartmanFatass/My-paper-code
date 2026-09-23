@@ -19,8 +19,10 @@ under `docs/research/archive/` per constitution section 4; direction NOTES keep 
 Roles (constitution section 2). Codex: a session may coordinate as Root or directly own one
 direction as an independent DM. The current owner-selected working level is four direction DMs
 total, counting the assigning session when it becomes a direct DM; reuse the recorded lead.
-For the current four-direction assignment, initialization ends cross-DM communication;
-each session completes and publishes independently. Root uses `hmasd-loop-dispatch`.
+Under the owner's 2026-09-23 delegation, Root acts as scientific project manager and DMs may
+reframe or change their research direction using project-wide evidence without renewed approval;
+see constitution section 2. Ending a recipe does not end the DM's research responsibility.
+Each session works and publishes independently. Root uses `hmasd-loop-dispatch`.
 A direct Codex DM reads the `developer_instructions` body in
 `.codex/agents/hmasd-direction-manager.toml`, then the relevant scientific/engineering methods;
 it uses the same DM responsibility source without creating a child or loading Root procedures.
@@ -35,8 +37,8 @@ Jev browser interaction and internal subagents keep their applicable workflows. 
 needs no second approval. Read other tasks' evidence only as needed and resolve ordinary
 concurrent changes locally; raise only a genuinely unresolved judgment in this task.
 RESEARCH records the acting Root and actual DM addresses/checkouts;
-keep task routing separate from launch-bound lead-runtime values. Start a reserve only for
-a recorded idea, never by obligation.
+keep task routing separate from launch-bound lead-runtime values. Start or switch work for
+a recorded useful scientific reason, never merely to fill a slot.
 Claude: the session is the DM for one direction at a time. A DM may work directly or delegate to
 its Implementer (Claude: Opus; Codex: Sol; both high effort) from a concise scope note and accepts the
 diff itself. Detached repository scripts observe accepted operations and wake the assigning
@@ -61,7 +63,7 @@ Methods are execution detail, not a second rulebook, in `.agents/skills/`:
 launch, and the carried-over engineering standards), `hmasd-loop-dispatch` (Codex Root/direct DM),
 `hmasd-chatgpt-pro-transport` (direct Pro browser/send/collection procedure; on the WSL host
 `hmasd-jev-pro-transport` uses Jev only for browser interactions that need it), `hmasd-pro-research-prompt-author`
-(Pro question), `hmasd-portfolio-task` (owner-triggered review only). Read the nearest
+(Pro question), `hmasd-portfolio-task` (owner-requested or delegated project review). Read the nearest
 directory `AGENTS.md` before a code task.
 
 Execution: node, interpreter and supervisor come from `.codex/hmasd-compute.toml`. Commit and

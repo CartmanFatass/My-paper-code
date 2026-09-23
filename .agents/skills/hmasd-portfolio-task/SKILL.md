@@ -1,14 +1,15 @@
 ---
 name: hmasd-portfolio-task
-description: Prepare an owner-triggered HMASD Portfolio review in RESEARCH.md, obtain Pro advice and apply the owner's decision; consolidate the current index and retire completed review material by date. Only when the owner asks; otherwise queue recommendations in NOTES.md.
+description: Prepare an owner-requested or delegated HMASD project review in RESEARCH.md, obtain Pro advice and apply the responsible scientific decision; consolidate the current index and retire completed review material by date.
 ---
 
-# Portfolio review (owner-triggered)
+# Portfolio review (owner-requested or delegated)
 
-Authority: `docs/project/OPERATING_CONSTITUTION.md` sections 2 and 4. The owner chooses which
-directions exist and triggers review. Nothing else triggers it: not object completion, idle
-capacity, a budget concern, a closing note or a timer. Without a trigger, recommendations wait
-as `NOTES.md` entries.
+Authority: `docs/project/OPERATING_CONSTITUTION.md` sections 2 and 4. Use for an owner's project
+review request or consequential project decisions within an explicit management delegation.
+The 2026-09-23 delegation lets Root and DMs choose worthwhile research within the project's
+purpose without repeated owner approval. A recipe's completion or failure does not automatically
+require this review; DM reflection and pivots may use their existing NOTES and section 5 advice.
 
 ## Steps
 
@@ -66,8 +67,9 @@ as `NOTES.md` entries.
    The review author hands off only this subsection while Pro writes and does not edit
    it concurrently. A short receipt is not an answer. Use the same complete-answer, scope and
    uncertain-write reconciliation checks as a direction question; do not look in NOTES.md.
-4. **Read the whole answer.** Pro advises. The owner decides; if the owner says to apply Pro's
-   answer, apply it. Check consequential recommendations against the supplied methods and evidence;
+4. **Read the whole answer.** Pro advises. The assigned Root/DM decides within the owner's
+   explicit delegation; otherwise the owner decides. Do not turn delegated scientific choices
+   into another permission request. Check consequential recommendations against the supplied methods and evidence;
    state dependent source gaps without inventing a further review trigger. Write the decision and
    its date under `### Decision`.
 5. **Apply and retire.** Update the affected direction rows and replace the current plan with
