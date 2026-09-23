@@ -4295,3 +4295,398 @@ new candidate, proof, framework or approval. Include MATERIAL_DISSENT yes/no and
 decision-critical unread source. The DM will read the full answer and own the decision.
 
 ### Answer
+
+Saved from chat after `deliver` verified `NOT_DELIVERED`; Pro states it made no write.
+The latest branch target remained byte-identical and empty before DM insertion. Question key
+`hmasd:cf77c8c4c6713ea91b15d485a7bf6621cdef44f2e75cc81f2aaef9fc9d804604`.
+Collected text:8292 characters, SHA-256
+`4c771f735a18768b55a857f1a565ed20de97ec0e3d21424caf48e1ed7f47a562`. The saved file adds
+one terminal LF (SHA-256 `913e631c276814dc0cef9b0c3733fcd45ccc557f1e178dad6b9f7aeb5111b264`).
+The complete extracted answer follows unchanged, including rendered equation/attachment text.
+
+本轮未完成 GitHub 写回。 读取正常，更新接口也可见；但接口要求整文件替换，我未能建立可核验其余字节原样保留的完整替换稿，因此没有发起写入。最新回读的本题 ### Answer 仍为空，没有新 commit。以下是完整答复。
+
+Answer
+一、建议采用这一个新 SET 配对，不扩成四格，也不先补机制实验
+
+我支持提议的两个新 exploratory fits：SET、训练 seed 953201、低层熵系数 .05 对 0，每 fit 360k team steps；保留共同裁剪训练／确定性部署、final45 主终点及新的评价世界。 先前的完整比较已经提供了值得检验的普通配方变化，现在最有价值的问题是它能否在另一个训练实例上再次产生实际服务收益，而不是继续提出新的“修复机制”。附件对这个较窄目标的限定是合理的。
+
+hmasd-pro-question-count-entrop…
+
+这次比较应改变的判断是：
+
+λ_l=0 是否值得从“在一个开发区组里有用的 SET 设置”，提高为“已有独立复现支持、可保留用于后续普通对照开发的设置”？
+
+正结果可以提高保留这个设置的理由；未复现则应降低将其作为默认改进的信心。两种结果都不要求 SET 超过 H6，也不直接决定整个 N 方向的去留。
+
+最强的替代解释是：B04 的 final45 收益依赖 seed 943201 所产生的有限训练结果及其评价面板，尤其是该 .05 控制在 N8 的表现；它未必代表可重复的配方优势。阶段15／30的不利结果使这种解释保持实质竞争力。新训练配对能直接增加一个不同训练实例的观察，而对旧策略增加世界、重画 sigma 曲线或再推导熵梯度，不能提供这个观察。
+
+最强的不投入理由则是：一个新配对仍不能给出可靠的训练总体精度，也不能分离所有学习通路。若真正需要立即回答的是“剩余 H6 优势是否稳定”或“Q 是否复现”，SET-only 确实不够。但当前问题已明确不购买这两项结论；不能把更宽问题尚未解决，变成较窄且有用比较的强制附加成本。现行方法也允许把复现本身作为能改变判断的下一步，而非要求每次必须更换架构或解释。
+
+二、B04 支持的是有范围的 SET 配方收益，不是统一的“降低噪声就更好”
+1. 最终收益真实存在，但主要集中在 N8
+
+我依据原始 final45 面板重新计算了 SET 的 J 均值差和逐世界差值符号，与最终 summary 一致。完整结果中的原生分量如下；E_SET 均为 λ0 − λ.05，惩罚差为负是有利变化。
+
+测试 N	E_SET：原生 J	覆盖变化	质量变化	高度惩罚变化	J 改善世界数
+4	+0.000936100	−0.002365000	−0.005118049	−0.004127014	8/16
+6	+0.052325723	+0.044612500	+0.004768679	−0.019666369	13/16
+8	+0.110144950	+0.105040000	+0.027910333	−0.028243850	16/16
+
+未见数量等权均值为 E_SET,U=+.055540525。N8 的覆盖增加相当于每步平均多服务 5.252 个用户，质量和惩罚也同时改善；这不是仅靠 H6 变差制造的相对结果。N8 的十六个配对世界 J 差全为正，也说明这一个固定策略对的均值并非由少数正世界抵消大多数负世界所得；但仍不是十六次独立训练复现。
+
+N4 应保留另一种读法：微小 J 增益来自惩罚降低抵消覆盖、质量损失，世界符号为8:8。它不是两个 unseen N 都出现覆盖恢复，也不是“无变化”的等价性证据。N6 的 J 和覆盖均值同时提高，满足原先的描述性无已观测训练数量服务代价条件，不等于总体非劣性。
+
+H6 的对应 unseen 变化为 −.009686614，因此 Q_U=+.065227139 包含了 H6 的损失，但不只来自该损失。同一 λ0 下的 H6−SET unseen 差仍为 +.047735405。这些数字支持保留完整包结果与系数敏感性，不能换算成“解释了旧 H6 优势的百分之多少”，也没有识别技能机制。H6 的 λ0 设置不应随 SET 的收益一并被认定为普遍改进。
+
+2. 不利阶段降低外推信心，但不推翻预写的 final45 读法
+
+SET 的 unseen E 在阶段15／30分别为 −.031707819／−.049766434。阶段15的正 Q_U 是在 SET 自身损失服务时出现的，继续证明“正交互”与“有用的自身改进”不是同一件事。N8 原始阶段面板也直接保留了 λ0 的不利 J 对比。
+
+正确更新有两面。final45 是事先固定的终点，因此不能因中间结果不利而改选别的终点；同样，也不能因 final45 转正，就宣称已经识别出“晚期恢复”或“.05 后期崩溃”。不同阶段使用不同世界，跨阶段变化混合了策略变化和世界变化。
+
+这使在相同固定训练预算下复现终点用途更值得检验，却不产生“必须先增加更密集 checkpoint 或延长训练”的要求。即使新配对最后再次为正、早期仍为负，支持的也只是指定360k终点的配方用途，不是全过程优势、收敛更快或任意停止时间都更好。
+
+3. 边界反例必须进入新解释，而不是被收益掩盖
+
+B04 的两个预写训练窗口均出现：SET 原始动作饱和明显下降，但物理位置边界截断增加。下表方向统一为 .05 → 0。
+
+训练窗口	原始坐标饱和率	物理边界截断率
+全程1–45	.637829 → .338887	.167267 → .236694
+晚期31–45	.801719 → .354616	.168403 → .253072
+
+因此，“此次 SET 收益需要更少训练边界截断”这一简单解释已经遇到反例。不能继续把“边界截断下降”写成新配方成功的必要中间条件；也不能反向认定“更多边界截断导致收益”。均值、位置访问、优化更新以及共同学习的作用仍未分开。
+
+还要保留测量阶段的区别：这些是随机训练期间的曝光统计，final45 J 来自确定性均值策略的部署评价。不能把前者直接充当后者的边界行为或安全结论。完整记录及最终训练行支持处理确实生效，而不是技术性未激活。
+
+综合而言，B04 加强了这个 SET 配方受基本学习设置影响、且存在有用调整的判断；削弱了统一的饱和率—边界—服务修复解释，以及旧 .05 包差对普通学习选择不敏感的看法；未解决独立训练复现、充分合格的普通基线、Q 复现及剩余 H6 包差。
+
+B03 的 clip-only 选择性 SET 恢复预测仍然失败。B04 改变了另一个学习因素，不能把 B03 倒写成成功。指定背景 f82f7265… 对动作执行、潜变量熵和有限学习的区分仍有效；其中 H6-only 的 B04 中间状态则由当前完整结果替代。
+
+三、为什么此时选择两 fits，而不是四格或零新 fit
+选择	新训练成本	按提案评价成本	主要新增判断
+SET .05/0 新配对	2 fits；720k team steps	192k team steps	SET 自身配方收益在新训练／新世界条件下是否再现
+H6/SET × .05/0 新四格	4 fits；1.44M team steps	384k team steps	另增加 H6 响应、Q 及同面板包差的一个新区组
+不再运行	0 fits	0	保留当前有范围的结论，不新增复现证据
+
+成本计数来自固定曝光方案；四格的训练和评价步数翻倍，但 H6 还有额外学习工作，不能把它转换为准确的两倍 wall time。
+
+hmasd-pro-question-count-entrop…
+
+四格不是错误选择，只是当前购买的问题不同。 它适合下一决定确实依赖“选择性 Q 能否再现”或“新的共同世界上还剩多少 H6 优势”的情况。对已经限定为 SET 自身效应的问题，加入两次 H6 训练并不是识别 E_SET 的必要条件。反过来，选择便宜配对后就必须真的放下新 Q 的结论，不能拿旧 H6 的 E 与新 SET 的 E 拼出一个所谓复现交互。
+
+我不选零新 fit，是因为这里存在能够改变实际使用判断的观察。 正结果会提高保留 λ0 普通配方的理由；无用或反向结果会降低把它当作可重复升级的理由。若这两个分支都只得到同一句“以后还需更多研究”，这次购买才失去意义；应在执行前把“保留为后续工作设置”与“暂不提高其默认使用地位”写清楚。
+
+一个更便宜但不同的问题，是用两个旧最终策略在新最终世界上再评估一次：按三种 N、各16世界、500步，需要 0 fits、48k evaluation team steps。它只能检验旧策略对的世界敏感性，不能检验训练配方复现，因此我不把它选为替代，也不把它加成两-fit比较的前置门槛。
+
+缺失的旧动作均值或梯度历史同样不要求先追加机制实验。它们限制中介归因，但不妨碍比较一个明确学习设置的完整服务用途。
+
+四、新配对的统计对象：一个新的训练区组，不是十六个或四十八个训练样本
+
+保留 seed 953201 和评价地址
+
+w
+r,n,i
+	​
+
+=1,500,000+1000r+100n+i,r∈{0,15,30,45},i=0,…,15.
+
+两个系数条件在新配对内共享初始化、外生随机地址和同阶段世界；不从旧检查点 warm-start，也不要求匹配旧 seed943201 的轨迹。.05 与 0 两个 fits 一起预写，不能看完第一个分数才决定第二个是否值得完成。
+
+hmasd-pro-question-count-entrop…
+
+令 b 表示这个新训练区组，π
+b,λ
+	​
+
+ 为固定360k终点策略，则每个 N 的读数为
+
+E
+b,n
+	​
+
+=
+16
+1
+	​
+
+i=0
+∑
+15
+	​
+
+[J(π
+b,0
+	​
+
+,w
+45,n,i
+	​
+
+)−J(π
+b,.05
+	​
+
+,w
+45,n,i
+	​
+
+)],
+
+主终点保持
+
+E
+b,U
+	​
+
+=
+2
+E
+b,4
+	​
+
++
+E
+b,8
+	​
+
+	​
+
+.
+
+原生单位继续是实际测试 N 对 scalar reward 的恢复：
+
+J=
+500
+n
+	​
+
+t
+∑
+	​
+
+r
+t
+	​
+
+=.7
+C
+ˉ
++.3
+Q
+ˉ
+	​
+
+−
+P
+ˉ
+.
+
+新评价不能因沿用训练 N=6 而错误换算，也不能把已经包含系数的高度惩罚再乘一次。
+
+需要明确三层边界：
+
+配对来自设计，不只来自种子数字相同。 初始张量／normalizer、初始逐世界输出以及第一段更新前采集结果的匹配，核对的是处理产生学习差异之前的共同起点。之后轨迹和状态曝光不同，是学习设置可能发挥作用的途径，不是应被强行消除的“不匹配”。
+
+新训练和新世界在区组之间同时变化。 这检验的是完整流程在两者更新后能否保留用途，不是单独隔离训练随机性的实验。若新 E 消失，不能直接写成“证实旧结果只是 seed 偶然”，也不能直接归因于世界；若再现，也没有独立估计这两类变异。四格在不改变世界设计时，同样不会自动分离它们。
+
+独立训练单位仍很少。 新研究每个系数只有一个新训练实例，合起来是一个预先配对的训练区组。加上旧 SET 配对，可并列观察两个区组的响应，但旧区组是触发本次选择的开发证据；这不是两轮独立确认，更不是由世界数提供的训练总体精度。保留两个区组各自的每-N效果，不用合并均值掩盖反号，也不从 world bootstrap 生成训练总体置信区间。
+
+本次没有新 H6 配对，所以 不报告“新 Q”或“剩余 H6 优势已复现”。旧 H6 结果只保留其历史范围。
+
+五、结果分支应改变配方使用判断，而不是形成自动追加训练的流程
+
+我建议保持现有 primary，但把三个判断分开：未见数量平均 J 收益是否再现、原生分量体现什么用途、是否存在训练数量代价。 它们不应被压成一个只有成功／失败的标签。
+
+新配对的 final45 观察	应采取的科学更新
+unseen J 有有用的正变化，覆盖等分量支持实际服务用途，N6 的 J／覆盖条件也保留	提高将 λ0 保留为后续 SET 工作配方的理由。若 N8 收益也再现，则进一步支持旧结果最突出的数量条件；仍不认证基线或 Q。
+unseen J 改善，但 N6 有代价，或 N4／N8出现明显相反取舍	保留具体收益和代价，不称为所有数量上的无成本升级。主终点不改，不能事后只选有利 N 或发明容忍区间。
+只有微小正号、明显抵消，或 J 主要通过惩罚补偿而覆盖用途未再现	保留原生 J 事实，但不能仅据正号提高“实用升级”的信心；区分目标值改善与覆盖恢复，避免把它们互换。
+技术完整，但 unseen J 不再改善或反向	降低“λ0 是可重复 SET 改进”的判断，暂不把它提升为默认升级。保留 B04 的局部结果；不宣布所有熵解释无效，也不自动改系数、延长 horizon 或补第三 fit。
+
+这里不应增加两个新门槛。
+
+第一，不要求复现 B04 的精确幅度、全部16个 N8 世界正号，或每个中间 checkpoint 都有优势。这些是旧数据的观察，不是未来合格线。若新收益主要转移到 N4，仍可能支持预写的 unseen 平均用途，只是不再支持“收益集中 N8”这一更细模式；不能偷偷把主终点改为 N8。
+
+第二，不把 sigma／边界模式当作配方复现的强制成功条件。本轮已经从机制修复转向配方用途。若原生收益再现而尺度变化较弱，保留配方结果、降低对应中介解释；若 sigma 和饱和下降再现而服务不再改善，则用途未复现，不能用诊断指标替代服务。系数有效生效而中间预测不成立，是预测遇到反证，不是技术性未激活。这个区分也保留了先前完整 Answer 的核心限制。
+
+N6 继续使用原有描述性条件：
+
+E
+b,6
+	​
+
+≥0且
+ΔC
+b,6
+	​
+
+≥0.
+
+满足时只称“当前面板未观察到训练数量 J／覆盖代价”。不满足时量化实际代价；一个很小负号并不自动证明重要损害，但也不能事后扩大容忍范围，再宣称满足原条件。该条件限制“无已观测代价”的措辞，不是总体非劣性检验或整个研究的审批门槛。
+
+本次也不需要凭空指定一个数值 MEI。应报告 signed effects、覆盖对应用户数、质量／惩罚取舍和分布，而不是把“正”直接等同“值得采用”。B04 的量级可以作为历史参照，不能成为按结果设定的复制阈值。
+
+六、实现上有一个具体绑定问题，但不需要改变两-fit科学比较
+
+不能只给旧 B04 入口换 seed 和标签，就把它当成新 .05/0 配对。 冻结 B04 runner 的 make_b04_config 明确把低层系数设为0，assert_agent_entropy_contract 也只接受0；它还绑定旧 B03 control 的源版本、摘要、旧初始化和旧世界。因此，直接套用旧入口可能让两个新标签实际都运行 λ0，或者继续与旧控制比较。这是旧专用入口的作用范围，不是 B04 结果存在缺陷。
+
+最小实现应是一个新研究专用的固定配对绑定：两臂使用同一已发布的新输入版本，分别核对有效 .05 和 0，第二个条件对照新 seed 的第一个条件，而不是旧 seed 的控制。保持原学习器、模型、信息刷新、采样／存储／更新和评价语义；不修改 B03/B04 的冻结入口或完成记录，也不需要构建通用扫描框架。
+
+必须继续保留的实质条件是：原始 Gaussian 样本及其 old log-probability 用于 PPO 存储／评分，另一个裁剪副本用于执行；logstd 从0初始化并继续可学习；targets／annealing关闭。λ0 不等于确定性训练，也不等于关闭所有探索。 B04 的原始日志明确记录了非零 sigma、原始样本和裁剪执行的区别。
+
+遥测继续使用独立解析原始熵，不读取 λ0 下的旧 action_entropy=0 作为分布熵。按采集时点将运动曝光对齐更新前 sigma，最终保存策略则用更新后 sigma；全1–45／晚31–45窗口累计分子、分母后求率。sigma 与解析熵在这里代数相连，不是两份独立中介证据，也不是裁剪后执行分布的熵。现有 B04 实现和最终行已经提供了这些区分。
+
+仍未分开的学习通路不需要在本轮强行补齐：熵项变化可能通过整体 actor 梯度裁剪、Adam、学得的均值和共同轨迹影响结果；共享 SET actor 的变化也改变全队行为、中心 critic 数据与循环信用。固定 roster 并没有把它变成面对固定队友的单智能体实验。它们是配方整体效果的可能途径，不是新增了一个未经声明的外生处理。先前完整 Answer 已明确讨论这一范围，本次不需要据此追加归因控制。
+
+成本按提案保持：2 fits、720k训练＋192k评价＝912k新增 team steps，90次 rollout updates、1440训练 episodes、384评价 episodes、8个 checkpoints和24个 panels。actor 与 critic 各202,500次 optimizer calls，技能路径为0。旧 SET/λ0 的56.3277 command minutes只是共享节点上的历史测量；未来 wall及实现、检查、阅读、发布成本不能当作零，也不能精确从它预测。
+
+hmasd-pro-question-count-entrop…
+
+七、可支持的结论、阅读范围和最终判断
+
+即使这个新配对成功，适当结论也只是：
+
+在第二个预先固定的 SET 训练配对及新的评价世界上，移除该低层原始熵系数的有用终点响应再次出现，因而提高保留这一普通学习设置的理由。
+
+它不是完整 Q 复现，不是一般数量不变性、充分合格基线认证或技能机制证明，也不是有限训练总体排名。新配方的复现与最终 H6 对普通 SET 的论文级比较，是相关但不同的工作；无需为了这次较窄观察先证明全部较宽结论。现行治理保留单种子探索的地位，并没有把它提升为确认。
+
+本次推理依据固定 2ab57e878e84a218e76af5a589a5201464329ebc 的问题、完整 B03/B04 notebook 条目、前次完整 entropy Answer及其采纳／固定合同；共享背景按指定 f82f7265b0724c88627cf63d7a4849f3735c6c32 阅读，执行绑定按 f4762ac67f04675136367fcc566327f0bf78a086，旧 B03 控制保留自身的 89486d32… 合同。最新分支读取只用于检查写入目标，没有替换这些推理输入。
+
+直接证据包括四个相关 run 的 summary身份／状态及相关内容、十二个 final45 原始面板、四份 training JSONL 的最终采集／更新行，以及 SET 新旧条件阶段15／30的 N8 原始面板。我独立重算了 SET final45 的 J 均值差与世界正负数；完整／晚期窗口累计量引用 DM 已发布的完整记录，本次没有重新逐条累加全部180行训练数据。没有读取节点上的二进制检查点，也没有重做 DM 的远端加载验证。 旧均值／梯度历史的缺口仍存在，不据此制造中介结论；新复现入口也尚未在本次审阅中被实现或运行。
+
+这些边界不阻止当前投资判断：已有材料足以说明两-fit方案能提供一个新的、与使用决策相关的观察，而且没有发现必须先换成四格或另一个机制实验的关键问题。
+
+MATERIAL_DISSENT: no。 我接受新的 SET .05/0 两-fit配对及其固定主终点。必要收紧是：严格区分配方复现与Q／包差复现、联合更新训练与世界后的不确定性、N6及分量取舍，以及旧 B04 硬编码入口与新配对的绑定。它们不增加 fits，不要求更换架构，也不把这次建议变成新的批准层；正负结果都应真实改变对这一个 SET 设置的判断，而不是自动导向下一轮训练。
+
+## 2026-09-23 — Complete recurrence advice adopted; fixed B05 SET pair and L0
+
+Read the entire8292-character answer and verified delivery independently, not from receipt
+SHAs (which name reasoning inputs, not an answer commit). Pro made no write; the full chat
+fallback is above. The equations below state the selected estimand unambiguously despite
+browser-extracted formula formatting. Consumed generation63 READY `0d7504c8bba9359c7a409159`
+under wake `969d74d4-6031-4505-8245-72cd1c804290`, rearmed64; no old operation restarted.
+
+### Scientific choice and working explanation
+
+Select **B05: one new exploratory SET .05/0 training pair, two fits declared together**.
+A useful recurrence changes whether lambda0 is retained as a supported setting for later SET
+work; absence/reversal lowers its case for promotion as a default upgrade. Neither branch
+is an automatic further fit or a verdict on the entire count-generalization direction.
+B04's N8 service response makes this worthwhile, while the N4 component tradeoff and adverse
+stages15/30 weaken its extrapolation. Physical-boundary truncation increased, so a reduction
+is not required for recipe usefulness. Scale, means, optimizer/gradient and co-learning paths
+remain unseparated; missing old histories are not a technical nonactivation finding.
+
+Adopt Pro's narrower comparison, component/N6 interpretation and concrete entrypoint warning.
+MATERIAL_DISSENT:no; adviser agreement is neither empirical replication nor permission.
+Four fresh H6/SET×coefficient cells would cost4 fits and address Q/package-gap recurrence;
+that is not today's decision. A0-fit/48k-eval old-policy panel tests only old-policy world
+sensitivity and is not selected or required first. No new mechanism experiment is selected.
+Inspection confirms B04's make_b04_config/assertions hardcode0 and bind old B03 identities;
+renaming its seed/tags would not implement this pair. New dedicated binding is needed.
+
+Fetched current published main `a7d16ff220231dff37b413ab4b746c6b552d3073` after collection;
+relevant topics and owner pause/lead are current. Topic3 now records complete B04's service/
+boundary counterexample; topic4 distinguishes finite learning from representation and retains
+adverse ordinary-structure comparisons. These support testing the useful same-architecture
+recipe, not presuming a new architecture or a competent baseline. Pro used the question-pinned
+earlier background and correctly superseded its interim B04 standing. It recomputed final SET
+means/world signs, disclosed using DM's pooled exposure rather than re-summing180 training rows,
+and did not load native checkpoints. My prior complete reader/loading evidence covers these
+facts. There is no decision-critical unsupported premise requiring another Pro request.
+
+The strongest competing explanation is a favorable B04 seed/panel combination. B05 changes
+training and evaluation worlds between blocks: failure does not isolate seed versus world,
+success does not estimate either variance independently. New conditions are matched within
+pair. One new training block is the independent unit; old B04 remains selected development
+evidence. No world-bootstrap training CI, hidden reversed block in a merged mean, new Q
+combined with old H6, stable ranking, baseline certification or mechanism claim.
+
+### Fixed prospective B05 comparison
+
+| Order/key | Arm | Training seed | Fixed low-level lambda_l | Tag |
+| --- | --- | ---: | ---: | --- |
+| 1/set_l05 | SET | 953201 | .05 | s1_entropy_b05_set_l05_s953201 |
+| 2/set_l0 | SET | 953201 | 0 | s1_entropy_b05_set_l0_s953201 |
+
+Both fits start afresh at one published B05 source; execute sequentially in this order. The
+first has no old comparator. The second binds the completed **first B05 summary** using an
+explicit path and SHA-256 in its admitted invocation; the hash is recorded after collecting
+this fixed control, never used to select a favorable source. Check same source/object/seed/
+cell/spec/config/world addresses and initialization, then initial per-world and first pre-update
+collection agreement. The second fit is selected now regardless of the first score. Technical
+failure or uncertain identity stops dependent execution for reconciliation, not an automatic retry.
+
+Preserve N6 train,k10,fixed roster,16 lanes×500 steps×45 rollouts=360000 team steps per fit,
+CPU float32/torch_threads4,PPO15 epochs/sequence batch32, actor/critic information/refresh,
+architecture, normalization, reset, reward and update behavior. Raw Gaussian actions and their
+original old log-probabilities remain stored/scored; an independent clipped copy executes.
+logstd starts0, stays learned and in the actor optimizer. Initial/final lambda match the cell;
+entropy targets and annealing are off. Zero lambda is still stochastic Gaussian training.
+
+Evaluate stages0/15/30/45,N4/6/8,16 worlds each×500 steps, deterministic means clipped to
+[-1,1], frozen weights/normalizers and zero updates. Addresses are
+`1500000+1000*rollout+100*N+i`,i=0..15, disjoint from old1200000-base worlds. Preserve learner,
+global and sampler RNG/runtime. Later trajectory differences are part of the treatment; no
+expectation of matching old seed trajectories or forcing post-treatment states to agree.
+
+For each world `J=N*scalar_return/500=.7*mean_coverage+.3*mean_quality-mean_weighted_penalty`.
+For each N, E_N averages16 paired final45 J_l0−J_l05 differences. **E_U=(E_4+E_8)/2**
+is primary. Report per-N J, all native component differences and world signs. N6 descriptive
+no-observed-J/coverage-cost wording requires E_6>=0 AND delta_coverage_6>=0. Otherwise report
+actual magnitude/tradeoffs, without post-result tolerance or population noninferiority.
+
+Keep all intermediate panels and full1–45/late31–45 pooled motion numerators/denominators;
+align collection to pre-update sigma/analytic raw entropy, final policy to post-update sigma.
+These are explanatory observations, not mandatory success gates. Sigma/raw entropy are
+algebraically linked and not clipped-action entropy. Training boundary exposure is not
+identical to deterministic deployment behavior or physical safety.
+
+A useful primary/native response with N6 condition retained strengthens retaining lambda0 for
+later SET work. Gain with N-specific or N6 cost remains a qualified tradeoff. A tiny positive
+sign or penalty compensation without useful service is not itself a practical upgrade.
+Absent/reverse effect lowers default-upgrade confidence while preserving B04's local finding.
+Do not require B04's exact magnitude, all16 positive N8 worlds, N8-only concentration or
+positive intermediates. Benefit moving to N4 can support the fixed primary while weakening
+that narrower N8 pattern. No invented MEI/equivalence band, best checkpoint, coefficient scan,
+longer horizon, third fit or automatic confirmation. No H6/Q result is produced by B05.
+
+Declared cost: **2 fits,720k train+192k eval team steps**,90 rollout updates,1440 train episodes,
+384 eval episodes,8 checkpoints/24 panels. Actor and critic each202500 optimizer calls across
+the pair; skill paths0. B04 SET/0's56.3277 command minutes is a shared-node historical anchor,
+not a forecast. Measure actual command/fit wall, user/system CPU and scientific-process peak
+RSS; scratch peak may stay unmeasured. Implementation, checks, collection and publication are
+additional support. Use configured primary wsl_4070 in an isolated native worktree, with fresh
+memory/pause/lead/source admission per launch. No migration or old worker restart.
+
+### L0: dedicated pair binding with unchanged learning path
+
+Owned deliverables only:
+`experiments/candidates/agent_count_generalization/entropy_b05/{__init__.py,runner.py}`,
+`scripts/run_agent_count_entropy_b05.py`, and
+`tests/experiments/candidates/agent_count_generalization/entropy_b05/test_runner.py`.
+NOTES/RESEARCH stay DM-owned. Frozen B03/B04 and shared learner/environment/configuration/
+models are read-only. Reuse safe pure collection/telemetry/state helpers, with no global
+monkeypatch of old code and no general sweep framework. New config/evaluation/binding paths
+must actually honor their cell coefficient and new seed base.
+
+CLI fixes cell/seed/tag and requires launch SHA/out. Zero cell additionally requires first-control
+summary path and SHA-256; .05 rejects those arguments. Admission precedes scientific effects.
+Record and assert the actual effective learner/optimizer coefficient, targets/annealing/logstd
+contract for both arms. Before the affected update reject wrong/mutated/old/incomplete control:
+status,source,object,tag/cell,seed,full spec,worlds,config apart from declared coefficient fields,
+complete panels/counts, initial digest and initial/first-pre-update output matching. Record
+honest partial counts/failure. Compare only new SET0 minus new SET.05 with correct labels.
+
+Checks use managed pytest tmp_path scratch: both coefficients through actual learner and tiny
+native two-cell path, matching initialization/pre-update outputs, raw storage versus clip
+execution, trainable logstd, parameter motion/optimizer counts, evaluation frozen state/RNG.
+Independently calculate E_U and native test-N reward identity. Negative tests cover control
+mutation/foreign old source/incompleteness/config/seed/world/coefficient binding and CLI
+admission/arguments. Reuse unchanged checks; no result-bearing trial outside admission.
+
+Implementer may edit only those four paths, return diff/check output/remaining gaps, decide no
+science and launch nothing. DM reads and accepts; independent hmasd-reviewer checks executable
+binding/config/RNG/evaluation/result identity before result launch. Stop only dependent action
+for unresolved semantic problems. No extra experiment, skill change or general infrastructure.
