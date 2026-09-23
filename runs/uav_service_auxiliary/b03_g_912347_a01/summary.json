@@ -1,0 +1,39 @@
+{
+  "object_id": "UAV-SERVICE-AUXILIARY-B03",
+  "status": "INCOMPLETE",
+  "failure": null,
+  "arm": "G",
+  "seed": 912347,
+  "launch_sha": "73be55261b9f5e8f8fe26fdec6558b87ad088fcb",
+  "device": "cuda",
+  "torch_threads": 4,
+  "counts": {
+    "transitions": 0,
+    "rollouts": 0,
+    "episodes": 0,
+    "evaluations": 0,
+    "evaluation_transitions": 0,
+    "fact_episodes": 0,
+    "fact_transitions": 0,
+    "reused_fact_episodes": 2,
+    "reused_fact_transitions": 3000,
+    "replay_agent_rows": 0
+  },
+  "stage_wall_seconds": {
+    "preparation": 0.8963664469774812,
+    "collection": 0.0,
+    "native_update": 0.0,
+    "auxiliary": 0.0,
+    "evaluation": 0.0,
+    "facts": 0.12257452198537067,
+    "replay": 0.0,
+    "checkpoint": 0.0
+  },
+  "evaluations": {},
+  "updates": [],
+  "training_rollouts": [],
+  "rss_curve": [],
+  "config_sha256": "6eb46367b0877be2a67459bab3fcc21d4595eef5238701b11c8ddf69f362e738",
+  "initialization_sha256": "10cdc004027e2ee04c4aa3c5bc7f0e2938df00bb1bc52d346c2886f21a9aa720",
+  "facts_sha256": "163d34ce6dc14e2cf6273c503ec8e086589b39908c19632af30c1b3bb3a727ae"
+}

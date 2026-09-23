@@ -3904,3 +3904,34 @@ Commit/push this accepted evidence and binding before one native submission.
 Consumed the exact S READY event at **generation 39**; no active S producer remains.
 The shared source is an authoring worktree with retained outputs and the planned
 G consumer, not a disposable per-operation snapshot to reclaim.
+
+## 2026-09-22 — B03 second-block G admitted
+
+After publishing the S acceptance and prospective G binding in `ade57de66`,
+submitted the original sixth fit once. Native admission accepted G/912347/a01 at
+September 23 **05:13:30 UTC**; the [runner manifest](../../../../runs/uav_service_auxiliary/b03_g_912347_a01/launch-manifest.json)
+retains the command, source, node, process identities and operation reference.
+The actual-node preflight passed with **14,995,603,456 available/effective bytes**
+against the 4 GiB floor, no failure reasons. Publication refresh to `e8fd213ba`
+changes another direction's standing only; this scope and pause remain unchanged.
+
+Collected and byte-verified the eight small startup files, including empty stdout
+and stderr. The startup summary digest is
+`9cd1325ad262eac8ccaa1f8013c569d9b324daa77241ad0b99c0e321fc15c1ac`;
+config is `6eb46367b0877be2a67459bab3fcc21d4595eef5238701b11c8ddf69f362e738`.
+The initial policy and reused facts exactly match D2; the config and command bind
+its declared calibration. Configuration comparison differs from D2 only in arm
+and the two declared reference digests. The captured summary is INCOMPLETE,
+failure null, with zero completed training/updates/evaluation and two reused fact
+episodes / 3,000 transitions; it is a startup snapshot, not a current progress
+estimate. First collection, first native update and realized calibration matching
+remain pending their recorded outputs.
+
+Registered the accepted native status handle, then drained **generation 40** and
+actually adopted its observation: runner and supervisor identities match, both
+running, records consistent, zero observation errors, no pending events and no
+stop request. This is **6/6 fixed fits started, five fully accepted and G2 running**.
+Keep the accepted handle and frozen endpoint; next read G's checkpoints and full
+result, then the already planned zero-update common endpoint replay. Admission
+and observation do not accept the scientific result. This continuation added no
+fit beyond the fixed six and made no worker restart, Pro Send or App message.
