@@ -8374,3 +8374,344 @@ result arrays; any checkpoint rearms the same observation without restarting the
 Planned exposure remains0 fits/48,000 evaluation team steps plus the bounded shadows; actual
 counts and resource cost will come from the collected runner output. No score has selected an
 extension, new constant, split-site study or new fit.
+
+## 2026-09-23 — B09 complete: fixed count changes behavior without a uniform service gain
+
+### Complete native evidence and acceptance
+
+The one accepted B09 operation finished with a valid exit0 witness at native source
+`3f57bd2d99be3121e0fa7d1277f767faab5552db`. Its operation, supervisor and runner identities
+remain those in the preceding launch entry; no restart or extra control rollout was used.
+The DM collected all14 native files (1,561,034 bytes, including two empty output logs) and
+verified every relative path, byte count and SHA-256 against the native files. The complete
+[summary](../../../../runs/agent_count_generalization/s1_fixed_count_b09/summary.json)
+is935,315 bytes with SHA-256
+`7ec6a024514756cc7444f67e2ffcfcab5280be80c143847b79a8b20fcef3d0bd`.
+The six standalone panels, config, manifest, preflight, launch status and process-exit witness
+are retained under the same run root. The historical launch-status record says accepted;
+the valid process-exit record and terminal operation observation establish completion.
+
+Scientific acceptance follows reading, not exit0. All six panels are complete and match their
+embedded summary rows. Original summaries, six original final45 panels and both native final45
+binaries retain their exact prior bindings. Source hashes match the launch commit's blobs;
+source and input identities are unchanged before/after evaluation. Strict final restoration,
+unchanged parameters/normalizers, zero optimizer calls and isolated RNG hold in every panel.
+Actual runtime state evolves; it is not counted as parameter learning. Both packages start
+from matching per-world state/observation digests at each N. True N remains4/6/8, users50,
+k10 and independent clipped execution[-1,1].
+
+The DM independently read the standalone measured arrays and SHA-pinned original controls,
+without importing the experimental evaluator or using its aggregate readings. Every N6
+world's J, scalar return, coverage, quality, weighted penalty and total reward is exactly
+identical for both packages. No numerical tolerance was relaxed. Recomputed absolute values,
+own effects, selectivity, gaps and equal-N means agree with2,835 runner-reported scalars to
+maximum absolute difference1.1102230246251565e-16. Native J/component and scalar-return
+identities also hold. N4/N8 site telemetry separately verifies original scalars.5/1 replaced
+by.75, exactly the three specified module instances, cloned inputs and all other affine
+columns unchanged. N6 is an unchanged-feature control, not evidence that unseen inputs were
+clamped correctly or that unrecorded full trajectories were identical.
+
+### Each package's native effect before the package gap
+
+Here F is clamped minus original for the same retained final45 policy. J is native team
+service; the penalty is already weighted and increasing it is adverse. Each N uses its
+fixed16 original final45 worlds, and U weights N4/N8 equally. Complete per-world J, scalar
+returns and all components remain in the six panels, including every adverse observation.
+
+| N | H6 original J | H6 fixed J | F_H6 J | SET original J | SET fixed J | F_SET J | Gamma J |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 4 | .577558729 | .577558729 | .000000000 | .498897910 | .494375227 | −.004522683 | −.004522683 |
+| 6 | .571507590 | .571507590 | .000000000 | .430893237 | .430893237 | .000000000 | .000000000 |
+| 8 | .454504516 | .455088474 | +.000583958 | .302237189 | .317215630 | +.014978441 | +.014394483 |
+| U | .516031623 | .516323602 | +.000291979 | .400567550 | .405795428 | +.005227879 | +.004935900 |
+
+| N | F_H6 coverage | F_SET coverage | H6 users/step change | SET users/step change | F_H6 quality | F_SET quality | F_H6 penalty | F_SET penalty |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 4 | .000000000 | −.005970000 | .000000 | −.298500 | .000000000 | +.000657409 | .000000000 | +.000540906 |
+| 6 | .000000000 | .000000000 | .000000 | .000000 | .000000000 | .000000000 | .000000000 | .000000000 |
+| 8 | +.000815000 | +.014832500 | +.040750 | +.741625 | −.000038351 | +.011302056 | −.000024963 | −.001205074 |
+| U | +.000407500 | +.004431250 | +.020375 | +.221563 | −.000019176 | +.005979732 | −.000012482 | −.000332084 |
+
+SET J improves in5/16 N4 worlds and9/16 N8 worlds; coverage improves in6/16 and7/16.
+Thus even the favorable N8 mean coverage does not mean most worlds improve. SET's N4 J
+range is−.038669709 to+.041870790; N8 range is−.027212521 to+.151625383. H6 is exactly
+unchanged in all16 N4 worlds and13/16 N8 worlds; the latter has two favorable and one adverse
+J/coverage changes, with J range−.012563184 to+.011845566. Both mean H6 and SET improve at
+N8, so the positive mean Gamma there is not produced by mean H6 damage. Locally, world1545808
+has H6 J−.012563184 and SET J+.000177223 but SET coverage−.0166; its positive Gamma is not
+a meaningful all-component recovery and must not stand in for the direct effects.
+
+The H6−SET J gap is .078660819→.083183502 at N4 and .152267327→.137872844 at N8;
+U is .115464073→.110528173. The algebra `G_fixed=G_original−Gamma` holds per world.
+A smaller pooled gap cannot remove the observed N4 cost. These are fixed-policy deployment
+effects and finite-world means, not new training replication, population confidence or a
+causal decomposition of the original package advantage.
+
+The previously named worlds remain especially informative without being discarded:
+
+- N8 world1545802: SET J .137210446→.288835829, coverage .17532→.39684,
+  gaining11.076 users/step. Quality rises.049186769, but penalty rises.018194648.
+  H6 remains unchanged. This improves the earlier B08 local failure, but is not a free
+  all-component improvement. This one world's fixed-weight contribution is+.004738293 J
+  to U's+.005227879; its+.0069225 coverage contribution exceeds U's net+.00443125.
+  That concentration is descriptive evidence about this full table, not a rule to delete it.
+- N8 world1545810: SET loses.019369213 J and.01352 coverage (.676 users/step),
+  with quality−.004949762 and penalty+.008420284. H6 remains unchanged and still trails
+  SET by.055025993 J and6.486 users/step. This adverse package-ranking world persists;
+  the reduced magnitude of that adverse gap follows SET harm, not H6 recovery.
+
+### Activation and its limits
+
+SET's two targeted sites each execute500 actual and500 shadow forwards at each unseen N.
+The original-feature shadow uses the actual clamped trajectory's same predecision input,
+hidden state, mask and skill. All96,000/192,000 raw mean coordinates differ at N4/N8;
+clipped actions differ in61,506/96,000 and70,515/192,000 coordinates, respectively.
+Mean absolute clipped differences are .010677489/.011317937; maxima .189235032/.230758905.
+Next hidden states differ in7,793,906/8,192,000 and15,894,640/16,384,000 coordinates,
+with mean absolute differences.002709225/.005339354. All500 batched calls at each N
+have some clipped action difference; this does not imply every actor coordinate changes.
+Held snapshot digests stay fixed between exactly0,10,...,490 refreshes. Inputs, RNG,
+parameters/normalizers and actual runtime are preserved across every shadow observation.
+N4 harm therefore cannot be dismissed as failure to activate the specified intervention.
+Raw or hidden-state differences alone would not have established executed-action differences.
+
+H6 has50 actual and50 complete shadow coordinator selections per unseen N, each using
+its own selected team and autoregressive prefix. N4 has0/800 team and0/3,200 individual
+choice disagreements. N8 has1/800 team and6/6,400 individual disagreements: world1545800
+at t30 (individual7),1545808 at t220 (individual7),1545812 at t230 (individual7) and
+at t430 (team plus individuals4/5/6). These are selection differences; no low-level action
+mechanism is inferred from a changed label alone. Independent per-world native outputs change
+in those three N8 worlds. The result supports limited sensitivity of this specified H6
+count pathway on these visited states, not invariance to all count information or evidence
+that online coordination itself is unnecessary. In particular, agreement of clamped and
+original-feature shadows is different from absence of skill changes over time.
+
+### Working explanation, decision and actual cost
+
+The prior Pro advice already covers this mixed branch. The uniform retention prediction
+required useful SET J and coverage gains at both unseen N; it fails at N4 despite measured
+activation. **Do not promote the joint fixed-.75 intervention to a uniform deployment upgrade.**
+Keep its N8 mean benefit, concentrated local repair and N4/adverse-world costs as the actual
+tradeoff. End this fixed-value experiment without a constant sweep, split-site rescue,
+outcome-selected N8-only policy, new world panel or training extension. This decision leaves
+B07's original bounded H6 package retain intact and does not close the direction as a whole.
+
+Independent ResearchCritic separately recomputed the finite effects, emphasized concentration
+and marked material dissent against interpreting the pooled gain as successful uniform
+retention. The DM adopts that objection; it agrees with the prewritten mixed-result reading.
+The Critic's possible independent-world check would address panel dependence only if accepting
+the N4 tradeoff became a worthwhile deployment objective. That is not the objective selected
+here, so it does not justify another B09 panel. No extra Pro round is needed to repeat the
+existing advice's outcome branch; a different proposed scientific comparator will be consulted
+on its own merits before selection.
+
+Strengthened: this SET count-feature intervention affects executed decisions and recurrent
+state and produces heterogeneous native consequences. Weakened: uniform count-value replacement
+removes a useful deployment cost across both unseen sizes. Untouched: individual-site
+attribution, harm during training, sufficiency of the ordinary comparator, learned skill
+causality and population reliability. B08's useful self-gains and noncausal initial/final gap,
+B04/B05's reversed entropy responses and B06's policy-pair/panel distinction remain. Neither a
+proxy response nor a positive pooled score is enough to credit the proposed repair.
+
+Actual exposure matches the fixed plan:0 fits,0 new training/stored-training steps or optimizer
+calls,6 panels,48,000 evaluation team steps,288,000 UAV steps,96 episodes/resets and3,000
+actual batched policy calls;1,000 SET actor and100 H6 coordinator shadow forwards, each with
+zero environment transitions. Original final panels were read, not rerun. Each policy's prior
+360k training steps/45 updates remain prior exposure. Measured command wall is94.187703s
+(1.569795min), run-study wall92.841533s; resource-record CPU user/system285.789537/.886169s,
+scientific-process peak RSS776,868KiB (Linux RUSAGE_SELF), peak scratch unmeasured. The resource
+snapshot precedes final top-level wall sampling by microseconds. Implementation,15 technical
+tests, independent review, collection and reading are additional non-fit work, not included
+as zero cost. This is not a controlled efficiency comparison.
+
+After full reading, READY event `86120ab200f1ac1051cd60ad` was consumed with generation88
+and its recorded wake id; rearm returned generation89. No experimental operation remains
+active and no accepted Send has been repeated. The next work is a bounded source/evidence
+inspection of whether the retained H6 benefit depends on online skill reassignment after its
+initial choice. It is not inferred from B09's low count sensitivity. The prospective question
+would compare original trained H6 to reusing its own initial per-world assignments while
+preserving the actual k10 clock and actor histories, separating a deployment contribution
+from training necessity. No such evaluator, batch or confirmation is selected by this result;
+its scientific value and comparator meaning require the focused new consultation below.
+
+## Pro question 2026-09-23 online-skill-reassignment-after-b09
+
+Conversation: reuse the current Jev account conversation through its locally recorded operation;
+its private URL is not a repository record.
+
+Question: After B07–B09, is replaying a trained H6 policy's own initial per-world skill
+assignments a worthwhile next discriminator for the deployment value of online reassignment,
+and what is the smallest scientifically interpretable comparison? The DM is considering this
+specific within-policy question, not selecting a new fit or asking for a list of replacement
+ideas. Advice can change whether to execute the proposed zero-fit comparison, revise its
+meaning/scope, or decline it. The owner explicitly authorized continued research in this task;
+no newer pause applies to this direction. FSD remains paused and G33 frozen.
+
+### Standing and the change in question
+
+B07 independently trained the original bounded H6/.05 policy952201 for360k team steps and
+compared its final45 policy to the retained SET/.05/953201 final45 policy. At N4/6/8 its
+mean native J advantage was+.078661/+.140614/+.152267, with2.814/7.733/8.805 more served
+users/step; the unseen equal-N J gap was+.115464. All mean service components favored H6,
+but N8 world1545810 still favored SET by.074395 J and7.162 served users/step. Together with
+the earlier bounded H6 package observation this supports an exploratory package retain;
+it does not identify the contribution of online assignment or skill learning.
+
+B08 evaluated the original initial policies on the same final worlds. Both packages gained
+useful J and coverage through training; unseen J self-gains were H6+.215503 and SET+.244588.
+H6's initial/final gaps were+.144549/+.115464. The larger final H6 level is not evidence of a
+larger J learning increment, nor does the initial gap identify a causal share. B04/B05's
+opposite SET entropy-reward responses and B06's cross-panel reading continue to weaken a
+universal ordinary-baseline repair story. No normalization/gradient defect was established.
+
+B09 is now fully read: fixing exactly three explicit action-path count scalars to the N6
+training value.75 activated SET's executed actions and next hidden state but did not give a
+uniform useful change. SET N4/N8 J effects are−.004523/+.014978 and users/step effects
+−.299/+.742. H6 effects are0/+.000584 J. The pooled Gamma+.004936 and gap reduction to
+.110528 are not enough to meet the prewritten both-N retention condition. World1545802
+contributes+.151625 J and11.076 users/step to SET but with penalty+.018195; world1545810
+loses.019369 J and.676 users/step. Every N6 world/component is exactly unchanged. The DM
+adopts the existing Pro mixed-outcome branch: preserve this tradeoff without promoting a
+uniform fixed-count upgrade or starting a constant/site/world sweep. The completed experiment
+cost0 fits,48k eval team steps and1.569795 command min, with bounded shadows; it adds no
+training replication. The immediately preceding full B09 result entry and saved arrays are
+the source for exact numbers, concentration, adverse results and engineering checks.
+
+The remaining question is different from repairing explicit count extrapolation. The
+positive H6 package may derive useful deployment behavior from repeated state-dependent team
+and individual assignments, or its initial assignment plus learned low-level recurrent
+response may retain much of the service. Those alternatives can predict different native
+consequences when later reassignment outputs are suppressed. **B09's original-feature/clamped
+shadow agreement is not evidence of temporal assignment constancy.** B07 saved only aggregate
+outputs, so the original policy's per-step label history is not available. No premise about
+collapse, unnecessary online coordination, or skilled training harm has been established.
+A detrimental replay can also reflect imposing a different conditioning distribution on a
+co-adapted actor; even a clean comparison would concern deployment of these retained weights,
+not prove that this training architecture is necessary or superior to a retrained comparator.
+
+### Prospective comparator to criticize, not an accepted batch
+
+Consider only the original unmodified B07 final45 H6 policy952201, binary and config already
+bound in B09. Restore all original modules and normalizers; use native S1, fixed episode roster,
+true N4/6/8,50 stationary users, deterministic means independently clipped[-1,1], CPU float32,
+threads4, original final45 worlds1545000+100*N+i (i0..15),16 lanes and500 steps. No count
+clamp, checkpoint selection, additional constants, label chosen from outcomes or optimization.
+
+Compare ordinary H6 to an evaluation variant that selects its team label and the ordered
+individual-label vector normally at each lane's episode start, then reuses exactly that
+lane's initial labels for all later low-level actions of that episode. Each actor still sees
+its native local observations, real roster/ego context and own evolving GRU state; all standard
+reset behavior is preserved. Initial labels may depend on the initial world and actual N,
+never on future returns. An episode reset requires a new ordinary initial assignment.
+
+Keep the native k=10 decision opportunities, counters, timers and reset/initialization path.
+One conservative implementation can still perform ordinary coordinator inference at each
+scheduled opportunity, record its proposed assignment separately, and use the saved initial
+labels when the low-level actor acts. This would change executed label updates, not offer a
+compute saving. Avoid calling a policy with stale labels an unchanged information path: its
+use of later centralized information is intentionally removed. Also distinguish unchanged
+configured clock from the longer effective lifetime of the labels. This is not a test of
+learned duration k, interruption or changing-roster learning. Decide whether this precise
+meaning is worthwhile for the N-axis question, or whether the ablation's limitations make
+another investment unnecessary.
+
+Read-only source mapping found that ordinary `HMASDAgent.step` initializes per-lane state,
+executes `_batched_assign_skills`, then `_batched_select_action`. Assignment triggers on
+`env_steps % k == 0`, done or invalid labels; native initialization consumes RNG even for
+labels immediately overwritten by the coordinator. Low-level selection consumes the chosen
+team/individual labels and evolves actor/critic GRU state. H6 has no central actor snapshot,
+unlike SET. Assignment values/log-probs support training buffers but are not the deployed
+action input; no training/store/update path belongs in this study. A new evaluator must not
+misreport probabilities of unused proposals as probabilities of replayed labels, skip native
+initialization, change timers or silently reset GRU state. The full actual path and any
+adapter would need focused engineering review before launch; this source map is not runtime
+validation or evidence of a service effect.
+
+Proposed smallest complete study: rerun three ordinary panels with the same observation
+adapter, requiring exact per-world J/return/components agreement with original B07 panels,
+and evaluate three initial-label-replay panels. The unchanged adapter controls protect the
+comparison at all N; no N6 identity is expected between ordinary and replayed decisions.
+Record actual label changes/proposals versus replayed choices to establish intervention
+activation, and the native J, coverage, quality and penalty on each world. If directly
+contrasting low-level actions locally is needed for the judgment, justify and cost a narrow
+observation; do not automatically recreate a large shadow system. Original SET arrays remain
+a descriptive reference for package usefulness, not a new execution or an attribution control.
+No later per-world/agent/step label search, oracle choice, freezing only favorable N or
+constant-skill sweep is proposed.
+
+Read each H6 deployment variant's absolute native service, replay-minus-original changes at
+each N and equal-weight N4/N8, components and adverse worlds before any residual H6−SET gap.
+If online reassignment changes choices and materially useful service is lost under replay,
+that would support keeping this deployed function for these weights/worlds. If replay changes
+choices yet retains or improves useful service, it would weaken the necessity of continued
+online reassignment for this retained package, without establishing training dispensability,
+equivalence or a competent flat learner. Mixed N/component outcomes remain tradeoffs; limited
+activation restricts interpretation. None of those outcomes automatically authorizes new
+training, more worlds, a skill-label sweep or confirmation. Please correct these conditional
+readings where they overreach, including whether a low-cost deployment ablation can genuinely
+change the live judgment rather than merely producing another score.
+
+### Context and source precedence
+
+All paths below resolve at the full `source_sha` in the actual send message unless explicitly
+pinned otherwise. Read the selected passages; this question supersedes conflicting old chat
+premises but preserves every completed experiment's contract.
+
+- Governance: `docs/project/OPERATING_CONSTITUTION.md` sections1–5,7–8. This is ongoing,
+  authorized single-direction exploration, with fits recorded and no allowance. Pro advises;
+  the DM decides. No new approval process, mandatory candidate or Portfolio review is requested.
+- Methods: `.agents/skills/hmasd-scientific-tools/SKILL.md`, “Update the working explanation,”
+  “Comparators and MARL information,” “Statistics,” and “Cost and exposure”; and
+  `.agents/skills/hmasd-research-engineering/SKILL.md` only for relevant source/invariant and
+  admission constraints. Same weights with changed deployment outputs are not new learning.
+- Shared background: `docs/research/RESEARCH.md` topics3–6 at current published main
+  `da18496d4f01624d7858ee56677ce919a363b272`, particularly the B07/B08 native-use reasoning,
+  separation of absolute/self-gain/relative gap, finite-policy evidence and joint learning.
+  That background motivates reading service before relative gaps and limits this proposed
+  ablation to deployment. The newer full B09 result in this source notebook/arrays supplies
+  the current evidence; the older main standing that B09 was awaiting collection is superseded.
+- Evidence: this notebook's “B07 complete: bounded package benefit recurs with an initial
+  policy rival,” “B08 complete: both packages learn useful service, and the initial gap is
+  not a causal share,” “Fixed-count advice adopted; B09 deployment comparison and L0,” and
+  the immediately preceding “B09 complete: fixed count changes behavior without a uniform
+  service gain.” B09's existing Pro answer covers that experiment's mixed-outcome decision;
+  the new consultation is about a different deployment comparator.
+- Underlying data: `runs/agent_count_generalization/s1_fixed_count_b09/summary.json` and its
+  six `panel_*` files; `runs/agent_count_generalization/s1_bounded_package_b07_h6_l05_s952201/`
+  `summary.json` and `panel_45_n4.json`, `panel_45_n6.json`, `panel_45_n8.json`; corresponding
+  `s1_entropy_b05_set_l05_s953201` final panels and `s1_initial_policy_b08` panels only if
+  needed to check contextual arithmetic. B07's original source is
+  `0a9e3fde40659fdcc1d05922c9920c5c04b2ab23`; its immutable training meaning is unchanged.
+- Actual path for the comparator's feasibility/meaning: `hmasd/agent.py` methods `step`,
+  `_batched_assign_skills`, `_batched_select_action`, `reset_env_state` and the rollout-store
+  path; `experiments/candidates/agent_count_generalization/bounded_package_b07/runner.py`
+  evaluation/restoration; the `models.py` H6 state/coordinator wiring. Read these when the
+  proposed comparison's semantics depend on them, and name consequential unread gaps.
+
+Prospective cost: **0 fits,0 parameter updates**; the proposed6 panels would take48,000
+native evaluation team steps,288,000 UAV steps,96 episodes/resets and3,000 actual batched
+policy-step calls. With scheduled coordinator inference preserved, about300 batched k10
+coordinator selections total, measured rather than assumed; no branching trajectories/search.
+B08/B09 zero-fit command walls.781/1.570min are rough references only, not a latency promise.
+Implementation, focused checks/review and full reading are additional work. No evaluator or
+batch for this idea has been selected, implemented, admitted or run.
+
+Constraints: Give scientific advice only. No training, experiments, background task or changes
+outside this question's empty `### Answer` subsection in
+`docs/research/candidates/agent_count_generalization/NOTES.md`, branch
+`codex/agent-count-generalization`, repository `CartmanFatass/My-paper-code`. Read reasoning
+inputs at the pinned source; before writing fetch the latest target file and use its actual
+blob SHA. Preserve the question and every other byte and stop on overlapping changes.
+On successful write return the real commit. If writing is unavailable/fails, return the
+complete answer in chat, not only a status, link or SHA.
+
+Return: Assess whether this proposed observation can change a worthwhile judgment after B09;
+state the strongest simpler explanation and what its outcomes can and cannot distinguish.
+Correct or narrow the comparator, assumptions, activation/native predictions, N-axis scope
+and cost where needed, including whether to use or decline the retained-policy ablation.
+One useful answer is enough; no new architecture or experiment is owed. Cite sources actually
+used, identify decision-critical sources you could not read, and return
+`MATERIAL_DISSENT: yes/no` with the substantive reason. Do not treat source mapping or adviser
+agreement as empirical evidence, or turn bounded negative results into universal closure.
+
+### Answer
