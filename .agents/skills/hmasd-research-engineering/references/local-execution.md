@@ -128,6 +128,14 @@ preserved; age, exit-zero alone or an apparently idle direction does not grant d
 Keep claims, manifests, exit witnesses and run artifacts: they retain status and duplicate
 prevention after the source directory is gone. Cleanup grants no relaunch.
 
+On sparse remote checkouts, a missing manifest can be a checkout omission. Check the
+published commit for the exact operation's original records and match its claim, SHA,
+host, source, output and native process identities before recovering them. Materialize
+the relevant run directories with `git sparse-checkout add` (preserving existing paths
+and untracked outputs), then preview again. Do not synthesize terminal records or treat
+a copied record from another node as local evidence. Retain the run directories in the
+sparse selection so a later checkout does not discard the recovered status handles.
+
 Ordinary authoring/publication worktrees are outside this collector. At a completed
 publication boundary, remove an owned temporary publication checkout with ordinary
 `git worktree remove <path>` only after verifying its commits are durably reachable,
