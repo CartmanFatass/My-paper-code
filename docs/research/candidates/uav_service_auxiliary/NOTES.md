@@ -5124,3 +5124,391 @@ receipt, link or SHA. Advice is not approval and does not lift a pause. The
 scientific decision remains this DM's under existing owner authorization.
 
 ### Answer
+
+Saved from chat, complete original answer. Same accepted question key:
+`hmasd:9c663dfbd9d85af2ad743a57b23ff3bc2d7e48878eff62bd5252c071b8ece5c5`,
+source `5c6af88f406b0b97d7f988f8d5cb9351d6afb893`. The deterministic observer
+collected 8,650 characters, body SHA256
+`79fd8810c1a5715ad21bc63da9f32b521e6629dbc4e2b6c0d003865dddc01152`.
+The saved file adds one final newline, SHA256
+`cd4d5b158dc322ff390f02aa62aaff8002274540b6f2c50f321a250fdd28554c`.
+`deliver` verified **NOT_DELIVERED**, no write commits; the hash beginning
+`f1b909f5` in the reply is described as a target blob and is not a delivery
+commit. The branch and empty target subsection remain unchanged. I read the
+entire answer below before taking back the subsection. Citation placeholders
+and the extracted display-math line breaks are preserved; no question was resent.
+
+~~~text
+GitHub 读取可用，但本轮可调用接口未提供文件写入动作，因此未写回；实际 Answer commit：无。 最后读取的目标 blob 为 f1b909f5f0d6ed5dfa28aa8b05935c2a89600708，指定问题下的 ### Answer 仍为空。本轮没有修改仓库，也没有启动实验。以下是完整答复。
+
+B04 下一笔投入：选择一次新的匹配训练对，保留两个面板的分歧
+
+MATERIAL_DISSENT: no。
+
+我支持一次新的、恰好两 fit 的 N/R 匹配训练比较：保持训练系数 N=2、R=4，保持每臂 180k transitions、固定 update-30 终点和两套既有评价世界。此次不同时选择旧策略的 64 新世界评价，不启动确认，也不增加系数搜索或新模块。
+
+支持这一选择的实质理由是：当前要决定的是风险重加权作为有限训练配方是否值得继续投入，而不是仅在已经训练好的两个 checkpoint 中挑选一个。新的训练对能增加一个独立学习实例，检查原生收益及其面板敏感性是否重现；扩大旧策略的评价世界数，虽然有价值且较便宜，却不增加这项学习重复。这个选择不把 B04 的大正差视为已确认优势，也不把开发面板的持续负差降格为可以忽略的噪声。
+
+一、先把 B04 的正面结果和反面结果放在同一读法下
+
+下面保留各预定训练后面板的原始对比。J 是原生完整 episode 奖励总和的世界均值，不是 R 自己的重加权训练回报；QoS 和成本差是每步均值，均按 R−N 计算。
+
+hmasd-pro-question-usa-b04-next…
+
+面板	原生 J 差	QoS 差	封顶返航成本差	J 胜／负世界数
+开发 update 10	−113.790779	−0.042389671	+0.016954686	2／6
+开发 update 20	−289.499894	−0.044626136	+0.074181672	2／6
+开发 update 30	−218.433452	−0.091920514	+0.027256861	2／6
+固定最终 32 世界，update 30	+549.393528	+0.108482684	−0.129009370	22／10
+
+最终面板是一个值得认真复查的原生阳性，不是只有风险代理量变好。 N/R 的 QoS 为 0.158025257／0.266507941，封顶成本为 0.239923270／0.110913900，未封顶成本也从 0.482361201 降到 0.205172231。J 差的算术分解是服务项约 +162.724026、原生的 −2×成本项约 +387.028110、PBRS 约 −0.358607。因此，这些世界上的收益同时得到服务和风险分量支持；不能说它只是换了评价权重才显得更好，也不能把上述分解变成机制贡献百分比。
+
+hmasd-pro-question-usa-b04-next…
+
+它也不是只靠一个最有利世界抬高均值：32 个差值中有 22 个为正，中位数为 +460.498960。但尾部并未消失。R 仍有 12 个负 J 世界、六个零服务世界；两臂的零服务集合只有一个世界重合。世界 938021 的相对损失达 −899.031058，938013 在 QoS 和最低电量稍有提高时仍损失 −797.043242，因为返航成本上升。恢复 N 的某些坏世界与产生新的坏结果可以同时发生。 这些异常不能被均值、P10 或最低电量的总体改善覆盖。
+
+hmasd-pro-question-usa-b04-next…
+
+开发面板则是对“普遍降低风险并改善服务”的直接反证。 三个训练后面板不只 J 较差，QoS 也较低、返航成本也较高。update-30 开发和最终评价使用各臂同一个终点策略，summary 中的策略指纹对此相符，所以两面板反号不是 R 又训练了一段时间所致。另一方面，这三个开发读数复用了同一组八世界，也不是三个独立训练阴性，更不能仅凭这次有限样本把反号命名为系统性分布迁移、评价过拟合或某个优化缺陷。
+
+hmasd-pro-question-usa-b04-next…
+
+还要保留一个绝对学习水平的边界：开发世界上，R 从初始化到终点的 J 提高约 +65.736632，N 提高约 +284.170084；这说明 R 在该面板发生了有用学习，却没有建立相对 N 的优势。最终面板没有初始化评价，不能拿开发初始化与最终终点相减，声称 R 在最终世界上的自身学习增量。 所有评价又都没有充电、cutoff 或 depletion 事件；一次训练中的充电 UAV-step 不支持充电竞争、恢复能力或灾难率下降的结论。
+
+hmasd-pro-question-usa-b04-next…
+
+二、工作解释应当怎样更新
+
+被加强的是一个有限训练机会：直接加强真实风险在训练目标中的权重，能够在一次完整训练比较的预定最终面板上，同时改善原生服务、真实成本和原生 J。 初始化、首轮物理采集和初始评价相符，首轮两层 advantages 及首次更新发生差异，两个运行都有完整原生优化器更新。因此，“修改没有真正进入学习”“只是评价重计分”已不适合作为当前结果的解释。原始数组及 checkpoint 的逐字节核验仍归属于 DM 的已报告审计；我本次核对的是源码、配置、summary、进度及退出／状态记录。
+
+hmasd-pro-question-usa-b04-next…
+
+被削弱的是两种过强说法。 第一，“加强风险惩罚只能通过牺牲服务来获益”不符合最终面板；第二，“系数 4 会普遍减少风险并提高净收益”不符合开发面板和不利世界。合适的更新不是在两个说法中选一个，而是承认：这个干预有真实但条件敏感的有限训练用途，其跨训练可重复性仍未知。
+
+未被识别的是收益的独立机制。 R 修改的是进入原生存储的奖励标量，从而同时改变高低层 return、GAE、actor advantages 和 critic targets；后续访问状态也随之变化。它不是同目标下只修复一个 critic，也不是把风险梯度单独加到低层 actor 的隔离实验。奖励与价值尺度、有限优化过程和访问轨迹的作用尚未分离。因此，“原系数一般过小”“风险表征更正确”“某一层信用分配被修好”都仍属于新猜想，而不是 B04 已经给出的诊断。
+
+继承证据要在这里真正约束投入，而不是只作引用。B03 的正确原始 J 差是 S−D +24.585407／−16.825601、G−D +117.896434／−24.945921；它说明同一最终面板上的辅助包差异也会随训练块反转，且共同 MSE 不提供可靠控制排序。项目级旧 Answer 的错误数字不能复用，后续 Decision 的纠正和本方向原记录才是依据。B04 没有辅助头，不能把当前阳性记成 B03 的挽救。
+
+指定当前背景中的 DM1 B11/B12 目标训练反转，进一步支持“不因一个大终点就提升为默认”；DM2 删除低层判别器奖励后的不利结果，则支持继续保留完整 native mixed RL 作为本次工作参照，而非未经依据地再删一个组件。这两项 S1 证据既不否定 S7 的阳性，也不识别 S7 的收益来源。它们对当前设计的具体影响是：保留 N，先重复真正发生的风险干预，不同时改变结构或内在奖励。
+
+三、为什么下一笔钱买新的训练对，而不是先买更多旧策略世界
+
+两种候选分别补充不同的不确定性。
+
+冻结策略的新 64 世界评价，考察的是：给定 seed 914021 已经产生的这两个终点策略，它们在另一组世界上的相对用途怎样？ 新的 N/R 训练对则考察：换一个完整训练实例，在相同两组世界上，这套训练干预还能产生怎样的 J／服务／风险差异？
+
+当前已经有两个事实：旧策略对世界条件敏感；这套学习干预只有一个训练对。增加旧策略世界数可以更清楚地描述前者，但不会增加后者。鉴于本题要决定的是后续学习投入，我愿意为第二个训练实例支付更高成本。它能让“训练实例变化”和“评价面板变化”形成一个小而有用的交叉比较，而不是每次同时换训练种子和世界、最后无法判断哪里发生了变化。
+
+其不同预测可以写得具体：
+
+可重复的风险训练用途预期：新实例在固定最终面板仍呈现较低真实成本、未塌缩的服务和较高原生 J；不要求精确重现 +549.393528。
+
+B04 特定学习轨迹的有利分化容许：新实例虽然再次确认干预进入 advantages 和更新，最终的服务／风险增量却消失或反转。
+
+较稳定但有范围的面板依赖预期：新实例又出现最终面板有利、开发面板不利。这样的重复会使“差异只属于 B04 这一次训练偶合”较难维持，却仍不给出一般用途，更没有自动识别一个可部署的世界分类规则。
+
+这些是供下一观察区分的工作假说，不是已经估计出来的发生概率。重复相同正负格局也不证明两组 seed 编号代表某种已知任务亚群；尤其不能根据已经看过的世界成绩，事后构造“这个世界用 N、那个世界用 R”的选择器并计作当前方法的收益。
+
+最强的反对理由与成本
+
+反对我这一选择的最强理由，是当前最显眼的问题确实来自世界敏感性，而冻结评价以更低成本就能直接扩大其观察范围。 R 的绝对服务还低，旧终点尚有严重坏世界；再花一对完整训练的成本，可能只增加另一对同样不成熟、同样难泛化的策略。两套已暴露面板上的第二次阳性仍不是总体确认。这个反对理由成立，不能靠“科研就应该多 seed”回避。
+
+两项候选的名义工作量如下。历史时间仅用作成本尺度，不是未来共享节点的运行保证。
+
+hmasd-pro-question-usa-b04-next… +1
+
+下一项候选	新训练 fits	训练团队 transitions	评价团队 transitions	历史成本参照
+一对新的 N/R 完整训练	2	360,000	192,000	B04 两 fits 合计 286.676430 runner 分钟
+旧 N/R 终点策略 × 64 新世界	0	0	192,000	B04 的 192k 评价阶段合计 75.168429 分钟
+
+新训练方案另有 2.88M 训练 agent rows，总计 552k 团队交互。冻结方案也需要 checkpoint 加载、身份和 RNG／复现核对，以及必要的窄 evaluator 实现；“零 fit”不等于零工程或零计算。B04 的 runner wall 总和、303.797771 分钟的批次经过时间、CPU 时间和每个进程的 RSS 高水位属于不同口径，不能相互替代或把 RSS 相加当作机器峰值。
+
+hmasd-pro-question-usa-b04-next…
+
+我仍选择新训练对，是因为其成功和失败都能改变这套学习配方的投入理由。 若实际用途改为“只决定这两个旧 checkpoint 中哪个更值得使用”，我会转而选择冻结 64 世界评价；若无论下一对如何都准备继续调系数，或即使复现也绝不考虑保留任何用途，那么这一对也没有足够决策价值，直接停止当前配方开支更一致。材料没有提供效用函数或机会成本的数值，因而这里是有理由的投资判断，不是计算出的最优预算分配。
+
+本建议没有选择“训练复现之后自动加 64 世界，再自动确认”。两种研究不是免费的前后置步骤，只选择当前这一项。
+
+四、我建议固定的下一项比较
+科学条件与执行绑定
+
+使用题面候选 914173 作为拟定的新训练 seed，N/R 各从头训练一次；四 lanes、1500-step rollout／episode、30 次完整更新，每臂 180k 团队 transitions。仍采用 S7-S2、interface v3／reward v2／arm C、8 UAV、30 用户、固定 k=10，保留原生网络、PPO、判别器奖励、熵、信息权限、归一化、循环 reset 和 S7 实际动作执行。CUDA FP32、TF32 关闭、四 Torch 线程及实际节点准入沿既有方式处理。914173 在此是拟采用值，本次没有声称已核验其全部历史使用情况；实际输入绑定应明确记录这一点，而不是仅更换输出目录名称。
+
+hmasd-pro-question-usa-b04-next…
+
+保持唯一目标干预：
+
+r
+train,N
+	​
+
+=r
+native
+	​
+
+,r
+train,R
+	​
+
+=r
+native
+	​
+
+−2c
+return
+	​
+
+.
+
+环境和两臂评价始终使用原生系数 2；不改变成本的 0.05 尺度、封顶 1、cutoff／depletion 惩罚或 PBRS。训练时是 2 对 4，评价时是 2 对 2。这里的原生标量不再除以 UAV 数量，也不拿两臂各自不同目标的训练回报直接排名。
+
+有一处执行描述必须写实：冻结 B04 CLI 的 --seed 只接受 914021；production_spec() 也会拒绝其他 seed，并返回原 B04 默认 spec。因此新 seed 不能由冻结入口原样执行，单改 CLI 的 choices 也不够。需要一个窄的后继参数绑定，使选定 seed 真正进入 spec 和 run_native，保留准入、来源身份及其他科学设置；记录实际发布的新来源版本，不改写旧 B04 入口和结果。这个边界来自源码阅读，不是已完成 B04 的缺陷，也不是新增科学审批。
+
+两臂应复用匹配的初始化和外生随机设计，并通过已有初始化、首轮物理采集和首次更新记录核对。新的 seed 同时改变模型初始化、随机流及训练世界，是一个新训练实例，不是单独隔离“初始化”的实验。保留现有审计足以核查干预是否生效；不为此次复现额外引入辅助头、梯度夹角调查或全新的 critic 诊断工程。
+
+面板、估计对象与读数
+
+保留 937001–937008 在 update 0／10／20／30 的开发面板；保留 938001–938032 在 update 30 的终点面板。这两组世界现在都属于已暴露的开发证据，“final”只是继承的面板和终点名称，不能再次称为未查看的确认集。不查看旧面板上的中途分数来修改 R、缩短／延长训练，或追加世界。
+
+对训练块 b 和面板 p，分别报告
+
+Δ
+b,p
+J
+	​
+
+=
+∣W
+p
+	​
+
+∣
+1
+	​
+
+w∈W
+p
+	​
+
+∑
+	​
+
+[J(π
+b,R
+30
+	​
+
+,w)−J(π
+b,N
+30
+	​
+
+,w)],
+
+并在相同世界上分别报告 QoS 和真实成本差。终点 32 世界的原生 J 差保留为主读数；开发八世界的终点差和整条曲线保留为范围约束，不合并成一个事后选择权重的总分。 配对依据是实际共同设计和世界，不是 seed 字符串相同。原有科学方法明确区分了独立训练单位、嵌套评价和选择曝光。
+
+这会形成四个不能互相遮蔽的终点格子：
+
+训练块	开发八世界	既定终点 32 世界
+B04，914021	−218.433452	+549.393528
+新训练块，拟 914173	单独报告	单独报告，保留主终点
+
+即使第二行全正，也只是两个训练实例的探索；不能把 32／40 个世界、评价 episode、四个 checkpoint 或数百万 agent rows 当作更多训练重复。即使对世界差值计算条件于策略的误差区间，也不能把其精度冒充跨训练总体精度。
+
+每个面板继续并列报告绝对 J、服务、封顶及未封顶成本、实际 episode 最低电量及其下尾、充电／cutoff／depletion 曝光，保留全部世界和实际长度。最低电量不能代替返航成本；固定需求下吞吐量与 QoS 的倍数关系也不能被算作两份独立证据。真实早终的完整回报按实际 episode 计入，不填补到 1500、不因其不利而剔除；每步尺度只作补充。冻结 evaluator 已明确累计原生回报、记录真正 episode minimum battery，并保持零评价更新。
+
+五、什么结果改变下一步选择
+
+下表是我建议事前采用的投入分支，不是总体显著性检验或机械的“正号通过”规则。
+
+新训练对的预定终点观察	对解释和投入的改变
+32 世界再次有值得保留的 J 增量、较低成本和兼容服务；开发面板也不再给出实质相反结果	加强风险重加权的有限训练复现理由，弱化“仅 B04 学习轨迹巧合”的解释。保留候选，但不把系数 4 设为默认，不自动确认。
+32 世界的服务／风险净收益重现，但开发面板仍明显不利	保留“在这些世界上可重复”的窄观察，同时加强面板敏感性。不把重复了正面格子理解成普遍用途。 不能据此选择一个未识别的世界条件规则；若所需用途是通用默认方案，本轮仍不足以支持继续按该用途投入。
+32 世界的原生收益消失、反转，或小到不足以改变保留价值；只有开发面板或早期 checkpoint 有利	显著降低当前固定系数 4 配方的投入理由，默认结束它的继续训练开支。不能用旧 B04 大正差、两块均值、另一面板或第三对训练掩盖新块主读数。
+成本降低但原生 J 变差，或 J 提高却没有风险改善／伴随不可接受的服务损失	前者是未兑现净用途，后者未兑现直接风险解释。保留实际得到的分量权衡，不改称原假说成功，也不自动扫系数、换 critic 或恢复辅助头。
+
+这里尤其要区分两件事：保留一个研究观察，与选择再花一笔钱，不是同一个决定。 “最终正、开发负”的重复可以产生可复用认识，却仍不足以支持通用控制器使用。R 当前低绝对 QoS、零服务世界及严重相对损失，意味着下一对即使平均正，也必须读它究竟改善了什么、留下多大损害；不能把任何一个正小数当作确认经费或部署资格。材料未给出与实际用途相符的最小有用差异和尾部容忍线，我不会从 +549.393528 倒推一个门槛，或偷用历史配置中的 gate 代替这次探索的用途判断。
+
+相反，新块反向也不证明所有风险重加权都无效；它改变的是继续这一固定配方的理由。技术错误导致的无效读数必须单列，保留尝试和成本，不能算科学阴性；同一语义下的工程修复由 DM 按现有责任处理，不能借修复悄悄更换 seed、系数或终点。失败的中间预测不是反复更换模块直到阳性的理由。
+
+本次没有选中确认。将来只有出现值得主张的实际用途，才需要在真实 CLAIM 中固定候选、主要对照、选择曝光、训练和世界总体、主终点、实用差异及小样本不确定性方法，并依现行方法采用全新独立训练种子。B04 和这里建议的新训练对都留作探索；它们不会因累计数量增加而自动变成确认。结束一个配方也不等于解除 DM 的方向责任，但本答复不据此安排另一个自动后继研究。
+
+六、来源范围和信息缺口
+
+本次读取的科学输入按附件绑定：问题、完整 B04 结果及指定 B03 收尾记录使用 5c6af88f406b0b97d7f988f8d5cb9351d6afb893；治理、科学方法、共享背景主题 3／6、DM3 计划以及项目级完整 Answer／Decision 使用 b512311aff062034799414338bf69f1043a710d6；B04 前瞻合同及有关执行、奖励和评价路径使用冻结来源 914fc484368cc6c41af211b169c45b02e4a10425。背景的 DM3 状态早于 R 完成，未用它覆盖较新的 B04 结果。移动分支只用于最后核对写回目标，不替代这些输入。
+
+两份 primary summary 的最终世界、全部开发聚合、实际计数和干预／策略指纹，以及两份配置、退出和最终状态记录已读取；progress 核对了可见采集记录和终点段，没有把整个原始轨迹审计重新执行一遍。仓库外 NPZ、checkpoint 和真实节点文件的逐字节一致性、GAE 的 float64 复算等，均是已读 NOTES 中 DM 报告的核验，不是我的独立二进制复核。GitHub 的 COMPLETE、exit-0 和一致状态记录支持其已完成的文本证据，但不使我取得未读取的数组。
+
+hmasd-pro-question-usa-b04-next…
+
+没有缺失到需要以记忆补写的决策核心文字来源。真正未满足的内容是：新的训练观察、可支持总体判断的跨训练精度、未暴露世界上的更广用途、以及新 seed 的实际后继入口和运行成本。它们分别限制复现、主张范围与执行，不是把已经可作的方向级选择推回另一个审批流程。
+
+最终建议保持不变：只选择一次新的匹配 N/R 训练对，固定系数与两个已暴露面板，购买跨训练实例的判别信息；保留大最终收益和持续开发劣势的全部张力。若新观察不能增加值得使用的服务—风险证据，就结束当前配方的追加投入，不用更大世界面板、更多 seed 或新模块自动接续。
+
+MATERIAL_DISSENT: no——同意“先买一次新学习实例”的选择，不同意将其理解为默认采纳、总体确认，或已经排除了面板依赖。
+
+~~~
+
+## 2026-09-23 — B04 advice adopted; B05 fixed independent training recurrence
+
+**Decision and actual update.** I adopt the complete Pro recommendation for
+exactly **one new N/R training pair**, and its adverse-outcome branches. The
+current question is whether the finite-learning intervention is worth retaining;
+another 64 worlds for the old checkpoints cannot add a training instance. This
+justifies the greater cost of learning, not an entitlement to a second positive
+number. I do not select the alternative old-policy wider-world study. Advice
+adds no empirical replication, establishes no mechanism and grants no permission;
+the owner already delegated this scientific choice. Current main
+`36db756f30dfe0452207457a881d16e9095cec7b` retains the pause lift, this lead and
+three-DM autonomy; FSD/G33 remain untouched. Its relevant topic-6 B04 reading
+and unchanged constitution were rechecked. B03 remains closed.
+
+Pro's consequential numerical descriptions agree with the independently
+recomputed B04 pair. Its distinction between four endpoint cells and a pooled
+score applies: the main comparison was positive only on one panel; development
+losses and each arm's absolute failures are part of use. Its source gap is
+explicit: it did not read external raw binaries or perform our arithmetic audit.
+That does not undermine its investment argument, and I do not attribute those
+checks to Pro. `MATERIAL_DISSENT: no` is advice, not acceptance of a wider claim.
+
+I verified the concrete implementation criticism: B04 CLI accepts only914021,
+and its production_spec rejects other seeds and returns that default. Changing
+only a tag or argument list would not deliver a fresh fit. The new selected seed
+is **914173**, with lanes **914173–914176**. A targeted check finds no such seed
+in this direction's retained run config/summary files; this is not a claim about
+every unobserved historical task. The subsequent actual initialization/collection
+fingerprints must differ from B04 and match within the new pair. Both model/RNG
+and training worlds change; no isolated-initialization explanation is claimed.
+
+**Prospective B05 comparison, before new results.** Same N/R intervention and
+S7-S2/v3/reward-v2/arm-C conditions as B04: N=8, users30, k10, four lanes,
+30×1500-step rollouts = **180k team transitions / 1.44M agent rows per arm**;
+complete native high/low and discriminator learning, no auxiliary heads. N uses
+original reward, R subtracts `2 * actual post-transition return_constraint_cost`
+before native storage, so training coefficients are2/4. Both evaluate original2.
+All networks, optimizer/update budgets, information, clipping, normalization,
+termination/truncation, intrinsic rewards, entropy, cost cap/scale and PBRS remain
+unchanged. CUDA FP32/TF32-off/four Torch threads on configured4070 after actual
+admission. N then R, each initialized from scratch, without an N-performance gate.
+
+Keep worlds937001–937008 at updates0/10/20/30 and worlds938001–938032 only at
+update30, deterministic original-objective evaluation with RNG preservation and
+zero optimizer updates. Both panels are now **already exposed development
+worlds**; the inherited `final` name denotes a fixed endpoint, not fresh held-out
+confirmation. Do not select checkpoints, change weights, add worlds, alter
+horizon or tune after intermediate results. Native early ends remain included
+with actual episode return and length, never padded/excluded for bad performance.
+
+Primary reading: B05 R−N raw original J on the32-world endpoint, alongside QoS,
+throughput, capped/uncapped actual cost, charging/cutoff/depletion, true episode
+minimum battery and its lower tail. Keep every world's difference, losses and
+amplitudes. Present both B04/B05 training blocks on both endpoint panels separately;
+no pooled mean can hide a new adverse cell. Development curves constrain scope
+without replacing the primary. Two training pairs remain exploratory; nested
+worlds/checkpoints/lanes/agent rows do not increase independent training n.
+
+Prewritten interpretation and investment branches:
+
+- Repeated meaningful endpoint J gain with lower risk and compatible service,
+  without substantial contrary development use, strengthens keeping this finite
+  training candidate. It neither promotes coefficient4 to default nor selects
+  confirmation. Read absolute service, bad worlds and cost before investing again.
+- Repeated positive final and negative development cells strengthens a narrow
+  panel-sensitive observation, not general use or a deployable world selector.
+  Preserve both cells; a universal-default use remains unsupported.
+- Endpoint net benefit disappears/reverses or is too small to change retention:
+  lower investment in this fixed weighting recipe and end its further training
+  by default. No third pair, alternate checkpoint, other panel or B04 pooled
+  average rescues it. This does not reject all risk learning or end DM responsibility.
+- Lower cost with lower original J fails net use; higher J without lower cost
+  fails the proposed risk explanation. Preserve actual tradeoffs. Neither selects
+  a coefficient search, critic replacement or revival of the old auxiliary head.
+- Technical invalidity is separate, with its attempt and cost recorded; same-effect
+  reconciliation and any repair preserve the fixed scientific contract. No blind retry.
+
+There is no invented universal minimum-effect or tail-tolerance gate. The visible
+service and loss amplitudes determine whether a result changes a practical
+retention judgment; no arbitrary positive decimal guarantees further investment.
+This is one new prospective study with a recurrence reason, not retroactive
+extension or confirmation of the completed B04 batch.
+
+**Exposure and cost.** Exactly **2 new fits / 360k train / 192k eval upper bound /
+552k total team interactions**, 2.88M train agent rows, no fact/replay collection.
+Reference sum fit wall286.676430min includes75.168429min evaluation; future wall
+under shared-node load is unknown. Record actual wall/CPU/RSS scope and archive
+bytes; independent rescoring adds no interactions. Preparation, narrow plumbing,
+checks, independent review, staging, collection and full reading are additional
+work, not a performance claim. No wider-world evaluation or third fit is selected.
+
+**L0 implementation scope.** Add `b05/native.py` as the fixed production seed/spec
+binding, `scripts/run_uav_service_auxiliary_b05.py` as the new guarded entry, and
+mirrored B05 tests. Reuse the already-reviewed B04 collector, objective, learner,
+evaluator, checkpoints and raw outputs. One narrowly justified change to the
+current B04 helper is an optional `object_id` argument with its existing B04
+value as default; B05 passes its own identity. This is metadata only, avoids a
+copied numerical runner, and leaves the frozen914fc4843 source, old CLI/spec and
+all results unchanged. No mutable-global patch or hidden default-seed substitution.
+
+Check production CLI→spec→active-config seed, actual initialization/RNG/lane seeds,
+unchanged fixed evaluation worlds and their physical initial states, correct new
+object identity and unchanged B04 default, no-science-before-admission/SHA refusal,
+and a short real storage/update/evaluation/checkpoint path. Reuse B04's nonconstant
+risk/GAE/actor and terminal-view regressions; do not repeat generic engineering
+work without a changed risk. Independent registered Reviewer checks the narrow
+scientific-input/result-identity diff before acceptance. Commit and push exact
+inputs, validate the changed path on the actual CUDA node, then admit N and
+observe its original operation. No result-bearing fit has started in this entry.
+
+
+**B05 implementation acceptance before remote validation.** The narrow new binding
+and guarded entry now implement the fixed seed; the only B04 helper diff is the
+optional output identity and its unchanged default. Combined B04/B05 checks:
+**13 passed / 2 CUDA skips, 17.17 s**. The first invocation failed at collection
+because the two files shared pytest module name `test_native`; renaming only the
+new test to `b05/test_recurrence.py` resolves it. No scientific run occurred in
+that collection failure. The final suite verifies actual new/old initialization
+and first-collection differences, new-pair matching, config and all lane seeds,
+new/default result identity, identical initial obs/state in all40 exposed worlds,
+identical deterministic fixed-policy traces under either policy RNG seed, and
+admission/SHA refusal. Existing real reward→GAE→actor and terminal-view regressions
+remain covered. Independent registered Reviewer reports **no material findings**,
+explicitly separating source/coverage review from actual CUDA validation still
+pending. I accept this bounded implementation; actual-node checks precede any fit.
+
+The full Pro answer is saved once and the exact READY event is consumed at
+generation62, advancing observation to63. There is no active prior experiment
+or pending answer; inspection finds no remaining tab for this completed private
+conversation, and preserves all three unrelated browser targets. No repeat Send
+or App message occurred. The next action is actual-node correctness on the
+published B05 inputs, followed by native admission of the already-fixed N.
+
+## 2026-09-23 — B05 N admitted after fixed-seed CUDA checks
+
+Scientific source **`3de3e3f71c747e2422656126b52ae88beafb562a`** is committed and
+published. Its retained, clean checkout on configured `wsl_4070` passed the
+complete new B05 suite: **7 passed in 22.21 s**, including its actual CUDA
+collection/update/evaluation/checkpoint path. The local combined B04/B05 result
+remains 13 passed / 2 CUDA skips; independent review found no material findings.
+No source change followed actual-node validation.
+
+The fixed **N / seed914173** fit was natively accepted at
+**2026-09-23T19:56:22.822292Z**. The launch kernel rechecked current main
+`cfb058e5974d0f71304631659a6c8a0742f49abf`, the lifted pause, unchanged direction
+and exact lead, published source and actual-node resources. Available physical
+memory was **14,131,367,936 bytes**, above the **4,294,967,296-byte** floor.
+[Native manifest](../../../../runs/uav_service_auxiliary/b05_n_914173_a01/launch-manifest.json),
+[actual-node preflight](../../../../runs/uav_service_auxiliary/b05_n_914173_a01/admission-preflight.json)
+and [observed native state](../../../../runs/uav_service_auxiliary/b05_n_914173_a01/launch-status.json)
+retain the operation, command, source and original output paths. The supervising
+and scientific process identities both match, records are consistent, and the
+runner is **running** with no exit witness. Admission is not scientific acceptance:
+**0 completed/accepted B05 results** at this observation.
+
+Detached observation is registered and has adopted that same native operation,
+generation **64**, 1500-second bounded window. The initial drain has no pending
+events or undelivered Pro answer. Preserve this source and worker; a checkpoint
+rearms observation without restarting it. Complete output collection, native
+accounting, seed/fingerprint binding and the full fixed panels remain required
+before accepting N. **R is already fixed as the second fit**, after N collection
+and resource release, irrespective of N's performance. The pair remains exactly
+2 fits / 360k train / 192k eval upper bound; no additional action is selected.

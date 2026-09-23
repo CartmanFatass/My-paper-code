@@ -11645,3 +11645,231 @@ and required tests. After acceptance, commit/push exact inputs, admit on configu
 with current pause/lead and fresh memory, stage bound assets without changing native originals,
 launch once, retain handle and arm detached observation. This entry fixes exposure before any
 B13 result. Ordinary technical repair does not authorize extra panels, fits or blind retries.
+
+
+### B13 asset availability and retained training cost
+
+All four exact final45 binaries were rechecked on wsl_4070 before implementation acceptance:
+H1/H2 each23,073,626 bytes, S1/S2 each20,968,771 bytes, all matching the four hashes above.
+The fixed B13 output root did not exist. H1 was also copied locally from its original native
+file and hash-verified; no replacement fit or checkpoint selection occurred. This resolves
+local restore-test availability, not native execution admission or scientific acceptance.
+
+The four selected historical fits each used360k team training steps:1.44M total,8.64M UAV
+training rows, with256k historical evaluation team steps. Original command walls, including
+their own evaluation, are H1=90.417839min, H2=61.825780min, S1=70.329337min and
+S2=81.932786min; summed304.505743min, not elapsed batch/node occupancy or a B13 estimate.
+Each paid101250 actor and101250 critic optimizer calls. Each H6 additionally paid675
+coordinator,675 team-discriminator and2700 individual-discriminator calls; both SETs paid
+zero for those three. Historical intervening evaluations and prior development/selection
+remain recorded in B03/B07/B11/B12; these selected-fit sums are not the whole direction cost.
+B13 adds only its declared128k evaluation and actual implementation/check/review/reading work.
+
+
+### Completed B11/B12 disposable source snapshots reclaimed
+
+The current main engineering method was read, including snapshot reclamation. All four
+B11/B12 outputs were already collected/read; before cleanup their local checkpoint and native
+trace bytes were rechecked against runner identities. The default preview could not inspect
+`/proc/660/cwd`; its refusal was preserved. The documented existing passwordless
+`--sudo-process-scan` performed only the read-only process probe. The explicit second preview
+confirmed terminal native identities, clean sources, external outputs and durable direction
+branch reachability for snapshots `47a0e50e9fff44bda1d1dac103791a84`,
+`e97d5410d77a41a3b09edcd7f9941642`, `1a402ca3a17e4d259bdfe3b46da60ddf` and
+`ab99cc4c0cc94d5cbcb377a1f5888852`; guarded apply rechecked and removed those four copies.
+Run outputs, original checkpoint paths, operation claims and published evidence remain. This
+reclaims disposable source only and grants no retry; B13 uses the existing bound binaries.
+
+
+### B13 implementation and independent review accepted
+
+The DM read the complete new candidate, CLI and tests and accepts their final bytes. No
+shared learner, environment, frozen runner or other direction was changed. The independent
+Reviewer found and the Implementer repaired an N6 constructor-difference guard, exact-zero
+floating cancellation in the four-gap identity, an initial-array reproduction check that
+incorrectly used allclose, and a reported runtime seed that was not installed. The fixed
+initial arrays and integer/boolean traces now require exact equality; continuous output
+comparison remains at the original1e-7/1e-6 tolerances. The algebraic diagnostic retains every
+residual with a16*float64-epsilon*max(1,sum absolute source values) roundoff bound; it does not
+introduce a scientific equivalence threshold or change any score comparison.
+
+All four real bound checkpoints were strictly restored at both N8 and N6 before any result
+panel, verifying exact saved modules, all normalizers and the original final digest. H1 retains
+its original constructor's .05/.01 entropy endpoints; H2/S1/S2 retain .05/.05. Only required
+roster/lane-derived fields change. Construction seed17 is fixed for this invocation; after
+strict restoration, evaluation explicitly installs the per-panel world_base+51 RNG seed.
+The runtime address is recorded truthfully; this does not assert identical post-constructor
+RNG state to the historical evaluator. Deterministic choices, native initial worlds and the
+full fixed SET reproduction check protect the compared behavior.
+
+Final focused suite: Implementer20 passed in6.69s; DM20 passed in6.24s; independent Reviewer20
+passed in5.90s. Existing14 dependency deprecation warnings remain. Coverage includes all eight
+real asset/roster restores, strict payload/config/module/normalizer rejection, focused real
+H6 16-to-32 batch/choice/action and observational counter checks, zero storage/update/freeze,
+all four contrasts including non-dyadic residuals, exact initial-array rejection, a short
+synthetic-runtime execution of the real evaluator with numeric trace/failure preservation,
+and CLI admission ordering. AST, LF and changed-line whitespace checks passed. The reviewer
+reports no material finding remaining on exactly these bytes:
+
+- candidate runner SHA-256 `79728b512de0e1b409ce0d934a57e406edccbd79c429b34aff77c4f18cfed6d8`;
+- CLI `197f843cbf23c88e01f4926e9efe7b229737bb13c57936fabc6a5048602a3050`;
+- tests `5c007454feb91392bf848e8fbd692faa09cf6703b7d5d1d1f7742901b398c045`;
+- package `e8a2a8ef9bafe2979aa383d48a570ac6af352b0f9c89efe82955740b46c07f74`.
+
+No full B13 panel or new fit was used for these checks. Full ordinary-control reproduction
+remains a prospective runtime condition, not something established by fixtures. The DM also
+prepared an independent saved-trace reader without candidate/environment imports. It will
+recompute J/C/Q/P/E/S/U, all four contrasts and loss-world readings after native collection.
+Current published controls were rechecked through main17f02ea4c: this direction remains
+exploring with the same lead and owner pause lifted; FSD/G33 controls are unchanged. Native
+live policy agrees on pause/state/lead, and its compute config equals published main. One
+fixed result launch will follow exact input publication and fresh admission on wsl_4070.
+
+Final staged-file whitespace audit found three extra blank lines at EOF in the new package,
+runner and tests; the earlier unstaged diff check did not include untracked files. They were
+removed after the semantic review, with identical parsed ASTs for all three files. This
+corrects the scope of the whitespace statement above; no behavior or test expectation changed.
+Final execution bytes are runner `d31e3219be7ad4557b8e3250059debe2bace1656f42e4771e91a467c1ac7cf37`,
+tests `319dbf25e925fd9a006529a6f144b421a975be8551ede89fabef3024c951ba22`,
+package `97533d39e14fdfd978d0536af13fc10b48837c2c225fbfb96b7236acbb4e8e2a`; CLI is unchanged.
+
+
+### B13 pre-admission path refusal and corrected input staging
+
+The first supervisor submission `agent-count-ordinary-control-b13` used published source
+`ba0a313707da94b4784e70ff338b256903eff848`. It exited4 after8 seconds at2026-09-23 20:09:41UTC:
+`absolute author input is absent from published snapshot`, naming S1's ignored checkpoint
+under the canonical author checkout. This happened in snapshot argument resolution, before
+claim creation, output-root creation or runner admission. Native reconciliation found no
+claim mentioning the fixed B13 tag, no output root and no active supervisor; zero B13 fits,
+training steps or evaluation panels started. Preserve the original supervisor log/status.
+
+DM decision: correct only the external-input locations and make one new admission submission
+for the same fixed output tag and eight-panel science. The kernel maps absolute paths beneath
+the author checkout into the published source snapshot. Therefore the two existing SET
+binaries were copied byte-for-byte to the configured external staging root:
+`/home/wu/hmasd-inputs/agent-count-ordinary-control-b13/s1_checkpoint_45.pt` and
+`/home/wu/hmasd-inputs/agent-count-ordinary-control-b13/s2_checkpoint_45.pt`.
+Both remain20,968,771 bytes with the prospectively bound SHA-256 values; original native files
+were rechecked unchanged. H1/H2 already reside outside that author root and retain their
+original bound paths. No source behavior, checkpoint, world, threshold, exposure or output
+identifier changes. This is a diagnosed pre-admission correction, not a repeated accepted
+worker or a scientific negative. The failed source snapshot is retained, not force-removed.
+
+
+### B13 second pre-admission refusal: published source object recovery
+
+The corrected external-input submission `agent-count-ordinary-control-b13-staged-inputs`
+used source `4f0718a2d7ec24b59a4f89facd9efedd622431ca` and stopped before admission after9s
+at2026-09-23 20:12:38UTC. Native `git worktree add` could not lazily fetch the published
+NOTES blob: GnuTLS receive error, early EOF/index-pack failure. Reconciliation again found
+no matching B13 claim, no output directory and a terminal supervisor, with zero experiment
+steps. The original log and failed source preparation are preserved.
+
+The missing Git object `814e9c9bdd629eb8f7b7317c2f310a68b063f82b` is exactly the845,674-byte
+NOTES blob of the published4f0718a2d source; the sole tree change since the already prepared
+ba0a313707 snapshot was this notebook. DM copied the existing local blob through native
+`git hash-object -w --stdin`, obtaining the identical object ID. No ref, index, source text,
+scientific argv or checkpoint changed. After this specific availability repair, the DM
+selects one further admission submission with the same4f0718a2d source, staged inputs and
+output tag. Two pre-admission failures are technical costs, not started fits or evidence
+against the scientific prediction; no accepted worker has been restarted.
+
+
+### B13 admitted attempt failed before exposure; L0 for sparse evidence loading
+
+The first admitted B13 operation is
+`/home/wu/projects/HMASD/.git/hmasd-admission/8a0991b1653e0d7ae1dbc738e9103aaed4750aa745303e9bb6b68c2e2ef0efbf.json`,
+source4f0718a2d, accepted2026-09-23 20:15:01UTC on wsl_4070. Fresh physical/effective available
+memory11,711,082,496 bytes exceeded the4GiB floor. Runner419418 exited1 at20:15:03UTC;
+native runner and supervisor are absent with consistent identities and valid exit witness.
+All9 files (17,992 bytes) were collected and matched byte sizes/SHA-256, and the complete
+config, summary, admission/manifest/status, witness and error were read. Command wall1.598061s,
+peak scientific-process RSS420,968KiB. Assets/panels are empty; every actual fit/training/
+evaluation/update/storage counter is0. This has no scientific outcome.
+
+The concrete error is FileNotFoundError for the first historical S1 summary inside the
+source snapshot. Git's linked worktree inherits the native sparse view, which omits the
+committed runs tree. Local complete-checkout fixtures did not cover this executable topology.
+The old claim, source, output tag and failure evidence remain immutable; there is no same-
+request retry. DM selects one explicitly recorded corrected-code attempt, not an automatic
+repeat or a new scientific candidate. The four frozen policies, worlds, prediction, fixed
+reproduction rules and total128k intended evaluation remain unchanged, with0 additional fits.
+
+Bounded L0 amendment: the existing B13 Implementer owns only its candidate runner/CLI/tests.
+Read committed source evidence directly from HEAD Git blobs even when sparse checkout omits
+physical files; when a physical file exists, require exact equality to the committed bytes.
+Continue verifying the fixed SHA-256 for every summary/panel/trace. Decode NPZ from verified
+bytes with allow_pickle=False, and re-read authoritative committed inputs for before/after
+identity instead of requiring absent working paths. Record the Git locator and optional
+working presence truthfully. External checkpoint hash/strict restore rules are unchanged.
+Keep the scientific object ID; bind corrected execution to `s1_ordinary_control_b13_a02`
+in both candidate and CLI, preserving the failed original tag. This changes executable input
+handling and source SHA; changing only a tag would not justify or permit repetition.
+
+Add a focused actual Git/sparse fixture that lacks working summary/trace files yet reads the
+committed bytes, rejects working-file disagreement and incorrect hashes, and exercises NPZ
+loading and input rechecking. Reuse the other20 checks; no result panels, new worlds, Pro
+question or shared launcher edits. Independent Reviewer rechecks the changed loader/identity
+path. DM will prepare the exact committed data objects on the native node, then admit this
+corrected code once after publication and fresh resources; if technical validation fails,
+retain the failure and reconsider rather than adjust numerical tolerance or delete a claim.
+
+
+### B13 a02 sparse evidence correction accepted
+
+The DM inspected and accepts the bounded three-file correction. Historical JSON/NPZ is read
+from the authoritative HEAD Git blob with its original fixed SHA-256; a present working file
+must be byte-identical. Verified NPZ bytes are decoded in memory with allow_pickle=False.
+Before/after identities re-read the committed references and external checkpoint bytes and
+truthfully record Git locators and working-file presence. The failure handler also preserves
+the original traceback/error.txt when a secondary identity recheck fails, reporting that
+secondary failure separately. Original a01 failure files and operation are unchanged.
+
+The real temporary sparse-Git fixture reproduces the missing-working-file topology and verifies
+JSON/NPZ loading, disagreement/hash rejection and identity rechecks. The existing failure test
+now also forces a secondary reread failure and checks that the original error survives. Final
+focused suite: Implementer21 passed in6.68s; independent Reviewer21 passed in6.29s, with14
+existing third-party deprecation warnings. Both checked the same final bytes; the Reviewer
+reports no material finding remaining. The DM read the complete diff and check reports and
+verified those hashes, parsed ASTs, LF and clean changed-line whitespace. No extra full panel
+or fit was used for acceptance. Full SET reproduction remains a runtime condition.
+
+- candidate runner SHA-256 `ba5270a08eb3cab464ab7b0ac169585bc0ba5c9d75edbf6e14539e6eb45235b9`;
+- CLI `94d14050360c47e02797cc1388e13cfffc9d4ac2574e3f6a39a02928822aa711`;
+- tests `d6f010e44513321498c74adb95ff44ff91ca88158b21146abb89eaba86249c58`;
+- unchanged package `97533d39e14fdfd978d0536af13fc10b48837c2c225fbfb96b7236acbb4e8e2a`.
+
+All12 fixed committed historical summary/panel/trace objects were transferred to the native
+Git object database and individually verified by size and SHA-256:57,405,194 uncompressed
+bytes, pack05a4c96ab701453cdec264d9d4e96c589272040e. No native ref, index, working evidence
+or original checkpoint was changed. Exact newly published source blobs will likewise be
+made available before snapshot preparation to avoid the diagnosed partial-clone fetch fault.
+Current published main37d837bfb retains the lifted owner pause, exploring state and same lead.
+The DM selects the already recorded a02 corrected-code attempt with unchanged scientific
+inputs, eight panels and0 fits; fresh native admission remains required. No B13 scientific
+result has yet been produced or accepted.
+
+
+### B13 a02 admitted under the unchanged ordinary-control protocol
+
+The corrected attempt was natively admitted at2026-09-23 20:36:05UTC. Its exact source,
+invocation, snapshot, native process identities and stable operation reference are in the
+[runner-written manifest](../../../../runs/agent_count_generalization/s1_ordinary_control_b13_a02/launch-manifest.json).
+The [fresh admission reading](../../../../runs/agent_count_generalization/s1_ordinary_control_b13_a02/admission-preflight.json)
+passed with12,121,624,576 physical/effective available bytes against the4GiB floor. The kernel
+read published main37d837bfb and the unchanged lifted pause/exploring/lead controls. Manifest,
+preflight and [fixed configuration](../../../../runs/agent_count_generalization/s1_ordinary_control_b13_a02/config.json)
+were collected without alteration, read and individually verified by size and SHA-256.
+
+The observer has adopted this same accepted operation at generation109; its first native
+reading at20:37:25UTC reports the recorded runner/supervisor running with consistent identities
+and no exit witness. It will return on completion/error or the bounded checkpoint, without
+restarting the worker. All earlier notices have been reconciled; there is no pending Pro.
+
+Scientific status remains unaccepted. This is the fixed0-fit,128k-evaluation comparison of
+four original policies, with mandatory S1/S2 reproduction before H1/H2 interpretation. The
+first admitted attempt's0-exposure technical failure stays preserved under its original tag.
+Next: collect the complete a02 output, verify fixed reproduction and input/parameter identities,
+independently recompute the native panels and full2x2 gaps, then apply the recorded prediction
+and contrary-world reading. Process exit alone cannot establish that scientific result.
