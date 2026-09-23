@@ -4613,3 +4613,25 @@ observation, not the final launch admission or a resource reservation. The next
 step is the same published-source CUDA correctness path on the actual node,
 then native admission of N. R remains the fixed second fit, selected irrespective
 of N's performance. No repeat Pro Send, task creation or App message is needed.
+
+## 2026-09-23 — B04 N admitted after native CUDA checks
+
+Fixed scientific source **`914fc484368cc6c41af211b169c45b02e4a10425`** is committed
+and published. The exact checkout on the configured 4070 node passed the entire
+B04 suite: **8 passed in 14.71 s**, including CPU and four-lane/full-hidden-size
+CUDA end-to-end checks. No source change followed these checks. The full native
+N fit is now **accepted and running**; this is a process fact, not a scientific
+result. [Native manifest](../../../../runs/uav_service_auxiliary/b04_n_914021_a01/launch-manifest.json),
+[actual-node preflight](../../../../runs/uav_service_auxiliary/b04_n_914021_a01/admission-preflight.json),
+[observed native state](../../../../runs/uav_service_auxiliary/b04_n_914021_a01/launch-status.json).
+The returned supervisor and child identities both match the live processes;
+the manifest supplies the immutable source, exact command, operation and paths.
+
+Detached observation is armed on that same operation, generation **48**, with
+a 1500-second bounded window. Initial drain adopted the live native handle;
+there are no unconsumed old events or pending Pro deliveries. Retain this worker
+and its source. On a checkpoint, read the evidence and rearm the same operation;
+on completion, verify the entire output and unchanged evaluation target before
+accepting a scientific result. R is already fixed as the second fit and awaits
+N's collection/resource release, not a positive performance gate. No further
+scientific action is selected in this launch turn.
