@@ -1,0 +1,96 @@
+{
+  "acceptance": "accepted",
+  "accepted_at": "2026-09-23T01:51:52.745549Z",
+  "bootstrap_command": [
+    "/home/wu/.venvs/hmasd/bin/python",
+    "/home/wu/hmasd-worktrees/agent-count-entropy-20260923-b05/scripts/hmasd_admission.py",
+    "_run-admitted",
+    "--runner",
+    "/home/wu/hmasd-worktrees/agent-count-entropy-20260923-b05/scripts/run_agent_count_entropy_b05.py",
+    "--output",
+    "/home/wu/hmasd-worktrees/agent-count-entropy-20260923-b05/runs/agent_count_generalization/s1_entropy_b05_set_l05_s953201",
+    "--",
+    "--cell",
+    "set_l05",
+    "--seed",
+    "953201",
+    "--out",
+    "runs/agent_count_generalization/s1_entropy_b05_set_l05_s953201",
+    "--launch-sha",
+    "e2ea736457e0992fb53cf21aa775fd15da3d8231"
+  ],
+  "claim_key": "5e59e6b76c6a44187cd3758e590ee3174616069562d6bacffb30b7a693954e9b",
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/5e59e6b76c6a44187cd3758e590ee3174616069562d6bacffb30b7a693954e9b.json",
+  "command": [
+    "/home/wu/.venvs/hmasd/bin/python",
+    "/home/wu/hmasd-worktrees/agent-count-entropy-20260923-b05/scripts/run_agent_count_entropy_b05.py",
+    "--cell",
+    "set_l05",
+    "--seed",
+    "953201",
+    "--out",
+    "runs/agent_count_generalization/s1_entropy_b05_set_l05_s953201",
+    "--launch-sha",
+    "e2ea736457e0992fb53cf21aa775fd15da3d8231"
+  ],
+  "command_sha256": "2e9d5f2986166ec71e0dcfba2108318a943031cfb7cb8063aad89b6d5736c239",
+  "control_observation": {
+    "observed_at": "2026-09-23T01:51:52.618717Z",
+    "ref": "refs/heads/main",
+    "remote": "origin",
+    "sha": "0fed22d9758227f6545d0e4e78ba78fdc7cc82eb"
+  },
+  "control_root": "/home/wu/projects/HMASD",
+  "created_at": "2026-09-23T01:51:52.632531Z",
+  "cwd": "/home/wu/hmasd-worktrees/agent-count-entropy-20260923-b05",
+  "direction": "agent_count_generalization",
+  "host_identity": "LAPTOP-U9TDKC8A",
+  "identity_command": [
+    "/home/wu/.local/share/uv/python/cpython-3.10.21-linux-x86_64-gnu/bin/python3.10",
+    "scripts/run_agent_count_entropy_b05.py",
+    "--cell",
+    "set_l05",
+    "--seed",
+    "953201",
+    "--launch-sha",
+    "e2ea736457e0992fb53cf21aa775fd15da3d8231"
+  ],
+  "lead": "Codex DM (independent session)",
+  "manifest_ref": "/home/wu/hmasd-worktrees/agent-count-entropy-20260923-b05/runs/agent_count_generalization/s1_entropy_b05_set_l05_s953201/launch-manifest.json",
+  "node": "wsl_4070",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/5e59e6b76c6a44187cd3758e590ee3174616069562d6bacffb30b7a693954e9b.json",
+  "output_root": "/home/wu/hmasd-worktrees/agent-count-entropy-20260923-b05/runs/agent_count_generalization/s1_entropy_b05_set_l05_s953201",
+  "preflight": "/home/wu/hmasd-worktrees/agent-count-entropy-20260923-b05/runs/agent_count_generalization/s1_entropy_b05_set_l05_s953201/admission-preflight.json",
+  "process": {
+    "detached": true,
+    "identity": {
+      "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+      "kind": "linux_pid_start_ticks",
+      "pid": 291336,
+      "session_id": 291336,
+      "start_ticks": 49053006
+    },
+    "native_handle_kind": "posix_session",
+    "pid": 291336,
+    "process_group_id": 291336
+  },
+  "process_exit": "/home/wu/hmasd-worktrees/agent-count-entropy-20260923-b05/runs/agent_count_generalization/s1_entropy_b05_set_l05_s953201/process-exit.json",
+  "published_remote": "origin",
+  "runner_process": {
+    "identity": {
+      "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+      "kind": "linux_pid_start_ticks",
+      "pid": 291337,
+      "session_id": 291336,
+      "start_ticks": 49053010
+    },
+    "pid": 291337,
+    "process_group_id": 291336,
+    "supervisor_pid": 291336
+  },
+  "schema_version": 1,
+  "sha": "e2ea736457e0992fb53cf21aa775fd15da3d8231",
+  "source_root": "/home/wu/hmasd-worktrees/agent-count-entropy-20260923-b05",
+  "stderr": "/home/wu/hmasd-worktrees/agent-count-entropy-20260923-b05/runs/agent_count_generalization/s1_entropy_b05_set_l05_s953201/stderr.log",
+  "stdout": "/home/wu/hmasd-worktrees/agent-count-entropy-20260923-b05/runs/agent_count_generalization/s1_entropy_b05_set_l05_s953201/stdout.log"
+}
