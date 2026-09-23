@@ -1779,3 +1779,27 @@ mechanism. The existing Pro advice and frozen comparison still cover the next ac
 Run the already specified T second arm from the same published source and fresh addresses,
 with no change based on M's scores, then read the paired result. No additional fit or panel
 is added. Current main keeps this lead active and owner pause lifted; Claude FSD/G33 are unchanged.
+
+## 2026-09-23 — B02 fixed T admitted after M collection
+
+After full local collection and verification, the native collector previewed and removed
+only M's disposable source snapshot `d14e5589c2a04aa6941f45e6e8a63b7b`. It verified terminal
+identities, clean source, retained output and durable source reachability; the operation,
+manifest, complete outputs and authoring checkout remain. Generation17's M-ready event was
+consumed into generation18 without restarting M.
+
+The fixed second arm T was natively accepted at10:01:24 PDT under the same tested/published
+inputs and the original two-fit contract. Its
+[native manifest](../../../../runs/complementary_skill_learning/b02_t_260923911_e232332a0/launch-manifest.json)
+and [fresh preflight](../../../../runs/complementary_skill_learning/b02_t_260923911_e232332a0/admission-preflight.json)
+were copied unchanged and match executing-node hashes. The preflight passed with11,933,335,552
+effective available bytes against the4,294,967,296-byte floor. Native runner/supervisor
+identities agree and remain running; supervisor command acceptance was separately checked.
+
+A read-only comparison of actual M/T initial checkpoints verifies identical native tensors,
+both factual-head tensors and normalizer fields; T's effective coefficient is0. The first
+rollout summary was not yet present at that read, so actual first-fact/D2 pairing and the
+declared low-target divergence remain for collection. No evaluation or learning was added
+for this check. T is observed through its original native operation at30s intervals with a
+1500s checkpoint window. The comparison, seeds,360k train/64k eval per arm and fixed final45
+endpoint remain unchanged. The complete paired scientific reading is still pending T.
