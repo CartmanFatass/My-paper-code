@@ -626,3 +626,46 @@ Use pytest-owned scratch under temp. Runtime smoke uses small declared technical
 never reported as research fits; production entry has require_admission before effects and no
 bypass. Numerical/recurrent/probability or failed instrumentation defects stop only the dependent
 launch/read; repair and record actual technical attempts, never relabel them as scientific negatives.
+
+## 2026-09-23 — Concrete B01 architecture and integrated implementation checks
+
+The candidate stays entirely in its B01 experiment directory with one admitted script entry;
+no shared learner, network, environment or buffer source was changed. The implementation uses
+the real D2 collection/storage/ordered-replay paths and the native complete learner update,
+then the fixed auxiliary pass. A parameter-free shared `LayerNorm(elementwise_affine=False)`
+normalizes the concatenated training-only x for both heads. It has no running statistics,
+learned affine transform or execution-time actor input. The separate native observation/state
+normalizers remain disabled and native value normalizers remain unchanged.
+
+Production dimensions, measured before results: state119, each observation104, actor feature/
+hidden256, x2286, G input3822. P uses two 64-wide SiLU context layers, a 64-wide SiLU unary
+layer and the rank32 symmetric bilinear pair mean, with member one-hot identity in unary/pair
+inputs. It has **192,514** trainable parameters. The nearest integer-width two-hidden-layer
+SiLU G has width**50**, **193,751** parameters (+0.6426%); no outcome was used to choose width.
+The actor auxiliary trunk has base92,672 + FiLM3,584 + GRU395,264 = **491,520** parameters;
+the Gaussian output head receives no auxiliary gradient. All arms construct both heads.
+
+Initial integrated CPU checks exercised complete small native D/G/P fits at 2 lanes x30 steps
+with one update, their three frozen panels and full four-cell diagnostic, independently from
+the planned 360k result fits. Initial native hashes, first-rollout fact hashes and frozen target
+calibration agreed across the three arms. Manual frozen execution matched real native `step`;
+an A/B/A branch check after a real prefix preserved the source environment, reproduced A and
+preserved RNG. The check also covered terminal-window inclusion, raw action/clip separation,
+native five-group update/movement and unadmitted-entry refusal. These short correctness
+trajectories are not B01 scientific outcomes or 360k fits. Production fits started remains0.
+
+Independent review identified missing retention of training raw-unit predictions. The repair
+saves every window's lane, boundary time, raw target and post-auxiliary-update G/P predictions
+as aligned rollout batches in `auxiliary_predictions.jsonl`, with batch/file SHA256 references
+in the native summary. Both raw losses/variances and the complete signed diagnostic rows remain.
+Pre-native-update telemetry replays the first up to32 canonical actual stored D2 rows and retains
+old/replayed individual probabilities and forced masks; the separate forced-factor test checks
+zero scores. Frozen evaluator checks cover native/auxiliary weights, calibration and native
+value-normalizer state, with Python/NumPy/Torch CPU/all-CUDA RNG restoration. These are evidence
+integrity checks, not evidence that one learning scheme improves service.
+
+Stable integrated CPU suite: DM **14 passed / 2 CUDA skips in9.56s**; independent Reviewer
+**14 passed / 2 CUDA skips in9.17s** on unchanged source bytes, no material finding remaining.
+Earlier incremental runner checks took5.30,7.95,9.89s; they used short technical trajectories,
+not the production horizon. Ordinary matplotlib deprecation warnings only. Actual-CUDA checks
+on the configured destination remain pending before the first result admission.
