@@ -730,3 +730,24 @@ requires a separate documented repair and independent review before use. Stage/p
 inputs, then use the original five-cell entry with native admission on wsl_4070 and arm the
 current session's deterministic observer. Do not duplicate training or consume another DM's
 operation. No result exists at this entry.
+
+
+### 2026-09-23 — Exact production inputs restored and verified
+
+The seven accepted evaluator/entry/test files were restored byte-identically from
+`7524026cebe8d9af7461f670db3edb3098e979c2`; the seven inference dependencies were restored
+byte-identically from producer SHA `89486d32ea569728f39d6e21b53f8a7c8854e74c`.
+No scientific executable byte was changed. The two full final summaries are copied exactly
+from published count-direction commit `e9a106f6841a765d474afb6dc41e5dd508ddcae0` and verified against
+the identical completed summaries already published in current main. Their SHA-256 values are
+H6 `55a994c81f49a9b97b52efa4ddaea82579e1068ea3a7ddbd11c8b7645bf88921` and
+SET `2621fc884d2d6a9ea909ee4f483b4df1c2d9d6f8767826ef730b952a360422e3`.
+
+Read-only inspection on configured host `LAPTOP-U9TDKC8A` independently verified both
+complete summary hashes and the previously declared checkpoint45 sizes/digests at
+`/home/wu/hmasd-worktrees/agent-count-action-law-20260922-b03/runs/agent_count_generalization/`.
+This closes the old binary-availability dependency without creating a new producer.
+The original asset files remain unchanged. Preserve the accepted 23-check engineering
+coverage and its full-size/full-horizon limits; production payload/config verification will run inside
+the admitted evaluator, before any fixed-panel environment or policy effects. No source, summary,
+checkpoint, cell or exposure substitution is selected.
