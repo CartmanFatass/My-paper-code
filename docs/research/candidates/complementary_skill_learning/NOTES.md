@@ -1634,3 +1634,71 @@ CPU tests and relevant actual CUDA path checks precede acceptance. Independent R
 the high-risk semantic delta; DM accepts. Stop only the dependent action on real semantic,
 resource, pause or uncertain-acceptance conflict; retain failures. Inputs commit/push and fresh
 native admission precede each fit. Result-bearing runs never start from this prose alone.
+
+## 2026-09-23 — B02 implementation accepted after stored-row repair
+
+The B02 implementation was published at `37f1c878bb2f8f0f41ba6d30cac8e291ce187d97`.
+It adds only the candidate B02 learner/runner, admitted CLI and mirrored tests; B01 and
+shared learner/config/environment bytes are unchanged. It reuses D's detached heads and
+native collection/update/evaluation paths, serializes inherited effective reward fields,
+rejects native reward fallback, checks logits before native nonfinite repair, and retains
+unweighted discriminator scores without an additional forward or RNG draw. The first
+rollout artifact includes actual low rewards/components, values, masks, GAE/returns and
+all D2 segment tables, with independent numerical checks. Later rollouts retain compact
+reward-path telemetry. Timings separate initial/final evaluation, collection and updates.
+
+The independent Reviewer found one material evidence defect: the collector counted attempted
+storage rows while native storage may return None after a refused write; later rollouts
+did not check actual stored rewards/masks. This was a reachable contract gap, not an observed
+healthy-path failure or evidence that the normal coefficient formula was wrong. Repair
+`bd02d4a9cecf5cb415f09a058ca7921a64dc602a` verifies every native return and actual buffer
+mask, low reward, env/team/individual/process components after storage. It counts only
+verified rows, preserves partial counts and failure location, and stops before another update
+on a discrepancy. Comparison tolerances are rtol1e-6/atol2e-6 on float32 reward arrays;
+the checks do not alter healthy rewards, RNG, buffers or native update ordering.
+
+The final frozen repair hashes are learning.py
+`3a88948a98393c2f13088f48dc03e940f3a85a05e83382166a6038b36fcd30bd`, runner.py
+`30ef683215a473a5cf654edb2814660647ae80efe2460ba9a0a77e27435f3304`, and test_b02.py
+`b5faf0b8d60ead305b69d6b8d626283fa99f7c1755e777b8e7b978dbbdc63113`.
+DM read the full diff and checked these hashes. Implementer CPU suite: 9 passed/1 CUDA skip;
+py_compile and diff checks passed. Independent focused re-review: 4 passed/1 CUDA skip
+in5.66s, resolving the finding with no remaining material issue. A healthy two-rollout
+fixture completes80 verified rows/two updates; refused and corrupted first-lane writes
+in rollout2 each fail with42 attempted/41 verified rows, one native update and no final
+checkpoint. These checks use shortened internal specs and do not add result fits.
+
+The same published repair was fetched and checked out on wsl_4070. All three hashes matched;
+the complete B02 suite passed **10 tests, zero skips in9.09s**, including the actual CUDA
+M/T collection, storage, native update and four-panel path. Fourteen dependency deprecation
+warnings did not affect completion. Earlier CPU B01+B02 checks had20 passed/3 CUDA skips;
+the initial independent B02 review had6 passed/1 skip in5.33s. These are observed test-command
+times where available; total implementation/review/transport support cost is not fully timed
+and is not zero. Remote Git's earlier pre-existing commit-graph/auto-GC warning did not
+prevent exact source checkout; no unrelated Git history or node environment was repaired.
+
+DM accepts the implementation for the frozen M=.5/T=0 comparison. No production fit has
+started at this acceptance entry. M remains the first separate native admission and T the
+fixed second fit; no score-dependent extension, diagnostic panel or coefficient change.
+The latest checked main preserves owner pause lifted and this direction/lead; Claude FSD
+and G33 retain their separate pause/frozen controls. Actual-node admission will recheck
+current controls, source publication, duplicate identity and memory before releasing M.
+
+## 2026-09-23 — B02 M admitted under the frozen comparison
+
+The first arm M was natively accepted at09:01:27 PDT. Its
+[native manifest](../../../../runs/complementary_skill_learning/b02_m_260923911_e232332a0/launch-manifest.json)
+and [fresh memory preflight](../../../../runs/complementary_skill_learning/b02_m_260923911_e232332a0/admission-preflight.json)
+are copied unchanged locally and match the executing node's SHA256 bytes. The preflight
+passed with13,644,189,696 effective available bytes against a4,294,967,296-byte floor.
+The status handle reports accepted/running with consistent native supervisor/runner identities;
+there is no exit witness or completed scientific result at this entry. Supervisor command
+acceptance was separately reconciled with this native evidence before adopting the operation.
+
+The current wait controller observes that same operation, with30s probes and a1,500s bounded
+checkpoint window. Old B01 and both Pro observations are terminal and consumed; no old worker
+or question was repeated. The M operation keeps its fixed360k training and64k initial/final
+own/uniform evaluation exposure. T remains the prospectively fixed second fit under a later
+separate admission, independent of M's scores. Collection, numerical reading and the paired
+scientific judgment remain outstanding. Preserve the live source snapshot and output until
+the complete evidence is collected and verified.
