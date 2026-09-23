@@ -3567,3 +3567,49 @@ observation errors zero and no pending event. Five of the six planned fits have 
 started: four complete/accepted, S2 running and G2 unstarted. Continue the fixed S
 horizon and complete verification before G2; the initial refused supervisor remains
 a separate zero-fit pre-admission event, with no worker restarted or recipe changed.
+
+## 2026-09-22 — B03 second-block S first checkpoint and matching verification
+
+Read generation-34 CHECKPOINT `f8e17485f2be5ce2fdeefdb6` from wake
+`ae703955-f3ec-4df9-835a-dd0d420c96ef`. Published main remains `e8c7b0de8` with
+the same active DM and no applicable owner pause. Native observation at September 23
+03:35:15 UTC identifies the original supervisor/runner **301706 / 301707** with
+matching boot/start ticks, consistent records, no exit witness and zero observer errors.
+Copied runner bytes were checked against their remote SHA256 digests; the existing
+progress prefix and config are unchanged. The read summary SHA256 is
+`e4e47d443fe7fb0b231f0788796c1d99cad0b5e221782166001a879041cb7368`.
+
+The snapshot is INCOMPLETE, failure null and stderr empty, with **48,000 training
+transitions / 8 native updates / 32 episodes**. It contains only development panel 0
+(8 worlds / 12,000 evaluation transitions), 23,856 initial-fact replay agent rows,
+two reused initial-fact episodes / 3,000 reused transitions and zero new fact
+interaction. Initialization, first collection, first native-update fingerprint and
+first native optimizer-step counts exactly match D2. The newly written calibration
+bytes hash to D2's `0c49d91203e9e6d18a38d5650207873a7eeb91b536f582a35fea9ee312591ebb`;
+the full panel-0 evaluation/readout object also matches D2 exactly. This verifies the
+previously pending matching checks before auxiliary divergence.
+
+All **17,752 floating values** in the summary and calibration are finite. All five
+native parameter groups move on each of the eight updates. Each auxiliary pass uses
+5,964 valid team rows / 47,712 agent samples and 30 steps for each head and the active
+representation optimizer: **240 steps each** so far. Both base and GRU auxiliary
+gradient maxima and parameter movements are positive on every pass. Service training
+losses span .000530119–.011422066 and finish this snapshot at .007529681; detached
+observation-head losses span .017087991–.034260658 and finish at .023481358. These are
+changing training distributions, not a common-fact improvement claim. Feature total
+variance spans 6.775868–12.209136. Wall at completed rollout 8 is **1,595.701921 s /
+26.595032 min**, peak RSS **3,049,384 KiB / 2.908119 GiB**. Stage timing and all
+per-lane readings remain in the runner summary.
+
+Retain the adverse early training: **24/32 episodes have zero QoS and 29/32 have
+negative J**; rollouts 2 and 3 have zero service on all lanes, and the second lane
+has zero service throughout all eight rollouts. Worst training J is −2,329.142893
+at rollout 4's fourth lane. All episodes truncate at 1,500 and have zero charging,
+cutoff, depletion or charger input. The only native development panel is still the
+matched initial panel (J −431.411727); no trained development or final comparison
+has yet been read. The new evidence strengthens matching and active-gradient
+correctness, while preserving low-service training as contrary evidence. It does
+not resolve second-block S−D or S−G utility. Continue the frozen 30-update horizon,
+then complete acceptance and the already planned G cell; no early selection or
+additional fit. Consumed the exact event and rearmed the same native operation at
+**generation 35**, 1,500-second window, without restarting a worker or sending Pro.
