@@ -4112,3 +4112,67 @@ These are partial scopes. Continue the same frozen operation through update 30,
 the remaining panels and endpoint artifacts. Consumed the exact checkpoint and
 rearmed at **generation 43**, 1,500-second window; no worker restart, extra fit,
 new Pro Send or App message.
+
+## 2026-09-23 — B03 second-block G training complete, final panel still pending
+
+Read generation-43 checkpoint `61e11e3b8c0c6427d68ffab4`, wake
+`e67f6e07-2fc0-4225-a151-166109a95ae2`. Both original native identities remain
+running, records consistent, observation errors zero; no exit witness is present.
+Main `e6bbd3162` leaves this authorization, pause, launch controls and relevant B03
+background unchanged. Collected and byte-verified nine small files. All prior
+updates, training/RSS rows, development 0/10/20 and fixed bindings remain unchanged.
+The new summary digest is
+`c8bc01d8295d77e7a7808712fde482e9e7be9959ad89abeb980763f1368d45bb`.
+
+Training has reached **180k transitions / 30 updates / 120 episodes**, but the run
+is still INCOMPLETE, failure null, stderr empty. Only the four development panels
+are recorded: 32 episodes / 48k evaluation transitions, 95,424 readout agent rows,
+zero new factual interaction. The final 32-world panel, four endpoint-fact
+episodes and final checkpoint readback remain pending. All **64,605 summary and
+calibration floats** are finite. Every native group and both auxiliary
+representation components move on the last two updates; all three auxiliary
+optimizers report **900 steps**. These logged counts do not substitute for saved
+optimizer-state verification.
+
+Development-30 gives **G J −566.691439**, QoS **.203386603**, cost **.286423774**,
+throughput 6.101598099 and true minimum battery **.370541902**. All eight worlds
+have nonzero service, but seven have negative J; worst is 920007 at −1,702.580350.
+All truncate at 1,500, with zero optimizer updates and physical event counts.
+World means independently recompute. Paired development readings are:
+
+| Development-30 reading | G−D | G−S |
+| --- | ---: | ---: |
+| Native J mean | **−525.092605** | **−990.448392** |
+| QoS per step | −.119445545 | −.177916481 |
+| Return-constraint cost per step | +.115810243 | +.241811562 |
+| True episode-minimum battery | −.022674243 | −.028571144 |
+| World J wins / losses | 1 / 7 | 1 / 7 |
+| Median world J difference | −489.498875 | −878.706288 |
+
+The sole paired win against either arm is 920006, whose absolute G J remains
+−60.744601. G−D development means at 10/20/30 are +72.859299 / −540.997677 /
+−525.092605. Within G, 20→30 J falls **340.782451**, service falls .012164037 and
+cost rises .107827272. Preserve this late decline and the unfavorable comparisons;
+the fixed final world panel is still a distinct outstanding reading.
+
+Initial-fact service MSE falls to **.005350291**, observation MSE to **.006838820**,
+while development J deteriorates. Their ratios to D are .735351 / .976663 and to
+S .067378 / .703224; lower errors coexist with lower development utility against
+both. The service mean beats its reference while episode 932212 does not;
+observation mean still exceeds .006262023, with episode 932211 worse and 932212
+better than their references. Feature variance / effective rank is **34.703107 /
+4.903232**, nondegenerate; per-agent/quarter variation is retained. Readout array
+digest is `139a80b7cedb9a6d674b4b5caa73611d0ac2fb54dc8db9f562d278d3e5bd0634`.
+Raw-array rescoring remains pending full collection; proxy improvement cannot
+rescue this adverse development result or select a replacement checkpoint.
+
+Rollout 29 has zero service and negative J on all four lanes. Rollout 30 has
+three positive-J lanes, while its second lane has zero service and J −488.952212.
+Whole-training counts are **69/120 zero-service and 93/120 negative-J episodes**,
+with the previous −2,436.929221 tail retained. All episodes truncate and all
+charging, cutoff, depletion and charger-input counts remain zero. The last RSS
+sample is at **5,041.502147 s / 84.025036 min**, peak **3,092,120 KiB / 2.948875 GiB**;
+the post-development-30 rollout-complete event is **5,312.082158 s / 88.534703 min**.
+Neither includes the unfinished final stages. Continue only the original accepted
+operation; consume the exact event and rearm the same handle at **generation 44**,
+1,500-second window. No restart, extra fit, new Pro Send or App message.

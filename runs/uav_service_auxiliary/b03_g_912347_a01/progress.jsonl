@@ -465,3 +465,21 @@
 {"event": "collection", "rollout": 29, "step": 1300, "transitions": 173200, "wall_seconds": 4835.427498340607}
 {"event": "collection", "rollout": 29, "step": 1400, "transitions": 173600, "wall_seconds": 4841.328566789627}
 {"event": "collection", "rollout": 29, "step": 1500, "transitions": 174000, "wall_seconds": 4847.227896928787}
+{"event": "rollout_complete", "rollout": 29, "transitions": 174000, "wall_seconds": 4892.536820173264}
+{"event": "collection", "rollout": 30, "step": 100, "transitions": 174400, "wall_seconds": 4898.440464019775}
+{"event": "collection", "rollout": 30, "step": 200, "transitions": 174800, "wall_seconds": 4904.663719177246}
+{"event": "collection", "rollout": 30, "step": 300, "transitions": 175200, "wall_seconds": 4910.8578288555145}
+{"event": "collection", "rollout": 30, "step": 400, "transitions": 175600, "wall_seconds": 4918.303270816803}
+{"event": "collection", "rollout": 30, "step": 500, "transitions": 176000, "wall_seconds": 4924.784637451172}
+{"event": "collection", "rollout": 30, "step": 600, "transitions": 176400, "wall_seconds": 4931.2311906814575}
+{"event": "collection", "rollout": 30, "step": 700, "transitions": 176800, "wall_seconds": 4937.508506774902}
+{"event": "collection", "rollout": 30, "step": 800, "transitions": 177200, "wall_seconds": 4944.143243551254}
+{"event": "collection", "rollout": 30, "step": 900, "transitions": 177600, "wall_seconds": 4951.892817974091}
+{"event": "collection", "rollout": 30, "step": 1000, "transitions": 178000, "wall_seconds": 4958.779631614685}
+{"event": "collection", "rollout": 30, "step": 1100, "transitions": 178400, "wall_seconds": 4965.637494802475}
+{"event": "collection", "rollout": 30, "step": 1200, "transitions": 178800, "wall_seconds": 4972.333303689957}
+{"event": "collection", "rollout": 30, "step": 1300, "transitions": 179200, "wall_seconds": 4978.853679656982}
+{"event": "collection", "rollout": 30, "step": 1400, "transitions": 179600, "wall_seconds": 4986.558703184128}
+{"event": "collection", "rollout": 30, "step": 1500, "transitions": 180000, "wall_seconds": 4993.552741527557}
+{"event": "development_evaluation", "rollout": 30}
+{"event": "rollout_complete", "rollout": 30, "transitions": 180000, "wall_seconds": 5312.0821578502655}
