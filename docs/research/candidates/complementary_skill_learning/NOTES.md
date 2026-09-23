@@ -1023,3 +1023,10 @@ The G READY event from generation8 was consumed with its exact wake/event identi
 the P manifest's existing status handle with30-second observations and a25-minute checkpoint,
 then read new evidence at wake and rearm the same handle. The worker/source remain unchanged;
 no restart, fourth fit, replacement seed or repeated Pro Send follows from a wake event.
+
+Before publication completed, P persisted its first three rollouts:24,000 training/stored
+transitions,48 episodes,3 native updates and no failure. Read the first-rollout facts/target
+digests and frozen calibration; all equal D/G exactly. First native update counts are the
+same15/2250/2250/15/60, both heads have7 steps and P trunk has7 steps, with nonzero movement
+in all three named trunk groups and mean trunk gradient norm.0784359365. This closes the
+startup first-facts check; it does not accept a P endpoint or change the frozen gradient scale.
