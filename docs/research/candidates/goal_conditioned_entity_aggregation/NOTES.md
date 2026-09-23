@@ -705,3 +705,101 @@ Actual batch cost is now **two started fits of three declared**, one complete an
 The same-session deterministic observer follows P's existing native handle. Continue to read
 its complete terminal outputs and then execute E under the fixed contract, without score-based
 selection, a retry, another panel or a new seed.
+
+## 2026-09-22 — B01 P complete and read; E remains the fixed third arm
+
+**Technical acceptance.** The queued observation was a checkpoint, but fresh status on the
+same native handle found P already exited 0 with a valid witness and consistent identities.
+I collected all ten files, verified each remote/local size and SHA-256, and read the complete
+summary, 45 training rows, final panel, cost and action telemetry. The source-matched endpoint
+validator passed; JSONL rows equal the summary rows. P completed 360,000 collected/stored
+training transitions, 720 episodes and 45 updates, then only the final 16,000-step/32-world
+evaluation. Every training row updated all five groups; evaluator updates are all zero.
+No failure or stderr text was recorded. O and P are two completed fits, not independent
+replicates of one arm or a paired-training population sample.
+
+Five-group optimizer counts match O: coordinator 675, actor/critic 101,250 each, team
+discriminator 675 and individual discriminator 2,700. Final relative parameter displacements
+in that order are .056977, 1.271667, .466326, .075898 and .151054. Checkpoint deserialization
+finds 720 finite tensors including optimizer state. Its 66,097,701 bytes have SHA-256
+`2b31d42845ec21b38c39d91eeef4e2f30c924cbc61406f462307aee7ff833f14`.
+The binary is retained both at the manifest's remote output and
+`/home/fires/.codex/worktrees/query-aggregation-sept22/hmasd-wsl/runs/goal_conditioned_entity_aggregation/b01_p_s922611/final_checkpoint.pt`.
+Text outputs are published; no remote or local result is removed.
+
+**Observed adverse P package.** Final mean J is **.15986089009073162**, versus O's
+.5091369609922052: **P-O = -.3492760709014736**. All 32 common worlds have negative P-O
+differences (range -.4526296101971363 to -.25582807640352734). P's per-world SD is
+.0466214350440584, range .019094263466790017 to .2239427145366501. These world comparisons
+describe the two realized policies; they do not create 32 independent training replications.
+All three native components are adverse: coverage .27067375 versus .67167875, quality
+.09573624081414245 versus .17631486439216798, and altitude penalty .05833160715351107
+versus .013932623325445148. Mean connected users fall from 33.5839375 to **13.5336875**
+per step. The penalty remains an altitude proxy. The full per-world endpoint and components
+are in the [P summary](../../../../runs/goal_conditioned_entity_aggregation/b01_p_s922611/summary.json).
+
+The [training curve](../../../../runs/goal_conditioned_entity_aggregation/b01_p_s922611/training.jsonl)
+starts at stochastic J .246951, reaches an early low .060125 at rollout 17, recovers to
+.264388 at rollout 40 and ends at .203895. The recovery does not meet the final package
+prediction against O; it is not a deterministic deployment curve. There was no intermediate
+deployment panel or checkpoint selection. The large final difference is not explained away
+as missing optimization: all declared learner groups actually updated and moved. Its cause
+is not isolated by this comparison.
+
+Training raw-coordinate excursions/saturation were 59.310540%, close to O's 59.006867%, while
+evaluation excursions were 59.557986% versus 52.281250%. Position-boundary coordinate differences
+were 18.009043% in training and 32.270486% in evaluation (O: 17.309213% / 23.179167%). Raw maxima
+were 17.319380 / 7.968101. Similar whole-training saturation does not identify equivalent action
+exposure, and these aggregates do not establish saturation, skill semantics or entity selection
+as the cause of P's service loss.
+
+**Cost.** P used 96,960 encoder and 496,582 actor parameters. Fit-body perf-counter wall through
+checkpoint is **6,584.574498 s (109.7429 min)**: collection 1,135.512941 s, update 5,415.063116 s
+and final evaluation 32.859884 s. Process CPU is 26,647.420786 s, with the unchanged four-thread
+topology. Peak RSS sampled before checkpoint serialization is 2,821,050,368 bytes. Acting and
+PPO actor reevaluation used 45.512583 / 592.331564 s; evaluator acting 1.166649 s. The native
+creation-to-exit epoch span is **6,740.735810 s (112.3456 min)**. As with O, preserve both timing
+scopes/clocks without assigning their difference to an unmeasured phase. P/O fit-body wall is
+1.220445 and process CPU 1.193346; these are observed costs on a shared node, not an intrinsic
+speed benchmark. No complete-invocation monotonic duration or user/system CPU split was recorded.
+Completed batch exposure is now 720,000 train + 32,000 eval transitions and two fits, with no
+extra training, diagnostic panel or technical retry.
+
+**Belief update.** Ordinary skill-conditioned pooling was a direct, competent literature
+alternative, not a promised improvement. Its current realized package substantially loses
+service and uses more measured computation than O; this weakens the investment case for this
+particular P recipe at the declared finite budget. It does not falsify conditional Deep Sets
+or identify a defective component, a compression bottleneck, label meaning or training-population
+ranking. The old dense adverse observation remains separate, not a replicate of P. No P rescue
+or extra seed is selected during this batch.
+
+The complete Pro advice explicitly made P success unnecessary for the E test. E was prospectively
+chosen and remains the third comparison regardless of this score. Its next observation is whether
+the fixed bare-attention package delivers useful final service relative to both O and P at its
+actual cost. No architecture, seed, entropy coefficient, horizon, endpoint or action law changes.
+There is no new material premise requiring another Pro round for this fixed continuation.
+
+Current shared topic 3 at main `f82f7265b` adds the count direction's completed B03 and first B04
+entropy comparison. Those data further caution that raw-action saturation and physical boundary
+exposure need not predict service together. They do not identify our encoder effect or authorize
+importing an entropy intervention into this already selected batch. Keep the same raw Gaussian
+PPO/entropy and clip execution in E, and defer any three-arm conclusion until its full result.
+
+## 2026-09-22 — B01 E accepted
+
+The prospectively fixed third arm E passed fresh native admission with the same published
+scientific source and CPU/four-thread contract. Its exact source/command/output and process
+identities are in the [native manifest](../../../../runs/goal_conditioned_entity_aggregation/b01_e_s922611/launch-manifest.json),
+with [fresh memory admission](../../../../runs/goal_conditioned_entity_aggregation/b01_e_s922611/admission-preflight.json)
+and [accepted status](../../../../runs/goal_conditioned_entity_aggregation/b01_e_s922611/launch-status.json).
+The three collected records match their remote SHA-256 values; independent native status
+reported the admitted child running and consistent records. O/P stay completed and preserved.
+
+The first E snapshot has one training start, two models, 8,000 collected/stored transitions,
+16 completed episodes, zero completed updates/evaluation at that observation, and no failure.
+Its active base is EarlyAttentionEncoder, with 96,576 encoder and 496,198 actor parameters.
+This is initial training exposure, not yet proof of a completed E optimizer stage. Batch cost
+is now **three started fits of three declared**, two complete and E in progress. The assigning
+session's deterministic observer follows this existing E handle; there is no fourth fit,
+extra diagnostic or confirmation queued. Next read E's complete final output and compare
+E-O, P-O and E-P with service components and measured full costs under the existing decision rule.
