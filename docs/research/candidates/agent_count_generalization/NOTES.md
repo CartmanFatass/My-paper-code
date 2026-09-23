@@ -9811,3 +9811,433 @@ worker or Pro Send was repeated and no App task was messaged. A checkpoint rearm
 preserve these same operations. Completion still requires full artifact collection,
 independent native-trace reading, both fixed endpoints and the prospective scientific
 interpretation before the result is accepted or the next investment selected.
+
+
+### B11 T6 collected and checked; T8 pending
+
+The original T6 operation exited normally at 2026-09-23 15:25:21 UTC. The native status
+reports a valid exit witness, absent runner/supervisor and consistent records. All 15 files
+(70,177,262 bytes) were collected into
+`runs/agent_count_generalization/s1_training_condition_b11_t6_s963201/` and individually
+matched against native SHA-256 and byte counts. Summary SHA-256 is
+`7046f2a8341f4dfb6049bf00aa97afafd34150e1840d94a66875a4936d437d63`.
+This completes this cell's collection, not the two-cell scientific comparison.
+
+The DM independently read both complete final panels and every world, loaded the trusted
+own checkpoints for tensor verification, and recomputed J/C/Q/P/E/S/U from the numeric
+native traces without candidate imports, a policy forward or new environment transitions.
+All 45 training rows match the summary; actual counts exactly equal the fixed expected
+counts: 1 fit,360,000 training team steps,2,160,000 agent rows,720 training episodes/resets,
+45 updates,22,500 training policy calls,101,250 actor and critic optimizer calls each;
+32,000 evaluation team steps,224,000 evaluation UAV steps,64 episodes/resets and1000
+batched policy calls. Evaluation has zero updates or storage. Source hashes before/after
+match published execution `dc1bc1f2718b1e4ff9510030ad26c287c76b03ac`.
+
+Initial checkpoint tensors match the recorded complete manifest. Both final evaluation
+copies match the trained learner digest; model/normalizers, learner runtime and global
+RNG remain preserved. The full numeric summary is finite. All 45 updates retain effective
+entropy .05, bounded physical actions, unchanged diagnostic RNG/policy/logprob and exact
+raw-action/logprob storage witnesses. Native connection uniqueness, c10 capacity, actual
+0dB eligibility, per-UAV counts and the identity E-S=U pass independent trace checks.
+
+These are standalone T6 readings, not Delta8 or Delta6:
+
+| Test N | J | Coverage C | Quality Q | Height penalty P | Eligible E | Served S | Eligible-unserved U |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 8 | .340079604889 | .444208750000 | .169379186683 | .021680276116 | 23.296125 | 22.2104375 | 1.0856875 |
+| 6 | .452484895156 | .592258750000 | .178208925899 | .015558907613 | 31.285500 | 29.6129375 | 1.6725625 |
+
+Retain the adverse worlds: N8 world1645815 has J .229516940986 and15.184 served users/step;
+world1645829 has24.122 eligible but17.046 served and7.076 eligible-unserved. N6 world1645608
+has J .323061473768,20.378 served and5.824 eligible-unserved. These describe one trained
+policy on separate N panels; they do not identify a causal N effect or its difference from
+T8. Every world's components remain in the committed panels and native traces.
+
+Measured command wall is4219.760235s (70.329337min), fit-function wall4218.503021s;
+process user/system CPU16826.737209/38.354270s; peak RSS1,166,924 KiB, scoped to Linux
+RUSAGE_SELF. Peak scratch is unmeasured. These are T6 costs only, not total batch costs or
+simultaneous memory. Both checkpoints are20,968,771 bytes, retained outside Git in this
+authoring run directory and the same tag under native `/home/wu/projects/HMASD/runs/agent_count_generalization/`:
+checkpoint00 SHA-256 `d96478ac256080e7a8cbbceb09f472f62fd0b11b7b9ee5c47d49085821c913a0`,
+checkpoint45 `36f6bc8afbc414df1f84c2b414180821bf30e14b90d7f44928db35ce2ab74c0a`.
+Their hashes/sizes are also runner-written in the committed summary. No remote source or
+artifact cleanup occurred.
+
+At this collection, the unchanged T8 operation had completed34 updates, collected280,000
+team steps and reported no failure or nonfinite loss; its final panels were still pending.
+Latest inspected main `fc8c4fe216906d4eaaea2b2c7c7595c1c83e9998` retains the lifted project
+pause and this lead; FSD/G33 controls are unchanged. The T6 ready event was consumed with
+generation96 and its original wake/event IDs; generation97 observes the remaining original
+T8 handle. No restart, replacement fit, new Pro question, outcome-driven change or App
+message was made. Complete and read the fixed paired comparison before updating the
+training-condition prediction or choosing the next investment.
+
+
+## 2026-09-23 — B11 complete: target-condition service gains with height costs and adverse worlds
+
+### Complete collection and independent reading
+
+Both original accepted operations have exited normally with valid exit witnesses, absent
+runner/supervisor identities and consistent source records. T8 ended at2026-09-23 15:45:16 UTC.
+Its15 native files (70,281,903 bytes) were collected and individually checked against native
+sizes/SHA-256. T6's15 files (70,177,262 bytes) were already independently collected. There is
+no missing cell, replacement fit, new evaluation or Pro receipt standing in for a result.
+The complete B11 contract is the prospective entry above, source
+`dc1bc1f2718b1e4ff9510030ad26c287c76b03ac`.
+
+- T6 summary: `runs/agent_count_generalization/s1_training_condition_b11_t6_s963201/summary.json`,
+  SHA-256 `7046f2a8341f4dfb6049bf00aa97afafd34150e1840d94a66875a4936d437d63`.
+- T8 summary: `runs/agent_count_generalization/s1_training_condition_b11_t8_s963201/summary.json`,
+  SHA-256 `1c1e6d9d844aa4752eee1aefb27e6d117cb63487804d0b49717baf065359968d`.
+- Each tag has `panel_45_n8.json`, `panel_45_n6.json`, both full native traces,
+  `training.jsonl`, config, admission and terminal records. These are the underlying evidence
+  for all means and differences below. All30 files were byte-verified locally; the26 non-weight
+  files are published. Four checkpoints stay recoverable outside Git at the authoring
+  checkout `/home/fires/.codex/worktrees/7fef/hmasd-wsl/runs/agent_count_generalization/`
+  and native `/home/wu/projects/HMASD/runs/agent_count_generalization/`, under their exact tags.
+  Both T8 checkpoints are20,968,771 bytes: checkpoint00 SHA-256
+  `31459aa8545008fa9596c58c66dca4678801e3388cddd249fd4f6384fd5494cd`, checkpoint45
+  `f37a7c3f86fe432c3393ab608f10df3dd4a718521cb9431118494d943e25fe62`.
+  T6 checkpoint hashes are in the preceding collection entry and its summary. No remote cleanup.
+
+The independent saved-data reader imports no candidate code and executes no policy or
+environment. It checks source bytes against Git, both initial tensor manifests/checkpoints,
+all45 training rows per arm, exact declared counts, optimizer calls, final-only evaluation,
+complete per-world J/C/Q/P/E/S/U arithmetic, c10 connection uniqueness/eligibility and
+per-UAV counts. Both actual initial state/observation arrays are exactly equal across policies
+within each evaluation N. Initial tensors, normalizers and returned/canonical RNG digests
+match across arms; final evaluation preserves each learner's model, normalizers, runtime and
+RNG with zero storage/updates. All numerical summary fields are finite. Every one of90
+rollouts retains effective entropy .05, bounded physical execution and unchanged raw
+policy/logprob storage witnesses. This accepts implementation of the fixed comparison.
+
+### Prespecified endpoint and every world
+
+These are per-step native units, after the final45th update only. Each cell is one trained
+instance evaluated on32 shared-within-N worlds; the training inference unit remains one
+common-initialization block, not64 independent training observations. No across-N score
+is constructed. Delta8 is primary; Delta6 describes the N6 consequence.
+
+| Test N / policy | J | C | Q | Height P | Eligible E | Served S | Eligible-unserved U |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 8 / T6 | 0.340079604889 | 0.444208750000 | 0.169379186683 | 0.021680276116 | 23.296125000000 | 22.210437500000 | 1.085687500000 |
+| 8 / T8 | 0.359761535830 | 0.504598750000 | 0.163468474226 | 0.042498131438 | 25.952562500000 | 25.229937500000 | 0.722625000000 |
+| 8 / T8 minus T6 | 0.019681930941 | 0.060390000000 | -0.005910712457 | 0.020817855322 | 2.656437500000 | 3.019500000000 | -0.363062500000 |
+| 6 / T6 | 0.452484895156 | 0.592258750000 | 0.178208925899 | 0.015558907613 | 31.285500000000 | 29.612937500000 | 1.672562500000 |
+| 6 / T8 | 0.455357177405 | 0.620145000000 | 0.180882484430 | 0.033009067924 | 32.523250000000 | 31.007250000000 | 1.516000000000 |
+| 6 / T8 minus T6 | 0.002872282248 | 0.027886250000 | 0.002673558531 | 0.017450160311 | 1.237750000000 | 1.394312500000 | -0.156562500000 |
+
+N8's J increases in20/32 worlds and decreases in12; service increases in27 and decreases in5.
+Median Delta8 is+.014655455783. The worst J world1645814 loses.078844611888 J and2.732
+served users/step; worst service world1645801 loses3.334 users and.053981984843 J.
+World1645810 loses.069195120897 J/1.938 users. Seven N8 worlds gain service while losing
+J:1645802,1645803,1645813,1645816,1645823,1645824,1645830. Positive mean service is not
+uniform native-objective improvement.
+
+N6's average Delta6 is+.002872282248, but only14/32 worlds gain J and18 lose; its median
+is−.005296834723. Service increases in21 worlds and decreases in11. World1645623 loses
+.064772997815 J/2.092 users; world1645615 loses.063832307842 J/3.406 users. Seven N6
+worlds gain service while losing J:1645603,1645604,1645606,1645610,1645613,1645626,1645630.
+There is no observed mean N6 loss in this block, but this is neither equivalence nor evidence
+of no specialization cost across worlds or training instances.
+
+Every paired difference follows. Signs use a1e−12 numerical-tie tolerance; none is tied here.
+The seven quantities are arithmetic consequences of saved native transitions, not causal
+shares or independent mechanistic effects.
+
+#### B11 paired worlds at N8
+
+| World | Delta J | Delta C | Delta Q | Delta P | Delta E | Delta S | Delta U |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 1645800 | +0.067754407 | +0.111240000 | +0.009772504 | +0.013045345 | +5.308000000 | +5.562000000 | -0.254000000 |
+| 1645801 | -0.053981985 | -0.066680000 | -0.024822071 | -0.000140636 | -2.222000000 | -3.334000000 | +1.112000000 |
+| 1645802 | -0.021974112 | +0.013480000 | -0.020311123 | +0.025316775 | +0.592000000 | +0.674000000 | -0.082000000 |
+| 1645803 | -0.013322821 | +0.007120000 | +0.009013983 | +0.021011016 | -0.236000000 | +0.356000000 | -0.592000000 |
+| 1645804 | +0.008034303 | +0.078640000 | -0.048103917 | +0.032582522 | +2.178000000 | +3.932000000 | -1.754000000 |
+| 1645805 | +0.026267160 | +0.073840000 | -0.004056849 | +0.024203786 | +4.016000000 | +3.692000000 | +0.324000000 |
+| 1645806 | +0.086966554 | +0.143920000 | -0.001255549 | +0.013400781 | +7.308000000 | +7.196000000 | +0.112000000 |
+| 1645807 | +0.045124185 | +0.074840000 | -0.003542970 | +0.006200924 | +3.662000000 | +3.742000000 | -0.080000000 |
+| 1645808 | +0.013859896 | +0.036680000 | +0.002532782 | +0.012575938 | +3.592000000 | +1.834000000 | +1.758000000 |
+| 1645809 | +0.100791612 | +0.169600000 | +0.006590325 | +0.019905485 | +7.474000000 | +8.480000000 | -1.006000000 |
+| 1645810 | -0.069195121 | -0.038760000 | -0.002484342 | +0.041317818 | -2.230000000 | -1.938000000 | -0.292000000 |
+| 1645811 | +0.042502423 | +0.083120000 | +0.000276612 | +0.015764560 | +4.260000000 | +4.156000000 | +0.104000000 |
+| 1645812 | +0.102563931 | +0.148240000 | +0.005041983 | +0.002716663 | +7.500000000 | +7.412000000 | +0.088000000 |
+| 1645813 | -0.016146361 | +0.017360000 | -0.020810947 | +0.022055077 | +1.228000000 | +0.868000000 | +0.360000000 |
+| 1645814 | -0.078844612 | -0.054640000 | +0.026475004 | +0.048539113 | -3.330000000 | -2.732000000 | -0.598000000 |
+| 1645815 | +0.072812597 | +0.132920000 | +0.005899069 | +0.022001124 | +6.150000000 | +6.646000000 | -0.496000000 |
+| 1645816 | -0.008737986 | +0.020520000 | +0.007063896 | +0.025221155 | +1.866000000 | +1.026000000 | +0.840000000 |
+| 1645817 | +0.068591867 | +0.106240000 | -0.009500438 | +0.002926002 | +4.786000000 | +5.312000000 | -0.526000000 |
+| 1645818 | +0.030041340 | +0.066880000 | -0.008445332 | +0.014241061 | +1.978000000 | +3.344000000 | -1.366000000 |
+| 1645819 | +0.060715823 | +0.080000000 | +0.021977808 | +0.001877519 | +3.412000000 | +4.000000000 | -0.588000000 |
+| 1645820 | +0.005655482 | +0.037960000 | +0.000896208 | +0.021185381 | +2.416000000 | +1.898000000 | +0.518000000 |
+| 1645821 | -0.045597812 | -0.040400000 | +0.035116498 | +0.027852761 | -0.862000000 | -2.020000000 | +1.158000000 |
+| 1645822 | +0.029801001 | +0.079000000 | -0.002924312 | +0.024621705 | +3.780000000 | +3.950000000 | -0.170000000 |
+| 1645823 | -0.017507161 | +0.046040000 | -0.077073653 | +0.026613065 | -0.636000000 | +2.302000000 | -2.938000000 |
+| 1645824 | -0.001257108 | +0.022240000 | -0.006703501 | +0.014814057 | +0.358000000 | +1.112000000 | -0.754000000 |
+| 1645825 | -0.054169562 | -0.020680000 | -0.003751568 | +0.038568092 | -1.308000000 | -1.034000000 | -0.274000000 |
+| 1645826 | +0.091160536 | +0.149400000 | +0.019975103 | +0.019411995 | +7.616000000 | +7.470000000 | +0.146000000 |
+| 1645827 | +0.015451015 | +0.035320000 | -0.014276621 | +0.004989998 | +2.410000000 | +1.766000000 | +0.644000000 |
+| 1645828 | +0.000276799 | +0.037040000 | -0.025931743 | +0.017871679 | +0.468000000 | +1.852000000 | -1.384000000 |
+| 1645829 | +0.120989588 | +0.223400000 | -0.030187484 | +0.026334167 | +5.472000000 | +11.170000000 | -5.698000000 |
+| 1645830 | -0.028724571 | +0.018160000 | +0.004931062 | +0.042915890 | +2.940000000 | +0.908000000 | +2.032000000 |
+| 1645831 | +0.049920483 | +0.140440000 | -0.040523216 | +0.036230553 | +5.060000000 | +7.022000000 | -1.962000000 |
+
+#### B11 paired worlds at N6
+
+| World | Delta J | Delta C | Delta Q | Delta P | Delta E | Delta S | Delta U |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 1645600 | -0.005812136 | -0.018840000 | +0.039357894 | +0.004431504 | +0.514000000 | -0.942000000 | +1.456000000 |
+| 1645601 | -0.057057737 | -0.036640000 | -0.002223177 | +0.030742784 | -1.000000000 | -1.832000000 | +0.832000000 |
+| 1645602 | +0.039959909 | +0.070760000 | +0.007600438 | +0.011852222 | +3.240000000 | +3.538000000 | -0.298000000 |
+| 1645603 | -0.007182368 | +0.027440000 | +0.007372489 | +0.028602115 | +1.852000000 | +1.372000000 | +0.480000000 |
+| 1645604 | -0.004903630 | +0.029440000 | -0.016462818 | +0.020572785 | +0.770000000 | +1.472000000 | -0.702000000 |
+| 1645605 | +0.003051310 | +0.040840000 | +0.013190542 | +0.029493853 | +4.178000000 | +2.042000000 | +2.136000000 |
+| 1645606 | -0.009298591 | +0.022440000 | +0.000020293 | +0.025012679 | +0.846000000 | +1.122000000 | -0.276000000 |
+| 1645607 | +0.029859332 | +0.049240000 | +0.007939766 | +0.006990598 | +2.382000000 | +2.462000000 | -0.080000000 |
+| 1645608 | +0.039937048 | +0.094920000 | +0.027021577 | +0.034613426 | +5.290000000 | +4.746000000 | +0.544000000 |
+| 1645609 | +0.064454765 | +0.102560000 | +0.012142623 | +0.010980022 | +5.990000000 | +5.128000000 | +0.862000000 |
+| 1645610 | -0.010706664 | +0.019360000 | -0.010887560 | +0.020992396 | +1.110000000 | +0.968000000 | +0.142000000 |
+| 1645611 | -0.034084202 | -0.001400000 | -0.008875888 | +0.030441436 | -1.428000000 | -0.070000000 | -1.358000000 |
+| 1645612 | +0.079004942 | +0.108600000 | +0.008933758 | -0.000304815 | +5.650000000 | +5.430000000 | +0.220000000 |
+| 1645613 | -0.005690040 | +0.036400000 | +0.001590161 | +0.031647088 | +1.886000000 | +1.820000000 | +0.066000000 |
+| 1645614 | +0.094861031 | +0.119240000 | +0.020974051 | -0.005100816 | +6.134000000 | +5.962000000 | +0.172000000 |
+| 1645615 | -0.063832308 | -0.068120000 | +0.031794465 | +0.025686647 | -2.268000000 | -3.406000000 | +1.138000000 |
+| 1645616 | +0.018520226 | +0.048280000 | -0.003149166 | +0.014331024 | +1.660000000 | +2.414000000 | -0.754000000 |
+| 1645617 | -0.041432234 | -0.023200000 | -0.022593086 | +0.018414309 | -1.810000000 | -1.160000000 | -0.650000000 |
+| 1645618 | +0.005425875 | +0.042400000 | -0.026569448 | +0.016283291 | -0.176000000 | +2.120000000 | -2.296000000 |
+| 1645619 | -0.046794900 | -0.031080000 | -0.013918827 | +0.020863252 | -1.034000000 | -1.554000000 | +0.520000000 |
+| 1645620 | +0.101195563 | +0.185280000 | -0.027882490 | +0.020135690 | +7.144000000 | +9.264000000 | -2.120000000 |
+| 1645621 | +0.035964469 | +0.050280000 | +0.028994874 | +0.007929993 | +1.784000000 | +2.514000000 | -0.730000000 |
+| 1645622 | -0.050454253 | -0.011640000 | -0.015220227 | +0.037740184 | -0.380000000 | -0.582000000 | +0.202000000 |
+| 1645623 | -0.064772998 | -0.041840000 | +0.004701110 | +0.036895331 | -3.902000000 | -2.092000000 | -1.810000000 |
+| 1645624 | +0.031848667 | +0.058120000 | +0.007709064 | +0.011148052 | +2.228000000 | +2.906000000 | -0.678000000 |
+| 1645625 | +0.025661346 | +0.038840000 | -0.006641590 | -0.000465823 | +2.674000000 | +1.942000000 | +0.732000000 |
+| 1645626 | -0.001081211 | +0.005360000 | +0.019819165 | +0.010778960 | -0.098000000 | +0.268000000 | -0.366000000 |
+| 1645627 | -0.057159068 | -0.037960000 | -0.012069956 | +0.026966081 | -2.612000000 | -1.898000000 | -0.714000000 |
+| 1645628 | -0.023601484 | -0.030320000 | +0.006363049 | +0.004286398 | -2.804000000 | -1.516000000 | -1.288000000 |
+| 1645629 | -0.018200001 | -0.010680000 | +0.006186988 | +0.012580097 | +0.334000000 | -0.534000000 | +0.868000000 |
+| 1645630 | -0.008505098 | +0.029840000 | -0.024774357 | +0.021960791 | +0.180000000 | +1.492000000 | -1.312000000 |
+| 1645631 | +0.032737470 | +0.024440000 | +0.025110156 | -0.008096424 | +1.274000000 | +1.222000000 | +0.052000000 |
+
+### Service, cost and changed understanding
+
+The native identity gives N8 DeltaJ = +.042273000000 coverage −.001773213737 quality
+−.020817855322 height = +.019681930941. N6 is+.019520375000 coverage +.000802067559
+quality −.017450160311 height = +.002872282248. This is an accounting decomposition,
+not an attribution of learning causes. Mean height rises71.680276→92.498131m at N8 and
+65.558908→83.009068m at N6. P increases in31/32 N8 worlds and28/32 N6 worlds. S1's P is
+its native height proxy, not a measured energy or return-risk quantity.
+
+N8 E increases2.6564375 users/step and U decreases.3630625, giving the3.0195 service gain.
+N6 E increases1.23775 and U decreases.1565625, giving1.3943125 more served users. Across
+all64,000 saved evaluation transitions, no user has multiple eligible UAVs at the actual
+0dB threshold; sum_i max(e_i−10,0) equals measured U. The per-UAV arrays are retained;
+capacity-saturated UAV-step fractions are T6/T8 .0728828125/.0617421875 at N8 and
+.154479166667/.146489583333 at N6. These are observed joint trajectories. They do not
+show that eligibility or altitude can be independently changed to keep the other benefits.
+
+Read all90 native training rows: both policies execute updates and move their actor/critic
+parameters, without coordinator/discriminator updates. Training-world sequences and actual
+N differ, and stochastic training returns are not deterministic final-panel learning curves.
+The final raw sigmas are T6 [4.898691654,5.090716839,4.733491421] and
+T8 [4.445799828,4.594556808,4.367106915]; they do not identify the service-gain mechanism.
+No intermediate checkpoint was evaluated or selected from these training traces.
+
+The prespecified primary mean prediction is met in this training block: target-condition
+training improves N8 native J with actual service and eligibility gains. This strengthens
+retaining T8 as a promising practical training-condition package for the tested N8 use.
+The observed gains have task substance (3.0195 additional served users/step), but12 loss
+worlds and the height/quality costs prevent treating the positive mean as a uniformly better
+policy. The N6 average specialization-loss prediction is not realized; its adverse majority
+and small positive mean leave robustness unresolved. Broad mixed-N training therefore does
+not become the automatic next experiment from a presumed mean N6 loss.
+
+The latest shared background read at main `16d9063f5be7f0a34cac0d7878ced1542a36fe7e`
+(topics3,4,6 and the DM1 plan) was used in the design and this update. B04/B05/B06's
+training-pair sign reversal makes training-instance recurrence decision-relevant. B11 adds
+an observed use response to the previously hypothetical target-training revision, while
+preserving prior negative constraints: same team steps change agent rows, actual optimizer
+work, reward/N and joint physical conditions; this does not isolate pure N or reward scale.
+Neither the H6 gap nor skill necessity is measured here. B07/B08/B10 retain their original
+scope; none of their old scores is imported as a common-world H6 control. An arbitrary
+favorable gap is not attainable headroom or proof of a fully tuned ordinary baseline.
+
+### Actual cost, bounded decision and next question
+
+The fixed B11 batch is complete: **2 fits /720,000 training team steps /5,040,000 agent rows
+/64,000 final evaluation team steps /448,000 evaluation UAV steps**. Actual training
+updates are45 per arm,720 episodes/resets per arm; actor and critic optimizer calls each
+101,250 (T6) and135,000 (T8). Coordinator/discriminator calls stay zero. There are45,000
+training and2000 final batched evaluation policy calls in total,128 evaluation episodes/
+resets, and no evaluation optimizer/storage calls. This is equal team-step exposure, not
+equal agent rows or optimization work.
+
+T6/T8 command wall4219.760235/5254.770351s (70.329337/87.579506min); sum9474.530586s
+(157.908843min). Fit-function wall4218.503021/5253.101420s, sum9471.604441s. The interval
+from first native admission to last native exit is5602.654925s (93.377582min), including
+concurrent fits and startup outside those timers. User CPU16826.737209/21169.641786s,
+system CPU38.354270/57.084104s; these are process-self totals, not additional thread sums.
+Peak RSS1,166,924/1,400,272 KiB, Linux RUSAGE_SELF; no simultaneous aggregate peak is
+claimed. Peak scratch remains unmeasured; support/publication/reading cost is additional,
+not zero. Concurrent scheduling changed during the fits; these walls do not establish an
+algorithmic speedup or controlled N-cost ratio.
+
+Retain this bounded positive mean observation with every loss. End B11 at its fixed endpoint;
+no extra seed, horizon, checkpoint, label or coefficient is appended to it. The next useful
+choice is whether a new independent common-initialization training block should test
+recurrence on this same now-read world panel, before promoting T8 as a practical default or
+investing in a mixed-condition/height revision. This is not a confirmation claim. A separate
+2-fit recurrence would answer a new training-instance question and retain B11 as development
+exposure. The strongest alternative is mixed-N learning for a separately prioritized broad
+use, or a direct height-cost revision if that becomes the primary objective; neither follows
+from assuming that B11 showed mean N6 harm or identified an altitude mechanism.
+
+The complete prior project Pro answer and Decision were reread (archive
+`docs/research/archive/2026-09-23/RESEARCH-scientific-management-adopted.md`, key
+`hmasd:1d02db50b970b1bf7ca4cbc7f445f83366400164d02b8b429c672206821b3ee4`). Its advice covers
+retaining a useful bounded target-condition response and choosing important robustness work;
+it does not settle the proposed recurrence versus repair choice with these new tail, median
+and cost observations. A focused new direction consultation below can change that investment.
+No new fit has launched. B11's final ready event was consumed using generation97 and its
+original wake/event IDs; generation98 has no unfinished scientific operation. No worker was
+restarted, no earlier Pro question resent, no other task messaged, and no owner pause changed.
+
+
+## Pro question 2026-09-23 training-condition-recurrence-after-b11
+
+Conversation: reuse the current direction adviser conversation via the private local operation
+for `hmasd:7ede3079cc3f00cd333f4cb066f3c9d3e16bbdb0be1ff860b81babefe94ebc84`.
+Its account-specific address remains local. This is a new scientific question, not a resend
+or a continuation of any incomplete old operation.
+
+Question: Given B11's complete positive N8 mean response but adverse worlds and higher
+height costs, is one new paired T6/T8 training block on the same fixed evaluation panel the
+most useful next investment, or is there a concrete stronger reason to prefer a mixed-N or
+height-cost learning change now? Criticize that choice and the exact recurrence estimand;
+do not treat a positive exploratory mean or a Pro endorsement as a stable recipe.
+
+Standing: The complete B11 result immediately above is new evidence. Both actual native
+fits and all four final panels are independently verified, with common initial tensors/RNG
+and actual shared-within-N world states. At N8, T8−T6 J=+.019681930941, service=+3.0195,
+E=+2.6564375, U=−.3630625; J is positive20/32, negative12/32, while service is positive27
+and negative5. Native J contributions are+.042273 coverage,−.001773214 quality,
+−.020817855 height. Worst service is−3.334 users/step; worst J is−.078844612.
+At N6, mean J=+.002872282248 and service=+1.3943125, but J is negative18/32 and its
+median is−.005296834723. P rises in31/32 N8 and28/32 N6 worlds; this is S1's native
+height proxy, not S7 return risk or measured energy. See all64 paired worlds and component
+arrays above and the raw panel files below. No H6 policy was evaluated in B11.
+
+The prespecified N8 mean-use prediction is realized in this one training block; mean N6
+specialization loss is not observed. The DM retains the bounded practical response and
+adverse consequences, without promoting a stable default. B04's favorable entropy revision
+reversed in B05 and followed the training pair in B06; that makes recurrence of this new
+training-condition effect relevant to actual adoption. It does not predict that B11 must
+reverse. Equal360k team steps are2.16M/2.88M agent rows and101250/135000 actor and critic
+optimizer calls each; reward/N and joint physical conditions also change. The practical
+estimand includes those costs and is not pure N causality or equal-work optimization.
+
+Prior advice: The full project advice/adoption in
+`docs/research/archive/2026-09-23/RESEARCH-scientific-management-adopted.md` at
+`9774c1e4a9d8e8db48d652d4ed43802789ac5a60` favored T8/T6 first, retained mixed-N as a broad-use
+alternative, and suggested important robustness work after a useful mean response. The DM
+has reread its complete Answer/Decision. That applies to B11's interpretation; the current
+question asks for a concrete next investment using new mixed tail/median and measured cost
+evidence. Its erroneous S7 numerical examples were corrected in the Decision and are not
+inputs to this direction question. This is not a new Portfolio review or a request to
+reassign other DMs.
+
+DM-preferred prospective option, not yet launched: one additional independently initialized
+common block, fresh seed963401 and train lane addresses964401..964416, two new ordinary
+SET fits at N6/c10 and N8/c10, each16 lanes×500 steps×45 rollouts. Keep actual common
+initial tensors, clip train/deploy, k10, lambda_l=.05, native learner reward/N, representation,
+information, normalization, optimizer settings and endpoint identical to B11. Evaluate only
+final45 at the same now-read N8 worlds1645800..1645831 and N6 worlds1645600..1645631,
+32×500 each, shared within N. That is2 new fits/720k training/64k evaluation team steps,
+5.04M training agent rows/448k evaluation UAV steps, same unequal optimizer work as B11.
+No old policy replaces either new trained cell. No extra H6 or initial/intermediate panel.
+The old world reuse is declared development exposure, chosen to distinguish training-pair
+recurrence on the existing panel without simultaneously changing the world set. It is not
+fresh confirmation or a claim over an unobserved world population. Ask whether this scope
+is the right purchase and whether a new world panel would materially improve this decision
+enough to justify additional work; do not automatically expand the grid.
+
+The intended discriminator is whether the new block repeats useful N8 J/service gains and
+what N6/tail consequences recur. A reversed block lowers the case for a dependable recipe;
+retain both blocks rather than hiding disagreement in a pooled score. Two positive blocks
+would strengthen, not confirm, the practical choice. Later paper-grade confirmation would
+require its own fixed claim and fresh independent training units. This is the reason for
+considering another pair, not an automatic extension after a positive result. No coefficient,
+horizon, seed or world sweep is proposed. Existing B11 command walls total157.908843min;
+its observed admission-to-last-exit interval was93.377582min with overlap. These are scale
+references, not a promised duration for the new pair. Required implementation and focused
+engineering checks, collection and complete reading remain additional non-fit work.
+
+Strongest alternative: fixed mixed-N training could directly buy broader use, with a new
+explicit episode/rollout schedule and reduced per-condition exposure, but B11 did not show
+mean N6 harm and has no N4 test. A height-cost training revision could target a measured
+tradeoff, but the positive native response and accounting decomposition do not identify a
+misweighted objective or an independently repairable altitude mechanism. Compare these
+alternatives only as needed to overturn or improve the recurrence choice. A third concrete
+option is welcome if the evidence gives it a better discriminator; no candidate quota.
+
+Context and source precedence:
+- Current governance and owner instruction: `docs/project/OPERATING_CONSTITUTION.md`,
+  sections1–5,7–8 at full current main revision
+  `16d9063f5be7f0a34cac0d7878ced1542a36fe7e`. Owner has explicitly authorized continued DM
+  research and autonomous scientific pivots, with three concurrent DMs; project pause is
+  lifted. FSD remains manually paused and G33 frozen. The direction-branch's historical
+  governance copy or old adviser chat does not override these current instructions.
+- Applicable method at that same governance revision:
+  `.agents/skills/hmasd-scientific-tools/SKILL.md`, Update the working explanation,
+  Comparators and MARL information, Statistics, Cost and exposure, Pro; and
+  `.agents/skills/hmasd-research-engineering/SKILL.md`, Checks and review and Execution
+  and admission, only for concrete implementation/exposure implications.
+- Shared background: `docs/research/RESEARCH.md` topics3,4,6 and DM1 plan at that same
+  full revision. It preserves useful H6 package evidence, ordinary learning, training-pair
+  instability and native-service priority; it is revisable science, not a veto on exploration.
+- Evidence at source_sha: this NOTES file's B11 prospective, T6 collection and full B11
+  result entries; prior B04/B05/B06 complete entries only for the recurrence rationale.
+  For raw B11 endpoint arrays read `panel_45_n8.json` and `panel_45_n6.json` in both
+  `runs/agent_count_generalization/s1_training_condition_b11_t6_s963201/` and
+  `runs/agent_count_generalization/s1_training_condition_b11_t8_s963201/`.
+  Each directory's `summary.json` contains counts, initialization/evaluation checks and
+  resources; `training.jsonl` contains all45 actual updates, and `trace_45_n8.npz` /
+  `trace_45_n6.npz` the underlying transitions. The DM's byte audit/independent numerical
+  recomputation is a reported fact, not a claim that the adviser re-ran that audit.
+- Frozen executed implementation:
+  `experiments/candidates/agent_count_generalization/training_condition_b11/runner.py`
+  and `scripts/run_agent_count_training_condition_b11.py` at
+  `dc1bc1f2718b1e4ff9510030ad26c287c76b03ac`, only where checking actual common
+  initialization, reward/exposure or endpoint semantics changes the advice. B11 is complete;
+  do not alter its contract or require retroactive evaluation.
+
+Constraints: no training, launching, browser operations, additional communication or edits
+outside this question's empty `### Answer` subsection. The sole write target is this NOTES
+file on `codex/agent-count-generalization` in `CartmanFatass/My-paper-code`. Read the question
+at the supplied immutable source_sha. Fetch the latest target blob and its actual SHA before
+writing; preserve the question and every other byte. Stop on overlapping edits. Report the
+actual commit if writing succeeds; if GitHub writeback is unavailable, return the complete
+answer in chat, not a receipt, SHA or link. No approval or new standing records are requested.
+
+Return: first make the direction-level investment recommendation and its strongest material
+objection. State which prior judgment the full B11 evidence strengthens, weakens or leaves
+unresolved; distinguish mean-use evidence, tail costs, training recurrence and possible new
+mechanisms. For the preferred comparison give the exact estimand, intermediate/native
+predictions, actual fit/evaluation cost, limits and outcome branches, with MATERIAL_DISSENT
+yes/no on the DM's proposed recurrence plan. Cite sources actually read and state any
+consequential unread gap. Keep the answer focused; advisory agreement is not empirical
+replication, a launch authorization or an additional owner gate.
+
+### Answer
+
+
+## 2026-09-23 — B11 interpretation clarification before adviser handoff
+
+The prospective wording was "Delta6 may be negative": N6 loss was a possible specialization
+consequence, not a required directional prediction. The completed reading's phrase "N6
+average specialization-loss prediction is not realized" should therefore be read as **no
+mean N6 loss observed in this block**, not a failed prespecified N6 prediction. The primary
+N8 J/service/eligibility prediction is unchanged. Negative N6 median and18/32 J-loss worlds
+still prevent interpreting the small positive mean as equivalence or absence of local cost.
+This corrects interpretation only; no number, endpoint, source input or next-question byte
+was changed, and no adviser Send had occurred when this clarification was written.
