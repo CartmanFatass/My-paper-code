@@ -9361,3 +9361,197 @@ and applying the already-written B10 branches. Planned exposure remains0 new fit
 team steps/3000 actual batched policy calls/300 coordinator selection calls; actual totals and
 costs are pending the runner's complete output. No additional execution or consultation follows
 automatically from this launch.
+
+## 2026-09-23 — B10 complete: opening-assignment replay improves means with consequential local losses
+
+The fixed six-panel comparison is scientifically accepted within its exploratory deployment
+scope. The DM collected all native outputs, checked their identities, independently recomputed
+the scores from standalone panels and reconstructed activation/chronology from numeric traces.
+The original operation exited normally; that witness alone was not used as acceptance.
+The executed source is `9fd88aa9f9e42d0855e367136751d37eb1648e07`, unchanged from the accepted
+four-file evaluator. The already-read complete Pro answer and prewritten B10 branches above
+cover this outcome; no question was resent and no new consultation is needed to apply them.
+
+### Native evidence and acceptance
+
+The [complete summary](../../../../runs/agent_count_generalization/s1_initial_assignment_b10/summary.json),
+[configuration](../../../../runs/agent_count_generalization/s1_initial_assignment_b10/config.json),
+six standalone panels, six numeric traces, original manifest/preflight, launch status,
+process-exit witness and stdout/stderr are preserved under
+`runs/agent_count_generalization/s1_initial_assignment_b10/`. The native root remains
+`/home/wu/hmasd-worktrees/agent-count-initial-assignment-20260923-b10/` on `wsl_4070`.
+All20 collected files matched native byte counts and SHA-256, totaling34,146,857 bytes;
+both logs are empty and no error file exists. Summary SHA-256 is
+`dc8951a3efef9865c6e03174d66f747a5740f0fed98551cc2c640c2ba2ce3a62` (10,555,836 bytes).
+The six trace identities below also reside in the runner-written panels, with full native
+paths, per-array shapes and numeric dtypes. They are preserved as evidence, not regenerated.
+
+| Trace file suffix after `trace_` | Bytes | SHA-256 |
+| --- | ---: | --- |
+| ordinary_policy45_world45_n4.npz | 1962938 | `ebec1c23d93a3fac1e1446c0d9c90e27dfc122f71403f984b7f056725ed77c2b` |
+| ordinary_policy45_world45_n6.npz | 2410938 | `808ceeb29d28200de06bea56241e2dbd6c10c1001e1c1893732030eeeb1ace3c` |
+| ordinary_policy45_world45_n8.npz | 2858938 | `ac8ca0b3bfa2ccf8ed483eba93137bfc8cffd3c38617cc84c1016418c94cc4fb` |
+| initial_replay_policy45_world45_n4.npz | 1962938 | `baaac9edc13a92f53a925f4b87c454f469c52b99dab38062c96dbc074b1234e5` |
+| initial_replay_policy45_world45_n6.npz | 2410938 | `c5276de8660633971156c6ff1e68bb21b639026cf5d5c8f5cf3a1fa56912cf73` |
+| initial_replay_policy45_world45_n8.npz | 2858938 | `88a3fdfa215a11dd72227355534685aef24167a4492aac00554c7f874198eeea` |
+
+The ordinary N4/N6/N8 panels ran first and exactly reproduce all16 historical B07 worlds in
+J, scalar return and each of the four native reward fields (18 complete array identities).
+All six restored parameter/normalizer digests equal the original final45
+`ea1de5234aba1683f182b6f36a3260ecf8fdd68779df0e313a6bc040b9458c1d`; weights/normalizers remain
+unchanged, all optimizer/storage/shadow counters are zero, and actual recurrent runtime evolves.
+Both modes have identical per-N initial world state/observation, config, runtime seed and
+initial runtime digest. Diagnostic RNG preservation and global RNG restoration hold for all
+panels. The original H6 checkpoint and all committed H6/SET input bytes remain unchanged;
+all11 recorded source hashes match the executed Git blobs before and after execution.
+
+The DM's disposable readers import neither the evaluator nor policy code. They independently
+read the six panels and six byte-bound original references, verify native-unit identities,
+and compute every per-world O/R/L/G array and each N/U mean. Reconciliation with runner
+aggregates has maximum absolute difference1.4210854715202004e-14, from summation order.
+Separate numeric-trace reading verifies finite shapes/dtypes, exact raw-to-clipped mapping,
+all k10 opportunity masks, opening-label reuse, actual temporal changes and all48 first
+divergence records. Every one of4800 JSON assignment events was reconciled against its binary
+trace, including lane/step, proposals, execution/opening labels, previous-opportunity changes,
+proposal-only metadata and event totals. Summary-embedded panels equal standalone panels.
+These are saved-data checks; no model reload, policy forward or environment transition was
+added during reading. The independent ResearchCritic also recomputed service and trace readings
+and found no material dissent with the mixed-consequence interpretation below.
+
+### Native outcomes, including the adverse worlds
+
+O denotes ordinary subsequent reassignment; R denotes replay of the actual opening assignment.
+The table gives absolute mean native J and connected users/step (50 times coverage), then the
+paired change R−O. U retains the prospectively declared equal weighting of N4 and N8; N6 is a
+real treatment, not an expected-zero control.
+
+| N | J O | J R | L J | Users/step O | Users/step R | L users/step | J world signs |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | --- |
+| 4 | .577558729 | .581730809 | +.004172080 | 36.271125 | 36.555000 | +.283875 | 13 positive / 3 negative |
+| 6 | .571507590 | .575395881 | +.003888290 | 37.029875 | 37.219000 | +.189125 | 16 positive / 0 negative |
+| 8 | .454504516 | .463701450 | +.009196934 | 29.299500 | 29.646625 | +.347125 | 13 positive / 3 negative |
+| U (4,8) | .516031623 | .522716130 | +.006684507 | 32.785313 | 33.100813 | +.315500 | 26 positive / 6 negative |
+
+| N | Quality O | Quality R | L quality | Penalty O | Penalty R | L penalty |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| 4 | .246233534 | .244654500 | −.001579034 | .004107081 | .003435540 | −.000671540 |
+| 6 | .195351947 | .195746056 | +.000394109 | .005516244 | .004393936 | −.001122308 |
+| 8 | .174402843 | .180311376 | +.005908533 | .008009337 | .005444712 | −.002564625 |
+| U (4,8) | .210318188 | .212482938 | +.002164749 | .006058209 | .004440126 | −.001618082 |
+
+The already-weighted `energy_penalty` field is S1's normalized-height proxy (scenario1.py),
+not measured battery consumption. Positive penalty change is adverse. J retains its native
+identity `.7*C + .3*Q − P`, and `N*scalar_return/500` agrees. Ordinary/replay scalar means are
+72.194841/72.716351 atN4,47.625633/47.949657 atN6,28.406532/28.981341 atN8; they are not
+substituted for cross-N native J.
+
+J improves in42/48 worlds, and the penalty falls in48/48. Coverage improves in34, falls in13
+and has one numerical tie (N4 world1545406: delta−1.44e-15); strict raw floating signs in saved
+arrays are retained, without interpreting that roundoff as a service loss. N4 quality falls
+in11/16 worlds. J medians are+.003778157/+.003770733/+.013602348 atN4/6/8. As a descriptive
+concentration check, removing each N's single largest J improvement would leave positive means
+of+.003392152/+.003582206/+.006584187; this neither changes the original estimand nor creates a
+new selected endpoint. The positive means are not supplied by one favorable world, but they
+hide consequential losses:
+
+- **1545811:** J .491574289→.425021956, L=−.066552333; coverage .61776→.51172,
+  **−5.302 users/step**. Quality increases+.017495434 and penalty decreases−.002427037,
+  which do not compensate for lost coverage.
+- **1545801:** J .505701701→.464840838, L=−.040860863; **−3.198 users/step**,
+  despite quality+.002810900 and penalty−.003067867.
+- **1545802**, retained from B08/B09: J .471084990→.462095863, L=−.008989128;
+  **−1.094 users/step**. Quality+.011454397 and penalty−.002890553 improve. Remaining
+  advantage over SET does not erase this own-policy service loss.
+- **1545810**, the continuing package counterexample: J .287199987→.293283828,
+  L=+.006083841, but coverage .34636→.34648 adds only **.006 users/step**. Replay still
+  trails the fixed SET reference by .068311364 J and **7.156 users/step**.
+
+Against unchanged descriptive SET arrays, ordinary/replay H6 gaps in mean J are
+.078660819/+.082832899 atN4, +.140614353/+.144502644 atN6 and +.152267327/+.161464261 atN8.
+U changes+.115464073→+.122148580. Each world obeys `G_R=G_O+L`; this remains an arithmetic
+identity, not an identified causal fraction or a certificate of ordinary-baseline competence.
+All48 world arrays and both old adverse worlds remain in the result; no world or N is dropped.
+
+### The intervention changed real behavior
+
+All48 worlds have changed executed individual labels and changed raw and clipped actions.
+The first10 actions, states, observations, actor-before/after identities and execution labels
+agree exactly. First executed-action differences occur at steps130–410 forN4,190–350 forN6
+and10–320 forN8; world state/observation histories first separate one step afterward.
+At1545808, raw action and actor-after identity differ at10, clipping absorbs that first-step
+action difference, executed action differs at11 and world state/observation at12. At1545810,
+team labels differ at310, individual labels/actions at320 and world history at321: team-only
+change is not evidence of low-level actor activation.
+
+| N | Ordinary temporal team / individual changes | Replay proposals differing from opening team / individual labels | Raw changed coordinates | Clipped changed coordinates | Raw changes absorbed by clipping |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| 4 | 0 / 571 | 0 / 769 | 42144 / 96000 | 30950 / 96000 | 11194 |
+| 6 | 27 / 364 | 182 / 750 | 61569 / 144000 | 46211 / 144000 | 15358 |
+| 8 | 47 / 690 | 264 / 1874 | 171792 / 192000 | 136902 / 192000 | 34890 |
+
+Temporal changes, proposals differing from opening labels and coordinator call counts are
+distinct quantities. After trajectories diverge, these are comparisons of two actual histories,
+not same-input counterfactual proposals or local causal action effects. Replay computes all
+normal proposals but suppresses their use; its execution labels never change within a lane's
+episode. All proposal probabilities/values remain proposal-only, with no training eligibility.
+
+Reading the saved opening events also limits the word "assignment": all48 team labels are3.
+AllN4 andN6 lanes initially give every member individual label5; N8 has six all5 worlds and
+ten worlds containing label4 (11 members total) among label5. Retaining an initial joint
+assignment therefore does not establish differentiated-role allocation, role semantics or
+the benefit of state-dependent initial selection. The local observations and recurrent actor
+remain active even where the retained labels are identical across members.
+
+### Judgment update and bounded decision
+
+The **activated, mixed-world/component branch** is selected. Every N's mean J and coverage
+improves, but the improvement branch also required acceptable observed costs. Large N8 service
+losses and N4 quality degradation prevent promoting replay as an unconditional replacement.
+Keep the exact replay behavior as a measured deployment alternative with an explicit tradeoff,
+and keep ordinary reassignment as the reference. No outcome-selected per-N/world switch or
+claim of equivalence/noninferiority is made; no post-result acceptability margin is invented.
+
+Strengthened: these retained weights can sustain and slightly improve the measured mean
+service using the opening labels plus ongoing local feedback/recurrence. Weakened: explaining
+these mean outcomes as requiring continual adoption of later coordinator outputs. Contrary
+evidence remains substantial: ordinary reassignment protects useful service in particular
+worlds. Changed label residence/switching and learned co-adaptation are unresolved explanations;
+this does not show that all later reassignment is harmful or all initial-label policies suffice.
+No result identifies skill training necessity, initial coordination value, general skill
+irrelevance, a competent flat comparator or a population-level count-generalization effect.
+Both modes still compute the coordinator, so no computation/communication/latency saving is
+measured. Independent training remains n=1;96 episodes and repeated controls add no training
+replication, and these are development-read worlds rather than blind confirmation.
+
+B07's bounded-package retain, B08's useful learning in both packages, the B04/B05 entropy
+reversal and B09's activated mixed response remain in force. The relevant published-main
+background at `b39b7007689a1e172d67b4c91e684ddc33708fe8`, topic3, is revised only where B10
+changes the previously unresolved claim about ongoing reassignment use. The result closes
+this fixed deployment diagnostic, not the broader number-generalization question or direction.
+There is no selected further fit, label/clock/world search or confirmation batch, and no
+unreconciled operation. Continued authorization is preserved; a next investment needs a distinct
+prospective prediction rather than another run selected merely to clarify these mixed scores.
+
+### Actual exposure and cost
+
+**0 new fits,0 training/stored-training steps,0 optimizer calls,0 training storage calls;
+6 panels,48,000 evaluation team steps,288,000 UAV steps,96 episodes/resets,3000 actual
+batched policy calls,300 successful native coordinator selection forwards and4800 lane
+selections (96 opening /4704 later).** There are six traces,0 shadows and0 SET model loads.
+All actual counts equal the prewritten totals. One H6 checkpoint deserialization completed;
+two input validations, three validation environment/agent batches (48 environment instances)
+and six panel environment/agent batches (96 instances) completed. Construction is not added
+to scientific transition counts. Original360k training steps are prior exposure.
+
+Runner resource snapshot: command wall59.053746457s (.984229108min), study wall57.736278982s,
+CPU user205.634627s/system.904330s, peak RSS927132KiB for the scientific process's Linux
+RUSAGE_SELF. Peak scratch is unmeasured. The final top-level wall fields differ from that
+snapshot by approximately4 microseconds due to the later save boundary. Implementation,
+the11 focused tests, independent review, collection, saved-data reading and publication are
+additional non-fit work, not included in the scientific command wall. No saving relative to
+ordinary execution is inferred from this combined six-panel runtime.
+
+Completion event `0a7197d1c26f73a6d35cc6bb` was read and consumed using generation92 and wake
+`563d45f0-944f-48be-9fc4-b895a2c82b83`; rearm returned generation93. A subsequent drain finds
+no pending event and no nonterminal observation. The worker, original Pro request and other
+tasks were not restarted, resent or messaged.
