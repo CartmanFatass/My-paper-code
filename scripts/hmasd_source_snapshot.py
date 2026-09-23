@@ -1,7 +1,8 @@
 """Prepare one retained Git worktree for a new admitted operation.
 
 The caller verifies publication before this function and retains the returned
-path with the operation. There is no cache eviction or automatic cleanup.
+path with the operation. After collection, hmasd_snapshot_gc.py can reclaim a
+verified terminal snapshot while preserving its operation and external outputs.
 """
 from __future__ import annotations
 

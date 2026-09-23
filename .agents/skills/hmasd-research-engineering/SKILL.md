@@ -188,6 +188,12 @@ At a meaningful result boundary:
    Use `--resume-jobs` only after explicitly resolving a blocked job.
 5. On terminal notice collect outputs into `runs/<direction>/<tag>/` and verify the local
    artifact before any remote cleanup. Exit zero is not a result; the DM reads it.
+   After collection, reclaim the operation's disposable source snapshot on its executing
+   Linux node with `scripts/hmasd_snapshot_gc.py`: preview, then `--apply --snapshot <id>`
+   for that operation's snapshot basename. The collector rechecks terminal native identities,
+   process references, clean files and durable Git reachability. Preserve every refusal;
+   do not remove claims, manifests, outputs or an authoring worktree to make cleanup pass.
+   See the execution method for commands and the separate publication-worktree lifecycle.
 
 Runtime notes: ordinary in-process batching and a fixed synchronous native team inside one
 named function are routine options. Select topology, profiling, device, JIT, language and

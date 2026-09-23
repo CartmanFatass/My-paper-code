@@ -149,6 +149,12 @@ Codex queue 只唤醒分配该等待的当前 Codex session；Claude 使用确�
 Git 的分支/worktree 服务于真实隔离需要，不再每方向强制建立。按完整工作边界提交和推送，
 在外部交付及结果运行前确保输入可取得；不要求 scope 尾注、每次 commit 立即 push 或月度治理指标。
 
+启动时的 `--snapshot` 会生成完整且锁定的源码 worktree；实验退出不会让 Git 自动释放它。
+收集并验证产物后，在原执行 Linux 节点用 `scripts/hmasd_snapshot_gc.py` 预览，
+再以 `--apply --snapshot <快照目录名>` 回收已核验的指定快照。脚本保留操作记录和外部产物，
+拒绝终态不明、进程引用、独有文件或源码提交无持久引用的快照。普通 DM/发布 worktree
+需另行核对任务与产物依赖；完整流程见[执行说明](../../.agents/skills/hmasd-research-engineering/references/local-execution.md#source-and-publication-worktree-reclamation)。
+
 每个 DM 拥有本方向记录和 RESEARCH 中自己的结果摘要、证据链接、standing 与下一步；即使
 Root 正在工作，也可自行发布到 main，不等待 Root 代更、批准、交接或确认。Root 负责被分配的
 跨方向协调与共享控制面维护。各方向通常修改不同内容：动笔前刷新 main、查看相关差异，只更新
