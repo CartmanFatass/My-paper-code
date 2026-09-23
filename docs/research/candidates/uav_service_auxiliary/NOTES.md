@@ -5512,3 +5512,137 @@ accounting, seed/fingerprint binding and the full fixed panels remain required
 before accepting N. **R is already fixed as the second fit**, after N collection
 and resource release, irrespective of N's performance. The pair remains exactly
 2 fits / 360k train / 192k eval upper bound; no additional action is selected.
+
+## 2026-09-23 — B05 N fully accepted; fixed R follows unchanged
+
+**Complete acceptance.** The original N operation has a valid native exit-0
+witness and consistent recorded process identities. All **46 remote files /
+113,321,414 bytes** were collected and matched by SHA256; the full binary traces,
+audit and checkpoint remain in the original remote output and this checkout.
+[Summary](../../../../runs/uav_service_auxiliary/b05_n_914173_a01/summary.json),
+[configuration](../../../../runs/uav_service_auxiliary/b05_n_914173_a01/config.json),
+[exit witness](../../../../runs/uav_service_auxiliary/b05_n_914173_a01/process-exit.json)
+and [final native status](../../../../runs/uav_service_auxiliary/b05_n_914173_a01/launch-status.json)
+retain the evidence. Summary SHA256 is
+`1af4318fdd21d5723054b12d8b89f99688d32190b4d89933074ce2913d9e12c9`;
+checkpoint SHA256 is
+`1a6a2b6c191d3dc74ac244b474dc6071905c71d6a973eea78a97e94e6fbcceb8`.
+
+Independent arithmetic over all raw arrays reproduces every recorded training
+lane return/metric sum, every evaluation world's fields and all aggregates.
+Original reward recomputed from QoS, capped actual return cost, event counts and
+PBRS agrees within **4.441e-16**; N's training reward is exactly native reward.
+All 37 runner-recorded artifact hashes, config hash, finite arrays, bounded
+actions and fixed evaluation seeds pass. Actual counts are **180k training /
+1.44M agent rows / 30 updates / 120 episodes**, plus **96k evaluation / 64
+episodes / zero evaluation updates**. Every episode truncates at1500, with no
+early terminal or rollout-boundary straddling; stderr is empty.
+
+The real first-rollout buffer agrees with its physical trajectory and native
+discriminator reward components. Independent float64 low GAE/return recurrences
+match FP32 storage with maximum errors **2.286e-6 / 4.109e-6**; high team/agent
+GAE and returns match within the previously used combined tolerances
+`atol=5e-5, rtol=3e-6` (maximum absolute difference **1.079e-4**). All600 high
+rows span ten steps and have the expected terminal masks. Every learner moves
+on every update. Final optimizer steps are high2250, low actor/critic67500 each,
+team discriminator450, individual discriminator1800; all optimizer tensor steps
+match the loaded checkpoint. L2 movements from initialization in that order are
+**13.343682 / 36.659901 / 31.517461 / 2.948467 / 8.086486**.
+
+The bound config and active seed are914173. Relative to B04, all scientific
+settings match except that selected seed; the only additional literal config
+difference is the inherited baseline path's checkout prefix. The comparison
+gate is explicitly disabled in both native configs, and that file is absent
+in both retained remote checkouts; it supplied no old-arm data to this run.
+The new actual initialization and first-collection fingerprints both differ
+from B04, as prospectively required:
+
+- Initialization: `9cec1f0e1b0f0cb965c120af9587a7ca8bcd0b2a9deddbbd09570c4c35209d43`.
+- First physical collection: `55d27fc4802d687ecb0a5bb793d5db40dca143e71515d5d531ed83d9494c9bc8`.
+- First update: `381d49b17b57f94c1709a45f09f49bc6b4b1afbee55ccb37c448726d036c6cba`.
+- Final policy: `22ade2e3aa948330acb4916445277edab0611a5159a1bef7beade8d1aefadc79`.
+
+The checkpoint's actual parameter tensors independently reproduce the final
+fingerprint, shared by development30 and the final panel. Initial evaluation
+uses the initialization fingerprint. These are distinct training instances,
+not isolated-initialization evidence; R must match this new pair's initial
+policy and first physical collection before its treatment can be read.
+
+**Full N reading before the fixed comparator.** Both evaluation panels remain
+already exposed development worlds. The `final` label denotes the fixed
+update30 endpoint, not fresh confirmation. QoS and cost are per-step means;
+battery is the true minimum over each episode.
+
+| Panel | Native J | QoS | Return cost | Mean episode battery minimum | P10 episode battery minimum |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Development0 | -222.092843 | .105247 | .122681 | .351597 | .325471 |
+| Development10 | -26.407571 | .218984 | .113952 | .364937 | .326567 |
+| Development20 | +87.562908 | .237458 | .085035 | .386833 | .351716 |
+| Development30 | -72.367636 | .276942 | .158086 | .378313 | .340282 |
+| Final32 endpoint | **-232.025030** | **.216058** | **.180829** | **.361646** | **.319036** |
+
+Final throughput is **6.481735 Mbps/step**, uncapped cost **.369444984**. Mean
+episode QoS, capped cost and PBRS sums are **324.086770 / 271.243481 /
+-13.624839**, reproducing native J. All32 world results are retained and read:
+**14 negative J / 18 positive J**, range **[-1796.058763,+666.535107]**,
+J P10 **-1561.212995**. Worst J is938005, with QoS.037220341 and cost.612961156.
+World938021 has zero QoS, J **-1224.469675**, and the lowest episode battery
+**.307733819**. A positive service mean does not remove these failures.
+
+On the same eight development worlds, final30 minus initialization gives
+J **+149.725207**, QoS **+.171694978**, throughput **+5.150849 Mbps/step**,
+but capped return cost **+.035404663** and uncapped cost **+.060078610**.
+QoS and battery minima improve in all8 worlds, while J improves in6 and falls
+in937004/937006 (**-66.727501 / -39.639874**). Return cost rises in5 worlds,
+falls in1 and ties in2. Thus battery minima alone do not establish lower return
+risk, and ordinary native learning delivers more service without resolving the
+net-use tradeoff. Development J falls **159.930544** from update20 to30 despite
+higher mean QoS; the fixed endpoint is retained. The lower final-panel mean uses
+the same update30 policy on other worlds, not additional training deterioration.
+No initialization reading exists for those32 worlds, so no final-panel learning
+increment is claimed. N alone leaves the R−N recurrence prediction unresolved;
+B04/B03 shared judgments are unchanged at this incomplete-pair boundary.
+
+No cutoff/depletion occurs in training or evaluation. Training records **3
+charging UAV-steps / .833333333 Wh**, each one UAV in lane1 (zero based):
+rollout25 steps1225/1249 and rollout27 step793 (zero based). Every evaluation
+panel has zero charging or charger input. These sparse training events do not
+establish improved charging recovery or catastrophe prevention.
+
+**Cost and fixed continuation.** One completed fit, **276k total interactions**,
+**124.628160 runner minutes**; CPU user/system **7169.527964 / 317.091823 s**.
+Collection/update/evaluation wall seconds are **3210.558280 / 2023.930494 /
+2240.020451**. Runner high-water RSS is **2,983,716 KiB / 2.845493 GiB**, not
+simultaneous machine peak; local output including final status is **113,323,182
+bytes**. Read-only verification added no interactions or optimizer updates.
+Current main `f32cd55dc95e11b84b3661ddf00d5d2456a59159` keeps this direction,
+lead and pause lift. Proceed with the already-fixed **R**, same published source
+`3de3e3f71c747e2422656126b52ae88beafb562a`, seed914173, horizons and panels.
+Its sole training intervention remains the extra `2 * actual return cost`;
+evaluation remains native coefficient2. No observation above changes the
+coefficient, endpoint, exposure or decision to execute this second fit.
+
+## 2026-09-23 — B05 fixed R admitted on the same source
+
+The preselected R fit is **natively accepted and running** on configured4070
+at **2026-09-23T22:11:13.450180Z**, after N's full collection and independent
+acceptance. Source remains **`3de3e3f71c747e2422656126b52ae88beafb562a`**,
+seed914173, CUDA FP32/TF32-off/four threads, with the original frozen N/R
+contract. The kernel refreshed main
+`3d0b52e2841beb57054aa0aca9ac864a6fa430b0`, preserving this lead and pause lift,
+and measured **13,293,408,256 bytes** available physical memory against the
+**4,294,967,296-byte** floor. [Native manifest](../../../../runs/uav_service_auxiliary/b05_r_914173_a01/launch-manifest.json),
+[actual-node preflight](../../../../runs/uav_service_auxiliary/b05_r_914173_a01/admission-preflight.json)
+and [initial native status](../../../../runs/uav_service_auxiliary/b05_r_914173_a01/launch-status.json)
+retain the exact operation, input command and identities. Both scientific child
+and supervisor match the observed live processes; no exit witness exists.
+
+The N READY event has been fully read and consumed at generation68. Detached
+observation of R has adopted this native handle at **generation70**, with a
+1500-second bounded window and no pending events. Preserve the original worker
+and unchanged source. On completion, collect and hash all artifacts, independently
+rescore the original objective, verify the new pair's matched initialization/
+first collection and actual reward/GAE separation, then read both endpoint panels
+and all loss worlds against N and the prewritten recurrence branches. Admission
+does not establish R's scientific result. Current state: **1 completed/accepted
+B05 fit, 1 fixed fit running**, no extra fit, Pro Send or App message.
