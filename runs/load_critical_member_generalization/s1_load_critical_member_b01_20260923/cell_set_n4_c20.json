@@ -1,0 +1,4367 @@
+{
+  "status": "complete",
+  "arm": "SET",
+  "seed": 943201,
+  "source_tag": "s1_action_law_b03_set_clip_s943201",
+  "test_n": 4,
+  "capacity": 20,
+  "total_capacity": 80,
+  "steps": 8000,
+  "episodes": 16,
+  "worlds": [
+    {
+      "world_id": 0,
+      "runtime_seed": 1487223932,
+      "status": "complete",
+      "steps": 500,
+      "episode_complete": true,
+      "native_terminal_observed": true,
+      "J": 0.5053482909616983,
+      "scalar_return": 63.168536370212294,
+      "component_means": {
+        "coverage_reward": 0.7119200000000001,
+        "quality_reward": 0.16272564194417669,
+        "energy_penalty": 0.04181340162155458,
+        "total_reward": 0.5053482909616983
+      },
+      "mean_e_i": [
+        11.064,
+        8.884,
+        8.238,
+        7.412
+      ],
+      "mean_served": 35.596,
+      "mean_eligible": 35.598,
+      "mean_eligible_unserved": 0.002,
+      "mean_ineligible": 14.402,
+      "mean_occupancy_rate": 0.44495,
+      "full_uav_step_rate": 0.0025,
+      "overflow_uav_steps": 1,
+      "overflow_uav_step_denominator": 2000,
+      "missed_eligible_users": 1,
+      "missed_eligible_user_denominator": 17799,
+      "visibility_truncated_entries": 1,
+      "visibility_eligible_entry_denominator": 17799,
+      "quality_normalized_sum_mean": 5.8064416864079735,
+      "quality_normalized_mean": 0.16272564194417669,
+      "capacity_identity_applicable_all": true,
+      "capacity_identity_holds_all_applicable": true,
+      "capacity_identity_interpretation_quarantined": false,
+      "capacity_identity_reasons": [
+        "[]"
+      ],
+      "maximum_eligible_uavs_per_user": 1,
+      "trace": {
+        "path": "trace_set_n4_c20_w00.npz",
+        "sha256": "747a1bbef3970f6be242565f444899b565a7c0b7963a24c101aafb1d79bfe3c2",
+        "bytes": 1163801,
+        "arrays": {
+          "observations": {
+            "shape": [
+              501,
+              4,
+              104
+            ],
+            "dtype": "float32"
+          },
+          "encoded_states": {
+            "shape": [
+              501,
+              133
+            ],
+            "dtype": "float32"
+          },
+          "native_positions": {
+            "shape": [
+              501,
+              4,
+              3
+            ],
+            "dtype": "float64"
+          },
+          "native_user_positions": {
+            "shape": [
+              501,
+              50,
+              2
+            ],
+            "dtype": "float64"
+          },
+          "sinr": {
+            "shape": [
+              501,
+              4,
+              50
+            ],
+            "dtype": "float64"
+          },
+          "connections": {
+            "shape": [
+              501,
+              4,
+              50
+            ],
+            "dtype": "bool"
+          },
+          "runtime_before_action": {
+            "shape": [
+              501
+            ],
+            "dtype": "<U64"
+          },
+          "runtime_after_action": {
+            "shape": [
+              500
+            ],
+            "dtype": "<U64"
+          },
+          "raw_actions": {
+            "shape": [
+              500,
+              4,
+              3
+            ],
+            "dtype": "float32"
+          },
+          "executed_actions": {
+            "shape": [
+              500,
+              4,
+              3
+            ],
+            "dtype": "float32"
+          },
+          "action_logprobs": {
+            "shape": [
+              500,
+              4
+            ],
+            "dtype": "float32"
+          },
+          "scalar_reward": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "component_coverage_reward": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "component_quality_reward": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "component_energy_penalty": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "component_total_reward": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "e_i": {
+            "shape": [
+              500,
+              4
+            ],
+            "dtype": "int64"
+          },
+          "served_count": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "eligible_count": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "eligible_unserved_count": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "ineligible_count": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "occupancy_rate": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "full_uav_rate": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "overflow_uavs": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "visibility_truncated": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "visibility_denominator": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "quality_sum": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "quality_mean": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "identity_applicable": {
+            "shape": [
+              500
+            ],
+            "dtype": "bool"
+          },
+          "identity_holds": {
+            "shape": [
+              500
+            ],
+            "dtype": "bool"
+          },
+          "identity_reasons": {
+            "shape": [
+              500
+            ],
+            "dtype": "<U2"
+          },
+          "maximum_eligible_uavs": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          }
+        }
+      }
+    },
+    {
+      "world_id": 1,
+      "runtime_seed": 4286678439,
+      "status": "complete",
+      "steps": 500,
+      "episode_complete": true,
+      "native_terminal_observed": true,
+      "J": 0.5559778551235909,
+      "scalar_return": 69.49723189044886,
+      "component_means": {
+        "coverage_reward": 0.74444,
+        "quality_reward": 0.17020968560524477,
+        "energy_penalty": 0.016193050557982553,
+        "total_reward": 0.5559778551235909
+      },
+      "mean_e_i": [
+        8.986,
+        9.396,
+        8.1,
+        10.74
+      ],
+      "mean_served": 37.222,
+      "mean_eligible": 37.222,
+      "mean_eligible_unserved": 0.0,
+      "mean_ineligible": 12.778,
+      "mean_occupancy_rate": 0.465275,
+      "full_uav_step_rate": 0.0,
+      "overflow_uav_steps": 0,
+      "overflow_uav_step_denominator": 2000,
+      "missed_eligible_users": 0,
+      "missed_eligible_user_denominator": 18611,
+      "visibility_truncated_entries": 0,
+      "visibility_eligible_entry_denominator": 18611,
+      "quality_normalized_sum_mean": 6.352889756513457,
+      "quality_normalized_mean": 0.17020968560524477,
+      "capacity_identity_applicable_all": true,
+      "capacity_identity_holds_all_applicable": true,
+      "capacity_identity_interpretation_quarantined": false,
+      "capacity_identity_reasons": [
+        "[]"
+      ],
+      "maximum_eligible_uavs_per_user": 1,
+      "trace": {
+        "path": "trace_set_n4_c20_w01.npz",
+        "sha256": "83523292070dbba95b091631373ffcee44bb78b06bb68db9a3115ecb6984720a",
+        "bytes": 1175762,
+        "arrays": {
+          "observations": {
+            "shape": [
+              501,
+              4,
+              104
+            ],
+            "dtype": "float32"
+          },
+          "encoded_states": {
+            "shape": [
+              501,
+              133
+            ],
+            "dtype": "float32"
+          },
+          "native_positions": {
+            "shape": [
+              501,
+              4,
+              3
+            ],
+            "dtype": "float64"
+          },
+          "native_user_positions": {
+            "shape": [
+              501,
+              50,
+              2
+            ],
+            "dtype": "float64"
+          },
+          "sinr": {
+            "shape": [
+              501,
+              4,
+              50
+            ],
+            "dtype": "float64"
+          },
+          "connections": {
+            "shape": [
+              501,
+              4,
+              50
+            ],
+            "dtype": "bool"
+          },
+          "runtime_before_action": {
+            "shape": [
+              501
+            ],
+            "dtype": "<U64"
+          },
+          "runtime_after_action": {
+            "shape": [
+              500
+            ],
+            "dtype": "<U64"
+          },
+          "raw_actions": {
+            "shape": [
+              500,
+              4,
+              3
+            ],
+            "dtype": "float32"
+          },
+          "executed_actions": {
+            "shape": [
+              500,
+              4,
+              3
+            ],
+            "dtype": "float32"
+          },
+          "action_logprobs": {
+            "shape": [
+              500,
+              4
+            ],
+            "dtype": "float32"
+          },
+          "scalar_reward": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "component_coverage_reward": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "component_quality_reward": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "component_energy_penalty": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "component_total_reward": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "e_i": {
+            "shape": [
+              500,
+              4
+            ],
+            "dtype": "int64"
+          },
+          "served_count": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "eligible_count": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "eligible_unserved_count": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "ineligible_count": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "occupancy_rate": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "full_uav_rate": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "overflow_uavs": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "visibility_truncated": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "visibility_denominator": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "quality_sum": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "quality_mean": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "identity_applicable": {
+            "shape": [
+              500
+            ],
+            "dtype": "bool"
+          },
+          "identity_holds": {
+            "shape": [
+              500
+            ],
+            "dtype": "bool"
+          },
+          "identity_reasons": {
+            "shape": [
+              500
+            ],
+            "dtype": "<U2"
+          },
+          "maximum_eligible_uavs": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          }
+        }
+      }
+    },
+    {
+      "world_id": 2,
+      "runtime_seed": 2462807455,
+      "status": "complete",
+      "steps": 500,
+      "episode_complete": true,
+      "native_terminal_observed": true,
+      "J": 0.5120744153709984,
+      "scalar_return": 64.0093019213748,
+      "component_means": {
+        "coverage_reward": 0.70804,
+        "quality_reward": 0.15407321413751734,
+        "energy_penalty": 0.029775548870256772,
+        "total_reward": 0.5120744153709984
+      },
+      "mean_e_i": [
+        8.138,
+        9.79,
+        8.994,
+        8.552
+      ],
+      "mean_served": 35.402,
+      "mean_eligible": 35.474,
+      "mean_eligible_unserved": 0.072,
+      "mean_ineligible": 14.526,
+      "mean_occupancy_rate": 0.442525,
+      "full_uav_step_rate": 0.019,
+      "overflow_uav_steps": 18,
+      "overflow_uav_step_denominator": 2000,
+      "missed_eligible_users": 36,
+      "missed_eligible_user_denominator": 17737,
+      "visibility_truncated_entries": 36,
+      "visibility_eligible_entry_denominator": 17737,
+      "quality_normalized_sum_mean": 5.4767443148780535,
+      "quality_normalized_mean": 0.15407321413751734,
+      "capacity_identity_applicable_all": true,
+      "capacity_identity_holds_all_applicable": true,
+      "capacity_identity_interpretation_quarantined": false,
+      "capacity_identity_reasons": [
+        "[]"
+      ],
+      "maximum_eligible_uavs_per_user": 1,
+      "trace": {
+        "path": "trace_set_n4_c20_w02.npz",
+        "sha256": "4027b9787b76229c6109acec203733659275abf868a701df77d9b399279559b1",
+        "bytes": 1160678,
+        "arrays": {
+          "observations": {
+            "shape": [
+              501,
+              4,
+              104
+            ],
+            "dtype": "float32"
+          },
+          "encoded_states": {
+            "shape": [
+              501,
+              133
+            ],
+            "dtype": "float32"
+          },
+          "native_positions": {
+            "shape": [
+              501,
+              4,
+              3
+            ],
+            "dtype": "float64"
+          },
+          "native_user_positions": {
+            "shape": [
+              501,
+              50,
+              2
+            ],
+            "dtype": "float64"
+          },
+          "sinr": {
+            "shape": [
+              501,
+              4,
+              50
+            ],
+            "dtype": "float64"
+          },
+          "connections": {
+            "shape": [
+              501,
+              4,
+              50
+            ],
+            "dtype": "bool"
+          },
+          "runtime_before_action": {
+            "shape": [
+              501
+            ],
+            "dtype": "<U64"
+          },
+          "runtime_after_action": {
+            "shape": [
+              500
+            ],
+            "dtype": "<U64"
+          },
+          "raw_actions": {
+            "shape": [
+              500,
+              4,
+              3
+            ],
+            "dtype": "float32"
+          },
+          "executed_actions": {
+            "shape": [
+              500,
+              4,
+              3
+            ],
+            "dtype": "float32"
+          },
+          "action_logprobs": {
+            "shape": [
+              500,
+              4
+            ],
+            "dtype": "float32"
+          },
+          "scalar_reward": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "component_coverage_reward": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "component_quality_reward": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "component_energy_penalty": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "component_total_reward": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "e_i": {
+            "shape": [
+              500,
+              4
+            ],
+            "dtype": "int64"
+          },
+          "served_count": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "eligible_count": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "eligible_unserved_count": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "ineligible_count": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "occupancy_rate": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "full_uav_rate": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "overflow_uavs": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "visibility_truncated": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "visibility_denominator": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "quality_sum": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "quality_mean": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "identity_applicable": {
+            "shape": [
+              500
+            ],
+            "dtype": "bool"
+          },
+          "identity_holds": {
+            "shape": [
+              500
+            ],
+            "dtype": "bool"
+          },
+          "identity_reasons": {
+            "shape": [
+              500
+            ],
+            "dtype": "<U2"
+          },
+          "maximum_eligible_uavs": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          }
+        }
+      }
+    },
+    {
+      "world_id": 3,
+      "runtime_seed": 1168622487,
+      "status": "complete",
+      "steps": 500,
+      "episode_complete": true,
+      "native_terminal_observed": true,
+      "J": 0.5852657685046546,
+      "scalar_return": 73.15822106308183,
+      "component_means": {
+        "coverage_reward": 0.7698799999999999,
+        "quality_reward": 0.195817278570653,
+        "energy_penalty": 0.012395415066541259,
+        "total_reward": 0.5852657685046546
+      },
+      "mean_e_i": [
+        15.728,
+        5.154,
+        11.712,
+        5.954
+      ],
+      "mean_served": 38.494,
+      "mean_eligible": 38.548,
+      "mean_eligible_unserved": 0.054,
+      "mean_ineligible": 11.452,
+      "mean_occupancy_rate": 0.48117499999999996,
+      "full_uav_step_rate": 0.0205,
+      "overflow_uav_steps": 15,
+      "overflow_uav_step_denominator": 2000,
+      "missed_eligible_users": 27,
+      "missed_eligible_user_denominator": 19274,
+      "visibility_truncated_entries": 27,
+      "visibility_eligible_entry_denominator": 19274,
+      "quality_normalized_sum_mean": 7.56203356136105,
+      "quality_normalized_mean": 0.19581727857065295,
+      "capacity_identity_applicable_all": true,
+      "capacity_identity_holds_all_applicable": true,
+      "capacity_identity_interpretation_quarantined": false,
+      "capacity_identity_reasons": [
+        "[]"
+      ],
+      "maximum_eligible_uavs_per_user": 1,
+      "trace": {
+        "path": "trace_set_n4_c20_w03.npz",
+        "sha256": "11dc381cae3c7bfaa9bb2a3999ec49c50e21428ad2fb2574d4ef52e8ae4e5bce",
+        "bytes": 1169706,
+        "arrays": {
+          "observations": {
+            "shape": [
+              501,
+              4,
+              104
+            ],
+            "dtype": "float32"
+          },
+          "encoded_states": {
+            "shape": [
+              501,
+              133
+            ],
+            "dtype": "float32"
+          },
+          "native_positions": {
+            "shape": [
+              501,
+              4,
+              3
+            ],
+            "dtype": "float64"
+          },
+          "native_user_positions": {
+            "shape": [
+              501,
+              50,
+              2
+            ],
+            "dtype": "float64"
+          },
+          "sinr": {
+            "shape": [
+              501,
+              4,
+              50
+            ],
+            "dtype": "float64"
+          },
+          "connections": {
+            "shape": [
+              501,
+              4,
+              50
+            ],
+            "dtype": "bool"
+          },
+          "runtime_before_action": {
+            "shape": [
+              501
+            ],
+            "dtype": "<U64"
+          },
+          "runtime_after_action": {
+            "shape": [
+              500
+            ],
+            "dtype": "<U64"
+          },
+          "raw_actions": {
+            "shape": [
+              500,
+              4,
+              3
+            ],
+            "dtype": "float32"
+          },
+          "executed_actions": {
+            "shape": [
+              500,
+              4,
+              3
+            ],
+            "dtype": "float32"
+          },
+          "action_logprobs": {
+            "shape": [
+              500,
+              4
+            ],
+            "dtype": "float32"
+          },
+          "scalar_reward": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "component_coverage_reward": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "component_quality_reward": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "component_energy_penalty": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "component_total_reward": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "e_i": {
+            "shape": [
+              500,
+              4
+            ],
+            "dtype": "int64"
+          },
+          "served_count": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "eligible_count": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "eligible_unserved_count": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "ineligible_count": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "occupancy_rate": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "full_uav_rate": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "overflow_uavs": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "visibility_truncated": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "visibility_denominator": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "quality_sum": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "quality_mean": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "identity_applicable": {
+            "shape": [
+              500
+            ],
+            "dtype": "bool"
+          },
+          "identity_holds": {
+            "shape": [
+              500
+            ],
+            "dtype": "bool"
+          },
+          "identity_reasons": {
+            "shape": [
+              500
+            ],
+            "dtype": "<U2"
+          },
+          "maximum_eligible_uavs": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          }
+        }
+      }
+    },
+    {
+      "world_id": 4,
+      "runtime_seed": 54481014,
+      "status": "complete",
+      "steps": 500,
+      "episode_complete": true,
+      "native_terminal_observed": true,
+      "J": 0.5499017989588229,
+      "scalar_return": 68.73772486985285,
+      "component_means": {
+        "coverage_reward": 0.73452,
+        "quality_reward": 0.17638157101163265,
+        "energy_penalty": 0.01717667234466687,
+        "total_reward": 0.5499017989588229
+      },
+      "mean_e_i": [
+        6.186,
+        10.742,
+        8.304,
+        11.578
+      ],
+      "mean_served": 36.726,
+      "mean_eligible": 36.81,
+      "mean_eligible_unserved": 0.084,
+      "mean_ineligible": 13.19,
+      "mean_occupancy_rate": 0.459075,
+      "full_uav_step_rate": 0.0125,
+      "overflow_uav_steps": 21,
+      "overflow_uav_step_denominator": 2000,
+      "missed_eligible_users": 42,
+      "missed_eligible_user_denominator": 18405,
+      "visibility_truncated_entries": 42,
+      "visibility_eligible_entry_denominator": 18405,
+      "quality_normalized_sum_mean": 6.4805828499643505,
+      "quality_normalized_mean": 0.17638157101163265,
+      "capacity_identity_applicable_all": true,
+      "capacity_identity_holds_all_applicable": true,
+      "capacity_identity_interpretation_quarantined": false,
+      "capacity_identity_reasons": [
+        "[]"
+      ],
+      "maximum_eligible_uavs_per_user": 1,
+      "trace": {
+        "path": "trace_set_n4_c20_w04.npz",
+        "sha256": "92c33d4bbff10ff5ed4209764bd232e195e0de81e6b0f111f0c4a4e19d3216c7",
+        "bytes": 1160871,
+        "arrays": {
+          "observations": {
+            "shape": [
+              501,
+              4,
+              104
+            ],
+            "dtype": "float32"
+          },
+          "encoded_states": {
+            "shape": [
+              501,
+              133
+            ],
+            "dtype": "float32"
+          },
+          "native_positions": {
+            "shape": [
+              501,
+              4,
+              3
+            ],
+            "dtype": "float64"
+          },
+          "native_user_positions": {
+            "shape": [
+              501,
+              50,
+              2
+            ],
+            "dtype": "float64"
+          },
+          "sinr": {
+            "shape": [
+              501,
+              4,
+              50
+            ],
+            "dtype": "float64"
+          },
+          "connections": {
+            "shape": [
+              501,
+              4,
+              50
+            ],
+            "dtype": "bool"
+          },
+          "runtime_before_action": {
+            "shape": [
+              501
+            ],
+            "dtype": "<U64"
+          },
+          "runtime_after_action": {
+            "shape": [
+              500
+            ],
+            "dtype": "<U64"
+          },
+          "raw_actions": {
+            "shape": [
+              500,
+              4,
+              3
+            ],
+            "dtype": "float32"
+          },
+          "executed_actions": {
+            "shape": [
+              500,
+              4,
+              3
+            ],
+            "dtype": "float32"
+          },
+          "action_logprobs": {
+            "shape": [
+              500,
+              4
+            ],
+            "dtype": "float32"
+          },
+          "scalar_reward": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "component_coverage_reward": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "component_quality_reward": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "component_energy_penalty": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "component_total_reward": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "e_i": {
+            "shape": [
+              500,
+              4
+            ],
+            "dtype": "int64"
+          },
+          "served_count": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "eligible_count": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "eligible_unserved_count": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "ineligible_count": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "occupancy_rate": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "full_uav_rate": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "overflow_uavs": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "visibility_truncated": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "visibility_denominator": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "quality_sum": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "quality_mean": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "identity_applicable": {
+            "shape": [
+              500
+            ],
+            "dtype": "bool"
+          },
+          "identity_holds": {
+            "shape": [
+              500
+            ],
+            "dtype": "bool"
+          },
+          "identity_reasons": {
+            "shape": [
+              500
+            ],
+            "dtype": "<U2"
+          },
+          "maximum_eligible_uavs": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          }
+        }
+      }
+    },
+    {
+      "world_id": 5,
+      "runtime_seed": 4033224630,
+      "status": "complete",
+      "steps": 500,
+      "episode_complete": true,
+      "native_terminal_observed": true,
+      "J": 0.5758514651096174,
+      "scalar_return": 71.98143313870217,
+      "component_means": {
+        "coverage_reward": 0.77028,
+        "quality_reward": 0.2009169578918805,
+        "energy_penalty": 0.023619622257946706,
+        "total_reward": 0.5758514651096174
+      },
+      "mean_e_i": [
+        8.626,
+        10.41,
+        10.648,
+        8.83
+      ],
+      "mean_served": 38.514,
+      "mean_eligible": 38.514,
+      "mean_eligible_unserved": 0.0,
+      "mean_ineligible": 11.486,
+      "mean_occupancy_rate": 0.48142499999999994,
+      "full_uav_step_rate": 0.001,
+      "overflow_uav_steps": 0,
+      "overflow_uav_step_denominator": 2000,
+      "missed_eligible_users": 0,
+      "missed_eligible_user_denominator": 19257,
+      "visibility_truncated_entries": 0,
+      "visibility_eligible_entry_denominator": 19257,
+      "quality_normalized_sum_mean": 7.7560734889694904,
+      "quality_normalized_mean": 0.2009169578918805,
+      "capacity_identity_applicable_all": true,
+      "capacity_identity_holds_all_applicable": true,
+      "capacity_identity_interpretation_quarantined": false,
+      "capacity_identity_reasons": [
+        "[]"
+      ],
+      "maximum_eligible_uavs_per_user": 1,
+      "trace": {
+        "path": "trace_set_n4_c20_w05.npz",
+        "sha256": "0ea31909ab8dcae59911768c1ee175cc11b17cedb78db56d6f92b047b7f9acf8",
+        "bytes": 1178718,
+        "arrays": {
+          "observations": {
+            "shape": [
+              501,
+              4,
+              104
+            ],
+            "dtype": "float32"
+          },
+          "encoded_states": {
+            "shape": [
+              501,
+              133
+            ],
+            "dtype": "float32"
+          },
+          "native_positions": {
+            "shape": [
+              501,
+              4,
+              3
+            ],
+            "dtype": "float64"
+          },
+          "native_user_positions": {
+            "shape": [
+              501,
+              50,
+              2
+            ],
+            "dtype": "float64"
+          },
+          "sinr": {
+            "shape": [
+              501,
+              4,
+              50
+            ],
+            "dtype": "float64"
+          },
+          "connections": {
+            "shape": [
+              501,
+              4,
+              50
+            ],
+            "dtype": "bool"
+          },
+          "runtime_before_action": {
+            "shape": [
+              501
+            ],
+            "dtype": "<U64"
+          },
+          "runtime_after_action": {
+            "shape": [
+              500
+            ],
+            "dtype": "<U64"
+          },
+          "raw_actions": {
+            "shape": [
+              500,
+              4,
+              3
+            ],
+            "dtype": "float32"
+          },
+          "executed_actions": {
+            "shape": [
+              500,
+              4,
+              3
+            ],
+            "dtype": "float32"
+          },
+          "action_logprobs": {
+            "shape": [
+              500,
+              4
+            ],
+            "dtype": "float32"
+          },
+          "scalar_reward": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "component_coverage_reward": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "component_quality_reward": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "component_energy_penalty": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "component_total_reward": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "e_i": {
+            "shape": [
+              500,
+              4
+            ],
+            "dtype": "int64"
+          },
+          "served_count": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "eligible_count": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "eligible_unserved_count": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "ineligible_count": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "occupancy_rate": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "full_uav_rate": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "overflow_uavs": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "visibility_truncated": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "visibility_denominator": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "quality_sum": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "quality_mean": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "identity_applicable": {
+            "shape": [
+              500
+            ],
+            "dtype": "bool"
+          },
+          "identity_holds": {
+            "shape": [
+              500
+            ],
+            "dtype": "bool"
+          },
+          "identity_reasons": {
+            "shape": [
+              500
+            ],
+            "dtype": "<U2"
+          },
+          "maximum_eligible_uavs": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          }
+        }
+      }
+    },
+    {
+      "world_id": 6,
+      "runtime_seed": 854088559,
+      "status": "complete",
+      "steps": 500,
+      "episode_complete": true,
+      "native_terminal_observed": true,
+      "J": 0.5250112444899805,
+      "scalar_return": 65.62640556124757,
+      "component_means": {
+        "coverage_reward": 0.7460399999999999,
+        "quality_reward": 0.17661388048315924,
+        "energy_penalty": 0.05020091965496725,
+        "total_reward": 0.5250112444899805
+      },
+      "mean_e_i": [
+        8.56,
+        8.896,
+        10.788,
+        9.058
+      ],
+      "mean_served": 37.302,
+      "mean_eligible": 37.302,
+      "mean_eligible_unserved": 0.0,
+      "mean_ineligible": 12.698,
+      "mean_occupancy_rate": 0.466275,
+      "full_uav_step_rate": 0.001,
+      "overflow_uav_steps": 0,
+      "overflow_uav_step_denominator": 2000,
+      "missed_eligible_users": 0,
+      "missed_eligible_user_denominator": 18651,
+      "visibility_truncated_entries": 0,
+      "visibility_eligible_entry_denominator": 18651,
+      "quality_normalized_sum_mean": 6.582310751426448,
+      "quality_normalized_mean": 0.1766138804831593,
+      "capacity_identity_applicable_all": true,
+      "capacity_identity_holds_all_applicable": true,
+      "capacity_identity_interpretation_quarantined": false,
+      "capacity_identity_reasons": [
+        "[]"
+      ],
+      "maximum_eligible_uavs_per_user": 1,
+      "trace": {
+        "path": "trace_set_n4_c20_w06.npz",
+        "sha256": "1675c9e0ad922452fb00a6f7d81840cd6f0e5d1691cfe201abca4a3371a69385",
+        "bytes": 1165590,
+        "arrays": {
+          "observations": {
+            "shape": [
+              501,
+              4,
+              104
+            ],
+            "dtype": "float32"
+          },
+          "encoded_states": {
+            "shape": [
+              501,
+              133
+            ],
+            "dtype": "float32"
+          },
+          "native_positions": {
+            "shape": [
+              501,
+              4,
+              3
+            ],
+            "dtype": "float64"
+          },
+          "native_user_positions": {
+            "shape": [
+              501,
+              50,
+              2
+            ],
+            "dtype": "float64"
+          },
+          "sinr": {
+            "shape": [
+              501,
+              4,
+              50
+            ],
+            "dtype": "float64"
+          },
+          "connections": {
+            "shape": [
+              501,
+              4,
+              50
+            ],
+            "dtype": "bool"
+          },
+          "runtime_before_action": {
+            "shape": [
+              501
+            ],
+            "dtype": "<U64"
+          },
+          "runtime_after_action": {
+            "shape": [
+              500
+            ],
+            "dtype": "<U64"
+          },
+          "raw_actions": {
+            "shape": [
+              500,
+              4,
+              3
+            ],
+            "dtype": "float32"
+          },
+          "executed_actions": {
+            "shape": [
+              500,
+              4,
+              3
+            ],
+            "dtype": "float32"
+          },
+          "action_logprobs": {
+            "shape": [
+              500,
+              4
+            ],
+            "dtype": "float32"
+          },
+          "scalar_reward": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "component_coverage_reward": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "component_quality_reward": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "component_energy_penalty": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "component_total_reward": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "e_i": {
+            "shape": [
+              500,
+              4
+            ],
+            "dtype": "int64"
+          },
+          "served_count": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "eligible_count": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "eligible_unserved_count": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "ineligible_count": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "occupancy_rate": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "full_uav_rate": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "overflow_uavs": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "visibility_truncated": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "visibility_denominator": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "quality_sum": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "quality_mean": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "identity_applicable": {
+            "shape": [
+              500
+            ],
+            "dtype": "bool"
+          },
+          "identity_holds": {
+            "shape": [
+              500
+            ],
+            "dtype": "bool"
+          },
+          "identity_reasons": {
+            "shape": [
+              500
+            ],
+            "dtype": "<U2"
+          },
+          "maximum_eligible_uavs": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          }
+        }
+      }
+    },
+    {
+      "world_id": 7,
+      "runtime_seed": 2273078573,
+      "status": "complete",
+      "steps": 500,
+      "episode_complete": true,
+      "native_terminal_observed": true,
+      "J": 0.5487811232665176,
+      "scalar_return": 68.5976404083147,
+      "component_means": {
+        "coverage_reward": 0.72672,
+        "quality_reward": 0.20611778837164046,
+        "energy_penalty": 0.02175821324497445,
+        "total_reward": 0.5487811232665176
+      },
+      "mean_e_i": [
+        6.268,
+        6.848,
+        12.55,
+        10.8
+      ],
+      "mean_served": 36.336,
+      "mean_eligible": 36.466,
+      "mean_eligible_unserved": 0.13,
+      "mean_ineligible": 13.534,
+      "mean_occupancy_rate": 0.4542,
+      "full_uav_step_rate": 0.014,
+      "overflow_uav_steps": 22,
+      "overflow_uav_step_denominator": 2000,
+      "missed_eligible_users": 65,
+      "missed_eligible_user_denominator": 18233,
+      "visibility_truncated_entries": 65,
+      "visibility_eligible_entry_denominator": 18233,
+      "quality_normalized_sum_mean": 7.553427736514034,
+      "quality_normalized_mean": 0.20611778837164046,
+      "capacity_identity_applicable_all": true,
+      "capacity_identity_holds_all_applicable": true,
+      "capacity_identity_interpretation_quarantined": false,
+      "capacity_identity_reasons": [
+        "[]"
+      ],
+      "maximum_eligible_uavs_per_user": 1,
+      "trace": {
+        "path": "trace_set_n4_c20_w07.npz",
+        "sha256": "dc6923864c06b5b80e74d17eb374045aeba7155e2c69b2e3b5c521a55e654b5c",
+        "bytes": 1162836,
+        "arrays": {
+          "observations": {
+            "shape": [
+              501,
+              4,
+              104
+            ],
+            "dtype": "float32"
+          },
+          "encoded_states": {
+            "shape": [
+              501,
+              133
+            ],
+            "dtype": "float32"
+          },
+          "native_positions": {
+            "shape": [
+              501,
+              4,
+              3
+            ],
+            "dtype": "float64"
+          },
+          "native_user_positions": {
+            "shape": [
+              501,
+              50,
+              2
+            ],
+            "dtype": "float64"
+          },
+          "sinr": {
+            "shape": [
+              501,
+              4,
+              50
+            ],
+            "dtype": "float64"
+          },
+          "connections": {
+            "shape": [
+              501,
+              4,
+              50
+            ],
+            "dtype": "bool"
+          },
+          "runtime_before_action": {
+            "shape": [
+              501
+            ],
+            "dtype": "<U64"
+          },
+          "runtime_after_action": {
+            "shape": [
+              500
+            ],
+            "dtype": "<U64"
+          },
+          "raw_actions": {
+            "shape": [
+              500,
+              4,
+              3
+            ],
+            "dtype": "float32"
+          },
+          "executed_actions": {
+            "shape": [
+              500,
+              4,
+              3
+            ],
+            "dtype": "float32"
+          },
+          "action_logprobs": {
+            "shape": [
+              500,
+              4
+            ],
+            "dtype": "float32"
+          },
+          "scalar_reward": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "component_coverage_reward": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "component_quality_reward": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "component_energy_penalty": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "component_total_reward": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "e_i": {
+            "shape": [
+              500,
+              4
+            ],
+            "dtype": "int64"
+          },
+          "served_count": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "eligible_count": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "eligible_unserved_count": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "ineligible_count": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "occupancy_rate": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "full_uav_rate": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "overflow_uavs": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "visibility_truncated": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "visibility_denominator": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "quality_sum": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "quality_mean": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "identity_applicable": {
+            "shape": [
+              500
+            ],
+            "dtype": "bool"
+          },
+          "identity_holds": {
+            "shape": [
+              500
+            ],
+            "dtype": "bool"
+          },
+          "identity_reasons": {
+            "shape": [
+              500
+            ],
+            "dtype": "<U2"
+          },
+          "maximum_eligible_uavs": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          }
+        }
+      }
+    },
+    {
+      "world_id": 8,
+      "runtime_seed": 2856336572,
+      "status": "complete",
+      "steps": 500,
+      "episode_complete": true,
+      "native_terminal_observed": true,
+      "J": 0.5519030175443854,
+      "scalar_return": 68.98787719304818,
+      "component_means": {
+        "coverage_reward": 0.7664000000000001,
+        "quality_reward": 0.19135770377932246,
+        "energy_penalty": 0.041984293589411296,
+        "total_reward": 0.5519030175443854
+      },
+      "mean_e_i": [
+        7.488,
+        10.354,
+        12.772,
+        7.738
+      ],
+      "mean_served": 38.32,
+      "mean_eligible": 38.352,
+      "mean_eligible_unserved": 0.032,
+      "mean_ineligible": 11.648,
+      "mean_occupancy_rate": 0.479,
+      "full_uav_step_rate": 0.024,
+      "overflow_uav_steps": 13,
+      "overflow_uav_step_denominator": 2000,
+      "missed_eligible_users": 16,
+      "missed_eligible_user_denominator": 19176,
+      "visibility_truncated_entries": 16,
+      "visibility_eligible_entry_denominator": 19176,
+      "quality_normalized_sum_mean": 7.299614571551481,
+      "quality_normalized_mean": 0.19135770377932243,
+      "capacity_identity_applicable_all": true,
+      "capacity_identity_holds_all_applicable": true,
+      "capacity_identity_interpretation_quarantined": false,
+      "capacity_identity_reasons": [
+        "[]"
+      ],
+      "maximum_eligible_uavs_per_user": 1,
+      "trace": {
+        "path": "trace_set_n4_c20_w08.npz",
+        "sha256": "ab6da469376144ae3c688bd23a46885f13c09a77573634be830dc92c873ee1b0",
+        "bytes": 1169293,
+        "arrays": {
+          "observations": {
+            "shape": [
+              501,
+              4,
+              104
+            ],
+            "dtype": "float32"
+          },
+          "encoded_states": {
+            "shape": [
+              501,
+              133
+            ],
+            "dtype": "float32"
+          },
+          "native_positions": {
+            "shape": [
+              501,
+              4,
+              3
+            ],
+            "dtype": "float64"
+          },
+          "native_user_positions": {
+            "shape": [
+              501,
+              50,
+              2
+            ],
+            "dtype": "float64"
+          },
+          "sinr": {
+            "shape": [
+              501,
+              4,
+              50
+            ],
+            "dtype": "float64"
+          },
+          "connections": {
+            "shape": [
+              501,
+              4,
+              50
+            ],
+            "dtype": "bool"
+          },
+          "runtime_before_action": {
+            "shape": [
+              501
+            ],
+            "dtype": "<U64"
+          },
+          "runtime_after_action": {
+            "shape": [
+              500
+            ],
+            "dtype": "<U64"
+          },
+          "raw_actions": {
+            "shape": [
+              500,
+              4,
+              3
+            ],
+            "dtype": "float32"
+          },
+          "executed_actions": {
+            "shape": [
+              500,
+              4,
+              3
+            ],
+            "dtype": "float32"
+          },
+          "action_logprobs": {
+            "shape": [
+              500,
+              4
+            ],
+            "dtype": "float32"
+          },
+          "scalar_reward": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "component_coverage_reward": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "component_quality_reward": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "component_energy_penalty": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "component_total_reward": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "e_i": {
+            "shape": [
+              500,
+              4
+            ],
+            "dtype": "int64"
+          },
+          "served_count": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "eligible_count": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "eligible_unserved_count": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "ineligible_count": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "occupancy_rate": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "full_uav_rate": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "overflow_uavs": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "visibility_truncated": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "visibility_denominator": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "quality_sum": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "quality_mean": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "identity_applicable": {
+            "shape": [
+              500
+            ],
+            "dtype": "bool"
+          },
+          "identity_holds": {
+            "shape": [
+              500
+            ],
+            "dtype": "bool"
+          },
+          "identity_reasons": {
+            "shape": [
+              500
+            ],
+            "dtype": "<U2"
+          },
+          "maximum_eligible_uavs": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          }
+        }
+      }
+    },
+    {
+      "world_id": 9,
+      "runtime_seed": 2843201446,
+      "status": "complete",
+      "steps": 500,
+      "episode_complete": true,
+      "native_terminal_observed": true,
+      "J": 0.49736863192965564,
+      "scalar_return": 62.171078991206954,
+      "component_means": {
+        "coverage_reward": 0.70912,
+        "quality_reward": 0.16742058224120157,
+        "energy_penalty": 0.04924154274270478,
+        "total_reward": 0.49736863192965564
+      },
+      "mean_e_i": [
+        9.686,
+        10.14,
+        7.03,
+        8.61
+      ],
+      "mean_served": 35.456,
+      "mean_eligible": 35.466,
+      "mean_eligible_unserved": 0.01,
+      "mean_ineligible": 14.534,
+      "mean_occupancy_rate": 0.44320000000000004,
+      "full_uav_step_rate": 0.006,
+      "overflow_uav_steps": 3,
+      "overflow_uav_step_denominator": 2000,
+      "missed_eligible_users": 5,
+      "missed_eligible_user_denominator": 17733,
+      "visibility_truncated_entries": 5,
+      "visibility_eligible_entry_denominator": 17733,
+      "quality_normalized_sum_mean": 5.938763703347757,
+      "quality_normalized_mean": 0.16742058224120157,
+      "capacity_identity_applicable_all": true,
+      "capacity_identity_holds_all_applicable": true,
+      "capacity_identity_interpretation_quarantined": false,
+      "capacity_identity_reasons": [
+        "[]"
+      ],
+      "maximum_eligible_uavs_per_user": 1,
+      "trace": {
+        "path": "trace_set_n4_c20_w09.npz",
+        "sha256": "6a79eb123609102bd09c6419f7f2d86f84f39aeb6a225fc8d9de0c9e467be9dd",
+        "bytes": 1162438,
+        "arrays": {
+          "observations": {
+            "shape": [
+              501,
+              4,
+              104
+            ],
+            "dtype": "float32"
+          },
+          "encoded_states": {
+            "shape": [
+              501,
+              133
+            ],
+            "dtype": "float32"
+          },
+          "native_positions": {
+            "shape": [
+              501,
+              4,
+              3
+            ],
+            "dtype": "float64"
+          },
+          "native_user_positions": {
+            "shape": [
+              501,
+              50,
+              2
+            ],
+            "dtype": "float64"
+          },
+          "sinr": {
+            "shape": [
+              501,
+              4,
+              50
+            ],
+            "dtype": "float64"
+          },
+          "connections": {
+            "shape": [
+              501,
+              4,
+              50
+            ],
+            "dtype": "bool"
+          },
+          "runtime_before_action": {
+            "shape": [
+              501
+            ],
+            "dtype": "<U64"
+          },
+          "runtime_after_action": {
+            "shape": [
+              500
+            ],
+            "dtype": "<U64"
+          },
+          "raw_actions": {
+            "shape": [
+              500,
+              4,
+              3
+            ],
+            "dtype": "float32"
+          },
+          "executed_actions": {
+            "shape": [
+              500,
+              4,
+              3
+            ],
+            "dtype": "float32"
+          },
+          "action_logprobs": {
+            "shape": [
+              500,
+              4
+            ],
+            "dtype": "float32"
+          },
+          "scalar_reward": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "component_coverage_reward": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "component_quality_reward": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "component_energy_penalty": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "component_total_reward": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "e_i": {
+            "shape": [
+              500,
+              4
+            ],
+            "dtype": "int64"
+          },
+          "served_count": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "eligible_count": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "eligible_unserved_count": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "ineligible_count": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "occupancy_rate": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "full_uav_rate": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "overflow_uavs": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "visibility_truncated": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "visibility_denominator": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "quality_sum": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "quality_mean": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "identity_applicable": {
+            "shape": [
+              500
+            ],
+            "dtype": "bool"
+          },
+          "identity_holds": {
+            "shape": [
+              500
+            ],
+            "dtype": "bool"
+          },
+          "identity_reasons": {
+            "shape": [
+              500
+            ],
+            "dtype": "<U2"
+          },
+          "maximum_eligible_uavs": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          }
+        }
+      }
+    },
+    {
+      "world_id": 10,
+      "runtime_seed": 1446619264,
+      "status": "complete",
+      "steps": 500,
+      "episode_complete": true,
+      "native_terminal_observed": true,
+      "J": 0.5742171440981758,
+      "scalar_return": 71.77714301227198,
+      "component_means": {
+        "coverage_reward": 0.7593199999999999,
+        "quality_reward": 0.19247776461254837,
+        "energy_penalty": 0.015050185285588736,
+        "total_reward": 0.5742171440981758
+      },
+      "mean_e_i": [
+        8.138,
+        6.466,
+        11.498,
+        12.73
+      ],
+      "mean_served": 37.966,
+      "mean_eligible": 38.832,
+      "mean_eligible_unserved": 0.866,
+      "mean_ineligible": 11.168,
+      "mean_occupancy_rate": 0.47457499999999997,
+      "full_uav_step_rate": 0.1055,
+      "overflow_uav_steps": 150,
+      "overflow_uav_step_denominator": 2000,
+      "missed_eligible_users": 433,
+      "missed_eligible_user_denominator": 19416,
+      "visibility_truncated_entries": 433,
+      "visibility_eligible_entry_denominator": 19416,
+      "quality_normalized_sum_mean": 7.314525405219199,
+      "quality_normalized_mean": 0.19247776461254837,
+      "capacity_identity_applicable_all": true,
+      "capacity_identity_holds_all_applicable": true,
+      "capacity_identity_interpretation_quarantined": false,
+      "capacity_identity_reasons": [
+        "[]"
+      ],
+      "maximum_eligible_uavs_per_user": 1,
+      "trace": {
+        "path": "trace_set_n4_c20_w10.npz",
+        "sha256": "2128bf0089a7361b791f25a34191d9df1c857447861161a3a06a8f71215939a2",
+        "bytes": 1167174,
+        "arrays": {
+          "observations": {
+            "shape": [
+              501,
+              4,
+              104
+            ],
+            "dtype": "float32"
+          },
+          "encoded_states": {
+            "shape": [
+              501,
+              133
+            ],
+            "dtype": "float32"
+          },
+          "native_positions": {
+            "shape": [
+              501,
+              4,
+              3
+            ],
+            "dtype": "float64"
+          },
+          "native_user_positions": {
+            "shape": [
+              501,
+              50,
+              2
+            ],
+            "dtype": "float64"
+          },
+          "sinr": {
+            "shape": [
+              501,
+              4,
+              50
+            ],
+            "dtype": "float64"
+          },
+          "connections": {
+            "shape": [
+              501,
+              4,
+              50
+            ],
+            "dtype": "bool"
+          },
+          "runtime_before_action": {
+            "shape": [
+              501
+            ],
+            "dtype": "<U64"
+          },
+          "runtime_after_action": {
+            "shape": [
+              500
+            ],
+            "dtype": "<U64"
+          },
+          "raw_actions": {
+            "shape": [
+              500,
+              4,
+              3
+            ],
+            "dtype": "float32"
+          },
+          "executed_actions": {
+            "shape": [
+              500,
+              4,
+              3
+            ],
+            "dtype": "float32"
+          },
+          "action_logprobs": {
+            "shape": [
+              500,
+              4
+            ],
+            "dtype": "float32"
+          },
+          "scalar_reward": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "component_coverage_reward": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "component_quality_reward": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "component_energy_penalty": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "component_total_reward": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "e_i": {
+            "shape": [
+              500,
+              4
+            ],
+            "dtype": "int64"
+          },
+          "served_count": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "eligible_count": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "eligible_unserved_count": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "ineligible_count": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "occupancy_rate": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "full_uav_rate": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "overflow_uavs": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "visibility_truncated": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "visibility_denominator": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "quality_sum": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "quality_mean": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "identity_applicable": {
+            "shape": [
+              500
+            ],
+            "dtype": "bool"
+          },
+          "identity_holds": {
+            "shape": [
+              500
+            ],
+            "dtype": "bool"
+          },
+          "identity_reasons": {
+            "shape": [
+              500
+            ],
+            "dtype": "<U2"
+          },
+          "maximum_eligible_uavs": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          }
+        }
+      }
+    },
+    {
+      "world_id": 11,
+      "runtime_seed": 1890306486,
+      "status": "complete",
+      "steps": 500,
+      "episode_complete": true,
+      "native_terminal_observed": true,
+      "J": 0.5756118186383197,
+      "scalar_return": 71.95147732978995,
+      "component_means": {
+        "coverage_reward": 0.80248,
+        "quality_reward": 0.1908413969006208,
+        "energy_penalty": 0.043376600431866565,
+        "total_reward": 0.5756118186383197
+      },
+      "mean_e_i": [
+        9.682,
+        10.646,
+        10.744,
+        9.052
+      ],
+      "mean_served": 40.124,
+      "mean_eligible": 40.124,
+      "mean_eligible_unserved": 0.0,
+      "mean_ineligible": 9.876,
+      "mean_occupancy_rate": 0.50155,
+      "full_uav_step_rate": 0.0,
+      "overflow_uav_steps": 0,
+      "overflow_uav_step_denominator": 2000,
+      "missed_eligible_users": 0,
+      "missed_eligible_user_denominator": 20062,
+      "visibility_truncated_entries": 0,
+      "visibility_eligible_entry_denominator": 20062,
+      "quality_normalized_sum_mean": 7.672765302920661,
+      "quality_normalized_mean": 0.1908413969006208,
+      "capacity_identity_applicable_all": true,
+      "capacity_identity_holds_all_applicable": true,
+      "capacity_identity_interpretation_quarantined": false,
+      "capacity_identity_reasons": [
+        "[]"
+      ],
+      "maximum_eligible_uavs_per_user": 1,
+      "trace": {
+        "path": "trace_set_n4_c20_w11.npz",
+        "sha256": "a41d4a1dd4f41f18533baf94d927ce22a9e82838bb9ca6259c2871395b9ec61d",
+        "bytes": 1183768,
+        "arrays": {
+          "observations": {
+            "shape": [
+              501,
+              4,
+              104
+            ],
+            "dtype": "float32"
+          },
+          "encoded_states": {
+            "shape": [
+              501,
+              133
+            ],
+            "dtype": "float32"
+          },
+          "native_positions": {
+            "shape": [
+              501,
+              4,
+              3
+            ],
+            "dtype": "float64"
+          },
+          "native_user_positions": {
+            "shape": [
+              501,
+              50,
+              2
+            ],
+            "dtype": "float64"
+          },
+          "sinr": {
+            "shape": [
+              501,
+              4,
+              50
+            ],
+            "dtype": "float64"
+          },
+          "connections": {
+            "shape": [
+              501,
+              4,
+              50
+            ],
+            "dtype": "bool"
+          },
+          "runtime_before_action": {
+            "shape": [
+              501
+            ],
+            "dtype": "<U64"
+          },
+          "runtime_after_action": {
+            "shape": [
+              500
+            ],
+            "dtype": "<U64"
+          },
+          "raw_actions": {
+            "shape": [
+              500,
+              4,
+              3
+            ],
+            "dtype": "float32"
+          },
+          "executed_actions": {
+            "shape": [
+              500,
+              4,
+              3
+            ],
+            "dtype": "float32"
+          },
+          "action_logprobs": {
+            "shape": [
+              500,
+              4
+            ],
+            "dtype": "float32"
+          },
+          "scalar_reward": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "component_coverage_reward": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "component_quality_reward": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "component_energy_penalty": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "component_total_reward": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "e_i": {
+            "shape": [
+              500,
+              4
+            ],
+            "dtype": "int64"
+          },
+          "served_count": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "eligible_count": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "eligible_unserved_count": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "ineligible_count": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "occupancy_rate": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "full_uav_rate": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "overflow_uavs": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "visibility_truncated": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "visibility_denominator": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "quality_sum": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "quality_mean": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "identity_applicable": {
+            "shape": [
+              500
+            ],
+            "dtype": "bool"
+          },
+          "identity_holds": {
+            "shape": [
+              500
+            ],
+            "dtype": "bool"
+          },
+          "identity_reasons": {
+            "shape": [
+              500
+            ],
+            "dtype": "<U2"
+          },
+          "maximum_eligible_uavs": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          }
+        }
+      }
+    },
+    {
+      "world_id": 12,
+      "runtime_seed": 1330306728,
+      "status": "complete",
+      "steps": 500,
+      "episode_complete": true,
+      "native_terminal_observed": true,
+      "J": 0.5733975589368819,
+      "scalar_return": 71.67469486711025,
+      "component_means": {
+        "coverage_reward": 0.7871200000000002,
+        "quality_reward": 0.19338885260389133,
+        "energy_penalty": 0.03560309684428534,
+        "total_reward": 0.5733975589368819
+      },
+      "mean_e_i": [
+        12.322,
+        7.54,
+        6.8,
+        12.694
+      ],
+      "mean_served": 39.356,
+      "mean_eligible": 39.356,
+      "mean_eligible_unserved": 0.0,
+      "mean_ineligible": 10.644,
+      "mean_occupancy_rate": 0.49194999999999994,
+      "full_uav_step_rate": 0.001,
+      "overflow_uav_steps": 0,
+      "overflow_uav_step_denominator": 2000,
+      "missed_eligible_users": 0,
+      "missed_eligible_user_denominator": 19678,
+      "visibility_truncated_entries": 0,
+      "visibility_eligible_entry_denominator": 19678,
+      "quality_normalized_sum_mean": 7.619571009212998,
+      "quality_normalized_mean": 0.19338885260389133,
+      "capacity_identity_applicable_all": true,
+      "capacity_identity_holds_all_applicable": true,
+      "capacity_identity_interpretation_quarantined": false,
+      "capacity_identity_reasons": [
+        "[]"
+      ],
+      "maximum_eligible_uavs_per_user": 1,
+      "trace": {
+        "path": "trace_set_n4_c20_w12.npz",
+        "sha256": "e920c6c46b89481dbf5f614c8e13eebc0e0468c6c9f22f480037356c77447957",
+        "bytes": 1186401,
+        "arrays": {
+          "observations": {
+            "shape": [
+              501,
+              4,
+              104
+            ],
+            "dtype": "float32"
+          },
+          "encoded_states": {
+            "shape": [
+              501,
+              133
+            ],
+            "dtype": "float32"
+          },
+          "native_positions": {
+            "shape": [
+              501,
+              4,
+              3
+            ],
+            "dtype": "float64"
+          },
+          "native_user_positions": {
+            "shape": [
+              501,
+              50,
+              2
+            ],
+            "dtype": "float64"
+          },
+          "sinr": {
+            "shape": [
+              501,
+              4,
+              50
+            ],
+            "dtype": "float64"
+          },
+          "connections": {
+            "shape": [
+              501,
+              4,
+              50
+            ],
+            "dtype": "bool"
+          },
+          "runtime_before_action": {
+            "shape": [
+              501
+            ],
+            "dtype": "<U64"
+          },
+          "runtime_after_action": {
+            "shape": [
+              500
+            ],
+            "dtype": "<U64"
+          },
+          "raw_actions": {
+            "shape": [
+              500,
+              4,
+              3
+            ],
+            "dtype": "float32"
+          },
+          "executed_actions": {
+            "shape": [
+              500,
+              4,
+              3
+            ],
+            "dtype": "float32"
+          },
+          "action_logprobs": {
+            "shape": [
+              500,
+              4
+            ],
+            "dtype": "float32"
+          },
+          "scalar_reward": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "component_coverage_reward": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "component_quality_reward": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "component_energy_penalty": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "component_total_reward": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "e_i": {
+            "shape": [
+              500,
+              4
+            ],
+            "dtype": "int64"
+          },
+          "served_count": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "eligible_count": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "eligible_unserved_count": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "ineligible_count": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "occupancy_rate": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "full_uav_rate": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "overflow_uavs": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "visibility_truncated": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "visibility_denominator": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "quality_sum": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "quality_mean": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "identity_applicable": {
+            "shape": [
+              500
+            ],
+            "dtype": "bool"
+          },
+          "identity_holds": {
+            "shape": [
+              500
+            ],
+            "dtype": "bool"
+          },
+          "identity_reasons": {
+            "shape": [
+              500
+            ],
+            "dtype": "<U2"
+          },
+          "maximum_eligible_uavs": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          }
+        }
+      }
+    },
+    {
+      "world_id": 13,
+      "runtime_seed": 1989999791,
+      "status": "complete",
+      "steps": 500,
+      "episode_complete": true,
+      "native_terminal_observed": true,
+      "J": 0.5889173177651049,
+      "scalar_return": 73.61466472063812,
+      "component_means": {
+        "coverage_reward": 0.77944,
+        "quality_reward": 0.1952406112028728,
+        "energy_penalty": 0.015262865595756831,
+        "total_reward": 0.5889173177651049
+      },
+      "mean_e_i": [
+        9.208,
+        6.9,
+        13.894,
+        8.996
+      ],
+      "mean_served": 38.972,
+      "mean_eligible": 38.998,
+      "mean_eligible_unserved": 0.026,
+      "mean_ineligible": 11.002,
+      "mean_occupancy_rate": 0.48714999999999997,
+      "full_uav_step_rate": 0.0105,
+      "overflow_uav_steps": 13,
+      "overflow_uav_step_denominator": 2000,
+      "missed_eligible_users": 13,
+      "missed_eligible_user_denominator": 19499,
+      "visibility_truncated_entries": 13,
+      "visibility_eligible_entry_denominator": 19499,
+      "quality_normalized_sum_mean": 7.642582019844969,
+      "quality_normalized_mean": 0.1952406112028728,
+      "capacity_identity_applicable_all": true,
+      "capacity_identity_holds_all_applicable": true,
+      "capacity_identity_interpretation_quarantined": false,
+      "capacity_identity_reasons": [
+        "[]"
+      ],
+      "maximum_eligible_uavs_per_user": 1,
+      "trace": {
+        "path": "trace_set_n4_c20_w13.npz",
+        "sha256": "aa9eeead633c44bf4c94b5dc4c797ef3cfca5e3af471b146fb58b295fddf9c14",
+        "bytes": 1180012,
+        "arrays": {
+          "observations": {
+            "shape": [
+              501,
+              4,
+              104
+            ],
+            "dtype": "float32"
+          },
+          "encoded_states": {
+            "shape": [
+              501,
+              133
+            ],
+            "dtype": "float32"
+          },
+          "native_positions": {
+            "shape": [
+              501,
+              4,
+              3
+            ],
+            "dtype": "float64"
+          },
+          "native_user_positions": {
+            "shape": [
+              501,
+              50,
+              2
+            ],
+            "dtype": "float64"
+          },
+          "sinr": {
+            "shape": [
+              501,
+              4,
+              50
+            ],
+            "dtype": "float64"
+          },
+          "connections": {
+            "shape": [
+              501,
+              4,
+              50
+            ],
+            "dtype": "bool"
+          },
+          "runtime_before_action": {
+            "shape": [
+              501
+            ],
+            "dtype": "<U64"
+          },
+          "runtime_after_action": {
+            "shape": [
+              500
+            ],
+            "dtype": "<U64"
+          },
+          "raw_actions": {
+            "shape": [
+              500,
+              4,
+              3
+            ],
+            "dtype": "float32"
+          },
+          "executed_actions": {
+            "shape": [
+              500,
+              4,
+              3
+            ],
+            "dtype": "float32"
+          },
+          "action_logprobs": {
+            "shape": [
+              500,
+              4
+            ],
+            "dtype": "float32"
+          },
+          "scalar_reward": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "component_coverage_reward": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "component_quality_reward": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "component_energy_penalty": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "component_total_reward": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "e_i": {
+            "shape": [
+              500,
+              4
+            ],
+            "dtype": "int64"
+          },
+          "served_count": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "eligible_count": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "eligible_unserved_count": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "ineligible_count": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "occupancy_rate": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "full_uav_rate": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "overflow_uavs": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "visibility_truncated": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "visibility_denominator": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "quality_sum": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "quality_mean": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "identity_applicable": {
+            "shape": [
+              500
+            ],
+            "dtype": "bool"
+          },
+          "identity_holds": {
+            "shape": [
+              500
+            ],
+            "dtype": "bool"
+          },
+          "identity_reasons": {
+            "shape": [
+              500
+            ],
+            "dtype": "<U2"
+          },
+          "maximum_eligible_uavs": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          }
+        }
+      }
+    },
+    {
+      "world_id": 14,
+      "runtime_seed": 4022219575,
+      "status": "complete",
+      "steps": 500,
+      "episode_complete": true,
+      "native_terminal_observed": true,
+      "J": 0.5557476176059531,
+      "scalar_return": 69.46845220074414,
+      "component_means": {
+        "coverage_reward": 0.7547999999999999,
+        "quality_reward": 0.1786639745360864,
+        "energy_penalty": 0.02621157475487277,
+        "total_reward": 0.5557476176059531
+      },
+      "mean_e_i": [
+        8.89,
+        7.91,
+        11.176,
+        9.764
+      ],
+      "mean_served": 37.74,
+      "mean_eligible": 37.74,
+      "mean_eligible_unserved": 0.0,
+      "mean_ineligible": 12.26,
+      "mean_occupancy_rate": 0.47175,
+      "full_uav_step_rate": 0.001,
+      "overflow_uav_steps": 0,
+      "overflow_uav_step_denominator": 2000,
+      "missed_eligible_users": 0,
+      "missed_eligible_user_denominator": 18870,
+      "visibility_truncated_entries": 0,
+      "visibility_eligible_entry_denominator": 18870,
+      "quality_normalized_sum_mean": 6.755409717922818,
+      "quality_normalized_mean": 0.1786639745360864,
+      "capacity_identity_applicable_all": true,
+      "capacity_identity_holds_all_applicable": true,
+      "capacity_identity_interpretation_quarantined": false,
+      "capacity_identity_reasons": [
+        "[]"
+      ],
+      "maximum_eligible_uavs_per_user": 1,
+      "trace": {
+        "path": "trace_set_n4_c20_w14.npz",
+        "sha256": "c699b9bf384f324bb6f032d7be902f9b6a8f4fdbcc89e601dbb79d742fffb0ff",
+        "bytes": 1173627,
+        "arrays": {
+          "observations": {
+            "shape": [
+              501,
+              4,
+              104
+            ],
+            "dtype": "float32"
+          },
+          "encoded_states": {
+            "shape": [
+              501,
+              133
+            ],
+            "dtype": "float32"
+          },
+          "native_positions": {
+            "shape": [
+              501,
+              4,
+              3
+            ],
+            "dtype": "float64"
+          },
+          "native_user_positions": {
+            "shape": [
+              501,
+              50,
+              2
+            ],
+            "dtype": "float64"
+          },
+          "sinr": {
+            "shape": [
+              501,
+              4,
+              50
+            ],
+            "dtype": "float64"
+          },
+          "connections": {
+            "shape": [
+              501,
+              4,
+              50
+            ],
+            "dtype": "bool"
+          },
+          "runtime_before_action": {
+            "shape": [
+              501
+            ],
+            "dtype": "<U64"
+          },
+          "runtime_after_action": {
+            "shape": [
+              500
+            ],
+            "dtype": "<U64"
+          },
+          "raw_actions": {
+            "shape": [
+              500,
+              4,
+              3
+            ],
+            "dtype": "float32"
+          },
+          "executed_actions": {
+            "shape": [
+              500,
+              4,
+              3
+            ],
+            "dtype": "float32"
+          },
+          "action_logprobs": {
+            "shape": [
+              500,
+              4
+            ],
+            "dtype": "float32"
+          },
+          "scalar_reward": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "component_coverage_reward": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "component_quality_reward": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "component_energy_penalty": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "component_total_reward": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "e_i": {
+            "shape": [
+              500,
+              4
+            ],
+            "dtype": "int64"
+          },
+          "served_count": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "eligible_count": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "eligible_unserved_count": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "ineligible_count": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "occupancy_rate": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "full_uav_rate": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "overflow_uavs": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "visibility_truncated": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "visibility_denominator": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "quality_sum": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "quality_mean": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "identity_applicable": {
+            "shape": [
+              500
+            ],
+            "dtype": "bool"
+          },
+          "identity_holds": {
+            "shape": [
+              500
+            ],
+            "dtype": "bool"
+          },
+          "identity_reasons": {
+            "shape": [
+              500
+            ],
+            "dtype": "<U2"
+          },
+          "maximum_eligible_uavs": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          }
+        }
+      }
+    },
+    {
+      "world_id": 15,
+      "runtime_seed": 2894812168,
+      "status": "complete",
+      "steps": 500,
+      "episode_complete": true,
+      "native_terminal_observed": true,
+      "J": 0.5906257735068289,
+      "scalar_return": 73.82822168835361,
+      "component_means": {
+        "coverage_reward": 0.8186400000000001,
+        "quality_reward": 0.19415215931350394,
+        "energy_penalty": 0.04066787428722231,
+        "total_reward": 0.5906257735068289
+      },
+      "mean_e_i": [
+        9.54,
+        6.284,
+        10.516,
+        14.592
+      ],
+      "mean_served": 40.932,
+      "mean_eligible": 40.932,
+      "mean_eligible_unserved": 0.0,
+      "mean_ineligible": 9.068,
+      "mean_occupancy_rate": 0.5116499999999999,
+      "full_uav_step_rate": 0.0,
+      "overflow_uav_steps": 0,
+      "overflow_uav_step_denominator": 2000,
+      "missed_eligible_users": 0,
+      "missed_eligible_user_denominator": 20466,
+      "visibility_truncated_entries": 0,
+      "visibility_eligible_entry_denominator": 20466,
+      "quality_normalized_sum_mean": 7.964842438303876,
+      "quality_normalized_mean": 0.19415215931350394,
+      "capacity_identity_applicable_all": true,
+      "capacity_identity_holds_all_applicable": true,
+      "capacity_identity_interpretation_quarantined": false,
+      "capacity_identity_reasons": [
+        "[]"
+      ],
+      "maximum_eligible_uavs_per_user": 1,
+      "trace": {
+        "path": "trace_set_n4_c20_w15.npz",
+        "sha256": "b61ca75fc47be78a78a917932687efdfe84549d2a73f1563ac18e4afd89df303",
+        "bytes": 1196369,
+        "arrays": {
+          "observations": {
+            "shape": [
+              501,
+              4,
+              104
+            ],
+            "dtype": "float32"
+          },
+          "encoded_states": {
+            "shape": [
+              501,
+              133
+            ],
+            "dtype": "float32"
+          },
+          "native_positions": {
+            "shape": [
+              501,
+              4,
+              3
+            ],
+            "dtype": "float64"
+          },
+          "native_user_positions": {
+            "shape": [
+              501,
+              50,
+              2
+            ],
+            "dtype": "float64"
+          },
+          "sinr": {
+            "shape": [
+              501,
+              4,
+              50
+            ],
+            "dtype": "float64"
+          },
+          "connections": {
+            "shape": [
+              501,
+              4,
+              50
+            ],
+            "dtype": "bool"
+          },
+          "runtime_before_action": {
+            "shape": [
+              501
+            ],
+            "dtype": "<U64"
+          },
+          "runtime_after_action": {
+            "shape": [
+              500
+            ],
+            "dtype": "<U64"
+          },
+          "raw_actions": {
+            "shape": [
+              500,
+              4,
+              3
+            ],
+            "dtype": "float32"
+          },
+          "executed_actions": {
+            "shape": [
+              500,
+              4,
+              3
+            ],
+            "dtype": "float32"
+          },
+          "action_logprobs": {
+            "shape": [
+              500,
+              4
+            ],
+            "dtype": "float32"
+          },
+          "scalar_reward": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "component_coverage_reward": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "component_quality_reward": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "component_energy_penalty": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "component_total_reward": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "e_i": {
+            "shape": [
+              500,
+              4
+            ],
+            "dtype": "int64"
+          },
+          "served_count": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "eligible_count": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "eligible_unserved_count": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "ineligible_count": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "occupancy_rate": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "full_uav_rate": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "overflow_uavs": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "visibility_truncated": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "visibility_denominator": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          },
+          "quality_sum": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "quality_mean": {
+            "shape": [
+              500
+            ],
+            "dtype": "float64"
+          },
+          "identity_applicable": {
+            "shape": [
+              500
+            ],
+            "dtype": "bool"
+          },
+          "identity_holds": {
+            "shape": [
+              500
+            ],
+            "dtype": "bool"
+          },
+          "identity_reasons": {
+            "shape": [
+              500
+            ],
+            "dtype": "<U2"
+          },
+          "maximum_eligible_uavs": {
+            "shape": [
+              500
+            ],
+            "dtype": "int64"
+          }
+        }
+      }
+    }
+  ],
+  "J": [
+    0.5053482909616983,
+    0.5559778551235909,
+    0.5120744153709984,
+    0.5852657685046546,
+    0.5499017989588229,
+    0.5758514651096174,
+    0.5250112444899805,
+    0.5487811232665176,
+    0.5519030175443854,
+    0.49736863192965564,
+    0.5742171440981758,
+    0.5756118186383197,
+    0.5733975589368819,
+    0.5889173177651049,
+    0.5557476176059531,
+    0.5906257735068289
+  ],
+  "component_means": {
+    "coverage_reward": [
+      0.7119200000000001,
+      0.74444,
+      0.70804,
+      0.7698799999999999,
+      0.73452,
+      0.77028,
+      0.7460399999999999,
+      0.72672,
+      0.7664000000000001,
+      0.70912,
+      0.7593199999999999,
+      0.80248,
+      0.7871200000000002,
+      0.77944,
+      0.7547999999999999,
+      0.8186400000000001
+    ],
+    "quality_reward": [
+      0.16272564194417669,
+      0.17020968560524477,
+      0.15407321413751734,
+      0.195817278570653,
+      0.17638157101163265,
+      0.2009169578918805,
+      0.17661388048315924,
+      0.20611778837164046,
+      0.19135770377932246,
+      0.16742058224120157,
+      0.19247776461254837,
+      0.1908413969006208,
+      0.19338885260389133,
+      0.1952406112028728,
+      0.1786639745360864,
+      0.19415215931350394
+    ],
+    "energy_penalty": [
+      0.04181340162155458,
+      0.016193050557982553,
+      0.029775548870256772,
+      0.012395415066541259,
+      0.01717667234466687,
+      0.023619622257946706,
+      0.05020091965496725,
+      0.02175821324497445,
+      0.041984293589411296,
+      0.04924154274270478,
+      0.015050185285588736,
+      0.043376600431866565,
+      0.03560309684428534,
+      0.015262865595756831,
+      0.02621157475487277,
+      0.04066787428722231
+    ],
+    "total_reward": [
+      0.5053482909616983,
+      0.5559778551235909,
+      0.5120744153709984,
+      0.5852657685046546,
+      0.5499017989588229,
+      0.5758514651096174,
+      0.5250112444899805,
+      0.5487811232665176,
+      0.5519030175443854,
+      0.49736863192965564,
+      0.5742171440981758,
+      0.5756118186383197,
+      0.5733975589368819,
+      0.5889173177651049,
+      0.5557476176059531,
+      0.5906257735068289
+    ]
+  },
+  "model_normalizer_digest_before": "7ca28a45f72acf31211268a84cb33ee3b1fac33f6d45aaca808ed683a3fb01fb",
+  "model_normalizer_digest_after": "7ca28a45f72acf31211268a84cb33ee3b1fac33f6d45aaca808ed683a3fb01fb",
+  "normalizers": {
+    "obs_norm": null,
+    "state_norm": null,
+    "value_norm_coordinator": {
+      "mean": {
+        "dtype": "float64",
+        "shape": [],
+        "value": 0.0
+      },
+      "var": {
+        "dtype": "float64",
+        "shape": [],
+        "value": 1.0
+      },
+      "count": {
+        "dtype": "float64",
+        "shape": [],
+        "value": 0.0001
+      }
+    },
+    "value_norm_discoverer": {
+      "mean": {
+        "dtype": "float64",
+        "shape": [],
+        "value": 4.758561804339192
+      },
+      "var": {
+        "dtype": "float64",
+        "shape": [],
+        "value": 3.858127340841716
+      },
+      "count": {
+        "dtype": "float64",
+        "shape": [],
+        "value": 2160000.0001
+      }
+    }
+  },
+  "optimizer_calls": {
+    "coordinator": 0,
+    "discoverer_actor": 0,
+    "discoverer_critic": 0,
+    "team_discriminator": 0,
+    "individual_discriminator": 0
+  },
+  "training_team_steps": 0,
+  "updates": 0,
+  "checkpoint_sha256_before": "03f4f070e30b34fb61cd45820f1579ebde185c9417468689bd0c2e7ef60c0a3b",
+  "checkpoint_sha256_after": "03f4f070e30b34fb61cd45820f1579ebde185c9417468689bd0c2e7ef60c0a3b",
+  "diagnostics_consumed_no_global_rng": true,
+  "policy_outputs_unchanged_by_mapping": true,
+  "action_logprobs_unchanged_by_mapping": true,
+  "config": {
+    "count_arm": "SET",
+    "algorithm": "mappo",
+    "n_agents": 4,
+    "n_uavs": 4,
+    "n_users": 50,
+    "num_envs": 16,
+    "rollout_length": 500,
+    "episode_length": 500,
+    "k": 10,
+    "n_Z": 1,
+    "n_z": 1,
+    "state_dim": 133,
+    "obs_dim": 104,
+    "action_dim": 3,
+    "action_space_type": "continuous",
+    "gamma": 0.99,
+    "gae_lambda": 0.95,
+    "ppo_epochs": 15,
+    "num_mini_batch": 4,
+    "sequence_batch_size": 32,
+    "coordinator_batch_size": 1280,
+    "high_level_batch_size": 128,
+    "high_level_buffer_size": 800,
+    "batch_size": 8000,
+    "discriminator_batch_size": 8000,
+    "lambda_e": 1.0,
+    "lambda_D": 0.0,
+    "lambda_d": 0.0,
+    "lambda_h": 0.0,
+    "lambda_l": 0.05,
+    "lambda_cd": 0.0,
+    "lambda_mi": 0.0,
+    "lr_coordinator": 0.0001,
+    "lr_discoverer_actor": 0.0001,
+    "lr_discoverer_critic": 0.0001,
+    "lr_discriminator": 0.0001,
+    "weight_decay": 0.0,
+    "clip_epsilon": 0.2,
+    "value_loss_coef": 1.0,
+    "max_grad_norm": 0.5,
+    "hidden_size": 256,
+    "embedding_dim": 256,
+    "n_heads": 8,
+    "n_encoder_layers": 2,
+    "n_decoder_layers": 2,
+    "gru_hidden_size": 256,
+    "use_valuenorm": true,
+    "use_obsnorm": false,
+    "use_statenorm": false,
+    "use_lr_decay": false,
+    "total_timesteps": 360000,
+    "seed": 943201,
+    "policy_interruption_mode": "off",
+    "use_central_snapshot_in_flat_actor": true,
+    "disable_high_level_training": true,
+    "disable_discriminator_training": true,
+    "disable_discriminator_rewards": true,
+    "collects_high_level_samples": false,
+    "use_process_exploration": false,
+    "use_horizon_window": false,
+    "use_opt_compact": false
+  },
+  "active_inference_rows": 1
+}

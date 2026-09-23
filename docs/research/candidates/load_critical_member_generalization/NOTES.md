@@ -730,3 +730,231 @@ requires a separate documented repair and independent review before use. Stage/p
 inputs, then use the original five-cell entry with native admission on wsl_4070 and arm the
 current session's deterministic observer. Do not duplicate training or consume another DM's
 operation. No result exists at this entry.
+
+
+### 2026-09-23 — Exact production inputs restored and verified
+
+The seven accepted evaluator/entry/test files were restored byte-identically from
+`7524026cebe8d9af7461f670db3edb3098e979c2`; the seven inference dependencies were restored
+byte-identically from producer SHA `89486d32ea569728f39d6e21b53f8a7c8854e74c`.
+No scientific executable byte was changed. The two full final summaries are copied exactly
+from published count-direction commit `e9a106f6841a765d474afb6dc41e5dd508ddcae0` and verified against
+the identical completed summaries already published in current main. Their SHA-256 values are
+H6 `55a994c81f49a9b97b52efa4ddaea82579e1068ea3a7ddbd11c8b7645bf88921` and
+SET `2621fc884d2d6a9ea909ee4f483b4df1c2d9d6f8767826ef730b952a360422e3`.
+
+Read-only inspection on configured host `LAPTOP-U9TDKC8A` independently verified both
+complete summary hashes and the previously declared checkpoint45 sizes/digests at
+`/home/wu/hmasd-worktrees/agent-count-action-law-20260922-b03/runs/agent_count_generalization/`.
+This closes the old binary-availability dependency without creating a new producer.
+The original asset files remain unchanged. Preserve the accepted 23-check engineering
+coverage and its full-size/full-horizon limits; production payload/config verification will run inside
+the admitted evaluator, before any fixed-panel environment or policy effects. No source, summary,
+checkpoint, cell or exposure substitution is selected.
+
+
+### 2026-09-23 — Original B01 admitted; current-session observation adopted
+
+The original five-cell contract is now accepted. The exact restored source is published
+as `c770220d3abc4e32a9e80347dea87bdea88080e8`; source remains fixed on the configured
+executing node. [Native manifest](../../../../runs/load_critical_member_generalization/s1_load_critical_member_b01_20260923/launch-manifest.json) and
+[actual-node admission](../../../../runs/load_critical_member_generalization/s1_load_critical_member_b01_20260923/admission-preflight.json) retain the
+operation identity, interpreter, source, native process identities and invocation.
+No new fit, supplementary panel, source-policy substitution or relaunch was introduced.
+
+Both original completed-summary/binary/payload/config bindings passed inside the admitted
+evaluator before policy/environment effects. The collected [progress summary](../../../../runs/load_critical_member_generalization/s1_load_critical_member_b01_20260923/summary.json)
+is an in-flight snapshot: 16,000 evaluation team steps,
+32 episodes and 2 of 10 policy-by-cell evaluations complete,
+0 fits/train steps/updates/optimizer calls, no reported failure. The fixed target remains
+80,000 steps and 160 episodes. This snapshot is not a complete five-cell result or a new
+scientific conclusion. Full trajectories, capacity-invariance checks and all adverse worlds
+will be collected and read at the original endpoint.
+
+The current task's deterministic observer has adopted this same accepted operation: first
+read reports consistent native records and both runner/supervisor running, generation 1,
+30-second read-only probes and a 1,500-second observation window. It wakes only this assigning
+session on terminal/error/checkpoint. A checkpoint means read/rearm, not new execution.
+The independent complementary-skill DM has its own task and operation; this direction
+requires no cross-task reporting loop or further owner approval.
+
+
+## 2026-09-23 — B01 complete: useful package levels, mixed capacity response, route closure
+
+### Scientific acceptance and recoverable evidence
+
+Read the terminal native observation and [OS exit witness](../../../../runs/load_critical_member_generalization/s1_load_critical_member_b01_20260923/process-exit.json),
+then collected and SHA-256 checked **all 181 files, 246,723,301 bytes** against the
+original node. The [complete summary](../../../../runs/load_critical_member_generalization/s1_load_critical_member_b01_20260923/summary.json) has SHA-256
+`f727a4ee005c1893e0041ea8dd8f2f1160d98a47f2014d396b75b8a0e5cb7bf8`.
+Source remains `c770220d3abc4e32a9e80347dea87bdea88080e8`; producer/checkpoint identities
+are exactly those bound before admission. Every planned cell, world and 500-step episode
+completed: **0 fits, 80,000 evaluation team steps, 160 episodes, 0 training steps/updates/
+optimizer calls**. Exit zero alone was not acceptance.
+
+Read and independently checked all 160 saved NPZ traces, their recorded sizes/hashes, array
+shapes/dtypes/finiteness, exact declared user streams and UAV prefixes, action clipping,
+full-SINR eligibility, actual connections, `S=Σ min(e_i,c)=E−T`, quality composition,
+scalar-to-native reward scaling and summary reductions. All 80,000 transitions passed;
+no eligibility-identity quarantine occurred. All 64 same-policy/same-N paired worlds
+were exactly equal in actions/log-probabilities, observations, encoded state, positions,
+SINR and recurrent/skill-clock fingerprints across capacity, including refresh boundaries.
+Height penalties were exactly equal. Model/normalizer and input checkpoint digests remained
+unchanged in every cell. This is frozen-policy evidence, not new learning or online adaptation.
+
+The 19 runner JSON files and two logs are published with this notebook. All 160 compressed
+traces remain recoverable with the per-world path, byte count and SHA-256 in the summary, at
+`hmasd-wsl-node:/home/wu/hmasd-worktrees/load-capacity-b01-20260923/runs/load_critical_member_generalization/s1_load_critical_member_b01_20260923/`
+and the independently verified local copy
+`/home/fires/.codex/worktrees/load-capacity-sept23/hmasd-wsl/runs/load_critical_member_generalization/s1_load_critical_member_b01_20260923/`.
+NPZ bytes are retained outside Git; neither copy nor its source/output worktree is reclaimed.
+The terminal wake was consumed with its exact generation/wake/event IDs; observation is now
+generation 2 with no remaining running job. No worker was restarted and no question resent.
+
+### Absolute service and package comparison
+
+J is native mean team reward, `N × scalar_return / 500`. Every mean below uses the same
+16 declared paired worlds. The independent learning unit remains one original trained
+instance per arm; there is no training-population confidence or mechanism attribution.
+
+| N | c | K | H6 J | SET J | H6−SET J | Worst world gap | Negative J worlds | Extra H6 served users/step |
+| ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 4 | 10 | 40 | 0.539891827 | 0.481791206 | +0.058100620 | -0.027369480 | 1/16 | +2.916125 |
+| 4 | 20 | 80 | 0.591848927 | 0.554125053 | +0.037723875 | -0.029597256 | 3/16 | +1.367125 |
+| 8 | 5 | 40 | 0.362293715 | 0.214267842 | +0.148025873 | +0.013004914 | 0/16 | +8.281125 |
+| 8 | 10 | 80 | 0.441925250 | 0.270417880 | +0.171507370 | +0.040798893 | 0/16 | +9.978875 |
+| 6 | 10 | 60 | 0.532320598 | 0.430265127 | +0.102055471 | +0.013401407 | 0/16 | +5.628625 |
+
+H6's mean J and coverage advantage survives all five declared conditions, while absolute
+service remains condition-dependent. Preserve the four adverse J comparisons: N4/c10 world 1
+(−.027369480); N4/c20 worlds 1, 3 and 13 (−.020677854, −.004430281, −.029597256).
+Coverage alone is adverse in N4/c10 world 1; N4/c20 worlds 1, 3, 4, 13, 15; and N8/c5
+world 7 (−.584 served users/step despite J +.013004914). A positive mean or J level does
+not erase these different component outcomes. At common c10, both packages' absolute mean
+J falls as N rises even though H6's relative gap grows.
+
+### Capacity response: the two-N conjecture did not hold
+
+| Arm | Same-N change | Extra served users/step | ΔJ | Δquality | Δheight | Negative ΔJ worlds |
+| --- | --- | ---: | ---: | ---: | ---: | ---: |
+| H6 | N4, c10→20 | 4.112250 | +0.051957101 | -0.018714664 | 0 | 0/16 |
+| H6 | N8, c5→10 | 6.248375 | +0.079631535 | -0.026152382 | 0 | 0/16 |
+| SET | N4, c10→20 | 5.661250 | +0.072333846 | -0.023078846 | 0 | 0/16 |
+| SET | N8, c5→10 | 4.550625 | +0.056150038 | -0.025195708 | 0 | 0/16 |
+
+All 64 arm×world absolute capacity changes improve J and service count; each of the four
+mean quality changes is negative. Capacity therefore has an actual favorable native effect
+on these paths despite a quality-composition cost. It is not irrelevant.
+
+The prewritten conjecture required H6 to recover more users **and** more J at both N.
+At N4 it fails already at the intermediate quantity: H6 gains 1.549 fewer users/step than
+SET. D4 is **−.020376745**, negative in 13/16 worlds (positive worlds 1, 6, 11), with
+range [−.066633344, +.008873451]. Its weighted decomposition is
+`−.021686000 coverage + .001309255 quality + 0 height`. Quality softens the adverse
+relative response; it does not cause a successful intermediate prediction to fail.
+At N8 H6 gains 1.69775 more users/step, and D8 is **+.023481498**, positive in all 16
+worlds, range [+.000771698, +.049642616], decomposed as
+`+.023768500 coverage − .000287002 quality + 0 height`.
+This is the prospectively covered mixed-N branch, not a uniform overload advantage,
+a universal capacity derivative or evidence that either actor senses hidden c.
+
+### Eligibility, local truncation and matched-K residuals
+
+E and T use all 50 users. Each table entry is a time/world mean count; a full UAV with
+e_i=c need not truncate anyone. Overflow rates use UAV-steps, while missed-eligible rates
+use eligible user-steps. Visible-user truncation has its own eligible-entry denominator.
+
+| Arm | N | c | E eligible | T eligible but unserved | SINR-ineligible | Overflow UAV-step rate | Missed eligible-user rate | Visible eligible-entry truncation |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| H6 | 4 | 10 | 39.171875 | 4.138375 | 10.828125 | 0.405531 | 0.105647 | 0.000667 |
+| H6 | 4 | 20 | 39.171875 | 0.026125 | 10.828125 | 0.001125 | 0.000667 | 0.000667 |
+| H6 | 8 | 5 | 29.654000 | 6.645250 | 20.346000 | 0.310578 | 0.224093 | 0.000000 |
+| H6 | 8 | 10 | 29.654000 | 0.396875 | 20.346000 | 0.022781 | 0.013384 | 0.000000 |
+| H6 | 6 | 10 | 35.710625 | 0.855250 | 14.289375 | 0.054938 | 0.023949 | 0.000000 |
+| SET | 4 | 10 | 37.858375 | 5.741000 | 12.141625 | 0.395062 | 0.151644 | 0.002107 |
+| SET | 4 | 20 | 37.858375 | 0.079750 | 12.141625 | 0.008000 | 0.002107 | 0.002107 |
+| SET | 8 | 5 | 20.001750 | 5.274125 | 29.998250 | 0.178813 | 0.263683 | 0.000075 |
+| SET | 8 | 10 | 20.001750 | 0.723500 | 29.998250 | 0.036797 | 0.036172 | 0.000075 |
+| SET | 6 | 10 | 30.673625 | 1.446875 | 19.326375 | 0.091771 | 0.047170 | 0.000000 |
+
+At N4, H6 starts with less absolute truncation and has less service to recover over
+c10→20; at N8/c5 it has more absolute truncation but a lower truncated fraction of its
+larger eligible population. The added service depends on the tails of e_i at different
+local cap intervals. This ordinary geometry/eligibility/truncation explanation survives;
+no new representation defect or skill mechanism is required to explain the sign reversal.
+At high capacity the remaining T is small compared with SINR-ineligible counts. Those
+counts bound capacity-only relief along the observed geometry, not attainable learning
+headroom, physical optimality or a limit on other policies.
+
+Let A_N=E_H6−E_SET and B_NK=T_H6−T_SET. The matched-K residual of package gaps is
+`(.7/50)ΔA − (.7/50)ΔB + .3ΔQ − ΔP`, with Δ taken from N4 to N8.
+
+| K | Eligibility contribution | Truncation contribution | Quality contribution | Height contribution | G(8,K)−G(4,K) | Negative worlds |
+| ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 40 | +.116742500 | −.041632500 | +.001940569 | +.012874683 | +.089925252 | 2/16 |
+| 80 | +.116742500 | +.003822000 | +.000344313 | +.012874683 | +.133783496 | 0/16 |
+
+K40's adverse residual worlds are 7 and 12. This is exact outcome accounting, not causal
+mediation or a pure-N effect: c, local capacity partition, geometry and interference
+change with N. Same-c10 gap differences are +.043954851 (N6−N4), +.069451899 (N8−N6)
+and +.113406750 (N8−N4); these also do not isolate abstract count invariance. N6 has no
+capacity pair, and this panel does not cover the full three-capacity mixture at each N.
+
+### Working update, Pro reuse and decision
+
+Strengthened: useful mean native service levels for this original H6 package on all five
+conditions; the actual capacity-conversion chain and same-N trajectory invariance; the
+need to retain eligibility and truncation separately. Weakened: the prewritten claim
+that H6 extracts a larger marginal capacity benefit at both N. Untouched/unresolved:
+training-population ranking, ordinary-baseline adequacy, skill causality, unseen online
+capacity adaptation, heterogeneous capabilities and key-member generalization. No failed
+intermediate prediction is rescued by a proxy improvement or by height in D_N.
+
+Checked current published main `1e5a411630a2a603fcc8659886332ea5c208e437` at this decision. Shared topic 3's B03–B08
+evidence matters: clipping alone did not selectively repair SET, entropy responses
+reversed across training instances, and both packages actually learned useful service
+despite an initial H6 advantage. These prevent attributing this fixed B03 pair's gap to
+a skill mechanism, prescribing an initialization/entropy repair, or borrowing a causal
+initialization share from another pair. No new result from another DM is assumed.
+
+Reuse the **complete, delivered prior Pro answer** (answer commit
+`04f402b8174dd1ea2e0d63f538ecfed1c099ac50`), specifically its sections 6–7: opposite
+N signs retain local threshold/geometry effects, and a finished frozen-conversion study
+may close when a further useful learning decision is not justified. Those conditions
+remain applicable; this decision changes no question, comparator, endpoint or scope.
+Bounded ResearchCritic `load_b01_interpretation_critic` independently challenged this
+reading and the investment choice, with no material dissent. Its advice supports, but
+does not replace, that already applicable Pro consultation and the DM's judgment.
+
+**Decision: complete and close the current frozen service-conversion route; archive this
+direction's present investment, preserving its positive and adverse evidence.** No further
+fit, missing-cell recount, confirmation, Pro operation or result run is selected or pending.
+The native pipeline is feasible now; the stop is scientific information value, not a
+technical block, missing asset, resource refusal or request for owner approval.
+
+The optional two balanced-c H6/SET fits would supply another package comparison without
+identifying the benefit of changing the training capacity distribution. Merely observing
+a capacity response does not identify a target mixture or a modifiable learning prediction
+worth that cost. Heterogeneous capacities would change the information/interface question
+and are not an automatic successor. If a concrete use distribution later motivates
+learning a geometric compromise, a new prospective comparison could first test an unchanged
+ordinary SET recipe under matched fixed versus mixture training, predicting both retained
+eligibility/better truncation tradeoffs and improved target-weighted J. That is unselected,
+not a queued reserve or an admission condition. This closure does not deny that such
+learning or key-member questions can have value under a different grounded comparison.
+
+### Actual cost and technical limits
+
+The runner measured **354.661234 s command wall (5.911021 min)**, including its import/load/
+init, inference, simulation, diagnostics and writes; the internal probe body was 352.870600 s.
+Scientific-process CPU user/system were 1435.264696 / 1.895802 s with four Torch threads;
+peak RUSAGE_SELF RSS was **784,072 KiB (765.695 MiB)**. Git/network preparation, collection,
+DM reading and peak scratch were not covered by that wall/RSS measurement and are not zero.
+The read-only local trace audit took 3.637053 s and added no environment steps or fits.
+
+Both recorded stderr warnings concern `std()` on singleton logits in existing debug
+statistics at `hmasd/networks.py:600,674`; source inspection shows that statistic is only
+logged. The native actions/log-probabilities and all scientific numeric arrays audited
+above were finite. The warnings remain in the published log; no source repair or rerun
+was made. This is one pair of fixed learned policies on the declared simulator worlds,
+not replicated learning, broad transfer, physical deployment evidence or a speed comparison.
