@@ -845,3 +845,27 @@ claims, native exit records, both retained output copies and the authoring check
 The canonical-main refresh printed a promisor transport error after fast-forwarding; a
 separate readback confirmed HEAD=origin/main `c13350a7ce9ddbcf0c55acacae03fa93a9e140fd`, clean
 tracked index/tree and readable current controls. This did not execute or retry a result run.
+
+## 2026-09-23 — B01 G admitted with the same initialization and first facts
+
+The second fixed arm G is natively accepted under current published owner controls and the
+same frozen source as D. Its [launch manifest](../../../../runs/complementary_skill_learning/b01_g_260923901_957a65c01/launch-manifest.json)
+and [actual-node memory preflight](../../../../runs/complementary_skill_learning/b01_g_260923901_957a65c01/admission-preflight.json)
+were copied and SHA256-verified against remote originals. Native runner/supervisor identities
+are running with consistent records and no exit witness. The outer supervisor exited0 after
+admission; G training has not completed. Preserve the accepted handle across later observations.
+
+The first completed-rollout snapshot records8,000 training/stored transitions,16 training
+episodes,one complete native update and16,000 initial evaluation transitions. Initial native
+digest and the entire32-world initial-own panel equal D exactly. First-rollout facts, raw-target
+digest and frozen mean/std also match D. Both heads took7 steps; G auxiliary trunk took7 steps,
+with nonzero base/FiLM/GRU movement and mean trunk gradient norm.0072697485. Native group
+update counts are15/2250/2250/15/60 in the same order recorded for D above. No failure is
+recorded. This verifies the intended common starting facts and active G gradient route;
+it is not an endpoint service comparison or evidence that G improves on D.
+
+Count2 admitted fits,1 complete; P remains unstarted. The existing D READY event from
+generation5 was consumed using its exact wake/event identities. A new detached launch observer
+will track this accepted G operation at30-second intervals with a25-minute checkpoint, leaving
+the source/worker unchanged. The next observation will read all new evidence and rearm the
+same operation; no duplicate launch or extra Pro question is authorized by an observation.
