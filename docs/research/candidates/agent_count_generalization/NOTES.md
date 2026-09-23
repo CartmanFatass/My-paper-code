@@ -4883,3 +4883,206 @@ child and detached supervisor both running with consistent recorded/native ident
 exit witness, error or pending event. The completed first operation remains terminal. Cost is
 **2/2 fits started,1 complete/1 running**. Full paired effect, component/N6 costs and training
 exposure comparison remain the dependency; no early endpoint or effect claim from activation.
+
+## 2026-09-23 — B05 zero-cell first checkpoint; adverse stage15 comparison retained
+
+Read generation69 CHECKPOINT `49eea53bb8fcc010140bb05e`, wake
+`ba901262-7017-42b2-9ac2-3307bdaee0d5`. Accepted native identities are still running and
+consistent, with no exit witness/stderr. Refreshed current main, including concurrent result
+publication: no change to this direction's owner pause/lead or frozen comparison. Rearmed the
+same zero-cell observation as generation70; no restart, new fit, Pro Send or other-task message.
+
+Collected byte-stable snapshot at25.335019898 command minutes:22/45 updates, rollout23
+collected,184000 training/stored steps,368 training episodes,48000 evaluation steps/96 episodes.
+Independent reading checks all22 training rows and six panels, exact49500 actor/critic calls
+each, zero skill optimizer calls, native reward identities, finite loss/scale histories, raw
+storage/old-logp, clipped execution and frozen zero-update evaluation. Training.jsonl agrees
+with all completed rows. Now directly compared both first rollout records: scalar returns,
+full motion telemetry, pre-update sigma/logsigma/analytic entropy are exactly equal, confirming
+the previously runner-reported first-collection match. The first control bytes retain their
+declared hash. Checkpoint00/15 paths/hashes remain native; full loading is deferred to terminal
+collection, not inferred from file names. Legacy zero `action_entropy` is not a measurement.
+
+Independently paired the raw same-world stage15 panels, zero minus.05:
+
+| N | zero J | E_J | delta coverage | delta quality | delta weighted penalty | positive worlds |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| 4 | .407421696269 | -.115595579940 | -.074120000000 | -.031041625389 | +.054399092324 | 1/16 |
+| 6 | .350268325090 | -.146463787052 | -.145655000000 | -.021221896378 | +.038138718139 | 0/16 |
+| 8 | .312211315657 | -.063348617584 | -.066097500000 | -.002314724497 | +.016385950234 | 4/16 |
+
+Stage15 unseen-N mean effect is **-.089472098762**; initial stage0 effects are exactly0.
+All three mean coverage/quality changes are adverse and penalties increase. These world signs
+describe this one training pair, not independent training replications. The adverse panel is
+retained, not substituted for or erased by the frozen final45 endpoint.
+
+After update22 zero-cell raw sigma is `[.9188569784164429,.9494268894195557,.9455133080482483]`,
+analytic raw entropy4.064266762; rollout22 raw saturation=.306138889 and boundary truncation
+=.151736111. Scale growth is suppressed, but this did not yield an early service benefit:
+the simpler claim that reduced raw noise guarantees improved return remains contradicted.
+This is neither a terminal replication failure nor evidence for eventual recovery. Stage15
+costs and the pending stage30/final45 comparisons remain part of the fixed reading. Continue
+the already-declared horizon with2/2 fits started,1 complete/1 running; no new investment or
+changed scientific standing is selected from this interim observation.
+
+## 2026-09-23 — B05 zero-cell second checkpoint; stage30 tradeoff and final update pending
+
+Read generation70 CHECKPOINT `50d7e65aef0f46288ba1fa68`, wake
+`973b6844-7e57-48b6-aa96-76ed20982219`; native identities remain running and consistent,
+without stderr or exit witness. Current main `46d3560c5ab7ef87345d11c1c5460fd87bfa4888`
+retains this direction's pause/lead/plan. Rearmed the same observation as generation71.
+
+Collected snapshot at52.922444996 command minutes:44/45 updates, final rollout45 collected,
+360000 training/stored steps,720 training episodes,72000 evaluation steps/144 episodes.
+Previous22 rows/six panels are unchanged. Independently checked22 new rows and three stage30
+panels, including raw storage/clipped execution, native identities, finite loss/scale values,
+row-aligned analytic entropy and frozen zero-update evaluation. Actor/critic each99000 actual
+optimizer calls, skill paths0. All44 rows agree with training.jsonl. Final update/evaluation
+is not yet part of this snapshot; checkpoint30 is recorded natively, not yet independently loaded.
+
+Independent same-world stage30 effects, zero minus.05:
+
+| N | zero J | E_J | delta coverage | delta quality | delta weighted penalty | positive worlds |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| 4 | .426431004482 | -.083535158400 | -.075065000000 | -.026177707368 | +.023136346190 | 2/16 |
+| 6 | .393704909018 | -.063093870149 | -.056632500000 | -.006320560300 | +.021554952059 | 2/16 |
+| 8 | .352275142405 | +.023686746033 | +.053270000000 | -.004669115686 | +.012201519261 | 12/16 |
+
+Stage30 unseen-N effect is **-.029924206184**: N8 coverage/J improves, while N4/N6 service
+losses and all-N penalty increases remain. This intermediate tradeoff is retained alongside
+stage15, not read as terminal recurrence or independent training replication. After update44
+zero sigma=`[.8115600347518921,.8401170969009399,.8412649631500244]`, analytic raw entropy
+3.700956034; rollout44 saturation=.312520833 and boundary truncation=.217319444. Reduced
+raw scale is not sufficient for universal service gain. Full paired interpretation still
+awaits the fixed final45 panel;2/2 started,1 complete/1 running, no new fit or changed endpoint.
+
+## 2026-09-23 — B05 complete: reduced raw noise recurs but SET service benefit reverses
+
+The fixed two-fit recurrence study is complete and read: **2/2 fits, 720k training + 192k
+evaluation team steps, 90 updates**. The new SET pair does not reproduce B04's useful
+zero-entropy-coefficient endpoint response. Apply the already-read recurrence advice's
+negative-result branch: **do not promote lambda0 as the default SET upgrade**. This changes
+the recipe-use judgment; it neither erases the selected B04 development result nor closes the
+whole N direction. No third fit, changed coefficient, extended horizon or confirmation follows.
+
+### Terminal acceptance and recoverable evidence
+
+Read generation71 READY `1bf7fa8c6fa319f156d90d6d`, wake
+`cf1a3b2d-abcd-4f03-8503-923d361a65ba`. Native status reports consistent accepted identity,
+runner/supervisor absent and a valid exit0 witness at epoch1790135545.38493. Collected all25
+zero-cell files,85203643 bytes, and checked every local SHA-256/length against the native
+inventory. Empty stdout/stderr are retained. This is followed by scientific reading, not
+treated as acceptance by itself. Consumed that event and rearmed generation72; no terminal
+job resumed and no scientific operation remains running.
+
+The frozen source is `e2ea736457e0992fb53cf21aa775fd15da3d8231`. Evidence:
+
+- [Zero-cell summary](../../../../runs/agent_count_generalization/s1_entropy_b05_set_l0_s953201/summary.json),
+  SHA-256 `1e0ecb08f66d99687d6811aa41332d542d7c46057de2f383326ddf20c51b7c91`.
+- [Exact .05 control](../../../../runs/agent_count_generalization/s1_entropy_b05_set_l05_s953201/summary.json),
+  SHA-256 `136d090b32a8c5fec1eefad5dbaaefa9155d44ce4335c7fb0f07585d36cff4c4`.
+- [Zero training rows](../../../../runs/agent_count_generalization/s1_entropy_b05_set_l0_s953201/training.jsonl)
+  and all panels0/15/30/45 at N4/6/8 in the same runner-written directory. Final checkpoints
+  are recoverable at the unchanged native output roots in the respective launch manifests;
+  all four zero checkpoints were also collected locally, without deleting native copies.
+
+Independently read all45 training rows and12 panels and recomputed every final paired world
+difference and component mean. Counts are360000 stored/training steps,720 training episodes,
+45 updates,96000 evaluation steps/192 episodes for this cell. All training rows match JSONL;
+actor and critic each101250 actual optimizer calls, skill optimizers0. Actor/critic movement,
+raw sample/old-logp storage, independently clipped execution, finite scales/losses, native
+test-N reward identities, zero-update frozen evaluation, actual0 entropy contract, logstd
+optimizer membership and row-aligned analytic entropy pass. Initial parameter/normalizer
+digest, initial per-world panels and the first pre-update training collection exactly match
+the .05 cell; subsequent treatment-induced trajectory divergence is allowed.
+
+Loaded all four checkpoint payloads with weights_only, checked130 finite tensors each,
+source/stage/config fields, file hashes, saved logstd and initial/final parameter-normalizer
+digests. The private checker initially looked for normalizers at the payload top level;
+inspection of the unchanged serializer located them under `normalizers`, and the corrected
+reader reproduced both expected digests. This was a reading-script error, not a fit failure.
+The final digest is `b76b3f50013422c626282ff3aa2a8a9950af43ee68c7387513d74ac60432b1c8`;
+final checkpoint SHA-256 is `bbe00968cc56481fbd74123a1fc92205d6b67f480e8ec0d36fec0a5e564d67d2`.
+The common checkpoint serializer retains lambda_l but omits the extra target/annealing and
+initial/final coefficient fields; those are verified in config/summary, not claimed as
+checkpoint fields. Checkpoints remain evaluation weights, without an optimizer-resume contract.
+
+### Fixed final45 native outcome
+
+Effects are zero minus.05, on the16 matched worlds at each N. Penalty is already weighted;
+positive penalty change is adverse. `J=.7*coverage+.3*quality-weighted_penalty`.
+
+| N | .05 J | zero J | E_J | delta coverage | delta quality | delta weighted penalty | positive J worlds |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 4 | .498897910261 | .448371403446 | -.050526506815 | -.044640000000 | -.015399033242 | +.014658796842 | 0/16 |
+| 6 | .430893236913 | .370479848881 | -.060413388032 | -.064380000000 | -.012274628108 | +.011664999600 | 4/16 |
+| 8 | .302237189002 | .261502880029 | -.040734308973 | -.025750000000 | -.005763786824 | +.020980172926 | 5/16 |
+
+Primary **E_U=(E_4+E_8)/2=-.045630407894**, with unseen mean J .400567549631 → .354937141737.
+Every N loses mean coverage and quality and incurs more weighted penalty. The coverage losses
+correspond to2.232,3.219 and1.2875 fewer covered users per step, respectively, on this50-user
+host. N6 fails both parts of the prewritten descriptive no-observed-J/coverage-cost condition.
+These are conditional outcomes for one newly trained policy pair, not sixteen training repeats
+or a population noninferiority/equivalence statement.
+
+Retain stage15 E_U=-.089472098762 and stage30 E_U=-.029924206184; stage30's positive N8
+effect +.023686746033 coexists with adverse N4/N6 and all-N penalty costs. The final45 N8
+effect is adverse. Different stages use different worlds, so this does not identify a late
+policy-collapse trajectory. No best checkpoint substitutes for the frozen final45 endpoint.
+
+### Scale, physical exposure and cost
+
+Final sigma .05=`[4.822341442108154,4.949835777282715,4.917407989501953]`,
+zero=`[.7989249229431152,.8290590047836304,.8323950171470642]`; analytic raw entropy
+9.022211121732 → 3.661415266209. Zero lambda remains stochastic training with learned
+variance. Legacy `action_entropy=0` is not the entropy measurement. Full and late windows
+below independently sum the row numerators and denominators before dividing:
+
+| Window | raw-coordinate saturation .05 → zero | physical-boundary truncation .05 → zero |
+| --- | --- | --- |
+| 1–45 | 4125129/6480000=.636593981 → 2018372/6480000=.311477160 | 1065959/6480000=.164499846 → 1119719/6480000=.172796142 |
+| 31–45 | 1733937/2160000=.802748611 → 658579/2160000=.304897685 | 369715/2160000=.171164352 → 405656/2160000=.187803704 |
+
+Thus lower raw scale/saturation recurs while native service reverses, and physical-boundary
+truncation again increases. B04's useful response and B05's adverse response share these
+qualitative diagnostic directions. They cannot supply a sufficient service-improvement rule
+or identify the learning mediator. Training exposure is not deterministic deployment exposure;
+mean/optimizer/state-visitation and multi-agent co-learning paths remain unseparated.
+
+Zero command wall3265.140695073s=54.419011585min; fit wall3264.093710744s;
+user CPU12950.296047s/system31.197628s; scientific-process RUSAGE_SELF peak RSS1186832KiB
+(1.131851196GiB). Peak scratch is unmeasured. Together with the accepted .05 cell, B05 uses
+**112.238565619 summed command minutes**,1440 training episodes,384 evaluation episodes,
+8 checkpoints/24 panels; actor and critic each202500 calls. No skill learning occurred.
+Collection, verification, writing and publication add support cost, not included in fit wall;
+the sum is not batch elapsed time or exclusive node occupancy.
+
+### Cumulative judgment and next discriminating question
+
+Reuse the complete recurrence advice: the predicted independent recipe benefit failed under
+the fixed new training/new-world conditions. Strengthen the distinction between an active
+entropy intervention and useful service; weaken default adoption of lambda0. Retain B04's
+E_U=+.055540524660 as selected development evidence alongside B05's -.045630407894, without
+merging their mean to conceal the reversal. The old Q/H6 comparisons retain only their old
+scope; B05 adds no H6 fit, no new Q, no competent-baseline certification and no skill mechanism.
+
+Current main `46d3560c5ab7ef87345d11c1c5460fd87bfa4888`, shared topic3, already separates
+raw entropy, execution bounds and native service; this result makes its uncertainty about
+recurrence concrete. Topic4's finite-learning/representation distinction remains applicable.
+Owner pause is lifted for this DM; Claude's FSD pause and all other direction rows are unchanged.
+
+The reversal still jointly changes training pair and world panel. It does not establish that
+the older result was caused by training-seed luck, by worlds, or by their interaction. A newly
+useful conditional discriminator is to exchange the two existing final-world panels between
+the two existing SET policy pairs, keeping all four final45 checkpoints fixed. A sign pattern
+that follows policy-pair identity would differ from one that follows panel identity; a mixed
+pattern would preserve interaction/ambiguity. This cannot estimate training-population variance
+or rescue default adoption. Its possible value is deciding whether further recipe development
+has a concrete training-side question or whether evaluation sensitivity dominates these assets.
+
+I will ask a focused Pro follow-up before selecting this new explanation/investment. Tentative
+scope is0 new fits/updates and192k evaluation steps for the complete2 policy-pairs ×2 lambdas
+×2 panels ×3 N ×16 worlds ×500 design, including96k diagonal replay to validate restoration
+and96k new off-diagonal evaluation. This is a proposed separate diagnostic, not an extension
+of B05. Pro can change whether it is worth doing, its minimal comparison and interpretation;
+no new result execution is selected or launched from this note alone.
