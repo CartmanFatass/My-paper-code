@@ -3536,3 +3536,34 @@ source/seed/facts/calibration/exposure bindings unchanged. Use a distinct submis
 supervisor `usa-b03-s-912347-a01-admit02`, preserving the rejected submission. Commit
 and push this correction before submitting that one valid request. This fixes the
 pre-admission command, not a scientific retry or a change to the six-fit design.
+
+## 2026-09-22 — B03 second-block S admitted
+
+The corrected invocation was published at `8be5fbb28` and submitted once through
+`usa-b03-s-912347-a01-admit02`. Native admission accepted **S / 912347 / a01** at
+September 23 **03:10:12 UTC**, on source `73be55261b9f5e8f8fe26fdec6558b87ad088fcb`.
+The original submission supervisor returned after admission; the independent native
+supervisor/runner are **301706 / 301707**, session 301706, start ticks
+49514020 / 49514023, on the same recorded boot. Admission observed published control
+`de99a36ac9846bc5b2bf3bc1f82fe0f033aa84db`. Actual-node available/effective memory was
+**14,767,763,456 bytes**, above the configured 4 GiB floor, with no failure reason.
+Native claim is
+`/home/wu/projects/HMASD/.git/hmasd-admission/b73b0ca2f8b86b1628bfdf9794dbf60255a1e054dc79ceb58b867310db6481ae.json`;
+the runner-written manifest is in `runs/uav_service_auxiliary/b03_s_912347_a01/`.
+
+Copied initial summary SHA256 is
+`e8b0350526d99070e46eadc663291298933b66d4202d77c2a14e73cd316ceede` and config SHA256
+`c42fd346acaf1ba4b0adb9bec3bb9ab677674ebae1eedd22fc142ba041ba3be1`. The snapshot is
+INCOMPLETE with zero training/evaluation updates or transitions, failure null and
+stderr empty. Its production spec matches D2 exactly; initialization fingerprint and
+reused facts digest match D2, with exactly two reused episodes / 3,000 reused
+transitions and zero new fact interaction. The command binds D2's exact calibration.
+The first collection/native-update provenance check remains to be observed after it
+occurs; these startup facts are not scientific acceptance of S.
+
+Registered observation and read its first adopted facts at **generation 34**: the
+original native identities are running, records consistent, exit witness absent,
+observation errors zero and no pending event. Five of the six planned fits have now
+started: four complete/accepted, S2 running and G2 unstarted. Continue the fixed S
+horizon and complete verification before G2; the initial refused supervisor remains
+a separate zero-fit pre-admission event, with no worker restarted or recipe changed.
