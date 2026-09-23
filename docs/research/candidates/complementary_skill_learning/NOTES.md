@@ -626,3 +626,101 @@ Use pytest-owned scratch under temp. Runtime smoke uses small declared technical
 never reported as research fits; production entry has require_admission before effects and no
 bypass. Numerical/recurrent/probability or failed instrumentation defects stop only the dependent
 launch/read; repair and record actual technical attempts, never relabel them as scientific negatives.
+
+## 2026-09-23 — Concrete B01 architecture and integrated implementation checks
+
+The candidate stays entirely in its B01 experiment directory with one admitted script entry;
+no shared learner, network, environment or buffer source was changed. The implementation uses
+the real D2 collection/storage/ordered-replay paths and the native complete learner update,
+then the fixed auxiliary pass. A parameter-free shared `LayerNorm(elementwise_affine=False)`
+normalizes the concatenated training-only x for both heads. It has no running statistics,
+learned affine transform or execution-time actor input. The separate native observation/state
+normalizers remain disabled and native value normalizers remain unchanged.
+
+Production dimensions, measured before results: state119, each observation104, actor feature/
+hidden256, x2286, G input3822. P uses two 64-wide SiLU context layers, a 64-wide SiLU unary
+layer and the rank32 symmetric bilinear pair mean, with member one-hot identity in unary/pair
+inputs. It has **192,514** trainable parameters. The nearest integer-width two-hidden-layer
+SiLU G has width**50**, **193,751** parameters (+0.6426%); no outcome was used to choose width.
+The actor auxiliary trunk has base92,672 + FiLM3,584 + GRU395,264 = **491,520** parameters;
+the Gaussian output head receives no auxiliary gradient. All arms construct both heads.
+
+Initial integrated CPU checks exercised complete small native D/G/P fits at 2 lanes x30 steps
+with one update, their three frozen panels and full four-cell diagnostic, independently from
+the planned 360k result fits. Initial native hashes, first-rollout fact hashes and frozen target
+calibration agreed across the three arms. Manual frozen execution matched real native `step`;
+an A/B/A branch check after a real prefix preserved the source environment, reproduced A and
+preserved RNG. The check also covered terminal-window inclusion, raw action/clip separation,
+native five-group update/movement and unadmitted-entry refusal. These short correctness
+trajectories are not B01 scientific outcomes or 360k fits. Production fits started remains0.
+
+Independent review identified missing retention of training raw-unit predictions. The repair
+saves every window's lane, boundary time, raw target and post-auxiliary-update G/P predictions
+as aligned rollout batches in `auxiliary_predictions.jsonl`, with batch/file SHA256 references
+in the native summary. Both raw losses/variances and the complete signed diagnostic rows remain.
+Pre-native-update telemetry replays the first up to32 canonical actual stored D2 rows and retains
+old/replayed individual probabilities and forced masks; the separate forced-factor test checks
+zero scores. Frozen evaluator checks cover native/auxiliary weights, calibration and native
+value-normalizer state, with Python/NumPy/Torch CPU/all-CUDA RNG restoration. These are evidence
+integrity checks, not evidence that one learning scheme improves service.
+
+Stable integrated CPU suite: DM **14 passed / 2 CUDA skips in9.56s**; independent Reviewer
+**14 passed / 2 CUDA skips in9.17s** on unchanged source bytes, no material finding remaining.
+Earlier incremental runner checks took5.30,7.95,9.89s; they used short technical trajectories,
+not the production horizon. Ordinary matplotlib deprecation warnings only. Actual-CUDA checks
+on the configured destination remain pending before the first result admission.
+
+## 2026-09-23 — B01 implementation accepted after actual CUDA verification
+
+Implementation commit `270122663fb618f2027d8e9c11737b2b8ee64dac` is published on
+`codex/complementary-skill-learning`. The Implementer's final delta preserved the explicit
+native `store_transition_batch` and `update` signatures instead of variadic forwarding;
+it reached publication after the review's original stable-hash check. The Reviewer separately
+checked that exact interface delta against native signatures/callers and found no material
+issue; no collection, replay, update or auxiliary ordering changed. Final learning SHA256 is
+`05e874a601bd1602dec02d5de8e10db830b5ea53b0ff04939694acda4aadbc43`.
+Implementer's final integrated CPU check was14 passed/2 CUDA skips in9.37s.
+
+The exact five published executable/test file hashes were verified on `wsl_4070`, checkout
+`/home/wu/hmasd-worktrees/complementary-skill-b01-270122663`. Configured Python3.10/Torch2.7+cu118
+and the configured native-extension PATH, OMP/MKL/OpenBLAS=4 ran the complete candidate suite:
+**16 passed in12.16s**, no skips, only the same matplotlib deprecation warnings. This includes
+the small three-arm complete pipeline on CUDA, equal first-rollout facts/calibration, actual
+CUDA RNG restoration and the frozen four-cell evaluation. These short support trajectories
+retain their declared technical horizon, not the production360k horizon or independent result
+replications. The first ordinary-shell Git fetch stalled before any scientific process and
+was terminated by its verified process identity; the configured `zsh -lic` network route
+successfully staged the same published source. No scientific launch had been attempted.
+
+DM accepts the implementation against the fixed B01 contract. Proceed with the declared
+D then G then P serial fits at the same published source, initialization/exogenous block,
+360k training and53,760 evaluation transitions each. No scientific conclusion follows from
+implementation checks. First-arm admission and its native manifest will be appended below;
+at this boundary0 production fits have started and no Pro operation remains open.
+
+## 2026-09-23 — B01 D admitted; native observation owns the running attempt
+
+The first fixed arm D is accepted and its native runner/supervisor identities are confirmed
+running with a consistent record. The configured outer supervisor has already exited0 after
+launching the detached admission kernel; that is **not** training completion. The
+[native launch manifest](../../../../runs/complementary_skill_learning/b01_d_260923901_957a65c01/launch-manifest.json)
+binds the exact source, argv, snapshot, node, process identities and stable operation reference;
+the [runner-side memory preflight](../../../../runs/complementary_skill_learning/b01_d_260923901_957a65c01/admission-preflight.json)
+passed on the actual node. Both copied records were SHA256-verified against their original
+remote bytes. Preserve this accepted operation; never launch another copy after an observation
+or transport error.
+
+The first persisted runner summary confirms one model construction, the declared production
+head parameter counts and actual CUDA runtime/thread settings, completed initial own evaluation
+of16,000 transitions/32 episodes, no failure, and no completed training rollout yet. This
+summary was written before entering the training loop; its zero training/start counters are
+the last completed-stage snapshot, not proof that the subsequently running process is idle.
+Count this as one admitted attempt,0 completed fits; G and P are not started. The final fit
+counts and actual cost will come from the completed runner artifacts, with partial work retained
+if an error occurs. No native service comparison has been accepted from this startup snapshot.
+
+The detached observer follows the manifest's existing operation through the configured SSH
+status command,30-second observations and a25-minute bounded return. At a checkpoint read
+all new evidence and rearm that same handle; at exit collect and verify all scientific outputs
+before interpretation or snapshot reclamation. The fixed G/P continuation remains the declared
+batch, contingent on technical integrity and current owner controls, not on D's score.
