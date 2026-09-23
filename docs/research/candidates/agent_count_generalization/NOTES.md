@@ -4777,3 +4777,29 @@ Growing raw scale/exposure reappears in this first fresh cell, but cannot establ
 usefulness or mechanism of removing entropy without its fixed paired zero cell. Continue
 the declared45-update endpoint; no score-dependent change, old-H6 combination or added fit.
 Cost remains1/2 started,0 complete. This interim record changes no shared scientific standing.
+
+## 2026-09-23 — B05 second observation checkpoint; endpoint still pending
+
+Read generation66 CHECKPOINT `86882ce0f628dc566f515715`, wake
+`b9e2c3bd-b4f8-4169-a336-726203df5ede`. Same accepted native identities remain running,
+consistent, no exit witness/stderr. Refreshed published main; no newer owner pause or relevant
+control change. Rearmed the same operation as generation67, with no restart or new training.
+
+Byte-stable collected snapshot at52.838661818 command minutes:41/45 completed updates,
+rollout42 collected,336000 training/stored steps,672 training episodes,72000 evaluation
+steps/144 episodes. Previous19 training rows and six panels are unchanged. Independently read
+and checked all22 added training rows and the three stage30 panels: raw storage and old-logp,
+clipped execution, native reward identities, finite loss/scale histories, aligned analytic
+entropy, exact optimizer totals, new evaluation worlds and frozen zero-update evaluation.
+Actor and critic each92250 optimizer calls; skill paths0. Training.jsonl equals the41 complete
+rows. Checkpoint30 path/hash is recorded natively; full checkpoint loading remains pending.
+
+Stage30 .05-cell J(N4/6/8)=`.509966162883 / .456798779167 / .328588396372`;
+coverage=`.64973 / .59266 / .42911`. Different stage worlds prevent identifying the apparent
+stage15-to30 decrease as a same-world learning decline. After update41 raw sigma is
+`[4.182372570037842,4.339208602905273,4.28018045425415]`, analytic raw entropy8.609381365.
+Rollout41 raw-coordinate saturation=.823645833, physical-boundary truncation=.167180556.
+This preserves the fresh .05 scale/exposure observation, not the absent zero-cell treatment
+effect or an identified mechanism. Read the fixed final endpoint and bind the preselected
+zero cell only after complete first-cell acceptance. Cost remains1/2 started,0 complete;
+no new scientific standing, extra fit, score-dependent continuation or Pro request.
