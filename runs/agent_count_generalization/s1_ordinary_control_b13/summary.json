@@ -1,0 +1,117 @@
+{
+  "schema": 1,
+  "object_id": "s1_ordinary_control_b13",
+  "tag": "s1_ordinary_control_b13",
+  "direction": "agent_count_generalization",
+  "launch_sha": "4f0718a2d7ec24b59a4f89facd9efedd622431ca",
+  "admission": {
+    "schema_version": 1,
+    "direction": "agent_count_generalization",
+    "sha": "4f0718a2d7ec24b59a4f89facd9efedd622431ca",
+    "command_sha256": "9b1d455699ea33ed83910b902b59d64e901e3a4e0e3d3830eac91e5989762d4b",
+    "parent_pid": 419417,
+    "child_pid": 419418,
+    "accepted_at_epoch": 1790194501.2593431
+  },
+  "status": "failed",
+  "zero_fit": true,
+  "failure": "FileNotFoundError: [Errno 2] No such file or directory: '/home/wu/projects/HMASD/.git/hmasd-launch-sources/90c3d2d12d9c410f95d43f107504fa34/runs/agent_count_generalization/s1_training_condition_b11_t6_s963201/summary.json'",
+  "spec": {
+    "test_ns": [
+      8,
+      6
+    ],
+    "horizon": 500,
+    "eval_lanes": 32,
+    "torch_threads": 4
+  },
+  "construction_seed": 17,
+  "policy_stage": 45,
+  "prior_training_team_steps_per_asset": 360000,
+  "evaluation_order": [
+    "s1",
+    "s2",
+    "h1",
+    "h2"
+  ],
+  "world_seed_bases": {
+    "8": 1645800,
+    "6": 1645600
+  },
+  "assets": [],
+  "panels": [],
+  "readings": null,
+  "counts": {
+    "fits": 0,
+    "training_team_steps": 0,
+    "stored_training_steps": 0,
+    "optimizer_calls": 0,
+    "panels": 0,
+    "evaluation_team_steps": 0,
+    "evaluation_uav_steps": 0,
+    "evaluation_episodes": 0,
+    "evaluation_resets": 0,
+    "batched_policy_step_calls": 0,
+    "h6_coordinator_batched_calls": 0,
+    "h6_lane_assignments": 0
+  },
+  "expected_counts": {
+    "fits": 0,
+    "training_team_steps": 0,
+    "stored_training_steps": 0,
+    "optimizer_calls": 0,
+    "panels": 8,
+    "evaluation_team_steps": 128000,
+    "evaluation_uav_steps": 896000,
+    "evaluation_episodes": 256,
+    "evaluation_resets": 256,
+    "batched_policy_step_calls": 4000,
+    "h6_coordinator_batched_calls": 200,
+    "h6_lane_assignments": 6400
+  },
+  "source_hashes_before": {
+    "experiments/candidates/agent_count_generalization/ordinary_control_b13/runner.py": "d31e3219be7ad4557b8e3250059debe2bace1656f42e4771e91a467c1ac7cf37",
+    "scripts/run_agent_count_ordinary_control_b13.py": "197f843cbf23c88e01f4926e9efe7b229737bb13c57936fabc6a5048602a3050",
+    "experiments/candidates/agent_count_generalization/action_law_b02/probe.py": "9ed9bc4bac4a292420a49e6fbd8f243bbb914423f76066c1266c11aaf8808e65",
+    "experiments/candidates/agent_count_generalization/action_law_b03/runner.py": "d9ed78a5dd6faeb1017747d46a428dc61d40929133dd17478348841bb1a03ddb",
+    "experiments/candidates/agent_count_generalization/training_condition_b11/runner.py": "beb7c1dbb9ddb8c78f989c630b0bb66de4703a861d99ac6d5c3a1ea34d940abb",
+    "experiments/candidates/agent_count_generalization/configuration.py": "dd2f03dfcebf71e28d43cc5fe58b0808815fc8c93934d356a8cf777cd6c6bd24",
+    "experiments/candidates/agent_count_generalization/models.py": "a92cd142a1b310fce404e52abe9728d54834e4193a281b79b969c9779d082e32",
+    "experiments/candidates/agent_count_generalization/runner.py": "21bdaa502ada60a8693bcae0100c1542d048ef94382bdb0b40d3731cad4988d7",
+    "experiments/candidates/agent_count_generalization/adapter.py": "b59d7028771b5acc4148f7dd90b5480c3143ae88580bb1b8154944831e2c0fbc"
+  },
+  "runtime": {
+    "python": "3.10.21 (main, Sep  1 2026, 14:16:49) [Clang 22.1.3 ]",
+    "torch": "2.7.0+cu118",
+    "numpy": "1.26.3",
+    "device": "cpu",
+    "dtype": "float32",
+    "torch_threads": 4
+  },
+  "last_boundary": "failed",
+  "command_wall_seconds": 1.59806056402158,
+  "run_study_wall_seconds": 0.003412429941818118,
+  "source_hashes_after": {
+    "experiments/candidates/agent_count_generalization/ordinary_control_b13/runner.py": "d31e3219be7ad4557b8e3250059debe2bace1656f42e4771e91a467c1ac7cf37",
+    "scripts/run_agent_count_ordinary_control_b13.py": "197f843cbf23c88e01f4926e9efe7b229737bb13c57936fabc6a5048602a3050",
+    "experiments/candidates/agent_count_generalization/action_law_b02/probe.py": "9ed9bc4bac4a292420a49e6fbd8f243bbb914423f76066c1266c11aaf8808e65",
+    "experiments/candidates/agent_count_generalization/action_law_b03/runner.py": "d9ed78a5dd6faeb1017747d46a428dc61d40929133dd17478348841bb1a03ddb",
+    "experiments/candidates/agent_count_generalization/training_condition_b11/runner.py": "beb7c1dbb9ddb8c78f989c630b0bb66de4703a861d99ac6d5c3a1ea34d940abb",
+    "experiments/candidates/agent_count_generalization/configuration.py": "dd2f03dfcebf71e28d43cc5fe58b0808815fc8c93934d356a8cf777cd6c6bd24",
+    "experiments/candidates/agent_count_generalization/models.py": "a92cd142a1b310fce404e52abe9728d54834e4193a281b79b969c9779d082e32",
+    "experiments/candidates/agent_count_generalization/runner.py": "21bdaa502ada60a8693bcae0100c1542d048ef94382bdb0b40d3731cad4988d7",
+    "experiments/candidates/agent_count_generalization/adapter.py": "b59d7028771b5acc4148f7dd90b5480c3143ae88580bb1b8154944831e2c0fbc"
+  },
+  "source_hashes_unchanged": true,
+  "resources": {
+    "command_wall_seconds": 1.598057448049076,
+    "run_study_wall_seconds": 0.0034095640294253826,
+    "cpu_user_seconds": 1.375618,
+    "cpu_system_seconds": 0.182885,
+    "peak_rss_kib": 420968,
+    "rss_scope": "scientific process Linux RUSAGE_SELF",
+    "resources_unmeasured": [
+      "peak_scratch_bytes"
+    ]
+  }
+}
