@@ -1,0 +1,36 @@
+{
+  "object_id": "UAV-SERVICE-AUXILIARY-B03",
+  "status": "INCOMPLETE",
+  "failure": null,
+  "arm": "D",
+  "seed": 912347,
+  "launch_sha": "73be55261b9f5e8f8fe26fdec6558b87ad088fcb",
+  "device": "cuda",
+  "torch_threads": 4,
+  "counts": {
+    "transitions": 0,
+    "rollouts": 0,
+    "episodes": 0,
+    "evaluations": 0,
+    "evaluation_transitions": 0,
+    "fact_episodes": 0,
+    "fact_transitions": 0,
+    "reused_fact_episodes": 0,
+    "reused_fact_transitions": 0,
+    "replay_agent_rows": 0
+  },
+  "stage_wall_seconds": {
+    "preparation": 0.0,
+    "collection": 0.0,
+    "native_update": 0.0,
+    "auxiliary": 0.0,
+    "evaluation": 0.0,
+    "facts": 0.0,
+    "replay": 0.0,
+    "checkpoint": 0.0
+  },
+  "evaluations": {},
+  "updates": [],
+  "training_rollouts": [],
+  "rss_curve": []
+}
