@@ -3514,3 +3514,25 @@ new Pro Send is authorized by this result. Consumed the exact generation-31 chec
 and rearmed observation at generation 32 to reconcile the completed original process.
 The resulting READY event was read against the complete verified result and consumed
 at generation 33; the D2 operation remains finished, with no worker restart.
+
+## 2026-09-22 — S2 pre-admission invocation refusal and correction
+
+The prospective D acceptance/S binding was published at `48f15461b` before submission.
+At September 23 03:06:51 UTC, supervisor `usa-b03-s-912347-a01` ended with exit 4 and
+the exact message `hmasd launch refused: runner entry is outside the source checkout`.
+The DM incorrectly put the configured Python executable after the launcher's `--`,
+where the native interface requires the tracked runner script as its first argument.
+The configured interpreter belongs before `scripts/hmasd_launch.py`; admission selects
+it for the child. The rejection occurs in request probing before claim creation.
+Direct reconciliation confirms the intended S output does not exist and the claim
+store contains no operation for that output. No S worker, environment, update, fit or
+scientific artifact was created. The failed supervisor log remains at
+`/home/wu/.agent-tasks/usa-b03-s-912347-a01/task.log`; it is not restarted.
+
+After reading the actual interface and the accepted first-block S manifest, explicitly
+correct the invocation to `-- scripts/run_uav_service_auxiliary_b03.py` followed by the
+same frozen S arguments. Keep the still-unused output `b03_s_912347_a01` and all
+source/seed/facts/calibration/exposure bindings unchanged. Use a distinct submission
+supervisor `usa-b03-s-912347-a01-admit02`, preserving the rejected submission. Commit
+and push this correction before submitting that one valid request. This fixes the
+pre-admission command, not a scientific retry or a change to the six-fit design.
