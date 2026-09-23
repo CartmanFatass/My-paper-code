@@ -697,3 +697,30 @@ D then G then P serial fits at the same published source, initialization/exogeno
 360k training and53,760 evaluation transitions each. No scientific conclusion follows from
 implementation checks. First-arm admission and its native manifest will be appended below;
 at this boundary0 production fits have started and no Pro operation remains open.
+
+## 2026-09-23 — B01 D admitted; native observation owns the running attempt
+
+The first fixed arm D is accepted and its native runner/supervisor identities are confirmed
+running with a consistent record. The configured outer supervisor has already exited0 after
+launching the detached admission kernel; that is **not** training completion. The
+[native launch manifest](../../../../runs/complementary_skill_learning/b01_d_260923901_957a65c01/launch-manifest.json)
+binds the exact source, argv, snapshot, node, process identities and stable operation reference;
+the [runner-side memory preflight](../../../../runs/complementary_skill_learning/b01_d_260923901_957a65c01/admission-preflight.json)
+passed on the actual node. Both copied records were SHA256-verified against their original
+remote bytes. Preserve this accepted operation; never launch another copy after an observation
+or transport error.
+
+The first persisted runner summary confirms one model construction, the declared production
+head parameter counts and actual CUDA runtime/thread settings, completed initial own evaluation
+of16,000 transitions/32 episodes, no failure, and no completed training rollout yet. This
+summary was written before entering the training loop; its zero training/start counters are
+the last completed-stage snapshot, not proof that the subsequently running process is idle.
+Count this as one admitted attempt,0 completed fits; G and P are not started. The final fit
+counts and actual cost will come from the completed runner artifacts, with partial work retained
+if an error occurs. No native service comparison has been accepted from this startup snapshot.
+
+The detached observer follows the manifest's existing operation through the configured SSH
+status command,30-second observations and a25-minute bounded return. At a checkpoint read
+all new evidence and rearm that same handle; at exit collect and verify all scientific outputs
+before interpretation or snapshot reclamation. The fixed G/P continuation remains the declared
+batch, contingent on technical integrity and current owner controls, not on D's score.
