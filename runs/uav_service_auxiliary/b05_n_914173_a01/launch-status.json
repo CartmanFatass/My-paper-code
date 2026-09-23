@@ -20,18 +20,15 @@
   "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/7353a74c46925fb4f0c82c5f58c14194c6fb92dd55c3c1d419ff7492cfeb10d4.json",
   "direction": "uav_service_auxiliary",
   "execution": {
+    "exit_code": 0,
     "exit_witness": {
+      "exit_code": 0,
+      "finished_at_epoch": 1790200862.4841056,
       "path": "/home/wu/hmasd-worktrees/usa-b05-3de3e3f71/runs/uav_service_auxiliary/b05_n_914173_a01/process-exit.json",
-      "state": "absent"
+      "state": "valid",
+      "termination": "process_exit"
     },
     "runner": {
-      "observed_identity": {
-        "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
-        "kind": "linux_pid_start_ticks",
-        "pid": 415552,
-        "session_id": 415551,
-        "start_ticks": 55318767
-      },
       "recorded_identity": {
         "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
         "kind": "linux_pid_start_ticks",
@@ -39,17 +36,10 @@
         "session_id": 415551,
         "start_ticks": 55318767
       },
-      "state": "running"
+      "state": "absent"
     },
-    "state": "running",
+    "state": "exited",
     "supervisor": {
-      "observed_identity": {
-        "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
-        "kind": "linux_pid_start_ticks",
-        "pid": 415551,
-        "session_id": 415551,
-        "start_ticks": 55318765
-      },
       "recorded_identity": {
         "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
         "kind": "linux_pid_start_ticks",
@@ -57,14 +47,14 @@
         "session_id": 415551,
         "start_ticks": 55318765
       },
-      "state": "running"
+      "state": "absent"
     }
   },
   "explicit_retry_available": false,
   "kind": "hmasd_operation_status",
   "manifest_ref": "/home/wu/hmasd-worktrees/usa-b05-3de3e3f71/runs/uav_service_auxiliary/b05_n_914173_a01/launch-manifest.json",
   "node": "wsl_4070",
-  "observed_at": "2026-09-23T19:56:49.385549Z",
+  "observed_at": "2026-09-23T22:03:39.793381Z",
   "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/7353a74c46925fb4f0c82c5f58c14194c6fb92dd55c3c1d419ff7492cfeb10d4.json",
   "output_root": "/home/wu/hmasd-worktrees/usa-b05-3de3e3f71/runs/uav_service_auxiliary/b05_n_914173_a01",
   "record_consistency": {
