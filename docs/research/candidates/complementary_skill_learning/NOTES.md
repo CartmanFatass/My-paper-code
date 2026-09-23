@@ -669,3 +669,31 @@ Stable integrated CPU suite: DM **14 passed / 2 CUDA skips in9.56s**; independen
 Earlier incremental runner checks took5.30,7.95,9.89s; they used short technical trajectories,
 not the production horizon. Ordinary matplotlib deprecation warnings only. Actual-CUDA checks
 on the configured destination remain pending before the first result admission.
+
+## 2026-09-23 — B01 implementation accepted after actual CUDA verification
+
+Implementation commit `270122663fb618f2027d8e9c11737b2b8ee64dac` is published on
+`codex/complementary-skill-learning`. The Implementer's final delta preserved the explicit
+native `store_transition_batch` and `update` signatures instead of variadic forwarding;
+it reached publication after the review's original stable-hash check. The Reviewer separately
+checked that exact interface delta against native signatures/callers and found no material
+issue; no collection, replay, update or auxiliary ordering changed. Final learning SHA256 is
+`05e874a601bd1602dec02d5de8e10db830b5ea53b0ff04939694acda4aadbc43`.
+Implementer's final integrated CPU check was14 passed/2 CUDA skips in9.37s.
+
+The exact five published executable/test file hashes were verified on `wsl_4070`, checkout
+`/home/wu/hmasd-worktrees/complementary-skill-b01-270122663`. Configured Python3.10/Torch2.7+cu118
+and the configured native-extension PATH, OMP/MKL/OpenBLAS=4 ran the complete candidate suite:
+**16 passed in12.16s**, no skips, only the same matplotlib deprecation warnings. This includes
+the small three-arm complete pipeline on CUDA, equal first-rollout facts/calibration, actual
+CUDA RNG restoration and the frozen four-cell evaluation. These short support trajectories
+retain their declared technical horizon, not the production360k horizon or independent result
+replications. The first ordinary-shell Git fetch stalled before any scientific process and
+was terminated by its verified process identity; the configured `zsh -lic` network route
+successfully staged the same published source. No scientific launch had been attempted.
+
+DM accepts the implementation against the fixed B01 contract. Proceed with the declared
+D then G then P serial fits at the same published source, initialization/exogenous block,
+360k training and53,760 evaluation transitions each. No scientific conclusion follows from
+implementation checks. First-arm admission and its native manifest will be appended below;
+at this boundary0 production fits have started and no Pro operation remains open.
