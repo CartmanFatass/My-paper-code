@@ -7657,3 +7657,165 @@ whether a narrowly defined frozen-policy intervention on those explicit scalar c
 discriminate harmful extrapolation from the remaining geometry/pooling/roster shift. This is a
 new candidate explanation, not a result of B08 or an established defect. Resolve its source
 mapping and consult Pro before selecting any additional evaluation or comparator change.
+
+## 2026-09-23 — Source bridge for a fixed-count feature intervention
+
+Read-only inspection confirms `train_n=6` (`configuration.py:14`), `MAX_UAVS=8`
+(`adapter.py:11`), and explicit count/8 features in `StateSetEncoder.forward`
+(`models.py:51-59`) and `SetActorBase.forward` (`models.py:152-155`). These scalars are
+.75 throughout training, versus .5/.75/1 at deployment N4/6/8. The SET deterministic action
+path contains two such scalars: its direct held-row count feature and its nested actor state
+encoder's pooled count. H6 has a policy-relevant scalar in the coordinator state embedding,
+which can affect selected skills and therefore the low-level FiLM actor. Its low-level actor
+has no SET snapshot fusion. Value/discriminator encoders are not deployment action paths;
+SET's constructed coordinator has only one skill category under its MAPPO configuration.
+
+This does **not** identify an erroneous count representation. A simple affine example supplies
+the limited motivation: if `z=Wf+v*c+b` and training sees only `c=c0`, then replacing
+`v` by `v+d` and `b` by `b-d*c0` preserves every training-point preactivation while changing
+unseen-c behavior by `d*(c-c0)`. This demonstrates an ambiguity of fixed-c observations,
+not the actual optimizer's trajectory, a causal decomposition of B08, or a theorem that
+clamping improves service. Initialization, regularization and joint training select a particular
+extension; the example omits their effects, nonlinear/recurrent dynamics and co-adaptation.
+
+The candidate intervention would replace only these **explicit policy-path scalar features**
+with.75. It would keep true N, environment physics, validity masks, actual members, mean/max
+pooling and denominators, held ego/current observations, snapshot cadence, recurrent memory
+and H6 Transformer sequence length intact. All those paths still expose actual roster/geometry.
+The two packages' intervention sites and information representations differ; this is neither
+a pure-N intervention nor a matched component ablation. A source Scout corroborated this
+limited mapping and emphasized the remaining count paths. No model was loaded or run.
+
+The testable conjecture is only that the explicit scalar extension learned at one constant
+count may impose a removable deployment cost, particularly in SET's direct actor route.
+It predicts unchanged N6 behavior and useful unseen-N J **and coverage** recovery if that
+route is a material bottleneck. Selective SET recovery would narrow the finite package gap;
+nonactivation, mixed signs or no native benefit would weaken that particular explanation.
+Neither outcome would identify skill causality or prove a stronger trained baseline.
+
+## Pro question 2026-09-23 fixed-count-channel-after-b08
+
+Conversation: existing direction adviser conversation, resolved from private local transport
+state. This account's URL is not a shared-record field.
+
+Question: Is the following narrowly defined frozen explicit-count-feature comparison worth
+selecting after B08, or does its intervention fail to discriminate a useful explanation?
+Please critique the source-to-simple-model bridge and recommend the smallest useful version
+or no experiment. This advice can change the next comparator/investment choice; no new study
+has been selected or run. Respond in Chinese and include `MATERIAL_DISSENT: yes/no`.
+
+Standing: Owner explicitly authorized continued direction research (including “你可以继续研究了
+作为DM不该简单的停下 impress me！”); published main retains owner pause lifted and this independent
+DM as lead. Current B08 complete result and source bridge are directly above. The preceding
+complete initial-policy Pro advice already covers B08's both-gain branch and has been applied:
+the initial/final diagnostic is finished without initialization matching or automatic fits.
+This question concerns a different, count-specific deployment pathway not covered by that
+advice; it is not a request to approve B08 again.
+
+On common final worlds, H6/SET own J gains at N4/6/8 are
+(.201365,.263805,.229640)/(.250270,.292080,.238906); all corresponding mean coverage and
+quality gains are positive and penalties decrease. At unseen N, D0=.144549, D45=.115464,
+Delta=-.029085; these are not causal shares. H6 adds more covered users at N6/N8 even though
+SET adds more J. H6's final ranking reverses in world1545810 while both policies improve;
+SET itself loses6.552 users/step in1545802. B07's bounded package retain, prior B04/B05
+opposite entropy responses and B06's finite-panel exceptions remain. No running model,
+population ranking, mechanism claim, confirmed comparator competence or automatic extra fit.
+
+Proposed intervention and scope, for criticism rather than execution:
+
+- Restore the exact original **final45** H6 B07/952201 and SET B05/953201 assets, not B08's
+  initial policies. Initial/final identities are in B08 config and original summaries.
+  H6 final checkpoint SHA-256 is
+  `6d71f3023e5593a801b4d618f7eece93df1a15575f8a71d769566190ba6498df`;
+  SET final is `98062b5b338b684219c43b5c9a3dc13bf176322a948c439294beee1d52ae477e`.
+- Clamp **all and only explicit scalar count/8 features on each policy's actual action path**
+  to training value.75: SET's direct actor-fusion scalar plus nested actor-state-encoder
+  scalar; H6's coordinator state-embedding scalar. Leave critic/discriminator state encoders,
+  actual N/masks/sets/mean denominators/maxima, Transformer length, observations, all other
+  state fields, k10 clock, weights, normalizers and action law unchanged. This is two sites
+  versus one with different roles; do not describe the packages as receiving a matched
+  component intervention or claim all count information was removed.
+- Evaluate only those clamped policies on the existing final45 worlds at N4/6/8. Reuse the
+  independently stored original unclamped final arrays, not copied comparison answers.
+  Native S1 has50 stationary uniform users; CPU float32/threads4,16 lanes×500 steps,
+  deterministic means with independent[-1,1] clipping and complete runtime resets.
+  Each policy follows its own closed-loop path from the same environmental initial states.
+  No initialization change, extra checkpoint, coefficient tuning, retraining or new worlds.
+- N6 is a strict implementation prediction: the explicit scalar already equals.75, so a
+  behavior difference is a technical problem to reconcile, not evidence for the conjecture.
+  At unseen N predict meaningful J **and coverage** improvement for SET if its scalar
+  extension is a material bottleneck, with smaller or absent H6 improvement for the selective
+  version. Keep absolute service, both component tradeoffs and individual adverse worlds.
+  Activation/feature change alone is not the native prediction. A harmful/mixed/nonactive
+  result should constrain this channel, not start a clamp sweep or diagnose all count paths.
+- Consider whether a same-predecision-state, read-only shadow computation is necessary to
+  determine whether changing these features actually changes H6 selected skills/SET action
+  means, or whether an exact feature intervention plus native outputs suffices. If used,
+  it would restore runtime/RNG and add at most one shadow policy pass per actual step, with
+  no extra environment transitions. Please remove this work if it cannot change the reading.
+
+Strongest alternative: the scalar is legitimate context and its learned extension is already
+benign; the important distribution shift remains in pooled geometry, true roster and attention
+length. B08 does not isolate any of them. Clamping a constant training feature is only one
+off-support continuation among many and may help or hurt without identifying a general
+count-learning mechanism. Also the two packages' different intervened routes preclude an
+equal-information causal ablation. The affine ambiguity establishes neither poor gradients
+nor a correct clamp. Explain whether the finite intervention still changes a useful deployment
+or comparator judgment despite those limitations.
+
+Context (read these concrete sources; `source_sha` means the full question commit supplied
+in the message; separately pinned main carries the current shared result):
+
+- Governance at `source_sha`: `docs/project/OPERATING_CONSTITUTION.md` sections1–5,7–8.
+  Pro advises; DM decides; cost is counted in fits with no allowance. No new approval layer.
+- Method at `source_sha`: `.agents/skills/hmasd-scientific-tools/SKILL.md`, “Update the working
+  explanation”, “Simple-model and literature bridges”, “Comparators and MARL information”,
+  “Statistics”, “Cost and exposure”, “Pro”; and
+  `.agents/skills/hmasd-research-engineering/SKILL.md`, “Checks and review” only for whether
+  state/identity/shadow semantics affect this proposed observation. No historical rulebook.
+- Shared background: `docs/research/RESEARCH.md` at
+  `d153cf777f65ea94c38e20e074b782a925b881da`, topic3/count paragraphs and topics4–6 for
+  package/learning/mechanism and nested-observation boundaries, plus this direction's row.
+  B08's new distinction rules out choosing a repair from Delta's sign and motivates the
+  explicit channel hypothesis separately. These are revisable scientific judgments.
+- Evidence at `source_sha`: the B08 complete entry and source bridge immediately above;
+  `runs/agent_count_generalization/s1_initial_policy_b08/summary.json` and its six individual
+  initial panels; the original `s1_bounded_package_b07_h6_l05_s952201` and
+  `s1_entropy_b05_set_l05_s953201` run summaries and `panel_45_n4/6/8.json` files. Read the
+  native arrays needed for consequential claims; identify any reused prior reading explicitly.
+  The preceding full “initial-policy-rival-after-b07” Answer and its adoption cover the
+  already-completed diagnostic, not this intervention. Keep B04/B05/B06 counterevidence in
+  the linked complete-result entries; no need to reread unrelated history or other directions.
+- Source at `source_sha`: `experiments/candidates/agent_count_generalization/models.py`
+  (`StateSetEncoder`, `SetActorBase`, `build_agent`), `configuration.py` and `adapter.py`;
+  `hmasd/networks.py` (`SkillCoordinator`, `R_Actor`) and `hmasd/baselines.py` MAPPO setup
+  only as needed to verify actual policy paths. The mathematical example above is a local
+  derivation, not a claimed literature result or an empirical fit.
+
+Prospective cost: consultation/source reasoning uses0 fits and no scientific execution.
+If selected in the proposed form, the study uses0 fits,0 training/optimizer steps,
+6 panels/48,000 evaluation team steps/288,000 UAV steps/96 episodes/3,000 batched policy
+calls, reusing original unclamped arrays. Optional shadow computations add at most3,000
+policy calls but no environment steps. There is no sweep, solver, extra world search or
+confirmation. B08's46.855948-second command wall is a nearby measured reference, not an
+estimate or promise for a different evaluator; implementation/review/collection/reading add
+cost. Exact actual wall remains unknown. No fits are proposed by this question.
+
+Constraints: no experiment, implementation or source changes. Write only in this question's
+empty `### Answer` subsection in
+`docs/research/candidates/agent_count_generalization/NOTES.md` on branch
+`codex/agent-count-generalization`. Read pinned inputs at `source_sha`, fetch the latest target
+blob for writing using its actual blob SHA, preserve all other bytes and stop on overlapping
+edits. Report the actual commit if successful. If repository delivery fails, return the full
+answer in chat, not only a hash, link or status. Do not put this account's conversation URL
+or identifying account information in any repository text.
+
+Return: the decisive objection or qualified reason to select the comparison; what the evidence
+strengthens/weakens/leaves untouched; correctness and limits of the simple-model mapping;
+the smallest useful intervention and its genuinely differing intermediate/native predictions;
+what positive, null, mixed and nonactivation outcomes would change; cost implications and
+one strongest alternative. No compulsory new idea or endorsement; no automatic confirmation.
+Cite sources actually used and identify decision-critical unread inputs. `MATERIAL_DISSENT`
+concerns the proposed reading/comparison, not permission.
+
+### Answer
