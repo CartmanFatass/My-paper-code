@@ -12891,3 +12891,38 @@ H6 success does not select or extend that second arm. Refresh actual-node pause/
 launch SET once through native admission, retain its handle, and read the complete pair after
 collection. No new Pro question, seed, world, training extension or confirmation is authorized by
 this result entry. The full block remains2fits/720k train/128k eval;1fit is now fully accepted.
+
+## 2026-09-23 — B14 fixed SET arm admitted after complete H6 acceptance
+
+H6's complete records were published at `07e5ea7fa` before the second fit. Fresh native
+controls at `9095b89d30f854e385493d79eed98d64690f30a7` preserve lifted/exploring/the same DM;
+the source is a published ancestor. The fixed SET output and supervisor were absent before
+submission. No scientific code or protocol was changed in response to H6's scores.
+
+At `2026-09-23T23:28:03.860065Z`, `wsl_4070` admitted
+`s1_fresh_learning_b14_set_s974201` from the SAME reviewed source
+`88b67e5e0110ae05c440588a2b19ab0b6c0f021c`, with `--cell set --seed 974201` and the fixed output.
+The launch kernel measured11,966,816,256 available bytes against the4-GiB floor and passed.
+The configured supervisor accepted this command once:
+
+- Operation: `/home/wu/projects/HMASD/.git/hmasd-admission/380ba398e2af9b667314ee8775e103a606c5b04ec452c700a874c01e1112ceb0.json`.
+- Manifest: `/home/wu/projects/HMASD/runs/agent_count_generalization/s1_fresh_learning_b14_set_s974201/launch-manifest.json`.
+- Source snapshot: `/home/wu/projects/HMASD/.git/hmasd-launch-sources/0879eb574fab4ffeb4df753f01569d36`.
+- Runner PID445237/start_ticks56588871; detached supervisor PID445236/start_ticks56588868;
+  boot `bb732fcb-1a33-4659-a786-331110ae41d3`. Wrapper
+  `agent-count-fresh-learning-b14-set-974201` is an admission transport, not scientific completion.
+- Output: `/home/wu/projects/HMASD/runs/agent_count_generalization/s1_fresh_learning_b14_set_s974201/`.
+
+The first summary reports one started SET fit. Its first adopted native observer reading at
+`23:28:45Z` is accepted/running with matching process identities, consistent records, no exit
+witness and zero observation errors. Observation `launch-s1-fresh-learning-b14-set` is armed
+under this task's generation117, interval30/window1500 seconds. H6 generation115's terminal
+event was fully read and consumed through rearm116 before registering SET; no other pending
+event or old output is left. Neither worker nor Pro question was repeated.
+
+B14 now has two started fits: H6 fully accepted, SET running, no accepted SET score. The fixed
+budgeted exposure remains720k train/128k eval, not an instruction to expand it. After terminal
+evidence, collect every SET artifact and independently read it; compare both arms' actual reset
+scenes/RNG records, initial/final world states, source/recipe bindings and native service identities.
+Then report D0, D45, each own increment and Delta separately, with N6, all paired losses and
+absolute minima intact. H6's own positive learning does not determine that comparison's answer.
