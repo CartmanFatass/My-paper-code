@@ -3935,3 +3935,49 @@ Keep the accepted handle and frozen endpoint; next read G's checkpoints and full
 result, then the already planned zero-update common endpoint replay. Admission
 and observation do not accept the scientific result. This continuation added no
 fit beyond the fixed six and made no worker restart, Pro Send or App message.
+
+## 2026-09-22 — B03 second-block G first nine updates and matched first rollout
+
+Read generation-40 checkpoint `1fc6ce4f6dfb12cca663a588`, wake
+`c69e9457-c958-4c3d-8d0e-bfd111424710`. The original runner and supervisor remain
+running with matching native identities, consistent records and zero observation
+errors. Refreshed main `2a23a738e`: this direction's authorization, owner pause,
+launch controls and relevant shared B03 understanding are unchanged. Collected
+and byte-verified nine small files from the accepted operation; immutable config,
+manifest and preflight match the startup snapshot. Summary digest is
+`1c063a57785b3e4fb0262b36301c27341406fb6d56031f3451ee5480c5cfcd1e`.
+
+The first-rollout checks now exactly match D2: initialization and facts retain
+their declared digests; collection is
+`ee1d01c195f9197226e4b41d360c0a38957c8b4a61af16ff7622b0dfc93e7eb7`, first native
+update is `4ee61c8f3ecb466faca8609273f17b007bfd9258b4dac57e43774bbbbe711c8f`,
+and the realized calibration file is byte-identical at
+`0c49d91203e9e6d18a38d5650207873a7eeb91b536f582a35fea9ee312591ebb`. All first native
+optimizer step counts match. The entire initial evaluation/readout record equals
+D2, including every world, factual episode, feature statistic and array digest.
+It is the same baseline observation, not new evidence for G's training benefit.
+
+The snapshot is INCOMPLETE, failure null, stderr empty. It contains **nine completed
+updates / 54k updated training transitions**, with the tenth collection already
+finished: total **60k collected transitions / 40 episodes**; four episodes await
+their reported training/update row. Evaluation remains only the initial eight
+worlds / 12k transitions; reused initial facts are 3k, new facts zero, readout rows
+23,856. All **19,845 summary/calibration floats** are finite. Every native parameter
+group moves at all nine updates, and both auxiliary heads and the active base/GRU
+move. Each pass uses 5,964 team / 47,712 agent rows; each head and the representation
+report **270 optimizer steps** so far. Final saved-state readback remains pending.
+
+Read all 36 reported training episodes: **28 have zero service and 32 negative J**.
+Rollouts 2, 3 and 9 have zero service in all four lanes; the worst reported J is
+**−2,257.271887** at rollout 4's fourth lane. All terminate by the fixed 1,500-step
+truncation, with zero charging, cutoff, depletion and charger input. Preserve these
+adverse trajectories alongside finite losses and learner movement. No trained
+development panel is present yet, so this checkpoint establishes operation and
+matching, without revising the unobserved final G comparison.
+
+The latest completed-update sample is **1,484.785164 s / 24.746419 min**, peak RSS
+**3,049,704 KiB / 2.908424 GiB**; the later collection-10 event is at
+**1,576.881969 s / 26.281366 min**. These are partial scopes, not full-fit cost.
+Consumed the exact checkpoint and rearmed the same accepted handle at
+**generation 41**, 1,500-second window. Continue the frozen run and panels; no
+restart, extra fit, new Pro Send or App message.
