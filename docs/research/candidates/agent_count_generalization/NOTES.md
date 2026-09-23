@@ -4749,3 +4749,137 @@ wakeup of this DM only. First fit's full terminal collection and scientific read
 current dependency. Then bind its exact summary bytes to the already-selected zero cell at
 the same executable source; first score does not select continuation. Neither admission,
 initial evaluation nor tests are recurrence evidence. No further fit or Pro request selected.
+
+## 2026-09-23 — B05 first observation checkpoint; first cell still running
+
+Read generation65 CHECKPOINT `971c34102c9b6e265d5711a1`, wake
+`a45f8757-fe40-4afe-a64e-e3fc6e579480`. The same native runner/supervisor identities remain
+running and consistent, with no exit witness or stderr. Refreshed published main; no change
+to owner pause/lead/this direction since `aecf372347b6779d75d63f1c0e36bc279d3e6e14`.
+Rearmed the same observation as generation66; no worker restart, new fit or Pro Send.
+
+Collected a byte-stable summary/training/panel snapshot at26.146190 command minutes:
+19/45 updates complete, rollout20 collected,160000 training/stored team steps,320 training
+episodes;48000 evaluation steps/96 episodes. All19 complete training rows equal training.jsonl.
+Independently verified raw action/old-logprob storage, clipped execution, native component and
+return identities, finite loss/scale histories, analytic raw entropy and pre-update alignment.
+Actor and critic each42750 optimizer calls, skill paths0. All six completed stage0/15 panels
+match their individual files, new world addresses, native J identities and frozen zero-update
+contract. Checkpoint00/15 paths and recorded hashes remain recoverable natively; full model
+loading remains part of terminal collection, not claimed from this snapshot.
+
+Stage15 .05-cell J for N4/6/8 is `.523017276209 / .496732112142 / .375559933241`;
+coverage is `.6471775 / .6250925 / .4838225`. These are one-cell descriptive values, not
+B05 treatment effects or comparable-world changes from stage0. After update19 sigma is
+`[1.9153083562850952,2.009573459625244,1.9602535963058472]`, analytic raw entropy6.277690577;
+rollout19 raw-coordinate saturation is.609597222 and boundary truncation.178284722.
+Growing raw scale/exposure reappears in this first fresh cell, but cannot establish the
+usefulness or mechanism of removing entropy without its fixed paired zero cell. Continue
+the declared45-update endpoint; no score-dependent change, old-H6 combination or added fit.
+Cost remains1/2 started,0 complete. This interim record changes no shared scientific standing.
+
+## 2026-09-23 — B05 second observation checkpoint; endpoint still pending
+
+Read generation66 CHECKPOINT `86882ce0f628dc566f515715`, wake
+`b9e2c3bd-b4f8-4169-a336-726203df5ede`. Same accepted native identities remain running,
+consistent, no exit witness/stderr. Refreshed published main; no newer owner pause or relevant
+control change. Rearmed the same operation as generation67, with no restart or new training.
+
+Byte-stable collected snapshot at52.838661818 command minutes:41/45 completed updates,
+rollout42 collected,336000 training/stored steps,672 training episodes,72000 evaluation
+steps/144 episodes. Previous19 training rows and six panels are unchanged. Independently read
+and checked all22 added training rows and the three stage30 panels: raw storage and old-logp,
+clipped execution, native reward identities, finite loss/scale histories, aligned analytic
+entropy, exact optimizer totals, new evaluation worlds and frozen zero-update evaluation.
+Actor and critic each92250 optimizer calls; skill paths0. Training.jsonl equals the41 complete
+rows. Checkpoint30 path/hash is recorded natively; full checkpoint loading remains pending.
+
+Stage30 .05-cell J(N4/6/8)=`.509966162883 / .456798779167 / .328588396372`;
+coverage=`.64973 / .59266 / .42911`. Different stage worlds prevent identifying the apparent
+stage15-to30 decrease as a same-world learning decline. After update41 raw sigma is
+`[4.182372570037842,4.339208602905273,4.28018045425415]`, analytic raw entropy8.609381365.
+Rollout41 raw-coordinate saturation=.823645833, physical-boundary truncation=.167180556.
+This preserves the fresh .05 scale/exposure observation, not the absent zero-cell treatment
+effect or an identified mechanism. Read the fixed final endpoint and bind the preselected
+zero cell only after complete first-cell acceptance. Cost remains1/2 started,0 complete;
+no new scientific standing, extra fit, score-dependent continuation or Pro request.
+
+## 2026-09-23 — B05 first cell complete and accepted; exact control bound for fixed zero cell
+
+Read generation67 READY `965273596b2d132c37f7f0bf`, wake
+`00e5d5c2-125c-44ab-8e3c-e4acfb56f006`. Native child/supervisor are absent with a consistent
+valid exit0 witness. Collected all25 runner-written files(85079882 bytes), verifying every
+file's SHA-256 against the native inventory. Full local/native checkpoint copies are retained;
+small run records are published. Consumed/rearmed68 without reviving the completed job.
+Current published main still has no newer owner pause/lead change on this direction.
+
+DM read and accepts **set_l05**,1/2 fits completed. Full fixed exposure:360000 training/stored
+team steps,720 training episodes/resets,45 updates,96000 evaluation steps/192 episodes,
+12 complete panels and4 checkpoints. Actor and critic each101250 optimizer calls, skill paths0.
+All45 training rows match training.jsonl; independent arithmetic checked native training/eval
+J identities, all component vectors, raw-action/original-logprob replay, clipped execution,
+row-aligned scale/entropy, complete and late pooled numerators/denominators, parameter movement
+on every update and frozen zero-update evaluation. No failure or stderr; process completion
+alone was not used as scientific acceptance.
+
+Loaded all four checkpoints with the scientific interpreter:130 finite tensors each, published
+source and serialized config match, saved logstd equals the recorded stage value. Recomputed
+initial/final parameter-normalizer digests agree with summary; final digest is
+`9f183501f97c021be1919d6da925a7ca981736dbeb6ec9dc0e1e67583d0a177b`.
+As in B04, the common checkpoint serializer preserves lambda_l but omits the four extra
+entropy endpoint/target/annealing fields; their explicit effective contract is in config.json
+and summary, not inferred from absent checkpoint fields. Final checkpoint SHA-256 is
+`98062b5b338b684219c43b5c9a3dc13bf176322a948c439294beee1d52ae477e`.
+
+| Final45 N | J | coverage | quality | weighted penalty |
+| --- | ---: | ---: | ---: | ---: |
+| 4 | .498897910261 | .669147500000 | .206895075106 | .031573862271 |
+| 6 | .430893236913 | .585937500000 | .174829483755 | .031711858213 |
+| 8 | .302237189002 | .409885000000 | .144583439577 | .028057342871 |
+
+The .05-cell unseen-N mean is.400567549631. It is a comparator value, not B05's treatment
+effect. Retain all stage0/15/30 panels and all16 final worlds; do not select the earlier higher
+means or read fresh-world stage changes as identified policy degradation. Final raw sigma is
+`[4.822341442108154,4.949835777282715,4.917407989501953]`, analytic raw entropy9.022211122.
+Full1–45 raw-coordinate saturation=.636593981481 and boundary truncation=.164499845679;
+late31–45 rates=.802748611111 and.171164351852. This supports recurrence of the .05 scale/
+exposure pattern in a new training realization; it leaves useful zero-entropy treatment response,
+N6 cost, wider ranking and mechanism unresolved. No Q or old-H6/new-SET comparison is made.
+
+Measured command wall57.819554034 min; fit wall3467.474343583 s, user CPU13683.796312 s,
+system CPU30.972938 s. Scientific-process peak RSS1209952 KiB(1.153900 GiB); peak scratch
+unmeasured. Tests, reading, transfers and publication are additional support work.
+
+Execute the **already selected** second `set_l0` cell, seed953201, same immutable executable
+source `e2ea736457e0992fb53cf21aa775fd15da3d8231`, with first B05 summary
+`runs/agent_count_generalization/s1_entropy_b05_set_l05_s953201/summary.json` as the explicit
+native control input. Its exact SHA-256 is
+`136d090b32a8c5fec1eefad5dbaaefa9155d44ce4335c7fb0f07585d36cff4c4`.
+This is the fixed first control, not a favorable score/source selection. The source, initializer,
+first pre-update data and world/panel checks remain enforced; no extra fit, new Pro round or
+changed endpoint. B05 effect reading waits for the complete paired zero cell.
+
+## 2026-09-23 — B05 fixed zero cell admitted with matched pre-update state
+
+After first-cell acceptance and publication, dispatched the selected zero cell once through
+the configured supervisor. Fresh native admission accepted the unchanged executable and the
+exact completed first summary. The [zero-cell launch manifest](../../../../runs/agent_count_generalization/s1_entropy_b05_set_l0_s953201/launch-manifest.json)
+and [memory preflight](../../../../runs/agent_count_generalization/s1_entropy_b05_set_l0_s953201/admission-preflight.json)
+preserve its native source, invocation, process and control identities. Supervisor dispatch
+exit0 is not the training endpoint. No worker restart or extra fit.
+
+The collected [live summary](../../../../runs/agent_count_generalization/s1_entropy_b05_set_l0_s953201/summary.json)
+is `training`, with8000 training/stored steps,16 training episodes and0 completed updates;
+initial evaluation used24000 steps/48 episodes. Actual coefficient/endpoints0, targets and
+annealing off. Runner verified complete first-control payload/counts/source/hash, compatible
+config, exact initialization, initial per-world outputs and first pre-update collection
+before the affected optimizer update. Independently compared both serialized configs apart
+from the three declared coefficient fields, initial digest, spec/worlds and every initial
+panel field apart from config: exact equality. The control bytes are unchanged at the declared
+`136d090b32a8c5fec1eefad5dbaaefa9155d44ce4335c7fb0f07585d36cff4c4` digest.
+
+Armed generation69 for this new accepted operation and read its first observation: scientific
+child and detached supervisor both running with consistent recorded/native identities, no
+exit witness, error or pending event. The completed first operation remains terminal. Cost is
+**2/2 fits started,1 complete/1 running**. Full paired effect, component/N6 costs and training
+exposure comparison remain the dependency; no early endpoint or effect claim from activation.
