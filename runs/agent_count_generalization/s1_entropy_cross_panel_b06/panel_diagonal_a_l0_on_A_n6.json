@@ -1,0 +1,538 @@
+{
+  "status": "complete",
+  "asset_key": "a_l0",
+  "policy_pair": "A",
+  "coefficient": 0.0,
+  "evaluation_panel": "A",
+  "test_n": 6,
+  "world_seeds": [
+    1245600,
+    1245601,
+    1245602,
+    1245603,
+    1245604,
+    1245605,
+    1245606,
+    1245607,
+    1245608,
+    1245609,
+    1245610,
+    1245611,
+    1245612,
+    1245613,
+    1245614,
+    1245615
+  ],
+  "runtime_seed": 1245651,
+  "steps": 8000,
+  "episodes": 16,
+  "J": [
+    0.4118336666211293,
+    0.5551937772578287,
+    0.42262891963753757,
+    0.5204286903064181,
+    0.5447393921078366,
+    0.44206256131230526,
+    0.431874652521965,
+    0.38476433998684556,
+    0.47914436820822176,
+    0.4943325628939197,
+    0.5301470884109294,
+    0.49255397527127154,
+    0.46982413577293436,
+    0.5380483754746809,
+    0.4749752661202931,
+    0.5260933562913855
+  ],
+  "scalar_returns": [
+    34.31947221842744,
+    46.26614810481906,
+    35.219076636461466,
+    43.36905752553485,
+    45.39494934231971,
+    36.83854677602544,
+    35.98955437683042,
+    32.0636949989038,
+    39.92869735068515,
+    41.194380241159976,
+    44.17892403424412,
+    41.046164605939296,
+    39.1520113144112,
+    44.837364622890064,
+    39.581272176691094,
+    43.84111302428213
+  ],
+  "component_means": {
+    "coverage_reward": [
+      0.5503199999999994,
+      0.7084399999999994,
+      0.5660400000000003,
+      0.6721599999999993,
+      0.709880000000001,
+      0.5830000000000011,
+      0.5516000000000001,
+      0.5045999999999988,
+      0.63016,
+      0.6393600000000007,
+      0.6827600000000008,
+      0.6470400000000002,
+      0.6077999999999997,
+      0.6728000000000041,
+      0.6111999999999994,
+      0.6908400000000026
+    ],
+    "quality_reward": [
+      0.1533929284350033,
+      0.19844348937053796,
+      0.1496387424950399,
+      0.2018640505939874,
+      0.1844478596570306,
+      0.1685082926142678,
+      0.19482797172097388,
+      0.16835165496499593,
+      0.1797661495387439,
+      0.17630368743077307,
+      0.18421521889000503,
+      0.178422989960015,
+      0.17514808273436136,
+      0.2272950426712106,
+      0.1850177161659717,
+      0.19321600136285097
+    ],
+    "energy_penalty": [
+      0.019408211909371732,
+      0.0002472695533332894,
+      0.018490703110974,
+      0.010642524871778582,
+      0.0075109657892725385,
+      0.01658992647197495,
+      0.012693738994326981,
+      0.018961156502652995,
+      0.015897476653401285,
+      0.006110543335312034,
+      0.0030494772560722663,
+      0.01390092171673309,
+      0.008180289047373984,
+      0.0011001373266820013,
+      0.008370048729498588,
+      0.015459444117469585
+    ],
+    "total_reward": [
+      0.4118336666211292,
+      0.5551937772578277,
+      0.4226289196375378,
+      0.5204286903064175,
+      0.544739392107837,
+      0.44206256131230565,
+      0.43187465252196555,
+      0.3847643399868453,
+      0.4791443682082224,
+      0.4943325628939203,
+      0.5301470884109293,
+      0.49255397527127126,
+      0.4698241357729342,
+      0.5380483754746814,
+      0.47497526612029306,
+      0.5260933562913853
+    ]
+  },
+  "initial_world_digests": [
+    {
+      "world_seed": 1245600,
+      "state_sha256": "f7c5eb4028d50995f0ac39a5512f9d0b3f7ee1bcbae580046601568ad71a3a5e",
+      "observation_sha256": "7006f0ce801e81e0a6e94bc86eaa513ff28fe724e8b49c6f5ec2532404feb93d"
+    },
+    {
+      "world_seed": 1245601,
+      "state_sha256": "969961598d9fadb59d0701ba52e85ea3a573ad18081550e6c4fcf75e8d368cfb",
+      "observation_sha256": "8df0b703bd7da5d48de8a4f3e7e565b5f1db4bc0799c7cb7daa0dddd7a8bce32"
+    },
+    {
+      "world_seed": 1245602,
+      "state_sha256": "df62f5a4d8b60b3fb934f25019ab6d8503ab2752e6f62f60c3f25d45e49b215e",
+      "observation_sha256": "636592ace7da36ed2b9edd999cdaff39502d0dc82388a89924d4c4293bd6ef2a"
+    },
+    {
+      "world_seed": 1245603,
+      "state_sha256": "c029cefcc1458ff34b792ba8ebb88858b2dcc4b309cded35f094f9713fb0459a",
+      "observation_sha256": "f23dfbea0f68cbf7b8bdb96a0451c568373ddfeab2ac36f0ea5cafa4db922571"
+    },
+    {
+      "world_seed": 1245604,
+      "state_sha256": "9e760bcf0ac274d51d65060c84c90e143c2c2d251d9de74dd01ffd7fb7cd1046",
+      "observation_sha256": "807976c93544e94a103e774810f7ecc62f662509a892409924ae685752050bf6"
+    },
+    {
+      "world_seed": 1245605,
+      "state_sha256": "db09dd1e5747d9f3100e36cd704bb6dd7181b40a9ddb9faa84ccb47de104cafa",
+      "observation_sha256": "1ae1c0b5fbcceb8f44c4445836068312173b6063b4bdb4320b494476484e0b9d"
+    },
+    {
+      "world_seed": 1245606,
+      "state_sha256": "40700952c10c17cdb9b12962b643ad05ce314801fbab11d023531d4cd446fd0b",
+      "observation_sha256": "db5f2894d654975eb6268b958f7e7c6637e77ce49023987aeabbf2153b1e58f3"
+    },
+    {
+      "world_seed": 1245607,
+      "state_sha256": "1e03a79c0360ce06fb9ec7a7c9ad9b2db1e51256dbb016b4e8ecc9b847e2cbad",
+      "observation_sha256": "2945083b502cf674b66e3c6ec6d48bbf4b576a86e613323c2cc489a263477039"
+    },
+    {
+      "world_seed": 1245608,
+      "state_sha256": "34791131e23c590612e5e270446aba253fdee9a2d8ff0c715446f50bb53e7fd6",
+      "observation_sha256": "4ac4cc5134d683f820c6d2fbfd7896342d3bff23e051dff9878d6a3fad4f5909"
+    },
+    {
+      "world_seed": 1245609,
+      "state_sha256": "1070d54e456ba0cf9fc59b4694dc415fc110bdd46bac434ce1e207fef4f2622b",
+      "observation_sha256": "c1e175971a3add16669ab10835e683dea3b14289f7c35a464ca87565912215eb"
+    },
+    {
+      "world_seed": 1245610,
+      "state_sha256": "a55cbe1fc10c1ed3a88f6ac18806ede1b7d6de386e7ba2c26bf958eaec22e6aa",
+      "observation_sha256": "8b2c3c3936e25c4fa7a96da8646aee6c7900ac89d554ab2f7d1128f2213325ca"
+    },
+    {
+      "world_seed": 1245611,
+      "state_sha256": "13695e8f78e4b0568f01cbafa91b5132df8323a3308c8cefda7104853ec4a915",
+      "observation_sha256": "6a6787cb2257b9bcc4d52f67ce57ce423c3ceadd8184880d761be6659a4c9993"
+    },
+    {
+      "world_seed": 1245612,
+      "state_sha256": "5cc495d72f65ff89d5ea4b99d5a5aa9e464810098bfc435ebb5d738c31edbfc9",
+      "observation_sha256": "daab242b797c4cb7f597e08a3acd71cbd9fcde2940340c4f2ba1f5ad0eb2226a"
+    },
+    {
+      "world_seed": 1245613,
+      "state_sha256": "d2dc85c5b2650fd6f722404910ccc372bde4004002e33fcacc873ed11b219a34",
+      "observation_sha256": "d3ff79adab873f4f602839ab8b133d5c57bfca276c2cb1e9913469006d833ec8"
+    },
+    {
+      "world_seed": 1245614,
+      "state_sha256": "3940e5db7dcaa8ec49c6cdf5c9d817551c67e556d064acdc36917a99dda14fac",
+      "observation_sha256": "5994f9dd9f88535e22d0ea82e1aee85d7d2ad480092eab0c0296d2e78cd97a68"
+    },
+    {
+      "world_seed": 1245615,
+      "state_sha256": "f07cc8fdd4fcaedb92e23722426f7784aebfd1889a2c8614247bef6e097f72b0",
+      "observation_sha256": "e61055d9d146658b1b020fc74888bf8e7fd6df7398bddfa4a57d8fbb7ed92e65"
+    }
+  ],
+  "optimizer_calls": {
+    "coordinator": 0,
+    "discoverer_actor": 0,
+    "discoverer_critic": 0,
+    "team_discriminator": 0,
+    "individual_discriminator": 0
+  },
+  "frozen_weights_and_normalizers": true,
+  "parameter_normalizer_digest_before": "de81c2086d1a13a9b2f73dc523c8bf22d7b47751ffd90cf835d9df065ad0ff82",
+  "parameter_normalizer_digest_after": "de81c2086d1a13a9b2f73dc523c8bf22d7b47751ffd90cf835d9df065ad0ff82",
+  "normalizers_before": {
+    "obs_norm": null,
+    "state_norm": null,
+    "value_norm_coordinator": {
+      "type": "RunningMeanStd",
+      "fields": {
+        "mean": {
+          "dtype": "float64",
+          "shape": [],
+          "value": 0.0
+        },
+        "var": {
+          "dtype": "float64",
+          "shape": [],
+          "value": 1.0
+        },
+        "count": {
+          "dtype": "float64",
+          "shape": [],
+          "value": 0.0001
+        }
+      }
+    },
+    "value_norm_discoverer": {
+      "type": "RunningMeanStd",
+      "fields": {
+        "mean": {
+          "dtype": "float64",
+          "shape": [],
+          "value": 4.7578455366475065
+        },
+        "var": {
+          "dtype": "float64",
+          "shape": [],
+          "value": 5.396762808332214
+        },
+        "count": {
+          "dtype": "float64",
+          "shape": [],
+          "value": 2160000.0001
+        }
+      }
+    }
+  },
+  "normalizers_after": {
+    "obs_norm": null,
+    "state_norm": null,
+    "value_norm_coordinator": {
+      "type": "RunningMeanStd",
+      "fields": {
+        "mean": {
+          "dtype": "float64",
+          "shape": [],
+          "value": 0.0
+        },
+        "var": {
+          "dtype": "float64",
+          "shape": [],
+          "value": 1.0
+        },
+        "count": {
+          "dtype": "float64",
+          "shape": [],
+          "value": 0.0001
+        }
+      }
+    },
+    "value_norm_discoverer": {
+      "type": "RunningMeanStd",
+      "fields": {
+        "mean": {
+          "dtype": "float64",
+          "shape": [],
+          "value": 4.7578455366475065
+        },
+        "var": {
+          "dtype": "float64",
+          "shape": [],
+          "value": 5.396762808332214
+        },
+        "count": {
+          "dtype": "float64",
+          "shape": [],
+          "value": 2160000.0001
+        }
+      }
+    }
+  },
+  "executed_action_bounds": {
+    "minimum": -1.0,
+    "maximum": 1.0
+  },
+  "policy_outputs_unchanged_by_mapping": true,
+  "diagnostics_rng_unchanged": true,
+  "config": {
+    "count_arm": "SET",
+    "algorithm": "mappo",
+    "n_agents": 6,
+    "n_uavs": 6,
+    "n_users": 50,
+    "num_envs": 16,
+    "rollout_length": 500,
+    "episode_length": 500,
+    "k": 10,
+    "n_Z": 1,
+    "n_z": 1,
+    "state_dim": 133,
+    "obs_dim": 104,
+    "action_dim": 3,
+    "action_space_type": "continuous",
+    "gamma": 0.99,
+    "gae_lambda": 0.95,
+    "ppo_epochs": 15,
+    "num_mini_batch": 4,
+    "sequence_batch_size": 32,
+    "coordinator_batch_size": 1280,
+    "high_level_batch_size": 128,
+    "high_level_buffer_size": 800,
+    "batch_size": 12000,
+    "discriminator_batch_size": 12000,
+    "lambda_e": 1.0,
+    "lambda_D": 0.0,
+    "lambda_d": 0.0,
+    "lambda_h": 0.0,
+    "lambda_l": 0.0,
+    "lambda_cd": 0.0,
+    "lambda_mi": 0.0,
+    "lr_coordinator": 0.0001,
+    "lr_discoverer_actor": 0.0001,
+    "lr_discoverer_critic": 0.0001,
+    "lr_discriminator": 0.0001,
+    "weight_decay": 0.0,
+    "clip_epsilon": 0.2,
+    "value_loss_coef": 1.0,
+    "max_grad_norm": 0.5,
+    "hidden_size": 256,
+    "embedding_dim": 256,
+    "n_heads": 8,
+    "n_encoder_layers": 2,
+    "n_decoder_layers": 2,
+    "gru_hidden_size": 256,
+    "use_valuenorm": true,
+    "use_obsnorm": false,
+    "use_statenorm": false,
+    "use_lr_decay": false,
+    "total_timesteps": 360000,
+    "seed": 943201,
+    "policy_interruption_mode": "off",
+    "use_central_snapshot_in_flat_actor": true,
+    "disable_high_level_training": true,
+    "disable_discriminator_training": true,
+    "disable_discriminator_rewards": true,
+    "collects_high_level_samples": false,
+    "use_process_exploration": false,
+    "use_horizon_window": false,
+    "use_opt_compact": false,
+    "lambda_l_initial": 0.0,
+    "lambda_l_final": 0.0,
+    "use_entropy_annealing": false,
+    "use_entropy_targets": false
+  },
+  "phase": "diagonal",
+  "historical_replay": {
+    "atol": 1e-10,
+    "rtol": 0.0,
+    "all_absolute_outputs_match": true,
+    "fields": {
+      "scalar_returns": {
+        "exact_equality": true,
+        "maximum_absolute_difference": 0.0,
+        "within_fixed_tolerance": true,
+        "per_world_absolute_difference": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "J": {
+        "exact_equality": true,
+        "maximum_absolute_difference": 0.0,
+        "within_fixed_tolerance": true,
+        "per_world_absolute_difference": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "component_means.coverage_reward": {
+        "exact_equality": true,
+        "maximum_absolute_difference": 0.0,
+        "within_fixed_tolerance": true,
+        "per_world_absolute_difference": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "component_means.quality_reward": {
+        "exact_equality": true,
+        "maximum_absolute_difference": 0.0,
+        "within_fixed_tolerance": true,
+        "per_world_absolute_difference": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "component_means.energy_penalty": {
+        "exact_equality": true,
+        "maximum_absolute_difference": 0.0,
+        "within_fixed_tolerance": true,
+        "per_world_absolute_difference": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "component_means.total_reward": {
+        "exact_equality": true,
+        "maximum_absolute_difference": 0.0,
+        "within_fixed_tolerance": true,
+        "per_world_absolute_difference": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    }
+  }
+}

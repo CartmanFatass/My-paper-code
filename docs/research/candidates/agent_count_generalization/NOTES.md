@@ -5732,3 +5732,150 @@ Remote preparation briefly stalled because this partial Git clone fetched missin
 the configured network shell. Only that owned HTTPS fetch was stopped; after confirming its
 parent exited with unchanged HEAD, clean tracked tree and no index lock, the same preparation
 completed inside zsh network environment. No scientific operation existed during that repair.
+
+
+## 2026-09-23 — B06 complete: finite sign reversal follows the policy pair across both panels
+
+The complete fixed B06 object is technically accepted and scientifically read. The native
+operation ended with exit0, a valid process-exit witness, absent original runner/supervisor
+identities and consistent admission/source/output binding. Exit0 alone was not acceptance:
+DM collected all32 files (740976 bytes), matched every native SHA-256 and size, read the empty
+stdout/stderr and independently reconstructed the comparisons from the per-world outputs.
+No retry, new policy, new panel, checkpoint selection or training occurred.
+
+All12 historical diagonal panels exactly reproduce all16 original J values, scalar returns
+and four native components:72 absolute array comparisons,1152 scalar comparisons, every
+maximum absolute difference0. The predeclared1e-10 absolute tolerance (relative tolerance0)
+was not needed. These diagonals completed before the12 fixed off-diagonal panels. Every panel
+file agrees with its summary row; all four assets have matching initial state/observation
+signatures at each fixed panel/N. All24 evaluations preserve policy and normalizer digests,
+record zero actual optimizer updates, and leave all checkpoint/source hashes unchanged.
+Raw means are clipped separately before bounded execution; diagnostics neither alter actions
+nor consume RNG. DM's independent standard-library reader does not import candidate arithmetic.
+
+Evidence: [complete runner summary](../../../../runs/agent_count_generalization/s1_entropy_cross_panel_b06/summary.json),
+[fixed input identities](../../../../runs/agent_count_generalization/s1_entropy_cross_panel_b06/config.json),
+[terminal witness](../../../../runs/agent_count_generalization/s1_entropy_cross_panel_b06/process-exit.json),
+and all24 `panel_diagonal_*` / `panel_off_diagonal_*` files in that run directory.
+Source remains `ce18435cedfe2b875482403b6b41778fdb67ee4d`; this observation does not change
+any original B03/B04/B05 run or final45 policy. The accepted native worktree and assets are retained.
+
+### Complete finite service table
+
+For each fixed policy pair, d means lambda0 minus lambda.05. A is the old943201 training pair;
+B is the new953201 pair. Panel A and B retain their previously used final45 world seeds.
+Thus a=d[A,A], x=d[A,B], y=d[B,A], z=d[B,B]. Each cell below averages16 worlds; the
+paired-world positive counts describe these worlds and are not additional training replicates.
+Coverage and quality use their native components. P is the already-weighted energy/height
+penalty, so dJ=.7*dCoverage+.3*dQuality-dP; increased P is adverse.
+
+| Policy pair | World panel | N | J(.05) | J(0) | dJ | dCoverage | dQuality | dP | Positive worlds |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| a: A / 943201 | A | 4 | 0.488043635 | 0.488979735 | +0.000936100 | -0.002365000 | -0.005118049 | -0.004127014 | 8/16 |
+| a: A / 943201 | A | 6 | 0.430089598 | 0.482415321 | +0.052325723 | +0.044612500 | +0.004768679 | -0.019666369 | 13/16 |
+| a: A / 943201 | A | 8 | 0.291076584 | 0.401221533 | +0.110144950 | +0.105040000 | +0.027910333 | -0.028243850 | 16/16 |
+| x: A / 943201 | B | 4 | 0.500192916 | 0.479567675 | -0.020625242 | -0.018630000 | -0.010349627 | +0.004479353 | 4/16 |
+| x: A / 943201 | B | 6 | 0.457583391 | 0.496057123 | +0.038473731 | +0.034510000 | +0.003361995 | -0.013308133 | 10/16 |
+| x: A / 943201 | B | 8 | 0.294354944 | 0.397071831 | +0.102716887 | +0.104672500 | +0.017194101 | -0.024287907 | 15/16 |
+| y: B / 953201 | A | 4 | 0.494398902 | 0.464607812 | -0.029791090 | -0.022957500 | -0.007733546 | +0.011400776 | 3/16 |
+| y: B / 953201 | A | 6 | 0.406888700 | 0.352967592 | -0.053921108 | -0.061157500 | -0.008847813 | +0.008456514 | 3/16 |
+| y: B / 953201 | A | 8 | 0.299184842 | 0.281804513 | -0.017380329 | -0.004282500 | -0.004266530 | +0.013102620 | 6/16 |
+| z: B / 953201 | B | 4 | 0.498897910 | 0.448371403 | -0.050526507 | -0.044640000 | -0.015399033 | +0.014658797 | 0/16 |
+| z: B / 953201 | B | 6 | 0.430893237 | 0.370479849 | -0.060413388 | -0.064380000 | -0.012274628 | +0.011665000 | 4/16 |
+| z: B / 953201 | B | 8 | 0.302237189 | 0.261502880 | -0.040734309 | -0.025750000 | -0.005763787 | +0.020980173 | 5/16 |
+
+The fixed contrasts are R=(a+x-y-z)/2, C=(a+y-x-z)/2 and T=a-x-y+z.
+R contrasts the two policy pairs averaged over panels; C contrasts panels averaged over pairs.
+The independently checked identities R+C=a-z and R-C=x-y hold. U is the equal-weight mean
+of N4 and N8, not an extra population or panel.
+
+| N | a | x | y | z | R | C | T |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 4 | +0.000936100 | -0.020625242 | -0.029791090 | -0.050526507 | +0.030314228 | +0.021148379 | +0.000825925 |
+| 6 | +0.052325723 | +0.038473731 | -0.053921108 | -0.060413388 | +0.102566975 | +0.010172136 | +0.007359712 |
+| 8 | +0.110144950 | +0.102716887 | -0.017380329 | -0.040734309 | +0.135488237 | +0.015391021 | -0.015925918 |
+| U | +0.055540525 | +0.041045823 | -0.023585710 | -0.045630408 | +0.082901232 | +0.018269700 | -0.007549997 |
+
+### Working explanation updated
+
+**Strengthened:** for these fixed assets, the U, N6 and N8 signs follow the policy pair under
+panel exchange: A benefits on both panels, B is harmed on both. The old positive endpoint is
+not erased; it also survives the other existing world panel. This weakens the explanation that
+the choice between these evaluation panels alone accounts for the observed U diagonal reversal.
+It adds no new trained-policy replication, and does not identify a generic seed effect.
+
+**Contrary evidence preserved:** panel B lowers d for both policy pairs at every N. The A/N4
+cell changes from +.000936100 to -.020625242, so there is real finite panel sensitivity and no
+single universal row-only story. A's coverage/quality gains and lower penalty at N6/N8 recur
+on both panels; B loses coverage/quality and incurs higher penalty at every N on both panels.
+A/N4 loses coverage and quality on both; its old tiny J gain depended on the lower penalty,
+which also changes sign on panel B. N6 separates strongly too: these observations do not
+identify an unseen-count-specific failure.
+
+**Weakened:** low raw sigma or action saturation is a sufficient explanation for useful service
+recovery. The diagnostic changes already repeated in B05 while service reversed, and B06
+retains that contrast under both sets of evaluation worlds. No default coefficient promotion
+follows; the B05 non-adoption of lambda0 remains. A posthoc decomposition of absolute U shows
+A0-B0 of +.071894471 / +.083382611 on panels A/B, versus A.05-B.05 of -.007231763 /
+-.003293620. This is a useful location of the finite contrast, not evidence that .05 stabilizes
+training or that zero increases population variance.
+
+**Untouched/unresolved:** learned action means, optimizer path, state visitation and multi-agent
+coadaptation are not isolated causes. R/C/T are finite contrasts, not causal shares, explained
+variance, equivalence tests, population precision or stable algorithm rankings. There is no
+new H6 fit or Q interaction, no demonstration of a fully tuned competent generic baseline,
+and no identification of the skill mechanism or count invariance. Broad direction closure
+cannot be inferred from the end of this particular diagnostic.
+
+A bounded independent ResearchCritic (`/root/b06_scientific_reading`) independently recomputed
+the complete contrast table and returned MATERIAL_DISSENT:no. Its cautions are adopted above:
+retain systematic panel-B harm, the N4 exception, the N6 evidence, native components and the
+finite scope. The critic sees no newly identified modifiable link justifying a specific repair.
+This is scientific criticism, not an additional experiment or Pro substitution.
+
+### Retained training evidence and next decision
+
+DM also read all45 retained training rows of each of the four completed fits; no policy was
+rerun. At train N6, native J is six times the learner scalar return divided by horizon500.
+For windows1-15 /16-30 /31-45 (240 training episodes each), native training J was:
+
+| Fixed fit | First15 | Middle15 | Last15 |
+| --- | --- | --- | --- |
+| A/.05 | .317121746 | .409542971 | .395315601 |
+| A/0 | .299387207 | .408687241 | .442219511 |
+| B/.05 | .323891350 | .390860568 | .407158207 |
+| B/0 | .324483821 | .390636615 | .398398494 |
+
+The late window d is +.046903911 for A and -.008759713 for B. These are stochastic training
+exposures with changing weights and worlds, not fixed-policy learning curves on a common
+panel. They do not diagnose late collapse or an evaluation-decoding mechanism. The existing
+lambda0 `action_entropy=0` loss-log shortcut is not zero actual entropy: the independently
+recorded analytic raw entropy and learned sigmas are positive. The unbounded Gaussian logstd
+path and separate existing tanh path were already known; rereading them is not a new repair
+result. These logs do not supply a newly identified bottleneck for a coefficient/action sweep.
+
+The live scientific gap is now different from the completed panel question: the original
+bounded H6-versus-SET/.05 package advantage still has only one trained comparison block.
+A possible next discriminator is one new H6 fit with prospectively fixed recipe/seed/endpoint,
+reusing the already complete B05 SET/.05 rather than retraining it. This is a candidate
+investment decision, not an accepted batch. That SET was not chosen as an unusually weak
+baseline: its final U on panel B is .400567550 versus the old SET/.05 .389560109 on panel A;
+those separate-panel numbers are descriptive, not matched-world training ranks. A recipe audit
+and focused Pro follow-up must assess this gap against the stronger alternative of ending the
+current recipe investigation without another fit. The new evidence does not automatically
+select either option; no new H6/entropy/world run is launched by this entry.
+
+### Actual exposure, resource cost and observer disposition
+
+B06 used0 fits,0 training team steps and0 optimizer updates;24 panels,192000 evaluation team
+steps,384 policy/world episodes,1152000 UAV steps and12000 returned batched policy calls.
+Command wall191.109937649s (3.185165627min), run-study wall189.918688179s, user CPU730.280454s,
+system CPU1.664876s, peak scientific-process Linux RUSAGE_SELF RSS891292KiB (.850002289GiB).
+Peak scratch is unmeasured. Engineering/review/collection/publication work is additional and
+not assigned a false zero cost. Runtime was native CPU float32, Python3.10.21,
+torch2.7.0+cu118, numpy1.26.3, torch threads4; no scientific precision/runtime change.
+The fresh native memory floor passed before admission.
+
+The generation75 READY event was read in full, then consumed by exact wake/event identity;
+rearm returned generation76 with no remaining active scientific jobs. Historical terminal jobs
+are retained as evidence. No worker restart or Pro resend followed the completion event.
