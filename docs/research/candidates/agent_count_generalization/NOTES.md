@@ -3952,3 +3952,87 @@ The snapshot's command wall184.063840049 seconds is partial cost, not the comple
 its unchanged45-update endpoint and collect all panels/checkpoints before the E/Q and native
 service reading. H6's complete adverse exposure/service tradeoffs and all intermediate results
 remain part of that reading. No automatic third fit, coefficient change or confirmation.
+
+## 2026-09-23 — B04 SET stage15: positive interaction without SET service recovery
+
+The scheduled observation returned the same accepted native runner276067/supervisor276066
+running with consistent identities, no exit witness and zero observation errors. Fresh main
+`9ff4925d56f5361aeb28ac5574acdb1f71a2c169` contained no newer pause, lead or fixed-input
+change. Read/hash-verified all14 currently available small artifacts, including the complete
+20 rollout rows and six evaluation panels. The durable
+[summary](../../../../runs/agent_count_generalization/s1_entropy_b04_set_zero_s943201/summary.json)
+SHA-256 is `41135c3ff7f544c01bc581d9af18e01fc1b797ca60af1c824d347d329e750ad5`:
+168000 training/stored team steps,336 episodes/resets,**20 completed updates**, rollout21
+collected,48000 evaluation steps and96 evaluation episodes. Failure remains null. Actor/critic
+have45000 optimizer calls each and all skill/discriminator paths0. All recorded losses/data
+are finite; required actor/critic representations move, coordinator remains unchanged, and
+raw action/log-probability storage, clipped execution, native component/motion identities,
+terminal cadence, sigma/entropy identities and zero-update frozen evaluation pass. The JSONL
+equals the complete summary rollout sequence; first pre-update control matching is preserved.
+
+Checkpoint15 independently loads130 finite tensors at its original native location:
+20968771 bytes, SHA-256 `4f8841901806e6298ddaafb8da6c70143681fd35cc4f736c415128b30d00ea09`,
+correct source/rollout and unchanged effective config. Its independently recomputed
+parameter/normalizer digest is `c503630b651852b09c8f0ad8d9a839df858c7a7f3e893bfcf2c1d5e207ded1f2`.
+Checkpoint00 identity remains unchanged. Snapshot command wall1531.160680272 seconds
+(25.519344671 minutes) is partial cost; complete fit wall and peak RSS are not yet available.
+
+### Same-stage service/components and package interaction
+
+Recomputed contrasts directly from each stage15 panel's16 paired native-world outputs and
+the old clip controls. The running summary's terminal control-comparison list is still empty;
+these interim calculations do not depend on a terminal comparison already being written.
+H6 uses its own **stage15** panel here, not its completed final45 result. All four stage15
+panels for each N share the fixed world addresses. Q=E_SET−E_H6=G_.05−G_0 holds numerically.
+
+| Stage15 N | SET J,lambda0 | SET J,lambda.05 | E_SET,J | Coverage change | Quality change | Penalty change | Q |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 4 | .426339553 | .457104788 | −.030765235 | +.073360000 | −.036544607 | +.071153853 | −.025083188 |
+| 6 | .423762848 | .458891338 | −.035128489 | +.013912500 | −.030400643 | +.035747046 | −.019020734 |
+| 8 | .369087814 | .401738217 | −.032650403 | +.008845000 | −.032619180 | +.029056149 | +.062032541 |
+
+SET's equal-weight unseen J is.397713683 versus.429421502, **E_SET,U=−.031707819**.
+The matched H6 E_U is−.050182495, so **Q_U=+.018474676** and the H6−SET gap falls from
+.069624234 to+.051149558. This positive interaction comes with deterioration of SET's own
+native J and therefore fails the prewritten joint recovery condition at this interim stage.
+At N8 SET now exceeds H6 by.012494488 even though SET itself is worse than its .05 control;
+this is a concrete example of why within-treatment rank and positive Q cannot replace E_SET.
+Negative SET world differences number12/11/11 of16 for N4/6/8. They are conditional worlds
+within one selected training block, not independent training replication or a population CI.
+
+SET coverage improves at all three N, but lower quality and larger penalty more than offset
+it in J=.7*coverage+.3*quality−penalty. Preserve this favorable component rather than calling
+all service components worse. Trained N6 fails the no-observed-service-cost conjunction due
+to lower J despite its higher coverage. This tradeoff differs from completed H6's lower
+coverage at all N; neither should be compressed into a common coverage-loss explanation.
+
+### Interim exposure and the unchanged endpoint
+
+Aligned diagnostic training window1–15 uses120000 team/720000 UAV steps,2160000 coordinate
+exposures. Rates are computed after summing counts. Final full1–45 and late31–45 readings
+remain fixed and unavailable for SET at this point.
+
+| SET/clip recipe | Raw-coordinate saturation | Boundary truncation | Boundary visits | Raw attempted L2/UAV-step | Executed attempted L2/UAV-step | Realized L2/UAV-step | Mean H_before |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| lambda0 | .327566204 | .213661111 | .218104167 | 48.895066147 | 36.457369675 | 31.079196768 | 4.192870052 |
+| reused lambda.05 | .443280093 | .154837963 | .163347685 | 63.686033183 | 39.719986166 | 36.117901995 | 5.029176304 |
+
+Respective saturation counts are707543/957485 and truncation461508/334450. Sigma after15
+is[.945207953,.950851560,.956965148] versus[1.759114385,1.761182308,1.704166889]. As with
+H6, analytic H is reconstructed from sigma and adds no independent mediator. Here lower
+latent saturation accompanies **more** physical boundary truncation already in the interim
+window. The intended entropy-scale intervention is active; adverse boundary/service behavior
+is scientific counterevidence, not a reason to classify treatment as technically unactivated.
+These aggregates do not identify action means, state visitation or unique noise mediation.
+
+Strengthened: intermediate saturation and actual service/components must be distinguished;
+an apparently favorable interaction can arise while both packages lose native service.
+Weakened at stage15: selective useful SET recovery and a no-cost boundary/service repair.
+Still unresolved: the predeclared final45 E/Q, full/late exposure and trained-N tradeoff for
+SET. Existing complete Pro advice covers the unchanged continuation. Do not select the N8
+ranking or an intermediate endpoint, extend the horizon or add a new fit from this observation.
+
+**2/2 fits started,1 complete and1 running**. Continue the same SET process through its
+fixed45 updates. Consumed generation59 event `f8a29536aab3c2492f42213b` under wake
+`83a63d17-4778-475b-bdbd-e65a1c8e860f` and rearmed generation60. No worker restart,
+repeated Pro Send, additional fit or cross-task message.
