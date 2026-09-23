@@ -1,0 +1,77 @@
+{
+  "admission": {
+    "claim_state": "accepted",
+    "state": "accepted"
+  },
+  "artifacts": {
+    "stderr": {
+      "path": "/home/wu/hmasd-worktrees/usa-b04-914fc4843/runs/uav_service_auxiliary/b04_r_914021_a01/stderr.log",
+      "state": "present"
+    },
+    "stdout": {
+      "path": "/home/wu/hmasd-worktrees/usa-b04-914fc4843/runs/uav_service_auxiliary/b04_r_914021_a01/stdout.log",
+      "state": "present"
+    },
+    "summary": {
+      "path": "/home/wu/hmasd-worktrees/usa-b04-914fc4843/runs/uav_service_auxiliary/b04_r_914021_a01/summary.json",
+      "state": "present"
+    }
+  },
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/f00d0398edf6ee0d8f767f6c7733984a934bf5d98d23122a9e22abb620e5112d.json",
+  "direction": "uav_service_auxiliary",
+  "execution": {
+    "exit_witness": {
+      "path": "/home/wu/hmasd-worktrees/usa-b04-914fc4843/runs/uav_service_auxiliary/b04_r_914021_a01/process-exit.json",
+      "state": "absent"
+    },
+    "runner": {
+      "observed_identity": {
+        "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+        "kind": "linux_pid_start_ticks",
+        "pid": 382504,
+        "session_id": 382503,
+        "start_ticks": 54144457
+      },
+      "recorded_identity": {
+        "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+        "kind": "linux_pid_start_ticks",
+        "pid": 382504,
+        "session_id": 382503,
+        "start_ticks": 54144457
+      },
+      "state": "running"
+    },
+    "state": "running",
+    "supervisor": {
+      "observed_identity": {
+        "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+        "kind": "linux_pid_start_ticks",
+        "pid": 382503,
+        "session_id": 382503,
+        "start_ticks": 54144454
+      },
+      "recorded_identity": {
+        "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+        "kind": "linux_pid_start_ticks",
+        "pid": 382503,
+        "session_id": 382503,
+        "start_ticks": 54144454
+      },
+      "state": "running"
+    }
+  },
+  "explicit_retry_available": false,
+  "kind": "hmasd_operation_status",
+  "manifest_ref": "/home/wu/hmasd-worktrees/usa-b04-914fc4843/runs/uav_service_auxiliary/b04_r_914021_a01/launch-manifest.json",
+  "node": "wsl_4070",
+  "observed_at": "2026-09-23T16:33:03.729900Z",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/f00d0398edf6ee0d8f767f6c7733984a934bf5d98d23122a9e22abb620e5112d.json",
+  "output_root": "/home/wu/hmasd-worktrees/usa-b04-914fc4843/runs/uav_service_auxiliary/b04_r_914021_a01",
+  "record_consistency": {
+    "mismatches": [],
+    "state": "consistent"
+  },
+  "schema_version": 1,
+  "sha": "914fc484368cc6c41af211b169c45b02e4a10425",
+  "source_root": "/home/wu/hmasd-worktrees/usa-b04-914fc4843"
+}

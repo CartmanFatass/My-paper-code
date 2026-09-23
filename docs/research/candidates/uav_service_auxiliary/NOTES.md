@@ -4733,3 +4733,29 @@ The only intervention remains the extra `2 * actual return_constraint_cost` in
 training; original evaluation coefficient remains 2. N's observations caused no
 coefficient, endpoint, seed or exposure change. R is the second originally
 selected fit, not an extension, confirmation or response to a positive N gate.
+
+## 2026-09-23 — B04 fixed R admitted on the same source
+
+The preselected R fit is **natively accepted and running** on the configured
+4070, with fresh actual-node available memory **13,679,423,488 bytes** against
+the 4 GiB floor. Its supervisor and scientific child identities match and the
+operation record is consistent. [Manifest](../../../../runs/uav_service_auxiliary/b04_r_914021_a01/launch-manifest.json),
+[admission preflight](../../../../runs/uav_service_auxiliary/b04_r_914021_a01/admission-preflight.json),
+[observed state](../../../../runs/uav_service_auxiliary/b04_r_914021_a01/launch-status.json).
+The supervisor's successful launch-command exit is not the scientific child's
+completion; no R outcome has been accepted.
+
+The written active config and complete spec exactly match N; the arm selector
+and extra training coefficient are the intended changes. Training/evaluation
+coefficients are **4/2**. The original N operation was collected and accepted
+before R's single launch. R's initial summary is still the pre-evaluation
+skeleton; the runner publishes initialization/collection fingerprints with its
+first progress write, so those matched-initialization checks remain pending.
+There is no evidence of an initialization mismatch or a runner failure.
+
+Retain this accepted operation and arm the assigning task's deterministic
+observer with the same native status reference. At its next checkpoint read
+the newly written fingerprints and progress; at completion collect and verify
+the entire R output, then read the fixed paired final worlds and contrary
+tails. No restart, new Pro question, new fit or cross-App message is selected
+by this completion/launch boundary.
