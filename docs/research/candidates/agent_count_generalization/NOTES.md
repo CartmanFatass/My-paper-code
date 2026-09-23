@@ -4722,3 +4722,30 @@ The frozen B03/B04 hashes remain unchanged. Current published main `0fed22d97` r
 direction's active lead and no owner pause on it. Publish the accepted source, then use
 native admission for the fixed first `.05` cell. B05 remains0/2 scientific fits started at
 this acceptance; its prospective pair, ordering, cost and interpretation are unchanged.
+
+## 2026-09-23 — B05 first cell admitted and training; fixed zero cell remains selected
+
+Published accepted executable source `e2ea736457e0992fb53cf21aa775fd15da3d8231` and prepared
+an isolated native worktree. The configured supervisor accepted the dispatch once; then
+native admission independently accepted the scientific child with fresh published control,
+source and memory checks. Source and native handles are recoverable in the runner-written
+[launch manifest](../../../../runs/agent_count_generalization/s1_entropy_b05_set_l05_s953201/launch-manifest.json)
+and [preflight](../../../../runs/agent_count_generalization/s1_entropy_b05_set_l05_s953201/admission-preflight.json).
+The dispatch supervisor finishing is not training completion. No old worker was restarted.
+
+The collected [initial live summary](../../../../runs/agent_count_generalization/s1_entropy_b05_set_l05_s953201/summary.json)
+records `training`, first rollout collected:8000 training/stored team steps,16 training
+episodes,0 completed updates,24000 evaluation steps/48 episodes. This is **1/2 fits started**,
+not an accepted training result. Independently checked all three initial N4/6/8 panel payloads:
+new world addresses, native J/component/scalar-return identities, finite values, clipped
+execution, frozen parameters/normalizers and zero evaluation optimizer calls. Actual effective
+lambda is.05 with endpoints.05, targets/annealing off, initial sigma1, trainable optimizer-owned
+logstd, exact953201 training worlds and production spec. These establish activation, not gain.
+
+Armed deterministic observation generation65 against this same accepted operation and read
+its first fact: scientific child and detached supervisor both running, consistent native
+identities, no exit witness or pending event. The observer owns completion/error/checkpoint
+wakeup of this DM only. First fit's full terminal collection and scientific reading are the
+current dependency. Then bind its exact summary bytes to the already-selected zero cell at
+the same executable source; first score does not select continuation. Neither admission,
+initial evaluation nor tests are recurrence evidence. No further fit or Pro request selected.
