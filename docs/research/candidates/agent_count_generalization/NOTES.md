@@ -4883,3 +4883,44 @@ child and detached supervisor both running with consistent recorded/native ident
 exit witness, error or pending event. The completed first operation remains terminal. Cost is
 **2/2 fits started,1 complete/1 running**. Full paired effect, component/N6 costs and training
 exposure comparison remain the dependency; no early endpoint or effect claim from activation.
+
+## 2026-09-23 — B05 zero-cell first checkpoint; adverse stage15 comparison retained
+
+Read generation69 CHECKPOINT `49eea53bb8fcc010140bb05e`, wake
+`ba901262-7017-42b2-9ac2-3307bdaee0d5`. Accepted native identities are still running and
+consistent, with no exit witness/stderr. Refreshed current main, including concurrent result
+publication: no change to this direction's owner pause/lead or frozen comparison. Rearmed the
+same zero-cell observation as generation70; no restart, new fit, Pro Send or other-task message.
+
+Collected byte-stable snapshot at25.335019898 command minutes:22/45 updates, rollout23
+collected,184000 training/stored steps,368 training episodes,48000 evaluation steps/96 episodes.
+Independent reading checks all22 training rows and six panels, exact49500 actor/critic calls
+each, zero skill optimizer calls, native reward identities, finite loss/scale histories, raw
+storage/old-logp, clipped execution and frozen zero-update evaluation. Training.jsonl agrees
+with all completed rows. Now directly compared both first rollout records: scalar returns,
+full motion telemetry, pre-update sigma/logsigma/analytic entropy are exactly equal, confirming
+the previously runner-reported first-collection match. The first control bytes retain their
+declared hash. Checkpoint00/15 paths/hashes remain native; full loading is deferred to terminal
+collection, not inferred from file names. Legacy zero `action_entropy` is not a measurement.
+
+Independently paired the raw same-world stage15 panels, zero minus.05:
+
+| N | zero J | E_J | delta coverage | delta quality | delta weighted penalty | positive worlds |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| 4 | .407421696269 | -.115595579940 | -.074120000000 | -.031041625389 | +.054399092324 | 1/16 |
+| 6 | .350268325090 | -.146463787052 | -.145655000000 | -.021221896378 | +.038138718139 | 0/16 |
+| 8 | .312211315657 | -.063348617584 | -.066097500000 | -.002314724497 | +.016385950234 | 4/16 |
+
+Stage15 unseen-N mean effect is **-.089472098762**; initial stage0 effects are exactly0.
+All three mean coverage/quality changes are adverse and penalties increase. These world signs
+describe this one training pair, not independent training replications. The adverse panel is
+retained, not substituted for or erased by the frozen final45 endpoint.
+
+After update22 zero-cell raw sigma is `[.9188569784164429,.9494268894195557,.9455133080482483]`,
+analytic raw entropy4.064266762; rollout22 raw saturation=.306138889 and boundary truncation
+=.151736111. Scale growth is suppressed, but this did not yield an early service benefit:
+the simpler claim that reduced raw noise guarantees improved return remains contradicted.
+This is neither a terminal replication failure nor evidence for eventual recovery. Stage15
+costs and the pending stage30/final45 comparisons remain part of the fixed reading. Continue
+the already-declared horizon with2/2 fits started,1 complete/1 running; no new investment or
+changed scientific standing is selected from this interim observation.
