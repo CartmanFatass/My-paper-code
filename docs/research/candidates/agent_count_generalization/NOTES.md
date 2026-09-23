@@ -10616,3 +10616,99 @@ Reviewer checks changed RNG/result/execution identity before the DM accepts. Com
 inputs, admit each fit on fresh actual-node memory, then arm observation for accepted handles.
 No helper owns NOTES or makes scientific choices, launches a result, messages another task or
 spawns another helper. This L0 starts at **0 B12 fits**, not a continuation of B11's completed runs.
+
+## 2026-09-23 — B12 implementation and independent engineering review accepted
+
+The DM read and accepts the four-path bounded Implementer diff. The new runner owns the
+fixed seed/address/tag bindings and fit control flow, while reusing B11 initialization,
+configuration, counting, native final evaluator and B03 collector. The normalized `run_fit`
+AST equals B11 after only explicit `b11` helper qualification, the `make_b12_config` wrapper
+name, docstring and B12 error-label substitutions. No module-global mutation, old checkpoint
+load, initial evaluation, core edit or scan interface was introduced. B11's runner, package,
+CLI and test remain byte-identical to their frozen `dc1bc1f2718b1e4ff9510030ad26c287c76b03ac`
+versions. The implementation stays within the prospective scope.
+
+The registered independent Reviewer read the actual B11 initializer/evaluator, B03 collector,
+config/model builders and admission consumer alongside the new code. It found **no material
+defect** in the reviewed executable bytes. Its then-existing five checks passed in 3.68s.
+The DM requested additional old-seed/old-tag refusal and saved physical-world equality checks;
+only tests changed afterward. The final Implementer run reports **5 passed, 14 existing
+dependency deprecation warnings in 4.06s**. The DM read those checks and their output; final
+AST/compile, LF, whitespace and all four hashes also pass. The review's executable hashes are
+still exact; no unchanged broad test rerun is needed merely for a launch boundary.
+
+The final checks use real reduced collect/store/update/evaluate paths: two lanes, horizon20,
+one rollout, smaller models. They verify seed963401 in configuration, actual initial tensors,
+sampler and native environments; common initialization across true N6/N8, fresh versus B11;
+target-owned empty optimizers/storage; raw sample/logprob preservation and clipped physical
+execution; final-only order, saved initial states/observations equal across arms; learner
+model/runtime/global-RNG isolation and zero evaluation storage/optimizer calls; new output
+and source identities; and admission ordering/SHA/refusal cases. Admission is mocked in
+tests. No production B12 fit or full-horizon result is claimed from these technical checks.
+
+Final SHA-256 values:
+
+| Owned new file | SHA-256 |
+| --- | --- |
+| `training_recurrence_b12/__init__.py` | `66ecf0ed2a21b4aad0ed9bd5ef820d091dbbc385a142fdc5515edbc8896b6eef` |
+| `training_recurrence_b12/runner.py` | `68fee8c3f9f0b0d58610c8452f01d23ccef09a5c35421fd58b14eb1341e7256d` |
+| `scripts/run_agent_count_training_recurrence_b12.py` | `a9d5b067431b87102e1a23decbda1a9f16d29aa8548df75073f88e45e7a936c6` |
+| `tests/.../training_recurrence_b12/test_runner.py` | `d2f90ee5ef698661a94479e8fa1c8cd52294fd5e90a754c334db43d9be3ce1d4` |
+
+Reading preparation also distinguishes B11 paired loss from lowest absolute outcome. On its
+same N8 panel, the lowest T6 service is 15.184 users/step (1645815), whereas the lowest T8
+service is 19.454 (1645801); minimum J is .229516941 (T6,1645815) and .279426368
+(T8,1645824). At N6 the service minima are 20.378/25.124 (both1645608); minimum J is
+.323061474 (T6,1645608)/.357899641 (T8,1645623). These are direct summaries of already-read
+B11 arrays, not new evaluations, a common worst world, or proof of deployment robustness.
+They do not erase B11's paired losses or change the already-fixed B12 mean estimand.
+
+Next execute exactly the two reviewed cells under native admission. The current main compute
+configuration adds the configured scientific venv's `bin` directory to WSL worker PATH so
+the native loader can find ninja; interpreter, device and the scientific contract are unchanged.
+Use the live canonical configuration for the new launches, preserve existing native artifacts,
+and record actual admitted operations before arming their observer. Still **0 production B12
+fits at this acceptance entry**.
+
+## 2026-09-23 — B12 both fixed cells admitted and training; same-handle observation active
+
+Both new cells are now admitted and have actually entered training: **2 started production
+fits**, with the fixed 720k train/64k final-evaluation contract unchanged. This is execution
+acceptance and observed initialization, not scientific acceptance or evidence of recurrence.
+The authoritative native identity, source, command, timestamps and paths are in the copied
+runner-written records:
+
+- T6: [launch manifest](../../../../runs/agent_count_generalization/s1_training_recurrence_b12_t6_s963401/launch-manifest.json),
+  [fresh memory admission](../../../../runs/agent_count_generalization/s1_training_recurrence_b12_t6_s963401/admission-preflight.json).
+- T8: [launch manifest](../../../../runs/agent_count_generalization/s1_training_recurrence_b12_t8_s963401/launch-manifest.json),
+  [fresh memory admission](../../../../runs/agent_count_generalization/s1_training_recurrence_b12_t8_s963401/admission-preflight.json).
+
+All four immutable files were copied from the native outputs and verified by byte length
+and SHA-256. Both native status observations report accepted/running, matching actual
+runner/supervisor identities and consistent records. Each fresh physical/effective memory
+reading exceeded the configured 4GiB floor. The canonical control files were reconciled to
+the latest published main; existing native B11 outputs and other directions' running work
+were preserved. A preliminary control-blob read outside the configured network shell stalled
+on Git's lazy network fetch; only that owned pre-launch reader and its Git children were
+stopped. The same two control files were reconciled and read successfully through the
+configured network shell before any B12 launch. This started no scientific fit and retried
+no accepted operation. Historical Git commit-graph cleanup warnings remain unrelated to
+the successfully verified source blobs and admissions; no repository repair was attempted.
+
+Native full-model summaries already verify seed963401, all16 new training-world addresses,
+true-N configurations, and the same common tensor manifest across arms. Both actual initial
+parameter/normalizer digests are
+`b6d6154362de907879eadf3bd7331c3cdd2ce3522c38bd40cb517cf3a01437d0`,
+and the returned canonical post-construction RNG digests are
+`8adf4b4259ddbf72caa6cc90d014b71883ef22c8e151b991ab6f4061f79ee8fe`.
+The shared actual initialization and sampler state differ from B11's recorded block.
+Each fit has completed native training transitions; no endpoint or best-checkpoint selection
+was made from these startup observations.
+
+The consumed Pro completion event was rearmed using its exact generation99, wake and event
+identities; its observer then had no remaining active job. New deterministic observations
+were separately registered for these two accepted launch operation references. Generation101's
+first drain sees both existing processes running, zero observation errors, no pending event
+and no record mismatch. Its 1500s bounded window returns control for rearming the same
+handles; it neither changes final45 nor restarts a worker. Complete native outputs, all45
+updates/arm, full final panels and independent trace/checkpoint reading remain outstanding.
