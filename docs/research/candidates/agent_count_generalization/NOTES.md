@@ -4803,3 +4803,58 @@ This preserves the fresh .05 scale/exposure observation, not the absent zero-cel
 effect or an identified mechanism. Read the fixed final endpoint and bind the preselected
 zero cell only after complete first-cell acceptance. Cost remains1/2 started,0 complete;
 no new scientific standing, extra fit, score-dependent continuation or Pro request.
+
+## 2026-09-23 — B05 first cell complete and accepted; exact control bound for fixed zero cell
+
+Read generation67 READY `965273596b2d132c37f7f0bf`, wake
+`00e5d5c2-125c-44ab-8e3c-e4acfb56f006`. Native child/supervisor are absent with a consistent
+valid exit0 witness. Collected all25 runner-written files(85079882 bytes), verifying every
+file's SHA-256 against the native inventory. Full local/native checkpoint copies are retained;
+small run records are published. Consumed/rearmed68 without reviving the completed job.
+Current published main still has no newer owner pause/lead change on this direction.
+
+DM read and accepts **set_l05**,1/2 fits completed. Full fixed exposure:360000 training/stored
+team steps,720 training episodes/resets,45 updates,96000 evaluation steps/192 episodes,
+12 complete panels and4 checkpoints. Actor and critic each101250 optimizer calls, skill paths0.
+All45 training rows match training.jsonl; independent arithmetic checked native training/eval
+J identities, all component vectors, raw-action/original-logprob replay, clipped execution,
+row-aligned scale/entropy, complete and late pooled numerators/denominators, parameter movement
+on every update and frozen zero-update evaluation. No failure or stderr; process completion
+alone was not used as scientific acceptance.
+
+Loaded all four checkpoints with the scientific interpreter:130 finite tensors each, published
+source and serialized config match, saved logstd equals the recorded stage value. Recomputed
+initial/final parameter-normalizer digests agree with summary; final digest is
+`9f183501f97c021be1919d6da925a7ca981736dbeb6ec9dc0e1e67583d0a177b`.
+As in B04, the common checkpoint serializer preserves lambda_l but omits the four extra
+entropy endpoint/target/annealing fields; their explicit effective contract is in config.json
+and summary, not inferred from absent checkpoint fields. Final checkpoint SHA-256 is
+`98062b5b338b684219c43b5c9a3dc13bf176322a948c439294beee1d52ae477e`.
+
+| Final45 N | J | coverage | quality | weighted penalty |
+| --- | ---: | ---: | ---: | ---: |
+| 4 | .498897910261 | .669147500000 | .206895075106 | .031573862271 |
+| 6 | .430893236913 | .585937500000 | .174829483755 | .031711858213 |
+| 8 | .302237189002 | .409885000000 | .144583439577 | .028057342871 |
+
+The .05-cell unseen-N mean is.400567549631. It is a comparator value, not B05's treatment
+effect. Retain all stage0/15/30 panels and all16 final worlds; do not select the earlier higher
+means or read fresh-world stage changes as identified policy degradation. Final raw sigma is
+`[4.822341442108154,4.949835777282715,4.917407989501953]`, analytic raw entropy9.022211122.
+Full1–45 raw-coordinate saturation=.636593981481 and boundary truncation=.164499845679;
+late31–45 rates=.802748611111 and.171164351852. This supports recurrence of the .05 scale/
+exposure pattern in a new training realization; it leaves useful zero-entropy treatment response,
+N6 cost, wider ranking and mechanism unresolved. No Q or old-H6/new-SET comparison is made.
+
+Measured command wall57.819554034 min; fit wall3467.474343583 s, user CPU13683.796312 s,
+system CPU30.972938 s. Scientific-process peak RSS1209952 KiB(1.153900 GiB); peak scratch
+unmeasured. Tests, reading, transfers and publication are additional support work.
+
+Execute the **already selected** second `set_l0` cell, seed953201, same immutable executable
+source `e2ea736457e0992fb53cf21aa775fd15da3d8231`, with first B05 summary
+`runs/agent_count_generalization/s1_entropy_b05_set_l05_s953201/summary.json` as the explicit
+native control input. Its exact SHA-256 is
+`136d090b32a8c5fec1eefad5dbaaefa9155d44ce4335c7fb0f07585d36cff4c4`.
+This is the fixed first control, not a favorable score/source selection. The source, initializer,
+first pre-update data and world/panel checks remain enforced; no extra fit, new Pro round or
+changed endpoint. B05 effect reading waits for the complete paired zero cell.
