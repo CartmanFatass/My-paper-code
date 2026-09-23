@@ -1060,3 +1060,142 @@ These checks support continued execution of the original P arm; they do not supp
 predeclared endpoint or a P−G/P−D scientific result. Preserve all fixed evaluation panels,
 diagnostic signs and adverse outcomes. Rearm the same accepted operation for completion/error
 or the next bounded checkpoint, without adding exposure or changing inputs.
+
+## 2026-09-23 — B01 complete; positive local pairing does not recover P service
+
+**Acceptance and evidence.** P's accepted native operation exited0 with a valid witness;
+runner/supervisor are absent and records consistent. Collected all13 original files,
+68,180,593 bytes, and matched every remote/local SHA256. Read the full
+[P summary](../../../../runs/complementary_skill_learning/b01_p_260923901_957a65c01/summary.json),
+[training rows](../../../../runs/complementary_skill_learning/b01_p_260923901_957a65c01/training.jsonl),
+[raw predictions](../../../../runs/complementary_skill_learning/b01_p_260923901_957a65c01/auxiliary_predictions.jsonl)
+and [actual combination trajectories](../../../../runs/complementary_skill_learning/b01_p_260923901_957a65c01/combination_diagnostic.json).
+This completes the original three fits at frozen source
+`957a65c0155f88e5287c744f0f667192174f16df`; there is no fourth fit or changed endpoint.
+
+P has45 native updates,360,000 training/stored transitions,720 episodes and53,760 evaluation
+transitions:96 complete500-step episodes,3,200 diagnostic prefix steps and2,560 real branch
+steps. Native optimizer counts are675/101,250/101,250/675/2,700 in coordinator/actor/critic/
+team-discriminator/individual-discriminator order. Both heads and the P auxiliary trunk
+have315 optimizer steps; all36,000 true ten-step windows are retained, terminal discards0.
+Every rollout's specified trunk groups move; all native groups move from initialization.
+The initial native digest, complete initial-own panel and first-rollout facts/target
+calibration equal D/G. Maximum sampled old/replayed log-mu discrepancy is4.291534423828125e-6,
+forced scores0. All finite-value, time/lane order, occupancy, raw-target/batch hash,
+raw-MSE/variance and optimizer-count checks passed. All frozen evaluations have zero
+optimizer and normalizer updates. Both logs are empty.
+
+Loaded both trusted checkpoints without executing another model or trajectory. Byte hashes,
+native tensor digests, frozen calibration and final Adam315 states match the records;
+checkpoint history agrees after normalizing tuple/list serialization. Final native digest:
+`8e3521e4c0f88ab098647615bd5c98f3ca1d3e37d246574dd488b81bb717ae1d`.
+The two `.pt` files remain in the original remote output directory and local run directory,
+ignored by Git, with hashes/sizes in the published summary. A readback comparison initially
+expected the diagnostic summary to contain raw rows; the actual schema stores aggregate
+fields plus the complete-file hash. Verified that schema and every underlying row; no
+scientific input or output was changed.
+
+**Complete service comparison.** Each named final panel pairs the same32 worlds across
+arms. Recomputed J from every native return and from .7C+.3Q-height; connected users=50C.
+Height is S1's native penalty proxy, not measured energy or S7 return safety.
+
+| Panel/readout | D | G | P | P−G | P−D |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Own J | .487211696 | .455360850 | .463577705 | **+.008216855** | **−.023633992** |
+| Own coverage | .646492500 | .612315000 | .645055000 | +.032740000 | −.001437500 |
+| Own quality | .169681089 | .166048744 | .163060153 | −.002988591 | −.006620936 |
+| Own height penalty | .016237380 | .023074274 | .036878841 | +.013804568 | +.020641461 |
+| Own connected users/step | 32.3246250 | 30.6157500 | 32.2527500 | +1.6370000 | −.0718750 |
+| Uniform J | .485044529 | .504742224 | .426480616 | **−.078261608** | **−.058563913** |
+| Uniform coverage | .645901250 | .668417500 | .604168750 | −.064248750 | −.041732500 |
+| Uniform quality | .164975172 | .177917839 | .146631549 | −.031286290 | −.018343624 |
+| Uniform height penalty | .016578898 | .016525378 | .040426974 | +.023901596 | +.023848076 |
+| Uniform connected users/step | 32.2950625 | 33.4208750 | 30.2084375 | −3.2124375 | −2.0866250 |
+
+The primary P−G own contrast is positive in18 worlds and negative in14. Coverage improves
+in24, but quality falls in19 and height penalty rises inall32. Worst own P−G J is−.073088161
+in1700106, with3.496 fewer users/step; worst coverage is−3.574 users in1700119 despite higher
+quality. Best P−G J is+.097456488 in1700104, with7.374 additional users. Against D, P own
+has9 positive/23 negative J worlds,13 coverage losses,18 quality losses and32 penalty
+increases. Worst P−D world1700116 loses.132332757 J and7.532 users/step; best1700109 gains
+.083027775 J and7.562 users while still increasing the height penalty.
+
+Uniform P J is lower than both comparators inall32 worlds. Relative to G,31 worlds lose
+coverage,all32 lose quality andall32 increase penalty. Even1700206, the only coverage gain
+(+.088 users), loses.034948960 J. Worst1700217 loses.151458531 J and7.626 users. Relative
+to D,27 worlds lose coverage,all32 lose quality andall32 increase penalty; worst1700229
+loses.125966180 J and7.208 users. P own J ranges.380865853–.537901758, uniform.351353358–
+.487787189. Raw action saturation is.545243056/.585295139. Every world's absolute values
+and signed differences remain reconstructible from the complete arrays; no unfavorable
+world was discarded. Own/uniform and initial/final world addresses differ, so within-arm
+panel differences are not paired causal effects of selection or learning.
+
+**Signed actual pairing.** Recomputed all64 rectangles,256 real ten-step cells, discounted
+native rewards/components, action clipping, trajectory hashes, pre-execution predicted
+signs and matched-minus-independent identities. Aggregate four rectangles within world.
+
+| P-bank readout | Mean scalar T | Mean team T (x6) | Worlds positive/negative | Rectangles positive/negative |
+| --- | ---: | ---: | ---: | ---: |
+| **Primary G** | **+.000293732024** | **+.001762392144** | **10/6** | **41/23** |
+| Secondary P | +.000431490679 | +.002588944072 | 12/4 | 42/22 |
+
+Primary predicted matching yields mean actual scalar return.689509207 versus.689215474
+for the equal-marginal independent mixture. Its world T ranges−.001677308749 (1700304) to
++.002516728191 (1700313); ties0. Secondary range−.000551421199 to+.001976693861; ties0.
+Descriptive preference reversals occur in7/64 rectangles. Thus the fixed P-bank/readout/
+prefix sample has positive mean signed matching value, including meaningful contrary
+worlds; this is not a test rejecting conditional-mean additivity or proof of practical
+whole-episode value. D/G primary means remain−.000008639782/−.000366352659. Their differences
+from P do not isolate bank quality because prefixes and learned readouts differ. There is
+no initial combination panel, no new-formation attribution, no P-exclusive mechanism and
+no mediation estimate for P−G. The ten-step discounted T is not500-step J.
+
+**Learning path and cost.** All45 training rows were read. Mean training J in rollouts1–15
+and31–45 is D.356046/.437044, G.281758/.395563, P.240883/.392605. These are on-policy
+training trajectories, not extra fixed-policy endpoints. P's last raw G/P training MSE is
+.004074362/.003819255; targets/visitation differ across arms after rollout1, so smaller
+numbers do not establish common-fact accuracy, useful control or mediation. Mean auxiliary
+trunk gradient norms over rollouts are G.044373445 and P.118510298; P's largest rollout mean
+is.581663502 and12/315 minibatches clip, versus0 for G. Equal lambda and close parameter
+counts did not produce equal effective actor interventions; this observation does not
+identify the reason for the service loss.
+
+All individual labels are visited; distinct observed joint tuples are D33,692/G33,760/P33,750
+out of36,000 windows each. Final individual behavior entropies are1.785863/1.781865/1.780611,
+near log6. This is evidence against gross marginal label starvation, not sufficient joint
+state-conditioned support, cross-play or reusable skill semantics. It weakens the priority
+of merely increasing the same uniform floor without a different exposure prediction.
+
+P runner-body wall2591.763733s (43.196062min), user/system CPU2458.294678/266.928666s,
+process-lifetime peak RSS1,892,116KiB, CUDA peak allocated1,531,044,864/reserved2,113,929,216
+bytes. Runtime and thread configuration match D/G. Total completed cost is3 fits,
+1,080,000 train +161,280 eval =1,241,280 physical team transitions and129.505699 summed
+runner-body minutes. First D admission to final P exit spans155.307173min, including imports,
+inter-arm reading/collection and scheduling gaps; it excludes earlier implementation and
+later final reading/publication. Runner-body time excludes preparation/import overhead,
+transfer and DM reading. Support work remains incurred but incompletely timed; shared-node
+occupancy is unmeasured, so this is not an efficiency or exclusive-GPU-time claim.
+
+**Working update and bounded recipe decision.** The prospective primary contrast P−G is
+positive, but it is an improvement over an own-policy G that itself underperforms D. Keeping
+D prevents that relative sign from being mistaken for net package value. P is below D on
+both final panels, with uniform losses against both controls in every world. Positive local
+T is preserved as an opportunity in this finite snapshot/readout sample; it cannot rescue
+the complete P package. G's uniform improvement and adverse own outcome also remain intact.
+The full pattern weakens this pair-factual auxiliary as a useful way to learn a reusable
+service bank in this block. It leaves opportunity outside these rectangles/horizons and
+training-population rankings unresolved; one fit per arm cannot establish general harm,
+equivalence or a class-wide impossibility.
+
+Apply the complete first Pro answer's explicitly predeclared local-T-without-net-use branch:
+end investment in this fixed B01 auxiliary recipe, without a second block, rank/weight sweep,
+extended horizon or confirmation. This ends a recipe, not the useful-skill question or DM
+responsibility. The next entry compares a simpler task-objective learning question with
+replication and exposure changes under current shared evidence, before committing new fits.
+
+After complete collection/reading, the maintained remote control checkout's GC preview and
+apply, using the documented read-only privileged process scan, reclaimed only P source
+snapshot `c0ba4cc61d324d659996549a87be7152`. Both output copies, original operation/claim,
+manifest, exit witness, published source and authoring checkout remain. The original D/G/P
+operations are all terminal; consume the P READY event with its exact generation/wake/event
+identities and leave no experiment waiting job to restart.
