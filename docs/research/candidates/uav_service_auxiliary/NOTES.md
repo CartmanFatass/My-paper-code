@@ -3668,3 +3668,60 @@ cost-related S−D gain and active learning, while final utility and recurrence 
 unresolved. Continue the fixed horizon and then G2 and common endpoint replay;
 no endpoint selection, extra fit or new Pro question. Consumed the exact event and
 rearmed the original operation at **generation 36**, 1,500-second window.
+
+## 2026-09-22 — B03 second-block S development-20 reversal retained
+
+Read generation-36 CHECKPOINT `eb28f47572a1031bf1235b26`, wake
+`afd775a4-c709-424e-9ea3-d21704ad4e5a`. Refreshed main `1ccec7d64` contains another
+direction's result/background revision; this direction's entry, notebook, lead and
+pause remain unchanged. Native observation at September 23 04:28:52 UTC still
+matches original supervisor/runner **301706 / 301707**, with consistent records,
+no exit witness and zero errors. Copied summary SHA256 is
+`b147ad44d29bc82613866bfd4592b7f29145ed096110f2a67676b8e779465ace`.
+Remote/local bytes match, prior completed rows and panels are exact prefixes, and
+config, calibration and first-rollout bindings remain unchanged.
+
+The snapshot remains INCOMPLETE, failure null, stderr empty: **25/30 native
+updates / 150,000 transitions in completed update rows**, plus all 6,000 transitions
+collected for rollout 26. Thus collector counts are **156,000 transitions / 104
+episodes**, while 100 episodes have completed update/readout rows. Panels 0/10/20
+account for 24 evaluation episodes / 36,000 transitions, with 71,568 initial-fact
+readout agent rows and zero new fact interaction. All **53,871 summary/calibration
+floats** are finite. Each new update moves all five native groups, both heads and
+the active base/GRU; each pass retains 5,964 team / 47,712 agent samples and 30 steps
+per auxiliary optimizer, **750 steps each** through update 25. Progress count/order
+checks pass. Completed-update wall is 4,695.405332 s; latest collection wall
+**4,788.609767 s / 79.810163 min**, peak RSS **3,092,032 KiB / 2.948792 GiB**.
+
+Development panel 20 has mean **J +93.329853**, QoS **.359506441**, cost
+**.143891593**, throughput 10.785193220 and true episode-minimum battery **.398685664**.
+All world averages independently recompute. Relative to D2 at 20, **S−D J is
+−221.758835, with all eight paired world differences negative** (range −484.385192
+to −3.076897). QoS is **+.039013932**, cost **+.093421547** and true minimum battery
+**+.018851334**. The earlier development-10 mean advantage +258.113781 therefore
+does not persist to 20. Within S, 10→20 J falls 24.321900 while QoS rises .089240575
+and cost rises .052389438. Six worlds have positive J, all have service, but worlds
+920001 and 920006 remain **−530.031340 / −604.620496**. All eight truncate at 1,500
+with zero optimizer updates, charging, cutoff, depletion and charger input.
+
+Initial-common-fact service/observation MSE is **.017281207 / .013726571** at 20:
+both increase from 10 (+.007657288 / +.005325520) and exceed D2 at 20
+(+.008729916 / +.003686301). The service-head reading is heterogeneous: episode
+932211 error .004699575 is below its training-mean reference .017477845, but
+zero-service episode 932212 error **.029862839** is far above its .001876310
+reference. Both observation episodes exceed their training-mean references. Feature
+total variance / effective rank **26.021919 / 4.859084** remains nondegenerate;
+per-agent and quarter variation is preserved with the raw prediction-array digest.
+Terminal acceptance still requires raw-array rescoring. Jointly worsening these
+readouts and J at this interval does not establish a causal mediation mechanism.
+
+New rollouts 17–25 have **17/36 zero-service and 22/36 negative-J episodes**;
+cumulative completed-update readings are **61/100 and 78/100**. Worst training J
+is **−2,413.736784**, rollout 23's third lane. Intermittent service gains coexist
+with high costs; all training event counts remain zero. These adverse rows are
+retained. Development-20 weakens the interim favorable net-use reading and again
+separates higher service from higher complete native return. It does not determine
+the predeclared final panel or justify early selection. Continue the same fixed
+30-update endpoint, then complete S acceptance and the fixed G/replay operations.
+No added fit, retuning or Pro Send. Consumed the exact event and rearmed the same
+operation at **generation 37**, 1,500-second window.
