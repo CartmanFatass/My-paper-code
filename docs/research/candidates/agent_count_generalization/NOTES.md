@@ -9332,3 +9332,32 @@ working changes, and native RESEARCH/compute-config byte hashes exactly matched 
 versions. No experiment had started during that update. The next action is one guarded native
 launch from the exact published accepted evaluator source, retaining the original binary and
 fresh actual-node admission; this is not scientific acceptance of any B10 outcome.
+
+## 2026-09-23 — B10 native operation accepted and observation armed
+
+The fixed evaluator was admitted once at accepted source
+`9fd88aa9f9e42d0855e367136751d37eb1648e07`. The retained native worktree is clean at that
+SHA; the four accepted files, core agent/compute configuration and eight committed original
+H6/SET reference files matched authoring bytes. The original H6 binary remains in its B07
+native location. No model or scientific operation was replaced.
+
+The runner-written [launch manifest](../../../../runs/agent_count_generalization/s1_initial_assignment_b10/launch-manifest.json)
+and [fresh admission preflight](../../../../runs/agent_count_generalization/s1_initial_assignment_b10/admission-preflight.json)
+are collected locally. The admission observed main
+`b39b7007689a1e172d67b4c91e684ddc33708fe8` and passed with14,293,573,632 effective available
+bytes against the configured4,294,967,296-byte floor. At11:46:48 UTC, the native kernel reports
+accepted admission, matching live runner/supervisor identities, consistent records and no exit
+witness. An initial status read preceded creation of the manifest; the same supervisor/log and
+result path were reconciled, with no second launch. These are execution facts, not B10 result
+or asset-validation acceptance.
+
+The one original operation reference is
+`/home/wu/projects/HMASD/.git/hmasd-admission/346542a53dbbe0e9ea77ac08e896ae684626ea6213aedcba9867f27acdad63b9.json`.
+Detached observation `agent-count-initial-assignment-b10` is registered against that exact
+status handle for this assigning task, using a1500-second bounded window. A checkpoint rearms
+observation only; it never restarts the evaluator. Completion/error requires reading all native
+outputs, verifying artifact hashes, independently reconstructing service and trace comparisons,
+and applying the already-written B10 branches. Planned exposure remains0 new fits/48,000 eval
+team steps/3000 actual batched policy calls/300 coordinator selection calls; actual totals and
+costs are pending the runner's complete output. No additional execution or consultation follows
+automatically from this launch.
