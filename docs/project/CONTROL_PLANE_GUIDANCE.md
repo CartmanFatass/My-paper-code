@@ -29,7 +29,7 @@
 | --- | --- |
 | 单一治理来源、任务方法自包含、按需加载 | 与前次修整原则一致。AGENTS 导航，角色管责任，skills 提供方法；不能要求普通任务沿多层历史索引拼义务 |
 | 简化手续，保留科学判断 | 与 Pro 修订一致。探索可以粗糙、单种子；确认需要适合主张的推断。更多表格不自动增加可信度，减少文件也不证明方法完整 |
-| DM 端到端负责；Root 不逐步审批 | 与两轮修整方向一致。Pro 提建议、Reviewer 返回发现，不能替代 DM 的判断或 owner 的方向选择 |
+| DM 端到端负责；Root 不逐步审批 | 与两轮修整方向一致。Pro 提建议、Reviewer 返回发现，不能替代 DM 的判断及 owner 授权范围内的科学选题 |
 | Pro 最终裁决、周额度、旧记录系统 | 后来经 owner 采纳有意替换为 adviser、per-idea fits、NOTES/runs/CLAIM；这些不是本次要恢复的遗漏 |
 | runtime 分工、Implementer、工程数字配额 | owner 后续明确修订：Codex Root/DM、Claude session DM、可用 Implementer，以及取消工程行数/时长配额。不是与 Pro 原稿逐字一致，也不是擅自遗漏 |
 | 设施选择、阅读范围与非代码审阅 | owner 后续同意以需求、成本、科学语义和维护负担判断技术选择，允许合理复用及依赖阅读；普通非代码改动由作者自检，不自动增加 Reviewer 轮次 |
@@ -83,6 +83,9 @@ Owner 可直接说“本任务作为 Root 协调 A、B”或“本任务直接�
 再把工作转交一次。当前 owner 选择四方向并行：分派 session 初始化三个独立 DM 后直接负责第四项，
 全部方向 DM 合计计数。初始化后禁止这些 DM 互相通信，各自完成与发布；共享 Git 证据仍可按需读取。
 Claude 仍是单方向 DM，其暂停与手动恢复安排保持不变。
+2026-09-23 owner 委托本任务作为科学项目管理者，并允许 DM 在失败后结合全项目证据自主修订或转向。
+Root 维护科学投入顺序与真实停滞的处理；DM 结束一个配方后继续选择有价值的研究工作，不逐次申请方向批准。
+具体授权和停止边界以宪章 section 2 为准，源文件发布仍不证明活跃会话已经读取。
 
 当前地址放在 RESEARCH：协调段说明 acting Root、范围、原生地址和工作区，方向 standing
 给出独立 DM 的 task id/host 或 child 的 parent/agent 地址、作者 checkout/branch。不要为新地址改写
@@ -134,7 +137,7 @@ flowchart TD
 ```
 
 图表示职责与数据流，不要求每个 idea 顺序走遍每个节点。暂停时没有科研启动路径；
-确认才增加 CLAIM；Portfolio 仅在 owner 触发时使用 RESEARCH 内的 review section。
+确认才增加 CLAIM；Portfolio 在 owner 请求或明确的项目管理委托内使用 RESEARCH 的 review section。
 科学设计和结果解释属于 DM；Implementer 返回实现与 checks；Reviewer 返回可达问题。
 Monitor/Transport 子代理已经退役，不保留兼容角色或改名替代。当前会话执行启动与单次发送；
 `tools/hmasd_wait.py` 在模型回合之外观察已接受的 operation，不作科学判断，也不启动或重发。
@@ -181,7 +184,7 @@ Pro 临时写指定 answer subsection，不能覆盖整个旧版本文件。
 | batching、数值复现、checker/diagnostics、watchdog | engineering Checks / Runtime notes | Implementer、Reviewer、DM；加速要保留科学含义，工程估计不能冒充科学终点 |
 | 文献、基础概念、现有分析工具 | scientific-tools Tools 及其 references/scripts | 只在相关问题需要时读取；摘要不能替代原始证据，工具不自动增加独立样本 |
 | 将方法传给 Pro | [pro author](../../.agents/skills/hmasd-pro-research-prompt-author/SKILL.md) Method context | 方向作者与 Portfolio；只复制方法文件而不传阅读目标，外部 adviser 不会自动得到它 |
-| 反证、完整代价、最小投资、可逆性 | [Portfolio](../../.agents/skills/hmasd-portfolio-task/SKILL.md) Steps | owner-triggered 方向选择；删 packet 不应删决策依据 |
+| 反证、完整代价、最小投资、可逆性 | [Portfolio](../../.agents/skills/hmasd-portfolio-task/SKILL.md) Steps | owner 请求或委托范围内的方向选择；删 packet 不应删决策依据 |
 | 方向结果发布与并发写入 | [engineering](../../.agents/skills/hmasd-research-engineering/SKILL.md) Publishing direction results | DM 自行更新自己的条目；普通冲突自行处理 |
 | 暂停、跨方向协调、运行中修订采纳 | [loop-dispatch](../../.agents/skills/hmasd-loop-dispatch/SKILL.md) | Root；App 内跨任务发送需用户明确要求；源码发布不等于活跃会话重载 |
 | Send、原操作核对、完整答案与 fallback | [Pro browser procedure](../../.agents/skills/hmasd-chatgpt-pro-transport/SKILL.md) | 当前作者 session；恢复观察与重复发送是不同动作，detached waiter 不作浏览器判断 |

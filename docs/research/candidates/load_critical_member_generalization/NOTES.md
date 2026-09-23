@@ -958,3 +958,27 @@ logged. The native actions/log-probabilities and all scientific numeric arrays a
 above were finite. The warnings remain in the published log; no source repair or rerun
 was made. This is one pair of fixed learned policies on the declared simulator worlds,
 not replicated learning, broad transfer, physical deployment evidence or a speed comparison.
+
+
+## 2026-09-23 — Owner assigns scientific project management and continued research selection
+
+The owner now asks this task to manage the project scientifically and asks DMs to review the
+whole project after failures, propose broader useful work and continue with greater autonomy.
+The prior B01 evidence and closure of the frozen capacity-conversion recipe remain intact.
+That closure does not end this task's responsibility to choose the next valuable research.
+All B01 operations and its Pro answer were already collected/read; no worker or Send is reopened.
+The original source checkout and ignored raw trajectories remain preserved. This task now acts
+as Root from the main-based project-management checkout recorded in RESEARCH.
+
+B01's large N8 eligibility difference and small remaining truncation motivate a new learning
+question; they do not establish learnable headroom. Count B08 says both packages learned useful
+service, and B10 weakens continuous reassignment as a necessary explanation of the mean benefit
+while preserving large local losses. The proposed next investment compares ordinary SET trained
+at N6 and N8, rather than extending capacity-only diagnostics. It is a new prospective candidate,
+not an accepted batch or a claimed repair; cost currently proposed is two 360k fits plus 64k final
+evaluation steps. A whole-project Pro question weighs this against mixed-count training, S7
+service/risk work and information from the ongoing complementary-skill comparison.
+
+See [current project review](../../RESEARCH.md#portfolio-review-2026-09-23-scientific-management-and-next-learning-investment).
+The current owner delegation permits choosing and continuing useful work after this advice,
+without treating a recipe failure as the end of research or requesting another direction approval.

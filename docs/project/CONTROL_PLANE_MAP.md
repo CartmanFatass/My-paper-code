@@ -18,7 +18,7 @@
 | Owner 与治理 | 当前 owner 指示；[OPERATING_CONSTITUTION.md](OPERATING_CONSTITUTION.md) | 研究暂停、方向选择与预算权限；修订不自动恢复研究 |
 | 当前研究状态与会话联系 | [RESEARCH.md](../research/RESEARCH.md) | active／reserve／archived、lead runtime、standing、pause；现有文字内记录 Root、DM 原生地址与工作区，不另设 registry |
 | 自动加载入口 | 根 `AGENTS.md`；`CLAUDE.md` 导入它；就近目录的 `AGENTS.md` | 导航与局部技术边界。新记录用 NOTES／CLAIM／runs；冻结对象从索引直接读原卡 |
-| 手工维护的方法 | `.agents/skills/hmasd-*/SKILL.md` 及其实际使用的 references/helpers | 科学、工程、Root coordination、提问、Pro 浏览器流程、owner-triggered Portfolio |
+| 手工维护的方法 | `.agents/skills/hmasd-*/SKILL.md` 及其实际使用的 references/helpers | 科学、工程、Root coordination、提问、Pro 浏览器流程、owner-requested/delegated Portfolio |
 | Codex 原生角色 | `.codex/config.toml` 注册 `.codex/agents/*.toml` | 原生 model／effort／sandbox 和共享角色正文 |
 | Claude 原生角色 | `.claude/agents/*.md` 的 frontmatter | model／tools／description 直接维护；不能从 Codex 字段推定实际生效值 |
 | 生成与适配 | `tools/publish_claude_control.py` | 共享 skills → `.claude/skills`；Codex role bodies ＋手工 Claude header → Claude agents；DM → research-hub；不生成已退役 Monitor/Transport roles 或旧别名 |
@@ -39,7 +39,7 @@ HMASD 生成文件；不自动删除孤儿文件，不检查真实会话是否�
 
 | 工作 | Codex | Claude | 方法／记录归属 |
 | --- | --- | --- | --- |
-| 方向推进 | 当前 owner 选择四方向并行；分派 session 初始化三个独立 DM 后直接负责第四项，初始化后各 DM 不互相通信 | session 本身是单方向 DM | Root 用 loop-dispatch；独立 Codex DM 由 AGENTS 直接读取共享 DM 正文；Claude 用 research-hub；direction lead 拥有 NOTES |
+| 方向推进 | owner 2026-09-23 委托 Root 管理科学项目；最多四个方向 DM 按证据自主修订或转向，各自发布 | session 本身是单方向 DM | Root 用 loop-dispatch；独立 Codex DM 由 AGENTS 直接读取共享 DM 正文；Claude 用 research-hub；direction lead 拥有 NOTES |
 | 实现 | DM 直接实现，或按需 Sol/high Implementer | session 直接实现，或按需 Opus/high Implementer | research-engineering；原生 Claude effort 未实测，不能从描述证明 |
 | Review／事实 | Reviewer，既有 Scout／Verifier／ResearchCritic | 对应原生 leaves | engineering／scientific-tools；是受限方法，不是额外决策者 |
 | 启动 | DM 直接启动或按需 Operator | session 直接启动或按需 Operator | engineering execution；精确来源、fresh preflight、accepted handle |
@@ -59,8 +59,8 @@ child 与 DM 内部助手仍向自己的分派者返回；必要的原生工具�
 [loop-dispatch](../../.agents/skills/hmasd-loop-dispatch/SKILL.md)，不假定跨 runtime 具备同一工具。
 任务是否在侧栏归档、消息是否排队、实验是否终止和科学结果是否读完是不同状态。
 
-DM 可在已选 active 方向内提出并前瞻记录新 idea，声明 fits 成本；宪章 section 3 已取消 fit allowance。
-已选 reserve 可先由指定 DM 做无实证的准备，再由 Root 按现有 reserve 权限更新状态。
+按宪章 section 2 的 owner 授权，DM 可结合全项目证据修订问题，并登记有科学理由的未被占用后继或 reserve；
+前瞻声明比较与 fits 成本，无须再等 Root/owner 审批。配方结束不等于 DM 责任结束；暂停和在途操作保持原约束。
 Implementer 的任务分配不自动授予 NOTES／RESEARCH 写入权。Pro 只接管目标 answer subsection；
 写入是否成功不确定时先核对实际 commit，再归还 writer，不建立 lease 或 ACK 服务。
 
@@ -79,7 +79,7 @@ handle，再完成新观察者 adoption。节点安全底线、declared artifact
 远端使用配置的 agent-task。新实验选机与已有进程恢复是两件事。分支/worktree 按隔离需要选择，
 在完成工作、外部交付或运行前 push，不要求逐提交 scope 尾注或月度治理计数。
 
-**Pro 路径：** 方向问题写 NOTES，owner-triggered Portfolio 写 RESEARCH → 发布问题 → 当前作者 session
+**Pro 路径：** 方向问题写 NOTES，owner-requested/delegated Portfolio 写 RESEARCH → 发布问题 → 当前作者 session
 携带 repository、branch、source_sha、target_path、question_heading、answer_heading、subject key、conversation →
 专用非保护 tab／provider preflight → 固定操作的 Send → 已验证的确定性外部观察（WSL POSIX Codex 使用
 `tools/hmasd_wait.py`）→ 完整 answer

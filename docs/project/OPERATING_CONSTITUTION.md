@@ -65,6 +65,14 @@ the UI requires it; passive waiting and ordinary task observation do not require
 Claude uses the same deterministic external observation where available and returns through its
 native runtime or a manual continuation; Codex queue is not a cross-runtime wake mechanism.
 
+2026-09-23 (owner, scientific project management and DM autonomy): the owner asks the current
+Codex session to manage the project as a scientist, and DMs to show greater freedom and
+resilience: after failures they may reconsider the whole project, recommend a broader useful
+course and continue. This delegates research prioritization and direction revision within the
+project's purpose to Root and DMs; it does not require another owner decision for each pivot.
+Closing a tested recipe does not end their research responsibility. The specific Claude FSD
+pause, frozen G33, existing ownership and accepted-operation contracts remain in force.
+
 ## 1. What this project is
 
 A personal exploratory research project on unfixed skill duration k and unfixed agent count N,
@@ -87,26 +95,42 @@ operation. A method, tool, conversation or historical workflow is not a permanen
 
 ## 2. Who does what
 
-- **Owner** chooses directions, pauses/resumes research, and adopts/amends this page.
-  Ordinary ideas, implementation, interpretation and within-budget runs do not await owner approval.
+- **Owner** sets the project's purpose and constraints, pauses/resumes research, and
+  adopts/amends this page. Under the 2026-09-23 delegation, Root and DMs may select and
+  revise research directions within that purpose. Ordinary scientific choices, implementation,
+  interpretation and prospectively declared runs do not await renewed owner approval.
 - **DM** owns a direction end to end: idea, code, run, reading and records. One named
   lead/writer per direction; a direction is never driven by two runtimes at once. The DM owns
   continuity of the scientific explanation across results, advisers and session changes, not
   just the next run. It distinguishes opportunity, representation, learning and net-use judgments,
   preserving contrary evidence and explaining why a next action changes understanding or use.
+  A direction is a revisable research question, not a permanent attachment to one recipe.
+  After a failed or completed approach, reconsider relevant project-wide evidence and remaining
+  opportunities; choose a useful continuation, replication, material revision or pivot and
+  carry it through. A DM may register an unowned successor or activate an unowned reserve in
+  RESEARCH with its scientific reason and prospective comparison, without a new Root/owner
+  approval. Keep one active idea at a time, preserve prior evidence and reconcile accepted work
+  before changing responsibility. Do not take over another lead's direction or a paused session.
+  Distinguish ending a recipe from ending investment in a question and from a DM becoming idle.
+  Honest exhaustion of worthwhile feasible work or a real external dependency may justify
+  stopping; a negative score, a completed batch or absence of a preselected successor alone
+  does not. No positive result, endless rescue search or fixed number of new ideas is owed.
 - **Codex side (owner amendment 2026-09-20):** a session may act as **Root**, coordinating
   a named set of directions, or as the **direct DM** for one direction. A DM may be an
   independent session or a Root child; its scientific responsibility is the same. Reuse the
   current lead rather than creating a second DM. The current owner-selected working level is
-  four concurrent direction DMs in total (owner, 2026-09-21), including a coordinating session
-  that finishes initialization and becomes one direct DM; this is not four of each form.
+  four concurrent direction DMs in total (owner, 2026-09-21), counting any coordinating session
+  when it also directly owns a direction; this is not four of each form.
   There is no obligation to replace a stopped direction without a worthwhile chosen question.
-  When fewer than four are active, Root may start a DM for a direction already chosen by
-  an owner-triggered Portfolio review (the reserve list in RESEARCH.md). Independent sessions
+  As scientific project manager (owner, 2026-09-23), Root maintains the cumulative project
+  explanation, prioritizes the next useful investments across directions, addresses actual
+  stagnation and may select worthwhile work under the delegated scope. Root need not become
+  the fourth DM or approve each DM's next experiment. Independent sessions
   do not create an additional allowance, approval layer or automatic authority for new tasks.
   Native task creation still follows the owner's task-creation request and available tools.
-  For the owner's four-direction assignment, create three independent sessions and let the
-  assigning session own the fourth. After initialization, these DMs do not communicate with
+  The earlier four-direction initialization assigned three independent sessions and the
+  assigning session as the fourth; the current owner assignment may instead retain a project
+  Root. After initialization, independent DMs do not communicate with
   one another, including Root reports, acknowledgments or relays through other routes. They
   complete and publish independently; ordinary shared Git evidence and current background
   remain available. Internal bounded helpers and Pro consultation retain their existing roles.
@@ -132,8 +156,9 @@ Innovation, diagnosis and prototype reasoning are work modes of the DM, assisted
 by the existing Scout or ResearchCritic; they are not additional standing roles. Scout can map
 code/evidence or retrieve a primary-source bandit/single-agent prototype, stating assumptions
 and the MARL coupling it omits. Critic challenges belief updates and discriminating predictions,
-not only claim strength. Portfolio remains owner-triggered and weighs remaining scientific
-reasons and opportunity cost, not a leaderboard or a required post-failure verdict.
+not only claim strength. Portfolio review follows an owner request or the owner's explicit
+project-management delegation, and weighs remaining scientific reasons and opportunity cost.
+It is not a leaderboard, a required post-failure ceremony or permission gate for DM initiative.
 
 Role limits allocate responsibility for the assigned task; they are not project-wide bans on
 the underlying capability. Necessary reading may follow dependencies beyond owned edit paths.
@@ -170,7 +195,8 @@ advances again, refresh and reconcile the affected changes; no standing synchron
 central writer is needed. Never replace the index with an older whole-file copy.
 Direction code and runs may stay on the published direction branch with
 pinned evidence links. Root handles assigned cross-direction coordination and shared-control
-maintenance; owner pause, direction selection and lead changes retain their existing authority.
+maintenance and the delegated scientific project plan; owner pause and actual lead changes
+retain their authority. Direction selection follows the delegation above.
 The direction lead owns NOTES.md, handing only the target answer
 subsection to Pro and reconciling uncertain writes before taking it back. Leaves return facts;
 an assignment does not implicitly grant shared-file or another checkout's index ownership.
@@ -194,9 +220,9 @@ attempt is counted and reported as a technical failure, not a scientific negativ
 its cell is a recorded decision of the lead, never automatic. A pre-training launch failure is
 recorded with its error and wall time. Confirming one claim still takes 3–5 fresh independent
 training seeds per arm, normally candidate plus one primary baseline, in one fixed batch with a
-claim note (section 8). Root may assign reasoning-only preparation to an existing chosen
-reserve, then activate it under the existing reserve authority if a worthwhile idea is
-recorded; preparation does not lift a pause. The owner pause, node admission and actual
+claim note (section 8). Root or a DM may prepare and register a worthwhile successor or
+unowned reserve under section 2, with its prospective reason and cost before result execution;
+preparation does not lift a pause. The owner pause, node admission and actual
 resource-safety checks are unchanged.
 
 ## 4. Three record types, and one repository table
@@ -293,7 +319,8 @@ The App-only cross-task messaging restriction does not apply to Jev Pro. Await a
 for the decision it can change and continue independent work. After an accepted Send, detached
 deterministic observation records completion, error or checkpoint state and wakes the assigning
 Codex session; it does not resend, interpret or require Jev. Portfolio review remains
-owner-triggered; advice does not select directions for the owner or lift a pause.
+owner-triggered or covered by an explicit project-management delegation; the responsible
+Root/DM decides within that delegated scope. Advice itself grants no authority or pause lift.
 
 **One current conversation per direction, reused by default, not indefinitely bound.** Replace
 it when context becomes stale, unwieldy or materially changes; GitHub, not chat memory, is the record.
@@ -318,7 +345,7 @@ are kept in `hmasd-research-engineering`: maintainable scope, proportionate corr
 checks, exact-sha staging of declared artifacts, the telemetry rule, quarantine of incomplete
 attempts and diagnosis by reproduction. Engineering review uses actual complexity and risk,
 not line counts, orchestration percentages, elapsed-test ceilings or fixed note/test counts.
-This does not relax scientific allowances or genuine resource-safety and external-effect checks.
+This does not relax scientific contracts or genuine resource-safety and external-effect checks.
 Non-code documentation, skill prose and descriptive control-plane edits use the author's
 consistency and source checks; they do not automatically invoke a Reviewer. Independent review
 continues for core and high-risk executable behavior, including executable configuration,
@@ -371,8 +398,8 @@ or retranscribing old records. This is a small activation change, not a reposito
 Two directions are active at adoption; all others become archived for investment purposes,
 not scientifically disproved. `tail_return_distributional_learning` (TRDL) is the one reserve
 direction: Codex Root may start a DM for it under the current concurrency setting when a worthwhile
-discriminating idea exists, and is under no obligation to do so. The reserve list is
-amended only by an owner-triggered Portfolio review.
+discriminating idea exists, and is under no obligation to do so. These are adoption-time
+assignments; current direction selection and reserve changes follow section 2 and RESEARCH.
 
 | Direction | Initial standing after adoption |
 | --- | --- |

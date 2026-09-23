@@ -7,7 +7,8 @@ description: Coordinate user-requested Codex Root assignments and cross-directio
 # Codex sessions: Root or direct DM
 
 Authority: `docs/project/OPERATING_CONSTITUTION.md`. Current state and session routing:
-`docs/research/RESEARCH.md`. Root coordinates; a DM owns science and its three records.
+`docs/research/RESEARCH.md`. Root manages the scientific project under the owner's delegation;
+a DM owns a revisable research direction and its three records.
 An independent DM session and a DM child have the same scientific responsibility.
 Claude remains a single-direction DM through its generated `hmasd-research-hub`.
 
@@ -28,8 +29,10 @@ Read the owner instruction, pause and current direction standing. Inspect anothe
 only for a concrete coordination need. Infer the mode from the assignment or ownership; do not ask the
 owner to repeat an already clear choice.
 
-- **Root:** coordinate a named set of directions, resolve shared dependencies, and maintain
-  assigned cross-direction controls. DMs publish their own result entries; Root is not a
+- **Root:** maintain the project's scientific explanation, compare the information value and
+  cost of next investments, address concrete stagnation, and select useful work within the
+  owner's delegated scope. Coordinate existing ownership and shared dependencies; maintain
+  the current scientific plan and assigned controls. DMs publish their own result entries; Root is not a
   routine result-publication gate. Count independent DMs and children
   together with any assigning session that becomes a direct DM toward the current
   owner-selected level of four concurrent direction DMs. Do not fill slots
@@ -120,18 +123,19 @@ Keep unknowns explicit; do not backfill addresses for dormant historical directi
    and keep it quiet. A queued prompt, active task, accepted launch, terminal handle
    and scientifically read result are different observations. Do not call them all done.
 
-Root may assign reasoning-only preparation to an already chosen reserve, then activate it
-under the constitution's existing reserve authority if a worthwhile idea is recorded.
-Preparation neither lifts a pause nor starts a result batch. Portfolio recommendations
-remain in the existing notebook/index for the owner-triggered review; this method does not
-send them to Pro automatically.
+Root and DMs may prepare and register worthwhile unowned successor/reserve work under
+constitution section 2, without a new approval cycle. Evaluate the new reason and actual
+comparison, not whether it appeared on an earlier list. A recipe's closure does not discharge
+research responsibility: reconsider relevant project evidence and choose useful continuation
+or a justified stop. Preparation neither lifts a pause nor starts a result batch. Use Portfolio
+for project-level decisions within an owner request/delegation, not as a gate for every pivot.
 
 ## Independent work and actual handover
 
-The owner's current four-direction assignment ends cross-DM communication after initialization.
-Create the three requested independent sessions with complete initial assignments; the assigning
-session then directly owns the fourth direction. Verify initial routing read-only and finish
-coordination. Do not add a progress watch, completion relay or later initialization ACK.
+The earlier four-direction initialization is not a permanent requirement that Root become
+the fourth DM. Apply the current owner assignment: the 2026-09-23 request retains this session
+as scientific project manager. Independent DMs remain responsible for their own work, including
+evidence-led revision or pivots. Do not add a routine progress watch, completion relay or ACK.
 Shared Git publication and background use continue through the normal methods; internal bounded
 helpers and Pro advice remain available within each DM's own task.
 
