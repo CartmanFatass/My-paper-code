@@ -2523,3 +2523,13 @@ Reviewer for scientific/RNG/result-identity risk, then DM accepts. Stop dependen
 for a real defect or unknown acceptance; never restart an accepted worker or modify this
 fixed study from partial scores. No Pro send, science choice, fit launch, notebook edit or
 child spawning is delegated to the Implementer.
+
+### Publication-time shared-background refresh
+
+While preparing publication, main advanced to `595399da0` with the S7 B04 complete reading.
+I read the changed shared topic and preserved the other DM's entry: its final32-world risk
+intervention gain and same-policy8-world development loss further support retaining explicitly
+fixed evaluation conditions and all adverse worlds. This is different host/objective evidence,
+not a matched G/D control or a reason to change the selected recurrence question. B03's already
+fixed old world/label stream, primary uniform endpoint, own consequences and costs remain as
+above. There is no new mechanism claim or additional arm from this publication.
