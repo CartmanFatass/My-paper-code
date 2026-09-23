@@ -4690,3 +4690,35 @@ Implementer may edit only those four paths, return diff/check output/remaining g
 science and launch nothing. DM reads and accepts; independent hmasd-reviewer checks executable
 binding/config/RNG/evaluation/result identity before result launch. Stop only dependent action
 for unresolved semantic problems. No extra experiment, skill change or general infrastructure.
+
+## 2026-09-23 — B05 implementation and independent review accepted
+
+DM accepts the four L0-owned files. Actual SET coefficients, fresh world addresses, Gaussian
+raw-action replay/clipped execution, initial matching and same-source first-control binding
+are implemented without changes to shared learners/configuration/environment or frozen
+B03/B04 executables. Primary E_U and every component/world difference are independently
+recomputed in the test from the two raw final panel sets. The legacy lambda0 `action_entropy=0`
+field is explicitly not an entropy measurement; analytic raw Gaussian entropy is separate
+and is not clipped-action entropy.
+
+Independent Reviewer found one P1 in the initial version: a completed control with malformed
+final panel data could pass its header checks and waste the zero training before comparison
+failed. Repair moves all expected panel shapes/finiteness, native reward identities, steps,
+episodes, frozen zero-update evidence and compatible config checks before learner creation.
+It also checks exact optimizer exposure and every rollout delta/cumulative count. Native
+chunking gives101250 actor and101250 critic calls per production fit, skill optimizers0.
+The Reviewer re-read the repaired delta, independently ran17 tests in3.94s and resolved P1;
+no material finding remains. Implementer ran17 tests in4.06s, plus1 focused production-count
+assertion and py_compile/whitespace checks. Tiny tests exercise both actual learner paths and
+out-of-range raw replay, not production45-rollout scientific replication or live admission.
+One failed-test diagnostic scratch `temp/tests/pytest-uf028byj` is retained locally; it is
+neither a scientific run nor a new fit. No source or scientific-result path was cleaned.
+
+Exact accepted SHA-256: runner `60de308181e03b8a38a7c8a60732984986b66dd502c7a14c45bc03b93386c7dc`;
+test `be066b853b02306e8a897e1ea34e72b36a506298e6c4c0b619ad70175928969b`;
+entry `bbacb7a00069232bf986e2da5f84473fb61e20598c50d7505313a211d127a287`;
+init `c595c93dda4c4b64a0836910e500b17fda7b503e153024b619665df16893f068`.
+The frozen B03/B04 hashes remain unchanged. Current published main `0fed22d97` retains this
+direction's active lead and no owner pause on it. Publish the accepted source, then use
+native admission for the fixed first `.05` cell. B05 remains0/2 scientific fits started at
+this acceptance; its prospective pair, ordering, cost and interpretation are unchanged.
