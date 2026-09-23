@@ -10230,6 +10230,267 @@ replication, a launch authorization or an additional owner gate.
 
 ### Answer
 
+Saved from chat by the direction DM after same-key deliver returned `NOT_DELIVERED`;
+no writeback commit exists. Complete collected text below is preserved verbatim.
+Question key `hmasd:0f201f5f3470609ce844fd5c4a4ddc996624eef9d659feb313cee4ac97a347c2`;
+source `7d9e74e3882aa42fab9594ea64f95ebf413019ea`; collected answer SHA-256
+`947a7f86d906325c2285f3e76a52568770931c0a7cec5265b7cbb953df94b395` (7,575 characters).
+The local text file has one added terminal newline; its SHA-256 is
+`c352e0cafe27a81b6369ff487576254fb2f0c371624ab9013cda0922515f8615`.
+Send was accepted once at 6 Pro; completion and delivery are separate facts.
+
+GitHub 读取正常，但当前连接没有可调用的文件写入操作，因此未发起写入，也没有产生新提交。最新回读的本题 ### Answer 仍为空，后面的解释澄清保持不变。以下是完整答复。
+
+Answer
+一、建议：选择一个新的 T6/T8 训练区组，暂不同时购买新世界或配方修改
+
+我支持 DM 提议的两个新 fits：共同初始化种子963401，训练环境地址964401…964416，分别在 N6/c10、N8/c10 训练360k team steps；仅评价 final45，继续使用 B11 的两个固定评价面板。 保留原始 SET、.05 熵系数、奖励/N、执行裁剪、信息与更新合同，不增加 mixed-N、高度系数修改、H6或中间评价。
+
+hmasd-pro-question-b11-training…
+
+这笔投入值得改变的判断是：
+
+把普通 SET 的训练放到 N8 条件，在既定团队步预算和已知评价面板上，是否具有足以继续作为 N8 用途候选保留的、跨训练区组的实际收益；还是目前只有 B11 这一对实例支持它？
+
+再次出现有用的 N8 J／服务收益，会提高将 T8 作为后续 N8 普通对照开发设置的优先级；反号或只剩代理收益，则降低把它作为可靠升级的理由。这里购买的是训练条件响应的有限复现，不是“确认 T8 更好”，也不是保证继续获得正数。
+
+最强的实质反对理由是：复现不会修复已经测得的高度代价和损失世界。 即使两个区组都在这个已读面板上有正均值，也可能重复得到一种不适合所需用途的取舍，且仍不知道新世界上的表现。若部署目标已经明确不能接受这些高度或局部服务损失，下一笔学习应直接针对该目标，而不必先完成一次复现才能获得修改资格。
+
+当前材料却没有给出这样的硬约束，也没有识别一个能独立降低高度且保住资格／服务的具体修正。B11 的实际服务增量已有任务意义，而训练区组只有一个。因此，我认为先检验这一简单训练选择的可重复用途，比立即叠加一个新学习目标更有决策价值。这不是普遍的“先复现、后创新”流程；它是对当前证据和当前用途的选择。
+
+二、B11 的正均值成立，尾部与高度代价也同样成立
+
+我从四份原始 final45 面板的 J 和服务人数数组独立重算了均值、差值、中位数与正负计数，与完整记录一致：
+
+T8−T6，固定终点	测试 N8：主要用途	测试 N6：条件间后果
+平均原生 J 变化	+.019681931	+.002872282
+平均多服务用户／步	+3.019500	+1.394313
+J 改善／下降世界数	20／12	14／18
+J 差中位数	+.014655456	−.005296835
+服务改善／下降世界数	27／5	21／11
+
+这些数值来自同一训练区组的条件评价，不是32或64个训练重复。
+
+N8 的完整记账是：
+
+ΔJ
+8
+	​
+
+=
+覆盖
+.042273000
+	​
+
+	​
+
+−
+质量
+.001773214
+	​
+
+	​
+
+−
+高度惩罚
+.020817855
+	​
+
+	​
+
+=.019681931.
+
+平均资格人数增加2.6564375，资格内未服务人数减少.3630625，合成每步3.0195人的服务增量。但高度惩罚在31/32个N8世界增加，平均高度由约71.680m升至92.498m。这不是纯覆盖收益，也不是测量到的电池风险、返航风险或实际能耗。
+
+hmasd-pro-question-b11-training…
+
+尾部不是可省略的附注。N8世界1645814损失约.078845 J，世界1645801少服务3.334人／步；另有七个世界服务增加但J下降。N6也有七个这样的世界，且18/32个世界J下降。正均值不能据此改称“多数条件无代价”。反过来，这些损失也不追溯取消原先以 N8 平均J、服务和资格为对象的正观察。
+
+hmasd-pro-question-b11-training…
+
+尤其应采用附件末尾的解释澄清：原文是“Delta6 may be negative”。 N6损失是可能的专门化后果，不是必须实现的方向预测。本轮正确结论是“没有观察到平均N6损失”，而非“预写N6预测失败”；负中位数和局部损失继续限制它的使用范围。
+
+hmasd-pro-question-b11-training…
+
+据此，B11 加强了目标条件训练能够改善普通 SET 有限用途的判断；削弱了“当前正收益等于统一改进、没有条件间代价”的说法；没有解决训练响应的可靠性、普通基线充分性、纯N机制或相对H6的差距。B11没有评价H6，不能把其他世界上的旧H6分数移入本表。
+
+hmasd-pro-question-b11-training…
+
+B04—B06的价值在这里是一个具体警示：同一项目曾出现有用普通配方响应随训练对反号，而交换既有评价面板没有消除主要反号。它使训练区组复现值得关注，不构成 B11 也必将反号的预测。
+
+三、精确定义：在固定评价面板上复现“整个训练条件包”的响应
+
+令 b=1 表示B11，b=2 表示拟议的新训练区组；T
+6,b
+	​
+
+、T
+8,b
+	​
+
+ 是各自经过45次完整更新后的策略。对测试数量 n∈{8,6} 及固定世界 w
+n,i
+	​
+
+，定义
+
+d
+b,n,i
+	​
+
+=J(T
+8,b
+	​
+
+,n,w
+n,i
+	​
+
+)−J(T
+6,b
+	​
+
+,n,w
+n,i
+	​
+
+),
+Δ
+b,n
+	​
+
+=
+32
+1
+	​
+
+i=0
+∑
+31
+	​
+
+d
+b,n,i
+	​
+
+.
+
+主读数是新块的 Δ
+2,8
+	​
+
+，不是两块合并后的均值。 Δ
+2,6
+	​
+
+ 单独描述N6后果；覆盖、质量、高度惩罚、资格E、实际服务S和资格内未服务U都按相同世界差分。不得沿用早期N4/N8的“unseen平均”，也不在看到结果后将N6/N8重加权成一个总分。原B11本来就是这个主次结构。
+
+更宽的目标可以表述为“对该固定面板，按声明的训练随机化程序重新训练时，T8−T6的响应如何”。但两个区组不足以准确估计这个训练分布的均值、方差或成功概率；它们首先提供的是两个分别保留的实现结果。32个共同世界可减少区组内评价差异，却不能代替独立训练单位。
+
+共同初始化是真的，训练轨迹配对不能被夸大
+
+已执行实现先构造一个新N6模板，再将其完整模块和normalizer严格复制到真实N6/N8运行时；目标保持自己的新优化器、缓冲区与采样器，并恢复模板构造后的RNG状态。两份摘要记录了相同初始参数／normalizer摘要及相同构造后RNG摘要。因此，共同初始化不是仅凭种子数字声称的配对，也不是预训练。
+
+新块应保留这一程序，但不同训练N仍有不同物理世界、联合动作维数、后续随机消耗和共同学习轨迹。不能要求T6/T8初始服务、首次采集或后续状态曝光相同。跨块又同时更换初始化／采样器种子和训练环境地址，所以本次是训练随机性区组的复现，不是单独隔离“初始化seed效应”。
+
+保留不等工作量，因为它属于当前问题
+
+在360k团队步下，T6/T8分别产生2.16M／2.88M agent rows，actor与critic各自执行101,250／135,000次优化器更新；训练scalar分别为原生R/6与R/8。共同物理条件也变化。实际摘要及源码确认这些差别。
+
+这些差别限制原因归属，但不使“同一团队步预算下采用哪个训练条件更有用”失效。本轮不要为了消除它们而临时等量化agent rows、减少T8更新或改奖励尺度；那将购买另一个问题。也不能把全部效果归为“多训练了三分之一”，因为本比较没有独立操纵这一因素。
+
+此外，T8在N8的成功是目标条件训练用途，不是T8对未见N8的零更新泛化成功；N8对T6才是未训练数量。这个命名区别对以后组织普通比较器尤其重要。
+
+四、暂不换世界，也不立即转向 mixed-N 或高度重加权
+固定旧面板是诚实而有用的条件化，不是新盲测
+
+这次保持世界集合不变，直接检验：同一评价函数下，换一个训练区组后，主收益和代价是否再现。若也更换世界，则反号可能同时来自新训练区组和新世界；固定面板避免把这两项变化重新混在一起。
+
+代价是结论只能对这个已经阅读、用于选择下一实验的开发面板负责。它不能支持未观察世界上的可靠性，也不能被称为新确认。 新旧区组在同一世界上的损失是否反复出现，可以描述，但不能仅由这种重合识别某个几何机制；更不能把旧损失世界挑出来当独立验证集。
+
+我不建议默认增加新面板。对新两策略增加同规模N6/N8面板，需额外64k评价team steps；将新旧四策略都放到另一面板则需额外128k。这些工作可能有价值，但购买的是另一项世界敏感性观察，而不是更多训练复现。当前没有必要同时扩展这两个维度。
+
+mixed-N 是宽条件用途的最强替代，而不是本轮必需修复
+
+若下一项真正需要的是一份策略在N4/N6/N8都好用，mixed-N可以现在直接排到首位，不需要等待复现批准。但当前B11没有N4测试，也没有平均N6损失，尚不能由“存在损失世界”推导出混合训练会消除这些损失。
+
+混合训练还改变每条件曝光与调度。360k若在三个N等分，N8只有120k团队步；若以两个新策略比较三种N的完整用途，评价量为96k而非64k。此前完整项目Answer／Decision明确保留了这一替代及其条件，并未把它排成T8阴性后的自动下一格。
+
+高度代价是已测取舍，不等于已找到可独立修复的学习故障
+
+当前P的增加很普遍，值得认真保留；但从
+
+ΔJ=.7ΔC+.3ΔQ−ΔP
+
+不能推出“只要降低P，其他收益都能保住”。高度、资格、干扰和行动轨迹共同变化。不能把两个策略各自有利的分量拼成一个可实现策略，也不能把惩罚贡献直接叫作可恢复的headroom。
+
+hmasd-pro-question-b11-training…
+
+提高训练中的高度惩罚是合法候选，但它改变训练目标，可能降低高度，同时损失资格和服务。它需要承担的预测应是：在原始评价J下，减少高度代价且保留足够服务，得到更好的完整用途，而不是在新权重分数下宣布获胜。现有材料没有给出应选系数或正确接线的新比较，不能凭代价项为负就补出一套配方。
+
+这里不要求先证明机制才允许探索；只是目前“这项有用训练条件响应能否再现”比一个尚未定稿的高度修改更直接。若明确的高度约束或N6用途优先级改变，这个排序也可以改变，不受本次复现方案永久约束。
+
+五、预测与结果分支：复现收益，还是复现一项代价较大的取舍
+预测应保留原生链，而不增加诊断胜利条件
+
+主预测是新块N8的J和实际服务S获得有用正增量，并检查资格E的改善是否也再现。保留 S=E−U 的实际记账及每UAV数据；U的下降不是必须单独成立的新门槛。资格增加但J不升，不能称主用途实现；J改善而服务下降，则是原生目标／服务取舍，不是原先联合预测完全复现。原B11的前瞻澄清已经规定了这一点。
+
+本次没有理由预言sigma必须更低、所有高度代价必须消失或训练loss必须更好。参数移动、有效.05和真实更新是实施事实，不是科学成功。若J／S收益再现但E方向未再现，可以保留用途，同时明确资格改善这一更细响应没有重复；不能用机制叙事覆盖实际分量。
+
+尾部读法不应临时换掉均值主终点
+
+继续呈现两块各自的全部32个世界、绝对J／服务、配对差、中位数、正负数和最不利变化。最差配对损失不等于最低绝对服务：一个世界相对损失较大，仍可能有较高绝对服务；这两类用途信息都需要保留。
+
+N6的当前结果尤其说明平均值如何掩盖抵消。我从原始J差计算，按32世界平均的正贡献约为.018828，负贡献绝对值约为.015955，才留下+.002872的净值。这只是对同一表的记账，不是新风险指标或新的合格阈值。
+
+不要求新块复制B11的精确幅度、20个J胜局或相同最差世界；也不把零附近正号自动当成值得采用。当前没有预先声明可接受的高度／尾部区域，因此可以判断“均值用途再次出现”，不能仅据此认证“部署代价已经可接受”。
+
+新块观察	应改变的判断
+N8 J、服务有用改善，资格响应相符，N6与尾部没有出现足以推翻该用途的代价	提高保留T8作为N8普通训练候选的理由。由单块信号增加为两个区组支持，但不确认稳定默认或总体排名
+N8均值收益再现，高度及局部损失也持续或加重	复现的是收益—代价取舍，不是鲁棒升级。若这些代价成为主要用途障碍，针对高度或宽条件的学习问题可提高优先级；不能称该问题已解决
+服务／资格增加但J不改善，或J改善而服务损失	原先联合用途没有完整复现。分别保留改善和损失，不用代理指标或重加权总分挽救主预测
+新块N8效应反号或不再有实质用途	降低T8作为可靠默认升级的理由；并列保存B11正结果与新反证，不以两块池化均值隐藏不一致。不自动追加第三块或扫系数
+方向小、分量混合、N6代价不清楚	保留不确定和具体取舍；不宣称等价或非劣，也不因为没有清楚胜者就必须扩批
+任一训练／评价未兑现合同	技术失败与科学反证分开。缺失的新T6或T8不填零、不由旧策略补格，也不默认重跑
+
+两个正块也不意味着下一步必然确认。它们可能只足以支持将该设置纳入另有理由的普通比较器评估；若共同重复的代价仍使它不值得用，正复现也可以伴随不采用。反过来，负复现降低的是这项未修改训练选择的采用理由，不是结束数量泛化问题或DM继续研究的责任。当前治理明确保留自主修订与有依据的转向，同时不要求无止境救援。
+
+六、实施与成本：两个新学习实例是这个问题的最小完整比较
+
+只训练一个新T8、与旧T6相减，可能提供新T8的局部用途，却不再是新的共同初始化T6/T8区组；只在旧策略上换世界则不增加训练实例。因此，两个新fits对当前复现估计量有明确用途，不是习惯性的对称扩张。
+
+保留以下新增工作：
+
+项目	新T6	新T8	新区组合计
+Fits	1	1	2
+训练team steps	360,000	360,000	720,000
+训练agent rows	2,160,000	2,880,000	5,040,000
+完整rollout更新	45	45	90
+Actor optimizer calls	101,250	135,000	236,250
+Critic optimizer calls	101,250	135,000	236,250
+最终评价team steps	32,000	32,000	64,000
+
+合计784k新增team steps，1,440训练episodes、128评价episodes，448k评价UAV steps；训练批量策略调用45,000，评价2,000。高层／判别器更新为零。保留checkpoint00与45用于身份和学习核对，不为此增加初始评价。上述成本结构来自已执行B11合同与实际优化器计数。
+
+有一项具体接线不能省略：冻结B11 runner写死SEED=963201、训练地址基数964201和旧tags，CLI也只接受963201。新研究需要自己的固定种子／地址／输出绑定，不能只给旧入口换标签，或改动已完成B11的文件来冒充原实验续跑。复用共同初始化、collector和evaluator逻辑即可，无须建立扫描框架。
+
+检查集中在新绑定、实际共同初始张量、目标自有空优化器、真实N、奖励单位、最终世界初值、raw样本／log-probability存储与独立执行裁剪、最终评价隔离。源代码的实际流程是在环境构造后设学习seed，保存00后直接训练，最终45后才评价；不能因更换入口而无意增加会消耗训练RNG的初始化评价。
+
+B11两臂command wall合计 157.908843分钟，首次准入至最后退出 93.377582分钟，后者包含并行重叠，不能相互替换。T6/T8的进程峰值RSS也不是同时内存峰值之和。这些是历史规模参照，不是新区组耗时承诺或受控算法速度比；实现、检查／独立审阅、收集和完整阅读仍是额外工作。
+
+hmasd-pro-question-b11-training…
+
+当前工程方法允许复用未变部分的检查证据，按实际改动检查初始化、RNG和曝光风险；不需要正面pilot、额外profiling fit或新的审批层。
+
+七、读取范围与最终判断
+
+本次完整读取附件，包括后置的B11解释澄清；推理使用固定问题版本 7d9e74e3882aa42fab9594ea64f95ebf413019ea，治理／方法／相关共享背景使用指定 16d9063f5be7f0a34cac0d7878ced1542a36fe7e。已读取项目归档在 9774c1e4a9d8e8db48d652d4ed43802789ac5a60 的完整Answer／Decision，并采用其明确纠正，而没有将错误S7示例移入本方向。该旧建议支持目标条件用途及重要鲁棒性工作，但没有替本次新增尾部和成本证据决定下一笔投入。
+
+直接证据包括四份B11 final45面板的全部J、scalar returns、C/Q/P及E/S/U数组，以及两份summary的身份、规格、相关初始化、实际优化器与隔离／资源字段；独立重算了128个J值所形成的64个配对差及对应服务差、均值、中位数、符号和不利世界。执行含义核对采用冻结 dc1bc1f2718b1e4ff9510030ad26c287c76b03ac 的runner与入口相关代码。B04—B06只用于已读完整记录中的复现理由，没有重算它们全部历史数据。
+
+没有加载四份二进制检查点、重新读取全部90条训练记录或独立重建NPZ中的每个转移，也没有重复DM的远端字节审计。 完整轨迹审计、所有更新逐条验证及原始世界状态一致性仍属于已发表的DM核验事实，不冒称本轮重复验证。这些边界不阻止当前有限投资判断；新块的真实响应、尾部、实现检查及运行成本仍未产生。
+
+MATERIAL_DISSENT: no。 我支持同一固定评价面板上的新T6/T8共同训练区组，暂不增加mixed-N、高度修改或新世界。实质收紧是：复现对象为整个训练条件包，而非纯N或独立初始化效应；先保留N8原生联合收益，再分别判断N6、尾部和高度代价；两个正块仍可能只是重复一项不适合某用途的取舍。该比较可以提高或降低T8作为普通目标条件训练设置的使用价值，不产生稳定默认、自动第三块或新的实验许可。
 
 ## 2026-09-23 — B11 interpretation clarification before adviser handoff
 
@@ -10241,3 +10502,117 @@ N8 J/service/eligibility prediction is unchanged. Negative N6 median and18/32 J-
 still prevent interpreting the small positive mean as equivalence or absence of local cost.
 This corrects interpretation only; no number, endpoint, source input or next-question byte
 was changed, and no adviser Send had occurred when this clarification was written.
+
+## 2026-09-23 — Pro recurrence advice adopted; fixed B12 training-block comparison
+
+### Decision and cumulative explanation
+
+The DM read the complete 7,575-character answer above and adopts the proposed **new
+T6/T8 training block**, with its narrowed interpretation. Same-key delivery was checked:
+`NOT_DELIVERED`, no branch commit filled the subsection, and the pinned question and empty
+target were unchanged. The complete chat answer was therefore saved into the assigned
+subsection. Its scientific agreement is advice, not another empirical observation.
+
+Current authority/background was refreshed at main `2c16014b9635ed01f03214bcd859fa30328425cb`.
+The owner has resumed this direction and delegated scientific continuation; its recorded DM
+and launch lead are unchanged. The separate FSD pause and G33 freeze remain in force.
+Relevant background is the count-training topic, B04–B06's training-pair sign reversal,
+B07/B08's ordinary-policy learning and bounded package advantage, and B10's deployment
+benefit with adverse worlds. None supplies B12 outcomes or a matched H6 cell for this study.
+
+B11 strengthens the practical usefulness of training ordinary SET at the target N8 condition
+in one block: +.019681931 native J and +3.0195 served users/step on its N8 panel. It leaves
+training recurrence unresolved. Its 12/32 N8 J losses, +.020817855 height penalty and negative
+N6 median prevent a uniform-improvement reading. The mean N6 loss was not observed; it was
+an optional consequence in the prospective note, not a failed required prediction.
+
+**Why this investment now:** changing training randomness while holding the now-read
+evaluation panels fixed distinguishes a second useful training-condition response from a
+single fortunate pair. New worlds would also change the evaluation function; mixed-N and
+height reweighting would change the learning question before this simple choice's recurrence
+is known. The strongest objection is that recurrence will not repair measured height/tail
+costs, and two positive blocks could merely repeat an unsuitable tradeoff. There is currently
+no adopted height/tail constraint that already excludes this use, or identified independent
+repair that preserves service. Thus this two-fit recurrence has greater immediate decision
+value; it is not a universal prerequisite to mixed-N or innovative learning changes.
+
+**Adopted refinements:** this is recurrence of the whole training-condition package under
+equal team-step budgets, not pure N, isolated initialization, equal agent work, or unseen-N
+transfer by T8. The new block changes initialization/sampler seed and training-world addresses
+together. Preserve per-block results, absolute service as well as paired losses, N6 consequences,
+and the height/quality accounting. Do not demand sigma improvement or eliminate P as a new
+success rule. J/S positive with E not positive retains possible use but fails the finer E
+response; J without S, or S/E without J, does not fully reproduce the joint prediction.
+
+### Prospective B12 contract — two new fits, no result yet
+
+- Estimand: for each of the same 32 fixed worlds at test N8, final45 native
+  `J(T8_B12) - J(T6_B12)`, with its arithmetic mean primary. Keep the N6 panel separate;
+  no N4, no old N4/N8 unseen-average and no post-result N6/N8 weighting. Old B11 scores
+  remain a separate block, not a pooled value that can hide sign disagreement.
+- New ordinary SET cells: T6 train N6/c10 and T8 train N8/c10; common initialization and
+  sampler seed **963401**; training environment addresses **964401..964416**. Build a fresh
+  canonical N6 template and strict-sync all parameters/normalizers into each true-N runtime,
+  with its own fresh optimizer/storage and the canonical post-construction RNG. Neither
+  old checkpoint nor canonical rollout is training input. Verify actual common tensors,
+  changed cross-block tensors/RNG, and true-N buffers; equal numeric seed alone is insufficient.
+- Each: 16 lanes × 500 steps × 45 full rollout updates = **360,000 team steps**, 720 train
+  episodes. Hold CPU float32, Torch 4 threads, BLAS/OpenMP 1, k10, architecture, information,
+  native reward/N, optimizer settings, recurrent/storage semantics and fixed lambda_l=.05.
+  Preserve raw Gaussian actions/log-probabilities for PPO and independently clip executed
+  training/deployment actions to [-1,1]. No tuning, annealing, new loss or mixed-N schedule.
+- Save checkpoint00 for identity and checkpoint45 for final evaluation only. Do not evaluate
+  initial or intermediate policies. Final N8 worlds **1645800..1645831**, then N6 worlds
+  **1645600..1645631**, each 32 × 500; preserve actual initial states, frozen weights/norms,
+  evolved deployment runtime, zero training storage/optimizer calls and learner RNG isolation.
+  These are **already-read development worlds** used to choose this recurrence, not a new
+  blind or confirmation sample. All four resulting policies across B11/B12 remain distinct.
+- Primary prediction: useful positive N8 J and actual service S; inspect whether eligibility E
+  also improves. Retain C/Q/P, E/S/U, per-UAV eligibility/connections, S=E−U, all world values,
+  medians/sign counts, worst paired J/S losses and lowest absolute J/S. P is the native height
+  penalty, not measured energy or return risk. Accounting contributions are not causal effects.
+- Costs: **2 new fits**, 720k train team steps, 5.04M training agent rows (T6 2.16M/T8 2.88M),
+  64k eval team steps/448k eval UAV steps. Actor and critic each make 101250/135000 optimizer
+  calls in T6/T8; no high-level/discriminator updates. 90 full rollout updates, 1440 train and
+  128 eval episodes, 45000/2000 batched train/eval policy calls. The reward scalars R/6 versus
+  R/8, physical conditions and unequal optimization work remain part of the comparison.
+  B11 historical sum command wall 157.908843min / overlapping admission-to-exit 93.377582min
+  is a scale reference, not a runtime guarantee. Record actual costs; preparation/check/review
+  and collection are additional, peak scratch unmeasured unless actually measured.
+- Outcome branches: positive joint response increases support from one to two realized blocks
+  on this panel, while persistent height/tail costs can still argue against adoption. Reversal,
+  proxy-only improvement or negligible practical change weakens reliable-use reasoning; retain
+  both blocks without automatic third block, seed sweep or coefficient rescue. Mixed N and
+  height-aware learning remain alternatives requiring their own concrete reason. This recipe's
+  outcome alone neither ends the direction nor obliges endless continuation. Confirmation,
+  if later justified, needs a separate claim and fresh fixed 3–5 units/arm; this is exploration.
+- Missing/invalid arm: report technical failure separately, preserve evidence, do not substitute
+  an old policy or zero, and do not automatically retry. Reconcile accepted native handles;
+  owner pause/resource failure/uncertain external effect stops only dependent execution.
+
+### L0 implementation scope
+
+Deliver a new fixed B12 entry while preserving completed B11 source bytes. Owned new paths:
+`experiments/candidates/agent_count_generalization/training_recurrence_b12/{__init__.py,runner.py}`,
+`scripts/run_agent_count_training_recurrence_b12.py`, and
+`tests/experiments/candidates/agent_count_generalization/training_recurrence_b12/test_runner.py`.
+Tags are `s1_training_recurrence_b12_t6_s963401` and `s1_training_recurrence_b12_t8_s963401`;
+object id `s1_training_recurrence_b12`. CLI accepts only these cells, seed963401 and matching
+output basename, calls runner admission before scientific effects, and checks launch SHA.
+
+Reuse B11 common-initialization, config, collector, final evaluator, telemetry/count helpers
+where their semantics are unchanged. A small B12-owned copy of the fit control flow is
+acceptable to bind its own cells, train seed addresses and source identity without mutating
+B11 globals, dynamically rewriting functions, or building a scan framework. Include B12
+entry/runner and reused B11 helper source in before/after source hashes. No core change.
+
+Focused checks must exercise the real new entry/binding and a reduced technical collect →
+store → update → final-evaluate path for both true Ns, actual common tensor/RNG/optimizer
+ownership and changed cross-block training inputs; preserve raw-sample/logprob versus executed
+action semantics, fixed evaluation worlds and zero evaluation training effects. Reuse unchanged
+B11 check evidence; any technical short fit is not scientific B12 evidence or a pilot selected
+by score. Tests own scratch under the repository pytest lifecycle. An independent registered
+Reviewer checks changed RNG/result/execution identity before the DM accepts. Commit/push exact
+inputs, admit each fit on fresh actual-node memory, then arm observation for accepted handles.
+No helper owns NOTES or makes scientific choices, launches a result, messages another task or
+spawns another helper. This L0 starts at **0 B12 fits**, not a continuation of B11's completed runs.
