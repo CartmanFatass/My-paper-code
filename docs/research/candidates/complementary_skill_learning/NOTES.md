@@ -7398,3 +7398,27 @@ output`runs/complementary_skill_learning/b07_e_260924001_455536ebd`, and the jus
 reference path/hash. Publish this binding and compact M evidence before E admission. E stays
 360ktrain+160keval+the fixed6400context scoring rows; U and all interpretation limits remain
 as originally declared. Routine cell acceptance/binding does not require an index/main update.
+
+**Pre-admission transport correction,08:46Z.** Outer supervisor`csl-b07-e-455536ebd` exited4
+after7s with the exact refusal: `absolute author input is absent from published snapshot:
+/home/wu/hmasd-worktrees/complementary-skill-b07-20260924/runs/complementary_skill_learning/b07_m_260924001_455536ebd/raw/final_S_reference.npz`.
+The launcher treats an absolute argument inside its author checkout as a source input and
+requires that path in the frozen source. This generated reference is intentionally retained
+outside Git. Reading the launcher establishes this refusal before claim creation, output
+creation or scientific child spawn; actual-node reconciliation found no E claim (by both
+output and B07/E command), no E output directory, and the outer task terminal with exit4.
+Thus this is a7s pre-training launch failure, not an E fit, scientific negative or uncertain
+accepted operation. Its original supervisor log remains intact. Prepared source snapshot
+`f78f152592c8449b98e38d8e4e22a1ea` is unclaimed and remains preserved; no broad cleanup applied.
+
+The DM corrects only transport placement using the configured `input_staging_root` and
+`scp_with_declared_sha256`: a third retained copy is now at
+`/home/wu/hmasd-inputs/complementary-skill-b07-455536ebd/m-final-S-reference-2445d485.npz`.
+Actual-node verification gives the same4537795bytes and fullSHA256
+`2445d48504935df1f6d69321030e0e1f13ecaf116d77bd83888b3141a9b98fc1`; bytes equal the verified
+M reference exactly. Use this staged absolute path for E's `--reference`, preserving the hash,
+metadata, all scientific inputs, source455536ebd and originally declared E output tag.
+This explicitly revised pre-admission request is authorized within the fixed cell, after
+proving no earlier E operation exists; it does not bypass or reset a claim. Keep the failed
+outer record and use `csl-b07-e-staged-455536ebd` for the corrected supervisor request.
+No learner, launcher, frozen experiment or output artifact was edited to accommodate it.
