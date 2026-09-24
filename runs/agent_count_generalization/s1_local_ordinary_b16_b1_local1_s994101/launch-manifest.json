@@ -1,0 +1,96 @@
+{
+  "acceptance": "accepted",
+  "accepted_at": "2026-09-24T11:10:11.694419Z",
+  "bootstrap_command": [
+    "/home/wu/.venvs/hmasd/bin/python",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/beedfa5c58424a0db4b33fe9446a2157/scripts/hmasd_admission.py",
+    "_run-admitted",
+    "--runner",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/beedfa5c58424a0db4b33fe9446a2157/scripts/run_agent_count_local_ordinary_b16.py",
+    "--output",
+    "/home/wu/projects/HMASD/runs/agent_count_generalization/s1_local_ordinary_b16_b1_local1_s994101",
+    "--",
+    "--cell",
+    "b1_local1",
+    "--seed",
+    "994101",
+    "--launch-sha",
+    "c95e57201dd7177fc8158b22a3379b56a5be8800",
+    "--out",
+    "/home/wu/projects/HMASD/runs/agent_count_generalization/s1_local_ordinary_b16_b1_local1_s994101"
+  ],
+  "claim_key": "5350d9ea8b9be15ac5e1463b0c46e383ab7438e1f58e8cd37d1aa3b727f9289c",
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/5350d9ea8b9be15ac5e1463b0c46e383ab7438e1f58e8cd37d1aa3b727f9289c.json",
+  "command": [
+    "/home/wu/.venvs/hmasd/bin/python",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/beedfa5c58424a0db4b33fe9446a2157/scripts/run_agent_count_local_ordinary_b16.py",
+    "--cell",
+    "b1_local1",
+    "--seed",
+    "994101",
+    "--launch-sha",
+    "c95e57201dd7177fc8158b22a3379b56a5be8800",
+    "--out",
+    "/home/wu/projects/HMASD/runs/agent_count_generalization/s1_local_ordinary_b16_b1_local1_s994101"
+  ],
+  "command_sha256": "2c6d1a1bfc0ae839ea6a9a165efd665042642282c33bd93866c490429d7eb8ff",
+  "control_observation": {
+    "observed_at": "2026-09-24T11:10:11.602925Z",
+    "ref": "refs/heads/main",
+    "remote": "origin",
+    "sha": "06d8adbe513c2492baa5ec49b0deabe62da0fcb8"
+  },
+  "control_root": "/home/wu/projects/HMASD",
+  "created_at": "2026-09-24T11:10:11.609908Z",
+  "cwd": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/beedfa5c58424a0db4b33fe9446a2157",
+  "direction": "agent_count_generalization",
+  "host_identity": "LAPTOP-U9TDKC8A",
+  "identity_command": [
+    "/home/wu/.local/share/uv/python/cpython-3.10.21-linux-x86_64-gnu/bin/python3.10",
+    "scripts/run_agent_count_local_ordinary_b16.py",
+    "--cell",
+    "b1_local1",
+    "--seed",
+    "994101",
+    "--launch-sha",
+    "c95e57201dd7177fc8158b22a3379b56a5be8800"
+  ],
+  "lead": "Codex DM (independent session)",
+  "manifest_ref": "/home/wu/projects/HMASD/runs/agent_count_generalization/s1_local_ordinary_b16_b1_local1_s994101/launch-manifest.json",
+  "node": "wsl_4070",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/5350d9ea8b9be15ac5e1463b0c46e383ab7438e1f58e8cd37d1aa3b727f9289c.json",
+  "output_root": "/home/wu/projects/HMASD/runs/agent_count_generalization/s1_local_ordinary_b16_b1_local1_s994101",
+  "preflight": "/home/wu/projects/HMASD/runs/agent_count_generalization/s1_local_ordinary_b16_b1_local1_s994101/admission-preflight.json",
+  "process": {
+    "detached": true,
+    "identity": {
+      "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+      "kind": "linux_pid_start_ticks",
+      "pid": 542110,
+      "session_id": 542110,
+      "start_ticks": 60695189
+    },
+    "native_handle_kind": "posix_session",
+    "pid": 542110,
+    "process_group_id": 542110
+  },
+  "process_exit": "/home/wu/projects/HMASD/runs/agent_count_generalization/s1_local_ordinary_b16_b1_local1_s994101/process-exit.json",
+  "published_remote": "origin",
+  "runner_process": {
+    "identity": {
+      "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+      "kind": "linux_pid_start_ticks",
+      "pid": 542111,
+      "session_id": 542110,
+      "start_ticks": 60695191
+    },
+    "pid": 542111,
+    "process_group_id": 542110,
+    "supervisor_pid": 542110
+  },
+  "schema_version": 1,
+  "sha": "c95e57201dd7177fc8158b22a3379b56a5be8800",
+  "source_root": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/beedfa5c58424a0db4b33fe9446a2157",
+  "stderr": "/home/wu/projects/HMASD/runs/agent_count_generalization/s1_local_ordinary_b16_b1_local1_s994101/stderr.log",
+  "stdout": "/home/wu/projects/HMASD/runs/agent_count_generalization/s1_local_ordinary_b16_b1_local1_s994101/stdout.log"
+}
