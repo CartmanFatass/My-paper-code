@@ -10154,3 +10154,58 @@ no additional experiment or relaxed scientific contract is implied by a technica
 | `B08/raw/final_R1_trajectory.npz` | 10747283 | `aeb407451f38710e09555d82ad04a68a28020e9e4d1510fd347bae1ed6b2c890` |
 | `B08/raw/final_R2_trajectory.npz` | 10763521 | `b1f72bcd1f61c3562f9d5179198ec6642096d8eaf3348487a533de68a812cffa` |
 | `B08/raw/final_R3_trajectory.npz` | 10795371 | `9c73632b0b6f504a5e82e61a9e5ced11801902c7195ad8bebea98d685baa275c` |
+
+
+## 2026-09-24 — B09 preparation; frozen inputs recover on the original node
+
+The selected B09 plan and complete advice were published on the direction branch at
+`a8f86ff45d5a20c64b3f76c0e7d2351206f3343b`, and the owned current plan/standing were
+published to main at `4c2e8ce8a06e8c608b3fe899288292a417d49f7a`, preserving other DMs.
+The completed Pro operation's matching open-tab count is0; unrelated browser tabs were left
+alone. The full fallback in the Answer was checked verbatim against its collected file.
+
+Read-only input recovery verified all22source files/141879874bytes on
+both original `wsl_4070` roots against the local copies and their declared SHA256/byte counts,
+in0.485915520s. The two immutable checkpoint/config/summary and all
+four R JSON/NPZ pairs remain recoverable without retraining or replacing an input.
+
+B07 input root: `/home/wu/hmasd-worktrees/complementary-skill-b07-20260924/runs/complementary_skill_learning/b07_u_260924001_455536ebd`; local copy `/home/fires/.codex/worktrees/5916/hmasd-wsl/runs/complementary_skill_learning/b07_u_260924001_455536ebd`.
+
+B08 input root: `/home/wu/hmasd-worktrees/complementary-skill-b08-20260924/runs/complementary_skill_learning/b08_u_260924041_c9217f0ae`; local copy `/home/fires/.codex/worktrees/5916/hmasd-wsl/runs/complementary_skill_learning/b08_u_260924041_c9217f0ae`.
+
+This is file verification only,0fits/0environment transitions. It does not count as one of the
+eight fixed R reconstruction panels. B09 implementation is delegated as the bounded L0;
+scientific acceptance and launch remain with the DM, following focused checks and independent
+review. No B09 native science operation has been submitted at this point.
+
+
+## 2026-09-24 — B09 implementation accepted for the fixed native batch
+
+The bounded Implementer returned the new B09 evaluator, explicit admitted CLI and focused
+tests without changing historical learners, evaluators, source assets or research records.
+I read the complete implementation and tests against the preceding L0 and accept this code
+for the already selected comparison. There is no change to the fixed assets, worlds, streams,
+intervention, order, costs or reading rule.
+
+The independent read-only Reviewer returned no material finding and requested no repair.
+Its inspection covered restoration and admission, original B07/B01 consumers, proposal and
+delivery probabilities, recurrent carry, eight-R-before-H ordering, exact array comparisons,
+mutation guards, aggregation, and failure/output retention. The reviewed runner SHA256 is
+`2b4cd93eeef93886eb4ee120f60974b0d2dc5e8db933386531576591eb3e2c8c`, verified unchanged
+at DM acceptance. Scientific acceptance remains mine; this review is code evidence only.
+
+The Implementer reported 10 focused CPU tests passing in 4.07 s. The Reviewer independently
+ran the existing tests: 10 passed in 4.13 s. These real-policy fixtures compare new R with the
+unchanged historical evaluator, independently check PCG64 and H delivery, first-k identity,
+recurrent carry and clipping, source rejection, no mutation, per-bank aggregation, admission
+ordering and readable partial failure. Their pytest-owned scratch was cleaned. The reported
+14 warnings were existing matplotlib deprecations. Both verified the production input
+contracts against all 22 files / 141,879,874 bytes; compilation and whitespace checks passed.
+
+These are small, untrained CPU fixtures, not trained-asset CUDA reproduction. The latter is
+still part of the declared first eight R panels and must succeed before H is released.
+The implementation restores serialized native/auxiliary/normalization/RNG state and reports
+idle newly constructed native optimizers because the original checkpoint did not serialize
+their histories. No result-bearing panel or additional training has been run in preparation.
+Next: publish this exact accepted source, submit the one fixed B09 native operation on the
+original node and adopt its status handle with detached observation.
