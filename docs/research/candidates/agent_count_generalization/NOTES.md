@@ -13983,3 +13983,43 @@ the verified local run path; thirteen JSON/JSONL/log files are published. Curren
 main`4f1f1f9eecf00c4218d827033bf858dd7f79a740` retains lifted pause, confirming state
 and the same lead. Continue only the already fixed b1_set at the same scientific
 source/seed994101/training scenes, after fresh native admission; no replacement fit.
+
+## 2026-09-23 — B15 block1 SET admitted and observation adopted
+
+The fixed second cell was accepted once after the first H6 cell's complete reading.
+The [native manifest](../../../../runs/agent_count_generalization/s1_bounded_confirmation_b15_b1_set_s994101/launch-manifest.json)
+retains the original operation, source snapshot, command and process identities;
+the [actual-node preflight](../../../../runs/agent_count_generalization/s1_bounded_confirmation_b15_b1_set_s994101/admission-preflight.json)
+passed with 13,901,406,208 available physical/effective bytes. Current control main
+`4f1f1f9eecf00c4218d827033bf858dd7f79a740` retained the lifted pause, confirming
+standing and same lead. The [fixed configuration](../../../../runs/agent_count_generalization/s1_bounded_confirmation_b15_b1_set_s994101/config.json)
+and all twelve scientific source hashes match the accepted B15 source. These three
+small native files were collected with byte-count and SHA256 equality.
+
+The first scientific progress read verifies fresh canonical SET initialization,
+target-owned empty optimizers/buffer, seed994101, training lanes2994100–2994115 and
+the same initial training-environment digest as H6. Initial0 N8 then N6 completed
+32,000 evaluation team steps/64 episodes with zero optimizer/storage calls. Every
+stage0 isolation field matches before/after. Training had collected/stored32,000
+team steps/64 episodes and completed3 updates; rollout4 was collected and awaiting
+its update in that saved reading. This is partial exposure, not cell acceptance.
+
+Detached observation is adopted at generation128, observer PID3019622, window1500s,
+job `launch-s1-bounded-confirmation-b15-b1-set`. The drain has no pending events and
+the original runner/supervisor are running with consistent native identities.
+The H6 completion event was consumed at generation126 and rearmed as generation127
+before SET registration; no launch or Pro send was repeated. There are2 started,
+1 complete B15 fits; four fixed cells remain unlaunched. Next is complete SET
+collection and paired block1 reading, then the already fixed block2 SET/H6 and
+block3 H6/SET regardless of scores, subject to genuine technical/owner stops.
+
+The owner-adopted workflow/storage revision at current main is now applied to
+continuation: unchanged per-cell progress stays in this published direction
+notebook and run records; the shared index waits for a material scientific or
+control change. Future bulk outputs, including the frozen runner's large summary,
+remain byte-exact at their recorded node paths and verified collection copies;
+readable results and their hashes/locators go here, while compact configuration,
+native status and panel readings are versioned. The already-published H6 evidence
+in direction commit `97346ad04f568f2c4ac90d5408ee85f7c8bcdf38` is preserved without
+untracking or history rewrite. This changes neither required measurements nor the
+frozen six-cell source, order, stopping rule or primary analysis.
