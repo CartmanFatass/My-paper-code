@@ -9513,3 +9513,155 @@ authoring checkout and all scientific outputs remain. No unrelated cleanup was p
 | `training.jsonl` | 612710 | `578566e478681fc4113451638df2ee50fff19e93ba067e9b192be1e26c3da22a` |
 
 U final native digest `e157afae86ff2b287242ef6ec46b71b5a1ae7f547363e1ab0c9ae76f7a6b7863`; final frozen digest `46c1975444592979dd4679709c1ea183c8fe61973db0f0d541c28f8eb649faa4`.
+
+
+## Pro question 2026-09-24 random-renewal-use-after-b08
+
+Conversation: reuse the current Jev direction conversation; its private address remains only
+in local operation state. This is a new question about the next scientific choice after B08,
+not a resend or a request to reapprove the completed experiment.
+
+Question: After the second E/M/U block preserved net E/U package use but reversed E/M's
+entropy increment, is one zero-fit comparison of **holding U's opening individual context
+versus repeated uniform redraw** a worthwhile next observation, or should further investment
+in this same-S1 diagnostic route end now? Assess the proposed discriminator and strongest
+stopping alternative; identify a better narrowly grounded choice only if the existing evidence
+actually supports one. No new architecture, fixed idea count or positive outcome is owed.
+This advice can change whether the DM buys that comparison or closes this route, not the
+already fixed B08 result. Please answer in Chinese.
+
+Standing: The immediately preceding complete B08 entry is the result basis. At fixed final
+readout, P=E-S−U-R is+.029553306358J/+.53275users, D=E-S−M-S is−.014004815412J/−.43340625users;
+G_E=E-S−E-R is−.003918668838J/−.26290625users and I is−.005574110294J/−.454375users.
+E-R−U-R is+.033471975195J/+.79565625users. All three arms actually learned useful service;
+U R0 final−initial is+.264058324954J/+15.55275users. E/M common-input team/individual
+entropy fell.635335922/.255062908, so lowering entropy occurred without recurring positive
+D or useful E learned selection. P nevertheless loses users in9/32world means, worst−1.773,
+and in50/128nested same-index episodes, worst−4.804. E/M quality is lower in all32worlds.
+Read the full result, not only these means.
+
+B07's corresponding P/D were+.061758309143/+3.51984375 and+.040099335296/+1.06084375;
+G_E and I were already negative. B04/B06 M−U reversal and B01/B03 contrary auxiliary results
+remain evidence. These are two exploratory training blocks on exposed worlds, not confirmation,
+not a stable ranking and not skill complementarity. The prior complete recurrence Answer
+explicitly covered P positive / D negative: retain E/U use, do not credit zero entropy merely
+from P, end the unchanged purchase without automatic fits, streams, tuning or confirmation.
+I have adopted that branch; no repeat consultation is needed for that completed reading.
+What it did not decide is the value of continued random renewals in the useful U controller.
+
+Relevant project evidence changes the next choice. Main topic3/B16 gives three competent
+ordinary local recurrent L instances and DM1 owns their B17 fresh-world/N comparisons; do not
+recommend taking over or duplicating that active programme. Its one-category trainable FiLM,
+task-only objective and actor input differ from our six-context mixed-reward U, so it neither
+provides a matched ablation nor proves random labels unneeded here. DM1 B10 held the opening
+learned H6 assignment while retaining recurrent feedback; its mean gains and material service
+losses make deployment persistence a plausible question but are not evidence for a U outcome.
+The fixed-S1 nature, exposed evaluation worlds and potential lack of broader explanatory value
+are substantive reasons for stopping, not merely statistical caveats.
+
+Candidate comparison for criticism, **not yet selected or executed**:
+
+- Use both and only B07/B08 final U banks, each an actually trained360k instance, with all four
+  original R streams and all32original worlds1700200..1700231, N6/H500/k10. No new fitting,
+  best-bank/label selection, extra worlds, seeds, checkpoint search or learned-S panels.
+- For each bank/stream, compare original R redraw with H: deliver the first uniformly drawn
+  six-member individual-label vector for all500steps. Preserve low-policy weights, all six
+  FiLM categories and parameter shapes, current local observation, recurrent carry/reset,
+  mean-and-clip physical actions, frozen normalization, task physics and objective.
+- The actual frozen evaluator's low-action call receives observations, individual labels and
+  hidden state. Its random team labels do not directly feed that low-action call, and R already
+  makes no learned coordinator selection. Accordingly this proposed intervention holds the
+  **individual** input only; retain the original team draws. Do not sell it as removing a
+  learned team coordinator or measuring joint-label semantics/coordination compute.
+- Generate the original PCG64 sequence at all50renewal opportunities, team[32] then
+  individual[32,6], in both modes. In H, save the later individual proposals separately but do
+  not deliver them. The delivered H law is initial uniform then conditional persistence, not
+  a new independent uniform draw every10steps. Both modes share actual first labels/worlds
+  within a bank, not just seed names; cross-bank numerical labels need not share semantics.
+- Replay all8original R panels exactly against their retained arrays before reading H−R;
+  those128k transitions are verification, not new observations. H's8panels add128k transitions.
+  First10steps must match within each H/R pair; all later proposals, delivered labels, actions
+  and service consequences must be retained. No learning/optimizer/store/normalizer mutation.
+- Primary descriptive use readings: H−R J and served users separately for each bank, first
+  average four streams within world then worlds equally. Preserve all world/episode losses,
+  quality/height contributions and each stream. No pooled two-bank success rule, post-result
+  loss tolerance, noninferiority/equivalence claim or extra runs for mixed results.
+
+New working conjecture, not a discovered B08 mechanism: ongoing exogenous individual-context
+changes add unnecessary actuation variation after the competent recurrent U policy has learned;
+holding the opening vector would improve J and users in both banks under this fixed evaluation.
+The contrasting prediction is worse use under H because renewal contributes to this controller's
+behaviour or because long persistence creates an adverse deployment distribution shift. Those
+explanations are not separated by this one comparison. Even favorable H would establish only a
+conditional deployment simplification, preserving recurrent feedback and trained conditioning;
+it would not show fixed-context training suffices, random labels are a regularizer, skill learning
+is unnecessary, or the bank equals a competent ordinary policy. Does that limited practical
+discrimination justify the cost after the earlier deployment diagnostics, or is its likely
+explanatory value too low? If the latter, explain the bounded route closure without claiming
+that all useful-skill research is exhausted.
+
+Prospective cost if selected:0fits/0training,16panels/512episodes/256kteam transitions
+(1.536Magent transitions), comprising128k H observations and128k R reconstruction. With32
+lanes,8000batched low-policy forward calls and800scheduled uniform renewal draw batches;
+no candidate enumeration or nested trajectory search. Checkpoint load, environment construction,
+array comparison, retention, review and readback are additional real work. Wall time/node
+occupancy are not yet measured; no zero-cost or speed claim. The strongest alternative costs
+0new fits and0evaluation and ends this specific diagnostic investment while preserving existing
+positive package evidence. No fixed-label training comparison or confirmation batch is proposed.
+
+Context (paths marked source_sha resolve at this question's published full source commit;
+other evidence retains its own stated revision):
+
+- Current governance, source_sha: `docs/project/OPERATING_CONSTITUTION.md` §§1–5 and7–8.
+  The owner delegated ordinary direction choice and execution to the DM, pause is lifted, and
+  this session remains the recorded independent lead. Pro advises; the DM chooses. No other
+  task may be messaged or taken over. There is no per-batch advice gate or fit allowance.
+- Current methods, source_sha: `.agents/skills/hmasd-scientific-tools/SKILL.md`, sections
+  `Update the working explanation`, `Use and revise shared understanding`, `Comparators and
+  MARL information`, `Statistics`, `Cost and exposure`, `Pro`; and
+  `.agents/skills/hmasd-research-engineering/SKILL.md` for proportional evaluator checks and
+  independently reviewed runtime changes if selected. These constrain meaning and cost,
+  not frozen historical results or a separate approval process.
+- Complete new evidence, source_sha: this NOTES entry `B08 complete; package benefit recurs
+  but entropy increment reverses`; preceding `B08 E complete; the entropy incentive increment
+  reverses`, `B08 M complete` and fixed `recurrence advice adopted; fixed B08 E/M/U and L0`.
+  Compact complete outputs under `runs/complementary_skill_learning/b08_{m,e,u}_260924041_c9217f0ae/`:
+  config/summary/native-status/process-exit plus notebook-bound external trajectories and
+  checkpoints. Summaries and DM readback are not an independent second artifact audit.
+- Prior advice, source_sha: this NOTES `Pro question 2026-09-24 recurrence-or-revision-after-b07`
+  and its complete Answer/adoption. Prior results `B07 complete`, `B04 complete`, `B06 complete`,
+  `B05 complete` identify actual learning, native losses and failed explanations; read only the
+  relevant full result/advice sections, not every historical transport or cell-progress note.
+- Frozen code contracts: B07 execution
+  `455536ebd0e6e23466ed40244bcf1e5ab6462826`; B08 execution
+  `c9217f0ae5b32aa2a13e228cc87899f545a0111b`.
+  `experiments/candidates/complementary_skill_learning/b07/runner.py::evaluate_panel` is the
+  R evaluator actually reused by B08; B08's `runner.py` binds the new training block and private
+  seeds. `experiments/candidates/complementary_skill_learning/b01/learning.py::low_actions`
+  identifies the delivered individual context and recurrent policy path. Verify function/path
+  at the supplied source before drawing a code-based conclusion.
+- Fresh shared background and routing, main
+  `5a99d6075a6cae539c7b05eb5fba88d1e6f6c499`:
+  `docs/research/RESEARCH.md` topic3, current-plan ordinary local comparator/entropy discussion,
+  active rows and pause. Direct evidence at that same revision:
+  `docs/research/candidates/agent_count_generalization/NOTES.md`, `B10 complete; opening
+  assignment replay improves means with consequential local losses`, `B16 complete; local
+  ordinary control changes the N8 comparator`, and `B17 advice adopted`.
+  The shared CSL row still describes planned B08; the newer complete result in this question's
+  source supersedes that progress description. It does not supersede other directions' plans.
+
+Constraints: No training, evaluation, code edits or messages to other tasks. Write advice only
+inside the empty `### Answer` below, on branch `codex/complementary-skill-learning` at
+`docs/research/candidates/complementary_skill_learning/NOTES.md`. Read the pinned scientific
+inputs; fetch the latest target file and actual blob SHA for writing. Preserve the question and
+all other bytes; stop on overlapping edits. Report the actual successful answer commit. If
+writeback fails, return the complete answer in chat, not a status, SHA or link alone.
+
+Return: State which judgment changes and why; test whether the proposed H/R comparison can
+change understanding or use beyond existing evidence, including the off-training persistence
+alternative. Recommend the smallest worthwhile choice (the stated comparison, a specifically
+supported revision, or reasoned stop), with native prediction, interpretation limits and full
+fit/non-fit cost. No fixed number of alternatives and no forced new idea. Cite the sources
+actually read and identify any decision-critical unread gap. Include MATERIAL_DISSENT yes/no.
+
+### Answer
