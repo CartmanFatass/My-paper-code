@@ -4981,3 +4981,198 @@ read/verify completed outputs or rearm the remaining observation against the ret
 generation/wake/event IDs; do not restart the evaluator, repeat the Pro Send or message
 another App task. Scientific acceptance still requires complete trajectories and the
 independent old-control/aggregate readback.
+
+
+## 2026-09-23 — B05 complete: stochastic deployment improves greedy but not uniform
+
+The fixed nine panels completed once on wsl_4070 at source
+`a5bb71ec32f56bd6e4e9479cc91ef1463d473a3b`. The native terminal witness reports exit0,
+consistent admission/source records, and absent runner/supervisor identities. Acceptance here
+also includes independent reading of all nine complete saved trajectories, rather than exit
+status or the evaluator's own `valid` field alone. The [compact summary](../../../../runs/complementary_skill_learning/b05_osr_a5bb71ec3/summary.json)
+and [configuration](../../../../runs/complementary_skill_learning/b05_osr_a5bb71ec3/config.json)
+retain every panel, all32 world results, label/state identities, stream dispersion, sensitivity,
+resource counts and trajectory hashes; the [terminal witness](../../../../runs/complementary_skill_learning/b05_osr_a5bb71ec3/process-exit.json)
+retains execution completion. No panel, stream or endpoint was added.
+
+**Complete readback.** All26 files, totaling100,905,305bytes, were collected and their byte
+counts/SHA256 matched the node copies. The independent saved-array reader loaded every NPZ
+with `allow_pickle=False`, checked all arrays' shapes/dtypes and finite values (with the declared
+nonrenewal factor-log-probability NaNs), lawful labels, k10 renewal/hold and AR order, exact
+mean-action clipping, episode boundaries, native reward components, saturation and physical
+initial identities. It regenerated all four declared R PCG64 streams and all label digests,
+recomputed every world's return/J/users/components using the historical sequential float64
+accumulation, and recomputed all primary/secondary/sensitivity/dispersion arithmetic.
+O and R0 exactly reproduce every saved historical B04 per-world output, component, saturation,
+physical-initial and label identity; their maximum numerical discrepancy is zero. This does
+not create another training replicate. Review and actual CUDA checks preceding execution
+remain the evidence for the learned team and actual sampled-prefix individual mixture path.
+The saved arrays are not an independent re-execution of that policy.
+
+Checkpoint restore/native identity is `d6b22033f9c84901db42015d01b7c58238002ea5ba301a0daf5d919035dc4058`;
+frozen-before/after identity is `7e9ee5542474cca2ba0281ebeb5000bc3947e254a6cf48b80e59d33010bd17f0`.
+Actual training/storage/native/optimizer/normalizer mutation counts are zero; each S private
+Torch stream advances through50 high-level selections and the default/training/private/sampler
+states remain unchanged after evaluation. Original native optimizer histories were not in the
+input checkpoint: freshly constructed empty unused states are honestly labeled, while saved
+auxiliary optimizer states were restored and unchanged. No resumed-training claim is made.
+
+**Prespecified endpoint reading.** Positive height means a larger penalty. Counts below are
+positive/negative world differences; none is zero. World and deployment-stream repetitions
+remain nested inside the single original M training instance. These are exposed development
+worlds, not held-out performance or inference about independent training.
+
+| Metric | Primary S4−R4 (world +/−) | Secondary S4−O (world +/−) | Prespecified S4−Rnew3 sensitivity (+/−) |
+| --- | ---: | ---: | ---: |
+| J | -0.000470478212 (17/15) | +0.047675313398 (24/8) | -0.001850778453 (16/16) |
+| users | +0.068265625000 (19/13) | +2.723250000000 (23/9) | -0.034333333333 (18/14) |
+| coverage | +0.001365312500 (19/13) | +0.054465000000 (23/9) | -0.000686666667 (18/14) |
+| quality | -0.001144899930 (11/21) | -0.001261511919 (13/19) | -0.001149370360 (10/22) |
+| height | +0.001082726983 (22/10) | -0.009928266974 (8/24) | +0.001025300678 (22/10) |
+
+The S−O positive working prediction is supported for the fixed finite comparison; the
+S−R positive prediction is not. Absolute J/users means are O=.409669217529/28.98975,
+S4=.457344530927/31.713, R4=.457815009139/31.644734375. Sampling the learned law improves
+on greedy on average, but its tiny negative primary J and mixed service/components do not
+establish learned assignment value beyond independent uniform. They also do not establish
+S/R equivalence, uniform's general superiority, or uselessness of learned high-level training.
+R remains the simpler serious deployment reference for this bank; neither rule is certified
+as uniformly preferable or sufficiently precise for a deployment guarantee.
+
+The old R0 stream matters descriptively. All four S stream-mean J values exceed old R0, but
+all four are below R1 and R3. Removing R0 from the predeclared sensitivity changes service
+from+.068265625 to−.034333333; J becomes−.001850778453. The primary remains the original
+four-stream comparison. Its difference from the new-three sensitivity is+.001380300241 J
+and+.102598958333 users, exactly the declared exposure identity up to float64 residual
+(maximum absolute residual across metrics1.23e−15). No more favorable endpoint is selected.
+
+| Panel | Mean native J | Users/step | Quality | Height penalty |
+| --- | ---: | ---: | ---: | ---: |
+| O | 0.409669217529 | 28.989750000000 | 0.157823478034 | 0.043534325882 |
+| R0 | 0.453674108416 | 31.336937500000 | 0.157693454756 | 0.032351053011 |
+| S0 | 0.455979727150 | 31.649062500000 | 0.155438276686 | 0.033738630856 |
+| R1 | 0.460097460626 | 31.796625000000 | 0.157763528860 | 0.032384348032 |
+| S1 | 0.459837557141 | 31.816125000000 | 0.158517792403 | 0.033143530580 |
+| R2 | 0.456300923157 | 31.580812500000 | 0.156644934777 | 0.032823932276 |
+| S2 | 0.457502736527 | 31.720750000000 | 0.156403561868 | 0.033508832034 |
+| R3 | 0.461187544356 | 31.864562500000 | 0.158725545791 | 0.032533994381 |
+| S3 | 0.456058102889 | 31.666062500000 | 0.155888233504 | 0.034033242162 |
+
+**All32 paired worlds and adverse consequences.** The complete native component vectors and
+all individual stream results remain in the summary; the table preserves the primary and
+secondary J/service readings without selecting worlds. The worst primary pair is1700203
+(−.035829642700 J,−2.6225 users); the best is1700223 (+.027954743338,+1.9435). S4−O has
+eight worlds worse on both J and service (1700201/204/205/209/215/219/221/225) and1700231
+with positive J but−.676 users. Its worst pair is1700219 (−.031356133252,−1.959), while
+1700220 improves+.192618306450/+12.6555 and1700224 improves+.187911510/+11.8025.
+Mean recovery does not erase the losses or identify the cause of the greedy shortfall.
+
+| World | S4−R4 J | S4−R4 users | S4−O J | S4−O users | S4−Rnew3 J | S4−Rnew3 users |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| 1700200 | -0.017821096 | -1.037500000 | +0.079987727 | +5.139000000 | -0.016430114 | -1.026333333 |
+| 1700201 | -0.011227520 | -0.473000000 | -0.008973499 | -0.920000000 | -0.011259719 | -0.443333333 |
+| 1700202 | +0.010647797 | +0.864500000 | +0.050713813 | +2.740500000 | +0.004135216 | +0.417166667 |
+| 1700203 | -0.035829643 | -2.622500000 | +0.048753964 | +1.560000000 | -0.040364002 | -2.901333333 |
+| 1700204 | +0.007750683 | +0.382000000 | -0.013519021 | -0.668000000 | +0.007191063 | +0.393333333 |
+| 1700205 | -0.006412641 | -0.366000000 | -0.015546635 | -0.472500000 | -0.005220539 | -0.272500000 |
+| 1700206 | -0.003849145 | -0.040000000 | +0.026472213 | +0.935500000 | -0.009369532 | -0.466500000 |
+| 1700207 | +0.000134002 | +0.263000000 | +0.081689322 | +4.299500000 | +0.006758716 | +0.842166667 |
+| 1700208 | +0.013871699 | +0.978000000 | +0.089489693 | +5.147000000 | +0.016392534 | +1.183666667 |
+| 1700209 | +0.007837828 | +0.577500000 | -0.015678486 | -0.323000000 | +0.008884780 | +0.649000000 |
+| 1700210 | +0.004321764 | +0.356000000 | +0.093121035 | +5.215000000 | +0.001943277 | +0.170333333 |
+| 1700211 | +0.004614334 | +0.670000000 | +0.055808234 | +2.988500000 | +0.005765844 | +0.751833333 |
+| 1700212 | -0.000493634 | -0.101000000 | +0.027408360 | +1.387500000 | -0.002886383 | -0.192500000 |
+| 1700213 | +0.003088941 | +0.185000000 | +0.019260052 | +1.955000000 | +0.000883110 | -0.005666667 |
+| 1700214 | +0.005469860 | +0.315000000 | +0.035067021 | +1.283000000 | +0.008297456 | +0.618333333 |
+| 1700215 | -0.002497014 | +0.085000000 | -0.015496858 | -0.968500000 | -0.009835943 | -0.423833333 |
+| 1700216 | -0.015639723 | -1.065000000 | +0.069348836 | +2.964500000 | -0.021802154 | -1.523500000 |
+| 1700217 | -0.005618909 | -0.116500000 | +0.027962148 | +1.817000000 | -0.016231352 | -1.039000000 |
+| 1700218 | -0.013935312 | -0.875500000 | +0.139510543 | +8.853000000 | -0.014260513 | -0.971666667 |
+| 1700219 | -0.015152339 | -0.805500000 | -0.031356133 | -1.959000000 | -0.012992624 | -0.720333333 |
+| 1700220 | +0.004718685 | +0.301000000 | +0.192618306 | +12.655500000 | +0.001382156 | +0.066166667 |
+| 1700221 | -0.003939632 | -0.159000000 | -0.016171198 | -0.359500000 | -0.005426029 | -0.291500000 |
+| 1700222 | +0.012608009 | +1.044000000 | +0.069112940 | +3.895000000 | +0.013045787 | +1.084333333 |
+| 1700223 | +0.027954743 | +1.943500000 | +0.121154060 | +6.917000000 | +0.026936876 | +1.856333333 |
+| 1700224 | +0.002518111 | +0.456000000 | +0.187911510 | +11.802500000 | +0.000648379 | +0.226500000 |
+| 1700225 | +0.008289137 | +0.476500000 | -0.030870871 | -1.793000000 | +0.009716523 | +0.609666667 |
+| 1700226 | +0.008641333 | +0.801500000 | +0.148077452 | +9.365500000 | -0.001092500 | +0.041500000 |
+| 1700227 | +0.005372729 | +0.606000000 | +0.028133091 | +1.312500000 | -0.002356273 | +0.059833333 |
+| 1700228 | -0.004217353 | -0.182000000 | +0.023482801 | +0.289500000 | +0.003132696 | +0.252166667 |
+| 1700229 | +0.001000286 | +0.114000000 | +0.042882644 | +2.106500000 | +0.000032487 | +0.070500000 |
+| 1700230 | -0.003468797 | -0.399000000 | +0.007453554 | +0.654500000 | -0.004733568 | -0.460833333 |
+| 1700231 | -0.003792487 | +0.008500000 | +0.007803408 | -0.676000000 | -0.000110568 | +0.347333333 |
+
+Four-stream dispersion is material relative to the primary mean. Median within-world J
+ranges are S=.024439723506 and R=.032450234592; maxima are.057935392766 at1700216 and
+.055788147137 at1700217. Users ranges have medians1.596/2.221 and maxima4.026 at1700213/
+4.638 at1700217. These four realizations do not certify adequate precision. S4's minimum
+world-mean J/users is.410666346044/28.39 at1700203; R4's is.393766727307/27.3035 at1700223.
+Averaged tails cannot be substituted for individual episode tails, nor can different low
+worlds establish dominance. S/R stream numbers do not denote common random innovations.
+
+**Cumulative belief and bounded decision.** This is the result branch already covered by
+the complete deployment-law Pro advice: S improves O without improving R, with small and
+stream-sensitive primary differences. Reuse that reasoning to end the fixed B05 study,
+including any automatic temperature/stream/checkpoint/selector rescue. The tested S law
+has not earned an additional-use claim over uniform. B04's original greedy Gamma stays
+−.008570019747 J/−.5038125 users; do not splice S4 onto the old U single stream or rewrite
+B04's own definition. No pure high-level-gradient, MI, complementarity or all-mismatch
+mechanism is identified. The broader training/skill question remains open.
+
+Current shared background and project explanation at
+[main f58384f3a](https://github.com/CartmanFatass/My-paper-code/blob/f58384f3a80d1e49c7e254e2a13a1128c973df35/docs/research/RESEARCH.md#current-research-plan)
+link B14 package learning, B10 label reuse and B04 conditional bank formation. B05 sharpens
+only the deployment part: randomization can recover much of this bank's greedy loss without
+a demonstrated learned-selectivity increment. It leaves the training-formation explanation
+unresolved. B03's fixed-panel G reversal and the other direction's training-condition reversals
+make independent learning recurrence a real rival investment; their unlike packages cannot
+be pooled as M/U replicates. The current strongest proposed next observation is one fresh
+matched M/U training pair, with the original uniform endpoint and unchanged mixed low-level
+objective, to challenge B04's bank-formation advantage along another learning trajectory.
+It would cost2fits/720k training+96k evaluation team transitions and would still leave only
+two exploratory training pairs. It is not already launched, not an automatic debt, and not
+confirmation. A focused follow-up should compare its decision value against a material
+learning revision or stopping this route now, using the completed B05 evidence; further
+fixed-bank draws cannot answer training recurrence. New training awaits that scientific
+choice and a separate prospective binding, not renewed owner permission.
+
+**Actual cost and retention.** This study used0fits/0training steps,144,000 evaluation team
+transitions (O16k,S64k,R64k),288episodes. Runner wall was147.435802416s (2.457263374min),
+user/system CPU147.772472/2.496164s, process-lifetime peak RSS1,293,234,176bytes. CUDA
+allocated/reserved peaks after restore through evaluation were67,425,792/81,788,928bytes.
+Scratch peak and shared-node occupancy were not measured. Output size at runner measurement
+was100,904,756bytes; the final549byte terminal witness brings the collected total to
+100,905,305. Engineering, transport, reading and publication are additional real support work,
+not zero or part of a claimed training speedup. B01–B05 cumulative scientific execution is
+9started fits/3.24M training/657,280 evaluation team transitions, about475.513252 summed
+runner minutes; technical fixtures are separately recorded above.
+
+Durable full output remains on configured nodewsl_4070 at
+`/home/wu/hmasd-worktrees/complementary-skill-b05-20260923/runs/complementary_skill_learning/b05_osr_a5bb71ec3/`,
+with the verified collection at
+`/home/fires/.codex/worktrees/5916/hmasd-wsl/runs/complementary_skill_learning/b05_osr_a5bb71ec3/`.
+Both directories and the original B04 input are retained. Compact JSON/source are versioned;
+new bulk NPZ and zero-byte stdout/stderr logs remain outside Git. Summary SHA256 is
+`b593b39515a5c8af8e629d452a3d0ca7a6cfbc9caf004bb360109f40b2e9843e` (207,582bytes).
+The nine bulk hashes below agree with the summary and both copies. This is output retention,
+not a new artifact registry, and does not alter historical tracked evidence.
+
+| Retained trajectory | Bytes | SHA256 |
+| --- | ---: | --- |
+| `panel_O_trajectory.npz` | 10815758 | `da0cec8a47e05afb90172406d16475dc7a1dc1cde8e72cb55bae4ef66a0b84e5` |
+| `panel_R0_trajectory.npz` | 11160229 | `02a898c69cbeafa0095f5c904245dc4042f864cd2c8e7fcabd713d1abae39273` |
+| `panel_R1_trajectory.npz` | 11219511 | `f7205a1d13409bcdffe3c1436899a8a9f966f3b80ac378c58ff7f80540ab8ce4` |
+| `panel_R2_trajectory.npz` | 11171191 | `6ae9fb29858c1713c23f783dbac02d42e7f55d430957f2b3954fc862fb12a5ad` |
+| `panel_R3_trajectory.npz` | 11228520 | `ff44ccf61982c42064b4c71923fbed23f63c91ade2b96de2c20ceb8b52553c2b` |
+| `panel_S0_trajectory.npz` | 11235087 | `03193abb32c359fdaa9223dfe0d4621d52858d677c7a82291943594966bcfbeb` |
+| `panel_S1_trajectory.npz` | 11257757 | `27e883aeebd7e3b382129f332998fda743073a23eb8585c80a3b3b595aa0718b` |
+| `panel_S2_trajectory.npz` | 11243324 | `ee5e63be90f4ad7223d7790d18a241bc1bee2b4666edde65636db9e8d3e5869e` |
+| `panel_S3_trajectory.npz` | 11252816 | `836a7f3c2b05782e2ea23345981e60b0ada50f8f7a44d14fcf54c52df97275f1` |
+
+The READY event `4f80ad73a1747cc38dda364d` under wake
+`bea4a11f-e3b8-4046-9d5f-78c7bcf068a3` was consumed after complete readback by rearming
+generation46 to47 against the same operation. Native snapshot GC first previewed eligibility
+(no live dependent processes, terminal witness, published durable source ref, outputs external
+to the snapshot), then removed only source snapshot`1553c10f58d8427c953cd70c24de0174`.
+Exact source remains published on the direction branch; both complete output copies, original
+M input and author checkouts remain. No evaluator restart, old Pro resend or App message occurred.
