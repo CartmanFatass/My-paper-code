@@ -541,7 +541,7 @@ B14的N8/N6包差约.0714/.0499，其差.0214只是单实例描述。主张、�
 技能线已固定B07 E/M/U窄干预，以四条新最终随机流和共同上下文条件熵检验该预测；
 主要比较E-S与真实U-R，并分别读E-S与M-S及同库S−R。其个体标签保留.9pi+.1/6，
 团队标签是原生学得分类分布，没有同样的概率下界。熵下降或均匀读出变差导致S−R扩大，
-都不能单独算服务修复；固定上下文比较尚未选定。[固定预测、成本与解释边界](candidates/complementary_skill_learning/NOTES.md#2026-09-23--entropy-intervention-advice-adopted-fixed-b07-emu-and-l0)。
+都不能单独算服务修复。固定标签的新增训练对照尚未选定；本次固定M-S上下文只用于条件分布评分。[固定预测、成本与解释边界](candidates/complementary_skill_learning/NOTES.md#2026-09-23--entropy-intervention-advice-adopted-fixed-b07-emu-and-l0)。
 
 动作饱和及原始高斯熵的优化激励是实际疑点，但“保存原始动作/log-prob，执行裁剪”本身不推出
 score-function梯度有偏；CAPG原文给出同期望、较低方差估计器。这不宣称PPO/GAE完整实现无偏，
