@@ -422,15 +422,24 @@ B05开发QoS也低.117039433，尽管其平均成本较低。B05最终仅14/32�
 [B04完整比较](candidates/uav_service_auxiliary/NOTES.md#2026-09-23--b04-complete-native-final-gain-with-contrary-development-worlds)。
 
 风险训练中的服务交换不意味着当前信息下的普通执行反馈也必须放弃服务。固定两份N的
-B06合法余量反馈相对原执行，在两最终面板的J/QoS均值提高754.992840/.023604554与
-552.876189/.007118394，两个开发面板亦有利；成本显著降低，最终零服务6→1与1→1，
-没有新增零服务。这个有限实例支持把实际可执行的简单反馈作为后续学习的更强参照，
-不复活未重复的辅助或系数4配方。其最终仍有4/8个服务损失世界，所有面板平均最低电池
-及P10更低，B05最终最差电池.258198；短时朝站点移动改善位置相关余量，不等于保存电量。
-覆盖时最近站点仍约1.331km，未达到站充电，切断和耗尽也未激活；完整能量循环和持续服务
-尚未检验。0fits/两旧训练制品与已曝光世界不增加训练n，也不识别速度、backhaul guard或
-学习机制的单独贡献。保留有限反馈用途，不将正均值自动升级为重训、确认或安全保证。
-[全部世界、原始复现、真实物理诊断与下一投入](candidates/uav_service_auxiliary/NOTES.md#2026-09-23--b06-complete-fixed-feedback-preserves-mean-service-while-reducing-return-margin-cost)。
+B06合法余量反馈改善两最终面板的J/QoS均值，亦保留4/8个服务损失世界；所有面板平均最低
+电池与P10更低，未到站充电。这个H1500有限实例主要支持位置相关余量修复，不能称为省电。
+[完整B06和相反证据](candidates/uav_service_auxiliary/NOTES.md#2026-09-23--b06-complete-fixed-feedback-preserves-mean-service-while-reducing-return-margin-cost)。
+
+同一固定反馈在B07原生H3000的两旧N上，最终J/QoS均值提高 **3781.140317/.066866785**
+与 **3624.592395/.047859413**，开发面板亦有利；全部80个J差为正，但主要受返航成本节省
+驱动。O实有275次切断、212次耗尽，F均为零；F所有世界均有真实充电及存储电量正增量，
+78/80世界存在同机补能、正净储能增益、退出反馈后又出现联合服务的有限序列。联合服务不能
+归因于该成员，502个有充电的反馈区间在终点仍未退出，亦不算完成循环。H3000从开局改变
+时间输入与末端PBRS，不能把后半程当H1500的因果续跑。
+
+这加强了普通反馈的有限物理用途，也揭示能量恢复不充分：最终仍有 **5/32、3/32服务损失**，
+最差QoS差 **−.194845487、−.240545272**；B04的938030充电后至终点无服务，B05的938021
+有充电却全程零服务。F耗能均值更高、全程净储能仍减少，最低电池可到.086567360；零事件
+不建立安全、储备不变式或无限持续运行。0fits、两个旧训练制品和已曝光世界不增加训练n。
+保留F为学习的较强普通参照；冻结策略的历史曝光、原生几何/guard与站点竞争仍是未决解释，
+不能据此诊断预测或表征瓶颈。下一投入问题是训练时启用同一F是否值得，而非复活旧辅助配方。
+[完整B07、全部世界与物理证据](candidates/uav_service_auxiliary/NOTES.md#2026-09-24--b07-complete-native-h3000-feedback-restores-energy-with-material-service-loss-worlds)。
 
 稀疏配对收益中的大量平局/小样本方差可能漏掉尾部，观察最大值不能替代预先有效的全局界。C07 LONG 的
 有限上界约束该固定程序，不等于零效应、NEAR 全局最优或全部长时域方法等价。基础认识本身不推出固定 seed
@@ -461,7 +470,7 @@ B/UCOPE 的局部预测、一步优势或真实后缀信用没有自动转成稳
 | --- | --- | --- | --- | --- |
 | `complementary_skill_learning` | 固定 N/k、完整高低层共同学习时，能否形成提高原生 UAV 服务的技能组合，并区别于普通曝光、通用辅助优化与共同适应？ | exploring | Codex DM (independent session) | **B07高层熵干预已固定，待实现/检查。** B06 M−U uniform反转为−.012274346 J/−1.4725人，双方仍真实学习；B04正库差和两块负greedy Gamma保留。采纳完整Pro建议，新增一块E/M/U各360k，E只将高层lambda_h=.07改0，四条新最终S/R流读原生用途，3fits/1.08M train+400k eval。主要比较E-S与真实U-R，E-S与M-S及同库S−R分别约束激励和读出解释；熵下降本身不算服务修复，不自动扩样或确认。[完整B06](candidates/complementary_skill_learning/NOTES.md#2026-09-23--b06-complete-learned-high-bank-advantage-reverses-while-both-arms-learn)、[完整答复与固定B07](candidates/complementary_skill_learning/NOTES.md#2026-09-23--entropy-intervention-advice-adopted-fixed-b07-emu-and-l0)。[任务路由](#session-routing)。 |
 | `agent_count_generalization` | 固定 k、回合内固定 roster 时，HMASD 对未见团队数量 N 的服务能力和泛化代价是什么？ | confirming | Codex DM (independent session) | **B15固定确认进行中。** B14新H6/SET均学习，N8终点J/服务差+.071357/+5.282688人，仍有局部损失、质量/高度代价和普通调优不足。固定三独立区组、每臂3seed、N6/360k，共6fits；主张仅为新固定N8面板上的训练程序平均用途，要求预写J下界>0且服务下界>1。保持clip/.05熵、种子、顺序、终点和判读，不按分数扩样或更换对照。[固定claim](candidates/agent_count_generalization/CLAIM_bounded_count_transfer_20260923.md)、[采纳与L0](candidates/agent_count_generalization/NOTES.md#2026-09-23--b15-advice-adopted-fixed-conditional-mean-confirmation-and-l0)、[已接受操作恢复入口](candidates/agent_count_generalization/NOTES.md#2026-09-23--b15-first-fixed-cell-admitted-with-observation-adopted)。[任务路由](#session-routing)。 |
-| `uav_service_auxiliary` | 在 S7 完整共同学习中，怎样把服务改善转成包含返航风险的净收益？ | exploring | Codex DM (independent session) | **B07固定H3000 O/F已选定，待实现/检查。** B06两份旧N反馈均改善平均J/QoS，但电池尾部更低且未充电；有限H1500用途保留。采纳完整Pro建议，复用两来源与全部dev8/final32，0新fits/160回合/最多480k eval；按原生H3000时间信息比较累计服务、J与真实电量恢复，不自动加时长或改反馈。[固定B07与L0](candidates/uav_service_auxiliary/NOTES.md#2026-09-23--h3000-advice-adopted-fixed-b07-native-long-task-of-comparison-and-l0)、[完整B06](candidates/uav_service_auxiliary/NOTES.md#2026-09-23--b06-complete-fixed-feedback-preserves-mean-service-while-reducing-return-margin-cost)。[任务路由](#session-routing)。 |
+| `uav_service_auxiliary` | 在 S7 完整共同学习中，怎样把服务改善转成包含返航风险的净收益？ | exploring | Codex DM (independent session) | **B07完整读毕，保留有限H3000反馈用途及服务反例。** 两旧N的最终平均J/QoS均提高，F有真实补能且未发生切断/耗尽；仍有5/32与3/32服务损失世界，充电不保证恢复服务。0新fits/160回合/480k eval已完成。下一步咨询同一F纳入训练是否值得与新匹配普通训练比较；尚未选新fit，不追加B07。[完整结果](candidates/uav_service_auxiliary/NOTES.md#2026-09-24--b07-complete-native-h3000-feedback-restores-energy-with-material-service-loss-worlds)、[投入问题](candidates/uav_service_auxiliary/NOTES.md#pro-question-2026-09-24-feedback-aware-training-after-h3000)。[任务路由](#session-routing)。 |
 | `goal_conditioned_entity_aggregation` | 当前技能条件化的实体聚合，能否比原始 MLP 或普通条件化池化提供有用的完整共同学习收益？ | reserve | Codex DM (independent session) | 原直接 DM task `01a0c7e4-e1aa-7460-a6bb-43db5c1b0898`，host `local`；原 checkout `/home/fires/.codex/worktrees/query-aggregation-sept22/hmasd-wsl` 已缺失，branch `codex/goal-conditioned-aggregation-20260922` 与原 lead 保留。固定 B01 O/P/E 的 3 fits 全部完成：每臂360k，共1.08M train/48k eval。Root 已从原节点取回并完整核对 E，三臂 J=.509137/.159861/.183016；P−O=−.349276、E−O=−.326121，均32/32世界不利；E−P=+.023155（20正/12负）。fit-body O/P/E=89.9204/109.7429/91.5859 min。每臂一个训练实例，结束这两个具体配方当前投入，不否定整个表示类；不新增第四条持续研究线。无运行中训练，原 DM 最终 notebook 补录仍待其承接，不声称已重载或交接。[P完整记录](candidates/goal_conditioned_entity_aggregation/NOTES.md#2026-09-22--b01-p-complete-and-read-e-remains-the-fixed-third-arm)、[E原生输出](../../runs/goal_conditioned_entity_aggregation/b01_e_s922611/summary.json)、[恢复事实与项目判断](archive/2026-09-23/RESEARCH-scientific-management-adopted.md#decision)。 |
 | `skill_teammate_drift_learning` | When teammates change, what must be learned or reused to improve decisions beyond competent simple controls? | reserve | Codex DM (independent session) | DM task `01a0bdb4-cd2c-71a3-af95-a196aeed70cd`，host `local`；checkout `/home/fires/.codex/worktrees/b-unknown-joint-law/hmasd-wsl`，branch `codex/b-unknown-joint-law`。旧径向一步表路线结束；B09/B10 局部正用途保留，B11 完整轨迹增量不一致；自身网络 refresh/burn-in 未识别真实队友行为漂移，后继方案已否决。没有排队实验、诊断或 Pro；需具体行为变化、受影响的未来估计和有区别的比较，才能选择下一步。reserve 不是无价值判决或外部等待。[最新判断及 B 分支 entry-mask 修复](https://github.com/CartmanFatass/My-paper-code/blob/74fe267aa166299d93a03566e5f0ab149ff2b12d/docs/research/candidates/skill_teammate_drift_learning/NOTES.md)；修复没有追溯应用于历史/FSD 结果。 |
 
@@ -546,11 +555,12 @@ B14的N8/N6包差约.0714/.0499，其差.0214只是单实例描述。主张、�
 动作饱和及原始高斯熵的优化激励是实际疑点，但“保存原始动作/log-prob，执行裁剪”本身不推出
 score-function梯度有偏；CAPG原文给出同期望、较低方差估计器。这不宣称PPO/GAE完整实现无偏，
 也不替代对执行分布的研究。[CAPG原文§3](https://proceedings.mlr.press/v80/fujita18a/fujita18a.pdf)。
-S7目前实测的风险节省具体是返航余量罚降低：B04/B05的256个评价回合均未发生切断、耗尽或充电，
-不能推出其他策略轨迹不可能触发事件。B05前三个正差世界占净J差72.5%，8个R零吞吐世界占51.9%，
-强化服务丧失的用途限制；它们不授权删尾、改B06判读或追加20/32及.02阈值。
+S7的B04/B05在H1500评价未激活切断、耗尽或充电，风险学习的有限J节省伴随服务损失，
+不能因少数有利世界删尾或改判读。B07同一反馈的H3000比较现已实际激活O的风险事件和F的
+补能路径，均值服务/J有利；充电后长期无服务的反例仍限制用途。能源与服务需分别读取，
+实际能量恢复不证明网络服务恢复或识别训练曝光瓶颈。[B07完整结果与投入问题](candidates/uav_service_auxiliary/NOTES.md#2026-09-24--b07-complete-native-h3000-feedback-restores-energy-with-material-service-loss-worlds)、
 [B05完整服务/余量记录](candidates/uav_service_auxiliary/NOTES.md#2026-09-23--b05-complete-endpoint-risk-savings-recur-service-gains-do-not)、
-[外部DM3 review](https://github.com/CartmanFatass/My-paper-code/blob/5ec6e1dff/docs/Claude_docs/reviews/DM3_UAV_SERVICE_AUXILIARY_REVIEW_20260924.md)。
+[外部DM3 review的原范围](https://github.com/CartmanFatass/My-paper-code/blob/5ec6e1dff/docs/Claude_docs/reviews/DM3_UAV_SERVICE_AUXILIARY_REVIEW_20260924.md)。
 外部任务的接入与训练成本尚未测量；一个外部正结果也不能自动建立通用MARL优势。
 
 ### 三条主线和近期动作
@@ -559,7 +569,7 @@ S7目前实测的风险节省具体是返航余量罚降低：B04/B05的256个�
 | --- | --- | --- |
 | DM1：泛化与训练条件 | B15：H6/SET各3个新独立训练区组，N6/360k，6fits；2.16M train +384k eval。完整绑定见[claim](candidates/agent_count_generalization/CLAIM_bounded_count_transfer_20260923.md)。 | 读取新固定N8面板上的平均J/服务差及预写区间，同时保留自身学习、N6代价与全部损失世界。小样本不确定可接受；不扩样、不把世界数当训练n，不把包收益解释为技能机制或普通调优充分。 |
 | DM2：有用技能与协作学习 | B07：E/M/U一块新匹配训练，各N6/k10/360k，3fits；1.08M train+400k eval。初始5单流、最终20四流面板，另在M-S全部6400重选上下文上评分E条件分布；待实现/检查。[Pro采纳、固定范围与L0](candidates/complementary_skill_learning/NOTES.md#2026-09-23--entropy-intervention-advice-adopted-fixed-b07-emu-and-l0)。 | E只去掉高层熵激励，主要读E-S相对真实U-R的J/服务；原M和同库S−R区分激励包与学得法则用途。保留实际学习、全部流/世界及质量/高度代价；共同输入熵降低不能代替原生改善，不自动加流、系数或确认。 |
-| DM3：服务收益与风险控制 | B07：两份旧N各O/F，原生H3000与全部旧dev8/final32，0fits/160回合/最多480k eval；尚未启动。[前瞻范围、Pro采纳与L0](candidates/uav_service_auxiliary/NOTES.md#2026-09-23--h3000-advice-adopted-fixed-b07-native-long-task-of-comparison-and-l0)。 | 判断有限反馈用途能否覆盖更长任务和实际能量恢复；H3000同时改变时间输入与末端PBRS，不是旧轨迹续跑。逐机能量与累计/计划窗口服务并读；早终止、服务损失或未激活均不自动延长、调参或重训。 |
+| DM3：服务收益与风险控制 | B07完成：两旧N各O/F、原生H3000、dev8/final32，0fits/160回合/480k eval，runner230.54分钟。[完整结果](candidates/uav_service_auxiliary/NOTES.md#2026-09-24--b07-complete-native-h3000-feedback-restores-energy-with-material-service-loss-worlds)；[新投入咨询](candidates/uav_service_auxiliary/NOTES.md#pro-question-2026-09-24-feedback-aware-training-after-h3000)，尚未选择新fit。 | 实际充电和风险事件暴露加强有限反馈用途，但能量恢复仍可伴随长期服务中断。拟议比较让两臂都训练于H3000并带同一F部署，仅改变训练时是否启用F；先评估信息价值与成本，不以正均值自动重训或确认。 |
 
 ### 推进与投入选择
 
@@ -589,13 +599,15 @@ horizon读取，评价、实现、检查、收取和支持成本另计；0fit不
 | Root：科学项目管理 | `01a0cd93-9107-7701-a7e5-84fb071ea8f7` / `local` | `/home/fires/.codex/worktrees/project-management-sept23/hmasd-wsl` · `codex/project-management-sept23` | [项目判断与已完成咨询](archive/2026-09-23/RESEARCH-scientific-management-adopted.md#decision)；原负载操作已完整结束，旧源码/轨迹留在方向表所列原工作区。 |
 | DM1：智能体数量泛化 DM | `01a0c6ef-cdd4-7113-b2d9-20487e35171b` / `local` | `/home/fires/.codex/worktrees/7fef/hmasd-wsl` · `codex/agent-count-generalization` | [NOTES及B15原操作](candidates/agent_count_generalization/NOTES.md#2026-09-23--b15-first-fixed-cell-admitted-with-observation-adopted)；沿后续 notebook 条目恢复同一批次。 |
 | DM2：实际互补技能学习 DM | `01a0cdb8-10c9-7743-a05a-6dcfc42621c5` / `local` | `/home/fires/.codex/worktrees/5916/hmasd-wsl` · `codex/complementary-skill-learning` | [NOTES及固定B07](candidates/complementary_skill_learning/NOTES.md#2026-09-23--entropy-intervention-advice-adopted-fixed-b07-emu-and-l0)；B06与完整Pro答复已验收，后续实现、三臂执行及观察沿notebook恢复。 |
-| DM3：控制用途预测小模块 DM | `01a0c9af-d5cd-7d70-b5e8-9db2c598ad4e` / `local` | `/home/fires/.codex/worktrees/d319/hmasd-wsl` · `codex/uav-service-predictive-control` | [NOTES及固定B07](candidates/uav_service_auxiliary/NOTES.md#2026-09-23--h3000-advice-adopted-fixed-b07-native-long-task-of-comparison-and-l0)；B06与本次完整Pro答复已读回，后续实现/执行/观察沿notebook恢复。 |
+| DM3：控制用途预测小模块 DM | `01a0c9af-d5cd-7d70-b5e8-9db2c598ad4e` / `local` | `/home/fires/.codex/worktrees/d319/hmasd-wsl` · `codex/uav-service-predictive-control` | [B07结果与下一咨询](candidates/uav_service_auxiliary/NOTES.md#2026-09-24--b07-complete-native-h3000-feedback-restores-energy-with-material-service-loss-worlds)；B07全部终态和原始证据已读，后续Pro操作及采纳沿notebook与同一key本地状态恢复。 |
 
 未活动方向的历史联系人及证据工作区仍在各自 standing 中，不能据此新建或重启任务。
 
 <a id="portfolio-review-2026-09-23-scientific-management-and-next-learning-investment"></a>
 
 [已完成项目复盘：完整答复、数值纠正与采纳决定](archive/2026-09-23/RESEARCH-scientific-management-adopted.md#portfolio-review-2026-09-23-scientific-management-and-next-learning-investment)。
+
+B07完成前的服务方向计划已退役至 [2026-09-24快照](archive/2026-09-24/RESEARCH-uav-service-b07-complete.md)；当前结果及下一投入问题见上方服务方向。
 
 ## Retirement and history
 
