@@ -1,7 +1,7 @@
 # .gitignore — ignore generated artifacts and scratch only. Source and documents are visible by
 # default; there is no global rule on *.md, *.txt, *.pdf, *.png or test*.py. Layout standard:
-# docs/Claude_docs/plans/CODEBASE_LAYOUT_STANDARD_20260903.md. Rules for run output are anchored
-# at the repository root so that archived copies under docs/ stay visible.
+# docs/Claude_docs/plans/CODEBASE_LAYOUT_STANDARD_20260903.md. Existing tracked evidence stays
+# tracked. New bulk run output is retained outside Git; docs/ is not an artifact-store escape.
 
 # Python and tool caches
 __pycache__/
@@ -21,7 +21,7 @@ env/
 venv/
 .venv/
 
-# Model, result and log output (never versioned; historical logs live under docs/archive/logs/)
+# New bulk model, result and log output; these rules do not untrack historical evidence.
 /models/
 /results/
 /logs/
@@ -41,6 +41,11 @@ venv/
 *.csv
 *.dat
 *.out
+/runs/**/*.jsonl
+/runs/**/*.ndjson
+/runs/**/raw/
+/runs/**/traces/
+/runs/**/checkpoints/
 /experiments/**/RISP_*_RESUME_*/
 /experiments/**/RISP_*_RESULTS_*/
 /experiments/**/RISP_*_CHECKPOINTS_*/

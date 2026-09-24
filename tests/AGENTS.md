@@ -2,15 +2,9 @@
 
 Scientific tests use Python 3.10 with torch 2.7.0+cpu and pytest 9. Control-plane skill tests
 that import `tomllib` use an existing Python 3.11+ interpreter, which has no torch. Choose the
-interpreter for the tested surface, by host, and install into none of them:
-
-| host | scientific | control-plane |
-|---|---|---|
-| Windows | `C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe` | `C:/Users/fires/.conda/envs/hmasd-science-tools/python.exe` |
-| WSL2 Ubuntu | `/home/fires/.venvs/hmasd-linux-cpu/bin/python` | `/home/fires/.venvs/hmasd-linux-science-tools/bin/python` |
-
-`tools/research_support/interpreters.py` resolves the same two roles for the running host, and
-`HMASD_SCIENTIFIC_PYTHON` / `HMASD_CONTROL_PLANE_PYTHON` override it. On Linux the venv's `bin`
+interpreter for the tested surface, by host, and install into none of them. The current host
+paths come from `.codex/hmasd-compute.toml` via `tools/research_support/interpreters.py`;
+`HMASD_SCIENTIFIC_PYTHON` / `HMASD_CONTROL_PLANE_PYTHON` override them. On Linux the venv's `bin`
 must be on `PATH` for any test that builds the native C++ geometry backend: `ninja` lives in the
 venv and `torch.utils.cpp_extension` looks for it on `PATH`. Without it,
 `tests/envs/uav_service_restoration` fails one test with "Ninja is required to load C++
@@ -36,23 +30,25 @@ local scientific fixtures. No lint, format, or type tooling is configured.
 ## Commands and scratch
 
 ```powershell
-# Windows. Scientific test: default scratch is allocated automatically under temp/tests/.
-& 'C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe' -m pytest -q tests/hmasd_run_test.py
-# Control-plane tests use Python 3.11+.
-& 'C:/Users/fires/.conda/envs/hmasd-science-tools/python.exe' -m pytest -q tests/skills/
+# Windows. Run from the checkout root; py -3.11 only resolves the configured paths.
+$scientific = py -3.11 -c 'from tools.research_support.interpreters import scientific_interpreter; print(scientific_interpreter())'
+$controlPlane = py -3.11 -c 'from tools.research_support.interpreters import control_plane_interpreter; print(control_plane_interpreter())'
+# Default scratch is allocated automatically under temp/tests/.
+& $scientific -m pytest -q tests/hmasd_run_test.py
+& $controlPlane -m pytest -q tests/skills/
 # Optional direction-specific location: use a fresh, nonexistent invocation directory.
-& 'C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe' -m pytest -q --basetemp temp/directions/<direction>/test/<unique-tag> <paths>
+& $scientific -m pytest -q --basetemp temp/directions/<direction>/test/<unique-tag> <paths>
 ```
 
 ```bash
-# WSL2. PATH carries the venv's bin so the native C++ loader can find ninja.
-PATH="$HOME/.venvs/hmasd-linux-cpu/bin:$PATH" \
-  ~/.venvs/hmasd-linux-cpu/bin/python -m pytest -q tests/hmasd_run_test.py
-# Control-plane tests use Python 3.11+.
-~/.venvs/hmasd-linux-science-tools/bin/python -m pytest -q tests/skills/
+# WSL2. Run from the checkout root; python3 only resolves the configured paths.
+scientific=$(python3 -c 'from tools.research_support.interpreters import scientific_interpreter; print(scientific_interpreter())')
+control_plane=$(python3 -c 'from tools.research_support.interpreters import control_plane_interpreter; print(control_plane_interpreter())')
+# PATH carries the venv's bin so the native C++ loader can find ninja.
+PATH="$(dirname "$scientific"):$PATH" "$scientific" -m pytest -q tests/hmasd_run_test.py
+"$control_plane" -m pytest -q tests/skills/
 # Optional direction-specific location: use a fresh, nonexistent invocation directory.
-PATH="$HOME/.venvs/hmasd-linux-cpu/bin:$PATH" \
-  ~/.venvs/hmasd-linux-cpu/bin/python -m pytest -q --basetemp temp/directions/<direction>/test/<unique-tag> <paths>
+PATH="$(dirname "$scientific"):$PATH" "$scientific" -m pytest -q --basetemp temp/directions/<direction>/test/<unique-tag> <paths>
 ```
 
 The session allocates a unique directory under this checkout's `temp/tests/` unless an

@@ -60,12 +60,17 @@ Use the existing RESEARCH index, with no separate session registry or handoff fi
 
 - Coordination prose identifies the acting Root, its scope and actual
   native address. Record its authoring checkout/branch when that matters to writers.
-- A direction's standing identifies its independent DM task id and host, or its parent task
-  and child agent address, plus its authoring checkout/branch. This gives a replacement
+- A direction's entry links to routing that identifies its independent DM task id and host,
+  or its parent task and child agent address, plus its authoring checkout/branch. This gives a replacement
   Root a recovery locator instead of just a runtime label, without a reporting obligation.
 - Keep the launch-bound **Lead runtime** cell stable. Put addresses and explanatory
   session text in standing/coordination prose, not in a value compared by a frozen runner.
   A real lead change must reconcile canonical and published control before dependent runs.
+
+Use one routing block for these addresses, linked from the scientific table. Keep detailed
+operation identity and progress in NOTES/run metadata; publishing source or accepting a cell
+does not require an index edit. Routine routing/status edits use Git history, not a new archive
+snapshot. Material scientific result/plan and owner-control changes still reach the index.
 
 Use only ids/addresses returned by native tools or established records, then verify them
 with the runtime before dispatch. A title, a process name, a previous message or an app's

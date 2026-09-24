@@ -79,7 +79,10 @@ require this review; DM reflection and pivots may use their existing NOTES and s
    Keep outcome details in their direction evidence; the index links to them. After the complete
    answer has been read, its write reconciled and the decision recorded, retire the complete
    review and superseded project narrative under `docs/research/archive/<YYYY-MM-DD>/RESEARCH.md`
-   in the same publication. A snapshot of the pre-retirement index is sufficient; include its
+   in the same publication. Retain the completed review or substantively superseded project plan,
+   not each intervening start, collection or acceptance update. Routine status/routing/wording
+   changes use Git history and create no archive file. A scoped copy of the retired material is
+   sufficient; use a whole-index snapshot only when that context is needed. Include its
    source revision and a historical-only banner, rebase relative links, and preserve inbound
    citations with direct archive links or small compatibility anchors. Use a new suffix if that
    date's file exists. Do not overwrite or keep appending to retired snapshots.

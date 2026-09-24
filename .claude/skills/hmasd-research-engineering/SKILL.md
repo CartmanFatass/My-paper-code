@@ -120,7 +120,12 @@ The DM repairs and accepts; the reviewer decides neither science nor permission.
 
 Each DM publishes its own read results and RESEARCH entry without waiting for Root. Directions
 normally touch separate content; use a small update-time check, not a coordination service.
-At a meaningful result boundary:
+Publish RESEARCH at a material scientific result/plan boundary, a changed direction/lead/pause,
+or a real shared dependency. An unchanged batch's start, checkpoint, collection and individual-cell
+acceptance stay in its NOTES/run records. Publishing exact source inputs on the direction branch
+before execution does not require a main/index edit for each cell. Routine progress or routing
+edits use Git history; archive only completed project reviews and substantive superseded plans.
+At an applicable publication boundary:
 
 1. Publish the direction evidence. Before editing the shared entry, fetch `origin/main`, check
    the owned checkout/index and inspect upstream changes to the affected content. Use a
@@ -131,11 +136,36 @@ At a meaningful result boundary:
    Keep the topic concise and conditional, reconcile concurrent evidence, and retain contrary sources;
    if there is no useful shared change, leave it alone. Preserve other direction rows, owner controls
    and launch-bound lead values; link to evidence rather than copying an old whole index.
+   Keep the standing to its scientific judgment, scope/contrary evidence and next comparison;
+   task/checkouts belong in the existing routing block. Do not copy process handles, observer
+   generations, per-file hashes or per-cell check transcripts into the index.
    Check the diff and commit explicit paths.
 3. Refresh main before pushing and reconcile any new relevant changes locally. Push normally
    and verify publication. A last-moment advance may reject the push; fetch, merge the relevant
    update and retry without force-pushing. An ordinary Git conflict needs no Root acknowledgment
    or App message. Raise only an unresolved ownership/meaning question in this task.
+
+### Retain outputs without growing Git history
+
+For new runs, commit the compact summary, config, source identity and native status/manifest
+needed to read and recover the result. Keep bulk checkpoints, trajectories, prediction/training
+streams and logs in the run's durable output on the configured node, with a verified collection
+copy when appropriate; ignored local `runs/` files are not a backup if their checkout will be removed.
+Use the existing summary artifact fields or NOTES to record node/path, byte count and content hash.
+No new receipt, registry, store service or per-run administrative file is needed.
+
+New runners should separate compact aggregate/per-seed/per-world results from large raw arrays
+and traces, using `runs/<direction>/<tag>/raw/` or the existing equivalent output layout. A file
+named `summary.json` containing bulk arrays is still bulk: preserve it at its recorded digest,
+and publish the readable result and locator in NOTES rather than silently editing that file.
+Small fixtures essential to executable checks may remain versioned with their test; do not
+force-add new bulk outputs simply to make every run file visible in Git.
+
+Before source/worktree cleanup, check that every required output is recoverable outside the
+deletion target and verify the retained copy's hashes. If it is the only recoverable copy,
+keep the checkout. Preserve failed/adverse outputs and all promised measurements. Existing
+tracked artifacts and accepted/frozen output contracts are unchanged; do not untrack, move,
+delete or convert old evidence as part of a routine result publication.
 
 ## Execution and admission
 

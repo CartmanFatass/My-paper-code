@@ -33,12 +33,12 @@ and output owners; adapters may call native kernels. Core packages (`hmasd/`, `h
 `envs/native/production_backend.py`'s lazy imports (see `envs/AGENTS.md`). Research documents
 describe meaning; they never control execution.
 
-Update this index when a nested `AGENTS.md` is added or removed. Update `RESEARCH_MAP.md` when a
-direction changes its primary implementation or test path.
+Update this code map when a nested `AGENTS.md` is added or removed. Current direction paths and
+standing belong in RESEARCH/NOTES; the historical RESEARCH_MAP remains an unmaintained catalogue.
 
 ## Control-plane source map
 
-The constitution is the sole governance text. Six shared task skills under `.agents/skills/`
+The constitution is the sole governance text. Shared task skills under `.agents/skills/`
 carry current methods; native roles supply bounded assistance, with Claude copies generated
 by `tools/publish_claude_control.py`. See the [control map](CONTROL_PLANE_MAP.md) for the actual
 source chain. Retired specifications and old operating records are in
