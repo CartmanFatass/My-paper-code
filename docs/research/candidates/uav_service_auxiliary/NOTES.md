@@ -7227,3 +7227,459 @@ Return: 说明哪些判断被加强/削弱/保持，最强反对意见，选定�
 给出MATERIAL_DISSENT: yes/no，引用实际使用的关键源并说明未读的关键材料。
 
 ### Answer
+
+Saved from chat (2026-09-23 PDT). Same accepted question key `hmasd:5c8754639c02f1a11610163143efcd3fdfbd24cac75ec66640f961646e7fc366`; the complete answer was read. Delivery verification returned `NOT_DELIVERED`: `dd240572aa3c83b2ce39ae4ab3c46ac999e077a2` is the unchanged source target blob, not an answer commit. Remote source and local target matched `2c73e4c420773ce0b0991bb53f105bcd24c762cf`; the assigned Answer remained empty. Original chat text follows verbatim, including rendered formula line breaks and attachment citation labels. Body SHA-256 `a71d5d72d34633aef02af18aa652ab186e6529651f9290e77d6b259eea902933`; saved file SHA-256 `6c096e318b440f945632bdfa6b80fbe0e24669e23be81c189ee1448fb1fe1980` (one trailing newline). Private conversation address remains only in local transport state.
+
+GitHub 读取可用，但本轮可调用接口没有仓库文件写入动作，因此未写回；实际 Answer commit：无。 最后读取的目标 blob 为 dd240572aa3c83b2ce39ae4ab3c46ac999e077a2，本次指定问题下的 ### Answer 仍为空。本轮没有修改仓库或启动实验。以下为完整答复。
+
+B06 后续：选择一次固定 H3000 的原生长任务比较，不先购买新的学习模块
+
+MATERIAL_DISSENT: no。
+
+我支持优先执行一次固定 H3000 比较：两份既有 N 最终制品，各自比较原执行 O 与完全不变的反馈 F，保留全部既有 development8／final32 世界。上限为 160 次 episode 尝试、480k 评价团队 transitions、0 新 fits、0 optimizer updates。
+
+这次要回答的是：**在时间信息与任务时域都按原生规则改变的 3000 步任务中，这两份冻结策略加 F 是否仍有值得保留的服务—风险用途，以及实际发生了怎样的能量消耗、补充和服务恢复。**它不是把 B06 的轨迹原样接长，也不是一个隔离了“增加能量暴露”的机制实验。
+
+我不同时选择新的学习比较、时间分母消融、更多世界、阈值搜索或确认。支持 H3000 的理由不是“B06 阳性，所以还应继续”，而是 B06 已把剩余问题具体化为：空间返航余量的修复，能否在更深的能量消耗过程中继续支持服务。现在直接观察这个强简单对照，比先假定预测器或 critic 存在可修复缺陷更有信息价值。
+
+一、B06 加强了有限用途，尚未建立持续能量循环
+
+四个用途格子都应保留。下表的 J 是完整原生 episode 回报，成本仍是原来的封顶返航成本；没有将反馈后的表现换成另一套奖励。
+
+hmasd-pro-question-usa-b06-next…
+
+来源／面板	O→F 原生 J	F−O J	QoS：O→F	返航成本：O→F
+B04，development8	50.842834→366.759692	+315.916858	.252992371→.253492381	.105076924→.000017033
+B04，final32	−496.301830→258.691011	+754.992840	.158025257→.181629811	.239923270→.000042644
+B05，development8	−72.367636→418.260942	+490.628577	.276942462→.287947935	.158086006→.000038551
+B05，final32	−232.025030→320.851159	+552.876189	.216057847→.223176241	.180828987→.000042278
+
+**加强的判断有两项。**第一，在这两份已经训练好的 N 制品、这些世界及 1500 步范围内，合法执行反馈可以产生实际原生增量，不需要为这个增量再训练一个预测头或改变整段训练奖励。第二，相比 B04/B05 的风险重加权结果，B06 的平均服务保留更好：四格平均 QoS 都提高，全部 80 个来源—世界配对没有 J 损失。这支持已完成的“保留有限反馈包”决定，不能再把它只描述为风险代理量变好。它仍依赖已训练的 N；零新增学习不等于既有学习没有作用。
+
+hmasd-pro-question-usa-b06-next…
+
+**被削弱的是“风险节省必然需要明显牺牲服务”的强解释，而不是所有服务代价。**四格仍分别有 2／4／1／8 个 QoS 损失世界。B04 的 final938030 和 B05 的 final938021 仍没有服务，虽然其 J 因成本节省大幅改善。因此，J 没有负配对不等于服务逐世界占优，更不等于已经得到高绝对服务水平。
+
+hmasd-pro-question-usa-b06-next…
+
+尚未建立的是节电、到站补能、持续服务和灾难预防。四格最低电池的均值和 P10 都变差；两个 final 面板的最差电池分别从 .311067401／.307733819 降至 .285397155／.258197998。与此同时，反馈覆盖产生朝站点的实际运动和 margin 增加，但没有进入 160 米 docking 区域，最近仍有约 1331 米；所有 episode 的充电、输入能量、排队、切断和耗尽均为零。正确描述是短时空间余量修复，不是一个已经观察到的能量循环。
+
+hmasd-pro-question-usa-b06-next…
+
+这个区别不是措辞保守，而是下一比较的实际依据。源码中的 margin 同时受电量和到站距离影响；移动可以降低估计返航需求，却继续消耗储能。最低电池变差不自动推翻原生 J 收益，也不能被“返航成本接近零”抵消掉。
+
+B03 的辅助预测反证和 B04/B05 的服务—风险取舍仍成立。指定主线计划要求把风险收益、服务损失和最低电池一起读；B06 的新结果加强了简单执行对照的地位，而没有为旧 MSE 头或固定系数 4 配方提供重开理由。
+
+二、一个源码推论使长时比较具有不同于重复 B06 的价值
+
+对当前有有效站点的 S2 条件，源码中的 raw margin 可写为
+
+m
+i
+	​
+
+=b
+i
+	​
+
+−κd
+i
+	​
+
+−0.1,κ=
+v
+limp
+	​
+
+3600C
+battery
+	​
+
+P(v
+limp
+	​
+
+,0)
+	​
+
+>0.
+
+这里 d
+i
+	​
+
+ 是最近站点的三维距离，b
+i
+	​
+
+ 是电池比例。F 的退出条件是 m
+i
+	​
+
+≥0.05，所以已触发 F 的成员要退出，必须满足
+
+b
+i
+	​
+
+≥0.15+κd
+i
+	​
+
+.
+
+这是由已读源码和固定 F 规则直接推出的必要条件，不是新增控制阈值。电量低于 15% 时，即使把距离缩到零，也无法仅靠几何移动满足退出条件；在现有能量模型下，需要实际净补能才能重新达到该退出余量。电量达到 15% 也不是充分条件，因为距离项仍在。
+
+hmasd-pro-question-usa-b06-next…
+
+B06 中观察到的覆盖段短、margin 很快恢复、没有到站，符合“当前储能尚容许通过缩短距离退出反馈”的范围。它没有回答储能进一步下降后，固定规则会表现为持续返站、成功补能、短促反复出入，还是服务中断。这正是一个不同的、可观察的用途问题，而不是已证明 F 有缺陷后寻找修补。
+
+源码还给出不能略过的条件：每步先根据实际运动耗能，再决定充电；只有合法 docking 请求、位置与速度条件满足后才有充电资格，站点容量和选择次序仍会约束实际获得能量的成员。到达附近、发出请求、成为候选、获得输入能量、净电量恢复，是不同事件。
+
+因此，我选择 H3000 来观察这个规则在更长任务中的后果，但不预测 H3000 必然到站或完成循环。它将原生任务时长加倍，同时保留原电池、初始比例和全部物理条件，是一个明确且有限的新任务范围；不是从试跑中挑选出的“恰好出现充电”的时长。不能依据 B06 的平均耗电斜率线性外推新轨迹，也不能在 3000 步没有事件后自动延长。
+
+三、时间信息改变是实质代价，但不使这项用途比较失去意义
+
+必须接受附件指出的区别：current_step/max_steps 进入 actor 观察和中央 state，等待时间也以 max_steps 归一化。将 max_steps 从 1500 改为 3000，时间推进后的同一物理时刻会给出不同时间比例。因此，不存在“头 1499 步闭环动作应完全重现 B06”的合理合同。初始时刻时间比例同为零，也不能据此推导后续历史相同。
+
+hmasd-pro-question-usa-b06-next…
+
+还有一个奖励边界区别：原生 PBRS 在 episode 结束时把下一势函数置零。H3000 在第 1500 步通常尚未结束，所以即使人为固定了相同物理动作前缀，第 1500 步的终端 shaping 处理也不能照搬 H1500。新任务可以保持同一个原生奖励函数，却不保持旧截断位置的奖励序列。
+
+这些差异限制的是机制归因，不妨碍下面这个直接比较：
+
+在共同的 H3000 原生时间信息、终止规则和世界下，同一份冻结 N 参数，使用 F 相比 O 是否仍改善完整任务用途？
+
+O/F 都接受相同的新时间定义，因此其 H3000 内部的反馈包对比仍明确。但 H3000 结果相对 B06 的变化，会同时包含时间信息、延长的历史与能量暴露、后续访问轨迹及终止边界的影响，不能归因于其中一个因素。
+
+我不建议额外加入“保持 1500 时间分母但跑到 3000”的臂。它会引入新的观察干预，甚至涉及时间值是否裁剪等选择；当前决策又不是估计纯粹的时域因果效应。为了获得一个并非本题所需的分解而追加整组运行，信息价值不足。
+
+最强的反对意见与替代
+
+**最强替代是止于当前 H1500 的有限用途，暂不新增计算。**B06 已得到可保留结果；H3000 要付接近两倍 B06 的评价工作，还可能主要暴露冻结策略对新时间信息的敏感性，而不是给出一个可直接修复的能量问题。即使出现充电，一次有限 episode 也不能证明持续循环。这个反对理由比“应该再找一个新网络”更有力。
+
+我仍支持 H3000，是因为这条方向当前的用途问题包含持续服务与返航风险，而 B06 的正结果恰好尚未跨入实际补能阶段，并伴随更低储能。**若研究用途明确只限于现有 1500 步任务，停止计算会更合适；但按本次提出的持续服务问题，H3000 能改变是否扩大 F 的使用范围，以及下一步是否真的存在值得学习的缺口。**这不是算出的最优资源配置，而是对信息价值和机会成本的判断。
+
+目前不优先选择新学习比较。低绝对 QoS 和未充电，并未定位到一个预测、critic 或技能学习瓶颈；已有 F 又构成了比只用 O 更强的执行参照。新的学习候选必须说明在这个参照下还要改善什么，不能仅重复“胜过 O”就宣称解决了当前问题。现阶段购买另一对完整训练，会同时增加学习变化和执行适应，而对当前能量循环缺口的解释未必比直接长任务更清楚。
+
+四、建议固定的最小完整方案
+制品与对照保持不变
+
+保留 B04 N／seed914021 和 B05 N／seed914173 的真实 update30 最终 checkpoint；各自都有历史 180k 训练，但此次不增加任何学习。每份制品分别执行 O 与 F，使用全部 development937001–937008 和 final938001–938032。两套面板、两个来源各自保留，不选择较强制品、已知触发世界或最有利面板。
+
+hmasd-pro-question-usa-b06-next…
+
+O 是该冻结策略在 H3000 下的正常闭环执行，不是旧 O1500 数组。F 完全复用 B06 的进入／退出、当前最近站点、速度转换、第四维请求和原 backhaul guard 例外；不因预计低电量而改成提前触发、到站充满、固定站点或预约排队。未覆盖时，继续使用 actor 基于当下 F 实际历史产生的命令。
+
+hmasd-pro-question-usa-b06-next…
+
+严格区分训练身份与评价配置
+
+先按原 1500 步保存配置核验源制品及 checkpoint 身份，再构造独立的评价配置副本。**源训练配置仍是 1500；新评价的 episode_length 与实际环境 max_steps 显式设为 3000。**冻结 B06 的 source verifier 和生产入口不能直接当作一个可任意改时域的执行器，也不应为新问题放宽旧 B06 身份检查。需要独立的后继入口及来源版本，保留训练身份、评价差异和输出定位。
+
+hmasd-pro-question-usa-b06-next…
+
+评价所需的单环境配置、buffer 分配及由配置计算出的尺寸应按实际初始化路径处理并记录。它们不能静默覆盖 checkpoint 的训练身份，也不能触发训练存储、optimizer 更新或 normalizer 更新。核心匹配条件继续是 S7-S2、N8、k10、原生奖励系数 2、相同信息权限、初始电量分布、充电与动作物理、CUDA FP32／TF32 off／四线程。H3000 不增加低电量开局、故障、强制队列或特殊站点。
+
+hmasd-pro-question-usa-b06-next…
+
+连续运行，不在旧边界重置
+
+actor 每步在真实新观察上运行，技能按原 k10 时钟刷新；F 模式、GRU 和技能状态只在原生 episode reset 时重置。第 1500 步不是新 reset、不是保存后重新开始，也不是清 buffer 后重建历史的人工边界。冻结 agent 的固定技能时钟本身不要求在 1500 步结构性复位。
+
+每个 episode 到 3000 步原生截断，或按未改的物理规则提前终止。成员切断、耗尽或失去服务不能成为剔除世界、重新开局或人为延长的理由；全体电池耗尽造成的原生提前终止也必须保留。O/F 的实际长度可以不同。
+
+在新 H3000 内，O/F 仍应有匹配的外生世界与随机性绑定，首次实际覆盖前的可比诊断前缀仍可用于检查实现。**这个检查属于新比较内部，不是要求重现 B06 的旧前缀。**正确性工作集中于新配置确实传入环境、时间与终止一致、跨 1500 连续运行、真实历史、身份及零更新，不需要另加一个“必须先充电成功”的 pilot。
+
+五、主读数是完整用途，能量循环需要另外读清楚
+
+对来源制品 b、面板 p，主对比保持为
+
+D
+b,p
+J
+	​
+
+(3000)=
+∣W
+p
+	​
+
+∣
+1
+	​
+
+w∈W
+p
+	​
+
+∑
+	​
+
+[J
+3000
+	​
+
+(N
+b
+	​
+
++F,w)−J
+3000
+	​
+
+(N
+b
+	​
+
++O,w)].
+
+final32 是每份制品的主要用途面板，development8 约束范围；四个格子分别报告。原生 J 按各自实际 episode 的全部奖励求和，保留全部世界、差值、绝对水平和损失尾部，不将两个来源或两个面板池化成一个掩盖相反结果的均值。H3000 的总 J 不能直接与 B06 的总 J 相减，称作“多运行 1500 步的收益”。
+
+服务与提前结束
+
+同时报告累计交付量、累计 QoS、实际每步服务、实际 episode 长度，以及零服务 episode 和不利世界。为比较计划中的 3000 步服务窗口，可另报
+
+S
+H
+	​
+
+=
+3000
+1
+	​
+
+t=0
+∑
+L−1
+	​
+
+q
+t
+	​
+
+,
+
+其中 L 为实际执行长度。它只是将已经交付的服务按共同任务窗口归一化，不补造未执行的奖励或轨迹，也不替换原生 J。这样，提前耗尽后因少承受后续负奖励而较高的 J，不会被误写成更好的持续服务。
+
+已有逐步记录可以按预先固定的前／后 1500 步及 250 步分段描述，不增加环境调用。未进入后半程的 episode 标明其暴露长度，不能把“后半程未观察到风险”当成安全。也不能事后选择最有利时间段替代完整终点。
+
+储能、充电与返回服务
+
+这里最重要的新增记录是逐成员的能量账：初始与实际电池比例、实际消耗 Wh、输入 Wh、实际净储能变化，结合已有 margin、距离、覆盖命令和真实运动。再记录进入 docking／capture、获得充电资格、实际获配站点、等待、充电开始结束、退出反馈和后续服务的时间关系。源码中先耗能再充电，且所谓净充电字段有自己的截断定义，故不能只累计“有充电”标志来替代真实电池恢复；能量核对应服从原代码的容量限制和最终裁剪。
+
+对“循环”的证据应分层描述，而不合成一个新评分：
+
+**到站或一次正输入能量，只证明发生了该事件。**更有用的循环迹象是，同一成员完成实际净储能恢复，随后退出返航／充电状态，并在剩余任务中重新参与有服务的联合运行。队伍总服务恢复不自动证明该成员的独立因果贡献；没有相应链路／交付记录时，不作这个归因。即使观察到若干次循环，也只支持该有限时域，不能声称稳定的无限持续服务。
+
+这类描述复用现有轨迹，只增加决定问题所需的能量和事件字段；不必为此另建全观察回放、额外 probe 或 oracle 路径搜索。诊断允许读取环境实际状态作事后核验，但那些额外记录不得成为 F 或 actor 的新输入。
+
+六、先于结果的预测，以及哪些结果改变投入
+
+中间预测不是“必然充电”，而是：在更深的能量消耗下，固定退出规则将使空间修复与净补能之间的区别显现。可以观察其是否变成更长的连续覆盖、逐步接近站点、实际补能后退出，也可能观察到撤离服务区、等待、反复出入或无法恢复。低于退出必要储能条件之后，仅靠距离缩短不能解释模式退出；若没有净补能却出现这种结果，应先核查实际输入和规则实现，而不是给出新的科学故事。
+
+原生用途预测是：F 在共同 H3000 条件下仍能通过减少真实返航成本，保留累计服务并改善完整 J，而不是把成本降低换成更早服务中断。最强相反预测是：B06 的几何修复只在当前储能窗口内有利；在更长任务中，额外耗电、返站驻留、站点竞争或新时间信息引起的轨迹变化，使服务或净用途明显恶化。仅凭这种恶化出现，仍不能从上述原因中任意挑一个作为已识别机制。
+
+固定 H3000 观察	对判断及下一笔投入的影响
+两来源主要面板仍有值得保留的 J／成本增量，累计服务相容；同时观察到净补能及后续服务恢复	扩大这一个包的有限长任务用途，并记录实际出现的能量循环。不是新学习成果、总体安全保证或自动确认；也不因此必须购买一个学习模块。
+J／成本改善，但累计服务、服务空窗或提前结束明显更差	保留原生风险账面的收益，但不判为持续服务成功。不能以少运行造成的低成本掩盖失败；默认不继续扩展这套固定 F 的长期用途。
+F 实际改变路径却没有净用途，或两来源／两面板出现实质反向	缩小 H3000 的使用判断，保留 B06 原有 H1500 结果。新任务阴性不能追溯抹掉旧阳性，也不自动授权改阈值、速度、驻留或站点协调。
+H3000 服务仍有用，但没有到站充电，或没有足够的低电量／反馈激活	最多得到 H3000 的有限用途，能量循环问题仍未被充分检验。不加长到事件出现为止，不制造低电量开局，也不把非激活算成活跃机制失败。
+
+技术无效另行保留其尝试、输出和成本，不计作科学阴性。需要真正解释不同科学后果时，才从实际证据选择新的问题；当前没有自动排队的训练、规则修订或确认。
+
+我不从 B06 的效果幅度反推出一个服务容忍百分比，也不把任何微小正差视作保留资格。最有说服力的模式仍是完整 J 有用、累计服务得到保留、真实风险与储能后果可接受地同时呈现；当这些分量冲突时，报告实际幅度、损失世界和任务范围，不用一个后选综合分数消除冲突。
+
+七、成本与推断范围
+
+所选完整比较的上限是
+
+2 来源×2 执行规则×40 世界×3000=480,000
+
+评价团队 transitions，160 次 episode 尝试、3.84M 成员步观察；0 新 fits、0 更新。按 B06 的 99.300211 runner 分钟及相同吞吐简单外推，约 198.6 分钟只是工作量尺度，不是未来运行时间承诺；低电量逻辑、充电、存储和节点并发可能改变实际成本。源制品既有训练是历史成本，后继实现、检查、必要审阅、收取和完整判读另外记录。
+
+hmasd-pro-question-usa-b06-next… +1
+
+我保留四组 O/F 面板，而不再附加一个 H1500 重跑网格。新 O3000 必须真实执行，不能用旧 O1500 替代；删去旧开发八世界会省下部分工作，却丢掉这个方向此前反复出现相反用途的范围约束。若只关心单一制品的窄部署，确实可以做更小研究；但那不是本次保留两个来源、两个面板的判断。
+
+这仍是两份固定历史策略上的任务迁移／执行比较。80 个配对世界、160 个 episode、更多时间点和成员观察，都不增加训练复制数。旧世界继续是已曝光开发条件；不因 horizon 新了就变成训练方法的 held-out 确认。将来若选择训练程序的总体主张，仍需实际 claim、匹配主对照、选择曝光和独立新训练批次；本问题没有选中那一步。
+
+hmasd-pro-question-usa-b06-next… +1
+
+八、来源边界与最终判断
+
+本答复使用附件指定的三组版本：2c73e4c420773ce0b0991bb53f105bcd24c762cf 的新问题、完整 B06 条目、80 个配对世界及前次完整咨询／采纳记录；4f1f1f9eecf00c4218d827033bf858dd7f79a740 的治理、方法及共享背景；f92a94b017816467662115dbbc1409793858613c 的冻结反馈、制品身份、评价、时间输入及能量／充电代码。B06 的 config、summary、manifest 和退出记录已取得；summary 核对用于实际计数、聚合及身份，不冒充新的原始数组重算。
+
+**没有取得并独立复核仓库外 NPZ／checkpoint。**B06 的“数值差 0”、原执行数组复现和诊断前缀一致，归属于已读 DM 核验；完整 actor observation/state 数组未保存，也不能被本答复升级为已经完成的逐数组输入审计。未实现的 H3000 接线、实际充电／恢复行为和新成本仍是未决事项，不以记忆补全。
+
+hmasd-pro-question-usa-b06-next… +1
+
+**最终建议：只购买一次 H3000 原生长任务的 O/F 比较，接受并明确记录其时间信息改变；以完整服务、风险和能量过程决定是否扩大当前反馈包的有限用途。**B06 已经提供了一个有力的简单执行参照。现在最值得弄清楚的是它在更深能量消耗下实际还能做什么，而不是先替它发明学习缺陷。若长任务只留下风险账面节省、却损害持续服务，或仍未产生所需暴露，就按该范围结束本次投入，不自动加时长、改控制或转入训练。
+
+## 2026-09-23 — H3000 advice adopted: fixed B07 native long-task O/F comparison and L0
+
+### Decision and working explanation
+
+The complete [B06 next-investment advice](#pro-question-2026-09-23-b06-feedback-use-and-next-investment)
+is saved verbatim above at `1ee90f44b` after same-key delivery verification; its reported hash
+was the unchanged target blob, not a writeback commit. The accepted question was not resent.
+The collected event was consumed with generation 85 / wake `d0f606a8-e06d-462c-a5fb-403a2e7b4d6d`
+/ event `7b615876462450cb9d1696ac`, advancing observation to 86. The operation's tab was already
+absent; unrelated tabs and the browser were preserved. There is no outstanding Pro producer.
+
+Adopt Pro's single fixed H3000 comparison. MATERIAL_DISSENT is no; agreement is advice, not
+new empirical evidence. This is a successor study, not an extension or rerun of the completed
+B06 batch. Current published background at
+[`8810bcc10978941638470aec79460faf1e4ff0c0`, RESEARCH topic 6](https://github.com/CartmanFatass/My-paper-code/blob/8810bcc10978941638470aec79460faf1e4ff0c0/docs/research/RESEARCH.md#6-实证研究是在具体条件下缩小解释空间)
+changes the choice concretely: B03 did not repeat auxiliary-package gains; B04/B05 risk training
+traded away service in consequential worlds; B06 made the unchanged N checkpoints a stronger
+simple executable comparator. No identified predictor, critic or skill bottleneck presently
+justifies buying a new learning module. Preserve all those adverse results and the two-block,
+already-exposed-world limits. Main's owner pause is lifted; the active direction and its exact
+lead `Codex DM (independent session)` are unchanged. Current constitution section 2 authorizes
+this independently selected, prospectively declared continuation.
+
+B06 strengthens finite H1500 feedback-package usefulness, weakens the claim that this
+information necessarily forces a service-for-return-cost exchange, and leaves sustainable
+energy recovery unresolved. Its shorter return distances improved margin while every active
+move consumed battery; charging never activated and battery tails worsened. The strongest
+alternative is to keep that bounded result and spend nothing further. I choose B07 because
+sustained service belongs to this direction's question, and the fixed rule makes a discriminating
+prediction when stored energy becomes low: under the native margin `m=b-kappa*d-0.1`, `kappa>0`,
+exiting at `m>=0.05` requires `b>=0.15+kappa*d` (up to observation rounding). Below 0.15,
+shrinking distance alone cannot restore the exit margin. This is a necessary condition for
+this existing controller, not a new threshold or evidence that H3000 will reach it.
+
+The expected intermediate difference is that F continues to reduce the native return-margin
+penalty, with later low-battery exposure potentially producing longer return modes, station
+arrival/admission and genuine battery replenishment rather than B06's short geometric repairs.
+The useful-package prediction is compatible cumulative service and native J gains on each final
+panel, with actual energy/service sequences explaining the scope. It can fail through stranded
+return modes, waiting, service gaps, early exhaustion, adverse worlds, or absence of that exposure.
+A positive J alone does not satisfy the sustained-service question.
+
+### Consequential source checks and changed task semantics
+
+The read-only source bridge verified `energy_aware.py:581-625,944-952`: the terminal/truncation
+transition sets PBRS next potential to zero. In H3000 the old t=1499 transition is nonterminal
+unless endogenous termination occurs; the terminal boundary is now t=2999. In addition,
+`routed_core.py:4169-4171,4906-4908` supplies `current_step/max_steps`, and
+`energy_aware.py:2243-2257,2318-2320` uses `waiting/max_steps`. Thus policy inputs can differ
+from the start, and the old reward boundary changes even under a hypothetical identical physical
+prefix. B07 is the native H3000 task comparison, not B06's unchanged trajectory continued for
+1500 steps or an isolated causal test of greater energy exposure. No denominator ablation is added.
+
+`energy_aware.py:1762-1833,1843-1889` consumes movement energy before charging, applies station
+capacity, then clips battery into [0,1]. Per-member `last_net_energy_charged_wh` is
+`max(0,actual_charge_wh-consumed_wh)`; it is not the signed stored-energy delta. The successor
+will read exact physical pre/post battery and per-member consumption/input postdecision, retain
+capacity and clipping residual, and verify their accounting. Flags or arrival alone cannot be
+called recovery. These arrays are measurement only; F continues to use only legal actor observations.
+No shared environment/observation/reward/controller code is changed.
+
+### Frozen comparison, exposure and stopping rule
+
+- Two retained N final checkpoints: B04 training seed 914021 and B05 training seed 914173;
+  all source digests and original H1500 training identity remain those of the B06 bindings.
+  Verify original summary/config/checkpoint/retained-trace hashes with the unchanged B06 verifier
+  before deriving a separate evaluation config. No parameter, optimizer or normalizer update.
+- For each checkpoint, newly execute O3000 and F3000 on development `937001..937008` and final
+  `938001..938032`. Two blocks, two modes, two panels: 160 episode attempts, **0 new fits,
+  0 optimizer updates, at most 480,000 team evaluation transitions and 3,840,000 member-step
+  observations**. Actual early termination shortens exposure; never pad, replace or silently retry.
+  No new worlds, checkpoint search, training, auxiliary loss or extra H1500 evaluation.
+- Evaluation copy sets only `episode_length=max_steps=3000`, one evaluator lane and its derived
+  buffer sizes. Preserve the complete saved training config separately, record every evaluation
+  config difference and derived size, and retain saved training exposure as historical identity.
+  No storage insertion/update is performed merely because an evaluator buffer exists.
+- S7-S2, N8, k10, 30 users, native return coefficient 2, battery/charging physics, stochastic
+  streams, legal information, action wrapper, deterministic actor, CUDA FP32, TF32 off and four
+  Torch threads remain matched. Expected actual node is configured `wsl_4070`.
+- F is imported unchanged from frozen B06: own legal margin enter <=0, exit >=.05, per-member
+  hysteresis; current nearest valid physical station (lowest-index exact ties); >160m return
+  command with existing 30m/s horizontal and 5m/s vertical normalization, <=160m dock command,
+  fixed fourth command component 1. No full-charge arrival rule, lower battery threshold,
+  station coordinator, capacity reservation, speed tuning or altered backhaul guard.
+- Each mode owns its actual policy observation/history. Native actor GRU, team/individual skill
+  clocks and F modes reset only at the episode boundary, never at step1500 or mode entry/exit.
+  Each episode ends at native exhaustion termination or H3000 truncation. O and F may have
+  different lengths. Run all fixed cells once even if an earlier result is adverse; technical
+  exceptions stop the attempt, preserve its cost and partial outputs, and require reconciliation.
+- Check O/F common prefixes within the new task through the first actual submitted-command
+  difference. Do not assert H3000 reproduces H1500 O arrays. Preserve immutable policy,
+  optimizer counters, normalizer state and RNG through evaluation.
+
+Dominant work is the 160 fixed rollouts: at most twice B06's 240k evaluation transitions;
+there is no nested search, branch rollout or model fitting. B06's 99.300211 runner minutes
+suggest approximately 198.6 runner minutes before instrumentation/resource variation, not a
+deadline or promised speed. Record actual preparation/check cost, wall, CPU, runner RSS scope,
+artifact bytes and actual transition counts; missing resource measurements remain unknown.
+The batch ends after these fixed episodes or a technical failure. No adaptive horizon extension
+until charging, no tuning to a world, and no automatic third block/confirmation follow.
+
+### Readout fixed before outcomes
+
+Keep B04/B05 and development/final as four separate comparisons; final32 is primary within
+each block, development8 remains a scope check. The primary native estimand is total raw J over
+actual episode length, with absolute levels, per-world paired differences, losses, medians and
+extremes. Never pool blocks to erase disagreement or subtract B06 H1500 J as an extra-half causal gain.
+
+Read cumulative QoS and delivered throughput, actual per-step service, actual length, terminal
+kind, zero-service episodes, service-free intervals, lower tails and all adverse worlds. Also
+report planned-window service `sum(q_t)/3000` and throughput `sum(T_t)/3000`; these are fixed
+budget denominators, not invented post-termination trajectory/reward or replacements for raw J.
+Report first/second1500 separately and twelve fixed 250-step bins with actual exposure; a
+missing second half is not evidence of safety or equal service. Retain return-cost/raw margin,
+cutoff/depletion, minimum battery and tail readings alongside service.
+
+Retain B06's action/mode/geometry/skill traces and add exact per-member energy accounting:
+physical initial/pre/post battery and 160Wh capacity, consumed Wh, charger-input Wh, native
+clipped-positive net-charge field, signed stored-energy delta and capacity/lower-bound clipping
+residual. Record request, chosen native station, capture/arrival, charging eligibility,
+admission/actual charge, wait age, station occupancy/queue, charge start/end, F entry/exit and
+later positive *joint* service. Raw traces must allow reading the same entity through arrival,
+net stored replenishment and later service; do not invent an energy-cycle composite score or
+attribute joint service to that member without link/throughput ownership evidence. End-of-episode
+unfinished intervals remain censored. Additional physics never becomes an actor/critic/F input.
+
+Outcome branches:
+
+1. Compatible cumulative service and useful J/cost on both final panels, with actual net battery
+   replenishment followed by later service, would extend this package's finite H3000 use; it
+   would not establish general safety, training-method superiority or automatic confirmation.
+2. J/cost savings with consequential cumulative-service loss, gaps or early ends support only
+   bounded risk bookkeeping, not sustained service; default to ending this F long-use extension.
+3. Activated path change without useful package performance, or material block/panel reversal,
+   narrows H3000 use while preserving H1500's bounded evidence; no automatic rescue tuning.
+4. Useful H3000 readings without enough low-energy/charging exposure retain only finite task
+   use and leave energy-cycle claims unresolved; no automatic extra horizon or low-battery setup.
+5. Technical failure is separate from scientific failure; preserve actual cost and narrower
+   reliable observations, reconcile before any newly declared repair attempt.
+
+No tiny-positive success cutoff, service/safety tolerance, MEI or population-confidence claim
+is manufactured for this exploration. All prior selection exposure and zero new training
+replication remain explicit.
+
+### L0: successor-only evaluator and measurements
+
+Deliver one admission-guarded B07 entry and evaluator for the exact comparison above. Owned
+code: `experiments/candidates/uav_service_auxiliary/b07/`,
+`scripts/run_uav_service_auxiliary_b07.py`, mirrored tests under
+`tests/experiments/candidates/uav_service_auxiliary/b07/`. Reuse the immutable B06 controller,
+source verifier and appropriate small helpers; preserve all B01–B06/shared sources and historical
+outputs. This scoped evaluator may copy the existing rollout path where instrumentation and
+H3000-specific summaries require it; no general framework or runtime monkeypatch of frozen code.
+Only the DM edits NOTES/main publication and stages/commits in this checkout. An assigned
+Implementer owns only those B07 paths, performs no result launch/Pro/science, and returns diff,
+checks, deviations and risks. It is not alone in the checkout and preserves other edits.
+
+Required focused evidence: separate saved H1500 identity vs evaluation H3000 config (including
+rejected source mutations), actual native time/PBRS terminal behavior, no reset/update at1500,
+unchanged F semantics, exact energy accounting including capacity clipping and charging with
+negative net change, unequal/early lengths and empty second-half bins, complete partial-failure
+counts/traces, policy/optimizer/normalizer/RNG immutability and pre-change paired prefixes. Use
+small native/fixture paths plus the actual-node CUDA check appropriate to the changed surface;
+these are correctness checks, not a positive charging pilot or extra scientific panel. An
+independent Reviewer checks the evaluator/result identity and recurrent/measurement boundaries;
+the DM reads and accepts. Commit and push exact inputs before guarded detached execution,
+retain accepted process handles, then arm the same native status operation with hmasd_wait.
