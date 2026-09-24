@@ -8132,6 +8132,222 @@ not a blob SHA, short receipt, link or status. The DM retains the decision and o
 
 ### Answer
 
+Saved from chat after verified NOT_DELIVERED; complete answer reproduced verbatim.
+
+GitHub 读取可用，但本次未完成 Answer 写回。 最新目标的本题 Answer 仍为空；现有文件更新接口要求整文件替换，我未能安全保证只填入本节、其余字节完全不变，因此没有提交写请求、没有改动仓库，也没有生成 Answer commit。这不是 GitHub 返回的权限拒绝。以下给出完整答复。
+
+Answer
+一、选择：购买一个新的 E/M/U 区组，但购买的是训练包复现，不是选择机制的第二次机会
+
+MATERIAL_DISSENT: no。 我支持题面提出的一次新 E/M/U 区组：保留 B07 的训练配方、25 个评价面板、四条最终评价流及共同输入评分程序，只改变实际训练初始化、训练世界和训练随机区组。不增加流、系数、checkpoint、诊断或第四臂。
+
+这次值得购买的判断是：
+
+零高层熵激励的 E，是否不仅在 B07 那一个训练实例中形成了更有用的完整方案，而且在另一条学习轨迹上，仍同时保留相对认真训练的 U 的净用途，以及相对原激励 M 的额外价值？
+
+我不建议将新问题缩成“熵是否再次下降”。B07 已经显示干预能够实质改变条件分布；目前更有决策价值的未知，是这种改变所伴随的原生服务收益是否依赖那一个学习区组。同一旧 bank 上再增加评价流不能回答这个问题。
+
+**最强反对理由是方向价值，而不只是样本量：**这项投资可能继续稳定一个普通优化配方，却不缩小“技能组合为什么有用”的解释空间。即使再出现正 P、D，普通循环控制、训练上下文分布及共同适应仍然可以解释收益；学得选择、互补性和技能必要性仍未被识别。三次训练及其读取成本是真实的，不能因为已有代码或出现了正分数就认为值得继续。
+
+我仍选择这一次复现，是因为它有一个具体的用途：决定是否把 E 保留为当前 S1 条件下值得继续使用和研究的训练参照，而不是继续依赖原 M 或一个偶然有利的 E 实例。 这也有助于避免以后把相对较差训练配方的改善误归给技能机制。不过，它不是机制研究的必经前置，更不意味着复现后欠下一项归因或确认实验。
+
+停止当前配方是合法的最强替代，但目前我认为还略早：B07 并非只有熵或代理指标改善，也不是只胜过一个没有学习的对照。它留下了两种部署规则下的原生收益，足以使一次有界的训练复现具有信息价值。这个理由来自 B07 的实际结果，而不是来自必须补齐种子数的惯例。
+
+二、B07 保留了有价值的训练干预结果，同时没有通过学得选择修复的预测
+
+B07 的关键事实应分成三层。
+
+第一，干预实际改变了分布，不只是配置值变为零。 在全部 6,400 个 M-final-S 共同输入上，E−M 的 team／individual 条件熵差分别为 −0.189656079／−0.394272327；也保留了 2 个 team、26 个 individual 反向因子。这个读取控制了数值状态、观测和实际 M 前缀，不假设不同 bank 中标签语义相同。它支持分布确实改变，不支持“熵梯度原来支配任务梯度”或“熵下降就是服务改善的中介”。
+
+第二，E 的训练包在这一块中有实际原生收益。
+
+B07 比较	J 差值	users/step 差值	应保留的含义
+P：E-S−U-R	+0.061758309143	+3.519843750	相对独立均匀标签训练对照的完整方案收益
+D：E-S−M-S	+0.040099335296	+1.060843750	去掉熵激励这一训练干预的整体后果
+E-R−U-R	+0.063060519313	+3.652843750	收益也存在于共同外部读出下
+E-R−M-R	+0.042352996369	+1.299515625	不是只有 E 的自身 selector 才能读出增益
+G_E：E-S−E-R	−0.001302210170	−0.133000000	没有正的平均学得读出增量
+I：G_E−G_M	−0.002253661073	−0.238671875	学得读出增量没有相对 M 提高
+
+这些是同一组 bank 与轨迹上的相关比较，不是六次独立成功或失败。
+
+E 自身的 S0、R0 初末 J／服务学习均在 32 个世界改善。U 的对应学习也达到 +0.154306875414 J、+10.5899375 人，31 个世界改善，仍保留 1700225 的小幅损失。M 也实际学到了服务。因此，P、D 不能被解释为仅仅战胜一个未训练或完全失效的占位对照。
+
+第三，原来的学得选择修复预测没有兑现。 不能用熵下降和正 P、D 覆盖负 G_E、I；也不能把小的平均差值升级成 S/R 等价，或“学得选择不存在任何用途”。19 个世界的 G_E 为正，而少数明显不利的世界仍重要；这是混合后果，不是均匀无效。前次完整 Answer 及 B07 采纳条目已经明确覆盖“bank 改善而学得读出未改善”的分支，本次维持该解释，不重新审批 B07。
+
+原生收益不能遮住服务尾部
+
+P 的平均 quality 改善、高度罚下降均在全部 32 个世界有利，但 1700203 仍少服务 2.0015 人、J 低 0.010310384571。D 在四个世界损失服务，1700203 少服务 5.391 人；共同 R 下的 E−M 虽然 J 在全部世界为正，仍有四个服务损失世界。高度项是 S1 的原生罚项，不是已经测得的电池安全收益。
+
+四流世界均值也不能替代单个 episode 后果。按已有同编号流描述，最差 P episode 为 −0.094017893888 J／−7.836 人，D 为 −0.131579870980 J／−11.212 人。S 与 R 的相同编号不代表共同随机创新，但这些实际执行中的不利结果仍应保留，不能因平均值好而删除。
+
+三、从“选择修复”转到“训练包复现”是有内容的修订，但不是新的机制解释
+
+令最终四流、等世界平均的原生结果为 V
+a,r
+	​
+
+，并定义：
+
+B
+EU
+	​
+
+=V
+E,R
+	​
+
+−V
+U,R
+	​
+
+,B
+EM
+	​
+
+=V
+E,R
+	​
+
+−V
+M,R
+	​
+
+.
+
+已有比较满足：
+
+P=B
+EU
+	​
+
++G
+E
+	​
+
+,D=B
+EM
+	​
+
++I.
+
+B07 的数值正好是：
+
+0.061758309143=0.063060519313−0.001302210170,
+0.040099335296=0.042352996369−0.002253661073.
+
+这说明：在已测的平均结果中，正差已经存在于共同 R 的 bank 比较里，并不需要把 G_E 或 I 写成正数才能描述收益。 这只是读数分解，不是把因果收益分配给“bank”和“selector”的机制分解。
+
+因此，当前最强竞争解释是：改变高层训练激励，改变了上下文／状态曝光、优化路径和共同适应，使循环低层控制变得更有用；它不需要在部署时表现出超过独立 uniform 的平均选择增量。 这是与结果相容的工作解释，不是已被证明的原因。单次 E/M 干预支持这一配置改变的整体后果，但不能分离熵集中、共享梯度裁剪、optimizer 历史、低层数据、critic 或 discriminator 的因果份额。
+
+这一区别也决定了复现能够做什么、不能做什么：
+
+能够改变的是训练配方的研究优先级。 另一独立学习区组若再次产生正 P、D，会削弱“收益只属于 B07 那一个学习实例”的解释；若正常学习中发生反转，会直接降低继续保留原样 E 为优先候选的理由。
+
+不能改变的是归因缺口。 即便两块一致，仍不能据此在普通循环控制、上下文训练和互补技能之间判定谁贡献了收益。相同 S1、相同结构与评价条件还保留了该宿主特定几何和优化条件的解释。
+
+指定共享背景对本次选择的实际影响，正是保留这些普通解释、使用真实 U、不给条件熵或标签可辨认性赋予它们没有的意义。其旧 B07 待完成状态由本题完成结果取代；DM1 的 B15/B16 不提供 E 的训练重复，也不是这里必须等待或另行复制的比较。
+
+B04 的 M−U 正差后来在 B06 反转，是这次重视训练区组的具体理由；不是“所有正结果必须机械重复”的规则。B07 的 M−U 又为正，但用了新的四流评价，不能拿来抹平 B06 或建立原 M 的稳定排名。尤其，B04/B06 中重复出现的较低 M 高度罚，在 B07 的 M−U 中也不是同一方向：B07 的 M 高度罚在全部世界更高。不要把一个看似重复的分量故事升级成跨区组机制。
+
+四、为什么这次仍保留三臂，而不是用两臂省掉一个“已知答案”
+
+对当前同时保留的两个判断，三臂不是冗余的：
+
+U 回答净用途。 E 比 M 好，不保证值得超过认真训练的独立均匀标签方案。已有历史已经说明，改善一个较弱对照不能自动成为净价值。
+
+M 回答激励改变的增量。 E 比 U 好，不保证这一块的收益来自去掉熵激励；原 M 可能在该新区组本来就同样好，甚至更好。B07 的 M-S−U-R 本身已为正，这不是抽象可能性。
+
+由此，三臂是同时回答这两个保留问题的最小直接学习比较，并不是任何后续技能研究都必须采用的格式。两臂设计完全可以成立，但应明确放弃一项判断：
+
+新比较	训练＋评价 transitions	能回答什么、失去什么
+E/M/U，推荐	1.08M＋400k＝1.48M	同时读取相对 U 的净用途和相对 M 的激励增量
+E/M	720k＋320k＝1.04M	保留激励与读出比较；没有新区组内相对 U 的净用途
+E/U	720k＋240k＝960k	保留净用途；没有新区组内去掉熵激励的增量对照
+
+题面已给出这些暴露量与范围。相对 E/M，U 增加的是 一个 fit、360k 训练和 80k 评价；相对 E/U，M 增加的是 一个 fit、360k 训练和 160k 评价，并使新的 M 共同输入参考池成立。不能把旧缺失臂补进来，制造一个不存在的同区组比较。
+
+最强的更便宜实验替代是 E/U。 若实际选择只剩“E 这个完整方案是否值得优先于 U”，它就足够，不必为了保留研究叙事而购买 M。此次我仍推荐三臂，是因为题目明确还要决定“零熵激励这项修改是否值得保留”；考虑到原 M 的区组变化，这一增量判断目前仍有独立价值。
+
+固定标签与随机标签训练则不是本次复现的便宜等价物。它会改变实际使用的参数、标签曝光和判别目标；六标签改一标签又改变 FiLM 形状，同时删奖励则加入 B02 的目标变化。它可以是一项合法的完整包比较，但并未由 B07 定位出一个必须立即修改的环节。当前没有充分理由让它压过这次更直接的复现，也不应以它为名复制 DM1 已选的普通循环对照。
+
+五、推荐的新区组：保持评价条件，真实改变训练对象
+
+保留 B07 的 N6、50 users、k10、H500、16 lanes×45 rollouts、网络和信息接口、混合奖励、低层熵 .05、detached heads，以及训练 Gaussian／评价 mean-clipped 的语义。E 保持 λ
+h
+	​
+
+=0 且高层 PPO 开启；M 保持 .07；U 保持独立 uniform 标签和零 coordinator 更新，但低层及 discriminators 继续学习。
+
+新的区组应改变实际 native/head 初始化、训练世界、训练及 private/sampler 随机状态，并在区组内真实匹配。不是换输出文件名，也不是用旧 checkpoint 继续训练。冻结 B07 的 _validate_protocol 会检查原固定地址；新工作需要一个明确的新入口或地址适配，不能把新 seed 塞进仍绑定旧地址的协议后声称已经独立。保留旧代码与旧输出，不需要重写训练算法。
+
+保留原四流，不为复现另换一套部署问题
+
+这次我支持沿用 B07 的世界 1700200..1700231、S 私有 Torch 地址 260924101..260924104、R 的 PCG64 地址 262625201..262625204，以及非标签评价地址 260924105 和相同抽样顺序。它们已经暴露，不能称为新世界或盲测；保留它们的目的，是让新旧差异主要对应新的训练区组，而不是同时改变训练与评价。
+
+仍然在每个世界内先平均四条完整最终流，再对世界等权平均。初始五个单流面板与最终二十个面板不变；实际初末学习使用对应的 S0／R0，而不是把四流最终均值减去一个初始值后称为四份配对学习。
+
+E/M 的 S 使用匹配随机地址，但各自依自己的状态、team token 和真实 AR 前缀采样，不能复制另一 bank 的标签。R 的数值标签匹配也不保证不同 bank 赋予标签相同语义。相同 S/R 编号不是共同随机创新；四条流、32 个世界和多个 checkpoint 都不增加训练区组数。B07 的 16 种流均值组合也不能被计为 16 次成功。
+
+共同输入评分要复制程序，而不是复制旧参考池
+
+新区组中，E 应评分新 M-final-S0..3 生成的全部 6,400 个 renewal 上下文，保留 44,800 个条件因子输出和相同评分程序；不能继续借用 B07 的旧 M 参考文件，或挑选更容易显示熵下降的行。
+
+这使每个区组内的 E/M 条件分布比较成立，但两个区组的 M 参考池本身会不同。因此，再次出现较低 E 熵支持该干预程序下的分布改变，不等于在一个固定跨区组状态总体上证明了同样幅度的效果。数值前缀匹配也仍不是技能语义匹配。既有代码对参考源、配置和 checkpoint 身份的绑定应随新区组真实更新，而不是绕过。
+
+我不建议另加梯度快照、标签重排、固定上下文干预或更多评价流。它们并非不能研究，而是这次训练包复现没有需要它们才能回答的部分。
+
+六、预写判断：哪些结果加强候选，哪些结果足以降低投入
+
+新块继续以 P＝E-S−U-R 的 J 与服务人数为主要用途读数，D＝E-S−M-S 为激励增量读数；保留 E-R 对 U-R／M-R、G_E、G_M、I 和各臂实际学习。不要在结果后选更有利的读出、分量或对照。
+
+新的工作预测是：P、D 的 J／服务均为正，E 有真实有用学习，共同输入上的条件熵降低。 不承诺复制 B07 的效应大小、31/32 胜数或所有 quality／height 符号。允许 G_E 仍小而混合，是对新问题范围的明确修订；不是把 B07 原来的选择修复预测宣布为通过。
+
+新区组结果	应改变的判断
+P、D 均为正，E 实际学习，分量和局部后果支持用途	加强 E 的条件性训练包收益在第二个学习实例出现的判断；保留为工作候选，不提升为稳定默认或机制结论
+D 正，但 P 不支持净用途	相对原 M 的改善不足以赢过认真训练的 U；降低 E 作为当前用途优先方案的理由
+P 正，但 D 不支持激励增量	保留该块 E 相对 U 的用途事实；“去掉高层熵更值得”的依据没有完整再现，不能只凭 P 给该修改记功
+P、D 反转，或正常学习中出现不利服务取舍	削弱原样 E 的跨实例用途；可以结束当前配方追加，不需要证明所有零熵训练均无用
+差值小、跨流混合或对用途不足以作选择	未决不是等价；本次购买可以结束，不自动加流、找种子或依赖池化均值挽救
+原生收益存在，但熵变化未重现，或收益仅来自控制臂退化	分别记录包结果与中间预测失败／控制退化；不能称原完整工作解释重现，也不能自动标作技术失败
+
+G_E、I 的解释保持独立。若仍没有正增量，学得选择修复仍不成立；若新块出现正增量，也只是新实例的有限观察，不能把 B07 的失败重写成成功。尤其要检查 G_E／I 的扩大是否主要来自 E-R 退化，而不是 E-S 真正改善。
+
+还应把原生差值、实际学习与局部服务后果分别读取。较低最终高度罚可以支持 J 收益，却不能自动免除人数损失；正相对差值也可能仅意味着较少退化。没有事先给出的服务损失容忍界，就不应在结果出来后创造一个恰好使方案通过的界。
+
+技术失败则另行处理：错误 seed、系数没有进入真实损失、实际更新缺失或评价发生参数变化会限制相应结论；合法训练但结果不好，不因此成为可以排除的异常。保留所有已发生成本与输出，不自动重跑。方法中关于探索、完整保留结果和技术失败的区分，正适用于这里。
+
+七、成本与结束：一次有界购买，不是一条自动续费路线
+
+推荐成本保持题面不变：
+
+3 个新 fit；每臂 360k training transitions；总计 1.08M train＋400k eval＝1.48M team transitions，2,160 个训练 episodes、800 个评价 episodes。
+
+优化暴露继续为 E/M 各 675 次 high 更新、U 为零；三臂 low actor／critic 各 101,250 次，team／individual discriminator 各 675／2,700 次，每个 factual head 315 次，auxiliary trunk 为零。U 仍有实际采样、推断和存储工作，不能把零 high optimizer calls 写成零高层计算。
+
+非环境工作也保留：M/E 自身 S 的完整概率记录，以及 E 对新 M 参考池的一次评分。B07 该额外评分实际为 200 batches、6,400 contexts／44,800 factors、3.322081 秒，已包含在其 runner 时间内；这是历史执行参考，不是新工作免费或固定耗时的保证。
+
+B07 的三臂 runner 总计 161.610872 分钟，不等于排他 GPU 时间或新批次持续时间。输入准备、适配检查、收取、完整输出读取及发布另有成本；缺少测量的部分不能计零。相同 transitions 也不建立 E/M/U 等计算。
+
+固定批次结束后，按上述读数作出一次判断并结束本次购买。第二块正结果可以保留 E 的研究价值，但不自动进入确认；反转或未决可以降低乃至结束原样配方投入，但不宣布有用技能问题普遍无解。确认若有独立价值，应是另一个实际主张与前写新批次，不能把这两块探索材料改名为确认。
+
+停止的替代成本为零新增 fit，已有 B07 正包结果仍保留。 我这次没有选择停止，是因为另一训练实例确实会改变是否保留该具体激励配方的判断；并不是因为缺少后继方案就不能停，也不是因为较窄的优化收益必须永远占据技能方向。
+
+八、来源范围与本次没有完成的核验
+
+推理使用附件指定的 86e919cc47b10e1c1caa7f045001f8e5dcb3c46b；共享背景使用 426c33aa9b50f227eff7bac1dc98e91cd32d61f3；B07 执行语义按 455536ebd0e6e23466ed40244bcf1e5ab6462826 阅读。最新分支仅用于检查写入位置，没有替代固定科学输入。
+
+本次阅读全文附件，包括 B07 完整结果、E 接受记录及全部所附损失表；并分段读取了指定 notebook 的前次高熵完整 Answer、B07 采纳与 M 接受记录、B04/B06 反转及 B05 部署结果，读取了指定治理、科学方法和共享背景。也直接读取了三臂 compact config、manifest、native status、exit witness，以及 summary 的身份／暴露量字段和选取训练记录；源码读取集中在新地址、真实臂配置、私有采样器和参考绑定相关路径。
+
+没有逐项重算三个 compact summary 的全部字段，没有访问外部 checkpoint、完整 training／prediction 流及 NPZ 的全部字节，也没有重新运行策略、模型评分、环境或张量／哈希审计。 本答复中的完整数值判读主要依据固定附件和 notebook 提供的 DM 已验证记录，不冒充第二次全量工程验收。外部留存位置和身份已在来源中给出；本次未读取这些字节不表示原证据丢失，也不构成索取新 fit 的理由。
+
+这些边界不妨碍当前投资建议，但限制了将其称为独立全量结果认证。真正尚未知的仍是新训练区组的 P、D、实际学习和服务后果，不能从四条旧评价流、熵变化或过去其他配方的正负号中补齐。
+
+最终建议：选择一个新的、原样 E/M/U 训练区组，保留 B07 的 P、D 与全部 S/R 读数，检验零高层熵训练包的净用途和激励增量是否再现。保留失败的学得选择预测，不给它新的成功名称；不追加流、诊断、调参或自动确认。MATERIAL_DISSENT: no。
+
+本次实际新增 0 fit、0 环境 transitions、0 代码执行、0 仓库写入。
+
+
 
 ## 2026-09-24 — B07 publication and focused recurrence question prepared
 
@@ -8147,3 +8363,160 @@ that question, the full B07 result and the prior E acceptance verbatim. It will 
 existing direction conversation and one new Send. Only its Answer is lent to Pro; account
 addresses remain local. Generation70 has no pending events or active old jobs. No additional
 fit, training seed, readout stream or confirmation has been selected.
+
+
+## 2026-09-24 — Recurrence advice adopted; fixed B08 E/M/U and L0
+
+**Complete advice and writer handback.** Key
+`hmasd:000029387f5f6ccf704e2b8f45383ec4e382ec3779534f5a0776a0f80a3830d3`
+was sent once with the pinned B07 question. Generation71 CHECKPOINT
+`149a7a91a572112cd1502c62`, wake`1a2942e6-0b44-4509-b97b-b704ea306f6f`, reported
+IN_PROGRESS,0partial characters,0recoveries. Rearming the same request71→72 then collected
+the complete answer: READY`26de7dc10e88360c36c8fe74`, wake
+`c930f8e2-0a29-4e93-926d-baf688bc4eeb`. No question was resent. The DM read all212lines.
+Deliver verification returned NOT_DELIVERED, no answer commit or off-branch receipt. Latest
+remote and local notebook bytes matched; the pinned question was unchanged and its Answer
+remained empty. The DM therefore inserted the full chat text above, preserving every other
+byte. Pro reports it did not attempt an unsafe whole-file replacement; this was not a
+reported connector permission denial. Full UTF-8 file19957bytes/8571characters has SHA256
+`a18a176013dc5f1a17a47f10fa3ebe9a9205041657eee9944e937d82bf471060`;
+the collector hashes the8570character text without its saved final newline:
+`0ddde3c157f5b0133f2f4822da51fa0dafd755d35954ba876d410cdbf2e3d09e`.
+These identities agree after the explicit newline convention. Advice is not another fit or
+independent full tensor/trajectory audit: Pro read the named context, selected summary fields
+and relevant source, but not all external bulk. Its source limitations are retained in full.
+
+**Decision and scientific reason.** MATERIAL_DISSENT:no; adopt one new three-arm recurrence,
+B08. B07's actual E service improvement under S and R gives a concrete reason to test another
+learning path before retaining zero high entropy as a working training candidate. B04/B06's
+reversal and B07's failed G_E/I prediction make that narrower recurrence decision consequential.
+This is a new prospective purchase, not an extension of B07 or a successful renaming of its
+failed learned-selection explanation. A same-bank extra stream cannot test training recurrence.
+The strongest objection remains that we may stabilize an ordinary optimization/context recipe
+without explaining complementary skills. This cost is worthwhile only because P and D can
+change whether E remains a useful training reference; no subsequent attribution study or
+confirmation is owed. Ending the recipe remains a real alternative after this purchase.
+
+Keep both comparators. U measures net use beyond a seriously trained recurrent low controller;
+M measures whether removing the high entropy incentive adds value in the same training block.
+E/U alone would be sufficient only if the latter choice no longer mattered; here it still
+matters because original M changes across blocks. No old omitted arm substitutes for a new
+matched fit. Fixed-label training is not selected: it changes active parameters, exposure and
+mixed-reward behavior, and six-to-one labels change FiLM shape. This does not take over DM1's
+separately selected ordinary local recurrent comparison.
+
+Fresh main`ae30db181b930f07cfd1eb55341ba6078dacc466` retains lifted pause and the same lead.
+Its topic3 now incorporates complete B07: conditional package gain, failed learned-readout
+repair, competent U, tails and insufficient training replication. This motivates the chosen
+recurrence rather than another entropy diagnostic. The concurrent N comparison and S7
+completed-segment work have different populations/interfaces; they supply no new E replicate
+and do not change this fixed S1 complete-k10 protocol. We preserve existing frozen S1 learning
+semantics and do not import unrelated concurrent core changes into the comparison.
+
+**Fixed B08 scientific contract before code or results.** Configured primary node`wsl_4070`,
+CUDAfloat32, sequential M→E→U, one new fit each,360000team transitions per arm; each uses
+N6/50users/S1/k10/H500,16lanes×45rollouts. Retain B07 networks, information permissions,
+mean-clipped evaluation and Gaussian training, complete recurrent collection/storage/replay,
+original mixed low discriminator coefficient.5 (effective team.025/individual.01), low entropy
+.05 and detached G/P factual heads with zero trunk updates. M high entropy.07 with high PPO;
+E only sets high entropy0 with high PPO still active; U independent uniform team/individual
+labels and zero high updates with the same active low/discriminator learning. No new auxiliary,
+noise factor, search, temperature, checkpoint selection or extra arm.
+
+New actual training addresses, identical across the three arms where the process is shared:
+
+| Address | B08 fixed value | B07 value retained as historical evidence |
+| --- | ---: | ---: |
+| native initialization | 260924041 | 260924001 |
+| G/P head initialization | 260924042 | 260924002 |
+| training/default RNG | 260924043 | 260924003 |
+| auxiliary sampling | 260924044 | 260924004 |
+| private low-action RNG | 260924045 | 260924005 |
+| private high collection | 260924046 | 260924006 |
+| private high update | 260924047 | 260924007 |
+| training world base | 2400000 | 2300000 |
+
+The seed change must reach actual models, heads, storage sampling and initialized worlds,
+not just the CLI or output name. Within-block initial native/head tensors and corresponding
+initial S/R trajectories must actually match; across B07/B08 initial tensors and training
+world/RNG identities must differ. U's unused high-update stream is not evidence of an update.
+The changed high laws need not share high RNG states. Preserve private low/default sampling
+isolation and exact update exposure; no arm restarts from an old checkpoint.
+
+Evaluation deliberately remains B07's exposed worlds1700200..1700231, S Torch260924101..104,
+R PCG64262625201..204, non-label260924105 and original draw order. Team S has its native
+categorical law without floor; individual S uses.9pi+.1/6 exactly once with the actual own
+canonical AR prefixes. R draws team[32] then individual[32,6] at each renewal. Reset worlds
+and hidden per panel, carry low recurrence through k10 within each H500episode. Initial M/E
+S0,R0 and U R0; final M/E S0..3,R0..3 and U R0..3. Five initial plus20final panels,400keval
+transitions/800episodes. Final reduction averages four complete streams within world then32
+worlds; actual learning pairs final0withinitial0. Same S/R index is not common innovations.
+No new evaluation world, stream or late-window search is selected; reused worlds stay exposed.
+
+E must score all6400renewal contexts/44800factors from this B08 M-finalS0..3 bank, using the
+unchanged200batch scoring procedure. M's new actual Spec, source SHA, final checkpoint/native/
+frozen identities and reference digest must bind that pool. Do not reuse B07's reference or
+select favorable rows. The actual pool digest will be recorded after M is read and before E
+admission; it is outcome-blind content binding of a fixed selection rule, not selection of
+contexts by their outcomes. Keep a verified staged reference outside disposable source trees.
+Cross-block pools differ, so entropy recurrence does not establish a common-state population
+or skill-semantic correspondence.
+
+**Predictions and readings.** Primary P=E-S−U-R native J/users; D=E-S−M-S measures incentive
+increment. Retain E-R−U-R, E-R−M-R, M-R−U-R, M-S−U-R, G_E, G_M,I and actual learning for
+all arms, with coverage/quality/height, all streams/worlds and adverse individual episodes.
+The working prediction is positive P and D in both J and service, actual E learning and lower
+common-input E conditional entropy. Do not require B07's effect size,31wins or component signs.
+G_E/I may remain mixed, which leaves the original learned-selection repair unestablished.
+Any larger G_E/I must be read against possible E-R deterioration; these algebraic differences
+remain correlated descriptions, not causal shares or additional independent evidence.
+
+P/D jointly useful strengthens a bounded second-block package recurrence and can keep E as a
+working candidate; it does not establish a default, stable rank, necessity or complementarity.
+D positive but P adverse limits net use; P positive but D adverse limits credit to zero entropy.
+A reversal, service tradeoff or small/mixed outcome lowers or leaves unresolved this recipe's
+priority and can end its current purchase. Preserve B07's result independently; do not pool it
+to erase a new reversal. Entropy not falling is a failed intermediate prediction, not automatic
+technical failure. No post-hoc service-loss tolerance, seed addition or new streams. Technical
+failure is recorded with cost and retained evidence; any rerun is a separate decision.
+Confirmation, if later useful, requires its own claim and fresh3–5independent seeds per arm;
+B07/B08 remain exposed exploratory blocks whatever their signs.
+
+**Cost and retained evidence.** B08 prospectively3fits/1.08Mtrain+400keval=1.48Mteam transitions,
+2160training/800evaluation episodes; M/E160keval each, U80k. Expected per M/E high675updates,
+U0; all arms low actor/critic101250each, team/individual discriminator675/2700, G/P315each,
+trunk0. Totals high1350,lowactor/critic303750each,team2025/individual8100,G/P1890combined.
+Shared-node B07 runner161.610872min is scale evidence only. Record actual wall/RSS/CUDA and
+unknown peak scratch/shared occupancy; support checks, staging, collection and reading add cost.
+The new M reference scoring's own calls/time count separately and remain included in E wall.
+Preserve full outputs/checkpoints/curves/RNG/predictions/occupancy/trajectories and score arrays
+at actual-node durable roots with verified local copies. Version compact result/config/status;
+raw arrays remain external with hashes. Existing tracked B07 artifacts remain intact. No source
+copy is removed before full output recovery and scientific readback.
+
+**L0: one bounded B08 fixed-address adapter and admitted entry.** Owned code paths:
+`experiments/candidates/complementary_skill_learning/b08/`,
+`scripts/run_complementary_skill_learning_b08.py`,
+`tests/experiments/candidates/complementary_skill_learning/b08/`. Reuse B07's actual training,
+evaluation, aggregation and reference methods. If required for honest normal-import reuse,
+a minimal explicit expected-protocol argument may be added to B07 validation/run_fit, retaining
+its unchanged B07 default and CLI fixed contract; no runtime global monkeypatch, source-string
+rewriting or duplicated whole learning engine. The old immutable455536ebd execution source
+and its outputs remain frozen and recoverable. The B08 adapter validates its own fixed addresses
+before output/native work, preserves reused-engine identity, and exposes the actual B08
+protocol/Spec/source unambiguously. Old B07 references, wrong arm/seed/source/config and changed
+evaluation addresses must be refused; a real B08 M reference must pass. Any failure of adapter
+completion checks must leave a failed retained summary, not a misleading complete result.
+
+Focused checks cover actual changed initialization/world/private RNG inputs, within-arm/between-
+arm pairing, strict production input drift, frozen evaluation streams and panel counts,
+new-block reference binding/rejection, actual E/M/U update exposure and frozen evaluation.
+Use the existing small real-engine CPU/CUDA fixtures and pytest-owned scratch; do not substitute
+a mock-only seed check for actual tensors/RNG/worlds. Reuse unchanged B07 tests where meaningful.
+One independent read-only Reviewer checks changed RNG/protocol/reference and launch identity
+before production. A bounded actual4070CUDA fixture follows accepted CPU evidence when the new
+path still needs device verification; all technical exposure is reported separately. No learner,
+reward, sampler-law, recurrence or evaluator-numeric changes, no scientific launch by helpers,
+no installs, and no broad shared-core refactor. Stop for any evidence that the adapter would
+need a new scientific contract. The DM owns NOTES/main/index and acceptance; helpers return
+facts/diff/checks and may not commit, launch, send Pro or spawn children.
