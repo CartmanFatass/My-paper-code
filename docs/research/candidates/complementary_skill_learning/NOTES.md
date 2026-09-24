@@ -7688,3 +7688,23 @@ Observer`launch-csl-b07-u-455536ebd` is registered and actually adopted at gener
 accepted running handle,0errors,no pending event/wake. Await this fixed U handle; E and M are
 fully read, no Pro is pending, and no worker or send is restarted. U terminal evidence and the
 complete P comparison remain the next work; no U scientific acceptance is asserted here.
+
+
+**U checkpoint,2026-09-24 10:22:14Z.** Drained generation68 CHECKPOINT
+`da9565fb8beb2029bf932828`,wake`2c27443b-f939-49c4-a626-26dd2f9a63da`. Fresh main
+`60ecab12875492dd4a1407dc238bd3c7e83e5bc4` retains lifted project pause and the same lead.
+Actual-node status confirms the original accepted U claim, runner537481/supervisor537480
+with matching recorded identities, consistent records and no exit witness. Both logs are
+empty; MemAvailable is13,624,596KiB. Persisted incomplete output contains26/45rollouts,
+208000training/stored transitions,416training episodes and26native updates. Only initialR0
+is present:16000evaluation transitions/32episodes; finalR0..3remain pending. High-level
+training remains disabled and its parameter displacement/optimizer delta are0; latest low
+actor/critic updates are2250each,team/individual discriminator15/60,auxiliary G/P7each and
+trunk0. The disabled coordinator's zero entropy report is a placeholder, not measured entropy
+of the independently uniform labels. No scientific acceptance or final primary contrast is
+inferred from this intermediate training state.
+
+Consumed this checkpoint and rearmed the same `launch-csl-b07-u-455536ebd` handle68→69,
+30sinterval/20stimeout/1500swindow,observerPID3232125. Refreshed native status is retained;
+no worker was restarted, no Pro was resent and no cross-task message was sent. Await U's
+terminal evidence for full readback and the fixed E-S−U-R primary comparison.
