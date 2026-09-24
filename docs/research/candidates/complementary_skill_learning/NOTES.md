@@ -4924,3 +4924,27 @@ production-checkpoint probe, fit, stream, retry or cross-task message is introdu
 Staging exposed one redundant final blank line in the runner and initializer, which an
 untracked-file diff check had not inspected. DM removed only those terminal blank lines;
 no executable token changed. Published byte identities after this whitespace repair: experiments/candidates/complementary_skill_learning/b05/__init__.py SHA256`2a589903c50668814e050ee595441c54fe4711ff58a8a35f4bf96926d9855796`; experiments/candidates/complementary_skill_learning/b05/runner.py SHA256`263c9b33e5ff3a436e9ef86cea3d8c00135c7d7421e6360209bfb91fdff673a7`.
+
+
+## 2026-09-23 — B05 actual CUDA fixture and current publication method
+
+Exact published source`a5bb71ec32f56bd6e4e9479cc91ef1463d473a3b` was checked on the configured
+wsl_4070 in its new isolated author checkout, using `/home/wu/.venvs/hmasd/bin/python`,
+Torch2.7.0+cu118 and the actual NVIDIA GeForce RTX4070LaptopGPU. Runner/entry/test byte hashes
+match the accepted source. The bounded artificial CUDA fixture passed1test in4.43s. It
+executes two frozen-B04 reference panels and all nine new panels at2lanes x20steps,
+0fits/440technical evaluation team transitions/22episodes; no production-checkpoint
+policy or environment probe occurred. Source staging initially lacked the configured network
+shell for promisor-object retrieval; only verified owned Git/read-only preparation processes
+were stopped and the absent checkout reconciled before successful preparation under the
+configured login shell. No scientific operation was admitted or restarted in that repair.
+
+The current owner-adopted workflow atmain`1bd0ec7fc` was read at this safe boundary and merged
+into this authoring branch. Pause remains lifted and our exploring lead is unchanged; no
+accepted process is rebound. B05 executable bytes still exactly matcha5bb71ec3. Routine start,
+observer and individual-cell progress now stay here/in run metadata, without another main
+index/archive update. The fixed B05 design is already published onmain. New bulk trajectories
+will remain in the durable node output with a verified collection copy and artifact hashes;
+compact config/summary/native status and the scientific reading are published at the material
+result boundary. Historical tracked outputs remain unchanged. This updates storage/publication
+practice, not B05's required trajectories, fixed nine panels, zero-update scope or endpoints.
