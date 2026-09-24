@@ -8622,3 +8622,20 @@ facts; on terminal exit collect/hash/read the complete M artifacts before accept
 scientific claim or staging its new reference for E. E and U remain the predeclared next
 cells, unchanged. Routine cell admission stays in these NOTES/run records; the published
 B08 scientific plan and main standing are unchanged.
+
+
+## 2026-09-24 — B08 M first checkpoint; same handle continues
+
+Generation74 CHECKPOINT`c4dfe664c7599dec6b20de61`, wake
+`c36931b7-462a-4277-aaaa-8d0b09c357e8`, was fully read. Its accepted M operation still has
+consistent running supervisor/runner identities,0observer errors and no exit witness. The
+current incomplete summary records19/45native updates,152000training/stored transitions,
+304training episodes,32000initial-evaluation transitions/64episodes; native optimizer calls
+are285/42750/42750/285/1140 in coordinator/low actor/low critic/team/individual order. Only
+initial S0/R0 panels are present; stderr is empty and no failure is recorded. These are partial
+execution facts, not an accepted scientific outcome or evidence for changing the fixed batch.
+Fresh maine25eb49b19ffbd51a94dc16454afa766df0998ce retains lifted pause and the original
+exploring direction/lead. The exact generation/wake/event were acknowledged and rearmed74→75
+with the same operation and1500s window; no pending events remain. No worker was restarted,
+no Pro question repeated and no other task contacted. E/U remain unstarted fixed subsequent
+cells pending complete M reading and its new reference binding.
