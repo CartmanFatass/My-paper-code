@@ -1,0 +1,12 @@
+# Retired B17 implementation plan before native acceptance
+
+Retired 2026-09-24 from RESEARCH.md at main `90760b08fad553d43f23ce8cf32177e048047c2e`.
+Only the superseded owned standing, plan and routing passages are retained; links are pinned.
+
+| `agent_count_generalization` | 固定 k、回合内固定 roster 时，HMASD 对未见团队数量 N 的服务能力和泛化代价是什么？ | exploring | Codex DM (independent session) | **B16三fit完整验收；B17新世界部署比较已固定，实施中。** N8的L−SET三块平均+.085041285 J/+5.8680208人/步，H6−L三块均负，平均−.013991995 J/−1.5402917人；L已作为普通参照。H6局部优势、L较低观测最低服务及N6反号保留。B17固定全部三对L/H6 final45，新N8/6/4共18面板288k步，加6旧N8复现96k步；0fits/384k总评价，检验这些资产的部署范围。Pro全文已核验保存，尚未执行；不建立训练总体或技能因果结论，不改B15联合确认。[完整B16](https://github.com/CartmanFatass/My-paper-code/blob/90760b08fad553d43f23ce8cf32177e048047c2e/docs/research/candidates/agent_count_generalization/NOTES.md#2026-09-24--b16-complete-local-ordinary-control-changes-the-n8-comparator)、[B17采纳与L0](https://github.com/CartmanFatass/My-paper-code/blob/90760b08fad553d43f23ce8cf32177e048047c2e/docs/research/candidates/agent_count_generalization/NOTES.md#2026-09-24--b17-advice-adopted-fixed-fresh-world-deployment-comparison-and-l0)。[任务路由](https://github.com/CartmanFatass/My-paper-code/blob/90760b08fad553d43f23ce8cf32177e048047c2e/docs/research/RESEARCH.md#session-routing)。 |
+
+| DM1：泛化与训练条件 | B17固定6个final45资产、18个新N8/6/4面板及6旧N8复现；0fits、384k团队/2.496M UAV评价步、768episodes/12000策略调用，实施与独立检查前。[完整采纳与范围](https://github.com/CartmanFatass/My-paper-code/blob/90760b08fad553d43f23ce8cf32177e048047c2e/docs/research/candidates/agent_count_generalization/NOTES.md#2026-09-24--b17-advice-adopted-fixed-fresh-world-deployment-comparison-and-l0)。 | L已是普通工作参照；下一观察检验新世界及小N的部署用途，保留全部区组、损失世界和最低服务。复现不算新证据，新世界不算新训练重复；所有结果按固定范围结束，不自动扩样或确认。 |
+
+| DM1：智能体数量泛化 DM | `01a0c6ef-cdd4-7113-b2d9-20487e35171b` / `local` | `/home/fires/.codex/worktrees/7fef/hmasd-wsl` · `codex/agent-count-generalization` | B16全部读完；Pro未写回已核验，完整答复已由DM保存并采纳[B17固定合同/L0](https://github.com/CartmanFatass/My-paper-code/blob/90760b08fad553d43f23ce8cf32177e048047c2e/docs/research/candidates/agent_count_generalization/NOTES.md#2026-09-24--b17-advice-adopted-fixed-fresh-world-deployment-comparison-and-l0)。本任务负责新评价器实施、独立审阅及后续原生准入；当前无运行中实验，无待收Pro。不得重发旧问题或重启旧批次。 |
+
+智能体数量方向的B16完成后拟议计划保留于 [B17采纳前快照](https://github.com/CartmanFatass/My-paper-code/blob/90760b08fad553d43f23ce8cf32177e048047c2e/docs/research/archive/2026-09-24/RESEARCH-agent-count-b17-adopted.md)；当前普通参照和固定B17比较见方向表。

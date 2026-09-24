@@ -17268,3 +17268,117 @@ The Implementer returns its diff and checks, launches nothing, commits nothing a
 children. Source is committed/pushed after review and before the configured native admission.
 After one accepted launch preserve its handle, arm same-task deterministic observation and
 end the turn. Subsequent terminal collection and full scientific interpretation remain here.
+
+
+## 2026-09-24 — B17 engineering accepted before native execution
+
+The bounded Implementer returned only the new B17 candidate package, production CLI and
+mirrored focused tests. I read the executable route and accept the implementation against
+the preceding fixed L0. The explicit canonical `--input-root` keeps the six retained assets
+available to an isolated source snapshot without copying a moving checkpoint or faking an
+old arm identity. All42 embedded input hashes independently match the native/local inventory:
+985227587bytes across the six checkpoint/config/summary/old N8/N6 panel/old N8 trace/manifest
+sets. This read-only availability check constructed no model and produced no new scientific
+observation. The fixed B17 output did not yet exist on the native node.
+
+The initial focused suite passed10tests in9.05s (reported test-process peak RSS about700MiB),
+including true LOCAL1/H6 strict restoration at full N4/6/8 dimensions, reduced native fixtures
+with k10 state and terminal successor evidence, frozen weights/normalizers and zero learning,
+array comparison, reducer/cost readings, admission-before-candidate-import and a replay
+mismatch that blocks all fresh calls. Compile, CLI help and whitespace checks passed.
+Mid-panel exceptions retain the available trace, completed-timestep boundary and actual
+interaction/inference counters; preallocated incomplete rows are explicitly marked partial.
+These tests are implementation evidence, not any of the24production panels or learning fits.
+
+An independent registered Reviewer inspected the high-risk restore/RNG/evaluation/admission
+paths and found one P2: phase step/UAV costs and observed storage/optimizer calls could be
+underreported when a completed replay mismatched or a fresh panel failed. I accepted that
+finding. The repair records actual phase work in the live progress callback, counts observed
+calls once on success or failure, and keeps successful-panel counts distinct. The updated
+replay-mismatch test has nonzero work; a new partial-fresh-failure regression preserves
+replay/fresh/total team steps18/2/20 and UAV steps144/16/160, with one storage call and three
+optimizer calls recorded rather than erased. The3affected tests passed (8unchanged tests
+deselected); compile and whitespace checks passed after the repair. The same independent
+Reviewer inspected the correction and closed P2 with no material finding remaining, reusing
+these check results. No production run was used to obtain engineering acceptance.
+
+Accepted runner SHA-256 is
+`b1be150f44d6992acf64a82e08ef359ff37160a3bfe25f608e90a1fea63a5f2c`;
+accepted test SHA-256 is
+`5f332e9bea03a7c92216d0e203288708bcffbd5e2a9b9abef92ec7c029bb851f`.
+DM staged-diff checking removed an extra blank EOF line in the new package initializer and
+test file; these whitespace-only changes leave the reviewed executable behavior unchanged.
+No scientific premise, policy, seed, tolerance, endpoint, cost scope or reading rule changed.
+Full agreement of the six native old N8 replays remains unverified and will gate the fresh
+panels inside the single accepted invocation. Current published main
+`5a99d6075a6cae539c7b05eb5fba88d1e6f6c499` retains the lifted owner pause, active direction and
+same lead. Next: publish these exact inputs, obtain fresh native kernel admission, retain the
+manifest/process handle, and arm deterministic observation for this task. B17 still has0fits;
+B15's original inconclusive confirmation and all B16 contrary evidence remain unchanged.
+
+
+## 2026-09-24 — B17 pre-admission refusal reconciled; immutable inputs staged
+
+The supervisor submission from published source
+`b35a55654b27be76a84f47bb23f8694baf340aee` exited4 before scientific admission.
+Its preserved native task log reports:
+`absolute author input is absent from published snapshot: /home/wu/projects/HMASD/runs/agent_count_generalization`.
+The snapshot mapper correctly treats an absolute path inside the author repository as a
+published source path; retained ignored model/trace files are not in that snapshot. No
+scientific result follows from this supervisor command. I inspected the actual native kernel
+and existing operation store: preparation raises before claim creation or child spawn, the
+fixed B17 output does not exist, and there is no matching operation claim. The refused
+supervisor/log and prepared source snapshot are preserved. No accepted scientific worker is
+being restarted, and no output tag or claim was removed to obtain another attempt.
+
+Resolve the existing input requirement using the configured external staging root:
+`/home/wu/hmasd-inputs/agent-count-b17-final45/agent_count_generalization`.
+All42 fixed input files were copied as independent bytes, made read-only, and checked against
+the same expected SHA-256 values both at the source and at the copy. Their total is
+985227587bytes; original retained assets remain unchanged. This adds985227587bytes of native
+input storage beyond retained outputs and the planned B17 outputs; staging wall/CPU was not
+separately metered. No new checkpoint, observation, fit, world, seed or comparison was created.
+The CLI will bind this explicit external directory, which snapshot rewriting preserves.
+
+This inspection also caught a production guard integration gap: the kernel's AST validator
+requires a literal direction argument, whereas the new CLI supplied a constant variable.
+I changed that one call to the same literal `agent_count_generalization` and clarified the
+input-root help text. A new focused regression invokes the real kernel guard validator.
+The two CLI/guard tests passed in3.22s (10other tests deselected); staged-diff whitespace
+checking passed. The evaluator itself and all scientific bindings remain unchanged.
+Corrected CLI SHA-256 is
+`54cdf984b3ab236b8eb9a265e06eae5be984e84451744abe2968359518b5a0ff`;
+current test SHA-256 is
+`c279eafdea935c5138844d002093c9b14bd2e668156cb742f997775764c80652`.
+The independent Reviewer checked the correction, snapshot mapping, recorded42-file identity
+and refusal ordering against the matching native kernel source, and found no remaining
+material integration issue. It reused the two passing checks, without claiming a new remote
+rehash or production evaluation. After publishing the exact corrected source, submit once
+with this staged input root to the same unused fixed B17 output. Native replay agreement
+remains unverified; only the prescribed six replay gates can release the18fresh panels.
+
+
+## 2026-09-24 — B17 admitted on native node; fixed evaluation running
+
+The corrected, published inputs obtained kernel acceptance at2026-09-24T15:38:11Z.
+The runner-written [launch manifest](../../../../runs/agent_count_generalization/s1_fresh_world_deployment_b17_final45/launch-manifest.json)
+is the authoritative source/command/input path, process identity and stable operation reference.
+The [fresh native preflight](../../../../runs/agent_count_generalization/s1_fresh_world_deployment_b17_final45/admission-preflight.json)
+passed both physical and effective memory floors:12935204864bytes available against the fixed
+4294967296byte minimum. The accepted [launch status](../../../../runs/agent_count_generalization/s1_fresh_world_deployment_b17_final45/launch-status.json)
+and these three files were collected byte-for-byte with native/local SHA-256 verification.
+A read-only operation check found matching running runner/supervisor identities, no exit witness
+and no record conflict. The earlier refused supervisor is distinct from this first accepted
+scientific operation and remains preserved.
+
+The initial runner summary reports all6assets restored/validated, one old N8 replay completed
+and the second starting, with0fresh panels,0fits,0stored training steps and0optimizer calls.
+This is an operational progress reading, not final replay verification or scientific acceptance.
+The complete fixed scope remains6old replays plus18fresh N8/N6/N4 panels,384000team steps,
+2496000UAV steps and768episodes. Only the full six replay comparison records can certify that
+the old consistency gate passed; terminal collection must still verify and read all artifacts.
+The same operation is retained for deterministic observation by this task. Checkpoint wakes
+only rearm observation; they neither restart this process nor authorize an extra panel or fit.
+Next scientific duty remains full collection and the fixed per-N/per-block reading, including
+all adverse worlds, absolute minima and old/new gap sensitivity. No performance claim has yet
+changed and no B17 extension or new Pro question is queued.
