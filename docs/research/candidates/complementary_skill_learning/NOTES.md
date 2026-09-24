@@ -5176,3 +5176,656 @@ generation46 to47 against the same operation. Native snapshot GC first previewed
 to the snapshot), then removed only source snapshot`1553c10f58d8427c953cd70c24de0174`.
 Exact source remains published on the direction branch; both complete output copies, original
 M input and author checkouts remain. No evaluator restart, old Pro resend or App message occurred.
+
+
+## Pro question 2026-09-23 training-recurrence-after-b05
+
+Conversation: reuse the current direction's Jev conversation from its private local operation
+record; do not publish the account URL. This is a new scientific question, not a resend of
+`hmasd:ef1a1f242d71ee4e2b77013ca1bfebdd3935246efb06593b2872af3d9382d75d`.
+
+**Question.** Given the completed B05 result—sampling the learned law improves greedy but
+has no demonstrated advantage over independent uniform—is one fresh matched M/U training
+pair the next useful investment to challenge B04's conditional bank-formation gain, or does
+an evidence-grounded material learning revision or stopping this training-law route have
+higher decision value now? Please advise on this one investment choice and its discriminator,
+not on how to make the same frozen S win. The DM leans toward the fresh pair, with the narrow
+fixed proposal below, but has not selected, implemented or launched it. No new architecture
+or positive insight is owed.
+
+**Why this question now.** The prior full deployment-law advice covered the B05 branch and
+its bounded end. We have reused it: fixed nine panels end without extra streams, temperature,
+selector fitting, low-action noise, checkpoint/world selection or a rewritten Gamma. It did
+not select the next training investment; it explicitly treated the fresh M/U pair as a
+competing use, not a debt. The actual S−R result and finite-stream sensitivity are new. We
+now need a choice about training-formation recurrence, not another result-review approval.
+The owner authorizes autonomous direction choices/publication under constitution §§2–5;
+pause is lifted, this session remains the same exploring lead, and other DMs' accepted work
+is left alone. Pro advises; DM owns the decision.
+
+**Standing and consequential evidence.** Read the complete latest B05 entry immediately
+above, including every world, four-stream means/dispersion, sensitivity, cost and recovery
+locations, and the selected B04/B03 entries below. The compact B05 native summary has all
+panel/world arrays and trajectory identities; all26 outputs and every saved trajectory were
+independently read by the DM. These are recorded checks, not checks the adviser may claim
+it newly performed. Bulk trajectories remain outside Git with two verified retained copies.
+
+- B04 (one actual paired initialization, new training worlds and separated private/sampler
+  RNG) M-final-uniform minus U-final-uniform: J+.035434871140, users+1.843375, J27/32 positive,
+  users24/32 positive, quality+.007564467331 and height−.007358280940. Both arms themselves
+  improve J/users in all32 worlds from actual identical initial-uniform policies. Eight
+  relative service losses remain, worst−1.928 users; three J-positive worlds lose service.
+  M is native learned high-level joint training; U uses exogenous independent-uniform labels
+  and skips high coordinator updates, retaining the same mixed low-level task/discriminator
+  objective and all required native low/discriminator learning. This is a training-regime
+  package intervention, not a clean isolated high-policy-gradient effect.
+- B04 M-greedy minus its uniform: J−.044004890887/users−2.3471875. Original full-deployment
+  Gamma=M-greedy−U-uniform is J−.008570019747/users−.5038125, with a−11.598 service world.
+  This adverse original endpoint remains frozen; it is not revised by B05.
+- B05 restored the same M-final only: native team categorical, individual AR actual-prefix
+  mixture .9pi+.1/6, mean-clipped low actions, unchanged k10/GRU and fixed32 exposed worlds.
+  O/R0 exactly reproduce old controls. Four-stream S−R primary is J−.000470478212 (17+/15−),
+  users+.068265625 (19+/13−), quality−.001144899930, height+.001082726983. Prespecified
+  S4−Rnew3 is J−.001850778453/users−.034333333333. Median within-world S/R J ranges are
+  .024439724/.032450235: small means do not show equivalence or adequate precision.
+  S4−O is J+.047675313398/users+2.72325, but has8 J and9 service loss worlds. Worst S−R
+  is1700203:−.035829642700 J/−2.6225users; worst S−O is1700219:−.031356133252/−1.959.
+  Randomization is conditionally useful versus this greedy extraction; learned-selectivity
+  value over uniform is not demonstrated. It does not imply learned training is useless.
+- Contrary recurrence evidence: old generic G−D uniform+.019697695 became−.010459129 in
+  the new B03 learning pair under the same evaluation worlds/label stream (11+/21−), while
+  both learned positively from initialization. Do not pool unlike G/D and M/U effects.
+  B02's mixed-vs-task-only deletion cost also does not isolate discriminator semantics or
+  establish a generally superior target. Original P/G additions and task-only deletion
+  recipes remain ended, without universal claims about learning/auxiliaries.
+
+Current shared background atmain`5fabdf2b8c60f327b7425522480d4a92994c0c00` (§3 and
+Current research plan) makes training-formed feedback control a working explanation, informed
+by DM1 B14/B10 and our B04/B05. Its explicit rivals include ordinary SET underdevelopment
+and S1 geometry/optimization. Those cross-direction observations cannot supply extra M/U
+training n or justify claiming a common mechanism. B05 narrows the deployment reading but
+leaves the training explanation unresolved. DM1's own fixed B15 package confirmation is not
+our matched comparison and must not be changed or duplicated here.
+
+**Proposed next observation if selected (B06, exploratory).** One fresh matched M/U training
+pair on native S1, N6/50users/k10,45 rollouts x16 lanes x500 steps=360k team transitions per
+arm, original mixed low-level reward and all B04 loss/architecture/physical-action semantics.
+M then U, once each, new actual initialization/head/training/private seeds260923961..967
+(respectively init, head, default training, auxiliary, low action, high collection, high
+update), new training-world base2200000. Verify actual native tensors and matching intra-pair
+initial/stream states, with distinct prior-block identities. Preserve eval RNG260923905,
+worlds1700200..1700231 and old uniform PCG seed262624105; do not falsely call these new or
+held-out worlds. M has initial-own/initial-uniform/final-own/final-uniform; U has
+initial-uniform/final-uniform. Six32x500 panels,96k evaluation transitions. Do not add S panels
+or compare new S against an old U control. Original B04 CLI is bound to its old init seed;
+a new narrow adapter/spec and appropriate checks would be needed, preserving old executable
+inputs rather than passing a cosmetic seed argument.
+
+Primary: final uniform native J(M)−J(U), equal weight across the same32 worlds. Read users,
+coverage, quality and height with the same complete pairing. Also preserve each arm's actual
+initial→final uniform learning, M initial→final own learning, M-own−M-uniform and the original
+form of Gamma=M-own−U-uniform. Both package and learning differences matter: a positive
+interaction caused only by U failure is not equivalent to both arms learning useful service.
+No world/endpoint selection or post-hoc service-loss tolerance.
+
+Working prediction: the M uniform bank advantage in native J and service recurs, while
+positive own-package Gamma is not promised. A second positive instance would strengthen a
+conditional recurrence judgment and could motivate a later, separately chosen attribution
+or confirmation question; it would still be only two exploratory pairs and cannot establish
+training-population advantage, complementarity, MI or the isolated effect of high gradients.
+A reversal or mixed service result would weaken using this fixed training recipe as an
+explanation that generalizes across learning instances. Preserve both blocks separately;
+no automatic third pair, pooled-score rescue or renamed retry. Technical failure is a
+separate recorded outcome, not a scientific negative or an automatic rerun.
+
+**Prospective cost and strongest rival.** Proposed pair:2started fits/720k train+96k eval,
+816k team transitions total, same preferred wsl_4070 after fresh native admission. B04's
+observed paired runner total109.310170min is a reference, not a fresh shared-node wall-time
+guarantee. Implementation/seed checks, input staging, full tensor/output reading, retained
+bulk and publication are extra work with time not yet measured. Existing B01–B05 total is
+9fits/3.24M train/657,280eval/about475.513252 summed runner minutes, plus separately recorded
+technical/support costs. No allowance is being consumed and a cheap experiment is not owed.
+
+The strongest rival to repeating the training recipe is to end investment in this particular
+M/U recurrence and pursue a material learning question that distinguishes a concrete surviving
+explanation—only if there is an executable comparison whose observation would change a use or
+scientific judgment. A new opaque auxiliary, entropy/temperature sweep, more frozen-bank
+streams, or a duplicate full hierarchy-vs-flat comparison has no such new basis here. If
+another targeted comparison is better, state what present evidence locates its bottleneck,
+its intermediate and native predictions, its matched simpler alternative, cost and unresolved
+confounds. If neither repetition nor a revision is worthwhile, explain a bounded stop without
+turning this into a universal negative or an invented external dependency. No exhaustive
+candidate search, required number of ideas or independent project review is requested.
+
+**Context to read (all source_sha unless explicitly pinned otherwise).**
+- Current governance: `docs/project/OPERATING_CONSTITUTION.md` §§1–5,7–8. Especially one
+  independent DM, proactive advice, no new approval layer, no automatic batch extension,
+  exploratory n versus confirmation, and durable bulk outside Git.
+- Current methods: `.agents/skills/hmasd-scientific-tools/SKILL.md`, Update the working
+  explanation; Use and revise shared understanding; Comparators and MARL information;
+  Statistics; Cost and exposure; Pro. Engineering feasibility: `.agents/skills/hmasd-research-engineering/SKILL.md`,
+  Checks and review; Publishing direction results. These guide reasoning, not retroactive changes.
+- Shared background: `docs/research/RESEARCH.md` topic3, our direction standing, and Current
+  research plan at`5fabdf2b8c60f327b7425522480d4a92994c0c00`; explain its concrete implication.
+- This notebook: B03 complete; Training-law advice accepted/prospective B04; B04 complete;
+  the full Answer under `Pro question 2026-09-23 deployment-law-after-b04`; the B05 adopted
+  fixed design and complete result immediately preceding this question. Read adverse results,
+  not only summaries favorable to replication. Earlier auxiliary history only as needed.
+- Frozen B04 science: `experiments/candidates/complementary_skill_learning/b04/runner.py`,
+  `learning.py`, and `scripts/run_complementary_skill_learning_b04.py` at
+  `483819ebaa8286d24641f4947e646a765c761003`, especially Spec, TrainingLawAgent, run_fit and
+  the fixed-seed entry. Original M/U config and summary at source_sha under
+  `runs/complementary_skill_learning/b04_m_260923931_483819eba/` and
+  `runs/complementary_skill_learning/b04_u_260923931_483819eba/`. These are frozen evidence;
+  do not relaunch or modify them, or claim to independently rehash unavailable checkpoints.
+- B05 config/summary and panel JSON at source_sha under
+  `runs/complementary_skill_learning/b05_osr_a5bb71ec3/`. Evaluator meaning is pinned to
+  `a5bb71ec32f56bd6e4e9479cc91ef1463d473a3b` under
+  `experiments/candidates/complementary_skill_learning/b05/runner.py`. Git has compact results;
+  the preceding result note gives verified durable raw locations/hashes. State which direct
+  sources you could not access and how that limits the decision, without inventing new checks.
+
+**Constraints and return.** Give an evidence-based choice, the strongest objection to it,
+what B04/B05 strengthens/weakens/leaves untouched, and the bounded next discriminator with
+actual fit/non-fit exposure. A mathematical/simple-model explanation is welcome if it changes
+this choice, with its mapping and omitted closed-loop/MARL coupling; do not decorate the answer
+with unrelated literature. If you disagree materially with the proposed fresh M/U pair,
+return `MATERIAL_DISSENT: yes` and the consequential reason; otherwise say `no` with limitations.
+No scientific runs or code changes. Edit only the empty `### Answer` below on branch
+`codex/complementary-skill-learning`, target
+`docs/research/candidates/complementary_skill_learning/NOTES.md`. Read reasoning at the pinned
+source_sha supplied in the message, then fetch the latest target blob and actual SHA for
+writing; preserve the question and every other byte, and stop on overlapping edits. On success
+return the actual answer commit. If writing fails or you cannot safely preserve the whole
+file, return your COMPLETE answer in chat, not a receipt, SHA or link alone.
+
+### Answer
+
+本次未写回 GitHub。 最新目标文件中，本题的 ### Answer 仍为空，实际 blob SHA 为 c8f93407d8b1b36d042113634979a555f0c20c5d。可用写入接口要求整文件替换；我未能可靠构造并校验一个保留其余所有字节的替换稿，因此没有提交写请求、没有改动仓库，也没有 Answer commit。这不是 GitHub 返回的权限拒绝。以下是完整答复。
+
+Answer
+一、选择：保留一对新的 M/U，检验训练形成优势能否再现
+
+MATERIAL_DISSENT: no。 我推荐题面提出的 B06：一次新的实际匹配初始化，M、U 各训练一次，保留六个既定评价面板，不增加 S 面板、训练臂、部署流或调参分支。这是对一个仍有决策价值的训练问题的直接观察，不是 B05 结束后必须偿还的重复实验债务。
+
+下一项观察应改变的判断是：
+
+在当前混合目标、技能接口、训练暴露量和固定 uniform 评价条件下，是否仍值得把 learned-high 训练制度 M 作为形成有用 bank 的优先研究对象，而不是采用认真训练的 uniform-high 制度 U？
+
+B04 为这一判断提供了一个正实例；B05 则没有增加训练实例，只排除了“已经证明 learned stochastic 部署优于 uniform”这一更强表述。因此，现在检验新的训练轨迹，比继续购买同一 M bank 的提取策略结果更有针对性。此前完整部署-law 答复已经覆盖 B05 的结束分支，却没有预先选择这次训练投资；当前选择必须由新的证据和剩余问题支持。
+
+hmasd-pro-question-complementar…
+
+最强反对理由也很明确：这是一项成本不小、结论仍然很窄的投资。 再花 816,000 个 team transitions，加上实现、核验和输出读取，只得到第二个探索性 M/U 区组；它仍使用已经暴露的世界和一条固定 uniform 流，并且仍是训练制度的整体干预，不能分离高层梯度、标签信息、经验分布或 S1 优化路径。第二次正号也不等于机制解释成立。
+
+hmasd-pro-question-complementar…
+
+我仍选择它，是因为这个窄结论本身能够改变下一步使用与投资判断：若双方正常学习而 M 的优势反转，继续把当前 M 配方的 bank 优势作为可跨学习实例使用的解释就应明显降级；若双方确实学到服务且优势再次出现，则它不再只依赖 B04 那一个学习实例。两种结果都有用，不要求事后制造一个必然正面的故事。
+
+目前最强的实际替代是有界结束这一原样 M/U 复现路线，保留 B04 的单实例结论，而不是立即上一个尚未被证据定位的新学习配方。下面解释为什么我暂不选择这个停止，也不推荐一个没有明确作用环节依据的“实质修订”。
+
+二、B04 与 B05 的更新必须分开
+B04 加强的是条件性 bank 形成价值，不是完整部署优越性
+
+B04 最终 uniform 下，M−U 为 +0.035434871140 J、+1.843375 users/step。两臂从相同初始 uniform 策略出发，各自的 J 和服务人数都在 32/32 世界改善；因此主要增益不是 U 没有学习造成的。与此同时，相对服务仍有八个损失世界，最差为 −1.928 人；1700218、1700222、1700224 还出现 J 为正而服务人数下降。这个正实例值得保留，但不能改写成逐世界支配。
+
+B04 的另一个事实同样保留：M-greedy−M-uniform 为 −0.044004890887 J、−2.3471875 人；原始
+Γ=M
+greedy
+	​
+
+−U
+uniform
+	​
+
+
+为 −0.008570019747 J、−0.5038125 人，1700224 的 Gamma 服务损失达到 −11.598 人。所以，bank 在外生部署下更好，并没有自动转化为原 learned-greedy 完整方案更好。
+
+B05 支持有限的随机部署改善，没有显示 learned selectivity 超越 uniform
+
+B05 使用同一份 B04 M-final，没有新训练。原生输出及完成记录给出的三个不同读数是：
+
+比较	平均 J 差值	平均 users/step 差值	应保留的解释
+S4−R4，主要终点	−0.000470478212	+0.068265625	没有显示 learned stochastic 超越 uniform 的额外价值
+S4−O，次要终点	+0.047675313398	+2.723250000	支持这份 bank 上相对 greedy 的有限部署改善
+S4−Rnew3，预写敏感性	−0.001850778453	−0.034333333	对旧 R0 的影响敏感，不能选择更有利的汇总
+
+主要终点还伴随 quality −0.001144899930、height penalty +0.001082726983。S4−O 虽然均值改善，仍有八个 J 损失世界、九个服务损失世界；主要 S−R 最差世界 1700203 为 −0.035829642700 J、−2.6225 人，S−O 最差世界 1700219 为 −0.031356133252 J、−1.959 人。
+
+这不是等价结论。四条流的世界内 J 极差中位数分别约为 S 的 0.02444 和 R 的 0.03245；这些极差不是均值的置信区间，却明确提醒我们不能从一个很小的平均差值推断精度充分。原始九面板中，四个 S 的流均值全部高于 R0，却全部低于 R1、R3；这正说明只挑一个控制流会改变叙述。
+
+因此，B05 削弱了该 learned stochastic 法则相对 uniform 具有额外部署价值的正预测，支持了相对 greedy 的有限改善，但没有：
+
+证明 M 的训练制度无用，或 U 的训练制度普遍更好；
+
+识别互补性、互信息或某个高层梯度机制；
+
+修正 B04 的 Gamma，或提供新的 M/U 训练重复。
+
+尤其不能把 S4 的新均值接到旧 U 的单流控制上，构造一个新的“完整系统成功”。B05 的 O/R0 身份重现保证的是原控制的执行一致性，不是另一个独立学习实例。
+
+三、为什么现在不优先修改学习机制
+
+指定共享背景把“训练形成的反馈控制”作为工作解释，同时保留 ordinary SET 训练不足、S1 几何及优化路径等竞争解释。其具体含义应是：训练的作用可能留存在 bank 的闭环行为中，不能仅凭部署时换标签法则的结果判断训练作用。 这为区分训练与部署提供理由，不是为任何新辅助目标背书。
+
+这里有一个重要限制：U 同样训练局部循环低层 actor、critic 和 discriminators，也同样能形成反馈控制。 因而“存在训练形成的反馈控制”这个宽解释可以同时容纳 M 和 U。即使 B06 再次有利，也只能加强 M 这一训练制度相对 U 的条件性额外价值，不能把宽解释独占地归因于 learned high 或互补技能。
+
+现有失败也没有把问题定位到一个足够具体的可修改环节。B03 的 generic G−D 在固定评价世界和流下，从旧 +0.019697695 变为新 −0.010459129，而两臂本身都学习了服务；它说明原 G 增量没有再现，却不指出应该修改哪个表征、目标或梯度路径。B02 的 task-only 删除结果也不隔离 discriminator 的语义贡献。
+
+hmasd-pro-question-complementar…
+
+因此，我不推荐把“B05 没有赢 R”直接翻译为新的辅助头、奖励系数、熵或信息接口修订。那样会同时更换作用假说与训练干预，新增结果未必能解释原来为什么有差异。目前能够直接区分的仍是两个已有、可执行且有明确用途的训练制度，而不是一个已经定位的学习瓶颈。
+
+DM1 的 B14/B10 可以作为工作解释的背景，不能给本题增加 M/U 的训练样本量；其 B15 完整方案确认也不是这里的匹配对照。重复 hierarchy-versus-SET，既不能替代当前训练-law 比较，也不应接管另一方向已固定的工作。
+
+hmasd-pro-question-complementar…
+
+最强的停止理由不是“没有新点子”，而是：若本方向实际需要的只是完整部署优越性或机制归因，而不会根据第二个固定-panel M/U 结果改变任何选择，那么 B06 的信息就不值得其成本。 本题仍明确关心 bank 形成增益的再现性，所以我判断这一停止理由目前还没有压过新 pair 的价值。
+
+四、B06 的判别量：新的学习实例，固定的外部评价
+
+令 b 表示训练区组，a∈{M,U}，整个实际训练过程写为
+
+Θ
+a,b
+	​
+
+=T
+a
+	​
+
+(ξ
+b
+	​
+
+),
+
+其中 ξ
+b
+	​
+
+ 包括初始化、外生训练世界及随机流；T
+a
+	​
+
+ 包括高低层、discriminator、normalizer 和内生经验的共同演化。令 W 为固定的 32 个开发世界，R
+0
+	​
+
+ 为原 uniform 标签流。
+
+建议保留的主要量是
+
+Δ
+b
+J
+	​
+
+=
+32
+1
+	​
+
+w∈W
+∑
+	​
+
+[J(Θ
+M,b
+	​
+
+;w,R
+0
+	​
+
+)−J(Θ
+U,b
+	​
+
+;w,R
+0
+	​
+
+)].
+
+B06 改变的是 b，不改变 W,R
+0
+	​
+
+ 或主要终点。这与 B05 在固定 Θ
+M,04
+	​
+
+ 上比较不同部署规则，是不同的干预。上述记号只是区分问题，没有假设训练、AR 前缀、循环状态与物理反馈可以线性分解，更没有提供某个效应符号的证明。实际 B05 代码在每个 k10 边界抽取标签，低层继续携带 GRU 状态并产生均值裁剪动作，说明这些闭环耦合不能从解释中删去。
+
+保留旧 R0 是有目的的，但范围要收窄
+
+我支持继续使用原评价世界与 R0，因为新问题是：固定原评价条件后，原优势能否沿另一个真实学习轨迹出现？ 现在换世界、换流或增加 S，会把训练变化与评价变化一起带进来，回答另一个问题。题面没有将 B06 描述为新的 held-out 世界确认，这一限定应保持。
+
+hmasd-pro-question-complementar…
+
+不过，必须明确以下边界。
+
+第一，固定外生流不等于已经精确估计整个 uniform 法则的期望价值。 B05 已经展示同一 bank 对 uniform 流的有限敏感性，但它没有在 U 上执行相同的多流比较。因此，不能把 B05 的 M-only 流波动当作 M−U 的标准误、误差界或校正项。也不能只替换 B04 的 M 侧评价而保留 U 侧原值。
+
+第二，相同数值标签流不保证不同训练 bank 中有相同技能语义。 这是对设计的逻辑限定，不是已发现的故障。新训练可能形成不同的标签—行为映射；固定 R0 保持了外生标签地址，却没有消除 bank 与有限流的交互。不能事后重新对齐标签或挑选标签流来恢复正号。若 B06 再次为正，结论仍应带着“固定世界、固定流、当前训练配方”的限定。
+
+第三，B04 和 B06 分别保留自己的匹配 U 控制。 不能拿新 M 对旧 U，也不能把 B03 的 G/D 差值并入 M/U。32 个世界、45 个更新阶段、初末评价和 B05 的四条流，都不增加独立训练区组数。第二个完成区组仍然只是两组探索性 M/U 观察，而不是一个稳定排序的确认。
+
+初末学习与 Gamma 不改变主终点
+
+对于每臂保留
+
+L
+a,b
+J
+	​
+
+=V
+R
+0
+	​
+
+	​
+
+(Θ
+a,b
+final
+	​
+
+)−V
+R
+0
+	​
+
+	​
+
+(Θ
+a,b
+initial
+	​
+
+).
+
+实际初始 uniform 面板匹配时，
+
+L
+M,b
+J
+	​
+
+−L
+U,b
+J
+	​
+
+=Δ
+b
+J
+	​
+
+.
+
+所以“差异中的差异”不是第二份独立支持。但分别读取两个 L 很重要：它能区分双方学习中的相对收益与仅由对照退化造成的相对胜出。对初始水平较高、学习增量较小的情形，还应同时看绝对端点，不能仅凭增量小就宣称策略无用。
+
+同样保留
+
+A
+b
+	​
+
+=V
+O
+	​
+
+(Θ
+M,b
+	​
+
+)−V
+R
+0
+	​
+
+	​
+
+(Θ
+M,b
+	​
+
+),Γ
+b
+	​
+
+=Δ
+b
+	​
+
++A
+b
+	​
+
+.
+
+正 Gamma 不能替代失败的 uniform 主要终点；负 Gamma 也不能抹掉正的条件性 bank 增益。它们回答不同用途问题，恒等式本身不增加证据。B04 采用这一关系的原先定义应原样延续。
+
+五、匹配的应是实际训练对象，而不是 seed 名称
+
+B06 保留 S1、N6、50 users、k10、45×16×500 的训练暴露量及 B04 的原混合目标和物理动作语义。新地址 260923961..967 分别用于 initialization、head、default training、auxiliary、low action、high collection、high update；训练世界基址改为 2200000。评价仍使用 260923905、世界 1700200..1700231 和 uniform PCG64 262624105。这些是一个新区组内部的随机地址，不是七次独立实验。
+
+hmasd-pro-question-complementar…
+
+两臂的科学含义不能简化为“更新／不更新 coordinator”：
+
+M 保留 learned team categorical、按实际前缀生成的个体 AR μ=.9π+.1/6，以及 native high-level learning。
+
+U 在同一重选时钟使用与状态、前缀和网络权重无关的均匀 team／individual 因子，省去 high coordinator 更新，但真实保留低层 actor、critic、discriminators 的学习，以及两种 detached factual head 的原定训练。它不是随机低层动作或未训练策略。
+
+冻结的 TrainingLawAgent 正是通过 U 的常量 logits 改变实际采样法则，并检查标签从低层动作到奖励、factual windows、canonical storage 的一致性；高层更新另有私有进程流和独立的 rollout-buffer sampler 状态。后者很关键：只隔离全局 Torch/NumPy RNG，不能保证省略高层更新不会改变后续低层 minibatch 顺序。
+
+因此，匹配应覆盖实际 native/head 初始张量、初始 normalizer 与私有／sampler 状态、外生世界及初始 uniform 面板，并确认这些对象确实区别于前一区组。不应要求 M/U 的首条轨迹、后续动作、目标、discriminator 数据或 ValueNorm 演化相同；高层训练法则改变之后，这些本来就是整体干预的下游结果。
+
+“同一 actor 输入接口”也不等于“相同有效信息”。M 的标签可能携带状态或联合前缀信息，U 的外生标签没有同样的信息关系；同一混合系数也不保证相同的实际内在奖励分布。因此该比较识别的是整个训练制度的条件性后果，而非纯高层 policy-gradient 效应。U 的训练法则与主要 uniform 部署更一致，也仍是该比较的已知范围，而不是结果出来后才解释的优势或劣势。
+
+工程上有一个已直接确认的限制：原 B04 CLI 会拒绝任何非 260923931 的 seed，随后调用 run_fit 时没有传入新 Spec。给旧入口换一个命令行 seed 不能产生本题所需的新学习对象。 应以新的窄适配器／Spec 真实连接新初始化和流，复用冻结模块而不改写旧 B04；针对这一改动检查实际 seed 传递、sampler 隔离、U 的采样及学习调用、六面板评价隔离即可，不需要把本次变成整个历史系统的重新验收。
+
+这也是可行性分析，不是宣称 B06 已实现或已通过检查。
+
+六、预期符号及反结果怎样改变判断
+
+我保留题面的工作预测：新 M 的 uniform J 和服务人数优势再次为正，同时双方各自学到服务。 不预测优势必然等于 B04 的大小，不承诺正 Gamma，也不要求 quality、height 或每个世界都复制原符号。B04 的 32/32 自身改善与八个相对服务损失，不应变成结果出来后套用的通过门槛。
+
+B06 的实际结果	应改变的判断与有界处理
+J 与服务人数的 M−U 都为正，双方自身也学习了有用服务	加强“该固定配方的条件性 bank 优势在第二个学习实例出现”。保留两块各自数值与不利世界；本批结束，不自动进入确认或机制实验。
+M−U 反转，双方仍正常学习	明显削弱把原 M 配方视为可跨实例提供额外 bank 价值的依据。U 在这一用途上得到更强支持；足以考虑结束原样正增益路线，但不证明高层训练普遍无用。
+J 与服务人数给出相反方向	保留为明确用途取舍。不能通过改变权重、只报 J、减掉高度项或另造容忍阈值宣布服务预测成功。
+相对差值为正，但只有 U 退化，或双方没有形成新的有用服务	不支持原先“双方学习、M 形成更有用 bank”的完整预测。区分绝对用途、初始水平和学习变化；合法运行中的退化是真实结果，不能自动排除或重跑。
+差值很小、方向混合或不足以支持用途选择	保留未决，不能宣布等价，也不能把两个区组的平均数当作“救回”新块结果的主要结论。没有新的投资理由时，停止原样追加。
+uniform 主要量与 Gamma 给出相反结论	分别解释 bank 用途与原 greedy 完整方案后果；不替换终点，不以另一量的正号解除不利结果。
+
+还应将技术失败与上述科学反结果分开。错用旧初始化、标签法则不符、实际学习调用缺失或评价发生更新，会限制依赖这些执行的比较；它们不是一次合格的 U 科学失败。相反，法则正确、学习调用和暴露量正确，而最终服务较差，就是应读取的科学结果。两者都要保留实际成本与部分输出，均不自动产生重跑权利。
+
+hmasd-pro-question-complementar…
+
+第二次正结果也不应被描述为“证实训练形成互补”。它至多使一个特定整体训练干预的额外价值更值得认真对待；作用机制仍包含多个未分离路径。第二次反结果则可以在没有证明普遍负效应的情况下，合理降低继续购买原样配方的优先级。投资决策无需假装已经完成总体效应证明。
+
+七、成本：两次训练及六面板，不隐藏非训练工作
+
+B06 的既定暴露量为：
+
+项目	M	U	合计
+新训练 fit	1	1	2
+训练 team transitions	360,000	360,000	720,000
+评价面板	4	2	6
+评价 team transitions	64,000	32,000	96,000
+评价 episodes	128	64	192
+总 team transitions	424,000	392,000	816,000
+
+M 的四面板为 initial/final×own/uniform；U 只有 initial/final uniform。不增加 U 的 argmax-of-uniform“伪 own”，也不为了形式对称复制无意义面板。
+
+hmasd-pro-question-complementar…
+
+按保留的完整 B04 语义，每臂低 actor、critic 各 101,250 次 optimizer calls，team／individual discriminator 为 675／2,700 次，每个 factual head 为 315 次，auxiliary trunk 为零；M 另有 675 次 coordinator 更新，U 为零。U 仍保留原生采样、推断和 D2 存储工作，不是“没有高层成本”。这些是提案的预期执行量，不是已经发生的 B06 计数。
+
+B04 的 paired runner 合计 109.310170 分钟是已有观测参考，不是 B06 的共享节点墙钟保证。M/U 评价量不同，高层优化工作也不同，不能由等训练 transitions 声称等计算；更不能把旧两臂时间差全部解释成高层学习的计算代价。
+
+新适配器及 seed 检查、输入 staging、针对性 review、实际张量与输出读取、批量材料留存及发布，都是额外工作，其时间尚未测量，不能计为零。大块 checkpoint／trajectory 保持在规定的可恢复外部位置，Git 保留紧凑结果、身份与恢复索引；不因这次咨询新建另一套记录或审批体系。
+
+hmasd-pro-question-complementar…
+
+已有 B01–B05 的九次 fit、3.24M 训练与 657,280 评价 transitions 是历史成本，不是继续投入的义务。选择停止的替代方案新增科学暴露为零，但也保留 bank 形成优势只有一个 M/U 实例这一缺口。我推荐支付本次有界 pair 的成本，购买这一明确的再现性信息，而不是同时购买它的所有可能后续。
+
+八、阅读范围与未取得的直接材料
+
+本次以附件指定的 f56dcb727ed511a4584b664840cbc80b1c6098da 为推理来源；共享背景使用单独固定的 5fabdf2b8c60f327b7425522480d4a92994c0c00；B04、B05 执行语义分别按 483819ebaa8286d24641f4947e646a765c761003 和 a5bb71ec32f56bd6e4e9479cc91ef1463d473a3b 阅读。最新分支只用于检查 Answer 写入位置，没有替代固定推理输入。
+
+hmasd-pro-question-complementar…
+
+已读附件全文、指定 notebook 中的 B03 完整结果、B04 prospective 与完整接受结果、前次完整 deployment-law Answer、B05 固定设计与完整完成记录，包括不利世界、流离散度、敏感性、成本及恢复位置；也读取了指定治理／方法部分和相关冻结函数。B05 的 config、summary 中的相关身份／计数／聚合字段，以及九个独立 panel JSON 中全部世界的 J、users 和原生分量数组均已直接读取。这里的“读取”不等于重新执行策略或独立复算全部运行材料。
+
+直接来源仍有以下缺口。 B04 M 的原始大 summary 获取返回错误，随后 M/U 的分段读取均只返回空 content 和 blob 身份；这不表示仓库文件本身为空。因此本答复对 B04 的完整训练计数、实际张量配对和全量验收，依据的是固定 notebook 中 DM 的接受记录，不冒充本次新完成的原始 summary 全量复核。
+
+此外，没有取得外部留存目录中的 checkpoint 张量及 B05 原始 NPZ 字节，没有独立重算其文件哈希、加载全部实际张量或从全部逐步轨迹重算结果。B05 的完整 NPZ 检查、两个留存副本及原控制完全重现，是已读来源中 DM 已完成的记录，不是本顾问新做的一次完整验收。
+
+这些缺口限制本次独立工程核验的范围，但已读的固定结果、原生面板和执行定义足以支持上述投资建议；不能据此进一步声称原运行已被我完整重新审计，或 B06 的实现已经可靠。
+
+最终建议：选择一对新的、真实匹配的 B06 M/U，以原固定 uniform 条件下的 bank 形成差为主要判别量；保留双方学习、服务取舍及原形式 Gamma。B05 在此结束，不追加同 bank 的 S 救援。B06 无论得到正结果、反转还是未决，都不自动附带第三对、确认或机制修订。MATERIAL_DISSENT: no。
+
+本次新增 0 fit、0 环境评价、0 代码修改、0 仓库写入。
+
+
+## 2026-09-23 — Training recurrence advice adopted; fixed B06 M/U and L0
+
+**Delivery and full reading.** The accepted question at
+`f56dcb727ed511a4584b664840cbc80b1c6098da`, key
+`hmasd:57966e24ae8afb0373804ba62e26c610fbc0067f702ef4ccbd041b205775654e`, completed once.
+Native `deliver` returned `NOT_DELIVERED`. The latest direction target still exactly matched
+the pinned source, its Answer was empty, and its actual blob was
+`c8f93407d8b1b36d042113634979a555f0c20c5d`, agreeing with the adviser's non-write account.
+The COMPLETE answer above was saved verbatim from chat:9,974 characters excluding its terminal
+newline,21,483file bytes, SHA256`607b879d6ce36d0b9cf9a34a9cbb0b49ee99ea55459b9667fae293e4af8c5f27`.
+The observer hashes stripped text as`b219ebe704dd7d4a3282c6219fb11dd89753985b6acb0ba1cd7406de505ed3c5`;
+these are distinct newline conventions, not different answers. No source SHA mentioned by Pro
+was mistaken for an answer commit, and no question was resent. Full sectionsI–VIII were read.
+
+The advice supports the proposed pair without material dissent. Its consequential numerical
+claims match our B04/B05 accepted records; B04's CLI really rejects a new seed and run_fit
+accepts an explicit Spec. Pro did not acquire B04's complete large raw summaries or external
+checkpoint/NPZ bytes, so its source reading is not a second complete runtime verification.
+That limitation does not remove our earlier complete reading, and does not establish that
+B06 code already works. Its strongest criticism is substantive: one expensive additional
+pair still gives only two exploratory blocks under one exposed world/label stream.
+
+**Decision and current background.** Select exactly one fresh M/U pair, called B06. What it
+can change is whether to retain the current learned-high training regime as a priority for
+forming useful banks relative to a genuinely trained uniform-high regime. This is a useful
+next observation after B05, because fixed-bank deployment draws cannot provide another
+learning instance. A second positive block would weaken the single-instance explanation;
+a reversal with both arms learning would lower this recipe's investment priority. Neither
+outcome identifies a high-gradient, information or complementarity mechanism. Keep B04 and
+B06 separate, with their own U controls, not a pooled score that rescues a new adverse block.
+
+Read the newer published shared-background revision
+[4f1f1f9ee](https://github.com/CartmanFatass/My-paper-code/blob/4f1f1f9eecf00c4218d827033bf858dd7f79a740/docs/research/RESEARCH.md#current-research-plan)
+after the answer. Owner pause/our lead are unchanged. Its existing-log entropy and B05 label
+readings strengthen random-context/optimization rivals and reject an unsupported all-same-label
+explanation of greedy. They do not newly establish an entropy-gradient failure, equivalent
+uniform law, or an actionable repaired learning mechanism. This makes the scope of B06 more
+explicit: it tests an extra effect of the whole M training regime over U under a fixed external
+readout. Both M and U have trained local recurrent feedback control; that broad explanation
+cannot uniquely credit M. Close-to-max average entropy does not imply independent uniform
+conditional joint labels, and sampled-factor probabilities are not full decision entropy.
+The prior question's comparison and purpose remain applicable; no new core question, loss,
+comparator or claim is substituted, and the accepted consultation is not resent.
+
+The strongest feasible rival is ending this original M/U recurrence with its one positive
+instance preserved. Choose the pair because either renewed bank value or its failure changes
+an actual training-investment choice. A lower-high-entropy or fixed-context learning treatment
+would change an additional hypothesis without a now-identified repair; it is not silently
+added. DM1's ongoing package comparison is not duplicated. B01 P/G, task-only deletion and
+the fixed B05 deployment-rescue routes remain ended as recorded. This choice is not an
+automatic third fit, confirmation or obligation to manufacture a mechanism.
+
+**Frozen B06 scientific scope.** Native S1, N6/50users, six team/six individual labels,k10,
+500-step episodes,16training lanes,45rollouts=360k training transitions per arm. Original B04
+M/U training laws, architectures, optimizer settings, mixed low-level reward including native
+.5 discriminator terms, factual detached heads, normalizers, private high/low/sampler
+isolation and physical train/evaluation action semantics all remain. M uses the native
+learned team and actual-prefix individual mixture and updates high; U uses independent
+uniform factors and no high update, while retaining every required native low/discriminator
+and factual-head update. Uniform labels do not mean random low actions or an untrained control.
+Do not demand identical downstream trajectories/targets after the label intervention.
+
+New matched random addresses260923961..967 map in order to init,head,default training,
+auxiliary,low action,high collection,high update; training-world base2200000. Match actual
+initial native/head tensors, initial normalizers, declared private/sampler states and external
+worlds between M/U, and distinguish the previous block. Evaluation retains RNG260923905,
+worlds1700200..1700231 and PCG64uniform stream262624105. Initial/final uniform physical and
+label identities must match within/across arms. Different banks may attach different behavior
+to the same numeric labels; neither stream semantics nor a full uniform-law expectation is
+identified by fixing the numeric stream. No post-hoc label alignment, replacement or new stream.
+
+Order: M once, then U once. M has initial-own,initial-uniform,final-own,final-uniform;
+U has initial-uniform,final-uniform. Total2fits/720k training+96k evaluation transitions,
+192evaluation episodes. Primary is equal-world mean final uniform J(M)−J(U). Read all users,
+coverage,quality,height pairs and all32 worlds, both arms' initial→final uniform learning,
+M's initial→final own learning, A=M-own−M-uniform and Gamma=M-own−U-uniform. No S panel,
+U argmax-of-uniform pseudo-own, additional checkpoint, new evaluation or score-dependent
+extension. Difference-in-differences and Gamma identities are arithmetic, not extra evidence.
+
+Working prediction: positive uniform J and service M−U and actual useful learning in both
+arms. The old exact32/32 improvement, effect size, component signs and loss counts are not
+new passing thresholds. Preserve native gains and service tradeoffs separately; no invented
+service-loss tolerance. Positive bank difference with only U degradation does not satisfy the
+full working explanation. Reversal, mixed signs and small/uncertain differences remain valid
+read outcomes, not equivalence or technical failure. Original-form negative Gamma cannot erase
+positive bank value; positive Gamma cannot replace a failed primary. Two blocks remain exploratory,
+not training-population, held-out, MI, complementarity or pure high-gradient confirmation.
+
+Cost reference: B04 paired runner109.310170min, not a new shared-node guarantee. Fresh source,
+engineering checks/review, actual-node admission, complete reading, bulk retention and publication
+are additional measured-as-available work. No automatic retry or third pair follows any result.
+Native technical failures retain partial outputs/cost and require a separate recorded decision.
+
+**L0 implementation.** Own only new B06 package, CLI and mirrored test locations:
+`experiments/candidates/complementary_skill_learning/b06/`,
+`scripts/run_complementary_skill_learning_b06.py`,
+`tests/experiments/candidates/complementary_skill_learning/b06/`. This is a narrow seed/spec
+adapter over the unchanged accepted B04 `run_fit`; do not duplicate the whole training loop,
+edit B01–B05 or core code, or introduce a new learner. Pass an immutable replaced Spec with
+all seven actual seeds and new training-world base. The new admitted CLI refuses nonfixed
+seed/invalid arm/unadmitted execution before effects, checks its source SHA, and uses configured
+thread/runtime conventions. Keep normal import-based reuse, without global monkeypatching or
+dynamic source rewriting for cosmetic experiment names.
+
+B04's existing raw `object_id=complementary_skill_b04` denotes the reused runner engine and
+is deliberately retained. B06 is identified by the new entrypoint, output tag, exact new launch
+SHA and complete actual Spec, as recorded here; it must never masquerade as the old B04 block.
+Do not rewrite old or new raw data merely to rename this engine field. Existing config/summary,
+source identity and launch manifest are sufficient. Bulk training/prediction/large raw-summary/
+checkpoint files remain in durable node output plus a verified collection copy; compact
+config/native state and readable full result/locators are published in the existing records.
+
+Checks target actual parameter/seed propagation and separate training effects, not just seed
+strings: new M/U initialization and initial-uniform pairing, differences from old actual
+initial/head/private/sampler states, both new arms' native update/parameter movement, exact
+uniform factors and label flow, preserved low/default/sampler isolation and six-panel evaluation
+semantics. Reuse B04 correctness coverage for unchanged internals. A bounded artificial CPU
+pair and corresponding real wsl_4070 CUDA pair using the new adapter can verify the new execution
+route without any production-checkpoint evaluation or result-bearing training probe. Full old
+production workload is not a test. Preserve failure artifacts and test scratch lifecycle.
+Independent Reviewer checks the changed entry/spec/identity path; DM accepts the diff/checks,
+publishes exact inputs, then native admission determines safe actual execution. No launch or
+Pro send is delegated to the Implementer, who returns facts and leaves this notebook to the DM.
+
+The adapter must retain production checks when its Spec differs from B04's default: B04's
+native/auxiliary optimizer guards apply whenever `small_model` is false and remain active;
+its exact old uniform-stream guard is conditional on Spec equality and therefore needs an
+explicit B06 production check. Check the prescribed PCG digest before work and the actual
+completed uniform panel identities afterward; a failed adapter check must be represented as
+technical failure with preserved outputs, not returned as accepted `complete`. Do not add new
+scientific measurements or change the fixed evaluation distribution.
+
+READY event`d049ec8dc89c9537b794e1df` under wake`356d5e64-f636-41ec-ade9-612462b4a731`
+was consumed after delivery verification and full reading by rearming generation48 to49.
+All earlier accepted operations remain terminal; no worker was restarted or old question resent.
