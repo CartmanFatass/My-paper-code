@@ -8924,3 +8924,24 @@ Fresh main6f29d276baa205c5eca03e665360020657d21b90 retains lifted pause and the 
 The exact generation/wake/event were acknowledged and rearmed78→79 for the same operation
 with1500s window. No worker restart, extra fit, Pro resend or other-task message occurred.
 M remains accepted, E remains incomplete, and fixed U remains unstarted.
+
+
+## 2026-09-24 — B08 E second checkpoint; same handle continues
+
+Generation79 CHECKPOINT`42908762e02903da542a3b26`, wake
+`a8c468f4-5ee1-46c0-b92e-5f61b5c8fc04`, was fully read. The same accepted E operation
+remains running with matching native identities,0observer errors and no exit witness at
+2026-09-24T14:03:07.427023Z. The incomplete summary records35/45native updates,
+280000training/stored transitions/560episodes,32000initial-evaluation transitions/64episodes;
+all17500storage batches/280000rows pass with0failures. Native optimizer calls are
+525/78750/78750/525/2100 in coordinator/low actor/low critic/team/individual order. Latest
+native update retains lambda_h=0 and active high PPO; only initial S0/R0 panels exist and
+common-reference scoring has not begun. The reported team/individual entropies
+1.0397694110870361/1.5249483585357666 describe the latest training-update minibatch and are
+not final common-input outcomes. Sourcec9217f0ae and the pinned new M-reference hash remain
+unchanged. No failure is recorded and stderr is empty. Interim summary identity:
+158427bytes/SHA256`bca039a3f331437220aceba664c90a0046406ab5794bc25addf72bc40f12ea86`.
+Fresh main6f29d276baa205c5eca03e665360020657d21b90 retains lifted pause and the same lead.
+The exact generation/wake/event were acknowledged and rearmed79→80 for the same operation
+with1500s window. M remains accepted, E remains incomplete, and fixed U remains unstarted.
+No worker restart, extra fit, Pro resend or other-task message occurred.
