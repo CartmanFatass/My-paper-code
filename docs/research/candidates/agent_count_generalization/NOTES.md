@@ -13780,3 +13780,68 @@ Implementer launches nothing and returns diff/checks/risks; DM accepts, commits 
 pushes exact inputs, performs fresh actual-node admission, then starts the fixed
 serial batch. Stop only dependent work for real semantics, source, resource or owner
 conflicts. No changes to the claim after results, automatic retry or added cells.
+
+## 2026-09-23 — B15 implementation accepted before confirmation exposure
+
+DM read and accepts the six scoped source/test files. The execution entry binds
+the exact six cells and fixed order, each actual learning/config/sampler seed,
+block-specific training lane base, and common new initial/final N8 then N6 panel.
+The native learner, action/storage/reset law, optimization exposure, evaluator and
+isolation path are the unchanged B14 scientific recipe. The B14 runner/CLI and
+shared configuration/models remain byte-identical to source88b67e5e. The B15 source
+manifest includes its fixed analysis and adopted claim; the CLI checks cell/seed/tag
+and admission SHA before importing or constructing scientific objects.
+
+The fixed reducer requires all six complete outputs, exact source/configuration,
+exposure, runtime, panel/checkpoint/trace identity, common actual reset trace within
+each block and distinct block initializations. It first averages the32 final N8
+worlds within each independent training block, then applies the prewritten n3/df2
+t rule. It retains initial/final absolute values, each arm's own change, N6, native
+components, all paired loss worlds and minima. Missing or invalid evidence raises
+an incomplete-batch error; there is no score exclusion, imputation or alternate
+success rule. File verification checks saved bytes and panel/summary agreement;
+DM must still read native trajectories, checkpoints and process evidence after
+each completed attempt. Passing code tests is not acceptance of a scientific result.
+
+Independent Reviewer read the analysis and execution diff, actual RNG/initialization,
+admission and frozen B14 dependencies. It found one substantive accounting defect:
+an initial-panel failure inherited B14's premature fit-start marker. The B15-only
+repair starts counting after a recorded training transition and reconciles from
+recorded transitions in the exception handler, including native-component failure
+before the ordinary transition hook. Initial evaluation exposure is preserved
+separately. This changes incomplete-attempt accounting, not complete-run science.
+The final bounded re-review closes the P2; no material assigned finding remains.
+
+Checks used the scientific CPU venv and pytest-owned scratch. Analysis:17 passed
+in1.66s. Initial execution check:6 passed in5.40s; after the initial failure repair,
+7 passed in5.77s; after the pre-hook exception repair, only the three affected
+failure/CLI checks reran,3 passed/5 deselected in2.84s. Each scientific-package
+invocation reported14 dependency deprecation warnings. The last change affects
+failure accounting only, so unchanged completed-loop and analysis checks were
+reused. No production45-rollout trial or confirmation seed/world was used by tests.
+All real-path fixtures used disjoint8_994xxx/8_945xxx addresses, hidden16,
+2 lanes,20-step horizon and one update. Across the three execution-test invocations
+there were14 started miniature technical fits:10 complete and4 intentionally failed
+after one transition, plus2 unstarted initial-evaluation failures. Total successful
+technical exposure was404 training +1280 evaluation =1684 team interactions; the
+two initial-evaluation failures additionally recorded4 resets/2 policy calls and
+zero successful environment steps. These costs are separate from the six scientific
+fits. Arithmetic fixtures and read-only review add no environment interactions.
+
+The repository-wide admission source regression returned1 failed/1 passed in.15s:
+the failure names the pre-existing, unchanged FSD B12 entry lacking that AST call.
+The B15 entry itself passes the same source predicate and its admission ordering,
+exact SHA/cell/seed/tag checks were reviewed. This unrelated historical entry was
+not edited or executed. No blanket claim of a clean repository-wide suite is made.
+
+Accepted runner SHA256:
+`861ebd6362baa99eeea0a04fbce04195d189f7fb71e52eec294d2dbc399335f7`;
+analysis SHA256:
+`05ac2ba97edefb8c19ce6a3063526b79bc5895337c510e0ba93c2cef0a6f0a9e`.
+The final runner-test SHA256 is
+`66a2eb5529b226d324078e8b44dc4bec8c41a957c559631aa1af0e8878bdb76a`;
+analysis-test SHA256 is
+`27d6e84fa6a9f017471f7405eeac58b8f1e0670677e7fdd1a942ca07a21d67bb`.
+Source remains to be committed/pushed and freshly admitted on the actual node.
+At this acceptance boundary there are0 B15 scientific fits/panel exposures;
+next action is the fixed first cell b1_h6, not an additional performance pilot.
