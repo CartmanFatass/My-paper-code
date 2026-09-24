@@ -375,16 +375,26 @@ S−G 也反号。首块 G 的有用普通比较证据继续保留，但不提�
 [G2 完整原生结果与分量](candidates/uav_service_auxiliary/NOTES.md#2026-09-23--b03-second-block-g-accepted-and-fixed-common-replay-bound)；
 [首块三臂反面证据](candidates/uav_service_auxiliary/NOTES.md#2026-09-22--b03-g-complete-acceptance-and-fixed-common-endpoint-replay)。
 
-直接训练目标干预也需要按原目标读取完整用途。S7同初始化N/R的B04仅把真实返航成本的
-训练系数2改为4，评价仍为2；首轮物理事实匹配、两层真实存储奖励/GAE与学习更新不同。
-固定最终32世界的R−N原生J **+549.393528**，QoS **+.108482684**、成本 **−.129009370**，
-支持这个有限实例中服务和风险可同时改善。22个J有利世界之外仍有10个损失，最差−899.031058；
-R仍有12个负J和6个零服务世界。同一最终策略在开发8世界却J **−218.433452**、QoS更低、
-成本更高；三个已训练开发时点都未出现平均优势。较高平均最低电池也不保证返航约束成本
-更低，须保留位置/最差成员风险与低尾部。该面板反号不是额外训练变化，也未识别分布偏移
-或优化机制；一个训练对不能支持稳定系数排序。原生评价无充电/切断/耗尽事件，R训练的一次
-充电UAV-step不建立恢复能力。此结果保留直接风险学习的机会，不复活旧MSE辅助配方，
-也不证明原系数普遍不足。[完整比较、全部世界与成本](candidates/uav_service_auxiliary/NOTES.md#2026-09-23--b04-complete-native-final-gain-with-contrary-development-worlds)。
+直接训练目标干预也需要按原目标读取完整用途。S7同初始化N/R仅把真实返航成本的训练
+系数2改为4，评价仍为2；两训练区组均核验首轮物理事实匹配、真实存储奖励/两层GAE变化
+及实际参数更新。B04/B05在同一最终32世界的R−N原生J为 **+549.393528/+241.885454**，
+成本为 **−.129009370/−.094165509**；同终点开发8世界的J却分别 **−218.433452/−37.659662**。
+重复的最终净收益削弱“仅首个训练实例有用”的窄解释，重复的面板反号限制其用途；两个训练
+区组和已曝光世界不建立稳定系数排序、总体可靠性或可部署的世界选择器。
+
+服务与风险的共同改善没有重复：B04最终QoS差+.108482684，B05为 **−.026788931**；
+B05开发QoS也低.117039433，尽管其平均成本较低。B05最终仅14/32世界J改善，中位差
+**−99.441797**，18个损失中的最差−676.258092；少数较大改善仍使平均J为正。R有13个负J、
+**8个零服务世界**（N为14/1），且6个J有利世界仍为零服务。也有6个世界同时改善服务和成本，
+不能把所有收益都解释成放弃服务。B04的22胜10负、最差−899.031058及R的12负J/6零服务
+继续保留。原目标中的风险成本节省可以形成有限净用途，却不能代替服务后果或证明一般控制改善。
+
+两块最终平均最低电池提高，但逐世界损失仍在，且开发面板的电池与成本变化不一致；
+须分别读真实episode最低电池、位置相关返航成本与低尾部。原生评价均无充电/切断/耗尽，
+稀疏训练充电不建立恢复或灾难预防能力。保留这些有边界的直接风险学习机会，当前固定
+系数4配方不追加训练，不选第三对或确认；下一干预须有新的可检验理由，不能复活旧MSE
+辅助配方或以池化均值抹去反号。[B05完整配对、全部世界与成本](candidates/uav_service_auxiliary/NOTES.md#2026-09-23--b05-complete-endpoint-risk-savings-recur-service-gains-do-not)；
+[B04完整比较](candidates/uav_service_auxiliary/NOTES.md#2026-09-23--b04-complete-native-final-gain-with-contrary-development-worlds)。
 
 稀疏配对收益中的大量平局/小样本方差可能漏掉尾部，观察最大值不能替代预先有效的全局界。C07 LONG 的
 有限上界约束该固定程序，不等于零效应、NEAR 全局最优或全部长时域方法等价。基础认识本身不推出固定 seed
@@ -415,7 +425,7 @@ B/UCOPE 的局部预测、一步优势或真实后缀信用没有自动转成稳
 | --- | --- | --- | --- | --- |
 | `complementary_skill_learning` | 固定 N/k、完整高低层共同学习时，能否形成提高原生 UAV 服务的技能组合，并区别于普通曝光、通用辅助优化与共同适应？ | exploring | Codex DM (independent session) | 直接 DM task `01a0cdb8-10c9-7743-a05a-6dcfc42621c5`，host `local`（原生 `Jacob`），`gpt-6-astra` / `max`；checkout `/home/fires/.codex/worktrees/5916/hmasd-wsl`，branch `codex/complementary-skill-learning`。**B03两臂完整验收，原样G配方追加投入结束。** 新共同初始化、旧uniform世界及原标签流固定；主要G−D J −.010459129、服务−.1334375人/步，11正21负；质量28/32世界更低、高度罚26/32更高。own J −.002056386而服务+.562125，保留最差配对−7.566人。D/G各自初末J/服务在own和uniform均32/32改善；D/G学习不是G增量成功。旧B01 uniform +.019697695反转，不池化、不称稳定有害或等效；B01 P局部正T无净用途、B02删除奖励失败与task-only自身学习均保留。实际2fits/720k train/128k eval/108.606496 runner min，全部24文件、90更新、8面板与实际检查点通过。B03无待收实验或旧Pro，不追加第三G块/救援/确认。**B04 M已原生运行，U固定第二，1运行/0结果验收。** source483819eba经独立Reviewer、CPU和实际4070 CUDA检查；高层对象私有sampler与其余学习sampler已隔离并检查存取。M完整收取验收后才处理同源U，不按中期分数更换配方。[M原生准入](candidates/complementary_skill_learning/NOTES.md#2026-09-23--b04-m-natively-admitted-u-remains-the-fixed-second-arm)。 完整Pro同key核验、全文读取和原文保存；M学习高层，U独立均匀标签且0高层更新，两组低层/判别器/脱离主干的事实头照常学习。主比较共同uniform部署的M−U及各自初末学习，M own另读；六面板、2fits/720k train/96k eval，保留D2记录并隔离高采样/高更新/低动作随机流。仅支持整体训练制度差，不是纯梯度或必要性机制。[全部结果与判断](candidates/complementary_skill_learning/NOTES.md#2026-09-23--b03-complete-generic-auxiliary-advantage-reverses-under-fixed-uniform-evaluation)；[完整答复、采纳和固定协议](candidates/complementary_skill_learning/NOTES.md#2026-09-23--training-law-advice-accepted-prospective-b04-mu)；[退役B04实现计划](archive/2026-09-23/RESEARCH-complementary-skill-b04-m-started.md)。 |
 | `agent_count_generalization` | 固定 k、回合内固定 roster 时，HMASD 对未见团队数量 N 的服务能力和泛化代价是什么？ | exploring | Codex DM (independent session) | 直接 DM：task `01a0c6ef-cdd4-7113-b2d9-20487e35171b`，host `local`；checkout `/home/fires/.codex/worktrees/7fef/hmasd-wsl`，branch `codex/agent-count-generalization`。B13完整验收：0fits/128k eval，8面板/24文件和原生重算通过，四SET轨迹字节复现。H1/H2对较强S2的N8 J +.046008/+.068402、服务+3.648/4.779人/步；保留H1的7个N8不利J世界与H2的N6 −5.664人配对损失，不能认证技能机制或训练总体优势。新完整Pro已读并原文保存，固定B14新H6/.05与普通SET/.05两臂，均N6/360k、seed974201、共同外生训练世界；对称initial0/final45 N8→N6评价，2fits/720k train/128k eval；source88b67e5e0经六项针对性检查和独立审阅；H6已完整收取20文件/556MB并独立重算验收，N8/N6自身J与服务各32/32世界改善，平均服务+18.868/+19.566人/步；具资格未服务U均值却增加+.204/+.512。固定SET于23:28:03Z在同源准入运行，观察器已接管；当前2已启动fits、1完整验收，尚无SET结果或两臂差距结论。分开读终点差、各自学习增量和差距变化，保留架构初始化及全部反例；不自动追加seed/世界/训练。旧输出与Pro已收齐。[完整H6及反向分量](candidates/agent_count_generalization/NOTES.md#2026-09-23--b14-h6-complete-new-own-policy-learning-ordinary-comparison-pending)；[当前SET操作](candidates/agent_count_generalization/NOTES.md#2026-09-23--b14-fixed-set-arm-admitted-after-complete-h6-acceptance)。[完整方案及L0](candidates/agent_count_generalization/NOTES.md#2026-09-23--b13-advice-adopted-fixed-b14-fresh-h6set-learning-block-and-l0)；[完整B13](candidates/agent_count_generalization/NOTES.md#2026-09-23--b13-complete-remaining-package-gains-survive-stronger-ordinary-controls)。 |
-| `uav_service_auxiliary` | 在 S7 完整共同学习中，怎样把服务改善转成包含返航风险的净收益？ | exploring | Codex DM (independent session) | 直接 DM task `01a0c9af-d5cd-7d70-b5e8-9db2c598ad4e`，host `local`，`gpt-6-astra` / `max`；checkout `/home/fires/.codex/worktrees/d319/hmasd-wsl`，branch `codex/uav-service-predictive-control`。B04最终R−N J +549.393528与开发−218.433452的反号、全部负尾部及B03失败继续保留。完整咨询后固定B05仅一对新N/R，source3de3e3f71、seed914173、训练成本系数2/4、评价均2；2fits/360k train/192k eval上限。**N已完整验收**：46文件与远端hash一致、全部原始轨迹/两层GAE/检查点独立核验，1fit/180k train/96k eval、124.628160 runner min。最终32世界J **−232.025030**、QoS .216057847、成本 .180828987，14负J、1零QoS，最差J−1796.058763；开发30−0 J +149.725207、服务提高但成本+.035404663，晚期J仍回落。训练3充电UAV步、评价无充电/切断/耗尽，不能声称风险干预已兑现。固定R已在同一源/seed上原生准入运行，观察器已接管；1已验收/1运行，配对增量待完整R。保持两区组×两端点分别读取，不池化反号或自动追加。[N完整验收](candidates/uav_service_auxiliary/NOTES.md#2026-09-23--b05-n-fully-accepted-fixed-r-follows-unchanged)；[R原生运行](candidates/uav_service_auxiliary/NOTES.md#2026-09-23--b05-fixed-r-admitted-on-the-same-source)；[B05前瞻与分支](candidates/uav_service_auxiliary/NOTES.md#2026-09-23--b04-advice-adopted-b05-fixed-independent-training-recurrence)；[B04完整证据](candidates/uav_service_auxiliary/NOTES.md#2026-09-23--b04-complete-native-final-gain-with-contrary-development-worlds)。 |
+| `uav_service_auxiliary` | 在 S7 完整共同学习中，怎样把服务改善转成包含返航风险的净收益？ | exploring | Codex DM (independent session) | 直接 DM task `01a0c9af-d5cd-7d70-b5e8-9db2c598ad4e`，host `local`，`gpt-6-astra` / `max`；checkout `/home/fires/.codex/worktrees/d319/hmasd-wsl`，branch `codex/uav-service-predictive-control`。**B05 N/R均完整验收，无遗留运行**：同source3de3e3f71/seed914173，原始轨迹、实际奖励/两层GAE、优化器和检查点均已独立核验；2fits/360k train/192k eval、259.992391 runner min。最终R−N J **+241.885454**、成本−.094165509，但QoS−.026788931；14胜18负、中位−99.441797，R有8个零服务世界（N为1）。开发终点J **−37.659662**、QoS−.117039433；完整两区组重复最终正/开发负，却未重复B04服务改善。保留条件性风险用途与全部损失；当前固定系数4配方不追加、无第三对或确认。下一动作是对合法观察下的条件返航反馈与必要学习修订作聚焦Pro咨询，尚未选择新试验；B03负证据保留。[完整B05与判断](candidates/uav_service_auxiliary/NOTES.md#2026-09-23--b05-complete-endpoint-risk-savings-recur-service-gains-do-not)；[固定协议与分支](candidates/uav_service_auxiliary/NOTES.md#2026-09-23--b04-advice-adopted-b05-fixed-independent-training-recurrence)。 |
 | `goal_conditioned_entity_aggregation` | 当前技能条件化的实体聚合，能否比原始 MLP 或普通条件化池化提供有用的完整共同学习收益？ | reserve | Codex DM (independent session) | 原直接 DM task `01a0c7e4-e1aa-7460-a6bb-43db5c1b0898`，host `local`；原 checkout `/home/fires/.codex/worktrees/query-aggregation-sept22/hmasd-wsl` 已缺失，branch `codex/goal-conditioned-aggregation-20260922` 与原 lead 保留。固定 B01 O/P/E 的 3 fits 全部完成：每臂360k，共1.08M train/48k eval。Root 已从原节点取回并完整核对 E，三臂 J=.509137/.159861/.183016；P−O=−.349276、E−O=−.326121，均32/32世界不利；E−P=+.023155（20正/12负）。fit-body O/P/E=89.9204/109.7429/91.5859 min。每臂一个训练实例，结束这两个具体配方当前投入，不否定整个表示类；不新增第四条持续研究线。无运行中训练，原 DM 最终 notebook 补录仍待其承接，不声称已重载或交接。[P完整记录](candidates/goal_conditioned_entity_aggregation/NOTES.md#2026-09-22--b01-p-complete-and-read-e-remains-the-fixed-third-arm)、[E原生输出](../../runs/goal_conditioned_entity_aggregation/b01_e_s922611/summary.json)、[恢复事实与项目判断](archive/2026-09-23/RESEARCH-scientific-management-adopted.md#decision)。 |
 | `skill_teammate_drift_learning` | When teammates change, what must be learned or reused to improve decisions beyond competent simple controls? | reserve | Codex DM (independent session) | DM task `01a0bdb4-cd2c-71a3-af95-a196aeed70cd`，host `local`；checkout `/home/fires/.codex/worktrees/b-unknown-joint-law/hmasd-wsl`，branch `codex/b-unknown-joint-law`。旧径向一步表路线结束；B09/B10 局部正用途保留，B11 完整轨迹增量不一致；自身网络 refresh/burn-in 未识别真实队友行为漂移，后继方案已否决。没有排队实验、诊断或 Pro；需具体行为变化、受影响的未来估计和有区别的比较，才能选择下一步。reserve 不是无价值判决或外部等待。[最新判断及 B 分支 entry-mask 修复](https://github.com/CartmanFatass/My-paper-code/blob/74fe267aa166299d93a03566e5f0ab149ff2b12d/docs/research/candidates/skill_teammate_drift_learning/NOTES.md)；修复没有追溯应用于历史/FSD 结果。 |
 
@@ -465,7 +475,7 @@ Root 负责优先次序、跨方向认识与实际停滞，不额外占第四条
 | --- | --- | --- |
 | **DM1：泛化与训练条件** | B13在更强普通T6对照下仍有剩余包用途，下一观察应挑战有利旧终点的选择。 | **B14 H6完整验收，固定SET正在运行。** H6自身N8/N6平均J增加+.353294/+.370646，服务增加18.868/19.566人/步，各32/32世界同向；保留U在25/32及28/32世界上升。完整检查点、逐步原生事实和训练/评价隔离通过。source88b67e5e0的SET于23:28:03Z准入、观察器接管，当前2启动/1验收；下一观察是完整SET及两臂初末比较。[H6结果](candidates/agent_count_generalization/NOTES.md#2026-09-23--b14-h6-complete-new-own-policy-learning-ordinary-comparison-pending)及[SET操作](candidates/agent_count_generalization/NOTES.md#2026-09-23--b14-fixed-set-arm-admitted-after-complete-h6-acceptance)。完整Pro支持新N6 H6/.05对普通SET/.05，2fits/720k train/128k初末评价；固定新seed974201、共同外生世界与各自原生初始化，在原开发世界读initial0/final45。初始评价必须隔离训练环境/学习器/RNG；SET真实单类别协调器推理也计数。最终优势、各自学习与N6/局部代价分开，两臂依预案完成而非按首臂分数选择。混合N普通学习为竞争投入，未加入本块。[完整建议、采纳和协议](candidates/agent_count_generalization/NOTES.md#2026-09-23--b13-advice-adopted-fixed-b14-fresh-h6set-learning-block-and-l0)；[B13反例与判断](candidates/agent_count_generalization/NOTES.md#2026-09-23--b13-complete-remaining-package-gains-survive-stronger-ordinary-controls)；[退役B13计划](archive/2026-09-23/RESEARCH-agent-count-b13-complete.md)。 |
 | **DM2：有用技能与协作学习** | B03两臂真实学习但G增量反转；训练期分配怎样塑造可用技能库，仍不能由部署比较推断。 | **B03完整验收；B04 M原生运行，U为固定第二臂，1运行/0 B04结果验收。** source483819eba实现、独立审阅、CPU及实际4070 CUDA检查已接受；下一观察是完整M检查点、全部更新和四面板，再按原协议处理U。[准入与完整收取要求](candidates/complementary_skill_learning/NOTES.md#2026-09-23--b04-m-natively-admitted-u-remains-the-fixed-second-arm)。 uniform G−D J −.010459129（11正21负），own −.002056386，保留服务/质量/高度权衡与全部损失世界。原样G不再追加；完整Pro后采纳新M/U完整学习比较，M学习高层、U固定均匀标签且0高层更新，低层/判别器保留学习。主要比较共同uniform部署下的最终库用途和各自初末学习，M own作为后果；固定2fits/720k train/96k eval，不伪造U的learned-own。补充代数Gamma=M(final,own)−U(final,uniform)，不能替换失败的uniform主比较；承认U训练与该部署规则更对齐。新seed931区组、独立随机流及完整协议已写入notebook；不重复DM1整包比较。[完整B03](candidates/complementary_skill_learning/NOTES.md#2026-09-23--b03-complete-generic-auxiliary-advantage-reverses-under-fixed-uniform-evaluation)；[完整答复与固定B04](candidates/complementary_skill_learning/NOTES.md#2026-09-23--training-law-advice-accepted-prospective-b04-mu)。 |
-| **DM3：服务收益与风险控制** | B04最终世界的服务/J/成本共同改善与开发世界损失并存；下一判断是该有限学习干预能否在新训练实例中复现。 | **B05固定：2fits/360k train/192k eval上限/552k总交互。** N已完整收取并独立核验，最终J−232.025030、14/32负J；开发自身学习J+149.725207但成本上升，不能由单臂判定风险加权用途。N实测1fit/276k总交互、124.628160 runner min；R已按同一source3de3e3f71/seed914173原生准入，保持原系数和已曝光面板，等待完整配对。分别读B04/B05×开发/最终四格的原生J、服务、真实成本及全部损失世界；净收益消失/反转默认结束此固定配方继续训练，持续面板反号只支持窄范围观察，不选择第三对、默认系数或确认。[N验收与固定R](candidates/uav_service_auxiliary/NOTES.md#2026-09-23--b05-fixed-r-admitted-on-the-same-source)；[前瞻分支](candidates/uav_service_auxiliary/NOTES.md#2026-09-23--b04-advice-adopted-b05-fixed-independent-training-recurrence)；[退役N运行计划](archive/2026-09-23/RESEARCH-uav-service-b05-n-accepted.md)。 |
+| **DM3：服务收益与风险控制** | 两训练区组重复最终J/成本优势和开发J损失，B05未重复服务收益；下一判断转向怎样避免整体加权造成的服务损失。 | **B05完整结束：2fits/360k train/192k eval/552k总交互、259.992391 runner min。** 最终R−N J+241.885454而QoS−.026788931，14胜18负、8零服务；开发J−37.659662，风险成本下降仍不足以补偿服务损失。两区组×两端点分别保留，不池化或选择较早checkpoint。当前系数4配方不追加、无第三对或确认；下一动作是聚焦比较条件返航反馈、明确学习修订或有理由停止，未启动新实验。[完整结果及下一问题](candidates/uav_service_auxiliary/NOTES.md#2026-09-23--b05-complete-endpoint-risk-savings-recur-service-gains-do-not)；[退役配对运行计划](archive/2026-09-23/RESEARCH-uav-service-b05-complete.md)。 |
 
 **DM1 的关键读法。** B13的四个旧策略与世界均带开发选择暴露；共享四个绝对读数的2×2差值
 不是四次训练复现或H6×SET交互。N8原生J与实际服务的正均值有完整反例，N6平均、配对损失和
@@ -481,7 +491,7 @@ B11/B12/B13原生操作、完整收取及独立判读均结束。B12反号已保
 DM2 保留“实际互补技能学习 DM”（task `01a0cdb8-10c9-7743-a05a-6dcfc42621c5`，host `local`）；B01–B03原生工作均完整收取验收。B03固定world/label-stream的新区组反转G的uniform增量，两臂自身学习保留；原样G停止追加。完整训练制度咨询已核验和读取；B04 M/U协议与source483819eba已固定；实现审阅、CPU和实际4070 CUDA检查通过，M已原生准入运行，U待完整M收取验收后按同源执行。当前1运行/0 B04结果验收，观察器跟随同一原生操作。[当前运行](candidates/complementary_skill_learning/NOTES.md#2026-09-23--b04-m-natively-admitted-u-remains-the-fixed-second-arm)。[完整读数与下一选择](candidates/complementary_skill_learning/NOTES.md#2026-09-23--b03-complete-generic-auxiliary-advantage-reverses-under-fixed-uniform-evaluation)。
 DM3 复用“控制用途预测小模块 DM”（task `01a0c9af-d5cd-7d70-b5e8-9db2c598ad4e`，host `local`）；
 原路径 `/home/fires/.codex/worktrees/d319/hmasd-wsl` 已从其已发表分支 `fefc5ca8d` 恢复干净 checkout，
-B03/B04完整证据保留；DM3的B05 N已完整收取、独立核验和判读。固定R在同一源/seed上原生运行，观察器已接管；1完成验收/1运行，尚无完整N/R配对结论。[N验收及R原生操作](candidates/uav_service_auxiliary/NOTES.md#2026-09-23--b05-fixed-r-admitted-on-the-same-source)。
+B03/B04完整证据保留；B05 N/R均已完整收取、独立核验和判读，2完成验收/0运行。READY已消费并按原身份推进观察器，无遗留实验或旧Pro答复。最终J/成本正用途与多数配对损失、8零服务及开发反号一并保留；固定系数配方不追加，下一科学选择通过聚焦咨询处理，不退回owner逐项选题。[完整结果与后继问题](candidates/uav_service_auxiliary/NOTES.md#2026-09-23--b05-complete-endpoint-risk-savings-recur-service-gains-do-not)。
 首次投递因任务归档明确拒绝，解除归档后才成功接受；没有重复已接受消息或新建替代 DM。
 两名 DM 的任务已接续，仍须区分任务运行、prospective/实现完成和新 fit 准入。接续请求要求读取当前 main 的治理、
 完整项目建议及现行背景后自主实施、判读与发布，不要求回复 Root 或逐批取得 ACK。
@@ -492,7 +502,7 @@ B03/B04完整证据保留；DM3的B05 N已完整收取、独立核验和判读�
 
 ### 推进与投入选择
 
-- **并行准备，保护已接受的工作。** DM2 的B03新G/D区组已完整验收，原样G增量预测失败并结束追加；完整新Pro后固定B04 M/U训练制度比较，M已通过审阅/检查并原生运行，U为完整M收取验收后的同源第二臂；DM1 的B14 H6完整验收，自身服务学习与未服务U上升均保留，固定同源SET已原生运行，等待完整两臂判读；DM3 的B05 N已完整验收并保留服务—风险取舍，原先固定的R已原生准入运行，等待完整配对。
+- **并行准备，保护已接受的工作。** DM2 的B03新G/D区组已完整验收，原样G增量预测失败并结束追加；完整新Pro后固定B04 M/U训练制度比较，M已通过审阅/检查并原生运行，U为完整M收取验收后的同源第二臂；DM1 的B14 H6完整验收，自身服务学习与未服务U上升均保留，固定同源SET已原生运行，等待完整两臂判读；DM3 的B05完整配对已验收：最终平均J正、开发负重复，服务增益未重复且零服务世界增加；原固定系数配方不追加，准备聚焦下一可检验干预。
   原项目 Pro 覆盖的DM1/B11已执行；B12的反号分支已按完整旧咨询处理；B13咨询与比较均完成，后续B14设计咨询亦完整读取并采纳，不重发旧问题或增加owner选题环节。
   D/G/P 未完成本身不阻止独立准备；只有真实资源冲突或会改变选择的待得证据才构成等待理由。
 - **按结果改变判断。** DM1 的B12未兑现N8联合用途，已降低当前训练条件配方优先级，保留两块
@@ -506,7 +516,7 @@ B03/B04完整证据保留；DM3的B05 N已完整收取、独立核验和判读�
   总体、普通主对照和3–5个新独立训练种子。其他线继续必要探索，避免三线同时铺开昂贵确认；零结果和不确定也是结果。
 
 **计算安排。** 三个 DM 是研究责任并行，训练并发以实际节点内存/负载准入为准。优先 `wsl_4070`，
-保留已接受进程，不能重复启动。DM1的B11/B12/B13均完整验收；B12为2fits/720k train/64k eval（sum command181.734382min），B13为0fits/128k eval/3.072805command min；B14固定2fits/720k train/128k eval；H6完整验收实耗360k train/64k eval、70.229585 command min，固定SET已在4070同源运行，当前2已启动fits/1验收结果；DM3 的B04两fits已完整验收，360k train/192k eval、286.676430 runner min；B05固定2fits/360k train/192k eval，N已完整验收（180k train/96k eval、124.628160 runner min），R已在4070原生运行，当前1验收/1运行；
+保留已接受进程，不能重复启动。DM1的B11/B12/B13均完整验收；B12为2fits/720k train/64k eval（sum command181.734382min），B13为0fits/128k eval/3.072805command min；B14固定2fits/720k train/128k eval；H6完整验收实耗360k train/64k eval、70.229585 command min，固定SET已在4070同源运行，当前2已启动fits/1验收结果；DM3 的B04两fits已完整验收，360k train/192k eval、286.676430 runner min；B05两fits亦完整验收，360k train/192k eval/552k总交互、259.992391 runner min（N124.628160/R135.364231），观察性检查无新交互，当前0运行，无追加固定系数fit；
 技能的B01三fits和B02/B03各两fits均完整验收；B03为720k train/128k eval、108.606496 summed runner min，D/G为53.417284/55.189212min；B01–B03累计7完整fits/2.52M train/417280 eval、363.745819 runner min。B04 M/U仍固定2fits/720k train/96k eval；source483819eba的M已在4070原生准入，U为完整收取验收后的第二臂，当前1运行/0 B04结果验收。M实耗须由完整原始输出读取，准入与初始面板不作科学验收；[运行与收取要求](candidates/complementary_skill_learning/NOTES.md#2026-09-23--b04-m-natively-admitted-u-remains-the-fixed-second-arm)。不同 horizon 不等价，fit 数不是额度、硬上限或必须跑满的清单。
 B11与B12完整批次已有上述实测成本；计入实现、检查、必要审查、取回与完整阅读成本。
 
@@ -514,7 +524,7 @@ B11与B12完整批次已有上述实测成本；计入实现、检查、必要�
 [负载 B01](candidates/load_critical_member_generalization/NOTES.md#2026-09-23--b01-complete-useful-package-levels-mixed-capacity-response-route-closure)、
 [技能学习](candidates/complementary_skill_learning/NOTES.md)、
 [S7 B04完整风险干预](candidates/uav_service_auxiliary/NOTES.md#2026-09-23--b04-complete-native-final-gain-with-contrary-development-worlds)、
-[S7 B05 N完整验收与固定R运行](candidates/uav_service_auxiliary/NOTES.md#2026-09-23--b05-fixed-r-admitted-on-the-same-source)、
+[S7 B05完整风险收益、服务损失与下一选择](candidates/uav_service_auxiliary/NOTES.md#2026-09-23--b05-complete-endpoint-risk-savings-recur-service-gains-do-not)、
 [聚合 E 原始输出](../../runs/goal_conditioned_entity_aggregation/b01_e_s922611/summary.json)。
 [完整项目建议与 Root 采纳决定](archive/2026-09-23/RESEARCH-scientific-management-adopted.md#decision)
 保存了 Pro 的实质不同意见、S7 数值纠正、CLI 核对和当前方案的证据边界。
