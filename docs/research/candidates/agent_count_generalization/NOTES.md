@@ -18587,3 +18587,56 @@ derivations awaiting measured sampler yields, not reported execution. Equal fina
 still leave intermediate ordering, reward normalization, experience composition and gradients
 different. The implementation must report actual yields/sizes/tails/calls and reject a
 missing update rather than infer work from these expected totals.
+
+
+## 2026-09-24 — B18 implementation accepted for the fixed native paired batch
+
+
+The DM read the full candidate runner/CLI, the focused tests and each consequential repair,
+and accepts the implementation within the selected L0. The independent registered Reviewer
+returned no remaining material finding on the final executable bytes below. Source ownership
+returned from the Implementer before the DM's final one-field repair and regression. No shared
+learner, environment, control-plane code or frozen B03/B11/B15/B16/B17 runner was changed.
+This is engineering acceptance, not a B18 scientific result; no production fit has started.
+
+The initial code's mixed first-N check, admission-output collision and delayed initial-trace
+comparison were corrected before execution. Native initial UAV/user arrays now accompany
+state/observation arrays and are checked across stages/arms; common-N6 training reset worlds
+are checked from actual arrays. Partial collection/update/reset data and explicit per-N
+exposure are retained. The reviewer and DM caught repeated or misattributed optimizer counts
+on exceptional paths. The final collected-publication regression reproduced12reported calls
+where6occurred, then passed after carrying the current rollout's optimizer baseline into the
+collected record. These defects spent no scientific fits and did not alter the frozen program.
+
+Checks read and accepted:
+- Implementer final full suite:9passed/13.25s on runner6536e187; independent Reviewer same
+  suite9passed/13.09s and shared real entry-mask tests2passed/3.22s.
+- DM targeted second-rollout collected-publication failure:1failed/4.48s before the one-field
+  repair;1passed/4.39s after it (9unselected). Reviewer inspected the final fixture/correction
+  and confirmed final file hashes; the unchanged nine tests were not needlessly repeated.
+- The fixtures run real collect/store/GAE/recurrent PPO for F6→6 and M4→6→8→4, and preserve
+  parameters/optimizers/Adam/value normalization/private sampler/global RNG at boundaries.
+  They exercise exact initial native trajectories, N5/N7 evaluation, partial transition and
+  optimizer failures, later-rollout failure, post-update failure, and admission-before-import.
+- Scientific test interpreter `/home/fires/.venvs/hmasd-linux-cpu/bin/python`; reduced
+  20step/2lane/hidden16 fixtures, not production-scale performance or training evidence.
+  Expected Matplotlib/PyParsing deprecation warnings only. Pytest owned and cleaned its
+  temporary outputs. Earlier intermediate test passes are technical development cost and
+  are not new scientific replication or multiple fits. The DM removed one surplus EOF blank
+  line in the docstring-only __init__.py during final staged whitespace checking; its new
+  digest below replaces reviewed d259f092 without changing executable behavior.
+
+Final accepted file SHA256 identities:
+
+| File | SHA256 |
+| --- | --- |
+| `experiments/candidates/agent_count_generalization/ordinary_roster_training_b18/runner.py` | `893416e222e26f11b5bb206508e3eabb553ede49fd75706b9afa631d4962084a` |
+| `experiments/candidates/agent_count_generalization/ordinary_roster_training_b18/__init__.py` | `6e575d69fc128d32084d2ac67a6472566133b8384e341b4c04840363f5e87f7a` |
+| `scripts/run_agent_count_ordinary_roster_training_b18.py` | `159111b7c8a7cb7ed566ab948d48995eb098d305a9d5a749848f8ce85b9d4795` |
+| `tests/experiments/candidates/agent_count_generalization/ordinary_roster_training_b18/test_runner.py` | `35813ca442817f4b2e7b2a279d03b20802ffb1088bd47db92512539b65ff7817` |
+
+The next operation is the already selected single native admitted batch F→M, with exact
+committed/published inputs and no old checkpoints. Fresh actual-node memory/pause/lead/source
+checks remain launch admission; no new owner or Pro decision is required. Preserve the
+returned operation reference and arm detached observation. The planned two fits and all
+fixed N5/N7 signs, N6 costs, own-learning readings and no-extension rules remain unchanged.
