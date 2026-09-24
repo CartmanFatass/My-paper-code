@@ -7780,3 +7780,505 @@ for evidence reading and exact-generation rearming. A present live summary or su
 process exit will not be treated as scientific acceptance. The earlier Pro answer has already
 been read fully, saved verbatim and published with the prospective plan; no Pro operation is
 pending and no question was resent.
+
+
+## 2026-09-24 — B07 complete: native H3000 feedback restores energy with material service-loss worlds
+
+### Accepted execution, evidence and cost
+
+The fixed [B07 prospective design](#2026-09-23--h3000-advice-adopted-fixed-b07-native-long-task-of-comparison-and-l0)
+is complete at immutable source `47d56c9bcdc9fa9d6edee43ae0b4d44755115708`. The same admitted
+operation exited 0, with valid native exit witness and both recorded process identities absent.
+All eight panels are COMPLETE: 160 attempts, 480,000 actual team transitions and 3,840,000
+member steps; all 160 episodes reached native H3000 truncation, with no early ending, retry,
+replacement, extension or omitted world. New fits, optimizer updates and independent training
+replications are all zero. These are the two existing B04/B05 N policies, originally trained
+for 180,000 transitions each at H1500; their learning is historical, not newly replicated here.
+
+The DM collected all 16 files (750,519,657 bytes) and matched every SHA-256 against the terminal
+actual-node files. The runner's output_bytes is 750,519,107; the additional 550 bytes are the
+subsequent native process-exit witness. Summary SHA-256:
+`a33d88cd3c0c9309983a69dac92d373b4516843c3ed28c379468506a59085d36`.
+The runner used CUDA FP32, TF32 disabled and four Torch threads. Actual runner wall was
+13,832.5682585 seconds = 230.5428043 minutes; CPU user/system were 13,510.072504 / 334.839316
+seconds. Peak RSS was 2,058,460 KiB for the B07 runner process only. The 198.6-minute forecast
+was a workload estimate, not a scientific endpoint; the declared transition budget did not change.
+Collection and total authoring/support wall were not separately instrumented and remain unknown.
+
+Compact, unchanged runner-written JSON is retained in
+`runs/uav_service_auxiliary/b07_of_a01/` (summary, config, admission and terminal records).
+Bulk NPZ and logs remain outside Git, both in the authoring checkout at that relative path and
+at durable node `wsl_4070` / host `LAPTOP-U9TDKC8A`, root
+`/home/wu/hmasd-worktrees/usa-b07-47d56c9bc/runs/uav_service_auxiliary/b07_of_a01/`.
+The source is a manual worktree containing required outputs, not a disposable admission snapshot;
+it is retained. Neither copy may be removed without verified recovery elsewhere.
+
+The DM read the complete summary and separately recomputed raw metrics, all scalar world
+readings, service intervals, both halves and all twelve 250-step bins directly from the NPZ.
+The arithmetic reader imported no candidate summarizer or controller: 37,402 scalar/array checks,
+maximum scalar discrepancy 7.5634e-15; physical energy-closure error at most 5.5512e-17 in battery
+ratio. A further 1,592 aggregate/paired checks had discrepancy zero. Checks cover native
+pre/consume/input/clip closure, raw-versus-derived telemetry, unchanged action pass-through,
+fixed F hysteresis/commands, battery and mode continuity, actual native truncation and station
+capacity. The adapter's Python sum of eight shared rewards was respected; its raw reward and
+reward-info scalar can differ by floating-point summation roundoff. No recorded reward was edited.
+The raw arithmetic pass took 6.646 seconds locally and launched no environment or learner.
+
+All 80 within-H3000 O/F pre-intervention prefixes agree on the retained actor-action, legal
+margin/battery, position, skill, reward/metric and termination fields: 94,527 transition-prefix
+steps. No full-observation/state or hidden-state replay claim is added. The seven allowed H3000
+config differences and unchanged source artifacts were verified; runner checks preserve each
+original policy fingerprint, optimizer counters and normalizers. The code's RNG-preservation
+checks and prelaunch engineering evidence retain their actual scope. stderr contains only two
+known notices that discriminator buffers were absent in historical checkpoints and replaced by
+empty buffers; there are no new discriminator updates in this fixed-policy evaluation.
+
+The READY event was read and consumed using generation 95, wake
+`618e825f-aafb-4342-b505-2345aa88d93a`, event `603f33afe762c2542cea4cc3`, advancing the observer to
+96. No experiment remains running and this terminal observation was not used to relaunch it.
+
+### Native service and risk, four comparisons kept separate
+
+J is the full raw native episode sum. QoS is the actual-step mean; because every length is 3000,
+it also equals the prospectively fixed planned-window service. Throughput is delivered Mbps.
+No H1500 score is subtracted to interpret a causal extra-half gain. H3000 changes native time
+inputs and the PBRS terminal boundary from the outset, as recorded prospectively.
+
+| Block / panel | J O | J F | F−O J | QoS O | QoS F | F−O cumulative QoS | Throughput O → F Mbps | J/QoS loss worlds |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | --- | --- |
+| B04 / development8 | -2129.970807132 | 1057.256306166 | 3187.227113297 | 0.317626864173 | 0.362227358309 | 133.801482408 | 9.528805925 → 10.866820749 | 0 / 1 |
+| B04 / final32 | -2804.180424208 | 976.959893055 | 3781.140317263 | 0.268582607591 | 0.335449392683 | 200.600355277 | 8.057478228 → 10.063481780 | 0 / 5 |
+| B05 / development8 | -2529.868024214 | 1042.549140884 | 3572.417165097 | 0.281283443285 | 0.357407117400 | 228.371022346 | 8.438503299 → 10.722213522 | 0 / 0 |
+| B05 / final32 | -2656.450673687 | 968.141721500 | 3624.592395187 | 0.286178473198 | 0.334037886410 | 143.578239636 | 8.585354196 → 10.021136592 | 0 / 3 |
+
+All 80 J differences are positive, but this does not imply per-world service dominance. Final
+B04 J difference median/range is 3940.010906188 / [1427.792308197, 5571.410321644]; B05 is
+3343.831047703 / [2229.295455621, 5084.041092316]. Native return-cost savings dominate these J
+increments; the service increases and adverse worlds are reported independently.
+
+| Block / panel | Mean return cost O → F | Raw return cost O → F | Native cutoff/depletion events O → F | Zero-service episodes O → F |
+| --- | --- | --- | --- | --- |
+| B04 / development | 0.503784967504 → 0.000287429078 | 2.345591437187 → 0.000287429078 | 21/16 → 0/0 | 0 → 0 |
+| B04 / final | 0.589177151217 → 0.000244113302 | 2.767881689463 → 0.000244113302 | 119/92 → 0/0 | 1 → 0 |
+| B05 / development | 0.552902622780 → 0.000388535265 | 3.112513030275 → 0.000388535265 | 20/14 → 0/0 | 0 → 0 |
+| B05 / final | 0.573505430165 → 0.000965636774 | 3.002438339640 → 0.000965636774 | 115/90 → 0/0 | 1 → 1 |
+
+O has cutoff in 79/80 worlds and depletion in 77/80, totaling 275 and 212 native events; F has
+zero of both in these same finite comparisons. This is actual exposure to the event path,
+unlike B06's all-zero risk-event panels, but is still not a deployment-safety guarantee.
+B04 final's zero-service O world 938032 becomes nonzero; B05 final 938021 remains zero in O/F.
+
+The final service losses are substantial in some worlds. B04 has 938002, 938008, 938027,
+938029 and 938030; the last loses .194845486708 mean QoS (.271313588378 → .076468101670).
+F obtains service during steps 1024–1606 (apart from a two-step gap), then none from 1607
+through the end, despite charging beginning at 1946 and 204.166666667 Wh total input.
+O first serves at 1759 and continues thereafter. B05 loses service in 938027, 938028 and
+938029; 938028 loses .240545271713 (.273223182693 → .032677910980). Its F service occurs only
+at 2146–2324; the initial gap grows from 1298 to 2146 steps, and a 675-step right-censored
+final gap follows, despite 258.055555556 Wh charger input. These temporal facts do not identify
+waiting, native backhaul guards, recurrent history or training-distribution mismatch as the cause.
+B05 938021 charges 231.111111111 Wh but has no service anywhere. Energy replenishment is not
+sufficient for service restoration.
+
+Maximum service gaps never worsen in the B04 pairs. B05 has three worsened gaps: development
+937007, 686→694; final938009, 1496→1516; final938028, 1298→2146. These coexist with lower mean
+maximum gaps (final B04 −132.46875, B05 −39.53125 steps); no average erases them.
+
+### Physical energy and finite return-to-service sequences
+
+| Block / panel | Episode-minimum battery mean O → F | F P10 / worst minimum | Mean consumed Wh O → F | Mean charger input Wh O → F | Mean signed stored delta Wh O → F |
+| --- | --- | --- | --- | --- | --- |
+| B04 / development | 0.000000000 → 0.101548270 | 0.100293555 / 0.100231260 | 1067.067170743 → 1115.969421802 | 1.493055556 → 145.312500000 | -1052.969826032 → -970.656921802 |
+| B04 / final | 0.000600029 → 0.103588469 | 0.100688914 / 0.099904440 | 1065.875142477 → 1115.042446599 | 0.286458333 → 165.208333333 | -1044.605602348 → -949.834113265 |
+| B05 / development | 0.002266089 → 0.105803768 | 0.100157940 / 0.099766674 | 1066.453579952 → 1144.954835699 | 0.000000000 → 177.465277778 | -1051.690929078 → -967.489557921 |
+| B05 / final | 0.002220757 → 0.102438883 | 0.093748167 / 0.086567360 | 1063.325618304 → 1138.186810580 | 0.000000000 → 184.557291667 | -1041.296688018 → -953.629518913 |
+
+Every F world has actual charger input and positive physical stored-energy increments (609 of
+640 member-worlds receive input); O charges in only one B04 development world and one B04
+final world, and no B05 world. F consumes more native energy on average, not less. Its whole
+initial-to-final stored-energy change remains negative; it is neither energy-neutral over the
+whole episode nor evidence of indefinite sustainability. O's lower-bound clipping residual is
+retained in the raw ledger; native clipped-positive net charge is not substituted for signed
+physical stored change. F has no upper/lower clipping event. Minimum F battery falls below the
+.1 reserve in 0/1/1/7 worlds for B04 dev/final and B05 dev/final respectively, including the
+.086567360011 minimum in B05 final938028; zero cutoff does not certify a reserve invariant.
+
+Same-entity sequences were read from each recorded F-mode interval. All 1500 intervals with
+positive input have a preceding native arrival for that member. Of these, 998 exit F before
+H3000; every such interval has positive net stored gain from its first actual charger input
+until exit (range .230975 to 9.403811111 Wh across panels). 977 then have positive joint team
+QoS at or after exit, covering 78/80 worlds. The exceptions to this latter world condition are
+B04 final938030 and B05 final938021, described above. This sequence does not attribute joint
+service to the recharged member: member-level link/delivery ownership was not recorded.
+The other 502 input-bearing intervals remain unfinished at the horizon and are right-censored,
+not completed cycles or proof of an eventual failure/success.
+
+| Block / panel | F input-bearing intervals | Exit before horizon | Then positive joint service (intervals / worlds) | Unfinished at horizon | Longest F mode / max wait age |
+| --- | ---: | ---: | --- | ---: | --- |
+| B04 / development | 137 | 85 | 85 / 8 | 52 | 574 / 89 |
+| B04 / final | 594 | 384 | 369 / 31 | 210 | 855 / 86 |
+| B05 / development | 146 | 88 | 88 / 8 | 58 | 631 / 108 |
+| B05 / final | 623 | 441 | 435 / 31 | 182 | 942 / 110 |
+
+For example, B04 final938001 member0 arrives/receives input at step2211, distance17.182960966m:
+battery .137324280579→.138767874329 in that transition (+.230975Wh). It exits at2221 with
+battery .151760218079 and legal margin .050193510950; joint QoS at2221 is .391875. B05
+final938001 member0 similarly receives input at2311 (distance19.645607018m),
+.128196872687→.129640466437, exits2328 at battery .152737966437 / margin .050946719944,
+and joint QoS is .832275004207. These are illustrative readings from the complete counts,
+not selected experiments. Event indices are zero-based transitions.
+
+F reaches eight simultaneous return modes and station queue length seven; maximum wait ages
+are in the table. Admission starts/ends can alternate under native station scheduling and are
+not counted as independent complete recovery cycles. Physical nonmovement during many overrides
+includes actual docking/waiting; it is not automatically failed commanded motion. These are
+possible constraints on service, not an identified causal bottleneck or permission to tune stations.
+
+### Fixed temporal readout and all paired worlds
+
+Both halves have their full 1500 transitions in every episode. Each cell below is the average
+QoS O→F; development/final panels stay separate.
+
+| Panel | First 1500 | Second 1500 |
+| --- | --- | --- |
+| B04/development | 0.258409267273 → 0.260093954303 | 0.376844461073 → 0.464360762315 |
+| B04/final | 0.169671915946 → 0.196428948456 | 0.367493299235 → 0.474469836910 |
+| B05/development | 0.280840404659 → 0.284559815099 | 0.281726481911 → 0.430254419701 |
+| B05/final | 0.210788384556 → 0.218079056979 | 0.361568561841 → 0.449996715841 |
+
+The twelve fixed 250-step bins are descriptive, never substitute endpoints. Entries are QoS O→F.
+
+| Steps | B04 dev8 | B04 final32 | B05 dev8 | B05 final32 |
+| --- | --- | --- | --- | --- |
+| 0–249 | 0.133856811→0.133856811 | 0.076170792→0.076170792 | 0.164157537→0.164157537 | 0.089311458→0.089311458 |
+| 250–499 | 0.186786732→0.186786732 | 0.110360411→0.110360411 | 0.228993776→0.228993776 | 0.161268038→0.161268038 |
+| 500–749 | 0.269378776→0.269378776 | 0.162968435→0.163874815 | 0.297802384→0.296418667 | 0.208468075→0.208168075 |
+| 750–999 | 0.301018526→0.301018526 | 0.195392668→0.211775096 | 0.333043781→0.330529811 | 0.254293737→0.257331363 |
+| 1000–1249 | 0.315877244→0.315990384 | 0.221959823→0.278321381 | 0.330837619→0.330242746 | 0.265325710→0.288310793 |
+| 1250–1499 | 0.343537515→0.353532497 | 0.251179365→0.338071196 | 0.330207331→0.357016354 | 0.286063289→0.304084614 |
+| 1500–1749 | 0.382982153→0.398149092 | 0.298737469→0.384267431 | 0.333674282→0.383313644 | 0.345776847→0.342653086 |
+| 1750–1999 | 0.366406849→0.439904145 | 0.362863680→0.449324665 | 0.339791617→0.394150245 | 0.398876028→0.427850543 |
+| 2000–2249 | 0.375579373→0.480107493 | 0.388558789→0.511145145 | 0.308223385→0.471624898 | 0.418288223→0.487700254 |
+| 2250–2499 | 0.399850321→0.492981868 | 0.387851084→0.526279151 | 0.276928437→0.463879634 | 0.384557506→0.506402709 |
+| 2500–2749 | 0.384506384→0.492160997 | 0.403847731→0.511664099 | 0.230368287→0.412953091 | 0.337990578→0.476714071 |
+| 2750–2999 | 0.351741687→0.482860979 | 0.363101043→0.464138530 | 0.201372884→0.455605006 | 0.283922190→0.458659632 |
+
+All pair differences below retain the original panel/world ordering. ΔQoS is the mean ratio,
+not percentage points. Absolute per-world levels, energy, intervals, halves and bins are in the
+unchanged runner summary and verified raw artifacts.
+
+| Block/panel | World | ΔJ F−O | ΔQoS F−O | Minimum battery O→F | F charger input Wh | Maximum service gap O→F |
+| --- | ---: | ---: | ---: | --- | ---: | --- |
+| B04/development | 937001 | 2514.189345798 | 0.003104141260 | 0.000000000→0.101669743 | 105.833333333 | 0→0 |
+| B04/development | 937002 | 4225.342893795 | 0.138678714884 | 0.000000000→0.101132285 | 130.277777778 | 67→67 |
+| B04/development | 937003 | 2175.063753706 | -0.021027703925 | 0.000000000→0.100320253 | 167.777777778 | 0→0 |
+| B04/development | 937004 | 3619.065444431 | 0.067654435326 | 0.000000000→0.101507184 | 201.944444444 | 0→0 |
+| B04/development | 937005 | 2149.919451777 | 0.042508807436 | 0.000000000→0.105342596 | 119.166666667 | 418→418 |
+| B04/development | 937006 | 3224.193519887 | 0.034767974406 | 0.000000000→0.100930282 | 135.555555556 | 0→0 |
+| B04/development | 937007 | 4041.284082925 | 0.066365667059 | 0.000000000→0.100231260 | 148.888888889 | 390→390 |
+| B04/development | 937008 | 3548.758414059 | 0.024751916643 | 0.000000000→0.101252559 | 153.055555556 | 0→0 |
+| B04/final | 938001 | 4397.948116378 | 0.035783909887 | 0.000000000→0.101491546 | 119.444444444 | 0→0 |
+| B04/final | 938002 | 2149.047109928 | -0.010449239348 | 0.000000000→0.100856500 | 133.611111111 | 0→0 |
+| B04/final | 938003 | 4262.407172106 | 0.188306466139 | 0.000000000→0.101445456 | 226.666666667 | 631→0 |
+| B04/final | 938004 | 3889.324785069 | 0.094536343663 | 0.000000000→0.103844302 | 181.388888889 | 699→699 |
+| B04/final | 938005 | 4792.089847493 | 0.072788203171 | 0.000000000→0.101063027 | 133.888888889 | 595→595 |
+| B04/final | 938006 | 4112.797386889 | 0.097833986511 | 0.000000000→0.101465335 | 168.611111111 | 216→216 |
+| B04/final | 938007 | 3920.329694179 | 0.046073916359 | 0.000000000→0.103216212 | 118.611111111 | 337→337 |
+| B04/final | 938008 | 4119.662129248 | -0.006533184586 | 0.000000000→0.100996964 | 170.000000000 | 534→534 |
+| B04/final | 938009 | 4315.837881304 | 0.079042901374 | 0.000000000→0.107527541 | 134.444444444 | 628→628 |
+| B04/final | 938010 | 2372.198756027 | 0.037758264305 | 0.000000000→0.099904440 | 163.888888889 | 0→0 |
+| B04/final | 938011 | 3248.476403404 | 0.110835559065 | 0.000000000→0.101219465 | 191.944444444 | 1532→1170 |
+| B04/final | 938012 | 3407.598994353 | 0.034609160582 | 0.000000000→0.103514471 | 147.222222222 | 0→0 |
+| B04/final | 938013 | 2876.994663024 | 0.009061089415 | 0.000000000→0.109943930 | 172.222222222 | 0→0 |
+| B04/final | 938014 | 3535.272147806 | 0.051688362056 | 0.000000000→0.105216261 | 177.777777778 | 438→438 |
+| B04/final | 938015 | 5137.903227035 | 0.185610372131 | 0.000000000→0.100811629 | 188.888888889 | 397→397 |
+| B04/final | 938016 | 4282.829947477 | 0.053045144408 | 0.000000000→0.113423329 | 207.222222222 | 122→122 |
+| B04/final | 938017 | 3298.788091472 | 0.022671678033 | 0.000000000→0.100615758 | 189.444444444 | 1159→1159 |
+| B04/final | 938018 | 4789.272060671 | 0.145435185040 | 0.000000000→0.100676491 | 200.555555556 | 1528→1157 |
+| B04/final | 938019 | 3468.586137774 | 0.049056324071 | 0.000000000→0.112016520 | 122.777777778 | 285→285 |
+| B04/final | 938020 | 4638.782489814 | 0.182652928573 | 0.000000000→0.100800722 | 167.500000000 | 0→0 |
+| B04/final | 938021 | 2684.774746572 | 0.024422652983 | 0.000000000→0.103361803 | 125.277777778 | 1018→1018 |
+| B04/final | 938022 | 2681.912897304 | 0.022412161793 | 0.000000000→0.107289899 | 158.333333333 | 0→0 |
+| B04/final | 938023 | 4819.947259499 | 0.067207471655 | 0.000000000→0.101361340 | 126.666666667 | 552→552 |
+| B04/final | 938024 | 4067.859279228 | 0.052890361977 | 0.000000000→0.103433681 | 224.444444444 | 0→0 |
+| B04/final | 938025 | 4311.112998140 | 0.044354511133 | 0.000000000→0.107492731 | 158.888888889 | 1259→1139 |
+| B04/final | 938026 | 3349.955109420 | 0.045950844321 | 0.000000000→0.100997113 | 161.666666667 | 220→0 |
+| B04/final | 938027 | 2511.038331307 | -0.004894553282 | 0.000000000→0.107738082 | 138.333333333 | 327→327 |
+| B04/final | 938028 | 5399.706183559 | 0.238501626935 | 0.000000000→0.101405889 | 272.500000000 | 566→566 |
+| B04/final | 938029 | 1427.792308197 | -0.011859605173 | 0.019200935→0.100262135 | 67.500000000 | 0→0 |
+| B04/final | 938030 | 3959.692118197 | -0.194845486708 | 0.000000000→0.100979710 | 204.166666667 | 1759→1393 |
+| B04/final | 938031 | 3195.141557899 | 0.035309432692 | 0.000000000→0.105868414 | 137.777777778 | 0→0 |
+| B04/final | 938032 | 5571.410321644 | 0.340480333781 | 0.000000000→0.104590314 | 195.000000000 | 3000→831 |
+| B05/development | 937001 | 2853.361972631 | 0.041693980600 | 0.000000000→0.100920165 | 142.777777778 | 0→0 |
+| B05/development | 937002 | 4090.882573513 | 0.131706587840 | 0.000000000→0.101358649 | 163.888888889 | 114→0 |
+| B05/development | 937003 | 3514.959094743 | 0.068658133071 | 0.000000000→0.109042620 | 194.444444444 | 0→0 |
+| B05/development | 937004 | 3936.311390022 | 0.068105822885 | 0.000000000→0.100325626 | 151.388888889 | 0→0 |
+| B05/development | 937005 | 2024.943257258 | 0.061471498648 | 0.018128715→0.114685717 | 112.222222222 | 511→157 |
+| B05/development | 937006 | 3310.968958601 | 0.072235982516 | 0.000000000→0.112823893 | 227.777777778 | 317→0 |
+| B05/development | 937007 | 4812.503758953 | 0.114178064900 | 0.000000000→0.099766674 | 245.833333333 | 686→694 |
+| B05/development | 937008 | 4035.406315060 | 0.050939322464 | 0.000000000→0.107506802 | 181.388888889 | 0→0 |
+| B05/final | 938001 | 4105.314418307 | 0.130089714942 | 0.000000000→0.110409424 | 166.388888889 | 0→0 |
+| B05/final | 938002 | 2841.654117882 | 0.021580543305 | 0.000000000→0.112678065 | 168.055555556 | 0→0 |
+| B05/final | 938003 | 3852.501615745 | 0.053706204925 | 0.000000000→0.103596672 | 195.833333333 | 99→0 |
+| B05/final | 938004 | 4609.495887672 | 0.123809513454 | 0.000000000→0.099553910 | 270.833333333 | 736→725 |
+| B05/final | 938005 | 5084.041092316 | 0.070227979952 | 0.000000000→0.101118499 | 172.777777778 | 1393→939 |
+| B05/final | 938006 | 4305.460315152 | 0.056361809626 | 0.000000000→0.101036808 | 250.000000000 | 665→665 |
+| B05/final | 938007 | 4283.483540891 | 0.134534571502 | 0.000000000→0.093219679 | 230.000000000 | 888→888 |
+| B05/final | 938008 | 4990.387267399 | 0.065289775838 | 0.000000000→0.100470052 | 193.888888889 | 846→576 |
+| B05/final | 938009 | 4954.754052138 | 0.106675153140 | 0.000000000→0.094275193 | 203.055555556 | 1496→1516 |
+| B05/final | 938010 | 3071.134081153 | 0.038125384593 | 0.000000000→0.103074406 | 155.555555556 | 0→0 |
+| B05/final | 938011 | 2767.656744299 | 0.081447264398 | 0.000000000→0.105574006 | 156.666666667 | 313→313 |
+| B05/final | 938012 | 3291.514166880 | 0.013533839732 | 0.000000000→0.101283302 | 142.777777778 | 0→0 |
+| B05/final | 938013 | 3107.789971628 | 0.061579268944 | 0.000000000→0.110211854 | 172.500000000 | 0→0 |
+| B05/final | 938014 | 3161.807211789 | 0.090411461067 | 0.000000000→0.110881718 | 176.944444444 | 697→190 |
+| B05/final | 938015 | 4707.103333057 | 0.029852226320 | 0.000000000→0.101267165 | 302.777777778 | 1276→1247 |
+| B05/final | 938016 | 3282.906708763 | 0.022869005018 | 0.000000000→0.111442548 | 164.722222222 | 35→35 |
+| B05/final | 938017 | 3076.697720959 | 0.085351220541 | 0.000000000→0.101041105 | 207.222222222 | 384→384 |
+| B05/final | 938018 | 3102.003082151 | 0.087890837931 | 0.000000000→0.100814686 | 179.722222222 | 320→320 |
+| B05/final | 938019 | 3958.384688470 | 0.047366154327 | 0.000000000→0.106886777 | 170.277777778 | 1524→1130 |
+| B05/final | 938020 | 2938.355036437 | 0.097632564148 | 0.000000000→0.103977152 | 181.944444444 | 0→0 |
+| B05/final | 938021 | 4324.216875944 | 0.000000000000 | 0.000000000→0.093689609 | 231.111111111 | 3000→3000 |
+| B05/final | 938022 | 2229.295455621 | 0.009932113183 | 0.000000000→0.115686212 | 161.944444444 | 36→0 |
+| B05/final | 938023 | 4779.234803157 | 0.063958485664 | 0.000000000→0.102706773 | 157.222222222 | 1438→1139 |
+| B05/final | 938024 | 4004.292682995 | 0.099495696847 | 0.000000000→0.109565247 | 232.222222222 | 34→0 |
+| B05/final | 938025 | 2709.366697536 | 0.008741459234 | 0.000000000→0.101359669 | 117.777777778 | 760→760 |
+| B05/final | 938026 | 3142.841923288 | 0.007143445755 | 0.000000000→0.105801739 | 208.888888889 | 0→0 |
+| B05/final | 938027 | 2526.866504298 | -0.066240828148 | 0.000000000→0.102545360 | 122.500000000 | 245→245 |
+| B05/final | 938028 | 3974.923728919 | -0.240545271713 | 0.000000000→0.086567360 | 258.055555556 | 1298→2146 |
+| B05/final | 938029 | 2376.838469522 | -0.011741694082 | 0.071064212→0.086827046 | 67.500000000 | 0→0 |
+| B05/final | 938030 | 3396.147928526 | 0.107472107888 | 0.000000000→0.097898949 | 152.222222222 | 394→394 |
+| B05/final | 938031 | 3034.299897130 | 0.045823580286 | 0.000000000→0.101525538 | 129.166666667 | 0→0 |
+| B05/final | 938032 | 3996.186625948 | 0.089127634170 | 0.000000000→0.101057738 | 205.277777778 | 91→91 |
+
+### Judgment changed and next useful decision
+
+Retain this package's **finite H3000 mean usefulness on these two retained policies and exposed
+worlds**, under the outcome branch already covered by the complete B06 Pro advice. The native
+risk path now activates in O, while F combines mean service improvement, lower return cost,
+actual stored-energy replenishment and later joint service in most worlds. This strengthens the
+physical-energy part beyond B06's geometric-only H1500 observation. It weakens the explanation
+that the useful feedback effect must disappear once native batteries become depleted. It does
+not establish per-world service preservation: the large, persistent losses above rule out that
+stronger use claim. No whole-run energy neutrality, sustained infinite operation, new learning
+advantage, learned-auxiliary mechanism, causal component attribution or general safety is claimed.
+
+The inherited [current shared background, topic 6 and service/risk discussion](https://github.com/CartmanFatass/My-paper-code/blob/63e382485f2a37cccd378436212b911b0fb4d2ae/docs/research/RESEARCH.md)
+makes the simpler comparator do work: B03 auxiliary benefit failed to recur, B04/B05 risk
+reweighting traded away service, and F now supplies a competent ordinary execution baseline
+through actual charging. A predictive head is still not justified by its availability. The new
+observation is a narrower unresolved link: arrival and stored-energy recovery can coexist with
+persistent loss of joint service. Current telemetry cannot decide whether the binding limitation
+is state/history exposure of a frozen H1500-trained actor, network geometry/native wrapper effects,
+station competition, or ordinary training variability. These are hypotheses, not equally endorsed
+rescue explanations. The severe gaps start before or survive charging, so a charging-only story
+is insufficient. Other directions' generic-auxiliary and learned-high reversal evidence reinforces
+the need for an ordinary matched learning comparison; it does not establish this specific cause.
+
+The strongest alternative is to retain F as a bounded reference and spend no more fits. I choose
+one focused Pro consultation on whether a matched **feedback-aware training** comparison is now
+worthwhile before any new predictor or control tuning. The prospective candidate is ordinary
+HMASD trained with exactly this F in the environment/action path; the comparator gets the same
+H3000 training opportunity and is also deployed with F. This tests adaptation of the learned
+service policy to the actual intervention-conditioned history, not whether new weights beat old
+weights or a new learner beats unprotected O. The conjecture predicts changed service-bearing
+behavior under F and a native cumulative-service increment, not merely fewer margin penalties or
+lower MSE. It remains unproven, and this question may rationally reject the expenditure. No new
+fit, horizon, threshold, station coordinator, extra panel or confirmation batch is selected here.
+This ends the fixed B07 attempt, not by itself the broader direction's scientific responsibility.
+
+### Retained file identities
+
+All paths below are relative to the two durable run roots stated above; every file was verified.
+
+| File | Bytes | SHA-256 |
+| --- | ---: | --- |
+| `B04/trajectories/development_F.npz` | 36335319 | `0efd278acffbc38dbe118ba6502010901b6cdac3899812923135fc06e5639a1d` |
+| `B04/trajectories/development_O.npz` | 38002649 | `9bbd417372146a56f9953a4c2bf8ee79b3565bf250488ade3d6df3c1bc60d922` |
+| `B04/trajectories/final_F.npz` | 145899689 | `ce9bfa110398590bffc412aac435e0eb9ba16c977775fd1c4dfa6948e6d7d009` |
+| `B04/trajectories/final_O.npz` | 153874665 | `db9a60d4f338c11276cd1897cfec40b536cacb4be9af95aa5d8db28d723235cb` |
+| `B05/trajectories/development_F.npz` | 36419023 | `44b905e120ffd779f268194be1dab25b792b0090d6baf0114914db3f9092924b` |
+| `B05/trajectories/development_O.npz` | 37490880 | `2c3d483e7bd8329a27b7e0bbb3a3c97cbf8990ae352e06930a731deeecab6e02` |
+| `B05/trajectories/final_F.npz` | 147414370 | `94e82b4a3b2b7261b3ed79691d14f6fc066c42c6c0c8b7aa7576c77b4235500b` |
+| `B05/trajectories/final_O.npz` | 152958693 | `540c9b2c1b5ddf582b8f1dd1d1edd930c849b00154115e1413a82458ceed689b` |
+| `admission-preflight.json` | 765 | `6cddd4488cbab27594b688128afb6222e5f829c5792848b732088ddef33afe75` |
+| `config.json` | 60778 | `b6b420fb9acc8c608b794e8ed403aa5db624152eea3e774911644a609ebe0ef8` |
+| `launch-manifest.json` | 4363 | `92d98535aaf2c6b31b9ca700cf578d480a42b465f84ff23a5363ad7bb1657edf` |
+| `launch-status.json` | 614 | `de1b04427430238a9c710c2d8d2d81e2c687bddcde2095082c04e8cec5c80527` |
+| `process-exit.json` | 550 | `a90fb4bd4adf98f988e25ce59666e3022fc55f3755a5319481c55ec593789012` |
+| `stderr.log` | 156 | `c296e315064bfab04d5e2a2247193534c3cfa0c68bac96afe848524cbb5ce7b3` |
+| `stdout.log` | 0 | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` |
+| `summary.json` | 2057143 | `a33d88cd3c0c9309983a69dac92d373b4516843c3ed28c379468506a59085d36` |
+
+## Pro question 2026-09-24 feedback-aware-training-after-h3000
+
+Conversation: same direction Jev conversation; its private URL remains only in local operation state.
+
+Question: Does the new B07 evidence justify a small matched experiment in which ordinary
+HMASD is trained with the unchanged feedback F that it will face at deployment, compared with
+equally trained ordinary HMASD deployed with that same F? Or is retaining the bounded frozen
+F reference, with no further fits, the better current investment? Critique the proposed
+comparison and its discriminating prediction; this is a new hypothesis/key-comparator decision
+under constitution §5, not a request to approve B07 or repeat its already covered interpretation.
+
+### Standing and what materially changed
+
+The complete prior answer under `Pro question 2026-09-23 b06-feedback-use-and-next-investment`
+already covered the fixed H3000 O/F investigation and its finite-use interpretation. It was
+read in full and saved verbatim after verifying that GitHub delivery had failed. That question
+must not be resent. B07 is now complete, with no extension: two old N policies, each originally
+trained for 180k transitions at H1500; S7-S2, N8, k10, 30 users; each evaluated with O and the
+same F at native H3000 on all old development8/final32 worlds. These are exposed worlds and
+two retained training artifacts, not new independent learning replications. Native H3000
+changes time-normalized inputs and terminal PBRS from the outset; it is not an H1500 rollout
+continued after its former terminal boundary.
+
+The preceding `B07 complete: native H3000 feedback restores energy with material service-loss
+worlds` entry contains the complete result, all 80 paired worlds, fixed time bins, adverse
+service intervals, energy sequences, costs and recoverable raw identities. Briefly:
+
+- Final B04 F−O is +3781.140317 native J and +.066866785 mean QoS; B05 is +3624.592395 J
+  and +.047859413 QoS. Both development panels also improve in mean service/J. All 80 paired
+  J differences are positive, largely through native return-cost savings. Final service loss
+  worlds number 5/32 and 3/32; development losses are 1/8 and 0/8. Do not substitute J for service.
+- O now has 275 native cutoff and 212 depletion events; F has zero. F has actual charger
+  input and positive stored-energy increments in every world. In 78/80 worlds, a member has
+  native arrival/input, positive net stored gain through exit from F, then later positive
+  joint service. This does not assign that joint service to the recharged member. Of 1500
+  input-bearing mode intervals, 502 are unfinished at H3000 and remain right-censored.
+- Physical recovery is insufficient for service: B04 final938030 loses .194845487 mean QoS
+  and has no service from step1607 through2999 despite input beginning at1946. B05 final938028
+  loses .240545272 QoS; service exists only during2146–2324, despite258.055556Wh input.
+  B05 final938021 charges231.111111Wh and serves nobody in O or F. These are important adverse
+  facts, not worlds to remove or a diagnosis of a particular bottleneck.
+- All160 episodes end by native truncation at3000. F consumes more energy on average, has
+  negative full-episode stored-energy change, and sometimes crosses the .1 reserve (worst
+  .086567360). The finite absence of cutoff/depletion is not an invariant or indefinite viability.
+- The complete 480k-transition comparison cost 0fits and230.542804 runner minutes. Raw physical
+  and service arithmetic was independently recomputed from all NPZ files without importing the
+  candidate summarizer/controller; retained pre-intervention fields agree in all80 O/F pairs.
+  Full observation/state/GRU arrays and member-owned delivered service were not saved. The
+  summary is derived evidence; full trajectory arrays are retained off Git at the recorded
+  locations and hashes, and are not presumed accessible to you through GitHub.
+
+Earlier B03 auxiliary gains failed to recur; B04/B05 stronger risk-weight training traded
+service, and B06's simple feedback improved means without actual charging. B07 strengthens
+finite ordinary feedback as the competent reference and the reality of energy recovery, while
+its service tails defeat a stronger preservation claim. It does not identify a predictive
+head, recurrent memory, station coordination or representation bottleneck. In the inherited
+shared topic6, this keeps native service/risk and a competent matched ordinary comparator
+ahead of proxy MSE or architecture. Other directions' generic-auxiliary/learned-high reversals
+make that comparison more useful; their different hosts do not prove a cause here.
+
+### Conjecture, strongest alternatives and proposed discriminator
+
+The narrow conjecture is that training on histories induced by the unchanged F can teach the
+ordinary service policy to make better use of the actual deployment process. A policy trained
+at H1500 without F need not know how to resume useful joint service after F has altered the
+team's positions, energy and history. That is an untested explanation, not a conclusion from
+charging plus a service gap. Native backhaul/geometry constraints, station competition, the
+ordinary policy/optimization budget or training variability could instead bind performance.
+The strongest expenditure alternative is to keep the useful finite F reference and stop
+investing in this repair. A cheaper observation is preferable if it would actually distinguish
+the live hypotheses; neither exhaustive diagnosis nor proof of a mechanism is a prerequisite.
+
+The proposed exploratory comparison, open to rejection or revision before selection, is:
+
+| Arm | Training | Fixed endpoint evaluation |
+| --- | --- | --- |
+| Feedback-aware ordinary HMASD | Complete ordinary joint learning, unchanged F between actor proposal and native environment | Same unchanged F |
+| Matched ordinary HMASD | Same complete learner, initialization, legal information, training horizon and update opportunity, without F during training | Same unchanged F |
+
+Both would train **from the same fresh initialization**, at native H3000 and180k actual
+training transitions each, with the same S7-S2/N8/k10 host, physical constants, full high/low/
+discriminator updates and declared training exposure. The historical N objective is native
+lambda_return=2 with **zero extra training-cost coefficient**; it is not lambda_return=0.
+Use that common objective here, not the abandoned coefficient4 repair. Both get H3000 training
+opportunity, so the primary comparison does not confound F-conditioned training with a longer
+episode than the new baseline. No auxiliary head, new actor input, F threshold, station rule,
+reset at1500, checkpoint selection or extra tuning is included. Fresh equal-budget ordinary
+learning plus F is the comparator; the two old N policies are descriptive context only.
+
+The intervention changes the actual training state/action consequences. Actor-proposed actions
+must remain coupled to their sampled log-probabilities in storage and updates; forced F commands
+cannot be recorded as if the actor sampled them. The controller mode is common deployment
+state for both arms, not a new privileged actor feature. Whether ignored proposal dimensions
+or the full learning/reward path creates an important credit/variance issue is part of the
+scientific and engineering criticism, not a reason to assume a masked loss or new estimator
+silently. Exact storage semantics would be checked in the later L0/implementation if selected.
+
+The predicted intermediate change is more useful service-bearing behavior in the actual
+F-conditioned process (with explicit opportunities/denominators and censored gaps), rather than
+merely greater weight movement, smaller entropy/MSE or more charging. The practical prediction
+is higher native cumulative QoS/throughput against the fresh ordinary+F comparator, read with
+raw J, zero-service worlds, battery/risk and all adverse worlds. A result driven only by lower
+return penalties or more energy input would not support the proposed service repair. Useful
+endpoint learning relative to the common initialization must also be shown. A positive single
+training pair would remain exploratory and would not isolate the hypothesized history mechanism.
+
+Please test whether this intermediate prediction and the one-pair contrast are informative
+enough at the proposed exposure. Recommend a more useful bounded discriminator, or no new
+experiment, if warranted. Do not expand this into a compulsory grid of controls or interpret
+the old final worlds as a fresh confirmatory population. Exact new training/world seeds and
+the readout would be prospectively fixed after the DM's decision; no new fit or panel is yet selected.
+
+### Context and prospective cost
+
+`source_sha` means the full immutable question commit supplied in the send message. The
+explicit current governance/method revision is
+`63e382485f2a37cccd378436212b911b0fb4d2ae`, published main when this question was authored.
+
+- Current governance, at that explicit revision: `docs/project/OPERATING_CONSTITUTION.md`
+  §§1–5,7–8; `docs/research/RESEARCH.md` owner pause and uav_service_auxiliary row. Owner pause
+  is lifted; three independent DMs continue under the delegated scientific scope. This task
+  owns only this direction. Advice grants no authority and creates no approval stage.
+- Current methods, at that revision: `.agents/skills/hmasd-scientific-tools/SKILL.md`,
+  `Explore an idea`, `Update the working explanation`, `Use and revise shared understanding`,
+  `Comparators and MARL information`, `Statistics`, `Cost and exposure`, `Pro`;
+  `.agents/skills/hmasd-research-engineering/SKILL.md`, `Carried-over engineering standards`
+  and `Checks and review`, only for relevant storage/learning and resource semantics.
+- Shared background, same revision: `docs/research/RESEARCH.md` topic6's B03/B04/B05/B06
+  discussion, plus the current-plan service/risk paragraph. These are inherited, revisable
+  judgments; they predate this complete B07 reading. The new evidence and proposed choice
+  above supersede the row's old B07 implementation status, not its owner control.
+- Evidence at source_sha: this notebook's B07 complete entry and prior B06 Pro question,
+  answer and adoption; `runs/uav_service_auxiliary/b07_of_a01/summary.json`, `config.json`,
+  `launch-manifest.json`, `process-exit.json`; the B04/B05 N config files in
+  `runs/uav_service_auxiliary/b04_n_914021_a01/` and `b05_n_914173_a01/` for the training objective.
+- Frozen B07 contract/code at `47d56c9bcdc9fa9d6edee43ae0b4d44755115708`:
+  the notebook's `2026-09-23 — H3000 advice adopted: fixed B07 native long-task O/F comparison and L0`,
+  `experiments/candidates/uav_service_auxiliary/b07/native.py`,
+  `experiments/candidates/uav_service_auxiliary/b06/feedback.py`, and
+  `experiments/candidates/uav_service_auxiliary/b04/native.py` for the inherited objective.
+  Read code when needed for a consequential feasibility claim; no new training implementation exists.
+  These are bounded experimental inputs, not current governance.
+
+Prospective cost **if this one-pair idea is selected**: 2new fits, each180k transitions at H3000,
+360k total training. A single actual common-initial F panel (only after identical initialization
+is verified) plus two endpoint F panels, each8development+32final worlds at3000, would add
+120episodes/360k evaluation transitions. Otherwise separately evaluating unequal initial
+artifacts changes that cost and must be declared. New evaluation worlds and seed assignments
+are not yet fixed; no reuse of B07 outcomes as these results. Non-fit work includes the action/
+storage integration, proportionate tests/review, raw service/physical telemetry and reading.
+Those costs and fresh-fit wall time are unknown; B07's230.54minutes for480k fixed-policy steps
+is context, not a calibrated learner-time estimate. No sweep, automatic replication, extra
+evaluation mode, training extension or confirmation is bundled with the proposal. Critique
+whether these costs buy a useful update relative to preserving F and spending no fits.
+
+Constraints: no experiments or training; no changes outside the empty `### Answer` subsection
+of this exact question on branch `codex/uav-service-predictive-control`, repository
+`CartmanFatass/My-paper-code`. Read the pinned question/Context, but fetch the **latest** target
+file before editing and use its actual blob SHA. Preserve the question and every other byte;
+stop on overlapping edits. Report the actual commit after a successful write. If delivery
+fails, return the complete answer in chat, not only a SHA, status or link. Keep private
+conversation/account identifiers out of repository content.
+
+Return: source-grounded advice on the impending comparison/investment, including which
+judgments are strengthened, weakened or untouched; the strongest alternative explanation and
+investment; the smallest useful discriminating observation, its intermediate/native predictions
+and fit/non-fit cost; scope and decision-critical source gaps; and `MATERIAL_DISSENT: yes/no`
+for the proposed comparison. No fixed candidate count, new architecture, universal negative
+claim, permission requirement or proof prerequisite is requested. If the proposed two-fit
+comparison is worthwhile, state what it can and cannot establish and the outcome that should
+end that specific investment. The DM owns the final choice.
+
+### Answer
