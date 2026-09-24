@@ -1,0 +1,1566 @@
+{
+  "status": "complete",
+  "phase": "replay",
+  "asset_key": "b3_h6",
+  "arm": "H6",
+  "block": 3,
+  "seed": 994103,
+  "policy_stage": 45,
+  "prior_training_team_steps": 360000,
+  "test_n": 8,
+  "world_seeds": [
+    1945800,
+    1945801,
+    1945802,
+    1945803,
+    1945804,
+    1945805,
+    1945806,
+    1945807,
+    1945808,
+    1945809,
+    1945810,
+    1945811,
+    1945812,
+    1945813,
+    1945814,
+    1945815,
+    1945816,
+    1945817,
+    1945818,
+    1945819,
+    1945820,
+    1945821,
+    1945822,
+    1945823,
+    1945824,
+    1945825,
+    1945826,
+    1945827,
+    1945828,
+    1945829,
+    1945830,
+    1945831
+  ],
+  "runtime_seed": 1945851,
+  "rng_order": {
+    "after_fixed_seed_before_construction": "cd6a89bb251ec6bfaff3f100da79dc06946085cc9c2e80a01b0f970b5aa76361",
+    "after_environment_construction": "cd6a89bb251ec6bfaff3f100da79dc06946085cc9c2e80a01b0f970b5aa76361",
+    "after_config_construction": "cd6a89bb251ec6bfaff3f100da79dc06946085cc9c2e80a01b0f970b5aa76361",
+    "after_agent_construction": "ad39e8477a01f4078b3ee5e5bbf3fa73b9f2bbafb80f9225068f7e4aa0f06c18",
+    "after_checkpoint_restore": "ad39e8477a01f4078b3ee5e5bbf3fa73b9f2bbafb80f9225068f7e4aa0f06c18",
+    "before_reset_no_reseed": "ad39e8477a01f4078b3ee5e5bbf3fa73b9f2bbafb80f9225068f7e4aa0f06c18",
+    "after_reset": "ad39e8477a01f4078b3ee5e5bbf3fa73b9f2bbafb80f9225068f7e4aa0f06c18",
+    "after_rollout": "f2166f9cf8c75fb5a5740dce554994cbc6795551c3aef00227ad7fb8aab84e96"
+  },
+  "steps": 16000,
+  "episodes": 32,
+  "resets": 32,
+  "policy_step_calls": 500,
+  "J": [
+    0.4337423397675054,
+    0.4371611448988524,
+    0.3991323824558423,
+    0.401207902317919,
+    0.40846907218372813,
+    0.4686636817561463,
+    0.4548860360610861,
+    0.4095736583306612,
+    0.41331532165911006,
+    0.39274028108321585,
+    0.3123180217851238,
+    0.3369029291526488,
+    0.34226410762753345,
+    0.346191926466154,
+    0.4012256665158514,
+    0.4247578499932103,
+    0.411982944545416,
+    0.46967151191160444,
+    0.44820538377215385,
+    0.40241739977349755,
+    0.37415882895965585,
+    0.3183875684186356,
+    0.48141563162842826,
+    0.3134957272994851,
+    0.4659401729540407,
+    0.46106307226046617,
+    0.41817331824534865,
+    0.4263929574708275,
+    0.34804036650540277,
+    0.31426002902984856,
+    0.4003285000990134,
+    0.41371985684715357
+  ],
+  "scalar_returns": [
+    27.10889623546909,
+    27.322571556178275,
+    24.945773903490146,
+    25.075493894869936,
+    25.52931701148301,
+    29.291480109759146,
+    28.43037725381788,
+    25.598353645666325,
+    25.83220760369438,
+    24.54626756770099,
+    19.519876361570237,
+    21.05643307204055,
+    21.39150672672084,
+    21.636995404134623,
+    25.076604157240713,
+    26.547365624575644,
+    25.7489340340885,
+    29.35446949447528,
+    28.012836485759617,
+    25.151087485843597,
+    23.38492680997849,
+    19.899223026164723,
+    30.088476976776768,
+    19.59348295621782,
+    29.121260809627547,
+    28.816442016279137,
+    26.13583239033429,
+    26.64955984192672,
+    21.75252290658767,
+    19.641251814365535,
+    25.020531256188338,
+    25.857491052947097
+  ],
+  "component_means": {
+    "coverage_reward": [
+      0.5544799999999999,
+      0.5810800000000008,
+      0.5196800000000005,
+      0.5301200000000004,
+      0.5420000000000007,
+      0.6192400000000009,
+      0.5995200000000002,
+      0.5247600000000008,
+      0.5367200000000011,
+      0.5061200000000003,
+      0.3960000000000009,
+      0.42628000000000105,
+      0.42943999999999954,
+      0.45519999999999916,
+      0.5308000000000003,
+      0.5643200000000008,
+      0.5340000000000014,
+      0.6184000000000008,
+      0.6006,
+      0.5264800000000001,
+      0.47908000000000034,
+      0.40315999999999985,
+      0.6446399999999994,
+      0.3943600000000003,
+      0.6239999999999998,
+      0.5998799999999987,
+      0.5600399999999993,
+      0.5656399999999993,
+      0.45751999999999954,
+      0.395919999999999,
+      0.5202400000000004,
+      0.5372800000000005
+    ],
+    "quality_reward": [
+      0.2098851329243183,
+      0.16188413100247437,
+      0.17448477162595488,
+      0.15767499024825526,
+      0.15833000327351343,
+      0.16980686879006743,
+      0.1647183660404085,
+      0.19692888420189625,
+      0.18567069898792804,
+      0.1808587353976395,
+      0.16758958961188553,
+      0.18095405860422584,
+      0.19192667373077196,
+      0.1502131522180648,
+      0.15467844591908686,
+      0.15252596721943623,
+      0.17911600049715337,
+      0.17426210033376277,
+      0.1522544410107683,
+      0.1689503640525485,
+      0.18601224071891176,
+      0.1812498900929583,
+      0.16304891012081682,
+      0.18318451399302563,
+      0.1548514698072712,
+      0.1905135281772145,
+      0.1475226728707858,
+      0.15616589229203753,
+      0.1515997329048619,
+      0.17184225563130423,
+      0.16882857498631207,
+      0.17671037781123686
+    ],
+    "energy_penalty": [
+      0.01735920010979006,
+      0.018160094401889773,
+      0.016989049031943735,
+      0.017178594756557693,
+      0.0184299287983257,
+      0.015746378880873577,
+      0.014193473751036068,
+      0.01683700692990796,
+      0.018089888037268267,
+      0.015801339536076014,
+      0.015158855098441676,
+      0.015779288428619205,
+      0.015921894491698382,
+      0.017512019199265046,
+      0.01673786725987467,
+      0.016023940172620554,
+      0.01555185560372985,
+      0.015487118188525053,
+      0.01789094853107626,
+      0.01680370944226659,
+      0.017000843256017178,
+      0.01819939860925208,
+      0.018747041407816318,
+      0.01751162689842257,
+      0.01731526798814046,
+      0.01600698619269815,
+      0.01811148361588726,
+      0.01640481021678353,
+      0.01770355336605567,
+      0.01443664765954266,
+      0.014488072396880422,
+      0.01538925649621773
+    ],
+    "total_reward": [
+      0.4337423397675054,
+      0.4371611448988524,
+      0.3991323824558423,
+      0.401207902317919,
+      0.40846907218372813,
+      0.4686636817561463,
+      0.4548860360610861,
+      0.4095736583306612,
+      0.41331532165911006,
+      0.39274028108321585,
+      0.3123180217851238,
+      0.3369029291526488,
+      0.34226410762753345,
+      0.346191926466154,
+      0.4012256665158514,
+      0.4247578499932103,
+      0.411982944545416,
+      0.46967151191160444,
+      0.44820538377215385,
+      0.40241739977349755,
+      0.37415882895965585,
+      0.3183875684186356,
+      0.48141563162842826,
+      0.3134957272994851,
+      0.4659401729540407,
+      0.46106307226046617,
+      0.41817331824534865,
+      0.4263929574708275,
+      0.34804036650540277,
+      0.31426002902984856,
+      0.4003285000990134,
+      0.41371985684715357
+    ]
+  },
+  "service_arrays": {
+    "E_eligible_users_per_step": [
+      29.638,
+      29.26,
+      26.698,
+      26.64,
+      27.536,
+      31.234,
+      30.006,
+      28.626,
+      26.836,
+      25.36,
+      20.23,
+      21.548,
+      23.284,
+      22.766,
+      26.952,
+      28.296,
+      27.152,
+      31.176,
+      31.262,
+      26.422,
+      23.984,
+      20.3,
+      33.116,
+      22.068,
+      31.988,
+      32.074,
+      28.042,
+      28.924,
+      22.998,
+      20.416,
+      26.332,
+      28.664
+    ],
+    "S_served_users_per_step": [
+      27.724,
+      29.054,
+      25.984,
+      26.506,
+      27.1,
+      30.962,
+      29.976,
+      26.238,
+      26.836,
+      25.306,
+      19.8,
+      21.314,
+      21.472,
+      22.76,
+      26.54,
+      28.216,
+      26.7,
+      30.92,
+      30.03,
+      26.324,
+      23.954,
+      20.158,
+      32.232,
+      19.718,
+      31.2,
+      29.994,
+      28.002,
+      28.282,
+      22.876,
+      19.796,
+      26.012,
+      26.864
+    ],
+    "U_eligible_unserved_users_per_step": [
+      1.914,
+      0.206,
+      0.714,
+      0.134,
+      0.436,
+      0.272,
+      0.03,
+      2.388,
+      0.0,
+      0.054,
+      0.43,
+      0.234,
+      1.812,
+      0.006,
+      0.412,
+      0.08,
+      0.452,
+      0.256,
+      1.232,
+      0.098,
+      0.03,
+      0.142,
+      0.884,
+      2.35,
+      0.788,
+      2.08,
+      0.04,
+      0.642,
+      0.122,
+      0.62,
+      0.32,
+      1.8
+    ]
+  },
+  "optimizer_calls": {
+    "coordinator": 0,
+    "discoverer_actor": 0,
+    "discoverer_critic": 0,
+    "team_discriminator": 0,
+    "individual_discriminator": 0
+  },
+  "training_storage_calls": 0,
+  "rollout_storage_before": {
+    "num_steps": 500,
+    "num_envs": 32,
+    "n_agents": 8,
+    "env_lengths": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "last_t_per_env": [
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1,
+      -1
+    ],
+    "sampler_seed": 16135357236351875578,
+    "sampler_state": {
+      "bit_generator": "PCG64",
+      "state": {
+        "state": 166655324207032721108781370660041834373,
+        "inc": 68854239988577902575140958168966526693
+      },
+      "has_uint32": 0,
+      "uinteger": 0
+    }
+  },
+  "rollout_storage_env_lengths": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "frozen_weights_and_normalizers": true,
+  "parameter_normalizer_digest_before": "cc33620256f5420fabddb2f72983194883e4ad03e6cb2732883a66f6831df09a",
+  "parameter_normalizer_digest_after": "cc33620256f5420fabddb2f72983194883e4ad03e6cb2732883a66f6831df09a",
+  "restored_digest_matches_original_final": true,
+  "normalizers_before": {
+    "obs_norm": null,
+    "state_norm": null,
+    "value_norm_coordinator": {
+      "type": "RunningMeanStd",
+      "fields": {
+        "mean": {
+          "dtype": "float64",
+          "shape": [],
+          "value": 5.9914574705296095
+        },
+        "var": {
+          "dtype": "float64",
+          "shape": [],
+          "value": 4.388651812836814
+        },
+        "count": {
+          "dtype": "float64",
+          "shape": [],
+          "value": 252000.0001
+        }
+      }
+    },
+    "value_norm_discoverer": {
+      "type": "RunningMeanStd",
+      "fields": {
+        "mean": {
+          "dtype": "float64",
+          "shape": [],
+          "value": 0.8035239532217909
+        },
+        "var": {
+          "dtype": "float64",
+          "shape": [],
+          "value": 0.8149865346256663
+        },
+        "count": {
+          "dtype": "float64",
+          "shape": [],
+          "value": 2160000.0001
+        }
+      }
+    }
+  },
+  "normalizers_after": {
+    "obs_norm": null,
+    "state_norm": null,
+    "value_norm_coordinator": {
+      "type": "RunningMeanStd",
+      "fields": {
+        "mean": {
+          "dtype": "float64",
+          "shape": [],
+          "value": 5.9914574705296095
+        },
+        "var": {
+          "dtype": "float64",
+          "shape": [],
+          "value": 4.388651812836814
+        },
+        "count": {
+          "dtype": "float64",
+          "shape": [],
+          "value": 252000.0001
+        }
+      }
+    },
+    "value_norm_discoverer": {
+      "type": "RunningMeanStd",
+      "fields": {
+        "mean": {
+          "dtype": "float64",
+          "shape": [],
+          "value": 0.8035239532217909
+        },
+        "var": {
+          "dtype": "float64",
+          "shape": [],
+          "value": 0.8149865346256663
+        },
+        "count": {
+          "dtype": "float64",
+          "shape": [],
+          "value": 2160000.0001
+        }
+      }
+    }
+  },
+  "runtime_digest_before": "0e02cf8d4c1afa8bccc79c019ff623f99019917a1cf7187519678c0f9c5432c0",
+  "runtime_digest_after": "c30803440a5862dd701e186fe8e9c91d3757af7f24c7dde4c8fbdb99a54833a1",
+  "runtime_evolved": true,
+  "execution_law": "raw low-level mean then clip to [-1,1]",
+  "raw_executed_actions_differ": true,
+  "executed_action_bounds": {
+    "minimum": -1.0,
+    "maximum": 1.0
+  },
+  "inference_counts": {
+    "coordinator_batched_calls": 50,
+    "coordinator_rows": 1600,
+    "coordinator_batch_sizes": [
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32,
+      32
+    ],
+    "decoder_team_calls": 50,
+    "decoder_team_rows": 1600,
+    "decoder_individual_calls": 400,
+    "decoder_individual_rows": 12800,
+    "team_selections": 1600,
+    "individual_selections": 12800,
+    "team_choice_counts": [
+      0,
+      0,
+      0,
+      0,
+      138,
+      1462
+    ],
+    "individual_choice_counts": [
+      954,
+      3594,
+      1645,
+      920,
+      120,
+      5567
+    ],
+    "set_snapshot_refresh_steps": null,
+    "set_snapshot_lane_refreshes": null,
+    "actor_calls": 500,
+    "actor_rows": 128000,
+    "critic_calls": 500,
+    "critic_rows": 128000,
+    "snapshot_refresh_calls": 0,
+    "snapshot_refresh_lane_rows": 0
+  },
+  "trace": {
+    "path": "/home/wu/projects/HMASD/runs/agent_count_generalization/s1_fresh_world_deployment_b17_final45/trace_replay_b3_h6_n8.npz",
+    "native_relative_path": "trace_replay_b3_h6_n8.npz",
+    "sha256": "8342cfe189fe2ef0b8cda3d034c80e21849ea260c996a1ec8880edfb3b619a63",
+    "bytes": 159123382,
+    "format": "NumPy npz with allow_pickle=False",
+    "arrays": {
+      "scalar_reward": {
+        "shape": [
+          500,
+          32
+        ],
+        "dtype": "float64"
+      },
+      "coverage_reward": {
+        "shape": [
+          500,
+          32
+        ],
+        "dtype": "float64"
+      },
+      "quality_reward": {
+        "shape": [
+          500,
+          32
+        ],
+        "dtype": "float64"
+      },
+      "energy_penalty": {
+        "shape": [
+          500,
+          32
+        ],
+        "dtype": "float64"
+      },
+      "total_reward": {
+        "shape": [
+          500,
+          32
+        ],
+        "dtype": "float64"
+      },
+      "eligible_links": {
+        "shape": [
+          500,
+          32,
+          8,
+          50
+        ],
+        "dtype": "bool"
+      },
+      "connections": {
+        "shape": [
+          500,
+          32,
+          8,
+          50
+        ],
+        "dtype": "bool"
+      },
+      "per_uav_eligible_counts": {
+        "shape": [
+          500,
+          32,
+          8
+        ],
+        "dtype": "int16"
+      },
+      "per_uav_connection_counts": {
+        "shape": [
+          500,
+          32,
+          8
+        ],
+        "dtype": "int16"
+      },
+      "eligible_user_counts": {
+        "shape": [
+          500,
+          32
+        ],
+        "dtype": "int16"
+      },
+      "served_user_counts": {
+        "shape": [
+          500,
+          32
+        ],
+        "dtype": "int16"
+      },
+      "eligible_unserved_user_counts": {
+        "shape": [
+          500,
+          32
+        ],
+        "dtype": "int16"
+      },
+      "connected_quality_sum": {
+        "shape": [
+          500,
+          32
+        ],
+        "dtype": "float64"
+      },
+      "uav_heights": {
+        "shape": [
+          500,
+          32,
+          8
+        ],
+        "dtype": "float64"
+      },
+      "states": {
+        "shape": [
+          500,
+          32,
+          133
+        ],
+        "dtype": "float32"
+      },
+      "observations": {
+        "shape": [
+          500,
+          32,
+          8,
+          104
+        ],
+        "dtype": "float32"
+      },
+      "next_states": {
+        "shape": [
+          500,
+          32,
+          133
+        ],
+        "dtype": "float32"
+      },
+      "next_observations": {
+        "shape": [
+          500,
+          32,
+          8,
+          104
+        ],
+        "dtype": "float32"
+      },
+      "raw_actions": {
+        "shape": [
+          500,
+          32,
+          8,
+          3
+        ],
+        "dtype": "float32"
+      },
+      "executed_actions": {
+        "shape": [
+          500,
+          32,
+          8,
+          3
+        ],
+        "dtype": "float32"
+      },
+      "terminated": {
+        "shape": [
+          500,
+          32
+        ],
+        "dtype": "bool"
+      },
+      "truncated": {
+        "shape": [
+          500,
+          32
+        ],
+        "dtype": "bool"
+      },
+      "team_skills": {
+        "shape": [
+          500,
+          32
+        ],
+        "dtype": "int64"
+      },
+      "agent_skills": {
+        "shape": [
+          500,
+          32,
+          8
+        ],
+        "dtype": "int64"
+      },
+      "skill_changed": {
+        "shape": [
+          500,
+          32
+        ],
+        "dtype": "bool"
+      },
+      "skill_timer": {
+        "shape": [
+          500,
+          32
+        ],
+        "dtype": "int64"
+      },
+      "uav_positions": {
+        "shape": [
+          500,
+          32,
+          8,
+          3
+        ],
+        "dtype": "float64"
+      },
+      "user_positions": {
+        "shape": [
+          500,
+          32,
+          50,
+          2
+        ],
+        "dtype": "float64"
+      },
+      "initial_states": {
+        "shape": [
+          32,
+          133
+        ],
+        "dtype": "float32"
+      },
+      "initial_observations": {
+        "shape": [
+          32,
+          8,
+          104
+        ],
+        "dtype": "float32"
+      }
+    }
+  },
+  "config": {
+    "count_arm": "H6",
+    "algorithm": "hmasd",
+    "n_agents": 8,
+    "n_uavs": 8,
+    "n_users": 50,
+    "num_envs": 32,
+    "rollout_length": 500,
+    "episode_length": 500,
+    "k": 10,
+    "n_Z": 6,
+    "n_z": 6,
+    "state_dim": 133,
+    "obs_dim": 104,
+    "action_dim": 3,
+    "action_space_type": "continuous",
+    "gamma": 0.99,
+    "gae_lambda": 0.95,
+    "ppo_epochs": 15,
+    "num_mini_batch": 4,
+    "sequence_batch_size": 32,
+    "coordinator_batch_size": 1280,
+    "high_level_batch_size": 128,
+    "high_level_buffer_size": 1600,
+    "batch_size": 32000,
+    "discriminator_batch_size": 32000,
+    "lambda_e": 1.0,
+    "lambda_D": 0.05,
+    "lambda_d": 0.02,
+    "lambda_h": 0.07,
+    "lambda_l": 0.05,
+    "lambda_cd": 0.0,
+    "lambda_mi": 0.0,
+    "lr_coordinator": 0.0001,
+    "lr_discoverer_actor": 0.0001,
+    "lr_discoverer_critic": 0.0001,
+    "lr_discriminator": 0.0001,
+    "weight_decay": 0.0,
+    "clip_epsilon": 0.2,
+    "value_loss_coef": 1.0,
+    "max_grad_norm": 0.5,
+    "hidden_size": 256,
+    "embedding_dim": 256,
+    "n_heads": 8,
+    "n_encoder_layers": 2,
+    "n_decoder_layers": 2,
+    "gru_hidden_size": 256,
+    "use_valuenorm": true,
+    "use_obsnorm": false,
+    "use_statenorm": false,
+    "use_lr_decay": false,
+    "total_timesteps": 360000,
+    "seed": 994103,
+    "policy_interruption_mode": "off",
+    "use_central_snapshot_in_flat_actor": false,
+    "disable_high_level_training": null,
+    "disable_discriminator_training": null,
+    "disable_discriminator_rewards": null,
+    "collects_high_level_samples": null,
+    "use_process_exploration": false,
+    "use_horizon_window": false,
+    "use_opt_compact": false,
+    "lambda_l_initial": 0.05,
+    "lambda_l_final": 0.05,
+    "use_entropy_annealing": false,
+    "use_entropy_targets": false
+  },
+  "post_transition_semantics": true,
+  "terminal_successor_recorded": true,
+  "actual_sinr_threshold": 0.0,
+  "max_connections_per_uav": 10,
+  "height_range": [
+    50.0,
+    150.0
+  ],
+  "n_users": 50,
+  "global_rng_isolation": {
+    "digest_before": "3634db0292c4dbfec7d59425ae4065c3345985332f02f3cee269b099e6fbcdd9",
+    "digest_after": "3634db0292c4dbfec7d59425ae4065c3345985332f02f3cee269b099e6fbcdd9",
+    "preserved": true
+  },
+  "replay_comparison": {
+    "reference": {
+      "path": "/home/wu/hmasd-inputs/agent-count-b17-final45/agent_count_generalization/s1_bounded_confirmation_b15_b3_h6_s994103/trace_stage45_n8.npz",
+      "sha256": "28a6e2f21c1da8613038da4fedac9b0e78fc51bb54d93d6b91b2bc5d4c839dd1",
+      "bytes": 141921340
+    },
+    "panel_arrays": {
+      "J": {
+        "actual_shape": [
+          32
+        ],
+        "expected_shape": [
+          32
+        ],
+        "actual_dtype": "float64",
+        "expected_dtype": "float64",
+        "rule": "allclose atol=1e-07 rtol=1e-06",
+        "match": true,
+        "exact_equal": true,
+        "max_abs_difference": 0.0,
+        "first_out_of_tolerance": null
+      },
+      "scalar_returns": {
+        "actual_shape": [
+          32
+        ],
+        "expected_shape": [
+          32
+        ],
+        "actual_dtype": "float64",
+        "expected_dtype": "float64",
+        "rule": "allclose atol=1e-07 rtol=1e-06",
+        "match": true,
+        "exact_equal": true,
+        "max_abs_difference": 0.0,
+        "first_out_of_tolerance": null
+      },
+      "component_means.coverage_reward": {
+        "actual_shape": [
+          32
+        ],
+        "expected_shape": [
+          32
+        ],
+        "actual_dtype": "float64",
+        "expected_dtype": "float64",
+        "rule": "allclose atol=1e-07 rtol=1e-06",
+        "match": true,
+        "exact_equal": true,
+        "max_abs_difference": 0.0,
+        "first_out_of_tolerance": null
+      },
+      "component_means.quality_reward": {
+        "actual_shape": [
+          32
+        ],
+        "expected_shape": [
+          32
+        ],
+        "actual_dtype": "float64",
+        "expected_dtype": "float64",
+        "rule": "allclose atol=1e-07 rtol=1e-06",
+        "match": true,
+        "exact_equal": true,
+        "max_abs_difference": 0.0,
+        "first_out_of_tolerance": null
+      },
+      "component_means.energy_penalty": {
+        "actual_shape": [
+          32
+        ],
+        "expected_shape": [
+          32
+        ],
+        "actual_dtype": "float64",
+        "expected_dtype": "float64",
+        "rule": "allclose atol=1e-07 rtol=1e-06",
+        "match": true,
+        "exact_equal": true,
+        "max_abs_difference": 0.0,
+        "first_out_of_tolerance": null
+      },
+      "component_means.total_reward": {
+        "actual_shape": [
+          32
+        ],
+        "expected_shape": [
+          32
+        ],
+        "actual_dtype": "float64",
+        "expected_dtype": "float64",
+        "rule": "allclose atol=1e-07 rtol=1e-06",
+        "match": true,
+        "exact_equal": true,
+        "max_abs_difference": 0.0,
+        "first_out_of_tolerance": null
+      },
+      "service_arrays.E_eligible_users_per_step": {
+        "actual_shape": [
+          32
+        ],
+        "expected_shape": [
+          32
+        ],
+        "actual_dtype": "float64",
+        "expected_dtype": "float64",
+        "rule": "allclose atol=1e-07 rtol=1e-06",
+        "match": true,
+        "exact_equal": true,
+        "max_abs_difference": 0.0,
+        "first_out_of_tolerance": null
+      },
+      "service_arrays.S_served_users_per_step": {
+        "actual_shape": [
+          32
+        ],
+        "expected_shape": [
+          32
+        ],
+        "actual_dtype": "float64",
+        "expected_dtype": "float64",
+        "rule": "allclose atol=1e-07 rtol=1e-06",
+        "match": true,
+        "exact_equal": true,
+        "max_abs_difference": 0.0,
+        "first_out_of_tolerance": null
+      },
+      "service_arrays.U_eligible_unserved_users_per_step": {
+        "actual_shape": [
+          32
+        ],
+        "expected_shape": [
+          32
+        ],
+        "actual_dtype": "float64",
+        "expected_dtype": "float64",
+        "rule": "allclose atol=1e-07 rtol=1e-06",
+        "match": true,
+        "exact_equal": true,
+        "max_abs_difference": 0.0,
+        "first_out_of_tolerance": null
+      }
+    },
+    "trace_arrays": {
+      "scalar_reward": {
+        "actual_shape": [
+          500,
+          32
+        ],
+        "expected_shape": [
+          500,
+          32
+        ],
+        "actual_dtype": "float64",
+        "expected_dtype": "float64",
+        "rule": "allclose atol=1e-07 rtol=1e-06",
+        "match": true,
+        "exact_equal": true,
+        "max_abs_difference": 0.0,
+        "first_out_of_tolerance": null
+      },
+      "coverage_reward": {
+        "actual_shape": [
+          500,
+          32
+        ],
+        "expected_shape": [
+          500,
+          32
+        ],
+        "actual_dtype": "float64",
+        "expected_dtype": "float64",
+        "rule": "allclose atol=1e-07 rtol=1e-06",
+        "match": true,
+        "exact_equal": true,
+        "max_abs_difference": 0.0,
+        "first_out_of_tolerance": null
+      },
+      "quality_reward": {
+        "actual_shape": [
+          500,
+          32
+        ],
+        "expected_shape": [
+          500,
+          32
+        ],
+        "actual_dtype": "float64",
+        "expected_dtype": "float64",
+        "rule": "allclose atol=1e-07 rtol=1e-06",
+        "match": true,
+        "exact_equal": true,
+        "max_abs_difference": 0.0,
+        "first_out_of_tolerance": null
+      },
+      "energy_penalty": {
+        "actual_shape": [
+          500,
+          32
+        ],
+        "expected_shape": [
+          500,
+          32
+        ],
+        "actual_dtype": "float64",
+        "expected_dtype": "float64",
+        "rule": "allclose atol=1e-07 rtol=1e-06",
+        "match": true,
+        "exact_equal": true,
+        "max_abs_difference": 0.0,
+        "first_out_of_tolerance": null
+      },
+      "total_reward": {
+        "actual_shape": [
+          500,
+          32
+        ],
+        "expected_shape": [
+          500,
+          32
+        ],
+        "actual_dtype": "float64",
+        "expected_dtype": "float64",
+        "rule": "allclose atol=1e-07 rtol=1e-06",
+        "match": true,
+        "exact_equal": true,
+        "max_abs_difference": 0.0,
+        "first_out_of_tolerance": null
+      },
+      "eligible_links": {
+        "actual_shape": [
+          500,
+          32,
+          8,
+          50
+        ],
+        "expected_shape": [
+          500,
+          32,
+          8,
+          50
+        ],
+        "actual_dtype": "bool",
+        "expected_dtype": "bool",
+        "rule": "exact",
+        "match": true,
+        "exact_equal": true,
+        "max_abs_difference": 0.0,
+        "first_out_of_tolerance": null
+      },
+      "connections": {
+        "actual_shape": [
+          500,
+          32,
+          8,
+          50
+        ],
+        "expected_shape": [
+          500,
+          32,
+          8,
+          50
+        ],
+        "actual_dtype": "bool",
+        "expected_dtype": "bool",
+        "rule": "exact",
+        "match": true,
+        "exact_equal": true,
+        "max_abs_difference": 0.0,
+        "first_out_of_tolerance": null
+      },
+      "per_uav_eligible_counts": {
+        "actual_shape": [
+          500,
+          32,
+          8
+        ],
+        "expected_shape": [
+          500,
+          32,
+          8
+        ],
+        "actual_dtype": "int16",
+        "expected_dtype": "int16",
+        "rule": "exact",
+        "match": true,
+        "exact_equal": true,
+        "max_abs_difference": 0.0,
+        "first_out_of_tolerance": null
+      },
+      "per_uav_connection_counts": {
+        "actual_shape": [
+          500,
+          32,
+          8
+        ],
+        "expected_shape": [
+          500,
+          32,
+          8
+        ],
+        "actual_dtype": "int16",
+        "expected_dtype": "int16",
+        "rule": "exact",
+        "match": true,
+        "exact_equal": true,
+        "max_abs_difference": 0.0,
+        "first_out_of_tolerance": null
+      },
+      "eligible_user_counts": {
+        "actual_shape": [
+          500,
+          32
+        ],
+        "expected_shape": [
+          500,
+          32
+        ],
+        "actual_dtype": "int16",
+        "expected_dtype": "int16",
+        "rule": "exact",
+        "match": true,
+        "exact_equal": true,
+        "max_abs_difference": 0.0,
+        "first_out_of_tolerance": null
+      },
+      "served_user_counts": {
+        "actual_shape": [
+          500,
+          32
+        ],
+        "expected_shape": [
+          500,
+          32
+        ],
+        "actual_dtype": "int16",
+        "expected_dtype": "int16",
+        "rule": "exact",
+        "match": true,
+        "exact_equal": true,
+        "max_abs_difference": 0.0,
+        "first_out_of_tolerance": null
+      },
+      "eligible_unserved_user_counts": {
+        "actual_shape": [
+          500,
+          32
+        ],
+        "expected_shape": [
+          500,
+          32
+        ],
+        "actual_dtype": "int16",
+        "expected_dtype": "int16",
+        "rule": "exact",
+        "match": true,
+        "exact_equal": true,
+        "max_abs_difference": 0.0,
+        "first_out_of_tolerance": null
+      },
+      "connected_quality_sum": {
+        "actual_shape": [
+          500,
+          32
+        ],
+        "expected_shape": [
+          500,
+          32
+        ],
+        "actual_dtype": "float64",
+        "expected_dtype": "float64",
+        "rule": "allclose atol=1e-07 rtol=1e-06",
+        "match": true,
+        "exact_equal": true,
+        "max_abs_difference": 0.0,
+        "first_out_of_tolerance": null
+      },
+      "uav_heights": {
+        "actual_shape": [
+          500,
+          32,
+          8
+        ],
+        "expected_shape": [
+          500,
+          32,
+          8
+        ],
+        "actual_dtype": "float64",
+        "expected_dtype": "float64",
+        "rule": "allclose atol=1e-07 rtol=1e-06",
+        "match": true,
+        "exact_equal": true,
+        "max_abs_difference": 0.0,
+        "first_out_of_tolerance": null
+      },
+      "states": {
+        "actual_shape": [
+          500,
+          32,
+          133
+        ],
+        "expected_shape": [
+          500,
+          32,
+          133
+        ],
+        "actual_dtype": "float32",
+        "expected_dtype": "float32",
+        "rule": "allclose atol=1e-07 rtol=1e-06",
+        "match": true,
+        "exact_equal": true,
+        "max_abs_difference": 0.0,
+        "first_out_of_tolerance": null
+      },
+      "observations": {
+        "actual_shape": [
+          500,
+          32,
+          8,
+          104
+        ],
+        "expected_shape": [
+          500,
+          32,
+          8,
+          104
+        ],
+        "actual_dtype": "float32",
+        "expected_dtype": "float32",
+        "rule": "allclose atol=1e-07 rtol=1e-06",
+        "match": true,
+        "exact_equal": true,
+        "max_abs_difference": 0.0,
+        "first_out_of_tolerance": null
+      },
+      "next_states": {
+        "actual_shape": [
+          500,
+          32,
+          133
+        ],
+        "expected_shape": [
+          500,
+          32,
+          133
+        ],
+        "actual_dtype": "float32",
+        "expected_dtype": "float32",
+        "rule": "allclose atol=1e-07 rtol=1e-06",
+        "match": true,
+        "exact_equal": true,
+        "max_abs_difference": 0.0,
+        "first_out_of_tolerance": null
+      },
+      "next_observations": {
+        "actual_shape": [
+          500,
+          32,
+          8,
+          104
+        ],
+        "expected_shape": [
+          500,
+          32,
+          8,
+          104
+        ],
+        "actual_dtype": "float32",
+        "expected_dtype": "float32",
+        "rule": "allclose atol=1e-07 rtol=1e-06",
+        "match": true,
+        "exact_equal": true,
+        "max_abs_difference": 0.0,
+        "first_out_of_tolerance": null
+      },
+      "raw_actions": {
+        "actual_shape": [
+          500,
+          32,
+          8,
+          3
+        ],
+        "expected_shape": [
+          500,
+          32,
+          8,
+          3
+        ],
+        "actual_dtype": "float32",
+        "expected_dtype": "float32",
+        "rule": "allclose atol=1e-07 rtol=1e-06",
+        "match": true,
+        "exact_equal": true,
+        "max_abs_difference": 0.0,
+        "first_out_of_tolerance": null
+      },
+      "executed_actions": {
+        "actual_shape": [
+          500,
+          32,
+          8,
+          3
+        ],
+        "expected_shape": [
+          500,
+          32,
+          8,
+          3
+        ],
+        "actual_dtype": "float32",
+        "expected_dtype": "float32",
+        "rule": "allclose atol=1e-07 rtol=1e-06",
+        "match": true,
+        "exact_equal": true,
+        "max_abs_difference": 0.0,
+        "first_out_of_tolerance": null
+      },
+      "initial_states": {
+        "actual_shape": [
+          32,
+          133
+        ],
+        "expected_shape": [
+          32,
+          133
+        ],
+        "actual_dtype": "float32",
+        "expected_dtype": "float32",
+        "rule": "exact",
+        "match": true,
+        "exact_equal": true,
+        "max_abs_difference": 0.0,
+        "first_out_of_tolerance": null
+      },
+      "initial_observations": {
+        "actual_shape": [
+          32,
+          8,
+          104
+        ],
+        "expected_shape": [
+          32,
+          8,
+          104
+        ],
+        "actual_dtype": "float32",
+        "expected_dtype": "float32",
+        "rule": "exact",
+        "match": true,
+        "exact_equal": true,
+        "max_abs_difference": 0.0,
+        "first_out_of_tolerance": null
+      }
+    },
+    "all_match": true,
+    "continuous_contract": {
+      "atol": 1e-07,
+      "rtol": 1e-06
+    }
+  }
+}

@@ -17382,3 +17382,648 @@ only rearm observation; they neither restart this process nor authorize an extra
 Next scientific duty remains full collection and the fixed per-N/per-block reading, including
 all adverse worlds, absolute minima and old/new gap sensitivity. No performance claim has yet
 changed and no B17 extension or new Pro question is queued.
+
+
+## 2026-09-24 — B17 complete: ordinary N8 use survives fresh worlds, smaller-roster tradeoffs remain
+
+B17 is complete and scientifically read within its fixed deployment scope. This follows the
+[B17 fixed L0](#2026-09-24--b17-advice-adopted-fixed-fresh-world-deployment-comparison-and-l0)
+and its preceding fully read Pro answer. Process exit alone was not accepted as science.
+The six retained final45 policies, the six old N8 replay panels and all eighteen fresh panels
+were collected and independently read; no cell was replaced, omitted, extended or selected.
+All deltas below are **LOCAL1 minus H6** unless explicitly named otherwise. They concern
+fixed N6-trained assets, not a newly replicated training-program effect.
+
+### Technical evidence and independent acceptance
+
+Scientific source is `452223270723a5957ee15db53e4953b31db1352f`, object
+`s1_fresh_world_deployment_b17`, tag `s1_fresh_world_deployment_b17_final45`.
+The accepted operation ended with exit0 and a valid recorded runner/supervisor identity witness
+at epoch1790264728.2825613. Its operation record remains
+`/home/wu/projects/HMASD/.git/hmasd-admission/a36f49c0b83ea7b6af2c35a15a68d939f06d865349addf5090befb6cc3f79acf.json`.
+All56 final files, 3,244,211,524bytes, were copied from
+`/home/wu/projects/HMASD/runs/agent_count_generalization/s1_fresh_world_deployment_b17_final45`
+to the identically named local runs directory. Every size and SHA256 agrees with the final
+native inventory below. Large traces remain recoverable at both paths; compact runner JSON
+is published. Source/input identities before and after agree, including all42 bound source
+files and six retained checkpoint digests. Config, manifest, exit witness and all24 separate
+panel JSONs agree with the summary and the declared order, stage, worlds, RNG and exposure.
+
+A DM-owned independent NumPy/std-library reader constructs no environment or learner and
+imports no candidate reducer. It checked all30 arrays in every saved panel for recorded shape,
+dtype and finite values; recomputed eligibility E, exclusive served S and eligible-unserved U,
+per-UAV cap10, C=S/50, Q=connected_quality_sum/max(S,1), physical height penalty P, and
+J=.7C+.3Q−P=N*scalar_reward. It checked current/next state and observation continuity, the
+real terminal successor, terminal flags only at step500, raw-to-clipped actions, actual k10
+skill events, zero LOCAL1 category values, same-N initial physical worlds across all six assets,
+and frozen parameter/normalizer digests with no stored training rows or optimizer calls.
+The six historical N8 traces contain22 reference arrays each: **all132 compared arrays are
+exactly equal**, maximum absolute difference0, as well as satisfying the predeclared continuous
+ATOL1e−7/RTOL1e−6 contract. No tolerance was widened. Fresh panels started only after that gate.
+Independent descriptive statistics and all adverse-world lists agree with the runner.
+
+Audit scratch is `temp/agent_count_generalization/read_b17_native_evidence.py` and
+`b17_independent_native_reading.json`; reader wall18.664588587s. This is artifact inspection,
+not new native evidence. An independent ResearchCritic also read the terminal summary and
+frozen reasoning, found no arithmetic discrepancy or material dissent, and restricted the
+scientific language about quality, small-N service and lower-tail ranking. I adopt those
+restrictions below; advisory agreement adds no replication.
+
+### Complete fresh-panel levels and differences
+
+Each row averages32 worlds, each500 steps. E/S/U have units users per team step;
+P is the already-weighted S1 height penalty, not measured battery expenditure.
+The three training blocks share each N's32 worlds; pooling them does not create96 independent
+worlds. Each N has exactly one new panel. Different N uses different physical worlds.
+
+| Block | N | Program | J | C | Q | P | E | S | U |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 1 | 8 | LOCAL1 | 0.434395845848 | 0.574781250000 | 0.162623227971 | 0.016737997543 | 29.110812500000 | 28.739062500000 | 0.371750000000 |
+| 1 | 8 | H6 | 0.419358138874 | 0.544272500000 | 0.169972028202 | 0.012624219587 | 27.811437500000 | 27.213625000000 | 0.597812500000 |
+| 2 | 8 | LOCAL1 | 0.439667605811 | 0.572951250000 | 0.161129917516 | 0.009737244444 | 29.187437500000 | 28.647562500000 | 0.539875000000 |
+| 2 | 8 | H6 | 0.388727924917 | 0.493055000000 | 0.185638925667 | 0.012102252783 | 25.588750000000 | 24.652750000000 | 0.936000000000 |
+| 3 | 8 | LOCAL1 | 0.418544081864 | 0.561715000000 | 0.152572717226 | 0.020428233303 | 28.455625000000 | 28.085750000000 | 0.369875000000 |
+| 3 | 8 | H6 | 0.407787125412 | 0.534081250000 | 0.170315393779 | 0.017164367722 | 27.490187500000 | 26.704062500000 | 0.786125000000 |
+| 1 | 6 | LOCAL1 | 0.511535337195 | 0.673571250000 | 0.183008634279 | 0.014867128089 | 35.132687500000 | 33.678562500000 | 1.454125000000 |
+| 1 | 6 | H6 | 0.512258226670 | 0.664190000000 | 0.189947051616 | 0.009658888814 | 34.695062500000 | 33.209500000000 | 1.485562500000 |
+| 2 | 6 | LOCAL1 | 0.508422411125 | 0.667961250000 | 0.177583256600 | 0.012425440855 | 35.045562500000 | 33.398062500000 | 1.647500000000 |
+| 2 | 6 | H6 | 0.505605016563 | 0.655007500000 | 0.192753595106 | 0.010726311969 | 34.401812500000 | 32.750375000000 | 1.651437500000 |
+| 3 | 6 | LOCAL1 | 0.494670166655 | 0.674111250000 | 0.166648212858 | 0.027202172203 | 34.956250000000 | 33.705562500000 | 1.250687500000 |
+| 3 | 6 | H6 | 0.522217755292 | 0.690718750000 | 0.182529853157 | 0.016044325655 | 35.694437500000 | 34.535937500000 | 1.158500000000 |
+| 1 | 4 | LOCAL1 | 0.541987026501 | 0.700156250000 | 0.220925144871 | 0.014399891960 | 40.609187500000 | 35.007812500000 | 5.601375000000 |
+| 1 | 4 | H6 | 0.545480108252 | 0.694022500000 | 0.238327579855 | 0.011833915704 | 40.475500000000 | 34.701125000000 | 5.774375000000 |
+| 2 | 4 | LOCAL1 | 0.525347963305 | 0.688556250000 | 0.223389241790 | 0.023658184232 | 39.340062500000 | 34.427812500000 | 4.912250000000 |
+| 2 | 4 | H6 | 0.556833935331 | 0.698648750000 | 0.246660327210 | 0.006218287832 | 40.100000000000 | 34.932437500000 | 5.167562500000 |
+| 3 | 4 | LOCAL1 | 0.500027014300 | 0.685691250000 | 0.205472090216 | 0.041598487765 | 39.886562500000 | 34.284562500000 | 5.602000000000 |
+| 3 | 4 | H6 | 0.545758964373 | 0.704360000000 | 0.233157201382 | 0.017240196042 | 40.381000000000 | 35.218000000000 | 5.163000000000 |
+
+All world deltas retain both the signed mean and distribution; no CI, p-value or equivalence
+claim is inferred from the three retained blocks. The JSON also preserves every per-world
+level and all component distributions, independently recomputed from the underlying traces.
+
+| Block | N | ΔJ mean | median | min / max | ΔS mean | median | min / max | J-or-S adverse worlds |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 1 | 8 | +0.015037706975 | +0.012034383222 | -0.133720681437 / +0.194755173691 | +1.525437500 | +1.228000000 | -7.312000000 / +14.142000000 | 10 / 32 |
+| 2 | 8 | +0.050939680894 | +0.047010826670 | -0.035588957682 / +0.140040206380 | +3.994812500 | +3.587000000 | -2.992000000 / +10.432000000 | 3 / 32 |
+| 3 | 8 | +0.010756956452 | +0.002646377996 | -0.068889248747 / +0.104027325205 | +1.381687500 | +1.036000000 | -4.476000000 / +8.648000000 | 14 / 32 |
+| 1 | 6 | -0.000722889476 | +0.005605244044 | -0.102662641345 / +0.101976128512 | +0.469062500 | +0.812000000 | -6.596000000 / +7.996000000 | 14 / 32 |
+| 2 | 6 | +0.002817394562 | +0.001300764205 | -0.143760025795 / +0.104269720471 | +0.647687500 | +0.781000000 | -10.004000000 / +8.646000000 | 16 / 32 |
+| 3 | 6 | -0.027547588637 | -0.023965219842 | -0.088293875191 / +0.025485236739 | -0.830375000 | -0.693000000 | -5.486000000 / +4.226000000 | 26 / 32 |
+| 1 | 4 | -0.003493081751 | -0.006497079961 | -0.062999045586 / +0.039625479055 | +0.306687500 | +0.121000000 | -4.220000000 / +3.482000000 | 18 / 32 |
+| 2 | 4 | -0.031485972026 | -0.029468399297 | -0.085600022467 / +0.026789615726 | -0.504625000 | -0.651000000 | -3.976000000 / +2.870000000 | 28 / 32 |
+| 3 | 4 | -0.045731950073 | -0.048488043603 | -0.081945292146 / +0.012670202632 | -0.933437500 | -1.035000000 | -3.744000000 / +2.498000000 | 31 / 32 |
+
+The prospective N8 prediction survives: all three LOCAL1 instances have higher fresh-panel
+mean J and S than their corresponding H6. Descriptive block-mean ΔJ/ΔS are
++.025578114774/+2.300645833333; sample SD across those three differences is
+.022067804225/1.468950828469. N6 remains mixed: means−.008484361184/+.095458333333,
+SD.016603866522/.806754140671. N4 has lower LOCAL1 mean J in all three blocks, but lower S
+only in blocks2/3: means−.026903667950/−.377125, SD.021489035163/.629817188878.
+These SDs describe the three observed retained-policy comparisons, not calibrated population
+uncertainty. No N-pooled winner or result-chosen policy selector is introduced.
+
+### Native accounting and stronger competing explanations
+
+| N | mean ΔJ | .7ΔC | .3ΔQ | −ΔP | ΔE | −ΔU | ΔS |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 8 | +0.025578114774 | +0.032209041667 | -0.004960048494 | -0.001670878400 | +1.954500000000 | +0.346145833333 | +2.300645833333 |
+| 6 | -0.008484361184 | +0.001336416667 | -0.003799039614 | -0.006021738236 | +0.114395833333 | -0.018937500000 | +0.095458333333 |
+| 4 | -0.026903667950 | -0.005279750000 | -0.006835863157 | -0.014788054793 | -0.373562500000 | -0.003562500000 | -0.377125000000 |
+
+At N4, about80% of the signed H6 J advantage is the quality/height arithmetic contribution;
+this is **not a causal share or independently recoverable gain**. Block1 directly contradicts
+uniform service advantage: LOCAL1 serves+.3066875 more while losing−.003493081751 J.
+Omitting P only from the arithmetic still leaves LOCAL1−H6 J negative in all three N4 blocks
+(−.000927105495/−.014046075626/−.021373658350). A height-only explanation is therefore
+insufficient even for the recorded objective decomposition. Changing altitude physically
+would also change geometry, interference and connections, so subtraction is no intervention.
+H6 has higher mean native Q in all9 block×N comparisons; Q averages connected links only,
+so it is not a common-user quality comparison.
+
+The Critic suggested an existing-trace fixed-denominator reading. I performed it post-result
+as descriptive diagnosis, keeping native J/S and their fixed interpretation unchanged:
+`Q50=mean(connected_quality_sum/50)=mean(C*Q)` at the step level, **not** mean(C)*mean(Q).
+This is not a replacement objective, common-served-user comparison or new validation panel.
+All18 fresh traces were read, without model calls or interactions (wall.378216725s).
+
+| Block | N | Q50 LOCAL1 | Q50 H6 | ΔQ50 | positive / negative worlds |
+| --- | --- | --- | --- | --- | --- |
+| 1 | 8 | 0.094265784101 | 0.092548563992 | +0.001717220109 | 19 / 13 |
+| 2 | 8 | 0.092616633335 | 0.091541468459 | +0.001075164876 | 15 / 17 |
+| 3 | 8 | 0.086322870939 | 0.090743642446 | -0.004420771507 | 11 / 21 |
+| 1 | 6 | 0.123612560301 | 0.126052354594 | -0.002439794293 | 14 / 18 |
+| 2 | 6 | 0.118746375445 | 0.125782966283 | -0.007036590837 | 11 / 21 |
+| 3 | 6 | 0.112720530183 | 0.125866029268 | -0.013145499085 | 3 / 29 |
+| 1 | 4 | 0.154612933286 | 0.165381783442 | -0.010768850156 | 3 / 29 |
+| 2 | 4 | 0.153883901392 | 0.172340488424 | -0.018456587032 | 1 / 31 |
+| 3 | 4 | 0.141034411705 | 0.164290168738 | -0.023255757033 | 2 / 30 |
+
+H6's N4/N6 aggregate quality advantage persists with the fixed50 denominator in all six
+comparisons; a denominator-only explanation is weakened. At N8 the first two signs reverse
+and block3 retains H6's advantage: native mean link quality and aggregate delivered quality
+are genuinely different readings. This still leaves changed served populations and achieved
+geometries unresolved, and does not identify a skill mechanism.
+
+The same full fresh traces have **zero multiply eligible user-steps**; in all288,000 new
+team steps, `S=sum_i min(e_i,10)` and `U=sum_i max(e_i−10,0)` hold exactly. This reuses and
+checks the current shared S1 non-FDMA/0dB/positive-noise single-eligibility understanding;
+it is not a newly discovered assignment theorem. Given these recorded links, a different
+matching algorithm cannot serve an eligible user through a second eligible UAV. Altered
+physical trajectories remain possible and are not bounded by this accounting.
+At N4 some UAV is overloaded on97.825%–98.75% of team steps, while total S=40 on only
+.01875%–.7625% depending on the asset. Global spare capacity therefore does not establish
+locally feasible service headroom. Mean U differs by only+.0035625 between L and H6 at N4;
+H6's+.377125 service difference is almost entirely its+.3735625 eligibility difference,
+not evidence that it reallocates a common eligible population better.
+Audit scratch: `read_b17_native_accounting.py` / `b17_native_accounting.json`.
+
+### Minima, new-versus-old sensitivity, and all adverse worlds
+
+Observed minimum episode-mean service is not a safety bound, guaranteed tail improvement or
+paired worst-case difference. Each program may attain its minimum in a different world.
+
+| Block | N | LOCAL1 min S (world) | H6 min S (world) | fresh-minus-old ΔJ | fresh-minus-old ΔS |
+| --- | --- | --- | --- | --- | --- |
+| 1 | 8 | 20.618000 (2145819) | 16.298000 (2145811) | +0.013671729869 | +0.886250000 |
+| 2 | 8 | 22.400000 (2145823) | 17.510000 (2145811) | +0.024926789263 | +1.738562500 |
+| 3 | 8 | 20.014000 (2145819) | 18.834000 (2145806) | -0.003840158395 | -0.343750000 |
+| 1 | 6 | 26.074000 (2145610) | 25.994000 (2145627) | +0.001941570773 | +0.173125000 |
+| 2 | 6 | 23.906000 (2145610) | 23.316000 (2145627) | +0.002315353643 | +0.398875000 |
+| 3 | 6 | 28.634000 (2145627) | 30.862000 (2145613) | -0.000903504324 | +0.013250000 |
+| 1 | 4 | 31.116000 (2145415) | 31.424000 (2145401) | not available | not available |
+| 2 | 4 | 27.752000 (2145405) | 29.356000 (2145405) | not available | not available |
+| 3 | 4 | 31.618000 (2145401) | 31.196000 (2145430) | not available | not available |
+
+All three old N8 panels had lower L minima; all three fresh panels have higher L minima.
+The mean N8 prediction recurs while this minimum ordering reverses. Old/new differences
+measure sensitivity to these finite panels; they do not identify training deterioration or a
+world-generating causal mechanism. There is no old N4 comparison and no initial N4 policy
+panel, so B17 establishes no N4 own-learning increment. N4 H6 has J-or-S adverse worlds too
+(17/14/9 by block), with maximum observed service losses3.482/2.870/2.498. In block3 its
+higher means coexist with lower minimum service31.196 versus L31.618.
+
+The most consequential L losses include N8/block1/world2145819 (−.133720681437 J,
+−7.312 services/step) and N6/block2/world2145610 (−.143760025795 J,−10.004 services/step).
+Both must remain beside the positive means. The complete adverse union is below; all signed
+components are L−H6, and a positive S with negative J is a retained native tradeoff.
+
+| Block | N | World | ΔJ | ΔC | ΔQ | ΔP | ΔE | ΔS | ΔU |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 1 | 8 | 2145807 | -0.026052008 | -0.023280000 | -0.013953131 | +0.005570069 | -1.156000000 | -1.164000000 | +0.008000000 |
+| 1 | 8 | 2145809 | -0.087993477 | -0.108600000 | -0.022341946 | +0.005270893 | -5.812000000 | -5.430000000 | -0.382000000 |
+| 1 | 8 | 2145814 | -0.002147529 | +0.000360000 | +0.004377366 | +0.003712739 | -0.074000000 | +0.018000000 | -0.092000000 |
+| 1 | 8 | 2145819 | -0.133720681 | -0.146240000 | -0.057716570 | +0.014037710 | -9.380000000 | -7.312000000 | -2.068000000 |
+| 1 | 8 | 2145820 | +0.002988395 | -0.011760000 | +0.021098075 | -0.004890973 | +0.748000000 | -0.588000000 | +1.336000000 |
+| 1 | 8 | 2145822 | -0.006972528 | +0.002080000 | -0.008589232 | +0.005851758 | -1.682000000 | +0.104000000 | -1.786000000 |
+| 1 | 8 | 2145824 | -0.027405175 | -0.030440000 | -0.002110746 | +0.005463952 | -1.362000000 | -1.522000000 | +0.160000000 |
+| 1 | 8 | 2145826 | -0.047894266 | -0.051080000 | -0.010827531 | +0.008890007 | -2.552000000 | -2.554000000 | +0.002000000 |
+| 1 | 8 | 2145828 | -0.023687095 | -0.021480000 | -0.004250074 | +0.007376072 | -1.426000000 | -1.074000000 | -0.352000000 |
+| 1 | 8 | 2145831 | -0.025887178 | -0.014680000 | -0.028500959 | +0.007060891 | -0.582000000 | -0.734000000 | +0.152000000 |
+| 2 | 8 | 2145802 | -0.026388998 | -0.038360000 | -0.001298245 | -0.000852476 | -2.050000000 | -1.918000000 | -0.132000000 |
+| 2 | 8 | 2145806 | -0.035588958 | -0.059840000 | +0.006145613 | -0.004455358 | -3.082000000 | -2.992000000 | -0.090000000 |
+| 2 | 8 | 2145810 | -0.017420233 | -0.025480000 | -0.009645483 | -0.003309412 | -0.310000000 | -1.274000000 | +0.964000000 |
+| 3 | 8 | 2145802 | -0.011339704 | -0.005960000 | -0.012043034 | +0.003554793 | -0.292000000 | -0.298000000 | +0.006000000 |
+| 3 | 8 | 2145808 | -0.068889249 | -0.079960000 | -0.018667223 | +0.007317082 | -3.308000000 | -3.998000000 | +0.690000000 |
+| 3 | 8 | 2145809 | -0.041030159 | -0.042000000 | -0.033274403 | +0.001647838 | -2.544000000 | -2.100000000 | -0.444000000 |
+| 3 | 8 | 2145812 | -0.019488003 | -0.004080000 | -0.025645490 | +0.008938356 | -0.010000000 | -0.204000000 | +0.194000000 |
+| 3 | 8 | 2145813 | -0.009129337 | +0.006960000 | -0.020087050 | +0.007975222 | +0.374000000 | +0.348000000 | +0.026000000 |
+| 3 | 8 | 2145814 | -0.010229267 | -0.018360000 | +0.008916972 | +0.000052359 | -0.940000000 | -0.918000000 | -0.022000000 |
+| 3 | 8 | 2145815 | -0.008514821 | -0.008640000 | -0.011343255 | -0.000936156 | -0.872000000 | -0.432000000 | -0.440000000 |
+| 3 | 8 | 2145818 | -0.020688608 | -0.004560000 | -0.040975886 | +0.005203842 | -1.200000000 | -0.228000000 | -0.972000000 |
+| 3 | 8 | 2145819 | -0.064061414 | -0.072080000 | -0.047030845 | -0.000503840 | -6.312000000 | -3.604000000 | -2.708000000 |
+| 3 | 8 | 2145823 | -0.038314063 | -0.048960000 | +0.007407992 | +0.006264460 | -2.450000000 | -2.448000000 | -0.002000000 |
+| 3 | 8 | 2145827 | -0.023686891 | -0.021440000 | -0.018438022 | +0.003147485 | -0.296000000 | -1.072000000 | +0.776000000 |
+| 3 | 8 | 2145829 | -0.001362896 | +0.028240000 | -0.042993536 | +0.008232835 | +1.122000000 | +1.412000000 | -0.290000000 |
+| 3 | 8 | 2145830 | -0.039471175 | -0.040400000 | -0.023511789 | +0.004137639 | -2.278000000 | -2.020000000 | -0.258000000 |
+| 3 | 8 | 2145831 | -0.056425844 | -0.089520000 | +0.018303858 | -0.000746998 | -4.786000000 | -4.476000000 | -0.310000000 |
+| 1 | 6 | 2145600 | -0.059983463 | -0.064840000 | -0.010844648 | +0.011342069 | -2.428000000 | -3.242000000 | +0.814000000 |
+| 1 | 6 | 2145602 | -0.076729376 | -0.099400000 | +0.003851975 | +0.008304968 | -2.528000000 | -4.970000000 | +2.442000000 |
+| 1 | 6 | 2145603 | -0.004018658 | +0.009440000 | -0.014037573 | +0.006415386 | +0.478000000 | +0.472000000 | +0.006000000 |
+| 1 | 6 | 2145605 | -0.050107114 | -0.069640000 | +0.012154581 | +0.005005489 | -2.200000000 | -3.482000000 | +1.282000000 |
+| 1 | 6 | 2145607 | -0.019486175 | -0.018640000 | -0.002479189 | +0.005694418 | -0.318000000 | -0.932000000 | +0.614000000 |
+| 1 | 6 | 2145608 | -0.026507975 | -0.027400000 | -0.008970740 | +0.004636753 | -1.644000000 | -1.370000000 | -0.274000000 |
+| 1 | 6 | 2145610 | -0.102662641 | -0.131920000 | -0.017837586 | +0.004967366 | -6.736000000 | -6.596000000 | -0.140000000 |
+| 1 | 6 | 2145611 | -0.000772498 | +0.014280000 | -0.006427673 | +0.008840196 | +1.110000000 | +0.714000000 | +0.396000000 |
+| 1 | 6 | 2145612 | -0.097251130 | -0.113840000 | -0.029867196 | +0.008602971 | -5.936000000 | -5.692000000 | -0.244000000 |
+| 1 | 6 | 2145619 | -0.055026136 | -0.087520000 | +0.023702586 | +0.000872911 | -1.782000000 | -4.376000000 | +2.594000000 |
+| 1 | 6 | 2145621 | -0.005703300 | +0.000440000 | -0.002750491 | +0.005186153 | -0.192000000 | +0.022000000 | -0.214000000 |
+| 1 | 6 | 2145624 | -0.000704751 | +0.011080000 | -0.013517810 | +0.004405408 | +0.190000000 | +0.554000000 | -0.364000000 |
+| 1 | 6 | 2145625 | -0.003863234 | +0.003720000 | -0.009794854 | +0.003528778 | +0.312000000 | +0.186000000 | +0.126000000 |
+| 1 | 6 | 2145631 | -0.001325863 | +0.005640000 | -0.006379932 | +0.003359884 | +0.160000000 | +0.282000000 | -0.122000000 |
+| 2 | 6 | 2145601 | -0.016363546 | -0.006800000 | -0.030113363 | +0.002569537 | -1.160000000 | -0.340000000 | -0.820000000 |
+| 2 | 6 | 2145603 | -0.011630234 | -0.014320000 | -0.012284141 | -0.002079008 | -0.724000000 | -0.716000000 | -0.008000000 |
+| 2 | 6 | 2145605 | -0.016192989 | -0.008920000 | -0.022736333 | +0.003128089 | +0.222000000 | -0.446000000 | +0.668000000 |
+| 2 | 6 | 2145607 | -0.005931059 | -0.002320000 | -0.010952328 | +0.001021361 | +0.032000000 | -0.116000000 | +0.148000000 |
+| 2 | 6 | 2145608 | -0.011233319 | -0.020880000 | +0.000224657 | -0.003315284 | -1.730000000 | -1.044000000 | -0.686000000 |
+| 2 | 6 | 2145610 | -0.143760026 | -0.200080000 | -0.013758646 | -0.000423568 | -10.360000000 | -10.004000000 | -0.356000000 |
+| 2 | 6 | 2145615 | -0.016591823 | -0.009520000 | -0.011518473 | +0.006472281 | +0.706000000 | -0.476000000 | +1.182000000 |
+| 2 | 6 | 2145616 | -0.043514851 | -0.047640000 | -0.010549784 | +0.007001916 | +0.008000000 | -2.382000000 | +2.390000000 |
+| 2 | 6 | 2145617 | -0.030703571 | -0.045760000 | -0.004828817 | -0.002777075 | -1.292000000 | -2.288000000 | +0.996000000 |
+| 2 | 6 | 2145619 | -0.081559889 | -0.098760000 | -0.013128312 | +0.008489395 | -3.850000000 | -4.938000000 | +1.088000000 |
+| 2 | 6 | 2145620 | -0.002994577 | +0.023320000 | -0.045034269 | +0.005808297 | +3.798000000 | +1.166000000 | +2.632000000 |
+| 2 | 6 | 2145622 | -0.037062318 | -0.042280000 | -0.013969269 | +0.003275537 | -1.936000000 | -2.114000000 | +0.178000000 |
+| 2 | 6 | 2145623 | -0.053246468 | -0.072320000 | -0.006067360 | +0.000802260 | -1.856000000 | -3.616000000 | +1.760000000 |
+| 2 | 6 | 2145624 | -0.052491103 | -0.073400000 | -0.010230258 | -0.001957975 | -3.784000000 | -3.670000000 | -0.114000000 |
+| 2 | 6 | 2145628 | -0.023905029 | -0.017400000 | -0.017840191 | +0.006372972 | -1.394000000 | -0.870000000 | -0.524000000 |
+| 2 | 6 | 2145631 | -0.025431619 | -0.030480000 | -0.016682665 | -0.000909180 | -1.624000000 | -1.524000000 | -0.100000000 |
+| 3 | 6 | 2145602 | -0.043565562 | -0.040440000 | -0.015270166 | +0.010676512 | -1.522000000 | -2.022000000 | +0.500000000 |
+| 3 | 6 | 2145603 | -0.065643756 | -0.067240000 | -0.031383222 | +0.009160789 | -3.390000000 | -3.362000000 | -0.028000000 |
+| 3 | 6 | 2145604 | -0.023747582 | +0.001440000 | -0.027433994 | +0.016525384 | -0.136000000 | +0.072000000 | -0.208000000 |
+| 3 | 6 | 2145605 | -0.076985007 | -0.098880000 | -0.000915723 | +0.007494290 | -3.840000000 | -4.944000000 | +1.104000000 |
+| 3 | 6 | 2145607 | -0.008183392 | +0.007480000 | -0.018225567 | +0.007951722 | +0.140000000 | +0.374000000 | -0.234000000 |
+| 3 | 6 | 2145608 | -0.017891465 | +0.008360000 | -0.047702804 | +0.009432624 | -3.264000000 | +0.418000000 | -3.682000000 |
+| 3 | 6 | 2145609 | -0.056918884 | -0.050680000 | -0.018207213 | +0.015980720 | +0.092000000 | -2.534000000 | +2.626000000 |
+| 3 | 6 | 2145610 | -0.054971047 | -0.050600000 | -0.020173033 | +0.013499137 | -2.812000000 | -2.530000000 | -0.282000000 |
+| 3 | 6 | 2145611 | -0.024182858 | -0.011720000 | -0.016524187 | +0.011021602 | +1.078000000 | -0.586000000 | +1.664000000 |
+| 3 | 6 | 2145613 | -0.022147782 | -0.022200000 | +0.016362648 | +0.011516577 | -1.958000000 | -1.110000000 | -0.848000000 |
+| 3 | 6 | 2145615 | -0.044427505 | -0.044040000 | -0.009047759 | +0.010885177 | -0.798000000 | -2.202000000 | +1.404000000 |
+| 3 | 6 | 2145616 | -0.004940720 | +0.011960000 | -0.018528877 | +0.007754057 | +1.632000000 | +0.598000000 | +1.034000000 |
+| 3 | 6 | 2145618 | -0.024987602 | -0.023800000 | -0.010682884 | +0.005122737 | -1.686000000 | -1.190000000 | -0.496000000 |
+| 3 | 6 | 2145619 | -0.060685337 | -0.067920000 | -0.021082864 | +0.006816478 | -2.536000000 | -3.396000000 | +0.860000000 |
+| 3 | 6 | 2145620 | -0.000135505 | +0.021840000 | -0.009970486 | +0.012432359 | -0.120000000 | +1.092000000 | -1.212000000 |
+| 3 | 6 | 2145621 | -0.034514704 | -0.024720000 | -0.014068237 | +0.012990233 | +0.710000000 | -1.236000000 | +1.946000000 |
+| 3 | 6 | 2145622 | -0.007123696 | -0.000520000 | -0.008450903 | +0.004224425 | -0.840000000 | -0.026000000 | -0.814000000 |
+| 3 | 6 | 2145623 | -0.061525649 | -0.063600000 | -0.001280355 | +0.016621543 | -1.380000000 | -3.180000000 | +1.800000000 |
+| 3 | 6 | 2145624 | -0.004133667 | +0.022280000 | -0.013193532 | +0.015771607 | +0.754000000 | +1.114000000 | -0.360000000 |
+| 3 | 6 | 2145625 | -0.019182764 | -0.001480000 | -0.015111578 | +0.013613290 | +0.112000000 | -0.074000000 | +0.186000000 |
+| 3 | 6 | 2145626 | -0.050353751 | -0.049400000 | -0.015908069 | +0.011001330 | -2.022000000 | -2.470000000 | +0.448000000 |
+| 3 | 6 | 2145627 | -0.088293875 | -0.109720000 | -0.007476618 | +0.009246890 | -4.624000000 | -5.486000000 | +0.862000000 |
+| 3 | 6 | 2145628 | -0.007091907 | +0.004760000 | -0.010571607 | +0.007252425 | +0.932000000 | +0.238000000 | +0.694000000 |
+| 3 | 6 | 2145629 | -0.041607958 | -0.043040000 | -0.007057605 | +0.009362677 | -1.680000000 | -2.152000000 | +0.472000000 |
+| 3 | 6 | 2145630 | -0.036838915 | -0.016000000 | -0.024754898 | +0.018212445 | -1.012000000 | -0.800000000 | -0.212000000 |
+| 3 | 6 | 2145631 | -0.047990810 | -0.057040000 | +0.002912994 | +0.008936708 | -2.678000000 | -2.852000000 | +0.174000000 |
+| 1 | 4 | 2145402 | -0.007380762 | -0.001480000 | -0.014706786 | +0.001932726 | +1.410000000 | -0.074000000 | +1.484000000 |
+| 1 | 4 | 2145403 | -0.015047530 | -0.014440000 | +0.000970920 | +0.005230806 | +1.014000000 | -0.722000000 | +1.736000000 |
+| 1 | 4 | 2145404 | -0.012092115 | -0.008040000 | -0.012703706 | +0.002653003 | -0.272000000 | -0.402000000 | +0.130000000 |
+| 1 | 4 | 2145405 | -0.003304098 | +0.006960000 | -0.010858593 | +0.004918520 | +0.156000000 | +0.348000000 | -0.192000000 |
+| 1 | 4 | 2145408 | -0.005711339 | -0.007080000 | +0.005038196 | +0.002266798 | -0.302000000 | -0.354000000 | +0.052000000 |
+| 1 | 4 | 2145410 | -0.029700370 | -0.032560000 | -0.013129451 | +0.002969535 | -0.278000000 | -1.628000000 | +1.350000000 |
+| 1 | 4 | 2145411 | -0.011014987 | +0.000360000 | -0.036667105 | +0.000266855 | -0.226000000 | +0.018000000 | -0.244000000 |
+| 1 | 4 | 2145413 | -0.062999046 | -0.084400000 | -0.007217168 | +0.001753895 | -4.246000000 | -4.220000000 | -0.026000000 |
+| 1 | 4 | 2145414 | -0.020415723 | -0.021560000 | -0.009345396 | +0.002520105 | -0.506000000 | -1.078000000 | +0.572000000 |
+| 1 | 4 | 2145415 | -0.037549256 | -0.033520000 | -0.026815830 | +0.006040507 | -0.576000000 | -1.676000000 | +1.100000000 |
+| 1 | 4 | 2145416 | -0.023196454 | -0.022440000 | -0.012141052 | +0.003846139 | +0.140000000 | -1.122000000 | +1.262000000 |
+| 1 | 4 | 2145417 | -0.035123941 | -0.031560000 | -0.024266296 | +0.005752052 | +1.524000000 | -1.578000000 | +3.102000000 |
+| 1 | 4 | 2145420 | -0.019724395 | -0.019800000 | -0.013084626 | +0.001939008 | +0.070000000 | -0.990000000 | +1.060000000 |
+| 1 | 4 | 2145422 | -0.014785534 | -0.011680000 | -0.015129939 | +0.002070552 | +1.648000000 | -0.584000000 | +2.232000000 |
+| 1 | 4 | 2145423 | -0.007282821 | +0.004480000 | -0.021894510 | +0.003850468 | +0.050000000 | +0.224000000 | -0.174000000 |
+| 1 | 4 | 2145429 | -0.015963486 | -0.012720000 | -0.018982696 | +0.001364677 | +0.910000000 | -0.636000000 | +1.546000000 |
+| 1 | 4 | 2145430 | -0.016762937 | -0.016360000 | -0.011627548 | +0.001822672 | -0.550000000 | -0.818000000 | +0.268000000 |
+| 1 | 4 | 2145431 | -0.030273667 | -0.027040000 | -0.027171753 | +0.003194141 | -2.188000000 | -1.352000000 | -0.836000000 |
+| 2 | 4 | 2145400 | -0.049866955 | -0.049720000 | +0.001901137 | +0.015633296 | +0.394000000 | -2.486000000 | +2.880000000 |
+| 2 | 4 | 2145402 | -0.023780466 | +0.002920000 | -0.026666189 | +0.017824609 | -2.048000000 | +0.146000000 | -2.194000000 |
+| 2 | 4 | 2145403 | -0.071583982 | -0.063760000 | -0.024011004 | +0.019748680 | -4.576000000 | -3.188000000 | -1.388000000 |
+| 2 | 4 | 2145404 | -0.033607263 | +0.000880000 | -0.052768574 | +0.018392690 | +2.164000000 | +0.044000000 | +2.120000000 |
+| 2 | 4 | 2145405 | -0.052801968 | -0.032080000 | -0.038769684 | +0.018715062 | -5.518000000 | -1.604000000 | -3.914000000 |
+| 2 | 4 | 2145406 | -0.025679668 | +0.000280000 | -0.018756052 | +0.020248852 | -1.092000000 | +0.014000000 | -1.106000000 |
+| 2 | 4 | 2145407 | -0.051952566 | -0.036800000 | -0.026195665 | +0.018333867 | +0.476000000 | -1.840000000 | +2.316000000 |
+| 2 | 4 | 2145408 | -0.028906768 | -0.016720000 | -0.012334790 | +0.013502330 | +0.360000000 | -0.836000000 | +1.196000000 |
+| 2 | 4 | 2145409 | -0.026987826 | -0.021840000 | +0.001955043 | +0.012286339 | +0.982000000 | -1.092000000 | +2.074000000 |
+| 2 | 4 | 2145410 | -0.014174547 | +0.009160000 | -0.016646554 | +0.015592580 | -0.880000000 | +0.458000000 | -1.338000000 |
+| 2 | 4 | 2145411 | -0.051162426 | -0.016680000 | -0.039404920 | +0.027664949 | -0.922000000 | -0.834000000 | -0.088000000 |
+| 2 | 4 | 2145412 | -0.030030031 | -0.014560000 | -0.013834241 | +0.015687759 | -1.660000000 | -0.728000000 | -0.932000000 |
+| 2 | 4 | 2145413 | -0.051706230 | -0.022040000 | -0.042081921 | +0.023653654 | +0.124000000 | -1.102000000 | +1.226000000 |
+| 2 | 4 | 2145414 | -0.001062794 | +0.033800000 | -0.037063958 | +0.013603606 | -0.910000000 | +1.690000000 | -2.600000000 |
+| 2 | 4 | 2145415 | -0.061408128 | -0.045040000 | -0.049963084 | +0.014891203 | -2.398000000 | -2.252000000 | -0.146000000 |
+| 2 | 4 | 2145417 | -0.013956801 | +0.013800000 | -0.021140153 | +0.017274755 | -0.186000000 | +0.690000000 | -0.876000000 |
+| 2 | 4 | 2145418 | -0.045573841 | -0.027480000 | -0.018373016 | +0.020825937 | -0.258000000 | -1.374000000 | +1.116000000 |
+| 2 | 4 | 2145420 | -0.022009606 | -0.011480000 | -0.005144468 | +0.012430265 | -0.056000000 | -0.574000000 | +0.518000000 |
+| 2 | 4 | 2145421 | -0.027325654 | +0.006800000 | -0.032665786 | +0.022285918 | +0.200000000 | +0.340000000 | -0.140000000 |
+| 2 | 4 | 2145422 | -0.060022254 | -0.049960000 | -0.021219496 | +0.018684406 | -0.694000000 | -2.498000000 | +1.804000000 |
+| 2 | 4 | 2145423 | -0.036301035 | -0.024280000 | -0.005157648 | +0.017757741 | -2.796000000 | -1.214000000 | -1.582000000 |
+| 2 | 4 | 2145424 | -0.036810030 | -0.011400000 | -0.022041248 | +0.022217655 | -1.728000000 | -0.570000000 | -1.158000000 |
+| 2 | 4 | 2145425 | -0.020371074 | +0.000920000 | -0.023279216 | +0.014031310 | -2.094000000 | +0.046000000 | -2.140000000 |
+| 2 | 4 | 2145426 | -0.041470806 | -0.033120000 | -0.008040221 | +0.015874740 | -0.216000000 | -1.656000000 | +1.440000000 |
+| 2 | 4 | 2145427 | -0.052089151 | -0.038200000 | -0.026919821 | +0.017273205 | -2.766000000 | -1.910000000 | -0.856000000 |
+| 2 | 4 | 2145428 | -0.022992766 | +0.000200000 | -0.016198884 | +0.018273100 | -0.684000000 | +0.010000000 | -0.694000000 |
+| 2 | 4 | 2145429 | -0.085600022 | -0.079520000 | -0.028099185 | +0.021506267 | -1.468000000 | -3.976000000 | +2.508000000 |
+| 2 | 4 | 2145430 | -0.008220649 | +0.028600000 | -0.025982203 | +0.020445988 | +2.340000000 | +1.430000000 | +0.910000000 |
+| 3 | 4 | 2145400 | -0.048741529 | -0.016560000 | -0.030416649 | +0.028024534 | +2.114000000 | -0.828000000 | +2.942000000 |
+| 3 | 4 | 2145401 | -0.063030114 | -0.047240000 | -0.021521481 | +0.023505670 | +1.690000000 | -2.362000000 | +4.052000000 |
+| 3 | 4 | 2145402 | -0.061063373 | -0.008160000 | -0.058172434 | +0.037899643 | +1.242000000 | -0.408000000 | +1.650000000 |
+| 3 | 4 | 2145403 | -0.047759469 | -0.027200000 | -0.035680255 | +0.018015393 | -2.380000000 | -1.360000000 | -1.020000000 |
+| 3 | 4 | 2145404 | -0.048234559 | -0.024480000 | -0.029296486 | +0.022309613 | -2.120000000 | -1.224000000 | -0.896000000 |
+| 3 | 4 | 2145405 | -0.018505728 | +0.014560000 | -0.025175790 | +0.021144991 | +1.308000000 | +0.728000000 | +0.580000000 |
+| 3 | 4 | 2145406 | -0.057239240 | -0.025080000 | -0.033800096 | +0.029543211 | +0.862000000 | -1.254000000 | +2.116000000 |
+| 3 | 4 | 2145407 | -0.063754768 | -0.043360000 | -0.023667703 | +0.026302457 | -0.310000000 | -2.168000000 | +1.858000000 |
+| 3 | 4 | 2145408 | -0.017427300 | +0.024920000 | -0.033948949 | +0.024686615 | -0.300000000 | +1.246000000 | -1.546000000 |
+| 3 | 4 | 2145409 | -0.013836667 | +0.028560000 | -0.019642445 | +0.027935933 | -3.488000000 | +1.428000000 | -4.916000000 |
+| 3 | 4 | 2145410 | -0.078109463 | -0.064240000 | -0.024319714 | +0.025845549 | -3.274000000 | -3.212000000 | -0.062000000 |
+| 3 | 4 | 2145411 | -0.038984571 | +0.001720000 | -0.048114403 | +0.025754250 | -0.592000000 | +0.086000000 | -0.678000000 |
+| 3 | 4 | 2145412 | -0.054409583 | -0.030280000 | -0.030063707 | +0.024194471 | -0.726000000 | -1.514000000 | +0.788000000 |
+| 3 | 4 | 2145413 | -0.049423867 | -0.007800000 | -0.031143130 | +0.034620928 | +0.288000000 | -0.390000000 | +0.678000000 |
+| 3 | 4 | 2145415 | -0.039368720 | -0.027440000 | -0.029292665 | +0.011372921 | +1.454000000 | -1.372000000 | +2.826000000 |
+| 3 | 4 | 2145416 | -0.057346744 | -0.033200000 | -0.021994610 | +0.027508361 | -0.438000000 | -1.660000000 | +1.222000000 |
+| 3 | 4 | 2145417 | -0.039429433 | +0.006440000 | -0.051950673 | +0.028352231 | +0.910000000 | +0.322000000 | +0.588000000 |
+| 3 | 4 | 2145418 | -0.022086185 | +0.018800000 | -0.035284796 | +0.024660746 | -1.736000000 | +0.940000000 | -2.676000000 |
+| 3 | 4 | 2145419 | -0.070630787 | -0.074880000 | -0.010263025 | +0.015135880 | -0.338000000 | -3.744000000 | +3.406000000 |
+| 3 | 4 | 2145420 | -0.049236832 | -0.045880000 | -0.001047101 | +0.016806702 | -1.480000000 | -2.294000000 | +0.814000000 |
+| 3 | 4 | 2145421 | -0.043832286 | -0.017480000 | -0.036165156 | +0.020746740 | -0.386000000 | -0.874000000 | +0.488000000 |
+| 3 | 4 | 2145422 | -0.081945292 | -0.052960000 | -0.026736715 | +0.036852278 | +1.184000000 | -2.648000000 | +3.832000000 |
+| 3 | 4 | 2145423 | -0.061980195 | -0.064840000 | -0.001149925 | +0.016247217 | -1.202000000 | -3.242000000 | +2.040000000 |
+| 3 | 4 | 2145424 | -0.023554869 | +0.019720000 | -0.043590747 | +0.024281645 | -1.668000000 | +0.986000000 | -2.654000000 |
+| 3 | 4 | 2145425 | -0.058985974 | -0.023920000 | -0.038952825 | +0.030556127 | -1.236000000 | -1.196000000 | -0.040000000 |
+| 3 | 4 | 2145426 | -0.043211596 | -0.039360000 | -0.007238847 | +0.013487942 | -1.228000000 | -1.968000000 | +0.740000000 |
+| 3 | 4 | 2145427 | -0.039919380 | -0.007360000 | -0.044629927 | +0.021378402 | -1.474000000 | -0.368000000 | -1.106000000 |
+| 3 | 4 | 2145428 | -0.080161861 | -0.072480000 | -0.005642059 | +0.027733243 | -2.868000000 | -3.624000000 | +0.756000000 |
+| 3 | 4 | 2145429 | -0.049451235 | -0.003520000 | -0.043220752 | +0.034021009 | -2.100000000 | -0.176000000 | -1.924000000 |
+| 3 | 4 | 2145430 | -0.010733201 | +0.009920000 | -0.000931804 | +0.017397660 | -1.458000000 | +0.496000000 | -1.954000000 |
+| 3 | 4 | 2145431 | -0.043697784 | -0.014280000 | -0.030467768 | +0.024561453 | +0.278000000 | -0.714000000 | +0.992000000 |
+
+### Cost, selection exposure and cumulative judgment
+
+Actual scientific cost: **0fits, 0training team steps, 0optimizer updates, 0storage calls**;
+6replay+18fresh=24panels, 96,000replay+288,000fresh=384,000 evaluation team steps;
+768,000replay+1,728,000fresh=2,496,000 UAV steps;768episodes/resets and12,000batched policy calls.
+These include12,000actor and12,000critic calls (2,496,000rows each),1,200coordinator and
+1,200team-decoder calls (38,400rows each),7,800individual-decoder calls (249,600rows), and
+zero snapshot refreshes. LOCAL1 still executes its one-category wrapper; no inference-speed
+advantage is claimed. Retained weights were selected by the original fixed final45 contract,
+not this result. B17 adds deployment exposure to those assets, no independent training n.
+
+Scientific-command wall410.589120363s (6.843152006min); run_study409.304952857s;
+scientific-process user/system CPU1083.873956/8.484693s; Linux RUSAGE_SELF peak
+2,389,724KiB (~2.279GiB), Torch4threads, CPUfloat32. These are not elapsed preparation,
+queue, transfer/publication or simultaneous shared-node occupancy measurements. The final
+56-file collection is3,244,211,524bytes; native independently staged input copies additionally
+occupy985,227,587bytes and the local collected output is another3,244,211,524bytes. Local
+copies of original retained assets already existed. No full-pipeline speed comparison is made;
+unmetered support work is unknown, not zero. The earlier pre-claim path refusal remains a
+technical launch fact in its prior entry, not a failed fit or a new scientific attempt.
+
+I checked published main `aed4aab0f8ac4dd3d2a69d7623a5bddc5f65195a` at this decision boundary:
+owner pause remains lifted and this direction retains the same lead. Its shared topics on
+competent ordinary comparators, learning-versus-deployment, native S1 single eligibility,
+and training blocks versus nested worlds directly govern this reading. The B16 L comparator
+is retained; no new hierarchy attribution is bought by better fresh-world performance.
+The other direction's B08 entropy/selection findings are context, not additional independent
+replication of our assets or permission to duplicate its random-renewal study.
+
+- **Strengthened:** these three ordinary local recurrent assets retain useful relative N8
+  deployment means on a new native panel. H6 retains a narrower smaller-roster native-objective
+  use in these three N4 comparisons. Mean task quality, aggregate delivered quality, actual
+  service and height cost must be separated when explaining that use.
+- **Weakened:** a stable minimum-service ranking, all-world dominance, a uniform small-N
+  service advantage, and the denominator-only or height-only versions of the N4 explanation.
+  The original H6−SET package result still does not establish hierarchy necessity against L.
+- **Untouched/unresolved:** B15's fixed joint confirmation remains inconclusive; it is not
+  extended or rescued. Pure count causality, skill attribution, a common-user quality mechanism,
+  population-level training rankings, real UAV deployment and within-episode roster adaptation
+  remain unestablished. Changing N changes geometry, interference, capacity and sampled worlds.
+
+The B17 batch ends at its fixed24panels. No additional fresh panel, new confirmation or retraining
+is appended to it. Merely measuring a second N4 panel would sharpen recurrence of retained
+assets but would leave the learning-support question untouched. The next direction judgment
+is whether a **new ordinary learning comparison with roster exposure varying between complete
+episodes**, against continuing fixed-N6 training conditions, is worth buying. That would ask
+about a training curriculum/program, not identify a pure count or hierarchical mechanism.
+I am obtaining a read-only feasibility map and focused Pro criticism before selecting any
+new fit. The completed batch is not the end of DM responsibility; neither is a new batch owed.
+
+### Final native artifact identity inventory
+
+Paths are relative to the B17 run directory above. This final collector inventory includes
+`process-exit.json`, which did not exist when the runner wrote its own output inventory.
+
+| File | Bytes | SHA256 |
+| --- | --- | --- |
+| `admission-preflight.json` | 770 | `3c660ebe422eea99de22463f1c6172306ee60701c3aa38b07c83694a55b55914` |
+| `config.json` | 8545 | `99d1445917c7c4cfc1cff88dc7ecc0230a54ca39b8e0c1eebc2cebd8953057d2` |
+| `launch-manifest.json` | 4351 | `fedd1774107ce0f46d9d66ccaf4d9905eb8afc2f8918bafc28b849583c9cec82` |
+| `launch-status.json` | 627 | `ab87bd75b5c2863559c2afba5084a90b47e6aa1b287e6f8824919b0941afdf3c` |
+| `panel_fresh_b1_h6_n4.json` | 20035 | `94f7da99352066d1017204b857b2e91e5acd93789b3fd4976f22fad8645d5f8a` |
+| `panel_fresh_b1_h6_n6.json` | 20064 | `5322e7f9e27ecacdf8e977427d6438ac247e1df65d12017f7c36ef09394f51e8` |
+| `panel_fresh_b1_h6_n8.json` | 20077 | `5a6a0fd9dab50fd17083ccb3a01bfe7c42b2cf948d499b91fd77aba87f119e81` |
+| `panel_fresh_b1_local1_n4.json` | 19915 | `c48d7022da9a422f09c173e3fd3b9ac8b39a0cabc5d1bfc9bea5d6b0a90d6794` |
+| `panel_fresh_b1_local1_n6.json` | 19933 | `d12bf44545c67c38edd6e4ac23444807a672432dc6febe6f3cd6fc46c7f57ea1` |
+| `panel_fresh_b1_local1_n8.json` | 19958 | `d761abeab76640ccdfe4048db62c1089c8b04751e18c6eb8c0d276f8d3b9e514` |
+| `panel_fresh_b2_h6_n4.json` | 20054 | `32a4f186169ac1db176c2b690936fb5612555aef9793d1dafd9a674cb3993c1f` |
+| `panel_fresh_b2_h6_n6.json` | 20068 | `503cca8b84e64dc27426d70a935ac588723fbdf6d2c804036c2a51d2082cc80d` |
+| `panel_fresh_b2_h6_n8.json` | 20105 | `5c117427899a2529a6fabdd11dbd0c22528f76d82346b29d9ae7049b0afcb173` |
+| `panel_fresh_b2_local1_n4.json` | 19914 | `27312767f52492616b9c4bf6f392e27dc1ce9c13c1e7454cfea293556c3fa57a` |
+| `panel_fresh_b2_local1_n6.json` | 19933 | `6f5f806e191a5e1e866f723bc6e242409b773fcc96acd5c82c3b82f5041acfac` |
+| `panel_fresh_b2_local1_n8.json` | 19961 | `f097aef38aaab739cf07c22104f13350a9b9c6c5b40da4f49333754e8333652e` |
+| `panel_fresh_b3_h6_n4.json` | 20035 | `f425b084e0679d856de1f0a2c648502215acacc64c7f247e7fa07ed19b692b30` |
+| `panel_fresh_b3_h6_n6.json` | 20064 | `7b98341d16840ef65cbb3d596212cc6159a4a15d79d1ced7d981e77b2c432d64` |
+| `panel_fresh_b3_h6_n8.json` | 20091 | `e976c2dfc8846038c3965d538dbc3c7ac614336d33664b3576a5b26909e2ff93` |
+| `panel_fresh_b3_local1_n4.json` | 19926 | `a9020328995108139d3ed0eb3f4bec6e2a33d29b1294f7ce1527ddf929a42760` |
+| `panel_fresh_b3_local1_n6.json` | 19917 | `2cdd124682d6dab98cc03ef8d76e153ae974327ca9ed7d328a72c07b5adbb744` |
+| `panel_fresh_b3_local1_n8.json` | 19973 | `fc612fcd2990098a3e084bd51817fd20034f08ceb3d65c5b2e737595c8c60533` |
+| `panel_replay_b1_h6_n8.json` | 33546 | `89593320a7f246e1228326d01200e222753dc72da0e2fcbe67ebf0eea4fcb614` |
+| `panel_replay_b1_local1_n8.json` | 33428 | `107e6e6ede1d848e80945742550c6f6145c7c1237c19d2ca502a6f97f13b1743` |
+| `panel_replay_b2_h6_n8.json` | 33586 | `f366f20a098c68056eba0c77a96cec1d6190f790f85b213e1f9acad95cbae72d` |
+| `panel_replay_b2_local1_n8.json` | 33406 | `875e9950a82cec33a634d3cd9049a73d25197ac709ad4a4132140aa935a05f3a` |
+| `panel_replay_b3_h6_n8.json` | 33559 | `ff2d6bd63ae64eff31c731c68dceb40977f8cfa100157fe9611b3146c34b614f` |
+| `panel_replay_b3_local1_n8.json` | 33436 | `96d7d2748cbcc8eabf998edf053af7498f1359a02ead4c8c49436cb80bb46b03` |
+| `process-exit.json` | 550 | `c14fd1d6b2f2c8aee4299171bb5b846a3a471f99278a312d7c82836cdc483d95` |
+| `stderr.log` | 0 | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` |
+| `stdout.log` | 0 | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` |
+| `summary.json` | 1153761 | `0199e236f0a40d0440b4b42c0050588056711293007d90e3beea0ab3f52a4e38` |
+| `trace_fresh_b1_h6_n4.npz` | 95070134 | `a1df35248eb75b771dc980ea78287e111cf5489b18f278c64f243218d7ceb914` |
+| `trace_fresh_b1_h6_n6.npz` | 127096758 | `69596b53db58c7be8c575f55546f7025630f053a85e2faaeef7740a234cc254a` |
+| `trace_fresh_b1_h6_n8.npz` | 159123382 | `321d301211dbd68e3f17e7e54916d550db90d3aabc141b0d1ba969736aaf2677` |
+| `trace_fresh_b1_local1_n4.npz` | 95070134 | `4578e81adfe5079f7522f4fb301a4289a5f276d389578a213913e5e6db8d7c8e` |
+| `trace_fresh_b1_local1_n6.npz` | 127096758 | `1741096334297ead2d023553f4f87d67c30677b549231d83a4dbd72ea06b1fb4` |
+| `trace_fresh_b1_local1_n8.npz` | 159123382 | `36bd5b7dd139760d577c52ea08a22e4eafda277285170885ca9770fd2ae62fe5` |
+| `trace_fresh_b2_h6_n4.npz` | 95070134 | `5b2b84c98dc7a2d296bb59071777d483b67d58dcc09634b43ee6eb38f8214c27` |
+| `trace_fresh_b2_h6_n6.npz` | 127096758 | `8c57ca986f353b3932fe947469192e739834669685a145da92746863cc63ff26` |
+| `trace_fresh_b2_h6_n8.npz` | 159123382 | `7bb72b31001af77dd0c6b61871ea3e3b6dd45880c508c493b41359553f3baac6` |
+| `trace_fresh_b2_local1_n4.npz` | 95070134 | `6366163fbaaadc1e7ea3e5080e83df6dc7dff272ac03901f5f8e47fe71e5fc43` |
+| `trace_fresh_b2_local1_n6.npz` | 127096758 | `4abba2245af679bc754919ac7ba792439b56c3f7baaf4832c0837de09ed34f27` |
+| `trace_fresh_b2_local1_n8.npz` | 159123382 | `2877ccc28f4969de282769ed7bfce87f9fb74b9c736d5e5fd2ce9da2f5a49ca6` |
+| `trace_fresh_b3_h6_n4.npz` | 95070134 | `c033633dd6e8eba281e72c7f86e34db234edc1dc1a17eb03023a1bb85e749476` |
+| `trace_fresh_b3_h6_n6.npz` | 127096758 | `6aa8fa0fce9db7c2af65934ae1f17d99d79258f760c6e38f466ecaff1b9eb856` |
+| `trace_fresh_b3_h6_n8.npz` | 159123382 | `efbbb6f2f4c9db1db7f9cce6d9fd41c6d6c7b05ef89af9121ebf0561abd0f025` |
+| `trace_fresh_b3_local1_n4.npz` | 95070134 | `eeb2aa3d402203bcdeaf97e130d8dd82df9cc2e40409a78a950e5f577b66cfc7` |
+| `trace_fresh_b3_local1_n6.npz` | 127096758 | `7a0f984acfa09c000acb54fdee95311d1f198ebc84f4236c434c2e0d5cb51140` |
+| `trace_fresh_b3_local1_n8.npz` | 159123382 | `fe8fb08009b72c4a3c2ab13619b0a06162b0ac4eb95eb0b6a531fd1e7df8fc4a` |
+| `trace_replay_b1_h6_n8.npz` | 159123382 | `418185f87f7dbb15ecffd3c3ee07f8c90f48f3e51e10afc53eab987ed7d7ee83` |
+| `trace_replay_b1_local1_n8.npz` | 159123382 | `28a6ec0e2e99ea59039aef67f75c86a40dde2ff914d00b96bd45eec3aeb83925` |
+| `trace_replay_b2_h6_n8.npz` | 159123382 | `331683206c1003f4b6e8e3840b3234acc83c8770777c841bd06d4fd92402d9c7` |
+| `trace_replay_b2_local1_n8.npz` | 159123382 | `57387bcc56dd5b51bea4b9c3cef098859bf0642ff5b8816a4cfb5d398e5420ef` |
+| `trace_replay_b3_h6_n8.npz` | 159123382 | `8342cfe189fe2ef0b8cda3d034c80e21849ea260c996a1ec8880edfb3b619a63` |
+| `trace_replay_b3_local1_n8.npz` | 159123382 | `381174b2bbff2e9fe37fbe72ecae893b6531a0ba69ca3329ae2a1e6ebc8035ab` |
+
+
+## 2026-09-24 — Post-B17 decision: test ordinary training support before another retained-policy panel
+
+The current choice is an ordinary learning-support question within the existing N direction,
+not a continuation of B15 confirmation or an extra B17 evaluation panel. B17's retained-policy
+N8 signs survive new worlds, whereas N4 native J favors H6 with mixed service and unresolved
+geometry. Additional frozen-world recurrence can improve a finite deployment estimate but
+cannot tell whether the ordinary learner's N6-only training support is a modifiable limitation.
+The current shared background at `aed4aab0f8ac4dd3d2a69d7623a5bddc5f65195a` makes L the
+competent ordinary working reference, distinguishes actual learning from frozen use, and
+warns that joint physics survives S1's unique eligible-link property. Those lessons change
+the proposed comparator: compare **the same ordinary LOCAL1 learner under two training
+schedules**, not return to the weaker SET or treat H6 as evidence of necessary skills.
+
+A bounded read-only Scout mapped technical feasibility. B16's104-wide local observation,
+133-wide padded state with MAX_UAVS8, shared value head and actor/critic parameter shapes
+can handle physical N4/6/8 while retaining one learned parameter/optimizer instance. Its
+production runner currently binds N6, and changing config alone is unsafe: RolloutBuffer,
+actor/critic hidden arrays and per-lane skill bookkeeping have N-dependent shapes. A new
+candidate would switch only after a complete500-step episode/rollout has been updated and
+its storage consumed; rebuild runtime arrays/buffer and reset lane state, while preserving
+model objects, optimizer objects/Adam state and scalar normalizers. Construction-time optimizer
+replacement must not be repeated. B16 disables observation/state normalization. The fixed-N6
+control must execute the same boundary adapter with N unchanged to control added reset/bookkeeping.
+These are feasible bounded changes, not an implemented or tested new learner. Source points:
+`experiments/candidates/agent_count_generalization/local_ordinary_b16/runner.py` spec/config,
+`make_agent` and `run_fit`; `adapter.py`/`models.py`; `action_law_b03/runner.py:collect_rollout`;
+`hmasd/utils.py:RolloutBuffer`; `hmasd/agent.py` recurrent arrays, reset and real update path.
+No model, environment, training or rollout was constructed for this feasibility reading.
+
+The candidate discussed below is **not selected for execution**. It proposes one fresh paired
+training block, two fits, same actual initialized modules/normalizers and program except for
+complete-episode roster schedule. FixedN6 uses45rollouts of N6; mixed uses `[4,6,8]` repeated15
+with16lanes×500steps each. Both therefore use360,000team and2,160,000UAV training steps,
+45outer updates, same existing PPO epochs, reward/action/entropy/critic/actor contracts.
+Actual minibatches, optimizer calls and wall/RSS must still be measured: equal team/UAV steps
+do not promise equal compute, and native scalar reward J/N changes scale with N. This is a
+whole training-schedule comparison, not an identified count feature or pure support effect.
+
+A prospective evaluator could use fixed initial/final panels at physical N4/5/6/7/8,32worlds
+and500steps each, common within-N worlds between arms, all new to training and prior studies.
+N5 andN7 are untrained by either schedule and bracketed only by the mixed support; they test
+interpolation, not extrapolation, dynamic roster loss, a larger population or general invariance.
+N4/N8 are seen only by mixed, so their improvements alone cannot carry an unseen-N claim.
+N6 remains a retained-use tradeoff. The reason to consider the purchase is useful new native
+learning under a changed ordinary training program; not a quota, invented bottleneck or
+obligation to obtain a positive result. The fixed B17 evidence and adverse worlds remain intact.
+
+## Pro question 2026-09-24 ordinary-roster-training-after-b17
+
+Conversation: new (Jev account; private address remains local).
+
+Question: After B16/B17 establish a stronger ordinary comparator but roster-dependent native
+tradeoffs, is the two-fit ordinary LOCAL1 mixed-roster training comparison below the smallest
+worthwhile next investment, or does its estimand/alternative make it less informative than
+one specific cheaper next observation or stopping this static-deployment route? Critique the
+choice, refine a discriminating prediction and advise whether to select it. Do not assume a
+new experiment is owed; do not select a new direction or repeat the other DM's skill study.
+
+Standing and material change:
+- B15's three-block H6−SET confirmation stayed inconclusive by its original joint lower-bound
+  rule (N8 J lower bound−.000007912493; service lower bound−.876090407179 rather than>1).
+  No extension or reinterpretation follows.
+- B16 trained three ordinary LOCAL1 instances (task-only MAPPO, one-category trainable FiLM,
+  local recurrent actor, central critic, Gaussian .05 entropy, clipped execution, N6/k10/360k).
+  All three final N8 J/service means exceed corresponding SET and H6; L is now the ordinary
+  working comparator. It has actual own-learning gains, with different initial relative gaps.
+- Fully audited B17 reused six final45 L/H6 policies: all six old N8 replays are array-exact;
+  then18fresh panels at N8/6/4. All56files/3,244,211,524bytes and full24traces were independently
+  verified;0newfits or updates. Three blocks share each N's32newworlds, not96 independent worlds.
+- Fresh L−H6 ΔJ/ΔS by block:
+  N8: +.015037706975/+1.5254375; +.050939680894/+3.9948125;
+      +.010756956452/+1.3816875.
+  N6: −.000722889476/+.4690625; +.002817394562/+.6476875;
+      −.027547588637/−.830375.
+  N4: −.003493081751/+.3066875; −.031485972026/−.504625;
+      −.045731950073/−.9334375.
+  Thus fresh N8 mean prediction survives, H6's N4 native objective use survives across assets,
+  but small-N service is mixed. N8 L minima are now higher in all3, whereas old L minima were
+  lower in all3. L still loses7.312services/J.133721 at N8/block1/world2145819, and10.004/J.143760
+  at N6/block2/world2145610. H6 N4 also has adverse J-or-S worlds17/14/9; block3 minS31.196
+  is lower than L31.618 despite higher means. These observations do not establish stable tails.
+- At N4 L−H6 meanJ−.026903667950 decomposes as coverage−.005279750,
+  quality−.006835863157, height−.014788054793. This arithmetic is not causal shares.
+  Removing P arithmetically leaves L−H6 negative in all3. H6's mean native Q is higher at all9
+  block×N cells; fixed-denominator connected_quality_sum/50 still favors H6 at N4/N6 in all6,
+  weakening a denominator-only explanation. N8 fixed-denominator signs favor L in blocks1/2
+  but H6 in3. Selected user sets/geometries still differ; no common-user quality mechanism.
+- In all288k fresh team steps, unique eligibility and S=sum_i min(e_i,10), U=sum_i max(e_i−10,0)
+  hold. N4 mean U is5.371875 L vs5.3683125 H6; H6's mean service advantage+.377125 is almost
+  entirely higher E+.3735625. Current S1 shared understanding already predicts unique eligible
+  links; this is no new matching theorem or evidence that movement cannot improve outcomes.
+  N changes capacity/geometry/interference and uses different worlds. No initial N4 is measured.
+
+Proposed purchase, for criticism rather than execution:
+- One fresh paired training block, **two fits** of the same LOCAL1 program, initialized with
+  actually identical full model/normalizer bytes at one declared fresh seed. No reused trained
+  endpoint, H6 fit, selected best old block or hyperparameter search.
+- Fixed schedule45×N6 versus mixed complete-rollout `[4,6,8]`×15. Each rollout16lanes×500steps,
+  all terminal before the update/boundary. Same360kteam/2.16MUAV training steps per arm,
+ 45outer updates and existing PPO settings. One persistent optimizer/model lifetime per arm;
+  reset per-episode runtime in both arms via the same boundary code. No within-episode join/leave.
+- Preserve native information, reward scalar J/N, task-only objective, critic, actor, normalizer,
+  action map and entropy. Actual optimizer/minibatch counts and resource costs reported because
+  equal steps do not remove N-dependent batch/scale changes. The treatment is a learning program.
+- One fixed initial and final panel at each physical N4/5/6/7/8,32new common worlds×500steps.
+  New N5/N7 are the two untrained interpolation targets, read separately in native J and S;
+  N4/N8 are seen by mixed and cannot support an unseen-N claim. N6 and all adverse worlds remain.
+  Native C/Q/P/E/S/U and each arm's own-learning increments accompany the final comparison.
+  No post-result N pooling, checkpoint selection, more training blocks or altered world panel.
+- Prospective cost:2fits,720k team/4.32M UAV training steps;20eval panels,320kteam/1.92MUAV
+  evaluation steps,640evaluation episodes; total1.04Mteam/6.24MUAV steps plus real learner updates.
+  Historical LOCAL1 fits consumed roughly49minutes each on the shared native node, but this is
+  only planning context, not a guaranteed duration or controlled speed comparison. Technical
+  fixtures/review are extra non-scientific work; no pilot fit or search is requested.
+- Working prediction to stress-test: mixed training gives positive final J **and S** differences
+  on each N5 andN7 while both programs learn useful service; N4/N8 may improve but do not
+  substitute for that prediction. Preserve any N6 cost and all quality/height/service conflicts.
+  The strongest alternative is that original fixed-N6 local feedback already interpolates well,
+  and dividing experience or changing optimization weighting hurts or does not add deployment
+  use. A retained-policy N4 replay cannot discriminate those learning predictions.
+- Feasibility is source-mapped only: fixed104/133 feature widths and shared value heads support
+  changing N, but buffers, recurrent arrays, config/batch metadata and skill state require an
+  atomic complete-episode boundary adapter. Persistent Adam state and zero initial hidden-state
+  inputs must be tested through real updates. Existing checkpoints promise evaluation, not resume.
+
+Context (paths marked source_sha resolve at the full immutable revision supplied in the message):
+- Current owner instruction: research resumed; this session is the independent DM and should
+  continue evidence-led research. No new task, cross-App message, owner approval layer or fit
+  allowance. Owner pause at main `aed4aab0f8ac4dd3d2a69d7623a5bddc5f65195a` is lifted.
+- Governance: `docs/project/OPERATING_CONSTITUTION.md` at source_sha, §§1–5,7–8: direction
+  ownership, fit cost without allowance, cumulative reasoning, proactive Pro, bounded claims.
+- Methods at source_sha: `.agents/skills/hmasd-scientific-tools/SKILL.md`, Explore an idea,
+  Update the working explanation, Comparators and MARL information, Statistics, Cost and exposure,
+  Pro; `.agents/skills/hmasd-research-engineering/SKILL.md`, L0, Checks/review and execution.
+- Shared scientific background: `docs/research/RESEARCH.md` at full main revision
+  `aed4aab0f8ac4dd3d2a69d7623a5bddc5f65195a`, topic3 B15/B16 ordinary comparator and S1 single
+  eligibility, topic4 finite learning versus representation, topic6 nested-world uncertainty,
+  and current plan ordinary-comparator paragraphs. The passages used are summarized above;
+  this background is revisable evidence, not scientific authority. Skill DM B08 and random-renewal
+  question belong to another direction; do not duplicate that retained-library selection study.
+- Direct evidence at source_sha: this NOTES file's B16-complete section and the immediately
+  preceding B17-complete and Post-B17 decision entries; runner summary and all panel JSONs under
+  `runs/agent_count_generalization/s1_fresh_world_deployment_b17_final45/`.
+  Raw NPZs are hash-identified at the recorded local/native paths; GitHub cannot provide ignored
+  binaries. Do not claim you independently read them. DM and independent Critic readings are
+  described explicitly; advice supplies no new replication.
+- Frozen contracts: `CLAIM_bounded_count_transfer_20260923.md` for B15 and preceding B17 L0
+  in this NOTES file, all at source_sha as records of their original fixed source. They stay intact.
+- Prior Pro advice: `Pro question 2026-09-24 fresh-world-count-transfer-after-local-b16` and its
+  complete Answer in this NOTES file. It justified zero-fit deployment evaluation first. B17's
+  actual roster-dependent outcome and this new learning-program choice were not decided there;
+  that material change motivates this focused question, not a per-result review requirement.
+- Engineering evidence at source_sha only if needed for the disputed feasibility premise:
+  `experiments/candidates/agent_count_generalization/local_ordinary_b16/runner.py` config,
+  make_agent/run_fit;
+  `experiments/candidates/agent_count_generalization/adapter.py` and
+  `experiments/candidates/agent_count_generalization/models.py`;
+  `experiments/candidates/agent_count_generalization/action_law_b03/runner.py:collect_rollout`;
+  `hmasd/utils.py:RolloutBuffer`; `hmasd/agent.py` recurrent state/reset/update. No new code exists.
+
+Return: distinguish strengthened/weakened/untouched judgments from conjecture. Advise whether
+this ordinary curriculum purchase has decision value now, identify its strongest alternative
+and the minimum change needed if the proposed endpoint or matching is misleading. Explicitly
+address interpolation versus unseen extrapolation, native scalar J/N and N-dependent updates,
+retained N6 costs, and the fact that mixed training changes physics/exposure as a program.
+If recommending a targeted alternative, predict an intermediate and native consequence with
+fit/non-fit costs; no fixed number of ideas or mandatory alternative is requested. A reasoned
+stop of this static route is legitimate, but neither generic caution nor demanding population
+precision before one useful exploration is sufficient. Include MATERIAL_DISSENT yes/no about
+this proposed purchase, with the substantive reason. No training, environment run or owner-level
+Portfolio/direction selection is authorized by this question.
+
+Write only in this question's empty `### Answer` subsection on branch
+`codex/agent-count-generalization`, target
+`docs/research/candidates/agent_count_generalization/NOTES.md`. Reason from source_sha; fetch
+the latest target file/blob SHA before writing, preserve all other bytes, and stop on overlap.
+The notebook is large: if you cannot obtain its full current bytes and blob identity, do not
+reconstruct/truncate it or invent a write commit. Return the complete answer in chat and
+explicitly relinquish the subsection for the DM to preserve a verified fallback. On successful
+write report the actual commit. Never return only a receipt or abbreviated recommendation.
+
+### Answer
