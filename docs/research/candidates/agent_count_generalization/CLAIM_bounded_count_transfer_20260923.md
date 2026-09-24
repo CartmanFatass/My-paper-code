@@ -219,3 +219,48 @@ no automatic replacement, changed seed or extra fit. An incomplete fixed batch
 cannot support the joint claim. Outcome branches and costs remain those above.
 The implementation source and actual launch records will be appended without
 rewriting this plan.
+
+
+### 2026-09-24 fixed-plan result: joint claim not established
+
+All six prespecified fits and all24 panels completed and passed independent
+artifact, actual-checkpoint, saved-transition and pairing verification. Scientific
+source is `e0a20add999ded53943f99df15f596822e6c13dc`. Original proposal/adoption
+bytes above remained SHA256
+`bcda398d39f245b6c21509ebba0f8c66adffc35f6412088cfa95101e38acba52` until this
+append. The frozen reducer was unchanged (SHA256
+`05ac2ba97edefb8c19ce6a3063526b79bc5895337c510e0ba93c2cef0a6f0a9e`).
+No missing fit, replacement, extension, checkpoint selection or analysis change.
+
+| N8 H6−SET final endpoint | Block1 | Block2 | Block3 | Mean | 95% df2 paired-t interval | Fixed strict lower threshold |
+| --- | ---: | ---: | ---: | ---: | --- | --- |
+| J | .08652103519570344 | .08858551766296538 | .03804131844242878 | .07104929043369919 | [−.000007912492966236084, .14210649336036463] | >0: not met |
+| S (users/step) | 6.500187500000001 | 4.1626875000000005 | 2.3203125 | 4.327729166666667 | [−.876090407179098, 9.53154874051243] | >1: not met |
+
+Both intervals cross their thresholds. The prespecified joint assertion is
+**inconclusive / not established** under the independent approximately normal
+training-block model, conditional on the fixed W8 panel. The negative J lower
+endpoint cannot be rounded into a pass; three positive block means do not replace
+the interval rule. This does not establish equivalence, no effect, next-fit
+reliability or any world-population statement. Three blocks cannot diagnose the
+normality assumption. The marginal intervals are not a joint95% confidence box.
+
+All arms improve panel-average own J and S at both N, but N8 differences of
+learning increments reverse by block: J +.117311401 / +.017179222 / −.057299186;
+S +7.6030625 / +1.151125 / −1.6145625. N6 final J/S gaps are
+−.010112369/−.269875, +.059717813/+2.9714375, +.045664546/+2.3396875.
+The N8 final J-or-S loss unions are3/4/10 worlds by block; N6 unions20/7/4.
+Block3 world1945810 loses.132738822 J and9.166 users/step; SET's own service also
+regresses2.542 users/step at N8 world1945804 despite its own J improving.
+These limit application claims and do not change the predefined statistical gate.
+
+Actual batch cost:6fits,2.16M train+384k eval=2.544M team interactions,
+270 updates,768 eval episodes and23,477.606831131 summed scientific-command
+seconds (6.521557453h). No isolated-node speed claim; other-process resources and
+peak scratch are unmeasured. Complete counts, per-cell resources, all native
+components/loss worlds, artifact locations/hashes and cumulative interpretation
+are in [the complete notebook result](NOTES.md#2026-09-24--b15-complete-positive-block-means-do-not-establish-the-joint-claim).
+
+This confirmation attempt ends at its declared six fits. The direction remains
+exploring a separately justified comparator question. B15 will not be extended,
+combined with B14 or retrospectively promoted by another endpoint or test.
