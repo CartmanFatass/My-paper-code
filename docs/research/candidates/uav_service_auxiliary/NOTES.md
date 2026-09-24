@@ -7683,3 +7683,50 @@ these are correctness checks, not a positive charging pilot or extra scientific 
 independent Reviewer checks the evaluator/result identity and recurrent/measurement boundaries;
 the DM reads and accepts. Commit and push exact inputs before guarded detached execution,
 retain accepted process handles, then arm the same native status operation with hmasd_wait.
+
+## 2026-09-23 — B07 evaluator accepted locally; actual-node CUDA check remains
+
+The DM accepts the bounded Implementer's three new B07 files against the preceding L0 and
+has read the code and focused checks. B01–B06, the shared environment, agent, config and admission
+code remain unchanged. B07 imports the existing controller and original source verifier;
+H1500 source identity is checked before deriving H3000/one-lane evaluation, with exactly the
+seven recorded differences: episode_length, max_steps, num_envs, batch_size, buffer_size,
+low_level_buffer_size and high_level_buffer_size. high_level_batch_size remains 128.
+The Implementer also ran the unchanged verifier against both real retained B04/B05 source
+sets; both passed all bound artifacts and derivation, with only the already permitted unused
+baseline-path difference. This did not execute new scientific episodes or train a model.
+
+The independent Reviewer found a real draft failure-preservation defect: later environment
+construction/close, world summarization or final immutability exceptions could discard completed
+panel arrays; derived ledger rejection could lose available telemetry from a counted transition.
+These were repaired before any result launch. Raw native service and physical pre/post energy
+inputs are captured before derivation; the whole panel lifecycle persists accumulated arrays on
+failure. Regression fixtures retain a returned transition after ledger rejection and the completed
+first world when the second environment constructor fails. Derived and raw arrays remain
+separate when validation fails, with INCOMPLETE/failure metadata, not a fabricated valid row.
+The new test filename was made unique after an initial combined-collection module-name collision;
+frozen B06 tests and repository pytest settings were not changed.
+
+Implementer checks: B07 10 passed / 1 CUDA skip in 5.48s; standard combined B06+B07 21 passed /
+3 CUDA skips in 6.77s. Independent Reviewer reran the stable combined suites: 21 passed /
+3 CUDA skips in 6.63s, and verified the final source digests. It reports no remaining material
+finding. The DM adopts that engineering result, not a scientific outcome. Code compilation and
+whitespace checks passed. The next required check is the actual-node CUDA case; no production
+B07 batch has started at this entry. Test/support work is not a new fit; implementation/review
+wall and aggregate support CPU were not separately instrumented and remain unknown.
+
+Coverage is deliberately stated at its actual level: the 1500-crossing clock/reset check uses
+a 3000-step fixture; the real native boundary/PBRS checks are short executions with controlled
+clock positions. The unchanged real agent reset/step and time/wait-denominator source paths
+were read, not represented as a newly tested 1500-step native GRU replay. The short real native
+O-path test checks equality against the frozen evaluator, policy/normalizer/optimizer invariance
+and Python/NumPy/Torch RNG restoration; CUDA is skipped on this CPU host. The B07 source-mutation
+fixture mocks the unchanged verifier and rejects a horizon change; actual artifact verification
+above is the Implementer's separate run, not an independent corrupt-artifact test. Existing
+B06 feedback/real mode-transition evidence is reused without claiming new training replication.
+
+Stable reviewed SHA-256: `b07/native.py` =
+`0e99410d74943a7566e1d9437a74f488d7c4f6f114414360122402024e8f63e7`;
+B07 entry = `3a1ebe8218bd61b471e11272bbc187931fd8a9b7b7c0f391050c2ee50acabb56`;
+B07 test = `a1dcd00addeab3d67da694eea8a5d63906b6a01a22b344b884353dc829e00b8a`.
+These are code-check identities, not another result record.
