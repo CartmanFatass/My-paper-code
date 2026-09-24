@@ -1,0 +1,28 @@
+{
+  "object_id": "complementary_skill_b07",
+  "arm": "M",
+  "spec": {
+    "n_agents": 6,
+    "n_users": 50,
+    "k": 10,
+    "horizon": 500,
+    "lanes": 16,
+    "rollouts": 45,
+    "eval_lanes": 32,
+    "init_seed": 260924001,
+    "head_seed": 260924002,
+    "train_rng_seed": 260924003,
+    "aux_seed": 260924004,
+    "low_action_seed": 260924005,
+    "high_collection_seed": 260924006,
+    "high_update_seed": 260924007,
+    "train_world_base": 2300000,
+    "eval_world_base": 1700200,
+    "threads": 4,
+    "small_model": false
+  },
+  "launch_sha": "455536ebd0e6e23466ed40244bcf1e5ab6462826",
+  "device": "cuda",
+  "training_law": "learned_team_and_mu=.9*pi+.1/6_individual_lambda_h=.07",
+  "reference_binding": null
+}

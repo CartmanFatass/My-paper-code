@@ -7163,3 +7163,36 @@ job remained. The earlier Pro answer stays reconciled and read; no Send, complet
 other task was contacted again. After accepted M admission, observe its native handle and
 preserve E/U as the already fixed remaining arms. E still awaits complete M output reading,
 reference-to-trajectory and checkpoint checks, and the empirical reference hash binding.
+
+M was admitted at2026-09-24T07:27:13Z. The
+[native manifest](../../../../runs/complementary_skill_learning/b07_m_260924001_455536ebd/launch-manifest.json)
+is the authoritative command/source/output/process handle; the configured outer supervisor
+finishing its launch command is not the scientific child's completion. The
+[actual-node preflight](../../../../runs/complementary_skill_learning/b07_m_260924001_455536ebd/admission-preflight.json)
+passed with11,480,862,720 available/effective bytes against4,294,967,296 required. Native status
+read at07:28:23Z found accepted admission, running runner and native supervisor with matching
+identities, consistent records and no exit witness. The current runner summary was incomplete:
+M/CUDA at the frozen source, one model constructed, initial S0/R0 totaling32000evaluation
+transitions/64episodes, and50own-S probability batches/1600contexts/11200factor distributions.
+Its then-persisted training counters were0; these are an interim snapshot, not final fit cost
+or completed-learning evidence. No scientific B07 comparison has been accepted.
+
+The manifest, preflight, config and launch-status bytes were collected locally and matched to
+their actual-node SHA256 values, respectively
+`8e7395297c0646211e08b8eb0efc9d9f2d5f5aebde3338d4b2e32b1af8eecf51`,
+`4ec3e8a81478e2c654dfcb432f9a94c4c811784af595804219d2ce72d384e101`,
+`3baa9e9e00c4e474e08848855139c8f28f37ace2b2df9020ff6f55f70267b5d4`,
+`6ebf1edd044dd42c3955b24a7ffe8b76ae3869038686ec54e60501e14a8e8d38`.
+The derived read-only native status is retained alongside them. Complete bulk outputs remain
+in the manifest's remote output root for terminal collection; no source copy was reclaimed.
+
+Detached observation `launch-csl-b07-m-455536ebd` is registered at generation60 with30s probes,
+20s probe timeout and1500s checkpoint window. The first drained observation at07:29:23Z
+actually adopted this same accepted/running/consistent native handle, with zero probe errors
+and no pending event or wake. Registration alone was not used as adoption. Await its bounded
+checkpoint/terminal return; rearm the same handle, never restart M. E/U remain unstarted.
+
+Main`63e382485f2a37cccd378436212b911b0fb4d2ae` also clarifies one ambiguous shared-background
+phrase: the unselected fixed-label training control differs from B07's already selected
+M-S-context conditional-distribution scoring. This is wording clarification, with no new
+arm, plan, pause or lead change and no archive. Routine M progress stays in this notebook/run.

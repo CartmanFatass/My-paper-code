@@ -1,0 +1,96 @@
+{
+  "acceptance": "accepted",
+  "accepted_at": "2026-09-24T07:27:13.363099Z",
+  "bootstrap_command": [
+    "/home/wu/.venvs/hmasd/bin/python",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/c3ea7db7052147f283917db028da30c9/scripts/hmasd_admission.py",
+    "_run-admitted",
+    "--runner",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/c3ea7db7052147f283917db028da30c9/scripts/run_complementary_skill_learning_b07.py",
+    "--output",
+    "/home/wu/hmasd-worktrees/complementary-skill-b07-20260924/runs/complementary_skill_learning/b07_m_260924001_455536ebd",
+    "--",
+    "--arm",
+    "M",
+    "--seed",
+    "260924001",
+    "--launch-sha",
+    "455536ebd0e6e23466ed40244bcf1e5ab6462826",
+    "--out",
+    "/home/wu/hmasd-worktrees/complementary-skill-b07-20260924/runs/complementary_skill_learning/b07_m_260924001_455536ebd"
+  ],
+  "claim_key": "48b893b0aba584d2ec603ab308f36a76f31cec8069fd4a5cfddce20708f3bba9",
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/48b893b0aba584d2ec603ab308f36a76f31cec8069fd4a5cfddce20708f3bba9.json",
+  "command": [
+    "/home/wu/.venvs/hmasd/bin/python",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/c3ea7db7052147f283917db028da30c9/scripts/run_complementary_skill_learning_b07.py",
+    "--arm",
+    "M",
+    "--seed",
+    "260924001",
+    "--launch-sha",
+    "455536ebd0e6e23466ed40244bcf1e5ab6462826",
+    "--out",
+    "/home/wu/hmasd-worktrees/complementary-skill-b07-20260924/runs/complementary_skill_learning/b07_m_260924001_455536ebd"
+  ],
+  "command_sha256": "7299eb30023ea552385680471377882bca36d609fd4d7c75d2194bdd26dbb4fa",
+  "control_observation": {
+    "observed_at": "2026-09-24T07:27:13.220358Z",
+    "ref": "refs/heads/main",
+    "remote": "origin",
+    "sha": "24cf6faee0a565e3778b53d0e57c9d5ce670339e"
+  },
+  "control_root": "/home/wu/projects/HMASD",
+  "created_at": "2026-09-24T07:27:13.229530Z",
+  "cwd": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/c3ea7db7052147f283917db028da30c9",
+  "direction": "complementary_skill_learning",
+  "host_identity": "LAPTOP-U9TDKC8A",
+  "identity_command": [
+    "/home/wu/.local/share/uv/python/cpython-3.10.21-linux-x86_64-gnu/bin/python3.10",
+    "scripts/run_complementary_skill_learning_b07.py",
+    "--arm",
+    "M",
+    "--seed",
+    "260924001",
+    "--launch-sha",
+    "455536ebd0e6e23466ed40244bcf1e5ab6462826"
+  ],
+  "lead": "Codex DM (independent session)",
+  "manifest_ref": "/home/wu/hmasd-worktrees/complementary-skill-b07-20260924/runs/complementary_skill_learning/b07_m_260924001_455536ebd/launch-manifest.json",
+  "node": "wsl_4070",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/48b893b0aba584d2ec603ab308f36a76f31cec8069fd4a5cfddce20708f3bba9.json",
+  "output_root": "/home/wu/hmasd-worktrees/complementary-skill-b07-20260924/runs/complementary_skill_learning/b07_m_260924001_455536ebd",
+  "preflight": "/home/wu/hmasd-worktrees/complementary-skill-b07-20260924/runs/complementary_skill_learning/b07_m_260924001_455536ebd/admission-preflight.json",
+  "process": {
+    "detached": true,
+    "identity": {
+      "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+      "kind": "linux_pid_start_ticks",
+      "pid": 513906,
+      "session_id": 513906,
+      "start_ticks": 59408314
+    },
+    "native_handle_kind": "posix_session",
+    "pid": 513906,
+    "process_group_id": 513906
+  },
+  "process_exit": "/home/wu/hmasd-worktrees/complementary-skill-b07-20260924/runs/complementary_skill_learning/b07_m_260924001_455536ebd/process-exit.json",
+  "published_remote": "origin",
+  "runner_process": {
+    "identity": {
+      "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+      "kind": "linux_pid_start_ticks",
+      "pid": 513907,
+      "session_id": 513906,
+      "start_ticks": 59408317
+    },
+    "pid": 513907,
+    "process_group_id": 513906,
+    "supervisor_pid": 513906
+  },
+  "schema_version": 1,
+  "sha": "455536ebd0e6e23466ed40244bcf1e5ab6462826",
+  "source_root": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/c3ea7db7052147f283917db028da30c9",
+  "stderr": "/home/wu/hmasd-worktrees/complementary-skill-b07-20260924/runs/complementary_skill_learning/b07_m_260924001_455536ebd/stderr.log",
+  "stdout": "/home/wu/hmasd-worktrees/complementary-skill-b07-20260924/runs/complementary_skill_learning/b07_m_260924001_455536ebd/stdout.log"
+}
