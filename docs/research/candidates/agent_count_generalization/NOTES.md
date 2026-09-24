@@ -13170,3 +13170,127 @@ claim, new evaluation panel or stopping/uncertainty rule. I will therefore take 
 constitution section5(4) consultation on that exact proposal and the strongest ordinary-learning
 alternative. No confirmation fit has started; state remains exploring. Advice informs the DM's
 choice and is not a new owner approval layer. The completed B14 block is not extended.
+
+
+## Pro question 2026-09-23 bounded-confirmation-after-fresh-b14
+
+Conversation: reuse the current Jev direction conversation; its private address stays local.
+Question: Does complete B14 justify prioritizing the exact proposed six-fit, fresh-panel
+confirmation in `CLAIM_bounded_count_transfer_20260923.md`, or would strengthening the ordinary
+learner first change the live judgment more? Criticize this actual claim, comparator, practical
+threshold, three-block uncertainty and fixed plan. Recommend one smallest useful next action,
+not a generic permission to continue.
+
+Standing: the owner explicitly resumed this DM and requested continued scientific ownership.
+The direction remains exploring. B14 is fully complete and will not be extended. I favor testing
+the selected bounded package claim now: its live uncertainty is recurrence across independent
+training blocks and unread worlds. Another outcome-selected development pair would not efficiently
+resolve that. The strongest competing investment is ordinary N6-only versus mixed-N6/8 learning,
+previously discussed but never executed or added to B14. It is not a prerequisite by default.
+The choice remains the DM's; advice is not an owner approval layer.
+
+B14 used one fresh H6/.05 and one fresh canonical SET/.05 fit, each N6/360k, seed974201,
+actual common exogenous training/reset RNG and initial0/final45 N8/N6 evaluation on32 exposed
+worlds per N. All40 files, full native traces/checkpoints,90 updates/eight panels and isolation
+were independently checked. Training reset artifacts are byte-identical; no new evaluation or
+old-weight substitution was added. Main outcomes:
+
+- N8 final H6-SET J=+.071357214919, S=+5.2826875 users/step;31/32 positive for both.
+  Initial means were J=-.020433802725,S=-.4055625. Own H6/SET gains: J+.353293692009/+.261502674365,
+  S+18.8676875/+13.1794375; each improves J/S in32/32 worlds.
+- N6 final J=+.049940952415,S=+2.7015625;31/32 J-positive,29/32 service-positive.
+  Both improve own J/S in32/32; initial mean differences are again negative.
+- Every final J/S loss: N8 1645808 J=-.002864459504,S=-1.102; N6 1645607 J=+.000261992341,S=-.820;
+  1645609 J=+.001153344585,S=-.398;1645626 J=-.012175919910,S=-2.488. Higher absolute H6 minima
+  do not erase these paired losses or certify tails.
+- N8 mean quality=-.000372724052 (17 lower worlds), height penalty=+.002488592865 (20 higher);
+  N6 quality=+.004010460215 (13 lower), height penalty=-.010915939351 (32 lower). H6 final U is
+  lower than SET on average but not everywhere; both packages' own U rises with eligibility/service.
+- B14 cost2fits/720k train/128k eval,137.854759 summed command minutes. Complete objectives,
+  architecture, information representation/bandwidth and computation remain package differences.
+
+This weakens retained-old-H6-only, favorable-initial-ranking-only and ordinary-deterioration-only
+explanations of this block's mean advantage. It does not identify skill causality, remove effects
+of initialization on later optimization, certify ordinary tuning or increase training n beyond1
+per arm. B04–B06 noise-response reversals, B11/B12 target-count reversals and B13 losses remain.
+The complete previous `fresh-matched-learning-after-b13` advice said this favorable branch raises
+the reason to study reliability but does not automatically enter confirmation; it did not review
+this actual claim, fresh panels or uncertainty rule. This focused section5(4) question addresses
+that new decision, not a repeated Send or compulsory post-result round.
+
+Actual proposed plan: read the full claim at source_sha. Six fits: three independent common-world
+training blocks, learning seeds994101/994102/994103, lane addresses2994100…15/2994200…15/2994300…15;
+native H6 and fresh canonical SET,360k/N6 each; order H6/SET,SET/H6,H6/SET. Initial0/final45 N8→N6
+on unread1945800…31 and1945600…31 worlds. No old-panel execution, intermediate checkpoint choice,
+score-based seed/world substitution or sample-size expansion. Pair on actual exogenous scenes,
+not identical model weights or random consumption. B14 is development, not one of the new blocks.
+
+Proposed narrow claim: conditional on the fixed unread panel, mean final N8 native J advantage>0
+and actual service advantage>1 user/step (2 percentage points among50). The task-scale practical
+threshold is development-informed, prospectively fixed, and not an equivalence margin. Separate
+two-sided95% paired t intervals over three independent block differences (df2): support only if
+lowerJ>0 AND lowerS>1. State approximate-normality/independence assumptions and small-n limits;
+no world bootstrap as trained-policy precision or simultaneous95% region. Crossing a threshold
+is inconclusive, not equivalence. N6, each own increment, all loss worlds and absolute minima
+remain separate; no skill mechanism, all-world harmlessness, universal ordinary-MARL superiority
+or physical-safety claim. Challenge whether this is the useful claim and whether three blocks
+can change a decision at this cost. Initial panels are secondary learning evidence: challenge
+their information value if warranted without quietly altering the stated plan.
+
+The frozen B14 CLI admits only its own seed/worlds. A separate bounded entrypoint would carry the
+chosen bindings without modifying B14, with targeted seed/init/isolation/native-path checks and
+independent implementation review before native admission. No implementation or new fit has begun.
+Any necessary plan change must be made before all fits and counted, not a rescue after scores.
+
+Context (current source meaning):
+- Current governance/method/background revision `33fa909989308e9f9d25601cdd9fd15d7d4a3b96`: `docs/project/OPERATING_CONSTITUTION.md`
+  §§1–5,7–8; `.agents/skills/hmasd-scientific-tools/SKILL.md` Update the working explanation,
+  Comparators, Confirm a claim, Statistics, Cost and exposure, Pro. Owner continuation and lifted
+  pause apply; historical pause/approval wording does not override them. Main advanced only other
+  DM results; this direction's scope/pause/lead and the applicable methods remain unchanged.
+- Relevant shared background: `docs/research/RESEARCH.md` at that revision, count-training reversals,
+  B13 stronger ordinary-control interpretation and B14 own-learning paragraph. They required a
+  competent actual ordinary learner, symmetric endpoints and retained loss worlds. Complete B14
+  updates that judgment without erasing comparator or tail limits. DM2/DM3 results are not data
+  for this count claim; no portfolio decision is requested.
+- Complete new result: this NOTES section `2026-09-23 — B14 complete: fresh learning reproduces a
+  bounded package benefit`, published at `ca0b8fdd945d08d25c774bfcce69a3cdefa435fc` and inherited at source_sha.
+- Actual proposed claim: `docs/research/candidates/agent_count_generalization/CLAIM_bounded_count_transfer_20260923.md`
+  at source_sha; read in full. It is proposed, unrun, not an admitted confirmation batch.
+- Primary native evidence at source_sha: `runs/agent_count_generalization/s1_fresh_learning_b14_h6_s974201/`
+  and `runs/agent_count_generalization/s1_fresh_learning_b14_set_s974201/`: config.json, summary.json
+  counts/initialization/isolation/optimizer records, and all four `panel_stage00_n8.json`,
+  `panel_stage00_n6.json`, `panel_stage45_n8.json`, `panel_stage45_n6.json` J/service/component arrays.
+  Binary locations/hashes and independent DM checks are in the result; do not imply you loaded them.
+- Prior reasoning at source_sha: this NOTES question `Pro question 2026-09-23 fresh-matched-learning-after-b13`,
+  full Answer/adoption, especially its favorable-result branch, actual information differences and
+  mixed-N alternative. B12/B13 result sections retain the adverse and stronger-control evidence;
+  no need to reconstruct the entire old history.
+- Frozen algorithm: `88b67e5e0110ae05c440588a2b19ab0b6c0f021c`,
+  `experiments/candidates/agent_count_generalization/fresh_learning_b14/runner.py`,
+  `experiments/candidates/agent_count_generalization/configuration.py` and `models.py`, only where
+  executable scope/information/counts matter. New methods do not revise frozen B14 inputs.
+
+Prospective cost:6fits/2.16M train team/12.96M UAV rows;384k eval team/2.688M UAV rows,
+768 episodes/12,000 evaluation policy calls,2.544M total team interactions. Six fits have607,500
+actor and607,500 critic optimizer calls; three H6 fits add2,025 coordinator,2,025 team-discriminator
+and8,100 individual-discriminator calls. Count inference/decoding and SET snapshot work. B14
+suggests roughly6.9 summed scientific-command hours and3.3GB artifacts before the collected copy,
+plus preparation/checks/review/collection/reading; these are estimates, not performance claims or
+fit allowances. A different suggested action needs its own exposure and information value;
+do not run both by default.
+
+Constraints: no training or edits to the claim or any file outside the empty Answer below.
+Write only in this subsection on branch `codex/agent-count-generalization`. Read at pinned
+source_sha, fetch the latest target file and actual blob SHA before writing, preserve every
+other byte and stop on overlap. On success report the actual commit; on write failure return
+the complete answer in chat, not a SHA, receipt or link. Advice does not grant launch permission.
+Return: strongest material objection grounded in these data and the actual claim, strengthened/
+weakened/unresolved judgments, and one recommended next action with discriminator and complete
+fit/non-fit cost. If supporting confirmation, assess its estimand, comparator, uncertainty,
+stopping and unfavorable branches and list necessary pre-run amendments. If ordinary development
+is better, identify the unmet premise and the finite observation that could reverse that choice.
+Include MATERIAL_DISSENT yes/no, sources actually used and any decision-critical unread gap.
+No fixed number of ideas, mechanism story or extra approval requirement is requested.
+
+### Answer
