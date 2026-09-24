@@ -195,6 +195,7 @@ class RolloutBuffer:
         sampler_seed=0,
         d2_enabled=False,
         central_snapshot=False,
+        ordinary_completed_segments=False,
     ):
         self.num_steps = num_steps
         self.num_envs = num_envs
@@ -215,7 +216,27 @@ class RolloutBuffer:
         # snapshot the actor actually consumed is stored raw, exactly like `states`/`obs`,
         # and replayed from here.  Nothing is allocated unless the arm asks for it.
         self.central_snapshot = bool(central_snapshot)
+        self.ordinary_completed_segments = bool(ordinary_completed_segments)
         self._sampler_rng = np.random.default_rng(int(sampler_seed))
+
+        if self.ordinary_completed_segments:
+            self._ordinary_phase_version = 0
+            self._ordinary_next_decision_id = 0
+            self._ordinary_episode_ids = np.zeros(self.num_envs, dtype=np.int64)
+            self._ordinary_interaction_indices = np.zeros(self.num_envs, dtype=np.int64)
+            self._ordinary_pending = {}
+            self._ordinary_completed = []
+            self._ordinary_frozen = []
+            self._ordinary_last_consumed = []
+            self._ordinary_counters = {
+                "decisions_started": 0,
+                "segments_completed": 0,
+                "segments_consumed": 0,
+                "terminal_completions": 0,
+                "interval_completions": 0,
+                "cross_version_completions": 0,
+                "final_censored": 0,
+            }
 
         self.reset()
         main_logger.info("已初始化重构后的RolloutBuffer，采用预分配数组存储。")
@@ -714,6 +735,366 @@ class RolloutBuffer:
         self._cached_rollout_data = None
         return True
 
+    def ordinary_begin_high_level_record(
+        self,
+        env_idx,
+        *,
+        state,
+        observations,
+        team_skill,
+        agent_skills,
+        team_log_prob,
+        agent_log_probs,
+        team_value,
+        agent_values,
+    ):
+        """Own one ordinary high decision independently of rollout-local rows."""
+        if not self.ordinary_completed_segments:
+            raise RuntimeError("ordinary completed-segment storage is disabled")
+        env_idx = int(env_idx)
+        if env_idx in self._ordinary_pending:
+            raise RuntimeError(f"lane {env_idx} already has an open ordinary high decision")
+        decision_id = int(self._ordinary_next_decision_id)
+        self._ordinary_next_decision_id += 1
+        record = {
+            "lane_id": env_idx,
+            "episode_id": int(self._ordinary_episode_ids[env_idx]),
+            "decision_id": decision_id,
+            "start_interaction_index": int(self._ordinary_interaction_indices[env_idx]),
+            "end_interaction_index": None,
+            "start_phase_version": int(self._ordinary_phase_version),
+            "end_phase_version": None,
+            "behavior_version": int(self._ordinary_phase_version),
+            "low_policy_versions": [],
+            "crosses_policy_version": False,
+            "duration": 0,
+            "reward_sum": 0.0,
+            "terminal": False,
+            "close_reason": None,
+            "state": np.asarray(state, dtype=np.float32).copy(),
+            "observations": np.asarray(observations, dtype=np.float32).copy(),
+            "team_skill": int(team_skill),
+            "agent_skills": self._agent_vector(
+                agent_skills, np.int64, "ordinary_agent_skills"
+            ).copy(),
+            "team_log_prob": float(team_log_prob),
+            "agent_log_probs": self._agent_vector(
+                agent_log_probs, np.float32, "ordinary_agent_log_probs"
+            ).copy(),
+            "team_value": float(team_value),
+            "agent_values": self._agent_vector(
+                agent_values, np.float32, "ordinary_agent_values"
+            ).copy(),
+            "successor_kind": None,
+            "successor_decision_id": None,
+            "bootstrap_team_value": None,
+            "bootstrap_agent_values": None,
+            "team_advantage": None,
+            "agent_advantages": None,
+            "team_return": None,
+            "agent_returns": None,
+            "consumed_phase_version": None,
+            "last_state": np.asarray(state, dtype=np.float32).copy(),
+            "last_observations": np.asarray(observations, dtype=np.float32).copy(),
+            "budget_censored": False,
+        }
+        self._ordinary_pending[env_idx] = record
+        self._ordinary_counters["decisions_started"] += 1
+        return decision_id
+
+    def ordinary_advance_high_level_record(
+        self, env_idx, *, reward, last_state, last_observations
+    ):
+        """Append one actual transition to the lane's open high decision."""
+        if not self.ordinary_completed_segments:
+            raise RuntimeError("ordinary completed-segment storage is disabled")
+        env_idx = int(env_idx)
+        record = self._ordinary_pending.get(env_idx)
+        if record is None:
+            raise RuntimeError(f"lane {env_idx} has no open ordinary high decision")
+        version = int(self._ordinary_phase_version)
+        if version not in record["low_policy_versions"]:
+            record["low_policy_versions"].append(version)
+        record["duration"] += 1
+        record["reward_sum"] += float(reward)
+        record["end_interaction_index"] = int(
+            self._ordinary_interaction_indices[env_idx]
+        )
+        record["last_state"] = np.asarray(last_state, dtype=np.float32).copy()
+        record["last_observations"] = np.asarray(
+            last_observations, dtype=np.float32
+        ).copy()
+        self._ordinary_interaction_indices[env_idx] += 1
+
+    def ordinary_close_high_level_record(self, env_idx, *, terminal, reason):
+        """Close an observed segment once, retaining its independent decision facts."""
+        if not self.ordinary_completed_segments:
+            raise RuntimeError("ordinary completed-segment storage is disabled")
+        env_idx = int(env_idx)
+        record = self._ordinary_pending.pop(env_idx, None)
+        if record is None:
+            raise RuntimeError(f"lane {env_idx} has no open ordinary high decision")
+        if int(record["duration"]) <= 0:
+            raise RuntimeError("ordinary high decision cannot close without a transition")
+        record["terminal"] = bool(terminal)
+        record["close_reason"] = str(reason)
+        record["end_phase_version"] = int(self._ordinary_phase_version)
+        record["crosses_policy_version"] = len(record["low_policy_versions"]) > 1
+        self._ordinary_completed.append(record)
+        self._ordinary_counters["segments_completed"] += 1
+        if record["terminal"]:
+            self._ordinary_counters["terminal_completions"] += 1
+        else:
+            self._ordinary_counters["interval_completions"] += 1
+        if record["crosses_policy_version"]:
+            self._ordinary_counters["cross_version_completions"] += 1
+        return record
+
+    def ordinary_reset_lane(self, env_idx):
+        """Advance episode identity only after the real terminal segment was closed."""
+        if not self.ordinary_completed_segments:
+            return
+        env_idx = int(env_idx)
+        if env_idx in self._ordinary_pending:
+            raise RuntimeError(
+                f"lane {env_idx} reset would discard an open ordinary high decision"
+            )
+        self._ordinary_episode_ids[env_idx] += 1
+
+    @staticmethod
+    def _ordinary_bootstrap_arrays(values, num_envs, n_agents):
+        if values is None:
+            return (
+                np.zeros(num_envs, dtype=np.float32),
+                np.zeros((num_envs, n_agents), dtype=np.float32),
+            )
+        if isinstance(values, dict):
+            team = np.asarray(values.get("state"), dtype=np.float32).reshape(num_envs)
+            agents = np.asarray(values.get("agents"), dtype=np.float32).reshape(
+                num_envs, n_agents
+            )
+            return team, agents
+        team = np.asarray(values, dtype=np.float32).reshape(num_envs)
+        return team, np.repeat(team[:, None], n_agents, axis=1)
+
+    def ordinary_prepare_high_level_phase(
+        self, phase_version, boundary_values, *, gamma, gae_lambda
+    ):
+        """Freeze first-eligible completed records and construct decision-sequence GAE."""
+        if not self.ordinary_completed_segments:
+            raise RuntimeError("ordinary completed-segment storage is disabled")
+        if self._ordinary_frozen:
+            raise RuntimeError("ordinary high collection is already frozen")
+        phase_version = int(phase_version)
+        if phase_version != int(self._ordinary_phase_version) + 1:
+            raise RuntimeError("ordinary high phase version is not consecutive")
+        frozen = sorted(
+            self._ordinary_completed,
+            key=lambda row: (
+                int(row["start_interaction_index"]), int(row["lane_id"]),
+                int(row["decision_id"]),
+            ),
+        )
+        self._ordinary_completed = []
+        self._ordinary_frozen = frozen
+        boundary_team, boundary_agents = self._ordinary_bootstrap_arrays(
+            boundary_values, self.num_envs, self.n_agents
+        )
+        all_open_or_eligible = frozen + list(self._ordinary_pending.values())
+        by_episode = {}
+        for record in all_open_or_eligible:
+            key = (int(record["lane_id"]), int(record["episode_id"]))
+            by_episode.setdefault(key, []).append(record)
+        for records in by_episode.values():
+            records.sort(
+                key=lambda row: (
+                    int(row["start_interaction_index"]), int(row["decision_id"])
+                )
+            )
+        frozen_ids = {int(record["decision_id"]) for record in frozen}
+        advantages = {}
+        for record in reversed(frozen):
+            lane = int(record["lane_id"])
+            if record["terminal"]:
+                successor = None
+                kind = "terminal"
+                bootstrap_team = 0.0
+                bootstrap_agents = np.zeros(self.n_agents, dtype=np.float32)
+                next_team_advantage = 0.0
+                next_agent_advantages = np.zeros(self.n_agents, dtype=np.float32)
+            else:
+                episode_records = by_episode[(lane, int(record["episode_id"]))]
+                successor = next(
+                    (
+                        candidate for candidate in episode_records
+                        if int(candidate["start_interaction_index"])
+                        > int(record["start_interaction_index"])
+                    ),
+                    None,
+                )
+                if successor is None:
+                    kind = "boundary_value"
+                    bootstrap_team = float(boundary_team[lane])
+                    bootstrap_agents = boundary_agents[lane].copy()
+                    next_team_advantage = 0.0
+                    next_agent_advantages = np.zeros(self.n_agents, dtype=np.float32)
+                else:
+                    bootstrap_team = float(successor["team_value"])
+                    bootstrap_agents = np.asarray(
+                        successor["agent_values"], dtype=np.float32
+                    ).copy()
+                    successor_id = int(successor["decision_id"])
+                    if successor_id in frozen_ids:
+                        kind = "eligible"
+                        next_team_advantage, next_agent_advantages = advantages[
+                            successor_id
+                        ]
+                    else:
+                        kind = "pending"
+                        next_team_advantage = 0.0
+                        next_agent_advantages = np.zeros(
+                            self.n_agents, dtype=np.float32
+                        )
+            discount = float(gamma) ** int(record["duration"])
+            nonterminal = 0.0 if record["terminal"] else 1.0
+            team_delta = (
+                float(record["reward_sum"])
+                + discount * nonterminal * bootstrap_team
+                - float(record["team_value"])
+            )
+            agent_delta = (
+                float(record["reward_sum"])
+                + discount * nonterminal * bootstrap_agents
+                - np.asarray(record["agent_values"], dtype=np.float32)
+            )
+            team_advantage = (
+                team_delta
+                + discount * float(gae_lambda) * nonterminal
+                * float(next_team_advantage)
+            )
+            agent_advantages = (
+                agent_delta
+                + discount * float(gae_lambda) * nonterminal
+                * np.asarray(next_agent_advantages, dtype=np.float32)
+            ).astype(np.float32, copy=False)
+            record["successor_kind"] = kind
+            record["successor_decision_id"] = (
+                None if successor is None else int(successor["decision_id"])
+            )
+            record["bootstrap_team_value"] = float(bootstrap_team)
+            record["bootstrap_agent_values"] = bootstrap_agents.copy()
+            record["team_advantage"] = float(team_advantage)
+            record["agent_advantages"] = agent_advantages.copy()
+            record["team_return"] = float(team_advantage + record["team_value"])
+            record["agent_returns"] = (
+                agent_advantages + np.asarray(record["agent_values"], dtype=np.float32)
+            ).astype(np.float32, copy=False)
+            advantages[int(record["decision_id"])] = (
+                float(team_advantage), agent_advantages.copy()
+            )
+        return len(frozen)
+
+    def ordinary_consume_high_level_phase(self, phase_version):
+        if not self.ordinary_completed_segments:
+            raise RuntimeError("ordinary completed-segment storage is disabled")
+        phase_version = int(phase_version)
+        consumed = []
+        for record in self._ordinary_frozen:
+            record["consumed_phase_version"] = phase_version
+            consumed.append(record)
+        self._ordinary_last_consumed = consumed
+        self._ordinary_frozen = []
+        self._ordinary_phase_version = phase_version
+        self._ordinary_counters["segments_consumed"] += len(consumed)
+        return len(consumed)
+
+    def ordinary_dispose_consumed_records(self):
+        if self.ordinary_completed_segments:
+            self._ordinary_last_consumed = []
+
+    def get_ordinary_high_level_data(self):
+        """Pack the frozen high collection independently of low rollout rows."""
+        if not self.ordinary_completed_segments or not self._ordinary_frozen:
+            return None
+        records = self._ordinary_frozen
+        return {
+            "records": records,
+            "states": np.stack([row["state"] for row in records]).astype(np.float32),
+            "observations": np.stack([row["observations"] for row in records]).astype(np.float32),
+            "team_skills": np.asarray([row["team_skill"] for row in records], dtype=np.int64),
+            "agent_skills": np.stack([row["agent_skills"] for row in records]).astype(np.int64),
+            "old_team_log_probs": np.asarray([row["team_log_prob"] for row in records], dtype=np.float32),
+            "old_agent_log_probs": np.stack([row["agent_log_probs"] for row in records]).astype(np.float32),
+            "elapsed_steps": np.asarray([row["duration"] for row in records], dtype=np.float32),
+            "terminal": np.asarray([row["terminal"] for row in records], dtype=np.float32),
+            "close_reason": np.asarray([
+                2 if row["terminal"] else 1 for row in records
+            ], dtype=np.int64),
+            "team_advantages": np.asarray([row["team_advantage"] for row in records], dtype=np.float32),
+            "agent_advantages": np.stack([row["agent_advantages"] for row in records]).astype(np.float32),
+            "team_returns": np.asarray([row["team_return"] for row in records], dtype=np.float32),
+            "agent_returns": np.stack([row["agent_returns"] for row in records]).astype(np.float32),
+            "values": np.asarray([row["team_value"] for row in records], dtype=np.float32),
+            "rewards": np.asarray([row["reward_sum"] for row in records], dtype=np.float32),
+        }
+
+    @staticmethod
+    def _ordinary_json_copy(value):
+        if isinstance(value, np.ndarray):
+            return value.tolist()
+        if isinstance(value, np.generic):
+            return value.item()
+        if isinstance(value, dict):
+            return {
+                str(key): RolloutBuffer._ordinary_json_copy(item)
+                for key, item in value.items()
+            }
+        if isinstance(value, (list, tuple)):
+            return [RolloutBuffer._ordinary_json_copy(item) for item in value]
+        return copy.deepcopy(value)
+
+    def ordinary_high_level_snapshot(self, final=False):
+        """Return a JSON-safe audit copy without changing eligibility or credit."""
+        if not self.ordinary_completed_segments:
+            raise RuntimeError("ordinary completed-segment storage is disabled")
+        final = bool(final)
+
+        def _rows(records, *, censored=False):
+            rows = []
+            for source in records:
+                row = self._ordinary_json_copy(source)
+                if censored:
+                    row["budget_censored"] = True
+                rows.append(row)
+            return rows
+
+        pending = sorted(
+            self._ordinary_pending.values(),
+            key=lambda row: (int(row["lane_id"]), int(row["decision_id"])),
+        )
+        completed = sorted(
+            [*self._ordinary_completed, *self._ordinary_frozen],
+            key=lambda row: (
+                int(row["start_interaction_index"]), int(row["lane_id"]),
+                int(row["decision_id"]),
+            ),
+        )
+        counters = dict(self._ordinary_counters)
+        counters.update(
+            completed_unconsumed=len(completed),
+            pending=len(pending),
+            final_censored=(len(pending) if final else 0),
+        )
+        return {
+            "schema_version": 1,
+            "final": final,
+            "phase_version": int(self._ordinary_phase_version),
+            "completed_records": _rows(completed),
+            "consumed_records": _rows(self._ordinary_last_consumed),
+            "pending_records": _rows(pending, censored=final),
+            "counters": self._ordinary_json_copy(counters),
+        }
+
     def _get_full_rollout_data(self):
         """
         返回当前rollout的有效数组视图。
@@ -899,6 +1280,18 @@ class RolloutBuffer:
         如果提供了 value_normalizer，则网络输出的 values 是归一化的。
         必须将其反归一化为真实尺度，才能与真实尺度的 rewards 进行 GAE 计算。
         """
+        if self.ordinary_completed_segments:
+            if value_normalizer is not None:
+                raise ValueError(
+                    "ordinary completed segments already store real-unit decision values"
+                )
+            return self.ordinary_prepare_high_level_phase(
+                self._ordinary_phase_version + 1,
+                high_level_last_values,
+                gamma=gamma,
+                gae_lambda=gae_lambda,
+            )
+
         data = self._get_full_rollout_data()
         if data is None:
             main_logger.error("无法获取完整的Rollout数据，跳过高层GAE计算。")
@@ -1143,6 +1536,14 @@ class RolloutBuffer:
 
     def get_all_high_level_returns(self, num_steps):
         """获取所有有效的高层回报，用于更新Value Normalization"""
+        if self.ordinary_completed_segments:
+            data = self.get_ordinary_high_level_data()
+            if data is None:
+                return np.array([])
+            return np.concatenate(
+                [data["team_returns"].reshape(-1), data["agent_returns"].reshape(-1)]
+            )
+
         data = self._get_full_rollout_data()
         if data is None:
             return np.array([])
@@ -1468,6 +1869,65 @@ class RolloutBuffer:
         """
         为Coordinator生成采样器。
         """
+        if self.ordinary_completed_segments:
+            data = self.get_ordinary_high_level_data()
+            if data is None:
+                return None
+            num_valid_samples = len(data["team_skills"])
+            valid_indices = np.arange(num_valid_samples)
+
+            def _tensor(value, dtype):
+                return torch.as_tensor(value, dtype=dtype, device=device)
+
+            tensor_cache = None
+            if cache_tensors and device is not None:
+                tensor_cache = {
+                    "observations": _tensor(data["observations"], torch.float32),
+                    "states": _tensor(data["states"], torch.float32),
+                    "team_skills": _tensor(data["team_skills"], torch.long),
+                    "agent_skills": _tensor(data["agent_skills"], torch.long),
+                    "old_team_log_probs": _tensor(data["old_team_log_probs"], torch.float32),
+                    "old_agent_log_probs": _tensor(data["old_agent_log_probs"], torch.float32),
+                    "high_level_elapsed_steps": _tensor(data["elapsed_steps"], torch.float32),
+                    "high_level_terminal": _tensor(data["terminal"], torch.float32),
+                    "high_level_close_reason": _tensor(data["close_reason"], torch.long),
+                    "team_advantages": _tensor(data["team_advantages"], torch.float32),
+                    "agent_advantages": _tensor(data["agent_advantages"], torch.float32),
+                    "team_returns": _tensor(data["team_returns"], torch.float32),
+                    "agent_returns": _tensor(data["agent_returns"], torch.float32),
+                    "values": _tensor(data["values"], torch.float32),
+                }
+
+            for _epoch in range(ppo_epochs):
+                self._sampler_rng.shuffle(valid_indices)
+                for start in range(0, num_valid_samples, num_sequences_per_batch):
+                    batch_indices = valid_indices[
+                        start:min(start + num_sequences_per_batch, num_valid_samples)
+                    ]
+                    if tensor_cache is not None:
+                        index = torch.as_tensor(
+                            batch_indices, dtype=torch.long, device=device
+                        )
+                        yield {key: value[index] for key, value in tensor_cache.items()}
+                    else:
+                        yield {
+                            "observations": torch.from_numpy(data["observations"][batch_indices]).float(),
+                            "states": torch.from_numpy(data["states"][batch_indices]).float(),
+                            "team_skills": torch.from_numpy(data["team_skills"][batch_indices]).long(),
+                            "agent_skills": torch.from_numpy(data["agent_skills"][batch_indices]).long(),
+                            "old_team_log_probs": torch.from_numpy(data["old_team_log_probs"][batch_indices]).float(),
+                            "old_agent_log_probs": torch.from_numpy(data["old_agent_log_probs"][batch_indices]).float(),
+                            "high_level_elapsed_steps": torch.from_numpy(data["elapsed_steps"][batch_indices]).float(),
+                            "high_level_terminal": torch.from_numpy(data["terminal"][batch_indices]).float(),
+                            "high_level_close_reason": torch.from_numpy(data["close_reason"][batch_indices]).long(),
+                            "team_advantages": torch.from_numpy(data["team_advantages"][batch_indices]).float(),
+                            "agent_advantages": torch.from_numpy(data["agent_advantages"][batch_indices]).float(),
+                            "team_returns": torch.from_numpy(data["team_returns"][batch_indices]).float(),
+                            "agent_returns": torch.from_numpy(data["agent_returns"][batch_indices]).float(),
+                            "values": torch.from_numpy(data["values"][batch_indices]).float(),
+                        }
+            return
+
         data = self._get_full_rollout_data()
         if data is None:
             main_logger.warning("无有效数据，无法创建Coordinator采样器。")

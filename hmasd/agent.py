@@ -471,6 +471,9 @@ class HMASDAgent:
         }
         
         self.use_ha_ctse = bool(getattr(config, 'use_horizon_window', False))
+        self.ordinary_completed_segments = bool(
+            getattr(config, 'ordinary_completed_segments', False)
+        )
         # D2 policy-based interruption (ADR 01 revision 3). `off` is the default and
         # must stay byte-identical to the pre-D2 route: every `d2` branch below is
         # guarded by `self.d2_enabled`, and nothing is allocated or drawn in `off`.
@@ -507,6 +510,25 @@ class HMASDAgent:
         self.use_discrete_skill_lifetimes = bool(
             self.use_process_exploration and getattr(config, 'use_discrete_skill_lifetimes', False)
         )
+        if self.ordinary_completed_segments:
+            if self.use_ha_ctse or self.d2_enabled or self.use_process_exploration:
+                raise ValueError(
+                    "ordinary_completed_segments supports only ordinary fixed-k HMASD"
+                )
+            if not bool(getattr(config, 'strict_hmasd_alignment', True)):
+                raise ValueError(
+                    "ordinary_completed_segments requires strict_hmasd_alignment"
+                )
+            if bool(getattr(config, 'disable_high_level_training', False)):
+                raise ValueError(
+                    "ordinary_completed_segments requires ordinary high-level training"
+                )
+            if bool(getattr(config, 'use_obsnorm', False)) or bool(
+                getattr(config, 'use_statenorm', True)
+            ):
+                raise ValueError(
+                    "ordinary_completed_segments does not support observation/state input normalization"
+                )
         if self.r39_native_toy_fixed_primitives:
             if (
                 not self.r39_native_hmasd_toy
@@ -806,6 +828,7 @@ class HMASDAgent:
             sampler_seed=rollout_sampler_seed,
             d2_enabled=self.d2_enabled,
             central_snapshot=self.use_central_snapshot,
+            ordinary_completed_segments=self.ordinary_completed_segments,
         )
         main_logger.info(f"初始化统一Rollout Buffer: 长度={rollout_length}, 环境数={num_envs}, "
                         f"智能体数={config.n_agents}, 团队技能数={config.n_Z}, 个体技能数={config.n_z}")
@@ -950,6 +973,7 @@ class HMASDAgent:
             'global_max_abs_error': 0.0,
             'global_sample_count': 0,
         }
+        self.last_ordinary_completed_segment_update = {}
         self.native_toy_optimizer_updates = {
             'high': 0,
             'low_actor': 0,
@@ -1595,6 +1619,20 @@ class HMASDAgent:
         # Discriminator 现在采用 On-Policy 模式，更新后清空缓冲区
         self.discriminator_buffer.clear()
         main_logger.info("已清空判别器Buffer (On-Policy模式)")
+
+        if self.ordinary_completed_segments:
+            self.rollout_buffer.ordinary_dispose_consumed_records()
+            self.last_ordinary_completed_segment_update = {}
+            self.high_level_buffer_warning_counter = 0
+            self.last_high_level_buffer_size = 0
+            self.cumulative_env_reward = 0.0
+            self.cumulative_team_disc_reward = 0.0
+            self.cumulative_ind_disc_reward = 0.0
+            self.reward_component_counts = 0
+            main_logger.info(
+                "ordinary completed-segment clear preserved live execution and open decisions"
+            )
+            return
         
         # 重置计数器和累积值
         self.current_high_level_reward_sum = 0.0
@@ -1705,6 +1743,9 @@ class HMASDAgent:
         
         这是解决"新Episode第一步技能未重新分配"Bug的关键修复。
         """
+        if self.ordinary_completed_segments:
+            self.rollout_buffer.ordinary_reset_lane(env_id)
+
         # 重置Actor隐藏状态
         if env_id in self.env_hidden_states:
             self.env_hidden_states[env_id] = None
@@ -1761,11 +1802,60 @@ class HMASDAgent:
         if env_id in self.env_pending_high_level:
             self.env_pending_high_level.pop(env_id, None)
 
+    def ordinary_high_level_snapshot(self, final=False):
+        """Copy the opt-in ordinary high record state for raw audit artifacts."""
+        if not self.ordinary_completed_segments:
+            raise RuntimeError("ordinary_completed_segments is disabled")
+        return self.rollout_buffer.ordinary_high_level_snapshot(final=final)
+
+    def _ordinary_boundary_values(self, last_state, last_observations):
+        """Query the true collection boundary before mutating any learner state."""
+        if last_state is None or last_observations is None:
+            raise ValueError(
+                "ordinary_completed_segments requires last_state and last_observations"
+            )
+        try:
+            with torch.no_grad():
+                state_tensor = torch.as_tensor(
+                    last_state, dtype=torch.float32, device=self.device
+                )
+                observation_tensor = torch.as_tensor(
+                    last_observations, dtype=torch.float32, device=self.device
+                )
+                state_value, agent_values, _ = self.skill_coordinator.get_value(
+                    state_tensor, observation_tensor
+                )
+                if self.config.use_valuenorm and self.value_norm_coordinator is not None:
+                    state_value = self._denormalize_values(
+                        state_value, self.value_norm_coordinator
+                    )
+                    agent_values = [
+                        self._denormalize_values(value, self.value_norm_coordinator)
+                        for value in agent_values
+                    ]
+                if agent_values is None or len(agent_values) != self.config.n_agents:
+                    raise ValueError("coordinator returned an invalid agent-value inventory")
+                team = state_value.detach().cpu().numpy().reshape(
+                    self.config.num_envs
+                )
+                agents = np.stack(
+                    [value.detach().cpu().numpy().reshape(-1) for value in agent_values],
+                    axis=1,
+                ).reshape(self.config.num_envs, self.config.n_agents)
+        except Exception as error:
+            raise RuntimeError(
+                "ordinary completed-segment boundary value query failed"
+            ) from error
+        return {'state': team, 'agents': agents}
+
     def _uses_process_high_level_flow(self):
         return bool(self.use_process_exploration and self.use_discrete_skill_lifetimes)
 
     def _should_use_legacy_high_level_contribution_monitor(self):
-        return not self._uses_process_high_level_flow()
+        return (
+            not self.ordinary_completed_segments
+            and not self._uses_process_high_level_flow()
+        )
 
     def _process_segments_enabled(self):
         return self.use_process_exploration and self.process_segment_buffer is not None
@@ -3930,6 +4020,63 @@ class HMASDAgent:
             if self.enable_runtime_profiling:
                 self._add_transition_profile('high_level_bookkeeping', time.perf_counter() - profile_start)
             return returned_reward_components
+        if self.ordinary_completed_segments:
+            any_done = bool(np.any(dones))
+            if (
+                rollout_step_idx is not None
+                and skill_timer_for_env == 0
+                and log_probs
+                and self._is_new_high_level_decision(log_probs)
+            ):
+                if 'state_value' not in log_probs or 'agent_values' not in log_probs:
+                    raise RuntimeError(
+                        "ordinary completed segment decision lacks real-unit values"
+                    )
+                self.rollout_buffer.ordinary_begin_high_level_record(
+                    env_id,
+                    state=state,
+                    observations=observations,
+                    team_skill=team_skill,
+                    agent_skills=agent_skills,
+                    team_log_prob=log_probs.get('team_log_prob', 0.0),
+                    agent_log_probs=log_probs.get(
+                        'agent_log_probs', [0.0] * self.config.n_agents
+                    ),
+                    team_value=log_probs['state_value'],
+                    agent_values=log_probs['agent_values'],
+                )
+            if env_id not in self.rollout_buffer._ordinary_pending:
+                raise RuntimeError(
+                    f"lane {env_id} transition has no owned ordinary high decision"
+                )
+            self.rollout_buffer.ordinary_advance_high_level_record(
+                env_id,
+                reward=current_reward,
+                last_state=next_state,
+                last_observations=next_observations,
+            )
+            closes_interval = int(skill_timer_for_env) == int(self.config.k) - 1
+            if any_done or closes_interval:
+                reason = "native_terminal" if any_done else "skill_interval"
+                self.rollout_buffer.ordinary_close_high_level_record(
+                    env_id, terminal=any_done, reason=reason
+                )
+                self.high_level_samples_total += 1
+                self.high_level_samples_by_env[env_id] = (
+                    self.high_level_samples_by_env.get(env_id, 0) + 1
+                )
+                legacy_reason = "环境终止" if any_done else "技能周期结束"
+                self.high_level_samples_by_reason[legacy_reason] = (
+                    self.high_level_samples_by_reason.get(legacy_reason, 0) + 1
+                )
+                self.env_last_contribution[env_id] = self.global_step
+                self.env_reward_sums[env_id] = 0.0
+                self.env_timers[env_id] = 0
+            if self.enable_runtime_profiling:
+                self._add_transition_profile(
+                    'high_level_bookkeeping', time.perf_counter() - profile_start
+                )
+            return returned_reward_components
         if (
             rollout_step_idx is not None
             and skill_timer_for_env == 0
@@ -5505,10 +5652,14 @@ class HMASDAgent:
         if not bool(getattr(self.config, 'audit_high_replay_likelihood', False)):
             return
 
-        valid_time_steps, valid_env_indices = np.where(
-            rollout_data['high_level_valid_mask'][:num_steps]
-        )
-        sample_count = int(valid_time_steps.size)
+        if self.ordinary_completed_segments:
+            ordinary = self.rollout_buffer.get_ordinary_high_level_data()
+            sample_count = 0 if ordinary is None else len(ordinary['team_skills'])
+        else:
+            valid_time_steps, valid_env_indices = np.where(
+                rollout_data['high_level_valid_mask'][:num_steps]
+            )
+            sample_count = int(valid_time_steps.size)
         if sample_count == 0:
             self.high_replay_likelihood_metrics.update({
                 'latest_team_max_abs_error': 0.0,
@@ -5534,16 +5685,34 @@ class HMASDAgent:
             with torch.no_grad():
                 for start in range(0, sample_count, batch_size):
                     end = min(start + batch_size, sample_count)
-                    time_batch = valid_time_steps[start:end]
-                    env_batch = valid_env_indices[start:end]
+                    if self.ordinary_completed_segments:
+                        states_np = ordinary['states'][start:end]
+                        observations_np = ordinary['observations'][start:end]
+                        team_skills_np = ordinary['team_skills'][start:end]
+                        agent_skills_np = ordinary['agent_skills'][start:end]
+                        old_team_log_probs_np = ordinary['old_team_log_probs'][start:end]
+                        old_agent_log_probs_np = ordinary['old_agent_log_probs'][start:end]
+                    else:
+                        time_batch = valid_time_steps[start:end]
+                        env_batch = valid_env_indices[start:end]
+                        states_np = rollout_data['states'][time_batch, env_batch]
+                        observations_np = rollout_data['obs'][time_batch, env_batch]
+                        team_skills_np = rollout_data['team_skills'][time_batch, env_batch]
+                        agent_skills_np = rollout_data['agent_skills'][time_batch, env_batch]
+                        old_team_log_probs_np = rollout_data[
+                            'high_level_team_log_probs'
+                        ][time_batch, env_batch]
+                        old_agent_log_probs_np = rollout_data[
+                            'high_level_agent_log_probs'
+                        ][time_batch, env_batch]
 
                     states = torch.as_tensor(
-                        rollout_data['states'][time_batch, env_batch],
+                        states_np,
                         dtype=torch.float32,
                         device=self.device,
                     )
                     observations = torch.as_tensor(
-                        rollout_data['obs'][time_batch, env_batch],
+                        observations_np,
                         dtype=torch.float32,
                         device=self.device,
                     )
@@ -5573,12 +5742,12 @@ class HMASDAgent:
                         )
 
                     team_skills = torch.as_tensor(
-                        rollout_data['team_skills'][time_batch, env_batch],
+                        team_skills_np,
                         dtype=torch.long,
                         device=self.device,
                     )
                     agent_skills = torch.as_tensor(
-                        rollout_data['agent_skills'][time_batch, env_batch],
+                        agent_skills_np,
                         dtype=torch.long,
                         device=self.device,
                     )
@@ -5589,12 +5758,12 @@ class HMASDAgent:
                         agent_skills,
                     )
                     old_team_log_probs = torch.as_tensor(
-                        rollout_data['high_level_team_log_probs'][time_batch, env_batch],
+                        old_team_log_probs_np,
                         dtype=torch.float32,
                         device=self.device,
                     )
                     old_agent_log_probs = torch.as_tensor(
-                        rollout_data['high_level_agent_log_probs'][time_batch, env_batch],
+                        old_agent_log_probs_np,
                         dtype=torch.float32,
                         device=self.device,
                     )
@@ -5656,18 +5825,45 @@ class HMASDAgent:
         if rollout_data is None:
             main_logger.warning("没有有效的Rollout数据，跳过Coordinator更新")
             return 0, 0, 0, 0, 0, 0, 0, 0, 0
-            
-        # 检查是否有有效的高层数据
-        high_level_valid_mask = rollout_data["high_level_valid_mask"]
-        high_level_data_count = np.sum(high_level_valid_mask[:num_steps])
-        self._audit_high_replay_likelihood(rollout_data, num_steps)
+
+        ordinary_high_data = None
+        advantages_prepared = False
+        if self.ordinary_completed_segments:
+            high_level_last_values = (
+                bootstrap_values
+                if bootstrap_values is not None
+                else self._compute_high_level_bootstrap_values(num_steps)
+            )
+            self.rollout_buffer.compute_high_level_advantages(
+                high_level_last_values,
+                gamma=self.config.gamma,
+                value_normalizer=None,
+            )
+            advantages_prepared = True
+            ordinary_high_data = self.rollout_buffer.get_ordinary_high_level_data()
+            high_level_data_count = (
+                0 if ordinary_high_data is None
+                else len(ordinary_high_data["team_skills"])
+            )
+            self.last_ordinary_completed_segment_update[
+                'completed_high_records'
+            ] = int(high_level_data_count)
+            high_level_valid_mask = None
+            self._audit_high_replay_likelihood(rollout_data, num_steps)
+        else:
+            # 检查是否有有效的高层数据
+            high_level_valid_mask = rollout_data["high_level_valid_mask"]
+            high_level_data_count = np.sum(high_level_valid_mask[:num_steps])
+            self._audit_high_replay_likelihood(rollout_data, num_steps)
         if (
             bool(getattr(self.config, 'r39a_strict_contract', False))
+            and not self.ordinary_completed_segments
             and int(self.high_replay_likelihood_metrics['latest_sample_count']) <= 0
         ):
             raise ValueError("R39A collected no replayable high-policy samples")
         if (
             bool(getattr(self.config, 'r39a_strict_contract', False))
+            and not self.ordinary_completed_segments
             and float(self.high_replay_likelihood_metrics['latest_max_abs_error']) > 1e-6
         ):
             raise ValueError(
@@ -5676,12 +5872,18 @@ class HMASDAgent:
             )
         if high_level_data_count == 0:
             main_logger.warning("没有有效的高层策略数据，跳过Coordinator更新")
+            if self.ordinary_completed_segments:
+                self.rollout_buffer.ordinary_consume_high_level_phase(self.global_step)
             return 0, 0, 0, 0, 0, 0, 0, 0, 0
         
         main_logger.info(f"开始使用统一缓冲区更新Coordinator，有效高层数据: {high_level_data_count}个")
         
         # 【GAE引导价值修复】优先使用传入的准确 bootstrap_values
-        if bootstrap_values is not None:
+        if self.ordinary_completed_segments:
+            main_logger.debug(
+                "ordinary completed segments froze boundary values before the update"
+            )
+        elif bootstrap_values is not None:
             high_level_last_values = bootstrap_values
             main_logger.debug("使用传入的Bootstrap Values进行GAE计算")
         else:
@@ -5694,11 +5896,12 @@ class HMASDAgent:
         
         # 【关键修复】Buffer中已是真实值，不再需要value_normalizer进行反归一化
         profile_start = time.perf_counter() if self.enable_runtime_profiling else 0.0
-        self.rollout_buffer.compute_high_level_advantages(
-            high_level_last_values, 
-            gamma=gamma_high, 
-            value_normalizer=None
-        )
+        if not advantages_prepared:
+            self.rollout_buffer.compute_high_level_advantages(
+                high_level_last_values,
+                gamma=gamma_high,
+                value_normalizer=None
+            )
         if self.enable_runtime_profiling:
             self._add_update_profile('coord_advantage', time.perf_counter() - profile_start)
         
@@ -5778,6 +5981,10 @@ class HMASDAgent:
 
             team_skills_batch = batch['team_skills'].to(self.device)    # Shape: (B,)
             agent_skills_batch = batch['agent_skills'].to(self.device) # Shape: (B, n_agents)
+            if self.ordinary_completed_segments:
+                self.last_ordinary_completed_segment_update[
+                    'coordinator_sample_presentations'
+                ] += int(team_skills_batch.numel())
             
             # 【关键修复】使用分离的旧log_probs
             old_team_log_probs_batch = batch['old_team_log_probs'].to(self.device)
@@ -5960,6 +6167,10 @@ class HMASDAgent:
         
         if self.r39_native_hmasd_toy:
             self.native_toy_optimizer_updates['high'] += int(update_count)
+        if self.ordinary_completed_segments:
+            self.last_ordinary_completed_segment_update[
+                'coordinator_optimizer_steps'
+            ] = int(update_count)
 
         # 计算平均损失
         avg_policy_loss = (total_policy_loss / update_count).item() if update_count > 0 else 0.0
@@ -5971,23 +6182,34 @@ class HMASDAgent:
         avg_agent_entropy = (total_agent_entropy / update_count).item() if update_count > 0 else 0.0
         profile_start = time.perf_counter() if self.enable_runtime_profiling else 0.0
         # 计算其他统计信息（从统一缓冲区获取高层数据）
-        valid_mask = high_level_valid_mask[:num_steps]
-        valid_high_level_rewards = rollout_data["high_level_rewards"][:num_steps][valid_mask]
+        if self.ordinary_completed_segments:
+            valid_mask = None
+            valid_high_level_rewards = ordinary_high_data["rewards"]
+        else:
+            valid_mask = high_level_valid_mask[:num_steps]
+            valid_high_level_rewards = rollout_data["high_level_rewards"][:num_steps][valid_mask]
         if valid_high_level_rewards.size > 0:
             avg_high_level_reward = float(np.mean(valid_high_level_rewards))
-            valid_time_steps, valid_env_indices = np.where(valid_mask)
-            sample_size = min(50, valid_time_steps.size)
-            if sample_size > 0:
+            if self.ordinary_completed_segments:
+                sample_size = min(50, len(ordinary_high_data["states"]))
+                sample_states_np = ordinary_high_data["states"][:sample_size]
+                sample_observations_np = ordinary_high_data["observations"][:sample_size]
+            else:
+                valid_time_steps, valid_env_indices = np.where(valid_mask)
+                sample_size = min(50, valid_time_steps.size)
                 sample_t = valid_time_steps[:sample_size]
                 sample_e = valid_env_indices[:sample_size]
+                sample_states_np = rollout_data["states"][sample_t, sample_e]
+                sample_observations_np = rollout_data["obs"][sample_t, sample_e]
+            if sample_size > 0:
                 with torch.no_grad():
                     sample_states = torch.as_tensor(
-                        rollout_data["states"][sample_t, sample_e],
+                        sample_states_np,
                         dtype=torch.float32,
                         device=self.device
                     )
                     sample_observations = torch.as_tensor(
-                        rollout_data["obs"][sample_t, sample_e],
+                        sample_observations_np,
                         dtype=torch.float32,
                         device=self.device
                     )
@@ -6011,6 +6233,9 @@ class HMASDAgent:
                         f"平均损失={avg_total_loss:.6f}, 平均策略损失={avg_policy_loss:.6f}, "
                         f"平均价值损失={avg_value_loss:.6f}")
         
+        if self.ordinary_completed_segments:
+            self.rollout_buffer.ordinary_consume_high_level_phase(self.global_step)
+
         return avg_total_loss, avg_policy_loss, avg_value_loss, \
                avg_team_entropy, avg_agent_entropy, \
                mean_state_value, mean_agent_value, avg_high_level_reward, avg_cd_loss
@@ -6479,6 +6704,11 @@ class HMASDAgent:
                 main_logger.warning("在Discoverer更新中，当前批次没有有效数据，跳过。")
                 continue
 
+            if self.ordinary_completed_segments:
+                self.last_ordinary_completed_segment_update[
+                    'low_valid_sample_presentations'
+                ] += int(valid_indices.numel())
+
             advantages_flat = advantages_flat[valid_indices]
             returns_flat = returns_flat[valid_indices]
             old_log_probs_flat = old_log_probs_flat[valid_indices]
@@ -6571,6 +6801,11 @@ class HMASDAgent:
             total_value_loss = total_value_loss + value_loss.detach()
             total_entropy_loss = total_entropy_loss + entropy_loss.detach()
             update_count += 1
+
+        if self.ordinary_completed_segments:
+            self.last_ordinary_completed_segment_update[
+                'low_optimizer_steps'
+            ] = int(update_count)
 
         # 计算平均值
         avg_loss = (total_loss / update_count).item() if update_count > 0 else 0
@@ -6742,6 +6977,16 @@ class HMASDAgent:
             'team_accuracy': float(team_acc),
             'individual_accuracy': float(ind_acc),
         }
+        if self.ordinary_completed_segments:
+            metrics = self.last_ordinary_completed_segment_update
+            metrics['discriminator_team_sample_presentations'] = int(
+                num_team_samples * update_epochs
+            )
+            metrics['discriminator_individual_sample_presentations'] = int(
+                num_ind_samples * update_epochs
+            )
+            metrics['discriminator_team_optimizer_steps'] = int(team_update_count)
+            metrics['discriminator_individual_optimizer_steps'] = int(ind_update_count)
 
         return total_loss
 
@@ -6781,6 +7026,11 @@ class HMASDAgent:
         
         team_data = [d for d in all_data if d['type'] == 'team']
         ind_data = [d for d in all_data if d['type'] == 'individual']
+        if self.ordinary_completed_segments:
+            metrics = self.last_ordinary_completed_segment_update
+            metrics['discriminator_team_records'] = int(len(team_data))
+            metrics['discriminator_individual_records'] = int(len(ind_data))
+            metrics['discriminator_epochs'] = int(update_epochs)
         
         main_logger.info(f"判别器On-Policy更新: 团队数据={len(team_data)}个, 个体数据={len(ind_data)}个")
         
@@ -6949,6 +7199,16 @@ class HMASDAgent:
             'team_accuracy': float(team_acc),
             'individual_accuracy': float(ind_acc),
         }
+        if self.ordinary_completed_segments:
+            metrics = self.last_ordinary_completed_segment_update
+            metrics['discriminator_team_sample_presentations'] = int(
+                len(team_data) * update_epochs
+            )
+            metrics['discriminator_individual_sample_presentations'] = int(
+                len(ind_data) * update_epochs
+            )
+            metrics['discriminator_team_optimizer_steps'] = int(team_update_count)
+            metrics['discriminator_individual_optimizer_steps'] = int(ind_update_count)
         
         return total_loss
 
@@ -7004,8 +7264,29 @@ class HMASDAgent:
         - Discriminator 更新后，下一轮采样的内在奖励会基于新的 Discriminator
         - 形成完整的逻辑闭环
         """
+        ordinary_boundary_values = None
+        if self.ordinary_completed_segments:
+            ordinary_boundary_values = self._ordinary_boundary_values(
+                last_state, last_observations
+            )
+
         # 更新全局步数
         self.global_step += 1
+        if self.ordinary_completed_segments:
+            self.last_ordinary_completed_segment_update = {
+                'completed_high_records': 0,
+                'coordinator_sample_presentations': 0,
+                'coordinator_optimizer_steps': 0,
+                'low_valid_sample_presentations': 0,
+                'low_optimizer_steps': 0,
+                'discriminator_team_records': 0,
+                'discriminator_individual_records': 0,
+                'discriminator_epochs': 0,
+                'discriminator_team_sample_presentations': 0,
+                'discriminator_individual_sample_presentations': 0,
+                'discriminator_team_optimizer_steps': 0,
+                'discriminator_individual_optimizer_steps': 0,
+            }
         main_logger.debug(f"HMASDAgent.update (step {self.global_step}): 开始更新所有网络，有效步数: {steps_in_buffer}")
 
         # [新增] 熵系数退火逻辑
@@ -7031,8 +7312,12 @@ class HMASDAgent:
                 main_logger.debug(f"熵系数退火 [进度: {progress_adjusted:.4f}]: lambda_h={self.config.lambda_h:.6f}, lambda_l={self.config.lambda_l:.6f}")
 
         # 【Coordinator Bootstrap 修复】计算高层策略的 Bootstrap Values
-        coord_bootstrap_values = None
-        if last_state is not None and last_observations is not None:
+        coord_bootstrap_values = ordinary_boundary_values
+        if (
+            not self.ordinary_completed_segments
+            and last_state is not None
+            and last_observations is not None
+        ):
             try:
                 with torch.no_grad():
                     # 标准化输入
@@ -7097,7 +7382,7 @@ class HMASDAgent:
                     main_logger.info("已使用最新的next_state计算Coordinator Bootstrap Values")
             except Exception as e:
                 main_logger.error(f"计算Coordinator Bootstrap Values时出错: {e}")
-        else:
+        elif not self.ordinary_completed_segments:
             main_logger.warning("未提供last_state或last_observations，Coordinator Bootstrap将使用回退机制")
 
         # 更频繁地检查环境贡献情况（从1000步降至200步）
@@ -7108,7 +7393,13 @@ class HMASDAgent:
             for env_id in range(self.config.num_envs):
                 env_contributions[env_id] = self.high_level_samples_by_env.get(env_id, 0)
             
-            if use_legacy_contribution_monitor:
+            if self.ordinary_completed_segments:
+                main_logger.debug(
+                    "ordinary completed-segment contribution diagnostics: "
+                    f"completed={self.rollout_buffer.ordinary_high_level_snapshot()['counters']['completed_unconsumed']}, "
+                    f"pending={len(self.rollout_buffer._ordinary_pending)}"
+                )
+            elif use_legacy_contribution_monitor:
                 # 旧HMASD fixed-k路径才允许按环境贡献数强制闭合高层样本。
                 low_contribution_envs = {env_id: count for env_id, count in env_contributions.items() if count < 3}
                 if low_contribution_envs:
@@ -7143,7 +7434,13 @@ class HMASDAgent:
             
             # 检查高层策略数据是否足够
             rollout_data_for_check = self.rollout_buffer._get_full_rollout_data()
-            if rollout_data_for_check:
+            if self.ordinary_completed_segments:
+                high_level_data_count = int(
+                    self.rollout_buffer.ordinary_high_level_snapshot()["counters"][
+                        "completed_unconsumed"
+                    ]
+                )
+            elif rollout_data_for_check:
                 high_level_data_count = np.sum(rollout_data_for_check['high_level_valid_mask'][:rollout_buffer_pos])
             else:
                 high_level_data_count = 0
@@ -7158,6 +7455,11 @@ class HMASDAgent:
                 for env_id in range(self.config.num_envs):
                     self.force_high_level_collection[env_id] = True
                     self.env_reward_thresholds[env_id] = 0.0
+            elif self.ordinary_completed_segments:
+                main_logger.debug(
+                    "ordinary completed-segment high replay diagnostics: "
+                    f"completed={high_level_data_count}; legacy forced collection disabled"
+                )
             elif not use_legacy_contribution_monitor:
                 main_logger.debug(
                     "HA-CTSE过程高层replay诊断: "
@@ -7349,6 +7651,10 @@ class HMASDAgent:
             update_result.update(self.last_ha_ctse_metrics)
             update_result['entropy_coef_low_level'] = float(
                 getattr(self, 'low_level_entropy_coef', getattr(self.config, 'lambda_l', 0.0))
+            )
+        if self.ordinary_completed_segments:
+            update_result['ordinary_completed_segments_metrics'] = dict(
+                self.last_ordinary_completed_segment_update
             )
         return update_result
     

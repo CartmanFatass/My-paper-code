@@ -2,8 +2,12 @@
 
 from __future__ import annotations
 
+import copy
+import gc
 import hashlib
 import json
+import resource
+import time
 from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Any, Iterable
@@ -12,7 +16,11 @@ import numpy as np
 import torch
 
 from hmasd.agent import HMASDAgent
-from ..b01.native import NativeSpec, _rng_state, active_config, make_config, seed_everything
+from ..b01.native import (
+    NativeSpec, _rng_state, _write_progress, active_config, make_config,
+    seed_everything, sha256_file,
+)
+from ..b04.native import write_json
 from ..b04.evaluation import TRACE_FIELDS
 from ..b06.feedback import PRODUCTION_LAYOUT
 from ..b06.native import _normalizer_snapshot
@@ -27,10 +35,6 @@ FINAL_SEEDS = tuple(range(942001, 942033))
 ARMS = ("N", "A")
 TRAINING_FEEDBACK = {"N": False, "A": True}
 EVALUATION_MODE = "F"
-
-
-class OrdinaryBoundaryRepairRequired(RuntimeError):
-    """The fixed batch cannot start until the ordinary learner boundary is resolved."""
 
 
 @dataclass(frozen=True)
@@ -53,7 +57,10 @@ def production_spec(seed: int) -> B08Spec:
 
 
 def make_b08_config(spec: B08Spec):
+    if spec != B08Spec():
+        raise ValueError("B08 accepts only the prospectively fixed production specification")
     config = make_config(spec)
+    config.ordinary_completed_segments = True
     expected = {
         "seed": TRAINING_SEED,
         "num_envs": 2,
@@ -102,6 +109,11 @@ def fixed_config_record(spec: B08Spec, config) -> dict[str, Any]:
         "final_seeds": list(spec.final_seeds),
         "common_initial_evaluation_episodes": len(spec.eval_seeds) + len(spec.final_seeds),
         "feedback_layout": asdict(PRODUCTION_LAYOUT),
+        "high_training_contract": "ordinary_completed_segments_v1",
+        "high_contract_interpretation": (
+            "complete segments eligible in first later phase; mixed low-policy versions; "
+            "final open prefixes budget-censored, no high credit or interaction top-up"
+        ),
     }
 
 
@@ -409,10 +421,117 @@ def unresolved_boundary_evidence(agent: HMASDAgent, dones: np.ndarray) -> dict[s
     }
 
 
-def run_native(**_kwargs):
-    """Fail before scientific effects until the DM supplies the core boundary resolution."""
+def run_native(*, out: Path, launch_sha: str, device_name="cuda", threads=4,
+               spec: B08Spec | None = None):
+    """Execute the fixed N-then-A pair once, preserving partial artifacts on error."""
+    from .training import train_arm
 
-    raise OrdinaryBoundaryRepairRequired(
-        "B08 ordinary HMASD training is blocked on the recorded mid-skill rollout-boundary "
-        "contract; no scientific fit was started"
-    )
+    spec = spec or B08Spec()
+    if threads != 4 or device_name != "cuda":
+        raise ValueError("B08 production requires the fixed CUDA FP32/four-thread binding")
+    config = make_b08_config(spec)
+    device = torch.device(device_name)
+    if not torch.cuda.is_available():
+        raise RuntimeError("B08 CUDA was requested but is unavailable")
+    torch.set_num_threads(threads)
+    torch.backends.cuda.matmul.allow_tf32 = False
+    torch.backends.cudnn.allow_tf32 = False
+    out = Path(out)
+    if any((out / name).exists() for name in ("summary.json", "config.json", "progress.jsonl", "N", "A")):
+        raise FileExistsError(f"B08 scientific output already exists: {out}")
+    out.mkdir(parents=True, exist_ok=True)
+    started = time.perf_counter()
+    cpu_start = resource.getrusage(resource.RUSAGE_SELF)
+    summary = {
+        "object_id": OBJECT_ID, "status": "INCOMPLETE", "failure": None,
+        "launch_sha": launch_sha, "seed": spec.seed, "arm_order": list(ARMS),
+        "device": str(device), "torch_threads": threads,
+        "counts": {key: 0 for key in ("fits_started", "fits_completed", "training_transitions",
+                                     "evaluation_transitions", "evaluation_episodes_attempted",
+                                     "evaluation_episodes_completed")},
+        "arms": {}, "evaluations": {}, "artifacts": {},
+    }
+    write_json(out / "config.json", fixed_config_record(spec, config))
+    summary["artifacts"]["config.json"] = sha256_file(out / "config.json")
+
+    def progress(event):
+        summary["counts"]["training_transitions"] = sum(
+            row["counts"]["transitions"] for row in summary["arms"].values())
+        _write_progress(out, summary, event)
+
+    def panel(agent, label, seeds):
+        def advance(kind, count):
+            field = {"attempt": "evaluation_episodes_attempted",
+                     "transition": "evaluation_transitions",
+                     "world": "evaluation_episodes_completed"}[kind]
+            summary["counts"][field] += 1 if kind == "world" else count
+            if kind != "transition" or summary["counts"][field] % 1000 == 0:
+                progress({"event": "evaluation_" + kind, "panel": label,
+                          "count": summary["counts"][field]})
+        path = out / "evaluation" / (label + ".npz")
+        result, arrays = evaluate_feedback_panel(
+            agent, config, seeds, device, trace_path=path,
+            log_dir=out / "evaluation_logs" / label, policy_seed=spec.seed, progress=advance)
+        del arrays
+        summary["evaluations"][label] = result
+        summary["artifacts"][str(path.relative_to(out))] = result["trace_sha256"]
+        progress({"event": "panel_complete", "panel": label})
+
+    def checkpoint(agent, label):
+        path = out / label / "agent.pt"
+        path.parent.mkdir(parents=True, exist_ok=True)
+        agent.save_model(path)
+        summary["artifacts"][str(path.relative_to(out))] = sha256_file(path)
+
+    try:
+        common_identity = None
+        for arm in ARMS:
+            arm_config = copy.deepcopy(config)
+            agent, identity = new_initialized_agent(
+                arm_config, device=device, log_dir=out / arm / "logs", seed=spec.seed)
+            if common_identity is None:
+                common_identity = identity
+                summary["common_initialization"] = identity
+                checkpoint(agent, "common_initial")
+                panel(agent, "initial_development", spec.eval_seeds)
+                panel(agent, "initial_final", spec.final_seeds)
+            else:
+                assert_common_initialization(common_identity, identity)
+            arm_summary = {"status": "INCOMPLETE", "counts": {"transitions": 0},
+                           "initialization": identity, "common_initialization_equal": True}
+            summary["arms"][arm] = arm_summary
+            summary["counts"]["fits_started"] += 1
+            progress({"event": "fit_start", "arm": arm})
+            train_arm(agent, arm_config, spec, arm=arm, out=out / arm,
+                      summary=arm_summary, progress=progress)
+            summary["counts"]["fits_completed"] += 1
+            checkpoint(agent, arm + "/endpoint")
+            panel(agent, arm + "_development", spec.eval_seeds)
+            panel(agent, arm + "_final", spec.final_seeds)
+            del agent
+            gc.collect()
+            torch.cuda.empty_cache()
+        summary["comparisons"] = {
+            name: endpoint_comparison(summary["evaluations"]["initial_" + name],
+                                      summary["evaluations"]["N_" + name],
+                                      summary["evaluations"]["A_" + name])
+            for name in ("development", "final")}
+        counts = summary["counts"]
+        expected_episodes = 3 * (len(spec.eval_seeds) + len(spec.final_seeds))
+        if (counts["training_transitions"] != 2 * spec.transitions
+                or counts["evaluation_episodes_completed"] != expected_episodes
+                or counts["evaluation_episodes_attempted"] != expected_episodes
+                or counts["evaluation_transitions"] > expected_episodes * spec.episode_length):
+            raise RuntimeError("B08 actual batch exposure mismatch")
+        summary["status"] = "COMPLETE"
+        return summary
+    except Exception as exc:
+        summary["failure"] = {"type": type(exc).__name__, "message": str(exc)}
+        raise
+    finally:
+        usage = resource.getrusage(resource.RUSAGE_SELF)
+        summary.update(wall_seconds=time.perf_counter() - started,
+                       cpu_user_seconds=usage.ru_utime - cpu_start.ru_utime,
+                       cpu_system_seconds=usage.ru_stime - cpu_start.ru_stime,
+                       peak_rss_kib=int(usage.ru_maxrss), rss_scope="runner process high-water mark")
+        progress({"event": "batch_exit", "status": summary["status"]})

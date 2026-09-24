@@ -212,10 +212,10 @@ def test_entry_admits_before_candidate_and_forwards_fixed_arguments(monkeypatch,
         entry.main(["--launch-sha", "other", "--out", str(tmp_path / "other")])
 
 
-def test_unresolved_training_contract_fails_before_output(tmp_path):
+def test_production_binding_refuses_changed_spec_before_output(tmp_path):
     out = tmp_path / "never-created"
-    with pytest.raises(native.OrdinaryBoundaryRepairRequired, match="no scientific fit"):
-        native.run_native(out=out)
+    with pytest.raises(ValueError, match="prospectively fixed"):
+        native.run_native(out=out, launch_sha="fixture", spec=replace(native.B08Spec(), rollouts=1))
     assert not out.exists()
 
 
