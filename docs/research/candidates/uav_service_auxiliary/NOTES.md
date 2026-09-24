@@ -6704,3 +6704,47 @@ The adopted B06 plan and exact Pro answer are already published on main
 `ac232d3b8c97656bda51a0f4555599b566ea95b5`. A read-only browser cleanup check found
 zero targets for this operation and three unrelated targets; no tab was closed
 by that check and no question was resent.
+
+## 2026-09-23 — B06 admitted after actual CUDA checks
+
+The published implementation source is
+`f92a94b017816467662115dbbc1409793858613c`. Its two CUDA correctness cases passed
+on the configured RTX4070 Laptop /Torch2.7.0+cu118 in **5.28s**, with four Torch
+threads and TF32 disabled: original raw-array parity against the unchanged B04
+evaluator (including Python/NumPy/Torch/CUDA RNG preservation), and feedback-mode
+switching without an added recurrent reset or skill-clock change. Both real
+retained source bundles also passed verify_source on that actual node and used
+their digest-bound checkpoint configs. Tracked source stayed clean. These are
+short correctness fixtures, not the full retained endpoint reproduction.
+
+Source preparation encountered network timeouts before any result admission:
+fetch and the partial clone's checkout object fetch needed the configured network
+shell. I reconciled and terminated only those identified preparation processes,
+removed only that new worktree's stale checkout lock after its Git processes had
+exited, and completed the same pinned checkout through the configured shell.
+No scientific worker existed during that recovery; no experiment was retried.
+The canonical checkout and unrelated processes/artifacts were preserved.
+
+The fixed B06 batch was accepted once at2026-09-24T01:50:18Z. Its original native
+handle, exact invocation, input roots, source, process identities and resource
+admission are retained in
+[launch manifest](../../../../runs/uav_service_auxiliary/b06_of_a01/launch-manifest.json),
+[preflight](../../../../runs/uav_service_auxiliary/b06_of_a01/admission-preflight.json)
+and [child admission](../../../../runs/uav_service_auxiliary/b06_of_a01/launch-status.json).
+These three static files were copied back with byte-digest equality. Kernel
+control observation was current main`b84bc737ffbf3da044335ebe77193a74e247edeb`;
+launch-bound lead and owner pause passed the native guard. The first native status
+showed the recorded runner and supervisor alive with consistent records; no exit
+witness and no scientific failure. The existing checkpoint loader reports that
+its training-only discriminator buffer is empty; no training or buffer update is
+part of this fixed-policy comparison.
+
+Detached observation job`launch-usa-b06-of-a01` adopted the same original status
+handle at **generation79**,1500-second window, with zero observation errors. All
+previous experiment/Pro notices remain consumed; there is no new Pro request.
+The batch remains **0 new fits /0 optimizer updates /160 episode attempts /
+240k evaluation team transitions upper bound**. Current status is running and
+scientifically incomplete. Full O reproduction is checked before each dependent
+F panel; complete collection, all four block-by-panel comparisons, service losses,
+nonactivation and actual physical effects still require reading. A checkpoint
+rearms observation only; it never restarts the worker or changes the rule.
