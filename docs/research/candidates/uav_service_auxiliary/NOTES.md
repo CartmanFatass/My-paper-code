@@ -6655,3 +6655,96 @@ subdelegation. An independent registered Reviewer checks changed scientific/inpu
 RNG semantics before DM acceptance. DM owns interpretation, source publication,
 actual-node admission and full collection. Stop dependent work for an actual
 semantic/input/admission failure; report it, do not broaden the study.
+
+## 2026-09-23 — B06 implementation accepted for actual-node validation
+
+The registered Implementer returned the five new paths fixed in the B06 L0;
+no shared/frozen learner, environment or previous evaluator changed. I read the
+rule, source restoration, evaluation and failure paths and accepted the bounded
+diff after independent registered Reviewer inspection. This accepts engineering
+for further checks, not a scientific result or a result launch.
+
+Two concrete defects were resolved before execution. A freshly constructed
+config had the current checkout's unused absolute baseline-metrics path rather
+than the historical source path. Both real retained inputs now pass verification:
+the exact saved checkpoint config is restored, its materialized active fields
+must match digest-bound config.json, and only the known path difference against
+a freshly reconstructed config is allowed while both recorded consumers are
+disabled. Other configuration differences refuse. No scientific field or old
+checkpoint is edited. Independent review also found that nullable first-entry
+and override times could crash a panel containing both activating and nonactivating
+worlds. These are now conditional timing diagnostics with explicit observed-world
+counts; all worlds remain in the primary outcome means. Both orderings are tested.
+
+O reproduces retained common arrays immediately before its dependent F panel.
+Legal pre/post observation fields and higher-precision physical telemetry are
+separately labeled. Returned transitions and attempted episodes are counted before
+subsequent telemetry validation; completed worlds and a failing world's partial
+trace remain recoverable. Mode intervals, actual commands and realized displacement
+are recorded separately. These changes preserve the fixed study and its adverse
+branches; no new arm, world, threshold or optimizer update is introduced.
+
+Implementer CPU checks: **11 passed, 2 CUDA cases skipped**,4.50s. The short O
+path compares against the unchanged B04 evaluator's raw arrays, rather than a
+second candidate implementation; it is a correctness fixture, not another full
+production panel. Checks also cover legal decoding/rule boundaries, real native
+movement/docking/depletion blocking, recurrent/skill reset continuity, mixed
+activation summaries, raw-array mismatch, partial-failure retention and guarded
+CLI refusal. Both actual local B04/B05 source bundles passed verify_source, using
+their complete checkpoint configs. The independent Reviewer inspected the nullable
+repair and regression and reported **no outstanding material findings**. Syntax
+and whitespace checks passed. I additionally made the pending CUDA fixtures use
+four Torch threads and explicitly compare CUDA RNG state before/after; TF32 stays
+disabled. No production result interaction has started. Full original endpoint
+reproduction remains a runtime condition inside B06, not established by the short
+fixtures. Publish this source, run the two actual-node CUDA correctness cases,
+then admit the unchanged batch only if those checks pass.
+
+The adopted B06 plan and exact Pro answer are already published on main
+`ac232d3b8c97656bda51a0f4555599b566ea95b5`. A read-only browser cleanup check found
+zero targets for this operation and three unrelated targets; no tab was closed
+by that check and no question was resent.
+
+## 2026-09-23 — B06 admitted after actual CUDA checks
+
+The published implementation source is
+`f92a94b017816467662115dbbc1409793858613c`. Its two CUDA correctness cases passed
+on the configured RTX4070 Laptop /Torch2.7.0+cu118 in **5.28s**, with four Torch
+threads and TF32 disabled: original raw-array parity against the unchanged B04
+evaluator (including Python/NumPy/Torch/CUDA RNG preservation), and feedback-mode
+switching without an added recurrent reset or skill-clock change. Both real
+retained source bundles also passed verify_source on that actual node and used
+their digest-bound checkpoint configs. Tracked source stayed clean. These are
+short correctness fixtures, not the full retained endpoint reproduction.
+
+Source preparation encountered network timeouts before any result admission:
+fetch and the partial clone's checkout object fetch needed the configured network
+shell. I reconciled and terminated only those identified preparation processes,
+removed only that new worktree's stale checkout lock after its Git processes had
+exited, and completed the same pinned checkout through the configured shell.
+No scientific worker existed during that recovery; no experiment was retried.
+The canonical checkout and unrelated processes/artifacts were preserved.
+
+The fixed B06 batch was accepted once at2026-09-24T01:50:18Z. Its original native
+handle, exact invocation, input roots, source, process identities and resource
+admission are retained in
+[launch manifest](../../../../runs/uav_service_auxiliary/b06_of_a01/launch-manifest.json),
+[preflight](../../../../runs/uav_service_auxiliary/b06_of_a01/admission-preflight.json)
+and [child admission](../../../../runs/uav_service_auxiliary/b06_of_a01/launch-status.json).
+These three static files were copied back with byte-digest equality. Kernel
+control observation was current main`b84bc737ffbf3da044335ebe77193a74e247edeb`;
+launch-bound lead and owner pause passed the native guard. The first native status
+showed the recorded runner and supervisor alive with consistent records; no exit
+witness and no scientific failure. The existing checkpoint loader reports that
+its training-only discriminator buffer is empty; no training or buffer update is
+part of this fixed-policy comparison.
+
+Detached observation job`launch-usa-b06-of-a01` adopted the same original status
+handle at **generation79**,1500-second window, with zero observation errors. All
+previous experiment/Pro notices remain consumed; there is no new Pro request.
+The batch remains **0 new fits /0 optimizer updates /160 episode attempts /
+240k evaluation team transitions upper bound**. Current status is running and
+scientifically incomplete. Full O reproduction is checked before each dependent
+F panel; complete collection, all four block-by-panel comparisons, service losses,
+nonactivation and actual physical effects still require reading. A checkpoint
+rearms observation only; it never restarts the worker or changes the rule.
