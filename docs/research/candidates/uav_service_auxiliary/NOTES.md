@@ -9710,3 +9710,74 @@ and write raw high records/censoring plus proposal/submission/actual-transition 
 That integration and an active-F native smoke also require independent engineering review before
 exact input publication and admission. This is scoped implementation within the revised choice,
 not another scientific decision round.
+
+## 2026-09-24 — B08 implementation accepted after independent core and collector review
+
+The DM read and accepted the shared ordinary completed-segment diff and candidate integration
+against the preceding revised contract. The core Implementer owned `hmasd/agent.py`,
+`hmasd/utils.py` and its focused test; the DM implemented the B08 collector/batch. Separate
+read-only Reviewers examined core semantics and candidate execution. Neither reported a
+remaining material finding. Review is engineering evidence, not scientific acceptance or an
+additional grant of research authority. B08 remains unstarted at this commit.
+
+The common opt-in retains genuine high decision facts independently of low rollout rows,
+freezes first-eligible completed targets, preserves live history and pending records across
+update/clear, and records final prefixes without manufactured high credit. One interface
+clarification: a pending record's `end_interaction_index` is the last observed prefix transition;
+`end_phase_version` and `close_reason` remain null until actual closure. DM review also required
+true-boundary value queries to fail before learner/global-step mutation and the opt-in phase200
+monitor to avoid the legacy row mask and forced collection. Default behavior remains selected
+when the new flag is absent/false; no historical result is reinterpreted.
+
+The candidate saves original proposals/log-probs, F-submitted commands, actual native rewards,
+ends/episode clocks, physical source energy facts, service metrics, F opportunities and boundary
+state in runner artifacts. Source facts are saved before derived ledger validation. The storage
+assertion compares actual proposal/log-prob/native-reward arrays to the real low buffer. Actual
+post-transition observations/state enter native intrinsic/discriminator storage before episode
+reset into distinct arrays. High before/after snapshots preserve complete original decision
+facts, successor/target/version data, consumed identities and final observed prefixes. The
+runner records actual native sample presentations and optimizer counts rather than inferring
+identical optimization exposure from identical interaction budgets. Per-fit wall and process
+high-water RSS are measured; CPU user/system time is measured only for the batch.
+
+The fixed batch constructs N and A separately from copies of one frozen configuration, verifies
+actual parameter/buffer/normalizer/sampler/global-RNG/evaluation-state initialization equality,
+evaluates one common initial F panel (development/final slices), and runs the fixed N-then-A
+training and endpoints without a score-conditioned branch. Evaluation uses a separate learner
+and preserves the training agent's final pending prefix. Technical failure keeps partial
+artifacts and halts the batch without an automatic retry; all signed endpoint effects remain.
+No other seed, arm, intermediate panel, loss, F threshold or native environment change was added.
+
+Validation before result execution:
+
+- Core author's focused/default recurrent-buffer set:19 passed; updated focused file:8 passed.
+  Core Reviewer independently ran19 checks in2.77s and the two updated compatibility checks in2.64s.
+- The real k4/two-lane/two-phase fixture includes row5 native ending, original row10 deferred
+  decision, distinct V10/V12, changed-current versus original likelihood, actual high/low movement,
+  phase-only low membership, real-unit ValueNorm and row22 final prefix. The aligned enabled/default
+  single-phase comparison captured every coordinator presentation plus targets/losses/all learner
+  state tensors: observed maximum drift0.0; allowed tolerance8 times FP32 epsilon. Absent/false
+  is exact in its fixture. This does not establish historical prepatch bitwise equivalence.
+- The historical update-phase equivalence harness was unavailable: its missing tape regenerated
+  with a pinned-digest mismatch before comparison (8b6f… versus d870…). The owned generated tape
+  was removed. This is an unexecuted historical comparison, not a passing compatibility result.
+- Candidate suite:17 passed in6.38s; separate Reviewer17 passed in6.16s. Later batch fixtures:
+  3 passed in2.32s, including adverse N with A still executed, technical N failure, mismatched A
+  initialization and output reuse refusal. Actual short native N/A collection with active F,
+  native H7/k4 endings, two phases and immutable F evaluation after final censoring:3 passed,
+  2 CUDA cases skipped locally in6.17s. Partial ledger rejection preserves the already executed
+  row's raw facts and distinguishes executed, validated and stored rows.
+- Compile/diff whitespace checks pass for changed code. A separate actual-node CUDA version of
+  the same native collector/update/evaluator test is available and will be read before launch;
+  no GPU correctness claim is made from CPU verification.
+
+Accepted production-file SHA256s at this boundary: core agent
+`f74e37c70a982b0a0a4230e648912df352659df8ae6232fa0e0a0c3f347c7f44`, core buffer
+`cd5b4d9ba22bbae6826e81a65ead8d1b828ac5f56b60494b78e6e92c6c29a375`, B08 batch/evaluator
+`6a0ab0066aac5b66152a5723328d5a6dd35dbb797e736d0273f8174294680eb3`, B08 collector
+`26e403ab068d7c6053f7eb3a6820adba1334107d8b8c8b8d9689c8d5acc0bc57`.
+The separate core test's final digest is
+`63508369b2e20fd71bda61600eff0f652348ea2920315ec50fe125ff7ac65190`.
+The earlier scientific interpretation is unchanged: this tests one finite trained package pair
+under an explicit mixed-behavior/eligibility approximation, not an unbiased estimator, recovery
+mediator, universal superiority or cancellation of approximation bias between arms.
