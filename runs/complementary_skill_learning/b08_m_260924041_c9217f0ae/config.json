@@ -1,0 +1,58 @@
+{
+  "object_id": "complementary_skill_b07",
+  "arm": "M",
+  "spec": {
+    "n_agents": 6,
+    "n_users": 50,
+    "k": 10,
+    "horizon": 500,
+    "lanes": 16,
+    "rollouts": 45,
+    "eval_lanes": 32,
+    "init_seed": 260924041,
+    "head_seed": 260924042,
+    "train_rng_seed": 260924043,
+    "aux_seed": 260924044,
+    "low_action_seed": 260924045,
+    "high_collection_seed": 260924046,
+    "high_update_seed": 260924047,
+    "train_world_base": 2400000,
+    "eval_world_base": 1700200,
+    "threads": 4,
+    "small_model": false
+  },
+  "launch_sha": "c9217f0ae5b32aa2a13e228cc87899f545a0111b",
+  "device": "cuda",
+  "training_law": "learned_team_and_mu=.9*pi+.1/6_individual_lambda_h=.07",
+  "reference_binding": null,
+  "adapter_protocol": {
+    "protocol_id": "complementary_skill_b08",
+    "source_module": "experiments.candidates.complementary_skill_learning.b08.runner",
+    "launch_sha": "c9217f0ae5b32aa2a13e228cc87899f545a0111b",
+    "spec": {
+      "n_agents": 6,
+      "n_users": 50,
+      "k": 10,
+      "horizon": 500,
+      "lanes": 16,
+      "rollouts": 45,
+      "eval_lanes": 32,
+      "init_seed": 260924041,
+      "head_seed": 260924042,
+      "train_rng_seed": 260924043,
+      "aux_seed": 260924044,
+      "low_action_seed": 260924045,
+      "high_collection_seed": 260924046,
+      "high_update_seed": 260924047,
+      "train_world_base": 2400000,
+      "eval_world_base": 1700200,
+      "threads": 4,
+      "small_model": false
+    },
+    "reused_engine": {
+      "object_id": "complementary_skill_b07",
+      "module": "experiments.candidates.complementary_skill_learning.b07.runner",
+      "callable": "experiments.candidates.complementary_skill_learning.b07.runner.run_fit"
+    }
+  }
+}

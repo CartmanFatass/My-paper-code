@@ -8594,3 +8594,31 @@ published inputs, duplicates and fresh actual memory immediately before release.
 prelaunch record B08 production fits started=0. After native acceptance observe that same
 handle; E/U stay the already fixed later cells. E requires full new M readback and reference
 identity/trajectory checks before its own admission. No recipe or budget changed at this step.
+
+
+## 2026-09-24 — B08 M admitted and same-handle observation adopted
+
+The first fixed B08 M request was accepted by the native kernel; production fits started=1/3.
+The configured outer supervisor completed its launch command, while the distinct native runner
+and supervisor remain running with matching recorded/observed identities. The retained
+[launch manifest](../../../../runs/complementary_skill_learning/b08_m_260924041_c9217f0ae/launch-manifest.json)
+contains the exact command, source, native identities and stable operation reference;
+[native status](../../../../runs/complementary_skill_learning/b08_m_260924041_c9217f0ae/native-status.json)
+is the accepted observer's first readback. This is admission and liveness, not scientific acceptance.
+The source snapshot and all partial outputs remain retained. No worker was restarted.
+
+Actual-node memory admission passed with14,320,390,144physical/effective available bytes
+against4,294,967,296required; cgroup headroom was unavailable, not measured unlimited memory.
+The copied manifest/preflight/config were SHA256-verified byte-for-byte against actual-node
+files before local retention. Config records the new B08 Spec/source and explicit adapter
+identity while preserving its reused B07 engine identity. Fresh control observation was main
+380e82cd19069b6dd8d99f5372cf15aa47b7a559 with the fixed direction and lead.
+
+The standard detached observer registered and then actually adopted this same native operation.
+Generation74, job`launch-csl-b08-m-c9217f0ae`, reports running/0errors and matching native
+identities at2026-09-24T11:55:49Z; the observation window is1500s, interval30s, timeout20s.
+There are no pending events. On a checkpoint rearm the same handle after reading its new
+facts; on terminal exit collect/hash/read the complete M artifacts before accepting any
+scientific claim or staging its new reference for E. E and U remain the predeclared next
+cells, unchanged. Routine cell admission stays in these NOTES/run records; the published
+B08 scientific plan and main standing are unchanged.
