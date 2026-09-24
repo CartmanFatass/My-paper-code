@@ -14943,3 +14943,213 @@ rewritten. Earlier entries bind every other cell's bulk evidence.
 | `trace_stage45_n8.npz` | 141921340 | `4c6847370f83b4472c5f15678684ad96fa95e20b9be76e15b3b7257687805202` |
 | `training.jsonl` | 383352 | `87e4e03fc72c9b7729dca5ad0f77214160215c260d6a8253f4a16a50cd9a8be6` |
 | `training_reset_scenes.npz` | 2972180 | `61fd3c63e0d452e84e4489fad57a9f3d7234a0e9157855ded24715ff64ba11f5` |
+
+
+## 2026-09-24 — Independent criticism of B15 and the next ordinary comparator
+
+A bounded, read-only ResearchCritic read the complete fixed result, claim and
+relevant current shared background. MATERIAL_DISSENT: no on the inconclusive
+B15 reading or local1 as the next development proposal. I adopt two precisions:
+N6 difference-of-J-gains is negative in all three B15 blocks, so endpoint ranking
+cannot support consistently greater H6 learning; and a local1 loss would leave
+H6's lawful central information, intrinsic objectives, initialization and joint
+co-adaptation as alternatives to learned skill choice. The Critic also identified
+that `R_Critic.film_generator = nn.Linear(n_Z, 2*hidden_size)` changes when n_Z
+changes. I checked that source line: retaining StateSetEncoder does not preserve
+the complete H6 critic. Local1 retains a trainable constant FiLM affine, not a
+claim of literally removing every conditioning parameter.
+
+The useful primary new comparison would be local1 versus SET: both single-category,
+task-reward ordinary programs, different actor input/encoding. Read H6 versus
+local1 as the remaining package gap. Their gap contraction is algebraically the
+local1−SET difference, not a second independent corroboration. Local1 is preferable
+to constant6 for this practical-comparator question; constant6 better preserves
+H6 shapes but changes information and learning objectives anyway. This critique
+is design advice, no new empirical replication, and does not replace Pro at the
+material comparator decision. No new fit has been selected or started.
+
+## Pro question 2026-09-24 local-ordinary-comparator-after-inconclusive-b15
+
+Conversation: existing Jev direction conversation; private address remains only
+in the local operation state. Reuse the conversation of the complete previous
+question key`hmasd:577f4d6ba746d0bfffb66159eb0e364a826e986ca88e7cf5d685f6e1469687dc`.
+This is a new scientific question, not a resend or a request to revise B15.
+
+**Question and impending choice.** B15 has finished its six fits with positive
+N8 block means but an inconclusive joint result. Should the next bounded study
+train a simpler local-observation ordinary recurrent MAPPO implementation on the
+three already exposed training blocks, comparing it with all retained B15 H6/SET
+policies? I currently prefer this3-fit development study to more unchanged H6/SET
+replication, mixed-N training or another deployment replay. Test that preference:
+would it materially change the judgment that the chosen SET architecture is a
+sufficiently strong practical comparator at unseen N, or should one specific
+alternative observation precede it? Specify the interpretable prediction and
+what each outcome would leave unresolved. This is not confirmation criticism of
+an unopened B15, not a request to certify the selected baseline, and not a request
+for a broad experiment menu or another portfolio.
+
+**Standing and new evidence.** The complete result immediately above is the source
+of the following fixed readings (not a model's forecast):
+
+| B15 block | Final N8 H6−SET J | Final N8 H6−SET S | N8 difference of own J gains | N8 difference of own S gains | Final N6 H6−SET J / S |
+| --- | ---: | ---: | ---: | ---: | --- |
+| 1 | .08652103519570344 | 6.500187500000001 | .11731140143858966 | 7.6030625 | −.010112368586138122 / −.269875 |
+| 2 | .08858551766296538 | 4.1626875000000005 | .01717922218579223 | 1.151125 | .0597178128125894 / 2.9714375 |
+| 3 | .03804131844242878 | 2.3203125 | −.057299186000910225 | −1.6145625 | .04566454626022008 / 2.3396875 |
+
+Native J=.7C+.3Q−P; S=50C actual served users/step. Mean N8 J gap is
+.07104929043369919, sample SD .028604373497714948,95% df2 paired-t interval
+[−.000007912492966236084,.14210649336036463]. Mean S gap is4.327729166666667,
+SD2.0948192804412353, interval[−.876090407179098,9.53154874051243]. The frozen
+strict lowerJ>0 AND lowerS>1 rule fails. Its independent approximately normal
+training-block model is conditional on the fixed32-world W8; n3 cannot diagnose
+normality. No rounding, extra fit, historical B14 block or alternative endpoint
+will rescue it. Your complete prior B15 advice anticipated the possible inconclusive
+branch and explicitly rejected automatic extension; I reuse that advice unchanged.
+
+All six packages have positive mean own J/S learning at both N, but relative gains
+are not stable. Block3 starts H6 ahead+.095340504 J/+3.934875 S and the gap contracts
+as both learn. Final J-or-S loss unions by block are N8:3/4/10, N6:20/7/4;
+block3 N8 world1945810 loses.132738822 J and9.166 served users/step. SET's own S
+falls2.542 at N8 world1945804 despite its own J improving. Complete native J/C/Q/P,
+E/S/U arrays, medians, ranges and every loss are retained, not discarded as a
+technical failure. Six fits cost2.16M train+384k eval and6.521557 scientific-command
+hours. Native/source/checkpoint/trace/reset/isolation checks all passed; no failed
+process or missing output explains the inconclusive result.
+
+The bounded package benefit remains worth investigating, but it does not identify
+skill learning, pure count transfer, ordinary-method optimality or training-program
+reliability. B11/B12 target-N training and B04/B05 noise-response reversals are
+specific contrary evidence against assuming another ordinary recipe must help.
+The selected SET already learns actual service and has a stronger historical
+instance; local1 is not justified by declaring SET a strawman. Current shared
+background additionally preserves the random-context rival while correcting the
+external review's unsupported claims that high average entropy establishes an
+independent uniform controller or that training accuracy .273/.309 equals1/6.
+The sibling skill direction has its own prospective B07E/M/U high-entropy/random-
+context intervention; do not duplicate it or assume its future result.
+
+**Proposed single new development comparison (not yet adopted).** Define L as an
+ordinary shared local-observation recurrent actor with a centralized critic:
+
+- Start from the existing core MAPPO switch, n_Z=n_z=1, no coordinator/discriminator
+  learning or intrinsic rewards; retain a trainable single-category FiLM affine.
+  Set use_central_snapshot_in_flat_actor=False; preserve k10 after the MAPPO switch
+  because it otherwise changes k/chunk length. Keep StateSetEncoder for the critic,
+  the native recurrent sampler/learner and the same N6 reward R/6. Relative to SET,
+  this preserves the single-category task-reward program while changing actor
+  input/encoding. Relative to H6, critic and actor conditioning dimensions, lawful
+  information route and objectives differ; this is not H6 minus one skill switch.
+- N6 training360k per L,16 lanes×500×45; low-level raw entropy .05, raw Gaussian
+  sample/log-prob stored with independent physical clipping; same normalization,
+  optimizer settings, recurrence, storage/terminal and fixed endpoint45 contracts.
+  Do not silently repair the action law or add a coefficient sweep to this question.
+- Exactly one newly initialized L fit for each already exposed block: learning
+  seeds994101/2/3 and training lane bases2994100/200/300 respectively. Construct
+  environments before learning seeding; actual reset arrays/RNG must match the
+  corresponding B15 block. Architecture-specific weight/RNG consumption remains
+  explicit; same seed integer is not identical optimization or cross-shape weights.
+- Initial0 and final45 on now-read W8=1945800–31 and W6=1945600–31, N8 thenN6,
+ 500steps/world, evaluation seeds1945851/1945651; native deterministic mean-clip
+  deployment. Hold all learning/runtime/environment state outside evaluation.
+  Preserve all three retained H6 and SET pairs as references, never choose the
+  best old seed. No new H6/SET training or rerunning their already verified panels.
+- Read L−SET as the ordinary simplification's native J/S comparison, H6−L as the
+  remaining package gap, and each arm's own learning plus all component/loss
+  consequences at both N. Algebraic gap contraction is not independent evidence
+  on top of L−SET. These are three new fits on already read blocks/panels, selected
+  after B15: development evidence, not a fourth arm retrofitted into its confirmation.
+  A small or nonsignificant H6−L gap is not equivalence. No unchanged-world boost
+  to training n, no new confirmed count effect or skills attribution.
+
+Tentative discriminating prediction: if the particular held-snapshot/set actor
+creates avoidable learning difficulty at this exposure, L should itself learn
+useful J/S and improve final N8 J/S over SET across the three blocks; read the
+signed effects per block rather than erase reversals with a mean. If L learns
+but stays below SET, that weakens this specific simplification at360k. If L
+beats SET but H6 stays better, the original comparator is improved while a residual
+package benefit remains; if L also overtakes H6, an ordinary local program is a
+concrete alternative on these conditions. None identifies hidden-state sufficiency,
+learned labels or a cause of count robustness. Critique whether these predictions
+are sufficiently discriminating to justify three fits and suggest a sharper
+bounded formulation if they are not.
+
+**Strongest alternative.** A constant six-dimensional context could preserve H6's
+actor/critic tensor shapes, disable high-level/intrinsic training and keep a fixed
+label. That better controls shape but remains a joint information/objective change;
+it is a different question from ordinary local1 competence. A read-only independent
+Critic prefers local1 for the practical comparator question, with MATERIAL_DISSENT:no;
+I adopted its warning about critic FiLM and the asymmetric interpretation of a
+local1 loss. Adviser agreement is not empirical evidence. Choose one useful next
+observation; do not append local1, constant6, squashed policies and mixed-N together.
+
+**Prospective cost.** Proposed3fits:1.08M training team steps/6.48M UAV steps,
+135rollout updates,303,750 actor and critic optimizer calls each;12evaluation
+panels/192k team steps/1.344M UAV steps/384episodes/6,000policy calls. These do not
+increase the original B15 n. B15's three SET commands total2.866053 hours, giving
+roughly2.9hours as a scale estimate, not measured local1 time or a limit; initialization,
+implementation/review, verification, collection, full reading and roughly1.6GB native
+artifacts plus their collection copy are additional. Actor cost may change. No new
+source or result has yet been implemented/accepted. First select the scientific
+comparison, then write its exact prospective L0 and test the actual new path.
+
+**Context and source precedence.** The send supplies a full source_sha for this
+question, updated notebook and compact evidence. Read only relevant sections:
+
+1. Current governance: docs/project/OPERATING_CONSTITUTION.md §§2–5,7–8 at
+   published main`03a9f17ff67b6d83a00313b5e37c2801aa927527`; scientific-tools
+   Update the working explanation / Comparators / Statistics / Cost and exposure,
+   and research-engineering Checks and review / Publishing direction results at
+   that revision. Owner asked this DM to continue research; pause remains lifted,
+   independent work is authorized, Pro advises and the DM decides. These are the
+   current methods, not an invitation to amend frozen B15 or grant new permission.
+2. Relevant shared understanding: docs/research/RESEARCH.md topic3 and the current
+   work explanation at`03a9f17ff67b6d83a00313b5e37c2801aa927527`; the B15 result
+   changes the older in-progress row and is fully given at source_sha here.
+   Topics3/4 separate equal information availability from encoding/optimization,
+   and observed own learning from package endpoint or skill causality. Their
+   effect on this proposal is explicit in the limitations above.
+3. Evidence at source_sha: this notebook's immediately preceding complete B15
+   result, its three per-block acceptances, CLAIM_bounded_count_transfer_20260923.md
+   including the preserved original/adoption and appended result; the24 compact
+   panels under runs/agent_count_generalization/s1_bounded_confirmation_b15_b{1,2,3}_{h6,set}_s99410{1,2,3}/.
+   Each matching block uses its own seed suffix. Read actual arrays needed to
+   challenge the result, not just this table. Bulk summary/checkpoints/NPZ are
+   retained at native+local paths with hashes in NOTES; GitHub may not fetch them.
+   Do not claim to have loaded inaccessible binary evidence; DM checks are reported
+   facts. The frozen all-six reducer is at e0a20add999ded53943f99df15f596822e6c13dc:
+   experiments/candidates/agent_count_generalization/bounded_confirmation_b15/analysis.py.
+4. Prior complete advice: notebook Pro question2026-09-23 bounded-confirmation-
+   after-fresh-b14 Answer and DM adoption at source_sha; especially finite-sample
+   limitations, ordinary comparator strength and the fixed-batch end branches.
+   It covered B15, not this newly chosen local comparison. B14/B11/B12/B13 result
+   sections are supporting/contrary history only when needed, not new B16 evidence.
+5. Exact interface for feasibility at e0a20add999ded53943f99df15f596822e6c13dc:
+   hmasd/baselines.py apply_algorithm_config(mappo), hmasd/networks.py R_Actor and
+   R_Critic; experiments/candidates/agent_count_generalization/configuration.py
+   make_config; models.py StateSetEncoder, SetActorBase, build_agent and strict_sync.
+   The current constructor accepts onlyH6/SET; a new bounded local constructor is
+   needed rather than bypassing its guard or modifying the frozen B15 contract.
+   The external DM1 review at bb5824caa7bde0ed40cc260074b1f794df2d3617,
+   docs/Claude_docs/reviews/DM1_AGENT_COUNT_GENERALIZATION_REVIEW_20260924.md,
+   is optional criticism, not governance or an independent empirical replication.
+
+**Constraints and return.** No experiments, edits outside the empty Answer below,
+new permanent records, invented approval gates or unsupported statistical success
+probabilities. Provide source-grounded advice on local1 versus one strongest
+alternative, what B15 strengthens/weakens/leaves untouched, the concrete distinct
+prediction and its native service implication, assumptions and remaining coupling,
+actual marginal fit/non-fit cost and MATERIAL_DISSENT yes/no. If suggesting a
+simple model or primary-source bridge, state which native quantities/interactions
+it represents and which it omits; no toy result substitutes for UAV evidence.
+Identify decision-critical unread sources rather than imply complete verification.
+
+Write only this question's empty `### Answer` on branch
+`codex/agent-count-generalization`, path
+`docs/research/candidates/agent_count_generalization/NOTES.md`. Read reasoning
+inputs at pinned source_sha but fetch the latest target blob for writing and use
+its actual blob SHA. Preserve every other byte and stop on overlapping edits.
+Report the actual commit after successful write. If writeback is unavailable,
+return the complete answer in chat, not a status, receipt, SHA or download link.
+
+### Answer
