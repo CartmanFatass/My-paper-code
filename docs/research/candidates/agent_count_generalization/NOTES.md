@@ -14314,49 +14314,6 @@ No source copy is removed; the frozen large summary is not converted or replaced
 | `training.jsonl` | 383240 | `5d443e392a936b847663428d4e295a2a7216056298992e92b67a46bff3e4a929` |
 | `training_reset_scenes.npz` | 2972180 | `c100565e6b08e4188925c1d21340acebf5821bec22a154e689c45c1902ec5fb8` |
 
-
-## 2026-09-24 — B16 third fixed local ordinary cell admitted
-
-After block2's complete reading, the original `b3_local1` cell was admitted once at
-2026-09-24T13:05:07.897519Z. Scientific source remains
-`c95e57201dd7177fc8158b22a3379b56a5be8800`; the fixed seed 994103/world base 2994300,
-N6/360k training and initial/final N8/N6 evaluation are unchanged. The actual node verified
-published source ancestry and fresh main `e25eb49b19ffbd51a94dc16454afa766df0998ce`;
-canonical/published pause, state and expected lead agree. The new tag and configured
-supervisor name were absent before this single submission. Actual physical/effective
-available memory was 12,273,549,312 bytes, above the 4 GiB floor.
-
-The [native manifest](../../../../runs/agent_count_generalization/s1_local_ordinary_b16_b3_local1_s994103/launch-manifest.json)
-preserves the accepted command, source snapshot, original operation and process identities.
-The [preflight](../../../../runs/agent_count_generalization/s1_local_ordinary_b16_b3_local1_s994103/admission-preflight.json)
-and [configuration](../../../../runs/agent_count_generalization/s1_local_ordinary_b16_b3_local1_s994103/config.json)
-were also collected byte-exactly. Their native/local SHA-256 values, in that order, are
-`ed5bf1eddb4ff36fa830460ec3e6e0ba88086234820cdb32aad8e2f078aa8d2e`,
-`3363874a241ec575f4e66ab12501d8e108283a98b412e67c1e9ce8f9bee1a899` and
-`9002a566176adcc5aabc5a2792bc80ef679a9b29af8163d25a5d94ff65b93433`.
-
-At 13:05:57 UTC the actual runner and native supervisor were live with consistent identities.
-The partial summary reported training, `fit_started=true`, no failure and empty stderr.
-Both initial panels were complete (32k team/224k UAV evaluation steps, 64 episodes,
-1000 policy calls, zero storage/optimizer calls); the first 8k training team steps/48k UAV
-steps and 16 episodes/resets were collected, with zero completed updates in that snapshot.
-All 16 source hashes, fixed configuration and fresh true-N6 LOCAL1 construction match the
-accepted design. Optimizer ownership and empty initial buffers pass; all stage 0 isolation
-fields are preserved. The training-environment digest matches both same-block B15 arms.
-
-Initial parameter/normalizer digest is
-`d7a43e18f6d4b03997855c415cdee57c9bf37885f405edbdd1c6b64b00210b93`, initialization RNG
-digest is `162e7149d1c164828608c7e194756e25b15d25edde522eade64fd3726fecad7f`, and sampler
-seed is 16135357236351875578. All three differ from both previous LOCAL1 blocks as planned.
-
-Block2's terminal event was read and consumed at generation 159, then rearmed as 160 before
-the third registration. Generation 161 adopts the original third-cell operation; its
-13:06:28 UTC observation is live/consistent with zero errors and no pending events.
-B16 has three started fits and two completely read fits. The remaining work is complete
-third-cell collection, independent artifact checks and the fixed three-block scientific
-reading. Startup verification is not final scientific acceptance. No additional fit,
-changed protocol or new Pro request is selected during this planned continuation.
-
 ## 2026-09-23 — B15 block2 H6 admitted and observation adopted
 
 The fixed fourth cell was admitted once after complete b2_set reading. The
@@ -14374,7 +14331,7 @@ panels and all12 source hashes. Native H6 starts from fresh owned parameters and
 empty optimizers/buffer; its initial learner and learning/sampler RNG differ from
 block1, while its initial training environment matches the block2 SET partner.
 Initial0 N8 then N6 completes32k evaluation team steps/64 episodes with zero
-optimizer/storage calls and every stage 0 isolation field preserved. A subsequent
+optimizer/storage calls and every stage0 isolation field preserved. A subsequent
 saved reading confirms training started:8k collected/stored team steps,16 episodes,
 zero completed updates yet. This is partial exposure, not scientific acceptance.
 
@@ -14500,8 +14457,8 @@ Other final component losses remain explicit (lower Q or higher P/U):
 
 N8 eligibility losses coincide with its four service-loss worlds; N6 eligibility
 losses occur at1945601/1945603/1945609/1945617/1945618. Full initial/final values
-for all worlds remain in the four native panels: [N8 initial](../../../../runs/agent_count_generalization/s1_bounded_confirmation_b15_b2_h6_s994102/panel_stage 00_n8.json),
-[N8 final](../../../../runs/agent_count_generalization/s1_bounded_confirmation_b15_b2_h6_s994102/panel_stage45_n8.json), [N6 initial](../../../../runs/agent_count_generalization/s1_bounded_confirmation_b15_b2_h6_s994102/panel_stage 00_n6.json),
+for all worlds remain in the four native panels: [N8 initial](../../../../runs/agent_count_generalization/s1_bounded_confirmation_b15_b2_h6_s994102/panel_stage00_n8.json),
+[N8 final](../../../../runs/agent_count_generalization/s1_bounded_confirmation_b15_b2_h6_s994102/panel_stage45_n8.json), [N6 initial](../../../../runs/agent_count_generalization/s1_bounded_confirmation_b15_b2_h6_s994102/panel_stage00_n6.json),
 [N6 final](../../../../runs/agent_count_generalization/s1_bounded_confirmation_b15_b2_h6_s994102/panel_stage45_n6.json), with the SET panels linked in its acceptance.
 
 **Cumulative judgment and fixed continuation.** Block2 strengthens the narrow
@@ -14520,7 +14477,7 @@ material even with positive panel averages.
 There are now two complete paired training blocks, not64 independent training
 replicates. The three-block confirmation, fixed paired-t intervals and conjunction
 are still unresolved; no partial-batch interval is used. Keep all adverse readings
-and finish the originally specified b3_h6 then b3_set at seed 994103/lane base 2994300,
+and finish the originally specified b3_h6 then b3_set at seed994103/lane base2994300,
 with identical source, budget, stage45 endpoint and claim. No expansion, replacement,
 recipe change, new Pro question or worker restart follows from these scores.
 
@@ -14549,8 +14506,8 @@ copy or previously tracked historical evidence is removed.
 | `stderr.log` | 0 | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` |
 | `stdout.log` | 0 | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` |
 | `summary.json` | 885410 | `5925bc427d84fd666105b1f106e51f64f71fea71d1f608331a65b60229e03f73` |
-| `trace_stage 00_n6.npz` | 110918716 | `a21d063f985a3404a55afa755ab5e1ec1ae8bc90d9ebe1b4d6303a3e860283a2` |
-| `trace_stage 00_n8.npz` | 141921340 | `1db2360d8fbc041b3ce4a7a5be51f9b0a238a1554bbaeefee55ec0ef37171f88` |
+| `trace_stage00_n6.npz` | 110918716 | `a21d063f985a3404a55afa755ab5e1ec1ae8bc90d9ebe1b4d6303a3e860283a2` |
+| `trace_stage00_n8.npz` | 141921340 | `1db2360d8fbc041b3ce4a7a5be51f9b0a238a1554bbaeefee55ec0ef37171f88` |
 | `trace_stage45_n6.npz` | 110918716 | `ae71617c641acabeeec085afc9386e8b348d253b50659a4eef76bef20204c531` |
 | `trace_stage45_n8.npz` | 141921340 | `ea8a26a82ca6061a5a0aff063d9adda654d232cf3f8311d883ecfffd9423ee0f` |
 | `training.jsonl` | 402619 | `255e4442fbaa55b9e268ca3538e6c085bbd6388853c43936f05a62f10294c086` |
@@ -14573,14 +14530,14 @@ frozen scientific source `e0a20add999ded53943f99df15f596822e6c13dc`. Actual-node
 physical/effective available bytes. These records and [configuration](../../../../runs/agent_count_generalization/s1_bounded_confirmation_b15_b3_h6_s994103/config.json)
 were collected byte-exactly with matching size/hash checks.
 
-The first scientific reading verifies b3_h6, seed 994103, lanes2994300–2994315,
+The first scientific reading verifies b3_h6, seed994103, lanes2994300–2994315,
 all12 unchanged source hashes, the same fixed spec/panels and H6 recipe (only its
 prescribed seed differs). Native H6 has fresh owned parameters, empty optimizers
 and buffer. Its initial learner, post-initialization global RNG, sampler seed and
 initial training environment differ from both earlier H6 blocks. The full reset
 trace and actual saved checkpoint will receive independent reading at completion.
 Initial0 N8 then N6 completes32k evaluation team steps/64 episodes with zero
-optimizer/storage calls; every stage 0 learner/runtime/RNG/optimizer/buffer/training-
+optimizer/storage calls; every stage0 learner/runtime/RNG/optimizer/buffer/training-
 environment isolation field is preserved. Training has begun:8k team steps
 collected/stored,16 episodes and zero completed updates at this saved boundary.
 This partial exposure is not scientific acceptance.
@@ -14596,7 +14553,7 @@ unchanged; no extra fit, worker restart, Pro resend or App cross-task message.
 
 **Acceptance.** All20 native files (556,157,414 bytes) have byte/size/SHA256-
 identical local collections. Independent trajectory and actual-checkpoint reading
-passes for frozen source `e0a20add999ded53943f99df15f596822e6c13dc`, learning seed 994103,
+passes for frozen source `e0a20add999ded53943f99df15f596822e6c13dc`, learning seed994103,
 training lanes2994300–2994315 and the fixed H6/.05 recipe. The [original process](../../../../runs/agent_count_generalization/s1_bounded_confirmation_b15_b3_h6_s994103/launch-manifest.json)
 and [exit witness](../../../../runs/agent_count_generalization/s1_bounded_confirmation_b15_b3_h6_s994103/process-exit.json) agree; acceptance follows the complete
 scientific reading, not exit0 alone.
@@ -14634,10 +14591,10 @@ statistical independence by distinct seed addresses.
 
 | N | Stage | J | C | Q | P | E | S | U |
 | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| 8 | stage 0 | 0.238699116191 | 0.322331250000 | 0.097696018017 | 0.016241564214 | 16.166062500000 | 16.116562500000 | 0.049500000000 |
+| 8 | stage0 | 0.238699116191 | 0.322331250000 | 0.097696018017 | 0.016241564214 | 16.166062500000 | 16.116562500000 | 0.049500000000 |
 | 8 | stage45 | 0.401568924743 | 0.524281250000 | 0.170757607347 | 0.016655232461 | 26.869625000000 | 26.214062500000 | 0.655562500000 |
 | 8 | change | 0.162869808552 | 0.201950000000 | 0.073061589329 | 0.000413668247 | 10.703562500000 | 10.097500000000 | 0.606062500000 |
-| 6 | stage 0 | 0.321393417422 | 0.429888750000 | 0.119543525263 | 0.015391765157 | 21.785625000000 | 21.494437500000 | 0.291187500000 |
+| 6 | stage0 | 0.321393417422 | 0.429888750000 | 0.119543525263 | 0.015391765157 | 21.785625000000 | 21.494437500000 | 0.291187500000 |
 | 6 | stage45 | 0.518148615930 | 0.687203750000 | 0.179960956598 | 0.016882296049 | 35.220312500000 | 34.360187500000 | 0.860125000000 |
 | 6 | change | 0.196755198508 | 0.257315000000 | 0.060417431335 | 0.001490530892 | 13.434687500000 | 12.865750000000 | 0.568937500000 |
 
@@ -14659,8 +14616,8 @@ U increases in31/32 N8 worlds (all except1945808, which ties), and28/32 N6 world
 (all except1945603/1945607/1945616/1945630, which decrease). Mean changes are
 +.6060625/+.5689375; largest increases are+2.388 at1945807 and+3.858 at1945624.
 The largest P increases are+.011824576 at1945825 and+.011194067 at1945615.
-Full values and all adverse components are retained in [N8 initial](../../../../runs/agent_count_generalization/s1_bounded_confirmation_b15_b3_h6_s994103/panel_stage 00_n8.json),
-[N8 final](../../../../runs/agent_count_generalization/s1_bounded_confirmation_b15_b3_h6_s994103/panel_stage45_n8.json), [N6 initial](../../../../runs/agent_count_generalization/s1_bounded_confirmation_b15_b3_h6_s994103/panel_stage 00_n6.json)
+Full values and all adverse components are retained in [N8 initial](../../../../runs/agent_count_generalization/s1_bounded_confirmation_b15_b3_h6_s994103/panel_stage00_n8.json),
+[N8 final](../../../../runs/agent_count_generalization/s1_bounded_confirmation_b15_b3_h6_s994103/panel_stage45_n8.json), [N6 initial](../../../../runs/agent_count_generalization/s1_bounded_confirmation_b15_b3_h6_s994103/panel_stage00_n6.json)
 and [N6 final](../../../../runs/agent_count_generalization/s1_bounded_confirmation_b15_b3_h6_s994103/panel_stage45_n6.json).
 
 Training mean native J starts.235792286, reaches its minimum.207246237 at rollout3,
@@ -14679,7 +14636,7 @@ learning or initialization-independent advantage.
 
 Block3's H6−SET contrast remains unknown. No older SET, cross-block pairing,
 partial confidence interval or incomplete confirmation substitutes for the fixed
-sixth cell. Complete the already specified b3_set with seed 994103/lane base 2994300,
+sixth cell. Complete the already specified b3_set with seed994103/lane base2994300,
 then read the complete third pair and run the unchanged all-six reducer. All
 fit outcomes remain in the batch; no replacement, extra fit or protocol change.
 
@@ -14703,8 +14660,8 @@ remain byte-exact and unmodified outside Git at both durable roots:
 | `stderr.log` | 0 | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` |
 | `stdout.log` | 0 | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` |
 | `summary.json` | 885461 | `0d0f3a50b025b342e3d741df84af44424b9a3a9f5778b2ef3f821e7f4e76bc8f` |
-| `trace_stage 00_n6.npz` | 110918716 | `cb7bb269f286acf13a41faf3e706f8dee305f43872758f37ba4026d9aa5a9ab3` |
-| `trace_stage 00_n8.npz` | 141921340 | `18f5a5757a7d92e321bbaeb266db785611370dd9c1c36511b4d02b4d277c9c11` |
+| `trace_stage00_n6.npz` | 110918716 | `cb7bb269f286acf13a41faf3e706f8dee305f43872758f37ba4026d9aa5a9ab3` |
+| `trace_stage00_n8.npz` | 141921340 | `18f5a5757a7d92e321bbaeb266db785611370dd9c1c36511b4d02b4d277c9c11` |
 | `trace_stage45_n6.npz` | 110918716 | `41677fc12390cae9abff34ba56c63b3ae0811ac9c268c572c8b56cba72880a90` |
 | `trace_stage45_n8.npz` | 141921340 | `28a6e2f21c1da8613038da4fedac9b0e78fc51bb54d93d6b91b2bc5d4c839dd1` |
 | `training.jsonl` | 402393 | `2ef06de45e2151af6f43b680f78d8397634f5eaf22d411274390c6dcdca95023` |
@@ -14726,14 +14683,14 @@ scientific source `e0a20add999ded53943f99df15f596822e6c13dc`. Actual-node
 physical/effective available bytes. These native records and the [configuration](../../../../runs/agent_count_generalization/s1_bounded_confirmation_b15_b3_set_s994103/config.json)
 were collected with exact byte/size/hash agreement.
 
-Initial reading verifies b3_set, seed 994103, lanes2994300–2994315, all12 source
+Initial reading verifies b3_set, seed994103, lanes2994300–2994315, all12 source
 hashes, the same fixed spec/panels and the unchanged SET/.05 recipe. Fresh canonical
 N6 initialization is synchronized into the target's owned parameters with empty
 optimizers/buffer, preserving the canonical post-initialization RNG. Its learner,
 returned global RNG and sampler seed differ from both previous SET blocks. The
 initial training environment and sampler seed match its block3 H6 partner.
 Initial0 N8 then N6 completes32k evaluation team steps/64 episodes with zero
-optimizer/storage calls and all stage 0 isolation fields preserved. A later saved
+optimizer/storage calls and all stage0 isolation fields preserved. A later saved
 reading confirms training began:8k collected/stored team steps,16 episodes and
 one completed update (2250 actor/2250 critic calls, zero coordinator/discriminator
 updates). This is partial exposure, not scientific acceptance.
@@ -14751,7 +14708,7 @@ replacement, changed endpoint, Pro resend or App cross-task message is implied.
 
 **Acceptance and unchanged protocol.** All six planned fits completed and were read;
 no replacement, extra fit, extra world, earlier checkpoint or revised decision rule
-was used. Final cell `b3_set`, learning seed 994103, source
+was used. Final cell `b3_set`, learning seed994103, source
 `e0a20add999ded53943f99df15f596822e6c13dc`, passed the independent saved-array and
 actual-checkpoint readers after all20 native files (551,896,591 bytes) were collected
 and SHA256-matched. The two actual checkpoints contain130 finite tensors each;
@@ -14847,7 +14804,7 @@ worlds and4 N6 worlds. Other adverse-component world lists follow.
 - N6 U higher: 1945600, 1945601, 1945605, 1945607, 1945613, 1945614, 1945615, 1945617, 1945618, 1945619, 1945620, 1945621, 1945622, 1945624, 1945625, 1945626, 1945627, 1945628, 1945629, 1945631.
 
 Full arrays, including each policy's absolute distribution and all components, remain in
-[panel_stage 00_n8](../../../../runs/agent_count_generalization/s1_bounded_confirmation_b15_b3_set_s994103/panel_stage 00_n8.json), [panel_stage45_n8](../../../../runs/agent_count_generalization/s1_bounded_confirmation_b15_b3_set_s994103/panel_stage45_n8.json), [panel_stage 00_n6](../../../../runs/agent_count_generalization/s1_bounded_confirmation_b15_b3_set_s994103/panel_stage 00_n6.json), [panel_stage45_n6](../../../../runs/agent_count_generalization/s1_bounded_confirmation_b15_b3_set_s994103/panel_stage45_n6.json).
+[panel_stage00_n8](../../../../runs/agent_count_generalization/s1_bounded_confirmation_b15_b3_set_s994103/panel_stage00_n8.json), [panel_stage45_n8](../../../../runs/agent_count_generalization/s1_bounded_confirmation_b15_b3_set_s994103/panel_stage45_n8.json), [panel_stage00_n6](../../../../runs/agent_count_generalization/s1_bounded_confirmation_b15_b3_set_s994103/panel_stage00_n6.json), [panel_stage45_n6](../../../../runs/agent_count_generalization/s1_bounded_confirmation_b15_b3_set_s994103/panel_stage45_n6.json).
 
 **Frozen six-fit decision.** Before analysis, the original claim bytes still hashed
 `bcda398d39f245b6c21509ebba0f8c66adffc35f6412088cfa95101e38acba52` and
@@ -14980,8 +14937,8 @@ rewritten. Earlier entries bind every other cell's bulk evidence.
 | `stderr.log` | 0 | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` |
 | `stdout.log` | 0 | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` |
 | `summary.json` | 853817 | `b8e4e9dbdc08bed4d824ba5a3fdcdc6097b4f1a5805aa0d40f56cc6f16d2141d` |
-| `trace_stage 00_n6.npz` | 110918716 | `6f6bb710fe45930686da3fbbe329b06356866a338797339d0ffa240c41773fd9` |
-| `trace_stage 00_n8.npz` | 141921340 | `0e9f05e3f7531809a27972c2125d4990f733eec84e15aa48359d0b4edaf8764b` |
+| `trace_stage00_n6.npz` | 110918716 | `6f6bb710fe45930686da3fbbe329b06356866a338797339d0ffa240c41773fd9` |
+| `trace_stage00_n8.npz` | 141921340 | `0e9f05e3f7531809a27972c2125d4990f733eec84e15aa48359d0b4edaf8764b` |
 | `trace_stage45_n6.npz` | 110918716 | `b7c99483a5790cef013fc9972998217870523bec46da2dc6d5801b44f2518dd2` |
 | `trace_stage45_n8.npz` | 141921340 | `4c6847370f83b4472c5f15678684ad96fa95e20b9be76e15b3b7257687805202` |
 | `training.jsonl` | 383352 | `87e4e03fc72c9b7729dca5ad0f77214160215c260d6a8253f4a16a50cd9a8be6` |
@@ -15814,7 +15771,7 @@ worlds and interpretation are unchanged; there is no early batch conclusion or n
 
 The [launch manifest](../../../../runs/agent_count_generalization/s1_local_ordinary_b16_b1_local1_s994101/launch-manifest.json), [exit witness](../../../../runs/agent_count_generalization/s1_local_ordinary_b16_b1_local1_s994101/process-exit.json)
 and [native status](../../../../runs/agent_count_generalization/s1_local_ordinary_b16_b1_local1_s994101/launch-status.json) preserve the original operation.
-Both native identities agree with the terminal witness. All 16 before/after source hashes
+Both native identities agree with the terminal witness. All16 before/after source hashes
 match published scientific source `c95e57201dd7177fc8158b22a3379b56a5be8800`.
 The independent saved-artifact reading checks all45 training rows against the summary:
 360k collected/stored team steps,2.16M UAV steps,720 episodes/resets,45 updates,
@@ -15885,7 +15842,7 @@ worlds and service in29/32; the six-world J-or-service loss union is1945800,1945
 The average includes +.005807322 quality, +.013806434 height penalty and +.0583125
 unserved eligible users. The positive net mean does not erase these costs or local losses.
 
-At N6, L−SET is −.012776829 J/+.0260625 users:18/32 J losses and 16/32 service losses,
+At N6, L−SET is −.012776829 J/+.0260625 users:18/32 J losses and16/32 service losses,
 with an18-world union. Worst1945600 loses.146207348 J/9.222 users. The mean quality
 change is −.009745603 and height penalty +.010218023. This is not an across-N superiority
 result even though LOCAL1 genuinely learns and its relative learning increment is positive.
@@ -15998,16 +15955,16 @@ retained there as well. Full byte identities, including those unpublished artifa
 | `config.json` | 2818 | `504f857cf7a99ea8adf71aacd7d8cef11975fcf013b4d59f5dc09267b0472a7e` |
 | `launch-manifest.json` | 4135 | `55abd3ecd7539e9c1ae4bf1c26a2df966a35380ac9bb1b63724f1b1815f581f4` |
 | `launch-status.json` | 629 | `fcc0a99859281c50f0ca6077dacd235b586afc355bb7e031eb89bab4364e4d0d` |
-| `panel_stage 00_n6.json` | 15163 | `562076e46c44231e76df5c03b0aef1dfc1e1ebe5272491d89073265cfe360538` |
-| `panel_stage 00_n8.json` | 15182 | `a8bef99bf25282dabb4c56189daed01ab91832da7832c6ce44726cdc6b154dcf` |
+| `panel_stage00_n6.json` | 15163 | `562076e46c44231e76df5c03b0aef1dfc1e1ebe5272491d89073265cfe360538` |
+| `panel_stage00_n8.json` | 15182 | `a8bef99bf25282dabb4c56189daed01ab91832da7832c6ce44726cdc6b154dcf` |
 | `panel_stage45_n6.json` | 15193 | `869ef23f67978ca14eec928b378c0fcc9980db2763e873e503ef7350f0bebfed` |
 | `panel_stage45_n8.json` | 15223 | `1fdb2d9d41a2c964c6dccc38463afcb9564b457ea0a3a82b4c576a5df554e43e` |
 | `process-exit.json` | 550 | `13fac14cc7e658be1e35aba6ff89a2472bdc2c4dfc669483b2f7711359f0031a` |
 | `stderr.log` | 0 | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` |
 | `stdout.log` | 0 | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` |
 | `summary.json` | 837728 | `2aef84f2e8e26ca83ad526042d7350b8f103225c0ff171cfdf00eb0a9f6be720` |
-| `trace_stage 00_n6.npz` | 110918716 | `5c22fef8ff39fd95e9794aceee9be21d5790ddb6382bb8202211295b097b5e72` |
-| `trace_stage 00_n8.npz` | 141921340 | `6c3e44b8a2ea825d97045dbfdfcc84d40ec20009550772582fa79079af50c667` |
+| `trace_stage00_n6.npz` | 110918716 | `5c22fef8ff39fd95e9794aceee9be21d5790ddb6382bb8202211295b097b5e72` |
+| `trace_stage00_n8.npz` | 141921340 | `6c3e44b8a2ea825d97045dbfdfcc84d40ec20009550772582fa79079af50c667` |
 | `trace_stage45_n6.npz` | 110918716 | `bf67d25fdc4e0bd77dbfcada074ffd6554ceca7144a0d2312ccbd84442e17951` |
 | `trace_stage45_n8.npz` | 141921340 | `1625b8d838919096ca669349d59cfa043d47207ee28433778eb04d41fbc41954` |
 | `training.jsonl` | 374901 | `7b6f13336cb87d3d8da8cc06a5ea0c504dd86dd661e0f015d53385c483dae616` |
@@ -16317,17 +16274,60 @@ and the later supervisor exit witness. Native/local file identities:
 | `config.json` | 2818 | `e9bef338ea9c0f0abc8a44f594fd91866503f1a3afa8239121021fb562d2e2d3` |
 | `launch-manifest.json` | 4135 | `daef14d073dbe09a886eb70ba2cf4ceb440eb690eaee164a12276f9a92a47ebf` |
 | `launch-status.json` | 629 | `c8d29f8e888a3f5c3611a58f7216aad94ef40833e2e78f8cf504c41b31973794` |
-| `panel_stage 00_n6.json` | 15174 | `18ca29dc518a4dd919e6cdaf18b2f949302b0b6af4c75cce2af5b23b8e94bcb3` |
-| `panel_stage 00_n8.json` | 15166 | `c5b9b817e7bd5e8e749b3736de84711545e81b3640cc57cd1637556943370533` |
+| `panel_stage00_n6.json` | 15174 | `18ca29dc518a4dd919e6cdaf18b2f949302b0b6af4c75cce2af5b23b8e94bcb3` |
+| `panel_stage00_n8.json` | 15166 | `c5b9b817e7bd5e8e749b3736de84711545e81b3640cc57cd1637556943370533` |
 | `panel_stage45_n6.json` | 15197 | `267bb24716f67820591e26b32acbc68513990eac8314f2c871d789d2606f0de1` |
 | `panel_stage45_n8.json` | 15201 | `d42415734ec4566bfeae04714197d908bbd9c8322ef93cf5f005cbbee502ebe3` |
 | `process-exit.json` | 550 | `fa5ea9e1c3c0beca0f903ecbf64c2c18ce9c3fcd0a6fce17c80aa613e43cd345` |
 | `stderr.log` | 0 | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` |
 | `stdout.log` | 0 | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` |
 | `summary.json` | 837517 | `f2a92baa064cb68eb6cd18394e797f2cec95dbfb7bdc1b13a425dbee78229a1d` |
-| `trace_stage 00_n6.npz` | 110918716 | `a50e8724f90593c9bfdf15c2216f2957c21f1d235415bfbb7dd814b8a7a4924f` |
-| `trace_stage 00_n8.npz` | 141921340 | `79975513bd2fb51bb19ae2dd5c1d7e4e0d78700236eb7477d992bcb5c22ef142` |
+| `trace_stage00_n6.npz` | 110918716 | `a50e8724f90593c9bfdf15c2216f2957c21f1d235415bfbb7dd814b8a7a4924f` |
+| `trace_stage00_n8.npz` | 141921340 | `79975513bd2fb51bb19ae2dd5c1d7e4e0d78700236eb7477d992bcb5c22ef142` |
 | `trace_stage45_n6.npz` | 110918716 | `741ed4efb80c7978a63995785dcfb9f4ab7108efd2d782de201b35c7c7ce0177` |
 | `trace_stage45_n8.npz` | 141921340 | `122a25ee639e011f96880539ab23e8f88b9f2a9a8d407e126ff152fc756fcf37` |
 | `training.jsonl` | 374481 | `87ce8807b5496d84e98409663bcaea508fb44a0291908388835573d771a85870` |
 | `training_reset_scenes.npz` | 2972180 | `c100565e6b08e4188925c1d21340acebf5821bec22a154e689c45c1902ec5fb8` |
+
+
+## 2026-09-24 — B16 third fixed local ordinary cell admitted
+
+After block2's complete reading, the original `b3_local1` cell was admitted once at
+2026-09-24T13:05:07.897519Z. Scientific source remains
+`c95e57201dd7177fc8158b22a3379b56a5be8800`; the fixed seed 994103/world base 2994300,
+N6/360k training and initial/final N8/N6 evaluation are unchanged. The actual node verified
+published source ancestry and fresh main `e25eb49b19ffbd51a94dc16454afa766df0998ce`;
+canonical/published pause, state and expected lead agree. The new tag and configured
+supervisor name were absent before this single submission. Actual physical/effective
+available memory was 12,273,549,312 bytes, above the 4 GiB floor.
+
+The [native manifest](../../../../runs/agent_count_generalization/s1_local_ordinary_b16_b3_local1_s994103/launch-manifest.json)
+preserves the accepted command, source snapshot, original operation and process identities.
+The [preflight](../../../../runs/agent_count_generalization/s1_local_ordinary_b16_b3_local1_s994103/admission-preflight.json)
+and [configuration](../../../../runs/agent_count_generalization/s1_local_ordinary_b16_b3_local1_s994103/config.json)
+were also collected byte-exactly. Their native/local SHA-256 values, in that order, are
+`ed5bf1eddb4ff36fa830460ec3e6e0ba88086234820cdb32aad8e2f078aa8d2e`,
+`3363874a241ec575f4e66ab12501d8e108283a98b412e67c1e9ce8f9bee1a899` and
+`9002a566176adcc5aabc5a2792bc80ef679a9b29af8163d25a5d94ff65b93433`.
+
+At 13:05:57 UTC the actual runner and native supervisor were live with consistent identities.
+The partial summary reported training, `fit_started=true`, no failure and empty stderr.
+Both initial panels were complete (32k team/224k UAV evaluation steps, 64 episodes,
+1000 policy calls, zero storage/optimizer calls); the first 8k training team steps/48k UAV
+steps and 16 episodes/resets were collected, with zero completed updates in that snapshot.
+All 16 source hashes, fixed configuration and fresh true-N6 LOCAL1 construction match the
+accepted design. Optimizer ownership and empty initial buffers pass; all stage 0 isolation
+fields are preserved. The training-environment digest matches both same-block B15 arms.
+
+Initial parameter/normalizer digest is
+`d7a43e18f6d4b03997855c415cdee57c9bf37885f405edbdd1c6b64b00210b93`, initialization RNG
+digest is `162e7149d1c164828608c7e194756e25b15d25edde522eade64fd3726fecad7f`, and sampler
+seed is 16135357236351875578. All three differ from both previous LOCAL1 blocks as planned.
+
+Block2's terminal event was read and consumed at generation 159, then rearmed as 160 before
+the third registration. Generation 161 adopts the original third-cell operation; its
+13:06:28 UTC observation is live/consistent with zero errors and no pending events.
+B16 has three started fits and two completely read fits. The remaining work is complete
+third-cell collection, independent artifact checks and the fixed three-block scientific
+reading. Startup verification is not final scientific acceptance. No additional fit,
+changed protocol or new Pro request is selected during this planned continuation.
