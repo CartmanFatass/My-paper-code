@@ -1,0 +1,15 @@
+# Retired UAV service B05 consultation standing — 2026-09-23
+
+Source RESEARCH revision: `76b5a7c4eaaee5d5cbc1e033c315a65765f45204`. Retired only the owned completed consultation/preparation passages below; B05 evidence remains current and B06 is fixed but not launched. Full question, exact answer and adoption remain in the append-only direction NOTES.
+
+| `uav_service_auxiliary` | 在 S7 完整共同学习中，怎样把服务改善转成包含返航风险的净收益？ | exploring | Codex DM (independent session) | 直接 DM task `01a0c9af-d5cd-7d70-b5e8-9db2c598ad4e`，host `local`，`gpt-6-astra` / `max`；checkout `/home/fires/.codex/worktrees/d319/hmasd-wsl`，branch `codex/uav-service-predictive-control`。**B05 N/R均完整验收，无遗留运行**：同source3de3e3f71/seed914173，原始轨迹、实际奖励/两层GAE、优化器和检查点均已独立核验；2fits/360k train/192k eval、259.992391 runner min。最终R−N J **+241.885454**、成本−.094165509，但QoS−.026788931；14胜18负、中位−99.441797，R有8个零服务世界（N为1）。开发终点J **−37.659662**、QoS−.117039433；完整两区组重复最终正/开发负，却未重复B04服务改善。保留条件性风险用途与全部损失；当前固定系数4配方不追加、无第三对或确认。条件返航反馈与必要学习修订的[新聚焦Pro问题](https://github.com/CartmanFatass/My-paper-code/blob/f5b078557b2f438300af1a3e58dbbe84d2f2c5c6/docs/research/candidates/uav_service_auxiliary/NOTES.md#pro-question-2026-09-23-b05-risk-service-next-intervention)已按原文一次提交（sourcef5b078557），generation77观察器正在等待同一key；尚未选择新试验或接受答复，B03负证据保留。[完整B05与判断](candidates/uav_service_auxiliary/NOTES.md#2026-09-23--b05-complete-endpoint-risk-savings-recur-service-gains-do-not)；[固定协议与分支](candidates/uav_service_auxiliary/NOTES.md#2026-09-23--b04-advice-adopted-b05-fixed-independent-training-recurrence)。 |
+
+| **DM3：服务收益与风险控制** | 两训练区组重复最终J/成本优势和开发J损失，B05未重复服务收益；下一判断转向怎样避免整体加权造成的服务损失。 | **B05完整结束：2fits/360k train/192k eval/552k总交互、259.992391 runner min。** 最终R−N J+241.885454而QoS−.026788931，14胜18负、8零服务；开发J−37.659662，风险成本下降仍不足以补偿服务损失。两区组×两端点分别保留，不池化或选择较早checkpoint。当前系数4配方不追加、无第三对或确认；[新聚焦问题](https://github.com/CartmanFatass/My-paper-code/blob/f5b078557b2f438300af1a3e58dbbe84d2f2c5c6/docs/research/candidates/uav_service_auxiliary/NOTES.md#pro-question-2026-09-23-b05-risk-service-next-intervention)已提交并挂接本任务观察，比较合法条件返航反馈、明确学习修订或有理由停止；待读完整建议后再固定下一比较，未启动新实验。[完整结果及下一问题](candidates/uav_service_auxiliary/NOTES.md#2026-09-23--b05-complete-endpoint-risk-savings-recur-service-gains-do-not)；[退役配对运行计划](archive/2026-09-23/RESEARCH-uav-service-b05-complete.md)。 |
+
+B03/B04完整证据保留；B05 N/R均已完整收取、独立核验和判读，2完成验收/0运行。READY已消费并按原身份推进观察器，无遗留实验或旧Pro答复。最终J/成本正用途与多数配对损失、8零服务及开发反号一并保留；固定系数配方不追加；新问题source`f5b078557b2f438300af1a3e58dbbe84d2f2c5c6`已在同一私有咨询中一次Send成功，effort6 Pro、原文附件核验通过。key `hmasd:9940a965e2f3debf93c92800e39af1a5d4e8a0bfd8875ddf88e430d1bc7a9632`由generation77、1500秒窗口观察；当前0实验/1咨询等待，不重发，回来后仍须deliver核验及全文读取。[完整结果与后继问题](candidates/uav_service_auxiliary/NOTES.md#2026-09-23--b05-complete-endpoint-risk-savings-recur-service-gains-do-not)。
+
+DM3 的B05完整配对已验收：最终平均J正、开发负重复，服务增益未重复且零服务世界增加；原固定系数配方不追加，下一可检验干预的新Pro问题已一次提交，等待完整建议。
+
+观察性检查无新交互，当前0运行，无追加固定系数fit；
+
+[S7 B05完整风险收益、服务损失与下一选择](candidates/uav_service_auxiliary/NOTES.md#2026-09-23--b05-complete-endpoint-risk-savings-recur-service-gains-do-not)、
