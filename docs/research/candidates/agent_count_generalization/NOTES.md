@@ -18027,3 +18027,544 @@ explicitly relinquish the subsection for the DM to preserve a verified fallback.
 write report the actual commit. Never return only a receipt or abbreviated recommendation.
 
 ### Answer
+
+本轮未写入 GitHub，也没有产生提交。 最新目标文件查询返回的 blob SHA 为 275a247b5e19702500b358212339325d34ae44df，但正文为空；我没有取得可安全替换的整文件字节，因此没有调用更新接口。我明确让出本题 ordinary-roster-training-after-b17 的 ### Answer 子节，由 DM 将核对后的下述完整答复保存进去。 这不是一次已经发起但失败的提交，也没有改动其他位置。
+
+附件全文已读。GitHub 的部分背景、合同和结果材料可以读取，但本轮没有逐份完整读完 runner summary 和全部 24 份面板 JSON，也没有读取原始 NPZ 或 checkpoint。下面的 B17 事实主要依据附件中固定版本的完整作者记录；我不把引用其审计结论称为自己完成了独立复现。具体信息边界在最后一节说明。
+
+Answer
+一、建议：选择这一个双 fit 比较，但购买的是有限训练程序的判别，不是已经诊断出的“人数支持修复”
+
+我建议选择拟议的一个新配对区组、两个 LOCAL1 fit。保留固定 45×N6 对混合 [4,6,8]×15，保留初始／最终的 N4、N5、N6、N7、N8 面板，不增加训练区组、H6 fit、额外人数或结果后的端点选择。
+
+MATERIAL_DISSENT: no。 对这项按题目限定的普通训练程序探索，我没有实质异议。支持它的理由是：它直接比较了两个尚未比较过、且可能改变静态部署用途的普通学习程序；更便宜的保留策略重放不能回答这个学习反事实。需要收紧的是估计对象和结果判读，而不是把两 fit 扩成确认批次或机制拆解。
+
+但必须区分两个判断：
+
+“这项比较值得做”不等于“B17 已经证明 N6-only 训练支持是瓶颈”。 B17 比较的是已经训练好的 L 和 H6；二者都是 N6 训练所得，H6 却在三块 N4 原生 J 上占优。因此，直接经历 N4 不是获得这项 N4 用途的逻辑必要条件。B17 给出了一个值得修改普通学习程序的现象，却没有识别出必须由混合人数训练修复的原因。混合训练可能有效，仍是本轮要检验的猜想。
+
+hmasd-pro-question-agent-count-… +1
+
+“两个 fit 是合适的最小配对学习比较”也不等于“任何更便宜的观察都没有价值”。 这里的“最小”依赖题目真正要决定的事情：在相同普通学习器、真实相同初始化和新训练实现下，改变完整回合的人数安排，是否增加有用的最终部署表现。一个旧策略重放无法给出混合程序的学习结果；一个新混合 fit 配旧 L 端点，又不满足本题要求的初始化与程序匹配。因此，在这个明确问题下，两份新 fit 有直接信息价值。题目已经正确排除了旧最佳区组、旧训练端点和超参数搜索。
+
+hmasd-pro-question-agent-count-…
+
+这不是训练授权、预算分配或方向选择。现行方法允许单区组探索，但它的结论必须保持探索性；没有理由为了购买一次有用观察，先要求训练总体精度已经足够。
+
+hmasd-pro-question-agent-count-… +1
+
+二、B16／B17 到底改变了什么
+已加强的判断
+
+B16 已经使 L 成为有实际自身学习、而非仅有漂亮未训练端点的普通工作参照。B17 进一步显示：这三份 L 的 N8 相对用途能够在新世界面板上保留；同时，H6 在这三份资产的 N4 原生目标上仍有较窄的条件性用途。不能把前者写成普遍替代，也不能把后者写成普遍的小人数服务优势。
+
+hmasd-pro-question-agent-count-…
+
+下面只作逐 N 的描述性汇总，差值均为 L−H6：
+
+物理人数	三块平均 ΔJ	三块平均 ΔS，用户／团队步	必须同时保留的事实
+N8	+0.025578114774	+2.300645833333	三块 J、S 均为正
+N6	−0.008484361184	+0.095458333333	J 与服务、区组之间均有取舍
+N4	−0.026903667950	−0.377125000000	三块 J 均为负，但第一块 S 为正
+
+这些是三个保留策略比较的描述，不是新的训练总体估计；三个区组共享每个 N 的 32 个世界，不能变成 96 个独立新世界。
+
+hmasd-pro-question-agent-count-… +1
+
+已削弱的判断
+
+稳定尾部排序、全世界占优以及单一的小人数解释都被削弱了。
+
+旧 N8 面板中 L 的最小服务在三块都较低，新 N8 面板则三块都较高；这种反转使“稳定最低服务优势”站不住脚。与此同时，L 在 N8／区组 1／世界 2145819 仍损失约 0.133721 J 和 7.312 服务，在 N6／区组 2／世界 2145610 损失约 0.143760 J 和 10.004 服务。H6 的 N4 均值优势也没有消除其不利世界，第三块甚至出现 H6 最低服务 31.196 低于 L 的 31.618。这些反例必须继续影响用途判断，不能被平均值或各自最小值相互抵消。
+
+hmasd-pro-question-agent-count-…
+
+N4 的高度单因解释也不够：仅在算术上去掉 P，L−H6 的 J 仍在三块全部为负。固定 50 分母的交付质量读数在 N4／N6 六个比较中仍支持 H6，削弱了“只是 Q 的分母不同”这一解释；但服务用户集合和达到的几何状态仍不同，所以这不是共同用户质量机制。
+
+hmasd-pro-question-agent-count-…
+
+未改变的判断
+
+B15 仍按原联合规则不确定：J 下界 −0.000007912493 没有超过 0，服务下界 −0.876090407179 没有超过 1。B17 或新的普通学习比较都不能延长、挽救或重命名那项确认。技能归因、纯人数因果效应、训练总体排序、真实 UAV 部署以及回合内加入／退出适应，也没有由这些结果建立。
+
+hmasd-pro-question-agent-count-… +1
+
+因此，我的更新是：加强普通比较器，保留人数条件下的原生取舍；降低对简单机制故事和统一排序的信心；把混合训练作为新的、尚未验证的学习程序猜想。
+
+三、把估计对象写清楚：一个新训练区组，逐 N 比较最终策略，并核对自身学习
+
+令 F 为固定 N6 程序，M 为混合程序。二者从实际相同的模型和 normalizer 状态开始，分别完成预定 45 次外层更新。对每个物理人数 n，令 W
+n
+	​
+
+ 是固定的 32 个新评价世界，Y 为一个世界 500 步上的平均 J 或 S。
+
+主要读数应是：
+
+D
+n
+Y
+	​
+
+=
+32
+1
+	​
+
+w∈W
+n
+	​
+
+∑
+	​
+
+[Y(π
+M,45
+	​
+
+,w;n)−Y(π
+F,45
+	​
+
+,w;n)].
+
+每个程序自己的学习增量则是：
+
+G
+a,n
+Y
+	​
+
+=
+32
+1
+	​
+
+w∈W
+n
+	​
+
+∑
+	​
+
+[Y(π
+a,45
+	​
+
+,w;n)−Y(π
+a,0
+	​
+
+,w;n)],a∈{F,M}.
+
+这两个量回答不同问题：前者是终点程序比较，后者说明终点是否来自实际的有用学习。题目要求同时保留它们是正确的，尤其因为 B17 本身没有 N4 初始面板，不能提供 N4 自身学习结论。
+
+hmasd-pro-question-agent-count-… +1
+
+在真正相同的初始模型／normalizer、评价初态和执行规则下，初始两臂差应为零，于是
+
+D
+n
+Y
+	​
+
+=G
+M,n
+Y
+	​
+
+−G
+F,n
+Y
+	​
+
+.
+
+这个等式说明为什么真实初始化匹配很有用：它避免把不同的初始相对优势误当作不同的学习增益。但终点差和学习增量差不是两份独立证据。若初始读数不一致，应先解释实际字节、normalizer、运行状态或评价路径的差异，不能仅凭“同一个 seed”宣布匹配已经成立。
+
+这里的主要结论仍然是：这一对新训练实现，在这些固定新世界上的程序差异。 两个程序各有一个训练实现；16 个并行 lane、32 个评价世界和大量时间步都不会增加训练区组数。世界层面的离散程度可以描述这对策略的条件性表现，但不能代替训练总体不确定性。
+
+hmasd-pro-question-agent-count-…
+
+插值与外推必须按各自训练支持区分
+
+N5、N7 都是两臂没有直接训练过的精确人数值；但只有 M 的训练支持 {4,6,8} 在它们两侧形成夹持。对 M，可以称为人数插值；F 只在 {6} 上训练，不能在同样严格的意义下说它也有两侧训练支持。F 是向相邻未训练人数的向下／向上迁移比较器。
+
+因此，这一设计能够检验“混合训练是否提高两个未训练中间人数的用途”，但不能支持超出 [4,8] 的未见人数外推。N4／N8 已被 M 训练见过，它们的改善不能代替 N5／N7 预测；也不能据此主张回合内 roster 变化、任意人数不变性或更大群体泛化。题目对这些范围的限制应原样保留。
+
+hmasd-pro-question-agent-count-…
+
+四、匹配没有失效，但必须承认：处理变量是整个训练程序
+物理变化不是能够从比较中“扣除”的噪声
+
+改变真实 N 会改变容量、几何、干扰、局部反馈和训练访问到的状态。混合程序因此不仅改变“是否见过一个人数标签”，还改变了学习数据和闭环交互过程。
+
+这不使程序比较失去意义。相反，如果真正想知道“这套普通训练安排能否产生更有用的最终控制器”，这些变化就是处理的一部分。错误在于把结果进一步归因为纯人数特征、纯支持覆盖或某个独立的技能机制。附件的 Post-B17 决策段已经正确把它限定为整个训练安排的比较。
+
+hmasd-pro-question-agent-count-…
+
+原生 J/N 必须保持，不能为了表面匹配改奖励
+
+继续使用原生关系：
+
+J=0.7C+0.3Q−P,r
+scalar
+	​
+
+=J/N.
+
+在固定评价 N 内，J 与 J/N 只是固定比例关系；但训练跨 N 时，比例本身随人数改变。在相同 J 下，未经后续处理的 N4 标量奖励是 N8 的两倍。优势标准化、价值归一化、裁剪和 Adam 是否消除或保留其中某些影响，是具体更新路径的问题，不能从等步数推出；固定 .05 熵系数也不能单独证明有效训练权重对 N 等价。
+
+hmasd-pro-question-agent-count-… +1
+
+因此，不应把奖励乘回 N、改变熵系数或另加人数权重，再称为“只是把两臂匹配得更好”。那会改变题目正在购买的程序。现有方案可以保留，但应明确：它比较的是原生奖励和既有 PPO 下的两种训练安排，而非奖励尺度已被隔离的支持效应。
+
+相同总步数不等于相同分布，也不保证相同更新工作
+
+由题目给定的 rollout 大小直接计算，混合臂的训练曝光为：
+
+混合臂训练人数	团队步	UAV 步
+N4	120,000	480,000
+N6	120,000	720,000
+N8	120,000	960,000
+合计	360,000	2,160,000
+
+固定臂的 360,000 团队步和 2,160,000 UAV 步则全部来自 N6。也就是说，M 的 N6 团队经验只有 F 的三分之一；M 在三个 N 上的团队步各占三分之一，但 UAV 步占比分别为 2/9、1/3、4/9。这些是曝光份额，不是有效优化损失权重的推导。
+
+hmasd-pro-question-agent-count-…
+
+45 次外层更新也不能替代实际 actor／critic optimizer 调用数、minibatch 大小与数量、尾批处理和学习资源的记录。即使某种实现最终产生相同的总 optimizer 调用数，各次更新的数据规模、组成、梯度和历史仍不同。应报告实际数值，而不是预先声称“训练计算已完全匹配”。
+
+固定顺序和最后一次 N8 更新属于端点含义
+
+[4,6,8]×15 最终停在 N8 更新之后。因此，final45 的差异可能同时含有最近 N8 经验、阶段顺序、normalizer 历史和较长期混合训练的影响。
+
+我认为最低限度的修正是把这一点写进估计对象，而不是增加 fit 或事后平均其他 checkpoint。 题目比较的是这两个确定、有限的学习程序；在这个对象下，保留既定顺序和 final45 是合理的。不能在结果有利时把它推广为“与顺序无关的混合支持收益”，也不能在结果不利时更换最后一个 N、挑周期中更好的 checkpoint，或者补做阶段平均来挽救预测。
+
+五、把工作预测收紧为可失败的联合预测，并让 N6 真正承担代价
+
+我保留并明确化主要预测：
+
+D
+5
+J
+	​
+
+>0,D
+5
+S
+	​
+
+>0,D
+7
+J
+	​
+
+>0,D
+7
+S
+	​
+
+>0.
+
+四个方向都要单独报告；任何一个未兑现，都不能靠另一个人数或指标的较大正值把原联合预测算作成立。
+
+同时，在 N5／N7 上读取两臂自己的服务增量、J 增量和绝对服务水平。工作预测的完整含义是：M 不只是比一个没有学起来的 F 更好，而是在两种程序都产生有用服务学习的情况下，增加未训练中间人数的最终用途。题目提出“双方有用学习”这一限定是有价值的。
+
+hmasd-pro-question-agent-count-…
+
+这里有三个重要限定。
+
+第一，符号兑现不等于实际值得采用。 很小的四个正数能够满足方向预测，却未必足以补偿复杂度、资源或 N6 损失。本轮不必另造确认式阈值，更不能借用 B15 的服务 >1 门槛；应报告实际幅度及其用途含义。J 与 S 本身也有关联，不能把两个正号当作两次独立复现。
+
+第二，若 F 没学起来，不能删除这个结果，也不能装作原预测完整成立。 M 的优势仍可能有价值，但“双方均有用学习后的相对优势”没有兑现。它应被读作这一次训练实现的具体结果，而不是自动以“异常 seed”为由重训控制臂。技术有效但科学上不理想的训练结果，仍然是结果。
+
+第三，N6 不能降为只在附录出现的次要指标。 应与 N5／N7 并列报告 D
+6
+J
+	​
+
+,D
+6
+S
+	​
+
+ 及自身学习增量。M 把三分之二的团队训练经验移离 N6，因此 N6 成本是该程序的真实交换条件。题目没有提供部署人数权重或非劣界限，我不会补造一个跨 N 总分或“可接受损失”门槛。四个主要正号即使全部兑现，也不自动支持无损替换 F。
+
+原生分解继续保留：
+
+ΔS=ΔE−ΔU,ΔJ=0.7ΔC+0.3ΔQ−ΔP.
+
+这有助于解释服务、质量和高度的冲突，但恒等式不是额外的机制验证。当前证据不支持预写“混合训练一定靠降低 U 成功”。B17 的 N4 服务差几乎全由 E 差解释，而不是 U 差；已记录链路上的唯一资格关系也没有否定轨迹改变能够改善服务。这里应明确放弃单一机制归因，而不是增加一个没有依据的中间预测。
+
+hmasd-pro-question-agent-count-…
+
+新面板的全部不利世界、配对损失及各臂最低服务仍须保留。最低值不是安全界限，不同策略各自的最低世界也不等于配对最坏损失。
+
+六、最强备择，以及一个确实更便宜、但不值得作为前置步骤的观察
+最强备择就是固定 N6 的普通反馈已经足够
+
+最强的竞争解释不是“混合训练不够复杂”，而是：
+
+固定 N6 训练所得的局部循环反馈，已经能在相邻未训练人数下产生有用行为；分散经验、改变批量组成、奖励尺度历史和更新顺序，没有增加值得购买的部署用途，甚至损害 N6 或其中一个中间人数。
+
+这是本题 F 控制臂直接检验的备择。它有可信的现有基础：L 已经表现出真正的学习和未训练 N8 用途；H6 同样没有直接接受 N4 训练，却在 N4 原生 J 上保留用途。但这些证据只能使备择值得认真对待，不能预先确定新 F 或 M 的 N5／N7 结果。
+
+hmasd-pro-question-agent-count-…
+
+一个具体的更便宜观察
+
+可以只拿全部三份保留 L final45，在 N5／N7 各一个 32 世界、500 步的新面板上做零更新评价。其科学执行量为：
+
+0 fit、0 训练更新；
+
+6 面板、192 个评价回合；
+
+96,000 团队步、576,000 UAV 步。
+
+这是按题目已有面板规格计算的替代方案成本；N5／N7 评价入口、恢复检查和结果读取仍另有非 fit 成本。
+
+它比再加一个 N4 保留策略面板更贴近本题，因为它能直接观察旧固定 N6 资产在两个中间人数上的表现。但它仍只有备择的一半：既有 F 类资产表现如何，而没有M 学出来会怎样。没有对应初始面板时，它也不能给出这些新世界上的自身学习增量。
+
+所以我不建议先买这个观察。若待决事项是“是否直接部署这些旧资产”，它可能更直接；本题却是“普通训练安排是否值得改变”。在没有预先给定部署要求或一个足以关闭改进空间的原生用途标准时，看见旧 L 表现不错，并不能自动判定新的混合程序没有增量价值。
+
+同样，只训练一个 M 再与旧 L 比较，会省一个 fit，却丢掉本题最有价值的匹配：实际相同初始化、新训练实现、同一边界代码及明确对称的选择曝光。它不是原双 fit 问题的低成本等价版本。
+
+因此，我选择直接做两程序探索，而不是把一个便宜但不回答学习反事实的观察设成必经步骤。 这与方法中“按可改变的判断选择最小真实学习比较，而非先穷尽诊断”的要求一致。
+
+hmasd-pro-question-agent-count-… +1
+
+七、可行性目前只是源码映射；最需要防止的是边界适配器悄悄改了学习程序
+
+现有固定特征宽度、八槽状态布局及共享价值头，使这个候选有合理的实现基础；但它们没有验证可变 N 的真实训练更新。附件明确说生产 runner 仍绑定 N6，buffer、循环状态和技能运行状态存在 N 相关尺寸，新适配器尚未实现或测试。
+
+hmasd-pro-question-agent-count-…
+
+最低限度的实现含义应是：
+
+旧人数的 rollout 必须先完整消费。 500 步的真实终止后继、终止标记、回报／优势及真实 PPO 更新，应在该 rollout 对应的 N、buffer 和配置语义下完成。不能先切新 N 再解释旧数据，不能因重建 buffer 丢失末端数据，也不能把跨回合连接误作同一个循环序列。
+
+新回合运行状态重建，但学习状态持续。 配置中的 N 和 batch 元数据、buffer、actor／critic 隐状态、每 lane 技能运行状态应一致切换。模型、optimizer 对象及其 Adam 历史持续存在；既有 scalar normalizer 持续更新，而不是每换 N 清空。B16 关闭的 observation／state normalization 也不应借此打开。两个程序初始状态相同，不意味着训练以后必须强制 normalizer 相同——后者是程序学习结果的一部分。
+
+hmasd-pro-question-agent-count-…
+
+固定 N6 控制臂必须走相同边界路径。 它也要进行相同的回合运行状态重置，只是 N 不变。需要通过真实更新检查零初始 hidden-state 输入、Adam 状态连续性及尺寸一致性，而不只是看一次前向能够运行。真实初始化还应核对实际模型／normalizer 状态，不能以相同 seed 标签代替。
+
+hmasd-pro-question-agent-count-… +1
+
+此外，重建运行状态不应意外重新播种训练随机流；同 N 的评价应核对实际初始物理状态相同，而不是只核对世界编号。不同 N 的训练世界和闭环轨迹则不能被宣称为相同配对反事实。
+
+这些是保证所选实验仍然是所选实验的技术检查，不是新增 owner 批准层，也不是要求先跑一个表现导向的 pilot。技术 fixture 的真实工作量应另计；本次答复没有执行这些检查。既有 checkpoint 支持评价恢复，不足以证明它们包含正确续训所需的完整 optimizer 状态，因此不要把旧 checkpoint 续训引入这两个 fresh fit。
+
+hmasd-pro-question-agent-count-…
+
+八、成本：保留原定 20 个面板，真实 learner 工作另报
+
+按题目规模核算，成本成立：
+
+工作	fit／面板	团队步	UAV 步
+两个训练程序	2 fit	720,000	4,320,000
+两臂×初始／最终×五个 N	20 面板	320,000	1,920,000
+合计	2 fit、20 面板	1,040,000	6,240,000
+
+评价共 640 个回合；训练共 90 次外层更新，但真实 actor／critic optimizer 调用、minibatch 工作和资源消耗不能被“90 次”替代。以上乘法与提案一致。
+
+hmasd-pro-question-agent-count-…
+
+我不建议在这份成本中增加旧 H6、旧 SET、额外 N、更多训练区组或中间 checkpoint 评价。相同初始权重也不意味着既定初始面板免费；按原方案执行，就按全部 20 个面板记成本。
+
+历史 LOCAL1 每 fit 约 49 分钟只能用作计划背景，不能当作本轮时长承诺，也不能据此宣称两程序速度相同。边界适配、针对性测试／审阅、初始化与恢复、产物保存、收取和完整读取均是额外工作；未知成本不是零。
+
+hmasd-pro-question-agent-count-… +1
+
+九、不同结果应怎样改变判断，而不是怎样找到一种“通过方式”
+观察	应作的更新
+N5／N7 四个差值均正，双方都有用学习	支持这一个新训练区组中，规定的 M 程序具有中间人数终点优势；仍分别保留 N6 和世界层面损失，不建立训练总体排名
+只有 N4／N8 改善	支持某些直接训练条件下的用途；未兑现未训练中间人数的主要预测，不能改用见过的人数宣布泛化成功
+N5 与 N7 相反，或 J 与 S 相反	主要联合预测未完整兑现；保留人数／原生指标条件下的取舍，不跨 N 池化成一个胜者
+四个差值都正，但很小，或伴随重要 N6 损失	方向预测可以成立，实际增量价值仍可能不足；不能由“全正”自动推出应全面替换 F
+两臂都学到有用服务，但 M 没有显示值得增加复杂度的优势	降低继续投入这一固定混合配方的理由；可以在此结束，不等于证明所有混合训练无用或两程序等价
+边界状态、normalizer、恢复或真实更新出现未解释错误	技术结果，不是支持 F 或否定 M 的科学证据；保留曝光与成本，不自动重训直到获得可读或有利结果
+
+如果 M 明确改善而 F 没有产生有用学习，应如实保留 M 的观察价值，同时标明原“双方有用学习后的优势”预测没有完整兑现，不能把控制臂的科学结果剔除。
+
+这轮完成后，不应自动追加 seed、换末段人数、改变世界或重选 checkpoint。一个有效但不支持新增用途的结果，足以使停止这个静态混合训练配方成为合理决定；停止投资与证明整个静态路线不可能成功，是不同判断。现阶段我尚不建议先停止，因为这个普通学习程序对照仍能提供现有部署重放没有提供的判别，而不是因为一个新实验“理应得到”。这一处理也保留了方法允许无有用判别、允许结束而不自动扩批的含义。
+
+hmasd-pro-question-agent-count-…
+
+十、读取范围、未核验之处和结论依赖
+
+本答复以附件指定的科学版本 24a20af73cd315158b38acafa70d157d8c400c19 为依据；共享背景遵循题目指定的完整 main revision，而没有用移动分支上的状态替换冻结科学输入。最新目标分支查询仅用于交付安全判断。
+
+附件全文已经读取，其中包括本题、Post-B17 决策段、B17 完成记录、前次 Pro 完整答复、现行 constitution 和 scientific-tools 方法。GitHub 另外读取到指定背景、工程方法、冻结合同及相关提交／结果材料。前次 Pro 的 B17 部署优先建议只被用来理解已经完成的决策，不被当作它已经决定了本次新学习程序。附件也明确说明这次属于完成 B17 后的新问题。
+
+hmasd-pro-question-agent-count-… +1
+
+仍有三类边界必须明确：
+
+第一，原生产物复核不完整。 本轮没有逐份完整读完 runner summary 和全部 24 份面板 JSON，也没有加载 ignored NPZ、checkpoint 或核验节点现场文件。因此，56 文件、全部 trace 的检查、132 数组精确重放及冻结参数等事实，是附件中 DM 已发表审计的报告，不是本答复新增的一次独立审计。题目本来就说明 GitHub 不提供这些 ignored 二进制。
+
+hmasd-pro-question-agent-count-… +1
+
+第二，新 learner 的技术有效性尚未建立。 本轮只有已发表的源码可行性映射，没有构建模型、执行环境、做真实更新测试或启动 fit。故建议不能解释成“适配器已经安全可运行”。若实际实现不能保持题目要求的边界和学习状态语义，依赖这些语义的比较应先被视为技术上未成立。
+
+第三，完整目标文件未取得。 这是安全写回的障碍，不是用附件摘录重建 notebook 的理由。我没有写回，没有改动其他字节，也没有可报告的提交。
+
+已读材料仍足以支持上述有明确条件的设计与投资建议：B16／B17 的关键符号、反例、合同和提案均在附件的作者原文中给出；我没有靠未读的二进制或未完成的 JSON 复核新增任何经验事实。若底层产物后来推翻这些已发表读数，依赖它们的建议当然需要相应重审。
+
+最终建议不变：选择这一个双 fit、固定端点的普通训练程序探索。把 N5／N7 各自的 J 与服务、自身学习和 N6 成本作为真正的判别内容；接受混合训练可能没有增量用途。不要把结果升级成纯人数机制、未见区间外推、训练总体优越或无损替代，也不要让它改变已经冻结的 B15／B17。
+
+
+## 2026-09-24 — B18 selected: one paired ordinary roster-training comparison
+
+### Advice read, delivery reconciled and DM decision
+
+The preceding complete answer is **saved from chat**, verbatim, including the copied citation
+fragments and formatting. The accepted question was bound to source
+`24a20af73cd315158b38acafa70d157d8c400c19`. Collection returned COMPLETE; same-key read-only
+delivery verification returned NOT_DELIVERED with no commits. Pro explicitly made no write
+attempt and relinquished this Answer subsection. Before appending, the DM verified local and
+remote target bytes equal the source notebook (blob `275a247b5e19702500b358212339325d34ae44df`),
+with this exact Answer still empty. The raw answer is25,102bytes/10,844characters, SHA256
+`2cf8e94dcdf130ba50f2d1ddea8dcd7035f543cb236dc2c116125a63a1bcc68f`; its stripped10,843characters
+have SHA256 `acd5370dfab35d7d9a8e4ffd6afd80cd6596e90e4a6ce08be48c4fab77898270`.
+The DM read the entire answer before choosing this investment. Process completion and advice
+are not empirical acceptance. No question was resent and no additional empirical audit is
+attributed to Pro; its stated lack of a complete binary/JSON audit remains visible above.
+
+**Decision: select B18, one fresh paired block/two fits, as exploratory ordinary training-program
+research.** Adopt the proposed comparator and Pro's refinements. This is not a diagnosed repair
+of an N6-only support defect: H6 itself learned only at N6 yet retains N4 J use. What is tested
+is whether reallocating the same ordinary learner's finite experience yields useful deployment
+behavior at two exact counts untrained by both arms. A zero-fit old-L N5/N7 panel would address
+only retained deployment and not this learning counterfactual, so it is not purchased first.
+
+The relevant current shared background was read at main
+`65ccefe7a35201c2c08920a3edc347d90a084ad2`: ordinary L is the competent working comparator;
+initial performance, actual learning and frozen use are different questions; S1 changes in N
+still alter capacity, geometry and interference. It therefore motivates same-L fresh training
+and own-learning readings, not a return to SET or a skill-necessity claim. The latest skill B09
+failure of a uniform-context generalization also keeps our learned-opening B10 bounded; B18
+changes no skill study. No new shared empirical conclusion follows from selecting this design.
+
+### Fixed scientific contract and cost
+
+Object `s1_ordinary_roster_training_b18`, batch tag
+`s1_ordinary_roster_training_b18_b1_s1004101`, fresh learner seed **1004101**. One admitted native
+invocation runs fixed arm **F** then mixed arm **M**, sequentially, in separate output subfolders.
+There is one lifetime of learned modules and optimizers per arm. Both are freshly constructed
+at canonical N6 with identical actual initial model and normalizer tensors; the initial digest
+and full tensor manifest must match before M starts training. No old endpoint, H6 fit, selected
+old block, pilot fit, extra seed or hyperparameter search enters this batch.
+
+- F:45complete rollouts at N6. M:`[4,6,8]` repeated15times. Each rollout has16native independent
+  lanes and500steps, ends all lanes, and performs the existing low-level PPO update before any
+  roster switch. Thus360,000team/2,160,000UAV training steps and45outer updates per arm.
+- Retain B16 LOCAL1: native uniform/free-space S1 with50users, capacity10/UAV; local104-wide
+  recurrent actor, trainable one-category FiLM, padded133-wide central state/MAX_UAVS8 and
+  count-stable central critic; task-only MAPPO, k10, raw Gaussian entropy coefficient.05,
+  raw actions/old logprobs stored and clipped execution. Preserve native scalar reward J/N,
+  hidden256,8attention heads,2layers,15PPO epochs, sequence batch32 and coordinator batch1280,
+  disabled observation/state normalization and scalar value normalization semantics.
+- Construct fresh episode worlds for BOTH arms at each complete-rollout boundary using lane
+  seeds `3044100 + 100*r + lane`, with r=1..45 and lane=0..15. Creation and explicit native
+  reset(seed=lane_seed) run inside RNG preservation so they do not reseed or advance the
+  continuing learner/policy/optimizer global stream. These are episode addresses, not a
+  cross-N claim of identical scenes. Initial physical arrays at common N6 rollouts must match
+  across arms; record all reset states/observations and native UAV/user arrays. Terminal
+  successor data are stored before the update; do not perform a throwaway old-N episode reset.
+- Evaluate each arm at stages0and45, fixed order **N5,N7,N6,N4,N8**,32worlds×500steps each.
+  World seeds for physical N4/5/6/7/8 are respectively2245400..2245431,
+  2245500..2245531,2245600..2245631,2245700..2245731,2245800..2245831.
+  Runtime seeds are each base+51. Retain the prior native evaluator's sequence of runtime
+  seeding, environment construction, target construction, strict weight/normalizer copy and
+  reset, with no extra reseed before evaluation reset. Preserve the learner, optimizer,
+  training runtime, environments and all RNG states around evaluation. Initial same-N physical
+  arrays and full initial deterministic evaluation traces must match across F/M; stage0/final
+  worlds must match within each N. No training storage, optimizer call or normalizer update
+  is allowed in evaluation; policy hidden state evolves normally within episodes.
+- Final45 is the only learned endpoint. M ends immediately after its N8 update, so its effect
+  includes order, last-roster recency and normalizer history. No checkpoint averaging, changed
+  final roster, longer training or result-dependent endpoint choice.
+
+Expected cost is **2started fits**,720,000team/4,320,000UAV training steps, plus20evaluation
+panels/640episodes/320,000team/1,920,000UAV evaluation steps: total1,040,000team/6,240,000UAV
+steps. Each arm has720training episodes. M spends120kteam steps at each N4/6/8 and
+480k/720k/960kUAV steps respectively; F spends360kteam/2.16MUAV at N6. M thus has one third
+of F's N6 team exposure. UAV exposure fractions2/9,1/3,4/9 are not optimizer weights. Measure
+actual actor/critic minibatches, sizes, tails, optimizer calls, transitions, outer updates,
+wall and process RSS; equal aggregate steps do not establish equal compute or effective
+optimization weighting. Historical about49minutes per LOCAL1 fit is planning context only.
+Use the configured native WSL node, CPUfloat32/Torch4threads, with fresh admission and an
+engineering observation checkpoint; no wall-based scientific endpoint. Technical fixtures
+and review have their own measured costs, not extra scientific fits.
+
+### Discriminating prediction and fixed reading
+
+For each n separately define DnJ=final_M_J−final_F_J and DnS=final_M_S−final_F_S on its32fixed
+paired worlds. The primary joint directional prediction requires **all four**
+`D5J>0,D5S>0,D7J>0,D7S>0`; retain each exact value and all paired world values. Each arm's own
+stage45−stage0 J and S is read at each N, including whether both arms learn useful native J
+and service at the primary targets. Positive F-to-M differences do not excuse an unlearned F,
+and an F learning failure is retained rather than screened out or retrained. No invented
+meaningfulness/noninferiority threshold or significance test is added to this single block.
+
+The strongest alternative is that fixed-N6 local feedback already transfers usefully and
+dividing its experience/changing optimization composition adds no use or produces a tradeoff.
+Any failed primary sign means the joint directional prediction is not fully met. Positive
+N4/N8 outcomes cannot substitute: those are training-seen for M. N5/N7 are untrained exact
+counts in both; only M brackets them, so M's use is interpolation while F transfers down/up
+from N6. No extrapolation outside[4,8], within-episode roster adaptation, invariance, pure count
+or support mechanism, population ranking or confirmed superiority follows.
+
+Dn6J/Dn6S and both arms' N6 own learning are coequal visible deployment tradeoffs. Report all
+native C/Q/P/E/S/U, raw scalar returns and J identities, each world and adverse J-or-S world,
+minima and quality/height/service conflicts. No pooled-N score or unmeasured deployment
+weighting. A tiny all-positive primary result with substantial N6 cost is not automatic
+replacement; mixed signs remain mixed. No required causal intermediate (for example U
+reduction) is postulated for this package comparison. B15 stays inconclusive and B17 ends at
+its fixed24panels. No extra block, world, seed, endpoint or tuning is appended after results.
+Technical failure preserves partial counts and trusted facts, counts started fits, and is
+neither a scientific negative nor permission for an automatic retry.
+
+### L0 implementation scope
+
+Implement a candidate-owned runner at
+`experiments/candidates/agent_count_generalization/ordinary_roster_training_b18/`, a guarded
+`scripts/run_agent_count_ordinary_roster_training_b18.py`, and mirrored tests under
+`tests/experiments/candidates/agent_count_generalization/ordinary_roster_training_b18/`.
+Reuse unchanged helpers where appropriate; do not modify frozen B03/B11/B15/B16/B17 code,
+shared learners/environments, unrelated directions or control-plane code. If a shared change
+is unavoidable, return the exact dependency to the DM before editing it. Candidate code may
+hold a narrow complete-episode collector to defer environment resets until after old-N update.
+This is a finite paired batch, not a new scheduling or training framework.
+
+The critical behavior is an atomic complete-episode boundary adapter used by BOTH F and M,
+including F's N6→N6 boundary. After the old-N rollout and actual update are consumed, preserve
+learned parameter identities and values, optimizer objects and all Adam state, scalar
+normalizers, train/eval mode and the continuing training RNG. Rebind physical-N config/batch
+metadata and nonparameter shared-head iteration metadata; replace RolloutBuffer and resize
+all actor/critic/current/previous hidden arrays, clear per-lane labels/logprobs/ages/indices and
+snapshot bookkeeping. First policy entry rows must have zero hidden state under the core
+entry-mask convention. Do not reconstruct the learner or optimizer at roster changes, pad a
+real old-N update as if it had the new N, or reset value normalization at the boundary.
+
+Required readable outputs are batch summary with arm status and partial/aggregate counts;
+per-arm config/summary/training curves; initial/final evaluation checkpoints (not resume
+claims); per-world panels with complete native transition traces; initialization identity,
+every reset scene and runtime-boundary invariants; per-rollout optimizer/minibatch/tail and
+per-N exposure; learner parameter movement and native own-learning/final paired readings;
+source/output identities and measured process resource scope. Bind source SHA and seed at
+the explicit CLI, reject mismatched identity or existing outputs, and require native single-use
+admission before importing/constructing scientific objects. Stop on a failed arm with explicit
+unstarted remaining arm; never silently rerun, resume or substitute a missing arm.
+
+Focused technical checks must exercise actual collect/store/GAE/recurrent PPO updates across
+N4→6→8→4 and N6→6; preserve parameter/optimizer/Adam/normalizer identities across each
+boundary and verify zero next-entry hidden state, old-N bootstrap/storage dimensions, fixed
+F/M initial tensors and full same-N initial evaluation/world arrays, RNG isolation, native
+N5/N7 evaluation and fixed reading, honest partial failure/counts, and admission-before-import.
+Use tiny non-result fixtures without changing production protocol. Tests own scratch through
+pytest. The DM accepts the diff and an independent high-risk Reviewer examines RNG, recurrent
+state, native readings, checkpoint identity and admission before result execution. No helper
+chooses science, adds fits, launches, writes NOTES/RESEARCH or spawns children.
