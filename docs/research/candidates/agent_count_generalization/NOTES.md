@@ -18640,3 +18640,31 @@ committed/published inputs and no old checkpoints. Fresh actual-node memory/paus
 checks remain launch admission; no new owner or Pro decision is required. Preserve the
 returned operation reference and arm detached observation. The planned two fits and all
 fixed N5/N7 signs, N6 costs, own-learning readings and no-extension rules remain unchanged.
+
+
+## 2026-09-24 — B18 paired batch admitted and under detached observation
+
+The single fixed F→M batch was accepted at2026-09-24T17:21:23.383233Z on native node
+`wsl_4070`, using published source `0f4671475c275db52abc19219d42b4fe9ee664fa` and seed1004101.
+Native admission read main `d7877e4c166f10079deac3b78ad1df46b0272f3f`, checked the current
+owner pause/lead, source publication, fresh actual-node memory and duplicate claim, then
+created the detached operation. The [runner-written manifest](../../../../runs/agent_count_generalization/s1_ordinary_roster_training_b18_b1_s1004101/launch-manifest.json)
+preserves the exact command, immutable source snapshot, operation reference and process
+identities; the [admission preflight](../../../../runs/agent_count_generalization/s1_ordinary_roster_training_b18_b1_s1004101/admission-preflight.json)
+preserves the launch checks. Both files were copied without modification and their SHA256
+digests independently matched the native files.
+
+The first detached observation at2026-09-24T17:25:57.970052Z reads admission/claim accepted,
+execution running and consistent records, with recorded and actual runnerPID590142 and
+supervisorPID590141 identities equal (including start ticks and boot identity). There is no
+exit witness. Observation job `launch-s1-ordinary-roster-training-b18` is armed in generation173
+for completion, failure or a bounded25-minute checkpoint; its probe only reads this operation.
+A checkpoint rearms observation and never restarts the worker.
+
+Planned cost remains two fresh fits,720k training team steps and320k evaluation team steps
+across the complete paired batch. The runner performs initial evaluation before the first
+training transition. A running process does not establish that both fits have started or
+that planned work has occurred; actual started/completed fits and exposure will be read from
+the runner's outputs. No B18 scientific result, final model or learning claim is available at
+this boundary. N5/N7's four fixed signs, each arm's own learning, N6 deployment cost, adverse
+worlds and the no-extension rule remain the selected interpretation contract.
