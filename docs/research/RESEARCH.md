@@ -111,16 +111,22 @@ B04的8个服务损失世界（最差−1.928人）仍保留，不用两块合�
 增加训练n，不能改写B04的greedy Gamma、拼接旧U终点或证明训练高层无用。
 [完整B05、全部世界、随机流与成本](candidates/complementary_skill_learning/NOTES.md#2026-09-23--b05-complete-stochastic-deployment-improves-greedy-but-not-uniform)。
 
-B07 的新 E/M/U 区组进一步区分了训练方案收益与学得选择。仅将高层熵系数从.07改0的E，
-在相同M-S上下文上的团队/个体条件熵分别下降.189656/.394272；完整方案E-S相对真实U-R
-为 **+.061758309 J/+3.51984375人**，E-S相对M-S为+.040099335J/+1.06084375人。
-但 E-S−E-R为−.001302210J/−.133人，选择增量相对M也未增加；E-R−U-R反而为
-+.063060519J/+3.65284375人。这支持一个条件性的训练方案/库改善事实，没有满足
-“降低熵释放有用学得选择”的完整预测，也未分离优化路径、经验分布与共同适应的贡献。
-主比较31/32世界均值改善，仍有世界少服务2.0015人，最差同编号流单回合少7.836人；
-四流平均不能覆盖单回合损失。每臂仍仅一个新训练实例，四流和32世界不增加训练n，
-本次M−U正号不抹去B06反号。已选择B08独立训练区组复核较窄的方案收益；它不把失败的选择预测重新命名为成功。
-[完整B07、原生分量与全部损失](https://github.com/CartmanFatass/My-paper-code/blob/86e919cc47b10e1c1caa7f045001f8e5dcb3c46b/docs/research/candidates/complementary_skill_learning/NOTES.md#2026-09-24--b07-complete-entropy-intervention-improves-this-package-without-learned-readout-gain)。
+B07/B08 两个新 E/M/U 训练区组区分了训练方案收益与高层熵改动的增量。E仅将高层熵系数
+从.07改0，共同M-S输入上的团队/个体条件熵在两块均降低；E-S相对真实U-R的J/服务差分别为
+**+.061758309/+3.51984375**、**+.029553306/+.53275**。各臂都有实际有用学习，故保留
+相对认真训练U的条件性方案收益。可是E-S−M-S从 **+.040099335/+1.06084375** 转为
+**−.014004815/−.43340625**；B08共同输入熵仍降低.635336/.255063，E相对M的质量却在32世界
+均更低。降低熵的分布变化已发生，其原生增量没有完整复现，不能只用E/U正差给该修改记功。
+
+两块E-S−E-R及选择交互I均负，未支持“降低熵释放有用学得选择”。E-R−U-R仍分别为
++.063060519/+3.65284375、+.033471975/+.79565625，优化、训练曝光与共同适应未被分离。
+B07世界1700203的E-S−U-R为−.010310J/−2.0015人，同编号流最差回合少7.836人；
+B08有9/32世界均值少服务，最差
+1700228为−.000348J/−1.773人，嵌套S3/R3回合少4.804人。S1高度罚下降是J分量，
+不是电池或实测节能。两训练块、已曝光世界及四流不建立稳定排序、互补机制或确认；
+B04/B06 M−U反号继续保留。已结束原样零高层熵追加，不升为默认改进；下一选择须有独立用途。
+[完整B07、原生分量与全部损失](https://github.com/CartmanFatass/My-paper-code/blob/86e919cc47b10e1c1caa7f045001f8e5dcb3c46b/docs/research/candidates/complementary_skill_learning/NOTES.md#2026-09-24--b07-complete-entropy-intervention-improves-this-package-without-learned-readout-gain)；
+[完整B08、全部反例与投入判断](https://github.com/CartmanFatass/My-paper-code/blob/b69ffa796e3d7268ef346f2c1a5224be216c07ab/docs/research/candidates/complementary_skill_learning/NOTES.md#2026-09-24--b08-complete-package-benefit-recurs-but-entropy-increment-reverses)。
 
 低层判别奖励的负均值也不能直接判断其有害。S1共同初始化的完整M/T比较只将原生系数.5改为0，
 保留技能、高层、判别器训练和熵；真实存储奖励、低层GAE/critic目标改变，首轮原生事实与D2回报匹配。
@@ -501,7 +507,7 @@ B/UCOPE 的局部预测、一步优势或真实后缀信用没有自动转成稳
 
 | Direction | Question | State | Lead runtime | Standing and next step |
 | --- | --- | --- | --- | --- |
-| `complementary_skill_learning` | 固定 N/k、完整高低层共同学习时，能否形成提高原生 UAV 服务的技能组合，并区别于普通曝光、通用辅助优化与共同适应？ | exploring | Codex DM (independent session) | **B07训练方案改善、选择修复预测未成立；B08独立训练区组复核已固定。** B07 E-S−U-R为+.061758309J/+3.51984375人，E-S−M-S为+.040099335J/+1.06084375人，但E-S−E-R为−.001302210J/−.133人；局部损失及B06反号保留。完整Pro已核验并采纳，新E/M/U各360k、3fits/1.08M train+400k eval，保留B07评价世界/四流，真实更换训练初始化、世界与私有RNG；新M生成共同参考池。正实施和独立检查，0新fits；检验净用途P与激励增量D的再现，不改写失败的选择解释、不自动确认。[完整B07](https://github.com/CartmanFatass/My-paper-code/blob/a3a7c0c1bf94aaa354c1fc725875e97d7a53a46f/docs/research/candidates/complementary_skill_learning/NOTES.md#2026-09-24--b07-complete-entropy-intervention-improves-this-package-without-learned-readout-gain)、[答复及固定B08/L0](https://github.com/CartmanFatass/My-paper-code/blob/a3a7c0c1bf94aaa354c1fc725875e97d7a53a46f/docs/research/candidates/complementary_skill_learning/NOTES.md#2026-09-24--recurrence-advice-adopted-fixed-b08-emu-and-l0)。[任务路由](#session-routing)。 |
+| `complementary_skill_learning` | 固定 N/k、完整高低层共同学习时，能否形成提高原生 UAV 服务的技能组合，并区别于普通曝光、通用辅助优化与共同适应？ | exploring | Codex DM (independent session) | **B08三臂完整验收：E/U方案收益再现，E/M熵增量反转。** P为+.029553306J/+.53275人，D为−.014004815J/−.43340625人；学得选择仍不优于随机读出，服务损失保留。固定3fits/1.48M总步已结束，不升零熵为默认或自动确认。下一项前瞻咨询比较“两个现有U库保持开局个体标签”与结束同S1诊断投入：拟0fits/256k评价，尚未选择或执行；不接管DM1普通L比较。[完整结果](https://github.com/CartmanFatass/My-paper-code/blob/b69ffa796e3d7268ef346f2c1a5224be216c07ab/docs/research/candidates/complementary_skill_learning/NOTES.md#2026-09-24--b08-complete-package-benefit-recurs-but-entropy-increment-reverses)、[下一选择](https://github.com/CartmanFatass/My-paper-code/blob/9b97ec121174c74a68694b223a70983fe549ff32/docs/research/candidates/complementary_skill_learning/NOTES.md#pro-question-2026-09-24-random-renewal-use-after-b08)。[任务路由](#session-routing)。 |
 | `agent_count_generalization` | 固定 k、回合内固定 roster 时，HMASD 对未见团队数量 N 的服务能力和泛化代价是什么？ | exploring | Codex DM (independent session) | **B16三fit完整验收；B17新世界部署比较已固定，实施中。** N8的L−SET三块平均+.085041285 J/+5.8680208人/步，H6−L三块均负，平均−.013991995 J/−1.5402917人；L已作为普通参照。H6局部优势、L较低观测最低服务及N6反号保留。B17固定全部三对L/H6 final45，新N8/6/4共18面板288k步，加6旧N8复现96k步；0fits/384k总评价，检验这些资产的部署范围。Pro全文已核验保存，尚未执行；不建立训练总体或技能因果结论，不改B15联合确认。[完整B16](candidates/agent_count_generalization/NOTES.md#2026-09-24--b16-complete-local-ordinary-control-changes-the-n8-comparator)、[B17采纳与L0](candidates/agent_count_generalization/NOTES.md#2026-09-24--b17-advice-adopted-fixed-fresh-world-deployment-comparison-and-l0)。[任务路由](#session-routing)。 |
 | `uav_service_auxiliary` | 在 S7 完整共同学习中，怎样把服务改善转成包含返航风险的净收益？ | exploring | Codex DM (independent session) | **B08固定A/N批次已原生准入，正在共同初始F评价。** 共享完成段修复与候选采集分别通过独立审阅，CPU及实际CUDA检查通过；输入8725d2f3e。既定N→A、各180k训练/30更新和同F部署不变，同任务观察原始句柄，尚无科学结果。两臂共用延期完成段/真实terminal/最终前缀censor合同；承认混合行为和高层资格改变，不宣称无偏或偏差抵消。B07有限用途及5/32、3/32服务损失保留。[准入与观察](candidates/uav_service_auxiliary/NOTES.md#2026-09-24--b08-fixed-batch-admitted-and-initial-f-panel-running)、[完整合同](candidates/uav_service_auxiliary/NOTES.md#2026-09-24--b08-boundary-advice-saved-common-completed-segment-contract-adopted-and-core-l0)、[B07结果](candidates/uav_service_auxiliary/NOTES.md#2026-09-24--b07-complete-native-h3000-feedback-restores-energy-with-material-service-loss-worlds)。[任务路由](#session-routing)。 |
 | `goal_conditioned_entity_aggregation` | 当前技能条件化的实体聚合，能否比原始 MLP 或普通条件化池化提供有用的完整共同学习收益？ | reserve | Codex DM (independent session) | 原直接 DM task `01a0c7e4-e1aa-7460-a6bb-43db5c1b0898`，host `local`；原 checkout `/home/fires/.codex/worktrees/query-aggregation-sept22/hmasd-wsl` 已缺失，branch `codex/goal-conditioned-aggregation-20260922` 与原 lead 保留。固定 B01 O/P/E 的 3 fits 全部完成：每臂360k，共1.08M train/48k eval。Root 已从原节点取回并完整核对 E，三臂 J=.509137/.159861/.183016；P−O=−.349276、E−O=−.326121，均32/32世界不利；E−P=+.023155（20正/12负）。fit-body O/P/E=89.9204/109.7429/91.5859 min。每臂一个训练实例，结束这两个具体配方当前投入，不否定整个表示类；不新增第四条持续研究线。无运行中训练，原 DM 最终 notebook 补录仍待其承接，不声称已重载或交接。[P完整记录](candidates/goal_conditioned_entity_aggregation/NOTES.md#2026-09-22--b01-p-complete-and-read-e-remains-the-fixed-third-arm)、[E原生输出](../../runs/goal_conditioned_entity_aggregation/b01_e_s922611/summary.json)、[恢复事实与项目判断](archive/2026-09-23/RESEARCH-scientific-management-adopted.md#decision)。 |
@@ -584,15 +590,17 @@ N6第三块H6仍较L多+.026644 J/+.843625人，局部H6优势亦存在。当前
 先质询新世界及下侧N部署范围；这不识别技能因果作用，不自动购买确认或改写B15。
 后继对照应区分局部结构、固定上下文、随机上下文与学得选择；直接把标签数6改1会改变FiLM参数形状，
 同时删除判别器奖励又改变学习目标。随机上下文与H6差异不显著不能证明等价或把作用唯一归为正则化。
-降低高层熵系数的B07检验现已完成：相同输入条件熵确实降低，E的完整方案相对真实U
-及原M有正平均J/服务；但同库E-S−E-R为负，选择增量没有增加。E在随机R读出下同样改善，
-故保留条件性训练方案收益，降低“释放有用学得选择”这一解释的可信度；优化与训练曝光仍是
-竞争解释。该结果不把零高层熵提升为默认配方，也不以四流/世界数建立训练总体结论。
-已采纳完整建议，选择B08独立E/M/U区组复核：固定评价世界与四流，仅更新实际训练区组和新M参考池；
-同时保留P净用途与D激励增量。尚未运行，不自动进入确认。[前瞻合同](https://github.com/CartmanFatass/My-paper-code/blob/a3a7c0c1bf94aaa354c1fc725875e97d7a53a46f/docs/research/candidates/complementary_skill_learning/NOTES.md#2026-09-24--recurrence-advice-adopted-fixed-b08-emu-and-l0)。
-B07个体标签保留.9pi+.1/6，团队无同样概率下界；本次M-S固定上下文仅用于条件分布评分。
-固定标签训练对照在技能线仍未选定，不与DM1已选的普通局部循环对照混同。
-[完整证据](https://github.com/CartmanFatass/My-paper-code/blob/86e919cc47b10e1c1caa7f045001f8e5dcb3c46b/docs/research/candidates/complementary_skill_learning/NOTES.md#2026-09-24--b07-complete-entropy-intervention-improves-this-package-without-learned-readout-gain)、[前瞻投入问题](https://github.com/CartmanFatass/My-paper-code/blob/86e919cc47b10e1c1caa7f045001f8e5dcb3c46b/docs/research/candidates/complementary_skill_learning/NOTES.md#pro-question-2026-09-24-recurrence-or-revision-after-b07)。
+技能线B08已完整读完：E-S相对U-R的有限用途在第二个训练区组出现，但E-S相对M-S的
+熵增量反转；E的共同输入熵确实降低，S−R及交互仍负。因此保留方案收益，结束原样零高层熵
+追加，不把失败的选择解释改名为成功。全部局部服务损失、B04/B06反号及两个开发块的范围保留。
+[完整B08及既有建议的分支判读](https://github.com/CartmanFatass/My-paper-code/blob/b69ffa796e3d7268ef346f2c1a5224be216c07ab/docs/research/candidates/complementary_skill_learning/NOTES.md#2026-09-24--b08-complete-package-benefit-recurs-but-entropy-increment-reverses)。
+
+当前前瞻问题是：是否值得用B07/B08两个已学U库，比较保持开局个体标签与每10步均匀重抽，
+还是结束这条同S1诊断投入。拟用全部原四流和32世界，128k干预评价加128k原R复现、0fits；
+尚未选择或执行。保留六标签参数形状、局部反馈和循环记忆，团队随机抽样照旧；U的R读出本来
+没有学得协调器选择，不能宣称该比较移除协调器或证明固定标签训练足够。长期驻留的部署分布
+改变是竞争解释，正负结果都只能回答这些既有库的用途。DM1 B10只提供问题动机，B16/B17的
+普通L及新世界比较继续由DM1负责，不在这里重复。[聚焦问题与成本](https://github.com/CartmanFatass/My-paper-code/blob/9b97ec121174c74a68694b223a70983fe549ff32/docs/research/candidates/complementary_skill_learning/NOTES.md#pro-question-2026-09-24-random-renewal-use-after-b08)。
 
 动作饱和及原始高斯熵的优化激励是实际疑点，但“保存原始动作/log-prob，执行裁剪”本身不推出
 score-function梯度有偏；CAPG原文给出同期望、较低方差估计器。这不宣称PPO/GAE完整实现无偏，
@@ -610,7 +618,7 @@ S7的B04/B05在H1500评价未激活切断、耗尽或充电，风险学习的有
 | 主线 | 当前固定比较与成本 | 这次观察改变什么 |
 | --- | --- | --- |
 | DM1：泛化与训练条件 | B17固定6个final45资产、18个新N8/6/4面板及6旧N8复现；0fits、384k团队/2.496M UAV评价步、768episodes/12000策略调用，实施与独立检查前。[完整采纳与范围](candidates/agent_count_generalization/NOTES.md#2026-09-24--b17-advice-adopted-fixed-fresh-world-deployment-comparison-and-l0)。 | L已是普通工作参照；下一观察检验新世界及小N的部署用途，保留全部区组、损失世界和最低服务。复现不算新证据，新世界不算新训练重复；所有结果按固定范围结束，不自动扩样或确认。 |
-| DM2：有用技能与协作学习 | B08固定新E/M/U各360k，3fits/1.08M train+400k eval；沿用B07五初始/二十最终面板及四流评价，新M参考池6400上下文/44800因子。正实施/检查，0fits。[完整建议与前瞻](https://github.com/CartmanFatass/My-paper-code/blob/a3a7c0c1bf94aaa354c1fc725875e97d7a53a46f/docs/research/candidates/complementary_skill_learning/NOTES.md#2026-09-24--recurrence-advice-adopted-fixed-b08-emu-and-l0)。 | 同时复核E-S−U-R净用途与E-S−M-S激励增量；实际学习、共同输入熵、随机读出、全部服务损失分别保留。可改变E作为工作候选的投入优先级，仍不识别互补机制；反转/未决允许结束本次购买，不自动扩样或确认。 |
+| DM2：有用技能与协作学习 | B08固定3fits全部读完，1.08M train+400k eval；runner合计173.81分钟。正咨询两个现有U库的开局个体标签保持比较，拟0fits/128k新评价+128k复现，尚未选定。[完整结果](https://github.com/CartmanFatass/My-paper-code/blob/b69ffa796e3d7268ef346f2c1a5224be216c07ab/docs/research/candidates/complementary_skill_learning/NOTES.md#2026-09-24--b08-complete-package-benefit-recurs-but-entropy-increment-reverses)、[前瞻问题](https://github.com/CartmanFatass/My-paper-code/blob/9b97ec121174c74a68694b223a70983fe549ff32/docs/research/candidates/complementary_skill_learning/NOTES.md#pro-question-2026-09-24-random-renewal-use-after-b08)。 | 保留E/U净用途与E/M增量反转，降低原样零熵配方优先级；新观察只有在能改变部署用途判断时才值得买，停止同S1诊断是明确替代。不自动加fit、流或确认，不把保持标签解释成训练必要性结论。 |
 | DM3：服务收益与风险控制 | B08固定新A/N各180k、2环境×3000步×30更新、同F部署。实际CUDA两项短程检查通过，固定批次已原生准入；先共同初始评价，再N→A，过程错误保留部分证据，不自动重跑。至多58内部跨版本段及2个最终未完成前缀/18实际transition须保存。[准入与句柄](candidates/uav_service_auxiliary/NOTES.md#2026-09-24--b08-fixed-batch-admitted-and-initial-f-panel-running)。 | 完整服务/J/风险及自身学习仍是主读数，一对探索不扩样。混合行为及终点高层信用缺失是共同协议的实际限制；计数小不证明影响可忽略，也不诊断B07坏世界或识别中介。 |
 
 ### 推进与投入选择
@@ -640,7 +648,7 @@ horizon读取，评价、实现、检查、收取和支持成本另计；0fit不
 | --- | --- | --- | --- |
 | Root：科学项目管理 | `01a0cd93-9107-7701-a7e5-84fb071ea8f7` / `local` | `/home/fires/.codex/worktrees/project-management-sept23/hmasd-wsl` · `codex/project-management-sept23` | [项目判断与已完成咨询](archive/2026-09-23/RESEARCH-scientific-management-adopted.md#decision)；原负载操作已完整结束，旧源码/轨迹留在方向表所列原工作区。 |
 | DM1：智能体数量泛化 DM | `01a0c6ef-cdd4-7113-b2d9-20487e35171b` / `local` | `/home/fires/.codex/worktrees/7fef/hmasd-wsl` · `codex/agent-count-generalization` | B16全部读完；Pro未写回已核验，完整答复已由DM保存并采纳[B17固定合同/L0](candidates/agent_count_generalization/NOTES.md#2026-09-24--b17-advice-adopted-fixed-fresh-world-deployment-comparison-and-l0)。本任务负责新评价器实施、独立审阅及后续原生准入；当前无运行中实验，无待收Pro。不得重发旧问题或重启旧批次。 |
-| DM2：实际互补技能学习 DM | `01a0cdb8-10c9-7743-a05a-6dcfc42621c5` / `local` | `/home/fires/.codex/worktrees/5916/hmasd-wsl` · `codex/complementary-skill-learning` | B07全部验收；Pro同key全文已收取、核验未写回并保存。[完整答复](https://github.com/CartmanFatass/My-paper-code/blob/a3a7c0c1bf94aaa354c1fc725875e97d7a53a46f/docs/research/candidates/complementary_skill_learning/NOTES.md#pro-question-2026-09-24-recurrence-or-revision-after-b07)及[已采纳B08合同/L0](https://github.com/CartmanFatass/My-paper-code/blob/a3a7c0c1bf94aaa354c1fc725875e97d7a53a46f/docs/research/candidates/complementary_skill_learning/NOTES.md#2026-09-24--recurrence-advice-adopted-fixed-b08-emu-and-l0)在方向分支，沿NOTES接续适配实现、独立检查和固定M→E→U执行。 |
+| DM2：实际互补技能学习 DM | `01a0cdb8-10c9-7743-a05a-6dcfc42621c5` / `local` | `/home/fires/.codex/worktrees/5916/hmasd-wsl` · `codex/complementary-skill-learning` | B08 M/E/U全部验收，旧观察事件已消费，无运行中实验。[完整结果](https://github.com/CartmanFatass/My-paper-code/blob/b69ffa796e3d7268ef346f2c1a5224be216c07ab/docs/research/candidates/complementary_skill_learning/NOTES.md#2026-09-24--b08-complete-package-benefit-recurs-but-entropy-increment-reverses)及[新的随机重抽用途问题](https://github.com/CartmanFatass/My-paper-code/blob/9b97ec121174c74a68694b223a70983fe549ff32/docs/research/candidates/complementary_skill_learning/NOTES.md#pro-question-2026-09-24-random-renewal-use-after-b08)在方向分支；沿同一新Pro操作收取全文、核验写回后作投入选择，不重发旧问题或重启已完成批次。 |
 | DM3：控制用途预测小模块 DM | `01a0c9af-d5cd-7d70-b5e8-9db2c598ad4e` / `local` | `/home/fires/.codex/worktrees/d319/hmasd-wsl` · `codex/uav-service-predictive-control` | [B08原生准入和同句柄观察](candidates/uav_service_auxiliary/NOTES.md#2026-09-24--b08-fixed-batch-admitted-and-initial-f-panel-running)；固定输入8725d2f3e已开始共同初始F评价，随后按既定N→A顺序执行。完整Pro答复、修订合同、核心/候选审阅和CPU/CUDA证据均在NOTES；本任务后续同句柄收取与完整验收，不重启或转发。 |
 
 未活动方向的历史联系人及证据工作区仍在各自 standing 中，不能据此新建或重启任务。
@@ -648,6 +656,8 @@ horizon读取，评价、实现、检查、收取和支持成本另计；0fit不
 <a id="portfolio-review-2026-09-23-scientific-management-and-next-learning-investment"></a>
 
 [已完成项目复盘：完整答复、数值纠正与采纳决定](archive/2026-09-23/RESEARCH-scientific-management-adopted.md#portfolio-review-2026-09-23-scientific-management-and-next-learning-investment)。
+
+技能方向B08完成前的执行计划已退役至 [B08完成前快照](archive/2026-09-24/RESEARCH-complementary-skill-b08-complete.md)；当前结果和下一投入问题见上方技能方向。
 
 服务方向历史计划保留在 [B07完成前快照](archive/2026-09-24/RESEARCH-uav-service-b07-complete.md)、[B08选择前快照](archive/2026-09-24/RESEARCH-uav-service-b08-selected.md)、[边界问题发现前快照](archive/2026-09-24/RESEARCH-uav-service-b08-boundary-premise.md)及[边界合同采纳前快照](archive/2026-09-24/RESEARCH-uav-service-b08-boundary-adopted.md)；当前已采纳合同及其限制见上方服务方向。
 
