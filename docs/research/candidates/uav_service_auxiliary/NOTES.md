@@ -8848,3 +8848,155 @@ fits; they own and clean scratch through pytest. Use existing local scientific v
 nothing. Independent engineering Reviewer checks the resulting high-risk collector/evaluator
 and boundary changes; the DM accepts. No result-bearing launch before exact reviewed inputs
 are committed, pushed and admitted on the actual configured node.
+
+## 2026-09-24 — B08 implementation exposes an unresolved ordinary high-level boundary contract
+
+No B08 fit or result-bearing attempt has started. The existing feedback-training Pro operation
+is fully reconciled, its complete answer saved and read. This entry records new source evidence
+from implementing its selected comparison, not a failed scientific prediction or a request to
+resend that consultation. The independent evaluator/config/opportunity work can proceed; the
+training entry fails before output creation until a coherent boundary contract is selected.
+
+The Implementer and independent engineering Reviewer traced ordinary strict HMASD at
+`001dd55b2e6ed7e6a5e5dc746dcc86818dae01a0` and found three coupled defects:
+
+1. `hmasd/agent.py::_store_coordinator_experience` closes strict high samples only at
+   `skill_timer == k-1`, ignoring an earlier native ending. The collector then calls
+   `reset_env_state`, which removes the pending decision/reward. Thus an actual terminal
+   skill can lose credit and a preceding nonterminal high sample can link in GAE to the
+   next episode. The native all-exhausted/no-charging ending exists in
+   `envs/pettingzoo/relay/energy_aware.py::step`. Its occurrence in B08 is unknown; it cannot
+   be treated as impossible or as a technical failure that selectively excludes an adverse run.
+2. `clear_buffers` clears timers and pending/reward state. On the next `step`, a lane missing
+   a timer gets random skills and reset recurrent arrays. Preserving physical/F state alone
+   therefore does not preserve the held skill and GRU of a live native episode.
+3. A pending ordinary high decision stores a rollout-local `time_step`. Closure writes its
+   old likelihood/value to that row, and the high sampler gets decision state/observation/skills
+   from the corresponding low row. Elapsed duration is also computed by local-row subtraction.
+   Restoring the dictionary after buffer reset can write to unrelated data or fail. Separately,
+   high GAE currently bootstraps the last completed decision from the global collection boundary;
+   if a new pending segment began earlier, its actual decision value is the appropriate next
+   high-decision successor. Snapshot/restore does not repair either issue.
+
+There is no ordinary handoff/flush API. D2 has a private segment flush and a different contract;
+turning on D2 is not an implementation of the selected ordinary comparator. The Reviewer ran
+12 existing storage/recurrent-mask checks successfully, but they do not cover this boundary.
+The meaningful regression is k4, collection12, one native ending at row5: row4's decision closes
+terminally after two rewards, row10's decision survives the update and closes after two further
+transitions with its original facts and four actual rewards, and the preceding completed decision
+bootstraps from row10. Low rows must retain their intended exactly-once epoch eligibility.
+
+The old behavior log-probability by itself is not a corrupted PPO denominator. A deferred high
+sample may, however, finish under the updated low policy and enter the following high update;
+this changes completion/update eligibility and the stationarity premise. An unfinished high
+sample at the fixed thirtieth endpoint also needs an explicit rule. We have not established
+that a small bookkeeping-only repair preserves every previously selected condition. This is
+not proof that a valid continuation implementation is impossible.
+
+The DM retains the scientific A/N question and favors keeping equal actual interaction exposure
+with a common, explicitly described complete-segment repair if its learning semantics are sound.
+Equal counts of whole native episodes would give outcome-dependent and potentially unequal
+actual exposure; silently changing to that comparator is not acceptable. Neither dropping/resetting
+live history, inventing a fresh action at a collection boundary, padding after termination, nor
+treating an adverse native ending as run failure resolves the selected question. A substantially
+larger algorithm project may not be worth this one exploratory comparison. The unresolved choice
+therefore changes the ordinary-training premise, rather than merely requesting code approval.
+
+Current published main `60ecab12875492dd4a1407dc238bd3c7e83e5bc4` was refreshed and read. Pause
+remains lifted and the direction/lead remains active. Shared background topic6 still supports
+F's finite physical usefulness while retaining B07's material service losses and unresolved
+training-exposure/geometry explanations. None of these source defects diagnoses the cause of
+B07's fixed-policy losses or invalidates its retained observations. No shared learner was changed.
+
+## Pro question 2026-09-24 ordinary-boundary-training-premise
+
+Conversation: reuse the current private Jev direction conversation from the reconciled local
+operation; its address remains local. This is a new source-grounded follow-up, not a resend of
+`feedback-aware-training-after-h3000`.
+
+Question: Given the newly demonstrated ordinary strict-HMASD boundary defects above, what is
+the smallest defensible common training contract for the selected A-versus-N, same-F-deployment
+comparison? In particular, can independent decision-time high storage with complete segments
+deferred across a low-policy update still support this ordinary-learning package comparison,
+and exactly how should completion eligibility, high GAE and the final unfinished segment work?
+If that is not a sound bounded repair, choose and justify one concrete smaller revision or
+recommend ending this unstarted recipe. Please resolve the scientific premise and estimator
+meaning; an engineering approval or another generic reminder to preserve state would not answer it.
+
+Standing: The immediately preceding entry supplies the actual new evidence and the DM's working
+preference. The preceding full Pro Answer and fixed B08 L0 remain the intended comparison,
+including same new initialization, S7-S2/N8/k10/native H3000, unchanged F only in A training,
+common F deployment, full native HMASD objective and learner groups, seed915031, N then A,
+2lanes ×3000 steps ×30 updates =180k actual training transitions per arm, dev941001–941008,
+final942001–942032, one common initial F panel and two endpoints. No B08 fit has started and
+these new worlds have not been evaluated. The complete B07 result still supports considering
+the training intervention; the source defects do not turn its service-loss worlds into a
+diagnosed training failure. One pair remains exploratory, with training n1 per arm.
+
+The complete prior advice explicitly required preserving native live history on an early-ending
+offset but did not specify cross-buffer high sample storage, eligibility or final censoring;
+its claim that the implementation did not yet exist was correct. These are now material facts.
+The candidate-only L0 cannot provide them through the present API. Ordinary terminal closure
+and separating live-state reset from storage clear look like necessary common correctness
+repairs, but they alone do not settle high-level continuation.
+
+Please test the favored repair against the strongest alternative: keeping whole complete
+episodes/skills and prospectively revising update or actual-interaction exposure. Do not quietly
+equate those exposures, call mixed-policy high transitions strictly on-policy, invent a
+sampled action for a suffix, erase rewards, add a loss mask/new head/mode feature, or assume
+no native early ending. The native likelihood remains the actor's proposal; F only maps its
+executed command. If the fixed cadence, exposure and unaltered estimator cannot all be kept,
+name which condition must change and what narrower comparison it would measure. A useful
+minimal counterexample or reasoning model is welcome; no new framework, result run, theory
+survey or confirmation is requested.
+
+Context (immutable reasoning inputs; attached excerpts will preserve these source meanings):
+
+- Governance at source_sha: `docs/project/OPERATING_CONSTITUTION.md` sections1–8, especially
+  DM autonomy, advisory consultation, shared correctness and the five scientific minimums.
+  Owner pause and actual direction lead are read at main
+  `60ecab12875492dd4a1407dc238bd3c7e83e5bc4`; no newer stop instruction is present.
+- Methods at source_sha: `.agents/skills/hmasd-scientific-tools/SKILL.md`, sections on updating
+  explanations, comparators and cost/exposure; `.agents/skills/hmasd-research-engineering/SKILL.md`,
+  Core versus experimental, Checks and review, and runtime notes on policy freshness/tails.
+  These are methods under the constitution, not extra permission requirements.
+- Shared background at main `60ecab12875492dd4a1407dc238bd3c7e83e5bc4`:
+  `docs/research/RESEARCH.md` topic6's B03–B07 service/risk/feedback evidence and active B08 row.
+  Its effect here is to require a competent genuinely trained ordinary comparison and actual
+  service readings while keeping geometry, state exposure and learning explanations unresolved.
+- Exact source at `001dd55b2e6ed7e6a5e5dc746dcc86818dae01a0`: `hmasd/agent.py` methods
+  `clear_buffers`, `reset_env_state`, `_batched_assign_skills`, `step`,
+  `_store_coordinator_experience`, `store_transition`, `store_transition_batch`, `update`;
+  `hmasd/utils.py::RolloutBuffer` high data storage, high GAE and high sampler;
+  `experiments/candidates/uav_service_auxiliary/b04/native.py` collector/update/clear path;
+  `envs/pettingzoo/relay/energy_aware.py::step` native early ending. D2 flush is contrast only.
+- This NOTES file at source_sha: the full Answer to
+  `Pro question 2026-09-24 feedback-aware-training-after-h3000`, the fixed B08 comparison/L0,
+  the new boundary finding entry and this question. Prior empirical results retain their
+  immutable evidence: B07 execution `47d56c9bcdc9fa9d6edee43ae0b4d44755115708`, interpreted
+  in the complete B07 entry saved at `e49da2a9d2a69bb6750afa5ecadc372e36ebe848`.
+  No raw re-audit of B07 is needed to settle this boundary decision; identify limits if citing it.
+
+Prospective cost: no new training has started. The existing selected plan is 2fits/360k train
+and at most360k evaluation transitions, 120 evaluation episodes. Any recommended change must
+state its actual exposure/update/tail meaning and dominant engineering cost before DM selection;
+do not expand fits, tune F, reuse old weights as the main baseline, or add panels. The strongest
+investment alternative remains retaining B07 and declining this unstarted recipe. This is an
+ordinary scientific choice, not an owner approval stage or an obligation to build infrastructure.
+
+Constraints: no experiments or changes outside the unique empty `### Answer` below in
+`docs/research/candidates/uav_service_auxiliary/NOTES.md`, branch
+`codex/uav-service-predictive-control`, repository `CartmanFatass/My-paper-code`. Reason from
+the immutable source_sha supplied in the actual message, then fetch the latest target blob
+before writing. Preserve the question and every byte outside this Answer; stop on overlapping
+edits. Return the actual Answer commit on successful write. If writing is unavailable, return
+the complete answer in chat, not a blob SHA, receipt or link. Do not create another record.
+
+Return: choose a concrete defensible contract or explain why the fixed recipe should stop;
+separate unchanged learner mathematics from changed behavior/eligibility or return semantics;
+resolve native termination, a mid-skill collection boundary and the fixed last endpoint;
+identify the smallest discriminating engineering reproduction and the scientific interpretation
+that remains supported. State MATERIAL_DISSENT yes/no about the unamended B08 training premise,
+source use and any unread consequential evidence. The DM decides after reading the full advice.
+
+### Answer
