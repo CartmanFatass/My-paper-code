@@ -7422,3 +7422,30 @@ This explicitly revised pre-admission request is authorized within the fixed cel
 proving no earlier E operation exists; it does not bypass or reset a claim. Keep the failed
 outer record and use `csl-b07-e-staged-455536ebd` for the corrected supervisor request.
 No learner, launcher, frozen experiment or output artifact was edited to accommodate it.
+
+The corrected E request was accepted at2026-09-24T08:50:26Z; its
+[native manifest](../../../../runs/complementary_skill_learning/b07_e_260924001_455536ebd/launch-manifest.json)
+is the exact admitted handle. Fresh actual-node preflight passed with14,587,650,048available/
+effective bytes. At08:51:30Z the scientific runner and native supervisor were running with
+their recorded identities, consistent records and no exit witness; stderr was empty. The
+incomplete E summary confirms public armE, actual lambda_h=0, lambda_l=.05, coordinator
+training enabled, and the exact staged M-reference hash/source metadata. Initial S0/R0 were
+written:32000evaluation transitions/64episodes,50probability forwards/1600contexts/11200factor
+outputs. Its then-persisted training counters were0; this is an interim write, not a claim
+that subsequent training has not begun or final cost is0. Common-reference scoring remains
+scheduled once after E training and its prescribed final panels.
+
+Collected manifest/preflight/config/launch-status bytes matched actual-node SHA256 values
+`2e98647e57aa0af607ef34caa5b545b0fd8b45ae90994cbbfb81532e55508d3b`,
+`989db404f0e734d1c9c9c2e57987456712d81546d667c8f8ef2c699700b33c5c`,
+`dbe56cc6baa2c64c5aff146eedd9545909f59873a8bdef366b16a122352d11ce`,
+`c09d9cc782c5e5819ff511f65143abc0c386424b5e40fb3caa89f8b210b09c67`, respectively.
+The read-only native status is retained beside them. M acceptance/reference binding was
+published at230822b024d98784036e8a19097b4f2d04f8d44b; the pre-admission refusal and staged-path
+correction were published atc2969e249fbdb96e8353f00021a0ca995ef4b166 before the corrected request.
+
+Observer`launch-csl-b07-e-455536ebd` is armed at generation64,30s interval/20s timeout/1500s
+checkpoint window. The first drained observation at08:52:06Z actually adopted this accepted,
+running, consistent handle with0errors and no pending event/wake. No E result is accepted yet;
+await its same-handle checkpoint/terminal collection, then continue the fixed U cell. The
+earlier failed outer request remains a separate pre-admission failure, not a second E fit.
