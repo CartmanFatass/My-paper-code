@@ -441,7 +441,7 @@ B/UCOPE 的局部预测、一步优势或真实后缀信用没有自动转成稳
 
 | Direction | Question | State | Lead runtime | Standing and next step |
 | --- | --- | --- | --- | --- |
-| `complementary_skill_learning` | 固定 N/k、完整高低层共同学习时，能否形成提高原生 UAV 服务的技能组合，并区别于普通曝光、通用辅助优化与共同适应？ | exploring | Codex DM (independent session) | **B05完整结束，下一投入选择转向训练复现。** 冻结M库的S−O为+.047675 J/+2.72325人，S−R主比较却为−.000470 J/+.068266人；去旧R流后服务转负，保留全部损失与有限抽样精度。随机化改善贪心，未显示learned选择的额外价值；不加流、不调温度、不重写B04 Gamma。B04库收益仍只有一个训练对，B03反转继续构成反证。拟比较一对新M/U的复现价值与修订/停止，先基于完整证据咨询；尚无新fit启动。[完整B05及下一判断](candidates/complementary_skill_learning/NOTES.md#2026-09-23--b05-complete-stochastic-deployment-improves-greedy-but-not-uniform)。[任务路由](#session-routing)。 |
+| `complementary_skill_learning` | 固定 N/k、完整高低层共同学习时，能否形成提高原生 UAV 服务的技能组合，并区别于普通曝光、通用辅助优化与共同适应？ | exploring | Codex DM (independent session) | **B06固定新M/U训练对已选定，待实现/检查。** B05中S相对O提高J/服务，S−R却未显示额外用途且有局部损失；固定库不追加流或调参。B04的uniform库收益仍只有一个训练实例，B03反转继续限制解释。采纳完整Pro建议，只做新匹配M/U各360k、2fits，固定旧评价世界/标签流及六面板；检验整个训练制度的条件库收益复现，保留各自学习、全部服务代价和原Gamma，不识别高层梯度或互补机制。[固定B06与采纳](candidates/complementary_skill_learning/NOTES.md#2026-09-23--training-recurrence-advice-adopted-fixed-b06-mu-and-l0)、[完整B05](candidates/complementary_skill_learning/NOTES.md#2026-09-23--b05-complete-stochastic-deployment-improves-greedy-but-not-uniform)。[任务路由](#session-routing)。 |
 | `agent_count_generalization` | 固定 k、回合内固定 roster 时，HMASD 对未见团队数量 N 的服务能力和泛化代价是什么？ | confirming | Codex DM (independent session) | **B15固定确认进行中。** B14新H6/SET均学习，N8终点J/服务差+.071357/+5.282688人，仍有局部损失、质量/高度代价和普通调优不足。固定三独立区组、每臂3seed、N6/360k，共6fits；主张仅为新固定N8面板上的训练程序平均用途，要求预写J下界>0且服务下界>1。保持clip/.05熵、种子、顺序、终点和判读，不按分数扩样或更换对照。[固定claim](candidates/agent_count_generalization/CLAIM_bounded_count_transfer_20260923.md)、[采纳与L0](candidates/agent_count_generalization/NOTES.md#2026-09-23--b15-advice-adopted-fixed-conditional-mean-confirmation-and-l0)、[已接受操作恢复入口](candidates/agent_count_generalization/NOTES.md#2026-09-23--b15-first-fixed-cell-admitted-with-observation-adopted)。[任务路由](#session-routing)。 |
 | `uav_service_auxiliary` | 在 S7 完整共同学习中，怎样把服务改善转成包含返航风险的净收益？ | exploring | Codex DM (independent session) | **B05完整结束；B06固定O/F评价进行中。** B05最终J+241.885454、成本−.094165509而QoS−.026788931，14胜18负、8个零服务世界；开发J仍负。风险节省重复，服务增益未重复，原系数4配方不追加。B06在B04/B05两份N上比较原执行与合法余量返航反馈，0fits/最多240k eval，保留全部服务/风险与失败世界，不调阈值。[完整B05](candidates/uav_service_auxiliary/NOTES.md#2026-09-23--b05-complete-endpoint-risk-savings-recur-service-gains-do-not)、[固定B06](candidates/uav_service_auxiliary/NOTES.md#2026-09-23--b05-advice-adopted-b06-fixed-observation-only-return-feedback)、[已接受操作恢复入口](candidates/uav_service_auxiliary/NOTES.md#2026-09-23--b06-admitted-after-actual-cuda-checks)。[任务路由](#session-routing)。 |
 | `goal_conditioned_entity_aggregation` | 当前技能条件化的实体聚合，能否比原始 MLP 或普通条件化池化提供有用的完整共同学习收益？ | reserve | Codex DM (independent session) | 原直接 DM task `01a0c7e4-e1aa-7460-a6bb-43db5c1b0898`，host `local`；原 checkout `/home/fires/.codex/worktrees/query-aggregation-sept22/hmasd-wsl` 已缺失，branch `codex/goal-conditioned-aggregation-20260922` 与原 lead 保留。固定 B01 O/P/E 的 3 fits 全部完成：每臂360k，共1.08M train/48k eval。Root 已从原节点取回并完整核对 E，三臂 J=.509137/.159861/.183016；P−O=−.349276、E−O=−.326121，均32/32世界不利；E−P=+.023155（20正/12负）。fit-body O/P/E=89.9204/109.7429/91.5859 min。每臂一个训练实例，结束这两个具体配方当前投入，不否定整个表示类；不新增第四条持续研究线。无运行中训练，原 DM 最终 notebook 补录仍待其承接，不声称已重载或交接。[P完整记录](candidates/goal_conditioned_entity_aggregation/NOTES.md#2026-09-22--b01-p-complete-and-read-e-remains-the-fixed-third-arm)、[E原生输出](../../runs/goal_conditioned_entity_aggregation/b01_e_s922611/summary.json)、[恢复事实与项目判断](archive/2026-09-23/RESEARCH-scientific-management-adopted.md#decision)。 |
@@ -486,30 +486,58 @@ B/UCOPE 的局部预测、一步优势或真实后缀信用没有自动转成稳
 下一比较见[方向表](#active)。当前已接受的批次按原绑定完成，低分、完成一个配方或暂时无新候选
 都不自动结束 DM 的科学责任。可依据项目证据继续、复现、简化、转向或有理由停止。
 
-**当前工作解释（待检验）：** 层级训练可能通过训练目标与技能条件化，塑造能迁移到不同人数的低层
-反馈控制；其中部分用途可以在不持续采用高层新分配时保留，而部署时如何使用学得分配又可能损耗
-这种用途。人数线 B14 的新学习包收益、B10 的开局标签复用均值，以及技能线 B04 的 uniform 库收益
-与贪心部署损失共同提示这一解释。B05进一步显示固定M库的随机化可改善贪心，但学得分配尚未显示
-超过uniform的额外用途。这些结果来自不同对照与训练实例，不能合并成机制证明或增加同一主张的
-训练 n；B10/B05的局部服务损失也反对“在线分配无用”或随机化逐世界占优的普遍结论。
-[B14](candidates/agent_count_generalization/NOTES.md#2026-09-23--b14-complete-fresh-learning-reproduces-a-bounded-package-benefit)、
-[B10](candidates/agent_count_generalization/NOTES.md#2026-09-23--b10-complete-opening-assignment-replay-improves-means-with-consequential-local-losses)、
-[技能 B04](candidates/complementary_skill_learning/NOTES.md#2026-09-23--b04-complete-training-bank-gain-and-greedy-deployment-loss-coexist)、
-[技能 B05](candidates/complementary_skill_learning/NOTES.md#2026-09-23--b05-complete-stochastic-deployment-improves-greedy-but-not-uniform)。
+**当前工作解释（待检验）：** H6 的有限包收益可能来自局部循环控制、技能上下文或优化差别；
+“学得的高层选择产生了收益”尚无识别性证据。2026-09-24 外部 review 后核对已完成训练日志：
+人数 B03/B07/B14 的最终团队条件熵约为上限的95.5%/98.2%/96.7%，技能 B04 M 为95.2%，
+个体熵均接近上限。这加强了随机上下文这一竞争解释，降低以已有正差支持学得技能作用的理由。
+但熵项的标量大小不能证明其梯度压制任务梯度；均值接近最大也不等于逐状态/联合分布独立均匀。
+B14 与技能 B04 M 的最终判别器训练准确率分别为.273/.309与.317/.293，不能直接称为六类随机
+猜测的1/6；这些是训练集指标，尚非留出可辨识性证据。裁剪后 log-q 的平均奖励也不能证明奖励
+对状态/标签恒定。[人数 B14 原始日志与配置](../../runs/agent_count_generalization/s1_fresh_learning_b14_h6_s974201/summary.json)、
+[技能 B04 原始日志与配置](../../runs/complementary_skill_learning/b04_m_260923931_483819eba/summary.json)、
+[外部 DM1 review 含F11](https://github.com/CartmanFatass/My-paper-code/blob/bb5824caa7bde0ed40cc260074b1f794df2d3617/docs/Claude_docs/reviews/DM1_AGENT_COUNT_GENERALIZATION_REVIEW_20260924.md)。
+
+部署读取仍有用：B10 的开局复用均值改善伴随局部服务损失；技能 B02 M/B03 D/B03 G/B04 M 的
+own−uniform 平均服务差为−2.47/−2.01/−1.31/−2.35人，但 B02 task-only T 为 **+1.02人**
+（J差−.00158）。四个混合奖励实例的同向服务现象不能推广到全部已训练策略，B03 D/G又共享
+初始化与训练区组，不能作为四个独立同配方训练重复。新发布B05中，S−O为+.0477 J/+2.72人，
+S−R为−.000470 J/+.0683人；固定库随机化改善贪心，学得选择尚未显示额外用途，亦未证明等价。
+Root随后对已验收九份NPZ核对原哈希，只取renewal行作补充描述性读取（无新环境步或fit）：
+O的个体标签计数为[158,1452,2061,3618,770,1541]，六机同标签仅9/1600次，个体相邻重选
+改变1180/9408次；S四流团队标签4占1767/6400，R为1053/6400。这反对review的“贪心
+把所有机变成同标签”解释，不能据此识别收益成因或推断总体占优。选中标签的单个log-prob
+不是完整分类分布的逐决策熵；本次补读不修改B05主判读。
+[B05完整结果与数组哈希](candidates/complementary_skill_learning/NOTES.md#2026-09-23--b05-complete-stochastic-deployment-improves-greedy-but-not-uniform)、
+[B02 T反例](../../runs/complementary_skill_learning/b02_t_260923911_e232332a0/summary.json)、
+[B10原范围](candidates/agent_count_generalization/NOTES.md#2026-09-23--b10-complete-opening-assignment-replay-improves-means-with-consequential-local-losses)、
+[技能 B04](candidates/complementary_skill_learning/NOTES.md#2026-09-23--b04-complete-training-bank-gain-and-greedy-deployment-loss-coexist)。
 
 竞争解释仍包括普通 SET 在当前表示/优化预算下不足，以及 S1 特定几何与干扰结构偏好当前配方。
 S1 的单用户单资格性质简化了冻结几何下的连接分配，却没有消除联合位置选择造成的干扰耦合。
-因此 B15 只检验固定新面板上的训练程序平均包差，B05的已读结果只回答固定技能库的部署后果。
-基线竞争力、训练形成收益的复现与成因、跨任务适用性仍需分别解决。基线开发与机制区分是现有解释的缺口，
-不是本轮追加调参或修改确认对照的指令。外部任务必须先匹配数量迁移、信息与动作条件，其接入和
-训练成本尚未测量；一个外部正结果也不能自动建立通用 MARL 优势。
+SET也保留当前自身局部观察，另有k10刷新中央快照；它与H6的差别不能简化成“旧观察对新观察”。
+B15仍只检验N6训练后固定新N8面板上的平均包差，既不识别技能成因，也不确认比SET更小的迁移损失；
+B14的N8/N6包差约.0714/.0499，其差.0214只是单实例描述。主张、终点、对照和判读保持原绑定。
+后继对照应区分局部结构、固定上下文、随机上下文与学得选择；直接把标签数6改1会改变FiLM参数形状，
+同时删除判别器奖励又改变学习目标。随机上下文与H6差异不显著不能证明等价或把作用唯一归为正则化。
+降低高层熵系数是可检验干预，尚非已证实修复；其信息价值在于是否改变条件分布并提高相对uniform的
+原生用途，不能仅以熵降低为成功。这些问题尚未注册为新增结果批次。
+
+动作饱和及原始高斯熵的优化激励是实际疑点，但“保存原始动作/log-prob，执行裁剪”本身不推出
+score-function梯度有偏；CAPG原文给出同期望、较低方差估计器。这不宣称PPO/GAE完整实现无偏，
+也不替代对执行分布的研究。[CAPG原文§3](https://proceedings.mlr.press/v80/fujita18a/fujita18a.pdf)。
+S7目前实测的风险节省具体是返航余量罚降低：B04/B05的256个评价回合均未发生切断、耗尽或充电，
+不能推出其他策略轨迹不可能触发事件。B05前三个正差世界占净J差72.5%，8个R零吞吐世界占51.9%，
+强化服务丧失的用途限制；它们不授权删尾、改B06判读或追加20/32及.02阈值。
+[B05完整服务/余量记录](candidates/uav_service_auxiliary/NOTES.md#2026-09-23--b05-complete-endpoint-risk-savings-recur-service-gains-do-not)、
+[外部DM3 review](https://github.com/CartmanFatass/My-paper-code/blob/5ec6e1dff/docs/Claude_docs/reviews/DM3_UAV_SERVICE_AUXILIARY_REVIEW_20260924.md)。
+外部任务的接入与训练成本尚未测量；一个外部正结果也不能自动建立通用MARL优势。
 
 ### 三条主线和近期动作
 
 | 主线 | 当前固定比较与成本 | 这次观察改变什么 |
 | --- | --- | --- |
 | DM1：泛化与训练条件 | B15：H6/SET各3个新独立训练区组，N6/360k，6fits；2.16M train +384k eval。完整绑定见[claim](candidates/agent_count_generalization/CLAIM_bounded_count_transfer_20260923.md)。 | 读取新固定N8面板上的平均J/服务差及预写区间，同时保留自身学习、N6代价与全部损失世界。小样本不确定可接受；不扩样、不把世界数当训练n，不把包收益解释为技能机制或普通调优充分。 |
-| DM2：有用技能与协作学习 | B05已完整读完：0fits/9面板/144k eval；下一投入选择为一对新独立M/U训练是否值得执行，拟2fits/720k train+96k eval，尚未启动。[B05结果与投入判断](candidates/complementary_skill_learning/NOTES.md#2026-09-23--b05-complete-stochastic-deployment-improves-greedy-but-not-uniform)。 | S改善O但未显示超过R，停止固定库的自动加流/调参；把训练形成收益能否复现与部署随机化分开。不新增完整包胜出或互补机制主张，新训练不是自动统计债务。 |
+| DM2：有用技能与协作学习 | B06：一对新匹配M/U，各360k，2fits/720k train+96k eval；保留B04六面板与原uniform条件，尚未启动。[前瞻范围与L0](candidates/complementary_skill_learning/NOTES.md#2026-09-23--training-recurrence-advice-adopted-fixed-b06-mu-and-l0)。 | 判断条件性训练库收益能否在另一个真实学习实例再现；双方学习、服务取舍与Gamma分别读取。U也训练循环反馈控制，正差不唯一归因于学得选择；两块仍探索，反转/未决不自动加第三对。 |
 | DM3：服务收益与风险控制 | B06：两份旧N分别原执行O与余量反馈F，固定进入/退出阈值0/.05；0fits/160回合/最多240k eval。[固定方案](candidates/uav_service_auxiliary/NOTES.md#2026-09-23--b05-advice-adopted-b06-fixed-observation-only-return-feedback)。 | 分别读取两来源×两面板的原生J、QoS、吞吐、返航成本、零服务与最低电池。风险获益主要伴随服务损失不算兼顾成功；不追加阈值搜索，不抹去原系数配方的负证据。 |
 
 ### 推进与投入选择
@@ -539,7 +567,7 @@ horizon读取，评价、实现、检查、收取和支持成本另计；0fit不
 | --- | --- | --- | --- |
 | Root：科学项目管理 | `01a0cd93-9107-7701-a7e5-84fb071ea8f7` / `local` | `/home/fires/.codex/worktrees/project-management-sept23/hmasd-wsl` · `codex/project-management-sept23` | [项目判断与已完成咨询](archive/2026-09-23/RESEARCH-scientific-management-adopted.md#decision)；原负载操作已完整结束，旧源码/轨迹留在方向表所列原工作区。 |
 | DM1：智能体数量泛化 DM | `01a0c6ef-cdd4-7113-b2d9-20487e35171b` / `local` | `/home/fires/.codex/worktrees/7fef/hmasd-wsl` · `codex/agent-count-generalization` | [NOTES及B15原操作](candidates/agent_count_generalization/NOTES.md#2026-09-23--b15-first-fixed-cell-admitted-with-observation-adopted)；沿后续 notebook 条目恢复同一批次。 |
-| DM2：实际互补技能学习 DM | `01a0cdb8-10c9-7743-a05a-6dcfc42621c5` / `local` | `/home/fires/.codex/worktrees/5916/hmasd-wsl` · `codex/complementary-skill-learning` | [NOTES及B05完整结果](candidates/complementary_skill_learning/NOTES.md#2026-09-23--b05-complete-stochastic-deployment-improves-greedy-but-not-uniform)；B01–B05与已完成Pro均已读回；后续咨询/执行沿notebook恢复。 |
+| DM2：实际互补技能学习 DM | `01a0cdb8-10c9-7743-a05a-6dcfc42621c5` / `local` | `/home/fires/.codex/worktrees/5916/hmasd-wsl` · `codex/complementary-skill-learning` | [NOTES及B06固定方案](candidates/complementary_skill_learning/NOTES.md#2026-09-23--training-recurrence-advice-adopted-fixed-b06-mu-and-l0)；B01–B05和本次Pro已完整读回，执行/观察沿后续notebook恢复。 |
 | DM3：控制用途预测小模块 DM | `01a0c9af-d5cd-7d70-b5e8-9db2c598ad4e` / `local` | `/home/fires/.codex/worktrees/d319/hmasd-wsl` · `codex/uav-service-predictive-control` | [NOTES及B06原操作](candidates/uav_service_auxiliary/NOTES.md#2026-09-23--b06-admitted-after-actual-cuda-checks)；原任务/工作区已恢复，沿记录恢复同一操作。 |
 
 未活动方向的历史联系人及证据工作区仍在各自 standing 中，不能据此新建或重启任务。
