@@ -14517,3 +14517,34 @@ The READY event was consumed using generation138 and its returned wake/event IDs
 remaining observations were rearmed as139. Per-cell progression remains in the
 direction notebook/runs under the current owner amendment; no main-index change
 or App cross-task delivery is made for this unchanged batch.
+
+## 2026-09-24 — B15 block3 H6 admitted and observation adopted
+
+The fixed fifth cell was admitted once after both block2 outputs were completely
+read and their compact evidence/notebook pushed as `2721809fc`. Fresh published
+control `24cf6faee0a565e3778b53d0e57c9d5ce670339e` and the canonical node agree on lifted pause,
+confirming state and unchanged lead. The [native manifest](../../../../runs/agent_count_generalization/s1_bounded_confirmation_b15_b3_h6_s994103/launch-manifest.json)
+binds the original operation/process identities, retained source snapshot and
+frozen scientific source `e0a20add999ded53943f99df15f596822e6c13dc`. Actual-node
+[preflight](../../../../runs/agent_count_generalization/s1_bounded_confirmation_b15_b3_h6_s994103/admission-preflight.json) passed with13,249,826,816
+physical/effective available bytes. These records and [configuration](../../../../runs/agent_count_generalization/s1_bounded_confirmation_b15_b3_h6_s994103/config.json)
+were collected byte-exactly with matching size/hash checks.
+
+The first scientific reading verifies b3_h6, seed994103, lanes2994300–2994315,
+all12 unchanged source hashes, the same fixed spec/panels and H6 recipe (only its
+prescribed seed differs). Native H6 has fresh owned parameters, empty optimizers
+and buffer. Its initial learner, post-initialization global RNG, sampler seed and
+initial training environment differ from both earlier H6 blocks. The full reset
+trace and actual saved checkpoint will receive independent reading at completion.
+Initial0 N8 then N6 completes32k evaluation team steps/64 episodes with zero
+optimizer/storage calls; every stage0 learner/runtime/RNG/optimizer/buffer/training-
+environment isolation field is preserved. Training has begun:8k team steps
+collected/stored,16 episodes and zero completed updates at this saved boundary.
+This partial exposure is not scientific acceptance.
+
+The launch observer is adopted at generation140, PID3128388,
+window1500s, job `launch-s1-bounded-confirmation-b15-b3-h6`; its saved probe observes
+the original runner/supervisor running consistently, with no pending event. There
+are5 started/4 complete B15 fits. Complete and read this cell before the sixth,
+already prescribed b3_set. The fixed source, endpoint and confirmation rule remain
+unchanged; no extra fit, worker restart, Pro resend or App cross-task message.
