@@ -7449,3 +7449,24 @@ checkpoint window. The first drained observation at08:52:06Z actually adopted th
 running, consistent handle with0errors and no pending event/wake. No E result is accepted yet;
 await its same-handle checkpoint/terminal collection, then continue the fixed U cell. The
 earlier failed outer request remains a separate pre-admission failure, not a second E fit.
+
+
+**E checkpoint,2026-09-24 09:21:51Z.** Drained generation64 CHECKPOINT
+`b75e71a88e3cae9804e2eedc`, wake`dd08e676-1e43-421d-8148-eac7f70344dc`. Fresh main
+`63e382485f2a37cccd378436212b911b0fb4d2ae` retains lifted project pause and the same lead.
+Actual-node status confirms the same accepted E claim, runner530093/supervisor530092 with
+matching recorded identities, consistent records and no exit witness. Both logs are empty;
+MemAvailable is12,765,760KiB. The persisted incomplete summary has24/45rollouts,
+192000training/stored transitions,384training episodes and24native updates. Only initial
+S0/R0 are present:32000evaluation transitions/64episodes; final panels and common-reference
+scoring remain pending. Actual lambda_h=0, lambda_l=.05, enabled coordinator training and
+the pinned M-reference path/hash are unchanged. Latest rollout's native update reports15
+coordinator,2250actor,2250critic,15team-disc and60individual-disc optimizer calls; auxiliary
+G/P each7 and trunk0. Training-minibatch team/individual entropy is1.610214/1.517632; this
+interim training context is not the final own/common-context entropy comparison or a service
+repair verdict. No terminal result or new scientific acceptance follows from this checkpoint.
+
+Consumed this event and rearmed the same `launch-csl-b07-e-455536ebd` handle at generation65,
+30s interval/20s timeout/1500s window, observerPID3199988. Native-status readback is refreshed;
+the E fit was not restarted, no Pro request was resent, and no cross-task message was sent.
+Continue awaiting the fixed E terminal evidence before its full readback and the fixed U cell.
