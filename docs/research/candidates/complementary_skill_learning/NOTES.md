@@ -7228,3 +7228,173 @@ MemAvailable is9,907,784KiB. Interim summary identity:154814bytes/SHA256
 This is progress, not final scientific acceptance. E/U and the fixed scientific scope remain
 unchanged. The same handle is rearmed at generation62 with1500s window; nothing was restarted
 or resent and no other task was messaged.
+
+
+## 2026-09-24 — B07 M complete; fixed E reference bound after full readback
+
+The DM accepts the completed first M cell as the fixed B07 comparator after reading the
+terminal native witness and the full retained numeric evidence, not from exit0 alone.
+Source remains`455536ebd0e6e23466ed40244bcf1e5ab6462826`. The
+[compact complete summary](../../../../runs/complementary_skill_learning/b07_m_260924001_455536ebd/summary.json)
+and existing native manifest carry the configuration, all per-world/per-stream readings,
+checkpoint/trajectory identities, counters and bulk locators. No E/U outcome exists yet.
+
+**Integrity and actual exposure.** Collected34remote files totaling170,362,897bytes into the
+same run path in this authoring checkout; every byte count and SHA256 matched the retained
+actual-node output. Both copies remain, including initial/final checkpoints,10complete raw
+panels and trajectories, all training/prediction rows, occupancy and the reference NPZ.
+The summary is370916bytes/SHA256`52d859d8be9cd221991bd8356948f84046e3ba6794f88fe75610cf9ad3cd4800`.
+The durable actual-node root is the manifest's output root under
+`/home/wu/hmasd-worktrees/complementary-skill-b07-20260924/runs/complementary_skill_learning/b07_m_260924001_455536ebd`.
+
+Independent saved-byte reductions read all45training rows, recomputed90G/P raw MSE values
+(maximum discrepancy0), checked all checkpoint tensors, native/frozen digests, head optimizer
+states, normalization state and private/default/sampler RNG chains. Actual initialization and
+head tensors differ from B06's preceding block. Native movement affected87coordinator,
+29discoverer,24team-discriminator and29individual-discriminator tensors; final relative
+movements are .052382/1.180110actor/.456549critic/.077046team/.155477individual. Both detached
+heads moved, with0auxiliary-trunk steps. Learned-factor replay's maximum sampled-log-mu
+error8.583069e-6 satisfies its frozen1e-4 check. All45lambda_h readings are .07; the recorded
+post-update gradients are finite. These are validity/readings, not a gradient mechanism claim.
+
+Actual1fit:360000training/stored transitions,720training episodes,45native updates;
+160000evaluation transitions/320episodes across the fixed10panels. Native optimizer calls:
+coordinator675, actor101250, critic101250, team discriminator675, individual discriminator2700;
+G/P315each, auxiliary trunk0. Storage and label-flow audits cover360000rows/22500batches,
+with0failures. Own-S probability instrumentation added250forwards/8000contexts/56000factor
+outputs, already inside measured runtime. The M reference export performs no E scoring.
+
+All160000retained evaluation transitions were read: canonical k10 labels and renewal order,
+episode ends, exact clipped actions, native component/return/J/users reductions, physical
+initial-state equality, fixed R0-R3 PCG64 streams and held-label log probabilities. Full
+probability entropy was independently reduced with0log0 handled; maximum discrepancy from
+native float32 entropy4.472275e-7, and maximum selected-probability/log-prob discrepancy
+4.768372e-7. Individual probabilities respect their .1/6 floor; no team floor was inferred.
+Initial/final panel audits contain0updates, optimizer steps, stores or normalizer changes;
+frozen state/RNG/mode identities match their checkpoint stages. The reviewed evaluator and
+technical tests establish low recurrent carry/reset semantics; retained trajectories do not
+by themselves supply a second hidden-state replay. No environment transition, policy call,
+model scoring or optimizer step was added by this readback (6.714s local CPU support).
+
+**M cell reading.** The following are absolute panel means; S0/R0 actual learning compares
+its own initial panel, while final four-stream averages are formed within each world first.
+
+| Panel | J | Users/step | Coverage | Quality | Height penalty | Team H | Individual H |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| initial_S0 | 0.273943485 | 18.470125000 | 0.369402500 | 0.105041426 | 0.016150693 | 1.735248208 | 1.732724786 |
+| initial_R0 | 0.276963725 | 18.632750000 | 0.372655000 | 0.104718786 | 0.015310410 | 1.791759469 | 1.791759469 |
+| final_S0 | 0.452828516 | 31.787562500 | 0.635751250 | 0.154173885 | 0.038449524 | 1.706917882 | 1.785156608 |
+| final_R0 | 0.453591359 | 31.697437500 | 0.633948750 | 0.157512461 | 0.037426504 | 1.791759469 | 1.791759469 |
+| final_S1 | 0.451103513 | 31.585250000 | 0.631705000 | 0.155752762 | 0.037815816 | 1.708779812 | 1.785228848 |
+| final_R1 | 0.448630424 | 31.433125000 | 0.628662500 | 0.154180219 | 0.037687392 | 1.791759469 | 1.791759469 |
+| final_S2 | 0.453433790 | 31.698375000 | 0.633967500 | 0.158023431 | 0.037750489 | 1.708570838 | 1.785270214 |
+| final_R2 | 0.454064356 | 31.749625000 | 0.634992500 | 0.157415282 | 0.037654978 | 1.791759469 | 1.791759469 |
+| final_S3 | 0.459299048 | 32.152000000 | 0.643040000 | 0.156026673 | 0.037636954 | 1.708225131 | 1.785306811 |
+| final_R3 | 0.456572924 | 31.920312500 | 0.638406250 | 0.157406979 | 0.037533544 | 1.791759469 | 1.791759469 |
+
+Four-stream M-S givesJ=.454166216807/users31.805796875; M-R givesJ=.453214765904/
+users31.700125. Thus G_M=+.000951450903J/+.105671875users, with16positive/16negative worlds
+for each primary metric. Coverage+.0021134375 contributes+.00147940625J, quality−.000634547446
+contributes−.000190364234J, and height penalty+.000337591113 subtracts the remainder.
+Quality improves in16worlds and declines in16; height penalty increases in17and falls in15.
+The largest G loss is world1700208:−.026135756388J/−1.7625users; its quality improves+.002006312
+but coverage falls−.03525 and height penalty rises+.002062650. World1700203 gains1.289users
+while quality falls−.008562591; world1700209 gainsJ slightly but loses users, and1700221
+has the opposite disagreement. Preserve these costs rather than credit the positive mean alone.
+
+Same-index descriptive S-R stream J differences are−.000762843264,+.002473089248,
+−.000630565975,+.002726123602; users differences+.090125,+.152125,−.05125,+.2316875.
+S Torch and R PCG64 streams do not form shared-innovation pairs merely by sharing an index.
+Across all16descriptive stream combinations the meanJ difference spans−.005469411730 to
++.010668624580 and users−.3350625 to+.718875. This small mixed M readout difference does
+not establish a stable learned-law advantage or equivalence. It does not decide the still
+unobserved E-S−U-R primary contrast, E-S−M-S intervention contrast, or entropy mechanism.
+
+Both actual S0 and R0 improveJ/users on all32worlds. Mean S0 learning is+.178885031084J/
++13.3174375users, R0+.176627633900J/+13.0646875users. These are competent-learning readings,
+not cost-free improvement: height penalty rises in all32worlds under both. S0 quality declines
+on1700203/1700211/1700221 by−.060595519/−.004917170/−.013612860; R0 quality declines on
+1700203/1700221 by−.039993122/−.001011470. All panel and learning arrays remain in summary.
+
+All45training curve rows were read, including the mid-course regressions: mean nativeJ begins
+.239530, falls to .200191 at rollout15, and reaches .424055 at45. Training action saturation
+rises .317021→.781667; final deterministic panel saturation is about .614–.616 and is a
+separate context. This keeps saturation an unresolved observation, not the identified cause.
+Final native training-minibatch team/individual entropy is1.693676/1.784374; on final own-S
+contexts the four-stream averages are1.708123/1.785241 (95.332%/99.636%of ln6). Contexts
+matter: these are not interchangeable entropy samples. The original M retains high entropy
+and learns useful low control; E will test the already chosen incentive intervention and its
+native consequence. No next arm or stopping rule was selected from these M scores.
+
+All four-stream world differences (S-R; height is a penalty) were read:
+
+| World | dJ | dUsers | dCoverage | dQuality | dHeight |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| 1700200 | -0.001632543 | -0.129000000 | -0.002580000 | -0.003704151 | -0.001284702 |
+| 1700201 | +0.012218833 | +0.772000000 | +0.015440000 | +0.000807324 | -0.001168636 |
+| 1700202 | -0.007444707 | -0.272000000 | -0.005440000 | -0.003153266 | +0.002690727 |
+| 1700203 | +0.014928298 | +1.289000000 | +0.025780000 | -0.008562591 | +0.000548925 |
+| 1700204 | +0.009260787 | +0.642500000 | +0.012850000 | -0.003118911 | -0.001201460 |
+| 1700205 | +0.001365616 | +0.329500000 | +0.006590000 | -0.007474542 | +0.001005021 |
+| 1700206 | -0.007863541 | -0.382500000 | -0.007650000 | +0.000033720 | +0.002518657 |
+| 1700207 | -0.007202106 | -0.456500000 | -0.009130000 | +0.004241252 | +0.002083482 |
+| 1700208 | -0.026135756 | -1.762500000 | -0.035250000 | +0.002006312 | +0.002062650 |
+| 1700209 | +0.000514563 | -0.017500000 | -0.000350000 | +0.001005190 | -0.000458006 |
+| 1700210 | -0.009179228 | -0.493000000 | -0.009860000 | +0.001069478 | +0.002598071 |
+| 1700211 | -0.001648106 | -0.065500000 | -0.001310000 | +0.002984615 | +0.001626490 |
+| 1700212 | -0.000717892 | -0.131500000 | -0.002630000 | +0.002859999 | -0.000265109 |
+| 1700213 | +0.015834382 | +1.099500000 | +0.021990000 | +0.002794433 | +0.000396947 |
+| 1700214 | -0.005460955 | -0.302500000 | -0.006050000 | -0.003838818 | +0.000074310 |
+| 1700215 | -0.006700771 | -0.187000000 | -0.003740000 | -0.001596781 | +0.003603736 |
+| 1700216 | +0.006528118 | +0.307500000 | +0.006150000 | +0.001410485 | -0.001799973 |
+| 1700217 | +0.000756351 | +0.115000000 | +0.002300000 | +0.003289379 | +0.001840463 |
+| 1700218 | +0.006761210 | +0.364500000 | +0.007290000 | +0.000306880 | -0.001566146 |
+| 1700219 | +0.007361735 | +0.386000000 | +0.007720000 | +0.001800080 | -0.001417711 |
+| 1700220 | -0.000041289 | -0.125500000 | -0.002510000 | -0.005311269 | -0.003309092 |
+| 1700221 | -0.000650827 | +0.151000000 | +0.003020000 | -0.003429559 | +0.001735959 |
+| 1700222 | +0.006096482 | +0.475500000 | +0.009510000 | +0.001506159 | +0.001012366 |
+| 1700223 | -0.003847213 | -0.327000000 | -0.006540000 | -0.004299666 | -0.002020687 |
+| 1700224 | +0.020251988 | +1.286000000 | +0.025720000 | +0.006847030 | -0.000193879 |
+| 1700225 | -0.009569976 | -0.742500000 | -0.014850000 | -0.000912371 | -0.001098736 |
+| 1700226 | -0.008131325 | -0.502500000 | -0.010050000 | -0.003991485 | -0.000101121 |
+| 1700227 | +0.014179974 | +1.155000000 | +0.023100000 | +0.001069445 | +0.002310860 |
+| 1700228 | +0.002145440 | +0.205000000 | +0.004100000 | -0.002079882 | +0.000100595 |
+| 1700229 | -0.011164612 | -0.698000000 | -0.013960000 | -0.001403728 | +0.000971494 |
+| 1700230 | +0.014850800 | +1.060500000 | +0.021210000 | -0.001262709 | -0.000382613 |
+| 1700231 | +0.004782695 | +0.338000000 | +0.006760000 | -0.000197570 | -0.000109966 |
+
+**Reference binding before E.** This is the prospectively chosen M-final S0-S3 reference,
+not a newly selected reference population. The4537795byte NPZ at
+`/home/wu/hmasd-worktrees/complementary-skill-b07-20260924/runs/complementary_skill_learning/b07_m_260924001_455536ebd/raw/final_S_reference.npz`
+is now pinned to SHA256
+`2445d48504935df1f6d69321030e0e1f13ecaf116d77bd83888b3141a9b98fc1`.
+All6400rows/44800factor distributions were matched exactly to retained finalS0..3 trajectories
+in stream→renewal→world order: native states, joint observations, actual team/individual labels
+and prefixes, full team probabilities and once-mixed individual probabilities. Integer labels,
+shapes, dtype, seeds, worlds and probability mass were checked. Metadata agrees with actual
+saved M-final checkpoint SHA256
+`f2544d87b155e20765a4e757bfc646edc83dacc3a2ac499079b3c5986a994255`, recomputed native digest
+`6eb97a83cf0159341b081dd1cafa551755696ef3d39cc9ae52e1bda8690acc2f` and recomputed frozen digest
+`371266bccf7a2f45e2e0c5128c3c691d7e9f2caff66ef048ff21a3ca90977844`, all at source455536ebd.
+This fulfills the empirical identity check beyond the runner's syntactic digest validation.
+E will receive this exact path/hash through its already fixed CLI and score once after training.
+
+**Cost, retention and continuation.** M runner body3874.286487s=64.571441min; summed45rollout
+wall3713.662080s is included, not an additional fit. Process peak RSS1,912,344KiB; CUDA peak
+allocated1,531,556,352/reserved2,183,135,232bytes. Shared-node occupancy and peak scratch
+remain unmeasured. Kernel/compilation/setup, collection and readback add support outside the
+runner-body wall. Total B07 so far1fit/360ktrain+160keval=520kenvironment transitions plus
+prior recorded engineering support; E/U remain the fixed two unstarted fits.
+
+After both retained copies and full reading, the maintained snapshot collector previewed then
+removed only disposable M source`c3ea7db7052147f283917db028da30c9`, with terminal native state
+and published reachability verified. Authoring checkout, all outputs, claim and manifest remain;
+the reference is outside the removed snapshot. READY`25d64285ff4dbdb63879f378`, wake
+`a2a00d64-bd35-48ad-8c58-46e231d3ffe2`, was consumed with generation62→63. No M restart,
+Pro resend or cross-task message. Fresh main63e382485 retains lifted pause and unchanged lead.
+
+Continue the fixed second E cell, seed260924001, source455536ebd, with only lambda_h=.07→0,
+output`runs/complementary_skill_learning/b07_e_260924001_455536ebd`, and the just-verified M
+reference path/hash. Publish this binding and compact M evidence before E admission. E stays
+360ktrain+160keval+the fixed6400context scoring rows; U and all interpretation limits remain
+as originally declared. Routine cell acceptance/binding does not require an index/main update.

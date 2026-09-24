@@ -20,18 +20,15 @@
   "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/48b893b0aba584d2ec603ab308f36a76f31cec8069fd4a5cfddce20708f3bba9.json",
   "direction": "complementary_skill_learning",
   "execution": {
+    "exit_code": 0,
     "exit_witness": {
+      "exit_code": 0,
+      "finished_at_epoch": 1790238852.1430538,
       "path": "/home/wu/hmasd-worktrees/complementary-skill-b07-20260924/runs/complementary_skill_learning/b07_m_260924001_455536ebd/process-exit.json",
-      "state": "absent"
+      "state": "valid",
+      "termination": "process_exit"
     },
     "runner": {
-      "observed_identity": {
-        "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
-        "kind": "linux_pid_start_ticks",
-        "pid": 513907,
-        "session_id": 513906,
-        "start_ticks": 59408317
-      },
       "recorded_identity": {
         "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
         "kind": "linux_pid_start_ticks",
@@ -39,17 +36,10 @@
         "session_id": 513906,
         "start_ticks": 59408317
       },
-      "state": "running"
+      "state": "absent"
     },
-    "state": "running",
+    "state": "exited",
     "supervisor": {
-      "observed_identity": {
-        "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
-        "kind": "linux_pid_start_ticks",
-        "pid": 513906,
-        "session_id": 513906,
-        "start_ticks": 59408314
-      },
       "recorded_identity": {
         "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
         "kind": "linux_pid_start_ticks",
@@ -57,14 +47,14 @@
         "session_id": 513906,
         "start_ticks": 59408314
       },
-      "state": "running"
+      "state": "absent"
     }
   },
   "explicit_retry_available": false,
   "kind": "hmasd_operation_status",
   "manifest_ref": "/home/wu/hmasd-worktrees/complementary-skill-b07-20260924/runs/complementary_skill_learning/b07_m_260924001_455536ebd/launch-manifest.json",
   "node": "wsl_4070",
-  "observed_at": "2026-09-24T08:20:23.265479Z",
+  "observed_at": "2026-09-24T08:34:34.994364Z",
   "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/48b893b0aba584d2ec603ab308f36a76f31cec8069fd4a5cfddce20708f3bba9.json",
   "output_root": "/home/wu/hmasd-worktrees/complementary-skill-b07-20260924/runs/complementary_skill_learning/b07_m_260924001_455536ebd",
   "record_consistency": {
