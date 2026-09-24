@@ -1,0 +1,127 @@
+{
+  "object_id": "UAV-SERVICE-AUXILIARY-B06-FEEDBACK",
+  "launch_sha": "f92a94b017816467662115dbbc1409793858613c",
+  "device": "cuda",
+  "torch_threads": 4,
+  "tf32": false,
+  "torch_default_dtype": "torch.float32",
+  "modes": [
+    "O",
+    "F"
+  ],
+  "panels": {
+    "development": [
+      937001,
+      937002,
+      937003,
+      937004,
+      937005,
+      937006,
+      937007,
+      937008
+    ],
+    "final": [
+      938001,
+      938002,
+      938003,
+      938004,
+      938005,
+      938006,
+      938007,
+      938008,
+      938009,
+      938010,
+      938011,
+      938012,
+      938013,
+      938014,
+      938015,
+      938016,
+      938017,
+      938018,
+      938019,
+      938020,
+      938021,
+      938022,
+      938023,
+      938024,
+      938025,
+      938026,
+      938027,
+      938028,
+      938029,
+      938030,
+      938031,
+      938032
+    ]
+  },
+  "horizon": 1500,
+  "feedback_layout": {
+    "n_uavs": 8,
+    "observation_dim": 365,
+    "uav_record_fields": 13,
+    "station_count": 2,
+    "station_record_fields": 8,
+    "xy_scale_m": 8000.0,
+    "z_scale_m": 150.0,
+    "horizontal_speed_mps": 30.0,
+    "vertical_speed_mps": 5.0,
+    "docking_radius_m": 160.0,
+    "enter_margin": 0.0,
+    "exit_margin": 0.05
+  },
+  "sources": {
+    "B04": {
+      "root": "/home/wu/hmasd-worktrees/usa-b04-914fc4843/runs/uav_service_auxiliary/b04_n_914021_a01",
+      "summary_sha256": "ab814a3e1d1861bcc8413c15c828dd39ed25c55106b1a71a6dc76a267f7bff78",
+      "checkpoint_sha256": "403908c044ee1c1952e36102959fbe53ab365d4845bacb17acbb7953d1a5def6",
+      "training_sha": "914fc484368cc6c41af211b169c45b02e4a10425",
+      "final_policy_sha256": "3fee4d9c751aac8dd3c0b5d84839624da63ca22a93f05f744647b1dc8f111408",
+      "config_sha256": "0eed858f964f8d8f371903ec226dfead056dcca9cf31b900bb065a195d7d4974",
+      "semantic_config_reconciliation": {
+        "differences": {
+          "scenario7_baseline_metrics_path": [
+            "/home/wu/hmasd-worktrees/usa-b04-914fc4843/baselines/scenario7_arm_a_2400000_metrics.json",
+            "/home/wu/hmasd-worktrees/usa-b06-f92a94b01/baselines/scenario7_arm_a_2400000_metrics.json"
+          ]
+        },
+        "allowed_unused_fields": [
+          "scenario7_baseline_metrics_path"
+        ],
+        "comparison_gate_enabled": false,
+        "physical_feasibility_check_enabled": false,
+        "evaluation_uses_checkpoint_saved_config": true
+      },
+      "retained_trace_sha256": {
+        "development": "9f8a6568a3cdf259b98ccb51de0082273500c9f589a4897aae0dde3cc786858e",
+        "final": "3bc2e92baf9b01d6dc8272bcd836acfb8aede8a5ae1bf0f48b212ffe9289edfb"
+      }
+    },
+    "B05": {
+      "root": "/home/wu/hmasd-worktrees/usa-b05-3de3e3f71/runs/uav_service_auxiliary/b05_n_914173_a01",
+      "summary_sha256": "1af4318fdd21d5723054b12d8b89f99688d32190b4d89933074ce2913d9e12c9",
+      "checkpoint_sha256": "1a6a2b6c191d3dc74ac244b474dc6071905c71d6a973eea78a97e94e6fbcceb8",
+      "training_sha": "3de3e3f71c747e2422656126b52ae88beafb562a",
+      "final_policy_sha256": "22ade2e3aa948330acb4916445277edab0611a5159a1bef7beade8d1aefadc79",
+      "config_sha256": "115336d5e48b091dd336dad6add129f534568535129a7cd540f3051320558b25",
+      "semantic_config_reconciliation": {
+        "differences": {
+          "scenario7_baseline_metrics_path": [
+            "/home/wu/hmasd-worktrees/usa-b05-3de3e3f71/baselines/scenario7_arm_a_2400000_metrics.json",
+            "/home/wu/hmasd-worktrees/usa-b06-f92a94b01/baselines/scenario7_arm_a_2400000_metrics.json"
+          ]
+        },
+        "allowed_unused_fields": [
+          "scenario7_baseline_metrics_path"
+        ],
+        "comparison_gate_enabled": false,
+        "physical_feasibility_check_enabled": false,
+        "evaluation_uses_checkpoint_saved_config": true
+      },
+      "retained_trace_sha256": {
+        "development": "1767acf0f0581ad0521dfc86c2bf7b32159db60971f082ee64454d20019107a7",
+        "final": "7319a802bc6d4e0303b756b4a676ceac11c7855cc27221821026dbb9b88d3c58"
+      }
+    }
+  }
+}

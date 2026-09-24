@@ -414,6 +414,17 @@ B05开发QoS也低.117039433，尽管其平均成本较低。B05最终仅14/32�
 辅助配方或以池化均值抹去反号。[B05完整配对、全部世界与成本](candidates/uav_service_auxiliary/NOTES.md#2026-09-23--b05-complete-endpoint-risk-savings-recur-service-gains-do-not)；
 [B04完整比较](candidates/uav_service_auxiliary/NOTES.md#2026-09-23--b04-complete-native-final-gain-with-contrary-development-worlds)。
 
+风险训练中的服务交换不意味着当前信息下的普通执行反馈也必须放弃服务。固定两份N的
+B06合法余量反馈相对原执行，在两最终面板的J/QoS均值提高754.992840/.023604554与
+552.876189/.007118394，两个开发面板亦有利；成本显著降低，最终零服务6→1与1→1，
+没有新增零服务。这个有限实例支持把实际可执行的简单反馈作为后续学习的更强参照，
+不复活未重复的辅助或系数4配方。其最终仍有4/8个服务损失世界，所有面板平均最低电池
+及P10更低，B05最终最差电池.258198；短时朝站点移动改善位置相关余量，不等于保存电量。
+覆盖时最近站点仍约1.331km，未达到站充电，切断和耗尽也未激活；完整能量循环和持续服务
+尚未检验。0fits/两旧训练制品与已曝光世界不增加训练n，也不识别速度、backhaul guard或
+学习机制的单独贡献。保留有限反馈用途，不将正均值自动升级为重训、确认或安全保证。
+[全部世界、原始复现、真实物理诊断与下一投入](candidates/uav_service_auxiliary/NOTES.md#2026-09-23--b06-complete-fixed-feedback-preserves-mean-service-while-reducing-return-margin-cost)。
+
 稀疏配对收益中的大量平局/小样本方差可能漏掉尾部，观察最大值不能替代预先有效的全局界。C07 LONG 的
 有限上界约束该固定程序，不等于零效应、NEAR 全局最优或全部长时域方法等价。基础认识本身不推出固定 seed
 数、阳性 toy、穷举或理论证明的普遍启动门槛；实际确认遵循当前 constitution。
@@ -443,7 +454,7 @@ B/UCOPE 的局部预测、一步优势或真实后缀信用没有自动转成稳
 | --- | --- | --- | --- | --- |
 | `complementary_skill_learning` | 固定 N/k、完整高低层共同学习时，能否形成提高原生 UAV 服务的技能组合，并区别于普通曝光、通用辅助优化与共同适应？ | exploring | Codex DM (independent session) | **B05完整结束，下一投入选择转向训练复现。** 冻结M库的S−O为+.047675 J/+2.72325人，S−R主比较却为−.000470 J/+.068266人；去旧R流后服务转负，保留全部损失与有限抽样精度。随机化改善贪心，未显示learned选择的额外价值；不加流、不调温度、不重写B04 Gamma。B04库收益仍只有一个训练对，B03反转继续构成反证。拟比较一对新M/U的复现价值与修订/停止，先基于完整证据咨询；尚无新fit启动。[完整B05及下一判断](candidates/complementary_skill_learning/NOTES.md#2026-09-23--b05-complete-stochastic-deployment-improves-greedy-but-not-uniform)。[任务路由](#session-routing)。 |
 | `agent_count_generalization` | 固定 k、回合内固定 roster 时，HMASD 对未见团队数量 N 的服务能力和泛化代价是什么？ | confirming | Codex DM (independent session) | **B15固定确认进行中。** B14新H6/SET均学习，N8终点J/服务差+.071357/+5.282688人，仍有局部损失、质量/高度代价和普通调优不足。固定三独立区组、每臂3seed、N6/360k，共6fits；主张仅为新固定N8面板上的训练程序平均用途，要求预写J下界>0且服务下界>1。保持clip/.05熵、种子、顺序、终点和判读，不按分数扩样或更换对照。[固定claim](candidates/agent_count_generalization/CLAIM_bounded_count_transfer_20260923.md)、[采纳与L0](candidates/agent_count_generalization/NOTES.md#2026-09-23--b15-advice-adopted-fixed-conditional-mean-confirmation-and-l0)、[已接受操作恢复入口](candidates/agent_count_generalization/NOTES.md#2026-09-23--b15-first-fixed-cell-admitted-with-observation-adopted)。[任务路由](#session-routing)。 |
-| `uav_service_auxiliary` | 在 S7 完整共同学习中，怎样把服务改善转成包含返航风险的净收益？ | exploring | Codex DM (independent session) | **B05完整结束；B06固定O/F评价进行中。** B05最终J+241.885454、成本−.094165509而QoS−.026788931，14胜18负、8个零服务世界；开发J仍负。风险节省重复，服务增益未重复，原系数4配方不追加。B06在B04/B05两份N上比较原执行与合法余量返航反馈，0fits/最多240k eval，保留全部服务/风险与失败世界，不调阈值。[完整B05](candidates/uav_service_auxiliary/NOTES.md#2026-09-23--b05-complete-endpoint-risk-savings-recur-service-gains-do-not)、[固定B06](candidates/uav_service_auxiliary/NOTES.md#2026-09-23--b05-advice-adopted-b06-fixed-observation-only-return-feedback)、[已接受操作恢复入口](candidates/uav_service_auxiliary/NOTES.md#2026-09-23--b06-admitted-after-actual-cuda-checks)。[任务路由](#session-routing)。 |
+| `uav_service_auxiliary` | 在 S7 完整共同学习中，怎样把服务改善转成包含返航风险的净收益？ | exploring | Codex DM (independent session) | **B06完整验收，保留有限反馈包。** 两份旧N最终J差+754.992840/+552.876189、QoS差+.023604554/+.007118394，开发均值亦有利；零服务6→1/1→1，无新增，仍有局部服务损失及更低电池尾部。0新fits/240k eval不增加训练复制，充电/切断/耗尽仍未激活。下一动作是比较持续运行与新学习的投入价值；不自动调阈值、重训或确认。[完整结果](candidates/uav_service_auxiliary/NOTES.md#2026-09-23--b06-complete-fixed-feedback-preserves-mean-service-while-reducing-return-margin-cost)、[下一投入问题](candidates/uav_service_auxiliary/NOTES.md#pro-question-2026-09-23-b06-feedback-use-and-next-investment)。[任务路由](#session-routing)。 |
 | `goal_conditioned_entity_aggregation` | 当前技能条件化的实体聚合，能否比原始 MLP 或普通条件化池化提供有用的完整共同学习收益？ | reserve | Codex DM (independent session) | 原直接 DM task `01a0c7e4-e1aa-7460-a6bb-43db5c1b0898`，host `local`；原 checkout `/home/fires/.codex/worktrees/query-aggregation-sept22/hmasd-wsl` 已缺失，branch `codex/goal-conditioned-aggregation-20260922` 与原 lead 保留。固定 B01 O/P/E 的 3 fits 全部完成：每臂360k，共1.08M train/48k eval。Root 已从原节点取回并完整核对 E，三臂 J=.509137/.159861/.183016；P−O=−.349276、E−O=−.326121，均32/32世界不利；E−P=+.023155（20正/12负）。fit-body O/P/E=89.9204/109.7429/91.5859 min。每臂一个训练实例，结束这两个具体配方当前投入，不否定整个表示类；不新增第四条持续研究线。无运行中训练，原 DM 最终 notebook 补录仍待其承接，不声称已重载或交接。[P完整记录](candidates/goal_conditioned_entity_aggregation/NOTES.md#2026-09-22--b01-p-complete-and-read-e-remains-the-fixed-third-arm)、[E原生输出](../../runs/goal_conditioned_entity_aggregation/b01_e_s922611/summary.json)、[恢复事实与项目判断](archive/2026-09-23/RESEARCH-scientific-management-adopted.md#decision)。 |
 | `skill_teammate_drift_learning` | When teammates change, what must be learned or reused to improve decisions beyond competent simple controls? | reserve | Codex DM (independent session) | DM task `01a0bdb4-cd2c-71a3-af95-a196aeed70cd`，host `local`；checkout `/home/fires/.codex/worktrees/b-unknown-joint-law/hmasd-wsl`，branch `codex/b-unknown-joint-law`。旧径向一步表路线结束；B09/B10 局部正用途保留，B11 完整轨迹增量不一致；自身网络 refresh/burn-in 未识别真实队友行为漂移，后继方案已否决。没有排队实验、诊断或 Pro；需具体行为变化、受影响的未来估计和有区别的比较，才能选择下一步。reserve 不是无价值判决或外部等待。[最新判断及 B 分支 entry-mask 修复](https://github.com/CartmanFatass/My-paper-code/blob/74fe267aa166299d93a03566e5f0ab149ff2b12d/docs/research/candidates/skill_teammate_drift_learning/NOTES.md)；修复没有追溯应用于历史/FSD 结果。 |
 
@@ -538,7 +549,7 @@ S7目前实测的风险节省具体是返航余量罚降低：B04/B05的256个�
 | --- | --- | --- |
 | DM1：泛化与训练条件 | B15：H6/SET各3个新独立训练区组，N6/360k，6fits；2.16M train +384k eval。完整绑定见[claim](candidates/agent_count_generalization/CLAIM_bounded_count_transfer_20260923.md)。 | 读取新固定N8面板上的平均J/服务差及预写区间，同时保留自身学习、N6代价与全部损失世界。小样本不确定可接受；不扩样、不把世界数当训练n，不把包收益解释为技能机制或普通调优充分。 |
 | DM2：有用技能与协作学习 | B05已完整读完：0fits/9面板/144k eval；下一投入选择为一对新独立M/U训练是否值得执行，拟2fits/720k train+96k eval，尚未启动。[B05结果与投入判断](candidates/complementary_skill_learning/NOTES.md#2026-09-23--b05-complete-stochastic-deployment-improves-greedy-but-not-uniform)。 | S改善O但未显示超过R，停止固定库的自动加流/调参；把训练形成收益能否复现与部署随机化分开。不新增完整包胜出或互补机制主张，新训练不是自动统计债务。 |
-| DM3：服务收益与风险控制 | B06：两份旧N分别原执行O与余量反馈F，固定进入/退出阈值0/.05；0fits/160回合/最多240k eval。[固定方案](candidates/uav_service_auxiliary/NOTES.md#2026-09-23--b05-advice-adopted-b06-fixed-observation-only-return-feedback)。 | 分别读取两来源×两面板的原生J、QoS、吞吐、返航成本、零服务与最低电池。风险获益主要伴随服务损失不算兼顾成功；不追加阈值搜索，不抹去原系数配方的负证据。 |
+| DM3：服务收益与风险控制 | B06已完整读完：两份旧N各O/F，0fits/160回合/240k eval；下一动作是[聚焦投入咨询](candidates/uav_service_auxiliary/NOTES.md#pro-question-2026-09-23-b06-feedback-use-and-next-investment)，尚无后继结果批次。[完整结果](candidates/uav_service_auxiliary/NOTES.md#2026-09-23--b06-complete-fixed-feedback-preserves-mean-service-while-reducing-return-margin-cost)。 | 简单合法反馈在两来源、两面板降低返航余量成本并保留平均服务；电池最低值变差、实际充电仍为空。比较持续原生运行的缺口与新学习的额外信息价值，保留所有局部损失，不扩写安全性或自动追加。 |
 
 ### 推进与投入选择
 
@@ -568,7 +579,7 @@ horizon读取，评价、实现、检查、收取和支持成本另计；0fit不
 | Root：科学项目管理 | `01a0cd93-9107-7701-a7e5-84fb071ea8f7` / `local` | `/home/fires/.codex/worktrees/project-management-sept23/hmasd-wsl` · `codex/project-management-sept23` | [项目判断与已完成咨询](archive/2026-09-23/RESEARCH-scientific-management-adopted.md#decision)；原负载操作已完整结束，旧源码/轨迹留在方向表所列原工作区。 |
 | DM1：智能体数量泛化 DM | `01a0c6ef-cdd4-7113-b2d9-20487e35171b` / `local` | `/home/fires/.codex/worktrees/7fef/hmasd-wsl` · `codex/agent-count-generalization` | [NOTES及B15原操作](candidates/agent_count_generalization/NOTES.md#2026-09-23--b15-first-fixed-cell-admitted-with-observation-adopted)；沿后续 notebook 条目恢复同一批次。 |
 | DM2：实际互补技能学习 DM | `01a0cdb8-10c9-7743-a05a-6dcfc42621c5` / `local` | `/home/fires/.codex/worktrees/5916/hmasd-wsl` · `codex/complementary-skill-learning` | [NOTES及B05完整结果](candidates/complementary_skill_learning/NOTES.md#2026-09-23--b05-complete-stochastic-deployment-improves-greedy-but-not-uniform)；B01–B05与已完成Pro均已读回；后续咨询/执行沿notebook恢复。 |
-| DM3：控制用途预测小模块 DM | `01a0c9af-d5cd-7d70-b5e8-9db2c598ad4e` / `local` | `/home/fires/.codex/worktrees/d319/hmasd-wsl` · `codex/uav-service-predictive-control` | [NOTES及B06原操作](candidates/uav_service_auxiliary/NOTES.md#2026-09-23--b06-admitted-after-actual-cuda-checks)；原任务/工作区已恢复，沿记录恢复同一操作。 |
+| DM3：控制用途预测小模块 DM | `01a0c9af-d5cd-7d70-b5e8-9db2c598ad4e` / `local` | `/home/fires/.codex/worktrees/d319/hmasd-wsl` · `codex/uav-service-predictive-control` | [NOTES及B06完整结果](candidates/uav_service_auxiliary/NOTES.md#2026-09-23--b06-complete-fixed-feedback-preserves-mean-service-while-reducing-return-margin-cost)；原实验已结束并读完，后续咨询/执行沿notebook恢复。 |
 
 未活动方向的历史联系人及证据工作区仍在各自 standing 中，不能据此新建或重启任务。
 

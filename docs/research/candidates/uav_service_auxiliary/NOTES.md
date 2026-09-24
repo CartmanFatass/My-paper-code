@@ -6748,3 +6748,482 @@ scientifically incomplete. Full O reproduction is checked before each dependent
 F panel; complete collection, all four block-by-panel comparisons, service losses,
 nonactivation and actual physical effects still require reading. A checkpoint
 rearms observation only; it never restarts the worker or changes the rule.
+
+## 2026-09-23 — B06 complete fixed feedback preserves mean service while reducing return-margin cost
+
+**Decision and scope.** Accept the completed fixed B06 comparison and retain this
+finite observation-only feedback package for the two historical N policies and
+these exposed S7-S2 worlds. Both final panels and both development panels have
+higher mean original J, lower capped/raw return-margin cost and higher mean QoS;
+there are no new zero-service worlds. This follows the useful finite-package
+branch in the complete [prior Pro advice](#pro-question-2026-09-23-b05-risk-service-next-intervention)
+and [pre-result B06 rule](#2026-09-23--b05-advice-adopted-b06-fixed-observation-only-return-feedback).
+It does not make the feedback a safety guarantee or a learned improvement.
+Local service losses, two retained zero-service episodes and worse battery
+minima remain consequential. No threshold, world, source, endpoint or stopping
+rule was changed after observation; no automatic training or confirmation follows.
+
+**Execution, collection and verification.** The original accepted operation at
+source `f92a94b017816467662115dbbc1409793858613c` exited with code0 and a valid
+native identity witness at2026-09-24T03:29:39Z. Its unchanged [manifest](../../../../runs/uav_service_auxiliary/b06_of_a01/launch-manifest.json),
+[config](../../../../runs/uav_service_auxiliary/b06_of_a01/config.json),
+[exit witness](../../../../runs/uav_service_auxiliary/b06_of_a01/process-exit.json)
+and [complete runner summary](../../../../runs/uav_service_auxiliary/b06_of_a01/summary.json)
+retain the binding. Sixteen collected files,228714437 bytes, matched remote
+sizes and SHA256s. The summary itself is1210118 bytes, SHA256
+`82de2a2033417bcb2c1447bd23cc453044ec870e661363dea38bee5db21a7bcf`.
+All eight NPZs and both historical source bundles remain recoverable locally
+and on the recorded node; no output or source worktree was deleted.
+
+Actual cost is **0 new fits /0 optimizer updates /160 episode attempts /
+240000 evaluation team transitions /1920000 agent-step observations**, all
+episodes1500 steps and native truncations. O and F each use120000 transitions.
+All nonactivating worlds are retained; there are no extra training replications,
+omitted worlds or early-end padding. B04/B05 retain seeds914021/914173, development937001–937008,
+final938001–938032, native reward coefficient2, CUDA FP32, TF32 off and four
+Torch threads. Runner wall5958.012672s (**99.300211min**), userCPU5809.094707s,
+systemCPU157.202009s, runner-process peakRSS1472072KiB. Output bytes measured
+inside the runner are228713887; the later550-byte supervisor exit witness
+explains the collection total. Implementation/checks, transport, reading and
+support work are additional, not included in runner wall; no speed claim.
+
+The DM read all four paired panels, every world and the promised diagnostics.
+The independent registered Verifier read all eight raw NPZs without calling the
+candidate rule or aggregation helpers as proof: exact original O equality with
+retained B04/B05 common arrays (41 development and161 final arrays per source),
+all pre-command-change common prefixes, native reward identity, seed/length/end
+counts, hysteresis and entry/exit bits, inactive pass-through and vector-to-action
+formula had zero mismatches. It independently recomputed7268 world/reduction
+fields and260 paired aggregate fields plus row effects/zero-service flags;
+maximum absolute numeric error was0. Full actor observation/state arrays are not
+stored: prefix verification covers retained legal margin/battery, positions,
+actions, skills, rewards/metrics and end flags, not independently recovered full
+actor inputs. Actual-state actor/recurrent continuation and legal observation
+ownership are also checked in the reviewed frozen source and prelaunch tests.
+
+All eight cells record identical before/after policy fingerprints and optimizer
+snapshots and assert normalizer immutability. Historical optimizer counters are
+not new updates. Immutability during execution is a recorded runtime assertion,
+not an inference from good scores or a fresh offline observation of every state.
+The two existing empty training-discriminator-buffer loader notices are the full
+stderr; evaluation uses no training buffer and there was no exception. The READY
+event was read and consumed under generation82, advancing observation to83; no
+experiment was restarted and no Pro question was resent.
+
+**Four separate complete-panel readings.** QoS, throughput and cost are per-step
+means; J is the full1500-step original return. Final32 is primary for each
+historical policy; development8 restricts use. World counts do not add training n.
+
+| Source/panel | J O | J F | J F−O | QoS O | QoS F | QoS F−O |
+| --- | --- | --- | --- | --- | --- | --- |
+| B04 development | 50.842834 | 366.759692 | 315.916858 | 0.252992371 | 0.253492381 | 0.000500010 |
+| B04 final | -496.301830 | 258.691011 | 754.992840 | 0.158025257 | 0.181629811 | 0.023604554 |
+| B05 development | -72.367636 | 418.260942 | 490.628577 | 0.276942462 | 0.287947935 | 0.011005473 |
+| B05 final | -232.025030 | 320.851159 | 552.876189 | 0.216057847 | 0.223176241 | 0.007118394 |
+
+| Source/panel | Mbps O | Mbps F | Capped cost O | Capped cost F | Raw cost O | Raw cost F |
+| --- | --- | --- | --- | --- | --- | --- |
+| B04 development | 7.589771126 | 7.604771440 | 0.105076924 | 0.000017033 | 0.159489740 | 0.000017033 |
+| B04 final | 4.740757721 | 5.448894337 | 0.239923270 | 0.000042644 | 0.482361201 | 0.000042644 |
+| B05 development | 8.308273861 | 8.638438040 | 0.158086006 | 0.000038551 | 0.277330490 | 0.000038551 |
+| B05 final | 6.481735407 | 6.695287219 | 0.180828987 | 0.000042278 | 0.369444984 | 0.000042278 |
+
+The fixed-demand Mbps/QoS relationship is not independent positive evidence.
+Bookkeeping of mean J changes (service sum, negative2×cost sum, other reward
+components) is B04 development(+.750016,+315.179673,−.012831), B04 final
+(+35.406831,+719.641878,−.055868), B05 development(+16.508209,+474.142367,−.021998),
+and B05 final(+10.677591,+542.360129,−.161530). Return-margin penalty savings
+dominate these gains. This is reward accounting, not component-causal attribution.
+
+| Source/panel | J +/0/− worlds | Median deltaJ | DeltaJ range | Amplitude | QoS-loss worlds | Zero service O→F |
+| --- | --- | --- | --- | --- | --- | --- |
+| B04 development | 5/3/0 | 224.748339 | [0.000000, 841.200659] | 841.200659 | 2 | 0→0 |
+| B04 final | 27/5/0 | 673.149142 | [0.000000, 1757.180103] | 1757.180103 | 4 | 6→1 |
+| B05 development | 6/2/0 | 475.959619 | [0.000000, 1349.912413] | 1349.912413 | 1 | 0→0 |
+| B05 final | 22/10/0 | 228.139102 | [0.000000, 1945.907801] | 1945.907801 | 8 | 1→1 |
+
+There is no J-loss world in this finite evaluation. The5/27/6/22 positive
+differences coincide with actual intervention; the20 nonactivating source-worlds
+remain exact ties and stay in the means. Positive counts include the very small
+B04 final938010(+.246716) and B05 final938014(+.000310) changes at late first
+overrides; no post-result practical-success threshold is invented.
+
+B04 final removes zero service in938004/938011/938017/938025/938032, while938030
+remains zero QoS with F J−14.356006 despite its+1491.681624 improvement. B05 final
+retains zero service in938021, F J−13.116204 despite+1211.353471. No panel creates
+a new zero-service world. Those two remaining worlds prevent interpreting all
+positive J changes as service restoration. Absolute mean F QoS remains only
+.181630/.223176 in the final panels; broad usefulness is not settled by risk savings.
+
+**Battery and adverse service readings.** These are true episode minima including
+initial legal battery and all physical post-transition member readings, not the
+mean of per-step minima. Lower minimum battery and better spatial return margin
+can coexist; neither metric substitutes for the other.
+
+| Source/panel | Mean min O | Mean min F | P10 O | P10 F | Worst O | Worst F | Battery-loss worlds |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| B04 development | 0.366579732 | 0.355666712 | 0.341325436 | 0.326217495 | 0.337171152 | 0.312420516 | 5 |
+| B04 final | 0.353111020 | 0.337402785 | 0.325910225 | 0.298954994 | 0.311067401 | 0.285397155 | 25 |
+| B05 development | 0.378313489 | 0.366323025 | 0.340282104 | 0.315998802 | 0.330785595 | 0.300439710 | 6 |
+| B05 final | 0.361645883 | 0.348680473 | 0.319035567 | 0.270643692 | 0.307733819 | 0.258197998 | 19 |
+
+B04 final worst F battery is.285397155 in938032; B05 final is.258197998 in938009.
+The largest paired battery loss is−.053979039 at B04 final938030 and−.069742687
+at B05 final938015. Mean minimum return margin improves in all four panels,
+but this does not certify either a battery floor or future recovery.
+
+QoS and throughput fall in2/4/1/8 worlds for B04dev/B04final/B05dev/B05final.
+The worst mean-QoS losses are−.008551409(937007),−.005573438(938024),
+−.000377888(937006),−.010742923(938007), respectively. The full tables below
+retain every service and battery loss, including their favorable J outcomes.
+
+**Physical intermediate prediction.** Total actual command overrides are
+13330 member-steps, matching mode-active steps. Every override has nonzero
+realized motion; none is logged as blocked. All observed active steps move
+toward the selected station, reduce its distance by approximately30m and
+increase legal margin(.002063539 to.002116784) while spending battery. This
+is direct conditional telemetry for this batch, not a theorem that any
+toward-station command always improves margin. Path separation from O is real.
+
+| Source/panel | Active worlds | Override member-steps | Entries/exits | Interval steps | Max simultaneous | First override range (0-based) | Mean negative-margin member-steps O→F | Mean saturated team-steps O→F |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| B04 development | 5 | 665 | 29/26 | 6–25 | 3 | 956–1389 | 411.000→3.625 | 107.000→0.000 |
+| B04 final | 27 | 6293 | 268/251 | 1–25 | 4 | 569–1494 | 1070.375→8.375 | 282.844→0.000 |
+| B05 development | 6 | 1136 | 49/44 | 4–25 | 3 | 680–1373 | 692.250→6.125 | 180.000→0.000 |
+| B05 final | 22 | 5236 | 219/212 | 1–25 | 4 | 530–1499 | 907.906→6.875 | 217.062→0.000 |
+
+Intervals ending at the horizon are included, not labeled completed recovery.
+Median observed mode interval is24 steps in each panel. Mode-active station
+distance never enters the160m docking radius (minimum1330.946661m across the
+batch). This is short margin-restoring movement, not arrival or recharging.
+All160 episodes still have **zero charging, charger input, cutoff and depletion**;
+station occupancy/queues remain zero. The fourth action coordinate and existing
+backhaul guard are part of the F package, so movement, guard effects and downstream
+policy adaptation are not isolated causal components. No full battery cycle,
+congestion handling or physical failure prevention was tested.
+
+**Fixed250-step descriptions.** These are secondary complete-world means and
+do not select a new endpoint or only successful post-trigger segments.
+
+| Source/panel | Steps | DeltaJ in bin | DeltaQoS | Delta capped cost | Delta raw cost |
+| --- | --- | --- | --- | --- | --- |
+| B04 development | 0–250 | 0.000000 | 0.000000000 | 0.000000000 | 0.000000000 |
+| B04 development | 250–500 | 0.000000 | 0.000000000 | 0.000000000 | 0.000000000 |
+| B04 development | 500–750 | 0.000000 | 0.000000000 | 0.000000000 | 0.000000000 |
+| B04 development | 750–1000 | 1.391738 | -0.000041597 | -0.002804275 | -0.002804275 |
+| B04 development | 1000–1250 | 79.940052 | -0.002531078 | -0.161143248 | -0.168667734 |
+| B04 development | 1250–1500 | 234.585068 | 0.005572737 | -0.466411823 | -0.785364232 |
+| B04 final | 0–250 | 0.000000 | 0.000000000 | 0.000000000 | 0.000000000 |
+| B04 final | 250–500 | 0.000000 | 0.000000000 | 0.000000000 | 0.000000000 |
+| B04 final | 500–750 | 19.508331 | 0.000906659 | -0.038565406 | -0.038565406 |
+| B04 final | 750–1000 | 146.435398 | 0.017292146 | -0.284231791 | -0.373720248 |
+| B04 final | 1000–1250 | 250.420159 | 0.035914913 | -0.482914718 | -0.900630951 |
+| B04 final | 1250–1500 | 338.628952 | 0.087513604 | -0.633571842 | -1.580994742 |
+| B05 development | 0–250 | 0.000000 | 0.000000000 | 0.000000000 | 0.000000000 |
+| B05 development | 250–500 | 0.000000 | 0.000000000 | 0.000000000 | 0.000000000 |
+| B05 development | 500–750 | 2.765206 | -0.000048897 | -0.005555485 | -0.005555485 |
+| B05 development | 750–1000 | 31.082062 | -0.000134690 | -0.062228018 | -0.063283038 |
+| B05 development | 1000–1250 | 143.822292 | 0.018391461 | -0.278443441 | -0.432201401 |
+| B05 development | 1250–1500 | 312.959017 | 0.047824961 | -0.602057789 | -1.162711711 |
+| B05 final | 0–250 | 0.000000 | 0.000000000 | 0.000000000 | 0.000000000 |
+| B05 final | 250–500 | 0.000000 | 0.000000000 | 0.000000000 | 0.000000000 |
+| B05 final | 500–750 | 26.223631 | 0.000166667 | -0.052360132 | -0.060230316 |
+| B05 final | 750–1000 | 106.917931 | 0.002615619 | -0.212581259 | -0.338486643 |
+| B05 final | 1000–1250 | 167.519312 | 0.019939356 | -0.325230595 | -0.713652547 |
+| B05 final | 1250–1500 | 252.215316 | 0.019988720 | -0.494548271 | -1.104046732 |
+
+**All complete world readings.** J is absolute raw return; service/cost are
+per-step means. Battery is the true episode minimum. All rows enter panel means;
+zero service, nonactivation and losses are not filtered. Full throughput/raw-cost,
+event, interval, bin and margin fields remain in the linked runner summary/NPZs.
+
+**B04 development**
+
+| World | J O | J F | DeltaJ | QoS O | QoS F | Cost O | Cost F | Min battery O | Min battery F | Override member-steps |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 937001 | 303.743662 | 303.743662 | 0.000000 | 0.210050087 | 0.210050087 | 0.000000000 | 0.000000000 | 0.377877870 | 0.377877870 | 0 |
+| 937002 | -577.833704 | 223.333626 | 801.167330 | 0.146016387 | 0.156951439 | 0.261689771 | 0.000066420 | 0.414504474 | 0.384285067 | 332 |
+| 937003 | 388.841047 | 388.841047 | 0.000000 | 0.267897216 | 0.267897216 | 0.000000000 | 0.000000000 | 0.363308388 | 0.363308388 | 0 |
+| 937004 | 63.889124 | 447.371109 | 383.481985 | 0.305692904 | 0.307470220 | 0.126985203 | 0.000047417 | 0.337171152 | 0.312420516 | 117 |
+| 937005 | 187.918165 | 187.918165 | 0.000000 | 0.133968947 | 0.133968947 | 0.000000000 | 0.000000000 | 0.391297960 | 0.391297960 | 0 |
+| 937006 | 339.754194 | 405.768887 | 66.014694 | 0.285804708 | 0.280589137 | 0.024616006 | 0.000003323 | 0.355398003 | 0.351013193 | 24 |
+| 937007 | -367.290467 | 473.910191 | 841.200659 | 0.334601897 | 0.326050489 | 0.284685066 | 0.000009142 | 0.343105843 | 0.332130485 | 96 |
+| 937008 | 67.720649 | 503.190847 | 435.470197 | 0.339906821 | 0.344961516 | 0.142639346 | 0.000009961 | 0.349974165 | 0.333000213 | 96 |
+
+**B04 final**
+
+| World | J O | J F | DeltaJ | QoS O | QoS F | Cost O | Cost F | Min battery O | Min battery F | Override member-steps |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 938001 | -876.165009 | 397.525291 | 1273.690299 | 0.266074060 | 0.274740114 | 0.420239908 | 0.000007576 | 0.335210634 | 0.309586364 | 144 |
+| 938002 | 304.295543 | 304.295543 | 0.000000 | 0.210346355 | 0.210346355 | 0.000000000 | 0.000000000 | 0.346237028 | 0.346237028 | 0 |
+| 938003 | -336.553081 | 294.968628 | 631.521709 | 0.194758185 | 0.205080149 | 0.205514653 | 0.000119542 | 0.339606263 | 0.315045543 | 387 |
+| 938004 | -1035.744855 | 91.709410 | 1127.454265 | 0.000000000 | 0.070742213 | 0.340485926 | 0.000038945 | 0.381030895 | 0.342662450 | 293 |
+| 938005 | -1394.507223 | 229.374058 | 1623.881282 | 0.143495659 | 0.162253883 | 0.532073772 | 0.000017443 | 0.332630758 | 0.345992905 | 186 |
+| 938006 | -499.094901 | 402.873599 | 901.968500 | 0.257748759 | 0.277777435 | 0.290663443 | 0.000022096 | 0.347631278 | 0.336081163 | 168 |
+| 938007 | 94.403898 | 441.273494 | 346.869596 | 0.302476983 | 0.304024160 | 0.114852264 | 0.000002654 | 0.325417669 | 0.322233033 | 48 |
+| 938008 | -1484.760602 | 189.553653 | 1674.314256 | 0.120105395 | 0.135474767 | 0.550440201 | 0.000029617 | 0.337851272 | 0.322922019 | 304 |
+| 938009 | -784.334361 | 268.059297 | 1052.393659 | 0.176843948 | 0.188585014 | 0.344981352 | 0.000046394 | 0.360146508 | 0.357939644 | 337 |
+| 938010 | 345.871096 | 346.117813 | 0.246716 | 0.240104177 | 0.240104177 | 0.000085152 | 0.000002921 | 0.359629341 | 0.357572120 | 6 |
+| 938011 | -624.503496 | 90.273078 | 714.776574 | 0.000000000 | 0.069345510 | 0.203617839 | 0.000022216 | 0.346415617 | 0.336281837 | 89 |
+| 938012 | 76.060876 | 331.833025 | 255.772149 | 0.228434757 | 0.229509677 | 0.084733754 | 0.000005024 | 0.395598946 | 0.379558730 | 48 |
+| 938013 | 283.359371 | 363.404585 | 80.045214 | 0.250415869 | 0.250291656 | 0.026744835 | 0.000000873 | 0.325651582 | 0.318020917 | 24 |
+| 938014 | -155.605685 | 149.927347 | 305.533032 | 0.107733333 | 0.107733333 | 0.101851475 | 0.000006715 | 0.313548464 | 0.299033823 | 72 |
+| 938015 | -1290.896840 | 318.931003 | 1609.827843 | 0.162586641 | 0.222799355 | 0.506869307 | 0.000231029 | 0.349697350 | 0.297424133 | 777 |
+| 938016 | -914.169805 | 261.902626 | 1176.072432 | 0.129794123 | 0.182877844 | 0.365715665 | 0.000047619 | 0.349894633 | 0.335657245 | 289 |
+| 938017 | -266.916911 | 41.955252 | 308.872164 | 0.000000000 | 0.038184990 | 0.083912741 | 0.000047848 | 0.351980656 | 0.340960967 | 117 |
+| 938018 | -603.156456 | 13.673577 | 616.830033 | 0.020357698 | 0.019156262 | 0.206214741 | 0.000003790 | 0.382711448 | 0.370029383 | 72 |
+| 938019 | 101.090234 | 279.246750 | 178.156515 | 0.195357608 | 0.195576005 | 0.059287460 | 0.000009823 | 0.399537689 | 0.385744196 | 35 |
+| 938020 | -891.134440 | 318.639590 | 1209.774030 | 0.178865577 | 0.221683076 | 0.382148781 | 0.000178056 | 0.379736345 | 0.336047863 | 611 |
+| 938021 | 131.628216 | 131.628216 | 0.000000 | 0.097151555 | 0.097151555 | 0.000000000 | 0.000000000 | 0.348999675 | 0.348999675 | 0 |
+| 938022 | 431.154043 | 431.154043 | 0.000000 | 0.295783593 | 0.295783593 | 0.000000000 | 0.000000000 | 0.351308657 | 0.351308657 | 0 |
+| 938023 | -1252.867887 | 367.410112 | 1620.277999 | 0.233882498 | 0.254588277 | 0.529776070 | 0.000013820 | 0.328238009 | 0.296523858 | 120 |
+| 938024 | -483.329470 | 351.406237 | 834.735707 | 0.250027386 | 0.244453948 | 0.281053759 | 0.000024881 | 0.333705023 | 0.320133558 | 192 |
+| 938025 | -1198.684186 | 124.236652 | 1322.920837 | 0.000000000 | 0.092990272 | 0.394508739 | 0.000023483 | 0.358841348 | 0.330585284 | 133 |
+| 938026 | 337.549766 | 534.424674 | 196.874908 | 0.366640192 | 0.366271612 | 0.065839315 | 0.000030055 | 0.359230638 | 0.360358156 | 121 |
+| 938027 | 185.714621 | 185.714621 | 0.000000 | 0.132300357 | 0.132300357 | 0.000000000 | 0.000000000 | 0.379850347 | 0.379850347 | 0 |
+| 938028 | -1375.314685 | 312.493648 | 1687.808333 | 0.147583941 | 0.218152087 | 0.527563158 | 0.000250810 | 0.341049595 | 0.303613391 | 945 |
+| 938029 | 316.524526 | 316.524526 | 0.000000 | 0.219732176 | 0.219732176 | 0.000000000 | 0.000000000 | 0.442478182 | 0.442478182 | 0 |
+| 938030 | -1506.037629 | -14.356006 | 1491.681624 | 0.000000000 | 0.000000000 | 0.497305144 | 0.000045918 | 0.352925274 | 0.298946235 | 217 |
+| 938031 | 21.844910 | 182.136020 | 160.291111 | 0.128207407 | 0.128459259 | 0.053312054 | 0.000004307 | 0.331694112 | 0.323663253 | 47 |
+| 938032 | -1537.378126 | 219.801977 | 1757.180103 | 0.000000000 | 0.155984845 | 0.507753122 | 0.000131143 | 0.311067401 | 0.285397155 | 511 |
+
+**B05 development**
+
+| World | J O | J F | DeltaJ | QoS O | QoS F | Cost O | Cost F | Min battery O | Min battery F | Override member-steps |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 937001 | 281.006204 | 281.006204 | 0.000000 | 0.194733840 | 0.194733840 | 0.000000000 | 0.000000000 | 0.393161605 | 0.393161605 | 0 |
+| 937002 | -258.928491 | 373.562278 | 632.490769 | 0.244953696 | 0.257470162 | 0.204763712 | 0.000138140 | 0.436937331 | 0.401187014 | 395 |
+| 937003 | 366.571828 | 686.000297 | 319.428468 | 0.465480173 | 0.467213453 | 0.105639910 | 0.000017415 | 0.371493050 | 0.371458820 | 72 |
+| 937004 | -94.156202 | 590.716628 | 684.872830 | 0.393540367 | 0.403246815 | 0.223451071 | 0.000007439 | 0.370602315 | 0.370235470 | 72 |
+| 937005 | 409.080037 | 409.080037 | 0.000000 | 0.281843001 | 0.281843001 | 0.000000000 | 0.000000000 | 0.432866343 | 0.432866343 | 0 |
+| 937006 | 206.564970 | 300.404478 | 93.839507 | 0.210093553 | 0.209715664 | 0.031466832 | 0.000001677 | 0.346309637 | 0.338568253 | 24 |
+| 937007 | -1023.588074 | 326.324340 | 1349.912413 | 0.174785536 | 0.227364948 | 0.423720908 | 0.000075072 | 0.330785595 | 0.300439710 | 379 |
+| 937008 | -465.491357 | 378.993274 | 844.484631 | 0.250109531 | 0.261995595 | 0.275645617 | 0.000068662 | 0.344352037 | 0.322666984 | 194 |
+
+**B05 final**
+
+| World | J O | J F | DeltaJ | QoS O | QoS F | Cost O | Cost F | Min battery O | Min battery F | Override member-steps |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 938001 | -187.990277 | 431.308497 | 619.298774 | 0.281651559 | 0.297354191 | 0.198642781 | 0.000023144 | 0.341567143 | 0.332525706 | 121 |
+| 938002 | 304.681632 | 304.681632 | 0.000000 | 0.211052091 | 0.211052091 | 0.000000000 | 0.000000000 | 0.332845421 | 0.332845421 | 0 |
+| 938003 | -285.235167 | 299.771945 | 585.007112 | 0.210874174 | 0.208197118 | 0.196347291 | 0.000023431 | 0.340932293 | 0.326217218 | 144 |
+| 938004 | -1040.922537 | 183.935142 | 1224.857678 | 0.097844788 | 0.131840192 | 0.391482952 | 0.000079132 | 0.373240214 | 0.362124330 | 318 |
+| 938005 | -1796.058763 | 149.849038 | 1945.907801 | 0.037220341 | 0.109295763 | 0.612961156 | 0.000133485 | 0.313619565 | 0.268703771 | 602 |
+| 938006 | -880.517761 | 207.437396 | 1087.955157 | 0.143121033 | 0.146959981 | 0.360788964 | 0.000049459 | 0.318844569 | 0.305012778 | 245 |
+| 938007 | -297.303106 | 158.373126 | 455.676233 | 0.125488008 | 0.114745085 | 0.157257500 | 0.000002613 | 0.327238138 | 0.322238785 | 24 |
+| 938008 | -1257.431391 | 172.892817 | 1430.324208 | 0.125526562 | 0.123372387 | 0.477847770 | 0.000038003 | 0.329082937 | 0.323195987 | 240 |
+| 938009 | -1611.942492 | 6.501484 | 1618.443976 | 0.004222222 | 0.014568627 | 0.534816733 | 0.000138078 | 0.320754550 | 0.258197998 | 397 |
+| 938010 | 385.535197 | 395.696295 | 10.161097 | 0.273256121 | 0.273367510 | 0.003334621 | 0.000003328 | 0.349556988 | 0.341732045 | 24 |
+| 938011 | 595.705532 | 595.705532 | 0.000000 | 0.407250694 | 0.407250694 | 0.000000000 | 0.000000000 | 0.381637964 | 0.381637964 | 0 |
+| 938012 | 182.694045 | 303.698838 | 121.004793 | 0.211787761 | 0.210391925 | 0.041053287 | 0.000034953 | 0.413075285 | 0.393885999 | 131 |
+| 938013 | 607.339525 | 607.339525 | 0.000000 | 0.414423244 | 0.414423244 | 0.000000000 | 0.000000000 | 0.377124043 | 0.377124043 | 0 |
+| 938014 | 262.644013 | 262.644322 | 0.000310 | 0.183699472 | 0.183699472 | 0.000000339 | 0.000000236 | 0.373599153 | 0.373599153 | 1 |
+| 938015 | -1520.376718 | 69.091854 | 1589.468572 | 0.052689409 | 0.056677917 | 0.528510931 | 0.000326961 | 0.328531028 | 0.258788341 | 904 |
+| 938016 | 131.370650 | 393.703297 | 262.332647 | 0.272036213 | 0.271812008 | 0.087564020 | 0.000011913 | 0.363860567 | 0.347234395 | 72 |
+| 938017 | 418.179523 | 547.175022 | 128.995499 | 0.374194091 | 0.375232186 | 0.042493109 | 0.000013657 | 0.378571780 | 0.380161321 | 43 |
+| 938018 | 583.507255 | 583.507255 | 0.000000 | 0.399342115 | 0.399342115 | 0.000000000 | 0.000000000 | 0.400974300 | 0.400974300 | 0 |
+| 938019 | -754.504727 | 66.260420 | 820.765146 | 0.009888889 | 0.052993251 | 0.252211529 | 0.000058755 | 0.386119481 | 0.352889925 | 353 |
+| 938020 | 666.535107 | 666.535107 | 0.000000 | 0.454360552 | 0.454360552 | 0.000000000 | 0.000000000 | 0.413796232 | 0.413796232 | 0 |
+| 938021 | -1224.469675 | -13.116204 | 1211.353471 | 0.000000000 | 0.000000000 | 0.404019744 | 0.000041326 | 0.307733819 | 0.308871499 | 218 |
+| 938022 | 333.905437 | 333.905437 | 0.000000 | 0.230813124 | 0.230813124 | 0.000000000 | 0.000000000 | 0.351440637 | 0.351440637 | 0 |
+| 938023 | -1565.750359 | 107.818352 | 1673.568711 | 0.012032549 | 0.081111695 | 0.523557072 | 0.000060544 | 0.323127515 | 0.288102983 | 360 |
+| 938024 | -210.134824 | 412.483489 | 622.618313 | 0.293700088 | 0.285180436 | 0.211843945 | 0.000049386 | 0.365200024 | 0.350725440 | 208 |
+| 938025 | 362.754967 | 362.754967 | 0.000000 | 0.252246706 | 0.252246706 | 0.000000000 | 0.000000000 | 0.410061828 | 0.410061828 | 0 |
+| 938026 | 348.324970 | 402.772280 | 54.447311 | 0.279101203 | 0.277534576 | 0.018935681 | 0.000000585 | 0.364078825 | 0.363368800 | 24 |
+| 938027 | 121.856158 | 121.856158 | 0.000000 | 0.088756063 | 0.088756063 | 0.000000000 | 0.000000000 | 0.388112592 | 0.388112592 | 0 |
+| 938028 | -1607.928730 | 74.298639 | 1682.227368 | 0.060830256 | 0.058816657 | 0.562182751 | 0.000228594 | 0.313951786 | 0.267871512 | 709 |
+| 938029 | 344.417567 | 344.417567 | 0.000000 | 0.237933755 | 0.237933755 | 0.000000000 | 0.000000000 | 0.471269721 | 0.471269721 | 0 |
+| 938030 | 372.052300 | 565.997856 | 193.945556 | 0.386593155 | 0.387482657 | 0.064217704 | 0.000013936 | 0.374127747 | 0.370523542 | 25 |
+| 938031 | 446.204619 | 446.204619 | 0.000000 | 0.306686858 | 0.306686858 | 0.000000000 | 0.000000000 | 0.381478478 | 0.381478478 | 0 |
+| 938032 | 348.057057 | 701.735373 | 353.678316 | 0.475228005 | 0.478140864 | 0.116457707 | 0.000021364 | 0.357113636 | 0.353062398 | 73 |
+
+**Cumulative update and next decision.** Current main background at
+`4f1f1f9eecf00c4218d827033bf858dd7f79a740`, topic6 and the service/risk plan,
+was read together with the owner-adopted September23 DM-autonomy/workflow changes.
+The B05 lesson made preservation of service and all contrary worlds decisive;
+B06 now supplies a concrete conditional counterexample to the idea that reducing
+these policies' return-margin penalty must mainly sacrifice service. It strengthens
+the value of an ordinary legal current-observation feedback comparator before
+paying for another predictive auxiliary or critic. B03's unreplicated auxiliary
+gains and B04/B05's coefficient4 service limitation are unchanged; nothing here
+revives those recipes, identifies a representation/credit bottleneck, establishes
+MARL population superiority or adds new training replication.
+
+The main gap has become more specific: all observed feedback is brief movement
+far from stations, while battery minima worsen and charging never occurs. There
+is useful finite-horizon control evidence, but no observed sustained service/
+energy cycle. A new direct learning comparison would need a reason to beat this
+stronger executable baseline; another set of1500-step worlds would mostly measure
+more of the already-tested conditional use. A separately declared native longer
+operation comparison could test the unobserved cycle, but would be a new task
+contract/exposure, not an extension of B06 or a remedy selected to improve its score.
+
+Selected next action is a focused Pro scientific consultation on that investment
+choice, after publishing this complete result: whether a source-defined longer
+native-operation comparison has greater information value than a new learning
+comparison or retaining the bounded result without more computation. This uses
+section5 because the next question/comparator or claim scope may change. The prior
+advice already covers B06 retention; it did not select a sustained-operation or
+new learning study. No successor experiment, threshold search, safety claim or
+confirmation is launched by this result. The active DM responsibility continues;
+this is a chosen decision step, not a missing permission or fabricated dependency.
+
+**Raw recovery.** Config, complete per-world summary and native status are
+versioned unchanged. Bulk raw output is retained under
+`/home/wu/hmasd-worktrees/usa-b06-f92a94b01/runs/uav_service_auxiliary/b06_of_a01`
+on `wsl_4070` (`hmasd-wsl-node`), with a verified collection copy at
+`/home/fires/.codex/worktrees/d319/hmasd-wsl/runs/uav_service_auxiliary/b06_of_a01`.
+Source and its operation metadata remain intact. Paths below are relative to
+that output root and hashes are also present in the original summary.
+
+| Raw path | Bytes | SHA256 |
+| --- | --- | --- |
+| B04/trajectories/development_F.npz | 11078841 | `b741be06e83bf6ab57365da41dcda745b87e189daa19c7ac1f5985637f007f25` |
+| B04/trajectories/development_O.npz | 11023687 | `f928ddce074dcbcc77014dc7da9787c1f5c03151542040eb480ff7e549d9d9b1` |
+| B04/trajectories/final_F.npz | 45008934 | `c579759efb2ce0197923e50ae685a5a1c2f545b418a1e43057acb7ff95774398` |
+| B04/trajectories/final_O.npz | 44775904 | `f5afe84a354791c9071ed957a1f2b17ae515a00d7dc187a8b12ccbd0c965a832` |
+| B05/trajectories/development_F.npz | 11451771 | `3c2f2c31448ec2ab1e870a7fd7fee8a1f80af2f82ce48214cd5a1fbc793b6e9d` |
+| B05/trajectories/development_O.npz | 11458985 | `1dd048b1b476733c344559d86ed9cf9feb1123b96131d68b93ccb920a9c0d6f8` |
+| B05/trajectories/final_F.npz | 46358433 | `a5fda1fa3d121d8d7d2440e3b88e5e8ec73d5743ef2312aee320cbcfb7b0231b` |
+| B05/trajectories/final_O.npz | 46337207 | `adba5176519eee5bfcadf22a1e645fd2002798bbbf4b58f7415078c5c000a8fc` |
+
+## Pro question 2026-09-23 b06-feedback-use-and-next-investment
+
+Conversation: reuse this direction's existing Jev conversation; its URL remains in local operation metadata only.
+
+Question: B06 的固定合法余量反馈已在两个旧 N 制品的两个面板上改善平均原生 J、成本与服务，但没有到站充电，且最低电池变差。下一笔科学投入应优先检验更长原生运行中的持续服务/能量循环，还是需要一个新的学习比较，或有理由止于当前有限用途？请判断这个具体选择，给出最有信息价值且可执行的下一观察及反面分支；不需要再次批准 B06，不要求新增架构或固定数量候选。
+
+### Standing and decision boundary
+
+B06 已完整收取、独立数值核验并按事前分支保留有限反馈包。完整新条目是本文件
+`2026-09-23 — B06 complete fixed feedback preserves mean service while reducing return-margin cost`，
+含全部80个配对世界、绝对数值、服务/电池损失、六段250-step描述和原始产物定位。
+原执行 O 与 retained B04/B05 N 的共同数组完全复现；全部先于首次实际覆盖的保留诊断前缀一致。
+规则/汇总独立核验未调用候选答案作证明，数值差0。完整 actor observation/state 数组未记录，
+不可把诊断前缀匹配说成对全部 actor 输入的独立逐数组核验。源码/测试另核验合法信息和真实历史。
+
+两份历史 N：B04 seed914021，B05 seed914173，最终 update30/各180k训练；不是新训练。
+此次固定 CUDA FP32/TF32off/4threads、S7-S2、N8、k10、每世界1500步，O/F各80回合，
+0新fits、0更新、共240k评价team transitions、1.92M成员观察、runner99.300211min。
+原生评价 J 保持 QoS − 2×capped return cost − 原事件罚 + 原 PBRS，不改奖励/需求/电量。
+两来源都用 development937001–937008、final938001–938032；final是各制品主要用途读数，
+开发约束范围。这些世界已曝光，不能当新 held-out 确认，世界数不增加训练 n。
+
+| 来源/面板 | J O→F；差 | QoS O→F | capped cost O→F | J正/平/负 | 零服务O→F |
+| --- | --- | --- | --- | --- | --- |
+| B04 dev8 | 50.842834→366.759692；+315.916858 | .252992371→.253492381 | .105076924→.000017033 | 5/3/0 | 0→0 |
+| B04 final32 | −496.301830→258.691011；+754.992840 | .158025257→.181629811 | .239923270→.000042644 | 27/5/0 | 6→1 |
+| B05 dev8 | −72.367636→418.260942；+490.628577 | .276942462→.287947935 | .158086006→.000038551 | 6/2/0 | 0→0 |
+| B05 final32 | −232.025030→320.851159；+552.876189 | .216057847→.223176241 | .180828987→.000042278 | 22/10/0 | 1→1 |
+
+风险账面节省主导J变化，吞吐与QoS固定倍数不增加证据。不是所有服务都改善：四格有2/4/1/8个
+QoS损失世界，最差依次−.008551409/−.005573438/−.000377888/−.010742923。B04 final938030、
+B05 final938021仍为零服务，F J为−14.356006/−13.116204，尽管各自J差+1491.681624/+1211.353471。
+四格最低电池均值依次从.366579732/.353111020/.378313489/.361645883降至
+.355666712/.337402785/.366323025/.348680473；P10也全低。B04/B05 final的P10为
+.325910225→.298954994、.319035567→.270643692，最差电池.311067401→.285397155、
+.307733819→.258197998。成本不是电量，两个指标必须分读。
+
+F 保持原网络/normalizer，actor在F实际历史每步运行，skill/GRU仅原生episode reset，不用影子O动作。
+它只读当前合法观察里的自身raw margin和有效站点相对坐标：margin<=0进入，>=.05退出；
+按当前3D最近站点、固定30m/s水平/5m/s垂直尺度，T=max(1,||r_xy||/30,|r_z|/5)，
+v=r/T，提交(vx/30,vy/30,vz/5,1)；d<=160时提交(0,0,0,1)。第四维及原backhaul guard
+例外也是包的一部分，没有纯速度因果主张。未激活时传递当前actor基于当前F历史的原命令。
+
+实际60/80来源-世界激活，20个未激活仍全留在均值。共13330成员覆盖步，每步都有约30m朝站点
+实际位移、合法margin增加(.002063539–.002116784)，同时消耗电量。覆盖段中位24步，最多25步；
+最近站点距离仍至少1330.946661m，没有覆盖进入160m docking半径。所有160回合均在1500原生
+truncation结束，充电/输入能量/排队/切断/耗尽全零。它是短时空间余量修复，没有观察完整能量循环。
+
+之前的负证据仍成立：B03两个D/S/G完整共同学习区组的收益未复制、共同事实MSE不选择原生用途；
+B04/B05训练系数2→4的最终J收益复制，但开发均值均负，B05最终QoS下降且R有8个零服务世界。
+这些配方不复活。B06给了更强的简单可执行对照，不能因新平均正值就宣称预测、critic或更强学习必需。
+
+上一轮完整Pro回答已明确覆盖“双方最终与开发有用则保留有限包、无自动训练/确认”的分支，本次
+保留据此完成；它没有选择后继持续运行任务或新的学习比较。现在问的是发生实质变化的下一投入选择，
+不是每批结果的重复评审。当前无运行中的结果批次、无重复Send、无待验收的旧Pro答复。
+
+### The source-defined distinction that may change the next choice
+
+我的暂定偏好是先问当前强简单反馈在完整能量使用过程中还剩什么服务问题，再买新训练。
+直接改评价horizon可能有信息，但不是把旧轨迹无改动地接长：独立只读Scout发现原生
+`current_step/max_steps`进入actor观察和中央state，排队等待也按max_steps归一化。
+将max_steps1500改3000从step1就改变时间信息，冻结策略动作/循环历史可能随即改变。
+因此“头1499步应完全复现B06”不是可用合同；固定动作序列的物理前缀与策略闭环前缀是两回事。
+只为保前缀而另造时间分母/剪裁也会是新的观察干预，不能偷偷叫原生长时运行。
+
+冻结B06 source verifier要求保存checkpoint的episode_length=1500，新研究必须保留该训练身份，
+另显式声明评价配置差异，不能改旧config/digest或放松B06再重跑。当前actor/技能代码没有1500步
+强制结构reset，k10刷新仍可继续；评价config/buffer语义及时间输入要分别处理。
+
+实际S2源配置：160Wh，初始比例uniform[.75,1]，reserve.1，emergency.05，cutoff.02；
+两站每站容量1、1000W充电、160m docking、20m capture、实际速度<=1m/s且有合法dock请求才可入站；
+每步先耗能再充电，所有成员电池耗尽可提前terminate。更长运行仅增加机会，代码并不保证这些策略会
+到站充电；不造低电量开局、掉线、oracle位置或强制排队来追求阳性事件。
+
+请基于这些源事实判断：若选原生更长任务，它回答的是冻结策略+F在新时间信息/任务范围下的用途，
+而非纯延长能量暴露机制；这个代价是否仍值得？如果不值得，指出比它更有决策价值的实际学习或其他
+窄比较，说明哪个中间变化和原生服务/风险后果能区分最强替代解释。也可建议不再支付计算，给出真实
+信息价值/机会成本理由；完成一个配方本身不是停止理由。不要按B06结果搜阈值、速度或站点协调参数。
+
+### Prospective cost and constraints
+
+这是科学选择咨询，尚非新实验注册。长时路线的具体可比成本尺度是两旧N×O/F×40旧世界×3000步，
+**0新fits、160次episode尝试、最多480k评价team transitions/3.84M成员观察**；H3000是待论证的
+任务候选，不是从新运行中选择、也不保证充电。按B06吞吐约198.6 runner分钟仅作量级参考，实际新增
+低电量/充電逻辑与存储成本未知。可以据源码和问题选择更小且诚实的固定比较，不能事后加长直到事件出现。
+保留开发/最终、两个来源、实际早终及全部损失的科学价值，需要同成本一起比较。
+
+若主张新的完整学习比较，成本参照是一对独立新训练实例、每臂180k的2fits/360k训练，加原B05式
+两臂192k评价，至少552k team transitions和实施/核验；这只是成本参照，不指定新网络/种子/配方，
+也不是确认。必须说明为何当前简单反馈这个更强参照仍留下值得学的缺口。要做确认须另有实际claim、
+3–5新独立训练seed/arm的固定前瞻与批评，本问题不批准确认。
+
+Owner pause当前lifted；owner于2026-09-23授权DM自主选题/转向、失败或完成后回看项目证据并选有价值
+的下一步，继续保留全部反证。这个授权不改B06冻结合同，不接管其他DM，不要求新任务或跨task通信。
+Pro只给建议，不启动实验、不改代码/阈值/控制，不建立新许可门槛。当前仅此一个科学选择。
+
+### Context and source precedence
+
+- **当前治理/方法/项目背景**明确用main `4f1f1f9eecf00c4218d827033bf858dd7f79a740`：
+  `docs/project/OPERATING_CONSTITUTION.md` §§1–5、7–8；`.agents/skills/hmasd-scientific-tools/SKILL.md`
+  的 Update the working explanation、Comparators、Statistics、Cost and exposure、Pro；
+  `.agents/skills/hmasd-research-engineering/SKILL.md` 的 Checks and review、Publishing direction results。
+  `docs/research/RESEARCH.md` topic6中服务/风险条目和 Current research plan 的服务线：旧B05反证促成B06
+  的服务保留读法；本问题给出的新B06事实更新该背景。其他方向的用途/部署区别可用来约束类比，
+  不要求读完整项目历史或接管其工作。
+- **新结果与旧咨询**用本次 `source_sha` 的
+  `docs/research/candidates/uav_service_auxiliary/NOTES.md`：上面的完整B06结果、
+  `2026-09-23 — B05 advice adopted; B06 fixed observation-only return feedback`，
+  `Pro question 2026-09-23 b05-risk-service-next-intervention` 的完整Answer，及
+  `2026-09-23 — B05 complete endpoint risk savings recur service gains do not`。
+  `runs/uav_service_auxiliary/b06_of_a01/{config,summary,launch-manifest,process-exit}.json`为本次完整结果；
+  必要时读取B04/B05 N/R summary，不能把summary核对说成自己读到了仓库外二进制原始轨迹。
+- **冻结实现/源事实**用 `f92a94b017816467662115dbbc1409793858613c`：
+  `experiments/candidates/uav_service_auxiliary/b06/{feedback,native}.py`（合法F、原执行、保存配置和身份），
+  `experiments/candidates/uav_service_auxiliary/b01/native.py`（make_config、make_env），
+  `experiments/candidates/uav_service_auxiliary/b04/evaluation.py`，
+  `envs/pettingzoo/relay/routed_core.py`（truncation、time_ratio actor/state），
+  `envs/pettingzoo/relay/energy_aware.py`（margin、能量/充电、等待归一化、终止和原reward），
+  `hmasd/agent.py`（step、reset_env_state、原skill clock），`configs/config_1.py`。
+  重点核对max_steps/观察与实际低电量/充电规则；不要求改已冻结实现。
+
+当前明确的治理/方法替代旧会话中冲突的指令；历史/冻结材料只按其原实验含义使用。
+不要用移动branch或聊天记忆替代给定revision。若关键源不可读，指出影响哪个判断，其他可支持的推理继续。
+不需要资料读取回执表或额外结果文件。
+
+Constraints: no training, no experiment launch, no source/control edits. Write only inside the
+empty `### Answer` subsection of this exact question in
+`docs/research/candidates/uav_service_auxiliary/NOTES.md` on branch
+`codex/uav-service-predictive-control`, repository `CartmanFatass/My-paper-code`.
+Read at the supplied immutable source_sha, but fetch the latest target file before
+writing and use its actual blob SHA. Preserve the question and every other byte;
+stop on overlapping edits. Return the actual answer commit on successful write.
+If GitHub writeback fails, return the complete answer in chat, not a receipt or link.
+
+Return: 说明哪些判断被加强/削弱/保持，最强反对意见，选定下一投入及其信息价值。
+若建议新比较，给最小完整的可前瞻方案、匹配条件/必要配置区别、实际成本、先于结果的中间与原生
+预测、失败/非激活如何改变投入；不要把建议变成新增许可要求或自动排队实验。
+给出MATERIAL_DISSENT: yes/no，引用实际使用的关键源并说明未读的关键材料。
+
+### Answer
