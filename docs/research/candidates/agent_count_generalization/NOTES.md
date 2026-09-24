@@ -13898,3 +13898,88 @@ Pro send. There is1 started/0 complete B15 fit, five fixed cells unlaunched, and
 pending Pro. Next is complete collection/verification of b1_h6, followed by the
 already fixed b1_set and remaining block order independent of observed scores,
 subject only to the stated genuine technical/resource/owner-stop conditions.
+
+## 2026-09-23 — B15 block1 H6 complete and accepted; fixed SET next
+
+READY event `f4b6f5032646a6c27bd889c2` at generation126 reports the original
+b1_h6 process exit0. DM separately accepts this one complete cell after collecting
+all20 native files (556,156,485 bytes), matching every local/remote size and SHA256,
+reading all45 training rows and four saved panels, and independently recomputing
+their native transition quantities. There is1/6 complete fit and no complete paired
+training block yet. This is not the confirmation verdict and cannot change the
+fixed remaining order, source, endpoint or analysis rule.
+
+**Actual execution and independent checks.** Published source remains
+`e0a20add999ded53943f99df15f596822e6c13dc`; all12 declared before/after path digests
+match those committed bytes. The [summary](../../../../runs/agent_count_generalization/s1_bounded_confirmation_b15_b1_h6_s994101/summary.json)
+and [45 update rows](../../../../runs/agent_count_generalization/s1_bounded_confirmation_b15_b1_h6_s994101/training.jsonl)
+agree exactly:360k collected/stored team steps,2.16M UAV steps,720 episodes/resets,
+45 updates;675 coordinator,101250 actor,101250 critic,675 team discriminator and
+2700 individual discriminator optimizer calls. Required learner parameters moved.
+Initial0/final45 N8 then N6 panels each contain32 complete500-step worlds:64k eval
+team/448k UAV steps,128 episodes,2000 policy calls,zero optimizer/storage calls.
+Both full stage-isolation snapshots match. The recorded training reset trace has
+46 reset scenes per16 lanes at2994100…2994115; its SHA256 is
+`a1c6d26ae3eafbd1aa270e4c3f0203a3110cffbb1787d37e947ad4ab8961aa3f`,
+retained for the upcoming within-block SET comparison.
+
+The fixed prewritten B15 validator passes for this cell. A separate saved-array
+reader recomputes E/S/U from native eligible/connected links with exclusivity and
+per-UAV capacity, coverage S/50, connected-user quality, physical height penalty,
+and J=.7C+.3Q-P=N*scalar_reward at every transition. All agree with the runner's
+per-world arrays; raw actions clip exactly to executed actions, initial scenes
+match between stages, state/observation successors match the next transition,
+and all arrays are finite. Training clipping/storage/logprob witnesses, native
+component identities, inference counts and terminal/reset records pass as well.
+
+Actual checkpoint00 and checkpoint45 each contain179 finite tensors. Their
+independently rebuilt parameter/normalizer digests match the evaluated learner:
+`1cb4e921110887dc0b3de3289ae2181c3c0b597d933858ea40fc84241f76e442`
+and `47db194502608eede457a99129f056d5a11a39b6da20e33d242098f42ac57547`.
+All initial tensor shapes/dtypes/digests match the initialization manifest; native
+exit identities match the admitted runner/supervisor. The checkpoint schema stores
+the historical base config, while its four additional fixed entropy fields reside
+in B15 config.json/summary. An initially overstrict reader expected those four keys
+inside the checkpoint; inspecting the unchanged serializers resolved that checker
+assumption, after which all actual base fields and separately recorded extras were
+verified. No result/source repair, training retry or extra evaluation occurred.
+
+**Descriptive own-learning reading, before the paired comparator.** Per-world
+J/C/Q/E/S all improve32/32 and height penalty falls32/32 at both N values. Means:
+
+| N | Stage | J | C | Q | P | E eligible | S served | U eligible unserved |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 8 | initial0 | .128643806 | .234680000 | .075269871 | .058213156 | 11.8172500 | 11.7340000 | .0832500 |
+| 8 | final45 | .433761925 | .565942500 | .166475396 | .012340444 | 28.7083750 | 28.2971250 | .4112500 |
+| 8 | own change | +.305118120 | +.331262500 | +.091205525 | -.045872712 | +16.8911250 | +16.5631250 | +.3280000 |
+| 6 | initial0 | .244050069 | .391768750 | .091028842 | .057496709 | 19.7745625 | 19.5884375 | .1861250 |
+| 6 | final45 | .508594516 | .661307500 | .182785085 | .009156259 | 34.0432500 | 33.0653750 | .9778750 |
+| 6 | own change | +.264544447 | +.269538750 | +.091756243 | -.048340449 | +14.2686875 | +13.4769375 | +.7917500 |
+
+The contrary consequence is higher eligible-but-unserved demand: U rises in28/32
+N8 worlds (one lower/three tied) and29/32 N6 worlds (three lower). Largest own U
+increases are +2.252 at1945802 and +3.278 at1945618. Minimum final J/S are
+.355189112/23.202 at1945830 and .415063439/26.448 at1945600. Full initial/final
+world vectors, including every adverse U change, are retained in the saved
+[N8 initial](../../../../runs/agent_count_generalization/s1_bounded_confirmation_b15_b1_h6_s994101/panel_stage00_n8.json)/[final](../../../../runs/agent_count_generalization/s1_bounded_confirmation_b15_b1_h6_s994101/panel_stage45_n8.json)
+and [N6 initial](../../../../runs/agent_count_generalization/s1_bounded_confirmation_b15_b1_h6_s994101/panel_stage00_n6.json)/[final](../../../../runs/agent_count_generalization/s1_bounded_confirmation_b15_b1_h6_s994101/panel_stage45_n6.json)
+panels. Native training mean J varies non-monotonically: rollout1 .237479279,
+minimum rollout2 .190316260, maximum rollout28 .507963484, final45 .484835351;
+these changing training episodes do not select a checkpoint. Final raw Gaussian
+sigmas are3.277720/3.203910/3.078657; execution remains the fixed clip law.
+
+This cell supports actual useful H6 learning on its declared panel; comparative
+advantage over SET, the three-block mean and the joint lower-bound claim are still
+unresolved. It supplies no next-training win probability, pure skill attribution
+or world-population inference. The upcoming SET is required by the existing plan
+regardless of these values. No additional Pro question or recipe change is selected.
+
+**Cost and continuation.** This cell costs1 fit,360k train+64k eval=424k team
+interactions; command67.199455min/fit-body67.178446min,scientific-process peak RSS
+2,681,356KiB. Peak scratch and other-process occupancy are unmeasured. Collecting
+and hashing the20 files took53.469788s; saved-array/checkpoint reading added no
+environment interaction. Seven binary artifacts remain at the original node and
+the verified local run path; thirteen JSON/JSONL/log files are published. Current
+main`4f1f1f9eecf00c4218d827033bf858dd7f79a740` retains lifted pause, confirming state
+and the same lead. Continue only the already fixed b1_set at the same scientific
+source/seed994101/training scenes, after fresh native admission; no replacement fit.
