@@ -7730,3 +7730,53 @@ Stable reviewed SHA-256: `b07/native.py` =
 B07 entry = `3a1ebe8218bd61b471e11272bbc187931fd8a9b7b7c0f391050c2ee50acabb56`;
 B07 test = `a1dcd00addeab3d67da694eea8a5d63906b6a01a22b344b884353dc829e00b8a`.
 These are code-check identities, not another result record.
+
+## 2026-09-23 — B07 actual-node CUDA check passed; fixed batch admitted and observed
+
+The exact published source `47d56c9bcdc9fa9d6edee43ae0b4d44755115708` passed the remaining
+actual-node check on `wsl_4070` / `LAPTOP-U9TDKC8A`, using Torch 2.7.0+cu118 and the NVIDIA
+GeForce RTX 4070 Laptop GPU. The focused case
+`test_h3000_native.py::test_real_h3000_loop_keeps_checkpoint_rng_and_normalizers_immutable[cuda]`
+passed: 1 passed, 14 dependency deprecation warnings, 4.66 seconds, exit 0. CUDA availability
+was asserted before testing; the case did not silently skip. FP32, TF32 disabled and four
+threads match the production binding. Source status was clean before and after the check.
+This closes the CUDA engineering check above; it does not extend its stated short-path coverage.
+
+The fixed B07 launch was submitted once through the configured `agent-task` supervisor and
+accepted by `hmasd_launch.py` at `2026-09-24T04:57:19.859770Z`. Native admission observed current
+main `d2e34d45c724c4248e5966d6c323afdda02b31e9`, the unpaused active direction and the exact lead
+`Codex DM (independent session)`. Its fresh actual-node preflight measured 14,547,607,552 bytes
+available against the 4,294,967,296-byte floor and passed. Main was refreshed again before this
+record; the relevant owner-control and direction records had not changed.
+
+The launch binds the preceding fixed H3000 O/F design, both retained B04/B05 N sources, CUDA,
+four threads and zero new fits/optimizer updates. The cap remains 160 episode attempts and
+480,000 team transitions, subject to native early endings or actual technical failure. No
+additional panel, controller adjustment, restart or replacement episode is authorized by this
+launch observation. Actual scientific cost and results remain pending.
+
+Runner-written admission artifacts were copied byte-for-byte to
+`runs/uav_service_auxiliary/b07_of_a01/`: `launch-manifest.json` (4,363 bytes; SHA-256
+`92d98535aaf2c6b31b9ca700cf578d480a42b465f84ff23a5363ad7bb1657edf`) and
+`admission-preflight.json` (765 bytes; SHA-256
+`6cddd4488cbab27594b688128afb6222e5f829c5792848b732088ddef33afe75`). The immutable result source
+and durable output root are `/home/wu/hmasd-worktrees/usa-b07-47d56c9bc` and its
+`runs/uav_service_auxiliary/b07_of_a01/`. Preserve that manual worktree and its outputs.
+
+The accepted operation is
+`/home/wu/projects/HMASD/.git/hmasd-admission/b0a21e1561c71e2544e1ee5b291b6c50879ec313bc69851232e8a6dcd08f6b93.json`.
+Its native supervisor is PID 488398 / start ticks 58534548; the runner is PID 488399 / start
+ticks 58534550, both in session 488398 under boot ID `bb732fcb-1a33-4659-a786-331110ae41d3`.
+Read-only native status confirmed accepted admission, consistent records and both matching
+identities running; no process-exit witness was present. The outer task
+`usa-b07-admit-47d56c9bc` finished successfully after admission, which is not completion of B07.
+
+Detached read-only observation `launch-usa-b07-of-a01` now follows that same operation in this
+assigning session's existing hmasd_wait state. Generation 87 / observer PID 3072710 uses a
+30-second probe interval and 1,500-second window. The first adopted observation at
+`2026-09-24T05:02:56.694335Z` confirmed the same running identities with zero probe errors;
+there were no pending events. A completion, error or bounded checkpoint returns control here
+for evidence reading and exact-generation rearming. A present live summary or successful
+process exit will not be treated as scientific acceptance. The earlier Pro answer has already
+been read fully, saved verbatim and published with the prospective plan; no Pro operation is
+pending and no question was resent.
