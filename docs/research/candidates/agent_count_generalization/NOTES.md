@@ -18568,3 +18568,22 @@ Use tiny non-result fixtures without changing production protocol. Tests own scr
 pytest. The DM accepts the diff and an independent high-risk Reviewer examines RNG, recurrent
 state, native readings, checkpoint identity and admission before result execution. No helper
 chooses science, adds fits, launches, writes NOTES/RESEARCH or spawns children.
+
+
+### B18 engineering clarification before implementation acceptance
+
+Source inspection of `RolloutBuffer.get_discoverer_sampler` confirms a private shuffle RNG
+separate from the global NumPy stream. The boundary adapter must transfer its current state
+via `get_sampler_rng_state`/`set_sampler_rng_state` when replacing storage; constructing a
+fresh buffer must not restart the continuing shuffle stream. This is preservation of the
+already selected training program, not another scientific treatment. A real-update check
+will compare the boundary's before/after private state as well as global RNG/Adam state.
+
+With500steps/k10,16lanes and batch32, each PPO epoch has3200/4800/6400sequences at N4/6/8,
+respectively100/150/200full minibatches. At15epochs this predicts1500/2250/3000calls per
+actor or critic per rollout. Both full schedules therefore predict101,250actor and101,250
+critic calls per arm, with no time-chunk or minibatch tail in production. These are source
+derivations awaiting measured sampler yields, not reported execution. Equal final counts
+still leave intermediate ordering, reward normalization, experience composition and gradients
+different. The implementation must report actual yields/sizes/tails/calls and reject a
+missing update rather than infer work from these expected totals.
