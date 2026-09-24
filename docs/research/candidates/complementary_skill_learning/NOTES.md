@@ -7957,3 +7957,177 @@ and rearmed69→70,1500s,observerPID3248184. All existing scientific launch jobs
 and historical Pro jobs already delivered/read; no remaining B07 worker or Pro request needs
 restarting. The next observation, if any, will be for a separately committed new scientific
 consultation. No additional task message or repeated Pro Send occurred in this event handling.
+
+
+## Pro question 2026-09-24 recurrence-or-revision-after-b07
+
+Conversation: reuse this direction's current Jev conversation via its private local operation
+state. Account identifiers and its address stay local. This is a new focused scientific
+question, not a resend or recovery of the previous high-entropy question, whose complete answer
+was already delivered from chat, read and adopted.
+
+**Question and decision.** B07 actually lowered high-level conditional entropy and improved
+both E-S versus M-S and E-S versus independently uniform-trained U-R, but E-S did not improve
+over E-R and its learned-readout increment did not increase. Does this justify buying a
+separate independent training-block recurrence of the zero-high-entropy *training package*,
+or is that a poor use of this useful-skill direction after its learned-selection prediction
+failed? Critique the DM's tentative preference for one unchanged new E/M/U block; identify
+whether a smaller comparison would answer the live decision, or recommend a material revision
+or ending this S1 recipe if that changes the scientific choice more usefully. The question is
+about the next investment and explanation, not re-approving B07 execution or certifying a claim.
+
+**Current standing and the new evidence.** E differs from M only by high-level entropy
+coefficient .07→0 with high-level PPO still enabled; U trains the same recurrent low-level
+and discriminator path with independent uniform team/individual labels and no high updates.
+All three retain low entropy .05, original mixed discriminator rewards, six-label FiLM shape,
+N6/k10/H500, actual matched initialization and private RNG separation. Detached G/P heads read
+facts but do not update the trunk. High-level loss removal changes the subsequent optimizer,
+label/state exposure and low/critic/discriminator data, including joint gradient clipping;
+it is not fixed-data causal mediation. Low execution uses mean-clipped actions at evaluation.
+S samples the bank's own team categorical law and individual .9pi+.1/6 mixture; team has no
+added floor. R independently samples labels. Each readout resets worlds and hidden state,
+then carries recurrence through k10 boundaries for the full episode.
+
+All three fixed fits finished and passed complete artifact readback. Four final streams are
+averaged within each of32previously exposed development worlds, then worlds. Numeric R labels
+match across E/M/U; S innovations match E/M but each bank uses its own state/AR prefixes.
+S Torch and R PCG64 streams with equal indices are not common innovations. Every arm has one
+new training instance. Main results, not interchangeable pieces of a success criterion:
+
+| B07 contrast | dJ | dUsers | J positive/negative worlds | Users positive/negative worlds |
+| --- | ---: | ---: | --- | --- |
+| P = E-S minus U-R | +.061758309143 | +3.519843750 | 31/1 | 31/1 |
+| D = E-S minus M-S | +.040099335296 | +1.060843750 | 31/1 | 28/4 |
+| E-R minus U-R | +.063060519313 | +3.652843750 | 32/0 | 32/0 |
+| E-R minus M-R | +.042352996369 | +1.299515625 | 32/0 | 28/4 |
+| G_E = E-S minus E-R | -.001302210170 | -.133000000 | 19/13 | 19/13 |
+| G_M = M-S minus M-R | +.000951450903 | +.105671875 | 16/16 | 16/16 |
+| I = G_E minus G_M | -.002253661073 | -.238671875 | 17/15 | 18/14 |
+| M-R minus U-R | +.020707522944 | +2.353328125 | 30/2 | 32/0 |
+
+On all6400M-final-S renewal contexts, true E/M team/individual conditional entropy differences
+are −.189656079/−.394272327; lower on6398/6400team and38374/38400individual factors. This
+scoring uses identical numeric inputs and actual M prefixes, not presumed shared skill semantics.
+E's actual paired finalS0−initialS0 learning is +.214657019516J/+13.973625users; R0 learning
++.219555329020/+14.4271875, each positive on all32worlds. U actually learns+.154306875414J/
++10.5899375users,31positive/1negative. It is not an untrained baseline. Mean P quality improves
+.015962741672 and height penalty falls.007691674142, each favorable on all32worlds; however
+world1700203 still loses .010310384571J/2.0015users. Worst same-index individual P episode
+loses .094017893888J/7.836users, D loses .131579870980J/11.212users, G_E loses
+.167032433984J/12.652users. Keep those separate from four-stream world means. All four P/D
+stream means are positive, while G_E varies in sign; no post-hoc loss tolerance is supplied.
+
+**Prior explanation and contrary evidence.** Your complete preceding answer explicitly said
+that E-R improvement without positive E-S−E-R preserves a narrower bank improvement while
+failing the proposed explanation that lower entropy releases useful learned selection. We
+reuse that advice now; interpretation of this result branch needs no fresh generic review.
+The DM updates toward a conditional training-package effect and away from learned-selection
+repair. The strongest alternative is ordinary recurrent low-level feedback control with
+changed randomized contexts/optimization and joint adaptation. Entropy reduction alone does
+not identify which pathway matters or establish complementary behavior.
+
+The prior positive bank result reversed: B04 M-R−U-R +.035434871J/+1.843375users became B06
+−.012274346J/−1.4725users under the same old evaluation worlds and label stream; both arms
+learned native service in both blocks. B07's new M-R−U-R is positive but uses four prospectively
+new streams, so it does not erase B06 or reopen the original M recipe's automatic replication.
+B05 showed same-bank stochastic versus greedy improvement but S−R −.000470478J/+.068265625users;
+its low entropy usefulness was unestablished. B01/B03 generic auxiliary G−D uniform changed
++.019698→−.010459J; a positive local P interaction did not give P net service. B02 removed
+mixed discriminator reward and lost .124783J under uniform, while task-only still learned.
+These constraints make a weak comparator, pooled positive mean or more final streams an
+unconvincing response to the current uncertainty.
+
+**DM's proposed investment and falsifiable revision, not an already selected batch.**
+I tentatively favor one *new* fixed three-arm E/M/U training block, with the B07 architecture,
+coefficients, horizon, deployed laws and exposed evaluation worlds/label streams unchanged;
+only a newly declared independent training initialization/world/RNG block would change.
+It would ask whether the observed E package and entropy-incentive difference recur before
+retaining this recipe as a working candidate. The revised working prediction is positive
+E-S−U-R and E-S−M-S native J/users, actual E learning and lower common-input conditional
+entropy, possibly with G_E still small/mixed. The last possibility is explicitly incompatible
+with crediting restored learned selection; this would test package recurrence, not rescue the
+failed selection story by changing its endpoint. E-R−U-R/E-R−M-R remain useful diagnostics.
+A renewed reversal would reduce this recipe's investment priority; a positive second block
+would strengthen a bounded recurrence observation, not establish training-population utility
+or automatically authorize confirmation. An uncertain result can end this purchase without
+more streams or seed hunting. Please challenge whether this narrower question is scientifically
+worthwhile here, rather than merely easy to repeat after a positive score.
+
+A two-arm E/M block can check the incentive-package difference at lower cost but cannot
+supply new net utility versus an actual U in that training block; E/U retains net utility
+but loses the matched original-incentive comparison. Neither can borrow the old omitted arm
+to manufacture a same-block contrast. A fixed-versus-random-label training comparison asks
+something different: one label changes FiLM shape, fixing a label at six rows changes active
+parameter/exposure and discriminator targets, deleting mixed reward adds the B02 objective
+change. It could be a valid complete-package comparison, not a pure test of skill necessity.
+The recent DM1 local ordinary recurrent comparison is separately owned; this direction does
+not copy or take over it. No material new architecture is owed if its prediction is weaker.
+
+**Prospective cost and alternatives.** No next fit or seed is selected by this question.
+An unchanged E/M/U block would cost3newfits,360k each:1.08Mtrain+400keval,25panels including
+5initialsingle and20finalfour-stream panels,2160train/800evalepisodes, plus6400common-input
+contexts/44800factors scored once. B07 actually took161.610872runner minutes on shared
+wsl_4070; that is scale evidence, not a duration guarantee. A two-arm E/M version costs2fits,
+720ktrain+320keval; E/U2fits,720ktrain+240keval, with their stated losses of estimand. Input
+preparation, relevant code checks, collection and interpretation have extra cost. A changed
+context-control comparison would need its own prospective design/engineering and cost; no
+parallel battery is selected. Ending the recipe costs0newfits; it must not be recast as a
+universal negative about skills or as an indefinite wait with no producer. Confirmation, if
+ever warranted, would be a separate actual claim and fixed fresh3–5seed-per-arm plan reviewed
+before execution, never the present two exploratory blocks rebranded as confirmation.
+
+**Context and source precedence.** At source_sha (the full question commit supplied by the
+actual send message), read:
+- `docs/project/OPERATING_CONSTITUTION.md` §§1–5,7–8: one revisable direction, DM-selected
+  continuation, no fit allowance or automatic batch extension, Pro advisory role, exploratory
+  versus empirical claim scope. Pause is lifted; lead is the current direct DM. Advice grants
+  no authority and no additional approval layer is requested.
+- `.agents/skills/hmasd-scientific-tools/SKILL.md`: Update the working explanation,
+  Comparators and MARL information, Statistics, Cost and exposure, and Pro. These are methods
+  under the constitution, not another source of permission.
+- This notebook's immediately preceding complete B07 section and its E/M acceptances,
+  the high-entropy question's complete Answer and fixed B07 adoption; these carry the actual
+  prior predictions, numerical native results, tails, verification scope and contrary outcomes.
+  Current result record was published at`37af70b00d74aab26d678edff76489c3ed4a87fd`. Read the B04/B06 complete sections for the
+  important reversal and B05 complete section for the stochastic-readout alternative. The
+  historical values stay at their own frozen contracts; neither new methods nor advice rewrite them.
+- B07 compact outputs in `runs/complementary_skill_learning/b07_m_260924001_455536ebd/`,
+  `b07_e_260924001_455536ebd/`, `b07_u_260924001_455536ebd/`: summaries, configs, manifests,
+  native status and exit witnesses at source_sha. Full training/prediction/checkpoint/trajectory
+  bulk is retained at the exact verified node/local locations and hashes in the acceptance
+  sections. If those bytes are inaccessible, say so; the DM's full readback is supplied evidence,
+  not your independent new byte-level verification. Do not invent an audit or request new fits
+  merely because bulk is not in the connector view.
+- Frozen executable source`455536ebd0e6e23466ed40244bcf1e5ab6462826`,
+  `experiments/candidates/complementary_skill_learning/b07/runner.py` and its B04 learning
+  implementation, only where the disputed interpretation/feasibility needs the actual path.
+
+Shared background at published main`426c33aa9b50f227eff7bac1dc98e91cd32d61f3`:
+`docs/research/RESEARCH.md` topic3 and current-plan discussion separate learning, bank formation,
+learned readout and ordinary-context alternatives; its skill B07 line still predates completion,
+so the supplied complete B07 evidence supersedes that result status for this question. DM1's
+B15 finding (positive block means did not establish its fixed joint claim) warns against
+using world count as training precision; it is a different N/comparator population, not E
+replication evidence. Its B16 local ordinary comparator is separately selected/owned. No whole
+project review or review of other DMs is assigned. No external literature premise is needed;
+if an analogy helps your recommendation, cite its actual primary source and omitted MARL coupling.
+
+**Constraints and return.** Give a reasoned next investment recommendation, its strongest
+objection/alternative, the observation that changes the live judgment and what evidence would
+weaken it. Separate observed facts, revised inference and any new conjecture. Do not merely
+repeat that one seed is exploratory; assess what the proposed purchase would teach after the
+selection prediction failed. If recommending a revision, state its intermediate/native
+predictions and material cost. If no worthwhile feasible continuation of this recipe remains,
+explain why rather than inventing a next experiment or owner dependency. No fixed idea count
+or positive outcome is owed. For this criticism return MATERIAL_DISSENT yes/no with the
+substantive reason. Cite sources actually read and material unavailable evidence in normal
+prose; no additional registry, receipt table or review gate.
+
+Do not run code or experiments. Write only the empty `### Answer` subsection of this question
+on branch`codex/complementary-skill-learning` in this same notebook. Read the question at the
+pinned source, fetch the latest target blob before writing and use its actual blob SHA;
+preserve the question and every other byte, stopping on overlapping edits. Return the actual
+answer commit on success. If GitHub writeback fails, return the complete answer in chat,
+not a blob SHA, short receipt, link or status. The DM retains the decision and other sections.
+
+### Answer
